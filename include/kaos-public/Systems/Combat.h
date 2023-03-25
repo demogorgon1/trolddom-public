@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../SystemBase.h"
+
 namespace kaos_public
 {
 
@@ -10,7 +12,7 @@ namespace kaos_public
 			: public SystemBase
 		{
 		public:
-			static System::Id ID = System::ID_COMBAT;
+			static const System::Id ID = System::ID_COMBAT;
 		};
 
 	}

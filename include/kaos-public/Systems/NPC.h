@@ -12,7 +12,7 @@ namespace kaos_public
 			: public SystemBase
 		{
 		public:
-			static System::Id ID = System::ID_NPC;
+			static const System::Id ID = System::ID_NPC;
 		};
 
 	}
