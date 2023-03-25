@@ -1,0 +1,23 @@
+ability strike:
+{
+	string: "Strike"
+	range: 1	
+	
+	effect damage:
+	{
+		flags: [ can_be_dodged can_be_parried can_miss ]
+		damage_type: physical
+	}
+}
+
+ability knock:
+{
+	string: "Knock"
+	range: 1
+
+	effect stun:
+	{	
+		flags: [ can_be_dodged can_be_parried can_miss ]		
+		duration: 3
+	}
+}

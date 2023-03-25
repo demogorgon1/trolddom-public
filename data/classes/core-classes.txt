@@ -1,0 +1,28 @@
+class fighter:
+{
+	string: "Fighter"
+	
+	level_progression:
+	[
+		{
+			level: 1
+			
+			unlock_abilities:
+			[
+				strike
+				knock
+			]
+			
+			stats:
+			{
+				health: 80
+				dexterity: 4
+				strength: 6
+				wisdom: 2
+				critical_strike_chance: 5
+				dodge_chance: 5
+				parry_chance: 5
+			}
+		}
+	]
+}

@@ -1,0 +1,38 @@
+#pragma once
+
+#include "DataErrorHandling.h"
+#include "DataType.h"
+#include "Parser.h"
+
+namespace kaos_public
+{
+
+	struct DataBase
+	{
+		DataBase()
+			: m_defined(false)
+			, m_id(0)
+		{
+
+		}
+
+		void
+		VerifyBase() const
+		{
+			KP_VERIFY_STRING_ID(m_name, m_debugInfo);
+			KP_VERIFY(m_defined, m_debugInfo, "'%s' not defined.", m_name.c_str());
+			KP_VERIFY(m_id != 0, m_debugInfo, "'%s' has no id.", m_name.c_str());
+		}
+
+		// Virtual interface
+		virtual void	FromSource(
+							const Parser::Node* aNode) = 0;
+
+		// Public data
+		std::string									m_name;
+		uint32_t									m_id;
+		bool										m_defined;
+		std::optional<DataErrorHandling::DebugInfo>	m_debugInfo;
+	};
+
+}

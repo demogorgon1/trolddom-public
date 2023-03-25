@@ -1,0 +1,138 @@
+#pragma once
+
+#include "Data/Ability.h"
+#include "Data/Class.h"
+#include "Data/Entity.h"
+#include "Data/Map.h"
+#include "Data/Talent.h"
+#include "Data/TalentTree.h"
+
+#include "PersistentIdTable.h"
+
+namespace kaos_public
+{
+
+	class Manifest
+	{
+	public:
+		struct IDataContainer			
+		{
+			// Virtual interface
+			virtual void		Verify() const = 0;
+			virtual DataBase*	GetBaseByName(
+									PersistentIdTable*	aPersistentIdTable,
+									const char*			aName) = 0;
+		};
+
+		template <typename _T>
+		struct DataContainer
+			: public IDataContainer
+		{
+			_T*
+			GetByName(
+				PersistentIdTable*						aPersistentIdTable,
+				const char*								aName)
+			{
+				typename std::unordered_map<std::string, _T*>::iterator it = m_nameTable.find(aName);
+				if(it == m_nameTable.end())
+				{
+					std::unique_ptr<_T> t = std::make_unique<_T>();
+					t->m_name = aName;
+					t->m_id = aPersistentIdTable->GetId(_T::DATA_TYPE, aName);
+
+					m_nameTable.insert(std::pair<std::string, _T*>(t->m_name, t.get()));
+					m_idTable.insert(std::pair<uint32_t, _T*>(t->m_id, t.get()));
+					m_entries.push_back(std::move(t));
+
+					return m_entries[m_entries.size() - 1].get();
+				}
+
+				return it->second;
+			}
+
+			const _T*
+			GetById(
+				uint32_t								aId) const
+			{
+				typename std::unordered_map<std::string, _T*>::iterator it = m_idTable.find(aId);
+				KP_CHECK(it != m_idTable.end(), "Invalid '%s' id: %u", DataType::IdToString(_T::DATA_TYPE), aId);
+				return it->second;
+			}
+
+			// IDataContainer implementation
+			void
+			Verify() const override
+			{
+				std::unordered_map<uint32_t, const _T*> idTable;
+
+				for(const std::unique_ptr<_T>& t : m_entries)
+				{
+					t->Verify();
+
+					KP_VERIFY(idTable.find(t->m_id) == idTable.end(), t->m_debugInfo, "Id collision: %u", t->m_id);
+					idTable[t->m_id] = t.get();
+				}
+			}
+
+			DataBase*
+			GetBaseByName(
+				PersistentIdTable*						aPersistentIdTable,
+				const char*								aName)
+			{
+				return GetByName(aPersistentIdTable, aName);
+			}
+
+			// Public data
+			std::vector<std::unique_ptr<_T>>			m_entries;
+			std::unordered_map<std::string, _T*>		m_nameTable;
+			std::unordered_map<uint32_t, _T*>			m_idTable;
+		};
+
+		Manifest()
+		{
+			RegisterDataContainer(m_abilities);
+			RegisterDataContainer(m_classes);
+			RegisterDataContainer(m_entities);
+			RegisterDataContainer(m_maps);
+			RegisterDataContainer(m_talents);
+			RegisterDataContainer(m_talentTrees);
+		}
+		
+		~Manifest()
+		{
+
+		}
+		
+		void
+		Verify() const
+		{
+			for(uint8_t i = 1; i < (uint8_t)DataType::NUM_IDS; i++)
+			{
+				assert(m_containers[i] != NULL);
+				m_containers[i]->Verify();
+			}
+		}
+
+		// Public data
+		DataContainer<Data::Ability>					m_abilities;
+		DataContainer<Data::Class>						m_classes;
+		DataContainer<Data::Entity>						m_entities;
+		DataContainer<Data::Map>						m_maps;
+		DataContainer<Data::Talent>						m_talents;
+		DataContainer<Data::TalentTree>					m_talentTrees;
+
+		IDataContainer*									m_containers[DataType::NUM_IDS] = { 0 };
+
+	private:
+
+		template <typename _T>
+		void 
+		RegisterDataContainer(
+			DataContainer<_T>&							aContainer)
+		{
+			m_containers[_T::DATA_TYPE] = &aContainer;
+		}
+
+	};
+
+}

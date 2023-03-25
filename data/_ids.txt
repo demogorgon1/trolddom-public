@@ -1,0 +1,5 @@
+# Do not modify this file!
+ability knock 2
+ability strike 1
+class fighter 1
+entity goblin 1
