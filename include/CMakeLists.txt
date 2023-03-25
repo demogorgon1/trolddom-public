@@ -8,4 +8,4 @@ file(GLOB_RECURSE H_FILES "kaos-public/*.h")
 
 target_sources(kaos-public PRIVATE ${H_FILES})
 
-#install(DIRECTORY kaos-public DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(DIRECTORY kaos-public DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})

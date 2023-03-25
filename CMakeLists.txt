@@ -16,6 +16,9 @@ endmacro()
 
 kaos_option(KAOS_PUBLIC_PRECOMPILED_HEADERS "Enable precompiled headers." ON)
 
+include(FetchContent)
+include(GNUInstallDirs)
+
 # -------------------
 
 add_subdirectory(lib)
