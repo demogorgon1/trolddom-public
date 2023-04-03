@@ -9,7 +9,9 @@ namespace kaos_public
 	class ComponentBase
 	{
 	public:
-		ComponentBase()
+		ComponentBase(
+			uint32_t	aComponentId)
+			: m_componentId(aComponentId)
 		{
 
 		}
@@ -24,7 +26,12 @@ namespace kaos_public
 		virtual void	FromSource(
 							const Parser::Node*		/*aSource*/) { assert(false); }
 
+		// Data access
+		uint32_t		GetComponentId() const { return m_componentId; }
+
 	private:
+
+		uint32_t		m_componentId;
 	};
 
 }

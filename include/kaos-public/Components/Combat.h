@@ -14,6 +14,7 @@ namespace kaos_public
 			static const Component::Id ID = Component::ID_COMBAT;
 
 			Combat()
+				: ComponentBase(ID)
 			{
 
 			}
@@ -42,7 +43,7 @@ namespace kaos_public
 			}
 
 			// Public data
-			uint32_t		m_targetEntityId = 0;
+			uint32_t		m_targetEntityInstanceId = 0;
 
 			uint32_t		m_currentHealth = 1;
 			uint32_t		m_maxHealth = 1;

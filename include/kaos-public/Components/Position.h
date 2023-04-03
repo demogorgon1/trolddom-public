@@ -15,6 +15,7 @@ namespace kaos_public
 			static const Component::Id ID = Component::ID_POSITION;
 
 			Position()
+				: ComponentBase(ID)
 			{
 
 			}
