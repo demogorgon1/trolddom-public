@@ -71,6 +71,14 @@ namespace kaos_public
 					aCallback(t.get());
 			}
 
+			void
+			ForEach(
+				std::function<void(const _T*)>			aCallback) const
+			{
+				for (const std::unique_ptr<_T>& t : m_entries)
+					aCallback(t.get());
+			}
+
 			// IDataContainer implementation
 			void
 			Verify() const override

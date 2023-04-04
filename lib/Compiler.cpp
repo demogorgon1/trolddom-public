@@ -4,6 +4,7 @@
 #include <kaos-public/ComponentFactory.h>
 #include <kaos-public/DataErrorHandling.h>
 
+#include "MapImageOutput.h"
 #include "SpriteSheetBuilder.h"
 #include "Tokenizer.h"
 
@@ -79,10 +80,21 @@ namespace kaos_public
 
 		// Build map data
 		{
+			std::unique_ptr<MapImageOutput> mapImageOutput;
+
 			m_manifest->m_maps.ForEach([&](
 				Data::Map* aMap)
 			{
 				aMap->m_data->Build(m_manifest);
+
+				// Debug image output for this map?
+				if(!aMap->m_data->m_imageOutputPath.empty())
+				{
+					if(!mapImageOutput)
+						mapImageOutput = std::make_unique<MapImageOutput>(m_manifest);
+
+					mapImageOutput->Generate(aMap->m_data.get(), aMap->m_data->m_imageOutputPath.c_str());
+				}
 			});
 		}
 

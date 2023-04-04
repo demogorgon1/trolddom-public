@@ -117,7 +117,9 @@ namespace kaos_public
 				KP_VERIFY(offsetX + width <= sourceImage.GetWidth() && offsetY + height <= sourceImage.GetHeight(), aNode->m_debugInfo, "Sprite exceeds source image bounds.");
 
 				Sprite* sprite = _CreateSprite(aNode, aNode->m_name.c_str(), width * height);
-				sourceImage.Extract(offsetX, offsetY, width, height, sprite->m_image);				
+				sourceImage.Extract(offsetX, offsetY, width, height, sprite->m_image);		
+				
+				offsetX += width; // Automatically advance horizontally
 
 				aNode->GetObject()->ForEachChild([&](
 					const Parser::Node* aSpriteComponent)

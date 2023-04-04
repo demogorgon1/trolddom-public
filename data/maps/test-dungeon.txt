@@ -34,6 +34,7 @@ map_palette test_dungeon_entity_spawns:
 map test_dungeon:
 {
 	default_tile: test_dungeon_wall
+	image_output: "test.png"
 
 	layers:
 	[

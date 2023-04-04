@@ -31,9 +31,9 @@ namespace kaos_public
 		void	Build(
 					const Manifest*			aManifest);
 
-	private:
-
+		// Public data
 		uint32_t									m_defaultTileSpriteId;
+		std::string									m_imageOutputPath;
 		int32_t										m_x;
 		int32_t										m_y;
 		int32_t										m_width;

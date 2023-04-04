@@ -38,6 +38,8 @@ namespace kaos_public
 		{
 			if(aNode->m_name == "default_tile")
 				m_defaultTileSpriteId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aNode->GetIdentifier());
+			else if(aNode->m_name == "image_output")
+				m_imageOutputPath = aNode->m_path + "/" + aNode->m_value;
 			else if(aNode->m_name == "layers")
 				_InitLayers(aNode->GetArray());
 			else

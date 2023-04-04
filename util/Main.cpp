@@ -18,8 +18,7 @@ main(
 
 	compiler.Parse("../../data");
 	compiler.Build("../../data/_ids.txt", ".");
-
-	manifest.Verify();
+	manifest.Verify();	
 
 	return EXIT_SUCCESS;
 }
