@@ -11,13 +11,14 @@ namespace kaos_public
 	{
 	public:
 				Compiler(
-					Manifest*		aManifest);
+					Manifest*			aManifest);
 				~Compiler();
 
 		void	Parse(
-					const char*		aRootPath);
+					const char*			aRootPath);
 		void	Build(
-					const char*		aPersistentIdTablePath);
+					const char*			aPersistentIdTablePath,
+					const char*			aDataOutputPath);
 
 	private:
 
@@ -26,7 +27,7 @@ namespace kaos_public
 		SourceContext		m_sourceContext;
 
 		void	_ParseDirectory(
-					const char*		aPath);
+					const char*			aPath);
 	};
 
 }

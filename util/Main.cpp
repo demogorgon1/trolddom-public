@@ -17,7 +17,7 @@ main(
 	kaos_public::Compiler compiler(&manifest);
 
 	compiler.Parse("../../data");
-	compiler.Build("../../data/_ids.txt");
+	compiler.Build("../../data/_ids.txt", ".");
 
 	manifest.Verify();
 

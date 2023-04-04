@@ -27,10 +27,12 @@ namespace kaos_public
 
 			Node(
 				SourceContext*						aSourceContext,
-				const DataErrorHandling::DebugInfo&	aDebugInfo)
+				const DataErrorHandling::DebugInfo&	aDebugInfo,
+				const char*							aPath)
 				: m_type(TYPE_NONE)
 				, m_sourceContext(aSourceContext)
 				, m_debugInfo(aDebugInfo)
+				, m_path(aPath)
 			{
 
 			}
@@ -66,6 +68,23 @@ namespace kaos_public
 				return (uint32_t)v;
 			}
 
+			int32_t
+			GetInt32() const
+			{
+				KP_VERIFY(m_type == TYPE_NUMBER, m_debugInfo, "Not a number.");
+				intmax_t v = strtoimax(m_value.c_str(), NULL, 10);
+				KP_VERIFY(v <= INT32_MAX && v >= INT32_MIN, m_debugInfo, "Number out of bounds.");
+				return (int32_t)v;
+			}
+
+			uint8_t
+			GetUInt8() const
+			{
+				uint32_t v = GetUInt32();
+				KP_VERIFY(v <= UINT8_MAX, m_debugInfo, "Number out of bounds.");
+				return (uint8_t)v;
+			}
+
 			const Node*
 			GetArray() const
 			{
@@ -97,6 +116,7 @@ namespace kaos_public
 			std::string							m_name;
 			std::string							m_tag;
 			std::string							m_value;
+			std::string							m_path;
 			DataErrorHandling::DebugInfo		m_debugInfo;
 
 			std::vector<std::unique_ptr<Node>>	m_children;

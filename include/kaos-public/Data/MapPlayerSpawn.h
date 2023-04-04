@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../DataBase.h"
-#include "../MapData.h"
 
 namespace kaos_public
 {
@@ -9,10 +8,10 @@ namespace kaos_public
 	namespace Data
 	{
 
-		struct Map
+		struct MapPlayerSpawn
 			: public DataBase
 		{
-			static const DataType::Id DATA_TYPE = DataType::ID_MAP;
+			static const DataType::Id DATA_TYPE = DataType::ID_MAP_PLAYER_SPAWN;
 
 			void
 			Verify() const
@@ -23,13 +22,11 @@ namespace kaos_public
 			// Base implementation
 			void
 			FromSource(
-				const Parser::Node*		aNode) override
+				const Parser::Node*		/*aNode*/) override
 			{
-				m_data = std::make_unique<MapData>(aNode);
 			}
 
 			// Public data
-			std::unique_ptr<MapData>	m_data;
 		};
 
 	}

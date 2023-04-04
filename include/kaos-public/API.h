@@ -34,6 +34,7 @@
 #include "Parser.h"
 #include "PersistentIdTable.h"
 #include "SourceContext.h"
+#include "SpriteInfo.h"
 #include "Stat.h"
 #include "System.h"
 #include "SystemBase.h"

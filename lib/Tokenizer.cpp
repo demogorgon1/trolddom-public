@@ -48,20 +48,30 @@ namespace kaos_public
 		const char*		aPath)
 		: m_i(0)
 	{
-		FILE* f = fopen(aPath, "rb");
-		KP_CHECK(f != NULL, "Failed to open: %s", aPath);
+		// Determine base path
+		{
+			std::filesystem::path p = aPath;
+			p.make_preferred();
+			m_path = p.parent_path().string();
+		}
 
-		fseek(f, 0, SEEK_END);
-		size_t fileSize = (size_t)ftell(f);
-		fseek(f, 0, SEEK_SET);
+		// Load and tokenize file
+		{
+			FILE* f = fopen(aPath, "rb");
+			KP_CHECK(f != NULL, "Failed to open: %s", aPath);
 
-		std::vector<char> buffer;
-		buffer.resize(fileSize + 1, 0);
-		fread(&buffer[0], 1, fileSize, f);
+			fseek(f, 0, SEEK_END);
+			size_t fileSize = (size_t)ftell(f);
+			fseek(f, 0, SEEK_SET);
 
-		fclose(f);
+			std::vector<char> buffer;
+			buffer.resize(fileSize + 1, 0);
+			fread(&buffer[0], 1, fileSize, f);
 
-		_Tokenize(aPath, &buffer[0]);
+			fclose(f);
+
+			_Tokenize(aPath, &buffer[0]);
+		}
 	}
 	
 	Tokenizer::~Tokenizer()

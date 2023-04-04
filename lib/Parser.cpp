@@ -9,7 +9,7 @@ namespace kaos_public
 
 	Parser::Parser(
 		SourceContext*	aSourceContext)
-		: m_root(aSourceContext, DataErrorHandling::DebugInfo("", 0))
+		: m_root(aSourceContext, DataErrorHandling::DebugInfo("", 0), "")
 	{
 
 	}
@@ -49,7 +49,7 @@ namespace kaos_public
 				break;
 			}
 
-			std::unique_ptr<Node> node = std::make_unique<Node>(m_root.m_sourceContext, aTokenizer.Next().m_debugInfo);
+			std::unique_ptr<Node> node = std::make_unique<Node>(m_root.m_sourceContext, aTokenizer.Next().m_debugInfo, aTokenizer.GetPath());
 
 			const std::string& identifier = aTokenizer.ConsumeAnyIdentifier();
 
@@ -87,7 +87,7 @@ namespace kaos_public
 				break;
 			}
 			
-			std::unique_ptr<Node> node = std::make_unique<Node>(m_root.m_sourceContext, aTokenizer.Next().m_debugInfo);
+			std::unique_ptr<Node> node = std::make_unique<Node>(m_root.m_sourceContext, aTokenizer.Next().m_debugInfo, aTokenizer.GetPath());
 
 			_ParseValue(aTokenizer, node.get());
 

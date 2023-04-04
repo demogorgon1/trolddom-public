@@ -4,6 +4,10 @@
 #include "Data/Class.h"
 #include "Data/Entity.h"
 #include "Data/Map.h"
+#include "Data/MapEntitySpawn.h"
+#include "Data/MapPalette.h"
+#include "Data/MapPlayerSpawn.h"
+#include "Data/Sprite.h"
 #include "Data/Talent.h"
 #include "Data/TalentTree.h"
 
@@ -54,9 +58,17 @@ namespace kaos_public
 			GetById(
 				uint32_t								aId) const
 			{
-				typename std::unordered_map<std::string, _T*>::iterator it = m_idTable.find(aId);
+				auto it = m_idTable.find(aId);
 				KP_CHECK(it != m_idTable.end(), "Invalid '%s' id: %u", DataType::IdToString(_T::DATA_TYPE), aId);
 				return it->second;
+			}
+
+			void
+			ForEach(
+				std::function<void(_T*)>				aCallback)
+			{
+				for (std::unique_ptr<_T>& t : m_entries)
+					aCallback(t.get());
 			}
 
 			// IDataContainer implementation
@@ -94,6 +106,10 @@ namespace kaos_public
 			RegisterDataContainer(m_classes);
 			RegisterDataContainer(m_entities);
 			RegisterDataContainer(m_maps);
+			RegisterDataContainer(m_mapEntitySpawns);
+			RegisterDataContainer(m_mapPalettes);
+			RegisterDataContainer(m_mapPlayerSpawns);
+			RegisterDataContainer(m_sprites);
 			RegisterDataContainer(m_talents);
 			RegisterDataContainer(m_talentTrees);
 		}
@@ -118,6 +134,10 @@ namespace kaos_public
 		DataContainer<Data::Class>						m_classes;
 		DataContainer<Data::Entity>						m_entities;
 		DataContainer<Data::Map>						m_maps;
+		DataContainer<Data::MapEntitySpawn>				m_mapEntitySpawns;
+		DataContainer<Data::MapPalette>					m_mapPalettes;
+		DataContainer<Data::MapPlayerSpawn>				m_mapPlayerSpawns;
+		DataContainer<Data::Sprite>						m_sprites;
 		DataContainer<Data::Talent>						m_talents;
 		DataContainer<Data::TalentTree>					m_talentTrees;
 

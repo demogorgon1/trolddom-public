@@ -3,3 +3,7 @@ ability knock 2
 ability strike 1
 class fighter 1
 entity goblin 1
+map test_dungeon 1
+map_entity_spawn test_dungeon_monster 1
+map_palette test_dungeon_tiles 1
+map_palette test_dungeon_entity_spawns 2

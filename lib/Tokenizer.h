@@ -39,10 +39,14 @@ namespace kaos_public
 		void				ConsumeToken(
 								const char*				aToken);
 
+		// Data access
+		const char*			GetPath() const { return m_path.c_str(); }
+
 	private:
 
 		std::vector<Token>				m_tokens;
 		size_t							m_i;
+		std::string						m_path;
 
 		void	_Tokenize(
 					const char*							aPath,

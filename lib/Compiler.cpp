@@ -4,13 +4,14 @@
 #include <kaos-public/ComponentFactory.h>
 #include <kaos-public/DataErrorHandling.h>
 
+#include "SpriteSheetBuilder.h"
 #include "Tokenizer.h"
 
 namespace kaos_public
 {
 
 	Compiler::Compiler(
-		Manifest*			aManifest)
+		Manifest*				aManifest)
 		: m_manifest(aManifest)
 		, m_parser(&m_sourceContext)
 	{
@@ -24,7 +25,7 @@ namespace kaos_public
 
 	void	
 	Compiler::Parse(
-		const char*			aRootPath)
+		const char*				aRootPath)
 	{
 		// Recursively parse all .txt files in root path
 		_ParseDirectory(aRootPath);
@@ -32,28 +33,58 @@ namespace kaos_public
 
 	void	
 	Compiler::Build(
-		const char*			aPersistentIdTablePath)
+		const char*				aPersistentIdTablePath,
+		const char*				aDataOutputPath)
 	{
+		SpriteSheetBuilder spriteSheetBuilder(512);
+
 		m_sourceContext.m_persistentIdTable->Load(aPersistentIdTablePath);
 
+		// Read source
 		m_parser.GetRoot()->ForEachChild([&](
 			const Parser::Node* aNode)
 		{
-			DataType::Id dataType = DataType::StringToId(aNode->m_tag.c_str());
-			KP_VERIFY(dataType != DataType::INVALID_ID, aNode->m_debugInfo, "'%s' is not a valid data type.", aNode->m_tag.c_str());
+			if(aNode->GetObject()->m_name == "sprites")
+			{
+				spriteSheetBuilder.AddSprites(aNode);
+			}
+			else
+			{
+				DataType::Id dataType = DataType::StringToId(aNode->m_tag.c_str());
+				KP_VERIFY(dataType != DataType::INVALID_ID, aNode->m_debugInfo, "'%s' is not a valid data type.", aNode->m_tag.c_str());
 
-			assert(m_manifest->m_containers[dataType] != NULL);
+				assert(m_manifest->m_containers[dataType] != NULL);
 			
-			DataBase* base = m_manifest->m_containers[dataType]->GetBaseByName(m_sourceContext.m_persistentIdTable.get(), aNode->m_name.c_str());
+				DataBase* base = m_manifest->m_containers[dataType]->GetBaseByName(m_sourceContext.m_persistentIdTable.get(), aNode->m_name.c_str());
 
-			KP_VERIFY(!base->m_defined, aNode->m_debugInfo, "'%s' has already been defined.", aNode->m_name.c_str());
+				KP_VERIFY(!base->m_defined, aNode->m_debugInfo, "'%s' has already been defined.", aNode->m_name.c_str());
 
-			base->m_debugInfo = aNode->m_debugInfo;
+				base->m_debugInfo = aNode->m_debugInfo;
 
-			base->FromSource(aNode);
+				base->FromSource(aNode);
 
-			base->m_defined = true;
+				base->m_defined = true;
+			}
 		});		
+
+		// Build sprite sheets
+		{
+			spriteSheetBuilder.Build();
+			spriteSheetBuilder.ExportManifestData(m_sourceContext.m_persistentIdTable.get(), m_manifest);
+
+			std::string spritesPath = aDataOutputPath;
+			spritesPath += "/sprites.bin";
+			spriteSheetBuilder.ExportSheets(spritesPath.c_str());
+		}
+
+		// Build map data
+		{
+			m_manifest->m_maps.ForEach([&](
+				Data::Map* aMap)
+			{
+				aMap->m_data->Build(m_manifest);
+			});
+		}
 
 		m_sourceContext.m_persistentIdTable->Save();
 	}
@@ -62,7 +93,7 @@ namespace kaos_public
 
 	void	
 	Compiler::_ParseDirectory(
-		const char*			aPath)
+		const char*				aPath)
 	{
 		std::error_code errorCode;
 		std::filesystem::directory_iterator it(aPath, errorCode);
@@ -84,8 +115,6 @@ namespace kaos_public
 				_ParseDirectory(entry.path().string().c_str());
 			}
 		}
-
 	}
-
 
 }

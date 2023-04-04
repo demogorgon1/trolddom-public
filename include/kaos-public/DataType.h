@@ -14,8 +14,12 @@ namespace kaos_public
 			ID_CLASS,
 			ID_ENTITY,
 			ID_MAP,
+			ID_MAP_ENTITY_SPAWN,
+			ID_MAP_PLAYER_SPAWN,
+			ID_MAP_PALETTE,
 			ID_TALENT,
 			ID_TALENT_TREE,
+			ID_SPRITE,
 
 			NUM_IDS
 		};
@@ -28,8 +32,12 @@ namespace kaos_public
 			"class",
 			"entity",
 			"map",
+			"map_entity_spawn",
+			"map_player_spawn",
+			"map_palette",
 			"talent",
-			"talent_tree"
+			"talent_tree",
+			"sprite"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

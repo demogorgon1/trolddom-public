@@ -1,0 +1,51 @@
+map_entity_spawn test_dungeon_monster:
+{	
+	entity goblin: { weight: 1 } 
+}
+
+map_player_spawn test_dungeon_player_spawn:
+{
+}
+
+sprites:
+{
+	source: "test-dungeon-tiles.png"
+
+	cursor: { position: [ 0 0 ] }
+
+	size: { width: 16 height: 16 }
+
+	sprite test_dungeon_floor: { flags: [ tile_walkable ] }
+	sprite test_dungeon_wall: { }
+}
+
+map_palette test_dungeon_tiles:
+{
+	tile test_dungeon_floor: [ 0 0 0 ]
+	tile test_dungeon_wall: [ 255 255 255 ]
+}
+
+map_palette test_dungeon_entity_spawns:
+{
+	entity_spawn test_dungeon_monster: [ 255 0 0 ]
+	player_spawn test_dungeon_player_spawn: [ 0 0 255 ]
+}
+
+map test_dungeon:
+{
+	default_tile: test_dungeon_wall
+
+	layers:
+	[
+		{
+			palettes:	[ test_dungeon_tiles ]
+			source:		"test-dungeon-0.png"
+		}
+
+		{
+			palettes:	[ test_dungeon_entity_spawns ]
+			source:		"test-dungeon-1.png"
+		}
+	]
+}
+ 

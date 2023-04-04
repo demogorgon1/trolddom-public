@@ -14,14 +14,30 @@ macro(kaos_public_option OPTION_NAME OPTION_TEXT OPTION_DEFAULT)
     message(STATUS "${OPTION_NAME}: ${${OPTION_NAME}}")
 endmacro()
 
-kaos_option(KAOS_PUBLIC_PRECOMPILED_HEADERS "Enable precompiled headers." ON)
+kaos_public_option(KAOS_PUBLIC_PRECOMPILED_HEADERS "Enable precompiled headers." ON)
 
 include(FetchContent)
 include(GNUInstallDirs)
 
+# ------ brotli ------
+set(BROTLI_DISABLE_TESTS ON)
+set(BROTLI_BUNDLED_MODE ON)
+
+FetchContent_Declare(
+	brotli
+	GIT_REPOSITORY https://github.com/google/brotli
+	GIT_TAG v1.0.9)
+FetchContent_MakeAvailable(brotli)	
+
+set(BROTLI_LIBRARIES_STATIC brotlidec-static brotlienc-static)
+
 # -------------------
 
+include_directories(extra)
+
+add_subdirectory(extra)
 add_subdirectory(lib)
 add_subdirectory(include)
 add_subdirectory(util)
+
 
