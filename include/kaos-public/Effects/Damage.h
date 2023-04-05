@@ -42,6 +42,25 @@ namespace kaos_public
 				});
 			}
 
+			void	
+			ToStream(
+				IWriter*				aStream) const override
+			{
+				ToStreamBase(aStream);
+				aStream->WriteUInt(m_damageType);
+			}
+			
+			bool	
+			FromStream(
+				IReader*				aStream) override
+			{
+				if(!FromStreamBase(aStream))
+					return false;
+				if (!aStream->ReadUInt(m_damageType))
+					return false;
+				return true;
+			}
+
 			// Public data
 			Effect::DamageType	m_damageType = Effect::DAMAGE_TYPE_PHYSICAL;
 		};

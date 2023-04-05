@@ -26,6 +26,23 @@ namespace kaos_public
 
 			}
 
+			// ComponentBase implementation
+			void
+			ToStream(
+				IWriter* aStream) const override
+			{
+				m_position.ToStream(aStream);
+			}
+
+			bool
+			FromStream(
+				IReader* aStream) override
+			{
+				if (!m_position.FromStream(aStream))
+					return false;
+				return true;
+			}
+
 			// Public data
 			Vec2	m_position;
 		};

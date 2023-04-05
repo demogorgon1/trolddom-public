@@ -186,6 +186,7 @@ namespace kaos_public
 			data->m_height = sprite->m_image.GetHeight();
 			data->m_spriteSheetIndex = sprite->m_sheetIndex;
 			data->m_info = sprite->m_info;
+			data->m_defined = true;
 		}
 	}
 

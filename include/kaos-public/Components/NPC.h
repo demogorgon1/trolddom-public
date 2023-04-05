@@ -43,6 +43,25 @@ namespace kaos_public
 				});
 			}
 
+			void
+			ToStream(
+				IWriter*				aStream) const override
+			{
+				aStream->WriteUInts(m_abilities);
+				m_stats.ToStream(aStream);
+			}
+
+			bool
+			FromStream(
+				IReader*				aStream) override
+			{
+				if(!aStream->ReadUInts(m_abilities))
+					return false;
+				if(!m_stats.FromStream(aStream))
+					return false;
+				return true;
+			}
+
 			// Public data			
 			std::vector<uint32_t>	m_abilities;
 			Stat::Collection		m_stats;

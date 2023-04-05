@@ -2,9 +2,12 @@
 
 #include <kaos-public/Compiler.h>
 #include <kaos-public/ComponentFactory.h>
+#include <kaos-public/Compression.h>
 #include <kaos-public/DataErrorHandling.h>
 
+#include "FileWriter.h"
 #include "MapImageOutput.h"
+#include "MemoryWriter.h"
 #include "SpriteSheetBuilder.h"
 #include "Tokenizer.h"
 
@@ -95,7 +98,22 @@ namespace kaos_public
 
 					mapImageOutput->Generate(aMap->m_data.get(), aMap->m_data->m_imageOutputPath.c_str());
 				}
-			});
+			});			
+		}
+
+		// Export manifest 
+		{
+			std::vector<uint8_t> uncompressed;
+			MemoryWriter writer(uncompressed);
+			m_manifest->ToStream(&writer);
+
+			std::vector<uint8_t> compressed;
+			Compression::Pack(&uncompressed[0], uncompressed.size(), compressed);
+
+			std::string path = aDataOutputPath;
+			path += "/manifest.bin";			
+			FileWriter file(path.c_str());
+			file.Write(&compressed[0], compressed.size());
 		}
 
 		m_sourceContext.m_persistentIdTable->Save();

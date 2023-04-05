@@ -24,7 +24,7 @@ namespace kaos_public
 
 		EffectBase*
 		Create(
-			uint32_t			aId) 
+			uint32_t			aId) const
 		{
 			if(!m_functions[aId])
 				return NULL;

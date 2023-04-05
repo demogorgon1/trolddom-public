@@ -24,6 +24,17 @@ namespace kaos_public
 
 	//--------------------------------------------------------------------
 
+	MapData::MapData()
+		: m_width(0)
+		, m_height(0)
+		, m_x(0)
+		, m_y(0)
+		, m_tileMap(NULL)
+		, m_defaultTileSpriteId(0)
+	{
+
+	}
+
 	MapData::MapData(
 		const Parser::Node*		aSource)
 		: m_width(0)
@@ -51,6 +62,56 @@ namespace kaos_public
 	{
 		if(m_tileMap != NULL)
 			delete [] m_tileMap;
+	}
+
+	void	
+	MapData::ToStream(
+		IWriter*				aStream) const
+	{
+		assert(m_tileMap != NULL);
+
+		aStream->WriteInt(m_x);
+		aStream->WriteInt(m_y);
+		aStream->WriteInt(m_width);
+		aStream->WriteInt(m_height);
+
+		for(int32_t i = 0, count = m_width * m_height; i < count; i++)
+			aStream->WriteUInt(m_tileMap[i]);
+
+		aStream->WriteObjects(m_entitySpawns);
+		aStream->WriteObjects(m_playerSpawns);
+	}
+
+	bool	
+	MapData::FromStream(
+		IReader*				aStream)
+	{
+		if (!aStream->ReadInt(m_x))
+			return false;
+		if (!aStream->ReadInt(m_y))
+			return false;
+		if (!aStream->ReadInt(m_width))
+			return false;
+		if (!aStream->ReadInt(m_height))
+			return false;
+
+		if(m_width < 0 || m_width > 2048 || m_height < 0 || m_height > 2048)
+			return false;
+
+		assert(m_tileMap == NULL);
+		m_tileMap = new uint32_t[m_width * m_height];
+		for (int32_t i = 0, count = m_width * m_height; i < count; i++)
+		{
+			if(!aStream->ReadUInt(m_tileMap[i]))
+				return false;
+		}
+
+		if (!aStream->ReadObjects(m_entitySpawns))
+			return false;
+		if (!aStream->ReadObjects(m_playerSpawns))
+			return false;
+
+		return true;
 	}
 
 	void	

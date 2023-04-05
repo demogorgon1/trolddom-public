@@ -5,5 +5,8 @@ class fighter 1
 entity goblin 1
 map test_dungeon 1
 map_entity_spawn test_dungeon_monster 1
+map_player_spawn test_dungeon_player_spawn 1
 map_palette test_dungeon_tiles 1
 map_palette test_dungeon_entity_spawns 2
+sprite test_dungeon_wall 2
+sprite test_dungeon_floor 1

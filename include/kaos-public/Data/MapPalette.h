@@ -29,6 +29,29 @@ namespace kaos_public
 
 			struct Entry
 			{
+				void
+				ToStream(
+					IWriter*			aStream) const 
+				{
+					aStream->WriteUInt(m_type);
+					aStream->Write(&m_color, sizeof(m_color));
+					aStream->WriteUInt(m_id);
+				}
+
+				bool
+				FromStream(
+					IReader*			aStream) 
+				{
+					if (!aStream->ReadUInt(m_type))
+						return false;
+					if(aStream->Read(&m_color, sizeof(m_color) != sizeof(m_color)))
+						return false;
+					if (!aStream->ReadUInt(m_id))
+						return false;
+					return true;
+				}
+
+				// Public data
 				EntryType		m_type = EntryType(0);
 				Color			m_color;
 				uint32_t		m_id = 0;
@@ -78,6 +101,25 @@ namespace kaos_public
 
 					m_entries.push_back(entry);
 				});
+			}
+
+			void
+			ToStream(
+				IWriter*			aStream) const override
+			{
+				ToStreamBase(aStream);
+				aStream->WriteObjects(m_entries);
+			}
+
+			bool
+			FromStream(
+				IReader* aStream) override
+			{
+				if (!FromStreamBase(aStream))
+					return false;
+				if (!aStream->ReadObjects(m_entries))
+					return false;
+				return true;
 			}
 
 			// Public data

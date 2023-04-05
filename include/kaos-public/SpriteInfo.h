@@ -27,6 +27,22 @@ namespace kaos_public
 
 		}
 
+		void
+		ToStream(
+			IWriter*		aStream) const 
+		{
+			aStream->WriteUInt(m_flags);
+		}
+
+		bool
+		FromStream(
+			IReader*		aStream) 
+		{
+			if (!aStream->ReadUInt(m_flags))
+				return false;
+			return true;
+		}
+
 		// Public data
 		uint8_t		m_flags;
 	};

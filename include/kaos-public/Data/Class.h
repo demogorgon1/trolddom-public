@@ -16,6 +16,11 @@ namespace kaos_public
 
 			struct LevelProgressionLevel
 			{
+				LevelProgressionLevel()
+				{
+
+				}
+
 				LevelProgressionLevel(
 					const Parser::Node*	aNode)
 				{
@@ -33,6 +38,29 @@ namespace kaos_public
 					});
 				}
 
+				void	
+				ToStream(
+					IWriter*				aStream) const 
+				{
+					aStream->WriteUInt(m_level);
+					aStream->WriteUInts(m_unlockAbilities);
+					m_stats.ToStream(aStream);
+				}
+			
+				bool	
+				FromStream(
+					IReader*				aStream) 
+				{
+					if(!aStream->ReadUInt(m_level))
+						return false;
+					if (!aStream->ReadUInts(m_unlockAbilities))
+						return false;
+					if(!m_stats.FromStream(aStream))
+						return false;
+					return true;
+				}
+
+				// Public data
 				uint32_t				m_level = 1;
 				std::vector<uint32_t>	m_unlockAbilities;
 				Stat::Collection		m_stats;
@@ -40,6 +68,11 @@ namespace kaos_public
 
 			struct LevelProgression
 			{
+				LevelProgression()
+				{
+
+				}
+
 				LevelProgression(
 					const Parser::Node* aNode)
 				{
@@ -50,6 +83,23 @@ namespace kaos_public
 					});
 				}
 
+				void	
+				ToStream(
+					IWriter*				aStream) const 
+				{
+					aStream->WriteObjectPointers(m_levels);
+				}
+			
+				bool	
+				FromStream(
+					IReader*				aStream) 
+				{
+					if(!aStream->ReadObjectPointers(m_levels))
+						return false;
+					return true;
+				}
+
+				// Public data
 				std::vector<std::unique_ptr<LevelProgressionLevel>>	m_levels;
 			};
 
@@ -76,6 +126,28 @@ namespace kaos_public
 					else
 						KP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
 				});
+			}
+
+			void	
+			ToStream(
+				IWriter*				aStream) const override
+			{
+				ToStreamBase(aStream);
+				aStream->WriteString(m_displayName);
+				aStream->WriteOptionalObjectPointer(m_levelProgression);
+			}
+			
+			bool	
+			FromStream(
+				IReader*				aStream) override
+			{
+				if (!FromStreamBase(aStream))
+					return false;
+				if(!aStream->ReadString(m_displayName))
+					return false;
+				if(!aStream->ReadOptionalObjectPointer(m_levelProgression))
+					return false;
+				return true;
 			}
 
 			// Public data

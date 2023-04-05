@@ -11,6 +11,8 @@
 #include "Data/Talent.h"
 #include "Data/TalentTree.h"
 
+#include "IReader.h"
+#include "IWriter.h"
 #include "PersistentIdTable.h"
 
 namespace kaos_public
@@ -23,6 +25,10 @@ namespace kaos_public
 		{
 			// Virtual interface
 			virtual void		Verify() const = 0;
+			virtual void		ToStream(
+									IWriter*			aStream) const = 0;
+			virtual bool		FromStream(	
+									IReader*			aStream) = 0;
 			virtual DataBase*	GetBaseByName(
 									PersistentIdTable*	aPersistentIdTable,
 									const char*			aName) = 0;
@@ -40,6 +46,9 @@ namespace kaos_public
 				typename std::unordered_map<std::string, _T*>::iterator it = m_nameTable.find(aName);
 				if(it == m_nameTable.end())
 				{
+					if(aPersistentIdTable == NULL)
+						return NULL;
+
 					std::unique_ptr<_T> t = std::make_unique<_T>();
 					t->m_name = aName;
 					t->m_id = aPersistentIdTable->GetId(_T::DATA_TYPE, aName);
@@ -94,6 +103,33 @@ namespace kaos_public
 				}
 			}
 
+			void
+			ToStream(
+				IWriter*								aStream) const override
+			{
+				aStream->WriteObjectPointers(m_entries);
+			}
+
+			bool
+			FromStream(
+				IReader*								aStream) override
+			{
+				if(!aStream->ReadObjectPointers(m_entries))
+					return false;
+
+				for (std::unique_ptr<_T>& t : m_entries)
+				{
+					KP_CHECK(t->m_defined, "'%s' not defined.", DataType::IdToString(_T::DATA_TYPE));
+					KP_CHECK(m_idTable.find(t->m_id) == m_idTable.end(), "Id collision for '%s': %u", DataType::IdToString(_T::DATA_TYPE), t->m_id);
+					KP_CHECK(m_nameTable.find(t->m_name) == m_nameTable.end(), "Name collision for '%s': %s", DataType::IdToString(_T::DATA_TYPE), t->m_name.c_str());
+
+					m_idTable[t->m_id] = t.get();
+					m_nameTable[t->m_name] = t.get();
+				}
+
+				return true;
+			}
+
 			DataBase*
 			GetBaseByName(
 				PersistentIdTable*						aPersistentIdTable,
@@ -135,6 +171,30 @@ namespace kaos_public
 				assert(m_containers[i] != NULL);
 				m_containers[i]->Verify();
 			}
+		}
+
+		void
+		ToStream(
+			IWriter*									aStream) const
+		{
+			for (uint8_t i = 1; i < (uint8_t)DataType::NUM_IDS; i++)
+			{
+				assert(m_containers[i] != NULL);
+				m_containers[i]->ToStream(aStream);
+			}
+		}
+		
+		bool
+		FromStream(
+			IReader*									aStream) 
+		{
+			for (uint8_t i = 1; i < (uint8_t)DataType::NUM_IDS; i++)
+			{
+				assert(m_containers[i] != NULL);
+				if(!m_containers[i]->FromStream(aStream))
+					return false;
+			}
+			return true;
 		}
 
 		// Public data

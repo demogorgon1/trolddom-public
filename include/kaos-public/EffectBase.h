@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Effect.h"
+#include "IReader.h"
+#include "IWriter.h"
 #include "Parser.h"
 
 namespace kaos_public
@@ -39,9 +41,29 @@ namespace kaos_public
 			return false;
 		}
 
+		void	
+		ToStreamBase(
+			IWriter*				aStream) const 
+		{
+			aStream->WriteUInt(m_flags);
+		}
+		
+		bool	
+		FromStreamBase(
+			IReader*				aStream) 
+		{
+			if(!aStream->ReadUInt(m_flags))
+				return false;
+			return true;
+		}
+
 		// Virtual methods
 		virtual void	FromSource(
 							const Parser::Node*		/*aSource*/) { assert(false); }
+		virtual void	ToStream(
+							IWriter*				/*aStream*/) const { assert(false); }
+		virtual bool	FromStream(
+							IReader*				/*aStream*/) { assert(false); return true; }
 
 		// Public data
 		uint32_t		m_flags;		

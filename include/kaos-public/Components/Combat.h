@@ -42,6 +42,28 @@ namespace kaos_public
 				});
 			}
 
+			void	
+			ToStream(
+				IWriter*				aStream) const override
+			{
+				aStream->WriteUInt(m_targetEntityInstanceId);
+				aStream->WriteUInt(m_currentHealth);
+				aStream->WriteUInt(m_maxHealth);
+			}
+			
+			bool	
+			FromStream(
+				IReader*				aStream) override
+			{
+				if (!aStream->ReadUInt(m_targetEntityInstanceId))
+					return false;
+				if (!aStream->ReadUInt(m_currentHealth))
+					return false;
+				if (!aStream->ReadUInt(m_maxHealth))
+					return false;
+				return true;
+			}
+
 			// Public data
 			uint32_t		m_targetEntityInstanceId = 0;
 

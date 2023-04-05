@@ -86,6 +86,26 @@ namespace kaos_public
 				});
 			}
 
+			void
+			ToStream(
+				IWriter*			aStream) const 
+			{
+				for(uint32_t i = 0; i < (uint32_t)NUM_IDS; i++)
+					aStream->WriteUInt(m_stats[i]);
+			}
+
+			bool
+			FromStream(
+				IReader*			aStream) 
+			{
+				for (uint32_t i = 0; i < (uint32_t)NUM_IDS; i++)
+				{
+					if(!aStream->ReadUInt(m_stats[i]))
+						return false;
+				}
+				return true;
+			}
+
 			// Public data
 			uint32_t		m_stats[NUM_IDS];
 		};

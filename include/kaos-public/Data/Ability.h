@@ -17,6 +17,11 @@ namespace kaos_public
 
 			struct EffectEntry
 			{
+				EffectEntry()
+				{
+
+				}
+
 				EffectEntry(
 					const Parser::Node*		aSource)
 				{
@@ -30,6 +35,28 @@ namespace kaos_public
 						effect->FromSource(aSource);
 
 					m_effectBase = std::move(effect);
+				}
+
+				void	
+				ToStream(
+					IWriter*				aStream) const 
+				{
+					aStream->WriteUInt(m_effectId);
+					aStream->WriteObjectPointer(m_effectBase);
+				}
+			
+				bool	
+				FromStream(
+					IReader*				aStream) 
+				{
+					if(!aStream->ReadUInt(m_effectId))
+						return false;
+
+					m_effectBase.reset(aStream->GetEffectFactory()->Create(m_effectId));
+					if(!m_effectBase->FromStream(aStream))
+						return false;
+
+					return true;
 				}
 
 				// Public data
@@ -62,6 +89,31 @@ namespace kaos_public
 					else
 						KP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
 				});
+			}
+
+			void	
+			ToStream(
+				IWriter*				aStream) const override
+			{
+				ToStreamBase(aStream);
+				aStream->WriteString(m_displayName);
+				aStream->WriteUInt(m_range);
+				aStream->WriteObjectPointers(m_effects);
+			}
+			
+			bool	
+			FromStream(
+				IReader*				aStream) override
+			{
+				if(!FromStreamBase(aStream))
+					return false;
+				if(!aStream->ReadString(m_displayName))
+					return false;
+				if(!aStream->ReadUInt(m_range))
+					return false;
+				if(!aStream->ReadObjectPointers(m_effects))
+					return false;
+				return true;
 			}
 
 			// Public data
