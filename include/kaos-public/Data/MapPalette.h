@@ -44,7 +44,7 @@ namespace kaos_public
 				{
 					if (!aStream->ReadUInt(m_type))
 						return false;
-					if(aStream->Read(&m_color, sizeof(m_color) != sizeof(m_color)))
+					if(aStream->Read(&m_color, sizeof(m_color)) != sizeof(m_color))
 						return false;
 					if (!aStream->ReadUInt(m_id))
 						return false;
