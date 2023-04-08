@@ -13,6 +13,7 @@ namespace kaos_public
 			ID_COMBAT,
 			ID_NPC,
 			ID_POSITION,
+			ID_PLAYER,
 
 			NUM_IDS
 		};
@@ -23,7 +24,8 @@ namespace kaos_public
 			NULL,
 			"combat",
 			"npc",
-			"position"
+			"position",
+			"player"
 		};		
 
 		static_assert(sizeof(COMPONENT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

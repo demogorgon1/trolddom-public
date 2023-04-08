@@ -31,6 +31,7 @@ namespace kaos_public
 			IWriter*							aStream) const
 		{
 			assert(m_defined);
+
 			aStream->WriteString(m_name);
 			aStream->WriteUInt(m_id);
 		}

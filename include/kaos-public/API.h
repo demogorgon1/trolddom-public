@@ -4,6 +4,7 @@
 
 #include "Components/Combat.h"
 #include "Components/NPC.h"
+#include "Components/Player.h"
 #include "Components/Position.h"
 
 #include "Data/Ability.h"
@@ -23,6 +24,7 @@
 #include "Component.h"
 #include "ComponentBase.h"
 #include "ComponentFactory.h"
+#include "Compression.h"
 #include "DataBase.h"
 #include "DataErrorHandling.h"
 #include "DataType.h"
@@ -34,6 +36,7 @@
 #include "Parser.h"
 #include "PersistentIdTable.h"
 #include "SourceContext.h"
+#include "SpriteData.h"
 #include "SpriteInfo.h"
 #include "Stat.h"
 #include "System.h"

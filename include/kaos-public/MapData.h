@@ -86,6 +86,7 @@ namespace kaos_public
 
 		// Public data
 		uint32_t									m_defaultTileSpriteId;
+		uint32_t									m_defaultPlayerSpawnId;
 		std::string									m_imageOutputPath;
 		int32_t										m_x;
 		int32_t										m_y;

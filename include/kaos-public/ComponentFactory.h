@@ -2,6 +2,7 @@
 
 #include "Components/Combat.h"
 #include "Components/NPC.h"
+#include "Components/Player.h"
 #include "Components/Position.h"
 
 #include "Component.h"
@@ -16,6 +17,7 @@ namespace kaos_public
 		{
 			_Register<Components::Combat>();
 			_Register<Components::NPC>();
+			_Register<Components::Player>();
 			_Register<Components::Position>();
 		}
 
