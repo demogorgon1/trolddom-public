@@ -11,7 +11,7 @@
 
 #if defined(WIN32)
 
-	#define KP_STRING_FORMAT_VARARGS(Buffer, BufferSize, Format)							\
+	#define KP_STRING_FORMAT_VARARGS(Buffer, BufferSize, Format)						\
 		{																				\
 			va_list _list;																\
 			va_start(_list, Format);													\
@@ -28,7 +28,7 @@
 
 #else
 
-	#define KP_STRING_FORMAT_VARARGS(Buffer, BufferSize, Format)							\
+	#define KP_STRING_FORMAT_VARARGS(Buffer, BufferSize, Format)						\
 		{																				\
 			va_list _list;																\
 			va_start(_list, Format);													\
