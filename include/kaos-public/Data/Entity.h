@@ -33,6 +33,8 @@ namespace kaos_public
 					std::unique_ptr<ComponentBase> component(aSource->m_sourceContext->m_componentFactory->Create(m_componentId));
 					assert(component);
 
+					KP_VERIFY((component->GetFlags() & ComponentBase::FLAG_PLAYER_ONLY) == 0, aSource->m_debugInfo, "'%s' is a player-only component.", aSource->m_name.c_str());
+
 					if(!aSource->m_children.empty())
 						component->FromSource(aSource);
 

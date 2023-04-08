@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Component.h"
-#include "Vec2.h"
 
 namespace kaos_public
 {
@@ -9,20 +8,20 @@ namespace kaos_public
 	namespace Components
 	{
 
-		struct Player
+		struct Wallet
 			: public ComponentBase
 		{
-			static const Component::Id ID = Component::ID_PLAYER;
-			static const uint8_t FLAGS = FLAG_SHARED_OWNER | FLAG_SHARED_OTHERS | FLAG_PLAYER_ONLY;
+			static const Component::Id ID = Component::ID_INVENTORY;
+			static const uint8_t FLAGS = FLAG_SHARED_OWNER | FLAG_PLAYER_ONLY | FLAG_PERSISTENT;
 
-			Player()
+			Wallet()
 				: ComponentBase(ID, FLAGS)
 			{
 
 			}
 
 			virtual
-			~Player()
+			~Wallet()
 			{
 
 			}
@@ -32,20 +31,20 @@ namespace kaos_public
 			ToStream(
 				IWriter* aStream) const override
 			{
-				aStream->WriteUInt(m_classId);
+				aStream->WriteUInt(m_cash);
 			}
 
 			bool
 			FromStream(
 				IReader* aStream) override
 			{
-				if(!aStream->ReadUInt(m_classId))
+				if(!aStream->ReadUInt(m_cash))
 					return false;
 				return true;
 			}
 
 			// Public data
-			uint32_t		m_classId = 0;
+			uint64_t			m_cash = 0;
 		};
 	}
 

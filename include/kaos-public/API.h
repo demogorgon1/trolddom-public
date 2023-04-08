@@ -3,9 +3,13 @@
 #include "Base.h"
 
 #include "Components/Combat.h"
+#include "Components/EquippedItems.h"
+#include "Components/Inventory.h"
 #include "Components/NPC.h"
 #include "Components/Player.h"
 #include "Components/Position.h"
+#include "Components/Talents.h"
+#include "Components/Wallet.h"
 
 #include "Data/Ability.h"
 #include "Data/Class.h"

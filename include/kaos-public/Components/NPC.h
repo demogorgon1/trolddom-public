@@ -13,9 +13,10 @@ namespace kaos_public
 			: public ComponentBase
 		{
 			static const Component::Id ID = Component::ID_NPC;
+			static const uint8_t FLAGS = FLAG_SHARED_OWNER | FLAG_SHARED_OTHERS;
 
 			NPC()
-				: ComponentBase(ID)
+				: ComponentBase(ID, FLAGS)
 			{
 
 			}

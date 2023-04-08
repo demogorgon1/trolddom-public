@@ -14,6 +14,10 @@ namespace kaos_public
 			ID_NPC,
 			ID_POSITION,
 			ID_PLAYER,
+			ID_INVENTORY,
+			ID_EQUIPPED_ITEMS,
+			ID_TALENTS,
+			ID_WALLET,
 
 			NUM_IDS
 		};
@@ -25,7 +29,11 @@ namespace kaos_public
 			"combat",
 			"npc",
 			"position",
-			"player"
+			"player",
+			"inventory",
+			"equipped_items",
+			"talents",
+			"wallet"
 		};		
 
 		static_assert(sizeof(COMPONENT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);
