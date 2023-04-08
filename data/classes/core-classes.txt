@@ -1,6 +1,18 @@
+sprites:
+{
+	source: "classes.png"
+
+	cursor: { position: [ 0 0 ] }
+
+	size: { width: 16 height: 16 }
+
+	sprite fighter: { }
+}
+
 class fighter:
 {
-	string: "Fighter"
+	string: "Fighter"	
+	sprite: fighter
 	
 	level_progression:
 	[

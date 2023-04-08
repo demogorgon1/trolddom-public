@@ -8,5 +8,6 @@ map_entity_spawn test_dungeon_monster 1
 map_player_spawn test_dungeon_player_spawn 1
 map_palette test_dungeon_tiles 1
 map_palette test_dungeon_entity_spawns 2
-sprite test_dungeon_wall 2
-sprite test_dungeon_floor 1
+sprite fighter 1
+sprite test_dungeon_wall 3
+sprite test_dungeon_floor 2

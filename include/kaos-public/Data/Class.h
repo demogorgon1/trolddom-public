@@ -121,6 +121,8 @@ namespace kaos_public
 				{
 					if(aMember->m_name == "string")
 						m_displayName = aMember->GetString();
+					else if (aMember->m_name == "sprite")
+						m_spriteId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aMember->GetIdentifier());
 					else if(aMember->m_name == "level_progression")
 						m_levelProgression = std::make_unique<LevelProgression>(aMember->GetArray());
 					else
@@ -135,6 +137,7 @@ namespace kaos_public
 				ToStreamBase(aStream);
 				aStream->WriteString(m_displayName);
 				aStream->WriteOptionalObjectPointer(m_levelProgression);
+				aStream->WriteUInt(m_spriteId);
 			}
 			
 			bool	
@@ -147,11 +150,14 @@ namespace kaos_public
 					return false;
 				if(!aStream->ReadOptionalObjectPointer(m_levelProgression))
 					return false;
+				if(!aStream->ReadUInt(m_spriteId))
+					return false;
 				return true;
 			}
 
 			// Public data
 			std::string												m_displayName;
+			uint32_t												m_spriteId;
 			std::unique_ptr<LevelProgression>						m_levelProgression;
 		};
 

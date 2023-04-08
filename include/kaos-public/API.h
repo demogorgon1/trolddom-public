@@ -4,6 +4,7 @@
 
 #include "Components/Combat.h"
 #include "Components/NPC.h"
+#include "Components/Player.h"
 #include "Components/Position.h"
 
 #include "Data/Ability.h"
