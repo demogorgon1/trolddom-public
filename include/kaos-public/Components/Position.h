@@ -13,7 +13,7 @@ namespace kaos_public
 			: public ComponentBase
 		{
 			static const Component::Id ID = Component::ID_POSITION;
-			static const uint8_t FLAGS = FLAG_SHARED_OWNER | FLAG_SHARED_OTHERS;
+			static const uint8_t FLAGS = FLAG_PRIVATE | FLAG_PUBLIC;
 
 			Position()
 				: ComponentBase(ID, FLAGS)

@@ -47,6 +47,14 @@ namespace kaos_public
 				return m_data->FromStream(aStream);
 			}
 
+			void
+			PrepareRuntime(
+				const Manifest*			aManifest) override
+			{
+				assert(m_data);
+				m_data->PrepareRuntime(aManifest);
+			}
+
 			// Public data
 			std::unique_ptr<MapData>	m_data;
 		};

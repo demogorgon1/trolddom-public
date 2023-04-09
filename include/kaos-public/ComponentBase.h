@@ -13,8 +13,8 @@ namespace kaos_public
 	public:
 		enum Flag : uint8_t
 		{
-			FLAG_SHARED_OWNER	= 0x01,
-			FLAG_SHARED_OTHERS	= 0x02,
+			FLAG_PRIVATE		= 0x01,
+			FLAG_PUBLIC			= 0x02,
 			FLAG_PERSISTENT		= 0x04,
 			FLAG_PLAYER_ONLY	= 0x08
 		};

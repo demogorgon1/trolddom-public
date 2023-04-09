@@ -12,7 +12,7 @@ namespace kaos_public
 			: public ComponentBase
 		{
 			static const Component::Id ID = Component::ID_COMBAT;
-			static const uint8_t FLAGS = FLAG_SHARED_OWNER | FLAG_SHARED_OTHERS;
+			static const uint8_t FLAGS = FLAG_PRIVATE | FLAG_PUBLIC;
 
 			Combat()
 				: ComponentBase(ID, FLAGS)
@@ -48,6 +48,7 @@ namespace kaos_public
 				IWriter*				aStream) const override
 			{
 				aStream->WriteUInt(m_targetEntityInstanceId);
+				aStream->WriteUInt(m_level);
 				aStream->WriteUInt(m_currentHealth);
 				aStream->WriteUInt(m_maxHealth);
 			}
@@ -57,6 +58,8 @@ namespace kaos_public
 				IReader*				aStream) override
 			{
 				if (!aStream->ReadUInt(m_targetEntityInstanceId))
+					return false;
+				if (!aStream->ReadUInt(m_level))
 					return false;
 				if (!aStream->ReadUInt(m_currentHealth))
 					return false;
@@ -68,6 +71,7 @@ namespace kaos_public
 			// Public data
 			uint32_t		m_targetEntityInstanceId = 0;
 
+			uint32_t		m_level = 1;
 			uint32_t		m_currentHealth = 1;
 			uint32_t		m_maxHealth = 1;
 		};

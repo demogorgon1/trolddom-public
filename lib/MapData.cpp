@@ -31,6 +31,7 @@ namespace kaos_public
 		, m_y(0)
 		, m_tileMap(NULL)
 		, m_defaultTileSpriteId(0)
+		, m_walkableBits(NULL)
 	{
 
 	}
@@ -44,6 +45,7 @@ namespace kaos_public
 		, m_tileMap(NULL)
 		, m_defaultTileSpriteId(0)
 		, m_defaultPlayerSpawnId(0)
+		, m_walkableBits(NULL)
 	{
 		aSource->GetObject()->ForEachChild([&](
 			const Parser::Node* aNode)
@@ -65,62 +67,9 @@ namespace kaos_public
 	{
 		if(m_tileMap != NULL)
 			delete [] m_tileMap;
-	}
 
-	void	
-	MapData::ToStream(
-		IWriter*				aStream) const
-	{
-		assert(m_tileMap != NULL);
-
-		aStream->WriteUInt(m_defaultTileSpriteId);
-		aStream->WriteUInt(m_defaultPlayerSpawnId);
-		aStream->WriteInt(m_x);
-		aStream->WriteInt(m_y);
-		aStream->WriteInt(m_width);
-		aStream->WriteInt(m_height);
-
-		for(int32_t i = 0, count = m_width * m_height; i < count; i++)
-			aStream->WriteUInt(m_tileMap[i]);
-
-		aStream->WriteObjects(m_entitySpawns);
-		aStream->WriteObjects(m_playerSpawns);
-	}
-
-	bool	
-	MapData::FromStream(
-		IReader*				aStream)
-	{
-		if (!aStream->ReadUInt(m_defaultTileSpriteId))
-			return false;
-		if (!aStream->ReadUInt(m_defaultPlayerSpawnId))
-			return false;
-		if (!aStream->ReadInt(m_x))
-			return false;
-		if (!aStream->ReadInt(m_y))
-			return false;
-		if (!aStream->ReadInt(m_width))
-			return false;
-		if (!aStream->ReadInt(m_height))
-			return false;
-
-		if(m_width < 0 || m_width > 2048 || m_height < 0 || m_height > 2048)
-			return false;
-
-		assert(m_tileMap == NULL);
-		m_tileMap = new uint32_t[m_width * m_height];
-		for (int32_t i = 0, count = m_width * m_height; i < count; i++)
-		{
-			if(!aStream->ReadUInt(m_tileMap[i]))
-				return false;
-		}
-
-		if (!aStream->ReadObjects(m_entitySpawns))
-			return false;
-		if (!aStream->ReadObjects(m_playerSpawns))
-			return false;
-
-		return true;
+		if(m_walkableBits != NULL)
+			delete [] m_walkableBits;
 	}
 
 	void	
@@ -200,6 +149,90 @@ namespace kaos_public
 			}
 		}
 	}
+
+	void	
+	MapData::ToStream(
+		IWriter*				aStream) const
+	{
+		assert(m_tileMap != NULL);
+
+		aStream->WriteUInt(m_defaultTileSpriteId);
+		aStream->WriteUInt(m_defaultPlayerSpawnId);
+		aStream->WriteInt(m_x);
+		aStream->WriteInt(m_y);
+		aStream->WriteInt(m_width);
+		aStream->WriteInt(m_height);
+
+		for(int32_t i = 0, count = m_width * m_height; i < count; i++)
+			aStream->WriteUInt(m_tileMap[i]);
+
+		aStream->WriteObjects(m_entitySpawns);
+		aStream->WriteObjects(m_playerSpawns);
+	}
+
+	bool	
+	MapData::FromStream(
+		IReader*				aStream)
+	{
+		if (!aStream->ReadUInt(m_defaultTileSpriteId))
+			return false;
+		if (!aStream->ReadUInt(m_defaultPlayerSpawnId))
+			return false;
+		if (!aStream->ReadInt(m_x))
+			return false;
+		if (!aStream->ReadInt(m_y))
+			return false;
+		if (!aStream->ReadInt(m_width))
+			return false;
+		if (!aStream->ReadInt(m_height))
+			return false;
+
+		if(m_width < 0 || m_width > 2048 || m_height < 0 || m_height > 2048)
+			return false;
+
+		assert(m_tileMap == NULL);
+		m_tileMap = new uint32_t[m_width * m_height];
+		for (int32_t i = 0, count = m_width * m_height; i < count; i++)
+		{
+			if(!aStream->ReadUInt(m_tileMap[i]))
+				return false;
+		}
+
+		if (!aStream->ReadObjects(m_entitySpawns))
+			return false;
+		if (!aStream->ReadObjects(m_playerSpawns))
+			return false;
+
+		return true;
+	}
+
+	void	
+	MapData::PrepareRuntime(
+		const Manifest*			aManifest)
+	{
+		assert(m_walkableBits == NULL);
+		assert(m_tileMap != NULL);
+		assert(m_width > 0 && m_height > 0);
+
+		_InitWalkableBits(aManifest);
+	}
+
+	bool	
+	MapData::IsTileWalkable(
+		int32_t					aX,
+		int32_t					aY) const
+	{
+		assert(m_walkableBits != NULL);
+		int32_t x = aX - m_x;
+		int32_t y = aY - m_y;
+		if(x < 0 || y < 0 || x >= m_width || y >= m_height)
+			return false;
+		uint32_t i = (uint32_t)(x + y * m_width);
+		uint32_t j = i / 32;
+		uint32_t k = i % 32;
+		return (m_walkableBits[j] & (1 << k)) != 0;
+	}
+
 
 	//--------------------------------------------------------------------
 
@@ -299,6 +332,43 @@ namespace kaos_public
 		m_y = minY;
 		m_width = maxX - minX;
 		m_height = maxY - minY;
+	}
+
+	void	
+	MapData::_InitWalkableBits(
+		const Manifest*				aManifest)
+	{
+		int32_t count = m_width * m_height / 32;
+		if((m_width * m_height % 32) != 0)
+			count++;
+
+		m_walkableBits = new uint32_t[count];
+		memset(m_walkableBits, 0, sizeof(uint32_t) * (size_t)count);
+
+		const uint32_t* in = m_tileMap;
+		uint32_t* out = m_walkableBits;
+		uint32_t bit = 0;
+
+		for(int32_t y = 0; y < m_height; y++)
+		{
+			for(int32_t x = 0; x < m_width; x++)
+			{
+				const Data::Sprite* sprite = aManifest->m_sprites.GetById(*in);
+				
+				if(sprite->m_info.m_flags & SpriteInfo::FLAG_TILE_WALKABLE)
+					*out |= 1 << bit;
+
+				// Next tile
+				in++;
+				bit++;
+
+				if(bit == 32)
+				{
+					bit = 0;
+					out++;
+				}
+			}
+		}
 	}
 
 }

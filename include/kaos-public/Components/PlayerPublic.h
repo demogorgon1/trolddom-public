@@ -9,20 +9,20 @@ namespace kaos_public
 	namespace Components
 	{
 
-		struct Player
+		struct PlayerPublic
 			: public ComponentBase
 		{
-			static const Component::Id ID = Component::ID_PLAYER;
-			static const uint8_t FLAGS = FLAG_SHARED_OWNER | FLAG_SHARED_OTHERS | FLAG_PLAYER_ONLY;
+			static const Component::Id ID = Component::ID_PLAYER_PUBLIC;
+			static const uint8_t FLAGS = FLAG_PRIVATE | FLAG_PUBLIC | FLAG_PLAYER_ONLY;
 
-			Player()
+			PlayerPublic()
 				: ComponentBase(ID, FLAGS)
 			{
 
 			}
 
 			virtual
-			~Player()
+			~PlayerPublic()
 			{
 
 			}

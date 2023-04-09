@@ -83,6 +83,11 @@ namespace kaos_public
 					IWriter*				aStream) const;
 		bool	FromStream(
 					IReader*				aStream);
+		void	PrepareRuntime(
+					const Manifest*			aManifest);
+		bool	IsTileWalkable(
+					int32_t					aX,
+					int32_t					aY) const;
 
 		// Public data
 		uint32_t									m_defaultTileSpriteId;
@@ -95,6 +100,7 @@ namespace kaos_public
 		uint32_t*									m_tileMap;
 		std::vector<EntitySpawn>					m_entitySpawns;
 		std::vector<PlayerSpawn>					m_playerSpawns;
+		uint32_t*									m_walkableBits;
 
 		struct SourceLayer
 		{
@@ -139,6 +145,8 @@ namespace kaos_public
 
 		void	_InitLayers(
 					const Parser::Node*		aLayersArray);
+		void	_InitWalkableBits(
+					const Manifest*			aManifest);
 	};
 
 }

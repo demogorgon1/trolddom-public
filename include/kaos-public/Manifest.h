@@ -25,6 +25,8 @@ namespace kaos_public
 		{
 			// Virtual interface
 			virtual void		Verify() const = 0;
+			virtual void		PrepareRuntime(
+									const Manifest*		aManifest) = 0;
 			virtual void		ToStream(
 									IWriter*			aStream) const = 0;
 			virtual bool		FromStream(	
@@ -101,6 +103,14 @@ namespace kaos_public
 					KP_VERIFY(idTable.find(t->m_id) == idTable.end(), t->m_debugInfo, "Id collision: %u", t->m_id);
 					idTable[t->m_id] = t.get();
 				}
+			}
+
+			void		
+			PrepareRuntime(
+				const Manifest*							aManifest) override
+			{
+				for (const std::unique_ptr<_T>& t : m_entries)
+					t->PrepareRuntime(aManifest);
 			}
 
 			void
@@ -195,6 +205,16 @@ namespace kaos_public
 					return false;
 			}
 			return true;
+		}
+
+		void
+		PrepareRuntime()
+		{
+			for (uint8_t i = 1; i < (uint8_t)DataType::NUM_IDS; i++)
+			{
+				assert(m_containers[i] != NULL);
+				m_containers[i]->PrepareRuntime(this);
+			}
 		}
 
 		// Public data

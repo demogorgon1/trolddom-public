@@ -9,6 +9,8 @@
 namespace kaos_public
 {
 
+	class Manifest;
+
 	struct DataBase
 	{
 		DataBase()
@@ -56,6 +58,10 @@ namespace kaos_public
 							IWriter*			aStream) const = 0;
 		virtual bool	FromStream(
 							IReader*			aStream) = 0;							
+
+		// Virtual methods
+		virtual void	PrepareRuntime(
+							const Manifest*		/*aManifest*/) { }
 
 		// Public data
 		std::string									m_name;

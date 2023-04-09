@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ComponentBase.h"
+#include "ErrorUtils.h"
 #include "SystemBase.h"
 
 namespace kaos_public
@@ -27,6 +28,8 @@ namespace kaos_public
 		AddComponent(
 			ComponentBase*		aComponent)
 		{
+			K_ASSERT(aComponent != NULL);
+			
 			// FIXME: this kinda defeats much of the purpose of using ECS
 			m_components.push_back(std::unique_ptr<ComponentBase>(aComponent));
 		}
@@ -39,11 +42,33 @@ namespace kaos_public
 		}
 
 		void
-		Serialize(
+		SerializeAll(
 			IWriter*			aWriter) const
 		{
 			for(const std::unique_ptr<ComponentBase>& component : m_components)
 				component->ToStream(aWriter);
+		}
+
+		void
+		SerializePublic(
+			IWriter*			aWriter) const
+		{
+			for(const std::unique_ptr<ComponentBase>& component : m_components)
+			{
+				if(component->GetFlags() & ComponentBase::FLAG_PUBLIC)
+					component->ToStream(aWriter);
+			}
+		}
+
+		void
+		SerializePrivate(
+			IWriter*			aWriter) const
+		{
+			for(const std::unique_ptr<ComponentBase>& component : m_components)
+			{
+				if(component->GetFlags() & ComponentBase::FLAG_PRIVATE)
+					component->ToStream(aWriter);
+			}
 		}
 
 		bool
@@ -52,7 +77,7 @@ namespace kaos_public
 		{
 			for (const std::unique_ptr<ComponentBase>& component : m_components)
 			{
-				if(!component->FromStream(aReader))
+				if (!component->FromStream(aReader))
 					return false;
 			}
 			return true;
