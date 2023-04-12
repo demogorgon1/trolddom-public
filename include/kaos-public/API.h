@@ -2,7 +2,9 @@
 
 #include "Base.h"
 
+#include "Components/Abilities.h"
 #include "Components/Combat.h"
+#include "Components/DisplayName.h"
 #include "Components/EquippedItems.h"
 #include "Components/Inventory.h"
 #include "Components/NPC.h"

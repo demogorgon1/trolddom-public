@@ -3,6 +3,7 @@
 #include "../ComponentBase.h"
 #include "../ComponentFactory.h"
 #include "../DataBase.h"
+#include "../EntityInstance.h"
 #include "../System.h"
 
 namespace kaos_public
@@ -73,6 +74,31 @@ namespace kaos_public
 				VerifyBase();
 			}
 
+			EntityInstance*
+			CreateInstance(
+				const ComponentFactory*	aComponentFactory,
+				uint32_t				aEntityInstanceId) const 
+			{
+				std::unique_ptr<kaos_public::EntityInstance> entity = std::make_unique<kaos_public::EntityInstance>(m_id, aEntityInstanceId);
+
+				for(const std::unique_ptr<ComponentEntry>& componentEntry : m_components)
+					entity->AddComponent(aComponentFactory->Create(componentEntry->m_componentId));
+
+				return entity.release();
+			}
+
+			void
+			SerializeInitData(
+				IWriter*				aWriter) const
+			{
+				uint32_t index = 0;
+				for (const std::unique_ptr<ComponentEntry>& componentEntry : m_components)
+				{
+					aWriter->WriteUInt(index++);
+					componentEntry->m_componentBase->ToStream(aWriter);
+				}
+			}
+
 			// Base implementation
 			void
 			FromSource(
@@ -84,6 +110,10 @@ namespace kaos_public
 					if (aMember->m_name == "string")
 					{
 						m_displayName = aMember->GetString();
+					}
+					else if (aMember->m_name == "sprite")
+					{
+						m_spriteId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aMember->GetIdentifier());
 					}
 					else if(aMember->m_name == "components")
 					{
@@ -116,6 +146,7 @@ namespace kaos_public
 			{
 				ToStreamBase(aStream);
 				aStream->WriteString(m_displayName);
+				aStream->WriteUInt(m_spriteId);
 				aStream->WriteUInts(m_systems);
 				aStream->WriteObjectPointers(m_components);
 			}
@@ -128,6 +159,8 @@ namespace kaos_public
 					return false;
 				if(!aStream->ReadString(m_displayName))
 					return false;
+				if(!aStream->ReadUInt(m_spriteId))
+					return false;
 				if(!aStream->ReadUInts(m_systems))
 					return false;
 				if(!aStream->ReadObjectPointers(m_components))
@@ -137,6 +170,7 @@ namespace kaos_public
 
 			// Public data
 			std::string										m_displayName;
+			uint32_t										m_spriteId = 0;
 			std::vector<uint32_t>							m_systems;
 			std::vector<std::unique_ptr<ComponentEntry>>	m_components;
 		};

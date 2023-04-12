@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Component.h"
+#include "DataErrorHandling.h"
 #include "IReader.h"
 #include "IWriter.h"
 #include "Parser.h"
@@ -32,6 +33,14 @@ namespace kaos_public
 		~ComponentBase()
 		{
 
+		}
+
+		template <typename _T>
+		const _T*
+		Cast() const
+		{
+			KP_CHECK(m_componentId == _T::ID, "Component type mismatch.");
+			return (const _T*)this;
 		}
 
 		// Virtual methods

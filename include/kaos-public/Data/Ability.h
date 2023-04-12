@@ -82,8 +82,10 @@ namespace kaos_public
 				{
 					if(aMember->m_name == "string")
 						m_displayName = aMember->GetString();
-					else if(aMember->m_name == "range")
+					else if (aMember->m_name == "range")
 						m_range = aMember->GetUInt32();
+					else if (aMember->m_name == "cooldown")
+						m_cooldown = aMember->GetUInt32();
 					else if(aMember->m_tag == "effect")
 						m_effects.push_back(std::make_unique<EffectEntry>(aMember->GetObject()));
 					else
@@ -98,6 +100,7 @@ namespace kaos_public
 				ToStreamBase(aStream);
 				aStream->WriteString(m_displayName);
 				aStream->WriteUInt(m_range);
+				aStream->WriteUInt(m_cooldown);
 				aStream->WriteObjectPointers(m_effects);
 			}
 			
@@ -109,7 +112,9 @@ namespace kaos_public
 					return false;
 				if(!aStream->ReadString(m_displayName))
 					return false;
-				if(!aStream->ReadUInt(m_range))
+				if (!aStream->ReadUInt(m_range))
+					return false;
+				if (!aStream->ReadUInt(m_cooldown))
 					return false;
 				if(!aStream->ReadObjectPointers(m_effects))
 					return false;
@@ -119,6 +124,7 @@ namespace kaos_public
 			// Public data
 			std::string									m_displayName;
 			uint32_t									m_range = 1;
+			uint32_t									m_cooldown = 10;
 			std::vector<std::unique_ptr<EffectEntry>>	m_effects;
 		};
 

@@ -19,6 +19,8 @@ namespace kaos_public
 			ID_EQUIPPED_ITEMS,
 			ID_TALENTS,
 			ID_WALLET,
+			ID_ABILITIES,
+			ID_DISPLAY_NAME,
 
 			NUM_IDS
 		};
@@ -35,7 +37,9 @@ namespace kaos_public
 			"inventory",
 			"equipped_items",
 			"talents",
-			"wallet"
+			"wallet",
+			"abilities",
+			"display_name"
 		};		
 
 		static_assert(sizeof(COMPONENT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

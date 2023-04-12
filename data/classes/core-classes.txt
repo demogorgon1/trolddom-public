@@ -23,6 +23,7 @@ class fighter:
 			[
 				strike
 				knock
+				gaze_of_death
 			]
 			
 			stats:

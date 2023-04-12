@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Effects/Damage.h"
+#include "Effects/Kill.h"
 #include "Effects/Stun.h"
 
 #include "Effect.h"
@@ -14,6 +15,7 @@ namespace kaos_public
 		EffectFactory()
 		{
 			_Register<Effects::Damage>();
+			_Register<Effects::Kill>();
 			_Register<Effects::Stun>();
 		}
 

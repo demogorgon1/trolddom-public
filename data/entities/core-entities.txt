@@ -1,18 +1,29 @@
+sprites:
+{
+	source: "entities.png"
+
+	cursor: { position: [ 0 0 ] }
+
+	size: { width: 16 height: 16 }
+
+	sprite goblin: { }
+}
+
 entity goblin:
 {
 	string: "Goblin"
 	
+	sprite: goblin
 	systems: [ combat npc ]
 	
 	components:
 	{
 		position: { }		
 		combat: { }
+		abilities: { available: [ strike ] }
 		
 		npc: 
-		{ 
-			abilities: [ strike ] 
-			
+		{ 			
 			stats:
 			{
 				health: 50

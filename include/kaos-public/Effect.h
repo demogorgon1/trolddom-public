@@ -70,6 +70,7 @@ namespace kaos_public
 
 			ID_DAMAGE,
 			ID_STUN,
+			ID_KILL,
 
 			NUM_IDS
 		};
@@ -80,6 +81,7 @@ namespace kaos_public
 			NULL,
 			"damage",
 			"stun",
+			"kill"
 		};
 
 		static_assert(sizeof(EFFECT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

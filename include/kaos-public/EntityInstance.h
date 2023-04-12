@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ComponentBase.h"
-#include "ErrorUtils.h"
+#include "DataErrorHandling.h"
 #include "SystemBase.h"
 
 namespace kaos_public
@@ -11,8 +11,8 @@ namespace kaos_public
 	{
 	public:
 		EntityInstance(
-			uint32_t			aEntityId,
-			uint32_t			aEntityInstanceId)
+			uint32_t				aEntityId,
+			uint32_t				aEntityInstanceId)
 			: m_entityInstanceId(aEntityInstanceId)
 			, m_entityId(aEntityId)
 		{
@@ -26,9 +26,9 @@ namespace kaos_public
 
 		void
 		AddComponent(
-			ComponentBase*		aComponent)
+			ComponentBase*			aComponent)
 		{
-			K_ASSERT(aComponent != NULL);
+			assert(aComponent != NULL);
 			
 			// FIXME: this kinda defeats much of the purpose of using ECS
 			m_components.push_back(std::unique_ptr<ComponentBase>(aComponent));
@@ -36,48 +36,75 @@ namespace kaos_public
 
 		void
 		AddSystem(
-			const SystemBase*	aSystem)
+			const SystemBase*		aSystem)
 		{
 			m_systems.push_back(aSystem);
 		}
 
 		void
 		SerializeAll(
-			IWriter*			aWriter) const
+			IWriter*				aWriter) const
 		{
+			uint32_t i = 0;
 			for(const std::unique_ptr<ComponentBase>& component : m_components)
+			{
+				aWriter->WriteUInt(i);
 				component->ToStream(aWriter);
+
+				i++;
+			}
 		}
 
 		void
 		SerializePublic(
-			IWriter*			aWriter) const
+			IWriter*				aWriter) const
 		{
+			uint32_t i = 0;
 			for(const std::unique_ptr<ComponentBase>& component : m_components)
 			{
 				if(component->GetFlags() & ComponentBase::FLAG_PUBLIC)
+				{
+					aWriter->WriteUInt(i);
 					component->ToStream(aWriter);
+				}
+				i++;
 			}
 		}
 
 		void
 		SerializePrivate(
-			IWriter*			aWriter) const
+			IWriter*				aWriter) const
 		{
+			uint32_t i = 0;
 			for(const std::unique_ptr<ComponentBase>& component : m_components)
-			{
+			{				
 				if(component->GetFlags() & ComponentBase::FLAG_PRIVATE)
+				{
+					aWriter->WriteUInt(i);
 					component->ToStream(aWriter);
+				}
+				i++;
 			}
 		}
 
 		bool
 		Deserialize(
-			IReader*			aReader) 
+			IReader*							aReader,
+			std::vector<const ComponentBase*>*	aOutUpdatedComponents) 
 		{
-			for (const std::unique_ptr<ComponentBase>& component : m_components)
+			while(!aReader->IsEnd())
 			{
-				if (!component->FromStream(aReader))
+				uint32_t index;
+				if(!aReader->ReadUInt(index))
+					return false;
+
+				if((size_t)index >= m_components.size())
+					return false;
+
+				if(aOutUpdatedComponents != NULL)
+					aOutUpdatedComponents->push_back(m_components[index].get());
+
+				if(!m_components[index]->FromStream(aReader))
 					return false;
 			}
 			return true;

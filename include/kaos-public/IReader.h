@@ -156,6 +156,7 @@ namespace kaos_public
 		}
 
 		// Virtual interface
+		virtual bool					IsEnd() const = 0;
 		virtual size_t					Read(
 											void*	aBuffer,
 											size_t	aBufferSize) = 0;
