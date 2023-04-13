@@ -15,7 +15,9 @@ namespace kaos_public::Systems
 		const Manifest*			aManifest)
 		: SystemBase(aManifest)
 	{
-
+		RequireComponent<Components::Combat>();
+		RequireComponent<Components::NPC>();
+		RequireComponent<Components::Position>();
 	}
 	
 	NPC::~NPC()
@@ -27,10 +29,10 @@ namespace kaos_public::Systems
 
 	void		
 	NPC::Init(
-		EntityInstance*			aEntity) 
+		ComponentBase**			aComponents) 
 	{
-		Components::Combat* combat = aEntity->GetComponent<Components::Combat>();
-		Components::NPC* npc = aEntity->GetComponent<Components::NPC>();
+		Components::Combat* combat = GetComponent<Components::Combat>(aComponents);
+		Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
 
 		combat->m_currentHealth = npc->m_stats.m_stats[Stat::ID_HEALTH];
 		combat->m_maxHealth = npc->m_stats.m_stats[Stat::ID_HEALTH];
@@ -38,11 +40,11 @@ namespace kaos_public::Systems
 
 	void		
 	NPC::Update(
-		EntityInstance*			aEntity) 
+		ComponentBase**			aComponents) 
 	{
-		Components::Combat* combat = aEntity->GetComponent<Components::Combat>();
-		Components::NPC* npc = aEntity->GetComponent<Components::NPC>();
-		Components::Position* position = aEntity->GetComponent<Components::Position>();
+		Components::Combat* combat = GetComponent<Components::Combat>(aComponents);
+		Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
+		Components::Position* position = GetComponent<Components::Position>(aComponents);
 
 		bool isDead = combat->m_runtimeFlags & Components::Combat::RUNTIME_FLAG_DEAD;
 

@@ -17,7 +17,7 @@ namespace kaos_public::Systems
 
 		// SystemBase implementation
 		void		Update(
-						EntityInstance* aEntity) override;
+						ComponentBase**	aComponents) override;
 
 	};
 

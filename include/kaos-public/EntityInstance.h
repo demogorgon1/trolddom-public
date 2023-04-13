@@ -126,6 +126,18 @@ namespace kaos_public
 			return NULL;
 		}
 
+		ComponentBase*
+		GetComponentBase(
+			uint32_t							aComponentId)
+		{
+			for (std::unique_ptr<ComponentBase>& component : m_components)
+			{
+				if(component->GetComponentId() == aComponentId)
+					return component.get();
+			}
+			return NULL;
+		}
+
 		// Data access
 		uint32_t		GetEntityInstanceId() const { return m_entityInstanceId; }
 		uint32_t		GetEntityId() const { return m_entityId; }

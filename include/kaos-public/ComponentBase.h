@@ -43,6 +43,14 @@ namespace kaos_public
 			return (const _T*)this;
 		}
 
+		template <typename _T>
+		_T*
+		Cast()
+		{
+			KP_CHECK(m_componentId == _T::ID, "Component type mismatch.");
+			return (_T*)this;
+		}
+
 		// Virtual methods
 		virtual void	FromSource(
 							const Parser::Node*		/*aSource*/) { assert(false); }

@@ -13,7 +13,7 @@ namespace kaos_public::Systems
 		const Manifest*		aManifest)
 		: SystemBase(aManifest)
 	{
-
+		RequireComponent<Components::Combat>();
 	}
 	
 	Combat::~Combat()
@@ -25,9 +25,9 @@ namespace kaos_public::Systems
 
 	void		
 	Combat::Update(
-		EntityInstance*			aEntity) 
+		ComponentBase**		aComponents) 
 	{
-		Components::Combat* combat = aEntity->GetComponent<Components::Combat>();
+		Components::Combat* combat = GetComponent<Components::Combat>(aComponents);
 
 		bool isDead = combat->m_runtimeFlags & Components::Combat::RUNTIME_FLAG_DEAD;
 
