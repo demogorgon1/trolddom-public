@@ -3,6 +3,7 @@ ability strike:
 	string: "Strike"
 	range: 1	
 	cooldown: 30
+	flags: [ target_other ]
 	
 	effect damage:
 	{
@@ -16,6 +17,7 @@ ability knock:
 	string: "Knock"
 	range: 1
 	cooldown: 100
+	flags: [ target_other ]
 
 	effect stun:
 	{	
@@ -29,6 +31,7 @@ ability gaze_of_death:
 	string: "Gaze of Death"
 	range: 100
 	cooldown: 10
+	flags: [ target_other ]
 	
 	effect kill:
 	{

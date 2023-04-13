@@ -45,7 +45,8 @@ namespace kaos_public
 			}
 
 			// Public data
-			uint32_t		m_classId = 0;
+			uint32_t			m_classId = 0;
+			Stat::Collection	m_stats;
 		};
 	}
 

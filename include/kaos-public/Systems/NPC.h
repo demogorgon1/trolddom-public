@@ -2,19 +2,26 @@
 
 #include "../SystemBase.h"
 
-namespace kaos_public
+namespace kaos_public::Systems
 {
 
-	namespace Systems
+	class NPC
+		: public SystemBase
 	{
+	public:
+		static const System::Id ID = System::ID_NPC;
 
-		class NPC
-			: public SystemBase
-		{
-		public:
-			static const System::Id ID = System::ID_NPC;
-		};
+					NPC(
+						const Manifest*		aManifest);
+		virtual		~NPC();
 
-	}
+		// SystemBase implementation
+		void		Init(
+						EntityInstance*		aEntity) override;
+		void		Update(
+						EntityInstance*		aEntity) override;
+
+	private:
+	};
 
 }

@@ -74,6 +74,20 @@ namespace kaos_public
 			}
 
 			void
+			Reset()
+			{
+				memset(m_stats, 0, sizeof(m_stats));
+			}
+
+			void
+			Add(
+				const Collection&	aOther)
+			{
+				for (uint32_t i = 1; i < (uint32_t)NUM_IDS; i++)
+					m_stats[i] += aOther.m_stats[i];
+			}
+
+			void
 			FromSource(
 				const Parser::Node*	aSource)
 			{

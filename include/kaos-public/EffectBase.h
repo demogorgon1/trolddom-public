@@ -8,6 +8,8 @@
 namespace kaos_public
 {
 
+	class EntityInstance;
+
 	class EffectBase
 	{
 	public:
@@ -64,6 +66,8 @@ namespace kaos_public
 							IWriter*				/*aStream*/) const { assert(false); }
 		virtual bool	FromStream(
 							IReader*				/*aStream*/) { assert(false); return true; }
+		virtual void	Apply(
+							EntityInstance*			/*aEntity*/) { }							
 
 		// Public data
 		uint32_t		m_flags;		

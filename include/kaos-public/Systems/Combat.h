@@ -2,19 +2,23 @@
 
 #include "../SystemBase.h"
 
-namespace kaos_public
+namespace kaos_public::Systems
 {
 
-	namespace Systems
+	class Combat
+		: public SystemBase
 	{
+	public:
+		static const System::Id ID = System::ID_COMBAT;
 
-		class Combat
-			: public SystemBase
-		{
-		public:
-			static const System::Id ID = System::ID_COMBAT;
-		};
+					Combat(
+						const Manifest*	aManifest);
+		virtual		~Combat();
 
-	}
+		// SystemBase implementation
+		void		Update(
+						EntityInstance* aEntity) override;
+
+	};
 
 }

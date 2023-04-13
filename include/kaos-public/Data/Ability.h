@@ -15,6 +15,31 @@ namespace kaos_public
 		{
 			static const DataType::Id DATA_TYPE = DataType::ID_ABILITY; 
 
+			enum Flag : uint8_t
+			{
+				FLAG_TARGET_SELF	= 0x01,
+				FLAG_TARGET_OTHER	= 0x02
+			};
+
+			static inline uint8_t
+			GetFlags(
+				const Parser::Node*			aSource)
+			{
+				uint8_t flags = 0;
+				aSource->GetArray()->ForEachChild([&](
+					const Parser::Node*		aChild)
+				{
+					const char* identifier = aChild->GetIdentifier();
+					if (strcmp(identifier, "target_self") == 0)
+						flags |= FLAG_TARGET_SELF;
+					else if (strcmp(identifier, "target_other") == 0)
+						flags |= FLAG_TARGET_OTHER;
+					else
+						KP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid ability flag.", identifier);
+				});
+				return flags;
+			}
+
 			struct EffectEntry
 			{
 				EffectEntry()
@@ -86,6 +111,8 @@ namespace kaos_public
 						m_range = aMember->GetUInt32();
 					else if (aMember->m_name == "cooldown")
 						m_cooldown = aMember->GetUInt32();
+					else if (aMember->m_name == "flags")
+						m_flags = GetFlags(aMember);
 					else if(aMember->m_tag == "effect")
 						m_effects.push_back(std::make_unique<EffectEntry>(aMember->GetObject()));
 					else
@@ -102,6 +129,7 @@ namespace kaos_public
 				aStream->WriteUInt(m_range);
 				aStream->WriteUInt(m_cooldown);
 				aStream->WriteObjectPointers(m_effects);
+				aStream->WritePOD(m_flags);
 			}
 			
 			bool	
@@ -118,6 +146,8 @@ namespace kaos_public
 					return false;
 				if(!aStream->ReadObjectPointers(m_effects))
 					return false;
+				if(!aStream->ReadPOD(m_flags))
+					return false;
 				return true;
 			}
 
@@ -125,6 +155,7 @@ namespace kaos_public
 			std::string									m_displayName;
 			uint32_t									m_range = 1;
 			uint32_t									m_cooldown = 10;
+			uint8_t										m_flags = 0;
 			std::vector<std::unique_ptr<EffectEntry>>	m_effects;
 		};
 

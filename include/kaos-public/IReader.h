@@ -13,9 +13,18 @@ namespace kaos_public
 
 		template <typename _T>
 		bool	
+		ReadPOD(
+			_T&										aOut)
+		{
+			return Read(&aOut, sizeof(aOut)) == sizeof(aOut);
+		}
+
+		template <typename _T>
+		bool	
 		ReadInt(
 			_T&										aOut)
 		{
+			// FIXME: varsize
 			return Read(&aOut, sizeof(aOut)) == sizeof(aOut);
 		}
 
@@ -24,6 +33,7 @@ namespace kaos_public
 		ReadUInt(
 			_T&										aOut)
 		{
+			// FIXME: varsize
 			return Read(&aOut, sizeof(aOut)) == sizeof(aOut);
 		}
 

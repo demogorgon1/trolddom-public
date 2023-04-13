@@ -10,9 +10,18 @@ namespace kaos_public
 
 		template <typename _T>
 		void
+		WritePOD(
+			_T										aValue)
+		{
+			Write(&aValue, sizeof(aValue));
+		}
+
+		template <typename _T>
+		void
 		WriteInt(
 			_T										aValue)
 		{
+			// FIXME: varsize
 			Write(&aValue, sizeof(aValue));
 		}
 
@@ -21,6 +30,7 @@ namespace kaos_public
 		WriteUInt(
 			_T										aValue)
 		{
+			// FIXME: varsize
 			Write(&aValue, sizeof(aValue));
 		}
 

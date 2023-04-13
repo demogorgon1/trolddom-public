@@ -2,7 +2,6 @@
 
 #include "ComponentBase.h"
 #include "DataErrorHandling.h"
-#include "SystemBase.h"
 
 namespace kaos_public
 {
@@ -33,14 +32,7 @@ namespace kaos_public
 			// FIXME: this kinda defeats much of the purpose of using ECS
 			m_components.push_back(std::unique_ptr<ComponentBase>(aComponent));
 		}
-
-		void
-		AddSystem(
-			const SystemBase*		aSystem)
-		{
-			m_systems.push_back(aSystem);
-		}
-
+		
 		void
 		SerializeAll(
 			IWriter*				aWriter) const
@@ -142,7 +134,6 @@ namespace kaos_public
 		
 		uint32_t									m_entityId;
 		uint32_t									m_entityInstanceId;
-		std::vector<const SystemBase*>				m_systems;
 		std::vector<std::unique_ptr<ComponentBase>>	m_components;
 	};
 

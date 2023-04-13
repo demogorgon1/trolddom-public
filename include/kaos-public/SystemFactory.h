@@ -8,10 +8,14 @@
 namespace kaos_public
 {
 
+	class Manifest;
+
 	class SystemFactory
 	{
 	public:
-		SystemFactory()
+		SystemFactory(
+			const Manifest*	aManifest)
+			: m_manifest(aManifest)
 		{
 			_Register<Systems::Combat>();
 			_Register<Systems::NPC>();
@@ -35,12 +39,13 @@ namespace kaos_public
 	private:
 
 		std::function<SystemBase*()>	m_functions[System::NUM_IDS];
+		const Manifest*					m_manifest;
 
 		template<typename _T>
 		void
 		_Register()
 		{
-			m_functions[_T::ID] = []() { return new _T(); };
+			m_functions[_T::ID] = [&]() { return new _T(m_manifest); };
 		}
 
 	};

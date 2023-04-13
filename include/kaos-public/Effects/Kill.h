@@ -1,6 +1,9 @@
 #pragma once
 
+#include "../Components/Combat.h"
+
 #include "../EffectBase.h"
+#include "../EntityInstance.h"
 
 namespace kaos_public
 {
@@ -45,6 +48,15 @@ namespace kaos_public
 				if(!FromStreamBase(aStream))
 					return false;
 				return true;
+			}
+
+			void	
+			Apply(
+				EntityInstance*			aEntity) override
+			{
+				Components::Combat* combat = aEntity->GetComponent<Components::Combat>();
+
+				combat->m_runtimeFlags |= Components::Combat::RUNTIME_FLAG_DEAD;
 			}
 
 			// Public data
