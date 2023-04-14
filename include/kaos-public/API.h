@@ -14,13 +14,6 @@
 #include "Components/Talents.h"
 #include "Components/Wallet.h"
 
-#include "Data/Ability.h"
-#include "Data/Class.h"
-#include "Data/Entity.h"
-#include "Data/Map.h"
-#include "Data/Talent.h"
-#include "Data/TalentTree.h"
-
 #include "Effects/Damage.h"
 #include "Effects/Stun.h"
 
@@ -39,6 +32,8 @@
 #include "EffectBase.h"
 #include "EffectFactory.h"
 #include "EntityInstance.h"
+#include "ICombatEventQueue.h"
+#include "IWorldView.h"
 #include "Manifest.h"
 #include "Parser.h"
 #include "PersistentIdTable.h"

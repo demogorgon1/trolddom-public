@@ -21,6 +21,7 @@ namespace kaos_public
 			ID_WALLET,
 			ID_ABILITIES,
 			ID_DISPLAY_NAME,
+			ID_SPRITE,
 
 			NUM_IDS
 		};
@@ -39,7 +40,8 @@ namespace kaos_public
 			"talents",
 			"wallet",
 			"abilities",
-			"display_name"
+			"display_name",
+			"sprite"
 		};		
 
 		static_assert(sizeof(COMPONENT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);
@@ -56,6 +58,20 @@ namespace kaos_public
 			}
 
 			return INVALID_ID;
+		}
+
+		inline constexpr const char*
+		IdToString(
+			uint32_t		aId)
+		{
+			if(aId < (uint32_t)NUM_IDS)
+			{
+				const char* p = COMPONENT_NAMES[aId];
+				if(p != NULL)
+					return p;
+			}
+
+			return "?";
 		}
 
 	}

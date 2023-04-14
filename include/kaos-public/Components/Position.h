@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Component.h"
+#include "../ComponentBase.h"
 #include "../Vec2.h"
 
 namespace kaos_public

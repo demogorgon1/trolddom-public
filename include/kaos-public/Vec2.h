@@ -1,5 +1,8 @@
 #pragma once
 
+#include "IReader.h"
+#include "IWriter.h"
+
 namespace kaos_public
 {
 

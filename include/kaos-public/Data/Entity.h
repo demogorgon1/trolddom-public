@@ -64,7 +64,7 @@ namespace kaos_public
 				}
 
 				// Public data
-				uint32_t							m_componentId;
+				uint32_t							m_componentId = 0;
 				std::unique_ptr<ComponentBase>		m_componentBase;
 			};
 
@@ -91,6 +91,7 @@ namespace kaos_public
 			SerializeInitData(
 				IWriter*				aWriter) const
 			{
+				aWriter->WritePOD(EntityState::ID_DEFAULT);
 				uint32_t index = 0;
 				for (const std::unique_ptr<ComponentEntry>& componentEntry : m_components)
 				{
@@ -110,10 +111,6 @@ namespace kaos_public
 					if (aMember->m_name == "string")
 					{
 						m_displayName = aMember->GetString();
-					}
-					else if (aMember->m_name == "sprite")
-					{
-						m_spriteId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aMember->GetIdentifier());
 					}
 					else if(aMember->m_name == "components")
 					{
@@ -146,7 +143,6 @@ namespace kaos_public
 			{
 				ToStreamBase(aStream);
 				aStream->WriteString(m_displayName);
-				aStream->WriteUInt(m_spriteId);
 				aStream->WriteUInts(m_systems);
 				aStream->WriteObjectPointers(m_components);
 			}
@@ -159,8 +155,6 @@ namespace kaos_public
 					return false;
 				if(!aStream->ReadString(m_displayName))
 					return false;
-				if(!aStream->ReadUInt(m_spriteId))
-					return false;
 				if(!aStream->ReadUInts(m_systems))
 					return false;
 				if(!aStream->ReadObjectPointers(m_components))
@@ -170,7 +164,6 @@ namespace kaos_public
 
 			// Public data
 			std::string										m_displayName;
-			uint32_t										m_spriteId = 0;
 			std::vector<uint32_t>							m_systems;
 			std::vector<std::unique_ptr<ComponentEntry>>	m_components;
 		};

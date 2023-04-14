@@ -14,11 +14,6 @@ namespace kaos_public
 			static const Component::Id ID = Component::ID_COMBAT;
 			static const uint8_t FLAGS = FLAG_PRIVATE | FLAG_PUBLIC;
 			
-			enum RuntimeFlag
-			{
-				RUNTIME_FLAG_DEAD = 0x01
-			};
-
 			Combat()
 				: ComponentBase(ID, FLAGS)
 			{
@@ -56,7 +51,6 @@ namespace kaos_public
 				aStream->WriteUInt(m_level);
 				aStream->WriteUInt(m_currentHealth);
 				aStream->WriteUInt(m_maxHealth);
-				aStream->WritePOD(m_runtimeFlags);
 			}
 			
 			bool	
@@ -71,8 +65,6 @@ namespace kaos_public
 					return false;
 				if (!aStream->ReadUInt(m_maxHealth))
 					return false;
-				if (!aStream->ReadPOD(m_runtimeFlags))
-					return false;
 				return true;
 			}
 
@@ -82,7 +74,6 @@ namespace kaos_public
 			uint32_t		m_level = 1;
 			uint32_t		m_currentHealth = 1;
 			uint32_t		m_maxHealth = 1;
-			uint8_t			m_runtimeFlags = 0;
 		};
 
 	}

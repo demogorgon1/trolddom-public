@@ -52,11 +52,10 @@ namespace kaos_public
 
 			void	
 			Apply(
-				EntityInstance*			aEntity) override
+				EntityInstance*			aEntity,
+				uint32_t				aTick) override
 			{
-				Components::Combat* combat = aEntity->GetComponent<Components::Combat>();
-
-				combat->m_runtimeFlags |= Components::Combat::RUNTIME_FLAG_DEAD;
+				aEntity->SetState(EntityState::ID_DEAD, aTick);
 			}
 
 			// Public data

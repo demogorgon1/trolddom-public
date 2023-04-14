@@ -60,6 +60,14 @@ namespace kaos_public
 			}
 
 			uint32_t
+			GetProbability() const 
+			{
+				float f = GetFloat();
+				KP_VERIFY(f >= 0.0f && f <= 1.0f, m_debugInfo, "Probability must be between 0 and 1.");
+				return (uint32_t)(f * (float)UINT32_MAX);
+			}
+
+			uint32_t
 			GetUInt32() const
 			{
 				KP_VERIFY(m_type == TYPE_NUMBER, m_debugInfo, "Not a number.");
@@ -83,6 +91,13 @@ namespace kaos_public
 				uint32_t v = GetUInt32();
 				KP_VERIFY(v <= UINT8_MAX, m_debugInfo, "Number out of bounds.");
 				return (uint8_t)v;
+			}
+
+			float
+			GetFloat() const
+			{
+				KP_VERIFY(m_type == TYPE_NUMBER, m_debugInfo, "Not a number.");
+				return strtof(m_value.c_str(), NULL);
 			}
 
 			const Node*

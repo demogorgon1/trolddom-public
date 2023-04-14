@@ -9,6 +9,7 @@
 #include "Components/PlayerPrivate.h"
 #include "Components/PlayerPublic.h"
 #include "Components/Position.h"
+#include "Components/Sprite.h"
 #include "Components/Talents.h"
 #include "Components/Wallet.h"
 
@@ -31,6 +32,7 @@ namespace kaos_public
 			_Register<Components::PlayerPrivate>();
 			_Register<Components::PlayerPublic>();
 			_Register<Components::Position>();
+			_Register<Components::Sprite>();
 			_Register<Components::Talents>();
 			_Register<Components::Wallet>();
 		}

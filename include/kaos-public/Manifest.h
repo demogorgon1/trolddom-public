@@ -225,6 +225,7 @@ namespace kaos_public
 		DataContainer<Data::MapEntitySpawn>				m_mapEntitySpawns;
 		DataContainer<Data::MapPalette>					m_mapPalettes;
 		DataContainer<Data::MapPlayerSpawn>				m_mapPlayerSpawns;
+		DataContainer<Data::MapPlayerSpawn>				m_npcStates;
 		DataContainer<Data::Sprite>						m_sprites;
 		DataContainer<Data::Talent>						m_talents;
 		DataContainer<Data::TalentTree>					m_talentTrees;

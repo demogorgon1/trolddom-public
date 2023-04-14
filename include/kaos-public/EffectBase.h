@@ -67,7 +67,8 @@ namespace kaos_public
 		virtual bool	FromStream(
 							IReader*				/*aStream*/) { assert(false); return true; }
 		virtual void	Apply(
-							EntityInstance*			/*aEntity*/) { }							
+							EntityInstance*			/*aEntity*/,
+							uint32_t				/*aTick*/) { }							
 
 		// Public data
 		uint32_t		m_flags;		

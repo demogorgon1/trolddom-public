@@ -40,6 +40,20 @@ namespace kaos_public
 			return INVALID_ID;
 		}
 
+		inline constexpr const char*
+		IdToString(
+			uint32_t	aId)
+		{
+			if((uint32_t)aId < (uint32_t)NUM_IDS)
+			{
+				const char* p = SYSTEM_NAMES[aId];
+				if(p != NULL)
+					return p;
+			}
+
+			return "?";
+		}
+
 	}
 
 }

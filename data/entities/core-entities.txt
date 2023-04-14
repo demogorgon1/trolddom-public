@@ -13,17 +13,25 @@ entity goblin:
 {
 	string: "Goblin"
 	
-	sprite: goblin
 	systems: [ combat npc ]
 	
 	components:
 	{
 		position: { }		
-		combat: { }
-		abilities: { available: [ strike ] }
-		
+		combat: { }			
+		sprite: { }
 		npc: 
 		{ 			
+			state default:
+			{
+				sprite: goblin			
+				
+				abilities:
+				[					
+					{ id: strike }
+				]
+			}
+		
 			stats:
 			{
 				health: 50

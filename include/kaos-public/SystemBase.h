@@ -1,17 +1,28 @@
 #pragma once
 
 #include "Component.h"
+#include "EntityState.h"
 #include "System.h"
 
 namespace kaos_public
 {
 	
 	class EntityInstance;
+	class ICombatEventQueue;
+	class IWorldView;
 	class Manifest;
 
 	class SystemBase
 	{
 	public:
+		struct Context
+		{
+			// Public data
+			ICombatEventQueue*	m_combatEventQueue = NULL;
+			const IWorldView*	m_worldView = NULL;
+			uint32_t			m_tick = 0;
+		};
+
 		SystemBase(
 			const Manifest*										aManifest)
 			: m_manifest(aManifest)
@@ -45,9 +56,12 @@ namespace kaos_public
 
 		// Virtual methods
 		virtual void					Init(
+											EntityState::Id		/*aEntityState*/,
 											ComponentBase**		/*aComponents*/) { }
-		virtual void					Update(
-											ComponentBase**		/*aComponents*/) { }
+		virtual EntityState::Id			Update(
+											EntityState::Id		/*aEntityState*/,
+											ComponentBase**		/*aComponents*/,
+											Context*			/*aContext*/) { return EntityState::CONTINUE; }
 
 		// Data access
 		const Manifest*					GetManifest() const { return m_manifest; }

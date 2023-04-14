@@ -12,7 +12,7 @@ namespace kaos_public
 			: public ComponentBase
 		{
 			static const Component::Id ID = Component::ID_ABILITIES;
-			static const uint8_t FLAGS = FLAG_PRIVATE;
+			static const uint8_t FLAGS = FLAG_PRIVATE | FLAG_PLAYER_ONLY;
 
 			struct Cooldown
 			{
@@ -57,20 +57,6 @@ namespace kaos_public
 			}
 
 			// ComponentBase implementation
-			void
-			FromSource(
-				const Parser::Node*		aSource) override
-			{
-				aSource->ForEachChild([&](
-					const Parser::Node*	aChild)
-				{
-					if (aChild->m_name == "available")
-						aChild->GetIdArray(DataType::ID_ABILITY, m_available);
-					else
-						KP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
-				});
-			}
-
 			void	
 			ToStream(
 				IWriter*				aStream) const override

@@ -37,7 +37,7 @@ namespace kaos_public
 			"map_palette",
 			"talent",
 			"talent_tree",
-			"sprite"
+			"sprite",
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

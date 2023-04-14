@@ -11,13 +11,15 @@ namespace kaos_public::Systems
 	public:
 		static const System::Id ID = System::ID_COMBAT;
 
-					Combat(
-						const Manifest*	aManifest);
-		virtual		~Combat();
+						Combat(
+							const Manifest*		aManifest);
+		virtual			~Combat();
 
 		// SystemBase implementation
-		void		Update(
-						ComponentBase**	aComponents) override;
+		EntityState::Id	Update(
+							EntityState::Id		aEntityState,
+							ComponentBase**		aComponents,
+							Context*			aContext) override;
 
 	};
 

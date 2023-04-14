@@ -2,6 +2,7 @@
 
 #include "ComponentBase.h"
 #include "DataErrorHandling.h"
+#include "EntityState.h"
 
 namespace kaos_public
 {
@@ -14,6 +15,7 @@ namespace kaos_public
 			uint32_t				aEntityInstanceId)
 			: m_entityInstanceId(aEntityInstanceId)
 			, m_entityId(aEntityId)
+			, m_state(EntityState::INVALID_ID)
 		{
 
 		}
@@ -21,6 +23,15 @@ namespace kaos_public
 		~EntityInstance()
 		{
 
+		}
+
+		void
+		SetState(
+			EntityState::Id			aState,
+			uint32_t				aTick)
+		{
+			m_state = aState;
+			m_stateTick = aTick;
 		}
 
 		void
@@ -37,6 +48,8 @@ namespace kaos_public
 		SerializeAll(
 			IWriter*				aWriter) const
 		{
+			aWriter->WritePOD(m_state);
+
 			uint32_t i = 0;
 			for(const std::unique_ptr<ComponentBase>& component : m_components)
 			{
@@ -51,6 +64,8 @@ namespace kaos_public
 		SerializePublic(
 			IWriter*				aWriter) const
 		{
+			aWriter->WritePOD(m_state);
+
 			uint32_t i = 0;
 			for(const std::unique_ptr<ComponentBase>& component : m_components)
 			{
@@ -67,6 +82,8 @@ namespace kaos_public
 		SerializePrivate(
 			IWriter*				aWriter) const
 		{
+			aWriter->WritePOD(m_state);
+
 			uint32_t i = 0;
 			for(const std::unique_ptr<ComponentBase>& component : m_components)
 			{				
@@ -84,6 +101,9 @@ namespace kaos_public
 			IReader*							aReader,
 			std::vector<const ComponentBase*>*	aOutUpdatedComponents) 
 		{
+			if(!aReader->ReadPOD(m_state))
+				return false;
+
 			while(!aReader->IsEnd())
 			{
 				uint32_t index;
@@ -141,11 +161,15 @@ namespace kaos_public
 		// Data access
 		uint32_t		GetEntityInstanceId() const { return m_entityInstanceId; }
 		uint32_t		GetEntityId() const { return m_entityId; }
+		EntityState::Id	GetState() const { return m_state; }
+		bool			IsPlayer() const { return m_entityId == 0; }
 		
 	private:
 		
-		uint32_t									m_entityId;
-		uint32_t									m_entityInstanceId;
+		uint32_t									m_entityId = 0;
+		uint32_t									m_entityInstanceId = 0;
+		EntityState::Id								m_state = EntityState::ID_DEFAULT;
+		uint32_t									m_stateTick = 0;
 		std::vector<std::unique_ptr<ComponentBase>>	m_components;
 	};
 

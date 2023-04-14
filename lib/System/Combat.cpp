@@ -23,21 +23,23 @@ namespace kaos_public::Systems
 
 	//---------------------------------------------------------------------------
 
-	void		
+	EntityState::Id
 	Combat::Update(
-		ComponentBase**		aComponents) 
+		EntityState::Id		aEntityState,
+		ComponentBase**		aComponents,
+		Context*			/*aContext*/) 
 	{
 		Components::Combat* combat = GetComponent<Components::Combat>(aComponents);
 
-		bool isDead = combat->m_runtimeFlags & Components::Combat::RUNTIME_FLAG_DEAD;
-
-		if(!isDead)
+		if(aEntityState != EntityState::ID_DEAD)
 		{
 			if(combat->m_currentHealth < combat->m_maxHealth)
 			{
 				combat->m_currentHealth++;
 			}
 		}
+
+		return EntityState::CONTINUE;
 	}
 
 }

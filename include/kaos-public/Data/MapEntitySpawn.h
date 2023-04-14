@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../DataBase.h"
+#include "../EntityState.h"
 
 namespace kaos_public
 {
@@ -25,9 +26,18 @@ namespace kaos_public
 						const Parser::Node* aChild)
 					{
 						if(aChild->m_name == "weight")
+						{
 							m_weight = aChild->GetUInt32();
-						else 
+						}
+						else if (aChild->m_name == "init_state")
+						{
+							m_initState = EntityState::StringToId(aChild->GetIdentifier());
+							KP_VERIFY(m_initState != EntityState::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid entity state.", aChild->GetIdentifier());
+						}
+						else
+						{
 							KP_VERIFY(false, aChild->m_debugInfo, "Invalid 'entity' item.");
+						}
 					});
 				}
 
@@ -37,6 +47,7 @@ namespace kaos_public
 				{
 					aStream->WriteUInt(m_entityId);
 					aStream->WriteUInt(m_weight);
+					aStream->WritePOD(m_initState);
 				}
 
 				bool
@@ -47,12 +58,15 @@ namespace kaos_public
 						return false;
 					if (!aStream->ReadUInt(m_weight))
 						return false;
+					if (!aStream->ReadPOD(m_initState))
+						return false;
 					return true;
 				}
 
 				// Public data
-				uint32_t		m_entityId;
-				uint32_t		m_weight;
+				uint32_t		m_entityId = 0;
+				uint32_t		m_weight = 1;
+				EntityState::Id	m_initState = EntityState::ID_DEFAULT;
 			};
 
 			void
