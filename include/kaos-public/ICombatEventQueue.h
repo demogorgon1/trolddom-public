@@ -9,7 +9,7 @@ namespace kaos_public
 		virtual ~ICombatEventQueue() {}
 
 		// Virtual interface
-		virtual void		AddCombatLogEvent(
+		virtual void		AddCombatEvent(
 								uint32_t				aSourceEntityInstanceId,
 								uint32_t				aTargetEntityInstanceId,
 								const Data::Ability*	aAbility) = 0;

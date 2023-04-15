@@ -9,6 +9,7 @@ namespace kaos_public
 	
 	class EntityInstance;
 	class ICombatEventQueue;
+	class IMoveRequestQueue;
 	class IWorldView;
 	class Manifest;
 
@@ -19,6 +20,7 @@ namespace kaos_public
 		{
 			// Public data
 			ICombatEventQueue*	m_combatEventQueue = NULL;
+			IMoveRequestQueue*	m_moveRequestQueue = NULL;
 			const IWorldView*	m_worldView = NULL;
 			uint32_t			m_tick = 0;
 		};

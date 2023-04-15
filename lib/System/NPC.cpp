@@ -9,6 +9,7 @@
 
 #include <kaos-public/EntityInstance.h>
 #include <kaos-public/Helpers.h>
+#include <kaos-public/IMoveRequestQueue.h>
 #include <kaos-public/IWorldView.h>
 
 namespace kaos_public::Systems
@@ -79,6 +80,8 @@ namespace kaos_public::Systems
 				{
 					if(Helpers::IsWithinDistance(aEntity->GetComponent<Components::Position>(), position, 3))
 					{
+						combat->m_targetEntityInstanceId = aEntity->GetEntityInstanceId();
+
 						returnValue = EntityState::ID_IN_COMBAT;
 					}
 				}
@@ -88,13 +91,36 @@ namespace kaos_public::Systems
 			break;
 
 		case EntityState::ID_IN_COMBAT:
+			{
+				const EntityInstance* target = aContext->m_worldView->QuerySingleEntityInstance(combat->m_targetEntityInstanceId);
+				if(target == NULL)
+				{
+					combat->m_targetEntityInstanceId = 0;
+
+					returnValue = EntityState::ID_DEFAULT;
+				}
+				else
+				{
+					const Components::Position* targetPosition = target->GetComponent<Components::Position>();
+
+					int32_t dx = targetPosition->m_position.m_x - position->m_position.m_x;
+					int32_t dy = targetPosition->m_position.m_y - position->m_position.m_y;
+
+					if(abs(dx) + abs(dy) <= 1)
+					{
+						// FIXME: attack
+					}
+					else
+					{
+						aContext->m_moveRequestQueue->AddMoveRequest(position, Vec2(dx, dy));
+					}
+				}
+			}
 			break;
 
 		default:
 			break;
 		}
-
-		(void)combat;
 
 		return returnValue;
 	}

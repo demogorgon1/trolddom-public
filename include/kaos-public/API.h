@@ -33,6 +33,7 @@
 #include "EffectFactory.h"
 #include "EntityInstance.h"
 #include "ICombatEventQueue.h"
+#include "IMoveRequestQueue.h"
 #include "IWorldView.h"
 #include "Manifest.h"
 #include "Parser.h"
