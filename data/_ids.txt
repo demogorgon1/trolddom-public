@@ -13,3 +13,4 @@ sprite fighter 1
 sprite goblin 2
 sprite test_dungeon_wall 4
 sprite test_dungeon_floor 3
+faction monsters 1

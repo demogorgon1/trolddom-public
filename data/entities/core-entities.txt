@@ -9,6 +9,10 @@ sprites:
 	sprite goblin: { }
 }
 
+faction monsters:
+{
+}
+
 entity goblin:
 {
 	string: "Goblin"
@@ -18,8 +22,11 @@ entity goblin:
 	components:
 	{
 		position: { }		
-		combat: { }			
 		sprite: { }
+		combat: 
+		{  
+			faction: monsters
+		}			
 		npc: 
 		{ 			
 			state default:

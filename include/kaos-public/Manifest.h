@@ -3,6 +3,7 @@
 #include "Data/Ability.h"
 #include "Data/Class.h"
 #include "Data/Entity.h"
+#include "Data/Faction.h"
 #include "Data/Map.h"
 #include "Data/MapEntitySpawn.h"
 #include "Data/MapPalette.h"
@@ -159,6 +160,7 @@ namespace kaos_public
 			RegisterDataContainer(m_abilities);
 			RegisterDataContainer(m_classes);
 			RegisterDataContainer(m_entities);
+			RegisterDataContainer(m_factions);
 			RegisterDataContainer(m_maps);
 			RegisterDataContainer(m_mapEntitySpawns);
 			RegisterDataContainer(m_mapPalettes);
@@ -221,6 +223,7 @@ namespace kaos_public
 		DataContainer<Data::Ability>					m_abilities;
 		DataContainer<Data::Class>						m_classes;
 		DataContainer<Data::Entity>						m_entities;
+		DataContainer<Data::Faction>					m_factions;
 		DataContainer<Data::Map>						m_maps;
 		DataContainer<Data::MapEntitySpawn>				m_mapEntitySpawns;
 		DataContainer<Data::MapPalette>					m_mapPalettes;

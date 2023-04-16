@@ -20,6 +20,7 @@ namespace kaos_public
 			ID_TALENT,
 			ID_TALENT_TREE,
 			ID_SPRITE,
+			ID_FACTION,
 
 			NUM_IDS
 		};
@@ -38,6 +39,7 @@ namespace kaos_public
 			"talent",
 			"talent_tree",
 			"sprite",
+			"faction"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

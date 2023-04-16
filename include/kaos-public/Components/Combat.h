@@ -38,6 +38,8 @@ namespace kaos_public
 						m_maxHealth = aChild->GetUInt32();
 					else if (aChild->m_name == "current_health")
 						m_currentHealth = aChild->GetUInt32();
+					else if (aChild->m_name == "faction")
+						m_factionId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_FACTION, aChild->GetIdentifier());
 					else
 						KP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 				});
@@ -51,6 +53,7 @@ namespace kaos_public
 				aStream->WriteUInt(m_level);
 				aStream->WriteUInt(m_currentHealth);
 				aStream->WriteUInt(m_maxHealth);
+				aStream->WriteUInt(m_factionId);
 			}
 			
 			bool	
@@ -65,6 +68,8 @@ namespace kaos_public
 					return false;
 				if (!aStream->ReadUInt(m_maxHealth))
 					return false;
+				if (!aStream->ReadUInt(m_factionId))
+					return false;
 				return true;
 			}
 
@@ -74,6 +79,7 @@ namespace kaos_public
 			uint32_t		m_level = 1;
 			uint32_t		m_currentHealth = 1;
 			uint32_t		m_maxHealth = 1;
+			uint32_t		m_factionId;
 		};
 
 	}
