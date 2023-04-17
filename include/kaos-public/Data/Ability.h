@@ -18,7 +18,11 @@ namespace kaos_public
 			enum Flag : uint8_t
 			{
 				FLAG_TARGET_SELF	= 0x01,
-				FLAG_TARGET_OTHER	= 0x02
+				FLAG_TARGET_OTHER	= 0x02,
+				FLAG_CAN_MISS		= 0x04,
+				FLAG_CAN_BE_DODGED	= 0x08,
+				FLAG_CAN_BE_PARRIED = 0x10,
+				FLAG_CAN_BE_BLOCKED = 0x20
 			};
 
 			static inline uint8_t
@@ -34,6 +38,14 @@ namespace kaos_public
 						flags |= FLAG_TARGET_SELF;
 					else if (strcmp(identifier, "target_other") == 0)
 						flags |= FLAG_TARGET_OTHER;
+					else if (strcmp(identifier, "can_miss") == 0)
+						flags |= FLAG_CAN_MISS;
+					else if (strcmp(identifier, "can_be_dodged") == 0)
+						flags |= FLAG_CAN_BE_DODGED;
+					else if (strcmp(identifier, "can_be_parried") == 0)
+						flags |= FLAG_CAN_BE_PARRIED;
+					else if (strcmp(identifier, "can_be_blocked") == 0)
+						flags |= FLAG_CAN_BE_BLOCKED;
 					else
 						KP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid ability flag.", identifier);
 				});

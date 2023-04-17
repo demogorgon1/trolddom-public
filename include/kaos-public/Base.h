@@ -3,6 +3,7 @@
 #include <filesystem>
 #include <functional>
 #include <optional>
+#include <random>
 
 #include <assert.h>
 #include <inttypes.h>

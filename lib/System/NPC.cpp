@@ -9,8 +9,10 @@
 
 #include <kaos-public/EntityInstance.h>
 #include <kaos-public/Helpers.h>
+#include <kaos-public/ICombatEventQueue.h>
 #include <kaos-public/IMoveRequestQueue.h>
 #include <kaos-public/IWorldView.h>
+#include <kaos-public/Manifest.h>
 
 namespace kaos_public::Systems
 {
@@ -34,6 +36,7 @@ namespace kaos_public::Systems
 
 	void		
 	NPC::Init(
+		uint32_t				/*aEntityInstanceId*/,
 		EntityState::Id			aEntityState,
 		ComponentBase**			aComponents) 
 	{
@@ -53,6 +56,7 @@ namespace kaos_public::Systems
 
 	EntityState::Id
 	NPC::Update(
+		uint32_t				aEntityInstanceId,
 		EntityState::Id			aEntityState,
 		ComponentBase**			aComponents,
 		Context*				aContext) 
@@ -67,6 +71,8 @@ namespace kaos_public::Systems
 		{
 			sprite->m_spriteId = state->m_spriteId;
 		}
+
+		npc->m_cooldowns.Update(aContext->m_tick);
 
 		EntityState::Id returnValue = EntityState::CONTINUE;
 
@@ -99,16 +105,32 @@ namespace kaos_public::Systems
 
 					returnValue = EntityState::ID_DEFAULT;
 				}
-				else
+				else if(state != NULL)
 				{
 					const Components::Position* targetPosition = target->GetComponent<Components::Position>();
 
 					int32_t dx = targetPosition->m_position.m_x - position->m_position.m_x;
 					int32_t dy = targetPosition->m_position.m_y - position->m_position.m_y;
+					int32_t distanceSquared = dx * dx + dy * dy;
 
-					if(abs(dx) + abs(dy) <= 1)
+					const Data::Ability* useAbility = NULL;
+
+					for(const Components::NPC::AbilityEntry& abilityEntry : state->m_abilities)
 					{
-						// FIXME: attack
+						const Data::Ability* ability = GetManifest()->m_abilities.GetById(abilityEntry.m_abilityId);
+
+						if(distanceSquared <= (int32_t)(ability->m_range * ability->m_range) && npc->m_cooldowns.Get(ability->m_id) == NULL)
+						{
+							if(abilityEntry.m_useProbability == UINT32_MAX || (*aContext->m_random)() < abilityEntry.m_useProbability)
+								useAbility = ability;
+						}
+					}
+
+					if(useAbility != NULL)
+					{
+						npc->m_cooldowns.Add(useAbility, aContext->m_tick);
+
+						aContext->m_combatEventQueue->AddCombatEvent(aEntityInstanceId, target->GetEntityInstanceId(), useAbility);
 					}
 					else
 					{

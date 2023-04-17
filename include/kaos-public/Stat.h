@@ -34,6 +34,7 @@ namespace kaos_public
 		static constexpr const Info INFO[] =
 		{			
 			{ NULL, NULL, NULL },
+
 			{ "health",					"HEA",		"Health" },
 			{ "dexterity",				"DEX",		"Dexterity" },
 			{ "strength",				"STR",		"Strength" },

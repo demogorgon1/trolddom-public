@@ -8,11 +8,8 @@ namespace kaos_public
 
 		enum Flag : uint32_t 
 		{
-			FLAG_CAN_MISS				= 0x00000001,
-			FLAG_CAN_BE_BLOCKED			= 0x00000002,
-			FLAG_CAN_BE_PARRIED			= 0x00000004,
-			FLAG_CAN_BE_DODGED			= 0x00000008,
-			FLAG_IS_MAGICAL				= 0x00000010
+			FLAG_IS_MAGICAL				= 0x00000001,
+			FLAG_GENERATE_RAGE			= 0x00000002
 		};
 
 		enum DamageType : uint8_t
@@ -30,16 +27,10 @@ namespace kaos_public
 		StringToFlag(
 			const char* aString)
 		{
-			if (strcmp(aString, "can_miss") == 0)
-				return FLAG_CAN_MISS;
-			if (strcmp(aString, "can_be_blocked") == 0)
-				return FLAG_CAN_BE_BLOCKED;
-			if (strcmp(aString, "can_be_parried") == 0)
-				return FLAG_CAN_BE_PARRIED;
-			if (strcmp(aString, "can_be_dodged") == 0)
-				return FLAG_CAN_BE_DODGED;
 			if (strcmp(aString, "is_magical") == 0)
 				return FLAG_IS_MAGICAL;
+			if (strcmp(aString, "generate_rage") == 0)
+				return FLAG_GENERATE_RAGE;
 			return 0;
 		}
 

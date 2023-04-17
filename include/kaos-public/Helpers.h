@@ -21,6 +21,21 @@ namespace kaos_public
 						const Components::Position*	aA,
 						const Components::Position*	aB,
 						int32_t						aDistance);
+
+		template <typename _T>
+		void	
+		RemoveCyclicFromVector(
+			std::vector<_T>&						aVector, 
+			size_t									aIndex)
+		{
+			assert(aIndex < aVector.size());
+			size_t newSize = aVector.size() - 1;
+
+			if(aIndex < newSize)
+				aVector[aIndex] = std::move(aVector[newSize]);
+
+			aVector.resize(newSize);
+		}
 		
 	}
 

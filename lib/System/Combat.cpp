@@ -25,6 +25,7 @@ namespace kaos_public::Systems
 
 	EntityState::Id
 	Combat::Update(
+		uint32_t			/*aEntityInstanceId*/,
 		EntityState::Id		aEntityState,
 		ComponentBase**		aComponents,
 		Context*			/*aContext*/) 

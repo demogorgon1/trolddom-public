@@ -32,7 +32,11 @@ entity goblin:
 			state default:
 			{
 				sprite: goblin			
-				
+			}
+			
+			state in_combat:
+			{
+				sprite: goblin			
 				abilities:
 				[					
 					{ id: strike }

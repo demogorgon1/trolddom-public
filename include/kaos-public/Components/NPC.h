@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Component.h"
+#include "../Cooldowns.h"
 #include "../EntityState.h"
 #include "../Stat.h"
 
@@ -59,7 +60,7 @@ namespace kaos_public
 
 				// Public data
 				uint32_t							m_abilityId = 0;
-				uint32_t							m_useProbability = 0;
+				uint32_t							m_useProbability = UINT32_MAX;
 			};
 
 			struct StateEntry
@@ -188,6 +189,8 @@ namespace kaos_public
 			// Public data			
 			Stat::Collection							m_stats;
 			std::vector<std::unique_ptr<StateEntry>>	m_states;
+			
+			Cooldowns									m_cooldowns;
 		};
 	}
 

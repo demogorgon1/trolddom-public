@@ -1,4 +1,5 @@
 # Do not modify this file!
+ability fighter_attack 4
 ability knock 2
 ability strike 1
 ability gaze_of_death 3

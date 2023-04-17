@@ -9,11 +9,24 @@ sprites:
 	sprite fighter: { }
 }
 
+ability fighter_attack:
+{
+	string: "Attack"
+	flags: [ can_be_dodged can_be_parried can_miss ]	
+	
+	effect damage:
+	{
+		flags: [ generate_rage ]
+		damage_type: physical				
+	}
+}
+
 class fighter:
 {
 	string: "Fighter"	
 	sprite: fighter
-	
+	main_attack: fighter_attack
+
 	level_progression:
 	[
 		{
@@ -25,7 +38,7 @@ class fighter:
 				knock
 				gaze_of_death
 			]
-			
+						
 			stats:
 			{
 				health: 80
@@ -36,6 +49,8 @@ class fighter:
 				dodge_chance: 5
 				parry_chance: 5
 			}
+			
+			resource rage: { add_max: 100 }
 		}
 	]
 }

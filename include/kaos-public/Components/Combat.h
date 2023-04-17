@@ -13,7 +13,37 @@ namespace kaos_public
 		{
 			static const Component::Id ID = Component::ID_COMBAT;
 			static const uint8_t FLAGS = FLAG_PRIVATE | FLAG_PUBLIC;
-			
+
+			struct Resource
+			{	
+				void
+				ToStream(
+					IWriter*			aStream) const
+				{
+					aStream->WriteUInt(m_id);
+					aStream->WriteUInt(m_current);
+					aStream->WriteUInt(m_max);
+				}
+
+				bool
+				FromStream(
+					IReader*			aStream) 
+				{
+					if (!aStream->ReadUInt(m_id))
+						return false;
+					if (!aStream->ReadUInt(m_current))
+						return false;
+					if (!aStream->ReadUInt(m_max))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t	m_id = 0;
+				uint32_t	m_current = 0;
+				uint32_t	m_max = 0;
+			};
+						
 			Combat()
 				: ComponentBase(ID, FLAGS)
 			{
@@ -24,6 +54,25 @@ namespace kaos_public
 			~Combat()
 			{
 
+			}
+
+			void
+			AddResourceMax(
+				uint32_t				aResourceId,
+				uint32_t				aValue)
+			{
+				for(Resource& t : m_resources)
+				{
+					if(t.m_id == aResourceId)
+					{
+						t.m_max += aValue;
+
+						if(t.m_current > t.m_max)
+							t.m_current = t.m_max;
+						return;
+					}
+				}
+				m_resources.push_back({ aResourceId, 0, aValue });
 			}
 
 			// ComponentBase implementation
@@ -54,6 +103,7 @@ namespace kaos_public
 				aStream->WriteUInt(m_currentHealth);
 				aStream->WriteUInt(m_maxHealth);
 				aStream->WriteUInt(m_factionId);
+				aStream->WriteObjects(m_resources);
 			}
 			
 			bool	
@@ -70,16 +120,19 @@ namespace kaos_public
 					return false;
 				if (!aStream->ReadUInt(m_factionId))
 					return false;
+				if(!aStream->ReadObjects(m_resources))
+					return false;
 				return true;
 			}
 
 			// Public data
-			uint32_t		m_targetEntityInstanceId = 0;
+			uint32_t				m_targetEntityInstanceId = 0;
 
-			uint32_t		m_level = 1;
-			uint32_t		m_currentHealth = 1;
-			uint32_t		m_maxHealth = 1;
-			uint32_t		m_factionId;
+			uint32_t				m_level = 1;
+			uint32_t				m_currentHealth = 1;
+			uint32_t				m_maxHealth = 1;
+			uint32_t				m_factionId = 0;
+			std::vector<Resource>	m_resources;
 		};
 
 	}

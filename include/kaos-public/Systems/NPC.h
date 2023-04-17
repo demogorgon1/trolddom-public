@@ -17,9 +17,11 @@ namespace kaos_public::Systems
 
 		// SystemBase implementation
 		void			Init(
+							uint32_t			aEntityInstanceId,
 							EntityState::Id		aEntityState,
 							ComponentBase**		aComponents) override;
 		EntityState::Id	Update(
+							uint32_t			aEntityInstanceId,
 							EntityState::Id		aEntityState,
 							ComponentBase**		aComponents,
 							Context*			aContext) override;

@@ -23,6 +23,7 @@ namespace kaos_public
 			IMoveRequestQueue*	m_moveRequestQueue = NULL;
 			const IWorldView*	m_worldView = NULL;
 			uint32_t			m_tick = 0;
+			std::mt19937*		m_random = NULL;
 		};
 
 		SystemBase(
@@ -58,9 +59,11 @@ namespace kaos_public
 
 		// Virtual methods
 		virtual void					Init(
+											uint32_t			/*aEntityInstanceId*/,
 											EntityState::Id		/*aEntityState*/,
 											ComponentBase**		/*aComponents*/) { }
 		virtual EntityState::Id			Update(
+											uint32_t			/*aEntityInstanceId*/,
 											EntityState::Id		/*aEntityState*/,
 											ComponentBase**		/*aComponents*/,
 											Context*			/*aContext*/) { return EntityState::CONTINUE; }
