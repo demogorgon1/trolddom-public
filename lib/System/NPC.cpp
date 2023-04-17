@@ -50,8 +50,8 @@ namespace kaos_public::Systems
 			sprite->m_spriteId = state->m_spriteId;
 		}
 
-		combat->m_currentHealth = npc->m_stats.m_stats[Stat::ID_HEALTH];
-		combat->m_maxHealth = npc->m_stats.m_stats[Stat::ID_HEALTH];
+		for(const Components::NPC::ResourceEntry& resource : npc->m_resources)
+			combat->AddResourceMax(resource.m_id, resource.m_max);
 	}
 
 	EntityState::Id

@@ -109,6 +109,14 @@ namespace kaos_public
 				KP_VERIFY(!m_displayName.empty(), m_debugInfo, "'%s' has no 'display_name'.", m_name.c_str());
 			}
 
+			// Helpers
+			bool TargetSelf() const { return m_flags & FLAG_TARGET_SELF; }
+			bool TargetOther() const { return m_flags & FLAG_TARGET_OTHER; }
+			bool CanMiss() const { return m_flags & FLAG_CAN_MISS; }
+			bool CanBeDodged() const { return m_flags & FLAG_CAN_BE_DODGED; }
+			bool CanBeParried() const { return m_flags & FLAG_CAN_BE_PARRIED; }
+			bool CanBeBlocked() const { return m_flags & FLAG_CAN_BE_BLOCKED; }
+
 			// Base implementation
 			void
 			FromSource(

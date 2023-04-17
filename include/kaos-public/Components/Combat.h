@@ -75,6 +75,25 @@ namespace kaos_public
 				m_resources.push_back({ aResourceId, 0, aValue });
 			}
 
+			uint32_t
+			GetResource(
+				uint32_t				aResourceId,
+				uint32_t*				aOutMax = NULL) const
+			{
+
+				for (const Resource& t : m_resources)
+				{
+					if (t.m_id == aResourceId)
+					{
+						if(aOutMax != NULL)
+							*aOutMax = t.m_max;
+						
+						return t.m_current;
+					}
+				}
+				return 0;
+			}
+
 			// ComponentBase implementation
 			void
 			FromSource(
@@ -83,11 +102,7 @@ namespace kaos_public
 				aSource->ForEachChild([&](
 					const Parser::Node*	aChild)
 				{
-					if (aChild->m_name == "max_health")
-						m_maxHealth = aChild->GetUInt32();
-					else if (aChild->m_name == "current_health")
-						m_currentHealth = aChild->GetUInt32();
-					else if (aChild->m_name == "faction")
+					if (aChild->m_name == "faction")
 						m_factionId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_FACTION, aChild->GetIdentifier());
 					else
 						KP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
@@ -100,8 +115,6 @@ namespace kaos_public
 			{
 				aStream->WriteUInt(m_targetEntityInstanceId);
 				aStream->WriteUInt(m_level);
-				aStream->WriteUInt(m_currentHealth);
-				aStream->WriteUInt(m_maxHealth);
 				aStream->WriteUInt(m_factionId);
 				aStream->WriteObjects(m_resources);
 			}
@@ -114,10 +127,6 @@ namespace kaos_public
 					return false;
 				if (!aStream->ReadUInt(m_level))
 					return false;
-				if (!aStream->ReadUInt(m_currentHealth))
-					return false;
-				if (!aStream->ReadUInt(m_maxHealth))
-					return false;
 				if (!aStream->ReadUInt(m_factionId))
 					return false;
 				if(!aStream->ReadObjects(m_resources))
@@ -129,8 +138,6 @@ namespace kaos_public
 			uint32_t				m_targetEntityInstanceId = 0;
 
 			uint32_t				m_level = 1;
-			uint32_t				m_currentHealth = 1;
-			uint32_t				m_maxHealth = 1;
 			uint32_t				m_factionId = 0;
 			std::vector<Resource>	m_resources;
 		};

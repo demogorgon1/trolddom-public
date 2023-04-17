@@ -25,7 +25,7 @@ entity goblin:
 		sprite: { }
 		combat: 
 		{  
-			faction: monsters
+			faction: monsters			
 		}			
 		npc: 
 		{ 			
@@ -45,13 +45,17 @@ entity goblin:
 		
 			stats:
 			{
-				health: 50
 				dexterity: 5
 				strength: 3
 				wisdom: 2
 				critical_strike_chance: 5
 				dodge_chance: 5
 				parry_chance: 5
+			}			
+			
+			resources:
+			{
+				health: 50
 			}
 		}
 	}

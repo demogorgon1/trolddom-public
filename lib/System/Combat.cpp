@@ -5,6 +5,7 @@
 #include <kaos-public/Systems/Combat.h>
 
 #include <kaos-public/EntityInstance.h>
+#include <kaos-public/Resource.h>
 
 namespace kaos_public::Systems
 {
@@ -34,9 +35,33 @@ namespace kaos_public::Systems
 
 		if(aEntityState != EntityState::ID_DEAD)
 		{
-			if(combat->m_currentHealth < combat->m_maxHealth)
+			for(Components::Combat::Resource& resource : combat->m_resources)
 			{
-				combat->m_currentHealth++;
+				switch(resource.m_id)
+				{
+				case Resource::ID_HEALTH:
+					if(aEntityState != EntityState::ID_IN_COMBAT && resource.m_current < resource.m_max) 
+						resource.m_current++;						
+					break;
+
+				case Resource::ID_MANA:
+					if(resource.m_current < resource.m_max)
+						resource.m_current++;
+					break;
+
+				case Resource::ID_RAGE:
+					if (aEntityState != EntityState::ID_IN_COMBAT && resource.m_current > 0)
+						resource.m_current--;
+					break;
+
+				case Resource::ID_ENERGY:
+					if (resource.m_current < resource.m_max)
+						resource.m_current++;
+					break;
+
+				default:
+					break;
+				}
 			}
 		}
 

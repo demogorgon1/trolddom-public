@@ -10,6 +10,7 @@ namespace kaos_public
 		{
 			INVALID_ID,
 
+			ID_HEALTH,
 			ID_MANA,
 			ID_RAGE,
 			ID_ENERGY,
@@ -21,6 +22,7 @@ namespace kaos_public
 		static constexpr const char* RESOURCE_NAMES[] =
 		{
 			NULL,
+			"health",
 			"mana",
 			"rage",
 			"energy"

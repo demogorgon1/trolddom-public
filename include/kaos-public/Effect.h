@@ -9,7 +9,8 @@ namespace kaos_public
 		enum Flag : uint32_t 
 		{
 			FLAG_IS_MAGICAL				= 0x00000001,
-			FLAG_GENERATE_RAGE			= 0x00000002
+			FLAG_GENERATE_RAGE			= 0x00000002,
+			FLAG_CAN_BE_CRITICAL		= 0x00000004
 		};
 
 		enum DamageType : uint8_t
@@ -31,6 +32,8 @@ namespace kaos_public
 				return FLAG_IS_MAGICAL;
 			if (strcmp(aString, "generate_rage") == 0)
 				return FLAG_GENERATE_RAGE;
+			if (strcmp(aString, "can_be_critical") == 0)
+				return FLAG_CAN_BE_CRITICAL;
 			return 0;
 		}
 

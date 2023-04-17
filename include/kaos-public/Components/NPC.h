@@ -3,6 +3,7 @@
 #include "../Component.h"
 #include "../Cooldowns.h"
 #include "../EntityState.h"
+#include "../Resource.h"
 #include "../Stat.h"
 
 namespace kaos_public
@@ -56,7 +57,7 @@ namespace kaos_public
 					if(!aStream->ReadUInt(m_useProbability))
 						return false;
 					return true;
-				}
+				}	
 
 				// Public data
 				uint32_t							m_abilityId = 0;
@@ -126,6 +127,32 @@ namespace kaos_public
 				std::vector<AbilityEntry>			m_abilities;
 			};
 
+			struct ResourceEntry
+			{
+				void
+				ToStream(
+					IWriter*				aStream) const
+				{
+					aStream->WriteUInt(m_id);
+					aStream->WriteUInt(m_max);
+				}
+
+				bool
+				FromStream(
+					IReader*				aStream)
+				{
+					if (!aStream->ReadUInt(m_id))
+						return false;
+					if (!aStream->ReadUInt(m_max))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t							m_id = 0;
+				uint32_t							m_max = 0;
+			};
+
 			NPC()
 				: ComponentBase(ID, FLAGS)
 			{
@@ -159,11 +186,29 @@ namespace kaos_public
 					const Parser::Node*	aChild)
 				{
 					if (aChild->m_tag == "state")
+					{
 						m_states.push_back(std::make_unique<StateEntry>(aChild));
+					}
 					else if (aChild->m_name == "stats")
+					{
 						m_stats.FromSource(aChild);
+					}
+					else if (aChild->m_name == "resources")
+					{
+						aChild->ForEachChild([&](
+							const Parser::Node* aResource)
+						{
+							ResourceEntry t;
+							t.m_id = Resource::StringToId(aResource->m_name.c_str());
+							KP_VERIFY(t.m_id != 0, aResource->m_debugInfo, "'%s' is not a valid resource.", aResource->m_name.c_str());
+							t.m_max = aResource->GetUInt32();
+							m_resources.push_back(t);
+						});
+					}
 					else
+					{
 						KP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
+					}
 				});
 			}
 
@@ -173,6 +218,7 @@ namespace kaos_public
 			{
 				aStream->WriteObjectPointers(m_states);
 				m_stats.ToStream(aStream);
+				aStream->WriteObjects(m_resources);
 			}
 
 			bool
@@ -183,12 +229,15 @@ namespace kaos_public
 					return false;
 				if(!m_stats.FromStream(aStream))
 					return false;
+				if(!aStream->ReadObjects(m_resources))
+					return false;
 				return true;
 			}
 
 			// Public data			
 			Stat::Collection							m_stats;
 			std::vector<std::unique_ptr<StateEntry>>	m_states;
+			std::vector<ResourceEntry>					m_resources;
 			
 			Cooldowns									m_cooldowns;
 		};

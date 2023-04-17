@@ -12,7 +12,6 @@ namespace kaos_public
 		{
 			INVALID_ID,
 
-			ID_HEALTH,
 			ID_DEXTERITY,
 			ID_STRENGTH,
 			ID_WISDOM,
@@ -35,7 +34,6 @@ namespace kaos_public
 		{			
 			{ NULL, NULL, NULL },
 
-			{ "health",					"HEA",		"Health" },
 			{ "dexterity",				"DEX",		"Dexterity" },
 			{ "strength",				"STR",		"Strength" },
 			{ "wisdom",					"WIS",		"Wisdom" },

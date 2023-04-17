@@ -16,7 +16,7 @@ ability fighter_attack:
 	
 	effect damage:
 	{
-		flags: [ generate_rage ]
+		flags: [ generate_rage can_be_critical ]
 		damage_type: physical				
 	}
 }
@@ -41,7 +41,6 @@ class fighter:
 						
 			stats:
 			{
-				health: 80
 				dexterity: 4
 				strength: 6
 				wisdom: 2
@@ -50,6 +49,7 @@ class fighter:
 				parry_chance: 5
 			}
 			
+			resource health: { add_max: 80 }
 			resource rage: { add_max: 100 }
 		}
 	]
