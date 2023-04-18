@@ -2,25 +2,6 @@
 
 #include "Base.h"
 
-#include "Components/Abilities.h"
-#include "Components/CombatPrivate.h"
-#include "Components/CombatPublic.h"
-#include "Components/DisplayName.h"
-#include "Components/EquippedItems.h"
-#include "Components/Inventory.h"
-#include "Components/NPC.h"
-#include "Components/PlayerPrivate.h"
-#include "Components/PlayerPublic.h"
-#include "Components/Position.h"
-#include "Components/Talents.h"
-#include "Components/Wallet.h"
-
-#include "Effects/Damage.h"
-#include "Effects/Stun.h"
-
-#include "Systems/Combat.h"
-#include "Systems/NPC.h"
-
 #include "CombatEvent.h"
 #include "Compiler.h"
 #include "Component.h"

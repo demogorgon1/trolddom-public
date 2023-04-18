@@ -4,6 +4,7 @@
 #include "Data/Class.h"
 #include "Data/Entity.h"
 #include "Data/Faction.h"
+#include "Data/Item.h"
 #include "Data/Map.h"
 #include "Data/MapEntitySpawn.h"
 #include "Data/MapPalette.h"
@@ -161,6 +162,7 @@ namespace kpublic
 			RegisterDataContainer(m_classes);
 			RegisterDataContainer(m_entities);
 			RegisterDataContainer(m_factions);
+			RegisterDataContainer(m_items);
 			RegisterDataContainer(m_maps);
 			RegisterDataContainer(m_mapEntitySpawns);
 			RegisterDataContainer(m_mapPalettes);
@@ -224,6 +226,7 @@ namespace kpublic
 		DataContainer<Data::Class>						m_classes;
 		DataContainer<Data::Entity>						m_entities;
 		DataContainer<Data::Faction>					m_factions;
+		DataContainer<Data::Item>						m_items;
 		DataContainer<Data::Map>						m_maps;
 		DataContainer<Data::MapEntitySpawn>				m_mapEntitySpawns;
 		DataContainer<Data::MapPalette>					m_mapPalettes;

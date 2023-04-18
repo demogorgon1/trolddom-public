@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../DataBase.h"
+#include "../EquipmentSlot.h"
 #include "../Resource.h"
 #include "../Stat.h"
 
@@ -14,6 +15,45 @@ namespace kpublic
 			: public DataBase
 		{
 			static const DataType::Id DATA_TYPE = DataType::ID_CLASS;
+
+			struct StartEquipment
+			{
+				StartEquipment()
+				{
+
+				}
+
+				StartEquipment(
+					const Parser::Node*		aSource)
+				{
+					m_equipmentSlotId = EquipmentSlot::StringToId(aSource->m_name.c_str());
+					KP_VERIFY(m_equipmentSlotId != 0, aSource->m_debugInfo, "'%s' not a valid equipment slot.", aSource->m_name.c_str());
+					m_itemId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ITEM, aSource->GetIdentifier());
+				}
+
+				void	
+				ToStream(
+					IWriter*				aStream) const 
+				{
+					aStream->WriteUInt(m_equipmentSlotId);
+					aStream->WriteUInt(m_itemId);
+				}
+			
+				bool	
+				FromStream(
+					IReader*				aStream) 
+				{
+					if (!aStream->ReadUInt(m_equipmentSlotId))
+						return false;
+					if (!aStream->ReadUInt(m_itemId))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t				m_equipmentSlotId = 0;
+				uint32_t				m_itemId = 0;				
+			};
 
 			struct LevelProgressionLevelResourceUpdate
 			{	
@@ -162,7 +202,7 @@ namespace kpublic
 			{
 				VerifyBase();
 
-				KP_VERIFY(!m_displayName.empty(), m_debugInfo, "'%s' has no 'display_name'.", m_name.c_str());
+				KP_VERIFY(!m_displayName.empty(), m_debugInfo, "'%s' has no 'string'.", m_name.c_str());
 			}
 
 			// Base implementation
@@ -189,6 +229,10 @@ namespace kpublic
 					{
 						m_levelProgression = std::make_unique<LevelProgression>(aMember->GetArray());
 					}
+					else if(aMember->m_tag == "start_equipment")
+					{
+						m_startEquipment.push_back(StartEquipment(aMember));
+					}
 					else
 					{
 						KP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
@@ -205,6 +249,7 @@ namespace kpublic
 				aStream->WriteOptionalObjectPointer(m_levelProgression);
 				aStream->WriteUInt(m_spriteId);
 				aStream->WriteUInt(m_defaultAttackAbilityId);
+				aStream->WriteObjects(m_startEquipment);
 			}
 			
 			bool	
@@ -221,6 +266,8 @@ namespace kpublic
 					return false;
 				if (!aStream->ReadUInt(m_defaultAttackAbilityId))
 					return false;
+				if(!aStream->ReadObjects(m_startEquipment))
+					return false;
 				return true;
 			}
 
@@ -229,6 +276,7 @@ namespace kpublic
 			uint32_t												m_spriteId = 0;
 			uint32_t												m_defaultAttackAbilityId = 0;
 			std::unique_ptr<LevelProgression>						m_levelProgression;
+			std::vector<StartEquipment>								m_startEquipment;
 		};
 
 	}

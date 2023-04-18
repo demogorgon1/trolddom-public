@@ -15,3 +15,4 @@ sprite test_dungeon_wall 3
 sprite test_dungeon_floor 2
 sprite goblin 4
 faction monsters 1
+item weapon_rusty_sword 1
