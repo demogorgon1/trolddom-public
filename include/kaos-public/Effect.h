@@ -24,6 +24,12 @@ namespace kaos_public
 			DAMAGE_TYPE_POISON
 		};
 
+		enum DamageBase : uint8_t
+		{
+			DAMAGE_BASE_RANGE,
+			DAMAGE_BASE_WEAPON
+		};
+
 		inline uint32_t	
 		StringToFlag(
 			const char* aString)

@@ -7,7 +7,9 @@ ability strike:
 	
 	effect damage:
 	{
+		flags: [ can_be_critical ]
 		damage_type: physical
+		base: weapon
 	}
 }
 

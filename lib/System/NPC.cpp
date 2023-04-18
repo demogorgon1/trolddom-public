@@ -1,6 +1,6 @@
 #include "../Pcheader.h"
 
-#include <kaos-public/Components/Combat.h>
+#include <kaos-public/Components/CombatPublic.h>
 #include <kaos-public/Components/NPC.h>
 #include <kaos-public/Components/Position.h>
 #include <kaos-public/Components/Sprite.h>
@@ -21,7 +21,7 @@ namespace kaos_public::Systems
 		const Manifest*			aManifest)
 		: SystemBase(aManifest)
 	{
-		RequireComponent<Components::Combat>();
+		RequireComponent<Components::CombatPublic>();
 		RequireComponent<Components::NPC>();
 		RequireComponent<Components::Position>();
 		RequireComponent<Components::Sprite>();
@@ -40,7 +40,7 @@ namespace kaos_public::Systems
 		EntityState::Id			aEntityState,
 		ComponentBase**			aComponents) 
 	{
-		Components::Combat* combat = GetComponent<Components::Combat>(aComponents);
+		Components::CombatPublic* combat = GetComponent<Components::CombatPublic>(aComponents);
 		Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
 		Components::Sprite* sprite = GetComponent<Components::Sprite>(aComponents);
 
@@ -61,7 +61,7 @@ namespace kaos_public::Systems
 		ComponentBase**			aComponents,
 		Context*				aContext) 
 	{
-		Components::Combat* combat = GetComponent<Components::Combat>(aComponents);
+		Components::CombatPublic* combat = GetComponent<Components::CombatPublic>(aComponents);
 		Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
 		Components::Position* position = GetComponent<Components::Position>(aComponents);
 		Components::Sprite* sprite = GetComponent<Components::Sprite>(aComponents);

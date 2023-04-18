@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Components/Combat.h"
+#include "../Components/CombatPublic.h"
 
 #include "../EffectBase.h"
 #include "../EntityInstance.h"
@@ -30,32 +30,41 @@ namespace kaos_public
 			// EffectBase implementation
 			void
 			FromSource(
-				const Parser::Node*		/*aSource*/) override
+				const Parser::Node*			/*aSource*/) override
 			{
 			}
 
 			void
 			ToStream(
-				IWriter*				aStream) const override
+				IWriter*					aStream) const override
 			{
 				ToStreamBase(aStream);
 			}
 
 			bool
 			FromStream(
-				IReader*				aStream) override
+				IReader*					aStream) override
 			{
 				if(!FromStreamBase(aStream))
 					return false;
 				return true;
 			}
 
-			void	
-			Apply(
-				EntityInstance*			aEntity,
-				uint32_t				aTick) override
+			void
+			Resolve(
+				std::mt19937&				aRandom,
+				Components::CombatPublic*	aSourceCombatPublic,
+				Components::CombatPrivate*	aSourceCombatPrivate,
+				Components::CombatPublic*	aTargetCombatPublic,
+				CombatEvent::Id				aId,
+				ICombatResultQueue*			aCombatResultQueue)
 			{
-				aEntity->SetState(EntityState::ID_DEAD, aTick);
+				(void)aRandom;
+				(void)aSourceCombatPublic;
+				(void)aSourceCombatPrivate;
+				(void)aTargetCombatPublic;
+				(void)aId;
+				(void)aCombatResultQueue;
 			}
 
 			// Public data

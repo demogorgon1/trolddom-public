@@ -17,7 +17,8 @@ ability fighter_attack:
 	effect damage:
 	{
 		flags: [ generate_rage can_be_critical ]
-		damage_type: physical				
+		damage_type: physical			
+		base: weapon
 	}
 }
 

@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Components/Abilities.h"
-#include "Components/Combat.h"
+#include "Components/CombatPrivate.h"
+#include "Components/CombatPublic.h"
 #include "Components/DisplayName.h"
 #include "Components/EquippedItems.h"
 #include "Components/Inventory.h"
@@ -24,7 +25,8 @@ namespace kaos_public
 		ComponentFactory()
 		{
 			_Register<Components::Abilities>();
-			_Register<Components::Combat>();
+			_Register<Components::CombatPrivate>();
+			_Register<Components::CombatPublic>();
 			_Register<Components::DisplayName>();
 			_Register<Components::EquippedItems>();
 			_Register<Components::Inventory>();

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "CombatEvent.h"
 #include "Effect.h"
 #include "IReader.h"
 #include "IWriter.h"
@@ -8,7 +9,14 @@
 namespace kaos_public
 {
 
+	namespace Components
+	{
+		struct CombatPublic;
+		struct CombatPrivate;
+	}
+
 	class EntityInstance;
+	class ICombatResultQueue;
 
 	class EffectBase
 	{
@@ -26,7 +34,7 @@ namespace kaos_public
 
 		bool
 		FromSourceBase(
-			const Parser::Node*		aSource)
+			const Parser::Node*							aSource)
 		{
 			if(aSource->m_name == "flags")
 			{
@@ -45,14 +53,14 @@ namespace kaos_public
 
 		void	
 		ToStreamBase(
-			IWriter*				aStream) const 
+			IWriter*									aStream) const 
 		{
 			aStream->WriteUInt(m_flags);
 		}
 		
 		bool	
 		FromStreamBase(
-			IReader*				aStream) 
+			IReader*									aStream) 
 		{
 			if(!aStream->ReadUInt(m_flags))
 				return false;
@@ -61,17 +69,21 @@ namespace kaos_public
 
 		// Virtual methods
 		virtual void	FromSource(
-							const Parser::Node*		/*aSource*/) { assert(false); }
+							const Parser::Node*			/*aSource*/) { assert(false); }
 		virtual void	ToStream(
-							IWriter*				/*aStream*/) const { assert(false); }
+							IWriter*					/*aStream*/) const { assert(false); }
 		virtual bool	FromStream(
-							IReader*				/*aStream*/) { assert(false); return true; }
-		virtual void	Apply(
-							EntityInstance*			/*aEntity*/,
-							uint32_t				/*aTick*/) { }							
+							IReader*					/*aStream*/) { assert(false); return true; }
+		virtual void	Resolve(
+							std::mt19937&				/*aRandom*/,
+							Components::CombatPublic*	/*aSourceCombatPublic*/,
+							Components::CombatPrivate*	/*aSourceCombatPrivate*/,
+							Components::CombatPublic*	/*aTargetCombatPublic*/,
+							CombatEvent::Id				/*aId*/,
+							ICombatResultQueue*			/*aCombatResultQueue*/) { }
 
 		// Public data
-		uint32_t		m_flags;		
+		uint32_t		m_flags = 0;		
 	};
 
 }

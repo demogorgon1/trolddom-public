@@ -21,6 +21,8 @@ namespace kaos_public
 						const Components::Position*	aA,
 						const Components::Position*	aB,
 						int32_t						aDistance);
+		float		RandomFloat(
+						std::mt19937&				aRandom);
 
 		template <typename _T>
 		void	
@@ -36,6 +38,20 @@ namespace kaos_public
 
 			aVector.resize(newSize);
 		}
+
+		template <typename _T>
+		_T
+		RandomInRange(
+			std::mt19937&							aRandom,
+			_T										aMin,
+			_T										aMax)
+		{
+			if(aMin == aMax)
+				return aMin;
+
+			std::uniform_int_distribution<_T> distribution(aMin, aMax);
+			return distribution(aRandom);
+		}	
 		
 	}
 

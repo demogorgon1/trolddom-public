@@ -1,6 +1,6 @@
 #include "../Pcheader.h"
 
-#include <kaos-public/Components/Combat.h>
+#include <kaos-public/Components/CombatPublic.h>
 
 #include <kaos-public/Systems/Combat.h>
 
@@ -14,7 +14,7 @@ namespace kaos_public::Systems
 		const Manifest*		aManifest)
 		: SystemBase(aManifest)
 	{
-		RequireComponent<Components::Combat>();
+		RequireComponent<Components::CombatPublic>();
 	}
 	
 	Combat::~Combat()
@@ -31,11 +31,11 @@ namespace kaos_public::Systems
 		ComponentBase**		aComponents,
 		Context*			/*aContext*/) 
 	{
-		Components::Combat* combat = GetComponent<Components::Combat>(aComponents);
+		Components::CombatPublic* combatPublic = GetComponent<Components::CombatPublic>(aComponents);
 
 		if(aEntityState != EntityState::ID_DEAD)
 		{
-			for(Components::Combat::Resource& resource : combat->m_resources)
+			for(Components::CombatPublic::Resource& resource : combatPublic->m_resources)
 			{
 				switch(resource.m_id)
 				{

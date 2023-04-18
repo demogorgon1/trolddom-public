@@ -3,7 +3,8 @@
 #include "Base.h"
 
 #include "Components/Abilities.h"
-#include "Components/Combat.h"
+#include "Components/CombatPrivate.h"
+#include "Components/CombatPublic.h"
 #include "Components/DisplayName.h"
 #include "Components/EquippedItems.h"
 #include "Components/Inventory.h"
@@ -20,6 +21,7 @@
 #include "Systems/Combat.h"
 #include "Systems/NPC.h"
 
+#include "CombatEvent.h"
 #include "Compiler.h"
 #include "Component.h"
 #include "ComponentBase.h"

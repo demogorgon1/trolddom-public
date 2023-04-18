@@ -10,7 +10,8 @@ namespace kaos_public
 		{
 			INVALID_ID,
 
-			ID_COMBAT,
+			ID_COMBAT_PUBLIC,
+			ID_COMBAT_PRIVATE,
 			ID_NPC,
 			ID_POSITION,
 			ID_PLAYER_PUBLIC,
@@ -30,7 +31,8 @@ namespace kaos_public
 		static constexpr const char* COMPONENT_NAMES[] = 
 		{
 			NULL,
-			"combat",
+			"combat_public",
+			"combat_private",
 			"npc",
 			"position",
 			"player_public",

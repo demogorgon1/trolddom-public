@@ -23,10 +23,14 @@ entity goblin:
 	{
 		position: { }		
 		sprite: { }
-		combat: 
+		combat_public: 
 		{  
-			faction: monsters			
+			faction: monsters		
 		}			
+		combat_private:
+		{
+			weapon_damage_range: [ 4 8 ]
+		}
 		npc: 
 		{ 			
 			state default:
