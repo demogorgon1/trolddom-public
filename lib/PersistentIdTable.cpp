@@ -1,9 +1,9 @@
 #include "Pcheader.h"
 
-#include <kaos-public/DataErrorHandling.h>
-#include <kaos-public/PersistentIdTable.h>
+#include <kpublic/DataErrorHandling.h>
+#include <kpublic/PersistentIdTable.h>
 
-namespace kaos_public
+namespace kpublic
 {
 
 	PersistentIdTable::PersistentIdTable()

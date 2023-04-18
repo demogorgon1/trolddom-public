@@ -1,11 +1,11 @@
 #include "Pcheader.h"
 
-#include <kaos-public/Manifest.h>
-#include <kaos-public/MapData.h>
+#include <kpublic/Manifest.h>
+#include <kpublic/MapData.h>
 
 #include "Image.h"
 
-namespace kaos_public
+namespace kpublic
 {
 
 	namespace

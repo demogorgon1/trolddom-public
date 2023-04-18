@@ -2,7 +2,7 @@
 
 #include "Image.h"
 
-namespace kaos_public
+namespace kpublic
 {
 
 	class Manifest;

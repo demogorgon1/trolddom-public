@@ -1,8 +1,8 @@
 #pragma once
 
-#include <kaos-public/DataErrorHandling.h>
+#include <kpublic/DataErrorHandling.h>
 
-namespace kaos_public
+namespace kpublic
 {
 
 	class Tokenizer

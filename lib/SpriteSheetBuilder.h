@@ -1,12 +1,12 @@
 #pragma once
 
-#include <kaos-public/Manifest.h>
-#include <kaos-public/Parser.h>
-#include <kaos-public/SpriteInfo.h>
+#include <kpublic/Manifest.h>
+#include <kpublic/Parser.h>
+#include <kpublic/SpriteInfo.h>
 
 #include "Image.h"
 
-namespace kaos_public
+namespace kpublic
 {
 
 	class Manifest;

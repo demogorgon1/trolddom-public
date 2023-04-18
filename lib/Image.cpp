@@ -4,7 +4,7 @@
 
 #include "Image.h"
 
-namespace kaos_public
+namespace kpublic
 {
 
 	Image::Image()

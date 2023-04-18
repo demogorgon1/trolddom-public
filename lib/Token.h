@@ -1,6 +1,6 @@
 #pragma once
 
-namespace kaos_public
+namespace kpublic
 {
 	
 	struct Token

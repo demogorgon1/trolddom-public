@@ -1,10 +1,10 @@
 #include "Pcheader.h"
 
-#include <kaos-public/Parser.h>
+#include <kpublic/Parser.h>
 
 #include "Tokenizer.h"
 
-namespace kaos_public
+namespace kpublic
 {
 
 	Parser::Parser(

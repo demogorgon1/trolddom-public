@@ -1,8 +1,8 @@
 #include "Pcheader.h"
 
-#include <kaos-public/DataErrorHandling.h>
+#include <kpublic/DataErrorHandling.h>
 
-namespace kaos_public
+namespace kpublic
 {
 
 	namespace DataErrorHandling

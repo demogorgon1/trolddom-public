@@ -1,11 +1,11 @@
 #include "Pcheader.h"
 
-#include <kaos-public/ComponentFactory.h>
-#include <kaos-public/EffectFactory.h>
-#include <kaos-public/PersistentIdTable.h>
-#include <kaos-public/SourceContext.h>
+#include <kpublic/ComponentFactory.h>
+#include <kpublic/EffectFactory.h>
+#include <kpublic/PersistentIdTable.h>
+#include <kpublic/SourceContext.h>
 
-namespace kaos_public
+namespace kpublic
 {
 
 	SourceContext::SourceContext()

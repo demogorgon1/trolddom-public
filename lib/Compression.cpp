@@ -3,9 +3,9 @@
 #include <brotli/decode.h>
 #include <brotli/encode.h>
 
-#include <kaos-public/Compression.h>
+#include <kpublic/Compression.h>
 
-namespace kaos_public
+namespace kpublic
 {
 
 	namespace Compression

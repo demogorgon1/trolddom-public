@@ -1,10 +1,10 @@
 #include "Pcheader.h"
 
-#include <kaos-public/DataErrorHandling.h>
+#include <kpublic/DataErrorHandling.h>
 
 #include "FileWriter.h"
 
-namespace kaos_public
+namespace kpublic
 {
 
 	FileWriter::FileWriter(

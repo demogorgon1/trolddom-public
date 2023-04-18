@@ -1,12 +1,12 @@
 #include "Pcheader.h"
 
-#include <kaos-public/Manifest.h>
-#include <kaos-public/MapData.h>
-#include <kaos-public/SpriteData.h>
+#include <kpublic/Manifest.h>
+#include <kpublic/MapData.h>
+#include <kpublic/SpriteData.h>
 
 #include "MapImageOutput.h"
 
-namespace kaos_public
+namespace kpublic
 {
 
 	MapImageOutput::MapImageOutput(

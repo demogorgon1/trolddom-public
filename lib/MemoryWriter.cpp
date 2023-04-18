@@ -2,7 +2,7 @@
 
 #include "MemoryWriter.h"
 
-namespace kaos_public
+namespace kpublic
 {
 
 	MemoryWriter::MemoryWriter(

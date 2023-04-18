@@ -1,10 +1,10 @@
 #include "Pcheader.h"
 
-#include <kaos-public/Components/Position.h>
+#include <kpublic/Components/Position.h>
 
-#include <kaos-public/Vec2.h>
+#include <kpublic/Vec2.h>
 
-namespace kaos_public::Helpers
+namespace kpublic::Helpers
 {
 
 	bool		

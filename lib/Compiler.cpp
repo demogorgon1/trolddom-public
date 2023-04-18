@@ -1,9 +1,9 @@
 #include "Pcheader.h"
 
-#include <kaos-public/Compiler.h>
-#include <kaos-public/ComponentFactory.h>
-#include <kaos-public/Compression.h>
-#include <kaos-public/DataErrorHandling.h>
+#include <kpublic/Compiler.h>
+#include <kpublic/ComponentFactory.h>
+#include <kpublic/Compression.h>
+#include <kpublic/DataErrorHandling.h>
 
 #include "FileWriter.h"
 #include "MapImageOutput.h"
@@ -11,7 +11,7 @@
 #include "SpriteSheetBuilder.h"
 #include "Tokenizer.h"
 
-namespace kaos_public
+namespace kpublic
 {
 
 	Compiler::Compiler(

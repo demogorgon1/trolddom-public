@@ -1,20 +1,20 @@
 #include "../Pcheader.h"
 
-#include <kaos-public/Components/CombatPublic.h>
-#include <kaos-public/Components/NPC.h>
-#include <kaos-public/Components/Position.h>
-#include <kaos-public/Components/Sprite.h>
+#include <kpublic/Components/CombatPublic.h>
+#include <kpublic/Components/NPC.h>
+#include <kpublic/Components/Position.h>
+#include <kpublic/Components/Sprite.h>
 
-#include <kaos-public/Systems/NPC.h>
+#include <kpublic/Systems/NPC.h>
 
-#include <kaos-public/EntityInstance.h>
-#include <kaos-public/Helpers.h>
-#include <kaos-public/ICombatEventQueue.h>
-#include <kaos-public/IMoveRequestQueue.h>
-#include <kaos-public/IWorldView.h>
-#include <kaos-public/Manifest.h>
+#include <kpublic/EntityInstance.h>
+#include <kpublic/Helpers.h>
+#include <kpublic/ICombatEventQueue.h>
+#include <kpublic/IMoveRequestQueue.h>
+#include <kpublic/IWorldView.h>
+#include <kpublic/Manifest.h>
 
-namespace kaos_public::Systems
+namespace kpublic::Systems
 {
 
 	NPC::NPC(

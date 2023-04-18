@@ -5,16 +5,16 @@ main(
 	int		aNumArgs,
 	char**	aArgs)
 {
-	kaos_public::DataErrorHandling::SetErrorCallback([](
+	kpublic::DataErrorHandling::SetErrorCallback([](
 		const char* aErrorMessage)
 	{
 		fprintf(stderr, "Error: %s\n", aErrorMessage);
 		exit(EXIT_FAILURE);
 	});
 
-	kaos_public::Manifest manifest;
+	kpublic::Manifest manifest;
 
-	kaos_public::Compiler compiler(&manifest);
+	kpublic::Compiler compiler(&manifest);
 
 	compiler.Parse("../../data");
 	compiler.Build("../../data/_ids.txt", ".");

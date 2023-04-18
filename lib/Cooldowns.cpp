@@ -1,11 +1,11 @@
 #include "Pcheader.h"
 
-#include <kaos-public/Data/Ability.h>
+#include <kpublic/Data/Ability.h>
 
-#include <kaos-public/Cooldowns.h>
-#include <kaos-public/Helpers.h>
+#include <kpublic/Cooldowns.h>
+#include <kpublic/Helpers.h>
 
-namespace kaos_public
+namespace kpublic
 {
 
 	Cooldowns::Cooldowns()

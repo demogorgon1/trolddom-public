@@ -1,13 +1,13 @@
 #include "../Pcheader.h"
 
-#include <kaos-public/Components/CombatPublic.h>
+#include <kpublic/Components/CombatPublic.h>
 
-#include <kaos-public/Systems/Combat.h>
+#include <kpublic/Systems/Combat.h>
 
-#include <kaos-public/EntityInstance.h>
-#include <kaos-public/Resource.h>
+#include <kpublic/EntityInstance.h>
+#include <kpublic/Resource.h>
 
-namespace kaos_public::Systems
+namespace kpublic::Systems
 {
 
 	Combat::Combat(

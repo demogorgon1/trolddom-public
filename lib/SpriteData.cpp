@@ -1,9 +1,9 @@
 #include "Pcheader.h"
 
-#include <kaos-public/Compression.h>
-#include <kaos-public/SpriteData.h>
+#include <kpublic/Compression.h>
+#include <kpublic/SpriteData.h>
 
-namespace kaos_public
+namespace kpublic
 {
 
 	namespace

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <kaos-public/Base.h>
-#include <kaos-public/Compiler.h>
-#include <kaos-public/Manifest.h>
+#include <kpublic/Base.h>
+#include <kpublic/Compiler.h>
+#include <kpublic/Manifest.h>
 

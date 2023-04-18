@@ -1,8 +1,8 @@
 #pragma once
 
-#include <kaos-public/IWriter.h>
+#include <kpublic/IWriter.h>
 
-namespace kaos_public
+namespace kpublic
 {
 
 	class FileWriter

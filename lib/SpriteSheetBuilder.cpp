@@ -1,10 +1,10 @@
 #include "Pcheader.h"
 
-#include <kaos-public/Compression.h>
+#include <kpublic/Compression.h>
 
 #include "SpriteSheetBuilder.h"
 
-namespace kaos_public
+namespace kpublic
 {
 
 	namespace
