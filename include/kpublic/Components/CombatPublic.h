@@ -120,30 +120,11 @@ namespace kpublic
 					const Parser::Node*	aChild)
 				{
 					if (aChild->m_name == "faction")
-					{
 						m_factionId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_FACTION, aChild->GetIdentifier());
-					}
-					else if (aChild->m_name == "weapon_damage_range")
-					{
-						if(aChild->m_type == Parser::Node::TYPE_ARRAY && aChild->m_children.size() == 1)
-						{
-							m_weaponDamageRangeMin = aChild->m_children[0]->GetUInt32();
-							m_weaponDamageRangeMax = m_weaponDamageRangeMin;
-						}
-						else if (aChild->m_type == Parser::Node::TYPE_ARRAY && aChild->m_children.size() == 2)
-						{
-							m_weaponDamageRangeMin = aChild->m_children[0]->GetUInt32();
-							m_weaponDamageRangeMax = aChild->m_children[1]->GetUInt32();
-						}
-						else
-						{
-							KP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid weapon damage range.", aChild->m_name.c_str());
-						}
-					}
+					else if(aChild->m_name == "level")
+						m_level = aChild->GetUInt32();
 					else
-					{
 						KP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
-					}
 				});
 			}
 
@@ -154,10 +135,6 @@ namespace kpublic
 				aStream->WriteUInt(m_targetEntityInstanceId);
 				aStream->WriteUInt(m_level);
 				aStream->WriteUInt(m_factionId);
-				aStream->WriteUInt(m_weaponDamageRangeMin);
-				aStream->WriteUInt(m_weaponDamageRangeMax);
-				aStream->WriteUInt(m_physicalCriticalStrikeChance);
-				aStream->WriteUInt(m_magicalCriticalStrikeChance);
 				aStream->WriteObjects(m_resources);
 			}
 			
@@ -171,14 +148,6 @@ namespace kpublic
 					return false;
 				if (!aStream->ReadUInt(m_factionId))
 					return false;
-				if (!aStream->ReadUInt(m_weaponDamageRangeMin))
-					return false;
-				if (!aStream->ReadUInt(m_weaponDamageRangeMax))
-					return false;
-				if (!aStream->ReadUInt(m_physicalCriticalStrikeChance))
-					return false;
-				if (!aStream->ReadUInt(m_magicalCriticalStrikeChance))
-					return false;
 				if(!aStream->ReadObjects(m_resources))
 					return false;
 				return true;
@@ -189,12 +158,6 @@ namespace kpublic
 
 			uint32_t				m_level = 1;
 			uint32_t				m_factionId = 0;
-
-			// FIXME: some of this should be moved to other components
-			uint32_t				m_weaponDamageRangeMin = 0;
-			uint32_t				m_weaponDamageRangeMax = 0;
-			uint32_t				m_physicalCriticalStrikeChance = 0;
-			uint32_t				m_magicalCriticalStrikeChance = 0;
 			std::vector<Resource>	m_resources;
 		};
 

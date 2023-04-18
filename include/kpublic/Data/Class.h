@@ -181,9 +181,9 @@ namespace kpublic
 					{
 						m_spriteId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aMember->GetIdentifier());
 					}					
-					else if (aMember->m_name == "main_attack")
+					else if (aMember->m_name == "default_attack")
 					{
-						m_mainAttackAbilityId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aMember->GetIdentifier());
+						m_defaultAttackAbilityId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aMember->GetIdentifier());
 					}
 					else if(aMember->m_name == "level_progression")
 					{
@@ -204,7 +204,7 @@ namespace kpublic
 				aStream->WriteString(m_displayName);
 				aStream->WriteOptionalObjectPointer(m_levelProgression);
 				aStream->WriteUInt(m_spriteId);
-				aStream->WriteUInt(m_mainAttackAbilityId);
+				aStream->WriteUInt(m_defaultAttackAbilityId);
 			}
 			
 			bool	
@@ -219,7 +219,7 @@ namespace kpublic
 					return false;
 				if(!aStream->ReadUInt(m_spriteId))
 					return false;
-				if (!aStream->ReadUInt(m_mainAttackAbilityId))
+				if (!aStream->ReadUInt(m_defaultAttackAbilityId))
 					return false;
 				return true;
 			}
@@ -227,7 +227,7 @@ namespace kpublic
 			// Public data
 			std::string												m_displayName;
 			uint32_t												m_spriteId = 0;
-			uint32_t												m_mainAttackAbilityId = 0;
+			uint32_t												m_defaultAttackAbilityId = 0;
 			std::unique_ptr<LevelProgression>						m_levelProgression;
 		};
 

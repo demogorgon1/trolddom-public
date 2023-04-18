@@ -1,8 +1,8 @@
 # Do not modify this file!
-ability fighter_attack 4
-ability knock 2
-ability strike 1
-ability gaze_of_death 3
+ability strike 4
+ability fighter_attack 3
+ability knock 1
+ability gaze_of_death 2
 class fighter 1
 entity goblin 1
 map test_dungeon 1
@@ -11,7 +11,7 @@ map_player_spawn test_dungeon_player_spawn 1
 map_palette test_dungeon_tiles 1
 map_palette test_dungeon_entity_spawns 2
 sprite fighter 1
-sprite goblin 2
-sprite test_dungeon_wall 4
-sprite test_dungeon_floor 3
+sprite test_dungeon_wall 3
+sprite test_dungeon_floor 2
+sprite goblin 4
 faction monsters 1

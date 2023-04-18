@@ -1,0 +1,14 @@
+ability strike:
+{
+	string: "Strike"
+	range: 1	
+	cooldown: 30
+	flags: [ target_other can_be_dodged can_be_parried can_miss ]
+	
+	effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		base: weapon
+	}
+}

@@ -15,9 +15,6 @@ namespace kpublic
 			ID_DEXTERITY,
 			ID_STRENGTH,
 			ID_WISDOM,
-			ID_CRITICAL_STRIKE_CHANCE,
-			ID_DODGE_CHANCE,
-			ID_PARRY_CHANCE,
 
 			NUM_IDS
 		};
@@ -36,10 +33,7 @@ namespace kpublic
 
 			{ "dexterity",				"DEX",		"Dexterity" },
 			{ "strength",				"STR",		"Strength" },
-			{ "wisdom",					"WIS",		"Wisdom" },
-			{ "critical_strike_chance",	"CRI",		"Critical Strike Chance" },
-			{ "dodge_chance",			"DOD",		"Dodge Chance" },
-			{ "parry_chance",			"PAR",		"Parry Chance" }
+			{ "wisdom",					"WIS",		"Wisdom" }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

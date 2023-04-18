@@ -1,0 +1,10 @@
+sprites:
+{
+	source: "entities.png"
+
+	cursor: { position: [ 0 0 ] }
+
+	size: { width: 16 height: 16 }
+
+	sprite goblin: { }
+}

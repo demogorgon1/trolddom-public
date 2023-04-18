@@ -4,7 +4,6 @@
 #include "../Cooldowns.h"
 #include "../EntityState.h"
 #include "../Resource.h"
-#include "../Stat.h"
 
 namespace kpublic
 {
@@ -189,10 +188,6 @@ namespace kpublic
 					{
 						m_states.push_back(std::make_unique<StateEntry>(aChild));
 					}
-					else if (aChild->m_name == "stats")
-					{
-						m_stats.FromSource(aChild);
-					}
 					else if (aChild->m_name == "resources")
 					{
 						aChild->ForEachChild([&](
@@ -217,7 +212,6 @@ namespace kpublic
 				IWriter*				aStream) const override
 			{
 				aStream->WriteObjectPointers(m_states);
-				m_stats.ToStream(aStream);
 				aStream->WriteObjects(m_resources);
 			}
 
@@ -227,15 +221,12 @@ namespace kpublic
 			{
 				if(!aStream->ReadObjectPointers(m_states))
 					return false;
-				if(!m_stats.FromStream(aStream))
-					return false;
 				if(!aStream->ReadObjects(m_resources))
 					return false;
 				return true;
 			}
 
 			// Public data			
-			Stat::Collection							m_stats;
 			std::vector<std::unique_ptr<StateEntry>>	m_states;
 			std::vector<ResourceEntry>					m_resources;
 			

@@ -63,8 +63,8 @@ namespace kpublic
 			GetProbability() const 
 			{
 				float f = GetFloat();
-				KP_VERIFY(f >= 0.0f && f <= 1.0f, m_debugInfo, "Probability must be between 0 and 1.");
-				return (uint32_t)(f * (float)UINT32_MAX);
+				KP_VERIFY(f >= 0.0f && f <= 100.0f, m_debugInfo, "Probability must be between 0 and 100.");
+				return (uint32_t)((f / 100.0f) * (float)UINT32_MAX);
 			}
 
 			uint32_t

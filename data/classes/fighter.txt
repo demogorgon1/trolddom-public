@@ -1,18 +1,32 @@
-sprites:
+ability knock:
 {
-	source: "classes.png"
+	string: "Knock"
+	range: 1
+	cooldown: 100
+	flags: [ target_other can_be_dodged can_be_parried can_miss ]
 
-	cursor: { position: [ 0 0 ] }
+	effect stun:
+	{	
+		duration: 3
+	}
+}
 
-	size: { width: 16 height: 16 }
-
-	sprite fighter: { }
+ability gaze_of_death:
+{
+	string: "Gaze of Death"
+	range: 100
+	cooldown: 10
+	flags: [ target_other ]
+	
+	effect kill:
+	{
+	}
 }
 
 ability fighter_attack:
 {
 	string: "Attack"
-	flags: [ can_be_dodged can_be_parried can_miss ]	
+	flags: [ target_other can_be_dodged can_be_parried can_miss ]	
 	
 	effect damage:
 	{
@@ -26,7 +40,7 @@ class fighter:
 {
 	string: "Fighter"	
 	sprite: fighter
-	main_attack: fighter_attack
+	default_attack: fighter_attack
 
 	level_progression:
 	[
@@ -45,9 +59,6 @@ class fighter:
 				dexterity: 4
 				strength: 6
 				wisdom: 2
-				critical_strike_chance: 5
-				dodge_chance: 5
-				parry_chance: 5
 			}
 			
 			resource health: { add_max: 80 }

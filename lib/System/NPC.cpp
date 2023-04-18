@@ -70,6 +70,11 @@ namespace kpublic::Systems
 		if (state != NULL)
 		{
 			sprite->m_spriteId = state->m_spriteId;
+		}			
+
+		if (aEntityState != EntityState::ID_DEAD && combat->GetResource(Resource::ID_HEALTH) == 0)
+		{
+			return EntityState::ID_DEAD;
 		}
 
 		npc->m_cooldowns.Update(aContext->m_tick);

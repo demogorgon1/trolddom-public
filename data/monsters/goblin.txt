@@ -1,18 +1,3 @@
-sprites:
-{
-	source: "entities.png"
-
-	cursor: { position: [ 0 0 ] }
-
-	size: { width: 16 height: 16 }
-
-	sprite goblin: { }
-}
-
-faction monsters:
-{
-}
-
 entity goblin:
 {
 	string: "Goblin"
@@ -25,11 +10,17 @@ entity goblin:
 		sprite: { }
 		combat_public: 
 		{  
+			level: 1
 			faction: monsters		
 		}			
 		combat_private:
 		{
 			weapon_damage_range: [ 4 8 ]
+			physical_critical_strike_chance: 5
+			dodge_chance: 5
+			parry_chance: 5
+			miss_chance: 5
+			block_chance: 0
 		}
 		npc: 
 		{ 			
@@ -46,17 +37,7 @@ entity goblin:
 					{ id: strike }
 				]
 			}
-		
-			stats:
-			{
-				dexterity: 5
-				strength: 3
-				wisdom: 2
-				critical_strike_chance: 5
-				dodge_chance: 5
-				parry_chance: 5
-			}			
-			
+					
 			resources:
 			{
 				health: 50
