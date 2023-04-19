@@ -4,6 +4,8 @@
 
 #include <kpublic/Cooldowns.h>
 #include <kpublic/Helpers.h>
+#include <kpublic/IReader.h>
+#include <kpublic/IWriter.h>
 
 namespace kpublic
 {
@@ -65,6 +67,22 @@ namespace kpublic
 				return &t;
 		}
 		return NULL;
+	}
+
+	void			
+	Cooldowns::ToStream(
+		IWriter*				aStream) const
+	{
+		aStream->WriteObjects(m_entries);
+	}
+	
+	bool			
+	Cooldowns::FromStream(
+		IReader*				aStream)
+	{
+		if(!aStream->ReadObjects(m_entries))
+			return false;
+		return true;
 	}
 
 }

@@ -1,6 +1,8 @@
 #pragma once
 
-#include "Component.h"
+#include "../Component.h"
+#include "../EquipmentSlot.h"
+#include "../ItemInstance.h"
 
 namespace kpublic
 {
@@ -29,18 +31,26 @@ namespace kpublic
 			// ComponentBase implementation
 			void
 			ToStream(
-				IWriter* /*aStream*/) const override
+				IWriter*	aStream) const override
 			{
+				for(uint32_t i = 0; i < (uint32_t)EquipmentSlot::NUM_IDS; i++)
+					aStream->WritePOD(m_slots[i]);
 			}
 
 			bool
 			FromStream(
-				IReader* /*aStream*/) override
+				IReader*	aStream) override
 			{
+				for (uint32_t i = 0; i < (uint32_t)EquipmentSlot::NUM_IDS; i++)
+				{
+					if(!aStream->ReadPOD(m_slots[i]))
+						return false;
+				}
 				return true;
 			}
 
 			// Public data
+			ItemInstance	m_slots[EquipmentSlot::NUM_IDS];
 		};
 	}
 

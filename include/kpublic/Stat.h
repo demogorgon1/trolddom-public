@@ -63,7 +63,6 @@ namespace kpublic
 		{
 			Collection()
 			{
-				memset(m_stats, 0, sizeof(m_stats));
 			}
 
 			void
@@ -114,7 +113,7 @@ namespace kpublic
 			}
 
 			// Public data
-			uint32_t		m_stats[NUM_IDS];
+			uint32_t		m_stats[NUM_IDS] = { 0 };
 		};
 
 	};

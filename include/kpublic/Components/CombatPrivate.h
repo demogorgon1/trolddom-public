@@ -51,6 +51,10 @@ namespace kpublic
 							KP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid weapon damage range.", aChild->m_name.c_str());
 						}
 					}
+					else if (aChild->m_name == "weapon_cooldown")
+					{
+						m_weaponCooldown = aChild->GetUInt32();
+					}
 					else if(aChild->m_name == "physical_critical_strike_chance")
 					{
 						m_physicalCriticalStrikeChance = aChild->GetProbability();
@@ -88,6 +92,7 @@ namespace kpublic
 			{
 				aStream->WriteUInt(m_weaponDamageRangeMin);
 				aStream->WriteUInt(m_weaponDamageRangeMax);
+				aStream->WriteUInt(m_weaponCooldown);
 				aStream->WriteUInt(m_physicalCriticalStrikeChance);
 				aStream->WriteUInt(m_magicalCriticalStrikeChance);
 				aStream->WriteUInt(m_dodgeChance);
@@ -103,6 +108,8 @@ namespace kpublic
 				if (!aStream->ReadUInt(m_weaponDamageRangeMin))
 					return false;
 				if (!aStream->ReadUInt(m_weaponDamageRangeMax))
+					return false;
+				if (!aStream->ReadUInt(m_weaponCooldown))
 					return false;
 				if (!aStream->ReadUInt(m_physicalCriticalStrikeChance))
 					return false;
@@ -122,6 +129,7 @@ namespace kpublic
 			// Public data
 			uint32_t				m_weaponDamageRangeMin = 0;
 			uint32_t				m_weaponDamageRangeMax = 0;
+			uint32_t				m_weaponCooldown = 0;
 			uint32_t				m_physicalCriticalStrikeChance = (5 * uint64_t(UINT32_MAX) / 100);
 			uint32_t				m_magicalCriticalStrikeChance = (5 * uint64_t(UINT32_MAX) / 100);
 			uint32_t				m_dodgeChance = (5 * uint64_t(UINT32_MAX) / 100);

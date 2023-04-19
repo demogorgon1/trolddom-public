@@ -18,6 +18,12 @@ namespace kpublic
 			ID_FEET,
 			ID_WRISTS,
 			ID_HANDS,
+			ID_BACK,
+			ID_NECK,
+			ID_FINGER,
+			ID_BAG_1,
+			ID_BAG_2,
+			ID_BAG_3,
 
 			NUM_IDS
 		};
@@ -40,7 +46,13 @@ namespace kpublic
 			{ "legs",		"Legs" },
 			{ "feet",		"Feet" },
 			{ "wrists",		"Wrists" },
-			{ "hands",		"Hands" }
+			{ "hands",		"Hands" },
+			{ "back",		"Back" },
+			{ "neck",		"Neck" },
+			{ "finger",		"Finger" },
+			{ "bag_1",		"Bag 1" },
+			{ "bag_2",		"Bag 2" },
+			{ "bag_3",		"Bag 3" }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

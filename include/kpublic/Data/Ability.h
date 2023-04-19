@@ -22,7 +22,8 @@ namespace kpublic
 				FLAG_CAN_MISS		= 0x04,
 				FLAG_CAN_BE_DODGED	= 0x08,
 				FLAG_CAN_BE_PARRIED = 0x10,
-				FLAG_CAN_BE_BLOCKED = 0x20
+				FLAG_CAN_BE_BLOCKED = 0x20,
+				FLAG_ATTACK			= 0x40
 			};
 
 			static inline uint8_t
@@ -46,6 +47,8 @@ namespace kpublic
 						flags |= FLAG_CAN_BE_PARRIED;
 					else if (strcmp(identifier, "can_be_blocked") == 0)
 						flags |= FLAG_CAN_BE_BLOCKED;
+					else if (strcmp(identifier, "attack") == 0)
+						flags |= FLAG_ATTACK;
 					else
 						KP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid ability flag.", identifier);
 				});

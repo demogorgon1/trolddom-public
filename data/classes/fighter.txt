@@ -26,7 +26,7 @@ ability gaze_of_death:
 ability fighter_attack:
 {
 	string: "Attack"
-	flags: [ target_other can_be_dodged can_be_parried can_miss ]	
+	flags: [ attack target_other can_be_dodged can_be_parried can_miss ]	
 	
 	effect damage:
 	{

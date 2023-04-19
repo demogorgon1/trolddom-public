@@ -7,6 +7,7 @@
 #include "Components/EquippedItems.h"
 #include "Components/Inventory.h"
 #include "Components/NPC.h"
+#include "Components/PlayerCooldowns.h"
 #include "Components/PlayerPrivate.h"
 #include "Components/PlayerPublic.h"
 #include "Components/Position.h"
@@ -32,6 +33,7 @@ namespace kpublic
 			_Register<Components::Inventory>();
 			_Register<Components::NPC>();
 			_Register<Components::PlayerPrivate>();
+			_Register<Components::PlayerCooldowns>();
 			_Register<Components::PlayerPublic>();
 			_Register<Components::Position>();
 			_Register<Components::Sprite>();

@@ -15,7 +15,6 @@ namespace kpublic
 	public:
 					ItemInstanceData();
 					ItemInstanceData(
-						std::mt19937&			aRandom,
 						const Manifest*			aManifest,
 						const ItemInstance&		aItemInstance);
 					~ItemInstanceData();
@@ -23,9 +22,10 @@ namespace kpublic
 		// Public data
 		ItemInstance			m_instance;
 		const Data::Item*		m_itemData = NULL;
-		std::string				m_string;
+		std::string				m_name;
+		std::string				m_suffix;
 		Stat::Collection		m_stats;
-		uint32_t				m_properties[Data::Item::NUM_PROPERTY_TYPES];
+		uint32_t				m_properties[Data::Item::NUM_PROPERTY_TYPES] = { 0 };
 
 	private:
 
