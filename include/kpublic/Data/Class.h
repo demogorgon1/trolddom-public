@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../ActionBar.h"
 #include "../DataBase.h"
 #include "../EquipmentSlot.h"
 #include "../Resource.h"
@@ -225,6 +226,10 @@ namespace kpublic
 					{
 						m_defaultAttackAbilityId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aMember->GetIdentifier());
 					}
+					else if (aMember->m_name == "default_action_bar")
+					{
+						aMember->GetIdArray(DataType::ID_ABILITY, m_defaultActionBar.m_slots);
+					}
 					else if(aMember->m_name == "level_progression")
 					{
 						m_levelProgression = std::make_unique<LevelProgression>(aMember->GetArray());
@@ -250,6 +255,7 @@ namespace kpublic
 				aStream->WriteUInt(m_spriteId);
 				aStream->WriteUInt(m_defaultAttackAbilityId);
 				aStream->WriteObjects(m_startEquipment);
+				m_defaultActionBar.ToStream(aStream);
 			}
 			
 			bool	
@@ -268,6 +274,8 @@ namespace kpublic
 					return false;
 				if(!aStream->ReadObjects(m_startEquipment))
 					return false;
+				if(!m_defaultActionBar.FromStream(aStream))
+					return false;
 				return true;
 			}
 
@@ -277,6 +285,7 @@ namespace kpublic
 			uint32_t												m_defaultAttackAbilityId = 0;
 			std::unique_ptr<LevelProgression>						m_levelProgression;
 			std::vector<StartEquipment>								m_startEquipment;
+			ActionBar												m_defaultActionBar;
 		};
 
 	}

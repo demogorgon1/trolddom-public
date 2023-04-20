@@ -2,6 +2,7 @@
 
 #include "Base.h"
 
+#include "ActionBar.h"
 #include "CombatEvent.h"
 #include "Compiler.h"
 #include "Component.h"
