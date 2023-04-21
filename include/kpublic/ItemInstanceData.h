@@ -24,6 +24,7 @@ namespace kpublic
 		const Data::Item*		m_itemData = NULL;
 		std::string				m_name;
 		std::string				m_suffix;
+		uint32_t				m_iconSpriteId = 0;
 		Stat::Collection		m_stats;
 		uint32_t				m_properties[Data::Item::NUM_PROPERTY_TYPES] = { 0 };
 

@@ -4,6 +4,7 @@ ability strike:
 	range: 1	
 	cooldown: 30
 	flags: [ target_other can_be_dodged can_be_parried can_miss ]
+	icon: icon_strike
 	
 	effect damage:
 	{

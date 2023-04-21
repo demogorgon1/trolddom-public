@@ -42,6 +42,9 @@ namespace kpublic
 		if (!aNode->m_suffix.empty())
 			m_suffix = aNode->m_suffix;
 
+		if(aNode->m_iconSpriteId != 0)
+			m_iconSpriteId = aNode->m_iconSpriteId;
+
 		for(const Data::Item::Property& p : aNode->m_properties)
 			m_properties[p.m_type] = p.m_value;
 

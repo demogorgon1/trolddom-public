@@ -4,6 +4,7 @@ ability knock:
 	range: 1
 	cooldown: 100
 	flags: [ target_other can_be_dodged can_be_parried can_miss ]
+	icon: icon_knock
 
 	effect stun:
 	{	
@@ -17,6 +18,7 @@ ability gaze_of_death:
 	range: 100
 	cooldown: 10
 	flags: [ target_other ]
+	icon: icon_green_sphere
 	
 	effect kill:
 	{
@@ -26,7 +28,7 @@ ability gaze_of_death:
 ability fighter_attack:
 {
 	string: "Attack"
-	flags: [ attack target_other can_be_dodged can_be_parried can_miss ]	
+	flags: [ attack target_other can_be_dodged can_be_parried can_miss use_weapon_icon ]	
 	
 	effect damage:
 	{
@@ -52,6 +54,7 @@ class fighter:
 			
 			unlock_abilities:
 			[
+				fighter_attack
 				strike
 				knock
 				gaze_of_death

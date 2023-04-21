@@ -57,6 +57,9 @@ namespace kpublic
 				Components::CombatPrivate*	aSourceCombatPrivate,
 				Components::CombatPublic*	aTargetCombatPublic,
 				CombatEvent::Id				aId,
+				uint32_t					aAbilityId,
+				uint32_t					aSourceEntityInstanceId,
+				uint32_t					aTargetEntityInstanceId,
 				ICombatResultQueue*			aCombatResultQueue)
 			{
 				(void)aRandom;
@@ -65,6 +68,9 @@ namespace kpublic
 				(void)aTargetCombatPublic;
 				(void)aId;
 				(void)aCombatResultQueue;
+				(void)aAbilityId;
+				(void)aSourceEntityInstanceId;
+				(void)aTargetEntityInstanceId;
 			}
 
 			// Public data

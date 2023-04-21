@@ -107,6 +107,8 @@ namespace kpublic
 							m_properties.push_back({ PROPERTY_TYPE_WEAPON_DAMAGE_MAX, aChild->GetUInt32() });
 						else if (aChild->m_name == "rarity")
 							m_properties.push_back({ PROPERTY_TYPE_RARITY, Rarity::StringToId(aChild->GetIdentifier()) });
+						else if (aChild->m_name == "icon")
+							m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
 						else if (aChild->m_name == "name")
 							m_name = aChild->GetString();
 						else if (aChild->m_name == "suffix")
@@ -141,6 +143,7 @@ namespace kpublic
 					aStream->WriteObjects(m_properties);
 					aStream->WriteString(m_name);
 					aStream->WriteString(m_suffix);
+					aStream->WriteUInt(m_iconSpriteId);
 					aStream->WriteUInt(m_chance);
 					aStream->WriteUInt(m_weight);
 					aStream->WriteObjectPointers(m_weightedChildren);
@@ -156,6 +159,8 @@ namespace kpublic
 					if (!aStream->ReadString(m_name))
 						return false;
 					if (!aStream->ReadString(m_suffix))
+						return false;
+					if (!aStream->ReadUInt(m_iconSpriteId))
 						return false;
 					if (!aStream->ReadUInt(m_chance))
 						return false;
@@ -177,8 +182,9 @@ namespace kpublic
 				std::vector<AddedStat>				m_addedStats;
 				std::string							m_name;
 				std::string							m_suffix;
+				uint32_t							m_iconSpriteId = 0;
 				uint32_t							m_chance = 0;
-				uint32_t							m_weight = 0;
+				uint32_t							m_weight = 0;				
 				uint32_t							m_totalChildWeight = 0;
 				std::vector<std::unique_ptr<Node>>	m_weightedChildren;
 				std::vector<std::unique_ptr<Node>>	m_randomChildren;

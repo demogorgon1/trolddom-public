@@ -126,6 +126,9 @@ namespace kpublic
 				Components::CombatPrivate*	aSourceCombatPrivate,
 				Components::CombatPublic*	aTargetCombatPublic,
 				CombatEvent::Id				aId,
+				uint32_t					aAbilityId,
+				uint32_t					aSourceEntityInstanceId,
+				uint32_t					aTargetEntityInstanceId,
 				ICombatResultQueue*			aCombatResultQueue) override
 			{
 				uint32_t damage = 0;
@@ -165,7 +168,16 @@ namespace kpublic
 
 				size_t healthResourceIndex;
 				if(aTargetCombatPublic->GetResourceIndex(Resource::ID_HEALTH, healthResourceIndex))
-					aCombatResultQueue->AddResourceChange(aTargetCombatPublic, healthResourceIndex, -(int32_t)damage);
+				{
+					aCombatResultQueue->AddResourceChange(
+						result,
+						aAbilityId,
+						aSourceEntityInstanceId,
+						aTargetEntityInstanceId,
+						aTargetCombatPublic, 
+						healthResourceIndex,
+						-(int32_t)damage);
+				}
 			}
 
 			// Public data

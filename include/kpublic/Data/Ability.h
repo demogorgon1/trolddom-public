@@ -17,13 +17,14 @@ namespace kpublic
 
 			enum Flag : uint8_t
 			{
-				FLAG_TARGET_SELF	= 0x01,
-				FLAG_TARGET_OTHER	= 0x02,
-				FLAG_CAN_MISS		= 0x04,
-				FLAG_CAN_BE_DODGED	= 0x08,
-				FLAG_CAN_BE_PARRIED = 0x10,
-				FLAG_CAN_BE_BLOCKED = 0x20,
-				FLAG_ATTACK			= 0x40
+				FLAG_TARGET_SELF		= 0x01,
+				FLAG_TARGET_OTHER		= 0x02,
+				FLAG_CAN_MISS			= 0x04,
+				FLAG_CAN_BE_DODGED		= 0x08,
+				FLAG_CAN_BE_PARRIED		= 0x10,
+				FLAG_CAN_BE_BLOCKED		= 0x20,
+				FLAG_ATTACK				= 0x40,
+				FLAG_USE_WEAPON_ICON	= 0x80
 			};
 
 			static inline uint8_t
@@ -49,6 +50,8 @@ namespace kpublic
 						flags |= FLAG_CAN_BE_BLOCKED;
 					else if (strcmp(identifier, "attack") == 0)
 						flags |= FLAG_ATTACK;
+					else if (strcmp(identifier, "use_weapon_icon") == 0)
+						flags |= FLAG_USE_WEAPON_ICON;
 					else
 						KP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid ability flag.", identifier);
 				});
@@ -134,6 +137,8 @@ namespace kpublic
 						m_range = aMember->GetUInt32();
 					else if (aMember->m_name == "cooldown")
 						m_cooldown = aMember->GetUInt32();
+					else if (aMember->m_name == "icon")
+						m_iconSpriteId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aMember->GetIdentifier());
 					else if (aMember->m_name == "flags")
 						m_flags = GetFlags(aMember);
 					else if(aMember->m_tag == "effect")
@@ -151,6 +156,7 @@ namespace kpublic
 				aStream->WriteString(m_displayName);
 				aStream->WriteUInt(m_range);
 				aStream->WriteUInt(m_cooldown);
+				aStream->WriteUInt(m_iconSpriteId);
 				aStream->WriteObjectPointers(m_effects);
 				aStream->WritePOD(m_flags);
 			}
@@ -167,6 +173,8 @@ namespace kpublic
 					return false;
 				if (!aStream->ReadUInt(m_cooldown))
 					return false;
+				if (!aStream->ReadUInt(m_iconSpriteId))
+					return false;
 				if(!aStream->ReadObjectPointers(m_effects))
 					return false;
 				if(!aStream->ReadPOD(m_flags))
@@ -179,6 +187,7 @@ namespace kpublic
 			uint32_t									m_range = 1;
 			uint32_t									m_cooldown = 10;
 			uint8_t										m_flags = 0;
+			uint32_t									m_iconSpriteId = 0;
 			std::vector<std::unique_ptr<EffectEntry>>	m_effects;
 		};
 

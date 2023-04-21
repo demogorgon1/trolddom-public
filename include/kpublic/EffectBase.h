@@ -80,6 +80,9 @@ namespace kpublic
 							Components::CombatPrivate*	/*aSourceCombatPrivate*/,
 							Components::CombatPublic*	/*aTargetCombatPublic*/,
 							CombatEvent::Id				/*aId*/,
+							uint32_t					/*aAbilityId*/,
+							uint32_t					/*aSourceEntityInstanceId*/,
+							uint32_t					/*aTargetEntityInstanceId*/,
 							ICombatResultQueue*			/*aCombatResultQueue*/) { }
 
 		// Public data

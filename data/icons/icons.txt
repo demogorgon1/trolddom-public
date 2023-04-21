@@ -1,0 +1,13 @@
+sprites:
+{
+	source: "icons.png"
+
+	cursor: { position: [ 0 0 ] }
+
+	size: { width: 16 height: 16 }
+
+	sprite icon_sword_1: { }
+	sprite icon_knock: { }
+	sprite icon_green_sphere : { }
+	sprite icon_strike : { }
+}

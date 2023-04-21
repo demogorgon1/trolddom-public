@@ -10,9 +10,13 @@ map_entity_spawn test_dungeon_monster 1
 map_player_spawn test_dungeon_player_spawn 1
 map_palette test_dungeon_tiles 1
 map_palette test_dungeon_entity_spawns 2
-sprite fighter 1
-sprite test_dungeon_wall 3
-sprite test_dungeon_floor 2
-sprite goblin 4
+sprite icon_strike 4
+sprite icon_knock 1
+sprite icon_green_sphere 2
+sprite fighter 3
+sprite goblin 8
+sprite icon_sword_1 5
+sprite test_dungeon_wall 7
+sprite test_dungeon_floor 6
 faction monsters 1
 item weapon_rusty_sword 1

@@ -7,6 +7,7 @@ item weapon_rusty_sword:
 		weapon_cooldown: 20		
 		required_level: 1
 		name: "Rusty Sword"
+		icon: icon_sword_1
 
 		weighted_child:
 		{
