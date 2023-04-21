@@ -18,29 +18,43 @@ namespace kpublic
 			NUM_IDS
 		};
 
-		// IMPORTANT: Must match Id enum
-		static constexpr const char* RESOURCE_NAMES[] =
+		struct Info
 		{
-			NULL,
-			"health",
-			"mana",
-			"rage",
-			"energy"
+			const char*		m_name;
+			const char*		m_capitalizedName;
 		};
 
-		static_assert(sizeof(RESOURCE_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);
+		// IMPORTANT: Must match Id enum
+		static constexpr const Info INFO[] =
+		{			
+			{ NULL, NULL },
+
+			{ "health",	"Health" },
+			{ "mana",	"Mana" },
+			{ "rage",	"Rage" },
+			{ "energy",	"Energy" }
+		};
+
+		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);
+
+		inline constexpr const Info*
+		GetInfo(
+			Id				aId)
+		{
+			assert((uint32_t)aId < (uint32_t)NUM_IDS);
+			return &INFO[aId];
+		}
 
 		inline constexpr Id
 		StringToId(
-			const char* aString)
+			const char*		aString)
 		{
-			for (uint32_t i = 1; i < (uint32_t)NUM_IDS; i++)
+			for(uint32_t i = 1; i < (uint32_t)NUM_IDS; i++)
 			{
-				assert(RESOURCE_NAMES[i] != NULL);
-				if (strcmp(RESOURCE_NAMES[i], aString) == 0)
+				const Info* t = &INFO[i];
+				if(strcmp(t->m_name, aString) == 0)
 					return (Id)i;
 			}
-
 			return INVALID_ID;
 		}
 

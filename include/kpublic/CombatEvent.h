@@ -18,6 +18,22 @@ namespace kpublic
 			NUM_IDS
 		};
 
+		constexpr bool 
+		IsHit(
+			Id		aId)
+		{
+			switch(aId)
+			{
+			case ID_HIT:
+			case ID_CRITICAL_STRIKE:
+			case ID_BLOCK:
+				return true;
+
+			default:
+				return false;
+			}
+		}
+
 	}
 
 }
