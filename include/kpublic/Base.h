@@ -4,6 +4,7 @@
 #include <functional>
 #include <optional>
 #include <random>
+#include <unordered_set>
 
 #include <assert.h>
 #include <inttypes.h>

@@ -184,7 +184,7 @@ namespace kpublic
 				std::string							m_suffix;
 				uint32_t							m_iconSpriteId = 0;
 				uint32_t							m_chance = 0;
-				uint32_t							m_weight = 0;				
+				uint32_t							m_weight = 1;				
 				uint32_t							m_totalChildWeight = 0;
 				std::vector<std::unique_ptr<Node>>	m_weightedChildren;
 				std::vector<std::unique_ptr<Node>>	m_randomChildren;

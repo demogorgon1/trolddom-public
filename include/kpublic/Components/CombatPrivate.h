@@ -127,15 +127,15 @@ namespace kpublic
 			}
 
 			// Public data
-			uint32_t				m_weaponDamageRangeMin = 0;
-			uint32_t				m_weaponDamageRangeMax = 0;
-			uint32_t				m_weaponCooldown = 0;
-			uint32_t				m_physicalCriticalStrikeChance = (5 * uint64_t(UINT32_MAX) / 100);
-			uint32_t				m_magicalCriticalStrikeChance = (5 * uint64_t(UINT32_MAX) / 100);
-			uint32_t				m_dodgeChance = (5 * uint64_t(UINT32_MAX) / 100);
-			uint32_t				m_parryChance = (5 * uint64_t(UINT32_MAX) / 100);
-			uint32_t				m_missChance = (5 * uint64_t(UINT32_MAX) / 100);
-			uint32_t				m_blockChance = (5 * uint64_t(UINT32_MAX) / 100);
+			uint32_t							m_weaponDamageRangeMin = 0;
+			uint32_t							m_weaponDamageRangeMax = 0;
+			uint32_t							m_weaponCooldown = 0;
+			uint32_t							m_physicalCriticalStrikeChance = (5 * uint64_t(UINT32_MAX) / 100);
+			uint32_t							m_magicalCriticalStrikeChance = (5 * uint64_t(UINT32_MAX) / 100);
+			uint32_t							m_dodgeChance = (5 * uint64_t(UINT32_MAX) / 100);
+			uint32_t							m_parryChance = (5 * uint64_t(UINT32_MAX) / 100);
+			uint32_t							m_missChance = (5 * uint64_t(UINT32_MAX) / 100);
+			uint32_t							m_blockChance = (5 * uint64_t(UINT32_MAX) / 100);
 		};
 
 	}

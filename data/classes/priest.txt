@@ -1,0 +1,47 @@
+ability minor_heal:
+{
+	string: "Minor Heal"
+	range: 6
+	cooldown: 20
+	flags: [ target_other target_self ]
+	icon: icon_heal
+
+	effect heal:
+	{	
+		base: [ 8 12 ]
+	}
+}
+
+class priest:
+{
+	string: "Priest"	
+	sprite: priest
+	default_attack: attack
+	default_action_bar: [ attack minor_heal gaze_of_death ]
+	
+	start_equipment main_hand: weapon_gnarly_staff
+
+	level_progression:
+	[
+		{
+			level: 1
+			
+			unlock_abilities:
+			[
+				attack
+				minor_heal
+				gaze_of_death
+			]
+						
+			stats:
+			{
+				dexterity: 3
+				strength: 3
+				wisdom: 6
+			}
+			
+			resource health: { add_max: 60 }
+			resource mana: { add_max: 60 }
+		}
+	]
+}

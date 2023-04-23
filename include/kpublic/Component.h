@@ -25,6 +25,7 @@ namespace kpublic
 			ID_SPRITE,
 			ID_PLAYER_COOLDOWNS,
 			ID_ACTION_BARS,
+			ID_THREAT,
 
 			NUM_IDS
 		};
@@ -47,7 +48,8 @@ namespace kpublic
 			"display_name",
 			"sprite",
 			"player_cooldowns",
-			"action_bars"
+			"action_bars",
+			"threat"
 		};		
 
 		static_assert(sizeof(COMPONENT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

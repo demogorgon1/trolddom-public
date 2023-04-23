@@ -57,8 +57,8 @@ namespace kpublic
 								}
 								else if (aChild->m_children.size() == 2)
 								{
-									m_damageBaseRangeMin = aChild->m_children[1]->GetUInt32();
-									m_damageBaseRangeMax = aChild->m_children[2]->GetUInt32();
+									m_damageBaseRangeMin = aChild->m_children[0]->GetUInt32();
+									m_damageBaseRangeMax = aChild->m_children[1]->GetUInt32();
 								}
 								else
 								{
@@ -162,7 +162,7 @@ namespace kpublic
 					{
 						damage = (damage * 3) / 2;
 
-						result = CombatEvent::ID_CRITICAL_STRIKE;
+						result = CombatEvent::ID_CRITICAL;
 					}
 				}
 
@@ -177,6 +177,12 @@ namespace kpublic
 						aTargetCombatPublic, 
 						healthResourceIndex,
 						-(int32_t)damage);
+
+					int32_t threat = (int32_t)damage;
+					if(result == CombatEvent::ID_CRITICAL)
+						threat = (threat * 3) / 2;
+
+					aCombatResultQueue->AddThreatChange(aSourceEntityInstanceId, aTargetEntityInstanceId, threat);
 				}
 			}
 

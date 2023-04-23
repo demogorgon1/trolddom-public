@@ -10,4 +10,6 @@ sprites:
 	sprite icon_knock: { }
 	sprite icon_green_sphere : { }
 	sprite icon_strike : { }
+	sprite icon_heal : { }
+	sprite icon_staff_1 : { }
 }

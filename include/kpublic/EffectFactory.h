@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Effects/Damage.h"
+#include "Effects/Heal.h"
 #include "Effects/Kill.h"
 #include "Effects/Stun.h"
 
@@ -15,6 +16,7 @@ namespace kpublic
 		EffectFactory()
 		{
 			_Register<Effects::Damage>();
+			_Register<Effects::Heal>();
 			_Register<Effects::Kill>();
 			_Register<Effects::Stun>();
 		}

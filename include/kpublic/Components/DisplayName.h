@@ -12,7 +12,7 @@ namespace kpublic
 			: public ComponentBase
 		{
 			static const Component::Id ID = Component::ID_DISPLAY_NAME;
-			static const uint8_t FLAGS = FLAG_PRIVATE | FLAG_PUBLIC;
+			static const uint8_t FLAGS = FLAG_PUBLIC | FLAG_PRIVATE;
 
 			DisplayName()
 				: ComponentBase(ID, FLAGS)

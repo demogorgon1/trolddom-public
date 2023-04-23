@@ -69,6 +69,7 @@ namespace kpublic
 			INVALID_ID,
 
 			ID_DAMAGE,
+			ID_HEAL,
 			ID_STUN,
 			ID_KILL,
 
@@ -80,6 +81,7 @@ namespace kpublic
 		{
 			NULL,
 			"damage",
+			"heal",
 			"stun",
 			"kill"
 		};

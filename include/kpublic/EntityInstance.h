@@ -22,7 +22,6 @@ namespace kpublic
 
 		~EntityInstance()
 		{
-
 		}
 
 		void
@@ -38,8 +37,6 @@ namespace kpublic
 		AddComponent(
 			ComponentBase*			aComponent)
 		{
-			assert(aComponent != NULL);
-			
 			// FIXME: this kinda defeats much of the purpose of using ECS
 			m_components.push_back(std::unique_ptr<ComponentBase>(aComponent));
 		}
@@ -116,6 +113,9 @@ namespace kpublic
 				if(aOutUpdatedComponents != NULL)
 					aOutUpdatedComponents->push_back(m_components[index].get());
 
+				if(!m_components[index])
+					return false;
+
 				if(!m_components[index]->FromStream(aReader))
 					return false;
 			}
@@ -128,7 +128,7 @@ namespace kpublic
 		{
 			for(std::unique_ptr<ComponentBase>& component : m_components)
 			{
-				if(component->GetComponentId() == _T::ID)
+				if(component && component->GetComponentId() == _T::ID)
 					return (_T*)component.get();
 			}
 			return NULL;
@@ -140,7 +140,7 @@ namespace kpublic
 		{
 			for(const std::unique_ptr<ComponentBase>& component : m_components)
 			{
-				if(component->GetComponentId() == _T::ID)
+				if(component && component->GetComponentId() == _T::ID)
 					return (const _T*)component.get();
 			}
 			return NULL;
@@ -152,7 +152,7 @@ namespace kpublic
 		{
 			for (std::unique_ptr<ComponentBase>& component : m_components)
 			{
-				if(component->GetComponentId() == aComponentId)
+				if(component && component->GetComponentId() == aComponentId)
 					return component.get();
 			}
 			return NULL;

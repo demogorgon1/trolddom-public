@@ -4,6 +4,7 @@
 #include <kpublic/Components/NPC.h>
 #include <kpublic/Components/Position.h>
 #include <kpublic/Components/Sprite.h>
+#include <kpublic/Components/Threat.h>
 
 #include <kpublic/Systems/NPC.h>
 
@@ -25,6 +26,7 @@ namespace kpublic::Systems
 		RequireComponent<Components::NPC>();
 		RequireComponent<Components::Position>();
 		RequireComponent<Components::Sprite>();
+		RequireComponent<Components::Threat>();
 	}
 	
 	NPC::~NPC()
@@ -65,6 +67,7 @@ namespace kpublic::Systems
 		Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
 		Components::Position* position = GetComponent<Components::Position>(aComponents);
 		Components::Sprite* sprite = GetComponent<Components::Sprite>(aComponents);
+		Components::Threat* threat = GetComponent<Components::Threat>(aComponents);
 
 		const Components::NPC::StateEntry* state = npc->GetState(aEntityState);
 		if (state != NULL)
@@ -78,39 +81,52 @@ namespace kpublic::Systems
 		}
 
 		npc->m_cooldowns.Update(aContext->m_tick);
+		threat->m_table.Update(aContext->m_tick);
 
 		EntityState::Id returnValue = EntityState::CONTINUE;
 
+		if(aEntityState != EntityState::ID_DEAD)
+		{
+			if(aContext->m_tick - threat->m_lastPingTick >= Components::Threat::PING_INTERVAL_TICKS)
+			{
+				aContext->m_worldView->QueryAllEntityInstances([&](
+					const EntityInstance* aEntity)
+				{
+					if (aEntity->IsPlayer())
+					{
+						if (Helpers::IsWithinDistance(aEntity->GetComponent<Components::Position>(), position, 3))
+						{
+							threat->m_table.Add(aContext->m_tick, aEntity->GetEntityInstanceId(), 0);
+						}
+					}
+
+					return false;
+				});
+
+				threat->m_lastPingTick = aContext->m_tick;
+			}
+		}
+		
 		switch(aEntityState)
 		{
 		case EntityState::ID_DEFAULT:
-			aContext->m_worldView->QueryAllEntityInstances([&](
-				const EntityInstance* aEntity)
+			if (!threat->m_table.IsEmpty())
 			{
-				if(aEntity->IsPlayer())
-				{
-					if(Helpers::IsWithinDistance(aEntity->GetComponent<Components::Position>(), position, 3))
-					{
-						combat->m_targetEntityInstanceId = aEntity->GetEntityInstanceId();
-
-						returnValue = EntityState::ID_IN_COMBAT;
-					}
-				}
-
-				return false;
-			});
+				combat->m_targetEntityInstanceId = threat->m_table.GetTop()->m_entityInstanceId;
+				returnValue = EntityState::ID_IN_COMBAT;
+			}
 			break;
 
 		case EntityState::ID_IN_COMBAT:
 			{
 				const EntityInstance* target = aContext->m_worldView->QuerySingleEntityInstance(combat->m_targetEntityInstanceId);
-				if(target == NULL)
+				if (target == NULL)
 				{
 					combat->m_targetEntityInstanceId = 0;
 
 					returnValue = EntityState::ID_DEFAULT;
 				}
-				else if(state != NULL)
+				else if (state != NULL)
 				{
 					const Components::Position* targetPosition = target->GetComponent<Components::Position>();
 
@@ -120,18 +136,18 @@ namespace kpublic::Systems
 
 					const Data::Ability* useAbility = NULL;
 
-					for(const Components::NPC::AbilityEntry& abilityEntry : state->m_abilities)
+					for (const Components::NPC::AbilityEntry& abilityEntry : state->m_abilities)
 					{
 						const Data::Ability* ability = GetManifest()->m_abilities.GetById(abilityEntry.m_abilityId);
 
-						if(distanceSquared <= (int32_t)(ability->m_range * ability->m_range) && npc->m_cooldowns.Get(ability->m_id) == NULL)
+						if (distanceSquared <= (int32_t)(ability->m_range * ability->m_range) && npc->m_cooldowns.Get(ability->m_id) == NULL)
 						{
-							if(abilityEntry.m_useProbability == UINT32_MAX || (*aContext->m_random)() < abilityEntry.m_useProbability)
+							if (abilityEntry.m_useProbability == UINT32_MAX || (*aContext->m_random)() < abilityEntry.m_useProbability)
 								useAbility = ability;
 						}
 					}
 
-					if(useAbility != NULL)
+					if (useAbility != NULL)
 					{
 						npc->m_cooldowns.Add(useAbility, aContext->m_tick);
 

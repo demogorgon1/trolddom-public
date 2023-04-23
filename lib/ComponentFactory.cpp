@@ -14,6 +14,7 @@
 #include <kpublic/Components/Position.h>
 #include <kpublic/Components/Sprite.h>
 #include <kpublic/Components/Talents.h>
+#include <kpublic/Components/Threat.h>
 #include <kpublic/Components/Wallet.h>
 
 #include <kpublic/ComponentFactory.h>
@@ -37,6 +38,7 @@ namespace kpublic
 		_Register<Components::Position>();
 		_Register<Components::Sprite>();
 		_Register<Components::Talents>();
+		_Register<Components::Threat>();
 		_Register<Components::Wallet>();
 	}
 

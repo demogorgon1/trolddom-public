@@ -13,7 +13,7 @@ namespace kpublic
 			ID_DODGE,
 			ID_PARRY,
 			ID_BLOCK,
-			ID_CRITICAL_STRIKE,
+			ID_CRITICAL,
 
 			NUM_IDS
 		};
@@ -25,7 +25,7 @@ namespace kpublic
 			switch(aId)
 			{
 			case ID_HIT:
-			case ID_CRITICAL_STRIKE:
+			case ID_CRITICAL:
 			case ID_BLOCK:
 				return true;
 

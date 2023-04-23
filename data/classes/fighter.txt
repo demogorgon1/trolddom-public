@@ -12,19 +12,6 @@ ability knock:
 	}
 }
 
-ability gaze_of_death:
-{
-	string: "Gaze of Death"
-	range: 100
-	cooldown: 10
-	flags: [ target_other ]
-	icon: icon_green_sphere
-	
-	effect kill:
-	{
-	}
-}
-
 ability fighter_attack:
 {
 	string: "Attack"
@@ -43,7 +30,7 @@ class fighter:
 	string: "Fighter"	
 	sprite: fighter
 	default_attack: fighter_attack
-	default_action_bar: [ fighter_attack knock ]
+	default_action_bar: [ fighter_attack knock strike gaze_of_death ]
 	
 	start_equipment main_hand: weapon_rusty_sword
 

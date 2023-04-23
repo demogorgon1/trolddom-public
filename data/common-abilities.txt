@@ -1,3 +1,16 @@
+ability attack:
+{
+	string: "Attack"
+	flags: [ attack target_other can_be_dodged can_be_parried can_miss use_weapon_icon ]	
+	
+	effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical			
+		base: weapon
+	}
+}
+
 ability strike:
 {
 	string: "Strike"
@@ -11,5 +24,18 @@ ability strike:
 		flags: [ can_be_critical ]
 		damage_type: physical
 		base: weapon
+	}
+}
+
+ability gaze_of_death:
+{
+	string: "Gaze of Death"
+	range: 100
+	cooldown: 10
+	flags: [ target_other ]
+	icon: icon_green_sphere
+	
+	effect kill:
+	{
 	}
 }

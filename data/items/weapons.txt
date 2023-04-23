@@ -30,3 +30,23 @@ item weapon_rusty_sword:
 		}
 	}
 }
+
+item weapon_gnarly_staff:
+{
+	equipment_slots: [ main_hand ]
+		
+	root:
+	{
+		weapon_cooldown: 30		
+		required_level: 1
+		name: "Gnarly Staff"
+		icon: icon_staff_1
+
+		weighted_child:
+		{
+			rarity: common
+			weapon_damage_min: 3
+			weapon_damage_max: 7
+		}			
+	}
+}
