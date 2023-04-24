@@ -8,8 +8,9 @@ namespace kpublic
 {
 	
 	class EntityInstance;
-	class ICombatEventQueue;
+	class IAbilityQueue;
 	class IMoveRequestQueue;
+	class IThreatEventQueue;
 	class IWorldView;
 	class Manifest;
 
@@ -19,8 +20,9 @@ namespace kpublic
 		struct Context
 		{
 			// Public data
-			ICombatEventQueue*	m_combatEventQueue = NULL;
+			IAbilityQueue*		m_abilityQueue = NULL;
 			IMoveRequestQueue*	m_moveRequestQueue = NULL;
+			IThreatEventQueue*	m_threatEventQueue = NULL;
 			const IWorldView*	m_worldView = NULL;
 			uint32_t			m_tick = 0;
 			std::mt19937*		m_random = NULL;

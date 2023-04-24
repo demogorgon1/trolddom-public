@@ -9,22 +9,22 @@ namespace kpublic
 	namespace Components
 	{
 
-		struct Threat
+		struct ThreatTarget
 			: public ComponentBase
 		{			
-			static const Component::Id ID = Component::ID_THREAT;
+			static const Component::Id ID = Component::ID_THREAT_TARGET;
 			static const uint8_t FLAGS = 0;
 
 			static const uint32_t PING_INTERVAL_TICKS = 10;
 
-			Threat()
+			ThreatTarget()
 				: ComponentBase(ID, FLAGS)
 			{
 
 			}
 
 			virtual
-			~Threat()
+			~ThreatTarget()
 			{
 
 			}

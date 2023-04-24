@@ -2,10 +2,12 @@
 
 #include "../Components/CombatPrivate.h"
 #include "../Components/CombatPublic.h"
+#include "../Components/ThreatSource.h"
 
 #include "../EffectBase.h"
 #include "../Helpers.h"
-#include "../ICombatResultQueue.h"
+#include "../IResourceChangeQueue.h"
+#include "../IThreatEventQueue.h"
 #include "../Resource.h"
 
 namespace kpublic
@@ -97,22 +99,26 @@ namespace kpublic
 			void
 			Resolve(
 				std::mt19937&				aRandom,
-				Components::CombatPublic*	/*aSourceCombatPublic*/,
-				Components::CombatPrivate*	aSourceCombatPrivate,
-				Components::CombatPublic*	aTargetCombatPublic,
 				CombatEvent::Id				aId,
 				uint32_t					aAbilityId,
-				uint32_t					aSourceEntityInstanceId,
-				uint32_t					aTargetEntityInstanceId,
-				ICombatResultQueue*			aCombatResultQueue) override
+				const EntityInstance*		aSource,
+				EntityInstance*				aTarget,
+				IResourceChangeQueue*		aResourceChangeQueue,
+				IThreatEventQueue*			aThreatEventQueue) override
 			{
+				const Components::CombatPrivate* sourceCombatPrivate = aSource->GetComponent<Components::CombatPrivate>();
+				Components::CombatPublic* targetCombatPublic = aTarget->GetComponent<Components::CombatPublic>();
+
+				if(sourceCombatPrivate == NULL || targetCombatPublic == NULL)
+					return;
+
 				uint32_t heal = Helpers::RandomInRange(aRandom, m_baseMin, m_baseMax);
 				
 				CombatEvent::Id result = aId;
 
 				if(m_flags & Effect::FLAG_CAN_BE_CRITICAL && aId == CombatEvent::ID_HIT)
 				{
-					float chance = (float)aSourceCombatPrivate->m_magicalCriticalStrikeChance / (float)UINT32_MAX;
+					float chance = (float)sourceCombatPrivate->m_magicalCriticalStrikeChance / (float)UINT32_MAX;
 
 					if(Helpers::RandomFloat(aRandom) < chance)
 					{
@@ -122,22 +128,31 @@ namespace kpublic
 				}
 
 				size_t healthResourceIndex;
-				if(aTargetCombatPublic->GetResourceIndex(Resource::ID_HEALTH, healthResourceIndex))
+				if(targetCombatPublic->GetResourceIndex(Resource::ID_HEALTH, healthResourceIndex))
 				{
-					aCombatResultQueue->AddResourceChange(
+					aResourceChangeQueue->AddResourceChange(
 						result,
 						aAbilityId,
-						aSourceEntityInstanceId,
-						aTargetEntityInstanceId,
-						aTargetCombatPublic, 
+						aSource->GetEntityInstanceId(),
+						aTarget->GetEntityInstanceId(),
+						targetCombatPublic,
 						healthResourceIndex,
 						(int32_t)heal);
 
-					//int32_t threat = (int32_t)damage;
-					//if(result == CombatEvent::ID_CRITICAL)
-					//	threat = (threat * 3) / 2;
+					// Anyone on the target's threat target list should gain threat from this
+					const Components::ThreatSource* targetThreatSource = aTarget->GetComponent<Components::ThreatSource>();
 
-					//aCombatResultQueue->AddThreatChange(aSourceEntityInstanceId, aTargetEntityInstanceId, threat);
+					if(targetThreatSource != NULL)
+					{
+						int32_t threat = (int32_t)heal;
+						if(result == CombatEvent::ID_CRITICAL)
+							threat = (threat * 3) / 2;
+
+						for(std::unordered_map<uint32_t, uint32_t>::const_iterator i = targetThreatSource->m_targets.cbegin(); i != targetThreatSource->m_targets.cend(); i++)
+						{
+							aThreatEventQueue->AddThreatEvent(aSource->GetEntityInstanceId(), i->first, threat);
+						}
+					}
 				}
 			}
 

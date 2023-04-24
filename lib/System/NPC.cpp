@@ -4,13 +4,13 @@
 #include <kpublic/Components/NPC.h>
 #include <kpublic/Components/Position.h>
 #include <kpublic/Components/Sprite.h>
-#include <kpublic/Components/Threat.h>
+#include <kpublic/Components/ThreatTarget.h>
 
 #include <kpublic/Systems/NPC.h>
 
 #include <kpublic/EntityInstance.h>
 #include <kpublic/Helpers.h>
-#include <kpublic/ICombatEventQueue.h>
+#include <kpublic/IAbilityQueue.h>
 #include <kpublic/IMoveRequestQueue.h>
 #include <kpublic/IWorldView.h>
 #include <kpublic/Manifest.h>
@@ -26,7 +26,7 @@ namespace kpublic::Systems
 		RequireComponent<Components::NPC>();
 		RequireComponent<Components::Position>();
 		RequireComponent<Components::Sprite>();
-		RequireComponent<Components::Threat>();
+		RequireComponent<Components::ThreatTarget>();
 	}
 	
 	NPC::~NPC()
@@ -67,7 +67,7 @@ namespace kpublic::Systems
 		Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
 		Components::Position* position = GetComponent<Components::Position>(aComponents);
 		Components::Sprite* sprite = GetComponent<Components::Sprite>(aComponents);
-		Components::Threat* threat = GetComponent<Components::Threat>(aComponents);
+		Components::ThreatTarget* threat = GetComponent<Components::ThreatTarget>(aComponents);
 
 		const Components::NPC::StateEntry* state = npc->GetState(aEntityState);
 		if (state != NULL)
@@ -87,7 +87,7 @@ namespace kpublic::Systems
 
 		if(aEntityState != EntityState::ID_DEAD)
 		{
-			if(aContext->m_tick - threat->m_lastPingTick >= Components::Threat::PING_INTERVAL_TICKS)
+			if(aContext->m_tick - threat->m_lastPingTick >= Components::ThreatTarget::PING_INTERVAL_TICKS)
 			{
 				aContext->m_worldView->QueryAllEntityInstances([&](
 					const EntityInstance* aEntity)
@@ -95,9 +95,7 @@ namespace kpublic::Systems
 					if (aEntity->IsPlayer())
 					{
 						if (Helpers::IsWithinDistance(aEntity->GetComponent<Components::Position>(), position, 3))
-						{
-							threat->m_table.Add(aContext->m_tick, aEntity->GetEntityInstanceId(), 0);
-						}
+							aContext->m_threatEventQueue->AddThreatEvent(aEntity->GetEntityInstanceId(), aEntityInstanceId, 0);
 					}
 
 					return false;
@@ -151,7 +149,7 @@ namespace kpublic::Systems
 					{
 						npc->m_cooldowns.Add(useAbility, aContext->m_tick);
 
-						aContext->m_combatEventQueue->AddCombatEvent(aEntityInstanceId, target->GetEntityInstanceId(), useAbility);
+						aContext->m_abilityQueue->AddAbility(aEntityInstanceId, target->GetEntityInstanceId(), useAbility);
 					}
 					else
 					{

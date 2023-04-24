@@ -16,7 +16,7 @@
 #include "EffectBase.h"
 #include "EffectFactory.h"
 #include "EntityInstance.h"
-#include "ICombatEventQueue.h"
+#include "IAbilityQueue.h"
 #include "ItemInstance.h"
 #include "ItemInstanceData.h"
 #include "IMoveRequestQueue.h"

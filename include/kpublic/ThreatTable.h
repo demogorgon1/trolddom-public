@@ -13,7 +13,7 @@ namespace kpublic
 	class ThreatTable
 	{
 	public:
-		static const uint32_t TIMEOUT_TICKS = 50;
+		static const uint32_t TIMEOUT_TICKS = 100;
 
 		struct Entry
 		{

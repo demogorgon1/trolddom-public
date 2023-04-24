@@ -8,10 +8,10 @@ namespace kpublic
 		struct CombatPublic;
 	}
 
-	class ICombatResultQueue
+	class IResourceChangeQueue
 	{
 	public:
-		virtual				~ICombatResultQueue() {}
+		virtual				~IResourceChangeQueue() {}
 
 		// Virtual interface
 		virtual void		AddResourceChange(
@@ -22,11 +22,6 @@ namespace kpublic
 								Components::CombatPublic*		aCombat,
 								size_t							aResourceIndex,
 								int32_t							aChange) = 0;
-		virtual	void		AddThreatChange(
-								uint32_t						aSourceEntityInstanceId,
-								uint32_t						aTargetEntityInstanceId,
-								int32_t							aThreat) = 0;
-
 	};
 
 }

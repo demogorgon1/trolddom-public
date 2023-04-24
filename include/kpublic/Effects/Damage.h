@@ -4,8 +4,10 @@
 #include "../Components/CombatPublic.h"
 
 #include "../EffectBase.h"
+#include "../EntityInstance.h"
 #include "../Helpers.h"
-#include "../ICombatResultQueue.h"
+#include "../IResourceChangeQueue.h"
+#include "../IThreatEventQueue.h"
 #include "../Resource.h"
 
 namespace kpublic
@@ -122,17 +124,21 @@ namespace kpublic
 			void
 			Resolve(
 				std::mt19937&				aRandom,
-				Components::CombatPublic*	/*aSourceCombatPublic*/,
-				Components::CombatPrivate*	aSourceCombatPrivate,
-				Components::CombatPublic*	aTargetCombatPublic,
 				CombatEvent::Id				aId,
 				uint32_t					aAbilityId,
-				uint32_t					aSourceEntityInstanceId,
-				uint32_t					aTargetEntityInstanceId,
-				ICombatResultQueue*			aCombatResultQueue) override
+				const EntityInstance*		aSource,
+				EntityInstance*				aTarget,
+				IResourceChangeQueue*		aResourceChangeQueue,
+				IThreatEventQueue*			aThreatEventQueue) override
 			{
+				const Components::CombatPrivate* sourceCombatPrivate = aSource->GetComponent<Components::CombatPrivate>();
+				Components::CombatPublic* targetCombatPublic = aTarget->GetComponent<Components::CombatPublic>();
+
+				if(sourceCombatPrivate || targetCombatPublic == NULL)
+					return;
+
 				uint32_t damage = 0;
-				
+
 				switch(m_damageBase)
 				{
 				case Effect::DAMAGE_BASE_RANGE:		
@@ -140,7 +146,7 @@ namespace kpublic
 					break;
 
 				case Effect::DAMAGE_BASE_WEAPON:
-					damage = Helpers::RandomInRange(aRandom, aSourceCombatPrivate->m_weaponDamageRangeMin, aSourceCombatPrivate->m_weaponDamageRangeMax);
+					damage = Helpers::RandomInRange(aRandom, sourceCombatPrivate->m_weaponDamageRangeMin, sourceCombatPrivate->m_weaponDamageRangeMax);
 					break;
 
 				default:
@@ -154,9 +160,9 @@ namespace kpublic
 					float chance = 0.0f;
 
 					if(m_flags & Effect::FLAG_IS_MAGICAL)
-						chance = (float)aSourceCombatPrivate->m_magicalCriticalStrikeChance / (float)UINT32_MAX;
+						chance = (float)sourceCombatPrivate->m_magicalCriticalStrikeChance / (float)UINT32_MAX;
 					else
-						chance = (float)aSourceCombatPrivate->m_physicalCriticalStrikeChance / (float)UINT32_MAX;
+						chance = (float)sourceCombatPrivate->m_physicalCriticalStrikeChance / (float)UINT32_MAX;
 
 					if(Helpers::RandomFloat(aRandom) < chance)
 					{
@@ -167,14 +173,14 @@ namespace kpublic
 				}
 
 				size_t healthResourceIndex;
-				if(aTargetCombatPublic->GetResourceIndex(Resource::ID_HEALTH, healthResourceIndex))
+				if(targetCombatPublic->GetResourceIndex(Resource::ID_HEALTH, healthResourceIndex))
 				{
-					aCombatResultQueue->AddResourceChange(
+					aResourceChangeQueue->AddResourceChange(
 						result,
 						aAbilityId,
-						aSourceEntityInstanceId,
-						aTargetEntityInstanceId,
-						aTargetCombatPublic, 
+						aSource->GetEntityInstanceId(),
+						aTarget->GetEntityInstanceId(),
+						targetCombatPublic,
 						healthResourceIndex,
 						-(int32_t)damage);
 
@@ -182,7 +188,7 @@ namespace kpublic
 					if(result == CombatEvent::ID_CRITICAL)
 						threat = (threat * 3) / 2;
 
-					aCombatResultQueue->AddThreatChange(aSourceEntityInstanceId, aTargetEntityInstanceId, threat);
+					aThreatEventQueue->AddThreatEvent(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), threat);
 				}
 			}
 

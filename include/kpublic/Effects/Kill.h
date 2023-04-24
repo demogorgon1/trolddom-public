@@ -60,7 +60,7 @@ namespace kpublic
 				uint32_t					aAbilityId,
 				uint32_t					aSourceEntityInstanceId,
 				uint32_t					aTargetEntityInstanceId,
-				ICombatResultQueue*			aCombatResultQueue)
+				IResourceChangeQueue*			aCombatResultQueue)
 			{
 				(void)aRandom;
 				(void)aSourceCombatPublic;

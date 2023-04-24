@@ -16,7 +16,8 @@ namespace kpublic
 	}
 
 	class EntityInstance;
-	class ICombatResultQueue;
+	class IResourceChangeQueue;
+	class IThreatEventQueue;
 
 	class EffectBase
 	{
@@ -76,14 +77,12 @@ namespace kpublic
 							IReader*					/*aStream*/) { assert(false); return true; }
 		virtual void	Resolve(
 							std::mt19937&				/*aRandom*/,
-							Components::CombatPublic*	/*aSourceCombatPublic*/,
-							Components::CombatPrivate*	/*aSourceCombatPrivate*/,
-							Components::CombatPublic*	/*aTargetCombatPublic*/,
 							CombatEvent::Id				/*aId*/,
 							uint32_t					/*aAbilityId*/,
-							uint32_t					/*aSourceEntityInstanceId*/,
-							uint32_t					/*aTargetEntityInstanceId*/,
-							ICombatResultQueue*			/*aCombatResultQueue*/) { }
+							const EntityInstance*		/*aSource*/,
+							EntityInstance*				/*aTarget*/,
+							IResourceChangeQueue*		/*aCombatResultQueue*/,
+							IThreatEventQueue*			/*aThreatEventQueue*/) { }
 
 		// Public data
 		uint32_t		m_flags = 0;		

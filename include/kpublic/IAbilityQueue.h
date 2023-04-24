@@ -3,13 +3,13 @@
 namespace kpublic
 {
 
-	class ICombatEventQueue
+	class IAbilityQueue
 	{
 	public:
-		virtual ~ICombatEventQueue() {}
+		virtual ~IAbilityQueue() {}
 
 		// Virtual interface
-		virtual void		AddCombatEvent(
+		virtual void		AddAbility(
 								uint32_t				aSourceEntityInstanceId,
 								uint32_t				aTargetEntityInstanceId,
 								const Data::Ability*	aAbility) = 0;

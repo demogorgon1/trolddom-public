@@ -8,7 +8,7 @@ entity goblin:
 	{
 		position: { }		
 		sprite: { }
-		threat: { }
+		threat_target: { }
 		combat_public: 
 		{  
 			level: 1
