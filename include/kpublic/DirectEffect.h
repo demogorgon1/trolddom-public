@@ -70,7 +70,7 @@ namespace kpublic
 
 			ID_DAMAGE,
 			ID_HEAL,
-			ID_STUN,
+			ID_APPLY_AURA,
 			ID_KILL,
 
 			NUM_IDS
@@ -82,7 +82,7 @@ namespace kpublic
 			NULL,
 			"damage",
 			"heal",
-			"stun",
+			"apply_aura",
 			"kill"
 		};
 

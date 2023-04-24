@@ -3,6 +3,9 @@
 #include "Base.h"
 
 #include "ActionBar.h"
+#include "AuraEffect.h"
+#include "AuraEffectBase.h"
+#include "AuraEffectFactory.h"
 #include "CombatEvent.h"
 #include "Compiler.h"
 #include "Component.h"
@@ -17,6 +20,7 @@
 #include "DirectEffectFactory.h"
 #include "EntityInstance.h"
 #include "IAbilityQueue.h"
+#include "IAuraEventQueue.h"
 #include "ItemInstance.h"
 #include "ItemInstanceData.h"
 #include "IMoveRequestQueue.h"

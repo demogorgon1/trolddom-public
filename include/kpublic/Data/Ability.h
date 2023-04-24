@@ -71,7 +71,7 @@ namespace kpublic
 					m_directEffectId = DirectEffect::StringToId(aSource->m_name.c_str());
 					KP_VERIFY(m_directEffectId != DirectEffect::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid direct effect.", aSource->m_name.c_str());
 
-					std::unique_ptr<DirectEffectBase> effect(aSource->m_sourceContext->m_effectFactory->Create(m_directEffectId));
+					std::unique_ptr<DirectEffectBase> effect(aSource->m_sourceContext->m_directEffectFactory->Create(m_directEffectId));
 					assert(effect);
 
 					if (!aSource->m_children.empty())
@@ -141,7 +141,7 @@ namespace kpublic
 						m_iconSpriteId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aMember->GetIdentifier());
 					else if (aMember->m_name == "flags")
 						m_flags = GetFlags(aMember);
-					else if(aMember->m_tag == "effect")
+					else if(aMember->m_tag == "direct_effect")
 						m_directEffects.push_back(std::make_unique<DirectEffectEntry>(aMember->GetObject()));
 					else
 						KP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());

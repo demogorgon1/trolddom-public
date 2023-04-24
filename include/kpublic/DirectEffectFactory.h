@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Effects/Damage.h"
-#include "Effects/Heal.h"
-#include "Effects/Kill.h"
-#include "Effects/Stun.h"
+#include "DirectEffects/ApplyAura.h"
+#include "DirectEffects/Damage.h"
+#include "DirectEffects/Heal.h"
+#include "DirectEffects/Kill.h"
 
 #include "DirectEffect.h"
 
@@ -15,10 +15,10 @@ namespace kpublic
 	public:
 		DirectEffectFactory()
 		{
-			_Register<Effects::Damage>();
-			_Register<Effects::Heal>();
-			_Register<Effects::Kill>();
-			_Register<Effects::Stun>();
+			_Register<DirectEffects::ApplyAura>();
+			_Register<DirectEffects::Damage>();
+			_Register<DirectEffects::Heal>();
+			_Register<DirectEffects::Kill>();
 		}
 
 		~DirectEffectFactory()

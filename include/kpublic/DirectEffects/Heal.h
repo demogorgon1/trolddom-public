@@ -13,7 +13,7 @@
 namespace kpublic
 {
 
-	namespace Effects
+	namespace DirectEffects
 	{
 
 		struct Heal
@@ -99,11 +99,13 @@ namespace kpublic
 			void
 			Resolve(
 				std::mt19937&				aRandom,
+				const Manifest*				/*aManifest*/,
 				CombatEvent::Id				aId,
 				uint32_t					aAbilityId,
 				const EntityInstance*		aSource,
 				EntityInstance*				aTarget,
 				IResourceChangeQueue*		aResourceChangeQueue,
+				IAuraEventQueue*			/*aAuraEventQueue*/,
 				IThreatEventQueue*			aThreatEventQueue) override
 			{
 				const Components::CombatPrivate* sourceCombatPrivate = aSource->GetComponent<Components::CombatPrivate>();

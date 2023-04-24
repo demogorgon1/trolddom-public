@@ -8,7 +8,7 @@
 namespace kpublic
 {
 
-	namespace Effects
+	namespace DirectEffects
 	{
 
 		struct Kill

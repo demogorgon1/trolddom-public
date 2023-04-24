@@ -9,6 +9,8 @@ entity goblin:
 		position: { }		
 		sprite: { }
 		threat_target: { }
+		visible_auras: { }
+		auras: { }
 		combat_public: 
 		{  
 			level: 1

@@ -16,8 +16,10 @@ namespace kpublic
 	}
 
 	class EntityInstance;
+	class IAuraEventQueue;
 	class IResourceChangeQueue;
 	class IThreatEventQueue;
+	class Manifest;
 
 	class DirectEffectBase
 	{
@@ -77,11 +79,13 @@ namespace kpublic
 							IReader*					/*aStream*/) { assert(false); return true; }
 		virtual void	Resolve(
 							std::mt19937&				/*aRandom*/,
+							const Manifest*				/*aManifest*/,
 							CombatEvent::Id				/*aId*/,
 							uint32_t					/*aAbilityId*/,
 							const EntityInstance*		/*aSource*/,
 							EntityInstance*				/*aTarget*/,
 							IResourceChangeQueue*		/*aCombatResultQueue*/,
+							IAuraEventQueue*			/*aAuraEventQueue*/,
 							IThreatEventQueue*			/*aThreatEventQueue*/) { }
 
 		// Public data

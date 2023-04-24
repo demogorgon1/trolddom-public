@@ -3,6 +3,7 @@
 namespace kpublic
 {
 
+	class AuraEffectFactory;
 	class ComponentFactory;
 	class DirectEffectFactory;
 
@@ -170,6 +171,7 @@ namespace kpublic
 		virtual size_t						Read(
 												void*	aBuffer,
 												size_t	aBufferSize) = 0;
+		virtual const AuraEffectFactory*	GetAuraEffectFactory() const = 0;
 		virtual const ComponentFactory*		GetComponentFactory() const = 0;
 		virtual const DirectEffectFactory*	GetDirectEffectFactory() const = 0;
 	};

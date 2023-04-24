@@ -1,0 +1,22 @@
+#pragma once
+
+#include "AuraEffectBase.h"
+
+namespace kpublic
+{
+
+	class IAuraEventQueue
+	{
+	public:
+		virtual				~IAuraEventQueue() {}
+
+		// Virtual interface
+		virtual void		ApplyAura(
+								uint32_t										aAbilityId,
+								uint32_t										aAuraId,
+								uint32_t										aSourceEntityInstanceId,
+								uint32_t										aTargetEntityInstanceId,
+								std::vector<std::unique_ptr<AuraEffectBase>>&	aAuraEffects) = 0;
+	};
+
+}

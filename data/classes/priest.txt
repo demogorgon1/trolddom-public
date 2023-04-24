@@ -6,7 +6,7 @@ ability minor_heal:
 	flags: [ target_other target_self ]
 	icon: icon_heal
 
-	effect heal:
+	direct_effect heal:
 	{	
 		base: [ 8 12 ]
 	}

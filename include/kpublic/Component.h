@@ -27,6 +27,8 @@ namespace kpublic
 			ID_ACTION_BARS,
 			ID_THREAT_TARGET,
 			ID_THREAT_SOURCE,
+			ID_AURAS,
+			ID_VISIBLE_AURAS,
 
 			NUM_IDS
 		};
@@ -51,7 +53,9 @@ namespace kpublic
 			"player_cooldowns",
 			"action_bars",
 			"threat_target",
-			"threat_source"
+			"threat_source",
+			"auras",
+			"visible_auras"
 		};		
 
 		static_assert(sizeof(COMPONENT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

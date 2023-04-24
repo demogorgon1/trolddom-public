@@ -2,6 +2,7 @@
 
 #include <kpublic/Components/Abilities.h>
 #include <kpublic/Components/ActionBars.h>
+#include <kpublic/Components/Auras.h>
 #include <kpublic/Components/CombatPrivate.h>
 #include <kpublic/Components/CombatPublic.h>
 #include <kpublic/Components/DisplayName.h>
@@ -16,6 +17,7 @@
 #include <kpublic/Components/Talents.h>
 #include <kpublic/Components/ThreatSource.h>
 #include <kpublic/Components/ThreatTarget.h>
+#include <kpublic/Components/VisibleAuras.h>
 #include <kpublic/Components/Wallet.h>
 
 #include <kpublic/ComponentFactory.h>
@@ -27,6 +29,7 @@ namespace kpublic
 	{
 		_Register<Components::Abilities>();
 		_Register<Components::ActionBars>();
+		_Register<Components::Auras>();
 		_Register<Components::CombatPrivate>();
 		_Register<Components::CombatPublic>();
 		_Register<Components::DisplayName>();
@@ -41,6 +44,7 @@ namespace kpublic
 		_Register<Components::Talents>();
 		_Register<Components::ThreatSource>();
 		_Register<Components::ThreatTarget>();
+		_Register<Components::VisibleAuras>();
 		_Register<Components::Wallet>();
 	}
 

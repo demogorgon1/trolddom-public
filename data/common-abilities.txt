@@ -3,7 +3,7 @@ ability attack:
 	string: "Attack"
 	flags: [ attack target_other can_be_dodged can_be_parried can_miss use_weapon_icon ]	
 	
-	effect damage:
+	direct_effect damage:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical			
@@ -19,7 +19,7 @@ ability strike:
 	flags: [ target_other can_be_dodged can_be_parried can_miss ]
 	icon: icon_strike
 	
-	effect damage:
+	direct_effect damage:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
@@ -35,7 +35,7 @@ ability gaze_of_death:
 	flags: [ target_other ]
 	icon: icon_green_sphere
 	
-	effect kill:
+	direct_effect kill:
 	{
 	}
 }

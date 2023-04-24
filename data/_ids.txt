@@ -27,3 +27,4 @@ sprite goblin 11
 faction monsters 1
 item weapon_rusty_sword 1
 item weapon_gnarly_staff 2
+aura knock 1
