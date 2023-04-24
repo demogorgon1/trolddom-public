@@ -4,7 +4,7 @@ namespace kpublic
 {
 
 	class ComponentFactory;
-	class EffectFactory;
+	class DirectEffectFactory;
 
 	class IReader
 	{
@@ -166,12 +166,12 @@ namespace kpublic
 		}
 
 		// Virtual interface
-		virtual bool					IsEnd() const = 0;
-		virtual size_t					Read(
-											void*	aBuffer,
-											size_t	aBufferSize) = 0;
-		virtual const ComponentFactory* GetComponentFactory() const = 0;
-		virtual const EffectFactory*	GetEffectFactory() const = 0;
+		virtual bool						IsEnd() const = 0;
+		virtual size_t						Read(
+												void*	aBuffer,
+												size_t	aBufferSize) = 0;
+		virtual const ComponentFactory*		GetComponentFactory() const = 0;
+		virtual const DirectEffectFactory*	GetDirectEffectFactory() const = 0;
 	};
 
 }

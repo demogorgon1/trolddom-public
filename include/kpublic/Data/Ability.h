@@ -1,8 +1,8 @@
 #pragma once
 
 #include "../DataBase.h"
-#include "../EffectBase.h"
-#include "../EffectFactory.h"
+#include "../DirectEffectFactory.h"
+#include "../DirectEffectBase.h"
 
 namespace kpublic
 {
@@ -58,53 +58,53 @@ namespace kpublic
 				return flags;
 			}
 
-			struct EffectEntry
+			struct DirectEffectEntry
 			{
-				EffectEntry()
+				DirectEffectEntry()
 				{
 
 				}
 
-				EffectEntry(
+				DirectEffectEntry(
 					const Parser::Node*		aSource)
 				{
-					m_effectId = Effect::StringToId(aSource->m_name.c_str());
-					KP_VERIFY(m_effectId != Effect::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid effect.", aSource->m_name.c_str());
+					m_directEffectId = DirectEffect::StringToId(aSource->m_name.c_str());
+					KP_VERIFY(m_directEffectId != DirectEffect::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid direct effect.", aSource->m_name.c_str());
 
-					std::unique_ptr<EffectBase> effect(aSource->m_sourceContext->m_effectFactory->Create(m_effectId));
+					std::unique_ptr<DirectEffectBase> effect(aSource->m_sourceContext->m_effectFactory->Create(m_directEffectId));
 					assert(effect);
 
 					if (!aSource->m_children.empty())
 						effect->FromSource(aSource);
 
-					m_effectBase = std::move(effect);
+					m_directEffectBase = std::move(effect);
 				}
 
 				void	
 				ToStream(
 					IWriter*				aStream) const 
 				{
-					aStream->WriteUInt(m_effectId);
-					aStream->WriteObjectPointer(m_effectBase);
+					aStream->WriteUInt(m_directEffectId);
+					aStream->WriteObjectPointer(m_directEffectBase);
 				}
 			
 				bool	
 				FromStream(
 					IReader*				aStream) 
 				{
-					if(!aStream->ReadUInt(m_effectId))
+					if(!aStream->ReadUInt(m_directEffectId))
 						return false;
 
-					m_effectBase.reset(aStream->GetEffectFactory()->Create(m_effectId));
-					if(!m_effectBase->FromStream(aStream))
+					m_directEffectBase.reset(aStream->GetDirectEffectFactory()->Create(m_directEffectId));
+					if(!m_directEffectBase->FromStream(aStream))
 						return false;
 
 					return true;
 				}
 
 				// Public data
-				uint32_t							m_effectId;
-				std::unique_ptr<EffectBase>			m_effectBase;
+				uint32_t							m_directEffectId;
+				std::unique_ptr<DirectEffectBase>	m_directEffectBase;
 			};
 
 			void
@@ -142,7 +142,7 @@ namespace kpublic
 					else if (aMember->m_name == "flags")
 						m_flags = GetFlags(aMember);
 					else if(aMember->m_tag == "effect")
-						m_effects.push_back(std::make_unique<EffectEntry>(aMember->GetObject()));
+						m_directEffects.push_back(std::make_unique<DirectEffectEntry>(aMember->GetObject()));
 					else
 						KP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
 				});
@@ -157,7 +157,7 @@ namespace kpublic
 				aStream->WriteUInt(m_range);
 				aStream->WriteUInt(m_cooldown);
 				aStream->WriteUInt(m_iconSpriteId);
-				aStream->WriteObjectPointers(m_effects);
+				aStream->WriteObjectPointers(m_directEffects);
 				aStream->WritePOD(m_flags);
 			}
 			
@@ -175,7 +175,7 @@ namespace kpublic
 					return false;
 				if (!aStream->ReadUInt(m_iconSpriteId))
 					return false;
-				if(!aStream->ReadObjectPointers(m_effects))
+				if(!aStream->ReadObjectPointers(m_directEffects))
 					return false;
 				if(!aStream->ReadPOD(m_flags))
 					return false;
@@ -183,12 +183,12 @@ namespace kpublic
 			}
 
 			// Public data
-			std::string									m_displayName;
-			uint32_t									m_range = 1;
-			uint32_t									m_cooldown = 10;
-			uint8_t										m_flags = 0;
-			uint32_t									m_iconSpriteId = 0;
-			std::vector<std::unique_ptr<EffectEntry>>	m_effects;
+			std::string										m_displayName;
+			uint32_t										m_range = 1;
+			uint32_t										m_cooldown = 10;
+			uint8_t											m_flags = 0;
+			uint32_t										m_iconSpriteId = 0;
+			std::vector<std::unique_ptr<DirectEffectEntry>>	m_directEffects;
 		};
 
 

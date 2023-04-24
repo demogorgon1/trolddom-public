@@ -4,7 +4,7 @@
 #include "../Components/CombatPublic.h"
 #include "../Components/ThreatSource.h"
 
-#include "../EffectBase.h"
+#include "../DirectEffectBase.h"
 #include "../Helpers.h"
 #include "../IResourceChangeQueue.h"
 #include "../IThreatEventQueue.h"
@@ -17,9 +17,9 @@ namespace kpublic
 	{
 
 		struct Heal
-			: public EffectBase
+			: public DirectEffectBase
 		{
-			static const Effect::Id ID = Effect::ID_HEAL;
+			static const DirectEffect::Id ID = DirectEffect::ID_HEAL;
 
 			Heal()
 			{
@@ -116,7 +116,7 @@ namespace kpublic
 				
 				CombatEvent::Id result = aId;
 
-				if(m_flags & Effect::FLAG_CAN_BE_CRITICAL && aId == CombatEvent::ID_HIT)
+				if(m_flags & DirectEffect::FLAG_CAN_BE_CRITICAL && aId == CombatEvent::ID_HIT)
 				{
 					float chance = (float)sourceCombatPrivate->m_magicalCriticalStrikeChance / (float)UINT32_MAX;
 

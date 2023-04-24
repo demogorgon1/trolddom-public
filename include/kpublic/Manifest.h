@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Data/Ability.h"
+#include "Data/Aura.h"
 #include "Data/Class.h"
 #include "Data/Entity.h"
 #include "Data/Faction.h"
@@ -159,6 +160,7 @@ namespace kpublic
 		Manifest()
 		{
 			RegisterDataContainer(m_abilities);
+			RegisterDataContainer(m_auras);
 			RegisterDataContainer(m_classes);
 			RegisterDataContainer(m_entities);
 			RegisterDataContainer(m_factions);
@@ -223,6 +225,7 @@ namespace kpublic
 
 		// Public data
 		DataContainer<Data::Ability>					m_abilities;
+		DataContainer<Data::Aura>						m_auras;
 		DataContainer<Data::Class>						m_classes;
 		DataContainer<Data::Entity>						m_entities;
 		DataContainer<Data::Faction>					m_factions;

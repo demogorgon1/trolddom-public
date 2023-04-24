@@ -5,15 +5,15 @@
 #include "Effects/Kill.h"
 #include "Effects/Stun.h"
 
-#include "Effect.h"
+#include "DirectEffect.h"
 
 namespace kpublic
 {
 
-	class EffectFactory
+	class DirectEffectFactory
 	{
 	public:
-		EffectFactory()
+		DirectEffectFactory()
 		{
 			_Register<Effects::Damage>();
 			_Register<Effects::Heal>();
@@ -21,12 +21,12 @@ namespace kpublic
 			_Register<Effects::Stun>();
 		}
 
-		~EffectFactory()
+		~DirectEffectFactory()
 		{
 
 		}
 
-		EffectBase*
+		DirectEffectBase*
 		Create(
 			uint32_t			aId) const
 		{
@@ -38,7 +38,7 @@ namespace kpublic
 
 	private:
 
-		std::function<EffectBase*()>			m_functions[Effect::NUM_IDS];
+		std::function<DirectEffectBase*()>			m_functions[DirectEffect::NUM_IDS];
 
 		template<typename _T>
 		void

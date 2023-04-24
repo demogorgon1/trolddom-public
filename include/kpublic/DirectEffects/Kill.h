@@ -2,7 +2,7 @@
 
 #include "../Components/CombatPublic.h"
 
-#include "../EffectBase.h"
+#include "../DirectEffectBase.h"
 #include "../EntityInstance.h"
 
 namespace kpublic
@@ -12,9 +12,9 @@ namespace kpublic
 	{
 
 		struct Kill
-			: public EffectBase
+			: public DirectEffectBase
 		{
-			static const Effect::Id ID = Effect::ID_KILL;
+			static const DirectEffect::Id ID = DirectEffect::ID_KILL;
 
 			Kill()
 			{

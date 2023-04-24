@@ -3,7 +3,7 @@
 namespace kpublic
 {
 
-	namespace Effect
+	namespace DirectEffect
 	{
 
 		enum Flag : uint32_t 

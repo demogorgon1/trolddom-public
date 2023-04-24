@@ -22,6 +22,7 @@ namespace kpublic
 			ID_SPRITE,
 			ID_FACTION,
 			ID_ITEM,
+			ID_AURA,
 
 			NUM_IDS
 		};
@@ -41,7 +42,8 @@ namespace kpublic
 			"talent_tree",
 			"sprite",
 			"faction",
-			"item"
+			"item",
+			"aura"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "CombatEvent.h"
-#include "Effect.h"
+#include "DirectEffect.h"
 #include "IReader.h"
 #include "IWriter.h"
 #include "Parser.h"
@@ -19,16 +19,16 @@ namespace kpublic
 	class IResourceChangeQueue;
 	class IThreatEventQueue;
 
-	class EffectBase
+	class DirectEffectBase
 	{
 	public:
-		EffectBase()
+		DirectEffectBase()
 		{
 
 		}
 
 		virtual 
-		~EffectBase()
+		~DirectEffectBase()
 		{
 
 		}
@@ -42,7 +42,7 @@ namespace kpublic
 				aSource->GetArray()->ForEachChild([&](
 					const Parser::Node* aArrayItem)
 				{
-					uint32_t flag = Effect::StringToFlag(aArrayItem->GetIdentifier());
+					uint32_t flag = DirectEffect::StringToFlag(aArrayItem->GetIdentifier());
 					KP_VERIFY(flag != 0, aArrayItem->m_debugInfo, "'%s' is not a valid effect flag.", aArrayItem->m_name.c_str());
 					m_flags |= flag;
 				});

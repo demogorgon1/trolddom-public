@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../EffectBase.h"
+#include "../DirectEffectBase.h"
 
 namespace kpublic
 {
@@ -9,9 +9,9 @@ namespace kpublic
 	{
 
 		struct Stun
-			: public EffectBase
+			: public DirectEffectBase
 		{
-			static const Effect::Id ID = Effect::ID_STUN;
+			static const DirectEffect::Id ID = DirectEffect::ID_STUN;
 
 			Stun()
 			{

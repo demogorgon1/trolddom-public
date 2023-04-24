@@ -3,7 +3,7 @@
 #include "../Components/CombatPrivate.h"
 #include "../Components/CombatPublic.h"
 
-#include "../EffectBase.h"
+#include "../DirectEffectBase.h"
 #include "../EntityInstance.h"
 #include "../Helpers.h"
 #include "../IResourceChangeQueue.h"
@@ -17,9 +17,9 @@ namespace kpublic
 	{
 
 		struct Damage
-			: public EffectBase
+			: public DirectEffectBase
 		{
-			static const Effect::Id ID = Effect::ID_DAMAGE;
+			static const DirectEffect::Id ID = DirectEffect::ID_DAMAGE;
 
 			Damage()
 			{
@@ -44,13 +44,13 @@ namespace kpublic
 					{
 						if(aChild->m_name == "damage_type")
 						{
-							m_damageType = Effect::StringToDamageType(aChild->GetIdentifier());
+							m_damageType = DirectEffect::StringToDamageType(aChild->GetIdentifier());
 						}
 						else if(aChild->m_name == "base")
 						{
 							if(aChild->m_type == Parser::Node::TYPE_ARRAY)
 							{
-								m_damageBase = Effect::DAMAGE_BASE_RANGE;
+								m_damageBase = DirectEffect::DAMAGE_BASE_RANGE;
 
 								if(aChild->m_children.size() == 1)
 								{
@@ -69,7 +69,7 @@ namespace kpublic
 							}
 							else if(aChild->m_type == Parser::Node::TYPE_IDENTIFIER && aChild->m_value == "weapon")
 							{
-								m_damageBase = Effect::DAMAGE_BASE_WEAPON;
+								m_damageBase = DirectEffect::DAMAGE_BASE_WEAPON;
 							}
 							else
 							{
@@ -92,7 +92,7 @@ namespace kpublic
 				aStream->WritePOD(m_damageType);
 				aStream->WritePOD(m_damageBase);
 
-				if(m_damageBase == Effect::DAMAGE_BASE_RANGE)
+				if(m_damageBase == DirectEffect::DAMAGE_BASE_RANGE)
 				{
 					aStream->WriteUInt(m_damageBaseRangeMin);
 					aStream->WriteUInt(m_damageBaseRangeMax);
@@ -110,7 +110,7 @@ namespace kpublic
 				if (!aStream->ReadPOD(m_damageBase))
 					return false;
 
-				if (m_damageBase == Effect::DAMAGE_BASE_RANGE)
+				if (m_damageBase == DirectEffect::DAMAGE_BASE_RANGE)
 				{
 					if (!aStream->ReadUInt(m_damageBaseRangeMin))
 						return false;
@@ -141,11 +141,11 @@ namespace kpublic
 
 				switch(m_damageBase)
 				{
-				case Effect::DAMAGE_BASE_RANGE:		
+				case DirectEffect::DAMAGE_BASE_RANGE:		
 					damage = Helpers::RandomInRange(aRandom, m_damageBaseRangeMin, m_damageBaseRangeMax); 
 					break;
 
-				case Effect::DAMAGE_BASE_WEAPON:
+				case DirectEffect::DAMAGE_BASE_WEAPON:
 					damage = Helpers::RandomInRange(aRandom, sourceCombatPrivate->m_weaponDamageRangeMin, sourceCombatPrivate->m_weaponDamageRangeMax);
 					break;
 
@@ -155,11 +155,11 @@ namespace kpublic
 
 				CombatEvent::Id result = aId;
 
-				if(m_flags & Effect::FLAG_CAN_BE_CRITICAL && aId == CombatEvent::ID_HIT)
+				if(m_flags & DirectEffect::FLAG_CAN_BE_CRITICAL && aId == CombatEvent::ID_HIT)
 				{
 					float chance = 0.0f;
 
-					if(m_flags & Effect::FLAG_IS_MAGICAL)
+					if(m_flags & DirectEffect::FLAG_IS_MAGICAL)
 						chance = (float)sourceCombatPrivate->m_magicalCriticalStrikeChance / (float)UINT32_MAX;
 					else
 						chance = (float)sourceCombatPrivate->m_physicalCriticalStrikeChance / (float)UINT32_MAX;
@@ -193,8 +193,8 @@ namespace kpublic
 			}
 
 			// Public data
-			Effect::DamageType	m_damageType = Effect::DAMAGE_TYPE_PHYSICAL;
-			Effect::DamageBase	m_damageBase = Effect::DAMAGE_BASE_RANGE;
+			DirectEffect::DamageType	m_damageType = DirectEffect::DAMAGE_TYPE_PHYSICAL;
+			DirectEffect::DamageBase	m_damageBase = DirectEffect::DAMAGE_BASE_RANGE;
 
 			uint32_t			m_damageBaseRangeMin = 0;
 			uint32_t			m_damageBaseRangeMax = 0;
