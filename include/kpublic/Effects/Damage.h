@@ -134,7 +134,7 @@ namespace kpublic
 				const Components::CombatPrivate* sourceCombatPrivate = aSource->GetComponent<Components::CombatPrivate>();
 				Components::CombatPublic* targetCombatPublic = aTarget->GetComponent<Components::CombatPublic>();
 
-				if(sourceCombatPrivate || targetCombatPublic == NULL)
+				if(sourceCombatPrivate == NULL || targetCombatPublic == NULL)
 					return;
 
 				uint32_t damage = 0;

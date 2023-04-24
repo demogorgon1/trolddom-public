@@ -117,43 +117,54 @@ namespace kpublic::Systems
 
 		case EntityState::ID_IN_COMBAT:
 			{
-				const EntityInstance* target = aContext->m_worldView->QuerySingleEntityInstance(combat->m_targetEntityInstanceId);
-				if (target == NULL)
+				if (threat->m_table.IsEmpty())
 				{
 					combat->m_targetEntityInstanceId = 0;
 
 					returnValue = EntityState::ID_DEFAULT;
 				}
-				else if (state != NULL)
+				else 
 				{
-					const Components::Position* targetPosition = target->GetComponent<Components::Position>();
+					combat->m_targetEntityInstanceId = threat->m_table.GetTop()->m_entityInstanceId;
 
-					int32_t dx = targetPosition->m_position.m_x - position->m_position.m_x;
-					int32_t dy = targetPosition->m_position.m_y - position->m_position.m_y;
-					int32_t distanceSquared = dx * dx + dy * dy;
-
-					const Data::Ability* useAbility = NULL;
-
-					for (const Components::NPC::AbilityEntry& abilityEntry : state->m_abilities)
+					const EntityInstance* target = aContext->m_worldView->QuerySingleEntityInstance(combat->m_targetEntityInstanceId);
+					if (target == NULL)
 					{
-						const Data::Ability* ability = GetManifest()->m_abilities.GetById(abilityEntry.m_abilityId);
+						combat->m_targetEntityInstanceId = 0;
 
-						if (distanceSquared <= (int32_t)(ability->m_range * ability->m_range) && npc->m_cooldowns.Get(ability->m_id) == NULL)
+						returnValue = EntityState::ID_DEFAULT;
+					}
+					else if (state != NULL)
+					{
+						const Components::Position* targetPosition = target->GetComponent<Components::Position>();
+
+						int32_t dx = targetPosition->m_position.m_x - position->m_position.m_x;
+						int32_t dy = targetPosition->m_position.m_y - position->m_position.m_y;
+						int32_t distanceSquared = dx * dx + dy * dy;
+
+						const Data::Ability* useAbility = NULL;
+
+						for (const Components::NPC::AbilityEntry& abilityEntry : state->m_abilities)
 						{
-							if (abilityEntry.m_useProbability == UINT32_MAX || (*aContext->m_random)() < abilityEntry.m_useProbability)
-								useAbility = ability;
+							const Data::Ability* ability = GetManifest()->m_abilities.GetById(abilityEntry.m_abilityId);
+
+							if (distanceSquared <= (int32_t)(ability->m_range * ability->m_range) && npc->m_cooldowns.Get(ability->m_id) == NULL)
+							{
+								if (abilityEntry.m_useProbability == UINT32_MAX || (*aContext->m_random)() < abilityEntry.m_useProbability)
+									useAbility = ability;
+							}
 						}
-					}
 
-					if (useAbility != NULL)
-					{
-						npc->m_cooldowns.Add(useAbility, aContext->m_tick);
+						if (useAbility != NULL)
+						{
+							npc->m_cooldowns.Add(useAbility, aContext->m_tick);
 
-						aContext->m_abilityQueue->AddAbility(aEntityInstanceId, target->GetEntityInstanceId(), useAbility);
-					}
-					else
-					{
-						aContext->m_moveRequestQueue->AddMoveRequest(position, Vec2(dx, dy));
+							aContext->m_abilityQueue->AddAbility(aEntityInstanceId, target->GetEntityInstanceId(), useAbility);
+						}
+						else
+						{
+							aContext->m_moveRequestQueue->AddMoveRequest(position, Vec2(dx, dy));
+						}
 					}
 				}
 			}

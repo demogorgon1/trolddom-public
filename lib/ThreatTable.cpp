@@ -59,12 +59,21 @@ namespace kpublic
 				{
 					Entry* prev = entry->m_prev;
 
-					std::swap(prev->m_prev, entry->m_prev);
-					std::swap(prev->m_next, entry->m_next);
-				}
+					if (entry->m_next != NULL)
+						entry->m_next->m_prev = entry->m_prev;
+					else
+						m_tail = entry->m_prev;
 
-				if(entry->m_prev == NULL)
-					m_head = entry;
+					if (entry->m_prev != NULL)
+						entry->m_prev->m_next = entry->m_next;
+					else
+						m_head = entry->m_next;
+
+					entry->m_next = NULL;
+					entry->m_prev = NULL;
+
+					_InsertBefore(entry, prev);
+				}
 			}
 			else
 			{
@@ -73,12 +82,21 @@ namespace kpublic
 				{
 					Entry* next = entry->m_next;
 
-					std::swap(next->m_prev, entry->m_prev);
-					std::swap(next->m_next, entry->m_next);
-				}
+					if (next->m_next != NULL)
+						next->m_next->m_prev = next->m_prev;
+					else
+						m_tail = next->m_prev;
 
-				if (entry->m_next == NULL)
-					m_tail = entry;
+					if (next->m_prev != NULL)
+						next->m_prev->m_next = next->m_next;
+					else
+						m_head = next->m_next;
+
+					next->m_next = NULL;
+					next->m_prev = NULL;
+
+					_InsertBefore(next, entry);
+				}
 			}
 		}
 		else
@@ -169,6 +187,7 @@ namespace kpublic
 		Entry*			aInsertBefore)
 	{
 		aEntry->m_next = aInsertBefore;
+		aEntry->m_prev = aInsertBefore->m_prev;
 		
 		if(aInsertBefore->m_prev == NULL)
 			m_head = aEntry;
