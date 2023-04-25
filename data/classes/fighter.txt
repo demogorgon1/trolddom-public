@@ -1,6 +1,7 @@
 aura knock:
 {
-	icon: icon_knock	
+	string: "Knock"
+	icon: icon_stun	
 	type: debuff
 	duration: 30	
 	aura_effect stun: { }

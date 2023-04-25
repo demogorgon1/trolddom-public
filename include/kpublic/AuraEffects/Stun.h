@@ -24,7 +24,7 @@ namespace kpublic
 
 			}
 
-			// EffectBase implementation
+			// AuraEffectBase implementation
 			void
 			FromSource(
 				const Parser::Node*		/*aSource*/) override

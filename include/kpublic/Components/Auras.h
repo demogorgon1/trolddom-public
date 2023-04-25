@@ -20,6 +20,7 @@ namespace kpublic
 				uint32_t										m_auraId = 0;
 				uint32_t										m_entityInstanceId = 0;
 				uint32_t										m_start = 0;
+				uint32_t										m_end = 0;
 				std::vector<std::unique_ptr<AuraEffectBase>>	m_effects;
 			};
 
@@ -43,6 +44,7 @@ namespace kpublic
 
 			// Public data
 			std::vector<std::unique_ptr<Entry>>					m_entries;
+			bool												m_dirty = false;
 		};
 	}
 

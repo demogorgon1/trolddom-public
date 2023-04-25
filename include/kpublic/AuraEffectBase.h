@@ -66,6 +66,29 @@ namespace kpublic
 			m_updateCount = aOther->m_updateCount;
 		}
 
+		bool
+		Update(
+			uint32_t									aTick)
+		{
+			if(m_updateCount == 0)
+				return true; // Effects that don't require updates will have this initialized to zero
+
+			uint32_t ticksSinceLastUpdate = aTick - m_lastUpdate;
+			if(ticksSinceLastUpdate >= m_updateInterval)
+			{
+				if(!OnUpdate())
+					return false;
+
+				m_lastUpdate = aTick;
+				m_updateCount--;
+
+				if(m_updateCount == 0)
+					return false;
+			}
+
+			return true;
+		}
+
 		// Virtual methods
 		virtual void			FromSource(
 									const Parser::Node*	/*aSource*/) { assert(false); }
@@ -73,12 +96,16 @@ namespace kpublic
 									IWriter*			/*aStream*/) const { assert(false); }
 		virtual bool			FromStream(
 									IReader*			/*aStream*/) { assert(false); return true; }
-		virtual void			Update() { }
+		virtual bool			OnUpdate() { return false; }
+		virtual void			OnApplication() { }
+		virtual void			OnRemoval() { }
 		virtual AuraEffectBase*	Copy() const { assert(false); return NULL; }
 
 		// Public data
 		uint32_t		m_updateInterval = 0;
 		uint32_t		m_updateCount = 0;
+
+		uint32_t		m_lastUpdate = 0;
 	};
 
 }

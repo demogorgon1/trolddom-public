@@ -12,4 +12,5 @@ sprites:
 	sprite icon_strike : { }
 	sprite icon_heal : { }
 	sprite icon_staff_1 : { }
+	sprite icon_stun : { }
 }

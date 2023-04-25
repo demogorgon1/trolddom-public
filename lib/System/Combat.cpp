@@ -8,6 +8,7 @@
 
 #include <kpublic/EntityInstance.h>
 #include <kpublic/Resource.h>
+#include <kpublic/Helpers.h>
 
 namespace kpublic::Systems
 {
@@ -33,7 +34,7 @@ namespace kpublic::Systems
 		uint32_t			/*aEntityInstanceId*/,
 		EntityState::Id		aEntityState,
 		ComponentBase**		aComponents,
-		Context*			/*aContext*/) 
+		Context*			aContext) 
 	{
 		{
 			Components::CombatPublic* combatPublic = GetComponent<Components::CombatPublic>(aComponents);
@@ -79,9 +80,44 @@ namespace kpublic::Systems
 			{
 				std::unique_ptr<Components::Auras::Entry>& entry = auras->m_entries[i];
 
-				(void)entry;
+				for(size_t j = 0; j < entry->m_effects.size(); j++)
+				{
+					std::unique_ptr<AuraEffectBase>& effect = entry->m_effects[j];
+
+					if(!effect->Update(aContext->m_tick))
+					{
+						effect.reset();
+						Helpers::RemoveCyclicFromVector(entry->m_effects, j);
+						j--;
+					}						
+				}
+
+				if(entry->m_effects.size() == 0 || aContext->m_tick >= entry->m_end)
+				{
+					entry.reset();
+					Helpers::RemoveCyclicFromVector(auras->m_entries, i);
+					i--;
+
+					auras->m_dirty = true;
+				}
 			}
-			(void)visibleAuras;
+
+			if(auras->m_dirty)
+			{
+				visibleAuras->m_entries.clear();
+
+				for (const std::unique_ptr<Components::Auras::Entry>& entry : auras->m_entries)
+				{
+					Components::VisibleAuras::Entry t;
+					t.m_auraId = entry->m_auraId;
+					t.m_entityInstanceId = entry->m_entityInstanceId;
+					t.m_start = entry->m_start;
+					t.m_end = entry->m_end;
+					visibleAuras->m_entries.push_back(t);
+				}
+
+				auras->m_dirty = false;
+			}
 		}
 
 		return EntityState::CONTINUE;
