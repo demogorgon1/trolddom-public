@@ -36,6 +36,22 @@ namespace kpublic
 
 			}
 
+			bool
+			HasEffect(
+				AuraEffect::Id					aId) const
+			{
+				for(const std::unique_ptr<Entry>& entry : m_entries)
+				{
+					for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
+					{
+						if(effect->m_id == aId)
+							return true;
+					}
+				}
+
+				return false;
+			}
+
 			// ComponentBase implementation
 			void	ToStream(
 						IWriter*				/*aStream*/) const override { }

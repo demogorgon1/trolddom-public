@@ -11,7 +11,9 @@ namespace kpublic
 	class AuraEffectBase
 	{
 	public:
-		AuraEffectBase()
+		AuraEffectBase(
+			AuraEffect::Id								aId)
+			: m_id(aId)
 		{
 
 		}
@@ -106,6 +108,7 @@ namespace kpublic
 		uint32_t		m_updateCount = 0;
 
 		uint32_t		m_lastUpdate = 0;
+		AuraEffect::Id	m_id = AuraEffect::INVALID_ID;
 	};
 
 }

@@ -14,6 +14,7 @@ namespace kpublic
 			static const AuraEffect::Id ID = AuraEffect::ID_STUN;
 
 			Stun()
+				: AuraEffectBase(ID)
 			{
 
 			}

@@ -1,5 +1,6 @@
 #include "../Pcheader.h"
 
+#include <kpublic/Components/Auras.h>
 #include <kpublic/Components/CombatPublic.h>
 #include <kpublic/Components/NPC.h>
 #include <kpublic/Components/Position.h>
@@ -22,6 +23,7 @@ namespace kpublic::Systems
 		const Manifest*			aManifest)
 		: SystemBase(aManifest)
 	{
+		RequireComponent<Components::Auras>();
 		RequireComponent<Components::CombatPublic>();
 		RequireComponent<Components::NPC>();
 		RequireComponent<Components::Position>();
@@ -74,6 +76,7 @@ namespace kpublic::Systems
 		const Components::Position* position = GetComponent<Components::Position>(aComponents);
 		Components::Sprite* sprite = GetComponent<Components::Sprite>(aComponents);
 		Components::ThreatTarget* threat = GetComponent<Components::ThreatTarget>(aComponents);
+		const Components::Auras* auras = GetComponent<Components::Auras>(aComponents);
 
 		const Components::NPC::StateEntry* state = npc->GetState(aEntityState);
 		if (state != NULL)
@@ -129,7 +132,7 @@ namespace kpublic::Systems
 
 					returnValue = EntityState::ID_DEFAULT;
 				}
-				else 
+				else if(!auras->HasEffect(AuraEffect::ID_STUN))
 				{
 					npc->m_targetEntityInstanceId = threat->m_table.GetTop()->m_entityInstanceId;
 
@@ -167,7 +170,7 @@ namespace kpublic::Systems
 
 							aContext->m_abilityQueue->AddAbility(aEntityInstanceId, target->GetEntityInstanceId(), useAbility);
 						}
-						else
+						else 
 						{
 							aContext->m_moveRequestQueue->AddMoveRequest(aEntityInstanceId, Vec2(dx, dy));
 						}
