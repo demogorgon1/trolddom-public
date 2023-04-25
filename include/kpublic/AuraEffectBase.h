@@ -99,8 +99,6 @@ namespace kpublic
 		virtual bool			FromStream(
 									IReader*			/*aStream*/) { assert(false); return true; }
 		virtual bool			OnUpdate() { return false; }
-		virtual void			OnApplication() { }
-		virtual void			OnRemoval() { }
 		virtual AuraEffectBase*	Copy() const { assert(false); return NULL; }
 
 		// Public data
