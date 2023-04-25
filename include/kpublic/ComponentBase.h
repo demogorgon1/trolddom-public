@@ -14,10 +14,11 @@ namespace kpublic
 	public:
 		enum Flag : uint8_t
 		{
-			FLAG_PRIVATE		= 0x01,
-			FLAG_PUBLIC			= 0x02,
-			FLAG_PERSISTENT		= 0x04,
-			FLAG_PLAYER_ONLY	= 0x08
+			FLAG_PUBLIC					= 0x01,
+			FLAG_REPLICATE_TO_OWNER		= 0x02,
+			FLAG_REPLICATE_TO_OTHERS	= 0x04,
+			FLAG_PERSISTENT				= 0x08,
+			FLAG_PLAYER_ONLY			= 0x10
 		};
 
 		ComponentBase(

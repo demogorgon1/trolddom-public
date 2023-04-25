@@ -13,7 +13,7 @@ namespace kpublic
 			: public ComponentBase
 		{
 			static const Component::Id ID = Component::ID_INVENTORY;
-			static const uint8_t FLAGS = FLAG_PRIVATE | FLAG_PLAYER_ONLY;
+			static const uint8_t FLAGS = FLAG_REPLICATE_TO_OWNER | FLAG_PLAYER_ONLY;
 
 			struct Entry
 			{	

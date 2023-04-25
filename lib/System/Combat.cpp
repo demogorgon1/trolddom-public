@@ -30,11 +30,51 @@ namespace kpublic::Systems
 	//---------------------------------------------------------------------------
 
 	EntityState::Id
-	Combat::Update(
+	Combat::UpdatePrivate(
+		uint32_t			/*aEntityInstanceId*/,
+		EntityState::Id		/*aEntityState*/,
+		ComponentBase**		aComponents,
+		Context*			aContext) 
+	{
+		{
+			Components::Auras* auras = GetComponent<Components::Auras>(aComponents);
+
+			for(size_t i = 0; i < auras->m_entries.size(); i++)
+			{
+				std::unique_ptr<Components::Auras::Entry>& entry = auras->m_entries[i];
+
+				for(size_t j = 0; j < entry->m_effects.size(); j++)
+				{
+					std::unique_ptr<AuraEffectBase>& effect = entry->m_effects[j];
+
+					if(!effect->Update(aContext->m_tick))
+					{
+						effect.reset();
+						Helpers::RemoveCyclicFromVector(entry->m_effects, j);
+						j--;
+					}						
+				}
+
+				if(entry->m_effects.size() == 0 || aContext->m_tick >= entry->m_end)
+				{
+					entry.reset();
+					Helpers::RemoveCyclicFromVector(auras->m_entries, i);
+					i--;
+
+					auras->m_dirty = true;
+				}
+			}
+		}
+
+		return EntityState::CONTINUE;
+	}
+
+	void
+	Combat::UpdatePublic(
 		uint32_t			/*aEntityInstanceId*/,
 		EntityState::Id		aEntityState,
 		ComponentBase**		aComponents,
-		Context*			aContext) 
+		Context*			/*aContext*/) 
 	{
 		{
 			Components::CombatPublic* combatPublic = GetComponent<Components::CombatPublic>(aComponents);
@@ -74,36 +114,10 @@ namespace kpublic::Systems
 
 		{
 			Components::Auras* auras = GetComponent<Components::Auras>(aComponents);
-			Components::VisibleAuras* visibleAuras = GetComponent<Components::VisibleAuras>(aComponents);
-
-			for(size_t i = 0; i < auras->m_entries.size(); i++)
-			{
-				std::unique_ptr<Components::Auras::Entry>& entry = auras->m_entries[i];
-
-				for(size_t j = 0; j < entry->m_effects.size(); j++)
-				{
-					std::unique_ptr<AuraEffectBase>& effect = entry->m_effects[j];
-
-					if(!effect->Update(aContext->m_tick))
-					{
-						effect.reset();
-						Helpers::RemoveCyclicFromVector(entry->m_effects, j);
-						j--;
-					}						
-				}
-
-				if(entry->m_effects.size() == 0 || aContext->m_tick >= entry->m_end)
-				{
-					entry.reset();
-					Helpers::RemoveCyclicFromVector(auras->m_entries, i);
-					i--;
-
-					auras->m_dirty = true;
-				}
-			}
 
 			if(auras->m_dirty)
 			{
+				Components::VisibleAuras* visibleAuras = GetComponent<Components::VisibleAuras>(aComponents);
 				visibleAuras->m_entries.clear();
 
 				for (const std::unique_ptr<Components::Auras::Entry>& entry : auras->m_entries)
@@ -119,8 +133,6 @@ namespace kpublic::Systems
 				auras->m_dirty = false;
 			}
 		}
-
-		return EntityState::CONTINUE;
 	}
 
 }

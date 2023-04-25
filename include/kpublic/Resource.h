@@ -18,10 +18,16 @@ namespace kpublic
 			NUM_IDS
 		};
 
+		enum Flag : uint8_t
+		{
+			FLAG_DEFAULT_TO_MAX = 0x01
+		};
+
 		struct Info
 		{
 			const char*		m_name;
 			const char*		m_capitalizedName;
+			uint8_t			m_flags;
 		};
 
 		// IMPORTANT: Must match Id enum
@@ -29,10 +35,10 @@ namespace kpublic
 		{			
 			{ NULL, NULL },
 
-			{ "health",	"Health" },
-			{ "mana",	"Mana" },
-			{ "rage",	"Rage" },
-			{ "energy",	"Energy" }
+			{ "health",	"Health",	FLAG_DEFAULT_TO_MAX },
+			{ "mana",	"Mana",		FLAG_DEFAULT_TO_MAX },
+			{ "rage",	"Rage",		0 },
+			{ "energy",	"Energy",	FLAG_DEFAULT_TO_MAX }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

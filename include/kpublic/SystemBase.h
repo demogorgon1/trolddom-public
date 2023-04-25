@@ -64,11 +64,16 @@ namespace kpublic
 											uint32_t			/*aEntityInstanceId*/,
 											EntityState::Id		/*aEntityState*/,
 											ComponentBase**		/*aComponents*/) { }
-		virtual EntityState::Id			Update(
+		virtual EntityState::Id			UpdatePrivate(
 											uint32_t			/*aEntityInstanceId*/,
 											EntityState::Id		/*aEntityState*/,
 											ComponentBase**		/*aComponents*/,
 											Context*			/*aContext*/) { return EntityState::CONTINUE; }
+		virtual void					UpdatePublic(
+											uint32_t			/*aEntityInstanceId*/,
+											EntityState::Id		/*aEntityState*/,
+											ComponentBase**		/*aComponents*/,
+											Context*			/*aContext*/) { }
 
 		// Data access
 		const Manifest*					GetManifest() const { return m_manifest; }

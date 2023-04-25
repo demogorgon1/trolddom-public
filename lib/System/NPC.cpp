@@ -53,19 +53,25 @@ namespace kpublic::Systems
 		}
 
 		for(const Components::NPC::ResourceEntry& resource : npc->m_resources)
+		{
 			combat->AddResourceMax(resource.m_id, resource.m_max);
+
+			const Resource::Info* info = Resource::GetInfo((Resource::Id)resource.m_id);
+			if(info->m_flags & Resource::FLAG_DEFAULT_TO_MAX)
+				combat->SetResourceToMax(resource.m_id);
+		}
 	}
 
 	EntityState::Id
-	NPC::Update(
+	NPC::UpdatePrivate(
 		uint32_t				aEntityInstanceId,
 		EntityState::Id			aEntityState,
 		ComponentBase**			aComponents,
 		Context*				aContext) 
 	{
-		Components::CombatPublic* combat = GetComponent<Components::CombatPublic>(aComponents);
+		const Components::CombatPublic* combat = GetComponent<Components::CombatPublic>(aComponents);
 		Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
-		Components::Position* position = GetComponent<Components::Position>(aComponents);
+		const Components::Position* position = GetComponent<Components::Position>(aComponents);
 		Components::Sprite* sprite = GetComponent<Components::Sprite>(aComponents);
 		Components::ThreatTarget* threat = GetComponent<Components::ThreatTarget>(aComponents);
 
@@ -110,7 +116,7 @@ namespace kpublic::Systems
 		case EntityState::ID_DEFAULT:
 			if (!threat->m_table.IsEmpty())
 			{
-				combat->m_targetEntityInstanceId = threat->m_table.GetTop()->m_entityInstanceId;
+				npc->m_targetEntityInstanceId = threat->m_table.GetTop()->m_entityInstanceId;
 				returnValue = EntityState::ID_IN_COMBAT;
 			}
 			break;
@@ -119,18 +125,18 @@ namespace kpublic::Systems
 			{
 				if (threat->m_table.IsEmpty())
 				{
-					combat->m_targetEntityInstanceId = 0;
+					npc->m_targetEntityInstanceId = 0;
 
 					returnValue = EntityState::ID_DEFAULT;
 				}
 				else 
 				{
-					combat->m_targetEntityInstanceId = threat->m_table.GetTop()->m_entityInstanceId;
+					npc->m_targetEntityInstanceId = threat->m_table.GetTop()->m_entityInstanceId;
 
-					const EntityInstance* target = aContext->m_worldView->QuerySingleEntityInstance(combat->m_targetEntityInstanceId);
+					const EntityInstance* target = aContext->m_worldView->QuerySingleEntityInstance(npc->m_targetEntityInstanceId);
 					if (target == NULL)
 					{
-						combat->m_targetEntityInstanceId = 0;
+						npc->m_targetEntityInstanceId = 0;
 
 						returnValue = EntityState::ID_DEFAULT;
 					}
@@ -163,7 +169,7 @@ namespace kpublic::Systems
 						}
 						else
 						{
-							aContext->m_moveRequestQueue->AddMoveRequest(position, Vec2(dx, dy));
+							aContext->m_moveRequestQueue->AddMoveRequest(aEntityInstanceId, Vec2(dx, dy));
 						}
 					}
 				}
@@ -175,6 +181,19 @@ namespace kpublic::Systems
 		}
 
 		return returnValue;
+	}
+
+	void			
+	NPC::UpdatePublic(
+		uint32_t			/*aEntityInstanceId*/,
+		EntityState::Id		/*aEntityState*/,
+		ComponentBase**		aComponents,
+		Context*			/*aContext*/) 
+	{
+		Components::CombatPublic* combat = GetComponent<Components::CombatPublic>(aComponents);
+		const Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
+
+		combat->m_targetEntityInstanceId = npc->m_targetEntityInstanceId;
 	}
 
 }

@@ -17,7 +17,7 @@ namespace kpublic
 
 		// Virtual interface
 		virtual void		AddMoveRequest(
-								Components::Position*	aPosition,
+								uint32_t				aEntityInstanceId,
 								const Vec2&				aMove) = 0;
 	};
 

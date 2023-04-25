@@ -231,6 +231,7 @@ namespace kpublic
 			std::vector<ResourceEntry>					m_resources;
 			
 			Cooldowns									m_cooldowns;
+			uint32_t									m_targetEntityInstanceId = 0;
 		};
 	}
 

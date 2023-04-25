@@ -66,7 +66,7 @@ namespace kpublic
 			uint32_t i = 0;
 			for(const std::unique_ptr<ComponentBase>& component : m_components)
 			{
-				if(component->GetFlags() & ComponentBase::FLAG_PUBLIC)
+				if(component->GetFlags() & ComponentBase::FLAG_REPLICATE_TO_OTHERS)
 				{
 					aWriter->WriteUInt(i);
 					component->ToStream(aWriter);
@@ -84,7 +84,7 @@ namespace kpublic
 			uint32_t i = 0;
 			for(const std::unique_ptr<ComponentBase>& component : m_components)
 			{				
-				if(component->GetFlags() & ComponentBase::FLAG_PRIVATE)
+				if(component->GetFlags() & ComponentBase::FLAG_REPLICATE_TO_OWNER)
 				{
 					aWriter->WriteUInt(i);
 					component->ToStream(aWriter);

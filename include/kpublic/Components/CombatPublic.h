@@ -12,7 +12,7 @@ namespace kpublic
 			: public ComponentBase
 		{
 			static const Component::Id ID = Component::ID_COMBAT_PUBLIC;
-			static const uint8_t FLAGS = FLAG_PRIVATE | FLAG_PUBLIC;
+			static const uint8_t FLAGS = FLAG_REPLICATE_TO_OWNER | FLAG_REPLICATE_TO_OTHERS | FLAG_PUBLIC;
 
 			struct Resource
 			{	
@@ -91,6 +91,20 @@ namespace kpublic
 					}
 				}
 				return 0;
+			}
+
+			void
+			SetResourceToMax(
+				uint32_t				aResourceId)
+			{
+				for (Resource& t : m_resources)
+				{
+					if (t.m_id == aResourceId)
+					{
+						t.m_current = t.m_max;
+						return;
+					}
+				}
 			}
 
 			bool

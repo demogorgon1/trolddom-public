@@ -13,7 +13,7 @@ namespace kpublic
 			: public ComponentBase
 		{
 			static const Component::Id ID = Component::ID_POSITION;
-			static const uint8_t FLAGS = FLAG_PRIVATE | FLAG_PUBLIC;
+			static const uint8_t FLAGS = FLAG_REPLICATE_TO_OWNER | FLAG_REPLICATE_TO_OTHERS | FLAG_PUBLIC;
 
 			Position()
 				: ComponentBase(ID, FLAGS)
