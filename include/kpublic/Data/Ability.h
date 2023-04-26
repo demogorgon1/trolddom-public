@@ -122,6 +122,7 @@ namespace kpublic
 			bool CanBeDodged() const { return m_flags & FLAG_CAN_BE_DODGED; }
 			bool CanBeParried() const { return m_flags & FLAG_CAN_BE_PARRIED; }
 			bool CanBeBlocked() const { return m_flags & FLAG_CAN_BE_BLOCKED; }
+			bool IsAttack() const { return m_flags & FLAG_ATTACK; }
 
 			// Base implementation
 			void
