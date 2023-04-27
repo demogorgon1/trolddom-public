@@ -13,6 +13,7 @@ namespace kpublic
 		{
 			static const Component::Id ID = Component::ID_VISIBLE_AURAS;
 			static const uint8_t FLAGS = FLAG_REPLICATE_TO_OWNER | FLAG_REPLICATE_TO_OTHERS;
+			static const Persistence::Id PERSISTENCE = Persistence::ID_NONE;
 
 			struct Entry
 			{
@@ -49,7 +50,7 @@ namespace kpublic
 			};
 
 			VisibleAuras()
-				: ComponentBase(ID, FLAGS)
+				: ComponentBase(ID, FLAGS, PERSISTENCE)
 			{
 
 			}

@@ -13,6 +13,7 @@ namespace kpublic
 		{
 			static const Component::Id ID = Component::ID_COMBAT_PUBLIC;
 			static const uint8_t FLAGS = FLAG_REPLICATE_TO_OWNER | FLAG_REPLICATE_TO_OTHERS | FLAG_PUBLIC;
+			static const Persistence::Id PERSISTENCE = Persistence::ID_VOLATILE;
 
 			struct Resource
 			{	
@@ -45,7 +46,7 @@ namespace kpublic
 			};
 						
 			CombatPublic()
-				: ComponentBase(ID, FLAGS)
+				: ComponentBase(ID, FLAGS, PERSISTENCE)
 			{
 
 			}

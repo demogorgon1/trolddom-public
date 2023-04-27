@@ -12,10 +12,11 @@ namespace kpublic
 			: public ComponentBase
 		{
 			static const Component::Id ID = Component::ID_TALENTS;
-			static const uint8_t FLAGS = FLAG_REPLICATE_TO_OWNER | FLAG_PLAYER_ONLY | FLAG_PERSISTENT;
+			static const uint8_t FLAGS = FLAG_REPLICATE_TO_OWNER | FLAG_PLAYER_ONLY;
+			static const Persistence::Id PERSISTENCE = Persistence::ID_MAIN;
 
 			Talents()
-				: ComponentBase(ID, FLAGS)
+				: ComponentBase(ID, FLAGS, PERSISTENCE)
 			{
 
 			}

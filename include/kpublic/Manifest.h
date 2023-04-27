@@ -17,6 +17,7 @@
 #include "IReader.h"
 #include "IWriter.h"
 #include "PersistentIdTable.h"
+#include "PlayerComponents.h"
 
 namespace kpublic
 {
@@ -198,6 +199,8 @@ namespace kpublic
 				assert(m_containers[i] != NULL);
 				m_containers[i]->ToStream(aStream);
 			}
+
+			m_playerComponents.ToStream(aStream);
 		}
 		
 		bool
@@ -210,6 +213,10 @@ namespace kpublic
 				if(!m_containers[i]->FromStream(aStream))
 					return false;
 			}
+
+			if(!m_playerComponents.FromStream(aStream))
+				return false;
+
 			return true;
 		}
 
@@ -240,6 +247,8 @@ namespace kpublic
 		DataContainer<Data::TalentTree>					m_talentTrees;
 
 		IDataContainer*									m_containers[DataType::NUM_IDS] = { 0 };
+
+		PlayerComponents								m_playerComponents;
 
 	private:
 

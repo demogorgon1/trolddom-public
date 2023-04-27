@@ -14,9 +14,10 @@ namespace kpublic
 		{
 			static const Component::Id ID = Component::ID_POSITION;
 			static const uint8_t FLAGS = FLAG_REPLICATE_TO_OWNER | FLAG_REPLICATE_TO_OTHERS | FLAG_PUBLIC;
+			static const Persistence::Id PERSISTENCE = Persistence::ID_VOLATILE;
 
 			Position()
-				: ComponentBase(ID, FLAGS)
+				: ComponentBase(ID, FLAGS, PERSISTENCE)
 			{
 
 			}

@@ -16,6 +16,7 @@ namespace kpublic
 		{
 			static const Component::Id ID = Component::ID_NPC;
 			static const uint8_t FLAGS = 0;
+			static const Persistence::Id PERSISTENCE = Persistence::ID_NONE;
 
 			struct AbilityEntry
 			{
@@ -153,7 +154,7 @@ namespace kpublic
 			};
 
 			NPC()
-				: ComponentBase(ID, FLAGS)
+				: ComponentBase(ID, FLAGS, PERSISTENCE)
 			{
 
 			}

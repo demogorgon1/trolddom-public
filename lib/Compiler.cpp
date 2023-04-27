@@ -48,7 +48,11 @@ namespace kpublic
 		m_parser.GetRoot()->ForEachChild([&](
 			const Parser::Node* aNode)
 		{
-			if(aNode->GetObject()->m_name == "sprites")
+			if(aNode->m_name == "player_components")
+			{
+				m_manifest->m_playerComponents.FromSource(aNode);
+			}
+			else if(aNode->GetObject()->m_name == "sprites")
 			{
 				spriteSheetBuilder.AddSprites(aNode);
 			}

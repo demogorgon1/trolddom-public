@@ -14,6 +14,7 @@ namespace kpublic
 		{
 			static const Component::Id ID = Component::ID_AURAS;
 			static const uint8_t FLAGS = 0;
+			static const Persistence::Id PERSISTENCE = Persistence::ID_VOLATILE;
 
 			struct Entry
 			{
@@ -25,7 +26,7 @@ namespace kpublic
 			};
 
 			Auras()
-				: ComponentBase(ID, FLAGS)
+				: ComponentBase(ID, FLAGS, PERSISTENCE)
 			{
 
 			}

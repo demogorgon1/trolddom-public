@@ -5,6 +5,7 @@
 #include "IReader.h"
 #include "IWriter.h"
 #include "Parser.h"
+#include "Persistence.h"
 
 namespace kpublic
 {
@@ -17,15 +18,25 @@ namespace kpublic
 			FLAG_PUBLIC					= 0x01,
 			FLAG_REPLICATE_TO_OWNER		= 0x02,
 			FLAG_REPLICATE_TO_OTHERS	= 0x04,
-			FLAG_PERSISTENT				= 0x08,
-			FLAG_PLAYER_ONLY			= 0x10
+			FLAG_PLAYER_ONLY			= 0x08
+		};
+
+		enum PendingPersistenceUpdate : uint8_t
+		{
+			PENDING_PERSISTENCE_UPDATE_NONE,
+			PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY,
+			PENDING_PERSISTENCE_UPDATE_MEDIUM_PRIORITY,
+			PENDING_PERSISTENCE_UPDATE_HIGH_PRIORITY
 		};
 
 		ComponentBase(
-			uint32_t	aComponentId,
-			uint8_t		aFlags)
+			uint32_t		aComponentId,
+			uint8_t			aFlags,
+			Persistence::Id	aPersistence)
 			: m_componentId(aComponentId)
 			, m_flags(aFlags)
+			, m_persistence(aPersistence)
+			, m_pendingPersistenceUpdate(PENDING_PERSISTENCE_UPDATE_NONE)
 		{
 
 		}
@@ -52,22 +63,39 @@ namespace kpublic
 			return (_T*)this;
 		}
 
+		void
+		ResetPendingPersistenceUpdate()
+		{
+			m_pendingPersistenceUpdate = PENDING_PERSISTENCE_UPDATE_NONE;
+		}
+
+		void
+		SetPendingPersistenceUpdate(
+			PendingPersistenceUpdate							aPendingPersistenceUpdate)
+		{
+			if((uint8_t)aPendingPersistenceUpdate > (uint8_t)m_pendingPersistenceUpdate)
+				m_pendingPersistenceUpdate = aPendingPersistenceUpdate;
+		}
+
 		// Virtual methods
-		virtual void	FromSource(
-							const Parser::Node*		/*aSource*/) { assert(false); }
-		virtual void	ToStream(
-							IWriter*				/*aStream*/) const { assert(false); }
-		virtual bool	FromStream(
-							IReader*				/*aStream*/) { assert(false); return true; }
+		virtual void				FromSource(
+										const Parser::Node*		/*aSource*/) { assert(false); }
+		virtual void				ToStream(
+										IWriter*				/*aStream*/) const { assert(false); }
+		virtual bool				FromStream(
+										IReader*				/*aStream*/) { assert(false); return true; }
 
 		// Data access
-		uint32_t		GetComponentId() const { return m_componentId; }
-		uint8_t			GetFlags() const { return m_flags; }
+		uint32_t					GetComponentId() const { return m_componentId; }
+		uint8_t						GetFlags() const { return m_flags; }
+		PendingPersistenceUpdate	GetPendingPersistenceUpdate() const { return m_pendingPersistenceUpdate; }
 
 	private:
 
-		uint32_t		m_componentId;
-		uint8_t			m_flags;
+		uint32_t					m_componentId;
+		uint8_t						m_flags;
+		Persistence::Id				m_persistence;
+		PendingPersistenceUpdate	m_pendingPersistenceUpdate;
 	};
 
 }

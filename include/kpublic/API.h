@@ -27,6 +27,7 @@
 #include "IWorldView.h"
 #include "Manifest.h"
 #include "Parser.h"
+#include "Persistence.h"
 #include "PersistentIdTable.h"
 #include "SourceContext.h"
 #include "SpriteData.h"

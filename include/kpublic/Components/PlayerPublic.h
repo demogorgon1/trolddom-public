@@ -15,9 +15,10 @@ namespace kpublic
 		{
 			static const Component::Id ID = Component::ID_PLAYER_PUBLIC;
 			static const uint8_t FLAGS = FLAG_REPLICATE_TO_OWNER | FLAG_REPLICATE_TO_OTHERS | FLAG_PLAYER_ONLY;
+			static const Persistence::Id PERSISTENCE = Persistence::ID_NONE;
 
 			PlayerPublic()
-				: ComponentBase(ID, FLAGS)
+				: ComponentBase(ID, FLAGS, PERSISTENCE)
 			{
 
 			}

@@ -13,9 +13,10 @@ namespace kpublic
 		{
 			static const Component::Id ID = Component::ID_SPRITE;
 			static const uint8_t FLAGS = FLAG_REPLICATE_TO_OWNER | FLAG_REPLICATE_TO_OTHERS;
+			static const Persistence::Id PERSISTENCE = Persistence::ID_NONE;
 
 			Sprite()
-				: ComponentBase(ID, FLAGS)
+				: ComponentBase(ID, FLAGS, PERSISTENCE)
 			{
 
 			}

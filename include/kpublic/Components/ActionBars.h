@@ -13,10 +13,11 @@ namespace kpublic
 			: public ComponentBase
 		{
 			static const Component::Id ID = Component::ID_ACTION_BARS;
-			static const uint8_t FLAGS = FLAG_REPLICATE_TO_OWNER | FLAG_PLAYER_ONLY | FLAG_PERSISTENT;			
+			static const uint8_t FLAGS = FLAG_REPLICATE_TO_OWNER | FLAG_PLAYER_ONLY;			
+			static const Persistence::Id PERSISTENCE = Persistence::ID_MAIN;
 
 			ActionBars()
-				: ComponentBase(ID, FLAGS)
+				: ComponentBase(ID, FLAGS, PERSISTENCE)
 			{
 
 			}

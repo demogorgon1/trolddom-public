@@ -14,11 +14,12 @@ namespace kpublic
 		{			
 			static const Component::Id ID = Component::ID_THREAT_TARGET;
 			static const uint8_t FLAGS = 0;
+			static const Persistence::Id PERSISTENCE = Persistence::ID_NONE;
 
 			static const uint32_t PING_INTERVAL_TICKS = 10;
 
 			ThreatTarget()
-				: ComponentBase(ID, FLAGS)
+				: ComponentBase(ID, FLAGS, PERSISTENCE)
 			{
 
 			}

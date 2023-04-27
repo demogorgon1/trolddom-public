@@ -1,0 +1,21 @@
+player_components:
+[
+	abilities
+	action_bars
+	auras
+	combat_private
+	combat_public
+	display_name
+	equipped_items
+	inventory
+	player_cooldowns
+	player_private
+	player_public
+	position
+	sprite
+	talents
+	threat_source
+	visible_auras
+	wallet
+]
+
