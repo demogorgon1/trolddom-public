@@ -62,6 +62,7 @@ namespace kpublic::Systems
 					i--;
 
 					auras->m_dirty = true;
+					auras->SetPendingPersistenceUpdate(kpublic::ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY);
 				}
 			}
 		}
@@ -81,33 +82,52 @@ namespace kpublic::Systems
 
 			if (aEntityState != EntityState::ID_DEAD)
 			{
+				bool dirty = false;
+
 				for (Components::CombatPublic::Resource& resource : combatPublic->m_resources)
 				{
 					switch (resource.m_id)
 					{
 					case Resource::ID_HEALTH:
 						if (aEntityState != EntityState::ID_IN_COMBAT && resource.m_current < resource.m_max)
+						{
 							resource.m_current++;
+							dirty = true;
+						}
 						break;
 
 					case Resource::ID_MANA:
 						if (resource.m_current < resource.m_max)
+						{
 							resource.m_current++;
+							dirty = true;
+						}
 						break;
 
 					case Resource::ID_RAGE:
 						if (aEntityState != EntityState::ID_IN_COMBAT && resource.m_current > 0)
+						{
 							resource.m_current--;
+							dirty = true;
+						}
 						break;
 
 					case Resource::ID_ENERGY:
 						if (resource.m_current < resource.m_max)
+						{
 							resource.m_current++;
+							dirty = true;
+						}
 						break;
 
 					default:
 						break;
 					}
+				}
+
+				if(dirty)
+				{
+					combatPublic->SetPendingPersistenceUpdate(kpublic::ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY);
 				}
 			}
 		}

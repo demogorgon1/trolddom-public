@@ -20,10 +20,12 @@ namespace kpublic
 
 	}
 
-	void			
+	bool
 	Cooldowns::Update(
 		uint32_t				aTick)
 	{
+		bool changed = false;
+
 		for(size_t i = 0; i < m_entries.size(); i++)
 		{
 			Entry& t = m_entries[i];
@@ -32,8 +34,12 @@ namespace kpublic
 			{
 				Helpers::RemoveCyclicFromVector(m_entries, i);
 				i--;
+
+				changed = true;
 			}
 		}
+
+		return changed;
 	}
 	
 	void			

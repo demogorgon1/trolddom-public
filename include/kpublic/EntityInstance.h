@@ -159,10 +159,11 @@ namespace kpublic
 		}
 
 		// Data access
-		uint32_t		GetEntityInstanceId() const { return m_entityInstanceId; }
-		uint32_t		GetEntityId() const { return m_entityId; }
-		EntityState::Id	GetState() const { return m_state; }
-		bool			IsPlayer() const { return m_entityId == 0; }
+		uint32_t										GetEntityInstanceId() const { return m_entityInstanceId; }
+		uint32_t										GetEntityId() const { return m_entityId; }
+		EntityState::Id									GetState() const { return m_state; }
+		bool											IsPlayer() const { return m_entityId == 0; }
+		std::vector<std::unique_ptr<ComponentBase>>&	GetComponents() { return m_components; }
 		
 	private:
 		

@@ -88,6 +88,7 @@ namespace kpublic
 		// Data access
 		uint32_t					GetComponentId() const { return m_componentId; }
 		uint8_t						GetFlags() const { return m_flags; }
+		Persistence::Id				GetPersistence() const { return m_persistence; }
 		PendingPersistenceUpdate	GetPendingPersistenceUpdate() const { return m_pendingPersistenceUpdate; }
 
 	private:

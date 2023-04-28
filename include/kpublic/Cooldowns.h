@@ -47,7 +47,7 @@ namespace kpublic
 						Cooldowns();
 						~Cooldowns();		
 
-		void			Update(
+		bool			Update(
 							uint32_t				aTick);
 		void			Add(
 							const Data::Ability*	aAbility,
