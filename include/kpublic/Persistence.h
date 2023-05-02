@@ -6,9 +6,17 @@ namespace kpublic::Persistence
 	enum Id : uint8_t
 	{
 		ID_NONE,
+
+		// Player 
 		ID_ACCOUNT,
 		ID_VOLATILE,
 		ID_MAIN,
+		ID_RESERVED_1,
+		ID_RESERVED_2,
+		ID_RESERVED_3,
+
+		// Group
+		ID_GROUP,
 
 		NUM_IDS
 	};
@@ -34,9 +42,16 @@ namespace kpublic::Persistence
 	{
 		{ NULL, PLAYER_PERSISTENCE_TYPE_NONE },
 
+		// Player
 		{ "account",	PLAYER_PERSISTENCE_TYPE_PER_ACCOUNT },
 		{ "volatile",	PLAYER_PERSISTENCE_TYPE_PER_CHARACTER },
-		{ "main",		PLAYER_PERSISTENCE_TYPE_PER_CHARACTER }
+		{ "main",		PLAYER_PERSISTENCE_TYPE_PER_CHARACTER },
+		{ NULL,			PLAYER_PERSISTENCE_TYPE_NONE },
+		{ NULL,			PLAYER_PERSISTENCE_TYPE_NONE },
+		{ NULL,			PLAYER_PERSISTENCE_TYPE_NONE },
+
+		// Group
+		{ "group",		PLAYER_PERSISTENCE_TYPE_NONE }
 	};
 
 	static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);
@@ -56,18 +71,10 @@ namespace kpublic::Persistence
 		for (uint32_t i = 1; i < (uint32_t)NUM_IDS; i++)
 		{
 			const Info* t = &INFO[i];
-			if (strcmp(t->m_name, aString) == 0)
+			if (t->m_name != NULL && strcmp(t->m_name, aString) == 0)
 				return (Id)i;
 		}
 		return ID_NONE;
-	}
-
-	inline void
-	GetAllIds(
-		std::vector<Id>&	aOut)
-	{
-		for (uint32_t i = 1; i < (uint32_t)NUM_IDS; i++)
-			aOut.push_back((Id)i);
 	}
 
 }
