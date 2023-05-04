@@ -70,12 +70,22 @@ namespace kpublic
 			}
 
 			const _T*
-			GetById(
+			TryGetById(
 				uint32_t								aId) const
 			{
 				auto it = m_idTable.find(aId);
-				KP_CHECK(it != m_idTable.end(), "Invalid '%s' id: %u", DataType::IdToString(_T::DATA_TYPE), aId);
+				if(it == m_idTable.end())
+					return NULL;
 				return it->second;
+			}
+
+			const _T*
+			GetById(
+				uint32_t								aId) const
+			{
+				const _T* t = TryGetById(aId);
+				KP_CHECK(t != NULL, "Invalid '%s' id: %u", DataType::IdToString(_T::DATA_TYPE), aId);
+				return t;
 			}
 
 			void
