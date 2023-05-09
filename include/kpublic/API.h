@@ -21,6 +21,7 @@
 #include "EntityInstance.h"
 #include "IAbilityQueue.h"
 #include "IAuraEventQueue.h"
+#include "Image.h"
 #include "ItemInstance.h"
 #include "ItemInstanceData.h"
 #include "IMoveRequestQueue.h"

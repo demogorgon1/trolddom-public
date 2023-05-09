@@ -28,6 +28,9 @@ namespace kpublic
 			const char*		m_name;
 			const char*		m_capitalizedName;
 			uint8_t			m_flags;
+			uint8_t			m_colorR;
+			uint8_t			m_colorG;
+			uint8_t			m_colorB;
 		};
 
 		// IMPORTANT: Must match Id enum
@@ -35,10 +38,10 @@ namespace kpublic
 		{			
 			{ NULL, NULL },
 
-			{ "health",	"Health",	FLAG_DEFAULT_TO_MAX },
-			{ "mana",	"Mana",		FLAG_DEFAULT_TO_MAX },
-			{ "rage",	"Rage",		0 },
-			{ "energy",	"Energy",	FLAG_DEFAULT_TO_MAX }
+			{ "health",	"Health",	FLAG_DEFAULT_TO_MAX,	0, 220, 0 },
+			{ "mana",	"Mana",		FLAG_DEFAULT_TO_MAX,	0, 0, 220 },
+			{ "rage",	"Rage",		0,						220, 0, 0 },
+			{ "energy",	"Energy",	FLAG_DEFAULT_TO_MAX,    220, 220, 0 }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

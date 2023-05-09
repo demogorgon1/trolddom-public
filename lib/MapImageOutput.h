@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Image.h"
+#include <kpublic/Image.h>
 
 namespace kpublic
 {

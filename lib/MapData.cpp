@@ -1,9 +1,8 @@
 #include "Pcheader.h"
 
+#include <kpublic/Image.h>
 #include <kpublic/Manifest.h>
 #include <kpublic/MapData.h>
-
-#include "Image.h"
 
 namespace kpublic
 {

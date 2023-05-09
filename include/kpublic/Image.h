@@ -1,6 +1,6 @@
 #pragma once
 
-#include <kpublic/DataErrorHandling.h>
+#include "DataErrorHandling.h"
 
 namespace kpublic
 {
@@ -41,7 +41,19 @@ namespace kpublic
 						const Image&	aImage);
 		void		Clear(
 						const RGBA&		aColor);
+		void		DrawVerticalGradient(
+						const RGBA&		aColorTop,
+						const RGBA&		aColorBottom);
+		void		DrawBlendedHorizontalLine(
+						uint32_t		aX,
+						uint32_t		aY,
+						uint32_t		aLength,
+						const RGBA&		aColor);
 		void		Release();
+		void		Detach(
+						void**			aOutData,
+						uint32_t*		aOutWidth,
+						uint32_t*		aOutHeight);
 		
 		// Data access
 		uint32_t	GetWidth() const { return m_width; }

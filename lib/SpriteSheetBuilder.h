@@ -1,10 +1,9 @@
 #pragma once
 
+#include <kpublic/Image.h>
 #include <kpublic/Manifest.h>
 #include <kpublic/Parser.h>
 #include <kpublic/SpriteInfo.h>
-
-#include "Image.h"
 
 namespace kpublic
 {
