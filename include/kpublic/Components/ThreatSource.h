@@ -35,6 +35,13 @@ namespace kpublic
 				m_targets[aEntityInstanceId] = aTick;
 			}
 
+			void
+			RemoveTarget(
+				uint32_t			aEntityInstanceId)
+			{
+				m_targets.erase(aEntityInstanceId);
+			}
+
 			// ComponentBase implementation
 			void
 			ToStream(

@@ -85,9 +85,10 @@ namespace kpublic::Systems
 		}			
 
 		if (aEntityState != EntityState::ID_DEAD && combat->GetResource(Resource::ID_HEALTH) == 0)
-		{
 			return EntityState::ID_DEAD;
-		}
+
+		if(aEntityState == EntityState::ID_DEAD && !threat->m_table.IsEmpty())
+			aContext->m_threatEventQueue->AddThreatClearEvent(aEntityInstanceId);
 
 		npc->m_cooldowns.Update(aContext->m_tick);
 		threat->m_table.Update(aContext->m_tick);

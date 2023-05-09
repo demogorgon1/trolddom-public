@@ -40,6 +40,7 @@ class priest:
 				dexterity: 3
 				strength: 3
 				wisdom: 6
+				constitution: 4
 			}
 			
 			resource health: { add_max: 60 }

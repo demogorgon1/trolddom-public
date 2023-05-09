@@ -15,6 +15,7 @@ namespace kpublic
 			ID_DEXTERITY,
 			ID_STRENGTH,
 			ID_WISDOM,
+			ID_CONSTITUTION,
 
 			NUM_IDS
 		};
@@ -33,7 +34,8 @@ namespace kpublic
 
 			{ "dexterity",				"DEX",		"Dexterity" },
 			{ "strength",				"STR",		"Strength" },
-			{ "wisdom",					"WIS",		"Wisdom" }
+			{ "wisdom",					"WIS",		"Wisdom" },
+			{ "constitution",			"CON",		"Constitution" },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

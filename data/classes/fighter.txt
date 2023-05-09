@@ -64,6 +64,7 @@ class fighter:
 				dexterity: 4
 				strength: 6
 				wisdom: 2
+				constitution: 4
 			}
 			
 			resource health: { add_max: 80 }
