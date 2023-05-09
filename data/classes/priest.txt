@@ -16,6 +16,8 @@ class priest:
 {
 	string: "Priest"	
 	sprite: priest
+	color_1: [ 210 210 210 ] 
+	color_2: [ 100 100 64 ]
 	default_attack: attack
 	default_action_bar: [ attack minor_heal gaze_of_death ]
 	

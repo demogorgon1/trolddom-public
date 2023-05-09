@@ -39,6 +39,8 @@ class fighter:
 {
 	string: "Fighter"	
 	sprite: fighter
+	color_1: [ 128 32 0 ] 
+	color_2: [ 70 32 0 ] 
 	default_attack: fighter_attack
 	default_action_bar: [ fighter_attack knock strike gaze_of_death ]
 	

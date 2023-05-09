@@ -17,6 +17,13 @@ namespace kpublic
 		{
 			static const DataType::Id DATA_TYPE = DataType::ID_CLASS;
 
+			struct Color
+			{
+				uint8_t					m_r = 0;
+				uint8_t					m_g = 0;
+				uint8_t					m_b = 0;
+			};
+
 			struct StartEquipment
 			{
 				StartEquipment()
@@ -222,6 +229,22 @@ namespace kpublic
 					{
 						m_spriteId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aMember->GetIdentifier());
 					}					
+					else if (aMember->m_name == "color_1")
+					{
+						const Parser::Node* components = aMember->GetArray();
+						KP_VERIFY(components->m_children.size() == 3, aMember->m_debugInfo, "'%s' is not a valid color.", aMember->m_name.c_str());
+						m_color1.m_r = components->m_children[0]->GetUInt8();
+						m_color1.m_g = components->m_children[1]->GetUInt8();
+						m_color1.m_b = components->m_children[2]->GetUInt8();
+					}
+					else if (aMember->m_name == "color_2")
+					{
+						const Parser::Node* components = aMember->GetArray();
+						KP_VERIFY(components->m_children.size() == 3, aMember->m_debugInfo, "'%s' is not a valid color.", aMember->m_name.c_str());
+						m_color2.m_r = components->m_children[0]->GetUInt8();
+						m_color2.m_g = components->m_children[1]->GetUInt8();
+						m_color2.m_b = components->m_children[2]->GetUInt8();
+					}
 					else if (aMember->m_name == "default_attack")
 					{
 						m_defaultAttackAbilityId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aMember->GetIdentifier());
@@ -256,6 +279,8 @@ namespace kpublic
 				aStream->WriteUInt(m_defaultAttackAbilityId);
 				aStream->WriteObjects(m_startEquipment);
 				m_defaultActionBar.ToStream(aStream);
+				aStream->WritePOD(m_color1);
+				aStream->WritePOD(m_color2);
 			}
 			
 			bool	
@@ -276,12 +301,18 @@ namespace kpublic
 					return false;
 				if(!m_defaultActionBar.FromStream(aStream))
 					return false;
+				if (!aStream->ReadPOD(m_color1))
+					return false;
+				if (!aStream->ReadPOD(m_color2))
+					return false;
 				return true;
 			}
 
 			// Public data
 			std::string												m_displayName;
 			uint32_t												m_spriteId = 0;
+			Color													m_color1;
+			Color													m_color2;
 			uint32_t												m_defaultAttackAbilityId = 0;
 			std::unique_ptr<LevelProgression>						m_levelProgression;
 			std::vector<StartEquipment>								m_startEquipment;
