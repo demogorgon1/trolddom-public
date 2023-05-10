@@ -21,6 +21,8 @@ class priest:
 	default_attack: attack
 	default_action_bar: [ attack minor_heal gaze_of_death ]
 	
+	start_map test_world: [ test_world_player_spawn ]
+	
 	start_equipment main_hand: weapon_gnarly_staff
 
 	level_progression:

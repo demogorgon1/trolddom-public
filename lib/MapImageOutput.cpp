@@ -10,11 +10,16 @@ namespace kpublic
 {
 
 	MapImageOutput::MapImageOutput(
+		const char*			aDataPath,
 		const Manifest*		aManifest)
 		: m_manifest(aManifest)
+		, m_dataPath(aDataPath)
 	{
+		std::string spritesPath = aDataPath;
+		spritesPath += "/sprites.bin";
+
 		SpriteData spriteData;
-		bool ok = spriteData.Load("sprites.bin");
+		bool ok = spriteData.Load(spritesPath.c_str());
 		KP_CHECK(ok, "Failed to load sprite data.");
 
 		std::vector<std::unique_ptr<Image>> sheets;

@@ -10,6 +10,7 @@ namespace kpublic
 
 	class Manifest;
 	class PersistentIdTable;
+	class TileStackCache;
 
 	class SpriteSheetBuilder
 	{
@@ -20,10 +21,14 @@ namespace kpublic
 
 		void	AddSprites(
 					const Parser::Node*		aSource);
+		void	GenerateStackedTiles(
+					TileStackCache*			aTileStackCache,
+					Manifest*				aManifest);
 		void	Build();
-		void	ExportManifestData(
+		void	ExportPreliminaryManifestData(
 					PersistentIdTable*		aPersistentIdTable,
 					Manifest*				aManifest);
+		void	UpdateManifestData();
 		void	ExportSheets(
 					const char*				aPath);
 
@@ -39,6 +44,7 @@ namespace kpublic
 				, m_sheetOffsetX(0)
 				, m_sheetOffsetY(0)
 				, m_sheetIndex(0)
+				, m_data(NULL)
 			{
 
 			}
@@ -51,6 +57,7 @@ namespace kpublic
 			uint32_t						m_sheetIndex;
 			uint32_t						m_sheetOffsetX;
 			uint32_t						m_sheetOffsetY;
+			Data::Sprite*					m_data;
 		};
 
 		struct Sheet
@@ -88,10 +95,14 @@ namespace kpublic
 
 		std::vector<std::unique_ptr<Sheet>>	m_sheets;
 
+		uint32_t							m_nextUnnamedIndex;
+
 		Sprite*	_CreateSprite(
 					const Parser::Node*	aNode,
 					const char*			aName,
 					uint32_t			aSize);
+		Sprite*	_GetSprite(
+					const char*			aName);
 		Sheet*	_CreateSheet(
 					uint32_t			aWidth,
 					uint32_t			aHeight);

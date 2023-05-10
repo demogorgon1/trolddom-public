@@ -43,6 +43,8 @@ class fighter:
 	color_2: [ 70 32 0 ] 
 	default_attack: fighter_attack
 	default_action_bar: [ fighter_attack knock strike gaze_of_death ]
+
+	start_map test_world: [ test_world_player_spawn ]
 	
 	start_equipment main_hand: weapon_rusty_sword
 

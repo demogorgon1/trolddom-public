@@ -49,6 +49,8 @@ namespace kpublic
 				PersistentIdTable*						aPersistentIdTable,
 				const char*								aName)
 			{
+				assert(!m_hasUnnamedEntries);
+
 				typename std::unordered_map<std::string, _T*>::iterator it = m_nameTable.find(aName);
 				if(it == m_nameTable.end())
 				{
@@ -59,6 +61,9 @@ namespace kpublic
 					t->m_name = aName;
 					t->m_id = aPersistentIdTable->GetId(_T::DATA_TYPE, aName);
 
+					if (t->m_id > m_maxId)
+						m_maxId = t->m_id;
+
 					m_nameTable.insert(std::pair<std::string, _T*>(t->m_name, t.get()));
 					m_idTable.insert(std::pair<uint32_t, _T*>(t->m_id, t.get()));
 					m_entries.push_back(std::move(t));
@@ -67,6 +72,29 @@ namespace kpublic
 				}
 
 				return it->second;
+			}
+
+			_T*
+			GetExistingByName(
+				const char*								aName)
+			{
+				typename std::unordered_map<std::string, _T*>::iterator it = m_nameTable.find(aName);
+				if(it == m_nameTable.end())
+					return NULL;
+				return it->second;
+			}
+
+			_T*
+			CreateUnnamed()
+			{
+				std::unique_ptr<_T> t = std::make_unique<_T>();
+				t->m_id = ++m_maxId;
+				m_idTable.insert(std::pair<uint32_t, _T*>(t->m_id, t.get()));
+				_T* returnValue = t.get();
+				m_entries.push_back(std::move(t));
+
+				m_hasUnnamedEntries = true;
+				return returnValue;
 			}
 
 			const _T*
@@ -79,11 +107,30 @@ namespace kpublic
 				return it->second;
 			}
 
+			_T*
+			TryGetById(
+				uint32_t								aId) 
+			{
+				auto it = m_idTable.find(aId);
+				if(it == m_idTable.end())
+					return NULL;
+				return it->second;
+			}
+
 			const _T*
 			GetById(
 				uint32_t								aId) const
 			{
 				const _T* t = TryGetById(aId);
+				KP_CHECK(t != NULL, "Invalid '%s' id: %u", DataType::IdToString(_T::DATA_TYPE), aId);
+				return t;
+			}
+
+			_T*
+			GetById(
+				uint32_t								aId) 
+			{
+				_T* t = TryGetById(aId);
 				KP_CHECK(t != NULL, "Invalid '%s' id: %u", DataType::IdToString(_T::DATA_TYPE), aId);
 				return t;
 			}
@@ -149,6 +196,9 @@ namespace kpublic
 
 					m_idTable[t->m_id] = t.get();
 					m_nameTable[t->m_name] = t.get();
+
+					if(t->m_id > m_maxId)
+						m_maxId = t->m_id;
 				}
 
 				return true;
@@ -166,6 +216,8 @@ namespace kpublic
 			std::vector<std::unique_ptr<_T>>			m_entries;
 			std::unordered_map<std::string, _T*>		m_nameTable;
 			std::unordered_map<uint32_t, _T*>			m_idTable;
+			uint32_t									m_maxId = 0;
+			bool										m_hasUnnamedEntries = false;
 		};
 
 		Manifest()

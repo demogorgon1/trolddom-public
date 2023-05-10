@@ -21,30 +21,40 @@ namespace kpublic
 			return 0;
 		}
 
-		SpriteInfo()
-			: m_flags(0)
-		{
-
-		}
-
 		void
 		ToStream(
 			IWriter*		aStream) const 
 		{
-			aStream->WriteUInt(m_flags);
+			aStream->WritePOD(m_flags);
+			aStream->WriteUInt(m_tileLayer);
+			aStream->WriteUInts(m_borders);
+			aStream->WriteUInt(m_animationNextFrame);
+			aStream->WriteUInt(m_animationDelay);
 		}
 
 		bool
 		FromStream(
 			IReader*		aStream) 
 		{
-			if (!aStream->ReadUInt(m_flags))
+			if (!aStream->ReadPOD(m_flags))
+				return false;
+			if (!aStream->ReadUInt(m_tileLayer))
+				return false;
+			if (!aStream->ReadUInts(m_borders))
+				return false;
+			if (!aStream->ReadUInt(m_animationNextFrame))
+				return false;
+			if (!aStream->ReadUInt(m_animationDelay))
 				return false;
 			return true;
 		}
 
 		// Public data
-		uint8_t		m_flags;
+		uint8_t					m_flags = 0;
+		uint32_t				m_tileLayer = 0;
+		std::vector<uint32_t>	m_borders;
+		uint32_t				m_animationNextFrame = 0;
+		uint32_t				m_animationDelay = 0;
 	};
 
 }

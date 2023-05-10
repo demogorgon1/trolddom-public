@@ -63,6 +63,44 @@ namespace kpublic
 				uint32_t				m_itemId = 0;				
 			};
 
+			struct StartMap
+			{
+				StartMap()
+				{
+
+				}
+
+				StartMap(
+					const Parser::Node*		aSource)
+				{
+					m_mapId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP, aSource->m_name.c_str());
+					aSource->GetIdArray(DataType::ID_MAP_PLAYER_SPAWN, m_mapPlayerSpawnIds);					
+				}
+
+				void	
+				ToStream(
+					IWriter*				aStream) const 
+				{
+					aStream->WriteUInt(m_mapId);
+					aStream->WriteUInts(m_mapPlayerSpawnIds);
+				}
+			
+				bool	
+				FromStream(
+					IReader*				aStream) 
+				{
+					if (!aStream->ReadUInt(m_mapId))
+						return false;
+					if (!aStream->ReadUInts(m_mapPlayerSpawnIds))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t				m_mapId = 0;
+				std::vector<uint32_t>	m_mapPlayerSpawnIds;				
+			};
+
 			struct LevelProgressionLevelResourceUpdate
 			{	
 				LevelProgressionLevelResourceUpdate()
@@ -261,6 +299,10 @@ namespace kpublic
 					{
 						m_startEquipment.push_back(StartEquipment(aMember));
 					}
+					else if (aMember->m_tag == "start_map")
+					{
+						m_startMaps.push_back(std::make_unique<StartMap>(aMember));
+					}
 					else
 					{
 						KP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
@@ -281,6 +323,7 @@ namespace kpublic
 				m_defaultActionBar.ToStream(aStream);
 				aStream->WritePOD(m_color1);
 				aStream->WritePOD(m_color2);
+				aStream->WriteObjectPointers(m_startMaps);
 			}
 			
 			bool	
@@ -305,6 +348,8 @@ namespace kpublic
 					return false;
 				if (!aStream->ReadPOD(m_color2))
 					return false;
+				if (!aStream->ReadObjectPointers(m_startMaps))
+					return false;
 				return true;
 			}
 
@@ -317,6 +362,7 @@ namespace kpublic
 			std::unique_ptr<LevelProgression>						m_levelProgression;
 			std::vector<StartEquipment>								m_startEquipment;
 			ActionBar												m_defaultActionBar;
+			std::vector<std::unique_ptr<StartMap>>					m_startMaps;
 		};
 
 	}

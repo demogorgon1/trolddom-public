@@ -104,6 +104,48 @@ namespace kpublic
 	}
 
 	void		
+	Image::InsertBlended(
+		uint32_t		aX,
+		uint32_t		aY,
+		const Image&	aImage)
+	{
+		assert(HasData());
+		assert(aImage.HasData());
+		assert(aX + aImage.m_width <= m_width && aY + aImage.m_height <= m_height);
+
+		for(uint32_t y = 0; y < aImage.m_height; y++)
+		{
+			RGBA* out = GetData() + aX + (aY + y) * m_width;
+			const RGBA* in = aImage.GetData() + y * aImage.GetWidth();
+
+			for(uint32_t x = 0; x < aImage.m_width; x++)
+			{
+				uint32_t r1 = ((uint32_t)out->m_r * (uint32_t)(255 - in->m_a)) / 255;
+				uint32_t g1 = ((uint32_t)out->m_g * (uint32_t)(255 - in->m_a)) / 255;
+				uint32_t b1 = ((uint32_t)out->m_b * (uint32_t)(255 - in->m_a)) / 255;
+				uint32_t a1 = ((uint32_t)out->m_a * (uint32_t)(255 - in->m_a)) / 255;
+
+				uint32_t r2 = ((uint32_t)in->m_r * (uint32_t)in->m_a) / 255;
+				uint32_t g2 = ((uint32_t)in->m_g * (uint32_t)in->m_a) / 255;
+				uint32_t b2 = ((uint32_t)in->m_b * (uint32_t)in->m_a) / 255;
+				uint32_t a2 = ((uint32_t)in->m_a * (uint32_t)in->m_a) / 255;
+
+				uint32_t r = r1 + r2;
+				uint32_t g = g1 + g2;
+				uint32_t b = b1 + b2;
+				uint32_t a = a1 + a2;
+
+				RGBA c = { (uint8_t)r, (uint8_t)g, (uint8_t)b, (uint8_t)a };
+
+				*out = c;
+
+				out++;
+				in++;
+			}
+		}
+	}
+
+	void		
 	Image::Clear(
 		const RGBA&		aColor)
 	{

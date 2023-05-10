@@ -12,6 +12,7 @@ namespace kpublic
 	{
 	public:
 				MapImageOutput(
+					const char*					aDataPath,
 					const Manifest*				aManifest);
 				~MapImageOutput();
 
@@ -21,6 +22,7 @@ namespace kpublic
 
 	private:
 
+		std::string			m_dataPath;
 		const Manifest*		m_manifest;
 
 		typedef std::unordered_map<uint32_t, std::unique_ptr<Image>> TileImageTable;

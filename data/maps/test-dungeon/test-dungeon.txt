@@ -7,22 +7,10 @@ map_player_spawn test_dungeon_player_spawn:
 {
 }
 
-sprites:
-{
-	source: "test-dungeon-tiles.png"
-
-	cursor: { position: [ 0 0 ] }
-
-	size: { width: 16 height: 16 }
-
-	sprite test_dungeon_floor: { flags: [ tile_walkable ] }
-	sprite test_dungeon_wall: { }
-}
-
 map_palette test_dungeon_tiles:
 {
-	tile test_dungeon_floor: [ 0 0 0 ]
-	tile test_dungeon_wall: [ 255 255 255 ]
+	tile dungeon_floor: [ 0 0 0 ]
+	tile dungeon_wall: [ 255 255 255 ]
 }
 
 map_palette test_dungeon_entity_spawns:
@@ -33,7 +21,7 @@ map_palette test_dungeon_entity_spawns:
 
 map test_dungeon:
 {
-	default_tile: test_dungeon_wall
+	default_tile: dungeon_wall
 	default_player_spawn: test_dungeon_player_spawn
 	#image_output: "test.png"
 

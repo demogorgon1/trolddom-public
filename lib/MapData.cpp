@@ -3,6 +3,7 @@
 #include <kpublic/Image.h>
 #include <kpublic/Manifest.h>
 #include <kpublic/MapData.h>
+#include <kpublic/TileStackCache.h>
 
 namespace kpublic
 {
@@ -73,13 +74,18 @@ namespace kpublic
 
 	void	
 	MapData::Build(
-		const Manifest*			aManifest)
+		const Manifest*			aManifest,
+		TileStackCache*			aTileStackCache)
 	{
 		// Allocate space for tile map
 		assert(m_tileMap == NULL);
 		m_tileMap = new uint32_t[m_width * m_height];
 		for(int32_t i = 0, count = m_width * m_height; i < count; i++)
 			m_tileMap[i] = m_defaultTileSpriteId;		
+
+		// Allocate temporary tile stack map
+		std::vector<std::vector<uint32_t>> tileStackMap;
+		tileStackMap.resize(m_width * m_height);
 
 		// Process layers
 		for(std::unique_ptr<SourceLayer>& layer : m_sourceLayers)
@@ -145,6 +151,111 @@ namespace kpublic
 						maskIndex++;
 					}
 				}
+			}
+		}
+
+		// Make list of tiles with borders
+		std::vector<const Data::Sprite*> spritesWithBorders;
+		aManifest->m_sprites.ForEach([&](
+			const Data::Sprite* aSprite)
+		{
+			if(aSprite->m_info.m_borders.size() > 0)
+				spritesWithBorders.push_back(aSprite);
+		});
+
+		// Sort by tile layer 
+		std::sort(spritesWithBorders.begin(), spritesWithBorders.end(), [](
+			const Data::Sprite* aLHS,
+			const Data::Sprite* aRHS)
+		{
+			return aLHS->m_info.m_tileLayer < aRHS->m_info.m_tileLayer;
+		});
+
+		// Generate tile-stack map (tile borders stacked on top of each other)
+		for (const Data::Sprite* t : spritesWithBorders)
+		{
+			KP_VERIFY(t->m_info.m_borders.size() == 17, t->m_debugInfo, "Bordered tile must have 17 borders defined.");
+
+			for (int32_t y = 0; y < m_height; y++)
+			{
+				for (int32_t x = 0; x < m_width; x++)
+				{
+					uint32_t tileSpriteId = m_tileMap[x + y * m_width];
+					if(tileSpriteId == t->m_id)
+						continue;
+
+					const Data::Sprite* sprite = aManifest->m_sprites.GetById(tileSpriteId);
+					if(sprite->m_info.m_tileLayer >= t->m_info.m_tileLayer)	
+						continue;
+
+					std::vector<uint32_t>& tileStack = tileStackMap[x + y * m_width];					
+
+					// Unleash the tiling monster
+					bool bits[8];
+					bits[0] = _GetTile(x - 1, y - 1) == t->m_id;
+					bits[1] = _GetTile(x, y - 1) == t->m_id;
+					bits[2] = _GetTile(x + 1, y - 1) == t->m_id;
+					bits[3] = _GetTile(x + 1, y) == t->m_id;
+					bits[4] = _GetTile(x + 1, y + 1) == t->m_id;
+					bits[5] = _GetTile(x, y + 1) == t->m_id;
+					bits[6] = _GetTile(x - 1, y + 1) == t->m_id;
+					bits[7] = _GetTile(x - 1, y) == t->m_id;
+
+					if (bits[1] && bits[7] && !bits[3] && !bits[5])
+						tileStack.push_back(t->m_info.m_borders[0]);
+					if (bits[1] && bits[3] && !bits[5] && !bits[7])
+						tileStack.push_back(t->m_info.m_borders[1]);
+					if (bits[3] && bits[5] && !bits[7] && !bits[1])
+						tileStack.push_back(t->m_info.m_borders[2]);
+					if (bits[5] && bits[7] && !bits[1] && !bits[3])
+						tileStack.push_back(t->m_info.m_borders[3]);
+
+					if (bits[5] && !bits[7] && !bits[3])
+						tileStack.push_back(t->m_info.m_borders[4]);
+					if (bits[7] && !bits[1] && !bits[5])
+						tileStack.push_back(t->m_info.m_borders[5]);
+					if (bits[1] && !bits[7] && !bits[3])
+						tileStack.push_back(t->m_info.m_borders[6]);
+					if (bits[3] && !bits[1] && !bits[5])
+						tileStack.push_back(t->m_info.m_borders[7]);
+
+					if (!bits[1] && bits[3] && bits[5] && bits[7])
+						tileStack.push_back(t->m_info.m_borders[8]);
+					if (bits[1] && !bits[3] && bits[5] && bits[7])
+						tileStack.push_back(t->m_info.m_borders[9]);
+					if (bits[1] && bits[3] && !bits[5] && bits[7])
+						tileStack.push_back(t->m_info.m_borders[10]);
+					if (bits[1] && bits[3] && bits[5] && !bits[7])
+						tileStack.push_back(t->m_info.m_borders[11]);
+
+					if (bits[0] && !bits[7] && !bits[1])
+						tileStack.push_back(t->m_info.m_borders[12]);
+					if (bits[2] && !bits[1] && !bits[3])
+						tileStack.push_back(t->m_info.m_borders[13]);
+					if (bits[4] && !bits[3] && !bits[5])
+						tileStack.push_back(t->m_info.m_borders[14]);
+					if (bits[6] && !bits[5] && !bits[7])
+						tileStack.push_back(t->m_info.m_borders[15]);
+
+					if (bits[1] && bits[3] && bits[5] && bits[7])
+						tileStack.push_back(t->m_info.m_borders[16]);
+				}
+			}
+		}
+
+		// Process tile stacks. See if we need to automatically generate border some tiles.
+		for (int32_t y = 0; y < m_height; y++)
+		{
+			for (int32_t x = 0; x < m_width; x++)
+			{
+				int32_t i = x + y * m_width;
+
+				const std::vector<uint32_t>& tileStack = tileStackMap[i];
+
+				if(tileStack.size() > 0)
+					m_tileMap[i] = aTileStackCache->GetSpriteId(m_tileMap[i], tileStack);
+				
+				//m_tileStacks.push_back({ x, y, aTileStackCache->GetIndex(m_tileMap[x + y * m_width], tileStack) });
 			}
 		}
 	}
@@ -368,6 +479,17 @@ namespace kpublic
 				}
 			}
 		}
+	}
+
+	uint32_t	
+	MapData::_GetTile(
+		int32_t				aX,
+		int32_t				aY)
+	{
+		if(aX >= 0 && aY >= 0 && aX < m_width && aY < m_height)
+			return m_tileMap[aX + aY * m_width];
+
+		return 0;
 	}
 
 }

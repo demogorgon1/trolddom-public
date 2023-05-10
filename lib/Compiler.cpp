@@ -4,6 +4,7 @@
 #include <kpublic/ComponentFactory.h>
 #include <kpublic/Compression.h>
 #include <kpublic/DataErrorHandling.h>
+#include <kpublic/TileStackCache.h>
 
 #include "FileWriter.h"
 #include "MapImageOutput.h"
@@ -75,30 +76,42 @@ namespace kpublic
 			}
 		});		
 
+		// Build map data
+		TileStackCache tileStackCache(m_manifest);
+
+		{
+			spriteSheetBuilder.ExportPreliminaryManifestData(m_sourceContext.m_persistentIdTable.get(), m_manifest);
+
+			m_manifest->m_maps.ForEach([&](
+				Data::Map* aMap)
+			{
+				aMap->m_data->Build(m_manifest, &tileStackCache);
+			});			
+		}
+
 		// Build sprite sheets
 		{
+			spriteSheetBuilder.GenerateStackedTiles(&tileStackCache, m_manifest);
 			spriteSheetBuilder.Build();
-			spriteSheetBuilder.ExportManifestData(m_sourceContext.m_persistentIdTable.get(), m_manifest);
+			spriteSheetBuilder.UpdateManifestData();
 
 			std::string spritesPath = aDataOutputPath;
 			spritesPath += "/sprites.bin";
 			spriteSheetBuilder.ExportSheets(spritesPath.c_str());
 		}
 
-		// Build map data
+		// Generate map image output for debugging purposes
 		{
 			std::unique_ptr<MapImageOutput> mapImageOutput;
 
 			m_manifest->m_maps.ForEach([&](
 				Data::Map* aMap)
 			{
-				aMap->m_data->Build(m_manifest);
-
 				// Debug image output for this map?
 				if(!aMap->m_data->m_imageOutputPath.empty())
 				{
 					if(!mapImageOutput)
-						mapImageOutput = std::make_unique<MapImageOutput>(m_manifest);
+						mapImageOutput = std::make_unique<MapImageOutput>(aDataOutputPath, m_manifest);
 
 					mapImageOutput->Generate(aMap->m_data.get(), aMap->m_data->m_imageOutputPath.c_str());
 				}

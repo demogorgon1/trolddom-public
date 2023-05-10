@@ -1,0 +1,69 @@
+sprites:
+{
+	source: "common-tiles.png"
+
+	size: { width: 16 height: 16 }
+
+	cursor: { position: [ 0 0 ] }
+
+	sprite dungeon_floor: { flags: [ tile_walkable ] }
+	sprite dungeon_wall: { }
+	sprite grass: { flags: [ tile_walkable ] tile_layer: 2 borders: 
+		[ grass_border_1 grass_border_2 grass_border_3 grass_border_4 grass_border_5 grass_border_6 grass_border_7
+		  grass_border_8 grass_border_9 grass_border_10 grass_border_11 grass_border_12 grass_border_13 grass_border_14
+		  grass_border_15 grass_border_16 grass_border_17 ] }
+	sprite dirt: { flags: [ tile_walkable ] tile_layer: 1 borders:
+		[ dirt_border_1 dirt_border_2 dirt_border_3 dirt_border_4 dirt_border_5 dirt_border_6 dirt_border_7
+		  dirt_border_8 dirt_border_9 dirt_border_10 dirt_border_11 dirt_border_12 dirt_border_13 dirt_border_14
+		  dirt_border_15 dirt_border_16 dirt_border_17 ] }	
+	sprite water_1: { animation_next_frame: water_2 animation_delay: 400 }
+	sprite water_2: { animation_next_frame: water_3 animation_delay: 400 }
+	sprite water_3: { animation_next_frame: water_1 animation_delay: 400 }
+	
+	cursor: { position: [ 0 16 ] }
+	
+	sprite grass_border_1: { }
+	sprite grass_border_2: { }
+	sprite grass_border_3: { }
+	sprite grass_border_4: { }
+	sprite grass_border_5: { }
+	sprite grass_border_6: { }
+	sprite grass_border_7: { }
+	sprite grass_border_8: { }
+	sprite grass_border_9: { }
+	sprite grass_border_10: { }
+	sprite grass_border_11: { }
+	sprite grass_border_12: { }
+	sprite grass_border_13: { }
+	sprite grass_border_14: { }
+	sprite grass_border_15: { }
+	sprite grass_border_16: { }
+	
+	cursor: { position: [ 0 32 ] }
+
+	sprite grass_border_17: { }
+
+	cursor: { position: [ 0 48 ] }
+	
+	sprite dirt_border_1: { }
+	sprite dirt_border_2: { }
+	sprite dirt_border_3: { }
+	sprite dirt_border_4: { }
+	sprite dirt_border_5: { }
+	sprite dirt_border_6: { }
+	sprite dirt_border_7: { }
+	sprite dirt_border_8: { }
+	sprite dirt_border_9: { }
+	sprite dirt_border_10: { }
+	sprite dirt_border_11: { }
+	sprite dirt_border_12: { }
+	sprite dirt_border_13: { }
+	sprite dirt_border_14: { }
+	sprite dirt_border_15: { }
+	sprite dirt_border_16: { }
+	
+	cursor: { position: [ 0 64 ] }
+
+	sprite dirt_border_17: { }
+
+}

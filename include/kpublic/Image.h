@@ -39,6 +39,10 @@ namespace kpublic
 						uint32_t		aX,
 						uint32_t		aY,
 						const Image&	aImage);
+		void		InsertBlended(
+						uint32_t		aX,
+						uint32_t		aY,
+						const Image&	aImage);
 		void		Clear(
 						const RGBA&		aColor);
 		void		DrawVerticalGradient(

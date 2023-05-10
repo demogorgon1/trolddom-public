@@ -8,6 +8,7 @@ namespace kpublic
 {
 
 	class Manifest;
+	class TileStackCache;
 
 	class MapData
 	{
@@ -78,7 +79,8 @@ namespace kpublic
 				~MapData();
 
 		void	Build(
-					const Manifest*			aManifest);
+					const Manifest*			aManifest,
+					TileStackCache*			aTileStackCache);
 		void	ToStream(
 					IWriter*				aStream) const;
 		bool	FromStream(
@@ -143,10 +145,15 @@ namespace kpublic
 
 		std::vector<std::unique_ptr<SourceLayer>>	m_sourceLayers;
 
-		void	_InitLayers(
-					const Parser::Node*		aLayersArray);
-		void	_InitWalkableBits(
-					const Manifest*			aManifest);
+	private:
+
+		void		_InitLayers(
+						const Parser::Node*		aLayersArray);
+		void		_InitWalkableBits(
+						const Manifest*			aManifest);
+		uint32_t	_GetTile(
+						int32_t					aX,
+						int32_t					aY);
 	};
 
 }

@@ -1,6 +1,7 @@
 #include "Pcheader.h"
 
 #include <kpublic/Compression.h>
+#include <kpublic/TileStackCache.h>
 
 #include "SpriteSheetBuilder.h"
 
@@ -51,6 +52,7 @@ namespace kpublic
 	SpriteSheetBuilder::SpriteSheetBuilder(
 		uint32_t					aMinSheetSize)
 		: m_minSheetSize(aMinSheetSize)
+		, m_nextUnnamedIndex(0)
 	{
 
 	}
@@ -134,6 +136,22 @@ namespace kpublic
 							sprite->m_info.m_flags |= flag;
 						});
 					}
+					else if(aSpriteComponent->m_name == "tile_layer")
+					{
+						sprite->m_info.m_tileLayer = aSpriteComponent->GetUInt32();
+					}
+					else if(aSpriteComponent->m_name == "borders")
+					{
+						aSpriteComponent->GetIdArray(DataType::ID_SPRITE, sprite->m_info.m_borders);
+					}
+					else if (aSpriteComponent->m_name == "animation_next_frame")
+					{
+						sprite->m_info.m_animationNextFrame = aSpriteComponent->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aSpriteComponent->GetIdentifier());
+					}
+					else if (aSpriteComponent->m_name == "animation_delay")
+					{
+						sprite->m_info.m_animationDelay = aSpriteComponent->GetUInt32();
+					}
 					else
 					{
 						KP_VERIFY(false, aNode->m_debugInfo, "Invalid item in 'sprite'.");
@@ -145,6 +163,45 @@ namespace kpublic
 				KP_VERIFY(false, aNode->m_debugInfo, "Invalid item in 'sprites'.");
 			}
 		});
+	}
+
+	void	
+	SpriteSheetBuilder::GenerateStackedTiles(
+		TileStackCache*			aTileStackCache,
+		Manifest*				aManifest)
+	{
+		const TileStackCache::Table& table = aTileStackCache->GetTable();
+
+		for(TileStackCache::Table::const_iterator i = table.cbegin(); i != table.cend(); i++)
+		{
+			const TileStackCache::Key& key = i->first;
+			uint32_t spriteId = i->second;			
+			Data::Sprite* targetSpriteData = aManifest->m_sprites.GetById(spriteId);
+			Data::Sprite* baseTileSpriteData = aManifest->m_sprites.GetById(key.m_baseTileSpriteId);
+			
+			Sprite* sprite = _CreateSprite(NULL, NULL, baseTileSpriteData->m_width * baseTileSpriteData->m_height);
+			const Sprite* baseTileSprite = _GetSprite(baseTileSpriteData->m_name.c_str());
+
+			sprite->m_data = targetSpriteData;
+
+			targetSpriteData->m_width = baseTileSprite->m_image.GetWidth();
+			targetSpriteData->m_height = baseTileSprite->m_image.GetHeight();
+			targetSpriteData->m_info = baseTileSprite->m_info;
+			targetSpriteData->m_name = sprite->m_name;
+			targetSpriteData->m_defined = true;
+
+			sprite->m_image.Allocate(baseTileSprite->m_image.GetWidth(), baseTileSprite->m_image.GetHeight());
+			sprite->m_image.Insert(0, 0, baseTileSprite->m_image);
+
+			for(uint32_t stackedSpriteId : key.m_stackedSpriteIds)
+			{
+				Data::Sprite* stackedSpriteData = aManifest->m_sprites.GetById(stackedSpriteId);
+				const Sprite* stackedSprite = _GetSprite(stackedSpriteData->m_name.c_str());
+				KP_CHECK(stackedSprite->m_image.GetWidth() == sprite->m_image.GetWidth() && stackedSprite->m_image.GetHeight() == sprite->m_image.GetHeight(), "Stacked tile sprite size mismatch.");
+
+				sprite->m_image.InsertBlended(0, 0, stackedSprite->m_image);
+			}
+		}
 	}
 
 	void	
@@ -171,7 +228,7 @@ namespace kpublic
 	}
 
 	void	
-	SpriteSheetBuilder::ExportManifestData(
+	SpriteSheetBuilder::ExportPreliminaryManifestData(
 		PersistentIdTable*		aPersistentIdTable,
 		Manifest*				aManifest)
 	{
@@ -180,13 +237,25 @@ namespace kpublic
 			Sprite* sprite = i->second.get();
 			Data::Sprite* data = aManifest->m_sprites.GetByName(aPersistentIdTable, sprite->m_name.c_str());
 
-			data->m_offsetX = sprite->m_sheetOffsetX;
-			data->m_offsetY = sprite->m_sheetOffsetY;
 			data->m_width = sprite->m_image.GetWidth();
 			data->m_height = sprite->m_image.GetHeight();
-			data->m_spriteSheetIndex = sprite->m_sheetIndex;
 			data->m_info = sprite->m_info;
 			data->m_defined = true;
+
+			sprite->m_data = data;
+		}
+	}
+
+	void	
+	SpriteSheetBuilder::UpdateManifestData()
+	{
+		for (SpriteTable::iterator i = m_spriteTable.begin(); i != m_spriteTable.end(); i++)
+		{
+			Sprite* sprite = i->second.get();
+
+			sprite->m_data->m_offsetX = sprite->m_sheetOffsetX;
+			sprite->m_data->m_offsetY = sprite->m_sheetOffsetY;
+			sprite->m_data->m_spriteSheetIndex = sprite->m_sheetIndex;
 		}
 	}
 
@@ -236,10 +305,35 @@ namespace kpublic
 		const char*				aName,
 		uint32_t				aSize)
 	{
-		KP_VERIFY(m_spriteTable.find(aName) == m_spriteTable.end(), aNode->m_debugInfo, "Sprite name '%s' already in use.", aName);
-		Sprite* sprite = new Sprite(aName, aSize);
-		m_spriteTable[aName] = std::unique_ptr<Sprite>(sprite);
+		Sprite* sprite = NULL;
+
+		if(aName == NULL)
+		{
+			assert(aNode == NULL);
+			char dummyName[64];
+			KP_STRING_FORMAT(dummyName, sizeof(dummyName), "__unnamed_%u__", m_nextUnnamedIndex++);
+			assert(m_spriteTable.find(dummyName) == m_spriteTable.end());
+			sprite = new Sprite(dummyName, aSize);
+			m_spriteTable[dummyName] = std::unique_ptr<Sprite>(sprite);
+		}
+		else
+		{
+			assert(aNode != NULL);
+			KP_VERIFY(m_spriteTable.find(aName) == m_spriteTable.end(), aNode->m_debugInfo, "Sprite name '%s' already in use.", aName);
+			sprite = new Sprite(aName, aSize);
+			m_spriteTable[aName] = std::unique_ptr<Sprite>(sprite);
+		}
+
 		return sprite;
+	}
+
+	SpriteSheetBuilder::Sprite* 
+	SpriteSheetBuilder::_GetSprite(
+		const char*				aName)
+	{
+		SpriteTable::iterator i = m_spriteTable.find(aName);
+		assert(i != m_spriteTable.end());
+		return i->second.get();
 	}
 
 	SpriteSheetBuilder::Sheet* 
