@@ -73,6 +73,36 @@ namespace kpublic
 			uint32_t								m_id = 0;
 		};
 
+		struct Portal
+		{
+			void	
+			ToStream(
+				IWriter*					aStream) const
+			{
+				aStream->WriteInt(m_x);
+				aStream->WriteInt(m_y);
+				aStream->WriteUInt(m_id);
+			}
+			
+			bool	
+			FromStream(
+				IReader*					aStream)
+			{
+				if (!aStream->ReadInt(m_x))
+					return false;
+				if (!aStream->ReadInt(m_y))
+					return false;
+				if (!aStream->ReadUInt(m_id))
+					return false;
+				return true;
+			}
+
+			// Public data
+			int32_t									m_x = 0;
+			int32_t									m_y = 0;
+			uint32_t								m_id = 0;
+		};
+
 				MapData();
 				MapData(
 					const Parser::Node*		aSource);
@@ -105,6 +135,7 @@ namespace kpublic
 		uint32_t*									m_tileMap;
 		std::vector<EntitySpawn>					m_entitySpawns;
 		std::vector<PlayerSpawn>					m_playerSpawns;
+		std::vector<Portal>							m_portals;
 		uint32_t*									m_walkableBits;
 		uint32_t*									m_blockLineOfSightBits;
 

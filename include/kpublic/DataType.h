@@ -23,6 +23,7 @@ namespace kpublic
 			ID_FACTION,
 			ID_ITEM,
 			ID_AURA,
+			ID_MAP_PORTAL,
 
 			NUM_IDS
 		};
@@ -43,7 +44,8 @@ namespace kpublic
 			"sprite",
 			"faction",
 			"item",
-			"aura"
+			"aura",
+			"map_portal"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

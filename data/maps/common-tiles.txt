@@ -27,7 +27,11 @@ sprites:
 		[ rocks_border_1 rocks_border_2 rocks_border_3 rocks_border_4 rocks_border_5 rocks_border_6 rocks_border_7
 		  rocks_border_8 rocks_border_9 rocks_border_10 rocks_border_11 rocks_border_12 rocks_border_13 rocks_border_14
 		  rocks_border_15 rocks_border_16 rocks_border_17 ] }	
-	
+	sprite rocks_dungeon_entrance: { flags: [ tile_walkable ] tile_layer: 3 borders:
+		[ rocks_border_1 rocks_border_2 rocks_border_3 rocks_border_4 rocks_border_5 rocks_border_6 rocks_border_7
+		  rocks_border_8 rocks_border_9 rocks_border_10 rocks_border_11 rocks_border_12 rocks_border_13 rocks_border_14
+		  rocks_border_15 rocks_border_16 rocks_border_17 ] }			  
+
 	cursor: { position: [ 0 16 ] }
 	
 	sprite grass_border_1: { }

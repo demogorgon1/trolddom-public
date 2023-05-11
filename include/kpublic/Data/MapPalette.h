@@ -17,7 +17,8 @@ namespace kpublic
 			{
 				ENTRY_TYPE_TILE,
 				ENTRY_TYPE_ENTITY_SPAWN,
-				ENTRY_TYPE_PLAYER_SPAWN
+				ENTRY_TYPE_PLAYER_SPAWN,
+				ENTRY_TYPE_PORTAL
 			};
 
 			struct Color
@@ -86,6 +87,11 @@ namespace kpublic
 					{
 						entry.m_type = ENTRY_TYPE_PLAYER_SPAWN;
 						entry.m_id = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_PLAYER_SPAWN, aChild->m_name.c_str());
+					}
+					else if (aChild->m_tag == "portal")
+					{
+						entry.m_type = ENTRY_TYPE_PORTAL;
+						entry.m_id = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_PORTAL, aChild->m_name.c_str());
 					}
 					else
 					{

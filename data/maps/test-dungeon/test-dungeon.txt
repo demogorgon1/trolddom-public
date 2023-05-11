@@ -13,7 +13,7 @@ map_palette test_dungeon_tiles:
 	tile dungeon_wall: [ 255 255 255 ]
 }
 
-map_palette test_dungeon_entity_spawns:
+map_palette test_dungeon_stuff:
 {
 	entity_spawn test_dungeon_monster: [ 255 0 0 ]
 	player_spawn test_dungeon_player_spawn: [ 0 0 255 ]
@@ -33,7 +33,7 @@ map test_dungeon:
 		}
 
 		{
-			palettes:	[ test_dungeon_entity_spawns ]
+			palettes:	[ test_dungeon_stuff ]
 			source:		"test-dungeon-1.png"
 		}
 	]

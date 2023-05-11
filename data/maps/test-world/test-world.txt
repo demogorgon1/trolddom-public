@@ -7,6 +7,12 @@ map_player_spawn test_world_player_spawn:
 {
 }
 
+map_portal test_world_dungeon_entrance:
+{
+	map: test_dungeon
+	spawn: test_dungeon_player_spawn
+}
+
 map_palette test_world_tiles:
 {
 	tile water_1: [ 9 86 104 ]
@@ -14,12 +20,14 @@ map_palette test_world_tiles:
 	tile grass: [ 64 105 0 ]
 	tile forest: [ 51 75 6 ]
 	tile rocks: [ 143 131 120 ]
+	tile rocks_dungeon_entrance: [ 200 200 200 ]
 }
 
-map_palette test_world_entity_spawns:
+map_palette test_world_stuff:
 {
 	entity_spawn test_world_monster: [ 255 0 0 ]
 	player_spawn test_world_player_spawn: [ 0 0 255 ]
+	portal test_world_dungeon_entrance: [ 0 255 0 ]
 }
 
 map test_world:
@@ -36,7 +44,7 @@ map test_world:
 		}
 
 		{
-			palettes:	[ test_world_entity_spawns ]
+			palettes:	[ test_world_stuff ]
 			source:		"test-world-1.png"
 		}
 	]

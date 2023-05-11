@@ -146,6 +146,10 @@ namespace kpublic
 								m_playerSpawns.push_back({ mapX, mapY, entry->m_id });
 								break;
 
+							case Data::MapPalette::ENTRY_TYPE_PORTAL:
+								m_portals.push_back({ mapX, mapY, entry->m_id });
+								break;
+
 							default:
 								assert(false);
 								break;
@@ -281,6 +285,7 @@ namespace kpublic
 
 		aStream->WriteObjects(m_entitySpawns);
 		aStream->WriteObjects(m_playerSpawns);
+		aStream->WriteObjects(m_portals);
 	}
 
 	bool	
@@ -314,6 +319,8 @@ namespace kpublic
 		if (!aStream->ReadObjects(m_entitySpawns))
 			return false;
 		if (!aStream->ReadObjects(m_playerSpawns))
+			return false;
+		if (!aStream->ReadObjects(m_portals))
 			return false;
 
 		return true;

@@ -10,6 +10,7 @@
 #include "Data/MapEntitySpawn.h"
 #include "Data/MapPalette.h"
 #include "Data/MapPlayerSpawn.h"
+#include "Data/MapPortal.h"
 #include "Data/Sprite.h"
 #include "Data/Talent.h"
 #include "Data/TalentTree.h"
@@ -232,6 +233,7 @@ namespace kpublic
 			RegisterDataContainer(m_mapEntitySpawns);
 			RegisterDataContainer(m_mapPalettes);
 			RegisterDataContainer(m_mapPlayerSpawns);
+			RegisterDataContainer(m_mapPortals);
 			RegisterDataContainer(m_sprites);
 			RegisterDataContainer(m_talents);
 			RegisterDataContainer(m_talentTrees);
@@ -303,7 +305,7 @@ namespace kpublic
 		DataContainer<Data::MapEntitySpawn>				m_mapEntitySpawns;
 		DataContainer<Data::MapPalette>					m_mapPalettes;
 		DataContainer<Data::MapPlayerSpawn>				m_mapPlayerSpawns;
-		DataContainer<Data::MapPlayerSpawn>				m_npcStates;
+		DataContainer<Data::MapPortal>					m_mapPortals;
 		DataContainer<Data::Sprite>						m_sprites;
 		DataContainer<Data::Talent>						m_talents;
 		DataContainer<Data::TalentTree>					m_talentTrees;
