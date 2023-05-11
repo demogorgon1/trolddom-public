@@ -90,6 +90,9 @@ namespace kpublic
 		bool	IsTileWalkable(
 					int32_t					aX,
 					int32_t					aY) const;
+		bool	DoesTileblockLineOfSight(
+					int32_t					aX,
+					int32_t					aY) const;
 
 		// Public data
 		uint32_t									m_defaultTileSpriteId;
@@ -103,6 +106,7 @@ namespace kpublic
 		std::vector<EntitySpawn>					m_entitySpawns;
 		std::vector<PlayerSpawn>					m_playerSpawns;
 		uint32_t*									m_walkableBits;
+		uint32_t*									m_blockLineOfSightBits;
 
 		struct SourceLayer
 		{
@@ -149,7 +153,7 @@ namespace kpublic
 
 		void		_InitLayers(
 						const Parser::Node*		aLayersArray);
-		void		_InitWalkableBits(
+		void		_InitBits(
 						const Manifest*			aManifest);
 		uint32_t	_GetTile(
 						int32_t					aX,

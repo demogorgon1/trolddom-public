@@ -32,6 +32,7 @@ namespace kpublic
 		, m_tileMap(NULL)
 		, m_defaultTileSpriteId(0)
 		, m_walkableBits(NULL)
+		, m_blockLineOfSightBits(NULL)
 	{
 
 	}
@@ -46,6 +47,7 @@ namespace kpublic
 		, m_defaultTileSpriteId(0)
 		, m_defaultPlayerSpawnId(0)
 		, m_walkableBits(NULL)
+		, m_blockLineOfSightBits(NULL)
 	{
 		aSource->GetObject()->ForEachChild([&](
 			const Parser::Node* aNode)
@@ -70,6 +72,9 @@ namespace kpublic
 
 		if(m_walkableBits != NULL)
 			delete [] m_walkableBits;
+
+		if (m_blockLineOfSightBits != NULL)
+			delete[] m_blockLineOfSightBits;
 	}
 
 	void	
@@ -253,9 +258,7 @@ namespace kpublic
 				const std::vector<uint32_t>& tileStack = tileStackMap[i];
 
 				if(tileStack.size() > 0)
-					m_tileMap[i] = aTileStackCache->GetSpriteId(m_tileMap[i], tileStack);
-				
-				//m_tileStacks.push_back({ x, y, aTileStackCache->GetIndex(m_tileMap[x + y * m_width], tileStack) });
+					m_tileMap[i] = aTileStackCache->GetSpriteId(m_tileMap[i], tileStack);				
 			}
 		}
 	}
@@ -321,10 +324,11 @@ namespace kpublic
 		const Manifest*			aManifest)
 	{
 		assert(m_walkableBits == NULL);
+		assert(m_blockLineOfSightBits == NULL);
 		assert(m_tileMap != NULL);
 		assert(m_width > 0 && m_height > 0);
 
-		_InitWalkableBits(aManifest);
+		_InitBits(aManifest);
 	}
 
 	bool	
@@ -337,12 +341,29 @@ namespace kpublic
 		int32_t y = aY - m_y;
 		if(x < 0 || y < 0 || x >= m_width || y >= m_height)
 			return false;
+	
 		uint32_t i = (uint32_t)(x + y * m_width);
 		uint32_t j = i / 32;
 		uint32_t k = i % 32;
 		return (m_walkableBits[j] & (1 << k)) != 0;
 	}
 
+	bool	
+	MapData::DoesTileblockLineOfSight(
+		int32_t					aX,
+		int32_t					aY) const
+	{
+		assert(m_blockLineOfSightBits != NULL);
+		int32_t x = aX - m_x;
+		int32_t y = aY - m_y;
+		if(x < 0 || y < 0 || x >= m_width || y >= m_height)
+			return false;
+	
+		uint32_t i = (uint32_t)(x + y * m_width);
+		uint32_t j = i / 32;
+		uint32_t k = i % 32;
+		return (m_blockLineOfSightBits[j] & (1 << k)) != 0;
+	}
 
 	//--------------------------------------------------------------------
 
@@ -445,7 +466,7 @@ namespace kpublic
 	}
 
 	void	
-	MapData::_InitWalkableBits(
+	MapData::_InitBits(
 		const Manifest*				aManifest)
 	{
 		int32_t count = m_width * m_height / 32;
@@ -453,10 +474,14 @@ namespace kpublic
 			count++;
 
 		m_walkableBits = new uint32_t[count];
+		m_blockLineOfSightBits = new uint32_t[count];
+
 		memset(m_walkableBits, 0, sizeof(uint32_t) * (size_t)count);
+		memset(m_blockLineOfSightBits, 0, sizeof(uint32_t) * (size_t)count);
 
 		const uint32_t* in = m_tileMap;
-		uint32_t* out = m_walkableBits;
+		uint32_t* outWalkable = m_walkableBits;
+		uint32_t* outBlockLineOfSight = m_blockLineOfSightBits;
 		uint32_t bit = 0;
 
 		for(int32_t y = 0; y < m_height; y++)
@@ -466,7 +491,10 @@ namespace kpublic
 				const Data::Sprite* sprite = aManifest->m_sprites.GetById(*in);
 				
 				if(sprite->m_info.m_flags & SpriteInfo::FLAG_TILE_WALKABLE)
-					*out |= 1 << bit;
+					*outWalkable |= 1 << bit;
+
+				if (sprite->m_info.m_flags & SpriteInfo::FLAG_TILE_BLOCK_LINE_OF_SIGHT)
+					*outBlockLineOfSight |= 1 << bit;
 
 				// Next tile
 				in++;
@@ -475,7 +503,8 @@ namespace kpublic
 				if(bit == 32)
 				{
 					bit = 0;
-					out++;
+					outWalkable++;
+					outBlockLineOfSight++;
 				}
 			}
 		}

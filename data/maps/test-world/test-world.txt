@@ -12,6 +12,8 @@ map_palette test_world_tiles:
 	tile water_1: [ 9 86 104 ]
 	tile dirt: [ 97 91 62 ]
 	tile grass: [ 64 105 0 ]
+	tile forest: [ 51 75 6 ]
+	tile rocks: [ 143 131 120 ]
 }
 
 map_palette test_world_entity_spawns:

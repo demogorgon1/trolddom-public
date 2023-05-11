@@ -7,7 +7,7 @@ sprites:
 	cursor: { position: [ 0 0 ] }
 
 	sprite dungeon_floor: { flags: [ tile_walkable ] }
-	sprite dungeon_wall: { }
+	sprite dungeon_wall: { flags: [ tile_block_line_of_sight ] }
 	sprite grass: { flags: [ tile_walkable ] tile_layer: 2 borders: 
 		[ grass_border_1 grass_border_2 grass_border_3 grass_border_4 grass_border_5 grass_border_6 grass_border_7
 		  grass_border_8 grass_border_9 grass_border_10 grass_border_11 grass_border_12 grass_border_13 grass_border_14
@@ -19,6 +19,14 @@ sprites:
 	sprite water_1: { animation_next_frame: water_2 animation_delay: 400 }
 	sprite water_2: { animation_next_frame: water_3 animation_delay: 400 }
 	sprite water_3: { animation_next_frame: water_1 animation_delay: 400 }
+	sprite forest: { flags: [ tile_block_line_of_sight ] tile_layer: 4 borders:
+		[ forest_border_1 forest_border_2 forest_border_3 forest_border_4 forest_border_5 forest_border_6 forest_border_7
+		  forest_border_8 forest_border_9 forest_border_10 forest_border_11 forest_border_12 forest_border_13 forest_border_14
+		  forest_border_15 forest_border_16 forest_border_17 ] }	
+	sprite rocks: { flags: [ tile_block_line_of_sight ] tile_layer: 3 borders:
+		[ rocks_border_1 rocks_border_2 rocks_border_3 rocks_border_4 rocks_border_5 rocks_border_6 rocks_border_7
+		  rocks_border_8 rocks_border_9 rocks_border_10 rocks_border_11 rocks_border_12 rocks_border_13 rocks_border_14
+		  rocks_border_15 rocks_border_16 rocks_border_17 ] }	
 	
 	cursor: { position: [ 0 16 ] }
 	
@@ -65,5 +73,51 @@ sprites:
 	cursor: { position: [ 0 64 ] }
 
 	sprite dirt_border_17: { }
+
+	cursor: { position: [ 0 80 ] }
+	
+	sprite forest_border_1: { }
+	sprite forest_border_2: { }
+	sprite forest_border_3: { }
+	sprite forest_border_4: { }
+	sprite forest_border_5: { }
+	sprite forest_border_6: { }
+	sprite forest_border_7: { }
+	sprite forest_border_8: { }
+	sprite forest_border_9: { }
+	sprite forest_border_10: { }
+	sprite forest_border_11: { }
+	sprite forest_border_12: { }
+	sprite forest_border_13: { }
+	sprite forest_border_14: { }
+	sprite forest_border_15: { }
+	sprite forest_border_16: { }
+	
+	cursor: { position: [ 0 96 ] }
+
+	sprite forest_border_17: { }
+
+	cursor: { position: [ 0 112 ] }
+	
+	sprite rocks_border_1: { }
+	sprite rocks_border_2: { }
+	sprite rocks_border_3: { }
+	sprite rocks_border_4: { }
+	sprite rocks_border_5: { }
+	sprite rocks_border_6: { }
+	sprite rocks_border_7: { }
+	sprite rocks_border_8: { }
+	sprite rocks_border_9: { }
+	sprite rocks_border_10: { }
+	sprite rocks_border_11: { }
+	sprite rocks_border_12: { }
+	sprite rocks_border_13: { }
+	sprite rocks_border_14: { }
+	sprite rocks_border_15: { }
+	sprite rocks_border_16: { }
+	
+	cursor: { position: [ 0 128 ] }
+
+	sprite rocks_border_17: { }
 
 }

@@ -8,15 +8,18 @@ namespace kpublic
 	public:
 		enum Flag : uint8_t
 		{
-			FLAG_TILE_WALKABLE = 0x01
+			FLAG_TILE_WALKABLE				= 0x01,
+			FLAG_TILE_BLOCK_LINE_OF_SIGHT	= 0x02
 		};
 
 		static inline uint8_t 
 		StringToFlag(			
 			const char*		aString)
 		{
-			if(strcmp(aString, "tile_walkable") == 0)
+			if (strcmp(aString, "tile_walkable") == 0)
 				return FLAG_TILE_WALKABLE;
+			if (strcmp(aString, "tile_block_line_of_sight") == 0)
+				return FLAG_TILE_BLOCK_LINE_OF_SIGHT;
 
 			return 0;
 		}
