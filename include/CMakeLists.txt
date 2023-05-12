@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.19)
 
-target_include_directories(kpublic PUBLIC  
+target_include_directories(tpublic PUBLIC  
     $<INSTALL_INTERFACE:include>    
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
 
-file(GLOB_RECURSE H_FILES "kpublic/*.h")
+file(GLOB_RECURSE H_FILES "tpublic/*.h")
 
-target_sources(kpublic PRIVATE ${H_FILES})
+target_sources(tpublic PRIVATE ${H_FILES})
 
-install(DIRECTORY kpublic DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(DIRECTORY tpublic DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
