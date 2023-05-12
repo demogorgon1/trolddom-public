@@ -4,7 +4,7 @@
 #include "../AuraEffectFactory.h"
 #include "../DataBase.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	namespace Data

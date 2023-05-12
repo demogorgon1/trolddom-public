@@ -4,7 +4,7 @@
 #include "../Stat.h"
 #include "../Vec2.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	namespace Components

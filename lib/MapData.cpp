@@ -5,7 +5,7 @@
 #include <kpublic/MapData.h>
 #include <kpublic/TileStackCache.h>
 
-namespace kpublic
+namespace tpublic
 {
 
 	namespace

@@ -3,7 +3,7 @@
 #include <kpublic/Manifest.h>
 #include <kpublic/TileStackCache.h>
 
-namespace kpublic
+namespace tpublic
 {
 
 	TileStackCache::TileStackCache(

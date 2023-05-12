@@ -2,7 +2,7 @@
 
 #include "../SystemBase.h"
 
-namespace kpublic::Systems
+namespace tpublic::Systems
 {
 
 	class Combat

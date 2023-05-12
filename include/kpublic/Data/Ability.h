@@ -4,7 +4,7 @@
 #include "../DirectEffectFactory.h"
 #include "../DirectEffectBase.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	namespace Data

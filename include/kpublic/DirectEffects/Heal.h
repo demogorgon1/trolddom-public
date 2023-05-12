@@ -10,7 +10,7 @@
 #include "../IThreatEventQueue.h"
 #include "../Resource.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	namespace DirectEffects

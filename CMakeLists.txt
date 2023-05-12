@@ -1,8 +1,8 @@
 cmake_minimum_required (VERSION 3.19)
 
-project(kaos-public)
+project(trolddom-public)
 
-macro(kaos_public_option OPTION_NAME OPTION_TEXT OPTION_DEFAULT)
+macro(trolddom_public_option OPTION_NAME OPTION_TEXT OPTION_DEFAULT)
     option(${OPTION_NAME} ${OPTION_TEXT} ${OPTION_DEFAULT})
     if(DEFINED ENV{${OPTION_NAME}})
         # Allow overriding the option through an environment variable
@@ -14,7 +14,7 @@ macro(kaos_public_option OPTION_NAME OPTION_TEXT OPTION_DEFAULT)
     message(STATUS "${OPTION_NAME}: ${${OPTION_NAME}}")
 endmacro()
 
-kaos_public_option(KAOS_PUBLIC_PRECOMPILED_HEADERS "Enable precompiled headers." ON)
+trolddom_public_option(TROLDDOM_PUBLIC_PRECOMPILED_HEADERS "Enable precompiled headers." ON)
 
 include(FetchContent)
 include(GNUInstallDirs)

@@ -6,7 +6,7 @@
 #include <kpublic/PersistentIdTable.h>
 #include <kpublic/SourceContext.h>
 
-namespace kpublic
+namespace tpublic
 {
 
 	SourceContext::SourceContext()

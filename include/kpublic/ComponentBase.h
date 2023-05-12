@@ -7,7 +7,7 @@
 #include "Parser.h"
 #include "Persistence.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	class ComponentBase

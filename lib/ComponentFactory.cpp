@@ -22,7 +22,7 @@
 
 #include <kpublic/ComponentFactory.h>
 
-namespace kpublic
+namespace tpublic
 {
 
 	ComponentFactory::ComponentFactory()

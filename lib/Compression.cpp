@@ -5,7 +5,7 @@
 
 #include <kpublic/Compression.h>
 
-namespace kpublic
+namespace tpublic
 {
 
 	namespace Compression

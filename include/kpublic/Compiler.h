@@ -4,7 +4,7 @@
 #include "Parser.h"
 #include "PersistentIdTable.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	class Compiler

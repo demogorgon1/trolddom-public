@@ -5,7 +5,7 @@
 
 #include "System.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	class Manifest;

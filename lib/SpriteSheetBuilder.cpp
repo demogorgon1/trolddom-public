@@ -5,7 +5,7 @@
 
 #include "SpriteSheetBuilder.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	namespace

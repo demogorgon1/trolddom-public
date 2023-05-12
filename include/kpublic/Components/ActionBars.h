@@ -3,7 +3,7 @@
 #include "../ActionBar.h"
 #include "../Component.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	namespace Components

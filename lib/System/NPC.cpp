@@ -16,7 +16,7 @@
 #include <kpublic/IWorldView.h>
 #include <kpublic/Manifest.h>
 
-namespace kpublic::Systems
+namespace tpublic::Systems
 {
 
 	NPC::NPC(

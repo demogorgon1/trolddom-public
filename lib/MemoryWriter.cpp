@@ -2,7 +2,7 @@
 
 #include "MemoryWriter.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	MemoryWriter::MemoryWriter(

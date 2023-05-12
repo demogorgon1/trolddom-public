@@ -5,7 +5,7 @@
 #include "PersistentIdTable.h"
 #include "SourceContext.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	class Tokenizer;

@@ -3,7 +3,7 @@
 #include <kpublic/ItemInstanceData.h>
 #include <kpublic/Manifest.h>
 
-namespace kpublic
+namespace tpublic
 {
 
 	ItemInstanceData::ItemInstanceData()

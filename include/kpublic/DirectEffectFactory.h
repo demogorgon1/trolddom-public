@@ -7,7 +7,7 @@
 
 #include "DirectEffect.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	class DirectEffectFactory

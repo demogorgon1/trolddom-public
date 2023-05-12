@@ -3,7 +3,7 @@
 #include "../Component.h"
 #include "../Cooldowns.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	namespace Components

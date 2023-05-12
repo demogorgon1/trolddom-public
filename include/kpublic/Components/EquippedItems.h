@@ -4,7 +4,7 @@
 #include "../EquipmentSlot.h"
 #include "../ItemInstance.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	namespace Components

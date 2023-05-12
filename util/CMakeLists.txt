@@ -10,5 +10,5 @@ if(KAOS_PUBLIC_PRECOMPILED_HEADERS)
 endif()
 
 target_compile_features(kpublic-util PRIVATE cxx_std_20)
-target_link_libraries(kpublic-util kpublic::kpublic kpublic-extra::kpublic-extra)
+target_link_libraries(kpublic-util tpublic::tpublic tpublic-extra::tpublic-extra)
 

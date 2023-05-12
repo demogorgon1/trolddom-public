@@ -3,7 +3,7 @@
 #include "../DataBase.h"
 #include "../MapData.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	namespace Data

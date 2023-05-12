@@ -4,7 +4,7 @@
 
 #include <kpublic/Image.h>
 
-namespace kpublic
+namespace tpublic
 {
 
 	Image::Image()

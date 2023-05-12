@@ -6,7 +6,7 @@
 
 #include "MapImageOutput.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	MapImageOutput::MapImageOutput(

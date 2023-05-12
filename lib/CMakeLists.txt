@@ -20,14 +20,14 @@ else()
 	)	
 endif()
 	
-add_library(kpublic STATIC ${CPP_FILES} ${H_FILES})
-add_library(kpublic::kpublic ALIAS kpublic)
+add_library(tpublic STATIC ${CPP_FILES} ${H_FILES})
+add_library(tpublic::tpublic ALIAS tpublic)
 
-target_compile_features(kpublic PRIVATE cxx_std_20)
+target_compile_features(tpublic PRIVATE cxx_std_20)
 
-target_link_libraries(kpublic PUBLIC ${BROTLI_LIBRARIES_STATIC})
+target_link_libraries(tpublic PUBLIC ${BROTLI_LIBRARIES_STATIC})
 
 if(KAOS_PUBLIC_PRECOMPILED_HEADERS)
-	target_precompile_headers(kpublic PRIVATE "Pcheader.h")
+	target_precompile_headers(tpublic PRIVATE "Pcheader.h")
 endif()
 	

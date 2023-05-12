@@ -6,7 +6,7 @@
 #include "../EntityInstance.h"
 #include "../System.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	namespace Data
@@ -79,7 +79,7 @@ namespace kpublic
 				const ComponentFactory*	aComponentFactory,
 				uint32_t				aEntityInstanceId) const 
 			{
-				std::unique_ptr<kpublic::EntityInstance> entity = std::make_unique<kpublic::EntityInstance>(m_id, aEntityInstanceId);
+				std::unique_ptr<tpublic::EntityInstance> entity = std::make_unique<tpublic::EntityInstance>(m_id, aEntityInstanceId);
 
 				for(const std::unique_ptr<ComponentEntry>& componentEntry : m_components)
 					entity->AddComponent(aComponentFactory->Create(componentEntry->m_componentId));

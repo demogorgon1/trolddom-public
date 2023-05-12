@@ -4,7 +4,7 @@
 
 #include "FileWriter.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	FileWriter::FileWriter(

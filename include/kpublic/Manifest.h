@@ -20,7 +20,7 @@
 #include "PersistentIdTable.h"
 #include "PlayerComponents.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	class Manifest

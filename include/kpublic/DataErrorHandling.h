@@ -1,6 +1,6 @@
 #pragma once
 
-namespace kpublic
+namespace tpublic
 {
 
 	namespace DataErrorHandling
@@ -36,19 +36,19 @@ namespace kpublic
 	do																																\
 	{																																\
 		if(!(_Condition))																											\
-			kpublic::DataErrorHandling::VerificationError(_DebugInfo, "" __VA_ARGS__);											\
+			tpublic::DataErrorHandling::VerificationError(_DebugInfo, "" __VA_ARGS__);											\
 	} while(false)
 
 #define KP_VERIFY_STRING_ID(_StringId, _DebugInfo)																					\
 	do																																\
 	{																																\
-		if(!kpublic::DataErrorHandling::VerifyStringId(_StringId))																\
-			kpublic::DataErrorHandling::VerificationError(_DebugInfo, "Invalid string identifier: '%s'", _StringId.c_str());	\
+		if(!tpublic::DataErrorHandling::VerifyStringId(_StringId))																\
+			tpublic::DataErrorHandling::VerificationError(_DebugInfo, "Invalid string identifier: '%s'", _StringId.c_str());	\
 	} while(false)
 	
 #define KP_CHECK(_Condition, ...)																									\
 	do																																\
 	{																																\
 		if(!(_Condition))																											\
-			kpublic::DataErrorHandling::FatalError("" __VA_ARGS__);																\
+			tpublic::DataErrorHandling::FatalError("" __VA_ARGS__);																\
 	} while(false)

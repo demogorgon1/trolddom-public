@@ -3,7 +3,7 @@
 #include <kpublic/Compression.h>
 #include <kpublic/SpriteData.h>
 
-namespace kpublic
+namespace tpublic
 {
 
 	namespace

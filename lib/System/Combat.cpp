@@ -10,7 +10,7 @@
 #include <kpublic/Resource.h>
 #include <kpublic/Helpers.h>
 
-namespace kpublic::Systems
+namespace tpublic::Systems
 {
 
 	Combat::Combat(
@@ -62,7 +62,7 @@ namespace kpublic::Systems
 					i--;
 
 					auras->m_dirty = true;
-					auras->SetPendingPersistenceUpdate(kpublic::ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY);
+					auras->SetPendingPersistenceUpdate(tpublic::ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY);
 				}
 			}
 		}
@@ -127,7 +127,7 @@ namespace kpublic::Systems
 
 				if(dirty)
 				{
-					combatPublic->SetPendingPersistenceUpdate(kpublic::ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY);
+					combatPublic->SetPendingPersistenceUpdate(tpublic::ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY);
 				}
 			}
 		}

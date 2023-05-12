@@ -7,7 +7,7 @@
 #include <kpublic/IReader.h>
 #include <kpublic/IWriter.h>
 
-namespace kpublic
+namespace tpublic
 {
 
 	Cooldowns::Cooldowns()

@@ -4,7 +4,7 @@
 #include "EntityState.h"
 #include "System.h"
 
-namespace kpublic
+namespace tpublic
 {
 	
 	class EntityInstance;

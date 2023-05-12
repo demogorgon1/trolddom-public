@@ -5,7 +5,7 @@
 #include "../DirectEffectBase.h"
 #include "../EntityInstance.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	namespace DirectEffects

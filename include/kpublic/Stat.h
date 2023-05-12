@@ -2,7 +2,7 @@
 
 #include "Parser.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	namespace Stat

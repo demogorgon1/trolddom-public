@@ -1,6 +1,6 @@
 #pragma once
 
-namespace kpublic::Persistence
+namespace tpublic::Persistence
 {
 
 	enum Id : uint8_t

@@ -2,7 +2,7 @@
 
 #include "../DirectEffectBase.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	namespace DirectEffects

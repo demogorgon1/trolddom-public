@@ -4,7 +4,7 @@
 
 #include <kpublic/Vec2.h>
 
-namespace kpublic::Helpers
+namespace tpublic::Helpers
 {
 
 	bool		

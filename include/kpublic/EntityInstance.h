@@ -4,7 +4,7 @@
 #include "DataErrorHandling.h"
 #include "EntityState.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	class EntityInstance

@@ -2,7 +2,7 @@
 
 #include <kpublic/DataErrorHandling.h>
 
-namespace kpublic
+namespace tpublic
 {
 
 	class Tokenizer

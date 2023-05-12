@@ -1,6 +1,6 @@
 #pragma once
 
-namespace kpublic
+namespace tpublic
 {
 
 	class IWorldView

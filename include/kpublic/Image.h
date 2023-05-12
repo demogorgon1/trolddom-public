@@ -2,7 +2,7 @@
 
 #include "DataErrorHandling.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	class Image

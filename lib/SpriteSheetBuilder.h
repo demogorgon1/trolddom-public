@@ -5,7 +5,7 @@
 #include <kpublic/Parser.h>
 #include <kpublic/SpriteInfo.h>
 
-namespace kpublic
+namespace tpublic
 {
 
 	class Manifest;

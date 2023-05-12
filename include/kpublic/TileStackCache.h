@@ -2,7 +2,7 @@
 
 #include "Hash.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	class Manifest;

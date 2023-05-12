@@ -47,7 +47,7 @@
 
 #endif
 
-namespace kpublic::Base
+namespace tpublic::Base
 {
 
 	inline uint32_t

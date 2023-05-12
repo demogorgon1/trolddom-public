@@ -3,7 +3,7 @@
 #include "Component.h"
 #include "ComponentBase.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	class ComponentFactory

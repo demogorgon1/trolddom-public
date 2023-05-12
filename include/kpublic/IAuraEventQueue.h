@@ -2,7 +2,7 @@
 
 #include "AuraEffectBase.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	class IAuraEventQueue

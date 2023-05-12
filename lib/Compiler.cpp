@@ -12,7 +12,7 @@
 #include "SpriteSheetBuilder.h"
 #include "Tokenizer.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	Compiler::Compiler(

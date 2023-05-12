@@ -2,7 +2,7 @@
 
 #include "../ComponentBase.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	namespace Components

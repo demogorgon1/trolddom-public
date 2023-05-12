@@ -2,7 +2,7 @@
 
 #include "Tokenizer.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	namespace

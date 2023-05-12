@@ -2,7 +2,7 @@
 
 #include <kpublic/Image.h>
 
-namespace kpublic
+namespace tpublic
 {
 
 	class Manifest;

@@ -6,7 +6,7 @@
 #include "../Resource.h"
 #include "../Stat.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	namespace Data

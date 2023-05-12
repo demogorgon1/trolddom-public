@@ -5,7 +5,7 @@
 #include "../EntityState.h"
 #include "../Resource.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	namespace Components

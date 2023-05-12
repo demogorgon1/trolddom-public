@@ -2,7 +2,7 @@
 
 #include <kpublic/ThreatTable.h>
 
-namespace kpublic
+namespace tpublic
 {
 
 	ThreatTable::ThreatTable()

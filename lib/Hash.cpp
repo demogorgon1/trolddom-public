@@ -2,7 +2,7 @@
 
 #include <kpublic/Hash.h>
 
-namespace kpublic
+namespace tpublic
 {
 
 	namespace Hash

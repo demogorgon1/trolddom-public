@@ -4,7 +4,7 @@
 
 #include "Tokenizer.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	Parser::Parser(

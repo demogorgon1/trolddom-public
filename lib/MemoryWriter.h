@@ -2,7 +2,7 @@
 
 #include <kpublic/IWriter.h>
 
-namespace kpublic
+namespace tpublic
 {
 
 	class MemoryWriter

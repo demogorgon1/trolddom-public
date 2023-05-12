@@ -5,7 +5,7 @@
 #include "ItemInstance.h"
 #include "Stat.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	class Manifest;

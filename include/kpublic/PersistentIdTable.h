@@ -2,7 +2,7 @@
 
 #include "DataType.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	class PersistentIdTable

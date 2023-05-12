@@ -4,7 +4,7 @@
 
 #include "AuraEffect.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	class AuraEffectFactory

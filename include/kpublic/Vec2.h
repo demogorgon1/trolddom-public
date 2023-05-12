@@ -3,7 +3,7 @@
 #include "IReader.h"
 #include "IWriter.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	struct Vec2

@@ -5,7 +5,7 @@
 #include "IWriter.h"
 #include "Parser.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	class PlayerComponents

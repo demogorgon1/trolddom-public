@@ -9,7 +9,7 @@
 #include <kpublic/IThreatEventQueue.h>
 #include <kpublic/Manifest.h>
 
-namespace kpublic
+namespace tpublic
 {
 
 	namespace DirectEffects

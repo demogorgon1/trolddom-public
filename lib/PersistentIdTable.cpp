@@ -3,7 +3,7 @@
 #include <kpublic/DataErrorHandling.h>
 #include <kpublic/PersistentIdTable.h>
 
-namespace kpublic
+namespace tpublic
 {
 
 	PersistentIdTable::PersistentIdTable()

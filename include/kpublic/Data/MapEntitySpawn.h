@@ -3,7 +3,7 @@
 #include "../DataBase.h"
 #include "../EntityState.h"
 
-namespace kpublic
+namespace tpublic
 {
 
 	namespace Data
