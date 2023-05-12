@@ -1,10 +1,10 @@
 #include "Pcheader.h"
 
-#include <kpublic/AuraEffectFactory.h>
-#include <kpublic/ComponentFactory.h>
-#include <kpublic/DirectEffectFactory.h>
-#include <kpublic/PersistentIdTable.h>
-#include <kpublic/SourceContext.h>
+#include <tpublic/AuraEffectFactory.h>
+#include <tpublic/ComponentFactory.h>
+#include <tpublic/DirectEffectFactory.h>
+#include <tpublic/PersistentIdTable.h>
+#include <tpublic/SourceContext.h>
 
 namespace tpublic
 {

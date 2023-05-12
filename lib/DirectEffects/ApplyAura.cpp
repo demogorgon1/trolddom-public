@@ -1,13 +1,13 @@
 #include "../Pcheader.h"
 
-#include <kpublic/Data/Aura.h>
+#include <tpublic/Data/Aura.h>
 
-#include <kpublic/DirectEffects/ApplyAura.h>
+#include <tpublic/DirectEffects/ApplyAura.h>
 
-#include <kpublic/EntityInstance.h>
-#include <kpublic/IAuraEventQueue.h>
-#include <kpublic/IThreatEventQueue.h>
-#include <kpublic/Manifest.h>
+#include <tpublic/EntityInstance.h>
+#include <tpublic/IAuraEventQueue.h>
+#include <tpublic/IThreatEventQueue.h>
+#include <tpublic/Manifest.h>
 
 namespace tpublic
 {

@@ -1,7 +1,7 @@
 #include "Pcheader.h"
 
-#include <kpublic/Compression.h>
-#include <kpublic/SpriteData.h>
+#include <tpublic/Compression.h>
+#include <tpublic/SpriteData.h>
 
 namespace tpublic
 {

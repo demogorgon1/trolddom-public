@@ -1,14 +1,14 @@
 #include "../Pcheader.h"
 
-#include <kpublic/Components/Auras.h>
-#include <kpublic/Components/CombatPublic.h>
-#include <kpublic/Components/VisibleAuras.h>
+#include <tpublic/Components/Auras.h>
+#include <tpublic/Components/CombatPublic.h>
+#include <tpublic/Components/VisibleAuras.h>
 
-#include <kpublic/Systems/Combat.h>
+#include <tpublic/Systems/Combat.h>
 
-#include <kpublic/EntityInstance.h>
-#include <kpublic/Resource.h>
-#include <kpublic/Helpers.h>
+#include <tpublic/EntityInstance.h>
+#include <tpublic/Resource.h>
+#include <tpublic/Helpers.h>
 
 namespace tpublic::Systems
 {

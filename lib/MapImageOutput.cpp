@@ -1,8 +1,8 @@
 #include "Pcheader.h"
 
-#include <kpublic/Manifest.h>
-#include <kpublic/MapData.h>
-#include <kpublic/SpriteData.h>
+#include <tpublic/Manifest.h>
+#include <tpublic/MapData.h>
+#include <tpublic/SpriteData.h>
 
 #include "MapImageOutput.h"
 

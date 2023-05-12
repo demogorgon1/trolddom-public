@@ -3,7 +3,7 @@
 #include <brotli/decode.h>
 #include <brotli/encode.h>
 
-#include <kpublic/Compression.h>
+#include <tpublic/Compression.h>
 
 namespace tpublic
 {

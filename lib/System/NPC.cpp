@@ -1,20 +1,20 @@
 #include "../Pcheader.h"
 
-#include <kpublic/Components/Auras.h>
-#include <kpublic/Components/CombatPublic.h>
-#include <kpublic/Components/NPC.h>
-#include <kpublic/Components/Position.h>
-#include <kpublic/Components/Sprite.h>
-#include <kpublic/Components/ThreatTarget.h>
+#include <tpublic/Components/Auras.h>
+#include <tpublic/Components/CombatPublic.h>
+#include <tpublic/Components/NPC.h>
+#include <tpublic/Components/Position.h>
+#include <tpublic/Components/Sprite.h>
+#include <tpublic/Components/ThreatTarget.h>
 
-#include <kpublic/Systems/NPC.h>
+#include <tpublic/Systems/NPC.h>
 
-#include <kpublic/EntityInstance.h>
-#include <kpublic/Helpers.h>
-#include <kpublic/IAbilityQueue.h>
-#include <kpublic/IMoveRequestQueue.h>
-#include <kpublic/IWorldView.h>
-#include <kpublic/Manifest.h>
+#include <tpublic/EntityInstance.h>
+#include <tpublic/Helpers.h>
+#include <tpublic/IAbilityQueue.h>
+#include <tpublic/IMoveRequestQueue.h>
+#include <tpublic/IWorldView.h>
+#include <tpublic/Manifest.h>
 
 namespace tpublic::Systems
 {

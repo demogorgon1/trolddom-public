@@ -1,6 +1,6 @@
 #include "Pcheader.h"
 
-#include <kpublic/Hash.h>
+#include <tpublic/Hash.h>
 
 namespace tpublic
 {

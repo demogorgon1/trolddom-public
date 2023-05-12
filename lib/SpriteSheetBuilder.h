@@ -1,9 +1,9 @@
 #pragma once
 
-#include <kpublic/Image.h>
-#include <kpublic/Manifest.h>
-#include <kpublic/Parser.h>
-#include <kpublic/SpriteInfo.h>
+#include <tpublic/Image.h>
+#include <tpublic/Manifest.h>
+#include <tpublic/Parser.h>
+#include <tpublic/SpriteInfo.h>
 
 namespace tpublic
 {

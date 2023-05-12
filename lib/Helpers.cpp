@@ -1,8 +1,8 @@
 #include "Pcheader.h"
 
-#include <kpublic/Components/Position.h>
+#include <tpublic/Components/Position.h>
 
-#include <kpublic/Vec2.h>
+#include <tpublic/Vec2.h>
 
 namespace tpublic::Helpers
 {

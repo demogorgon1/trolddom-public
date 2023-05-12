@@ -1,11 +1,11 @@
 #include "Pcheader.h"
 
-#include <kpublic/Data/Ability.h>
+#include <tpublic/Data/Ability.h>
 
-#include <kpublic/Cooldowns.h>
-#include <kpublic/Helpers.h>
-#include <kpublic/IReader.h>
-#include <kpublic/IWriter.h>
+#include <tpublic/Cooldowns.h>
+#include <tpublic/Helpers.h>
+#include <tpublic/IReader.h>
+#include <tpublic/IWriter.h>
 
 namespace tpublic
 {

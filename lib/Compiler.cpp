@@ -1,10 +1,10 @@
 #include "Pcheader.h"
 
-#include <kpublic/Compiler.h>
-#include <kpublic/ComponentFactory.h>
-#include <kpublic/Compression.h>
-#include <kpublic/DataErrorHandling.h>
-#include <kpublic/TileStackCache.h>
+#include <tpublic/Compiler.h>
+#include <tpublic/ComponentFactory.h>
+#include <tpublic/Compression.h>
+#include <tpublic/DataErrorHandling.h>
+#include <tpublic/TileStackCache.h>
 
 #include "FileWriter.h"
 #include "MapImageOutput.h"

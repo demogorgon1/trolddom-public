@@ -1,6 +1,6 @@
 #include "Pcheader.h"
 
-#include <kpublic/ThreatTable.h>
+#include <tpublic/ThreatTable.h>
 
 namespace tpublic
 {

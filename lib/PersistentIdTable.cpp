@@ -1,7 +1,7 @@
 #include "Pcheader.h"
 
-#include <kpublic/DataErrorHandling.h>
-#include <kpublic/PersistentIdTable.h>
+#include <tpublic/DataErrorHandling.h>
+#include <tpublic/PersistentIdTable.h>
 
 namespace tpublic
 {

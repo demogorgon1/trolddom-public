@@ -1,7 +1,7 @@
 #include "Pcheader.h"
 
-#include <kpublic/Manifest.h>
-#include <kpublic/TileStackCache.h>
+#include <tpublic/Manifest.h>
+#include <tpublic/TileStackCache.h>
 
 namespace tpublic
 {

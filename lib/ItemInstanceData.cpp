@@ -1,7 +1,7 @@
 #include "Pcheader.h"
 
-#include <kpublic/ItemInstanceData.h>
-#include <kpublic/Manifest.h>
+#include <tpublic/ItemInstanceData.h>
+#include <tpublic/Manifest.h>
 
 namespace tpublic
 {

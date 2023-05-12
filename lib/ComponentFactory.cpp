@@ -1,26 +1,26 @@
 #include "Pcheader.h"
 
-#include <kpublic/Components/Abilities.h>
-#include <kpublic/Components/ActionBars.h>
-#include <kpublic/Components/Auras.h>
-#include <kpublic/Components/CombatPrivate.h>
-#include <kpublic/Components/CombatPublic.h>
-#include <kpublic/Components/DisplayName.h>
-#include <kpublic/Components/EquippedItems.h>
-#include <kpublic/Components/Inventory.h>
-#include <kpublic/Components/NPC.h>
-#include <kpublic/Components/PlayerCooldowns.h>
-#include <kpublic/Components/PlayerPrivate.h>
-#include <kpublic/Components/PlayerPublic.h>
-#include <kpublic/Components/Position.h>
-#include <kpublic/Components/Sprite.h>
-#include <kpublic/Components/Talents.h>
-#include <kpublic/Components/ThreatSource.h>
-#include <kpublic/Components/ThreatTarget.h>
-#include <kpublic/Components/VisibleAuras.h>
-#include <kpublic/Components/Wallet.h>
+#include <tpublic/Components/Abilities.h>
+#include <tpublic/Components/ActionBars.h>
+#include <tpublic/Components/Auras.h>
+#include <tpublic/Components/CombatPrivate.h>
+#include <tpublic/Components/CombatPublic.h>
+#include <tpublic/Components/DisplayName.h>
+#include <tpublic/Components/EquippedItems.h>
+#include <tpublic/Components/Inventory.h>
+#include <tpublic/Components/NPC.h>
+#include <tpublic/Components/PlayerCooldowns.h>
+#include <tpublic/Components/PlayerPrivate.h>
+#include <tpublic/Components/PlayerPublic.h>
+#include <tpublic/Components/Position.h>
+#include <tpublic/Components/Sprite.h>
+#include <tpublic/Components/Talents.h>
+#include <tpublic/Components/ThreatSource.h>
+#include <tpublic/Components/ThreatTarget.h>
+#include <tpublic/Components/VisibleAuras.h>
+#include <tpublic/Components/Wallet.h>
 
-#include <kpublic/ComponentFactory.h>
+#include <tpublic/ComponentFactory.h>
 
 namespace tpublic
 {

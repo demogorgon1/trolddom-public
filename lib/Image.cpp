@@ -2,7 +2,7 @@
 
 #include <lodepng/lodepng.h>
 
-#include <kpublic/Image.h>
+#include <tpublic/Image.h>
 
 namespace tpublic
 {

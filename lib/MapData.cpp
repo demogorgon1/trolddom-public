@@ -1,9 +1,9 @@
 #include "Pcheader.h"
 
-#include <kpublic/Image.h>
-#include <kpublic/Manifest.h>
-#include <kpublic/MapData.h>
-#include <kpublic/TileStackCache.h>
+#include <tpublic/Image.h>
+#include <tpublic/Manifest.h>
+#include <tpublic/MapData.h>
+#include <tpublic/TileStackCache.h>
 
 namespace tpublic
 {

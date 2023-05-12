@@ -1,7 +1,7 @@
 #include "Pcheader.h"
 
-#include <kpublic/Compression.h>
-#include <kpublic/TileStackCache.h>
+#include <tpublic/Compression.h>
+#include <tpublic/TileStackCache.h>
 
 #include "SpriteSheetBuilder.h"
 
