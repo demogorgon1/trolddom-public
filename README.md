@@ -20,3 +20,13 @@ Maps (dungeons, open world, etc) are made using image files, with each pixel col
 The basic gameplay architecture uses a (fairly) strict [Entity-Component-System (ECS)](https://en.m.wikipedia.org/wiki/Entity_component_system) approach.
 
 All gameplay objects (players, NPCs, etc) are represented by an entity. An entity type, as defined in data, is simply a list of components and systems. Components and systems themselves are defined and implemented in code. Note that the player system isn't included in this public repository, as its tentacles dig too deep into other parts of the server code.
+
+### Components
+Each component shoule be defined by a single ```.h``` file in the ```includes/tpublic/Components``` directory, implementing the ```tpublic::ComponentBase``` interface. A component simply some data (maybe with some access methods for convenience) and functionality to read defaults from the data definition, and binary serialization. Flags control persistence (in case of player components) and how replication should be done to clients.
+
+### Systems
+This is where all the heavy logic goes. Systems are updated on a per-entity basis and are done in three ways:
+
+* ```Init```: When an entity (with the system) is created.
+* ```UpdatePrivate```: Invoked during world tick. The can read and write *private* components of the entity, but only read from *public* ones. The system can also read *public* components of other entities.
+* ```UpdatePublic```: Also invoked during world tick, but after ```UpdatePrivate```. Both *public* and *private* components of the entity can be read and written to, but access of other entities isn't possible.
