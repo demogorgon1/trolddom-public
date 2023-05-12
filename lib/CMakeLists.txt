@@ -27,7 +27,7 @@ target_compile_features(tpublic PRIVATE cxx_std_20)
 
 target_link_libraries(tpublic PUBLIC ${BROTLI_LIBRARIES_STATIC})
 
-if(KAOS_PUBLIC_PRECOMPILED_HEADERS)
+if(TROLDDOM_PUBLIC_PRECOMPILED_HEADERS)
 	target_precompile_headers(tpublic PRIVATE "Pcheader.h")
 endif()
 	
