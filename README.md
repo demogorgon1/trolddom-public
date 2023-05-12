@@ -30,3 +30,5 @@ This is where all the heavy logic goes. Systems are updated on a per-entity basi
 * ```Init```: When an entity (with the system) is created.
 * ```UpdatePrivate```: Invoked during world tick. The can read and write *private* components of the entity, but only read from *public* ones. The system can also read *public* components of other entities.
 * ```UpdatePublic```: Also invoked during world tick, but after ```UpdatePrivate```. Both *public* and *private* components of the entity can be read and written to, but access of other entities isn't possible.
+
+The reason why updates are separated into two stages is that during each stage, all entities can be updated in parallel, with the caveat being that when a system looks at other entities than its own, it will only see the updates from the previous world tick.
