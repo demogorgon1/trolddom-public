@@ -32,7 +32,7 @@ namespace tpublic
 					else if (aChild->m_name == "spawn")
 						m_mapPlayerSpawnId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_PLAYER_SPAWN, aChild->GetIdentifier());
 					else
-						KP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 				});
 			}
 

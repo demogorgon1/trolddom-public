@@ -39,7 +39,7 @@ namespace tpublic
 						else if(aChild->m_name == "threat")
 							m_threat = aChild->GetInt32();
 						else
-							KP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 					}
 				});
 			}

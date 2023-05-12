@@ -95,11 +95,11 @@ namespace tpublic
 					}
 					else
 					{
-						KP_VERIFY(false, aChild->m_debugInfo, "Invalid 'map_palette' item.");
+						TP_VERIFY(false, aChild->m_debugInfo, "Invalid 'map_palette' item.");
 					}
 
-					KP_VERIFY(aChild->m_type == Parser::Node::TYPE_ARRAY, aChild->m_debugInfo, "Not an array.");
-					KP_VERIFY(aChild->m_children.size() == 3, aChild->m_debugInfo, "Not a valid RGB color.");
+					TP_VERIFY(aChild->m_type == Parser::Node::TYPE_ARRAY, aChild->m_debugInfo, "Not an array.");
+					TP_VERIFY(aChild->m_children.size() == 3, aChild->m_debugInfo, "Not a valid RGB color.");
 
 					entry.m_color.m_r = aChild->m_children[0]->GetUInt8();
 					entry.m_color.m_g = aChild->m_children[1]->GetUInt8();

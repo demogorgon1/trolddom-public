@@ -49,7 +49,7 @@ namespace tpublic
 						}
 						else
 						{
-							KP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid weapon damage range.", aChild->m_name.c_str());
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid weapon damage range.", aChild->m_name.c_str());
 						}
 					}
 					else if (aChild->m_name == "weapon_cooldown")
@@ -82,7 +82,7 @@ namespace tpublic
 					}
 					else
 					{
-						KP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 					}
 				});
 			}

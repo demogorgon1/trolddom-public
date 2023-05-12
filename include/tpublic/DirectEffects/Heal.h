@@ -58,17 +58,17 @@ namespace tpublic
 								}
 								else
 								{
-									KP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid heal base definition.", aChild->m_name.c_str());
+									TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid heal base definition.", aChild->m_name.c_str());
 								}
 							}
 							else
 							{
-								KP_VERIFY(false, aChild->m_debugInfo, "Not a valid heal base.", aChild->m_name.c_str());
+								TP_VERIFY(false, aChild->m_debugInfo, "Not a valid heal base.", aChild->m_name.c_str());
 							}
 						}
 						else
 						{
-							KP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 						}
 					}
 				});

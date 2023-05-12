@@ -58,7 +58,7 @@ namespace tpublic
 		// Load and tokenize file
 		{
 			FILE* f = fopen(aPath, "rb");
-			KP_CHECK(f != NULL, "Failed to open: %s", aPath);
+			TP_CHECK(f != NULL, "Failed to open: %s", aPath);
 
 			fseek(f, 0, SEEK_END);
 			size_t fileSize = (size_t)ftell(f);
@@ -104,7 +104,7 @@ namespace tpublic
 	Tokenizer::ConsumeAnyIdentifier()
 	{
 		const Token& token = Next();
-		KP_VERIFY(token.m_type == Token::TYPE_IDENTIFIER, token.m_debugInfo, "Unexpected '%s', expected identifier.", token.m_value.c_str());
+		TP_VERIFY(token.m_type == Token::TYPE_IDENTIFIER, token.m_debugInfo, "Unexpected '%s', expected identifier.", token.m_value.c_str());
 		Proceed();
 		return token.m_value;
 	}
@@ -129,7 +129,7 @@ namespace tpublic
 		const char*		aToken)
 	{
 		const Token& token = Next();
-		KP_VERIFY(token.m_value == aToken, token.m_debugInfo, "Unexpected '%s', expected '%s'.", token.m_value.c_str(), aToken);
+		TP_VERIFY(token.m_value == aToken, token.m_debugInfo, "Unexpected '%s', expected '%s'.", token.m_value.c_str(), aToken);
 		Proceed();
 	}
 
@@ -258,7 +258,7 @@ namespace tpublic
 				}
 				else
 				{
-					KP_VERIFY(c >= ' ', debugInfo, "Invalid string.");
+					TP_VERIFY(c >= ' ', debugInfo, "Invalid string.");
 					buffer.push_back(c);
 				}
 				break;
@@ -274,7 +274,7 @@ namespace tpublic
 				}
 				else
 				{
-					KP_VERIFY(false, debugInfo, "Invalid string escape code: '%c'", c);
+					TP_VERIFY(false, debugInfo, "Invalid string escape code: '%c'", c);
 				}
 				break;
 

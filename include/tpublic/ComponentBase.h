@@ -51,7 +51,7 @@ namespace tpublic
 		const _T*
 		Cast() const
 		{
-			KP_CHECK(m_componentId == _T::ID, "Component type mismatch.");
+			TP_CHECK(m_componentId == _T::ID, "Component type mismatch.");
 			return (const _T*)this;
 		}
 
@@ -59,7 +59,7 @@ namespace tpublic
 		_T*
 		Cast()
 		{
-			KP_CHECK(m_componentId == _T::ID, "Component type mismatch.");
+			TP_CHECK(m_componentId == _T::ID, "Component type mismatch.");
 			return (_T*)this;
 		}
 

@@ -26,7 +26,7 @@ namespace tpublic
 					const Parser::Node*		aSource)
 				{
 					m_auraEffectId = AuraEffect::StringToId(aSource->m_name.c_str());
-					KP_VERIFY(m_auraEffectId != AuraEffect::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid aura effect.", aSource->m_name.c_str());
+					TP_VERIFY(m_auraEffectId != AuraEffect::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid aura effect.", aSource->m_name.c_str());
 
 					std::unique_ptr<AuraEffectBase> effect(aSource->m_sourceContext->m_auraEffectFactory->Create(m_auraEffectId));
 					assert(effect);
@@ -87,7 +87,7 @@ namespace tpublic
 					return TYPE_DEBUFF;
 				if (strcmp(string, "buff") == 0)
 					return TYPE_BUFF;
-				KP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid aura type.", string);
+				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid aura type.", string);
 				return Type(0);
 			}
 
@@ -102,7 +102,7 @@ namespace tpublic
 					const char* string = aFlag->GetIdentifier();
 					if (strcmp(string, "unique") == 0)
 						flags |= FLAG_UNIQUE;
-					KP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid aura flag.", string);
+					TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid aura flag.", string);
 				});
 				return flags;
 			}
@@ -134,7 +134,7 @@ namespace tpublic
 					else if(aChild->m_name == "string")
 						m_string = aChild->GetString();
 					else
-						KP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 				});
 			}
 

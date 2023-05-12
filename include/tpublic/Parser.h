@@ -48,14 +48,14 @@ namespace tpublic
 			const char*
 			GetString() const
 			{
-				KP_VERIFY(m_type == TYPE_STRING, m_debugInfo, "Not a string.");
+				TP_VERIFY(m_type == TYPE_STRING, m_debugInfo, "Not a string.");
 				return m_value.c_str();
 			}
 
 			const char*
 			GetIdentifier() const
 			{
-				KP_VERIFY(m_type == TYPE_IDENTIFIER, m_debugInfo, "Not an identifier.");
+				TP_VERIFY(m_type == TYPE_IDENTIFIER, m_debugInfo, "Not an identifier.");
 				return m_value.c_str();
 			}
 
@@ -63,25 +63,25 @@ namespace tpublic
 			GetProbability() const 
 			{
 				float f = GetFloat();
-				KP_VERIFY(f >= 0.0f && f <= 100.0f, m_debugInfo, "Probability must be between 0 and 100.");
+				TP_VERIFY(f >= 0.0f && f <= 100.0f, m_debugInfo, "Probability must be between 0 and 100.");
 				return (uint32_t)((f / 100.0f) * (float)UINT32_MAX);
 			}
 
 			uint32_t
 			GetUInt32() const
 			{
-				KP_VERIFY(m_type == TYPE_NUMBER, m_debugInfo, "Not a number.");
+				TP_VERIFY(m_type == TYPE_NUMBER, m_debugInfo, "Not a number.");
 				uintmax_t v = strtoumax(m_value.c_str(), NULL, 10);
-				KP_VERIFY(v <= UINT32_MAX, m_debugInfo, "Number out of bounds.");
+				TP_VERIFY(v <= UINT32_MAX, m_debugInfo, "Number out of bounds.");
 				return (uint32_t)v;
 			}
 
 			int32_t
 			GetInt32() const
 			{
-				KP_VERIFY(m_type == TYPE_NUMBER, m_debugInfo, "Not a number.");
+				TP_VERIFY(m_type == TYPE_NUMBER, m_debugInfo, "Not a number.");
 				intmax_t v = strtoimax(m_value.c_str(), NULL, 10);
-				KP_VERIFY(v <= INT32_MAX && v >= INT32_MIN, m_debugInfo, "Number out of bounds.");
+				TP_VERIFY(v <= INT32_MAX && v >= INT32_MIN, m_debugInfo, "Number out of bounds.");
 				return (int32_t)v;
 			}
 
@@ -89,28 +89,28 @@ namespace tpublic
 			GetUInt8() const
 			{
 				uint32_t v = GetUInt32();
-				KP_VERIFY(v <= UINT8_MAX, m_debugInfo, "Number out of bounds.");
+				TP_VERIFY(v <= UINT8_MAX, m_debugInfo, "Number out of bounds.");
 				return (uint8_t)v;
 			}
 
 			float
 			GetFloat() const
 			{
-				KP_VERIFY(m_type == TYPE_NUMBER, m_debugInfo, "Not a number.");
+				TP_VERIFY(m_type == TYPE_NUMBER, m_debugInfo, "Not a number.");
 				return strtof(m_value.c_str(), NULL);
 			}
 
 			const Node*
 			GetArray() const
 			{
-				KP_VERIFY(m_type == TYPE_ARRAY, m_debugInfo, "Not an array.");
+				TP_VERIFY(m_type == TYPE_ARRAY, m_debugInfo, "Not an array.");
 				return this;
 			}
 
 			const Node*
 			GetObject() const
 			{
-				KP_VERIFY(m_type == TYPE_OBJECT, m_debugInfo, "Not an object.");
+				TP_VERIFY(m_type == TYPE_OBJECT, m_debugInfo, "Not an object.");
 				return this;
 			}
 
@@ -119,7 +119,7 @@ namespace tpublic
 				DataType::Id				aDataType,
 				std::vector<uint32_t>&		aOut) const
 			{
-				KP_VERIFY(m_type == TYPE_ARRAY, m_debugInfo, "Not an array.");
+				TP_VERIFY(m_type == TYPE_ARRAY, m_debugInfo, "Not an array.");
 				for (const std::unique_ptr<Node>& child : m_children)
 					aOut.push_back(m_sourceContext->m_persistentIdTable->GetId(aDataType, child->GetIdentifier()));
 			}

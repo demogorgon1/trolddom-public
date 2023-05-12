@@ -25,7 +25,7 @@ namespace tpublic
 			FromSource(
 				const Parser::Node*		aNode) override
 			{
-				KP_VERIFY(false, aNode->m_debugInfo, "'sprite' must be defined in a sprite sheet.");
+				TP_VERIFY(false, aNode->m_debugInfo, "'sprite' must be defined in a sprite sheet.");
 			}
 
 			void

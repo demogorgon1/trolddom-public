@@ -50,12 +50,12 @@ namespace tpublic
 		const char*		aPath)
 	{
 		std::filesystem::path p = aPath;
-		KP_CHECK(p.extension() == ".png", "Not a PNG: %s", aPath);
+		TP_CHECK(p.extension() == ".png", "Not a PNG: %s", aPath);
 
 		Release();
 		
 		uint32_t result = (uint32_t)lodepng_decode32_file((unsigned char**)&m_data, (unsigned*)&m_width, (unsigned*)&m_height, aPath);
-		KP_CHECK(result == 0, "Failed to load PNG: %s", aPath);
+		TP_CHECK(result == 0, "Failed to load PNG: %s", aPath);
 	}
 	
 	void		
@@ -63,13 +63,13 @@ namespace tpublic
 		const char*		aPath) const
 	{
 		std::filesystem::path p = aPath;
-		KP_CHECK(p.extension() == ".png", "Not a PNG: %s", aPath);
+		TP_CHECK(p.extension() == ".png", "Not a PNG: %s", aPath);
 
 		assert(HasData());
 		assert(m_width > 0 && m_height > 0);
 
 		uint32_t result = (uint32_t)lodepng_encode32_file(aPath, (const unsigned char*)m_data, (unsigned)m_width, (unsigned)m_height);
-		KP_CHECK(result == 0, "Failed to save PNG: %s", aPath);
+		TP_CHECK(result == 0, "Failed to save PNG: %s", aPath);
 	}
 	
 	void		

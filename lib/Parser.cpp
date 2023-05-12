@@ -63,7 +63,7 @@ namespace tpublic
 				node->m_name = identifier;
 			}
 
-			KP_VERIFY(aTokenizer.IsToken(":"), aTokenizer.Next().m_debugInfo, "Unexpected '%s', expected ':'.", aTokenizer.Next().m_value.c_str());
+			TP_VERIFY(aTokenizer.IsToken(":"), aTokenizer.Next().m_debugInfo, "Unexpected '%s', expected ':'.", aTokenizer.Next().m_value.c_str());
 			aTokenizer.Proceed();
 
 			_ParseValue(aTokenizer, node.get());
@@ -122,7 +122,7 @@ namespace tpublic
 			else if (token.m_type == Tokenizer::Token::TYPE_IDENTIFIER)
 				aParent->m_type = Node::TYPE_IDENTIFIER;
 			else
-				KP_VERIFY(false, token.m_debugInfo, "Unexpected '%s', expected value.", token.m_value.c_str());
+				TP_VERIFY(false, token.m_debugInfo, "Unexpected '%s', expected value.", token.m_value.c_str());
 
 			aParent->m_value = token.m_value;
 		}

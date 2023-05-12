@@ -53,7 +53,7 @@ namespace tpublic
 					else if (strcmp(identifier, "use_weapon_icon") == 0)
 						flags |= FLAG_USE_WEAPON_ICON;
 					else
-						KP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid ability flag.", identifier);
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid ability flag.", identifier);
 				});
 				return flags;
 			}
@@ -69,7 +69,7 @@ namespace tpublic
 					const Parser::Node*		aSource)
 				{
 					m_directEffectId = DirectEffect::StringToId(aSource->m_name.c_str());
-					KP_VERIFY(m_directEffectId != DirectEffect::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid direct effect.", aSource->m_name.c_str());
+					TP_VERIFY(m_directEffectId != DirectEffect::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid direct effect.", aSource->m_name.c_str());
 
 					std::unique_ptr<DirectEffectBase> effect(aSource->m_sourceContext->m_directEffectFactory->Create(m_directEffectId));
 					assert(effect);
@@ -112,7 +112,7 @@ namespace tpublic
 			{
 				VerifyBase();
 
-				KP_VERIFY(!m_displayName.empty(), m_debugInfo, "'%s' has no 'display_name'.", m_name.c_str());
+				TP_VERIFY(!m_displayName.empty(), m_debugInfo, "'%s' has no 'display_name'.", m_name.c_str());
 			}
 
 			// Helpers
@@ -145,7 +145,7 @@ namespace tpublic
 					else if(aMember->m_tag == "direct_effect")
 						m_directEffects.push_back(std::make_unique<DirectEffectEntry>(aMember->GetObject()));
 					else
-						KP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
+						TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
 				});
 			}
 

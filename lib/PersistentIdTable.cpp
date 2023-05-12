@@ -56,7 +56,7 @@ namespace tpublic
 						while (std::getline(tokenizer, token, '-'))
 							tokens.push_back(token);
 
-						KP_CHECK(tokens.size() == 3, "Syntax error in persistent id table file at line %u.", lineNum);
+						TP_CHECK(tokens.size() == 3, "Syntax error in persistent id table file at line %u.", lineNum);
 
 						DataType::Id dataType = DataType::StringToId(tokens[0].c_str());
 						const char* name = tokens[1].c_str();
@@ -76,7 +76,7 @@ namespace tpublic
 			catch (...)
 			{
 				fclose(f);
-				KP_CHECK(false, "Failed to load persistent id table: %s", aPath);
+				TP_CHECK(false, "Failed to load persistent id table: %s", aPath);
 			}
 		}
 	}
@@ -85,10 +85,10 @@ namespace tpublic
 	PersistentIdTable::Save()
 	{
 		char tmpPath[1024];
-		KP_STRING_FORMAT(tmpPath, sizeof(tmpPath), "%s.tmp", m_path.c_str());
+		TP_STRING_FORMAT(tmpPath, sizeof(tmpPath), "%s.tmp", m_path.c_str());
 
 		FILE* f = fopen(tmpPath, "wb");
-		KP_CHECK(f != NULL, "Failed to open file for output: %s", tmpPath);
+		TP_CHECK(f != NULL, "Failed to open file for output: %s", tmpPath);
 
 		try
 		{
@@ -107,7 +107,7 @@ namespace tpublic
 		catch(...)
 		{
 			fclose(f);
-			KP_CHECK(false, "Failed to save persistent id table: %s", tmpPath);
+			TP_CHECK(false, "Failed to save persistent id table: %s", tmpPath);
 		}
 
 		std::filesystem::rename(tmpPath, m_path);

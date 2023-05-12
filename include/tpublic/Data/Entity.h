@@ -29,12 +29,12 @@ namespace tpublic
 					const Parser::Node* aSource)
 				{
 					m_componentId = Component::StringToId(aSource->m_name.c_str());
-					KP_VERIFY(m_componentId != Component::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid component.", aSource->m_name.c_str());
+					TP_VERIFY(m_componentId != Component::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid component.", aSource->m_name.c_str());
 
 					std::unique_ptr<ComponentBase> component(aSource->m_sourceContext->m_componentFactory->Create(m_componentId));
 					assert(component);
 
-					KP_VERIFY((component->GetFlags() & ComponentBase::FLAG_PLAYER_ONLY) == 0, aSource->m_debugInfo, "'%s' is a player-only component.", aSource->m_name.c_str());
+					TP_VERIFY((component->GetFlags() & ComponentBase::FLAG_PLAYER_ONLY) == 0, aSource->m_debugInfo, "'%s' is a player-only component.", aSource->m_name.c_str());
 
 					if(!aSource->m_children.empty())
 						component->FromSource(aSource);
@@ -126,13 +126,13 @@ namespace tpublic
 							const Parser::Node* aArrayItem)
 						{
 							uint32_t systemId = System::StringToId(aArrayItem->GetIdentifier());
-							KP_VERIFY(systemId != System::INVALID_ID, aArrayItem->m_debugInfo, "'%s' not a valid system.", aArrayItem->m_name.c_str());
+							TP_VERIFY(systemId != System::INVALID_ID, aArrayItem->m_debugInfo, "'%s' not a valid system.", aArrayItem->m_name.c_str());
 							m_systems.push_back(systemId);
 						});
 					}
 					else
 					{
-						KP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
+						TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
 					}
 				});
 			}

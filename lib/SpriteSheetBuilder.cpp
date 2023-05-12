@@ -88,13 +88,13 @@ namespace tpublic
 				{	
 					if(aCursorNode->m_name == "position")
 					{
-						KP_VERIFY(aCursorNode->m_type == Parser::Node::TYPE_ARRAY && aCursorNode->m_children.size() == 2, aCursorNode->m_debugInfo, "Invalid cursor position.");
+						TP_VERIFY(aCursorNode->m_type == Parser::Node::TYPE_ARRAY && aCursorNode->m_children.size() == 2, aCursorNode->m_debugInfo, "Invalid cursor position.");
 						offsetX = aCursorNode->m_children[0]->GetUInt32();
 						offsetY = aCursorNode->m_children[1]->GetUInt32();
 					}
 					else
 					{
-						KP_VERIFY(false, aCursorNode->m_debugInfo, "Invalid cursor item.");
+						TP_VERIFY(false, aCursorNode->m_debugInfo, "Invalid cursor item.");
 					}
 				});
 			}
@@ -108,15 +108,15 @@ namespace tpublic
 					else if (aSizeComponent->m_name == "height")
 						height = aSizeComponent->GetUInt32();
 					else
-						KP_VERIFY(false, aSizeComponent->m_debugInfo, "Invalid size component.");
+						TP_VERIFY(false, aSizeComponent->m_debugInfo, "Invalid size component.");
 				});
 			}
 			else if(aNode->m_tag == "sprite")
 			{
-				KP_VERIFY(!aNode->m_name.empty(), aNode->m_debugInfo, "Sprite must be named.");
-				KP_VERIFY(width > 0 && height > 0, aNode->m_debugInfo, "Sprite must be of non-zero size.");
-				KP_VERIFY(sourceImage.HasData(), aNode->m_debugInfo, "No source image specified.");
-				KP_VERIFY(offsetX + width <= sourceImage.GetWidth() && offsetY + height <= sourceImage.GetHeight(), aNode->m_debugInfo, "Sprite exceeds source image bounds.");
+				TP_VERIFY(!aNode->m_name.empty(), aNode->m_debugInfo, "Sprite must be named.");
+				TP_VERIFY(width > 0 && height > 0, aNode->m_debugInfo, "Sprite must be of non-zero size.");
+				TP_VERIFY(sourceImage.HasData(), aNode->m_debugInfo, "No source image specified.");
+				TP_VERIFY(offsetX + width <= sourceImage.GetWidth() && offsetY + height <= sourceImage.GetHeight(), aNode->m_debugInfo, "Sprite exceeds source image bounds.");
 
 				Sprite* sprite = _CreateSprite(aNode, aNode->m_name.c_str(), width * height);
 				sourceImage.Extract(offsetX, offsetY, width, height, sprite->m_image);		
@@ -132,7 +132,7 @@ namespace tpublic
 							const Parser::Node* aFlag)
 						{
 							uint8_t flag = SpriteInfo::StringToFlag(aFlag->GetIdentifier());
-							KP_VERIFY(flag != 0, aFlag->m_debugInfo, "Not a valid sprite flag.");
+							TP_VERIFY(flag != 0, aFlag->m_debugInfo, "Not a valid sprite flag.");
 							sprite->m_info.m_flags |= flag;
 						});
 					}
@@ -154,13 +154,13 @@ namespace tpublic
 					}
 					else
 					{
-						KP_VERIFY(false, aNode->m_debugInfo, "Invalid item in 'sprite'.");
+						TP_VERIFY(false, aNode->m_debugInfo, "Invalid item in 'sprite'.");
 					}
 				});
 			}
 			else
 			{
-				KP_VERIFY(false, aNode->m_debugInfo, "Invalid item in 'sprites'.");
+				TP_VERIFY(false, aNode->m_debugInfo, "Invalid item in 'sprites'.");
 			}
 		});
 	}
@@ -197,7 +197,7 @@ namespace tpublic
 			{
 				Data::Sprite* stackedSpriteData = aManifest->m_sprites.GetById(stackedSpriteId);
 				const Sprite* stackedSprite = _GetSprite(stackedSpriteData->m_name.c_str());
-				KP_CHECK(stackedSprite->m_image.GetWidth() == sprite->m_image.GetWidth() && stackedSprite->m_image.GetHeight() == sprite->m_image.GetHeight(), "Stacked tile sprite size mismatch.");
+				TP_CHECK(stackedSprite->m_image.GetWidth() == sprite->m_image.GetWidth() && stackedSprite->m_image.GetHeight() == sprite->m_image.GetHeight(), "Stacked tile sprite size mismatch.");
 
 				sprite->m_image.InsertBlended(0, 0, stackedSprite->m_image);
 			}
@@ -292,7 +292,7 @@ namespace tpublic
 
 		// Write to file
 		FILE* f = fopen(aPath, "wb");
-		KP_CHECK(f != NULL, "Failed to open file for output: %s", aPath);
+		TP_CHECK(f != NULL, "Failed to open file for output: %s", aPath);
 		fwrite(&compressed[0], 1, compressed.size(), f);
 		fclose(f);
 	}
@@ -311,7 +311,7 @@ namespace tpublic
 		{
 			assert(aNode == NULL);
 			char dummyName[64];
-			KP_STRING_FORMAT(dummyName, sizeof(dummyName), "__unnamed_%u__", m_nextUnnamedIndex++);
+			TP_STRING_FORMAT(dummyName, sizeof(dummyName), "__unnamed_%u__", m_nextUnnamedIndex++);
 			assert(m_spriteTable.find(dummyName) == m_spriteTable.end());
 			sprite = new Sprite(dummyName, aSize);
 			m_spriteTable[dummyName] = std::unique_ptr<Sprite>(sprite);
@@ -319,7 +319,7 @@ namespace tpublic
 		else
 		{
 			assert(aNode != NULL);
-			KP_VERIFY(m_spriteTable.find(aName) == m_spriteTable.end(), aNode->m_debugInfo, "Sprite name '%s' already in use.", aName);
+			TP_VERIFY(m_spriteTable.find(aName) == m_spriteTable.end(), aNode->m_debugInfo, "Sprite name '%s' already in use.", aName);
 			sprite = new Sprite(aName, aSize);
 			m_spriteTable[aName] = std::unique_ptr<Sprite>(sprite);
 		}

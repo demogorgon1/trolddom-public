@@ -89,7 +89,7 @@ namespace tpublic
 					const Parser::Node* aNode)
 				{
 					Id id = StringToId(aNode->m_name.c_str());
-					KP_VERIFY(id != INVALID_ID, aNode->m_debugInfo, "'%s' is not a valid stat.", aNode->m_name.c_str());
+					TP_VERIFY(id != INVALID_ID, aNode->m_debugInfo, "'%s' is not a valid stat.", aNode->m_name.c_str());
 					m_stats[id] = aNode->GetUInt32();
 				});
 			}

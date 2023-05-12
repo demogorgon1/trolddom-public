@@ -61,7 +61,7 @@ namespace tpublic
 			else if(aNode->m_name == "layers")
 				_InitLayers(aNode->GetArray());
 			else
-				KP_VERIFY(false, aNode->m_debugInfo, "Invalid 'map_data' item.");
+				TP_VERIFY(false, aNode->m_debugInfo, "Invalid 'map_data' item.");
 		});
 	}
 
@@ -106,7 +106,7 @@ namespace tpublic
 				for(const Data::MapPalette::Entry& paletteEntry : palette->m_entries)
 				{
 					uint32_t key = _MakeColorKey(paletteEntry.m_color.m_r, paletteEntry.m_color.m_g, paletteEntry.m_color.m_b);
-					KP_VERIFY(combinedPalette.find(key) == combinedPalette.end(), layer->m_debugInfo, "Source color defined by multiple palettes used at the same time.");
+					TP_VERIFY(combinedPalette.find(key) == combinedPalette.end(), layer->m_debugInfo, "Source color defined by multiple palettes used at the same time.");
 					combinedPalette[key] = &paletteEntry;
 				}
 			}
@@ -124,7 +124,7 @@ namespace tpublic
 						{
 							uint32_t key = _MakeColorKey(src->m_r, src->m_g, src->m_b);
 							CombinedPalette::iterator i = combinedPalette.find(key);
-							KP_VERIFY(i != combinedPalette.end(), layer->m_debugInfo, "Source color not defined in any palette: %u %u %u (%d, %d)", src->m_r, src->m_g, src->m_b, x, y);
+							TP_VERIFY(i != combinedPalette.end(), layer->m_debugInfo, "Source color not defined in any palette: %u %u %u (%d, %d)", src->m_r, src->m_g, src->m_b, x, y);
 
 							const Data::MapPalette::Entry* entry = i->second;
 
@@ -183,7 +183,7 @@ namespace tpublic
 		// Generate tile-stack map (tile borders stacked on top of each other)
 		for (const Data::Sprite* t : spritesWithBorders)
 		{
-			KP_VERIFY(t->m_info.m_borders.size() == 17, t->m_debugInfo, "Bordered tile must have 17 borders defined.");
+			TP_VERIFY(t->m_info.m_borders.size() == 17, t->m_debugInfo, "Bordered tile must have 17 borders defined.");
 
 			for (int32_t y = 0; y < m_height; y++)
 			{
@@ -409,12 +409,12 @@ namespace tpublic
 				}
 				else
 				{
-					KP_VERIFY(false, aNode->m_debugInfo, "Invalid layer item.");
+					TP_VERIFY(false, aNode->m_debugInfo, "Invalid layer item.");
 				}
 			});
 
-			KP_VERIFY(!sourcePath.empty(), aLayer->m_debugInfo, "Missing 'source' item.");
-			KP_VERIFY(layer->m_palettes.size() > 0, aLayer->m_debugInfo, "No palettes defined for layer.");
+			TP_VERIFY(!sourcePath.empty(), aLayer->m_debugInfo, "Missing 'source' item.");
+			TP_VERIFY(layer->m_palettes.size() > 0, aLayer->m_debugInfo, "No palettes defined for layer.");
 
 			Image sourceImage;
 			sourceImage.LoadPNG(sourcePath.c_str());
@@ -454,7 +454,7 @@ namespace tpublic
 					}
 					else
 					{
-						KP_VERIFY(src->m_a == 0, aLayer->m_debugInfo, "Source alpha channel should be 0 or 255.");
+						TP_VERIFY(src->m_a == 0, aLayer->m_debugInfo, "Source alpha channel should be 0 or 255.");
 					}
 
 					src++;

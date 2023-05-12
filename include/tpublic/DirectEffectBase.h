@@ -45,7 +45,7 @@ namespace tpublic
 					const Parser::Node* aArrayItem)
 				{
 					uint32_t flag = DirectEffect::StringToFlag(aArrayItem->GetIdentifier());
-					KP_VERIFY(flag != 0, aArrayItem->m_debugInfo, "'%s' is not a valid effect flag.", aArrayItem->m_name.c_str());
+					TP_VERIFY(flag != 0, aArrayItem->m_debugInfo, "'%s' is not a valid effect flag.", aArrayItem->m_name.c_str());
 					m_flags |= flag;
 				});
 				return true;

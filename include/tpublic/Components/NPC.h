@@ -36,7 +36,7 @@ namespace tpublic
 						else if(aChild->m_name == "use_probability")
 							m_useProbability = aChild->GetProbability();
 						else 
-							KP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 					});
 				}
 
@@ -75,7 +75,7 @@ namespace tpublic
 					const Parser::Node*		aSource)
 				{
 					m_entityState = EntityState::StringToId(aSource->m_name.c_str());
-					KP_VERIFY(m_entityState != EntityState::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid entity state.", aSource->GetIdentifier());
+					TP_VERIFY(m_entityState != EntityState::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid entity state.", aSource->GetIdentifier());
 
 					aSource->GetObject()->ForEachChild([&](
 						const Parser::Node* aChild)
@@ -94,7 +94,7 @@ namespace tpublic
 						}
 						else 
 						{
-							KP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 						}
 					});
 				}
@@ -196,14 +196,14 @@ namespace tpublic
 						{
 							ResourceEntry t;
 							t.m_id = Resource::StringToId(aResource->m_name.c_str());
-							KP_VERIFY(t.m_id != 0, aResource->m_debugInfo, "'%s' is not a valid resource.", aResource->m_name.c_str());
+							TP_VERIFY(t.m_id != 0, aResource->m_debugInfo, "'%s' is not a valid resource.", aResource->m_name.c_str());
 							t.m_max = aResource->GetUInt32();
 							m_resources.push_back(t);
 						});
 					}
 					else
 					{
-						KP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 					}
 				});
 			}

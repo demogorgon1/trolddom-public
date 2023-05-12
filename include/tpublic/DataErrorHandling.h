@@ -32,21 +32,21 @@ namespace tpublic
 
 }
 
-#define KP_VERIFY(_Condition, _DebugInfo, ...)																						\
+#define TP_VERIFY(_Condition, _DebugInfo, ...)																						\
 	do																																\
 	{																																\
 		if(!(_Condition))																											\
 			tpublic::DataErrorHandling::VerificationError(_DebugInfo, "" __VA_ARGS__);											\
 	} while(false)
 
-#define KP_VERIFY_STRING_ID(_StringId, _DebugInfo)																					\
+#define TP_VERIFY_STRING_ID(_StringId, _DebugInfo)																					\
 	do																																\
 	{																																\
 		if(!tpublic::DataErrorHandling::VerifyStringId(_StringId))																\
 			tpublic::DataErrorHandling::VerificationError(_DebugInfo, "Invalid string identifier: '%s'", _StringId.c_str());	\
 	} while(false)
 	
-#define KP_CHECK(_Condition, ...)																									\
+#define TP_CHECK(_Condition, ...)																									\
 	do																																\
 	{																																\
 		if(!(_Condition))																											\

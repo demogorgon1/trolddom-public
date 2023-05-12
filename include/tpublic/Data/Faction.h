@@ -40,12 +40,12 @@ namespace tpublic
 							if(aFlag->m_name == "neutral")
 								m_flags |= FLAG_NEUTRAL;
 							else
-								KP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid faction flag.", aFlag->m_name.c_str());
+								TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid faction flag.", aFlag->m_name.c_str());
 						});
 					}
 					else
 					{
-						KP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
 				});
 				

@@ -35,7 +35,7 @@ namespace tpublic
 					const Parser::Node*		aSource)
 				{
 					m_equipmentSlotId = EquipmentSlot::StringToId(aSource->m_name.c_str());
-					KP_VERIFY(m_equipmentSlotId != 0, aSource->m_debugInfo, "'%s' not a valid equipment slot.", aSource->m_name.c_str());
+					TP_VERIFY(m_equipmentSlotId != 0, aSource->m_debugInfo, "'%s' not a valid equipment slot.", aSource->m_name.c_str());
 					m_itemId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ITEM, aSource->GetIdentifier());
 				}
 
@@ -112,7 +112,7 @@ namespace tpublic
 					const Parser::Node*	aNode)
 				{
 					m_resourceId = Resource::StringToId(aNode->m_name.c_str());
-					KP_VERIFY(m_resourceId != 0, aNode->m_debugInfo, "'%s' not a valid resource.", aNode->m_name.c_str());
+					TP_VERIFY(m_resourceId != 0, aNode->m_debugInfo, "'%s' not a valid resource.", aNode->m_name.c_str());
 
 					aNode->ForEachChild([&](
 						const Parser::Node* aMember)
@@ -120,7 +120,7 @@ namespace tpublic
 						if (aMember->m_name == "add_max")
 							m_addMax = aMember->GetUInt32();
 						else
-							KP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
+							TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
 					});
 				}
 
@@ -170,7 +170,7 @@ namespace tpublic
 						else if(aMember->m_tag == "resource")
 							m_resourceUpdates.push_back(LevelProgressionLevelResourceUpdate(aMember));
 						else
-							KP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
+							TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
 					});
 				}
 
@@ -248,7 +248,7 @@ namespace tpublic
 			{
 				VerifyBase();
 
-				KP_VERIFY(!m_displayName.empty(), m_debugInfo, "'%s' has no 'string'.", m_name.c_str());
+				TP_VERIFY(!m_displayName.empty(), m_debugInfo, "'%s' has no 'string'.", m_name.c_str());
 			}
 
 			// Base implementation
@@ -270,7 +270,7 @@ namespace tpublic
 					else if (aMember->m_name == "color_1")
 					{
 						const Parser::Node* components = aMember->GetArray();
-						KP_VERIFY(components->m_children.size() == 3, aMember->m_debugInfo, "'%s' is not a valid color.", aMember->m_name.c_str());
+						TP_VERIFY(components->m_children.size() == 3, aMember->m_debugInfo, "'%s' is not a valid color.", aMember->m_name.c_str());
 						m_color1.m_r = components->m_children[0]->GetUInt8();
 						m_color1.m_g = components->m_children[1]->GetUInt8();
 						m_color1.m_b = components->m_children[2]->GetUInt8();
@@ -278,7 +278,7 @@ namespace tpublic
 					else if (aMember->m_name == "color_2")
 					{
 						const Parser::Node* components = aMember->GetArray();
-						KP_VERIFY(components->m_children.size() == 3, aMember->m_debugInfo, "'%s' is not a valid color.", aMember->m_name.c_str());
+						TP_VERIFY(components->m_children.size() == 3, aMember->m_debugInfo, "'%s' is not a valid color.", aMember->m_name.c_str());
 						m_color2.m_r = components->m_children[0]->GetUInt8();
 						m_color2.m_g = components->m_children[1]->GetUInt8();
 						m_color2.m_b = components->m_children[2]->GetUInt8();
@@ -305,7 +305,7 @@ namespace tpublic
 					}
 					else
 					{
-						KP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
+						TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
 					}
 				});
 			}

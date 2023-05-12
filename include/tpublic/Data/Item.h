@@ -126,13 +126,13 @@ namespace tpublic
 						else if (aChild->m_tag == "stat" && aChild->m_type == Parser::Node::TYPE_NUMBER)
 							m_addedStats.push_back({ Stat::StringToId(aChild->m_name.c_str()), aChild->GetUInt32(), aChild->GetUInt32() });
 						else
-							KP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					});
 
 					for(std::unique_ptr<Node>& child : m_weightedChildren)
 						m_totalChildWeight += child->m_weight;
 
-					KP_VERIFY((m_totalChildWeight == 0 && m_weightedChildren.size() == 0) || (m_totalChildWeight > 0 && m_weightedChildren.size() > 0),
+					TP_VERIFY((m_totalChildWeight == 0 && m_weightedChildren.size() == 0) || (m_totalChildWeight > 0 && m_weightedChildren.size() > 0),
 						aSource->m_debugInfo, "Invalid children.");
 				}
 
@@ -210,7 +210,7 @@ namespace tpublic
 							const Parser::Node* aEquipmentSlot)
 						{
 							EquipmentSlot::Id id = EquipmentSlot::StringToId(aEquipmentSlot->GetIdentifier());
-							KP_VERIFY(id != EquipmentSlot::INVALID_ID, aEquipmentSlot->m_debugInfo, "'%s' is not a valid equipment slot.", aEquipmentSlot->GetIdentifier());
+							TP_VERIFY(id != EquipmentSlot::INVALID_ID, aEquipmentSlot->m_debugInfo, "'%s' is not a valid equipment slot.", aEquipmentSlot->GetIdentifier());
 							m_equipmentSlots.push_back(id);
 						});	
 					}
@@ -220,7 +220,7 @@ namespace tpublic
 					}
 					else
 					{
-						KP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
 				});
 			}

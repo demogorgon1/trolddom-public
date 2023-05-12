@@ -13,7 +13,7 @@
 
 #if defined(WIN32)
 
-	#define KP_STRING_FORMAT_VARARGS(Buffer, BufferSize, Format)						\
+	#define TP_STRING_FORMAT_VARARGS(Buffer, BufferSize, Format)						\
 		{																				\
 			va_list _list;																\
 			va_start(_list, Format);													\
@@ -23,14 +23,14 @@
 			va_end(_list);																\
 		}
 
-	#define KP_STRING_FORMAT(Buffer, BufferSize, Format, ...)							\
+	#define TP_STRING_FORMAT(Buffer, BufferSize, Format, ...)							\
 		{																				\
 			sprintf_s(Buffer, BufferSize, Format, __VA_ARGS__);							\
 		}
 
 #else
 
-	#define KP_STRING_FORMAT_VARARGS(Buffer, BufferSize, Format)						\
+	#define TP_STRING_FORMAT_VARARGS(Buffer, BufferSize, Format)						\
 		{																				\
 			va_list _list;																\
 			va_start(_list, Format);													\
@@ -40,7 +40,7 @@
 			va_end(_list);																\
 		}
 
-	#define KP_STRING_FORMAT(Buffer, BufferSize, Format, ...)							\
+	#define TP_STRING_FORMAT(Buffer, BufferSize, Format, ...)							\
 		{																				\
 			snprintf(Buffer, BufferSize, Format, __VA_ARGS__);							\
 		}

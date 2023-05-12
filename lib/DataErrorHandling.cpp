@@ -26,12 +26,12 @@ namespace tpublic
 			if(g_errorCallback)
 			{
 				char buffer1[1024];
-				KP_STRING_FORMAT_VARARGS(buffer1, sizeof(buffer1), aFormat);
+				TP_STRING_FORMAT_VARARGS(buffer1, sizeof(buffer1), aFormat);
 
 				char buffer2[1024];
 				if (aDebugInfo.has_value())
 				{
-					KP_STRING_FORMAT(buffer2, sizeof(buffer2), "[%s:%u] %s", aDebugInfo.value().m_file.c_str(), aDebugInfo.value().m_line, buffer1);
+					TP_STRING_FORMAT(buffer2, sizeof(buffer2), "[%s:%u] %s", aDebugInfo.value().m_file.c_str(), aDebugInfo.value().m_line, buffer1);
 					g_errorCallback(buffer2);
 				}
 				else
@@ -73,7 +73,7 @@ namespace tpublic
 			if(g_errorCallback)
 			{
 				char buffer[1024];
-				KP_STRING_FORMAT_VARARGS(buffer, sizeof(buffer), aFormat);
+				TP_STRING_FORMAT_VARARGS(buffer, sizeof(buffer), aFormat);
 				g_errorCallback(buffer);
 			}
 

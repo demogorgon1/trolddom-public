@@ -32,11 +32,11 @@ namespace tpublic
 						else if (aChild->m_name == "init_state")
 						{
 							m_initState = EntityState::StringToId(aChild->GetIdentifier());
-							KP_VERIFY(m_initState != EntityState::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid entity state.", aChild->GetIdentifier());
+							TP_VERIFY(m_initState != EntityState::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid entity state.", aChild->GetIdentifier());
 						}
 						else
 						{
-							KP_VERIFY(false, aChild->m_debugInfo, "Invalid 'entity' item.");
+							TP_VERIFY(false, aChild->m_debugInfo, "Invalid 'entity' item.");
 						}
 					});
 				}
@@ -91,7 +91,7 @@ namespace tpublic
 					}
 					else
 					{
-						KP_VERIFY(false, aChild->m_debugInfo, "Invalid 'map_entity_spawn' item.");
+						TP_VERIFY(false, aChild->m_debugInfo, "Invalid 'map_entity_spawn' item.");
 					}
 				});
 			}

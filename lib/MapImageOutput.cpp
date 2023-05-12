@@ -20,7 +20,7 @@ namespace tpublic
 
 		SpriteData spriteData;
 		bool ok = spriteData.Load(spritesPath.c_str());
-		KP_CHECK(ok, "Failed to load sprite data.");
+		TP_CHECK(ok, "Failed to load sprite data.");
 
 		std::vector<std::unique_ptr<Image>> sheets;
 		
@@ -43,7 +43,7 @@ namespace tpublic
 		m_manifest->m_sprites.ForEach([&](
 			const Data::Sprite* aSprite)
 		{
-			KP_CHECK(aSprite->m_spriteSheetIndex < (uint32_t)sheets.size(), "Invalid sprite sheet index.");
+			TP_CHECK(aSprite->m_spriteSheetIndex < (uint32_t)sheets.size(), "Invalid sprite sheet index.");
 			Image* spriteSheet = sheets[aSprite->m_spriteSheetIndex].get();
 
 			std::unique_ptr<Image> image = std::make_unique<Image>();

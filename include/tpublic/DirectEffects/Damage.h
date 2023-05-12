@@ -64,7 +64,7 @@ namespace tpublic
 								}
 								else
 								{
-									KP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid damage base definition.", aChild->m_name.c_str());
+									TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid damage base definition.", aChild->m_name.c_str());
 								}
 							}
 							else if(aChild->m_type == Parser::Node::TYPE_IDENTIFIER && aChild->m_value == "weapon")
@@ -73,12 +73,12 @@ namespace tpublic
 							}
 							else
 							{
-								KP_VERIFY(false, aChild->m_debugInfo, "Not a valid damage base.", aChild->m_name.c_str());
+								TP_VERIFY(false, aChild->m_debugInfo, "Not a valid damage base.", aChild->m_name.c_str());
 							}
 						}
 						else
 						{
-							KP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 						}
 					}
 				});

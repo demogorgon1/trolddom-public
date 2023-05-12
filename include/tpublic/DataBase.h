@@ -23,9 +23,9 @@ namespace tpublic
 		void
 		VerifyBase() const
 		{
-			KP_VERIFY_STRING_ID(m_name, m_debugInfo);
-			KP_VERIFY(m_defined, m_debugInfo, "'%s' not defined.", m_name.c_str());
-			KP_VERIFY(m_id != 0, m_debugInfo, "'%s' has no id.", m_name.c_str());
+			TP_VERIFY_STRING_ID(m_name, m_debugInfo);
+			TP_VERIFY(m_defined, m_debugInfo, "'%s' not defined.", m_name.c_str());
+			TP_VERIFY(m_id != 0, m_debugInfo, "'%s' has no id.", m_name.c_str());
 		}
 
 		void

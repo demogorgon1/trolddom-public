@@ -123,7 +123,7 @@ namespace tpublic
 				uint32_t								aId) const
 			{
 				const _T* t = TryGetById(aId);
-				KP_CHECK(t != NULL, "Invalid '%s' id: %u", DataType::IdToString(_T::DATA_TYPE), aId);
+				TP_CHECK(t != NULL, "Invalid '%s' id: %u", DataType::IdToString(_T::DATA_TYPE), aId);
 				return t;
 			}
 
@@ -132,7 +132,7 @@ namespace tpublic
 				uint32_t								aId) 
 			{
 				_T* t = TryGetById(aId);
-				KP_CHECK(t != NULL, "Invalid '%s' id: %u", DataType::IdToString(_T::DATA_TYPE), aId);
+				TP_CHECK(t != NULL, "Invalid '%s' id: %u", DataType::IdToString(_T::DATA_TYPE), aId);
 				return t;
 			}
 
@@ -162,7 +162,7 @@ namespace tpublic
 				{
 					t->Verify();
 
-					KP_VERIFY(idTable.find(t->m_id) == idTable.end(), t->m_debugInfo, "Id collision: %u", t->m_id);
+					TP_VERIFY(idTable.find(t->m_id) == idTable.end(), t->m_debugInfo, "Id collision: %u", t->m_id);
 					idTable[t->m_id] = t.get();
 				}
 			}
@@ -191,9 +191,9 @@ namespace tpublic
 
 				for (std::unique_ptr<_T>& t : m_entries)
 				{
-					KP_CHECK(t->m_defined, "'%s' not defined.", DataType::IdToString(_T::DATA_TYPE));
-					KP_CHECK(m_idTable.find(t->m_id) == m_idTable.end(), "Id collision for '%s': %u", DataType::IdToString(_T::DATA_TYPE), t->m_id);
-					KP_CHECK(m_nameTable.find(t->m_name) == m_nameTable.end(), "Name collision for '%s': %s", DataType::IdToString(_T::DATA_TYPE), t->m_name.c_str());
+					TP_CHECK(t->m_defined, "'%s' not defined.", DataType::IdToString(_T::DATA_TYPE));
+					TP_CHECK(m_idTable.find(t->m_id) == m_idTable.end(), "Id collision for '%s': %u", DataType::IdToString(_T::DATA_TYPE), t->m_id);
+					TP_CHECK(m_nameTable.find(t->m_name) == m_nameTable.end(), "Name collision for '%s': %s", DataType::IdToString(_T::DATA_TYPE), t->m_name.c_str());
 
 					m_idTable[t->m_id] = t.get();
 					m_nameTable[t->m_name] = t.get();

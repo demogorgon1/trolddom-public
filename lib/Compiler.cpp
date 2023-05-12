@@ -60,13 +60,13 @@ namespace tpublic
 			else
 			{
 				DataType::Id dataType = DataType::StringToId(aNode->m_tag.c_str());
-				KP_VERIFY(dataType != DataType::INVALID_ID, aNode->m_debugInfo, "'%s' is not a valid data type.", aNode->m_tag.c_str());
+				TP_VERIFY(dataType != DataType::INVALID_ID, aNode->m_debugInfo, "'%s' is not a valid data type.", aNode->m_tag.c_str());
 
 				assert(m_manifest->m_containers[dataType] != NULL);
 			
 				DataBase* base = m_manifest->m_containers[dataType]->GetBaseByName(m_sourceContext.m_persistentIdTable.get(), aNode->m_name.c_str());
 
-				KP_VERIFY(!base->m_defined, aNode->m_debugInfo, "'%s' has already been defined.", aNode->m_name.c_str());
+				TP_VERIFY(!base->m_defined, aNode->m_debugInfo, "'%s' has already been defined.", aNode->m_name.c_str());
 
 				base->m_debugInfo = aNode->m_debugInfo;
 
@@ -144,7 +144,7 @@ namespace tpublic
 	{
 		std::error_code errorCode;
 		std::filesystem::directory_iterator it(aPath, errorCode);
-		KP_CHECK(!errorCode, "Failed to search directory: %s (%s)", aPath, errorCode.message().c_str());
+		TP_CHECK(!errorCode, "Failed to search directory: %s (%s)", aPath, errorCode.message().c_str());
 
 		for (const std::filesystem::directory_entry& entry : it)
 		{

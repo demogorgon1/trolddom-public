@@ -24,7 +24,7 @@ namespace tpublic
 				const Parser::Node* aChild)
 			{
 				uint32_t componentId = Component::StringToId(aChild->GetIdentifier());
-				KP_VERIFY(componentId != 0, aChild->m_debugInfo, "'%s' is not a valid component.", aChild->GetIdentifier());
+				TP_VERIFY(componentId != 0, aChild->m_debugInfo, "'%s' is not a valid component.", aChild->GetIdentifier());
 				m_components.push_back(componentId);
 			});
 		}
