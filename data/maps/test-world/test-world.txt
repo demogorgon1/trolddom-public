@@ -7,6 +7,10 @@ map_player_spawn test_world_player_spawn:
 {
 }
 
+map_player_spawn test_world_dungeon_exit:
+{
+}
+
 map_portal test_world_dungeon_entrance:
 {
 	map: test_dungeon
@@ -27,7 +31,8 @@ map_palette test_world_stuff:
 {
 	entity_spawn test_world_monster: [ 255 0 0 ]
 	player_spawn test_world_player_spawn: [ 0 0 255 ]
-	portal test_world_dungeon_entrance: [ 0 255 0 ]
+	player_spawn test_world_dungeon_exit: [ 0 0 200 ]
+	portal test_world_dungeon_entrance: [ 0 255 0 ]	
 }
 
 map test_world:

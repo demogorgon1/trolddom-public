@@ -7,16 +7,25 @@ map_player_spawn test_dungeon_player_spawn:
 {
 }
 
+map_portal test_dungeon_exit:
+{
+	map: test_world
+	spawn: test_world_dungeon_exit
+}
+
 map_palette test_dungeon_tiles:
 {
 	tile dungeon_floor: [ 0 0 0 ]
 	tile dungeon_wall: [ 255 255 255 ]
+	tile dungeon_wall_face: [ 128 128 128 ]
+	tile dungeon_wall_face_exit: [ 200 200 200 ]
 }
 
 map_palette test_dungeon_stuff:
 {
 	entity_spawn test_dungeon_monster: [ 255 0 0 ]
 	player_spawn test_dungeon_player_spawn: [ 0 0 255 ]
+	portal test_dungeon_exit: [ 0 255 0 ]	
 }
 
 map test_dungeon:
