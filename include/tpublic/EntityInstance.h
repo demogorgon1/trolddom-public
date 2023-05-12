@@ -37,7 +37,7 @@ namespace tpublic
 		AddComponent(
 			ComponentBase*			aComponent)
 		{
-			// FIXME: this kinda defeats much of the purpose of using ECS
+			// FIXME: this kinda defeats much of the purpose of using ECS. Will need some optimization at some point.
 			m_components.push_back(std::unique_ptr<ComponentBase>(aComponent));
 		}
 		
