@@ -7,4 +7,5 @@ sprites:
 	size: { width: 16 height: 16 }
 
 	sprite goblin: { }
+	sprite goblin_boss: { }
 }

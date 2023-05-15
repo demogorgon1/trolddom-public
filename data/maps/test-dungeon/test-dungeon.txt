@@ -1,6 +1,24 @@
+map_trigger test_dungeon_boss_1_killed:
+{
+	persistent: true
+	default: false
+}
+
 map_entity_spawn test_dungeon_monster:
 {	
 	entity goblin: { weight: 1 init_state: default } 
+}
+
+map_entity_spawn test_dungeon_boss_1:
+{
+	entity test_dungeon_boss_1: 
+	{ 
+		init_state: default 
+		spawn_condition:
+		{	
+			if_not: test_dungeon_boss_1_killed
+		}
+	}
 }
 
 map_player_spawn test_dungeon_player_spawn:
@@ -24,6 +42,7 @@ map_palette test_dungeon_tiles:
 map_palette test_dungeon_stuff:
 {
 	entity_spawn test_dungeon_monster: [ 255 0 0 ]
+	entity_spawn test_dungeon_boss_1: [ 255 255 0 ]
 	player_spawn test_dungeon_player_spawn: [ 0 0 255 ]
 	portal test_dungeon_exit: [ 0 255 0 ]	
 }
@@ -47,5 +66,17 @@ map test_dungeon:
 			source:		"test-dungeon-1.png"
 		}
 	]
+	
+	script:
+	{
+		condition trigger_not_set: test_dungeon_boss_1_killed
+		condition entity_state: { entity_spawn: test_dungeon_boss_1 state: dead }
+		
+		run: 
+		{
+			set_trigger: test_dungeon_boss_1_killed
+		}
+	}
+	
 }
  

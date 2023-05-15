@@ -13,6 +13,7 @@
 #include "Data/MapPalette.h"
 #include "Data/MapPlayerSpawn.h"
 #include "Data/MapPortal.h"
+#include "Data/MapTrigger.h"
 #include "Data/Sprite.h"
 #include "Data/Talent.h"
 #include "Data/TalentTree.h"
@@ -238,6 +239,7 @@ namespace tpublic
 			RegisterDataContainer(m_mapPalettes);
 			RegisterDataContainer(m_mapPlayerSpawns);
 			RegisterDataContainer(m_mapPortals);
+			RegisterDataContainer(m_mapTriggers);
 			RegisterDataContainer(m_sprites);
 			RegisterDataContainer(m_talents);
 			RegisterDataContainer(m_talentTrees);
@@ -312,6 +314,7 @@ namespace tpublic
 		DataContainer<Data::MapPalette>					m_mapPalettes;
 		DataContainer<Data::MapPlayerSpawn>				m_mapPlayerSpawns;
 		DataContainer<Data::MapPortal>					m_mapPortals;
+		DataContainer<Data::MapTrigger>					m_mapTriggers;
 		DataContainer<Data::Sprite>						m_sprites;
 		DataContainer<Data::Talent>						m_talents;
 		DataContainer<Data::TalentTree>					m_talentTrees;

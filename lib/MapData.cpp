@@ -63,6 +63,8 @@ namespace tpublic
 				_InitLayers(aNode->GetArray());
 			else if(aNode->m_name == "type")
 				m_type = MapType::StringToId(aNode->GetIdentifier());
+			else if(aNode->m_name == "script")
+				m_scripts.push_back(std::make_unique<Script>(aNode));
 			else
 				TP_VERIFY(false, aNode->m_debugInfo, "Invalid 'map_data' item.");
 		});
@@ -290,6 +292,7 @@ namespace tpublic
 		aStream->WriteObjects(m_entitySpawns);
 		aStream->WriteObjects(m_playerSpawns);
 		aStream->WriteObjects(m_portals);
+		aStream->WriteObjectPointers(m_scripts);
 	}
 
 	bool	
@@ -328,7 +331,8 @@ namespace tpublic
 			return false;
 		if (!aStream->ReadObjects(m_portals))
 			return false;
-
+		if(!aStream->ReadObjectPointers(m_scripts))
+			return false;
 		return true;
 	}
 

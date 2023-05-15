@@ -104,6 +104,205 @@ namespace tpublic
 			uint32_t								m_id = 0;
 		};
 
+		struct ScriptCondition
+		{
+			enum Type : uint8_t
+			{
+				TYPE_NONE,
+				TYPE_TRIGGER_NOT_SET, 
+				TYPE_TRIGGER_SET,
+				TYPE_ENTITY_STATE
+			};
+
+			ScriptCondition()
+			{
+
+			}
+
+			ScriptCondition(
+				const Parser::Node*			aSource)
+			{
+				if(aSource->m_name == "trigger_not_set")
+					m_type = TYPE_TRIGGER_NOT_SET;
+				else if (aSource->m_name == "trigger_set")
+					m_type = TYPE_TRIGGER_SET;
+				else if (aSource->m_name == "entity_state")
+					m_type = TYPE_ENTITY_STATE;
+				else
+					TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid script condition.", aSource->m_name.c_str());
+
+				if(m_type == TYPE_TRIGGER_NOT_SET || m_type == TYPE_TRIGGER_SET)
+				{
+					m_mapTriggerId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_TRIGGER, aSource->GetIdentifier());
+				}
+				else if(m_type == TYPE_ENTITY_STATE)
+				{
+					aSource->ForEachChild([&](
+						const Parser::Node* aChild)
+					{
+						if(aChild->m_name == "entity_spawn")
+						{
+							m_mapEntitySpawnId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aChild->GetIdentifier());
+						}
+						else if(aChild->m_name == "state")
+						{
+							m_entityState = EntityState::StringToId(aChild->GetIdentifier());
+							TP_VERIFY(m_entityState != EntityState::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid entity state.", aChild->GetIdentifier());
+						}
+						else
+						{
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+						}
+					});
+				}
+			}
+
+			void	
+			ToStream(
+				IWriter*					aStream) const
+			{
+				aStream->WritePOD(m_type);
+				aStream->WriteUInt(m_mapTriggerId);
+				aStream->WriteUInt(m_mapEntitySpawnId);
+				aStream->WritePOD(m_entityState);
+			}
+			
+			bool	
+			FromStream(
+				IReader*					aStream)
+			{
+				if (!aStream->ReadPOD(m_type))
+					return false;
+				if (!aStream->ReadUInt(m_mapTriggerId))
+					return false;
+				if (!aStream->ReadUInt(m_mapEntitySpawnId))
+					return false;
+				if (!aStream->ReadPOD(m_entityState))
+					return false;
+				return true;
+			}
+
+			// Public data
+			Type									m_type = TYPE_NONE;
+
+			// TYPE_TRIGGER_NOT_SET, TYPE_TRIGGER_SET
+			uint32_t								m_mapTriggerId = 0;
+
+			// TYPE_ENTITY_STATE
+			uint32_t								m_mapEntitySpawnId = 0;
+			EntityState::Id							m_entityState = EntityState::INVALID_ID;
+		};
+
+		struct ScriptCommand
+		{	
+			enum Type : uint8_t
+			{
+				TYPE_NONE,
+				TYPE_SET_TRIGGER,
+				TYPE_CLEAR_TRIGGER
+			};
+
+			ScriptCommand()
+			{
+
+			}
+
+			ScriptCommand(
+				const Parser::Node*			aSource)
+			{
+				if(aSource->m_name == "set_trigger")
+					m_type = TYPE_SET_TRIGGER;
+				else if(aSource->m_name == "clear_trigger")
+					m_type = TYPE_CLEAR_TRIGGER;
+				else
+					TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid script command.", aSource->m_name.c_str());
+
+				if(m_type == TYPE_SET_TRIGGER || m_type == TYPE_CLEAR_TRIGGER)
+					m_mapTriggerId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_TRIGGER, aSource->GetIdentifier());
+			}
+
+			void	
+			ToStream(
+				IWriter*					aStream) const
+			{
+				aStream->WritePOD(m_type);
+				aStream->WriteUInt(m_mapTriggerId);
+			}
+			
+			bool	
+			FromStream(
+				IReader*					aStream)
+			{
+				if (!aStream->ReadPOD(m_type))
+					return false;
+				if (!aStream->ReadUInt(m_mapTriggerId))
+					return false;
+				return true;
+			}
+
+			// Public data
+			Type									m_type = TYPE_NONE;
+
+			// TYPE_SET_TRIGGER, TYPE_CLEAR_TRIGGER
+			uint32_t								m_mapTriggerId = 0;
+		};
+
+		struct Script
+		{			
+			Script()
+			{
+
+			}
+
+			Script(
+				const Parser::Node*			aSource)
+			{
+				aSource->ForEachChild([&](
+					const Parser::Node* aChild)
+				{
+					if(aChild->m_tag == "condition")
+					{
+						m_conditions.push_back(ScriptCondition(aChild));
+					}
+					else if(aChild->m_name == "run")
+					{	
+						aChild->GetObject()->ForEachChild([&](
+							const Parser::Node* aCommand)
+						{
+							m_commands.push_back(ScriptCommand(aCommand));
+						});
+					}
+					else
+					{
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					}						
+				});
+			}
+
+			void	
+			ToStream(
+				IWriter*					aStream) const
+			{
+				aStream->WriteObjects(m_conditions);
+				aStream->WriteObjects(m_commands);
+			}
+			
+			bool	
+			FromStream(
+				IReader*					aStream)
+			{
+				if (!aStream->ReadObjects(m_conditions))
+					return false;
+				if (!aStream->ReadObjects(m_commands))
+					return false;
+				return true;
+			}
+
+			// Public data
+			std::vector<ScriptCondition>			m_conditions;
+			std::vector<ScriptCommand>				m_commands;
+		};
+
 				MapData();
 				MapData(
 					const Parser::Node*		aSource);
@@ -138,6 +337,7 @@ namespace tpublic
 		std::vector<EntitySpawn>					m_entitySpawns;
 		std::vector<PlayerSpawn>					m_playerSpawns;
 		std::vector<Portal>							m_portals;
+		std::vector<std::unique_ptr<Script>>		m_scripts;
 		uint32_t*									m_walkableBits;
 		uint32_t*									m_blockLineOfSightBits;
 

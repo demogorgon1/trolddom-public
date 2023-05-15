@@ -100,6 +100,17 @@ namespace tpublic
 				return strtof(m_value.c_str(), NULL);
 			}
 
+			bool
+			GetBool() const
+			{
+				if (m_value == "true" || m_value == "on" || m_value == "yes" || m_value == "1")
+					return true;
+				if (m_value == "false" || m_value == "off" || m_value == "no" || m_value == "0")
+					return false;
+				TP_VERIFY(false, m_debugInfo, "Not a bool.");
+				return false;			
+			}
+
 			const Node*
 			GetArray() const
 			{
