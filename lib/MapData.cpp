@@ -41,6 +41,7 @@ namespace tpublic
 		const Parser::Node*		aSource)
 		: m_width(0)
 		, m_height(0)
+		, m_type(MapType::ID_OPEN_WORLD)
 		, m_x(0)
 		, m_y(0)
 		, m_tileMap(NULL)
@@ -60,6 +61,8 @@ namespace tpublic
 				m_imageOutputPath = aNode->m_path + "/" + aNode->m_value;
 			else if(aNode->m_name == "layers")
 				_InitLayers(aNode->GetArray());
+			else if(aNode->m_name == "type")
+				m_type = MapType::StringToId(aNode->GetIdentifier());
 			else
 				TP_VERIFY(false, aNode->m_debugInfo, "Invalid 'map_data' item.");
 		});
@@ -273,6 +276,7 @@ namespace tpublic
 	{
 		assert(m_tileMap != NULL);
 
+		aStream->WritePOD(m_type);
 		aStream->WriteUInt(m_defaultTileSpriteId);
 		aStream->WriteUInt(m_defaultPlayerSpawnId);
 		aStream->WriteInt(m_x);
@@ -292,6 +296,8 @@ namespace tpublic
 	MapData::FromStream(
 		IReader*				aStream)
 	{
+		if(!aStream->ReadPOD(m_type))
+			return false;
 		if (!aStream->ReadUInt(m_defaultTileSpriteId))
 			return false;
 		if (!aStream->ReadUInt(m_defaultPlayerSpawnId))

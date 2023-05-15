@@ -37,6 +37,7 @@ map_palette test_world_stuff:
 
 map test_world:
 {
+	type: open_world
 	default_tile: water_1
 	default_player_spawn: test_world_player_spawn
 	#image_output: "test-world.png"

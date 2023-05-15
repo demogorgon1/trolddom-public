@@ -39,9 +39,9 @@ namespace tpublic
 			}
 
 			// Public data
-			uint32_t		m_abilityId = 0;
-			uint32_t		m_start = 0;
-			uint32_t		m_end = 0;
+			uint32_t			m_abilityId = 0;
+			uint32_t			m_start = 0;
+			uint32_t			m_end = 0;
 		};
 
 						Cooldowns();

@@ -11,12 +11,6 @@ namespace tpublic::Persistence
 		ID_ACCOUNT,
 		ID_VOLATILE,
 		ID_MAIN,
-		ID_RESERVED_1,
-		ID_RESERVED_2,
-		ID_RESERVED_3,
-
-		// Group
-		ID_GROUP,
 
 		NUM_IDS
 	};
@@ -46,12 +40,6 @@ namespace tpublic::Persistence
 		{ "account",	PLAYER_PERSISTENCE_TYPE_PER_ACCOUNT },
 		{ "volatile",	PLAYER_PERSISTENCE_TYPE_PER_CHARACTER },
 		{ "main",		PLAYER_PERSISTENCE_TYPE_PER_CHARACTER },
-		{ NULL,			PLAYER_PERSISTENCE_TYPE_NONE },
-		{ NULL,			PLAYER_PERSISTENCE_TYPE_NONE },
-		{ NULL,			PLAYER_PERSISTENCE_TYPE_NONE },
-
-		// Group
-		{ "group",		PLAYER_PERSISTENCE_TYPE_NONE }
 	};
 
 	static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

@@ -2,6 +2,7 @@
 
 #include "IReader.h"
 #include "IWriter.h"
+#include "MapType.h"
 #include "Parser.h"
 
 namespace tpublic
@@ -125,6 +126,7 @@ namespace tpublic
 					int32_t					aY) const;
 
 		// Public data
+		MapType::Id									m_type;
 		uint32_t									m_defaultTileSpriteId;
 		uint32_t									m_defaultPlayerSpawnId;
 		std::string									m_imageOutputPath;
