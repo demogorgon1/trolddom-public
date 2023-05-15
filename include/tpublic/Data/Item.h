@@ -214,6 +214,10 @@ namespace tpublic
 							m_equipmentSlots.push_back(id);
 						});	
 					}
+					else if(aChild->m_name == "loot_groups")
+					{
+						aChild->GetIdArray(DataType::ID_LOOT_GROUP, m_lootGroups);
+					}
 					else if(aChild->m_name == "root")
 					{
 						m_root = std::make_unique<Node>(aChild, false);
@@ -230,6 +234,8 @@ namespace tpublic
 				IWriter*				aStream) const override
 			{
 				ToStreamBase(aStream);
+				aStream->WriteUInts(m_equipmentSlots);
+				aStream->WriteUInts(m_lootGroups);
 				aStream->WriteOptionalObjectPointer(m_root);
 			}
 
@@ -239,6 +245,10 @@ namespace tpublic
 			{
 				if (!FromStreamBase(aStream))
 					return false;
+				if (!aStream->ReadUInts(m_equipmentSlots))
+					return false;
+				if (!aStream->ReadUInts(m_lootGroups))
+					return false;
 				if(!aStream->ReadOptionalObjectPointer(m_root))
 					return false;
 				return true;
@@ -246,6 +256,7 @@ namespace tpublic
 
 			// Public data
 			std::vector<uint32_t>		m_equipmentSlots;
+			std::vector<uint32_t>		m_lootGroups;
 			std::unique_ptr<Node>		m_root;
 		};
 

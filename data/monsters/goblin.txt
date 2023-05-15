@@ -1,3 +1,16 @@
+loot_table goblin:
+{
+	cash: [ 10 20 ]
+	
+	slots:
+	[
+		{
+			possibility: { weight: 10 }
+			possibility: { weight: 1 loot_group: world_drops_1_to_5 }
+		}		
+	]	
+}
+
 entity goblin:
 {
 	string: "Goblin"
@@ -11,6 +24,10 @@ entity goblin:
 		threat_target: { }
 		visible_auras: { }
 		auras: { }
+		lootable : 
+		{ 
+			loot_table: goblin
+		}
 		combat_public: 
 		{  
 			level: 1
@@ -44,7 +61,7 @@ entity goblin:
 			resources:
 			{
 				health: 50
-			}
+			}			
 		}
 	}
 }

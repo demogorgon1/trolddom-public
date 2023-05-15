@@ -139,6 +139,27 @@ namespace tpublic
 			return true;
 		}
 
+		template <typename _T>
+		bool
+		ReadOptionalObject(
+			std::optional<_T>&						aOut)
+		{
+			bool isSet;
+			if (!ReadBool(isSet))
+				return false;
+
+			if(isSet)
+			{
+				_T t;
+				if(!t.FromStream(this))
+					return false;
+
+				aOut = t;
+			}
+
+			return true;
+		}
+
 		bool
 		ReadString(
 			std::string&							aOut,

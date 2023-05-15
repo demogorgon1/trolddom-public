@@ -29,6 +29,7 @@ namespace tpublic
 			ID_THREAT_SOURCE,
 			ID_AURAS,
 			ID_VISIBLE_AURAS,
+			ID_LOOTABLE,
 
 			NUM_IDS
 		};
@@ -55,7 +56,8 @@ namespace tpublic
 			"threat_target",
 			"threat_source",
 			"auras",
-			"visible_auras"
+			"visible_auras",
+			"lootable"
 		};		
 
 		static_assert(sizeof(COMPONENT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

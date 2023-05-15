@@ -16,6 +16,7 @@ namespace tpublic
 			ID_STRENGTH,
 			ID_WISDOM,
 			ID_CONSTITUTION,
+			ID_ARMOR,
 
 			NUM_IDS
 		};
@@ -36,6 +37,7 @@ namespace tpublic
 			{ "strength",				"STR",		"Strength" },
 			{ "wisdom",					"WIS",		"Wisdom" },
 			{ "constitution",			"CON",		"Constitution" },
+			{ "armor",					"ARM",		"Armor" },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

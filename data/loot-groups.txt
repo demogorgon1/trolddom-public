@@ -1,0 +1,1 @@
+loot_group world_drops_1_to_5: {}

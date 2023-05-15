@@ -24,6 +24,8 @@ namespace tpublic
 			ID_ITEM,
 			ID_AURA,
 			ID_MAP_PORTAL,
+			ID_LOOT_TABLE,
+			ID_LOOT_GROUP,
 
 			NUM_IDS
 		};
@@ -45,7 +47,9 @@ namespace tpublic
 			"faction",
 			"item",
 			"aura",
-			"map_portal"
+			"map_portal",
+			"loot_table",
+			"loot_group"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

@@ -13,4 +13,11 @@ sprites:
 	sprite icon_heal : { }
 	sprite icon_staff_1 : { }
 	sprite icon_stun : { }
+	sprite icon_mail_pants_1 : { }
+	sprite icon_copper_single : { }
+	sprite icon_silver_single : { }
+	sprite icon_gold_single : { }
+	sprite icon_copper_multi : { }
+	sprite icon_silver_multi : { }
+	sprite icon_gold_multi : { }
 }

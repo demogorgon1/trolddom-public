@@ -32,20 +32,20 @@ namespace tpublic
 			ToStream(
 				IWriter* aStream) const override
 			{
-				aStream->WriteUInt(m_cash);
+				aStream->WriteInt(m_cash);
 			}
 
 			bool
 			FromStream(
 				IReader* aStream) override
 			{
-				if(!aStream->ReadUInt(m_cash))
+				if(!aStream->ReadInt(m_cash))
 					return false;
 				return true;
 			}
 
 			// Public data
-			uint64_t			m_cash = 0;
+			int64_t			m_cash = 0;
 		};
 	}
 

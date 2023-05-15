@@ -83,6 +83,16 @@ namespace tpublic
 			aObject->ToStream(this);
 		}
 
+		template <typename _T>
+		void
+		WriteOptionalObject(
+			const std::optional<_T>&				aObject)
+		{
+			WriteBool(aObject.has_value());
+			if (aObject)
+				aObject.value().ToStream(this);
+		}
+
 		void
 		WriteString(
 			const std::string&						aValue)

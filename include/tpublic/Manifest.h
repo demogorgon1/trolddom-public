@@ -6,6 +6,8 @@
 #include "Data/Entity.h"
 #include "Data/Faction.h"
 #include "Data/Item.h"
+#include "Data/LootGroup.h"
+#include "Data/LootTable.h"
 #include "Data/Map.h"
 #include "Data/MapEntitySpawn.h"
 #include "Data/MapPalette.h"
@@ -229,6 +231,8 @@ namespace tpublic
 			RegisterDataContainer(m_entities);
 			RegisterDataContainer(m_factions);
 			RegisterDataContainer(m_items);
+			RegisterDataContainer(m_lootGroups);
+			RegisterDataContainer(m_lootTables);
 			RegisterDataContainer(m_maps);
 			RegisterDataContainer(m_mapEntitySpawns);
 			RegisterDataContainer(m_mapPalettes);
@@ -301,6 +305,8 @@ namespace tpublic
 		DataContainer<Data::Entity>						m_entities;
 		DataContainer<Data::Faction>					m_factions;
 		DataContainer<Data::Item>						m_items;
+		DataContainer<Data::LootGroup>					m_lootGroups;
+		DataContainer<Data::LootTable>					m_lootTables;
 		DataContainer<Data::Map>						m_maps;
 		DataContainer<Data::MapEntitySpawn>				m_mapEntitySpawns;
 		DataContainer<Data::MapPalette>					m_mapPalettes;
