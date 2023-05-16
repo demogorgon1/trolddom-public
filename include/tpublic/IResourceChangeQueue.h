@@ -1,5 +1,7 @@
 #pragma once
 
+#include "EntityState.h"
+
 namespace tpublic
 {
 
@@ -11,6 +13,8 @@ namespace tpublic
 	class IResourceChangeQueue
 	{
 	public:
+		typedef std::function<void()> UpdateCallback;
+
 		virtual				~IResourceChangeQueue() {}
 
 		// Virtual interface
@@ -22,6 +26,8 @@ namespace tpublic
 								Components::CombatPublic*		aCombat,
 								size_t							aResourceIndex,
 								int32_t							aChange) = 0;
+		virtual void		AddUpdateCallback(
+								UpdateCallback					aUpdateCallback) = 0;
 	};
 
 }

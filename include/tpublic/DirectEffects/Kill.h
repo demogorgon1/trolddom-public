@@ -27,7 +27,7 @@ namespace tpublic
 
 			}
 
-			// EffectBase implementation
+			// DirectEffectBase implementation
 			void
 			FromSource(
 				const Parser::Node*			/*aSource*/) override
@@ -52,25 +52,21 @@ namespace tpublic
 
 			void
 			Resolve(
-				std::mt19937&				aRandom,
-				Components::CombatPublic*	aSourceCombatPublic,
-				Components::CombatPrivate*	aSourceCombatPrivate,
-				Components::CombatPublic*	aTargetCombatPublic,
-				CombatEvent::Id				aId,
-				uint32_t					aAbilityId,
-				uint32_t					aSourceEntityInstanceId,
-				uint32_t					aTargetEntityInstanceId,
-				IResourceChangeQueue*			aCombatResultQueue)
+				uint32_t					aTick,
+				std::mt19937&				/*aRandom*/,
+				const Manifest*				/*aManifest*/,
+				CombatEvent::Id				/*aId*/,
+				uint32_t					/*aAbilityId*/,
+				const EntityInstance*		/*aSource*/,
+				EntityInstance*				aTarget,
+				IResourceChangeQueue*		aCombatResultQueue,
+				IAuraEventQueue*			/*aAuraEventQueue*/,
+				IThreatEventQueue*			/*aThreatEventQueue*/) override
 			{
-				(void)aRandom;
-				(void)aSourceCombatPublic;
-				(void)aSourceCombatPrivate;
-				(void)aTargetCombatPublic;
-				(void)aId;
-				(void)aCombatResultQueue;
-				(void)aAbilityId;
-				(void)aSourceEntityInstanceId;
-				(void)aTargetEntityInstanceId;
+				aCombatResultQueue->AddUpdateCallback([aTarget, aTick]()
+				{
+					aTarget->SetState(EntityState::ID_DEAD, aTick);
+				});
 			}
 
 			// Public data
