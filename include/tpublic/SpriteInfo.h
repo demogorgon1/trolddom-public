@@ -9,7 +9,8 @@ namespace tpublic
 		enum Flag : uint8_t
 		{
 			FLAG_TILE_WALKABLE				= 0x01,
-			FLAG_TILE_BLOCK_LINE_OF_SIGHT	= 0x02
+			FLAG_TILE_BLOCK_LINE_OF_SIGHT	= 0x02,
+			FLAG_STANDALONE					= 0x04
 		};
 
 		static inline uint8_t 
@@ -20,7 +21,8 @@ namespace tpublic
 				return FLAG_TILE_WALKABLE;
 			if (strcmp(aString, "tile_block_line_of_sight") == 0)
 				return FLAG_TILE_BLOCK_LINE_OF_SIGHT;
-
+			if (strcmp(aString, "standalone") == 0)
+				return FLAG_STANDALONE;
 			return 0;
 		}
 

@@ -100,16 +100,24 @@ namespace tpublic
 			}
 			else if (aNode->m_name == "size")
 			{
-				aNode->GetObject()->ForEachChild([&](
-					const Parser::Node* aSizeComponent)
-				{	
-					if(aSizeComponent->m_name == "width")
-						width = aSizeComponent->GetUInt32();
-					else if (aSizeComponent->m_name == "height")
-						height = aSizeComponent->GetUInt32();
-					else
-						TP_VERIFY(false, aSizeComponent->m_debugInfo, "Invalid size component.");
-				});
+				if(aNode->m_type == Parser::Node::TYPE_IDENTIFIER && aNode->m_value == "source")
+				{
+					width = sourceImage.GetWidth();
+					height = sourceImage.GetHeight();
+				}
+				else
+				{
+					aNode->GetObject()->ForEachChild([&](
+						const Parser::Node* aSizeComponent)
+					{	
+						if(aSizeComponent->m_name == "width")
+							width = aSizeComponent->GetUInt32();
+						else if (aSizeComponent->m_name == "height")
+							height = aSizeComponent->GetUInt32();
+						else
+							TP_VERIFY(false, aSizeComponent->m_debugInfo, "Invalid size component.");
+					});
+				}
 			}
 			else if(aNode->m_tag == "sprite")
 			{
@@ -358,8 +366,9 @@ namespace tpublic
 		size_t emptySpaceIndex = 0;
 		uint32_t emptySpaceSize = 0;
 
-		// Find smallest empty space that fits this sprite
+		if((aSprite->m_info.m_flags & SpriteInfo::FLAG_STANDALONE) == 0)
 		{
+			// Find smallest empty space that fits this sprite
 			for (std::unique_ptr<Sheet>& sheet : m_sheets)
 			{
 				for(size_t i = 0; i < sheet->m_emptySpaces.size(); i++)
@@ -383,11 +392,18 @@ namespace tpublic
 		// If no empty space was found, create new blank sheet
 		if(insertSheet == NULL)
 		{
-			uint32_t nearestPowerOfTwoWidth = _GetNearestPowerOfTwo(width);
-			uint32_t nearestPowerOfTwoHeight = _GetNearestPowerOfTwo(width);
-			uint32_t sheetSize = std::max(nearestPowerOfTwoWidth, nearestPowerOfTwoHeight);
-			sheetSize = std::max(sheetSize, m_minSheetSize);
-			insertSheet = _CreateSheet(sheetSize, sheetSize);
+			if ((aSprite->m_info.m_flags & SpriteInfo::FLAG_STANDALONE) == 0)
+			{
+				uint32_t nearestPowerOfTwoWidth = _GetNearestPowerOfTwo(width);
+				uint32_t nearestPowerOfTwoHeight = _GetNearestPowerOfTwo(height);
+				uint32_t sheetSize = std::max(nearestPowerOfTwoWidth, nearestPowerOfTwoHeight);
+				sheetSize = std::max(sheetSize, m_minSheetSize);
+				insertSheet = _CreateSheet(sheetSize, sheetSize);
+			}
+			else
+			{
+				insertSheet = _CreateSheet(width, height);				
+			}
 		}
 
 		// Insert
