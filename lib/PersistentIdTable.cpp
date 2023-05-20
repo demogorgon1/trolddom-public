@@ -46,14 +46,14 @@ namespace tpublic
 			{
 				char line[1024];
 				uint32_t lineNum = 1;
-				while (feof(f) != 0 && fgets(line, sizeof(line), f) != NULL)
+				while (feof(f) == 0 && fgets(line, sizeof(line), f) != NULL)
 				{
 					if (line[0] != '#')
 					{
 						std::stringstream tokenizer(line);
 						std::string token;
 						std::vector<std::string> tokens;
-						while (std::getline(tokenizer, token, '-'))
+						while (std::getline(tokenizer, token, ' '))
 							tokens.push_back(token);
 
 						TP_CHECK(tokens.size() == 3, "Syntax error in persistent id table file at line %u.", lineNum);

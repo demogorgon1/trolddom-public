@@ -30,6 +30,7 @@ namespace tpublic
 					Manifest*				aManifest);
 		void	UpdateManifestData();
 		void	ExportSheets(
+					Compression::Level		aCompressionLevel,
 					const char*				aPath);
 
 	private:

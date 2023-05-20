@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Compression.h"
 #include "Manifest.h"
 #include "Parser.h"
 #include "PersistentIdTable.h"
@@ -18,7 +19,8 @@ namespace tpublic
 					const char*			aRootPath);
 		void	Build(
 					const char*			aPersistentIdTablePath,
-					const char*			aDataOutputPath);
+					const char*			aDataOutputPath,
+					Compression::Level	aCompressionLevel);
 
 	private:
 

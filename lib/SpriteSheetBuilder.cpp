@@ -269,6 +269,7 @@ namespace tpublic
 
 	void	
 	SpriteSheetBuilder::ExportSheets(
+		Compression::Level		aCompressionLevel,
 		const char*				aPath)
 	{
 		// Serialize to big data blob
@@ -295,7 +296,7 @@ namespace tpublic
 				}
 			}
 
-			Compression::Pack(&data[0], data.size(), compressed);
+			Compression::Pack(&data[0], data.size(), aCompressionLevel, compressed);
 		}
 
 		// Write to file

@@ -39,7 +39,8 @@ namespace tpublic
 	void	
 	Compiler::Build(
 		const char*				aPersistentIdTablePath,
-		const char*				aDataOutputPath)
+		const char*				aDataOutputPath,
+		Compression::Level		aCompressionLevel)
 	{
 		SpriteSheetBuilder spriteSheetBuilder(512);
 
@@ -97,7 +98,7 @@ namespace tpublic
 
 			std::string spritesPath = aDataOutputPath;
 			spritesPath += "/sprites.bin";
-			spriteSheetBuilder.ExportSheets(spritesPath.c_str());
+			spriteSheetBuilder.ExportSheets(aCompressionLevel, spritesPath.c_str());
 		}
 
 		// Generate map image output for debugging purposes
@@ -125,7 +126,7 @@ namespace tpublic
 			m_manifest->ToStream(&writer);
 
 			std::vector<uint8_t> compressed;
-			Compression::Pack(&uncompressed[0], uncompressed.size(), compressed);
+			Compression::Pack(&uncompressed[0], uncompressed.size(), aCompressionLevel, compressed);
 
 			std::string path = aDataOutputPath;
 			path += "/manifest.bin";			

@@ -15,16 +15,35 @@ namespace tpublic
 		Pack(
 			const void*				aBuffer,
 			size_t					aBufferSize,
+			Level					aLevel,
 			std::vector<uint8_t>&	aOut)
 		{	
 			size_t maxEncodedSize = BrotliEncoderMaxCompressedSize(aBufferSize);
 			aOut.resize(maxEncodedSize);
 
 			size_t encodedSize;
-			
+
+			int quality = 0;
+			int windowBits = 0;
+
+			if(aLevel == LEVEL_BEST)
+			{
+				quality = BROTLI_MAX_QUALITY;
+				windowBits = BROTLI_MAX_WINDOW_BITS;
+			}
+			else if (aLevel == LEVEL_FAST)
+			{
+				quality = BROTLI_MIN_QUALITY;
+				windowBits = BROTLI_MIN_WINDOW_BITS;
+			}
+			else
+			{
+				assert(false);
+			}
+
 			BROTLI_BOOL result = BrotliEncoderCompress(
-				BROTLI_MAX_QUALITY, 
-				BROTLI_MAX_WINDOW_BITS, 
+				quality, 
+				windowBits, 
 				BROTLI_MODE_GENERIC,
 				aBufferSize,
 				(const uint8_t*)aBuffer,
