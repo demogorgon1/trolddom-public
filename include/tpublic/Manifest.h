@@ -88,6 +88,16 @@ namespace tpublic
 				return it->second;
 			}
 
+			const _T*
+			GetExistingByName(
+				const char*								aName) const
+			{
+				typename std::unordered_map<std::string, _T*>::const_iterator it = m_nameTable.find(aName);
+				if(it == m_nameTable.cend())
+					return NULL;
+				return it->second;
+			}
+
 			_T*
 			CreateUnnamed()
 			{
