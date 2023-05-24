@@ -263,6 +263,10 @@ namespace tpublic
 					{
 						m_displayName = aMember->GetString();
 					}
+					else if (aMember->m_name == "description")
+					{
+						m_description = aMember->GetString();
+					}
 					else if (aMember->m_name == "sprite")
 					{
 						m_spriteId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aMember->GetIdentifier());
@@ -316,6 +320,7 @@ namespace tpublic
 			{
 				ToStreamBase(aStream);
 				aStream->WriteString(m_displayName);
+				aStream->WriteString(m_description);
 				aStream->WriteOptionalObjectPointer(m_levelProgression);
 				aStream->WriteUInt(m_spriteId);
 				aStream->WriteUInt(m_defaultAttackAbilityId);
@@ -333,6 +338,8 @@ namespace tpublic
 				if (!FromStreamBase(aStream))
 					return false;
 				if(!aStream->ReadString(m_displayName))
+					return false;
+				if (!aStream->ReadString(m_description))
 					return false;
 				if(!aStream->ReadOptionalObjectPointer(m_levelProgression))
 					return false;
@@ -355,6 +362,7 @@ namespace tpublic
 
 			// Public data
 			std::string												m_displayName;
+			std::string												m_description;
 			uint32_t												m_spriteId = 0;
 			Color													m_color1;
 			Color													m_color2;

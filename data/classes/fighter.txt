@@ -38,6 +38,8 @@ ability fighter_attack:
 class fighter:
 {
 	string: "Fighter"	
+	description: "Defeat your enemies in hand-to-hand combat while being able to take a beating."
+	
 	sprite: fighter
 	color_1: [ 128 32 0 ] 
 	color_2: [ 70 32 0 ] 
