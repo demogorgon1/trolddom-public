@@ -326,6 +326,7 @@ namespace tpublic
 
 		// Public data
 		MapType::Id									m_type;
+		std::string									m_displayName;
 		uint32_t									m_defaultTileSpriteId;
 		uint32_t									m_defaultPlayerSpawnId;
 		std::string									m_imageOutputPath;

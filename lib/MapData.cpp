@@ -63,6 +63,8 @@ namespace tpublic
 				_InitLayers(aNode->GetArray());
 			else if(aNode->m_name == "type")
 				m_type = MapType::StringToId(aNode->GetIdentifier());
+			else if(aNode->m_name == "string")
+				m_displayName = aNode->GetString();
 			else if(aNode->m_name == "script")
 				m_scripts.push_back(std::make_unique<Script>(aNode));
 			else
@@ -279,6 +281,7 @@ namespace tpublic
 		assert(m_tileMap != NULL);
 
 		aStream->WritePOD(m_type);
+		aStream->WriteString(m_displayName);
 		aStream->WriteUInt(m_defaultTileSpriteId);
 		aStream->WriteUInt(m_defaultPlayerSpawnId);
 		aStream->WriteInt(m_x);
@@ -300,6 +303,8 @@ namespace tpublic
 		IReader*				aStream)
 	{
 		if(!aStream->ReadPOD(m_type))
+			return false;
+		if(!aStream->ReadString(m_displayName))
 			return false;
 		if (!aStream->ReadUInt(m_defaultTileSpriteId))
 			return false;
