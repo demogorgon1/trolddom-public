@@ -1,5 +1,7 @@
 #include "Pcheader.h"
 
+#include <map>
+
 #include <tpublic/DataErrorHandling.h>
 #include <tpublic/PersistentIdTable.h>
 
@@ -98,8 +100,15 @@ namespace tpublic
 			{
 				const char* dataTypeString = DataType::IdToString((DataType::Id)i);
 
+				// Sort by id
+				typedef std::map<uint32_t, std::pair<std::string, std::string>> SortedMap;
+				SortedMap sortedMap;
+
 				for(std::pair<std::string, uint32_t> it : m_tables[i])
-					fprintf(f, "%s %s %u\r\n", dataTypeString, it.first.c_str(), it.second);
+					sortedMap[it.second] = std::make_pair<std::string, std::string>(dataTypeString, it.first.c_str());
+
+				for(SortedMap::const_iterator j = sortedMap.cbegin(); j != sortedMap.cend(); j++)
+					fprintf(f, "%s %s %u\r\n", j->second.first.c_str(), j->second.second.c_str(), j->first);
 			}
 
 			fclose(f);
