@@ -59,7 +59,7 @@ namespace tpublic
 			else if (aNode->m_name == "default_player_spawn")
 				m_defaultPlayerSpawnId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_PLAYER_SPAWN, aNode->GetIdentifier());
 			else if (aNode->m_name == "default_exit_portal")
-				m_defaultPlayerSpawnId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_PORTAL, aNode->GetIdentifier());
+				m_defaultExitPortalId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_PORTAL, aNode->GetIdentifier());
 			else if(aNode->m_name == "image_output")
 				m_imageOutputPath = aNode->m_path + "/" + aNode->m_value;
 			else if(aNode->m_name == "layers")
