@@ -326,6 +326,7 @@ namespace tpublic
 
 		// Public data
 		MapType::Id									m_type;
+		MapType::ResetMode							m_resetMode;
 		std::string									m_displayName;
 		uint32_t									m_defaultTileSpriteId;
 		uint32_t									m_defaultPlayerSpawnId;

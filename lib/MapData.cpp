@@ -34,6 +34,8 @@ namespace tpublic
 		, m_defaultExitPortalId(0)
 		, m_walkableBits(NULL)
 		, m_blockLineOfSightBits(NULL)
+		, m_resetMode(MapType::RESET_MODE_MANUAL)
+		, m_type(MapType::ID_OPEN_WORLD)
 	{
 
 	}
@@ -43,6 +45,7 @@ namespace tpublic
 		: m_width(0)
 		, m_height(0)
 		, m_type(MapType::ID_OPEN_WORLD)
+		, m_resetMode(MapType::RESET_MODE_MANUAL)
 		, m_x(0)
 		, m_y(0)
 		, m_tileMap(NULL)
@@ -66,6 +69,8 @@ namespace tpublic
 				_InitLayers(aNode->GetArray());
 			else if(aNode->m_name == "type")
 				m_type = MapType::StringToId(aNode->GetIdentifier());
+			else if (aNode->m_name == "reset")
+				m_resetMode = MapType::StringToResetMode(aNode->GetIdentifier());
 			else if(aNode->m_name == "string")
 				m_displayName = aNode->GetString();
 			else if(aNode->m_name == "script")
@@ -284,6 +289,7 @@ namespace tpublic
 		assert(m_tileMap != NULL);
 
 		aStream->WritePOD(m_type);
+		aStream->WritePOD(m_resetMode);
 		aStream->WriteString(m_displayName);
 		aStream->WriteUInt(m_defaultTileSpriteId);
 		aStream->WriteUInt(m_defaultPlayerSpawnId);
@@ -306,7 +312,9 @@ namespace tpublic
 	MapData::FromStream(
 		IReader*				aStream)
 	{
-		if(!aStream->ReadPOD(m_type))
+		if (!aStream->ReadPOD(m_type))
+			return false;
+		if (!aStream->ReadPOD(m_resetMode))
 			return false;
 		if(!aStream->ReadString(m_displayName))
 			return false;
