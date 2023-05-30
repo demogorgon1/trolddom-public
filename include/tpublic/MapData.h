@@ -329,6 +329,7 @@ namespace tpublic
 		std::string									m_displayName;
 		uint32_t									m_defaultTileSpriteId;
 		uint32_t									m_defaultPlayerSpawnId;
+		uint32_t									m_defaultExitPortalId;
 		std::string									m_imageOutputPath;
 		int32_t										m_x;
 		int32_t										m_y;

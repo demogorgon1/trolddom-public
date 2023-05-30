@@ -53,6 +53,7 @@ map test_dungeon:
 	type: private
 	default_tile: dungeon_wall
 	default_player_spawn: test_dungeon_player_spawn
+	default_exit_portal: test_dungeon_exit
 	#image_output: "test.png"
 
 	layers:

@@ -31,6 +31,7 @@ namespace tpublic
 		, m_y(0)
 		, m_tileMap(NULL)
 		, m_defaultTileSpriteId(0)
+		, m_defaultExitPortalId(0)
 		, m_walkableBits(NULL)
 		, m_blockLineOfSightBits(NULL)
 	{
@@ -57,6 +58,8 @@ namespace tpublic
 				m_defaultTileSpriteId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aNode->GetIdentifier());
 			else if (aNode->m_name == "default_player_spawn")
 				m_defaultPlayerSpawnId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_PLAYER_SPAWN, aNode->GetIdentifier());
+			else if (aNode->m_name == "default_exit_portal")
+				m_defaultPlayerSpawnId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_PORTAL, aNode->GetIdentifier());
 			else if(aNode->m_name == "image_output")
 				m_imageOutputPath = aNode->m_path + "/" + aNode->m_value;
 			else if(aNode->m_name == "layers")
@@ -284,6 +287,7 @@ namespace tpublic
 		aStream->WriteString(m_displayName);
 		aStream->WriteUInt(m_defaultTileSpriteId);
 		aStream->WriteUInt(m_defaultPlayerSpawnId);
+		aStream->WriteUInt(m_defaultExitPortalId);
 		aStream->WriteInt(m_x);
 		aStream->WriteInt(m_y);
 		aStream->WriteInt(m_width);
@@ -309,6 +313,8 @@ namespace tpublic
 		if (!aStream->ReadUInt(m_defaultTileSpriteId))
 			return false;
 		if (!aStream->ReadUInt(m_defaultPlayerSpawnId))
+			return false;
+		if (!aStream->ReadUInt(m_defaultExitPortalId))
 			return false;
 		if (!aStream->ReadInt(m_x))
 			return false;
