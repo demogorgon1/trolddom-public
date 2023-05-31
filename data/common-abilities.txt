@@ -1,7 +1,8 @@
 ability attack:
 {
-	string: "Attack"
+	string: "Attack"	
 	flags: [ attack target_other can_be_dodged can_be_parried can_miss use_weapon_icon ]	
+	delay: 3
 	
 	direct_effect damage:
 	{
@@ -18,6 +19,7 @@ ability strike:
 	cooldown: 30
 	flags: [ target_other can_be_dodged can_be_parried can_miss ]
 	icon: icon_strike
+	delay: 3
 	
 	direct_effect damage:
 	{

@@ -136,6 +136,10 @@ namespace tpublic
 						m_displayName = aMember->GetString();
 					else if (aMember->m_name == "range")
 						m_range = aMember->GetUInt32();
+					else if (aMember->m_name == "speed")
+						m_speed = aMember->GetUInt32();
+					else if (aMember->m_name == "delay")
+						m_delay = aMember->GetUInt32();
 					else if (aMember->m_name == "cooldown")
 						m_cooldown = aMember->GetUInt32();
 					else if (aMember->m_name == "icon")
@@ -156,6 +160,8 @@ namespace tpublic
 				ToStreamBase(aStream);
 				aStream->WriteString(m_displayName);
 				aStream->WriteUInt(m_range);
+				aStream->WriteUInt(m_speed);
+				aStream->WriteUInt(m_delay);
 				aStream->WriteUInt(m_cooldown);
 				aStream->WriteUInt(m_iconSpriteId);
 				aStream->WriteObjectPointers(m_directEffects);
@@ -172,6 +178,10 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInt(m_range))
 					return false;
+				if (!aStream->ReadUInt(m_speed))
+					return false;
+				if (!aStream->ReadUInt(m_delay))
+					return false;
 				if (!aStream->ReadUInt(m_cooldown))
 					return false;
 				if (!aStream->ReadUInt(m_iconSpriteId))
@@ -186,6 +196,8 @@ namespace tpublic
 			// Public data
 			std::string										m_displayName;
 			uint32_t										m_range = 1;
+			uint32_t										m_speed = 0;
+			uint32_t										m_delay = 0;
 			uint32_t										m_cooldown = 10;
 			uint8_t											m_flags = 0;
 			uint32_t										m_iconSpriteId = 0;

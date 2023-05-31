@@ -14,6 +14,7 @@ ability knock:
 	cooldown: 100
 	flags: [ target_other can_be_dodged can_be_parried can_miss ]
 	icon: icon_knock
+	delay: 3
 
 	direct_effect apply_aura:
 	{	
@@ -26,6 +27,7 @@ ability fighter_attack:
 {
 	string: "Attack"
 	flags: [ attack target_other can_be_dodged can_be_parried can_miss use_weapon_icon ]	
+	delay: 3
 	
 	direct_effect damage:
 	{
