@@ -123,6 +123,7 @@ namespace tpublic
 			bool CanBeParried() const { return m_flags & FLAG_CAN_BE_PARRIED; }
 			bool CanBeBlocked() const { return m_flags & FLAG_CAN_BE_BLOCKED; }
 			bool IsAttack() const { return m_flags & FLAG_ATTACK; }
+			bool IsInstantMelee() const { return m_range == 1; }
 
 			// Base implementation
 			void
