@@ -123,7 +123,7 @@ namespace tpublic
 			bool CanBeParried() const { return m_flags & FLAG_CAN_BE_PARRIED; }
 			bool CanBeBlocked() const { return m_flags & FLAG_CAN_BE_BLOCKED; }
 			bool IsAttack() const { return m_flags & FLAG_ATTACK; }
-			bool IsInstantMelee() const { return m_range == 1; }
+			bool IsInstantMelee() const { return m_range == 1 && m_castTime == 0; }
 
 			// Base implementation
 			void
@@ -143,6 +143,8 @@ namespace tpublic
 						m_delay = aMember->GetUInt32();
 					else if (aMember->m_name == "cooldown")
 						m_cooldown = aMember->GetUInt32();
+					else if (aMember->m_name == "cast_time")
+						m_castTime = aMember->GetUInt32();
 					else if (aMember->m_name == "icon")
 						m_iconSpriteId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aMember->GetIdentifier());
 					else if (aMember->m_name == "projectile")
@@ -170,6 +172,7 @@ namespace tpublic
 				aStream->WriteObjectPointers(m_directEffects);
 				aStream->WritePOD(m_flags);
 				aStream->WriteUInt(m_projectileParticleSystemId);
+				aStream->WriteUInt(m_castTime);
 			}
 			
 			bool	
@@ -196,6 +199,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInt(m_projectileParticleSystemId))
 					return false;
+				if (!aStream->ReadUInt(m_castTime))
+					return false;
 				return true;
 			}
 
@@ -205,6 +210,7 @@ namespace tpublic
 			uint32_t										m_speed = 0;
 			uint32_t										m_delay = 0;
 			uint32_t										m_cooldown = 10;
+			uint32_t										m_castTime = 0;
 			uint8_t											m_flags = 0;
 			uint32_t										m_iconSpriteId = 0;
 			uint32_t										m_projectileParticleSystemId = 0;

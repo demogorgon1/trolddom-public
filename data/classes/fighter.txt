@@ -27,11 +27,12 @@ ability throw_rock:
 {
 	string: "Throw Rock"
 	range: 6
-	cooldown: 100
+	cooldown: 60
 	flags: [ target_other can_be_dodged can_miss ]
 	icon: icon_throw_rock
 	speed: 6
 	projectile: throw_rock
+	cast_time: 2
 	
 	direct_effect damage:
 	{
