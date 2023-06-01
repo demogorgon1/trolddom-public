@@ -1,0 +1,20 @@
+sprites:
+{
+	source: "effects.png"
+
+	cursor: { position: [ 0 0 ] }
+
+	size: { width: 4 height: 4 }
+
+	sprite effect_rock: { flags: [ centered doubled ] }
+}
+
+particle_system throw_rock:
+{
+	particle:
+	{
+		sprites: [ effect_rock ]
+		flags: [ attached no_rotation ]
+		count: 1		
+	}
+}

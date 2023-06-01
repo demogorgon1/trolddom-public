@@ -20,4 +20,5 @@ sprites:
 	sprite icon_copper_multi : { }
 	sprite icon_silver_multi : { }
 	sprite icon_gold_multi : { }
+	sprite icon_throw_rock : { }
 }

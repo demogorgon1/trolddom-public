@@ -23,6 +23,24 @@ ability knock:
 	}
 }
 
+ability throw_rock:
+{
+	string: "Throw Rock"
+	range: 6
+	cooldown: 100
+	flags: [ target_other can_be_dodged can_miss ]
+	icon: icon_throw_rock
+	speed: 6
+	projectile: throw_rock
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical			
+		base: [ 3 6 ]
+	}
+}
+
 ability fighter_attack:
 {
 	string: "Attack"
@@ -46,7 +64,7 @@ class fighter:
 	color_1: [ 128 32 0 ] 
 	color_2: [ 70 32 0 ] 
 	default_attack: fighter_attack
-	default_action_bar: [ fighter_attack knock strike gaze_of_death ]
+	default_action_bar: [ fighter_attack knock strike gaze_of_death throw_rock ]
 
 	start_map test_world: [ test_world_player_spawn ]
 	
@@ -63,6 +81,7 @@ class fighter:
 				strike
 				knock
 				gaze_of_death
+				throw_rock
 			]
 						
 			stats:

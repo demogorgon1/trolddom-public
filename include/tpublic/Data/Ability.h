@@ -145,6 +145,8 @@ namespace tpublic
 						m_cooldown = aMember->GetUInt32();
 					else if (aMember->m_name == "icon")
 						m_iconSpriteId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aMember->GetIdentifier());
+					else if (aMember->m_name == "projectile")
+						m_projectileParticleSystemId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PARTICLE_SYSTEM, aMember->GetIdentifier());
 					else if (aMember->m_name == "flags")
 						m_flags = GetFlags(aMember);
 					else if(aMember->m_tag == "direct_effect")
@@ -167,6 +169,7 @@ namespace tpublic
 				aStream->WriteUInt(m_iconSpriteId);
 				aStream->WriteObjectPointers(m_directEffects);
 				aStream->WritePOD(m_flags);
+				aStream->WriteUInt(m_projectileParticleSystemId);
 			}
 			
 			bool	
@@ -191,6 +194,8 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadPOD(m_flags))
 					return false;
+				if (!aStream->ReadUInt(m_projectileParticleSystemId))
+					return false;
 				return true;
 			}
 
@@ -202,6 +207,7 @@ namespace tpublic
 			uint32_t										m_cooldown = 10;
 			uint8_t											m_flags = 0;
 			uint32_t										m_iconSpriteId = 0;
+			uint32_t										m_projectileParticleSystemId = 0;
 			std::vector<std::unique_ptr<DirectEffectEntry>>	m_directEffects;
 		};
 

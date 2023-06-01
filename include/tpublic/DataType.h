@@ -27,6 +27,7 @@ namespace tpublic
 			ID_LOOT_TABLE,
 			ID_LOOT_GROUP,
 			ID_MAP_TRIGGER,
+			ID_PARTICLE_SYSTEM,
 
 			NUM_IDS
 		};
@@ -51,7 +52,8 @@ namespace tpublic
 			"map_portal",
 			"loot_table",
 			"loot_group",
-			"map_trigger"
+			"map_trigger",
+			"particle_system"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

@@ -10,7 +10,9 @@ namespace tpublic
 		{
 			FLAG_TILE_WALKABLE				= 0x01,
 			FLAG_TILE_BLOCK_LINE_OF_SIGHT	= 0x02,
-			FLAG_STANDALONE					= 0x04
+			FLAG_STANDALONE					= 0x04,
+			FLAG_CENTERED					= 0x08,
+			FLAG_DOUBLED					= 0x10
 		};
 
 		static inline uint8_t 
@@ -23,6 +25,10 @@ namespace tpublic
 				return FLAG_TILE_BLOCK_LINE_OF_SIGHT;
 			if (strcmp(aString, "standalone") == 0)
 				return FLAG_STANDALONE;
+			if (strcmp(aString, "centered") == 0)
+				return FLAG_CENTERED;
+			if (strcmp(aString, "doubled") == 0)
+				return FLAG_DOUBLED;
 			return 0;
 		}
 

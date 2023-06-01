@@ -28,6 +28,7 @@
 #include "IWorldView.h"
 #include "Manifest.h"
 #include "Parser.h"
+#include "Particle.h"
 #include "Persistence.h"
 #include "PersistentIdTable.h"
 #include "SourceContext.h"

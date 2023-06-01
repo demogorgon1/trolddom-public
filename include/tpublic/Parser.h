@@ -135,6 +135,22 @@ namespace tpublic
 					aOut.push_back(m_sourceContext->m_persistentIdTable->GetId(aDataType, child->GetIdentifier()));
 			}
 
+			template <typename _T>
+			_T
+			GetFlags(
+				std::function<_T(const char*)> aLookup) const
+			{
+				TP_VERIFY(m_type == TYPE_ARRAY, m_debugInfo, "Not an array.");
+				_T flags = 0;
+				for (const std::unique_ptr<Node>& child : m_children)
+				{
+					_T flag = aLookup(child->GetIdentifier());
+					TP_VERIFY(flag != _T(0), m_debugInfo, "'%s' is not a valid flag.", child->GetIdentifier());
+					flags |= flag;
+				}
+				return flags;
+			}
+
 			// Public data
 			Type								m_type;
 			SourceContext*						m_sourceContext;
