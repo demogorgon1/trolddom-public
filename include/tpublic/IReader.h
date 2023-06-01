@@ -40,6 +40,23 @@ namespace tpublic
 
 		template <typename _T>
 		bool
+		ReadUIntDelta(
+			_T										aBase,
+			_T&										aOut)
+		{
+			int64_t delta;
+			if(!ReadInt(delta))
+				return false;
+			int64_t value = (int64_t)aBase + delta;
+			if(value > 0)
+				aOut = (_T)value;
+			else
+				aOut = 0;
+			return true;
+		}
+
+		template <typename _T>
+		bool
 		ReadUInts(
 			std::vector<_T>&						aOut,
 			size_t									aMaxCount = 1024)
@@ -187,6 +204,19 @@ namespace tpublic
 			return Read(&aOut, sizeof(aOut)) == sizeof(aOut);
 		}
 
+		void
+		SetTick(
+			uint32_t								aTick)
+		{
+			m_tick = aTick;
+		}
+
+		uint32_t
+		GetTick() const
+		{
+			return m_tick;
+		}
+
 		// Virtual interface
 		virtual bool						IsEnd() const = 0;
 		virtual size_t						Read(
@@ -195,6 +225,10 @@ namespace tpublic
 		virtual const AuraEffectFactory*	GetAuraEffectFactory() const = 0;
 		virtual const ComponentFactory*		GetComponentFactory() const = 0;
 		virtual const DirectEffectFactory*	GetDirectEffectFactory() const = 0;
+
+	private:
+
+		uint32_t			m_tick = 0;
 	};
 
 }

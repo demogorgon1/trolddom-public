@@ -36,6 +36,15 @@ namespace tpublic
 
 		template <typename _T>
 		void
+		WriteUIntDelta(
+			_T										aBase,
+			_T										aValue)
+		{
+			WriteInt((int64_t)aValue - (int64_t)aBase);
+		}
+
+		template <typename _T>
+		void
 		WriteUInts(
 			const std::vector<_T>&					aValues)
 		{
@@ -108,11 +117,28 @@ namespace tpublic
 		{
 			Write(&aValue, sizeof(aValue));
 		}
+
+		void
+		SetTick(
+			uint32_t								aTick)
+		{
+			m_tick = aTick;
+		}
+
+		uint32_t
+		GetTick() const
+		{
+			return m_tick;
+		}
 		
 		// Virtual interface
 		virtual void		Write(
 								const void*			aBuffer,
 								size_t				aBufferSize) = 0;
+
+	private:
+		
+		uint32_t			m_tick = 0;
 	};
 
 }

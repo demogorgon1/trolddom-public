@@ -21,8 +21,8 @@ namespace tpublic
 				IWriter*							aStream) const
 			{
 				aStream->WriteUInt(m_abilityId);
-				aStream->WriteUInt(m_start);
-				aStream->WriteUInt(m_end);
+				aStream->WriteUIntDelta(aStream->GetTick(), m_start);
+				aStream->WriteUIntDelta(aStream->GetTick(), m_end);
 			}
 			
 			bool			
@@ -31,9 +31,9 @@ namespace tpublic
 			{
 				if (!aStream->ReadUInt(m_abilityId))
 					return false;
-				if (!aStream->ReadUInt(m_start))
+				if (!aStream->ReadUIntDelta(aStream->GetTick(), m_start))
 					return false;
-				if (!aStream->ReadUInt(m_end))
+				if (!aStream->ReadUIntDelta(aStream->GetTick(), m_end))
 					return false;
 				return true;
 			}
