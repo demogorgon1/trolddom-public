@@ -33,7 +33,7 @@ ability firebolt:
 {
 	string: "Firebolt"
 	range: 7	
-	cast_time: 20
+	cast_time: 25
 	flags: [ target_other can_miss ]
 	icon: icon_firebolt
 	speed: 5
@@ -51,11 +51,33 @@ ability gaze_of_death:
 {
 	string: "Gaze of Death"
 	range: 100
-	cooldown: 10
+	cooldown: 100
 	flags: [ target_other ]
 	icon: icon_green_sphere
 	
 	direct_effect kill:
 	{
+	}
+}
+
+aura dont_touch_me_bro:
+{
+	string: "Don't Touch Me, Bro"
+	icon: icon_impact_1	
+	type: buff
+	duration: 300
+	aura_effect damage_input_modifier: { type_mask: [ all ] multiplier_num: 0 }
+}
+
+ability dont_touch_me_bro:
+{
+	string: "Don't Touch Me, Bro"
+	cooldown: 100
+	flags: [ target_self ]
+	icon: icon_impact_1
+	
+	direct_effect apply_aura:
+	{	
+		aura: dont_touch_me_bro
 	}
 }

@@ -1,7 +1,10 @@
 #pragma once
 
+#include "../Data/Aura.h"
+
 #include "../AuraEffectBase.h"
 #include "../ComponentBase.h"
+#include "../Manifest.h"
 
 namespace tpublic
 {
@@ -18,11 +21,36 @@ namespace tpublic
 
 			struct Entry
 			{
+				void
+				ToStream(
+					IWriter*					aWriter) const
+				{
+					aWriter->WriteUInt(m_auraId);
+					aWriter->WriteUIntDelta(aWriter->GetTick(), m_start);
+					aWriter->WriteUIntDelta(aWriter->GetTick(), m_end);
+				}
+
+				bool
+				FromStream(
+					IReader*					aReader) 
+				{
+					if(!aReader->ReadUInt(m_auraId))
+						return false;
+					if (!aReader->ReadUIntDelta(aReader->GetTick(), m_start))
+						return false;
+					if (!aReader->ReadUIntDelta(aReader->GetTick(), m_end))
+						return false;
+					return true;
+				}
+
+				// Public data
 				uint32_t										m_auraId = 0;
-				uint32_t										m_entityInstanceId = 0;
 				uint32_t										m_start = 0;
 				uint32_t										m_end = 0;
-				std::vector<std::unique_ptr<AuraEffectBase>>	m_effects;
+
+				// Not serialized
+				uint32_t										m_entityInstanceId = 0; 
+				std::vector<std::unique_ptr<AuraEffectBase>>	m_effects; 
 			};
 
 			Auras()
@@ -37,27 +65,19 @@ namespace tpublic
 
 			}
 
-			bool
-			HasEffect(
-				AuraEffect::Id					aId) const
-			{
-				for(const std::unique_ptr<Entry>& entry : m_entries)
-				{
-					for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
-					{
-						if(effect->m_id == aId)
-							return true;
-					}
-				}
-
-				return false;
-			}
+			bool		HasEffect(
+							AuraEffect::Id					aId) const;
+			int32_t		FilterDamageInput(
+							DirectEffect::DamageType		aDamageType,
+							int32_t							aDamage) const;
 
 			// ComponentBase implementation
-			void	ToStream(
-						IWriter*				/*aStream*/) const override { }
-			bool	FromStream(
-						IReader*				/*aStream*/) override { return true; }
+			void		ToStream(
+							IWriter*						aStream) const override;
+			bool		FromStream(
+							IReader*						aStream) override;
+			void		OnLoadedFromPersistence(
+							const Manifest*					aManifest) override;
 
 			// Public data
 			std::vector<std::unique_ptr<Entry>>					m_entries;

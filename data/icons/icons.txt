@@ -1,9 +1,8 @@
 sprites:
 {
 	source: "icons.png"
-
+	
 	cursor: { position: [ 0 0 ] }
-
 	size: { width: 16 height: 16 }
 
 	sprite icon_sword_1: { }
@@ -22,4 +21,8 @@ sprites:
 	sprite icon_gold_multi : { }
 	sprite icon_throw_rock : { }
 	sprite icon_firebolt : { }
+	
+	cursor: { position: [ 0 16 ] }
+
+	sprite icon_impact_1 : { }
 }

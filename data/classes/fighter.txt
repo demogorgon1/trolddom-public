@@ -65,7 +65,7 @@ class fighter:
 	color_1: [ 128 32 0 ] 
 	color_2: [ 70 32 0 ] 
 	default_attack: fighter_attack
-	default_action_bar: [ fighter_attack knock strike gaze_of_death throw_rock ]
+	default_action_bar: [ fighter_attack knock strike gaze_of_death throw_rock dont_touch_me_bro ]
 
 	start_map test_world: [ test_world_player_spawn ]
 	
@@ -83,6 +83,7 @@ class fighter:
 				knock
 				gaze_of_death
 				throw_rock
+				dont_touch_me_bro
 			]
 						
 			stats:

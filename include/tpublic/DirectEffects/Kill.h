@@ -1,9 +1,6 @@
 #pragma once
 
-#include "../Components/CombatPublic.h"
-
 #include "../DirectEffectBase.h"
-#include "../EntityInstance.h"
 
 namespace tpublic
 {
@@ -30,44 +27,25 @@ namespace tpublic
 			// DirectEffectBase implementation
 			void
 			FromSource(
-				const Parser::Node*			/*aSource*/) override
-			{
-			}
-
+				const Parser::Node*			aSource) override;
 			void
 			ToStream(
-				IWriter*					aStream) const override
-			{
-				ToStreamBase(aStream);
-			}
-
+				IWriter*					aStream) const override;
 			bool
 			FromStream(
-				IReader*					aStream) override
-			{
-				if(!FromStreamBase(aStream))
-					return false;
-				return true;
-			}
-
+				IReader*					aStream) override;
 			void
 			Resolve(
 				uint32_t					aTick,
-				std::mt19937&				/*aRandom*/,
-				const Manifest*				/*aManifest*/,
-				CombatEvent::Id				/*aId*/,
-				uint32_t					/*aAbilityId*/,
-				const EntityInstance*		/*aSource*/,
+				std::mt19937&				aRandom,
+				const Manifest*				aManifest,
+				CombatEvent::Id				aId,
+				uint32_t					aAbilityId,
+				const EntityInstance*		aSource,
 				EntityInstance*				aTarget,
 				IResourceChangeQueue*		aCombatResultQueue,
-				IAuraEventQueue*			/*aAuraEventQueue*/,
-				IThreatEventQueue*			/*aThreatEventQueue*/) override
-			{
-				aCombatResultQueue->AddUpdateCallback([aTarget, aTick]()
-				{
-					aTarget->SetState(EntityState::ID_DEAD, aTick);
-				});
-			}
+				IAuraEventQueue*			aAuraEventQueue,
+				IThreatEventQueue*			aThreatEventQueue) override;
 
 			// Public data
 		};

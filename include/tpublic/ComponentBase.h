@@ -10,6 +10,8 @@
 namespace tpublic
 {
 
+	class Manifest;
+
 	class ComponentBase
 	{
 	public:
@@ -84,6 +86,8 @@ namespace tpublic
 										IWriter*				/*aStream*/) const { assert(false); }
 		virtual bool				FromStream(
 										IReader*				/*aStream*/) { assert(false); return true; }
+		virtual void				OnLoadedFromPersistence(
+										const Manifest*			/*aManifest*/) { }
 
 		// Data access
 		uint32_t					GetComponentId() const { return m_componentId; }

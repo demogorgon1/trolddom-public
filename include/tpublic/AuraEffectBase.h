@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AuraEffect.h"
+#include "DirectEffect.h"
 #include "IReader.h"
 #include "IWriter.h"
 #include "Parser.h"
@@ -100,6 +101,9 @@ namespace tpublic
 									IReader*			/*aStream*/) { assert(false); return true; }
 		virtual bool			OnUpdate() { return false; }
 		virtual AuraEffectBase*	Copy() const { assert(false); return NULL; }
+		virtual int32_t			FilterDamageInput(
+									DirectEffect::DamageType	/*aDamageType*/,
+									int32_t						aDamage) const { return aDamage; }
 
 		// Public data
 		uint32_t		m_updateInterval = 0;

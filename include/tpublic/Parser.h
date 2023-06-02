@@ -151,6 +151,13 @@ namespace tpublic
 				return flags;
 			}
 
+			bool
+			IsIdentifier(
+				const char*					aString) const
+			{
+				return m_type == TYPE_IDENTIFIER && m_value == aString;
+			}
+
 			// Public data
 			Type								m_type;
 			SourceContext*						m_sourceContext;

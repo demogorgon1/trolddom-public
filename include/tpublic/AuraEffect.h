@@ -11,6 +11,7 @@ namespace tpublic
 			INVALID_ID,
 
 			ID_STUN,
+			ID_DAMAGE_INPUT_MODIFIER,
 
 			NUM_IDS
 		};
@@ -19,7 +20,8 @@ namespace tpublic
 		static constexpr const char* EFFECT_NAMES[] =
 		{
 			NULL,
-			"stun"
+			"stun",
+			"damage_input_modifier"
 		};
 
 		static_assert(sizeof(EFFECT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

@@ -13,6 +13,7 @@
 #include <tpublic/Helpers.h>
 #include <tpublic/IAbilityQueue.h>
 #include <tpublic/IMoveRequestQueue.h>
+#include <tpublic/IThreatEventQueue.h>
 #include <tpublic/IWorldView.h>
 #include <tpublic/Manifest.h>
 

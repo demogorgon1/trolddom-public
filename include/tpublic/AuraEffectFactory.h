@@ -1,5 +1,6 @@
 #pragma once
 
+#include "AuraEffects/DamageInputModifier.h"
 #include "AuraEffects/Stun.h"
 
 #include "AuraEffect.h"
@@ -12,6 +13,7 @@ namespace tpublic
 	public:
 		AuraEffectFactory()
 		{
+			_Register<AuraEffects::DamageInputModifier>();
 			_Register<AuraEffects::Stun>();
 		}
 

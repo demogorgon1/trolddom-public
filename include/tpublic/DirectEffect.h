@@ -21,8 +21,12 @@ namespace tpublic
 			DAMAGE_TYPE_ARCANE,
 			DAMAGE_TYPE_EVIL,		
 			DAMAGE_TYPE_HOLY,			
-			DAMAGE_TYPE_POISON
+			DAMAGE_TYPE_POISON,
+
+			NUM_DAMAGE_TYPES
 		};
+
+		static_assert(NUM_DAMAGE_TYPES <= 32); // Must fit into a bitfield
 
 		enum DamageBase : uint8_t
 		{
