@@ -140,6 +140,10 @@ namespace tpublic
 				if(!aOut->FromStream(this))
 					return false;
 			}
+			else
+			{
+				aOut.reset();
+			}
 
 			return true;
 		}
@@ -172,6 +176,10 @@ namespace tpublic
 					return false;
 
 				aOut = t;
+			}
+			else
+			{
+				aOut.reset();
 			}
 
 			return true;

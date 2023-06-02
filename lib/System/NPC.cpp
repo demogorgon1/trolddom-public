@@ -142,6 +142,7 @@ namespace tpublic::Systems
 				if (threat->m_table.IsEmpty())
 				{
 					npc->m_targetEntityInstanceId = 0;
+					npc->m_castInProgress.reset();
 
 					returnValue = EntityState::ID_DEFAULT;
 				}
@@ -226,6 +227,11 @@ namespace tpublic::Systems
 		const Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
 
 		combat->m_targetEntityInstanceId = npc->m_targetEntityInstanceId;
+
+		if(npc->m_castInProgress.has_value())
+			combat->m_castInProgress = npc->m_castInProgress.value();
+		else
+			combat->m_castInProgress.reset();
 	}
 
 }
