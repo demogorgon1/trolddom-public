@@ -95,7 +95,12 @@ namespace tpublic::Systems
 			aContext->m_threatEventQueue->AddThreatClearEvent(aEntityInstanceId);
 
 		npc->m_cooldowns.Update(aContext->m_tick);
-		threat->m_table.Update(aContext->m_tick);
+
+		std::vector<uint32_t> threatRemovedEntityInstanceIds;
+		threat->m_table.Update(aContext->m_tick, threatRemovedEntityInstanceIds);
+
+		for(uint32_t threatRemovedInstanceId : threatRemovedEntityInstanceIds)
+			aContext->m_threatEventQueue->AddThreatEvent(threatRemovedInstanceId, aEntityInstanceId, INT32_MIN);
 
 		EntityState::Id returnValue = EntityState::CONTINUE;
 

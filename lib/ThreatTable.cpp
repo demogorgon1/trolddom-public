@@ -19,7 +19,8 @@ namespace tpublic
 
 	void	
 	ThreatTable::Update(
-		uint32_t					aTick)
+		uint32_t					aTick,
+		std::vector<uint32_t>&		aOutRemoved)
 	{
 		Entry* t = m_head;
 		while(t != NULL)
@@ -29,6 +30,8 @@ namespace tpublic
 			uint32_t ticksSinceLastUpdate = aTick - t->m_tick;
 			if(ticksSinceLastUpdate > TIMEOUT_TICKS)
 			{
+				aOutRemoved.push_back(t->m_entityInstanceId);
+
 				m_table.erase(t->m_entityInstanceId);
 				_Remove(t);
 			}
