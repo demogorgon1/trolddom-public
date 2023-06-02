@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../CastInProgress.h"
 #include "../Component.h"
 #include "../Cooldowns.h"
 #include "../EntityState.h"
@@ -232,6 +233,7 @@ namespace tpublic
 			std::vector<ResourceEntry>					m_resources;
 			
 			Cooldowns									m_cooldowns;
+			std::optional<CastInProgress>				m_castInProgress;
 			uint32_t									m_targetEntityInstanceId = 0;
 		};
 	}

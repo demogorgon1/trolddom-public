@@ -29,6 +29,24 @@ ability strike:
 	}
 }
 
+ability firebolt:
+{
+	string: "Firebolt"
+	range: 7	
+	cast_time: 20
+	flags: [ target_other can_miss ]
+	icon: icon_firebolt
+	speed: 5
+	projectile: firebolt
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		base: [ 10 20 ]
+	}
+}
+
 ability gaze_of_death:
 {
 	string: "Gaze of Death"

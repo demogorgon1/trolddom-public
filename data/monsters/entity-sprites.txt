@@ -8,4 +8,5 @@ sprites:
 
 	sprite goblin: { }
 	sprite goblin_boss: { }
+	sprite goblin_shaman: { }
 }

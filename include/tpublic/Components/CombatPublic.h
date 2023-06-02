@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../CastInProgress.h"
 #include "../ComponentBase.h"
 
 namespace tpublic
@@ -151,6 +152,7 @@ namespace tpublic
 				aStream->WriteUInt(m_level);
 				aStream->WriteUInt(m_factionId);
 				aStream->WriteObjects(m_resources);
+				aStream->WriteOptionalObject(m_castInProgress);
 			}
 			
 			bool	
@@ -165,15 +167,18 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadObjects(m_resources))
 					return false;
+				if(!aStream->ReadOptionalObject(m_castInProgress))
+					return false;
 				return true;
 			}
 
 			// Public data
-			uint32_t				m_targetEntityInstanceId = 0;
+			uint32_t						m_targetEntityInstanceId = 0;
 
-			uint32_t				m_level = 1;
-			uint32_t				m_factionId = 0;
-			std::vector<Resource>	m_resources;
+			uint32_t						m_level = 1;
+			uint32_t						m_factionId = 0;
+			std::vector<Resource>			m_resources;
+			std::optional<CastInProgress>	m_castInProgress;
 		};
 
 	}

@@ -85,7 +85,10 @@ namespace tpublic::Systems
 		}			
 
 		if (aEntityState != EntityState::ID_DEAD && combat->GetResource(Resource::ID_HEALTH) == 0)
+		{
+			npc->m_castInProgress.reset();
 			return EntityState::ID_DEAD;
+		}
 
 		if(aEntityState == EntityState::ID_DEAD && !threat->m_table.IsEmpty())
 			aContext->m_threatEventQueue->AddThreatClearEvent(aEntityInstanceId);
@@ -97,12 +100,21 @@ namespace tpublic::Systems
 
 		if(aEntityState != EntityState::ID_DEAD)
 		{
+			if(npc->m_castInProgress && aContext->m_tick >= npc->m_castInProgress->m_end)
+			{				
+				aContext->m_abilityQueue->AddAbility(
+					aEntityInstanceId, 
+					npc->m_castInProgress->m_targetEntityInstanceId, 
+					GetManifest()->m_abilities.GetById(npc->m_castInProgress->m_abilityId));
+				npc->m_castInProgress.reset();
+			}
+
 			if(aContext->m_tick - threat->m_lastPingTick >= Components::ThreatTarget::PING_INTERVAL_TICKS)
 			{
 				aContext->m_worldView->QueryAllEntityInstances([&](
 					const EntityInstance* aEntity)
 				{
-					if (aEntity->IsPlayer())
+					if (aEntity->IsPlayer() && aEntity->GetState() != EntityState::ID_DEAD)
 					{
 						if (Helpers::IsWithinDistance(aEntity->GetComponent<Components::Position>(), position, 3))
 							aContext->m_threatEventQueue->AddThreatEvent(aEntity->GetEntityInstanceId(), aEntityInstanceId, 0);
@@ -133,18 +145,22 @@ namespace tpublic::Systems
 
 					returnValue = EntityState::ID_DEFAULT;
 				}
-				else if(!auras->HasEffect(AuraEffect::ID_STUN))
+				else if(auras->HasEffect(AuraEffect::ID_STUN))
+				{
+					npc->m_castInProgress.reset();
+				}
+				else
 				{
 					npc->m_targetEntityInstanceId = threat->m_table.GetTop()->m_entityInstanceId;
 
 					const EntityInstance* target = aContext->m_worldView->QuerySingleEntityInstance(npc->m_targetEntityInstanceId);
-					if (target == NULL)
+					if (target == NULL || target->GetState() == EntityState::ID_DEAD)
 					{
+						threat->m_table.Remove(npc->m_targetEntityInstanceId);
+						npc->m_castInProgress.reset();
 						npc->m_targetEntityInstanceId = 0;
-
-						returnValue = EntityState::ID_DEFAULT;
 					}
-					else if (state != NULL)
+					else if (state != NULL && !npc->m_castInProgress)						
 					{
 						const Components::Position* targetPosition = target->GetComponent<Components::Position>();
 
@@ -169,7 +185,19 @@ namespace tpublic::Systems
 						{
 							npc->m_cooldowns.Add(useAbility, aContext->m_tick);
 
-							aContext->m_abilityQueue->AddAbility(aEntityInstanceId, target->GetEntityInstanceId(), useAbility);
+							if(useAbility->m_castTime > 0)
+							{
+								CastInProgress cast;
+								cast.m_abilityId = useAbility->m_id;
+								cast.m_targetEntityInstanceId = target->GetEntityInstanceId();
+								cast.m_start = aContext->m_tick;
+								cast.m_end = cast.m_start + useAbility->m_castTime;
+								npc->m_castInProgress = cast;
+							}
+							else
+							{
+								aContext->m_abilityQueue->AddAbility(aEntityInstanceId, target->GetEntityInstanceId(), useAbility);
+							}
 						}
 						else 
 						{

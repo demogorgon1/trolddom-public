@@ -32,7 +32,7 @@ ability throw_rock:
 	icon: icon_throw_rock
 	speed: 6
 	projectile: throw_rock
-	cast_time: 2
+	cast_time: 20
 	
 	direct_effect damage:
 	{

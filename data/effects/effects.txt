@@ -7,6 +7,7 @@ sprites:
 	size: { width: 4 height: 4 }
 
 	sprite effect_rock: { flags: [ centered doubled ] }
+	sprite effect_firebolt: { flags: [ centered doubled ] }
 }
 
 particle_system throw_rock:
@@ -14,6 +15,16 @@ particle_system throw_rock:
 	particle:
 	{
 		sprites: [ effect_rock ]
+		flags: [ attached no_rotation ]
+		count: 1		
+	}
+}
+
+particle_system firebolt:
+{
+	particle:
+	{
+		sprites: [ effect_firebolt ]
 		flags: [ attached no_rotation ]
 		count: 1		
 	}
