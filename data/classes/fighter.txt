@@ -12,7 +12,7 @@ ability knock:
 	string: "Knock"
 	range: 1
 	cooldown: 100
-	flags: [ target_other can_be_dodged can_be_parried can_miss ]
+	flags: [ target_other target_hostile can_be_dodged can_be_parried can_miss ]
 	icon: icon_knock
 	delay: 3
 
@@ -28,7 +28,7 @@ ability throw_rock:
 	string: "Throw Rock"
 	range: 6
 	cooldown: 60
-	flags: [ target_other can_be_dodged can_miss ]
+	flags: [ target_other target_hostile can_be_dodged can_miss ]
 	icon: icon_throw_rock
 	speed: 6
 	projectile: throw_rock
@@ -45,7 +45,7 @@ ability throw_rock:
 ability fighter_attack:
 {
 	string: "Attack"
-	flags: [ attack target_other can_be_dodged can_be_parried can_miss use_weapon_icon ]	
+	flags: [ attack target_other target_hostile can_be_dodged can_be_parried can_miss use_weapon_icon ]	
 	delay: 3
 	
 	direct_effect damage:

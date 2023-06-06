@@ -1,7 +1,7 @@
 ability attack:
 {
 	string: "Attack"	
-	flags: [ attack target_other can_be_dodged can_be_parried can_miss use_weapon_icon ]	
+	flags: [ attack target_other target_hostile can_be_dodged can_be_parried can_miss use_weapon_icon ]	
 	delay: 3
 	
 	direct_effect damage:
@@ -17,7 +17,7 @@ ability strike:
 	string: "Strike"
 	range: 1	
 	cooldown: 30
-	flags: [ target_other can_be_dodged can_be_parried can_miss ]
+	flags: [ target_other target_hostile can_be_dodged can_be_parried can_miss ]
 	icon: icon_strike
 	delay: 3
 	
@@ -34,10 +34,11 @@ ability firebolt:
 	string: "Firebolt"
 	range: 7	
 	cast_time: 25
-	flags: [ target_other can_miss ]
+	flags: [ target_other target_hostile can_miss ]
 	icon: icon_firebolt
 	speed: 5
 	projectile: firebolt
+	cooldown: 0
 	
 	direct_effect damage:
 	{
@@ -47,12 +48,30 @@ ability firebolt:
 	}
 }
 
+ability lake_of_fire:
+{
+	string: "Lake of Fire"
+	range: 7
+	cast_time: 25
+	flags: [ target_aoe target_hostile ]
+	icon: icon_lake_of_fire
+	cooldown: 100	
+	aoe_radius: 2
+	aoe_cap: 6
+	
+	direct_effect damage:
+	{
+		damage_type: physical
+		base: [ 8 15 ]
+	}
+}
+
 ability gaze_of_death:
 {
 	string: "Gaze of Death"
 	range: 100
 	cooldown: 100
-	flags: [ target_other ]
+	flags: [ target_other target_hostile target_friendly ]
 	icon: icon_green_sphere
 	
 	direct_effect kill:

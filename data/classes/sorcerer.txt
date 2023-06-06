@@ -1,0 +1,41 @@
+class sorcerer:
+{
+	string: "Sorcerer"	
+	description: "Master the elemental magic and destroy your enemies with fire, ice, and lightning."
+	
+	sprite: sorcerer
+	color_1: [ 0 59 210 ] 
+	color_2: [ 0 10 64 ]
+	default_attack: attack
+	default_action_bar: [ attack firebolt lake_of_fire gaze_of_death ]
+	
+	start_map test_world: [ test_world_player_spawn ]
+	
+	start_equipment main_hand: weapon_gnarly_staff
+
+	level_progression:
+	[
+		{
+			level: 1
+			
+			unlock_abilities:
+			[
+				attack
+				firebolt
+				lake_of_fire
+				gaze_of_death
+			]
+						
+			stats:
+			{
+				dexterity: 2
+				strength: 2
+				wisdom: 6
+				constitution: 4
+			}
+			
+			resource health: { add_max: 60 }
+			resource mana: { add_max: 60 }
+		}
+	]
+}

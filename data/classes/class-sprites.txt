@@ -8,4 +8,5 @@ sprites:
 
 	sprite fighter: { }
 	sprite priest: { }
+	sprite sorcerer: { }
 }

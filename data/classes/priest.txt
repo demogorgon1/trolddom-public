@@ -3,7 +3,7 @@ ability minor_heal:
 	string: "Minor Heal"
 	range: 6
 	cooldown: 20
-	flags: [ target_other target_self ]
+	flags: [ target_other target_self target_friendly ]
 	icon: icon_heal
 
 	direct_effect heal:

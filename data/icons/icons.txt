@@ -25,4 +25,6 @@ sprites:
 	cursor: { position: [ 0 16 ] }
 
 	sprite icon_impact_1 : { }
+	sprite icon_lake_of_fire : { }
 }
+

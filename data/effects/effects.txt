@@ -3,11 +3,22 @@ sprites:
 	source: "effects.png"
 
 	cursor: { position: [ 0 0 ] }
-
 	size: { width: 4 height: 4 }
 
 	sprite effect_rock: { flags: [ centered doubled ] }
 	sprite effect_firebolt: { flags: [ centered doubled ] }
+	sprite effect_aoe_nw: { }
+	sprite effect_aoe_ne: { }
+	sprite effect_aoe_se: { }
+	sprite effect_aoe_sw: { }
+	
+	cursor: { position: [ 0 4 ] }
+	size: { width: 16 height: 16 }
+	
+	sprite effect_aoe_w: { }
+	sprite effect_aoe_n: { }
+	sprite effect_aoe_e: { }
+	sprite effect_aoe_s: { }	
 }
 
 particle_system throw_rock:
