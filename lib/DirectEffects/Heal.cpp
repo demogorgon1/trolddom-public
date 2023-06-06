@@ -80,7 +80,7 @@ namespace tpublic::DirectEffects
 
 	void
 	Heal::Resolve(
-		uint32_t					/*aTick*/,
+		int32_t						/*aTick*/,
 		std::mt19937&				aRandom,
 		const Manifest*				/*aManifest*/,
 		CombatEvent::Id				aId,
@@ -133,7 +133,7 @@ namespace tpublic::DirectEffects
 				if(result == CombatEvent::ID_CRITICAL)
 					threat = (threat * 3) / 2;
 
-				for(std::unordered_map<uint32_t, uint32_t>::const_iterator i = targetThreatSource->m_targets.cbegin(); i != targetThreatSource->m_targets.cend(); i++)
+				for(std::unordered_map<uint32_t, int32_t>::const_iterator i = targetThreatSource->m_targets.cbegin(); i != targetThreatSource->m_targets.cend(); i++)
 				{
 					aThreatEventQueue->AddThreatEvent(aSource->GetEntityInstanceId(), i->first, threat);
 				}

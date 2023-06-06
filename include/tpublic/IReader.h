@@ -40,6 +40,19 @@ namespace tpublic
 
 		template <typename _T>
 		bool
+		ReadIntDelta(
+			_T										aBase,
+			_T&										aOut)
+		{
+			int32_t delta;
+			if(!ReadInt(delta))
+				return false;
+			aOut = aBase + delta;
+			return true;
+		}
+
+		template <typename _T>
+		bool
 		ReadUIntDelta(
 			_T										aBase,
 			_T&										aOut)
@@ -214,12 +227,12 @@ namespace tpublic
 
 		void
 		SetTick(
-			uint32_t								aTick)
+			int32_t									aTick)
 		{
 			m_tick = aTick;
 		}
 
-		uint32_t
+		int32_t
 		GetTick() const
 		{
 			return m_tick;
@@ -236,7 +249,7 @@ namespace tpublic
 
 	private:
 
-		uint32_t			m_tick = 0;
+		int32_t				m_tick = 0;
 	};
 
 }

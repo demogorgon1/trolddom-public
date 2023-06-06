@@ -23,8 +23,8 @@ namespace tpublic
 				{	
 					aStream->WriteUInt(m_auraId);
 					aStream->WriteUInt(m_entityInstanceId);
-					aStream->WriteUInt(m_start);
-					aStream->WriteUInt(m_end);
+					aStream->WriteInt(m_start);
+					aStream->WriteInt(m_end);
 				}
 
 				bool
@@ -35,9 +35,9 @@ namespace tpublic
 						return false;
 					if (!aStream->ReadUInt(m_entityInstanceId))
 						return false;
-					if (!aStream->ReadUInt(m_start))
+					if (!aStream->ReadInt(m_start))
 						return false;
-					if (!aStream->ReadUInt(m_end))
+					if (!aStream->ReadInt(m_end))
 						return false;
 					return true;
 				}
@@ -45,8 +45,8 @@ namespace tpublic
 				// Public data
 				uint32_t		m_auraId = 0;
 				uint32_t		m_entityInstanceId = 0;
-				uint32_t		m_start = 0;
-				uint32_t		m_end = 0;
+				int32_t			m_start = 0;
+				int32_t			m_end = 0;
 			};
 
 			VisibleAuras()

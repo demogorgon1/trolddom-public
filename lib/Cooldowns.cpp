@@ -22,7 +22,7 @@ namespace tpublic
 
 	bool
 	Cooldowns::Update(
-		uint32_t				aTick)
+		int32_t					aTick)
 	{
 		bool changed = false;
 
@@ -45,9 +45,9 @@ namespace tpublic
 	void			
 	Cooldowns::Add(
 		const Data::Ability*	aAbility,
-		uint32_t				aTick)
+		int32_t					aTick)
 	{
-		uint32_t end = aTick + aAbility->m_cooldown;
+		int32_t end = aTick + aAbility->m_cooldown;
 
 		for (Entry& t : m_entries)
 		{

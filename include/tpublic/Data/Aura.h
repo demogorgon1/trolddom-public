@@ -124,7 +124,7 @@ namespace tpublic
 					if(aChild->m_name == "icon")
 						m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
 					else if (aChild->m_name == "duration")
-						m_duration = aChild->GetUInt32();
+						m_duration = aChild->GetInt32();
 					else if (aChild->m_name == "type")
 						m_type = SourceToType(aChild);
 					else if (aChild->m_name == "flags")
@@ -144,7 +144,7 @@ namespace tpublic
 			{
 				ToStreamBase(aStream);
 				aStream->WriteUInt(m_iconSpriteId);
-				aStream->WriteUInt(m_duration);
+				aStream->WriteInt(m_duration);
 				aStream->WritePOD(m_type);
 				aStream->WritePOD(m_flags);
 				aStream->WriteObjectPointers(m_auraEffects);
@@ -159,7 +159,7 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInt(m_iconSpriteId))
 					return false;
-				if (!aStream->ReadUInt(m_duration))
+				if (!aStream->ReadInt(m_duration))
 					return false;
 				if(!aStream->ReadPOD(m_type))
 					return false;
@@ -175,7 +175,7 @@ namespace tpublic
 			// Public data
 			std::string										m_string;
 			uint32_t										m_iconSpriteId = 0;
-			uint32_t										m_duration = 0;
+			int32_t											m_duration = 0;
 			Type											m_type = TYPE_HIDDEN;
 			uint8_t											m_flags = 0;
 			std::vector<std::unique_ptr<AuraEffectEntry>>	m_auraEffects;

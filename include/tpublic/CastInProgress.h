@@ -15,8 +15,8 @@ namespace tpublic
 		{
 			aWriter->WriteUInt(m_abilityId);
 			aWriter->WriteUInt(m_targetEntityInstanceId);
-			aWriter->WriteUInt(m_start);
-			aWriter->WriteUInt(m_end);
+			aWriter->WriteInt(m_start);
+			aWriter->WriteInt(m_end);
 		}
 
 		bool
@@ -27,9 +27,9 @@ namespace tpublic
 				return false;
 			if (!aReader->ReadUInt(m_targetEntityInstanceId))
 				return false;
-			if (!aReader->ReadUInt(m_start))
+			if (!aReader->ReadInt(m_start))
 				return false;
-			if (!aReader->ReadUInt(m_end))
+			if (!aReader->ReadInt(m_end))
 				return false;
 			return true;
 		}
@@ -37,8 +37,8 @@ namespace tpublic
 		// Public data
 		uint32_t		m_abilityId = 0;
 		uint32_t		m_targetEntityInstanceId = 0;
-		uint32_t		m_start = 0;
-		uint32_t		m_end = 0;
+		int32_t			m_start = 0;
+		int32_t			m_end = 0;
 	};
 
 }

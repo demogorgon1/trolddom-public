@@ -13,13 +13,13 @@ namespace tpublic
 	class ThreatTable
 	{
 	public:
-		static const uint32_t TIMEOUT_TICKS = 100;
+		static const int32_t TIMEOUT_TICKS = 100;
 
 		struct Entry
 		{
 			uint32_t					m_entityInstanceId = 0;
 			int32_t						m_threat = 0;
-			uint32_t					m_tick = 0;
+			int32_t						m_tick = 0;
 			Entry*						m_next = NULL;
 			Entry*						m_prev = NULL;
 		};

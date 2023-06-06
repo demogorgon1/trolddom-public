@@ -27,7 +27,7 @@ namespace tpublic
 		void
 		SetState(
 			EntityState::Id			aState,
-			uint32_t				aTick)
+			int32_t					aTick)
 		{
 			m_state = aState;
 			m_stateTick = aTick;
@@ -170,7 +170,7 @@ namespace tpublic
 		uint32_t									m_entityId = 0;
 		uint32_t									m_entityInstanceId = 0;
 		EntityState::Id								m_state = EntityState::ID_DEFAULT;
-		uint32_t									m_stateTick = 0;
+		int32_t										m_stateTick = 0;
 		std::vector<std::unique_ptr<ComponentBase>>	m_components;
 	};
 

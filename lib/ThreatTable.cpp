@@ -27,7 +27,7 @@ namespace tpublic
 		{
 			Entry* next = t->m_next;
 
-			uint32_t ticksSinceLastUpdate = aTick - t->m_tick;
+			int32_t ticksSinceLastUpdate = aTick - t->m_tick;
 			if(ticksSinceLastUpdate > TIMEOUT_TICKS)
 			{
 				aOutRemoved.push_back(t->m_entityInstanceId);

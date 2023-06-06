@@ -32,7 +32,7 @@ namespace tpublic::DirectEffects
 
 	void
 	Kill::Resolve(
-		uint32_t					aTick,
+		int32_t						aTick,
 		std::mt19937&				/*aRandom*/,
 		const Manifest*				/*aManifest*/,
 		CombatEvent::Id				/*aId*/,

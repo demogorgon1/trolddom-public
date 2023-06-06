@@ -69,7 +69,7 @@ namespace tpublic
 				std::vector<uint32_t>				m_sprites;
 				uint8_t								m_flags = 0;
 				uint32_t							m_count = 0;
-				uint32_t							m_spriteInterval = 100;
+				uint32_t							m_spriteInterval = 100; // ms
 			};
 
 			void

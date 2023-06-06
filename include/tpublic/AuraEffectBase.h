@@ -31,7 +31,7 @@ namespace tpublic
 		{
 			if(aSource->m_name == "update_interval")
 			{
-				m_updateInterval = aSource->GetUInt32();
+				m_updateInterval = aSource->GetInt32();
 				return true;
 			}
 			else if (aSource->m_name == "update_count")
@@ -46,7 +46,7 @@ namespace tpublic
 		ToStreamBase(
 			IWriter*									aStream) const 
 		{
-			aStream->WriteUInt(m_updateInterval);
+			aStream->WriteInt(m_updateInterval);
 			aStream->WriteUInt(m_updateCount);
 		}
 		
@@ -54,7 +54,7 @@ namespace tpublic
 		FromStreamBase(
 			IReader*									aStream) 
 		{
-			if (!aStream->ReadUInt(m_updateInterval))
+			if (!aStream->ReadInt(m_updateInterval))
 				return false;
 			if (!aStream->ReadUInt(m_updateCount))
 				return false;
@@ -71,12 +71,12 @@ namespace tpublic
 
 		bool
 		Update(
-			uint32_t									aTick)
+			int32_t										aTick)
 		{
 			if(m_updateCount == 0)
 				return true; // Effects that don't require updates will have this initialized to zero
 
-			uint32_t ticksSinceLastUpdate = aTick - m_lastUpdate;
+			int32_t ticksSinceLastUpdate = aTick - m_lastUpdate;
 			if(ticksSinceLastUpdate >= m_updateInterval)
 			{
 				if(!OnUpdate())
@@ -106,10 +106,10 @@ namespace tpublic
 									int32_t						aDamage) const { return aDamage; }
 
 		// Public data
-		uint32_t		m_updateInterval = 0;
+		int32_t			m_updateInterval = 0;
 		uint32_t		m_updateCount = 0;
 
-		uint32_t		m_lastUpdate = 0;
+		int32_t			m_lastUpdate = 0;
 		AuraEffect::Id	m_id = AuraEffect::INVALID_ID;
 	};
 

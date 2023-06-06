@@ -30,7 +30,7 @@ namespace tpublic
 			void
 			AddTarget(
 				uint32_t			aEntityInstanceId,
-				uint32_t			aTick)
+				int32_t				aTick)
 			{
 				m_targets[aEntityInstanceId] = aTick;
 			}
@@ -57,7 +57,7 @@ namespace tpublic
 			}
 
 			// Public data
-			std::unordered_map<uint32_t, uint32_t>			m_targets;
+			std::unordered_map<uint32_t, int32_t>			m_targets;
 		};
 	}
 

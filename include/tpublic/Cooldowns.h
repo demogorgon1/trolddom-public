@@ -21,8 +21,8 @@ namespace tpublic
 				IWriter*							aStream) const
 			{
 				aStream->WriteUInt(m_abilityId);
-				aStream->WriteUIntDelta(aStream->GetTick(), m_start);
-				aStream->WriteUIntDelta(aStream->GetTick(), m_end);
+				aStream->WriteIntDelta(aStream->GetTick(), m_start);
+				aStream->WriteIntDelta(aStream->GetTick(), m_end);
 			}
 			
 			bool			
@@ -31,27 +31,27 @@ namespace tpublic
 			{
 				if (!aStream->ReadUInt(m_abilityId))
 					return false;
-				if (!aStream->ReadUIntDelta(aStream->GetTick(), m_start))
+				if (!aStream->ReadIntDelta(aStream->GetTick(), m_start))
 					return false;
-				if (!aStream->ReadUIntDelta(aStream->GetTick(), m_end))
+				if (!aStream->ReadIntDelta(aStream->GetTick(), m_end))
 					return false;
 				return true;
 			}
 
 			// Public data
 			uint32_t			m_abilityId = 0;
-			uint32_t			m_start = 0;
-			uint32_t			m_end = 0;
+			int32_t				m_start = 0;
+			int32_t				m_end = 0;
 		};
 
 						Cooldowns();
 						~Cooldowns();		
 
 		bool			Update(
-							uint32_t				aTick);
+							int32_t					aTick);
 		void			Add(
 							const Data::Ability*	aAbility,
-							uint32_t				aTick);
+							int32_t					aTick);
 		const Entry*	Get(
 							uint32_t				aAbilityId) const;
 		void			ToStream(

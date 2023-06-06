@@ -26,8 +26,8 @@ namespace tpublic
 					IWriter*					aWriter) const
 				{
 					aWriter->WriteUInt(m_auraId);
-					aWriter->WriteUIntDelta(aWriter->GetTick(), m_start);
-					aWriter->WriteUIntDelta(aWriter->GetTick(), m_end);
+					aWriter->WriteIntDelta(aWriter->GetTick(), m_start);
+					aWriter->WriteIntDelta(aWriter->GetTick(), m_end);
 				}
 
 				bool
@@ -36,17 +36,17 @@ namespace tpublic
 				{
 					if(!aReader->ReadUInt(m_auraId))
 						return false;
-					if (!aReader->ReadUIntDelta(aReader->GetTick(), m_start))
+					if (!aReader->ReadIntDelta(aReader->GetTick(), m_start))
 						return false;
-					if (!aReader->ReadUIntDelta(aReader->GetTick(), m_end))
+					if (!aReader->ReadIntDelta(aReader->GetTick(), m_end))
 						return false;
 					return true;
 				}
 
 				// Public data
 				uint32_t										m_auraId = 0;
-				uint32_t										m_start = 0;
-				uint32_t										m_end = 0;
+				int32_t											m_start = 0;
+				int32_t											m_end = 0;
 
 				// Not serialized
 				uint32_t										m_entityInstanceId = 0; 

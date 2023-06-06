@@ -138,13 +138,13 @@ namespace tpublic
 					else if (aMember->m_name == "range")
 						m_range = aMember->GetUInt32();
 					else if (aMember->m_name == "speed")
-						m_speed = aMember->GetUInt32();
+						m_speed = aMember->GetInt32();
 					else if (aMember->m_name == "delay")
-						m_delay = aMember->GetUInt32();
+						m_delay = aMember->GetInt32();
 					else if (aMember->m_name == "cooldown")
-						m_cooldown = aMember->GetUInt32();
+						m_cooldown = aMember->GetInt32();
 					else if (aMember->m_name == "cast_time")
-						m_castTime = aMember->GetUInt32();
+						m_castTime = aMember->GetInt32();
 					else if (aMember->m_name == "icon")
 						m_iconSpriteId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aMember->GetIdentifier());
 					else if (aMember->m_name == "projectile")
@@ -165,14 +165,14 @@ namespace tpublic
 				ToStreamBase(aStream);
 				aStream->WriteString(m_displayName);
 				aStream->WriteUInt(m_range);
-				aStream->WriteUInt(m_speed);
-				aStream->WriteUInt(m_delay);
-				aStream->WriteUInt(m_cooldown);
+				aStream->WriteInt(m_speed);
+				aStream->WriteInt(m_delay);
+				aStream->WriteInt(m_cooldown);
 				aStream->WriteUInt(m_iconSpriteId);
 				aStream->WriteObjectPointers(m_directEffects);
 				aStream->WritePOD(m_flags);
 				aStream->WriteUInt(m_projectileParticleSystemId);
-				aStream->WriteUInt(m_castTime);
+				aStream->WriteInt(m_castTime);
 			}
 			
 			bool	
@@ -185,11 +185,11 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInt(m_range))
 					return false;
-				if (!aStream->ReadUInt(m_speed))
+				if (!aStream->ReadInt(m_speed))
 					return false;
-				if (!aStream->ReadUInt(m_delay))
+				if (!aStream->ReadInt(m_delay))
 					return false;
-				if (!aStream->ReadUInt(m_cooldown))
+				if (!aStream->ReadInt(m_cooldown))
 					return false;
 				if (!aStream->ReadUInt(m_iconSpriteId))
 					return false;
@@ -199,7 +199,7 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInt(m_projectileParticleSystemId))
 					return false;
-				if (!aStream->ReadUInt(m_castTime))
+				if (!aStream->ReadInt(m_castTime))
 					return false;
 				return true;
 			}
@@ -207,10 +207,10 @@ namespace tpublic
 			// Public data
 			std::string										m_displayName;
 			uint32_t										m_range = 1;
-			uint32_t										m_speed = 0;
-			uint32_t										m_delay = 0;
-			uint32_t										m_cooldown = 10;
-			uint32_t										m_castTime = 0;
+			int32_t											m_speed = 0;
+			int32_t											m_delay = 0;
+			int32_t											m_cooldown = 10;
+			int32_t											m_castTime = 0;
 			uint8_t											m_flags = 0;
 			uint32_t										m_iconSpriteId = 0;
 			uint32_t										m_projectileParticleSystemId = 0;
