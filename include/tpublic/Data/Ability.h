@@ -133,6 +133,9 @@ namespace tpublic
 			// Helpers
 			bool TargetSelf() const { return m_flags & FLAG_TARGET_SELF; }
 			bool TargetOther() const { return m_flags & FLAG_TARGET_OTHER; }
+			bool TargetAOE() const { return m_flags & FLAG_TARGET_AOE; }
+			bool TargetFriendly() const { return m_flags & FLAG_TARGET_FRIENDLY; }
+			bool TargetHostile() const { return m_flags & FLAG_TARGET_HOSTILE; }
 			bool CanMiss() const { return m_flags & FLAG_CAN_MISS; }
 			bool CanBeDodged() const { return m_flags & FLAG_CAN_BE_DODGED; }
 			bool CanBeParried() const { return m_flags & FLAG_CAN_BE_PARRIED; }
