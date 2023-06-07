@@ -12,6 +12,7 @@ namespace tpublic
 		virtual void		AddAbility(
 								uint32_t				aSourceEntityInstanceId,
 								uint32_t				aTargetEntityInstanceId,
+								const tpublic::Vec2&	aAOETarget,
 								const Data::Ability*	aAbility) = 0;
 	};
 

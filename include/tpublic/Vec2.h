@@ -12,17 +12,17 @@ namespace tpublic
 		ToStream(
 			IWriter*				aStream) const 
 		{
-			aStream->WriteUInt(m_x);
-			aStream->WriteUInt(m_y);
+			aStream->WriteInt(m_x);
+			aStream->WriteInt(m_y);
 		}
 
 		bool
 		FromStream(
 			IReader*				aStream) 
 		{
-			if (!aStream->ReadUInt(m_x))
+			if (!aStream->ReadInt(m_x))
 				return false;
-			if (!aStream->ReadUInt(m_y))
+			if (!aStream->ReadInt(m_y))
 				return false;
 			return true;
 		}

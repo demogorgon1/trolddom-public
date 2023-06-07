@@ -7,10 +7,6 @@ sprites:
 
 	sprite effect_rock: { flags: [ centered doubled ] }
 	sprite effect_firebolt: { flags: [ centered doubled ] }
-	sprite effect_aoe_nw: { }
-	sprite effect_aoe_ne: { }
-	sprite effect_aoe_se: { }
-	sprite effect_aoe_sw: { }
 	
 	cursor: { position: [ 0 4 ] }
 	size: { width: 16 height: 16 }
@@ -19,6 +15,10 @@ sprites:
 	sprite effect_aoe_n: { }
 	sprite effect_aoe_e: { }
 	sprite effect_aoe_s: { }	
+	sprite effect_aoe_nw: { }
+	sprite effect_aoe_ne: { }
+	sprite effect_aoe_se: { }
+	sprite effect_aoe_sw: { }
 }
 
 particle_system throw_rock:

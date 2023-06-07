@@ -110,7 +110,8 @@ namespace tpublic::Systems
 			{				
 				aContext->m_abilityQueue->AddAbility(
 					aEntityInstanceId, 
-					npc->m_castInProgress->m_targetEntityInstanceId, 
+					npc->m_castInProgress->m_targetEntityInstanceId,
+					npc->m_castInProgress->m_aoeTarget,
 					GetManifest()->m_abilities.GetById(npc->m_castInProgress->m_abilityId));
 				npc->m_castInProgress.reset();
 			}
@@ -203,7 +204,7 @@ namespace tpublic::Systems
 							}
 							else
 							{
-								aContext->m_abilityQueue->AddAbility(aEntityInstanceId, target->GetEntityInstanceId(), useAbility);
+								aContext->m_abilityQueue->AddAbility(aEntityInstanceId, target->GetEntityInstanceId(), Vec2(), useAbility);
 							}
 						}
 						else 
