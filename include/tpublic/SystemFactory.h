@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Systems/Combat.h"
+#include "Systems/Environment.h"
 #include "Systems/NPC.h"
 
 #include "System.h"
@@ -18,6 +19,7 @@ namespace tpublic
 			: m_manifest(aManifest)
 		{
 			_Register<Systems::Combat>();
+			_Register<Systems::Environment>();
 			_Register<Systems::NPC>();
 		}
 

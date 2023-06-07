@@ -152,14 +152,6 @@ namespace tpublic
 					{
 						aSpriteComponent->GetIdArray(DataType::ID_SPRITE, sprite->m_info.m_borders);
 					}
-					else if (aSpriteComponent->m_name == "animation_next_frame")
-					{
-						sprite->m_info.m_animationNextFrame = aSpriteComponent->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aSpriteComponent->GetIdentifier());
-					}
-					else if (aSpriteComponent->m_name == "animation_delay")
-					{
-						sprite->m_info.m_animationDelay = aSpriteComponent->GetUInt32();
-					}
 					else
 					{
 						TP_VERIFY(false, aNode->m_debugInfo, "Invalid item in 'sprite'.");

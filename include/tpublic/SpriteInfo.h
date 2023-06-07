@@ -39,8 +39,6 @@ namespace tpublic
 			aStream->WritePOD(m_flags);
 			aStream->WriteUInt(m_tileLayer);
 			aStream->WriteUInts(m_borders);
-			aStream->WriteUInt(m_animationNextFrame);
-			aStream->WriteUInt(m_animationDelay);
 		}
 
 		bool
@@ -53,10 +51,6 @@ namespace tpublic
 				return false;
 			if (!aStream->ReadUInts(m_borders))
 				return false;
-			if (!aStream->ReadUInt(m_animationNextFrame))
-				return false;
-			if (!aStream->ReadUInt(m_animationDelay))
-				return false;
 			return true;
 		}
 
@@ -64,8 +58,6 @@ namespace tpublic
 		uint8_t					m_flags = 0;
 		uint32_t				m_tileLayer = 0;
 		std::vector<uint32_t>	m_borders;
-		uint32_t				m_animationNextFrame = 0;
-		uint32_t				m_animationDelay = 0;
 	};
 
 }

@@ -118,8 +118,60 @@ namespace tpublic
 				}
 
 				// Public data
-				uint32_t							m_directEffectId;
+				uint32_t							m_directEffectId = 0;
 				std::unique_ptr<DirectEffectBase>	m_directEffectBase;
+			};
+
+			struct AOEEntitySpawnEntry
+			{
+				AOEEntitySpawnEntry()
+				{
+
+				}
+
+				AOEEntitySpawnEntry(
+					const Parser::Node*		aSource)
+				{
+					m_entityId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENTITY, aSource->m_name.c_str());
+					
+					aSource->ForEachChild([&](
+						const Parser::Node* aChild)
+					{
+						if(aChild->m_name == "probability")
+						{
+							m_probability = aChild->GetProbability();
+							if(m_probability == UINT32_MAX)
+								m_probability = 0; // 0 means always
+						}
+						else
+						{
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+						}
+					});
+				}
+
+				void	
+				ToStream(
+					IWriter*				aStream) const 
+				{
+					aStream->WriteUInt(m_entityId);
+					aStream->WriteUInt(m_probability);
+				}
+			
+				bool	
+				FromStream(
+					IReader*				aStream) 
+				{
+					if(!aStream->ReadUInt(m_entityId))
+						return false;
+					if(!aStream->ReadUInt(m_probability))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t							m_entityId = 0;
+				uint32_t							m_probability = 0;
 			};
 
 			void
@@ -175,6 +227,8 @@ namespace tpublic
 						m_flags = GetFlags(aMember);
 					else if(aMember->m_tag == "direct_effect")
 						m_directEffects.push_back(std::make_unique<DirectEffectEntry>(aMember->GetObject()));
+					else if (aMember->m_tag == "aoe_entity_spawn")
+						m_aoeEntitySpawns.push_back(std::make_unique<AOEEntitySpawnEntry>(aMember->GetObject()));
 					else
 						TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
 				});
@@ -197,6 +251,7 @@ namespace tpublic
 				aStream->WriteInt(m_castTime);
 				aStream->WriteUInt(m_aoeRadius);
 				aStream->WriteUInt(m_aoeCap);
+				aStream->WriteObjectPointers(m_aoeEntitySpawns);
 			}
 			
 			bool	
@@ -229,22 +284,25 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInt(m_aoeCap))
 					return false;
+				if (!aStream->ReadObjectPointers(m_aoeEntitySpawns))
+					return false;
 				return true;
 			}
 
 			// Public data
-			std::string										m_displayName;
-			uint32_t										m_range = 1;
-			int32_t											m_speed = 0;
-			int32_t											m_delay = 0;
-			int32_t											m_cooldown = 10;
-			int32_t											m_castTime = 0;
-			uint16_t										m_flags = 0;
-			uint32_t										m_iconSpriteId = 0;
-			uint32_t										m_projectileParticleSystemId = 0;
-			uint32_t										m_aoeRadius = 0;
-			uint32_t										m_aoeCap = 0;
-			std::vector<std::unique_ptr<DirectEffectEntry>>	m_directEffects;
+			std::string											m_displayName;
+			uint32_t											m_range = 1;
+			int32_t												m_speed = 0;
+			int32_t												m_delay = 0;
+			int32_t												m_cooldown = 10;
+			int32_t												m_castTime = 0;
+			uint16_t											m_flags = 0;
+			uint32_t											m_iconSpriteId = 0;
+			uint32_t											m_projectileParticleSystemId = 0;
+			uint32_t											m_aoeRadius = 0;
+			uint32_t											m_aoeCap = 0;
+			std::vector<std::unique_ptr<DirectEffectEntry>>		m_directEffects;
+			std::vector<std::unique_ptr<AOEEntitySpawnEntry>>	m_aoeEntitySpawns;
 		};
 
 

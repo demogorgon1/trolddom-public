@@ -43,7 +43,8 @@ namespace tpublic::Systems
 	NPC::Init(
 		uint32_t				/*aEntityInstanceId*/,
 		EntityState::Id			aEntityState,
-		ComponentBase**			aComponents) 
+		ComponentBase**			aComponents,
+		int32_t					/*aTick*/)
 	{
 		Components::CombatPublic* combat = GetComponent<Components::CombatPublic>(aComponents);
 		Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
@@ -52,7 +53,7 @@ namespace tpublic::Systems
 		const Components::NPC::StateEntry* state = npc->GetState(aEntityState);
 		if(state != NULL)
 		{
-			sprite->m_spriteId = state->m_spriteId;
+			sprite->m_frames = { state->m_spriteId };
 		}
 
 		for(const Components::NPC::ResourceEntry& resource : npc->m_resources)
@@ -82,7 +83,7 @@ namespace tpublic::Systems
 		const Components::NPC::StateEntry* state = npc->GetState(aEntityState);
 		if (state != NULL)
 		{
-			sprite->m_spriteId = state->m_spriteId;
+			sprite->m_frames = { state->m_spriteId };
 		}			
 
 		if (aEntityState != EntityState::ID_DEAD && combat->GetResource(Resource::ID_HEALTH) == 0)

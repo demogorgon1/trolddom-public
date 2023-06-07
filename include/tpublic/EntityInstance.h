@@ -164,6 +164,7 @@ namespace tpublic
 		EntityState::Id									GetState() const { return m_state; }
 		bool											IsPlayer() const { return m_entityId == 0; }
 		std::vector<std::unique_ptr<ComponentBase>>&	GetComponents() { return m_components; }
+		int32_t											GetStateTick() const { return m_stateTick; }
 		
 	private:
 		

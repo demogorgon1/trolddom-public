@@ -63,7 +63,8 @@ namespace tpublic
 		virtual void					Init(
 											uint32_t			/*aEntityInstanceId*/,
 											EntityState::Id		/*aEntityState*/,
-											ComponentBase**		/*aComponents*/) { }
+											ComponentBase**		/*aComponents*/,
+											int32_t				/*aTick*/) { }
 		virtual EntityState::Id			UpdatePrivate(
 											uint32_t			/*aEntityInstanceId*/,
 											EntityState::Id		/*aEntityState*/,

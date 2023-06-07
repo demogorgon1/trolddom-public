@@ -53,11 +53,15 @@ ability lake_of_fire:
 	string: "Lake of Fire"
 	range: 7
 	cast_time: 25
-	flags: [ target_aoe target_hostile ]
+	flags: [ target_aoe ]
 	icon: icon_lake_of_fire
 	cooldown: 100	
 	aoe_radius: 2
-	aoe_cap: 6
+	
+	aoe_entity_spawn fire:
+	{
+		probability: 100
+	}
 	
 	direct_effect damage:
 	{

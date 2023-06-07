@@ -19,6 +19,10 @@ sprites:
 	sprite effect_aoe_ne: { }
 	sprite effect_aoe_se: { }
 	sprite effect_aoe_sw: { }
+	
+	sprite effect_fire_0: { }
+	sprite effect_fire_1: { }
+	sprite effect_fire_2: { }
 }
 
 particle_system throw_rock:
@@ -38,5 +42,19 @@ particle_system firebolt:
 		sprites: [ effect_firebolt ]
 		flags: [ attached no_rotation ]
 		count: 1		
+	}
+}
+
+entity fire:
+{
+	string: "Fire"
+	
+	systems: [ environment ]
+	
+	components:
+	{
+		position: { }		
+		sprite: { frames: [ effect_fire_0 effect_fire_1 effect_fire_2 ] frame_delay: 120 random_start_frame: true }
+		environment: { tick_interval: 5 duration: 60 }
 	}
 }

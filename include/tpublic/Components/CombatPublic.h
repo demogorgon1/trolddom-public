@@ -151,6 +151,7 @@ namespace tpublic
 				aStream->WriteUInt(m_targetEntityInstanceId);
 				aStream->WriteUInt(m_level);
 				aStream->WriteUInt(m_factionId);
+				aStream->WriteUInt(m_combatGroupId);
 				aStream->WriteObjects(m_resources);
 				aStream->WriteOptionalObject(m_castInProgress);
 			}
@@ -165,10 +166,12 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInt(m_factionId))
 					return false;
+				if (!aStream->ReadUInt(m_combatGroupId))
+					return false;
 				if(!aStream->ReadObjects(m_resources))
 					return false;
 				if(!aStream->ReadOptionalObject(m_castInProgress))
-					return false;
+					return false;			
 				return true;
 			}
 
@@ -177,6 +180,7 @@ namespace tpublic
 
 			uint32_t						m_level = 1;
 			uint32_t						m_factionId = 0;
+			uint64_t						m_combatGroupId = 0;
 			std::vector<Resource>			m_resources;
 			std::optional<CastInProgress>	m_castInProgress;
 		};

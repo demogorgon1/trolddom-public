@@ -16,7 +16,7 @@ namespace tpublic
 			static const uint8_t FLAGS = 0;
 			static const Persistence::Id PERSISTENCE = Persistence::ID_NONE;
 
-			static const uint32_t PING_INTERVAL_TICKS = 10;
+			static const int32_t PING_INTERVAL_TICKS = 10;
 
 			ThreatTarget()
 				: ComponentBase(ID, FLAGS, PERSISTENCE)
@@ -46,7 +46,7 @@ namespace tpublic
 
 			// Public data
 			ThreatTable		m_table;
-			uint32_t		m_lastPingTick = 0;
+			int32_t		m_lastPingTick = 0;
 		};
 	}
 

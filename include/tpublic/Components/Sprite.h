@@ -35,8 +35,12 @@ namespace tpublic
 				aSource->ForEachChild([&](
 					const Parser::Node*	aChild)
 				{
-					if (aChild->m_name == "id")
-						m_spriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
+					if (aChild->m_name == "frames")
+						aChild->GetIdArray(DataType::ID_SPRITE, m_frames);
+					else if(aChild->m_name == "frame_delay")
+						m_frameDelay = aChild->GetUInt32();
+					else if (aChild->m_name == "random_start_frame")
+						m_randomStartFrame = aChild->GetBool();
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 				});
@@ -46,20 +50,28 @@ namespace tpublic
 			ToStream(
 				IWriter* aStream) const override
 			{
-				aStream->WriteUInt(m_spriteId);
+				aStream->WriteUInts(m_frames);
+				aStream->WriteUInt(m_frameDelay);
+				aStream->WritePOD(m_randomStartFrame);
 			}
 
 			bool
 			FromStream(
 				IReader* aStream) override
 			{
-				if(!aStream->ReadUInt(m_spriteId))
+				if(!aStream->ReadUInts(m_frames))
+					return false;
+				if(!aStream->ReadUInt(m_frameDelay))
+					return false;
+				if (!aStream->ReadUInt(m_randomStartFrame))
 					return false;
 				return true;
 			}
 
 			// Public data
-			uint32_t		m_spriteId = 0;
+			std::vector<uint32_t>		m_frames;
+			uint32_t					m_frameDelay = 0;
+			bool						m_randomStartFrame = false;
 		};
 	}
 

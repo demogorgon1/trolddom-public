@@ -6,6 +6,7 @@
 #include <tpublic/Components/CombatPrivate.h>
 #include <tpublic/Components/CombatPublic.h>
 #include <tpublic/Components/DisplayName.h>
+#include <tpublic/Components/Environment.h>
 #include <tpublic/Components/EquippedItems.h>
 #include <tpublic/Components/Inventory.h>
 #include <tpublic/Components/Lootable.h>
@@ -34,6 +35,7 @@ namespace tpublic
 		_Register<Components::CombatPrivate>();
 		_Register<Components::CombatPublic>();
 		_Register<Components::DisplayName>();
+		_Register<Components::Environment>();
 		_Register<Components::EquippedItems>();
 		_Register<Components::Inventory>();
 		_Register<Components::Lootable>();

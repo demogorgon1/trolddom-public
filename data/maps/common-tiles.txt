@@ -16,9 +16,9 @@ sprites:
 		[ dirt_border_1 dirt_border_2 dirt_border_3 dirt_border_4 dirt_border_5 dirt_border_6 dirt_border_7
 		  dirt_border_8 dirt_border_9 dirt_border_10 dirt_border_11 dirt_border_12 dirt_border_13 dirt_border_14
 		  dirt_border_15 dirt_border_16 dirt_border_17 ] }	
-	sprite water_1: { animation_next_frame: water_2 animation_delay: 400 }
-	sprite water_2: { animation_next_frame: water_3 animation_delay: 400 }
-	sprite water_3: { animation_next_frame: water_1 animation_delay: 400 }
+	sprite water_1: { }
+	sprite water_2: { }
+	sprite water_3: { }
 	sprite forest: { flags: [ tile_block_line_of_sight ] tile_layer: 4 borders:
 		[ forest_border_1 forest_border_2 forest_border_3 forest_border_4 forest_border_5 forest_border_6 forest_border_7
 		  forest_border_8 forest_border_9 forest_border_10 forest_border_11 forest_border_12 forest_border_13 forest_border_14
