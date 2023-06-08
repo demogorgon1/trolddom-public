@@ -28,7 +28,6 @@ namespace tpublic::Systems
 		RequireComponent<Components::CombatPublic>();
 		RequireComponent<Components::NPC>();
 		RequireComponent<Components::Position>();
-		RequireComponent<Components::Sprite>();
 		RequireComponent<Components::ThreatTarget>();
 	}
 	
@@ -42,19 +41,12 @@ namespace tpublic::Systems
 	void		
 	NPC::Init(
 		uint32_t				/*aEntityInstanceId*/,
-		EntityState::Id			aEntityState,
+		EntityState::Id			/*aEntityState*/,
 		ComponentBase**			aComponents,
 		int32_t					/*aTick*/)
 	{
 		Components::CombatPublic* combat = GetComponent<Components::CombatPublic>(aComponents);
 		Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
-		Components::Sprite* sprite = GetComponent<Components::Sprite>(aComponents);
-
-		const Components::NPC::StateEntry* state = npc->GetState(aEntityState);
-		if(state != NULL)
-		{
-			sprite->m_frames = { state->m_spriteId };
-		}
 
 		for(const Components::NPC::ResourceEntry& resource : npc->m_resources)
 		{
@@ -76,15 +68,10 @@ namespace tpublic::Systems
 		const Components::CombatPublic* combat = GetComponent<Components::CombatPublic>(aComponents);
 		Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
 		const Components::Position* position = GetComponent<Components::Position>(aComponents);
-		Components::Sprite* sprite = GetComponent<Components::Sprite>(aComponents);
 		Components::ThreatTarget* threat = GetComponent<Components::ThreatTarget>(aComponents);
 		const Components::Auras* auras = GetComponent<Components::Auras>(aComponents);
 
 		const Components::NPC::StateEntry* state = npc->GetState(aEntityState);
-		if (state != NULL)
-		{
-			sprite->m_frames = { state->m_spriteId };
-		}			
 
 		if (aEntityState != EntityState::ID_DEAD && combat->GetResource(Resource::ID_HEALTH) == 0)
 		{

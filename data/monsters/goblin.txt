@@ -20,7 +20,6 @@ entity goblin:
 	components:
 	{
 		position: { }		
-		sprite: { }
 		threat_target: { }
 		visible_auras: { }
 		auras: { }
@@ -46,12 +45,10 @@ entity goblin:
 		{ 			
 			state default:
 			{
-				sprite: goblin			
 			}
 			
 			state in_combat:
 			{
-				sprite: goblin			
 				abilities:
 				[					
 					{ id: strike }
@@ -63,6 +60,13 @@ entity goblin:
 				health: 50
 			}			
 		}
+		sprite: 
+		{ 
+			animations:
+			[
+				{ states: [ default in_combat ] frames: [ goblin ] }			
+			]		
+		}		
 	}
 }
 
@@ -74,8 +78,7 @@ entity goblin_shaman:
 	
 	components:
 	{
-		position: { }		
-		sprite: { }
+		position: { }				
 		threat_target: { }
 		visible_auras: { }
 		auras: { }
@@ -101,12 +104,10 @@ entity goblin_shaman:
 		{ 			
 			state default:
 			{
-				sprite: goblin_shaman	
 			}
 			
 			state in_combat:
 			{
-				sprite: goblin_shaman			
 				abilities:
 				[					
 					{ id: firebolt }
@@ -117,6 +118,13 @@ entity goblin_shaman:
 			{
 				health: 40
 			}			
+		}
+		sprite: 
+		{ 
+			animations:
+			[
+				{ states: [ default in_combat ] frames: [ goblin_shaman ] }			
+			]		
 		}
 	}
 }

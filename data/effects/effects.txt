@@ -47,14 +47,25 @@ particle_system firebolt:
 
 entity fire:
 {
-	string: "Fire"
-	
 	systems: [ environment ]
 	
 	components:
 	{
 		position: { }		
-		sprite: { frames: [ effect_fire_0 effect_fire_1 effect_fire_2 ] frame_delay: 120 random_start_frame: true }
 		environment: { tick_interval: 5 duration: 60 }
+		
+		sprite: 
+		{ 
+			animations: 
+			[
+				{ 
+					states: [ default ] 
+					frames: [ effect_fire_0 effect_fire_1 effect_fire_2 ] 
+					frame_delay: 120 
+					random_start_frame: true 
+				}
+			]			
+		}
+		
 	}
 }

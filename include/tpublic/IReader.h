@@ -93,6 +93,29 @@ namespace tpublic
 
 		template <typename _T>
 		bool
+		ReadPODs(
+			std::vector<_T>&						aOut,
+			size_t									aMaxCount = 1024)
+		{
+			size_t count;
+			if(!ReadUInt(count))
+				return false;
+
+			if(count > aMaxCount)
+				return false;
+
+			aOut.resize(count);
+			for(_T& value : aOut)
+			{
+				if(!ReadPOD(value))
+					return false;
+			}
+
+			return true;
+		}
+
+		template <typename _T>
+		bool
 		ReadObjects(
 			std::vector<_T>&						aOut,
 			size_t									aMaxCount = 1024)

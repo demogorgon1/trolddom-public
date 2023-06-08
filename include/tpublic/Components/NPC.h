@@ -81,11 +81,7 @@ namespace tpublic
 					aSource->GetObject()->ForEachChild([&](
 						const Parser::Node* aChild)
 					{
-						if(aChild->m_name == "sprite")
-						{
-							m_spriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
-						}
-						else if(aChild->m_name == "abilities")
+						if(aChild->m_name == "abilities")
 						{
 							aChild->GetArray()->ForEachChild([&](
 								const Parser::Node* aAbility)
@@ -105,7 +101,6 @@ namespace tpublic
 					IWriter*				aStream) const
 				{
 					aStream->WritePOD(m_entityState);
-					aStream->WriteUInt(m_spriteId);
 					aStream->WriteObjects(m_abilities);
 				}
 
@@ -115,8 +110,6 @@ namespace tpublic
 				{
 					if(!aStream->ReadPOD(m_entityState))
 						return false;
-					if(!aStream->ReadUInt(m_spriteId))
-						return false;
 					if(!aStream->ReadObjects(m_abilities))
 						return false;
 					return true;
@@ -124,7 +117,6 @@ namespace tpublic
 
 				// Public data
 				EntityState::Id						m_entityState = EntityState::ID_DEFAULT;
-				uint32_t							m_spriteId = 0;
 				std::vector<AbilityEntry>			m_abilities;
 			};
 

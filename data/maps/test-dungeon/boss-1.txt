@@ -20,7 +20,6 @@ entity test_dungeon_boss_1:
 	components:
 	{
 		position: { }		
-		sprite: { }
 		threat_target: { }
 		visible_auras: { }
 		auras: { }
@@ -46,12 +45,10 @@ entity test_dungeon_boss_1:
 		{ 			
 			state default:
 			{
-				sprite: goblin_boss			
 			}
 			
 			state in_combat:
 			{
-				sprite: goblin_boss
 				abilities:
 				[					
 					{ id: strike }
@@ -63,5 +60,12 @@ entity test_dungeon_boss_1:
 				health: 200
 			}			
 		}
+		sprite: 
+		{ 
+			animations:
+			[
+				{ states: [ default in_combat ] frames: [ goblin_boss ] }			
+			]		
+		}		
 	}
 }
