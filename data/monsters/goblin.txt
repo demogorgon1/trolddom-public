@@ -64,7 +64,7 @@ entity goblin:
 		{ 
 			animations:
 			[
-				{ states: [ default in_combat ] frames: [ goblin ] }			
+				{ states: [ default in_combat spawning despawning_default despawning_dead ] frames: [ goblin ] }			
 			]		
 		}		
 	}
@@ -123,7 +123,7 @@ entity goblin_shaman:
 		{ 
 			animations:
 			[
-				{ states: [ default in_combat ] frames: [ goblin_shaman ] }			
+				{ states: [ default in_combat spawning despawning_default despawning_dead ] frames: [ goblin_shaman ] }			
 			]		
 		}
 	}

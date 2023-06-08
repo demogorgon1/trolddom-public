@@ -61,6 +61,7 @@ ability lake_of_fire:
 	aoe_entity_spawn fire:
 	{
 		probability: 100
+		init_state: spawning
 	}
 	
 	direct_effect damage:

@@ -68,11 +68,13 @@ namespace tpublic
 		virtual EntityState::Id			UpdatePrivate(
 											uint32_t			/*aEntityInstanceId*/,
 											EntityState::Id		/*aEntityState*/,
+											int32_t				/*aTicksInState*/,
 											ComponentBase**		/*aComponents*/,
 											Context*			/*aContext*/) { return EntityState::CONTINUE; }
 		virtual void					UpdatePublic(
 											uint32_t			/*aEntityInstanceId*/,
 											EntityState::Id		/*aEntityState*/,
+											int32_t				/*aTicksInState*/,
 											ComponentBase**		/*aComponents*/,
 											Context*			/*aContext*/) { }
 

@@ -64,7 +64,7 @@ entity test_dungeon_boss_1:
 		{ 
 			animations:
 			[
-				{ states: [ default in_combat ] frames: [ goblin_boss ] }			
+				{ states: [ default in_combat spawning despawning_default despawning_dead ] frames: [ goblin_boss ] }			
 			]		
 		}		
 	}

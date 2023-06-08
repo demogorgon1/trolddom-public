@@ -161,7 +161,7 @@ namespace tpublic
 				// Public data
 				uint32_t										m_entityId = 0;
 				uint32_t										m_weight = 1;
-				EntityState::Id									m_initState = EntityState::ID_DEFAULT;
+				EntityState::Id									m_initState = EntityState::ID_SPAWNING;
 				std::vector<std::unique_ptr<SpawnCondition>>	m_spawnConditions;
 			};
 

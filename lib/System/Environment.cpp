@@ -42,15 +42,22 @@ namespace tpublic::Systems
 	EntityState::Id
 	Environment::UpdatePrivate(
 		uint32_t			aEntityInstanceId,
-		EntityState::Id		/*aEntityState*/,
+		EntityState::Id		aEntityState,
+		int32_t				aTicksInState,
 		ComponentBase**		aComponents,
 		Context*			aContext) 
 	{
 		Components::Environment* environment = GetComponent<Components::Environment>(aComponents);
 		assert(environment != NULL);
 
+		if (aEntityState == EntityState::ID_SPAWNING)
+			return aTicksInState < SPAWN_TICKS ? EntityState::CONTINUE : EntityState::ID_DEFAULT;
+
+		if (aEntityState == EntityState::ID_DESPAWNING_DEFAULT)
+			return aTicksInState < DESPAWN_TICKS ? EntityState::CONTINUE : EntityState::DESTROY;
+
 		if(aContext->m_tick > environment->m_destroyTick)
-			return EntityState::DESTROY;
+			return EntityState::ID_DESPAWNING_DEFAULT;
 
 		const Components::Position* position = GetComponent<Components::Position>(aComponents);
 		assert(position != NULL);
@@ -73,8 +80,7 @@ namespace tpublic::Systems
 			environment->m_lastUpdateTick = aContext->m_tick;
 		}
 
-		//return EntityState::CONTINUE;
-		return EntityState::ID_DEAD;
+		return EntityState::CONTINUE;
 	}
 
 }

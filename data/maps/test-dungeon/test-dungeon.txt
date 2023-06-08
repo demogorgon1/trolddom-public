@@ -6,14 +6,13 @@ map_trigger test_dungeon_boss_1_killed:
 
 map_entity_spawn test_dungeon_monster:
 {	
-	entity goblin_shaman: { weight: 1 init_state: default } 
+	entity goblin_shaman: { weight: 1 } 
 }
 
 map_entity_spawn test_dungeon_boss_1:
 {
 	entity test_dungeon_boss_1: 
 	{ 
-		init_state: default 
 		spawn_condition:
 		{	
 			if_not: test_dungeon_boss_1_killed

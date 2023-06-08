@@ -11,6 +11,9 @@ namespace tpublic::Systems
 	public:
 		static const System::Id ID = System::ID_NPC;
 
+		static const int32_t SPAWN_TICKS = 4;
+		static const int32_t DESPAWN_TICKS = 4;
+
 						NPC(
 							const Manifest*		aManifest);
 		virtual			~NPC();
@@ -24,11 +27,13 @@ namespace tpublic::Systems
 		EntityState::Id	UpdatePrivate(
 							uint32_t			aEntityInstanceId,
 							EntityState::Id		aEntityState,
+							int32_t				aTicksInState,
 							ComponentBase**		aComponents,
 							Context*			aContext) override;
 		void			UpdatePublic(
 							uint32_t			aEntityInstanceId,
 							EntityState::Id		aEntityState,
+							int32_t				aTicksInState,
 							ComponentBase**		aComponents,
 							Context*			aContext) override;
 

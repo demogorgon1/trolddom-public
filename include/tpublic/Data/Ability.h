@@ -3,6 +3,7 @@
 #include "../DataBase.h"
 #include "../DirectEffectFactory.h"
 #include "../DirectEffectBase.h"
+#include "../EntityState.h"
 
 namespace tpublic
 {
@@ -143,6 +144,11 @@ namespace tpublic
 							if(m_probability == UINT32_MAX)
 								m_probability = 0; // 0 means always
 						}
+						else if(aChild->m_name == "init_state")
+						{
+							m_initState = EntityState::StringToId(aChild->GetIdentifier());
+							TP_VERIFY(m_initState != EntityState::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid entity state.", aChild->GetIdentifier());
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -156,6 +162,7 @@ namespace tpublic
 				{
 					aStream->WriteUInt(m_entityId);
 					aStream->WriteUInt(m_probability);
+					aStream->WritePOD(m_initState);
 				}
 			
 				bool	
@@ -166,12 +173,15 @@ namespace tpublic
 						return false;
 					if(!aStream->ReadUInt(m_probability))
 						return false;
+					if(!aStream->ReadPOD(m_initState))
+						return false;
 					return true;
 				}
 
 				// Public data
 				uint32_t							m_entityId = 0;
 				uint32_t							m_probability = 0;
+				EntityState::Id						m_initState = EntityState::ID_DEFAULT;
 			};
 
 			void

@@ -11,6 +11,9 @@ namespace tpublic::Systems
 	public:
 		static const System::Id ID = System::ID_ENVIRONMENT;
 
+		static const int32_t SPAWN_TICKS = 3;
+		static const int32_t DESPAWN_TICKS = 3;
+
 						Environment(
 							const Manifest*		aManifest);
 		virtual			~Environment();
@@ -24,6 +27,7 @@ namespace tpublic::Systems
 		EntityState::Id	UpdatePrivate(
 							uint32_t			aEntityInstanceId,
 							EntityState::Id		aEntityState,
+							int32_t				aTicksInState,
 							ComponentBase**		aComponents,
 							Context*			aContext) override;
 

@@ -13,8 +13,11 @@ namespace tpublic
 			DESTROY,
 
 			ID_DEFAULT,
+			ID_SPAWNING,
 			ID_IN_COMBAT,
 			ID_DEAD,
+			ID_DESPAWNING_DEFAULT,
+			ID_DESPAWNING_DEAD,
 
 			NUM_IDS
 		};
@@ -27,8 +30,11 @@ namespace tpublic
 			NULL,
 
 			"default",
+			"spawning",
 			"in_combat",
-			"dead"
+			"dead",
+			"despawning_default",
+			"despawning_dead"
 		};
 
 		static_assert(sizeof(ENTITY_STATE_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

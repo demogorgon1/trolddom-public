@@ -33,6 +33,7 @@ namespace tpublic::Systems
 	Combat::UpdatePrivate(
 		uint32_t			/*aEntityInstanceId*/,
 		EntityState::Id		/*aEntityState*/,
+		int32_t				/*aTicksInState*/,
 		ComponentBase**		aComponents,
 		Context*			aContext) 
 	{
@@ -74,6 +75,7 @@ namespace tpublic::Systems
 	Combat::UpdatePublic(
 		uint32_t			/*aEntityInstanceId*/,
 		EntityState::Id		aEntityState,
+		int32_t				/*aTicksInState*/,
 		ComponentBase**		aComponents,
 		Context*			/*aContext*/) 
 	{

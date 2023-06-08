@@ -62,15 +62,21 @@ namespace tpublic::Systems
 	NPC::UpdatePrivate(
 		uint32_t				aEntityInstanceId,
 		EntityState::Id			aEntityState,
+		int32_t					aTicksInState,
 		ComponentBase**			aComponents,
 		Context*				aContext) 
-	{
+	{		
+		if(aEntityState == EntityState::ID_SPAWNING)
+			return aTicksInState < SPAWN_TICKS ? EntityState::CONTINUE : EntityState::ID_DEFAULT;
+
+		if (aEntityState == EntityState::ID_DESPAWNING_DEFAULT || aEntityState == EntityState::ID_DESPAWNING_DEAD)
+			return aTicksInState < DESPAWN_TICKS ? EntityState::CONTINUE : EntityState::DESTROY;
+
 		const Components::CombatPublic* combat = GetComponent<Components::CombatPublic>(aComponents);
 		Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
 		const Components::Position* position = GetComponent<Components::Position>(aComponents);
 		Components::ThreatTarget* threat = GetComponent<Components::ThreatTarget>(aComponents);
 		const Components::Auras* auras = GetComponent<Components::Auras>(aComponents);
-
 		const Components::NPC::StateEntry* state = npc->GetState(aEntityState);
 
 		if (aEntityState != EntityState::ID_DEAD && combat->GetResource(Resource::ID_HEALTH) == 0)
@@ -215,6 +221,7 @@ namespace tpublic::Systems
 	NPC::UpdatePublic(
 		uint32_t			/*aEntityInstanceId*/,
 		EntityState::Id		/*aEntityState*/,
+		int32_t				/*aTicksInState*/,
 		ComponentBase**		aComponents,
 		Context*			/*aContext*/) 
 	{

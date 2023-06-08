@@ -23,6 +23,9 @@ sprites:
 	sprite effect_fire_0: { }
 	sprite effect_fire_1: { }
 	sprite effect_fire_2: { }
+	sprite effect_fire_fade_0: { }
+	sprite effect_fire_fade_1: { }
+	sprite effect_fire_fade_2: { }
 }
 
 particle_system throw_rock:
@@ -64,6 +67,13 @@ entity fire:
 					frame_delay: 120 
 					random_start_frame: true 
 				}
+				
+				{ 
+					states: [ spawning despawning_default ] 
+					frames: [ effect_fire_fade_0 effect_fire_fade_1 effect_fire_fade_2 ] 
+					frame_delay: 120 
+					random_start_frame: true 
+				}				
 			]			
 		}
 		

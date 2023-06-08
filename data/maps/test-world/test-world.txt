@@ -1,6 +1,6 @@
 map_entity_spawn test_world_monster:
 {	
-	entity goblin: { weight: 1 init_state: default } 
+	entity goblin: { weight: 1 } 
 }
 
 map_player_spawn test_world_player_spawn:
