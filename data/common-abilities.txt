@@ -105,3 +105,27 @@ ability dont_touch_me_bro:
 		aura: dont_touch_me_bro
 	}
 }
+
+aura immortality:
+{
+	string: "Immortality"
+	icon: icon_skull_1	
+	type: buff
+	duration: 300
+	aura_effect immortality: { }
+}
+
+ability immortality:
+{
+	string: "Immortality"
+	cooldown: 100
+	flags: [ target_self ]
+	states: [ default in_combat ]	
+	icon: icon_skull_1
+	
+	direct_effect apply_aura:
+	{	
+		aura: immortality
+	}
+}
+

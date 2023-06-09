@@ -11,6 +11,7 @@ namespace tpublic
 			INVALID_ID,
 
 			ID_STUN,
+			ID_IMMORTALITY,
 			ID_DAMAGE_INPUT_MODIFIER,
 
 			NUM_IDS
@@ -21,6 +22,7 @@ namespace tpublic
 		{
 			NULL,
 			"stun",
+			"immortality",
 			"damage_input_modifier"
 		};
 

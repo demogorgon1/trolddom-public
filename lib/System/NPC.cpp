@@ -79,7 +79,7 @@ namespace tpublic::Systems
 		const Components::Auras* auras = GetComponent<Components::Auras>(aComponents);
 		const Components::NPC::StateEntry* state = npc->GetState(aEntityState);
 
-		if (aEntityState != EntityState::ID_DEAD && combat->GetResource(Resource::ID_HEALTH) == 0)
+		if (aEntityState != EntityState::ID_DEAD && combat->GetResource(Resource::ID_HEALTH) == 0 && !auras->HasEffect(AuraEffect::ID_IMMORTALITY))
 		{
 			npc->m_castInProgress.reset();
 			return EntityState::ID_DEAD;
@@ -110,6 +110,14 @@ namespace tpublic::Systems
 				npc->m_castInProgress.reset();
 			}
 
+			const EntityInstance* topThreatEntity = NULL;
+			if(!threat->m_table.IsEmpty())
+			{
+				topThreatEntity = aContext->m_worldView->QuerySingleEntityInstance(threat->m_table.GetTop()->m_entityInstanceId);
+				if(topThreatEntity->GetState() == EntityState::ID_DEAD)
+					topThreatEntity = NULL;
+			}
+
 			if(aContext->m_tick - threat->m_lastPingTick >= Components::ThreatTarget::PING_INTERVAL_TICKS)
 			{
 				aContext->m_worldView->QueryAllEntityInstances([&](
@@ -122,10 +130,10 @@ namespace tpublic::Systems
 							if (Helpers::IsWithinDistance(aEntity->GetComponent<Components::Position>(), position, 3))
 								aContext->m_threatEventQueue->AddThreatEvent(aEntity->GetEntityInstanceId(), aEntityInstanceId, 0);
 						}
-						else if(!threat->m_table.IsEmpty() && aEntity->GetState() != EntityState::ID_IN_COMBAT)
+						else if(topThreatEntity != NULL && aEntity->GetState() != EntityState::ID_IN_COMBAT)
 						{
 							if (Helpers::IsWithinDistance(aEntity->GetComponent<Components::Position>(), position, 3))
-								aContext->m_threatEventQueue->AddThreatEvent(threat->m_table.GetTop()->m_entityInstanceId, aEntity->GetEntityInstanceId(), 0);
+								aContext->m_threatEventQueue->AddThreatEvent(topThreatEntity->GetEntityInstanceId(), aEntity->GetEntityInstanceId(), 0);
 						}
 					}
 

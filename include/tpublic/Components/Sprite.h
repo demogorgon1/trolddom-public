@@ -52,6 +52,10 @@ namespace tpublic
 						{
 							m_randomStartFrame = aChild->GetBool();
 						}
+						else if (aChild->m_name == "z_offset")
+						{
+							m_zOffset = aChild->GetInt32();
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
@@ -67,6 +71,7 @@ namespace tpublic
 					aWriter->WriteUInts(m_frameSpriteIds);
 					aWriter->WriteUInt(m_frameDelay);
 					aWriter->WritePOD(m_randomStartFrame);
+					aWriter->WriteInt(m_zOffset);
 				}
 
 				bool
@@ -81,6 +86,8 @@ namespace tpublic
 						return false;
 					if(!aReader->ReadPOD(m_randomStartFrame))
 						return false;
+					if (!aReader->ReadInt(m_zOffset))
+						return false;
 					return true;
 				}
 
@@ -89,6 +96,7 @@ namespace tpublic
 				std::vector<uint32_t>			m_frameSpriteIds;
 				uint32_t						m_frameDelay = 0;
 				bool							m_randomStartFrame = false;
+				int32_t							m_zOffset = 0;
 			};
 
 			Sprite()
@@ -162,12 +170,14 @@ namespace tpublic
 			AddAnimation(
 				const std::vector<EntityState::Id>&	aStates,
 				const std::vector<uint32_t>&		aFrames,
-				uint32_t							aFrameDelay)
+				uint32_t							aFrameDelay,
+				int32_t								aZOffset)
 			{
 				std::unique_ptr<Animation> t = std::make_unique<Animation>();
 				t->m_entityStates = aStates;
 				t->m_frameSpriteIds = aFrames;
 				t->m_frameDelay = aFrameDelay;
+				t->m_zOffset = aZOffset;
 				m_animations.push_back(std::move(t));
 			}
 

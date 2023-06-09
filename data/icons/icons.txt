@@ -27,5 +27,6 @@ sprites:
 	sprite icon_impact_1 : { }
 	sprite icon_lake_of_fire : { }
 	sprite icon_fire : { }
+	sprite icon_skull_1 : { }
 }
 
