@@ -1,12 +1,15 @@
 #include "../Pcheader.h"
 
 #include <tpublic/Components/Environment.h>
+#include <tpublic/Components/Owner.h>
 #include <tpublic/Components/Position.h>
 
 #include <tpublic/Systems/Environment.h>
 
 #include <tpublic/EntityInstance.h>
+#include <tpublic/IAbilityQueue.h>
 #include <tpublic/IWorldView.h>
+#include <tpublic/Manifest.h>
 
 namespace tpublic::Systems
 {
@@ -17,6 +20,7 @@ namespace tpublic::Systems
 	{
 		RequireComponent<Components::Environment>();
 		RequireComponent<Components::Position>();
+		RequireComponent<Components::Owner>();
 	}
 	
 	Environment::~Environment()
@@ -36,7 +40,7 @@ namespace tpublic::Systems
 		Components::Environment* environment = GetComponent<Components::Environment>(aComponents);
 		assert(environment != NULL);
 
-		environment->m_destroyTick = aTick + environment->m_duration;
+		environment->m_despawnTick = aTick + environment->m_duration;
 	}
 
 	EntityState::Id
@@ -56,23 +60,26 @@ namespace tpublic::Systems
 		if (aEntityState == EntityState::ID_DESPAWNING_DEFAULT)
 			return aTicksInState < DESPAWN_TICKS ? EntityState::CONTINUE : EntityState::DESTROY;
 
-		if(aContext->m_tick > environment->m_destroyTick)
+		if(aContext->m_tick > environment->m_despawnTick)
 			return EntityState::ID_DESPAWNING_DEFAULT;
 
 		const Components::Position* position = GetComponent<Components::Position>(aComponents);
 		assert(position != NULL);
 
+		const Components::Owner* owner = GetComponent<Components::Owner>(aComponents);		
+		assert(owner != NULL);
+
 		int32_t ticksSinceLastUpdate = aContext->m_tick - environment->m_lastUpdateTick;
 
-		if (ticksSinceLastUpdate >= environment->m_tickInterval)
+		if (ticksSinceLastUpdate >= environment->m_tickInterval && environment->m_abilityId != 0)
 		{
+			const Data::Ability* ability = GetManifest()->m_abilities.GetById(environment->m_abilityId);
+
 			aContext->m_worldView->QueryEntityInstancesAtPosition(position->m_position, [&](
 				const EntityInstance* aEntityInstance)
 			{
-				if(aEntityInstance->GetEntityInstanceId() != aEntityInstanceId)
-				{
-					printf("tick: %u\n", aEntityInstance->GetEntityInstanceId());
-				}
+				if(aEntityInstance->GetEntityInstanceId() != aEntityInstanceId && aEntityInstance->GetEntityInstanceId() != owner->m_ownerEntityInstanceId)
+					aContext->m_abilityQueue->AddAbility(aEntityInstanceId, aEntityInstance->GetEntityInstanceId(), tpublic::Vec2(), ability);
 
 				return false; // Don't stop
 			});

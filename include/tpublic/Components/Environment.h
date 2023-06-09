@@ -40,6 +40,8 @@ namespace tpublic
 						m_tickInterval = aChild->GetInt32();
 					else if (aChild->m_name == "duration")
 						m_duration = aChild->GetInt32();
+					else if (aChild->m_name == "ability")
+						m_abilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 				});
@@ -51,6 +53,7 @@ namespace tpublic
 			{
 				aStream->WriteInt(m_tickInterval);
 				aStream->WriteInt(m_duration);
+				aStream->WriteUInt(m_abilityId);
 			}
 
 			bool
@@ -61,6 +64,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadInt(m_duration))
 					return false;
+				if (!aStream->ReadUInt(m_abilityId))
+					return false;
 				return true;
 			}
 
@@ -68,7 +73,8 @@ namespace tpublic
 			int32_t			m_tickInterval = 5;
 			int32_t			m_duration = 10;
 			int32_t			m_lastUpdateTick = 0;
-			int32_t			m_destroyTick = 0;
+			int32_t			m_despawnTick = 0;
+			uint32_t		m_abilityId = 0;
 		};
 	}
 

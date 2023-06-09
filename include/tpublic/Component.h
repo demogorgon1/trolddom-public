@@ -31,6 +31,7 @@ namespace tpublic
 			ID_VISIBLE_AURAS,
 			ID_LOOTABLE,
 			ID_ENVIRONMENT,
+			ID_OWNER,
 
 			NUM_IDS
 		};
@@ -59,7 +60,8 @@ namespace tpublic
 			"auras",
 			"visible_auras",
 			"lootable",
-			"environment"
+			"environment",
+			"owner"
 		};		
 
 		static_assert(sizeof(COMPONENT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

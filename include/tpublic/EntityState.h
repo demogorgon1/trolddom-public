@@ -55,6 +55,22 @@ namespace tpublic
 			return INVALID_ID;
 		}
 
+		inline constexpr bool
+		IsInteractable(
+			Id			aId)
+		{
+			switch(aId)
+			{
+			case ID_DEFAULT:	
+			case ID_IN_COMBAT:
+				return true;
+
+			default:
+				break;
+			}
+			return false;
+		}
+
 	}
 
 }

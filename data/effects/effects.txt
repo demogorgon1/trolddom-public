@@ -48,6 +48,19 @@ particle_system firebolt:
 	}
 }
 
+ability fire_damage:
+{
+	string: "Fire"
+	flags: [ ]
+	icon: icon_fire
+	direct_effect damage:
+	{
+		flags: [ ]
+		damage_type: fire
+		base: [ 2 4 ]
+	}
+}
+
 entity fire:
 {
 	systems: [ environment ]
@@ -55,8 +68,13 @@ entity fire:
 	components:
 	{
 		position: { }		
-		environment: { tick_interval: 5 duration: 60 }
-		
+		owner: { }
+		environment: 
+		{
+			tick_interval: 5 
+			duration: 60 
+			ability: fire_damage
+		}		
 		sprite: 
 		{ 
 			animations: 

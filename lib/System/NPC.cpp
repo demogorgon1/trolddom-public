@@ -220,13 +220,14 @@ namespace tpublic::Systems
 	void			
 	NPC::UpdatePublic(
 		uint32_t			/*aEntityInstanceId*/,
-		EntityState::Id		/*aEntityState*/,
+		EntityState::Id		aEntityState,
 		int32_t				/*aTicksInState*/,
 		ComponentBase**		aComponents,
 		Context*			/*aContext*/) 
 	{
 		Components::CombatPublic* combat = GetComponent<Components::CombatPublic>(aComponents);
 		const Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
+		Components::Position* position = GetComponent<Components::Position>(aComponents);
 
 		combat->m_targetEntityInstanceId = npc->m_targetEntityInstanceId;
 
@@ -234,6 +235,11 @@ namespace tpublic::Systems
 			combat->m_castInProgress = npc->m_castInProgress.value();
 		else
 			combat->m_castInProgress.reset();
+
+		if (aEntityState == EntityState::ID_DEAD || aEntityState == EntityState::ID_DESPAWNING_DEAD)
+			position->m_block = false;
+		else
+			position->m_block = true;
 	}
 
 }

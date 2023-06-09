@@ -63,12 +63,6 @@ ability lake_of_fire:
 		probability: 100
 		init_state: spawning
 	}
-	
-	direct_effect damage:
-	{
-		damage_type: physical
-		base: [ 8 15 ]
-	}
 }
 
 ability gaze_of_death:

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <tpublic/Data/Ability.h>
+
 namespace tpublic
 {
 

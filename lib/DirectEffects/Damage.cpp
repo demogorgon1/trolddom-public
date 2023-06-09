@@ -119,7 +119,7 @@ namespace tpublic::DirectEffects
 		Components::CombatPublic* targetCombatPublic = aTarget->GetComponent<Components::CombatPublic>();
 		const Components::Auras* targetAuras = aTarget->GetComponent<Components::Auras>();
 
-		if(sourceCombatPrivate == NULL || targetCombatPublic == NULL)
+		if(targetCombatPublic == NULL)
 			return;
 
 		uint32_t damage = 0;
@@ -131,6 +131,7 @@ namespace tpublic::DirectEffects
 			break;
 
 		case DirectEffect::DAMAGE_BASE_WEAPON:
+			TP_CHECK(sourceCombatPrivate != NULL, "No weapon damage available.");
 			damage = Helpers::RandomInRange(aRandom, sourceCombatPrivate->m_weaponDamageRangeMin, sourceCombatPrivate->m_weaponDamageRangeMax);
 			break;
 
@@ -140,7 +141,7 @@ namespace tpublic::DirectEffects
 
 		CombatEvent::Id result = aId;
 
-		if(m_flags & DirectEffect::FLAG_CAN_BE_CRITICAL && aId == CombatEvent::ID_HIT)
+		if(m_flags & DirectEffect::FLAG_CAN_BE_CRITICAL && aId == CombatEvent::ID_HIT && sourceCombatPrivate != NULL)
 		{
 			float chance = 0.0f;
 
