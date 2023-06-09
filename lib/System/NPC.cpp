@@ -115,10 +115,18 @@ namespace tpublic::Systems
 				aContext->m_worldView->QueryAllEntityInstances([&](
 					const EntityInstance* aEntity)
 				{
-					if (aEntity->IsPlayer() && aEntity->GetState() != EntityState::ID_DEAD)
+					if(aEntity->GetState() != EntityState::ID_DEAD)
 					{
-						if (Helpers::IsWithinDistance(aEntity->GetComponent<Components::Position>(), position, 3))
-							aContext->m_threatEventQueue->AddThreatEvent(aEntity->GetEntityInstanceId(), aEntityInstanceId, 0);
+						if (aEntity->IsPlayer())
+						{
+							if (Helpers::IsWithinDistance(aEntity->GetComponent<Components::Position>(), position, 3))
+								aContext->m_threatEventQueue->AddThreatEvent(aEntity->GetEntityInstanceId(), aEntityInstanceId, 0);
+						}
+						else if(!threat->m_table.IsEmpty() && aEntity->GetState() != EntityState::ID_IN_COMBAT)
+						{
+							if (Helpers::IsWithinDistance(aEntity->GetComponent<Components::Position>(), position, 3))
+								aContext->m_threatEventQueue->AddThreatEvent(threat->m_table.GetTop()->m_entityInstanceId, aEntity->GetEntityInstanceId(), 0);
+						}
 					}
 
 					return false;
@@ -133,6 +141,8 @@ namespace tpublic::Systems
 		case EntityState::ID_DEFAULT:
 			if (!threat->m_table.IsEmpty())
 			{
+				threat->m_lastPingTick = 0; // Force a threat ping (will cause nearby allies to join)
+
 				npc->m_targetEntityInstanceId = threat->m_table.GetTop()->m_entityInstanceId;
 				returnValue = EntityState::ID_IN_COMBAT;
 			}

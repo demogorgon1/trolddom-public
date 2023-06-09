@@ -42,6 +42,14 @@ namespace tpublic
 				m_targets.erase(aEntityInstanceId);
 			}
 
+			uint32_t
+			GetFirstTarget() const 
+			{
+				std::unordered_map<uint32_t, int32_t>::const_iterator i = m_targets.cbegin();
+				assert(i != m_targets.cend());
+				return i->first;
+			}
+
 			// ComponentBase implementation
 			void
 			ToStream(
