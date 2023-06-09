@@ -4,6 +4,7 @@ ability minor_heal:
 	range: 6
 	cooldown: 20
 	flags: [ target_other target_self target_friendly ]
+	states: [ default in_combat ]
 	icon: icon_heal
 
 	direct_effect heal:
@@ -18,6 +19,8 @@ class priest:
 	description: "Channel the holy powers to heal and support your friends or smite your enemies with divine punishment."
 	
 	sprite: priest
+	sprite_dead: priest_dead
+	
 	color_1: [ 210 210 210 ] 
 	color_2: [ 100 100 64 ]
 	default_attack: attack

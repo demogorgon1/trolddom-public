@@ -151,6 +151,21 @@ namespace tpublic
 				return flags;
 			}
 
+			template <typename _T, _T _Invalid>
+			void
+			GetIdArrayWithLookup(
+				std::vector<_T>&				aOut,
+				std::function<_T(const char*)>	aLookup) const
+			{
+				TP_VERIFY(m_type == TYPE_ARRAY, m_debugInfo, "Not an array.");
+				for (const std::unique_ptr<Node>& child : m_children)
+				{
+					_T id = aLookup(child->GetIdentifier());
+					TP_VERIFY(id != _Invalid, m_debugInfo, "'%s' is not a valid identifier.", child->GetIdentifier());
+					aOut.push_back(id);
+				}
+			}
+
 			bool
 			IsIdentifier(
 				const char*					aString) const

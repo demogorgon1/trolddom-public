@@ -204,6 +204,18 @@ namespace tpublic
 			bool CanBeBlocked() const { return m_flags & FLAG_CAN_BE_BLOCKED; }
 			bool IsAttack() const { return m_flags & FLAG_ATTACK; }
 			bool IsInstantMelee() const { return m_range == 1 && m_castTime == 0; }
+			
+			bool 
+			IsUsableInState(
+				EntityState::Id			aEntityState) const
+			{
+				for(EntityState::Id entityState : m_entityStates)
+				{
+					if(aEntityState == entityState)
+						return true;
+				}
+				return false;
+			}
 
 			// Base implementation
 			void
@@ -239,6 +251,8 @@ namespace tpublic
 						m_directEffects.push_back(std::make_unique<DirectEffectEntry>(aMember->GetObject()));
 					else if (aMember->m_tag == "aoe_entity_spawn")
 						m_aoeEntitySpawns.push_back(std::make_unique<AOEEntitySpawnEntry>(aMember->GetObject()));
+					else if (aMember->m_name == "states")
+						aMember->GetIdArrayWithLookup<EntityState::Id, EntityState::INVALID_ID>(m_entityStates, [&](const char* aIdentifier) { return EntityState::StringToId(aIdentifier); });
 					else
 						TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
 				});
@@ -246,55 +260,58 @@ namespace tpublic
 
 			void	
 			ToStream(
-				IWriter*				aStream) const override
+				IWriter*				aWriter) const override
 			{
-				ToStreamBase(aStream);
-				aStream->WriteString(m_displayName);
-				aStream->WriteUInt(m_range);
-				aStream->WriteInt(m_speed);
-				aStream->WriteInt(m_delay);
-				aStream->WriteInt(m_cooldown);
-				aStream->WriteUInt(m_iconSpriteId);
-				aStream->WriteObjectPointers(m_directEffects);
-				aStream->WritePOD(m_flags);
-				aStream->WriteUInt(m_projectileParticleSystemId);
-				aStream->WriteInt(m_castTime);
-				aStream->WriteUInt(m_aoeRadius);
-				aStream->WriteUInt(m_aoeCap);
-				aStream->WriteObjectPointers(m_aoeEntitySpawns);
+				ToStreamBase(aWriter);
+				aWriter->WriteString(m_displayName);
+				aWriter->WriteUInt(m_range);
+				aWriter->WriteInt(m_speed);
+				aWriter->WriteInt(m_delay);
+				aWriter->WriteInt(m_cooldown);
+				aWriter->WriteUInt(m_iconSpriteId);
+				aWriter->WriteObjectPointers(m_directEffects);
+				aWriter->WritePOD(m_flags);
+				aWriter->WriteUInt(m_projectileParticleSystemId);
+				aWriter->WriteInt(m_castTime);
+				aWriter->WriteUInt(m_aoeRadius);
+				aWriter->WriteUInt(m_aoeCap);
+				aWriter->WriteObjectPointers(m_aoeEntitySpawns);
+				aWriter->WriteUInts(m_entityStates);
 			}
 			
 			bool	
 			FromStream(
-				IReader*				aStream) override
+				IReader*				aReader) override
 			{
-				if(!FromStreamBase(aStream))
+				if(!FromStreamBase(aReader))
 					return false;
-				if(!aStream->ReadString(m_displayName))
+				if(!aReader->ReadString(m_displayName))
 					return false;
-				if (!aStream->ReadUInt(m_range))
+				if (!aReader->ReadUInt(m_range))
 					return false;
-				if (!aStream->ReadInt(m_speed))
+				if (!aReader->ReadInt(m_speed))
 					return false;
-				if (!aStream->ReadInt(m_delay))
+				if (!aReader->ReadInt(m_delay))
 					return false;
-				if (!aStream->ReadInt(m_cooldown))
+				if (!aReader->ReadInt(m_cooldown))
 					return false;
-				if (!aStream->ReadUInt(m_iconSpriteId))
+				if (!aReader->ReadUInt(m_iconSpriteId))
 					return false;
-				if(!aStream->ReadObjectPointers(m_directEffects))
+				if(!aReader->ReadObjectPointers(m_directEffects))
 					return false;
-				if(!aStream->ReadPOD(m_flags))
+				if(!aReader->ReadPOD(m_flags))
 					return false;
-				if (!aStream->ReadUInt(m_projectileParticleSystemId))
+				if (!aReader->ReadUInt(m_projectileParticleSystemId))
 					return false;
-				if (!aStream->ReadInt(m_castTime))
+				if (!aReader->ReadInt(m_castTime))
 					return false;
-				if (!aStream->ReadUInt(m_aoeRadius))
+				if (!aReader->ReadUInt(m_aoeRadius))
 					return false;
-				if (!aStream->ReadUInt(m_aoeCap))
+				if (!aReader->ReadUInt(m_aoeCap))
 					return false;
-				if (!aStream->ReadObjectPointers(m_aoeEntitySpawns))
+				if (!aReader->ReadObjectPointers(m_aoeEntitySpawns))
+					return false;
+				if(!aReader->ReadUInts(m_entityStates))
 					return false;
 				return true;
 			}
@@ -313,8 +330,8 @@ namespace tpublic
 			uint32_t											m_aoeCap = 0;
 			std::vector<std::unique_ptr<DirectEffectEntry>>		m_directEffects;
 			std::vector<std::unique_ptr<AOEEntitySpawnEntry>>	m_aoeEntitySpawns;
+			std::vector<EntityState::Id>						m_entityStates;
 		};
-
 
 	}
 

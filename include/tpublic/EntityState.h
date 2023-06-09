@@ -16,8 +16,7 @@ namespace tpublic
 			ID_SPAWNING,
 			ID_IN_COMBAT,
 			ID_DEAD,
-			ID_DESPAWNING_DEFAULT,
-			ID_DESPAWNING_DEAD,
+			ID_DESPAWNING,
 
 			NUM_IDS
 		};
@@ -33,8 +32,7 @@ namespace tpublic
 			"spawning",
 			"in_combat",
 			"dead",
-			"despawning_default",
-			"despawning_dead"
+			"despawning"
 		};
 
 		static_assert(sizeof(ENTITY_STATE_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);
@@ -56,7 +54,23 @@ namespace tpublic
 		}
 
 		inline constexpr bool
-		IsInteractable(
+		CanBeAttacked(
+			Id			aId)
+		{
+			switch(aId)
+			{
+			case ID_DEFAULT:	
+			case ID_IN_COMBAT:
+				return true;
+
+			default:
+				break;
+			}
+			return false;
+		}
+
+		inline constexpr bool
+		CanMove(
 			Id			aId)
 		{
 			switch(aId)

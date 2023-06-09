@@ -2,11 +2,18 @@ sprites:
 {
 	source: "entities.png"
 
-	cursor: { position: [ 0 0 ] }
-
 	size: { width: 16 height: 16 }
+
+	cursor: { position: [ 0 0 ] }
 
 	sprite goblin: { }
 	sprite goblin_boss: { }
 	sprite goblin_shaman: { }
+	
+	cursor: { position: [ 0 16 ] }
+	
+	sprite goblin_dead: { }
+	sprite goblin_boss_dead: { }
+	sprite goblin_shaman_dead: { }	
+	
 }

@@ -69,7 +69,7 @@ namespace tpublic::Systems
 		if(aEntityState == EntityState::ID_SPAWNING)
 			return aTicksInState < SPAWN_TICKS ? EntityState::CONTINUE : EntityState::ID_DEFAULT;
 
-		if (aEntityState == EntityState::ID_DESPAWNING_DEFAULT || aEntityState == EntityState::ID_DESPAWNING_DEAD)
+		if (aEntityState == EntityState::ID_DESPAWNING)
 			return aTicksInState < DESPAWN_TICKS ? EntityState::CONTINUE : EntityState::DESTROY;
 
 		const Components::CombatPublic* combat = GetComponent<Components::CombatPublic>(aComponents);
@@ -236,7 +236,7 @@ namespace tpublic::Systems
 		else
 			combat->m_castInProgress.reset();
 
-		if (aEntityState == EntityState::ID_DEAD || aEntityState == EntityState::ID_DESPAWNING_DEAD)
+		if (aEntityState == EntityState::ID_DEAD || aEntityState == EntityState::ID_DESPAWNING)
 			position->m_block = false;
 		else
 			position->m_block = true;

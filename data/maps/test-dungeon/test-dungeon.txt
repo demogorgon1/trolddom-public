@@ -4,9 +4,14 @@ map_trigger test_dungeon_boss_1_killed:
 	default: false
 }
 
-map_entity_spawn test_dungeon_monster:
+map_entity_spawn test_dungeon_monster_caster:
 {	
 	entity goblin_shaman: { weight: 1 } 
+}
+
+map_entity_spawn test_dungeon_monster_melee:
+{	
+	entity goblin: { weight: 1 } 
 }
 
 map_entity_spawn test_dungeon_boss_1:
@@ -40,7 +45,8 @@ map_palette test_dungeon_tiles:
 
 map_palette test_dungeon_stuff:
 {
-	entity_spawn test_dungeon_monster: [ 255 0 0 ]
+	entity_spawn test_dungeon_monster_caster: [ 255 0 0 ]
+	entity_spawn test_dungeon_monster_melee: [ 128 0 0 ]
 	entity_spawn test_dungeon_boss_1: [ 255 255 0 ]
 	player_spawn test_dungeon_player_spawn: [ 0 0 255 ]
 	portal test_dungeon_exit: [ 0 255 0 ]	

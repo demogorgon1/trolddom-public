@@ -4,6 +4,8 @@ class sorcerer:
 	description: "Master the elemental magic and destroy your enemies with fire, ice, and lightning."
 	
 	sprite: sorcerer
+	sprite_dead: sorcerer_dead
+	
 	color_1: [ 0 59 210 ] 
 	color_2: [ 0 10 64 ]
 	default_attack: attack

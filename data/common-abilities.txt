@@ -2,6 +2,7 @@ ability attack:
 {
 	string: "Attack"	
 	flags: [ attack target_other target_hostile can_be_dodged can_be_parried can_miss use_weapon_icon ]	
+	states: [ default in_combat ]
 	delay: 3
 	
 	direct_effect damage:
@@ -18,6 +19,7 @@ ability strike:
 	range: 1	
 	cooldown: 30
 	flags: [ target_other target_hostile can_be_dodged can_be_parried can_miss ]
+	states: [ default in_combat ]
 	icon: icon_strike
 	delay: 3
 	
@@ -35,6 +37,7 @@ ability firebolt:
 	range: 7	
 	cast_time: 25
 	flags: [ target_other target_hostile can_miss ]
+	states: [ default in_combat ]
 	icon: icon_firebolt
 	speed: 5
 	projectile: firebolt
@@ -54,6 +57,7 @@ ability lake_of_fire:
 	range: 7
 	cast_time: 25
 	flags: [ target_aoe ]
+	states: [ default in_combat ]
 	icon: icon_lake_of_fire
 	cooldown: 100	
 	aoe_radius: 2
@@ -71,6 +75,7 @@ ability gaze_of_death:
 	range: 100
 	cooldown: 100
 	flags: [ target_other target_hostile target_friendly ]
+	states: [ default in_combat ]
 	icon: icon_green_sphere
 	
 	direct_effect kill:
@@ -92,6 +97,7 @@ ability dont_touch_me_bro:
 	string: "Don't Touch Me, Bro"
 	cooldown: 100
 	flags: [ target_self ]
+	states: [ default in_combat ]	
 	icon: icon_impact_1
 	
 	direct_effect apply_aura:

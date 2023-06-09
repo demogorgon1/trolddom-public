@@ -271,6 +271,10 @@ namespace tpublic
 					{
 						m_spriteId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aMember->GetIdentifier());
 					}					
+					else if (aMember->m_name == "sprite_dead")
+					{
+						m_spriteDeadId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aMember->GetIdentifier());
+					}
 					else if (aMember->m_name == "color_1")
 					{
 						const Parser::Node* components = aMember->GetArray();
@@ -323,6 +327,7 @@ namespace tpublic
 				aStream->WriteString(m_description);
 				aStream->WriteOptionalObjectPointer(m_levelProgression);
 				aStream->WriteUInt(m_spriteId);
+				aStream->WriteUInt(m_spriteDeadId);
 				aStream->WriteUInt(m_defaultAttackAbilityId);
 				aStream->WriteObjects(m_startEquipment);
 				m_defaultActionBar.ToStream(aStream);
@@ -343,7 +348,9 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadOptionalObjectPointer(m_levelProgression))
 					return false;
-				if(!aStream->ReadUInt(m_spriteId))
+				if (!aStream->ReadUInt(m_spriteId))
+					return false;
+				if (!aStream->ReadUInt(m_spriteDeadId))
 					return false;
 				if (!aStream->ReadUInt(m_defaultAttackAbilityId))
 					return false;
@@ -364,6 +371,7 @@ namespace tpublic
 			std::string												m_displayName;
 			std::string												m_description;
 			uint32_t												m_spriteId = 0;
+			uint32_t												m_spriteDeadId = 0;
 			Color													m_color1;
 			Color													m_color2;
 			uint32_t												m_defaultAttackAbilityId = 0;

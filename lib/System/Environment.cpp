@@ -57,11 +57,11 @@ namespace tpublic::Systems
 		if (aEntityState == EntityState::ID_SPAWNING)
 			return aTicksInState < SPAWN_TICKS ? EntityState::CONTINUE : EntityState::ID_DEFAULT;
 
-		if (aEntityState == EntityState::ID_DESPAWNING_DEFAULT)
+		if (aEntityState == EntityState::ID_DESPAWNING)
 			return aTicksInState < DESPAWN_TICKS ? EntityState::CONTINUE : EntityState::DESTROY;
 
 		if(aContext->m_tick > environment->m_despawnTick)
-			return EntityState::ID_DESPAWNING_DEFAULT;
+			return EntityState::ID_DESPAWNING;
 
 		const Components::Position* position = GetComponent<Components::Position>(aComponents);
 		assert(position != NULL);

@@ -2,11 +2,18 @@ sprites:
 {
 	source: "classes.png"
 
-	cursor: { position: [ 0 0 ] }
-
 	size: { width: 16 height: 16 }
+
+	cursor: { position: [ 0 0 ] }
 
 	sprite fighter: { }
 	sprite priest: { }
 	sprite sorcerer: { }
+	
+	cursor: { position: [ 0 16 ] }
+	
+	sprite fighter_dead: { }
+	sprite priest_dead: { }
+	sprite sorcerer_dead: { }	
+
 }
