@@ -127,6 +127,21 @@ namespace tpublic
 				return false;
 			}
 
+			void
+			SetResource(
+				uint32_t				aResourceId,
+				uint32_t				aValue)
+			{
+				for (Resource& t : m_resources)
+				{
+					if (t.m_id == aResourceId)
+					{
+						t.m_current = aValue;
+						return;
+					}
+				}
+			}
+
 			// ComponentBase implementation
 			void
 			FromSource(
