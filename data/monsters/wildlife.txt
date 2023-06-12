@@ -1,0 +1,77 @@
+loot_group deer_drops: {}
+
+loot_table deer:
+{
+	slots:
+	[
+		{
+			possibility: { weight: 1 }
+			possibility: { weight: 1 loot_group: deer_drops }
+		}		
+	
+		{
+			possibility: { weight: 10 }
+			possibility: { weight: 1 loot_group: world_drops_1_to_5 }
+		}		
+	]	
+}
+
+entity deer:
+{
+	string: "Deer"
+	
+	systems: [ combat npc ]
+	
+	components:
+	{
+		position: { }		
+		threat_target: { }
+		visible_auras: { }
+		auras: { }
+		lootable : 
+		{ 
+			loot_table: deer
+		}
+		combat_public: 
+		{  
+			level: 1
+			faction: wildlife		
+		}			
+		combat_private:
+		{
+			weapon_damage_range: [ 3 7 ]
+			physical_critical_strike_chance: 5
+			dodge_chance: 5
+			parry_chance: 5
+			miss_chance: 5
+			block_chance: 0
+		}
+		npc: 
+		{ 			
+			state default:
+			{
+			}
+			
+			state in_combat:
+			{
+				abilities:
+				[					
+					{ id: strike }
+				]
+			}
+					
+			resources:
+			{
+				health: 50
+			}			
+		}
+		sprite: 
+		{ 
+			animations:
+			[
+				{ states: [ default in_combat spawning ] frames: [ deer ] }			
+				{ states: [ dead ] frames: [ deer_dead ] z_offset: -2 }	
+			]		
+		}		
+	}
+}

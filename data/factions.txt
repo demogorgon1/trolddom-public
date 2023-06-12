@@ -1,3 +1,8 @@
 faction monsters:
 {
 }
+
+faction wildlife:
+{
+	flags: [ neutral ]
+}

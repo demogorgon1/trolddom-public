@@ -9,11 +9,13 @@ sprites:
 	sprite goblin: { }
 	sprite goblin_boss: { }
 	sprite goblin_shaman: { }
+	sprite deer: { }
 	
 	cursor: { position: [ 0 16 ] }
 	
 	sprite goblin_dead: { }
 	sprite goblin_boss_dead: { }
-	sprite goblin_shaman_dead: { }	
+	sprite goblin_shaman_dead: { }
+	sprite deer_dead: { }	
 	
 }

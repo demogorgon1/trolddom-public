@@ -37,10 +37,10 @@ namespace tpublic
 						aChild->GetArray()->ForEachChild([&](
 							const Parser::Node* aFlag)
 						{
-							if(aFlag->m_name == "neutral")
+							if(aFlag->IsIdentifier("neutral"))
 								m_flags |= FLAG_NEUTRAL;
 							else
-								TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid faction flag.", aFlag->m_name.c_str());
+								TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid faction flag.", aFlag->m_value.c_str());
 						});
 					}
 					else
@@ -69,6 +69,9 @@ namespace tpublic
 					return false;
 				return true;
 			}
+
+			// Helpers
+			bool IsNeutral() const { return m_flags & FLAG_NEUTRAL; }
 
 			// Public data
 			uint8_t		m_flags;

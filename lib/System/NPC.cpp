@@ -79,6 +79,8 @@ namespace tpublic::Systems
 		const Components::Auras* auras = GetComponent<Components::Auras>(aComponents);
 		const Components::NPC::StateEntry* state = npc->GetState(aEntityState);
 
+		const Data::Faction* faction = GetManifest()->m_factions.GetById(combat->m_factionId);
+
 		if (aEntityState != EntityState::ID_DEAD && combat->GetResource(Resource::ID_HEALTH) == 0 && !auras->HasEffect(AuraEffect::ID_IMMORTALITY))
 		{
 			npc->m_castInProgress.reset();
@@ -125,14 +127,16 @@ namespace tpublic::Systems
 				{
 					if(aEntity->GetState() != EntityState::ID_DEAD)
 					{
-						if (aEntity->IsPlayer())
+						bool isWithinDistance = Helpers::IsWithinDistance(aEntity->GetComponent<Components::Position>(), position, 3);
+
+						if (aEntity->IsPlayer() && (!faction->IsNeutral() || combat->m_targetEntityInstanceId == aEntity->GetEntityInstanceId()))
 						{
-							if (Helpers::IsWithinDistance(aEntity->GetComponent<Components::Position>(), position, 3))
+							if (isWithinDistance)
 								aContext->m_threatEventQueue->AddThreatEvent(aEntity->GetEntityInstanceId(), aEntityInstanceId, 0);
 						}
-						else if(topThreatEntity != NULL && aEntity->GetState() != EntityState::ID_IN_COMBAT)
+						else if(topThreatEntity != NULL && aEntity->GetState() != EntityState::ID_IN_COMBAT && !faction->IsNeutral())
 						{
-							if (Helpers::IsWithinDistance(aEntity->GetComponent<Components::Position>(), position, 3))
+							if (isWithinDistance)
 							{
 								const tpublic::Components::CombatPublic* nearbyNonPlayerCombatPublic = aEntity->GetComponent<tpublic::Components::CombatPublic>();
 								if(nearbyNonPlayerCombatPublic != NULL && nearbyNonPlayerCombatPublic->m_factionId == combat->m_factionId)
