@@ -114,7 +114,7 @@ namespace tpublic::Systems
 			if(!threat->m_table.IsEmpty())
 			{
 				topThreatEntity = aContext->m_worldView->QuerySingleEntityInstance(threat->m_table.GetTop()->m_entityInstanceId);
-				if(topThreatEntity->GetState() == EntityState::ID_DEAD)
+				if(topThreatEntity != NULL && topThreatEntity->GetState() == EntityState::ID_DEAD)
 					topThreatEntity = NULL;
 			}
 
@@ -133,7 +133,11 @@ namespace tpublic::Systems
 						else if(topThreatEntity != NULL && aEntity->GetState() != EntityState::ID_IN_COMBAT)
 						{
 							if (Helpers::IsWithinDistance(aEntity->GetComponent<Components::Position>(), position, 3))
-								aContext->m_threatEventQueue->AddThreatEvent(topThreatEntity->GetEntityInstanceId(), aEntity->GetEntityInstanceId(), 0);
+							{
+								const tpublic::Components::CombatPublic* nearbyNonPlayerCombatPublic = aEntity->GetComponent<tpublic::Components::CombatPublic>();
+								if(nearbyNonPlayerCombatPublic != NULL && nearbyNonPlayerCombatPublic->m_factionId == combat->m_factionId)
+									aContext->m_threatEventQueue->AddThreatEvent(topThreatEntity->GetEntityInstanceId(), aEntity->GetEntityInstanceId(), 0);
+							}
 						}
 					}
 
@@ -219,9 +223,11 @@ namespace tpublic::Systems
 								aContext->m_abilityQueue->AddAbility(aEntityInstanceId, target->GetEntityInstanceId(), Vec2(), useAbility);
 							}
 						}
-						else 
+						else if(npc->m_moveCooldownUntilTick < aContext->m_tick)
 						{
 							aContext->m_moveRequestQueue->AddMoveRequest(aEntityInstanceId, Vec2(dx, dy));
+
+							npc->m_moveCooldownUntilTick = aContext->m_tick + 2;
 						}
 					}
 				}
