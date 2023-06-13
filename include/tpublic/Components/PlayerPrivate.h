@@ -33,6 +33,7 @@ namespace tpublic
 				IWriter* aStream) const override
 			{
 				aStream->WriteUInt(m_level);
+				aStream->WriteUInt(m_xp);
 				aStream->WritePOD(m_isDead);
 			}
 
@@ -42,6 +43,8 @@ namespace tpublic
 			{
 				if(!aStream->ReadUInt(m_level))
 					return false;
+				if (!aStream->ReadUInt(m_xp))
+					return false;
 				if (!aStream->ReadPOD(m_isDead))
 					return false;
 				return true;
@@ -49,6 +52,7 @@ namespace tpublic
 
 			// Public data
 			uint32_t		m_level = 1;
+			uint32_t		m_xp = 0;
 			bool			m_isDead = false;
 
 			// Not persistent

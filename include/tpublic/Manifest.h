@@ -21,6 +21,7 @@
 
 #include "IReader.h"
 #include "IWriter.h"
+#include "LevelXPRequirements.h"
 #include "PersistentIdTable.h"
 #include "PlayerComponents.h"
 
@@ -283,6 +284,7 @@ namespace tpublic
 			}
 
 			m_playerComponents.ToStream(aStream);
+			m_levelXPRequirements.ToStream(aStream);
 		}
 		
 		bool
@@ -297,6 +299,8 @@ namespace tpublic
 			}
 
 			if(!m_playerComponents.FromStream(aStream))
+				return false;
+			if (!m_levelXPRequirements.FromStream(aStream))
 				return false;
 
 			return true;
@@ -334,7 +338,9 @@ namespace tpublic
 
 		IDataContainer*									m_containers[DataType::NUM_IDS] = { 0 };
 
+		// Global non-itemized data
 		PlayerComponents								m_playerComponents;
+		LevelXPRequirements								m_levelXPRequirements;
 
 	private:
 

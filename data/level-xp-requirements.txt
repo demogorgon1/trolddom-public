@@ -1,0 +1,4 @@
+level_xp_requirements:
+[
+	[ 2 200 ]
+]
