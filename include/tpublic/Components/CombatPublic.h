@@ -1,7 +1,10 @@
 #pragma once
 
+#include "../Data/Ability.h"
+
 #include "../CastInProgress.h"
 #include "../ComponentBase.h"
+#include "../Resource.h"
 
 namespace tpublic
 {
@@ -16,7 +19,7 @@ namespace tpublic
 			static const uint8_t FLAGS = FLAG_REPLICATE_TO_OWNER | FLAG_REPLICATE_TO_OTHERS | FLAG_PUBLIC;
 			static const Persistence::Id PERSISTENCE = Persistence::ID_VOLATILE;
 
-			struct Resource
+			struct ResourceEntry
 			{	
 				void
 				ToStream(
@@ -63,7 +66,7 @@ namespace tpublic
 				uint32_t				aResourceId,
 				uint32_t				aValue)
 			{
-				for(Resource& t : m_resources)
+				for(ResourceEntry& t : m_resources)
 				{
 					if(t.m_id == aResourceId)
 					{
@@ -82,7 +85,7 @@ namespace tpublic
 				uint32_t				aResourceId,
 				uint32_t*				aOutMax = NULL) const
 			{
-				for (const Resource& t : m_resources)
+				for (const ResourceEntry& t : m_resources)
 				{
 					if (t.m_id == aResourceId)
 					{
@@ -99,7 +102,7 @@ namespace tpublic
 			SetResourceToMax(
 				uint32_t				aResourceId)
 			{
-				for (Resource& t : m_resources)
+				for (ResourceEntry& t : m_resources)
 				{
 					if (t.m_id == aResourceId)
 					{
@@ -115,7 +118,7 @@ namespace tpublic
 				size_t&					aOut) const
 			{
 				size_t i = 0;
-				for (const Resource& t : m_resources)
+				for (const ResourceEntry& t : m_resources)
 				{
 					if (t.m_id == aResourceId)
 					{
@@ -132,7 +135,7 @@ namespace tpublic
 				uint32_t				aResourceId,
 				uint32_t				aValue)
 			{
-				for (Resource& t : m_resources)
+				for (ResourceEntry& t : m_resources)
 				{
 					if (t.m_id == aResourceId)
 					{
@@ -140,6 +143,42 @@ namespace tpublic
 						return;
 					}
 				}
+			}
+
+			bool
+			HasResourcesForAbility(
+				const Data::Ability*	aAbility) const
+			{
+				for(uint32_t resourceId = 1; resourceId < (uint32_t)Resource::NUM_IDS; resourceId++)
+				{
+					uint32_t cost = aAbility->m_resourceCosts[resourceId];
+					if(cost > 0 && cost > GetResource(resourceId))
+						return false;
+				}
+				return true;
+			}
+
+			bool
+			SubtractResourcesForAbility(
+				const Data::Ability*	aAbility)
+			{
+				for (uint32_t resourceId = 1; resourceId < (uint32_t)Resource::NUM_IDS; resourceId++)
+				{
+					uint32_t cost = aAbility->m_resourceCosts[resourceId];
+					if(cost > 0)
+					{
+						size_t index;
+						if(!GetResourceIndex(resourceId, index))
+							return false;
+
+						if(m_resources[index].m_current < cost)
+							return false;
+
+						m_resources[index].m_current -= cost;						
+					}				
+				}
+
+				return true;
 			}
 
 			// ComponentBase implementation
@@ -196,7 +235,7 @@ namespace tpublic
 			uint32_t						m_level = 1;
 			uint32_t						m_factionId = 0;
 			uint64_t						m_combatGroupId = 0;
-			std::vector<Resource>			m_resources;
+			std::vector<ResourceEntry>		m_resources;
 			std::optional<CastInProgress>	m_castInProgress;
 		};
 

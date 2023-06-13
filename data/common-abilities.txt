@@ -16,8 +16,10 @@ ability attack:
 ability push:
 {
 	string: "Push"	
+	cooldown: 100
 	flags: [ target_other target_hostile ]	
 	states: [ default in_combat ]
+	icon: icon_push
 	
 	direct_effect push:
 	{
@@ -53,6 +55,7 @@ ability firebolt:
 	speed: 5
 	projectile: firebolt
 	cooldown: 0
+	resource_cost mana: 10
 	
 	direct_effect damage:
 	{
@@ -72,6 +75,7 @@ ability lake_of_fire:
 	icon: icon_lake_of_fire
 	cooldown: 100	
 	aoe_radius: 2
+	resource_cost mana: 10
 	
 	aoe_entity_spawn fire:
 	{

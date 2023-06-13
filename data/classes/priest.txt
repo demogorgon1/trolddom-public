@@ -6,6 +6,7 @@ ability minor_heal:
 	flags: [ target_other target_self target_friendly ]
 	states: [ default in_combat ]
 	icon: icon_heal
+	resource_cost mana: 10
 
 	direct_effect heal:
 	{	

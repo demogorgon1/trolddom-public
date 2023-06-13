@@ -202,10 +202,19 @@ namespace tpublic::Systems
 						{
 							const Data::Ability* ability = GetManifest()->m_abilities.GetById(abilityEntry.m_abilityId);
 
-							if (distanceSquared <= (int32_t)(ability->m_range * ability->m_range) && npc->m_cooldowns.Get(ability->m_id) == NULL)
+							if (distanceSquared > (int32_t)(ability->m_range * ability->m_range))
+								continue;
+								
+							if(npc->m_cooldowns.Get(ability->m_id) != NULL)
+								continue;
+
+							if(!combat->HasResourcesForAbility(ability))
+								continue;
+
+							if (abilityEntry.m_useProbability == UINT32_MAX || (*aContext->m_random)() < abilityEntry.m_useProbability)
 							{
-								if (abilityEntry.m_useProbability == UINT32_MAX || (*aContext->m_random)() < abilityEntry.m_useProbability)
-									useAbility = ability;
+								useAbility = ability;
+								break;
 							}
 						}
 

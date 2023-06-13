@@ -118,6 +118,7 @@ entity goblin_shaman:
 			resources:
 			{
 				health: 40
+				mana: 40
 			}			
 		}
 		sprite: 

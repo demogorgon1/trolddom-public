@@ -4,6 +4,7 @@
 #include "../DirectEffectFactory.h"
 #include "../DirectEffectBase.h"
 #include "../EntityState.h"
+#include "../Resource.h"
 
 namespace tpublic
 {
@@ -32,6 +33,15 @@ namespace tpublic
 				FLAG_AOE_LOW_HEALTH_ONLY	= 0x0800,
 				FLAG_AOE_LOW_HEALTH_PRIO	= 0x1000
 			};
+
+			static inline Resource::Id
+			GetResourceId(
+				const Parser::Node*			aSource)
+			{
+				Resource::Id resourceId = Resource::StringToId(aSource->m_name.c_str());
+				TP_VERIFY(resourceId != Resource::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid resource id.", aSource->m_name.c_str());
+				return resourceId;
+			}
 
 			static inline uint16_t
 			GetFlags(
@@ -253,6 +263,8 @@ namespace tpublic
 						m_aoeEntitySpawns.push_back(std::make_unique<AOEEntitySpawnEntry>(aMember->GetObject()));
 					else if (aMember->m_name == "states")
 						aMember->GetIdArrayWithLookup<EntityState::Id, EntityState::INVALID_ID>(m_entityStates, [&](const char* aIdentifier) { return EntityState::StringToId(aIdentifier); });
+					else if (aMember->m_tag == "resource_cost")
+						m_resourceCosts[GetResourceId(aMember)] = aMember->GetUInt32();
 					else
 						TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
 				});
@@ -277,6 +289,9 @@ namespace tpublic
 				aWriter->WriteUInt(m_aoeCap);
 				aWriter->WriteObjectPointers(m_aoeEntitySpawns);
 				aWriter->WriteUInts(m_entityStates);
+				
+				for(uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
+					aWriter->WriteUInt(m_resourceCosts[i]);
 			}
 			
 			bool	
@@ -313,6 +328,13 @@ namespace tpublic
 					return false;
 				if(!aReader->ReadUInts(m_entityStates))
 					return false;
+
+				for (uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
+				{
+					if(!aReader->ReadUInt(m_resourceCosts[i]))
+						return false;
+				}
+
 				return true;
 			}
 
@@ -331,6 +353,7 @@ namespace tpublic
 			std::vector<std::unique_ptr<DirectEffectEntry>>		m_directEffects;
 			std::vector<std::unique_ptr<AOEEntitySpawnEntry>>	m_aoeEntitySpawns;
 			std::vector<EntityState::Id>						m_entityStates;
+			uint32_t											m_resourceCosts[Resource::NUM_IDS] = { 0 };
 		};
 
 	}

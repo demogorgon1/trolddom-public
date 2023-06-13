@@ -86,7 +86,7 @@ namespace tpublic::Systems
 			{
 				bool dirty = false;
 
-				for (Components::CombatPublic::Resource& resource : combatPublic->m_resources)
+				for (Components::CombatPublic::ResourceEntry& resource : combatPublic->m_resources)
 				{
 					switch (resource.m_id)
 					{
