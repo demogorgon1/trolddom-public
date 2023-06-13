@@ -24,7 +24,7 @@ class priest:
 	color_1: [ 210 210 210 ] 
 	color_2: [ 100 100 64 ]
 	default_attack: attack
-	default_action_bar: [ attack minor_heal gaze_of_death dont_touch_me_bro immortality ]
+	default_action_bar: [ attack minor_heal gaze_of_death dont_touch_me_bro immortality push ]
 	
 	start_map test_world: [ test_world_player_spawn ]
 	
@@ -42,6 +42,7 @@ class priest:
 				gaze_of_death
 				dont_touch_me_bro
 				immortality 
+				push
 			]
 						
 			stats:

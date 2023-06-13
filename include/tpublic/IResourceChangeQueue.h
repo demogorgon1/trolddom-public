@@ -28,6 +28,9 @@ namespace tpublic
 								int32_t							aChange) = 0;
 		virtual void		AddUpdateCallback(
 								UpdateCallback					aUpdateCallback) = 0;
+		virtual void		AddPushRequest(
+								uint32_t						aSourceEntityInstanceId,
+								uint32_t						aTargetEntityInstanceId) = 0;
 	};
 
 }

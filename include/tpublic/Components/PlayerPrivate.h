@@ -50,6 +50,9 @@ namespace tpublic
 			// Public data
 			uint32_t		m_level = 1;
 			bool			m_isDead = false;
+
+			// Not persistent
+			bool			m_positionUpdatedOnServer = false;
 		};
 	}
 
