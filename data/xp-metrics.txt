@@ -1,0 +1,30 @@
+xp_metrics:
+{
+	# XP required to level
+	levels:	
+	[
+		[ 2 200 ]
+	]
+	
+	# XP gained from kill at levels
+	kills:
+	[
+		[ 1 15 ]
+		[ 2 18 ]
+	]
+	
+	# Percentage XP adjustment for level differences
+	adjustments: 
+	[		
+		[ -5 0  ]
+		[ -4 20 ]
+		[ -3 40 ]
+		[ -2 60 ]
+		[ -1 80 ]
+		[ +1 110 ]
+		[ +2 120 ]
+		[ +3 130 ]
+		[ +4 140 ]
+		[ +5 150 ]
+	]
+}

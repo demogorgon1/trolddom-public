@@ -191,10 +191,13 @@ namespace tpublic
 					buffer.push_back(c);
 					state = STATE_IDENTIFIER;
 				}
-				else if(_IsNum(c) || c == '-')
+				else if(_IsNum(c) || c == '-' || c == '+')
 				{
 					buffer.clear();
-					buffer.push_back(c);
+
+					if(c != '+')
+						buffer.push_back(c);
+
 					state = STATE_NUMBER;
 				}
 				else if (c == '\"')

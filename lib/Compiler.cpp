@@ -54,9 +54,9 @@ namespace tpublic
 			{
 				m_manifest->m_playerComponents.FromSource(aNode);
 			}
-			else if (aNode->m_name == "level_xp_requirements")
+			else if (aNode->m_name == "xp_metrics")
 			{
-				m_manifest->m_levelXPRequirements.FromSource(aNode);
+				m_manifest->m_xpMetrics.FromSource(aNode);
 			}
 			else if(aNode->GetObject()->m_name == "sprites")
 			{
