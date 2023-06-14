@@ -23,6 +23,7 @@ entity test_dungeon_boss_1:
 		threat_target: { }
 		visible_auras: { }
 		auras: { }
+		tag: { }
 		lootable : 
 		{ 
 			loot_table: test_dungeon_boss_1

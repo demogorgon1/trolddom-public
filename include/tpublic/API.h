@@ -34,6 +34,7 @@
 #include "Particle.h"
 #include "Persistence.h"
 #include "PersistentIdTable.h"
+#include "PlayerTag.h"
 #include "SourceContext.h"
 #include "SpriteData.h"
 #include "SpriteInfo.h"

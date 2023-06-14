@@ -28,6 +28,7 @@ entity deer:
 		threat_target: { }
 		visible_auras: { }
 		auras: { }
+		tag: { }
 		lootable : 
 		{ 
 			loot_table: deer

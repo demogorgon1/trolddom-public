@@ -5,6 +5,7 @@
 #include <tpublic/Components/NPC.h>
 #include <tpublic/Components/Position.h>
 #include <tpublic/Components/Sprite.h>
+#include <tpublic/Components/Tag.h>
 #include <tpublic/Components/ThreatTarget.h>
 
 #include <tpublic/Systems/NPC.h>
@@ -28,6 +29,7 @@ namespace tpublic::Systems
 		RequireComponent<Components::CombatPublic>();
 		RequireComponent<Components::NPC>();
 		RequireComponent<Components::Position>();
+		RequireComponent<Components::Tag>();
 		RequireComponent<Components::ThreatTarget>();
 	}
 	
@@ -170,6 +172,9 @@ namespace tpublic::Systems
 				{
 					npc->m_targetEntityInstanceId = 0;
 					npc->m_castInProgress.reset();
+
+					Components::Tag* tag = GetComponent<Components::Tag>(aComponents);
+					tag->m_playerTag.Clear();
 
 					returnValue = EntityState::ID_DEFAULT;
 				}

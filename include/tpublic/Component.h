@@ -32,6 +32,7 @@ namespace tpublic
 			ID_LOOTABLE,
 			ID_ENVIRONMENT,
 			ID_OWNER,
+			ID_TAG,
 
 			NUM_IDS
 		};
@@ -61,7 +62,8 @@ namespace tpublic
 			"visible_auras",
 			"lootable",
 			"environment",
-			"owner"
+			"owner",
+			"tag"
 		};		
 
 		static_assert(sizeof(COMPONENT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

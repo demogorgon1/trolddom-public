@@ -17,6 +17,7 @@
 #include <tpublic/Components/PlayerPublic.h>
 #include <tpublic/Components/Position.h>
 #include <tpublic/Components/Sprite.h>
+#include <tpublic/Components/Tag.h>
 #include <tpublic/Components/Talents.h>
 #include <tpublic/Components/ThreatSource.h>
 #include <tpublic/Components/ThreatTarget.h>
@@ -47,6 +48,7 @@ namespace tpublic
 		_Register<Components::PlayerPublic>();
 		_Register<Components::Position>();
 		_Register<Components::Sprite>();
+		_Register<Components::Tag>();
 		_Register<Components::Talents>();
 		_Register<Components::ThreatSource>();
 		_Register<Components::ThreatTarget>();
