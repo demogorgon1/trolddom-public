@@ -13,6 +13,13 @@ ability attack:
 	}
 }
 
+aura pushed:
+{
+	string: "Pushed"
+	icon: icon_push
+	type: debuff
+}
+
 ability push:
 {
 	string: "Push"	
@@ -23,6 +30,11 @@ ability push:
 	
 	direct_effect push:
 	{
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: pushed
 	}
 }
 
