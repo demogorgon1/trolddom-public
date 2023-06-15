@@ -12,6 +12,7 @@ namespace tpublic
 	class IMoveRequestQueue;
 	class IThreatEventQueue;
 	class IWorldView;
+	class IXPEventQueue;
 	class Manifest;
 
 	class SystemBase
@@ -23,6 +24,7 @@ namespace tpublic
 			IAbilityQueue*		m_abilityQueue = NULL;
 			IMoveRequestQueue*	m_moveRequestQueue = NULL;
 			IThreatEventQueue*	m_threatEventQueue = NULL;
+			IXPEventQueue*		m_xpEventQueue = NULL;
 			const IWorldView*	m_worldView = NULL;
 			int32_t				m_tick = 0;
 			std::mt19937*		m_random = NULL;

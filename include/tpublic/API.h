@@ -29,6 +29,7 @@
 #include "IThreatEventQueue.h"
 #include "IMoveRequestQueue.h"
 #include "IWorldView.h"
+#include "IXPEventQueue.h"
 #include "Manifest.h"
 #include "Parser.h"
 #include "Particle.h"

@@ -169,6 +169,8 @@ namespace tpublic
 		GetAdjustment(
 			int32_t				aLevelDiff) const
 		{
+			if(aLevelDiff == 0)
+				return 100;
 			if (aLevelDiff <= m_minAdjustmentLevelDiff)
 				return m_minAdjustment;
 			if(aLevelDiff >= m_maxAdjustmentLevelDiff)

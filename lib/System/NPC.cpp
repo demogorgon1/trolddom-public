@@ -16,6 +16,7 @@
 #include <tpublic/IMoveRequestQueue.h>
 #include <tpublic/IThreatEventQueue.h>
 #include <tpublic/IWorldView.h>
+#include <tpublic/IXPEventQueue.h>
 #include <tpublic/Manifest.h>
 
 namespace tpublic::Systems
@@ -85,6 +86,10 @@ namespace tpublic::Systems
 
 		if (aEntityState != EntityState::ID_DEAD && combat->GetResource(Resource::ID_HEALTH) == 0 && !auras->HasEffect(AuraEffect::ID_IMMORTALITY))
 		{
+			const Components::Tag* tag = GetComponent<Components::Tag>(aComponents);
+			if(tag->m_playerTag.IsSet())
+				aContext->m_xpEventQueue->AddKillXPEvent(tag->m_playerTag, combat->m_level);
+
 			npc->m_castInProgress.reset();
 			return EntityState::ID_DEAD;
 		}
