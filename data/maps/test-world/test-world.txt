@@ -6,6 +6,7 @@ map_entity_spawn test_world_monster:
 map_entity_spawn test_world_wildlife:
 {	
 	entity deer: { weight: 1 } 
+	entity boar: { weight: 1 } 
 }
 
 map_player_spawn test_world_player_spawn:
@@ -47,6 +48,9 @@ map test_world:
 	type: open_world
 	default_tile: water_1
 	default_player_spawn: test_world_player_spawn
+	view_attenuation: 0
+	view_attenuation_bias: 0
+	view_hidden_visibility: 50	
 	#image_output: "test-world.png"
 
 	layers:

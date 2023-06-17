@@ -331,6 +331,9 @@ namespace tpublic
 		uint32_t									m_defaultTileSpriteId;
 		uint32_t									m_defaultPlayerSpawnId;
 		uint32_t									m_defaultExitPortalId;
+		uint32_t									m_viewAttenuation;
+		uint32_t									m_viewAttenuationBias;
+		uint32_t									m_viewHiddenVisibility;
 		std::string									m_imageOutputPath;
 		int32_t										m_x;
 		int32_t										m_y;

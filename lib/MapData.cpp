@@ -51,6 +51,9 @@ namespace tpublic
 		, m_tileMap(NULL)
 		, m_defaultTileSpriteId(0)
 		, m_defaultPlayerSpawnId(0)
+		, m_viewAttenuation(0)
+		, m_viewAttenuationBias(0)
+		, m_viewHiddenVisibility(0)
 		, m_walkableBits(NULL)
 		, m_blockLineOfSightBits(NULL)
 	{
@@ -73,6 +76,12 @@ namespace tpublic
 				m_resetMode = MapType::StringToResetMode(aNode->GetIdentifier());
 			else if(aNode->m_name == "string")
 				m_displayName = aNode->GetString();
+			else if (aNode->m_name == "view_attenuation")
+				m_viewAttenuation = aNode->GetUInt32();
+			else if (aNode->m_name == "view_attenuation_bias")
+				m_viewAttenuationBias = aNode->GetUInt32();
+			else if (aNode->m_name == "view_hidden_visibility")
+				m_viewHiddenVisibility = aNode->GetUInt32();
 			else if(aNode->m_name == "script")
 				m_scripts.push_back(std::make_unique<Script>(aNode));
 			else
@@ -294,6 +303,9 @@ namespace tpublic
 		aStream->WriteUInt(m_defaultTileSpriteId);
 		aStream->WriteUInt(m_defaultPlayerSpawnId);
 		aStream->WriteUInt(m_defaultExitPortalId);
+		aStream->WriteUInt(m_viewAttenuation);
+		aStream->WriteUInt(m_viewAttenuationBias);
+		aStream->WriteUInt(m_viewHiddenVisibility);
 		aStream->WriteInt(m_x);
 		aStream->WriteInt(m_y);
 		aStream->WriteInt(m_width);
@@ -323,6 +335,12 @@ namespace tpublic
 		if (!aStream->ReadUInt(m_defaultPlayerSpawnId))
 			return false;
 		if (!aStream->ReadUInt(m_defaultExitPortalId))
+			return false;
+		if (!aStream->ReadUInt(m_viewAttenuation))
+			return false;
+		if (!aStream->ReadUInt(m_viewAttenuationBias))
+			return false;
+		if (!aStream->ReadUInt(m_viewHiddenVisibility))
 			return false;
 		if (!aStream->ReadInt(m_x))
 			return false;
