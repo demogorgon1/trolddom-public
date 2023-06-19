@@ -1,6 +1,9 @@
 #pragma once
 
 #include "../Component.h"
+#include "../ComponentBase.h"
+#include "../ItemInstance.h"
+#include "../PlayerTag.h"
 
 namespace tpublic
 {
@@ -47,6 +50,12 @@ namespace tpublic
 				IWriter*				aStream) const override
 			{
 				aStream->WriteUInt(m_lootTableId);
+				m_playerTag.ToStream(aStream);
+				if (m_playerTag.IsSet())
+				{					
+					aStream->WriteInt(m_availableCash);
+					aStream->WriteObjects(m_availableLoot);
+				}
 			}
 
 			bool
@@ -55,11 +64,24 @@ namespace tpublic
 			{
 				if(!aStream->ReadUInt(m_lootTableId))
 					return false;
+				if(!m_playerTag.FromStream(aStream))
+					return false;
+				if (m_playerTag.IsSet())
+				{
+					if (!aStream->ReadInt(m_availableCash))
+						return false;
+					if (!aStream->ReadObjects(m_availableLoot))
+						return false;
+				}
 				return true;
 			}
 
 			// Public data
-			uint32_t	m_lootTableId = 0;
+			uint32_t					m_lootTableId = 0;
+
+			PlayerTag					m_playerTag;
+			int64_t						m_availableCash = 0;
+			std::vector<ItemInstance>	m_availableLoot;
 		};
 	}
 

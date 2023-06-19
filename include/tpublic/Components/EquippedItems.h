@@ -35,7 +35,7 @@ namespace tpublic
 				IWriter*	aStream) const override
 			{
 				for(uint32_t i = 0; i < (uint32_t)EquipmentSlot::NUM_IDS; i++)
-					aStream->WritePOD(m_slots[i]);
+					m_slots[i].ToStream(aStream);
 			}
 
 			bool
@@ -44,7 +44,7 @@ namespace tpublic
 			{
 				for (uint32_t i = 0; i < (uint32_t)EquipmentSlot::NUM_IDS; i++)
 				{
-					if(!aStream->ReadPOD(m_slots[i]))
+					if(!m_slots[i].FromStream(aStream))
 						return false;
 				}
 				return true;

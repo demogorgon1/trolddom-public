@@ -2,6 +2,7 @@
 
 #include <tpublic/Components/Auras.h>
 #include <tpublic/Components/CombatPublic.h>
+#include <tpublic/Components/Lootable.h>
 #include <tpublic/Components/NPC.h>
 #include <tpublic/Components/Position.h>
 #include <tpublic/Components/Sprite.h>
@@ -17,6 +18,7 @@
 #include <tpublic/IThreatEventQueue.h>
 #include <tpublic/IWorldView.h>
 #include <tpublic/IXPEventQueue.h>
+#include <tpublic/LootGenerator.h>
 #include <tpublic/Manifest.h>
 
 namespace tpublic::Systems
@@ -28,6 +30,7 @@ namespace tpublic::Systems
 	{
 		RequireComponent<Components::Auras>();
 		RequireComponent<Components::CombatPublic>();
+		RequireComponent<Components::Lootable>();
 		RequireComponent<Components::NPC>();
 		RequireComponent<Components::Position>();
 		RequireComponent<Components::Tag>();
@@ -88,7 +91,15 @@ namespace tpublic::Systems
 		{
 			const Components::Tag* tag = GetComponent<Components::Tag>(aComponents);
 			if(tag->m_playerTag.IsSet())
+			{
 				aContext->m_xpEventQueue->AddKillXPEvent(tag->m_playerTag, combat->m_level);
+
+				Components::Lootable* lootable = GetComponent<Components::Lootable>(aComponents);
+				lootable->m_playerTag = tag->m_playerTag;
+
+				if(lootable->m_playerTag.IsSet())
+					aContext->m_lootGenerator->Generate(*aContext->m_random, lootable);					
+			}
 
 			npc->m_castInProgress.reset();
 			return EntityState::ID_DEAD;
