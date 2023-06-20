@@ -30,6 +30,17 @@ namespace tpublic
 
 			}
 
+			bool
+			GetAvailableLootByIndex(
+				size_t					aIndex,
+				ItemInstance&			aOut) const
+			{
+				if(aIndex >= m_availableLoot.size())
+					return false;
+				aOut = m_availableLoot[aIndex];
+				return true;
+			}
+
 			// ComponentBase implementation
 			void				
 			FromSource(
@@ -50,6 +61,7 @@ namespace tpublic
 				IWriter*				aStream) const override
 			{
 				aStream->WriteUInt(m_lootTableId);
+				aStream->WriteUInt(m_version);
 				m_playerTag.ToStream(aStream);
 				if (m_playerTag.IsSet())
 				{					
@@ -62,7 +74,9 @@ namespace tpublic
 			FromStream(
 				IReader*				aStream) override
 			{
-				if(!aStream->ReadUInt(m_lootTableId))
+				if (!aStream->ReadUInt(m_lootTableId))
+					return false;
+				if (!aStream->ReadUInt(m_version))
 					return false;
 				if(!m_playerTag.FromStream(aStream))
 					return false;
@@ -82,6 +96,7 @@ namespace tpublic
 			PlayerTag					m_playerTag;
 			int64_t						m_availableCash = 0;
 			std::vector<ItemInstance>	m_availableLoot;
+			uint32_t					m_version = 0;
 		};
 	}
 

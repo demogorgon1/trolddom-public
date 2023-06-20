@@ -1,6 +1,18 @@
 loot_group deer_drops: {}
 loot_group boar_drops: {}
 
+item antlers:
+{
+	loot_groups: [ deer_drops ]		
+	root: {	name: "Broken Antlers" icon: icon_antlers }
+}
+
+item boar_tusks:
+{
+	loot_groups: [ boar_drops ]		
+	root: {	name: "Broken Tusks" icon: icon_boar_tusks }
+}
+
 loot_table deer:
 {
 	slots:

@@ -50,3 +50,19 @@ item weapon_gnarly_staff:
 		}			
 	}
 }
+
+item weapon_the_dev_tool:
+{
+	equipment_slots: [ main_hand ]
+		
+	root:
+	{
+		weapon_cooldown: 20		
+		required_level: 1
+		name: "The Dev Tool"
+		icon: icon_hammer_1
+		rarity: mythic
+		weapon_damage_min: 100
+		weapon_damage_max: 200
+	}			
+}

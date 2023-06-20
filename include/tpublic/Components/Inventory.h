@@ -22,7 +22,6 @@ namespace tpublic
 				ToStream(
 					IWriter*	aStream) const 
 				{
-					aStream->WriteUInt(m_index);
 					aStream->WritePOD(m_item);
 				}
 
@@ -30,15 +29,12 @@ namespace tpublic
 				FromStream(
 					IReader*	aStream) 
 				{
-					if(!aStream->ReadUInt(m_index))
-						return false;
 					if (!aStream->ReadPOD(m_item))
 						return false;
 					return true;
 				}
 
 				// Public data
-				uint32_t					m_index = 0;
 				ItemInstance				m_item;
 			};
 
@@ -54,17 +50,32 @@ namespace tpublic
 
 			}
 
+			bool
+			AddToInventory(
+				const ItemInstance&		aItemInstance)
+			{
+				for(Entry& t : m_entries)
+				{
+					if(!t.m_item.IsSet())
+					{
+						t.m_item = aItemInstance;
+						return true;
+					}
+				}
+				return false;
+			}
+			
 			// ComponentBase implementation
 			void
 			ToStream(
-				IWriter*	aStream) const override
+				IWriter*				aStream) const override
 			{
 				aStream->WriteObjects(m_entries);
 			}
 
 			bool
 			FromStream(
-				IReader*	aStream) override
+				IReader*				aStream) override
 			{
 				if(!aStream->ReadObjects(m_entries))
 					return false;

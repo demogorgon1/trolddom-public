@@ -29,6 +29,9 @@ sprites:
 	sprite icon_fire : { }
 	sprite icon_skull_1 : { }
 	sprite icon_push : { }
+	sprite icon_hammer_1 : { }
+	sprite icon_antlers : { }
+	sprite icon_boar_tusks : { }
 	
 }
 

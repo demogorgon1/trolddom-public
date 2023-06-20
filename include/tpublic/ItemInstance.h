@@ -44,6 +44,20 @@ namespace tpublic
 			return true;
 		}
 
+		bool
+		operator ==(
+			const ItemInstance&	aOther) const
+		{
+			return m_itemId == aOther.m_itemId && m_seed == aOther.m_seed;
+		}
+
+		bool
+		operator !=(
+			const ItemInstance&	aOther) const
+		{
+			return !this->operator==(aOther);
+		}
+
 		// Public data
 		uint32_t		m_itemId = 0;
 		uint32_t		m_seed = 0;
