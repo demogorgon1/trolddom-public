@@ -59,6 +59,7 @@ namespace tpublic
 					if(!t.m_item.IsSet())
 					{
 						t.m_item = aItemInstance;
+						m_version++;
 						return true;
 					}
 				}
@@ -71,6 +72,7 @@ namespace tpublic
 				IWriter*				aStream) const override
 			{
 				aStream->WriteObjects(m_entries);
+				aStream->WriteUInt(m_version);
 			}
 
 			bool
@@ -79,11 +81,14 @@ namespace tpublic
 			{
 				if(!aStream->ReadObjects(m_entries))
 					return false;
+				if(!aStream->ReadUInt(m_version))
+					return false;
 				return true;
 			}
 
 			// Public data
 			std::vector<Entry>				m_entries;
+			uint32_t						m_version;
 		};
 	}
 
