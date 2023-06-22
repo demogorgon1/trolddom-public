@@ -100,6 +100,15 @@ namespace tpublic
 				return it->second;
 			}
 
+			uint32_t
+			GetExistingIdByName(
+				const char*								aName) const
+			{
+				const _T* t = GetExistingByName(aName);
+				TP_CHECK(t != NULL, "'%s' is not defined.", aName);
+				return t->m_id;
+			}
+
 			_T*
 			CreateUnnamed()
 			{
