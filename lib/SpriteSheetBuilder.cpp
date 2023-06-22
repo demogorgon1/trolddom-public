@@ -152,6 +152,12 @@ namespace tpublic
 					{
 						aSpriteComponent->GetIdArray(DataType::ID_SPRITE, sprite->m_info.m_borders);
 					}
+					else if(aSpriteComponent->m_name == "origin")
+					{
+						TP_VERIFY(aSpriteComponent->m_type == Parser::Node::TYPE_ARRAY && aSpriteComponent->m_children.size() == 2, aSpriteComponent->m_debugInfo, "Not a valid vector.");
+						sprite->m_info.m_origin.m_x = aSpriteComponent->m_children[0]->GetInt32();
+						sprite->m_info.m_origin.m_y = aSpriteComponent->m_children[1]->GetInt32();
+					}
 					else
 					{
 						TP_VERIFY(false, aNode->m_debugInfo, "Invalid item in 'sprite'.");
@@ -256,6 +262,7 @@ namespace tpublic
 			sprite->m_data->m_offsetX = sprite->m_sheetOffsetX;
 			sprite->m_data->m_offsetY = sprite->m_sheetOffsetY;
 			sprite->m_data->m_spriteSheetIndex = sprite->m_sheetIndex;
+			sprite->m_data->m_index = sprite->m_index;
 		}
 	}
 
@@ -458,6 +465,8 @@ namespace tpublic
 			}
 
 			insertSheet->m_sprites.push_back(aSprite);
+
+			aSprite->m_index = (uint32_t)insertSheet->m_sprites.size() - 1;
 		}
 	}
 

@@ -38,6 +38,7 @@ namespace tpublic
 				aStream->WriteUInt(m_offsetY);
 				aStream->WriteUInt(m_width);
 				aStream->WriteUInt(m_height);
+				aStream->WriteUInt(m_index);
 				m_info.ToStream(aStream);
 			}
 
@@ -57,6 +58,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInt(m_height))
 					return false;
+				if (!aStream->ReadUInt(m_index))
+					return false;
 				if (!m_info.FromStream(aStream))
 					return false;
 				return true;
@@ -68,6 +71,7 @@ namespace tpublic
 			uint32_t	m_offsetY = 0;
 			uint32_t	m_width = 0;
 			uint32_t	m_height = 0;
+			uint32_t	m_index = 0;
 			SpriteInfo	m_info;
 		};
 

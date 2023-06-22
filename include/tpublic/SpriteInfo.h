@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Vec2.h"
+
 namespace tpublic
 {
 
@@ -39,6 +41,7 @@ namespace tpublic
 			aStream->WritePOD(m_flags);
 			aStream->WriteUInt(m_tileLayer);
 			aStream->WriteUInts(m_borders);
+			m_origin.ToStream(aStream);
 		}
 
 		bool
@@ -51,6 +54,8 @@ namespace tpublic
 				return false;
 			if (!aStream->ReadUInts(m_borders))
 				return false;
+			if(!m_origin.FromStream(aStream))
+				return false;
 			return true;
 		}
 
@@ -58,6 +63,7 @@ namespace tpublic
 		uint8_t					m_flags = 0;
 		uint32_t				m_tileLayer = 0;
 		std::vector<uint32_t>	m_borders;
+		Vec2					m_origin;
 	};
 
 }

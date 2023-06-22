@@ -45,6 +45,7 @@ namespace tpublic
 				, m_sheetOffsetX(0)
 				, m_sheetOffsetY(0)
 				, m_sheetIndex(0)
+				, m_index(0)
 				, m_data(NULL)
 			{
 
@@ -58,6 +59,7 @@ namespace tpublic
 			uint32_t						m_sheetIndex;
 			uint32_t						m_sheetOffsetX;
 			uint32_t						m_sheetOffsetY;
+			uint32_t						m_index;
 			Data::Sprite*					m_data;
 		};
 
