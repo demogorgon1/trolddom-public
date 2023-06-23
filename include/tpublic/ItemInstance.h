@@ -58,6 +58,15 @@ namespace tpublic
 			return !this->operator==(aOther);
 		}
 
+		ItemInstance&
+		operator=(
+			const ItemInstance& aOther) 
+		{
+			m_itemId = aOther.m_itemId;
+			m_seed = aOther.m_seed;
+			return *this;
+		}
+
 		// Public data
 		uint32_t		m_itemId = 0;
 		uint32_t		m_seed = 0;

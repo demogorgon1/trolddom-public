@@ -65,6 +65,38 @@ namespace tpublic
 				}
 				return false;
 			}
+
+			bool
+			Move(
+				uint32_t				aSourceIndex,
+				uint32_t				aDestinationIndex)
+			{
+				if((size_t)aSourceIndex >= m_entries.size() || (size_t)aDestinationIndex >= m_entries.size())
+					return false;
+
+				if (aSourceIndex != aDestinationIndex)
+				{
+					Entry& source = m_entries[aSourceIndex];
+					Entry& destination = m_entries[aDestinationIndex];
+
+					if(!source.m_item.IsSet())
+						return false;
+
+					if(destination.m_item.IsSet())
+					{
+						tpublic::ItemInstance temp = destination.m_item;
+						destination.m_item = source.m_item;
+						source.m_item = temp;
+					}
+					else
+					{
+						destination.m_item = source.m_item;
+						source.m_item.Clear();
+					}
+				}
+
+				return true;
+			}
 			
 			// ComponentBase implementation
 			void
