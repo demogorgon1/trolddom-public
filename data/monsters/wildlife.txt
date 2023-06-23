@@ -5,12 +5,14 @@ item antlers:
 {
 	loot_groups: [ deer_drops ]		
 	root: {	name: "Broken Antlers" icon: icon_antlers }
+	stack: 4
 }
 
 item boar_tusks:
 {
 	loot_groups: [ boar_drops ]		
 	root: {	name: "Broken Tusks" icon: icon_boar_tusks }
+	stack: 4
 }
 
 loot_table deer:

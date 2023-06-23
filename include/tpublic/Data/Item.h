@@ -222,6 +222,10 @@ namespace tpublic
 					{
 						m_root = std::make_unique<Node>(aChild, false);
 					}
+					else if (aChild->m_name == "stack")
+					{
+						m_stackSize = aChild->GetUInt32();
+					}
 					else
 					{
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -237,6 +241,7 @@ namespace tpublic
 				aStream->WriteUInts(m_equipmentSlots);
 				aStream->WriteUInts(m_lootGroups);
 				aStream->WriteOptionalObjectPointer(m_root);
+				aStream->WriteUInt(m_stackSize);
 			}
 
 			bool
@@ -251,6 +256,8 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadOptionalObjectPointer(m_root))
 					return false;
+				if(!aStream->ReadUInt(m_stackSize))
+					return false;
 				return true;
 			}
 
@@ -258,6 +265,7 @@ namespace tpublic
 			std::vector<uint32_t>		m_equipmentSlots;
 			std::vector<uint32_t>		m_lootGroups;
 			std::unique_ptr<Node>		m_root;
+			uint32_t					m_stackSize = 1;
 		};
 
 	}
