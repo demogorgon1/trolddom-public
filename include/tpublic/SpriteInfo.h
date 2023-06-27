@@ -1,5 +1,6 @@
 #pragma once
 
+#include "DataErrorHandling.h"
 #include "Vec2.h"
 
 namespace tpublic
@@ -15,6 +16,32 @@ namespace tpublic
 			FLAG_STANDALONE					= 0x04,
 			FLAG_CENTERED					= 0x08,
 			FLAG_DOUBLED					= 0x10
+		};
+
+		struct NamedAnchor
+		{
+			void
+			ToStream(
+				IWriter*	aStream) const 
+			{
+				aStream->WriteString(m_name);
+				m_position.ToStream(aStream);
+			}
+
+			bool
+			FromStream(
+				IReader*	aStream) 
+			{
+				if(!aStream->ReadString(m_name))
+					return false;
+				if(!m_position.FromStream(aStream))
+					return false;
+				return true;
+			}
+
+			// Public data
+			std::string				m_name;
+			Vec2					m_position;
 		};
 
 		static inline uint8_t 
@@ -42,6 +69,7 @@ namespace tpublic
 			aStream->WriteUInt(m_tileLayer);
 			aStream->WriteUInts(m_borders);
 			m_origin.ToStream(aStream);
+			aStream->WriteObjects(m_namedAnchors);
 		}
 
 		bool
@@ -56,14 +84,31 @@ namespace tpublic
 				return false;
 			if(!m_origin.FromStream(aStream))
 				return false;
+			if(!aStream->ReadObjects(m_namedAnchors))
+				return false;
 			return true;
 		}
 
+		const Vec2&
+		GetNamedAnchor(
+			const char*		aName) const
+		{
+			for(const NamedAnchor& t : m_namedAnchors)
+			{
+				if(t.m_name == aName)
+					return t.m_position;
+			}
+			TP_CHECK(false, "Named anchor '%s' not defined.", aName);
+			static Vec2 dummy;
+			return dummy;
+		}
+
 		// Public data
-		uint8_t					m_flags = 0;
-		uint32_t				m_tileLayer = 0;
-		std::vector<uint32_t>	m_borders;
-		Vec2					m_origin;
+		uint8_t						m_flags = 0;
+		uint32_t					m_tileLayer = 0;
+		std::vector<uint32_t>		m_borders;
+		Vec2						m_origin;
+		std::vector<NamedAnchor>	m_namedAnchors;
 	};
 
 }
