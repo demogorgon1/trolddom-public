@@ -82,7 +82,8 @@ namespace tpublic
 			Move(
 				uint32_t				aSourceIndex,
 				const Data::Item*		aSourceItemData,
-				uint32_t				aDestinationIndex)
+				uint32_t				aDestinationIndex,
+				uint32_t				aSplitQuantity)
 			{
 				if((size_t)aSourceIndex >= m_entries.size() || (size_t)aDestinationIndex >= m_entries.size())
 					return false;
@@ -99,25 +100,44 @@ namespace tpublic
 					{
 						bool doSwap = true;
 
-						if(source.m_item.m_itemId == destination.m_item.m_itemId)
+						if (aSplitQuantity != 0)
 						{
-							assert(aSourceItemData->m_id == source.m_item.m_itemId);
+							if(source.m_item.m_itemId != destination.m_item.m_itemId)
+								return false;
 
-							if(destination.m_item.m_quantity + source.m_item.m_quantity <= aSourceItemData->m_stackSize)
+							if (aSplitQuantity >= source.m_item.m_quantity)
+								return false;
+
+							uint32_t quantityToMove = aSplitQuantity;
+							if(destination.m_item.m_quantity + quantityToMove > aSourceItemData->m_stackSize)
+								quantityToMove = aSourceItemData->m_stackSize - destination.m_item.m_quantity;
+
+							destination.m_item.m_quantity += quantityToMove;
+							source.m_item.m_quantity -= quantityToMove;
+							doSwap = false;
+						}
+						else
+						{
+							if(source.m_item.m_itemId == destination.m_item.m_itemId)
 							{
-								// Destination got enough space for everything
-								destination.m_item.m_quantity += source.m_item.m_quantity;
-								source.m_item.Clear();
-								doSwap = false;
-							}
-							else if(destination.m_item.m_quantity < aSourceItemData->m_stackSize)
-							{
-								// Only move some to destination
-								uint32_t quantityToMove = aSourceItemData->m_stackSize - destination.m_item.m_quantity;
-								destination.m_item.m_quantity += quantityToMove;
-								assert(source.m_item.m_quantity > quantityToMove);
-								source.m_item.m_quantity -= quantityToMove;
-								doSwap = false;
+								assert(aSourceItemData->m_id == source.m_item.m_itemId);
+
+								if(destination.m_item.m_quantity + source.m_item.m_quantity <= aSourceItemData->m_stackSize)
+								{
+									// Destination got enough space for everything
+									destination.m_item.m_quantity += source.m_item.m_quantity;
+									source.m_item.Clear();
+									doSwap = false;
+								}
+								else if(destination.m_item.m_quantity < aSourceItemData->m_stackSize)
+								{
+									// Only move some to destination
+									uint32_t quantityToMove = aSourceItemData->m_stackSize - destination.m_item.m_quantity;
+									destination.m_item.m_quantity += quantityToMove;
+									assert(source.m_item.m_quantity > quantityToMove);
+									source.m_item.m_quantity -= quantityToMove;
+									doSwap = false;
+								}
 							}
 						}
 						
@@ -130,8 +150,20 @@ namespace tpublic
 					}
 					else
 					{
-						destination.m_item = source.m_item;
-						source.m_item.Clear();
+						if (aSplitQuantity != 0)
+						{
+							if (aSplitQuantity >= source.m_item.m_quantity)
+								return false;
+
+							destination.m_item = source.m_item;
+							destination.m_item.m_quantity = aSplitQuantity;
+							source.m_item.m_quantity -= aSplitQuantity;
+						}
+						else
+						{
+							destination.m_item = source.m_item;
+							source.m_item.Clear();
+						}
 					}
 
 					m_version++;
