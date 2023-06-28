@@ -163,11 +163,13 @@ namespace tpublic
 						aSpriteComponent->GetObject()->ForEachChild([&](
 							const Parser::Node* aAnchor)
 						{
-							TP_VERIFY(aAnchor->m_type == Parser::Node::TYPE_ARRAY && aAnchor->m_children.size() == 2, aAnchor->m_debugInfo, "Not a valid named anchor.");
+							TP_VERIFY(aAnchor->m_type == Parser::Node::TYPE_ARRAY && aAnchor->m_children.size() == 4, aAnchor->m_debugInfo, "Not a valid named anchor.");
 							SpriteInfo::NamedAnchor t;
 							t.m_name = aAnchor->m_name;
 							t.m_position.m_x = aAnchor->m_children[0]->GetInt32();
 							t.m_position.m_y = aAnchor->m_children[1]->GetInt32();
+							t.m_size.m_x = aAnchor->m_children[2]->GetInt32();
+							t.m_size.m_y = aAnchor->m_children[3]->GetInt32();
 							sprite->m_info.m_namedAnchors.push_back(t);
 						});
 					}

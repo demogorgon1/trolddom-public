@@ -26,6 +26,7 @@ namespace tpublic
 			{
 				aStream->WriteString(m_name);
 				m_position.ToStream(aStream);
+				m_size.ToStream(aStream);
 			}
 
 			bool
@@ -34,7 +35,9 @@ namespace tpublic
 			{
 				if(!aStream->ReadString(m_name))
 					return false;
-				if(!m_position.FromStream(aStream))
+				if (!m_position.FromStream(aStream))
+					return false;
+				if (!m_size.FromStream(aStream))
 					return false;
 				return true;
 			}
@@ -42,6 +45,7 @@ namespace tpublic
 			// Public data
 			std::string				m_name;
 			Vec2					m_position;
+			Vec2					m_size;
 		};
 
 		static inline uint8_t 
@@ -89,17 +93,17 @@ namespace tpublic
 			return true;
 		}
 
-		const Vec2&
+		const NamedAnchor&
 		GetNamedAnchor(
 			const char*		aName) const
 		{
 			for(const NamedAnchor& t : m_namedAnchors)
 			{
 				if(t.m_name == aName)
-					return t.m_position;
+					return t;
 			}
 			TP_CHECK(false, "Named anchor '%s' not defined.", aName);
-			static Vec2 dummy;
+			static NamedAnchor dummy;
 			return dummy;
 		}
 
