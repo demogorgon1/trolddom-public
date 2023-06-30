@@ -196,6 +196,18 @@ namespace tpublic
 				VerifyBase();
 			}
 
+			bool
+			IsEquippableInSlot(
+				uint32_t				aSlot) const
+			{
+				for(uint32_t slot : m_equipmentSlots)
+				{
+					if(slot == aSlot)
+						return true;
+				}
+				return false;
+			}				
+
 			// Base implementation
 			void
 			FromSource(

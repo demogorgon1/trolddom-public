@@ -36,6 +36,7 @@ namespace tpublic
 			{
 				for(uint32_t i = 0; i < (uint32_t)EquipmentSlot::NUM_IDS; i++)
 					m_slots[i].ToStream(aStream);
+				aStream->WriteUInt(m_version);
 			}
 
 			bool
@@ -47,11 +48,14 @@ namespace tpublic
 					if(!m_slots[i].FromStream(aStream))
 						return false;
 				}
+				if(!aStream->ReadUInt(m_version))
+					return false;
 				return true;
 			}
 
 			// Public data
 			ItemInstance	m_slots[EquipmentSlot::NUM_IDS];
+			uint32_t		m_version = 0;
 		};
 	}
 
