@@ -180,6 +180,15 @@ namespace tpublic
 					return &m_entries[aIndex].m_item;
 				return NULL;
 			}
+
+			ItemInstance*
+			GetItemAtIndex(
+				uint32_t				aIndex) 
+			{
+				if((size_t)aIndex < m_entries.size())
+					return &m_entries[aIndex].m_item;
+				return NULL;
+			}
 			
 			// ComponentBase implementation
 			void

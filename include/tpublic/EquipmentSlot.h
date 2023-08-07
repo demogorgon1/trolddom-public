@@ -86,6 +86,13 @@ namespace tpublic
 			return INVALID_ID;
 		}
 
+		inline constexpr bool
+		Validate(
+			Id				aId)
+		{
+			return (uint32_t)aId < (uint32_t)NUM_IDS && aId != INVALID_ID;
+		}
+
 	}
 
 }
