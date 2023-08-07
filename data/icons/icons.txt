@@ -32,6 +32,8 @@ sprites:
 	sprite icon_hammer_1 : { }
 	sprite icon_antlers : { }
 	sprite icon_boar_tusks : { }
+	sprite icon_ring_1 : { }
+	sprite icon_ring_2 : { }
 	
 }
 

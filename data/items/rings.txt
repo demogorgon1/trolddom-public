@@ -1,0 +1,37 @@
+item ring_iron_ring:
+{
+	equipment_slots: [ finger_1 finger_2 ]
+	loot_groups: [ world_drops_1_to_5 ]
+		
+	root:
+	{
+		required_level: 1
+		name: "Iron Ring"
+		icon: icon_ring_1
+
+		weighted_child:
+		{
+			rarity: common
+			stat strength: 1
+		}			
+	}
+}
+
+item ring_sapphire_ring:
+{
+	equipment_slots: [ finger_1 finger_2 ]
+	loot_groups: [ world_drops_1_to_5 ]
+		
+	root:
+	{
+		required_level: 1
+		name: "Sapphire Ring"
+		icon: icon_ring_2
+
+		weighted_child:
+		{
+			rarity: common
+			stat wisdom: 1
+		}			
+	}
+}
