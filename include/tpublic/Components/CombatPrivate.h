@@ -27,6 +27,20 @@ namespace tpublic
 
 			}
 
+			void
+			Reset()
+			{
+				m_weaponDamageRangeMin = 0;
+				m_weaponDamageRangeMax = 0;
+				m_weaponCooldown = 0;
+				m_physicalCriticalStrikeChance = (5 * uint64_t(UINT32_MAX) / 100);
+				m_magicalCriticalStrikeChance = (5 * uint64_t(UINT32_MAX) / 100);
+				m_dodgeChance = (5 * uint64_t(UINT32_MAX) / 100);
+				m_parryChance = (5 * uint64_t(UINT32_MAX) / 100);
+				m_missChance = (5 * uint64_t(UINT32_MAX) / 100);
+				m_blockChance = (5 * uint64_t(UINT32_MAX) / 100);
+			}
+
 			// ComponentBase implementation
 			void
 			FromSource(
@@ -130,7 +144,7 @@ namespace tpublic
 			void
 			DebugPrint() const override
 			{
-				printf("combat_private: weapon_damage_range=%u-%u weapon_cooldown=%d phys_crit=%.f mag_crit=%.f dodge=%.f parry=%.f miss=%.f block=%.f\n",
+				printf("combat_private: weapon_damage_range=%u-%u weapon_cooldown=%d phys_crit=%f mag_crit=%f dodge=%f parry=%f miss=%f block=%f\n",
 					m_weaponDamageRangeMin,
 					m_weaponDamageRangeMax,
 					m_weaponCooldown,
@@ -146,12 +160,12 @@ namespace tpublic
 			uint32_t							m_weaponDamageRangeMin = 0;
 			uint32_t							m_weaponDamageRangeMax = 0;
 			int32_t								m_weaponCooldown = 0;
-			uint32_t							m_physicalCriticalStrikeChance = (5 * uint64_t(UINT32_MAX) / 100);
-			uint32_t							m_magicalCriticalStrikeChance = (5 * uint64_t(UINT32_MAX) / 100);
-			uint32_t							m_dodgeChance = (5 * uint64_t(UINT32_MAX) / 100);
-			uint32_t							m_parryChance = (5 * uint64_t(UINT32_MAX) / 100);
-			uint32_t							m_missChance = (5 * uint64_t(UINT32_MAX) / 100);
-			uint32_t							m_blockChance = (5 * uint64_t(UINT32_MAX) / 100);
+			uint32_t							m_physicalCriticalStrikeChance = 0;
+			uint32_t							m_magicalCriticalStrikeChance = 0;
+			uint32_t							m_dodgeChance = 0;
+			uint32_t							m_parryChance = 0;
+			uint32_t							m_missChance = 0;
+			uint32_t							m_blockChance = 0;
 		};
 
 	}

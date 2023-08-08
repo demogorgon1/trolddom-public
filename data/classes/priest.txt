@@ -27,9 +27,22 @@ class priest:
 	default_attack: attack
 	default_action_bar: [ attack minor_heal gaze_of_death dont_touch_me_bro immortality push ]
 	
-	start_map test_world: [ test_world_player_spawn ]
-	
+	start_map test_world: [ test_world_player_spawn ]	
 	start_equipment main_hand: weapon_gnarly_staff
+	
+	stats_conversion:
+	{
+		str_to_dps: [ 1 1 ]
+		str_weapon_damage_min: [ 1 2 ]
+		str_weapon_damage_max: [ 3 2 ]
+		dex_to_phys_crit: [ 1 20 ]
+		dex_to_dodge: [ 1 20 ]
+		dex_to_parry: [ 1 25 ]
+		str_to_parry: [ 1 40 ]
+		wis_to_mag_crit: [ 1 30 ]
+		con_to_health: [ 10 1 ]
+		wis_to_mana: [ 10 1 ]
+	}	
 
 	level_progression:
 	[

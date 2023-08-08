@@ -267,6 +267,131 @@ namespace tpublic
 				std::vector<std::unique_ptr<LevelProgressionLevel>>	m_levels;
 			};
 
+			struct StatsConversionEntry
+			{
+				void	
+				ToStream(
+					IWriter*				aStream) const 
+				{
+					aStream->WriteUInt(m_numerator);
+					aStream->WriteUInt(m_denominator);
+				}
+			
+				bool	
+				FromStream(
+					IReader*				aStream) 
+				{
+					if(!aStream->ReadUInt(m_numerator))
+						return false;
+					if (!aStream->ReadUInt(m_denominator))
+						return false;
+					return true;
+				}
+
+				void
+				FromSource(
+					const Parser::Node*		aSource)
+				{
+					TP_VERIFY(aSource->m_type == Parser::Node::TYPE_ARRAY && aSource->m_children.size() == 2, aSource->m_debugInfo, "Not a valid stats conversion.");
+					m_numerator = aSource->m_children[0]->GetUInt32();
+					m_denominator = aSource->m_children[1]->GetUInt32();
+				}
+
+				// Public data
+				uint32_t											m_numerator = 0;
+				uint32_t											m_denominator = 1;
+			};
+
+			struct StatsConversion
+			{
+				void
+				FromSource(
+					const Parser::Node* aNode)
+				{
+					aNode->ForEachChild([&](
+						const Parser::Node* aItem)
+					{						
+						if (aItem->m_name == "str_to_dps")
+							m_strToDps.FromSource(aItem);
+						else if (aItem->m_name == "str_weapon_damage_min")
+							m_strWeaponDamageMin.FromSource(aItem);
+						else if (aItem->m_name == "str_weapon_damage_max")
+							m_strWeaponDamageMax.FromSource(aItem);
+						else if (aItem->m_name == "dex_to_phys_crit")
+							m_dexToPhysCrit.FromSource(aItem);
+						else if (aItem->m_name == "dex_to_dodge")
+							m_dexToDodge.FromSource(aItem);
+						else if (aItem->m_name == "dex_to_parry")
+							m_dexToParry.FromSource(aItem);
+						else if (aItem->m_name == "str_to_parry")
+							m_strToParry.FromSource(aItem);
+						else if (aItem->m_name == "wis_to_mag_crit")
+							m_wisToMagCrit.FromSource(aItem);
+						else if (aItem->m_name == "con_to_health")
+							m_conToHealth.FromSource(aItem);
+						else if (aItem->m_name == "wis_to_mana")
+							m_wisToMana.FromSource(aItem);
+						else
+							TP_VERIFY(false, aItem->m_debugInfo, "'%s' not a valid item.", aItem->m_name.c_str());
+					});
+				}
+
+				void	
+				ToStream(
+					IWriter*				aStream) const 
+				{
+					m_strToDps.ToStream(aStream);
+					m_strWeaponDamageMin.ToStream(aStream);
+					m_strWeaponDamageMax.ToStream(aStream);
+					m_dexToPhysCrit.ToStream(aStream);
+					m_dexToDodge.ToStream(aStream);
+					m_dexToParry.ToStream(aStream);
+					m_strToParry.ToStream(aStream);
+					m_wisToMagCrit.ToStream(aStream);
+					m_conToHealth.ToStream(aStream);
+					m_wisToMana.ToStream(aStream);
+				}
+			
+				bool	
+				FromStream(
+					IReader*				aStream) 
+				{
+					if (!m_strToDps.FromStream(aStream))
+						return false;
+					if (!m_strWeaponDamageMin.FromStream(aStream))
+						return false;
+					if (!m_strWeaponDamageMax.FromStream(aStream))
+						return false;
+					if (!m_dexToPhysCrit.FromStream(aStream))
+						return false;
+					if (!m_dexToDodge.FromStream(aStream))
+						return false;
+					if (!m_dexToParry.FromStream(aStream))
+						return false;
+					if (!m_strToParry.FromStream(aStream))
+						return false;
+					if (!m_wisToMagCrit.FromStream(aStream))
+						return false;
+					if (!m_conToHealth.FromStream(aStream))
+						return false;
+					if (!m_wisToMana.FromStream(aStream))
+						return false;
+					return true;
+				}
+
+				// Public data
+				StatsConversionEntry								m_strToDps;
+				StatsConversionEntry								m_strWeaponDamageMin;
+				StatsConversionEntry								m_strWeaponDamageMax;
+				StatsConversionEntry								m_dexToPhysCrit;
+				StatsConversionEntry								m_dexToDodge;
+				StatsConversionEntry								m_dexToParry;
+				StatsConversionEntry								m_strToParry;
+				StatsConversionEntry								m_wisToMagCrit;
+				StatsConversionEntry								m_conToHealth;
+				StatsConversionEntry								m_wisToMana;
+			};
+
 			void
 			Verify() const
 			{
@@ -335,6 +460,10 @@ namespace tpublic
 					{
 						m_startMaps.push_back(std::make_unique<StartMap>(aMember));
 					}
+					else if(aMember->m_name == "stats_conversion")
+					{
+						m_statsConversion.FromSource(aMember);
+					}
 					else
 					{
 						TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
@@ -358,6 +487,7 @@ namespace tpublic
 				aStream->WritePOD(m_color1);
 				aStream->WritePOD(m_color2);
 				aStream->WriteObjectPointers(m_startMaps);
+				m_statsConversion.ToStream(aStream);
 			}
 			
 			bool	
@@ -388,6 +518,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadObjectPointers(m_startMaps))
 					return false;
+				if(!m_statsConversion.FromStream(aStream))
+					return false;
 				return true;
 			}
 
@@ -403,6 +535,7 @@ namespace tpublic
 			std::vector<StartEquipment>								m_startEquipment;
 			ActionBar												m_defaultActionBar;
 			std::vector<std::unique_ptr<StartMap>>					m_startMaps;
+			StatsConversion											m_statsConversion;
 		};
 
 	}
