@@ -46,6 +46,14 @@ namespace tpublic
 				return true;
 			}
 
+			void
+			DebugPrint() const override
+			{
+				printf("player_public: class=%u", m_classId);
+				m_stats.DebugPrint();
+				printf("\n");				
+			}
+
 			// Public data
 			uint32_t			m_classId = 0;
 			Stat::Collection	m_stats;

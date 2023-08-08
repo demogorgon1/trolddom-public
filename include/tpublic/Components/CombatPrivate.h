@@ -127,6 +127,21 @@ namespace tpublic
 				return true;
 			}
 
+			void
+			DebugPrint() const override
+			{
+				printf("combat_private: weapon_damage_range=%u-%u weapon_cooldown=%d phys_crit=%.f mag_crit=%.f dodge=%.f parry=%.f miss=%.f block=%.f\n",
+					m_weaponDamageRangeMin,
+					m_weaponDamageRangeMax,
+					m_weaponCooldown,
+					(m_physicalCriticalStrikeChance / (float)UINT32_MAX) * 100.0f,
+					(m_magicalCriticalStrikeChance / (float)UINT32_MAX) * 100.0f,
+					(m_dodgeChance / (float)UINT32_MAX) * 100.0f,
+					(m_parryChance / (float)UINT32_MAX) * 100.0f,
+					(m_missChance / (float)UINT32_MAX) * 100.0f,
+					(m_blockChance / (float)UINT32_MAX) * 100.0f);
+			}
+
 			// Public data
 			uint32_t							m_weaponDamageRangeMin = 0;
 			uint32_t							m_weaponDamageRangeMax = 0;

@@ -229,6 +229,15 @@ namespace tpublic
 				return true;
 			}
 
+			void
+			DebugPrint() const override
+			{
+				printf("combat_public: target=%u level=%u faction=%u combat_group=%zu", m_targetEntityInstanceId, m_level, m_factionId, m_combatGroupId);
+				for(const ResourceEntry& resource : m_resources)
+					printf(" %s=%u/%u", Resource::GetInfo((Resource::Id)resource.m_id)->m_name, resource.m_current, resource.m_max);
+				printf("\n");
+			}
+
 			// Public data
 			uint32_t						m_targetEntityInstanceId = 0;
 

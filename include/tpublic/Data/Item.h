@@ -141,6 +141,7 @@ namespace tpublic
 					IWriter*			aStream) const
 				{
 					aStream->WriteObjects(m_properties);
+					aStream->WriteObjects(m_addedStats);
 					aStream->WriteString(m_name);
 					aStream->WriteString(m_suffix);
 					aStream->WriteUInt(m_iconSpriteId);
@@ -155,6 +156,8 @@ namespace tpublic
 					IReader*			aStream)
 				{
 					if(!aStream->ReadObjects(m_properties))
+						return false;
+					if (!aStream->ReadObjects(m_addedStats))
 						return false;
 					if (!aStream->ReadString(m_name))
 						return false;

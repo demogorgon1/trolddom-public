@@ -88,6 +88,7 @@ namespace tpublic
 										IReader*				/*aStream*/) { assert(false); return true; }
 		virtual void				OnLoadedFromPersistence(
 										const Manifest*			/*aManifest*/) { }
+		virtual void				DebugPrint() const { printf("%s: <no debug print>\n", Component::IdToString(m_componentId)); }
 
 		// Data access
 		uint32_t					GetComponentId() const { return m_componentId; }

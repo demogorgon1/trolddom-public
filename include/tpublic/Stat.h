@@ -116,6 +116,18 @@ namespace tpublic
 				return true;
 			}
 
+			void
+			DebugPrint() const
+			{
+				for (uint32_t i = 1; i < (uint32_t)NUM_IDS; i++)
+				{
+					uint32_t value = m_stats[i];
+					
+					if(value > 0)
+						printf(" %s=%u", GetInfo((Id)i)->m_shortName, value);
+				}
+			}
+
 			// Public data
 			uint32_t		m_stats[NUM_IDS] = { 0 };
 		};
