@@ -162,15 +162,31 @@ namespace tpublic
 						const Parser::Node* aMember)
 					{						
 						if (aMember->m_name == "level")
+						{
 							m_level = aMember->GetUInt32();
+						}
 						else if (aMember->m_name == "unlock_abilities")
+						{
 							aMember->GetIdArray(DataType::ID_ABILITY, m_unlockAbilities);
+						}
 						else if (aMember->m_name == "stats")
+						{
 							m_stats.FromSource(aMember);
+						}
 						else if(aMember->m_tag == "resource")
+						{
 							m_resourceUpdates.push_back(LevelProgressionLevelResourceUpdate(aMember));
+						}
+						else if(aMember->m_name == "add_unarmed_weapon_damage")
+						{
+							TP_VERIFY(aMember->m_type == Parser::Node::TYPE_ARRAY && aMember->m_children.size() == 2, aMember->m_debugInfo, "Not a valid range.");
+							m_addUnarmedWeaponDamageMin = aMember->m_children[0]->GetUInt32();
+							m_addUnarmedWeaponDamageMax = aMember->m_children[1]->GetUInt32();
+						}
 						else
+						{
 							TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
+						}
 					});
 				}
 
@@ -182,6 +198,8 @@ namespace tpublic
 					aStream->WriteUInts(m_unlockAbilities);
 					m_stats.ToStream(aStream);
 					aStream->WriteObjects(m_resourceUpdates);
+					aStream->WriteUInt(m_addUnarmedWeaponDamageMin);
+					aStream->WriteUInt(m_addUnarmedWeaponDamageMax);
 				}
 			
 				bool	
@@ -196,6 +214,10 @@ namespace tpublic
 						return false;
 					if(!aStream->ReadObjects(m_resourceUpdates))
 						return false;
+					if (!aStream->ReadUInt(m_addUnarmedWeaponDamageMin))
+						return false;
+					if (!aStream->ReadUInt(m_addUnarmedWeaponDamageMax))
+						return false;
 					return true;
 				}
 
@@ -204,6 +226,8 @@ namespace tpublic
 				std::vector<uint32_t>								m_unlockAbilities;
 				Stat::Collection									m_stats;
 				std::vector<LevelProgressionLevelResourceUpdate>	m_resourceUpdates;
+				uint32_t											m_addUnarmedWeaponDamageMin = 0;
+				uint32_t											m_addUnarmedWeaponDamageMax = 0;
 			};
 
 			struct LevelProgression

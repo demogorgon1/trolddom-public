@@ -41,6 +41,8 @@ class sorcerer:
 			
 			resource health: { add_max: 60 }
 			resource mana: { add_max: 60 }
+			
+			add_unarmed_weapon_damage: [ 2 4 ]			
 		}
 	]
 }

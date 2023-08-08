@@ -73,7 +73,6 @@ class fighter:
 	default_action_bar: [ fighter_attack knock strike gaze_of_death throw_rock dont_touch_me_bro immortality push ]
 
 	start_map test_world: [ test_world_player_spawn ]
-	
 	start_equipment main_hand: weapon_the_dev_tool
 
 	level_progression:
@@ -103,6 +102,8 @@ class fighter:
 			
 			resource health: { add_max: 80 }
 			resource rage: { add_max: 100 }
+			
+			add_unarmed_weapon_damage: [ 2 4 ]
 		}
 	]
 }
