@@ -27,6 +27,7 @@ namespace tpublic
 		uint32_t				m_iconSpriteId = 0;
 		Stat::Collection		m_stats;
 		uint32_t				m_properties[Data::Item::NUM_PROPERTY_TYPES] = { 0 };
+		bool					m_isWeapon = false;
 
 	private:
 

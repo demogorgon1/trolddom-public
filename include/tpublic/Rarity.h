@@ -23,18 +23,19 @@ namespace tpublic
 		{
 			const char* m_name;
 			const char* m_displayName;
+			uint8_t		m_color[3];
 		};
 
 		// IMPORTANT: Must match Id enum
 		static constexpr const Info INFO[] =
 		{
-			{ NULL, NULL },
+			{ NULL, NULL,				{ 255, 255, 255 } },
 
-			{ "common",		"Common" },
-			{ "uncommon",	"Uncommon" },
-			{ "rare",		"Rare" },
-			{ "epic",		"Epic" },
-			{ "mythic",		"Mythic" }
+			{ "common",		"Common",	{ 255, 255, 255 } },
+			{ "uncommon",	"Uncommon",	{ 10, 232, 90 } },
+			{ "rare",		"Rare",		{ 67, 173, 225 } },
+			{ "epic",		"Epic",		{ 215, 80, 219 } },
+			{ "mythic",		"Mythic",	{ 255, 207, 107 } }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

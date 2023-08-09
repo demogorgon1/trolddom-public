@@ -11,7 +11,7 @@ item ring_iron_ring:
 
 		weighted_child:
 		{
-			rarity: common
+			rarity: uncommon
 			stat strength: 1
 		}			
 	}
@@ -30,7 +30,7 @@ item ring_sapphire_ring:
 
 		weighted_child:
 		{
-			rarity: common
+			rarity: uncommon
 			stat wisdom: 1
 		}			
 	}

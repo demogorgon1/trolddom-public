@@ -76,6 +76,8 @@ namespace tpublic
 
 			_Generate(aRandom, aManifest, chosen);
 		}
+
+		m_isWeapon = m_properties[Data::Item::PROPERTY_TYPE_WEAPON_COOLDOWN] != 0;
 	}
 
 }

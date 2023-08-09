@@ -56,11 +56,11 @@ namespace tpublic
 			{ "hands",		"Hands" },
 			{ "back",		"Back" },
 			{ "neck",		"Neck" },
-			{ "finger_1",	"Finger 1" },
-			{ "finger_2",	"Finger 2" },
-			{ "bag_1",		"Bag 1" },
-			{ "bag_2",		"Bag 2" },
-			{ "bag_3",		"Bag 3" }
+			{ "finger_1",	"Finger" },
+			{ "finger_2",	"Finger" },
+			{ "bag_1",		"Bag" },
+			{ "bag_2",		"Bag" },
+			{ "bag_3",		"Bag" }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);
