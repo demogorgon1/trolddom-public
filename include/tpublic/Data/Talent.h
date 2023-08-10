@@ -13,6 +13,52 @@ namespace tpublic
 		{
 			static const DataType::Id DATA_TYPE = DataType::ID_TALENT;
 
+			struct Point
+			{
+				Point()
+				{
+
+				}
+
+				Point(
+					const Parser::Node*	aSource)
+				{
+					aSource->ForEachChild([&](
+						const Parser::Node*	aChild)
+					{
+						if (aChild->m_name == "ability")
+							m_abilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
+						else if (aChild->m_name == "aura")
+							m_abilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_AURA, aChild->GetIdentifier());
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					});
+				}
+
+				void
+				ToStream(
+					IWriter*			aStream) const
+				{
+					aStream->WriteUInt(m_abilityId);
+					aStream->WriteUInt(m_auraId);
+				}
+
+				bool
+				FromStream(
+					IReader*			aStream)
+				{
+					if (!aStream->ReadUInt(m_abilityId))
+						return false;
+					if (!aStream->ReadUInt(m_auraId))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t				m_abilityId = 0;
+				uint32_t				m_auraId = 0;
+			};
+
 			void
 			Verify() const
 			{
@@ -22,8 +68,26 @@ namespace tpublic
 			// Base implementation
 			void
 			FromSource(
-				const Parser::Node*		/*aNode*/) override
+				const Parser::Node*		aSource) override
 			{
+				aSource->ForEachChild([&](
+					const Parser::Node*	aChild)
+				{
+					if(aChild->m_name == "string")
+						m_string = aChild->GetString();
+					else if (aChild->m_name == "icon")
+						m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
+					else if (aChild->m_name == "talent_tree")
+						m_talentTreeId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TALENT_TREE, aChild->GetIdentifier());
+					else if (aChild->m_name == "prerequisites")
+						aChild->GetIdArray(DataType::ID_TALENT, m_prerequisites);
+					else if (aChild->m_name == "talent_tree_points_required")
+						m_talentTreePointsRequired = aChild->GetUInt32();
+					else if (aChild->m_name == "points")
+						aChild->GetObjectArray(m_points);
+					else
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+				});
 			}
 
 			void
@@ -31,6 +95,12 @@ namespace tpublic
 				IWriter*				aStream) const override
 			{
 				ToStreamBase(aStream);
+				aStream->WriteString(m_string);
+				aStream->WriteUInt(m_iconSpriteId);
+				aStream->WriteUInt(m_talentTreeId);
+				aStream->WriteUInts(m_prerequisites);
+				aStream->WriteUInt(m_talentTreePointsRequired);
+				aStream->WriteObjects(m_points);
 			}
 
 			bool
@@ -39,10 +109,28 @@ namespace tpublic
 			{
 				if (!FromStreamBase(aStream))
 					return false;
+				if(!aStream->ReadString(m_string))
+					return false;
+				if (!aStream->ReadUInt(m_iconSpriteId))
+					return false;
+				if (!aStream->ReadUInt(m_talentTreeId))
+					return false;
+				if(!aStream->ReadUInts(m_prerequisites))
+					return false;
+				if (!aStream->ReadUInt(m_talentTreePointsRequired))
+					return false;
+				if(!aStream->ReadObjects(m_points))
+					return false;
 				return true;
 			}
 
 			// Public data
+			std::string				m_string;
+			uint32_t				m_iconSpriteId = 0;
+			uint32_t				m_talentTreeId = 0;
+			std::vector<uint32_t>	m_prerequisites;
+			uint32_t				m_talentTreePointsRequired = 0;
+			std::vector<Point>		m_points;
 		};
 
 

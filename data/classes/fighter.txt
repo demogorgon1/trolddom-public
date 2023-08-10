@@ -1,3 +1,64 @@
+talent_tree fighter_protection:
+{
+	string: "Protection"
+	icon: icon_fighter_protection
+}
+
+talent fighter_protection_stoicism:
+{
+	string: "Stoicism"
+	icon: icon_star_1
+	talent_tree: fighter_protection
+	prerequisites: [ ]	
+	talent_tree_points_required: 0
+	points:
+	[
+		{ aura: fighter_protection_stoicism_1 }
+		{ aura: fighter_protection_stoicism_2 }
+		{ aura: fighter_protection_stoicism_3 }
+	]
+}
+
+aura fighter_protection_stoicism_1:
+{
+	type: hidden
+}
+
+aura fighter_protection_stoicism_2:
+{
+	type: hidden
+}
+
+aura fighter_protection_stoicism_3:
+{
+	type: hidden
+}
+
+talent fighter_protection_knock:
+{
+	string: "Knock"
+	icon: icon_knock
+	talent_tree: fighter_protection
+	prerequisites: [ fighter_protection_stoicism ]
+	talent_tree_points_required: 0
+	points:
+	[
+		{ ability: knock }
+	]
+}
+
+talent_tree fighter_subtlety:
+{
+	string: "Subtlety"
+	icon: icon_fighter_subtlety
+}
+
+talent_tree fighter_combat:
+{
+	string: "Combat"
+	icon: icon_fighter_combat
+}
+
 aura knock:
 {
 	string: "Knock"

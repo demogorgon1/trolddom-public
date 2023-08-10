@@ -166,9 +166,22 @@ namespace tpublic
 				}
 			}
 
+			template <typename _T>
+			void
+			GetObjectArray(
+				std::vector<_T>&				aOut) const
+			{
+				TP_VERIFY(m_type == TYPE_ARRAY, m_debugInfo, "Not an array.");
+				for (const std::unique_ptr<Node>& child : m_children)
+				{
+					_T object(child->GetObject());
+					aOut.push_back(object);
+				}
+			}
+
 			bool
 			IsIdentifier(
-				const char*					aString) const
+				const char*						aString) const
 			{
 				return m_type == TYPE_IDENTIFIER && m_value == aString;
 			}

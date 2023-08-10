@@ -13,9 +13,9 @@ sprites:
 	sprite icon_staff_1 : { }
 	sprite icon_stun : { }
 	sprite icon_mail_pants_1 : { }
-	sprite icon_copper_single : { }
-	sprite icon_silver_single : { }
-	sprite icon_gold_single : { }
+	sprite icon_fighter_protection : { }
+	sprite icon_fighter_subtlety : { }
+	sprite icon_fighter_combat : { }
 	sprite icon_copper_multi : { }
 	sprite icon_silver_multi : { }
 	sprite icon_gold_multi : { }
@@ -34,6 +34,7 @@ sprites:
 	sprite icon_boar_tusks : { }
 	sprite icon_ring_1 : { }
 	sprite icon_ring_2 : { }
+	sprite icon_star_1 : { }
 	
 }
 
