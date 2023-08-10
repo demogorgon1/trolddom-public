@@ -77,8 +77,6 @@ namespace tpublic
 						m_string = aChild->GetString();
 					else if (aChild->m_name == "icon")
 						m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
-					else if (aChild->m_name == "talent_tree")
-						m_talentTreeId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TALENT_TREE, aChild->GetIdentifier());
 					else if (aChild->m_name == "prerequisites")
 						aChild->GetIdArray(DataType::ID_TALENT, m_prerequisites);
 					else if (aChild->m_name == "talent_tree_points_required")
@@ -97,7 +95,6 @@ namespace tpublic
 				ToStreamBase(aStream);
 				aStream->WriteString(m_string);
 				aStream->WriteUInt(m_iconSpriteId);
-				aStream->WriteUInt(m_talentTreeId);
 				aStream->WriteUInts(m_prerequisites);
 				aStream->WriteUInt(m_talentTreePointsRequired);
 				aStream->WriteObjects(m_points);
@@ -113,8 +110,6 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInt(m_iconSpriteId))
 					return false;
-				if (!aStream->ReadUInt(m_talentTreeId))
-					return false;
 				if(!aStream->ReadUInts(m_prerequisites))
 					return false;
 				if (!aStream->ReadUInt(m_talentTreePointsRequired))
@@ -127,7 +122,6 @@ namespace tpublic
 			// Public data
 			std::string				m_string;
 			uint32_t				m_iconSpriteId = 0;
-			uint32_t				m_talentTreeId = 0;
 			std::vector<uint32_t>	m_prerequisites;
 			uint32_t				m_talentTreePointsRequired = 0;
 			std::vector<Point>		m_points;

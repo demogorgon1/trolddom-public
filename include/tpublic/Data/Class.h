@@ -464,6 +464,10 @@ namespace tpublic
 					{
 						m_statsConversion.FromSource(aMember);
 					}
+					else if (aMember->m_name == "talent_trees")
+					{
+						aMember->GetIdArray(DataType::ID_TALENT_TREE, m_talentTrees);
+					}
 					else
 					{
 						TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
@@ -488,6 +492,7 @@ namespace tpublic
 				aStream->WritePOD(m_color2);
 				aStream->WriteObjectPointers(m_startMaps);
 				m_statsConversion.ToStream(aStream);
+				aStream->WriteUInts(m_talentTrees);
 			}
 			
 			bool	
@@ -520,6 +525,8 @@ namespace tpublic
 					return false;
 				if(!m_statsConversion.FromStream(aStream))
 					return false;
+				if (!aStream->ReadUInts(m_talentTrees))
+					return false;
 				return true;
 			}
 
@@ -536,6 +543,7 @@ namespace tpublic
 			ActionBar												m_defaultActionBar;
 			std::vector<std::unique_ptr<StartMap>>					m_startMaps;
 			StatsConversion											m_statsConversion;
+			std::vector<uint32_t>									m_talentTrees;
 		};
 
 	}

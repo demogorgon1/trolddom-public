@@ -242,6 +242,29 @@ namespace tpublic
 		}
 
 		bool
+		ReadStrings(
+			std::vector<std::string>&				aOut,
+			size_t									aMaxArrayLength = 256,
+			size_t									aMaxStringLength = 256)
+		{
+			size_t count;
+			if(!ReadUInt(count))
+				return false;
+
+			if(count > aMaxArrayLength)
+				return false;
+
+			aOut.resize(count);
+			for(size_t i = 0; i < count; i++)
+			{
+				if(!ReadString(aOut[i], aMaxStringLength))
+					return false;
+			}
+
+			return true;
+		}
+
+		bool
 		ReadBool(
 			bool&									aOut)
 		{

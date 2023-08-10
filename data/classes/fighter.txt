@@ -2,13 +2,26 @@ talent_tree fighter_protection:
 {
 	string: "Protection"
 	icon: icon_fighter_protection
+	
+	map_palette:
+	{
+		talent fighter_protection_stoicism: "A"
+		talent fighter_protection_knock: "B"
+		sprite talent_tree_down_arrow: "d"
+	}
+	
+	map:
+	[
+		".A."
+		".d."
+		".B."
+	]
 }
 
 talent fighter_protection_stoicism:
 {
 	string: "Stoicism"
 	icon: icon_star_1
-	talent_tree: fighter_protection
 	prerequisites: [ ]	
 	talent_tree_points_required: 0
 	points:
@@ -38,7 +51,6 @@ talent fighter_protection_knock:
 {
 	string: "Knock"
 	icon: icon_knock
-	talent_tree: fighter_protection
 	prerequisites: [ fighter_protection_stoicism ]
 	talent_tree_points_required: 0
 	points:
@@ -132,6 +144,7 @@ class fighter:
 	color_2: [ 70 32 0 ] 
 	default_attack: fighter_attack
 	default_action_bar: [ fighter_attack knock strike gaze_of_death throw_rock dont_touch_me_bro immortality push ]
+	talent_trees: [ fighter_protection fighter_combat fighter_subtlety ]
 
 	start_map test_world: [ test_world_player_spawn ]
 	start_equipment main_hand: weapon_the_dev_tool

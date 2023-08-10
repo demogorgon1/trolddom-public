@@ -131,6 +131,15 @@ namespace tpublic
 		}
 
 		void
+		WriteStrings(
+			const std::vector<std::string>&			aStrings)
+		{
+			WriteUInt(aStrings.size());
+			for(const std::string& t : aStrings)
+				WriteString(t);
+		}
+
+		void
 		WriteBool(
 			bool									aValue)
 		{
