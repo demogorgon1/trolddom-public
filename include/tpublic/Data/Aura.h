@@ -133,6 +133,8 @@ namespace tpublic
 						m_auraEffects.push_back(std::make_unique<AuraEffectEntry>(aChild));
 					else if(aChild->m_name == "string")
 						m_string = aChild->GetString();
+					else if (aChild->m_name == "description")
+						m_description = aChild->GetString();
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 				});
@@ -149,6 +151,7 @@ namespace tpublic
 				aStream->WritePOD(m_flags);
 				aStream->WriteObjectPointers(m_auraEffects);
 				aStream->WriteString(m_string);
+				aStream->WriteString(m_description);
 			}
 
 			bool
@@ -169,11 +172,14 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadString(m_string))
 					return false;
+				if (!aStream->ReadString(m_description))
+					return false;
 				return true;
 			}
 
 			// Public data
 			std::string										m_string;
+			std::string										m_description;
 			uint32_t										m_iconSpriteId = 0;
 			int32_t											m_duration = 0;
 			Type											m_type = TYPE_HIDDEN;

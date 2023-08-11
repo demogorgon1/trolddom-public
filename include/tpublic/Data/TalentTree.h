@@ -128,6 +128,20 @@ namespace tpublic
 				VerifyBase();
 			}
 
+			void
+			ForEachTalent(
+				std::function<void(uint32_t)>	aCallback) const
+			{
+				if(m_mapPalette)
+				{
+					for (const MapPaletteEntry& t : m_mapPalette->m_entries)
+					{
+						if(t.m_type == MapPaletteEntry::TYPE_TALENT)
+							aCallback(t.m_id);
+					}
+				}
+			}
+
 			// Base implementation
 			void
 			FromSource(

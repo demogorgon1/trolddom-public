@@ -53,6 +53,30 @@ namespace tpublic
 
 			}
 
+			bool
+			HasTalent(
+				uint32_t		aTalentId) const
+			{
+				for(const Entry& t : m_entries)
+				{
+					if(t.m_talentId == aTalentId)
+						return true;
+				}
+				return false;
+			}
+
+			uint32_t
+			GetPoints(
+				uint32_t		aTalentId) const
+			{
+				for (const Entry& t : m_entries)
+				{
+					if (t.m_talentId == aTalentId)
+						return t.m_points;
+				}
+				return 0;
+			}
+
 			// ComponentBase implementation
 			void
 			ToStream(

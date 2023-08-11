@@ -237,6 +237,8 @@ namespace tpublic
 				{
 					if(aMember->m_name == "string")
 						m_displayName = aMember->GetString();
+					else if (aMember->m_name == "description")
+						m_displayName = aMember->GetString();
 					else if (aMember->m_name == "range")
 						m_range = aMember->GetUInt32();
 					else if (aMember->m_name == "aoe_radius")
@@ -276,6 +278,7 @@ namespace tpublic
 			{
 				ToStreamBase(aWriter);
 				aWriter->WriteString(m_displayName);
+				aWriter->WriteString(m_description);
 				aWriter->WriteUInt(m_range);
 				aWriter->WriteInt(m_speed);
 				aWriter->WriteInt(m_delay);
@@ -301,6 +304,8 @@ namespace tpublic
 				if(!FromStreamBase(aReader))
 					return false;
 				if(!aReader->ReadString(m_displayName))
+					return false;
+				if (!aReader->ReadString(m_description))
 					return false;
 				if (!aReader->ReadUInt(m_range))
 					return false;
@@ -340,6 +345,7 @@ namespace tpublic
 
 			// Public data
 			std::string											m_displayName;
+			std::string											m_description;
 			uint32_t											m_range = 1;
 			int32_t												m_speed = 0;
 			int32_t												m_delay = 0;

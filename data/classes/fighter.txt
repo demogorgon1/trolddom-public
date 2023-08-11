@@ -35,16 +35,19 @@ talent fighter_protection_stoicism:
 aura fighter_protection_stoicism_1:
 {
 	type: hidden
+	description: "Increases your Constitution by 2%."
 }
 
 aura fighter_protection_stoicism_2:
 {
 	type: hidden
+	description: "Increases your Constitution by 4%."
 }
 
 aura fighter_protection_stoicism_3:
 {
 	type: hidden
+	description: "Increases your Constitution by 6%."
 }
 
 talent fighter_protection_knock:
@@ -55,7 +58,7 @@ talent fighter_protection_knock:
 	talent_tree_points_required: 0
 	points:
 	[
-		{ ability: knock }
+		{ ability: knock }		
 	]
 }
 
@@ -74,7 +77,7 @@ talent_tree fighter_combat:
 aura knock:
 {
 	string: "Knock"
-	icon: icon_stun	
+	icon: icon_stun		
 	type: debuff
 	duration: 30	
 	aura_effect stun: { }
@@ -83,6 +86,7 @@ aura knock:
 ability knock:
 {
 	string: "Knock"
+	description: "Stuns target for 3 seconds."
 	range: 1
 	cooldown: 100
 	flags: [ target_other target_hostile can_be_dodged can_be_parried can_miss ]

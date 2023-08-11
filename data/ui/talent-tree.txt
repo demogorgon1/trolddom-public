@@ -1,10 +1,10 @@
 sprites:
 {
 	source: "talent-tree.png"
+
+	size: { width: 22 height: 22 }
 	
 	cursor: { position: [ 0 0 ] }
-	size: { width: 22 height: 22 }
-
 	sprite talent_tree_down_arrow: { }
 	sprite talent_tree_down: { }
 	sprite talent_tree_horizontal : { }
@@ -15,6 +15,12 @@ sprites:
 	sprite talent_tree_t : { }
 	sprite talent_tree_t_inverted : { }
 	sprite talent_tree_t_arrow : { }
+	sprite talent_tree_cell : { }
+
+	cursor: { position: [ 0 22 ] }
+	sprite talent_tree_cell_yellow_bright : { }
+	sprite talent_tree_cell_green : { }
+	sprite talent_tree_cell_yellow : { }
 	
 }
 
