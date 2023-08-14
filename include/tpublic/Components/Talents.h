@@ -77,6 +77,50 @@ namespace tpublic
 				return 0;
 			}
 
+			bool
+			AddPoint(
+				uint32_t		aTalentId,
+				uint32_t		aMaxPoints) 
+			{
+				if(m_availablePoints == 0)
+					return false;
+
+				for (Entry& existing : m_entries)
+				{
+					if(existing.m_talentId == aTalentId)
+					{
+						if(existing.m_points < aMaxPoints)
+						{
+							existing.m_points++;
+							m_availablePoints--;
+							return true;
+						}
+						else
+						{
+							return false;
+						}
+					}
+				}
+
+				m_availablePoints--;
+				m_entries.push_back({ aTalentId, 1 });
+				return true;
+			}
+
+			bool
+			ResetPoints()
+			{
+				if(m_entries.size() == 0)
+					return false;
+
+				for (Entry& t : m_entries)
+					m_availablePoints += t.m_points;
+
+				m_entries.clear();
+
+				return true;
+			}
+
 			// ComponentBase implementation
 			void
 			ToStream(
