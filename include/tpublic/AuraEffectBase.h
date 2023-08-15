@@ -5,6 +5,7 @@
 #include "IReader.h"
 #include "IWriter.h"
 #include "Parser.h"
+#include "Stat.h"
 
 namespace tpublic
 {
@@ -104,6 +105,10 @@ namespace tpublic
 		virtual int32_t			FilterDamageInput(
 									DirectEffect::DamageType	/*aDamageType*/,
 									int32_t						aDamage) const { return aDamage; }
+		virtual bool			GetStatModifier(
+									Stat::Id					/*aStat*/,
+									uint32_t&					/*aOutNum*/,
+									uint32_t&					/*aOutDenom*/) const { return false; }		
 
 		// Public data
 		int32_t			m_updateInterval = 0;

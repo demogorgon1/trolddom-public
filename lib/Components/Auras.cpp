@@ -2,6 +2,8 @@
 
 #include <tpublic/Components/Auras.h>
 
+#include <tpublic/Helpers.h>
+
 namespace tpublic::Components
 {
 
@@ -37,6 +39,20 @@ namespace tpublic::Components
 		}
 						
 		return damage;
+	}
+
+	void		
+	Auras::RemoveAura(
+		uint32_t						aAuraId)
+	{
+		for(size_t i = 0; i < m_entries.size(); i++)
+		{
+			if(m_entries[i]->m_auraId == aAuraId)
+			{
+				Helpers::RemoveCyclicFromVector(m_entries, i);
+				i--;
+			}
+		}
 	}
 
 	//------------------------------------------------------------------------

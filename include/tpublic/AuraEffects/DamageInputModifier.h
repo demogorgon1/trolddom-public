@@ -36,7 +36,7 @@ namespace tpublic
 				{
 					if(aChild->m_name == "type_mask")
 					{
-						aChild->ForEachChild([&](
+						aChild->GetArray()->ForEachChild([&](
 							const Parser::Node* aFlag)
 						{
 							if(aFlag->IsIdentifier("all"))
@@ -49,6 +49,12 @@ namespace tpublic
 								m_typeMask |= 1 << (uint32_t)damageType;
 							}
 						});
+					}
+					else if (aChild->m_name == "multiplier")
+					{
+						float f = aChild->GetFloat();
+						m_multiplierNumerator = (uint32_t)(f * 1000.0f);
+						m_multiplierDenominator = 1000;
 					}
 					else if (aChild->m_name == "multiplier_num")
 					{

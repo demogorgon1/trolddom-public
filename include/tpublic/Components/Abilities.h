@@ -27,6 +27,18 @@ namespace tpublic
 
 			}
 
+			bool
+			IsAbilityAvailable(
+				uint32_t				aAbilityId) const
+			{
+				for(uint32_t abilityId : m_available)
+				{
+					if(abilityId == aAbilityId)
+						return true;
+				}
+				return false;
+			}
+
 			// ComponentBase implementation
 			void	
 			ToStream(

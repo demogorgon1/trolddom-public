@@ -16,6 +16,14 @@ namespace tpublic
 			Write(&aValue, sizeof(aValue));
 		}
 
+		void
+		WriteFloat(
+			float									aValue)
+		{
+			// FIXME: some clever encoding
+			Write(&aValue, sizeof(aValue));
+		}
+
 		template <typename _T>
 		void
 		WriteInt(

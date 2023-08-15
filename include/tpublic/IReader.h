@@ -20,6 +20,14 @@ namespace tpublic
 			return Read(&aOut, sizeof(aOut)) == sizeof(aOut);
 		}
 
+		bool
+		ReadFloat(
+			float&									aOut)
+		{
+			// FIXME: clever encoding
+			return Read(&aOut, sizeof(float)) == sizeof(float);
+		}
+
 		template <typename _T>
 		bool	
 		ReadInt(

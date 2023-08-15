@@ -36,18 +36,21 @@ aura fighter_protection_stoicism_1:
 {
 	type: hidden
 	description: "Increases your Constitution by 2%."
+	stat_modifiers: { constitution: { add_percent: 2 } }
 }
 
 aura fighter_protection_stoicism_2:
 {
 	type: hidden
 	description: "Increases your Constitution by 4%."
+	stat_modifiers: { constitution: { add_percent: 4 } }
 }
 
 aura fighter_protection_stoicism_3:
 {
 	type: hidden
 	description: "Increases your Constitution by 6%."
+	stat_modifiers: { constitution: { add_percent: 6 } }
 }
 
 talent fighter_protection_knock:
@@ -147,7 +150,7 @@ class fighter:
 	color_1: [ 128 32 0 ] 
 	color_2: [ 70 32 0 ] 
 	default_attack: fighter_attack
-	default_action_bar: [ fighter_attack knock strike gaze_of_death throw_rock dont_touch_me_bro immortality push ]
+	default_action_bar: [ fighter_attack strike gaze_of_death throw_rock dont_touch_me_bro immortality push ]
 	talent_trees: [ fighter_protection fighter_combat fighter_subtlety ]
 
 	start_map test_world: [ test_world_player_spawn ]
@@ -174,7 +177,6 @@ class fighter:
 			[
 				fighter_attack
 				strike
-				knock
 				gaze_of_death
 				throw_rock
 				dont_touch_me_bro

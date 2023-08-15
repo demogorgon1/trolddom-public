@@ -3,6 +3,7 @@
 #include "../AuraEffectBase.h"
 #include "../AuraEffectFactory.h"
 #include "../DataBase.h"
+#include "../StatModifiers.h"
 
 namespace tpublic
 {
@@ -135,6 +136,8 @@ namespace tpublic
 						m_string = aChild->GetString();
 					else if (aChild->m_name == "description")
 						m_description = aChild->GetString();
+					else if(aChild->m_name == "stat_modifiers")
+						m_statModifiers = std::make_unique<StatModifiers>(aChild);
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 				});
@@ -152,6 +155,7 @@ namespace tpublic
 				aStream->WriteObjectPointers(m_auraEffects);
 				aStream->WriteString(m_string);
 				aStream->WriteString(m_description);
+				aStream->WriteOptionalObjectPointer(m_statModifiers);
 			}
 
 			bool
@@ -174,6 +178,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadString(m_description))
 					return false;
+				if(!aStream->ReadOptionalObjectPointer(m_statModifiers))
+					return false;
 				return true;
 			}
 
@@ -185,6 +191,7 @@ namespace tpublic
 			Type											m_type = TYPE_HIDDEN;
 			uint8_t											m_flags = 0;
 			std::vector<std::unique_ptr<AuraEffectEntry>>	m_auraEffects;
+			std::unique_ptr<StatModifiers>					m_statModifiers;
 		};
 
 	}

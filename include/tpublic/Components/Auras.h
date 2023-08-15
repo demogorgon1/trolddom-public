@@ -27,7 +27,10 @@ namespace tpublic
 				{
 					aWriter->WriteUInt(m_auraId);
 					aWriter->WriteIntDelta(aWriter->GetTick(), m_start);
-					aWriter->WriteIntDelta(aWriter->GetTick(), m_end);
+
+					aWriter->WriteBool(m_end != 0);
+					if(m_end != 0)
+						aWriter->WriteIntDelta(aWriter->GetTick(), m_end);
 				}
 
 				bool
@@ -38,8 +41,20 @@ namespace tpublic
 						return false;
 					if (!aReader->ReadIntDelta(aReader->GetTick(), m_start))
 						return false;
-					if (!aReader->ReadIntDelta(aReader->GetTick(), m_end))
+					
+					bool hasEnd;
+					if(!aReader->ReadBool(hasEnd))
 						return false;
+
+					if(hasEnd)
+					{
+						if (!aReader->ReadIntDelta(aReader->GetTick(), m_end))
+							return false;
+					}
+					else
+					{
+						m_end = 0;
+					}
 					return true;
 				}
 
@@ -70,6 +85,8 @@ namespace tpublic
 			int32_t		FilterDamageInput(
 							DirectEffect::DamageType		aDamageType,
 							int32_t							aDamage) const;
+			void		RemoveAura(
+							uint32_t						aAuraId);
 
 			// ComponentBase implementation
 			void		ToStream(
