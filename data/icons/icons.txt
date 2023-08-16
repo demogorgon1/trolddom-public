@@ -35,6 +35,7 @@ sprites:
 	sprite icon_ring_1 : { }
 	sprite icon_ring_2 : { }
 	sprite icon_star_1 : { }
+	sprite icon_star_2 : { }
 	
 }
 

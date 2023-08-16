@@ -96,6 +96,7 @@ ability knock:
 	states: [ default in_combat ]
 	icon: icon_knock
 	delay: 3
+	talent_tree: fighter_protection
 
 	direct_effect apply_aura:
 	{	
@@ -115,6 +116,7 @@ ability throw_rock:
 	speed: 6
 	projectile: throw_rock
 	cast_time: 20
+	talent_tree: fighter_subtlety
 	
 	direct_effect damage:
 	{

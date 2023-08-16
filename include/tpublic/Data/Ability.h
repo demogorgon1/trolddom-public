@@ -238,7 +238,9 @@ namespace tpublic
 					if(aMember->m_name == "string")
 						m_displayName = aMember->GetString();
 					else if (aMember->m_name == "description")
-						m_displayName = aMember->GetString();
+						m_description = aMember->GetString();
+					else if (aMember->m_name == "talent_tree")
+						m_talentTreeId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TALENT_TREE, aMember->GetIdentifier());
 					else if (aMember->m_name == "range")
 						m_range = aMember->GetUInt32();
 					else if (aMember->m_name == "aoe_radius")
@@ -279,6 +281,7 @@ namespace tpublic
 				ToStreamBase(aWriter);
 				aWriter->WriteString(m_displayName);
 				aWriter->WriteString(m_description);
+				aWriter->WriteUInt(m_talentTreeId);
 				aWriter->WriteUInt(m_range);
 				aWriter->WriteInt(m_speed);
 				aWriter->WriteInt(m_delay);
@@ -306,6 +309,8 @@ namespace tpublic
 				if(!aReader->ReadString(m_displayName))
 					return false;
 				if (!aReader->ReadString(m_description))
+					return false;
+				if (!aReader->ReadUInt(m_talentTreeId))
 					return false;
 				if (!aReader->ReadUInt(m_range))
 					return false;
@@ -360,6 +365,7 @@ namespace tpublic
 			std::vector<std::unique_ptr<AOEEntitySpawnEntry>>	m_aoeEntitySpawns;
 			std::vector<EntityState::Id>						m_entityStates;
 			uint32_t											m_resourceCosts[Resource::NUM_IDS] = { 0 };
+			uint32_t											m_talentTreeId = 0;
 		};
 
 	}
