@@ -36,6 +36,8 @@ sprites:
 	sprite icon_ring_2 : { }
 	sprite icon_star_1 : { }
 	sprite icon_star_2 : { }
+	sprite icon_small_red_potion : { }
+	sprite icon_small_blue_potion : { }
 	
 }
 

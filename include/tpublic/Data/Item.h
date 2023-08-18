@@ -241,6 +241,10 @@ namespace tpublic
 					{
 						m_stackSize = aChild->GetUInt32();
 					}
+					else if (aChild->m_name == "use_ability")
+					{
+						m_useAbilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
+					}
 					else
 					{
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -257,6 +261,7 @@ namespace tpublic
 				aStream->WriteUInts(m_lootGroups);
 				aStream->WriteOptionalObjectPointer(m_root);
 				aStream->WriteUInt(m_stackSize);
+				aStream->WriteUInt(m_useAbilityId);
 			}
 
 			bool
@@ -271,7 +276,9 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadOptionalObjectPointer(m_root))
 					return false;
-				if(!aStream->ReadUInt(m_stackSize))
+				if (!aStream->ReadUInt(m_stackSize))
+					return false;
+				if (!aStream->ReadUInt(m_useAbilityId))
 					return false;
 				return true;
 			}
@@ -281,6 +288,7 @@ namespace tpublic
 			std::vector<uint32_t>		m_lootGroups;
 			std::unique_ptr<Node>		m_root;
 			uint32_t					m_stackSize = 1;
+			uint32_t					m_useAbilityId = 0;
 		};
 
 	}

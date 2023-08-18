@@ -26,27 +26,16 @@ namespace tpublic::DirectEffects
 			{
 				if(aChild->m_name == "base")
 				{
-					if(aChild->m_type == Parser::Node::TYPE_ARRAY)
+					if(aChild->m_type == Parser::Node::TYPE_ARRAY && aChild->m_children.size() == 2)
 					{
-						if(aChild->m_children.size() == 1)
-						{
-							m_baseMin = aChild->m_children[0]->GetUInt32();
-							m_baseMax = m_baseMin;
-						}
-						else if (aChild->m_children.size() == 2)
-						{
-							m_baseMin = aChild->m_children[0]->GetUInt32();
-							m_baseMax = aChild->m_children[1]->GetUInt32();
-						}
-						else
-						{
-							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid heal base definition.", aChild->m_name.c_str());
-						}
+						m_baseMin = aChild->m_children[0]->GetUInt32();
+						m_baseMax = aChild->m_children[1]->GetUInt32();
 					}
 					else
 					{
-						TP_VERIFY(false, aChild->m_debugInfo, "Not a valid heal base.", aChild->m_name.c_str());
-					}
+						m_baseMin = aChild->GetUInt32();
+						m_baseMax = m_baseMin;
+					}					
 				}
 				else
 				{

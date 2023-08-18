@@ -1,0 +1,17 @@
+ability consumable_small_healing_potion:	
+{
+	string: "Small Healing Potion"
+	description: "Restores 20 health."
+	flags: [ target_self ]
+	icon: icon_small_red_potion
+	direct_effect heal: { base: 20 }
+	consume_item: consumable_small_healing_potion
+}
+
+item consumable_small_healing_potion:
+{
+	loot_groups: [ world_drops_1_to_5 ]
+	root: { name: "Small Healing Potion" required_level: 1 icon: icon_small_red_potion }
+	stack: 4	
+	use_ability: consumable_small_healing_potion
+}
