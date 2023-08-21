@@ -20,14 +20,14 @@ namespace tpublic
 			{	
 				void
 				ToStream(
-					IWriter*	aStream) const 
+					IWriter*								aStream) const 
 				{
 					aStream->WritePOD(m_item);
 				}
 
 				bool
 				FromStream(
-					IReader*	aStream) 
+					IReader*								aStream) 
 				{
 					if (!aStream->ReadPOD(m_item))
 						return false;
@@ -52,8 +52,8 @@ namespace tpublic
 
 			bool
 			AddToInventory(
-				const ItemInstance&		aItemInstance,
-				const Data::Item*		aItemData)
+				const ItemInstance&							aItemInstance,
+				const Data::Item*							aItemData)
 			{
 				for(Entry& t : m_entries)
 				{
@@ -80,10 +80,10 @@ namespace tpublic
 
 			bool
 			Move(
-				uint32_t				aSourceIndex,
-				const Data::Item*		aSourceItemData,
-				uint32_t				aDestinationIndex,
-				uint32_t				aSplitQuantity)
+				uint32_t									aSourceIndex,
+				const Data::Item*							aSourceItemData,
+				uint32_t									aDestinationIndex,
+				uint32_t									aSplitQuantity)
 			{
 				if((size_t)aSourceIndex >= m_entries.size() || (size_t)aDestinationIndex >= m_entries.size())
 					return false;
@@ -174,7 +174,7 @@ namespace tpublic
 
 			const ItemInstance*
 			GetItemAtIndex(
-				uint32_t				aIndex) const
+				uint32_t									aIndex) const
 			{
 				if((size_t)aIndex < m_entries.size())
 					return &m_entries[aIndex].m_item;
@@ -183,17 +183,28 @@ namespace tpublic
 
 			ItemInstance*
 			GetItemAtIndex(
-				uint32_t				aIndex) 
+				uint32_t									aIndex) 
 			{
 				if((size_t)aIndex < m_entries.size())
 					return &m_entries[aIndex].m_item;
 				return NULL;
 			}
 			
+			void
+			ForEach(
+				std::function<void(const ItemInstance&)>	aCallback) const
+			{
+				for(const Entry& t : m_entries)
+				{
+					if(t.m_item.IsSet())
+						aCallback(t.m_item);
+				}
+			}
+
 			// ComponentBase implementation
 			void
 			ToStream(
-				IWriter*				aStream) const override
+				IWriter*									aStream) const override
 			{
 				aStream->WriteObjects(m_entries);
 				aStream->WriteUInt(m_version);
@@ -201,7 +212,7 @@ namespace tpublic
 
 			bool
 			FromStream(
-				IReader*				aStream) override
+				IReader*									aStream) override
 			{
 				if(!aStream->ReadObjects(m_entries))
 					return false;

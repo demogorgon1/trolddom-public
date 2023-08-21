@@ -29,6 +29,18 @@ namespace tpublic
 
 			}
 
+			void
+			ForEach(
+				std::function<void(const ItemInstance&)>	aCallback) const
+			{
+				for (uint32_t i = 0; i < (uint32_t)EquipmentSlot::NUM_IDS; i++)
+				{
+					const ItemInstance& t = m_slots[i];
+					if(t.IsSet())
+						aCallback(t);
+				}
+			}
+
 			// ComponentBase implementation
 			void
 			ToStream(
@@ -41,7 +53,7 @@ namespace tpublic
 
 			bool
 			FromStream(
-				IReader*	aStream) override
+				IReader*									aStream) override
 			{
 				for (uint32_t i = 0; i < (uint32_t)EquipmentSlot::NUM_IDS; i++)
 				{
