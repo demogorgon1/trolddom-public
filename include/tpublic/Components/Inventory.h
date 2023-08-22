@@ -79,6 +79,37 @@ namespace tpublic
 			}
 
 			bool
+			Destroy(
+				uint32_t									aIndex,
+				const Data::Item*							aItemData,
+				uint32_t									aQuantity)
+			{
+				if ((size_t)aIndex >= m_entries.size() || (size_t)aIndex >= m_entries.size())
+					return false;
+
+				Entry& entry = m_entries[aIndex];
+
+				if(!entry.m_item.IsSet())
+					return false;
+
+				if(entry.m_item.m_itemId != aItemData->m_id)
+					return false;
+
+				uint32_t quantity = aQuantity;
+				if(quantity == 0 || quantity > entry.m_item.m_quantity)
+					quantity = entry.m_item.m_quantity;
+
+				entry.m_item.m_quantity -= quantity;
+
+				if(entry.m_item.m_quantity == 0)
+					entry.m_item.Clear();
+					
+				m_version++;
+
+				return true;
+			}
+
+			bool
 			Move(
 				uint32_t									aSourceIndex,
 				const Data::Item*							aSourceItemData,
