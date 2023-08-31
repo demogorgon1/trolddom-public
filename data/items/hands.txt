@@ -1,0 +1,18 @@
+item hands_flimsy_mail_gloves:
+{
+	equipment_slots: [ hands ]
+	loot_groups: [ world_drops_1_to_5 ]
+		
+	root:
+	{
+		required_level: 1
+		name: "Flimsy Mail Gloves"
+		icon: icon_mail_gloves_1
+
+		weighted_child:
+		{
+			rarity: common
+			stat armor: 15
+		}			
+	}
+}

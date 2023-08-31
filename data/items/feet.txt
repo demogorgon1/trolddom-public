@@ -1,0 +1,18 @@
+item feet_flimsy_mail_boots:
+{
+	equipment_slots: [ feet ]
+	loot_groups: [ world_drops_1_to_5 ]
+		
+	root:
+	{
+		required_level: 1
+		name: "Flimsy Mail Boots"
+		icon: icon_mail_boots_1
+
+		weighted_child:
+		{
+			rarity: common
+			stat armor: 15
+		}			
+	}
+}

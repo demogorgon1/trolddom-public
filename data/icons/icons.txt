@@ -38,6 +38,12 @@ sprites:
 	sprite icon_star_2 : { }
 	sprite icon_small_red_potion : { }
 	sprite icon_small_blue_potion : { }
+	sprite icon_mail_shirt_1 : { }
+	sprite icon_mail_boots_1 : { }
+
+	cursor: { position: [ 0 32 ] }
+
+	sprite icon_mail_gloves_1 : { }
 	
 }
 
