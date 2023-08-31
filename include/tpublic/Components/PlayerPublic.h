@@ -35,6 +35,7 @@ namespace tpublic
 				IWriter* aStream) const override
 			{
 				aStream->WriteUInt(m_classId);
+				m_stats.ToStream(aStream);
 			}
 
 			bool
@@ -42,6 +43,8 @@ namespace tpublic
 				IReader* aStream) override
 			{
 				if(!aStream->ReadUInt(m_classId))
+					return false;
+				if(!m_stats.FromStream(aStream))
 					return false;
 				return true;
 			}

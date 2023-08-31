@@ -127,6 +127,18 @@ namespace tpublic
 						printf(" %s=%u", GetInfo((Id)i)->m_shortName, value);
 				}
 			}
+			
+			bool
+			Compare(
+				const Collection&	aOther) const
+			{
+				for (uint32_t i = 1; i < (uint32_t)NUM_IDS; i++)
+				{
+					if(m_stats[i] != aOther.m_stats[i])
+						return false;
+				}
+				return true;
+			}
 
 			// Public data
 			uint32_t		m_stats[NUM_IDS] = { 0 };
