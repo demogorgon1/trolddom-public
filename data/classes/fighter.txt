@@ -80,6 +80,7 @@ talent_tree fighter_combat:
 aura knock:
 {
 	string: "Knock"
+	description: "Stunned."
 	icon: icon_stun		
 	type: debuff
 	duration: 30	

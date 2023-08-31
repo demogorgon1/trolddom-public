@@ -80,6 +80,7 @@ ability firebolt:
 ability lake_of_fire:
 {
 	string: "Lake of Fire"
+	description: "Spawn a lake of fire that damages enemies who touch it."	
 	range: 7
 	cast_time: 25
 	flags: [ target_aoe ]
@@ -99,6 +100,7 @@ ability lake_of_fire:
 ability gaze_of_death:
 {
 	string: "Gaze of Death"
+	description: "Kill target."
 	range: 100
 	cooldown: 100
 	flags: [ target_other target_hostile target_friendly ]
@@ -113,6 +115,7 @@ ability gaze_of_death:
 aura dont_touch_me_bro:
 {
 	string: "Don't Touch Me, Bro"
+	description: "All incoming reduced to 0."
 	icon: icon_impact_1	
 	type: buff
 	duration: 300
@@ -122,6 +125,7 @@ aura dont_touch_me_bro:
 ability dont_touch_me_bro:
 {
 	string: "Don't Touch Me, Bro"
+	description: "Reduce all incoming damage to 0 for 30 seconds."
 	cooldown: 100
 	flags: [ target_self ]
 	states: [ default in_combat ]	
@@ -136,6 +140,7 @@ ability dont_touch_me_bro:
 aura immortality:
 {
 	string: "Immortality"
+	description: "You can't die."
 	icon: icon_skull_1	
 	type: buff
 	duration: 300
@@ -145,6 +150,7 @@ aura immortality:
 ability immortality:
 {
 	string: "Immortality"
+	description: "Make it impossible to die for 30 seconds."
 	cooldown: 100
 	flags: [ target_self ]
 	states: [ default in_combat ]	
