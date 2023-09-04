@@ -194,6 +194,72 @@ namespace tpublic
 				EntityState::Id						m_initState = EntityState::ID_DEFAULT;
 			};
 
+			struct ConsumedItem
+			{
+				void	
+				ToStream(
+					IWriter*				aStream) const 
+				{
+					aStream->WriteUInt(m_itemId);
+					aStream->WriteUInt(m_quantity);
+				}
+			
+				bool	
+				FromStream(
+					IReader*				aStream) 
+				{
+					if(!aStream->ReadUInt(m_itemId))
+						return false;
+					if(!aStream->ReadUInt(m_quantity))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t							m_itemId = 0;
+				uint32_t							m_quantity = 0;
+			};
+
+			struct ConsumeItems
+			{
+				ConsumeItems()
+				{
+
+				}
+
+				ConsumeItems(
+					const Parser::Node*		aSource)
+				{
+					aSource->ForEachChild([&](
+						const Parser::Node* aChild)
+					{
+						ConsumedItem t;
+						t.m_itemId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ITEM, aChild->m_name.c_str());
+						t.m_quantity = aChild->GetUInt32();
+						m_items.push_back(t);
+					});
+				}
+
+				void	
+				ToStream(
+					IWriter*				aStream) const 
+				{
+					aStream->WriteObjects(m_items);
+				}
+			
+				bool	
+				FromStream(
+					IReader*				aStream) 
+				{
+					if(!aStream->ReadObjects(m_items))
+						return false;
+					return true;
+				}
+
+				// Public data
+				std::vector<ConsumedItem>			m_items;				
+			};
+
 			void
 			Verify() const
 			{
@@ -269,8 +335,8 @@ namespace tpublic
 						aMember->GetIdArrayWithLookup<EntityState::Id, EntityState::INVALID_ID>(m_entityStates, [&](const char* aIdentifier) { return EntityState::StringToId(aIdentifier); });
 					else if (aMember->m_tag == "resource_cost")
 						m_resourceCosts[GetResourceId(aMember)] = aMember->GetUInt32();
-					else if (aMember->m_name == "consume_item")
-						m_consumeItemId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ITEM, aMember->GetIdentifier());
+					else if (aMember->m_name == "consume_items")
+						m_consumeItems = std::make_unique<ConsumeItems>(aMember);
 					else
 						TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
 				});
@@ -297,7 +363,7 @@ namespace tpublic
 				aWriter->WriteUInt(m_aoeCap);
 				aWriter->WriteObjectPointers(m_aoeEntitySpawns);
 				aWriter->WriteUInts(m_entityStates);
-				aWriter->WriteUInt(m_consumeItemId);
+				aWriter->WriteOptionalObjectPointer(m_consumeItems);
 
 				for(uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 					aWriter->WriteUInt(m_resourceCosts[i]);
@@ -341,7 +407,7 @@ namespace tpublic
 					return false;
 				if(!aReader->ReadUInts(m_entityStates))
 					return false;
-				if (!aReader->ReadUInt(m_consumeItemId))
+				if (!aReader->ReadOptionalObjectPointer(m_consumeItems))
 					return false;
 
 				for (uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
@@ -371,7 +437,7 @@ namespace tpublic
 			std::vector<EntityState::Id>						m_entityStates;
 			uint32_t											m_resourceCosts[Resource::NUM_IDS] = { 0 };
 			uint32_t											m_talentTreeId = 0;
-			uint32_t											m_consumeItemId = 0;
+			std::unique_ptr<ConsumeItems>						m_consumeItems;
 		};
 
 	}

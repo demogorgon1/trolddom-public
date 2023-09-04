@@ -5,7 +5,7 @@ ability consumable_small_healing_potion:
 	flags: [ target_self ]
 	icon: icon_small_red_potion
 	direct_effect heal: { base: 20 }
-	consume_item: consumable_small_healing_potion
+	consume_items: { consumable_small_healing_potion: 1 }
 	states: [ default in_combat ]
 }
 

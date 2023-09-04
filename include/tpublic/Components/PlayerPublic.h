@@ -35,6 +35,7 @@ namespace tpublic
 				IWriter* aStream) const override
 			{
 				aStream->WriteUInt(m_classId);
+				aStream->WriteUInt(m_characterId);
 				m_stats.ToStream(aStream);
 			}
 
@@ -43,6 +44,8 @@ namespace tpublic
 				IReader* aStream) override
 			{
 				if(!aStream->ReadUInt(m_classId))
+					return false;
+				if (!aStream->ReadUInt(m_characterId))
 					return false;
 				if(!m_stats.FromStream(aStream))
 					return false;
@@ -59,6 +62,7 @@ namespace tpublic
 
 			// Public data
 			uint32_t			m_classId = 0;
+			uint32_t			m_characterId = 0;
 			Stat::Collection	m_stats;
 		};
 	}

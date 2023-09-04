@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../Data/Ability.h"
+
 #include "../Component.h"
 #include "../ItemInstance.h"
 
@@ -105,6 +107,88 @@ namespace tpublic
 					entry.m_item.Clear();
 					
 				m_version++;
+
+				return true;
+			}
+
+			bool
+			HasItems(
+				uint32_t									aItemId,
+				uint32_t									aQuantityRequired) const
+			{
+				uint32_t count = 0;
+
+				for(const Entry& t : m_entries)
+				{
+					if(t.m_item.IsSet() && t.m_item.m_itemId == aItemId)
+					{
+						count += t.m_item.m_quantity;
+
+						if(count >= aQuantityRequired)
+							return true;
+					}
+				}
+
+				return false;
+			}
+
+			void
+			RemoveItems(
+				uint32_t									aItemId,
+				uint32_t									aQuantity)
+			{
+				uint32_t remaining = aQuantity;
+
+				for (Entry& t : m_entries)
+				{
+					if(remaining == 0)
+						break;
+
+					if (t.m_item.IsSet() && t.m_item.m_itemId == aItemId)
+					{
+						uint32_t toRemove = remaining;
+						if(toRemove >= t.m_item.m_quantity)
+							toRemove = t.m_item.m_quantity;
+
+						t.m_item.m_quantity -= toRemove;
+						remaining -= toRemove;
+
+						if(t.m_item.m_quantity == 0)
+							t.m_item.Clear();						
+					}
+				}
+
+				assert(remaining == 0);
+				m_version++;
+			}
+
+			bool
+			Consume(
+				const Data::Ability::ConsumeItems*			aConsumeItems)
+			{
+				// First pass to see if we actually have everything
+				if(!CanConsume(aConsumeItems))
+					return false;
+
+				// Second pass we remove stuff
+				for (const Data::Ability::ConsumedItem& item : aConsumeItems->m_items)
+					RemoveItems(item.m_itemId, item.m_quantity);
+
+				return true;
+			}
+
+			bool
+			CanConsume(
+				const Data::Ability::ConsumeItems*			aConsumeItems) const
+			{
+				if (aConsumeItems == NULL)
+					return true;
+
+				for (const Data::Ability::ConsumedItem& item : aConsumeItems->m_items)
+				{
+					if (!HasItems(item.m_itemId, item.m_quantity))
+						return false;
+				}
 
 				return true;
 			}
