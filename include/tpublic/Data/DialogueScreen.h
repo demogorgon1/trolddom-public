@@ -23,7 +23,7 @@ namespace tpublic
 				Option(
 					const Parser::Node*	aSource)
 				{
-					m_dialogueScreenId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_DIALOGUE_SCREEN, aSource->GetIdentifier());
+					m_dialogueScreenId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_DIALOGUE_SCREEN, aSource->m_name.c_str());
 					m_string = aSource->GetString();
 				}
 

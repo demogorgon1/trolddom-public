@@ -270,10 +270,12 @@ namespace tpublic
 				if(c == 'n')
 				{
 					buffer.push_back('\n');
+					state = STATE_STRING;
 				}
 				else if (c == '\"')
 				{
 					buffer.push_back('\"');
+					state = STATE_STRING;
 				}
 				else
 				{
