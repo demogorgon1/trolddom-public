@@ -113,11 +113,21 @@ namespace tpublic
 			FromSource(
 				const Parser::Node*		aNode) override
 			{
+				auto appendString = [&](
+					std::string& aString,
+					const char*  aAppend)
+				{
+					size_t length = aString.length();
+					if(length > 0 && aString[length - 1] != '\n')
+						aString.push_back(' ');
+					aString.append(aAppend);
+				};				
+
 				aNode->ForEachChild([&](
 					const Parser::Node* aChild)
 				{
 					if(aChild->m_name == "text")
-						aChild->GetArray()->ForEachChild([&](const Parser::Node* aLine) { m_text.append(aLine->GetString()); });
+						aChild->GetArray()->ForEachChild([&](const Parser::Node* aLine) { appendString(m_text, aLine->GetString()); });
 					else if(aChild->m_name == "options")
 						aChild->GetObject()->ForEachChild([&](const Parser::Node* aOption) { m_options.push_back(Option(aOption)); });
 					else if(aChild->m_tag == "sell")

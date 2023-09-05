@@ -16,3 +16,22 @@ item consumable_small_healing_potion:
 	stack: 4	
 	use_ability: consumable_small_healing_potion
 }
+
+ability consumable_small_mana_potion:	
+{
+	string: "Small Mana Potion"
+	description: "Restores 20 mana."
+	flags: [ target_self ]
+	icon: icon_small_blue_potion
+	#direct_effect heal: { base: 20 }
+	consume_items: { consumable_small_mana_potion: 1 }
+	states: [ default in_combat ]
+}
+
+item consumable_small_mana_potion:
+{
+	loot_groups: [ world_drops_1_to_5 ]
+	root: { name: "Small Mana Potion" required_level: 1 icon: icon_small_blue_potion }
+	stack: 4	
+	use_ability: consumable_small_mana_potion
+}
