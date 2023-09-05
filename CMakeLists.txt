@@ -33,7 +33,7 @@ set(BROTLI_LIBRARIES_STATIC brotlidec-static brotlienc-static)
 
 # -------------------
 
-if(MSVS)
+if(MSVC)
 	add_compile_options(/bigobj)
 endif()
 
