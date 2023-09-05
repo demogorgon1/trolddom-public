@@ -191,8 +191,10 @@ namespace tpublic
 				{
 					if (aChild->m_name == "faction")
 						m_factionId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_FACTION, aChild->GetIdentifier());
-					else if(aChild->m_name == "level")
+					else if (aChild->m_name == "level")
 						m_level = aChild->GetUInt32();
+					else if (aChild->m_name == "dialogue_screen")
+						m_dialogueScreenId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_DIALOGUE_SCREEN, aChild->GetIdentifier());
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 				});
@@ -205,6 +207,7 @@ namespace tpublic
 				aStream->WriteUInt(m_targetEntityInstanceId);
 				aStream->WriteUInt(m_level);
 				aStream->WriteUInt(m_factionId);
+				aStream->WriteUInt(m_dialogueScreenId);
 				aStream->WriteUInt(m_combatGroupId);
 				aStream->WriteObjects(m_resources);
 				aStream->WriteOptionalObject(m_castInProgress);
@@ -220,6 +223,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInt(m_factionId))
 					return false;
+				if (!aStream->ReadUInt(m_dialogueScreenId))
+					return false;
 				if (!aStream->ReadUInt(m_combatGroupId))
 					return false;
 				if(!aStream->ReadObjects(m_resources))
@@ -232,7 +237,7 @@ namespace tpublic
 			void
 			DebugPrint() const override
 			{
-				printf("combat_public: target=%u level=%u faction=%u combat_group=%zu", m_targetEntityInstanceId, m_level, m_factionId, m_combatGroupId);
+				printf("combat_public: target=%u level=%u faction=%u combat_group=%zu dialogue_screen=%u", m_targetEntityInstanceId, m_level, m_factionId, m_combatGroupId, m_dialogueScreenId);
 				for(const ResourceEntry& resource : m_resources)
 					printf(" %s=%u/%u", Resource::GetInfo((Resource::Id)resource.m_id)->m_name, resource.m_current, resource.m_max);
 				printf("\n");
@@ -243,6 +248,7 @@ namespace tpublic
 
 			uint32_t						m_level = 1;
 			uint32_t						m_factionId = 0;
+			uint32_t						m_dialogueScreenId = 0;
 			uint64_t						m_combatGroupId = 0;
 			std::vector<ResourceEntry>		m_resources;
 			std::optional<CastInProgress>	m_castInProgress;
