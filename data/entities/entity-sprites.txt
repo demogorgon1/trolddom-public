@@ -11,6 +11,7 @@ sprites:
 	sprite goblin_shaman: { }
 	sprite deer: { }
 	sprite boar: { }
+	sprite man_1: { }
 	
 	cursor: { position: [ 0 16 ] }
 	
@@ -19,5 +20,6 @@ sprites:
 	sprite goblin_shaman_dead: { }
 	sprite deer_dead: { }	
 	sprite boar_dead: { }	
+	sprite man_1_dead: { }
 	
 }

@@ -28,6 +28,7 @@ namespace tpublic
 			ID_LOOT_GROUP,
 			ID_MAP_TRIGGER,
 			ID_PARTICLE_SYSTEM,
+			ID_DIALOGUE_SCREEN,
 
 			NUM_IDS
 		};
@@ -53,7 +54,8 @@ namespace tpublic
 			"loot_table",
 			"loot_group",
 			"map_trigger",
-			"particle_system"
+			"particle_system",
+			"dialogue_screen"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

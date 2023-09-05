@@ -9,6 +9,11 @@ map_entity_spawn test_world_wildlife:
 	entity boar: { weight: 1 } 
 }
 
+map_entity_spawn test_world_sylas:
+{
+	entity test_world_sylas: { weight: 1 }
+}
+
 map_player_spawn test_world_player_spawn:
 {
 }
@@ -37,8 +42,9 @@ map_palette test_world_stuff:
 {
 	entity_spawn test_world_monster: [ 255 0 0 ]
 	entity_spawn test_world_wildlife: [ 255 255 0 ]
+	entity_spawn test_world_sylas: [ 255 189 0 ]
 	player_spawn test_world_player_spawn: [ 0 0 255 ]
-	player_spawn test_world_dungeon_exit: [ 0 0 200 ]
+	player_spawn test_world_dungeon_exit: [ 0 0 200 ]	
 	portal test_world_dungeon_entrance: [ 0 255 0 ]	
 }
 

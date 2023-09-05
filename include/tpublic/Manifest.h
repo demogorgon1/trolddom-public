@@ -3,6 +3,7 @@
 #include "Data/Ability.h"
 #include "Data/Aura.h"
 #include "Data/Class.h"
+#include "Data/DialogueScreen.h"
 #include "Data/Entity.h"
 #include "Data/Faction.h"
 #include "Data/Item.h"
@@ -250,6 +251,7 @@ namespace tpublic
 			RegisterDataContainer(m_abilities);
 			RegisterDataContainer(m_auras);
 			RegisterDataContainer(m_classes);
+			RegisterDataContainer(m_dialogueScreens);
 			RegisterDataContainer(m_entities);
 			RegisterDataContainer(m_factions);
 			RegisterDataContainer(m_items);
@@ -329,6 +331,7 @@ namespace tpublic
 		DataContainer<Data::Ability>					m_abilities;
 		DataContainer<Data::Aura>						m_auras;
 		DataContainer<Data::Class>						m_classes;
+		DataContainer<Data::DialogueScreen>				m_dialogueScreens;
 		DataContainer<Data::Entity>						m_entities;
 		DataContainer<Data::Faction>					m_factions;
 		DataContainer<Data::Item>						m_items;

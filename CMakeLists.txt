@@ -33,6 +33,10 @@ set(BROTLI_LIBRARIES_STATIC brotlidec-static brotlienc-static)
 
 # -------------------
 
+if(MSVS)
+	add_compile_options(/bigobj)
+endif()
+
 include_directories(extra)
 
 add_subdirectory(extra)

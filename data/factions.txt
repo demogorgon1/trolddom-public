@@ -6,3 +6,8 @@ faction wildlife:
 {
 	flags: [ neutral ]
 }
+
+faction npcs:
+{
+	flags: [ neutral ]
+}

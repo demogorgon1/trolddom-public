@@ -44,6 +44,7 @@ sprites:
 	cursor: { position: [ 0 32 ] }
 
 	sprite icon_mail_gloves_1 : { }
+	sprite icon_knife_1 : { }
 	
 }
 
