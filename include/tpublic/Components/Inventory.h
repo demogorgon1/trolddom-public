@@ -81,6 +81,90 @@ namespace tpublic
 			}
 
 			bool
+			CanAddMultipleToInventory(
+				uint32_t									aItemId,
+				uint32_t									aQuantity,
+				const Data::Item*							aItemData) const
+			{
+				if(aQuantity == 0)
+					return true;
+
+				uint32_t remaining = aQuantity;
+				
+				for (const Entry& t : m_entries)
+				{
+					if(!t.m_item.IsSet())
+					{
+						uint32_t toAdd = remaining;
+						if(toAdd > aItemData->m_stackSize)
+							toAdd = aItemData->m_stackSize;  
+
+						remaining -= toAdd;
+					}
+					else if(t.m_item.IsSet() && t.m_item.m_itemId == aItemId && t.m_item.m_quantity < aItemData->m_stackSize)
+					{
+						uint32_t toAdd = remaining;
+						if (toAdd > aItemData->m_stackSize - t.m_item.m_quantity)
+							toAdd = aItemData->m_stackSize - t.m_item.m_quantity;
+
+						remaining -=  toAdd;
+					}
+
+					if(remaining == 0)
+						return true;
+				}
+
+				return false;
+			}
+
+			void
+			AddMultipleToInventory(
+				uint32_t									aItemId,
+				uint32_t									aQuantity,
+				const Data::Item*							aItemData) 
+			{
+				if(aQuantity == 0)
+					return;
+
+				uint32_t remaining = aQuantity;
+
+				for (Entry& t : m_entries)
+				{
+					if (!t.m_item.IsSet())
+					{
+						uint32_t toAdd = remaining;
+						if (toAdd > aItemData->m_stackSize)
+							toAdd = aItemData->m_stackSize;
+
+						remaining -= toAdd;
+
+						ItemInstance itemInstance;
+						itemInstance.m_itemId = aItemId;
+						itemInstance.m_quantity = toAdd;
+						
+						t.m_item = itemInstance;
+					}
+					else if (t.m_item.IsSet() && t.m_item.m_itemId == aItemId && t.m_item.m_quantity < aItemData->m_stackSize)
+					{
+						uint32_t toAdd = remaining;
+						if (toAdd > aItemData->m_stackSize - t.m_item.m_quantity)
+							toAdd = aItemData->m_stackSize - t.m_item.m_quantity;
+
+						remaining -= toAdd;
+
+						t.m_item.m_quantity += toAdd;
+					}
+
+					if (remaining == 0)
+						break;
+				}
+
+				m_version++;
+
+				assert(remaining == 0);
+			}
+
+			bool
 			Destroy(
 				uint32_t									aIndex,
 				const Data::Item*							aItemData,
