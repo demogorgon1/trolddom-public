@@ -17,5 +17,6 @@ player_components:
 	threat_source
 	visible_auras
 	wallet
+	vendor_buyback
 ]
 

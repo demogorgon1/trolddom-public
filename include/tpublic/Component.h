@@ -33,6 +33,7 @@ namespace tpublic
 			ID_ENVIRONMENT,
 			ID_OWNER,
 			ID_TAG,
+			ID_VENDOR_BUYBACK,
 
 			NUM_IDS
 		};
@@ -63,7 +64,8 @@ namespace tpublic
 			"lootable",
 			"environment",
 			"owner",
-			"tag"
+			"tag",
+			"vendor_buyback"
 		};		
 
 		static_assert(sizeof(COMPONENT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);
