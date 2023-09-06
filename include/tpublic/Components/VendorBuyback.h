@@ -31,6 +31,8 @@ namespace tpublic
 			AddItem(
 				const ItemInstance&		aItemInstance)
 			{
+				m_version++;
+
 				for (size_t i = 0; i < COUNT; i++)
 				{
 					if(!m_items[i].IsSet())
@@ -46,6 +48,26 @@ namespace tpublic
 				m_nextIndex = (m_nextIndex + 1) % COUNT;
 			}
 
+			bool
+			HasItems() const
+			{
+				for (size_t i = 0; i < COUNT; i++)
+				{
+					if(m_items[i].IsSet())
+						return true;
+				}
+				return false;
+			}
+
+			void
+			Clear()
+			{
+				for (size_t i = 0; i < COUNT; i++)
+					m_items[i].Clear();
+				m_nextIndex = 0;
+				m_version++;
+			}
+
 			// ComponentBase implementation
 			void
 			ToStream(
@@ -55,6 +77,7 @@ namespace tpublic
 					m_items[i].ToStream(aStream);
 
 				aStream->WriteUInt(m_nextIndex);
+				aStream->WriteUInt(m_version);
 			}
 
 			bool
@@ -69,6 +92,8 @@ namespace tpublic
 
 				if(!aStream->ReadUInt(m_nextIndex))
 					return false;
+				if (!aStream->ReadUInt(m_version))
+					return false;
 				return true;
 			}
 
@@ -76,6 +101,7 @@ namespace tpublic
 			static const size_t COUNT = 4;
 			ItemInstance	m_items[COUNT];
 			size_t			m_nextIndex = 0;
+			uint32_t		m_version = 0;
 		};
 	}
 
