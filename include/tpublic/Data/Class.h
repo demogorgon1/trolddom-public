@@ -3,6 +3,7 @@
 #include "../ActionBar.h"
 #include "../DataBase.h"
 #include "../EquipmentSlot.h"
+#include "../ItemType.h"
 #include "../Resource.h"
 #include "../Stat.h"
 
@@ -400,6 +401,14 @@ namespace tpublic
 				TP_VERIFY(!m_displayName.empty(), m_debugInfo, "'%s' has no 'string'.", m_name.c_str());
 			}
 
+			bool
+			CanUseItemType(
+				ItemType::Id			aItemType) const
+			{
+				uint32_t i = (uint32_t)aItemType;
+				return (m_itemTypesMask & (1 << i)) != 0;
+			}
+
 			// Base implementation
 			void
 			FromSource(
@@ -468,6 +477,21 @@ namespace tpublic
 					{
 						aMember->GetIdArray(DataType::ID_TALENT_TREE, m_talentTrees);
 					}
+					else if (aMember->m_name == "item_types")
+					{
+						std::vector<ItemType::Id> itemTypes;
+						aMember->GetIdArrayWithLookup<ItemType::Id, ItemType::INVALID_ID>(itemTypes, [&](
+							const char* aIdentifier) -> ItemType::Id
+						{
+							return ItemType::StringToId(aIdentifier);
+						});
+						for(ItemType::Id itemType : itemTypes)
+						{
+							uint32_t t = (uint32_t)itemType;
+							static_assert((uint32_t)ItemType::NUM_IDS <= 32);
+							m_itemTypesMask |= (1 << t);
+						}
+					}
 					else
 					{
 						TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
@@ -493,6 +517,7 @@ namespace tpublic
 				aStream->WriteObjectPointers(m_startMaps);
 				m_statsConversion.ToStream(aStream);
 				aStream->WriteUInts(m_talentTrees);
+				aStream->WritePOD(m_itemTypesMask);
 			}
 			
 			bool	
@@ -527,6 +552,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInts(m_talentTrees))
 					return false;
+				if (!aStream->ReadPOD(m_itemTypesMask))
+					return false;
 				return true;
 			}
 
@@ -544,6 +571,7 @@ namespace tpublic
 			std::vector<std::unique_ptr<StartMap>>					m_startMaps;
 			StatsConversion											m_statsConversion;
 			std::vector<uint32_t>									m_talentTrees;
+			uint32_t												m_itemTypesMask = 0;
 		};
 
 	}

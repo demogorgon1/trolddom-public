@@ -155,6 +155,9 @@ class fighter:
 	default_attack: fighter_attack
 	default_action_bar: [ fighter_attack strike gaze_of_death throw_rock dont_touch_me_bro immortality push ]
 	talent_trees: [ fighter_protection fighter_combat fighter_subtlety ]
+	
+	item_types: [ armor_cloth armor_mail armor_plate weapon_1h_sword weapon_1h_mace weapon_1h_axe weapon_1h_knife
+	              weapon_2h_sword weapon_2h_mace weapon_2h_axe weapon_2h_staff shield ]
 
 	start_map test_world: [ test_world_player_spawn ]
 	start_equipment main_hand: weapon_the_dev_tool

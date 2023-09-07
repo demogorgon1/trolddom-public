@@ -27,6 +27,8 @@ class priest:
 	default_attack: attack
 	default_action_bar: [ attack minor_heal gaze_of_death dont_touch_me_bro immortality push ]
 	
+	item_types: [ armor_cloth weapon_1h_knife weapon_2h_staff ]
+
 	start_map test_world: [ test_world_player_spawn ]	
 	start_equipment main_hand: weapon_gnarly_staff
 	
