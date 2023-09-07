@@ -58,6 +58,10 @@ namespace tpublic
 			{
 				m_manifest->m_xpMetrics.FromSource(aNode);
 			}
+			else if (aNode->m_name == "item_metrics")
+			{
+				m_manifest->m_itemMetrics.FromSource(aNode);
+			}
 			else if(aNode->GetObject()->m_name == "sprites")
 			{
 				spriteSheetBuilder.AddSprites(aNode);

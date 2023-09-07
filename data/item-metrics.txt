@@ -1,0 +1,58 @@
+item_metrics:
+{
+	base_armor:
+	[
+		[ 1  10 ]
+		[ 2  11 ]
+		[ 3  12 ]
+		[ 4  13 ]
+		[ 5  14 ]
+		[ 6  15 ]
+		[ 7  16 ]
+		[ 8  17 ]
+		[ 9  19 ]
+		[ 10 20 ]
+	]
+	
+	base_cost:
+	[
+		[ 1  8 ]
+		[ 2  11 ]
+		[ 3  14 ]
+		[ 4  17 ]
+		[ 5  20 ]
+		[ 6  23 ]
+		[ 7  26 ]
+		[ 8  29 ]
+		[ 9  32 ]
+		[ 10 35 ]
+	]
+	
+	item_type_multipliers armor_cloth: 		{ armor: 1 		cost: 1 }
+	item_type_multipliers armor_mail: 		{ armor: 2 		cost: 1.5 }
+	item_type_multipliers armor_plate: 		{ armor: 3 		cost: 3 }
+	item_type_multipliers weapon_1h_sword: 	{ 				cost: 6 }
+	item_type_multipliers weapon_1h_mace: 	{ 				cost: 6 }
+	item_type_multipliers weapon_1h_axe: 	{ 				cost: 6 }
+	item_type_multipliers weapon_1h_knife: 	{ 				cost: 5 }
+	item_type_multipliers weapon_2h_sword: 	{ 				cost: 8 }
+	item_type_multipliers weapon_2h_mace: 	{ 				cost: 8 }
+	item_type_multipliers weapon_2h_axe: 	{ 				cost: 8 }
+	item_type_multipliers weapon_2h_staff: 	{ 				cost: 7 }
+	item_type_multipliers shield: 			{ armor: 7		cost: 5 }
+	
+	equipment_slot_multipliers head:		{ armor: 3		cost: 2 }
+	equipment_slot_multipliers chest:		{ armor: 4		cost: 2.5 }
+	equipment_slot_multipliers legs:		{ armor: 3.5	cost: 2.25 }
+	equipment_slot_multipliers feet:		{ armor: 2		cost: 1.5 }
+	equipment_slot_multipliers shoulders:	{ armor: 2.5	cost: 1.75 }
+	equipment_slot_multipliers wrists:		{ armor: 1.5	cost: 1 }
+	equipment_slot_multipliers waist:		{ armor: 2		cost: 1.5 }
+	equipment_slot_multipliers hands:		{ armor: 2		cost: 1.5 }
+	equipment_slot_multipliers finger_1:	{ 				cost: 2 }
+	equipment_slot_multipliers finger_2:	{ 				cost: 2 }
+	equipment_slot_multipliers bag_1:		{ 				cost: 3 }
+	equipment_slot_multipliers bag_2:		{ 				cost: 3 }
+	equipment_slot_multipliers bag_3:		{ 				cost: 3 }
+
+}
