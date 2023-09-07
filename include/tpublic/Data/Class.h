@@ -405,6 +405,9 @@ namespace tpublic
 			CanUseItemType(
 				ItemType::Id			aItemType) const
 			{
+				if(aItemType == ItemType::ID_NONE)
+					return true;
+
 				uint32_t i = (uint32_t)aItemType;
 				return (m_itemTypesMask & (1 << i)) != 0;
 			}

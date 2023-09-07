@@ -16,7 +16,7 @@ item weapon_rusty_sword:
 
 item weapon_gnarly_staff:
 {
-	type: weapon_staff
+	type: weapon_2h_staff
 	equipment_slots: [ main_hand ]
 		
 	root:

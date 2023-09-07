@@ -255,6 +255,7 @@ namespace tpublic
 					else if(aChild->m_name == "type")
 					{
 						m_itemType = ItemType::StringToId(aChild->GetIdentifier());
+						TP_VERIFY(m_itemType != ItemType::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid item type.", aChild->GetIdentifier());
 					}
 					else
 					{
