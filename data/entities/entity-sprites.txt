@@ -1,6 +1,6 @@
 sprites:
 {
-	source: "entities.png"
+	source: "npcs.png"
 
 	size: { width: 16 height: 16 }
 
@@ -20,6 +20,23 @@ sprites:
 	sprite goblin_shaman_dead: { }
 	sprite deer_dead: { }	
 	sprite boar_dead: { }	
-	sprite man_1_dead: { }
+	sprite man_1_dead: { }	
+}
+
+sprites:
+{
+	source: "objects.png"
+
+	size: { width: 16 height: 16 }
+
+	cursor: { position: [ 0 0 ] }
+
+	sprite spirit_stone_1: { }
+	sprite spirit_stone_2: { }
+	sprite spirit_stone_3: { }
+	sprite spirit_stone_4: { }
+	sprite spirit_stone_5: { }
+	sprite spirit_stone_6: { }
 	
 }
+
