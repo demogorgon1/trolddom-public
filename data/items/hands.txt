@@ -1,5 +1,6 @@
 item hands_flimsy_mail_gloves:
 {
+	type: armor_mail
 	equipment_slots: [ hands ]
 	loot_groups: [ world_drops_1_to_5 ]
 		

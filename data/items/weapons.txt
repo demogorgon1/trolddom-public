@@ -1,5 +1,6 @@
 item weapon_rusty_sword:
 {
+	type: weapon_1h_sword
 	equipment_slots: [ main_hand ]
 		
 	root:
@@ -33,6 +34,7 @@ item weapon_rusty_sword:
 
 item weapon_gnarly_staff:
 {
+	type: weapon_staff
 	equipment_slots: [ main_hand ]
 		
 	root:
@@ -53,6 +55,7 @@ item weapon_gnarly_staff:
 
 item weapon_the_dev_tool:
 {
+	type: weapon_1h_mace
 	equipment_slots: [ main_hand ]
 		
 	root:

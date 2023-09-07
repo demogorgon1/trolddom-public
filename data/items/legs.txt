@@ -1,5 +1,6 @@
 item legs_flimsy_mail_pants:
 {
+	type: armor_mail
 	equipment_slots: [ legs ]
 	loot_groups: [ world_drops_1_to_5 ]
 		

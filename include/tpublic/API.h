@@ -38,6 +38,7 @@
 #include "PersistentIdTable.h"
 #include "PlayerTag.h"
 #include "SourceContext.h"
+#include "ItemType.h"
 #include "SpriteData.h"
 #include "SpriteInfo.h"
 #include "Stat.h"

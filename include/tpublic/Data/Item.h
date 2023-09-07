@@ -2,6 +2,7 @@
 
 #include "../DataBase.h"
 #include "../EquipmentSlot.h"
+#include "../ItemType.h"
 #include "../Rarity.h"
 #include "../Stat.h"
 
@@ -245,6 +246,10 @@ namespace tpublic
 					{
 						m_useAbilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
 					}
+					else if(aChild->m_name == "type")
+					{
+						m_itemType = ItemType::StringToId(aChild->GetIdentifier());
+					}
 					else
 					{
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -262,6 +267,7 @@ namespace tpublic
 				aStream->WriteOptionalObjectPointer(m_root);
 				aStream->WriteUInt(m_stackSize);
 				aStream->WriteUInt(m_useAbilityId);
+				aStream->WritePOD(m_itemType);
 			}
 
 			bool
@@ -280,6 +286,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInt(m_useAbilityId))
 					return false;
+				if(!aStream->ReadPOD(m_itemType))
+					return false;
 				return true;
 			}
 
@@ -289,6 +297,7 @@ namespace tpublic
 			std::unique_ptr<Node>		m_root;
 			uint32_t					m_stackSize = 1;
 			uint32_t					m_useAbilityId = 0;
+			ItemType::Id				m_itemType = ItemType::ID_NONE;
 		};
 
 	}

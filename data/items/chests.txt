@@ -1,5 +1,6 @@
 item chest_flimsy_mail_shirt:
 {
+	type: armor_mail
 	equipment_slots: [ chest ]
 	loot_groups: [ world_drops_1_to_5 ]
 		
