@@ -15,7 +15,7 @@ namespace tpublic
 		{
 			void
 			FromSource(
-				const Parser::Node* aSource)
+				const Parser::Node*		aSource)
 			{
 				aSource->ForEachChild([&](
 					const Parser::Node* aChild)
@@ -31,7 +31,7 @@ namespace tpublic
 
 			void
 			ToStream(
-				IWriter*		aWriter) const
+				IWriter*				aWriter) const
 			{
 				aWriter->WriteFloat(m_armor);
 				aWriter->WriteFloat(m_cost);
@@ -39,7 +39,7 @@ namespace tpublic
 
 			bool
 			FromStream(
-				IReader*		aReader) 
+				IReader*				aReader) 
 			{
 				if (!aReader->ReadFloat(m_armor))
 					return false;
@@ -60,7 +60,7 @@ namespace tpublic
 
 		void
 		FromSource(
-			const Parser::Node*	aSource)
+			const Parser::Node*			aSource)
 		{
 			aSource->ForEachChild([&](
 				const Parser::Node* aChild)
@@ -95,6 +95,36 @@ namespace tpublic
 						m_levelBaseCost[level] = cost;
 					});
 				}
+				else if(aChild->m_name == "base_1h_weapon_dps")
+				{
+					aChild->GetArray()->ForEachChild([&](
+						const Parser::Node* aEntry)
+					{
+						TP_VERIFY(aEntry->m_type == Parser::Node::TYPE_ARRAY && aEntry->m_children.size() == 2, aEntry->m_debugInfo, "Not a level-dps pair.");
+						uint32_t level = aEntry->m_children[0]->GetUInt32();
+						uint32_t dps = aEntry->m_children[1]->GetUInt32();
+
+						if(level >= m_levelBase1HWeaponDPS.size())
+							m_levelBase1HWeaponDPS.resize(level + 1);
+
+						m_levelBase1HWeaponDPS[level] = dps;
+					});
+				}
+				else if(aChild->m_name == "base_2h_weapon_dps")
+				{
+					aChild->GetArray()->ForEachChild([&](
+						const Parser::Node* aEntry)
+					{
+						TP_VERIFY(aEntry->m_type == Parser::Node::TYPE_ARRAY && aEntry->m_children.size() == 2, aEntry->m_debugInfo, "Not a level-dps pair.");
+						uint32_t level = aEntry->m_children[0]->GetUInt32();
+						uint32_t dps = aEntry->m_children[1]->GetUInt32();
+
+						if(level >= m_levelBase2HWeaponDPS.size())
+							m_levelBase2HWeaponDPS.resize(level + 1);
+
+						m_levelBase2HWeaponDPS[level] = dps;
+					});
+				}
 				else if(aChild->m_tag == "item_type_multipliers")
 				{
 					ItemType::Id itemType = ItemType::StringToId(aChild->m_name.c_str());
@@ -116,10 +146,12 @@ namespace tpublic
 
 		void
 		ToStream(
-			IWriter*			aStream) const 
+			IWriter*						aStream) const 
 		{
 			aStream->WriteUInts(m_levelBaseArmor);
 			aStream->WriteUInts(m_levelBaseCost);
+			aStream->WriteUInts(m_levelBase1HWeaponDPS);
+			aStream->WriteUInts(m_levelBase2HWeaponDPS);
 
 			for(uint32_t i = 1; i < (uint32_t)ItemType::NUM_IDS; i++)
 				m_itemTypeMultipliers[i].ToStream(aStream);
@@ -130,11 +162,15 @@ namespace tpublic
 
 		bool
 		FromStream(
-			IReader*			aStream) 
+			IReader*						aStream) 
 		{
 			if(!aStream->ReadUInts(m_levelBaseArmor))
 				return false;
 			if (!aStream->ReadUInts(m_levelBaseCost))
+				return false;
+			if (!aStream->ReadUInts(m_levelBase1HWeaponDPS))
+				return false;
+			if (!aStream->ReadUInts(m_levelBase2HWeaponDPS))
 				return false;
 
 			for (uint32_t i = 1; i < (uint32_t)ItemType::NUM_IDS; i++)
@@ -154,7 +190,7 @@ namespace tpublic
 		
 		uint32_t
 		GetLevelBaseArmor(
-			uint32_t			aLevel) const
+			uint32_t						aLevel) const
 		{
 			if(aLevel >= m_levelBaseArmor.size())
 				return 1;
@@ -163,16 +199,64 @@ namespace tpublic
 
 		uint32_t
 		GetLevelBaseCost(
-			uint32_t			aLevel) const
+			uint32_t						aLevel) const
 		{
 			if (aLevel >= m_levelBaseCost.size())
 				return 1;
 			return m_levelBaseCost[aLevel];
 		}
+
+		uint32_t
+		GetLevelBase1HWeaponDPS(
+			uint32_t						aLevel) const
+		{
+			if (aLevel >= m_levelBase1HWeaponDPS.size())
+				return 1;
+			return m_levelBase1HWeaponDPS[aLevel];
+		}
+
+		uint32_t
+		GetLevelBase2HWeaponDPS(
+			uint32_t						aLevel) const
+		{
+			if (aLevel >= m_levelBase2HWeaponDPS.size())
+				return 1;
+			return m_levelBase2HWeaponDPS[aLevel];
+		}
+
+		const Multipliers&
+		GetItemTypeMultipliers(
+			ItemType::Id					aItemType) const
+		{
+			return m_itemTypeMultipliers[aItemType];
+		}
+
+		Multipliers
+		GetEquipmentSlotMultipliers(
+			const std::vector<uint32_t>&	aEquipmentSlots) const
+		{
+			if(aEquipmentSlots.size() == 0)
+				return Multipliers();
+
+			Multipliers t;
+
+			for(uint32_t equipmentSlot : aEquipmentSlots)
+			{
+				const Multipliers& multipliers = m_equipmentSlotMultipliers[equipmentSlot];
+				if (multipliers.m_armor > t.m_armor)
+					t.m_armor = multipliers.m_armor;
+				if (multipliers.m_cost > t.m_cost)
+					t.m_cost = multipliers.m_cost;
+			}
+			
+			return t;
+		}
 		
 		// Public data
 		std::vector<uint32_t>					m_levelBaseArmor;
 		std::vector<uint32_t>					m_levelBaseCost;
+		std::vector<uint32_t>					m_levelBase1HWeaponDPS;
+		std::vector<uint32_t>					m_levelBase2HWeaponDPS;
 		Multipliers								m_itemTypeMultipliers[ItemType::NUM_IDS];
 		Multipliers								m_equipmentSlotMultipliers[EquipmentSlot::NUM_IDS];
 	};

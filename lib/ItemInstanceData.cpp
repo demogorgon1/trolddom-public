@@ -2,6 +2,7 @@
 
 #include <tpublic/Helpers.h>
 #include <tpublic/ItemInstanceData.h>
+#include <tpublic/ItemType.h>
 #include <tpublic/Manifest.h>
 
 namespace tpublic
@@ -22,11 +23,83 @@ namespace tpublic
 
 		if(m_itemData->m_root)
 			_Generate(random, aManifest, m_itemData->m_root.get());
+
+		const ItemType::Info* itemTypeInfo = ItemType::GetInfo(m_itemData->m_itemType);
+		uint32_t itemLevel = GetItemLevel();
+
+		if(itemTypeInfo->m_flags & ItemType::FLAG_WEAPON)
+		{
+			if (m_properties[Data::Item::PROPERTY_TYPE_WEAPON_DAMAGE_MIN] == 0 || m_properties[Data::Item::PROPERTY_TYPE_WEAPON_DAMAGE_MAX] == 0)
+			{
+				// This weapon doesn't have explicit damage range, use defaults based on item level
+				bool isTwoHanded = itemTypeInfo->m_flags & ItemType::FLAG_TWO_HANDED;
+				uint32_t dps = isTwoHanded ? aManifest->m_itemMetrics.GetLevelBase2HWeaponDPS(itemLevel) : aManifest->m_itemMetrics.GetLevelBase1HWeaponDPS(itemLevel);
+				uint32_t cooldown = GetWeaponCooldown();
+				uint32_t avgDamage = (dps * cooldown) / 10;
+				uint32_t minDamage = avgDamage / 2;
+				uint32_t maxDamage = (avgDamage * 3) / 2;
+				
+				if(minDamage == 0)
+					minDamage = 1;
+
+				if(maxDamage <= minDamage)
+					maxDamage = minDamage + 1;
+
+				m_properties[Data::Item::PROPERTY_TYPE_WEAPON_DAMAGE_MIN] = minDamage;
+				m_properties[Data::Item::PROPERTY_TYPE_WEAPON_DAMAGE_MAX] = maxDamage;
+			}
+		}
+
+		bool isArmor = itemTypeInfo->m_flags & ItemType::FLAG_ARMOR;
+
+		if(isArmor || m_properties[Data::Item::PROPERTY_TYPE_COST] == 0)
+		{
+			ItemMetrics::Multipliers itemTypeMultipliers = aManifest->m_itemMetrics.GetItemTypeMultipliers(m_itemData->m_itemType);
+			ItemMetrics::Multipliers equipmentSlotMultipliers = aManifest->m_itemMetrics.GetEquipmentSlotMultipliers(m_itemData->m_equipmentSlots);
+
+			ItemMetrics::Multipliers multipliers;
+			multipliers.m_armor = itemTypeMultipliers.m_armor * equipmentSlotMultipliers.m_armor;
+			multipliers.m_cost = itemTypeMultipliers.m_cost * equipmentSlotMultipliers.m_cost;
+
+			if(isArmor)
+			{
+				uint32_t baseArmor = aManifest->m_itemMetrics.GetLevelBaseArmor(itemLevel);
+				baseArmor = 1 + (uint32_t)((float)baseArmor * multipliers.m_armor);
+				m_stats.m_stats[Stat::ID_ARMOR] += baseArmor; // Add it
+			}
+
+			if(m_properties[Data::Item::PROPERTY_TYPE_COST] == 0)
+			{
+				uint32_t baseCost = aManifest->m_itemMetrics.GetLevelBaseCost(itemLevel);
+				baseCost = 1 + (uint32_t)((float)baseCost * multipliers.m_cost);
+				m_properties[Data::Item::PROPERTY_TYPE_COST] = baseCost;
+			}
+		}
 	}
 	
 	ItemInstanceData::~ItemInstanceData()
 	{
 
+	}
+
+	uint32_t	
+	ItemInstanceData::GetItemLevel() const
+	{
+		uint32_t itemLevel = m_properties[Data::Item::PROPERTY_TYPE_ITEM_LEVEL];
+		if(itemLevel == 0)
+			itemLevel = m_properties[Data::Item::PROPERTY_TYPE_REQUIRED_LEVEL];
+		if(itemLevel == 0)
+			itemLevel = 1;
+		return itemLevel;
+	}
+
+	uint32_t	
+	ItemInstanceData::GetWeaponCooldown() const
+	{
+		uint32_t weaponCooldown = m_properties[Data::Item::PROPERTY_TYPE_WEAPON_COOLDOWN];
+		if(weaponCooldown == 0)
+			weaponCooldown = 20;
+		return weaponCooldown;
 	}
 
 	//---------------------------------------------------------

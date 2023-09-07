@@ -5,15 +5,12 @@ item ring_iron_ring:
 		
 	root:
 	{
-		required_level: 1
 		name: "Iron Ring"
+		required_level: 2
+		item_level: 3
 		icon: icon_ring_1
-
-		weighted_child:
-		{
-			rarity: uncommon
-			stat strength: 1
-		}			
+		rarity: uncommon
+		stat strength: 1
 	}
 }
 
@@ -24,14 +21,11 @@ item ring_sapphire_ring:
 		
 	root:
 	{
-		required_level: 1
 		name: "Sapphire Ring"
+		required_level: 2
+		item_level: 3
 		icon: icon_ring_2
-
-		weighted_child:
-		{
-			rarity: uncommon
-			stat wisdom: 1
-		}			
+		rarity: uncommon
+		stat wisdom: 1
 	}
 }

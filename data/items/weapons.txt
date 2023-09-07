@@ -5,30 +5,12 @@ item weapon_rusty_sword:
 		
 	root:
 	{
+		name: "Rusty Sword"
 		weapon_cooldown: 20		
 		required_level: 1
-		name: "Rusty Sword"
+		item_level: 1
 		icon: icon_sword_1
-
-		weighted_child:
-		{
-			child_weight: 1
-			
-			rarity: uncommon
-			suffix: " of Doom"
-			weapon_damage_min: 5
-			weapon_damage_max: 10
-			stat strength: [ 1 3 ]
-		}
-			
-		weighted_child:
-		{
-			child_weight: 5
-			
-			rarity: common
-			weapon_damage_min: 4
-			weapon_damage_max: 9
-		}
+		rarity: common
 	}
 }
 
@@ -39,17 +21,12 @@ item weapon_gnarly_staff:
 		
 	root:
 	{
+		name: "Gnarly Staff"
 		weapon_cooldown: 30		
 		required_level: 1
-		name: "Gnarly Staff"
+		item_level: 1
 		icon: icon_staff_1
-
-		weighted_child:
-		{
-			rarity: common
-			weapon_damage_min: 3
-			weapon_damage_max: 7
-		}			
+		rarity: common
 	}
 }
 
@@ -60,9 +37,10 @@ item weapon_the_dev_tool:
 		
 	root:
 	{
+		name: "The Dev Tool"
 		weapon_cooldown: 20		
 		required_level: 1
-		name: "The Dev Tool"
+		item_level: 1
 		icon: icon_hammer_1
 		rarity: mythic
 		weapon_damage_min: 100

@@ -21,9 +21,11 @@ namespace tpublic
 			{
 				PROPERTY_TYPE_WEAPON_COOLDOWN,
 				PROPERTY_TYPE_REQUIRED_LEVEL,
+				PROPERTY_TYPE_ITEM_LEVEL,
 				PROPERTY_TYPE_WEAPON_DAMAGE_MIN,
 				PROPERTY_TYPE_WEAPON_DAMAGE_MAX,
 				PROPERTY_TYPE_RARITY,
+				PROPERTY_TYPE_COST,
 
 				NUM_PROPERTY_TYPES
 			};
@@ -102,6 +104,10 @@ namespace tpublic
 							m_properties.push_back({ PROPERTY_TYPE_WEAPON_COOLDOWN, aChild->GetUInt32() });
 						else if (aChild->m_name == "required_level")
 							m_properties.push_back({ PROPERTY_TYPE_REQUIRED_LEVEL, aChild->GetUInt32() });
+						else if (aChild->m_name == "item_level")
+							m_properties.push_back({ PROPERTY_TYPE_ITEM_LEVEL, aChild->GetUInt32() });
+						else if (aChild->m_name == "cost")
+							m_properties.push_back({ PROPERTY_TYPE_COST, aChild->GetUInt32() });
 						else if (aChild->m_name == "weapon_damage_min")
 							m_properties.push_back({ PROPERTY_TYPE_WEAPON_DAMAGE_MIN, aChild->GetUInt32() });
 						else if (aChild->m_name == "weapon_damage_max")

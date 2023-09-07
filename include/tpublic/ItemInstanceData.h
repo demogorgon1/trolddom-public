@@ -18,6 +18,9 @@ namespace tpublic
 						const Manifest*			aManifest,
 						const ItemInstance&		aItemInstance);
 					~ItemInstanceData();
+
+		uint32_t	GetItemLevel() const;
+		uint32_t	GetWeaponCooldown() const;
 	
 		// Public data
 		ItemInstance			m_instance;

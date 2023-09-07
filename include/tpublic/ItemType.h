@@ -38,7 +38,9 @@ namespace tpublic
 			FLAG_AXE		= 0x04,
 			FLAG_KNIFE		= 0x08,
 			FLAG_TWO_HANDED	= 0x10,
-			FLAG_SHIELD		= 0x20
+			FLAG_SHIELD		= 0x20,
+			FLAG_WEAPON		= 0x40,
+			FLAG_ARMOR		= 0x80
 		};
 
 		struct Info
@@ -55,21 +57,21 @@ namespace tpublic
 
 			{ "none",				"",						0 },
 
-			{ "armor_cloth",		"Cloth",				0 },
-			{ "armor_mail",			"Mail",					0 },
-			{ "armor_plate",		"Plate",				0 },
+			{ "armor_cloth",		"Cloth",				FLAG_ARMOR },
+			{ "armor_mail",			"Mail",					FLAG_ARMOR },
+			{ "armor_plate",		"Plate",				FLAG_ARMOR },
 
-			{ "weapon_1h_sword",	"One-Handed Sword",		FLAG_SWORD },
-			{ "weapon_1h_mace",		"One-Handed Mace",		FLAG_MACE },
-			{ "weapon_1h_axe",		"One-Handed Axe",		FLAG_AXE },
-			{ "weapon_1h_knife",	"Knife",				0 },
+			{ "weapon_1h_sword",	"One-Handed Sword",		FLAG_SWORD | FLAG_WEAPON },
+			{ "weapon_1h_mace",		"One-Handed Mace",		FLAG_MACE | FLAG_WEAPON },
+			{ "weapon_1h_axe",		"One-Handed Axe",		FLAG_AXE | FLAG_WEAPON },
+			{ "weapon_1h_knife",	"Knife",				FLAG_WEAPON },
 
-			{ "weapon_2h_sword",	"Two-Handed Sword",		FLAG_SWORD | FLAG_TWO_HANDED },
-			{ "weapon_2h_mace",		"Two-Handed Mace",		FLAG_MACE | FLAG_TWO_HANDED },
-			{ "weapon_2h_axe",		"Two-Handed Axe",		FLAG_AXE | FLAG_TWO_HANDED },
-			{ "weapon_2h_staff",	"Staff",				FLAG_TWO_HANDED },
+			{ "weapon_2h_sword",	"Two-Handed Sword",		FLAG_SWORD | FLAG_TWO_HANDED | FLAG_WEAPON },
+			{ "weapon_2h_mace",		"Two-Handed Mace",		FLAG_MACE | FLAG_TWO_HANDED | FLAG_WEAPON },
+			{ "weapon_2h_axe",		"Two-Handed Axe",		FLAG_AXE | FLAG_TWO_HANDED | FLAG_WEAPON },
+			{ "weapon_2h_staff",	"Staff",				FLAG_TWO_HANDED | FLAG_WEAPON },
 			
-			{ "shield",				"Shield",				FLAG_SHIELD },
+			{ "shield",				"Shield",				FLAG_SHIELD | FLAG_ARMOR },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

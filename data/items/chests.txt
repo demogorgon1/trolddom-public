@@ -6,14 +6,10 @@ item chest_flimsy_mail_shirt:
 		
 	root:
 	{
-		required_level: 1
 		name: "Flimsy Mail Shirt"
+		required_level: 1
+		item_level: 1
 		icon: icon_mail_shirt_1
-
-		weighted_child:
-		{
-			rarity: common
-			stat armor: 15
-		}			
+		rarity: common
 	}
 }

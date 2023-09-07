@@ -28,6 +28,34 @@ item_metrics:
 		[ 10 35 ]
 	]
 	
+	base_1h_weapon_dps:
+	[
+		[ 1 5 ]
+		[ 2 6 ]
+		[ 3 7 ]
+		[ 4 8 ]
+		[ 5 9 ]
+		[ 6 10 ]
+		[ 7 11 ]
+		[ 8 12 ]
+		[ 9 13 ]
+		[ 10 14 ]
+	]
+
+	base_2h_weapon_dps:
+	[
+		[ 1 8 ]
+		[ 2 9 ]
+		[ 3 10 ]
+		[ 4 12 ]
+		[ 5 13 ]
+		[ 6 15 ]
+		[ 7 16 ]
+		[ 8 18 ]
+		[ 9 19 ]
+		[ 10 21 ]
+	]
+
 	item_type_multipliers armor_cloth: 		{ armor: 1 		cost: 1 }
 	item_type_multipliers armor_mail: 		{ armor: 2 		cost: 1.5 }
 	item_type_multipliers armor_plate: 		{ armor: 3 		cost: 3 }
