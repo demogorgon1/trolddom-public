@@ -13,8 +13,8 @@ loot_table test_world_npc_1:
 
 dialogue_screen test_world_npc_vendor:
 {
-	sell consumable_small_healing_potion: { cost: 20 quantity: 1 }	
-	sell consumable_small_mana_potion: { cost: 20 quantity: 1 }	
+	sell consumable_small_healing_potion: { quantity: 1 }	
+	sell consumable_small_mana_potion: { quantity: 1 }	
 }
 
 dialogue_screen test_world_sylas:

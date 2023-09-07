@@ -31,6 +31,7 @@ namespace tpublic
 		Stat::Collection		m_stats;
 		uint32_t				m_properties[Data::Item::NUM_PROPERTY_TYPES] = { 0 };
 		bool					m_isWeapon = false;
+		uint32_t				m_vendorValue = 0;
 
 	private:
 

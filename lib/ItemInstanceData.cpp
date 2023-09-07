@@ -75,6 +75,8 @@ namespace tpublic
 				m_properties[Data::Item::PROPERTY_TYPE_COST] = baseCost;
 			}
 		}
+
+		m_vendorValue = (uint32_t)((float)m_properties[Data::Item::PROPERTY_TYPE_COST] * aManifest->m_itemMetrics.m_vendorCostMultiplier);
 	}
 	
 	ItemInstanceData::~ItemInstanceData()

@@ -1,5 +1,7 @@
 item_metrics:
 {
+	vendor_cost_multiplier: 0.5
+
 	base_armor:
 	[
 		[ 1  10 ]

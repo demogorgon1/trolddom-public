@@ -137,6 +137,10 @@ namespace tpublic
 					TP_VERIFY(equipmentSlot != EquipmentSlot::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid equipment slot.", aChild->m_name.c_str());
 					m_equipmentSlotMultipliers[equipmentSlot].FromSource(aChild);
 				}
+				else if(aChild->m_name == "vendor_cost_multiplier")
+				{
+					m_vendorCostMultiplier = aChild->GetFloat();
+				}
 				else
 				{
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -152,6 +156,7 @@ namespace tpublic
 			aStream->WriteUInts(m_levelBaseCost);
 			aStream->WriteUInts(m_levelBase1HWeaponDPS);
 			aStream->WriteUInts(m_levelBase2HWeaponDPS);
+			aStream->WriteFloat(m_vendorCostMultiplier);
 
 			for(uint32_t i = 1; i < (uint32_t)ItemType::NUM_IDS; i++)
 				m_itemTypeMultipliers[i].ToStream(aStream);
@@ -171,6 +176,8 @@ namespace tpublic
 			if (!aStream->ReadUInts(m_levelBase1HWeaponDPS))
 				return false;
 			if (!aStream->ReadUInts(m_levelBase2HWeaponDPS))
+				return false;
+			if (!aStream->ReadFloat(m_vendorCostMultiplier))
 				return false;
 
 			for (uint32_t i = 1; i < (uint32_t)ItemType::NUM_IDS; i++)
@@ -259,6 +266,7 @@ namespace tpublic
 		std::vector<uint32_t>					m_levelBase2HWeaponDPS;
 		Multipliers								m_itemTypeMultipliers[ItemType::NUM_IDS];
 		Multipliers								m_equipmentSlotMultipliers[EquipmentSlot::NUM_IDS];
+		float									m_vendorCostMultiplier = 0.5f;
 	};
 
 }
