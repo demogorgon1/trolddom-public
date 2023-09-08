@@ -65,6 +65,7 @@ namespace tpublic
 				m_playerTag.ToStream(aStream);
 				if (m_playerTag.IsSet())
 				{					
+					aStream->WritePOD(m_cash);
 					aStream->WriteInt(m_availableCash);
 					aStream->WriteObjects(m_availableLoot);
 				}
@@ -82,6 +83,8 @@ namespace tpublic
 					return false;
 				if (m_playerTag.IsSet())
 				{
+					if(!aStream->ReadPOD(m_cash))
+						return false;
 					if (!aStream->ReadInt(m_availableCash))
 						return false;
 					if (!aStream->ReadObjects(m_availableLoot))
@@ -94,6 +97,7 @@ namespace tpublic
 			uint32_t					m_lootTableId = 0;
 
 			PlayerTag					m_playerTag;
+			bool						m_cash = false;
 			int64_t						m_availableCash = 0;
 			std::vector<ItemInstance>	m_availableLoot;
 			uint32_t					m_version = 0;

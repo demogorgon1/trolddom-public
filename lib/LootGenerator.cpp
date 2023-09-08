@@ -40,6 +40,7 @@ namespace tpublic
 		{
 			std::uniform_int_distribution<int64_t> distribution(lootTable->m_cash->m_min, lootTable->m_cash->m_max);
 			aLootable->m_availableCash = distribution(aRandom);
+			aLootable->m_cash = true;
 		}
 
 		for(const std::unique_ptr<Data::LootTable::Slot>& slot : lootTable->m_slots)
