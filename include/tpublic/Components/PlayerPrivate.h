@@ -35,6 +35,8 @@ namespace tpublic
 				aStream->WriteUInt(m_level);
 				aStream->WriteUInt(m_xp);
 				aStream->WritePOD(m_isDead);
+				aStream->WriteUInt(m_resurrectionPointMapId);
+				m_resurrectionPointPosition.ToStream(aStream);
 			}
 
 			bool
@@ -47,6 +49,10 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadPOD(m_isDead))
 					return false;
+				if (!aStream->ReadUInt(m_resurrectionPointMapId))
+					return false;
+				if(!m_resurrectionPointPosition.FromStream(aStream))
+					return false;
 				return true;
 			}
 
@@ -54,6 +60,8 @@ namespace tpublic
 			uint32_t		m_level = 1;
 			uint32_t		m_xp = 0;
 			bool			m_isDead = false;
+			Vec2			m_resurrectionPointPosition;
+			uint32_t		m_resurrectionPointMapId = 0;
 
 			// Not persistent
 			bool			m_positionUpdatedOnServer = false;
