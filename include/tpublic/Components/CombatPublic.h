@@ -130,6 +130,24 @@ namespace tpublic
 				return false;
 			}
 
+			bool
+			GetSecondaryResourceIndex(
+				size_t&					aOut) const
+			{
+				// Secondary resource is the first one that's not health
+				size_t i = 0;
+				for (const ResourceEntry& t : m_resources)
+				{
+					if (t.m_id != Resource::ID_HEALTH)
+					{
+						aOut = i;
+						return true;
+					}
+					i++;
+				}
+				return false;
+			}
+
 			void
 			SetResource(
 				uint32_t				aResourceId,
