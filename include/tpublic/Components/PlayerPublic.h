@@ -37,6 +37,7 @@ namespace tpublic
 				aStream->WriteUInt(m_classId);
 				aStream->WriteUInt(m_characterId);
 				m_stats.ToStream(aStream);
+				aStream->WriteString(m_guildName);
 			}
 
 			bool
@@ -49,13 +50,15 @@ namespace tpublic
 					return false;
 				if(!m_stats.FromStream(aStream))
 					return false;
+				if(!aStream->ReadString(m_guildName))
+					return false;
 				return true;
 			}
 
 			void
 			DebugPrint() const override
 			{
-				printf("player_public: class=%u", m_classId);
+				printf("player_public: class=%u guild_name=%s", m_classId, m_guildName.c_str());
 				m_stats.DebugPrint();
 				printf("\n");				
 			}
@@ -64,6 +67,7 @@ namespace tpublic
 			uint32_t			m_classId = 0;
 			uint32_t			m_characterId = 0;
 			Stat::Collection	m_stats;
+			std::string			m_guildName;
 		};
 	}
 
