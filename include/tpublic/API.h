@@ -15,6 +15,7 @@
 #include "DataBase.h"
 #include "DataErrorHandling.h"
 #include "DataType.h"
+#include "DialogueScript.h"
 #include "DirectEffect.h"
 #include "DirectEffectBase.h"
 #include "DirectEffectFactory.h"

@@ -89,6 +89,14 @@ namespace tpublic
 								m_abilities.push_back(AbilityEntry(aAbility));
 							});
 						}
+						else if(aChild->m_name == "dialogue_scripts")
+						{
+							aChild->GetIdArrayWithLookup<DialogueScript::Id, DialogueScript::INVALID_ID>(m_dialogueScripts, [aChild](
+								const char* aIdentifier) -> DialogueScript::Id
+							{
+								return DialogueScript::StringToId(aIdentifier);
+							});
+						}
 						else 
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
@@ -102,6 +110,7 @@ namespace tpublic
 				{
 					aStream->WritePOD(m_entityState);
 					aStream->WriteObjects(m_abilities);
+					aStream->WritePODs(m_dialogueScripts);
 				}
 
 				bool
@@ -112,12 +121,27 @@ namespace tpublic
 						return false;
 					if(!aStream->ReadObjects(m_abilities))
 						return false;
+					if(!aStream->ReadPODs(m_dialogueScripts))
+						return false;
 					return true;
+				}
+
+				bool
+				HasDialogueScript(
+					DialogueScript::Id		aDialogueScript) const
+				{
+					for(DialogueScript::Id t : m_dialogueScripts)
+					{
+						if(t == aDialogueScript)
+							return true;
+					}
+					return false;
 				}
 
 				// Public data
 				EntityState::Id						m_entityState = EntityState::ID_DEFAULT;
 				std::vector<AbilityEntry>			m_abilities;
+				std::vector<DialogueScript::Id>		m_dialogueScripts;
 			};
 
 			struct ResourceEntry
@@ -160,7 +184,7 @@ namespace tpublic
 
 			const StateEntry*
 			GetState(
-				EntityState::Id			aEntityState)
+				EntityState::Id			aEntityState) const
 			{
 				for(const std::unique_ptr<StateEntry>& t : m_states)
 				{

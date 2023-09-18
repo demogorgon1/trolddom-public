@@ -212,7 +212,7 @@ namespace tpublic
 					else if (aChild->m_name == "level")
 						m_level = aChild->GetUInt32();
 					else if (aChild->m_name == "dialogue_screen")
-						m_dialogueScreenId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_DIALOGUE_SCREEN, aChild->GetIdentifier());
+						aChild->GetIdArray(DataType::ID_DIALOGUE_SCREEN, m_dialogueScreenIds);
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 				});
@@ -225,7 +225,7 @@ namespace tpublic
 				aStream->WriteUInt(m_targetEntityInstanceId);
 				aStream->WriteUInt(m_level);
 				aStream->WriteUInt(m_factionId);
-				aStream->WriteUInt(m_dialogueScreenId);
+				aStream->WriteUInts(m_dialogueScreenIds);
 				aStream->WriteUInt(m_combatGroupId);
 				aStream->WriteObjects(m_resources);
 				aStream->WriteOptionalObject(m_castInProgress);
@@ -241,7 +241,7 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInt(m_factionId))
 					return false;
-				if (!aStream->ReadUInt(m_dialogueScreenId))
+				if (!aStream->ReadUInts(m_dialogueScreenIds))
 					return false;
 				if (!aStream->ReadUInt(m_combatGroupId))
 					return false;
@@ -255,9 +255,11 @@ namespace tpublic
 			void
 			DebugPrint() const override
 			{
-				printf("combat_public: target=%u level=%u faction=%u combat_group=%zu dialogue_screen=%u", m_targetEntityInstanceId, m_level, m_factionId, m_combatGroupId, m_dialogueScreenId);
+				printf("combat_public: target=%u level=%u faction=%u combat_group=%zu dialogue_screens=", m_targetEntityInstanceId, m_level, m_factionId, m_combatGroupId);
+				for(uint32_t dialogueScreenId : m_dialogueScreenIds)
+					printf("%u ", dialogueScreenId);
 				for(const ResourceEntry& resource : m_resources)
-					printf(" %s=%u/%u", Resource::GetInfo((Resource::Id)resource.m_id)->m_name, resource.m_current, resource.m_max);
+					printf("%s=%u/%u ", Resource::GetInfo((Resource::Id)resource.m_id)->m_name, resource.m_current, resource.m_max);
 				printf("\n");
 			}
 
@@ -266,7 +268,7 @@ namespace tpublic
 
 			uint32_t						m_level = 1;
 			uint32_t						m_factionId = 0;
-			uint32_t						m_dialogueScreenId = 0;
+			std::vector<uint32_t>			m_dialogueScreenIds;
 			uint64_t						m_combatGroupId = 0;
 			std::vector<ResourceEntry>		m_resources;
 			std::optional<CastInProgress>	m_castInProgress;

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../DataBase.h"
+#include "../DialogueScript.h"
 
 namespace tpublic
 {
@@ -23,8 +24,27 @@ namespace tpublic
 				Option(
 					const Parser::Node*	aSource)
 				{
-					m_dialogueScreenId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_DIALOGUE_SCREEN, aSource->m_name.c_str());
-					m_string = aSource->GetString();
+					aSource->ForEachChild([&](
+						const Parser::Node* aChild)
+					{
+						if(aChild->m_name == "goto")
+						{
+							m_dialogueScreenId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_DIALOGUE_SCREEN, aChild->GetIdentifier());
+						}
+						else if (aChild->m_name == "text")
+						{
+							m_string = aChild->GetString();
+						}
+						else if(aChild->m_name == "script")
+						{
+							m_dialogueScript = DialogueScript::StringToId(aChild->GetIdentifier());
+							TP_VERIFY(m_dialogueScript != DialogueScript::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid dialogue script.", aChild->GetIdentifier());
+						}
+						else
+						{
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
+						}
+					});				
 				}
 
 				void
@@ -33,6 +53,7 @@ namespace tpublic
 				{
 					aWriter->WriteString(m_string);
 					aWriter->WriteUInt(m_dialogueScreenId);
+					aWriter->WritePOD(m_dialogueScript);
 				}
 
 				bool
@@ -43,12 +64,15 @@ namespace tpublic
 						return false;
 					if(!aReader->ReadUInt(m_dialogueScreenId))
 						return false;
+					if (!aReader->ReadPOD(m_dialogueScript))
+						return false;
 					return true;
 				}
 
 				// Public data
 				std::string			m_string;
-				uint32_t			m_dialogueScreenId = 0;
+				uint32_t			m_dialogueScreenId = 0;		
+				DialogueScript::Id	m_dialogueScript = DialogueScript::ID_NONE;
 			};
 
 			struct Sell
@@ -129,9 +153,11 @@ namespace tpublic
 					if(aChild->m_name == "text")
 						aChild->GetArray()->ForEachChild([&](const Parser::Node* aLine) { appendString(m_text, aLine->GetString()); });
 					else if(aChild->m_name == "options")
-						aChild->GetObject()->ForEachChild([&](const Parser::Node* aOption) { m_options.push_back(Option(aOption)); });
+						aChild->GetArray()->ForEachChild([&](const Parser::Node* aOption) { m_options.push_back(Option(aOption)); });
 					else if(aChild->m_tag == "sell")
 						m_sell.push_back(Sell(aChild));
+					else if(aChild->m_name == "conditions")
+						aChild->GetIdArray(DataType::ID_CONDITION, m_conditions);
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 				});
@@ -142,6 +168,7 @@ namespace tpublic
 				IWriter*				aStream) const override
 			{
 				ToStreamBase(aStream);
+				aStream->WriteUInts(m_conditions);
 				aStream->WriteString(m_text);
 				aStream->WriteObjects(m_options);
 				aStream->WriteObjects(m_sell);
@@ -153,7 +180,9 @@ namespace tpublic
 			{
 				if (!FromStreamBase(aStream))
 					return false;
-				if(!aStream->ReadString(m_text))
+				if(!aStream->ReadUInts(m_conditions))
+					return false;
+				if(!aStream->ReadString(m_text, 16 * 1024))
 					return false;
 				if (!aStream->ReadObjects(m_options))
 					return false;
@@ -163,6 +192,7 @@ namespace tpublic
 			}
 
 			// Public data
+			std::vector<uint32_t>				m_conditions;
 			std::string							m_text;
 			std::vector<Option>					m_options;
 			std::vector<Sell>					m_sell;

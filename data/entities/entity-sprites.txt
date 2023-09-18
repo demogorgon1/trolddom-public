@@ -12,6 +12,7 @@ sprites:
 	sprite deer: { }
 	sprite boar: { }
 	sprite man_1: { }
+	sprite man_2: { }
 	
 	cursor: { position: [ 0 16 ] }
 	
@@ -21,6 +22,7 @@ sprites:
 	sprite deer_dead: { }	
 	sprite boar_dead: { }	
 	sprite man_1_dead: { }	
+	sprite man_2_dead: { }	
 }
 
 sprites:
