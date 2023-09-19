@@ -40,6 +40,10 @@ namespace tpublic
 							m_dialogueScript = DialogueScript::StringToId(aChild->GetIdentifier());
 							TP_VERIFY(m_dialogueScript != DialogueScript::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid dialogue script.", aChild->GetIdentifier());
 						}
+						else if (aChild->m_name == "condition")
+						{
+							m_conditionExpressionId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_EXPRESSION, aChild->GetIdentifier());
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
@@ -54,6 +58,7 @@ namespace tpublic
 					aWriter->WriteString(m_string);
 					aWriter->WriteUInt(m_dialogueScreenId);
 					aWriter->WritePOD(m_dialogueScript);
+					aWriter->WriteUInt(m_conditionExpressionId);
 				}
 
 				bool
@@ -66,6 +71,8 @@ namespace tpublic
 						return false;
 					if (!aReader->ReadPOD(m_dialogueScript))
 						return false;
+					if (!aReader->ReadUInt(m_conditionExpressionId))
+						return false;
 					return true;
 				}
 
@@ -73,6 +80,7 @@ namespace tpublic
 				std::string			m_string;
 				uint32_t			m_dialogueScreenId = 0;		
 				DialogueScript::Id	m_dialogueScript = DialogueScript::ID_NONE;
+				uint32_t			m_conditionExpressionId = 0;
 			};
 
 			struct Sell

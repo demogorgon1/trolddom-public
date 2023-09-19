@@ -35,6 +35,7 @@ namespace tpublic
 			ID_TAG,
 			ID_VENDOR_BUYBACK,
 			ID_RESURRECTION_POINT,
+			ID_GUILD_REGISTRAR,
 
 			NUM_IDS
 		};
@@ -67,7 +68,8 @@ namespace tpublic
 			"owner",
 			"tag",
 			"vendor_buyback",
-			"resurrection_point"
+			"resurrection_point",
+			"guild_registrar"
 		};		
 
 		static_assert(sizeof(COMPONENT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

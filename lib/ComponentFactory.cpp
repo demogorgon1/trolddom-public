@@ -8,6 +8,7 @@
 #include <tpublic/Components/DisplayName.h>
 #include <tpublic/Components/Environment.h>
 #include <tpublic/Components/EquippedItems.h>
+#include <tpublic/Components/GuildRegistrar.h>
 #include <tpublic/Components/Inventory.h>
 #include <tpublic/Components/Lootable.h>
 #include <tpublic/Components/NPC.h>
@@ -41,6 +42,7 @@ namespace tpublic
 		_Register<Components::DisplayName>();
 		_Register<Components::Environment>();
 		_Register<Components::EquippedItems>();
+		_Register<Components::GuildRegistrar>();
 		_Register<Components::Inventory>();
 		_Register<Components::Lootable>();
 		_Register<Components::NPC>();

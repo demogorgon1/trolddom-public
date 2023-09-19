@@ -27,6 +27,8 @@ namespace tpublic
 
 			// Client 
 			OP_CLIENT_PLAYER_IS_IN_GUILD,
+			OP_CLIENT_WALLET_CASH,
+			OP_CLIENT_GUILD_REGISTRATION_PRICE,
 
 			NUM_OPS
 		};
@@ -48,7 +50,9 @@ namespace tpublic
 			"greater_than",
 
 			// Client
-			"client_player_is_in_guild"
+			"client_player_is_in_guild",
+			"client_wallet_cash",
+			"client_guild_registration_price"
 		};
 
 		static_assert(sizeof(OPS) / sizeof(const char*) == (size_t)NUM_OPS);

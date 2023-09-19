@@ -102,6 +102,15 @@ entity test_world_sylas:
 	}
 }
 
+expression test_world_rob_beaurichard_can_afford_guild_registration:
+{
+	less_than_or_equal: 
+	{
+		client_guild_registration_price: {}
+		client_wallet_cash: {}
+	}
+}
+
 dialogue_screen test_world_rob_beaurichard_1:
 {
 	text: 
@@ -112,7 +121,7 @@ dialogue_screen test_world_rob_beaurichard_1:
 	
 	options:
 	[
-		{ script: create_guild text: "Yes, please hand me the guild registration form." }
+		{ script: create_guild text: "Yes, please hand me the guild registration form." condition: test_world_rob_beaurichard_can_afford_guild_registration }
 	]
 }
 
@@ -120,7 +129,7 @@ dialogue_screen test_world_rob_beaurichard_2:
 {
 	text: 
 	[	
-		"If you don't feel at home in your guild, how about making your own? I've got the paperwork right here!"
+		"If you don't feel at home in your current guild, how about making your own? I've got the paperwork right here! Come back and talk to me when you're ready."
 	]
 }
 
@@ -153,7 +162,11 @@ entity test_world_rob_beaurichard:
 		visible_auras: { }
 		auras: { }
 		tag: { }
-		lootable : 
+		guild_registrar: 
+		{
+			registration_price_tiers: [ 5000 10000 20000 40000 ]
+		}
+		lootable: 
 		{ 
 			loot_table: test_world_npc_1
 		}

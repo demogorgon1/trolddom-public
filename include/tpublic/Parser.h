@@ -179,6 +179,16 @@ namespace tpublic
 				}
 			}
 
+			template <typename _T>
+			void
+			GetUIntArray(
+				std::vector<_T>& aOut) const
+			{
+				TP_VERIFY(m_type == TYPE_ARRAY, m_debugInfo, "Not an array.");
+				for (const std::unique_ptr<Node>& child : m_children)
+					aOut.push_back((_T)child->GetUInt32());
+			}
+
 			bool
 			IsIdentifier(
 				const char*						aString) const
