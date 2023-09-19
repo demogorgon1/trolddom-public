@@ -29,7 +29,8 @@ namespace tpublic
 			ID_MAP_TRIGGER,
 			ID_PARTICLE_SYSTEM,
 			ID_DIALOGUE_SCREEN,
-			ID_CONDITION,
+			ID_EXPRESSION,
+			ID_DIALOGUE_ROOT,
 
 			NUM_IDS
 		};
@@ -57,7 +58,8 @@ namespace tpublic
 			"map_trigger",
 			"particle_system",
 			"dialogue_screen",
-			"condition"
+			"expression",
+			"dialogue_root"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

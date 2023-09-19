@@ -35,6 +35,11 @@ dialogue_screen test_world_sylas:
 	]
 }
 
+dialogue_root test_world_sylas:
+{
+	test_world_sylas: { }
+}
+
 entity test_world_sylas:
 {
 	string: "Sylas"
@@ -56,7 +61,7 @@ entity test_world_sylas:
 		{  
 			level: 1
 			faction: npcs		
-			dialogue_screen: [ test_world_sylas ]
+			dialogue_root: test_world_sylas
 		}			
 		combat_private:
 		{
@@ -97,20 +102,8 @@ entity test_world_sylas:
 	}
 }
 
-condition test_world_rob_beaurichard_is_in_guild:
-{
-	player_is_in_guild: {}
-}
-
-condition test_world_rob_beaurichard_is_not_in_guild:
-{
-	not: { player_is_in_guild: {} }
-}
-
 dialogue_screen test_world_rob_beaurichard_1:
 {
-	conditions: [ test_world_rob_beaurichard_is_not_in_guild ]
-
 	text: 
 	[	
 		"Welcome! I am Rob Beaurichard, the official guild registrar of this realm. If you have a burning desire to forge your own path and leave your mark on history,"
@@ -125,12 +118,26 @@ dialogue_screen test_world_rob_beaurichard_1:
 
 dialogue_screen test_world_rob_beaurichard_2:
 {
-	conditions: [ test_world_rob_beaurichard_is_in_guild ]
-
 	text: 
 	[	
 		"If you don't feel at home in your guild, how about making your own? I've got the paperwork right here!"
 	]
+}
+
+expression test_world_rob_beaurichard_is_in_guild:
+{
+	client_player_is_in_guild: {}
+}
+
+expression test_world_rob_beaurichard_is_not_in_guild:
+{
+	not: { client_player_is_in_guild: {} }
+}
+
+dialogue_root test_world_rob_beaurichard:
+{
+	test_world_rob_beaurichard_1: { conditions: [ test_world_rob_beaurichard_is_not_in_guild ] }
+	test_world_rob_beaurichard_2: { conditions: [ test_world_rob_beaurichard_is_in_guild ] }
 }
 
 entity test_world_rob_beaurichard:
@@ -154,7 +161,7 @@ entity test_world_rob_beaurichard:
 		{  
 			level: 1
 			faction: npcs		
-			dialogue_screen: [ test_world_rob_beaurichard_1 test_world_rob_beaurichard_2 ]
+			dialogue_root: test_world_rob_beaurichard
 		}			
 		combat_private:
 		{

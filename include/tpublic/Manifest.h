@@ -3,9 +3,10 @@
 #include "Data/Ability.h"
 #include "Data/Aura.h"
 #include "Data/Class.h"
-#include "Data/Condition.h"
+#include "Data/DialogueRoot.h"
 #include "Data/DialogueScreen.h"
 #include "Data/Entity.h"
+#include "Data/Expression.h"
 #include "Data/Faction.h"
 #include "Data/Item.h"
 #include "Data/LootGroup.h"
@@ -253,9 +254,10 @@ namespace tpublic
 			RegisterDataContainer(m_abilities);
 			RegisterDataContainer(m_auras);
 			RegisterDataContainer(m_classes);
-			RegisterDataContainer(m_conditions);
+			RegisterDataContainer(m_dialogueRoots);
 			RegisterDataContainer(m_dialogueScreens);
 			RegisterDataContainer(m_entities);
+			RegisterDataContainer(m_expressions);
 			RegisterDataContainer(m_factions);
 			RegisterDataContainer(m_items);
 			RegisterDataContainer(m_lootGroups);
@@ -337,9 +339,10 @@ namespace tpublic
 		DataContainer<Data::Ability>					m_abilities;
 		DataContainer<Data::Aura>						m_auras;
 		DataContainer<Data::Class>						m_classes;
-		DataContainer<Data::Condition>					m_conditions;
+		DataContainer<Data::DialogueRoot>				m_dialogueRoots;
 		DataContainer<Data::DialogueScreen>				m_dialogueScreens;
 		DataContainer<Data::Entity>						m_entities;
+		DataContainer<Data::Expression>					m_expressions;
 		DataContainer<Data::Faction>					m_factions;
 		DataContainer<Data::Item>						m_items;
 		DataContainer<Data::LootGroup>					m_lootGroups;

@@ -156,8 +156,6 @@ namespace tpublic
 						aChild->GetArray()->ForEachChild([&](const Parser::Node* aOption) { m_options.push_back(Option(aOption)); });
 					else if(aChild->m_tag == "sell")
 						m_sell.push_back(Sell(aChild));
-					else if(aChild->m_name == "conditions")
-						aChild->GetIdArray(DataType::ID_CONDITION, m_conditions);
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 				});
@@ -168,7 +166,6 @@ namespace tpublic
 				IWriter*				aStream) const override
 			{
 				ToStreamBase(aStream);
-				aStream->WriteUInts(m_conditions);
 				aStream->WriteString(m_text);
 				aStream->WriteObjects(m_options);
 				aStream->WriteObjects(m_sell);
@@ -180,8 +177,6 @@ namespace tpublic
 			{
 				if (!FromStreamBase(aStream))
 					return false;
-				if(!aStream->ReadUInts(m_conditions))
-					return false;
 				if(!aStream->ReadString(m_text, 16 * 1024))
 					return false;
 				if (!aStream->ReadObjects(m_options))
@@ -192,7 +187,6 @@ namespace tpublic
 			}
 
 			// Public data
-			std::vector<uint32_t>				m_conditions;
 			std::string							m_text;
 			std::vector<Option>					m_options;
 			std::vector<Sell>					m_sell;
