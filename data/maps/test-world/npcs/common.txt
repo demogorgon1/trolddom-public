@@ -1,0 +1,13 @@
+loot_table test_world_npc_1:
+{
+	cash: [ 20 30 ]
+	
+	slots:
+	[
+		{
+			possibility: { weight: 10 }
+			possibility: { weight: 1 loot_group: world_drops_1_to_5 }
+		}		
+	]	
+}
+
