@@ -120,8 +120,8 @@ namespace tpublic
 			static const size_t MAX_COUNT = 8;
 
 			// Public data
-			size_t		m_count;
-			uint32_t	m_values[MAX_COUNT];	
+			size_t		m_count = 0; 
+			uint32_t	m_values[MAX_COUNT] = { 0 };	
 		};
 
 		typedef std::function<uint32_t(const Args*)> OpFunction;
