@@ -68,7 +68,7 @@ map test_world:
 	default_player_spawn: test_world_player_spawn
 	view_attenuation: 0
 	view_attenuation_bias: 0
-	view_hidden_visibility: 50	
+	view_hidden_visibility: 35	
 	#image_output: "test-world.png"
 
 	layers:
