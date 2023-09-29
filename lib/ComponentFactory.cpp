@@ -23,6 +23,7 @@
 #include <tpublic/Components/Talents.h>
 #include <tpublic/Components/ThreatSource.h>
 #include <tpublic/Components/ThreatTarget.h>
+#include <tpublic/Components/Trade.h>
 #include <tpublic/Components/VendorBuyback.h>
 #include <tpublic/Components/VisibleAuras.h>
 #include <tpublic/Components/Wallet.h>
@@ -57,6 +58,7 @@ namespace tpublic
 		_Register<Components::Talents>();
 		_Register<Components::ThreatSource>();
 		_Register<Components::ThreatTarget>();
+		_Register<Components::Trade>();
 		_Register<Components::VendorBuyback>();
 		_Register<Components::VisibleAuras>();
 		_Register<Components::Wallet>();

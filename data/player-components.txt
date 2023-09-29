@@ -15,6 +15,7 @@ player_components:
 	sprite
 	talents
 	threat_source
+	trade
 	visible_auras
 	wallet
 	vendor_buyback
