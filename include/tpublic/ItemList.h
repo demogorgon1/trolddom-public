@@ -20,6 +20,7 @@ namespace tpublic
 				IWriter*								aStream) const 
 			{
 				aStream->WritePOD(m_item);
+				aStream->WritePOD(m_trading);
 			}
 
 			bool
@@ -28,11 +29,14 @@ namespace tpublic
 			{
 				if (!aStream->ReadPOD(m_item))
 					return false;
+				if(!aStream->ReadPOD(m_trading))
+					return false;
 				return true;
 			}
 
 			// Public data
 			ItemInstance				m_item;
+			bool						m_trading = false;
 		};
 
 		void				ToStream(
