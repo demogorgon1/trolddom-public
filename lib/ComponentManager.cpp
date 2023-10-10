@@ -73,10 +73,13 @@ namespace tpublic
 	ComponentManager::Create(
 		uint32_t			aId) const
 	{
-		if(!m_functions[aId])
+		assert(aId < Component::NUM_IDS);
+		const ComponentType& t = m_componentTypes[aId];
+
+		if(!t.m_create)
 			return NULL;
 
-		return m_functions[aId]();
+		return t.m_create();
 	}
 
 }

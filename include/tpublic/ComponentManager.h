@@ -17,13 +17,23 @@ namespace tpublic
 
 	private:
 
-		std::function<ComponentBase*()>		m_functions[Component::NUM_IDS];
+		struct ComponentType
+		{
+			std::function<ComponentBase*()>		m_create;
+			ComponentSchema						m_schema;
+		};
+
+		ComponentType							m_componentTypes[Component::NUM_IDS];
 
 		template<typename _T>
 		void
 		_Register()
 		{
-			m_functions[_T::ID] = []() { return new _T(); };
+			ComponentType& t = m_componentTypes[_T::ID];
+
+			_T::CreateSchema(&t.m_schema);
+
+			t.m_create = []() { return new _T(); };
 		}
 	};
 
