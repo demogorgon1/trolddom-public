@@ -28,7 +28,7 @@ namespace tpublic
 				ComponentSchema*		aSchema)
 			{
 				aSchema->Define(ComponentSchema::TYPE_INT32, FIELD_TICK_INTERVAL, "tick_interval", offsetof(Environment, m_tickInterval));
-				aSchema->Define(ComponentSchema::TYPE_INT32, FIELD_DURATION, "tick_duration", offsetof(Environment, m_duration));
+				aSchema->Define(ComponentSchema::TYPE_INT32, FIELD_DURATION, "duration", offsetof(Environment, m_duration));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_ABILITY, "ability", offsetof(Environment, m_abilityId))->SetDataType(DataType::ID_ABILITY);
 			}
 
@@ -45,24 +45,6 @@ namespace tpublic
 			}
 
 			// ComponentBase implementation
-			void
-			FromSource( 
-				const Parser::Node*	aSource)
-			{
-				aSource->ForEachChild([&](
-					const Parser::Node* aChild)
-				{
-					if(aChild->m_name == "tick_interval")					
-						m_tickInterval = aChild->GetInt32();
-					else if (aChild->m_name == "duration")
-						m_duration = aChild->GetInt32();
-					else if (aChild->m_name == "ability")
-						m_abilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
-					else
-						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
-				});
-			}
-
 			void
 			ToStream(
 				IWriter*			aStream) const override

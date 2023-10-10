@@ -37,7 +37,7 @@ namespace tpublic
 					TP_VERIFY((component->GetFlags() & ComponentBase::FLAG_PLAYER_ONLY) == 0, aSource->m_debugInfo, "'%s' is a player-only component.", aSource->m_name.c_str());
 
 					if(!aSource->m_children.empty())
-						component->FromSource(aSource);
+						aSource->m_sourceContext->m_componentManager->ReadSource(aSource, component.get());
 
 					m_componentBase = std::move(component);
 				}

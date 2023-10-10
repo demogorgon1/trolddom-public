@@ -172,11 +172,15 @@ namespace tpublic
 				FromSource(
 					const Parser::Node*		aSource)
 				{
-					ResourceEntry t;
-					t.m_id = Resource::StringToId(aSource->m_name.c_str());
-					TP_VERIFY(t.m_id != 0, aSource->m_debugInfo, "'%s' is not a valid resource.", aSource->m_name.c_str());
-					t.m_max = aSource->GetUInt32();
-					m_entries.push_back(t);
+					aSource->ForEachChild([&](
+						const Parser::Node* aChild)
+					{
+						ResourceEntry t;
+						t.m_id = Resource::StringToId(aChild->m_name.c_str());
+						TP_VERIFY(t.m_id != 0, aChild->m_debugInfo, "'%s' is not a valid resource.", aChild->m_name.c_str());
+						t.m_max = aChild->GetUInt32();
+						m_entries.push_back(t);
+					});
 				}
 
 				void
@@ -238,38 +242,6 @@ namespace tpublic
 			}
 
 			// ComponentBase implementation
-			void	
-			FromSource(
-				const Parser::Node*		aSource) override
-			{
-				aSource->ForEachChild([&](
-					const Parser::Node*	aChild)
-				{
-					if (aChild->m_tag == "state")
-					{
-						std::unique_ptr<StateEntry> t = std::make_unique<StateEntry>();
-						t->FromSource(aChild);
-						m_states.push_back(std::move(t));
-					}
-					else if (aChild->m_name == "resources")
-					{
-						aChild->ForEachChild([&](
-							const Parser::Node* aResource)
-						{
-							ResourceEntry t;
-							t.m_id = Resource::StringToId(aResource->m_name.c_str());
-							TP_VERIFY(t.m_id != 0, aResource->m_debugInfo, "'%s' is not a valid resource.", aResource->m_name.c_str());
-							t.m_max = aResource->GetUInt32();
-							m_resources.m_entries.push_back(t);
-						});
-					}
-					else
-					{
-						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
-					}
-				});
-			}
-
 			void
 			ToStream(
 				IWriter*				aStream) const override

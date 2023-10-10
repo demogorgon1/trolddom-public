@@ -71,7 +71,7 @@ namespace tpublic
 
 	ComponentBase*
 	ComponentManager::Create(
-		uint32_t			aId) const
+		uint32_t				aId) const
 	{
 		assert(aId < Component::NUM_IDS);
 		const ComponentType& t = m_componentTypes[aId];
@@ -80,6 +80,80 @@ namespace tpublic
 			return NULL;
 
 		return t.m_create();
+	}
+
+	std::string
+	ComponentManager::AsDebugString(
+		const ComponentBase*	aComponent) const
+	{
+		const ComponentType& t = m_componentTypes[aComponent->GetComponentId()];
+
+		return t.m_schema.AsDebugString(aComponent);
+	}
+
+	void				
+	ComponentManager::WriteNetwork(
+		IWriter*				aWriter,
+		const ComponentBase*	aComponent) const
+	{
+		const ComponentType& t = m_componentTypes[aComponent->GetComponentId()];
+
+		t.m_schema.WriteNetwork(aWriter, aComponent);
+	}
+	
+	bool				
+	ComponentManager::ReadNetwork(
+		IReader*				aReader,
+		ComponentBase*			aComponent) const
+	{
+		const ComponentType& t = m_componentTypes[aComponent->GetComponentId()];
+
+		return t.m_schema.ReadNetwork(aReader, aComponent);
+	}
+	
+	void				
+	ComponentManager::WriteStorage(
+		IWriter*				aWriter,
+		const ComponentBase*	aComponent) const
+	{
+		const ComponentType& t = m_componentTypes[aComponent->GetComponentId()];
+
+		t.m_schema.WriteStorage(aWriter, aComponent);
+	}
+	
+	bool				
+	ComponentManager::ReadStorage(
+		IReader*				aReader,
+		ComponentBase*			aComponent) const
+	{
+		const ComponentType& t = m_componentTypes[aComponent->GetComponentId()];
+
+		return t.m_schema.ReadStorage(aReader, aComponent);
+	}
+
+	void				
+	ComponentManager::ReadSource(
+		const Parser::Node*		aSource,
+		ComponentBase*			aComponent) const
+	{
+		const ComponentType& t = m_componentTypes[aComponent->GetComponentId()];
+
+		t.m_schema.ReadSource(aSource, aComponent);
+	}
+
+	//----------------------------------------------------------------------------------
+
+	void				
+	ComponentManager::_InitComponentType(
+		ComponentType&			aComponentType)
+	{
+		aComponentType.m_schema.InitUpgradeChains();
+
+		std::unique_ptr<ComponentBase> test(aComponentType.m_create());
+		const char* componentName = Component::IdToString(aComponentType.m_id);
+		std::string t = AsDebugString(test.get());
+
+		printf("----%s----\n%s\n", componentName, t.c_str());
 	}
 
 }

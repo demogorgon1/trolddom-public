@@ -224,24 +224,6 @@ namespace tpublic
 			}
 
 			// ComponentBase implementation
-			void
-			FromSource(
-				const Parser::Node*		aSource) override
-			{
-				aSource->ForEachChild([&](
-					const Parser::Node*	aChild)
-				{
-					if (aChild->m_name == "faction")
-						m_factionId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_FACTION, aChild->GetIdentifier());
-					else if (aChild->m_name == "level")
-						m_level = aChild->GetUInt32();
-					else if (aChild->m_name == "dialogue_root")
-						m_dialogueRootId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_DIALOGUE_ROOT, aChild->GetIdentifier());
-					else
-						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
-				});
-			}
-
 			void	
 			ToStream(
 				IWriter*				aStream) const override

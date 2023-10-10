@@ -104,7 +104,13 @@ namespace tpublic
 			CreateSchema(
 				ComponentSchema* aSchema)
 			{
-				aSchema->DefineCustomObjectPointersSingleAppend<Animation>(FIELD_ANIMATIONS, "animations", offsetof(Sprite, m_animations));
+				aSchema->DefineCustomObjectPointers<Animation>(FIELD_ANIMATIONS, "animations", offsetof(Sprite, m_animations));
+				
+				aSchema->OnRead<Sprite>([](
+					Sprite* aSprite)
+				{
+					aSprite->UpdateStateAnimations();
+				});
 			}
 
 			Sprite()
@@ -120,32 +126,6 @@ namespace tpublic
 			}
 
 			// ComponentBase implementation
-			void
-			FromSource(
-				const Parser::Node*		aSource) override
-			{
-				aSource->ForEachChild([&](
-					const Parser::Node*	aChild)
-				{
-					if (aChild->m_name == "animations")
-					{
-						aChild->ForEachChild([&](
-							const Parser::Node* aAnimation)
-						{
-							std::unique_ptr<Animation> t = std::make_unique<Animation>();
-							t->FromSource(aAnimation);
-							m_animations.push_back(std::move(t));
-						});
-					}
-					else
-					{
-						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
-					}
-				});
-
-				UpdateStateAnimations();
-			}
-
 			void
 			ToStream(
 				IWriter* aStream) const override

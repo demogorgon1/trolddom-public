@@ -32,15 +32,15 @@ namespace tpublic
 			CreateSchema(
 				ComponentSchema* aSchema)
 			{
-				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_WEAPON_DAMAGE_RANGE_MIN, NULL, offsetof(CombatPrivate, m_weaponDamageRangeMin));
-				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_WEAPON_DAMAGE_RANGE_MAX, NULL, offsetof(CombatPrivate, m_weaponDamageRangeMax));
-				aSchema->Define(ComponentSchema::TYPE_INT32, FIELD_WEAPON_COOLDOWN, NULL, offsetof(CombatPrivate, m_weaponCooldown));
-				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_PHYSICAL_CRITICAL_STRIKE_CHANCE, NULL, offsetof(CombatPrivate, m_physicalCriticalStrikeChance));
-				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_MAGICAL_CRITICAL_STRIKE_CHANCE, NULL, offsetof(CombatPrivate, m_magicalCriticalStrikeChance));
-				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_DODGE_CHANCE, NULL, offsetof(CombatPrivate, m_dodgeChance));
-				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_PARRY_CHANCE, NULL, offsetof(CombatPrivate, m_parryChance));
-				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_MISS_CHANCE, NULL, offsetof(CombatPrivate, m_missChance));
-				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_BLOCK_CHANCE, NULL, offsetof(CombatPrivate, m_blockChance));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_WEAPON_DAMAGE_RANGE_MIN, "weapon_damage_range_min", offsetof(CombatPrivate, m_weaponDamageRangeMin));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_WEAPON_DAMAGE_RANGE_MAX, "weapon_damage_range_max", offsetof(CombatPrivate, m_weaponDamageRangeMax));
+				aSchema->Define(ComponentSchema::TYPE_INT32, FIELD_WEAPON_COOLDOWN, "weapon_cooldown", offsetof(CombatPrivate, m_weaponCooldown));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_PHYSICAL_CRITICAL_STRIKE_CHANCE, "physical_critical_strike_chance", offsetof(CombatPrivate, m_physicalCriticalStrikeChance));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_MAGICAL_CRITICAL_STRIKE_CHANCE, "magical_critical_strike_chance", offsetof(CombatPrivate, m_magicalCriticalStrikeChance));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_DODGE_CHANCE, "dodge_chance", offsetof(CombatPrivate, m_dodgeChance));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_PARRY_CHANCE, "parry_chance", offsetof(CombatPrivate, m_parryChance));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_MISS_CHANCE, "miss_chance", offsetof(CombatPrivate, m_missChance));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_BLOCK_CHANCE, "block_chance", offsetof(CombatPrivate, m_blockChance));
 			}
 
 			CombatPrivate()
@@ -70,65 +70,6 @@ namespace tpublic
 			}
 
 			// ComponentBase implementation
-			void
-			FromSource(
-				const Parser::Node*		aSource) override
-			{
-				aSource->ForEachChild([&](
-					const Parser::Node*	aChild)
-				{
-					if (aChild->m_name == "weapon_damage_range")
-					{
-						if(aChild->m_type == Parser::Node::TYPE_ARRAY && aChild->m_children.size() == 1)
-						{
-							m_weaponDamageRangeMin = aChild->m_children[0]->GetUInt32();
-							m_weaponDamageRangeMax = m_weaponDamageRangeMin;
-						}
-						else if (aChild->m_type == Parser::Node::TYPE_ARRAY && aChild->m_children.size() == 2)
-						{
-							m_weaponDamageRangeMin = aChild->m_children[0]->GetUInt32();
-							m_weaponDamageRangeMax = aChild->m_children[1]->GetUInt32();
-						}
-						else
-						{
-							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid weapon damage range.", aChild->m_name.c_str());
-						}
-					}
-					else if (aChild->m_name == "weapon_cooldown")
-					{
-						m_weaponCooldown = aChild->GetInt32();
-					}
-					else if(aChild->m_name == "physical_critical_strike_chance")
-					{
-						m_physicalCriticalStrikeChance = aChild->GetProbability();
-					}
-					else if (aChild->m_name == "magical_critical_strike_chance")
-					{
-						m_magicalCriticalStrikeChance = aChild->GetProbability();
-					}
-					else if (aChild->m_name == "dodge_chance")
-					{
-						m_dodgeChance = aChild->GetProbability();
-					}
-					else if (aChild->m_name == "parry_chance")
-					{
-						m_parryChance = aChild->GetProbability();
-					}
-					else if (aChild->m_name == "miss_chance")
-					{
-						m_missChance = aChild->GetProbability();
-					}
-					else if (aChild->m_name == "block_chance")
-					{
-						m_blockChance = aChild->GetProbability();
-					}
-					else
-					{
-						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
-					}
-				});
-			}
-
 			void	
 			ToStream(
 				IWriter*				aStream) const override

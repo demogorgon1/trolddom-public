@@ -1,6 +1,7 @@
 #include "Pcheader.h"
 
 #include <tpublic/ComponentSchema.h>
+#include <tpublic/Helpers.h>
 #include <tpublic/Vec2.h>
 
 namespace tpublic
@@ -115,6 +116,9 @@ namespace tpublic
 		{
 			const char* fieldName = aChild->m_name.c_str();
 
+			if(!aChild->m_tag.empty())
+				fieldName = aChild->m_tag.c_str();
+
 			const Field* field = _GetFieldByName(fieldName);
 			TP_VERIFY(field != NULL, aChild->m_debugInfo, "'%s' is not a valid component field.", fieldName);
 			TP_VERIFY(field->m_offset != UINT32_MAX, aChild->m_debugInfo, "'%s' is a deprecated component field.", fieldName);
@@ -200,6 +204,9 @@ namespace tpublic
 				break;
 			}
 		});
+
+		if (m_onReadCallback)
+			m_onReadCallback(aObject);
 	}
 	
 	void			
@@ -231,6 +238,10 @@ namespace tpublic
 					return false;
 			}
 		}
+
+		if (m_onReadCallback)
+			m_onReadCallback(aObject);
+
 		return true;
 	}
 
@@ -372,7 +383,26 @@ namespace tpublic
 			}
 		}
 
+		if(m_onReadCallback)
+			m_onReadCallback(aObject);
+
 		return true;
+	}
+
+	std::string
+	ComponentSchema::AsDebugString(
+		const void*			aObject) const
+	{
+		std::string t;
+
+		for(const Field& field : m_fields)
+		{
+			char buffer[1024];
+			TP_STRING_FORMAT(buffer, sizeof(buffer), "%u(%s)=%s ", field.m_id, field.m_name != NULL ? field.m_name : "", _ValueAsString(aObject, &field).c_str());
+			t.append(buffer);
+		}
+
+		return t;
 	}
 
 	//--------------------------------------------------------------------------------------
@@ -605,6 +635,98 @@ namespace tpublic
 		}
 
 		return true;
+	}
+
+	std::string		
+	ComponentSchema::_ValueAsString(
+		const void*		aObject,
+		const Field*	aField) const
+	{
+		char buffer[1024];
+
+		switch(aField->m_type)
+		{
+		case TYPE_VEC2:			
+			{
+				const Vec2* t = (const Vec2*)&(((const uint8_t*)aObject)[aField->m_offset]);
+				TP_STRING_FORMAT(buffer, sizeof(buffer), "%d,%d", t->m_x, t->m_y);
+			}
+			break;
+
+		case TYPE_STRING:
+			{
+				const std::string* t = (const std::string*)&(((const uint8_t*)aObject)[aField->m_offset]);
+				TP_STRING_FORMAT(buffer, sizeof(buffer), "%s", t->c_str());
+			}
+			break;
+
+		case TYPE_BOOL:
+			{
+				const bool* t = (const bool*)&(((const uint8_t*)aObject)[aField->m_offset]);
+				TP_STRING_FORMAT(buffer, sizeof(buffer), "%s", *t ? "true" : "false");
+			}
+			break;
+
+		case TYPE_INT32:
+			{
+				const int32_t* t = (const int32_t*)&(((const uint8_t*)aObject)[aField->m_offset]);
+				TP_STRING_FORMAT(buffer, sizeof(buffer), "%d", *t);
+			}
+			break;
+
+		case TYPE_INT64:
+			{
+				const int64_t* t = (const int64_t*)&(((const uint8_t*)aObject)[aField->m_offset]);
+				TP_STRING_FORMAT(buffer, sizeof(buffer), "%zd", *t);
+			}
+			break;
+
+		case TYPE_UINT32:
+			{
+				const uint32_t* t = (const uint32_t*)&(((const uint8_t*)aObject)[aField->m_offset]);
+				TP_STRING_FORMAT(buffer, sizeof(buffer), "%u", *t);
+			}
+			break;
+
+		case TYPE_UINT64:
+			{
+				const uint64_t* t = (const uint64_t*)&(((const uint8_t*)aObject)[aField->m_offset]);
+				TP_STRING_FORMAT(buffer, sizeof(buffer), "%zu", *t);
+			}
+			break;
+
+		case TYPE_UINT32_ARRAY:
+			{
+				buffer[0] = '\0';
+				const std::vector<uint32_t>* t = (const std::vector<uint32_t>*)&(((const uint8_t*)aObject)[aField->m_offset]);
+				for(size_t i = 0; i < t->size(); i++)
+				{
+					if(i > 0)
+					{
+						Helpers::StringAppend(buffer, sizeof(buffer), ",");
+					}
+					else
+					{
+						char tmp[1024];
+						TP_STRING_FORMAT(tmp, sizeof(tmp), "%u", t->at(i));
+						Helpers::StringAppend(buffer, sizeof(buffer), tmp);
+					}
+				}
+			}
+			break;
+
+		case TYPE_CUSTOM:
+			{
+				strcpy(buffer, "(custom)");
+			}
+			break;
+
+		default:	
+			buffer[0] = '\0';
+			break;
+		}
+
+		return buffer;
 	}
 
 }

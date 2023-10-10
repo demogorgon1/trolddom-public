@@ -33,6 +33,7 @@ namespace tpublic
 		typedef std::function<void(void*)> CustomNewCallback;
 		typedef std::function<void(void*)> CustomDeleteCallback;
 		typedef std::function<void(void*, const void*)> InitFromDeprecatedCallback;
+		typedef std::function<void(void*)> OnReadCallback;
 
 		struct Field
 		{
@@ -64,26 +65,28 @@ namespace tpublic
 		};
 
 		Field*			Define(				
-							Type				aType,
-							uint32_t			aId,
-							const char*			aName,
-							uint32_t			aOffset);
+							Type					aType,
+							uint32_t				aId,
+							const char*				aName,
+							uint32_t				aOffset);
 		void			InitUpgradeChains();
 		void			ReadSource(
-							const Parser::Node* aSource,
-							void*				aObject) const;
+							const Parser::Node*		aSource,
+							void*					aObject) const;
 		void			WriteNetwork(
-							IWriter*			aWriter,
-							const void*			aObject) const;
+							IWriter*				aWriter,
+							const void*				aObject) const;
 		bool			ReadNetwork(
-							IReader*			aReader,
-							void*				aObject) const;						
+							IReader*				aReader,
+							void*					aObject) const;						
 		void			WriteStorage(
-							IWriter*			aWriter,
-							const void*			aObject) const;
+							IWriter*				aWriter,
+							const void*				aObject) const;
 		bool			ReadStorage(
-							IReader*			aReader,
-							void*				aObject) const;			
+							IReader*				aReader,
+							void*					aObject) const;			
+		std::string		AsDebugString(
+							const void*				aObject) const;
 		
 		template <typename _FromT, typename _ToT, typename _UpgradeCallback>
 		void
@@ -103,6 +106,18 @@ namespace tpublic
 				const void* aFromData)
 			{
 				aUpgradeCallback((const _FromT*)aFromData, (_ToT*)aToData);
+			};
+		}
+
+		template <typename _T, typename _OnReadCallback>
+		void
+		OnRead(
+			_OnReadCallback						aOnReadCallback)
+		{
+			m_onReadCallback = [&](
+				void*		aData)
+			{
+				aOnReadCallback((_T*)aData);
 			};
 		}
 
@@ -159,7 +174,7 @@ namespace tpublic
 			const char*							aName,
 			uint32_t							aOffset)
 		{
-			Field* t = DefineCustomObjectPointersNoSource<_T>>(aId, aOffset);
+			Field* t = DefineCustomObjectPointersNoSource<_T>(aId, aOffset);
 			t->m_name = aName;
 			t->m_customReadSource = [](
 				const Parser::Node*	aSource,
@@ -338,6 +353,7 @@ namespace tpublic
 	private:
 
 		std::vector<Field>	m_fields;
+		OnReadCallback		m_onReadCallback;
 
 		uint32_t		_GetFieldSize(
 							const Field*			aField) const;
@@ -354,6 +370,9 @@ namespace tpublic
 		bool			_ReadValue(
 							IReader*				aReader,
 							void*					aObject,
+							const Field*			aField) const;
+		std::string		_ValueAsString(
+							const void*				aObject,
 							const Field*			aField) const;
 	};
 

@@ -35,12 +35,6 @@ namespace tpublic
 
 			// ComponentBase implementation
 			void
-			FromSource(
-				const Parser::Node*		/*aSource*/) override
-			{
-			}
-
-			void
 			ToStream(
 				IWriter* /*aStream*/) const override
 			{

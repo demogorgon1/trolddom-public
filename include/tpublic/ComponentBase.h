@@ -81,8 +81,6 @@ namespace tpublic
 		}
 
 		// Virtual methods
-		virtual void				FromSource(
-										const Parser::Node*		/*aSource*/) { assert(false); }
 		virtual void				ToStream(
 										IWriter*				/*aStream*/) const { assert(false); }
 		virtual bool				FromStream(

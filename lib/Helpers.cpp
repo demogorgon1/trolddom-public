@@ -7,6 +7,29 @@
 namespace tpublic::Helpers
 {
 
+	void		
+	StringAppend(
+		char*						aBuffer,
+		size_t						aBufferSize,
+		const char*					aAppend)
+	{
+		size_t length = strlen(aBuffer);
+		size_t appendLength = strlen(aAppend);
+		size_t maxLength = aBufferSize - 1;
+
+		if(length + appendLength <= maxLength)
+		{
+			memcpy(aBuffer + length, aAppend, appendLength);
+			length += appendLength;
+		}
+		else if(length < maxLength)
+		{
+			appendLength = maxLength - length;
+			memcpy(aBuffer + length, aAppend, appendLength);
+			length = maxLength;
+		}
+	}
+
 	bool		
 	IsWithinDistance(
 		const Vec2&					aA,

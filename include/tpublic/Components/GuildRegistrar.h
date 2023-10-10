@@ -40,20 +40,6 @@ namespace tpublic
 			}
 
 			// ComponentBase implementation
-			void
-			FromSource(
-				const Parser::Node*		aSource) override
-			{
-				aSource->ForEachChild([&](
-					const Parser::Node*	aChild)
-				{
-					if (aChild->m_name == "registration_price_tiers")
-						aChild->GetUIntArray(m_registrationPriceTiers);
-					else
-						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
-				});
-			}
-
 			void	
 			ToStream(
 				IWriter*				aStream) const override

@@ -71,7 +71,8 @@ entity deer:
 		}			
 		combat_private:
 		{
-			weapon_damage_range: [ 3 7 ]
+			weapon_damage_range_min: 3 
+			weapon_damage_range_max: 7
 			physical_critical_strike_chance: 5
 			dodge_chance: 5
 			parry_chance: 5
@@ -132,7 +133,8 @@ entity boar:
 		}			
 		combat_private:
 		{
-			weapon_damage_range: [ 3 7 ]
+			weapon_damage_range_min: 3 
+			weapon_damage_range_max: 7
 			physical_critical_strike_chance: 5
 			dodge_chance: 5
 			parry_chance: 5

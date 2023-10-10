@@ -2,9 +2,13 @@
 
 #include "Component.h"
 #include "ComponentBase.h"
+#include "Parser.h"
 
 namespace tpublic
 {
+
+	class IReader;
+	class IWriter;
 
 	class ComponentManager
 	{
@@ -13,12 +17,30 @@ namespace tpublic
 							~ComponentManager();
 
 		ComponentBase*		Create(
-								uint32_t			aId) const;
+								uint32_t				aId) const;
+		std::string			AsDebugString(
+								const ComponentBase*	aComponent) const;
+		void				WriteNetwork(
+								IWriter*				aWriter,
+								const ComponentBase*	aComponent) const;
+		bool				ReadNetwork(
+								IReader*				aReader,
+								ComponentBase*			aComponent) const;
+		void				WriteStorage(
+								IWriter*				aWriter,
+								const ComponentBase*	aComponent) const;
+		bool				ReadStorage(
+								IReader*				aReader,
+								ComponentBase*			aComponent) const;
+		void				ReadSource(
+								const Parser::Node*		aSource,
+								ComponentBase*			aComponent) const;
 
 	private:
 
 		struct ComponentType
 		{
+			uint32_t							m_id = 0;
 			std::function<ComponentBase*()>		m_create;
 			ComponentSchema						m_schema;
 		};
@@ -33,8 +55,14 @@ namespace tpublic
 
 			_T::CreateSchema(&t.m_schema);
 
+			t.m_id = _T::ID;
 			t.m_create = []() { return new _T(); };
+
+			_InitComponentType(t);
 		}
+
+		void				_InitComponentType(
+								ComponentType&		aComponentType);
 	};
 
 }

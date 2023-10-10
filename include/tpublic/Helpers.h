@@ -13,6 +13,10 @@ namespace tpublic
 	namespace Helpers
 	{
 
+		void		StringAppend(
+						char*						aBuffer,
+						size_t						aBufferSize,
+						const char*					aAppend);
 		bool		IsWithinDistance(
 						const Vec2&					aA,
 						const Vec2&					aB,
