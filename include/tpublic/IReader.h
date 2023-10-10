@@ -4,7 +4,7 @@ namespace tpublic
 {
 
 	class AuraEffectFactory;
-	class ComponentFactory;
+	class ComponentManager;
 	class DirectEffectFactory;
 
 	class IReader
@@ -298,7 +298,7 @@ namespace tpublic
 												void*	aBuffer,
 												size_t	aBufferSize) = 0;
 		virtual const AuraEffectFactory*	GetAuraEffectFactory() const = 0;
-		virtual const ComponentFactory*		GetComponentFactory() const = 0;
+		virtual const ComponentManager*		GetComponentManager() const = 0;
 		virtual const DirectEffectFactory*	GetDirectEffectFactory() const = 0;
 
 	private:

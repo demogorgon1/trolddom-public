@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Component.h"
+#include "ComponentSchema.h"
 #include "DataErrorHandling.h"
 #include "IReader.h"
 #include "IWriter.h"

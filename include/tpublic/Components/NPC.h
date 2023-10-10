@@ -67,12 +67,8 @@ namespace tpublic
 
 			struct StateEntry
 			{
-				StateEntry()
-				{
-
-				}
-
-				StateEntry(
+				void
+				FromSource(
 					const Parser::Node*		aSource)
 				{
 					m_entityState = EntityState::StringToId(aSource->m_name.c_str());
@@ -170,6 +166,53 @@ namespace tpublic
 				uint32_t							m_max = 0;
 			};
 
+			struct Resources
+			{				
+				void
+				FromSource(
+					const Parser::Node*		aSource)
+				{
+					ResourceEntry t;
+					t.m_id = Resource::StringToId(aSource->m_name.c_str());
+					TP_VERIFY(t.m_id != 0, aSource->m_debugInfo, "'%s' is not a valid resource.", aSource->m_name.c_str());
+					t.m_max = aSource->GetUInt32();
+					m_entries.push_back(t);
+				}
+
+				void
+				ToStream(
+					IWriter*				aStream) const
+				{
+					aStream->WriteObjects(m_entries);
+				}
+
+				bool
+				FromStream(
+					IReader*				aStream)
+				{
+					if(!aStream->ReadObjects(m_entries))
+						return false;
+					return true;
+				}
+
+				// Public data
+				std::vector<ResourceEntry>			m_entries;
+			};
+
+			enum Field
+			{
+				FIELD_STATES,
+				FIELD_RESOURCES
+			};
+
+			static void
+			CreateSchema(
+				ComponentSchema*		aSchema)
+			{
+				aSchema->DefineCustomObjectPointersSingleAppend<StateEntry>(FIELD_STATES, "state", offsetof(NPC, m_states));
+				aSchema->DefineCustomObject<Resources>(FIELD_RESOURCES, "resources", offsetof(NPC, m_resources));
+			}
+
 			NPC()
 				: ComponentBase(ID, FLAGS, PERSISTENCE)
 			{
@@ -204,7 +247,9 @@ namespace tpublic
 				{
 					if (aChild->m_tag == "state")
 					{
-						m_states.push_back(std::make_unique<StateEntry>(aChild));
+						std::unique_ptr<StateEntry> t = std::make_unique<StateEntry>();
+						t->FromSource(aChild);
+						m_states.push_back(std::move(t));
 					}
 					else if (aChild->m_name == "resources")
 					{
@@ -215,7 +260,7 @@ namespace tpublic
 							t.m_id = Resource::StringToId(aResource->m_name.c_str());
 							TP_VERIFY(t.m_id != 0, aResource->m_debugInfo, "'%s' is not a valid resource.", aResource->m_name.c_str());
 							t.m_max = aResource->GetUInt32();
-							m_resources.push_back(t);
+							m_resources.m_entries.push_back(t);
 						});
 					}
 					else
@@ -230,7 +275,7 @@ namespace tpublic
 				IWriter*				aStream) const override
 			{
 				aStream->WriteObjectPointers(m_states);
-				aStream->WriteObjects(m_resources);
+				m_resources.ToStream(aStream);
 			}
 
 			bool
@@ -239,15 +284,16 @@ namespace tpublic
 			{
 				if(!aStream->ReadObjectPointers(m_states))
 					return false;
-				if(!aStream->ReadObjects(m_resources))
+				if(!m_resources.FromStream(aStream))
 					return false;
 				return true;
 			}
 
 			// Public data			
 			std::vector<std::unique_ptr<StateEntry>>	m_states;
-			std::vector<ResourceEntry>					m_resources;
+			Resources									m_resources;
 			
+			// Not serialized
 			Cooldowns									m_cooldowns;
 			std::optional<CastInProgress>				m_castInProgress;
 			uint32_t									m_targetEntityInstanceId = 0;

@@ -28,12 +28,12 @@
 #include <tpublic/Components/VisibleAuras.h>
 #include <tpublic/Components/Wallet.h>
 
-#include <tpublic/ComponentFactory.h>
+#include <tpublic/ComponentManager.h>
 
 namespace tpublic
 {
 
-	ComponentFactory::ComponentFactory()
+	ComponentManager::ComponentManager()
 	{
 		_Register<Components::Abilities>();
 		_Register<Components::ActionBars>();
@@ -64,13 +64,13 @@ namespace tpublic
 		_Register<Components::Wallet>();
 	}
 
-	ComponentFactory::~ComponentFactory()
+	ComponentManager::~ComponentManager()
 	{
 
 	}
 
 	ComponentBase*
-	ComponentFactory::Create(
+	ComponentManager::Create(
 		uint32_t			aId) const
 	{
 		if(!m_functions[aId])

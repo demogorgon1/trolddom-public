@@ -10,7 +10,7 @@
 #include "Compiler.h"
 #include "Component.h"
 #include "ComponentBase.h"
-#include "ComponentFactory.h"
+#include "ComponentManager.h"
 #include "Compression.h"
 #include "DataBase.h"
 #include "DataErrorHandling.h"

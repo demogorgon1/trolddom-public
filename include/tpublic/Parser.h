@@ -67,6 +67,24 @@ namespace tpublic
 				return (uint32_t)((f / 100.0f) * (float)UINT32_MAX);
 			}
 
+			uint64_t
+			GetUInt64() const
+			{
+				TP_VERIFY(m_type == TYPE_NUMBER, m_debugInfo, "Not a number.");
+				uintmax_t v = strtoumax(m_value.c_str(), NULL, 10);
+				TP_VERIFY(v <= UINT64_MAX, m_debugInfo, "Number out of bounds.");
+				return (uint64_t)v;
+			}
+
+			int64_t
+			GetInt64() const
+			{
+				TP_VERIFY(m_type == TYPE_NUMBER, m_debugInfo, "Not a number.");
+				intmax_t v = strtoimax(m_value.c_str(), NULL, 10);
+				TP_VERIFY(v <= INT64_MAX && v >= INT64_MIN, m_debugInfo, "Number out of bounds.");
+				return (int64_t)v;
+			}
+
 			uint32_t
 			GetUInt32() const
 			{

@@ -18,6 +18,12 @@ namespace tpublic
 
 			static const int32_t PING_INTERVAL_TICKS = 10;
 
+			static void
+			CreateSchema(
+				ComponentSchema* /*aSchema*/)
+			{
+			}
+
 			ThreatTarget()
 				: ComponentBase(ID, FLAGS, PERSISTENCE)
 			{
@@ -45,8 +51,9 @@ namespace tpublic
 			}
 
 			// Public data
+			// Not serialized, server only
 			ThreatTable		m_table;
-			int32_t		m_lastPingTick = 0;
+			int32_t			m_lastPingTick = 0;
 		};
 	}
 

@@ -16,6 +16,18 @@ namespace tpublic
 			static const uint8_t FLAGS = FLAG_REPLICATE_TO_OTHERS;
 			static const Persistence::Id PERSISTENCE = Persistence::ID_NONE;
 
+			enum Field
+			{
+				FIELD_PLAYER_TAG
+			};
+
+			static void
+			CreateSchema(
+				ComponentSchema* aSchema)
+			{
+				aSchema->DefineCustomObjectNoSource<PlayerTag>(FIELD_PLAYER_TAG, offsetof(Tag, m_playerTag));
+			}
+
 			Tag()
 				: ComponentBase(ID, FLAGS, PERSISTENCE)
 			{

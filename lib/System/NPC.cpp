@@ -54,7 +54,7 @@ namespace tpublic::Systems
 		Components::CombatPublic* combat = GetComponent<Components::CombatPublic>(aComponents);
 		Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
 
-		for(const Components::NPC::ResourceEntry& resource : npc->m_resources)
+		for(const Components::NPC::ResourceEntry& resource : npc->m_resources.m_entries)
 		{
 			combat->AddResourceMax(resource.m_id, resource.m_max);
 

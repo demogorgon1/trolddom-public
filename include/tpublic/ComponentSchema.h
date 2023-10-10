@@ -1,0 +1,360 @@
+#pragma once
+
+#include "DataType.h"
+#include "IReader.h"
+#include "IWriter.h"
+#include "Parser.h"
+
+namespace tpublic
+{
+
+	class ComponentSchema
+	{
+	public:		
+		static const uint32_t MAX_FIELD_ID = 64;
+
+		enum Type : uint8_t
+		{
+			TYPE_NONE,
+			TYPE_VEC2,
+			TYPE_STRING,
+			TYPE_BOOL,
+			TYPE_INT32,
+			TYPE_INT64,
+			TYPE_UINT32,
+			TYPE_UINT64,
+			TYPE_UINT32_ARRAY,
+			TYPE_CUSTOM
+		};
+
+		typedef std::function<void(IWriter*, const void*)> CustomWriteCallback;
+		typedef std::function<bool(IReader*, void*)> CustomReadCallback;
+		typedef std::function<void(const Parser::Node*, void*)> CustomReadSourceCallback;
+		typedef std::function<void(void*)> CustomNewCallback;
+		typedef std::function<void(void*)> CustomDeleteCallback;
+		typedef std::function<void(void*, const void*)> InitFromDeprecatedCallback;
+
+		struct Field
+		{
+			void
+			SetDataType(
+				DataType::Id			aDataType)
+			{
+				m_dataType = aDataType;
+			}
+
+			// Public data
+			Type						m_type = TYPE_NONE;
+			uint32_t					m_id = 0;
+			const char*					m_name = NULL;
+			uint32_t					m_offset = 0;
+
+			DataType::Id				m_dataType = DataType::INVALID_ID;
+
+			uint32_t					m_initFromDeprecatedId = 0;
+			InitFromDeprecatedCallback	m_initFromDeprecatedCallback;
+			std::vector<uint32_t>		m_upgradeChain;
+
+			CustomReadCallback			m_customRead;
+			CustomWriteCallback			m_customWrite;
+			CustomReadSourceCallback	m_customReadSource;
+			CustomNewCallback			m_customNewCallback;
+			CustomDeleteCallback		m_customDeleteCallback;
+			uint32_t					m_customSize = 0;			
+		};
+
+		Field*			Define(				
+							Type				aType,
+							uint32_t			aId,
+							const char*			aName,
+							uint32_t			aOffset);
+		void			InitUpgradeChains();
+		void			ReadSource(
+							const Parser::Node* aSource,
+							void*				aObject) const;
+		void			WriteNetwork(
+							IWriter*			aWriter,
+							const void*			aObject) const;
+		bool			ReadNetwork(
+							IReader*			aReader,
+							void*				aObject) const;						
+		void			WriteStorage(
+							IWriter*			aWriter,
+							const void*			aObject) const;
+		bool			ReadStorage(
+							IReader*			aReader,
+							void*				aObject) const;			
+		
+		template <typename _FromT, typename _ToT, typename _UpgradeCallback>
+		void
+		Upgrade(
+			uint32_t							aFromId,
+			uint32_t							aToId,
+			_UpgradeCallback					aUpgradeCallback)
+		{
+			Field* from = _GetFieldById(aFromId);
+			Field* to = _GetFieldById(aToId);
+			assert(from != NULL && to != NULL);
+			assert(from->m_offset == UINT32_MAX); // Must be deprecated
+
+			to->m_initFromDeprecatedId = aFromId;
+			to->m_initFromDeprecatedCallback = [&](
+				void*		aToData,
+				const void* aFromData)
+			{
+				aUpgradeCallback((const _FromT*)aFromData, (_ToT*)aToData);
+			};
+		}
+
+		template <typename _T>
+		Field*
+		DefineCustom(
+			uint32_t							aId,
+			const char*							aName,
+			uint32_t							aOffset)
+		{
+			Field* t = Define(ComponentSchema::TYPE_CUSTOM, aId, aName, aOffset);
+			t->m_customSize = sizeof(_T);
+			t->m_customNewCallback = [](
+				void* aObject)
+			{
+				new (aObject) _T();
+			};
+			t->m_customDeleteCallback = [](
+				void* aObject)
+			{
+				((_T*)aObject)->~_T();
+			};
+			return t;
+		}
+
+		template <typename _T>
+		Field*
+		DefineCustomObjectPointersNoSource(
+			uint32_t							aId,
+			uint32_t							aOffset)
+		{
+			Field* t = DefineCustom<std::vector<std::unique_ptr<_T>>>(aId, NULL, aOffset);
+			t->m_customRead = [](
+				IReader*	aReader,
+				void*		aObject) -> bool
+			{
+				std::vector<std::unique_ptr<_T>>* p = (std::vector<std::unique_ptr<_T>>*)aObject;
+				return aReader->ReadObjectPointers(*p);
+			};
+			t->m_customWrite = [](
+				IWriter*	aWriter,
+				const void* aObject)
+			{
+				const std::vector<std::unique_ptr<_T>>* p = (const std::vector<std::unique_ptr<_T>>*)aObject;
+				aWriter->WriteObjectPointers(*p);
+			};
+			return t;
+		}
+
+		template <typename _T>
+		Field*
+		DefineCustomObjectPointers(
+			uint32_t							aId,
+			const char*							aName,
+			uint32_t							aOffset)
+		{
+			Field* t = DefineCustomObjectPointersNoSource<_T>>(aId, aOffset);
+			t->m_name = aName;
+			t->m_customReadSource = [](
+				const Parser::Node*	aSource,
+				void*				aObject)
+			{
+				std::vector<std::unique_ptr<_T>>* p = (std::vector<std::unique_ptr<_T>>*)aObject;
+				aSource->ForEachChild([&](
+					const Parser::Node* aChild)
+				{
+					std::unique_ptr<_T> entry = std::make_unique<_T>();
+					entry->FromSource(aChild);
+					p->push_back(std::move(entry));
+				});
+			};
+			return t;
+		}
+
+		template <typename _T>
+		Field*
+		DefineCustomObjectPointersSingleAppend(
+			uint32_t							aId,
+			const char*							aName,
+			uint32_t							aOffset)
+		{
+			Field* t = DefineCustomObjectPointersNoSource<_T>(aId, aOffset);
+			t->m_name = aName;
+			t->m_customReadSource = [](
+				const Parser::Node*	aSource,
+				void*				aObject)
+			{
+				std::vector<std::unique_ptr<_T>>* p = (std::vector<std::unique_ptr<_T>>*)aObject;
+				std::unique_ptr<_T> entry = std::make_unique<_T>();
+				entry->FromSource(aSource);
+				p->push_back(std::move(entry));
+			};
+			return t;
+		}
+
+		template <typename _T>
+		Field*
+		DefineCustomObjectsNoSource(
+			uint32_t							aId,
+			uint32_t							aOffset)
+		{
+			Field* t = DefineCustom<std::vector<_T>>(aId, NULL, aOffset);
+			t->m_customRead = [](
+				IReader*	aReader,
+				void*		aObject) -> bool
+			{
+				std::vector<_T>* p = (std::vector<_T>*)aObject;
+				return aReader->ReadObjects(*p);
+			};
+			t->m_customWrite = [](
+				IWriter*	aWriter,
+				const void* aObject)
+			{
+				const std::vector<_T>* p = (const std::vector<_T>*)aObject;
+				aWriter->WriteObjects(*p);
+			};
+			return t;
+		}
+
+		template <typename _T>
+		Field*
+		DefineCustomObjects(
+			uint32_t							aId,
+			const char*							aName,
+			uint32_t							aOffset)
+		{
+			Field* t = DefineCustomObjectsNoSource<_T>(aId, aOffset);
+			t->m_name = aName;
+			t->m_customReadSource = [](
+				const Parser::Node*	aSource,
+				void*				aObject)
+			{
+				std::vector<_T>* p = (std::vector<_T>*)aObject;
+				aSource->ForEachChild([&](
+					const Parser::Node* aChild)
+				{
+					_T entry;
+					entry.FromSource(aChild);
+					p->push_back(entry);
+				});
+			};
+			return t;
+		}
+
+		template <typename _T>
+		Field*
+		DefineCustomOptionalObjectNoSource(
+			uint32_t							aId,
+			uint32_t							aOffset)
+		{
+			Field* t = DefineCustom<std::optional<_T>>(aId, NULL, aOffset);
+			t->m_customRead = [](
+				IReader*	aReader,
+				void*		aObject) -> bool
+			{
+				std::optional<_T>* p = (std::optional<_T>*)aObject;
+				return aReader->ReadOptionalObject(*p);
+			};
+			t->m_customWrite = [](
+				IWriter*	aWriter,
+				const void* aObject)
+			{
+				const std::optional<_T>* p = (const std::optional<_T>*)aObject;
+				aWriter->WriteOptionalObject(*p);
+			};
+			return t;
+		}
+
+		template <typename _T>
+		Field*
+		DefineCustomOptionalObject(
+			uint32_t							aId,
+			const char*							aName,
+			uint32_t							aOffset)
+		{
+			Field* t = DefineCustomOptionalObjectNoSource<_T>(aId, aOffset);
+			t->m_name = aName;
+			t->m_customReadSource = [](
+				const Parser::Node*	aSource,
+				void*				aObject)
+			{
+				std::optional<_T>* p = (std::optional<_T>*)aObject;
+				_T entry;
+				entry.FromSource(aSource);
+				*p = entry;
+			};
+			return t;
+		}
+
+		template <typename _T>
+		Field*
+		DefineCustomObjectNoSource(
+			uint32_t							aId,
+			uint32_t							aOffset)
+		{
+			Field* t = DefineCustom<_T>(aId, NULL, aOffset);
+			t->m_customRead = [](
+				IReader*	aReader,
+				void*		aObject) -> bool
+			{
+				_T* p = (_T*)aObject;
+				return p->FromStream(aReader);
+			};
+			t->m_customWrite = [](
+				IWriter*	aWriter,
+				const void* aObject)
+			{
+				const _T* p = (const _T*)aObject;
+				p->ToStream(aWriter);
+			};
+			return t;
+		}
+
+		template <typename _T>
+		Field*
+		DefineCustomObject(
+			uint32_t							aId,
+			const char*							aName,
+			uint32_t							aOffset)
+		{
+			Field* t = DefineCustomObjectNoSource<_T>(aId, aOffset);
+			t->m_name = aName;
+			t->m_customReadSource = [](
+				const Parser::Node*	aSource,
+				void*				aObject)
+			{
+				_T* p = (_T*)aObject;
+				p->FromSource(aSource);
+			};
+			return t;
+		}
+
+	private:
+
+		std::vector<Field>	m_fields;
+
+		uint32_t		_GetFieldSize(
+							const Field*			aField) const;
+		const Field*	_GetFieldByName(
+							const char*				aName) const;
+		const Field*	_GetFieldById(
+							uint32_t				aId) const;
+		Field*			_GetFieldById(
+							uint32_t				aId);
+		void			_WriteValue(
+							IWriter*				aWriter,
+							const void*				aObject,
+							const Field*			aField) const;
+		bool			_ReadValue(
+							IReader*				aReader,
+							void*					aObject,
+							const Field*			aField) const;
+	};
+
+}

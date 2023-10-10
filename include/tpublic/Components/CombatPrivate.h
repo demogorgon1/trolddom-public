@@ -15,6 +15,34 @@ namespace tpublic
 			static const uint8_t FLAGS = FLAG_REPLICATE_TO_OWNER;
 			static const Persistence::Id PERSISTENCE = Persistence::ID_NONE;
 
+			enum Field
+			{
+				FIELD_WEAPON_DAMAGE_RANGE_MIN,
+				FIELD_WEAPON_DAMAGE_RANGE_MAX,
+				FIELD_WEAPON_COOLDOWN,
+				FIELD_PHYSICAL_CRITICAL_STRIKE_CHANCE,
+				FIELD_MAGICAL_CRITICAL_STRIKE_CHANCE,
+				FIELD_DODGE_CHANCE,
+				FIELD_PARRY_CHANCE,
+				FIELD_MISS_CHANCE,
+				FIELD_BLOCK_CHANCE
+			};
+
+			static void
+			CreateSchema(
+				ComponentSchema* aSchema)
+			{
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_WEAPON_DAMAGE_RANGE_MIN, NULL, offsetof(CombatPrivate, m_weaponDamageRangeMin));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_WEAPON_DAMAGE_RANGE_MAX, NULL, offsetof(CombatPrivate, m_weaponDamageRangeMax));
+				aSchema->Define(ComponentSchema::TYPE_INT32, FIELD_WEAPON_COOLDOWN, NULL, offsetof(CombatPrivate, m_weaponCooldown));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_PHYSICAL_CRITICAL_STRIKE_CHANCE, NULL, offsetof(CombatPrivate, m_physicalCriticalStrikeChance));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_MAGICAL_CRITICAL_STRIKE_CHANCE, NULL, offsetof(CombatPrivate, m_magicalCriticalStrikeChance));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_DODGE_CHANCE, NULL, offsetof(CombatPrivate, m_dodgeChance));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_PARRY_CHANCE, NULL, offsetof(CombatPrivate, m_parryChance));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_MISS_CHANCE, NULL, offsetof(CombatPrivate, m_missChance));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_BLOCK_CHANCE, NULL, offsetof(CombatPrivate, m_blockChance));
+			}
+
 			CombatPrivate()
 				: ComponentBase(ID, FLAGS, PERSISTENCE)
 			{

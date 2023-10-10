@@ -18,6 +18,18 @@ namespace tpublic
 
 			static const uint32_t MAX_ROWS = 4;
 
+			enum Field
+			{
+				FIELD_ACTION_BARS
+			};
+
+			static void
+			CreateSchema(
+				ComponentSchema* aSchema)
+			{
+				aSchema->DefineCustomObjectPointersNoSource<ActionBar>(FIELD_ACTION_BARS, offsetof(ActionBars, m_actionBars));
+			}
+
 			ActionBars()
 				: ComponentBase(ID, FLAGS, PERSISTENCE)
 			{

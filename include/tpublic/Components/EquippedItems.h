@@ -17,6 +17,46 @@ namespace tpublic
 			static const uint8_t FLAGS = FLAG_REPLICATE_TO_OWNER | FLAG_REPLICATE_TO_OTHERS | FLAG_PLAYER_ONLY;
 			static const Persistence::Id PERSISTENCE = Persistence::ID_MAIN;
 
+			struct Slots
+			{
+				void
+				ToStream(
+					IWriter*			aWriter) const
+				{
+					for (uint32_t i = 0; i < (uint32_t)EquipmentSlot::NUM_IDS; i++)
+						m_items[i].ToStream(aWriter);
+				}
+
+				bool
+				FromStream(
+					IReader*			aReader)
+				{
+					for (uint32_t i = 0; i < (uint32_t)EquipmentSlot::NUM_IDS; i++)
+					{
+						if (!m_items[i].FromStream(aReader))
+							return false;
+					}
+					return true;
+				}
+
+				// Public data
+				ItemInstance	m_items[EquipmentSlot::NUM_IDS];
+			};
+
+			enum Field
+			{
+				FIELD_SLOTS,
+				FIELD_VERSION
+			};
+
+			static void
+			CreateSchema(
+				ComponentSchema*		aSchema)
+			{
+				aSchema->DefineCustomObjectNoSource<Slots>(FIELD_SLOTS, offsetof(EquippedItems, m_slots));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_VERSION, NULL, offsetof(EquippedItems, m_version));
+			}
+
 			EquippedItems()
 				: ComponentBase(ID, FLAGS, PERSISTENCE)
 			{
@@ -35,7 +75,7 @@ namespace tpublic
 			{
 				for (uint32_t i = 0; i < (uint32_t)EquipmentSlot::NUM_IDS; i++)
 				{
-					const ItemInstance& t = m_slots[i];
+					const ItemInstance& t = m_slots.m_items[i];
 					if(t.IsSet())
 						aCallback(t);
 				}
@@ -46,8 +86,7 @@ namespace tpublic
 			ToStream(
 				IWriter*	aStream) const override
 			{
-				for(uint32_t i = 0; i < (uint32_t)EquipmentSlot::NUM_IDS; i++)
-					m_slots[i].ToStream(aStream);
+				m_slots.ToStream(aStream);
 				aStream->WriteUInt(m_version);
 			}
 
@@ -55,18 +94,15 @@ namespace tpublic
 			FromStream(
 				IReader*									aStream) override
 			{
-				for (uint32_t i = 0; i < (uint32_t)EquipmentSlot::NUM_IDS; i++)
-				{
-					if(!m_slots[i].FromStream(aStream))
-						return false;
-				}
+				if(!m_slots.FromStream(aStream))
+					return false;
 				if(!aStream->ReadUInt(m_version))
 					return false;
 				return true;
 			}
 
 			// Public data
-			ItemInstance	m_slots[EquipmentSlot::NUM_IDS];
+			Slots			m_slots;
 			uint32_t		m_version = 0;
 		};
 	}

@@ -15,6 +15,12 @@ namespace tpublic
 			static const uint8_t FLAGS = 0;
 			static const Persistence::Id PERSISTENCE = Persistence::ID_NONE;
 
+			static void
+			CreateSchema(
+				ComponentSchema* /*aSchema*/)
+			{
+			}
+
 			ThreatSource()
 				: ComponentBase(ID, FLAGS, PERSISTENCE)
 			{
@@ -65,6 +71,7 @@ namespace tpublic
 			}
 
 			// Public data
+			// Not serialized, server only
 			std::unordered_map<uint32_t, int32_t>			m_targets;
 		};
 	}

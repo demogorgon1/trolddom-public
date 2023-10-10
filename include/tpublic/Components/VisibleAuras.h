@@ -49,6 +49,18 @@ namespace tpublic
 				int32_t			m_end = 0;
 			};
 
+			enum Field
+			{
+				FIELD_ENTRIES
+			};
+			
+			static void
+			CreateSchema(
+				ComponentSchema* aSchema)
+			{
+				aSchema->DefineCustomObjectsNoSource<Entry>(FIELD_ENTRIES, offsetof(VisibleAuras, m_entries));
+			}
+
 			VisibleAuras()
 				: ComponentBase(ID, FLAGS, PERSISTENCE)
 			{

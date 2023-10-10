@@ -19,12 +19,8 @@ namespace tpublic
 
 			struct Animation
 			{
-				Animation()
-				{
-
-				}
-
-				Animation(
+				void
+				FromSource(
 					const Parser::Node*	aSource)
 				{
 					aSource->ForEachChild([&](
@@ -99,6 +95,18 @@ namespace tpublic
 				int32_t							m_zOffset = 0;
 			};
 
+			enum Field
+			{
+				FIELD_ANIMATIONS
+			};
+
+			static void
+			CreateSchema(
+				ComponentSchema* aSchema)
+			{
+				aSchema->DefineCustomObjectPointersSingleAppend<Animation>(FIELD_ANIMATIONS, "animations", offsetof(Sprite, m_animations));
+			}
+
 			Sprite()
 				: ComponentBase(ID, FLAGS, PERSISTENCE)
 			{
@@ -124,7 +132,9 @@ namespace tpublic
 						aChild->ForEachChild([&](
 							const Parser::Node* aAnimation)
 						{
-							m_animations.push_back(std::make_unique<Animation>(aAnimation));
+							std::unique_ptr<Animation> t = std::make_unique<Animation>();
+							t->FromSource(aAnimation);
+							m_animations.push_back(std::move(t));
 						});
 					}
 					else

@@ -16,6 +16,18 @@ namespace tpublic
 			static const uint8_t FLAGS = FLAG_REPLICATE_TO_OWNER | FLAG_PLAYER_ONLY;
 			static const Persistence::Id PERSISTENCE = Persistence::ID_MAIN;
 
+			enum Field
+			{
+				FIELD_ITEM_LIST
+			};
+
+			static void
+			CreateSchema(
+				ComponentSchema*		aSchema)
+			{
+				aSchema->DefineCustomObjectNoSource<ItemList>(FIELD_ITEM_LIST, offsetof(Inventory, m_itemList));
+			}
+
 			Inventory()
 				: ComponentBase(ID, FLAGS, PERSISTENCE)
 			{

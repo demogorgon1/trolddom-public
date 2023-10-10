@@ -15,6 +15,12 @@ namespace tpublic
 			static const uint8_t FLAGS = 0;
 			static const Persistence::Id PERSISTENCE = Persistence::ID_NONE;
 
+			static void
+			CreateSchema(
+				ComponentSchema* /*aSchema*/)
+			{
+			}
+
 			ResurrectionPoint()
 				: ComponentBase(ID, FLAGS, PERSISTENCE)
 			{

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../ComponentBase.h"
-#include "../ComponentFactory.h"
+#include "../ComponentManager.h"
 #include "../DataBase.h"
 #include "../EntityInstance.h"
 #include "../System.h"
@@ -31,7 +31,7 @@ namespace tpublic
 					m_componentId = Component::StringToId(aSource->m_name.c_str());
 					TP_VERIFY(m_componentId != Component::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid component.", aSource->m_name.c_str());
 
-					std::unique_ptr<ComponentBase> component(aSource->m_sourceContext->m_componentFactory->Create(m_componentId));
+					std::unique_ptr<ComponentBase> component(aSource->m_sourceContext->m_componentManager->Create(m_componentId));
 					assert(component);
 
 					TP_VERIFY((component->GetFlags() & ComponentBase::FLAG_PLAYER_ONLY) == 0, aSource->m_debugInfo, "'%s' is a player-only component.", aSource->m_name.c_str());
@@ -57,7 +57,7 @@ namespace tpublic
 					if(!aStream->ReadUInt(m_componentId))
 						return false;
 
-					m_componentBase.reset(aStream->GetComponentFactory()->Create(m_componentId));
+					m_componentBase.reset(aStream->GetComponentManager()->Create(m_componentId));
 					if(!m_componentBase->FromStream(aStream))
 						return false;
 					return true;
@@ -76,13 +76,13 @@ namespace tpublic
 
 			EntityInstance*
 			CreateInstance(
-				const ComponentFactory*	aComponentFactory,
+				const ComponentManager*	aComponentManager,
 				uint32_t				aEntityInstanceId) const 
 			{
 				std::unique_ptr<tpublic::EntityInstance> entity = std::make_unique<tpublic::EntityInstance>(m_id, aEntityInstanceId);
 
 				for(const std::unique_ptr<ComponentEntry>& componentEntry : m_components)
-					entity->AddComponent(aComponentFactory->Create(componentEntry->m_componentId));
+					entity->AddComponent(aComponentManager->Create(componentEntry->m_componentId));
 
 				return entity.release();
 			}

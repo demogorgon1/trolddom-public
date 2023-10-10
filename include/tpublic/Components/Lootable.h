@@ -18,6 +18,27 @@ namespace tpublic
 			static const uint8_t FLAGS = FLAG_REPLICATE_TO_OTHERS;
 			static const Persistence::Id PERSISTENCE = Persistence::ID_NONE;
 
+			enum Field
+			{
+				FIELD_LOOT_TABLE_ID,
+				FIELD_PLAYER_TAG,
+				FIELD_CASH,
+				FIELD_AVAILABLE_CASH,
+				FIELD_AVAILABLE_LOOT,
+				FIELD_VERSION
+			};
+
+			static void
+			CreateSchema(
+				ComponentSchema* aSchema)
+			{
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_LOOT_TABLE_ID, "loot_table", offsetof(Lootable, m_lootTableId))->SetDataType(DataType::ID_LOOT_TABLE);
+				aSchema->DefineCustomObjectNoSource<PlayerTag>(FIELD_PLAYER_TAG, offsetof(Lootable, m_playerTag));
+				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_CASH, NULL, offsetof(Lootable, m_cash));
+				aSchema->Define(ComponentSchema::TYPE_INT64, FIELD_AVAILABLE_CASH, NULL, offsetof(Lootable, m_availableCash));
+				aSchema->DefineCustomObjectsNoSource<ItemInstance>(FIELD_AVAILABLE_LOOT, offsetof(Lootable, m_availableLoot));
+			}
+
 			Lootable()
 				: ComponentBase(ID, FLAGS, PERSISTENCE)
 			{
@@ -95,7 +116,6 @@ namespace tpublic
 
 			// Public data
 			uint32_t					m_lootTableId = 0;
-
 			PlayerTag					m_playerTag;
 			bool						m_cash = false;
 			int64_t						m_availableCash = 0;

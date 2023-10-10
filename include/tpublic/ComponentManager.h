@@ -6,11 +6,11 @@
 namespace tpublic
 {
 
-	class ComponentFactory
+	class ComponentManager
 	{
 	public:
-							ComponentFactory();
-							~ComponentFactory();
+							ComponentManager();
+							~ComponentManager();
 
 		ComponentBase*		Create(
 								uint32_t			aId) const;

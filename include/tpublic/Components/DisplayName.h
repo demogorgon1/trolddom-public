@@ -15,6 +15,18 @@ namespace tpublic
 			static const uint8_t FLAGS = FLAG_REPLICATE_TO_OTHERS | FLAG_REPLICATE_TO_OWNER;
 			static const Persistence::Id PERSISTENCE = Persistence::ID_NONE;
 
+			enum Field
+			{
+				FIELD_STRING
+			};
+
+			static void
+			CreateSchema(
+				ComponentSchema*		aSchema)
+			{
+				aSchema->Define(ComponentSchema::TYPE_STRING, FIELD_STRING, "string", offsetof(DisplayName, m_string));
+			}
+
 			DisplayName()
 				: ComponentBase(ID, FLAGS, PERSISTENCE)
 			{

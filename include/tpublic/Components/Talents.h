@@ -41,6 +41,20 @@ namespace tpublic
 				uint32_t				m_points = 0;
 			};
 
+			enum Field
+			{
+				FIELD_ENTRIES,
+				FIELD_AVAILABLE_POINTS
+			};
+
+			static void
+			CreateSchema(
+				ComponentSchema* aSchema)
+			{
+				aSchema->DefineCustomObjectsNoSource<Entry>(FIELD_ENTRIES, offsetof(Talents, m_entries));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_AVAILABLE_POINTS, NULL, offsetof(Talents, m_availablePoints));
+			}
+
 			Talents()
 				: ComponentBase(ID, FLAGS, PERSISTENCE)
 			{

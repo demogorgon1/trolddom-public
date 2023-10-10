@@ -68,6 +68,18 @@ namespace tpublic
 				std::vector<std::unique_ptr<AuraEffectBase>>	m_effects; 
 			};
 
+			enum Field
+			{
+				FIELD_ENTRIES
+			};
+
+			static void
+			CreateSchema(
+				ComponentSchema* aSchema)
+			{
+				aSchema->DefineCustomObjectPointersNoSource<Entry>(FIELD_ENTRIES, offsetof(Auras, m_entries));
+			}
+
 			Auras()
 				: ComponentBase(ID, FLAGS, PERSISTENCE)
 			{

@@ -19,6 +19,30 @@ namespace tpublic
 			static const uint8_t FLAGS = FLAG_REPLICATE_TO_OWNER | FLAG_REPLICATE_TO_OTHERS | FLAG_PUBLIC;
 			static const Persistence::Id PERSISTENCE = Persistence::ID_VOLATILE;
 
+			enum Field
+			{
+				FIELD_TARGET_ENTITY_INSTANCE_ID,
+				FIELD_LEVEL,
+				FIELD_FACTION_ID,
+				FIELD_DIALOGUE_ROOT_ID,
+				FIELD_COMBAT_GROUP_ID,
+				FIELD_RESOURCES,
+				FIELD_CAST_IN_PROGRESS
+			};
+
+			static void
+			CreateSchema(
+				ComponentSchema*		aSchema)
+			{
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_TARGET_ENTITY_INSTANCE_ID, NULL, offsetof(CombatPublic, m_targetEntityInstanceId));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_LEVEL, "level", offsetof(CombatPublic, m_level));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_FACTION_ID, "faction", offsetof(CombatPublic, m_factionId))->SetDataType(DataType::ID_FACTION);
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_DIALOGUE_ROOT_ID, "dialogue_root", offsetof(CombatPublic, m_dialogueRootId))->SetDataType(DataType::ID_DIALOGUE_ROOT);
+				aSchema->Define(ComponentSchema::TYPE_UINT64, FIELD_COMBAT_GROUP_ID, NULL, offsetof(CombatPublic, m_combatGroupId));
+				aSchema->DefineCustomObjectsNoSource<ResourceEntry>(FIELD_RESOURCES, offsetof(CombatPublic, m_resources));
+				aSchema->DefineCustomOptionalObjectNoSource<CastInProgress>(FIELD_CAST_IN_PROGRESS, offsetof(CombatPublic, m_castInProgress));
+			}
+
 			struct ResourceEntry
 			{	
 				void
@@ -245,10 +269,10 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInt(m_combatGroupId))
 					return false;
-				if(!aStream->ReadObjects(m_resources))
+				if (!aStream->ReadObjects(m_resources))
 					return false;
-				if(!aStream->ReadOptionalObject(m_castInProgress))
-					return false;			
+				if (!aStream->ReadOptionalObject(m_castInProgress))
+					return false;
 				return true;
 			}
 
@@ -263,7 +287,6 @@ namespace tpublic
 
 			// Public data
 			uint32_t						m_targetEntityInstanceId = 0;
-
 			uint32_t						m_level = 1;
 			uint32_t						m_factionId = 0;
 			uint32_t						m_dialogueRootId = 0;

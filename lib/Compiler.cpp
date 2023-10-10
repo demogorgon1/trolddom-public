@@ -1,7 +1,7 @@
 #include "Pcheader.h"
 
 #include <tpublic/Compiler.h>
-#include <tpublic/ComponentFactory.h>
+#include <tpublic/ComponentManager.h>
 #include <tpublic/Compression.h>
 #include <tpublic/DataErrorHandling.h>
 #include <tpublic/TileStackCache.h>
