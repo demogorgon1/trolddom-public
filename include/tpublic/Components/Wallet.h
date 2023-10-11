@@ -39,23 +39,6 @@ namespace tpublic
 
 			}
 
-			// ComponentBase implementation
-			void
-			ToStream(
-				IWriter* aStream) const override
-			{
-				aStream->WriteInt(m_cash);
-			}
-
-			bool
-			FromStream(
-				IReader* aStream) override
-			{
-				if(!aStream->ReadInt(m_cash))
-					return false;
-				return true;
-			}
-
 			// Public data
 			int64_t			m_cash = 0;
 		};

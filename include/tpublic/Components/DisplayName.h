@@ -39,23 +39,6 @@ namespace tpublic
 
 			}
 
-			// ComponentBase implementation
-			void
-			ToStream(
-				IWriter* aStream) const override
-			{
-				aStream->WriteString(m_string);
-			}
-
-			bool
-			FromStream(
-				IReader* aStream) override
-			{
-				if(!aStream->ReadString(m_string))
-					return false;
-				return true;
-			}
-
 			// Public data
 			std::string		m_string;
 		};

@@ -57,22 +57,6 @@ namespace tpublic::Components
 
 	//------------------------------------------------------------------------
 
-	void	
-	Auras::ToStream(
-		IWriter*						aStream) const 
-	{				
-		aStream->WriteObjectPointers(m_entries);
-	}
-			
-	bool	
-	Auras::FromStream(
-		IReader*						aStream) 
-	{ 
-		if(!aStream->ReadObjectPointers(m_entries))
-			return false;
-		return true; 
-	}
-
 	void				
 	Auras::OnLoadedFromPersistence(
 		const Manifest*					aManifest) 

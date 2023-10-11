@@ -124,11 +124,12 @@ namespace tpublic
 	bool				
 	ComponentManager::ReadStorage(
 		IReader*				aReader,
-		ComponentBase*			aComponent) const
+		ComponentBase*			aComponent,
+		const Manifest*			aManifest) const
 	{
 		const ComponentType& t = m_componentTypes[aComponent->GetComponentId()];
 
-		return t.m_schema.ReadStorage(aReader, aComponent);
+		return t.m_schema.ReadStorage(aManifest, aReader, aComponent);
 	}
 
 	void				
@@ -148,12 +149,7 @@ namespace tpublic
 		ComponentType&			aComponentType)
 	{
 		aComponentType.m_schema.InitUpgradeChains();
-
-		std::unique_ptr<ComponentBase> test(aComponentType.m_create());
-		const char* componentName = Component::IdToString(aComponentType.m_id);
-		std::string t = AsDebugString(test.get());
-
-		printf("----%s----\n%s\n", componentName, t.c_str());
+		aComponentType.m_schema.Validate();
 	}
 
 }

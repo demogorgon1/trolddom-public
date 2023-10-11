@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ComponentBase.h"
+#include "ComponentManager.h"
 #include "DataErrorHandling.h"
 #include "EntityState.h"
 
@@ -41,24 +42,26 @@ namespace tpublic
 			m_components.push_back(std::unique_ptr<ComponentBase>(aComponent));
 		}
 		
+		//void
+		//SerializeAll(
+		//	const ComponentManager*	aComponentManager,
+		//	IWriter*				aWriter) const
+		//{
+		//	aWriter->WritePOD(m_state);
+
+		//	uint32_t i = 0;
+		//	for(const std::unique_ptr<ComponentBase>& component : m_components)
+		//	{
+		//		aWriter->WriteUInt(i);
+		//		component->ToStream(aWriter);
+
+		//		i++;
+		//	}
+		//}
+
 		void
-		SerializeAll(
-			IWriter*				aWriter) const
-		{
-			aWriter->WritePOD(m_state);
-
-			uint32_t i = 0;
-			for(const std::unique_ptr<ComponentBase>& component : m_components)
-			{
-				aWriter->WriteUInt(i);
-				component->ToStream(aWriter);
-
-				i++;
-			}
-		}
-
-		void
-		SerializePublic(
+		WriteNetworkPublic(
+			const ComponentManager* aComponentManager,
 			IWriter*				aWriter) const
 		{
 			aWriter->WritePOD(m_state);
@@ -69,14 +72,16 @@ namespace tpublic
 				if(component->GetFlags() & ComponentBase::FLAG_REPLICATE_TO_OTHERS)
 				{
 					aWriter->WriteUInt(i);
-					component->ToStream(aWriter);
+					//component->ToStream(aWriter);
+					aComponentManager->WriteNetwork(aWriter, component.get());
 				}
 				i++;
 			}
 		}
 
 		void
-		SerializePrivate(
+		WriteNetworkPrivate(
+			const ComponentManager* aComponentManager,
 			IWriter*				aWriter) const
 		{
 			aWriter->WritePOD(m_state);
@@ -87,14 +92,16 @@ namespace tpublic
 				if(component->GetFlags() & ComponentBase::FLAG_REPLICATE_TO_OWNER)
 				{
 					aWriter->WriteUInt(i);
-					component->ToStream(aWriter);
+					//component->ToStream(aWriter);
+					aComponentManager->WriteNetwork(aWriter, component.get());
 				}
 				i++;
 			}
 		}
 
 		bool
-		Deserialize(
+		ReadNetwork(
+			const ComponentManager*				aComponentManager,
 			IReader*							aReader,
 			std::vector<const ComponentBase*>*	aOutUpdatedComponents) 
 		{
@@ -116,7 +123,10 @@ namespace tpublic
 				if(!m_components[index])
 					return false;
 
-				if(!m_components[index]->FromStream(aReader))
+				//if(!m_components[index]->FromStream(aReader))
+				//	return false;
+
+				if(!aComponentManager->ReadNetwork(aReader, m_components[index].get()))
 					return false;
 			}
 			return true;

@@ -44,10 +44,12 @@ namespace tpublic
 
 				void	
 				ToStream(
+					const ComponentManager*	aComponentManager,
 					IWriter*				aStream) const 
 				{
 					aStream->WriteUInt(m_componentId);
-					aStream->WriteObjectPointer(m_componentBase);
+					//aStream->WriteObjectPointer(m_componentBase);
+					aComponentManager->WriteNetwork(aStream, m_componentBase.get());
 				}
 			
 				bool	
@@ -58,7 +60,9 @@ namespace tpublic
 						return false;
 
 					m_componentBase.reset(aStream->GetComponentManager()->Create(m_componentId));
-					if(!m_componentBase->FromStream(aStream))
+					//if(!m_componentBase->FromStream(aStream))
+					//	return false;
+					if(!aStream->GetComponentManager()->ReadNetwork(aStream, m_componentBase.get()))
 						return false;
 					return true;
 				}
@@ -89,6 +93,7 @@ namespace tpublic
 
 			void
 			SerializeInitData(
+				const ComponentManager* aComponentManager,
 				IWriter*				aWriter) const
 			{
 				aWriter->WritePOD(EntityState::ID_DEFAULT);
@@ -96,7 +101,8 @@ namespace tpublic
 				for (const std::unique_ptr<ComponentEntry>& componentEntry : m_components)
 				{
 					aWriter->WriteUInt(index++);
-					componentEntry->m_componentBase->ToStream(aWriter);
+					//componentEntry->m_componentBase->ToStream(aWriter);
+					aComponentManager->WriteNetwork(aWriter, componentEntry->m_componentBase.get());
 				}
 			}
 
@@ -144,7 +150,13 @@ namespace tpublic
 				ToStreamBase(aStream);
 				aStream->WriteString(m_displayName);
 				aStream->WriteUInts(m_systems);
-				aStream->WriteObjectPointers(m_components);
+
+				{
+					assert(m_componentManager != NULL);
+					aStream->WriteUInt<size_t>(m_components.size());
+					for(const std::unique_ptr<ComponentEntry>& t : m_components)
+						t->ToStream(m_componentManager, aStream);
+				}
 			}
 			
 			bool	

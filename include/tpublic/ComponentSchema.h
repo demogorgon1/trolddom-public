@@ -7,10 +7,13 @@
 
 namespace tpublic
 {
+	
+	class Manifest;
 
 	class ComponentSchema
 	{
 	public:		
+		static const uint8_t STORAGE_FORMAT_VERSION = 1;
 		static const uint32_t MAX_FIELD_ID = 64;
 
 		enum Type : uint8_t
@@ -27,13 +30,20 @@ namespace tpublic
 			TYPE_CUSTOM
 		};
 
+		enum ReadType
+		{
+			READ_TYPE_NETWORK,
+			READ_TYPE_STORAGE,
+			READ_TYPE_SOURCE
+		};
+
 		typedef std::function<void(IWriter*, const void*)> CustomWriteCallback;
 		typedef std::function<bool(IReader*, void*)> CustomReadCallback;
 		typedef std::function<void(const Parser::Node*, void*)> CustomReadSourceCallback;
 		typedef std::function<void(void*)> CustomNewCallback;
 		typedef std::function<void(void*)> CustomDeleteCallback;
 		typedef std::function<void(void*, const void*)> InitFromDeprecatedCallback;
-		typedef std::function<void(void*)> OnReadCallback;
+		typedef std::function<void(void*, ReadType, const Manifest*)> OnReadCallback;
 
 		struct Field
 		{
@@ -83,10 +93,12 @@ namespace tpublic
 							IWriter*				aWriter,
 							const void*				aObject) const;
 		bool			ReadStorage(
+							const Manifest*			aManifest,
 							IReader*				aReader,
 							void*					aObject) const;			
 		std::string		AsDebugString(
 							const void*				aObject) const;
+		void			Validate() const;
 		
 		template <typename _FromT, typename _ToT, typename _UpgradeCallback>
 		void
@@ -115,9 +127,11 @@ namespace tpublic
 			_OnReadCallback						aOnReadCallback)
 		{
 			m_onReadCallback = [&](
-				void*		aData)
+				void*			aData,
+				ReadType		aReadType,
+				const Manifest* aManifest)
 			{
-				aOnReadCallback((_T*)aData);
+				aOnReadCallback((_T*)aData, aReadType, aManifest);
 			};
 		}
 

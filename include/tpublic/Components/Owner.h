@@ -39,23 +39,6 @@ namespace tpublic
 
 			}
 
-			// ComponentBase implementation
-			void
-			ToStream(
-				IWriter* aStream) const override
-			{
-				aStream->WriteUInt(m_ownerEntityInstanceId);
-			}
-
-			bool
-			FromStream(
-				IReader* aStream) override
-			{
-				if(!aStream->ReadUInt(m_ownerEntityInstanceId))
-					return false;
-				return true;
-			}
-
 			// Public data
 			uint32_t		m_ownerEntityInstanceId = 0;
 		};

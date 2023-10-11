@@ -69,62 +69,6 @@ namespace tpublic
 				m_blockChance = (5 * uint64_t(UINT32_MAX) / 100);
 			}
 
-			// ComponentBase implementation
-			void	
-			ToStream(
-				IWriter*				aStream) const override
-			{
-				aStream->WriteUInt(m_weaponDamageRangeMin);
-				aStream->WriteUInt(m_weaponDamageRangeMax);
-				aStream->WriteInt(m_weaponCooldown);
-				aStream->WriteUInt(m_physicalCriticalStrikeChance);
-				aStream->WriteUInt(m_magicalCriticalStrikeChance);
-				aStream->WriteUInt(m_dodgeChance);
-				aStream->WriteUInt(m_parryChance);
-				aStream->WriteUInt(m_missChance);
-				aStream->WriteUInt(m_blockChance);
-			}
-			
-			bool	
-			FromStream(
-				IReader*				aStream) override
-			{
-				if (!aStream->ReadUInt(m_weaponDamageRangeMin))
-					return false;
-				if (!aStream->ReadUInt(m_weaponDamageRangeMax))
-					return false;
-				if (!aStream->ReadInt(m_weaponCooldown))
-					return false;
-				if (!aStream->ReadUInt(m_physicalCriticalStrikeChance))
-					return false;
-				if (!aStream->ReadUInt(m_magicalCriticalStrikeChance))
-					return false;
-				if (!aStream->ReadUInt(m_dodgeChance))
-					return false;
-				if (!aStream->ReadUInt(m_parryChance))
-					return false;
-				if (!aStream->ReadUInt(m_missChance))
-					return false;
-				if (!aStream->ReadUInt(m_blockChance))
-					return false;
-				return true;
-			}
-
-			void
-			DebugPrint() const override
-			{
-				printf("combat_private: weapon_damage_range=%u-%u weapon_cooldown=%d phys_crit=%f mag_crit=%f dodge=%f parry=%f miss=%f block=%f\n",
-					m_weaponDamageRangeMin,
-					m_weaponDamageRangeMax,
-					m_weaponCooldown,
-					(m_physicalCriticalStrikeChance / (float)UINT32_MAX) * 100.0f,
-					(m_magicalCriticalStrikeChance / (float)UINT32_MAX) * 100.0f,
-					(m_dodgeChance / (float)UINT32_MAX) * 100.0f,
-					(m_parryChance / (float)UINT32_MAX) * 100.0f,
-					(m_missChance / (float)UINT32_MAX) * 100.0f,
-					(m_blockChance / (float)UINT32_MAX) * 100.0f);
-			}
-
 			// Public data
 			uint32_t							m_weaponDamageRangeMin = 0;
 			uint32_t							m_weaponDamageRangeMax = 0;

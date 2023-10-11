@@ -16,6 +16,7 @@ namespace tpublic
 		DataBase()
 			: m_defined(false)
 			, m_id(0)
+			, m_componentManager(NULL)
 		{
 
 		}
@@ -68,6 +69,7 @@ namespace tpublic
 		uint32_t									m_id;
 		bool										m_defined;
 		std::optional<DataErrorHandling::DebugInfo>	m_debugInfo;
+		const ComponentManager*						m_componentManager;
 	};
 
 }

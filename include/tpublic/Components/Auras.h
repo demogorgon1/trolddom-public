@@ -78,6 +78,15 @@ namespace tpublic
 				ComponentSchema* aSchema)
 			{
 				aSchema->DefineCustomObjectPointersNoSource<Entry>(FIELD_ENTRIES, offsetof(Auras, m_entries));
+
+				aSchema->OnRead<Auras>([](
+					Auras*						aAuras,
+					ComponentSchema::ReadType	aReadType,
+					const Manifest*				aManifest)
+				{
+					if(aReadType == ComponentSchema::READ_TYPE_STORAGE)
+						aAuras->OnLoadedFromPersistence(aManifest);
+				});
 			}
 
 			Auras()
@@ -99,14 +108,8 @@ namespace tpublic
 							int32_t							aDamage) const;
 			void		RemoveAura(
 							uint32_t						aAuraId);
-
-			// ComponentBase implementation
-			void		ToStream(
-							IWriter*						aStream) const override;
-			bool		FromStream(
-							IReader*						aStream) override;
 			void		OnLoadedFromPersistence(
-							const Manifest*					aManifest) override;
+							const Manifest*					aManifest);
 
 			// Public data
 			std::vector<std::unique_ptr<Entry>>					m_entries;

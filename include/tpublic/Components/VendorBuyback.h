@@ -114,26 +114,6 @@ namespace tpublic
 				m_version++;
 			}
 
-			// ComponentBase implementation
-			void
-			ToStream(
-				IWriter* aStream) const override
-			{
-				m_items.ToStream(aStream);
-				aStream->WriteUInt(m_version);
-			}
-
-			bool
-			FromStream(
-				IReader* aStream) override
-			{
-				if(!m_items.FromStream(aStream))
-					return false;
-				if (!aStream->ReadUInt(m_version))
-					return false;
-				return true;
-			}
-
 			// Public data
 			Items			m_items;
 			uint32_t		m_version = 0;

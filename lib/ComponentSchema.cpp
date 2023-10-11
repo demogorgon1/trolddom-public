@@ -206,7 +206,7 @@ namespace tpublic
 		});
 
 		if (m_onReadCallback)
-			m_onReadCallback(aObject);
+			m_onReadCallback(aObject, READ_TYPE_SOURCE, NULL);
 	}
 	
 	void			
@@ -240,7 +240,7 @@ namespace tpublic
 		}
 
 		if (m_onReadCallback)
-			m_onReadCallback(aObject);
+			m_onReadCallback(aObject, READ_TYPE_NETWORK, NULL);
 
 		return true;
 	}
@@ -268,6 +268,7 @@ namespace tpublic
 	
 	bool			
 	ComponentSchema::ReadStorage(
+		const Manifest*		aManifest,
 		IReader*			aReader,
 		void*				aObject) const
 	{
@@ -384,7 +385,7 @@ namespace tpublic
 		}
 
 		if(m_onReadCallback)
-			m_onReadCallback(aObject);
+			m_onReadCallback(aObject, READ_TYPE_STORAGE, aManifest);
 
 		return true;
 	}
@@ -403,6 +404,33 @@ namespace tpublic
 		}
 
 		return t;
+	}
+
+	void			
+	ComponentSchema::Validate() const
+	{
+		// Make sure no fields overlap
+		for(size_t i = 0; i < m_fields.size(); i++)
+		{
+			const Field& field1 = m_fields[i];
+
+			for(size_t j = i + 1; j < m_fields.size(); j++)
+			{
+				const Field& field2 = m_fields[j];
+
+				size_t fieldSize1 = _GetFieldSize(&field1);
+				size_t fieldSize2 = _GetFieldSize(&field2);
+
+				size_t rangeMin = field1.m_offset;
+				size_t rangeMax = field1.m_offset + fieldSize1;
+				if(field2.m_offset < rangeMin)
+					rangeMin = field2.m_offset;
+				if(field2.m_offset + fieldSize2 > rangeMax)
+					rangeMax = field2.m_offset + fieldSize2;
+
+				assert(rangeMax - rangeMin >= fieldSize1 + fieldSize2);
+			}
+		}
 	}
 
 	//--------------------------------------------------------------------------------------

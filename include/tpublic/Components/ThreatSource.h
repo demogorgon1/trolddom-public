@@ -56,20 +56,6 @@ namespace tpublic
 				return i->first;
 			}
 
-			// ComponentBase implementation
-			void
-			ToStream(
-				IWriter* /*aStream*/) const override
-			{
-			}
-
-			bool
-			FromStream(
-				IReader* /*aStream*/) override
-			{
-				return true;
-			}
-
 			// Public data
 			// Not serialized, server only
 			std::unordered_map<uint32_t, int32_t>			m_targets;

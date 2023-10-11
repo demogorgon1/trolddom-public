@@ -9,6 +9,7 @@ namespace tpublic
 
 	class IReader;
 	class IWriter;
+	class Manifest;
 
 	class ComponentManager
 	{
@@ -31,7 +32,8 @@ namespace tpublic
 								const ComponentBase*	aComponent) const;
 		bool				ReadStorage(
 								IReader*				aReader,
-								ComponentBase*			aComponent) const;
+								ComponentBase*			aComponent,
+								const Manifest*			aManifest) const;
 		void				ReadSource(
 								const Parser::Node*		aSource,
 								ComponentBase*			aComponent) const;

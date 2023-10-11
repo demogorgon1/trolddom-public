@@ -44,29 +44,6 @@ namespace tpublic
 
 			}
 
-			// ComponentBase implementation
-			void
-			ToStream(
-				IWriter*			aStream) const override
-			{
-				aStream->WriteInt(m_tickInterval);
-				aStream->WriteInt(m_duration);
-				aStream->WriteUInt(m_abilityId);
-			}
-
-			bool
-			FromStream(
-				IReader*			aStream) override
-			{
-				if (!aStream->ReadInt(m_tickInterval))
-					return false;
-				if (!aStream->ReadInt(m_duration))
-					return false;
-				if (!aStream->ReadUInt(m_abilityId))
-					return false;
-				return true;
-			}
-
 			// Public data
 			int32_t			m_tickInterval = 5;
 			int32_t			m_duration = 10;

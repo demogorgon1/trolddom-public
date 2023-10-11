@@ -78,38 +78,6 @@ namespace tpublic
 
 			}
 
-			// ComponentBase implementation
-			void
-			ToStream(
-				IWriter* aStream) const override
-			{
-				aStream->WriteUInt(m_level);
-				aStream->WriteUInt(m_xp);
-				aStream->WritePOD(m_isDead);
-				aStream->WriteUInt(m_resurrectionPointMapId);
-				m_resurrectionPointPosition.ToStream(aStream);
-				m_guildRegistrationHistory.ToStream(aStream);
-			}
-
-			bool
-			FromStream(
-				IReader* aStream) override
-			{
-				if(!aStream->ReadUInt(m_level))
-					return false;
-				if (!aStream->ReadUInt(m_xp))
-					return false;
-				if (!aStream->ReadPOD(m_isDead))
-					return false;
-				if (!aStream->ReadUInt(m_resurrectionPointMapId))
-					return false;
-				if(!m_resurrectionPointPosition.FromStream(aStream))
-					return false;
-				if(!m_guildRegistrationHistory.FromStream(aStream))
-					return false;
-				return true;
-			}
-
 			// Public data
 			uint32_t					m_level = 1;
 			uint32_t					m_xp = 0;

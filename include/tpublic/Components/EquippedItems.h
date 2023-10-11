@@ -81,26 +81,6 @@ namespace tpublic
 				}
 			}
 
-			// ComponentBase implementation
-			void
-			ToStream(
-				IWriter*	aStream) const override
-			{
-				m_slots.ToStream(aStream);
-				aStream->WriteUInt(m_version);
-			}
-
-			bool
-			FromStream(
-				IReader*									aStream) override
-			{
-				if(!m_slots.FromStream(aStream))
-					return false;
-				if(!aStream->ReadUInt(m_version))
-					return false;
-				return true;
-			}
-
 			// Public data
 			Slots			m_slots;
 			uint32_t		m_version = 0;

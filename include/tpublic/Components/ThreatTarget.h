@@ -36,20 +36,6 @@ namespace tpublic
 
 			}
 
-			// ComponentBase implementation
-			void
-			ToStream(
-				IWriter* /*aStream*/) const override
-			{
-			}
-
-			bool
-			FromStream(
-				IReader* /*aStream*/) override
-			{
-				return true;
-			}
-
 			// Public data
 			// Not serialized, server only
 			ThreatTable		m_table;

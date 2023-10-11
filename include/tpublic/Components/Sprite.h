@@ -107,7 +107,9 @@ namespace tpublic
 				aSchema->DefineCustomObjectPointers<Animation>(FIELD_ANIMATIONS, "animations", offsetof(Sprite, m_animations));
 				
 				aSchema->OnRead<Sprite>([](
-					Sprite* aSprite)
+					Sprite*						aSprite,
+					ComponentSchema::ReadType	/*aReadType*/,
+					const Manifest*				/*aManifest*/)
 				{
 					aSprite->UpdateStateAnimations();
 				});
@@ -126,25 +128,6 @@ namespace tpublic
 			}
 
 			// ComponentBase implementation
-			void
-			ToStream(
-				IWriter* aStream) const override
-			{
-				aStream->WriteObjectPointers(m_animations);
-			}
-
-			bool
-			FromStream(
-				IReader* aStream) override
-			{
-				if(!aStream->ReadObjectPointers(m_animations))
-					return false;
-
-				UpdateStateAnimations();
-
-				return true;
-			}
-
 			void
 			UpdateStateAnimations()
 			{

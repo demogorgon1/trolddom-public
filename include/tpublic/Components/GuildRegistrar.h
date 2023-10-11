@@ -39,32 +39,6 @@ namespace tpublic
 
 			}
 
-			// ComponentBase implementation
-			void	
-			ToStream(
-				IWriter*				aStream) const override
-			{
-				aStream->WriteUInts(m_registrationPriceTiers);
-			}
-			
-			bool	
-			FromStream(
-				IReader*				aStream) override
-			{
-				if (!aStream->ReadUInts(m_registrationPriceTiers))
-					return false;
-				return true;
-			}
-
-			void
-			DebugPrint() const override
-			{
-				printf("guild_registrar: registration_price_tiers=");
-				for(uint32_t t : m_registrationPriceTiers)
-					printf("%u ", t);
-				printf("\n");
-			}
-
 			// Public data
 			std::vector<uint32_t>		m_registrationPriceTiers;
 		};

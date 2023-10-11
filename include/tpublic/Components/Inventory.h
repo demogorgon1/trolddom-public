@@ -49,23 +49,6 @@ namespace tpublic
 				m_itemList.m_version = version;
 			}
 
-			// ComponentBase implementation
-			void
-			ToStream(
-				IWriter*									aStream) const override
-			{
-				m_itemList.ToStream(aStream);
-			}
-
-			bool
-			FromStream(
-				IReader*									aStream) override
-			{
-				if(!m_itemList.FromStream(aStream))
-					return false;
-				return true;
-			}
-
 			// Public data
 			ItemList						m_itemList;
 		};

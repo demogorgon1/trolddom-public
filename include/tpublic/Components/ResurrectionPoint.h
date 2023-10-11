@@ -33,20 +33,6 @@ namespace tpublic
 
 			}
 
-			// ComponentBase implementation
-			void
-			ToStream(
-				IWriter* /*aStream*/) const override
-			{
-			}
-
-			bool
-			FromStream(
-				IReader* /*aStream*/) override
-			{
-				return true;
-			}
-
 			// Public data
 		};
 	}

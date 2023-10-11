@@ -82,6 +82,7 @@ namespace tpublic
 				base->FromSource(aNode);
 
 				base->m_defined = true;
+				base->m_componentManager = m_sourceContext.m_componentManager.get();
 			}
 		});		
 

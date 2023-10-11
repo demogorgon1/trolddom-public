@@ -51,23 +51,6 @@ namespace tpublic
 				return false;
 			}
 
-			// ComponentBase implementation
-			void	
-			ToStream(
-				IWriter*				aStream) const override
-			{
-				aStream->WriteUInts(m_available);
-			}
-			
-			bool	
-			FromStream(
-				IReader*				aStream) override
-			{
-				if (!aStream->ReadUInts(m_available))
-					return false;
-				return true;
-			}
-
 			// Public data
 			std::vector<uint32_t>	m_available;
 		};

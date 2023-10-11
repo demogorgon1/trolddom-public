@@ -40,23 +40,6 @@ namespace tpublic
 
 			}
 
-			// ComponentBase implementation
-			void
-			ToStream(
-				IWriter* aStream) const override
-			{
-				m_cooldowns.ToStream(aStream);
-			}
-
-			bool
-			FromStream(
-				IReader* aStream) override
-			{
-				if(!m_cooldowns.FromStream(aStream))
-					return false;
-				return true;
-			}
-
 			// Public data
 			Cooldowns		m_cooldowns;
 		};

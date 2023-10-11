@@ -55,23 +55,6 @@ namespace tpublic
 				m_actionBars[aRow]->SetSlot((size_t)aIndex, aAbilityId);
 			}
 
-			// ComponentBase implementation
-			void
-			ToStream(
-				IWriter*	aStream) const override
-			{
-				aStream->WriteObjectPointers(m_actionBars);
-			}
-
-			bool
-			FromStream(
-				IReader*	aStream) override
-			{
-				if(!aStream->ReadObjectPointers(m_actionBars))
-					return false;
-				return true;
-			}
-
 			// Public data
 			std::vector<std::unique_ptr<ActionBar>>		m_actionBars;
 		};

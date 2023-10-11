@@ -241,26 +241,6 @@ namespace tpublic
 				return NULL;
 			}
 
-			// ComponentBase implementation
-			void
-			ToStream(
-				IWriter*				aStream) const override
-			{
-				aStream->WriteObjectPointers(m_states);
-				m_resources.ToStream(aStream);
-			}
-
-			bool
-			FromStream(
-				IReader*				aStream) override
-			{
-				if(!aStream->ReadObjectPointers(m_states))
-					return false;
-				if(!m_resources.FromStream(aStream))
-					return false;
-				return true;
-			}
-
 			// Public data			
 			std::vector<std::unique_ptr<StateEntry>>	m_states;
 			Resources									m_resources;

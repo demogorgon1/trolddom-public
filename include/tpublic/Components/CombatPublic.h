@@ -223,50 +223,6 @@ namespace tpublic
 				return true;
 			}
 
-			// ComponentBase implementation
-			void	
-			ToStream(
-				IWriter*				aStream) const override
-			{
-				aStream->WriteUInt(m_targetEntityInstanceId);
-				aStream->WriteUInt(m_level);
-				aStream->WriteUInt(m_factionId);
-				aStream->WriteUInt(m_dialogueRootId);
-				aStream->WriteUInt(m_combatGroupId);
-				aStream->WriteObjects(m_resources);
-				aStream->WriteOptionalObject(m_castInProgress);
-			}
-			
-			bool	
-			FromStream(
-				IReader*				aStream) override
-			{
-				if (!aStream->ReadUInt(m_targetEntityInstanceId))
-					return false;
-				if (!aStream->ReadUInt(m_level))
-					return false;
-				if (!aStream->ReadUInt(m_factionId))
-					return false;
-				if (!aStream->ReadUInt(m_dialogueRootId))
-					return false;
-				if (!aStream->ReadUInt(m_combatGroupId))
-					return false;
-				if (!aStream->ReadObjects(m_resources))
-					return false;
-				if (!aStream->ReadOptionalObject(m_castInProgress))
-					return false;
-				return true;
-			}
-
-			void
-			DebugPrint() const override
-			{
-				printf("combat_public: target=%u level=%u faction=%u combat_group=%zu dialogue_root=%u", m_targetEntityInstanceId, m_level, m_factionId, m_combatGroupId, m_dialogueRootId);
-				for(const ResourceEntry& resource : m_resources)
-					printf("%s=%u/%u ", Resource::GetInfo((Resource::Id)resource.m_id)->m_name, resource.m_current, resource.m_max);
-				printf("\n");
-			}
-
 			// Public data
 			uint32_t						m_targetEntityInstanceId = 0;
 			uint32_t						m_level = 1;
