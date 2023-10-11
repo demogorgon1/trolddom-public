@@ -30,18 +30,6 @@ namespace tpublic
 				aSchema->DefineCustomObjectPointersNoSource<ActionBar>(FIELD_ACTION_BARS, offsetof(ActionBars, m_actionBars));
 			}
 
-			ActionBars()
-				: ComponentBase(ID, FLAGS, PERSISTENCE)
-			{
-
-			}
-
-			virtual
-			~ActionBars()
-			{
-
-			}
-
 			void
 			Set(
 				uint32_t	aRow,

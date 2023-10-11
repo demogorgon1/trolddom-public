@@ -115,18 +115,6 @@ namespace tpublic
 				});
 			}
 
-			Sprite()
-				: ComponentBase(ID, FLAGS, PERSISTENCE)
-			{
-				memset(m_stateAnimations, 0, sizeof(m_stateAnimations));
-			}
-
-			virtual 
-			~Sprite()
-			{
-
-			}
-
 			// ComponentBase implementation
 			void
 			UpdateStateAnimations()
@@ -156,7 +144,7 @@ namespace tpublic
 
 			// Public data
 			std::vector<std::unique_ptr<Animation>>	m_animations;
-			const Animation*						m_stateAnimations[EntityState::NUM_IDS];
+			const Animation*						m_stateAnimations[EntityState::NUM_IDS] = { 0 };
 		};
 	}
 

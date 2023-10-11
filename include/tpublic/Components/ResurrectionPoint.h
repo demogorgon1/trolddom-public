@@ -21,18 +21,6 @@ namespace tpublic
 			{
 			}
 
-			ResurrectionPoint()
-				: ComponentBase(ID, FLAGS, PERSISTENCE)
-			{
-
-			}
-
-			virtual 
-			~ResurrectionPoint()
-			{
-
-			}
-
 			// Public data
 		};
 	}

@@ -27,18 +27,6 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_OTHER_CHARACTER_ID, NULL, offsetof(Trade, m_otherCharacterId));
 			}
 
-			Trade()
-				: ComponentBase(ID, FLAGS, PERSISTENCE)
-			{
-
-			}
-
-			virtual 
-			~Trade()
-			{
-
-			}
-
 			// Public data
 			uint32_t		m_otherCharacterId = 0;
 		};

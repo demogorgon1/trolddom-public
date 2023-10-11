@@ -27,18 +27,6 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32_ARRAY, FIELD_AVAILABLE, NULL, offsetof(Abilities, m_available));
 			}
 
-			Abilities()
-				: ComponentBase(ID, FLAGS, PERSISTENCE)
-			{
-
-			}
-
-			virtual 
-			~Abilities()
-			{
-
-			}
-
 			bool
 			IsAbilityAvailable(
 				uint32_t				aAbilityId) const

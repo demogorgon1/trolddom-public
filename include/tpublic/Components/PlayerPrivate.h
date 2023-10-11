@@ -66,18 +66,6 @@ namespace tpublic
 				aSchema->DefineCustomObjectNoSource<GuildRegistrationHistory>(FIELD_GUILD_REGISTRATION_HISTORY, offsetof(PlayerPrivate, m_guildRegistrationHistory));
 			}
 
-			PlayerPrivate()
-				: ComponentBase(ID, FLAGS, PERSISTENCE)
-			{
-
-			}
-
-			virtual
-			~PlayerPrivate()
-			{
-
-			}
-
 			// Public data
 			uint32_t					m_level = 1;
 			uint32_t					m_xp = 0;

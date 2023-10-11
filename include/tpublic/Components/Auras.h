@@ -89,18 +89,6 @@ namespace tpublic
 				});
 			}
 
-			Auras()
-				: ComponentBase(ID, FLAGS, PERSISTENCE)
-			{
-
-			}
-
-			virtual
-			~Auras()
-			{
-
-			}
-
 			bool		HasEffect(
 							AuraEffect::Id					aId) const;
 			int32_t		FilterDamageInput(

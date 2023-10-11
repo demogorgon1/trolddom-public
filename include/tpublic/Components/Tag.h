@@ -28,18 +28,6 @@ namespace tpublic
 				aSchema->DefineCustomObjectNoSource<PlayerTag>(FIELD_PLAYER_TAG, offsetof(Tag, m_playerTag));
 			}
 
-			Tag()
-				: ComponentBase(ID, FLAGS, PERSISTENCE)
-			{
-
-			}
-
-			virtual
-			~Tag()
-			{
-
-			}
-
 			// Public data
 			PlayerTag		m_playerTag;
 		};

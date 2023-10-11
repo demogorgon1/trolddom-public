@@ -32,18 +32,6 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_ABILITY, "ability", offsetof(Environment, m_abilityId))->SetDataType(DataType::ID_ABILITY);
 			}
 
-			Environment()
-				: ComponentBase(ID, FLAGS, PERSISTENCE)
-			{
-
-			}
-
-			virtual
-			~Environment()
-			{
-
-			}
-
 			// Public data
 			int32_t			m_tickInterval = 5;
 			int32_t			m_duration = 10;

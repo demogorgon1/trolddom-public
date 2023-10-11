@@ -27,18 +27,6 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_OWNER_ENTITY_INSTANCE_ID, NULL, offsetof(Owner, m_ownerEntityInstanceId));
 			}
 
-			Owner()
-				: ComponentBase(ID, FLAGS, PERSISTENCE)
-			{
-
-			}
-
-			virtual 
-			~Owner()
-			{
-
-			}
-
 			// Public data
 			uint32_t		m_ownerEntityInstanceId = 0;
 		};

@@ -79,7 +79,27 @@ namespace tpublic
 		if(!t.m_create)
 			return NULL;
 
-		return t.m_create();
+		ComponentBase* component = t.m_create();
+		component->SetComponentId(aId);
+		return component;
+	}
+
+	uint8_t				
+	ComponentManager::GetComponentFlags(
+		uint32_t				aId) const
+	{
+		assert(aId < Component::NUM_IDS);
+		const ComponentType& t = m_componentTypes[aId];
+		return t.m_flags;
+	}
+	
+	Persistence::Id		
+	ComponentManager::GetComponentPersistence(
+		uint32_t				aId) const
+	{
+		assert(aId < Component::NUM_IDS);
+		const ComponentType& t = m_componentTypes[aId];
+		return t.m_persistence;
 	}
 
 	std::string

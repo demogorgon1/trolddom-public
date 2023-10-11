@@ -61,18 +61,6 @@ namespace tpublic
 				aSchema->DefineCustomObjectsNoSource<Entry>(FIELD_ENTRIES, offsetof(VisibleAuras, m_entries));
 			}
 
-			VisibleAuras()
-				: ComponentBase(ID, FLAGS, PERSISTENCE)
-			{
-
-			}
-
-			virtual
-			~VisibleAuras()
-			{
-
-			}
-
 			// Public data
 			std::vector<Entry>	m_entries;			
 		};

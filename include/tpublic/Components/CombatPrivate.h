@@ -43,18 +43,6 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_BLOCK_CHANCE, "block_chance", offsetof(CombatPrivate, m_blockChance));
 			}
 
-			CombatPrivate()
-				: ComponentBase(ID, FLAGS, PERSISTENCE)
-			{
-
-			}
-
-			virtual 
-			~CombatPrivate()
-			{
-
-			}
-
 			void
 			Reset()
 			{

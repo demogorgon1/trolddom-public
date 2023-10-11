@@ -27,18 +27,6 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_STRING, FIELD_STRING, "string", offsetof(DisplayName, m_string));
 			}
 
-			DisplayName()
-				: ComponentBase(ID, FLAGS, PERSISTENCE)
-			{
-
-			}
-
-			virtual 
-			~DisplayName()
-			{
-
-			}
-
 			// Public data
 			std::string		m_string;
 		};

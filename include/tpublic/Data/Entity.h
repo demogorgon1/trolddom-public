@@ -31,10 +31,13 @@ namespace tpublic
 					m_componentId = Component::StringToId(aSource->m_name.c_str());
 					TP_VERIFY(m_componentId != Component::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid component.", aSource->m_name.c_str());
 
-					std::unique_ptr<ComponentBase> component(aSource->m_sourceContext->m_componentManager->Create(m_componentId));
+					const ComponentManager* componentManager = aSource->m_sourceContext->m_componentManager.get();
+
+					std::unique_ptr<ComponentBase> component(componentManager->Create(m_componentId));
 					assert(component);
 
-					TP_VERIFY((component->GetFlags() & ComponentBase::FLAG_PLAYER_ONLY) == 0, aSource->m_debugInfo, "'%s' is a player-only component.", aSource->m_name.c_str());
+					uint8_t flags = componentManager->GetComponentFlags(m_componentId);
+					TP_VERIFY((flags & ComponentBase::FLAG_PLAYER_ONLY) == 0, aSource->m_debugInfo, "'%s' is a player-only component.", aSource->m_name.c_str());
 
 					if(!aSource->m_children.empty())
 						aSource->m_sourceContext->m_componentManager->ReadSource(aSource, component.get());
@@ -48,7 +51,6 @@ namespace tpublic
 					IWriter*				aStream) const 
 				{
 					aStream->WriteUInt(m_componentId);
-					//aStream->WriteObjectPointer(m_componentBase);
 					aComponentManager->WriteNetwork(aStream, m_componentBase.get());
 				}
 			
@@ -60,8 +62,6 @@ namespace tpublic
 						return false;
 
 					m_componentBase.reset(aStream->GetComponentManager()->Create(m_componentId));
-					//if(!m_componentBase->FromStream(aStream))
-					//	return false;
 					if(!aStream->GetComponentManager()->ReadNetwork(aStream, m_componentBase.get()))
 						return false;
 					return true;
@@ -101,7 +101,6 @@ namespace tpublic
 				for (const std::unique_ptr<ComponentEntry>& componentEntry : m_components)
 				{
 					aWriter->WriteUInt(index++);
-					//componentEntry->m_componentBase->ToStream(aWriter);
 					aComponentManager->WriteNetwork(aWriter, componentEntry->m_componentBase.get());
 				}
 			}

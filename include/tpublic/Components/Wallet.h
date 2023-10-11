@@ -27,18 +27,6 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_INT64, FIELD_CASH, NULL, offsetof(Wallet, m_cash));
 			}
 
-			Wallet()
-				: ComponentBase(ID, FLAGS, PERSISTENCE)
-			{
-
-			}
-
-			virtual
-			~Wallet()
-			{
-
-			}
-
 			// Public data
 			int64_t			m_cash = 0;
 		};

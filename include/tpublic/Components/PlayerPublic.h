@@ -35,18 +35,6 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_STRING, FIELD_GUILD_NAME, NULL, offsetof(PlayerPublic, m_guildName));
 			}
 
-			PlayerPublic()
-				: ComponentBase(ID, FLAGS, PERSISTENCE)
-			{
-
-			}
-
-			virtual
-			~PlayerPublic()
-			{
-
-			}
-
 			// Public data
 			uint32_t			m_classId = 0;
 			uint32_t			m_characterId = 0;

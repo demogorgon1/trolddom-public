@@ -30,18 +30,6 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_BLOCK, NULL, offsetof(Position, m_block));
 			}
 
-			Position()
-				: ComponentBase(ID, FLAGS, PERSISTENCE)
-			{
-
-			}
-
-			virtual 
-			~Position()
-			{
-
-			}
-
 			// Public data
 			Vec2	m_position;
 			bool	m_block = false;

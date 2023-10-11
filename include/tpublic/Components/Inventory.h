@@ -28,18 +28,6 @@ namespace tpublic
 				aSchema->DefineCustomObjectNoSource<ItemList>(FIELD_ITEM_LIST, offsetof(Inventory, m_itemList));
 			}
 
-			Inventory()
-				: ComponentBase(ID, FLAGS, PERSISTENCE)
-			{
-
-			}
-
-			virtual
-			~Inventory()
-			{
-
-			}
-
 			void
 			UpdateItemList(
 				const ItemList&								aItemList)

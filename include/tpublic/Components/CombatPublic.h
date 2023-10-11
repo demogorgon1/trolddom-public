@@ -73,18 +73,6 @@ namespace tpublic
 				uint32_t	m_max = 0;
 			};
 						
-			CombatPublic()
-				: ComponentBase(ID, FLAGS, PERSISTENCE)
-			{
-
-			}
-
-			virtual 
-			~CombatPublic()
-			{
-
-			}
-
 			void
 			AddResourceMax(
 				uint32_t				aResourceId,

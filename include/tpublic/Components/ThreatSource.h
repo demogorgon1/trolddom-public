@@ -21,18 +21,6 @@ namespace tpublic
 			{
 			}
 
-			ThreatSource()
-				: ComponentBase(ID, FLAGS, PERSISTENCE)
-			{
-
-			}
-
-			virtual
-			~ThreatSource()
-			{
-
-			}
-
 			void
 			AddTarget(
 				uint32_t			aEntityInstanceId,

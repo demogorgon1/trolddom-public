@@ -217,18 +217,6 @@ namespace tpublic
 				aSchema->DefineCustomObject<Resources>(FIELD_RESOURCES, "resources", offsetof(NPC, m_resources));
 			}
 
-			NPC()
-				: ComponentBase(ID, FLAGS, PERSISTENCE)
-			{
-
-			}
-
-			virtual  
-			~NPC()
-			{
-
-			}
-
 			const StateEntry*
 			GetState(
 				EntityState::Id			aEntityState) const

@@ -28,18 +28,6 @@ namespace tpublic
 				aSchema->DefineCustomObjectNoSource<Cooldowns>(FIELD_COOLDOWNS, offsetof(PlayerCooldowns, m_cooldowns));
 			}
 			
-			PlayerCooldowns()
-				: ComponentBase(ID, FLAGS, PERSISTENCE)
-			{
-
-			}
-
-			virtual
-			~PlayerCooldowns()
-			{
-
-			}
-
 			// Public data
 			Cooldowns		m_cooldowns;
 		};

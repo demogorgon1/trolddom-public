@@ -55,18 +55,6 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_AVAILABLE_POINTS, NULL, offsetof(Talents, m_availablePoints));
 			}
 
-			Talents()
-				: ComponentBase(ID, FLAGS, PERSISTENCE)
-			{
-
-			}
-
-			virtual
-			~Talents()
-			{
-
-			}
-
 			bool
 			HasTalent(
 				uint32_t		aTalentId) const

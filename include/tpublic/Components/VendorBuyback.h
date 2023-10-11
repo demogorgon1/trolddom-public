@@ -61,18 +61,6 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_VERSION, NULL, offsetof(VendorBuyback, m_version));
 			}
 
-			VendorBuyback()
-				: ComponentBase(ID, FLAGS, PERSISTENCE)
-			{
-
-			}
-
-			virtual
-			~VendorBuyback()
-			{
-
-			}
-
 			void
 			AddItem(
 				const ItemInstance&		aItemInstance)

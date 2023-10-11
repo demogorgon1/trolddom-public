@@ -24,18 +24,6 @@ namespace tpublic
 			{
 			}
 
-			ThreatTarget()
-				: ComponentBase(ID, FLAGS, PERSISTENCE)
-			{
-
-			}
-
-			virtual
-			~ThreatTarget()
-			{
-
-			}
-
 			// Public data
 			// Not serialized, server only
 			ThreatTable		m_table;

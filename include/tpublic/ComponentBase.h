@@ -11,8 +11,6 @@
 namespace tpublic
 {
 
-	class Manifest;
-
 	class ComponentBase
 	{
 	public:
@@ -32,14 +30,7 @@ namespace tpublic
 			PENDING_PERSISTENCE_UPDATE_HIGH_PRIORITY
 		};
 
-		ComponentBase(
-			uint32_t		aComponentId,
-			uint8_t			aFlags,
-			Persistence::Id	aPersistence)
-			: m_componentId(aComponentId)
-			, m_flags(aFlags)
-			, m_persistence(aPersistence)
-			, m_pendingPersistenceUpdate(PENDING_PERSISTENCE_UPDATE_NONE)
+		ComponentBase()
 		{
 
 		}
@@ -47,7 +38,7 @@ namespace tpublic
 		virtual 
 		~ComponentBase()
 		{
-
+			// FIXME: For now we'll need a virtual destructor, but with a proper component pool we can get rid of it (and the vtable)
 		}
 
 		template <typename _T>
@@ -67,6 +58,14 @@ namespace tpublic
 		}
 
 		void
+		SetComponentId(
+			uint32_t											aComponentId)
+		{
+			assert(m_componentId == 0);
+			m_componentId = aComponentId;
+		}
+
+		void
 		ResetPendingPersistenceUpdate()
 		{
 			m_pendingPersistenceUpdate = PENDING_PERSISTENCE_UPDATE_NONE;
@@ -80,18 +79,28 @@ namespace tpublic
 				m_pendingPersistenceUpdate = aPendingPersistenceUpdate;
 		}
 
+		void
+		ResetDirty()
+		{
+			m_dirty = false;
+		}
+
+		void
+		SetDirty()
+		{
+			m_dirty = true;
+		}
+
 		// Data access
 		uint32_t					GetComponentId() const { return m_componentId; }
-		uint8_t						GetFlags() const { return m_flags; }
-		Persistence::Id				GetPersistence() const { return m_persistence; }
 		PendingPersistenceUpdate	GetPendingPersistenceUpdate() const { return m_pendingPersistenceUpdate; }
+		bool						IsDirty() const { return m_dirty; }
 
 	private:
 
-		uint32_t					m_componentId;
-		uint8_t						m_flags;
-		Persistence::Id				m_persistence;
-		PendingPersistenceUpdate	m_pendingPersistenceUpdate;
+		uint32_t					m_componentId = 0;
+		PendingPersistenceUpdate	m_pendingPersistenceUpdate = PENDING_PERSISTENCE_UPDATE_NONE;
+		bool						m_dirty = false;
 	};
 
 }

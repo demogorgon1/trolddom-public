@@ -42,23 +42,6 @@ namespace tpublic
 			m_components.push_back(std::unique_ptr<ComponentBase>(aComponent));
 		}
 		
-		//void
-		//SerializeAll(
-		//	const ComponentManager*	aComponentManager,
-		//	IWriter*				aWriter) const
-		//{
-		//	aWriter->WritePOD(m_state);
-
-		//	uint32_t i = 0;
-		//	for(const std::unique_ptr<ComponentBase>& component : m_components)
-		//	{
-		//		aWriter->WriteUInt(i);
-		//		component->ToStream(aWriter);
-
-		//		i++;
-		//	}
-		//}
-
 		void
 		WriteNetworkPublic(
 			const ComponentManager* aComponentManager,
@@ -69,10 +52,9 @@ namespace tpublic
 			uint32_t i = 0;
 			for(const std::unique_ptr<ComponentBase>& component : m_components)
 			{
-				if(component->GetFlags() & ComponentBase::FLAG_REPLICATE_TO_OTHERS)
+				if(aComponentManager->GetComponentFlags(component->GetComponentId()) & ComponentBase::FLAG_REPLICATE_TO_OTHERS)
 				{
 					aWriter->WriteUInt(i);
-					//component->ToStream(aWriter);
 					aComponentManager->WriteNetwork(aWriter, component.get());
 				}
 				i++;
@@ -89,10 +71,9 @@ namespace tpublic
 			uint32_t i = 0;
 			for(const std::unique_ptr<ComponentBase>& component : m_components)
 			{				
-				if(component->GetFlags() & ComponentBase::FLAG_REPLICATE_TO_OWNER)
+				if(aComponentManager->GetComponentFlags(component->GetComponentId()) & ComponentBase::FLAG_REPLICATE_TO_OWNER)
 				{
 					aWriter->WriteUInt(i);
-					//component->ToStream(aWriter);
 					aComponentManager->WriteNetwork(aWriter, component.get());
 				}
 				i++;
@@ -122,9 +103,6 @@ namespace tpublic
 
 				if(!m_components[index])
 					return false;
-
-				//if(!m_components[index]->FromStream(aReader))
-				//	return false;
 
 				if(!aComponentManager->ReadNetwork(aReader, m_components[index].get()))
 					return false;
