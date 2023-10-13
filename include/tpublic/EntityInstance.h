@@ -11,6 +11,11 @@ namespace tpublic
 	class EntityInstance
 	{
 	public:
+		enum NetworkWriteFlag : uint8_t
+		{
+			NETWORK_WRITE_FLAG_ONLY_DIRTY = 0x01
+		};
+
 		EntityInstance(
 			uint32_t				aEntityId,
 			uint32_t				aEntityInstanceId)
@@ -32,6 +37,7 @@ namespace tpublic
 		{
 			m_state = aState;
 			m_stateTick = aTick;
+			m_dirty = true;
 		}
 
 		void
@@ -45,14 +51,19 @@ namespace tpublic
 		void
 		WriteNetworkPublic(
 			const ComponentManager* aComponentManager,
-			IWriter*				aWriter) const
+			IWriter*				aWriter,
+			uint8_t					aFlags) const
 		{
+			bool onlyDirty = aFlags & NETWORK_WRITE_FLAG_ONLY_DIRTY;
+
 			aWriter->WritePOD(m_state);
 
 			uint32_t i = 0;
 			for(const std::unique_ptr<ComponentBase>& component : m_components)
 			{
-				if(aComponentManager->GetComponentFlags(component->GetComponentId()) & ComponentBase::FLAG_REPLICATE_TO_OTHERS)
+				ComponentBase::Replication componentReplication = aComponentManager->GetComponentReplication(component->GetComponentId());
+
+				if((component->IsDirty() || !onlyDirty) && componentReplication == ComponentBase::REPLICATION_PUBLIC)
 				{
 					aWriter->WriteUInt(i);
 					aComponentManager->WriteNetwork(aWriter, component.get());
@@ -64,14 +75,19 @@ namespace tpublic
 		void
 		WriteNetworkPrivate(
 			const ComponentManager* aComponentManager,
-			IWriter*				aWriter) const
+			IWriter*				aWriter,
+			uint8_t					aFlags) const
 		{
+			bool onlyDirty = aFlags & NETWORK_WRITE_FLAG_ONLY_DIRTY;
+
 			aWriter->WritePOD(m_state);
 
 			uint32_t i = 0;
 			for(const std::unique_ptr<ComponentBase>& component : m_components)
-			{				
-				if(aComponentManager->GetComponentFlags(component->GetComponentId()) & ComponentBase::FLAG_REPLICATE_TO_OWNER)
+			{		
+				ComponentBase::Replication componentReplication = aComponentManager->GetComponentReplication(component->GetComponentId());
+
+				if((component->IsDirty() || !onlyDirty) && componentReplication == ComponentBase::REPLICATION_PRIVATE)
 				{
 					aWriter->WriteUInt(i);
 					aComponentManager->WriteNetwork(aWriter, component.get());
@@ -108,6 +124,29 @@ namespace tpublic
 					return false;
 			}
 			return true;
+		}
+
+		bool
+		IsDirty() const
+		{
+			if(m_dirty)
+				return true;
+
+			for (const std::unique_ptr<ComponentBase>& component : m_components)
+			{
+				if(component->IsDirty())
+					return true;
+			}
+			return false;
+		}
+
+		void
+		ResetDirty()
+		{
+			m_dirty = false;
+
+			for (std::unique_ptr<ComponentBase>& component : m_components)
+				component->ResetDirty();
 		}
 
 		template <typename _T>
@@ -161,6 +200,7 @@ namespace tpublic
 		EntityState::Id								m_state = EntityState::ID_DEFAULT;
 		int32_t										m_stateTick = 0;
 		std::vector<std::unique_ptr<ComponentBase>>	m_components;
+		bool										m_dirty = false;
 	};
 
 }

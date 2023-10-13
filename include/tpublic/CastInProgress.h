@@ -38,6 +38,20 @@ namespace tpublic
 			return true;
 		}
 
+		bool
+		operator==(
+			const CastInProgress& aOther) const
+		{
+			return m_abilityId == aOther.m_abilityId && m_targetEntityInstanceId == aOther.m_targetEntityInstanceId && m_start == aOther.m_start && m_end == aOther.m_end && m_aoeTarget == aOther.m_aoeTarget;
+		}
+
+		bool
+		operator!=(
+			const CastInProgress& aOther) const
+		{
+			return !this->operator==(aOther);
+		}
+
 		// Public data
 		uint32_t		m_abilityId = 0;
 		uint32_t		m_targetEntityInstanceId = 0;

@@ -102,6 +102,15 @@ namespace tpublic
 		return t.m_persistence;
 	}
 
+	ComponentBase::Replication
+	ComponentManager::GetComponentReplication(
+		uint32_t				aId) const
+	{
+		assert(aId < Component::NUM_IDS);
+		const ComponentType& t = m_componentTypes[aId];
+		return t.m_replication;
+	}
+
 	std::string
 	ComponentManager::AsDebugString(
 		const ComponentBase*	aComponent) const
@@ -164,7 +173,7 @@ namespace tpublic
 
 	//----------------------------------------------------------------------------------
 
-	void				
+	void				 
 	ComponentManager::_InitComponentType(
 		ComponentType&			aComponentType)
 	{

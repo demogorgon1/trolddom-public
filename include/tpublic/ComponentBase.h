@@ -16,10 +16,14 @@ namespace tpublic
 	public:
 		enum Flag : uint8_t
 		{
-			FLAG_PUBLIC					= 0x01,
-			FLAG_REPLICATE_TO_OWNER		= 0x02,
-			FLAG_REPLICATE_TO_OTHERS	= 0x04,
-			FLAG_PLAYER_ONLY			= 0x08
+			FLAG_PLAYER_ONLY			= 0x01
+		};
+
+		enum Replication : uint8_t
+		{
+			REPLICATION_NONE,
+			REPLICATION_PUBLIC,
+			REPLICATION_PRIVATE
 		};
 
 		enum PendingPersistenceUpdate : uint8_t
@@ -77,6 +81,8 @@ namespace tpublic
 		{
 			if((uint8_t)aPendingPersistenceUpdate > (uint8_t)m_pendingPersistenceUpdate)
 				m_pendingPersistenceUpdate = aPendingPersistenceUpdate;
+
+			m_dirty = true;
 		}
 
 		void

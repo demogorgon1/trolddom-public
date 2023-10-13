@@ -13,8 +13,9 @@ namespace tpublic
 			: public ComponentBase
 		{
 			static const Component::Id ID = Component::ID_PLAYER_PRIVATE;
-			static const uint8_t FLAGS = FLAG_REPLICATE_TO_OWNER | FLAG_PLAYER_ONLY;
+			static const uint8_t FLAGS = FLAG_PLAYER_ONLY;
 			static const Persistence::Id PERSISTENCE = Persistence::ID_MAIN;
+			static const Replication REPLICATION = REPLICATION_PRIVATE;
 			
 			struct GuildRegistrationHistory
 			{

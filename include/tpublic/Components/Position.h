@@ -13,8 +13,9 @@ namespace tpublic
 			: public ComponentBase
 		{
 			static const Component::Id ID = Component::ID_POSITION;
-			static const uint8_t FLAGS = FLAG_REPLICATE_TO_OWNER | FLAG_REPLICATE_TO_OTHERS | FLAG_PUBLIC;
+			static const uint8_t FLAGS = 0;
 			static const Persistence::Id PERSISTENCE = Persistence::ID_VOLATILE;
+			static const Replication REPLICATION = REPLICATION_PUBLIC;
 
 			enum Field : uint32_t
 			{

@@ -14,33 +14,35 @@ namespace tpublic
 	class ComponentManager
 	{
 	public:
-							ComponentManager();
-							~ComponentManager();
+									ComponentManager();
+									~ComponentManager();
 
-		ComponentBase*		Create(
-								uint32_t				aId) const;
-		uint8_t				GetComponentFlags(
-								uint32_t				aId) const;
-		Persistence::Id		GetComponentPersistence(
-								uint32_t				aId) const;
-		std::string			AsDebugString(
-								const ComponentBase*	aComponent) const;
-		void				WriteNetwork(
-								IWriter*				aWriter,
-								const ComponentBase*	aComponent) const;
-		bool				ReadNetwork(
-								IReader*				aReader,
-								ComponentBase*			aComponent) const;
-		void				WriteStorage(
-								IWriter*				aWriter,
-								const ComponentBase*	aComponent) const;
-		bool				ReadStorage(
-								IReader*				aReader,
-								ComponentBase*			aComponent,
-								const Manifest*			aManifest) const;
-		void				ReadSource(
-								const Parser::Node*		aSource,
-								ComponentBase*			aComponent) const;
+		ComponentBase*				Create(
+										uint32_t				aId) const;
+		uint8_t						GetComponentFlags(
+										uint32_t				aId) const;
+		Persistence::Id				GetComponentPersistence(
+										uint32_t				aId) const;
+		ComponentBase::Replication	GetComponentReplication(
+										uint32_t				aId) const;
+		std::string					AsDebugString(
+										const ComponentBase*	aComponent) const;
+		void						WriteNetwork(
+										IWriter*				aWriter,
+										const ComponentBase*	aComponent) const;
+		bool						ReadNetwork(
+										IReader*				aReader,
+										ComponentBase*			aComponent) const;
+		void						WriteStorage(
+										IWriter*				aWriter,
+										const ComponentBase*	aComponent) const;
+		bool						ReadStorage(
+										IReader*				aReader,
+										ComponentBase*			aComponent,
+										const Manifest*			aManifest) const;
+		void						ReadSource(
+										const Parser::Node*		aSource,
+										ComponentBase*			aComponent) const;
 
 	private:
 
@@ -51,6 +53,7 @@ namespace tpublic
 			ComponentSchema						m_schema;
 			uint8_t								m_flags = 0;
 			Persistence::Id						m_persistence = Persistence::ID_NONE;
+			ComponentBase::Replication			m_replication = ComponentBase::REPLICATION_NONE;
 		};
 
 		ComponentType							m_componentTypes[Component::NUM_IDS];
@@ -66,6 +69,7 @@ namespace tpublic
 			t.m_id = _T::ID;
 			t.m_flags = _T::FLAGS;
 			t.m_persistence = _T::PERSISTENCE;
+			t.m_replication = _T::REPLICATION;
 
 			t.m_create = []() { return new _T(); };
 

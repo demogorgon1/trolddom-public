@@ -16,6 +16,12 @@ namespace tpublic
 		static const uint8_t STORAGE_FORMAT_VERSION = 1;
 		static const uint32_t MAX_FIELD_ID = 64;
 
+		enum Flag : uint8_t
+		{
+			FLAG_NO_NETWORK	= 0x01,
+			FLAG_NO_STORAGE = 0x02
+		};
+
 		enum Type : uint8_t
 		{
 			TYPE_NONE,
@@ -47,11 +53,20 @@ namespace tpublic
 
 		struct Field
 		{
-			void
+			Field*
 			SetDataType(
 				DataType::Id			aDataType)
 			{
 				m_dataType = aDataType;
+				return this;
+			}
+
+			Field*
+			SetFlags(
+				uint8_t					aFlags)
+			{
+				m_flags = aFlags;
+				return this;
 			}
 
 			// Public data
@@ -59,6 +74,7 @@ namespace tpublic
 			uint32_t					m_id = 0;
 			const char*					m_name = NULL;
 			uint32_t					m_offset = 0;
+			uint8_t						m_flags = 0;
 
 			DataType::Id				m_dataType = DataType::INVALID_ID;
 

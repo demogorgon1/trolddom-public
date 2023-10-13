@@ -14,6 +14,7 @@ namespace tpublic
 			static const Component::Id ID = Component::ID_THREAT_SOURCE;
 			static const uint8_t FLAGS = 0;
 			static const Persistence::Id PERSISTENCE = Persistence::ID_NONE;
+			static const Replication REPLICATION = REPLICATION_NONE;
 
 			static void
 			CreateSchema(

@@ -11,9 +11,11 @@ namespace tpublic
 		struct Abilities
 			: public ComponentBase
 		{
+		public:
 			static const Component::Id ID = Component::ID_ABILITIES;
-			static const uint8_t FLAGS = FLAG_REPLICATE_TO_OWNER | FLAG_PLAYER_ONLY;
+			static const uint8_t FLAGS = FLAG_PLAYER_ONLY;
 			static const Persistence::Id PERSISTENCE = Persistence::ID_NONE;
+			static const Replication REPLICATION = REPLICATION_PRIVATE;
 
 			enum Field : uint32_t
 			{
@@ -39,7 +41,6 @@ namespace tpublic
 				return false;
 			}
 
-			// Public data
 			std::vector<uint32_t>	m_available;
 		};
 

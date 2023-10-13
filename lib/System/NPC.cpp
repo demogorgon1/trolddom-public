@@ -52,7 +52,7 @@ namespace tpublic::Systems
 		int32_t					/*aTick*/)
 	{
 		Components::CombatPublic* combat = GetComponent<Components::CombatPublic>(aComponents);
-		Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
+		const Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
 
 		for(const Components::NPC::ResourceEntry& resource : npc->m_resources.m_entries)
 		{
@@ -62,6 +62,8 @@ namespace tpublic::Systems
 			if(info->m_flags & Resource::FLAG_DEFAULT_TO_MAX)
 				combat->SetResourceToMax(resource.m_id);
 		}
+
+		combat->SetDirty();
 	}
 
 	EntityState::Id
@@ -96,12 +98,14 @@ namespace tpublic::Systems
 
 				Components::Lootable* lootable = GetComponent<Components::Lootable>(aComponents);
 				lootable->m_playerTag = tag->m_playerTag;
+				lootable->SetDirty();
 
 				if(lootable->m_playerTag.IsSet())
 					aContext->m_lootGenerator->Generate(*aContext->m_random, lootable);					
 			}
 
 			npc->m_castInProgress.reset();
+
 			return EntityState::ID_DEAD;
 		}
 
@@ -178,6 +182,7 @@ namespace tpublic::Systems
 				threat->m_lastPingTick = 0; // Force a threat ping (will cause nearby allies to join)
 
 				npc->m_targetEntityInstanceId = threat->m_table.GetTop()->m_entityInstanceId;
+				npc->SetDirty();
 				returnValue = EntityState::ID_IN_COMBAT;
 			}
 			break;
@@ -191,6 +196,7 @@ namespace tpublic::Systems
 
 					Components::Tag* tag = GetComponent<Components::Tag>(aComponents);
 					tag->m_playerTag.Clear();
+					tag->SetDirty();
 
 					returnValue = EntityState::ID_DEFAULT;
 				}
@@ -200,8 +206,9 @@ namespace tpublic::Systems
 				}
 				else
 				{
-					npc->m_targetEntityInstanceId = threat->m_table.GetTop()->m_entityInstanceId;
-
+					uint32_t topThreatEntityInstanceId = threat->m_table.GetTop()->m_entityInstanceId;
+					npc->m_targetEntityInstanceId = topThreatEntityInstanceId;
+					
 					const EntityInstance* target = aContext->m_worldView->QuerySingleEntityInstance(npc->m_targetEntityInstanceId);
 					if (target == NULL || target->GetState() == EntityState::ID_DEAD)
 					{
@@ -287,17 +294,36 @@ namespace tpublic::Systems
 		const Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
 		Components::Position* position = GetComponent<Components::Position>(aComponents);
 
-		combat->m_targetEntityInstanceId = npc->m_targetEntityInstanceId;
+		if(combat->m_targetEntityInstanceId != npc->m_targetEntityInstanceId)
+		{
+			combat->m_targetEntityInstanceId = npc->m_targetEntityInstanceId;
+			combat->SetDirty();
+		}
 
 		if(npc->m_castInProgress.has_value())
-			combat->m_castInProgress = npc->m_castInProgress.value();
-		else
-			combat->m_castInProgress.reset();
+		{
+			if(combat->m_castInProgress != npc->m_castInProgress.value())
+			{
+				combat->m_castInProgress = npc->m_castInProgress.value();
+				combat->SetDirty();
+			}
+		}
+		else 
+		{
+			if (combat->m_castInProgress.has_value())
+			{
+				combat->m_castInProgress.reset();
+				combat->SetDirty();
+			}
+		}
 
-		if (aEntityState == EntityState::ID_DEAD || aEntityState == EntityState::ID_DESPAWNING)
-			position->m_block = false;
-		else
-			position->m_block = true;
+		bool block = (aEntityState != EntityState::ID_DEAD && aEntityState != EntityState::ID_DESPAWNING);
+
+		if(position->m_block != block)
+		{
+			position->m_block = block;
+			position->SetDirty();
+		}
 	}
 
 }

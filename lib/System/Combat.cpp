@@ -153,6 +153,7 @@ namespace tpublic::Systems
 				}
 
 				auras->m_dirty = false;
+				visibleAuras->SetDirty();
 			}
 		}
 	}

@@ -218,7 +218,7 @@ namespace tpublic
 		{
 			bool deprecated = field.m_offset == UINT32_MAX;
 
-			if(!deprecated)
+			if (!deprecated && (field.m_flags & FLAG_NO_NETWORK) == 0)
 				_WriteValue(aWriter, aObject, &field);
 		}
 	}
@@ -254,7 +254,7 @@ namespace tpublic
 		{
 			bool deprecated = field.m_offset == UINT32_MAX;
 
-			if(!deprecated)
+			if(!deprecated && (field.m_flags & FLAG_NO_STORAGE) == 0)
 			{
 				aWriter->WriteUInt(field.m_id + 1); // Ids can't be zero (end-of-stream)
 

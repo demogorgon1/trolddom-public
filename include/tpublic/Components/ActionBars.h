@@ -13,8 +13,9 @@ namespace tpublic
 			: public ComponentBase
 		{
 			static const Component::Id ID = Component::ID_ACTION_BARS;
-			static const uint8_t FLAGS = FLAG_REPLICATE_TO_OWNER | FLAG_PLAYER_ONLY;			
+			static const uint8_t FLAGS = FLAG_PLAYER_ONLY;			
 			static const Persistence::Id PERSISTENCE = Persistence::ID_MAIN;
+			static const Replication REPLICATION = REPLICATION_PRIVATE;
 
 			static const uint32_t MAX_ROWS = 4;
 
@@ -42,7 +43,7 @@ namespace tpublic
 					m_actionBars.push_back(std::make_unique<ActionBar>());
 				m_actionBars[aRow]->SetSlot((size_t)aIndex, aAbilityId);
 			}
-
+		
 			// Public data
 			std::vector<std::unique_ptr<ActionBar>>		m_actionBars;
 		};

@@ -18,6 +18,7 @@ namespace tpublic
 			static const Component::Id ID = Component::ID_NPC;
 			static const uint8_t FLAGS = 0;
 			static const Persistence::Id PERSISTENCE = Persistence::ID_NONE;
+			static const Replication REPLICATION = REPLICATION_NONE;
 
 			struct AbilityEntry
 			{
