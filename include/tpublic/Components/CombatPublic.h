@@ -4,6 +4,8 @@
 
 #include "../CastInProgress.h"
 #include "../ComponentBase.h"
+#include "../LootRule.h"
+#include "../Rarity.h"
 #include "../Resource.h"
 
 namespace tpublic
@@ -28,7 +30,9 @@ namespace tpublic
 				FIELD_DIALOGUE_ROOT_ID,
 				FIELD_COMBAT_GROUP_ID,
 				FIELD_RESOURCES,
-				FIELD_CAST_IN_PROGRESS
+				FIELD_CAST_IN_PROGRESS,
+				FIELD_LOOT_RULE,
+				FIELD_LOOT_THRESHOLD
 			};
 
 			static void
@@ -42,6 +46,8 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT64, FIELD_COMBAT_GROUP_ID, NULL, offsetof(CombatPublic, m_combatGroupId))->SetFlags(ComponentSchema::FLAG_NO_STORAGE);
 				aSchema->DefineCustomObjectsNoSource<ResourceEntry>(FIELD_RESOURCES, offsetof(CombatPublic, m_resources));
 				aSchema->DefineCustomOptionalObjectNoSource<CastInProgress>(FIELD_CAST_IN_PROGRESS, offsetof(CombatPublic, m_castInProgress))->SetFlags(ComponentSchema::FLAG_NO_STORAGE);
+				aSchema->DefineCustomPODNoSource<LootRule::Id>(FIELD_LOOT_RULE, offsetof(CombatPublic, m_lootRule))->SetFlags(ComponentSchema::FLAG_NO_STORAGE);
+				aSchema->DefineCustomPODNoSource<Rarity::Id>(FIELD_LOOT_THRESHOLD, offsetof(CombatPublic, m_lootThreshold))->SetFlags(ComponentSchema::FLAG_NO_STORAGE);
 			}
 
 			struct ResourceEntry
@@ -220,6 +226,8 @@ namespace tpublic
 			uint64_t						m_combatGroupId = 0;
 			std::vector<ResourceEntry>		m_resources;
 			std::optional<CastInProgress>	m_castInProgress;
+			LootRule::Id					m_lootRule = LootRule::INVALID_ID;
+			Rarity::Id						m_lootThreshold = Rarity::INVALID_ID;
 		};
 
 	}

@@ -31,6 +31,7 @@ namespace tpublic
 
 	void		
 	LootGenerator::Generate(
+		const PlayerTag&		aPlayerTag,
 		std::mt19937&			aRandom,
 		Components::Lootable*	aLootable) const
 	{
@@ -71,10 +72,11 @@ namespace tpublic
 				GroupTable::const_iterator i = m_groups.find(lootGroupId);
 				if(i != m_groups.end())
 				{
-					ItemInstance itemInstance;
-					itemInstance.m_itemId = i->second->GetRandom(aRandom);
-					itemInstance.m_seed = aRandom();
-					aLootable->m_availableLoot.push_back(itemInstance);
+					Components::Lootable::AvailableLoot loot;
+					loot.m_itemInstance.m_itemId = i->second->GetRandom(aRandom);
+					loot.m_itemInstance.m_seed = aRandom();
+					loot.m_playerTag = aPlayerTag;
+					aLootable->m_availableLoot.push_back(loot);
 				}
 			}						
 		}

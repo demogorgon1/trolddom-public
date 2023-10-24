@@ -380,6 +380,49 @@ namespace tpublic
 			return t;
 		}
 
+		template <typename _T>
+		Field*
+		DefineCustomPODNoSource(
+			uint32_t							aId,
+			uint32_t							aOffset)
+		{
+			Field* t = DefineCustom<_T>(aId, NULL, aOffset);
+			t->m_customRead = [](
+				IReader*	aReader,
+				void*		aObject) -> bool
+			{
+				_T* p = (_T*)aObject;
+				return aReader->ReadPOD<_T>(*p);
+			};
+			t->m_customWrite = [](
+				IWriter*	aWriter,
+				const void* aObject)
+			{
+				const _T* p = (const _T*)aObject;
+				aWriter->WritePOD<_T>(*p);
+			};
+			return t;
+		}
+
+		template <typename _T>
+		Field*
+		DefineCustomPOD(
+			uint32_t							aId,
+			const char*							aName,
+			uint32_t							aOffset)
+		{
+			Field* t = DefineCustomPODNoSource<_T>(aId, aOffset);
+			t->m_name = aName;
+			t->m_customReadSource = [](
+				const Parser::Node*	aSource,
+				void*				aObject)
+			{
+				_T* p = (_T*)aObject;
+				p->FromSource(aSource);
+			};
+			return t;
+		}
+
 	private:
 
 		std::vector<Field>	m_fields;

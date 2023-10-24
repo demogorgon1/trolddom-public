@@ -18,6 +18,7 @@ namespace tpublic
 					~LootGenerator();
 
 		void		Generate(
+						const PlayerTag&		aPlayerTag,
 						std::mt19937&			aRandom,
 						Components::Lootable*	aLootable) const;
 

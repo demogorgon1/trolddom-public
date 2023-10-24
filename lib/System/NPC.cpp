@@ -17,7 +17,7 @@
 #include <tpublic/IMoveRequestQueue.h>
 #include <tpublic/IThreatEventQueue.h>
 #include <tpublic/IWorldView.h>
-#include <tpublic/IXPEventQueue.h>
+#include <tpublic/ISystemEventQueue.h>
 #include <tpublic/LootGenerator.h>
 #include <tpublic/Manifest.h>
 
@@ -94,14 +94,40 @@ namespace tpublic::Systems
 			const Components::Tag* tag = GetComponent<Components::Tag>(aComponents);
 			if(tag->m_playerTag.IsSet())
 			{
-				aContext->m_xpEventQueue->AddKillXPEvent(tag->m_playerTag, combat->m_level);
+				aContext->m_systemEventQueue->AddKillXPEvent(tag->m_playerTag, combat->m_level);
 
 				Components::Lootable* lootable = GetComponent<Components::Lootable>(aComponents);
 				lootable->m_playerTag = tag->m_playerTag;
 				lootable->SetDirty();
 
 				if(lootable->m_playerTag.IsSet())
-					aContext->m_lootGenerator->Generate(*aContext->m_random, lootable);					
+				{
+					PlayerTag lootPlayerTag = lootable->m_playerTag;
+					bool groupDecidesLoot = false;
+
+					if(lootable->m_playerTag.IsGroup())
+					{
+						switch (tag->m_lootRule)
+						{
+						case LootRule::ID_FREE_FOR_ALL:
+							lootPlayerTag.SetAnyone(); // Anyone in group can loot
+							break;
+
+						case LootRule::ID_GROUP:
+						case LootRule::ID_MASTER:
+							lootPlayerTag.Clear(); // Nobody can loot before group decides
+							groupDecidesLoot = true;
+
+						default:
+							break;
+						}
+					}				
+
+					aContext->m_lootGenerator->Generate(lootPlayerTag, *aContext->m_random, lootable);
+
+					if(groupDecidesLoot)
+						aContext->m_systemEventQueue->AddLootGenerationEvent(tag->m_playerTag, lootable); // FIXME
+				}
 			}
 
 			npc->m_castInProgress.reset();

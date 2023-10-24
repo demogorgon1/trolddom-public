@@ -1,7 +1,9 @@
 #pragma once
 
 #include "../Component.h"
+#include "../LootRule.h"
 #include "../PlayerTag.h"
+#include "../Rarity.h"
 
 namespace tpublic
 {
@@ -19,7 +21,9 @@ namespace tpublic
 
 			enum Field
 			{
-				FIELD_PLAYER_TAG
+				FIELD_PLAYER_TAG,
+				FIELD_LOOT_RULE,
+				FIELD_LOOT_THRESHOLD
 			};
 
 			static void
@@ -27,10 +31,14 @@ namespace tpublic
 				ComponentSchema* aSchema)
 			{
 				aSchema->DefineCustomObjectNoSource<PlayerTag>(FIELD_PLAYER_TAG, offsetof(Tag, m_playerTag));
+				aSchema->DefineCustomPODNoSource<LootRule::Id>(FIELD_LOOT_RULE, offsetof(Tag, m_lootRule));
+				aSchema->DefineCustomPODNoSource<Rarity::Id>(FIELD_LOOT_THRESHOLD, offsetof(Tag, m_lootThreshold));
 			}
 
 			// Public data
 			PlayerTag		m_playerTag;
+			LootRule::Id	m_lootRule = LootRule::INVALID_ID;
+			Rarity::Id		m_lootThreshold = Rarity::INVALID_ID;
 		};
 	}
 

@@ -13,7 +13,8 @@ namespace tpublic
 		{
 			TYPE_NONE,
 			TYPE_INDIVIDUAL,
-			TYPE_GROUP
+			TYPE_GROUP,
+			TYPE_ANYONE
 		};
 
 		void
@@ -36,6 +37,12 @@ namespace tpublic
 		{
 			m_type = TYPE_GROUP;
 			m_value = aGroupId;
+		}
+
+		void
+		SetAnyone()
+		{
+			m_type = TYPE_ANYONE;
 		}
 
 		void
@@ -66,6 +73,7 @@ namespace tpublic
 		bool		IsSet() const { return m_type != TYPE_NONE; }
 		bool		IsIndividual() const { return m_type == TYPE_INDIVIDUAL; }
 		bool		IsGroup() const { return m_type == TYPE_GROUP; }
+		bool		IsAnyone() const { return m_type == TYPE_ANYONE; }
 		uint32_t	GetEntityInstanceId() const { assert(IsIndividual()); return (uint32_t)m_value; }
 		uint64_t	GetGroupId() const { assert(IsGroup()); return m_value; }
 
