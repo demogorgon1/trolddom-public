@@ -14,7 +14,9 @@
 #include <tpublic/EntityInstance.h>
 #include <tpublic/Helpers.h>
 #include <tpublic/IAbilityQueue.h>
+#include <tpublic/IGroupRoundRobin.h>
 #include <tpublic/IMoveRequestQueue.h>
+#include <tpublic/ItemInstanceData.h>
 #include <tpublic/IThreatEventQueue.h>
 #include <tpublic/IWorldView.h>
 #include <tpublic/ISystemEventQueue.h>
@@ -102,31 +104,64 @@ namespace tpublic::Systems
 
 				if(lootable->m_playerTag.IsSet())
 				{
-					PlayerTag lootPlayerTag = lootable->m_playerTag;
-					bool groupDecidesLoot = false;
+					aContext->m_lootGenerator->Generate(*aContext->m_random, lootable);
 
-					if(lootable->m_playerTag.IsGroup())
+					if(lootable->m_availableLoot.size() > 0)
 					{
-						switch (tag->m_lootRule)
+						if(lootable->m_playerTag.IsGroup())
 						{
-						case LootRule::ID_FREE_FOR_ALL:
-							lootPlayerTag.SetAnyone(); // Anyone in group can loot
-							break;
+							uint64_t groupId = lootable->m_playerTag.GetGroupId();
 
-						case LootRule::ID_GROUP:
-						case LootRule::ID_MASTER:
-							lootPlayerTag.Clear(); // Nobody can loot before group decides
-							groupDecidesLoot = true;
+							if(tag->m_lootRule == LootRule::ID_FREE_FOR_ALL)
+							{
+								// Anyone in group can loot
+								lootable->SetPlayerTagForAllAvailableLoot(PlayerTag(PlayerTag::TYPE_ANYONE));
+							}
+							else
+							{
+								// Group and master loot is decided on per item basis
+								for(Components::Lootable::AvailableLoot& loot : lootable->m_availableLoot)
+								{
+									assert(loot.m_itemInstance.IsSet());
+									ItemInstanceData itemInstanceData(GetManifest(), loot.m_itemInstance);
+									uint32_t rarity = itemInstanceData.m_properties[Data::Item::PROPERTY_TYPE_RARITY];
 
-						default:
-							break;
-						}
-					}				
+									if(rarity < (uint32_t)tag->m_lootThreshold)
+									{
+										// This item rarity is below the threshold, which means it will be assigned using round-robin
+										uint32_t entityInstanceId = aContext->m_groupRoundRobin->GetNextGroupRoundRobinEntityInstanceId(groupId);
+										if(entityInstanceId != 0)
+										{
+											loot.m_playerTag.SetEntityInstanceId(entityInstanceId);
+										}										
+									}
+									else
+									{
+										// Item is above the rarity threshold, so whoever gets to loot it can't be decided here
+										switch(tag->m_lootRule)
+										{
+										case LootRule::ID_GROUP:
+											aContext->m_systemEventQueue->AddGroupLootEvent(aEntityInstanceId, lootable);
+											break;
 
-					aContext->m_lootGenerator->Generate(lootPlayerTag, *aContext->m_random, lootable);
+										case LootRule::ID_MASTER:
+											loot.m_playerTag = PlayerTag(PlayerTag::TYPE_MASTER);
+											break;
 
-					if(groupDecidesLoot)
-						aContext->m_systemEventQueue->AddLootGenerationEvent(tag->m_playerTag, lootable); // FIXME
+										default:
+											assert(false);
+											break;
+										}										
+									}
+								}
+							}
+						}						
+					}
+					else
+					{
+						// No group
+						lootable->SetPlayerTagForAllAvailableLoot(lootable->m_playerTag);
+					}
 				}
 			}
 

@@ -153,6 +153,10 @@ namespace tpublic
 		}
 
 		m_isWeapon = m_properties[Data::Item::PROPERTY_TYPE_WEAPON_COOLDOWN] != 0;
+
+		uint32_t& rarity = m_properties[Data::Item::PROPERTY_TYPE_RARITY];
+		if(rarity == 0)
+			rarity = 1; // Must always have a rarity
 	}
 
 }

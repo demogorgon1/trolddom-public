@@ -23,6 +23,7 @@
 #include "Helpers.h"
 #include "IAbilityQueue.h"
 #include "IAuraEventQueue.h"
+#include "IGroupRoundRobin.h"
 #include "Image.h"
 #include "IResourceChangeQueue.h"
 #include "ItemInstance.h"

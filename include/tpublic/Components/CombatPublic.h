@@ -22,33 +22,10 @@ namespace tpublic
 			static const Replication REPLICATION = REPLICATION_PUBLIC;
 			static const Persistence::Id PERSISTENCE = Persistence::ID_VOLATILE;
 
-			enum Field
+			enum CombatFlag : uint8_t
 			{
-				FIELD_TARGET_ENTITY_INSTANCE_ID,
-				FIELD_LEVEL,
-				FIELD_FACTION_ID,
-				FIELD_DIALOGUE_ROOT_ID,
-				FIELD_COMBAT_GROUP_ID,
-				FIELD_RESOURCES,
-				FIELD_CAST_IN_PROGRESS,
-				FIELD_LOOT_RULE,
-				FIELD_LOOT_THRESHOLD
+				COMBAT_FLAG_MASTER_LOOTER = 0x01
 			};
-
-			static void
-			CreateSchema(
-				ComponentSchema*		aSchema)
-			{
-				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_TARGET_ENTITY_INSTANCE_ID, NULL, offsetof(CombatPublic, m_targetEntityInstanceId));
-				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_LEVEL, "level", offsetof(CombatPublic, m_level));
-				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_FACTION_ID, "faction", offsetof(CombatPublic, m_factionId))->SetDataType(DataType::ID_FACTION);
-				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_DIALOGUE_ROOT_ID, "dialogue_root", offsetof(CombatPublic, m_dialogueRootId))->SetDataType(DataType::ID_DIALOGUE_ROOT)->SetFlags(ComponentSchema::FLAG_NO_STORAGE);
-				aSchema->Define(ComponentSchema::TYPE_UINT64, FIELD_COMBAT_GROUP_ID, NULL, offsetof(CombatPublic, m_combatGroupId))->SetFlags(ComponentSchema::FLAG_NO_STORAGE);
-				aSchema->DefineCustomObjectsNoSource<ResourceEntry>(FIELD_RESOURCES, offsetof(CombatPublic, m_resources));
-				aSchema->DefineCustomOptionalObjectNoSource<CastInProgress>(FIELD_CAST_IN_PROGRESS, offsetof(CombatPublic, m_castInProgress))->SetFlags(ComponentSchema::FLAG_NO_STORAGE);
-				aSchema->DefineCustomPODNoSource<LootRule::Id>(FIELD_LOOT_RULE, offsetof(CombatPublic, m_lootRule))->SetFlags(ComponentSchema::FLAG_NO_STORAGE);
-				aSchema->DefineCustomPODNoSource<Rarity::Id>(FIELD_LOOT_THRESHOLD, offsetof(CombatPublic, m_lootThreshold))->SetFlags(ComponentSchema::FLAG_NO_STORAGE);
-			}
 
 			struct ResourceEntry
 			{	
@@ -80,6 +57,36 @@ namespace tpublic
 				uint32_t	m_max = 0;
 			};
 						
+			enum Field
+			{
+				FIELD_TARGET_ENTITY_INSTANCE_ID,
+				FIELD_LEVEL,
+				FIELD_FACTION_ID,
+				FIELD_DIALOGUE_ROOT_ID,
+				FIELD_COMBAT_GROUP_ID,
+				FIELD_RESOURCES,
+				FIELD_CAST_IN_PROGRESS,
+				FIELD_LOOT_RULE,
+				FIELD_LOOT_THRESHOLD,
+				FIELD_COMBAT_FLAGS
+			};
+
+			static void
+			CreateSchema(
+				ComponentSchema*		aSchema)
+			{
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_TARGET_ENTITY_INSTANCE_ID, NULL, offsetof(CombatPublic, m_targetEntityInstanceId));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_LEVEL, "level", offsetof(CombatPublic, m_level));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_FACTION_ID, "faction", offsetof(CombatPublic, m_factionId))->SetDataType(DataType::ID_FACTION);
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_DIALOGUE_ROOT_ID, "dialogue_root", offsetof(CombatPublic, m_dialogueRootId))->SetDataType(DataType::ID_DIALOGUE_ROOT)->SetFlags(ComponentSchema::FLAG_NO_STORAGE);
+				aSchema->Define(ComponentSchema::TYPE_UINT64, FIELD_COMBAT_GROUP_ID, NULL, offsetof(CombatPublic, m_combatGroupId))->SetFlags(ComponentSchema::FLAG_NO_STORAGE);
+				aSchema->DefineCustomObjectsNoSource<ResourceEntry>(FIELD_RESOURCES, offsetof(CombatPublic, m_resources));
+				aSchema->DefineCustomOptionalObjectNoSource<CastInProgress>(FIELD_CAST_IN_PROGRESS, offsetof(CombatPublic, m_castInProgress))->SetFlags(ComponentSchema::FLAG_NO_STORAGE);
+				aSchema->DefineCustomPODNoSource<LootRule::Id>(FIELD_LOOT_RULE, offsetof(CombatPublic, m_lootRule))->SetFlags(ComponentSchema::FLAG_NO_STORAGE);
+				aSchema->DefineCustomPODNoSource<Rarity::Id>(FIELD_LOOT_THRESHOLD, offsetof(CombatPublic, m_lootThreshold))->SetFlags(ComponentSchema::FLAG_NO_STORAGE);
+				aSchema->DefineCustomPODNoSource<uint8_t>(FIELD_COMBAT_FLAGS, offsetof(CombatPublic, m_combatFlags))->SetFlags(ComponentSchema::FLAG_NO_STORAGE);
+			}
+
 			void
 			AddResourceMax(
 				uint32_t				aResourceId,
@@ -218,6 +225,9 @@ namespace tpublic
 				return true;
 			}
 
+			// Helpers
+			bool IsMasterLooter() const { return (m_combatFlags & COMBAT_FLAG_MASTER_LOOTER) != 0; }
+
 			// Public data
 			uint32_t						m_targetEntityInstanceId = 0;
 			uint32_t						m_level = 1;
@@ -228,6 +238,7 @@ namespace tpublic
 			std::optional<CastInProgress>	m_castInProgress;
 			LootRule::Id					m_lootRule = LootRule::INVALID_ID;
 			Rarity::Id						m_lootThreshold = Rarity::INVALID_ID;
+			uint8_t							m_combatFlags = 0;
 		};
 
 	}

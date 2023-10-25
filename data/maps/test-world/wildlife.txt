@@ -25,6 +25,9 @@ loot_table deer:
 		}		
 	
 		{
+			# Testing
+			possibility: { weight: 100 loot_group: test_uncommons }
+			
 			possibility: { weight: 10 }
 			possibility: { weight: 1 loot_group: world_drops_1_to_5 }
 		}		

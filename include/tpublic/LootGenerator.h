@@ -18,7 +18,6 @@ namespace tpublic
 					~LootGenerator();
 
 		void		Generate(
-						const PlayerTag&		aPlayerTag,
 						std::mt19937&			aRandom,
 						Components::Lootable*	aLootable) const;
 
@@ -36,7 +35,7 @@ namespace tpublic
 				if(m_itemIds.size() == 1)
 					return m_itemIds[0];
 
-				std::uniform_int_distribution<size_t> distribution(0, m_itemIds.size());	
+				std::uniform_int_distribution<size_t> distribution(0, m_itemIds.size() - 1);	
 				return m_itemIds[distribution(aRandom)];
 			}
 

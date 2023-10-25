@@ -9,6 +9,7 @@ namespace tpublic
 	
 	class EntityInstance;
 	class IAbilityQueue;
+	class IGroupRoundRobin;
 	class IMoveRequestQueue;
 	class IThreatEventQueue;
 	class IWorldView;
@@ -25,7 +26,8 @@ namespace tpublic
 			IAbilityQueue*			m_abilityQueue = NULL;
 			IMoveRequestQueue*		m_moveRequestQueue = NULL;
 			IThreatEventQueue*		m_threatEventQueue = NULL;
-			ISystemEventQueue*			m_systemEventQueue = NULL;
+			ISystemEventQueue*		m_systemEventQueue = NULL;
+			IGroupRoundRobin*		m_groupRoundRobin = NULL;
 			const IWorldView*		m_worldView = NULL;
 			const LootGenerator*	m_lootGenerator = NULL;
 			int32_t					m_tick = 0;

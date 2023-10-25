@@ -18,7 +18,9 @@ namespace tpublic
 		virtual size_t					QueryEntityInstancesAtPosition(
 											const tpublic::Vec2&	aPosition,
 											EntityCallback			aEntityCallback) const = 0;
-											
+		virtual void					QueryGroupEntityInstances(
+											uint64_t				aGroupId,
+											EntityCallback			aEntityCallback) const = 0;											
 	};
 
 }

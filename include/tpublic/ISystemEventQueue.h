@@ -19,8 +19,8 @@ namespace tpublic
 		virtual void		AddKillXPEvent(
 								const PlayerTag&		aPlayerTag,
 								uint32_t				aKillLevel) = 0;
-		virtual void		AddLootGenerationEvent(
-								const PlayerTag&		aPlayerTag, 
+		virtual void		AddGroupLootEvent(
+								uint32_t				aEntityInstanceId,
 								Components::Lootable*	aLootable) = 0;
 	};
 

@@ -1,7 +1,7 @@
 item ring_iron_ring:
 {
 	equipment_slots: [ finger_1 finger_2 ]
-	loot_groups: [ world_drops_1_to_5 ]
+	loot_groups: [ world_drops_1_to_5 test_uncommons ]
 		
 	root:
 	{
@@ -17,7 +17,7 @@ item ring_iron_ring:
 item ring_sapphire_ring:
 {
 	equipment_slots: [ finger_1 finger_2 ]
-	loot_groups: [ world_drops_1_to_5 ]
+	loot_groups: [ world_drops_1_to_5 test_uncommons ]
 		
 	root:
 	{

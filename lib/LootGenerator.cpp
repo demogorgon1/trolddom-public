@@ -31,7 +31,6 @@ namespace tpublic
 
 	void		
 	LootGenerator::Generate(
-		const PlayerTag&		aPlayerTag,
 		std::mt19937&			aRandom,
 		Components::Lootable*	aLootable) const
 	{
@@ -51,7 +50,7 @@ namespace tpublic
 			for(const Data::LootTable::Possibility& possibility : slot->m_possibilities)
 				totalWeight += possibility.m_weight;
 
-			std::uniform_int_distribution<uint32_t> distribution(0, totalWeight);
+			std::uniform_int_distribution<uint32_t> distribution(1, totalWeight);
 			uint32_t possibilityRoll = distribution(aRandom);
 			uint32_t accumWeight = 0;
 			uint32_t lootGroupId = 0;
@@ -75,7 +74,6 @@ namespace tpublic
 					Components::Lootable::AvailableLoot loot;
 					loot.m_itemInstance.m_itemId = i->second->GetRandom(aRandom);
 					loot.m_itemInstance.m_seed = aRandom();
-					loot.m_playerTag = aPlayerTag;
 					aLootable->m_availableLoot.push_back(loot);
 				}
 			}						

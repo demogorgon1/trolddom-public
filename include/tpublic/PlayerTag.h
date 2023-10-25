@@ -11,11 +11,21 @@ namespace tpublic
 	public:
 		enum Type : uint8_t
 		{
-			TYPE_NONE,
-			TYPE_INDIVIDUAL,
-			TYPE_GROUP,
-			TYPE_ANYONE
+			TYPE_NONE,			// NPC: Not tagged, loot: can't be looted by anyone
+			TYPE_INDIVIDUAL,	// NPC: tagged by individual, loot: can be looted by individual
+			TYPE_GROUP,			// NPC: tagged by group
+			TYPE_ANYONE,		// Loot: can be looted by anyone
+			TYPE_MASTER			// Loot: can be assigned by master looter
 		};
+
+		PlayerTag(
+			Type			aType = TYPE_NONE,
+			uint64_t		aValue = 0)
+			: m_type(aType)
+			, m_value(aValue)
+		{
+
+		}
 
 		void
 		Clear()
@@ -37,12 +47,6 @@ namespace tpublic
 		{
 			m_type = TYPE_GROUP;
 			m_value = aGroupId;
-		}
-
-		void
-		SetAnyone()
-		{
-			m_type = TYPE_ANYONE;
 		}
 
 		void
@@ -74,13 +78,14 @@ namespace tpublic
 		bool		IsIndividual() const { return m_type == TYPE_INDIVIDUAL; }
 		bool		IsGroup() const { return m_type == TYPE_GROUP; }
 		bool		IsAnyone() const { return m_type == TYPE_ANYONE; }
+		bool		IsMaster() const { return m_type == TYPE_MASTER; }
 		uint32_t	GetEntityInstanceId() const { assert(IsIndividual()); return (uint32_t)m_value; }
 		uint64_t	GetGroupId() const { assert(IsGroup()); return m_value; }
 
 	private:
 
-		Type				m_type = TYPE_NONE;
-		uint64_t			m_value = 0;
+		Type				m_type;
+		uint64_t			m_value;
 	};
 
 }

@@ -78,6 +78,14 @@ namespace tpublic
 				return true;
 			}
 
+			void
+			SetPlayerTagForAllAvailableLoot(
+				const PlayerTag&		aPlayerTag)
+			{
+				for(AvailableLoot& t : m_availableLoot)
+					t.m_playerTag = aPlayerTag;
+			}
+
 			// Public data
 			uint32_t					m_lootTableId = 0;
 			PlayerTag					m_playerTag;
