@@ -141,7 +141,16 @@ namespace tpublic::Systems
 										switch(tag->m_lootRule)
 										{
 										case LootRule::ID_GROUP:
-											aContext->m_systemEventQueue->AddGroupLootEvent(aEntityInstanceId, lootable);
+											{
+												std::vector<uint32_t> groupMembers;
+												aContext->m_worldView->QueryGroupEntityInstances(groupId, [&](
+													const EntityInstance* aEntityInstance) -> bool
+												{
+													groupMembers.push_back(aEntityInstance->GetEntityInstanceId());
+													return false;
+												});
+												aContext->m_systemEventQueue->AddGroupLootEvent(aEntityInstanceId, lootable, groupMembers);
+											}
 											break;
 
 										case LootRule::ID_MASTER:
