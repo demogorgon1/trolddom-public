@@ -120,6 +120,7 @@ namespace tpublic::Systems
 							else
 							{
 								// Group and master loot is decided on per item basis
+								size_t index = 0;
 								for(Components::Lootable::AvailableLoot& loot : lootable->m_availableLoot)
 								{
 									assert(loot.m_itemInstance.IsSet());
@@ -149,7 +150,7 @@ namespace tpublic::Systems
 													groupMembers.push_back(aEntityInstance->GetEntityInstanceId());
 													return false;
 												});
-												aContext->m_systemEventQueue->AddGroupLootEvent(aEntityInstanceId, lootable, groupMembers);
+												aContext->m_systemEventQueue->AddGroupLootEvent(aEntityInstanceId, groupId, loot, index, groupMembers);
 											}
 											break;
 
@@ -162,6 +163,8 @@ namespace tpublic::Systems
 											break;
 										}										
 									}
+
+									index++;
 								}
 							}
 						}						
