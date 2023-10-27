@@ -9,7 +9,7 @@ namespace tpublic
 		virtual				~IGroupRoundRobin() {}
 
 		// Virtual interface
-		virtual uint32_t	GetNextGroupRoundRobinEntityInstanceId(
+		virtual uint32_t	GetNextGroupRoundRobinCharacterId(
 								uint64_t				aGroupId) = 0;
 	};
 

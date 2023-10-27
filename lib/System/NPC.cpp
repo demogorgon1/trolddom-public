@@ -96,7 +96,10 @@ namespace tpublic::Systems
 			const Components::Tag* tag = GetComponent<Components::Tag>(aComponents);
 			if(tag->m_playerTag.IsSet())
 			{
-				aContext->m_systemEventQueue->AddKillXPEvent(tag->m_playerTag, combat->m_level);
+				if(tag->m_playerTag.IsGroup())
+					aContext->m_systemEventQueue->AddGroupKillXPEvent(tag->m_playerTag.GetGroupId(), combat->m_level);
+				else if(tag->m_playerTag.IsCharacter())
+					aContext->m_systemEventQueue->AddIndividualKillXPEvent(tag->m_playerTag.GetCharacterId(), tag->m_playerTag.GetCharacterLevel(), combat->m_level);
 
 				Components::Lootable* lootable = GetComponent<Components::Lootable>(aComponents);
 				lootable->m_playerTag = tag->m_playerTag;
@@ -130,10 +133,10 @@ namespace tpublic::Systems
 									if(rarity < (uint32_t)tag->m_lootThreshold)
 									{
 										// This item rarity is below the threshold, which means it will be assigned using round-robin
-										uint32_t entityInstanceId = aContext->m_groupRoundRobin->GetNextGroupRoundRobinEntityInstanceId(groupId);
-										if(entityInstanceId != 0)
+										uint32_t characterId = aContext->m_groupRoundRobin->GetNextGroupRoundRobinCharacterId(groupId);
+										if(characterId != 0)
 										{
-											loot.m_playerTag.SetEntityInstanceId(entityInstanceId);
+											loot.m_playerTag.SetCharacter(characterId, 0);
 										}										
 									}
 									else
@@ -168,11 +171,11 @@ namespace tpublic::Systems
 								}
 							}
 						}						
-					}
-					else
-					{
-						// No group
-						lootable->SetPlayerTagForAllAvailableLoot(lootable->m_playerTag);
+						else
+						{
+							// No group
+							lootable->SetPlayerTagForAllAvailableLoot(lootable->m_playerTag);
+						}
 					}
 				}
 			}
