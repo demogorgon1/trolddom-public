@@ -35,6 +35,9 @@ namespace tpublic
 							m_xpToLevel.resize(level + 1);
 
 						m_xpToLevel[level] = xp;
+
+						if(level > m_maxLevel)
+							m_maxLevel = level;
 					});
 				}
 				else if(aChild->m_name == "kills")
@@ -99,6 +102,7 @@ namespace tpublic
 			aStream->WriteInt(m_maxAdjustmentLevelDiff);
 			aStream->WriteUInt(m_minAdjustment);
 			aStream->WriteUInt(m_maxAdjustment);
+			aStream->WriteUInt(m_maxLevel);
 
 			aStream->WriteUInt(m_adjustments.size());
 			for(std::unordered_map<int32_t, uint32_t>::const_iterator i = m_adjustments.cbegin(); i != m_adjustments.cend(); i++)
@@ -123,6 +127,8 @@ namespace tpublic
 			if (!aStream->ReadUInt(m_minAdjustment))
 				return false;
 			if (!aStream->ReadUInt(m_maxAdjustment))
+				return false;
+			if (!aStream->ReadUInt(m_maxLevel))
 				return false;
 
 			{
@@ -193,6 +199,7 @@ namespace tpublic
 		}
 		
 		// Public data
+		uint32_t								m_maxLevel = 0;
 		std::vector<uint32_t>					m_xpToLevel;
 		std::vector<uint32_t>					m_xpFromKill;
 		int32_t									m_minAdjustmentLevelDiff = 0;

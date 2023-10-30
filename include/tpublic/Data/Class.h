@@ -264,6 +264,18 @@ namespace tpublic
 					return true;
 				}
 
+				const LevelProgressionLevel*
+				GetLevel(
+					uint32_t				aLevel) const
+				{
+					for(const std::unique_ptr<LevelProgressionLevel>& level : m_levels)
+					{
+						if(level->m_level == aLevel)
+							return level.get();
+					}
+					return NULL;
+				}
+
 				// Public data
 				std::vector<std::unique_ptr<LevelProgressionLevel>>	m_levels;
 			};

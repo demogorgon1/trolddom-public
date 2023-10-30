@@ -24,7 +24,8 @@ namespace tpublic
 
 			enum CombatFlag : uint8_t
 			{
-				COMBAT_FLAG_MASTER_LOOTER = 0x01
+				COMBAT_FLAG_MASTER_LOOTER = 0x01,
+				COMBAT_FLAG_PVP = 0x02
 			};
 
 			struct ResourceEntry
@@ -84,7 +85,7 @@ namespace tpublic
 				aSchema->DefineCustomOptionalObjectNoSource<CastInProgress>(FIELD_CAST_IN_PROGRESS, offsetof(CombatPublic, m_castInProgress))->SetFlags(ComponentSchema::FLAG_NO_STORAGE);
 				aSchema->DefineCustomPODNoSource<LootRule::Id>(FIELD_LOOT_RULE, offsetof(CombatPublic, m_lootRule))->SetFlags(ComponentSchema::FLAG_NO_STORAGE);
 				aSchema->DefineCustomPODNoSource<Rarity::Id>(FIELD_LOOT_THRESHOLD, offsetof(CombatPublic, m_lootThreshold))->SetFlags(ComponentSchema::FLAG_NO_STORAGE);
-				aSchema->DefineCustomPODNoSource<uint8_t>(FIELD_COMBAT_FLAGS, offsetof(CombatPublic, m_combatFlags))->SetFlags(ComponentSchema::FLAG_NO_STORAGE);
+				aSchema->DefineCustomPODNoSource<uint8_t>(FIELD_COMBAT_FLAGS, offsetof(CombatPublic, m_combatFlags));
 			}
 
 			void
