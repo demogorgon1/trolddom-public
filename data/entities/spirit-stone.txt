@@ -15,6 +15,7 @@ entity spirit_stone:
 					frames: [ spirit_stone_1 spirit_stone_2 spirit_stone_3 spirit_stone_4 spirit_stone_5 spirit_stone_6 ] 		
 					frame_delay: 120 
 					random_start_frame: true 
+					z_offset: -3
 				}
 			]		
 		}		

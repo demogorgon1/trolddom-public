@@ -11,6 +11,8 @@
 namespace tpublic
 {
 
+	class Manifest;
+
 	namespace Components
 	{
 
@@ -25,7 +27,8 @@ namespace tpublic
 			enum CombatFlag : uint8_t
 			{
 				COMBAT_FLAG_MASTER_LOOTER = 0x01,
-				COMBAT_FLAG_PVP = 0x02
+				COMBAT_FLAG_PVP = 0x02,
+				COMBAT_FLAG_PUSHABLE = 0x08
 			};
 
 			struct ResourceEntry
@@ -86,6 +89,13 @@ namespace tpublic
 				aSchema->DefineCustomPODNoSource<LootRule::Id>(FIELD_LOOT_RULE, offsetof(CombatPublic, m_lootRule))->SetFlags(ComponentSchema::FLAG_NO_STORAGE);
 				aSchema->DefineCustomPODNoSource<Rarity::Id>(FIELD_LOOT_THRESHOLD, offsetof(CombatPublic, m_lootThreshold))->SetFlags(ComponentSchema::FLAG_NO_STORAGE);
 				aSchema->DefineCustomPODNoSource<uint8_t>(FIELD_COMBAT_FLAGS, offsetof(CombatPublic, m_combatFlags));
+
+				aSchema->AddSourceModifier<CombatPublic>("not_pushable", [](
+					CombatPublic*		aCombatPublic,
+					const Parser::Node*	/*aSource*/)
+				{
+					aCombatPublic->m_combatFlags &= ~COMBAT_FLAG_PUSHABLE;
+				});
 			}
 
 			void
@@ -239,7 +249,7 @@ namespace tpublic
 			std::optional<CastInProgress>	m_castInProgress;
 			LootRule::Id					m_lootRule = LootRule::INVALID_ID;
 			Rarity::Id						m_lootThreshold = Rarity::INVALID_ID;
-			uint8_t							m_combatFlags = 0;
+			uint8_t							m_combatFlags = COMBAT_FLAG_PUSHABLE;
 		};
 
 	}

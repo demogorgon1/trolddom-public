@@ -50,7 +50,8 @@ namespace tpublic
 		typedef std::function<void(void*)> CustomDeleteCallback;
 		typedef std::function<void(void*, const void*)> InitFromDeprecatedCallback;
 		typedef std::function<void(void*, ReadType, const Manifest*)> OnReadCallback;
-
+		typedef std::function<void(void*, const Parser::Node*)> SourceModifierCallback;
+		
 		struct Field
 		{
 			Field*
@@ -70,24 +71,24 @@ namespace tpublic
 			}
 
 			// Public data
-			Type						m_type = TYPE_NONE;
-			uint32_t					m_id = 0;
-			const char*					m_name = NULL;
-			uint32_t					m_offset = 0;
-			uint8_t						m_flags = 0;
+			Type										m_type = TYPE_NONE;
+			uint32_t									m_id = 0;
+			const char*									m_name = NULL;
+			uint32_t									m_offset = 0;
+			uint8_t										m_flags = 0;
 
-			DataType::Id				m_dataType = DataType::INVALID_ID;
+			DataType::Id								m_dataType = DataType::INVALID_ID;
 
-			uint32_t					m_initFromDeprecatedId = 0;
-			InitFromDeprecatedCallback	m_initFromDeprecatedCallback;
-			std::vector<uint32_t>		m_upgradeChain;
+			uint32_t									m_initFromDeprecatedId = 0;
+			InitFromDeprecatedCallback					m_initFromDeprecatedCallback;
+			std::vector<uint32_t>						m_upgradeChain;
 
-			CustomReadCallback			m_customRead;
-			CustomWriteCallback			m_customWrite;
-			CustomReadSourceCallback	m_customReadSource;
-			CustomNewCallback			m_customNewCallback;
-			CustomDeleteCallback		m_customDeleteCallback;
-			uint32_t					m_customSize = 0;			
+			CustomReadCallback							m_customRead;
+			CustomWriteCallback							m_customWrite;
+			CustomReadSourceCallback					m_customReadSource;
+			CustomNewCallback							m_customNewCallback;
+			CustomDeleteCallback						m_customDeleteCallback;
+			uint32_t									m_customSize = 0;			
 		};
 
 		Field*			Define(				
@@ -148,6 +149,21 @@ namespace tpublic
 				const Manifest* aManifest)
 			{
 				aOnReadCallback((_T*)aData, aReadType, aManifest);
+			};
+		}
+
+		template <typename _T, typename _SourceModifierCallback>
+		void
+		AddSourceModifier(
+			const char*							aName,
+			_SourceModifierCallback				aSourceModifierCallback)
+		{
+			assert(!m_sourceModifierCallbacks.contains(aName));
+			m_sourceModifierCallbacks[aName] = [&](
+				void*				aData,
+				const Parser::Node*	aSource)
+			{
+				aSourceModifierCallback((_T*)aData, aSource);
 			};
 		}
 
@@ -425,8 +441,9 @@ namespace tpublic
 
 	private:
 
-		std::vector<Field>	m_fields;
-		OnReadCallback		m_onReadCallback;
+		std::vector<Field>										m_fields;
+		OnReadCallback											m_onReadCallback;
+		std::unordered_map<std::string, SourceModifierCallback>	m_sourceModifierCallbacks;
 
 		uint32_t		_GetFieldSize(
 							const Field*			aField) const;

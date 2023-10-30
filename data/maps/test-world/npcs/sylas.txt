@@ -49,6 +49,8 @@ entity test_world_sylas:
 			level: 1
 			faction: npcs		
 			dialogue_root: test_world_sylas_dialogue
+			
+			modifier not_pushable: {}
 		}			
 		combat_private:
 		{

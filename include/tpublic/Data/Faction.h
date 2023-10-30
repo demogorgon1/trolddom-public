@@ -15,7 +15,8 @@ namespace tpublic
 
 			enum Flag : uint8_t
 			{
-				FLAG_NEUTRAL = 0x01
+				FLAG_NEUTRAL = 0x01,
+				FLAG_FRIENDLY = 0x02
 			};
 
 			void
@@ -39,6 +40,8 @@ namespace tpublic
 						{
 							if(aFlag->IsIdentifier("neutral"))
 								m_flags |= FLAG_NEUTRAL;
+							else if(aFlag->IsIdentifier("friendly"))
+								m_flags |= FLAG_FRIENDLY;
 							else
 								TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid faction flag.", aFlag->m_value.c_str());
 						});
@@ -71,7 +74,7 @@ namespace tpublic
 			}
 
 			// Helpers
-			bool IsNeutral() const { return m_flags & FLAG_NEUTRAL; }
+			bool IsNeutralOrFriendly() const { return (m_flags & FLAG_NEUTRAL) != 0 || (m_flags & FLAG_FRIENDLY) != 0; }
 
 			// Public data
 			uint8_t		m_flags;

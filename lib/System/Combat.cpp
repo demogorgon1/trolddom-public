@@ -128,9 +128,7 @@ namespace tpublic::Systems
 				}
 
 				if(dirty)
-				{
 					combatPublic->SetPendingPersistenceUpdate(tpublic::ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY);
-				}
 			}
 		}
 

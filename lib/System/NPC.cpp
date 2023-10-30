@@ -227,12 +227,12 @@ namespace tpublic::Systems
 					{
 						bool isWithinDistance = Helpers::IsWithinDistance(aEntity->GetComponent<Components::Position>(), position, 3);
 
-						if (aEntity->IsPlayer() && (!faction->IsNeutral() || combat->m_targetEntityInstanceId == aEntity->GetEntityInstanceId()))
+						if (aEntity->IsPlayer() && (!faction->IsNeutralOrFriendly() || combat->m_targetEntityInstanceId == aEntity->GetEntityInstanceId()))
 						{
 							if (isWithinDistance)
 								aContext->m_threatEventQueue->AddThreatEvent(aEntity->GetEntityInstanceId(), aEntityInstanceId, 0);
 						}
-						else if(topThreatEntity != NULL && aEntity->GetState() != EntityState::ID_IN_COMBAT && !faction->IsNeutral())
+						else if(topThreatEntity != NULL && aEntity->GetState() != EntityState::ID_IN_COMBAT && !faction->IsNeutralOrFriendly())
 						{
 							if (isWithinDistance)
 							{

@@ -83,6 +83,8 @@ entity test_world_rob_beaurichard:
 			level: 1
 			faction: npcs		
 			dialogue_root: test_world_rob_beaurichard_dialogue
+			
+			modifier not_pushable: {}
 		}			
 		combat_private:
 		{
