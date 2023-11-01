@@ -1,7 +1,7 @@
 ability attack:
 {
 	string: "Attack"	
-	flags: [ attack target_other target_hostile can_be_dodged can_be_parried can_miss use_weapon_icon ]	
+	flags: [ offensive attack target_other target_hostile can_be_dodged can_be_parried can_miss use_weapon_icon ]	
 	states: [ default in_combat ]
 	delay: 3
 	
@@ -43,7 +43,7 @@ ability strike:
 	string: "Strike"
 	range: 1	
 	cooldown: 30
-	flags: [ target_other target_hostile can_be_dodged can_be_parried can_miss ]
+	flags: [ offensive target_other target_hostile can_be_dodged can_be_parried can_miss ]
 	states: [ default in_combat ]
 	icon: icon_strike
 	delay: 3
@@ -61,7 +61,7 @@ ability firebolt:
 	string: "Firebolt"
 	range: 7	
 	cast_time: 25
-	flags: [ target_other target_hostile can_miss ]
+	flags: [ offensive target_other target_hostile can_miss ]
 	states: [ default in_combat ]
 	icon: icon_firebolt
 	speed: 5
@@ -103,7 +103,7 @@ ability gaze_of_death:
 	description: "Kill target."
 	range: 100
 	cooldown: 100
-	flags: [ target_other target_hostile target_friendly ]
+	flags: [ offensive target_other target_hostile target_friendly ]
 	states: [ default in_combat ]
 	icon: icon_green_sphere
 	

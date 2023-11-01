@@ -77,6 +77,8 @@ namespace tpublic
 
 			// Not serialized
 			bool						m_positionUpdatedOnServer = false;
+			bool						m_pvpCombatEvent = false;
+			int32_t						m_lastPVPCombatEventTick = 0;
 		};
 	}
 

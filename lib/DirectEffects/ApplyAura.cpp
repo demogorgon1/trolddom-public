@@ -28,7 +28,7 @@ namespace tpublic
 			IAuraEventQueue*		aAuraEventQueue,
 			IThreatEventQueue*		aThreatEventQueue)
 		{
-			if(m_threat != 0)
+			if(m_threat != 0 && aTarget->GetEntityId() != 0)
 				aThreatEventQueue->AddThreatEvent(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), m_threat);
 
 			// FIXME: filter certain combat event ids. For example, we could have effects not be applied if blocked or only on criticals.

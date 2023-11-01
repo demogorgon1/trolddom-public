@@ -93,7 +93,7 @@ ability knock:
 	description: "Stuns target for 3 seconds."
 	range: 1
 	cooldown: 100
-	flags: [ target_other target_hostile can_be_dodged can_be_parried can_miss ]
+	flags: [ offensive target_other target_hostile can_be_dodged can_be_parried can_miss ]
 	states: [ default in_combat ]
 	icon: icon_knock
 	delay: 3
@@ -111,7 +111,7 @@ ability throw_rock:
 	string: "Throw Rock"
 	range: 6
 	cooldown: 60
-	flags: [ target_other target_hostile can_be_dodged can_miss ]
+	flags: [ offensive target_other target_hostile can_be_dodged can_miss ]
 	states: [ default ]
 	icon: icon_throw_rock
 	speed: 6
@@ -130,7 +130,7 @@ ability throw_rock:
 ability fighter_attack:
 {
 	string: "Attack"
-	flags: [ attack target_other target_hostile can_be_dodged can_be_parried can_miss use_weapon_icon ]	
+	flags: [ offensive attack target_other target_hostile can_be_dodged can_be_parried can_miss use_weapon_icon ]	
 	states: [ default in_combat ]
 	delay: 3
 	

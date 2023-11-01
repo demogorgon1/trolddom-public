@@ -250,6 +250,9 @@ namespace tpublic
 			LootRule::Id					m_lootRule = LootRule::INVALID_ID;
 			Rarity::Id						m_lootThreshold = Rarity::INVALID_ID;
 			uint8_t							m_combatFlags = COMBAT_FLAG_PUSHABLE;
+
+			// Internal server-side only
+			int32_t							m_lastCombatEventTick = 0;
 		};
 
 	}

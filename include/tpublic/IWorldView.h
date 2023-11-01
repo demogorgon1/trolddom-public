@@ -3,6 +3,8 @@
 namespace tpublic
 {
 
+	class MapData;
+
 	class IWorldView
 	{
 	public:
@@ -11,6 +13,7 @@ namespace tpublic
 		virtual							~IWorldView() {}	
 
 		// Virtual interface
+		virtual const MapData*			GetMapData() const = 0;
 		virtual size_t					QueryAllEntityInstances(
 											EntityCallback			aEntityCallback) const = 0;
 		virtual const EntityInstance*	QuerySingleEntityInstance(

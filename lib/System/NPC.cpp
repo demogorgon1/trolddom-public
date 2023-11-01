@@ -265,8 +265,12 @@ namespace tpublic::Systems
 
 		case EntityState::ID_IN_COMBAT:
 			{
-				if (threat->m_table.IsEmpty())
+				int32_t ticksSinceLastCombatEvent = aContext->m_tick - combat->m_lastCombatEventTick;
+				bool isOpenWorld = aContext->m_worldView->GetMapData()->m_type == MapType::ID_OPEN_WORLD;
+
+				if (threat->m_table.IsEmpty() || (ticksSinceLastCombatEvent > 10 * 10 && !isOpenWorld))
 				{
+					// Empty threat table or no combat events for 10 seconds
 					npc->m_targetEntityInstanceId = 0;
 					npc->m_castInProgress.reset();
 

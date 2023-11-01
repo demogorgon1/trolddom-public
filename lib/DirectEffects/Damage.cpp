@@ -177,7 +177,8 @@ namespace tpublic::DirectEffects
 			if(result == CombatEvent::ID_CRITICAL)
 				threat = (threat * 3) / 2;
 
-			aThreatEventQueue->AddThreatEvent(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), threat);
+			if(aTarget->GetEntityId() != 0) // Not a player
+				aThreatEventQueue->AddThreatEvent(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), threat);
 		}
 	}
 
