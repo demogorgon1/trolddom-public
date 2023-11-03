@@ -31,7 +31,7 @@ namespace tpublic::Systems
 
 	EntityState::Id
 	Combat::UpdatePrivate(
-		uint32_t			/*aEntityInstanceId*/,
+		uint32_t			aEntityInstanceId,
 		EntityState::Id		/*aEntityState*/,
 		int32_t				/*aTicksInState*/,
 		ComponentBase**		aComponents,
@@ -48,7 +48,7 @@ namespace tpublic::Systems
 				{
 					std::unique_ptr<AuraEffectBase>& effect = entry->m_effects[j];
 
-					if(!effect->Update(aContext->m_tick))
+					if(!effect->Update(entry->m_entityInstanceId, aEntityInstanceId, aContext, GetManifest()))
 					{
 						effect.reset();
 						Helpers::RemoveCyclicFromVector(entry->m_effects, j);

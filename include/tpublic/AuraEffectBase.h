@@ -6,6 +6,7 @@
 #include "IWriter.h"
 #include "Parser.h"
 #include "Stat.h"
+#include "SystemBase.h"
 
 namespace tpublic
 {
@@ -72,18 +73,24 @@ namespace tpublic
 
 		bool
 		Update(
-			int32_t										aTick)
+			uint32_t									aSourceEntityInstanceId,
+			uint32_t									aTargetEntityInstanceId,
+			SystemBase::Context*						aContext,
+			const Manifest*								aManifest)
 		{
 			if(m_updateCount == 0)
 				return true; // Effects that don't require updates will have this initialized to zero
 
-			int32_t ticksSinceLastUpdate = aTick - m_lastUpdate;
+			if(aSourceEntityInstanceId == 0)
+				return false;
+
+			int32_t ticksSinceLastUpdate = aContext->m_tick - m_lastUpdate;
 			if(ticksSinceLastUpdate >= m_updateInterval)
 			{
-				if(!OnUpdate())
+				if(!OnUpdate(aSourceEntityInstanceId, aTargetEntityInstanceId, aContext, aManifest))
 					return false;
 
-				m_lastUpdate = aTick;
+				m_lastUpdate = aContext->m_tick;
 				m_updateCount--;
 
 				if(m_updateCount == 0)
@@ -95,12 +102,16 @@ namespace tpublic
 
 		// Virtual methods
 		virtual void			FromSource(
-									const Parser::Node*	/*aSource*/) { assert(false); }
+									const Parser::Node*			/*aSource*/) { assert(false); }
 		virtual void			ToStream(
-									IWriter*			/*aStream*/) const { assert(false); }
+									IWriter*					/*aStream*/) const { assert(false); }
 		virtual bool			FromStream(
-									IReader*			/*aStream*/) { assert(false); return true; }
-		virtual bool			OnUpdate() { return false; }
+									IReader*					/*aStream*/) { assert(false); return true; }
+		virtual bool			OnUpdate(
+									uint32_t					/*aSourceEntityInstanceId*/,
+									uint32_t					/*aTargetEntityInstanceId*/,
+									SystemBase::Context*		/*aContext*/,
+									const Manifest*				/*aManifest*/) { return false; }
 		virtual AuraEffectBase*	Copy() const { assert(false); return NULL; }
 		virtual int32_t			FilterDamageInput(
 									DirectEffect::DamageType	/*aDamageType*/,

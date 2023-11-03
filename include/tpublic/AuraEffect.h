@@ -13,6 +13,7 @@ namespace tpublic
 			ID_STUN,
 			ID_IMMORTALITY,
 			ID_DAMAGE_INPUT_MODIFIER,
+			ID_REPEAT,
 
 			NUM_IDS
 		};
@@ -23,7 +24,8 @@ namespace tpublic
 			NULL,
 			"stun",
 			"immortality",
-			"damage_input_modifier"
+			"damage_input_modifier",
+			"repeat"
 		};
 
 		static_assert(sizeof(EFFECT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

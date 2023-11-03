@@ -2,6 +2,7 @@
 
 #include "AuraEffects/DamageInputModifier.h"
 #include "AuraEffects/Immortality.h"
+#include "AuraEffects/Repeat.h"
 #include "AuraEffects/Stun.h"
 
 #include "AuraEffect.h"
@@ -16,6 +17,7 @@ namespace tpublic
 		{
 			_Register<AuraEffects::DamageInputModifier>();
 			_Register<AuraEffects::Immortality>();
+			_Register<AuraEffects::Repeat>();
 			_Register<AuraEffects::Stun>();
 		}
 

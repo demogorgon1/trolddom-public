@@ -45,6 +45,33 @@ sprites:
 
 	sprite icon_mail_gloves_1 : { }
 	sprite icon_knife_1 : { }
+	sprite icon_sword_2 : { }
+	sprite icon_sword_3 : { }
+	sprite icon_axe_1 : { }
+	sprite icon_shield_1 : { }
+	sprite icon_shoulders_1 : { }
+	sprite icon_green_bag : { }
+	sprite icon_red_bag : { }
+	sprite icon_brown_bag : { }
+	sprite icon_mail_belt_1 : { }
+	sprite icon_mail_bracers_1 : { }
+	sprite icon_cape_1 : { }
+	sprite icon_cape_2 : { }
+	sprite icon_necklace_1 : { }
+	sprite icon_necklace_2 : { }
+
+	cursor: { position: [ 0 48 ] }
+	
+	sprite icon_pants_1 : { }
+	sprite icon_pants_2 : { }
+	sprite icon_wizard_hat_1 : { }
+	sprite icon_wizard_hat_2 : { }
+	sprite icon_cloth_shirt_1 : { }
+	sprite icon_cloth_shirt_2 : { }
+	sprite icon_cloth_shirt_3 : { }
+	sprite icon_shoe_1 : { }
+	sprite icon_holy_condemnation : { }
+	sprite icon_holy_blessing : { }
 	
 }
 

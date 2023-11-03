@@ -14,6 +14,91 @@ ability minor_heal:
 	}
 }
 
+ability holy_blessing_tick:
+{
+	string: "Holy Blessing"
+	icon: icon_holy_blessing		
+	states: [ default in_combat ]
+	
+	direct_effect heal:
+	{	
+		base: [ 3 5 ]
+	}	
+}
+
+aura holy_blessing:
+{
+	string: "Holy Blessing"
+	icon: icon_holy_blessing		
+	type: buff
+	duration: 100	
+	aura_effect repeat: 
+	{ 
+		update_interval: 10
+		update_count: 10
+		ability: holy_blessing_tick
+	}
+}
+
+ability holy_blessing:
+{
+	string: "Holy Blessing"
+	description: "Heals friendly target for 30 over 10 seconds."
+	range: 6
+	cooldown: 10
+	flags: [ target_other target_self target_friendly ]
+	states: [ default in_combat ]
+	icon: icon_holy_blessing
+	resource_cost mana: 10
+
+	direct_effect apply_aura:
+	{	
+		aura: holy_blessing
+	}
+}
+
+ability holy_condemnation_tick:
+{
+	string: "Holy Condemnation"
+	icon: icon_holy_condemnation		
+	states: [ default in_combat ]
+	
+	direct_effect damage:
+	{	
+		base: [ 3 5 ]
+	}	
+}
+
+aura holy_condemnation:
+{
+	string: "Holy Condemnation"
+	icon: icon_holy_condemnation		
+	type: debuff
+	duration: 100	
+	aura_effect repeat: 
+	{ 
+		update_interval: 10
+		update_count: 10
+		ability: holy_condemnation_tick
+	}
+}
+
+ability holy_condemnation:
+{
+	string: "Holy Condemnation"
+	range: 6
+	cooldown: 10
+	flags: [ target_other target_hostile ]
+	states: [ default in_combat ]
+	icon: icon_holy_condemnation
+	resource_cost mana: 10
+
+	direct_effect apply_aura:
+	{	
+		aura: holy_condemnation
+	}
+}
+
 class priest:
 {
 	string: "Priest"	
@@ -55,6 +140,8 @@ class priest:
 			[
 				attack
 				minor_heal
+				holy_blessing
+				holy_condemnation
 				gaze_of_death
 				dont_touch_me_bro
 				immortality 
