@@ -171,7 +171,8 @@ class fighter:
 		dex_to_dodge: [ 1 20 ]
 		dex_to_parry: [ 1 25 ]
 		str_to_parry: [ 1 40 ]
-		con_to_health: [ 10 1 ]
+		con_to_health: [ 10 1 ]		
+		spi_to_health_regen: [ 1 1 ]
 	}
 
 	level_progression:
@@ -196,6 +197,7 @@ class fighter:
 				strength: 6
 				wisdom: 2
 				constitution: 4
+				spirit: 5
 			}
 			
 			resource health: { add_max: 80 }

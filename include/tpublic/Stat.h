@@ -16,6 +16,7 @@ namespace tpublic
 			ID_STRENGTH,
 			ID_WISDOM,
 			ID_CONSTITUTION,
+			ID_SPIRIT,
 			ID_ARMOR,
 
 			NUM_IDS
@@ -37,6 +38,7 @@ namespace tpublic
 			{ "strength",				"STR",		"Strength" },
 			{ "wisdom",					"WIS",		"Wisdom" },
 			{ "constitution",			"CON",		"Constitution" },
+			{ "spirit",					"SPI",		"Spirit" },
 			{ "armor",					"ARM",		"Armor" },
 		};
 

@@ -74,64 +74,11 @@ namespace tpublic::Systems
 	void
 	Combat::UpdatePublic(
 		uint32_t			/*aEntityInstanceId*/,
-		EntityState::Id		aEntityState,
+		EntityState::Id		/*aEntityState*/,
 		int32_t				/*aTicksInState*/,
 		ComponentBase**		aComponents,
 		Context*			/*aContext*/) 
 	{
-		{
-			Components::CombatPublic* combatPublic = GetComponent<Components::CombatPublic>(aComponents);
-
-			if (aEntityState != EntityState::ID_DEAD)
-			{
-				bool dirty = false;
-
-				for (Components::CombatPublic::ResourceEntry& resource : combatPublic->m_resources)
-				{
-					switch (resource.m_id)
-					{
-					case Resource::ID_HEALTH:
-						if (aEntityState != EntityState::ID_IN_COMBAT && resource.m_current < resource.m_max)
-						{
-							resource.m_current++;
-							dirty = true;
-						}
-						break;
-
-					case Resource::ID_MANA:
-						if (resource.m_current < resource.m_max)
-						{
-							resource.m_current++;
-							dirty = true;
-						}
-						break;
-
-					case Resource::ID_RAGE:
-						if (aEntityState != EntityState::ID_IN_COMBAT && resource.m_current > 0)
-						{
-							resource.m_current--;
-							dirty = true;
-						}
-						break;
-
-					case Resource::ID_ENERGY:
-						if (resource.m_current < resource.m_max)
-						{
-							resource.m_current++;
-							dirty = true;
-						}
-						break;
-
-					default:
-						break;
-					}
-				}
-
-				if(dirty)
-					combatPublic->SetPendingPersistenceUpdate(tpublic::ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY);
-			}
-		}
-
 		{
 			Components::Auras* auras = GetComponent<Components::Auras>(aComponents);
 

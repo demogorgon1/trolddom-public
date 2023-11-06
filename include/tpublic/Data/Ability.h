@@ -32,7 +32,8 @@ namespace tpublic
 				FLAG_USE_WEAPON_ICON		= 0x0400,				
 				FLAG_AOE_LOW_HEALTH_ONLY	= 0x0800,
 				FLAG_AOE_LOW_HEALTH_PRIO	= 0x1000,
-				FLAG_OFFENSIVE				= 0x2000
+				FLAG_OFFENSIVE				= 0x2000,
+				FLAG_SPELL					= 0x4000
 			};
 
 			static inline Resource::Id
@@ -81,6 +82,8 @@ namespace tpublic
 						flags |= FLAG_AOE_LOW_HEALTH_PRIO;
 					else if (strcmp(identifier, "offensive") == 0)
 						flags |= FLAG_OFFENSIVE;
+					else if (strcmp(identifier, "spell") == 0)
+						flags |= FLAG_SPELL;
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid ability flag.", identifier);
 				});

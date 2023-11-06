@@ -344,6 +344,10 @@ namespace tpublic
 							m_conToHealth.FromSource(aItem);
 						else if (aItem->m_name == "wis_to_mana")
 							m_wisToMana.FromSource(aItem);
+						else if (aItem->m_name == "spi_to_health_regen")
+							m_spiToHealthRegen.FromSource(aItem);
+						else if (aItem->m_name == "spi_to_mana_regen_per_5_sec")
+							m_spiToManaRegenPer5Sec.FromSource(aItem);
 						else
 							TP_VERIFY(false, aItem->m_debugInfo, "'%s' not a valid item.", aItem->m_name.c_str());
 					});
@@ -363,6 +367,8 @@ namespace tpublic
 					m_wisToMagCrit.ToStream(aStream);
 					m_conToHealth.ToStream(aStream);
 					m_wisToMana.ToStream(aStream);
+					m_spiToHealthRegen.ToStream(aStream);
+					m_spiToManaRegenPer5Sec.ToStream(aStream);
 				}
 			
 				bool	
@@ -389,6 +395,10 @@ namespace tpublic
 						return false;
 					if (!m_wisToMana.FromStream(aStream))
 						return false;
+					if (!m_spiToHealthRegen.FromStream(aStream))
+						return false;
+					if (!m_spiToManaRegenPer5Sec.FromStream(aStream))
+						return false;
 					return true;
 				}
 
@@ -403,6 +413,8 @@ namespace tpublic
 				StatsConversionEntry								m_wisToMagCrit;
 				StatsConversionEntry								m_conToHealth;
 				StatsConversionEntry								m_wisToMana;
+				StatsConversionEntry								m_spiToHealthRegen;
+				StatsConversionEntry								m_spiToManaRegenPer5Sec;
 			};
 
 			void

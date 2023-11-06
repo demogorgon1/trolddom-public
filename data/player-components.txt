@@ -6,7 +6,7 @@ player_components:
 	combat_private
 	combat_public
 	display_name
-	equipped_items
+	equipped_items	
 	inventory
 	player_cooldowns
 	player_private

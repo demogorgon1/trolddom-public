@@ -13,6 +13,8 @@ namespace tpublic
 			ID_COMBAT,
 			ID_NPC,
 			ID_ENVIRONMENT,
+			ID_HEALTH_REGEN,
+			ID_MANA_REGEN,
 
 			NUM_IDS
 		};
@@ -23,7 +25,9 @@ namespace tpublic
 			NULL,
 			"combat",
 			"npc",
-			"environment"
+			"environment",
+			"health_regen",
+			"mana_regen"
 		};
 
 		static_assert(sizeof(SYSTEM_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

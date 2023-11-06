@@ -36,8 +36,10 @@ namespace tpublic
 		};
 
 		SystemBase(
-			const Manifest*										aManifest)
+			const Manifest*										aManifest,
+			int32_t												aUpdateInterval = 0)
 			: m_manifest(aManifest)
+			, m_updateInterval(aUpdateInterval)
 		{
 			memset(m_componentIndices, 0xFF, sizeof(m_componentIndices));
 		}
@@ -88,12 +90,14 @@ namespace tpublic
 		// Data access
 		const Manifest*					GetManifest() const { return m_manifest; }
 		const std::vector<uint32_t>&	GetRequiredComponents() const { return m_requiredComponents; }
+		int32_t							GetUpdateInterval() const { return m_updateInterval; }
 
 	private:
 
 		const Manifest*			m_manifest;
 		std::vector<uint32_t>	m_requiredComponents;
 		size_t					m_componentIndices[Component::NUM_IDS];
+		int32_t					m_updateInterval;
 	};
 
 }

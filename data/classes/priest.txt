@@ -3,7 +3,7 @@ ability minor_heal:
 	string: "Minor Heal"
 	range: 6
 	cooldown: 20
-	flags: [ target_other target_self target_friendly ]
+	flags: [ spell target_other target_self target_friendly ]
 	states: [ default in_combat ]
 	icon: icon_heal
 	resource_cost mana: 10
@@ -46,7 +46,7 @@ ability holy_blessing:
 	description: "Heals friendly target for 30 over 10 seconds."
 	range: 6
 	cooldown: 10
-	flags: [ target_other target_self target_friendly ]
+	flags: [ spell target_other target_self target_friendly ]
 	states: [ default in_combat ]
 	icon: icon_holy_blessing
 	resource_cost mana: 10
@@ -88,7 +88,7 @@ ability holy_condemnation:
 	string: "Holy Condemnation"
 	range: 6
 	cooldown: 10
-	flags: [ target_other target_hostile ]
+	flags: [ spell target_other target_hostile ]
 	states: [ default in_combat ]
 	icon: icon_holy_condemnation
 	resource_cost mana: 10
@@ -129,6 +129,8 @@ class priest:
 		wis_to_mag_crit: [ 1 30 ]
 		con_to_health: [ 10 1 ]
 		wis_to_mana: [ 10 1 ]
+		spi_to_mana_regen_per_5_sec: [ 5 1 ]
+		spi_to_health_regen: [ 1 1 ]
 	}	
 
 	level_progression:
@@ -154,6 +156,7 @@ class priest:
 				strength: 3
 				wisdom: 6
 				constitution: 4
+				spirit: 7
 			}
 			
 			resource health: { add_max: 60 }

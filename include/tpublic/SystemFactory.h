@@ -2,6 +2,8 @@
 
 #include "Systems/Combat.h"
 #include "Systems/Environment.h"
+#include "Systems/HealthRegen.h"
+#include "Systems/ManaRegen.h"
 #include "Systems/NPC.h"
 
 #include "System.h"
@@ -19,7 +21,9 @@ namespace tpublic
 			: m_manifest(aManifest)
 		{
 			_Register<Systems::Combat>();
-			_Register<Systems::Environment>();
+			_Register<Systems::Environment>(); 
+			_Register<Systems::HealthRegen>();
+			_Register<Systems::ManaRegen>();
 			_Register<Systems::NPC>();
 		}
 

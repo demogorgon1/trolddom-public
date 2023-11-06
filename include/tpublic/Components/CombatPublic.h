@@ -253,6 +253,9 @@ namespace tpublic
 
 			// Internal server-side only
 			int32_t							m_lastCombatEventTick = 0;
+			int32_t							m_lastCastingTick = -50;
+			int32_t							m_last5SecRuleManaRegenTick = 0;
+			int32_t							m_lastBaseManaRegenTick = 0;
 		};
 
 	}
