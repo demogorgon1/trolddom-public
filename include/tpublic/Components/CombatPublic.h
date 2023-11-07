@@ -108,9 +108,6 @@ namespace tpublic
 					if(t.m_id == aResourceId)
 					{
 						t.m_max += aValue;
-
-						if(t.m_current > t.m_max)
-							t.m_current = t.m_max;
 						return;
 					}
 				}

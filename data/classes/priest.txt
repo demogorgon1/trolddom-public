@@ -19,6 +19,7 @@ ability holy_blessing_tick:
 	string: "Holy Blessing"
 	icon: icon_holy_blessing		
 	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]
 	
 	direct_effect heal:
 	{	
@@ -62,6 +63,7 @@ ability holy_condemnation_tick:
 	string: "Holy Condemnation"
 	icon: icon_holy_condemnation		
 	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]
 	
 	direct_effect damage:
 	{	

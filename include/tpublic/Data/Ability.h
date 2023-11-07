@@ -17,23 +17,25 @@ namespace tpublic
 		{
 			static const DataType::Id DATA_TYPE = DataType::ID_ABILITY; 
 
-			enum Flag : uint16_t
+			enum Flag : uint32_t
 			{
-				FLAG_TARGET_SELF			= 0x0001,
-				FLAG_TARGET_OTHER			= 0x0002,
-				FLAG_TARGET_AOE				= 0x0004,
-				FLAG_TARGET_HOSTILE			= 0x0008,
-				FLAG_TARGET_FRIENDLY		= 0x0010,
-				FLAG_CAN_MISS				= 0x0020,
-				FLAG_CAN_BE_DODGED			= 0x0040,
-				FLAG_CAN_BE_PARRIED			= 0x0080,
-				FLAG_CAN_BE_BLOCKED			= 0x0100,
-				FLAG_ATTACK					= 0x0200,
-				FLAG_USE_WEAPON_ICON		= 0x0400,				
-				FLAG_AOE_LOW_HEALTH_ONLY	= 0x0800,
-				FLAG_AOE_LOW_HEALTH_PRIO	= 0x1000,
-				FLAG_OFFENSIVE				= 0x2000,
-				FLAG_SPELL					= 0x4000
+				FLAG_TARGET_SELF				= 0x00000001,
+				FLAG_TARGET_OTHER				= 0x00000002,
+				FLAG_TARGET_AOE					= 0x00000004,
+				FLAG_TARGET_HOSTILE				= 0x00000008,
+				FLAG_TARGET_FRIENDLY			= 0x00000010,
+				FLAG_CAN_MISS					= 0x00000020,
+				FLAG_CAN_BE_DODGED				= 0x00000040,
+				FLAG_CAN_BE_PARRIED				= 0x00000080,
+				FLAG_CAN_BE_BLOCKED				= 0x00000100,
+				FLAG_ATTACK						= 0x00000200,
+				FLAG_USE_WEAPON_ICON			= 0x00000400,				
+				FLAG_AOE_LOW_HEALTH_ONLY		= 0x00000800,
+				FLAG_AOE_LOW_HEALTH_PRIO		= 0x00001000,
+				FLAG_OFFENSIVE					= 0x00002000,
+				FLAG_SPELL						= 0x00004000,
+				FLAG_ALWAYS_IN_RANGE			= 0x00008000,
+				FLAG_ALWAYS_IN_LINE_OF_SIGHT	= 0x00010000
 			};
 
 			static inline Resource::Id
@@ -45,11 +47,11 @@ namespace tpublic
 				return resourceId;
 			}
 
-			static inline uint16_t
+			static inline uint32_t
 			GetFlags(
 				const Parser::Node*			aSource)
 			{
-				uint16_t flags = 0;
+				uint32_t flags = 0;
 				aSource->GetArray()->ForEachChild([&](
 					const Parser::Node*		aChild)
 				{
@@ -84,6 +86,10 @@ namespace tpublic
 						flags |= FLAG_OFFENSIVE;
 					else if (strcmp(identifier, "spell") == 0)
 						flags |= FLAG_SPELL;
+					else if (strcmp(identifier, "always_in_range") == 0)
+						flags |= FLAG_ALWAYS_IN_RANGE;
+					else if (strcmp(identifier, "always_in_line_of_sight") == 0)
+						flags |= FLAG_ALWAYS_IN_LINE_OF_SIGHT;
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid ability flag.", identifier);
 				});
@@ -285,6 +291,8 @@ namespace tpublic
 			bool CanBeParried() const { return m_flags & FLAG_CAN_BE_PARRIED; }
 			bool CanBeBlocked() const { return m_flags & FLAG_CAN_BE_BLOCKED; }
 			bool IsAttack() const { return m_flags & FLAG_ATTACK; }
+			bool AlwaysInRange() const { return m_flags & FLAG_ALWAYS_IN_RANGE; }
+			bool AlwaysInLineOfSight() const { return m_flags & FLAG_ALWAYS_IN_LINE_OF_SIGHT; }
 			bool IsInstantMelee() const { return m_range == 1 && m_castTime == 0; }
 			
 			bool 
@@ -433,7 +441,7 @@ namespace tpublic
 			int32_t												m_delay = 0;
 			int32_t												m_cooldown = 10;
 			int32_t												m_castTime = 0;
-			uint16_t											m_flags = 0;
+			uint32_t											m_flags = 0;
 			uint32_t											m_iconSpriteId = 0;
 			uint32_t											m_projectileParticleSystemId = 0;
 			uint32_t											m_aoeRadius = 0;

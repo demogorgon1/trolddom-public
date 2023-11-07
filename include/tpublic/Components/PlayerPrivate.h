@@ -68,17 +68,17 @@ namespace tpublic
 			}
 
 			// Public data
-			uint32_t					m_level = 1;
-			uint32_t					m_xp = 0;
-			bool						m_isDead = false;
-			Vec2						m_resurrectionPointPosition;
-			uint32_t					m_resurrectionPointMapId = 0;
-			GuildRegistrationHistory	m_guildRegistrationHistory;
+			uint32_t										m_level = 1;
+			uint32_t										m_xp = 0;
+			bool											m_isDead = false;
+			Vec2											m_resurrectionPointPosition;
+			uint32_t										m_resurrectionPointMapId = 0;
+			GuildRegistrationHistory						m_guildRegistrationHistory;
 
 			// Not serialized
-			bool						m_positionUpdatedOnServer = false;
-			bool						m_pvpCombatEvent = false;
-			int32_t						m_lastPVPCombatEventTick = 0;
+			bool											m_positionUpdatedOnServer = false;
+			bool											m_pvpCombatEvent = false;
+			int32_t											m_lastPVPCombatEventTick = 0;
 		};
 	}
 

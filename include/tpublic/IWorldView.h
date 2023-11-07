@@ -23,7 +23,11 @@ namespace tpublic
 											EntityCallback			aEntityCallback) const = 0;
 		virtual void					QueryGroupEntityInstances(
 											uint64_t				aGroupId,
-											EntityCallback			aEntityCallback) const = 0;											
+											EntityCallback			aEntityCallback) const = 0;						
+		virtual bool					QueryLineOfSight(
+											const tpublic::Vec2&	aFrom,
+											const tpublic::Vec2&	aTo) const = 0;
+
 	};
 
 }

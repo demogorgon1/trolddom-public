@@ -12,12 +12,20 @@ namespace tpublic
 	public:
 		virtual ~IAbilityQueue() {}
 
+		enum AbilityQueueResult
+		{
+			ABILITY_QUEUE_RESULT_OK,
+			ABILITY_QUEUE_RESULT_TOO_FAR_AWAY,
+			ABILITY_QUEUE_RESULT_NO_LINE_OF_SIGHT,
+			ABILITY_QUEUE_RESULT_FAILURE
+		};
+
 		// Virtual interface
-		virtual void		AddAbility(
-								uint32_t				aSourceEntityInstanceId,
-								uint32_t				aTargetEntityInstanceId,
-								const Vec2&				aAOETarget,
-								const Data::Ability*	aAbility) = 0;
+		virtual AbilityQueueResult		AddAbility(
+											uint32_t				aSourceEntityInstanceId,
+											uint32_t				aTargetEntityInstanceId,
+											const Vec2&				aAOETarget,
+											const Data::Ability*	aAbility) = 0;
 	};
 
 }

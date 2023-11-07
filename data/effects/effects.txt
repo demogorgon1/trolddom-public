@@ -51,7 +51,7 @@ particle_system firebolt:
 ability fire_damage:
 {
 	string: "Fire"
-	flags: [ offensive ]
+	flags: [ offensive always_in_range always_in_line_of_sight ]
 	icon: icon_fire
 	direct_effect damage:
 	{

@@ -265,12 +265,9 @@ namespace tpublic::Systems
 
 		case EntityState::ID_IN_COMBAT:
 			{
-				int32_t ticksSinceLastCombatEvent = aContext->m_tick - combat->m_lastCombatEventTick;
-				bool isOpenWorld = aContext->m_worldView->GetMapData()->m_type == MapType::ID_OPEN_WORLD;
-
-				if (threat->m_table.IsEmpty() || (ticksSinceLastCombatEvent > 10 * 10 && !isOpenWorld))
+				if (threat->m_table.IsEmpty())
 				{
-					// Empty threat table or no combat events for 10 seconds
+					// Empty threat table 
 					npc->m_targetEntityInstanceId = 0;
 					npc->m_castInProgress.reset();
 
@@ -317,6 +314,9 @@ namespace tpublic::Systems
 								continue;
 
 							if(!combat->HasResourcesForAbility(ability))
+								continue;
+
+							if(!aContext->m_worldView->QueryLineOfSight(targetPosition->m_position, position->m_position))
 								continue;
 
 							if (abilityEntry.m_useProbability == UINT32_MAX || (*aContext->m_random)() < abilityEntry.m_useProbability)
