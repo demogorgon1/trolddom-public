@@ -103,7 +103,7 @@ ability gaze_of_death:
 	description: "Kill target."
 	range: 100
 	cooldown: 100
-	flags: [ offensive target_other target_hostile target_friendly ]
+	flags: [ offensive target_other target_hostile ]
 	states: [ default in_combat ]
 	icon: icon_green_sphere
 	

@@ -86,6 +86,21 @@ namespace tpublic
 					t.m_playerTag = aPlayerTag;
 			}
 
+			bool
+			HasLoot() const
+			{
+				if(m_cash)
+					return true;
+
+				for(const AvailableLoot& t : m_availableLoot)
+				{
+					if(t.m_itemInstance.IsSet())
+						return true;
+				}
+
+				return false;
+			}
+
 			// Public data
 			uint32_t					m_lootTableId = 0;
 			PlayerTag					m_playerTag;

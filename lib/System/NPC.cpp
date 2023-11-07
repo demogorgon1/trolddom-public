@@ -80,7 +80,7 @@ namespace tpublic::Systems
 			return aTicksInState < SPAWN_TICKS ? EntityState::CONTINUE : EntityState::ID_DEFAULT;
 
 		if (aEntityState == EntityState::ID_DESPAWNING)
-			return aTicksInState < DESPAWN_TICKS ? EntityState::CONTINUE : EntityState::DESTROY;
+			return aTicksInState < DESPAWN_TICKS ? EntityState::CONTINUE : EntityState::ID_DESPAWNED;
 
 		const Components::CombatPublic* combat = GetComponent<Components::CombatPublic>(aComponents);
 		Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
@@ -252,6 +252,18 @@ namespace tpublic::Systems
 		
 		switch(aEntityState)
 		{
+		case EntityState::ID_DEAD:
+			{
+				const Components::Lootable* lootable = GetComponent<Components::Lootable>(aComponents);
+				bool hasLoot = lootable->HasLoot();
+				if((hasLoot && aTicksInState >= npc->m_despawnTime.m_ticksWithLoot) || 
+					(!hasLoot && aTicksInState >= npc->m_despawnTime.m_ticksWithoutLoot))
+				{
+					returnValue = EntityState::ID_DESPAWNING;
+				}
+			}
+			break;
+
 		case EntityState::ID_DEFAULT:
 			if (!threat->m_table.IsEmpty())
 			{
@@ -397,7 +409,7 @@ namespace tpublic::Systems
 			}
 		}
 
-		bool block = (aEntityState != EntityState::ID_DEAD && aEntityState != EntityState::ID_DESPAWNING);
+		bool block = (aEntityState != EntityState::ID_DEAD && aEntityState != EntityState::ID_DESPAWNING && aEntityState != EntityState::ID_DESPAWNED);
 
 		if(position->m_block != block)
 		{

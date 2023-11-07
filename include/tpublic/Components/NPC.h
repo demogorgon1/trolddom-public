@@ -204,10 +204,56 @@ namespace tpublic
 				std::vector<ResourceEntry>			m_entries;
 			};
 
+			struct DespawnTime
+			{
+				void
+				FromSource(
+					const Parser::Node*		aSource)
+				{
+					aSource->ForEachChild([&](
+						const Parser::Node* aChild)
+					{
+						if (aChild->m_name == "without_loot_ticks")
+							m_ticksWithoutLoot = aChild->GetInt32();
+						else if (aChild->m_name == "with_loot_ticks")
+							m_ticksWithLoot = aChild->GetInt32();
+						else if (aChild->m_name == "without_loot_mins")
+							m_ticksWithoutLoot = aChild->GetInt32() * 10 * 60;
+						else if (aChild->m_name == "with_loot_mins")
+							m_ticksWithLoot = aChild->GetInt32() * 10 * 60;
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					});
+				}
+
+				void
+				ToStream(
+					IWriter*				aStream) const
+				{
+					aStream->WriteInt(m_ticksWithoutLoot);
+					aStream->WriteInt(m_ticksWithLoot);
+				}
+
+				bool
+				FromStream(
+					IReader*				aStream)
+				{
+					if(!aStream->ReadInt(m_ticksWithoutLoot))
+						return false;
+					if (!aStream->ReadInt(m_ticksWithLoot))
+						return false;
+					return true;
+				}
+				// Public data
+				int32_t								m_ticksWithoutLoot = 2 * 60 * 10; // 2 min
+				int32_t								m_ticksWithLoot = 5 * 60 * 10; // 5 min
+			};
+
 			enum Field
 			{
 				FIELD_STATES,
-				FIELD_RESOURCES
+				FIELD_RESOURCES,
+				FIELD_DESPAWN_TIME
 			};
 
 			static void
@@ -216,6 +262,7 @@ namespace tpublic
 			{
 				aSchema->DefineCustomObjectPointersSingleAppend<StateEntry>(FIELD_STATES, "state", offsetof(NPC, m_states));
 				aSchema->DefineCustomObject<Resources>(FIELD_RESOURCES, "resources", offsetof(NPC, m_resources));
+				aSchema->DefineCustomObject<DespawnTime>(FIELD_DESPAWN_TIME, "despawn_time", offsetof(NPC, m_despawnTime));
 			}
 
 			const StateEntry*
@@ -233,7 +280,8 @@ namespace tpublic
 			// Public data			
 			std::vector<std::unique_ptr<StateEntry>>	m_states;
 			Resources									m_resources;
-			
+			DespawnTime									m_despawnTime;
+
 			// Not serialized
 			Cooldowns									m_cooldowns;
 			std::optional<CastInProgress>				m_castInProgress;

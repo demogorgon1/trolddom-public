@@ -15,8 +15,10 @@ namespace tpublic
 			ID_DEFAULT,
 			ID_SPAWNING,
 			ID_IN_COMBAT,
+			ID_EVADING,
 			ID_DEAD,
 			ID_DESPAWNING,
+			ID_DESPAWNED,
 
 			NUM_IDS
 		};
@@ -31,8 +33,10 @@ namespace tpublic
 			"default",
 			"spawning",
 			"in_combat",
+			"evading",
 			"dead",
-			"despawning"
+			"despawning",
+			"despawned"
 		};
 
 		static_assert(sizeof(ENTITY_STATE_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);
