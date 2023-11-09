@@ -17,16 +17,16 @@ namespace tpublic::DirectEffects
 
 	void
 	Heal::FromSource(
-		const Parser::Node*		aSource) 
+		const SourceNode*		aSource) 
 	{
 		aSource->ForEachChild([&](
-			const Parser::Node*	aChild)
+			const SourceNode*	aChild)
 		{
 			if(!FromSourceBase(aChild))
 			{
 				if(aChild->m_name == "base")
 				{
-					if(aChild->m_type == Parser::Node::TYPE_ARRAY && aChild->m_children.size() == 2)
+					if(aChild->m_type == SourceNode::TYPE_ARRAY && aChild->m_children.size() == 2)
 					{
 						m_baseMin = aChild->m_children[0]->GetUInt32();
 						m_baseMax = aChild->m_children[1]->GetUInt32();

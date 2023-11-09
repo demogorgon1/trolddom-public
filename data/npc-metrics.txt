@@ -1,0 +1,7 @@
+npc_metrics:
+{
+
+	level<1>: { base_weapon_damage: [ 6 8 ] base_resource<health>: 100 base_resource<mana>: 80 elite_weapon_damage: 2 elite_resource<health>: 2 elite_resource<mana>: 2 }
+	level<2>: { base_weapon_damage: [ 7 9 ] base_resource<health>: 110 base_resource<mana>: 88 elite_weapon_damage: 2 elite_resource<health>: 2 elite_resource<mana>: 2 }
+
+}

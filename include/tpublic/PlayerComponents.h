@@ -18,10 +18,10 @@ namespace tpublic
 
 		void
 		FromSource(
-			const Parser::Node*	aSource)
+			const SourceNode*	aSource)
 		{
 			aSource->GetArray()->ForEachChild([&](
-				const Parser::Node* aChild)
+				const SourceNode* aChild)
 			{
 				uint32_t componentId = Component::StringToId(aChild->GetIdentifier());
 				TP_VERIFY(componentId != 0, aChild->m_debugInfo, "'%s' is not a valid component.", aChild->GetIdentifier());

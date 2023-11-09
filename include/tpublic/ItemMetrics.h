@@ -15,10 +15,10 @@ namespace tpublic
 		{
 			void
 			FromSource(
-				const Parser::Node*		aSource)
+				const SourceNode*		aSource)
 			{
 				aSource->ForEachChild([&](
-					const Parser::Node* aChild)
+					const SourceNode* aChild)
 				{
 					if (aChild->m_name == "armor")
 						m_armor = aChild->GetFloat();
@@ -60,17 +60,17 @@ namespace tpublic
 
 		void
 		FromSource(
-			const Parser::Node*			aSource)
+			const SourceNode*			aSource)
 		{
 			aSource->ForEachChild([&](
-				const Parser::Node* aChild)
+				const SourceNode* aChild)
 			{
 				if(aChild->m_name == "base_armor")
 				{
 					aChild->GetArray()->ForEachChild([&](
-						const Parser::Node* aEntry)
+						const SourceNode* aEntry)
 					{
-						TP_VERIFY(aEntry->m_type == Parser::Node::TYPE_ARRAY && aEntry->m_children.size() == 2, aEntry->m_debugInfo, "Not a level-armor pair.");
+						TP_VERIFY(aEntry->m_type == SourceNode::TYPE_ARRAY && aEntry->m_children.size() == 2, aEntry->m_debugInfo, "Not a level-armor pair.");
 						uint32_t level = aEntry->m_children[0]->GetUInt32();
 						uint32_t armor = aEntry->m_children[1]->GetUInt32();
 
@@ -83,9 +83,9 @@ namespace tpublic
 				else if(aChild->m_name == "base_cost")
 				{
 					aChild->GetArray()->ForEachChild([&](
-						const Parser::Node* aEntry)
+						const SourceNode* aEntry)
 					{
-						TP_VERIFY(aEntry->m_type == Parser::Node::TYPE_ARRAY && aEntry->m_children.size() == 2, aEntry->m_debugInfo, "Not a level-cost pair.");
+						TP_VERIFY(aEntry->m_type == SourceNode::TYPE_ARRAY && aEntry->m_children.size() == 2, aEntry->m_debugInfo, "Not a level-cost pair.");
 						uint32_t level = aEntry->m_children[0]->GetUInt32();
 						uint32_t cost = aEntry->m_children[1]->GetUInt32();
 
@@ -98,9 +98,9 @@ namespace tpublic
 				else if(aChild->m_name == "base_1h_weapon_dps")
 				{
 					aChild->GetArray()->ForEachChild([&](
-						const Parser::Node* aEntry)
+						const SourceNode* aEntry)
 					{
-						TP_VERIFY(aEntry->m_type == Parser::Node::TYPE_ARRAY && aEntry->m_children.size() == 2, aEntry->m_debugInfo, "Not a level-dps pair.");
+						TP_VERIFY(aEntry->m_type == SourceNode::TYPE_ARRAY && aEntry->m_children.size() == 2, aEntry->m_debugInfo, "Not a level-dps pair.");
 						uint32_t level = aEntry->m_children[0]->GetUInt32();
 						uint32_t dps = aEntry->m_children[1]->GetUInt32();
 
@@ -113,9 +113,9 @@ namespace tpublic
 				else if(aChild->m_name == "base_2h_weapon_dps")
 				{
 					aChild->GetArray()->ForEachChild([&](
-						const Parser::Node* aEntry)
+						const SourceNode* aEntry)
 					{
-						TP_VERIFY(aEntry->m_type == Parser::Node::TYPE_ARRAY && aEntry->m_children.size() == 2, aEntry->m_debugInfo, "Not a level-dps pair.");
+						TP_VERIFY(aEntry->m_type == SourceNode::TYPE_ARRAY && aEntry->m_children.size() == 2, aEntry->m_debugInfo, "Not a level-dps pair.");
 						uint32_t level = aEntry->m_children[0]->GetUInt32();
 						uint32_t dps = aEntry->m_children[1]->GetUInt32();
 

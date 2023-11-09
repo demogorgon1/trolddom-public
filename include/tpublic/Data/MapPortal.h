@@ -22,10 +22,10 @@ namespace tpublic
 			// Base implementation
 			void
 			FromSource(
-				const Parser::Node*		aSource) override
+				const SourceNode*		aSource) override
 			{
 				aSource->ForEachChild([&](
-					const Parser::Node* aChild)
+					const SourceNode* aChild)
 				{
 					if(aChild->m_name == "map")
 						m_mapId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP, aChild->GetIdentifier());

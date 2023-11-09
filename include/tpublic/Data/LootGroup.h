@@ -22,7 +22,7 @@ namespace tpublic
 			// Base implementation
 			void
 			FromSource(
-				const Parser::Node*		/*aNode*/) override
+				const SourceNode*		/*aNode*/) override
 			{
 			}
 

@@ -21,7 +21,7 @@ namespace tpublic
 				}
 
 				CashRange(
-					const Parser::Node*	aSource)
+					const SourceNode*	aSource)
 				{
 					TP_VERIFY(aSource->m_children.size() == 2, aSource->m_debugInfo, "Range must be an array with two elements.");
 					m_min = (int64_t)aSource->m_children[0]->GetInt32();
@@ -60,10 +60,10 @@ namespace tpublic
 				}
 
 				Possibility(
-					const Parser::Node*	aSource)
+					const SourceNode*	aSource)
 				{
 					aSource->ForEachChild([&](
-						const Parser::Node* aChild)
+						const SourceNode* aChild)
 					{
 						if(aChild->m_name == "weight")
 							m_weight = aChild->GetUInt32();
@@ -106,10 +106,10 @@ namespace tpublic
 				}
 
 				Slot(
-					const Parser::Node*	aSource)
+					const SourceNode*	aSource)
 				{
 					aSource->ForEachChild([&](
-						const Parser::Node* aChild)
+						const SourceNode* aChild)
 					{
 						if(aChild->m_name == "possibility")
 							m_possibilities.push_back(Possibility(aChild));
@@ -147,10 +147,10 @@ namespace tpublic
 			// Base implementation
 			void
 			FromSource(
-				const Parser::Node*		aSource) override
+				const SourceNode*		aSource) override
 			{
 				aSource->ForEachChild([&](
-					const Parser::Node* aChild)
+					const SourceNode* aChild)
 				{
 					if(aChild->m_name == "cash")
 					{
@@ -159,7 +159,7 @@ namespace tpublic
 					else if (aChild->m_name == "slots")
 					{
 						aChild->GetArray()->ForEachChild([&](	
-							const Parser::Node* aSlot)
+							const SourceNode* aSlot)
 						{
 							m_slots.push_back(std::make_unique<Slot>(aSlot));
 						});

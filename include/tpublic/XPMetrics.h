@@ -17,17 +17,17 @@ namespace tpublic
 
 		void
 		FromSource(
-			const Parser::Node*	aSource)
+			const SourceNode*	aSource)
 		{
 			aSource->ForEachChild([&](
-				const Parser::Node* aChild)
+				const SourceNode* aChild)
 			{
 				if(aChild->m_name == "levels")
 				{
 					aChild->GetArray()->ForEachChild([&](
-						const Parser::Node* aEntry)
+						const SourceNode* aEntry)
 					{
-						TP_VERIFY(aEntry->m_type == Parser::Node::TYPE_ARRAY && aEntry->m_children.size() == 2, aEntry->m_debugInfo, "Not a level-xp pair.");
+						TP_VERIFY(aEntry->m_type == SourceNode::TYPE_ARRAY && aEntry->m_children.size() == 2, aEntry->m_debugInfo, "Not a level-xp pair.");
 						uint32_t level = aEntry->m_children[0]->GetUInt32();
 						uint32_t xp = aEntry->m_children[1]->GetUInt32();
 
@@ -43,9 +43,9 @@ namespace tpublic
 				else if(aChild->m_name == "kills")
 				{
 					aChild->GetArray()->ForEachChild([&](
-						const Parser::Node* aEntry)
+						const SourceNode* aEntry)
 					{
-						TP_VERIFY(aEntry->m_type == Parser::Node::TYPE_ARRAY && aEntry->m_children.size() == 2, aEntry->m_debugInfo, "Not a level-xp pair.");
+						TP_VERIFY(aEntry->m_type == SourceNode::TYPE_ARRAY && aEntry->m_children.size() == 2, aEntry->m_debugInfo, "Not a level-xp pair.");
 						uint32_t level = aEntry->m_children[0]->GetUInt32();
 						uint32_t xp = aEntry->m_children[1]->GetUInt32();
 
@@ -64,9 +64,9 @@ namespace tpublic
 					m_maxAdjustmentLevelDiff = INT32_MIN;
 
 					aChild->GetArray()->ForEachChild([&](
-						const Parser::Node* aEntry)
+						const SourceNode* aEntry)
 					{
-						TP_VERIFY(aEntry->m_type == Parser::Node::TYPE_ARRAY && aEntry->m_children.size() == 2, aEntry->m_debugInfo, "Not a level difference-percentage pair.");
+						TP_VERIFY(aEntry->m_type == SourceNode::TYPE_ARRAY && aEntry->m_children.size() == 2, aEntry->m_debugInfo, "Not a level difference-percentage pair.");
 						int32_t levelDiff = aEntry->m_children[0]->GetInt32();
 						uint32_t adjustment = aEntry->m_children[1]->GetUInt32();
 

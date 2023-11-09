@@ -28,15 +28,15 @@ namespace tpublic
 			// Base implementation
 			void
 			FromSource(
-				const Parser::Node*		aNode) override
+				const SourceNode*		aNode) override
 			{	
 				aNode->ForEachChild([&](
-					const Parser::Node* aChild)
+					const SourceNode* aChild)
 				{
 					if(aChild->m_name == "flags")
 					{
 						aChild->GetArray()->ForEachChild([&](
-							const Parser::Node* aFlag)
+							const SourceNode* aFlag)
 						{
 							if(aFlag->IsIdentifier("neutral"))
 								m_flags |= FLAG_NEUTRAL;

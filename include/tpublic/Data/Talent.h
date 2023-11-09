@@ -21,10 +21,10 @@ namespace tpublic
 				}
 
 				Point(
-					const Parser::Node*	aSource)
+					const SourceNode*	aSource)
 				{
 					aSource->ForEachChild([&](
-						const Parser::Node*	aChild)
+						const SourceNode*	aChild)
 					{
 						if (aChild->m_name == "ability")
 							m_abilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
@@ -68,10 +68,10 @@ namespace tpublic
 			// Base implementation
 			void
 			FromSource(
-				const Parser::Node*		aSource) override
+				const SourceNode*		aSource) override
 			{
 				aSource->ForEachChild([&](
-					const Parser::Node*	aChild)
+					const SourceNode*	aChild)
 				{
 					if(aChild->m_name == "string")
 						m_string = aChild->GetString();

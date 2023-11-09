@@ -87,10 +87,10 @@ namespace tpublic
 
 			void
 			FromSource(
-				const Parser::Node*	aSource)
+				const SourceNode*	aSource)
 			{
 				aSource->ForEachChild([&](
-					const Parser::Node* aNode)
+					const SourceNode* aNode)
 				{
 					Id id = StringToId(aNode->m_name.c_str());
 					TP_VERIFY(id != INVALID_ID, aNode->m_debugInfo, "'%s' is not a valid stat.", aNode->m_name.c_str());

@@ -30,10 +30,10 @@ namespace tpublic
 			// AuraEffectBase implementation
 			void
 			FromSource(
-				const Parser::Node*		aSource) override
+				const SourceNode*		aSource) override
 			{
 				aSource->ForEachChild([&](
-					const Parser::Node*	aChild)
+					const SourceNode*	aChild)
 				{
 					if (!FromSourceBase(aChild))
 					{

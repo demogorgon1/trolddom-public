@@ -54,7 +54,7 @@ namespace tpublic
 
 		// Virtual interface
 		virtual void	FromSource(
-							const Parser::Node* aNode) = 0;
+							const SourceNode* aNode) = 0;
 		virtual void	ToStream(
 							IWriter*			aStream) const = 0;
 		virtual bool	FromStream(

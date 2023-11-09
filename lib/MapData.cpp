@@ -41,7 +41,7 @@ namespace tpublic
 	}
 
 	MapData::MapData(
-		const Parser::Node*		aSource)
+		const SourceNode*		aSource)
 		: m_width(0)
 		, m_height(0)
 		, m_type(MapType::ID_OPEN_WORLD)
@@ -58,7 +58,7 @@ namespace tpublic
 		, m_blockLineOfSightBits(NULL)
 	{
 		aSource->GetObject()->ForEachChild([&](
-			const Parser::Node* aNode)
+			const SourceNode* aNode)
 		{
 			if(aNode->m_name == "default_tile")
 				m_defaultTileSpriteId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aNode->GetIdentifier());
@@ -423,7 +423,7 @@ namespace tpublic
 
 	void	
 	MapData::_InitLayers(
-		const Parser::Node*		aLayersArray)
+		const SourceNode*		aLayersArray)
 	{		
 		int32_t minX = INT32_MAX;
 		int32_t minY = INT32_MAX;
@@ -431,7 +431,7 @@ namespace tpublic
 		int32_t maxY = INT32_MIN;
 
 		aLayersArray->ForEachChild([&](
-			const Parser::Node* aLayer)
+			const SourceNode* aLayer)
 		{
 			std::unique_ptr<SourceLayer> layer = std::make_unique<SourceLayer>();
 			layer->m_debugInfo = aLayer->m_debugInfo;
@@ -439,7 +439,7 @@ namespace tpublic
 			std::string sourcePath;
 
 			aLayer->GetObject()->ForEachChild([&](
-				const Parser::Node* aNode)
+				const SourceNode* aNode)
 			{
 				if(aNode->m_name == "palettes")
 				{

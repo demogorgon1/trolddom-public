@@ -31,7 +31,7 @@ namespace tpublic
 					}
 
 					SubCondition(
-						const Parser::Node*	aNode)
+						const SourceNode*	aNode)
 					{
 						if (aNode->m_name == "if")
 							m_type = TYPE_IF;
@@ -73,10 +73,10 @@ namespace tpublic
 				}
 
 				SpawnCondition(
-					const Parser::Node*	aNode)
+					const SourceNode*	aNode)
 				{
 					aNode->GetObject()->ForEachChild([&](
-						const Parser::Node* aChild)
+						const SourceNode* aChild)
 					{
 						m_subConditions.push_back(SubCondition(aChild));
 					});
@@ -106,12 +106,12 @@ namespace tpublic
 			{
 				void
 				FromSource(
-					const Parser::Node*	aNode)
+					const SourceNode*	aNode)
 				{
 					m_entityId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENTITY, aNode->m_name.c_str());
 
 					aNode->GetObject()->ForEachChild([&](
-						const Parser::Node* aChild)
+						const SourceNode* aChild)
 					{
 						if(aChild->m_name == "weight")
 						{
@@ -169,10 +169,10 @@ namespace tpublic
 			{
 				void
 				FromSource(
-					const Parser::Node*	aNode)
+					const SourceNode*	aNode)
 				{
 					aNode->GetObject()->ForEachChild([&](
-						const Parser::Node* aChild)
+						const SourceNode* aChild)
 					{
 						if(aChild->m_name == "min_delay")
 							m_minDelay = aChild->GetInt32();
@@ -228,10 +228,10 @@ namespace tpublic
 			// Base implementation
 			void
 			FromSource(
-				const Parser::Node*		aNode) override
+				const SourceNode*		aNode) override
 			{
 				aNode->GetObject()->ForEachChild([&](
-					const Parser::Node* aChild)
+					const SourceNode* aChild)
 				{
 					if(aChild->m_tag == "entity")
 					{

@@ -25,6 +25,7 @@
 #include "IReader.h"
 #include "ItemMetrics.h"
 #include "IWriter.h"
+#include "NPCMetrics.h"
 #include "PersistentIdTable.h"
 #include "PlayerComponents.h"
 #include "XPMetrics.h"
@@ -302,6 +303,7 @@ namespace tpublic
 			m_playerComponents.ToStream(aStream);
 			m_xpMetrics.ToStream(aStream);
 			m_itemMetrics.ToStream(aStream);
+			m_npcMetrics.ToStream(aStream);
 		}
 		
 		bool
@@ -320,6 +322,8 @@ namespace tpublic
 			if (!m_xpMetrics.FromStream(aStream))
 				return false;
 			if (!m_itemMetrics.FromStream(aStream))
+				return false;
+			if (!m_npcMetrics.FromStream(aStream))
 				return false;
 
 			return true;
@@ -364,6 +368,7 @@ namespace tpublic
 		PlayerComponents								m_playerComponents;
 		XPMetrics										m_xpMetrics;
 		ItemMetrics										m_itemMetrics;
+		NPCMetrics										m_npcMetrics;
 
 	private:
 

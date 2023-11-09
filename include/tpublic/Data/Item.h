@@ -94,11 +94,11 @@ namespace tpublic
 				}
 
 				Node(
-					const Parser::Node*	aSource,
+					const SourceNode*	aSource,
 					bool				aWeighted)
 				{
 					aSource->ForEachChild([&](
-						const Parser::Node* aChild)
+						const SourceNode* aChild)
 					{
 						if(aChild->m_name == "weapon_cooldown")
 							m_properties.push_back({ PROPERTY_TYPE_WEAPON_COOLDOWN, aChild->GetUInt32() });
@@ -128,9 +128,9 @@ namespace tpublic
 							m_chance = aChild->GetProbability();
 						else if (aChild->m_name == "child_weight" && aWeighted)
 							m_weight = aChild->GetUInt32();
-						else if (aChild->m_tag == "stat" && aChild->m_type == Parser::Node::TYPE_ARRAY && aChild->m_children.size() == 2)
+						else if (aChild->m_tag == "stat" && aChild->m_type == SourceNode::TYPE_ARRAY && aChild->m_children.size() == 2)
 							m_addedStats.push_back({ Stat::StringToId(aChild->m_name.c_str()), aChild->m_children[0]->GetUInt32(), aChild->m_children[1]->GetUInt32() });
-						else if (aChild->m_tag == "stat" && aChild->m_type == Parser::Node::TYPE_NUMBER)
+						else if (aChild->m_tag == "stat" && aChild->m_type == SourceNode::TYPE_NUMBER)
 							m_addedStats.push_back({ Stat::StringToId(aChild->m_name.c_str()), aChild->GetUInt32(), aChild->GetUInt32() });
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -221,15 +221,15 @@ namespace tpublic
 			// Base implementation
 			void
 			FromSource(
-				const Parser::Node*		aSource) override
+				const SourceNode*		aSource) override
 			{
 				aSource->ForEachChild([&](
-					const Parser::Node* aChild)
+					const SourceNode* aChild)
 				{
 					if(aChild->m_name == "equipment_slots")
 					{
 						aChild->ForEachChild([&](
-							const Parser::Node* aEquipmentSlot)
+							const SourceNode* aEquipmentSlot)
 						{
 							EquipmentSlot::Id id = EquipmentSlot::StringToId(aEquipmentSlot->GetIdentifier());
 							TP_VERIFY(id != EquipmentSlot::INVALID_ID, aEquipmentSlot->m_debugInfo, "'%s' is not a valid equipment slot.", aEquipmentSlot->GetIdentifier());

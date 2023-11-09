@@ -24,7 +24,7 @@ namespace tpublic
 				}
 
 				AuraEffectEntry(
-					const Parser::Node*		aSource)
+					const SourceNode*		aSource)
 				{
 					m_auraEffectId = AuraEffect::StringToId(aSource->m_name.c_str());
 					TP_VERIFY(m_auraEffectId != AuraEffect::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid aura effect.", aSource->m_name.c_str());
@@ -79,7 +79,7 @@ namespace tpublic
 
 			static Type
 			SourceToType(
-				const Parser::Node*		aSource)
+				const SourceNode*		aSource)
 			{
 				const char* string = aSource->GetIdentifier();
 				if (strcmp(string, "hidden") == 0)
@@ -94,11 +94,11 @@ namespace tpublic
 
 			static uint8_t
 			SourceToFlags(
-				const Parser::Node*		aSource)
+				const SourceNode*		aSource)
 			{
 				uint8_t flags = 0;
 				aSource->GetArray()->ForEachChild([&](
-					const Parser::Node*	aFlag)
+					const SourceNode*	aFlag)
 				{
 					const char* string = aFlag->GetIdentifier();
 					if (strcmp(string, "unique") == 0)
@@ -117,10 +117,10 @@ namespace tpublic
 			// Base implementation
 			void
 			FromSource(
-				const Parser::Node*		aNode) override
+				const SourceNode*		aNode) override
 			{
 				aNode->ForEachChild([&](
-					const Parser::Node* aChild)
+					const SourceNode* aChild)
 				{
 					if(aChild->m_name == "icon")
 						m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());

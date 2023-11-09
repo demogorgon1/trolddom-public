@@ -16,10 +16,10 @@ namespace tpublic
 		}
 
 		Modifier(
-			const Parser::Node*	aSource)
+			const SourceNode*	aSource)
 		{
 			aSource->ForEachChild([&](
-				const Parser::Node*	aChild)
+				const SourceNode*	aChild)
 			{
 				if(aChild->m_name == "add")
 					m_add = aChild->GetFloat();

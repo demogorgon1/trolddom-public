@@ -11,68 +11,6 @@ loot_table test_dungeon_boss_1:
 	]	
 }
 
-entity test_dungeon_boss_1:
-{
-	string: "Ignorg"
-	
-	systems: [ combat npc ]
-	
-	components:
-	{
-		position: { }		
-		threat_target: { }
-		visible_auras: { }
-		auras: { }
-		tag: { }
-		lootable : 
-		{ 
-			loot_table: test_dungeon_boss_1
-		}
-		combat_public: 
-		{  
-			level: 1
-			faction: monsters		
-		}			
-		combat_private:
-		{
-			weapon_damage_range_min: 6 
-			weapon_damage_range_max: 12
-			physical_critical_strike_chance: 5
-			dodge_chance: 5
-			parry_chance: 5
-			miss_chance: 5
-			block_chance: 5
-		}
-		npc: 
-		{ 			
-			state default:
-			{
-			}
-			
-			state in_combat:
-			{
-				abilities:
-				[					
-					{ id: strike }
-				]
-			}
-					
-			resources:
-			{
-				health: 200
-			}			
-		}
-		sprite: 
-		{ 
-			animations:
-			[
-				{ states: [ default in_combat spawning ] frames: [ goblin_boss ] }			
-				{ states: [ dead ] frames: [ goblin_boss_dead ] z_offset: -2 }			
-			]		
-		}		
-	}
-}
-
 loot_table goblin:
 {
 	cash: [ 10 20 ]
@@ -86,129 +24,42 @@ loot_table goblin:
 	]	
 }
 
-entity goblin:
-{
-	string: "Goblin"
-	
-	systems: [ combat npc ]
-	
-	components:
-	{
-		position: { }		
-		threat_target: { }
-		visible_auras: { }
-		auras: { }
-		tag: { }
-		lootable : 
-		{ 
-			loot_table: goblin
-		}
-		combat_public: 
-		{  
-			level: 1
-			faction: monsters		
-		}			
-		combat_private:
-		{
-			weapon_damage_range_min: 4 
-			weapon_damage_range_max: 8
-			physical_critical_strike_chance: 5
-			dodge_chance: 5
-			parry_chance: 5
-			miss_chance: 5
-			block_chance: 0
-		}
-		npc: 
-		{ 			
-			state default:
-			{
-			}
-			
-			state in_combat:
-			{
-				abilities:
-				[					
-					{ id: strike }
-				]
-			}
-					
-			resources:
-			{
-				health: 50
-			}			
-		}
-		sprite: 
-		{ 
-			animations:
-			[
-				{ states: [ default in_combat spawning ] frames: [ goblin ] }			
-				{ states: [ dead ] frames: [ goblin_dead ] z_offset: -2 }	
-			]		
-		}		
-	}
+entity test_dungeon_boss_1: !NPC 
+{ 
+	_string: "Ignorg" 
+	_level: 1 
+	_faction: monsters 
+	_sprite: goblin_boss 
+	_sprite_dead: goblin_boss_dead 
+	_weapon_damage: 1.6 
+	_resource_health: 2 
+	_loot_table: test_dungeon_boss_1
 }
 
-entity goblin_shaman:
+entity goblin: !NPC
 {
-	string: "Goblin Shaman"
-	
-	systems: [ combat npc mana_regen ]
-	
-	components:
-	{
-		position: { }				
-		threat_target: { }
-		visible_auras: { }
-		auras: { }
-		tag: { }
-		lootable : 
-		{ 
-			loot_table: goblin
-		}
-		combat_public: 
-		{  
-			level: 1
-			faction: monsters		
-		}			
-		combat_private:
-		{
-			weapon_damage_range_min: 4 
-			weapon_damage_range_max: 8
-			physical_critical_strike_chance: 5
-			dodge_chance: 5
-			parry_chance: 5
-			miss_chance: 5
-			block_chance: 0
-			mana_regen: 5
-		}
-		npc: 
-		{ 			
-			state default:
-			{
-			}
-			
-			state in_combat:
-			{
-				abilities:
-				[					
-					{ id: firebolt }
-					{ id: strike }
-				]
-			}
-					
-			resources:
-			{
-				health: 40
-				mana: 40
-			}			
-		}
-		sprite: 
-		{ 
-			animations:
-			[
-				{ states: [ default in_combat spawning ] frames: [ goblin_shaman ] }	
-				{ states: [ dead ] frames: [ goblin_shaman_dead ] z_offset: -2 }	
-			]		
-		}
-	}
+	_string: "Goblin"
+	_level: 1
+	_faction: monsters 
+	_sprite: goblin
+	_sprite_dead: goblin_dead 
+	_weapon_damage: 1 
+	_resource_health: 1
+	_loot_table: goblin
 }
+
+entity goblin_shaman: !NPC
+{
+	_string: "Goblin Shaman"
+	_level: 1
+	_faction: monsters 
+	_sprite: goblin_shaman
+	_sprite_dead: goblin_shaman_dead 
+	_weapon_damage: 0.7
+	_resource_health: 0.8
+	_resource_mana: 1
+	_loot_table: goblin
+	_abilities: [ { id: firebolt }{ id: strike } ]
+}
+	
+

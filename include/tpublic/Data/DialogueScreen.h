@@ -22,10 +22,10 @@ namespace tpublic
 				}
 
 				Option(
-					const Parser::Node*	aSource)
+					const SourceNode*	aSource)
 				{
 					aSource->ForEachChild([&](
-						const Parser::Node* aChild)
+						const SourceNode* aChild)
 					{
 						if(aChild->m_name == "goto")
 						{
@@ -91,11 +91,11 @@ namespace tpublic
 				}
 
 				Sell(
-					const Parser::Node* aSource)
+					const SourceNode* aSource)
 				{
 					m_itemId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ITEM, aSource->m_name.c_str());
 					aSource->ForEachChild([&](
-						const Parser::Node* aChild)
+						const SourceNode* aChild)
 					{
 						if(aChild->m_name == "cost")
 							m_cost = aChild->GetUInt32();
@@ -143,7 +143,7 @@ namespace tpublic
 			// DataBase implementation
 			void
 			FromSource(
-				const Parser::Node*		aNode) override
+				const SourceNode*		aNode) override
 			{
 				auto appendString = [&](
 					std::string& aString,
@@ -156,12 +156,12 @@ namespace tpublic
 				};				
 
 				aNode->ForEachChild([&](
-					const Parser::Node* aChild)
+					const SourceNode* aChild)
 				{
 					if(aChild->m_name == "text")
-						aChild->GetArray()->ForEachChild([&](const Parser::Node* aLine) { appendString(m_text, aLine->GetString()); });
+						aChild->GetArray()->ForEachChild([&](const SourceNode* aLine) { appendString(m_text, aLine->GetString()); });
 					else if(aChild->m_name == "options")
-						aChild->GetArray()->ForEachChild([&](const Parser::Node* aOption) { m_options.push_back(Option(aOption)); });
+						aChild->GetArray()->ForEachChild([&](const SourceNode* aOption) { m_options.push_back(Option(aOption)); });
 					else if(aChild->m_tag == "sell")
 						m_sell.push_back(Sell(aChild));
 					else

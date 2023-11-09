@@ -22,10 +22,10 @@ namespace tpublic
 				}
 
 				Entry(
-					const Parser::Node*	aSource)
+					const SourceNode*	aSource)
 				{
 					aSource->ForEachChild([&](
-						const Parser::Node* aChild)
+						const SourceNode* aChild)
 					{
 						if(aChild->m_name == "sprites")						
 							aChild->GetIdArray(DataType::ID_SPRITE, m_sprites);
@@ -81,10 +81,10 @@ namespace tpublic
 			// Base implementation
 			void
 			FromSource(
-				const Parser::Node*		aNode) override
+				const SourceNode*		aNode) override
 			{	
 				aNode->ForEachChild([&](
-					const Parser::Node* aChild)
+					const SourceNode* aChild)
 				{
 					if(aChild->m_name == "particle")
 						m_particles.push_back(std::make_unique<Entry>(aChild));

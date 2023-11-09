@@ -41,7 +41,7 @@ namespace tpublic
 										ComponentBase*			aComponent,
 										const Manifest*			aManifest) const;
 		void						ReadSource(
-										const Parser::Node*		aSource,
+										const SourceNode*		aSource,
 										ComponentBase*			aComponent) const;
 
 	private:

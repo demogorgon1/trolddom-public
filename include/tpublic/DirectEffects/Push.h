@@ -27,7 +27,7 @@ namespace tpublic
 			// DirectEffectBase implementation
 			void
 			FromSource(
-				const Parser::Node*			aSource) override;
+				const SourceNode*			aSource) override;
 			void
 			ToStream(
 				IWriter*					aStream) const override;

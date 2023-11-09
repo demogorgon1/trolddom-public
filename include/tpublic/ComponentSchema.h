@@ -45,12 +45,12 @@ namespace tpublic
 
 		typedef std::function<void(IWriter*, const void*)> CustomWriteCallback;
 		typedef std::function<bool(IReader*, void*)> CustomReadCallback;
-		typedef std::function<void(const Parser::Node*, void*)> CustomReadSourceCallback;
+		typedef std::function<void(const SourceNode*, void*)> CustomReadSourceCallback;
 		typedef std::function<void(void*)> CustomNewCallback;
 		typedef std::function<void(void*)> CustomDeleteCallback;
 		typedef std::function<void(void*, const void*)> InitFromDeprecatedCallback;
 		typedef std::function<void(void*, ReadType, const Manifest*)> OnReadCallback;
-		typedef std::function<void(void*, const Parser::Node*)> SourceModifierCallback;
+		typedef std::function<void(void*, const SourceNode*)> SourceModifierCallback;
 		
 		struct Field
 		{
@@ -98,7 +98,7 @@ namespace tpublic
 							uint32_t				aOffset);
 		void			InitUpgradeChains();
 		void			ReadSource(
-							const Parser::Node*		aSource,
+							const SourceNode*		aSource,
 							void*					aObject) const;
 		void			WriteNetwork(
 							IWriter*				aWriter,
@@ -161,7 +161,7 @@ namespace tpublic
 			assert(!m_sourceModifierCallbacks.contains(aName));
 			m_sourceModifierCallbacks[aName] = [&](
 				void*				aData,
-				const Parser::Node*	aSource)
+				const SourceNode*	aSource)
 			{
 				aSourceModifierCallback((_T*)aData, aSource);
 			};
@@ -223,12 +223,12 @@ namespace tpublic
 			Field* t = DefineCustomObjectPointersNoSource<_T>(aId, aOffset);
 			t->m_name = aName;
 			t->m_customReadSource = [](
-				const Parser::Node*	aSource,
+				const SourceNode*	aSource,
 				void*				aObject)
 			{
 				std::vector<std::unique_ptr<_T>>* p = (std::vector<std::unique_ptr<_T>>*)aObject;
 				aSource->ForEachChild([&](
-					const Parser::Node* aChild)
+					const SourceNode* aChild)
 				{
 					std::unique_ptr<_T> entry = std::make_unique<_T>();
 					entry->FromSource(aChild);
@@ -248,7 +248,7 @@ namespace tpublic
 			Field* t = DefineCustomObjectPointersNoSource<_T>(aId, aOffset);
 			t->m_name = aName;
 			t->m_customReadSource = [](
-				const Parser::Node*	aSource,
+				const SourceNode*	aSource,
 				void*				aObject)
 			{
 				std::vector<std::unique_ptr<_T>>* p = (std::vector<std::unique_ptr<_T>>*)aObject;
@@ -293,12 +293,12 @@ namespace tpublic
 			Field* t = DefineCustomObjectsNoSource<_T>(aId, aOffset);
 			t->m_name = aName;
 			t->m_customReadSource = [](
-				const Parser::Node*	aSource,
+				const SourceNode*	aSource,
 				void*				aObject)
 			{
 				std::vector<_T>* p = (std::vector<_T>*)aObject;
 				aSource->ForEachChild([&](
-					const Parser::Node* aChild)
+					const SourceNode* aChild)
 				{
 					_T entry;
 					entry.FromSource(aChild);
@@ -342,7 +342,7 @@ namespace tpublic
 			Field* t = DefineCustomOptionalObjectNoSource<_T>(aId, aOffset);
 			t->m_name = aName;
 			t->m_customReadSource = [](
-				const Parser::Node*	aSource,
+				const SourceNode*	aSource,
 				void*				aObject)
 			{
 				std::optional<_T>* p = (std::optional<_T>*)aObject;
@@ -387,7 +387,7 @@ namespace tpublic
 			Field* t = DefineCustomObjectNoSource<_T>(aId, aOffset);
 			t->m_name = aName;
 			t->m_customReadSource = [](
-				const Parser::Node*	aSource,
+				const SourceNode*	aSource,
 				void*				aObject)
 			{
 				_T* p = (_T*)aObject;
@@ -430,7 +430,7 @@ namespace tpublic
 			Field* t = DefineCustomPODNoSource<_T>(aId, aOffset);
 			t->m_name = aName;
 			t->m_customReadSource = [](
-				const Parser::Node*	aSource,
+				const SourceNode*	aSource,
 				void*				aObject)
 			{
 				_T* p = (_T*)aObject;

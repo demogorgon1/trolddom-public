@@ -33,7 +33,7 @@ namespace tpublic
 				}
 
 				StartEquipment(
-					const Parser::Node*		aSource)
+					const SourceNode*		aSource)
 				{
 					m_equipmentSlotId = EquipmentSlot::StringToId(aSource->m_name.c_str());
 					TP_VERIFY(m_equipmentSlotId != 0, aSource->m_debugInfo, "'%s' not a valid equipment slot.", aSource->m_name.c_str());
@@ -72,7 +72,7 @@ namespace tpublic
 				}
 
 				StartMap(
-					const Parser::Node*		aSource)
+					const SourceNode*		aSource)
 				{
 					m_mapId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP, aSource->m_name.c_str());
 					aSource->GetIdArray(DataType::ID_MAP_PLAYER_SPAWN, m_mapPlayerSpawnIds);					
@@ -110,13 +110,13 @@ namespace tpublic
 				}
 
 				LevelProgressionLevelResourceUpdate(
-					const Parser::Node*	aNode)
+					const SourceNode*	aNode)
 				{
 					m_resourceId = Resource::StringToId(aNode->m_name.c_str());
 					TP_VERIFY(m_resourceId != 0, aNode->m_debugInfo, "'%s' not a valid resource.", aNode->m_name.c_str());
 
 					aNode->ForEachChild([&](
-						const Parser::Node* aMember)
+						const SourceNode* aMember)
 					{						
 						if (aMember->m_name == "add_max")
 							m_addMax = aMember->GetUInt32();
@@ -157,10 +157,10 @@ namespace tpublic
 				}
 
 				LevelProgressionLevel(
-					const Parser::Node*	aNode)
+					const SourceNode*	aNode)
 				{
 					aNode->ForEachChild([&](
-						const Parser::Node* aMember)
+						const SourceNode* aMember)
 					{						
 						if (aMember->m_name == "level")
 						{
@@ -180,7 +180,7 @@ namespace tpublic
 						}
 						else if(aMember->m_name == "add_unarmed_weapon_damage")
 						{
-							TP_VERIFY(aMember->m_type == Parser::Node::TYPE_ARRAY && aMember->m_children.size() == 2, aMember->m_debugInfo, "Not a valid range.");
+							TP_VERIFY(aMember->m_type == SourceNode::TYPE_ARRAY && aMember->m_children.size() == 2, aMember->m_debugInfo, "Not a valid range.");
 							m_addUnarmedWeaponDamageMin = aMember->m_children[0]->GetUInt32();
 							m_addUnarmedWeaponDamageMax = aMember->m_children[1]->GetUInt32();
 						}
@@ -239,10 +239,10 @@ namespace tpublic
 				}
 
 				LevelProgression(
-					const Parser::Node* aNode)
+					const SourceNode* aNode)
 				{
 					aNode->ForEachChild([&](
-						const Parser::Node* aArrayItem)
+						const SourceNode* aArrayItem)
 					{						
 						m_levels.push_back(std::make_unique<LevelProgressionLevel>(aArrayItem->GetObject()));
 					});
@@ -303,9 +303,9 @@ namespace tpublic
 
 				void
 				FromSource(
-					const Parser::Node*		aSource)
+					const SourceNode*		aSource)
 				{
-					TP_VERIFY(aSource->m_type == Parser::Node::TYPE_ARRAY && aSource->m_children.size() == 2, aSource->m_debugInfo, "Not a valid stats conversion.");
+					TP_VERIFY(aSource->m_type == SourceNode::TYPE_ARRAY && aSource->m_children.size() == 2, aSource->m_debugInfo, "Not a valid stats conversion.");
 					m_numerator = aSource->m_children[0]->GetUInt32();
 					m_denominator = aSource->m_children[1]->GetUInt32();
 				}
@@ -319,10 +319,10 @@ namespace tpublic
 			{
 				void
 				FromSource(
-					const Parser::Node* aNode)
+					const SourceNode* aNode)
 				{
 					aNode->ForEachChild([&](
-						const Parser::Node* aItem)
+						const SourceNode* aItem)
 					{						
 						if (aItem->m_name == "str_to_dps")
 							m_strToDps.FromSource(aItem);
@@ -439,10 +439,10 @@ namespace tpublic
 			// Base implementation
 			void
 			FromSource(
-				const Parser::Node*		aNode) override
+				const SourceNode*		aNode) override
 			{
 				aNode->ForEachChild([&](
-					const Parser::Node* aMember)
+					const SourceNode* aMember)
 				{
 					if(aMember->m_name == "string")
 					{
@@ -462,7 +462,7 @@ namespace tpublic
 					}
 					else if (aMember->m_name == "color_1")
 					{
-						const Parser::Node* components = aMember->GetArray();
+						const SourceNode* components = aMember->GetArray();
 						TP_VERIFY(components->m_children.size() == 3, aMember->m_debugInfo, "'%s' is not a valid color.", aMember->m_name.c_str());
 						m_color1.m_r = components->m_children[0]->GetUInt8();
 						m_color1.m_g = components->m_children[1]->GetUInt8();
@@ -470,7 +470,7 @@ namespace tpublic
 					}
 					else if (aMember->m_name == "color_2")
 					{
-						const Parser::Node* components = aMember->GetArray();
+						const SourceNode* components = aMember->GetArray();
 						TP_VERIFY(components->m_children.size() == 3, aMember->m_debugInfo, "'%s' is not a valid color.", aMember->m_name.c_str());
 						m_color2.m_r = components->m_children[0]->GetUInt8();
 						m_color2.m_g = components->m_children[1]->GetUInt8();

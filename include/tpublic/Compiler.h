@@ -24,9 +24,9 @@ namespace tpublic
 
 	private:
 
-		Manifest*			m_manifest;
-		Parser				m_parser;
-		SourceContext		m_sourceContext;
+		Manifest*							m_manifest;
+		Parser								m_parser;
+		SourceContext						m_sourceContext;
 
 		void	_ParseDirectory(
 					const char*			aPath);

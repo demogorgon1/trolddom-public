@@ -22,15 +22,15 @@ namespace tpublic
 			{
 				void
 				FromSource(
-					const Parser::Node*	aSource)
+					const SourceNode*	aSource)
 				{
 					aSource->ForEachChild([&](
-						const Parser::Node*	aChild)
+						const SourceNode*	aChild)
 					{
 						if (aChild->m_name == "states")
 						{
 							aChild->GetArray()->ForEachChild([&](
-								const Parser::Node* aState)
+								const SourceNode* aState)
 							{
 								EntityState::Id entityState = EntityState::StringToId(aState->GetIdentifier());
 								TP_VERIFY(entityState != EntityState::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid entity state.", aState->GetIdentifier());

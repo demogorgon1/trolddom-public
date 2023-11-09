@@ -9,6 +9,7 @@
 #include "FileWriter.h"
 #include "MapImageOutput.h"
 #include "MemoryWriter.h"
+#include "PostProcessEntities.h"
 #include "SpriteSheetBuilder.h"
 #include "Tokenizer.h"
 
@@ -34,6 +35,8 @@ namespace tpublic
 	{
 		// Recursively parse all .txt files in root path
 		_ParseDirectory(aRootPath);
+
+		m_parser.ResolveMacrosAndReferences();
 	}
 
 	void	
@@ -48,7 +51,7 @@ namespace tpublic
 
 		// Read source
 		m_parser.GetRoot()->ForEachChild([&](
-			const Parser::Node* aNode)
+			const SourceNode* aNode)
 		{
 			if(aNode->m_name == "player_components")
 			{
@@ -61,6 +64,10 @@ namespace tpublic
 			else if (aNode->m_name == "item_metrics")
 			{
 				m_manifest->m_itemMetrics.FromSource(aNode);
+			}
+			else if (aNode->m_name == "npc_metrics")
+			{
+				m_manifest->m_npcMetrics.FromSource(aNode);
 			}
 			else if(aNode->GetObject()->m_name == "sprites")
 			{
@@ -128,6 +135,9 @@ namespace tpublic
 			});			
 		}
 
+		// Post process entities
+		PostProcessEntities::Run(m_manifest);
+
 		// Export manifest 
 		{
 			std::vector<uint8_t> uncompressed;
@@ -163,7 +173,6 @@ namespace tpublic
 				if(entry.path().filename().string().c_str()[0] != '_')
 				{
 					Tokenizer tokenizer(entry.path().string().c_str());
-
 					m_parser.Parse(tokenizer);
 				}
 			}

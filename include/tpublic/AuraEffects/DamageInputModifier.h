@@ -29,15 +29,15 @@ namespace tpublic
 			// AuraEffectBase implementation
 			void
 			FromSource(
-				const Parser::Node*		aSource) override
+				const SourceNode*		aSource) override
 			{
 				aSource->ForEachChild([&](
-					const Parser::Node* aChild)
+					const SourceNode* aChild)
 				{
 					if(aChild->m_name == "type_mask")
 					{
 						aChild->GetArray()->ForEachChild([&](
-							const Parser::Node* aFlag)
+							const SourceNode* aFlag)
 						{
 							if(aFlag->IsIdentifier("all"))
 							{

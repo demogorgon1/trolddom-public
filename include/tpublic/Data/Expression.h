@@ -23,7 +23,7 @@ namespace tpublic
 			// Base implementation
 			void
 			FromSource(
-				const Parser::Node*		aSource) override
+				const SourceNode*		aSource) override
 			{	
 				m_root = std::make_unique<Expr::Node>(aSource, Expr::OP_AND);
 			}

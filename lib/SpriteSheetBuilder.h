@@ -20,7 +20,7 @@ namespace tpublic
 				~SpriteSheetBuilder();
 
 		void	AddSprites(
-					const Parser::Node*		aSource);
+					const SourceNode*		aSource);
 		void	GenerateStackedTiles(
 					TileStackCache*			aTileStackCache,
 					Manifest*				aManifest);
@@ -101,7 +101,7 @@ namespace tpublic
 		uint32_t							m_nextUnnamedIndex;
 
 		Sprite*	_CreateSprite(
-					const Parser::Node*	aNode,
+					const SourceNode*	aNode,
 					const char*			aName,
 					uint32_t			aSize);
 		Sprite*	_GetSprite(

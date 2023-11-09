@@ -10,7 +10,7 @@ namespace tpublic::DirectEffects
 
 	void
 	Push::FromSource(
-		const Parser::Node*			/*aSource*/) 
+		const SourceNode*			/*aSource*/) 
 	{
 	}
 

@@ -16,10 +16,10 @@ namespace tpublic::DirectEffects
 
 	void
 	Damage::FromSource(
-		const Parser::Node*		aSource)
+		const SourceNode*		aSource)
 	{
 		aSource->ForEachChild([&](
-			const Parser::Node*	aChild)
+			const SourceNode*	aChild)
 		{
 			if(!FromSourceBase(aChild))
 			{
@@ -29,7 +29,7 @@ namespace tpublic::DirectEffects
 				}
 				else if(aChild->m_name == "base")
 				{
-					if(aChild->m_type == Parser::Node::TYPE_ARRAY)
+					if(aChild->m_type == SourceNode::TYPE_ARRAY)
 					{
 						m_damageBase = DirectEffect::DAMAGE_BASE_RANGE;
 
@@ -48,7 +48,7 @@ namespace tpublic::DirectEffects
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid damage base definition.", aChild->m_name.c_str());
 						}
 					}
-					else if(aChild->m_type == Parser::Node::TYPE_IDENTIFIER && aChild->m_value == "weapon")
+					else if(aChild->m_type == SourceNode::TYPE_IDENTIFIER && aChild->m_value == "weapon")
 					{
 						m_damageBase = DirectEffect::DAMAGE_BASE_WEAPON;
 					}

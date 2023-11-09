@@ -60,10 +60,10 @@ namespace tpublic
 				}
 
 				MapPalette(
-					const Parser::Node*		aSource)
+					const SourceNode*		aSource)
 				{
 					aSource->ForEachChild([&](
-						const Parser::Node*	aChild)
+						const SourceNode*	aChild)
 					{
 						MapPaletteEntry entry;
 
@@ -145,10 +145,10 @@ namespace tpublic
 			// Base implementation
 			void
 			FromSource(
-				const Parser::Node*		aSource) override
+				const SourceNode*		aSource) override
 			{
 				aSource->ForEachChild([&](
-					const Parser::Node*	aChild)
+					const SourceNode*	aChild)
 				{
 					if(aChild->m_name == "string")
 					{
@@ -165,7 +165,7 @@ namespace tpublic
 					else if(aChild->m_name == "map")
 					{
 						aChild->GetArray()->ForEachChild([&](
-							const Parser::Node* aMapRow)
+							const SourceNode* aMapRow)
 						{
 							m_map.push_back(aMapRow->GetString());
 						});

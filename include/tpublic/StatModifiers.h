@@ -15,10 +15,10 @@ namespace tpublic
 		}
 
 		StatModifiers(
-			const Parser::Node*		aSource)
+			const SourceNode*		aSource)
 		{
 			aSource->ForEachChild([&](
-				const Parser::Node*	aChild)
+				const SourceNode*	aChild)
 			{
 				Stat::Id statId = Stat::StringToId(aChild->m_name.c_str());
 				TP_VERIFY(statId != Stat::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid stat.", aChild->m_name.c_str());

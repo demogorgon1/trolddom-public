@@ -28,7 +28,7 @@ namespace tpublic
 			// AuraEffectBase implementation
 			void
 			FromSource(
-				const Parser::Node*		/*aSource*/) override
+				const SourceNode*		/*aSource*/) override
 			{
 			}
 

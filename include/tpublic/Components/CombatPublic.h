@@ -92,7 +92,7 @@ namespace tpublic
 
 				aSchema->AddSourceModifier<CombatPublic>("not_pushable", [](
 					CombatPublic*		aCombatPublic,
-					const Parser::Node*	/*aSource*/)
+					const SourceNode*	/*aSource*/)
 				{
 					aCombatPublic->m_combatFlags &= ~COMBAT_FLAG_PUSHABLE;
 				});
@@ -130,6 +130,18 @@ namespace tpublic
 					}
 				}
 				return 0;
+			}
+
+			ResourceEntry*
+			GetResourceEntry(
+				uint32_t				aResourceId)
+			{
+				for (ResourceEntry& t : m_resources)
+				{
+					if (t.m_id == aResourceId)
+						return &t;
+				}
+				return NULL;
 			}
 
 			void

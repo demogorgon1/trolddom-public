@@ -67,10 +67,10 @@ namespace tpublic
 			// Base implementation
 			void
 			FromSource(
-				const Parser::Node*		aNode) override
+				const SourceNode*		aNode) override
 			{
 				aNode->GetObject()->ForEachChild([&](
-					const Parser::Node*	aChild)
+					const SourceNode*	aChild)
 				{
 					Entry entry;
 					if (aChild->m_tag == "tile")
@@ -98,7 +98,7 @@ namespace tpublic
 						TP_VERIFY(false, aChild->m_debugInfo, "Invalid 'map_palette' item.");
 					}
 
-					TP_VERIFY(aChild->m_type == Parser::Node::TYPE_ARRAY, aChild->m_debugInfo, "Not an array.");
+					TP_VERIFY(aChild->m_type == SourceNode::TYPE_ARRAY, aChild->m_debugInfo, "Not an array.");
 					TP_VERIFY(aChild->m_children.size() == 3, aChild->m_debugInfo, "Not a valid RGB color.");
 
 					entry.m_color.m_r = aChild->m_children[0]->GetUInt8();

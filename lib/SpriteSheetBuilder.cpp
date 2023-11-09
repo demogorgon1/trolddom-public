@@ -64,7 +64,7 @@ namespace tpublic
 
 	void	
 	SpriteSheetBuilder::AddSprites(
-		const Parser::Node*			aSource)
+		const SourceNode*			aSource)
 	{
 		uint32_t offsetX = 0;
 		uint32_t offsetY = 0;
@@ -74,7 +74,7 @@ namespace tpublic
 		Image sourceImage;
 
 		aSource->ForEachChild([&](
-			const Parser::Node*		aNode)
+			const SourceNode*		aNode)
 		{
 			if(aNode->m_name == "source")
 			{				
@@ -84,11 +84,11 @@ namespace tpublic
 			else if(aNode->m_name == "cursor")
 			{				
 				aNode->GetObject()->ForEachChild([&](
-					const Parser::Node* aCursorNode)
+					const SourceNode* aCursorNode)
 				{	
 					if(aCursorNode->m_name == "position")
 					{
-						TP_VERIFY(aCursorNode->m_type == Parser::Node::TYPE_ARRAY && aCursorNode->m_children.size() == 2, aCursorNode->m_debugInfo, "Invalid cursor position.");
+						TP_VERIFY(aCursorNode->m_type == SourceNode::TYPE_ARRAY && aCursorNode->m_children.size() == 2, aCursorNode->m_debugInfo, "Invalid cursor position.");
 						offsetX = aCursorNode->m_children[0]->GetUInt32();
 						offsetY = aCursorNode->m_children[1]->GetUInt32();
 					}
@@ -100,7 +100,7 @@ namespace tpublic
 			}
 			else if (aNode->m_name == "size")
 			{
-				if(aNode->m_type == Parser::Node::TYPE_IDENTIFIER && aNode->m_value == "source")
+				if(aNode->m_type == SourceNode::TYPE_IDENTIFIER && aNode->m_value == "source")
 				{
 					width = sourceImage.GetWidth();
 					height = sourceImage.GetHeight();
@@ -108,7 +108,7 @@ namespace tpublic
 				else
 				{
 					aNode->GetObject()->ForEachChild([&](
-						const Parser::Node* aSizeComponent)
+						const SourceNode* aSizeComponent)
 					{	
 						if(aSizeComponent->m_name == "width")
 							width = aSizeComponent->GetUInt32();
@@ -132,12 +132,12 @@ namespace tpublic
 				offsetX += width; // Automatically advance horizontally
 
 				aNode->GetObject()->ForEachChild([&](
-					const Parser::Node* aSpriteComponent)
+					const SourceNode* aSpriteComponent)
 				{
 					if(aSpriteComponent->m_name == "flags")
 					{
 						aSpriteComponent->GetArray()->ForEachChild([&](
-							const Parser::Node* aFlag)
+							const SourceNode* aFlag)
 						{
 							uint8_t flag = SpriteInfo::StringToFlag(aFlag->GetIdentifier());
 							TP_VERIFY(flag != 0, aFlag->m_debugInfo, "Not a valid sprite flag.");
@@ -154,16 +154,16 @@ namespace tpublic
 					}
 					else if(aSpriteComponent->m_name == "origin")
 					{
-						TP_VERIFY(aSpriteComponent->m_type == Parser::Node::TYPE_ARRAY && aSpriteComponent->m_children.size() == 2, aSpriteComponent->m_debugInfo, "Not a valid vector.");
+						TP_VERIFY(aSpriteComponent->m_type == SourceNode::TYPE_ARRAY && aSpriteComponent->m_children.size() == 2, aSpriteComponent->m_debugInfo, "Not a valid vector.");
 						sprite->m_info.m_origin.m_x = aSpriteComponent->m_children[0]->GetInt32();
 						sprite->m_info.m_origin.m_y = aSpriteComponent->m_children[1]->GetInt32();
 					}
 					else if(aSpriteComponent->m_name == "anchors")
 					{
 						aSpriteComponent->GetObject()->ForEachChild([&](
-							const Parser::Node* aAnchor)
+							const SourceNode* aAnchor)
 						{
-							TP_VERIFY(aAnchor->m_type == Parser::Node::TYPE_ARRAY && aAnchor->m_children.size() == 4, aAnchor->m_debugInfo, "Not a valid named anchor.");
+							TP_VERIFY(aAnchor->m_type == SourceNode::TYPE_ARRAY && aAnchor->m_children.size() == 4, aAnchor->m_debugInfo, "Not a valid named anchor.");
 							SpriteInfo::NamedAnchor t;
 							t.m_name = aAnchor->m_name;
 							t.m_position.m_x = aAnchor->m_children[0]->GetInt32();
@@ -324,7 +324,7 @@ namespace tpublic
 
 	SpriteSheetBuilder::Sprite* 
 	SpriteSheetBuilder::_CreateSprite(
-		const Parser::Node*		aNode,
+		const SourceNode*		aNode,
 		const char*				aName,
 		uint32_t				aSize)
 	{

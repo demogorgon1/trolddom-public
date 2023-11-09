@@ -2,8 +2,10 @@
 
 #include "DataType.h"
 #include "DataErrorHandling.h"
+#include "Macro.h"
 #include "PersistentIdTable.h"
 #include "SourceContext.h"
+#include "SourceNode.h"
 
 namespace tpublic
 {
@@ -13,247 +15,94 @@ namespace tpublic
 	class Parser
 	{
 	public:
-		struct Node
+							Parser(
+								SourceContext*		aSourceContext);
+							~Parser();
+
+		void				Parse(
+								Tokenizer&			aTokenizer);
+		void				ResolveMacrosAndReferences();
+		void				DebugPrint() const;
+
+		// Data access
+		const SourceNode*	GetRoot() const { return &m_root; }
+
+	private:
+
+		struct MacroNamespace
 		{
-			enum Type
-			{
-				TYPE_NONE,
-				TYPE_OBJECT,
-				TYPE_ARRAY,
-				TYPE_NUMBER,
-				TYPE_STRING,
-				TYPE_IDENTIFIER
-			};
-
-			Node(
-				SourceContext*						aSourceContext,
-				const DataErrorHandling::DebugInfo&	aDebugInfo,
-				const char*							aPath)
-				: m_type(TYPE_NONE)
-				, m_sourceContext(aSourceContext)
-				, m_debugInfo(aDebugInfo)
-				, m_path(aPath)
-			{
-
-			}
-
 			void
-			ForEachChild(
-				std::function<void(const Node*)>	aCallback) const
+			InsertMacro(
+				std::unique_ptr<Macro>&						aMacro)
 			{
-				for(const std::unique_ptr<Node>& child : m_children)
-					aCallback(child.get());
+				TP_VERIFY(!m_table.contains(aMacro->m_name), aMacro->m_debugInfo, "'%s' already exists in macro namespace.", aMacro->m_name.c_str());
+				m_table[aMacro->m_name] = std::move(aMacro);
 			}
 
-			const char*
-			GetString() const
+			const Macro*
+			GetMacro(
+				const char*									aName) const
 			{
-				TP_VERIFY(m_type == TYPE_STRING, m_debugInfo, "Not a string.");
-				return m_value.c_str();
-			}
-
-			const char*
-			GetIdentifier() const
-			{
-				TP_VERIFY(m_type == TYPE_IDENTIFIER, m_debugInfo, "Not an identifier.");
-				return m_value.c_str();
-			}
-
-			uint32_t
-			GetProbability() const 
-			{
-				float f = GetFloat();
-				TP_VERIFY(f >= 0.0f && f <= 100.0f, m_debugInfo, "Probability must be between 0 and 100.");
-				return (uint32_t)((f / 100.0f) * (float)UINT32_MAX);
-			}
-
-			uint64_t
-			GetUInt64() const
-			{
-				TP_VERIFY(m_type == TYPE_NUMBER, m_debugInfo, "Not a number.");
-				uintmax_t v = strtoumax(m_value.c_str(), NULL, 10);
-				TP_VERIFY(v <= UINT64_MAX, m_debugInfo, "Number out of bounds.");
-				return (uint64_t)v;
-			}
-
-			int64_t
-			GetInt64() const
-			{
-				TP_VERIFY(m_type == TYPE_NUMBER, m_debugInfo, "Not a number.");
-				intmax_t v = strtoimax(m_value.c_str(), NULL, 10);
-				TP_VERIFY(v <= INT64_MAX && v >= INT64_MIN, m_debugInfo, "Number out of bounds.");
-				return (int64_t)v;
-			}
-
-			uint32_t
-			GetUInt32() const
-			{
-				TP_VERIFY(m_type == TYPE_NUMBER, m_debugInfo, "Not a number.");
-				uintmax_t v = strtoumax(m_value.c_str(), NULL, 10);
-				TP_VERIFY(v <= UINT32_MAX, m_debugInfo, "Number out of bounds.");
-				return (uint32_t)v;
-			}
-
-			int32_t
-			GetInt32() const
-			{
-				TP_VERIFY(m_type == TYPE_NUMBER, m_debugInfo, "Not a number.");
-				intmax_t v = strtoimax(m_value.c_str(), NULL, 10);
-				TP_VERIFY(v <= INT32_MAX && v >= INT32_MIN, m_debugInfo, "Number out of bounds.");
-				return (int32_t)v;
-			}
-
-			uint8_t
-			GetUInt8() const
-			{
-				uint32_t v = GetUInt32();
-				TP_VERIFY(v <= UINT8_MAX, m_debugInfo, "Number out of bounds.");
-				return (uint8_t)v;
-			}
-
-			float
-			GetFloat() const
-			{
-				TP_VERIFY(m_type == TYPE_NUMBER, m_debugInfo, "Not a number.");
-				return strtof(m_value.c_str(), NULL);
-			}
-
-			bool
-			GetBool() const
-			{
-				if (m_value == "true" || m_value == "on" || m_value == "yes" || m_value == "1")
-					return true;
-				if (m_value == "false" || m_value == "off" || m_value == "no" || m_value == "0")
-					return false;
-				TP_VERIFY(false, m_debugInfo, "Not a bool.");
-				return false;			
-			}
-
-			const Node*
-			GetArray() const
-			{
-				TP_VERIFY(m_type == TYPE_ARRAY, m_debugInfo, "Not an array.");
-				return this;
-			}
-
-			const Node*
-			GetObject() const
-			{
-				TP_VERIFY(m_type == TYPE_OBJECT, m_debugInfo, "Not an object.");
-				return this;
-			}
-
-			void
-			GetIdArray(
-				DataType::Id				aDataType,
-				std::vector<uint32_t>&		aOut) const
-			{
-				TP_VERIFY(m_type == TYPE_ARRAY, m_debugInfo, "Not an array.");
-				for (const std::unique_ptr<Node>& child : m_children)
-					aOut.push_back(m_sourceContext->m_persistentIdTable->GetId(aDataType, child->GetIdentifier()));
-			}
-
-			template <typename _T>
-			_T
-			GetFlags(
-				std::function<_T(const char*)> aLookup) const
-			{
-				TP_VERIFY(m_type == TYPE_ARRAY, m_debugInfo, "Not an array.");
-				_T flags = 0;
-				for (const std::unique_ptr<Node>& child : m_children)
-				{
-					_T flag = aLookup(child->GetIdentifier());
-					TP_VERIFY(flag != _T(0), m_debugInfo, "'%s' is not a valid flag.", child->GetIdentifier());
-					flags |= flag;
-				}
-				return flags;
-			}
-
-			template <typename _T, _T _Invalid>
-			void
-			GetIdArrayWithLookup(
-				std::vector<_T>&				aOut,
-				std::function<_T(const char*)>	aLookup) const
-			{
-				TP_VERIFY(m_type == TYPE_ARRAY, m_debugInfo, "Not an array.");
-				for (const std::unique_ptr<Node>& child : m_children)
-				{
-					_T id = aLookup(child->GetIdentifier());
-					TP_VERIFY(id != _Invalid, m_debugInfo, "'%s' is not a valid identifier.", child->GetIdentifier());
-					aOut.push_back(id);
-				}
-			}
-
-			template <typename _T>
-			void
-			GetObjectArray(
-				std::vector<_T>&				aOut) const
-			{
-				TP_VERIFY(m_type == TYPE_ARRAY, m_debugInfo, "Not an array.");
-				for (const std::unique_ptr<Node>& child : m_children)
-				{
-					_T object(child->GetObject());
-					aOut.push_back(object);
-				}
-			}
-
-			template <typename _T>
-			void
-			GetUIntArray(
-				std::vector<_T>& aOut) const
-			{
-				TP_VERIFY(m_type == TYPE_ARRAY, m_debugInfo, "Not an array.");
-				for (const std::unique_ptr<Node>& child : m_children)
-					aOut.push_back((_T)child->GetUInt32());
-			}
-
-			bool
-			IsIdentifier(
-				const char*						aString) const
-			{
-				return m_type == TYPE_IDENTIFIER && m_value == aString;
+				Table::const_iterator i = m_table.find(aName);
+				if(i != m_table.cend())
+					return i->second.get();
+				return NULL;
 			}
 
 			// Public data
-			Type								m_type;
-			SourceContext*						m_sourceContext;
-
-			std::string							m_name;
-			std::string							m_tag;
-			std::string							m_value;
-			std::string							m_path;
-			DataErrorHandling::DebugInfo		m_debugInfo;
-
-			std::vector<std::unique_ptr<Node>>	m_children;
+			typedef std::unordered_map<std::string, std::unique_ptr<Macro>> Table;
+			Table			m_table;
 		};
 
-					Parser(
-						SourceContext*		aSourceContext);
-					~Parser();
+		SourceNode									m_root;
 
-		void		Parse(
-						Tokenizer&			aTokenizer);
-		void		DebugPrint() const;
+		typedef std::unordered_map<std::string, std::unique_ptr<MacroNamespace>> MacroNamespaceTable;
+		MacroNamespaceTable							m_macroNamespaceTable;
 
-		// Data access
-		const Node*	GetRoot() const { return &m_root; }
-
-	private:
+		std::vector<std::unique_ptr<SourceNode>>	m_referenceObjects;
 		
-		Node		m_root;
-		
-		void	_ParseObject(
-					Tokenizer&				aTokenizer,
-					Node*					aObject);
-		void	_ParseArray(
-					Tokenizer&				aTokenizer,
-					Node*					aArray);
-		void	_ParseValue(
-					Tokenizer&				aTokenizer,
-					Node*					aParent);
-		void	_DebugPrint(
-					const Node*				aNode,
-					uint32_t				aLevel) const;
+		void					_ParseObject(
+									Tokenizer&						aTokenizer,
+									const char*						aEndToken,
+									SourceNode*						aObject);
+		void					_ParseArray(
+									Tokenizer&						aTokenizer,
+									SourceNode*						aArray);
+		void					_ParseValue(
+									Tokenizer&						aTokenizer,
+									SourceNode*						aParent);
+		void					_ParseExpression(
+									Tokenizer&						aTokenizer,
+									SourceNode*						aParent);
+		void					_DebugPrint(
+									const SourceNode*				aNode,
+									uint32_t						aLevel) const;
+		MacroNamespace*			_GetOrCreateMacroNamespace(
+									const char*						aPath);
+		const MacroNamespace*	_GetMacroNamespace(
+									const char*						aPath) const;
+		void					_ResolveMacrosAndReferences(
+									SourceNode*						aNode);
+		const Macro*			_FindMacro(
+									const char*						aPath,
+									const char*						aName);
+		SourceNode*				_ExprOrs(
+									Tokenizer&						aTokenizer);
+		SourceNode*				_ExprAnds(
+									Tokenizer&						aTokenizer);
+		SourceNode*				_ExprEquals(
+									Tokenizer&						aTokenizer);
+		SourceNode*				_ExprSummands(
+									Tokenizer&						aTokenizer);
+		SourceNode*				_ExprFactors(
+									Tokenizer&						aTokenizer);
+		SourceNode*				_ExprExponentials(
+									Tokenizer&						aTokenizer);
+		SourceNode*				_ExprOperand(
+									Tokenizer&						aTokenizer);
+		std::string				_EvaluateExpression(
+									const SourceNode*				aSourceNode);
+
 	};
 	
 }

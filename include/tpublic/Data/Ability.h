@@ -40,7 +40,7 @@ namespace tpublic
 
 			static inline Resource::Id
 			GetResourceId(
-				const Parser::Node*			aSource)
+				const SourceNode*			aSource)
 			{
 				Resource::Id resourceId = Resource::StringToId(aSource->m_name.c_str());
 				TP_VERIFY(resourceId != Resource::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid resource id.", aSource->m_name.c_str());
@@ -49,11 +49,11 @@ namespace tpublic
 
 			static inline uint32_t
 			GetFlags(
-				const Parser::Node*			aSource)
+				const SourceNode*			aSource)
 			{
 				uint32_t flags = 0;
 				aSource->GetArray()->ForEachChild([&](
-					const Parser::Node*		aChild)
+					const SourceNode*		aChild)
 				{
 					const char* identifier = aChild->GetIdentifier();
 					if (strcmp(identifier, "target_self") == 0)
@@ -104,7 +104,7 @@ namespace tpublic
 				}
 
 				DirectEffectEntry(
-					const Parser::Node*		aSource)
+					const SourceNode*		aSource)
 				{
 					m_directEffectId = DirectEffect::StringToId(aSource->m_name.c_str());
 					TP_VERIFY(m_directEffectId != DirectEffect::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid direct effect.", aSource->m_name.c_str());
@@ -153,12 +153,12 @@ namespace tpublic
 				}
 
 				AOEEntitySpawnEntry(
-					const Parser::Node*		aSource)
+					const SourceNode*		aSource)
 				{
 					m_entityId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENTITY, aSource->m_name.c_str());
 					
 					aSource->ForEachChild([&](
-						const Parser::Node* aChild)
+						const SourceNode* aChild)
 					{
 						if(aChild->m_name == "probability")
 						{
@@ -240,10 +240,10 @@ namespace tpublic
 				}
 
 				ConsumeItems(
-					const Parser::Node*		aSource)
+					const SourceNode*		aSource)
 				{
 					aSource->ForEachChild([&](
-						const Parser::Node* aChild)
+						const SourceNode* aChild)
 					{
 						ConsumedItem t;
 						t.m_itemId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ITEM, aChild->m_name.c_str());
@@ -310,10 +310,10 @@ namespace tpublic
 			// Base implementation
 			void
 			FromSource(
-				const Parser::Node*		aNode) override
+				const SourceNode*		aNode) override
 			{
 				aNode->ForEachChild([&](
-					const Parser::Node* aMember)
+					const SourceNode* aMember)
 				{
 					if(aMember->m_name == "string")
 						m_displayName = aMember->GetString();

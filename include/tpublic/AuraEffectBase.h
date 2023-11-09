@@ -29,7 +29,7 @@ namespace tpublic
 
 		bool
 		FromSourceBase(
-			const Parser::Node*							aSource)
+			const SourceNode*							aSource)
 		{
 			if(aSource->m_name == "update_interval")
 			{
@@ -102,7 +102,7 @@ namespace tpublic
 
 		// Virtual methods
 		virtual void			FromSource(
-									const Parser::Node*			/*aSource*/) { assert(false); }
+									const SourceNode*			/*aSource*/) { assert(false); }
 		virtual void			ToStream(
 									IWriter*					/*aStream*/) const { assert(false); }
 		virtual bool			FromStream(

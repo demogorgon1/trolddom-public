@@ -3,6 +3,7 @@
 #include "../CastInProgress.h"
 #include "../Component.h"
 #include "../Cooldowns.h"
+#include "../DialogueScript.h"
 #include "../EntityState.h"
 #include "../Resource.h"
 
@@ -28,10 +29,10 @@ namespace tpublic
 				}
 
 				AbilityEntry(
-					const Parser::Node*		aSource)
+					const SourceNode*		aSource)
 				{
 					aSource->GetObject()->ForEachChild([&](
-						const Parser::Node* aChild)
+						const SourceNode* aChild)
 					{
 						if(aChild->m_name == "id")
 							m_abilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
@@ -70,18 +71,18 @@ namespace tpublic
 			{
 				void
 				FromSource(
-					const Parser::Node*		aSource)
+					const SourceNode*		aSource)
 				{
 					m_entityState = EntityState::StringToId(aSource->m_name.c_str());
 					TP_VERIFY(m_entityState != EntityState::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid entity state.", aSource->GetIdentifier());
 
 					aSource->GetObject()->ForEachChild([&](
-						const Parser::Node* aChild)
+						const SourceNode* aChild)
 					{
 						if(aChild->m_name == "abilities")
 						{
 							aChild->GetArray()->ForEachChild([&](
-								const Parser::Node* aAbility)
+								const SourceNode* aAbility)
 							{
 								m_abilities.push_back(AbilityEntry(aAbility));
 							});
@@ -171,10 +172,10 @@ namespace tpublic
 			{				
 				void
 				FromSource(
-					const Parser::Node*		aSource)
+					const SourceNode*		aSource)
 				{
 					aSource->ForEachChild([&](
-						const Parser::Node* aChild)
+						const SourceNode* aChild)
 					{
 						ResourceEntry t;
 						t.m_id = Resource::StringToId(aChild->m_name.c_str());
@@ -200,6 +201,18 @@ namespace tpublic
 					return true;
 				}
 
+				ResourceEntry*
+				GetResourceEntry(
+					uint32_t				aResourceId)
+				{
+					for(ResourceEntry& t : m_entries)
+					{
+						if(t.m_id == aResourceId)
+							return &t;
+					}
+					return NULL;
+				}
+
 				// Public data
 				std::vector<ResourceEntry>			m_entries;
 			};
@@ -208,10 +221,10 @@ namespace tpublic
 			{
 				void
 				FromSource(
-					const Parser::Node*		aSource)
+					const SourceNode*		aSource)
 				{
 					aSource->ForEachChild([&](
-						const Parser::Node* aChild)
+						const SourceNode* aChild)
 					{
 						if (aChild->m_name == "without_loot_ticks")
 							m_ticksWithoutLoot = aChild->GetInt32();

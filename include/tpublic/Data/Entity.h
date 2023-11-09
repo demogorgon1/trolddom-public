@@ -4,6 +4,7 @@
 #include "../ComponentManager.h"
 #include "../DataBase.h"
 #include "../EntityInstance.h"
+#include "../Resource.h"
 #include "../System.h"
 
 namespace tpublic
@@ -17,6 +18,36 @@ namespace tpublic
 		{
 			static const DataType::Id DATA_TYPE = DataType::ID_ENTITY;
 
+			struct Modifiers
+			{
+				void
+				FromSource(
+					const SourceNode*			aSource)
+				{
+					aSource->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if(aChild->m_name == "weapon_damage")
+						{
+							m_weaponDamage = aChild->GetFloat();
+						}
+						else if(aChild->m_name == "resource")
+						{
+							TP_VERIFY(aChild->m_annotation, aChild->m_debugInfo, "Missing resource annotation.");
+							Resource::Id resourceId = Resource::StringToId(aChild->m_annotation->GetIdentifier());
+							TP_VERIFY(resourceId != Resource::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid resource.", aChild->m_annotation->GetIdentifier());
+							m_resources[resourceId] = aChild->GetFloat();
+						}
+					});
+				}
+
+				// Public data - not serialized
+				std::optional<float>					m_weaponDamage;
+
+				typedef std::unordered_map<Resource::Id, float> Resources;
+				Resources								m_resources;
+			};
+
 			struct ComponentEntry
 			{
 				ComponentEntry()
@@ -26,7 +57,7 @@ namespace tpublic
 				}
 
 				ComponentEntry(
-					const Parser::Node* aSource)
+					const SourceNode* aSource)
 				{
 					m_componentId = Component::StringToId(aSource->m_name.c_str());
 					TP_VERIFY(m_componentId != Component::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid component.", aSource->m_name.c_str());
@@ -105,13 +136,37 @@ namespace tpublic
 				}
 			}
 
+			template <typename _T>
+			_T*
+			TryGetComponent()
+			{
+				for (std::unique_ptr<ComponentEntry>& componentEntry : m_components)
+				{
+					if(componentEntry->m_componentBase->Is<_T>())
+						return componentEntry->m_componentBase->Cast<_T>();
+				}
+				return NULL;
+			}
+
+			template <typename _T>
+			const _T*
+			TryGetComponent() const
+			{
+				for (const std::unique_ptr<ComponentEntry>& componentEntry : m_components)
+				{
+					if(componentEntry->m_componentBase->Is<_T>())
+						return componentEntry->m_componentBase->Cast<_T>();
+				}
+				return NULL;
+			}
+
 			// Base implementation
 			void
 			FromSource(
-				const Parser::Node*		aNode) override
+				const SourceNode*		aNode) override
 			{
 				aNode->ForEachChild([&](
-					const Parser::Node*	aMember)
+					const SourceNode*	aMember)
 				{
 					if (aMember->m_name == "string")
 					{
@@ -120,7 +175,7 @@ namespace tpublic
 					else if(aMember->m_name == "components")
 					{
 						aMember->GetObject()->ForEachChild([&](
-							const Parser::Node* aComponentMember)
+							const SourceNode* aComponentMember)
 						{
 							m_components.push_back(std::make_unique<ComponentEntry>(aComponentMember));
 						});
@@ -128,12 +183,16 @@ namespace tpublic
 					else if (aMember->m_name == "systems")
 					{
 						aMember->GetArray()->ForEachChild([&](
-							const Parser::Node* aArrayItem)
+							const SourceNode* aArrayItem)
 						{
 							uint32_t systemId = System::StringToId(aArrayItem->GetIdentifier());
 							TP_VERIFY(systemId != System::INVALID_ID, aArrayItem->m_debugInfo, "'%s' not a valid system.", aArrayItem->m_name.c_str());
 							m_systems.push_back(systemId);
 						});
+					}
+					else if(aMember->m_name == "modifiers")
+					{
+						m_modifiers.FromSource(aMember);
 					}
 					else
 					{
@@ -177,6 +236,9 @@ namespace tpublic
 			std::string										m_displayName;
 			std::vector<uint32_t>							m_systems;
 			std::vector<std::unique_ptr<ComponentEntry>>	m_components;
+
+			// Not serialized
+			Modifiers										m_modifiers;
 		};
 
 	}

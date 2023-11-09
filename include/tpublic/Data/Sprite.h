@@ -23,7 +23,7 @@ namespace tpublic
 			// Base implementation
 			void
 			FromSource(
-				const Parser::Node*		aNode) override
+				const SourceNode*		aNode) override
 			{
 				TP_VERIFY(false, aNode->m_debugInfo, "'sprite' must be defined in a sprite sheet.");
 			}

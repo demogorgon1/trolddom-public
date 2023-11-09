@@ -163,7 +163,7 @@ namespace tpublic
 
 	void				
 	ComponentManager::ReadSource(
-		const Parser::Node*		aSource,
+		const SourceNode*		aSource,
 		ComponentBase*			aComponent) const
 	{
 		const ComponentType& t = m_componentTypes[aComponent->GetComponentId()];

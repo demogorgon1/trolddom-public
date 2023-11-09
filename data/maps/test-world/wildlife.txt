@@ -50,126 +50,27 @@ loot_table boar:
 	]	
 }
 
-entity deer:
+entity deer: !NPC
 {
-	string: "Deer"
-	
-	systems: [ combat npc ]
-	
-	components:
-	{
-		position: { }		
-		threat_target: { }
-		visible_auras: { }
-		auras: { }
-		tag: { }
-		lootable : 
-		{ 
-			loot_table: deer
-		}
-		combat_public: 
-		{  
-			level: 1
-			faction: wildlife		
-		}			
-		combat_private:
-		{
-			weapon_damage_range_min: 3 
-			weapon_damage_range_max: 7
-			physical_critical_strike_chance: 5
-			dodge_chance: 5
-			parry_chance: 5
-			miss_chance: 5
-			block_chance: 0
-		}
-		npc: 
-		{ 			
-			state default:
-			{
-			}
-			
-			state in_combat:
-			{
-				abilities:
-				[					
-					{ id: strike }
-				]
-			}
-					
-			resources:
-			{
-				health: 50
-			}			
-		}
-		sprite: 
-		{ 
-			animations:
-			[
-				{ states: [ default in_combat spawning ] frames: [ deer ] }			
-				{ states: [ dead ] frames: [ deer_dead ] z_offset: -2 }	
-			]		
-		}		
-	}
+	_string: "Deer"
+	_level: 1
+	_faction: wildlife
+	_sprite: deer
+	_sprite_dead: deer_dead 
+	_weapon_damage: 1 
+	_resource_health: 1
+	_loot_table: deer	
 }
-
-entity boar:
+	
+entity boar: !NPC
 {
-	string: "Boar"
-	
-	systems: [ combat npc ]
-	
-	components:
-	{
-		position: { }		
-		threat_target: { }
-		visible_auras: { }
-		auras: { }
-		tag: { }
-		lootable : 
-		{ 
-			loot_table: boar
-		}
-		combat_public: 
-		{  
-			level: 1
-			faction: wildlife		
-		}			
-		combat_private:
-		{
-			weapon_damage_range_min: 3 
-			weapon_damage_range_max: 7
-			physical_critical_strike_chance: 5
-			dodge_chance: 5
-			parry_chance: 5
-			miss_chance: 5
-			block_chance: 0
-		}
-		npc: 
-		{ 			
-			state default:
-			{
-			}
-			
-			state in_combat:
-			{
-				abilities:
-				[					
-					{ id: strike }
-				]
-			}
-					
-			resources:
-			{
-				health: 50
-			}			
-		}
-		sprite: 
-		{ 
-			animations:
-			[
-				{ states: [ default in_combat spawning ] frames: [ boar ] }			
-				{ states: [ dead ] frames: [ boar_dead ] z_offset: -2 }	
-			]		
-		}		
-	}
+	_string: "Boar"
+	_level: 1
+	_faction: wildlife
+	_sprite: boar
+	_sprite_dead: boar_dead 
+	_weapon_damage: 1 
+	_resource_health: 1
+	_loot_table: boar	
 }
+	

@@ -61,6 +61,13 @@ namespace tpublic
 			return (_T*)this;
 		}
 
+		template <typename _T>
+		bool
+		Is() const
+		{
+			return m_componentId == _T::ID;
+		}
+
 		void
 		SetComponentId(
 			uint32_t											aComponentId)

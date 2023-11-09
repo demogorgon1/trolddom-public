@@ -78,14 +78,14 @@ namespace tpublic
 			}
 
 			Node(
-				const Parser::Node*	aSource,
+				const SourceNode*	aSource,
 				Op					aOp)
 				: m_op(aOp)
 			{
 				TP_VERIFY(m_op != INVALID_OP, aSource->m_debugInfo, "'%s' is not a valid operation.", aSource->m_name.c_str());
 
 				aSource->ForEachChild([&](
-					const Parser::Node* aChild)
+					const SourceNode* aChild)
 				{
 					m_children.push_back(std::make_unique<Node>(aChild, StringToOp(aChild->m_name.c_str())));
 				});

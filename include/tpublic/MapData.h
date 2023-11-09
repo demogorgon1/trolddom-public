@@ -120,7 +120,7 @@ namespace tpublic
 			}
 
 			ScriptCondition(
-				const Parser::Node*			aSource)
+				const SourceNode*			aSource)
 			{
 				if(aSource->m_name == "trigger_not_set")
 					m_type = TYPE_TRIGGER_NOT_SET;
@@ -138,7 +138,7 @@ namespace tpublic
 				else if(m_type == TYPE_ENTITY_STATE)
 				{
 					aSource->ForEachChild([&](
-						const Parser::Node* aChild)
+						const SourceNode* aChild)
 					{
 						if(aChild->m_name == "entity_spawn")
 						{
@@ -208,7 +208,7 @@ namespace tpublic
 			}
 
 			ScriptCommand(
-				const Parser::Node*			aSource)
+				const SourceNode*			aSource)
 			{
 				if(aSource->m_name == "set_trigger")
 					m_type = TYPE_SET_TRIGGER;
@@ -255,10 +255,10 @@ namespace tpublic
 			}
 
 			Script(
-				const Parser::Node*			aSource)
+				const SourceNode*			aSource)
 			{
 				aSource->ForEachChild([&](
-					const Parser::Node* aChild)
+					const SourceNode* aChild)
 				{
 					if(aChild->m_tag == "condition")
 					{
@@ -267,7 +267,7 @@ namespace tpublic
 					else if(aChild->m_name == "run")
 					{	
 						aChild->GetObject()->ForEachChild([&](
-							const Parser::Node* aCommand)
+							const SourceNode* aCommand)
 						{
 							m_commands.push_back(ScriptCommand(aCommand));
 						});
@@ -305,7 +305,7 @@ namespace tpublic
 
 				MapData();
 				MapData(
-					const Parser::Node*		aSource);
+					const SourceNode*		aSource);
 				~MapData();
 
 		void	Build(
@@ -391,7 +391,7 @@ namespace tpublic
 	private:
 
 		void		_InitLayers(
-						const Parser::Node*		aLayersArray);
+						const SourceNode*		aLayersArray);
 		void		_InitBits(
 						const Manifest*			aManifest);
 		uint32_t	_GetTile(

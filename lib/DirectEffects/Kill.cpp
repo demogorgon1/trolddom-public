@@ -10,7 +10,7 @@ namespace tpublic::DirectEffects
 
 	void
 	Kill::FromSource(
-		const Parser::Node*			/*aSource*/) 
+		const SourceNode*			/*aSource*/) 
 	{
 	}
 

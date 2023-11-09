@@ -108,11 +108,11 @@ namespace tpublic
 
 	void			
 	ComponentSchema::ReadSource(
-		const Parser::Node*	aSource,
+		const SourceNode*	aSource,
 		void*				aObject) const
 	{
 		aSource->ForEachChild([&](
-			const Parser::Node* aChild)
+			const SourceNode* aChild)
 		{
 			if(aChild->m_tag == "modifier")
 			{
@@ -135,7 +135,7 @@ namespace tpublic
 				{
 				case TYPE_VEC2:
 					{
-						TP_VERIFY(aChild->m_children.size() == 2 && aChild->m_type == Parser::Node::TYPE_ARRAY, aChild->m_debugInfo, "Syntax error.");
+						TP_VERIFY(aChild->m_children.size() == 2 && aChild->m_type == SourceNode::TYPE_ARRAY, aChild->m_debugInfo, "Syntax error.");
 						Vec2* t = (Vec2*)&(((const uint8_t*)aObject)[field->m_offset]);
 						t->m_x = aChild->m_children[0]->GetInt32();
 						t->m_y = aChild->m_children[1]->GetInt32();
@@ -190,10 +190,10 @@ namespace tpublic
 
 				case TYPE_UINT32_ARRAY:
 					{
-						TP_VERIFY(aChild->m_type == Parser::Node::TYPE_ARRAY, aChild->m_debugInfo, "Syntax error.");
+						TP_VERIFY(aChild->m_type == SourceNode::TYPE_ARRAY, aChild->m_debugInfo, "Syntax error.");
 						std::vector<uint32_t>* t = (std::vector<uint32_t>*)&(((const uint8_t*)aObject)[field->m_offset]);
 						aChild->ForEachChild([t](
-							const Parser::Node* aElement)
+							const SourceNode* aElement)
 						{
 							t->push_back(aElement->GetUInt32());
 						});

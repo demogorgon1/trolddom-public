@@ -97,7 +97,10 @@ namespace tpublic
 		{
 			WriteUInt(aObjects.size());
 			for(const std::unique_ptr<_T>& object : aObjects)
+			{
+				assert(object);
 				object->ToStream(this);
+			}
 		}
 
 		template <typename _T>
