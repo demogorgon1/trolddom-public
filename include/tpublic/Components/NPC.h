@@ -300,6 +300,7 @@ namespace tpublic
 			std::optional<CastInProgress>				m_castInProgress;
 			uint32_t									m_targetEntityInstanceId = 0;
 			int32_t										m_moveCooldownUntilTick = 0;
+			Vec2										m_anchorPosition;
 		};
 	}
 

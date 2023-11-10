@@ -269,6 +269,8 @@ namespace tpublic::Systems
 			{
 				threat->m_lastPingTick = 0; // Force a threat ping (will cause nearby allies to join)
 
+				npc->m_anchorPosition = position->m_position; // Remember this position, this is where we'll go back to if we evade
+
 				npc->m_targetEntityInstanceId = threat->m_table.GetTop()->m_entityInstanceId;
 				npc->SetDirty();
 				returnValue = EntityState::ID_IN_COMBAT;
@@ -287,7 +289,7 @@ namespace tpublic::Systems
 					tag->m_playerTag.Clear();
 					tag->SetDirty();
 
-					returnValue = EntityState::ID_DEFAULT;
+					returnValue = EntityState::ID_EVADING;
 				}
 				else if(auras->HasEffect(AuraEffect::ID_STUN))
 				{
@@ -367,6 +369,22 @@ namespace tpublic::Systems
 			}
 			break;
 
+		case EntityState::ID_EVADING:
+			if(position->m_position == npc->m_anchorPosition)
+			{
+				returnValue = EntityState::ID_DEFAULT;
+			}
+			else if(npc->m_moveCooldownUntilTick < aContext->m_tick)
+			{
+				int32_t dx = npc->m_anchorPosition.m_x - position->m_position.m_x;
+				int32_t dy = npc->m_anchorPosition.m_y - position->m_position.m_y;
+
+				aContext->m_moveRequestQueue->AddMoveRequest(aEntityInstanceId, Vec2(dx, dy));
+
+				npc->m_moveCooldownUntilTick = aContext->m_tick + 2;
+			}
+			break;
+
 		default:
 			break;
 		}
@@ -409,7 +427,7 @@ namespace tpublic::Systems
 			}
 		}
 
-		bool block = (aEntityState != EntityState::ID_DEAD && aEntityState != EntityState::ID_DESPAWNING && aEntityState != EntityState::ID_DESPAWNED);
+		bool block = (aEntityState != EntityState::ID_DEAD && aEntityState != EntityState::ID_EVADING && aEntityState != EntityState::ID_DESPAWNING && aEntityState != EntityState::ID_DESPAWNED);
 
 		if(position->m_block != block)
 		{

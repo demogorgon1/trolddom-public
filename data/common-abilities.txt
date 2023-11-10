@@ -162,3 +162,19 @@ ability immortality:
 	}
 }
 
+ability smoke_bomb:
+{
+	string: "Smoke Bomb"
+	description: "Drop all threat."
+	cooldown: 100
+	flags: [ target_self ]
+	states: [ default in_combat ]	
+	icon: icon_smoke
+	
+	direct_effect threat:
+	{	
+		apply_to: all
+		multiply: 0
+	}
+}
+

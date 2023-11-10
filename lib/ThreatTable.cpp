@@ -53,54 +53,7 @@ namespace tpublic
 		{
 			entry = i->second;
 
-			entry->m_threat += aThreat;
-
-			if(aThreat > 0)
-			{
-				// Move up the list	
-				while(entry->m_prev != NULL && entry->m_prev->m_threat < entry->m_threat)
-				{
-					Entry* prev = entry->m_prev;
-
-					if (entry->m_next != NULL)
-						entry->m_next->m_prev = entry->m_prev;
-					else
-						m_tail = entry->m_prev;
-
-					if (entry->m_prev != NULL)
-						entry->m_prev->m_next = entry->m_next;
-					else
-						m_head = entry->m_next;
-
-					entry->m_next = NULL;
-					entry->m_prev = NULL;
-
-					_InsertBefore(entry, prev);
-				}
-			}
-			else
-			{
-				// Move down the list				
-				while (entry->m_next != NULL && entry->m_next->m_threat > entry->m_threat)
-				{
-					Entry* next = entry->m_next;
-
-					if (next->m_next != NULL)
-						next->m_next->m_prev = next->m_prev;
-					else
-						m_tail = next->m_prev;
-
-					if (next->m_prev != NULL)
-						next->m_prev->m_next = next->m_next;
-					else
-						m_head = next->m_next;
-
-					next->m_next = NULL;
-					next->m_prev = NULL;
-
-					_InsertBefore(next, entry);
-				}
-			}
+			_Add(entry, aThreat);
 		}
 		else
 		{
@@ -125,6 +78,32 @@ namespace tpublic
 		}
 
 		entry->m_tick = aTick;
+	}
+
+	void			
+	ThreatTable::Multiply(
+		uint32_t					aTick,
+		uint32_t					aEntityInstanceId,
+		float						aFactor)
+	{
+		assert(aFactor > 0.0f);
+
+		Table::iterator i = m_table.find(aEntityInstanceId);
+		if (i != m_table.end())
+		{
+			Entry* entry = i->second;
+
+			int32_t threatChange = 0;
+
+			if(aFactor < 1.0f)
+				threatChange = -(int32_t)((float)entry->m_threat * (1.0f - aFactor));
+			else if (aFactor > 1.0f)
+				threatChange = (int32_t)((float)entry->m_threat * (aFactor - 1.0f));
+
+			_Add(entry, threatChange);
+
+			entry->m_tick = aTick;
+		}
 	}
 
 	void	
@@ -215,6 +194,61 @@ namespace tpublic
 			m_head = aEntry->m_next;
 
 		delete aEntry;
+	}
+
+	void
+	ThreatTable::_Add(
+		Entry*			aEntry,
+		int32_t			aThreat)
+	{
+		aEntry->m_threat += aThreat;
+
+		if (aThreat > 0)
+		{
+			// Move up the list	
+			while (aEntry->m_prev != NULL && aEntry->m_prev->m_threat < aEntry->m_threat)
+			{
+				Entry* prev = aEntry->m_prev;
+
+				if (aEntry->m_next != NULL)
+					aEntry->m_next->m_prev = aEntry->m_prev;
+				else
+					m_tail = aEntry->m_prev;
+
+				if (aEntry->m_prev != NULL)
+					aEntry->m_prev->m_next = aEntry->m_next;
+				else
+					m_head = aEntry->m_next;
+
+				aEntry->m_next = NULL;
+				aEntry->m_prev = NULL;
+
+				_InsertBefore(aEntry, prev);
+			}
+		}
+		else
+		{
+			// Move down the list				
+			while (aEntry->m_next != NULL && aEntry->m_next->m_threat > aEntry->m_threat)
+			{
+				Entry* next = aEntry->m_next;
+
+				if (next->m_next != NULL)
+					next->m_next->m_prev = next->m_prev;
+				else
+					m_tail = next->m_prev;
+
+				if (next->m_prev != NULL)
+					next->m_prev->m_next = next->m_next;
+				else
+					m_head = next->m_next;
+
+				next->m_next = NULL;
+				next->m_prev = NULL;
+
+				_InsertBefore(next, aEntry);
+			}
+		}
 	}
 
 }

@@ -34,6 +34,10 @@ namespace tpublic
 							uint32_t					aTick,
 							uint32_t					aEntityInstanceId,
 							int32_t						aThreat);
+		void			Multiply(
+							uint32_t					aTick,
+							uint32_t					aEntityInstanceId,
+							float						aFactor);
 		void			Remove(
 							uint32_t					aEntityInstanceId);
 		void			Clear();
@@ -58,6 +62,9 @@ namespace tpublic
 					Entry*						aInsertBefore);
 		void	_Remove(
 					Entry*						aEntry);
+		void	_Add(
+					Entry*						aEntry,
+					int32_t						aThreat);
 	};
 
 }

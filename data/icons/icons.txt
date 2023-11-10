@@ -72,6 +72,7 @@ sprites:
 	sprite icon_shoe_1 : { }
 	sprite icon_holy_condemnation : { }
 	sprite icon_holy_blessing : { }
+	sprite icon_smoke : { }
 	
 }
 

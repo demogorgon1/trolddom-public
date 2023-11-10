@@ -189,6 +189,7 @@ class fighter:
 				dont_touch_me_bro
 				immortality 
 				push
+				smoke_bomb
 			]
 						
 			stats:
