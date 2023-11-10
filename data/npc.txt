@@ -60,7 +60,9 @@
 				]
 				
 				<exists _abilities> abilities: @_abilities
-			}					
+			}	
+
+			<exists _default_behavior_state> default_behavior_state: @_default_behavior_state
 		}
 		sprite: 
 		{ 

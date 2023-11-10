@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../Data/NPCBehaviorState.h"
+
 #include "../CastInProgress.h"
 #include "../Component.h"
 #include "../Cooldowns.h"
@@ -266,7 +268,8 @@ namespace tpublic
 			{
 				FIELD_STATES,
 				FIELD_RESOURCES,
-				FIELD_DESPAWN_TIME
+				FIELD_DESPAWN_TIME,
+				FIELD_DEFAULT_BEHAVIOR_STATE
 			};
 
 			static void
@@ -276,6 +279,7 @@ namespace tpublic
 				aSchema->DefineCustomObjectPointersSingleAppend<StateEntry>(FIELD_STATES, "state", offsetof(NPC, m_states));
 				aSchema->DefineCustomObject<Resources>(FIELD_RESOURCES, "resources", offsetof(NPC, m_resources));
 				aSchema->DefineCustomObject<DespawnTime>(FIELD_DESPAWN_TIME, "despawn_time", offsetof(NPC, m_despawnTime));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_DEFAULT_BEHAVIOR_STATE, "default_behavior_state", offsetof(NPC, m_defaultBehaviorState))->SetDataType(DataType::ID_NPC_BEHAVIOR_STATE);
 			}
 
 			const StateEntry*
@@ -294,13 +298,17 @@ namespace tpublic
 			std::vector<std::unique_ptr<StateEntry>>	m_states;
 			Resources									m_resources;
 			DespawnTime									m_despawnTime;
+			uint32_t									m_defaultBehaviorState = 0;
 
 			// Not serialized
 			Cooldowns									m_cooldowns;
 			std::optional<CastInProgress>				m_castInProgress;
 			uint32_t									m_targetEntityInstanceId = 0;
 			int32_t										m_moveCooldownUntilTick = 0;
+			Vec2										m_spawnPosition;
 			Vec2										m_anchorPosition;
+			const Data::NPCBehaviorState*				m_npcBehaviorState = NULL;
+			uint32_t									m_npcBehaviorStateTick = 0;
 		};
 	}
 

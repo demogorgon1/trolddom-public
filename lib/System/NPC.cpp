@@ -52,20 +52,30 @@ namespace tpublic::Systems
 		EntityState::Id			/*aEntityState*/,
 		ComponentBase**			aComponents,
 		int32_t					/*aTick*/)
-	{
-		Components::CombatPublic* combat = GetComponent<Components::CombatPublic>(aComponents);
-		const Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
-
-		for(const Components::NPC::ResourceEntry& resource : npc->m_resources.m_entries)
+	{		
+		Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
+	
+		// Initialize resources
 		{
-			combat->AddResourceMax(resource.m_id, resource.m_max);
+			Components::CombatPublic* combat = GetComponent<Components::CombatPublic>(aComponents);
 
-			const Resource::Info* info = Resource::GetInfo((Resource::Id)resource.m_id);
-			if(info->m_flags & Resource::FLAG_DEFAULT_TO_MAX)
-				combat->SetResourceToMax(resource.m_id);
+			for (const Components::NPC::ResourceEntry& resource : npc->m_resources.m_entries)
+			{
+				combat->AddResourceMax(resource.m_id, resource.m_max);
+
+				const Resource::Info* info = Resource::GetInfo((Resource::Id)resource.m_id);
+				if (info->m_flags & Resource::FLAG_DEFAULT_TO_MAX)
+					combat->SetResourceToMax(resource.m_id);
+			}
+
+			combat->SetDirty();
 		}
 
-		combat->SetDirty();
+		// Remember spawn position
+		{
+			const Components::Position* position = GetComponent<Components::Position>(aComponents);
+			npc->m_spawnPosition = position->m_position;
+		}
 	}
 
 	EntityState::Id
@@ -272,8 +282,55 @@ namespace tpublic::Systems
 				npc->m_anchorPosition = position->m_position; // Remember this position, this is where we'll go back to if we evade
 
 				npc->m_targetEntityInstanceId = threat->m_table.GetTop()->m_entityInstanceId;
+				npc->m_npcBehaviorState = NULL;
+				npc->m_moveCooldownUntilTick = 0;
 				npc->SetDirty();
+
 				returnValue = EntityState::ID_IN_COMBAT;
+			}
+			else if(npc->m_npcBehaviorState == NULL && npc->m_defaultBehaviorState != 0)
+			{
+				npc->m_npcBehaviorState = GetManifest()->m_npcBehaviorStates.GetById(npc->m_defaultBehaviorState);
+				npc->m_npcBehaviorStateTick = aContext->m_tick;
+			}
+			else if(npc->m_npcBehaviorState != NULL)
+			{
+				if(npc->m_npcBehaviorState->m_maxTicks != 0 && (aContext->m_tick - npc->m_npcBehaviorStateTick) > npc->m_npcBehaviorState->m_maxTicks)
+				{
+					// FIXME: do something
+				}
+				else
+				{
+					switch(npc->m_npcBehaviorState->m_behavior)
+					{
+					case NPCBehavior::ID_WANDERING:
+						if (npc->m_moveCooldownUntilTick < aContext->m_tick)
+						{
+							static const Vec2 WANDER_DIRECTIONS[] = 
+							{
+								{ 1, 0 },
+								{ 0, 1 },
+								{ -1, 0 },
+								{ 0, -1 }
+							};
+
+							size_t randomIndex = aContext->m_random->operator()() % 4;
+							const Vec2& direction = WANDER_DIRECTIONS[randomIndex];
+							Vec2 newPosition = { direction.m_x + position->m_position.m_x, direction.m_y + position->m_position.m_y };
+							Vec2 spawnDirection = { newPosition.m_x - npc->m_spawnPosition.m_x, newPosition.m_y - npc->m_spawnPosition.m_y };
+							int32_t spawnSquaredDistance = spawnDirection.m_x * spawnDirection.m_x + spawnDirection.m_y * spawnDirection.m_y;
+
+							if(spawnSquaredDistance <= (int32_t)(npc->m_npcBehaviorState->m_maxRange * npc->m_npcBehaviorState->m_maxRange))
+								aContext->m_moveRequestQueue->AddMoveRequest(aEntityInstanceId, Vec2(direction.m_x, direction.m_y));
+
+							npc->m_moveCooldownUntilTick = aContext->m_tick + 10 + (uint32_t)aContext->m_random->operator()() % 10;
+						}
+						break;
+
+					default:
+						break;
+					}
+				}
 			}
 			break;
 

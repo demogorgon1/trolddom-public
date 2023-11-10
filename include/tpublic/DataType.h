@@ -31,6 +31,7 @@ namespace tpublic
 			ID_DIALOGUE_SCREEN,
 			ID_EXPRESSION,
 			ID_DIALOGUE_ROOT,
+			ID_NPC_BEHAVIOR_STATE,
 
 			NUM_IDS
 		};
@@ -59,7 +60,8 @@ namespace tpublic
 			"particle_system",
 			"dialogue_screen",
 			"expression",
-			"dialogue_root"
+			"dialogue_root",
+			"npc_behavior_state"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

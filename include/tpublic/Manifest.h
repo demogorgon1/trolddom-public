@@ -17,6 +17,7 @@
 #include "Data/MapPlayerSpawn.h"
 #include "Data/MapPortal.h"
 #include "Data/MapTrigger.h"
+#include "Data/NPCBehaviorState.h"
 #include "Data/ParticleSystem.h"
 #include "Data/Sprite.h"
 #include "Data/Talent.h"
@@ -269,6 +270,7 @@ namespace tpublic
 			RegisterDataContainer(m_mapPlayerSpawns);
 			RegisterDataContainer(m_mapPortals);
 			RegisterDataContainer(m_mapTriggers);
+			RegisterDataContainer(m_npcBehaviorStates);
 			RegisterDataContainer(m_particleSystems);
 			RegisterDataContainer(m_sprites);
 			RegisterDataContainer(m_talents);
@@ -357,6 +359,7 @@ namespace tpublic
 		DataContainer<Data::MapPlayerSpawn>				m_mapPlayerSpawns;
 		DataContainer<Data::MapPortal>					m_mapPortals;
 		DataContainer<Data::MapTrigger>					m_mapTriggers;
+		DataContainer<Data::NPCBehaviorState>			m_npcBehaviorStates;
 		DataContainer<Data::ParticleSystem>				m_particleSystems;
 		DataContainer<Data::Sprite>						m_sprites;
 		DataContainer<Data::Talent>						m_talents;
