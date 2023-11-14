@@ -103,6 +103,8 @@ namespace tpublic
 				Data::Map* aMap)
 			{
 				aMap->m_data->Build(m_manifest, &tileStackCache);
+
+				aMap->m_data->ConstructMapPathData(m_manifest);
 			});			
 		}
 
@@ -184,3 +186,4 @@ namespace tpublic
 	}
 
 }
+

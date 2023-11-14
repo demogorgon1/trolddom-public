@@ -3,7 +3,10 @@
 #include <tpublic/Image.h>
 #include <tpublic/Manifest.h>
 #include <tpublic/MapData.h>
+#include <tpublic/MapPathData.h>
 #include <tpublic/TileStackCache.h>
+
+#include "MapPathDataBuilder.h"
 
 namespace tpublic
 {
@@ -292,6 +295,18 @@ namespace tpublic
 	}
 
 	void	
+	MapData::ConstructMapPathData(
+		const Manifest*			aManifest)
+	{		
+		m_mapPathData = std::make_unique<MapPathData>();
+
+		MapPathDataBuilder builder;
+		builder.Build(aManifest, m_tileMap, (uint32_t)m_width, (uint32_t)m_height, 5);
+
+		builder.Export(m_mapPathData.get());
+	}
+
+	void	
 	MapData::ToStream(
 		IWriter*				aStream) const
 	{
@@ -318,6 +333,7 @@ namespace tpublic
 		aStream->WriteObjects(m_playerSpawns);
 		aStream->WriteObjects(m_portals);
 		aStream->WriteObjectPointers(m_scripts);
+		aStream->WriteObjectPointer(m_mapPathData);
 	}
 
 	bool	
@@ -369,6 +385,8 @@ namespace tpublic
 		if (!aStream->ReadObjects(m_portals))
 			return false;
 		if(!aStream->ReadObjectPointers(m_scripts))
+			return false;
+		if(!aStream->ReadObjectPointer(m_mapPathData))
 			return false;
 		return true;
 	}

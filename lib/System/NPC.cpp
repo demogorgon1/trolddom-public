@@ -94,7 +94,7 @@ namespace tpublic::Systems
 
 		const Components::CombatPublic* combat = GetComponent<Components::CombatPublic>(aComponents);
 		Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
-		const Components::Position* position = GetComponent<Components::Position>(aComponents);
+		Components::Position* position = GetComponent<Components::Position>(aComponents);
 		Components::ThreatTarget* threat = GetComponent<Components::ThreatTarget>(aComponents);
 		const Components::Auras* auras = GetComponent<Components::Auras>(aComponents);
 		const Components::NPC::StateEntry* state = npc->GetState(aEntityState);
@@ -259,6 +259,9 @@ namespace tpublic::Systems
 				threat->m_lastPingTick = aContext->m_tick;
 			}
 		}
+
+		if(aEntityState != EntityState::ID_IN_COMBAT && aEntityState != EntityState::ID_EVADING)
+			position->m_lastMoveTick = aContext->m_tick;
 		
 		switch(aEntityState)
 		{
@@ -321,7 +324,14 @@ namespace tpublic::Systems
 							int32_t spawnSquaredDistance = spawnDirection.m_x * spawnDirection.m_x + spawnDirection.m_y * spawnDirection.m_y;
 
 							if(spawnSquaredDistance <= (int32_t)(npc->m_npcBehaviorState->m_maxRange * npc->m_npcBehaviorState->m_maxRange))
-								aContext->m_moveRequestQueue->AddMoveRequest(aEntityInstanceId, Vec2(direction.m_x, direction.m_y));
+							{
+								IMoveRequestQueue::MoveRequest moveRequest;
+								moveRequest.AddToPriorityList(direction);
+								moveRequest.m_moveRequestType = IMoveRequestQueue::MOVE_REQUEST_TYPE_SIMPLE;
+								moveRequest.m_entityInstanceId = aEntityInstanceId;
+
+								aContext->m_moveRequestQueue->AddMoveRequest(moveRequest);
+							}
 
 							npc->m_moveCooldownUntilTick = aContext->m_tick + 10 + (uint32_t)aContext->m_random->operator()() % 10;
 						}
@@ -341,6 +351,7 @@ namespace tpublic::Systems
 					// Empty threat table 
 					npc->m_targetEntityInstanceId = 0;
 					npc->m_castInProgress.reset();
+					npc->m_npcMovement.Reset();				
 
 					Components::Tag* tag = GetComponent<Components::Tag>(aComponents);
 					tag->m_playerTag.Clear();
@@ -399,6 +410,9 @@ namespace tpublic::Systems
 
 						if (useAbility != NULL)
 						{
+							position->m_lastMoveTick = aContext->m_tick;
+							npc->m_npcMovement.Reset();
+
 							npc->m_cooldowns.Add(useAbility, aContext->m_tick);
 
 							if(useAbility->m_castTime > 0)
@@ -417,9 +431,15 @@ namespace tpublic::Systems
 						}
 						else if(npc->m_moveCooldownUntilTick < aContext->m_tick)
 						{
-							aContext->m_moveRequestQueue->AddMoveRequest(aEntityInstanceId, Vec2(dx, dy));
+							IMoveRequestQueue::MoveRequest moveRequest;
+							if(npc->m_npcMovement.GetMoveRequest(aContext->m_worldView->GetMapData()->m_mapPathData.get(), position->m_position, targetPosition->m_position, aContext->m_tick - position->m_lastMoveTick, moveRequest))
+							{
+								moveRequest.m_entityInstanceId = aEntityInstanceId;
 
-							npc->m_moveCooldownUntilTick = aContext->m_tick + 2;
+								aContext->m_moveRequestQueue->AddMoveRequest(moveRequest);
+
+								npc->m_moveCooldownUntilTick = aContext->m_tick + 2;
+							}
 						}
 					}
 				}
@@ -433,12 +453,16 @@ namespace tpublic::Systems
 			}
 			else if(npc->m_moveCooldownUntilTick < aContext->m_tick)
 			{
-				int32_t dx = npc->m_anchorPosition.m_x - position->m_position.m_x;
-				int32_t dy = npc->m_anchorPosition.m_y - position->m_position.m_y;
+				// FIXME: since
+				IMoveRequestQueue::MoveRequest moveRequest;
+				if (npc->m_npcMovement.GetMoveRequest(aContext->m_worldView->GetMapData()->m_mapPathData.get(), position->m_position, npc->m_anchorPosition, aContext->m_tick - position->m_lastMoveTick, moveRequest))
+				{
+					moveRequest.m_entityInstanceId = aEntityInstanceId;
 
-				aContext->m_moveRequestQueue->AddMoveRequest(aEntityInstanceId, Vec2(dx, dy));
+					aContext->m_moveRequestQueue->AddMoveRequest(moveRequest);
 
-				npc->m_moveCooldownUntilTick = aContext->m_tick + 2;
+					npc->m_moveCooldownUntilTick = aContext->m_tick + 2;
+				}
 			}
 			break;
 

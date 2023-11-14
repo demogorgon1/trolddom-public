@@ -9,6 +9,7 @@ namespace tpublic
 {
 
 	class Manifest;
+	class MapPathData;
 	class TileStackCache;
 
 	class MapData
@@ -311,6 +312,8 @@ namespace tpublic
 		void	Build(
 					const Manifest*			aManifest,
 					TileStackCache*			aTileStackCache);
+		void	ConstructMapPathData(
+					const Manifest*			aManifest);
 		void	ToStream(
 					IWriter*				aStream) const;
 		bool	FromStream(
@@ -346,6 +349,7 @@ namespace tpublic
 		std::vector<std::unique_ptr<Script>>		m_scripts;
 		uint32_t*									m_walkableBits;
 		uint32_t*									m_blockLineOfSightBits;
+		std::unique_ptr<MapPathData>				m_mapPathData;
 
 		struct SourceLayer
 		{

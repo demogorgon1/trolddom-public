@@ -7,6 +7,7 @@
 #include "../Cooldowns.h"
 #include "../DialogueScript.h"
 #include "../EntityState.h"
+#include "../NPCMovement.h"
 #include "../Resource.h"
 
 namespace tpublic
@@ -309,6 +310,7 @@ namespace tpublic
 			Vec2										m_anchorPosition;
 			const Data::NPCBehaviorState*				m_npcBehaviorState = NULL;
 			uint32_t									m_npcBehaviorStateTick = 0;
+			NPCMovement									m_npcMovement;
 		};
 	}
 

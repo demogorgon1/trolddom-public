@@ -32,8 +32,11 @@ namespace tpublic
 			}
 
 			// Public data
-			Vec2	m_position;
-			bool	m_block = false;
+			Vec2		m_position;
+			bool		m_block = false;
+
+			// Not serialized, internal server stuff
+			uint32_t	m_lastMoveTick = 0;
 		};
 	}
 

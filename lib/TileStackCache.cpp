@@ -30,6 +30,8 @@ namespace tpublic
 
 		Data::Sprite* sprite = m_manifest->m_sprites.CreateUnnamed();
 
+		sprite->m_info.m_flags = m_manifest->m_sprites.GetById(aBaseTileSpriteId)->m_info.m_flags;
+
 		m_table[key] = sprite->m_id;
 		return sprite->m_id;
 	}
