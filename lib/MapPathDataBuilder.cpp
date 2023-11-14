@@ -121,7 +121,7 @@ namespace tpublic
 			}
 
 			// Create routes to other areas
-			_CreateAreaToAreaRoutes(area, AreaToAreaRoute(), aMaxAreaToAreaRouteLength);
+			_CreateAreaToAreaRoutes(area, aMaxAreaToAreaRouteLength);
 		}
 	}
 
@@ -162,7 +162,7 @@ namespace tpublic
 			aOut->m_areas[area->m_id] = std::move(t);
 		}
 
-		for(AreaToAreaTable::const_iterator i = m_areaToAreaTable.cbegin(); i != m_areaToAreaTable.cend(); i++)
+		for (AreaToAreaTable::const_iterator i = m_areaToAreaTable.cbegin(); i != m_areaToAreaTable.cend(); i++)
 		{
 			uint32_t areaToAreaKey = i->first;
 			const AreaToAreaRouteStart& route = i->second;
@@ -195,13 +195,13 @@ namespace tpublic
 				{
 					uint32_t roll = aRandom() & 0xFF;
 
-					if(roll < 32)
+					if(roll < 24)
 					{
 						bool valid = true;
 
-						for(int32_t i = -3; i <= 3 && valid; i++)
+						for(int32_t i = -2; i <= 2 && valid; i++)
 						{
-							for (int32_t j = -3; j <= 3 && valid; j++)
+							for (int32_t j = -2; j <= 2 && valid; j++)
 							{
 								if(m_waypoints->m_points.contains(Vec2(x + i, y + j)))
 									valid = false;
@@ -322,26 +322,73 @@ namespace tpublic
 	void	
 	MapPathDataBuilder::_CreateAreaToAreaRoutes(
 		Area*					aArea,
-		const AreaToAreaRoute&	aRoute,
-		size_t					aMaxLength)
+		size_t					aMaxDepth)
 	{
-		// FIXME: this is far from optimal, could come up with a faster algorithm
-		if (aRoute.m_length > 1)
-			_AddAreaToAreaRoute(aRoute);
-
-		if(aRoute.m_length == aMaxLength)
-			return;
-
-		AreaToAreaRoute extendedRoute = aRoute;
-		extendedRoute.Add(aArea->m_id);
-
-		for (Area::Neighbors::const_iterator i = aArea->m_neighbors.cbegin(); i != aArea->m_neighbors.cend(); i++)
+		struct QueueItem
 		{
-			const Neighbor* neighbor = i->second.get();
+			const Area*		m_area = NULL;
+			AreaToAreaRoute	m_route;
+		};
 
-			if(!extendedRoute.HasArea(neighbor->m_id))
-				_CreateAreaToAreaRoutes(m_waypoints->GetArea(neighbor->m_id), extendedRoute, aMaxLength);
+		std::vector<QueueItem> queue;
+
+		{
+			QueueItem t;
+			t.m_area = aArea;
+			t.m_route.Add(aArea->m_id);
+			queue.push_back(t);
 		}
+
+		std::unordered_set<uint32_t> visited;
+
+		size_t steps = 0;
+
+		while(!queue.empty())
+		{
+			QueueItem t = queue[queue.size() - 1];
+			queue.pop_back();
+
+			visited.insert(t.m_area->m_id);
+
+			if (t.m_route.m_length > 1)
+				_AddAreaToAreaRoute(t.m_route);
+			
+			if(t.m_route.m_length < aMaxDepth)
+			{
+				for (Area::Neighbors::const_iterator i = t.m_area->m_neighbors.cbegin(); i != t.m_area->m_neighbors.cend(); i++)
+				{
+					const Neighbor* neighbor = i->second.get();
+					if(!visited.contains(neighbor->m_id))
+					{
+						QueueItem next;
+						next.m_route = t.m_route;
+						next.m_route.Add(neighbor->m_id);
+						next.m_area = m_waypoints->GetArea(neighbor->m_id);
+						queue.push_back(next);
+					}
+				}
+			}
+
+			steps++;
+		}
+
+		//// FIXME: this is far from optimal, could come up with a faster algorithm
+		//if (aRoute.m_length > 1)
+		//	_AddAreaToAreaRoute(aRoute);
+
+		//if(aRoute.m_length == aMaxLength)
+		//	return;
+
+		//AreaToAreaRoute extendedRoute = aRoute;
+		//extendedRoute.Add(aArea->m_id);
+
+		//for (Area::Neighbors::const_iterator i = aArea->m_neighbors.cbegin(); i != aArea->m_neighbors.cend(); i++)
+		//{
+		//	const Neighbor* neighbor = i->second.get();
+
+		//	if(!extendedRoute.HasArea(neighbor->m_id))
+		//		_CreateAreaToAreaRoutes(m_waypoints->GetArea(neighbor->m_id), extendedRoute, aMaxLength);
+		//}
 	}
 
 	void	

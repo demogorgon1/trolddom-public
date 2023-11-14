@@ -161,32 +161,6 @@ namespace tpublic
 					elemOffset++;
 				}
 			}
-
-
-			printf("--===================\n");
-			for (int32_t y = 0; y < m_size.m_y; y++)
-			{
-				for (int32_t x = 0; x < m_size.m_x; x++)
-				{
-					uint32_t v = aDistanceField[x + y * m_size.m_x];
-					if (v != UINT32_MAX)
-						printf("%-4u", v);
-					else
-						printf("    ");
-				}
-				printf("\n");
-			}
-
-			for (int32_t y = 0; y < m_size.m_y; y++)
-			{
-				for (int32_t x = 0; x < m_size.m_x; x++)
-				{
-					uint32_t v = aDistanceField[x + y * m_size.m_x];
-					assert(v == Get({ x, y }));
-				}
-			}
-
-			printf("--\n");
 		}
 
 		uint32_t

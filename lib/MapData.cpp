@@ -301,7 +301,7 @@ namespace tpublic
 		m_mapPathData = std::make_unique<MapPathData>();
 
 		MapPathDataBuilder builder;
-		builder.Build(aManifest, m_tileMap, (uint32_t)m_width, (uint32_t)m_height, 5);
+		builder.Build(aManifest, m_tileMap, (uint32_t)m_width, (uint32_t)m_height, 6);
 
 		builder.Export(m_mapPathData.get());
 	}

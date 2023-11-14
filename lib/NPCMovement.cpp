@@ -106,6 +106,9 @@ namespace tpublic
 							const PackedDistanceField* distanceFieldToNeighbor = m_currentArea->GetNeighborDistanceField(goToNeighborAreaId);
 							assert(distanceFieldToNeighbor != NULL);
 
+							printf("---\n");
+							distanceFieldToNeighbor->DebugPrint();
+
 							Vec2 localAreaPosition = aPosition - m_currentArea->m_origin;
 
 							uint32_t center = distanceFieldToNeighbor->Get(localAreaPosition);

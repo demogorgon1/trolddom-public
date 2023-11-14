@@ -110,15 +110,6 @@ namespace tpublic
 			int32_t									m_height = 0;
 		};
 
-		enum Direction : uint8_t
-		{
-			DIRECTION_NONE,
-			DIRECTION_NORTH,
-			DIRECTION_EAST,
-			DIRECTION_SOUTH,
-			DIRECTION_WEST
-		};
-
 		struct Neighbor
 		{
 			uint32_t								m_id = 0;
@@ -280,20 +271,19 @@ namespace tpublic
 		std::unique_ptr<Waypoints>					m_waypoints;
 			
 		void	_ConstructBitMapAndInitWaypoints(
-					const Manifest*			aManifest,
-					const uint32_t*			aTileMap,
-					std::mt19937&			aRandom,
-					BitMap&					aOutBitMap);
+					const Manifest*					aManifest,
+					const uint32_t*					aTileMap,
+					std::mt19937&					aRandom,
+					BitMap&							aOutBitMap);
 		void	_BitMapToImage(
-					const BitMap&			aBitMap,
-					Image&					aOut);
+					const BitMap&					aBitMap,
+					Image&							aOut);
 		void	_CreateAreaNeighborDistanceField(
-					Area*					aArea,
-					Neighbor*				aNeighbor);
+					Area*							aArea,
+					Neighbor*						aNeighbor);
 		void	_CreateAreaToAreaRoutes(
-					Area*					aArea,
-					const AreaToAreaRoute&	aRoute,
-					size_t					aMaxLength);
+					Area*							aArea,
+					size_t							aMaxDepth);
 		void	_AddAreaToAreaRoute(
 					const AreaToAreaRoute&	aRoute);
 	};

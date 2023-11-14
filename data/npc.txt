@@ -68,7 +68,7 @@
 		{ 
 			animations:
 			[
-				{ states: [ default in_combat spawning ] frames: [ @_sprite ] }			
+				{ states: [ default in_combat spawning evading ] frames: [ @_sprite ] }			
 				{ states: [ dead ] frames: [ @_sprite_dead ] z_offset: -2 }			
 			]		
 		}				

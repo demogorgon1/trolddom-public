@@ -22,6 +22,20 @@ namespace tpublic
 			return (aAId << 16) | aBId;
 		}
 
+		static constexpr uint32_t
+		GetAreaToAreaKeyA(
+			uint32_t							aAreaToAreaKey)
+		{
+			return aAreaToAreaKey >> 16;
+		}
+
+		static constexpr uint32_t
+		GetAreaToAreaKeyB(
+			uint32_t							aAreaToAreaKey)
+		{
+			return aAreaToAreaKey & 0xFFFF;
+		}
+
 		struct Area
 		{
 			void

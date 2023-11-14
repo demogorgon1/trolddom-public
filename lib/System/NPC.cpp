@@ -208,7 +208,7 @@ namespace tpublic::Systems
 
 		EntityState::Id returnValue = EntityState::CONTINUE;
 
-		if(aEntityState != EntityState::ID_DEAD)
+		if(aEntityState == EntityState::ID_DEFAULT || aEntityState == EntityState::ID_IN_COMBAT)
 		{
 			if(npc->m_castInProgress && aContext->m_tick >= npc->m_castInProgress->m_end)
 			{				
@@ -429,7 +429,7 @@ namespace tpublic::Systems
 								aContext->m_abilityQueue->AddAbility(aEntityInstanceId, target->GetEntityInstanceId(), Vec2(), useAbility);
 							}
 						}
-						else if(npc->m_moveCooldownUntilTick < aContext->m_tick)
+						else if(npc->m_moveCooldownUntilTick < aContext->m_tick && distanceSquared > 1)
 						{
 							IMoveRequestQueue::MoveRequest moveRequest;
 							if(npc->m_npcMovement.GetMoveRequest(aContext->m_worldView->GetMapData()->m_mapPathData.get(), position->m_position, targetPosition->m_position, aContext->m_tick - position->m_lastMoveTick, moveRequest))
@@ -508,7 +508,11 @@ namespace tpublic::Systems
 			}
 		}
 
-		bool block = (aEntityState != EntityState::ID_DEAD && aEntityState != EntityState::ID_EVADING && aEntityState != EntityState::ID_DESPAWNING && aEntityState != EntityState::ID_DESPAWNED);
+		bool block = 
+			aEntityState != EntityState::ID_DEAD && 
+			aEntityState != EntityState::ID_EVADING && 
+			aEntityState != EntityState::ID_DESPAWNING && 
+			aEntityState != EntityState::ID_DESPAWNED;
 
 		if(position->m_block != block)
 		{
