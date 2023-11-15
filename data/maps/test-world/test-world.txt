@@ -38,6 +38,16 @@ map_portal test_world_dungeon_entrance:
 	spawn: test_dungeon_player_spawn
 }
 
+map_player_spawn test_world_dungeon_exit_2:
+{
+}
+
+map_portal test_world_dungeon_entrance_2:
+{
+	map: test_dungeon_2
+	spawn: test_dungeon_player_spawn_2
+}
+
 map_palette test_world_tiles:
 {
 	tile water_1: [ 9 86 104 ]
@@ -57,7 +67,9 @@ map_palette test_world_stuff:
 	entity_spawn test_world_spirit_stone: [ 0 0 0 ]
 	player_spawn test_world_player_spawn: [ 0 0 255 ]
 	player_spawn test_world_dungeon_exit: [ 0 0 200 ]	
+	player_spawn test_world_dungeon_exit_2: [ 0 255 100 ]	
 	portal test_world_dungeon_entrance: [ 0 255 0 ]	
+	portal test_world_dungeon_entrance_2: [ 0 128 255 ]	
 }
 
 map test_world:

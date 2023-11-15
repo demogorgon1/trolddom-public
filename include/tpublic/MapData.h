@@ -304,6 +304,42 @@ namespace tpublic
 			std::vector<ScriptCommand>				m_commands;
 		};
 
+		struct Generator
+		{
+			Generator()
+			{
+
+			}
+
+			Generator(
+				const SourceNode*			aSource)
+			{
+				aSource->ForEachChild([&](
+					const SourceNode* /*aChild*/)
+				{					
+					//else
+					//{
+					//	TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					//}						
+				});
+			}
+
+			void	
+			ToStream(
+				IWriter*					/*aStream*/) const
+			{
+			}
+			
+			bool	
+			FromStream(
+				IReader*					/*aStream*/)
+			{
+				return true;
+			}
+
+			// Public data
+		};
+
 				MapData();
 				MapData(
 					const SourceNode*		aSource);
@@ -350,6 +386,7 @@ namespace tpublic
 		uint32_t*									m_walkableBits;
 		uint32_t*									m_blockLineOfSightBits;
 		std::unique_ptr<MapPathData>				m_mapPathData;
+		std::unique_ptr<Generator>					m_generator;
 
 		struct SourceLayer
 		{

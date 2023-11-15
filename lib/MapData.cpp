@@ -87,8 +87,10 @@ namespace tpublic
 				m_viewHiddenVisibility = aNode->GetUInt32();
 			else if(aNode->m_name == "script")
 				m_scripts.push_back(std::make_unique<Script>(aNode));
+			else if(aNode->m_name == "generator")
+				m_generator = std::make_unique<Generator>(aNode);
 			else
-				TP_VERIFY(false, aNode->m_debugInfo, "Invalid 'map_data' item.");
+				TP_VERIFY(false, aNode->m_debugInfo, "'%s' is not a valid item.", aNode->m_name.c_str());
 		});
 	}
 
@@ -334,6 +336,7 @@ namespace tpublic
 		aStream->WriteObjects(m_portals);
 		aStream->WriteObjectPointers(m_scripts);
 		aStream->WriteObjectPointer(m_mapPathData);
+		aStream->WriteOptionalObjectPointer(m_generator);
 	}
 
 	bool	
@@ -388,6 +391,8 @@ namespace tpublic
 			return false;
 		if(!aStream->ReadObjectPointer(m_mapPathData))
 			return false;
+		if(!aStream->ReadOptionalObjectPointer(m_generator))
+			return false;
 		return true;
 	}
 
@@ -395,12 +400,15 @@ namespace tpublic
 	MapData::PrepareRuntime(
 		const Manifest*			aManifest)
 	{
-		assert(m_walkableBits == NULL);
-		assert(m_blockLineOfSightBits == NULL);
-		assert(m_tileMap != NULL);
-		assert(m_width > 0 && m_height > 0);
+		if(!m_generator)
+		{
+			assert(m_walkableBits == NULL);
+			assert(m_blockLineOfSightBits == NULL);
+			assert(m_tileMap != NULL);
+			assert(m_width > 0 && m_height > 0);
 
-		_InitBits(aManifest);
+			_InitBits(aManifest);
+		}
 	}
 
 	bool	
