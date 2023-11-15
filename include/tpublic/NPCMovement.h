@@ -10,13 +10,17 @@ namespace tpublic
 	class NPCMovement
 	{
 	public:	
-		bool	GetMoveRequest(
+		bool	GetMoveRequest(						
 					const MapPathData*					aMapPathData,
 					const Vec2&							aPosition,
 					const Vec2&							aDestination,
-					int32_t								aStuckTicks,
+					int32_t								aCurrentTick,
+					int32_t								aLastMoveTick,
 					IMoveRequestQueue::MoveRequest&		aOut);
-		void	Reset();
+		void	Reset(
+					int32_t								aCurrentTick);
+		bool	ShouldResetIfLOS(
+					int32_t								aCurrentTick) const;
 
 	private:
 
@@ -31,6 +35,7 @@ namespace tpublic
 		const MapPathData::Area*	m_currentArea = NULL;
 		uint32_t					m_currentAreaId = UINT32_MAX;
 		uint32_t					m_destinationAreaId = UINT32_MAX;
+		int32_t						m_modeStartTick = 0;
 	};
 
 }

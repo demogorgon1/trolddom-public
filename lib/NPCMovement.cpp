@@ -10,17 +10,18 @@ namespace tpublic
 		const MapPathData*				aMapPathData,
 		const Vec2&						aPosition,
 		const Vec2&						aDestination,
-		int32_t							aStuckTicks,
+		int32_t							aCurrentTick,
+		int32_t							aLastMoveTick,
 		IMoveRequestQueue::MoveRequest& aOut)
 	{
 		switch(m_mode)
 		{
 		case MODE_DIRECT:
 			// Move directly towards the destination, no pathfinding, nice and cheap
-			if (aStuckTicks > 8)
+			if (aCurrentTick - aLastMoveTick > 8)
 			{
 				// We've been stuck for a bit, gotta try something more complex
-				Reset();
+				Reset(aCurrentTick);
 
 				m_mode = MODE_COMPLEX;
 			}
@@ -106,9 +107,6 @@ namespace tpublic
 							const PackedDistanceField* distanceFieldToNeighbor = m_currentArea->GetNeighborDistanceField(goToNeighborAreaId);
 							assert(distanceFieldToNeighbor != NULL);
 
-							printf("---\n");
-							distanceFieldToNeighbor->DebugPrint();
-
 							Vec2 localAreaPosition = aPosition - m_currentArea->m_origin;
 
 							uint32_t center = distanceFieldToNeighbor->Get(localAreaPosition);
@@ -145,7 +143,7 @@ namespace tpublic
 				}
 				else
 				{
-					Reset();
+					Reset(aCurrentTick);
 				}
 			}
 			break;
@@ -159,13 +157,25 @@ namespace tpublic
 	}
 
 	void	
-	NPCMovement::Reset()
+	NPCMovement::Reset(
+		int32_t				aCurrentTick)
 	{
 		m_mode = MODE_DIRECT;
 		m_storedDestination.reset();
 		m_currentArea = NULL;
 		m_currentAreaId = UINT32_MAX;
 		m_destinationAreaId = UINT32_MAX;
+		m_modeStartTick = aCurrentTick;
+	}
+
+	bool	
+	NPCMovement::ShouldResetIfLOS(
+		int32_t				aCurrentTick) const
+	{
+		if(m_modeStartTick != 0 && m_mode == MODE_COMPLEX)
+			return aCurrentTick - m_modeStartTick > 10;
+
+		return false;
 	}
 
 }

@@ -351,7 +351,7 @@ namespace tpublic::Systems
 					// Empty threat table 
 					npc->m_targetEntityInstanceId = 0;
 					npc->m_castInProgress.reset();
-					npc->m_npcMovement.Reset();				
+					npc->m_npcMovement.Reset(aContext->m_tick);				
 
 					Components::Tag* tag = GetComponent<Components::Tag>(aComponents);
 					tag->m_playerTag.Clear();
@@ -411,7 +411,7 @@ namespace tpublic::Systems
 						if (useAbility != NULL)
 						{
 							position->m_lastMoveTick = aContext->m_tick;
-							npc->m_npcMovement.Reset();
+							npc->m_npcMovement.Reset(aContext->m_tick);
 
 							npc->m_cooldowns.Add(useAbility, aContext->m_tick);
 
@@ -431,8 +431,14 @@ namespace tpublic::Systems
 						}
 						else if(npc->m_moveCooldownUntilTick < aContext->m_tick && distanceSquared > 1)
 						{
+							if(npc->m_npcMovement.ShouldResetIfLOS(aContext->m_tick))
+							{
+								if(aContext->m_worldView->QueryLineOfSight(position->m_position, targetPosition->m_position))
+									npc->m_npcMovement.Reset(aContext->m_tick);
+							}
+
 							IMoveRequestQueue::MoveRequest moveRequest;
-							if(npc->m_npcMovement.GetMoveRequest(aContext->m_worldView->GetMapData()->m_mapPathData.get(), position->m_position, targetPosition->m_position, aContext->m_tick - position->m_lastMoveTick, moveRequest))
+							if(npc->m_npcMovement.GetMoveRequest(aContext->m_worldView->GetMapData()->m_mapPathData.get(), position->m_position, targetPosition->m_position, aContext->m_tick, position->m_lastMoveTick, moveRequest))
 							{
 								moveRequest.m_entityInstanceId = aEntityInstanceId;
 
@@ -453,9 +459,9 @@ namespace tpublic::Systems
 			}
 			else if(npc->m_moveCooldownUntilTick < aContext->m_tick)
 			{
-				// FIXME: since
+				// FIXME: since (future me: what?)
 				IMoveRequestQueue::MoveRequest moveRequest;
-				if (npc->m_npcMovement.GetMoveRequest(aContext->m_worldView->GetMapData()->m_mapPathData.get(), position->m_position, npc->m_anchorPosition, aContext->m_tick - position->m_lastMoveTick, moveRequest))
+				if (npc->m_npcMovement.GetMoveRequest(aContext->m_worldView->GetMapData()->m_mapPathData.get(), position->m_position, npc->m_anchorPosition, aContext->m_tick, position->m_lastMoveTick, moveRequest))
 				{
 					moveRequest.m_entityInstanceId = aEntityInstanceId;
 
