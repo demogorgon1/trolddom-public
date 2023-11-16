@@ -32,6 +32,8 @@ namespace tpublic
 			ID_EXPRESSION,
 			ID_DIALOGUE_ROOT,
 			ID_NPC_BEHAVIOR_STATE,
+			ID_MAP_SEGMENT,
+			ID_MAP_SEGMENT_CONNECTOR,
 
 			NUM_IDS
 		};
@@ -61,7 +63,9 @@ namespace tpublic
 			"dialogue_screen",
 			"expression",
 			"dialogue_root",
-			"npc_behavior_state"
+			"npc_behavior_state",
+			"map_segment",
+			"map_segment_connector"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

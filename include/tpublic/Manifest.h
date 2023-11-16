@@ -16,6 +16,8 @@
 #include "Data/MapPalette.h"
 #include "Data/MapPlayerSpawn.h"
 #include "Data/MapPortal.h"
+#include "Data/MapSegment.h"
+#include "Data/MapSegmentConnector.h"
 #include "Data/MapTrigger.h"
 #include "Data/NPCBehaviorState.h"
 #include "Data/ParticleSystem.h"
@@ -269,6 +271,8 @@ namespace tpublic
 			RegisterDataContainer(m_mapPalettes);
 			RegisterDataContainer(m_mapPlayerSpawns);
 			RegisterDataContainer(m_mapPortals);
+			RegisterDataContainer(m_mapSegments);
+			RegisterDataContainer(m_mapSegmentConnectors);
 			RegisterDataContainer(m_mapTriggers);
 			RegisterDataContainer(m_npcBehaviorStates);
 			RegisterDataContainer(m_particleSystems);
@@ -358,6 +362,8 @@ namespace tpublic
 		DataContainer<Data::MapPalette>					m_mapPalettes;
 		DataContainer<Data::MapPlayerSpawn>				m_mapPlayerSpawns;
 		DataContainer<Data::MapPortal>					m_mapPortals;
+		DataContainer<Data::MapSegment>					m_mapSegments;
+		DataContainer<Data::MapSegmentConnector>		m_mapSegmentConnectors;
 		DataContainer<Data::MapTrigger>					m_mapTriggers;
 		DataContainer<Data::NPCBehaviorState>			m_npcBehaviorStates;
 		DataContainer<Data::ParticleSystem>				m_particleSystems;

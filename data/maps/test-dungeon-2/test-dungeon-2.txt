@@ -1,0 +1,121 @@
+map_player_spawn test_dungeon_player_spawn_2:
+{
+}
+
+map_portal test_dungeon_exit_2:
+{
+	map: test_world
+	spawn: test_world_dungeon_exit_2
+}
+
+map_segment_connector dungeon_east_1x1:
+{
+	match: [ dungeon_west_1x1 ]
+}
+
+map_segment_connector dungeon_west_1x1:
+{
+	match: [ dungeon_east_1x1 ]
+}
+
+map_segment dungeon_entrance_room<paletted>:
+{
+	palette:
+	[
+		{ symbol: "." tiles: [ dungeon_floor ] }			
+		{ symbol: "W" tiles: [ dungeon_wall ] }
+		
+		{ 
+			symbol: "e" 
+			tiles: [ dungeon_wall_face_exit ] 
+			portals: [ test_dungeon_exit_2 ] 
+		}
+		
+		{ 
+			symbol: "i" 
+			tiles: [ dungeon_floor ] 
+			player_spawns: [ test_dungeon_player_spawn_2 ] 
+		}		
+
+		{ 
+			symbol: "0" 
+			tiles: [ dungeon_floor ] 
+			connectors: [ dungeon_east_1x1 ]
+		}				
+	]
+		
+	paletted_map:
+	[
+		"WWeWW"
+		"W.i.W"
+		"W...W"
+		"W...0"
+		"WWWWW"
+	]	
+	
+	tile_map_modifier wall_face:
+	{
+		walls: [ dungeon_wall ]
+		floors: [ dungeon_floor ]
+		faces: [ dungeon_wall_face ]
+	}
+}
+
+map_segment dungeon_passage<paletted>:
+{
+	palette:
+	[
+		{ symbol: "." tiles: [ dungeon_floor ] }			
+		{ symbol: "W" tiles: [ dungeon_wall ] }
+		
+		{ 
+			symbol: "1" 
+			tiles: [ dungeon_floor ] 
+			connectors: [ dungeon_west_1x1 ]
+		}		
+	]
+		
+	paletted_map:
+	[
+		"WWWWW"
+		"1...W"
+		"WWWWW"
+	]	
+	
+	tile_map_modifier wall_face:
+	{
+		walls: [ dungeon_wall ]
+		floors: [ dungeon_floor ]
+		faces: [ dungeon_wall_face ]
+	}
+}
+
+map test_dungeon_2:
+{
+	string: "Test Dungeon 2"
+	type: private
+	reset: manual
+	default_tile: dungeon_wall
+	default_player_spawn: test_dungeon_player_spawn_2
+	default_exit_portal: test_dungeon_exit_2
+	view_attenuation: 30
+	view_attenuation_bias: 50
+	view_hidden_visibility: 0
+
+	generator dungeon:
+	{	
+		room entrance:
+		{
+			flags: [ root ]
+			segment<1>: dungeon_entrance_room			
+			
+			connection passage<dungeon_east_1x1>: { weight: 1 }
+		}
+		
+		room passage:
+		{
+			segment<1>: dungeon_passage
+		}		
+	}
+}
+ 

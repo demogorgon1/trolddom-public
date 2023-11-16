@@ -6,6 +6,7 @@ namespace tpublic
 	class AuraEffectFactory;
 	class ComponentManager;
 	class DirectEffectFactory;
+	class MapGeneratorFactory;
 
 	class IReader
 	{
@@ -297,9 +298,12 @@ namespace tpublic
 		virtual size_t						Read(
 												void*	aBuffer,
 												size_t	aBufferSize) = 0;
+
+		// FIXME: this is weird, relevant FromStream methods should get these from somewhere else.
 		virtual const AuraEffectFactory*	GetAuraEffectFactory() const = 0;
 		virtual const ComponentManager*		GetComponentManager() const = 0;
 		virtual const DirectEffectFactory*	GetDirectEffectFactory() const = 0;
+		virtual const MapGeneratorFactory*	GetMapGeneratorFactory() const = 0;
 
 	private:
 

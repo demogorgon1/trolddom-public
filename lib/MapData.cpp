@@ -87,7 +87,7 @@ namespace tpublic
 				m_viewHiddenVisibility = aNode->GetUInt32();
 			else if(aNode->m_name == "script")
 				m_scripts.push_back(std::make_unique<Script>(aNode));
-			else if(aNode->m_name == "generator")
+			else if(aNode->m_tag == "generator")
 				m_generator = std::make_unique<Generator>(aNode);
 			else
 				TP_VERIFY(false, aNode->m_debugInfo, "'%s' is not a valid item.", aNode->m_name.c_str());

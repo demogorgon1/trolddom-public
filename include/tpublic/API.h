@@ -36,6 +36,7 @@
 #include "IWorldView.h"
 #include "LootGenerator.h"
 #include "Manifest.h"
+#include "MapGeneratorFactory.h"
 #include "Parser.h"
 #include "Particle.h"
 #include "Persistence.h"

@@ -2,6 +2,8 @@
 
 #include "IReader.h"
 #include "IWriter.h"
+#include "MapGeneratorBase.h"
+#include "MapGeneratorFactory.h"
 #include "MapType.h"
 #include "Parser.h"
 
@@ -314,30 +316,41 @@ namespace tpublic
 			Generator(
 				const SourceNode*			aSource)
 			{
-				aSource->ForEachChild([&](
-					const SourceNode* /*aChild*/)
-				{					
-					//else
-					//{
-					//	TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
-					//}						
-				});
+				MapGenerator::Id mapGeneratorId = MapGenerator::StringToId(aSource->m_name.c_str());
+				TP_VERIFY(mapGeneratorId != MapGenerator::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid map generator.", aSource->m_name.c_str());
+				m_base.reset(aSource->m_sourceContext->m_mapGeneratorFactory->Create(mapGeneratorId));
+				assert(m_base);
+				m_base->FromSource(aSource);
 			}
 
 			void	
 			ToStream(
-				IWriter*					/*aStream*/) const
+				IWriter*					aStream) const
 			{
+				assert(m_base);
+				aStream->WritePOD(m_base->m_id);
+				m_base->ToStream(aStream);
 			}
 			
 			bool	
 			FromStream(
-				IReader*					/*aStream*/)
+				IReader*					aStream)
 			{
+				assert(!m_base);
+				MapGenerator::Id mapGeneratorId;
+				if(!aStream->ReadPOD(mapGeneratorId))
+					return false;
+				if(!MapGenerator::ValidateId(mapGeneratorId))
+					return false;
+				m_base.reset(aStream->GetMapGeneratorFactory()->Create(mapGeneratorId));
+				assert(m_base);
+				if(!m_base->FromStream(aStream))
+					return false;
 				return true;
 			}
 
 			// Public data
+			std::unique_ptr<MapGeneratorBase>	m_base;
 		};
 
 				MapData();
