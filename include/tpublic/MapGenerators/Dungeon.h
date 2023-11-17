@@ -79,6 +79,17 @@ namespace tpublic::MapGenerators
 				TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "No map segment connector annotation specified.");
 				m_mapSegmentConnectorId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_SEGMENT_CONNECTOR, aSource->m_annotation->GetIdentifier());
 				m_roomName = aSource->m_name;
+
+				aSource->ForEachChild([&](
+					const SourceNode* aChild)
+				{
+					if(aChild->m_name == "weight")
+						m_weight = aChild->GetUInt32();
+					else if (aChild->m_name == "debug_name")
+						m_debugName = aChild->GetString();
+					else
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+				});
 			}
 
 			void
@@ -87,6 +98,7 @@ namespace tpublic::MapGenerators
 			{
 				aWriter->WriteUInt(m_mapSegmentConnectorId);
 				aWriter->WriteUInt(m_roomIndex);
+				aWriter->WriteUInt(m_weight);
 			}
 
 			bool
@@ -97,12 +109,16 @@ namespace tpublic::MapGenerators
 					return false;
 				if (!aReader->ReadUInt(m_roomIndex))
 					return false;
+				if (!aReader->ReadUInt(m_weight))
+					return false;
 				return true;
 			}
 
 			// Public data
 			uint32_t						m_mapSegmentConnectorId = 0;
 			uint32_t						m_roomIndex = UINT32_MAX;
+			uint32_t						m_weight = 1;
+			std::string						m_debugName;
 
 			// Only for building, converted to index
 			std::string						m_roomName;
@@ -147,6 +163,9 @@ namespace tpublic::MapGenerators
 
 				for(const RoomSegment& segment : m_segments)
 					m_totalSegmentWeight += segment.m_weight;
+
+				for (const RoomConnection& connection : m_connections)
+					m_totalConnectionWeight += connection.m_weight;
 			}
 
 			void
@@ -155,6 +174,7 @@ namespace tpublic::MapGenerators
 			{
 				aWriter->WritePOD(m_flags);
 				aWriter->WriteUInt(m_totalSegmentWeight);
+				aWriter->WriteUInt(m_totalConnectionWeight);
 				aWriter->WriteObjects(m_segments);
 				aWriter->WriteObjects(m_connections);
 			}
@@ -165,7 +185,9 @@ namespace tpublic::MapGenerators
 			{
 				if(!aReader->ReadPOD(m_flags))
 					return false;
-				if(!aReader->ReadUInt(m_totalSegmentWeight))
+				if (!aReader->ReadUInt(m_totalSegmentWeight))
+					return false;
+				if (!aReader->ReadUInt(m_totalConnectionWeight))
 					return false;
 				if (!aReader->ReadObjects(m_segments))
 					return false;
@@ -174,9 +196,22 @@ namespace tpublic::MapGenerators
 				return true;
 			}
 
+			const RoomConnection*
+			GetRoomConnection(
+				uint32_t							aMapSegmentConnectorId) const
+			{
+				for(const RoomConnection& t : m_connections)
+				{
+					if(t.m_mapSegmentConnectorId == aMapSegmentConnectorId)
+						return &t;
+				}
+				return NULL;
+			}
+
 			// Public data
 			uint8_t							m_flags = 0;
 			uint32_t						m_totalSegmentWeight = 0;
+			uint32_t						m_totalConnectionWeight = 0;
 			std::vector<RoomSegment>		m_segments;
 			std::vector<RoomConnection>		m_connections;
 		};
@@ -195,6 +230,7 @@ namespace tpublic::MapGenerators
 						const Manifest*				aManifest,
 						uint32_t					aSeed,
 						const MapData*				aSourceMapData,
+						const char*					aDebugImagePath,
 						std::unique_ptr<MapData>&	aOutMapData) const override;
 
 	private:
@@ -208,10 +244,10 @@ namespace tpublic::MapGenerators
 		public:
 
 			Builder(
-				const Manifest*								aManifest,
-				uint32_t									aSeed,
-				const MapData*								aSourceMapData,
-				const std::vector<std::unique_ptr<Room>>&	aSourceRooms)
+				const Manifest*									aManifest,
+				uint32_t										aSeed,
+				const MapData*									aSourceMapData,
+				const std::vector<std::unique_ptr<Room>>&		aSourceRooms)
 				: m_random(aSeed)
 				, m_manifest(aManifest)
 				, m_sourceMapData(aSourceMapData)
@@ -221,22 +257,73 @@ namespace tpublic::MapGenerators
 			}
 
 			void		GenerateRootRoom();
+			void		GenerateAndAttachRoom();
+			void		DebugImageOutput(
+							const char*							aPath) const;
 			MapData*	CreateMapData();
+
+			// Data access
+			bool		HasOpenConnectors() const { return !m_openConnectors.empty(); }
 
 		private:
 
-			struct GeneratedRoom
+			struct GeneratedRoomConnector
 			{
-				MapSegmentInstance			m_mapSegmentInstance;
+				uint32_t												m_mapSegmentConnectorId = 0;
+				const MapSegmentInstance::Connector*					m_connector = NULL;
+				std::vector<const RoomConnection*>						m_possibleConnections;
 			};
 
-			const Manifest*					m_manifest;
-			std::mt19937					m_random;
-			const MapData*					m_sourceMapData;
-			std::vector<const Room*>		m_sourceRooms;
+			struct GeneratedRoom
+			{
+				GeneratedRoomConnector*
+				GetOrCreateConnector(
+					uint32_t									aMapSegmentConnectorId)
+				{
+					for(std::unique_ptr<GeneratedRoomConnector>& connector : m_connectors)
+					{	
+						if(connector->m_mapSegmentConnectorId == aMapSegmentConnectorId)
+							return connector.get();
+					}
+					
+					GeneratedRoomConnector* t = new GeneratedRoomConnector();
+					t->m_mapSegmentConnectorId = aMapSegmentConnectorId;
+					m_connectors.push_back(std::unique_ptr<GeneratedRoomConnector>(t));
+					return t;
+				}
 
+				// Public data
+				MapSegmentInstance										m_mapSegmentInstance;
+				Vec2													m_min;
+				Vec2													m_max;
+				std::vector<std::unique_ptr<GeneratedRoomConnector>>	m_connectors;
+			};
+
+			struct OpenConnector
+			{
+				const GeneratedRoom*									m_generatedRoom = NULL;
+				size_t													m_connectorIndex = 0;
+				uint32_t												m_attempts = 0;
+			};
+
+			const Manifest*												m_manifest;
+			std::mt19937												m_random;
+			const MapData*												m_sourceMapData;
+			std::vector<const Room*>									m_sourceRooms;
+
+			std::vector<std::unique_ptr<GeneratedRoom>>					m_generatedRooms;
+			Vec2														m_min;
+			Vec2														m_max;
+
+			std::vector<OpenConnector>									m_openConnectors;
+			std::vector<OpenConnector>									m_failedConnectors;
+			
+			void			_AddGeneratedRoom(
+								std::unique_ptr<GeneratedRoom>&	aGeneratedRoom);
 			GeneratedRoom*	_GenerateRoom(
-								const Room*					aSourceRoom);
+								const Room*						aSourceRoom);
+			bool			_CheckOverlap(
+								const GeneratedRoom*			aGeneratedRoom) const;
 		};
 	};
 

@@ -1,6 +1,6 @@
 #include "Pcheader.h"
 
-#include "Tokenizer.h"
+#include <tpublic/Tokenizer.h>
 
 namespace tpublic
 {
@@ -48,11 +48,12 @@ namespace tpublic
 		const char*		aPath)
 		: m_i(0)
 	{
-		// Determine base path
+		// Determine paths
 		{
 			std::filesystem::path p = aPath;
 			p.make_preferred();
 			m_path = p.parent_path().string();
+			m_pathWithFileName = p.string();
 		}
 
 		// Load and tokenize file
@@ -131,6 +132,19 @@ namespace tpublic
 		const Token& token = Next();
 		TP_VERIFY(token.m_value == aToken, token.m_debugInfo, "Unexpected '%s', expected '%s'.", token.m_value.c_str(), aToken);
 		Proceed();
+	}
+
+	bool
+	Tokenizer::TryConsumeToken(
+		const char*		aToken)
+	{
+		const Token& token = Next();
+		if(token.m_value == aToken)
+		{
+			Proceed();
+			return true;
+		}
+		return false;
 	}
 
 	//-----------------------------------------------------------------------------------------------------

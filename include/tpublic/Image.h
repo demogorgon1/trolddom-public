@@ -1,6 +1,7 @@
 #pragma once
 
 #include "DataErrorHandling.h"
+#include "Vec2.h"
 
 namespace tpublic
 {
@@ -18,46 +19,55 @@ namespace tpublic
 
 					Image();
 					Image(
-						uint32_t		aWidth,
-						uint32_t		aHeight);
+						uint32_t					aWidth,
+						uint32_t					aHeight);
 					~Image();
 
 		void		Allocate(
-						uint32_t		aWidth,
-						uint32_t		aHeight);
+						uint32_t					aWidth,
+						uint32_t					aHeight);
 		void		LoadPNG(
-						const char*		aPath);
+						const char*					aPath);
 		void		SavePNG(
-						const char*		aPath) const;
+						const char*					aPath) const;
 		void		Extract(
-						uint32_t		aX,
-						uint32_t		aY,
-						uint32_t		aWidth,
-						uint32_t		aHeight,
-						Image&			aOut) const;
+						uint32_t					aX,
+						uint32_t					aY,
+						uint32_t					aWidth,
+						uint32_t					aHeight,
+						Image&						aOut) const;
 		void		Insert(
-						uint32_t		aX,
-						uint32_t		aY,
-						const Image&	aImage);
+						uint32_t					aX,
+						uint32_t					aY,
+						const Image&				aImage);
 		void		InsertBlended(
-						uint32_t		aX,
-						uint32_t		aY,
-						const Image&	aImage);
+						uint32_t					aX,
+						uint32_t					aY,
+						const Image&				aImage);
 		void		Clear(
-						const RGBA&		aColor);
+						const RGBA&					aColor);
 		void		DrawVerticalGradient(
-						const RGBA&		aColorTop,
-						const RGBA&		aColorBottom);
+						const RGBA&					aColorTop,
+						const RGBA&					aColorBottom);
 		void		DrawBlendedHorizontalLine(
-						uint32_t		aX,
-						uint32_t		aY,
-						uint32_t		aLength,
-						const RGBA&		aColor);
+						uint32_t					aX,
+						uint32_t					aY,
+						uint32_t					aLength,
+						const RGBA&					aColor);
+		void		Grow(
+						uint32_t					aFactor,
+						const std::optional<RGBA>&	aGridColor = std::optional<RGBA>(),
+						const std::optional<Vec2>&	aGridOffset = std::optional<Vec2>());
+		void		DrawString(
+						uint32_t					aX,
+						uint32_t					aY,
+						const char*					aFormat,
+						...);
 		void		Release();
 		void		Detach(
-						void**			aOutData,
-						uint32_t*		aOutWidth,
-						uint32_t*		aOutHeight);
+						void**						aOutData,
+						uint32_t*					aOutWidth,
+						uint32_t*					aOutHeight);
 		
 		// Data access
 		uint32_t	GetWidth() const { return m_width; }

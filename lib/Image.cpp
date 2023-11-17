@@ -7,6 +7,56 @@
 namespace tpublic
 {
 
+	namespace
+	{
+
+		struct SmallPixelFont
+		{
+			static const uint32_t XSIZE = 6;
+			static const uint32_t YSIZE = 7;
+
+			SmallPixelFont()
+			{
+				memset(m_characterOffsets, 0xFF, sizeof(m_characterOffsets));
+				m_numCharacters = (uint32_t)strlen(m_characters);
+				for(uint32_t i = 0; i < m_numCharacters; i++)
+				{
+					uint8_t character = (uint8_t)m_characters[i];
+					m_characterOffsets[character] = (uint8_t)i;
+				}
+				assert(strlen(m_data) == (size_t)(XSIZE * YSIZE * m_numCharacters));
+			}
+
+			bool
+			GetCharacterPixel(
+				char		aCharacter,
+				uint32_t	aX,
+				uint32_t	aY) const
+			{
+				assert(aX < XSIZE && aY < YSIZE);
+				uint32_t offset = m_characterOffsets[(uint8_t)aCharacter];
+				return offset != 0xFF && m_data[aX + offset * XSIZE + aY * (XSIZE * m_numCharacters)] == 'x';
+			}
+
+			// Public data
+			uint8_t		m_characterOffsets[256];
+			uint32_t	m_numCharacters = 0;
+			const char* m_characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,._-";
+			const char*	m_data = 
+				".xxx..xxxx...xxxx.xxxx..xxxxx.xxxxx..xxx..x...x.xxxxx.xxxxx.x...x.x.....x...x.x...x..xxx..xxxx...xxx..xxxx...xxxx.xxxxx.x...x.x...x.x...x.x...x.x...x.xxxxx..xxx....x....xxx...xxx..x...x.xxxxx..xxx..xxxxx..xxx...xxx.........................."
+				"x...x.x...x.x.....x...x.x.....x.....x...x.x...x...x.......x.x..x..x.....xx.xx.xx..x.x...x.x...x.x...x.x...x.x.......x...x...x.x...x.x...x.x...x.x...x.....x.x...x..xx...x...x.x...x.x...x.x.....x...x.....x.x...x.x...x........................."
+				"x...x.x...x.x.....x...x.x.....x.....x.....x...x...x.......x.x.x...x.....x.x.x.x.x.x.x...x.x...x.x...x.x...x.x.......x...x...x.x...x.x...x..x.x..x...x....x..x...x.x.x......x......x.x...x.x.....x.........x.x...x.x...x........................."
+				"xxxxx.xxxx..x.....x...x.xxx...xxx...x.xxx.xxxxx...x.......x.xx....x.....x...x.x..xx.x...x.xxxx..x...x.xxxx...xxx....x...x...x.x...x.x...x...x....x.x....x...x.x.x...x.....x......x..xxxxx.xxxx..xxxx.....x...xxx...xxxx....................xxx.."
+				"x...x.x...x.x.....x...x.x.....x.....x...x.x...x...x.......x.x.x...x.....x...x.x...x.x...x.x.....x.x.x.x.x.......x...x...x...x.x...x.x.x.x..x.x....x....x....x...x...x....x........x.....x.....x.x...x...x...x...x.....x........................."
+				"x...x.x...x.x.....x...x.x.....x.....x...x.x...x...x.......x.x..x..x.....x...x.x...x.x...x.x.....x..xx.x..x......x...x...x...x..x.x..xx.xx.x...x...x...x.....x...x...x...x.....x...x.....x.x...x.x...x...x...x...x.x...x...x....................."
+				"x...x.xxxx...xxxx.xxxx..xxxxx.x......xxx..x...x.xxxxx.xxxx..x...x.xxxxx.x...x.x...x..xxx..x......xxxx.x...x.xxxx....x....xxx....x...x...x.x...x...x...xxxxx..xxx..xxxxx.xxxxx..xxx......x..xxx...xxx....x....xxx...xxx...x.....x....xxxxx.......";
+		};
+
+		SmallPixelFont g_smallPixelFont;
+	}
+
+	//---------------------------------------------------------------------------------
+
 	Image::Image()
 		: m_data(NULL)
 		, m_width(0)
@@ -214,6 +264,117 @@ namespace tpublic
 			p->m_b = (uint8_t)(b + premultB);		
 			
 			p++;
+		}
+	}
+
+	void		
+	Image::Grow(
+		uint32_t					aFactor,
+		const std::optional<RGBA>&	aGridColor,
+		const std::optional<Vec2>&	aGridOffset)
+	{
+		assert(HasData());
+		assert(aFactor > 1);
+
+		Image grown(m_width * aFactor, m_height * aFactor);
+		RGBA* out = grown.GetData();
+		const RGBA* in = GetData();
+		for(uint32_t y = 0; y < grown.m_height; y++)
+		{
+			for (uint32_t x = 0; x < grown.m_width; x++)
+			{
+				uint32_t inX = x / aFactor;
+				uint32_t inY = y / aFactor;
+				RGBA inColor = in[inX + inY * m_width];;
+
+				if(aGridColor.has_value() && (x % aFactor == 0 || y % aFactor == 0))
+					inColor = aGridColor.value();
+
+				*out = inColor;
+				out++;
+			}
+		}
+
+		if(aGridColor.has_value())
+		{
+			for(uint32_t y = 0; y < m_height; y++)
+			{
+				for (uint32_t x = 0; x < m_width; x++)
+				{
+					int32_t dx = (int32_t)x;
+					int32_t dy = (int32_t)y;
+					if(aGridOffset.has_value())
+					{
+						dx += aGridOffset->m_x;
+						dy += aGridOffset->m_y;
+					}
+					
+					grown.DrawString(x * aFactor + 2, y * aFactor + 2, "%d,%d", dx, dy);
+				}
+			}
+		}
+
+		Release();
+		grown.Detach((void**)&m_data, &m_width, &m_height);
+	}
+
+	void		
+	Image::DrawString(
+		uint32_t					aX,
+		uint32_t					aY,
+		const char*					aFormat,
+		...)
+	{
+		assert(HasData());
+
+		char buffer[1024];
+		TP_STRING_FORMAT_VARARGS(buffer, sizeof(buffer), aFormat);
+
+		const char* p = buffer;
+		uint32_t xPosition = aX;
+		RGBA* out = GetData();
+
+		while(*p != '\0')
+		{
+			for(uint32_t y = 0; y < SmallPixelFont::YSIZE; y++)
+			{
+				for (uint32_t x = 0; x < SmallPixelFont::XSIZE; x++)
+				{
+					uint32_t xImage = xPosition + x;
+					uint32_t yImage = aY + y;
+
+					if(xImage < m_width && yImage < m_height)
+					{
+						if(g_smallPixelFont.GetCharacterPixel(*p, x, y))
+						{	
+							RGBA& c = out[xImage + yImage * m_width];
+							
+							c.m_r = 255 - c.m_r;
+							c.m_g = 255 - c.m_g;
+							c.m_b = 255 - c.m_b;
+
+							if(c.m_r > 64)
+								c.m_r -= 64;
+							else
+								c.m_r = 0;
+
+							if (c.m_g > 64)
+								c.m_g -= 64;
+							else
+								c.m_g = 0;
+
+							if (c.m_b > 64)
+								c.m_b -= 64;
+							else
+								c.m_b = 0;
+
+							c.m_a = 255;
+						}
+					}
+				}
+			}
+			p++;
+			xPosition += SmallPixelFont::XSIZE;
 		}
 	}
 

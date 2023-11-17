@@ -5,13 +5,13 @@
 #include <tpublic/Compression.h>
 #include <tpublic/DataErrorHandling.h>
 #include <tpublic/TileStackCache.h>
+#include <tpublic/Tokenizer.h>
 
 #include "FileWriter.h"
 #include "MapImageOutput.h"
 #include "MemoryWriter.h"
 #include "PostProcessEntities.h"
 #include "SpriteSheetBuilder.h"
-#include "Tokenizer.h"
 
 namespace tpublic
 {

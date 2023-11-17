@@ -58,6 +58,7 @@ namespace tpublic
 									const Manifest*				/*aManifest*/,
 									uint32_t					/*aSeed*/,
 									const MapData*				/*aSourceMapData*/,
+									const char*					/*aDebugImagePath*/,
 									std::unique_ptr<MapData>&	/*aOutMapData*/) const { assert(false); return false; }
 
 		// Public data

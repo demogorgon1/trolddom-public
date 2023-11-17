@@ -1,6 +1,6 @@
 #pragma once
 
-#include <tpublic/DataErrorHandling.h>
+#include "DataErrorHandling.h"
 
 namespace tpublic
 {
@@ -38,15 +38,19 @@ namespace tpublic
 								const char*				aToken);
 		void				ConsumeToken(
 								const char*				aToken);
+		bool				TryConsumeToken(
+								const char*				aToken);
 
 		// Data access
 		const char*			GetPath() const { return m_path.c_str(); }
+		const char*			GetPathWithFileName() const { return m_pathWithFileName.c_str(); }
 
 	private:
 
 		std::vector<Token>				m_tokens;
 		size_t							m_i;
 		std::string						m_path;
+		std::string						m_pathWithFileName;
 
 		void	_Tokenize(
 					const char*							aPath,

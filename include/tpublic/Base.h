@@ -68,4 +68,22 @@ namespace tpublic::Base
 		return hash;
 	}
 
+	template <typename _T>
+	inline _T
+	Min(
+		_T				aA,
+		_T				aB)
+	{
+		return aA < aB ? aA : aB;
+	}
+
+	template <typename _T>
+	inline _T
+	Max(
+		_T				aA,
+		_T				aB)
+	{
+		return aA > aB ? aA : aB;
+	}
+
 }

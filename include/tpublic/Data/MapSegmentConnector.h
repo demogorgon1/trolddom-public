@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../DataBase.h"
+#include "../Vec2.h"
 
 namespace tpublic
 {
@@ -19,6 +20,18 @@ namespace tpublic
 				VerifyBase();
 			}
 
+			bool
+			ConnectsWith(
+				uint32_t				aMapSegmentConnectorId) const
+			{
+				for(uint32_t t : m_connects)
+				{
+					if(t == aMapSegmentConnectorId)
+						return true;
+				}
+				return false;
+			}
+
 			// Base implementation
 			void
 			FromSource(
@@ -27,8 +40,8 @@ namespace tpublic
 				aNode->ForEachChild([&](
 					const SourceNode* aChild)
 				{
-					if(aChild->m_name == "match")
-						aChild->GetIdArray(DataType::ID_MAP_SEGMENT_CONNECTOR, m_match);
+					if(aChild->m_name == "connects")
+						aChild->GetIdArray(DataType::ID_MAP_SEGMENT_CONNECTOR, m_connects);
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 				});				
@@ -40,7 +53,7 @@ namespace tpublic
 			{
 				ToStreamBase(aStream);
 				
-				aStream->WriteUInts(m_match);
+				aStream->WriteUInts(m_connects);
 			}
 
 			bool
@@ -50,13 +63,13 @@ namespace tpublic
 				if (!FromStreamBase(aStream))
 					return false;
 
-				if(!aStream->ReadUInts(m_match))
+				if(!aStream->ReadUInts(m_connects))
 					return false;
 				return true;
 			}
 
 			// Public data
-			std::vector<uint32_t>	m_match;
+			std::vector<uint32_t>	m_connects;
 		};
 
 	}

@@ -8,86 +8,211 @@ map_portal test_dungeon_exit_2:
 	spawn: test_world_dungeon_exit_2
 }
 
-map_segment_connector dungeon_east_1x1:
+map_segment_connector connector_east: { connects: [ connector_west ] }
+map_segment_connector connector_west: { connects: [ connector_east ] }
+map_segment_connector connector_south: { connects: [ connector_north ] }
+map_segment_connector connector_north: { connects: [ connector_south ] }
+
+!define local DUNGEON_PALETTE
+[
+	{ symbol: "." tiles: [ dungeon_floor ] }			
+	{ symbol: "W" tiles: [ dungeon_wall ] }
+	
+	{ 
+		symbol: "e" 
+		tiles: [ dungeon_wall_face_exit ] 
+		portals: [ test_dungeon_exit_2 ] 
+	}
+	
+	{ 
+		symbol: "i" 
+		tiles: [ dungeon_floor ] 
+		player_spawns: [ test_dungeon_player_spawn_2 ] 
+	}		
+
+	{ 
+		symbol: "1" 
+		tiles: [ dungeon_floor ] 
+		connectors: [ connector_east ]
+	}				
+	
+	{ 
+		symbol: "2" 
+		tiles: [ dungeon_floor ] 
+		connectors: [ connector_west ]
+	}				
+	
+	{ 
+		symbol: "3" 
+		tiles: [ dungeon_floor ] 
+		connectors: [ connector_south ]
+	}					
+	
+	{ 
+		symbol: "4" 
+		tiles: [ dungeon_floor ] 
+		connectors: [ connector_north ]
+	}						
+]
+
+!define local DUNGEON_WALL_FACE_MODIFIER
 {
-	match: [ dungeon_west_1x1 ]
+	walls: [ dungeon_wall ]
+	floors: [ dungeon_floor ]
+	faces: [ dungeon_wall_face ]
 }
 
-map_segment_connector dungeon_west_1x1:
+map_segment dungeon_entrance_1<paletted>:
 {
-	match: [ dungeon_east_1x1 ]
-}
-
-map_segment dungeon_entrance_room<paletted>:
-{
-	palette:
-	[
-		{ symbol: "." tiles: [ dungeon_floor ] }			
-		{ symbol: "W" tiles: [ dungeon_wall ] }
-		
-		{ 
-			symbol: "e" 
-			tiles: [ dungeon_wall_face_exit ] 
-			portals: [ test_dungeon_exit_2 ] 
-		}
-		
-		{ 
-			symbol: "i" 
-			tiles: [ dungeon_floor ] 
-			player_spawns: [ test_dungeon_player_spawn_2 ] 
-		}		
-
-		{ 
-			symbol: "0" 
-			tiles: [ dungeon_floor ] 
-			connectors: [ dungeon_east_1x1 ]
-		}				
-	]
-		
+	tile_map_modifier wall_face: !DUNGEON_WALL_FACE_MODIFIER {}
+	palette: !DUNGEON_PALETTE {}		
 	paletted_map:
 	[
+		"WWWWW "
+		"WWeWW "
+		"W.i.W "
+		"W...W "
+		"W....1"
+		"WWWWW "
+	]		
+}
+
+map_segment dungeon_entrance_2<paletted>:
+{
+	tile_map_modifier wall_face: !DUNGEON_WALL_FACE_MODIFIER {}
+	palette: !DUNGEON_PALETTE {}		
+	paletted_map:
+	[
+		"WWWWW"
 		"WWeWW"
 		"W.i.W"
 		"W...W"
-		"W...0"
+		"2...W"
 		"WWWWW"
-	]	
-	
-	tile_map_modifier wall_face:
-	{
-		walls: [ dungeon_wall ]
-		floors: [ dungeon_floor ]
-		faces: [ dungeon_wall_face ]
-	}
+	]		
 }
 
-map_segment dungeon_passage<paletted>:
+map_segment dungeon_passage_1<paletted>:
 {
-	palette:
+	tile_map_modifier wall_face: !DUNGEON_WALL_FACE_MODIFIER {}
+	palette: !DUNGEON_PALETTE {}		
+	paletted_map:
 	[
-		{ symbol: "." tiles: [ dungeon_floor ] }			
-		{ symbol: "W" tiles: [ dungeon_wall ] }
-		
-		{ 
-			symbol: "1" 
-			tiles: [ dungeon_floor ] 
-			connectors: [ dungeon_west_1x1 ]
-		}		
-	]
-		
+		"WWWWW "
+		"W...W "
+		"2....1"
+		"W...W "
+		"WWWWW "
+	]	
+}
+
+map_segment dungeon_passage_2<paletted>:
+{
+	tile_map_modifier wall_face: !DUNGEON_WALL_FACE_MODIFIER {}
+	palette: !DUNGEON_PALETTE {}				
+	paletted_map:
+	[
+		"WWWWWWWWW "
+		"W.......W "
+		"2.......W "
+		"W.......W "
+		"WWWWW...W "
+		"    W...W "
+		"    W...W "
+		"    W....1"
+		"    WWWWW "
+	]	
+}
+
+map_segment dungeon_passage_3<paletted>:
+{
+	tile_map_modifier wall_face: !DUNGEON_WALL_FACE_MODIFIER {}
+	palette: !DUNGEON_PALETTE {}		
+	paletted_map:
+	[
+		"WWWWW "
+		"W...W "
+		"2....1"
+		"W...W "
+		"WW.WW "
+		"  3   "
+	]	
+}
+
+map_segment dungeon_passage_4<paletted>:
+{
+	tile_map_modifier wall_face: !DUNGEON_WALL_FACE_MODIFIER {}
+	palette: !DUNGEON_PALETTE {}				
+	paletted_map:
+	[
+		"WW4WWWWWW "
+		"W.......W "
+		"W.......W "
+		"W.......W "
+		"WWWWW...W "
+		"    W...W "
+		"    W...W "
+		"    W...W "
+		"    WW.WW "
+		"      3   "
+	]	
+}
+
+map_segment dungeon_blind_1<paletted>:
+{
+	tile_map_modifier wall_face: !DUNGEON_WALL_FACE_MODIFIER {}
+	palette: !DUNGEON_PALETTE {}				
 	paletted_map:
 	[
 		"WWWWW"
-		"1...W"
+		"W...W"
+		"2...W"
+		"W...W"
 		"WWWWW"
 	]	
-	
-	tile_map_modifier wall_face:
-	{
-		walls: [ dungeon_wall ]
-		floors: [ dungeon_floor ]
-		faces: [ dungeon_wall_face ]
-	}
+}
+
+map_segment dungeon_blind_2<paletted>:
+{
+	tile_map_modifier wall_face: !DUNGEON_WALL_FACE_MODIFIER {}
+	palette: !DUNGEON_PALETTE {}				
+	paletted_map:
+	[
+		"WWWWW "
+		"W...W " 
+		"W....1"
+		"W...W "
+		"WWWWW "
+	]	
+}
+
+map_segment dungeon_blind_3<paletted>:
+{
+	tile_map_modifier wall_face: !DUNGEON_WALL_FACE_MODIFIER {}
+	palette: !DUNGEON_PALETTE {}				
+	paletted_map:
+	[
+		"WW4WW"
+		"W...W"
+		"W...W"
+		"W...W"
+		"WWWWW"
+	]	
+}
+
+map_segment dungeon_blind_4<paletted>:
+{
+	tile_map_modifier wall_face: !DUNGEON_WALL_FACE_MODIFIER {}
+	palette: !DUNGEON_PALETTE {}				
+	paletted_map:
+	[
+		"WWWWW"
+		"W...W" 
+		"W...W"
+		"W...W"
+		"WW.WW"
+		"  3  "
+	]	
 }
 
 map test_dungeon_2:
@@ -107,15 +232,40 @@ map test_dungeon_2:
 		room entrance:
 		{
 			flags: [ root ]
-			segment<1>: dungeon_entrance_room			
+			segment<1>: dungeon_entrance_1
+			segment<1>: dungeon_entrance_2
 			
-			connection passage<dungeon_east_1x1>: { weight: 1 }
+			connection passage<connector_east>: { weight: 1 debug_name: "A" }
+			connection passage<connector_west>: { weight: 1 debug_name: "B" }
 		}
 		
 		room passage:
 		{
-			segment<1>: dungeon_passage
+			segment<1>: dungeon_passage_1
+			segment<1>: dungeon_passage_2
+			segment<1>: dungeon_passage_3
+			segment<1>: dungeon_passage_4
+			
+			connection passage<connector_east>: { weight: 1 debug_name: "C" }
+			connection blind<connector_east>: { weight: 1 debug_name: "D" }
+
+			connection passage<connector_west>: { weight: 1 debug_name: "E" }
+			connection blind<connector_west>: { weight: 1 debug_name: "F" }
+			
+			connection passage<connector_north>: { weight: 1 debug_name: "G" }
+			connection blind<connector_north>: { weight: 1 debug_name: "H" }			
+			
+			connection passage<connector_south>: { weight: 1 debug_name: "I" }
+			connection blind<connector_south>: { weight: 1 debug_name: "J" }						
 		}		
+		
+		room blind:
+		{
+			segment<1>: dungeon_blind_1
+			segment<1>: dungeon_blind_2
+			segment<1>: dungeon_blind_3
+			segment<1>: dungeon_blind_4
+		}				
 	}
 }
  

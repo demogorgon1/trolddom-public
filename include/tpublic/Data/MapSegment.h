@@ -202,9 +202,8 @@ namespace tpublic
 									std::uniform_int_distribution<size_t> distribution(0, paletteEntry->m_tileSpriteIds.size() - 1);
 									m_tiles[offset] = paletteEntry->m_tileSpriteIds[distribution(aRandom)];
 								}
-								else
+								else if(paletteEntry->m_tileSpriteIds.size() == 1)
 								{
-									assert(paletteEntry->m_tileSpriteIds.size() == 1);
 									m_tiles[offset] = paletteEntry->m_tileSpriteIds[0];
 								}			
 								

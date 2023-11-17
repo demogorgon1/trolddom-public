@@ -1,8 +1,7 @@
 #include "Pcheader.h"
 
 #include <tpublic/Parser.h>
-
-#include "Tokenizer.h"
+#include <tpublic/Tokenizer.h>
 
 namespace tpublic
 {
@@ -105,7 +104,7 @@ namespace tpublic
 
 	Parser::Parser(
 		SourceContext*	aSourceContext)
-		: m_root(aSourceContext, DataErrorHandling::DebugInfo("", 0), "")
+		: m_root(aSourceContext, DataErrorHandling::DebugInfo("", 0), "", "")
 	{
 
 	}
@@ -157,27 +156,29 @@ namespace tpublic
 				aTokenizer.Proceed();
 				aTokenizer.ConsumeToken("define");
 
+				bool isLocal = aTokenizer.TryConsumeToken("local");
+
 				// Macro definition
 				const std::string& identifier = aTokenizer.ConsumeAnyIdentifier();
 					
-				std::unique_ptr<SourceNode> body = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer.Next().m_debugInfo, aTokenizer.GetPath());
+				std::unique_ptr<SourceNode> body = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
 				_ParseValue(aTokenizer, body.get());
 
 				std::unique_ptr<Macro> macro = std::make_unique<Macro>(identifier.c_str(), body->m_debugInfo);
 				macro->m_body = std::move(body);
 
 				// Insert macro in namespace
-				_GetOrCreateMacroNamespace(aTokenizer.GetPath())->InsertMacro(macro);
+				_GetOrCreateMacroNamespace(isLocal ? aTokenizer.GetPathWithFileName() : aTokenizer.GetPath())->InsertMacro(macro);
 			}
 			else
 			{
-				std::unique_ptr<SourceNode> node = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer.Next().m_debugInfo, aTokenizer.GetPath());
+				std::unique_ptr<SourceNode> node = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
 
 				if (aTokenizer.IsToken("<"))
 				{
 					aTokenizer.Proceed();
 				
-					std::unique_ptr<SourceNode> expression = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer.Next().m_debugInfo, aTokenizer.GetPath());
+					std::unique_ptr<SourceNode> expression = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
 					_ParseExpression(aTokenizer, expression.get());
 
 					node->m_condition = std::move(expression);
@@ -201,7 +202,7 @@ namespace tpublic
 				{
 					aTokenizer.Proceed();
 
-					std::unique_ptr<SourceNode> annotation = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer.Next().m_debugInfo, aTokenizer.GetPath());
+					std::unique_ptr<SourceNode> annotation = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
 					_ParseValue(aTokenizer, annotation.get());
 
 					node->m_annotation = std::move(annotation);
@@ -233,13 +234,13 @@ namespace tpublic
 				break;
 			}
 			
-			std::unique_ptr<SourceNode> node = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer.Next().m_debugInfo, aTokenizer.GetPath());
+			std::unique_ptr<SourceNode> node = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
 
 			if (aTokenizer.IsToken("<"))
 			{
 				aTokenizer.Proceed();
 
-				std::unique_ptr<SourceNode> expression = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer.Next().m_debugInfo, aTokenizer.GetPath());
+				std::unique_ptr<SourceNode> expression = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
 				_ParseExpression(aTokenizer, expression.get());
 
 				node->m_condition = std::move(expression);
@@ -267,7 +268,7 @@ namespace tpublic
 
 			// Macro name
 			{
-				std::unique_ptr<SourceNode> node = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer.Next().m_debugInfo, aTokenizer.GetPath());
+				std::unique_ptr<SourceNode> node = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
 				node->m_type = SourceNode::TYPE_IDENTIFIER;
 				node->m_value = macroName;
 				aParent->m_children.push_back(std::move(node));
@@ -275,7 +276,7 @@ namespace tpublic
 
 			// Macro arguments
 			{
-				std::unique_ptr<SourceNode> node = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer.Next().m_debugInfo, aTokenizer.GetPath());
+				std::unique_ptr<SourceNode> node = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
 
 				_ParseValue(aTokenizer, node.get());
 
@@ -291,7 +292,7 @@ namespace tpublic
 
 			// Reference name
 			{
-				std::unique_ptr<SourceNode> node = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer.Next().m_debugInfo, aTokenizer.GetPath());
+				std::unique_ptr<SourceNode> node = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
 				node->m_type = SourceNode::TYPE_IDENTIFIER;
 				node->m_value = referenceName;
 				aParent->m_children.push_back(std::move(node));
@@ -443,7 +444,7 @@ namespace tpublic
 					const char* macroName = child->m_children[0]->GetIdentifier();
 					std::unique_ptr<SourceNode> arg = std::move(child->m_children[1]);
 
-					const Macro* macro = _FindMacro(child->m_path.c_str(), macroName);
+					const Macro* macro = _FindMacro(child->m_pathWithFileName.c_str(), macroName);
 					TP_VERIFY(macro != NULL, child->m_debugInfo, "'%s' is not a defined macro.", macroName);
 
 					child->Copy(macro->m_body.get());
@@ -519,7 +520,7 @@ namespace tpublic
 			{
 				aTokenizer.Proceed();
 				std::unique_ptr<SourceNode> rhs(_ExprAnds(aTokenizer));
-				std::unique_ptr<SourceNode> newLhs = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer.Next().m_debugInfo, aTokenizer.GetPath());
+				std::unique_ptr<SourceNode> newLhs = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
 				newLhs->m_type = SourceNode::TYPE_EXPRESSION_OR;
 				newLhs->m_children.push_back(std::move(lhs));
 				newLhs->m_children.push_back(std::move(rhs));
@@ -542,7 +543,7 @@ namespace tpublic
 			{
 				aTokenizer.Proceed();
 				std::unique_ptr<SourceNode> rhs(_ExprEquals(aTokenizer));
-				std::unique_ptr<SourceNode> newLhs = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer.Next().m_debugInfo, aTokenizer.GetPath());
+				std::unique_ptr<SourceNode> newLhs = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
 				newLhs->m_type = SourceNode::TYPE_EXPRESSION_AND;
 				newLhs->m_children.push_back(std::move(lhs));
 				newLhs->m_children.push_back(std::move(rhs));
@@ -565,7 +566,7 @@ namespace tpublic
 			{
 				aTokenizer.Proceed();
 				std::unique_ptr<SourceNode> rhs(_ExprSummands(aTokenizer));
-				std::unique_ptr<SourceNode> newLhs = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer.Next().m_debugInfo, aTokenizer.GetPath());
+				std::unique_ptr<SourceNode> newLhs = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
 				newLhs->m_type = SourceNode::TYPE_EXPRESSION_EQUAL;
 				newLhs->m_children.push_back(std::move(lhs));
 				newLhs->m_children.push_back(std::move(rhs));
@@ -588,7 +589,7 @@ namespace tpublic
 			{
 				aTokenizer.Proceed();
 				std::unique_ptr<SourceNode> rhs(_ExprFactors(aTokenizer));
-				std::unique_ptr<SourceNode> newLhs = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer.Next().m_debugInfo, aTokenizer.GetPath());
+				std::unique_ptr<SourceNode> newLhs = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
 				newLhs->m_type = SourceNode::TYPE_EXPRESSION_ADD;
 				newLhs->m_children.push_back(std::move(lhs));
 				newLhs->m_children.push_back(std::move(rhs));
@@ -599,7 +600,7 @@ namespace tpublic
 			{
 				aTokenizer.Proceed();
 				std::unique_ptr<SourceNode> rhs(_ExprFactors(aTokenizer));
-				std::unique_ptr<SourceNode> newLhs = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer.Next().m_debugInfo, aTokenizer.GetPath());
+				std::unique_ptr<SourceNode> newLhs = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
 				newLhs->m_type = SourceNode::TYPE_EXPRESSION_SUBTRACT;
 				newLhs->m_children.push_back(std::move(lhs));
 				newLhs->m_children.push_back(std::move(rhs));
@@ -622,7 +623,7 @@ namespace tpublic
 			{
 				aTokenizer.Proceed();
 				std::unique_ptr<SourceNode> rhs(_ExprExponentials(aTokenizer));
-				std::unique_ptr<SourceNode> newLhs = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer.Next().m_debugInfo, aTokenizer.GetPath());
+				std::unique_ptr<SourceNode> newLhs = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
 				newLhs->m_type = SourceNode::TYPE_EXPRESSION_MULTIPLY;
 				newLhs->m_children.push_back(std::move(lhs));
 				newLhs->m_children.push_back(std::move(rhs));
@@ -633,7 +634,7 @@ namespace tpublic
 			{
 				aTokenizer.Proceed();
 				std::unique_ptr<SourceNode> rhs(_ExprExponentials(aTokenizer));
-				std::unique_ptr<SourceNode> newLhs = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer.Next().m_debugInfo, aTokenizer.GetPath());
+				std::unique_ptr<SourceNode> newLhs = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
 				newLhs->m_type = SourceNode::TYPE_EXPRESSION_DIVIDE;
 				newLhs->m_children.push_back(std::move(lhs));
 				newLhs->m_children.push_back(std::move(rhs));
@@ -656,7 +657,7 @@ namespace tpublic
 			{
 				aTokenizer.Proceed();
 				std::unique_ptr<SourceNode> rhs(_ExprOperand(aTokenizer));
-				std::unique_ptr<SourceNode> newLhs = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer.Next().m_debugInfo, aTokenizer.GetPath());
+				std::unique_ptr<SourceNode> newLhs = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
 				newLhs->m_type = SourceNode::TYPE_EXPRESSION_POWER;
 				newLhs->m_children.push_back(std::move(lhs));
 				newLhs->m_children.push_back(std::move(rhs));
@@ -682,14 +683,14 @@ namespace tpublic
 		else if (aTokenizer.IsToken("-"))
 		{
 			aTokenizer.Proceed();
-			node = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer.Next().m_debugInfo, aTokenizer.GetPath());
+			node = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
 			node->m_type = SourceNode::TYPE_EXPRESSION_NEGATE;
 			node->m_children.push_back(std::unique_ptr<SourceNode>(_ExprOperand(aTokenizer)));
 		}
 		else if (aTokenizer.IsToken("!"))
 		{
 			aTokenizer.Proceed();
-			node = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer.Next().m_debugInfo, aTokenizer.GetPath());
+			node = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
 			node->m_type = SourceNode::TYPE_EXPRESSION_NOT;
 			node->m_children.push_back(std::unique_ptr<SourceNode>(_ExprOperand(aTokenizer)));
 		}
@@ -699,7 +700,7 @@ namespace tpublic
 
 			if(identifier == "exists")
 			{
-				node = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer.Next().m_debugInfo, aTokenizer.GetPath());
+				node = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
 				node->m_type = SourceNode::TYPE_EXPRESSION_EXISTS;
 				node->m_name = aTokenizer.ConsumeAnyIdentifier();		
 			}
