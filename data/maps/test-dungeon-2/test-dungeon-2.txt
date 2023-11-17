@@ -62,6 +62,27 @@ map_segment_connector connector_north: { connects: [ connector_south ] }
 	faces: [ dungeon_wall_face ]
 }
 
+map_segment dungeon_random_room_1<random_room>:
+{
+	tile_map_modifier wall_face: !DUNGEON_WALL_FACE_MODIFIER {}
+	random_room:
+	{
+		wall_tiles: [ dungeon_wall ]
+		floor_tiles: [ dungeon_floor ]
+	
+		rect_count: [ 1 4 ]
+		rect_width: [ 4 10 ]
+		rect_height: [ 4 10 ]
+		
+		connector connector_east: { direction: east size: 1 }
+		connector connector_west: { direction: west size: 1 }
+		connector connector_north: { direction: north size: 1 }
+		connector connector_south: { direction: south size: 1 }
+		
+		connector_count: [ 1 4 ]		
+	}
+}
+
 map_segment dungeon_entrance_1<paletted>:
 {
 	tile_map_modifier wall_face: !DUNGEON_WALL_FACE_MODIFIER {}
@@ -245,6 +266,7 @@ map test_dungeon_2:
 			segment<1>: dungeon_passage_2
 			segment<1>: dungeon_passage_3
 			segment<1>: dungeon_passage_4
+			segment<3>: dungeon_random_room_1
 			
 			connection passage<connector_east>: { weight: 1 debug_name: "C" }
 			connection blind<connector_east>: { weight: 1 debug_name: "D" }

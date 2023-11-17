@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../DataBase.h"
+#include "../UIntRange.h"
 #include "../Vec2.h"
 
 namespace tpublic
@@ -18,7 +19,8 @@ namespace tpublic
 			{
 				INVALID_TYPE,
 
-				TYPE_PALETTED
+				TYPE_PALETTED,
+				TYPE_RANDOM_ROOM
 			};
 
 			enum ObjectType : uint8_t
@@ -29,6 +31,33 @@ namespace tpublic
 				OBJECT_TYPE_PLAYER_SPAWN,
 				OBJECT_TYPE_CONNECTOR
 			};
+
+			enum Direction : uint8_t
+			{
+				INVALID_DIRECTION,
+
+				DIRECTION_WEST,
+				DIRECTION_EAST,
+				DIRECTION_SOUTH,
+				DIRECTION_NORTH,
+
+				NUM_DIRECTIONS
+			};
+
+			static Direction
+			StringToDirection(
+				const char*				aString)
+			{
+				if (strcmp(aString, "west") == 0)
+					return DIRECTION_WEST;
+				if (strcmp(aString, "east") == 0)
+					return DIRECTION_EAST;
+				if (strcmp(aString, "south") == 0)
+					return DIRECTION_SOUTH;
+				if (strcmp(aString, "north") == 0)
+					return DIRECTION_NORTH;
+				return INVALID_DIRECTION;
+			}
 
 			struct Object
 			{
@@ -148,6 +177,133 @@ namespace tpublic
 				// Public data
 				typedef std::unordered_map<uint32_t, std::unique_ptr<PaletteEntry>> Table;
 				Table					m_table;
+			};
+
+			struct RandomRoomConnector
+			{
+				RandomRoomConnector()
+				{
+
+				}
+
+				RandomRoomConnector(
+					const SourceNode* aSource)
+				{
+					m_mapSegmentConnectorId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_SEGMENT_CONNECTOR, aSource->m_name.c_str());
+
+					aSource->GetObject()->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if(aChild->m_name == "direction")
+							m_direction = StringToDirection(aChild->GetIdentifier());
+						else if(aChild->m_name == "size")
+							m_size = aChild->GetUInt32();
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					});
+
+					TP_VERIFY(m_direction != INVALID_DIRECTION, aSource->m_debugInfo, "Invalid direction.");
+				}
+
+				void
+				ToStream(
+					IWriter*			aWriter) const
+				{
+					aWriter->WritePOD(m_direction);
+					aWriter->WriteUInt(m_size);
+				}
+
+				bool
+				FromStream(
+					IReader* aReader)
+				{
+					if (!aReader->ReadPOD(m_direction))
+						return false;
+					if (!aReader->ReadUInt(m_size))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t					m_mapSegmentConnectorId = 0;
+				Direction					m_direction = INVALID_DIRECTION;
+				uint32_t					m_size = 1;
+			};
+
+			struct RandomRoom
+			{
+				RandomRoom()
+				{
+
+				}
+
+				RandomRoom(
+					const SourceNode* aSource)
+				{
+					aSource->GetObject()->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if (aChild->m_name == "wall_tiles")
+							aChild->GetIdArray(DataType::ID_SPRITE, m_wallTiles);
+						else if (aChild->m_name == "floor_tiles")
+							aChild->GetIdArray(DataType::ID_SPRITE, m_floorTiles);
+						else if(aChild->m_name == "rect_count")
+							m_rectCount = UIntRange(aChild);
+						else if (aChild->m_name == "rect_width")
+							m_rectWidth = UIntRange(aChild);
+						else if (aChild->m_name == "rect_height")
+							m_rectHeight = UIntRange(aChild);
+						else if (aChild->m_name == "connector_count")
+							m_connectorCount = UIntRange(aChild);
+						else if(aChild->m_tag == "connector")
+							m_connectors.push_back(RandomRoomConnector(aChild));
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					});
+				}
+
+				void
+				ToStream(
+					IWriter*			aWriter) const
+				{
+					aWriter->WriteUInts(m_wallTiles);
+					aWriter->WriteUInts(m_floorTiles);
+					m_rectCount.ToStream(aWriter);
+					m_rectWidth.ToStream(aWriter);
+					m_rectHeight.ToStream(aWriter);
+					m_connectorCount.ToStream(aWriter);
+					aWriter->WriteObjects(m_connectors);
+				}
+
+				bool
+				FromStream(
+					IReader* aReader)
+				{
+					if (!aReader->ReadUInts(m_wallTiles))
+						return false;
+					if (!aReader->ReadUInts(m_floorTiles))
+						return false;
+					if (!m_rectCount.FromStream(aReader))
+						return false;
+					if (!m_rectWidth.FromStream(aReader))
+						return false;
+					if (!m_rectHeight.FromStream(aReader))
+						return false;
+					if (!m_connectorCount.FromStream(aReader))
+						return false;
+					if(!aReader->ReadObjects(m_connectors))
+						return false;
+					return true;
+				}
+
+				// Public data
+				std::vector<uint32_t>				m_wallTiles;
+				std::vector<uint32_t>				m_floorTiles;
+				UIntRange							m_rectCount;
+				UIntRange							m_rectWidth;
+				UIntRange							m_rectHeight;
+				UIntRange							m_connectorCount;
+				std::vector<RandomRoomConnector>	m_connectors;
 			};
 
 			struct TileMap
@@ -371,7 +527,8 @@ namespace tpublic
 
 				void
 				Apply(
-					TileMap*			aTileMap,
+					uint32_t*			aTileMap,
+					const Vec2&			aSize,
 					std::mt19937&		aRandom) const
 				{
 					switch(m_modifier)
@@ -379,13 +536,12 @@ namespace tpublic
 					case MODIFIER_WALL_FACE:
 						{
 							int32_t i = 0;
-							for (int32_t y = 0; y < aTileMap->m_size.m_y - 1; y++)
+							for (int32_t y = 0; y < aSize.m_y - 1; y++)
 							{
-								for (int32_t x = 0; x < aTileMap->m_size.m_x; x++)
+								for (int32_t x = 0; x < aSize.m_x; x++)
 								{
-									assert((size_t)i < aTileMap->m_tiles.size());
-									uint32_t& spriteId = aTileMap->m_tiles[i];
-									const uint32_t& southSpriteId = aTileMap->m_tiles[i + aTileMap->m_size.m_x];
+									uint32_t& spriteId = aTileMap[i];
+									const uint32_t& southSpriteId = aTileMap[i + aSize.m_x];
 
 									if(std::find(m_wallSpriteIds.cbegin(), m_wallSpriteIds.cend(), spriteId) != m_wallSpriteIds.cend() && 
 										std::find(m_floorSpriteIds.cbegin(), m_floorSpriteIds.cend(), southSpriteId) != m_floorSpriteIds.cend())
@@ -439,6 +595,8 @@ namespace tpublic
 
 				if(strcmp(typeString, "paletted") == 0)
 					m_type = TYPE_PALETTED;
+				else if (strcmp(typeString, "random_room") == 0)
+					m_type = TYPE_RANDOM_ROOM;
 
 				TP_VERIFY(m_type != INVALID_TYPE, aSource->m_debugInfo, "'%s' is not a valid type.", typeString);
 
@@ -452,6 +610,8 @@ namespace tpublic
 						palette = std::make_unique<Palette>(aChild);
 					else if(aChild->m_name == "paletted_map" && m_type == TYPE_PALETTED)
 						m_tileMap = std::make_unique<TileMap>(palette.get(), aChild, random);
+					else if (aChild->m_name == "random_room" && m_type == TYPE_RANDOM_ROOM)
+						m_randomRoom = std::make_unique<RandomRoom>(aChild);
 					else if(aChild->m_tag == "tile_map_modifier")
 						m_tileMapModifiers.push_back(std::make_unique<TileMapModifier>(aChild));
 					else 
@@ -461,7 +621,7 @@ namespace tpublic
 				if(m_tileMap && m_tileMapModifiers.size() > 0)
 				{
 					for(const std::unique_ptr<TileMapModifier>& tileMapModifier : m_tileMapModifiers)
-						tileMapModifier->Apply(m_tileMap.get(), random);
+						tileMapModifier->Apply(&m_tileMap->m_tiles[0], m_tileMap->m_size, random);
 				}
 			}
 
@@ -473,6 +633,7 @@ namespace tpublic
 
 				aStream->WritePOD(m_type);
 				aStream->WriteOptionalObjectPointer(m_tileMap);
+				aStream->WriteOptionalObjectPointer(m_randomRoom);
 				aStream->WriteObjectPointers(m_tileMapModifiers);
 			}
 
@@ -487,6 +648,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadOptionalObjectPointer(m_tileMap))
 					return false;
+				if (!aStream->ReadOptionalObjectPointer(m_randomRoom))
+					return false;
 				if(!aStream->ReadObjectPointers(m_tileMapModifiers))
 					return false;
 				return true;
@@ -496,6 +659,7 @@ namespace tpublic
 			Type											m_type = INVALID_TYPE;
 			std::unique_ptr<TileMap>						m_tileMap;
 			std::vector<std::unique_ptr<TileMapModifier>>	m_tileMapModifiers;
+			std::unique_ptr<RandomRoom>						m_randomRoom;
 		};
 
 	}

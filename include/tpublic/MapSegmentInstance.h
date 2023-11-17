@@ -42,6 +42,13 @@ namespace tpublic
 
 		Connector*			_GetOrCreateConnector(
 								uint32_t					aMapSegmentConnectorId);
+		void				_GenerateRandomRoom(
+								const Manifest*				aManifest,
+								std::mt19937&				aRandom);
+		uint32_t			_SampleGeneratedTileMap(
+								const Vec2&					aPosition) const;
+		bool				_HasConnectorAtPositio(
+								const Vec2&					aPosition) const;
 	};
 
 }
