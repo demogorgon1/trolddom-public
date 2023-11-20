@@ -4,7 +4,6 @@
 #include <tpublic/Manifest.h>
 #include <tpublic/MapData.h>
 #include <tpublic/MapPathData.h>
-#include <tpublic/TileStackCache.h>
 
 #include "MapPathDataBuilder.h"
 

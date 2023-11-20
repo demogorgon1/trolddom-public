@@ -10,7 +10,6 @@ namespace tpublic
 
 	class Manifest;
 	class PersistentIdTable;
-	class TileStackCache;
 
 	class SpriteSheetBuilder
 	{

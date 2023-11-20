@@ -4,7 +4,6 @@
 #include <tpublic/ComponentManager.h>
 #include <tpublic/Compression.h>
 #include <tpublic/DataErrorHandling.h>
-#include <tpublic/TileStackCache.h>
 #include <tpublic/Tokenizer.h>
 
 #include "FileWriter.h"
