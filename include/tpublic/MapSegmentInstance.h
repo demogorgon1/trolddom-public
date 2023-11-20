@@ -18,7 +18,7 @@ namespace tpublic
 		{			
 			uint32_t							m_mapSegmentConnectorId = 0;
 			std::vector<Vec2>					m_positions;
-		};
+		};		
 
 		void				Generate(						
 								const Manifest*				aManifest,
@@ -37,6 +37,7 @@ namespace tpublic
 
 		std::vector<uint32_t>					m_generatedTileMap;
 		std::vector<std::unique_ptr<Connector>>	m_connectors;
+		std::vector<Data::MapSegment::Object>	m_objects;
 
 	private:
 

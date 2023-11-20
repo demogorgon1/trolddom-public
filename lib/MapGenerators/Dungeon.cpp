@@ -83,7 +83,7 @@ namespace tpublic::MapGenerators
 		uint32_t						aSeed,
 		const MapData*					aSourceMapData,
 		const char*						aDebugImagePath,
-		std::unique_ptr<MapData>&		/*aOutMapData*/) const 
+		std::unique_ptr<MapData>&		aOutMapData) const 
 	{
 		Builder builder(aManifest, aSeed, aSourceMapData, m_rooms);
 
@@ -95,7 +95,7 @@ namespace tpublic::MapGenerators
 		if (aDebugImagePath != NULL)
 			builder.DebugImageOutput(aDebugImagePath);
 
-		//aOutMapData.reset(builder.CreateMapData());
+		aOutMapData.reset(builder.CreateMapData());
 		return true;
 	}
 
@@ -146,19 +146,19 @@ namespace tpublic::MapGenerators
 	{
 		assert(!m_openConnectors.empty());
 
-		printf("[generate and attach room: %zu open connectors]\n", m_openConnectors.size());
+		//printf("[generate and attach room: %zu open connectors]\n", m_openConnectors.size());
 
-		for(const OpenConnector& x : m_openConnectors)
-		{
-			const GeneratedRoomConnector* y = x.m_generatedRoom->m_connectors[x.m_connectorIndex].get();
-			for(const Vec2& pos : y->m_connector->m_positions)
-			{
-				Vec2 s = pos + x.m_generatedRoom->m_min;
-				printf("<%d %d>", s.m_x, s.m_y);
-			}
+		//for(const OpenConnector& x : m_openConnectors)
+		//{
+		//	const GeneratedRoomConnector* y = x.m_generatedRoom->m_connectors[x.m_connectorIndex].get();
+		//	for(const Vec2& pos : y->m_connector->m_positions)
+		//	{
+		//		Vec2 s = pos + x.m_generatedRoom->m_min;
+		//		printf("<%d %d>", s.m_x, s.m_y);
+		//	}
 
-			printf(" %s\n", x.m_generatedRoom->m_mapSegmentInstance.m_mapSegment->m_name.c_str());
-		}
+		//	printf(" %s\n", x.m_generatedRoom->m_mapSegmentInstance.m_mapSegment->m_name.c_str());
+		//}
 
 		// Pick random open connector
 		OpenConnector openConnector;
@@ -221,15 +221,15 @@ namespace tpublic::MapGenerators
 				candidates.clear();
 			}
 
-			printf("trying connection %s\n", connection->m_debugName.c_str());
+			//printf("trying connection %s\n", connection->m_debugName.c_str());
 
 			// Try generating this room
 			const Room* room = m_sourceRooms[connection->m_roomIndex];
 			std::unique_ptr<GeneratedRoom> generatedRoom(_GenerateRoom(room));
 
-			printf("generated room: %s (%ux%u)\n", 
-				generatedRoom->m_mapSegmentInstance.m_mapSegment->m_name.c_str(),
-				generatedRoom->m_mapSegmentInstance.m_size.m_x, generatedRoom->m_mapSegmentInstance.m_size.m_y);
+			//printf("generated room: %s (%ux%u)\n", 
+			//	generatedRoom->m_mapSegmentInstance.m_mapSegment->m_name.c_str(),
+			//	generatedRoom->m_mapSegmentInstance.m_size.m_x, generatedRoom->m_mapSegmentInstance.m_size.m_y);
 
 			// Find matching connectors
 			struct Match
@@ -283,14 +283,14 @@ namespace tpublic::MapGenerators
 					matchingConnectors.clear();
 				}
 
-				printf("offset %d %d\n", match.m_offset.m_x, match.m_offset.m_y);
+				//printf("offset %d %d\n", match.m_offset.m_x, match.m_offset.m_y);
 
 				generatedRoom->m_min = match.m_offset;
 				generatedRoom->m_max = generatedRoom->m_min + generatedRoom->m_mapSegmentInstance.m_size;
 
 				if(!_CheckOverlap(generatedRoom.get()))
 				{
-					printf("ok\n");
+					//printf("ok\n");
 
 					for (size_t i = 0; i < generatedRoom->m_connectors.size(); i++)
 					{
@@ -309,7 +309,7 @@ namespace tpublic::MapGenerators
 				}
 				else
 				{
-					printf("failed\n");
+					//printf("failed\n");
 				}
 			}	
 		}
@@ -345,8 +345,76 @@ namespace tpublic::MapGenerators
 	MapData* 
 	Dungeon::Builder::CreateMapData()
 	{
-		assert(false);
-		return NULL;
+		std::unique_ptr<MapData> mapData = std::make_unique<MapData>();
+		mapData->CopyFrom(m_sourceMapData);
+		assert(mapData->m_tileMap == NULL);
+
+		mapData->m_width = m_max.m_x - m_min.m_x;
+		mapData->m_height = m_max.m_y - m_min.m_y;
+		assert(mapData->m_width > 0 && mapData->m_height > 0);
+
+		mapData->m_tileMap = new uint32_t[mapData->m_width * mapData->m_height];
+		memset(mapData->m_tileMap, 0, mapData->m_width * mapData->m_height * sizeof(uint32_t));
+
+		for (const std::unique_ptr<GeneratedRoom>& generatedRoom : m_generatedRooms)
+		{
+			for (int32_t y = 0; y < generatedRoom->m_mapSegmentInstance.m_size.m_y; y++)
+			{
+				const uint32_t* src = &generatedRoom->m_mapSegmentInstance.m_tileMap[y * generatedRoom->m_mapSegmentInstance.m_size.m_x];
+
+				Vec2 dstPosition = generatedRoom->m_min + Vec2(0, y);
+				uint32_t* dst = &mapData->m_tileMap[dstPosition.m_x + dstPosition.m_y * mapData->m_width];
+
+				memcpy(dst, src, sizeof(uint32_t) * generatedRoom->m_mapSegmentInstance.m_size.m_x);
+			}
+
+			for(const Data::MapSegment::Object& object : generatedRoom->m_mapSegmentInstance.m_objects)
+			{
+				switch(object.m_type)
+				{
+				case Data::MapSegment::OBJECT_TYPE_PORTAL:
+					{
+						MapData::Portal t;
+						t.m_id = object.m_id;
+						t.m_x = object.m_position.m_x;
+						t.m_y = object.m_position.m_y;
+						mapData->m_portals.push_back(t);
+					}
+					break;
+
+				case Data::MapSegment::OBJECT_TYPE_PLAYER_SPAWN:
+					{
+						MapData::PlayerSpawn t;
+						t.m_id = object.m_id;
+						t.m_x = object.m_position.m_x;
+						t.m_y = object.m_position.m_y;
+						mapData->m_playerSpawns.push_back(t);
+					}
+					break;
+
+				default:
+					assert(false);
+					break;
+				}
+			}
+		}
+
+		{
+			uint32_t* p = mapData->m_tileMap;
+
+			for (int32_t y = 0; y < mapData->m_height; y++)
+			{
+				for (int32_t x = 0; x < mapData->m_width; x++)
+				{
+					if (*p == 0)
+						*p = mapData->m_defaultTileSpriteId;
+
+					p++;
+				}
+			}
+		}
+
+		return mapData.release();
 	}
 
 	void			

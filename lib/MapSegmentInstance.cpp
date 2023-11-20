@@ -31,6 +31,7 @@ namespace tpublic
 					break;
 
 				default:
+					m_objects.push_back(object);
 					break;
 				}
 			}
