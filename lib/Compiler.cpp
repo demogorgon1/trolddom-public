@@ -94,15 +94,13 @@ namespace tpublic
 		});		
 
 		// Build map data
-		TileStackCache tileStackCache(m_manifest);
-
 		{
 			spriteSheetBuilder.ExportPreliminaryManifestData(m_sourceContext.m_persistentIdTable.get(), m_manifest);
 
 			m_manifest->m_maps.ForEach([&](
 				Data::Map* aMap)
 			{
-				aMap->m_data->Build(m_manifest, &tileStackCache);
+				aMap->m_data->Build(m_manifest);
 
 				aMap->m_data->ConstructMapPathData(m_manifest);
 			});			
@@ -110,7 +108,6 @@ namespace tpublic
 
 		// Build sprite sheets
 		{
-			spriteSheetBuilder.GenerateStackedTiles(&tileStackCache, m_manifest);
 			spriteSheetBuilder.Build();
 			spriteSheetBuilder.UpdateManifestData();
 

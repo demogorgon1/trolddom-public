@@ -12,7 +12,6 @@ namespace tpublic
 
 	class Manifest;
 	class MapPathData;
-	class TileStackCache;
 
 	class MapData
 	{
@@ -359,8 +358,7 @@ namespace tpublic
 				~MapData();
 
 		void	Build(
-					const Manifest*			aManifest,
-					TileStackCache*			aTileStackCache);
+					const Manifest*			aManifest);
 		void	ConstructMapPathData(
 					const Manifest*			aManifest);
 		void	ToStream(
@@ -368,6 +366,7 @@ namespace tpublic
 		bool	FromStream(
 					IReader*				aStream);
 		void	PrepareRuntime(
+					uint8_t					aRuntime,
 					const Manifest*			aManifest);
 		bool	IsTileWalkable(
 					int32_t					aX,
@@ -375,6 +374,8 @@ namespace tpublic
 		bool	DoesTileblockLineOfSight(
 					int32_t					aX,
 					int32_t					aY) const;
+		void	CopyFrom(
+					const MapData*			aMapData);
 
 		// Public data
 		MapType::Id									m_type;

@@ -49,10 +49,11 @@ namespace tpublic
 
 			void
 			PrepareRuntime(
+				uint8_t					aRuntime,
 				const Manifest*			aManifest) override
 			{
 				assert(m_data);
-				m_data->PrepareRuntime(aManifest);
+				m_data->PrepareRuntime(aRuntime, aManifest);
 			}
 
 			// Public data

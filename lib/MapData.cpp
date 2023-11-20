@@ -108,190 +108,85 @@ namespace tpublic
 
 	void	
 	MapData::Build(
-		const Manifest*			aManifest,
-		TileStackCache*			aTileStackCache)
+		const Manifest*			aManifest)
 	{
-		// Allocate space for tile map
-		assert(m_tileMap == NULL);
-		m_tileMap = new uint32_t[m_width * m_height];
-		for(int32_t i = 0, count = m_width * m_height; i < count; i++)
-			m_tileMap[i] = m_defaultTileSpriteId;		
-
-		// Allocate temporary tile stack map
-		std::vector<std::vector<uint32_t>> tileStackMap;
-		tileStackMap.resize(m_width * m_height);
-
-		// Process layers
-		for(std::unique_ptr<SourceLayer>& layer : m_sourceLayers)
+		if(m_sourceLayers.size() > 0)
 		{
-			typedef std::unordered_map<uint32_t, const Data::MapPalette::Entry*> CombinedPalette;
-			CombinedPalette combinedPalette;
+			// Allocate space for tile map
+			assert(m_tileMap == NULL);
+			m_tileMap = new uint32_t[m_width * m_height];
+			for(int32_t i = 0, count = m_width * m_height; i < count; i++)
+				m_tileMap[i] = m_defaultTileSpriteId;		
 
-			// Make combined palette
-			for(uint32_t paletteId : layer->m_palettes)
+			// Process layers
+			for(std::unique_ptr<SourceLayer>& layer : m_sourceLayers)
 			{
-				const Data::MapPalette* palette = aManifest->m_mapPalettes.GetById(paletteId);
+				typedef std::unordered_map<uint32_t, const Data::MapPalette::Entry*> CombinedPalette;
+				CombinedPalette combinedPalette;
 
-				for(const Data::MapPalette::Entry& paletteEntry : palette->m_entries)
+				// Make combined palette
+				for(uint32_t paletteId : layer->m_palettes)
 				{
-					uint32_t key = _MakeColorKey(paletteEntry.m_color.m_r, paletteEntry.m_color.m_g, paletteEntry.m_color.m_b);
-					TP_VERIFY(combinedPalette.find(key) == combinedPalette.end(), layer->m_debugInfo, "Source color defined by multiple palettes used at the same time.");
-					combinedPalette[key] = &paletteEntry;
-				}
-			}
+					const Data::MapPalette* palette = aManifest->m_mapPalettes.GetById(paletteId);
 
-			// Process image
-			{
-				const SourceLayer::RGB* src = layer->m_rgb;
-				size_t maskIndex = 0;
-
-				for (int32_t y = 0; y < layer->m_height; y++)
-				{
-					for (int32_t x = 0; x < layer->m_width; x++)
+					for(const Data::MapPalette::Entry& paletteEntry : palette->m_entries)
 					{
-						if ((layer->m_mask[maskIndex / 8] & (1 << (maskIndex % 8))) != 0)
-						{
-							uint32_t key = _MakeColorKey(src->m_r, src->m_g, src->m_b);
-							CombinedPalette::iterator i = combinedPalette.find(key);
-							TP_VERIFY(i != combinedPalette.end(), layer->m_debugInfo, "Source color not defined in any palette: %u %u %u (%d, %d)", src->m_r, src->m_g, src->m_b, x, y);
-
-							const Data::MapPalette::Entry* entry = i->second;
-
-							int32_t mapX = x - layer->m_x;
-							int32_t mapY = y - layer->m_y;
-							assert(mapX >= 0 && mapY >= 0 && mapX < m_width && mapY < m_height);
-
-							switch(entry->m_type)
-							{
-							case Data::MapPalette::ENTRY_TYPE_TILE:
-								m_tileMap[mapX + mapY * m_width] = entry->m_id;
-								break;
-
-							case Data::MapPalette::ENTRY_TYPE_ENTITY_SPAWN:
-								m_entitySpawns.push_back({ mapX, mapY, entry->m_id });
-								break;
-
-							case Data::MapPalette::ENTRY_TYPE_PLAYER_SPAWN:
-								m_playerSpawns.push_back({ mapX, mapY, entry->m_id });
-								break;
-
-							case Data::MapPalette::ENTRY_TYPE_PORTAL:
-								m_portals.push_back({ mapX, mapY, entry->m_id });
-								break;
-
-							default:
-								assert(false);
-								break;
-							}
-						}
-
-						src++;
-						maskIndex++;
+						uint32_t key = _MakeColorKey(paletteEntry.m_color.m_r, paletteEntry.m_color.m_g, paletteEntry.m_color.m_b);
+						TP_VERIFY(combinedPalette.find(key) == combinedPalette.end(), layer->m_debugInfo, "Source color defined by multiple palettes used at the same time.");
+						combinedPalette[key] = &paletteEntry;
 					}
 				}
-			}
-		}
 
-		// Make list of tiles with borders
-		std::vector<const Data::Sprite*> spritesWithBorders;
-		aManifest->m_sprites.ForEach([&](
-			const Data::Sprite* aSprite)
-		{
-			if(aSprite->m_info.m_borders.size() > 0)
-				spritesWithBorders.push_back(aSprite);
-		});
-
-		// Sort by tile layer 
-		std::sort(spritesWithBorders.begin(), spritesWithBorders.end(), [](
-			const Data::Sprite* aLHS,
-			const Data::Sprite* aRHS)
-		{
-			return aLHS->m_info.m_tileLayer < aRHS->m_info.m_tileLayer;
-		});
-
-		// Generate tile-stack map (tile borders stacked on top of each other)
-		for (const Data::Sprite* t : spritesWithBorders)
-		{
-			TP_VERIFY(t->m_info.m_borders.size() == 17, t->m_debugInfo, "Bordered tile must have 17 borders defined.");
-
-			for (int32_t y = 0; y < m_height; y++)
-			{
-				for (int32_t x = 0; x < m_width; x++)
+				// Process image
 				{
-					uint32_t tileSpriteId = m_tileMap[x + y * m_width];
-					if(tileSpriteId == t->m_id)
-						continue;
+					const SourceLayer::RGB* src = layer->m_rgb;
+					size_t maskIndex = 0;
 
-					const Data::Sprite* sprite = aManifest->m_sprites.GetById(tileSpriteId);
-					if(sprite->m_info.m_tileLayer >= t->m_info.m_tileLayer)	
-						continue;
+					for (int32_t y = 0; y < layer->m_height; y++)
+					{
+						for (int32_t x = 0; x < layer->m_width; x++)
+						{
+							if ((layer->m_mask[maskIndex / 8] & (1 << (maskIndex % 8))) != 0)
+							{
+								uint32_t key = _MakeColorKey(src->m_r, src->m_g, src->m_b);
+								CombinedPalette::iterator i = combinedPalette.find(key);
+								TP_VERIFY(i != combinedPalette.end(), layer->m_debugInfo, "Source color not defined in any palette: %u %u %u (%d, %d)", src->m_r, src->m_g, src->m_b, x, y);
 
-					std::vector<uint32_t>& tileStack = tileStackMap[x + y * m_width];					
+								const Data::MapPalette::Entry* entry = i->second;
 
-					// Unleash the tiling monster
-					bool bits[8];
-					bits[0] = _GetTile(x - 1, y - 1) == t->m_id;
-					bits[1] = _GetTile(x, y - 1) == t->m_id;
-					bits[2] = _GetTile(x + 1, y - 1) == t->m_id;
-					bits[3] = _GetTile(x + 1, y) == t->m_id;
-					bits[4] = _GetTile(x + 1, y + 1) == t->m_id;
-					bits[5] = _GetTile(x, y + 1) == t->m_id;
-					bits[6] = _GetTile(x - 1, y + 1) == t->m_id;
-					bits[7] = _GetTile(x - 1, y) == t->m_id;
+								int32_t mapX = x - layer->m_x;
+								int32_t mapY = y - layer->m_y;
+								assert(mapX >= 0 && mapY >= 0 && mapX < m_width && mapY < m_height);
 
-					if (bits[1] && bits[7] && !bits[3] && !bits[5])
-						tileStack.push_back(t->m_info.m_borders[0]);
-					if (bits[1] && bits[3] && !bits[5] && !bits[7])
-						tileStack.push_back(t->m_info.m_borders[1]);
-					if (bits[3] && bits[5] && !bits[7] && !bits[1])
-						tileStack.push_back(t->m_info.m_borders[2]);
-					if (bits[5] && bits[7] && !bits[1] && !bits[3])
-						tileStack.push_back(t->m_info.m_borders[3]);
+								switch(entry->m_type)
+								{
+								case Data::MapPalette::ENTRY_TYPE_TILE:
+									m_tileMap[mapX + mapY * m_width] = entry->m_id;
+									break;
 
-					if (bits[5] && !bits[7] && !bits[3])
-						tileStack.push_back(t->m_info.m_borders[4]);
-					if (bits[7] && !bits[1] && !bits[5])
-						tileStack.push_back(t->m_info.m_borders[5]);
-					if (bits[1] && !bits[7] && !bits[3])
-						tileStack.push_back(t->m_info.m_borders[6]);
-					if (bits[3] && !bits[1] && !bits[5])
-						tileStack.push_back(t->m_info.m_borders[7]);
+								case Data::MapPalette::ENTRY_TYPE_ENTITY_SPAWN:
+									m_entitySpawns.push_back({ mapX, mapY, entry->m_id });
+									break;
 
-					if (!bits[1] && bits[3] && bits[5] && bits[7])
-						tileStack.push_back(t->m_info.m_borders[8]);
-					if (bits[1] && !bits[3] && bits[5] && bits[7])
-						tileStack.push_back(t->m_info.m_borders[9]);
-					if (bits[1] && bits[3] && !bits[5] && bits[7])
-						tileStack.push_back(t->m_info.m_borders[10]);
-					if (bits[1] && bits[3] && bits[5] && !bits[7])
-						tileStack.push_back(t->m_info.m_borders[11]);
+								case Data::MapPalette::ENTRY_TYPE_PLAYER_SPAWN:
+									m_playerSpawns.push_back({ mapX, mapY, entry->m_id });
+									break;
 
-					if (bits[0] && !bits[7] && !bits[1])
-						tileStack.push_back(t->m_info.m_borders[12]);
-					if (bits[2] && !bits[1] && !bits[3])
-						tileStack.push_back(t->m_info.m_borders[13]);
-					if (bits[4] && !bits[3] && !bits[5])
-						tileStack.push_back(t->m_info.m_borders[14]);
-					if (bits[6] && !bits[5] && !bits[7])
-						tileStack.push_back(t->m_info.m_borders[15]);
+								case Data::MapPalette::ENTRY_TYPE_PORTAL:
+									m_portals.push_back({ mapX, mapY, entry->m_id });
+									break;
 
-					if (bits[1] && bits[3] && bits[5] && bits[7])
-						tileStack.push_back(t->m_info.m_borders[16]);
+								default:
+									assert(false);
+									break;
+								}
+							}
+
+							src++;
+							maskIndex++;
+						}
+					}
 				}
-			}
-		}
-
-		// Process tile stacks. See if we need to automatically generate border some tiles.
-		for (int32_t y = 0; y < m_height; y++)
-		{
-			for (int32_t x = 0; x < m_width; x++)
-			{
-				int32_t i = x + y * m_width;
-
-				const std::vector<uint32_t>& tileStack = tileStackMap[i];
-
-				if(tileStack.size() > 0)
-					m_tileMap[i] = aTileStackCache->GetSpriteId(m_tileMap[i], tileStack);				
 			}
 		}
 	}
@@ -312,8 +207,6 @@ namespace tpublic
 	MapData::ToStream(
 		IWriter*				aStream) const
 	{
-		assert(m_tileMap != NULL);
-
 		aStream->WritePOD(m_type);
 		aStream->WritePOD(m_resetMode);
 		aStream->WriteString(m_displayName);
@@ -373,12 +266,15 @@ namespace tpublic
 		if(m_width < 0 || m_width > 2048 || m_height < 0 || m_height > 2048)
 			return false;
 
-		assert(m_tileMap == NULL);
-		m_tileMap = new uint32_t[m_width * m_height];
-		for (int32_t i = 0, count = m_width * m_height; i < count; i++)
+		if(m_width != 0 && m_height != 0)
 		{
-			if(!aStream->ReadUInt(m_tileMap[i]))
-				return false;
+			assert(m_tileMap == NULL);
+			m_tileMap = new uint32_t[m_width * m_height];
+			for (int32_t i = 0, count = m_width * m_height; i < count; i++)
+			{
+				if(!aStream->ReadUInt(m_tileMap[i]))
+					return false;
+			}
 		}
 
 		if (!aStream->ReadObjects(m_entitySpawns))
@@ -398,17 +294,18 @@ namespace tpublic
 
 	void	
 	MapData::PrepareRuntime(
+		uint8_t					/*aRuntime*/,
 		const Manifest*			aManifest)
 	{
-		if(!m_generator)
-		{
-			assert(m_walkableBits == NULL);
-			assert(m_blockLineOfSightBits == NULL);
-			assert(m_tileMap != NULL);
-			assert(m_width > 0 && m_height > 0);
+		if(m_tileMap == NULL)
+			return;
 
-			_InitBits(aManifest);
-		}
+		assert(m_walkableBits == NULL);
+		assert(m_blockLineOfSightBits == NULL);
+		assert(m_tileMap != NULL);
+		assert(m_width > 0 && m_height > 0);
+
+		_InitBits(aManifest);
 	}
 
 	bool	
@@ -443,6 +340,44 @@ namespace tpublic
 		uint32_t j = i / 32;
 		uint32_t k = i % 32;
 		return (m_blockLineOfSightBits[j] & (1 << k)) != 0;
+	}
+
+	void	
+	MapData::CopyFrom(
+		const MapData*			aMapData)
+	{
+		// FIXME: wonky bonky, need a slam with the refactoring hammer
+		m_type = aMapData->m_type;
+		m_resetMode = aMapData->m_resetMode;
+		m_displayName = aMapData->m_displayName;
+		m_defaultTileSpriteId = aMapData->m_defaultTileSpriteId;
+		m_defaultPlayerSpawnId = aMapData->m_defaultPlayerSpawnId;
+		m_defaultExitPortalId = aMapData->m_defaultExitPortalId;
+		m_viewAttenuation = aMapData->m_viewAttenuation;
+		m_viewAttenuationBias = aMapData->m_viewAttenuationBias;
+		m_viewHiddenVisibility = aMapData->m_viewHiddenVisibility;
+
+		m_entitySpawns = aMapData->m_entitySpawns;
+		m_playerSpawns = aMapData->m_playerSpawns;
+		m_portals = aMapData->m_portals;
+	
+		for(const std::unique_ptr<Script>& script : aMapData->m_scripts)
+		{
+			std::unique_ptr<Script> t = std::make_unique<Script>();
+			*t = *script;
+			m_scripts.push_back(std::move(t));
+		}
+
+		if(aMapData->m_tileMap != NULL)
+		{
+			assert(m_tileMap == NULL);
+			m_width = aMapData->m_width;
+			m_height = aMapData->m_height;
+			m_x = aMapData->m_x;
+			m_y = aMapData->m_y;
+			m_tileMap = new uint32_t[m_width * m_height];
+			memcpy(m_tileMap, aMapData->m_tileMap, m_width * m_height * sizeof(uint32_t));
+		}
 	}
 
 	//--------------------------------------------------------------------

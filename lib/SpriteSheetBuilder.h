@@ -21,9 +21,6 @@ namespace tpublic
 
 		void	AddSprites(
 					const SourceNode*		aSource);
-		void	GenerateStackedTiles(
-					TileStackCache*			aTileStackCache,
-					Manifest*				aManifest);
 		void	Build();
 		void	ExportPreliminaryManifestData(
 					PersistentIdTable*		aPersistentIdTable,

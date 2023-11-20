@@ -39,11 +39,12 @@ namespace tpublic
 	class Manifest
 	{
 	public:
-		struct IDataContainer			
+		struct IDataContainer						
 		{
 			// Virtual interface
 			virtual void		Verify() const = 0;
 			virtual void		PrepareRuntime(
+									uint8_t				aRuntime,
 									const Manifest*		aManifest) = 0;
 			virtual void		ToStream(
 									IWriter*			aStream) const = 0;
@@ -201,10 +202,11 @@ namespace tpublic
 
 			void		
 			PrepareRuntime(
+				uint8_t									aRuntime,
 				const Manifest*							aManifest) override
 			{
 				for (const std::unique_ptr<_T>& t : m_entries)
-					t->PrepareRuntime(aManifest);
+					t->PrepareRuntime(aRuntime, aManifest);
 			}
 
 			void
@@ -336,12 +338,13 @@ namespace tpublic
 		}
 
 		void
-		PrepareRuntime()
+		PrepareRuntime(
+			uint8_t										aRuntime)
 		{
 			for (uint8_t i = 1; i < (uint8_t)DataType::NUM_IDS; i++)
 			{
 				assert(m_containers[i] != NULL);
-				m_containers[i]->PrepareRuntime(this);
+				m_containers[i]->PrepareRuntime(aRuntime, this);
 			}
 		}
 

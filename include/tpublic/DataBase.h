@@ -10,9 +10,15 @@ namespace tpublic
 {
 
 	class Manifest;
-
+	
 	struct DataBase
 	{
+		enum Runtime : uint8_t
+		{
+			RUNTIME_SERVER = 0x01,
+			RUNTIME_CLIENT = 0x02
+		};
+		
 		DataBase()
 			: m_defined(false)
 			, m_id(0)
@@ -62,6 +68,7 @@ namespace tpublic
 
 		// Virtual methods
 		virtual void	PrepareRuntime(
+							uint8_t				/*aRuntime*/,
 							const Manifest*		/*aManifest*/) { }
 
 		// Public data

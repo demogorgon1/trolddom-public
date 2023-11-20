@@ -1,7 +1,6 @@
 #include "Pcheader.h"
 
 #include <tpublic/Compression.h>
-#include <tpublic/TileStackCache.h>
 
 #include "SpriteSheetBuilder.h"
 
@@ -184,45 +183,6 @@ namespace tpublic
 				TP_VERIFY(false, aNode->m_debugInfo, "Invalid item in 'sprites'.");
 			}
 		});
-	}
-
-	void	
-	SpriteSheetBuilder::GenerateStackedTiles(
-		TileStackCache*			aTileStackCache,
-		Manifest*				aManifest)
-	{
-		const TileStackCache::Table& table = aTileStackCache->GetTable();
-
-		for(TileStackCache::Table::const_iterator i = table.cbegin(); i != table.cend(); i++)
-		{
-			const TileStackCache::Key& key = i->first;
-			uint32_t spriteId = i->second;			
-			Data::Sprite* targetSpriteData = aManifest->m_sprites.GetById(spriteId);
-			Data::Sprite* baseTileSpriteData = aManifest->m_sprites.GetById(key.m_baseTileSpriteId);
-			
-			Sprite* sprite = _CreateSprite(NULL, NULL, baseTileSpriteData->m_width * baseTileSpriteData->m_height);
-			const Sprite* baseTileSprite = _GetSprite(baseTileSpriteData->m_name.c_str());
-
-			sprite->m_data = targetSpriteData;
-
-			targetSpriteData->m_width = baseTileSprite->m_image.GetWidth();
-			targetSpriteData->m_height = baseTileSprite->m_image.GetHeight();
-			targetSpriteData->m_info = baseTileSprite->m_info;
-			targetSpriteData->m_name = sprite->m_name;
-			targetSpriteData->m_defined = true;
-
-			sprite->m_image.Allocate(baseTileSprite->m_image.GetWidth(), baseTileSprite->m_image.GetHeight());
-			sprite->m_image.Insert(0, 0, baseTileSprite->m_image);
-
-			for(uint32_t stackedSpriteId : key.m_stackedSpriteIds)
-			{
-				Data::Sprite* stackedSpriteData = aManifest->m_sprites.GetById(stackedSpriteId);
-				const Sprite* stackedSprite = _GetSprite(stackedSpriteData->m_name.c_str());
-				TP_CHECK(stackedSprite->m_image.GetWidth() == sprite->m_image.GetWidth() && stackedSprite->m_image.GetHeight() == sprite->m_image.GetHeight(), "Stacked tile sprite size mismatch.");
-
-				sprite->m_image.InsertBlended(0, 0, stackedSprite->m_image);
-			}
-		}
 	}
 
 	void	
