@@ -88,6 +88,8 @@ namespace tpublic
 				m_scripts.push_back(std::make_unique<Script>(aNode));
 			else if(aNode->m_tag == "generator")
 				m_generator = std::make_unique<Generator>(aNode);
+			else if(aNode->m_name == "seed")
+				m_seed.FromSource(aNode);
 			else
 				TP_VERIFY(false, aNode->m_debugInfo, "'%s' is not a valid item.", aNode->m_name.c_str());
 		});
@@ -229,6 +231,7 @@ namespace tpublic
 		aStream->WriteObjectPointers(m_scripts);
 		aStream->WriteObjectPointer(m_mapPathData);
 		aStream->WriteOptionalObjectPointer(m_generator);
+		m_seed.ToStream(aStream);
 	}
 
 	bool	
@@ -287,6 +290,8 @@ namespace tpublic
 		if(!aStream->ReadObjectPointer(m_mapPathData))
 			return false;
 		if(!aStream->ReadOptionalObjectPointer(m_generator))
+			return false;
+		if(!m_seed.FromStream(aStream))
 			return false;
 		return true;
 	}

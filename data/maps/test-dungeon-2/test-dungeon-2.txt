@@ -247,6 +247,7 @@ map test_dungeon_2:
 	view_attenuation: 30
 	view_attenuation_bias: 50
 	view_hidden_visibility: 0
+	seed: random
 
 	generator dungeon:
 	{	

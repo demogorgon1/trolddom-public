@@ -1,5 +1,6 @@
 #pragma once
 
+#include "EntityState.h"
 #include "IReader.h"
 #include "IWriter.h"
 #include "MapGeneratorBase.h"
@@ -16,6 +17,84 @@ namespace tpublic
 	class MapData
 	{
 	public:
+		enum SeedType : uint8_t
+		{
+			INVALID_SEED_TYPE,
+
+			SEED_TYPE_RANDOM,		// New random seed every time
+			SEED_TYPE_CONSTANT,		// Always same seed (m_value)
+			SEED_TYPE_HOURLY,		// Based on server date (year-month-day-hour)
+			SEED_TYPE_DAILY,		// Based on server date (year-month-day)
+			SEED_TYPE_WEEKLY,		// Based on server date (year-week)
+			SEED_TYPE_MONTHLY,		// Based on server date (year-month)
+			SEED_TYPE_YEARLY		// Based on server date (year)
+		};
+
+		struct Seed
+		{		
+			void
+			FromSource(
+				const SourceNode*			aSource)
+			{
+				if(aSource->m_type == SourceNode::TYPE_NUMBER)
+				{
+					m_constant = aSource->GetUInt32();
+					m_type = SEED_TYPE_CONSTANT;
+				}
+				else
+				{
+					std::string_view seedTypeString(aSource->GetIdentifier());
+					if (seedTypeString == "random")
+						m_type = SEED_TYPE_RANDOM;
+					else if (seedTypeString == "hourly")
+						m_type = SEED_TYPE_HOURLY;
+					else if (seedTypeString == "daily")
+						m_type = SEED_TYPE_DAILY;
+					else if (seedTypeString == "weekly")
+						m_type = SEED_TYPE_WEEKLY;
+					else if (seedTypeString == "monthly")
+						m_type = SEED_TYPE_MONTHLY;
+					else if (seedTypeString == "yearly")
+						m_type = SEED_TYPE_RANDOM;
+					else
+						TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid seed type.", aSource->GetIdentifier());
+				}
+			}
+
+			void	
+			ToStream(
+				IWriter*					aStream) const
+			{
+				aStream->WritePOD(m_type);
+				aStream->WriteUInt(m_xor);
+
+				if(m_type == SEED_TYPE_CONSTANT)
+					aStream->WriteUInt(m_constant);
+			}
+			
+			bool	
+			FromStream(
+				IReader*					aStream)
+			{
+				if (!aStream->ReadPOD(m_type))
+					return false;
+				if (!aStream->ReadUInt(m_xor))
+					return false;
+
+				if(m_type == SEED_TYPE_CONSTANT)
+				{
+					if (!aStream->ReadUInt(m_constant))
+						return false;
+				}
+				return true;
+			}
+
+			// Public data
+			SeedType			m_type = SEED_TYPE_CONSTANT;
+			uint32_t			m_constant = 1;
+			uint32_t			m_xor = 0x12345678;
+		};
+
 		struct EntitySpawn
 		{
 			void	
@@ -393,6 +472,7 @@ namespace tpublic
 		int32_t										m_width;
 		int32_t										m_height;
 		uint32_t*									m_tileMap;
+		Seed										m_seed;
 		std::vector<EntitySpawn>					m_entitySpawns;
 		std::vector<PlayerSpawn>					m_playerSpawns;
 		std::vector<Portal>							m_portals;
@@ -401,6 +481,7 @@ namespace tpublic
 		uint32_t*									m_blockLineOfSightBits;
 		std::unique_ptr<MapPathData>				m_mapPathData;
 		std::unique_ptr<Generator>					m_generator;
+
 
 		struct SourceLayer
 		{
