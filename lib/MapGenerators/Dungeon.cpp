@@ -358,14 +358,19 @@ namespace tpublic::MapGenerators
 
 		for (const std::unique_ptr<GeneratedRoom>& generatedRoom : m_generatedRooms)
 		{
+			Vec2 dstPosition = generatedRoom->m_min - m_min;
+
 			for (int32_t y = 0; y < generatedRoom->m_mapSegmentInstance.m_size.m_y; y++)
 			{
 				const uint32_t* src = &generatedRoom->m_mapSegmentInstance.m_tileMap[y * generatedRoom->m_mapSegmentInstance.m_size.m_x];
 
-				Vec2 dstPosition = generatedRoom->m_min + Vec2(0, y);
-				uint32_t* dst = &mapData->m_tileMap[dstPosition.m_x + dstPosition.m_y * mapData->m_width];
+				assert(dstPosition.m_x + generatedRoom->m_mapSegmentInstance.m_size.m_x <= mapData->m_width);
+				assert(dstPosition.m_y < mapData->m_height);
 
+				uint32_t* dst = &mapData->m_tileMap[dstPosition.m_x + dstPosition.m_y * mapData->m_width];
 				memcpy(dst, src, sizeof(uint32_t) * generatedRoom->m_mapSegmentInstance.m_size.m_x);
+
+				dstPosition.m_y++;
 			}
 
 			for(const Data::MapSegment::Object& object : generatedRoom->m_mapSegmentInstance.m_objects)

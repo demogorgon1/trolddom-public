@@ -24,10 +24,10 @@ loot_table goblin:
 	]	
 }
 
-entity test_dungeon_boss_1: !NPC 
+entity ignorg_1: !NPC 
 { 
 	_string: "Ignorg" 
-	_level: 1 
+	_level: 6 
 	_faction: monsters 
 	_sprite: goblin_boss 
 	_sprite_dead: goblin_boss_dead 
@@ -36,10 +36,10 @@ entity test_dungeon_boss_1: !NPC
 	_loot_table: test_dungeon_boss_1
 }
 
-entity goblin: !NPC
+entity goblin_5: !NPC
 {
 	_string: "Goblin"
-	_level: 1
+	_level: 5
 	_faction: monsters 
 	_sprite: goblin
 	_sprite_dead: goblin_dead 
@@ -48,10 +48,10 @@ entity goblin: !NPC
 	_loot_table: goblin
 }
 
-entity goblin_shaman: !NPC
+entity goblin_shaman_5: !NPC
 {
 	_string: "Goblin Shaman"
-	_level: 1
+	_level: 5
 	_faction: monsters 
 	_sprite: goblin_shaman
 	_sprite_dead: goblin_shaman_dead 

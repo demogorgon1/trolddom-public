@@ -6,17 +6,17 @@ map_trigger test_dungeon_boss_1_killed:
 
 map_entity_spawn test_dungeon_monster_caster:
 {	
-	entity goblin_shaman: { weight: 1 } 
+	entity goblin_shaman_5: { weight: 1 } 
 }
 
 map_entity_spawn test_dungeon_monster_melee:
 {	
-	entity goblin: { weight: 1 } 
+	entity goblin_5: { weight: 1 } 
 }
 
 map_entity_spawn test_dungeon_boss_1:
 {
-	entity test_dungeon_boss_1: 
+	entity ignorg_6: 
 	{ 
 		spawn_condition:
 		{	

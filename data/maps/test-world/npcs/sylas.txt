@@ -46,7 +46,7 @@ entity test_world_sylas:
 		}
 		combat_public: 
 		{  
-			level: 1
+			level: 10
 			faction: npcs		
 			dialogue_root: test_world_sylas_dialogue
 			
@@ -54,8 +54,6 @@ entity test_world_sylas:
 		}			
 		combat_private:
 		{
-			weapon_damage_range_min: 6
-			weapon_damage_range_max: 12
 			physical_critical_strike_chance: 5
 			dodge_chance: 5
 			parry_chance: 5
@@ -74,12 +72,7 @@ entity test_world_sylas:
 				[					
 					{ id: strike }
 				]
-			}
-					
-			resources:
-			{
-				health: 200
-			}			
+			}	
 		}
 		sprite: 
 		{ 

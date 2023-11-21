@@ -8,6 +8,11 @@ map_portal test_dungeon_exit_2:
 	spawn: test_world_dungeon_exit_2
 }
 
+map_entity_spawn test_dungeon_goblin_melee:
+{	
+	entity goblin: { weight: 1 } 
+}
+
 map_segment_connector connector_east: { connects: [ connector_west ] }
 map_segment_connector connector_west: { connects: [ connector_east ] }
 map_segment_connector connector_south: { connects: [ connector_north ] }
@@ -16,10 +21,10 @@ map_segment_connector connector_north: { connects: [ connector_south ] }
 !define local DUNGEON_PALETTE
 [
 	{ symbol: "." tiles: [ dungeon_floor ] }			
-	{ symbol: "W" tiles: [ dungeon_wall ] }
+	{ symbol: "#" tiles: [ dungeon_wall ] }
 	
 	{ 
-		symbol: "e" 
+		symbol: "x" 
 		tiles: [ dungeon_wall_face_exit ] 
 		portals: [ test_dungeon_exit_2 ] 
 	}
@@ -31,25 +36,25 @@ map_segment_connector connector_north: { connects: [ connector_south ] }
 	}		
 
 	{ 
-		symbol: "1" 
+		symbol: "e" 
 		tiles: [ dungeon_floor ] 
 		connectors: [ connector_east ]
 	}				
 	
 	{ 
-		symbol: "2" 
+		symbol: "w" 
 		tiles: [ dungeon_floor ] 
 		connectors: [ connector_west ]
 	}				
 	
 	{ 
-		symbol: "3" 
+		symbol: "s" 
 		tiles: [ dungeon_floor ] 
 		connectors: [ connector_south ]
 	}					
 	
 	{ 
-		symbol: "4" 
+		symbol: "n" 
 		tiles: [ dungeon_floor ] 
 		connectors: [ connector_north ]
 	}						
@@ -89,12 +94,12 @@ map_segment dungeon_entrance_1<paletted>:
 	palette: !DUNGEON_PALETTE {}		
 	paletted_map:
 	[
-		"WWWWW "
-		"WWeWW "
-		"W.i.W "
-		"W...W "
-		"W....1"
-		"WWWWW "
+		"##### "
+		"##x## "
+		"#.i.# "
+		"#...# "
+		"#....e"
+		"##### "
 	]		
 }
 
@@ -104,12 +109,12 @@ map_segment dungeon_entrance_2<paletted>:
 	palette: !DUNGEON_PALETTE {}		
 	paletted_map:
 	[
-		"WWWWW"
-		"WWeWW"
-		"W.i.W"
-		"W...W"
-		"2...W"
-		"WWWWW"
+		"#####"
+		"##e##"
+		"#.i.#"
+		"#...#"
+		"w...#"
+		"#####"
 	]		
 }
 
@@ -119,11 +124,11 @@ map_segment dungeon_passage_1<paletted>:
 	palette: !DUNGEON_PALETTE {}		
 	paletted_map:
 	[
-		"WWWWW "
-		"W...W "
-		"2....1"
-		"W...W "
-		"WWWWW "
+		"##### "
+		"#...# "
+		"w....e"
+		"#...# "
+		"##### "
 	]	
 }
 
@@ -133,15 +138,15 @@ map_segment dungeon_passage_2<paletted>:
 	palette: !DUNGEON_PALETTE {}				
 	paletted_map:
 	[
-		"WWWWWWWWW "
-		"W.......W "
-		"2.......W "
-		"W.......W "
-		"WWWWW...W "
-		"    W...W "
-		"    W...W "
-		"    W....1"
-		"    WWWWW "
+		"######### "
+		"#.......# "
+		"w.......# "
+		"#.......# "
+		"#####...# "
+		"    #...# "
+		"    #...# "
+		"    #....e"
+		"    ##### "
 	]	
 }
 
@@ -151,12 +156,12 @@ map_segment dungeon_passage_3<paletted>:
 	palette: !DUNGEON_PALETTE {}		
 	paletted_map:
 	[
-		"WWWWW "
-		"W...W "
-		"2....1"
-		"W...W "
-		"WW.WW "
-		"  3   "
+		"##### "
+		"#...# "
+		"w....e"
+		"#...# "
+		"##.## "
+		"  s   "
 	]	
 }
 
@@ -166,16 +171,16 @@ map_segment dungeon_passage_4<paletted>:
 	palette: !DUNGEON_PALETTE {}				
 	paletted_map:
 	[
-		"WW4WWWWWW "
-		"W.......W "
-		"W.......W "
-		"W.......W "
-		"WWWWW...W "
-		"    W...W "
-		"    W...W "
-		"    W...W "
-		"    WW.WW "
-		"      3   "
+		"##n###### "
+		"#.......# "
+		"#.......# "
+		"#.......# "
+		"#####...# "
+		"    #...# "
+		"    #...# "
+		"    #...# "
+		"    ##.## "
+		"      s   "
 	]	
 }
 
@@ -185,11 +190,11 @@ map_segment dungeon_blind_1<paletted>:
 	palette: !DUNGEON_PALETTE {}				
 	paletted_map:
 	[
-		"WWWWW"
-		"W...W"
-		"2...W"
-		"W...W"
-		"WWWWW"
+		"#####"
+		"#...#"
+		"w...#"
+		"#...#"
+		"#####"
 	]	
 }
 
@@ -199,11 +204,11 @@ map_segment dungeon_blind_2<paletted>:
 	palette: !DUNGEON_PALETTE {}				
 	paletted_map:
 	[
-		"WWWWW "
-		"W...W " 
-		"W....1"
-		"W...W "
-		"WWWWW "
+		"##### "
+		"#...# " 
+		"#....e"
+		"#...# "
+		"##### "
 	]	
 }
 
@@ -213,11 +218,11 @@ map_segment dungeon_blind_3<paletted>:
 	palette: !DUNGEON_PALETTE {}				
 	paletted_map:
 	[
-		"WW4WW"
-		"W...W"
-		"W...W"
-		"W...W"
-		"WWWWW"
+		"##n##"
+		"#...#"
+		"#...#"
+		"#...#"
+		"#####"
 	]	
 }
 
@@ -227,12 +232,12 @@ map_segment dungeon_blind_4<paletted>:
 	palette: !DUNGEON_PALETTE {}				
 	paletted_map:
 	[
-		"WWWWW"
-		"W...W" 
-		"W...W"
-		"W...W"
-		"WW.WW"
-		"  3  "
+		"#####"
+		"#...#" 
+		"#...#"
+		"#...#"
+		"##.##"
+		"  s  "
 	]	
 }
 

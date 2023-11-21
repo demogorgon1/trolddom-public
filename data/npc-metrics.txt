@@ -1,7 +1,15 @@
 npc_metrics:
 {
 
-	level<1>: { base_weapon_damage: [ 6 8 ] base_resource<health>: 100 base_resource<mana>: 80 elite_weapon_damage: 2 elite_resource<health>: 2 elite_resource<mana>: 2 }
-	level<2>: { base_weapon_damage: [ 7 9 ] base_resource<health>: 110 base_resource<mana>: 88 elite_weapon_damage: 2 elite_resource<health>: 2 elite_resource<mana>: 2 }
+	level<1>:  { base_weapon_damage: [ 6 8 ]   base_resource<health>: 100 base_resource<mana>: 80  elite_weapon_damage: 2 elite_resource<health>: 2 elite_resource<mana>: 1 }
+	level<2>:  { base_weapon_damage: [ 7 9 ]   base_resource<health>: 110 base_resource<mana>: 88  elite_weapon_damage: 2 elite_resource<health>: 2 elite_resource<mana>: 1 }
+	level<3>:  { base_weapon_damage: [ 8 11 ]  base_resource<health>: 121 base_resource<mana>: 97  elite_weapon_damage: 2 elite_resource<health>: 2 elite_resource<mana>: 1 }
+	level<4>:  { base_weapon_damage: [ 9 12 ]  base_resource<health>: 133 base_resource<mana>: 107 elite_weapon_damage: 2 elite_resource<health>: 2 elite_resource<mana>: 1 }
+	level<5>:  { base_weapon_damage: [ 10 13 ] base_resource<health>: 146 base_resource<mana>: 118 elite_weapon_damage: 2 elite_resource<health>: 2 elite_resource<mana>: 1 }
+	level<6>:  { base_weapon_damage: [ 11 15 ] base_resource<health>: 165 base_resource<mana>: 130 elite_weapon_damage: 2 elite_resource<health>: 2 elite_resource<mana>: 1 }
+	level<7>:  { base_weapon_damage: [ 12 16 ] base_resource<health>: 182 base_resource<mana>: 143 elite_weapon_damage: 2 elite_resource<health>: 2 elite_resource<mana>: 1 }
+	level<8>:  { base_weapon_damage: [ 13 17 ] base_resource<health>: 200 base_resource<mana>: 157 elite_weapon_damage: 2 elite_resource<health>: 2 elite_resource<mana>: 1 }
+	level<9>:  { base_weapon_damage: [ 14 19 ] base_resource<health>: 220 base_resource<mana>: 173 elite_weapon_damage: 2 elite_resource<health>: 2 elite_resource<mana>: 1 }
+	level<10>: { base_weapon_damage: [ 15 20 ] base_resource<health>: 242 base_resource<mana>: 190 elite_weapon_damage: 2 elite_resource<health>: 2 elite_resource<mana>: 1 }
 
 }

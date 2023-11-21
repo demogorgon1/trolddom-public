@@ -80,7 +80,7 @@ entity test_world_rob_beaurichard:
 		}
 		combat_public: 
 		{  
-			level: 1
+			level: 10
 			faction: npcs		
 			dialogue_root: test_world_rob_beaurichard_dialogue
 			
@@ -88,8 +88,6 @@ entity test_world_rob_beaurichard:
 		}			
 		combat_private:
 		{
-			weapon_damage_range_min: 6 
-			weapon_damage_range_max: 12
 			physical_critical_strike_chance: 5
 			dodge_chance: 5
 			parry_chance: 5
@@ -109,12 +107,7 @@ entity test_world_rob_beaurichard:
 				[					
 					{ id: strike }
 				]
-			}
-					
-			resources:
-			{
-				health: 200
-			}			
+			}	
 		}
 		sprite: 
 		{ 
