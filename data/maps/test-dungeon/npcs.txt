@@ -24,7 +24,7 @@ loot_table goblin:
 	]	
 }
 
-entity ignorg_1: !NPC 
+entity ignorg_6: !NPC 
 { 
 	_string: "Ignorg" 
 	_level: 6 

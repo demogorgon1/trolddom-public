@@ -2,6 +2,7 @@
 
 #include "../ActionBar.h"
 #include "../Component.h"
+#include "../ComponentBase.h"
 
 namespace tpublic
 {

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Component.h"
+#include "../ComponentBase.h"
 #include "../Stat.h"
 #include "../Vec2.h"
 

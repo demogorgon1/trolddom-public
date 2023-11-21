@@ -397,6 +397,16 @@ namespace tpublic::MapGenerators
 					}
 					break;
 
+				case Data::MapSegment::OBJECT_TYPE_ENTITY_SPAWN:
+					{
+						MapData::EntitySpawn t;
+						t.m_id = object.m_id;
+						t.m_x = object.m_position.m_x;
+						t.m_y = object.m_position.m_y;
+						mapData->m_entitySpawns.push_back(t);
+					}
+					break;
+
 				default:
 					assert(false);
 					break;

@@ -1,0 +1,11 @@
+entity goblin_melee: !NPC
+{
+	_string: "Goblin"
+	_level: 10
+	_faction: monsters 
+	_sprite: goblin
+	_sprite_dead: goblin_dead 
+	_weapon_damage: 1 
+	_resource_health: 1
+	_loot_table: trash
+}

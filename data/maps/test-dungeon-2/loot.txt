@@ -1,0 +1,13 @@
+loot_table trash:
+{
+	cash: [ 10 20 ]
+	
+	slots:
+	[
+		{
+			possibility: { weight: 10 }
+			possibility: { weight: 1 loot_group: world_drops_1_to_5 }
+		}		
+	]	
+}
+

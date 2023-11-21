@@ -10,7 +10,7 @@ map_portal test_dungeon_exit_2:
 
 map_entity_spawn test_dungeon_goblin_melee:
 {	
-	entity goblin: { weight: 1 } 
+	entity goblin_melee: { weight: 1 } 
 }
 
 map_segment_connector connector_east: { connects: [ connector_west ] }
@@ -57,7 +57,13 @@ map_segment_connector connector_north: { connects: [ connector_south ] }
 		symbol: "n" 
 		tiles: [ dungeon_floor ] 
 		connectors: [ connector_north ]
-	}						
+	}					
+
+	{ 
+		symbol: "G" 
+		tiles: [ dungeon_floor ] 
+		entity_spawns: [ test_dungeon_goblin_melee ] 
+	}			
 ]
 
 !define local DUNGEON_WALL_FACE_MODIFIER
@@ -140,7 +146,7 @@ map_segment dungeon_passage_2<paletted>:
 	[
 		"######### "
 		"#.......# "
-		"w.......# "
+		"w.....G.# "
 		"#.......# "
 		"#####...# "
 		"    #...# "
@@ -173,7 +179,7 @@ map_segment dungeon_passage_4<paletted>:
 	[
 		"##n###### "
 		"#.......# "
-		"#.......# "
+		"#....G..# "
 		"#.......# "
 		"#####...# "
 		"    #...# "
@@ -192,7 +198,7 @@ map_segment dungeon_blind_1<paletted>:
 	[
 		"#####"
 		"#...#"
-		"w...#"
+		"w.G.#"
 		"#...#"
 		"#####"
 	]	
@@ -206,7 +212,7 @@ map_segment dungeon_blind_2<paletted>:
 	[
 		"##### "
 		"#...# " 
-		"#....e"
+		"#.G..e"
 		"#...# "
 		"##### "
 	]	
@@ -220,7 +226,7 @@ map_segment dungeon_blind_3<paletted>:
 	[
 		"##n##"
 		"#...#"
-		"#...#"
+		"#.G.#"
 		"#...#"
 		"#####"
 	]	
@@ -234,7 +240,7 @@ map_segment dungeon_blind_4<paletted>:
 	[
 		"#####"
 		"#...#" 
-		"#...#"
+		"#.G.#"
 		"#...#"
 		"##.##"
 		"  s  "

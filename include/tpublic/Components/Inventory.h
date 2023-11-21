@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Component.h"
+#include "../ComponentBase.h"
 #include "../ItemList.h"
 
 namespace tpublic

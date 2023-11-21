@@ -29,6 +29,7 @@ namespace tpublic
 
 				OBJECT_TYPE_PORTAL,
 				OBJECT_TYPE_PLAYER_SPAWN,
+				OBJECT_TYPE_ENTITY_SPAWN,
 				OBJECT_TYPE_CONNECTOR
 			};
 
@@ -123,6 +124,11 @@ namespace tpublic
 							aChild->GetIdArray(DataType::ID_MAP_PLAYER_SPAWN, m_mapPlayerSpawnIds);
 							TP_VERIFY(m_mapPlayerSpawnIds.size() > 0, aChild->m_debugInfo, "Must have at least one map player spawn specified.");
 						}
+						else if (aChild->m_name == "entity_spawns")
+						{
+							aChild->GetIdArray(DataType::ID_MAP_ENTITY_SPAWN, m_mapEntitySpawnIds);
+							TP_VERIFY(m_mapEntitySpawnIds.size() > 0, aChild->m_debugInfo, "Must have at least one map entity spawn specified.");
+						}
 						else if (aChild->m_name == "connectors")
 						{
 							aChild->GetIdArray(DataType::ID_MAP_SEGMENT_CONNECTOR, m_mapSegmentConnectorIds);
@@ -140,6 +146,7 @@ namespace tpublic
 				std::vector<uint32_t>	m_tileSpriteIds;
 				std::vector<uint32_t>	m_mapPortalIds;
 				std::vector<uint32_t>	m_mapPlayerSpawnIds;
+				std::vector<uint32_t>	m_mapEntitySpawnIds;
 				std::vector<uint32_t>	m_mapSegmentConnectorIds;
 			};
 			
@@ -396,6 +403,25 @@ namespace tpublic
 									{
 										std::uniform_int_distribution<size_t> distribution(0, paletteEntry->m_mapPortalIds.size() - 1);
 										t.m_id = paletteEntry->m_mapPortalIds[distribution(aRandom)];
+									}
+
+									m_objects.push_back(t);
+								}
+
+								if (paletteEntry->m_mapEntitySpawnIds.size() > 0)
+								{
+									Object t;
+									t.m_position = { x, y };
+									t.m_type = OBJECT_TYPE_ENTITY_SPAWN;
+
+									if (paletteEntry->m_mapEntitySpawnIds.size() == 1)
+									{
+										t.m_id = paletteEntry->m_mapEntitySpawnIds[0];
+									}
+									else
+									{
+										std::uniform_int_distribution<size_t> distribution(0, paletteEntry->m_mapEntitySpawnIds.size() - 1);
+										t.m_id = paletteEntry->m_mapEntitySpawnIds[distribution(aRandom)];
 									}
 
 									m_objects.push_back(t);

@@ -33,6 +33,12 @@ entity test_world_sylas:
 	
 	systems: [ combat npc ]
 	
+	modifiers: 
+	{ 
+		weapon_damage: 2
+		resource<health>: 2
+	}		
+	
 	components:
 	{
 		position: { }		
