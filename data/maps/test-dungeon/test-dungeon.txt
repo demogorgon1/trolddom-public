@@ -64,6 +64,7 @@ map test_dungeon:
 	view_attenuation_bias: 50
 	view_hidden_visibility: 0		
 	#image_output: "test.png"
+	level: 5
 
 	layers:
 	[

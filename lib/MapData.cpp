@@ -39,6 +39,7 @@ namespace tpublic
 		, m_blockLineOfSightBits(NULL)
 		, m_resetMode(MapType::RESET_MODE_MANUAL)
 		, m_type(MapType::ID_OPEN_WORLD)
+		, m_level(0)
 	{
 
 	}
@@ -55,6 +56,7 @@ namespace tpublic
 		, m_defaultTileSpriteId(0)
 		, m_defaultPlayerSpawnId(0)
 		, m_viewAttenuation(0)
+		, m_level(0)
 		, m_viewAttenuationBias(0)
 		, m_viewHiddenVisibility(0)
 		, m_walkableBits(NULL)
@@ -91,6 +93,8 @@ namespace tpublic
 				m_generator = std::make_unique<Generator>(aNode);
 			else if(aNode->m_name == "seed")
 				m_seed.FromSource(aNode);
+			else if (aNode->m_name == "level")
+				m_level = aNode->GetUInt32();
 			else
 				TP_VERIFY(false, aNode->m_debugInfo, "'%s' is not a valid item.", aNode->m_name.c_str());
 		});
@@ -259,6 +263,7 @@ namespace tpublic
 		aStream->WriteOptionalObjectPointer(m_generator);
 		m_seed.ToStream(aStream);
 		aStream->WriteOptionalObjectPointer(m_worldInfoMap);
+		aStream->WriteUInt(m_level);
 	}
 
 	bool	
@@ -321,6 +326,8 @@ namespace tpublic
 		if(!m_seed.FromStream(aStream))
 			return false;
 		if (!aStream->ReadOptionalObjectPointer(m_worldInfoMap))
+			return false;
+		if(!aStream->ReadUInt(m_level))	
 			return false;
 		return true;
 	}
