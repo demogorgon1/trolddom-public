@@ -47,6 +47,36 @@ map_portal test_world_dungeon_entrance_2:
 	map: test_dungeon_2
 }
 
+zone test_world_zone_1:
+{
+	string: "Zone 1"
+}
+
+zone test_world_zone_2:
+{
+	string: "Zone 2"
+}
+
+zone test_world_zone_3:
+{
+	string: "Zone 3"
+}
+
+zone test_world_zone_4:
+{
+	string: "Zone 4"
+}
+
+zone test_world_zone_5:
+{
+	string: "Zone 5"
+}
+
+zone test_world_zone_6:
+{
+	string: "Zone 6"
+}
+
 map_palette test_world_tiles:
 {
 	tile water_1: [ 9 86 104 ]
@@ -71,6 +101,30 @@ map_palette test_world_stuff:
 	portal test_world_dungeon_entrance_2: [ 0 128 255 ]	
 }
 
+map_palette test_world_levels:
+{
+	level<1>: [ 0 255 0 ]
+	level<2>: [ 255 0 0 ]
+	level<3>: [ 0 0 255 ]
+	level<4>: [ 0 255 255 ]
+	level<5>: [ 255 0 255 ]
+	level<6>: [ 255 255 0 ]
+	level<7>: [ 127 127 0 ]
+	level<8>: [ 0 127 127 ]
+	level<9>: [ 127 0 127 ]
+	level<10>: [ 127 0 255 ]
+}
+
+map_palette test_world_zones:
+{
+	zone test_world_zone_1: [ 0 255 255 ]
+	zone test_world_zone_2: [ 255 0 0 ]
+	zone test_world_zone_3: [ 0 0 127 ]
+	zone test_world_zone_4: [ 127 0 127 ]
+	zone test_world_zone_5: [ 255 255 0 ]
+	zone test_world_zone_6: [ 255 127 0 ]	
+}
+
 map test_world:
 {
 	string: "Test World"
@@ -93,6 +147,16 @@ map test_world:
 			palettes:	[ test_world_stuff ]
 			source:		"test-world-1.png"
 		}
+		
+		{
+			palettes:	[ test_world_levels ]
+			source:		"test-world-2.png"
+		}		
+		
+		{
+			palettes:	[ test_world_zones ]
+			source:		"test-world-3.png"
+		}				
 	]
 }
  

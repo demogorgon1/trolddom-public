@@ -4,6 +4,7 @@
 #include <tpublic/Manifest.h>
 #include <tpublic/MapData.h>
 #include <tpublic/MapPathData.h>
+#include <tpublic/WorldInfoMap.h>
 
 #include "MapPathDataBuilder.h"
 
@@ -119,6 +120,15 @@ namespace tpublic
 			for(int32_t i = 0, count = m_width * m_height; i < count; i++)
 				m_tileMap[i] = m_defaultTileSpriteId;		
 
+			// Allocate space for temporary level and zone maps
+			std::vector<uint32_t> levelMap;
+			levelMap.resize(m_width * m_height, 0);
+			bool hasLevelMap = false;
+
+			std::vector<uint32_t> zoneMap;
+			zoneMap.resize(m_width * m_height, 0);
+			bool hasZoneMap = false;
+
 			// Process layers
 			for(std::unique_ptr<SourceLayer>& layer : m_sourceLayers)
 			{
@@ -162,19 +172,29 @@ namespace tpublic
 								switch(entry->m_type)
 								{
 								case Data::MapPalette::ENTRY_TYPE_TILE:
-									m_tileMap[mapX + mapY * m_width] = entry->m_id;
+									m_tileMap[mapX + mapY * m_width] = entry->m_value;
 									break;
 
 								case Data::MapPalette::ENTRY_TYPE_ENTITY_SPAWN:
-									m_entitySpawns.push_back({ mapX, mapY, entry->m_id });
+									m_entitySpawns.push_back({ mapX, mapY, entry->m_value });
 									break;
 
 								case Data::MapPalette::ENTRY_TYPE_PLAYER_SPAWN:
-									m_playerSpawns.push_back({ mapX, mapY, entry->m_id });
+									m_playerSpawns.push_back({ mapX, mapY, entry->m_value });
 									break;
 
 								case Data::MapPalette::ENTRY_TYPE_PORTAL:
-									m_portals.push_back({ mapX, mapY, entry->m_id });
+									m_portals.push_back({ mapX, mapY, entry->m_value });
+									break;
+
+								case Data::MapPalette::ENTRY_TYPE_LEVEL:
+									levelMap[mapX + mapY * m_width] = entry->m_value;
+									hasLevelMap = true;
+									break;
+
+								case Data::MapPalette::ENTRY_TYPE_ZONE:
+									zoneMap[mapX + mapY * m_width] = entry->m_value;
+									hasZoneMap = true;
 									break;
 
 								default:
@@ -188,6 +208,12 @@ namespace tpublic
 						}
 					}
 				}
+			}
+
+			if(hasLevelMap || hasZoneMap)
+			{
+				m_worldInfoMap = std::make_unique<WorldInfoMap>();
+				m_worldInfoMap->Build(m_width, m_height, &levelMap[0], &zoneMap[0]);
 			}
 		}
 	}
@@ -232,6 +258,7 @@ namespace tpublic
 		aStream->WriteObjectPointer(m_mapPathData);
 		aStream->WriteOptionalObjectPointer(m_generator);
 		m_seed.ToStream(aStream);
+		aStream->WriteOptionalObjectPointer(m_worldInfoMap);
 	}
 
 	bool	
@@ -292,6 +319,8 @@ namespace tpublic
 		if(!aStream->ReadOptionalObjectPointer(m_generator))
 			return false;
 		if(!m_seed.FromStream(aStream))
+			return false;
+		if (!aStream->ReadOptionalObjectPointer(m_worldInfoMap))
 			return false;
 		return true;
 	}
@@ -381,6 +410,14 @@ namespace tpublic
 			m_y = aMapData->m_y;
 			m_tileMap = new uint32_t[m_width * m_height];
 			memcpy(m_tileMap, aMapData->m_tileMap, m_width * m_height * sizeof(uint32_t));
+		}
+
+		if(aMapData->m_worldInfoMap)
+		{
+			assert(!m_worldInfoMap);
+
+			m_worldInfoMap = std::make_unique<WorldInfoMap>();
+			m_worldInfoMap->CopyFrom(aMapData->m_worldInfoMap.get());
 		}
 	}
 

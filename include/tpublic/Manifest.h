@@ -24,6 +24,7 @@
 #include "Data/Sprite.h"
 #include "Data/Talent.h"
 #include "Data/TalentTree.h"
+#include "Data/Zone.h"
 
 #include "IReader.h"
 #include "ItemMetrics.h"
@@ -281,6 +282,7 @@ namespace tpublic
 			RegisterDataContainer(m_sprites);
 			RegisterDataContainer(m_talents);
 			RegisterDataContainer(m_talentTrees);
+			RegisterDataContainer(m_zones);
 		}
 		
 		~Manifest()
@@ -373,6 +375,7 @@ namespace tpublic
 		DataContainer<Data::Sprite>						m_sprites;
 		DataContainer<Data::Talent>						m_talents;
 		DataContainer<Data::TalentTree>					m_talentTrees;
+		DataContainer<Data::Zone>						m_zones;
 
 		IDataContainer*									m_containers[DataType::NUM_IDS] = { 0 };
 

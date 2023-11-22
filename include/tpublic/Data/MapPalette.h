@@ -18,7 +18,9 @@ namespace tpublic
 				ENTRY_TYPE_TILE,
 				ENTRY_TYPE_ENTITY_SPAWN,
 				ENTRY_TYPE_PLAYER_SPAWN,
-				ENTRY_TYPE_PORTAL
+				ENTRY_TYPE_PORTAL,
+				ENTRY_TYPE_LEVEL,
+				ENTRY_TYPE_ZONE
 			};
 
 			struct Color
@@ -36,7 +38,7 @@ namespace tpublic
 				{
 					aStream->WriteUInt(m_type);
 					aStream->Write(&m_color, sizeof(m_color));
-					aStream->WriteUInt(m_id);
+					aStream->WriteUInt(m_value);
 				}
 
 				bool
@@ -47,7 +49,7 @@ namespace tpublic
 						return false;
 					if(aStream->Read(&m_color, sizeof(m_color)) != sizeof(m_color))
 						return false;
-					if (!aStream->ReadUInt(m_id))
+					if (!aStream->ReadUInt(m_value))
 						return false;
 					return true;
 				}
@@ -55,7 +57,7 @@ namespace tpublic
 				// Public data
 				EntryType		m_type = EntryType(0);
 				Color			m_color;
-				uint32_t		m_id = 0;
+				uint32_t		m_value = 0;
 			};
 
 			void
@@ -76,22 +78,32 @@ namespace tpublic
 					if (aChild->m_tag == "tile")
 					{
 						entry.m_type = ENTRY_TYPE_TILE;
-						entry.m_id = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->m_name.c_str());
+						entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->m_name.c_str());
 					}
 					else if (aChild->m_tag == "entity_spawn")
 					{
 						entry.m_type = ENTRY_TYPE_ENTITY_SPAWN;
-						entry.m_id = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aChild->m_name.c_str());
+						entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aChild->m_name.c_str());
 					}
 					else if (aChild->m_tag == "player_spawn")
 					{
 						entry.m_type = ENTRY_TYPE_PLAYER_SPAWN;
-						entry.m_id = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_PLAYER_SPAWN, aChild->m_name.c_str());
+						entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_PLAYER_SPAWN, aChild->m_name.c_str());
 					}
 					else if (aChild->m_tag == "portal")
 					{
 						entry.m_type = ENTRY_TYPE_PORTAL;
-						entry.m_id = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_PORTAL, aChild->m_name.c_str());
+						entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_PORTAL, aChild->m_name.c_str());
+					}
+					else if (aChild->m_name == "level" && aChild->m_annotation)
+					{
+						entry.m_type = ENTRY_TYPE_LEVEL;
+						entry.m_value = aChild->m_annotation->GetUInt32();
+					}
+					else if (aChild->m_tag == "zone")
+					{
+						entry.m_type = ENTRY_TYPE_ZONE;
+						entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ZONE, aChild->m_name.c_str());
 					}
 					else
 					{

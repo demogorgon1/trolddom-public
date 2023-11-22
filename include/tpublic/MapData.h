@@ -13,6 +13,7 @@ namespace tpublic
 
 	class Manifest;
 	class MapPathData;
+	class WorldInfoMap;
 
 	class MapData
 	{
@@ -481,7 +482,7 @@ namespace tpublic
 		uint32_t*									m_blockLineOfSightBits;
 		std::unique_ptr<MapPathData>				m_mapPathData;
 		std::unique_ptr<Generator>					m_generator;
-
+		std::unique_ptr<WorldInfoMap>				m_worldInfoMap;
 
 		struct SourceLayer
 		{
