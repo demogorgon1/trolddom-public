@@ -113,9 +113,17 @@ namespace tpublic
 					aNode->GetObject()->ForEachChild([&](
 						const SourceNode* aChild)
 					{
-						if(aChild->m_name == "weight")
+						if(aChild->m_name == "level")
+						{
+							m_level = UIntRange(aChild);
+						}
+						else if(aChild->m_name == "weight")
 						{
 							m_weight = aChild->GetUInt32();
+						}
+						else if (aChild->m_name == "zones")
+						{
+							aChild->GetIdArray(DataType::ID_ZONE, m_zones);
 						}
 						else if (aChild->m_name == "init_state")
 						{
@@ -141,6 +149,8 @@ namespace tpublic
 					aStream->WriteUInt(m_weight);
 					aStream->WritePOD(m_initState);
 					aStream->WriteObjectPointers(m_spawnConditions);
+					m_level.ToStream(aStream);
+					aStream->WriteUInts(m_zones);
 				}
 
 				bool
@@ -155,7 +165,34 @@ namespace tpublic
 						return false;
 					if(!aStream->ReadObjectPointers(m_spawnConditions))
 						return false;
+					if(!m_level.FromStream(aStream))
+						return false;
+					if(!aStream->ReadUInts(m_zones))
+						return false;
 					return true;
+				}
+
+				bool
+				HasZone(
+					uint32_t		aZoneId) const
+				{
+					if(m_zones.empty())
+						return true;
+					for(uint32_t t : m_zones)
+					{
+						if(t == aZoneId)
+							return true;
+					}
+					return false;
+				}
+
+				bool
+				HasLevel(
+					uint32_t		aLevel) const
+				{
+					if(m_level.m_min == 0 && m_level.m_max == 0)
+						return true;
+					return aLevel >= m_level.m_min && aLevel <= m_level.m_max;
 				}
 
 				// Public data
@@ -163,6 +200,8 @@ namespace tpublic
 				uint32_t										m_weight = 1;
 				EntityState::Id									m_initState = EntityState::ID_SPAWNING;
 				std::vector<std::unique_ptr<SpawnCondition>>	m_spawnConditions;
+				UIntRange										m_level;
+				std::vector<uint32_t>							m_zones;
 			};
 
 			struct SpawnTimer

@@ -25,9 +25,6 @@ loot_table deer:
 		}		
 	
 		{
-			# Testing
-			possibility: { weight: 100 loot_group: test_uncommons }
-			
 			possibility: { weight: 10 }
 			possibility: { weight: 1 loot_group: world_drops_1_to_5 }
 		}		
@@ -50,13 +47,13 @@ loot_table boar:
 	]	
 }
 
-npc_behavior_state wildlife:
+npc_behavior_state .wildlife:
 {
 	behavior: wandering
 	max_range: 2
 }
 
-entity deer: !NPC
+entity deer_1: !NPC
 {
 	_string: "Deer"
 	_level: 1
@@ -66,10 +63,10 @@ entity deer: !NPC
 	_weapon_damage: 1 
 	_resource_health: 1
 	_loot_table: deer	
-	_default_behavior_state: wildlife
+	_default_behavior_state: .wildlife
 }
 	
-entity boar: !NPC
+entity boar_1: !NPC
 {
 	_string: "Boar"
 	_level: 1
@@ -79,6 +76,6 @@ entity boar: !NPC
 	_weapon_damage: 1 
 	_resource_health: 1
 	_loot_table: boar	
-	_default_behavior_state: wildlife
+	_default_behavior_state: .wildlife
 }
 	
