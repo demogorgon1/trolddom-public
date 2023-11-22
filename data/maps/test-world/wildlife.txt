@@ -6,6 +6,7 @@ item antlers:
 	loot_groups: [ deer_drops ]		
 	root: {	name: "Broken Antlers" icon: icon_antlers }
 	stack: 4
+	level_range: [ 1 2 ]
 }
 
 item boar_tusks:
@@ -13,6 +14,23 @@ item boar_tusks:
 	loot_groups: [ boar_drops ]		
 	root: {	name: "Broken Tusks" icon: icon_boar_tusks }
 	stack: 4
+	level_range: [ 1 2 ]
+}
+
+item pristine_antlers:
+{
+	loot_groups: [ deer_drops ]		
+	root: {	name: "Pristine Antlers" icon: icon_antlers }
+	stack: 4
+	level_range: [ 3 4 ]
+}
+
+item pristine_tusks:
+{
+	loot_groups: [ boar_drops ]		
+	root: {	name: "Pristine Tusks" icon: icon_boar_tusks }
+	stack: 4
+	level_range: [ 3 4 ]
 }
 
 loot_table deer:
@@ -24,10 +42,7 @@ loot_table deer:
 			possibility: { weight: 1 loot_group: deer_drops }
 		}		
 	
-		{
-			possibility: { weight: 10 }
-			possibility: { weight: 1 loot_group: world_drops_1_to_5 }
-		}		
+		!WORLD_DROPS{}
 	]	
 }
 
@@ -40,10 +55,7 @@ loot_table boar:
 			possibility: { weight: 1 loot_group: boar_drops }
 		}		
 	
-		{
-			possibility: { weight: 10 }
-			possibility: { weight: 1 loot_group: world_drops_1_to_5 }
-		}		
+		!WORLD_DROPS{}
 	]	
 }
 
@@ -78,4 +90,30 @@ entity boar_1: !NPC
 	_loot_table: boar	
 	_default_behavior_state: .wildlife
 }
+
+entity deer_2: !NPC
+{
+	_string: "Deer"
+	_level: 2
+	_faction: wildlife
+	_sprite: deer
+	_sprite_dead: deer_dead 
+	_weapon_damage: 1 
+	_resource_health: 1
+	_loot_table: deer	
+	_default_behavior_state: .wildlife
+}
 	
+entity boar_2: !NPC
+{
+	_string: "Boar"
+	_level: 2
+	_faction: wildlife
+	_sprite: boar
+	_sprite_dead: boar_dead 
+	_weapon_damage: 1 
+	_resource_health: 1
+	_loot_table: boar	
+	_default_behavior_state: .wildlife
+}
+

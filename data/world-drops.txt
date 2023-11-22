@@ -1,0 +1,7 @@
+loot_group world_drops: {}
+
+!define WORLD_DROPS
+{
+	possibility: { weight: 10 }
+	possibility: { weight: 1 loot_group: world_drops }	
+}

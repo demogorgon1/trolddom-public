@@ -19,28 +19,47 @@ namespace tpublic
 
 		void		Generate(
 						std::mt19937&			aRandom,
+						uint32_t				aLevel,
 						Components::Lootable*	aLootable) const;
 
 	private:
 
 		const Manifest*					m_manifest;
 
+		struct LevelBucket
+		{
+			std::vector<uint32_t>		m_itemIds;
+		};
+
 		struct Group
 		{
-			uint32_t
-			GetRandom(
-				std::mt19937&					aRandom) const
+			LevelBucket*
+			GetOrCreateLevelBucket(
+				uint32_t						aLevel)
 			{
-				assert(m_itemIds.size() > 0);
-				if(m_itemIds.size() == 1)
-					return m_itemIds[0];
+				LevelBucketTable::iterator i = m_levelBucketTable.find(aLevel);
+				if (i != m_levelBucketTable.end())
+					return i->second.get();
 
-				std::uniform_int_distribution<size_t> distribution(0, m_itemIds.size() - 1);	
-				return m_itemIds[distribution(aRandom)];
+				LevelBucket* t = new LevelBucket();
+				m_levelBucketTable[aLevel] = std::unique_ptr<LevelBucket>(t);
+				return t;
 			}
 
-			// Public data
-			std::vector<uint32_t>		m_itemIds;
+			const LevelBucket*
+			GetLevelBucket(
+				uint32_t						aLevel) const
+			{
+				LevelBucketTable::const_iterator i = m_levelBucketTable.find(aLevel);
+				if (i == m_levelBucketTable.cend())
+					return NULL;
+				return i->second.get();
+			}
+
+			// Public data	
+			typedef std::unordered_map<uint32_t, std::unique_ptr<LevelBucket>> LevelBucketTable;
+			LevelBucketTable			m_levelBucketTable;
+			LevelBucket					m_defaultLevelBucket;
 		};
 
 		typedef std::unordered_map<uint32_t, std::unique_ptr<Group>> GroupTable;

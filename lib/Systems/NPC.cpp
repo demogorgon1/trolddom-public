@@ -117,7 +117,7 @@ namespace tpublic::Systems
 
 				if(lootable->m_playerTag.IsSet())
 				{
-					aContext->m_lootGenerator->Generate(*aContext->m_random, lootable);
+					aContext->m_lootGenerator->Generate(*aContext->m_random, combat->m_level, lootable);
 
 					if(lootable->m_availableLoot.size() > 0)
 					{

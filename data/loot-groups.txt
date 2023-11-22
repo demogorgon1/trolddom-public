@@ -1,2 +1,0 @@
-loot_group world_drops_1_to_5: {}
-loot_group test_uncommons: {}

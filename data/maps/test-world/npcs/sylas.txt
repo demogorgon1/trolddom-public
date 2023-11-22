@@ -46,7 +46,7 @@ entity test_world_sylas:
 		visible_auras: { }
 		auras: { }
 		tag: { }
-		lootable : 
+		lootable: 
 		{ 
 			loot_table: test_world_npc_1
 		}

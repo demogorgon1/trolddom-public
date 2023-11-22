@@ -4,10 +4,7 @@ loot_table .trash:
 	
 	slots:
 	[
-		{
-			possibility: { weight: 10 }
-			possibility: { weight: 1 loot_group: world_drops_1_to_5 }
-		}		
+		!WORLD_DROPS{}
 	]	
 }
 

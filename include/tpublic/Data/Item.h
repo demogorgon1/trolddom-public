@@ -5,6 +5,7 @@
 #include "../ItemType.h"
 #include "../Rarity.h"
 #include "../Stat.h"
+#include "../UIntRange.h"
 
 namespace tpublic
 {
@@ -248,6 +249,10 @@ namespace tpublic
 					{
 						m_stackSize = aChild->GetUInt32();
 					}
+					else if (aChild->m_name == "level_range")
+					{
+						m_levelRange = UIntRange(aChild);
+					}
 					else if (aChild->m_name == "use_ability")
 					{
 						m_useAbilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
@@ -275,6 +280,7 @@ namespace tpublic
 				aStream->WriteUInt(m_stackSize);
 				aStream->WriteUInt(m_useAbilityId);
 				aStream->WritePOD(m_itemType);
+				m_levelRange.ToStream(aStream);
 			}
 
 			bool
@@ -295,6 +301,8 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadPOD(m_itemType))
 					return false;
+				if(!m_levelRange.FromStream(aStream))
+					return false;
 				return true;
 			}
 
@@ -305,6 +313,7 @@ namespace tpublic
 			uint32_t					m_stackSize = 1;
 			uint32_t					m_useAbilityId = 0;
 			ItemType::Id				m_itemType = ItemType::ID_NONE;
+			UIntRange					m_levelRange;
 		};
 
 	}

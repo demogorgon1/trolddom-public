@@ -11,7 +11,9 @@ map_entity_spawn test_world_monster:
 map_entity_spawn test_world_wildlife:
 {	
 	entity deer_1: { level: 1 weight: 1 zones: [ test_world_zone_1 ] } 
-	entity boar_1: { level: 1 weight: 1 zones: [ test_world_zone_1 ]  } 
+	entity boar_1: { level: 1 weight: 1 zones: [ test_world_zone_1 ] } 
+	entity deer_2: { level: 2 weight: 1 zones: [ test_world_zone_1 ] } 
+	entity boar_2: { level: 2 weight: 1 zones: [ test_world_zone_1 ] } 
 }
 
 map_entity_spawn test_world_sylas:

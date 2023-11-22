@@ -20,7 +20,19 @@ namespace tpublic
 			const Data::Item*	aItem)
 		{
 			for(uint32_t lootGroupId : aItem->m_lootGroups)
-				_GetOrCreateGroup(lootGroupId)->m_itemIds.push_back(aItem->m_id);
+			{
+				Group* group = _GetOrCreateGroup(lootGroupId);
+				
+				if(aItem->m_levelRange.m_min == 0)
+				{
+					group->m_defaultLevelBucket.m_itemIds.push_back(aItem->m_id);
+				}
+				else
+				{
+					for(uint32_t level = aItem->m_levelRange.m_min; level < aItem->m_levelRange.m_max; level++)
+						group->GetOrCreateLevelBucket(level)->m_itemIds.push_back(aItem->m_id);
+				}				
+			}
 		});
 	}
 
@@ -32,6 +44,7 @@ namespace tpublic
 	void		
 	LootGenerator::Generate(
 		std::mt19937&			aRandom,
+		uint32_t				aLevel,
 		Components::Lootable*	aLootable) const
 	{
 		const Data::LootTable* lootTable = m_manifest->m_lootTables.GetById(aLootable->m_lootTableId);
@@ -71,10 +84,36 @@ namespace tpublic
 				GroupTable::const_iterator i = m_groups.find(lootGroupId);
 				if(i != m_groups.end())
 				{
-					Components::Lootable::AvailableLoot loot;
-					loot.m_itemInstance.m_itemId = i->second->GetRandom(aRandom);
-					loot.m_itemInstance.m_seed = aRandom();
-					aLootable->m_availableLoot.push_back(loot);
+					const Group* group = i->second.get();
+					const LevelBucket* levelBucket = group->GetLevelBucket(aLevel);
+
+					uint32_t itemId = 0;
+
+					if(levelBucket != NULL)
+					{
+						size_t totalItemCount = group->m_defaultLevelBucket.m_itemIds.size() + levelBucket->m_itemIds.size();
+						assert(totalItemCount > 0);
+						std::uniform_int_distribution<size_t> d(0, totalItemCount - 1);
+						size_t roll = d(aRandom);
+						if(roll < group->m_defaultLevelBucket.m_itemIds.size())
+							itemId = group->m_defaultLevelBucket.m_itemIds[roll];
+						else
+							itemId = levelBucket->m_itemIds[roll - group->m_defaultLevelBucket.m_itemIds.size()];
+					}
+					else if(group->m_defaultLevelBucket.m_itemIds.size() > 0)
+					{
+						std::uniform_int_distribution<size_t> d(0, group->m_defaultLevelBucket.m_itemIds.size() - 1);
+						size_t roll = d(aRandom);
+						itemId = group->m_defaultLevelBucket.m_itemIds[roll];
+					}
+
+					if(itemId != 0)
+					{
+						Components::Lootable::AvailableLoot loot;
+						loot.m_itemInstance.m_itemId = itemId;
+						loot.m_itemInstance.m_seed = aRandom();
+						aLootable->m_availableLoot.push_back(loot);
+					}
 				}
 			}						
 		}
