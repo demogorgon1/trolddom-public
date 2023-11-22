@@ -104,7 +104,7 @@ namespace tpublic
 
 	Parser::Parser(
 		SourceContext*	aSourceContext)
-		: m_root(aSourceContext, DataErrorHandling::DebugInfo("", 0), "", "")
+		: m_root(aSourceContext, DataErrorHandling::DebugInfo("", 0), "", "", "")
 	{
 
 	}
@@ -493,7 +493,7 @@ namespace tpublic
 	{
 		std::filesystem::path path = aPath;
 		
-		while(!path.empty())
+		for(;;)
 		{
 			const MacroNamespace* macroNamespace = _GetMacroNamespace(path.string().c_str());
 			if(macroNamespace != NULL)
@@ -503,8 +503,11 @@ namespace tpublic
 					return macro;
 			}
 
+			if(path.empty())
+				break;
+
 			path = path.parent_path();
-		}
+		} 
 
 		return NULL;
 	}

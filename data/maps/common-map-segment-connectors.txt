@@ -1,0 +1,4 @@
+map_segment_connector connector_east: { connects: [ connector_west ] }
+map_segment_connector connector_west: { connects: [ connector_east ] }
+map_segment_connector connector_south: { connects: [ connector_north ] }
+map_segment_connector connector_north: { connects: [ connector_south ] }

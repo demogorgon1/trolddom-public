@@ -29,6 +29,7 @@ namespace tpublic
 		SourceContext						m_sourceContext;
 
 		void	_ParseDirectory(
+					const char*			aRootPath,
 					const char*			aPath);
 	};
 

@@ -77,7 +77,7 @@ namespace tpublic
 		{
 			if(aNode->m_name == "source")
 			{				
-				std::string path = aNode->m_path + "/" + aNode->m_value;
+				std::string path = aNode->m_realPath + "/" + aNode->m_value;
 				sourceImage.LoadPNG(path.c_str());
 			}
 			else if(aNode->m_name == "cursor")

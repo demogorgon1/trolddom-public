@@ -1,4 +1,4 @@
-loot_table trash:
+loot_table .trash:
 {
 	cash: [ 10 20 ]
 	

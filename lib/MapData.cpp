@@ -412,7 +412,7 @@ namespace tpublic
 				}
 				else if(aNode->m_name == "source")
 				{
-					sourcePath = aNode->m_path + "/" + aNode->m_value;
+					sourcePath = aNode->m_realPath + "/" + aNode->m_value;
 				}
 				else if (aNode->GetArray()->m_name == "offset" && aNode->m_children.size() == 2)
 				{

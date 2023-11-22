@@ -45,6 +45,7 @@ namespace tpublic
 	//-----------------------------------------------------------------------------------------------------
 
 	Tokenizer::Tokenizer(
+		const char*		aRootPath,
 		const char*		aPath)
 		: m_i(0)
 	{
@@ -52,6 +53,18 @@ namespace tpublic
 		{
 			std::filesystem::path p = aPath;
 			p.make_preferred();
+			m_realPath = p.parent_path().string();
+			std::string pString = p.string();
+
+			std::filesystem::path rootPath = aRootPath;
+			rootPath.make_preferred();
+			std::string rootPathString = rootPath.string();
+
+			assert(rootPathString.length() < pString.length());
+			pString.erase(0, rootPathString.length() + 1);
+
+			p = pString;
+			 
 			m_path = p.parent_path().string();
 			m_pathWithFileName = p.string();
 		}
@@ -71,7 +84,7 @@ namespace tpublic
 
 			fclose(f);
 
-			_Tokenize(aPath, &buffer[0]);
+			_Tokenize(m_pathWithFileName.c_str(), &buffer[0]);
 		}
 	}
 	
@@ -180,6 +193,24 @@ namespace tpublic
 			}
 		}
 
+		// Set up local prefix
+		std::vector<char> localPrefix;
+		{
+			localPrefix.push_back('_');
+			localPrefix.push_back('_');
+			const char* pathP = m_path.c_str();
+			while(*pathP != '\0')
+			{
+				char c = *pathP;
+				if(_IsAlpha(c) || _IsNum(c) || c == '_')
+					localPrefix.push_back(c);
+				else
+					localPrefix.push_back('_');
+				pathP++;
+			}
+			localPrefix.push_back('_');
+		}
+
 		std::optional<char> next; 
 
 		for(;;)
@@ -199,10 +230,17 @@ namespace tpublic
 			switch(state)
 			{
 			case STATE_INIT:
-				if(c == '_' || _IsAlpha(c))
+				if(c == '.' || c == '_' || _IsAlpha(c))
 				{
-					buffer.clear();
-					buffer.push_back(c);
+					if(c == '.')
+					{
+						buffer = localPrefix;
+					}
+					else
+					{
+						buffer.clear();
+						buffer.push_back(c);
+					}
 					state = STATE_IDENTIFIER;
 				}
 				else if(_IsNum(c) || c == '-' || c == '+')

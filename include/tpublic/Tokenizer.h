@@ -26,6 +26,7 @@ namespace tpublic
 		};
 
 							Tokenizer(
+								const char*				aRootPath,
 								const char*				aPath);
 							~Tokenizer();
 
@@ -44,13 +45,15 @@ namespace tpublic
 		// Data access
 		const char*			GetPath() const { return m_path.c_str(); }
 		const char*			GetPathWithFileName() const { return m_pathWithFileName.c_str(); }
+		const char*			GetRealPath() const { return m_realPath.c_str(); }
 
 	private:
 
 		std::vector<Token>				m_tokens;
 		size_t							m_i;
-		std::string						m_path;
-		std::string						m_pathWithFileName;
+		std::string						m_path;					// Relative from the root data directory (without file name)
+		std::string						m_pathWithFileName;		// Like m_path, but including the file name
+		std::string						m_realPath;				// Relative from the process working directory
 
 		void	_Tokenize(
 					const char*							aPath,

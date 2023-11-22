@@ -33,7 +33,7 @@ namespace tpublic
 		const char*				aRootPath)
 	{
 		// Recursively parse all .txt files in root path
-		_ParseDirectory(aRootPath);
+		_ParseDirectory(aRootPath, aRootPath);
 
 		m_parser.ResolveMacrosAndReferences();
 	}
@@ -158,6 +158,7 @@ namespace tpublic
 
 	void	
 	Compiler::_ParseDirectory(
+		const char*				aRootPath,
 		const char*				aPath)
 	{
 		std::error_code errorCode;
@@ -170,13 +171,13 @@ namespace tpublic
 			{
 				if(entry.path().filename().string().c_str()[0] != '_')
 				{
-					Tokenizer tokenizer(entry.path().string().c_str());
+					Tokenizer tokenizer(aRootPath, entry.path().string().c_str());
 					m_parser.Parse(tokenizer);
 				}
 			}
 			else if(entry.is_directory())
 			{
-				_ParseDirectory(entry.path().string().c_str());
+				_ParseDirectory(aRootPath, entry.path().string().c_str());
 			}
 		}
 	}

@@ -45,7 +45,6 @@ map_player_spawn test_world_dungeon_exit_2:
 map_portal test_world_dungeon_entrance_2:
 {
 	map: test_dungeon_2
-	spawn: test_dungeon_player_spawn_2
 }
 
 map_palette test_world_tiles:

@@ -1,22 +1,17 @@
-map_player_spawn test_dungeon_player_spawn_2:
+map_player_spawn .player_spawn:
 {
 }
 
-map_portal test_dungeon_exit_2:
+map_portal .exit:
 {
 	map: test_world
 	spawn: test_world_dungeon_exit_2
 }
 
-map_entity_spawn test_dungeon_goblin_melee:
+map_entity_spawn .goblin_melee:
 {	
-	entity goblin_melee: { weight: 1 } 
+	entity .goblin_melee: { weight: 1 } 
 }
-
-map_segment_connector connector_east: { connects: [ connector_west ] }
-map_segment_connector connector_west: { connects: [ connector_east ] }
-map_segment_connector connector_south: { connects: [ connector_north ] }
-map_segment_connector connector_north: { connects: [ connector_south ] }
 
 !define local DUNGEON_PALETTE
 [
@@ -26,13 +21,13 @@ map_segment_connector connector_north: { connects: [ connector_south ] }
 	{ 
 		symbol: "x" 
 		tiles: [ dungeon_wall_face_exit ] 
-		portals: [ test_dungeon_exit_2 ] 
+		portals: [ .exit ] 
 	}
 	
 	{ 
 		symbol: "i" 
 		tiles: [ dungeon_floor ] 
-		player_spawns: [ test_dungeon_player_spawn_2 ] 
+		player_spawns: [ .player_spawn ] 
 	}		
 
 	{ 
@@ -62,7 +57,7 @@ map_segment_connector connector_north: { connects: [ connector_south ] }
 	{ 
 		symbol: "G" 
 		tiles: [ dungeon_floor ] 
-		entity_spawns: [ test_dungeon_goblin_melee ] 
+		entity_spawns: [ .goblin_melee ] 
 	}			
 ]
 
@@ -73,7 +68,7 @@ map_segment_connector connector_north: { connects: [ connector_south ] }
 	faces: [ dungeon_wall_face ]
 }
 
-map_segment dungeon_random_room_1<random_room>:
+map_segment .random_room_1<random_room>:
 {
 	tile_map_modifier wall_face: !DUNGEON_WALL_FACE_MODIFIER {}
 	random_room:
@@ -94,7 +89,7 @@ map_segment dungeon_random_room_1<random_room>:
 	}
 }
 
-map_segment dungeon_entrance_1<paletted>:
+map_segment .entrance_1<paletted>:
 {
 	tile_map_modifier wall_face: !DUNGEON_WALL_FACE_MODIFIER {}
 	palette: !DUNGEON_PALETTE {}		
@@ -109,7 +104,7 @@ map_segment dungeon_entrance_1<paletted>:
 	]		
 }
 
-map_segment dungeon_entrance_2<paletted>:
+map_segment .entrance_2<paletted>:
 {
 	tile_map_modifier wall_face: !DUNGEON_WALL_FACE_MODIFIER {}
 	palette: !DUNGEON_PALETTE {}		
@@ -124,7 +119,7 @@ map_segment dungeon_entrance_2<paletted>:
 	]		
 }
 
-map_segment dungeon_passage_1<paletted>:
+map_segment .passage_1<paletted>:
 {
 	tile_map_modifier wall_face: !DUNGEON_WALL_FACE_MODIFIER {}
 	palette: !DUNGEON_PALETTE {}		
@@ -138,7 +133,7 @@ map_segment dungeon_passage_1<paletted>:
 	]	
 }
 
-map_segment dungeon_passage_2<paletted>:
+map_segment .passage_2<paletted>:
 {
 	tile_map_modifier wall_face: !DUNGEON_WALL_FACE_MODIFIER {}
 	palette: !DUNGEON_PALETTE {}				
@@ -156,7 +151,7 @@ map_segment dungeon_passage_2<paletted>:
 	]	
 }
 
-map_segment dungeon_passage_3<paletted>:
+map_segment .passage_3<paletted>:
 {
 	tile_map_modifier wall_face: !DUNGEON_WALL_FACE_MODIFIER {}
 	palette: !DUNGEON_PALETTE {}		
@@ -171,7 +166,7 @@ map_segment dungeon_passage_3<paletted>:
 	]	
 }
 
-map_segment dungeon_passage_4<paletted>:
+map_segment .passage_4<paletted>:
 {
 	tile_map_modifier wall_face: !DUNGEON_WALL_FACE_MODIFIER {}
 	palette: !DUNGEON_PALETTE {}				
@@ -190,7 +185,7 @@ map_segment dungeon_passage_4<paletted>:
 	]	
 }
 
-map_segment dungeon_blind_1<paletted>:
+map_segment .blind_1<paletted>:
 {
 	tile_map_modifier wall_face: !DUNGEON_WALL_FACE_MODIFIER {}
 	palette: !DUNGEON_PALETTE {}				
@@ -204,7 +199,7 @@ map_segment dungeon_blind_1<paletted>:
 	]	
 }
 
-map_segment dungeon_blind_2<paletted>:
+map_segment .blind_2<paletted>:
 {
 	tile_map_modifier wall_face: !DUNGEON_WALL_FACE_MODIFIER {}
 	palette: !DUNGEON_PALETTE {}				
@@ -218,7 +213,7 @@ map_segment dungeon_blind_2<paletted>:
 	]	
 }
 
-map_segment dungeon_blind_3<paletted>:
+map_segment .blind_3<paletted>:
 {
 	tile_map_modifier wall_face: !DUNGEON_WALL_FACE_MODIFIER {}
 	palette: !DUNGEON_PALETTE {}				
@@ -232,7 +227,7 @@ map_segment dungeon_blind_3<paletted>:
 	]	
 }
 
-map_segment dungeon_blind_4<paletted>:
+map_segment .blind_4<paletted>:
 {
 	tile_map_modifier wall_face: !DUNGEON_WALL_FACE_MODIFIER {}
 	palette: !DUNGEON_PALETTE {}				
@@ -253,8 +248,8 @@ map test_dungeon_2:
 	type: private
 	reset: manual
 	default_tile: dungeon_wall
-	default_player_spawn: test_dungeon_player_spawn_2
-	default_exit_portal: test_dungeon_exit_2
+	default_player_spawn: .player_spawn
+	default_exit_portal: .exit
 	view_attenuation: 30
 	view_attenuation_bias: 50
 	view_hidden_visibility: 0
@@ -265,40 +260,40 @@ map test_dungeon_2:
 		room entrance:
 		{
 			flags: [ root ]
-			segment<1>: dungeon_entrance_1
-			segment<1>: dungeon_entrance_2
+			segment<1>: .entrance_1
+			segment<1>: .entrance_2
 			
-			connection passage<connector_east>: { weight: 1 debug_name: "A" }
-			connection passage<connector_west>: { weight: 1 debug_name: "B" }
+			connection passage<connector_east>: { weight: 1 }
+			connection passage<connector_west>: { weight: 1 }
 		}
 		
 		room passage:
 		{
-			segment<1>: dungeon_passage_1
-			segment<1>: dungeon_passage_2
-			segment<1>: dungeon_passage_3
-			segment<1>: dungeon_passage_4
-			segment<3>: dungeon_random_room_1
+			segment<1>: .passage_1
+			segment<1>: .passage_2
+			segment<1>: .passage_3
+			segment<1>: .passage_4
+			segment<3>: .random_room_1
 			
-			connection passage<connector_east>: { weight: 1 debug_name: "C" }
-			connection blind<connector_east>: { weight: 1 debug_name: "D" }
+			connection passage<connector_east>: { weight: 1 }
+			connection blind<connector_east>: { weight: 1 }
 
-			connection passage<connector_west>: { weight: 1 debug_name: "E" }
-			connection blind<connector_west>: { weight: 1 debug_name: "F" }
+			connection passage<connector_west>: { weight: 1 }
+			connection blind<connector_west>: { weight: 1 }
 			
-			connection passage<connector_north>: { weight: 1 debug_name: "G" }
-			connection blind<connector_north>: { weight: 1 debug_name: "H" }			
+			connection passage<connector_north>: { weight: 1 }
+			connection blind<connector_north>: { weight: 1 }			
 			
-			connection passage<connector_south>: { weight: 1 debug_name: "I" }
-			connection blind<connector_south>: { weight: 1 debug_name: "J" }						
+			connection passage<connector_south>: { weight: 1 }
+			connection blind<connector_south>: { weight: 1 }						
 		}		
 		
 		room blind:
 		{
-			segment<1>: dungeon_blind_1
-			segment<1>: dungeon_blind_2
-			segment<1>: dungeon_blind_3
-			segment<1>: dungeon_blind_4
+			segment<1>: .blind_1
+			segment<1>: .blind_2
+			segment<1>: .blind_3
+			segment<1>: .blind_4
 		}				
 	}
 }

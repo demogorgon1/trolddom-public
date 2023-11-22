@@ -39,12 +39,14 @@ namespace tpublic
 		SourceNode(
 			SourceContext*							aSourceContext,
 			const DataErrorHandling::DebugInfo&		aDebugInfo,
+			const char*								aRealPath,
 			const char*								aPath,
 			const char*								aPathWithFileName)
 			: m_type(TYPE_NONE)
 			, m_sourceContext(aSourceContext)
 			, m_debugInfo(aDebugInfo)
 			, m_path(aPath)
+			, m_realPath(aRealPath)
 			, m_pathWithFileName(aPathWithFileName)
 		{
 
@@ -57,6 +59,7 @@ namespace tpublic
 			, m_sourceContext(aSourceContext)
 			, m_debugInfo(aTokenizer.Next().m_debugInfo)
 			, m_path(aTokenizer.GetPath())
+			, m_realPath(aTokenizer.GetRealPath())
 			, m_pathWithFileName(aTokenizer.GetPathWithFileName())
 		{
 
@@ -75,7 +78,7 @@ namespace tpublic
 
 			for(const std::unique_ptr<SourceNode>& otherChild : aOther->m_children)
 			{
-				std::unique_ptr<SourceNode> child = std::make_unique<SourceNode>(m_sourceContext, m_debugInfo, m_path.c_str(), m_pathWithFileName.c_str());
+				std::unique_ptr<SourceNode> child = std::make_unique<SourceNode>(m_sourceContext, m_debugInfo, m_realPath.c_str(), m_path.c_str(), m_pathWithFileName.c_str());
 
 				child->m_name = otherChild->m_name;
 				child->m_tag = otherChild->m_tag;
@@ -87,7 +90,7 @@ namespace tpublic
 
 			if(aOther->m_annotation)
 			{
-				std::unique_ptr<SourceNode> annotation = std::make_unique<SourceNode>(m_sourceContext, m_debugInfo, m_path.c_str(), m_pathWithFileName.c_str());
+				std::unique_ptr<SourceNode> annotation = std::make_unique<SourceNode>(m_sourceContext, m_debugInfo, m_realPath.c_str(), m_path.c_str(), m_pathWithFileName.c_str());
 				
 				annotation->m_name = aOther->m_annotation->m_name;
 				annotation->m_tag = aOther->m_annotation->m_tag;
@@ -99,7 +102,7 @@ namespace tpublic
 
 			if(aOther->m_condition)
 			{
-				std::unique_ptr<SourceNode> condition = std::make_unique<SourceNode>(m_sourceContext, m_debugInfo, m_path.c_str(), m_pathWithFileName.c_str());
+				std::unique_ptr<SourceNode> condition = std::make_unique<SourceNode>(m_sourceContext, m_debugInfo, m_realPath.c_str(), m_path.c_str(), m_pathWithFileName.c_str());
 				
 				condition->m_name = aOther->m_condition->m_name;
 				condition->m_tag = aOther->m_condition->m_tag;
@@ -340,6 +343,7 @@ namespace tpublic
 		std::string									m_name;
 		std::string									m_tag;
 		std::string									m_value;
+		std::string									m_realPath;
 		std::string									m_path;
 		std::string									m_pathWithFileName;
 		DataErrorHandling::DebugInfo				m_debugInfo;
