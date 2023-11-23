@@ -1,0 +1,1 @@
+!define TRASH_RESPAWN_TIMER { cooldown_range_min: 36000 cooldown_range_max: 36000 }

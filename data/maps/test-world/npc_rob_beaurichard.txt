@@ -1,4 +1,4 @@
-expression test_world_rob_beaurichard_can_afford_guild_registration:
+expression .rob_beaurichard_can_afford_guild_registration:
 {
 	less_than_or_equal: 
 	{
@@ -7,7 +7,7 @@ expression test_world_rob_beaurichard_can_afford_guild_registration:
 	}
 }
 
-expression test_world_rob_beaurichard_cannot_afford_guild_registration:
+expression .rob_beaurichard_cannot_afford_guild_registration:
 {
 	greater_than: 
 	{
@@ -16,7 +16,7 @@ expression test_world_rob_beaurichard_cannot_afford_guild_registration:
 	}
 }
 
-dialogue_screen test_world_rob_beaurichard_greetings_not_in_guild:
+dialogue_screen .rob_beaurichard_greetings_not_in_guild:
 {
 	text: 
 	[	
@@ -28,12 +28,12 @@ dialogue_screen test_world_rob_beaurichard_greetings_not_in_guild:
 	
 	options:
 	[
-		{ text: "Okay, please hand me the guild registration form." script: create_guild condition: test_world_rob_beaurichard_can_afford_guild_registration }
-		{ text: "I can't afford that, I might come back later." condition: test_world_rob_beaurichard_cannot_afford_guild_registration }
+		{ text: "Okay, please hand me the guild registration form." script: create_guild condition: .rob_beaurichard_can_afford_guild_registration }
+		{ text: "I can't afford that, I might come back later." condition: .rob_beaurichard_cannot_afford_guild_registration }
 	]
 }
 
-dialogue_screen test_world_rob_beaurichard_greetings_in_guild:
+dialogue_screen .rob_beaurichard_greetings_in_guild:
 {
 	text: 
 	[	
@@ -41,23 +41,23 @@ dialogue_screen test_world_rob_beaurichard_greetings_in_guild:
 	]
 }
 
-expression test_world_rob_beaurichard_is_in_guild:
+expression .rob_beaurichard_is_in_guild:
 {
 	client_player_is_in_guild: {}
 }
 
-expression test_world_rob_beaurichard_is_not_in_guild:
+expression .rob_beaurichard_is_not_in_guild:
 {
 	not: { client_player_is_in_guild: {} }
 }
 
-dialogue_root test_world_rob_beaurichard_dialogue:
+dialogue_root .rob_beaurichard_dialogue:
 {
-	test_world_rob_beaurichard_greetings_not_in_guild: { conditions: [ test_world_rob_beaurichard_is_not_in_guild ] }
-	test_world_rob_beaurichard_greetings_in_guild: { conditions: [ test_world_rob_beaurichard_is_in_guild ] }
+	.rob_beaurichard_greetings_not_in_guild: { conditions: [ .rob_beaurichard_is_not_in_guild ] }
+	.rob_beaurichard_greetings_in_guild: { conditions: [ .rob_beaurichard_is_in_guild ] }
 }
 
-entity test_world_rob_beaurichard:
+entity .rob_beaurichard:
 {
 	string: "Rob Beaurichard"
 	
@@ -82,13 +82,14 @@ entity test_world_rob_beaurichard:
 		}
 		lootable: 
 		{ 
-			loot_table: test_world_npc_1
+			loot_table: .npc
 		}
 		combat_public: 
 		{  
 			level: 10
 			faction: npcs		
-			dialogue_root: test_world_rob_beaurichard_dialogue
+			creature_type: humanoid			
+			dialogue_root: .rob_beaurichard_dialogue
 			
 			modifier not_pushable: {}
 		}			

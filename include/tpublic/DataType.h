@@ -35,6 +35,7 @@ namespace tpublic
 			ID_MAP_SEGMENT,
 			ID_MAP_SEGMENT_CONNECTOR,
 			ID_ZONE,
+			ID_CREATURE_TYPE,
 
 			NUM_IDS
 		};
@@ -67,7 +68,8 @@ namespace tpublic
 			"npc_behavior_state",
 			"map_segment",
 			"map_segment_connector",
-			"zone"
+			"zone",
+			"creature_type"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

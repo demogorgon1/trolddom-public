@@ -45,6 +45,8 @@ namespace tpublic
 	LootGenerator::Generate(
 		std::mt19937&			aRandom,
 		uint32_t				aLevel,
+		uint32_t				aCreatureTypeId,
+		bool					aIsElite,
 		Components::Lootable*	aLootable) const
 	{
 		const Data::LootTable* lootTable = m_manifest->m_lootTables.GetById(aLootable->m_lootTableId);
@@ -53,7 +55,26 @@ namespace tpublic
 		{
 			std::uniform_int_distribution<int64_t> distribution(lootTable->m_cash->m_min, lootTable->m_cash->m_max);
 			aLootable->m_availableCash = distribution(aRandom);
-			aLootable->m_cash = true;
+			aLootable->m_cash = aLootable->m_availableCash > 0;
+		}
+		else if(aCreatureTypeId != 0)
+		{
+			if(m_manifest->m_creatureTypes.GetById(aCreatureTypeId)->m_flags & Data::CreatureType::FLAG_CASH_LOOT)
+			{
+				const NPCMetrics::Level* npcMetricsLevel = m_manifest->m_npcMetrics.GetLevel(aLevel);
+				if (npcMetricsLevel != NULL)
+				{
+					std::uniform_int_distribution<uint32_t> distribution(npcMetricsLevel->m_cash.m_min, npcMetricsLevel->m_cash.m_max);
+					aLootable->m_availableCash = (int64_t)distribution(aRandom);
+
+					if(aLootable->m_availableCash > 0 && aIsElite)
+					{
+						aLootable->m_availableCash = (int64_t)((float)aLootable->m_availableCash * npcMetricsLevel->m_eliteCash);
+					}
+
+					aLootable->m_cash = aLootable->m_availableCash > 0;						
+				}
+			}
 		}
 
 		for(const std::unique_ptr<Data::LootTable::Slot>& slot : lootTable->m_slots)

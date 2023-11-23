@@ -1,10 +1,10 @@
-dialogue_screen test_world_sylas_vendor:
+dialogue_screen .sylas_vendor:
 {
 	sell consumable_small_healing_potion: { quantity: 1 }	
 	sell consumable_small_mana_potion: { quantity: 1 }	
 }
 
-dialogue_screen test_world_sylas_greetings:
+dialogue_screen .sylas_greetings:
 {
 	text: 
 	[	
@@ -18,16 +18,16 @@ dialogue_screen test_world_sylas_greetings:
 	
 	options:
 	[
-		{ goto: test_world_sylas_vendor text: "Let me browse your goods." }
+		{ goto: .sylas_vendor text: "Let me browse your goods." }
 	]
 }
 
-dialogue_root test_world_sylas_dialogue:
+dialogue_root .sylas_dialogue:
 {
-	test_world_sylas_greetings: { }
+	.sylas_greetings: { }
 }
 
-entity test_world_sylas:
+entity .sylas:
 {
 	string: "Sylas"
 	
@@ -48,13 +48,14 @@ entity test_world_sylas:
 		tag: { }
 		lootable: 
 		{ 
-			loot_table: test_world_npc_1
+			loot_table: .npc
 		}
 		combat_public: 
 		{  
 			level: 10
 			faction: npcs		
-			dialogue_root: test_world_sylas_dialogue
+			creature_type: humanoid
+			dialogue_root: .sylas_dialogue
 			
 			modifier not_pushable: {}
 		}			

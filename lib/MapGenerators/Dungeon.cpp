@@ -381,8 +381,8 @@ namespace tpublic::MapGenerators
 					{
 						MapData::Portal t;
 						t.m_id = object.m_id;
-						t.m_x = object.m_position.m_x;
-						t.m_y = object.m_position.m_y;
+						t.m_x = generatedRoom->m_min.m_x + object.m_position.m_x;
+						t.m_y = generatedRoom->m_min.m_y + object.m_position.m_y;
 						mapData->m_portals.push_back(t);
 					}
 					break;
@@ -391,8 +391,8 @@ namespace tpublic::MapGenerators
 					{
 						MapData::PlayerSpawn t;
 						t.m_id = object.m_id;
-						t.m_x = object.m_position.m_x;
-						t.m_y = object.m_position.m_y;
+						t.m_x = generatedRoom->m_min.m_x + object.m_position.m_x;
+						t.m_y = generatedRoom->m_min.m_y + object.m_position.m_y;
 						mapData->m_playerSpawns.push_back(t);
 					}
 					break;
@@ -401,8 +401,8 @@ namespace tpublic::MapGenerators
 					{
 						MapData::EntitySpawn t;
 						t.m_id = object.m_id;
-						t.m_x = object.m_position.m_x;
-						t.m_y = object.m_position.m_y;
+						t.m_x = generatedRoom->m_min.m_x + object.m_position.m_x;
+						t.m_y = generatedRoom->m_min.m_y + object.m_position.m_y;
 						mapData->m_entitySpawns.push_back(t);
 					}
 					break;

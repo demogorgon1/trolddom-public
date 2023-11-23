@@ -33,7 +33,8 @@ namespace tpublic
 			TYPE_EXPRESSION_POWER,
 			TYPE_EXPRESSION_EXISTS,
 			TYPE_EXPRESSION_NEGATE,
-			TYPE_EXPRESSION_NOT
+			TYPE_EXPRESSION_NOT,
+			TYPE_EXPRESSION_VALUE
 		};
 
 		SourceNode(
@@ -119,6 +120,18 @@ namespace tpublic
 		{
 			for(const std::unique_ptr<SourceNode>& child : m_children)
 				aCallback(child.get());
+		}
+
+		const SourceNode*
+		TryGetChildByName(
+			const char*								aName) const
+		{
+			for (const std::unique_ptr<SourceNode>& child : m_children)
+			{
+				if(child->m_name == aName)
+					return child.get();
+			}
+			return NULL;
 		}
 
 		const char*

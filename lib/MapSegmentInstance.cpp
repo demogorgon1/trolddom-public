@@ -371,26 +371,6 @@ namespace tpublic
 					_GetOrCreateConnector(randomRoomConnector.m_mapSegmentConnectorId)->m_positions.push_back(selectedPosition.value());
 				}
 			}
-
-			//for (int32_t y = 0; y < m_size.m_y; y++)
-			//{
-			//	for (int32_t x = 0; x < m_size.m_x; x++)
-			//	{
-			//		if (m_generatedTileMap[x + y * m_size.m_x] == randomRoom->m_floorTiles[0])
-			//		{
-			//			printf("F");
-			//		}
-			//		else if (m_generatedTileMap[x + y * m_size.m_x] == randomRoom->m_wallTiles[0])
-			//		{
-			//			printf("W");
-			//		}
-			//		else
-			//		{
-			//			printf(".");
-			//		}
-			//	}
-			//	printf("\n");
-			//}
 		}	
 	}
 

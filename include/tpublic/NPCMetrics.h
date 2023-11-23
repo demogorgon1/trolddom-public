@@ -5,6 +5,7 @@
 #include "IWriter.h"
 #include "Parser.h"
 #include "Resource.h"
+#include "UIntRange.h"
 
 namespace tpublic
 {
@@ -23,7 +24,11 @@ namespace tpublic
 				{
 					if(aChild->m_name == "base_weapon_damage")
 					{
-						aChild->GetUIntRange(m_baseWeaponDamageMin, m_baseWeaponDamageMax);
+						m_baseWeaponDamage = UIntRange(aChild);
+					}
+					else if (aChild->m_name == "cash")
+					{
+						m_cash = UIntRange(aChild);
 					}
 					else if(aChild->m_name == "base_resource")
 					{
@@ -35,6 +40,10 @@ namespace tpublic
 					else if (aChild->m_name == "elite_weapon_damage")
 					{
 						m_eliteWeaponDamage = aChild->GetFloat();
+					}
+					else if (aChild->m_name == "elite_cash")
+					{
+						m_eliteCash = aChild->GetFloat();
 					}
 					else if (aChild->m_name == "elite_resource")
 					{
@@ -54,9 +63,10 @@ namespace tpublic
 			ToStream(
 				IWriter*				aWriter) const
 			{	
-				aWriter->WriteUInt(m_baseWeaponDamageMin);
-				aWriter->WriteUInt(m_baseWeaponDamageMax);
+				m_baseWeaponDamage.ToStream(aWriter);
+				m_cash.ToStream(aWriter);
 				aWriter->WriteFloat(m_eliteWeaponDamage);
+				aWriter->WriteFloat(m_eliteCash);
 				for(uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 				{
 					aWriter->WriteUInt(m_baseResource[i]);
@@ -68,11 +78,13 @@ namespace tpublic
 			FromStream(
 				IReader*				aReader) 
 			{
-				if (!aReader->ReadUInt(m_baseWeaponDamageMin))
+				if (!m_baseWeaponDamage.FromStream(aReader))
 					return false;
-				if (!aReader->ReadUInt(m_baseWeaponDamageMax))
+				if (!m_cash.FromStream(aReader))
 					return false;
 				if (!aReader->ReadFloat(m_eliteWeaponDamage))
+					return false;
+				if (!aReader->ReadFloat(m_eliteCash))
 					return false;
 				for (uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 				{
@@ -85,13 +97,14 @@ namespace tpublic
 			}
 
 			// Public data
-			uint32_t		m_baseWeaponDamageMin = 0;
-			uint32_t		m_baseWeaponDamageMax = 0;
+			UIntRange		m_baseWeaponDamage;
+			UIntRange		m_cash;
 
 			uint32_t		m_baseResource[Resource::NUM_IDS] = { 0 };
 
 			float			m_eliteWeaponDamage = 0.0f;
 			float			m_eliteResource[Resource::NUM_IDS] = { 0 };
+			float			m_eliteCash = 0.0f;
 		};
 
 		NPCMetrics()

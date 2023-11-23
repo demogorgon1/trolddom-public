@@ -1,7 +1,5 @@
 loot_table .trash:
 {
-	cash: [ 10 20 ]
-	
 	slots:
 	[
 		!WORLD_DROPS{}

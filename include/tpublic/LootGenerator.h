@@ -14,13 +14,15 @@ namespace tpublic
 	{
 	public:
 					LootGenerator(
-						const Manifest*			aManifest);			
+						const Manifest*				aManifest);			
 					~LootGenerator();
 
 		void		Generate(
-						std::mt19937&			aRandom,
-						uint32_t				aLevel,
-						Components::Lootable*	aLootable) const;
+						std::mt19937&				aRandom,
+						uint32_t					aLevel,
+						uint32_t					aCreatureTypeId,
+						bool						aIsElite,
+						Components::Lootable*		aLootable) const;
 
 	private:
 

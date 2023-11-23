@@ -1,85 +1,79 @@
-map_entity_spawn test_world_spirit_stone:
+map_player_spawn dungeon_1_exit:
+{
+}
+
+map_player_spawn dungeon_2_exit:
+{
+}
+
+map_entity_spawn .spirit_stone:
 {	
 	entity spirit_stone: { } 
 }
 
-map_entity_spawn test_world_monster:
+map_entity_spawn .wildlife:
 {	
-	entity goblin: { weight: 1 } 
+	entity .deer_1: { level: 1 weight: 1 zones: [ .zone_1 ] } 
+	entity .boar_1: { level: 1 weight: 1 zones: [ .zone_1 ] } 
+	entity .deer_2: { level: 2 weight: 1 zones: [ .zone_1 ] } 
+	entity .boar_2: { level: 2 weight: 1 zones: [ .zone_1 ] } 
 }
 
-map_entity_spawn test_world_wildlife:
-{	
-	entity deer_1: { level: 1 weight: 1 zones: [ test_world_zone_1 ] } 
-	entity boar_1: { level: 1 weight: 1 zones: [ test_world_zone_1 ] } 
-	entity deer_2: { level: 2 weight: 1 zones: [ test_world_zone_1 ] } 
-	entity boar_2: { level: 2 weight: 1 zones: [ test_world_zone_1 ] } 
-}
-
-map_entity_spawn test_world_sylas:
+map_entity_spawn .sylas:
 {
-	entity test_world_sylas: { weight: 1 }
+	entity .sylas: { weight: 1 }
 }
 
-map_entity_spawn test_world_rob_beaurichard:
+map_entity_spawn .rob_beaurichard:
 {
-	entity test_world_rob_beaurichard: { weight: 1 }
+	entity .rob_beaurichard: { weight: 1 }
 }
 
-map_player_spawn test_world_player_spawn:
+map_player_spawn .player_spawn:
 {
 }
 
-map_player_spawn test_world_dungeon_exit:
-{
-}
-
-map_portal test_world_dungeon_entrance:
+map_portal .dungeon_1_entrance:
 {
 	map: test_dungeon
-	spawn: test_dungeon_player_spawn
 }
 
-map_player_spawn test_world_dungeon_exit_2:
-{
-}
-
-map_portal test_world_dungeon_entrance_2:
+map_portal .dungeon_2_entrance:
 {
 	map: test_dungeon_2
 }
 
-zone test_world_zone_1:
+zone .zone_1:
 {
 	string: "Zone 1"
 }
 
-zone test_world_zone_2:
+zone .zone_2:
 {
 	string: "Zone 2"
 }
 
-zone test_world_zone_3:
+zone .zone_3:
 {
 	string: "Zone 3"
 }
 
-zone test_world_zone_4:
+zone .zone_4:
 {
 	string: "Zone 4"
 }
 
-zone test_world_zone_5:
+zone .zone_5:
 {
 	string: "Zone 5"
 }
 
-zone test_world_zone_6:
+zone .zone_6:
 {
 	string: "Zone 6"
 }
 
-map_palette test_world_tiles:
+map_palette .tiles:
 {
 	tile water_1: [ 9 86 104 ]
 	tile dirt: [ 97 91 62 ]
@@ -89,21 +83,20 @@ map_palette test_world_tiles:
 	tile rocks_dungeon_entrance: [ 200 200 200 ]
 }
 
-map_palette test_world_stuff:
+map_palette .stuff:
 {
-	entity_spawn test_world_monster: [ 255 0 0 ]
-	entity_spawn test_world_wildlife: [ 255 255 0 ]
-	entity_spawn test_world_sylas: [ 255 189 0 ]
-	entity_spawn test_world_rob_beaurichard: [ 12 189 87 ]
-	entity_spawn test_world_spirit_stone: [ 0 0 0 ]
-	player_spawn test_world_player_spawn: [ 0 0 255 ]
-	player_spawn test_world_dungeon_exit: [ 0 0 200 ]	
-	player_spawn test_world_dungeon_exit_2: [ 0 255 100 ]	
-	portal test_world_dungeon_entrance: [ 0 255 0 ]	
-	portal test_world_dungeon_entrance_2: [ 0 128 255 ]	
+	entity_spawn .wildlife: [ 255 255 0 ]
+	entity_spawn .sylas: [ 255 189 0 ]
+	entity_spawn .rob_beaurichard: [ 12 189 87 ]
+	entity_spawn .spirit_stone: [ 0 0 0 ]
+	player_spawn .player_spawn: [ 0 0 255 ]
+	player_spawn dungeon_1_exit: [ 0 0 200 ]	
+	player_spawn dungeon_2_exit: [ 0 255 100 ]	
+	portal .dungeon_1_entrance: [ 0 255 0 ]	
+	portal .dungeon_2_entrance: [ 0 128 255 ]	
 }
 
-map_palette test_world_levels:
+map_palette .levels:
 {
 	level<1>: [ 0 255 0 ]
 	level<2>: [ 255 0 0 ]
@@ -117,14 +110,14 @@ map_palette test_world_levels:
 	level<10>: [ 127 0 255 ]
 }
 
-map_palette test_world_zones:
+map_palette .zones:
 {
-	zone test_world_zone_1: [ 0 255 255 ]
-	zone test_world_zone_2: [ 255 0 0 ]
-	zone test_world_zone_3: [ 0 0 127 ]
-	zone test_world_zone_4: [ 127 0 127 ]
-	zone test_world_zone_5: [ 255 255 0 ]
-	zone test_world_zone_6: [ 255 127 0 ]	
+	zone .zone_1: [ 0 255 255 ]
+	zone .zone_2: [ 255 0 0 ]
+	zone .zone_3: [ 0 0 127 ]
+	zone .zone_4: [ 127 0 127 ]
+	zone .zone_5: [ 255 255 0 ]
+	zone .zone_6: [ 255 127 0 ]	
 }
 
 map test_world:
@@ -132,7 +125,7 @@ map test_world:
 	string: "Test World"
 	type: open_world
 	default_tile: water_1
-	default_player_spawn: test_world_player_spawn
+	default_player_spawn: .player_spawn
 	view_attenuation: 0
 	view_attenuation_bias: 0
 	view_hidden_visibility: 35	
@@ -141,22 +134,22 @@ map test_world:
 	layers:
 	[
 		{
-			palettes:	[ test_world_tiles ]
+			palettes:	[ .tiles ]
 			source:		"test-world-0.png"
 		}
 
 		{
-			palettes:	[ test_world_stuff ]
+			palettes:	[ .stuff ]
 			source:		"test-world-1.png"
 		}
 		
 		{
-			palettes:	[ test_world_levels ]
+			palettes:	[ .levels ]
 			source:		"test-world-2.png"
 		}		
 		
 		{
-			palettes:	[ test_world_zones ]
+			palettes:	[ .zones ]
 			source:		"test-world-3.png"
 		}				
 	]

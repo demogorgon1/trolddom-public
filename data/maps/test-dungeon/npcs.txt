@@ -1,58 +1,60 @@
-loot_table test_dungeon_boss_1:
+loot_table .ignorg:
 {
-	cash: [ 20 30 ]
-	
 	slots:
 	[
 		!WORLD_DROPS{}
 	]	
 }
 
-loot_table goblin:
+loot_table .trash:
 {
-	cash: [ 10 20 ]
-	
 	slots:
 	[
 		!WORLD_DROPS{}
 	]	
 }
 
-entity ignorg_6: !NPC 
+entity .ignorg: !NPC 
 { 
 	_string: "Ignorg" 
 	_level: 6 
+	_elite: true
 	_faction: monsters 
 	_sprite: goblin_boss 
 	_sprite_dead: goblin_boss_dead 
 	_weapon_damage: 1.6 
 	_resource_health: 2 
-	_loot_table: test_dungeon_boss_1
+	_loot_table: .ignorg
+	_creature_type: humanoid
 }
 
-entity goblin_5: !NPC
+entity .goblin: !NPC
 {
 	_string: "Goblin"
 	_level: 5
+	_elite: true
 	_faction: monsters 
 	_sprite: goblin
 	_sprite_dead: goblin_dead 
 	_weapon_damage: 1 
 	_resource_health: 1
-	_loot_table: goblin
+	_loot_table: .trash
+	_creature_type: humanoid
 }
 
-entity goblin_shaman_5: !NPC
+entity .goblin_shaman: !NPC
 {
 	_string: "Goblin Shaman"
 	_level: 5
+	_elite: true
 	_faction: monsters 
 	_sprite: goblin_shaman
 	_sprite_dead: goblin_shaman_dead 
 	_weapon_damage: 0.7
 	_resource_health: 0.8
 	_resource_mana: 1
-	_loot_table: goblin
+	_loot_table: .trash
+	_creature_type: humanoid
 	_abilities: [ { id: firebolt }{ id: strike } ]
 }
 	

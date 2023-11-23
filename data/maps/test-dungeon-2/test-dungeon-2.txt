@@ -5,12 +5,13 @@ map_player_spawn .player_spawn:
 map_portal .exit:
 {
 	map: test_world
-	spawn: test_world_dungeon_exit_2
+	spawn: dungeon_2_exit
 }
 
 map_entity_spawn .goblin_melee:
 {	
 	entity .goblin_melee: { weight: 1 } 
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
 }
 
 !define local DUNGEON_PALETTE
@@ -193,7 +194,7 @@ map_segment .blind_1<paletted>:
 	[
 		"#####"
 		"#...#"
-		"w.G.#"
+		"w...#"
 		"#...#"
 		"#####"
 	]	
@@ -207,7 +208,7 @@ map_segment .blind_2<paletted>:
 	[
 		"##### "
 		"#...# " 
-		"#.G..e"
+		"#....e"
 		"#...# "
 		"##### "
 	]	

@@ -28,7 +28,8 @@ namespace tpublic
 			{
 				COMBAT_FLAG_MASTER_LOOTER = 0x01,
 				COMBAT_FLAG_PVP = 0x02,
-				COMBAT_FLAG_PUSHABLE = 0x08
+				COMBAT_FLAG_PUSHABLE = 0x08,
+				COMBAT_FLAG_ELITE = 0x10
 			};
 
 			struct ResourceEntry
@@ -72,7 +73,8 @@ namespace tpublic
 				FIELD_CAST_IN_PROGRESS,
 				FIELD_LOOT_RULE,
 				FIELD_LOOT_THRESHOLD,
-				FIELD_COMBAT_FLAGS
+				FIELD_COMBAT_FLAGS,
+				FIELD_CREATURE_TYPE_ID
 			};
 
 			static void
@@ -89,12 +91,20 @@ namespace tpublic
 				aSchema->DefineCustomPODNoSource<LootRule::Id>(FIELD_LOOT_RULE, offsetof(CombatPublic, m_lootRule))->SetFlags(ComponentSchema::FLAG_NO_STORAGE);
 				aSchema->DefineCustomPODNoSource<Rarity::Id>(FIELD_LOOT_THRESHOLD, offsetof(CombatPublic, m_lootThreshold))->SetFlags(ComponentSchema::FLAG_NO_STORAGE);
 				aSchema->DefineCustomPODNoSource<uint8_t>(FIELD_COMBAT_FLAGS, offsetof(CombatPublic, m_combatFlags));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_CREATURE_TYPE_ID, "creature_type", offsetof(CombatPublic, m_creatureTypeId))->SetDataType(DataType::ID_CREATURE_TYPE)->SetFlags(ComponentSchema::FLAG_NO_STORAGE);
 
 				aSchema->AddSourceModifier<CombatPublic>("not_pushable", [](
 					CombatPublic*		aCombatPublic,
 					const SourceNode*	/*aSource*/)
 				{
 					aCombatPublic->m_combatFlags &= ~COMBAT_FLAG_PUSHABLE;
+				});
+
+				aSchema->AddSourceModifier<CombatPublic>("elite", [](
+					CombatPublic*		aCombatPublic,
+					const SourceNode*	/*aSource*/)
+				{
+					aCombatPublic->m_combatFlags |= COMBAT_FLAG_ELITE;
 				});
 			}
 
@@ -247,12 +257,14 @@ namespace tpublic
 
 			// Helpers
 			bool IsMasterLooter() const { return (m_combatFlags & COMBAT_FLAG_MASTER_LOOTER) != 0; }
+			bool IsElite() const { return (m_combatFlags & COMBAT_FLAG_ELITE) != 0; }
 
 			// Public data
 			uint32_t						m_targetEntityInstanceId = 0;
 			uint32_t						m_level = 1;
 			uint32_t						m_factionId = 0;
 			uint32_t						m_dialogueRootId = 0;
+			uint32_t						m_creatureTypeId = 0;
 			uint64_t						m_combatGroupId = 0;
 			std::vector<ResourceEntry>		m_resources;
 			std::optional<CastInProgress>	m_castInProgress;

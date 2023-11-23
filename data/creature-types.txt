@@ -1,0 +1,4 @@
+creature_type humanoid: { string: "Humanoid" flags: [ cash_loot ] }
+creature_type beast: { string: "Beast" }
+creature_type undead: { string: "Undead" }
+creature_type demon: { string: "Demon" }

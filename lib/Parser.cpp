@@ -364,6 +364,7 @@ namespace tpublic
 		case SourceNode::TYPE_EXPRESSION_EXISTS:	printf("expression_exists "); break;
 		case SourceNode::TYPE_EXPRESSION_NEGATE:	printf("expression_negate "); break;
 		case SourceNode::TYPE_EXPRESSION_NOT:		printf("expression_not "); break;
+		case SourceNode::TYPE_EXPRESSION_VALUE:		printf("expression_value "); break;
 		default:									assert(false);
 		}
 
@@ -432,6 +433,8 @@ namespace tpublic
 					i--;
 					continue;
 				}
+
+				child->m_condition.reset();
 			}
 
 			size_t originalReferenceObjectCount = m_referenceObjects.size();
@@ -517,7 +520,7 @@ namespace tpublic
 		Tokenizer&			aTokenizer)
 	{
 		std::unique_ptr<SourceNode> lhs(_ExprAnds(aTokenizer));
-		while (aTokenizer.IsToken("]"))
+		while (!aTokenizer.IsToken(">"))
 		{
 			if (aTokenizer.IsToken("or"))
 			{
@@ -540,7 +543,7 @@ namespace tpublic
 		Tokenizer&			aTokenizer)
 	{
 		std::unique_ptr<SourceNode> lhs(_ExprEquals(aTokenizer));
-		while (aTokenizer.IsToken("]"))
+		while (!aTokenizer.IsToken(">"))
 		{
 			if (aTokenizer.IsToken("and"))
 			{
@@ -563,7 +566,7 @@ namespace tpublic
 		Tokenizer&			aTokenizer)
 	{
 		std::unique_ptr<SourceNode> lhs(_ExprSummands(aTokenizer));
-		while (aTokenizer.IsToken("]"))
+		while (!aTokenizer.IsToken(">"))
 		{
 			if (aTokenizer.IsToken("equals"))
 			{
@@ -586,7 +589,7 @@ namespace tpublic
 		Tokenizer&			aTokenizer)
 	{
 		std::unique_ptr<SourceNode> lhs(_ExprFactors(aTokenizer));
-		while (aTokenizer.IsToken("]"))
+		while (!aTokenizer.IsToken(">"))
 		{
 			if (aTokenizer.IsToken("+"))
 			{
@@ -620,7 +623,7 @@ namespace tpublic
 		Tokenizer&			aTokenizer)
 	{
 		std::unique_ptr<SourceNode> lhs(_ExprExponentials(aTokenizer));
-		while (aTokenizer.IsToken("]"))
+		while (!aTokenizer.IsToken(">"))
 		{
 			if (aTokenizer.IsToken("*"))
 			{
@@ -654,7 +657,7 @@ namespace tpublic
 		Tokenizer&			aTokenizer)
 	{
 		std::unique_ptr<SourceNode> lhs(_ExprOperand(aTokenizer));
-		while (aTokenizer.IsToken("]"))
+		while (!aTokenizer.IsToken(">"))
 		{
 			if (aTokenizer.IsToken("^"))
 			{
@@ -709,7 +712,9 @@ namespace tpublic
 			}
 			else
 			{
-				TP_VERIFY(false, aTokenizer.Next().m_debugInfo, "Unexpected token in expression.");
+				node = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
+				node->m_type = SourceNode::TYPE_EXPRESSION_VALUE;
+				node->m_name = identifier;
 			}
 		}
 		else 
@@ -735,8 +740,18 @@ namespace tpublic
 				{
 					assert(aSourceNode->m_children.size() == 2);
 					std::string lhs = _EvaluateExpression(aSourceNode->m_children[0].get());
-					std::string rhs = _EvaluateExpression(aSourceNode->m_children[1].get());
-					result = std::to_string(_StringToBool(lhs) || _StringToBool(rhs));
+					if(_StringToBool(lhs))
+					{
+						result = "1";
+					}
+					else
+					{
+						std::string rhs = _EvaluateExpression(aSourceNode->m_children[1].get());
+						if (_StringToBool(rhs))
+							result = "1";
+						else
+							result = "0";
+					}
 				}			
 				break;
 
@@ -744,8 +759,18 @@ namespace tpublic
 				{
 					assert(aSourceNode->m_children.size() == 2);
 					std::string lhs = _EvaluateExpression(aSourceNode->m_children[0].get());
-					std::string rhs = _EvaluateExpression(aSourceNode->m_children[1].get());
-					result = std::to_string(_StringToBool(lhs) && _StringToBool(rhs));
+					if(!_StringToBool(lhs))
+					{
+						result = "0";
+					}
+					else
+					{
+						std::string rhs = _EvaluateExpression(aSourceNode->m_children[1].get());
+						if (!_StringToBool(rhs))
+							result = "0";
+						else
+							result = "1";
+					}
 				}			
 				break;
 
@@ -807,6 +832,15 @@ namespace tpublic
 				{
 					assert(aSourceNode->m_children.size() == 0);
 					result = _FindReferenceObject(m_referenceObjects, aSourceNode->m_name.c_str()) != NULL ? "1" : "0";
+				}			
+				break;
+
+			case SourceNode::TYPE_EXPRESSION_VALUE:
+				{
+					assert(aSourceNode->m_children.size() == 0);
+					const SourceNode* referenceObject = _FindReferenceObject(m_referenceObjects, aSourceNode->m_name.c_str());
+					TP_VERIFY(referenceObject != NULL, aSourceNode->m_debugInfo, "'%s' is not defined.", aSourceNode->m_name.c_str());
+					result = referenceObject->m_value;
 				}			
 				break;
 

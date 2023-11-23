@@ -3,6 +3,7 @@
 #include "Data/Ability.h"
 #include "Data/Aura.h"
 #include "Data/Class.h"
+#include "Data/CreatureType.h"
 #include "Data/DialogueRoot.h"
 #include "Data/DialogueScreen.h"
 #include "Data/Entity.h"
@@ -25,6 +26,7 @@
 #include "Data/Talent.h"
 #include "Data/TalentTree.h"
 #include "Data/Zone.h"
+#include "Data/DialogueScreen.h"
 
 #include "IReader.h"
 #include "ItemMetrics.h"
@@ -261,6 +263,7 @@ namespace tpublic
 			RegisterDataContainer(m_abilities);
 			RegisterDataContainer(m_auras);
 			RegisterDataContainer(m_classes);
+			RegisterDataContainer(m_creatureTypes);
 			RegisterDataContainer(m_dialogueRoots);
 			RegisterDataContainer(m_dialogueScreens);
 			RegisterDataContainer(m_entities);
@@ -354,6 +357,7 @@ namespace tpublic
 		DataContainer<Data::Ability>					m_abilities;
 		DataContainer<Data::Aura>						m_auras;
 		DataContainer<Data::Class>						m_classes;
+		DataContainer<Data::CreatureType>				m_creatureTypes;
 		DataContainer<Data::DialogueRoot>				m_dialogueRoots;
 		DataContainer<Data::DialogueScreen>				m_dialogueScreens;
 		DataContainer<Data::Entity>						m_entities;
