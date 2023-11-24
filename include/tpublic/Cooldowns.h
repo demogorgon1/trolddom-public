@@ -21,8 +21,32 @@ namespace tpublic
 				IWriter*							aStream) const
 			{
 				aStream->WriteUInt(m_abilityId);
-				aStream->WriteIntDelta(aStream->GetTick(), m_start);
-				aStream->WriteIntDelta(aStream->GetTick(), m_end);
+				
+				if(aStream->IsNetworkStream())
+				{
+					aStream->WriteInt(m_start);
+					aStream->WriteInt(m_end);
+				}
+				else
+				{
+					// Convert ticks into global UTC time stamps
+					int32_t currentTick = aStream->GetTick();
+					uint64_t currentTimeStamp = (uint64_t)time(NULL);
+
+					uint64_t startTimeStamp = currentTimeStamp;
+
+					if (m_start < currentTick)
+						startTimeStamp -= (uint64_t)(currentTick - m_start) / 10;
+
+					aStream->WriteUInt(startTimeStamp);
+
+					uint64_t endTimeStamp = 0;
+
+					if (m_end > m_start)
+						endTimeStamp = startTimeStamp + (uint64_t)(m_end - m_start) / 10;
+
+					aStream->WriteUInt(endTimeStamp);
+				}
 			}
 			
 			bool			
@@ -31,10 +55,44 @@ namespace tpublic
 			{
 				if (!aStream->ReadUInt(m_abilityId))
 					return false;
-				if (!aStream->ReadIntDelta(aStream->GetTick(), m_start))
-					return false;
-				if (!aStream->ReadIntDelta(aStream->GetTick(), m_end))
-					return false;
+
+				if (aStream->IsNetworkStream())
+				{
+					if(!aStream->ReadInt(m_start))
+						return false;
+					if (!aStream->ReadInt(m_end))
+						return false;
+				}
+				else
+				{
+					// Convert global UTC time stamps into ticks
+					uint64_t startTimeStamp;
+					uint64_t endTimeStamp;
+
+					if (!aStream->ReadUInt(startTimeStamp))
+						return false;
+					if (!aStream->ReadUInt(endTimeStamp))
+						return false;
+
+					int32_t currentTick = aStream->GetTick();
+					uint64_t currentTimeStamp = (uint64_t)time(NULL);
+
+					if (startTimeStamp < currentTimeStamp)
+						m_start = currentTick - (int32_t)((currentTimeStamp - startTimeStamp) * 10);
+					else
+						m_start = currentTick;
+
+					if (endTimeStamp != 0)
+					{
+						assert(endTimeStamp >= startTimeStamp);
+						m_end = m_start + (int32_t)((endTimeStamp - startTimeStamp) * 10);
+					}
+					else
+					{
+						m_end = 0;
+					}
+				}
+
 				return true;
 			}
 

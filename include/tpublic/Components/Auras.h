@@ -27,35 +27,60 @@ namespace tpublic
 					IWriter*					aWriter) const
 				{
 					aWriter->WriteUInt(m_auraId);
-					aWriter->WriteIntDelta(aWriter->GetTick(), m_start);
 
-					aWriter->WriteBool(m_end != 0);
-					if(m_end != 0)
-						aWriter->WriteIntDelta(aWriter->GetTick(), m_end);
+					// Convert ticks into global UTC time stamps
+					int32_t currentTick = aWriter->GetTick();
+					uint64_t currentTimeStamp = (uint64_t)time(NULL);
+
+					uint64_t startTimeStamp = currentTimeStamp;
+
+					if(m_start < currentTick)
+						startTimeStamp -= (uint64_t)(currentTick - m_start) / 10;
+
+					aWriter->WriteUInt(startTimeStamp);
+
+					uint64_t endTimeStamp = 0;
+
+					if(m_end > m_start)
+						endTimeStamp = startTimeStamp + (uint64_t)(m_end - m_start) / 10;
+
+					aWriter->WriteUInt(endTimeStamp);
 				}
 
 				bool
 				FromStream(
 					IReader*					aReader) 
 				{
-					if(!aReader->ReadUInt(m_auraId))
-						return false;
-					if (!aReader->ReadIntDelta(aReader->GetTick(), m_start))
+					if (!aReader->ReadUInt(m_auraId))
 						return false;
 					
-					bool hasEnd;
-					if(!aReader->ReadBool(hasEnd))
+					// Convert global UTC time stamps into ticks
+					uint64_t startTimeStamp;
+					uint64_t endTimeStamp;
+
+					if (!aReader->ReadUInt(startTimeStamp))
+						return false;
+					if (!aReader->ReadUInt(endTimeStamp))
 						return false;
 
-					if(hasEnd)
+					int32_t currentTick = aReader->GetTick();
+					uint64_t currentTimeStamp = (uint64_t)time(NULL);
+
+					if(startTimeStamp < currentTimeStamp)
+						m_start = currentTick - (int32_t)((currentTimeStamp - startTimeStamp) * 10);
+					else
+						m_start = currentTick;
+
+					if(endTimeStamp != 0)
 					{
-						if (!aReader->ReadIntDelta(aReader->GetTick(), m_end))
-							return false;
+						assert(endTimeStamp >= startTimeStamp);
+						m_end = m_start + (int32_t)((endTimeStamp - startTimeStamp) * 10);
 					}
 					else
 					{
 						m_end = 0;
 					}
+
 					return true;
 				}
 

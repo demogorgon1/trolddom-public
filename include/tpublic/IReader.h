@@ -293,6 +293,19 @@ namespace tpublic
 			return m_tick;
 		}
 
+		void
+		SetNetworkStream(
+			bool									aNetworkStream)
+		{
+			m_networkStream = aNetworkStream;
+		}
+
+		bool
+		IsNetworkStream() const
+		{
+			return m_networkStream;
+		}
+
 		// Virtual interface
 		virtual bool						IsEnd() const = 0;
 		virtual size_t						Read(
@@ -308,6 +321,7 @@ namespace tpublic
 	private:
 
 		int32_t				m_tick = 0;
+		bool				m_networkStream = false;
 	};
 
 }
