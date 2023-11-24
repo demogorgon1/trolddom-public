@@ -21,7 +21,6 @@ namespace tpublic
 			enum PropertyType : uint8_t
 			{
 				PROPERTY_TYPE_WEAPON_COOLDOWN,
-				PROPERTY_TYPE_REQUIRED_LEVEL,
 				PROPERTY_TYPE_ITEM_LEVEL,
 				PROPERTY_TYPE_WEAPON_DAMAGE_MIN,
 				PROPERTY_TYPE_WEAPON_DAMAGE_MAX,
@@ -103,8 +102,6 @@ namespace tpublic
 					{
 						if(aChild->m_name == "weapon_cooldown")
 							m_properties.push_back({ PROPERTY_TYPE_WEAPON_COOLDOWN, aChild->GetUInt32() });
-						else if (aChild->m_name == "required_level")
-							m_properties.push_back({ PROPERTY_TYPE_REQUIRED_LEVEL, aChild->GetUInt32() });
 						else if (aChild->m_name == "item_level")
 							m_properties.push_back({ PROPERTY_TYPE_ITEM_LEVEL, aChild->GetUInt32() });
 						else if (aChild->m_name == "cost")
@@ -253,6 +250,10 @@ namespace tpublic
 					{
 						m_levelRange = UIntRange(aChild);
 					}
+					else if (aChild->m_name == "required_level")
+					{
+						m_requiredLevel = aChild->GetUInt32();
+					}
 					else if (aChild->m_name == "use_ability")
 					{
 						m_useAbilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
@@ -281,6 +282,7 @@ namespace tpublic
 				aStream->WriteUInt(m_useAbilityId);
 				aStream->WritePOD(m_itemType);
 				m_levelRange.ToStream(aStream);
+				aStream->WriteUInt(m_requiredLevel);
 			}
 
 			bool
@@ -303,6 +305,8 @@ namespace tpublic
 					return false;
 				if(!m_levelRange.FromStream(aStream))
 					return false;
+				if (!aStream->ReadUInt(m_requiredLevel))
+					return false;
 				return true;
 			}
 
@@ -314,6 +318,7 @@ namespace tpublic
 			uint32_t					m_useAbilityId = 0;
 			ItemType::Id				m_itemType = ItemType::ID_NONE;
 			UIntRange					m_levelRange;
+			uint32_t					m_requiredLevel = 1;
 		};
 
 	}

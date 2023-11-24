@@ -2,12 +2,12 @@ item legs_flimsy_mail_pants:
 {
 	type: armor_mail
 	equipment_slots: [ legs ]
-	loot_groups: [ world_drops ]
+	loot_groups: [ world_drops_junk ]
+	required_level: 1
 		
 	root:
 	{
 		name: "Flimsy Mail Pants"
-		required_level: 1
 		item_level: 1
 		icon: icon_mail_pants_1
 		rarity: common

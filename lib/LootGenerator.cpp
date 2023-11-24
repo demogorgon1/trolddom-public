@@ -19,17 +19,28 @@ namespace tpublic
 		m_manifest->m_items.ForEach([&](
 			const Data::Item*	aItem)
 		{
+			UIntRange levelRange = aItem->m_levelRange;
+
+			if (levelRange.m_min == 0)
+			{
+				levelRange.m_max = aItem->m_requiredLevel + 1;
+				levelRange.m_min = aItem->m_requiredLevel - 1;
+
+				if(levelRange.m_min < 1)
+					levelRange.m_min = 1;
+			}
+
 			for(uint32_t lootGroupId : aItem->m_lootGroups)
 			{
 				Group* group = _GetOrCreateGroup(lootGroupId);
 				
-				if(aItem->m_levelRange.m_min == 0)
+				if(levelRange.m_min == 0)
 				{
 					group->m_defaultLevelBucket.m_itemIds.push_back(aItem->m_id);
 				}
 				else
 				{
-					for(uint32_t level = aItem->m_levelRange.m_min; level < aItem->m_levelRange.m_max; level++)
+					for(uint32_t level = levelRange.m_min; level <= levelRange.m_max; level++)
 						group->GetOrCreateLevelBucket(level)->m_itemIds.push_back(aItem->m_id);
 				}				
 			}

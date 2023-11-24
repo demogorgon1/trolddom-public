@@ -1,12 +1,12 @@
 item ring_iron_ring:
 {
 	equipment_slots: [ finger_1 finger_2 ]
-	loot_groups: [ world_drops ]
+	loot_groups: [ world_drops_uncommon ]
+	required_level: 2
 		
 	root:
 	{
 		name: "Iron Ring"
-		required_level: 2
 		item_level: 3
 		icon: icon_ring_1
 		rarity: uncommon
@@ -17,12 +17,12 @@ item ring_iron_ring:
 item ring_sapphire_ring:
 {
 	equipment_slots: [ finger_1 finger_2 ]
-	loot_groups: [ world_drops ]
+	loot_groups: [ world_drops_uncommon ]
+	required_level: 2
 		
 	root:
 	{
 		name: "Sapphire Ring"
-		required_level: 2
 		item_level: 3
 		icon: icon_ring_2
 		rarity: uncommon

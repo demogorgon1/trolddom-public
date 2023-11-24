@@ -87,12 +87,9 @@ namespace tpublic
 	uint32_t	
 	ItemInstanceData::GetItemLevel() const
 	{
-		uint32_t itemLevel = m_properties[Data::Item::PROPERTY_TYPE_ITEM_LEVEL];
-		if(itemLevel == 0)
-			itemLevel = m_properties[Data::Item::PROPERTY_TYPE_REQUIRED_LEVEL];
-		if(itemLevel == 0)
-			itemLevel = 1;
-		return itemLevel;
+		if(m_itemData->m_itemType != 0)
+			return m_itemData->m_itemType;
+		return m_itemData->m_requiredLevel;
 	}
 
 	uint32_t	
