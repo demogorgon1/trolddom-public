@@ -138,7 +138,7 @@ namespace tpublic::Systems
 								{
 									assert(loot.m_itemInstance.IsSet());
 									ItemInstanceData itemInstanceData(GetManifest(), loot.m_itemInstance);
-									uint32_t rarity = itemInstanceData.m_properties[Data::Item::PROPERTY_TYPE_RARITY];
+									uint32_t rarity = (uint32_t)itemInstanceData.m_itemData->m_rarity;
 
 									if(rarity < (uint32_t)tag->m_lootThreshold)
 									{

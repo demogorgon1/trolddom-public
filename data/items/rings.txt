@@ -3,13 +3,12 @@ item ring_iron_ring:
 	equipment_slots: [ finger_1 finger_2 ]
 	loot_groups: [ world_drops_uncommon ]
 	required_level: 2
+	icon: icon_ring_1
+	rarity: uncommon
 		
 	root:
 	{
 		name: "Iron Ring"
-		item_level: 3
-		icon: icon_ring_1
-		rarity: uncommon
 		stat strength: 1
 	}
 }
@@ -19,13 +18,12 @@ item ring_sapphire_ring:
 	equipment_slots: [ finger_1 finger_2 ]
 	loot_groups: [ world_drops_uncommon ]
 	required_level: 2
+	icon: icon_ring_2
+	rarity: uncommon
 		
 	root:
 	{
 		name: "Sapphire Ring"
-		item_level: 3
-		icon: icon_ring_2
-		rarity: uncommon
 		stat wisdom: 1
 	}
 }

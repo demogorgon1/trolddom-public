@@ -21,84 +21,80 @@ namespace tpublic
 		m_itemData = aManifest->m_items.GetById(aItemInstance.m_itemId);
 		std::mt19937 random(aItemInstance.m_seed);
 
-		if(m_itemData->m_root)
-			_Generate(random, aManifest, m_itemData->m_root.get());
-
 		const ItemType::Info* itemTypeInfo = ItemType::GetInfo(m_itemData->m_itemType);
-		uint32_t itemLevel = GetItemLevel();
+		const ItemMetrics::Multipliers& rarityMultipliers = aManifest->m_itemMetrics.GetRarityMultipliers(m_itemData->m_rarity);
+		const ItemMetrics::Multipliers& itemTypeMultipliers = aManifest->m_itemMetrics.GetItemTypeMultipliers(m_itemData->m_itemType);
+		const ItemMetrics::Multipliers& equipmentSlotMultipliers = aManifest->m_itemMetrics.GetEquipmentSlotMultipliers(m_itemData->m_equipmentSlots);
+
+		ItemMetrics::Multipliers multipliers;
+		multipliers.m_armor = itemTypeMultipliers.m_armor * equipmentSlotMultipliers.m_armor * rarityMultipliers.m_armor;
+		multipliers.m_cost = itemTypeMultipliers.m_cost * equipmentSlotMultipliers.m_cost * rarityMultipliers.m_cost;
+		multipliers.m_weaponDamage = itemTypeMultipliers.m_weaponDamage * equipmentSlotMultipliers.m_weaponDamage * rarityMultipliers.m_weaponDamage;
+
+		if(m_itemData->m_root)
+		{
+			Stat::Collection statWeights;
+			uint32_t totalStatWeight = 0;
+
+			m_statBudget = (int32_t)m_itemData->m_itemLevel - 1;
+
+			_Generate(random, aManifest, m_itemData->m_root.get(), statWeights, totalStatWeight);
+
+			if(totalStatWeight > 0 && m_statBudget > 0)
+			{
+				for(uint32_t i = 1; i < (uint32_t)Stat::NUM_IDS; i++)
+					m_stats.m_stats[i] += (statWeights.m_stats[i] * (uint32_t)m_statBudget) / totalStatWeight;
+			}
+		}
 
 		if(itemTypeInfo->m_flags & ItemType::FLAG_WEAPON)
 		{
-			if (m_properties[Data::Item::PROPERTY_TYPE_WEAPON_DAMAGE_MIN] == 0 || m_properties[Data::Item::PROPERTY_TYPE_WEAPON_DAMAGE_MAX] == 0)
+			if(m_weaponCooldown == 0)
+				m_weaponCooldown = 20;
+
+			if (m_weaponDamage.m_min == 0 && m_weaponDamage.m_max == 0)
 			{
 				// This weapon doesn't have explicit damage range, use defaults based on item level
 				bool isTwoHanded = itemTypeInfo->m_flags & ItemType::FLAG_TWO_HANDED;
-				uint32_t dps = isTwoHanded ? aManifest->m_itemMetrics.GetLevelBase2HWeaponDPS(itemLevel) : aManifest->m_itemMetrics.GetLevelBase1HWeaponDPS(itemLevel);
-				uint32_t cooldown = GetWeaponCooldown();
-				uint32_t avgDamage = (dps * cooldown) / 10;
-				uint32_t minDamage = avgDamage / 2;
-				uint32_t maxDamage = (avgDamage * 3) / 2;
+				uint32_t dps = isTwoHanded ? aManifest->m_itemMetrics.GetLevelBase2HWeaponDPS(m_itemData->m_itemLevel) : aManifest->m_itemMetrics.GetLevelBase1HWeaponDPS(m_itemData->m_itemLevel);
+
+				dps = (uint32_t)((float)dps * multipliers.m_weaponDamage);
+
+				uint32_t avgDamage = (dps * m_weaponCooldown) / 10;
 				
-				if(minDamage == 0)
-					minDamage = 1;
+				m_weaponDamage.m_min = avgDamage / 2;
+				m_weaponDamage.m_max = (avgDamage * 3) / 2;
+				
+				if(m_weaponDamage.m_min == 0)
+					m_weaponDamage.m_min = 1;
 
-				if(maxDamage <= minDamage)
-					maxDamage = minDamage + 1;
-
-				m_properties[Data::Item::PROPERTY_TYPE_WEAPON_DAMAGE_MIN] = minDamage;
-				m_properties[Data::Item::PROPERTY_TYPE_WEAPON_DAMAGE_MAX] = maxDamage;
+				if(m_weaponDamage.m_max <= m_weaponDamage.m_min)
+					m_weaponDamage.m_max = m_weaponDamage.m_min + 1;
 			}
+
+			m_isWeapon = true;
 		}
 
-		bool isArmor = itemTypeInfo->m_flags & ItemType::FLAG_ARMOR;
-
-		if(isArmor || m_properties[Data::Item::PROPERTY_TYPE_COST] == 0)
+		if(itemTypeInfo->m_flags & ItemType::FLAG_ARMOR)
 		{
-			ItemMetrics::Multipliers itemTypeMultipliers = aManifest->m_itemMetrics.GetItemTypeMultipliers(m_itemData->m_itemType);
-			ItemMetrics::Multipliers equipmentSlotMultipliers = aManifest->m_itemMetrics.GetEquipmentSlotMultipliers(m_itemData->m_equipmentSlots);
-
-			ItemMetrics::Multipliers multipliers;
-			multipliers.m_armor = itemTypeMultipliers.m_armor * equipmentSlotMultipliers.m_armor;
-			multipliers.m_cost = itemTypeMultipliers.m_cost * equipmentSlotMultipliers.m_cost;
-
-			if(isArmor)
-			{
-				uint32_t baseArmor = aManifest->m_itemMetrics.GetLevelBaseArmor(itemLevel);
-				baseArmor = 1 + (uint32_t)((float)baseArmor * multipliers.m_armor);
-				m_stats.m_stats[Stat::ID_ARMOR] += baseArmor; // Add it
-			}
-
-			if(m_properties[Data::Item::PROPERTY_TYPE_COST] == 0)
-			{
-				uint32_t baseCost = aManifest->m_itemMetrics.GetLevelBaseCost(itemLevel);
-				baseCost = 1 + (uint32_t)((float)baseCost * multipliers.m_cost);
-				m_properties[Data::Item::PROPERTY_TYPE_COST] = baseCost;
-			}
+			uint32_t baseArmor = aManifest->m_itemMetrics.GetLevelBaseArmor(m_itemData->m_itemLevel);
+			baseArmor = 1 + (uint32_t)((float)baseArmor * multipliers.m_armor);
+			m_stats.m_stats[Stat::ID_ARMOR] += baseArmor; 
 		}
 
-		m_vendorValue = (uint32_t)((float)m_properties[Data::Item::PROPERTY_TYPE_COST] * aManifest->m_itemMetrics.m_vendorCostMultiplier);
+		if (m_cost == 0)
+		{
+			uint32_t baseCost = aManifest->m_itemMetrics.GetLevelBaseCost(m_itemData->m_itemLevel);
+			baseCost = (uint32_t)((float)baseCost * multipliers.m_cost * rarityMultipliers.m_cost);
+			m_cost = baseCost;
+		}
+
+		m_vendorValue = (uint32_t)((float)m_cost * aManifest->m_itemMetrics.m_vendorCostMultiplier);
 	}
 	
 	ItemInstanceData::~ItemInstanceData()
 	{
 
-	}
-
-	uint32_t	
-	ItemInstanceData::GetItemLevel() const
-	{
-		if(m_itemData->m_itemType != 0)
-			return m_itemData->m_itemType;
-		return m_itemData->m_requiredLevel;
-	}
-
-	uint32_t	
-	ItemInstanceData::GetWeaponCooldown() const
-	{
-		uint32_t weaponCooldown = m_properties[Data::Item::PROPERTY_TYPE_WEAPON_COOLDOWN];
-		if(weaponCooldown == 0)
-			weaponCooldown = 20;
-		return weaponCooldown;
 	}
 
 	//---------------------------------------------------------
@@ -107,7 +103,9 @@ namespace tpublic
 	ItemInstanceData::_Generate(
 		std::mt19937&			aRandom,
 		const Manifest*			aManifest,
-		const Data::Item::Node*	aNode)
+		const Data::Item::Node*	aNode,
+		Stat::Collection&		aOutStatWeights,
+		uint32_t&				aOutTotalStatWeight)
 	{
 		if(!aNode->m_name.empty())
 			m_name = aNode->m_name;
@@ -115,19 +113,32 @@ namespace tpublic
 		if (!aNode->m_suffix.empty())
 			m_suffix = aNode->m_suffix;
 
-		if(aNode->m_iconSpriteId != 0)
-			m_iconSpriteId = aNode->m_iconSpriteId;
+		m_statBudget += aNode->m_budgetBias;
 
-		for(const Data::Item::Property& p : aNode->m_properties)
-			m_properties[p.m_type] = p.m_value;
+		if(aNode->m_weaponDamage.has_value())
+			m_weaponDamage = aNode->m_weaponDamage.value();
+
+		if(aNode->m_weaponCooldown != 0)
+			m_weaponCooldown = aNode->m_weaponCooldown;
 
 		for(const Data::Item::AddedStat& addedStat : aNode->m_addedStats)
-			m_stats.m_stats[addedStat.m_id] += Helpers::RandomInRange<uint32_t>(aRandom, addedStat.m_min, addedStat.m_max);
+		{
+			if(!addedStat.m_isBudgetWeight)
+			{
+				m_stats.m_stats[addedStat.m_id] += addedStat.m_range.GetRandom(aRandom);
+			}
+			else
+			{				
+				uint32_t weight = addedStat.m_range.GetRandom(aRandom);
+				aOutStatWeights.m_stats[addedStat.m_id] += weight;
+				aOutTotalStatWeight += weight;
+			}
+		}
 
 		for(const std::unique_ptr<Data::Item::Node>& child : aNode->m_randomChildren)
 		{
 			if(aRandom() <= child->m_chance)
-				_Generate(aRandom, aManifest, child.get());
+				_Generate(aRandom, aManifest, child.get(), aOutStatWeights, aOutTotalStatWeight);
 		}
 
 		if(aNode->m_weightedChildren.size() > 0)
@@ -146,14 +157,8 @@ namespace tpublic
 
 			assert(chosen != NULL);
 
-			_Generate(aRandom, aManifest, chosen);
-		}
-
-		m_isWeapon = m_properties[Data::Item::PROPERTY_TYPE_WEAPON_COOLDOWN] != 0;
-
-		uint32_t& rarity = m_properties[Data::Item::PROPERTY_TYPE_RARITY];
-		if(rarity == 0)
-			rarity = 1; // Must always have a rarity
+			_Generate(aRandom, aManifest, chosen, aOutStatWeights, aOutTotalStatWeight);
+		}	
 	}
 
 }

@@ -4,7 +4,8 @@ loot_group .boar_drops: {}
 item .antlers:
 {
 	loot_groups: [ .deer_drops ]		
-	root: {	name: "Broken Antlers" icon: icon_antlers }
+	root: {	name: "Broken Antlers" }
+	icon: icon_antlers
 	stack: 4
 	level_range: [ 1 2 ]
 }
@@ -12,7 +13,8 @@ item .antlers:
 item .boar_tusks:
 {
 	loot_groups: [ .boar_drops ]		
-	root: {	name: "Broken Tusks" icon: icon_boar_tusks }
+	root: {	name: "Broken Tusks" }
+	icon: icon_boar_tusks
 	stack: 4
 	level_range: [ 1 2 ]
 }
@@ -20,7 +22,8 @@ item .boar_tusks:
 item .pristine_antlers:
 {
 	loot_groups: [ .deer_drops ]		
-	root: {	name: "Pristine Antlers" icon: icon_antlers }
+	root: {	name: "Pristine Antlers" }
+	icon: icon_antlers
 	stack: 4
 	level_range: [ 3 4 ]
 }
@@ -28,8 +31,9 @@ item .pristine_antlers:
 item .pristine_tusks:
 {
 	loot_groups: [ .boar_drops ]		
-	root: {	name: "Pristine Tusks" icon: icon_boar_tusks }
+	root: {	name: "Pristine Tusks" }
 	stack: 4
+	icon: icon_boar_tusks
 	level_range: [ 3 4 ]
 }
 

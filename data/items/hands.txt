@@ -4,13 +4,13 @@ item hands_flimsy_mail_gloves:
 	equipment_slots: [ hands ]
 	loot_groups: [ world_drops_junk ]
 	required_level: 1
+	item_level: 1
+	icon: icon_mail_gloves_1
+	rarity: common
 		
 	root:
 	{
 		name: "Flimsy Mail Gloves"
-		item_level: 1
-		icon: icon_mail_gloves_1
-		rarity: common
 		stat armor: 15
 	}
 }

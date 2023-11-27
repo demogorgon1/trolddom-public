@@ -18,53 +18,30 @@ namespace tpublic
 		{
 			static const DataType::Id DATA_TYPE = DataType::ID_ITEM;
 
-			enum PropertyType : uint8_t
-			{
-				PROPERTY_TYPE_WEAPON_COOLDOWN,
-				PROPERTY_TYPE_ITEM_LEVEL,
-				PROPERTY_TYPE_WEAPON_DAMAGE_MIN,
-				PROPERTY_TYPE_WEAPON_DAMAGE_MAX,
-				PROPERTY_TYPE_RARITY,
-				PROPERTY_TYPE_COST,
-
-				NUM_PROPERTY_TYPES
-			};
-
-			struct Property
-			{
-				void 
-				ToStream(
-					IWriter*			aStream) const
-				{
-					aStream->WritePOD(m_type);
-					aStream->WriteUInt(m_value);
-				}
-
-				bool
-				FromStream(
-					IReader*			aStream)
-				{
-					if (!aStream->ReadPOD(m_type))
-						return false;
-					if (!aStream->ReadUInt(m_value))
-						return false;
-					return true;
-				}
-
-				// Public data
-				PropertyType		m_type = PropertyType(0);
-				uint32_t			m_value = 0;
-			};
-
 			struct AddedStat
 			{
+				AddedStat()
+				{
+
+				}
+
+				AddedStat(					
+					const SourceNode*	aSource,
+					bool				aIsBudgetWeight)
+					: m_isBudgetWeight(aIsBudgetWeight)
+				{
+					m_id = Stat::StringToId(aSource->m_name.c_str());
+					TP_VERIFY(m_id != Stat::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid stat.", aSource->m_name.c_str());
+					m_range = UIntRange(aSource);
+				}
+
 				void 
 				ToStream(
 					IWriter*			aStream) const
 				{
 					aStream->WritePOD(m_id);
-					aStream->WriteUInt(m_min);
-					aStream->WriteUInt(m_max);
+					aStream->WriteBool(m_isBudgetWeight);
+					m_range.ToStream(aStream);
 				}
 
 				bool
@@ -73,17 +50,17 @@ namespace tpublic
 				{
 					if (!aStream->ReadPOD(m_id))
 						return false;
-					if (!aStream->ReadUInt(m_min))
+					if (!aStream->ReadBool(m_isBudgetWeight))
 						return false;
-					if (!aStream->ReadUInt(m_max))
+					if(!m_range.FromStream(aStream))
 						return false;
 					return true;
 				}
 
 				// Public data
 				Stat::Id			m_id = Stat::Id(0);
-				uint32_t			m_min = 0;
-				uint32_t			m_max = 0;
+				bool				m_isBudgetWeight = false;
+				UIntRange			m_range;
 			};
 
 			struct Node
@@ -101,19 +78,9 @@ namespace tpublic
 						const SourceNode* aChild)
 					{
 						if(aChild->m_name == "weapon_cooldown")
-							m_properties.push_back({ PROPERTY_TYPE_WEAPON_COOLDOWN, aChild->GetUInt32() });
-						else if (aChild->m_name == "item_level")
-							m_properties.push_back({ PROPERTY_TYPE_ITEM_LEVEL, aChild->GetUInt32() });
-						else if (aChild->m_name == "cost")
-							m_properties.push_back({ PROPERTY_TYPE_COST, aChild->GetUInt32() });
-						else if (aChild->m_name == "weapon_damage_min")
-							m_properties.push_back({ PROPERTY_TYPE_WEAPON_DAMAGE_MIN, aChild->GetUInt32() });
-						else if (aChild->m_name == "weapon_damage_max")
-							m_properties.push_back({ PROPERTY_TYPE_WEAPON_DAMAGE_MAX, aChild->GetUInt32() });
-						else if (aChild->m_name == "rarity")
-							m_properties.push_back({ PROPERTY_TYPE_RARITY, Rarity::StringToId(aChild->GetIdentifier()) });
-						else if (aChild->m_name == "icon")
-							m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
+							m_weaponCooldown = aChild->GetUInt32();
+						else if (aChild->m_name == "weapon_damage")
+							m_weaponDamage = UIntRange(aChild);
 						else if (aChild->m_name == "name")
 							m_name = aChild->GetString();
 						else if (aChild->m_name == "suffix")
@@ -126,10 +93,10 @@ namespace tpublic
 							m_chance = aChild->GetProbability();
 						else if (aChild->m_name == "child_weight" && aWeighted)
 							m_weight = aChild->GetUInt32();
-						else if (aChild->m_tag == "stat" && aChild->m_type == SourceNode::TYPE_ARRAY && aChild->m_children.size() == 2)
-							m_addedStats.push_back({ Stat::StringToId(aChild->m_name.c_str()), aChild->m_children[0]->GetUInt32(), aChild->m_children[1]->GetUInt32() });
-						else if (aChild->m_tag == "stat" && aChild->m_type == SourceNode::TYPE_NUMBER)
-							m_addedStats.push_back({ Stat::StringToId(aChild->m_name.c_str()), aChild->GetUInt32(), aChild->GetUInt32() });
+						else if (aChild->m_tag == "stat")
+							m_addedStats.push_back(AddedStat(aChild, false));
+						else if (aChild->m_tag == "stat_weight")
+							m_addedStats.push_back(AddedStat(aChild, true));
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					});
@@ -145,11 +112,12 @@ namespace tpublic
 				ToStream(
 					IWriter*			aStream) const
 				{
-					aStream->WriteObjects(m_properties);
 					aStream->WriteObjects(m_addedStats);
+					aStream->WriteOptionalObject(m_weaponDamage);
+					aStream->WriteUInt(m_weaponCooldown);
 					aStream->WriteString(m_name);
 					aStream->WriteString(m_suffix);
-					aStream->WriteUInt(m_iconSpriteId);
+					aStream->WriteInt(m_budgetBias);
 					aStream->WriteUInt(m_chance);
 					aStream->WriteUInt(m_weight);
 					aStream->WriteObjectPointers(m_weightedChildren);
@@ -160,15 +128,17 @@ namespace tpublic
 				FromStream(
 					IReader*			aStream)
 				{
-					if(!aStream->ReadObjects(m_properties))
-						return false;
 					if (!aStream->ReadObjects(m_addedStats))
+						return false;
+					if (!aStream->ReadOptionalObject(m_weaponDamage))
+						return false;
+					if (!aStream->ReadUInt(m_weaponCooldown))
 						return false;
 					if (!aStream->ReadString(m_name))
 						return false;
 					if (!aStream->ReadString(m_suffix))
 						return false;
-					if (!aStream->ReadUInt(m_iconSpriteId))
+					if (!aStream->ReadInt(m_budgetBias))
 						return false;
 					if (!aStream->ReadUInt(m_chance))
 						return false;
@@ -186,14 +156,15 @@ namespace tpublic
 				}
 
 				// Public data
-				std::vector<Property>				m_properties;
 				std::vector<AddedStat>				m_addedStats;
+				std::optional<UIntRange>			m_weaponDamage;
+				uint32_t							m_weaponCooldown = 0;
 				std::string							m_name;
 				std::string							m_suffix;
-				uint32_t							m_iconSpriteId = 0;
 				uint32_t							m_chance = 0;
 				uint32_t							m_weight = 1;				
 				uint32_t							m_totalChildWeight = 0;
+				int32_t								m_budgetBias = 0;
 				std::vector<std::unique_ptr<Node>>	m_weightedChildren;
 				std::vector<std::unique_ptr<Node>>	m_randomChildren;
 			};
@@ -246,6 +217,10 @@ namespace tpublic
 					{
 						m_stackSize = aChild->GetUInt32();
 					}
+					else if (aChild->m_name == "item_level")
+					{
+						m_itemLevel = aChild->GetUInt32();
+					}
 					else if (aChild->m_name == "level_range")
 					{
 						m_levelRange = UIntRange(aChild);
@@ -254,9 +229,22 @@ namespace tpublic
 					{
 						m_requiredLevel = aChild->GetUInt32();
 					}
+					else if (aChild->m_name == "cost")
+					{
+						m_cost = aChild->GetUInt32();
+					}
 					else if (aChild->m_name == "use_ability")
 					{
 						m_useAbilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
+					}
+					else if (aChild->m_name == "icon")
+					{
+						m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
+					}
+					else if (aChild->m_name == "rarity")
+					{
+						m_rarity = Rarity::StringToId(aChild->GetIdentifier());
+						TP_VERIFY(m_rarity != Rarity::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid rarity.", aChild->GetIdentifier());
 					}
 					else if(aChild->m_name == "type")
 					{
@@ -268,6 +256,9 @@ namespace tpublic
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
 				});
+
+				if(m_itemLevel == 0)
+					m_itemLevel = m_requiredLevel;
 			}
 
 			void
@@ -283,6 +274,10 @@ namespace tpublic
 				aStream->WritePOD(m_itemType);
 				m_levelRange.ToStream(aStream);
 				aStream->WriteUInt(m_requiredLevel);
+				aStream->WriteUInt(m_itemLevel);
+				aStream->WriteUInt(m_iconSpriteId);
+				aStream->WriteUInt(m_cost);
+				aStream->WritePOD(m_rarity);
 			}
 
 			bool
@@ -307,6 +302,14 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInt(m_requiredLevel))
 					return false;
+				if (!aStream->ReadUInt(m_itemLevel))
+					return false;
+				if (!aStream->ReadUInt(m_iconSpriteId))
+					return false;
+				if (!aStream->ReadUInt(m_cost))
+					return false;
+				if (!aStream->ReadPOD(m_rarity))
+					return false;
 				return true;
 			}
 
@@ -319,6 +322,10 @@ namespace tpublic
 			ItemType::Id				m_itemType = ItemType::ID_NONE;
 			UIntRange					m_levelRange;
 			uint32_t					m_requiredLevel = 1;
+			uint32_t					m_itemLevel = 0;
+			uint32_t					m_iconSpriteId = 0;
+			uint32_t					m_cost = 0;
+			Rarity::Id					m_rarity = Rarity::ID_COMMON;
 		};
 
 	}

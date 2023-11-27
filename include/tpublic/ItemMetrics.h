@@ -24,6 +24,10 @@ namespace tpublic
 						m_armor = aChild->GetFloat();
 					else if (aChild->m_name == "cost")
 						m_cost = aChild->GetFloat();
+					else if (aChild->m_name == "stat_budget")
+						m_cost = aChild->GetFloat();
+					else if (aChild->m_name == "weapon_damage")
+						m_weaponDamage = aChild->GetFloat();
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 				});
@@ -35,6 +39,8 @@ namespace tpublic
 			{
 				aWriter->WriteFloat(m_armor);
 				aWriter->WriteFloat(m_cost);
+				aWriter->WriteFloat(m_statBudget);
+				aWriter->WriteFloat(m_weaponDamage);
 			}
 
 			bool
@@ -45,12 +51,18 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadFloat(m_cost))
 					return false;
+				if (!aReader->ReadFloat(m_statBudget))
+					return false;
+				if (!aReader->ReadFloat(m_weaponDamage))
+					return false;
 				return true;
 			}
 
 			// Public data
 			float	m_armor = 1.0f;
 			float	m_cost = 1.0f;
+			float	m_statBudget = 1.0f;
+			float	m_weaponDamage = 1.0f;
 		};
 
 		ItemMetrics()
@@ -137,6 +149,12 @@ namespace tpublic
 					TP_VERIFY(equipmentSlot != EquipmentSlot::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid equipment slot.", aChild->m_name.c_str());
 					m_equipmentSlotMultipliers[equipmentSlot].FromSource(aChild);
 				}
+				else if (aChild->m_tag == "rarity_multipliers")
+				{
+					Rarity::Id rarity = Rarity::StringToId(aChild->m_name.c_str());
+					TP_VERIFY(rarity != Rarity::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid rarity.", aChild->m_name.c_str());
+					m_rarityMultipliers[rarity].FromSource(aChild);
+				}
 				else if(aChild->m_name == "vendor_cost_multiplier")
 				{
 					m_vendorCostMultiplier = aChild->GetFloat();
@@ -163,6 +181,9 @@ namespace tpublic
 
 			for (uint32_t i = 1; i < (uint32_t)EquipmentSlot::NUM_IDS; i++)
 				m_equipmentSlotMultipliers[i].ToStream(aStream);
+
+			for (uint32_t i = 1; i < (uint32_t)Rarity::NUM_IDS; i++)
+				m_rarityMultipliers[i].ToStream(aStream);
 		}
 
 		bool
@@ -189,6 +210,12 @@ namespace tpublic
 			for (uint32_t i = 1; i < (uint32_t)EquipmentSlot::NUM_IDS; i++)
 			{
 				if (!m_equipmentSlotMultipliers[i].FromStream(aStream))
+					return false;
+			}
+
+			for (uint32_t i = 1; i < (uint32_t)Rarity::NUM_IDS; i++)
+			{
+				if (!m_rarityMultipliers[i].FromStream(aStream))
 					return false;
 			}
 
@@ -258,6 +285,13 @@ namespace tpublic
 			
 			return t;
 		}
+
+		const Multipliers&
+		GetRarityMultipliers(
+			Rarity::Id						aRarity) const
+		{
+			return m_rarityMultipliers[aRarity];
+		}
 		
 		// Public data
 		std::vector<uint32_t>					m_levelBaseArmor;
@@ -266,6 +300,7 @@ namespace tpublic
 		std::vector<uint32_t>					m_levelBase2HWeaponDPS;
 		Multipliers								m_itemTypeMultipliers[ItemType::NUM_IDS];
 		Multipliers								m_equipmentSlotMultipliers[EquipmentSlot::NUM_IDS];
+		Multipliers								m_rarityMultipliers[Rarity::NUM_IDS];
 		float									m_vendorCostMultiplier = 0.5f;
 	};
 
