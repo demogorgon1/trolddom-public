@@ -4,6 +4,7 @@
 #include <tpublic/ComponentManager.h>
 #include <tpublic/DirectEffectFactory.h>
 #include <tpublic/MapGeneratorFactory.h>
+#include <tpublic/ObjectiveTypeFactory.h>
 #include <tpublic/PersistentIdTable.h>
 #include <tpublic/SourceContext.h>
 
@@ -16,6 +17,7 @@ namespace tpublic
 		m_componentManager = std::make_unique<ComponentManager>();
 		m_directEffectFactory = std::make_unique<DirectEffectFactory>();
 		m_mapGeneratorFactory = std::make_unique<MapGeneratorFactory>();
+		m_objectiveTypeFactory = std::make_unique<ObjectiveTypeFactory>();
 		m_persistentIdTable = std::make_unique<PersistentIdTable>();
 	}
 

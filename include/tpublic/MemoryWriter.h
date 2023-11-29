@@ -1,6 +1,6 @@
 #pragma once
 
-#include <tpublic/IWriter.h>
+#include "IWriter.h"
 
 namespace tpublic
 {

@@ -19,6 +19,7 @@ dialogue_screen .sylas_greetings:
 	options:
 	[
 		{ goto: .sylas_vendor text: "Let me browse your goods." }
+		{ quest: test_dungeon_kill_ignorg text: "Tell me about that sinister looking tunnel that leads underground." }
 	]
 }
 

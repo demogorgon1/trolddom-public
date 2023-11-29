@@ -1,6 +1,6 @@
 #include "Pcheader.h"
 
-#include "MemoryWriter.h"
+#include <tpublic/MemoryWriter.h>
 
 namespace tpublic
 {

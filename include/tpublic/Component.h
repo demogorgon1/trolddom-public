@@ -37,6 +37,8 @@ namespace tpublic
 			ID_RESURRECTION_POINT,
 			ID_GUILD_REGISTRAR,
 			ID_TRADE,
+			ID_ACTIVE_QUESTS,
+			ID_COMPLETED_QUESTS,
 
 			NUM_IDS
 		};
@@ -71,7 +73,9 @@ namespace tpublic
 			"vendor_buyback",
 			"resurrection_point",
 			"guild_registrar",
-			"trade"
+			"trade",
+			"active_quests",
+			"completed_quests"
 		};		
 
 		static_assert(sizeof(COMPONENT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

@@ -7,6 +7,7 @@ namespace tpublic
 	class ComponentManager;
 	class DirectEffectFactory;
 	class MapGeneratorFactory;
+	class ObjectiveTypeFactory;
 	class PersistentIdTable;
 	
 	struct SourceContext
@@ -18,6 +19,7 @@ namespace tpublic
 		std::unique_ptr<ComponentManager>		m_componentManager;
 		std::unique_ptr<DirectEffectFactory>	m_directEffectFactory;
 		std::unique_ptr<MapGeneratorFactory>	m_mapGeneratorFactory;
+		std::unique_ptr<ObjectiveTypeFactory>	m_objectiveTypeFactory;
 		std::unique_ptr<PersistentIdTable>		m_persistentIdTable;
 	};
 

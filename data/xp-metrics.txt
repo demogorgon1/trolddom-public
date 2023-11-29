@@ -20,7 +20,22 @@ xp_metrics:
 		[ 9 34 ]
 		[ 10 37 ]
 	]
-	
+
+	# XP gained from quest completion at levels
+	quests:
+	[
+		[ 1 150 ]
+		[ 2 170 ]
+		[ 3 190 ]
+		[ 4 210 ]
+		[ 5 230 ]
+		[ 6 250 ]
+		[ 7 280 ]
+		[ 8 310 ]
+		[ 9 340 ]
+		[ 10 370 ]
+	]
+
 	# Percentage XP adjustment for level differences
 	adjustments: 
 	[		
@@ -35,4 +50,8 @@ xp_metrics:
 		[ +4 140 ]
 		[ +5 150 ]
 	]
+	
+	# Elite bonus percentages
+	elite_kill_adjustment: 300
+	elite_quest_adjustment: 200
 }

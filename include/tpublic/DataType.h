@@ -36,6 +36,9 @@ namespace tpublic
 			ID_MAP_SEGMENT_CONNECTOR,
 			ID_ZONE,
 			ID_CREATURE_TYPE,
+			ID_OBJECTIVE,
+			ID_QUEST,
+			ID_ACHIEVEMENT,
 
 			NUM_IDS
 		};
@@ -69,7 +72,10 @@ namespace tpublic
 			"map_segment",
 			"map_segment_connector",
 			"zone",
-			"creature_type"
+			"creature_type",
+			"objective",
+			"quest",
+			"achievement"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

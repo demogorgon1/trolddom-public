@@ -7,6 +7,7 @@ namespace tpublic
 	class ComponentManager;
 	class DirectEffectFactory;
 	class MapGeneratorFactory;
+	class ObjectiveTypeFactory;
 
 	class IReader
 	{
@@ -313,10 +314,11 @@ namespace tpublic
 												size_t	aBufferSize) = 0;
 
 		// FIXME: this is weird, relevant FromStream methods should get these from somewhere else.
-		virtual const AuraEffectFactory*	GetAuraEffectFactory() const = 0;
-		virtual const ComponentManager*		GetComponentManager() const = 0;
-		virtual const DirectEffectFactory*	GetDirectEffectFactory() const = 0;
-		virtual const MapGeneratorFactory*	GetMapGeneratorFactory() const = 0;
+		virtual const AuraEffectFactory*	GetAuraEffectFactory() const { assert(false); return NULL; }
+		virtual const ComponentManager*		GetComponentManager() const { assert(false); return NULL; }
+		virtual const DirectEffectFactory*	GetDirectEffectFactory() const { assert(false); return NULL; }
+		virtual const MapGeneratorFactory*	GetMapGeneratorFactory() const { assert(false); return NULL; }
+		virtual const ObjectiveTypeFactory* GetObjectiveTypeFactory() const { assert(false); return NULL; }
 
 	private:
 

@@ -6,6 +6,7 @@
 #include "Helpers.h"
 #include "LootRule.h"
 #include "Persistence.h"
+#include "RangeBasedSet.h"
 #include "Rarity.h"
 #include "UIntRange.h"
 #include "Vec2.h"

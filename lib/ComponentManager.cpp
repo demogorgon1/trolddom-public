@@ -2,9 +2,11 @@
 
 #include <tpublic/Components/Abilities.h>
 #include <tpublic/Components/ActionBars.h>
+#include <tpublic/Components/ActiveQuests.h>
 #include <tpublic/Components/Auras.h>
 #include <tpublic/Components/CombatPrivate.h>
 #include <tpublic/Components/CombatPublic.h>
+#include <tpublic/Components/CompletedQuests.h>
 #include <tpublic/Components/DisplayName.h>
 #include <tpublic/Components/Environment.h>
 #include <tpublic/Components/EquippedItems.h>
@@ -37,9 +39,11 @@ namespace tpublic
 	{
 		_Register<Components::Abilities>();
 		_Register<Components::ActionBars>();
+		_Register<Components::ActiveQuests>();
 		_Register<Components::Auras>();
 		_Register<Components::CombatPrivate>();
 		_Register<Components::CombatPublic>();
+		_Register<Components::CompletedQuests>();
 		_Register<Components::DisplayName>();
 		_Register<Components::Environment>();
 		_Register<Components::EquippedItems>();

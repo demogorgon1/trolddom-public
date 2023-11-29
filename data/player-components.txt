@@ -2,9 +2,11 @@ player_components:
 [
 	abilities
 	action_bars
+	active_quests
 	auras
 	combat_private
 	combat_public
+	completed_quests
 	display_name
 	equipped_items	
 	inventory

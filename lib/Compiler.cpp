@@ -4,11 +4,11 @@
 #include <tpublic/ComponentManager.h>
 #include <tpublic/Compression.h>
 #include <tpublic/DataErrorHandling.h>
+#include <tpublic/MemoryWriter.h>
 #include <tpublic/Tokenizer.h>
 
 #include "FileWriter.h"
 #include "MapImageOutput.h"
-#include "MemoryWriter.h"
 #include "PostProcessEntities.h"
 #include "SpriteSheetBuilder.h"
 

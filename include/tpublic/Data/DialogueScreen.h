@@ -31,6 +31,10 @@ namespace tpublic
 						{
 							m_dialogueScreenId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_DIALOGUE_SCREEN, aChild->GetIdentifier());
 						}
+						else if (aChild->m_name == "quest")
+						{
+							m_questId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_QUEST, aChild->GetIdentifier());
+						}
 						else if (aChild->m_name == "text")
 						{
 							m_string = aChild->GetString();
@@ -57,6 +61,7 @@ namespace tpublic
 				{
 					aWriter->WriteString(m_string);
 					aWriter->WriteUInt(m_dialogueScreenId);
+					aWriter->WriteUInt(m_questId);
 					aWriter->WritePOD(m_dialogueScript);
 					aWriter->WriteUInt(m_conditionExpressionId);
 				}
@@ -67,7 +72,9 @@ namespace tpublic
 				{
 					if(!aReader->ReadString(m_string))
 						return false;
-					if(!aReader->ReadUInt(m_dialogueScreenId))
+					if (!aReader->ReadUInt(m_dialogueScreenId))
+						return false;
+					if (!aReader->ReadUInt(m_questId))
 						return false;
 					if (!aReader->ReadPOD(m_dialogueScript))
 						return false;
@@ -79,6 +86,7 @@ namespace tpublic
 				// Public data
 				std::string			m_string;
 				uint32_t			m_dialogueScreenId = 0;		
+				uint32_t			m_questId = 0;
 				DialogueScript::Id	m_dialogueScript = DialogueScript::ID_NONE;
 				uint32_t			m_conditionExpressionId = 0;
 			};

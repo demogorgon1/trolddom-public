@@ -6,21 +6,18 @@
 	[ 
 		combat 
 		npc 		
-		#<exists _resource_mana> mana_regen
+		<exists _resource_mana> mana_regen
 	]
 	
 	modifiers: 
 	{ 
-		#<exists _weapon_damage> weapon_damage: @_weapon_damage 
-		#<!exists _weapon_damage> weapon_damage: 1
+		<exists _weapon_damage> weapon_damage: @_weapon_damage 
+		<!exists _weapon_damage> weapon_damage: 1
+				
+		<exists _resource_health> resource<health>: @_resource_health
+		<!exists _resource_health> resource<health>: 1
 		
-		weapon_damage: 1
-		resource<health>: 1
-		
-		#<exists _resource_health> resource<health>: @_resource_health
-		#<!exists _resource_health> resource<health>: 1
-		
-		#<exists _resource_mana> resource<mana>: @_resource_mana
+		<exists _resource_mana> resource<mana>: @_resource_mana
 	}
 			
 	components:
@@ -50,7 +47,7 @@
 			miss_chance: 5
 			block_chance: 5
 			
-			#<exists _resource_mana> mana_regen: 5
+			<exists _resource_mana> mana_regen: 5
 		}
 		npc: 
 		{ 			
@@ -60,20 +57,15 @@
 			
 			state in_combat:
 			{
-			abilities:
+				<!exists _abilities> abilities:
 				[					
 					{ id: strike }
 				]
 				
-				#<!exists _abilities> abilities:
-				#[					
-				#	{ id: strike }
-				#]
-				#
-				#<exists _abilities> abilities: @_abilities
+				<exists _abilities> abilities: @_abilities
 			}	
 
-			#<exists _default_behavior_state> default_behavior_state: @_default_behavior_state
+			<exists _default_behavior_state> default_behavior_state: @_default_behavior_state
 		}
 		sprite: 
 		{ 

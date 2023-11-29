@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Data/Ability.h"
+#include "Data/Achievement.h"
 #include "Data/Aura.h"
 #include "Data/Class.h"
 #include "Data/CreatureType.h"
@@ -21,12 +22,13 @@
 #include "Data/MapSegmentConnector.h"
 #include "Data/MapTrigger.h"
 #include "Data/NPCBehaviorState.h"
+#include "Data/Objective.h"
 #include "Data/ParticleSystem.h"
+#include "Data/Quest.h"
 #include "Data/Sprite.h"
 #include "Data/Talent.h"
 #include "Data/TalentTree.h"
 #include "Data/Zone.h"
-#include "Data/DialogueScreen.h"
 
 #include "IReader.h"
 #include "ItemMetrics.h"
@@ -261,6 +263,7 @@ namespace tpublic
 		Manifest()
 		{
 			RegisterDataContainer(m_abilities);
+			RegisterDataContainer(m_achievements);
 			RegisterDataContainer(m_auras);
 			RegisterDataContainer(m_classes);
 			RegisterDataContainer(m_creatureTypes);
@@ -281,7 +284,9 @@ namespace tpublic
 			RegisterDataContainer(m_mapSegmentConnectors);
 			RegisterDataContainer(m_mapTriggers);
 			RegisterDataContainer(m_npcBehaviorStates);
+			RegisterDataContainer(m_objectives);
 			RegisterDataContainer(m_particleSystems);
+			RegisterDataContainer(m_quests);
 			RegisterDataContainer(m_sprites);
 			RegisterDataContainer(m_talents);
 			RegisterDataContainer(m_talentTrees);
@@ -355,6 +360,7 @@ namespace tpublic
 
 		// Public data
 		DataContainer<Data::Ability>					m_abilities;
+		DataContainer<Data::Achievement>				m_achievements;
 		DataContainer<Data::Aura>						m_auras;
 		DataContainer<Data::Class>						m_classes;
 		DataContainer<Data::CreatureType>				m_creatureTypes;
@@ -375,7 +381,9 @@ namespace tpublic
 		DataContainer<Data::MapSegmentConnector>		m_mapSegmentConnectors;
 		DataContainer<Data::MapTrigger>					m_mapTriggers;
 		DataContainer<Data::NPCBehaviorState>			m_npcBehaviorStates;
+		DataContainer<Data::Objective>					m_objectives;
 		DataContainer<Data::ParticleSystem>				m_particleSystems;
+		DataContainer<Data::Quest>						m_quests;
 		DataContainer<Data::Sprite>						m_sprites;
 		DataContainer<Data::Talent>						m_talents;
 		DataContainer<Data::TalentTree>					m_talentTrees;

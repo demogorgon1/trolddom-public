@@ -55,6 +55,21 @@ namespace tpublic
 						m_xpFromKill[level] = xp;
 					});
 				}
+				else if(aChild->m_name == "quests")
+				{
+					aChild->GetArray()->ForEachChild([&](
+						const SourceNode* aEntry)
+					{
+						TP_VERIFY(aEntry->m_type == SourceNode::TYPE_ARRAY && aEntry->m_children.size() == 2, aEntry->m_debugInfo, "Not a level-xp pair.");
+						uint32_t level = aEntry->m_children[0]->GetUInt32();
+						uint32_t xp = aEntry->m_children[1]->GetUInt32();
+
+						if(level >= m_xpFromQuest.size())
+							m_xpFromQuest.resize(level + 1);
+
+						m_xpFromQuest[level] = xp;
+					});
+				}
 				else if(aChild->m_name == "adjustments")
 				{
 					TP_VERIFY(aChild->GetArray()->m_children.size() > 0, aChild->m_debugInfo, "Array is empty.");
@@ -85,6 +100,14 @@ namespace tpublic
 						m_adjustments[levelDiff] = adjustment;
 					});
 				}
+				else if (aChild->m_name == "elite_kill_adjustment")
+				{
+					m_eliteKillAdjustment = aChild->GetUInt32();
+				}
+				else if (aChild->m_name == "elite_quest_adjustment")
+				{
+					m_eliteQuestAdjustment = aChild->GetUInt32();
+				}
 				else
 				{
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -98,11 +121,14 @@ namespace tpublic
 		{
 			aStream->WriteUInts(m_xpToLevel);
 			aStream->WriteUInts(m_xpFromKill);
+			aStream->WriteUInts(m_xpFromQuest);
 			aStream->WriteInt(m_minAdjustmentLevelDiff);
 			aStream->WriteInt(m_maxAdjustmentLevelDiff);
 			aStream->WriteUInt(m_minAdjustment);
 			aStream->WriteUInt(m_maxAdjustment);
 			aStream->WriteUInt(m_maxLevel);
+			aStream->WriteUInt(m_eliteKillAdjustment);
+			aStream->WriteUInt(m_eliteQuestAdjustment);
 
 			aStream->WriteUInt(m_adjustments.size());
 			for(std::unordered_map<int32_t, uint32_t>::const_iterator i = m_adjustments.cbegin(); i != m_adjustments.cend(); i++)
@@ -120,6 +146,8 @@ namespace tpublic
 				return false;
 			if (!aStream->ReadUInts(m_xpFromKill))
 				return false;
+			if (!aStream->ReadUInts(m_xpFromQuest))
+				return false;
 			if(!aStream->ReadInt(m_minAdjustmentLevelDiff))
 				return false;
 			if (!aStream->ReadInt(m_maxAdjustmentLevelDiff))
@@ -129,6 +157,10 @@ namespace tpublic
 			if (!aStream->ReadUInt(m_maxAdjustment))
 				return false;
 			if (!aStream->ReadUInt(m_maxLevel))
+				return false;
+			if (!aStream->ReadUInt(m_eliteKillAdjustment))
+				return false;
+			if (!aStream->ReadUInt(m_eliteQuestAdjustment))
 				return false;
 
 			{
@@ -171,6 +203,15 @@ namespace tpublic
 			return m_xpFromKill[aLevel];
 		}
 
+		uint32_t
+		GetXPFromQuest(
+			uint32_t			aLevel) const
+		{
+			if (aLevel >= m_xpFromQuest.size())
+				return 0;
+			return m_xpFromQuest[aLevel];
+		}
+
 		uint32_t 
 		GetAdjustment(
 			int32_t				aLevelDiff) const
@@ -193,6 +234,7 @@ namespace tpublic
 			uint32_t			aPlayerLevel,
 			uint32_t			aKillLevel) const
 		{
+			// FIXME: include elite flag
 			int32_t diff = (int32_t)aKillLevel - (int32_t)aPlayerLevel;
 			uint32_t adjustment = GetAdjustment(diff);
 			return (GetXPFromKill(aKillLevel) * adjustment) / 100;
@@ -202,11 +244,14 @@ namespace tpublic
 		uint32_t								m_maxLevel = 0;
 		std::vector<uint32_t>					m_xpToLevel;
 		std::vector<uint32_t>					m_xpFromKill;
+		std::vector<uint32_t>					m_xpFromQuest;
 		int32_t									m_minAdjustmentLevelDiff = 0;
 		int32_t									m_maxAdjustmentLevelDiff = 0;
 		uint32_t								m_minAdjustment = 0;
 		uint32_t								m_maxAdjustment = 0;
 		std::unordered_map<int32_t, uint32_t>	m_adjustments;
+		uint32_t								m_eliteKillAdjustment = 100;
+		uint32_t								m_eliteQuestAdjustment = 100;
 	};
 
 }

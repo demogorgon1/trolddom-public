@@ -1,0 +1,44 @@
+objective .kill_ignorg:
+{
+	string: "Kill Ignorg"
+	
+	maps: [ test_dungeon ]
+	
+	kill_npc:
+	{
+		entities: [ .ignorg ]
+	}
+}
+
+quest test_dungeon_kill_ignorg:
+{
+	string: "Kill Ignorg!"
+
+	text:
+	[
+		"Venture into the dungeon and slay Ignorg."
+	]
+	
+	description: 
+	[
+		"I see the fire of adventure burning within your eyes. The realm is in dire need of a hero, and I believe you may be the one to answer"
+		"the call. Deep within these accursed depths lies a threat that festers and grows - Ignorg, the goblin overlord."
+		"This foul being has tainted this place, and his minions sow chaos in the shadows. The time has come for someone to face the darkness"
+		"head-on, to venture into the heart of the dungeon and put an end to his reign of terror."
+		""
+		"Will you be the one to undertake this perilous quest?"
+	]
+
+	progress:
+	[
+		"Did you get cold feet?"
+	]
+
+	objectives: [ .kill_ignorg ]
+	level: 10
+	type: dungeon
+	
+	reward_one_item: [ consumable_small_healing_potion consumable_small_mana_potion ]
+	reward_all_items: [ legs_flimsy_mail_pants ]
+}
+
