@@ -32,6 +32,7 @@ namespace tpublic::Systems
 
 	void			
 	Environment::Init(
+		uint32_t			/*aEntityId*/,
 		uint32_t			/*aEntityInstanceId*/,
 		EntityState::Id		/*aEntityState*/,
 		ComponentBase**		aComponents,
@@ -45,6 +46,7 @@ namespace tpublic::Systems
 
 	EntityState::Id
 	Environment::UpdatePrivate(
+		uint32_t			/*aEntityId*/,
 		uint32_t			aEntityInstanceId,
 		EntityState::Id		aEntityState,
 		int32_t				aTicksInState,

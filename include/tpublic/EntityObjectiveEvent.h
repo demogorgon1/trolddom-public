@@ -15,7 +15,7 @@ namespace tpublic
 
 		// Public data
 		Type		m_type = INVALID_TYPE;
-		uint32_t	m_playerEntityInstanceId = 0;		
+		uint32_t	m_characterId = 0;		
 		uint32_t	m_entityId = 0;
 	};
 

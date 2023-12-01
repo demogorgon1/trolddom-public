@@ -14,13 +14,19 @@ namespace tpublic
 
 		void		
 		Init(
-			uint32_t									aPlayerEntityInstanceId,
+			uint32_t									aCharacterId,
 			uint32_t									aObjectiveId)
 		{
-			assert(m_playerEntityInstanceId == 0);
+			assert(m_characterId == 0);
 			assert(m_objectiveId == 0);
-			m_playerEntityInstanceId = aPlayerEntityInstanceId;
+			m_characterId = aCharacterId;
 			m_objectiveId = aObjectiveId;
+		}
+
+		void
+		Detach()
+		{
+			m_detached = true;
 		}
 
 		// Virtual methods
@@ -34,13 +40,15 @@ namespace tpublic
 							IReader*					aReader) = 0;
 
 		// Data access
-		uint32_t		GetPlayerEntityInstanceId() const { assert(m_playerEntityInstanceId != 0); return m_playerEntityInstanceId; }
+		uint32_t		GetCharacterId() const { assert(m_characterId != 0); return m_characterId; }
 		uint32_t		GetObjectiveId() const { assert(m_objectiveId != 0); return m_objectiveId; }
+		bool			IsDetached() const { return m_detached; }
 
 	private:
 
-		uint32_t	m_playerEntityInstanceId = 0;
-		uint32_t	m_objectiveId = 0;
+		uint32_t			m_characterId = 0;
+		uint32_t			m_objectiveId = 0;
+		std::atomic_bool	m_detached;
 	};
 
 }

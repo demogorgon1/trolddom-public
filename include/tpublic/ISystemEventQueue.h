@@ -16,10 +16,12 @@ namespace tpublic
 		virtual void		AddIndividualKillXPEvent(
 								uint32_t											aCharacterId,
 								uint32_t											aCharacterLevel,
-								uint32_t											aKillLevel) = 0;
+								uint32_t											aKillLevel,
+								uint32_t											aKillEntityId) = 0;
 		virtual void		AddGroupKillXPEvent(
 								uint64_t											aGroupId,
-								uint32_t											aKillLevel) = 0;
+								uint32_t											aKillLevel,
+								uint32_t											aKillEntityId) = 0;
 		virtual void		AddGroupLootEvent(
 								uint32_t											aEntityInstanceId,
 								uint64_t											aGroupId,

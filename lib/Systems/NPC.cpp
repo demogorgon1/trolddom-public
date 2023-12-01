@@ -48,6 +48,7 @@ namespace tpublic::Systems
 
 	void		
 	NPC::Init(
+		uint32_t				/*aEntityId*/,
 		uint32_t				/*aEntityInstanceId*/,
 		EntityState::Id			/*aEntityState*/,
 		ComponentBase**			aComponents,
@@ -80,6 +81,7 @@ namespace tpublic::Systems
 
 	EntityState::Id
 	NPC::UpdatePrivate(
+		uint32_t				aEntityId,
 		uint32_t				aEntityInstanceId,
 		EntityState::Id			aEntityState,
 		int32_t					aTicksInState,
@@ -107,9 +109,9 @@ namespace tpublic::Systems
 			if(tag->m_playerTag.IsSet())
 			{
 				if(tag->m_playerTag.IsGroup())
-					aContext->m_systemEventQueue->AddGroupKillXPEvent(tag->m_playerTag.GetGroupId(), combat->m_level);
+					aContext->m_systemEventQueue->AddGroupKillXPEvent(tag->m_playerTag.GetGroupId(), combat->m_level, aEntityId);
 				else if(tag->m_playerTag.IsCharacter())
-					aContext->m_systemEventQueue->AddIndividualKillXPEvent(tag->m_playerTag.GetCharacterId(), tag->m_playerTag.GetCharacterLevel(), combat->m_level);
+					aContext->m_systemEventQueue->AddIndividualKillXPEvent(tag->m_playerTag.GetCharacterId(), tag->m_playerTag.GetCharacterLevel(), combat->m_level, aEntityId);
 
 				Components::Lootable* lootable = GetComponent<Components::Lootable>(aComponents);
 				lootable->m_playerTag = tag->m_playerTag;
@@ -481,6 +483,7 @@ namespace tpublic::Systems
 
 	void			
 	NPC::UpdatePublic(
+		uint32_t			/*aEntityId*/,
 		uint32_t			/*aEntityInstanceId*/,
 		EntityState::Id		aEntityState,
 		int32_t				/*aTicksInState*/,

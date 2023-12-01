@@ -17,12 +17,14 @@ namespace tpublic::Systems
 
 		// SystemBase implementation
 		EntityState::Id	UpdatePrivate(
+							uint32_t			aEntityId,
 							uint32_t			aEntityInstanceId,
 							EntityState::Id		aEntityState,
 							int32_t				aTicksInState,
 							ComponentBase**		aComponents,
 							Context*			aContext) override;
 		void			UpdatePublic(
+							uint32_t			aEntityId,
 							uint32_t			aEntityInstanceId,
 							EntityState::Id		aEntityState,
 							int32_t				aTicksInState,

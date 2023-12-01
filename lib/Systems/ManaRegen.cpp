@@ -25,6 +25,7 @@ namespace tpublic::Systems
 
 	EntityState::Id
 	ManaRegen::UpdatePrivate(
+		uint32_t			/*aEntityId*/,
 		uint32_t			/*aEntityInstanceId*/,
 		EntityState::Id		/*aEntityState*/,
 		int32_t				/*aTicksInState*/,

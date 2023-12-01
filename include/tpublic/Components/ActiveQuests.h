@@ -64,8 +64,11 @@ namespace tpublic
 
 				bool
 				LoadObjectiveInstanceData(
-					std::vector<std::shared_ptr<ObjectiveInstanceBase>>&			aObjectiveInstances)
+					std::vector<std::shared_ptr<ObjectiveInstanceBase>>&			aObjectiveInstances) const
 				{
+					if(m_objectiveInstanceData.size() == 0)
+						return true;
+
 					MemoryReader reader(&m_objectiveInstanceData[0], m_objectiveInstanceData.size());
 
 					for (std::shared_ptr<ObjectiveInstanceBase>& objectiveInstance : aObjectiveInstances)
