@@ -11,6 +11,7 @@ namespace tpublic::Persistence
 		ID_ACCOUNT,
 		ID_VOLATILE,
 		ID_MAIN,
+		ID_STATS,
 
 		NUM_IDS
 	};
@@ -40,6 +41,7 @@ namespace tpublic::Persistence
 		{ "account",	PLAYER_PERSISTENCE_TYPE_PER_ACCOUNT },
 		{ "volatile",	PLAYER_PERSISTENCE_TYPE_PER_CHARACTER },
 		{ "main",		PLAYER_PERSISTENCE_TYPE_PER_CHARACTER },
+		{ "stats",		PLAYER_PERSISTENCE_TYPE_PER_CHARACTER }
 	};
 
 	static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

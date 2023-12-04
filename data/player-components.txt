@@ -13,6 +13,7 @@ player_components:
 	player_cooldowns
 	player_private
 	player_public
+	player_stats
 	position
 	sprite
 	talents

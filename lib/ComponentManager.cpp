@@ -18,6 +18,7 @@
 #include <tpublic/Components/PlayerCooldowns.h>
 #include <tpublic/Components/PlayerPrivate.h>
 #include <tpublic/Components/PlayerPublic.h>
+#include <tpublic/Components/PlayerStats.h>
 #include <tpublic/Components/Position.h>
 #include <tpublic/Components/ResurrectionPoint.h>
 #include <tpublic/Components/Sprite.h>
@@ -55,6 +56,7 @@ namespace tpublic
 		_Register<Components::PlayerPrivate>();
 		_Register<Components::PlayerCooldowns>();
 		_Register<Components::PlayerPublic>();
+		_Register<Components::PlayerStats>();
 		_Register<Components::Position>();
 		_Register<Components::ResurrectionPoint>();
 		_Register<Components::Sprite>();

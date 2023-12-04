@@ -31,6 +31,9 @@ namespace tpublic
 
 			// Public data
 			int64_t			m_cash = 0;
+
+			// Internal server
+			int64_t			m_loot = 0;
 		};
 	}
 
