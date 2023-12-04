@@ -232,6 +232,15 @@ namespace tpublic
 			return this;
 		}
 
+		const SourceNode*
+		GetArrayIndex(
+			size_t						aIndex) const
+		{
+			TP_VERIFY(m_type == TYPE_ARRAY, m_debugInfo, "Not an array.");
+			TP_VERIFY(aIndex < m_children.size(), m_debugInfo, "Array index out of bounds.");
+			return m_children[aIndex].get();
+		}
+
 		void
 		GetIdArray(
 			DataType::Id				aDataType,

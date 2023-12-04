@@ -69,12 +69,16 @@ namespace tpublic
 						aChild->GetArray()->ForEachChild([&](const SourceNode* aLine) { appendString(m_description, aLine->GetString()); });
 					else if (aChild->m_name == "progress")
 						aChild->GetArray()->ForEachChild([&](const SourceNode* aLine) { appendString(m_progress, aLine->GetString()); });
+					else if (aChild->m_name == "completion")
+						aChild->GetArray()->ForEachChild([&](const SourceNode* aLine) { appendString(m_completion, aLine->GetString()); });
 					else if(aChild->m_name == "level")
 						m_level = aChild->GetUInt32();
 					else if(aChild->m_name == "type")
 						m_type = SourceToType(aChild);
 					else if (aChild->m_name == "objectives")
 						aChild->GetIdArray(DataType::ID_OBJECTIVE, m_objectives);
+					else if (aChild->m_name == "prerequisites")
+						aChild->GetIdArray(DataType::ID_QUEST, m_prerequisites);
 					else if (aChild->m_name == "reward_one_item")
 						aChild->GetIdArray(DataType::ID_ITEM, m_rewardOneItem);
 					else if (aChild->m_name == "reward_all_items")
@@ -94,7 +98,9 @@ namespace tpublic
 				aStream->WriteString(m_text);
 				aStream->WriteString(m_description);
 				aStream->WriteString(m_progress);
+				aStream->WriteString(m_completion);
 				aStream->WriteUInts(m_objectives);
+				aStream->WriteUInts(m_prerequisites);
 				aStream->WriteUInt(m_level);
 				aStream->WritePOD(m_type);
 				aStream->WriteUInts(m_rewardOneItem);
@@ -116,7 +122,11 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadString(m_progress, 16 * 1024))
 					return false;
-				if(!aStream->ReadUInts(m_objectives))
+				if (!aStream->ReadString(m_completion, 16 * 1024))
+					return false;
+				if (!aStream->ReadUInts(m_objectives))
+					return false;
+				if (!aStream->ReadUInts(m_prerequisites))
 					return false;
 				if(!aStream->ReadUInt(m_level))
 					return false;
@@ -134,7 +144,9 @@ namespace tpublic
 			std::string				m_text;
 			std::string				m_description;
 			std::string				m_progress;
+			std::string				m_completion;
 			std::vector<uint32_t>	m_objectives;
+			std::vector<uint32_t>	m_prerequisites;			
 			uint32_t				m_level = 1;
 			Type					m_type = TYPE_NORMAL;
 			std::vector<uint32_t>	m_rewardOneItem;

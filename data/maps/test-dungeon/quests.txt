@@ -33,6 +33,11 @@ quest test_dungeon_kill_ignorg:
 	[
 		"Did you get cold feet?"
 	]
+	
+	completion:
+	[
+		"Nice."
+	]
 
 	objectives: [ .kill_ignorg ]
 	level: 10

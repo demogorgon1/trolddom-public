@@ -30,7 +30,24 @@ namespace tpublic::ObjectiveTypes
 			EntityObjectiveEvent::Type		aEntityObjectiveEvent) override
 		{
 			if(aEntityObjectiveEvent == EntityObjectiveEvent::TYPE_KILL_NPC && m_killed < m_objective->m_count)
+			{
 				m_killed++;
+				OnUpdate();
+			}
+		}
+
+		bool	
+		GetProgress(
+			Progress&						aOut) override
+		{
+			aOut = { m_killed, m_objective->m_count };
+			return true;
+		}
+
+		bool	
+		IsCompleted() const override
+		{
+			return m_killed == m_objective->m_count;
 		}
 
 		void	

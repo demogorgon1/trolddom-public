@@ -100,6 +100,32 @@ namespace tpublic
 				aSchema->DefineCustomObjectPointersNoSource<Quest>(FIELD_QUESTS, offsetof(ActiveQuests, m_quests));
 			}
 
+			bool
+			HasQuest(
+				uint32_t															aQuestId) const
+			{
+				for(const std::unique_ptr<Quest>& quest : m_quests)
+				{
+					if(quest->m_questId == aQuestId)
+						return true;
+				}
+				return false;
+			}
+
+			void
+			RemoveQuest(
+				uint32_t															aQuestId)
+			{
+				for (size_t i = 0; i < m_quests.size(); i++)
+				{
+					if(m_quests[i]->m_questId == aQuestId)
+					{
+						m_quests.erase(m_quests.begin() + i);
+						return;
+					}
+				}
+			}
+
 			// Public data
 			std::vector<std::unique_ptr<Quest>>						m_quests;
 		};

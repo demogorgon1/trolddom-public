@@ -36,6 +36,7 @@
 #include "NPCMetrics.h"
 #include "PersistentIdTable.h"
 #include "PlayerComponents.h"
+#include "QuestMetrics.h"
 #include "XPMetrics.h"
 
 namespace tpublic
@@ -322,6 +323,7 @@ namespace tpublic
 			m_xpMetrics.ToStream(aStream);
 			m_itemMetrics.ToStream(aStream);
 			m_npcMetrics.ToStream(aStream);
+			m_questMetrics.ToStream(aStream);
 		}
 		
 		bool
@@ -342,6 +344,8 @@ namespace tpublic
 			if (!m_itemMetrics.FromStream(aStream))
 				return false;
 			if (!m_npcMetrics.FromStream(aStream))
+				return false;
+			if (!m_questMetrics.FromStream(aStream))
 				return false;
 
 			return true;
@@ -396,6 +400,7 @@ namespace tpublic
 		XPMetrics										m_xpMetrics;
 		ItemMetrics										m_itemMetrics;
 		NPCMetrics										m_npcMetrics;
+		QuestMetrics									m_questMetrics;
 
 	private:
 
