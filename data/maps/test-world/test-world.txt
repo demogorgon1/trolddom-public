@@ -76,6 +76,8 @@ zone .zone_6:
 map_palette .tiles:
 {
 	tile water_1: [ 9 86 104 ]
+	tile mud: [ 67 61 32 ]
+	tile sand: [ 200 200 128 ]
 	tile dirt: [ 97 91 62 ]
 	tile grass: [ 64 105 0 ]
 	tile forest: [ 51 75 6 ]
