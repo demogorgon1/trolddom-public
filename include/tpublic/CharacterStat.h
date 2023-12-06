@@ -9,12 +9,15 @@ namespace tpublic
 	namespace CharacterStat
 	{
 
-		// IMPORTANT: Never remove anything from this enum, only add new things
+		// IMPORTANT: Never remove or reorder anything in this enum, only add new things
 		enum Id : uint32_t
 		{
 			INVALID_ID,
 
 			ID_CASH_LOOTED,
+			ID_TOTAL_KILLS,
+			ID_QUESTS_COMPLETED,
+			ID_TIME_PLAYED,
 
 			NUM_IDS
 		};
@@ -30,7 +33,10 @@ namespace tpublic
 		{
 			{ NULL, NULL },
 
-			{ "cash_looted", "{%zu} looted" }
+			{ "cash_looted", "Cash looted: {%zu}" },
+			{ "total_kills", "Total kills: %zu" },
+			{ "quests_completed", "Quests completed: %zu" },
+			{ "time_played", "Time played: {@%zu}" }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

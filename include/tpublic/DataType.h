@@ -39,6 +39,7 @@ namespace tpublic
 			ID_OBJECTIVE,
 			ID_QUEST,
 			ID_ACHIEVEMENT,
+			ID_ACHIEVEMENT_CATEGORY,
 
 			NUM_IDS
 		};
@@ -75,7 +76,8 @@ namespace tpublic
 			"creature_type",
 			"objective",
 			"quest",
-			"achievement"
+			"achievement",
+			"achievement_category"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

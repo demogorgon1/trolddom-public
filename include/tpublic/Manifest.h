@@ -2,6 +2,7 @@
 
 #include "Data/Ability.h"
 #include "Data/Achievement.h"
+#include "Data/AchievementCategory.h"
 #include "Data/Aura.h"
 #include "Data/Class.h"
 #include "Data/CreatureType.h"
@@ -265,6 +266,7 @@ namespace tpublic
 		{
 			RegisterDataContainer(m_abilities);
 			RegisterDataContainer(m_achievements);
+			RegisterDataContainer(m_achievementCategories);
 			RegisterDataContainer(m_auras);
 			RegisterDataContainer(m_classes);
 			RegisterDataContainer(m_creatureTypes);
@@ -365,6 +367,7 @@ namespace tpublic
 		// Public data
 		DataContainer<Data::Ability>					m_abilities;
 		DataContainer<Data::Achievement>				m_achievements;
+		DataContainer<Data::AchievementCategory>		m_achievementCategories;
 		DataContainer<Data::Aura>						m_auras;
 		DataContainer<Data::Class>						m_classes;
 		DataContainer<Data::CreatureType>				m_creatureTypes;

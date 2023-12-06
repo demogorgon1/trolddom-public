@@ -14,7 +14,7 @@ namespace tpublic
 		{
 		public:
 			static const Component::Id ID = Component::ID_PLAYER_STATS;
-			static const uint8_t FLAGS = FLAG_PLAYER_ONLY;
+			static const uint8_t FLAGS = FLAG_PLAYER_ONLY | FLAG_REPLICATE_ONLY_ON_REQUEST;
 			static const Persistence::Id PERSISTENCE = Persistence::ID_STATS;
 			static const Replication REPLICATION = REPLICATION_PRIVATE;
 

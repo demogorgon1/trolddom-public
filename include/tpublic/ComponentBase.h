@@ -16,7 +16,8 @@ namespace tpublic
 	public:
 		enum Flag : uint8_t
 		{
-			FLAG_PLAYER_ONLY			= 0x01
+			FLAG_PLAYER_ONLY				= 0x01,
+			FLAG_REPLICATE_ONLY_ON_REQUEST	= 0x02
 		};
 
 		enum Replication : uint8_t

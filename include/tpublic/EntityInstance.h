@@ -62,8 +62,9 @@ namespace tpublic
 			for(const std::unique_ptr<ComponentBase>& component : m_components)
 			{
 				ComponentBase::Replication componentReplication = aComponentManager->GetComponentReplication(component->GetComponentId());
+				uint8_t componentFlags = aComponentManager->GetComponentFlags(component->GetComponentId());
 
-				if((component->IsDirty() || !onlyDirty) && componentReplication == ComponentBase::REPLICATION_PUBLIC)
+				if((component->IsDirty() || !onlyDirty) && componentReplication == ComponentBase::REPLICATION_PUBLIC && (componentFlags & ComponentBase::FLAG_REPLICATE_ONLY_ON_REQUEST) == 0)
 				{
 					aWriter->WriteUInt(i);
 					aComponentManager->WriteNetwork(aWriter, component.get());
@@ -86,8 +87,9 @@ namespace tpublic
 			for(const std::unique_ptr<ComponentBase>& component : m_components)
 			{		
 				ComponentBase::Replication componentReplication = aComponentManager->GetComponentReplication(component->GetComponentId());
+				uint8_t componentFlags = aComponentManager->GetComponentFlags(component->GetComponentId());
 
-				if((component->IsDirty() || !onlyDirty) && componentReplication == ComponentBase::REPLICATION_PRIVATE)
+				if((component->IsDirty() || !onlyDirty) && componentReplication == ComponentBase::REPLICATION_PRIVATE && (componentFlags & ComponentBase::FLAG_REPLICATE_ONLY_ON_REQUEST) == 0)
 				{
 					aWriter->WriteUInt(i);
 					aComponentManager->WriteNetwork(aWriter, component.get());
@@ -178,6 +180,18 @@ namespace tpublic
 			uint32_t							aComponentId)
 		{
 			for (std::unique_ptr<ComponentBase>& component : m_components)
+			{
+				if(component && component->GetComponentId() == aComponentId)
+					return component.get();
+			}
+			return NULL;
+		}
+
+		const ComponentBase*
+		GetComponentBase(
+			uint32_t							aComponentId) const
+		{
+			for (const std::unique_ptr<ComponentBase>& component : m_components)
 			{
 				if(component && component->GetComponentId() == aComponentId)
 					return component.get();

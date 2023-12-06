@@ -40,6 +40,8 @@ namespace tpublic
 			ID_ACTIVE_QUESTS,
 			ID_COMPLETED_QUESTS,
 			ID_PLAYER_STATS,
+			ID_RECENT_ACHIEVEMENTS,
+			ID_ACHIEVEMENTS,
 
 			NUM_IDS
 		};
@@ -77,7 +79,9 @@ namespace tpublic
 			"trade",
 			"active_quests",
 			"completed_quests",
-			"player_stats"
+			"player_stats",
+			"recent_achievements",
+			"achievements"
 		};		
 
 		static_assert(sizeof(COMPONENT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

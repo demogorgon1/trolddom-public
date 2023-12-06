@@ -1,6 +1,7 @@
 player_components:
 [
 	abilities
+	achievements
 	action_bars
 	active_quests
 	auras
@@ -15,6 +16,7 @@ player_components:
 	player_public
 	player_stats
 	position
+	recent_achievements
 	sprite
 	talents
 	threat_source

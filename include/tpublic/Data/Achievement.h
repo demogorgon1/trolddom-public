@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../CharacterStat.h"
 #include "../DataBase.h"
 
 namespace tpublic
@@ -12,6 +13,45 @@ namespace tpublic
 			: public DataBase
 		{
 			static const DataType::Id DATA_TYPE = DataType::ID_ACHIEVEMENT;
+
+			struct StatTrigger
+			{
+				StatTrigger()
+				{
+
+				}
+
+				StatTrigger(
+					const SourceNode*	aSource)
+				{
+					m_id = CharacterStat::StringToId(aSource->m_name.c_str());
+					TP_VERIFY(m_id != CharacterStat::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid character stat.", aSource->m_name.c_str());
+					m_threshold = aSource->GetUInt32();
+				}
+
+				void
+				ToStream(
+					IWriter*			aWriter) const
+				{
+					aWriter->WritePOD(m_id);
+					aWriter->WriteUInt(m_threshold);
+				}
+
+				bool
+				FromStream(
+					IReader*			aReader)
+				{
+					if(!aReader->ReadPOD(m_id))
+						return false;
+					if(!aReader->ReadUInt(m_threshold))
+						return false;
+					return true;
+				}
+
+				// Public data
+				CharacterStat::Id	m_id = CharacterStat::INVALID_ID;
+				uint32_t			m_threshold = 0;
+			};
 
 			void
 			Verify() const
@@ -29,6 +69,18 @@ namespace tpublic
 				{
 					if(aChild->m_name == "string")
 						m_string = aChild->GetString();
+					else if (aChild->m_name == "description")
+						m_description = aChild->GetString();
+					else if (aChild->m_name == "points")
+						m_points = aChild->GetUInt32();
+					else if (aChild->m_name == "priority")
+						m_priority = aChild->GetUInt32();
+					else if (aChild->m_name == "category")
+						m_categoryId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ACHIEVEMENT_CATEGORY, aChild->GetIdentifier());
+					else if (aChild->m_name == "root")
+						m_rootId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ACHIEVEMENT, aChild->GetIdentifier());
+					else if (aChild->m_tag == "stat_trigger")
+						m_statTrigger = StatTrigger(aChild);
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 				});
@@ -41,6 +93,12 @@ namespace tpublic
 				ToStreamBase(aStream);
 
 				aStream->WriteString(m_string);
+				aStream->WriteString(m_description);
+				aStream->WriteUInt(m_points);
+				aStream->WriteUInt(m_priority);
+				aStream->WriteUInt(m_categoryId);
+				aStream->WriteUInt(m_rootId);
+				aStream->WriteOptionalObject(m_statTrigger);
 			}
 
 			bool
@@ -50,13 +108,31 @@ namespace tpublic
 				if (!FromStreamBase(aStream))
 					return false;
 
-				if(!aStream->ReadString(m_string))
+				if (!aStream->ReadString(m_string))
+					return false;
+				if (!aStream->ReadString(m_description))
+					return false;
+				if (!aStream->ReadUInt(m_points))
+					return false;
+				if (!aStream->ReadUInt(m_priority))
+					return false;
+				if (!aStream->ReadUInt(m_categoryId))
+					return false;
+				if (!aStream->ReadUInt(m_rootId))
+					return false;
+				if(!aStream->ReadOptionalObject(m_statTrigger))
 					return false;
 				return true;
 			}
 
 			// Public data
-			std::string		m_string;
+			std::string					m_string;
+			std::string					m_description;
+			uint32_t					m_points = 10;
+			uint32_t					m_priority = 0;
+			uint32_t					m_categoryId = 0;
+			uint32_t					m_rootId = 0;
+			std::optional<StatTrigger>	m_statTrigger;
 		};
 
 	}

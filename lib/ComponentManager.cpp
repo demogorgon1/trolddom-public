@@ -1,6 +1,7 @@
 #include "Pcheader.h"
 
 #include <tpublic/Components/Abilities.h>
+#include <tpublic/Components/Achievements.h>
 #include <tpublic/Components/ActionBars.h>
 #include <tpublic/Components/ActiveQuests.h>
 #include <tpublic/Components/Auras.h>
@@ -20,6 +21,7 @@
 #include <tpublic/Components/PlayerPublic.h>
 #include <tpublic/Components/PlayerStats.h>
 #include <tpublic/Components/Position.h>
+#include <tpublic/Components/RecentAchievements.h>
 #include <tpublic/Components/ResurrectionPoint.h>
 #include <tpublic/Components/Sprite.h>
 #include <tpublic/Components/Tag.h>
@@ -39,6 +41,7 @@ namespace tpublic
 	ComponentManager::ComponentManager()
 	{
 		_Register<Components::Abilities>();
+		_Register<Components::Achievements>();
 		_Register<Components::ActionBars>();
 		_Register<Components::ActiveQuests>();
 		_Register<Components::Auras>();
@@ -58,6 +61,7 @@ namespace tpublic
 		_Register<Components::PlayerPublic>();
 		_Register<Components::PlayerStats>();
 		_Register<Components::Position>();
+		_Register<Components::RecentAchievements>();
 		_Register<Components::ResurrectionPoint>();
 		_Register<Components::Sprite>();
 		_Register<Components::Tag>();
