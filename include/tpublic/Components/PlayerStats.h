@@ -40,6 +40,20 @@ namespace tpublic
 					m_stats.m_value[aId] += (uint64_t)aValue;
 			}
 
+			template <typename _T>
+			bool
+			UpdateMax(
+				CharacterStat::Id		aId,
+				_T						aValue)
+			{
+				if (aValue > _T(0) && (uint64_t)aValue > m_stats.m_value[aId])
+				{
+					m_stats.m_value[aId] = (uint64_t)aValue;
+					return true;
+				}
+				return false;
+			}
+
 			// Public data
 			CharacterStat::Collection	m_stats;
 		};

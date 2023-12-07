@@ -18,6 +18,9 @@ namespace tpublic
 			ID_TOTAL_KILLS,
 			ID_QUESTS_COMPLETED,
 			ID_TIME_PLAYED,
+			ID_MAX_UNCOMMON_EQUIP,
+			ID_MAX_RARE_EQUIP,
+			ID_MAX_EPIC_EQUIP,
 
 			NUM_IDS
 		};
@@ -36,7 +39,10 @@ namespace tpublic
 			{ "cash_looted", "Cash looted: {%zu}" },
 			{ "total_kills", "Total kills: %zu" },
 			{ "quests_completed", "Quests completed: %zu" },
-			{ "time_played", "Time played: {@%zu}" }
+			{ "time_played", "Time played: {@%zu}" },
+			{ "max_uncommon_equip", "Maximum number of uncommon items equipped: %zu" },
+			{ "max_rare_equip", "Maximum number of rare items equipped: %zu" },
+			{ "max_epic_equip", "Maximum number of epic items equipped: %zu" }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);
