@@ -116,11 +116,15 @@ namespace tpublic
 			void
 			CompleteAchievement(
 				uint32_t			aAchievementId,
+				uint32_t			aPoints,
 				uint64_t			aTimeStamp)
 			{
 				Entry* entry = m_table.GetOrCreateEntry(aAchievementId);
 				if(entry->m_completionTimeStamp == 0)
+				{
 					entry->m_completionTimeStamp = aTimeStamp;
+					m_totalPoints += aPoints;
+				}
 			}
 
 			// Public data

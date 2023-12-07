@@ -1,21 +1,21 @@
 achievement_category .general: { string: "General" order_key: 1 }
 
-achievement .cash_loot_1: { category: .general string: "Coin Collector" description: "Loot {100000}." points: 10 priority: 0 stat_trigger cash_looted: 100000 }
-achievement .cash_loot_2: { category: .general string: "Gold Hoarder" description: "Loot {1000000}." points: 10 priority: 1 root: cash_loot_1 stat_trigger cash_looted: 1000000 }
-achievement .cash_loot_3: { category: .general string: "Treasure Tycoon" description: "Loot {10000000}." points: 10 priority: 2 root: cash_loot_1 stat_trigger cash_looted: 10000000 }
-achievement .cash_loot_4: { category: .general string: "Lord of the Leprechauns" description: "Loot {100000000}." points: 10 priority: 3 root: cash_loot_1 stat_trigger cash_looted: 100000000 }
+achievement cash_loot_1: { category: .general string: "Coin Collector" description: "Loot {100000}." points: 10 priority: 0 stat_trigger cash_looted: 100000 icon: icon_gold_multi }
+achievement cash_loot_2: { category: .general string: "Gold Hoarder" description: "Loot {1000000}." points: 10 priority: 1 root: cash_loot_1 stat_trigger cash_looted: 1000000 icon: icon_gold_multi }
+achievement cash_loot_3: { category: .general string: "Treasure Tycoon" description: "Loot {10000000}." points: 10 priority: 2 root: cash_loot_1 stat_trigger cash_looted: 10000000 icon: icon_gold_multi }
+achievement cash_loot_4: { category: .general string: "Lord of the Leprechauns" description: "Loot {100000000}." points: 10 priority: 3 root: cash_loot_1 stat_trigger cash_looted: 100000000 icon: icon_gold_multi }
 
-achievement .kills_1: { category: .general string: "Monster Pesterer" description: "Kill 10 enemies." points: 10 priority: 0 stat_trigger total_kills: 10 }
-achievement .kills_2: { category: .general string: "Minion Mutilator" description: "Kill 50 enemies." points: 10 priority: 1 stat_trigger total_kills: 50 }
-achievement .kills_3: { category: .general string: "Exterminator Extraordinaire" description: "Kill 200 enemies." points: 10 priority: 2 stat_trigger total_kills: 200 }
-achievement .kills_4: { category: .general string: "Monster Muncher" description: "Kill 500 enemies." points: 10 priority: 3 stat_trigger total_kills: 500 }
-achievement .kills_5: { category: .general string: "Apex Predator" description: "Kill 1000 enemies." points: 10 priority: 4 stat_trigger total_kills: 1000 }
+achievement kills_1: { category: .general string: "Monster Pesterer" description: "Kill 10 enemies." points: 10 priority: 0 stat_trigger total_kills: 10 icon: icon_fighter_subtlety }
+achievement kills_2: { category: .general string: "Minion Mutilator" description: "Kill 50 enemies." points: 10 priority: 1 stat_trigger total_kills: 50 icon: icon_fighter_subtlety }
+achievement kills_3: { category: .general string: "Exterminator Extraordinaire" description: "Kill 200 enemies." points: 10 priority: 2 stat_trigger total_kills: 200 icon: icon_fighter_subtlety }
+achievement kills_4: { category: .general string: "Monster Muncher" description: "Kill 500 enemies." points: 10 priority: 3 stat_trigger total_kills: 500 icon: icon_fighter_subtlety }
+achievement kills_5: { category: .general string: "Apex Predator" description: "Kill 1000 enemies." points: 10 priority: 4 stat_trigger total_kills: 1000 icon: icon_fighter_subtlety }
 
-achievement .uncommon_1: { category: .general string: "Uncommon" description: "Equip an uncommon item." points: 10 priority: 0 stat_trigger max_uncommon_equip: 1 }
-achievement .uncommon_full: { category: .general string: "Very Uncommon" description: "Equip uncommon items in 13 slots." points: 10 priority: 0 stat_trigger max_uncommon_equip: 13 }
-achievement .rare_1: { category: .general string: "Rare" description: "Equip a rare item." points: 10 priority: 0 stat_trigger max_rare_equip: 1 }
-achievement .rare_full: { category: .general string: "Very Rare" description: "Equip rare items in 13 slots." points: 10 priority: 0 stat_trigger max_rare_equip: 13 }
-achievement .epic_1: { category: .general string: "Epic" description: "Equip an epic item." points: 10 priority: 0 stat_trigger max_epic_equip: 1 }
-achievement .epic_full: { category: .general string: "Very Epic" description: "Equip epic items in 13 slots." points: 10 priority: 0 stat_trigger max_epic_equip: 13 }
+achievement uncommon_1: { category: .general string: "Uncommon" description: "Equip an uncommon item." points: 10 priority: 0 stat_trigger max_uncommon_equip: 1 icon: icon_gold_multi }
+achievement uncommon_full: { category: .general string: "Very Uncommon" description: "Equip uncommon items in 13 slots." points: 10 priority: 0 stat_trigger max_uncommon_equip: 13 icon: icon_gold_multi }
+achievement rare_1: { category: .general string: "Rare" description: "Equip a rare item." points: 10 priority: 0 stat_trigger max_rare_equip: 1 icon: icon_gold_multi }
+achievement rare_full: { category: .general string: "Very Rare" description: "Equip rare items in 13 slots." points: 10 priority: 0 stat_trigger max_rare_equip: 13 icon: icon_gold_multi }
+achievement epic_1: { category: .general string: "Epic" description: "Equip an epic item." points: 10 priority: 0 stat_trigger max_epic_equip: 1 icon: icon_gold_multi }
+achievement epic_full: { category: .general string: "Very Epic" description: "Equip epic items in 13 slots." points: 10 priority: 0 stat_trigger max_epic_equip: 13 icon: icon_gold_multi }
 
 

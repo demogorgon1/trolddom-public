@@ -79,6 +79,8 @@ namespace tpublic
 						m_categoryId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ACHIEVEMENT_CATEGORY, aChild->GetIdentifier());
 					else if (aChild->m_name == "root")
 						m_rootId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ACHIEVEMENT, aChild->GetIdentifier());
+					else if (aChild->m_name == "icon")
+						m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
 					else if (aChild->m_tag == "stat_trigger")
 						m_statTrigger = StatTrigger(aChild);
 					else
@@ -98,6 +100,7 @@ namespace tpublic
 				aStream->WriteUInt(m_priority);
 				aStream->WriteUInt(m_categoryId);
 				aStream->WriteUInt(m_rootId);
+				aStream->WriteUInt(m_iconSpriteId);
 				aStream->WriteOptionalObject(m_statTrigger);
 			}
 
@@ -120,6 +123,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInt(m_rootId))
 					return false;
+				if (!aStream->ReadUInt(m_iconSpriteId))
+					return false;
 				if(!aStream->ReadOptionalObject(m_statTrigger))
 					return false;
 				return true;
@@ -132,6 +137,7 @@ namespace tpublic
 			uint32_t					m_priority = 0;
 			uint32_t					m_categoryId = 0;
 			uint32_t					m_rootId = 0;
+			uint32_t					m_iconSpriteId = 0;
 			std::optional<StatTrigger>	m_statTrigger;
 		};
 
