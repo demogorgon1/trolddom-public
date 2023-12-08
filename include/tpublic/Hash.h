@@ -11,6 +11,8 @@ namespace tpublic
 						size_t					aBufferSize,
 						uint32_t				aSeed,
 						uint32_t				aOutHash[5]);
+		uint32_t	String(
+						const char*				aString);
 	
 		inline constexpr uint64_t
 		Splitmix_64(

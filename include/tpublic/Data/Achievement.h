@@ -63,7 +63,9 @@ namespace tpublic
 			void
 			FromSource(
 				const SourceNode*		aSource) override
-			{
+			{				
+				m_sortKey = aSource->GetSortKey();
+
 				aSource->ForEachChild([&](
 					const SourceNode* aChild)
 				{
@@ -75,6 +77,8 @@ namespace tpublic
 						m_points = aChild->GetUInt32();
 					else if (aChild->m_name == "priority")
 						m_priority = aChild->GetUInt32();
+					else if (aChild->m_name == "no_progress_values")
+						m_noProgressValues = aChild->GetBool();
 					else if (aChild->m_name == "category")
 						m_categoryId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ACHIEVEMENT_CATEGORY, aChild->GetIdentifier());
 					else if (aChild->m_name == "root")
@@ -102,6 +106,8 @@ namespace tpublic
 				aStream->WriteUInt(m_rootId);
 				aStream->WriteUInt(m_iconSpriteId);
 				aStream->WriteOptionalObject(m_statTrigger);
+				aStream->WriteUInt(m_sortKey);
+				aStream->WriteBool(m_noProgressValues);
 			}
 
 			bool
@@ -127,6 +133,10 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadOptionalObject(m_statTrigger))
 					return false;
+				if (!aStream->ReadUInt(m_sortKey))
+					return false;
+				if (!aStream->ReadBool(m_noProgressValues))
+					return false;
 				return true;
 			}
 
@@ -139,6 +149,8 @@ namespace tpublic
 			uint32_t					m_rootId = 0;
 			uint32_t					m_iconSpriteId = 0;
 			std::optional<StatTrigger>	m_statTrigger;
+			uint64_t					m_sortKey = 0;
+			bool						m_noProgressValues = false;
 		};
 
 	}

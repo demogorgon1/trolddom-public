@@ -113,6 +113,16 @@ namespace tpublic
 				return m_table.m_map.contains(aAchievementId);
 			}
 
+			uint64_t
+			GetCompletionTimeStamp(
+				uint32_t			aAchievementId) const
+			{
+				Table::Map::const_iterator i = m_table.m_map.find(aAchievementId);
+				if (i != m_table.m_map.end())
+					return i->second->m_completionTimeStamp;
+				return 0;
+			}
+
 			void
 			CompleteAchievement(
 				uint32_t			aAchievementId,

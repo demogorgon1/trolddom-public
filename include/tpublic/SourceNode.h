@@ -2,6 +2,7 @@
 
 #include "DataErrorHandling.h"
 #include "DataType.h"
+#include "Hash.h"
 #include "PersistentIdTable.h"
 #include "SourceContext.h"
 #include "Tokenizer.h"
@@ -64,6 +65,12 @@ namespace tpublic
 			, m_pathWithFileName(aTokenizer.GetPathWithFileName())
 		{
 
+		}
+
+		uint64_t
+		GetSortKey() const
+		{
+			return ((uint64_t)Hash::String(m_debugInfo.m_file.c_str()) << 32ULL) | (uint64_t)m_debugInfo.m_line;
 		}
 
 		void

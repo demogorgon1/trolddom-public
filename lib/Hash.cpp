@@ -8,6 +8,15 @@ namespace tpublic
 	namespace Hash
 	{
 
+		uint32_t	
+		String(
+			const char*				aString)
+		{
+			uint32_t hash[5];
+			MurmurHash2_160(aString, strlen(aString), 0x94812923, hash);
+			return hash[0] ^ hash[1] ^ hash[2] ^ hash[3] ^ hash[4];
+		}
+
 		void
 		MurmurHash2_160(
 			const void*				aBuffer,
