@@ -25,6 +25,7 @@
 #include "Data/NPCBehaviorState.h"
 #include "Data/Objective.h"
 #include "Data/ParticleSystem.h"
+#include "Data/Profession.h"
 #include "Data/Quest.h"
 #include "Data/Sprite.h"
 #include "Data/Talent.h"
@@ -37,6 +38,7 @@
 #include "NPCMetrics.h"
 #include "PersistentIdTable.h"
 #include "PlayerComponents.h"
+#include "ProfessionMetrics.h"
 #include "QuestMetrics.h"
 #include "XPMetrics.h"
 
@@ -289,6 +291,7 @@ namespace tpublic
 			RegisterDataContainer(m_npcBehaviorStates);
 			RegisterDataContainer(m_objectives);
 			RegisterDataContainer(m_particleSystems);
+			RegisterDataContainer(m_professions);
 			RegisterDataContainer(m_quests);
 			RegisterDataContainer(m_sprites);
 			RegisterDataContainer(m_talents);
@@ -326,6 +329,7 @@ namespace tpublic
 			m_itemMetrics.ToStream(aStream);
 			m_npcMetrics.ToStream(aStream);
 			m_questMetrics.ToStream(aStream);
+			m_professionMetrics.ToStream(aStream);
 		}
 		
 		bool
@@ -348,6 +352,8 @@ namespace tpublic
 			if (!m_npcMetrics.FromStream(aStream))
 				return false;
 			if (!m_questMetrics.FromStream(aStream))
+				return false;
+			if (!m_professionMetrics.FromStream(aStream))
 				return false;
 
 			return true;
@@ -390,6 +396,7 @@ namespace tpublic
 		DataContainer<Data::NPCBehaviorState>			m_npcBehaviorStates;
 		DataContainer<Data::Objective>					m_objectives;
 		DataContainer<Data::ParticleSystem>				m_particleSystems;
+		DataContainer<Data::Profession>					m_professions;
 		DataContainer<Data::Quest>						m_quests;
 		DataContainer<Data::Sprite>						m_sprites;
 		DataContainer<Data::Talent>						m_talents;
@@ -404,6 +411,7 @@ namespace tpublic
 		ItemMetrics										m_itemMetrics;
 		NPCMetrics										m_npcMetrics;
 		QuestMetrics									m_questMetrics;
+		ProfessionMetrics								m_professionMetrics;
 
 	private:
 

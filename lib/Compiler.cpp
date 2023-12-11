@@ -72,6 +72,10 @@ namespace tpublic
 			{
 				m_manifest->m_questMetrics.FromSource(aNode);
 			}
+			else if (aNode->m_name == "profession_metrics")
+			{
+				m_manifest->m_professionMetrics.FromSource(aNode);
+			}
 			else if(aNode->GetObject()->m_name == "sprites")
 			{
 				spriteSheetBuilder.AddSprites(aNode);

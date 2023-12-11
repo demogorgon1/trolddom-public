@@ -1,0 +1,4 @@
+profession herbalism<primary>:
+{
+	string: "Herbalism"
+}

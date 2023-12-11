@@ -1,0 +1,42 @@
+profession first_aid<secondary>:
+{
+	string: "First Aid"
+}
+
+ability consumable_linen_bandage:	
+{
+	string: "Linen Bandage"
+	description: "Restores 20 health."
+	flags: [ target_self ]
+	icon: icon_linen_bandage
+	direct_effect heal: { base: 20 }
+	consume_items: { consumable_linen_bandage: 1 }
+	states: [ default in_combat ]
+}
+
+item consumable_linen_bandage:
+{
+	item_level: 1 
+	required_level: 1
+	icon: icon_linen_bandage
+	root: { name: "Linen Bandage" }
+	stack: 4	
+	use_ability: consumable_linen_bandage
+}
+
+ability craft_linen_bandage:
+{
+	string: "Linen Bandage"	
+	description: "Craft a Linen Bandage."
+	icon: icon_linen_bandage
+	cast_time: 20
+	flags: [ crafting ]	
+	states: [ default in_combat ]
+	consume_items: { item_linen_cloth: 1 }
+	required_profession<0>: first_aid 
+	
+	direct_effect produce_item:
+	{
+		item: consumable_linen_bandage
+	}	
+}

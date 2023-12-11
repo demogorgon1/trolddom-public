@@ -35,7 +35,8 @@ namespace tpublic
 				FLAG_OFFENSIVE					= 0x00002000,
 				FLAG_SPELL						= 0x00004000,
 				FLAG_ALWAYS_IN_RANGE			= 0x00008000,
-				FLAG_ALWAYS_IN_LINE_OF_SIGHT	= 0x00010000
+				FLAG_ALWAYS_IN_LINE_OF_SIGHT	= 0x00010000,
+				FLAG_CRAFTING					= 0x00020000
 			};
 
 			static inline Resource::Id
@@ -90,6 +91,8 @@ namespace tpublic
 						flags |= FLAG_ALWAYS_IN_RANGE;
 					else if (strcmp(identifier, "always_in_line_of_sight") == 0)
 						flags |= FLAG_ALWAYS_IN_LINE_OF_SIGHT;
+					else if (strcmp(identifier, "crafting") == 0)
+						flags |= FLAG_CRAFTING;
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid ability flag.", identifier);
 				});
@@ -272,6 +275,45 @@ namespace tpublic
 				std::vector<ConsumedItem>			m_items;				
 			};
 
+			struct RequiredProfession
+			{
+				RequiredProfession()
+				{
+
+				}
+
+				RequiredProfession(
+					const SourceNode*		aSource)
+				{
+					TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing skill annotation.");
+					m_skill = aSource->m_annotation->GetUInt32();
+					m_professionId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PROFESSION, aSource->GetIdentifier());
+				}
+
+				void	
+				ToStream(
+					IWriter*				aStream) const 
+				{
+					aStream->WriteUInt(m_professionId);
+					aStream->WriteUInt(m_skill);
+				}
+			
+				bool	
+				FromStream(
+					IReader*				aStream) 
+				{
+					if (!aStream->ReadUInt(m_professionId))
+						return false;
+					if (!aStream->ReadUInt(m_skill))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t							m_professionId = 0;	
+				uint32_t							m_skill = 0;
+			};
+
 			void
 			Verify() const
 			{
@@ -351,6 +393,8 @@ namespace tpublic
 						m_resourceCosts[GetResourceId(aMember)] = aMember->GetUInt32();
 					else if (aMember->m_name == "consume_items")
 						m_consumeItems = std::make_unique<ConsumeItems>(aMember);
+					else if(aMember->m_name == "required_profession")
+						m_requiredProfession = RequiredProfession(aMember);
 					else
 						TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
 				});
@@ -378,6 +422,7 @@ namespace tpublic
 				aWriter->WriteObjectPointers(m_aoeEntitySpawns);
 				aWriter->WriteUInts(m_entityStates);
 				aWriter->WriteOptionalObjectPointer(m_consumeItems);
+				aWriter->WriteOptionalObject(m_requiredProfession);
 
 				for(uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 					aWriter->WriteUInt(m_resourceCosts[i]);
@@ -423,6 +468,8 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadOptionalObjectPointer(m_consumeItems))
 					return false;
+				if(!aReader->ReadOptionalObject(m_requiredProfession))
+					return false;
 
 				for (uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 				{
@@ -452,6 +499,7 @@ namespace tpublic
 			uint32_t											m_resourceCosts[Resource::NUM_IDS] = { 0 };
 			uint32_t											m_talentTreeId = 0;
 			std::unique_ptr<ConsumeItems>						m_consumeItems;
+			std::optional<RequiredProfession>					m_requiredProfession;
 		};
 
 	}

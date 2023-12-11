@@ -1,0 +1,8 @@
+item item_linen_cloth:
+{
+	root: {	name: "Linen Cloth" }
+	loot_groups: [ world_drops_junk ]
+	icon: icon_linen_cloth
+	stack: 20
+	level_range: [ 1 7 ]
+}
