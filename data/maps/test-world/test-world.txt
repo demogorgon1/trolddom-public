@@ -24,6 +24,21 @@ map_entity_spawn .sylas:
 	entity .sylas: { weight: 1 }
 }
 
+map_entity_spawn .brom:
+{
+	entity .brom: { weight: 1 }
+}
+
+map_entity_spawn .elysia:
+{
+	entity .elysia: { weight: 1 }
+}
+
+map_entity_spawn .caelum:
+{
+	entity .caelum: { weight: 1 }
+}
+
 map_entity_spawn .rob_beaurichard:
 {
 	entity .rob_beaurichard: { weight: 1 }
@@ -83,6 +98,12 @@ map_palette .tiles:
 	tile forest: [ 51 75 6 ]
 	tile rocks: [ 143 131 120 ]
 	tile rocks_dungeon_entrance: [ 200 200 200 ]
+	tile wood_wall: [ 255 255 0 ] 
+	tile wood_open_door: [ 255 200 0 ] 
+	tile wood_floor: [ 200 200 0 ] 
+	tile wood_solid_wall: [ 0 200 200 ]
+	tile wood_solid_wall_face: [ 100 200 200 ]
+
 }
 
 map_palette .stuff:
@@ -90,6 +111,9 @@ map_palette .stuff:
 	entity_spawn .wildlife: [ 255 255 0 ]
 	entity_spawn .sylas: [ 255 189 0 ]
 	entity_spawn .rob_beaurichard: [ 12 189 87 ]
+	entity_spawn .elysia: [ 240 189 0 ]
+	entity_spawn .caelum: [ 220 189 0 ]
+	entity_spawn .brom: [ 210 189 0 ]
 	entity_spawn .spirit_stone: [ 0 0 0 ]
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn dungeon_1_exit: [ 0 0 200 ]	

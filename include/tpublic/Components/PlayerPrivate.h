@@ -2,6 +2,7 @@
 
 #include "../Component.h"
 #include "../EventHistory.h"
+#include "../PlayerProfessions.h"
 
 namespace tpublic
 {
@@ -52,7 +53,8 @@ namespace tpublic
 				FIELD_IS_DEAD,
 				FIELD_RESURRECTION_POINT_POSITION,
 				FIELD_RESURRECTION_POINT_MAP_ID,
-				FIELD_GUILD_REGISTRATION_HISTORY
+				FIELD_GUILD_REGISTRATION_HISTORY,
+				FIELD_PROFESSIONS
 			};
 
 			static void
@@ -65,6 +67,7 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_VEC2, FIELD_RESURRECTION_POINT_POSITION, NULL, offsetof(PlayerPrivate, m_resurrectionPointPosition));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_RESURRECTION_POINT_MAP_ID, NULL, offsetof(PlayerPrivate, m_resurrectionPointMapId));
 				aSchema->DefineCustomObjectNoSource<GuildRegistrationHistory>(FIELD_GUILD_REGISTRATION_HISTORY, offsetof(PlayerPrivate, m_guildRegistrationHistory));
+				aSchema->DefineCustomObjectNoSource<PlayerProfessions>(FIELD_PROFESSIONS, offsetof(PlayerPrivate, m_professions));
 			}
 
 			// Public data
@@ -74,6 +77,7 @@ namespace tpublic
 			Vec2											m_resurrectionPointPosition;
 			uint32_t										m_resurrectionPointMapId = 0;
 			GuildRegistrationHistory						m_guildRegistrationHistory;
+			PlayerProfessions								m_professions;
 
 			// Not serialized
 			bool											m_positionUpdatedOnServer = false;

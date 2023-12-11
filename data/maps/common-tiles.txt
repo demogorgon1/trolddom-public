@@ -41,6 +41,11 @@ sprites:
 		[ sand_border_1 sand_border_2 sand_border_3 sand_border_4 sand_border_5 sand_border_6 sand_border_7
 		  sand_border_8 sand_border_9 sand_border_10 sand_border_11 sand_border_12 sand_border_13 sand_border_14
 		  sand_border_15 sand_border_16 sand_border_17 ] }	
+	sprite wood_wall: { flags: [ tile_block_line_of_sight ] tile_layer: 10 }
+	sprite wood_open_door: { flags: [ tile_walkable ] tile_layer: 10 }
+	sprite wood_floor: { flags: [ tile_walkable ] tile_layer: 10 }
+	sprite wood_solid_wall: { flags: [ tile_block_line_of_sight ] tile_layer: 10 }
+	sprite wood_solid_wall_face: { flags: [ tile_block_line_of_sight ] tile_layer: 10 }
 
 	cursor: { position: [ 0 16 ] }
 	

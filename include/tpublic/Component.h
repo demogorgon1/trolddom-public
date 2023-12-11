@@ -42,6 +42,7 @@ namespace tpublic
 			ID_PLAYER_STATS,
 			ID_RECENT_ACHIEVEMENTS,
 			ID_ACHIEVEMENTS,
+			ID_GUILD_NAME,
 
 			NUM_IDS
 		};
@@ -81,7 +82,8 @@ namespace tpublic
 			"completed_quests",
 			"player_stats",
 			"recent_achievements",
-			"achievements"
+			"achievements",
+			"guild_name"
 		};		
 
 		static_assert(sizeof(COMPONENT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

@@ -1,0 +1,85 @@
+dialogue_screen .caelum_greetings:
+{
+	text: 
+	[	
+		"What can I do for you?"
+	]
+	
+	options:
+	[
+	]
+}
+
+dialogue_root .caelum_dialogue:
+{
+	.caelum_greetings: { }
+}
+
+entity .caelum:
+{
+	string: "Caelum"
+	
+	systems: [ combat npc ]
+	
+	modifiers: 
+	{ 
+		weapon_damage: 2
+		resource<health>: 2
+	}		
+	
+	components:
+	{
+		position: { }		
+		threat_target: { }
+		visible_auras: { }
+		auras: { }
+		tag: { }
+		guild_name:
+		{
+			string: "First Aid Trainer"
+		}		
+		lootable: 
+		{ 
+			loot_table: .npc
+		}
+		combat_public: 
+		{  
+			level: 10
+			faction: npcs		
+			creature_type: humanoid
+			dialogue_root: .caelum_dialogue
+			
+			modifier not_pushable: {}
+		}			
+		combat_private:
+		{
+			physical_critical_strike_chance: 5
+			dodge_chance: 5
+			parry_chance: 5
+			miss_chance: 5
+			block_chance: 5
+		}
+		npc: 
+		{ 			
+			state default:
+			{
+			}
+			
+			state in_combat:
+			{
+				abilities:
+				[					
+					{ id: strike }
+				]
+			}	
+		}
+		sprite: 
+		{ 
+			animations:
+			[
+				{ states: [ default in_combat spawning ] frames: [ man_4 ] }			
+				{ states: [ dead ] frames: [ man_4_dead ] z_offset: -2 }			
+			]		
+		}		
+	}
+}

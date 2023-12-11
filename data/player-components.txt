@@ -10,6 +10,7 @@ player_components:
 	completed_quests
 	display_name
 	equipped_items	
+	guild_name
 	inventory
 	player_cooldowns
 	player_private

@@ -13,6 +13,9 @@ sprites:
 	sprite boar: { }
 	sprite man_1: { }
 	sprite man_2: { }
+	sprite woman_1: { }
+	sprite man_3: { }
+	sprite man_4: { }
 	
 	cursor: { position: [ 0 16 ] }
 	
@@ -23,6 +26,9 @@ sprites:
 	sprite boar_dead: { }	
 	sprite man_1_dead: { }	
 	sprite man_2_dead: { }	
+	sprite woman_1_dead: { }
+	sprite man_3_dead: { }
+	sprite man_4_dead: { }
 }
 
 sprites:
