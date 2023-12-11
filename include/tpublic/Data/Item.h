@@ -321,7 +321,7 @@ namespace tpublic
 			uint32_t					m_useAbilityId = 0;
 			ItemType::Id				m_itemType = ItemType::ID_NONE;
 			UIntRange					m_levelRange;
-			uint32_t					m_requiredLevel = 1;
+			uint32_t					m_requiredLevel = 0;
 			uint32_t					m_itemLevel = 0;
 			uint32_t					m_iconSpriteId = 0;
 			uint32_t					m_cost = 0;

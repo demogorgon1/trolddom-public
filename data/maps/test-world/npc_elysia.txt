@@ -1,3 +1,22 @@
+dialogue_screen .elysia_herbalism:
+{
+	text: 
+	[	
+		"If you pick up herbalism as a profession you'll be able to find and identify many different kinds of plants and herbs."
+	]
+	
+	options:
+	[
+		{ goto: .elysia_greetings text: "I see." }
+	]	
+}
+
+dialogue_screen .elysia_trainer:
+{
+	train_profession<0>: herbalism
+	train_profession<1>: herbalism
+}
+
 dialogue_screen .elysia_greetings:
 {
 	text: 
@@ -7,6 +26,8 @@ dialogue_screen .elysia_greetings:
 	
 	options:
 	[
+		{ goto: .elysia_herbalism text: "Tell me about herbalism." }
+		{ goto: .elysia_trainer text: "Teach me the way of the herbalist." }
 	]
 }
 

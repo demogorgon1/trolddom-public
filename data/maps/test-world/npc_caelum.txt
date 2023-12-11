@@ -1,3 +1,23 @@
+dialogue_screen .caelum_first_aid:
+{
+	text: 
+	[	
+		"With first aid you'll learn how to craft bandages that you can use to heal wounds you or your allies might sustain on your adventures."
+	]
+	
+	options:
+	[
+		{ goto: .caelum_greetings text: "Alright." }
+	]
+}
+
+dialogue_screen .caelum_trainer:
+{
+	train_profession<0>: first_aid
+	train_profession<1>: first_aid
+	train_ability: craft_linen_bandage
+}
+
 dialogue_screen .caelum_greetings:
 {
 	text: 
@@ -7,6 +27,8 @@ dialogue_screen .caelum_greetings:
 	
 	options:
 	[
+		{ goto: .caelum_first_aid text: "What can I use first aid for?" }
+		{ goto: .caelum_trainer text: "Please teach me about first aid." }
 	]
 }
 

@@ -142,6 +142,45 @@ namespace tpublic
 				uint32_t			m_quantity = 1;
 			};
 
+			struct TrainProfession
+			{
+				TrainProfession()
+				{
+
+				}
+
+				TrainProfession(
+					const SourceNode* aSource)
+				{
+					m_professionId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PROFESSION, aSource->m_name.c_str());
+					TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing profession level annotation.");
+					m_professionLevel = aSource->m_annotation->GetUInt32();
+				}
+
+				void
+				ToStream(
+					IWriter*			aWriter) const
+				{
+					aWriter->WriteUInt(m_professionId);
+					aWriter->WriteUInt(m_professionLevel);
+				}
+
+				bool
+				FromStream(
+					IReader*			aReader) 
+				{
+					if (!aReader->ReadUInt(m_professionId))
+						return false;
+					if (!aReader->ReadUInt(m_professionLevel))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t			m_professionId = 0;
+				uint32_t			m_professionLevel = 0;
+			};
+
 			void
 			Verify() const
 			{
@@ -172,6 +211,12 @@ namespace tpublic
 						aChild->GetArray()->ForEachChild([&](const SourceNode* aOption) { m_options.push_back(Option(aOption)); });
 					else if(aChild->m_tag == "sell")
 						m_sell.push_back(Sell(aChild));
+					else if (aChild->m_name == "train_profession")
+						m_trainProfessions.push_back(TrainProfession(aChild));
+					else if (aChild->m_name == "train_ability")
+						m_trainAbilities.push_back(aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier()));
+					else if (aChild->m_name == "train_abilities")
+						aChild->GetIdArray(DataType::ID_ABILITY, m_trainAbilities);
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 				});
@@ -185,6 +230,8 @@ namespace tpublic
 				aStream->WriteString(m_text);
 				aStream->WriteObjects(m_options);
 				aStream->WriteObjects(m_sell);
+				aStream->WriteObjects(m_trainProfessions);
+				aStream->WriteUInts(m_trainAbilities);
 			}
 
 			bool
@@ -199,6 +246,10 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadObjects(m_sell))
 					return false;
+				if (!aStream->ReadObjects(m_trainProfessions))
+					return false;
+				if(!aStream->ReadUInts(m_trainAbilities))
+					return false;
 				return true;
 			}
 
@@ -206,6 +257,8 @@ namespace tpublic
 			std::string							m_text;
 			std::vector<Option>					m_options;
 			std::vector<Sell>					m_sell;
+			std::vector<TrainProfession>		m_trainProfessions;
+			std::vector<uint32_t>				m_trainAbilities;
 		};
 
 	}
