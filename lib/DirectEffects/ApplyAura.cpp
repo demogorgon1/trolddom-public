@@ -32,7 +32,7 @@ namespace tpublic
 				aThreatEventQueue->AddThreatEvent(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), m_threat);
 
 			// FIXME: filter certain combat event ids. For example, we could have effects not be applied if blocked or only on criticals.
-			const Data::Aura* aura = aManifest->m_auras.GetById(m_auraId);
+			const Data::Aura* aura = aManifest->GetById<tpublic::Data::Aura>(m_auraId);
 
 			std::vector<std::unique_ptr<AuraEffectBase>> effects;
 			for(const std::unique_ptr<Data::Aura::AuraEffectEntry>& t : aura->m_auraEffects)

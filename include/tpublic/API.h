@@ -2,9 +2,11 @@
 
 #include "Base.h"
 
+#include "EntityInstance.h"
 #include "DataErrorHandling.h"
 #include "Helpers.h"
 #include "LootRule.h"
+#include "Manifest.h"
 #include "Persistence.h"
 #include "RangeBasedSet.h"
 #include "Rarity.h"
@@ -14,9 +16,7 @@
 namespace tpublic
 {
 	class ComponentBase;
-	class EntityInstance;
 	class ItemInstanceData;
-	class Manifest;
 	class MapData;
 	class NPCMetrics;
 	class PlayerTag;

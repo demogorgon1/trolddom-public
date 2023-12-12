@@ -336,6 +336,7 @@ namespace tpublic
 			bool AlwaysInRange() const { return m_flags & FLAG_ALWAYS_IN_RANGE; }
 			bool AlwaysInLineOfSight() const { return m_flags & FLAG_ALWAYS_IN_LINE_OF_SIGHT; }
 			bool IsInstantMelee() const { return m_range == 1 && m_castTime == 0; }
+			bool IsCrafting() const { return m_flags & FLAG_CRAFTING; }
 			
 			bool 
 			IsUsableInState(
@@ -365,6 +366,8 @@ namespace tpublic
 						m_talentTreeId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TALENT_TREE, aMember->GetIdentifier());
 					else if (aMember->m_name == "range")
 						m_range = aMember->GetUInt32();
+					else if (aMember->m_name == "level")
+						m_level = aMember->GetUInt32();
 					else if (aMember->m_name == "aoe_radius")
 						m_aoeRadius = aMember->GetUInt32();
 					else if (aMember->m_name == "aoe_cap")
@@ -423,6 +426,7 @@ namespace tpublic
 				aWriter->WriteUInts(m_entityStates);
 				aWriter->WriteOptionalObjectPointer(m_consumeItems);
 				aWriter->WriteOptionalObject(m_requiredProfession);
+				aWriter->WriteUInt(m_level);
 
 				for(uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 					aWriter->WriteUInt(m_resourceCosts[i]);
@@ -470,6 +474,8 @@ namespace tpublic
 					return false;
 				if(!aReader->ReadOptionalObject(m_requiredProfession))
 					return false;
+				if (!aReader->ReadUInt(m_level))
+					return false;
 
 				for (uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 				{
@@ -500,6 +506,7 @@ namespace tpublic
 			uint32_t											m_talentTreeId = 0;
 			std::unique_ptr<ConsumeItems>						m_consumeItems;
 			std::optional<RequiredProfession>					m_requiredProfession;
+			uint32_t											m_level = 1;
 		};
 
 	}

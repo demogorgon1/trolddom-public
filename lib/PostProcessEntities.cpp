@@ -4,6 +4,8 @@
 #include <tpublic/Components/CombatPublic.h>
 #include <tpublic/Components/NPC.h>
 
+#include <tpublic/Data/Entity.h>
+
 #include <tpublic/Manifest.h>
 
 namespace tpublic
@@ -74,7 +76,7 @@ namespace tpublic
 		Run(
 			Manifest* aManifest)
 		{
-			aManifest->m_entities.ForEach([aManifest](
+			aManifest->GetContainer<Data::Entity>()->ForEach([aManifest](
 				Data::Entity* aEntity)
 			{
 				_PostProcessEntity(aManifest, aEntity);

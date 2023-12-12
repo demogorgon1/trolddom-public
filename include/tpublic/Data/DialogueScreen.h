@@ -152,7 +152,7 @@ namespace tpublic
 				TrainProfession(
 					const SourceNode* aSource)
 				{
-					m_professionId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PROFESSION, aSource->m_name.c_str());
+					m_professionId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PROFESSION, aSource->GetIdentifier());
 					TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing profession level annotation.");
 					m_professionLevel = aSource->m_annotation->GetUInt32();
 				}

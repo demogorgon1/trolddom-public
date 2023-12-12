@@ -2,6 +2,7 @@
 
 #include <tpublic/Components/Lootable.h>
 
+#include <tpublic/Data/CreatureType.h>
 #include <tpublic/Data/Item.h>
 #include <tpublic/Data/LootGroup.h>
 #include <tpublic/Data/LootTable.h>
@@ -16,7 +17,7 @@ namespace tpublic
 		const Manifest*			aManifest)
 		: m_manifest(aManifest)
 	{
-		m_manifest->m_items.ForEach([&](
+		m_manifest->GetContainer<tpublic::Data::Item>()->ForEach([&](
 			const Data::Item*	aItem)
 		{
 			UIntRange levelRange = aItem->m_levelRange;
@@ -60,7 +61,7 @@ namespace tpublic
 		bool					aIsElite,
 		Components::Lootable*	aLootable) const
 	{
-		const Data::LootTable* lootTable = m_manifest->m_lootTables.GetById(aLootable->m_lootTableId);
+		const Data::LootTable* lootTable = m_manifest->GetById<tpublic::Data::LootTable>(aLootable->m_lootTableId);
 
 		if(lootTable->m_cash.has_value())
 		{
@@ -70,7 +71,7 @@ namespace tpublic
 		}
 		else if(aCreatureTypeId != 0)
 		{
-			if(m_manifest->m_creatureTypes.GetById(aCreatureTypeId)->m_flags & Data::CreatureType::FLAG_CASH_LOOT)
+			if(m_manifest->GetById<tpublic::Data::CreatureType>(aCreatureTypeId)->m_flags & Data::CreatureType::FLAG_CASH_LOOT)
 			{
 				const NPCMetrics::Level* npcMetricsLevel = m_manifest->m_npcMetrics.GetLevel(aLevel);
 				if (npcMetricsLevel != NULL)

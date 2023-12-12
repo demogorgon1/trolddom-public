@@ -16,7 +16,7 @@ namespace tpublic::AuraEffects
 		SystemBase::Context*	aContext,
 		const Manifest*			aManifest) 
 	{
-		const Data::Ability* ability = aManifest->m_abilities.GetById(m_abilityId);
+		const Data::Ability* ability = aManifest->GetById<tpublic::Data::Ability>(m_abilityId);
 		aContext->m_abilityQueue->AddAbility(aSourceEntityInstanceId, aTargetEntityInstanceId, Vec2(), ability);
 		return true;
 	}

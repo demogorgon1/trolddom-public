@@ -1,5 +1,7 @@
 #include "Pcheader.h"
 
+#include <tpublic/Data/Sprite.h>
+
 #include <tpublic/Manifest.h>
 #include <tpublic/MapData.h>
 #include <tpublic/SpriteData.h>
@@ -40,7 +42,7 @@ namespace tpublic
 			sheets.push_back(std::move(image));
 		}
 
-		m_manifest->m_sprites.ForEach([&](
+		m_manifest->GetContainer<Data::Sprite>()->ForEach([&](
 			const Data::Sprite* aSprite)
 		{
 			TP_CHECK(aSprite->m_spriteSheetIndex < (uint32_t)sheets.size(), "Invalid sprite sheet index.");

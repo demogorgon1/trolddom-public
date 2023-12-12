@@ -1,5 +1,8 @@
 #include "Pcheader.h"
 
+#include <tpublic/Data/MapPalette.h>
+#include <tpublic/Data/Sprite.h>
+
 #include <tpublic/Image.h>
 #include <tpublic/Manifest.h>
 #include <tpublic/MapData.h>
@@ -142,7 +145,7 @@ namespace tpublic
 				// Make combined palette
 				for(uint32_t paletteId : layer->m_palettes)
 				{
-					const Data::MapPalette* palette = aManifest->m_mapPalettes.GetById(paletteId);
+					const Data::MapPalette* palette = aManifest->GetById<Data::MapPalette>(paletteId);
 
 					for(const Data::MapPalette::Entry& paletteEntry : palette->m_entries)
 					{
@@ -551,7 +554,7 @@ namespace tpublic
 		{
 			for(int32_t x = 0; x < m_width; x++)
 			{
-				const Data::Sprite* sprite = aManifest->m_sprites.GetById(*in);
+				const Data::Sprite* sprite = aManifest->GetById<tpublic::Data::Sprite>(*in);
 				
 				if(sprite->m_info.m_flags & SpriteInfo::FLAG_TILE_WALKABLE)
 					*outWalkable |= 1 << bit;

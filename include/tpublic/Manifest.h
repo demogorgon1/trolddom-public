@@ -1,37 +1,7 @@
 #pragma once
 
-#include "Data/Ability.h"
-#include "Data/Achievement.h"
-#include "Data/AchievementCategory.h"
-#include "Data/Aura.h"
-#include "Data/Class.h"
-#include "Data/CreatureType.h"
-#include "Data/DialogueRoot.h"
-#include "Data/DialogueScreen.h"
-#include "Data/Entity.h"
-#include "Data/Expression.h"
-#include "Data/Faction.h"
-#include "Data/Item.h"
-#include "Data/LootGroup.h"
-#include "Data/LootTable.h"
-#include "Data/Map.h"
-#include "Data/MapEntitySpawn.h"
-#include "Data/MapPalette.h"
-#include "Data/MapPlayerSpawn.h"
-#include "Data/MapPortal.h"
-#include "Data/MapSegment.h"
-#include "Data/MapSegmentConnector.h"
-#include "Data/MapTrigger.h"
-#include "Data/NPCBehaviorState.h"
-#include "Data/Objective.h"
-#include "Data/ParticleSystem.h"
-#include "Data/Profession.h"
-#include "Data/Quest.h"
-#include "Data/Sprite.h"
-#include "Data/Talent.h"
-#include "Data/TalentTree.h"
-#include "Data/Zone.h"
-
+#include "AbilityMetrics.h"
+#include "DataBase.h"
 #include "IReader.h"
 #include "ItemMetrics.h"
 #include "IWriter.h"
@@ -48,8 +18,29 @@ namespace tpublic
 	class Manifest
 	{
 	public:
-		struct IDataContainer						
+		class IDataContainer						
 		{
+		public:
+			IDataContainer(
+				DataType::Id							aDataType)
+				: m_dataType(aDataType)
+			{
+
+			}
+			
+			virtual 
+			~IDataContainer()
+			{
+
+			}
+
+			bool
+			IsDataType(
+				DataType::Id							aDataType) const
+			{
+				return m_dataType == aDataType;
+			}
+
 			// Virtual interface
 			virtual void		Verify() const = 0;
 			virtual void		PrepareRuntime(
@@ -62,12 +53,28 @@ namespace tpublic
 			virtual DataBase*	GetBaseByName(
 									PersistentIdTable*	aPersistentIdTable,
 									const char*			aName) = 0;
+
+		private:
+
+			DataType::Id		m_dataType;
 		};
 
 		template <typename _T>
 		struct DataContainer
 			: public IDataContainer
 		{
+			DataContainer()
+				: IDataContainer(_T::DATA_TYPE)
+			{
+
+			}
+
+			virtual
+			~DataContainer()
+			{
+
+			}
+
 			_T*
 			GetByName(
 				PersistentIdTable*						aPersistentIdTable,
@@ -251,7 +258,7 @@ namespace tpublic
 			DataBase*
 			GetBaseByName(
 				PersistentIdTable*						aPersistentIdTable,
-				const char*								aName)
+				const char*								aName) override
 			{
 				return GetByName(aPersistentIdTable, aName);
 			}
@@ -264,146 +271,84 @@ namespace tpublic
 			bool										m_hasUnnamedEntries = false;
 		};
 
-		Manifest()
-		{
-			RegisterDataContainer(m_abilities);
-			RegisterDataContainer(m_achievements);
-			RegisterDataContainer(m_achievementCategories);
-			RegisterDataContainer(m_auras);
-			RegisterDataContainer(m_classes);
-			RegisterDataContainer(m_creatureTypes);
-			RegisterDataContainer(m_dialogueRoots);
-			RegisterDataContainer(m_dialogueScreens);
-			RegisterDataContainer(m_entities);
-			RegisterDataContainer(m_expressions);
-			RegisterDataContainer(m_factions);
-			RegisterDataContainer(m_items);
-			RegisterDataContainer(m_lootGroups);
-			RegisterDataContainer(m_lootTables);
-			RegisterDataContainer(m_maps);
-			RegisterDataContainer(m_mapEntitySpawns);
-			RegisterDataContainer(m_mapPalettes);
-			RegisterDataContainer(m_mapPlayerSpawns);
-			RegisterDataContainer(m_mapPortals);
-			RegisterDataContainer(m_mapSegments);
-			RegisterDataContainer(m_mapSegmentConnectors);
-			RegisterDataContainer(m_mapTriggers);
-			RegisterDataContainer(m_npcBehaviorStates);
-			RegisterDataContainer(m_objectives);
-			RegisterDataContainer(m_particleSystems);
-			RegisterDataContainer(m_professions);
-			RegisterDataContainer(m_quests);
-			RegisterDataContainer(m_sprites);
-			RegisterDataContainer(m_talents);
-			RegisterDataContainer(m_talentTrees);
-			RegisterDataContainer(m_zones);
-		}
+					Manifest();
+					~Manifest();
 		
-		~Manifest()
+		void		Verify() const;
+		void		ToStream(
+						IWriter*						aStream) const;
+		bool		FromStream(
+						IReader*						aStream);
+		void		PrepareRuntime(
+						uint8_t							aRuntime);
+
+		template<typename _T>
+		DataContainer<_T>*
+		GetContainer()
 		{
-
-		}
-		
-		void
-		Verify() const
-		{
-			for(uint8_t i = 1; i < (uint8_t)DataType::NUM_IDS; i++)
-			{
-				assert(m_containers[i] != NULL);
-				m_containers[i]->Verify();
-			}
-		}
-
-		void
-		ToStream(
-			IWriter*									aStream) const
-		{
-			for (uint8_t i = 1; i < (uint8_t)DataType::NUM_IDS; i++)
-			{
-				assert(m_containers[i] != NULL);
-				m_containers[i]->ToStream(aStream);
-			}
-
-			m_playerComponents.ToStream(aStream);
-			m_xpMetrics.ToStream(aStream);
-			m_itemMetrics.ToStream(aStream);
-			m_npcMetrics.ToStream(aStream);
-			m_questMetrics.ToStream(aStream);
-			m_professionMetrics.ToStream(aStream);
-		}
-		
-		bool
-		FromStream(
-			IReader*									aStream) 
-		{
-			for (uint8_t i = 1; i < (uint8_t)DataType::NUM_IDS; i++)
-			{
-				assert(m_containers[i] != NULL);
-				if(!m_containers[i]->FromStream(aStream))
-					return false;
-			}
-
-			if(!m_playerComponents.FromStream(aStream))
-				return false;
-			if (!m_xpMetrics.FromStream(aStream))
-				return false;
-			if (!m_itemMetrics.FromStream(aStream))
-				return false;
-			if (!m_npcMetrics.FromStream(aStream))
-				return false;
-			if (!m_questMetrics.FromStream(aStream))
-				return false;
-			if (!m_professionMetrics.FromStream(aStream))
-				return false;
-
-			return true;
+			std::unique_ptr<IDataContainer>& t = m_containers[_T::DATA_TYPE];
+			assert(t);
+			assert(t->IsDataType(_T::DATA_TYPE));
+			return (DataContainer<_T>*)t.get();
 		}
 
-		void
-		PrepareRuntime(
-			uint8_t										aRuntime)
+		template<typename _T>
+		const DataContainer<_T>*
+		GetContainer() const
 		{
-			for (uint8_t i = 1; i < (uint8_t)DataType::NUM_IDS; i++)
-			{
-				assert(m_containers[i] != NULL);
-				m_containers[i]->PrepareRuntime(aRuntime, this);
-			}
+			const std::unique_ptr<IDataContainer>& t = m_containers[_T::DATA_TYPE];
+			assert(t);
+			assert(t->IsDataType(_T::DATA_TYPE));
+			return (const DataContainer<_T>*)t.get();
 		}
 
-		// Public data
-		DataContainer<Data::Ability>					m_abilities;
-		DataContainer<Data::Achievement>				m_achievements;
-		DataContainer<Data::AchievementCategory>		m_achievementCategories;
-		DataContainer<Data::Aura>						m_auras;
-		DataContainer<Data::Class>						m_classes;
-		DataContainer<Data::CreatureType>				m_creatureTypes;
-		DataContainer<Data::DialogueRoot>				m_dialogueRoots;
-		DataContainer<Data::DialogueScreen>				m_dialogueScreens;
-		DataContainer<Data::Entity>						m_entities;
-		DataContainer<Data::Expression>					m_expressions;
-		DataContainer<Data::Faction>					m_factions;
-		DataContainer<Data::Item>						m_items;
-		DataContainer<Data::LootGroup>					m_lootGroups;
-		DataContainer<Data::LootTable>					m_lootTables;
-		DataContainer<Data::Map>						m_maps;
-		DataContainer<Data::MapEntitySpawn>				m_mapEntitySpawns;
-		DataContainer<Data::MapPalette>					m_mapPalettes;
-		DataContainer<Data::MapPlayerSpawn>				m_mapPlayerSpawns;
-		DataContainer<Data::MapPortal>					m_mapPortals;
-		DataContainer<Data::MapSegment>					m_mapSegments;
-		DataContainer<Data::MapSegmentConnector>		m_mapSegmentConnectors;
-		DataContainer<Data::MapTrigger>					m_mapTriggers;
-		DataContainer<Data::NPCBehaviorState>			m_npcBehaviorStates;
-		DataContainer<Data::Objective>					m_objectives;
-		DataContainer<Data::ParticleSystem>				m_particleSystems;
-		DataContainer<Data::Profession>					m_professions;
-		DataContainer<Data::Quest>						m_quests;
-		DataContainer<Data::Sprite>						m_sprites;
-		DataContainer<Data::Talent>						m_talents;
-		DataContainer<Data::TalentTree>					m_talentTrees;
-		DataContainer<Data::Zone>						m_zones;
+		template<typename _T>
+		_T*
+		GetById(
+			uint32_t									aId)
+		{
+			return GetContainer<_T>()->GetById(aId);
+		}
 
-		IDataContainer*									m_containers[DataType::NUM_IDS] = { 0 };
+		template<typename _T>
+		const _T*
+		GetById(
+			uint32_t									aId) const
+		{
+			return GetContainer<_T>()->GetById(aId);
+		}
+
+		template<typename _T>
+		_T*
+		TryGetById(
+			uint32_t									aId)
+		{
+			return GetContainer<_T>()->TryGetById(aId);
+		}
+
+		template<typename _T>
+		const _T*
+		TryGetById(
+			uint32_t									aId) const
+		{
+			return GetContainer<_T>()->TryGetById(aId);
+		}
+
+		template<typename _T>
+		const _T*
+		GetExistingByName(
+			const char*									aName) const
+		{
+			return GetContainer<_T>()->GetExistingByName(aName);
+		}
+
+		template<typename _T>
+		uint32_t
+		GetExistingIdByName(
+			const char*									aName) const
+		{
+			return GetContainer<_T>()->GetExistingIdByName(aName);
+		}
 
 		// Global non-itemized data
 		PlayerComponents								m_playerComponents;
@@ -412,17 +357,19 @@ namespace tpublic
 		NPCMetrics										m_npcMetrics;
 		QuestMetrics									m_questMetrics;
 		ProfessionMetrics								m_professionMetrics;
+		AbilityMetrics									m_abilityMetrics;
+
+		// Public data
+		std::unique_ptr<IDataContainer>					m_containers[DataType::NUM_IDS];
 
 	private:
 
 		template <typename _T>
 		void 
-		RegisterDataContainer(
-			DataContainer<_T>&							aContainer)
-		{
-			m_containers[_T::DATA_TYPE] = &aContainer;
+		RegisterDataContainer()
+		{			
+			m_containers[_T::DATA_TYPE].reset(new DataContainer<_T>());
 		}
-
 	};
 
 }

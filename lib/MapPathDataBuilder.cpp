@@ -184,7 +184,7 @@ namespace tpublic
 			for(int32_t x = 0; x < aOutBitMap.m_width; x++)
 			{
 				uint32_t tileSpriteId = aTileMap[x + y * aOutBitMap.m_width];
-				const Data::Sprite* sprite = aManifest->m_sprites.GetById(tileSpriteId);
+				const Data::Sprite* sprite = aManifest->GetById<tpublic::Data::Sprite>(tileSpriteId);
 				bool walkable = sprite->m_info.m_flags & SpriteInfo::FLAG_TILE_WALKABLE;
 
 				if(!walkable)

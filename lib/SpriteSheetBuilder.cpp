@@ -216,7 +216,7 @@ namespace tpublic
 		for (SpriteTable::iterator i = m_spriteTable.begin(); i != m_spriteTable.end(); i++)
 		{
 			Sprite* sprite = i->second.get();
-			Data::Sprite* data = aManifest->m_sprites.GetByName(aPersistentIdTable, sprite->m_name.c_str());
+			Data::Sprite* data = aManifest->GetContainer<Data::Sprite>()->GetByName(aPersistentIdTable, sprite->m_name.c_str());
 
 			data->m_width = sprite->m_image.GetWidth();
 			data->m_height = sprite->m_image.GetHeight();

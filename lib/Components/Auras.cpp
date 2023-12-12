@@ -63,7 +63,7 @@ namespace tpublic::Components
 	{
 		for(std::unique_ptr<Entry>& entry : m_entries)
 		{
-			const Data::Aura* auraData = aManifest->m_auras.GetById(entry->m_auraId);
+			const Data::Aura* auraData = aManifest->GetById<tpublic::Data::Aura>(entry->m_auraId);
 
 			for(const std::unique_ptr<Data::Aura::AuraEffectEntry>& effect : auraData->m_auraEffects)
 				entry->m_effects.push_back(std::unique_ptr<AuraEffectBase>(effect->m_auraEffectBase->Copy()));

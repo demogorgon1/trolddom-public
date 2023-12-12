@@ -1,5 +1,7 @@
 #pragma once
 
+#include <tpublic/Data/Sprite.h>
+
 #include <tpublic/Image.h>
 #include <tpublic/Manifest.h>
 #include <tpublic/Parser.h>

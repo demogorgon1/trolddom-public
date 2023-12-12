@@ -1,10 +1,15 @@
 #include "Pcheader.h"
 
+#include <tpublic/Data/Map.h>
+
+#include <tpublic/AuraEffectFactory.h>
 #include <tpublic/Compiler.h>
 #include <tpublic/ComponentManager.h>
 #include <tpublic/Compression.h>
 #include <tpublic/DataErrorHandling.h>
+#include <tpublic/DirectEffectFactory.h>
 #include <tpublic/MemoryWriter.h>
+#include <tpublic/ObjectiveTypeFactory.h>
 #include <tpublic/Tokenizer.h>
 
 #include "FileWriter.h"
@@ -76,6 +81,10 @@ namespace tpublic
 			{
 				m_manifest->m_professionMetrics.FromSource(aNode);
 			}
+			else if (aNode->m_name == "ability_metrics")
+			{
+				m_manifest->m_abilityMetrics.FromSource(aNode);
+			}
 			else if(aNode->GetObject()->m_name == "sprites")
 			{
 				spriteSheetBuilder.AddSprites(aNode);
@@ -85,7 +94,7 @@ namespace tpublic
 				DataType::Id dataType = DataType::StringToId(aNode->m_tag.c_str());
 				TP_VERIFY(dataType != DataType::INVALID_ID, aNode->m_debugInfo, "'%s' is not a valid data type.", aNode->m_tag.c_str());
 
-				assert(m_manifest->m_containers[dataType] != NULL);
+				assert(m_manifest->m_containers[dataType]);
 			
 				DataBase* base = m_manifest->m_containers[dataType]->GetBaseByName(m_sourceContext.m_persistentIdTable.get(), aNode->m_name.c_str());
 
@@ -104,7 +113,7 @@ namespace tpublic
 		{
 			spriteSheetBuilder.ExportPreliminaryManifestData(m_sourceContext.m_persistentIdTable.get(), m_manifest);
 
-			m_manifest->m_maps.ForEach([&](
+			m_manifest->GetContainer<tpublic::Data::Map>()->ForEach([&](
 				Data::Map* aMap)
 			{
 				aMap->m_data->Build(m_manifest);
@@ -127,7 +136,7 @@ namespace tpublic
 		{
 			std::unique_ptr<MapImageOutput> mapImageOutput;
 
-			m_manifest->m_maps.ForEach([&](
+			m_manifest->GetContainer<Data::Map>()->ForEach([&](
 				Data::Map* aMap)
 			{
 				// Debug image output for this map?

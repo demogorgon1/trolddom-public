@@ -4,6 +4,8 @@
 #include <tpublic/Components/CombatPublic.h>
 #include <tpublic/Components/CompletedQuests.h>
 
+#include <tpublic/Data/Quest.h>
+
 #include <tpublic/EntityInstance.h>
 #include <tpublic/Manifest.h>
 #include <tpublic/QuestStatus.h>
@@ -29,7 +31,7 @@ namespace tpublic
 				return ID_IN_PROGRESS;
 
 			const Components::CombatPublic* combatPublic = aPlayerEntity->GetComponent<Components::CombatPublic>();
-			const Data::Quest* quest = aManifest->m_quests.GetById(aQuestId);
+			const Data::Quest* quest = aManifest->GetById<Data::Quest>(aQuestId);
 			if(quest->m_level > combatPublic->m_level && quest->m_level - combatPublic->m_level >= 10)
 				return ID_PLAYER_TOO_LOW_LEVEL;
 
@@ -50,7 +52,7 @@ namespace tpublic
 			uint8_t						aOutColor[3])
 		{
 			const Components::CombatPublic* combatPublic = aPlayerEntity->GetComponent<Components::CombatPublic>();
-			const Data::Quest* quest = aManifest->m_quests.GetById(aQuestId);
+			const Data::Quest* quest = aManifest->GetById<Data::Quest>(aQuestId);
 			int32_t levelDiff = (int32_t)quest->m_level - (int32_t)combatPublic->m_level;
 			if(levelDiff < 0)
 				levelDiff = -levelDiff;

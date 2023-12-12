@@ -1,9 +1,11 @@
 #pragma once
 
+#include "EquipmentSlot.h"
 #include "IReader.h"
 #include "ItemType.h"
 #include "IWriter.h"
 #include "Parser.h"
+#include "Rarity.h"
 
 namespace tpublic
 {

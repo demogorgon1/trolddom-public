@@ -33,6 +33,20 @@ namespace tpublic
 				return true;
 			}
 
+			bool
+			operator==(
+				const Entry&	aOther) const
+			{
+				return m_professionId == aOther.m_professionId && m_professionLevel == aOther.m_professionLevel && m_skill == aOther.m_skill;
+			}
+
+			bool
+			operator!=(
+				const Entry&	aOther) const
+			{
+				return !this->operator==(aOther);
+			}
+
 			// Public data
 			uint32_t		m_professionId = 0;
 			uint32_t		m_professionLevel = 0;
@@ -98,6 +112,27 @@ namespace tpublic
 			}
 
 			m_entries.push_back({ aProfessionId, aProfessionLevel, 0 });
+		}
+
+		bool
+		operator==(
+			const PlayerProfessions&	aOther) const
+		{
+			if(m_entries.size() != aOther.m_entries.size())
+				return false;
+			for(size_t i = 0; i < m_entries.size(); i++)
+			{
+				if(m_entries[i] != aOther.m_entries[i])
+					return false;
+			}
+			return true;
+		}
+
+		bool
+		operator!=(
+			const PlayerProfessions&	aOther) const
+		{
+			return !this->operator==(aOther);
 		}
 
 		// Public data

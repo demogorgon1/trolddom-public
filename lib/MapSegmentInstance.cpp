@@ -1,5 +1,7 @@
 #include "Pcheader.h"
 
+#include <tpublic/Data/Sprite.h>
+
 #include <tpublic/BBox.h>
 #include <tpublic/Image.h>
 #include <tpublic/Manifest.h>
@@ -78,7 +80,7 @@ namespace tpublic
 				{
 					if(*in != 0)
 					{
-						const Data::Sprite* sprite = aManifest->m_sprites.GetById(*in);
+						const Data::Sprite* sprite = aManifest->GetById<tpublic::Data::Sprite>(*in);
 
 						if(sprite->m_info.m_flags & SpriteInfo::FLAG_TILE_WALKABLE)
 							*out = { 64, 64, 64, 255 };

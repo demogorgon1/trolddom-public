@@ -9,6 +9,9 @@
 #include <tpublic/Components/Tag.h>
 #include <tpublic/Components/ThreatTarget.h>
 
+#include <tpublic/Data/Faction.h>
+#include <tpublic/Data/NPCBehaviorState.h>
+
 #include <tpublic/Systems/NPC.h>
 
 #include <tpublic/EntityInstance.h>
@@ -22,6 +25,7 @@
 #include <tpublic/ISystemEventQueue.h>
 #include <tpublic/LootGenerator.h>
 #include <tpublic/Manifest.h>
+#include <tpublic/MapData.h>
 
 namespace tpublic::Systems
 {
@@ -101,7 +105,7 @@ namespace tpublic::Systems
 		const Components::Auras* auras = GetComponent<Components::Auras>(aComponents);
 		const Components::NPC::StateEntry* state = npc->GetState(aEntityState);
 
-		const Data::Faction* faction = GetManifest()->m_factions.GetById(combat->m_factionId);
+		const Data::Faction* faction = GetManifest()->GetById<Data::Faction>(combat->m_factionId);
 
 		if (aEntityState != EntityState::ID_DEAD && combat->GetResource(Resource::ID_HEALTH) == 0 && !auras->HasEffect(AuraEffect::ID_IMMORTALITY))
 		{
@@ -218,7 +222,7 @@ namespace tpublic::Systems
 					aEntityInstanceId, 
 					npc->m_castInProgress->m_targetEntityInstanceId,
 					npc->m_castInProgress->m_aoeTarget,
-					GetManifest()->m_abilities.GetById(npc->m_castInProgress->m_abilityId));
+					GetManifest()->GetById<tpublic::Data::Ability>(npc->m_castInProgress->m_abilityId));
 				npc->m_castInProgress.reset();
 			}
 
@@ -295,7 +299,7 @@ namespace tpublic::Systems
 			}
 			else if(npc->m_npcBehaviorState == NULL && npc->m_defaultBehaviorState != 0)
 			{
-				npc->m_npcBehaviorState = GetManifest()->m_npcBehaviorStates.GetById(npc->m_defaultBehaviorState);
+				npc->m_npcBehaviorState = GetManifest()->GetById<Data::NPCBehaviorState>(npc->m_defaultBehaviorState);
 				npc->m_npcBehaviorStateTick = aContext->m_tick;
 			}
 			else if(npc->m_npcBehaviorState != NULL)
@@ -389,7 +393,7 @@ namespace tpublic::Systems
 
 						for (const Components::NPC::AbilityEntry& abilityEntry : state->m_abilities)
 						{
-							const Data::Ability* ability = GetManifest()->m_abilities.GetById(abilityEntry.m_abilityId);
+							const Data::Ability* ability = GetManifest()->GetById<tpublic::Data::Ability>(abilityEntry.m_abilityId);
 
 							if (distanceSquared > (int32_t)(ability->m_range * ability->m_range))
 								continue;

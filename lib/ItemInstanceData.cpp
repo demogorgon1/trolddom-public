@@ -18,7 +18,7 @@ namespace tpublic
 		const ItemInstance&	aItemInstance)
 		: m_instance(aItemInstance)
 	{
-		m_itemData = aManifest->m_items.GetById(aItemInstance.m_itemId);
+		m_itemData = aManifest->GetById<tpublic::Data::Item>(aItemInstance.m_itemId);
 		std::mt19937 random(aItemInstance.m_seed);
 
 		const ItemType::Info* itemTypeInfo = ItemType::GetInfo(m_itemData->m_itemType);

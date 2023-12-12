@@ -75,7 +75,7 @@ namespace tpublic::Systems
 
 		if (ticksSinceLastUpdate >= environment->m_tickInterval && environment->m_abilityId != 0)
 		{
-			const Data::Ability* ability = GetManifest()->m_abilities.GetById(environment->m_abilityId);
+			const Data::Ability* ability = GetManifest()->GetById<tpublic::Data::Ability>(environment->m_abilityId);
 
 			aContext->m_worldView->QueryEntityInstancesAtPosition(position->m_position, [&](
 				const EntityInstance* aEntityInstance)

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Component.h"
+#include "../ComponentBase.h"
 #include "../EventHistory.h"
 #include "../PlayerProfessions.h"
 

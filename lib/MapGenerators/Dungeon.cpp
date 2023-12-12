@@ -4,6 +4,7 @@
 
 #include <tpublic/Image.h>
 #include <tpublic/Manifest.h>
+#include <tpublic/MapData.h>
 
 namespace tpublic::MapGenerators
 {
@@ -239,7 +240,7 @@ namespace tpublic::MapGenerators
 			};
 			std::vector<Match> matchingConnectors;
 
-			const Data::MapSegmentConnector* fromConnector = m_manifest->m_mapSegmentConnectors.GetById(connection->m_mapSegmentConnectorId);
+			const Data::MapSegmentConnector* fromConnector = m_manifest->GetById<Data::MapSegmentConnector>(connection->m_mapSegmentConnectorId);
 
 			for(const std::unique_ptr<MapSegmentInstance::Connector>& connector : generatedRoom->m_mapSegmentInstance.m_connectors)
 			{				
@@ -471,7 +472,7 @@ namespace tpublic::MapGenerators
 
 				if(roll <= weightSum)
 				{
-					mapSegment = m_manifest->m_mapSegments.GetById(roomSegment.m_mapSegmentId);
+					mapSegment = m_manifest->GetById<Data::MapSegment>(roomSegment.m_mapSegmentId);
 					break;
 				}
 			}
