@@ -18,6 +18,7 @@ namespace tpublic
 				aWriter->WriteUInt(m_professionId);
 				aWriter->WriteUInt(m_professionLevel);
 				aWriter->WriteUInt(m_skill);
+				aWriter->WriteUInts(m_abilityIds);
 			}
 
 			bool
@@ -30,6 +31,8 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadUInt(m_skill))
 					return false;
+				if (!aReader->ReadUInts(m_abilityIds))
+					return false;
 				return true;
 			}
 
@@ -37,7 +40,7 @@ namespace tpublic
 			operator==(
 				const Entry&	aOther) const
 			{
-				return m_professionId == aOther.m_professionId && m_professionLevel == aOther.m_professionLevel && m_skill == aOther.m_skill;
+				return m_professionId == aOther.m_professionId && m_professionLevel == aOther.m_professionLevel && m_skill == aOther.m_skill && m_abilityIds == aOther.m_abilityIds;
 			}
 
 			bool
@@ -47,10 +50,23 @@ namespace tpublic
 				return !this->operator==(aOther);
 			}
 
+			bool
+			HasAbility(
+				uint32_t		aAbilityId) const
+			{
+				for(uint32_t t : m_abilityIds)
+				{
+					if(t == aAbilityId)
+						return true;
+				}
+				return false;
+			}
+
 			// Public data
-			uint32_t		m_professionId = 0;
-			uint32_t		m_professionLevel = 0;
-			uint32_t		m_skill = 0;
+			uint32_t				m_professionId = 0;
+			uint32_t				m_professionLevel = 0;
+			uint32_t				m_skill = 0;
+			std::vector<uint32_t>	m_abilityIds;
 		};
 
 		void
@@ -112,6 +128,21 @@ namespace tpublic
 			}
 
 			m_entries.push_back({ aProfessionId, aProfessionLevel, 0 });
+		}
+
+		void
+		AddProfessionAbility(
+			uint32_t			aProfessionId,
+			uint32_t			aAbilityId)
+		{
+			for (Entry& t : m_entries)
+			{
+				if (t.m_professionId == aProfessionId)
+				{
+					t.m_abilityIds.push_back(aAbilityId);
+					return;
+				}
+			}
 		}
 
 		bool

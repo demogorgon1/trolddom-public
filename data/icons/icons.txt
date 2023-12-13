@@ -74,6 +74,7 @@ sprites:
 	sprite icon_holy_blessing : { }
 	sprite icon_smoke : { }
 	sprite icon_linen_cloth : { }
+	sprite icon_linen_bandage : { }
 	
 }
 

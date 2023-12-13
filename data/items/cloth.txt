@@ -5,4 +5,5 @@ item item_linen_cloth:
 	icon: icon_linen_cloth
 	stack: 20
 	level_range: [ 1 7 ]
+	item_level: 1
 }
