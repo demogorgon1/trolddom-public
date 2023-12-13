@@ -33,10 +33,6 @@ ability craft_linen_bandage:
 	flags: [ crafting ]	
 	states: [ default in_combat ]
 	consume_items: { item_linen_cloth: 1 }
+	produce_items: { consumable_linen_bandage: 1 }
 	required_profession<0>: first_aid 
-	
-	direct_effect produce_item:
-	{
-		item: consumable_linen_bandage
-	}	
 }

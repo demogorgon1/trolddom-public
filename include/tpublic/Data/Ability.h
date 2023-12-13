@@ -209,7 +209,7 @@ namespace tpublic
 				EntityState::Id						m_initState = EntityState::ID_DEFAULT;
 			};
 
-			struct ConsumedItem
+			struct Item
 			{
 				void	
 				ToStream(
@@ -235,20 +235,20 @@ namespace tpublic
 				uint32_t							m_quantity = 0;
 			};
 
-			struct ConsumeItems
+			struct Items
 			{
-				ConsumeItems()
+				Items()
 				{
 
 				}
 
-				ConsumeItems(
+				Items(
 					const SourceNode*		aSource)
 				{
 					aSource->ForEachChild([&](
 						const SourceNode* aChild)
 					{
-						ConsumedItem t;
+						Item t;
 						t.m_itemId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ITEM, aChild->m_name.c_str());
 						t.m_quantity = aChild->GetUInt32();
 						m_items.push_back(t);
@@ -272,7 +272,7 @@ namespace tpublic
 				}
 
 				// Public data
-				std::vector<ConsumedItem>			m_items;				
+				std::vector<Item>			m_items;				
 			};
 
 			struct RequiredProfession
@@ -395,7 +395,9 @@ namespace tpublic
 					else if (aMember->m_tag == "resource_cost")
 						m_resourceCosts[GetResourceId(aMember)] = aMember->GetUInt32();
 					else if (aMember->m_name == "consume_items")
-						m_consumeItems = std::make_unique<ConsumeItems>(aMember);
+						m_consumeItems = std::make_unique<Items>(aMember);
+					else if (aMember->m_name == "produce_items")
+						m_produceItems = std::make_unique<Items>(aMember);
 					else if(aMember->m_name == "required_profession")
 						m_requiredProfession = RequiredProfession(aMember);
 					else
@@ -425,6 +427,7 @@ namespace tpublic
 				aWriter->WriteObjectPointers(m_aoeEntitySpawns);
 				aWriter->WriteUInts(m_entityStates);
 				aWriter->WriteOptionalObjectPointer(m_consumeItems);
+				aWriter->WriteOptionalObjectPointer(m_produceItems);
 				aWriter->WriteOptionalObject(m_requiredProfession);
 				aWriter->WriteUInt(m_level);
 
@@ -472,6 +475,8 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadOptionalObjectPointer(m_consumeItems))
 					return false;
+				if (!aReader->ReadOptionalObjectPointer(m_produceItems))
+					return false;
 				if(!aReader->ReadOptionalObject(m_requiredProfession))
 					return false;
 				if (!aReader->ReadUInt(m_level))
@@ -504,7 +509,8 @@ namespace tpublic
 			std::vector<EntityState::Id>						m_entityStates;
 			uint32_t											m_resourceCosts[Resource::NUM_IDS] = { 0 };
 			uint32_t											m_talentTreeId = 0;
-			std::unique_ptr<ConsumeItems>						m_consumeItems;
+			std::unique_ptr<Items>								m_consumeItems;
+			std::unique_ptr<Items>								m_produceItems;
 			std::optional<RequiredProfession>					m_requiredProfession;
 			uint32_t											m_level = 1;
 		};

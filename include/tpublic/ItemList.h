@@ -65,9 +65,9 @@ namespace tpublic
 								uint32_t									aItemId,
 								uint32_t									aQuantity);
 		bool				Consume(
-								const Data::Ability::ConsumeItems*			aConsumeItems);
+								const Data::Ability::Items*					aConsumeItems);
 		bool				CanConsume(
-								const Data::Ability::ConsumeItems*			aConsumeItems) const;
+								const Data::Ability::Items*					aConsumeItems) const;
 		bool				Move(
 								uint32_t									aSourceIndex,
 								const Data::Item*							aSourceItemData,

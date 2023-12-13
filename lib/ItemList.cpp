@@ -220,14 +220,14 @@ namespace tpublic
 
 	bool
 	ItemList::Consume(
-		const Data::Ability::ConsumeItems*			aConsumeItems)
+		const Data::Ability::Items*					aConsumeItems)
 	{
 		// First pass to see if we actually have everything
 		if(!CanConsume(aConsumeItems))
 			return false;
 
 		// Second pass we remove stuff
-		for (const Data::Ability::ConsumedItem& item : aConsumeItems->m_items)
+		for (const Data::Ability::Item& item : aConsumeItems->m_items)
 			RemoveItems(item.m_itemId, item.m_quantity);
 
 		return true;
@@ -235,12 +235,12 @@ namespace tpublic
 
 	bool
 	ItemList::CanConsume(
-		const Data::Ability::ConsumeItems*			aConsumeItems) const
+		const Data::Ability::Items*					aConsumeItems) const
 	{
 		if (aConsumeItems == NULL)
 			return true;
 
-		for (const Data::Ability::ConsumedItem& item : aConsumeItems->m_items)
+		for (const Data::Ability::Item& item : aConsumeItems->m_items)
 		{
 			if (!HasItems(item.m_itemId, item.m_quantity))
 				return false;

@@ -78,7 +78,6 @@ namespace tpublic
 			ID_KILL,
 			ID_PUSH,
 			ID_THREAT,
-			ID_PRODUCE_ITEM,
 
 			NUM_IDS
 		};
@@ -92,8 +91,7 @@ namespace tpublic
 			"apply_aura",
 			"kill",
 			"push",
-			"threat",
-			"produce_item"
+			"threat"
 		};
 
 		static_assert(sizeof(EFFECT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);
