@@ -337,6 +337,7 @@ namespace tpublic
 			bool AlwaysInLineOfSight() const { return m_flags & FLAG_ALWAYS_IN_LINE_OF_SIGHT; }
 			bool IsInstantMelee() const { return m_range == 1 && m_castTime == 0; }
 			bool IsCrafting() const { return m_flags & FLAG_CRAFTING; }
+			bool IsChanneled() const { return m_channelTicks != 0 && m_channelTickAbilityId != 0; }
 			
 			bool 
 			IsUsableInState(
@@ -368,6 +369,12 @@ namespace tpublic
 						m_range = aMember->GetUInt32();
 					else if (aMember->m_name == "level")
 						m_level = aMember->GetUInt32();
+					else if (aMember->m_name == "channel_ticks")
+						m_channelTicks = aMember->GetUInt32();
+					else if (aMember->m_name == "channel_interval")
+						m_channelInterval = aMember->GetInt32();
+					else if (aMember->m_name == "channel_tick_ability")
+						m_channelTickAbilityId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aMember->GetIdentifier());
 					else if (aMember->m_name == "aoe_radius")
 						m_aoeRadius = aMember->GetUInt32();
 					else if (aMember->m_name == "aoe_cap")
@@ -430,6 +437,9 @@ namespace tpublic
 				aWriter->WriteOptionalObjectPointer(m_produceItems);
 				aWriter->WriteOptionalObject(m_requiredProfession);
 				aWriter->WriteUInt(m_level);
+				aWriter->WriteUInt(m_channelTicks);
+				aWriter->WriteInt(m_channelInterval);
+				aWriter->WriteUInt(m_channelTickAbilityId);
 
 				for(uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 					aWriter->WriteUInt(m_resourceCosts[i]);
@@ -481,6 +491,12 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadUInt(m_level))
 					return false;
+				if (!aReader->ReadUInt(m_channelTicks))
+					return false;
+				if (!aReader->ReadInt(m_channelInterval))
+					return false;
+				if (!aReader->ReadUInt(m_channelTickAbilityId))
+					return false;
 
 				for (uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 				{
@@ -513,6 +529,9 @@ namespace tpublic
 			std::unique_ptr<Items>								m_produceItems;
 			std::optional<RequiredProfession>					m_requiredProfession;
 			uint32_t											m_level = 1;
+			uint32_t											m_channelTicks = 0;
+			int32_t												m_channelInterval = 10;
+			uint32_t											m_channelTickAbilityId = 0;
 		};
 
 	}

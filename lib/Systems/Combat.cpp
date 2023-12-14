@@ -7,6 +7,7 @@
 #include <tpublic/Systems/Combat.h>
 
 #include <tpublic/EntityInstance.h>
+#include <tpublic/ISystemEventQueue.h>
 #include <tpublic/Resource.h>
 #include <tpublic/Helpers.h>
 
@@ -44,20 +45,34 @@ namespace tpublic::Systems
 			for(size_t i = 0; i < auras->m_entries.size(); i++)
 			{
 				std::unique_ptr<Components::Auras::Entry>& entry = auras->m_entries[i];
-
-				for(size_t j = 0; j < entry->m_effects.size(); j++)
+				
+				if(!entry->m_cancel)
 				{
-					std::unique_ptr<AuraEffectBase>& effect = entry->m_effects[j];
-
-					if(!effect->Update(entry->m_entityInstanceId, aEntityInstanceId, aContext, GetManifest()))
+					if(entry->m_channeledAbilityId != 0)
 					{
-						effect.reset();
-						Helpers::RemoveCyclicFromVector(entry->m_effects, j);
-						j--;
-					}						
+						CastInProgress castInProgress;
+						castInProgress.m_abilityId = entry->m_channeledAbilityId;
+						castInProgress.m_channeling = true;
+						castInProgress.m_start = entry->m_start;
+						castInProgress.m_end = entry->m_end;
+						castInProgress.m_targetEntityInstanceId = aEntityInstanceId;
+						aContext->m_systemEventQueue->AddChannelingEvent(entry->m_entityInstanceId, castInProgress);
+					}
+	
+					for(size_t j = 0; j < entry->m_effects.size(); j++)
+					{
+						std::unique_ptr<AuraEffectBase>& effect = entry->m_effects[j];
+
+						if(!effect->Update(entry->m_entityInstanceId, aEntityInstanceId, aContext, GetManifest()))
+						{
+							effect.reset();
+							Helpers::RemoveCyclicFromVector(entry->m_effects, j);
+							j--;
+						}						
+					}
 				}
 
-				if(entry->m_effects.size() == 0 || (entry->m_end != 0 && aContext->m_tick >= entry->m_end))
+				if(entry->m_cancel || entry->m_effects.size() == 0 || (entry->m_end != 0 && aContext->m_tick >= entry->m_end))
 				{
 					entry.reset();
 					Helpers::RemoveCyclicFromVector(auras->m_entries, i);

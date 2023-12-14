@@ -31,8 +31,8 @@ aura holy_blessing:
 {
 	string: "Holy Blessing"
 	icon: icon_holy_blessing		
-	type: buff
-	duration: 100	
+	type: buff	
+	duration: 100
 	aura_effect repeat: 
 	{ 
 		update_interval: 10

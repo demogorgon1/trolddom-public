@@ -74,7 +74,8 @@ namespace tpublic
 
 			enum Flag : uint8_t
 			{
-				FLAG_UNIQUE = 0x01
+				FLAG_UNIQUE = 0x01,
+				FLAG_CHANNELED = 0x02
 			};
 
 			static Type
@@ -103,9 +104,22 @@ namespace tpublic
 					const char* string = aFlag->GetIdentifier();
 					if (strcmp(string, "unique") == 0)
 						flags |= FLAG_UNIQUE;
-					TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid aura flag.", string);
+					else if (strcmp(string, "channeled") == 0)
+						flags |= FLAG_CHANNELED;
+					else
+						TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid aura flag.", string);
 				});
 				return flags;
+			}
+
+			static int32_t
+			SourceToDuration(
+				const SourceNode*		aSource)
+			{
+				if(aSource->IsIdentifier("based_on_effects"))
+					return -1;
+				else
+					return aSource->GetInt32();
 			}
 
 			void
@@ -125,7 +139,7 @@ namespace tpublic
 					if(aChild->m_name == "icon")
 						m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
 					else if (aChild->m_name == "duration")
-						m_duration = aChild->GetInt32();
+						m_duration = SourceToDuration(aChild);
 					else if (aChild->m_name == "type")
 						m_type = SourceToType(aChild);
 					else if (aChild->m_name == "flags")

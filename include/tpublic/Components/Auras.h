@@ -91,6 +91,8 @@ namespace tpublic
 
 				// Not serialized
 				uint32_t										m_entityInstanceId = 0; 
+				uint32_t										m_channeledAbilityId = 0;	
+				bool											m_cancel = false;
 				std::vector<std::unique_ptr<AuraEffectBase>>	m_effects; 
 			};
 

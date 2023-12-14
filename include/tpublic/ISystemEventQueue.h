@@ -7,6 +7,8 @@
 namespace tpublic
 {
 
+	class CastInProgress;
+
 	class ISystemEventQueue
 	{
 	public:
@@ -28,6 +30,9 @@ namespace tpublic
 								const tpublic::Components::Lootable::AvailableLoot& aLoot,
 								size_t												aLootIndex,
 								const std::vector<uint32_t>&						aGroupMemberEntityInstanceIds) = 0;
+		virtual void		AddChannelingEvent(
+								uint32_t											aSourceEntityInstanceId,
+								const CastInProgress&								aCastInProgress) = 0;
 	};
 
 }
