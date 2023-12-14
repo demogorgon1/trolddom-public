@@ -28,20 +28,20 @@ namespace tpublic
 			// AuraEffectBase implementation
 			void
 			FromSource(
-				const SourceNode*		/*aSource*/) override
+				const SourceNode*						/*aSource*/) override
 			{
 			}
 
 			void
 			ToStream(
-				IWriter*				aStream) const override
+				IWriter*								aStream) const override
 			{
 				ToStreamBase(aStream);
 			}
 
 			bool
 			FromStream(
-				IReader*				aStream) override
+				IReader*								aStream) override
 			{
 				if(!FromStreamBase(aStream))
 					return false;
@@ -56,7 +56,11 @@ namespace tpublic
 				return t;
 			}
 
-			// Public data
+			bool			OnApplication(
+								uint32_t				aSourceEntityInstanceId,
+								uint32_t				aTargetEntityInstanceId,
+								SystemBase::Context*	aContext,
+								const Manifest*			aManifest) override;
 		};
 
 	}

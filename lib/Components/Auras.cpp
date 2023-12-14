@@ -13,11 +13,8 @@ namespace tpublic::Components
 	{
 		for(const std::unique_ptr<Entry>& entry : m_entries)
 		{
-			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
-			{
-				if(effect->m_id == aId)
-					return true;
-			}
+			if(entry->HasEffect(aId))
+				return true;
 		}
 
 		return false;

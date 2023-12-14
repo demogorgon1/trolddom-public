@@ -84,6 +84,18 @@ namespace tpublic
 					return true;
 				}
 
+				bool
+				HasEffect(
+					AuraEffect::Id				aId) const
+				{
+					for (const std::unique_ptr<AuraEffectBase>& effect : m_effects)
+					{
+						if (effect->m_id == aId)
+							return true;
+					}
+					return false;
+				}
+
 				// Public data
 				uint32_t										m_auraId = 0;
 				int32_t											m_start = 0;

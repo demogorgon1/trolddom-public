@@ -78,6 +78,14 @@ namespace tpublic
 			SystemBase::Context*						aContext,
 			const Manifest*								aManifest)
 		{
+			if(!m_applied)
+			{
+				if (!OnApplication(aSourceEntityInstanceId, aTargetEntityInstanceId, aContext, aManifest))
+					return false;
+
+				m_applied = true;
+			}
+
 			if(m_updateCount == 0)
 				return true; // Effects that don't require updates will have this initialized to zero
 
@@ -107,6 +115,11 @@ namespace tpublic
 									IWriter*					/*aStream*/) const { assert(false); }
 		virtual bool			FromStream(
 									IReader*					/*aStream*/) { assert(false); return true; }
+		virtual bool			OnApplication(
+									uint32_t					/*aSourceEntityInstanceId*/,
+									uint32_t					/*aTargetEntityInstanceId*/,
+									SystemBase::Context*		/*aContext*/,
+									const Manifest*				/*aManifest*/) { return true; }
 		virtual bool			OnUpdate(
 									uint32_t					/*aSourceEntityInstanceId*/,
 									uint32_t					/*aTargetEntityInstanceId*/,
@@ -125,8 +138,10 @@ namespace tpublic
 		int32_t			m_updateInterval = 0;
 		uint32_t		m_updateCount = 0;
 
+		// Internal
 		int32_t			m_lastUpdate = 0;
 		AuraEffect::Id	m_id = AuraEffect::INVALID_ID;
+		bool			m_applied = false;
 	};
 
 }

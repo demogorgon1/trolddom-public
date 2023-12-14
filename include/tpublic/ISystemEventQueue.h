@@ -33,6 +33,14 @@ namespace tpublic
 		virtual void		AddChannelingEvent(
 								uint32_t											aSourceEntityInstanceId,
 								const CastInProgress&								aCastInProgress) = 0;
+		virtual void		CancelChannelingEvent(
+								uint32_t											aSourceEntityInstanceId,
+								uint32_t											aTargetEntityInstanceId,
+								uint32_t											aChanneledAbilityId,
+								int32_t												aStart) = 0;
+		virtual void		AddInterruptEvent(
+								uint32_t											aSourceEntityInstanceId,
+								uint32_t											aTargetEntityInstanceId) = 0;
 	};
 
 }

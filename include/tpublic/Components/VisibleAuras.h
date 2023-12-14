@@ -52,7 +52,8 @@ namespace tpublic
 
 			enum Field
 			{
-				FIELD_ENTRIES
+				FIELD_ENTRIES,
+				FIELD_STUNNED
 			};
 			
 			static void
@@ -60,10 +61,12 @@ namespace tpublic
 				ComponentSchema* aSchema)
 			{
 				aSchema->DefineCustomObjectsNoSource<Entry>(FIELD_ENTRIES, offsetof(VisibleAuras, m_entries));
+				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_STUNNED, NULL, offsetof(VisibleAuras, m_stunned));
 			}
 
 			// Public data
 			std::vector<Entry>	m_entries;			
+			bool				m_stunned = false;
 		};
 	}
 
