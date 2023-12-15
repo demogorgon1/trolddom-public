@@ -72,7 +72,7 @@ namespace tpublic::Systems
 					}
 				}
 
-				if(entry->m_cancel || entry->m_effects.size() == 0 || (entry->m_end != 0 && aContext->m_tick >= entry->m_end))
+				if(entry->m_cancel || (!entry->m_noEffects && entry->m_effects.size() == 0) || (entry->m_end != 0 && aContext->m_tick >= entry->m_end))
 				{
 					entry.reset();
 					Helpers::RemoveCyclicFromVector(auras->m_entries, i);

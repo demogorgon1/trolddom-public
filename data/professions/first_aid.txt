@@ -3,6 +3,15 @@ profession first_aid<secondary>:
 	string: "First Aid"
 }
 
+aura recently_bandaged:
+{
+	string: "Recently Bandaged"
+	icon: icon_recently_bandaged
+	type: debuff
+	flags: [ unique ]
+	duration: 150
+}
+
 #####################################################
 # Bandage consumable macros
 
@@ -39,6 +48,8 @@ profession first_aid<secondary>:
 	consume_items: { consumable_linen_bandage: 1 }
 	states: [ default in_combat ]	
 	direct_effect apply_aura: { aura: @_aura }
+	direct_effect apply_aura: { aura: recently_bandaged }
+	requirement target<must_not_have_aura>: { id: recently_bandaged }
 }
 
 !define local ITEM_BANDAGE

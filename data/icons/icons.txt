@@ -76,6 +76,7 @@ sprites:
 	sprite icon_linen_cloth : { }
 	sprite icon_linen_bandage : { }
 	sprite icon_heavy_linen_bandage : { }
+	sprite icon_recently_bandaged : { }
 	
 }
 

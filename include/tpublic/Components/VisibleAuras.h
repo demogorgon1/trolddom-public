@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Component.h"
+#include "../ComponentBase.h"
 
 namespace tpublic
 {
@@ -62,6 +63,18 @@ namespace tpublic
 			{
 				aSchema->DefineCustomObjectsNoSource<Entry>(FIELD_ENTRIES, offsetof(VisibleAuras, m_entries));
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_STUNNED, NULL, offsetof(VisibleAuras, m_stunned));
+			}
+
+			bool 
+			HasAura(
+				uint32_t			aAuraId) const
+			{
+				for(const Entry& t : m_entries)
+				{
+					if(t.m_auraId == aAuraId)
+						return true;
+				}
+				return false;
 			}
 
 			// Public data
