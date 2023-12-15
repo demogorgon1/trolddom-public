@@ -151,7 +151,19 @@ namespace tpublic
 				break;
 			}
 
-			if(aTokenizer.IsToken("!"))
+			if (aTokenizer.IsToken("$"))
+			{
+				aTokenizer.Proceed();
+				aTokenizer.ConsumeToken("{");
+
+				std::unique_ptr<SourceNode> node = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
+				_ParseObject(aTokenizer, "}", node.get());
+				
+				node->m_type = SourceNode::TYPE_REFERENCE_OBJECT;
+
+				aObject->m_children.push_back(std::move(node));
+			}
+			else if(aTokenizer.IsToken("!"))
 			{
 				aTokenizer.Proceed();
 				aTokenizer.ConsumeToken("define");
@@ -420,7 +432,7 @@ namespace tpublic
 		for(size_t i = 0; i < aNode->m_children.size(); i++)
 		{
 			std::unique_ptr<SourceNode>& child = aNode->m_children[i];
-
+			
 			if(child->m_condition)
 			{
 				assert(child->m_condition->m_children.size() == 1);
@@ -435,6 +447,16 @@ namespace tpublic
 				}
 
 				child->m_condition.reset();
+			}
+
+			if(child->m_type == SourceNode::TYPE_REFERENCE_OBJECT)
+			{
+				child->m_type = SourceNode::TYPE_OBJECT;
+				m_referenceObjects.push_back(std::move(child));
+
+				aNode->m_children.erase(aNode->m_children.begin() + i);
+				i--;
+				continue;
 			}
 
 			if (child->m_annotation)
@@ -453,35 +475,35 @@ namespace tpublic
 		switch (aNode->m_type)
 		{
 		case SourceNode::TYPE_MACRO_INVOCATION:
-		{
-			assert(aNode->m_children.size() == 2);
-			const char* macroName = aNode->m_children[0]->GetIdentifier();
-			std::unique_ptr<SourceNode> arg = std::move(aNode->m_children[1]);
+			{
+				assert(aNode->m_children.size() == 2);
+				const char* macroName = aNode->m_children[0]->GetIdentifier();
+				std::unique_ptr<SourceNode> arg = std::move(aNode->m_children[1]);
 
-			const Macro* macro = _FindMacro(aNode->m_pathWithFileName.c_str(), macroName);
-			TP_VERIFY(macro != NULL, aNode->m_debugInfo, "'%s' is not a defined macro.", macroName);
+				const Macro* macro = _FindMacro(aNode->m_pathWithFileName.c_str(), macroName);
+				TP_VERIFY(macro != NULL, aNode->m_debugInfo, "'%s' is not a defined macro.", macroName);
 
-			aNode->Copy(macro->m_body.get());
+				aNode->Copy(macro->m_body.get());
 
-			if (arg->m_type == SourceNode::TYPE_OBJECT)
-				m_referenceObjects.push_back(std::move(arg));
-		}
-		break;
+				if (arg->m_type == SourceNode::TYPE_OBJECT)
+					m_referenceObjects.push_back(std::move(arg));
+			}
+			break;
 
 		case SourceNode::TYPE_REFERENCE:
-		{
-			assert(aNode->m_children.size() == 1);
-			const char* referenceName = aNode->m_children[0]->GetIdentifier();
-			const SourceNode* resolved = _FindReferenceObject(m_referenceObjects, referenceName);
-			TP_VERIFY(resolved != NULL, aNode->m_debugInfo, "'%s' is not defined.", referenceName);
+			{
+				assert(aNode->m_children.size() == 1);
+				const char* referenceName = aNode->m_children[0]->GetIdentifier();
+				const SourceNode* resolved = _FindReferenceObject(m_referenceObjects, referenceName);
+				TP_VERIFY(resolved != NULL, aNode->m_debugInfo, "'%s' is not defined.", referenceName);
 
-			std::unique_ptr<SourceNode> annotation = std::move(aNode->m_annotation);
+				std::unique_ptr<SourceNode> annotation = std::move(aNode->m_annotation);
 
-			aNode->Copy(resolved);
+				aNode->Copy(resolved);
 
-			aNode->m_annotation = std::move(annotation);
-		}
-		break;
+				aNode->m_annotation = std::move(annotation);
+			}
+			break;
 
 		default:
 			break;
