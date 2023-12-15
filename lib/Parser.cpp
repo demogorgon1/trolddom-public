@@ -437,55 +437,65 @@ namespace tpublic
 				child->m_condition.reset();
 			}
 
-			size_t originalReferenceObjectCount = m_referenceObjects.size();
+			if (child->m_annotation)
+				_InnerResolveMacrosAndReferences(child->m_annotation.get());
 
-			switch (child->m_type)
-			{
-			case SourceNode::TYPE_MACRO_INVOCATION:
-				{
-					assert(child->m_children.size() == 2);
-					const char* macroName = child->m_children[0]->GetIdentifier();
-					std::unique_ptr<SourceNode> arg = std::move(child->m_children[1]);
+			_InnerResolveMacrosAndReferences(child.get());
+		}
+	}
 
-					const Macro* macro = _FindMacro(child->m_pathWithFileName.c_str(), macroName);
-					TP_VERIFY(macro != NULL, child->m_debugInfo, "'%s' is not a defined macro.", macroName);
+	void
+	Parser::_InnerResolveMacrosAndReferences(
+		SourceNode*						aNode)
+	{
+		size_t originalReferenceObjectCount = m_referenceObjects.size();
 
-					child->Copy(macro->m_body.get());
+		switch (aNode->m_type)
+		{
+		case SourceNode::TYPE_MACRO_INVOCATION:
+		{
+			assert(aNode->m_children.size() == 2);
+			const char* macroName = aNode->m_children[0]->GetIdentifier();
+			std::unique_ptr<SourceNode> arg = std::move(aNode->m_children[1]);
 
-					if(arg->m_type == SourceNode::TYPE_OBJECT)
-						m_referenceObjects.push_back(std::move(arg));
-				}
-				break;
+			const Macro* macro = _FindMacro(aNode->m_pathWithFileName.c_str(), macroName);
+			TP_VERIFY(macro != NULL, aNode->m_debugInfo, "'%s' is not a defined macro.", macroName);
 
-			case SourceNode::TYPE_REFERENCE:
-				{
-					assert(child->m_children.size() == 1);
-					const char* referenceName = child->m_children[0]->GetIdentifier();
-					const SourceNode* resolved = _FindReferenceObject(m_referenceObjects, referenceName);				
-					TP_VERIFY(resolved != NULL, child->m_debugInfo, "'%s' is not defined.", referenceName);
+			aNode->Copy(macro->m_body.get());
 
-					std::unique_ptr<SourceNode> annotation = std::move(child->m_annotation);
+			if (arg->m_type == SourceNode::TYPE_OBJECT)
+				m_referenceObjects.push_back(std::move(arg));
+		}
+		break;
 
-					child->Copy(resolved);
+		case SourceNode::TYPE_REFERENCE:
+		{
+			assert(aNode->m_children.size() == 1);
+			const char* referenceName = aNode->m_children[0]->GetIdentifier();
+			const SourceNode* resolved = _FindReferenceObject(m_referenceObjects, referenceName);
+			TP_VERIFY(resolved != NULL, aNode->m_debugInfo, "'%s' is not defined.", referenceName);
 
-					child->m_annotation = std::move(annotation);
-				}
-				break;
+			std::unique_ptr<SourceNode> annotation = std::move(aNode->m_annotation);
 
-			default:
-				break;
-			}
+			aNode->Copy(resolved);
 
-			assert(child->m_type != SourceNode::TYPE_REFERENCE && child->m_type != SourceNode::TYPE_MACRO_INVOCATION);
+			aNode->m_annotation = std::move(annotation);
+		}
+		break;
 
-			_ResolveMacrosAndReferences(child.get());
+		default:
+			break;
+		}
 
-			// Pop off any reference objects
-			if(originalReferenceObjectCount != m_referenceObjects.size())
-			{
-				assert(originalReferenceObjectCount < m_referenceObjects.size());
-				m_referenceObjects.resize(originalReferenceObjectCount);
-			}			
+		assert(aNode->m_type != SourceNode::TYPE_REFERENCE && aNode->m_type != SourceNode::TYPE_MACRO_INVOCATION);
+
+		_ResolveMacrosAndReferences(aNode);
+
+		// Pop off any reference objects
+		if (originalReferenceObjectCount != m_referenceObjects.size())
+		{
+			assert(originalReferenceObjectCount < m_referenceObjects.size());
+			m_referenceObjects.resize(originalReferenceObjectCount);
 		}
 	}
 

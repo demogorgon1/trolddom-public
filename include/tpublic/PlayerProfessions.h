@@ -97,6 +97,18 @@ namespace tpublic
 			return NULL;
 		}
 
+		Entry*
+		GetProfession(
+			uint32_t			aProfessionId) 
+		{
+			for(Entry& t : m_entries)
+			{
+				if(t.m_professionId == aProfessionId)
+					return &t;
+			}
+			return NULL;
+		}
+
 		bool
 		HasProfession(
 			uint32_t			aProfessionId) const

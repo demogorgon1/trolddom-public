@@ -83,6 +83,8 @@ namespace tpublic
 									const char*						aPath) const;
 		void					_ResolveMacrosAndReferences(
 									SourceNode*						aNode);
+		void					_InnerResolveMacrosAndReferences(
+									SourceNode*						aNode);
 		const Macro*			_FindMacro(
 									const char*						aPath,
 									const char*						aName);

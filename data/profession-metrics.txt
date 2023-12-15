@@ -9,4 +9,23 @@ profession_metrics:
 		{ string: "Artisan" required_level: 35 required_skill: 200 training_cost: 6000 max_skill: 300 }		
 	]
 
+	skills:
+	{
+		skill_up_chance<-15>: 10
+		skill_up_chance<-14>: 20
+		skill_up_chance<-13>: 30
+		skill_up_chance<-12>: 40
+		skill_up_chance<-11>: 50
+		skill_up_chance<-10>: 60
+		skill_up_chance<-9>: 70
+		skill_up_chance<-8>: 80
+		skill_up_chance<-7>: 90
+		skill_up_chance<-5>: 100
+		skill_up_chance<-4>: 100
+		skill_up_chance<-3>: 100
+		skill_up_chance<-2>: 100
+		skill_up_chance<-1>: 100
+		skill_up_chance<0>: 100		
+	}
+
 }

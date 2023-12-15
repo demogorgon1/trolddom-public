@@ -74,6 +74,68 @@ namespace tpublic
 			uint32_t	m_trainingCost = 1;
 		};
 
+		struct Skills
+		{
+			void
+			FromSource(
+				const SourceNode*			aSource)
+			{
+				aSource->ForEachChild([&](
+					const SourceNode* aChild)
+				{
+					if(aChild->m_name == "skill_up_chance")
+					{
+						TP_VERIFY(aChild->m_annotation, aChild->m_debugInfo, "Missing skill diferrence annotation.");
+						int32_t difference = aChild->m_annotation->GetInt32();
+						m_table[difference] = aChild->GetUInt32();
+					}
+					else
+					{
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					}
+				});
+			}
+	
+			void
+			ToStream(
+				IWriter*						aStream) const 
+			{
+				aStream->WriteUInt(m_table.size());
+				for(Table::const_iterator i = m_table.cbegin(); i != m_table.cend(); i++)
+				{
+					aStream->WriteInt(i->first);
+					aStream->WriteUInt(i->second);
+				}
+			}
+	
+			bool
+			FromStream(
+				IReader*						aStream) 
+			{
+				size_t count;
+				if(!aStream->ReadUInt(count))
+					return false;
+				for(size_t i = 0; i < count; i++)
+				{
+					int32_t difference;
+					if(!aStream->ReadInt(difference))
+						return false;
+
+					uint32_t chance;
+					if (!aStream->ReadUInt(chance))
+						return false;
+
+					m_table[difference] = chance;
+
+				}
+				return true;
+			}
+	
+			// Public data
+			typedef std::unordered_map<int32_t, uint32_t> Table;
+			Table		m_table;
+		};
+
 		void
 		FromSource(
 			const SourceNode*			aSource)
@@ -89,6 +151,10 @@ namespace tpublic
 						m_levels.push_back(Level(aItem));
 					});
 				}
+				else if (aChild->m_name == "skills")
+				{
+					m_skills.FromSource(aChild);
+				}
 				else
 				{
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -101,6 +167,7 @@ namespace tpublic
 			IWriter*						aStream) const 
 		{
 			aStream->WriteObjects(m_levels);
+			m_skills.ToStream(aStream);
 		}
 
 		bool
@@ -108,6 +175,8 @@ namespace tpublic
 			IReader*						aStream) 
 		{
 			if(!aStream->ReadObjects(m_levels))
+				return false;
+			if(!m_skills.FromStream(aStream))
 				return false;
 			return true;
 		}
@@ -128,8 +197,21 @@ namespace tpublic
 			return NULL;
 		}
 
+		uint32_t 
+		GetSkillUpChance(
+			uint32_t						aSkill,
+			uint32_t						aSkillRequired) const
+		{
+			int32_t difference = (int32_t)aSkillRequired - (int32_t)aSkill;
+			Skills::Table::const_iterator i = m_skills.m_table.find(difference);
+			if(i == m_skills.m_table.cend())
+				return 0;
+			return i->second;
+		}
+
 		// Public data
-		std::vector<Level>				m_levels;
+		std::vector<Level>				m_levels;		
+		Skills							m_skills;
 	};
 
 }

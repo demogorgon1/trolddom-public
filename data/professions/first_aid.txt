@@ -3,19 +3,22 @@ profession first_aid<secondary>:
 	string: "First Aid"
 }
 
-ability consumable_linen_bandage_tick:
+#####################################################
+# Bandage consumable macros
+
+!define local ABILITY_BANDAGE_TICK
 {
-	string: "Linen Bandage"
-	icon: icon_linen_bandage		
+	string: @_string
+	icon: @_icon
 	states: [ default in_combat ]
 	flags: [ always_in_range always_in_line_of_sight ]	
-	direct_effect heal: { base: 5 }	
+	direct_effect heal: { base: @_heal_tick }	
 }
 
-aura consumable_linen_bandage:
+!define local AURA_BANDAGE
 {
-	string: "Linen Bandage"
-	icon: icon_linen_bandage		
+	string: @_string
+	icon: @_icon
 	type: buff
 	flags: [ channeled ]
 	duration: 50
@@ -23,40 +26,59 @@ aura consumable_linen_bandage:
 	{ 
 		update_interval: 10
 		update_count: 5
-		ability: consumable_linen_bandage_tick
+		ability: @_ability_tick
 	}
 }
 
-ability consumable_linen_bandage:	
+!define local ABILITY_BANDAGE	
 {
-	string: "Linen Bandage"
-	description: "Restores 25 health over 5 seconds."
+	string: @_string
+	description: @_description
 	flags: [ target_other target_self target_friendly ]
-	icon: icon_linen_bandage
+	icon: @_icon
 	consume_items: { consumable_linen_bandage: 1 }
 	states: [ default in_combat ]	
-	direct_effect apply_aura: { aura: consumable_linen_bandage }
+	direct_effect apply_aura: { aura: @_aura }
 }
 
-item consumable_linen_bandage:
+!define local ITEM_BANDAGE
 {
-	item_level: 1 
-	required_level: 1
-	icon: icon_linen_bandage
-	root: { name: "Linen Bandage" }
-	stack: 4	
-	use_ability: consumable_linen_bandage
+	item_level: @_level 
+	required_level: @_level
+	icon: @_icon
+	root: { name: @_string }
+	stack: 20	
+	use_ability: @_ability
 }
 
-ability craft_linen_bandage:
+!define local ABILITY_CRAFT_BANDAGE
 {
-	string: "Linen Bandage"	
-	description: "Craft a Linen Bandage."
-	icon: icon_linen_bandage
+	string: @_string
+	description: @_craft_description
+	icon: @_icon
 	cast_time: 20
 	flags: [ crafting ]	
 	states: [ default in_combat ]
-	consume_items: { item_linen_cloth: 1 }
-	produce_items: { consumable_linen_bandage: 1 }
-	required_profession<0>: first_aid 
+	consume_items: @_materials
+	produce_items: @_item
+	required_profession<@_skill>: first_aid 
 }
+
+#####################################################
+# Linen Bandage
+
+ability consumable_linen_bandage_tick: !ABILITY_BANDAGE_TICK { _string: "Linen Bandage" _icon: icon_linen_bandage _heal_tick: 5 }
+aura consumable_linen_bandage: !AURA_BANDAGE { _string: "Heavy Linen Bandage" _icon: icon_linen_bandage _ability_tick: consumable_linen_bandage_tick }
+ability consumable_linen_bandage:	!ABILITY_BANDAGE { _string: "Linen Bandage" _description: "Restores 25 health over 5 seconds." _icon: icon_linen_bandage _aura: consumable_linen_bandage }
+item consumable_linen_bandage: !ITEM_BANDAGE { _string: "Linen Bandage" _level: 1 _icon: icon_linen_bandage _ability: consumable_linen_bandage }
+ability craft_linen_bandage: !ABILITY_CRAFT_BANDAGE { _string: "Linen Bandage" _craft_description: "Craft a Linen Bandage." _icon: icon_linen_bandage _materials: { item_linen_cloth: 1 } _item: { consumable_linen_bandage: 1 } _skill: 0 }
+
+#####################################################
+# Heavy Linen Bandage
+
+ability consumable_heavy_linen_bandage_tick: !ABILITY_BANDAGE_TICK { _string: "Heavy Linen Bandage" _icon: icon_heavy_linen_bandage _heal_tick: 7 }
+aura consumable_heavy_linen_bandage: !AURA_BANDAGE { _string: "Heavy Linen Bandage" _icon: icon_heavy_linen_bandage _ability_tick: consumable_heavy_linen_bandage_tick }
+ability consumable_heavy_linen_bandage:	!ABILITY_BANDAGE { _string: "Heavy Linen Bandage" _description: "Restores 35 health over 5 seconds." _icon: icon_heavy_linen_bandage _aura: consumable_heavy_linen_bandage }
+item consumable_heavy_linen_bandage: !ITEM_BANDAGE { _string: "Heavy Linen Bandage" _level: 4 _icon: icon_heavy_linen_bandage _ability: consumable_heavy_linen_bandage }
+ability craft_heavy_linen_bandage: !ABILITY_CRAFT_BANDAGE { _string: "Heavy Linen Bandage" _craft_description: "Craft a Heavy Linen Bandage." _icon: icon_heavy_linen_bandage _materials: { item_linen_cloth: 2 } _item: { consumable_heavy linen_bandage: 1 } _skill: 20 }
+
