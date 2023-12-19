@@ -1,5 +1,7 @@
 #include "Pcheader.h"
 
+#include <map>
+
 #include <tpublic/Compression.h>
 
 #include "SpriteSheetBuilder.h"
@@ -26,16 +28,6 @@ namespace tpublic
 		}
 
 		void
-		_WriteUInt32(
-			std::vector<uint8_t>&	aBuffer,
-			uint32_t				aValue)
-		{
-			size_t offset = aBuffer.size();
-			aBuffer.resize(offset + sizeof(aValue));
-			memcpy(&aBuffer[offset], &aValue, sizeof(aValue));
-		}
-
-		void
 		_WriteBuffer(
 			std::vector<uint8_t>&	aBuffer,
 			const void*				aPtr,
@@ -44,6 +36,34 @@ namespace tpublic
 			size_t offset = aBuffer.size();
 			aBuffer.resize(offset + aSize);
 			memcpy(&aBuffer[offset], aPtr, aSize);
+		}
+
+		void
+		_WriteUInt32(
+			std::vector<uint8_t>&	aBuffer,
+			uint32_t				aValue)
+		{
+			uint8_t temp[5];
+			uint8_t* p = temp;
+			size_t i = 0;
+
+			for (;;)
+			{
+				assert(i < sizeof(temp));
+
+				if (aValue <= 0x7F)
+				{
+					p[i++] = (uint8_t)aValue;
+					break;
+				}
+				else
+				{
+					p[i++] = (uint8_t)((aValue & 0x7F) | 0x80);
+					aValue >>= 7;
+				}
+			}
+
+			_WriteBuffer(aBuffer, temp, i);
 		}
 
 	}
@@ -246,11 +266,54 @@ namespace tpublic
 		Compression::Level		aCompressionLevel,
 		const char*				aPath)
 	{
+		// Make palette
+		std::vector<uint32_t> palette;		
+		std::unordered_map<uint32_t, uint32_t> reversePalette;
+		uint32_t totalPixelCount = 0;
+
+		{
+			std::unordered_map<uint32_t, uint32_t> rgbaCounts;
+
+			for (std::unique_ptr<Sheet>& sheet : m_sheets)
+			{
+				for (const Sprite* sprite : sheet->m_sprites)
+				{
+					const Image::RGBA* p = sprite->m_image.GetData();
+					for (uint32_t i = 0, count = sprite->m_image.GetWidth() * sprite->m_image.GetHeight(); i < count; i++, p++)
+					{
+						uint32_t c = *((const uint32_t*)p);
+						std::unordered_map<uint32_t, uint32_t>::iterator j = rgbaCounts.find(c);
+						if (j == rgbaCounts.end())
+							rgbaCounts[c] = 1;
+						else
+							j->second++;
+
+						TP_CHECK(totalPixelCount < UINT32_MAX, "Total pixel count: too damn high!");
+						totalPixelCount++;
+					}
+				}
+			}
+
+			std::multimap<uint32_t, uint32_t> rgbaCountsSorted;
+			for (std::unordered_map<uint32_t, uint32_t>::const_iterator i = rgbaCounts.cbegin(); i != rgbaCounts.cend(); i++)
+				rgbaCountsSorted.insert(std::make_pair(i->second, i->first));
+		
+			for(std::multimap<uint32_t, uint32_t>::const_reverse_iterator i = rgbaCountsSorted.crbegin(); i != rgbaCountsSorted.crend(); i++)
+			{				
+				reversePalette[i->second] = (uint32_t)palette.size();
+				palette.push_back(i->second);
+			}
+		}
+
 		// Serialize to big data blob
 		std::vector<uint8_t> compressed;
 
 		{
 			std::vector<uint8_t> data;
+
+			_WriteUInt32(data, totalPixelCount);
+			_WriteUInt32(data, (uint32_t)palette.size());
+			_WriteBuffer(data, &palette[0], palette.size() * sizeof(uint32_t));
 			_WriteUInt32(data, (uint32_t)m_sheets.size());
 
 			for (std::unique_ptr<Sheet>& sheet : m_sheets)
@@ -266,7 +329,17 @@ namespace tpublic
 					_WriteUInt32(data, sprite->m_sheetOffsetY);
 					_WriteUInt32(data, sprite->m_image.GetWidth());
 					_WriteUInt32(data, sprite->m_image.GetHeight());
-					_WriteBuffer(data, sprite->m_image.GetData(), sprite->m_image.GetSize());
+
+					// Encode pixels using palette
+					const Image::RGBA* p = sprite->m_image.GetData();
+					for (uint32_t i = 0, count = sprite->m_image.GetWidth() * sprite->m_image.GetHeight(); i < count; i++, p++)
+					{
+						uint32_t c = *((const uint32_t*)p);
+						std::unordered_map<uint32_t, uint32_t>::const_iterator j = reversePalette.find(c);
+						assert(j != reversePalette.cend());
+						uint32_t index = j->second;
+						_WriteUInt32(data, index);
+					}		
 				}
 			}
 

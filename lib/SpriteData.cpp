@@ -58,7 +58,30 @@ namespace tpublic
 			size_t&					aBytesRemaining,
 			uint32_t&				aOut)
 		{
-			return _ReadBuffer(aPointer, aBytesRemaining, &aOut, sizeof(uint32_t));
+			uint64_t value = 0;
+			uint64_t offset = 0;
+
+			for (;;)
+			{
+				if(aBytesRemaining == 0)
+					return false;
+
+				uint64_t i = (uint64_t)*aPointer;
+				aPointer++;
+				aBytesRemaining--;
+
+				value |= (i & 0x7FULL) << offset;
+				offset += 7;
+
+				if ((i & 0x80ULL) == 0)
+					break;
+			}
+
+			if(value > (uint64_t)UINT32_MAX)
+				return false;
+
+			aOut = (uint32_t)value;
+			return true;
 		}
 
 	}
@@ -88,6 +111,22 @@ namespace tpublic
 
 		size_t bytesRemaining = m_data.size();
 		const uint8_t* p = &m_data[0];
+
+		uint32_t totalPixelCount = 0;
+		if (!_ReadUInt32(p, bytesRemaining, totalPixelCount))
+			return false;
+
+		m_rgbaData.resize((size_t)totalPixelCount);
+		size_t rgbaDataOffset = 0;
+
+		uint32_t paletteSize = 0;
+		if (!_ReadUInt32(p, bytesRemaining, paletteSize))
+			return false;
+
+		std::vector<uint32_t> palette;
+		palette.resize((size_t)paletteSize);
+		if(!_ReadBuffer(p, bytesRemaining, &palette[0], palette.size() * sizeof(uint32_t)))
+			return false;
 
 		uint32_t sheetCount = 0;
 		if(!_ReadUInt32(p, bytesRemaining, sheetCount))
@@ -135,9 +174,25 @@ namespace tpublic
 				if (sprite.m_sheetY + sprite.m_height > sheet->m_height)
 					return false;
 
-				sprite.m_rgba = (const RGBA*)p;
-				if(!_ReadBuffer(p, bytesRemaining, NULL, sprite.m_width * sprite.m_height * 4))
+				if(rgbaDataOffset + (size_t)(sprite.m_width * sprite.m_height) > m_rgbaData.size())
 					return false;
+
+				sprite.m_rgba = (const RGBA*)&m_rgbaData[rgbaDataOffset];
+
+				for(uint32_t k = 0, count = sprite.m_width * sprite.m_height; k < count; k++)
+				{
+					uint32_t paletteIndex = 0;
+					if (!_ReadUInt32(p, bytesRemaining, paletteIndex))
+						return false;
+
+					if(paletteIndex >= paletteSize)
+						return false;
+
+					uint32_t paletteRGBA = palette[paletteIndex];
+					assert((size_t)rgbaDataOffset < m_rgbaData.size());
+					RGBA& rgba = m_rgbaData[rgbaDataOffset++];
+					memcpy(&rgba, &paletteRGBA, sizeof(uint32_t));
+				}
 
 				sheet->m_sprites.push_back(sprite);
 			}

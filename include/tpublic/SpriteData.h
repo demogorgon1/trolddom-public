@@ -40,6 +40,7 @@ namespace tpublic
 		// Public data
 		std::vector<uint8_t>				m_data;
 		std::vector<std::unique_ptr<Sheet>>	m_sheets;
+		std::vector<RGBA>					m_rgbaData;
 	};
 
 }
