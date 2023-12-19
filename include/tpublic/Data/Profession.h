@@ -34,6 +34,8 @@ namespace tpublic
 				{
 					if(aChild->m_name == "string")
 						m_string = aChild->GetString();
+					else if(aChild->m_name == "icon")
+						m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 				});
@@ -48,6 +50,7 @@ namespace tpublic
 
 				aStream->WriteString(m_string);
 				aStream->WritePOD(m_type);
+				aStream->WriteUInt(m_iconSpriteId);
 			}
 
 			bool
@@ -59,9 +62,11 @@ namespace tpublic
 
 				if(!aStream->ReadString(m_string))
 					return false;
-				if(!aStream->ReadPOD(m_type))
+				if (!aStream->ReadPOD(m_type))
 					return false;
 				if(!ProfessionType::Validate(m_type))
+					return false;
+				if (!aStream->ReadUInt(m_iconSpriteId))
 					return false;
 				return true;
 			}
@@ -69,6 +74,7 @@ namespace tpublic
 			// Public data
 			std::string				m_string;
 			ProfessionType::Id		m_type;
+			uint32_t				m_iconSpriteId;
 		};
 
 	}

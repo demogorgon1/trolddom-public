@@ -77,6 +77,11 @@ sprites:
 	sprite icon_linen_bandage : { }
 	sprite icon_heavy_linen_bandage : { }
 	sprite icon_recently_bandaged : { }
+	sprite icon_herbalism : { }
+
+	cursor: { position: [ 0 64 ] }
+	sprite icon_first_aid : { }
+	sprite icon_mining : { }
 	
 }
 

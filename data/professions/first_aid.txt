@@ -1,6 +1,7 @@
 profession first_aid<secondary>:
 {
 	string: "First Aid"
+	icon: icon_first_aid
 }
 
 aura recently_bandaged:

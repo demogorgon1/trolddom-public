@@ -1,4 +1,5 @@
 profession herbalism<primary>:
 {
 	string: "Herbalism"
+	icon: icon_herbalism
 }
