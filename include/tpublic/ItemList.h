@@ -80,6 +80,8 @@ namespace tpublic
 		void				ForEach(
 								std::function<void(const ItemInstance&)>	aCallback) const;
 		size_t				GetSpace() const;
+		size_t				GetItemCount(
+								uint32_t									aItemId) const;
 
 		// Public data
 		std::vector<Entry>		m_entries;

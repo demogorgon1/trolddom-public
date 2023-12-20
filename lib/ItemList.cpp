@@ -384,5 +384,19 @@ namespace tpublic
 		return count;
 	}	
 
+	size_t				
+	ItemList::GetItemCount(
+		uint32_t									aItemId) const
+	{
+		size_t count = 0;
+		for (const Entry& t : m_entries)
+		{
+			if(t.m_item.IsSet() && t.m_item.m_itemId == aItemId)
+				count += (size_t)t.m_item.m_quantity;
+		}
+
+		return count;
+	}
+
 }
 

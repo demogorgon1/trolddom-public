@@ -11,18 +11,38 @@ profession_metrics:
 
 	skills:
 	{
-		skill_up_chance<-15>: 10
-		skill_up_chance<-14>: 20
-		skill_up_chance<-13>: 30
-		skill_up_chance<-12>: 40
-		skill_up_chance<-11>: 50
-		skill_up_chance<-10>: 60
-		skill_up_chance<-9>: 70
-		skill_up_chance<-8>: 80
-		skill_up_chance<-7>: 90
+		# Green
+		skill_up_chance<-29>: 10
+		skill_up_chance<-28>: 10
+		skill_up_chance<-27>: 10
+		skill_up_chance<-26>: 10
+		skill_up_chance<-25>: 20
+		skill_up_chance<-24>: 30
+		skill_up_chance<-23>: 40
+		skill_up_chance<-22>: 50
+		skill_up_chance<-21>: 60
+		skill_up_chance<-20>: 70
+		
+		# Yellow
+		skill_up_chance<-19>: 80
+		skill_up_chance<-18>: 82
+		skill_up_chance<-17>: 84
+		skill_up_chance<-16>: 86
+		skill_up_chance<-15>: 88
+		skill_up_chance<-14>: 90
+		skill_up_chance<-13>: 92
+		skill_up_chance<-12>: 94
+		skill_up_chance<-11>: 96
+		skill_up_chance<-10>: 98
+		
+		# Orange
+		skill_up_chance<-9>: 100
+		skill_up_chance<-8>: 100
+		skill_up_chance<-7>: 100
+		skill_up_chance<-6>: 100
 		skill_up_chance<-5>: 100
-		skill_up_chance<-4>: 100
-		skill_up_chance<-3>: 100
+		skill_up_chance<-4>: 100		
+		skill_up_chance<-3>: 100		
 		skill_up_chance<-2>: 100
 		skill_up_chance<-1>: 100
 		skill_up_chance<0>: 100		
