@@ -22,12 +22,19 @@ namespace tpublic
 			ABILITY_QUEUE_RESULT_FAILURE
 		};
 
+		struct ProfessionSkillUpEvent
+		{
+			uint32_t		m_professionId = 0;
+			uint32_t		m_skill = 0;
+		};
+
 		// Virtual interface
 		virtual AbilityQueueResult		AddAbility(
 											uint32_t				aSourceEntityInstanceId,
 											uint32_t				aTargetEntityInstanceId,
 											const Vec2&				aAOETarget,
-											const Data::Ability*	aAbility) = 0;
+											const Data::Ability*	aAbility,
+											ProfessionSkillUpEvent*	aOutProfessionSkillUpEvent) = 0;
 	};
 
 }

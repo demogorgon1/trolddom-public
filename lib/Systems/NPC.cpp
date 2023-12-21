@@ -222,7 +222,8 @@ namespace tpublic::Systems
 					aEntityInstanceId, 
 					npc->m_castInProgress->m_targetEntityInstanceId,
 					npc->m_castInProgress->m_aoeTarget,
-					GetManifest()->GetById<tpublic::Data::Ability>(npc->m_castInProgress->m_abilityId));
+					GetManifest()->GetById<tpublic::Data::Ability>(npc->m_castInProgress->m_abilityId),
+					NULL);
 				npc->m_castInProgress.reset();
 			}
 
@@ -432,7 +433,7 @@ namespace tpublic::Systems
 							}
 							else
 							{
-								aContext->m_abilityQueue->AddAbility(aEntityInstanceId, target->GetEntityInstanceId(), Vec2(), useAbility);
+								aContext->m_abilityQueue->AddAbility(aEntityInstanceId, target->GetEntityInstanceId(), Vec2(), useAbility, NULL);
 							}
 						}
 						else if(npc->m_moveCooldownUntilTick < aContext->m_tick && distanceSquared > 1)

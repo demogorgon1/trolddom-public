@@ -113,7 +113,7 @@ ${
 	_aura: consumable_heavy_linen_bandage
 	_materials: { item_linen_cloth: 2 } 
 	_item: { consumable_heavy_linen_bandage: 1 } 
-	_skill: 25
+	_skill: 20
 }
 
 ability consumable_heavy_linen_bandage_tick: !ABILITY_BANDAGE_TICK {}
