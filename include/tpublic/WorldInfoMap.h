@@ -14,22 +14,22 @@ namespace tpublic
 		{
 			bool
 			operator ==(
-				const Entry&					aOther) const
+				const Entry&						aOther) const
 			{
 				return m_level == aOther.m_level && m_zoneId == aOther.m_zoneId;
 			}
 
 			void			
 			ToStream(
-				IWriter*						aWriter) const
+				IWriter*							aWriter) const
 			{
 				aWriter->WriteUInt(m_level);
 				aWriter->WriteUInt(m_zoneId);
 			}
 			
 			bool			
-			FromStream(
-				IReader*						aReader)
+			FromStream(	
+				IReader*							aReader)
 			{
 				if (!aReader->ReadUInt(m_level))
 					return false;
@@ -43,19 +43,43 @@ namespace tpublic
 			uint32_t				m_zoneId = 0;
 		};		
 
-		void			CopyFrom(
-							const WorldInfoMap*	aWorldInfoMap);
-		void			Build(
-							int32_t				aWidth,
-							int32_t				aHeight,
-							const uint32_t*		aLevelMap,
-							const uint32_t*		aZoneMap);
-		const Entry&	Get(
-							const Vec2&			aPosition) const;
-		void			ToStream(
-							IWriter*			aWriter) const;
-		bool			FromStream(
-							IReader*			aReader);
+		struct ZoneOutline
+		{
+			void			
+			ToStream(
+				IWriter*							aWriter) const
+			{
+				aWriter->WriteObjects(m_positions);
+			}
+			
+			bool			
+			FromStream(
+				IReader*							aReader)
+			{
+				if(!aReader->ReadObjects(m_positions))
+					return false;
+				return true;
+			}
+
+			// Public data
+			std::vector<Vec2>		m_positions;
+		};
+
+		void				CopyFrom(
+								const WorldInfoMap*	aWorldInfoMap);
+		void				Build(
+								int32_t				aWidth,
+								int32_t				aHeight,
+								const uint32_t*		aLevelMap,
+								const uint32_t*		aZoneMap);
+		const Entry&		Get(
+								const Vec2&			aPosition) const;
+		const ZoneOutline*	GetZoneOutline(
+								uint32_t			aZoneId) const;
+		void				ToStream(
+								IWriter*			aWriter) const;
+		bool				FromStream(
+								IReader*			aReader);
 	
 	private:
 
@@ -65,7 +89,7 @@ namespace tpublic
 		{
 			void			
 			ToStream(
-				IWriter*						aWriter) const
+				IWriter*							aWriter) const
 			{
 				aWriter->WriteBool(m_hasDetails);
 				if(!m_hasDetails)
@@ -76,7 +100,7 @@ namespace tpublic
 			
 			bool			
 			FromStream(
-				IReader*						aReader)
+				IReader*							aReader)
 			{
 				if(!aReader->ReadBool(m_hasDetails))
 					return false;
@@ -108,7 +132,7 @@ namespace tpublic
 
 			void			
 			ToStream(
-				IWriter*						aWriter) const
+				IWriter*							aWriter) const
 			{
 				for(int32_t i = 0; i < TOP_LEVEL_CELL_SIZE * TOP_LEVEL_CELL_SIZE; i++)
 					m_entries[i].ToStream(aWriter);
@@ -116,7 +140,7 @@ namespace tpublic
 			
 			bool			
 			FromStream(
-				IReader*						aReader)
+				IReader*							aReader)
 			{
 				for (int32_t i = 0; i < TOP_LEVEL_CELL_SIZE * TOP_LEVEL_CELL_SIZE; i++)
 				{
@@ -138,6 +162,9 @@ namespace tpublic
 		Vec2						m_topLevelCellsSize;
 
 		Entry						m_blankEntry;
+
+		typedef std::unordered_map<uint32_t, std::unique_ptr<ZoneOutline>> ZoneOutlineTable;
+		ZoneOutlineTable			m_zoneOutlineTable;
 	};
 
 }

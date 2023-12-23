@@ -23,7 +23,8 @@ player_components:
 	threat_source
 	trade
 	visible_auras
-	wallet
 	vendor_buyback
+	wallet
+	zone_discovery	
 ]
 

@@ -43,6 +43,7 @@ namespace tpublic
 			ID_RECENT_ACHIEVEMENTS,
 			ID_ACHIEVEMENTS,
 			ID_GUILD_NAME,
+			ID_ZONE_DISCOVERY,
 
 			NUM_IDS
 		};
@@ -83,7 +84,8 @@ namespace tpublic
 			"player_stats",
 			"recent_achievements",
 			"achievements",
-			"guild_name"
+			"guild_name",
+			"zone_discovery"
 		};		
 
 		static_assert(sizeof(COMPONENT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

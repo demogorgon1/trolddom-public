@@ -33,6 +33,7 @@
 #include <tpublic/Components/VendorBuyback.h>
 #include <tpublic/Components/VisibleAuras.h>
 #include <tpublic/Components/Wallet.h>
+#include <tpublic/Components/ZoneDiscovery.h>
 
 #include <tpublic/ComponentManager.h>
 
@@ -74,6 +75,7 @@ namespace tpublic
 		_Register<Components::VendorBuyback>();
 		_Register<Components::VisibleAuras>();
 		_Register<Components::Wallet>();
+		_Register<Components::ZoneDiscovery>();
 	}
 
 	ComponentManager::~ComponentManager()
