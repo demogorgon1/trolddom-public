@@ -155,6 +155,7 @@ map test_world:
 	view_attenuation: 0
 	view_attenuation_bias: 0
 	view_hidden_visibility: 35	
+	has_overview_map: true
 	#image_output: "test-world.png"
 
 	layers:

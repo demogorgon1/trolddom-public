@@ -484,6 +484,7 @@ namespace tpublic
 		std::unique_ptr<Generator>					m_generator;
 		std::unique_ptr<WorldInfoMap>				m_worldInfoMap;
 		uint32_t									m_level;
+		bool										m_hasOverviewMap;
 
 		struct SourceLayer
 		{

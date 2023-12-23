@@ -64,6 +64,7 @@ namespace tpublic
 		, m_viewHiddenVisibility(0)
 		, m_walkableBits(NULL)
 		, m_blockLineOfSightBits(NULL)
+		, m_hasOverviewMap(false)
 	{
 		aSource->GetObject()->ForEachChild([&](
 			const SourceNode* aNode)
@@ -98,6 +99,8 @@ namespace tpublic
 				m_seed.FromSource(aNode);
 			else if (aNode->m_name == "level")
 				m_level = aNode->GetUInt32();
+			else if(aNode->m_name == "has_overview_map")
+				m_hasOverviewMap = aNode->GetBool();
 			else
 				TP_VERIFY(false, aNode->m_debugInfo, "'%s' is not a valid item.", aNode->m_name.c_str());
 		});
@@ -267,6 +270,7 @@ namespace tpublic
 		m_seed.ToStream(aStream);
 		aStream->WriteOptionalObjectPointer(m_worldInfoMap);
 		aStream->WriteUInt(m_level);
+		aStream->WriteBool(m_hasOverviewMap);
 	}
 
 	bool	
@@ -331,6 +335,8 @@ namespace tpublic
 		if (!aStream->ReadOptionalObjectPointer(m_worldInfoMap))
 			return false;
 		if(!aStream->ReadUInt(m_level))	
+			return false;
+		if (!aStream->ReadBool(m_hasOverviewMap))
 			return false;
 		return true;
 	}
@@ -399,6 +405,8 @@ namespace tpublic
 		m_viewAttenuation = aMapData->m_viewAttenuation;
 		m_viewAttenuationBias = aMapData->m_viewAttenuationBias;
 		m_viewHiddenVisibility = aMapData->m_viewHiddenVisibility;
+		m_level = aMapData->m_level;
+		m_hasOverviewMap = aMapData->m_hasOverviewMap;
 
 		m_entitySpawns = aMapData->m_entitySpawns;
 		m_playerSpawns = aMapData->m_playerSpawns;
