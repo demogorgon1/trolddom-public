@@ -46,6 +46,15 @@ sprites:
 	sprite wood_floor: { flags: [ tile_walkable ] tile_layer: 10 }
 	sprite wood_solid_wall: { flags: [ tile_block_line_of_sight ] tile_layer: 10 }
 	sprite wood_solid_wall_face: { flags: [ tile_block_line_of_sight ] tile_layer: 10 }
+	sprite roof_nw: { tile_layer: 10 }
+	sprite roof_n: { tile_layer: 10 }
+	sprite roof_ne: { tile_layer: 10 }
+	sprite roof_w: { tile_layer: 10 }
+	sprite roof: { tile_layer: 10 }
+	sprite roof_e: { tile_layer: 10 }
+	sprite roof_sw: { tile_layer: 10 }
+	sprite roof_s: { tile_layer: 10 }
+	sprite roof_se: { tile_layer: 10 }
 
 	cursor: { position: [ 0 16 ] }
 	

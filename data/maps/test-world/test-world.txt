@@ -103,7 +103,7 @@ map_palette .tiles:
 	tile wood_floor: [ 200 200 0 ] 
 	tile wood_solid_wall: [ 0 200 200 ]
 	tile wood_solid_wall_face: [ 100 200 200 ]
-
+	tile roof: [ 255 0 0 ]
 }
 
 map_palette .stuff:
@@ -179,6 +179,12 @@ map test_world:
 			palettes:	[ .zones ]
 			source:		"test-world-3.png"
 		}				
+		
+		{ 
+			palettes: 	[ .tiles ]
+			source:		"test-world-4.png"
+			cover: 		true
+		}
 	]
 }
  

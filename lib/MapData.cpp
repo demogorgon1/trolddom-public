@@ -139,6 +139,10 @@ namespace tpublic
 			zoneMap.resize(m_width * m_height, 0);
 			bool hasZoneMap = false;
 
+			std::vector<uint32_t> coverMap;
+			coverMap.resize(m_width * m_height, 0);
+			bool hasCoverMap = false;
+
 			// Process layers
 			for(std::unique_ptr<SourceLayer>& layer : m_sourceLayers)
 			{
@@ -179,37 +183,46 @@ namespace tpublic
 								int32_t mapY = y - layer->m_y;
 								assert(mapX >= 0 && mapY >= 0 && mapX < m_width && mapY < m_height);
 
-								switch(entry->m_type)
+								if(layer->m_cover)
 								{
-								case Data::MapPalette::ENTRY_TYPE_TILE:
-									m_tileMap[mapX + mapY * m_width] = entry->m_value;
-									break;
+									TP_VERIFY(entry->m_type == Data::MapPalette::ENTRY_TYPE_TILE, layer->m_debugInfo, "Cover layer can only have tiles.");
+									coverMap[mapX + mapY * m_width] = entry->m_value;
+									hasCoverMap = true;
+								}
+								else
+								{
+									switch(entry->m_type)
+									{
+									case Data::MapPalette::ENTRY_TYPE_TILE:
+										m_tileMap[mapX + mapY * m_width] = entry->m_value;
+										break;
 
-								case Data::MapPalette::ENTRY_TYPE_ENTITY_SPAWN:
-									m_entitySpawns.push_back({ mapX, mapY, entry->m_value });
-									break;
+									case Data::MapPalette::ENTRY_TYPE_ENTITY_SPAWN:
+										m_entitySpawns.push_back({ mapX, mapY, entry->m_value });
+										break;
 
-								case Data::MapPalette::ENTRY_TYPE_PLAYER_SPAWN:
-									m_playerSpawns.push_back({ mapX, mapY, entry->m_value });
-									break;
+									case Data::MapPalette::ENTRY_TYPE_PLAYER_SPAWN:
+										m_playerSpawns.push_back({ mapX, mapY, entry->m_value });
+										break;
 
-								case Data::MapPalette::ENTRY_TYPE_PORTAL:
-									m_portals.push_back({ mapX, mapY, entry->m_value });
-									break;
+									case Data::MapPalette::ENTRY_TYPE_PORTAL:
+										m_portals.push_back({ mapX, mapY, entry->m_value });
+										break;
 
-								case Data::MapPalette::ENTRY_TYPE_LEVEL:
-									levelMap[mapX + mapY * m_width] = entry->m_value;
-									hasLevelMap = true;
-									break;
+									case Data::MapPalette::ENTRY_TYPE_LEVEL:
+										levelMap[mapX + mapY * m_width] = entry->m_value;
+										hasLevelMap = true;
+										break;
 
-								case Data::MapPalette::ENTRY_TYPE_ZONE:
-									zoneMap[mapX + mapY * m_width] = entry->m_value;
-									hasZoneMap = true;
-									break;
+									case Data::MapPalette::ENTRY_TYPE_ZONE:
+										zoneMap[mapX + mapY * m_width] = entry->m_value;
+										hasZoneMap = true;
+										break;
 
-								default:
-									assert(false);
-									break;
+									default:
+										assert(false);
+										break;
+									}
 								}
 							}
 
@@ -224,6 +237,12 @@ namespace tpublic
 			{
 				m_worldInfoMap = std::make_unique<WorldInfoMap>();
 				m_worldInfoMap->Build(m_width, m_height, &levelMap[0], &zoneMap[0]);
+			}
+
+			if(hasCoverMap)
+			{
+				m_mapCovers = std::make_unique<MapCovers>();
+				m_mapCovers->Build(m_width, m_height, &coverMap[0]);
 			}
 		}
 	}
@@ -271,6 +290,7 @@ namespace tpublic
 		aStream->WriteOptionalObjectPointer(m_worldInfoMap);
 		aStream->WriteUInt(m_level);
 		aStream->WriteBool(m_hasOverviewMap);
+		aStream->WriteOptionalObjectPointer(m_mapCovers);
 	}
 
 	bool	
@@ -337,6 +357,8 @@ namespace tpublic
 		if(!aStream->ReadUInt(m_level))	
 			return false;
 		if (!aStream->ReadBool(m_hasOverviewMap))
+			return false;
+		if (!aStream->ReadOptionalObjectPointer(m_mapCovers))
 			return false;
 		return true;
 	}
@@ -437,6 +459,14 @@ namespace tpublic
 			m_worldInfoMap = std::make_unique<WorldInfoMap>();
 			m_worldInfoMap->CopyFrom(aMapData->m_worldInfoMap.get());
 		}
+
+		if(aMapData->m_mapCovers)
+		{
+			assert(!m_mapCovers);
+
+			m_mapCovers = std::make_unique<MapCovers>();
+			m_mapCovers->CopyFrom(aMapData->m_mapCovers.get());
+		}
 	}
 
 	//--------------------------------------------------------------------
@@ -469,10 +499,14 @@ namespace tpublic
 				{
 					sourcePath = aNode->m_realPath + "/" + aNode->m_value;
 				}
-				else if (aNode->GetArray()->m_name == "offset" && aNode->m_children.size() == 2)
+				else if (aNode->m_name == "offset" && aNode->GetArray()->m_children.size() == 2)
 				{
 					layer->m_x = aNode->m_children[0]->GetInt32();
 					layer->m_y = aNode->m_children[1]->GetInt32();
+				}
+				else if (aNode->m_name == "cover")
+				{
+					layer->m_cover = aNode->GetBool();
 				}
 				else
 				{

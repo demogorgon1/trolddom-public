@@ -3,6 +3,7 @@
 #include "EntityState.h"
 #include "IReader.h"
 #include "IWriter.h"
+#include "MapCovers.h"
 #include "MapGeneratorBase.h"
 #include "MapGeneratorFactory.h"
 #include "MapType.h"
@@ -485,6 +486,7 @@ namespace tpublic
 		std::unique_ptr<WorldInfoMap>				m_worldInfoMap;
 		uint32_t									m_level;
 		bool										m_hasOverviewMap;
+		std::unique_ptr<MapCovers>					m_mapCovers;
 
 		struct SourceLayer
 		{
@@ -502,6 +504,7 @@ namespace tpublic
 				, m_height(0)
 				, m_rgb(NULL)
 				, m_mask(NULL)
+				, m_cover(false)
 			{
 
 			}
@@ -522,6 +525,7 @@ namespace tpublic
 			int32_t									m_y;
 			int32_t									m_width;
 			int32_t									m_height;
+			bool									m_cover;
 			DataErrorHandling::DebugInfo			m_debugInfo;
 		};
 
