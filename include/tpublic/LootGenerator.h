@@ -8,11 +8,18 @@ namespace tpublic
 		struct Lootable;
 	}
 
+	namespace Data
+	{
+		struct LootTable;
+	}
+
 	class Manifest;
 
 	class LootGenerator
 	{
 	public:
+		typedef std::function<void(const tpublic::ItemInstance&)> ItemCallback;
+
 					LootGenerator(
 						const Manifest*				aManifest);			
 					~LootGenerator();
@@ -23,6 +30,11 @@ namespace tpublic
 						uint32_t					aCreatureTypeId,
 						bool						aIsElite,
 						Components::Lootable*		aLootable) const;
+		void		GenerateItems(
+						std::mt19937&				aRandom,
+						uint32_t					aLevel,
+						const Data::LootTable*		aLootTable,
+						ItemCallback				aItemCallback) const;						
 
 	private:
 

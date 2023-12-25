@@ -81,7 +81,7 @@ namespace tpublic::Systems
 				const EntityInstance* aEntityInstance)
 			{
 				if(aEntityInstance->GetEntityInstanceId() != aEntityInstanceId && aEntityInstance->GetEntityInstanceId() != owner->m_ownerEntityInstanceId)
-					aContext->m_abilityQueue->AddAbility(aEntityInstanceId, aEntityInstance->GetEntityInstanceId(), tpublic::Vec2(), ability, NULL);
+					aContext->m_abilityQueue->AddAbility(aEntityInstanceId, aEntityInstance->GetEntityInstanceId(), tpublic::Vec2(), ability);
 
 				return false; // Don't stop
 			});

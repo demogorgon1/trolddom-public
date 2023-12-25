@@ -40,7 +40,10 @@ namespace tpublic
 			}
 
 			// Public data
-			ItemList						m_itemList;
+			ItemList							m_itemList;
+
+			// Not serialized
+			std::vector<tpublic::ItemInstance>	m_itemLootNotifications;
 		};
 	}
 

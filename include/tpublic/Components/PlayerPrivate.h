@@ -85,6 +85,14 @@ namespace tpublic
 			bool											m_positionUpdatedOnServer = false;
 			bool											m_pvpCombatEvent = false;
 			int32_t											m_lastPVPCombatEventTick = 0;
+
+			struct ProfessionSkillUseEvent
+			{
+				uint32_t									m_professionId = 0;
+				uint32_t									m_professionSkill = 0;
+			};
+
+			std::vector<ProfessionSkillUseEvent>			m_professionSkillUseEvents;
 		};
 	}
 

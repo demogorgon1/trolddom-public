@@ -22,7 +22,7 @@ namespace tpublic
 		{
 			UIntRange levelRange = aItem->m_levelRange;
 
-			if (levelRange.m_min == 0)
+			if (levelRange.m_min == 0 && aItem->m_requiredLevel > 0)
 			{
 				levelRange.m_max = aItem->m_requiredLevel + 1;
 				levelRange.m_min = aItem->m_requiredLevel - 1;
@@ -63,33 +63,53 @@ namespace tpublic
 	{
 		const Data::LootTable* lootTable = m_manifest->GetById<tpublic::Data::LootTable>(aLootable->m_lootTableId);
 
-		if(lootTable->m_cash.has_value())
+		// Cash
 		{
-			std::uniform_int_distribution<int64_t> distribution(lootTable->m_cash->m_min, lootTable->m_cash->m_max);
-			aLootable->m_availableCash = distribution(aRandom);
-			aLootable->m_cash = aLootable->m_availableCash > 0;
-		}
-		else if(aCreatureTypeId != 0)
-		{
-			if(m_manifest->GetById<tpublic::Data::CreatureType>(aCreatureTypeId)->m_flags & Data::CreatureType::FLAG_CASH_LOOT)
+			if(lootTable->m_cash.has_value())
 			{
-				const NPCMetrics::Level* npcMetricsLevel = m_manifest->m_npcMetrics.GetLevel(aLevel);
-				if (npcMetricsLevel != NULL)
+				std::uniform_int_distribution<int64_t> distribution(lootTable->m_cash->m_min, lootTable->m_cash->m_max);
+				aLootable->m_availableCash = distribution(aRandom);
+				aLootable->m_cash = aLootable->m_availableCash > 0;
+			}
+			else if(aCreatureTypeId != 0)
+			{
+				if(m_manifest->GetById<tpublic::Data::CreatureType>(aCreatureTypeId)->m_flags & Data::CreatureType::FLAG_CASH_LOOT)
 				{
-					std::uniform_int_distribution<uint32_t> distribution(npcMetricsLevel->m_cash.m_min, npcMetricsLevel->m_cash.m_max);
-					aLootable->m_availableCash = (int64_t)distribution(aRandom);
-
-					if(aLootable->m_availableCash > 0 && aIsElite)
+					const NPCMetrics::Level* npcMetricsLevel = m_manifest->m_npcMetrics.GetLevel(aLevel);
+					if (npcMetricsLevel != NULL)
 					{
-						aLootable->m_availableCash = (int64_t)((float)aLootable->m_availableCash * npcMetricsLevel->m_eliteCash);
-					}
+						std::uniform_int_distribution<uint32_t> distribution(npcMetricsLevel->m_cash.m_min, npcMetricsLevel->m_cash.m_max);
+						aLootable->m_availableCash = (int64_t)distribution(aRandom);
 
-					aLootable->m_cash = aLootable->m_availableCash > 0;						
+						if(aLootable->m_availableCash > 0 && aIsElite)
+						{
+							aLootable->m_availableCash = (int64_t)((float)aLootable->m_availableCash * npcMetricsLevel->m_eliteCash);
+						}
+
+						aLootable->m_cash = aLootable->m_availableCash > 0;						
+					}
 				}
 			}
 		}
 
-		for(const std::unique_ptr<Data::LootTable::Slot>& slot : lootTable->m_slots)
+		// Items
+		GenerateItems(aRandom, aLevel, lootTable, [aLootable](
+			const tpublic::ItemInstance& aItemInstance)
+		{
+			Components::Lootable::AvailableLoot loot;
+			loot.m_itemInstance = aItemInstance;
+			aLootable->m_availableLoot.push_back(loot);
+		});
+	}
+
+	void		
+	LootGenerator::GenerateItems(
+		std::mt19937&				aRandom,
+		uint32_t					aLevel,
+		const Data::LootTable*		aLootTable,
+		ItemCallback				aItemCallback) const
+	{	
+		for(const std::unique_ptr<Data::LootTable::Slot>& slot : aLootTable->m_slots)
 		{
 			uint32_t totalWeight = 0;
 
@@ -118,7 +138,7 @@ namespace tpublic
 				if(i != m_groups.end())
 				{
 					const Group* group = i->second.get();
-					const LevelBucket* levelBucket = group->GetLevelBucket(aLevel);
+					const LevelBucket* levelBucket = aLevel != 0 ? group->GetLevelBucket(aLevel) : NULL;
 
 					uint32_t itemId = 0;
 
@@ -142,10 +162,10 @@ namespace tpublic
 
 					if(itemId != 0)
 					{
-						Components::Lootable::AvailableLoot loot;
-						loot.m_itemInstance.m_itemId = itemId;
-						loot.m_itemInstance.m_seed = aRandom();
-						aLootable->m_availableLoot.push_back(loot);
+						tpublic::ItemInstance itemInstance;
+						itemInstance.m_itemId = itemId;
+						itemInstance.m_seed = aRandom();
+						aItemCallback(itemInstance);
 					}
 				}
 			}						
