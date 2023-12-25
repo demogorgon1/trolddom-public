@@ -38,6 +38,18 @@ ability push:
 	}
 }
 
+ability open:
+{
+	string: "Open"	
+	flags: [ target_other hidden ]	
+	states: [ default in_combat ]
+	icon: icon_stuff
+	
+	direct_effect open:
+	{
+	}
+}
+
 ability strike:
 {
 	string: "Strike"

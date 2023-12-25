@@ -39,6 +39,14 @@ namespace tpublic
 			return true;
 		}
 
+		int32_t
+		DistanceSquared(
+			const Vec2&				aOther) const
+		{
+			Vec2 t = { m_x - aOther.m_x, m_y - aOther.m_y };
+			return t.m_x * t.m_x + t.m_y * t.m_y;
+		}
+
 		bool
 		operator==(
 			const Vec2& aOther) const

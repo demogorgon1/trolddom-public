@@ -54,7 +54,7 @@ namespace tpublic
 	}
 
 	void		
-	LootGenerator::Generate(
+	LootGenerator::GenerateLootable(
 		std::mt19937&			aRandom,
 		uint32_t				aLevel,
 		uint32_t				aCreatureTypeId,

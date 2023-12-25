@@ -10,14 +10,16 @@ namespace tpublic
 
 	class EntityInstance;
 
-	namespace AbilityRequirements
+	namespace Requirements
 	{
 
-		bool	Check(
+		bool	CheckAbility(
 					const Data::Ability*				aAbility,			
 					const EntityInstance*				aSelf,
 					const EntityInstance*				aTarget);
-
+		bool	CheckOpenable(
+					const EntityInstance*				aSelf,
+					const EntityInstance*				aTarget);
 	}
 
 }

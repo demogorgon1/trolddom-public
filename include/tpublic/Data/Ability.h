@@ -36,7 +36,8 @@ namespace tpublic
 				FLAG_SPELL						= 0x00004000,
 				FLAG_ALWAYS_IN_RANGE			= 0x00008000,
 				FLAG_ALWAYS_IN_LINE_OF_SIGHT	= 0x00010000,
-				FLAG_CRAFTING					= 0x00020000
+				FLAG_CRAFTING					= 0x00020000,
+				FLAG_HIDDEN						= 0x00040000
 			};
 
 			static inline Resource::Id
@@ -93,6 +94,8 @@ namespace tpublic
 						flags |= FLAG_ALWAYS_IN_LINE_OF_SIGHT;
 					else if (strcmp(identifier, "crafting") == 0)
 						flags |= FLAG_CRAFTING;
+					else if (strcmp(identifier, "hidden") == 0)
+						flags |= FLAG_HIDDEN;
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid ability flag.", identifier);
 				});
@@ -417,6 +420,7 @@ namespace tpublic
 			bool AlwaysInLineOfSight() const { return m_flags & FLAG_ALWAYS_IN_LINE_OF_SIGHT; }
 			bool IsInstantMelee() const { return m_range == 1 && m_castTime == 0; }
 			bool IsCrafting() const { return m_flags & FLAG_CRAFTING; }
+			bool IsHidden() const { return m_flags & FLAG_HIDDEN; }
 			bool IsChanneled() const { return m_channelTicks != 0 && m_channelTickAbilityId != 0; }
 			
 			bool 

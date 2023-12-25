@@ -5,6 +5,7 @@
 #include "Systems/HealthRegen.h"
 #include "Systems/ManaRegen.h"
 #include "Systems/NPC.h"
+#include "Systems/Openable.h"
 
 #include "System.h"
 
@@ -25,6 +26,7 @@ namespace tpublic
 			_Register<Systems::HealthRegen>();
 			_Register<Systems::ManaRegen>();
 			_Register<Systems::NPC>();
+			_Register<Systems::Openable>();
 		}
 
 		~SystemFactory()
@@ -57,3 +59,4 @@ namespace tpublic
 	};
 
 }
+

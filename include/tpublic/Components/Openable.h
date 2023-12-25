@@ -80,7 +80,10 @@ namespace tpublic
 				FIELD_REQUIRED_ITEM_ID,
 				FIELD_VERB,
 				FIELD_REQUIRED_PROFESSION_ID,
-				FIELD_REQUIRED_PROFESSION_SKILL
+				FIELD_REQUIRED_PROFESSION_SKILL,
+				FIELD_RANGE,
+				FIELD_DESPAWN,
+				FIELD_OPENED
 			};
 
 			static void
@@ -92,6 +95,9 @@ namespace tpublic
 				aSchema->DefineCustomObject<Verb>(FIELD_VERB, "verb", offsetof(Openable, m_verb));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_REQUIRED_PROFESSION_ID, "required_profession", offsetof(Openable, m_requiredProfessionId))->SetDataType(DataType::ID_PROFESSION);
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_REQUIRED_PROFESSION_SKILL, "required_profession_skill", offsetof(Openable, m_requiredProfessionSkill));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_RANGE, "range", offsetof(Openable, m_range));
+				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_DESPAWN, "despawn", offsetof(Openable, m_despawn));
+				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_OPENED, NULL, offsetof(Openable, m_opened));
 			}
 
 			// Public data
@@ -100,6 +106,9 @@ namespace tpublic
 			Verb					m_verb;
 			uint32_t				m_requiredProfessionId = 0;
 			uint32_t				m_requiredProfessionSkill = 0;
+			uint32_t				m_range = 1;
+			bool					m_despawn = false;
+			bool					m_opened = false;
 		};
 
 	}

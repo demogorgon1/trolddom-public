@@ -87,6 +87,7 @@ sprites:
 	sprite icon_copper : { }
 	sprite icon_iron : { }
 	sprite icon_pickaxe : { }
+	sprite icon_stuff : { }
 	
 }
 

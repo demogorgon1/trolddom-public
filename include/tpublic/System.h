@@ -15,6 +15,7 @@ namespace tpublic
 			ID_ENVIRONMENT,
 			ID_HEALTH_REGEN,
 			ID_MANA_REGEN,
+			ID_OPENABLE,
 
 			NUM_IDS
 		};
@@ -27,7 +28,8 @@ namespace tpublic
 			"npc",
 			"environment",
 			"health_regen",
-			"mana_regen"
+			"mana_regen",
+			"openable"
 		};
 
 		static_assert(sizeof(SYSTEM_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

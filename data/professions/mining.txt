@@ -29,10 +29,11 @@ loot_table .mining_copper:
 entity mining_copper_vein:
 {
 	string: "Copper Vein"	
+	systems: [ openable ]
 	components:
 	{
 		position: { }		
-		openable: { required_profession: mining required_profession_skill: 0 required_item: weapon_pick_axe loot_table: .mining_copper }
+		openable: { required_profession: mining required_profession_skill: 0 required_item: weapon_pick_axe loot_table: .mining_copper verb: mine range: 1 despawn: true }
 		sprite: { animations: [ { states: [ default ] frames: [ copper_vein ] z_offset: -3 } ] }		
 	}
 }
@@ -62,10 +63,11 @@ loot_table .mining_iron:
 entity mining_iron_vein:
 {
 	string: "Iron Vein"	
+	systems: [ openable ]
 	components:
 	{
 		position: { }		
-		openable: { required_profession: mining required_profession_skill: 20 required_item: weapon_pick_axe loot_table: .mining_iron }
+		openable: { required_profession: mining required_profession_skill: 20 required_item: weapon_pick_axe loot_table: .mining_iron verb: mine range: 1 despawn: true }
 		sprite: { animations: [ { states: [ default ] frames: [ iron_vein ] z_offset: -3 } ] }		
 	}
 }

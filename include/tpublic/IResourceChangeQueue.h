@@ -31,6 +31,9 @@ namespace tpublic
 		virtual void		AddPushRequest(
 								uint32_t						aSourceEntityInstanceId,
 								uint32_t						aTargetEntityInstanceId) = 0;
+		virtual void		AddOpenRequest(
+								uint32_t						aSourceEntityInstanceId,
+								uint32_t						aTargetEntityInstanceId) = 0;
 	};
 
 }

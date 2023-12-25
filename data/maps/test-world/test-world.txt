@@ -21,15 +21,20 @@ map_entity_spawn .wildlife:
 
 map_entity_spawn .mining:
 {	
+	spawn_timer: { despawn_required: true min_delay: 600 cooldown_range_min: 1200 cooldown_range_max: 4800 }
+
 	entity mining_copper_vein: { level: [ 1 6 ] weight: 1 init_state: default } 
 	entity mining_iron_vein: { level: [ 4 10 ] weight: 1 init_state: default } 
 }
 
 map_entity_spawn .herbalism:
 {	
-	entity herbalism_dewleaf: { level: [ 1 6 ] weight: 1 init_state: default } 
+	spawn_timer: { despawn_required: true min_delay: 600 cooldown_range_min: 1200 cooldown_range_max: 4800 }
+
+	entity herbalism_dewleaf: { level: [ 1 6 ] weight: 1 init_state: default }
 	entity herbalism_mistflower: { level: [ 4 10 ] weight: 1 init_state: default } 
 }
+
 map_entity_spawn .sylas:
 {
 	entity .sylas: { weight: 1 }

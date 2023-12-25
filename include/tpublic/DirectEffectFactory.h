@@ -4,6 +4,7 @@
 #include "DirectEffects/Damage.h"
 #include "DirectEffects/Heal.h"
 #include "DirectEffects/Kill.h"
+#include "DirectEffects/Open.h"
 #include "DirectEffects/Push.h"
 #include "DirectEffects/Threat.h"
 
@@ -21,6 +22,7 @@ namespace tpublic
 			_Register<DirectEffects::Damage>();
 			_Register<DirectEffects::Heal>();
 			_Register<DirectEffects::Kill>();
+			_Register<DirectEffects::Open>();
 			_Register<DirectEffects::Push>();
 			_Register<DirectEffects::Threat>();
 		}

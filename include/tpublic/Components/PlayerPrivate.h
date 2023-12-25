@@ -4,6 +4,7 @@
 #include "../ComponentBase.h"
 #include "../EventHistory.h"
 #include "../PlayerProfessions.h"
+#include "../Vec2.h"
 
 namespace tpublic
 {

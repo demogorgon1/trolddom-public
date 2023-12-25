@@ -17,7 +17,7 @@ namespace tpublic
 						const Manifest*				aManifest);			
 					~LootGenerator();
 
-		void		Generate(
+		void		GenerateLootable(
 						std::mt19937&				aRandom,
 						uint32_t					aLevel,
 						uint32_t					aCreatureTypeId,

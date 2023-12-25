@@ -29,10 +29,11 @@ loot_table .herbalism_dewleaf:
 entity herbalism_dewleaf:
 {
 	string: "Dewleaf"	
+	systems: [ openable ]
 	components:
 	{
 		position: { }		
-		openable: { required_profession: herbalism required_profession_skill: 0 loot_table: .herbalism_dewleaf }
+		openable: { required_profession: herbalism required_profession_skill: 0 loot_table: .herbalism_dewleaf verb: pick range: 1 despawn: true }
 		sprite: { animations: [ { states: [ default ] frames: [ dewleaf ] z_offset: -3 } ] }		
 	}
 }
@@ -62,10 +63,11 @@ loot_table .herbalism_mistflower:
 entity herbalism_mistflower:
 {
 	string: "Mistflower"	
+	systems: [ openable ]
 	components:
 	{
 		position: { }		
-		openable: { required_profession: herbalism required_profession_skill: 20 loot_table: .herbalism_mistflower }
+		openable: { required_profession: herbalism required_profession_skill: 20 loot_table: .herbalism_mistflower verb: pick range: 1 despawn: true } 
 		sprite: { animations: [ { states: [ default ] frames: [ mistflower ] z_offset: -3 } ] }		
 	}
 }
