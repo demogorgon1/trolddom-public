@@ -3,3 +3,69 @@ profession mining<primary>:
 	string: "Mining"
 	icon: icon_mining
 }
+
+#############################################################################
+# Copper
+
+loot_group .mining_copper: { }
+
+item item_copper_ore:
+{
+	item_level: 1
+	icon: icon_copper
+	root: { name: "Copper Ore" }
+	loot_groups: [ .mining_copper ]
+	stack: 20	
+}
+
+loot_table .mining_copper:
+{
+	slots:
+	[
+		{ possibility: { weight: 1 loot_group: .mining_copper } }		
+	]	
+}
+
+entity mining_copper_vein:
+{
+	string: "Copper Vein"	
+	components:
+	{
+		position: { }		
+		openable: { required_profession: mining required_profession_skill: 0 required_item: weapon_pick_axe loot_table: .mining_copper }
+		sprite: { animations: [ { states: [ default ] frames: [ copper_vein ] z_offset: -3 } ] }		
+	}
+}
+
+#############################################################################
+# Iron
+
+loot_group .mining_iron: { }
+
+item item_iron_ore:
+{
+	item_level: 5
+	icon: icon_iron
+	root: { name: "Iron Ore" }
+	loot_groups: [ .mining_iron ]
+	stack: 20	
+}
+
+loot_table .mining_iron:
+{
+	slots:
+	[
+		{ possibility: { weight: 1 loot_group: .mining_iron } }		
+	]	
+}
+
+entity mining_iron_vein:
+{
+	string: "Iron Vein"	
+	components:
+	{
+		position: { }		
+		openable: { required_profession: mining required_profession_skill: 20 required_item: weapon_pick_axe loot_table: .mining_iron }
+		sprite: { animations: [ { states: [ default ] frames: [ iron_vein ] z_offset: -3 } ] }		
+	}
+}

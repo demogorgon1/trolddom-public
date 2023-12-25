@@ -82,6 +82,11 @@ sprites:
 	cursor: { position: [ 0 64 ] }
 	sprite icon_first_aid : { }
 	sprite icon_mining : { }
+	sprite icon_dewleaf : { }
+	sprite icon_mistflower : { }
+	sprite icon_copper : { }
+	sprite icon_iron : { }
+	sprite icon_pickaxe : { }
 	
 }
 

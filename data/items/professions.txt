@@ -1,0 +1,15 @@
+item weapon_pick_axe:
+{
+	type: weapon_1h_axe
+	equipment_slots: [ main_hand ]
+	required_level: 1
+	item_level: 1
+	icon: icon_pickaxe
+	rarity: common
+		
+	root:
+	{
+		name: "Pickaxe"
+		weapon_cooldown: 20		
+	}
+}

@@ -3,3 +3,69 @@ profession herbalism<primary>:
 	string: "Herbalism"
 	icon: icon_herbalism
 }
+
+#############################################################################
+# Dewleaf
+
+loot_group .herbalism_dewleaf: { }
+
+item item_dewleaf:
+{
+	item_level: 1
+	icon: icon_dewleaf
+	root: { name: "Dewleaf" }
+	loot_groups: [ .herbalism_dewleaf ]
+	stack: 20	
+}
+
+loot_table .herbalism_dewleaf:
+{
+	slots:
+	[
+		{ possibility: { weight: 1 loot_group: .herbalism_dewleaf } }		
+	]	
+}
+
+entity herbalism_dewleaf:
+{
+	string: "Dewleaf"	
+	components:
+	{
+		position: { }		
+		openable: { required_profession: herbalism required_profession_skill: 0 loot_table: .herbalism_dewleaf }
+		sprite: { animations: [ { states: [ default ] frames: [ dewleaf ] z_offset: -3 } ] }		
+	}
+}
+
+#############################################################################
+# Mistflower
+
+loot_group .herbalism_mistflower: { }
+
+item item_mistflower:
+{
+	item_level: 5
+	icon: icon_mistflower
+	root: { name: "Mistflower" }
+	loot_groups: [ .herbalism_mistflower ]
+	stack: 20	
+}
+
+loot_table .herbalism_mistflower:
+{
+	slots:
+	[
+		{ possibility: { weight: 1 loot_group: .herbalism_mistflower } }		
+	]	
+}
+
+entity herbalism_mistflower:
+{
+	string: "Mistflower"	
+	components:
+	{
+		position: { }		
+		openable: { required_profession: herbalism required_profession_skill: 20 loot_table: .herbalism_mistflower }
+		sprite: { animations: [ { states: [ default ] frames: [ mistflower ] z_offset: -3 } ] }		
+	}
+}

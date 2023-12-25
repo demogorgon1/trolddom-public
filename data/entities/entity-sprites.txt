@@ -16,6 +16,7 @@ sprites:
 	sprite woman_1: { }
 	sprite man_3: { }
 	sprite man_4: { }
+	sprite man_5: { }
 	
 	cursor: { position: [ 0 16 ] }
 	
@@ -29,6 +30,7 @@ sprites:
 	sprite woman_1_dead: { }
 	sprite man_3_dead: { }
 	sprite man_4_dead: { }
+	sprite man_5_dead: { }
 }
 
 sprites:
@@ -45,6 +47,10 @@ sprites:
 	sprite spirit_stone_4: { }
 	sprite spirit_stone_5: { }
 	sprite spirit_stone_6: { }
+	sprite dewleaf : { }
+	sprite mistflower : { }
+	sprite copper_vein : { }
+	sprite iron_vein : { }
 	
 }
 

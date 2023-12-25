@@ -107,7 +107,7 @@ namespace tpublic
 			bool						m_cash = false;
 			int64_t						m_availableCash = 0;
 			std::vector<AvailableLoot>	m_availableLoot;
-			uint32_t					m_version = 0;
+			uint32_t					m_version = 0;			
 		};
 	}
 

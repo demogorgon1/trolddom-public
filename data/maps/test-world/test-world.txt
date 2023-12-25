@@ -8,7 +8,7 @@ map_player_spawn dungeon_2_exit:
 
 map_entity_spawn .spirit_stone:
 {	
-	entity spirit_stone: { } 
+	entity spirit_stone: { init_state: default } 
 }
 
 map_entity_spawn .wildlife:
@@ -19,6 +19,17 @@ map_entity_spawn .wildlife:
 	entity .boar_2: { level: 2 weight: 1 zones: [ .zone_1 ] } 
 }
 
+map_entity_spawn .mining:
+{	
+	entity mining_copper_vein: { level: [ 1 6 ] weight: 1 init_state: default } 
+	entity mining_iron_vein: { level: [ 4 10 ] weight: 1 init_state: default } 
+}
+
+map_entity_spawn .herbalism:
+{	
+	entity herbalism_dewleaf: { level: [ 1 6 ] weight: 1 init_state: default } 
+	entity herbalism_mistflower: { level: [ 4 10 ] weight: 1 init_state: default } 
+}
 map_entity_spawn .sylas:
 {
 	entity .sylas: { weight: 1 }
@@ -42,6 +53,11 @@ map_entity_spawn .caelum:
 map_entity_spawn .rob_beaurichard:
 {
 	entity .rob_beaurichard: { weight: 1 }
+}
+
+map_entity_spawn .harald_skrald:
+{
+	entity .harald_skrald: { weight: 1 }
 }
 
 map_player_spawn .player_spawn:
@@ -109,17 +125,20 @@ map_palette .tiles:
 map_palette .stuff:
 {
 	entity_spawn .wildlife: [ 255 255 0 ]
+	entity_spawn .mining: [ 200 200 200 ]
+	entity_spawn .herbalism: [ 0 255 0 ]
 	entity_spawn .sylas: [ 255 189 0 ]
 	entity_spawn .rob_beaurichard: [ 12 189 87 ]
 	entity_spawn .elysia: [ 240 189 0 ]
 	entity_spawn .caelum: [ 220 189 0 ]
 	entity_spawn .brom: [ 210 189 0 ]
+	entity_spawn .harald_skrald: [ 200 189 0 ]
 	entity_spawn .spirit_stone: [ 0 0 0 ]
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn dungeon_1_exit: [ 0 0 200 ]	
 	player_spawn dungeon_2_exit: [ 0 255 100 ]	
-	portal .dungeon_1_entrance: [ 0 255 0 ]	
-	portal .dungeon_2_entrance: [ 0 128 255 ]	
+	portal .dungeon_1_entrance: [ 0 234 0 ]	
+	portal .dungeon_2_entrance: [ 0 128 255 ]		
 }
 
 map_palette .levels:

@@ -16,6 +16,7 @@
 #include <tpublic/Components/Inventory.h>
 #include <tpublic/Components/Lootable.h>
 #include <tpublic/Components/NPC.h>
+#include <tpublic/Components/Openable.h>
 #include <tpublic/Components/Owner.h>
 #include <tpublic/Components/PlayerCooldowns.h>
 #include <tpublic/Components/PlayerPrivate.h>
@@ -58,6 +59,7 @@ namespace tpublic
 		_Register<Components::Inventory>();
 		_Register<Components::Lootable>();
 		_Register<Components::NPC>();
+		_Register<Components::Openable>();
 		_Register<Components::Owner>();
 		_Register<Components::PlayerPrivate>();
 		_Register<Components::PlayerCooldowns>();
