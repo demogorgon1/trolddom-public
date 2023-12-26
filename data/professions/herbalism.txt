@@ -4,70 +4,41 @@ profession herbalism<primary>:
 	icon: icon_herbalism
 }
 
+${
+	_profession: herbalism
+	_verb: pick
+}
+
 #############################################################################
 # Dewleaf
+${
+	_icon: icon_dewleaf
+	_item_string: "Dewleaf"
+	_entity_string: "Dewleaf"
+	_loot_group: .herbalism_dewleaf
+	_loot_table: .herbalism_dewleaf
+	_profession_skill: 0
+	_sprite: dewleaf
+}
 
 loot_group .herbalism_dewleaf: { }
-
-item item_dewleaf:
-{
-	item_level: 1
-	icon: icon_dewleaf
-	root: { name: "Dewleaf" }
-	loot_groups: [ .herbalism_dewleaf ]
-	stack: 20	
-}
-
-loot_table .herbalism_dewleaf:
-{
-	slots:
-	[
-		{ possibility: { weight: 1 loot_group: .herbalism_dewleaf } }		
-	]	
-}
-
-entity herbalism_dewleaf:
-{
-	string: "Dewleaf"	
-	systems: [ openable ]
-	components:
-	{
-		position: { }		
-		openable: { required_profession: herbalism required_profession_skill: 0 loot_table: .herbalism_dewleaf verb: pick range: 1 despawn: true }
-		sprite: { animations: [ { states: [ default ] frames: [ dewleaf ] z_offset: -3 } ] }		
-	}
-}
+loot_table .herbalism_dewleaf: { slots: [ { possibility: { loot_group: .herbalism_dewleaf } } ] }
+item item_dewleaf: !GATHER_ITEM { }
+entity herbalism_dewleaf: !GATHER_ENTITY { }
 
 #############################################################################
 # Mistflower
+${
+	_icon: icon_mistflower
+	_item_string: "Mistflower"
+	_entity_string: "Mistflower"
+	_loot_group: .herbalism_mistflower
+	_loot_table: .herbalism_mistflower
+	_profession_skill: 20
+	_sprite: mistflower
+}
 
 loot_group .herbalism_mistflower: { }
-
-item item_mistflower:
-{
-	item_level: 5
-	icon: icon_mistflower
-	root: { name: "Mistflower" }
-	loot_groups: [ .herbalism_mistflower ]
-	stack: 20	
-}
-
-loot_table .herbalism_mistflower:
-{
-	slots:
-	[
-		{ possibility: { weight: 1 loot_group: .herbalism_mistflower } }		
-	]	
-}
-
-entity herbalism_mistflower:
-{
-	string: "Mistflower"	
-	systems: [ openable ]
-	components:
-	{
-		position: { }		
-		openable: { required_profession: herbalism required_profession_skill: 20 loot_table: .herbalism_mistflower verb: pick range: 1 despawn: true } 
-		sprite: { animations: [ { states: [ default ] frames: [ mistflower ] z_offset: -3 } ] }		
-	}
-}
+loot_table .herbalism_mistflower: { slots: [ { possibility: { loot_group: .herbalism_mistflower } } ] }
+item item_mistflower: !GATHER_ITEM { }
+entity herbalism_mistflower: !GATHER_ENTITY { }

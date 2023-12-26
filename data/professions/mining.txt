@@ -4,70 +4,42 @@ profession mining<primary>:
 	icon: icon_mining
 }
 
+${
+	_profession: mining
+	_verb: mine
+	_required_item: weapon_pick_axe
+}
+
 #############################################################################
 # Copper
+${
+	_icon: icon_copper
+	_item_string: "Copper Ore"
+	_entity_string: "Copper Vein"
+	_loot_group: .mining_copper
+	_loot_table: .mining_copper
+	_profession_skill: 0
+	_sprite: copper_vein
+}
 
 loot_group .mining_copper: { }
-
-item item_copper_ore:
-{
-	item_level: 1
-	icon: icon_copper
-	root: { name: "Copper Ore" }
-	loot_groups: [ .mining_copper ]
-	stack: 20	
-}
-
-loot_table .mining_copper:
-{
-	slots:
-	[
-		{ possibility: { weight: 1 loot_group: .mining_copper } }		
-	]	
-}
-
-entity mining_copper_vein:
-{
-	string: "Copper Vein"	
-	systems: [ openable ]
-	components:
-	{
-		position: { }		
-		openable: { required_profession: mining required_profession_skill: 0 required_item: weapon_pick_axe loot_table: .mining_copper verb: mine range: 1 despawn: true }
-		sprite: { animations: [ { states: [ default ] frames: [ copper_vein ] z_offset: -3 } ] }		
-	}
-}
+loot_table .mining_copper: { slots: [ { possibility: { loot_group: .mining_copper } } ] }
+item item_copper_ore: !GATHER_ITEM { }
+entity mining_copper_vein: !GATHER_ENTITY { }
 
 #############################################################################
 # Iron
+${
+	_icon: icon_iron
+	_item_string: "Iron Ore"
+	_entity_string: "Iron Vein"
+	_loot_group: .mining_iron
+	_loot_table: .mining_iron
+	_profession_skill: 20
+	_sprite: iron_vein
+}
 
 loot_group .mining_iron: { }
-
-item item_iron_ore:
-{
-	item_level: 5
-	icon: icon_iron
-	root: { name: "Iron Ore" }
-	loot_groups: [ .mining_iron ]
-	stack: 20	
-}
-
-loot_table .mining_iron:
-{
-	slots:
-	[
-		{ possibility: { weight: 1 loot_group: .mining_iron } }		
-	]	
-}
-
-entity mining_iron_vein:
-{
-	string: "Iron Vein"	
-	systems: [ openable ]
-	components:
-	{
-		position: { }		
-		openable: { required_profession: mining required_profession_skill: 20 required_item: weapon_pick_axe loot_table: .mining_iron verb: mine range: 1 despawn: true }
-		sprite: { animations: [ { states: [ default ] frames: [ iron_vein ] z_offset: -3 } ] }		
-	}
-}
+loot_table .mining_iron: { slots: [ { possibility: { loot_group: .mining_iron } } ] }
+item item_iron_ore: !GATHER_ITEM { }
+entity mining_iron_vein: !GATHER_ENTITY { }

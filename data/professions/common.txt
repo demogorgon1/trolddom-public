@@ -1,0 +1,31 @@
+!define GATHER_ITEM
+{
+	item_level: 1
+	icon: @_icon
+	root: { name: @_item_string }
+	loot_groups: [ @_loot_group ]
+	stack: 20	
+}
+
+!define GATHER_ENTITY
+{
+	string: @_entity_string
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ @_sprite ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			required_profession: @_profession 
+			required_profession_skill: @_profession_skill 
+			loot_table: @_loot_table 
+			verb: @_verb 
+			range: 1 
+			despawn: true 						
+			
+			<exists _required_item> required_item: @_required_item 
+		}		
+	}
+}
