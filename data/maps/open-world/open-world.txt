@@ -2,10 +2,6 @@ map_player_spawn dungeon_1_exit:
 {
 }
 
-map_player_spawn dungeon_2_exit:
-{
-}
-
 map_entity_spawn .spirit_stone:
 {	
 	entity spirit_stone: { init_state: default } 
@@ -76,17 +72,12 @@ map_player_spawn .player_spawn:
 
 map_portal .dungeon_1_entrance:
 {
-	map: test_dungeon
-}
-
-map_portal .dungeon_2_entrance:
-{
-	map: test_dungeon_2
+	map: dungeon_1
 }
 
 zone .zone_1:
 {
-	string: "Zone 1"
+	string: "Cape Arrival"
 }
 
 zone .zone_2:
@@ -117,6 +108,7 @@ zone .zone_6:
 map_palette .tiles:
 {
 	tile water_1: [ 9 86 104 ]
+	tile pavement: [ 32 32 32 ]
 	tile mud: [ 67 61 32 ]
 	tile sand: [ 200 200 128 ]
 	tile dirt: [ 97 91 62 ]
@@ -130,6 +122,7 @@ map_palette .tiles:
 	tile wood_solid_wall: [ 0 200 200 ]
 	tile wood_solid_wall_face: [ 100 200 200 ]
 	tile roof: [ 255 0 0 ]
+	tile forest_entrance: [ 123 255 123 ] 
 }
 
 map_palette .stuff:
@@ -147,9 +140,7 @@ map_palette .stuff:
 	entity_spawn .spirit_stone: [ 0 0 0 ]
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn dungeon_1_exit: [ 0 0 200 ]	
-	player_spawn dungeon_2_exit: [ 0 255 100 ]	
 	portal .dungeon_1_entrance: [ 0 234 0 ]	
-	portal .dungeon_2_entrance: [ 0 128 255 ]		
 }
 
 map_palette .levels:
@@ -176,44 +167,43 @@ map_palette .zones:
 	zone .zone_6: [ 255 127 0 ]	
 }
 
-map test_world:
+map open_world:
 {
-	string: "Test World"
+	string: "First Island"
 	type: open_world
 	default_tile: water_1
 	default_player_spawn: .player_spawn
+	default_fishing_loot_table: fish
 	view_attenuation: 0
 	view_attenuation_bias: 0
 	view_hidden_visibility: 35	
 	has_overview_map: true
-	default_fishing_loot_table: fish
-	#image_output: "test-world.png"
 
 	layers:
 	[
 		{
 			palettes:	[ .tiles ]
-			source:		"test-world-0.png"
+			source:		"open-world-0.png"
 		}
 
 		{
 			palettes:	[ .stuff ]
-			source:		"test-world-1.png"
+			source:		"open-world-1.png"
 		}
 		
 		{
 			palettes:	[ .levels ]
-			source:		"test-world-2.png"
+			source:		"open-world-2.png"
 		}		
 		
 		{
 			palettes:	[ .zones ]
-			source:		"test-world-3.png"
+			source:		"open-world-3.png"
 		}				
 		
 		{ 
 			palettes: 	[ .tiles ]
-			source:		"test-world-4.png"
+			source:		"open-world-4.png"
 			cover: 		true
 		}
 	]

@@ -45,9 +45,6 @@ namespace tpublic
 						const IWorldView*			aWorldView) override;
 
 			// Public data
-
-			// Internal
-			bool		m_splashed = false;
 		};
 
 	}

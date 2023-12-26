@@ -55,6 +55,8 @@ sprites:
 	sprite roof_sw: { tile_layer: 10 }
 	sprite roof_s: { tile_layer: 10 }
 	sprite roof_se: { tile_layer: 10 }
+	sprite pavement: { flags: [ tile_walkable ] tile_layer: 1 }
+	sprite forest_entrance: { flags: [ tile_walkable ] tile_layer: 10 }
 
 	cursor: { position: [ 0 16 ] }
 	

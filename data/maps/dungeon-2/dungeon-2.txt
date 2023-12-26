@@ -4,7 +4,7 @@ map_player_spawn .player_spawn:
 
 map_portal .exit:
 {
-	map: test_world
+	map: open_world
 	spawn: dungeon_2_exit
 }
 
@@ -243,9 +243,9 @@ map_segment .blind_4<paletted>:
 	]	
 }
 
-map test_dungeon_2:
+map dungeon_2:
 {
-	string: "Test Dungeon 2"
+	string: "Lower Labyrinths"
 	type: private
 	reset: manual
 	default_tile: dungeon_wall

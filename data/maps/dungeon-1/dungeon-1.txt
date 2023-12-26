@@ -33,7 +33,7 @@ map_player_spawn .player_spawn:
 
 map_portal .exit:
 {
-	map: test_world
+	map: open_world
 	spawn: dungeon_1_exit
 }
 
@@ -54,9 +54,9 @@ map_palette .stuff:
 	portal .exit: [ 0 255 0 ]	
 }
 
-map test_dungeon:
+map dungeon_1:
 {
-	string: "Test Dungeon"
+	string: "Goblin Caves"
 	type: private
 	reset: manual
 	default_tile: dungeon_wall
@@ -65,19 +65,18 @@ map test_dungeon:
 	view_attenuation: 30
 	view_attenuation_bias: 50
 	view_hidden_visibility: 0		
-	#image_output: "test.png"
 	level: 5
 
 	layers:
 	[
 		{
 			palettes:	[ .tiles ]
-			source:		"test-dungeon-0.png"
+			source:		"dungeon-1-0.png"
 		}
 
 		{
 			palettes:	[ .stuff ]
-			source:		"test-dungeon-1.png"
+			source:		"dungeon-1-1.png"
 		}
 	]
 	

@@ -116,7 +116,7 @@ class priest:
 	
 	item_types: [ armor_cloth weapon_1h_knife weapon_2h_staff ]
 
-	start_map test_world: [ test_world_player_spawn ]	
+	start_map open_world: [ ]	
 	start_equipment main_hand: weapon_gnarly_staff
 	
 	stats_conversion:

@@ -57,9 +57,6 @@ namespace tpublic::DirectEffects
 		IEventQueue*				aEventQueue,
 		const IWorldView*			aWorldView) 
 	{		
-		if(m_splashed)
-			return;
-
 		const tpublic::Components::Position* position = aTarget->GetComponent<tpublic::Components::Position>();
 		const tpublic::MapData* map = aWorldView->WorldViewGetMapData();
 
@@ -136,8 +133,6 @@ namespace tpublic::DirectEffects
 						splashOpenable->m_lootTableId = map->m_defaultFishingLootTableId;
 						splashOpenable->m_requiredProfessionSkill = skillRequired;
 						splashOpenable->m_level = level;
-
-						m_splashed = true;
 					}
 				}
 			}
