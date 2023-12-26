@@ -1,0 +1,101 @@
+profession fishing<secondary>:
+{
+	string: "Fishing"
+	icon: icon_fishing_rod
+}
+
+ability fishing_tick:
+{
+	string: "Fishing"
+	icon: icon_fishing_rod
+	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]	
+	direct_effect fishing: { }
+}
+
+aura fishing:
+{
+	string: "Fishing"
+	icon: icon_fishing_rod
+	type: buff
+	flags: [ channeled ]
+	duration: 100
+	aura_effect repeat: 
+	{ 
+		update_interval: 10
+		update_count: 10
+		ability: fishing_tick
+	}
+}
+
+ability fishing:
+{
+	string: "Fishing"
+	description: "Fish."
+	flags: [ target_self ]
+	icon: icon_fishing_rod
+	states: [ default in_combat ]	
+	direct_effect apply_aura: { aura: fishing }
+}
+
+entity fishing_splash:
+{
+	string: "Splash"
+	
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default spawning ] 
+					frames: [ fishing_splash_1 fishing_splash_2 fishing_splash_3 fishing_splash_4 fishing_splash_5 ] 		
+					frame_delay: 150 
+					z_offset: -3
+					repeat: false
+				}
+			]		
+		}		
+		openable: 
+		{ 
+			required_profession: fishing
+			verb: catch
+			range: 10 
+			despawn: true 									
+			instant: true
+			required_item: weapon_fishing_rod
+			duration: 20
+		}				
+	}
+}
+
+loot_group fish: { } 
+
+loot_table fish:
+{
+	slots:
+	[
+		{
+			possibility: { weight: 1 loot_group: fish }
+		}		
+	]		
+}
+
+################################################################################
+# Herring 
+
+item item_herring:
+{
+	loot_groups: [ fish ]		
+	root: {	name: "Herring" }
+	icon: icon_small_blue_fish
+	stack: 20
+	item_level: 1
+	level_range: [ 1 5 ]
+}
+
+
+

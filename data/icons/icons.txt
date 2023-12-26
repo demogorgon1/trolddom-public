@@ -88,6 +88,8 @@ sprites:
 	sprite icon_iron : { }
 	sprite icon_pickaxe : { }
 	sprite icon_stuff : { }
+	sprite icon_fishing_rod : { }
+	sprite icon_small_blue_fish : { }
 	
 }
 

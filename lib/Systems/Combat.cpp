@@ -7,7 +7,7 @@
 #include <tpublic/Systems/Combat.h>
 
 #include <tpublic/EntityInstance.h>
-#include <tpublic/ISystemEventQueue.h>
+#include <tpublic/IEventQueue.h>
 #include <tpublic/Resource.h>
 #include <tpublic/Helpers.h>
 
@@ -56,7 +56,7 @@ namespace tpublic::Systems
 						castInProgress.m_start = entry->m_start;
 						castInProgress.m_end = entry->m_end;
 						castInProgress.m_targetEntityInstanceId = aEntityInstanceId;
-						aContext->m_systemEventQueue->AddChannelingEvent(entry->m_entityInstanceId, castInProgress);
+						aContext->m_eventQueue->EventQueueChanneling(entry->m_entityInstanceId, castInProgress);
 					}
 	
 					for(size_t j = 0; j < entry->m_effects.size(); j++)

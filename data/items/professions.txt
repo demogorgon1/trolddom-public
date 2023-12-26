@@ -13,3 +13,20 @@ item weapon_pick_axe:
 		weapon_cooldown: 20		
 	}
 }
+
+item weapon_fishing_rod:
+{
+	type: weapon_2h_staff
+	equipment_slots: [ main_hand ]
+	required_level: 1
+	item_level: 1
+	icon: icon_fishing_rod
+	rarity: common
+	use_ability: fishing
+		
+	root:
+	{
+		name: "Fishing Rod"
+		weapon_cooldown: 20		
+	}
+}

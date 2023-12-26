@@ -9,12 +9,8 @@ namespace tpublic
 {
 	
 	class EntityInstance;
-	class IAbilityQueue;
-	class IGroupRoundRobin;
-	class IMoveRequestQueue;
-	class IThreatEventQueue;
+	class IEventQueue;
 	class IWorldView;
-	class ISystemEventQueue;
 	class LootGenerator;
 	class Manifest;
 
@@ -24,11 +20,7 @@ namespace tpublic
 		struct Context
 		{
 			// Public data
-			IAbilityQueue*			m_abilityQueue = NULL;
-			IMoveRequestQueue*		m_moveRequestQueue = NULL;
-			IThreatEventQueue*		m_threatEventQueue = NULL;
-			ISystemEventQueue*		m_systemEventQueue = NULL;
-			IGroupRoundRobin*		m_groupRoundRobin = NULL;
+			IEventQueue*			m_eventQueue = NULL;
 			const IWorldView*		m_worldView = NULL;
 			const LootGenerator*	m_lootGenerator = NULL;
 			int32_t					m_tick = 0;

@@ -7,12 +7,12 @@ namespace tpublic
 
 	bool	
 	NPCMovement::GetMoveRequest(
-		const MapPathData*				aMapPathData,
-		const Vec2&						aPosition,
-		const Vec2&						aDestination,
-		int32_t							aCurrentTick,
-		int32_t							aLastMoveTick,
-		IMoveRequestQueue::MoveRequest& aOut)
+		const MapPathData*					aMapPathData,
+		const Vec2&							aPosition,
+		const Vec2&							aDestination,
+		int32_t								aCurrentTick,
+		int32_t								aLastMoveTick,
+		IEventQueue::EventQueueMoveRequest& aOut)
 	{
 		switch(m_mode)
 		{
@@ -54,7 +54,7 @@ namespace tpublic
 					else if (d.m_y > 0 && !vertical)
 						aOut.AddToPriorityList({ 0, 1 });
 
-					aOut.m_moveRequestType = IMoveRequestQueue::MOVE_REQUEST_TYPE_SIMPLE;
+					aOut.m_type = IEventQueue::EventQueueMoveRequest::TYPE_SIMPLE;
 
 					return true;
 				}
@@ -84,7 +84,7 @@ namespace tpublic
 					if(currentAreaId == destinationAreaId)
 					{
 						aOut.AddToPriorityList(aDestination - aPosition);
-						aOut.m_moveRequestType = IMoveRequestQueue::MOVE_REQUEST_TYPE_FIND_PATH;
+						aOut.m_type = IEventQueue::EventQueueMoveRequest::TYPE_FIND_PATH;
 						return true;
 					}
 					else
@@ -134,7 +134,7 @@ namespace tpublic
 
 							if(aOut.m_priorityListLength > 0)
 							{
-								aOut.m_moveRequestType = IMoveRequestQueue::MOVE_REQUEST_TYPE_SIMPLE;
+								aOut.m_type = IEventQueue::EventQueueMoveRequest::TYPE_SIMPLE;
 
 								return true;
 							}

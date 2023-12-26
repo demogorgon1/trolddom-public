@@ -31,6 +31,14 @@ namespace tpublic
 		}
 
 		void
+		SetEntityInstanceId(
+			uint32_t				aEntityInstanceId)
+		{
+			assert(m_entityInstanceId == 0);
+			m_entityInstanceId = aEntityInstanceId;
+		}
+
+		void
 		SetState(
 			EntityState::Id			aState,
 			int32_t					aTick)
@@ -200,7 +208,7 @@ namespace tpublic
 		}
 
 		// Data access
-		uint32_t										GetEntityInstanceId() const { return m_entityInstanceId; }
+		uint32_t										GetEntityInstanceId() const { assert(m_entityInstanceId != 0); return m_entityInstanceId; }
 		uint32_t										GetEntityId() const { return m_entityId; }
 		EntityState::Id									GetState() const { return m_state; }
 		bool											IsPlayer() const { return m_entityId == 0; }

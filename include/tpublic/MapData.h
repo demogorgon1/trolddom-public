@@ -433,30 +433,32 @@ namespace tpublic
 			std::unique_ptr<MapGeneratorBase>	m_base;
 		};
 
-				MapData();
-				MapData(
-					const SourceNode*		aSource);
-				~MapData();
+					MapData();
+					MapData(
+						const SourceNode*		aSource);
+					~MapData();
 
-		void	Build(
-					const Manifest*			aManifest);
-		void	ConstructMapPathData(
-					const Manifest*			aManifest);
-		void	ToStream(
-					IWriter*				aStream) const;
-		bool	FromStream(
-					IReader*				aStream);
-		void	PrepareRuntime(
-					uint8_t					aRuntime,
-					const Manifest*			aManifest);
-		bool	IsTileWalkable(
-					int32_t					aX,
-					int32_t					aY) const;
-		bool	DoesTileblockLineOfSight(
-					int32_t					aX,
-					int32_t					aY) const;
-		void	CopyFrom(
-					const MapData*			aMapData);
+		void		Build(
+						const Manifest*			aManifest);
+		void		ConstructMapPathData(
+						const Manifest*			aManifest);
+		void		ToStream(
+						IWriter*				aStream) const;
+		bool		FromStream(
+						IReader*				aStream);
+		void		PrepareRuntime(
+						uint8_t					aRuntime,
+						const Manifest*			aManifest);
+		bool		IsTileWalkable(
+						int32_t					aX,
+						int32_t					aY) const;
+		bool		DoesTileblockLineOfSight(
+						int32_t					aX,
+						int32_t					aY) const;
+		void		CopyFrom(
+						const MapData*			aMapData);
+		uint32_t	GetTile(
+						const Vec2&				aPosition) const;
 
 		// Public data
 		MapType::Id									m_type;
@@ -487,6 +489,7 @@ namespace tpublic
 		uint32_t									m_level;
 		bool										m_hasOverviewMap;
 		std::unique_ptr<MapCovers>					m_mapCovers;
+		uint32_t									m_defaultFishingLootTableId;
 
 		struct SourceLayer
 		{

@@ -19,7 +19,8 @@ namespace tpublic
 					const EntityInstance*				aTarget);
 		bool	CheckOpenable(
 					const EntityInstance*				aSelf,
-					const EntityInstance*				aTarget);
+					const EntityInstance*				aTarget,
+					bool*								aOutInstant);
 	}
 
 }

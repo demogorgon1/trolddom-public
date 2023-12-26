@@ -13,9 +13,10 @@ namespace tpublic
 		{
 			FLAG_TILE_WALKABLE				= 0x01,
 			FLAG_TILE_BLOCK_LINE_OF_SIGHT	= 0x02,
-			FLAG_STANDALONE					= 0x04,
-			FLAG_CENTERED					= 0x08,
-			FLAG_DOUBLED					= 0x10
+			FLAG_TILE_FISHABLE				= 0x04,
+			FLAG_STANDALONE					= 0x08,
+			FLAG_CENTERED					= 0x10,
+			FLAG_DOUBLED					= 0x20
 		};
 
 		struct NamedAnchor
@@ -56,6 +57,8 @@ namespace tpublic
 				return FLAG_TILE_WALKABLE;
 			if (strcmp(aString, "tile_block_line_of_sight") == 0)
 				return FLAG_TILE_BLOCK_LINE_OF_SIGHT;
+			if (strcmp(aString, "tile_fishable") == 0)
+				return FLAG_TILE_FISHABLE;
 			if (strcmp(aString, "standalone") == 0)
 				return FLAG_STANDALONE;
 			if (strcmp(aString, "centered") == 0)

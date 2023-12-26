@@ -62,7 +62,8 @@ namespace tpublic
 		bool	
 		CheckOpenable(
 			const EntityInstance*			aSelf,
-			const EntityInstance*			aTarget)
+			const EntityInstance*			aTarget,
+			bool*							aOutInstant)
 		{
 			const Components::Openable* openable = aTarget->GetComponent<Components::Openable>();
 			if(openable == NULL)
@@ -98,6 +99,9 @@ namespace tpublic
 						return false;
 				}
 			}
+
+			if(aOutInstant != NULL)
+				*aOutInstant = openable->m_instant;
 
 			return true;
 		}

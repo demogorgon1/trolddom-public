@@ -1,0 +1,106 @@
+dialogue_screen .fisherman_fishing:
+{
+	text: 
+	[	
+		"Aye, grab your trusty rod, seek out a serene water spot, and let's get started!"
+	]
+	
+	options:
+	[
+		{ goto: .fisherman_greetings text: "Uhm, okay." }
+	]
+}
+
+dialogue_screen .fisherman_trainer:
+{
+	train_profession<0>: fishing
+	train_profession<1>: fishing
+}
+
+dialogue_screen .fisherman_greetings:
+{
+	text: 
+	[	
+		"What can I do for you?"
+	]
+	
+	options:
+	[
+		{ goto: .fisherman_fishing text: "So, you're a fisherman?" }
+		{ goto: .fisherman_trainer text: "Please teach me how to drag fish out of the water." }
+	]
+}
+
+dialogue_root .fisherman_dialogue:
+{
+	.fisherman_greetings: { }
+}
+
+entity .fisherman:
+{
+	string: "Captain Finley"
+	
+	systems: [ combat npc ]
+	
+	modifiers: 
+	{ 
+		weapon_damage: 2
+		resource<health>: 2
+	}		
+	
+	components:
+	{
+		position: { }		
+		threat_target: { }
+		visible_auras: { }
+		auras: { }
+		tag: { }
+		guild_name:
+		{
+			string: "Fisherman"
+		}		
+		lootable: 
+		{ 
+			loot_table: .npc
+		}
+		combat_public: 
+		{  
+			level: 10
+			faction: npcs		
+			creature_type: humanoid
+			dialogue_root: .fisherman_dialogue
+			
+			modifier not_pushable: {}
+		}			
+		combat_private:
+		{
+			physical_critical_strike_chance: 5
+			dodge_chance: 5
+			parry_chance: 5
+			miss_chance: 5
+			block_chance: 5
+		}
+		npc: 
+		{ 			
+			state default:
+			{
+			}
+			
+			state in_combat:
+			{
+				abilities:
+				[					
+					{ id: strike }
+				]
+			}	
+		}
+		sprite: 
+		{ 
+			animations:
+			[
+				{ states: [ default in_combat spawning ] frames: [ man_4 ] }			
+				{ states: [ dead ] frames: [ man_4_dead ] z_offset: -2 }			
+			]		
+		}		
+	}
+}

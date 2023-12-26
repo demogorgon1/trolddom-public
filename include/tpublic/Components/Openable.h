@@ -22,7 +22,8 @@ namespace tpublic
 				{
 					TYPE_OPEN,
 					TYPE_PICK,
-					TYPE_MINE
+					TYPE_MINE,
+					TYPE_CATCH
 				};
 
 				void
@@ -36,6 +37,8 @@ namespace tpublic
 						m_type = TYPE_PICK;
 					else if (t == "mine")
 						m_type = TYPE_MINE;
+					else if (t == "catch")
+						m_type = TYPE_CATCH;
 					else
 						TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid verb.", aSource->GetIdentifier());
 				}
@@ -61,10 +64,11 @@ namespace tpublic
 				{
 					switch(m_type)
 					{
-					case TYPE_OPEN:	return "Open";
-					case TYPE_PICK:	return "Pick";
-					case TYPE_MINE:	return "Mine";
-					default:		break;
+					case TYPE_OPEN:		return "Open";
+					case TYPE_PICK:		return "Pick";
+					case TYPE_MINE:		return "Mine";
+					case TYPE_CATCH:	return "Catch";
+					default:			break;
 					}
 					assert(false);
 					return "";
@@ -83,7 +87,10 @@ namespace tpublic
 				FIELD_REQUIRED_PROFESSION_SKILL,
 				FIELD_RANGE,
 				FIELD_DESPAWN,
-				FIELD_OPENED
+				FIELD_OPENED,
+				FIELD_INSTANT,
+				FIELD_DURATION,
+				FIELD_LEVEL
 			};
 
 			static void
@@ -97,7 +104,10 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_REQUIRED_PROFESSION_SKILL, "required_profession_skill", offsetof(Openable, m_requiredProfessionSkill));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_RANGE, "range", offsetof(Openable, m_range));
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_DESPAWN, "despawn", offsetof(Openable, m_despawn));
+				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_INSTANT, "instant", offsetof(Openable, m_instant));
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_OPENED, NULL, offsetof(Openable, m_opened));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_DURATION, "duration", offsetof(Openable, m_duration));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_LEVEL, "level", offsetof(Openable, m_level));
 			}
 
 			// Public data
@@ -107,8 +117,11 @@ namespace tpublic
 			uint32_t				m_requiredProfessionId = 0;
 			uint32_t				m_requiredProfessionSkill = 0;
 			uint32_t				m_range = 1;
+			bool					m_instant = false;
 			bool					m_despawn = false;
 			bool					m_opened = false;
+			uint32_t				m_duration = 0;
+			uint32_t				m_level = 1;
 		};
 
 	}

@@ -8,18 +8,18 @@ namespace tpublic
 	namespace DirectEffects
 	{
 
-		struct Kill
+		struct Fishing
 			: public DirectEffectBase
 		{
-			static const DirectEffect::Id ID = DirectEffect::ID_KILL;
+			static const DirectEffect::Id ID = DirectEffect::ID_FISHING;
 
-			Kill()
+			Fishing()
 			{
 
 			}
 
 			virtual 
-			~Kill()
+			~Fishing()
 			{
 
 			}
@@ -45,6 +45,9 @@ namespace tpublic
 						const IWorldView*			aWorldView) override;
 
 			// Public data
+
+			// Internal
+			bool		m_splashed = false;
 		};
 
 	}

@@ -43,6 +43,7 @@ namespace tpublic
 		, m_resetMode(MapType::RESET_MODE_MANUAL)
 		, m_type(MapType::ID_OPEN_WORLD)
 		, m_level(0)
+		, m_defaultFishingLootTableId(0)
 	{
 
 	}
@@ -65,6 +66,7 @@ namespace tpublic
 		, m_walkableBits(NULL)
 		, m_blockLineOfSightBits(NULL)
 		, m_hasOverviewMap(false)
+		, m_defaultFishingLootTableId(0)
 	{
 		aSource->GetObject()->ForEachChild([&](
 			const SourceNode* aNode)
@@ -75,6 +77,8 @@ namespace tpublic
 				m_defaultPlayerSpawnId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_PLAYER_SPAWN, aNode->GetIdentifier());
 			else if (aNode->m_name == "default_exit_portal")
 				m_defaultExitPortalId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_PORTAL, aNode->GetIdentifier());
+			else if (aNode->m_name == "default_fishing_loot_table")
+				m_defaultFishingLootTableId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_LOOT_TABLE, aNode->GetIdentifier());
 			else if(aNode->m_name == "image_output")
 				m_imageOutputPath = aNode->m_path + "/" + aNode->m_value;
 			else if(aNode->m_name == "layers")
@@ -291,6 +295,7 @@ namespace tpublic
 		aStream->WriteUInt(m_level);
 		aStream->WriteBool(m_hasOverviewMap);
 		aStream->WriteOptionalObjectPointer(m_mapCovers);
+		aStream->WriteUInt(m_defaultFishingLootTableId);
 	}
 
 	bool	
@@ -359,6 +364,8 @@ namespace tpublic
 		if (!aStream->ReadBool(m_hasOverviewMap))
 			return false;
 		if (!aStream->ReadOptionalObjectPointer(m_mapCovers))
+			return false;
+		if (!aStream->ReadUInt(m_defaultFishingLootTableId))
 			return false;
 		return true;
 	}
@@ -467,6 +474,17 @@ namespace tpublic
 			m_mapCovers = std::make_unique<MapCovers>();
 			m_mapCovers->CopyFrom(aMapData->m_mapCovers.get());
 		}
+	}
+
+	uint32_t	
+	MapData::GetTile(
+		const Vec2&				aPosition) const
+	{
+		Vec2 p = aPosition - Vec2{ m_x, m_y };
+		if(p.m_x >= 0 && p.m_y >= 0 && p.m_x < m_width && p.m_y < m_height)
+			return m_tileMap[p.m_x + p.m_y * m_width];
+
+		return 0;
 	}
 
 	//--------------------------------------------------------------------

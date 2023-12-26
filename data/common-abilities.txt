@@ -41,7 +41,7 @@ ability push:
 ability open:
 {
 	string: "Open"	
-	flags: [ target_other hidden ]	
+	flags: [ target_other hidden always_in_range ]	
 	states: [ default in_combat ]
 	icon: icon_stuff
 	

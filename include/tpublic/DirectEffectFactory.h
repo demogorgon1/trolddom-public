@@ -2,6 +2,7 @@
 
 #include "DirectEffects/ApplyAura.h"
 #include "DirectEffects/Damage.h"
+#include "DirectEffects/Fishing.h"
 #include "DirectEffects/Heal.h"
 #include "DirectEffects/Kill.h"
 #include "DirectEffects/Open.h"
@@ -20,6 +21,7 @@ namespace tpublic
 		{
 			_Register<DirectEffects::ApplyAura>();
 			_Register<DirectEffects::Damage>();
+			_Register<DirectEffects::Fishing>();
 			_Register<DirectEffects::Heal>();
 			_Register<DirectEffects::Kill>();
 			_Register<DirectEffects::Open>();

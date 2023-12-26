@@ -51,6 +51,11 @@ sprites:
 	sprite mistflower : { }
 	sprite copper_vein : { }
 	sprite iron_vein : { }
+	sprite fishing_splash_1: { }
+	sprite fishing_splash_2: { }
+	sprite fishing_splash_3: { }
+	sprite fishing_splash_4: { }
+	sprite fishing_splash_5: { }
 	
 }
 

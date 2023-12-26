@@ -41,7 +41,8 @@ namespace tpublic
 						EntityInstance*			aTarget,
 						IResourceChangeQueue*	aResourceChangeQueue,
 						IAuraEventQueue*		aAuraEventQueue,
-						IThreatEventQueue*		aThreatEventQueue) override;
+						IEventQueue*			aEventQueue,
+						const IWorldView*		aWorldView) override;
 
 			// Public data
 			DirectEffect::DamageType	m_damageType = DirectEffect::DAMAGE_TYPE_PHYSICAL;

@@ -8,8 +8,8 @@
 
 #include <tpublic/EntityInstance.h>
 #include <tpublic/Helpers.h>
+#include <tpublic/IEventQueue.h>
 #include <tpublic/IResourceChangeQueue.h>
-#include <tpublic/IThreatEventQueue.h>
 #include <tpublic/Resource.h>
 
 namespace tpublic::DirectEffects
@@ -78,7 +78,8 @@ namespace tpublic::DirectEffects
 		EntityInstance*				aTarget,
 		IResourceChangeQueue*		aResourceChangeQueue,
 		IAuraEventQueue*			/*aAuraEventQueue*/,
-		IThreatEventQueue*			aThreatEventQueue) 
+		IEventQueue*				aEventQueue,
+		const IWorldView*			/*aWorldView*/) 
 	{
 		const Components::CombatPrivate* sourceCombatPrivate = aSource->GetComponent<Components::CombatPrivate>();
 		Components::CombatPublic* targetCombatPublic = aTarget->GetComponent<Components::CombatPublic>();
@@ -124,7 +125,7 @@ namespace tpublic::DirectEffects
 
 				for(std::unordered_map<uint32_t, int32_t>::const_iterator i = targetThreatSource->m_targets.cbegin(); i != targetThreatSource->m_targets.cend(); i++)
 				{
-					aThreatEventQueue->AddThreatEvent(aSource->GetEntityInstanceId(), i->first, threat);
+					aEventQueue->EventQueueThreat(aSource->GetEntityInstanceId(), i->first, threat);
 				}
 			}
 		}

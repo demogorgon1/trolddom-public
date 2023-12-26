@@ -1,6 +1,7 @@
 dialogue_screen .harald_skrald_vendor:
 {
 	sell weapon_pick_axe: { quantity: 1 }	
+	sell weapon_fishing_rod: { quantity: 1 }	
 }
 
 dialogue_root .harald_skrald_dialogue:

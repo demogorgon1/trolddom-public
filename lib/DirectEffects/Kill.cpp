@@ -41,7 +41,8 @@ namespace tpublic::DirectEffects
 		EntityInstance*				aTarget,
 		IResourceChangeQueue*		aCombatResultQueue,
 		IAuraEventQueue*			/*aAuraEventQueue*/,
-		IThreatEventQueue*			/*aThreatEventQueue*/) 
+		IEventQueue*				/*aEventQueue*/,
+		const IWorldView*			/*aWorldView*/) 
 	{
 		aCombatResultQueue->AddUpdateCallback([aTarget, aTick]()
 		{

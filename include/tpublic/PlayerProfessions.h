@@ -122,6 +122,9 @@ namespace tpublic
 			uint32_t			aSkill) const
 		{
 			const Entry* t = GetProfession(aProfessionId);
+			if(t == NULL)
+				return false;
+
 			return t->m_skill >= aSkill;
 		}
 

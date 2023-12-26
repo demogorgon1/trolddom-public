@@ -65,6 +65,11 @@ map_entity_spawn .harald_skrald:
 	entity .harald_skrald: { weight: 1 }
 }
 
+map_entity_spawn .fisherman:
+{
+	entity .fisherman: { weight: 1 }
+}
+
 map_player_spawn .player_spawn:
 {
 }
@@ -138,6 +143,7 @@ map_palette .stuff:
 	entity_spawn .caelum: [ 220 189 0 ]
 	entity_spawn .brom: [ 210 189 0 ]
 	entity_spawn .harald_skrald: [ 200 189 0 ]
+	entity_spawn .fisherman: [ 0 2 255 ]
 	entity_spawn .spirit_stone: [ 0 0 0 ]
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn dungeon_1_exit: [ 0 0 200 ]	
@@ -180,6 +186,7 @@ map test_world:
 	view_attenuation_bias: 0
 	view_hidden_visibility: 35	
 	has_overview_map: true
+	default_fishing_loot_table: fish
 	#image_output: "test-world.png"
 
 	layers:

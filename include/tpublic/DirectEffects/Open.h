@@ -41,7 +41,8 @@ namespace tpublic
 						EntityInstance*				aTarget,
 						IResourceChangeQueue*		aCombatResultQueue,
 						IAuraEventQueue*			aAuraEventQueue,
-						IThreatEventQueue*			aThreatEventQueue) override;
+						IEventQueue*				aEventQueue,
+						const IWorldView*			aWorldView) override;
 
 			// Public data
 		};

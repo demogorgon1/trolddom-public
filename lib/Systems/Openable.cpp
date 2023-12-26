@@ -26,11 +26,14 @@ namespace tpublic::Systems
 		uint32_t			/*aEntityId*/,
 		uint32_t			/*aEntityInstanceId*/,
 		EntityState::Id		/*aEntityState*/,
-		int32_t				/*aTicksInState*/,
+		int32_t				aTicksInState,
 		ComponentBase**		aComponents,
 		Context*			/*aContext*/) 
 	{
 		Components::Openable* openable = GetComponent<Components::Openable>(aComponents);
+
+		if(openable->m_duration != 0 && aTicksInState >= (int32_t)openable->m_duration)
+			return EntityState::ID_DESPAWNED;
 
 		if(openable->m_opened)
 		{

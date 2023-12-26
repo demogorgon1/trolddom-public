@@ -17,8 +17,9 @@ namespace tpublic
 
 	class EntityInstance;
 	class IAuraEventQueue;
+	class IEventQueue;
 	class IResourceChangeQueue;
-	class IThreatEventQueue;
+	class IWorldView;
 	class Manifest;
 
 	class DirectEffectBase
@@ -87,7 +88,8 @@ namespace tpublic
 							EntityInstance*				/*aTarget*/,
 							IResourceChangeQueue*		/*aCombatResultQueue*/,
 							IAuraEventQueue*			/*aAuraEventQueue*/,
-							IThreatEventQueue*			/*aThreatEventQueue*/) { }
+							IEventQueue*				/*aEventQueue*/,
+							const IWorldView*			/*aWorldView*/) { }
 
 		// Public data
 		uint32_t		m_flags = 0;		

@@ -8,8 +8,8 @@
 
 #include <tpublic/EntityInstance.h>
 #include <tpublic/Helpers.h>
+#include <tpublic/IEventQueue.h>
 #include <tpublic/IResourceChangeQueue.h>
-#include <tpublic/IThreatEventQueue.h>
 
 namespace tpublic::DirectEffects
 {
@@ -113,7 +113,8 @@ namespace tpublic::DirectEffects
 		EntityInstance*				aTarget,
 		IResourceChangeQueue*		aResourceChangeQueue,
 		IAuraEventQueue*			/*aAuraEventQueue*/,
-		IThreatEventQueue*			aThreatEventQueue) 
+		IEventQueue*				aEventQueue,
+		const IWorldView*			/*aWorldView*/) 
 	{
 		const Components::CombatPrivate* sourceCombatPrivate = aSource->GetComponent<Components::CombatPrivate>();
 		Components::CombatPublic* targetCombatPublic = aTarget->GetComponent<Components::CombatPublic>();
@@ -178,7 +179,7 @@ namespace tpublic::DirectEffects
 				threat = (threat * 3) / 2;
 
 			if(aTarget->GetEntityId() != 0) // Not a player
-				aThreatEventQueue->AddThreatEvent(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), threat);
+				aEventQueue->EventQueueThreat(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), threat);
 		}
 	}
 

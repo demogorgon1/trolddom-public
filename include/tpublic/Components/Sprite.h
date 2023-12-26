@@ -49,6 +49,10 @@ namespace tpublic
 						{
 							m_randomStartFrame = aChild->GetBool();
 						}
+						else if (aChild->m_name == "repeat")
+						{
+							m_repeat = aChild->GetBool();
+						}
 						else if (aChild->m_name == "z_offset")
 						{
 							m_zOffset = aChild->GetInt32();
@@ -68,6 +72,7 @@ namespace tpublic
 					aWriter->WriteUInts(m_frameSpriteIds);
 					aWriter->WriteUInt(m_frameDelay);
 					aWriter->WritePOD(m_randomStartFrame);
+					aWriter->WritePOD(m_repeat);
 					aWriter->WriteInt(m_zOffset);
 				}
 
@@ -81,7 +86,9 @@ namespace tpublic
 						return false;
 					if(!aReader->ReadUInt(m_frameDelay))
 						return false;
-					if(!aReader->ReadPOD(m_randomStartFrame))
+					if (!aReader->ReadPOD(m_randomStartFrame))
+						return false;
+					if (!aReader->ReadPOD(m_repeat))
 						return false;
 					if (!aReader->ReadInt(m_zOffset))
 						return false;
@@ -93,6 +100,7 @@ namespace tpublic
 				std::vector<uint32_t>			m_frameSpriteIds;
 				uint32_t						m_frameDelay = 0;
 				bool							m_randomStartFrame = false;
+				bool							m_repeat = true;
 				int32_t							m_zOffset = 0;
 			};
 

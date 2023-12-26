@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IMoveRequestQueue.h"
+#include "IEventQueue.h"
 #include "MapPathData.h"
 #include "Vec2.h"
 
@@ -16,7 +16,7 @@ namespace tpublic
 					const Vec2&							aDestination,
 					int32_t								aCurrentTick,
 					int32_t								aLastMoveTick,
-					IMoveRequestQueue::MoveRequest&		aOut);
+					IEventQueue::EventQueueMoveRequest&	aOut);
 		void	Reset(
 					int32_t								aCurrentTick);
 		bool	ShouldResetIfLOS(

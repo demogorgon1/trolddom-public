@@ -4,10 +4,12 @@
 #include <tpublic/Components/Owner.h>
 #include <tpublic/Components/Position.h>
 
+#include <tpublic/Data/Ability.h>
+
 #include <tpublic/Systems/Environment.h>
 
 #include <tpublic/EntityInstance.h>
-#include <tpublic/IAbilityQueue.h>
+#include <tpublic/IEventQueue.h>
 #include <tpublic/IWorldView.h>
 #include <tpublic/Manifest.h>
 
@@ -56,11 +58,14 @@ namespace tpublic::Systems
 		Components::Environment* environment = GetComponent<Components::Environment>(aComponents);
 		assert(environment != NULL);
 
+		if(aEntityState == EntityState::ID_DESPAWNED)
+			return EntityState::CONTINUE;
+
 		if (aEntityState == EntityState::ID_SPAWNING)
 			return aTicksInState < SPAWN_TICKS ? EntityState::CONTINUE : EntityState::ID_DEFAULT;
 
 		if (aEntityState == EntityState::ID_DESPAWNING)
-			return aTicksInState < DESPAWN_TICKS ? EntityState::CONTINUE : EntityState::DESTROY;
+			return aTicksInState < DESPAWN_TICKS ? EntityState::CONTINUE : EntityState::ID_DESPAWNED;
 
 		if(aContext->m_tick > environment->m_despawnTick)
 			return EntityState::ID_DESPAWNING;
@@ -77,11 +82,11 @@ namespace tpublic::Systems
 		{
 			const Data::Ability* ability = GetManifest()->GetById<tpublic::Data::Ability>(environment->m_abilityId);
 
-			aContext->m_worldView->QueryEntityInstancesAtPosition(position->m_position, [&](
+			aContext->m_worldView->WorldViewEntityInstancesAtPosition(position->m_position, [&](
 				const EntityInstance* aEntityInstance)
 			{
 				if(aEntityInstance->GetEntityInstanceId() != aEntityInstanceId && aEntityInstance->GetEntityInstanceId() != owner->m_ownerEntityInstanceId)
-					aContext->m_abilityQueue->AddAbility(aEntityInstanceId, aEntityInstance->GetEntityInstanceId(), tpublic::Vec2(), ability);
+					aContext->m_eventQueue->EventQueueAbility(aEntityInstanceId, aEntityInstance->GetEntityInstanceId(), tpublic::Vec2(), ability);
 
 				return false; // Don't stop
 			});

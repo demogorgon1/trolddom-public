@@ -13,18 +13,18 @@ namespace tpublic
 		virtual							~IWorldView() {}	
 
 		// Virtual interface
-		virtual const MapData*			GetMapData() const = 0;
-		virtual size_t					QueryAllEntityInstances(
+		virtual const MapData*			WorldViewGetMapData() const = 0;
+		virtual size_t					WorldViewAllEntityInstances(
 											EntityCallback			aEntityCallback) const = 0;
-		virtual const EntityInstance*	QuerySingleEntityInstance(
+		virtual const EntityInstance*	WorldViewSingleEntityInstance(
 											uint32_t				aEntityInstanceId) const = 0;
-		virtual size_t					QueryEntityInstancesAtPosition(
+		virtual size_t					WorldViewEntityInstancesAtPosition(
 											const tpublic::Vec2&	aPosition,
 											EntityCallback			aEntityCallback) const = 0;
-		virtual void					QueryGroupEntityInstances(
+		virtual void					WorldViewGroupEntityInstances(
 											uint64_t				aGroupId,
 											EntityCallback			aEntityCallback) const = 0;						
-		virtual bool					QueryLineOfSight(
+		virtual bool					WorldViewLineOfSight(
 											const tpublic::Vec2&	aFrom,
 											const tpublic::Vec2&	aTo) const = 0;
 

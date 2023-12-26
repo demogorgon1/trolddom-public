@@ -6,7 +6,7 @@
 #include <tpublic/DirectEffects/Threat.h>
 
 #include <tpublic/EntityInstance.h>
-#include <tpublic/IThreatEventQueue.h>
+#include <tpublic/IEventQueue.h>
 
 namespace tpublic::DirectEffects
 {
@@ -97,7 +97,8 @@ namespace tpublic::DirectEffects
 		EntityInstance*				aTarget,
 		IResourceChangeQueue*		/*aCombatResultQueue*/,
 		IAuraEventQueue*			/*aAuraEventQueue*/,
-		IThreatEventQueue*			aThreatEventQueue) 
+		IEventQueue*				aEventQueue,
+		const IWorldView*			/*aWorldView*/) 
 	{				
 		switch (m_applyTo)
 		{
@@ -111,7 +112,7 @@ namespace tpublic::DirectEffects
 					{
 						uint32_t entityInstanceId = i->first;
 
-						aThreatEventQueue->AddThreatEvent(aTarget->GetEntityInstanceId(), entityInstanceId, m_add, m_multiply);
+						aEventQueue->EventQueueThreat(aTarget->GetEntityInstanceId(), entityInstanceId, m_add, m_multiply);
 					}
 				}
 			}
@@ -123,7 +124,7 @@ namespace tpublic::DirectEffects
 
 				if(combatPublic->m_targetEntityInstanceId != 0)
 				{
-					aThreatEventQueue->AddThreatEvent(aTarget->GetEntityInstanceId(), combatPublic->m_targetEntityInstanceId, m_add, m_multiply);
+					aEventQueue->EventQueueThreat(aTarget->GetEntityInstanceId(), combatPublic->m_targetEntityInstanceId, m_add, m_multiply);
 				}
 			}
 			break;

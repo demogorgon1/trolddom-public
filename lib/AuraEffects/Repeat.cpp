@@ -2,7 +2,9 @@
 
 #include <tpublic/AuraEffects/Repeat.h>
 
-#include <tpublic/IAbilityQueue.h>
+#include <tpublic/Data/Ability.h>
+
+#include <tpublic/IEventQueue.h>
 #include <tpublic/Manifest.h>
 #include <tpublic/Vec2.h>
 
@@ -17,7 +19,7 @@ namespace tpublic::AuraEffects
 		const Manifest*			aManifest) 
 	{
 		const Data::Ability* ability = aManifest->GetById<tpublic::Data::Ability>(m_abilityId);
-		aContext->m_abilityQueue->AddAbility(aSourceEntityInstanceId, aTargetEntityInstanceId, Vec2(), ability);
+		aContext->m_eventQueue->EventQueueAbility(aSourceEntityInstanceId, aTargetEntityInstanceId, Vec2(), ability);
 		return true;
 	}
 

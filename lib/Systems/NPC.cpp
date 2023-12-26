@@ -16,7 +16,7 @@
 
 #include <tpublic/EntityInstance.h>
 #include <tpublic/Helpers.h>
-#include <tpublic/IAbilityQueue.h>
+#include <tpublic/IEventQueue.h>
 #include <tpublic/IGroupRoundRobin.h>
 #include <tpublic/IMoveRequestQueue.h>
 #include <tpublic/ItemInstanceData.h>
@@ -113,9 +113,9 @@ namespace tpublic::Systems
 			if(tag->m_playerTag.IsSet())
 			{
 				if(tag->m_playerTag.IsGroup())
-					aContext->m_systemEventQueue->AddGroupKillXPEvent(tag->m_playerTag.GetGroupId(), combat->m_level, aEntityId);
+					aContext->m_eventQueue->EventQueueGroupKillXP(tag->m_playerTag.GetGroupId(), combat->m_level, aEntityId);
 				else if(tag->m_playerTag.IsCharacter())
-					aContext->m_systemEventQueue->AddIndividualKillXPEvent(tag->m_playerTag.GetCharacterId(), tag->m_playerTag.GetCharacterLevel(), combat->m_level, aEntityId);
+					aContext->m_eventQueue->EventQueueIndividualKillXP(tag->m_playerTag.GetCharacterId(), tag->m_playerTag.GetCharacterLevel(), combat->m_level, aEntityId);
 
 				Components::Lootable* lootable = GetComponent<Components::Lootable>(aComponents);
 				lootable->m_playerTag = tag->m_playerTag;
@@ -149,7 +149,7 @@ namespace tpublic::Systems
 									if(rarity < (uint32_t)tag->m_lootThreshold)
 									{
 										// This item rarity is below the threshold, which means it will be assigned using round-robin
-										uint32_t characterId = aContext->m_groupRoundRobin->GetNextGroupRoundRobinCharacterId(groupId);
+										uint32_t characterId = aContext->m_eventQueue->EventQueueGetNextGroupRoundRobinCharacterId(groupId);
 										if(characterId != 0)
 										{
 											loot.m_playerTag.SetCharacter(characterId, 0);
@@ -163,13 +163,13 @@ namespace tpublic::Systems
 										case LootRule::ID_GROUP:
 											{
 												std::vector<uint32_t> groupMembers;
-												aContext->m_worldView->QueryGroupEntityInstances(groupId, [&](
+												aContext->m_worldView->WorldViewGroupEntityInstances(groupId, [&](
 													const EntityInstance* aEntityInstance) -> bool
 												{
 													groupMembers.push_back(aEntityInstance->GetEntityInstanceId());
 													return false;
 												});
-												aContext->m_systemEventQueue->AddGroupLootEvent(aEntityInstanceId, groupId, loot, index, groupMembers);
+												aContext->m_eventQueue->EventQueueGroupLoot(aEntityInstanceId, groupId, loot, index, groupMembers);
 											}
 											break;
 
@@ -202,7 +202,7 @@ namespace tpublic::Systems
 		}
 
 		if(aEntityState == EntityState::ID_DEAD && !threat->m_table.IsEmpty())
-			aContext->m_threatEventQueue->AddThreatClearEvent(aEntityInstanceId);
+			aContext->m_eventQueue->EventQueueThreatClear(aEntityInstanceId);
 
 		npc->m_cooldowns.Update(aContext->m_tick);
 
@@ -210,7 +210,7 @@ namespace tpublic::Systems
 		threat->m_table.Update(aContext->m_tick, threatRemovedEntityInstanceIds);
 
 		for(uint32_t threatRemovedInstanceId : threatRemovedEntityInstanceIds)
-			aContext->m_threatEventQueue->AddThreatEvent(threatRemovedInstanceId, aEntityInstanceId, INT32_MIN);
+			aContext->m_eventQueue->EventQueueThreat(threatRemovedInstanceId, aEntityInstanceId, INT32_MIN);
 
 		EntityState::Id returnValue = EntityState::CONTINUE;
 
@@ -218,7 +218,7 @@ namespace tpublic::Systems
 		{
 			if(npc->m_castInProgress && aContext->m_tick >= npc->m_castInProgress->m_end)
 			{				
-				aContext->m_abilityQueue->AddAbility(
+				aContext->m_eventQueue->EventQueueAbility(
 					aEntityInstanceId, 
 					npc->m_castInProgress->m_targetEntityInstanceId,
 					npc->m_castInProgress->m_aoeTarget,
@@ -229,14 +229,14 @@ namespace tpublic::Systems
 			const EntityInstance* topThreatEntity = NULL;
 			if(!threat->m_table.IsEmpty())
 			{
-				topThreatEntity = aContext->m_worldView->QuerySingleEntityInstance(threat->m_table.GetTop()->m_entityInstanceId);
+				topThreatEntity = aContext->m_worldView->WorldViewSingleEntityInstance(threat->m_table.GetTop()->m_entityInstanceId);
 				if(topThreatEntity != NULL && topThreatEntity->GetState() == EntityState::ID_DEAD)
 					topThreatEntity = NULL;
 			}
 
 			if(aContext->m_tick - threat->m_lastPingTick >= Components::ThreatTarget::PING_INTERVAL_TICKS)
 			{
-				aContext->m_worldView->QueryAllEntityInstances([&](
+				aContext->m_worldView->WorldViewAllEntityInstances([&](
 					const EntityInstance* aEntity)
 				{
 					if(aEntity->GetState() != EntityState::ID_DEAD)
@@ -246,7 +246,7 @@ namespace tpublic::Systems
 						if (aEntity->IsPlayer() && (!faction->IsNeutralOrFriendly() || combat->m_targetEntityInstanceId == aEntity->GetEntityInstanceId()))
 						{
 							if (isWithinDistance)
-								aContext->m_threatEventQueue->AddThreatEvent(aEntity->GetEntityInstanceId(), aEntityInstanceId, 0);
+								aContext->m_eventQueue->EventQueueThreat(aEntity->GetEntityInstanceId(), aEntityInstanceId, 0);
 						}
 						else if(topThreatEntity != NULL && aEntity->GetState() != EntityState::ID_IN_COMBAT && !faction->IsNeutralOrFriendly())
 						{
@@ -254,7 +254,7 @@ namespace tpublic::Systems
 							{
 								const tpublic::Components::CombatPublic* nearbyNonPlayerCombatPublic = aEntity->GetComponent<tpublic::Components::CombatPublic>();
 								if(nearbyNonPlayerCombatPublic != NULL && nearbyNonPlayerCombatPublic->m_factionId == combat->m_factionId)
-									aContext->m_threatEventQueue->AddThreatEvent(topThreatEntity->GetEntityInstanceId(), aEntity->GetEntityInstanceId(), 0);
+									aContext->m_eventQueue->EventQueueThreat(topThreatEntity->GetEntityInstanceId(), aEntity->GetEntityInstanceId(), 0);
 							}
 						}
 					}
@@ -331,12 +331,12 @@ namespace tpublic::Systems
 
 							if(spawnSquaredDistance <= (int32_t)(npc->m_npcBehaviorState->m_maxRange * npc->m_npcBehaviorState->m_maxRange))
 							{
-								IMoveRequestQueue::MoveRequest moveRequest;
+								IEventQueue::EventQueueMoveRequest moveRequest;
 								moveRequest.AddToPriorityList(direction);
-								moveRequest.m_moveRequestType = IMoveRequestQueue::MOVE_REQUEST_TYPE_SIMPLE;
+								moveRequest.m_type = IEventQueue::EventQueueMoveRequest::TYPE_SIMPLE;
 								moveRequest.m_entityInstanceId = aEntityInstanceId;
 
-								aContext->m_moveRequestQueue->AddMoveRequest(moveRequest);
+								aContext->m_eventQueue->EventQueueMove(moveRequest);
 							}
 
 							npc->m_moveCooldownUntilTick = aContext->m_tick + 10 + (uint32_t)aContext->m_random->operator()() % 10;
@@ -374,7 +374,7 @@ namespace tpublic::Systems
 					uint32_t topThreatEntityInstanceId = threat->m_table.GetTop()->m_entityInstanceId;
 					npc->m_targetEntityInstanceId = topThreatEntityInstanceId;
 					
-					const EntityInstance* target = aContext->m_worldView->QuerySingleEntityInstance(npc->m_targetEntityInstanceId);
+					const EntityInstance* target = aContext->m_worldView->WorldViewSingleEntityInstance(npc->m_targetEntityInstanceId);
 					if (target == NULL || target->GetState() == EntityState::ID_DEAD)
 					{
 						threat->m_table.Remove(npc->m_targetEntityInstanceId);
@@ -404,7 +404,7 @@ namespace tpublic::Systems
 							if(!combat->HasResourcesForAbility(ability))
 								continue;
 
-							if(!aContext->m_worldView->QueryLineOfSight(targetPosition->m_position, position->m_position))
+							if(!aContext->m_worldView->WorldViewLineOfSight(targetPosition->m_position, position->m_position))
 								continue;
 
 							if (abilityEntry.m_useProbability == UINT32_MAX || (*aContext->m_random)() < abilityEntry.m_useProbability)
@@ -432,23 +432,23 @@ namespace tpublic::Systems
 							}
 							else
 							{
-								aContext->m_abilityQueue->AddAbility(aEntityInstanceId, target->GetEntityInstanceId(), Vec2(), useAbility);
+								aContext->m_eventQueue->EventQueueAbility(aEntityInstanceId, target->GetEntityInstanceId(), Vec2(), useAbility);
 							}
 						}
 						else if(npc->m_moveCooldownUntilTick < aContext->m_tick && distanceSquared > 1)
 						{
 							if(npc->m_npcMovement.ShouldResetIfLOS(aContext->m_tick))
 							{
-								if(aContext->m_worldView->QueryLineOfSight(position->m_position, targetPosition->m_position))
+								if(aContext->m_worldView->WorldViewLineOfSight(position->m_position, targetPosition->m_position))
 									npc->m_npcMovement.Reset(aContext->m_tick);
 							}
 
-							IMoveRequestQueue::MoveRequest moveRequest;
-							if(npc->m_npcMovement.GetMoveRequest(aContext->m_worldView->GetMapData()->m_mapPathData.get(), position->m_position, targetPosition->m_position, aContext->m_tick, position->m_lastMoveTick, moveRequest))
+							IEventQueue::EventQueueMoveRequest moveRequest;
+							if(npc->m_npcMovement.GetMoveRequest(aContext->m_worldView->WorldViewGetMapData()->m_mapPathData.get(), position->m_position, targetPosition->m_position, aContext->m_tick, position->m_lastMoveTick, moveRequest))
 							{
 								moveRequest.m_entityInstanceId = aEntityInstanceId;
 
-								aContext->m_moveRequestQueue->AddMoveRequest(moveRequest);
+								aContext->m_eventQueue->EventQueueMove(moveRequest);
 
 								npc->m_moveCooldownUntilTick = aContext->m_tick + 2;
 							}
@@ -466,12 +466,12 @@ namespace tpublic::Systems
 			else if(npc->m_moveCooldownUntilTick < aContext->m_tick)
 			{
 				// FIXME: since (future me: what?)
-				IMoveRequestQueue::MoveRequest moveRequest;
-				if (npc->m_npcMovement.GetMoveRequest(aContext->m_worldView->GetMapData()->m_mapPathData.get(), position->m_position, npc->m_anchorPosition, aContext->m_tick, position->m_lastMoveTick, moveRequest))
+				IEventQueue::EventQueueMoveRequest moveRequest;
+				if (npc->m_npcMovement.GetMoveRequest(aContext->m_worldView->WorldViewGetMapData()->m_mapPathData.get(), position->m_position, npc->m_anchorPosition, aContext->m_tick, position->m_lastMoveTick, moveRequest))
 				{
 					moveRequest.m_entityInstanceId = aEntityInstanceId;
 
-					aContext->m_moveRequestQueue->AddMoveRequest(moveRequest);
+					aContext->m_eventQueue->EventQueueMove(moveRequest);
 
 					npc->m_moveCooldownUntilTick = aContext->m_tick + 2;
 				}
