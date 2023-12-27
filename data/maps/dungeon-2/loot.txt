@@ -3,6 +3,7 @@ loot_table .trash:
 	slots:
 	[
 		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
 	]	
 }
 

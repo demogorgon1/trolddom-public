@@ -23,7 +23,7 @@ namespace tpublic
 				const char*				aString)
 			{
 				std::string_view t(aString);
-				if(t == "cash_loot")
+				if (t == "cash_loot")
 					return FLAG_CASH_LOOT;
 				return 0;
 			}

@@ -7,14 +7,6 @@ map_entity_spawn .spirit_stone:
 	entity spirit_stone: { init_state: default } 
 }
 
-map_entity_spawn .wildlife:
-{	
-	entity .deer_1: { level: 1 weight: 1 zones: [ .zone_1 ] } 
-	entity .boar_1: { level: 1 weight: 1 zones: [ .zone_1 ] } 
-	entity .deer_2: { level: 2 weight: 1 zones: [ .zone_1 ] } 
-	entity .boar_2: { level: 2 weight: 1 zones: [ .zone_1 ] } 
-}
-
 map_entity_spawn .mining:
 {	
 	spawn_timer: { despawn_required: true min_delay: 600 cooldown_range_min: 1200 cooldown_range_max: 4800 }

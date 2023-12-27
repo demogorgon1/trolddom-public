@@ -3,6 +3,7 @@ loot_table .ignorg:
 	slots:
 	[
 		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
 	]	
 }
 
@@ -11,6 +12,7 @@ loot_table .trash:
 	slots:
 	[
 		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
 	]	
 }
 

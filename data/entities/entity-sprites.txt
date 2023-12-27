@@ -17,6 +17,11 @@ sprites:
 	sprite man_3: { }
 	sprite man_4: { }
 	sprite man_5: { }
+	sprite fisherman_1: { }
+	sprite wolf_1: { }
+	sprite wolf_2: { }
+	sprite wolf_3: { }
+	sprite bear: { }
 	
 	cursor: { position: [ 0 16 ] }
 	
@@ -31,6 +36,11 @@ sprites:
 	sprite man_3_dead: { }
 	sprite man_4_dead: { }
 	sprite man_5_dead: { }
+	sprite fisherman_1_dead: { }
+	sprite wolf_1_dead: { }
+	sprite wolf_2_dead: { }
+	sprite wolf_3_dead: { }
+	sprite bear_dead: { }
 }
 
 sprites:

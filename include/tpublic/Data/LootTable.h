@@ -69,6 +69,8 @@ namespace tpublic
 							m_weight = aChild->GetUInt32();
 						else if(aChild->m_name == "loot_group")
 							m_lootGroupId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_LOOT_GROUP, aChild->GetIdentifier());
+						else if (aChild->m_name == "creature_types")
+							aChild->GetIdArray(DataType::ID_CREATURE_TYPE, m_creatureTypes);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					});
@@ -80,6 +82,7 @@ namespace tpublic
 				{
 					aStream->WriteUInt(m_weight);
 					aStream->WriteUInt(m_lootGroupId);
+					aStream->WriteUInts(m_creatureTypes);
 				}
 
 				bool
@@ -90,12 +93,33 @@ namespace tpublic
 						return false;
 					if (!aStream->ReadUInt(m_lootGroupId))
 						return false;
+					if (!aStream->ReadUInts(m_creatureTypes))
+						return false;
 					return true;
+				}
+
+				bool
+				HasCreatureType(
+					uint32_t	aCreatureTypeId) const
+				{
+					if(m_creatureTypes.empty())
+						return true; // Doesn't matter what creature type it is
+
+					if(aCreatureTypeId == 0)
+						return false; // This possibility is for specific creature types only
+
+					for(uint32_t t : m_creatureTypes)
+					{
+						if(t == aCreatureTypeId)
+							return true;
+					}
+					return false;
 				}
 
 				// Public data
 				uint32_t						m_weight = 1;
 				uint32_t						m_lootGroupId = 0;
+				std::vector<uint32_t>			m_creatureTypes;
 			};
 
 			struct Slot

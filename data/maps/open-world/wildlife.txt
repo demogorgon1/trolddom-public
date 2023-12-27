@@ -1,5 +1,7 @@
 loot_group .deer_drops: {}
 loot_group .boar_drops: {}
+loot_group .bear_drops: {}
+loot_group .wolf_drops: {}
 
 item .antlers:
 {
@@ -41,31 +43,43 @@ item .pristine_tusks:
 	level_range: [ 3 4 ]
 }
 
-loot_table .deer:
+item .bear_claw:
+{
+	loot_groups: [ .bear_drops ]		
+	root: {	name: "Bear Claw" }
+	icon: icon_claw
+	stack: 4
+	item_level: 5
+	level_range: [ 5 6 ]
+}
+
+item .wolf_teeth:
+{
+	loot_groups: [ .wolf_drops ]		
+	root: {	name: "Wolf Teeth" }
+	icon: icon_teeth
+	stack: 4
+	item_level: 4
+	level_range: [ 4 6 ]
+}
+
+!define local WILDLIFE_LOOT_TABLE
 {
 	slots:
 	[
 		{
 			possibility: { weight: 1 }
-			possibility: { weight: 1 loot_group: .deer_drops }
+			possibility: { weight: 1 loot_group: @_loot_group }
 		}		
 	
 		!WORLD_DROPS{}
 	]	
 }
 
-loot_table .boar:
-{
-	slots:
-	[
-		{
-			possibility: { weight: 1 }
-			possibility: { weight: 1 loot_group: .boar_drops }
-		}		
-	
-		!WORLD_DROPS{}
-	]	
-}
+loot_table .deer: !WILDLIFE_LOOT_TABLE { _loot_group: .deer_drops }
+loot_table .boar: !WILDLIFE_LOOT_TABLE { _loot_group: .boar_drops }
+loot_table .wolf: !WILDLIFE_LOOT_TABLE { _loot_group: .wolf_drops }
+loot_table .bear: !WILDLIFE_LOOT_TABLE { _loot_group: .bear_drops }
 
 npc_behavior_state .wildlife:
 {
@@ -129,3 +143,100 @@ entity .boar_2: !NPC
 	_default_behavior_state: .wildlife
 }
 
+entity .wolf_3: !NPC
+{
+	_string: "Wolf"
+	_level: 3
+	_faction: wildlife_aggressive
+	_sprite: wolf_1
+	_sprite_dead: wolf_1_dead 
+	_weapon_damage: 1.4 
+	_resource_health: 1
+	_loot_table: .wolf
+	_creature_type: beast
+	_default_behavior_state: .wildlife
+}
+
+entity .wolf_4: !NPC
+{
+	_string: "Wolf"
+	_level: 4
+	_faction: wildlife_aggressive
+	_sprite: wolf_2
+	_sprite_dead: wolf_2_dead 
+	_weapon_damage: 1.4 
+	_resource_health: 1
+	_loot_table: .wolf
+	_creature_type: beast
+	_default_behavior_state: .wildlife
+}
+
+entity .wolf_5: !NPC
+{
+	_string: "Wolf"
+	_level: 5
+	_faction: wildlife_aggressive
+	_sprite: wolf_3
+	_sprite_dead: wolf_3_dead 
+	_weapon_damage: 1.4 
+	_resource_health: 1
+	_loot_table: .wolf
+	_creature_type: beast
+	_default_behavior_state: .wildlife
+}
+
+entity .bear_4: !NPC
+{
+	_string: "Bear"
+	_level: 4
+	_faction: wildlife_aggressive
+	_sprite: bear
+	_sprite_dead: bear_dead 
+	_weapon_damage: 1.3 
+	_resource_health: 1.4
+	_loot_table: .bear
+	_creature_type: beast
+	_default_behavior_state: .wildlife
+}
+
+entity .bear_5: !NPC
+{
+	_string: "Bear"
+	_level: 5
+	_faction: wildlife_aggressive
+	_sprite: bear
+	_sprite_dead: bear_dead 
+	_weapon_damage: 1.3 
+	_resource_health: 1.4
+	_loot_table: .bear
+	_creature_type: beast
+	_default_behavior_state: .wildlife
+}
+
+entity .bear_6: !NPC
+{
+	_string: "Bear"
+	_level: 6
+	_faction: wildlife_aggressive
+	_sprite: bear
+	_sprite_dead: bear_dead 
+	_weapon_damage: 1.3 
+	_resource_health: 1.4
+	_loot_table: .bear
+	_creature_type: beast
+	_default_behavior_state: .wildlife
+}
+
+map_entity_spawn .wildlife:
+{	
+	entity .deer_1: { level: 1 weight: 1 } 
+	entity .boar_1: { level: 1 weight: 1 } 
+	entity .deer_2: { level: 2 weight: 1 } 
+	entity .boar_2: { level: 2 weight: 1 } 
+	entity .wolf_3: { level: 3 weight: 1 } 
+	entity .wolf_4: { level: 4 weight: 1 } 
+	entity .wolf_5: { level: 5 weight: 1 } 
+	entity .bear_4: { level: 4 weight: 1 } 
+	entity .bear_5: { level: 5 weight: 1 } 
+	entity .bear_6: { level: 6 weight: 1 } 
+}

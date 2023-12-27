@@ -7,6 +7,10 @@ faction wildlife:
 	flags: [ neutral ]
 }
 
+faction wildlife_aggressive:
+{
+}
+
 faction npcs:
 {
 	flags: [ friendly ]

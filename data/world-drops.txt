@@ -1,3 +1,4 @@
+loot_group world_drops_cloth: {}
 loot_group world_drops_junk: {}
 loot_group world_drops_consumable: {}
 loot_group world_drops_uncommon: {}
@@ -12,4 +13,10 @@ loot_group world_drops_epic: {}
 	possibility: { weight: 80 loot_group: world_drops_uncommon }	
 	possibility: { weight: 8 loot_group: world_drops_rare }	
 	possibility: { weight: 1 loot_group: world_drops_epic }	
+}
+
+!define WORLD_DROPS_CLOTH
+{
+	possibility: { weight: 1 }
+	possibility: { weight: 1 loot_group: world_drops_cloth creature_types: [ humanoid demon undead ] }
 }

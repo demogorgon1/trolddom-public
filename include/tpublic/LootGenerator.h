@@ -33,6 +33,7 @@ namespace tpublic
 		void		GenerateItems(
 						std::mt19937&				aRandom,
 						uint32_t					aLevel,
+						uint32_t					aCreatureTypeId,
 						const Data::LootTable*		aLootTable,
 						ItemCallback				aItemCallback) const;						
 

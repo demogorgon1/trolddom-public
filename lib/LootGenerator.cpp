@@ -93,7 +93,7 @@ namespace tpublic
 		}
 
 		// Items
-		GenerateItems(aRandom, aLevel, lootTable, [aLootable](
+		GenerateItems(aRandom, aLevel, aCreatureTypeId, lootTable, [aLootable](
 			const tpublic::ItemInstance& aItemInstance)
 		{
 			Components::Lootable::AvailableLoot loot;
@@ -106,6 +106,7 @@ namespace tpublic
 	LootGenerator::GenerateItems(
 		std::mt19937&				aRandom,
 		uint32_t					aLevel,
+		uint32_t					aCreatureTypeId,
 		const Data::LootTable*		aLootTable,
 		ItemCallback				aItemCallback) const
 	{	
@@ -114,7 +115,10 @@ namespace tpublic
 			uint32_t totalWeight = 0;
 
 			for(const Data::LootTable::Possibility& possibility : slot->m_possibilities)
-				totalWeight += possibility.m_weight;
+			{
+				if(possibility.HasCreatureType(aCreatureTypeId))
+					totalWeight += possibility.m_weight;
+			}
 
 			std::uniform_int_distribution<uint32_t> distribution(1, totalWeight);
 			uint32_t possibilityRoll = distribution(aRandom);
@@ -123,12 +127,15 @@ namespace tpublic
 
 			for (const Data::LootTable::Possibility& possibility : slot->m_possibilities)
 			{
-				accumWeight += possibility.m_weight;
-
-				if(possibilityRoll <= accumWeight)
+				if (possibility.HasCreatureType(aCreatureTypeId))
 				{
-					lootGroupId = possibility.m_lootGroupId;
-					break;
+					accumWeight += possibility.m_weight;
+
+					if (possibilityRoll <= accumWeight)
+					{
+						lootGroupId = possibility.m_lootGroupId;
+						break;
+					}
 				}
 			}
 
