@@ -90,15 +90,18 @@ namespace tpublic
 		};
 
 		void	ToStream(
-					IWriter*			aWriter) const;
+					IWriter*				aWriter) const;
 		bool	FromStream(
-					IReader*			aReader);
+					IReader*				aReader);
 		void	Build(
-					uint32_t			aWidth,
-					uint32_t			aHeight,
-					const uint32_t*		aTileMap);
+					uint32_t				aWidth,
+					uint32_t				aHeight,
+					const uint32_t*			aTileMap);
 		void	CopyFrom(
-					const MapCovers*	aOther);
+					const MapCovers*		aOther);
+		void	ReconstructTileMap(
+					const Vec2&				aSize,
+					std::vector<uint32_t>&	aOutTileMap) const;
 					
 		// Public data
 		std::vector<std::unique_ptr<Entry>>		m_entries;

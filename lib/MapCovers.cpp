@@ -132,4 +132,29 @@ namespace tpublic
 		}
 	}
 
+	void	
+	MapCovers::ReconstructTileMap(
+		const Vec2&				aSize,
+		std::vector<uint32_t>&	aOutTileMap) const
+	{
+		aOutTileMap.resize(aSize.m_x * aSize.m_y, 0);
+		
+		for (const std::unique_ptr<Entry>& t : m_entries)
+		{
+			assert(t->m_position.m_x + t->m_size.m_x <= aSize.m_x);
+			assert(t->m_position.m_y + t->m_size.m_y <= aSize.m_y);
+
+			size_t rowBytes = (size_t)t->m_size.m_x * sizeof(uint32_t);
+			uint32_t* out = &aOutTileMap[t->m_position.m_x + t->m_position.m_y * aSize.m_x];
+			const uint32_t* in = t->m_tileMap;
+
+			for(int32_t y = 0; y < t->m_size.m_y; y++)
+			{
+				memcpy(out, in, rowBytes);
+				out += aSize.m_x;
+				in += t->m_size.m_x;
+			}
+		}
+	}
+
 }

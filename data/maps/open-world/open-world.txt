@@ -82,27 +82,42 @@ zone .zone_1:
 
 zone .zone_2:
 {
-	string: "Zone 2"
+	string: "Southshore"
 }
 
 zone .zone_3:
 {
-	string: "Zone 3"
+	string: "Eldertree Woods"
 }
 
 zone .zone_4:
 {
-	string: "Zone 4"
+	string: "Dark Cove"
 }
 
 zone .zone_5:
 {
-	string: "Zone 5"
+	string: "Eastshore"
 }
 
 zone .zone_6:
 {
-	string: "Zone 6"
+	string: "Dinith Mountains"
+}
+
+zone .zone_7:
+{
+	string: "Dinith Bay"
+}
+
+zone .zone_8:
+{
+	string: "Black Woods"
+}
+
+zone .zone_9:
+{
+	string: "Northern Wastes"
 }
 
 map_palette .tiles:
@@ -149,12 +164,12 @@ map_palette .levels:
 	level<2>: [ 255 0 0 ]
 	level<3>: [ 0 0 255 ]
 	level<4>: [ 0 255 255 ]
-	level<5>: [ 255 0 255 ]
-	level<6>: [ 255 255 0 ]
-	level<7>: [ 127 127 0 ]
-	level<8>: [ 0 127 127 ]
-	level<9>: [ 127 0 127 ]
-	level<10>: [ 127 0 255 ]
+	level<5>: [ 127 127 0 ]
+	level<6>: [ 0 127 127 ]
+	level<7>: [ 127 0 127 ]
+	level<8>: [ 127 0 255 ]
+	level<9>: [ 255 0 255 ]
+	level<10>: [ 255 255 0 ]
 }
 
 map_palette .zones:
@@ -165,6 +180,9 @@ map_palette .zones:
 	zone .zone_4: [ 127 0 127 ]
 	zone .zone_5: [ 255 255 0 ]
 	zone .zone_6: [ 255 127 0 ]	
+	zone .zone_7: [ 0 0 255 ]	
+	zone .zone_8: [ 0 255 0 ]	
+	zone .zone_9: [ 220 0 255 ]	
 }
 
 map open_world:

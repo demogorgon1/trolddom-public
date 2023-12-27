@@ -33,6 +33,14 @@ namespace tpublic
 			Vec2 combinedSize = Combine(aOther).GetSize();
 			return combinedSize.m_x < size.m_x + otherSize.m_x && combinedSize.m_y < size.m_y + otherSize.m_y;
 		}
+
+		void
+		AddPosition(
+			const Vec2&		aPosition)
+		{
+			m_min = { Base::Min(m_min.m_x, aPosition.m_x), Base::Min(m_min.m_y, aPosition.m_y) };
+			m_max = { Base::Max(m_max.m_x, aPosition.m_x), Base::Max(m_max.m_y, aPosition.m_y) };
+		}
 	
 		// Public data
 		Vec2		m_min; 
