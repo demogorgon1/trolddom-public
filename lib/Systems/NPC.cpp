@@ -363,6 +363,8 @@ namespace tpublic::Systems
 					tag->m_playerTag.Clear();
 					tag->SetDirty();
 
+					position->m_lastMoveTick = aContext->m_tick;
+
 					returnValue = EntityState::ID_EVADING;
 				}
 				else if(auras->HasEffect(AuraEffect::ID_STUN))
@@ -444,9 +446,16 @@ namespace tpublic::Systems
 							}
 
 							IEventQueue::EventQueueMoveRequest moveRequest;
-							if(npc->m_npcMovement.GetMoveRequest(aContext->m_worldView->WorldViewGetMapData()->m_mapPathData.get(), position->m_position, targetPosition->m_position, aContext->m_tick, position->m_lastMoveTick, moveRequest))
+							if(npc->m_npcMovement.GetMoveRequest(
+								aContext->m_worldView->WorldViewGetMapData()->m_mapPathData.get(), 
+								position->m_position, 
+								targetPosition->m_position, 
+								aContext->m_tick, 
+								position->m_lastMoveTick, 
+								moveRequest))
 							{
 								moveRequest.m_entityInstanceId = aEntityInstanceId;
+								moveRequest.m_canMoveOnAllNonViewBlockingTiles = npc->m_canMoveOnAllNonViewBlockingTiles;
 
 								aContext->m_eventQueue->EventQueueMove(moveRequest);
 
@@ -467,14 +476,19 @@ namespace tpublic::Systems
 			{
 				// FIXME: since (future me: what?)
 				IEventQueue::EventQueueMoveRequest moveRequest;
-				if (npc->m_npcMovement.GetMoveRequest(aContext->m_worldView->WorldViewGetMapData()->m_mapPathData.get(), position->m_position, npc->m_anchorPosition, aContext->m_tick, position->m_lastMoveTick, moveRequest))
+				if (!npc->m_npcMovement.GetMoveRequest(aContext->m_worldView->WorldViewGetMapData()->m_mapPathData.get(), position->m_position, npc->m_anchorPosition, aContext->m_tick, position->m_lastMoveTick, moveRequest))
 				{
-					moveRequest.m_entityInstanceId = aEntityInstanceId;
-
-					aContext->m_eventQueue->EventQueueMove(moveRequest);
-
-					npc->m_moveCooldownUntilTick = aContext->m_tick + 2;
+					// Can't seem to move, teleport all the way back to anchor
+					moveRequest.m_type = IEventQueue::EventQueueMoveRequest::TYPE_SIMPLE;
+					moveRequest.AddToPriorityList(npc->m_anchorPosition - position->m_position);
 				}
+
+				moveRequest.m_entityInstanceId = aEntityInstanceId;
+				moveRequest.m_canMoveOnAllNonViewBlockingTiles = npc->m_canMoveOnAllNonViewBlockingTiles;
+
+				aContext->m_eventQueue->EventQueueMove(moveRequest);
+
+				npc->m_moveCooldownUntilTick = aContext->m_tick + 2;
 			}
 			break;
 

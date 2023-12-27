@@ -58,6 +58,11 @@ map_entity_spawn .fisherman:
 	entity .fisherman: { weight: 1 }
 }
 
+map_entity_spawn .spawn_of_umbracoth:
+{
+	entity .spawn_of_umbracoth: { weight: 1 }
+}
+
 map_player_spawn .player_spawn:
 {
 }
@@ -145,6 +150,7 @@ map_palette .stuff:
 	entity_spawn .harald_skrald: [ 200 189 0 ]
 	entity_spawn .fisherman: [ 0 2 255 ]
 	entity_spawn .spirit_stone: [ 0 0 0 ]
+	entity_spawn .spawn_of_umbracoth: [ 32 0 0 ]	
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn dungeon_1_exit: [ 0 0 200 ]	
 	portal .dungeon_1_entrance: [ 0 234 0 ]	

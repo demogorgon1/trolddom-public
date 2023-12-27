@@ -41,6 +41,15 @@ sprites:
 	sprite wolf_2_dead: { }
 	sprite wolf_3_dead: { }
 	sprite bear_dead: { }
+	
+	cursor: { position: [ 0 32 ] }
+
+	sprite tentacle_monster: { }
+	
+	cursor: { position: [ 0 48 ] }
+	
+	sprite tentacle_monster_dead: { }
+	
 }
 
 sprites:

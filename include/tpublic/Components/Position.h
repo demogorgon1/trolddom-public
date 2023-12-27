@@ -20,7 +20,7 @@ namespace tpublic
 			enum Field : uint32_t
 			{
 				FIELD_POSITION,
-				FIELD_BLOCK
+				FIELD_BLOCK,
 			};
 
 			static void

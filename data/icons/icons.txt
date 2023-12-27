@@ -90,6 +90,9 @@ sprites:
 	sprite icon_stuff : { }
 	sprite icon_fishing_rod : { }
 	sprite icon_small_blue_fish : { }
+	sprite icon_teeth : { }
+	sprite icon_claw : { }
+	
 	
 }
 

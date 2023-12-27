@@ -54,6 +54,7 @@ namespace tpublic
 			uint32_t			m_entityInstanceId = 0;
 			Vec2				m_priorityList[MAX_PRIORITY_LIST_LENGTH];
 			uint32_t			m_priorityListLength = 0;
+			bool				m_canMoveOnAllNonViewBlockingTiles = false;
 		};
 
 		struct EventQueueSpawnEntityRequest

@@ -98,8 +98,8 @@ entity .fisherman:
 		{ 
 			animations:
 			[
-				{ states: [ default in_combat spawning ] frames: [ man_4 ] }			
-				{ states: [ dead ] frames: [ man_4_dead ] z_offset: -2 }			
+				{ states: [ default in_combat spawning ] frames: [ fisherman_1 ] }			
+				{ states: [ dead ] frames: [ fisherman_1_dead ] z_offset: -2 }			
 			]		
 		}		
 	}
