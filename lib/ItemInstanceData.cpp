@@ -113,6 +113,9 @@ namespace tpublic
 		if (!aNode->m_suffix.empty())
 			m_suffix = aNode->m_suffix;
 
+		if (!aNode->m_flavor.empty())
+			m_flavor = aNode->m_flavor;
+
 		m_statBudget += aNode->m_budgetBias;
 
 		if(aNode->m_weaponDamage.has_value())

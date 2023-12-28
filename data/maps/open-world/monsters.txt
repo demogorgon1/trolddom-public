@@ -1,3 +1,80 @@
+##########################################################################################
+# Spawn of Umbracoth
+
+loot_group .spawn_of_umbracoth_quest_drop: { }
+loot_group .spawn_of_umbracoth_junk: { }
+loot_table .spawn_of_umbracoth: 
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .spawn_of_umbracoth_quest_drop }			
+		}		
+	
+		!WORLD_DROPS{ _extra_possibility: { loot_group: .spawn_of_umbracoth_junk weight: 250 } }
+	]	
+}
+
+ability .spawn_of_umbracoth_quest_drop_start_quest:	
+{
+	string: "Glowing Tentacle"
+	description: "This item starts a quest."
+	flags: [ target_self ]
+	icon: icon_tentacle
+	direct_effect start_quest: { quest: .spawn_of_umbracoth }
+	states: [ default in_combat ]
+	requirement self<must_not_have_completed_quest>: { id: .spawn_of_umbracoth }
+	requirement self<must_not_have_active_quest>: { id: .spawn_of_umbracoth }
+}
+
+item .spawn_of_umbracoth_quest_drop:
+{
+	loot_groups: [ .spawn_of_umbracoth_quest_drop ]		
+	root: {	name: "Glowing Tentacle" flavor: "Slimy." }
+	icon: icon_tentacle
+	stack: 4
+	item_level: 5
+	unique: true
+	use_ability: .spawn_of_umbracoth_quest_drop_start_quest
+}
+
+item .spawn_of_umbracoth_junk:
+{
+	loot_groups: [ .spawn_of_umbracoth_junk ]		
+	root: {	name: "Green Slime" }
+	icon: icon_green_bottle
+	stack: 4
+	item_level: 5
+}
+
+quest .spawn_of_umbracoth:
+{
+	string: "Glowing Tentacle"
+
+	text:
+	[
+		"Bring the glowing tentacle back to town. Maybe someone there can tell you what kind of monster you just encountered."
+	]
+	
+	description: 
+	[
+		"The severed tentacle has an eerie glow to it, but at least it's also quite slimy."
+	]
+
+	progress:
+	[
+		"(progress)"
+	]
+	
+	completion:
+	[
+		"(completion)"
+	]
+
+	level: 5
+	type: elite	
+}
+
 entity .spawn_of_umbracoth: !NPC
 {
 	_string: "Spawn of Umbracoth"
@@ -8,7 +85,8 @@ entity .spawn_of_umbracoth: !NPC
 	_weapon_damage: 1.5
 	_resource_health: 1.5
 	_elite: true
-	_loot_table: .bear
+	_loot_table: .spawn_of_umbracoth
 	_creature_type: beast
 	_can_move_on_all_non_view_blocking_tiles: true
 }
+

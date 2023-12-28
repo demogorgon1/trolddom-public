@@ -29,6 +29,9 @@ namespace tpublic
 		const ItemInstance&							aItemInstance,
 		const Data::Item*							aItemData)
 	{
+		if(aItemData->m_unique && HasItems(aItemInstance.m_itemId, 1))
+			return false;
+
 		for(Entry& t : m_entries)
 		{
 			if(!t.m_item.IsSet())
@@ -58,6 +61,9 @@ namespace tpublic
 		uint32_t									aQuantity,
 		const Data::Item*							aItemData) const
 	{
+		if (aItemData->m_unique && HasItems(aItemId, 1))
+			return false;
+
 		if(aQuantity == 0)
 			return true;
 
@@ -95,6 +101,9 @@ namespace tpublic
 		uint32_t									aQuantity,
 		const Data::Item*							aItemData) 
 	{
+		if (aItemData->m_unique && HasItems(aItemId, 1))
+			return;
+
 		if(aQuantity == 0)
 			return;
 

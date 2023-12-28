@@ -24,6 +24,7 @@ namespace tpublic
 		const Data::Item*		m_itemData = NULL;
 		std::string				m_name;
 		std::string				m_suffix;
+		std::string				m_flavor;
 		Stat::Collection		m_stats;
 		uint32_t				m_vendorValue = 0;
 		bool					m_isWeapon = false;

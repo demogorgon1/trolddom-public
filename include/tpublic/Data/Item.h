@@ -85,6 +85,8 @@ namespace tpublic
 							m_name = aChild->GetString();
 						else if (aChild->m_name == "suffix")
 							m_suffix = aChild->GetString();
+						else if (aChild->m_name == "flavor")
+							m_flavor = aChild->GetString();
 						else if(aChild->m_name == "weighted_child")
 							m_weightedChildren.push_back(std::make_unique<Node>(aChild, true));
 						else if (aChild->m_name == "random_child")
@@ -117,11 +119,13 @@ namespace tpublic
 					aStream->WriteUInt(m_weaponCooldown);
 					aStream->WriteString(m_name);
 					aStream->WriteString(m_suffix);
+					aStream->WriteString(m_flavor);
 					aStream->WriteInt(m_budgetBias);
 					aStream->WriteUInt(m_chance);
 					aStream->WriteUInt(m_weight);
 					aStream->WriteObjectPointers(m_weightedChildren);
 					aStream->WriteObjectPointers(m_randomChildren);
+
 				}
 
 				bool
@@ -137,6 +141,8 @@ namespace tpublic
 					if (!aStream->ReadString(m_name))
 						return false;
 					if (!aStream->ReadString(m_suffix))
+						return false;
+					if (!aStream->ReadString(m_flavor))
 						return false;
 					if (!aStream->ReadInt(m_budgetBias))
 						return false;
@@ -161,6 +167,7 @@ namespace tpublic
 				uint32_t							m_weaponCooldown = 0;
 				std::string							m_name;
 				std::string							m_suffix;
+				std::string							m_flavor;
 				uint32_t							m_chance = 0;
 				uint32_t							m_weight = 1;				
 				uint32_t							m_totalChildWeight = 0;
@@ -233,6 +240,10 @@ namespace tpublic
 					{
 						m_cost = aChild->GetUInt32();
 					}
+					else if (aChild->m_name == "unique")
+					{
+						m_unique = aChild->GetBool();
+					}
 					else if (aChild->m_name == "use_ability")
 					{
 						m_useAbilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
@@ -278,6 +289,7 @@ namespace tpublic
 				aStream->WriteUInt(m_iconSpriteId);
 				aStream->WriteUInt(m_cost);
 				aStream->WritePOD(m_rarity);
+				aStream->WriteBool(m_unique);
 			}
 
 			bool
@@ -310,6 +322,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadPOD(m_rarity))
 					return false;
+				if(!aStream->ReadBool(m_unique))
+					return false;
 				return true;
 			}
 
@@ -326,6 +340,7 @@ namespace tpublic
 			uint32_t					m_iconSpriteId = 0;
 			uint32_t					m_cost = 0;
 			Rarity::Id					m_rarity = Rarity::ID_COMMON;
+			bool						m_unique = false;
 		};
 
 	}

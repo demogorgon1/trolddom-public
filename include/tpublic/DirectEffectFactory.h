@@ -7,6 +7,7 @@
 #include "DirectEffects/Kill.h"
 #include "DirectEffects/Open.h"
 #include "DirectEffects/Push.h"
+#include "DirectEffects/StartQuest.h"
 #include "DirectEffects/Threat.h"
 
 #include "DirectEffect.h"
@@ -26,6 +27,7 @@ namespace tpublic
 			_Register<DirectEffects::Kill>();
 			_Register<DirectEffects::Open>();
 			_Register<DirectEffects::Push>();
+			_Register<DirectEffects::StartQuest>();
 			_Register<DirectEffects::Threat>();
 		}
 

@@ -28,7 +28,9 @@ namespace tpublic
 				{
 					aWriter->WriteUInt(m_questId);
 					aWriter->WriteUInt(m_objectiveInstanceData.size());
-					aWriter->Write(&m_objectiveInstanceData[0], m_objectiveInstanceData.size());
+
+					if(m_objectiveInstanceData.size() > 0)
+						aWriter->Write(&m_objectiveInstanceData[0], m_objectiveInstanceData.size());
 				}
 
 				bool
@@ -45,9 +47,12 @@ namespace tpublic
 					if(size > 100000)
 						return false;
 
-					m_objectiveInstanceData.resize(size);
-					if(aReader->Read(&m_objectiveInstanceData[0], m_objectiveInstanceData.size()) != m_objectiveInstanceData.size())
-						return false;
+					if(size > 0)
+					{
+						m_objectiveInstanceData.resize(size);
+						if (aReader->Read(&m_objectiveInstanceData[0], m_objectiveInstanceData.size()) != m_objectiveInstanceData.size())
+							return false;
+					}
 					return true;
 				}
 
@@ -128,6 +133,9 @@ namespace tpublic
 
 			// Public data
 			std::vector<std::unique_ptr<Quest>>						m_quests;
+
+			// Internal
+			std::vector<uint32_t>									m_tryStartQuestIds;
 		};
 
 	}

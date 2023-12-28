@@ -1,13 +1,13 @@
 #include "Pcheader.h"
 
+#include <tpublic/Components/ActiveQuests.h>
+#include <tpublic/Components/CompletedQuests.h>
 #include <tpublic/Components/EquippedItems.h>
 #include <tpublic/Components/Inventory.h>
 #include <tpublic/Components/Openable.h>
 #include <tpublic/Components/PlayerPrivate.h>
 #include <tpublic/Components/Position.h>
 #include <tpublic/Components/VisibleAuras.h>
-
-#include <tpublic/Data/Ability.h>
 
 #include <tpublic/EntityInstance.h>
 
@@ -18,41 +18,88 @@ namespace tpublic
 	{
 
 		bool	
+		Check(
+			const EntityInstance*				aSelf,
+			const EntityInstance*				aTarget,
+			const Data::Ability::Requirement*	aRequirement)
+		{
+			const EntityInstance* entity = NULL;
+			switch (aRequirement->m_target)
+			{
+			case Data::Ability::Requirement::TARGET_SELF:	entity = aSelf; break;
+			case Data::Ability::Requirement::TARGET_TARGET: entity = aTarget; break;
+			default: assert(false); break;
+			}
+
+			if (entity == NULL)
+				return false;
+
+			switch(aRequirement->m_type)
+			{
+			case Data::Ability::Requirement::TYPE_MUST_HAVE_AURA:
+			case Data::Ability::Requirement::TYPE_MUST_NOT_HAVE_AURA:
+				{
+					const Components::VisibleAuras* visibleAuras = entity->GetComponent<Components::VisibleAuras>();
+					bool hasAura = visibleAuras->HasAura(aRequirement->m_id);
+					if (aRequirement->m_type == Data::Ability::Requirement::TYPE_MUST_HAVE_AURA && !hasAura)
+						return false;
+					else if (aRequirement->m_type == Data::Ability::Requirement::TYPE_MUST_NOT_HAVE_AURA && hasAura)
+						return false;
+				}
+				break;					
+
+			case Data::Ability::Requirement::TYPE_MUST_HAVE_COMPLETED_QUEST:
+			case Data::Ability::Requirement::TYPE_MUST_NOT_HAVE_COMPLETED_QUEST:
+				{
+					if(aRequirement->m_target != Data::Ability::Requirement::TARGET_SELF)
+						return false;
+
+					const Components::CompletedQuests* completedQuests = entity->GetComponent<Components::CompletedQuests>();
+					bool hasCompletedQuest = completedQuests->m_questIds.HasValue(aRequirement->m_id);
+					if(aRequirement->m_type == Data::Ability::Requirement::TYPE_MUST_HAVE_COMPLETED_QUEST && !hasCompletedQuest)
+						return false;
+					else if (aRequirement->m_type == Data::Ability::Requirement::TYPE_MUST_NOT_HAVE_COMPLETED_QUEST && hasCompletedQuest)
+						return false;
+				}
+				break;
+
+			case Data::Ability::Requirement::TYPE_MUST_HAVE_ACTIVE_QUEST:
+			case Data::Ability::Requirement::TYPE_MUST_NOT_HAVE_ACTIVE_QUEST:
+				{
+					if(aRequirement->m_target != Data::Ability::Requirement::TARGET_SELF)
+						return false;
+
+					const Components::ActiveQuests* activeQuests = entity->GetComponent<Components::ActiveQuests>();
+					bool hasActiveQuest = activeQuests->HasQuest(aRequirement->m_id);
+					if(aRequirement->m_type == Data::Ability::Requirement::TYPE_MUST_HAVE_ACTIVE_QUEST && !hasActiveQuest)
+						return false;
+					else if (aRequirement->m_type == Data::Ability::Requirement::TYPE_MUST_NOT_HAVE_ACTIVE_QUEST && hasActiveQuest)
+						return false;
+				}
+				break;
+
+			default:
+				assert(false);
+				break;
+			}
+
+			return true;
+		}
+
+		bool	
 		CheckAbility(
-			const Data::Ability*			aAbility,
-			const EntityInstance*			aSelf,
-			const EntityInstance*			aTarget)
+			const Data::Ability*				aAbility,
+			const EntityInstance*				aSelf,
+			const EntityInstance*				aTarget,
+			const Data::Ability::Requirement**	aOutFailedRequirement)
 		{
 			for(const Data::Ability::Requirement& requirement : aAbility->m_requirements)
 			{
-				const EntityInstance* entity = NULL;
-				switch (requirement.m_target)
+				if(!Check(aSelf, aTarget, &requirement))
 				{
-				case Data::Ability::Requirement::TARGET_SELF:	entity = aSelf; break;
-				case Data::Ability::Requirement::TARGET_TARGET: entity = aTarget; break;
-				default: assert(false); break;
-				}
-
-				if (entity == NULL)
+					if(aOutFailedRequirement != NULL)
+						*aOutFailedRequirement = &requirement;
 					return false;
-
-				switch(requirement.m_type)
-				{
-				case Data::Ability::Requirement::TYPE_MUST_HAVE_AURA:
-				case Data::Ability::Requirement::TYPE_MUST_NOT_HAVE_AURA:
-					{
-						const Components::VisibleAuras* visibleAuras = entity->GetComponent<Components::VisibleAuras>();
-						bool hasAura = visibleAuras->HasAura(requirement.m_id);
-						if (requirement.m_type == Data::Ability::Requirement::TYPE_MUST_HAVE_AURA && !hasAura)
-							return false;
-						else if (requirement.m_type == Data::Ability::Requirement::TYPE_MUST_NOT_HAVE_AURA && hasAura)
-							return false;
-					}
-					break;					
-
-				default:
-					assert(false);
-					break;
 				}
 			}
 

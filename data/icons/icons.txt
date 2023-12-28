@@ -92,6 +92,8 @@ sprites:
 	sprite icon_small_blue_fish : { }
 	sprite icon_teeth : { }
 	sprite icon_claw : { }
+	sprite icon_tentacle : { }
+	sprite icon_green_bottle : { }
 	
 	
 }
