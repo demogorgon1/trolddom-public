@@ -2,6 +2,7 @@
 
 #include "../DataBase.h"
 #include "../DialogueScript.h"
+#include "../Requirement.h"
 
 namespace tpublic
 {
@@ -33,6 +34,11 @@ namespace tpublic
 						}
 						else if (aChild->m_name == "quest")
 						{
+							if(aChild->m_annotation && aChild->m_annotation->IsIdentifier("completion_only"))
+								m_questOffer = false;
+							else if (aChild->m_annotation && aChild->m_annotation->IsIdentifier("offer_only"))
+								m_questCompletion = false;
+
 							m_questId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_QUEST, aChild->GetIdentifier());
 						}
 						else if (aChild->m_name == "text")
@@ -47,6 +53,10 @@ namespace tpublic
 						else if (aChild->m_name == "condition")
 						{
 							m_conditionExpressionId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_EXPRESSION, aChild->GetIdentifier());
+						}
+						else if(aChild->m_tag == "requirement")
+						{
+							m_requirements.push_back(Requirement(aChild));
 						}
 						else
 						{
@@ -64,6 +74,9 @@ namespace tpublic
 					aWriter->WriteUInt(m_questId);
 					aWriter->WritePOD(m_dialogueScript);
 					aWriter->WriteUInt(m_conditionExpressionId);
+					aWriter->WriteBool(m_questOffer);
+					aWriter->WriteBool(m_questCompletion);
+					aWriter->WriteObjects(m_requirements);
 				}
 
 				bool
@@ -80,15 +93,24 @@ namespace tpublic
 						return false;
 					if (!aReader->ReadUInt(m_conditionExpressionId))
 						return false;
+					if (!aReader->ReadBool(m_questOffer))
+						return false;
+					if (!aReader->ReadBool(m_questCompletion))
+						return false;
+					if(!aReader->ReadObjects(m_requirements))
+						return false;
 					return true;
 				}
 
 				// Public data
-				std::string			m_string;
-				uint32_t			m_dialogueScreenId = 0;		
-				uint32_t			m_questId = 0;
-				DialogueScript::Id	m_dialogueScript = DialogueScript::ID_NONE;
-				uint32_t			m_conditionExpressionId = 0;
+				std::string					m_string;
+				uint32_t					m_dialogueScreenId = 0;		
+				uint32_t					m_questId = 0;
+				bool						m_questOffer = true;
+				bool						m_questCompletion = true;
+				DialogueScript::Id			m_dialogueScript = DialogueScript::ID_NONE;
+				uint32_t					m_conditionExpressionId = 0;
+				std::vector<Requirement>	m_requirements;
 			};
 
 			struct Sell

@@ -54,8 +54,6 @@ namespace tpublic
 			const Components::CombatPublic* combatPublic = aPlayerEntity->GetComponent<Components::CombatPublic>();
 			const Data::Quest* quest = aManifest->GetById<Data::Quest>(aQuestId);
 			int32_t levelDiff = (int32_t)quest->m_level - (int32_t)combatPublic->m_level;
-			if(levelDiff < 0)
-				levelDiff = -levelDiff;
 			aManifest->m_xpMetrics.GetLevelDiffColor(levelDiff, aOutColor);
 		}
 	}

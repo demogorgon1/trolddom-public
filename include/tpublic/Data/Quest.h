@@ -83,6 +83,8 @@ namespace tpublic
 						aChild->GetIdArray(DataType::ID_ITEM, m_rewardOneItem);
 					else if (aChild->m_name == "reward_all_items")
 						aChild->GetIdArray(DataType::ID_ITEM, m_rewardAllItems);
+					else if(aChild->m_name == "next_quest")
+						m_nextQuestId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_QUEST, aChild->GetIdentifier());
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 				});
@@ -105,6 +107,7 @@ namespace tpublic
 				aStream->WritePOD(m_type);
 				aStream->WriteUInts(m_rewardOneItem);
 				aStream->WriteUInts(m_rewardAllItems);
+				aStream->WriteUInt(m_nextQuestId);
 			}
 
 			bool
@@ -136,6 +139,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInts(m_rewardAllItems))
 					return false;
+				if (!aStream->ReadUInt(m_nextQuestId))
+					return false;
 				return true;
 			}
 
@@ -151,6 +156,7 @@ namespace tpublic
 			Type					m_type = TYPE_NORMAL;
 			std::vector<uint32_t>	m_rewardOneItem;
 			std::vector<uint32_t>	m_rewardAllItems;
+			uint32_t				m_nextQuestId = 0;
 		};
 
 	}

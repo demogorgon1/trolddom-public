@@ -1,6 +1,6 @@
 #pragma once
 
-#include <tpublic/Data/Ability.h>
+#include "Requirement.h"
 
 namespace tpublic
 {
@@ -13,12 +13,12 @@ namespace tpublic
 		bool	Check(
 					const EntityInstance*				aSelf,
 					const EntityInstance*				aTarget,
-					const Data::Ability::Requirement*	aRequirement);
-		bool	CheckAbility(
-					const Data::Ability*				aAbility,			
+					const Requirement*					aRequirement);
+		bool	CheckList(
+					const std::vector<Requirement>&		aRequirements,
 					const EntityInstance*				aSelf,
 					const EntityInstance*				aTarget,
-					const Data::Ability::Requirement**	aOutFailedRequirement = NULL);
+					const Requirement**					aOutFailedRequirement = NULL);
 		bool	CheckOpenable(
 					const EntityInstance*				aSelf,
 					const EntityInstance*				aTarget,

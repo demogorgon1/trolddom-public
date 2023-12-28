@@ -28,6 +28,8 @@ dialogue_screen .fisherman_greetings:
 	[
 		{ goto: .fisherman_fishing text: "So, you're a fisherman?" }
 		{ goto: .fisherman_trainer text: "Please teach me how to drag fish out of the water." }
+		{ quest<completion_only>: spawn_of_umbracoth }
+		{ quest<offer_only>: spawn_of_umbracoth_2 requirement self<must_have_completed_quest>: { id: spawn_of_umbracoth } }
 	]
 }
 

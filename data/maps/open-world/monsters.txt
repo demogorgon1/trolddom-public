@@ -21,10 +21,10 @@ ability .spawn_of_umbracoth_quest_drop_start_quest:
 	description: "This item starts a quest."
 	flags: [ target_self ]
 	icon: icon_tentacle
-	direct_effect start_quest: { quest: .spawn_of_umbracoth }
+	direct_effect start_quest: { quest: spawn_of_umbracoth }
 	states: [ default in_combat ]
-	requirement self<must_not_have_completed_quest>: { id: .spawn_of_umbracoth }
-	requirement self<must_not_have_active_quest>: { id: .spawn_of_umbracoth }
+	requirement self<must_not_have_completed_quest>: { id: spawn_of_umbracoth }
+	requirement self<must_not_have_active_quest>: { id: spawn_of_umbracoth }
 }
 
 item .spawn_of_umbracoth_quest_drop:
@@ -47,7 +47,7 @@ item .spawn_of_umbracoth_junk:
 	item_level: 5
 }
 
-quest .spawn_of_umbracoth:
+quest spawn_of_umbracoth:
 {
 	string: "Glowing Tentacle"
 
@@ -60,19 +60,40 @@ quest .spawn_of_umbracoth:
 	[
 		"The severed tentacle has an eerie glow to it, but at least it's also quite slimy."
 	]
-
-	progress:
+	
+	completion:
 	[
-		"(progress)"
+		"Aye, that's one fine specimen of a slimy tentacle. I've encountered plenty tentacled monsters at sea, so I know what I'm talking about!"
+	]
+
+	level: 5
+	type: elite		
+	next_quest: spawn_of_umbracoth_2
+}
+
+quest spawn_of_umbracoth_2:
+{
+	string: "Glowing Tentacle"
+
+	text:
+	[
+		"The fisherman figured you should go talk Sylas about the tentacle."
+	]
+	
+	description: 
+	[
+		"You found it on a monster in the woods? That's strange. Maybe go ask Sylas."
 	]
 	
 	completion:
 	[
-		"(completion)"
+		"Where did you find this? What was it attached to? Oh my. I've heard rumors about nameless horrors lurking in the deep tunnels under this island, but that anything like this should roam in the woods? I can't help you, but I can offer you"
+		"some items that might come in handy for you."
 	]
 
-	level: 5
-	type: elite	
+	level: 5	
+	
+	## FIXME: items
 }
 
 entity .spawn_of_umbracoth: !NPC

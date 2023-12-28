@@ -21,13 +21,13 @@ namespace tpublic
 		Check(
 			const EntityInstance*				aSelf,
 			const EntityInstance*				aTarget,
-			const Data::Ability::Requirement*	aRequirement)
+			const Requirement*					aRequirement)
 		{
 			const EntityInstance* entity = NULL;
 			switch (aRequirement->m_target)
 			{
-			case Data::Ability::Requirement::TARGET_SELF:	entity = aSelf; break;
-			case Data::Ability::Requirement::TARGET_TARGET: entity = aTarget; break;
+			case Requirement::TARGET_SELF:	entity = aSelf; break;
+			case Requirement::TARGET_TARGET: entity = aTarget; break;
 			default: assert(false); break;
 			}
 
@@ -36,44 +36,44 @@ namespace tpublic
 
 			switch(aRequirement->m_type)
 			{
-			case Data::Ability::Requirement::TYPE_MUST_HAVE_AURA:
-			case Data::Ability::Requirement::TYPE_MUST_NOT_HAVE_AURA:
+			case Requirement::TYPE_MUST_HAVE_AURA:
+			case Requirement::TYPE_MUST_NOT_HAVE_AURA:
 				{
 					const Components::VisibleAuras* visibleAuras = entity->GetComponent<Components::VisibleAuras>();
 					bool hasAura = visibleAuras->HasAura(aRequirement->m_id);
-					if (aRequirement->m_type == Data::Ability::Requirement::TYPE_MUST_HAVE_AURA && !hasAura)
+					if (aRequirement->m_type == Requirement::TYPE_MUST_HAVE_AURA && !hasAura)
 						return false;
-					else if (aRequirement->m_type == Data::Ability::Requirement::TYPE_MUST_NOT_HAVE_AURA && hasAura)
+					else if (aRequirement->m_type == Requirement::TYPE_MUST_NOT_HAVE_AURA && hasAura)
 						return false;
 				}
 				break;					
 
-			case Data::Ability::Requirement::TYPE_MUST_HAVE_COMPLETED_QUEST:
-			case Data::Ability::Requirement::TYPE_MUST_NOT_HAVE_COMPLETED_QUEST:
+			case Requirement::TYPE_MUST_HAVE_COMPLETED_QUEST:
+			case Requirement::TYPE_MUST_NOT_HAVE_COMPLETED_QUEST:
 				{
-					if(aRequirement->m_target != Data::Ability::Requirement::TARGET_SELF)
+					if(aRequirement->m_target != Requirement::TARGET_SELF)
 						return false;
 
 					const Components::CompletedQuests* completedQuests = entity->GetComponent<Components::CompletedQuests>();
 					bool hasCompletedQuest = completedQuests->m_questIds.HasValue(aRequirement->m_id);
-					if(aRequirement->m_type == Data::Ability::Requirement::TYPE_MUST_HAVE_COMPLETED_QUEST && !hasCompletedQuest)
+					if(aRequirement->m_type == Requirement::TYPE_MUST_HAVE_COMPLETED_QUEST && !hasCompletedQuest)
 						return false;
-					else if (aRequirement->m_type == Data::Ability::Requirement::TYPE_MUST_NOT_HAVE_COMPLETED_QUEST && hasCompletedQuest)
+					else if (aRequirement->m_type == Requirement::TYPE_MUST_NOT_HAVE_COMPLETED_QUEST && hasCompletedQuest)
 						return false;
 				}
 				break;
 
-			case Data::Ability::Requirement::TYPE_MUST_HAVE_ACTIVE_QUEST:
-			case Data::Ability::Requirement::TYPE_MUST_NOT_HAVE_ACTIVE_QUEST:
+			case Requirement::TYPE_MUST_HAVE_ACTIVE_QUEST:
+			case Requirement::TYPE_MUST_NOT_HAVE_ACTIVE_QUEST:
 				{
-					if(aRequirement->m_target != Data::Ability::Requirement::TARGET_SELF)
+					if(aRequirement->m_target != Requirement::TARGET_SELF)
 						return false;
 
 					const Components::ActiveQuests* activeQuests = entity->GetComponent<Components::ActiveQuests>();
 					bool hasActiveQuest = activeQuests->HasQuest(aRequirement->m_id);
-					if(aRequirement->m_type == Data::Ability::Requirement::TYPE_MUST_HAVE_ACTIVE_QUEST && !hasActiveQuest)
+					if(aRequirement->m_type == Requirement::TYPE_MUST_HAVE_ACTIVE_QUEST && !hasActiveQuest)
 						return false;
-					else if (aRequirement->m_type == Data::Ability::Requirement::TYPE_MUST_NOT_HAVE_ACTIVE_QUEST && hasActiveQuest)
+					else if (aRequirement->m_type == Requirement::TYPE_MUST_NOT_HAVE_ACTIVE_QUEST && hasActiveQuest)
 						return false;
 				}
 				break;
@@ -87,13 +87,13 @@ namespace tpublic
 		}
 
 		bool	
-		CheckAbility(
-			const Data::Ability*				aAbility,
+		CheckList(
+			const std::vector<Requirement>&		aRequirements,
 			const EntityInstance*				aSelf,
 			const EntityInstance*				aTarget,
-			const Data::Ability::Requirement**	aOutFailedRequirement)
+			const Requirement**					aOutFailedRequirement)
 		{
-			for(const Data::Ability::Requirement& requirement : aAbility->m_requirements)
+			for(const Requirement& requirement : aRequirements)
 			{
 				if(!Check(aSelf, aTarget, &requirement))
 				{

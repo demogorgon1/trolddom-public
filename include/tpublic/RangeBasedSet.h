@@ -100,6 +100,12 @@ namespace tpublic
 			return true;
 		}
 
+		void
+		Reset()
+		{
+			m_array.clear();
+		}
+
 		// Serialization
 		void		ToStream(
 						IWriter*			aWriter) const;
