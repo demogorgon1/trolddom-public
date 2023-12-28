@@ -27,3 +27,18 @@ item ring_sapphire_ring:
 		stat wisdom: 1
 	}
 }
+
+item neck_miststone_chain:
+{
+	equipment_slots: [ neck ]
+	required_level: 5
+	icon: icon_necklace_1
+	rarity: rare
+	
+	root: 
+	{ 
+		name: "Miststone Chain" 
+		stat_weight constitution: 1 
+		stat_weight wisdom: 1
+	}
+}

@@ -93,7 +93,7 @@ quest spawn_of_umbracoth_2:
 
 	level: 5	
 	
-	## FIXME: items
+	reward_one_item: [ legs_heroic_ringmail_leggings back_graceful_cape neck_miststone_chain ]
 }
 
 entity .spawn_of_umbracoth: !NPC
