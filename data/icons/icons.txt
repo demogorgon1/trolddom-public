@@ -94,7 +94,12 @@ sprites:
 	sprite icon_claw : { }
 	sprite icon_tentacle : { }
 	sprite icon_green_bottle : { }
+	sprite icon_uncommon_item : { }
+	sprite icon_rare_item : { }
 	
+	cursor: { position: [ 0 80 ] }	
+	sprite icon_epic_item : { }
+	sprite icon_exclamation_mark : { }	
 	
 }
 
