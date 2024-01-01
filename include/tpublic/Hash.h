@@ -6,6 +6,31 @@ namespace tpublic
 	namespace Hash
 	{
 
+		struct CheckSum
+		{
+			CheckSum()
+				: m_hash(0)
+				, m_processedBytes(0)
+			{
+
+			}
+
+			void	AddData(
+						const void*				aBuffer,
+						size_t					aBufferSize);
+			bool	operator==(
+						const CheckSum&			aOther) const;
+			bool	operator!=(
+						const CheckSum&			aOther) const;
+
+			// Public data
+			uint32_t		m_hash;
+			size_t			m_processedBytes;			
+		};
+
+		uint32_t	CRC_32(
+						const void*				aBuffer,
+						size_t					aBufferSize);
 		void		MurmurHash2_160(
 						const void*				aBuffer,
 						size_t					aBufferSize,
@@ -24,6 +49,27 @@ namespace tpublic
 			return x;
 		}
 
+		inline constexpr uint64_t
+		Splitmix_2_32(
+			uint32_t							aValue1,
+			uint32_t							aValue2)
+		{
+			uint64_t combined = ((uint64_t)aValue1 << 32ULL) | (uint64_t)aValue2;
+			return Splitmix_64(combined);
+		}
+
+		template <typename _T>
+		inline constexpr uint32_t
+		PODVector_32(
+			const std::vector<_T>&				aVector)
+		{
+			if(aVector.size() == 0)
+				return 0;
+		
+			uint32_t hash[5];
+			MurmurHash2_160(&aVector[0], sizeof(_T) * aVector.size(), 0x43025501, hash);
+			return hash[0] ^ hash[1] ^ hash[2] ^ hash[3] ^ hash[4];
+		}
 	}
 		
 }

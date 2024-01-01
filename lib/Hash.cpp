@@ -1,12 +1,80 @@
 #include "Pcheader.h"
 
 #include <tpublic/Hash.h>
+#include <tpublic/Singleton.h>
 
 namespace tpublic
 {
 
+	namespace
+	{
+		
+		struct _CRC32LookUpTable : public Singleton<_CRC32LookUpTable>
+		{
+			_CRC32LookUpTable()
+			{
+				for(uint32_t i = 0; i < 256; i++)
+					m_table[i] = _CRC32ForByte(i);
+			}
+
+			uint32_t
+			_CRC32ForByte(
+				uint32_t		aByte)
+			{
+				uint32_t r = aByte;
+				for (uint32_t j = 0; j < 8; j++)
+					r = (r & 1 ? 0 : 0xEDB88320) ^ r >> 1;
+				return r ^ 0xFF000000;
+			}
+
+			uint32_t	m_table[256];
+		};
+
+	}
+
 	namespace Hash
 	{
+
+		void	
+		CheckSum::AddData(
+			const void*				aBuffer,
+			size_t					aBufferSize)
+		{
+			const uint32_t* table = _CRC32LookUpTable::GetInstance()->m_table;
+			const uint8_t* p = (const uint8_t*)aBuffer;
+
+			for(size_t i = 0; i < aBufferSize; i++)
+			{
+				m_hash = table[(uint8_t)m_hash ^ *p] ^ m_hash >> 8;
+				p++;
+			}
+
+			m_processedBytes += aBufferSize;
+		}
+
+		bool	
+		CheckSum::operator==(
+			const CheckSum&			aOther) const
+		{
+			return m_hash == aOther.m_hash && m_processedBytes == aOther.m_processedBytes;
+		}
+
+		bool	
+		CheckSum::operator!=(
+			const CheckSum&			aOther) const
+		{
+			return m_hash != aOther.m_hash || m_processedBytes != aOther.m_processedBytes;
+		}
+
+		uint32_t
+		CRC_32(
+			const void*				aBuffer,
+			size_t					aBufferSize)
+		{
+			CheckSum checkSum;
+			checkSum.AddData(aBuffer, aBufferSize);
+			return checkSum.m_hash;
+		}
 
 		uint32_t	
 		String(

@@ -4,6 +4,7 @@
 
 #include "EntityInstance.h"
 #include "DataErrorHandling.h"
+#include "Hash.h"
 #include "Helpers.h"
 #include "LootRule.h"
 #include "Manifest.h"
@@ -11,6 +12,7 @@
 #include "RangeBasedSet.h"
 #include "Rarity.h"
 #include "UIntRange.h"
+#include "UTF8.h"
 #include "Vec2.h"
 
 namespace tpublic
