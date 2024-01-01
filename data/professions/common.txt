@@ -2,7 +2,7 @@
 {
 	item_level: 1
 	icon: @_icon
-	root: { name: @_item_string }
+	string: @_item_string
 	loot_groups: [ @_loot_group ]
 	stack: 20	
 }

@@ -58,7 +58,7 @@ aura recently_bandaged:
 	item_level: @_level 
 	required_level: @_level
 	icon: @_icon
-	root: { name: @_string }
+	string: @_string
 	stack: 20	
 	use_ability: @_ability
 }

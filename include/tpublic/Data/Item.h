@@ -32,7 +32,7 @@ namespace tpublic
 				{
 					m_id = Stat::StringToId(aSource->m_name.c_str());
 					TP_VERIFY(m_id != Stat::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid stat.", aSource->m_name.c_str());
-					m_range = UIntRange(aSource);
+					m_value = aSource->GetUInt32();
 				}
 
 				void 
@@ -41,7 +41,7 @@ namespace tpublic
 				{
 					aStream->WritePOD(m_id);
 					aStream->WriteBool(m_isBudgetWeight);
-					m_range.ToStream(aStream);
+					aStream->WriteUInt(m_value);
 				}
 
 				bool
@@ -52,7 +52,7 @@ namespace tpublic
 						return false;
 					if (!aStream->ReadBool(m_isBudgetWeight))
 						return false;
-					if(!m_range.FromStream(aStream))
+					if(!aStream->ReadUInt(m_value))
 						return false;
 					return true;
 				}
@@ -60,120 +60,7 @@ namespace tpublic
 				// Public data
 				Stat::Id			m_id = Stat::Id(0);
 				bool				m_isBudgetWeight = false;
-				UIntRange			m_range;
-			};
-
-			struct Node
-			{
-				Node()
-				{
-
-				}
-
-				Node(
-					const SourceNode*	aSource,
-					bool				aWeighted)
-				{
-					aSource->ForEachChild([&](
-						const SourceNode* aChild)
-					{
-						if(aChild->m_name == "weapon_cooldown")
-							m_weaponCooldown = aChild->GetUInt32();
-						else if (aChild->m_name == "weapon_damage")
-							m_weaponDamage = UIntRange(aChild);
-						else if (aChild->m_name == "name")
-							m_name = aChild->GetString();
-						else if (aChild->m_name == "suffix")
-							m_suffix = aChild->GetString();
-						else if (aChild->m_name == "flavor")
-							m_flavor = aChild->GetString();
-						else if(aChild->m_name == "weighted_child")
-							m_weightedChildren.push_back(std::make_unique<Node>(aChild, true));
-						else if (aChild->m_name == "random_child")
-							m_randomChildren.push_back(std::make_unique<Node>(aChild, false));
-						else if (aChild->m_name == "child_chance" && !aWeighted)
-							m_chance = aChild->GetProbability();
-						else if (aChild->m_name == "child_weight" && aWeighted)
-							m_weight = aChild->GetUInt32();
-						else if (aChild->m_tag == "stat")
-							m_addedStats.push_back(AddedStat(aChild, false));
-						else if (aChild->m_tag == "stat_weight")
-							m_addedStats.push_back(AddedStat(aChild, true));
-						else
-							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
-					});
-
-					for(std::unique_ptr<Node>& child : m_weightedChildren)
-						m_totalChildWeight += child->m_weight;
-
-					TP_VERIFY((m_totalChildWeight == 0 && m_weightedChildren.size() == 0) || (m_totalChildWeight > 0 && m_weightedChildren.size() > 0),
-						aSource->m_debugInfo, "Invalid children.");
-				}
-
-				void 
-				ToStream(
-					IWriter*			aStream) const
-				{
-					aStream->WriteObjects(m_addedStats);
-					aStream->WriteOptionalObject(m_weaponDamage);
-					aStream->WriteUInt(m_weaponCooldown);
-					aStream->WriteString(m_name);
-					aStream->WriteString(m_suffix);
-					aStream->WriteString(m_flavor);
-					aStream->WriteInt(m_budgetBias);
-					aStream->WriteUInt(m_chance);
-					aStream->WriteUInt(m_weight);
-					aStream->WriteObjectPointers(m_weightedChildren);
-					aStream->WriteObjectPointers(m_randomChildren);
-
-				}
-
-				bool
-				FromStream(
-					IReader*			aStream)
-				{
-					if (!aStream->ReadObjects(m_addedStats))
-						return false;
-					if (!aStream->ReadOptionalObject(m_weaponDamage))
-						return false;
-					if (!aStream->ReadUInt(m_weaponCooldown))
-						return false;
-					if (!aStream->ReadString(m_name))
-						return false;
-					if (!aStream->ReadString(m_suffix))
-						return false;
-					if (!aStream->ReadString(m_flavor))
-						return false;
-					if (!aStream->ReadInt(m_budgetBias))
-						return false;
-					if (!aStream->ReadUInt(m_chance))
-						return false;
-					if (!aStream->ReadUInt(m_weight))
-						return false;
-					if (!aStream->ReadObjectPointers(m_weightedChildren))
-						return false;
-					if (!aStream->ReadObjectPointers(m_randomChildren))
-						return false;
-
-					for (std::unique_ptr<Node>& child : m_weightedChildren)
-						m_totalChildWeight += child->m_weight;
-
-					return true;
-				}
-
-				// Public data
-				std::vector<AddedStat>				m_addedStats;
-				std::optional<UIntRange>			m_weaponDamage;
-				uint32_t							m_weaponCooldown = 0;
-				std::string							m_name;
-				std::string							m_suffix;
-				std::string							m_flavor;
-				uint32_t							m_chance = 0;
-				uint32_t							m_weight = 1;				
-				uint32_t							m_totalChildWeight = 0;
-				int32_t								m_budgetBias = 0;
-				std::vector<std::unique_ptr<Node>>	m_weightedChildren;
-				std::vector<std::unique_ptr<Node>>	m_randomChildren;
+				uint32_t			m_value = 0;
 			};
 
 			void
@@ -215,10 +102,6 @@ namespace tpublic
 					else if(aChild->m_name == "loot_groups")
 					{
 						aChild->GetIdArray(DataType::ID_LOOT_GROUP, m_lootGroups);
-					}
-					else if(aChild->m_name == "root")
-					{
-						m_root = std::make_unique<Node>(aChild, false);
 					}
 					else if (aChild->m_name == "stack")
 					{
@@ -262,6 +145,34 @@ namespace tpublic
 						m_itemType = ItemType::StringToId(aChild->GetIdentifier());
 						TP_VERIFY(m_itemType != ItemType::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid item type.", aChild->GetIdentifier());
 					}
+					else if (aChild->m_name == "weapon_cooldown")
+					{
+						m_weaponCooldown = aChild->GetUInt32();
+					}
+					else if (aChild->m_name == "weapon_damage")
+					{
+						m_weaponDamage = UIntRange(aChild);
+					}
+					else if (aChild->m_name == "string")
+					{
+						m_string = aChild->GetString();
+					}
+					else if (aChild->m_name == "flavor")
+					{
+						m_flavor = aChild->GetString();
+					}
+					else if (aChild->m_name == "budget_bias")
+					{
+						m_budgetBias = aChild->GetInt32();
+					}
+					else if (aChild->m_tag == "stat")
+					{
+						m_addedStats.push_back(AddedStat(aChild, false));
+					}
+					else if (aChild->m_tag == "stat_weight")
+					{
+						m_addedStats.push_back(AddedStat(aChild, true));
+					}
 					else
 					{
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -279,7 +190,6 @@ namespace tpublic
 				ToStreamBase(aStream);
 				aStream->WriteUInts(m_equipmentSlots);
 				aStream->WriteUInts(m_lootGroups);
-				aStream->WriteOptionalObjectPointer(m_root);
 				aStream->WriteUInt(m_stackSize);
 				aStream->WriteUInt(m_useAbilityId);
 				aStream->WritePOD(m_itemType);
@@ -290,6 +200,12 @@ namespace tpublic
 				aStream->WriteUInt(m_cost);
 				aStream->WritePOD(m_rarity);
 				aStream->WriteBool(m_unique);
+				aStream->WriteObjects(m_addedStats);
+				aStream->WriteOptionalObject(m_weaponDamage);
+				aStream->WriteUInt(m_weaponCooldown);
+				aStream->WriteString(m_string);
+				aStream->WriteString(m_flavor);
+				aStream->WriteInt(m_budgetBias);
 			}
 
 			bool
@@ -301,8 +217,6 @@ namespace tpublic
 				if (!aStream->ReadUInts(m_equipmentSlots))
 					return false;
 				if (!aStream->ReadUInts(m_lootGroups))
-					return false;
-				if(!aStream->ReadOptionalObjectPointer(m_root))
 					return false;
 				if (!aStream->ReadUInt(m_stackSize))
 					return false;
@@ -324,13 +238,24 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadBool(m_unique))
 					return false;
+				if (!aStream->ReadObjects(m_addedStats))
+					return false;
+				if (!aStream->ReadOptionalObject(m_weaponDamage))
+					return false;
+				if (!aStream->ReadUInt(m_weaponCooldown))
+					return false;
+				if (!aStream->ReadString(m_string))
+					return false;
+				if (!aStream->ReadString(m_flavor))
+					return false;
+				if (!aStream->ReadInt(m_budgetBias))
+					return false;
 				return true;
 			}
 
 			// Public data
 			std::vector<uint32_t>		m_equipmentSlots;
 			std::vector<uint32_t>		m_lootGroups;
-			std::unique_ptr<Node>		m_root;
 			uint32_t					m_stackSize = 1;
 			uint32_t					m_useAbilityId = 0;
 			ItemType::Id				m_itemType = ItemType::ID_NONE;
@@ -341,6 +266,12 @@ namespace tpublic
 			uint32_t					m_cost = 0;
 			Rarity::Id					m_rarity = Rarity::ID_COMMON;
 			bool						m_unique = false;
+			std::vector<AddedStat>		m_addedStats;
+			std::optional<UIntRange>	m_weaponDamage;
+			uint32_t					m_weaponCooldown = 0;
+			std::string					m_string;
+			std::string					m_flavor;
+			int32_t						m_budgetBias = 0;
 		};
 
 	}

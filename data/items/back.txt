@@ -4,11 +4,7 @@ item back_graceful_cape:
 	required_level: 5
 	icon: icon_cape_1
 	rarity: rare
-	
-	root: 
-	{ 
-		name: "Graceful Cape" 
-		stat_weight spirit: 3 
-		stat_weight wisdom: 2
-	}
+	string: "Graceful Cape" 
+	stat_weight spirit: 3 
+	stat_weight wisdom: 2
 }

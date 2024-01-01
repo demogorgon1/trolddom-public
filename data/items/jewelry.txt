@@ -4,13 +4,9 @@ item ring_iron_ring:
 	loot_groups: [ world_drops_uncommon ]
 	required_level: 2
 	icon: icon_ring_1
-	rarity: uncommon
-		
-	root:
-	{
-		name: "Iron Ring"
-		stat strength: 1
-	}
+	rarity: uncommon	
+	string: "Iron Ring"
+	stat strength: 1
 }
 
 item ring_sapphire_ring:
@@ -20,12 +16,8 @@ item ring_sapphire_ring:
 	required_level: 2
 	icon: icon_ring_2
 	rarity: uncommon
-		
-	root:
-	{
-		name: "Sapphire Ring"
-		stat wisdom: 1
-	}
+	string: "Sapphire Ring"
+	stat wisdom: 1
 }
 
 item neck_miststone_chain:
@@ -34,11 +26,7 @@ item neck_miststone_chain:
 	required_level: 5
 	icon: icon_necklace_1
 	rarity: rare
-	
-	root: 
-	{ 
-		name: "Miststone Chain" 
-		stat_weight constitution: 1 
-		stat_weight wisdom: 1
-	}
+	string: "Miststone Chain" 
+	stat_weight constitution: 1 
+	stat_weight wisdom: 1
 }

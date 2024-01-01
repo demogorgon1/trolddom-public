@@ -7,10 +7,5 @@ item hands_flimsy_mail_gloves:
 	item_level: 1
 	icon: icon_mail_gloves_1
 	rarity: common
-		
-	root:
-	{
-		name: "Flimsy Mail Gloves"
-		stat armor: 15
-	}
+	string: "Flimsy Mail Gloves"
 }

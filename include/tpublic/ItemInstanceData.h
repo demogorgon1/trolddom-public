@@ -23,7 +23,6 @@ namespace tpublic
 		ItemInstance			m_instance;
 		const Data::Item*		m_itemData = NULL;
 		std::string				m_name;
-		std::string				m_suffix;
 		std::string				m_flavor;
 		Stat::Collection		m_stats;
 		uint32_t				m_vendorValue = 0;
@@ -36,9 +35,7 @@ namespace tpublic
 	private:
 
 		void		_Generate(						
-						std::mt19937&			aRandom,
 						const Manifest*			aManifest,
-						const Data::Item::Node*	aNode,
 						Stat::Collection&		aOutStatWeights,
 						uint32_t&				aOutTotalStatWeight);
 	};

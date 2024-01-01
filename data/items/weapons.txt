@@ -7,12 +7,8 @@ item weapon_rusty_sword:
 	item_level: 1
 	icon: icon_sword_1
 	rarity: common
-		
-	root:
-	{
-		name: "Rusty Sword"
-		weapon_cooldown: 20		
-	}
+	string: "Rusty Sword"
+	weapon_cooldown: 20		
 }
 
 item weapon_gnarly_staff:
@@ -24,12 +20,8 @@ item weapon_gnarly_staff:
 	item_level: 1
 	icon: icon_staff_1
 	rarity: common
-		
-	root:
-	{
-		name: "Gnarly Staff"
-		weapon_cooldown: 30		
-	}
+	string: "Gnarly Staff"
+	weapon_cooldown: 30		
 }
 
 item weapon_the_dev_tool:
@@ -40,11 +32,7 @@ item weapon_the_dev_tool:
 	item_level: 1
 	icon: icon_hammer_1
 	rarity: mythic
-		
-	root:
-	{
-		name: "The Dev Tool"
-		weapon_cooldown: 20		
-		weapon_damage: [ 1000 2000 ]
-	}			
+	string: "The Dev Tool"
+	weapon_cooldown: 20		
+	weapon_damage: [ 1000 2000 ]
 }

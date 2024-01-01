@@ -19,7 +19,6 @@ namespace tpublic
 		: m_instance(aItemInstance)
 	{
 		m_itemData = aManifest->GetById<tpublic::Data::Item>(aItemInstance.m_itemId);
-		std::mt19937 random(aItemInstance.m_seed);
 
 		const ItemType::Info* itemTypeInfo = ItemType::GetInfo(m_itemData->m_itemType);
 		const ItemMetrics::Multipliers& rarityMultipliers = aManifest->m_itemMetrics.GetRarityMultipliers(m_itemData->m_rarity);
@@ -31,14 +30,13 @@ namespace tpublic
 		multipliers.m_cost = itemTypeMultipliers.m_cost * equipmentSlotMultipliers.m_cost * rarityMultipliers.m_cost;
 		multipliers.m_weaponDamage = itemTypeMultipliers.m_weaponDamage * equipmentSlotMultipliers.m_weaponDamage * rarityMultipliers.m_weaponDamage;
 
-		if(m_itemData->m_root)
 		{
 			Stat::Collection statWeights;
 			uint32_t totalStatWeight = 0;
 
 			m_statBudget = (int32_t)m_itemData->m_itemLevel - 1;
 
-			_Generate(random, aManifest, m_itemData->m_root.get(), statWeights, totalStatWeight);
+			_Generate(aManifest, statWeights, totalStatWeight);
 
 			if(totalStatWeight > 0 && m_statBudget > 0)
 			{
@@ -101,67 +99,39 @@ namespace tpublic
 
 	void		
 	ItemInstanceData::_Generate(
-		std::mt19937&			aRandom,
-		const Manifest*			aManifest,
-		const Data::Item::Node*	aNode,
+		const Manifest*			/*aManifest*/,
 		Stat::Collection&		aOutStatWeights,
 		uint32_t&				aOutTotalStatWeight)
 	{
-		if(!aNode->m_name.empty())
-			m_name = aNode->m_name;
+		if(!m_itemData->m_string.empty())
+			m_name = m_itemData->m_string;
 
-		if (!aNode->m_suffix.empty())
-			m_suffix = aNode->m_suffix;
+		if (!m_itemData->m_flavor.empty())
+			m_flavor = m_itemData->m_flavor;
 
-		if (!aNode->m_flavor.empty())
-			m_flavor = aNode->m_flavor;
+		m_statBudget += m_itemData->m_budgetBias;
 
-		m_statBudget += aNode->m_budgetBias;
+		if(m_itemData->m_weaponDamage.has_value())
+			m_weaponDamage = m_itemData->m_weaponDamage.value();
 
-		if(aNode->m_weaponDamage.has_value())
-			m_weaponDamage = aNode->m_weaponDamage.value();
+		if(m_itemData->m_weaponCooldown != 0)
+			m_weaponCooldown = m_itemData->m_weaponCooldown;
 
-		if(aNode->m_weaponCooldown != 0)
-			m_weaponCooldown = aNode->m_weaponCooldown;
-
-		for(const Data::Item::AddedStat& addedStat : aNode->m_addedStats)
+		for(const Data::Item::AddedStat& addedStat : m_itemData->m_addedStats)
 		{
 			if(!addedStat.m_isBudgetWeight)
 			{
-				m_stats.m_stats[addedStat.m_id] += addedStat.m_range.GetRandom(aRandom);
+				m_stats.m_stats[addedStat.m_id] += addedStat.m_value;
 			}
 			else
 			{				
-				uint32_t weight = addedStat.m_range.GetRandom(aRandom);
+				uint32_t weight = addedStat.m_value;
 				aOutStatWeights.m_stats[addedStat.m_id] += weight;
 				aOutTotalStatWeight += weight;
 			}
 		}
 
-		for(const std::unique_ptr<Data::Item::Node>& child : aNode->m_randomChildren)
-		{
-			if(aRandom() <= child->m_chance)
-				_Generate(aRandom, aManifest, child.get(), aOutStatWeights, aOutTotalStatWeight);
-		}
-
-		if(aNode->m_weightedChildren.size() > 0)
-		{
-			uint32_t sum = 0;
-			uint32_t roll = Helpers::RandomInRange<uint32_t>(aRandom, 0, aNode->m_totalChildWeight);
-			const Data::Item::Node* chosen = NULL;
-
-			for(size_t i = 0; i < aNode->m_weightedChildren.size() && chosen == NULL; i++)
-			{
-				const std::unique_ptr<Data::Item::Node>& child = aNode->m_weightedChildren[i];
-				sum += child->m_weight;
-				if(roll <= sum)
-					chosen = child.get();
-			}
-
-			assert(chosen != NULL);
-
-			_Generate(aRandom, aManifest, chosen, aOutStatWeights, aOutTotalStatWeight);
-		}	
+		
 	}
 
 }

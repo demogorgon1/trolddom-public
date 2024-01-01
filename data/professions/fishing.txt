@@ -90,7 +90,7 @@ loot_table fish:
 item item_herring:
 {
 	loot_groups: [ fish ]		
-	root: {	name: "Herring" }
+	string: "Herring"
 	icon: icon_small_blue_fish
 	stack: 20
 	item_level: 1

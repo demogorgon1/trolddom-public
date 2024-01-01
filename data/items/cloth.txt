@@ -1,6 +1,6 @@
 item item_linen_cloth:
 {
-	root: {	name: "Linen Cloth" }
+	string: "Linen Cloth"
 	loot_groups: [ world_drops_cloth ]
 	icon: icon_linen_cloth
 	stack: 20

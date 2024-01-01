@@ -171,7 +171,6 @@ namespace tpublic
 					{
 						tpublic::ItemInstance itemInstance;
 						itemInstance.m_itemId = itemId;
-						itemInstance.m_seed = aRandom();
 						aItemCallback(itemInstance);
 					}
 				}

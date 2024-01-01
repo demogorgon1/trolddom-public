@@ -7,9 +7,5 @@ item chest_flimsy_mail_shirt:
 	item_level: 1
 	icon: icon_mail_shirt_1
 	rarity: common
-		
-	root:
-	{
-		name: "Flimsy Mail Shirt"
-	}
+	string: "Flimsy Mail Shirt"
 }

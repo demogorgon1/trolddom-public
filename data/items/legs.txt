@@ -6,11 +6,7 @@ item legs_flimsy_mail_pants:
 	required_level: 1
 	icon: icon_mail_pants_1
 	rarity: common
-		
-	root:
-	{
-		name: "Flimsy Mail Pants"
-	}
+	string: "Flimsy Mail Pants"
 }
 
 item legs_heroic_ringmail_leggings:
@@ -20,11 +16,7 @@ item legs_heroic_ringmail_leggings:
 	required_level: 5
 	icon: icon_mail_pants_1
 	rarity: rare
-	
-	root: 
-	{ 
-		name: "Heroic Ringmail Leggings" 
-		stat_weight constitution: 1 
-		stat_weight strength: 1
-	}
+	string: "Heroic Ringmail Leggings" 
+	stat_weight constitution: 1 
+	stat_weight strength: 1
 }

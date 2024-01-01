@@ -5,13 +5,9 @@ item weapon_pick_axe:
 	required_level: 1
 	item_level: 1
 	icon: icon_pickaxe
-	rarity: common
-		
-	root:
-	{
-		name: "Pickaxe"
-		weapon_cooldown: 20		
-	}
+	rarity: common		
+	string: "Pickaxe"
+	weapon_cooldown: 20		
 }
 
 item weapon_fishing_rod:
@@ -23,10 +19,6 @@ item weapon_fishing_rod:
 	icon: icon_fishing_rod
 	rarity: common
 	use_ability: fishing
-		
-	root:
-	{
-		name: "Fishing Rod"
-		weapon_cooldown: 20		
-	}
+	string: "Fishing Rod"
+	weapon_cooldown: 20		
 }

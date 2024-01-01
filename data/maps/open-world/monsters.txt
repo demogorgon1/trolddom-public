@@ -30,7 +30,8 @@ ability .spawn_of_umbracoth_quest_drop_start_quest:
 item .spawn_of_umbracoth_quest_drop:
 {
 	loot_groups: [ .spawn_of_umbracoth_quest_drop ]		
-	root: {	name: "Glowing Tentacle" flavor: "Slimy." }
+	string: "Glowing Tentacle" 
+	flavor: "Slimy."
 	icon: icon_tentacle
 	stack: 4
 	item_level: 5
@@ -41,7 +42,7 @@ item .spawn_of_umbracoth_quest_drop:
 item .spawn_of_umbracoth_junk:
 {
 	loot_groups: [ .spawn_of_umbracoth_junk ]		
-	root: {	name: "Green Slime" }
+	string: "Green Slime"
 	icon: icon_green_bottle
 	stack: 4
 	item_level: 5

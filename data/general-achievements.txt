@@ -19,7 +19,7 @@ achievement epic_1: { category: .general string: "Epic" description: "Equip an e
 achievement epic_full: { category: .general string: "Very Epic" description: "Equip epic items in 13 slots." points: 10 priority: 0 stat_trigger max_epic_equip: 13 icon: icon_epic_item root: epic_1 priority: 1 }
 
 achievement quests_1: { category: .general string: "Apprentice Adventurer" description: "Complete 10 quests." points: 10 priority: 0 stat_trigger quests_completed: 10 icon: icon_exclamation_mark }
-achievement quests_2: { category: .general string: "Journeyman Adventurer" description: "Complete 50 quests." points: 10 priority: 0 stat_trigger quests_completed: 50 icon: icon_exclamation_mark root: quests_1
+achievement quests_2: { category: .general string: "Journeyman Adventurer" description: "Complete 50 quests." points: 10 priority: 0 stat_trigger quests_completed: 50 icon: icon_exclamation_mark root: quests_1 }
 achievement quests_3: { category: .general string: "Expert Adventurer" description: "Complete 200 quests." points: 10 priority: 0 stat_trigger quests_completed: 200 icon: icon_exclamation_mark root: quests_1 }
 achievement quests_4: { category: .general string: "Artisan Adventurer" description: "Complete 500 quests." points: 10 priority: 0 stat_trigger quests_completed: 500 icon: icon_exclamation_mark root: quests_1 }
 achievement quests_5: { category: .general string: "Master Adventurer" description: "Complete 1000 quests." points: 10 priority: 0 stat_trigger quests_completed: 1000 icon: icon_exclamation_mark root: quests_1 }

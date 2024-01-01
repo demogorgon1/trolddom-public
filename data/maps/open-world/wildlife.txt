@@ -6,7 +6,7 @@ loot_group .wolf_drops: {}
 item .antlers:
 {
 	loot_groups: [ .deer_drops ]		
-	root: {	name: "Broken Antlers" }
+	string: "Broken Antlers" 
 	icon: icon_antlers
 	stack: 4
 	item_level: 1
@@ -16,7 +16,7 @@ item .antlers:
 item .boar_tusks:
 {
 	loot_groups: [ .boar_drops ]		
-	root: {	name: "Broken Tusks" }
+	string: "Broken Tusks"
 	icon: icon_boar_tusks
 	stack: 4
 	item_level: 1
@@ -26,7 +26,7 @@ item .boar_tusks:
 item .pristine_antlers:
 {
 	loot_groups: [ .deer_drops ]		
-	root: {	name: "Pristine Antlers" }
+	string: "Pristine Antlers"
 	icon: icon_antlers
 	stack: 4
 	item_level: 3
@@ -36,7 +36,7 @@ item .pristine_antlers:
 item .pristine_tusks:
 {
 	loot_groups: [ .boar_drops ]		
-	root: {	name: "Pristine Tusks" }
+	string: "Pristine Tusks"
 	stack: 4	
 	item_level: 3
 	icon: icon_boar_tusks
@@ -46,7 +46,7 @@ item .pristine_tusks:
 item .bear_claw:
 {
 	loot_groups: [ .bear_drops ]		
-	root: {	name: "Bear Claw" }
+	string: "Bear Claw"
 	icon: icon_claw
 	stack: 4
 	item_level: 5
@@ -56,7 +56,7 @@ item .bear_claw:
 item .wolf_teeth:
 {
 	loot_groups: [ .wolf_drops ]		
-	root: {	name: "Wolf Teeth" }
+	string: "Wolf Teeth"
 	icon: icon_teeth
 	stack: 4
 	item_level: 4
