@@ -13,6 +13,7 @@ namespace tpublic
 			: public DataBase
 		{
 			static const DataType::Id DATA_TYPE = DataType::ID_MAP_ENTITY_SPAWN;
+			static const bool TAGGED = true;
 
 			struct SpawnCondition
 			{
@@ -272,19 +273,22 @@ namespace tpublic
 				aNode->GetObject()->ForEachChild([&](
 					const SourceNode* aChild)
 				{
-					if(aChild->m_tag == "entity")
+					if(!FromSourceBase(aChild))
 					{
-						std::unique_ptr<Entity> entity = std::make_unique<Entity>();
-						entity->FromSource(aChild);
-						m_entities.push_back(std::move(entity));
-					}
-					else if (aChild->m_name == "spawn_timer")
-					{
-						m_spawnTimer.FromSource(aChild);
-					}
-					else
-					{
-						TP_VERIFY(false, aChild->m_debugInfo, "Invalid 'map_entity_spawn' item.");
+						if (aChild->m_tag == "entity")
+						{
+							std::unique_ptr<Entity> entity = std::make_unique<Entity>();
+							entity->FromSource(aChild);
+							m_entities.push_back(std::move(entity));
+						}
+						else if (aChild->m_name == "spawn_timer")
+						{
+							m_spawnTimer.FromSource(aChild);
+						}
+						else
+						{
+							TP_VERIFY(false, aChild->m_debugInfo, "Invalid 'map_entity_spawn' item.");
+						}
 					}
 				});
 			}

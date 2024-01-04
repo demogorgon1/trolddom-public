@@ -12,6 +12,7 @@ namespace tpublic
 			: public DataBase
 		{
 			static const DataType::Id DATA_TYPE = DataType::ID_ACHIEVEMENT_CATEGORY;
+			static const bool TAGGED = false;
 
 			void
 			Verify() const
@@ -29,12 +30,15 @@ namespace tpublic
 				aSource->ForEachChild([&](
 					const SourceNode* aChild)
 				{
-					if(aChild->m_name == "string")
-						m_string = aChild->GetString();
-					else if (aChild->m_name == "order_key")
-						m_orderKey = aChild->GetUInt32();
-					else
-						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					if (!FromSourceBase(aChild))
+					{
+						if (aChild->m_name == "string")
+							m_string = aChild->GetString();
+						else if (aChild->m_name == "order_key")
+							m_orderKey = aChild->GetUInt32();
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					}
 				});
 			}
 

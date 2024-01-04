@@ -1,6 +1,7 @@
 #include "Pcheader.h"
 
 #include <tpublic/Data/Map.h>
+#include <tpublic/Data/Tag.h>
 
 #include <tpublic/AuraEffectFactory.h>
 #include <tpublic/Compiler.h>
@@ -89,6 +90,10 @@ namespace tpublic
 			{
 				spriteSheetBuilder.AddSprites(aNode);
 			}
+			else if (aNode->GetObject()->m_name == "word_list")
+			{
+				WordList::Data::FromSource(aNode, &m_manifest->m_wordList);
+			}
 			else
 			{
 				DataType::Id dataType = DataType::StringToId(aNode->m_tag.c_str());
@@ -108,6 +113,29 @@ namespace tpublic
 				base->m_componentManager = m_sourceContext.m_componentManager.get();
 			}
 		});		
+
+		// Prepare word list manifest
+		{
+			m_manifest->m_wordList.Prepare(m_manifest);
+
+			WordList::QueryCache wordListQueryCache(&m_manifest->m_wordList);
+
+			//WordList::QueryParams queryParams;
+			//queryParams.m_mustHaveTags.push_back(m_manifest->GetExistingIdByName<Data::Tag>("adjective"));
+			//queryParams.m_mustHaveTags.push_back(m_manifest->GetExistingIdByName<Data::Tag>("evil"));
+			//queryParams.Prepare();
+
+			//std::mt19937 random;
+
+			//for(uint32_t i = 0; i < 20; i++)
+			//{
+			//	const WordList::QueryCache::Query* query = wordListQueryCache.PerformQuery(queryParams);
+			//	const WordList::Word* word = query->GetRandomWord(random);
+			//	printf("%s\n", word->m_word.c_str());
+			//}
+
+			//printf("..\n");
+		}
 
 		// Build map data
 		{
@@ -192,7 +220,7 @@ namespace tpublic
 					m_parser.Parse(tokenizer);
 				}
 			}
-			else if(entry.is_directory())
+			else if(entry.is_directory() && entry.path().filename().string().c_str()[0] != '_')
 			{
 				_ParseDirectory(aRootPath, entry.path().string().c_str());
 			}

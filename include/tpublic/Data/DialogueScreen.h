@@ -14,6 +14,7 @@ namespace tpublic
 			: public DataBase
 		{
 			static const DataType::Id DATA_TYPE = DataType::ID_DIALOGUE_SCREEN;
+			static const bool TAGGED = false;
 
 			struct Option
 			{
@@ -227,20 +228,23 @@ namespace tpublic
 				aNode->ForEachChild([&](
 					const SourceNode* aChild)
 				{
-					if(aChild->m_name == "text")
-						aChild->GetArray()->ForEachChild([&](const SourceNode* aLine) { appendString(m_text, aLine->GetString()); });
-					else if(aChild->m_name == "options")
-						aChild->GetArray()->ForEachChild([&](const SourceNode* aOption) { m_options.push_back(Option(aOption)); });
-					else if(aChild->m_tag == "sell")
-						m_sell.push_back(Sell(aChild));
-					else if (aChild->m_name == "train_profession")
-						m_trainProfessions.push_back(TrainProfession(aChild));
-					else if (aChild->m_name == "train_ability")
-						m_trainAbilities.push_back(aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier()));
-					else if (aChild->m_name == "train_abilities")
-						aChild->GetIdArray(DataType::ID_ABILITY, m_trainAbilities);
-					else
-						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
+					if(!FromSourceBase(aChild))
+					{
+						if (aChild->m_name == "text")
+							aChild->GetArray()->ForEachChild([&](const SourceNode* aLine) { appendString(m_text, aLine->GetString()); });
+						else if (aChild->m_name == "options")
+							aChild->GetArray()->ForEachChild([&](const SourceNode* aOption) { m_options.push_back(Option(aOption)); });
+						else if (aChild->m_tag == "sell")
+							m_sell.push_back(Sell(aChild));
+						else if (aChild->m_name == "train_profession")
+							m_trainProfessions.push_back(TrainProfession(aChild));
+						else if (aChild->m_name == "train_ability")
+							m_trainAbilities.push_back(aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier()));
+						else if (aChild->m_name == "train_abilities")
+							aChild->GetIdArray(DataType::ID_ABILITY, m_trainAbilities);
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
+					}
 				});
 			}
 

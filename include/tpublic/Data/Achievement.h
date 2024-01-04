@@ -13,6 +13,7 @@ namespace tpublic
 			: public DataBase
 		{
 			static const DataType::Id DATA_TYPE = DataType::ID_ACHIEVEMENT;
+			static const bool TAGGED = false;
 
 			struct StatTrigger
 			{
@@ -69,26 +70,29 @@ namespace tpublic
 				aSource->ForEachChild([&](
 					const SourceNode* aChild)
 				{
-					if(aChild->m_name == "string")
-						m_string = aChild->GetString();
-					else if (aChild->m_name == "description")
-						m_description = aChild->GetString();
-					else if (aChild->m_name == "points")
-						m_points = aChild->GetUInt32();
-					else if (aChild->m_name == "priority")
-						m_priority = aChild->GetUInt32();
-					else if (aChild->m_name == "no_progress_values")
-						m_noProgressValues = aChild->GetBool();
-					else if (aChild->m_name == "category")
-						m_categoryId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ACHIEVEMENT_CATEGORY, aChild->GetIdentifier());
-					else if (aChild->m_name == "root")
-						m_rootId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ACHIEVEMENT, aChild->GetIdentifier());
-					else if (aChild->m_name == "icon")
-						m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
-					else if (aChild->m_tag == "stat_trigger")
-						m_statTrigger = StatTrigger(aChild);
-					else
-						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					if(!FromSourceBase(aChild))
+					{
+						if (aChild->m_name == "string")
+							m_string = aChild->GetString();
+						else if (aChild->m_name == "description")
+							m_description = aChild->GetString();
+						else if (aChild->m_name == "points")
+							m_points = aChild->GetUInt32();
+						else if (aChild->m_name == "priority")
+							m_priority = aChild->GetUInt32();
+						else if (aChild->m_name == "no_progress_values")
+							m_noProgressValues = aChild->GetBool();
+						else if (aChild->m_name == "category")
+							m_categoryId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ACHIEVEMENT_CATEGORY, aChild->GetIdentifier());
+						else if (aChild->m_name == "root")
+							m_rootId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ACHIEVEMENT, aChild->GetIdentifier());
+						else if (aChild->m_name == "icon")
+							m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
+						else if (aChild->m_tag == "stat_trigger")
+							m_statTrigger = StatTrigger(aChild);
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					}
 				});
 			}
 

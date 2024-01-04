@@ -14,6 +14,7 @@ namespace tpublic
 			: public DataBase
 		{
 			static const DataType::Id DATA_TYPE = DataType::ID_MAP_SEGMENT;
+			static const bool TAGGED = true;
 
 			enum Type : uint8_t
 			{
@@ -632,16 +633,19 @@ namespace tpublic
 				aSource->ForEachChild([&](
 					const SourceNode*	aChild)
 				{
-					if(aChild->m_name == "palette" && m_type == TYPE_PALETTED)
-						palette = std::make_unique<Palette>(aChild);
-					else if(aChild->m_name == "paletted_map" && m_type == TYPE_PALETTED)
-						m_tileMap = std::make_unique<TileMap>(palette.get(), aChild, random);
-					else if (aChild->m_name == "random_room" && m_type == TYPE_RANDOM_ROOM)
-						m_randomRoom = std::make_unique<RandomRoom>(aChild);
-					else if(aChild->m_tag == "tile_map_modifier")
-						m_tileMapModifiers.push_back(std::make_unique<TileMapModifier>(aChild));
-					else 
-						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					if(!FromSourceBase(aChild))
+					{
+						if (aChild->m_name == "palette" && m_type == TYPE_PALETTED)
+							palette = std::make_unique<Palette>(aChild);
+						else if (aChild->m_name == "paletted_map" && m_type == TYPE_PALETTED)
+							m_tileMap = std::make_unique<TileMap>(palette.get(), aChild, random);
+						else if (aChild->m_name == "random_room" && m_type == TYPE_RANDOM_ROOM)
+							m_randomRoom = std::make_unique<RandomRoom>(aChild);
+						else if (aChild->m_tag == "tile_map_modifier")
+							m_tileMapModifiers.push_back(std::make_unique<TileMapModifier>(aChild));
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					}
 				});			
 				
 				if(m_tileMap && m_tileMapModifiers.size() > 0)

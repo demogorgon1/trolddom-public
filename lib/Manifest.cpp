@@ -28,6 +28,7 @@
 #include <tpublic/Data/Profession.h>
 #include <tpublic/Data/Quest.h>
 #include <tpublic/Data/Sprite.h>
+#include <tpublic/Data/Tag.h>
 #include <tpublic/Data/Talent.h>
 #include <tpublic/Data/TalentTree.h>
 #include <tpublic/Data/Zone.h>
@@ -67,6 +68,7 @@ namespace tpublic
 		RegisterDataContainer<Data::Profession>();
 		RegisterDataContainer<Data::Quest>();
 		RegisterDataContainer<Data::Sprite>();
+		RegisterDataContainer<Data::Tag>();
 		RegisterDataContainer<Data::Talent>();
 		RegisterDataContainer<Data::TalentTree>();
 		RegisterDataContainer<Data::Zone>();
@@ -104,6 +106,7 @@ namespace tpublic
 		m_questMetrics.ToStream(aStream);
 		m_professionMetrics.ToStream(aStream);
 		m_abilityMetrics.ToStream(aStream);
+		m_wordList.ToStream(aStream);
 	}
 
 	bool
@@ -130,6 +133,8 @@ namespace tpublic
 		if (!m_professionMetrics.FromStream(aStream))
 			return false;
 		if (!m_abilityMetrics.FromStream(aStream))
+			return false;
+		if(!m_wordList.FromStream(aStream))
 			return false;
 
 		return true;

@@ -17,6 +17,7 @@ namespace tpublic
 			: public DataBase
 		{
 			static const DataType::Id DATA_TYPE = DataType::ID_CLASS;
+			static const bool TAGGED = true;
 
 			struct Color
 			{
@@ -323,7 +324,7 @@ namespace tpublic
 				{
 					aNode->ForEachChild([&](
 						const SourceNode* aItem)
-					{						
+					{				
 						if (aItem->m_name == "str_to_dps")
 							m_strToDps.FromSource(aItem);
 						else if (aItem->m_name == "str_weapon_damage_min")
@@ -444,84 +445,87 @@ namespace tpublic
 				aNode->ForEachChild([&](
 					const SourceNode* aMember)
 				{
-					if(aMember->m_name == "string")
+					if(!FromSourceBase(aMember))
 					{
-						m_displayName = aMember->GetString();
-					}
-					else if (aMember->m_name == "description")
-					{
-						m_description = aMember->GetString();
-					}
-					else if (aMember->m_name == "sprite")
-					{
-						m_spriteId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aMember->GetIdentifier());
-					}					
-					else if (aMember->m_name == "sprite_dead")
-					{
-						m_spriteDeadId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aMember->GetIdentifier());
-					}
-					else if (aMember->m_name == "color_1")
-					{
-						const SourceNode* components = aMember->GetArray();
-						TP_VERIFY(components->m_children.size() == 3, aMember->m_debugInfo, "'%s' is not a valid color.", aMember->m_name.c_str());
-						m_color1.m_r = components->m_children[0]->GetUInt8();
-						m_color1.m_g = components->m_children[1]->GetUInt8();
-						m_color1.m_b = components->m_children[2]->GetUInt8();
-					}
-					else if (aMember->m_name == "color_2")
-					{
-						const SourceNode* components = aMember->GetArray();
-						TP_VERIFY(components->m_children.size() == 3, aMember->m_debugInfo, "'%s' is not a valid color.", aMember->m_name.c_str());
-						m_color2.m_r = components->m_children[0]->GetUInt8();
-						m_color2.m_g = components->m_children[1]->GetUInt8();
-						m_color2.m_b = components->m_children[2]->GetUInt8();
-					}
-					else if (aMember->m_name == "default_attack")
-					{
-						m_defaultAttackAbilityId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aMember->GetIdentifier());
-					}
-					else if (aMember->m_name == "default_action_bar")
-					{
-						aMember->GetIdArray(DataType::ID_ABILITY, m_defaultActionBar.m_slots);
-					}
-					else if(aMember->m_name == "level_progression")
-					{
-						m_levelProgression = std::make_unique<LevelProgression>(aMember->GetArray());
-					}
-					else if(aMember->m_tag == "start_equipment")
-					{
-						m_startEquipment.push_back(StartEquipment(aMember));
-					}
-					else if (aMember->m_tag == "start_map")
-					{
-						m_startMaps.push_back(std::make_unique<StartMap>(aMember));
-					}
-					else if(aMember->m_name == "stats_conversion")
-					{
-						m_statsConversion.FromSource(aMember);
-					}
-					else if (aMember->m_name == "talent_trees")
-					{
-						aMember->GetIdArray(DataType::ID_TALENT_TREE, m_talentTrees);
-					}
-					else if (aMember->m_name == "item_types")
-					{
-						std::vector<ItemType::Id> itemTypes;
-						aMember->GetIdArrayWithLookup<ItemType::Id, ItemType::INVALID_ID>(itemTypes, [&](
-							const char* aIdentifier) -> ItemType::Id
+						if (aMember->m_name == "string")
 						{
-							return ItemType::StringToId(aIdentifier);
-						});
-						for(ItemType::Id itemType : itemTypes)
-						{
-							uint32_t t = (uint32_t)itemType;
-							static_assert((uint32_t)ItemType::NUM_IDS <= 32);
-							m_itemTypesMask |= (1 << t);
+							m_displayName = aMember->GetString();
 						}
-					}
-					else
-					{
-						TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
+						else if (aMember->m_name == "description")
+						{
+							m_description = aMember->GetString();
+						}
+						else if (aMember->m_name == "sprite")
+						{
+							m_spriteId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aMember->GetIdentifier());
+						}
+						else if (aMember->m_name == "sprite_dead")
+						{
+							m_spriteDeadId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aMember->GetIdentifier());
+						}
+						else if (aMember->m_name == "color_1")
+						{
+							const SourceNode* components = aMember->GetArray();
+							TP_VERIFY(components->m_children.size() == 3, aMember->m_debugInfo, "'%s' is not a valid color.", aMember->m_name.c_str());
+							m_color1.m_r = components->m_children[0]->GetUInt8();
+							m_color1.m_g = components->m_children[1]->GetUInt8();
+							m_color1.m_b = components->m_children[2]->GetUInt8();
+						}
+						else if (aMember->m_name == "color_2")
+						{
+							const SourceNode* components = aMember->GetArray();
+							TP_VERIFY(components->m_children.size() == 3, aMember->m_debugInfo, "'%s' is not a valid color.", aMember->m_name.c_str());
+							m_color2.m_r = components->m_children[0]->GetUInt8();
+							m_color2.m_g = components->m_children[1]->GetUInt8();
+							m_color2.m_b = components->m_children[2]->GetUInt8();
+						}
+						else if (aMember->m_name == "default_attack")
+						{
+							m_defaultAttackAbilityId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aMember->GetIdentifier());
+						}
+						else if (aMember->m_name == "default_action_bar")
+						{
+							aMember->GetIdArray(DataType::ID_ABILITY, m_defaultActionBar.m_slots);
+						}
+						else if (aMember->m_name == "level_progression")
+						{
+							m_levelProgression = std::make_unique<LevelProgression>(aMember->GetArray());
+						}
+						else if (aMember->m_tag == "start_equipment")
+						{
+							m_startEquipment.push_back(StartEquipment(aMember));
+						}
+						else if (aMember->m_tag == "start_map")
+						{
+							m_startMaps.push_back(std::make_unique<StartMap>(aMember));
+						}
+						else if (aMember->m_name == "stats_conversion")
+						{
+							m_statsConversion.FromSource(aMember);
+						}
+						else if (aMember->m_name == "talent_trees")
+						{
+							aMember->GetIdArray(DataType::ID_TALENT_TREE, m_talentTrees);
+						}
+						else if (aMember->m_name == "item_types")
+						{
+							std::vector<ItemType::Id> itemTypes;
+							aMember->GetIdArrayWithLookup<ItemType::Id, ItemType::INVALID_ID>(itemTypes, [&](
+								const char* aIdentifier) -> ItemType::Id
+								{
+									return ItemType::StringToId(aIdentifier);
+								});
+							for (ItemType::Id itemType : itemTypes)
+							{
+								uint32_t t = (uint32_t)itemType;
+								static_assert((uint32_t)ItemType::NUM_IDS <= 32);
+								m_itemTypesMask |= (1 << t);
+							}
+						}
+						else
+						{
+							TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
+						}
 					}
 				});
 			}

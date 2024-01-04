@@ -15,6 +15,7 @@ namespace tpublic
 			: public DataBase
 		{
 			static const DataType::Id DATA_TYPE = DataType::ID_AURA;
+			static const bool TAGGED = false;
 
 			struct AuraEffectEntry
 			{
@@ -136,24 +137,27 @@ namespace tpublic
 				aNode->ForEachChild([&](
 					const SourceNode* aChild)
 				{
-					if(aChild->m_name == "icon")
-						m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
-					else if (aChild->m_name == "duration")
-						m_duration = SourceToDuration(aChild);
-					else if (aChild->m_name == "type")
-						m_type = SourceToType(aChild);
-					else if (aChild->m_name == "flags")
-						m_flags |= SourceToFlags(aChild);
-					else if (aChild->m_tag == "aura_effect")
-						m_auraEffects.push_back(std::make_unique<AuraEffectEntry>(aChild));
-					else if(aChild->m_name == "string")
-						m_string = aChild->GetString();
-					else if (aChild->m_name == "description")
-						m_description = aChild->GetString();
-					else if(aChild->m_name == "stat_modifiers")
-						m_statModifiers = std::make_unique<StatModifiers>(aChild);
-					else
-						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
+					if(!FromSourceBase(aChild))
+					{
+						if (aChild->m_name == "icon")
+							m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
+						else if (aChild->m_name == "duration")
+							m_duration = SourceToDuration(aChild);
+						else if (aChild->m_name == "type")
+							m_type = SourceToType(aChild);
+						else if (aChild->m_name == "flags")
+							m_flags |= SourceToFlags(aChild);
+						else if (aChild->m_tag == "aura_effect")
+							m_auraEffects.push_back(std::make_unique<AuraEffectEntry>(aChild));
+						else if (aChild->m_name == "string")
+							m_string = aChild->GetString();
+						else if (aChild->m_name == "description")
+							m_description = aChild->GetString();
+						else if (aChild->m_name == "stat_modifiers")
+							m_statModifiers = std::make_unique<StatModifiers>(aChild);
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
+					}
 				});
 			}
 

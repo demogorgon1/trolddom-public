@@ -12,6 +12,7 @@ namespace tpublic
 			: public DataBase
 		{
 			static const DataType::Id DATA_TYPE = DataType::ID_MAP_PALETTE;
+			static const bool TAGGED = false;
 
 			enum EntryType : uint8_t
 			{
@@ -74,50 +75,53 @@ namespace tpublic
 				aNode->GetObject()->ForEachChild([&](
 					const SourceNode*	aChild)
 				{
-					Entry entry;
-					if (aChild->m_tag == "tile")
+					if(!FromSourceBase(aChild))
 					{
-						entry.m_type = ENTRY_TYPE_TILE;
-						entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->m_name.c_str());
-					}
-					else if (aChild->m_tag == "entity_spawn")
-					{
-						entry.m_type = ENTRY_TYPE_ENTITY_SPAWN;
-						entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aChild->m_name.c_str());
-					}
-					else if (aChild->m_tag == "player_spawn")
-					{
-						entry.m_type = ENTRY_TYPE_PLAYER_SPAWN;
-						entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_PLAYER_SPAWN, aChild->m_name.c_str());
-					}
-					else if (aChild->m_tag == "portal")
-					{
-						entry.m_type = ENTRY_TYPE_PORTAL;
-						entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_PORTAL, aChild->m_name.c_str());
-					}
-					else if (aChild->m_name == "level" && aChild->m_annotation)
-					{
-						entry.m_type = ENTRY_TYPE_LEVEL;
-						entry.m_value = aChild->m_annotation->GetUInt32();
-					}
-					else if (aChild->m_tag == "zone")
-					{
-						entry.m_type = ENTRY_TYPE_ZONE;
-						entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ZONE, aChild->m_name.c_str());
-					}
-					else
-					{
-						TP_VERIFY(false, aChild->m_debugInfo, "Invalid 'map_palette' item.");
-					}
+						Entry entry;
+						if (aChild->m_tag == "tile")
+						{
+							entry.m_type = ENTRY_TYPE_TILE;
+							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->m_name.c_str());
+						}
+						else if (aChild->m_tag == "entity_spawn")
+						{
+							entry.m_type = ENTRY_TYPE_ENTITY_SPAWN;
+							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aChild->m_name.c_str());
+						}
+						else if (aChild->m_tag == "player_spawn")
+						{
+							entry.m_type = ENTRY_TYPE_PLAYER_SPAWN;
+							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_PLAYER_SPAWN, aChild->m_name.c_str());
+						}
+						else if (aChild->m_tag == "portal")
+						{
+							entry.m_type = ENTRY_TYPE_PORTAL;
+							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_PORTAL, aChild->m_name.c_str());
+						}
+						else if (aChild->m_name == "level" && aChild->m_annotation)
+						{
+							entry.m_type = ENTRY_TYPE_LEVEL;
+							entry.m_value = aChild->m_annotation->GetUInt32();
+						}
+						else if (aChild->m_tag == "zone")
+						{
+							entry.m_type = ENTRY_TYPE_ZONE;
+							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ZONE, aChild->m_name.c_str());
+						}
+						else
+						{
+							TP_VERIFY(false, aChild->m_debugInfo, "Invalid 'map_palette' item.");
+						}
 
-					TP_VERIFY(aChild->m_type == SourceNode::TYPE_ARRAY, aChild->m_debugInfo, "Not an array.");
-					TP_VERIFY(aChild->m_children.size() == 3, aChild->m_debugInfo, "Not a valid RGB color.");
+						TP_VERIFY(aChild->m_type == SourceNode::TYPE_ARRAY, aChild->m_debugInfo, "Not an array.");
+						TP_VERIFY(aChild->m_children.size() == 3, aChild->m_debugInfo, "Not a valid RGB color.");
 
-					entry.m_color.m_r = aChild->m_children[0]->GetUInt8();
-					entry.m_color.m_g = aChild->m_children[1]->GetUInt8();
-					entry.m_color.m_b = aChild->m_children[2]->GetUInt8();
+						entry.m_color.m_r = aChild->m_children[0]->GetUInt8();
+						entry.m_color.m_g = aChild->m_children[1]->GetUInt8();
+						entry.m_color.m_b = aChild->m_children[2]->GetUInt8();
 
-					m_entries.push_back(entry);
+						m_entries.push_back(entry);
+					}
 				});
 			}
 

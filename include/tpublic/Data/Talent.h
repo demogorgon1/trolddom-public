@@ -12,6 +12,7 @@ namespace tpublic
 			: public DataBase
 		{
 			static const DataType::Id DATA_TYPE = DataType::ID_TALENT;
+			static const bool TAGGED = false;
 
 			struct Point
 			{
@@ -73,18 +74,21 @@ namespace tpublic
 				aSource->ForEachChild([&](
 					const SourceNode*	aChild)
 				{
-					if(aChild->m_name == "string")
-						m_string = aChild->GetString();
-					else if (aChild->m_name == "icon")
-						m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
-					else if (aChild->m_name == "prerequisites")
-						aChild->GetIdArray(DataType::ID_TALENT, m_prerequisites);
-					else if (aChild->m_name == "talent_tree_points_required")
-						m_talentTreePointsRequired = aChild->GetUInt32();
-					else if (aChild->m_name == "points")
-						aChild->GetObjectArray(m_points);
-					else
-						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					if(!FromSourceBase(aChild))
+					{
+						if (aChild->m_name == "string")
+							m_string = aChild->GetString();
+						else if (aChild->m_name == "icon")
+							m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
+						else if (aChild->m_name == "prerequisites")
+							aChild->GetIdArray(DataType::ID_TALENT, m_prerequisites);
+						else if (aChild->m_name == "talent_tree_points_required")
+							m_talentTreePointsRequired = aChild->GetUInt32();
+						else if (aChild->m_name == "points")
+							aChild->GetObjectArray(m_points);
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					}
 				});
 			}
 

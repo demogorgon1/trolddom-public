@@ -13,6 +13,7 @@ namespace tpublic
 			: public DataBase
 		{
 			static const DataType::Id DATA_TYPE = DataType::ID_SPRITE;
+			static const bool TAGGED = false;
 
 			void
 			Verify() const

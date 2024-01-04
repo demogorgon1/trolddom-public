@@ -13,6 +13,7 @@ namespace tpublic
 			: public DataBase
 		{
 			static const DataType::Id DATA_TYPE = DataType::ID_PROFESSION;
+			static const bool TAGGED = false;
 
 			void
 			Verify() const
@@ -32,12 +33,15 @@ namespace tpublic
 				aNode->ForEachChild([&](
 					const SourceNode* aChild)
 				{
-					if(aChild->m_name == "string")
-						m_string = aChild->GetString();
-					else if(aChild->m_name == "icon")
-						m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
-					else
-						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					if(!FromSourceBase(aChild))
+					{
+						if (aChild->m_name == "string")
+							m_string = aChild->GetString();
+						else if (aChild->m_name == "icon")
+							m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					}
 				});
 				
 			}

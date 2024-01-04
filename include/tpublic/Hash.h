@@ -23,6 +23,23 @@ namespace tpublic
 			bool	operator!=(
 						const CheckSum&			aOther) const;
 
+			template <typename _T>
+			void
+			AddPOD(
+				const _T&						aData)
+			{
+				AddData(&aData, sizeof(_T));
+			}
+
+			template <typename _T> 
+			void
+			AddPODVector(
+				const std::vector<_T>&			aVector)
+			{
+				if(aVector.size() > 0)
+					AddData(&aVector[0], sizeof(_T) * aVector.size());
+			}
+
 			// Public data
 			uint32_t		m_hash;
 			size_t			m_processedBytes;			

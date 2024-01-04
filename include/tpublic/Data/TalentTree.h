@@ -12,6 +12,7 @@ namespace tpublic
 			: public DataBase
 		{
 			static const DataType::Id DATA_TYPE = DataType::ID_TALENT_TREE;
+			static const bool TAGGED = false;
 
 			struct MapPaletteEntry 
 			{
@@ -150,29 +151,32 @@ namespace tpublic
 				aSource->ForEachChild([&](
 					const SourceNode*	aChild)
 				{
-					if(aChild->m_name == "string")
+					if(!FromSourceBase(aChild))
 					{
-						m_string = aChild->GetString();
-					}
-					else if (aChild->m_name == "icon")
-					{
-						m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
-					}
-					else if(aChild->m_name == "map_palette")
-					{
-						m_mapPalette = std::make_unique<MapPalette>(aChild);
-					}
-					else if(aChild->m_name == "map")
-					{
-						aChild->GetArray()->ForEachChild([&](
-							const SourceNode* aMapRow)
+						if (aChild->m_name == "string")
 						{
-							m_map.push_back(aMapRow->GetString());
-						});
-					}
-					else
-					{
-						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+							m_string = aChild->GetString();
+						}
+						else if (aChild->m_name == "icon")
+						{
+							m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
+						}
+						else if (aChild->m_name == "map_palette")
+						{
+							m_mapPalette = std::make_unique<MapPalette>(aChild);
+						}
+						else if (aChild->m_name == "map")
+						{
+							aChild->GetArray()->ForEachChild([&](
+								const SourceNode* aMapRow)
+								{
+									m_map.push_back(aMapRow->GetString());
+								});
+						}
+						else
+						{
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+						}
 					}
 				});
 			}

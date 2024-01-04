@@ -17,6 +17,7 @@ namespace tpublic
 			: public DataBase
 		{
 			static const DataType::Id DATA_TYPE = DataType::ID_ENTITY;
+			static const bool TAGGED = true;
 
 			struct Modifiers
 			{
@@ -168,35 +169,38 @@ namespace tpublic
 				aNode->ForEachChild([&](
 					const SourceNode*	aMember)
 				{
-					if (aMember->m_name == "string")
+					if(!FromSourceBase(aMember))
 					{
-						m_displayName = aMember->GetString();
-					}
-					else if(aMember->m_name == "components")
-					{
-						aMember->GetObject()->ForEachChild([&](
-							const SourceNode* aComponentMember)
+						if (aMember->m_name == "string")
 						{
-							m_components.push_back(std::make_unique<ComponentEntry>(aComponentMember));
-						});
-					}
-					else if (aMember->m_name == "systems")
-					{
-						aMember->GetArray()->ForEachChild([&](
-							const SourceNode* aArrayItem)
+							m_displayName = aMember->GetString();
+						}
+						else if (aMember->m_name == "components")
 						{
-							uint32_t systemId = System::StringToId(aArrayItem->GetIdentifier());
-							TP_VERIFY(systemId != System::INVALID_ID, aArrayItem->m_debugInfo, "'%s' not a valid system.", aArrayItem->m_name.c_str());
-							m_systems.push_back(systemId);
-						});
-					}
-					else if(aMember->m_name == "modifiers")
-					{
-						m_modifiers.FromSource(aMember);
-					}
-					else
-					{
-						TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
+							aMember->GetObject()->ForEachChild([&](
+								const SourceNode* aComponentMember)
+								{
+									m_components.push_back(std::make_unique<ComponentEntry>(aComponentMember));
+								});
+						}
+						else if (aMember->m_name == "systems")
+						{
+							aMember->GetArray()->ForEachChild([&](
+								const SourceNode* aArrayItem)
+								{
+									uint32_t systemId = System::StringToId(aArrayItem->GetIdentifier());
+									TP_VERIFY(systemId != System::INVALID_ID, aArrayItem->m_debugInfo, "'%s' not a valid system.", aArrayItem->m_name.c_str());
+									m_systems.push_back(systemId);
+								});
+						}
+						else if (aMember->m_name == "modifiers")
+						{
+							m_modifiers.FromSource(aMember);
+						}
+						else
+						{
+							TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
+						}
 					}
 				});
 			}

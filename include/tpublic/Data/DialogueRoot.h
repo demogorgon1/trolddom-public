@@ -12,6 +12,7 @@ namespace tpublic
 			: public DataBase
 		{
 			static const DataType::Id DATA_TYPE = DataType::ID_DIALOGUE_ROOT;
+			static const bool TAGGED = true;
 
 			struct Entry
 			{
@@ -73,7 +74,8 @@ namespace tpublic
 				aSource->ForEachChild([&](
 					const SourceNode* aChild)
 				{
-					m_entries.push_back(std::make_unique<Entry>(aChild));
+					if(!FromSourceBase(aChild))
+						m_entries.push_back(std::make_unique<Entry>(aChild));
 				});
 			}
 

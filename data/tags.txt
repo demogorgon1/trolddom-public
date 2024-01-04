@@ -1,0 +1,17 @@
+tag american_forename_male: {}
+tag american_forename_female: {}
+tag tolkienesque_forename: {}
+tag elven_placename: {}
+tag human_townname: {}
+tag noun: {} 
+tag creature: {} 
+tag snake: {} 
+tag dangerous: {}
+tag evil: {}
+tag predator: {} 
+tag grandiose: {}
+tag mysterious: {}
+tag adjective: {}
+tag good: {}
+tag color: {}
+tag monster: { }

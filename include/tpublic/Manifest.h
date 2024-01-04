@@ -10,6 +10,7 @@
 #include "PlayerComponents.h"
 #include "ProfessionMetrics.h"
 #include "QuestMetrics.h"
+#include "WordList.h"
 #include "XPMetrics.h"
 
 namespace tpublic
@@ -42,17 +43,19 @@ namespace tpublic
 			}
 
 			// Virtual interface
-			virtual void		Verify() const = 0;
-			virtual void		PrepareRuntime(
-									uint8_t				aRuntime,
-									const Manifest*		aManifest) = 0;
-			virtual void		ToStream(
-									IWriter*			aStream) const = 0;
-			virtual bool		FromStream(	
-									IReader*			aStream) = 0;
-			virtual DataBase*	GetBaseByName(
-									PersistentIdTable*	aPersistentIdTable,
-									const char*			aName) = 0;
+			virtual void			Verify() const = 0;
+			virtual void			PrepareRuntime(
+										uint8_t				aRuntime,
+										const Manifest*		aManifest) = 0;
+			virtual void			ToStream(
+										IWriter*			aStream) const = 0;
+			virtual bool			FromStream(	
+										IReader*			aStream) = 0;
+			virtual DataBase*		GetBaseByName(
+										PersistentIdTable*	aPersistentIdTable,
+										const char*			aName) = 0;
+			virtual const DataBase*	GetExistingBaseById(
+										uint32_t			aId) const = 0;
 
 		private:
 
@@ -263,6 +266,16 @@ namespace tpublic
 				return GetByName(aPersistentIdTable, aName);
 			}
 
+			const DataBase* 
+			GetExistingBaseById(
+				uint32_t								aId) const override
+			{
+				typename std::unordered_map<uint32_t, _T*>::const_iterator i = m_idTable.find(aId);
+				if(i != m_idTable.cend())
+					return i->second;
+				return NULL;
+			}
+
 			// Public data
 			std::vector<std::unique_ptr<_T>>			m_entries;
 			std::unordered_map<std::string, _T*>		m_nameTable;
@@ -358,6 +371,7 @@ namespace tpublic
 		QuestMetrics									m_questMetrics;
 		ProfessionMetrics								m_professionMetrics;
 		AbilityMetrics									m_abilityMetrics;
+		WordList::Data									m_wordList;
 
 		// Public data
 		std::unique_ptr<IDataContainer>					m_containers[DataType::NUM_IDS];

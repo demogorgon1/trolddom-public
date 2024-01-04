@@ -12,6 +12,7 @@ namespace tpublic
 			: public DataBase
 		{
 			static const DataType::Id DATA_TYPE = DataType::ID_CREATURE_TYPE;
+			static const bool TAGGED = true;
 
 			enum Flag : uint8_t
 			{
@@ -42,23 +43,26 @@ namespace tpublic
 				aSource->ForEachChild([&](
 					const SourceNode*	aChild)
 				{
-					if(aChild->m_name == "string")
+					if(!FromSourceBase(aChild))
 					{
-						m_string = aChild->GetString();
-					}
-					else if (aChild->m_name == "flags")
-					{
-						aChild->GetArray()->ForEachChild([&](
-							const SourceNode* aFlag)
+						if (aChild->m_name == "string")
 						{
-							uint8_t flag = StringToFlag(aFlag->GetIdentifier());
-							TP_VERIFY(flag != 0, aFlag->m_debugInfo, "'%s' is not a valid flag.", aFlag->GetIdentifier());
-							m_flags |= flag;
-						});								
-					}
-					else
-					{
-						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+							m_string = aChild->GetString();
+						}
+						else if (aChild->m_name == "flags")
+						{
+							aChild->GetArray()->ForEachChild([&](
+								const SourceNode* aFlag)
+								{
+									uint8_t flag = StringToFlag(aFlag->GetIdentifier());
+									TP_VERIFY(flag != 0, aFlag->m_debugInfo, "'%s' is not a valid flag.", aFlag->GetIdentifier());
+									m_flags |= flag;
+								});
+						}
+						else
+						{
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+						}
 					}
 				});
 			}

@@ -27,6 +27,11 @@ namespace tpublic
 						int32_t						aDistance);
 		float		RandomFloat(
 						std::mt19937&				aRandom);
+		bool		LoadTextFile(
+						const char*					aPath,
+						std::vector<std::string>&	aOut);
+		void		TrimString(
+						std::string&				aString);
 
 		template <typename _T>
 		void	

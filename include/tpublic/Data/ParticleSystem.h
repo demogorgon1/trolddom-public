@@ -13,6 +13,7 @@ namespace tpublic
 			: public DataBase
 		{
 			static const DataType::Id DATA_TYPE = DataType::ID_PARTICLE_SYSTEM;
+			static const bool TAGGED = false;
 
 			struct Entry
 			{
@@ -86,10 +87,13 @@ namespace tpublic
 				aNode->ForEachChild([&](
 					const SourceNode* aChild)
 				{
-					if(aChild->m_name == "particle")
-						m_particles.push_back(std::make_unique<Entry>(aChild));
-					else
-						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					if(!FromSourceBase(aChild))
+					{
+						if (aChild->m_name == "particle")
+							m_particles.push_back(std::make_unique<Entry>(aChild));
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					}
 				});
 			}
 

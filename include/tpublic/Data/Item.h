@@ -17,6 +17,7 @@ namespace tpublic
 			: public DataBase
 		{
 			static const DataType::Id DATA_TYPE = DataType::ID_ITEM;
+			static const bool TAGGED = true;
 
 			struct AddedStat
 			{
@@ -89,93 +90,96 @@ namespace tpublic
 				aSource->ForEachChild([&](
 					const SourceNode* aChild)
 				{
-					if(aChild->m_name == "equipment_slots")
+					if(!FromSourceBase(aChild))
 					{
-						aChild->ForEachChild([&](
-							const SourceNode* aEquipmentSlot)
+						if (aChild->m_name == "equipment_slots")
 						{
-							EquipmentSlot::Id id = EquipmentSlot::StringToId(aEquipmentSlot->GetIdentifier());
-							TP_VERIFY(id != EquipmentSlot::INVALID_ID, aEquipmentSlot->m_debugInfo, "'%s' is not a valid equipment slot.", aEquipmentSlot->GetIdentifier());
-							m_equipmentSlots.push_back(id);
-						});	
-					}
-					else if(aChild->m_name == "loot_groups")
-					{
-						aChild->GetIdArray(DataType::ID_LOOT_GROUP, m_lootGroups);
-					}
-					else if (aChild->m_name == "stack")
-					{
-						m_stackSize = aChild->GetUInt32();
-					}
-					else if (aChild->m_name == "item_level")
-					{
-						m_itemLevel = aChild->GetUInt32();
-					}
-					else if (aChild->m_name == "level_range")
-					{
-						m_levelRange = UIntRange(aChild);
-					}
-					else if (aChild->m_name == "required_level")
-					{
-						m_requiredLevel = aChild->GetUInt32();
-					}
-					else if (aChild->m_name == "cost")
-					{
-						m_cost = aChild->GetUInt32();
-					}
-					else if (aChild->m_name == "unique")
-					{
-						m_unique = aChild->GetBool();
-					}
-					else if (aChild->m_name == "use_ability")
-					{
-						m_useAbilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
-					}
-					else if (aChild->m_name == "icon")
-					{
-						m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
-					}
-					else if (aChild->m_name == "rarity")
-					{
-						m_rarity = Rarity::StringToId(aChild->GetIdentifier());
-						TP_VERIFY(m_rarity != Rarity::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid rarity.", aChild->GetIdentifier());
-					}
-					else if(aChild->m_name == "type")
-					{
-						m_itemType = ItemType::StringToId(aChild->GetIdentifier());
-						TP_VERIFY(m_itemType != ItemType::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid item type.", aChild->GetIdentifier());
-					}
-					else if (aChild->m_name == "weapon_cooldown")
-					{
-						m_weaponCooldown = aChild->GetUInt32();
-					}
-					else if (aChild->m_name == "weapon_damage")
-					{
-						m_weaponDamage = UIntRange(aChild);
-					}
-					else if (aChild->m_name == "string")
-					{
-						m_string = aChild->GetString();
-					}
-					else if (aChild->m_name == "flavor")
-					{
-						m_flavor = aChild->GetString();
-					}
-					else if (aChild->m_name == "budget_bias")
-					{
-						m_budgetBias = aChild->GetInt32();
-					}
-					else if (aChild->m_tag == "stat")
-					{
-						m_addedStats.push_back(AddedStat(aChild, false));
-					}
-					else if (aChild->m_tag == "stat_weight")
-					{
-						m_addedStats.push_back(AddedStat(aChild, true));
-					}
-					else
-					{
-						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+							aChild->ForEachChild([&](
+								const SourceNode* aEquipmentSlot)
+								{
+									EquipmentSlot::Id id = EquipmentSlot::StringToId(aEquipmentSlot->GetIdentifier());
+									TP_VERIFY(id != EquipmentSlot::INVALID_ID, aEquipmentSlot->m_debugInfo, "'%s' is not a valid equipment slot.", aEquipmentSlot->GetIdentifier());
+									m_equipmentSlots.push_back(id);
+								});
+						}
+						else if (aChild->m_name == "loot_groups")
+						{
+							aChild->GetIdArray(DataType::ID_LOOT_GROUP, m_lootGroups);
+						}
+						else if (aChild->m_name == "stack")
+						{
+							m_stackSize = aChild->GetUInt32();
+						}
+						else if (aChild->m_name == "item_level")
+						{
+							m_itemLevel = aChild->GetUInt32();
+						}
+						else if (aChild->m_name == "level_range")
+						{
+							m_levelRange = UIntRange(aChild);
+						}
+						else if (aChild->m_name == "required_level")
+						{
+							m_requiredLevel = aChild->GetUInt32();
+						}
+						else if (aChild->m_name == "cost")
+						{
+							m_cost = aChild->GetUInt32();
+						}
+						else if (aChild->m_name == "unique")
+						{
+							m_unique = aChild->GetBool();
+						}
+						else if (aChild->m_name == "use_ability")
+						{
+							m_useAbilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
+						}
+						else if (aChild->m_name == "icon")
+						{
+							m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
+						}
+						else if (aChild->m_name == "rarity")
+						{
+							m_rarity = Rarity::StringToId(aChild->GetIdentifier());
+							TP_VERIFY(m_rarity != Rarity::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid rarity.", aChild->GetIdentifier());
+						}
+						else if (aChild->m_name == "type")
+						{
+							m_itemType = ItemType::StringToId(aChild->GetIdentifier());
+							TP_VERIFY(m_itemType != ItemType::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid item type.", aChild->GetIdentifier());
+						}
+						else if (aChild->m_name == "weapon_cooldown")
+						{
+							m_weaponCooldown = aChild->GetUInt32();
+						}
+						else if (aChild->m_name == "weapon_damage")
+						{
+							m_weaponDamage = UIntRange(aChild);
+						}
+						else if (aChild->m_name == "string")
+						{
+							m_string = aChild->GetString();
+						}
+						else if (aChild->m_name == "flavor")
+						{
+							m_flavor = aChild->GetString();
+						}
+						else if (aChild->m_name == "budget_bias")
+						{
+							m_budgetBias = aChild->GetInt32();
+						}
+						else if (aChild->m_tag == "stat")
+						{
+							m_addedStats.push_back(AddedStat(aChild, false));
+						}
+						else if (aChild->m_tag == "stat_weight")
+						{
+							m_addedStats.push_back(AddedStat(aChild, true));
+						}
+						else
+						{
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+						}
 					}
 				});
 

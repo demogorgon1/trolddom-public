@@ -12,6 +12,7 @@ namespace tpublic
 			: public DataBase
 		{
 			static const DataType::Id DATA_TYPE = DataType::ID_LOOT_TABLE;
+			static const bool TAGGED = true;
 
 			struct CashRange
 			{			
@@ -176,21 +177,24 @@ namespace tpublic
 				aSource->ForEachChild([&](
 					const SourceNode* aChild)
 				{
-					if(aChild->m_name == "cash")
+					if(!FromSourceBase(aChild))
 					{
-						m_cash = CashRange(aChild->GetArray());
-					}
-					else if (aChild->m_name == "slots")
-					{
-						aChild->GetArray()->ForEachChild([&](	
-							const SourceNode* aSlot)
+						if (aChild->m_name == "cash")
 						{
-							m_slots.push_back(std::make_unique<Slot>(aSlot));
-						});
-					}
-					else
-					{
-						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+							m_cash = CashRange(aChild->GetArray());
+						}
+						else if (aChild->m_name == "slots")
+						{
+							aChild->GetArray()->ForEachChild([&](
+								const SourceNode* aSlot)
+								{
+									m_slots.push_back(std::make_unique<Slot>(aSlot));
+								});
+						}
+						else
+						{
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+						}
 					}
 				});				
 			}

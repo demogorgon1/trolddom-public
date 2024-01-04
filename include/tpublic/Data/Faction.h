@@ -12,6 +12,7 @@ namespace tpublic
 			: public DataBase
 		{
 			static const DataType::Id DATA_TYPE = DataType::ID_FACTION;
+			static const bool TAGGED = true;
 
 			enum Flag : uint8_t
 			{
@@ -33,22 +34,25 @@ namespace tpublic
 				aNode->ForEachChild([&](
 					const SourceNode* aChild)
 				{
-					if(aChild->m_name == "flags")
+					if(!FromSourceBase(aChild))
 					{
-						aChild->GetArray()->ForEachChild([&](
-							const SourceNode* aFlag)
+						if (aChild->m_name == "flags")
 						{
-							if(aFlag->IsIdentifier("neutral"))
-								m_flags |= FLAG_NEUTRAL;
-							else if(aFlag->IsIdentifier("friendly"))
-								m_flags |= FLAG_FRIENDLY;
-							else
-								TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid faction flag.", aFlag->m_value.c_str());
-						});
-					}
-					else
-					{
-						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+							aChild->GetArray()->ForEachChild([&](
+								const SourceNode* aFlag)
+								{
+									if (aFlag->IsIdentifier("neutral"))
+										m_flags |= FLAG_NEUTRAL;
+									else if (aFlag->IsIdentifier("friendly"))
+										m_flags |= FLAG_FRIENDLY;
+									else
+										TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid faction flag.", aFlag->m_value.c_str());
+								});
+						}
+						else
+						{
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+						}
 					}
 				});
 				

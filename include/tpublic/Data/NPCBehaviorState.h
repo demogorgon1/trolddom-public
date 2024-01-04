@@ -13,6 +13,7 @@ namespace tpublic
 			: public DataBase
 		{
 			static const DataType::Id DATA_TYPE = DataType::ID_NPC_BEHAVIOR_STATE;
+			static const bool TAGGED = false;
 
 			void
 			Verify() const
@@ -30,22 +31,25 @@ namespace tpublic
 				aNode->ForEachChild([&](
 					const SourceNode* aChild)
 				{
-					if(aChild->m_name == "behavior")
+					if(!FromSourceBase(aChild))
 					{
-						m_behavior = NPCBehavior::StringToId(aChild->GetIdentifier());
-						TP_VERIFY(m_behavior != NPCBehavior::INVALID_ID, aChild->m_debugInfo, "'%s' is not NPC behavior.", aChild->GetIdentifier());
-					}
-					else if (aChild->m_name == "max_range")
-					{
-						m_maxRange = aChild->GetUInt32();
-					}
-					else if (aChild->m_name == "max_ticks")
-					{
-						m_maxTicks = aChild->GetUInt32();
-					}
-					else
-					{
-						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+						if (aChild->m_name == "behavior")
+						{
+							m_behavior = NPCBehavior::StringToId(aChild->GetIdentifier());
+							TP_VERIFY(m_behavior != NPCBehavior::INVALID_ID, aChild->m_debugInfo, "'%s' is not NPC behavior.", aChild->GetIdentifier());
+						}
+						else if (aChild->m_name == "max_range")
+						{
+							m_maxRange = aChild->GetUInt32();
+						}
+						else if (aChild->m_name == "max_ticks")
+						{
+							m_maxTicks = aChild->GetUInt32();
+						}
+						else
+						{
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+						}
 					}
 				});
 				

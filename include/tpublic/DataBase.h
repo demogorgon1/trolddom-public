@@ -35,6 +35,18 @@ namespace tpublic
 			TP_VERIFY(m_id != 0, m_debugInfo, "'%s' has no id.", m_name.c_str());
 		}
 
+		bool
+		FromSourceBase(
+			const SourceNode*					aSource)
+		{
+			if(aSource->m_name == "tags")
+			{	
+				aSource->GetIdArray(DataType::ID_TAG, m_tagIds);
+				return true;
+			}
+			return false;
+		}
+
 		void
 		ToStreamBase(
 			IWriter*							aStream) const
@@ -43,6 +55,7 @@ namespace tpublic
 
 			aStream->WriteString(m_name);
 			aStream->WriteUInt(m_id);
+			aStream->WriteUInts(m_tagIds);
 		}
 
 		bool
@@ -53,14 +66,28 @@ namespace tpublic
 				return false;
 			if(!aStream->ReadUInt(m_id))
 				return false;
+			if (!aStream->ReadUInts(m_tagIds))
+				return false;
 
 			m_defined = true;
 			return true;
 		}
 
+		bool
+		HasTag(
+			uint32_t							aTagId) const
+		{
+			for(uint32_t t : m_tagIds)
+			{
+				if(t == aTagId)
+					return true;
+			}
+			return false;
+		}
+
 		// Virtual interface
 		virtual void	FromSource(
-							const SourceNode* aNode) = 0;
+							const SourceNode*	aNode) = 0;
 		virtual void	ToStream(
 							IWriter*			aStream) const = 0;
 		virtual bool	FromStream(
@@ -74,6 +101,7 @@ namespace tpublic
 		// Public data
 		std::string									m_name;
 		uint32_t									m_id;
+		std::vector<uint32_t>						m_tagIds;
 		bool										m_defined;
 		std::optional<DataErrorHandling::DebugInfo>	m_debugInfo;
 		const ComponentManager*						m_componentManager;

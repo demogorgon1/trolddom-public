@@ -12,6 +12,7 @@ namespace tpublic
 			: public DataBase
 		{
 			static const DataType::Id DATA_TYPE = DataType::ID_QUEST;
+			static const bool TAGGED = true;
 
 			enum Type : uint8_t
 			{
@@ -61,32 +62,35 @@ namespace tpublic
 				aSource->ForEachChild([&](
 					const SourceNode* aChild)
 				{
-					if(aChild->m_name == "string")
-						m_string = aChild->GetString();
-					else if (aChild->m_name == "text")
-						aChild->GetArray()->ForEachChild([&](const SourceNode* aLine) { appendString(m_text, aLine->GetString()); });
-					else if (aChild->m_name == "description")
-						aChild->GetArray()->ForEachChild([&](const SourceNode* aLine) { appendString(m_description, aLine->GetString()); });
-					else if (aChild->m_name == "progress")
-						aChild->GetArray()->ForEachChild([&](const SourceNode* aLine) { appendString(m_progress, aLine->GetString()); });
-					else if (aChild->m_name == "completion")
-						aChild->GetArray()->ForEachChild([&](const SourceNode* aLine) { appendString(m_completion, aLine->GetString()); });
-					else if(aChild->m_name == "level")
-						m_level = aChild->GetUInt32();
-					else if(aChild->m_name == "type")
-						m_type = SourceToType(aChild);
-					else if (aChild->m_name == "objectives")
-						aChild->GetIdArray(DataType::ID_OBJECTIVE, m_objectives);
-					else if (aChild->m_name == "prerequisites")
-						aChild->GetIdArray(DataType::ID_QUEST, m_prerequisites);
-					else if (aChild->m_name == "reward_one_item")
-						aChild->GetIdArray(DataType::ID_ITEM, m_rewardOneItem);
-					else if (aChild->m_name == "reward_all_items")
-						aChild->GetIdArray(DataType::ID_ITEM, m_rewardAllItems);
-					else if(aChild->m_name == "next_quest")
-						m_nextQuestId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_QUEST, aChild->GetIdentifier());
-					else
-						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					if(!FromSourceBase(aChild))
+					{
+						if (aChild->m_name == "string")
+							m_string = aChild->GetString();
+						else if (aChild->m_name == "text")
+							aChild->GetArray()->ForEachChild([&](const SourceNode* aLine) { appendString(m_text, aLine->GetString()); });
+						else if (aChild->m_name == "description")
+							aChild->GetArray()->ForEachChild([&](const SourceNode* aLine) { appendString(m_description, aLine->GetString()); });
+						else if (aChild->m_name == "progress")
+							aChild->GetArray()->ForEachChild([&](const SourceNode* aLine) { appendString(m_progress, aLine->GetString()); });
+						else if (aChild->m_name == "completion")
+							aChild->GetArray()->ForEachChild([&](const SourceNode* aLine) { appendString(m_completion, aLine->GetString()); });
+						else if (aChild->m_name == "level")
+							m_level = aChild->GetUInt32();
+						else if (aChild->m_name == "type")
+							m_type = SourceToType(aChild);
+						else if (aChild->m_name == "objectives")
+							aChild->GetIdArray(DataType::ID_OBJECTIVE, m_objectives);
+						else if (aChild->m_name == "prerequisites")
+							aChild->GetIdArray(DataType::ID_QUEST, m_prerequisites);
+						else if (aChild->m_name == "reward_one_item")
+							aChild->GetIdArray(DataType::ID_ITEM, m_rewardOneItem);
+						else if (aChild->m_name == "reward_all_items")
+							aChild->GetIdArray(DataType::ID_ITEM, m_rewardAllItems);
+						else if (aChild->m_name == "next_quest")
+							m_nextQuestId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_QUEST, aChild->GetIdentifier());
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					}
 				});
 			}
 

@@ -41,6 +41,7 @@ namespace tpublic
 			ID_ACHIEVEMENT,
 			ID_ACHIEVEMENT_CATEGORY,
 			ID_PROFESSION,
+			ID_TAG,
 
 			NUM_IDS
 		};
@@ -79,7 +80,8 @@ namespace tpublic
 			"quest",
 			"achievement",
 			"achievement_category",
-			"profession"
+			"profession",
+			"tag"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

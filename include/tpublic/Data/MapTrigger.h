@@ -12,6 +12,7 @@ namespace tpublic
 			: public DataBase
 		{
 			static const DataType::Id DATA_TYPE = DataType::ID_MAP_TRIGGER;
+			static const bool TAGGED = false;
 
 			void
 			Verify() const
@@ -27,12 +28,15 @@ namespace tpublic
 				aSource->ForEachChild([&](
 					const SourceNode* aChild)
 				{
+					if(!FromSourceBase(aChild))
+					{
 						if (aChild->m_name == "persistent")
 							m_persistent = aChild->GetBool();
 						else if (aChild->m_name == "default")
 							m_default = aChild->GetBool();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					}
 				});
 			}
 

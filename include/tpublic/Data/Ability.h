@@ -17,6 +17,7 @@ namespace tpublic
 			: public DataBase
 		{
 			static const DataType::Id DATA_TYPE = DataType::ID_ABILITY; 
+			static const bool TAGGED = true;
 
 			enum Flag : uint32_t
 			{
@@ -364,58 +365,61 @@ namespace tpublic
 				aNode->ForEachChild([&](
 					const SourceNode* aMember)
 				{
-					if(aMember->m_name == "string")
-						m_displayName = aMember->GetString();
-					else if (aMember->m_name == "description")
-						m_description = aMember->GetString();
-					else if (aMember->m_name == "talent_tree")
-						m_talentTreeId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TALENT_TREE, aMember->GetIdentifier());
-					else if (aMember->m_name == "range")
-						m_range = aMember->GetUInt32();
-					else if (aMember->m_name == "level")
-						m_level = aMember->GetUInt32();
-					else if (aMember->m_name == "channel_ticks")
-						m_channelTicks = aMember->GetUInt32();
-					else if (aMember->m_name == "channel_interval")
-						m_channelInterval = aMember->GetInt32();
-					else if (aMember->m_name == "channel_tick_ability")
-						m_channelTickAbilityId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aMember->GetIdentifier());
-					else if (aMember->m_name == "aoe_radius")
-						m_aoeRadius = aMember->GetUInt32();
-					else if (aMember->m_name == "aoe_cap")
-						m_aoeCap = aMember->GetUInt32();
-					else if (aMember->m_name == "speed")
-						m_speed = aMember->GetInt32();
-					else if (aMember->m_name == "delay")
-						m_delay = aMember->GetInt32();
-					else if (aMember->m_name == "cooldown")
-						m_cooldown = aMember->GetInt32();
-					else if (aMember->m_name == "cast_time")
-						m_castTime = aMember->GetInt32();
-					else if (aMember->m_name == "icon")
-						m_iconSpriteId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aMember->GetIdentifier());
-					else if (aMember->m_name == "projectile")
-						m_projectileParticleSystemId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PARTICLE_SYSTEM, aMember->GetIdentifier());
-					else if (aMember->m_name == "flags")
-						m_flags = GetFlags(aMember);
-					else if(aMember->m_tag == "direct_effect")
-						m_directEffects.push_back(std::make_unique<DirectEffectEntry>(aMember->GetObject()));
-					else if (aMember->m_tag == "aoe_entity_spawn")
-						m_aoeEntitySpawns.push_back(std::make_unique<AOEEntitySpawnEntry>(aMember->GetObject()));
-					else if (aMember->m_name == "states")
-						aMember->GetIdArrayWithLookup<EntityState::Id, EntityState::INVALID_ID>(m_entityStates, [&](const char* aIdentifier) { return EntityState::StringToId(aIdentifier); });
-					else if (aMember->m_tag == "resource_cost")
-						m_resourceCosts[GetResourceId(aMember)] = aMember->GetUInt32();
-					else if (aMember->m_name == "consume_items")
-						m_consumeItems = std::make_unique<Items>(aMember);
-					else if (aMember->m_name == "produce_items")
-						m_produceItems = std::make_unique<Items>(aMember);
-					else if(aMember->m_name == "required_profession")
-						m_requiredProfession = RequiredProfession(aMember);
-					else if (aMember->m_tag == "requirement")
-						m_requirements.push_back(Requirement(aMember));
-					else
-						TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
+					if(!FromSourceBase(aMember))
+					{
+						if (aMember->m_name == "string")
+							m_displayName = aMember->GetString();
+						else if (aMember->m_name == "description")
+							m_description = aMember->GetString();
+						else if (aMember->m_name == "talent_tree")
+							m_talentTreeId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TALENT_TREE, aMember->GetIdentifier());
+						else if (aMember->m_name == "range")
+							m_range = aMember->GetUInt32();
+						else if (aMember->m_name == "level")
+							m_level = aMember->GetUInt32();
+						else if (aMember->m_name == "channel_ticks")
+							m_channelTicks = aMember->GetUInt32();
+						else if (aMember->m_name == "channel_interval")
+							m_channelInterval = aMember->GetInt32();
+						else if (aMember->m_name == "channel_tick_ability")
+							m_channelTickAbilityId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aMember->GetIdentifier());
+						else if (aMember->m_name == "aoe_radius")
+							m_aoeRadius = aMember->GetUInt32();
+						else if (aMember->m_name == "aoe_cap")
+							m_aoeCap = aMember->GetUInt32();
+						else if (aMember->m_name == "speed")
+							m_speed = aMember->GetInt32();
+						else if (aMember->m_name == "delay")
+							m_delay = aMember->GetInt32();
+						else if (aMember->m_name == "cooldown")
+							m_cooldown = aMember->GetInt32();
+						else if (aMember->m_name == "cast_time")
+							m_castTime = aMember->GetInt32();
+						else if (aMember->m_name == "icon")
+							m_iconSpriteId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aMember->GetIdentifier());
+						else if (aMember->m_name == "projectile")
+							m_projectileParticleSystemId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PARTICLE_SYSTEM, aMember->GetIdentifier());
+						else if (aMember->m_name == "flags")
+							m_flags = GetFlags(aMember);
+						else if (aMember->m_tag == "direct_effect")
+							m_directEffects.push_back(std::make_unique<DirectEffectEntry>(aMember->GetObject()));
+						else if (aMember->m_tag == "aoe_entity_spawn")
+							m_aoeEntitySpawns.push_back(std::make_unique<AOEEntitySpawnEntry>(aMember->GetObject()));
+						else if (aMember->m_name == "states")
+							aMember->GetIdArrayWithLookup<EntityState::Id, EntityState::INVALID_ID>(m_entityStates, [&](const char* aIdentifier) { return EntityState::StringToId(aIdentifier); });
+						else if (aMember->m_tag == "resource_cost")
+							m_resourceCosts[GetResourceId(aMember)] = aMember->GetUInt32();
+						else if (aMember->m_name == "consume_items")
+							m_consumeItems = std::make_unique<Items>(aMember);
+						else if (aMember->m_name == "produce_items")
+							m_produceItems = std::make_unique<Items>(aMember);
+						else if (aMember->m_name == "required_profession")
+							m_requiredProfession = RequiredProfession(aMember);
+						else if (aMember->m_tag == "requirement")
+							m_requirements.push_back(Requirement(aMember));
+						else
+							TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
+					}
 				});
 			}
 

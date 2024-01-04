@@ -1,0 +1,24 @@
+word_list: { strings: [ "Viper" "Snake" "Serpent" "Adder" "Asp" "Anaconda" "Python" ] tags: [ noun creature snake dangerous evil ] }
+word_list: { strings: [ "Wolf" "Lion" "Tiger" "Panther" "Cougar" "Jaguar" "Jackal" "Leopard" "Bear" ] tags: [ noun creature predator ] }
+word_list: { strings: [ "Dragon" "Drake" "Wyvern" "Manticore" "Basilisk" "Hydra" "Kraken" "Sphinx" "Giant" ] tags: [ noun creature monster dangerous ] }
+
+word_list: { strings: [ "Adversary" "Devourer" "Nightmare" "Horror" "Phantasm" "Incubus" ] tags: [ noun evil grandiose ] }
+word_list: { strings: [ "Beholder" "Berserker" "Witness" "Watcher" "Observer" "Slayer" ] tags: [ noun ] }
+word_list: { strings: [ "Dreamer" "Elder" "Ancient" ] tags: [ noun mysterious ] }
+
+word_list: { strings: [ "Repugnant" "Vile" "Hateful" "Corrupt" "Vicious" "Malevolent" "Hideous" "Nefarious" "Ugly" "Beastly" "Wicked" "Depraved" "Calamitious" "Baneful" "Atrocious" "Damned"
+		     		  "Execrable" "Iniquitous" "Injurious" "Loathsome" "Maleficient" "Malignant" "Obscene" "Rancorous" "Repulsive" "Revolting" "Spiteful" "Stinking" "Wrathful" "Angry"
+				      "Bitter" "Bloody" "Deadly" "Dirty" "Cruel" "Destructive" "Fatal" "Harmful" "Lethal" "Toxic" "Noxious" "Murderous" "Pestilent" "Violent" ] tags: [ adjective evil ] }
+
+word_list: { strings: [ "Crazy" "Deep" "Old" "Fat" "Large" "Mad" "Skinny" "Strange" "Weird" "Wild" "Pretty" "Immortal" "Absurd" "Delirious" "Demented" "Foolish" "Deranged" "Endless" "Enduring"
+                      "Eternal" "Everlasting" "Indestructible" "Timeless" "Undying" "Deathless" ] tags: [ adjective ] }
+
+word_list: { strings: [ "Bold" "Clean" "Clever" "Fit" "Healthy" "Humble" "Pure" "Polite" "Sharp" "Shy" "Sincere" "Strong" "Young" "Adventurous" "Fearless" "Heroic" "Resolute" "Daring" "Courageous"
+                      "Audacious" "Confident" "Gallant" "Forward" "Dauntless" "Unafraid" "Undaunted" "Valiant" "Valorous" "Elegant" "Orderly" "Flauntless" "Able" "Adept" "Cunning" "Apt"
+                      "Astute" "Rational" "Resourceful" "Sagacious" "Savvy" "Brilliant" "Courteous" "Modest" "Quiet" "Incorruptible" ] tags: [ adjective good ] }												 
+
+word_list: { strings: [ "Grey" "Black" "Ebon" "Dark" ] tags: [ adjective color evil ] }
+word_list: { strings: [ "Red" "Green" "Blue" "Brown" "Purple" ] tags: [ adjective color ] }
+word_list: { strings: [ "White" "Pearly" ] tags: [ adjective color good ] }
+
+word_list: { strings: [ "Great" "High" "Grand" ] tags: [ adjective grandiose ] }
