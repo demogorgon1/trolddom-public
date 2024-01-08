@@ -58,6 +58,7 @@ namespace tpublic
 			uint32_t						m_sheetOffsetX;
 			uint32_t						m_sheetOffsetY;
 			uint32_t						m_index;
+			std::vector<uint32_t>			m_tags;
 			Data::Sprite*					m_data;
 		};
 

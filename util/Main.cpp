@@ -17,7 +17,7 @@ main(
 	tpublic::Compiler compiler(&manifest);
 
 	compiler.Parse("../../data");
-	compiler.Build("../../data/_ids.txt", ".", tpublic::Compression::LEVEL_FAST);
+	compiler.Build("../../data/_ids.txt", ".", "../../data/generated", tpublic::Compression::LEVEL_FAST);
 	manifest.Verify();	
 
 	return EXIT_SUCCESS;

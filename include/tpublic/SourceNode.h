@@ -298,7 +298,7 @@ namespace tpublic
 			TP_VERIFY(m_type == TYPE_ARRAY, m_debugInfo, "Not an array.");
 			for (const std::unique_ptr<SourceNode>& child : m_children)
 			{
-				_T object(child->GetObject());
+				_T object(child.get());
 				aOut.push_back(object);
 			}
 		}
@@ -364,6 +364,12 @@ namespace tpublic
 			const char*						aString) const
 		{
 			return m_type == TYPE_IDENTIFIER && m_value == aString;
+		}
+
+		bool
+		IsAnonymousObject() const
+		{
+			return m_type == TYPE_OBJECT && m_name.empty();
 		}
 
 		// Public data

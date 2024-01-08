@@ -10,12 +10,13 @@ word_list: { strings: [ "Repugnant" "Vile" "Hateful" "Corrupt" "Vicious" "Malevo
 		     		  "Execrable" "Iniquitous" "Injurious" "Loathsome" "Maleficient" "Malignant" "Obscene" "Rancorous" "Repulsive" "Revolting" "Spiteful" "Stinking" "Wrathful" "Angry"
 				      "Bitter" "Bloody" "Deadly" "Dirty" "Cruel" "Destructive" "Fatal" "Harmful" "Lethal" "Toxic" "Noxious" "Murderous" "Pestilent" "Violent" ] tags: [ adjective evil ] }
 
-word_list: { strings: [ "Crazy" "Deep" "Old" "Fat" "Large" "Mad" "Skinny" "Strange" "Weird" "Wild" "Pretty" "Immortal" "Absurd" "Delirious" "Demented" "Foolish" "Deranged" "Endless" "Enduring"
-                      "Eternal" "Everlasting" "Indestructible" "Timeless" "Undying" "Deathless" ] tags: [ adjective ] }
+word_list: { strings: [ "Crazy" "Deep" "Old" "Fat" "Large" "Mad" "Skinny" "Strange" "Weird" "Wild" "Immortal" "Endless" "Enduring" "Pretty"	"Absurd"
+                      "Eternal" "Everlasting" "Indestructible" "Timeless" "Undying" "Deathless" "Bleak" ] tags: [ adjective ] }					  
+word_list: { strings: [ "Delirious" "Demented" "Foolish" "Deranged" ] tags: [ character_adjective ] }
+word_list: { strings: [ "Clever" "Fit" "Healthy" "Polite" "Shy" "Sincere" "Strong" "Young" "Adventurous" "Fearless" "Confident" "Unafraid" "Undaunted" "Rational" "Resourceful" "Courteous" "Quiet" ] tags: [ character_adjective ] }
 
-word_list: { strings: [ "Bold" "Clean" "Clever" "Fit" "Healthy" "Humble" "Pure" "Polite" "Sharp" "Shy" "Sincere" "Strong" "Young" "Adventurous" "Fearless" "Heroic" "Resolute" "Daring" "Courageous"
-                      "Audacious" "Confident" "Gallant" "Forward" "Dauntless" "Unafraid" "Undaunted" "Valiant" "Valorous" "Elegant" "Orderly" "Flauntless" "Able" "Adept" "Cunning" "Apt"
-                      "Astute" "Rational" "Resourceful" "Sagacious" "Savvy" "Brilliant" "Courteous" "Modest" "Quiet" "Incorruptible" ] tags: [ adjective good ] }												 
+word_list: { strings: [ "Bold" "Humble" "Clean" "Pure" "Sharp" "Heroic" "Resolute" "Daring" "Courageous" "Audacious" "Gallant" "Forward" "Dauntless" "Valiant" "Valorous" "Elegant" "Orderly" "Flauntless" "Able" "Adept" "Cunning" "Apt"
+                      "Astute" "Sagacious" "Savvy" "Brilliant" "Modest" "Incorruptible" ] tags: [ adjective good ] }												 
 
 word_list: { strings: [ "Grey" "Black" "Ebon" "Dark" ] tags: [ adjective color evil ] }
 word_list: { strings: [ "Red" "Green" "Blue" "Brown" "Purple" ] tags: [ adjective color ] }

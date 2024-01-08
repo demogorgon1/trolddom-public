@@ -5,14 +5,14 @@ sprites:
 	cursor: { position: [ 0 0 ] }
 	size: { width: 16 height: 16 }
 
-	sprite icon_sword_1: { }
+	sprite icon_sword_1: { tags: [ icon weapon_1h_sword weapon_1h_knife weapon_2h_sword ] }
 	sprite icon_knock: { }
 	sprite icon_green_sphere : { }
 	sprite icon_strike : { }
 	sprite icon_heal : { }
-	sprite icon_staff_1 : { }
+	sprite icon_staff_1 : { tags: [ icon weapon_2h_staff ] }
 	sprite icon_stun : { }
-	sprite icon_mail_pants_1 : { }
+	sprite icon_mail_pants_1 : { tags: [ icon mail legs ] }
 	sprite icon_fighter_protection : { }
 	sprite icon_fighter_subtlety : { }
 	sprite icon_fighter_combat : { }
@@ -27,49 +27,49 @@ sprites:
 	sprite icon_impact_1 : { }
 	sprite icon_lake_of_fire : { }
 	sprite icon_fire : { }
-	sprite icon_skull_1 : { }
+	sprite icon_skull_1 : { tags: [ icon evil ] }
 	sprite icon_push : { }
 	sprite icon_hammer_1 : { }
-	sprite icon_antlers : { }
-	sprite icon_boar_tusks : { }
-	sprite icon_ring_1 : { }
-	sprite icon_ring_2 : { }
+	sprite icon_antlers : { tags: [ icon death ] }
+	sprite icon_boar_tusks : { tags: [ icon death ] }
+	sprite icon_ring_1 : { tags: [ icon finger ] }
+	sprite icon_ring_2 : { tags: [ icon finger ] }
 	sprite icon_star_1 : { }
 	sprite icon_star_2 : { }
-	sprite icon_small_red_potion : { }
-	sprite icon_small_blue_potion : { }
-	sprite icon_mail_shirt_1 : { }
-	sprite icon_mail_boots_1 : { }
+	sprite icon_small_red_potion : { tags: [ icon potion ] }
+	sprite icon_small_blue_potion : { tags: [ icon potion ] }
+	sprite icon_mail_shirt_1 : { tags: [ icon mail chest ] } 
+	sprite icon_mail_boots_1 : { tags: [ icon mail feet ] }
 
 	cursor: { position: [ 0 32 ] }
 
-	sprite icon_mail_gloves_1 : { }
-	sprite icon_knife_1 : { }
-	sprite icon_sword_2 : { }
-	sprite icon_sword_3 : { }
-	sprite icon_axe_1 : { }
-	sprite icon_shield_1 : { }
-	sprite icon_shoulders_1 : { }
-	sprite icon_green_bag : { }
-	sprite icon_red_bag : { }
-	sprite icon_brown_bag : { }
-	sprite icon_mail_belt_1 : { }
-	sprite icon_mail_bracers_1 : { }
-	sprite icon_cape_1 : { }
-	sprite icon_cape_2 : { }
-	sprite icon_necklace_1 : { }
-	sprite icon_necklace_2 : { }
+	sprite icon_mail_gloves_1 : { tags: [ icon mail hands ] } 
+	sprite icon_knife_1 : { tags: [ icon weapon_1h_sword weapon_1h_knife ]}
+	sprite icon_sword_2 : { tags: [ icon weapon_1h_sword weapon_1h_knife weapon_2h_sword ] }
+	sprite icon_sword_3 : { tags: [ icon weapon_1h_sword weapon_1h_knife weapon_2h_sword ] }
+	sprite icon_axe_1 : { tags: [ icon weapon_1h_axe weapon_1h_axe weapon_2h_axe ] }
+	sprite icon_shield_1 : { tags: [ icon shield ] }
+	sprite icon_shoulders_1 : { tags: [ icon cloth mail plate shoulders ] }
+	sprite icon_green_bag : { tags: [ icon bag ] }
+	sprite icon_red_bag : { tags: [ icon bag ] }
+	sprite icon_brown_bag : { tags: [ icon bag ] }
+	sprite icon_mail_belt_1 : { tags: [ icon mail plate waist ] }
+	sprite icon_mail_bracers_1 : { tags: [ icon mail plate wrists ] }
+	sprite icon_cape_1 : { tags: [ icon back ] }
+	sprite icon_cape_2 : { tags: [ icon back ] }
+	sprite icon_necklace_1 : { tags: [ icon neck ] }
+	sprite icon_necklace_2 : { tags: [ icon neck ] }
 
 	cursor: { position: [ 0 48 ] }
 	
-	sprite icon_pants_1 : { }
-	sprite icon_pants_2 : { }
-	sprite icon_wizard_hat_1 : { }
-	sprite icon_wizard_hat_2 : { }
-	sprite icon_cloth_shirt_1 : { }
-	sprite icon_cloth_shirt_2 : { }
-	sprite icon_cloth_shirt_3 : { }
-	sprite icon_shoe_1 : { }
+	sprite icon_pants_1 : { tags: [ icon cloth legs ] }
+	sprite icon_pants_2 : { tags: [ icon cloth legs ] }
+	sprite icon_wizard_hat_1 : { tags: [ icon cloth head ] }
+	sprite icon_wizard_hat_2 : { tags: [ icon cloth head ] }
+	sprite icon_cloth_shirt_1 : { tags: [ icon cloth chest ] }
+	sprite icon_cloth_shirt_2 : { tags: [ icon cloth chest ] }
+	sprite icon_cloth_shirt_3 : { tags: [ icon cloth chest ] }
+	sprite icon_shoe_1 : { tags: [ icon cloth mail feet ] }
 	sprite icon_holy_condemnation : { }
 	sprite icon_holy_blessing : { }
 	sprite icon_smoke : { }
@@ -82,16 +82,16 @@ sprites:
 	cursor: { position: [ 0 64 ] }
 	sprite icon_first_aid : { }
 	sprite icon_mining : { }
-	sprite icon_dewleaf : { }
-	sprite icon_mistflower : { }
+	sprite icon_dewleaf : { tags: [ icon life ] }
+	sprite icon_mistflower : { tags: [ icon life ] }
 	sprite icon_copper : { }
 	sprite icon_iron : { }
 	sprite icon_pickaxe : { }
 	sprite icon_stuff : { }
 	sprite icon_fishing_rod : { }
 	sprite icon_small_blue_fish : { }
-	sprite icon_teeth : { }
-	sprite icon_claw : { }
+	sprite icon_teeth : { tags: [ icon death ] }
+	sprite icon_claw : { tags: [ icon death ] }
 	sprite icon_tentacle : { }
 	sprite icon_green_bottle : { }
 	sprite icon_uncommon_item : { }
@@ -100,6 +100,16 @@ sprites:
 	cursor: { position: [ 0 80 ] }	
 	sprite icon_epic_item : { }
 	sprite icon_exclamation_mark : { }	
+	sprite icon_gloves_1 : { tags: [ icon hands ] }
+	sprite icon_belt_1 : { tags: [ icon waist ] }
+	sprite icon_gloves_2 : { tags: [ icon hands ] }
+	sprite icon_belt_2 : { tags: [ icon waist ] }
+	sprite icon_ring_3 : { tags: [ icon finger ] }
+	sprite icon_ring_4 : { tags: [ icon finger ] }
+	sprite icon_ring_5 : { tags: [ icon finger ] }
+	sprite icon_chest_1 : { tags: [ icon mail plate chest ] }
+	sprite icon_chest_2 : { tags: [ icon mail plate chest ] }
+	sprite icon_default : { }
 	
 }
 

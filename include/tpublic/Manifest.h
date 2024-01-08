@@ -23,8 +23,10 @@ namespace tpublic
 		{
 		public:
 			IDataContainer(
-				DataType::Id							aDataType)
+				DataType::Id								aDataType,
+				bool										aHasTaggedData)
 				: m_dataType(aDataType)
+				, m_tagged(aHasTaggedData)
 			{
 
 			}
@@ -37,9 +39,15 @@ namespace tpublic
 
 			bool
 			IsDataType(
-				DataType::Id							aDataType) const
+				DataType::Id								aDataType) const
 			{
 				return m_dataType == aDataType;
+			}
+
+			bool
+			IsTagged() const
+			{
+				return m_tagged;
 			}
 
 			// Virtual interface
@@ -59,7 +67,8 @@ namespace tpublic
 
 		private:
 
-			DataType::Id		m_dataType;
+			DataType::Id					m_dataType;
+			bool							m_tagged;
 		};
 
 		template <typename _T>
@@ -67,7 +76,7 @@ namespace tpublic
 			: public IDataContainer
 		{
 			DataContainer()
-				: IDataContainer(_T::DATA_TYPE)
+				: IDataContainer(_T::DATA_TYPE, _T::TAGGED)
 			{
 
 			}
@@ -134,6 +143,16 @@ namespace tpublic
 			{
 				const _T* t = GetExistingByName(aName);
 				TP_CHECK(t != NULL, "'%s' is not defined.", aName);
+				return t->m_id;
+			}
+
+			uint32_t
+			TryGetExistingIdByName(
+				const char*								aName) const
+			{
+				const _T* t = GetExistingByName(aName);
+				if(t == NULL)
+					return 0;
 				return t->m_id;
 			}
 
@@ -361,6 +380,14 @@ namespace tpublic
 			const char*									aName) const
 		{
 			return GetContainer<_T>()->GetExistingIdByName(aName);
+		}
+
+		template<typename _T>
+		uint32_t
+		TryGetExistingIdByName(
+			const char*									aName) const
+		{
+			return GetContainer<_T>()->TryGetExistingIdByName(aName);
 		}
 
 		// Global non-itemized data

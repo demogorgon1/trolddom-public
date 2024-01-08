@@ -16,6 +16,23 @@ namespace tpublic
 		}
 
 		UIntRange(
+			uint32_t				aValue) 
+			: m_min(aValue)
+			, m_max(aValue)
+		{
+
+		}
+
+		UIntRange(
+			uint32_t				aMin,
+			uint32_t				aMax)
+			: m_min(aMin)
+			, m_max(aMax)
+		{
+
+		}
+
+		UIntRange(
 			const SourceNode*		aSource)
 		{
 			if(aSource->m_type == SourceNode::TYPE_ARRAY)

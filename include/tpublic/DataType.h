@@ -42,6 +42,8 @@ namespace tpublic
 			ID_ACHIEVEMENT_CATEGORY,
 			ID_PROFESSION,
 			ID_TAG,
+			ID_WORD_GENERATOR,
+			ID_TAG_CONTEXT,
 
 			NUM_IDS
 		};
@@ -81,7 +83,9 @@ namespace tpublic
 			"achievement",
 			"achievement_category",
 			"profession",
-			"tag"
+			"tag",
+			"word_generator",
+			"tag_context"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

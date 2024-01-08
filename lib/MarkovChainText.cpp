@@ -121,7 +121,7 @@ namespace tpublic::MarkovChainText
 						else
 						{
 							characterCounter = new CharacterCounter();
-							m_table[key] = std::unique_ptr<CharacterCounter>();
+							m_table[key] = std::unique_ptr<CharacterCounter>(characterCounter);
 						}
 
 						characterCounter->AddCharacter(characterCode);

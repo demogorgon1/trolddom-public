@@ -2,6 +2,8 @@
 
 #include <tpublic/Components/Position.h>
 
+#include <tpublic/Helpers.h>
+#include <tpublic/Stat.h>
 #include <tpublic/Vec2.h>
 
 namespace tpublic::Helpers
@@ -123,6 +125,31 @@ namespace tpublic::Helpers
 				assert(length > removeBackCount);
 				aString.erase(length - removeBackCount, removeBackCount);
 			}
+		}
+	}
+
+	void		
+	GetRandomStatWeights(
+		uint32_t					aSeed,
+		Stat::Collection&			aOut)
+	{
+		std::vector<Stat::Id> possibleStatIds =
+		{
+			Stat::ID_CONSTITUTION,
+			Stat::ID_DEXTERITY,
+			Stat::ID_STRENGTH,
+			Stat::ID_SPIRIT,
+			Stat::ID_WISDOM
+		};
+
+		std::mt19937 wordRandom(aSeed);
+
+		uint32_t differentStatWeightsCount = RandomInRange<uint32_t>(wordRandom, 1, 2);
+		for (uint32_t j = 0; j < differentStatWeightsCount; j++)
+		{
+			size_t possibleStatIdIndex = RandomInRange<size_t>(wordRandom, 0, possibleStatIds.size() - 1);
+
+			aOut.m_stats[possibleStatIds[possibleStatIdIndex]]++;
 		}
 	}
 

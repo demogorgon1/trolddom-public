@@ -12,7 +12,6 @@ namespace tpublic
 		: m_manifest(aManifest)
 		, m_dataType(aDataType)
 	{
-
 	}
 	
 	TaggedData::~TaggedData()
@@ -89,8 +88,11 @@ namespace tpublic
 			for(uint32_t mustHaveTagId : aQuery.m_mustHaveTagIds)
 			{
 				const Tag* tag = _GetTag(mustHaveTagId);
-				for(uint32_t dataId : tag->m_dataIds)
-					dataIds.insert(dataId);
+				if(tag != NULL)
+				{
+					for (uint32_t dataId : tag->m_dataIds)
+						dataIds.insert(dataId);
+				}
 			}
 		}
 		else
@@ -98,8 +100,11 @@ namespace tpublic
 			for(const Query::TagScoring& tagScoring : aQuery.m_tagScoring)
 			{
 				const Tag* tag = _GetTag(tagScoring.m_tagId);
-				for (uint32_t dataId : tag->m_dataIds)
-					dataIds.insert(dataId);
+				if(tag != NULL)
+				{
+					for (uint32_t dataId : tag->m_dataIds)
+						dataIds.insert(dataId);
+				}
 			}
 		}
 

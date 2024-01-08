@@ -1,17 +1,48 @@
-tag american_forename_male: {}
+tag american_forename_male: { }
 tag american_forename_female: {}
 tag tolkienesque_forename: {}
 tag elven_placename: {}
 tag human_townname: {}
-tag noun: {} 
-tag creature: {} 
-tag snake: {} 
-tag dangerous: {}
-tag evil: {}
-tag predator: {} 
-tag grandiose: {}
-tag mysterious: {}
-tag adjective: {}
-tag good: {}
-tag color: {}
-tag monster: { }
+tag noun: { transferable: false random_associated_stat_weights: true } 
+tag creature: { random_associated_stat_weights: true } 
+tag snake: { associated_stat_weights: { wisdom: 2 } }
+tag dangerous: { associated_stat_weights: { strength: 2 } }
+tag evil: { random_associated_stat_weights: true }
+tag predator: { associated_stat_weights: { dexterity: 2 } } 
+tag grandiose: { random_associated_stat_weights: true }
+tag mysterious: { associated_stat_weights: { spirit: 2 } }
+tag adjective: { transferable: false random_associated_stat_weights: true }
+tag character_adjective: { transferable: false }
+tag good: { random_associated_stat_weights: true }
+tag color: { random_associated_stat_weights: true }
+tag monster: { associated_stat_weights: { strength: 1 constitution: 2 } }
+tag icon: { transferable: false }
+tag death: { random_associated_stat_weights: true }
+tag life: { random_associated_stat_weights: true }
+
+# Item tags
+tag weapon_1h_sword: {}
+tag weapon_1h_mace: {}
+tag weapon_1h_axe: {}
+tag weapon_1h_knife: {}
+tag weapon_2h_sword: {}
+tag weapon_2h_mace: {}
+tag weapon_2h_axe: {}
+tag weapon_2h_staff: {}
+tag armor_cloth: {}
+tag armor_mail: {}
+tag armor_plate: {}
+tag head: {}
+tag chest: {}
+tag legs: {}
+tag shoulders: {}
+tag wrists: {}
+tag waist: {}
+tag hands: {}
+tag feet: {}
+tag back: {}
+tag bag: {}
+tag finger: {}
+tag neck: {}
+tag potion: { } 
+

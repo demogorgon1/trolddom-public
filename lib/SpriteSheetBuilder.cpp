@@ -167,6 +167,10 @@ namespace tpublic
 					{
 						sprite->m_info.m_tileLayer = aSpriteComponent->GetUInt32();
 					}
+					else if (aSpriteComponent->m_name == "tags")
+					{
+						aSpriteComponent->GetIdArray(DataType::ID_TAG, sprite->m_tags);
+					}
 					else if(aSpriteComponent->m_name == "borders")
 					{
 						aSpriteComponent->GetIdArray(DataType::ID_SPRITE, sprite->m_info.m_borders);
@@ -241,6 +245,7 @@ namespace tpublic
 			data->m_width = sprite->m_image.GetWidth();
 			data->m_height = sprite->m_image.GetHeight();
 			data->m_info = sprite->m_info;
+			data->m_tagIds = sprite->m_tags;
 			data->m_defined = true;
 
 			sprite->m_data = data;

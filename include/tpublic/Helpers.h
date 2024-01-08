@@ -8,6 +8,11 @@ namespace tpublic
 		struct Position;
 	}
 
+	namespace Stat
+	{
+		struct Collection;
+	}
+
 	struct Vec2;
 
 	namespace Helpers
@@ -32,6 +37,9 @@ namespace tpublic
 						std::vector<std::string>&	aOut);
 		void		TrimString(
 						std::string&				aString);
+		void		GetRandomStatWeights(
+						uint32_t					aSeed,
+						Stat::Collection&			aOut);
 
 		template <typename _T>
 		void	

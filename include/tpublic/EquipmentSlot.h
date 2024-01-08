@@ -35,6 +35,7 @@ namespace tpublic
 		struct Info
 		{
 			const char* m_name;
+			const char* m_tag;
 			const char* m_displayName;
 		};
 
@@ -43,24 +44,24 @@ namespace tpublic
 		{
 			{ NULL, NULL },
 
-			{ "main_hand",	"Main-Hand" },
-			{ "off_hand",	"Off-Hand" },
-			{ "ranged",		"Ranged" },
-			{ "head",		"Head" },
-			{ "chest",		"Chest" },
-			{ "legs",		"Legs" },
-			{ "feet",		"Feet" },
-			{ "shoulders",	"Shoulders" },
-			{ "wrists",		"Wrists" },
-			{ "waist",		"Waist" },
-			{ "hands",		"Hands" },
-			{ "back",		"Back" },
-			{ "neck",		"Neck" },
-			{ "finger_1",	"Finger" },
-			{ "finger_2",	"Finger" },
-			{ "bag_1",		"Bag" },
-			{ "bag_2",		"Bag" },
-			{ "bag_3",		"Bag" }
+			{ "main_hand",	NULL,			"Main-Hand" },
+			{ "off_hand",	NULL,			"Off-Hand" },
+			{ "ranged",		NULL,			"Ranged" },
+			{ "head",		"head",			"Head" },
+			{ "chest",		"chest",		"Chest" },
+			{ "legs",		"legs",			"Legs" },
+			{ "feet",		"feet",			"Feet" },
+			{ "shoulders",	"shoulders",	"Shoulders" },
+			{ "wrists",		"wrists",		"Wrists" },
+			{ "waist",		"waist",		"Waist" },
+			{ "hands",		"hands",		"Hands" },
+			{ "back",		"back",			"Back" },
+			{ "neck",		"neck",			"Neck" },
+			{ "finger_1",	"finger",		"Finger" },
+			{ "finger_2",	"finger",		"Finger" },
+			{ "bag_1",		"bag",			"Bag" },
+			{ "bag_2",		"bag",			"Bag" },
+			{ "bag_3",		"bag",			"Bag" }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

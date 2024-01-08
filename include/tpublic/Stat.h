@@ -77,6 +77,17 @@ namespace tpublic
 				memset(m_stats, 0, sizeof(m_stats));
 			}
 
+			bool
+			IsEmpty() const
+			{
+				for (uint32_t i = 1; i < (uint32_t)NUM_IDS; i++)
+				{
+					if(m_stats[i] != 0)
+						return false;
+				}
+				return true;
+			}
+
 			void
 			Add(
 				const Collection&	aOther)
@@ -140,6 +151,39 @@ namespace tpublic
 						return false;
 				}
 				return true;
+			}
+
+			void
+			RemoveLowStats(
+				uint32_t			aNumberToKeep)
+			{
+				// Only keep the X highest stats, reset the rest to 0
+				struct Entry
+				{
+					uint32_t	m_index = 0;
+					uint32_t	m_value = 0;
+				};
+
+				std::vector<Entry> entries;
+
+				for (uint32_t i = 1; i < (uint32_t)NUM_IDS; i++)
+				{
+					if(m_stats[i] > 0)
+						entries.push_back({ i, m_stats[i] });
+				}
+
+				if(entries.size() > (size_t)aNumberToKeep)
+				{
+					std::sort(entries.begin(), entries.end(), [](
+						const Entry& aLHS, 
+						const Entry& aRHS)
+					{
+						return aLHS.m_value > aRHS.m_value;
+					});
+
+					for(size_t i = (size_t)aNumberToKeep; i < entries.size(); i++)
+						m_stats[entries[i].m_index] = 0;
+				}
 			}
 
 			// Public data

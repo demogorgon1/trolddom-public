@@ -1,0 +1,10873 @@
+item world_drops_item_0:
+{
+	string: "Ebon Leggings"
+	icon: icon_mail_pants_1
+	rarity: common
+	item_level: 3
+	required_level: 3
+	type: armor_mail
+	binds: never
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		color
+		legs
+		armor_mail
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_1:
+{
+	string: "Heroic Hosen"
+	icon: icon_mail_pants_1
+	rarity: common
+	item_level: 8
+	required_level: 8
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		good
+		armor_cloth
+		legs
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_2:
+{
+	string: "Strange Striders"
+	icon: icon_mail_boots_1
+	rarity: common
+	item_level: 3
+	required_level: 3
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_cloth
+		feet
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_3:
+{
+	string: "Wrathful Band"
+	icon: icon_ring_3
+	rarity: common
+	item_level: 7
+	required_level: 7
+	type: none
+	binds: never
+	equipment_slots:
+	[
+		finger_1
+		finger_2
+	]
+	tags:
+	[
+		evil
+		finger
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_4:
+{
+	string: "Dark Crown"
+	icon: icon_wizard_hat_2
+	rarity: common
+	item_level: 9
+	required_level: 9
+	type: armor_mail
+	binds: never
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		color
+		armor_mail
+		evil
+		head
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_5:
+{
+	string: "Sharp Scales"
+	icon: icon_pants_2
+	rarity: common
+	item_level: 2
+	required_level: 2
+	type: armor_mail
+	binds: never
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		legs
+		armor_mail
+		good
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_6:
+{
+	string: "Modest Tunic"
+	icon: icon_chest_2
+	rarity: common
+	item_level: 6
+	required_level: 6
+	type: armor_mail
+	binds: never
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		armor_mail
+		chest
+		good
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_7:
+{
+	string: "Skinny Hood"
+	icon: icon_wizard_hat_1
+	rarity: common
+	item_level: 6
+	required_level: 6
+	type: armor_mail
+	binds: never
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		armor_mail
+		head
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_8:
+{
+	string: "Sagacious Cape"
+	icon: icon_cape_1
+	rarity: common
+	item_level: 1
+	required_level: 1
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		good
+		armor_cloth
+		back
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_9:
+{
+	string: "Black Handwraps"
+	icon: icon_mail_gloves_1
+	rarity: common
+	item_level: 8
+	required_level: 8
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_cloth
+		hands
+		color
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_10:
+{
+	string: "Crazy Shawl"
+	icon: icon_cape_2
+	rarity: common
+	item_level: 2
+	required_level: 2
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		armor_cloth
+		back
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_11:
+{
+	string: "Forward Helm"
+	icon: icon_wizard_hat_2
+	rarity: common
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: never
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		armor_plate
+		head
+		good
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_12:
+{
+	string: "Bitter Ring"
+	icon: icon_ring_1
+	rarity: common
+	item_level: 9
+	required_level: 9
+	type: none
+	binds: never
+	equipment_slots:
+	[
+		finger_1
+		finger_2
+	]
+	tags:
+	[
+		evil
+		finger
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_13:
+{
+	string: "Vicious Poncho"
+	icon: icon_cape_1
+	rarity: common
+	item_level: 3
+	required_level: 3
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		armor_cloth
+		back
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_14:
+{
+	string: "Astute Gauntlets"
+	icon: icon_gloves_1
+	rarity: common
+	item_level: 2
+	required_level: 2
+	type: armor_mail
+	binds: never
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_mail
+		hands
+		good
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_15:
+{
+	string: "Repulsive Waistband"
+	icon: icon_belt_1
+	rarity: common
+	item_level: 1
+	required_level: 1
+	type: armor_mail
+	binds: never
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_mail
+		waist
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_16:
+{
+	string: "Deadly Girdle"
+	icon: icon_mail_belt_1
+	rarity: common
+	item_level: 9
+	required_level: 9
+	type: armor_plate
+	binds: never
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_plate
+		waist
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_17:
+{
+	string: "Strange Waist"
+	icon: icon_mail_belt_1
+	rarity: common
+	item_level: 7
+	required_level: 7
+	type: armor_mail
+	binds: never
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_mail
+		waist
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_18:
+{
+	string: "Destructive Mittens"
+	icon: icon_gloves_1
+	rarity: common
+	item_level: 5
+	required_level: 5
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_cloth
+		hands
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_19:
+{
+	string: "Pretty Strap"
+	icon: icon_belt_2
+	rarity: common
+	item_level: 9
+	required_level: 9
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_cloth
+		waist
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_20:
+{
+	string: "Violent Boots"
+	icon: icon_mail_boots_1
+	rarity: common
+	item_level: 8
+	required_level: 8
+	type: armor_plate
+	binds: never
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_plate
+		feet
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_21:
+{
+	string: "Loathsome Band"
+	icon: icon_ring_1
+	rarity: common
+	item_level: 4
+	required_level: 4
+	type: none
+	binds: never
+	equipment_slots:
+	[
+		finger_1
+		finger_2
+	]
+	tags:
+	[
+		evil
+		finger
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_22:
+{
+	string: "Bitter Hauberk"
+	icon: icon_chest_1
+	rarity: common
+	item_level: 8
+	required_level: 8
+	type: armor_mail
+	binds: never
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		armor_mail
+		chest
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_23:
+{
+	string: "Repugnant Cuffs"
+	icon: icon_mail_bracers_1
+	rarity: common
+	item_level: 1
+	required_level: 1
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		armor_cloth
+		evil
+		wrists
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_24:
+{
+	string: "Toxic Pendant"
+	icon: icon_necklace_1
+	rarity: common
+	item_level: 10
+	required_level: 10
+	type: none
+	binds: never
+	equipment_slots:
+	[
+		neck
+	]
+	tags:
+	[
+		neck
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_25:
+{
+	string: "Eternal Girdle"
+	icon: icon_belt_1
+	rarity: common
+	item_level: 7
+	required_level: 7
+	type: armor_mail
+	binds: never
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_mail
+		waist
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_26:
+{
+	string: "Hateful Mitts"
+	icon: icon_gloves_2
+	rarity: common
+	item_level: 7
+	required_level: 7
+	type: armor_plate
+	binds: never
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_plate
+		hands
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_27:
+{
+	string: "Pearly Grasp"
+	icon: icon_gloves_2
+	rarity: common
+	item_level: 6
+	required_level: 6
+	type: armor_mail
+	binds: never
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		color
+		armor_mail
+		hands
+		good
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_28:
+{
+	string: "Humble Pauldrons"
+	icon: icon_shoulders_1
+	rarity: common
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: never
+	equipment_slots:
+	[
+		shoulders
+	]
+	tags:
+	[
+		armor_plate
+		shoulders
+		good
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_29:
+{
+	string: "Bleak Girdle"
+	icon: icon_belt_2
+	rarity: common
+	item_level: 9
+	required_level: 9
+	type: armor_plate
+	binds: never
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_plate
+		waist
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_30:
+{
+	string: "Able Wrap"
+	icon: icon_cape_1
+	rarity: common
+	item_level: 2
+	required_level: 2
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		good
+		armor_cloth
+		back
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_31:
+{
+	string: "Flauntless Gaiters"
+	icon: icon_pants_2
+	rarity: common
+	item_level: 3
+	required_level: 3
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		good
+		armor_cloth
+		legs
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_32:
+{
+	string: "Able Attire"
+	icon: icon_mail_shirt_1
+	rarity: common
+	item_level: 8
+	required_level: 8
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		good
+		armor_cloth
+		chest
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_33:
+{
+	string: "Execrable Mantle"
+	icon: icon_cloth_shirt_3
+	rarity: common
+	item_level: 6
+	required_level: 6
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		armor_cloth
+		chest
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_34:
+{
+	string: "Pure Scarf"
+	icon: icon_shoulders_1
+	rarity: common
+	item_level: 6
+	required_level: 6
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		shoulders
+	]
+	tags:
+	[
+		good
+		armor_cloth
+		shoulders
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_35:
+{
+	string: "Blue Handwraps"
+	icon: icon_gloves_2
+	rarity: common
+	item_level: 5
+	required_level: 5
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_cloth
+		hands
+		color
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_36:
+{
+	string: "Incorruptible Shawl"
+	icon: icon_cape_2
+	rarity: common
+	item_level: 7
+	required_level: 7
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		good
+		armor_cloth
+		back
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_37:
+{
+	string: "Bloody Crest"
+	icon: icon_wizard_hat_1
+	rarity: common
+	item_level: 6
+	required_level: 6
+	type: armor_mail
+	binds: never
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		armor_mail
+		evil
+		head
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_38:
+{
+	string: "Audacious Wrap"
+	icon: icon_shoulders_1
+	rarity: common
+	item_level: 8
+	required_level: 8
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		shoulders
+	]
+	tags:
+	[
+		good
+		armor_cloth
+		shoulders
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_39:
+{
+	string: "Execrable Gloves"
+	icon: icon_mail_gloves_1
+	rarity: common
+	item_level: 2
+	required_level: 2
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_cloth
+		hands
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_40:
+{
+	string: "Dark Mitts"
+	icon: icon_gloves_2
+	rarity: common
+	item_level: 2
+	required_level: 2
+	type: armor_mail
+	binds: never
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		color
+		armor_mail
+		hands
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_41:
+{
+	string: "Injurious Sandals"
+	icon: icon_mail_boots_1
+	rarity: common
+	item_level: 4
+	required_level: 4
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_cloth
+		feet
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_42:
+{
+	string: "Dirty Mitts"
+	icon: icon_mail_gloves_1
+	rarity: common
+	item_level: 9
+	required_level: 9
+	type: armor_plate
+	binds: never
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_plate
+		hands
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_43:
+{
+	string: "Rancorous Scales"
+	icon: icon_pants_2
+	rarity: common
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: never
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		armor_plate
+		legs
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_44:
+{
+	string: "Bleak Girdle"
+	icon: icon_mail_belt_1
+	rarity: common
+	item_level: 2
+	required_level: 2
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_cloth
+		waist
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_45:
+{
+	string: "Malevolent Cloak"
+	icon: icon_cape_1
+	rarity: common
+	item_level: 5
+	required_level: 5
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		armor_cloth
+		back
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_46:
+{
+	string: "Repulsive Tights"
+	icon: icon_pants_1
+	rarity: common
+	item_level: 2
+	required_level: 2
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		armor_cloth
+		legs
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_47:
+{
+	string: "Dauntless Gloves"
+	icon: icon_gloves_1
+	rarity: common
+	item_level: 8
+	required_level: 8
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		good
+		armor_cloth
+		hands
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_48:
+{
+	string: "Pure Tunic"
+	icon: icon_chest_2
+	rarity: common
+	item_level: 3
+	required_level: 3
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		good
+		armor_cloth
+		chest
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_49:
+{
+	string: "Green Mantle"
+	icon: icon_wizard_hat_2
+	rarity: common
+	item_level: 9
+	required_level: 9
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		armor_cloth
+		head
+		color
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_50:
+{
+	string: "Dauntless Scalemail"
+	icon: icon_mail_shirt_1
+	rarity: common
+	item_level: 8
+	required_level: 8
+	type: armor_mail
+	binds: never
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		armor_mail
+		chest
+		good
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_51:
+{
+	string: "Fatal Girdle"
+	icon: icon_mail_belt_1
+	rarity: common
+	item_level: 2
+	required_level: 2
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_cloth
+		waist
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_52:
+{
+	string: "Obscene Crest"
+	icon: icon_wizard_hat_2
+	rarity: common
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: never
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		armor_plate
+		evil
+		head
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_53:
+{
+	string: "Brown Chausses"
+	icon: icon_pants_1
+	rarity: common
+	item_level: 5
+	required_level: 5
+	type: armor_mail
+	binds: never
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		color
+		legs
+		armor_mail
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_54:
+{
+	string: "Valorous Wrists"
+	icon: icon_mail_bracers_1
+	rarity: common
+	item_level: 2
+	required_level: 2
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		good
+		armor_cloth
+		wrists
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_55:
+{
+	string: "Spiteful Cuirass"
+	icon: icon_cloth_shirt_2
+	rarity: common
+	item_level: 10
+	required_level: 10
+	type: armor_mail
+	binds: never
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		armor_mail
+		chest
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_56:
+{
+	string: "High Turban"
+	icon: icon_wizard_hat_1
+	rarity: common
+	item_level: 8
+	required_level: 8
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		armor_cloth
+		head
+		grandiose
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_57:
+{
+	string: "Bold Treads"
+	icon: icon_mail_boots_1
+	rarity: common
+	item_level: 3
+	required_level: 3
+	type: armor_mail
+	binds: never
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_mail
+		feet
+		good
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_58:
+{
+	string: "Murderous Silks"
+	icon: icon_mail_pants_1
+	rarity: common
+	item_level: 3
+	required_level: 3
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		armor_cloth
+		legs
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_59:
+{
+	string: "Violent Cap"
+	icon: icon_wizard_hat_2
+	rarity: common
+	item_level: 6
+	required_level: 6
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		armor_cloth
+		evil
+		head
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_60:
+{
+	string: "Vile Pauldrons"
+	icon: icon_shoulders_1
+	rarity: common
+	item_level: 6
+	required_level: 6
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		shoulders
+	]
+	tags:
+	[
+		armor_cloth
+		shoulders
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_61:
+{
+	string: "Fatal Leggings"
+	icon: icon_pants_1
+	rarity: common
+	item_level: 8
+	required_level: 8
+	type: armor_mail
+	binds: never
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		legs
+		armor_mail
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_62:
+{
+	string: "Hateful Guards"
+	icon: icon_mail_bracers_1
+	rarity: common
+	item_level: 7
+	required_level: 7
+	type: armor_plate
+	binds: never
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		armor_plate
+		evil
+		wrists
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_63:
+{
+	string: "Grey Boots"
+	icon: icon_mail_boots_1
+	rarity: common
+	item_level: 8
+	required_level: 8
+	type: armor_plate
+	binds: never
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_plate
+		feet
+		color
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_64:
+{
+	string: "Timeless Armor"
+	icon: icon_mail_shirt_1
+	rarity: common
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: never
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		armor_plate
+		chest
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_65:
+{
+	string: "Pearly Sash"
+	icon: icon_mail_belt_1
+	rarity: common
+	item_level: 3
+	required_level: 3
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		good
+		armor_cloth
+		waist
+		color
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_66:
+{
+	string: "Dark Gaiters"
+	icon: icon_mail_pants_1
+	rarity: common
+	item_level: 3
+	required_level: 3
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		armor_cloth
+		color
+		legs
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_67:
+{
+	string: "Bleak Bandana"
+	icon: icon_wizard_hat_1
+	rarity: common
+	item_level: 10
+	required_level: 10
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		armor_cloth
+		head
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_68:
+{
+	string: "Baneful Bracers"
+	icon: icon_mail_bracers_1
+	rarity: common
+	item_level: 5
+	required_level: 5
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		armor_cloth
+		evil
+		wrists
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_69:
+{
+	string: "Strange Wrap"
+	icon: icon_wizard_hat_2
+	rarity: common
+	item_level: 8
+	required_level: 8
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		armor_cloth
+		head
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_70:
+{
+	string: "Pestilent Cuffs"
+	icon: icon_mail_bracers_1
+	rarity: common
+	item_level: 9
+	required_level: 9
+	type: armor_plate
+	binds: never
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		armor_plate
+		evil
+		wrists
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_71:
+{
+	string: "Old Poncho"
+	icon: icon_cape_2
+	rarity: common
+	item_level: 3
+	required_level: 3
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		armor_cloth
+		back
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_72:
+{
+	string: "Immortal Cloak"
+	icon: icon_cape_2
+	rarity: common
+	item_level: 9
+	required_level: 9
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		armor_cloth
+		back
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_73:
+{
+	string: "Dirty Mitts"
+	icon: icon_gloves_2
+	rarity: common
+	item_level: 9
+	required_level: 9
+	type: armor_plate
+	binds: never
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_plate
+		hands
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_74:
+{
+	string: "Toxic Shankguards"
+	icon: icon_pants_2
+	rarity: common
+	item_level: 10
+	required_level: 10
+	type: armor_mail
+	binds: never
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		legs
+		armor_mail
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_75:
+{
+	string: "Weird Armguards"
+	icon: icon_mail_bracers_1
+	rarity: common
+	item_level: 2
+	required_level: 2
+	type: armor_mail
+	binds: never
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		armor_mail
+		wrists
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_76:
+{
+	string: "Angry Leggings"
+	icon: icon_pants_2
+	rarity: common
+	item_level: 1
+	required_level: 1
+	type: armor_mail
+	binds: never
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		legs
+		armor_mail
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_77:
+{
+	string: "Vile Cuffs"
+	icon: icon_mail_bracers_1
+	rarity: common
+	item_level: 2
+	required_level: 2
+	type: armor_mail
+	binds: never
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		armor_mail
+		evil
+		wrists
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_78:
+{
+	string: "Maleficient Belt"
+	icon: icon_mail_belt_1
+	rarity: common
+	item_level: 10
+	required_level: 10
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_cloth
+		waist
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_79:
+{
+	string: "Green Leggings"
+	icon: icon_mail_pants_1
+	rarity: common
+	item_level: 2
+	required_level: 2
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		armor_cloth
+		color
+		legs
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_80:
+{
+	string: "Pestilent Skirt"
+	icon: icon_pants_1
+	rarity: common
+	item_level: 2
+	required_level: 2
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		armor_cloth
+		legs
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_81:
+{
+	string: "Eternal Gloves"
+	icon: icon_mail_gloves_1
+	rarity: common
+	item_level: 6
+	required_level: 6
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_cloth
+		hands
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_82:
+{
+	string: "Valorous Warboots"
+	icon: icon_mail_boots_1
+	rarity: common
+	item_level: 7
+	required_level: 7
+	type: armor_plate
+	binds: never
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_plate
+		feet
+		good
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_83:
+{
+	string: "Astute Wrists"
+	icon: icon_mail_bracers_1
+	rarity: common
+	item_level: 5
+	required_level: 5
+	type: armor_mail
+	binds: never
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		armor_mail
+		wrists
+		good
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_84:
+{
+	string: "Nefarious Ringmail"
+	icon: icon_cloth_shirt_1
+	rarity: common
+	item_level: 5
+	required_level: 5
+	type: armor_mail
+	binds: never
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		armor_mail
+		chest
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_85:
+{
+	string: "Undying Breeches"
+	icon: icon_pants_2
+	rarity: common
+	item_level: 3
+	required_level: 3
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		armor_cloth
+		legs
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_86:
+{
+	string: "Obscene Belt"
+	icon: icon_mail_belt_1
+	rarity: common
+	item_level: 2
+	required_level: 2
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_cloth
+		waist
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_87:
+{
+	string: "Incorruptible Tabard"
+	icon: icon_cape_2
+	rarity: common
+	item_level: 7
+	required_level: 7
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		good
+		armor_cloth
+		back
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_88:
+{
+	string: "Noxious Warboots"
+	icon: icon_shoe_1
+	rarity: common
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: never
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_plate
+		feet
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_89:
+{
+	string: "Hateful Mantle"
+	icon: icon_cape_1
+	rarity: common
+	item_level: 6
+	required_level: 6
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		armor_cloth
+		back
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_90:
+{
+	string: "Spiteful Mitts"
+	icon: icon_gloves_1
+	rarity: common
+	item_level: 9
+	required_level: 9
+	type: armor_plate
+	binds: never
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_plate
+		hands
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_91:
+{
+	string: "Calamitious Hoop"
+	icon: icon_ring_3
+	rarity: common
+	item_level: 5
+	required_level: 5
+	type: none
+	binds: never
+	equipment_slots:
+	[
+		finger_1
+		finger_2
+	]
+	tags:
+	[
+		evil
+		finger
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_92:
+{
+	string: "Ebon Cloak"
+	icon: icon_cape_2
+	rarity: common
+	item_level: 3
+	required_level: 3
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		armor_cloth
+		color
+		back
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_93:
+{
+	string: "Iniquitous Waistband"
+	icon: icon_belt_1
+	rarity: common
+	item_level: 3
+	required_level: 3
+	type: armor_cloth
+	binds: never
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_cloth
+		waist
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_94:
+{
+	string: "Valiant Footguards"
+	icon: icon_shoe_1
+	rarity: common
+	item_level: 7
+	required_level: 7
+	type: armor_mail
+	binds: never
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_mail
+		feet
+		good
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_95:
+{
+	string: "Deathless Strap"
+	icon: icon_mail_belt_1
+	rarity: common
+	item_level: 3
+	required_level: 3
+	type: armor_mail
+	binds: never
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_mail
+		waist
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_96:
+{
+	string: "Daring Choker"
+	icon: icon_necklace_1
+	rarity: common
+	item_level: 8
+	required_level: 8
+	type: none
+	binds: never
+	equipment_slots:
+	[
+		neck
+	]
+	tags:
+	[
+		neck
+		good
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_97:
+{
+	string: "Harmful Grips"
+	icon: icon_mail_gloves_1
+	rarity: common
+	item_level: 9
+	required_level: 9
+	type: armor_plate
+	binds: never
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_plate
+		hands
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_98:
+{
+	string: "Iniquitous Striders"
+	icon: icon_shoe_1
+	rarity: common
+	item_level: 2
+	required_level: 2
+	type: armor_mail
+	binds: never
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_mail
+		feet
+		evil
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_99:
+{
+	string: "Harmful Loop"
+	icon: icon_ring_4
+	rarity: common
+	item_level: 8
+	required_level: 8
+	type: none
+	binds: never
+	equipment_slots:
+	[
+		finger_1
+		finger_2
+	]
+	tags:
+	[
+		evil
+		finger
+	]
+	loot_groups:
+	[
+		world_drops_junk
+	]
+}
+
+item world_drops_item_100:
+{
+	string: "Strange Leggings"
+	icon: icon_pants_2
+	rarity: uncommon
+	item_level: 4
+	required_level: 4
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		legs
+		armor_mail
+	]
+	stat_weight wisdom: 1
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_101:
+{
+	string: "Humble Scales"
+	icon: icon_mail_pants_1
+	rarity: uncommon
+	item_level: 8
+	required_level: 8
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		armor_plate
+		legs
+		good
+	]
+	stat_weight dexterity: 2
+	stat_weight wisdom: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_102:
+{
+	string: "Wrists of the Lion"
+	icon: icon_mail_bracers_1
+	rarity: uncommon
+	item_level: 6
+	required_level: 6
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		armor_plate
+		wrists
+		creature
+		predator
+	]
+	stat_weight dexterity: 2
+	stat_weight constitution: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_103:
+{
+	string: "Wrathful Bracers"
+	icon: icon_mail_bracers_1
+	rarity: uncommon
+	item_level: 7
+	required_level: 7
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		armor_mail
+		evil
+		wrists
+	]
+	stat_weight dexterity: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_104:
+{
+	string: "Angry Shroud"
+	icon: icon_chest_2
+	rarity: uncommon
+	item_level: 3
+	required_level: 3
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		armor_cloth
+		chest
+		evil
+	]
+	stat_weight strength: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_105:
+{
+	string: "Bracers of the Observer"
+	icon: icon_mail_bracers_1
+	rarity: uncommon
+	item_level: 9
+	required_level: 9
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		armor_cloth
+		wrists
+	]
+	stat_weight spirit: 1
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_106:
+{
+	string: "Injurious Scales"
+	icon: icon_pants_2
+	rarity: uncommon
+	item_level: 5
+	required_level: 5
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		legs
+		armor_mail
+		evil
+	]
+	stat_weight wisdom: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_107:
+{
+	string: "Bitter Treads"
+	icon: icon_mail_boots_1
+	rarity: uncommon
+	item_level: 9
+	required_level: 9
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_plate
+		feet
+		evil
+	]
+	stat_weight dexterity: 2
+	stat_weight strength: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_108:
+{
+	string: "Weird Battleplate"
+	icon: icon_cloth_shirt_2
+	rarity: uncommon
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		armor_plate
+		chest
+	]
+	stat_weight dexterity: 1
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_109:
+{
+	string: "Hauberk of the Panther"
+	icon: icon_chest_2
+	rarity: uncommon
+	item_level: 5
+	required_level: 5
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		armor_mail
+		chest
+		creature
+		predator
+	]
+	stat_weight dexterity: 4
+	stat_weight strength: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_110:
+{
+	string: "High Gloves"
+	icon: icon_mail_gloves_1
+	rarity: uncommon
+	item_level: 5
+	required_level: 5
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_mail
+		hands
+		grandiose
+	]
+	stat_weight dexterity: 2
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_111:
+{
+	string: "Injurious Belt"
+	icon: icon_belt_1
+	rarity: uncommon
+	item_level: 5
+	required_level: 5
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_cloth
+		waist
+		evil
+	]
+	stat_weight wisdom: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_112:
+{
+	string: "Adept Cloak"
+	icon: icon_cape_2
+	rarity: uncommon
+	item_level: 9
+	required_level: 9
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		good
+		armor_cloth
+		back
+	]
+	stat_weight strength: 2
+	stat_weight wisdom: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_113:
+{
+	string: "Chestplate of the Serpent"
+	icon: icon_cloth_shirt_3
+	rarity: uncommon
+	item_level: 9
+	required_level: 9
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		dangerous
+		armor_plate
+		chest
+		creature
+		snake
+		evil
+	]
+	stat_weight strength: 2
+	stat_weight wisdom: 5
+	stat_weight constitution: 3
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_114:
+{
+	string: "High Boots"
+	icon: icon_mail_boots_1
+	rarity: uncommon
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_plate
+		feet
+		grandiose
+	]
+	stat_weight dexterity: 2
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_115:
+{
+	string: "Grey Hood"
+	icon: icon_wizard_hat_1
+	rarity: uncommon
+	item_level: 8
+	required_level: 8
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		color
+		armor_mail
+		evil
+		head
+	]
+	stat_weight dexterity: 3
+	stat_weight spirit: 3
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_116:
+{
+	string: "Pestilent Hood"
+	icon: icon_wizard_hat_1
+	rarity: uncommon
+	item_level: 6
+	required_level: 6
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		armor_mail
+		evil
+		head
+	]
+	stat_weight dexterity: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_117:
+{
+	string: "Damned Armguards"
+	icon: icon_mail_bracers_1
+	rarity: uncommon
+	item_level: 3
+	required_level: 3
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		armor_mail
+		evil
+		wrists
+	]
+	stat_weight strength: 2
+	stat_weight wisdom: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_118:
+{
+	string: "Repulsive Shawl"
+	icon: icon_cape_1
+	rarity: uncommon
+	item_level: 3
+	required_level: 3
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		armor_cloth
+		back
+		evil
+	]
+	stat_weight wisdom: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_119:
+{
+	string: "Toxic Mittens"
+	icon: icon_gloves_2
+	rarity: uncommon
+	item_level: 4
+	required_level: 4
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_cloth
+		hands
+		evil
+	]
+	stat_weight dexterity: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_120:
+{
+	string: "Band of the Devourer"
+	icon: icon_ring_3
+	rarity: uncommon
+	item_level: 7
+	required_level: 7
+	type: none
+	binds: when_equipped
+	equipment_slots:
+	[
+		finger_1
+		finger_2
+	]
+	tags:
+	[
+		evil
+		finger
+		grandiose
+	]
+	stat_weight strength: 3
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_121:
+{
+	string: "Shankguards of the Serpent"
+	icon: icon_pants_1
+	rarity: uncommon
+	item_level: 3
+	required_level: 3
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		snake
+		legs
+		armor_mail
+		creature
+		dangerous
+		evil
+	]
+	stat_weight strength: 2
+	stat_weight wisdom: 5
+	stat_weight constitution: 3
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_122:
+{
+	string: "Band of the Horror"
+	icon: icon_ring_1
+	rarity: uncommon
+	item_level: 4
+	required_level: 4
+	type: none
+	binds: when_equipped
+	equipment_slots:
+	[
+		finger_1
+		finger_2
+	]
+	tags:
+	[
+		evil
+		finger
+		grandiose
+	]
+	stat_weight wisdom: 3
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_123:
+{
+	string: "Gallant Gloves"
+	icon: icon_mail_gloves_1
+	rarity: uncommon
+	item_level: 5
+	required_level: 5
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_mail
+		hands
+		good
+	]
+	stat_weight wisdom: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_124:
+{
+	string: "Humble Bracers"
+	icon: icon_mail_bracers_1
+	rarity: uncommon
+	item_level: 3
+	required_level: 3
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		armor_mail
+		wrists
+		good
+	]
+	stat_weight dexterity: 2
+	stat_weight wisdom: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_125:
+{
+	string: "Atrocious Tunic"
+	icon: icon_cloth_shirt_2
+	rarity: uncommon
+	item_level: 9
+	required_level: 9
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		armor_cloth
+		chest
+		evil
+	]
+	stat_weight strength: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_126:
+{
+	string: "Adept Striders"
+	icon: icon_shoe_1
+	rarity: uncommon
+	item_level: 8
+	required_level: 8
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_plate
+		feet
+		good
+	]
+	stat_weight strength: 2
+	stat_weight wisdom: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_127:
+{
+	string: "Cape of the Wolf"
+	icon: icon_cape_2
+	rarity: uncommon
+	item_level: 8
+	required_level: 8
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		back
+		predator
+	]
+	stat_weight dexterity: 2
+	stat_weight strength: 2
+	stat_weight wisdom: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_128:
+{
+	string: "Loathsome Steps"
+	icon: icon_shoe_1
+	rarity: uncommon
+	item_level: 7
+	required_level: 7
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_cloth
+		feet
+		evil
+	]
+	stat_weight constitution: 2
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_129:
+{
+	string: "Blue Circlet"
+	icon: icon_wizard_hat_1
+	rarity: uncommon
+	item_level: 9
+	required_level: 9
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		armor_cloth
+		head
+		color
+	]
+	stat_weight strength: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_130:
+{
+	string: "Waistband of the Horror"
+	icon: icon_mail_belt_1
+	rarity: uncommon
+	item_level: 9
+	required_level: 9
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_mail
+		waist
+		evil
+		grandiose
+	]
+	stat_weight wisdom: 3
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_131:
+{
+	string: "Pestilent Greaves"
+	icon: icon_mail_pants_1
+	rarity: uncommon
+	item_level: 3
+	required_level: 3
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		legs
+		armor_mail
+		evil
+	]
+	stat_weight dexterity: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_132:
+{
+	string: "Veil of the Horror"
+	icon: icon_wizard_hat_1
+	rarity: uncommon
+	item_level: 6
+	required_level: 6
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		armor_cloth
+		evil
+		head
+		grandiose
+	]
+	stat_weight wisdom: 3
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_133:
+{
+	string: "Circle of the Incubus"
+	icon: icon_ring_4
+	rarity: uncommon
+	item_level: 4
+	required_level: 4
+	type: none
+	binds: when_equipped
+	equipment_slots:
+	[
+		finger_1
+		finger_2
+	]
+	tags:
+	[
+		evil
+		finger
+		grandiose
+	]
+	stat_weight spirit: 3
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_134:
+{
+	string: "Clean Treads"
+	icon: icon_mail_boots_1
+	rarity: uncommon
+	item_level: 3
+	required_level: 3
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_mail
+		feet
+		good
+	]
+	stat_weight constitution: 2
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_135:
+{
+	string: "Pauldrons of the Jackal"
+	icon: icon_shoulders_1
+	rarity: uncommon
+	item_level: 8
+	required_level: 8
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		shoulders
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		shoulders
+		predator
+	]
+	stat_weight dexterity: 2
+	stat_weight wisdom: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_136:
+{
+	string: "Hideous Warboots"
+	icon: icon_shoe_1
+	rarity: uncommon
+	item_level: 7
+	required_level: 7
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_plate
+		feet
+		evil
+	]
+	stat_weight constitution: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_137:
+{
+	string: "Crazy Belt"
+	icon: icon_mail_belt_1
+	rarity: uncommon
+	item_level: 3
+	required_level: 3
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_mail
+		waist
+	]
+	stat_weight strength: 1
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_138:
+{
+	string: "Hood of the Snake"
+	icon: icon_wizard_hat_1
+	rarity: uncommon
+	item_level: 8
+	required_level: 8
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		evil
+		head
+		snake
+		dangerous
+	]
+	stat_weight strength: 2
+	stat_weight wisdom: 2
+	stat_weight constitution: 3
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_139:
+{
+	string: "Striders of the Ancient"
+	icon: icon_shoe_1
+	rarity: uncommon
+	item_level: 9
+	required_level: 9
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_mail
+		mysterious
+		feet
+	]
+	stat_weight wisdom: 1
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_140:
+{
+	string: "Gallant Armor"
+	icon: icon_chest_2
+	rarity: uncommon
+	item_level: 6
+	required_level: 6
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		armor_mail
+		chest
+		good
+	]
+	stat_weight wisdom: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_141:
+{
+	string: "Mantlet of the Serpent"
+	icon: icon_shoulders_1
+	rarity: uncommon
+	item_level: 10
+	required_level: 10
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		shoulders
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		shoulders
+		snake
+		dangerous
+		evil
+	]
+	stat_weight strength: 2
+	stat_weight wisdom: 5
+	stat_weight constitution: 3
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_142:
+{
+	string: "Bitter Beads"
+	icon: icon_necklace_2
+	rarity: uncommon
+	item_level: 7
+	required_level: 7
+	type: none
+	binds: when_equipped
+	equipment_slots:
+	[
+		neck
+	]
+	tags:
+	[
+		neck
+		evil
+	]
+	stat_weight dexterity: 2
+	stat_weight strength: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_143:
+{
+	string: "Scales of the Giant"
+	icon: icon_mail_pants_1
+	rarity: uncommon
+	item_level: 5
+	required_level: 5
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		legs
+		armor_mail
+		creature
+		dangerous
+		monster
+	]
+	stat_weight strength: 3
+	stat_weight wisdom: 2
+	stat_weight constitution: 4
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_144:
+{
+	string: "Baneful Tights"
+	icon: icon_mail_pants_1
+	rarity: uncommon
+	item_level: 9
+	required_level: 9
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		armor_cloth
+		legs
+		evil
+	]
+	stat_weight strength: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_145:
+{
+	string: "Plate Armor of the Dragon"
+	icon: icon_cloth_shirt_2
+	rarity: uncommon
+	item_level: 9
+	required_level: 9
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		dangerous
+		monster
+		armor_plate
+		chest
+		creature
+	]
+	stat_weight dexterity: 2
+	stat_weight strength: 3
+	stat_weight constitution: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_146:
+{
+	string: "Leggings of the Lion"
+	icon: icon_mail_pants_1
+	rarity: uncommon
+	item_level: 9
+	required_level: 9
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		legs
+		armor_mail
+		creature
+		predator
+	]
+	stat_weight dexterity: 2
+	stat_weight constitution: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_147:
+{
+	string: "Leggings of the Beholder"
+	icon: icon_mail_pants_1
+	rarity: uncommon
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		armor_plate
+		legs
+	]
+	stat_weight wisdom: 1
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_148:
+{
+	string: "Strange Belt"
+	icon: icon_belt_2
+	rarity: uncommon
+	item_level: 4
+	required_level: 4
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_cloth
+		waist
+	]
+	stat_weight wisdom: 1
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_149:
+{
+	string: "Mad Leggings"
+	icon: icon_pants_1
+	rarity: uncommon
+	item_level: 9
+	required_level: 9
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		armor_plate
+		legs
+	]
+	stat_weight wisdom: 1
+	stat_weight spirit: 1
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_150:
+{
+	string: "Adept Wrists"
+	icon: icon_mail_bracers_1
+	rarity: uncommon
+	item_level: 5
+	required_level: 5
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		good
+		armor_cloth
+		wrists
+	]
+	stat_weight strength: 2
+	stat_weight wisdom: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_151:
+{
+	string: "Ugly Girdle"
+	icon: icon_belt_2
+	rarity: uncommon
+	item_level: 8
+	required_level: 8
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_plate
+		waist
+		evil
+	]
+	stat_weight wisdom: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_152:
+{
+	string: "Ugly Beads"
+	icon: icon_necklace_2
+	rarity: uncommon
+	item_level: 6
+	required_level: 6
+	type: none
+	binds: when_equipped
+	equipment_slots:
+	[
+		neck
+	]
+	tags:
+	[
+		neck
+		evil
+	]
+	stat_weight wisdom: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_153:
+{
+	string: "Wild Gauntlets"
+	icon: icon_gloves_1
+	rarity: uncommon
+	item_level: 6
+	required_level: 6
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_mail
+		hands
+	]
+	stat_weight spirit: 1
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_154:
+{
+	string: "Leggings of the Kraken"
+	icon: icon_pants_1
+	rarity: uncommon
+	item_level: 4
+	required_level: 4
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		legs
+		dangerous
+		monster
+	]
+	stat_weight dexterity: 2
+	stat_weight strength: 3
+	stat_weight wisdom: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_155:
+{
+	string: "Incorruptible Pendant"
+	icon: icon_necklace_1
+	rarity: uncommon
+	item_level: 6
+	required_level: 6
+	type: none
+	binds: when_equipped
+	equipment_slots:
+	[
+		neck
+	]
+	tags:
+	[
+		neck
+		good
+	]
+	stat_weight strength: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_156:
+{
+	string: "Hateful Wrap"
+	icon: icon_cape_1
+	rarity: uncommon
+	item_level: 3
+	required_level: 3
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		armor_cloth
+		back
+		evil
+	]
+	stat_weight strength: 2
+	stat_weight constitution: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_157:
+{
+	string: "Baneful Belt"
+	icon: icon_belt_1
+	rarity: uncommon
+	item_level: 4
+	required_level: 4
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_cloth
+		waist
+		evil
+	]
+	stat_weight strength: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_158:
+{
+	string: "Fat Pendant"
+	icon: icon_necklace_2
+	rarity: uncommon
+	item_level: 7
+	required_level: 7
+	type: none
+	binds: when_equipped
+	equipment_slots:
+	[
+		neck
+	]
+	tags:
+	[
+		neck
+	]
+	stat_weight spirit: 1
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_159:
+{
+	string: "Modest Band"
+	icon: icon_ring_1
+	rarity: uncommon
+	item_level: 9
+	required_level: 9
+	type: none
+	binds: when_equipped
+	equipment_slots:
+	[
+		finger_1
+		finger_2
+	]
+	tags:
+	[
+		finger
+		good
+	]
+	stat_weight dexterity: 2
+	stat_weight strength: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_160:
+{
+	string: "Angry Scalemail"
+	icon: icon_mail_shirt_1
+	rarity: uncommon
+	item_level: 3
+	required_level: 3
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		armor_mail
+		chest
+		evil
+	]
+	stat_weight strength: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_161:
+{
+	string: "Chain of the Bear"
+	icon: icon_necklace_1
+	rarity: uncommon
+	item_level: 4
+	required_level: 4
+	type: none
+	binds: when_equipped
+	equipment_slots:
+	[
+		neck
+	]
+	tags:
+	[
+		neck
+		creature
+		predator
+	]
+	stat_weight dexterity: 2
+	stat_weight constitution: 2
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_162:
+{
+	string: "Injurious Armguards"
+	icon: icon_mail_bracers_1
+	rarity: uncommon
+	item_level: 3
+	required_level: 3
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		armor_mail
+		evil
+		wrists
+	]
+	stat_weight wisdom: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_163:
+{
+	string: "Harness of the Beholder"
+	icon: icon_cloth_shirt_1
+	rarity: uncommon
+	item_level: 4
+	required_level: 4
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		armor_mail
+		chest
+	]
+	stat_weight wisdom: 1
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_164:
+{
+	string: "Bold Striders"
+	icon: icon_shoe_1
+	rarity: uncommon
+	item_level: 8
+	required_level: 8
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_plate
+		feet
+		good
+	]
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_165:
+{
+	string: "Gallant Hauberk"
+	icon: icon_cloth_shirt_2
+	rarity: uncommon
+	item_level: 4
+	required_level: 4
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		armor_mail
+		chest
+		good
+	]
+	stat_weight wisdom: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_166:
+{
+	string: "Girdle of the Wolf"
+	icon: icon_mail_belt_1
+	rarity: uncommon
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_plate
+		waist
+		creature
+		predator
+	]
+	stat_weight dexterity: 2
+	stat_weight strength: 2
+	stat_weight wisdom: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_167:
+{
+	string: "High Scalemail"
+	icon: icon_chest_2
+	rarity: uncommon
+	item_level: 10
+	required_level: 10
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		armor_mail
+		grandiose
+		chest
+	]
+	stat_weight dexterity: 2
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_168:
+{
+	string: "Cunning Boots"
+	icon: icon_shoe_1
+	rarity: uncommon
+	item_level: 9
+	required_level: 9
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		good
+		armor_cloth
+		feet
+	]
+	stat_weight constitution: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_169:
+{
+	string: "Vicious Striders"
+	icon: icon_mail_boots_1
+	rarity: uncommon
+	item_level: 9
+	required_level: 9
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_plate
+		feet
+		evil
+	]
+	stat_weight strength: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_170:
+{
+	string: "Undying Ring"
+	icon: icon_ring_5
+	rarity: uncommon
+	item_level: 10
+	required_level: 10
+	type: none
+	binds: when_equipped
+	equipment_slots:
+	[
+		finger_1
+		finger_2
+	]
+	tags:
+	[
+		finger
+	]
+	stat_weight dexterity: 1
+	stat_weight wisdom: 1
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_171:
+{
+	string: "Chausses of the Python"
+	icon: icon_pants_1
+	rarity: uncommon
+	item_level: 8
+	required_level: 8
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		snake
+		legs
+		armor_mail
+		creature
+		dangerous
+		evil
+	]
+	stat_weight strength: 2
+	stat_weight wisdom: 2
+	stat_weight spirit: 3
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_172:
+{
+	string: "Depraved Cuffs"
+	icon: icon_mail_bracers_1
+	rarity: uncommon
+	item_level: 3
+	required_level: 3
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		armor_cloth
+		evil
+		wrists
+	]
+	stat_weight strength: 4
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_173:
+{
+	string: "Enduring Gauntlets"
+	icon: icon_gloves_2
+	rarity: uncommon
+	item_level: 8
+	required_level: 8
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_mail
+		hands
+	]
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_174:
+{
+	string: "Gallant Grasp"
+	icon: icon_gloves_2
+	rarity: uncommon
+	item_level: 4
+	required_level: 4
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_mail
+		hands
+		good
+	]
+	stat_weight wisdom: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_175:
+{
+	string: "White Warboots"
+	icon: icon_mail_boots_1
+	rarity: uncommon
+	item_level: 9
+	required_level: 9
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_plate
+		feet
+		color
+		good
+	]
+	stat_weight constitution: 3
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_176:
+{
+	string: "Depraved Mitts"
+	icon: icon_gloves_1
+	rarity: uncommon
+	item_level: 8
+	required_level: 8
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_plate
+		hands
+		evil
+	]
+	stat_weight strength: 4
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_177:
+{
+	string: "Dauntless Sash"
+	icon: icon_mail_belt_1
+	rarity: uncommon
+	item_level: 6
+	required_level: 6
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_mail
+		waist
+		good
+	]
+	stat_weight dexterity: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_178:
+{
+	string: "Maleficient Loop"
+	icon: icon_ring_2
+	rarity: uncommon
+	item_level: 9
+	required_level: 9
+	type: none
+	binds: when_equipped
+	equipment_slots:
+	[
+		finger_1
+		finger_2
+	]
+	tags:
+	[
+		evil
+		finger
+	]
+	stat_weight strength: 2
+	stat_weight wisdom: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_179:
+{
+	string: "Waist of the Slayer"
+	icon: icon_belt_1
+	rarity: uncommon
+	item_level: 9
+	required_level: 9
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_plate
+		waist
+	]
+	stat_weight dexterity: 1
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_180:
+{
+	string: "Baneful Chausses"
+	icon: icon_pants_2
+	rarity: uncommon
+	item_level: 6
+	required_level: 6
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		legs
+		armor_mail
+		evil
+	]
+	stat_weight strength: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_181:
+{
+	string: "Lethal Helm"
+	icon: icon_wizard_hat_1
+	rarity: uncommon
+	item_level: 5
+	required_level: 5
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		armor_mail
+		evil
+		head
+	]
+	stat_weight wisdom: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_182:
+{
+	string: "Pestilent Loop"
+	icon: icon_ring_3
+	rarity: uncommon
+	item_level: 4
+	required_level: 4
+	type: none
+	binds: when_equipped
+	equipment_slots:
+	[
+		finger_1
+		finger_2
+	]
+	tags:
+	[
+		evil
+		finger
+	]
+	stat_weight dexterity: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_183:
+{
+	string: "Purple Cloak"
+	icon: icon_cape_1
+	rarity: uncommon
+	item_level: 5
+	required_level: 5
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		armor_cloth
+		color
+		back
+	]
+	stat_weight constitution: 2
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_184:
+{
+	string: "Legwraps of the Leopard"
+	icon: icon_pants_2
+	rarity: uncommon
+	item_level: 4
+	required_level: 4
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		legs
+		predator
+	]
+	stat_weight dexterity: 2
+	stat_weight strength: 2
+	stat_weight wisdom: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_185:
+{
+	string: "Eternal Wrists"
+	icon: icon_mail_bracers_1
+	rarity: uncommon
+	item_level: 7
+	required_level: 7
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		armor_plate
+		wrists
+	]
+	stat_weight wisdom: 1
+	stat_weight spirit: 1
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_186:
+{
+	string: "Cuffs of the Asp"
+	icon: icon_mail_bracers_1
+	rarity: uncommon
+	item_level: 4
+	required_level: 4
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		evil
+		wrists
+		snake
+		dangerous
+	]
+	stat_weight strength: 5
+	stat_weight wisdom: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_187:
+{
+	string: "Harmful Mantle"
+	icon: icon_cape_2
+	rarity: uncommon
+	item_level: 5
+	required_level: 5
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		armor_cloth
+		back
+		evil
+	]
+	stat_weight dexterity: 2
+	stat_weight constitution: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_188:
+{
+	string: "Cape of the Cougar"
+	icon: icon_cape_1
+	rarity: uncommon
+	item_level: 3
+	required_level: 3
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		back
+		predator
+	]
+	stat_weight dexterity: 4
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_189:
+{
+	string: "Hideous Poncho"
+	icon: icon_cape_2
+	rarity: uncommon
+	item_level: 7
+	required_level: 7
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		armor_cloth
+		back
+		evil
+	]
+	stat_weight constitution: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_190:
+{
+	string: "Toxic Wrap"
+	icon: icon_cape_1
+	rarity: uncommon
+	item_level: 3
+	required_level: 3
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		armor_cloth
+		back
+		evil
+	]
+	stat_weight dexterity: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_191:
+{
+	string: "Hideous Bracers"
+	icon: icon_mail_bracers_1
+	rarity: uncommon
+	item_level: 5
+	required_level: 5
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		armor_mail
+		evil
+		wrists
+	]
+	stat_weight constitution: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_192:
+{
+	string: "Warboots of the Elder"
+	icon: icon_mail_boots_1
+	rarity: uncommon
+	item_level: 7
+	required_level: 7
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_plate
+		mysterious
+		feet
+	]
+	stat_weight strength: 1
+	stat_weight constitution: 1
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_193:
+{
+	string: "Girdle of the Snake"
+	icon: icon_belt_1
+	rarity: uncommon
+	item_level: 9
+	required_level: 9
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		dangerous
+		armor_plate
+		waist
+		creature
+		snake
+		evil
+	]
+	stat_weight strength: 2
+	stat_weight wisdom: 2
+	stat_weight constitution: 3
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_194:
+{
+	string: "Pants of the Giant"
+	icon: icon_mail_pants_1
+	rarity: uncommon
+	item_level: 3
+	required_level: 3
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		legs
+		dangerous
+		monster
+	]
+	stat_weight strength: 3
+	stat_weight wisdom: 2
+	stat_weight constitution: 4
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_195:
+{
+	string: "Fatal Footguards"
+	icon: icon_mail_boots_1
+	rarity: uncommon
+	item_level: 5
+	required_level: 5
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_mail
+		feet
+		evil
+	]
+	stat_weight dexterity: 2
+	stat_weight wisdom: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_196:
+{
+	string: "Armguards of the Giant"
+	icon: icon_mail_bracers_1
+	rarity: uncommon
+	item_level: 8
+	required_level: 8
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		dangerous
+		monster
+		armor_plate
+		wrists
+		creature
+	]
+	stat_weight strength: 3
+	stat_weight wisdom: 2
+	stat_weight constitution: 4
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_197:
+{
+	string: "Loop of the Anaconda"
+	icon: icon_ring_3
+	rarity: uncommon
+	item_level: 5
+	required_level: 5
+	type: none
+	binds: when_equipped
+	equipment_slots:
+	[
+		finger_1
+		finger_2
+	]
+	tags:
+	[
+		evil
+		finger
+		creature
+		snake
+		dangerous
+	]
+	stat_weight strength: 2
+	stat_weight wisdom: 2
+	stat_weight constitution: 3
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_198:
+{
+	string: "Savvy Headgear"
+	icon: icon_wizard_hat_1
+	rarity: uncommon
+	item_level: 8
+	required_level: 8
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		armor_mail
+		head
+		good
+	]
+	stat_weight wisdom: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_199:
+{
+	string: "Rancorous Garment"
+	icon: icon_mail_shirt_1
+	rarity: uncommon
+	item_level: 7
+	required_level: 7
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		armor_cloth
+		chest
+		evil
+	]
+	stat_weight dexterity: 2
+	stat_weight wisdom: 2
+	loot_groups:
+	[
+		world_drops_uncommon
+	]
+}
+
+item world_drops_item_200:
+{
+	string: "Shinplates of the Phantasm"
+	icon: icon_mail_pants_1
+	rarity: rare
+	item_level: 7
+	required_level: 7
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		legs
+		armor_mail
+		evil
+		grandiose
+	]
+	stat_weight dexterity: 6
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_201:
+{
+	string: "Calamitious Hydra Mantle"
+	icon: icon_wizard_hat_1
+	rarity: rare
+	item_level: 6
+	required_level: 6
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		evil
+		head
+		dangerous
+		monster
+	]
+	stat_weight strength: 3
+	stat_weight constitution: 5
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_202:
+{
+	string: "Mantle of the Basilisk"
+	icon: icon_shoulders_1
+	rarity: rare
+	item_level: 10
+	required_level: 10
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		shoulders
+	]
+	tags:
+	[
+		armor_mail
+		shoulders
+		creature
+		dangerous
+		monster
+	]
+	stat_weight strength: 3
+	stat_weight constitution: 7
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_203:
+{
+	string: "Dirty Shawl of the Observer"
+	icon: icon_shoulders_1
+	rarity: rare
+	item_level: 7
+	required_level: 7
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		shoulders
+	]
+	tags:
+	[
+		armor_cloth
+		shoulders
+		evil
+	]
+	stat_weight dexterity: 2
+	stat_weight constitution: 1
+	stat_weight spirit: 3
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_204:
+{
+	string: "Grand Treads of the Basilisk"
+	icon: icon_mail_boots_1
+	rarity: rare
+	item_level: 8
+	required_level: 8
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_mail
+		feet
+		grandiose
+		creature
+		dangerous
+		monster
+	]
+	stat_weight strength: 3
+	stat_weight constitution: 9
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_205:
+{
+	string: "Audacious Wrists of the Manticore"
+	icon: icon_mail_bracers_1
+	rarity: rare
+	item_level: 8
+	required_level: 8
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		creature
+		good
+		armor_cloth
+		wrists
+		dangerous
+		monster
+	]
+	stat_weight dexterity: 2
+	stat_weight strength: 7
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_206:
+{
+	string: "Wolfkiller Crest"
+	icon: icon_wizard_hat_2
+	rarity: rare
+	item_level: 9
+	required_level: 9
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		armor_plate
+		head
+		creature
+		predator
+	]
+	stat_weight dexterity: 2
+	stat_weight strength: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_207:
+{
+	string: "Mantle of the Injurious Asp"
+	icon: icon_chest_2
+	rarity: rare
+	item_level: 6
+	required_level: 6
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		chest
+		evil
+		snake
+		dangerous
+	]
+	stat_weight strength: 5
+	stat_weight wisdom: 4
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_208:
+{
+	string: "Dark Mantle"
+	icon: icon_shoulders_1
+	rarity: rare
+	item_level: 7
+	required_level: 7
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		shoulders
+	]
+	tags:
+	[
+		color
+		armor_mail
+		shoulders
+		evil
+	]
+	stat_weight strength: 3
+	stat_weight constitution: 1
+	stat_weight spirit: 3
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_209:
+{
+	string: "Valiant Greaves"
+	icon: icon_pants_1
+	rarity: rare
+	item_level: 9
+	required_level: 9
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		armor_plate
+		legs
+		good
+	]
+	stat_weight dexterity: 2
+	stat_weight constitution: 3
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_210:
+{
+	string: "Repugnant Waist"
+	icon: icon_belt_2
+	rarity: rare
+	item_level: 7
+	required_level: 7
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_mail
+		waist
+		evil
+	]
+	stat_weight dexterity: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_211:
+{
+	string: "Pantherslayer Girdle"
+	icon: icon_mail_belt_1
+	rarity: rare
+	item_level: 7
+	required_level: 7
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_plate
+		waist
+		creature
+		predator
+	]
+	stat_weight dexterity: 4
+	stat_weight strength: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_212:
+{
+	string: "Pauldrons of the Serpent"
+	icon: icon_shoulders_1
+	rarity: rare
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		shoulders
+	]
+	tags:
+	[
+		dangerous
+		armor_plate
+		shoulders
+		creature
+		snake
+		evil
+	]
+	stat_weight wisdom: 5
+	stat_weight constitution: 4
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_213:
+{
+	string: "Modest Scales"
+	icon: icon_pants_2
+	rarity: rare
+	item_level: 6
+	required_level: 6
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		legs
+		armor_mail
+		good
+	]
+	stat_weight dexterity: 2
+	stat_weight strength: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_214:
+{
+	string: "Chausses of the Cougar"
+	icon: icon_pants_2
+	rarity: rare
+	item_level: 5
+	required_level: 5
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		legs
+		armor_mail
+		creature
+		predator
+	]
+	stat_weight dexterity: 4
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_215:
+{
+	string: "Pure Girdle"
+	icon: icon_belt_1
+	rarity: rare
+	item_level: 7
+	required_level: 7
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_plate
+		waist
+		good
+	]
+	stat_weight dexterity: 2
+	stat_weight constitution: 3
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_216:
+{
+	string: "Timeless Asp Ring"
+	icon: icon_ring_4
+	rarity: rare
+	item_level: 6
+	required_level: 6
+	type: none
+	binds: when_equipped
+	equipment_slots:
+	[
+		finger_1
+		finger_2
+	]
+	tags:
+	[
+		evil
+		finger
+		creature
+		snake
+		dangerous
+	]
+	stat_weight strength: 5
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_217:
+{
+	string: "Red Pendant"
+	icon: icon_necklace_1
+	rarity: rare
+	item_level: 10
+	required_level: 10
+	type: none
+	binds: when_equipped
+	equipment_slots:
+	[
+		neck
+	]
+	tags:
+	[
+		neck
+		color
+	]
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_218:
+{
+	string: "Toxic Gloves of the Wolf"
+	icon: icon_gloves_1
+	rarity: rare
+	item_level: 9
+	required_level: 9
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_mail
+		hands
+		evil
+		creature
+		predator
+	]
+	stat_weight dexterity: 4
+	stat_weight strength: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_219:
+{
+	string: "Wolfslayer Girdle"
+	icon: icon_belt_2
+	rarity: rare
+	item_level: 7
+	required_level: 7
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_plate
+		waist
+		creature
+		predator
+	]
+	stat_weight dexterity: 2
+	stat_weight strength: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_220:
+{
+	string: "Gloves of the Witness"
+	icon: icon_gloves_2
+	rarity: rare
+	item_level: 8
+	required_level: 8
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_mail
+		hands
+	]
+	stat_weight wisdom: 1
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_221:
+{
+	string: "Grey Treads"
+	icon: icon_shoe_1
+	rarity: rare
+	item_level: 9
+	required_level: 9
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		color
+		armor_mail
+		feet
+		evil
+	]
+	stat_weight dexterity: 3
+	stat_weight constitution: 1
+	stat_weight spirit: 3
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_222:
+{
+	string: "Sagacious Dreamer Strap"
+	icon: icon_mail_belt_1
+	rarity: rare
+	item_level: 7
+	required_level: 7
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		good
+		armor_cloth
+		waist
+		mysterious
+	]
+	stat_weight strength: 2
+	stat_weight constitution: 1
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_223:
+{
+	string: "Mantle of the Lion"
+	icon: icon_wizard_hat_2
+	rarity: rare
+	item_level: 10
+	required_level: 10
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		head
+		predator
+	]
+	stat_weight dexterity: 2
+	stat_weight constitution: 3
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_224:
+{
+	string: "Mantle of the Beholder"
+	icon: icon_shoulders_1
+	rarity: rare
+	item_level: 7
+	required_level: 7
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		shoulders
+	]
+	tags:
+	[
+		armor_cloth
+		shoulders
+	]
+	stat_weight wisdom: 1
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_225:
+{
+	string: "Krakenkiller Bracers"
+	icon: icon_mail_bracers_1
+	rarity: rare
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		dangerous
+		monster
+		armor_plate
+		wrists
+		creature
+	]
+	stat_weight dexterity: 2
+	stat_weight strength: 3
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_226:
+{
+	string: "Cougarkiller Warboots"
+	icon: icon_shoe_1
+	rarity: rare
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_plate
+		feet
+		creature
+		predator
+	]
+	stat_weight dexterity: 4
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_227:
+{
+	string: "Vile Battleplate of the Slayer"
+	icon: icon_cloth_shirt_2
+	rarity: rare
+	item_level: 8
+	required_level: 8
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		armor_plate
+		chest
+		evil
+	]
+	stat_weight dexterity: 1
+	stat_weight constitution: 1
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_228:
+{
+	string: "Green Cuffs"
+	icon: icon_mail_bracers_1
+	rarity: rare
+	item_level: 7
+	required_level: 7
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		armor_plate
+		wrists
+		color
+	]
+	stat_weight dexterity: 2
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_229:
+{
+	string: "Resolute Cape"
+	icon: icon_cape_1
+	rarity: rare
+	item_level: 6
+	required_level: 6
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		good
+		armor_cloth
+		back
+	]
+	stat_weight constitution: 1
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_230:
+{
+	string: "Cuffs of the Jaguar"
+	icon: icon_mail_bracers_1
+	rarity: rare
+	item_level: 7
+	required_level: 7
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		armor_plate
+		wrists
+		creature
+		predator
+	]
+	stat_weight dexterity: 4
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_231:
+{
+	string: "Beads of the Dreamer"
+	icon: icon_necklace_2
+	rarity: rare
+	item_level: 6
+	required_level: 6
+	type: none
+	binds: when_equipped
+	equipment_slots:
+	[
+		neck
+	]
+	tags:
+	[
+		neck
+		mysterious
+	]
+	stat_weight constitution: 2
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_232:
+{
+	string: "Fatal Girdle of the Adder"
+	icon: icon_belt_1
+	rarity: rare
+	item_level: 7
+	required_level: 7
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		dangerous
+		armor_plate
+		waist
+		evil
+		creature
+		snake
+	]
+	stat_weight strength: 5
+	stat_weight wisdom: 4
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_233:
+{
+	string: "Strap of the Rational Beholder"
+	icon: icon_belt_1
+	rarity: rare
+	item_level: 7
+	required_level: 7
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_mail
+		waist
+	]
+	stat_weight wisdom: 1
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_234:
+{
+	string: "Grey Snake Chestguard"
+	icon: icon_cloth_shirt_2
+	rarity: rare
+	item_level: 9
+	required_level: 9
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		dangerous
+		armor_plate
+		chest
+		snake
+		color
+		evil
+		creature
+	]
+	stat_weight dexterity: 3
+	stat_weight constitution: 4
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_235:
+{
+	string: "Loathsome Strap"
+	icon: icon_mail_belt_1
+	rarity: rare
+	item_level: 7
+	required_level: 7
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_cloth
+		waist
+		evil
+	]
+	stat_weight constitution: 3
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_236:
+{
+	string: "Cougarkiller Striders"
+	icon: icon_shoe_1
+	rarity: rare
+	item_level: 6
+	required_level: 6
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		feet
+		predator
+	]
+	stat_weight dexterity: 4
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_237:
+{
+	string: "Strange Gloves"
+	icon: icon_gloves_2
+	rarity: rare
+	item_level: 9
+	required_level: 9
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_plate
+		hands
+	]
+	stat_weight wisdom: 1
+	stat_weight constitution: 2
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_238:
+{
+	string: "Ebon Girdle of the Slayer"
+	icon: icon_mail_belt_1
+	rarity: rare
+	item_level: 8
+	required_level: 8
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		color
+		armor_mail
+		waist
+		evil
+	]
+	stat_weight dexterity: 1
+	stat_weight constitution: 1
+	stat_weight spirit: 3
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_239:
+{
+	string: "Revolting Footguards of the Devourer"
+	icon: icon_shoe_1
+	rarity: rare
+	item_level: 5
+	required_level: 5
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_mail
+		feet
+		evil
+		grandiose
+	]
+	stat_weight strength: 5
+	stat_weight constitution: 1
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_240:
+{
+	string: "Indestructible Asp Striders"
+	icon: icon_mail_boots_1
+	rarity: rare
+	item_level: 9
+	required_level: 9
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		feet
+		snake
+		dangerous
+		evil
+	]
+	stat_weight strength: 5
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_241:
+{
+	string: "Leopardslayer Gauntlets"
+	icon: icon_mail_gloves_1
+	rarity: rare
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_plate
+		hands
+		creature
+		predator
+	]
+	stat_weight dexterity: 2
+	stat_weight strength: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_242:
+{
+	string: "Beastly Gauntlets"
+	icon: icon_mail_gloves_1
+	rarity: rare
+	item_level: 6
+	required_level: 6
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_mail
+		hands
+		evil
+	]
+	stat_weight strength: 2
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_243:
+{
+	string: "Repugnant Poncho"
+	icon: icon_cape_1
+	rarity: rare
+	item_level: 6
+	required_level: 6
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		armor_cloth
+		back
+		evil
+	]
+	stat_weight dexterity: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_244:
+{
+	string: "Obscene Mitts"
+	icon: icon_mail_gloves_1
+	rarity: rare
+	item_level: 8
+	required_level: 8
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_mail
+		hands
+		evil
+	]
+	stat_weight constitution: 5
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_245:
+{
+	string: "Gallant Bracers of the Basilisk"
+	icon: icon_mail_bracers_1
+	rarity: rare
+	item_level: 10
+	required_level: 10
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		creature
+		good
+		armor_cloth
+		wrists
+		dangerous
+		monster
+	]
+	stat_weight strength: 3
+	stat_weight constitution: 7
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_246:
+{
+	string: "Bloody Grasp of the Adversary"
+	icon: icon_mail_gloves_1
+	rarity: rare
+	item_level: 8
+	required_level: 8
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_mail
+		hands
+		evil
+		grandiose
+	]
+	stat_weight wisdom: 5
+	stat_weight constitution: 4
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_247:
+{
+	string: "Crest of the Astute Slayer"
+	icon: icon_wizard_hat_2
+	rarity: rare
+	item_level: 5
+	required_level: 5
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		armor_mail
+		head
+		good
+	]
+	stat_weight dexterity: 1
+	stat_weight constitution: 3
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_248:
+{
+	string: "Cougarkiller Beads"
+	icon: icon_necklace_2
+	rarity: rare
+	item_level: 10
+	required_level: 10
+	type: none
+	binds: when_equipped
+	equipment_slots:
+	[
+		neck
+	]
+	tags:
+	[
+		neck
+		creature
+		predator
+	]
+	stat_weight dexterity: 4
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_249:
+{
+	string: "Wrists of the Beholder"
+	icon: icon_mail_bracers_1
+	rarity: rare
+	item_level: 9
+	required_level: 9
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		armor_cloth
+		wrists
+	]
+	stat_weight wisdom: 1
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_250:
+{
+	string: "Able Chain"
+	icon: icon_necklace_2
+	rarity: rare
+	item_level: 6
+	required_level: 6
+	type: none
+	binds: when_equipped
+	equipment_slots:
+	[
+		neck
+	]
+	tags:
+	[
+		neck
+		good
+	]
+	stat_weight wisdom: 4
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_251:
+{
+	string: "Loathsome Striders of the Ancient"
+	icon: icon_shoe_1
+	rarity: rare
+	item_level: 6
+	required_level: 6
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_cloth
+		mysterious
+		feet
+		evil
+	]
+	stat_weight constitution: 3
+	stat_weight spirit: 4
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_252:
+{
+	string: "Hood of the Demented Elder"
+	icon: icon_wizard_hat_2
+	rarity: rare
+	item_level: 8
+	required_level: 8
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		armor_cloth
+		head
+		mysterious
+	]
+	stat_weight strength: 1
+	stat_weight constitution: 1
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_253:
+{
+	string: "Band of the Wrathful Slayer"
+	icon: icon_ring_2
+	rarity: rare
+	item_level: 5
+	required_level: 5
+	type: none
+	binds: when_equipped
+	equipment_slots:
+	[
+		finger_1
+		finger_2
+	]
+	tags:
+	[
+		evil
+		finger
+	]
+	stat_weight dexterity: 3
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_254:
+{
+	string: "Iniquitous Plate Armor"
+	icon: icon_chest_2
+	rarity: rare
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		armor_plate
+		chest
+		evil
+	]
+	stat_weight constitution: 1
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_255:
+{
+	string: "Red Circle"
+	icon: icon_ring_2
+	rarity: rare
+	item_level: 10
+	required_level: 10
+	type: none
+	binds: when_equipped
+	equipment_slots:
+	[
+		finger_1
+		finger_2
+	]
+	tags:
+	[
+		finger
+		color
+	]
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_256:
+{
+	string: "Jaguarkiller Boots"
+	icon: icon_mail_boots_1
+	rarity: rare
+	item_level: 5
+	required_level: 5
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_mail
+		feet
+		creature
+		predator
+	]
+	stat_weight dexterity: 4
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_257:
+{
+	string: "Black Tabard of the Phantasm"
+	icon: icon_cape_1
+	rarity: rare
+	item_level: 9
+	required_level: 9
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		armor_cloth
+		color
+		back
+		evil
+		grandiose
+	]
+	stat_weight dexterity: 6
+	stat_weight strength: 3
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_258:
+{
+	string: "Valiant Shawl"
+	icon: icon_cape_2
+	rarity: rare
+	item_level: 9
+	required_level: 9
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		good
+		armor_cloth
+		back
+	]
+	stat_weight dexterity: 2
+	stat_weight constitution: 3
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_259:
+{
+	string: "Cougarslayer Necklace"
+	icon: icon_necklace_2
+	rarity: rare
+	item_level: 8
+	required_level: 8
+	type: none
+	binds: when_equipped
+	equipment_slots:
+	[
+		neck
+	]
+	tags:
+	[
+		neck
+		creature
+		predator
+	]
+	stat_weight dexterity: 4
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_260:
+{
+	string: "Apt Leggings"
+	icon: icon_pants_2
+	rarity: rare
+	item_level: 8
+	required_level: 8
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		armor_plate
+		legs
+		good
+	]
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_261:
+{
+	string: "Heroic Greaves"
+	icon: icon_pants_1
+	rarity: rare
+	item_level: 6
+	required_level: 6
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		legs
+		armor_mail
+		good
+	]
+	stat_weight dexterity: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_262:
+{
+	string: "Tigerkiller Scales"
+	icon: icon_mail_pants_1
+	rarity: rare
+	item_level: 8
+	required_level: 8
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		legs
+		armor_mail
+		creature
+		predator
+	]
+	stat_weight dexterity: 2
+	stat_weight strength: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_263:
+{
+	string: "Beastly Gloves"
+	icon: icon_gloves_1
+	rarity: rare
+	item_level: 10
+	required_level: 10
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_mail
+		hands
+		evil
+	]
+	stat_weight strength: 2
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_264:
+{
+	string: "Treads of the Bold Slayer"
+	icon: icon_shoe_1
+	rarity: rare
+	item_level: 6
+	required_level: 6
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_mail
+		feet
+		good
+	]
+	stat_weight dexterity: 1
+	stat_weight constitution: 1
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_265:
+{
+	string: "Bracers of the Wyvern"
+	icon: icon_mail_bracers_1
+	rarity: rare
+	item_level: 5
+	required_level: 5
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		armor_mail
+		wrists
+		creature
+		dangerous
+		monster
+	]
+	stat_weight strength: 3
+	stat_weight constitution: 3
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_266:
+{
+	string: "Flauntless Jerkin"
+	icon: icon_chest_1
+	rarity: rare
+	item_level: 9
+	required_level: 9
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		armor_mail
+		chest
+		good
+	]
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_267:
+{
+	string: "Bearkiller Hosen"
+	icon: icon_mail_pants_1
+	rarity: rare
+	item_level: 5
+	required_level: 5
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		legs
+		predator
+	]
+	stat_weight dexterity: 2
+	stat_weight constitution: 3
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_268:
+{
+	string: "Incorruptible Kraken Locket"
+	icon: icon_necklace_2
+	rarity: rare
+	item_level: 5
+	required_level: 5
+	type: none
+	binds: when_equipped
+	equipment_slots:
+	[
+		neck
+	]
+	tags:
+	[
+		dangerous
+		monster
+		neck
+		creature
+		good
+	]
+	stat_weight dexterity: 2
+	stat_weight strength: 5
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_269:
+{
+	string: "Beastly Handwraps"
+	icon: icon_mail_gloves_1
+	rarity: rare
+	item_level: 7
+	required_level: 7
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_cloth
+		hands
+		evil
+	]
+	stat_weight strength: 2
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_270:
+{
+	string: "Shawl of the Python"
+	icon: icon_cape_2
+	rarity: rare
+	item_level: 5
+	required_level: 5
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		snake
+		back
+		dangerous
+		evil
+	]
+	stat_weight strength: 2
+	stat_weight constitution: 1
+	stat_weight spirit: 3
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_271:
+{
+	string: "Bleak Greaves"
+	icon: icon_pants_2
+	rarity: rare
+	item_level: 9
+	required_level: 9
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		armor_plate
+		legs
+	]
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_272:
+{
+	string: "Atrocious Poncho of the Slayer"
+	icon: icon_cape_2
+	rarity: rare
+	item_level: 8
+	required_level: 8
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		armor_cloth
+		back
+		evil
+	]
+	stat_weight dexterity: 1
+	stat_weight strength: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_273:
+{
+	string: "Savvy Cuffs"
+	icon: icon_mail_bracers_1
+	rarity: rare
+	item_level: 5
+	required_level: 5
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		armor_mail
+		wrists
+		good
+	]
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_274:
+{
+	string: "Red Dreamer Gloves"
+	icon: icon_mail_gloves_1
+	rarity: rare
+	item_level: 8
+	required_level: 8
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_cloth
+		hands
+		color
+		mysterious
+	]
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_275:
+{
+	string: "Sabatons of the Viper"
+	icon: icon_shoe_1
+	rarity: rare
+	item_level: 7
+	required_level: 7
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		dangerous
+		armor_plate
+		feet
+		creature
+		snake
+		evil
+	]
+	stat_weight constitution: 4
+	stat_weight spirit: 3
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_276:
+{
+	string: "Audacious Waistband of the Hydra"
+	icon: icon_belt_2
+	rarity: rare
+	item_level: 7
+	required_level: 7
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_mail
+		waist
+		creature
+		good
+		dangerous
+		monster
+	]
+	stat_weight dexterity: 2
+	stat_weight strength: 5
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_277:
+{
+	string: "Depraved Striders"
+	icon: icon_shoe_1
+	rarity: rare
+	item_level: 7
+	required_level: 7
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_plate
+		feet
+		evil
+	]
+	stat_weight strength: 4
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_278:
+{
+	string: "Wrists of the Sphinx"
+	icon: icon_mail_bracers_1
+	rarity: rare
+	item_level: 9
+	required_level: 9
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		wrists
+		dangerous
+		monster
+	]
+	stat_weight strength: 3
+	stat_weight constitution: 7
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_279:
+{
+	string: "Enduring Cuffs"
+	icon: icon_mail_bracers_1
+	rarity: rare
+	item_level: 5
+	required_level: 5
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		armor_cloth
+		wrists
+	]
+	stat_weight constitution: 2
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_280:
+{
+	string: "Nefarious Armguards"
+	icon: icon_mail_bracers_1
+	rarity: rare
+	item_level: 9
+	required_level: 9
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		armor_plate
+		evil
+		wrists
+	]
+	stat_weight constitution: 3
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_281:
+{
+	string: "Orderly Shawl of the Leopard"
+	icon: icon_cape_1
+	rarity: rare
+	item_level: 7
+	required_level: 7
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		creature
+		good
+		armor_cloth
+		back
+		predator
+	]
+	stat_weight dexterity: 4
+	stat_weight strength: 4
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_282:
+{
+	string: "Vile Loop"
+	icon: icon_ring_1
+	rarity: rare
+	item_level: 7
+	required_level: 7
+	type: none
+	binds: when_equipped
+	equipment_slots:
+	[
+		finger_1
+		finger_2
+	]
+	tags:
+	[
+		evil
+		finger
+	]
+	stat_weight constitution: 1
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_283:
+{
+	string: "Pearly Waist of the Serpent"
+	icon: icon_belt_2
+	rarity: rare
+	item_level: 7
+	required_level: 7
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		dangerous
+		armor_plate
+		waist
+		snake
+		color
+		creature
+		good
+		evil
+	]
+	stat_weight wisdom: 8
+	stat_weight constitution: 7
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_284:
+{
+	string: "Loathsome Ring"
+	icon: icon_ring_2
+	rarity: rare
+	item_level: 6
+	required_level: 6
+	type: none
+	binds: when_equipped
+	equipment_slots:
+	[
+		finger_1
+		finger_2
+	]
+	tags:
+	[
+		evil
+		finger
+	]
+	stat_weight constitution: 3
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_285:
+{
+	string: "Wicked Crown"
+	icon: icon_wizard_hat_1
+	rarity: rare
+	item_level: 9
+	required_level: 9
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		armor_plate
+		evil
+		head
+	]
+	stat_weight strength: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_286:
+{
+	string: "Wrathful Scales"
+	icon: icon_pants_2
+	rarity: rare
+	item_level: 7
+	required_level: 7
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		legs
+		armor_mail
+		evil
+	]
+	stat_weight dexterity: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_287:
+{
+	string: "Depraved Tiger Mantle"
+	icon: icon_mail_shirt_1
+	rarity: rare
+	item_level: 7
+	required_level: 7
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		chest
+		evil
+		predator
+	]
+	stat_weight dexterity: 2
+	stat_weight strength: 6
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_288:
+{
+	string: "Baneful Hoop"
+	icon: icon_ring_5
+	rarity: rare
+	item_level: 7
+	required_level: 7
+	type: none
+	binds: when_equipped
+	equipment_slots:
+	[
+		finger_1
+		finger_2
+	]
+	tags:
+	[
+		evil
+		finger
+	]
+	stat_weight strength: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_289:
+{
+	string: "Sharp Band"
+	icon: icon_ring_1
+	rarity: rare
+	item_level: 5
+	required_level: 5
+	type: none
+	binds: when_equipped
+	equipment_slots:
+	[
+		finger_1
+		finger_2
+	]
+	tags:
+	[
+		finger
+		good
+	]
+	stat_weight constitution: 1
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_290:
+{
+	string: "Cuffs of the Deadly Incubus"
+	icon: icon_mail_bracers_1
+	rarity: rare
+	item_level: 6
+	required_level: 6
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		armor_plate
+		evil
+		wrists
+		grandiose
+	]
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	stat_weight spirit: 3
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_291:
+{
+	string: "Obscene Girdle of the Snake"
+	icon: icon_mail_belt_1
+	rarity: rare
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		dangerous
+		armor_plate
+		waist
+		evil
+		creature
+		snake
+	]
+	stat_weight strength: 2
+	stat_weight constitution: 8
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_292:
+{
+	string: "Deathless Bear Pauldrons"
+	icon: icon_shoulders_1
+	rarity: rare
+	item_level: 7
+	required_level: 7
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		shoulders
+	]
+	tags:
+	[
+		armor_mail
+		shoulders
+		creature
+		predator
+	]
+	stat_weight dexterity: 2
+	stat_weight constitution: 1
+	stat_weight spirit: 3
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_293:
+{
+	string: "Tigerkiller Pauldrons"
+	icon: icon_shoulders_1
+	rarity: rare
+	item_level: 8
+	required_level: 8
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		shoulders
+	]
+	tags:
+	[
+		armor_mail
+		shoulders
+		creature
+		predator
+	]
+	stat_weight dexterity: 2
+	stat_weight strength: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_294:
+{
+	string: "Green Sandals"
+	icon: icon_mail_boots_1
+	rarity: rare
+	item_level: 5
+	required_level: 5
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_cloth
+		feet
+		color
+	]
+	stat_weight dexterity: 2
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_295:
+{
+	string: "Clean Gloves"
+	icon: icon_mail_gloves_1
+	rarity: rare
+	item_level: 7
+	required_level: 7
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_mail
+		hands
+		good
+	]
+	stat_weight constitution: 3
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_296:
+{
+	string: "Ebon Grasp of the Incubus"
+	icon: icon_mail_gloves_1
+	rarity: rare
+	item_level: 9
+	required_level: 9
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_plate
+		hands
+		color
+		evil
+		grandiose
+	]
+	stat_weight constitution: 1
+	stat_weight spirit: 6
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_297:
+{
+	string: "Jackalkiller Shawl"
+	icon: icon_cape_2
+	rarity: rare
+	item_level: 6
+	required_level: 6
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		back
+		predator
+	]
+	stat_weight dexterity: 2
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_298:
+{
+	string: "Wrists of the Brilliant Leopard"
+	icon: icon_mail_bracers_1
+	rarity: rare
+	item_level: 9
+	required_level: 9
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		armor_plate
+		wrists
+		creature
+		good
+		predator
+	]
+	stat_weight dexterity: 2
+	stat_weight strength: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_299:
+{
+	string: "Pestilent Bracers"
+	icon: icon_mail_bracers_1
+	rarity: rare
+	item_level: 8
+	required_level: 8
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		armor_mail
+		evil
+		wrists
+	]
+	stat_weight dexterity: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_rare
+	]
+}
+
+item world_drops_item_300:
+{
+	string: "Belt of the Foolish Giant"
+	icon: icon_belt_2
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		dangerous
+		monster
+		armor_plate
+		waist
+		creature
+	]
+	stat_weight strength: 3
+	stat_weight constitution: 5
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_301:
+{
+	string: "Enduring Wyvern Circle"
+	icon: icon_ring_4
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: none
+	binds: when_equipped
+	equipment_slots:
+	[
+		finger_1
+		finger_2
+	]
+	tags:
+	[
+		finger
+		creature
+		dangerous
+		monster
+	]
+	stat_weight strength: 3
+	stat_weight constitution: 4
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_302:
+{
+	string: "Cuffs of the Healthy Incubus"
+	icon: icon_mail_bracers_1
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		armor_cloth
+		evil
+		wrists
+		grandiose
+	]
+	stat_weight constitution: 1
+	stat_weight spirit: 3
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_303:
+{
+	string: "Ugly Helm"
+	icon: icon_wizard_hat_2
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		armor_plate
+		evil
+		head
+	]
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_304:
+{
+	string: "Wicked Leggings of the Drake"
+	icon: icon_pants_2
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		dangerous
+		monster
+		armor_plate
+		legs
+		evil
+		creature
+	]
+	stat_weight strength: 7
+	stat_weight constitution: 3
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_305:
+{
+	string: "Old Bracers"
+	icon: icon_mail_bracers_1
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		armor_mail
+		wrists
+	]
+	stat_weight strength: 1
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_306:
+{
+	string: "Sash of the Deadly Adder"
+	icon: icon_belt_2
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		waist
+		evil
+		snake
+		dangerous
+	]
+	stat_weight strength: 5
+	stat_weight wisdom: 4
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_307:
+{
+	string: "Weird Bracers of the Python"
+	icon: icon_mail_bracers_1
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		evil
+		wrists
+		snake
+		dangerous
+	]
+	stat_weight strength: 2
+	stat_weight constitution: 1
+	stat_weight spirit: 3
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_308:
+{
+	string: "Lethal Shawl"
+	icon: icon_cape_1
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		armor_cloth
+		back
+		evil
+	]
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_309:
+{
+	string: "Giantkiller Wrists"
+	icon: icon_mail_bracers_1
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		dangerous
+		monster
+		armor_plate
+		wrists
+		creature
+	]
+	stat_weight strength: 3
+	stat_weight constitution: 5
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_310:
+{
+	string: "Veil of the Slayer"
+	icon: icon_wizard_hat_1
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		armor_mail
+		head
+	]
+	stat_weight dexterity: 1
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_311:
+{
+	string: "Viperkiller Mantle"
+	icon: icon_shoulders_1
+	rarity: epic
+	item_level: 9
+	required_level: 9
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		shoulders
+	]
+	tags:
+	[
+		snake
+		armor_mail
+		shoulders
+		creature
+		dangerous
+		evil
+	]
+	stat_weight constitution: 4
+	stat_weight spirit: 3
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_312:
+{
+	string: "Belt of the Skinny Kraken"
+	icon: icon_mail_belt_1
+	rarity: epic
+	item_level: 9
+	required_level: 9
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		dangerous
+		monster
+		armor_plate
+		waist
+		creature
+	]
+	stat_weight strength: 3
+	stat_weight wisdom: 3
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_313:
+{
+	string: "Hateful Veil"
+	icon: icon_wizard_hat_2
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		armor_mail
+		evil
+		head
+	]
+	stat_weight strength: 2
+	stat_weight constitution: 3
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_314:
+{
+	string: "Astute Footguards"
+	icon: icon_shoe_1
+	rarity: epic
+	item_level: 9
+	required_level: 9
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_mail
+		feet
+		good
+	]
+	stat_weight constitution: 3
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_315:
+{
+	string: "Grasp of the Hateful Jackal"
+	icon: icon_gloves_1
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_mail
+		hands
+		evil
+		creature
+		predator
+	]
+	stat_weight dexterity: 2
+	stat_weight strength: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_316:
+{
+	string: "Mantle of the Clever Incubus"
+	icon: icon_shoulders_1
+	rarity: epic
+	item_level: 9
+	required_level: 9
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		shoulders
+	]
+	tags:
+	[
+		armor_mail
+		grandiose
+		shoulders
+		evil
+	]
+	stat_weight constitution: 1
+	stat_weight spirit: 3
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_317:
+{
+	string: "Waist of the Murderous Adder"
+	icon: icon_belt_2
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		dangerous
+		armor_plate
+		waist
+		evil
+		creature
+		snake
+	]
+	stat_weight strength: 5
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_318:
+{
+	string: "Skullcap of the Snake"
+	icon: icon_wizard_hat_2
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		snake
+		armor_mail
+		evil
+		head
+		creature
+		dangerous
+	]
+	stat_weight strength: 2
+	stat_weight constitution: 4
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_319:
+{
+	string: "Jackalkiller Sabatons"
+	icon: icon_shoe_1
+	rarity: epic
+	item_level: 9
+	required_level: 9
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_mail
+		feet
+		creature
+		predator
+	]
+	stat_weight dexterity: 2
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_320:
+{
+	string: "Treads of the Viper"
+	icon: icon_mail_boots_1
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		dangerous
+		armor_plate
+		feet
+		creature
+		snake
+		evil
+	]
+	stat_weight constitution: 4
+	stat_weight spirit: 3
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_321:
+{
+	string: "Hideous Hydraslayer Footguards"
+	icon: icon_shoe_1
+	rarity: epic
+	item_level: 9
+	required_level: 9
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		dangerous
+		monster
+		armor_plate
+		feet
+		evil
+		creature
+	]
+	stat_weight strength: 3
+	stat_weight constitution: 5
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_322:
+{
+	string: "Corrupt Handwraps"
+	icon: icon_mail_gloves_1
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_cloth
+		hands
+		evil
+	]
+	stat_weight dexterity: 2
+	stat_weight constitution: 1
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_323:
+{
+	string: "Calamitious Chestguard"
+	icon: icon_mail_shirt_1
+	rarity: epic
+	item_level: 9
+	required_level: 9
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		armor_plate
+		chest
+		evil
+	]
+	stat_weight constitution: 3
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_324:
+{
+	string: "Belt of the Courteous Adversary"
+	icon: icon_belt_2
+	rarity: epic
+	item_level: 9
+	required_level: 9
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_plate
+		waist
+		evil
+		grandiose
+	]
+	stat_weight wisdom: 3
+	stat_weight constitution: 4
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_325:
+{
+	string: "Green Dreamer Girdle"
+	icon: icon_mail_belt_1
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_plate
+		waist
+		color
+		mysterious
+	]
+	stat_weight dexterity: 2
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_326:
+{
+	string: "Repulsive Tunic of the Giant"
+	icon: icon_chest_2
+	rarity: epic
+	item_level: 9
+	required_level: 9
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		chest
+		evil
+		dangerous
+		monster
+	]
+	stat_weight wisdom: 4
+	stat_weight constitution: 5
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_327:
+{
+	string: "Wolfslayer Pauldrons"
+	icon: icon_shoulders_1
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		shoulders
+	]
+	tags:
+	[
+		armor_plate
+		shoulders
+		creature
+		predator
+	]
+	stat_weight dexterity: 2
+	stat_weight strength: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_328:
+{
+	string: "Humble Sabatons"
+	icon: icon_mail_boots_1
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_plate
+		feet
+		good
+	]
+	stat_weight dexterity: 2
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_329:
+{
+	string: "Tigerslayer Visage"
+	icon: icon_wizard_hat_1
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		armor_plate
+		head
+		creature
+		predator
+	]
+	stat_weight dexterity: 2
+	stat_weight strength: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_330:
+{
+	string: "Endless Manticorekiller Waist"
+	icon: icon_belt_1
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_mail
+		waist
+		creature
+		dangerous
+		monster
+	]
+	stat_weight strength: 5
+	stat_weight wisdom: 3
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_331:
+{
+	string: "Scales of the Nightmare"
+	icon: icon_pants_2
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		armor_plate
+		legs
+		evil
+		grandiose
+	]
+	stat_weight wisdom: 3
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_332:
+{
+	string: "White Wrap"
+	icon: icon_shoulders_1
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		shoulders
+	]
+	tags:
+	[
+		good
+		armor_cloth
+		shoulders
+		color
+	]
+	stat_weight constitution: 4
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_333:
+{
+	string: "Pythonkiller Headpiece"
+	icon: icon_wizard_hat_1
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		dangerous
+		armor_plate
+		evil
+		head
+		creature
+		snake
+	]
+	stat_weight strength: 2
+	stat_weight constitution: 1
+	stat_weight spirit: 3
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_334:
+{
+	string: "Warboots of the Tiger"
+	icon: icon_shoe_1
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_plate
+		feet
+		creature
+		predator
+	]
+	stat_weight dexterity: 2
+	stat_weight strength: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_335:
+{
+	string: "Plate Cuirass of the Sincere Wyvern"
+	icon: icon_chest_1
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		dangerous
+		monster
+		armor_plate
+		chest
+		creature
+	]
+	stat_weight strength: 3
+	stat_weight constitution: 3
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_336:
+{
+	string: "Repulsive Watcher Cuffs"
+	icon: icon_mail_bracers_1
+	rarity: epic
+	item_level: 9
+	required_level: 9
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		armor_plate
+		evil
+		wrists
+	]
+	stat_weight strength: 1
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_337:
+{
+	string: "Absurd Belt of the Dreamer"
+	icon: icon_mail_belt_1
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_plate
+		waist
+		mysterious
+	]
+	stat_weight dexterity: 1
+	stat_weight constitution: 1
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_338:
+{
+	string: "Plate Armor of the Dirty Cougar"
+	icon: icon_mail_shirt_1
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		armor_plate
+		chest
+		evil
+		creature
+		predator
+	]
+	stat_weight dexterity: 6
+	stat_weight constitution: 1
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_339:
+{
+	string: "Handguards of the Delirious Asp"
+	icon: icon_gloves_2
+	rarity: epic
+	item_level: 9
+	required_level: 9
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		dangerous
+		armor_plate
+		hands
+		creature
+		snake
+		evil
+	]
+	stat_weight strength: 5
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_340:
+{
+	string: "Plate Cuirass of the Dragon"
+	icon: icon_cloth_shirt_2
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		dangerous
+		monster
+		armor_plate
+		chest
+		creature
+	]
+	stat_weight dexterity: 2
+	stat_weight strength: 3
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_341:
+{
+	string: "Toxic Mantle"
+	icon: icon_shoulders_1
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		shoulders
+	]
+	tags:
+	[
+		armor_plate
+		shoulders
+		evil
+	]
+	stat_weight dexterity: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_342:
+{
+	string: "Strap of the Slayer"
+	icon: icon_belt_2
+	rarity: epic
+	item_level: 9
+	required_level: 9
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_mail
+		waist
+	]
+	stat_weight dexterity: 1
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_343:
+{
+	string: "Endless Pauldrons"
+	icon: icon_shoulders_1
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		shoulders
+	]
+	tags:
+	[
+		armor_mail
+		shoulders
+	]
+	stat_weight dexterity: 1
+	stat_weight wisdom: 1
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_344:
+{
+	string: "Steps of the Wolf"
+	icon: icon_shoe_1
+	rarity: epic
+	item_level: 9
+	required_level: 9
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		feet
+		predator
+	]
+	stat_weight dexterity: 2
+	stat_weight strength: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_345:
+{
+	string: "Nefarious Cape of the Giant"
+	icon: icon_cape_2
+	rarity: epic
+	item_level: 9
+	required_level: 9
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		back
+		evil
+		dangerous
+		monster
+	]
+	stat_weight strength: 3
+	stat_weight constitution: 7
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_346:
+{
+	string: "Undying Bearkiller Girdle"
+	icon: icon_mail_belt_1
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_plate
+		waist
+		creature
+		predator
+	]
+	stat_weight dexterity: 3
+	stat_weight constitution: 3
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_347:
+{
+	string: "Ugly Warboots"
+	icon: icon_shoe_1
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_plate
+		feet
+		evil
+	]
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_348:
+{
+	string: "Greaves of the Iniquitous Basilisk"
+	icon: icon_pants_2
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		dangerous
+		monster
+		armor_plate
+		legs
+		evil
+		creature
+	]
+	stat_weight strength: 3
+	stat_weight constitution: 7
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_349:
+{
+	string: "Vicious Lionslayer Cuffs"
+	icon: icon_mail_bracers_1
+	rarity: epic
+	item_level: 9
+	required_level: 9
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		evil
+		wrists
+		predator
+	]
+	stat_weight dexterity: 2
+	stat_weight strength: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_350:
+{
+	string: "Black Mantle"
+	icon: icon_shoulders_1
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		shoulders
+	]
+	tags:
+	[
+		color
+		armor_mail
+		shoulders
+		evil
+	]
+	stat_weight strength: 3
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_351:
+{
+	string: "Vicious Waist"
+	icon: icon_belt_2
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_plate
+		waist
+		evil
+	]
+	stat_weight strength: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_352:
+{
+	string: "Gloves of the Hideous Tiger"
+	icon: icon_gloves_1
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		hands
+		evil
+		predator
+	]
+	stat_weight dexterity: 2
+	stat_weight constitution: 5
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_353:
+{
+	string: "Weird Ancient Band"
+	icon: icon_ring_3
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: none
+	binds: when_equipped
+	equipment_slots:
+	[
+		finger_1
+		finger_2
+	]
+	tags:
+	[
+		finger
+		mysterious
+	]
+	stat_weight dexterity: 1
+	stat_weight constitution: 1
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_354:
+{
+	string: "Humble Mantle"
+	icon: icon_cape_1
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		good
+		armor_cloth
+		back
+	]
+	stat_weight dexterity: 2
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_355:
+{
+	string: "Injurious Jackalkiller Slippers"
+	icon: icon_shoe_1
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		feet
+		evil
+		predator
+	]
+	stat_weight dexterity: 2
+	stat_weight wisdom: 4
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_356:
+{
+	string: "Deadly Manticoreslayer Pauldrons"
+	icon: icon_shoulders_1
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		shoulders
+	]
+	tags:
+	[
+		dangerous
+		monster
+		armor_plate
+		shoulders
+		evil
+		creature
+	]
+	stat_weight strength: 5
+	stat_weight wisdom: 4
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_357:
+{
+	string: "Red Cloak"
+	icon: icon_cape_2
+	rarity: epic
+	item_level: 9
+	required_level: 9
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		armor_cloth
+		color
+		back
+	]
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_358:
+{
+	string: "Valiant Armguards of the Dragon"
+	icon: icon_mail_bracers_1
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		armor_mail
+		wrists
+		creature
+		good
+		dangerous
+		monster
+	]
+	stat_weight dexterity: 4
+	stat_weight constitution: 5
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_359:
+{
+	string: "Basiliskslayer Mantle"
+	icon: icon_cloth_shirt_3
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		chest
+		dangerous
+		monster
+	]
+	stat_weight strength: 3
+	stat_weight constitution: 7
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_360:
+{
+	string: "Crazy Hoop"
+	icon: icon_ring_5
+	rarity: epic
+	item_level: 9
+	required_level: 9
+	type: none
+	binds: when_equipped
+	equipment_slots:
+	[
+		finger_1
+		finger_2
+	]
+	tags:
+	[
+		finger
+	]
+	stat_weight strength: 1
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_361:
+{
+	string: "Grey Chain"
+	icon: icon_necklace_2
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: none
+	binds: when_equipped
+	equipment_slots:
+	[
+		neck
+	]
+	tags:
+	[
+		neck
+		color
+		evil
+	]
+	stat_weight dexterity: 3
+	stat_weight constitution: 1
+	stat_weight spirit: 3
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_362:
+{
+	string: "Bearkiller Mantle"
+	icon: icon_cloth_shirt_2
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		chest
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		chest
+		predator
+	]
+	stat_weight dexterity: 2
+	stat_weight constitution: 3
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_363:
+{
+	string: "Deadly Gauntlets of the Nightmare"
+	icon: icon_gloves_2
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_mail
+		hands
+		evil
+		grandiose
+	]
+	stat_weight wisdom: 5
+	stat_weight constitution: 3
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_364:
+{
+	string: "Sharp Adversary Striders"
+	icon: icon_mail_boots_1
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		good
+		armor_cloth
+		feet
+		evil
+		grandiose
+	]
+	stat_weight wisdom: 3
+	stat_weight constitution: 4
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_365:
+{
+	string: "Pantherslayer Epaulettes"
+	icon: icon_shoulders_1
+	rarity: epic
+	item_level: 9
+	required_level: 9
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		shoulders
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		shoulders
+		predator
+	]
+	stat_weight dexterity: 4
+	stat_weight strength: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_366:
+{
+	string: "Pure Pendant"
+	icon: icon_necklace_1
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: none
+	binds: when_equipped
+	equipment_slots:
+	[
+		neck
+	]
+	tags:
+	[
+		neck
+		good
+	]
+	stat_weight dexterity: 2
+	stat_weight constitution: 3
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_367:
+{
+	string: "Striders of the Basilisk"
+	icon: icon_mail_boots_1
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_mail
+		feet
+		creature
+		dangerous
+		monster
+	]
+	stat_weight strength: 3
+	stat_weight constitution: 7
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_368:
+{
+	string: "Scales of the Pretty Hydra"
+	icon: icon_mail_pants_1
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		dangerous
+		monster
+		armor_plate
+		legs
+		creature
+	]
+	stat_weight strength: 3
+	stat_weight constitution: 4
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_369:
+{
+	string: "Handguards of the Panther"
+	icon: icon_gloves_1
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_plate
+		hands
+		creature
+		predator
+	]
+	stat_weight dexterity: 4
+	stat_weight strength: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_370:
+{
+	string: "Grey Cape"
+	icon: icon_cape_1
+	rarity: epic
+	item_level: 9
+	required_level: 9
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		armor_cloth
+		color
+		back
+		evil
+	]
+	stat_weight dexterity: 3
+	stat_weight constitution: 1
+	stat_weight spirit: 3
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_371:
+{
+	string: "Adept Headgear"
+	icon: icon_wizard_hat_2
+	rarity: epic
+	item_level: 9
+	required_level: 9
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		armor_mail
+		head
+		good
+	]
+	stat_weight strength: 2
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_372:
+{
+	string: "Forward Belt"
+	icon: icon_mail_belt_1
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		good
+		armor_cloth
+		waist
+	]
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_373:
+{
+	string: "Cruel Steps"
+	icon: icon_shoe_1
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_cloth
+		feet
+		evil
+	]
+	stat_weight strength: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_374:
+{
+	string: "Grey Adderslayer Shoes"
+	icon: icon_shoe_1
+	rarity: epic
+	item_level: 9
+	required_level: 9
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		feet
+		snake
+		color
+		evil
+		dangerous
+	]
+	stat_weight dexterity: 3
+	stat_weight strength: 5
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_375:
+{
+	string: "Gallant Mantle"
+	icon: icon_shoulders_1
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		shoulders
+	]
+	tags:
+	[
+		armor_plate
+		shoulders
+		good
+	]
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_376:
+{
+	string: "Orderly Wrap"
+	icon: icon_cape_1
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		good
+		armor_cloth
+		back
+	]
+	stat_weight dexterity: 2
+	stat_weight strength: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_377:
+{
+	string: "Cuffs of the Atrocious Python"
+	icon: icon_mail_bracers_1
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		snake
+		armor_mail
+		evil
+		wrists
+		creature
+		dangerous
+	]
+	stat_weight strength: 4
+	stat_weight constitution: 1
+	stat_weight spirit: 3
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_378:
+{
+	string: "Atrocious Necklace of the Beholder"
+	icon: icon_necklace_1
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: none
+	binds: when_equipped
+	equipment_slots:
+	[
+		neck
+	]
+	tags:
+	[
+		neck
+		evil
+	]
+	stat_weight strength: 2
+	stat_weight wisdom: 1
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_379:
+{
+	string: "Warboots of the Elder"
+	icon: icon_mail_boots_1
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		armor_mail
+		mysterious
+		feet
+	]
+	stat_weight strength: 1
+	stat_weight constitution: 1
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_380:
+{
+	string: "Leggings of the Manticore"
+	icon: icon_mail_pants_1
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		dangerous
+		monster
+		armor_plate
+		legs
+		creature
+	]
+	stat_weight strength: 5
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_381:
+{
+	string: "Toxic Crest"
+	icon: icon_wizard_hat_2
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		armor_plate
+		evil
+		head
+	]
+	stat_weight dexterity: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_382:
+{
+	string: "Indestructible Grasp"
+	icon: icon_mail_gloves_1
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_plate
+		hands
+	]
+	stat_weight constitution: 2
+	stat_weight spirit: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_383:
+{
+	string: "Deathless Bracers of the Berserker"
+	icon: icon_mail_bracers_1
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		wrists
+	]
+	tags:
+	[
+		armor_plate
+		wrists
+	]
+	stat_weight wisdom: 3
+	stat_weight constitution: 1
+	stat_weight spirit: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_384:
+{
+	string: "Lethal Elder Shankguards"
+	icon: icon_pants_1
+	rarity: epic
+	item_level: 9
+	required_level: 9
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		legs
+		armor_mail
+		evil
+		mysterious
+	]
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_385:
+{
+	string: "Wrathful Mitts"
+	icon: icon_gloves_1
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		hands
+	]
+	tags:
+	[
+		armor_plate
+		hands
+		evil
+	]
+	stat_weight dexterity: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_386:
+{
+	string: "Sabatons of the Fearless Hydra"
+	icon: icon_shoe_1
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		dangerous
+		monster
+		armor_plate
+		feet
+		creature
+	]
+	stat_weight strength: 3
+	stat_weight constitution: 3
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_387:
+{
+	string: "Modest Waist"
+	icon: icon_mail_belt_1
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_plate
+		waist
+		good
+	]
+	stat_weight dexterity: 2
+	stat_weight strength: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_388:
+{
+	string: "Sphinxkiller Mantle"
+	icon: icon_wizard_hat_2
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		head
+		dangerous
+		monster
+	]
+	stat_weight strength: 3
+	stat_weight constitution: 7
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_389:
+{
+	string: "Treads of the Viper"
+	icon: icon_shoe_1
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		feet
+		snake
+		dangerous
+		evil
+	]
+	stat_weight constitution: 4
+	stat_weight spirit: 3
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_390:
+{
+	string: "Hideous Lionkiller Legwraps"
+	icon: icon_pants_2
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		legs
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		legs
+		evil
+		predator
+	]
+	stat_weight dexterity: 2
+	stat_weight constitution: 5
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_391:
+{
+	string: "Poncho of the Slayer"
+	icon: icon_cape_2
+	rarity: epic
+	item_level: 9
+	required_level: 9
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		armor_cloth
+		back
+	]
+	stat_weight dexterity: 1
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_392:
+{
+	string: "Adept Tiara"
+	icon: icon_wizard_hat_2
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		good
+		armor_cloth
+		head
+	]
+	stat_weight strength: 2
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_393:
+{
+	string: "Great Giant Shawl"
+	icon: icon_cape_1
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		back
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		back
+		grandiose
+		dangerous
+		monster
+	]
+	stat_weight wisdom: 6
+	stat_weight constitution: 5
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_394:
+{
+	string: "Footguards of the Python"
+	icon: icon_shoe_1
+	rarity: epic
+	item_level: 8
+	required_level: 8
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		snake
+		armor_mail
+		feet
+		creature
+		dangerous
+		evil
+	]
+	stat_weight strength: 2
+	stat_weight constitution: 1
+	stat_weight spirit: 3
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_395:
+{
+	string: "Flauntless Girdle"
+	icon: icon_belt_1
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		waist
+	]
+	tags:
+	[
+		armor_plate
+		waist
+		good
+	]
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	stat_weight spirit: 2
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_396:
+{
+	string: "Old Viper Visage"
+	icon: icon_wizard_hat_1
+	rarity: epic
+	item_level: 9
+	required_level: 9
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		dangerous
+		armor_plate
+		evil
+		head
+		creature
+		snake
+	]
+	stat_weight strength: 3
+	stat_weight constitution: 4
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_397:
+{
+	string: "Great Crown"
+	icon: icon_wizard_hat_1
+	rarity: epic
+	item_level: 9
+	required_level: 9
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		armor_plate
+		head
+		grandiose
+	]
+	stat_weight wisdom: 4
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_398:
+{
+	string: "Bleak Mantle of the Hydra"
+	icon: icon_wizard_hat_1
+	rarity: epic
+	item_level: 10
+	required_level: 10
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots:
+	[
+		head
+	]
+	tags:
+	[
+		creature
+		armor_cloth
+		head
+		dangerous
+		monster
+	]
+	stat_weight strength: 3
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+
+item world_drops_item_399:
+{
+	string: "Ebon Incubus Footguards"
+	icon: icon_shoe_1
+	rarity: epic
+	item_level: 9
+	required_level: 9
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots:
+	[
+		feet
+	]
+	tags:
+	[
+		color
+		armor_mail
+		feet
+		evil
+		grandiose
+	]
+	stat_weight constitution: 1
+	stat_weight spirit: 6
+	loot_groups:
+	[
+		world_drops_epic
+	]
+}
+

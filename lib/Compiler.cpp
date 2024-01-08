@@ -11,11 +11,14 @@
 #include <tpublic/DirectEffectFactory.h>
 #include <tpublic/MemoryWriter.h>
 #include <tpublic/ObjectiveTypeFactory.h>
+#include <tpublic/PerfTimer.h>
 #include <tpublic/Tokenizer.h>
 
 #include "FileWriter.h"
+#include "GenerationJob.h"
 #include "MapImageOutput.h"
 #include "PostProcessEntities.h"
+#include "PostProcessWordGenerators.h"
 #include "SpriteSheetBuilder.h"
 
 namespace tpublic
@@ -48,9 +51,11 @@ namespace tpublic
 	Compiler::Build(
 		const char*				aPersistentIdTablePath,
 		const char*				aDataOutputPath,
+		const char*				aGeneratedSourceOutputPath,
 		Compression::Level		aCompressionLevel)
 	{
 		SpriteSheetBuilder spriteSheetBuilder(512);
+		std::vector<std::unique_ptr<GenerationJob>> generationJobs;
 
 		m_sourceContext.m_persistentIdTable->Load(aPersistentIdTablePath);
 
@@ -86,13 +91,17 @@ namespace tpublic
 			{
 				m_manifest->m_abilityMetrics.FromSource(aNode);
 			}
-			else if(aNode->GetObject()->m_name == "sprites")
+			else if(aNode->m_name == "sprites")
 			{
 				spriteSheetBuilder.AddSprites(aNode);
 			}
-			else if (aNode->GetObject()->m_name == "word_list")
+			else if (aNode->m_name == "word_list")
 			{
 				WordList::Data::FromSource(aNode, &m_manifest->m_wordList);
+			}
+			else if(aNode->m_tag == "generation_job")
+			{
+				generationJobs.push_back(std::make_unique<GenerationJob>(aNode));
 			}
 			else
 			{
@@ -117,24 +126,6 @@ namespace tpublic
 		// Prepare word list manifest
 		{
 			m_manifest->m_wordList.Prepare(m_manifest);
-
-			WordList::QueryCache wordListQueryCache(&m_manifest->m_wordList);
-
-			//WordList::QueryParams queryParams;
-			//queryParams.m_mustHaveTags.push_back(m_manifest->GetExistingIdByName<Data::Tag>("adjective"));
-			//queryParams.m_mustHaveTags.push_back(m_manifest->GetExistingIdByName<Data::Tag>("evil"));
-			//queryParams.Prepare();
-
-			//std::mt19937 random;
-
-			//for(uint32_t i = 0; i < 20; i++)
-			//{
-			//	const WordList::QueryCache::Query* query = wordListQueryCache.PerformQuery(queryParams);
-			//	const WordList::Word* word = query->GetRandomWord(random);
-			//	printf("%s\n", word->m_word.c_str());
-			//}
-
-			//printf("..\n");
 		}
 
 		// Build map data
@@ -178,8 +169,13 @@ namespace tpublic
 			});			
 		}
 
-		// Post process entities
+		// Post process stuff
 		PostProcessEntities::Run(m_manifest);
+		PostProcessWordGenerators::Run(m_manifest);
+
+		// Run generation jobs
+		for(std::unique_ptr<GenerationJob>& generationJob : generationJobs)
+			generationJob->Run(m_manifest, aGeneratedSourceOutputPath);
 
 		// Export manifest 
 		{
@@ -210,6 +206,8 @@ namespace tpublic
 		std::filesystem::directory_iterator it(aPath, errorCode);
 		TP_CHECK(!errorCode, "Failed to search directory: %s (%s)", aPath, errorCode.message().c_str());
 
+		PerfTimer timer;
+
 		for (const std::filesystem::directory_entry& entry : it)
 		{
 			if (entry.is_regular_file() && entry.path().extension().string() == ".txt")
@@ -225,6 +223,9 @@ namespace tpublic
 				_ParseDirectory(aRootPath, entry.path().string().c_str());
 			}
 		}
+
+		uint64_t elapsed = timer.GetElapsedMilliseconds();		
+		printf("'%s' parsed in %zu ms.\n", aPath, elapsed);
 	}
 
 }

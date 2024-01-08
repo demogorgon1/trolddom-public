@@ -2,6 +2,7 @@
 
 #include "../DataBase.h"
 #include "../EquipmentSlot.h"
+#include "../ItemBinding.h"
 #include "../ItemType.h"
 #include "../Rarity.h"
 #include "../Stat.h"
@@ -96,11 +97,11 @@ namespace tpublic
 						{
 							aChild->ForEachChild([&](
 								const SourceNode* aEquipmentSlot)
-								{
-									EquipmentSlot::Id id = EquipmentSlot::StringToId(aEquipmentSlot->GetIdentifier());
-									TP_VERIFY(id != EquipmentSlot::INVALID_ID, aEquipmentSlot->m_debugInfo, "'%s' is not a valid equipment slot.", aEquipmentSlot->GetIdentifier());
-									m_equipmentSlots.push_back(id);
-								});
+							{
+								EquipmentSlot::Id id = EquipmentSlot::StringToId(aEquipmentSlot->GetIdentifier());
+								TP_VERIFY(id != EquipmentSlot::INVALID_ID, aEquipmentSlot->m_debugInfo, "'%s' is not a valid equipment slot.", aEquipmentSlot->GetIdentifier());
+								m_equipmentSlots.push_back(id);
+							});
 						}
 						else if (aChild->m_name == "loot_groups")
 						{
@@ -147,6 +148,11 @@ namespace tpublic
 						{
 							m_itemType = ItemType::StringToId(aChild->GetIdentifier());
 							TP_VERIFY(m_itemType != ItemType::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid item type.", aChild->GetIdentifier());
+						}
+						else if (aChild->m_name == "binds")
+						{
+							m_itemBinding = ItemBinding::StringToId(aChild->GetIdentifier());
+							TP_VERIFY(m_itemBinding != ItemBinding::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid item binding.", aChild->GetIdentifier());
 						}
 						else if (aChild->m_name == "weapon_cooldown")
 						{
@@ -210,6 +216,7 @@ namespace tpublic
 				aStream->WriteString(m_string);
 				aStream->WriteString(m_flavor);
 				aStream->WriteInt(m_budgetBias);
+				aStream->WritePOD(m_itemBinding);
 			}
 
 			bool
@@ -254,6 +261,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadInt(m_budgetBias))
 					return false;
+				if (!aStream->ReadPOD(m_itemBinding))
+					return false;
 				return true;
 			}
 
@@ -276,6 +285,7 @@ namespace tpublic
 			std::string					m_string;
 			std::string					m_flavor;
 			int32_t						m_budgetBias = 0;
+			ItemBinding::Id				m_itemBinding = ItemBinding::ID_NEVER;
 		};
 
 	}

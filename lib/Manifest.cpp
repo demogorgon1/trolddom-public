@@ -29,8 +29,10 @@
 #include <tpublic/Data/Quest.h>
 #include <tpublic/Data/Sprite.h>
 #include <tpublic/Data/Tag.h>
+#include <tpublic/Data/TagContext.h>
 #include <tpublic/Data/Talent.h>
 #include <tpublic/Data/TalentTree.h>
+#include <tpublic/Data/WordGenerator.h>
 #include <tpublic/Data/Zone.h>
 
 #include <tpublic/Manifest.h>
@@ -61,7 +63,7 @@ namespace tpublic
 		RegisterDataContainer<Data::MapPortal>();
 		RegisterDataContainer<Data::MapSegment>();
 		RegisterDataContainer<Data::MapSegmentConnector>();
-		RegisterDataContainer<Data::MapTrigger>();
+		RegisterDataContainer<Data::MapTrigger>();		
 		RegisterDataContainer<Data::NPCBehaviorState>();
 		RegisterDataContainer<Data::Objective>();
 		RegisterDataContainer<Data::ParticleSystem>();
@@ -69,8 +71,10 @@ namespace tpublic
 		RegisterDataContainer<Data::Quest>();
 		RegisterDataContainer<Data::Sprite>();
 		RegisterDataContainer<Data::Tag>();
+		RegisterDataContainer<Data::TagContext>();
 		RegisterDataContainer<Data::Talent>();
 		RegisterDataContainer<Data::TalentTree>();
+		RegisterDataContainer<Data::WordGenerator>();
 		RegisterDataContainer<Data::Zone>();
 	}
 

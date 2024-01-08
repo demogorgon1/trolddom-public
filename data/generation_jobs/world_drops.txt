@@ -1,0 +1,118 @@
+generation_job world_drops:
+{
+	random_seed: 419578923
+	
+	item_classes:
+	[
+		{ slots: [ head ] types: [ armor_cloth armor_mail ] min_level: 5 }
+		{ slots: [ chest ] types: [ armor_cloth armor_mail ] }	
+		{ slots: [ legs ] types: [ armor_cloth armor_mail ] }	
+		{ slots: [ shoulders ] types: [ armor_cloth armor_mail ] min_level: 6 }	
+		{ slots: [ wrists ] types: [ armor_cloth armor_mail ] }	
+		{ slots: [ waist ] types: [ armor_cloth armor_mail ] }	
+		{ slots: [ hands ] types: [ armor_cloth armor_mail ] }	
+		{ slots: [ feet ] types: [ armor_cloth armor_mail ] }			
+		{ slots: [ head ] types: [ armor_plate ] min_level: 9 }
+		{ slots: [ chest ] types: [ armor_plate ] min_level: 8 }
+		{ slots: [ legs ] types: [ armor_plate ] min_level: 8 }	
+		{ slots: [ shoulders ] types: [ armor_plate ] min_level: 10 }	
+		{ slots: [ wrists ] types: [ armor_plate ] min_level: 6 }	
+		{ slots: [ waist ] types: [ armor_plate ] min_level: 7 }	
+		{ slots: [ hands ] types: [ armor_plate ] min_level: 7 }	
+		{ slots: [ feet ] types: [ armor_plate ] min_level: 7 }	
+		{ slots: [ back ] types: [ armor_cloth ] }	
+		{ slots: [ finger_1 finger_2 ] min_level: 4 }	
+		{ slots: [ neck ] min_level: 4 }			
+	]
+	
+	# Common (junk) items
+	{
+		designations:
+		[				
+			{ weight: 20 prefix: [ adjective " " ] }
+		]
+		
+		level_range: [ 1 10 ]
+		
+		items:
+		{
+			rarity: common
+			binds: never
+			max_different_stats: 0
+			loot_groups: [ world_drops_junk ]
+			count: 100			
+		}		
+	}
+
+	# Uncommon, rare, and epic items
+	{
+		designations:
+		[				
+			{ weight: 20 prefix: [ adjective " " ] }
+			{ weight: 10 suffix: [ " of the " noun ] }
+		]
+
+		{
+			level_range: [ 3 10 ]
+			
+			items:
+			{
+				rarity: uncommon
+				binds: when_equipped
+				max_different_stats: 3
+				loot_groups: [ world_drops_uncommon ]
+				count: 100	
+			}
+		}
+
+		designations:
+		[				
+			{ weight: 5 prefix: [ adjective " " ] suffix: [ " of the " noun ] }
+			{ weight: 5 prefix: [ adjective " " noun " " ] }
+			{ weight: 5 suffix: [ " of the " adjective " " noun ] }
+			{ weight: 2 suffix: [ " of the " character_adjective " " noun ] }
+			{ weight: 2 prefix: [ predator "slayer " ] }
+			{ weight: 2 prefix: [ creature "slayer " ] }
+			{ weight: 2 prefix: [ predator "killer " ] }
+			{ weight: 2 prefix: [ creature "killer " ] }
+		]
+
+		{
+			level_range: [ 5 10 ]
+		
+			items:
+			{
+				rarity: rare
+				binds: when_equipped				
+				max_different_stats: 2
+				stat_weights: { constitution: 1 }
+				loot_groups: [ world_drops_rare ]		
+				count: 100				
+			}
+		}
+
+		designations:
+		[				
+			{ weight: 1 prefix: [ adjective " " predator "slayer " ] }
+			{ weight: 1 prefix: [ adjective " " creature "slayer " ] }
+			{ weight: 1 prefix: [ adjective " " predator "killer " ] }
+			{ weight: 1 prefix: [ adjective " " creature "killer " ] }
+		]
+
+		{
+			level_range: [ 8 10 ]
+
+			items:
+			{
+				rarity: epic
+				binds: when_equipped				
+				max_different_stats: 2
+				stat_weights: { constitution: 1 }
+				loot_groups: [ world_drops_epic ]		
+				count: 100				
+			}
+		}
+	
+	}	
+	
+}

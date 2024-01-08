@@ -8,6 +8,7 @@
 #include "Helpers.h"
 #include "LootRule.h"
 #include "Manifest.h"
+#include "PerfTimer.h"
 #include "Persistence.h"
 #include "RangeBasedSet.h"
 #include "Rarity.h"

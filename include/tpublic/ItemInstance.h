@@ -19,6 +19,7 @@ namespace tpublic
 		{
 			m_itemId = 0;
 			m_quantity = 1;
+			m_soulbound = false;
 		}
 
 		void
@@ -29,6 +30,7 @@ namespace tpublic
 			if(IsSet())
 			{
 				aWriter->WriteUInt(m_quantity);
+				aWriter->WriteBool(m_soulbound);
 			}
 		}
 
@@ -42,6 +44,8 @@ namespace tpublic
 			{
 				if (!aReader->ReadUInt(m_quantity))
 					return false;
+				if(!aReader->ReadBool(m_soulbound))
+					return false;
 			}
 			return true;
 		}
@@ -50,7 +54,7 @@ namespace tpublic
 		operator ==(
 			const ItemInstance&	aOther) const
 		{
-			return m_itemId == aOther.m_itemId && m_quantity == aOther.m_quantity;
+			return m_itemId == aOther.m_itemId && m_quantity == aOther.m_quantity && m_soulbound == aOther.m_soulbound;
 		}
 
 		bool
@@ -66,12 +70,14 @@ namespace tpublic
 		{
 			m_itemId = aOther.m_itemId;
 			m_quantity = aOther.m_quantity;
+			m_soulbound = aOther.m_soulbound;
 			return *this;
 		}
 
 		// Public data
 		uint32_t		m_itemId = 0;
 		uint32_t		m_quantity = 1;
+		bool			m_soulbound = false;
 	};
 
 }

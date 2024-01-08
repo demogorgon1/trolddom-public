@@ -1,0 +1,21 @@
+word_generator human_placename:
+{
+	source: { tags: [ elven_placename ] }
+	syllables: [ 2 4 ]
+}
+
+word_generator human_townname:
+{
+	source: { tags: [ human_townname ] }
+	syllables: [ 1 3 ]
+	max_consonant_sequence: 3
+	exclude_endings: [ "wr" "tr" "pr" "sr" "dr" "fr" "gr" "jr" "kr" "lr" "zr" "xr" "cr" "vr" "br" "nr" "mr" "bld" "tl" "ih" ]
+}
+
+word_generator human_townname_short:
+{
+	source: { tags: [ human_townname ] }
+	syllables: [ 1 2 ]
+	max_consonant_sequence: 3
+	exclude_endings: [ "wr" "tr" "pr" "sr" "dr" "fr" "gr" "jr" "kr" "lr" "zr" "xr" "cr" "vr" "br" "nr" "mr" "bld" "tl" "ih" ]
+}

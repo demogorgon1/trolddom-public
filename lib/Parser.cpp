@@ -198,31 +198,34 @@ namespace tpublic
 					aTokenizer.ConsumeToken(">");
 				}
 
-				const std::string& identifier = aTokenizer.ConsumeAnyIdentifier();
-
-				if (aTokenizer.IsIdentifier())
+				if(!aTokenizer.IsToken("{"))
 				{
-					node->m_name = aTokenizer.ConsumeAnyIdentifier();
-					node->m_tag = identifier;
+					const std::string& identifier = aTokenizer.ConsumeAnyIdentifier();
+
+					if (aTokenizer.IsIdentifier())
+					{
+						node->m_name = aTokenizer.ConsumeAnyIdentifier();
+						node->m_tag = identifier;
+					}
+					else 
+					{
+						node->m_name = identifier;
+					}
+
+					if(aTokenizer.IsToken("<"))
+					{
+						aTokenizer.Proceed();
+
+						std::unique_ptr<SourceNode> annotation = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
+						_ParseValue(aTokenizer, annotation.get());
+
+						node->m_annotation = std::move(annotation);
+
+						aTokenizer.ConsumeToken(">");
+					}
+
+					aTokenizer.ConsumeToken(":");
 				}
-				else 
-				{
-					node->m_name = identifier;
-				}
-
-				if(aTokenizer.IsToken("<"))
-				{
-					aTokenizer.Proceed();
-
-					std::unique_ptr<SourceNode> annotation = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
-					_ParseValue(aTokenizer, annotation.get());
-
-					node->m_annotation = std::move(annotation);
-
-					aTokenizer.ConsumeToken(">");
-				}
-
-				aTokenizer.ConsumeToken(":");
 
 				_ParseValue(aTokenizer, node.get());
 

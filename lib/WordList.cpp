@@ -52,7 +52,7 @@ namespace tpublic::WordList
 			else if(aChild->m_name == "tags")
 			{
 				aChild->GetIdArray(DataType::ID_TAG, tagIds);
-			}
+			}						
 			else if(aChild->m_name == "capitalize")
 			{
 				capitalize = aChild->GetBool();
@@ -149,6 +149,8 @@ namespace tpublic::WordList
 					aWriter->WriteUInt(index + 1); // 1-based index because 0 marks end of list
 				}
 			}
+
+			aWriter->WriteUInt(0); // Marks end
 		}
 
 		aWriter->WriteUInt(outputWordArray.size());
@@ -234,9 +236,10 @@ namespace tpublic::WordList
 
 			word->m_word = aWord;
 			word->m_flags = aFlags;
+			word->m_allTags = aTags;
 		}
 
-		// Add to tag index 
+		// Add to tag index
 		for(uint32_t tagId : aTags)
 		{
 			Tag* tag;
@@ -337,6 +340,33 @@ namespace tpublic::WordList
 				{
 					Word* word = GetWordByIndex(wordIndex);
 					word->m_explicitTags.push_back(tag->m_id);
+				}
+			}
+
+			if(tagData->m_randomAssociatedStatWeights)
+			{
+				for (uint32_t wordIndex : tag->m_words)
+				{
+					Word* word = GetWordByIndex(wordIndex);
+					uint32_t wordHash = Hash::String(word->m_word.c_str());
+					
+					if(!word->m_associatedStatWeights)
+						word->m_associatedStatWeights = std::make_unique<Stat::Collection>();
+
+					Helpers::GetRandomStatWeights(wordHash, *word->m_associatedStatWeights);
+				}
+			}
+
+			if(tagData->m_associatedStatWeights)
+			{
+				for (uint32_t wordIndex : tag->m_words)
+				{
+					Word* word = GetWordByIndex(wordIndex);
+
+					if (!word->m_associatedStatWeights)
+						word->m_associatedStatWeights = std::make_unique<Stat::Collection>();
+
+					word->m_associatedStatWeights->Add(*tagData->m_associatedStatWeights);
 				}
 			}
 		}
@@ -466,13 +496,10 @@ namespace tpublic::WordList
 					}
 					else
 					{
-						for(std::unordered_map<uint32_t, uint32_t>::iterator i = result.begin(); i != result.end();)
+						for(std::unordered_map<uint32_t, uint32_t>::iterator i = result.begin(); i != result.end(); i++)
 						{
 							if(tag->m_words.contains(i->first))
-							{
 								i->second += tagScore;
-								i++;
-							}
 						}
 					}
 	
@@ -533,8 +560,7 @@ namespace tpublic::WordList
 				if(j == query->m_resultBucketTable.end())
 				{
 					resultBucket = new ResultBucket(score);
-					query->m_resultBucketTable[score] = std::unique_ptr<ResultBucket>(resultBucket);
-					query->m_resultBuckets.AddPossibility(score, resultBucket);
+					query->m_resultBucketTable[score] = std::unique_ptr<ResultBucket>(resultBucket);					
 				}
 				else
 				{
@@ -542,6 +568,16 @@ namespace tpublic::WordList
 				}
 
 				resultBucket->m_words.push_back(word);
+			}
+
+			for(Query::ResultBucketTable::const_iterator i = query->m_resultBucketTable.cbegin(); i != query->m_resultBucketTable.cend(); i++)
+			{
+				uint32_t score = i->first;
+				const ResultBucket* resultBucket = i->second.get();
+
+				uint32_t weight = score * (uint32_t)resultBucket->m_words.size();
+
+				query->m_resultBuckets.AddPossibility(weight, resultBucket);
 			}
 		}
 

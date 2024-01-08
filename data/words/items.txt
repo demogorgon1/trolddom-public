@@ -1,0 +1,40 @@
+word_list: { tags: [ weapon_1h_sword ] strings: [ "Sword" "Scimitar" "Falchion" "Blade" "Gladius" "Rapier" "Cutter" "Cutlass" "Messer" "Longsword" "Short Sword" "Saber" ] }
+word_list: { tags: [ weapon_1h_mace ] strings: [ "Mace" "Flail" "Club" "Knocker" "Breaker" "Crusher" "Mallet" "Hammer" "Maul" "Warhammer" "Bat" ] }
+word_list: { tags: [ weapon_1h_axe ] strings: [ "Axe" "Cleaver" "Hatchet" "Chopper" ] }
+word_list: { tags: [ weapon_1h_knife ] strings: [ "Knife" "Dagger" "Cutter" "Slicer" "Blade" "Machete" "Scalpel" "Skewer" "Shank" "Shiv" "Switchblade" "Tickler" "Stiletto" "Skiver" ] }
+
+word_list: { tags: [ weapon_2h_sword ] strings: [ "Sword" "Scimitar" "Falchion" "Blade" "Longsword" "Broadsword" "Claymore" "Flamberge" ] }
+word_list: { tags: [ weapon_2h_mace ] strings: [ "Mace" "Club" "Knocker" "Breaker" "Crusher" "Mallet" "Hammer" "Maul" "Warhammer" ] }
+word_list: { tags: [ weapon_2h_axe ] strings: [ "Axe" "Cleaver" "Chopper" "Battle Axe" "Greataxe" ] }
+word_list: { tags: [ weapon_2h_staff ] strings: [ "Staff" "Stick" "Club" "Rod" "Stave" "Cane" ] }
+
+word_list: { tags: [ armor_cloth head ] strings: [ "Hood" "Veil" "Turban" "Cap" "Cowl" "Headwrap" "Wrap" "Headscarf" "Coif" "Mantle" "Bandana" "Tiara" "Circlet" ] }
+word_list: { tags: [ armor_cloth legs ] strings: [ "Leggings" "Trousers" "Breeches" "Pantaloons" "Pants" "Skirt" "Tights" "Hosen" "Bloomers" "Legwraps" "Looms" "Gaiters" "Hose" "Silks" ] }
+word_list: { tags: [ armor_cloth chest ] strings: [ "Robe" "Vestment" "Tunic" "Garb" "Raiment" "Mantle" "Attire" "Blouse" "Vest" "Garment" "Shroud" ] }
+word_list: { tags: [ armor_cloth feet ] strings: [ "Steps" "Shoes" "Footwraps" "Sandals" "Boots" "Slippers" "Treads" "Striders" "Anklets" ] }
+word_list: { tags: [ armor_cloth shoulders ] strings: [ "Mantle" "Epaulettes" "Shawl" "Drapes" "Wrap" "Mantlet" "Pauldrons" "Scarf" ] }
+word_list: { tags: [ armor_cloth wrists ] strings: [ "Bracers" "Wrists" "Cuffs" ] }
+word_list: { tags: [ armor_cloth waist ] strings: [ "Waist" "Belt" "Girdle" "Sash" "Strap" "Waistband" ] }
+word_list: { tags: [ armor_cloth hands ] strings: [ "Gloves" "Mittens" "Handwraps" ] }
+word_list: { tags: [ armor_cloth back ] strings: [ "Cape" "Cloak" "Mantle" "Poncho" "Shawl" "Tabard" "Wrap" ] }
+
+word_list: { tags: [ armor_mail head ] strings: [ "Helm" "Coif" "Hood" "Headguard" "Veil" "Cap" "Headpiece" "Skullcap" "Crown" "Headgear" "Crest" "Visage" ] }
+word_list: { tags: [ armor_mail legs ] strings: [ "Leggings" "Greaves" "Shankguards" "Chausses" "Shinplates" "Scales" ] }
+word_list: { tags: [ armor_mail chest ] strings: [ "Hauberk" "Cuirass" "Chestguard" "Tunic" "Harness" "Armor" "Jerkin" "Mail" "Scalemail" "Ringmail" ] }
+word_list: { tags: [ armor_mail feet ] strings: [ "Sabatons" "Boots" "Footguards" "Warboots" "Treads" "Striders" ] }
+word_list: { tags: [ armor_mail shoulders ] strings: [ "Mantle" "Pauldrons" ] }
+word_list: { tags: [ armor_mail wrists ] strings: [ "Bracers" "Wrists" "Cuffs" "Armguards" "Guards" ] }
+word_list: { tags: [ armor_mail waist ] strings: [ "Waist" "Belt" "Girdle" "Sash" "Strap" "Waistband" ] }
+word_list: { tags: [ armor_mail hands ] strings: [ "Gloves" "Gauntlets" "Handguards" "Grips" "Mitts" "Grasp" ] }
+
+word_list: { tags: [ armor_plate head ] strings: [ "Helm" "Headguard" "Cap" "Headpiece" "Crown" "Headgear" "Crest" "Visage" ] }
+word_list: { tags: [ armor_plate legs ] strings: [ "Leggings" "Greaves" "Scales" ] }
+word_list: { tags: [ armor_plate chest ] strings: [ "Plate Cuirass" "Breastplate" "Chestguard" "Chestplate" "Battleplate" "Armor" "Hauberk" "Warplate" "Plate Armor" ] }
+word_list: { tags: [ armor_plate feet ] strings: [ "Sabatons" "Boots" "Footguards" "Warboots" "Treads" "Striders" ] }
+word_list: { tags: [ armor_plate shoulders ] strings: [ "Mantle" "Pauldrons" ] }
+word_list: { tags: [ armor_plate wrists ] strings: [ "Bracers" "Wrists" "Cuffs" "Armguards" "Guards" ] }
+word_list: { tags: [ armor_plate waist ] strings: [ "Waist" "Belt" "Girdle" ] }
+word_list: { tags: [ armor_plate hands ] strings: [ "Gloves" "Gauntlets" "Handguards" "Grips" "Mitts" "Grasp" ] }
+
+word_list: { tags: [ neck ] strings: [ "Chain" "Choker" "Beads" "Pendant" "Locket" "Necklace" ] }
+word_list: { tags: [ finger ] strings: [ "Ring" "Band" "Circle" "Loop" "Hoop" "Eye" ] }

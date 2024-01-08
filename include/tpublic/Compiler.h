@@ -20,13 +20,14 @@ namespace tpublic
 		void	Build(
 					const char*			aPersistentIdTablePath,
 					const char*			aDataOutputPath,
+					const char*			aGeneratedSourceOutputPath,
 					Compression::Level	aCompressionLevel);
 
 	private:
 
 		Manifest*							m_manifest;
 		Parser								m_parser;
-		SourceContext						m_sourceContext;
+		SourceContext						m_sourceContext;		
 
 		void	_ParseDirectory(
 					const char*			aRootPath,

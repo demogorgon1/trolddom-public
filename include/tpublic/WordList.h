@@ -6,6 +6,7 @@
 #include "IReader.h"
 #include "IWriter.h"
 #include "SourceNode.h"
+#include "Stat.h"
 #include "WeightedRandom.h"
 
 namespace tpublic
@@ -30,6 +31,7 @@ namespace tpublic::WordList
 			aWriter->WriteString(m_word);
 			aWriter->WritePOD(m_flags);
 			aWriter->WriteUInts(m_explicitTags);
+			aWriter->WriteOptionalObjectPointer(m_associatedStatWeights);
 		}
 			
 		bool
@@ -42,6 +44,8 @@ namespace tpublic::WordList
 				return false;
 			if(!aReader->ReadUInts(m_explicitTags))
 				return false;
+			if(!aReader->ReadOptionalObjectPointer(m_associatedStatWeights))
+				return false;
 			return true;
 		}
 
@@ -49,6 +53,8 @@ namespace tpublic::WordList
 		std::string								m_word;
 		uint8_t									m_flags = 0;
 		std::vector<uint32_t>					m_explicitTags;
+		std::vector<uint32_t>					m_allTags;
+		std::unique_ptr<Stat::Collection>		m_associatedStatWeights;
 	};
 
 	struct DataChunk
