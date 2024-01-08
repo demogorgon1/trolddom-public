@@ -18,6 +18,11 @@ namespace tpublic
 			ID_CONSTITUTION,
 			ID_SPIRIT,
 			ID_ARMOR,
+			ID_PHYSICAL_CRITICAL_STRIKE_CHANCE,
+			ID_SPELL_CRITICICAL_STRIKE_CHANCE,
+			ID_DODGE_CHANCE,
+			ID_BLOCK_CHANCE,
+			ID_PARRY_CHANCE,
 
 			NUM_IDS
 		};
@@ -27,19 +32,27 @@ namespace tpublic
 			const char*		m_name;
 			const char*		m_shortName;
 			const char*		m_longName;
+			const char*		m_description;
+			uint32_t		m_budgetCost;
+			bool			m_percentage;
 		};
 
 		// IMPORTANT: Must match Id enum
 		static constexpr const Info INFO[] =
 		{			
-			{ NULL, NULL, NULL },
+			{ NULL, NULL, NULL, 0, false },
 
-			{ "dexterity",				"DEX",		"Dexterity" },
-			{ "strength",				"STR",		"Strength" },
-			{ "wisdom",					"WIS",		"Wisdom" },
-			{ "constitution",			"CON",		"Constitution" },
-			{ "spirit",					"SPI",		"Spirit" },
-			{ "armor",					"ARM",		"Armor" },
+			{ "dexterity",				"DEX",			"Dexterity",								NULL,																	1,	false },
+			{ "strength",				"STR",			"Strength",									NULL,																	1,	false },
+			{ "wisdom",					"WIS",			"Wisdom",									NULL,																	1,	false },
+			{ "constitution",			"CON",			"Constitution",								NULL,																	1,	false },
+			{ "spirit",					"SPI",			"Spirit",									NULL,																	1,	false },
+			{ "armor",					"ARM",			"Armor",									NULL,																	1,	false },
+			{ "phys_crit_chance",		"CRIT",			"Critical Strike Chance (Physical)",		"Improves your chance to get a critical strike by %u%%.",				10,	true },
+			{ "spell_crit_chance",		"SPELLCRIT",	"Critical Strike Chance (Spells)",			"Improves your chance to get a critical strike with spells by %u%%.",	10,	true },
+			{ "dodge_chance",			"DODGE",		"Dodge Chance",								"Improves your chance to dodge an attack by %u%%.",						10,	true },
+			{ "block_chance",			"BLOCK",		"Block Chance",								"Improves your chance to block an attack by %u%%.",						10,	true },
+			{ "parry_chance",			"PARRY",		"Parry Chance",								"Improves your chance to parry an attack by %u%%.",						10,	true }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

@@ -34,14 +34,18 @@ namespace tpublic
 			Stat::Collection statWeights;
 			uint32_t totalStatWeight = 0;
 
-			m_statBudget = (int32_t)m_itemData->m_itemLevel - 1;
+			m_statBudget = (int32_t)m_itemData->m_itemLevel - 1;			
+			m_statBudget = (int32_t)(rarityMultipliers.m_statBudget * (float)m_statBudget);
 
 			_Generate(aManifest, statWeights, totalStatWeight);
 
 			if(totalStatWeight > 0 && m_statBudget > 0)
 			{
 				for(uint32_t i = 1; i < (uint32_t)Stat::NUM_IDS; i++)
-					m_stats.m_stats[i] += (statWeights.m_stats[i] * (uint32_t)m_statBudget) / totalStatWeight;
+				{
+					const Stat::Info* statInfo = Stat::GetInfo((Stat::Id)i);					
+					m_stats.m_stats[i] += (statWeights.m_stats[i] * (uint32_t)m_statBudget) / (totalStatWeight * statInfo->m_budgetCost);
+				}
 			}
 		}
 

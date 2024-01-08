@@ -27,7 +27,7 @@ namespace tpublic
 					else if (aChild->m_name == "cost")
 						m_cost = aChild->GetFloat();
 					else if (aChild->m_name == "stat_budget")
-						m_cost = aChild->GetFloat();
+						m_statBudget = aChild->GetFloat();
 					else if (aChild->m_name == "weapon_damage")
 						m_weaponDamage = aChild->GetFloat();
 					else

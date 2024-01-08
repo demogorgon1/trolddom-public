@@ -64,6 +64,15 @@ generation_job world_drops:
 				count: 100	
 			}
 		}
+		
+		item_specials:
+		[
+			{ raw_stat phys_crit_chance: 1 }
+			{ raw_stat spell_crit_chance: 1 }
+			{ raw_stat dodge_chance: 1 }
+			{ raw_stat block_chance: 1 }
+			{ raw_stat parry_chance: 1 }
+		]
 
 		designations:
 		[				
@@ -85,6 +94,7 @@ generation_job world_drops:
 				rarity: rare
 				binds: when_equipped				
 				max_different_stats: 2
+				special_propabilities: [ 16 ]
 				stat_weights: { constitution: 1 }
 				loot_groups: [ world_drops_rare ]		
 				count: 100				
@@ -107,6 +117,7 @@ generation_job world_drops:
 				rarity: epic
 				binds: when_equipped				
 				max_different_stats: 2
+				special_propabilities: [ 40 5 ]
 				stat_weights: { constitution: 1 }
 				loot_groups: [ world_drops_epic ]		
 				count: 100				

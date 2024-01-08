@@ -59,6 +59,7 @@ namespace tpublic
 				TYPE_RANDOM_NUMBER_GENERATOR,
 				TYPE_RANDOM_TAGS,
 				TYPE_ITEM_CLASS,
+				TYPE_ITEM_SPECIAL,
 				TYPE_DESIGNATION,
 				TYPE_LEVEL_RANGE
 			};
@@ -76,6 +77,12 @@ namespace tpublic
 				std::vector<ItemType::Id>				m_types;
 				uint32_t								m_minLevel = 0;
 				uint32_t								m_maxLevel = 0;
+				uint32_t								m_weight = 1;
+			};
+
+			struct ItemSpecial
+			{
+				Stat::Collection						m_rawStats;
 				uint32_t								m_weight = 1;
 			};
 
@@ -109,6 +116,7 @@ namespace tpublic
 			Type										m_type;
 			RandomTags									m_randomTags;
 			ItemClass									m_itemClass;
+			ItemSpecial									m_itemSpecial;
 			Designation									m_designation;
 			UIntRange									m_range;
 			std::unique_ptr<std::mt19937>				m_randomNumberGenerator;
@@ -145,32 +153,33 @@ namespace tpublic
 			return aVector[_GetRandomIntInRange<size_t>(0, aVector.size() - 1)];
 		}
 
-		void				_ReadSource();
-		void				_ReadCompound(
-								const SourceNode*				aSource);
-		void				_ReadStackObject(
-								StackObject::Type				aType,
-								const SourceNode*				aSource);
-		void				_ReadStackObjectArray(
-								StackObject::Type				aType,
-								const SourceNode*				aSource);
-		void				_ReadItems(
-								const SourceNode*				aSource);
-		void				_GetContextTags(
-								std::vector<uint32_t>&			aOut);
-		std::mt19937&		_GetRandom();		
-		const UIntRange&	_GetLevelRange() const;
-		const char*			_PickIconName(
-								uint32_t						aMustHaveTagId,
-								const std::vector<uint32_t>&	aTags);
-		GeneratedSource*	_CreateGeneratedSource();
-		void				_CreateDesignation(
-								const char*						aBaseName,
-								const StackObject::Designation*	aDesignation,
-								const std::vector<uint32_t>&	aContextTags,
-								std::vector<uint32_t>&			aTags,
-								Stat::Collection&				aStatWeights,
-								std::string&					aOut);
+		void							_ReadSource();
+		void							_ReadCompound(
+											const SourceNode*				aSource);
+		void							_ReadStackObject(
+											StackObject::Type				aType,
+											const SourceNode*				aSource);
+		void							_ReadStackObjectArray(
+											StackObject::Type				aType,
+											const SourceNode*				aSource);
+		void							_ReadItems(
+											const SourceNode*				aSource);
+		void							_GetContextTags(
+											std::vector<uint32_t>&			aOut);
+		std::mt19937&					_GetRandom();		
+		const UIntRange&				_GetLevelRange() const;
+		const char*						_PickIconName(
+											uint32_t						aMustHaveTagId,
+											const std::vector<uint32_t>&	aTags);
+		GeneratedSource*				_CreateGeneratedSource();
+		void							_CreateDesignation(
+											const char*						aBaseName,
+											const StackObject::Designation*	aDesignation,
+											const std::vector<uint32_t>&	aContextTags,
+											std::vector<uint32_t>&			aTags,
+											Stat::Collection&				aStatWeights,
+											std::string&					aOut);
+		const StackObject::ItemSpecial*	_PickItemSpecial();
 	};
 
 }

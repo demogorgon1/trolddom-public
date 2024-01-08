@@ -147,6 +147,8 @@ namespace tpublic
 				_ReadStackObjectArray(StackObject::TYPE_DESIGNATION, aChild);
 			else if (aChild->m_name == "level_range")
 				_ReadStackObject(StackObject::TYPE_LEVEL_RANGE, aChild);
+			else if (aChild->m_name == "item_specials")
+				_ReadStackObjectArray(StackObject::TYPE_ITEM_SPECIAL, aChild);
 			else if (aChild->m_name == "items")
 				_ReadItems(aChild);
 			else
@@ -223,6 +225,27 @@ namespace tpublic
 			});
 			break;
 
+		case StackObject::TYPE_ITEM_SPECIAL:
+			aSource->ForEachChild([&](
+				const SourceNode* aChild)
+			{
+				if(aChild->m_tag == "raw_stat")
+				{
+					Stat::Id statId = Stat::StringToId(aChild->m_name.c_str());
+					TP_VERIFY(statId != Stat::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid stat.", aChild->m_name.c_str());
+					stackObject->m_itemSpecial.m_rawStats.m_stats[statId] = aChild->GetUInt32();
+				}
+				else if(aChild->m_name == "weight")
+				{
+					stackObject->m_itemSpecial.m_weight = aChild->GetUInt32();
+				}
+				else
+				{
+					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+				}
+			});			
+			break;
+
 		default:
 			assert(false);
 			break;
@@ -253,6 +276,7 @@ namespace tpublic
 		uint32_t maxDifferentStats = 3;
 		Stat::Collection baseStatWeights;
 		ItemBinding::Id itemBinding = ItemBinding::ID_WHEN_EQUIPPED;
+		std::vector<uint32_t> specialPropabilities;		
 
 		aSource->ForEachChild([&](
 			const SourceNode* aChild)
@@ -269,6 +293,8 @@ namespace tpublic
 				aChild->GetIdArray(DataType::ID_LOOT_GROUP, lootGroups);
 			else if(aChild->m_name == "stat_weights")
 				baseStatWeights.FromSource(aChild);
+			else if(aChild->m_name == "special_propabilities")
+				aChild->GetUIntArray(specialPropabilities);
 			else
 				TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 		});
@@ -361,6 +387,8 @@ namespace tpublic
 					statWeights.RemoveLowStats(maxDifferentStats);
 					statWeights.Add(baseStatWeights);
 
+					Stat::Collection rawStats;
+
 					std::unordered_set<uint32_t> allTagsSet;
 					for(uint32_t tagId : allTags)
 					{
@@ -368,6 +396,25 @@ namespace tpublic
 
 						if(tag->m_transferable)
 							allTagsSet.insert(tagId);
+					}
+
+					{	
+						// Roll for specials
+						for (uint32_t propability : specialPropabilities)
+						{
+							if(_GetRandomIntInRange<uint32_t>(1, 100) < propability)
+							{
+								const StackObject::ItemSpecial* itemSpecial = _PickItemSpecial();
+								if(itemSpecial == NULL)
+									break;
+								
+								rawStats.Add(itemSpecial->m_rawStats);
+							}
+							else
+							{
+								break;
+							}
+						}
 					}
 
 					const char* iconName = _PickIconName(lastEquipmentSlotTagId, allTags);
@@ -405,6 +452,12 @@ namespace tpublic
 						{
 							const Stat::Info* statInfo = Stat::GetInfo((Stat::Id)j);
 							output->PrintF(1, "stat_weight %s: %u", statInfo->m_name, statWeights.m_stats[j]);
+						}
+
+						if(rawStats.m_stats[j] != 0)
+						{
+							const Stat::Info* statInfo = Stat::GetInfo((Stat::Id)j);
+							output->PrintF(1, "stat %s: %u", statInfo->m_name, rawStats.m_stats[j]);
 						}
 					}
 
@@ -590,6 +643,24 @@ namespace tpublic
 		aOut = prefix;
 		aOut += aBaseName;
 		aOut += suffix;
+	}
+
+	const GenerationJob::StackObject::ItemSpecial*
+	GenerationJob::_PickItemSpecial()
+	{
+		WeightedRandom<const StackObject::ItemSpecial*> possibilities;
+
+		for (const std::unique_ptr<StackObject>& stackObject : m_stack)
+		{
+			if (stackObject->m_type == StackObject::TYPE_ITEM_SPECIAL)
+				possibilities.AddPossibility(stackObject->m_itemSpecial.m_weight, &stackObject->m_itemSpecial);
+		}
+
+		const StackObject::ItemSpecial* picked;
+		if(!possibilities.Pick(_GetRandom(), picked))
+			return NULL;
+
+		return picked;
 	}
 
 }
