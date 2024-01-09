@@ -39,6 +39,8 @@ namespace tpublic
 							m_titleSuffix = aChild->GetString();
 						else if (aChild->m_name == "title")
 							m_title = aChild->GetString();
+						else if (aChild->m_name == "pantheon")
+							m_pantheonId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PANTHEON, aChild->GetIdentifier());
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -55,6 +57,7 @@ namespace tpublic
 				aWriter->WriteString(m_titlePrefix);
 				aWriter->WriteString(m_titleSuffix);
 				aWriter->WriteString(m_title);
+				aWriter->WriteUInt(m_pantheonId);
 			}
 			
 			bool
@@ -72,6 +75,8 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadString(m_title))
 					return false;
+				if(!aReader->ReadUInt(m_pantheonId))
+					return false;
 				return true;
 			}
 
@@ -80,6 +85,7 @@ namespace tpublic
 			std::string							m_titlePrefix;
 			std::string							m_titleSuffix;
 			std::string							m_title;
+			uint32_t							m_pantheonId = 0;
 		};
 
 	}

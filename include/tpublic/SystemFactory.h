@@ -6,6 +6,7 @@
 #include "Systems/ManaRegen.h"
 #include "Systems/NPC.h"
 #include "Systems/Openable.h"
+#include "Systems/Shrine.h"
 
 #include "System.h"
 
@@ -18,8 +19,8 @@ namespace tpublic
 	{
 	public:
 		SystemFactory(
-			const Manifest*	aManifest)
-			: m_manifest(aManifest)
+			const SystemBase::SystemData*	aData)
+			: m_data(aData)
 		{
 			_Register<Systems::Combat>();
 			_Register<Systems::Environment>(); 
@@ -27,6 +28,7 @@ namespace tpublic
 			_Register<Systems::ManaRegen>();
 			_Register<Systems::NPC>();
 			_Register<Systems::Openable>();
+			_Register<Systems::Shrine>();
 		}
 
 		~SystemFactory()
@@ -36,7 +38,7 @@ namespace tpublic
 
 		SystemBase*
 		Create(
-			uint32_t		aId) 
+			uint32_t						aId) 
 		{
 			if(!m_functions[aId])
 				return NULL;
@@ -47,13 +49,13 @@ namespace tpublic
 	private:
 
 		std::function<SystemBase*()>	m_functions[System::NUM_IDS];
-		const Manifest*					m_manifest;
+		const SystemBase::SystemData*	m_data;
 
 		template<typename _T>
 		void
 		_Register()
 		{
-			m_functions[_T::ID] = [&]() { return new _T(m_manifest); };
+			m_functions[_T::ID] = [&]() { return new _T(m_data); };
 		}
 
 	};

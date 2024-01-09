@@ -9,8 +9,8 @@ namespace tpublic::Systems
 {
 
 	ManaRegen::ManaRegen(
-		const Manifest*		aManifest)
-		: SystemBase(aManifest)
+		const SystemData*	aData)
+		: SystemBase(aData)
 	{
 		RequireComponent<Components::CombatPrivate>();
 		RequireComponent<Components::CombatPublic>();

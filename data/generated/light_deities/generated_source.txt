@@ -8,6 +8,7 @@ deity light_deities_deity_0:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_1:
@@ -19,6 +20,7 @@ deity light_deities_deity_1:
 	[
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_2:
@@ -31,6 +33,7 @@ deity light_deities_deity_2:
 		life
 		mysterious
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_3:
@@ -43,6 +46,7 @@ deity light_deities_deity_3:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_4:
@@ -54,6 +58,7 @@ deity light_deities_deity_4:
 	[
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_5:
@@ -66,6 +71,7 @@ deity light_deities_deity_5:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_6:
@@ -79,6 +85,7 @@ deity light_deities_deity_6:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_7:
@@ -91,6 +98,7 @@ deity light_deities_deity_7:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_8:
@@ -104,6 +112,7 @@ deity light_deities_deity_8:
 		good
 		grandiose
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_9:
@@ -115,6 +124,7 @@ deity light_deities_deity_9:
 	[
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_10:
@@ -126,6 +136,7 @@ deity light_deities_deity_10:
 	[
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_11:
@@ -138,6 +149,7 @@ deity light_deities_deity_11:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_12:
@@ -151,6 +163,7 @@ deity light_deities_deity_12:
 		good
 		mysterious
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_13:
@@ -163,6 +176,7 @@ deity light_deities_deity_13:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_14:
@@ -175,6 +189,7 @@ deity light_deities_deity_14:
 		life
 		mysterious
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_15:
@@ -188,6 +203,7 @@ deity light_deities_deity_15:
 		good
 		mysterious
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_16:
@@ -200,6 +216,7 @@ deity light_deities_deity_16:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_17:
@@ -211,6 +228,7 @@ deity light_deities_deity_17:
 	[
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_18:
@@ -224,6 +242,7 @@ deity light_deities_deity_18:
 		good
 		mysterious
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_19:
@@ -236,6 +255,7 @@ deity light_deities_deity_19:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_20:
@@ -248,6 +268,7 @@ deity light_deities_deity_20:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_21:
@@ -262,6 +283,7 @@ deity light_deities_deity_21:
 		good
 		mysterious
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_22:
@@ -274,6 +296,7 @@ deity light_deities_deity_22:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_23:
@@ -286,6 +309,7 @@ deity light_deities_deity_23:
 		good
 		mysterious
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_24:
@@ -298,6 +322,7 @@ deity light_deities_deity_24:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_25:
@@ -308,6 +333,7 @@ deity light_deities_deity_25:
 	tags:
 	[
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_26:
@@ -319,6 +345,7 @@ deity light_deities_deity_26:
 	[
 		life
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_27:
@@ -331,6 +358,7 @@ deity light_deities_deity_27:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_28:
@@ -344,6 +372,7 @@ deity light_deities_deity_28:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_29:
@@ -357,6 +386,7 @@ deity light_deities_deity_29:
 		mysterious
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_30:
@@ -370,6 +400,7 @@ deity light_deities_deity_30:
 		good
 		mysterious
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_31:
@@ -382,6 +413,7 @@ deity light_deities_deity_31:
 		good
 		mysterious
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_32:
@@ -393,6 +425,7 @@ deity light_deities_deity_32:
 	[
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_33:
@@ -405,6 +438,7 @@ deity light_deities_deity_33:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_34:
@@ -416,6 +450,7 @@ deity light_deities_deity_34:
 	[
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_35:
@@ -429,6 +464,7 @@ deity light_deities_deity_35:
 		good
 		mysterious
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_36:
@@ -440,6 +476,7 @@ deity light_deities_deity_36:
 	[
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_37:
@@ -453,6 +490,7 @@ deity light_deities_deity_37:
 		good
 		mysterious
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_38:
@@ -465,6 +503,7 @@ deity light_deities_deity_38:
 		good
 		mysterious
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_39:
@@ -477,6 +516,7 @@ deity light_deities_deity_39:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_40:
@@ -488,6 +528,7 @@ deity light_deities_deity_40:
 	[
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_41:
@@ -501,6 +542,7 @@ deity light_deities_deity_41:
 		good
 		mysterious
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_42:
@@ -512,6 +554,7 @@ deity light_deities_deity_42:
 	[
 		life
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_43:
@@ -524,6 +567,7 @@ deity light_deities_deity_43:
 	[
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_44:
@@ -535,6 +579,7 @@ deity light_deities_deity_44:
 	[
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_45:
@@ -548,6 +593,7 @@ deity light_deities_deity_45:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_46:
@@ -560,6 +606,7 @@ deity light_deities_deity_46:
 	[
 		life
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_47:
@@ -574,6 +621,7 @@ deity light_deities_deity_47:
 		good
 		mysterious
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_48:
@@ -585,6 +633,7 @@ deity light_deities_deity_48:
 	[
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_49:
@@ -597,6 +646,7 @@ deity light_deities_deity_49:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_50:
@@ -609,6 +659,7 @@ deity light_deities_deity_50:
 		mysterious
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_51:
@@ -622,6 +673,7 @@ deity light_deities_deity_51:
 		good
 		mysterious
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_52:
@@ -633,6 +685,7 @@ deity light_deities_deity_52:
 	[
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_53:
@@ -646,6 +699,7 @@ deity light_deities_deity_53:
 		good
 		mysterious
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_54:
@@ -658,6 +712,7 @@ deity light_deities_deity_54:
 	[
 		life
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_55:
@@ -669,6 +724,7 @@ deity light_deities_deity_55:
 	[
 		life
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_56:
@@ -681,6 +737,7 @@ deity light_deities_deity_56:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_57:
@@ -693,6 +750,7 @@ deity light_deities_deity_57:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_58:
@@ -704,6 +762,7 @@ deity light_deities_deity_58:
 	[
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_59:
@@ -715,6 +774,7 @@ deity light_deities_deity_59:
 	[
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_60:
@@ -727,6 +787,7 @@ deity light_deities_deity_60:
 	[
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_61:
@@ -738,6 +799,7 @@ deity light_deities_deity_61:
 	[
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_62:
@@ -752,6 +814,7 @@ deity light_deities_deity_62:
 		good
 		mysterious
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_63:
@@ -764,6 +827,7 @@ deity light_deities_deity_63:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_64:
@@ -776,6 +840,7 @@ deity light_deities_deity_64:
 		life
 		mysterious
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_65:
@@ -788,6 +853,7 @@ deity light_deities_deity_65:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_66:
@@ -801,6 +867,7 @@ deity light_deities_deity_66:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_67:
@@ -813,6 +880,7 @@ deity light_deities_deity_67:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_68:
@@ -826,6 +894,7 @@ deity light_deities_deity_68:
 		good
 		grandiose
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_69:
@@ -837,6 +906,7 @@ deity light_deities_deity_69:
 	[
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_70:
@@ -850,6 +920,7 @@ deity light_deities_deity_70:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_71:
@@ -861,6 +932,7 @@ deity light_deities_deity_71:
 	[
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_72:
@@ -872,6 +944,7 @@ deity light_deities_deity_72:
 	[
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_73:
@@ -884,6 +957,7 @@ deity light_deities_deity_73:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_74:
@@ -896,6 +970,7 @@ deity light_deities_deity_74:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_75:
@@ -907,6 +982,7 @@ deity light_deities_deity_75:
 	[
 		life
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_76:
@@ -917,6 +993,7 @@ deity light_deities_deity_76:
 	tags:
 	[
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_77:
@@ -929,6 +1006,7 @@ deity light_deities_deity_77:
 		life
 		mysterious
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_78:
@@ -942,6 +1020,7 @@ deity light_deities_deity_78:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_79:
@@ -954,6 +1033,7 @@ deity light_deities_deity_79:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_80:
@@ -967,6 +1047,7 @@ deity light_deities_deity_80:
 		good
 		mysterious
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_81:
@@ -979,6 +1060,7 @@ deity light_deities_deity_81:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_82:
@@ -991,6 +1073,7 @@ deity light_deities_deity_82:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_83:
@@ -1003,6 +1086,7 @@ deity light_deities_deity_83:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_84:
@@ -1014,6 +1098,7 @@ deity light_deities_deity_84:
 	[
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_85:
@@ -1027,6 +1112,7 @@ deity light_deities_deity_85:
 		mysterious
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_86:
@@ -1039,6 +1125,7 @@ deity light_deities_deity_86:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_87:
@@ -1052,6 +1139,7 @@ deity light_deities_deity_87:
 		mysterious
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_88:
@@ -1064,6 +1152,7 @@ deity light_deities_deity_88:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_89:
@@ -1075,6 +1164,7 @@ deity light_deities_deity_89:
 	[
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_90:
@@ -1088,6 +1178,7 @@ deity light_deities_deity_90:
 		mysterious
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_91:
@@ -1099,6 +1190,7 @@ deity light_deities_deity_91:
 	[
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_92:
@@ -1111,6 +1203,7 @@ deity light_deities_deity_92:
 		life
 		mysterious
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_93:
@@ -1124,6 +1217,7 @@ deity light_deities_deity_93:
 		good
 		mysterious
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_94:
@@ -1136,6 +1230,7 @@ deity light_deities_deity_94:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_95:
@@ -1146,6 +1241,7 @@ deity light_deities_deity_95:
 	tags:
 	[
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_96:
@@ -1159,6 +1255,7 @@ deity light_deities_deity_96:
 		good
 		grandiose
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_97:
@@ -1171,6 +1268,7 @@ deity light_deities_deity_97:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_98:
@@ -1183,6 +1281,7 @@ deity light_deities_deity_98:
 		life
 		good
 	]
+	pantheon: light
 }
 
 deity light_deities_deity_99:
@@ -1194,5 +1293,6 @@ deity light_deities_deity_99:
 	[
 		good
 	]
+	pantheon: light
 }
 

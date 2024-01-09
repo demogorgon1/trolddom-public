@@ -17,8 +17,8 @@ namespace tpublic::Systems
 {
 
 	Environment::Environment(
-		const Manifest*		aManifest)
-		: SystemBase(aManifest)
+		const SystemData*	aData)
+		: SystemBase(aData)
 	{
 		RequireComponent<Components::Environment>();
 		RequireComponent<Components::Position>();

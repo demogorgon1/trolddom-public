@@ -57,6 +57,8 @@ namespace tpublic
 							m_string = aChild->GetString();
 						else if(aChild->m_name == "faction")
 							m_factionId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_FACTION, aChild->GetIdentifier());
+						else if (aChild->m_name == "opposition")
+							m_oppositionPantheonId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PANTHEON, aChild->GetIdentifier());
 						else if(aChild->m_name == "notification_string")
 							m_notificationStrings[SourceToNotificationString(aChild)] = aChild->GetString();
 						else
@@ -73,6 +75,7 @@ namespace tpublic
 
 				aWriter->WriteString(m_string);
 				aWriter->WriteUInt(m_factionId);
+				aWriter->WriteUInt(m_oppositionPantheonId);
 
 				for (uint32_t i = 0; i < (uint32_t)NUM_NOTIFICATION_STRINGS; i++)
 					aWriter->WriteString(m_notificationStrings[i]);
@@ -87,7 +90,9 @@ namespace tpublic
 
 				if(!aReader->ReadString(m_string))
 					return false;
-				if(!aReader->ReadUInt(m_factionId))
+				if (!aReader->ReadUInt(m_factionId))
+					return false;
+				if (!aReader->ReadUInt(m_oppositionPantheonId))
 					return false;
 
 				for(uint32_t i = 0; i < (uint32_t)NUM_NOTIFICATION_STRINGS; i++)
@@ -101,6 +106,7 @@ namespace tpublic
 			// Public data
 			std::string							m_string;
 			uint32_t							m_factionId = 0;
+			uint32_t							m_oppositionPantheonId = 0;
 			std::string							m_notificationStrings[NUM_NOTIFICATION_STRINGS];
 		};
 

@@ -12,7 +12,7 @@ namespace tpublic::Systems
 		static const System::Id ID = System::ID_COMBAT;
 
 						Combat(
-							const Manifest*		aManifest);
+							const SystemData*	aData);
 		virtual			~Combat();
 
 		// SystemBase implementation

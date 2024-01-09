@@ -7,6 +7,16 @@ map_entity_spawn .spirit_stone:
 	entity spirit_stone: { init_state: default } 
 }
 
+map_entity_spawn .holy_altar:
+{	
+	entity holy_altar: { init_state: default } 
+}
+
+map_entity_spawn .underworld_shrine:
+{	
+	entity underworld_shrine: { init_state: default } 
+}
+
 map_entity_spawn .mining:
 {	
 	spawn_timer: { despawn_required: true min_delay: 600 cooldown_range_min: 1200 cooldown_range_max: 4800 }
@@ -149,7 +159,9 @@ map_palette .stuff:
 	entity_spawn .brom: [ 210 189 0 ]
 	entity_spawn .harald_skrald: [ 200 189 0 ]
 	entity_spawn .fisherman: [ 0 2 255 ]
-	entity_spawn .spirit_stone: [ 0 0 0 ]
+	entity_spawn .spirit_stone: [ 0 0 0 ]	
+	entity_spawn .holy_altar: [ 0 0 40 ]	
+	entity_spawn .underworld_shrine: [ 0 0 80 ]	
 	entity_spawn .spawn_of_umbracoth: [ 32 0 0 ]	
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn dungeon_1_exit: [ 0 0 200 ]	

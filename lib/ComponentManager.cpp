@@ -8,6 +8,7 @@
 #include <tpublic/Components/CombatPrivate.h>
 #include <tpublic/Components/CombatPublic.h>
 #include <tpublic/Components/CompletedQuests.h>
+#include <tpublic/Components/DeityRelations.h>
 #include <tpublic/Components/DisplayName.h>
 #include <tpublic/Components/Environment.h>
 #include <tpublic/Components/EquippedItems.h>
@@ -26,6 +27,7 @@
 #include <tpublic/Components/RecentAchievements.h>
 #include <tpublic/Components/Reputation.h>
 #include <tpublic/Components/ResurrectionPoint.h>
+#include <tpublic/Components/Shrine.h>
 #include <tpublic/Components/Sprite.h>
 #include <tpublic/Components/Tag.h>
 #include <tpublic/Components/Talents.h>
@@ -52,6 +54,7 @@ namespace tpublic
 		_Register<Components::CombatPrivate>();
 		_Register<Components::CombatPublic>();
 		_Register<Components::CompletedQuests>();
+		_Register<Components::DeityRelations>();
 		_Register<Components::DisplayName>();
 		_Register<Components::Environment>();
 		_Register<Components::EquippedItems>();
@@ -70,6 +73,7 @@ namespace tpublic
 		_Register<Components::RecentAchievements>();
 		_Register<Components::Reputation>();
 		_Register<Components::ResurrectionPoint>();
+		_Register<Components::Shrine>();
 		_Register<Components::Sprite>();
 		_Register<Components::Tag>();
 		_Register<Components::Talents>();

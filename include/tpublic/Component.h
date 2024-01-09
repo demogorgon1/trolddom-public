@@ -46,6 +46,8 @@ namespace tpublic
 			ID_ZONE_DISCOVERY,
 			ID_OPENABLE,
 			ID_REPUTATION,
+			ID_DEITY_RELATIONS,
+			ID_SHRINE,
 
 			NUM_IDS
 		};
@@ -89,7 +91,9 @@ namespace tpublic
 			"guild_name",
 			"zone_discovery",
 			"openable",
-			"reputation"
+			"reputation",
+			"deity_relations",
+			"shrine"
 		};		
 
 		static_assert(sizeof(COMPONENT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

@@ -13,6 +13,7 @@ namespace tpublic
 	class IWorldView;
 	class LootGenerator;
 	class Manifest;
+	class Pantheons;
 
 	class SystemBase
 	{
@@ -22,15 +23,21 @@ namespace tpublic
 			// Public data
 			IEventQueue*			m_eventQueue = NULL;
 			const IWorldView*		m_worldView = NULL;
-			const LootGenerator*	m_lootGenerator = NULL;
 			int32_t					m_tick = 0;
 			std::mt19937*			m_random = NULL;
 		};
 
+		struct SystemData
+		{
+			const LootGenerator*	m_lootGenerator = NULL;
+			const Pantheons*		m_pantheons = NULL;
+			const Manifest*			m_manifest = NULL;
+		};
+
 		SystemBase(
-			const Manifest*										aManifest,
+			const SystemData*									aData,
 			int32_t												aUpdateInterval = 0)
-			: m_manifest(aManifest)
+			: m_data(aData)
 			, m_updateInterval(aUpdateInterval)
 		{
 			memset(m_componentIndices, 0xFF, sizeof(m_componentIndices));
@@ -83,13 +90,14 @@ namespace tpublic
 											Context*			/*aContext*/) { }
 
 		// Data access
-		const Manifest*					GetManifest() const { return m_manifest; }
+		const Manifest*					GetManifest() const { return m_data->m_manifest; }
+		const SystemData*				GetData() const { return m_data; }
 		const std::vector<uint32_t>&	GetRequiredComponents() const { return m_requiredComponents; }
 		int32_t							GetUpdateInterval() const { return m_updateInterval; }
 
 	private:
 
-		const Manifest*			m_manifest;
+		const SystemData*		m_data;
 		std::vector<uint32_t>	m_requiredComponents;
 		size_t					m_componentIndices[Component::NUM_IDS];
 		int32_t					m_updateInterval;

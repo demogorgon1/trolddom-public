@@ -75,6 +75,14 @@ sprites:
 	sprite fishing_splash_3: { }
 	sprite fishing_splash_4: { }
 	sprite fishing_splash_5: { }
+	sprite underworld_shrine_1: { }
+	
+	cursor: { position: [ 0 16 ] }
+	
+	sprite underworld_shrine_2: { }
+	sprite underworld_shrine_3: { }
+	sprite underworld_shrine_4: { }
+	sprite holy_altar: { }
 	
 }
 

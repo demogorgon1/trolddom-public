@@ -15,8 +15,8 @@ namespace tpublic::Systems
 {
 
 	Combat::Combat(
-		const Manifest*		aManifest)
-		: SystemBase(aManifest)
+		const SystemData*	aData)
+		: SystemBase(aData)
 	{
 		RequireComponent<Components::Auras>();
 		RequireComponent<Components::CombatPublic>();

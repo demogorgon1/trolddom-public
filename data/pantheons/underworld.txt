@@ -6,10 +6,11 @@ faction underworld:
 
 pantheon underworld:
 {
+	string: "The Underworld"
 	faction: underworld
+	opposition: light
 	
 	notification_string<gained_reputation>: "You've gained favor with the underworld."
 	notification_string<lost_reputation>: "You've lost favor with the underworld."
-	
 }
 

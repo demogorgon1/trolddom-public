@@ -13,7 +13,7 @@ namespace tpublic::Systems
 		static const int32_t UPDATE_INTERVAL = 10;
 
 						Openable(
-							const Manifest*		aManifest);
+							const SystemData*	aData);
 		virtual			~Openable();
 
 		// SystemBase implementation

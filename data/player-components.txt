@@ -8,6 +8,7 @@ player_components:
 	combat_private
 	combat_public
 	completed_quests
+	deity_relations
 	display_name
 	equipped_items	
 	guild_name

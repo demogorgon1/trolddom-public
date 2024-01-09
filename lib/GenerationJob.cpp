@@ -513,7 +513,6 @@ namespace tpublic
 
 		TP_VERIFY(pantheonId != 0, aSource->m_debugInfo, "No pantheon defined.");
 		const Data::Pantheon* pantheon = m_manifest->GetById<Data::Pantheon>(pantheonId);
-		(void)pantheon;
 
 		TP_VERIFY(nameWordGeneratorId != 0, aSource->m_debugInfo, "No name generator defined.");
 		const Data::WordGenerator* nameWordGenerator = m_manifest->GetById<Data::WordGenerator>(nameWordGeneratorId);
@@ -638,6 +637,8 @@ namespace tpublic
 				}
 				output->PrintF(1, "]");
 			}
+
+			output->PrintF(1, "pantheon: %s", pantheon->m_name.c_str());
 
 			output->PrintF(0, "}");
 		}

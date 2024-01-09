@@ -15,7 +15,7 @@ namespace tpublic::Systems
 		static const int32_t DESPAWN_TICKS = 3;
 
 						Environment(
-							const Manifest*		aManifest);
+							const SystemData*	aData);
 		virtual			~Environment();
 
 		// SystemBase implementation

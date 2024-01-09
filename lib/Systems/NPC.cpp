@@ -31,8 +31,8 @@ namespace tpublic::Systems
 {
 
 	NPC::NPC(
-		const Manifest*			aManifest)
-		: SystemBase(aManifest)
+		const SystemData*		aData)
+		: SystemBase(aData)
 	{
 		RequireComponent<Components::Auras>();
 		RequireComponent<Components::CombatPublic>();
@@ -123,7 +123,7 @@ namespace tpublic::Systems
 
 				if(lootable->m_playerTag.IsSet())
 				{
-					aContext->m_lootGenerator->GenerateLootable(*aContext->m_random, combat->m_level, combat->m_creatureTypeId, combat->IsElite(), lootable);
+					GetData()->m_lootGenerator->GenerateLootable(*aContext->m_random, combat->m_level, combat->m_creatureTypeId, combat->IsElite(), lootable);
 
 					if(lootable->m_availableLoot.size() > 0)
 					{

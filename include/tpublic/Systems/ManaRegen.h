@@ -12,7 +12,7 @@ namespace tpublic::Systems
 		static const System::Id ID = System::ID_MANA_REGEN;
 
 						ManaRegen(
-							const Manifest*		aManifest);
+							const SystemData*	aData);
 		virtual			~ManaRegen();
 
 		// SystemBase implementation

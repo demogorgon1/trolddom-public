@@ -13,7 +13,7 @@ namespace tpublic::Systems
 		static const int32_t UPDATE_INTERVAL = 20;
 
 						HealthRegen(
-							const Manifest*		aManifest);
+							const SystemData*	aData);
 		virtual			~HealthRegen();
 
 		// SystemBase implementation

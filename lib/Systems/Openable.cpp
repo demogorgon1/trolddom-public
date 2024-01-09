@@ -8,8 +8,8 @@ namespace tpublic::Systems
 {
 
 	Openable::Openable(
-		const Manifest*		aManifest)
-		: SystemBase(aManifest, UPDATE_INTERVAL)
+		const SystemData*	aData)
+		: SystemBase(aData, UPDATE_INTERVAL)
 	{
 		RequireComponent<Components::Openable>();
 	}

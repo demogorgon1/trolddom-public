@@ -9,8 +9,8 @@ namespace tpublic::Systems
 {
 
 	HealthRegen::HealthRegen(
-		const Manifest*		aManifest)
-		: SystemBase(aManifest, UPDATE_INTERVAL)
+		const SystemData*	aData)
+		: SystemBase(aData, UPDATE_INTERVAL)
 	{
 		RequireComponent<Components::CombatPrivate>();
 		RequireComponent<Components::CombatPublic>();

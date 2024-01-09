@@ -5,18 +5,16 @@
 namespace tpublic::Systems
 {
 
-	class NPC
+	class Shrine
 		: public SystemBase
 	{
 	public:
-		static const System::Id ID = System::ID_NPC;
+		static const System::Id ID = System::ID_SHRINE;
+		static const int32_t UPDATE_INTERVAL = 10;
 
-		static const int32_t SPAWN_TICKS = 4;
-		static const int32_t DESPAWN_TICKS = 4;
-
-						NPC(
+						Shrine(
 							const SystemData*	aData);
-		virtual			~NPC();
+		virtual			~Shrine();
 
 		// SystemBase implementation
 		void			Init(
@@ -39,7 +37,6 @@ namespace tpublic::Systems
 							int32_t				aTicksInState,
 							ComponentBase**		aComponents,
 							Context*			aContext) override;
-
 	private:
 	};
 
