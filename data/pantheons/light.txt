@@ -1,0 +1,15 @@
+faction light:
+{
+	string: "The Light"
+	flags: [ reputation ]
+}
+
+pantheon light:
+{
+	faction: light
+	
+	notification_string<gained_reputation>: "You've gained favor with the light."
+	notification_string<lost_reputation>: "You've lost favor with the light."
+	
+}
+

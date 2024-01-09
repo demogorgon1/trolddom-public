@@ -1,0 +1,16 @@
+generation_job light_deities:
+{
+	random_seed: 3848912
+	
+	random_tags<[ 70 1 ]>: [ life ]
+	random_tags<[ 80 1 ]>: [ good ]
+	
+	deities:
+	{
+		pantheon: light
+		name_generator: angel_name	
+		must_not_have_tags: [ creature evil ]
+				
+		count: 100
+	}
+}

@@ -313,7 +313,6 @@ namespace tpublic
 				}
 				else
 				{
-					TP_VERIFY(c >= ' ', debugInfo, "Invalid string.");
 					buffer.push_back(c);
 				}
 				break;

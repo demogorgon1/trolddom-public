@@ -3,6 +3,8 @@ tag american_forename_female: {}
 tag tolkienesque_forename: {}
 tag elven_placename: {}
 tag human_townname: {}
+tag theological_demon_name: {}
+tag theological_angel_name: {}
 tag noun: { transferable: false random_associated_stat_weights: true } 
 tag creature: { random_associated_stat_weights: true } 
 tag snake: { associated_stat_weights: { wisdom: 2 } }
@@ -14,7 +16,7 @@ tag mysterious: { associated_stat_weights: { spirit: 2 } }
 tag adjective: { transferable: false random_associated_stat_weights: true }
 tag character_adjective: { transferable: false }
 tag good: { random_associated_stat_weights: true }
-tag color: { random_associated_stat_weights: true }
+tag color: { random_associated_stat_weights: true transferable: false }
 tag monster: { associated_stat_weights: { strength: 1 constitution: 2 } }
 tag icon: { transferable: false }
 tag death: { random_associated_stat_weights: true }

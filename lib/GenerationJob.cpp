@@ -1,9 +1,12 @@
 #include "Pcheader.h"
 
 #include <tpublic/Data/LootGroup.h>
+#include <tpublic/Data/Pantheon.h>
 #include <tpublic/Data/Tag.h>
+#include <tpublic/Data/WordGenerator.h>
 
 #include <tpublic/DataErrorHandling.h>
+#include <tpublic/GenerateWord.h>
 #include <tpublic/Helpers.h>
 #include <tpublic/ItemBinding.h>
 #include <tpublic/Manifest.h>
@@ -151,6 +154,8 @@ namespace tpublic
 				_ReadStackObjectArray(StackObject::TYPE_ITEM_SPECIAL, aChild);
 			else if (aChild->m_name == "items")
 				_ReadItems(aChild);
+			else if (aChild->m_name == "deities")
+				_ReadDeities(aChild);
 			else
 				TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 		});
@@ -476,6 +481,165 @@ namespace tpublic
 					output->PrintF(0, "}");
 				}
 			}
+		}
+	}
+
+	void		
+	GenerationJob::_ReadDeities(
+		const SourceNode*		aSource)
+	{
+		uint32_t count = 0;
+		uint32_t nameWordGeneratorId = 0;
+		uint32_t pantheonId = 0;
+		std::vector<uint32_t> mustHaveTags;
+		std::vector<uint32_t> mustNotHaveTags;
+
+		aSource->ForEachChild([&](
+			const SourceNode* aChild)
+		{
+			if(aChild->m_name == "count")
+				count = aChild->GetUInt32();
+			else if(aChild->m_name == "name_generator")
+				nameWordGeneratorId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_WORD_GENERATOR, aChild->GetIdentifier());
+			else if (aChild->m_name == "pantheon")
+				pantheonId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PANTHEON, aChild->GetIdentifier());
+			else if(aChild->m_name == "must_have_tags")
+				aChild->GetIdArray(DataType::ID_TAG, mustHaveTags);
+			else if (aChild->m_name == "must_not_have_tags")
+				aChild->GetIdArray(DataType::ID_TAG, mustNotHaveTags);
+			else
+				TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+		});
+
+		TP_VERIFY(pantheonId != 0, aSource->m_debugInfo, "No pantheon defined.");
+		const Data::Pantheon* pantheon = m_manifest->GetById<Data::Pantheon>(pantheonId);
+		(void)pantheon;
+
+		TP_VERIFY(nameWordGeneratorId != 0, aSource->m_debugInfo, "No name generator defined.");
+		const Data::WordGenerator* nameWordGenerator = m_manifest->GetById<Data::WordGenerator>(nameWordGeneratorId);
+
+		for(uint32_t i = 0; i < count; i++)
+		{
+			std::vector<uint32_t> contextTags;
+			_GetContextTags(contextTags);
+
+			std::string name;
+			GenerateWord(_GetRandom(), nameWordGenerator, name);
+
+			std::string descriptionNoun;
+
+			std::unordered_set<uint32_t> tags;
+			for (uint32_t tagId : contextTags)
+				tags.insert(tagId);
+
+			{
+				WordList::QueryParams wordListQuery;
+				wordListQuery.m_mustHaveTags = mustHaveTags;
+				wordListQuery.m_mustHaveTags.push_back(m_manifest->GetExistingIdByName<Data::Tag>("noun"));
+				for (uint32_t tagId : contextTags)
+					wordListQuery.m_tagScoring.push_back({ tagId, 1 });
+
+				wordListQuery.m_mustNotHaveTags = mustNotHaveTags;
+
+				wordListQuery.Prepare();
+				const WordList::Word* word = m_wordListQueryCache->PerformQuery(wordListQuery)->GetRandomWord(_GetRandom());
+				if(word != NULL)
+				{
+					descriptionNoun = word->m_word;
+
+					for(uint32_t tagId : word->m_allTags)
+						tags.insert(tagId);
+				}
+			}
+
+			std::string descriptionAdjective;
+
+			{
+				WordList::QueryParams wordListQuery;
+				wordListQuery.m_mustHaveTags = mustHaveTags;
+				wordListQuery.m_mustHaveTags.push_back(m_manifest->GetExistingIdByName<Data::Tag>("adjective"));
+				for (uint32_t tagId : contextTags)
+					wordListQuery.m_tagScoring.push_back({ tagId, 1 });
+
+				wordListQuery.m_mustNotHaveTags = mustNotHaveTags;
+
+				wordListQuery.Prepare();
+				const WordList::Word* word = m_wordListQueryCache->PerformQuery(wordListQuery)->GetRandomWord(_GetRandom());
+				if (word != NULL)
+				{
+					descriptionAdjective = word->m_word;
+
+					for (uint32_t tagId : word->m_allTags)
+						tags.insert(tagId);
+				}
+			}
+
+			uint32_t roll = _GetRandomIntInRange<uint32_t>(1, 100);
+
+			std::string titlePrefix;
+			std::string titleSuffix;
+			std::string title;
+
+			if(!descriptionAdjective.empty() && !descriptionNoun.empty())
+			{
+				if(roll < 15)
+				{
+					titlePrefix = descriptionAdjective + " ";
+					titleSuffix = " the " + descriptionNoun;
+				}
+				else if (roll < 30)
+				{
+					titleSuffix = " the " + descriptionAdjective + " " + descriptionNoun;
+				}
+				else if (roll < 50)
+				{
+					titleSuffix = " the " + descriptionAdjective;
+				}
+				else if (roll < 70)
+				{
+					titleSuffix = " the " + descriptionNoun;
+				}
+				else if (roll < 90)
+				{
+					titleSuffix = ", " + descriptionAdjective + " " + descriptionNoun;
+				}
+				else
+				{
+					titlePrefix = descriptionAdjective + " ";
+				}
+
+				title = descriptionAdjective + " " + descriptionNoun;
+			}
+
+			GeneratedSource* output = _CreateGeneratedSource();
+
+			output->PrintF(0, "deity %s_deity_%u:", m_source->m_name.c_str(), m_nextDeityNumber++);
+			output->PrintF(0, "{");
+			output->PrintF(1, "string: \"%s\"", name.c_str());
+
+			if(!title.empty())
+				output->PrintF(1, "title: \"%s\"", title.c_str());
+
+			if (!titlePrefix.empty())
+				output->PrintF(1, "title_prefix: \"%s\"", titlePrefix.c_str());
+			
+			if (!titleSuffix.empty())
+				output->PrintF(1, "title_suffix: \"%s\"", titleSuffix.c_str());
+
+			if(tags.size() > 0)
+			{
+				output->PrintF(1, "tags:");
+				output->PrintF(1, "[");
+				for (uint32_t tagId : tags)
+				{
+					const Data::Tag* dataTag = m_manifest->GetById<Data::Tag>(tagId);
+					if(dataTag->m_transferable)
+						output->PrintF(2, "%s", dataTag->m_name.c_str());
+				}
+				output->PrintF(1, "]");
+			}
+
+			output->PrintF(0, "}");
 		}
 	}
 

@@ -24,6 +24,7 @@
 #include <tpublic/Components/PlayerStats.h>
 #include <tpublic/Components/Position.h>
 #include <tpublic/Components/RecentAchievements.h>
+#include <tpublic/Components/Reputation.h>
 #include <tpublic/Components/ResurrectionPoint.h>
 #include <tpublic/Components/Sprite.h>
 #include <tpublic/Components/Tag.h>
@@ -67,6 +68,7 @@ namespace tpublic
 		_Register<Components::PlayerStats>();
 		_Register<Components::Position>();
 		_Register<Components::RecentAchievements>();
+		_Register<Components::Reputation>();
 		_Register<Components::ResurrectionPoint>();
 		_Register<Components::Sprite>();
 		_Register<Components::Tag>();

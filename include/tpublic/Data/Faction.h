@@ -17,7 +17,8 @@ namespace tpublic
 			enum Flag : uint8_t
 			{
 				FLAG_NEUTRAL = 0x01,
-				FLAG_FRIENDLY = 0x02
+				FLAG_FRIENDLY = 0x02,
+				FLAG_REPUTATION = 0x04
 			};
 
 			void
@@ -40,14 +41,20 @@ namespace tpublic
 						{
 							aChild->GetArray()->ForEachChild([&](
 								const SourceNode* aFlag)
-								{
-									if (aFlag->IsIdentifier("neutral"))
-										m_flags |= FLAG_NEUTRAL;
-									else if (aFlag->IsIdentifier("friendly"))
-										m_flags |= FLAG_FRIENDLY;
-									else
-										TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid faction flag.", aFlag->m_value.c_str());
-								});
+							{
+								if (aFlag->IsIdentifier("neutral"))
+									m_flags |= FLAG_NEUTRAL;
+								else if (aFlag->IsIdentifier("friendly"))
+									m_flags |= FLAG_FRIENDLY;
+								else if (aFlag->IsIdentifier("reputation"))
+									m_flags |= FLAG_REPUTATION;
+								else
+									TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid faction flag.", aFlag->m_value.c_str());
+							});
+						}
+						else if(aChild->m_name == "string")
+						{
+							m_string = aChild->GetString();
 						}
 						else
 						{
@@ -64,6 +71,7 @@ namespace tpublic
 			{
 				ToStreamBase(aStream);
 				aStream->WritePOD(m_flags);
+				aStream->WriteString(m_string);
 			}
 
 			bool
@@ -74,6 +82,8 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadPOD(m_flags))
 					return false;
+				if(!aStream->ReadString(m_string))
+					return false;
 				return true;
 			}
 
@@ -82,6 +92,7 @@ namespace tpublic
 
 			// Public data
 			uint8_t		m_flags;
+			std::string	m_string;
 		};
 
 	}

@@ -1,0 +1,1198 @@
+deity light_deities_deity_0:
+{
+	string: "Seriel"
+	title: "Enduring Beholder"
+	title_suffix: ", Enduring Beholder"
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_1:
+{
+	string: "Grierus"
+	title: "Bold Observer"
+	title_suffix: " the Bold Observer"
+	tags:
+	[
+		good
+	]
+}
+
+deity light_deities_deity_2:
+{
+	string: "Ketan"
+	title: "Undying Elder"
+	title_prefix: "Undying "
+	tags:
+	[
+		life
+		mysterious
+	]
+}
+
+deity light_deities_deity_3:
+{
+	string: "Vehapah"
+	title: "Brilliant Observer"
+	title_suffix: " the Observer"
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_4:
+{
+	string: "Kura"
+	title: "Gallant Watcher"
+	title_suffix: " the Watcher"
+	tags:
+	[
+		good
+	]
+}
+
+deity light_deities_deity_5:
+{
+	string: "Haphiel"
+	title: "Orderly Observer"
+	title_suffix: ", Orderly Observer"
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_6:
+{
+	string: "Dannieshitr"
+	title: "Brown Slayer"
+	title_prefix: "Brown "
+	title_suffix: " the Slayer"
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_7:
+{
+	string: "Lumal"
+	title: "Brilliant Beholder"
+	title_suffix: " the Beholder"
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_8:
+{
+	string: "Ranaelifel"
+	title: "Great Witness"
+	title_suffix: " the Great Witness"
+	tags:
+	[
+		life
+		good
+		grandiose
+	]
+}
+
+deity light_deities_deity_9:
+{
+	string: "Shari"
+	title: "Mad Berserker"
+	title_suffix: " the Mad"
+	tags:
+	[
+		good
+	]
+}
+
+deity light_deities_deity_10:
+{
+	string: "Sadrel"
+	title: "Flauntless Witness"
+	title_suffix: ", Flauntless Witness"
+	tags:
+	[
+		good
+	]
+}
+
+deity light_deities_deity_11:
+{
+	string: "Chanel"
+	title: "Brilliant Observer"
+	title_prefix: "Brilliant "
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_12:
+{
+	string: "Muruer"
+	title: "Weird Elder"
+	title_suffix: " the Elder"
+	tags:
+	[
+		life
+		good
+		mysterious
+	]
+}
+
+deity light_deities_deity_13:
+{
+	string: "Seriemwoon"
+	title: "Gallant Berserker"
+	title_suffix: " the Berserker"
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_14:
+{
+	string: "Dannieel"
+	title: "Everlasting Ancient"
+	title_suffix: " the Ancient"
+	tags:
+	[
+		life
+		mysterious
+	]
+}
+
+deity light_deities_deity_15:
+{
+	string: "Lumatubiel"
+	title: "Red Elder"
+	title_prefix: "Red "
+	tags:
+	[
+		life
+		good
+		mysterious
+	]
+}
+
+deity light_deities_deity_16:
+{
+	string: "Abarin"
+	title: "Sharp Witness"
+	title_prefix: "Sharp "
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_17:
+{
+	string: "Chriphiel"
+	title: "Everlasting Beholder"
+	title_suffix: " the Everlasting"
+	tags:
+	[
+		good
+	]
+}
+
+deity light_deities_deity_18:
+{
+	string: "Sitzel"
+	title: "Modest Ancient"
+	title_prefix: "Modest "
+	tags:
+	[
+		life
+		good
+		mysterious
+	]
+}
+
+deity light_deities_deity_19:
+{
+	string: "Tephipal"
+	title: "Courageous Observer"
+	title_suffix: " the Observer"
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_20:
+{
+	string: "Zetzach"
+	title: "Bold Witness"
+	title_suffix: " the Bold"
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_21:
+{
+	string: "Nirahmeroel"
+	title: "Orderly Elder"
+	title_prefix: "Orderly "
+	title_suffix: " the Elder"
+	tags:
+	[
+		life
+		good
+		mysterious
+	]
+}
+
+deity light_deities_deity_22:
+{
+	string: "Grael"
+	title: "Immortal Witness"
+	title_suffix: ", Immortal Witness"
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_23:
+{
+	string: "Jomah"
+	title: "Humble Elder"
+	title_suffix: " the Humble Elder"
+	tags:
+	[
+		good
+		mysterious
+	]
+}
+
+deity light_deities_deity_24:
+{
+	string: "Damerifiel"
+	title: "Valiant Slayer"
+	title_suffix: " the Valiant"
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_25:
+{
+	string: "Kuciel"
+	title: "Mad Berserker"
+	title_suffix: ", Mad Berserker"
+	tags:
+	[
+	]
+}
+
+deity light_deities_deity_26:
+{
+	string: "Senkasiel"
+	title: "Blue Observer"
+	title_suffix: " the Observer"
+	tags:
+	[
+		life
+	]
+}
+
+deity light_deities_deity_27:
+{
+	string: "Aran"
+	title: "Valorous Berserker"
+	title_suffix: " the Valorous Berserker"
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_28:
+{
+	string: "Numaphas"
+	title: "Weird Witness"
+	title_prefix: "Weird "
+	title_suffix: " the Witness"
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_29:
+{
+	string: "Sarah"
+	title: "Flauntless Ancient"
+	title_suffix: " the Flauntless"
+	tags:
+	[
+		life
+		mysterious
+		good
+	]
+}
+
+deity light_deities_deity_30:
+{
+	string: "Luadieli"
+	title: "Eternal Ancient"
+	title_suffix: " the Ancient"
+	tags:
+	[
+		life
+		good
+		mysterious
+	]
+}
+
+deity light_deities_deity_31:
+{
+	string: "Zamamel"
+	title: "Resolute Elder"
+	title_suffix: " the Elder"
+	tags:
+	[
+		good
+		mysterious
+	]
+}
+
+deity light_deities_deity_32:
+{
+	string: "Kichiel"
+	title: "Dauntless Berserker"
+	title_suffix: " the Dauntless Berserker"
+	tags:
+	[
+		good
+	]
+}
+
+deity light_deities_deity_33:
+{
+	string: "Pamiel"
+	title: "Apt Observer"
+	title_suffix: ", Apt Observer"
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_34:
+{
+	string: "Jenel"
+	title: "Crazy Beholder"
+	title_suffix: " the Beholder"
+	tags:
+	[
+		good
+	]
+}
+
+deity light_deities_deity_35:
+{
+	string: "Zadrion"
+	title: "Dauntless Ancient"
+	title_suffix: " the Ancient"
+	tags:
+	[
+		life
+		good
+		mysterious
+	]
+}
+
+deity light_deities_deity_36:
+{
+	string: "Ramie"
+	title: "Pretty Observer"
+	title_suffix: " the Observer"
+	tags:
+	[
+		good
+	]
+}
+
+deity light_deities_deity_37:
+{
+	string: "Numalie"
+	title: "Pearly Ancient"
+	title_suffix: " the Pearly"
+	tags:
+	[
+		life
+		good
+		mysterious
+	]
+}
+
+deity light_deities_deity_38:
+{
+	string: "Sakiemil"
+	title: "Large Ancient"
+	title_suffix: " the Large"
+	tags:
+	[
+		good
+		mysterious
+	]
+}
+
+deity light_deities_deity_39:
+{
+	string: "Gaaqi"
+	title: "Timeless Witness"
+	title_suffix: " the Witness"
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_40:
+{
+	string: "Ranahkil"
+	title: "Endless Witness"
+	title_prefix: "Endless "
+	tags:
+	[
+		good
+	]
+}
+
+deity light_deities_deity_41:
+{
+	string: "Dachoriel"
+	title: "Humble Elder"
+	title_suffix: " the Elder"
+	tags:
+	[
+		life
+		good
+		mysterious
+	]
+}
+
+deity light_deities_deity_42:
+{
+	string: "Zerdil"
+	title: "Purple Observer"
+	title_suffix: " the Purple"
+	tags:
+	[
+		life
+	]
+}
+
+deity light_deities_deity_43:
+{
+	string: "Schoneel"
+	title: "Red Berserker"
+	title_prefix: "Red "
+	title_suffix: " the Berserker"
+	tags:
+	[
+		good
+	]
+}
+
+deity light_deities_deity_44:
+{
+	string: "Mimamphael"
+	title: "Pretty Watcher"
+	title_suffix: " the Watcher"
+	tags:
+	[
+		good
+	]
+}
+
+deity light_deities_deity_45:
+{
+	string: "Kirahiel"
+	title: "Weird Watcher"
+	title_prefix: "Weird "
+	title_suffix: " the Watcher"
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_46:
+{
+	string: "Teril"
+	title: "Large Slayer"
+	title_prefix: "Large "
+	title_suffix: " the Slayer"
+	tags:
+	[
+		life
+	]
+}
+
+deity light_deities_deity_47:
+{
+	string: "Pamathiel"
+	title: "White Dreamer"
+	title_prefix: "White "
+	title_suffix: " the Dreamer"
+	tags:
+	[
+		life
+		good
+		mysterious
+	]
+}
+
+deity light_deities_deity_48:
+{
+	string: "Zethiel"
+	title: "Eternal Observer"
+	title_suffix: " the Eternal"
+	tags:
+	[
+		good
+	]
+}
+
+deity light_deities_deity_49:
+{
+	string: "Dagel"
+	title: "Eternal Witness"
+	title_suffix: " the Witness"
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_50:
+{
+	string: "Thesit"
+	title: "Forward Dreamer"
+	title_suffix: ", Forward Dreamer"
+	tags:
+	[
+		mysterious
+		good
+	]
+}
+
+deity light_deities_deity_51:
+{
+	string: "Domiel"
+	title: "Skinny Dreamer"
+	title_prefix: "Skinny "
+	title_suffix: " the Dreamer"
+	tags:
+	[
+		good
+		mysterious
+	]
+}
+
+deity light_deities_deity_52:
+{
+	string: "Peramwoonel"
+	title: "Large Witness"
+	title_suffix: " the Witness"
+	tags:
+	[
+		good
+	]
+}
+
+deity light_deities_deity_53:
+{
+	string: "Imbriel"
+	title: "Apt Elder"
+	title_suffix: " the Apt Elder"
+	tags:
+	[
+		life
+		good
+		mysterious
+	]
+}
+
+deity light_deities_deity_54:
+{
+	string: "Penel"
+	title: "Fat Watcher"
+	title_prefix: "Fat "
+	title_suffix: " the Watcher"
+	tags:
+	[
+		life
+	]
+}
+
+deity light_deities_deity_55:
+{
+	string: "Rartrit"
+	title: "Fat Slayer"
+	title_suffix: " the Slayer"
+	tags:
+	[
+		life
+	]
+}
+
+deity light_deities_deity_56:
+{
+	string: "Mushiel"
+	title: "Skinny Beholder"
+	title_suffix: ", Skinny Beholder"
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_57:
+{
+	string: "Hachaciel"
+	title: "Audacious Observer"
+	title_suffix: " the Audacious"
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_58:
+{
+	string: "Angel"
+	title: "Clean Witness"
+	title_suffix: ", Clean Witness"
+	tags:
+	[
+		good
+	]
+}
+
+deity light_deities_deity_59:
+{
+	string: "Amariel"
+	title: "Deathless Observer"
+	title_suffix: " the Observer"
+	tags:
+	[
+		good
+	]
+}
+
+deity light_deities_deity_60:
+{
+	string: "Kumimael"
+	title: "Orderly Berserker"
+	title_prefix: "Orderly "
+	title_suffix: " the Berserker"
+	tags:
+	[
+		good
+	]
+}
+
+deity light_deities_deity_61:
+{
+	string: "Grinieluel"
+	title: "Pretty Observer"
+	title_suffix: ", Pretty Observer"
+	tags:
+	[
+		good
+	]
+}
+
+deity light_deities_deity_62:
+{
+	string: "Hehon"
+	title: "Bold Dreamer"
+	title_prefix: "Bold "
+	title_suffix: " the Dreamer"
+	tags:
+	[
+		life
+		good
+		mysterious
+	]
+}
+
+deity light_deities_deity_63:
+{
+	string: "Reman"
+	title: "Sharp Watcher"
+	title_suffix: ", Sharp Watcher"
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_64:
+{
+	string: "Arinsies"
+	title: "Deathless Elder"
+	title_suffix: " the Elder"
+	tags:
+	[
+		life
+		mysterious
+	]
+}
+
+deity light_deities_deity_65:
+{
+	string: "Dumil"
+	title: "Wild Beholder"
+	title_suffix: " the Wild Beholder"
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_66:
+{
+	string: "Imbahiaciel"
+	title: "Astute Slayer"
+	title_prefix: "Astute "
+	title_suffix: " the Slayer"
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_67:
+{
+	string: "Viruban"
+	title: "Green Slayer"
+	title_suffix: " the Slayer"
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_68:
+{
+	string: "Joyel"
+	title: "High Witness"
+	title_suffix: " the High"
+	tags:
+	[
+		life
+		good
+		grandiose
+	]
+}
+
+deity light_deities_deity_69:
+{
+	string: "Hamielafiel"
+	title: "Old Beholder"
+	title_suffix: " the Old"
+	tags:
+	[
+		good
+	]
+}
+
+deity light_deities_deity_70:
+{
+	string: "Temapha"
+	title: "Eternal Slayer"
+	title_prefix: "Eternal "
+	title_suffix: " the Slayer"
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_71:
+{
+	string: "Nural"
+	title: "Astute Slayer"
+	title_suffix: " the Slayer"
+	tags:
+	[
+		good
+	]
+}
+
+deity light_deities_deity_72:
+{
+	string: "Zadkiel"
+	title: "Astute Berserker"
+	title_suffix: " the Astute Berserker"
+	tags:
+	[
+		good
+	]
+}
+
+deity light_deities_deity_73:
+{
+	string: "Lemil"
+	title: "Skinny Slayer"
+	title_prefix: "Skinny "
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_74:
+{
+	string: "Tzam"
+	title: "Humble Berserker"
+	title_suffix: " the Humble"
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_75:
+{
+	string: "Angel"
+	title: "Red Berserker"
+	title_suffix: ", Red Berserker"
+	tags:
+	[
+		life
+	]
+}
+
+deity light_deities_deity_76:
+{
+	string: "Penel"
+	title: "Large Witness"
+	title_suffix: " the Witness"
+	tags:
+	[
+	]
+}
+
+deity light_deities_deity_77:
+{
+	string: "Haneliel"
+	title: "Immortal Elder"
+	title_suffix: " the Immortal"
+	tags:
+	[
+		life
+		mysterious
+	]
+}
+
+deity light_deities_deity_78:
+{
+	string: "Phesiel"
+	title: "Cunning Beholder"
+	title_prefix: "Cunning "
+	title_suffix: " the Beholder"
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_79:
+{
+	string: "Poraedooniel"
+	title: "Immortal Berserker"
+	title_suffix: " the Immortal"
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_80:
+{
+	string: "Hameediel"
+	title: "Incorruptible Elder"
+	title_suffix: " the Elder"
+	tags:
+	[
+		life
+		good
+		mysterious
+	]
+}
+
+deity light_deities_deity_81:
+{
+	string: "Cartithiel"
+	title: "Daring Beholder"
+	title_suffix: " the Beholder"
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_82:
+{
+	string: "Naran"
+	title: "Pearly Watcher"
+	title_suffix: " the Watcher"
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_83:
+{
+	string: "Behons"
+	title: "Strange Observer"
+	title_prefix: "Strange "
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_84:
+{
+	string: "Powel"
+	title: "Purple Beholder"
+	title_suffix: " the Purple Beholder"
+	tags:
+	[
+		good
+	]
+}
+
+deity light_deities_deity_85:
+{
+	string: "Jerael"
+	title: "Dauntless Dreamer"
+	title_suffix: " the Dauntless Dreamer"
+	tags:
+	[
+		life
+		mysterious
+		good
+	]
+}
+
+deity light_deities_deity_86:
+{
+	string: "Zamiae"
+	title: "Orderly Slayer"
+	title_suffix: " the Slayer"
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_87:
+{
+	string: "Keminel"
+	title: "Astute Dreamer"
+	title_prefix: "Astute "
+	tags:
+	[
+		life
+		mysterious
+		good
+	]
+}
+
+deity light_deities_deity_88:
+{
+	string: "Sephiel"
+	title: "Green Watcher"
+	title_suffix: " the Watcher"
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_89:
+{
+	string: "Premph"
+	title: "Bold Slayer"
+	title_suffix: " the Bold Slayer"
+	tags:
+	[
+		good
+	]
+}
+
+deity light_deities_deity_90:
+{
+	string: "Vichahifel"
+	title: "White Dreamer"
+	title_prefix: "White "
+	tags:
+	[
+		life
+		mysterious
+		good
+	]
+}
+
+deity light_deities_deity_91:
+{
+	string: "Baran"
+	title: "Skinny Beholder"
+	title_suffix: ", Skinny Beholder"
+	tags:
+	[
+		good
+	]
+}
+
+deity light_deities_deity_92:
+{
+	string: "Sachafias"
+	title: "Blue Ancient"
+	title_suffix: " the Ancient"
+	tags:
+	[
+		life
+		mysterious
+	]
+}
+
+deity light_deities_deity_93:
+{
+	string: "Ariel"
+	title: "Audacious Dreamer"
+	title_suffix: " the Audacious"
+	tags:
+	[
+		life
+		good
+		mysterious
+	]
+}
+
+deity light_deities_deity_94:
+{
+	string: "Schueem"
+	title: "Purple Slayer"
+	title_prefix: "Purple "
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_95:
+{
+	string: "Tetzaruel"
+	title: "Green Beholder"
+	title_suffix: ", Green Beholder"
+	tags:
+	[
+	]
+}
+
+deity light_deities_deity_96:
+{
+	string: "Daph"
+	title: "High Berserker"
+	title_suffix: " the Berserker"
+	tags:
+	[
+		life
+		good
+		grandiose
+	]
+}
+
+deity light_deities_deity_97:
+{
+	string: "Purt"
+	title: "Forward Watcher"
+	title_suffix: " the Forward"
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_98:
+{
+	string: "Tzamphas"
+	title: "Courageous Observer"
+	title_prefix: "Courageous "
+	tags:
+	[
+		life
+		good
+	]
+}
+
+deity light_deities_deity_99:
+{
+	string: "Viriel"
+	title: "Valiant Beholder"
+	title_suffix: ", Valiant Beholder"
+	tags:
+	[
+		good
+	]
+}
+

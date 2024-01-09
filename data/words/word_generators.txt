@@ -19,3 +19,17 @@ word_generator human_townname_short:
 	max_consonant_sequence: 3
 	exclude_endings: [ "wr" "tr" "pr" "sr" "dr" "fr" "gr" "jr" "kr" "lr" "zr" "xr" "cr" "vr" "br" "nr" "mr" "bld" "tl" "ih" ]
 }
+
+word_generator demon_name:
+{
+	source: { tags: [ theological_demon_name ] }
+	syllables: [ 1 4 ]
+	max_consonant_sequence: 3
+}
+
+word_generator angel_name:
+{
+	source: { tags: [ theological_angel_name ] }
+	syllables: [ 1 4 ]
+	max_consonant_sequence: 3
+}

@@ -5,3 +5,6 @@ word_list: { import: "_source/american_forenames_female.txt" capitalize: true ta
 word_list: { import: "_source/tolkienesque_forenames.txt" capitalize: true tags: [ tolkienesque_forename ] hidden: true }
 word_list: { import: "_source/elven_placenames.txt" capitalize: true tags: [ elven_placename ] hidden: true }
 word_list: { import: "_source/english_towns.txt" capitalize: true tags: [ human_townname ] hidden: true }
+word_list: { import: "_source/theological_demons.txt" capitalize: true tags: [ theological_demon_name ] hidden: true }
+word_list: { import: "_source/theological_angels.txt" capitalize: true tags: [ theological_angel_name ] hidden: true }
+

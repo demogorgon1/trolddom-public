@@ -1,0 +1,16 @@
+generation_job underworld_deities:
+{
+	random_seed: 38489142
+	
+	random_tags<[ 90 1 ]>: [ death ]
+	random_tags<[ 30 1 ]>: [ evil ]
+	
+	deities:
+	{
+		pantheon: underworld
+		name_generator: demon_name	
+		must_not_have_tags: [ creature good ]
+				
+		count: 100
+	}
+}

@@ -44,6 +44,8 @@ namespace tpublic
 			ID_TAG,
 			ID_WORD_GENERATOR,
 			ID_TAG_CONTEXT,
+			ID_PANTHEON,
+			ID_DEITY,
 
 			NUM_IDS
 		};
@@ -85,7 +87,9 @@ namespace tpublic
 			"profession",
 			"tag",
 			"word_generator",
-			"tag_context"
+			"tag_context",
+			"pantheon",
+			"deity"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

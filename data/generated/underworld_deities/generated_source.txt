@@ -1,0 +1,1222 @@
+deity underworld_deities_deity_0:
+{
+	string: "Angandans"
+	title: "Deathless Slayer"
+	title_suffix: " the Slayer"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_1:
+{
+	string: "Leth"
+	title: "Baneful Phantasm"
+	title_suffix: " the Phantasm"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_2:
+{
+	string: "Pros"
+	title: "Grey Horror"
+	title_suffix: " the Horror"
+	tags:
+	[
+		death
+		evil
+		color
+	]
+}
+
+deity underworld_deities_deity_3:
+{
+	string: "Asbeatinas"
+	title: "Toxic Horror"
+	title_suffix: " the Toxic"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_4:
+{
+	string: "Harphaz"
+	title: "Rancorous Incubus"
+	title_suffix: " the Incubus"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_5:
+{
+	string: "Abez"
+	title: "Skinny Devourer"
+	title_suffix: ", Skinny Devourer"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_6:
+{
+	string: "Asas"
+	title: "Bloody Devourer"
+	title_suffix: " the Bloody Devourer"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_7:
+{
+	string: "Chria"
+	title: "Pestilent Adversary"
+	title_prefix: "Pestilent "
+	title_suffix: " the Adversary"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_8:
+{
+	string: "Abrgos"
+	title: "Pestilent Berserker"
+	title_suffix: " the Pestilent"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_9:
+{
+	string: "Mariularya"
+	title: "Rancorous Berserker"
+	title_suffix: " the Rancorous Berserker"
+	tags:
+	[
+		evil
+	]
+}
+
+deity underworld_deities_deity_10:
+{
+	string: "Folphelas"
+	title: "Grand Horror"
+	title_suffix: ", Grand Horror"
+	tags:
+	[
+		death
+		evil
+		grandiose
+	]
+}
+
+deity underworld_deities_deity_11:
+{
+	string: "Anol"
+	title: "Everlasting Slayer"
+	title_suffix: " the Everlasting"
+	tags:
+	[
+		death
+	]
+}
+
+deity underworld_deities_deity_12:
+{
+	string: "Tanech"
+	title: "Spiteful Berserker"
+	title_suffix: " the Berserker"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_13:
+{
+	string: "Bazusu"
+	title: "Vile Observer"
+	title_suffix: " the Observer"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_14:
+{
+	string: "Cusahila"
+	title: "Spiteful Incubus"
+	title_suffix: ", Spiteful Incubus"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_15:
+{
+	string: "Tathorieceu"
+	title: "Cruel Devourer"
+	title_suffix: " the Devourer"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_16:
+{
+	string: "Boras"
+	title: "Red Elder"
+	title_suffix: " the Red Elder"
+	tags:
+	[
+		death
+		mysterious
+		color
+	]
+}
+
+deity underworld_deities_deity_17:
+{
+	string: "Buraron"
+	title: "Brown Devourer"
+	title_suffix: " the Devourer"
+	tags:
+	[
+		death
+		evil
+		color
+	]
+}
+
+deity underworld_deities_deity_18:
+{
+	string: "Funs"
+	title: "Damned Succubus"
+	title_suffix: ", Damned Succubus"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_19:
+{
+	string: "Marmoya"
+	title: "Endless Inquisitor"
+	title_suffix: ", Endless Inquisitor"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_20:
+{
+	string: "Gaem"
+	title: "Obscene Watcher"
+	title_suffix: " the Obscene"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_21:
+{
+	string: "Angios"
+	title: "Angry Nightmare"
+	title_prefix: "Angry "
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_22:
+{
+	string: "Xaevele"
+	title: "Enduring Devourer"
+	title_suffix: " the Enduring Devourer"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_23:
+{
+	string: "Maleros"
+	title: "Noxious Liar"
+	title_suffix: ", Noxious Liar"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_24:
+{
+	string: "Jinonit"
+	title: "Ebon Adversary"
+	title_prefix: "Ebon "
+	title_suffix: " the Adversary"
+	tags:
+	[
+		death
+		evil
+		color
+	]
+}
+
+deity underworld_deities_deity_25:
+{
+	string: "Cine"
+	title: "Pretty Watcher"
+	title_suffix: ", Pretty Watcher"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_26:
+{
+	string: "Toyzer"
+	title: "Deep Berserker"
+	title_prefix: "Deep "
+	tags:
+	[
+		death
+	]
+}
+
+deity underworld_deities_deity_27:
+{
+	string: "Sther"
+	title: "Timeless Succubus"
+	title_suffix: ", Timeless Succubus"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_28:
+{
+	string: "Tue"
+	title: "Cruel Cambion"
+	title_prefix: "Cruel "
+	tags:
+	[
+		evil
+	]
+}
+
+deity underworld_deities_deity_29:
+{
+	string: "Nilis"
+	title: "Red Observer"
+	title_suffix: " the Red Observer"
+	tags:
+	[
+		color
+	]
+}
+
+deity underworld_deities_deity_30:
+{
+	string: "Fomon"
+	title: "Rancorous Elder"
+	title_suffix: " the Elder"
+	tags:
+	[
+		death
+		mysterious
+		evil
+	]
+}
+
+deity underworld_deities_deity_31:
+{
+	string: "Agamos"
+	title: "Brown Ancient"
+	title_prefix: "Brown "
+	title_suffix: " the Ancient"
+	tags:
+	[
+		death
+		evil
+		mysterious
+		color
+	]
+}
+
+deity underworld_deities_deity_32:
+{
+	string: "Elas"
+	title: "Dark Succubus"
+	title_suffix: " the Dark"
+	tags:
+	[
+		death
+		evil
+		color
+	]
+}
+
+deity underworld_deities_deity_33:
+{
+	string: "Andryasym"
+	title: "Bitter Familiar"
+	title_suffix: ", Bitter Familiar"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_34:
+{
+	string: "Marar"
+	title: "Maleficient Beholder"
+	title_suffix: " the Beholder"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_35:
+{
+	string: "Lenii"
+	title: "Blue Slayer"
+	title_prefix: "Blue "
+	tags:
+	[
+		death
+		color
+	]
+}
+
+deity underworld_deities_deity_36:
+{
+	string: "Proas"
+	title: "Wicked Observer"
+	title_suffix: " the Observer"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_37:
+{
+	string: "Arin"
+	title: "Hideous Beholder"
+	title_suffix: " the Beholder"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_38:
+{
+	string: "Limyon"
+	title: "Harmful Beholder"
+	title_suffix: " the Beholder"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_39:
+{
+	string: "Ailibethas"
+	title: "Indestructible Dreamer"
+	title_suffix: " the Indestructible"
+	tags:
+	[
+		death
+		mysterious
+	]
+}
+
+deity underworld_deities_deity_40:
+{
+	string: "Pisosiurer"
+	title: "Wild Dreamer"
+	title_suffix: ", Wild Dreamer"
+	tags:
+	[
+		death
+		mysterious
+	]
+}
+
+deity underworld_deities_deity_41:
+{
+	string: "Indhax"
+	title: "Purple Horror"
+	title_suffix: " the Horror"
+	tags:
+	[
+		death
+		evil
+		color
+	]
+}
+
+deity underworld_deities_deity_42:
+{
+	string: "Stheras"
+	title: "Grey Observer"
+	title_prefix: "Grey "
+	tags:
+	[
+		death
+		color
+		evil
+	]
+}
+
+deity underworld_deities_deity_43:
+{
+	string: "Babn"
+	title: "Murderous Liar"
+	title_suffix: ", Murderous Liar"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_44:
+{
+	string: "Anob"
+	title: "Destructive Observer"
+	title_suffix: ", Destructive Observer"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_45:
+{
+	string: "Ceel"
+	title: "Stinking Elder"
+	title_suffix: " the Elder"
+	tags:
+	[
+		death
+		mysterious
+		evil
+	]
+}
+
+deity underworld_deities_deity_46:
+{
+	string: "Yeliat"
+	title: "Brown Beholder"
+	title_prefix: "Brown "
+	tags:
+	[
+		death
+		color
+	]
+}
+
+deity underworld_deities_deity_47:
+{
+	string: "Pasasyangon"
+	title: "Baneful Dreamer"
+	title_suffix: " the Baneful"
+	tags:
+	[
+		death
+		evil
+		mysterious
+	]
+}
+
+deity underworld_deities_deity_48:
+{
+	string: "Turch"
+	title: "Obscene Witness"
+	title_prefix: "Obscene "
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_49:
+{
+	string: "Amyarundag"
+	title: "Great Liar"
+	title_suffix: ", Great Liar"
+	tags:
+	[
+		death
+		evil
+		grandiose
+	]
+}
+
+deity underworld_deities_deity_50:
+{
+	string: "Simifus"
+	title: "Old Adversary"
+	title_suffix: ", Old Adversary"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_51:
+{
+	string: "Sorcel"
+	title: "Damned Dreamer"
+	title_suffix: ", Damned Dreamer"
+	tags:
+	[
+		death
+		evil
+		mysterious
+	]
+}
+
+deity underworld_deities_deity_52:
+{
+	string: "Fla"
+	title: "Violent Dreamer"
+	title_prefix: "Violent "
+	title_suffix: " the Dreamer"
+	tags:
+	[
+		death
+		evil
+		mysterious
+	]
+}
+
+deity underworld_deities_deity_53:
+{
+	string: "Grdög"
+	title: "Deathless Elder"
+	title_suffix: ", Deathless Elder"
+	tags:
+	[
+		death
+		mysterious
+	]
+}
+
+deity underworld_deities_deity_54:
+{
+	string: "Andr"
+	title: "Endless Berserker"
+	title_suffix: " the Endless Berserker"
+	tags:
+	[
+		death
+	]
+}
+
+deity underworld_deities_deity_55:
+{
+	string: "Lera"
+	title: "Harmful Devourer"
+	title_prefix: "Harmful "
+	tags:
+	[
+		evil
+	]
+}
+
+deity underworld_deities_deity_56:
+{
+	string: "Aladhe"
+	title: "Wicked Succubus"
+	title_prefix: "Wicked "
+	tags:
+	[
+		evil
+	]
+}
+
+deity underworld_deities_deity_57:
+{
+	string: "Arcalyota"
+	title: "Angry Liar"
+	title_suffix: ", Angry Liar"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_58:
+{
+	string: "Sars"
+	title: "Angry Familiar"
+	title_suffix: ", Angry Familiar"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_59:
+{
+	string: "Sthan"
+	title: "Vicious Phantasm"
+	title_suffix: ", Vicious Phantasm"
+	tags:
+	[
+		evil
+	]
+}
+
+deity underworld_deities_deity_60:
+{
+	string: "Malin"
+	title: "Corrupt Adversary"
+	title_prefix: "Corrupt "
+	title_suffix: " the Adversary"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_61:
+{
+	string: "Salphef"
+	title: "Corrupt Beholder"
+	title_suffix: " the Corrupt Beholder"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_62:
+{
+	string: "Denn"
+	title: "Deadly Cambion"
+	title_suffix: ", Deadly Cambion"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_63:
+{
+	string: "Bevioifus"
+	title: "Dirty Cambion"
+	title_prefix: "Dirty "
+	title_suffix: " the Cambion"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_64:
+{
+	string: "Alam"
+	title: "Toxic Horror"
+	title_suffix: " the Horror"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_65:
+{
+	string: "Baasimuefus"
+	title: "Fat Berserker"
+	title_suffix: " the Fat Berserker"
+	tags:
+	[
+		death
+	]
+}
+
+deity underworld_deities_deity_66:
+{
+	string: "Mondifur"
+	title: "Repugnant Ancient"
+	title_prefix: "Repugnant "
+	title_suffix: " the Ancient"
+	tags:
+	[
+		mysterious
+		evil
+	]
+}
+
+deity underworld_deities_deity_67:
+{
+	string: "Yerahel"
+	title: "Corrupt Witness"
+	title_prefix: "Corrupt "
+	title_suffix: " the Witness"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_68:
+{
+	string: "Barmot"
+	title: "Maleficient Devourer"
+	title_suffix: ", Maleficient Devourer"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_69:
+{
+	string: "Pins"
+	title: "Skinny Observer"
+	title_prefix: "Skinny "
+	tags:
+	[
+		death
+	]
+}
+
+deity underworld_deities_deity_70:
+{
+	string: "Flas"
+	title: "Vicious Beholder"
+	title_suffix: " the Vicious"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_71:
+{
+	string: "Kaba"
+	title: "Cruel Dreamer"
+	title_prefix: "Cruel "
+	title_suffix: " the Dreamer"
+	tags:
+	[
+		death
+		mysterious
+		evil
+	]
+}
+
+deity underworld_deities_deity_72:
+{
+	string: "Ailem"
+	title: "Endless Observer"
+	title_suffix: " the Observer"
+	tags:
+	[
+		death
+	]
+}
+
+deity underworld_deities_deity_73:
+{
+	string: "Mont"
+	title: "Dark Liar"
+	title_suffix: ", Dark Liar"
+	tags:
+	[
+		evil
+		color
+	]
+}
+
+deity underworld_deities_deity_74:
+{
+	string: "Jima"
+	title: "Green Witness"
+	title_suffix: ", Green Witness"
+	tags:
+	[
+		death
+		color
+	]
+}
+
+deity underworld_deities_deity_75:
+{
+	string: "Leqo"
+	title: "Calamitious Slayer"
+	title_suffix: " the Slayer"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_76:
+{
+	string: "Vabeth"
+	title: "Weird Slayer"
+	title_suffix: " the Weird"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_77:
+{
+	string: "Sevyaca"
+	title: "Calamitious Dreamer"
+	title_suffix: " the Dreamer"
+	tags:
+	[
+		death
+		mysterious
+		evil
+	]
+}
+
+deity underworld_deities_deity_78:
+{
+	string: "Susos"
+	title: "Ugly Watcher"
+	title_prefix: "Ugly "
+	title_suffix: " the Watcher"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_79:
+{
+	string: "Namos"
+	title: "Great Phantasm"
+	title_suffix: " the Great Phantasm"
+	tags:
+	[
+		death
+		evil
+		grandiose
+	]
+}
+
+deity underworld_deities_deity_80:
+{
+	string: "Osun"
+	title: "Crazy Beholder"
+	title_suffix: " the Crazy Beholder"
+	tags:
+	[
+		death
+	]
+}
+
+deity underworld_deities_deity_81:
+{
+	string: "Guamocur"
+	title: "Wrathful Berserker"
+	title_prefix: "Wrathful "
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_82:
+{
+	string: "Memiarar"
+	title: "Strange Beholder"
+	title_suffix: " the Strange"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_83:
+{
+	string: "Naevainiat"
+	title: "Angry Berserker"
+	title_prefix: "Angry "
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_84:
+{
+	string: "Lezbem"
+	title: "Cruel Beholder"
+	title_suffix: " the Beholder"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_85:
+{
+	string: "Bamogdax"
+	title: "Blue Elder"
+	title_suffix: " the Elder"
+	tags:
+	[
+		death
+		mysterious
+		color
+	]
+}
+
+deity underworld_deities_deity_86:
+{
+	string: "Gusan"
+	title: "Execrable Dreamer"
+	title_suffix: " the Execrable"
+	tags:
+	[
+		death
+		evil
+		mysterious
+	]
+}
+
+deity underworld_deities_deity_87:
+{
+	string: "Desitsu"
+	title: "Mad Phantasm"
+	title_suffix: " the Mad"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_88:
+{
+	string: "Gucondo"
+	title: "Harmful Watcher"
+	title_suffix: " the Watcher"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_89:
+{
+	string: "Garb"
+	title: "Black Beholder"
+	title_prefix: "Black "
+	title_suffix: " the Beholder"
+	tags:
+	[
+		death
+		color
+		evil
+	]
+}
+
+deity underworld_deities_deity_90:
+{
+	string: "Barar"
+	title: "Absurd Succubus"
+	title_suffix: " the Succubus"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_91:
+{
+	string: "Mors"
+	title: "Infernal Horror"
+	title_suffix: " the Infernal Horror"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_92:
+{
+	string: "Einnkaba"
+	title: "Vicious Witness"
+	title_prefix: "Vicious "
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_93:
+{
+	string: "Ifrgo"
+	title: "Deep Witness"
+	title_suffix: " the Witness"
+	tags:
+	[
+		death
+	]
+}
+
+deity underworld_deities_deity_94:
+{
+	string: "Krur"
+	title: "Toxic Inquisitor"
+	title_prefix: "Toxic "
+	title_suffix: " the Inquisitor"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_95:
+{
+	string: "Aby"
+	title: "Depraved Phantasm"
+	title_prefix: "Depraved "
+	title_suffix: " the Phantasm"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_96:
+{
+	string: "Ghezus"
+	title: "Bloody Slayer"
+	title_prefix: "Bloody "
+	title_suffix: " the Slayer"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_97:
+{
+	string: "Luruzus"
+	title: "Destructive Dreamer"
+	title_suffix: " the Destructive"
+	tags:
+	[
+		death
+		evil
+		mysterious
+	]
+}
+
+deity underworld_deities_deity_98:
+{
+	string: "Baarymar"
+	title: "Harmful Devourer"
+	title_prefix: "Harmful "
+	title_suffix: " the Devourer"
+	tags:
+	[
+		death
+		evil
+	]
+}
+
+deity underworld_deities_deity_99:
+{
+	string: "Must"
+	title: "Wild Observer"
+	title_suffix: " the Observer"
+	tags:
+	[
+	]
+}
+

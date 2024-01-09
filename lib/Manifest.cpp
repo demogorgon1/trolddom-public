@@ -6,6 +6,7 @@
 #include <tpublic/Data/Aura.h>
 #include <tpublic/Data/Class.h>
 #include <tpublic/Data/CreatureType.h>
+#include <tpublic/Data/Deity.h>
 #include <tpublic/Data/DialogueRoot.h>
 #include <tpublic/Data/DialogueScreen.h>
 #include <tpublic/Data/Entity.h>
@@ -24,6 +25,7 @@
 #include <tpublic/Data/MapTrigger.h>
 #include <tpublic/Data/NPCBehaviorState.h>
 #include <tpublic/Data/Objective.h>
+#include <tpublic/Data/Pantheon.h>
 #include <tpublic/Data/ParticleSystem.h>
 #include <tpublic/Data/Profession.h>
 #include <tpublic/Data/Quest.h>
@@ -48,6 +50,7 @@ namespace tpublic
 		RegisterDataContainer<Data::Aura>();
 		RegisterDataContainer<Data::Class>();
 		RegisterDataContainer<Data::CreatureType>();
+		RegisterDataContainer<Data::Deity>();
 		RegisterDataContainer<Data::DialogueRoot>();
 		RegisterDataContainer<Data::DialogueScreen>();
 		RegisterDataContainer<Data::Entity>();
@@ -66,6 +69,7 @@ namespace tpublic
 		RegisterDataContainer<Data::MapTrigger>();		
 		RegisterDataContainer<Data::NPCBehaviorState>();
 		RegisterDataContainer<Data::Objective>();
+		RegisterDataContainer<Data::Pantheon>();
 		RegisterDataContainer<Data::ParticleSystem>();
 		RegisterDataContainer<Data::Profession>();
 		RegisterDataContainer<Data::Quest>();
@@ -75,7 +79,7 @@ namespace tpublic
 		RegisterDataContainer<Data::Talent>();
 		RegisterDataContainer<Data::TalentTree>();
 		RegisterDataContainer<Data::WordGenerator>();
-		RegisterDataContainer<Data::Zone>();
+		RegisterDataContainer<Data::Zone>();				
 	}
 
 	Manifest::~Manifest()
