@@ -199,6 +199,21 @@ namespace tpublic
 				}
 			}
 
+			uint32_t
+			GetTotalBudgetCost() const
+			{
+				uint32_t sum = 0;
+				for (uint32_t i = 1; i < (uint32_t)NUM_IDS; i++)
+				{
+					if(m_stats[i] != 0)
+					{
+						const Info* statInfo = GetInfo((Id)i);
+						sum += statInfo->m_budgetCost * m_stats[i];
+					}
+				}
+				return sum;
+			}
+
 			// Public data
 			uint32_t		m_stats[NUM_IDS] = { 0 };
 		};

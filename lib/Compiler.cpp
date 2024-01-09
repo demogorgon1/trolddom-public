@@ -210,6 +210,9 @@ namespace tpublic
 
 		for (const std::filesystem::directory_entry& entry : it)
 		{
+			std::string path = entry.path().string().c_str();
+			std::replace(path.begin(), path.end(), '\\', '/');
+
 			if (entry.is_regular_file() && entry.path().extension().string() == ".txt")
 			{
 				if(entry.path().filename().string().c_str()[0] != '_')
@@ -220,7 +223,7 @@ namespace tpublic
 			}
 			else if(entry.is_directory() && entry.path().filename().string().c_str()[0] != '_')
 			{
-				_ParseDirectory(aRootPath, entry.path().string().c_str());
+				_ParseDirectory(aRootPath, path.c_str());
 			}
 		}
 

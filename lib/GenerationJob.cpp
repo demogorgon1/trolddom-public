@@ -277,6 +277,7 @@ namespace tpublic
 		Stat::Collection baseStatWeights;
 		ItemBinding::Id itemBinding = ItemBinding::ID_WHEN_EQUIPPED;
 		std::vector<uint32_t> specialPropabilities;		
+		int32_t budgetBias = 0;
 
 		aSource->ForEachChild([&](
 			const SourceNode* aChild)
@@ -417,6 +418,8 @@ namespace tpublic
 						}
 					}
 
+					int32_t itemBudgetBias = budgetBias - (int32_t)rawStats.GetTotalBudgetCost();
+
 					const char* iconName = _PickIconName(lastEquipmentSlotTagId, allTags);
 
 					GeneratedSource* output = _CreateGeneratedSource();
@@ -430,6 +433,9 @@ namespace tpublic
 					output->PrintF(1, "required_level: %u", itemLevel);
 					output->PrintF(1, "type: %s", ItemType::GetInfo(itemType)->m_name);
 					output->PrintF(1, "binds: %s", ItemBinding::GetInfo(itemBinding)->m_name);
+
+					if(itemBudgetBias != 0)
+						output->PrintF(1, "budget_bias: %d", itemBudgetBias);
 
 					if(itemClass->m_slots.size() > 0)
 					{

@@ -5612,6 +5612,7 @@ item world_drops_item_215:
 	required_level: 5
 	type: armor_cloth
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		chest
@@ -5812,6 +5813,7 @@ item world_drops_item_222:
 	required_level: 6
 	type: armor_mail
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		head
@@ -6289,6 +6291,7 @@ item world_drops_item_239:
 	required_level: 10
 	type: armor_cloth
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		chest
@@ -6350,6 +6353,7 @@ item world_drops_item_241:
 	required_level: 8
 	type: armor_cloth
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		feet
@@ -6380,6 +6384,7 @@ item world_drops_item_242:
 	required_level: 7
 	type: armor_plate
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		feet
@@ -6689,6 +6694,7 @@ item world_drops_item_253:
 	required_level: 7
 	type: armor_plate
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		waist
@@ -6716,6 +6722,7 @@ item world_drops_item_254:
 	required_level: 9
 	type: armor_cloth
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		back
@@ -6857,6 +6864,7 @@ item world_drops_item_259:
 	required_level: 7
 	type: armor_mail
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		legs
@@ -7116,6 +7124,7 @@ item world_drops_item_268:
 	required_level: 6
 	type: armor_mail
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		hands
@@ -7178,6 +7187,7 @@ item world_drops_item_270:
 	required_level: 10
 	type: armor_plate
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		head
@@ -7267,6 +7277,7 @@ item world_drops_item_273:
 	required_level: 9
 	type: armor_plate
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		head
@@ -7509,6 +7520,7 @@ item world_drops_item_282:
 	required_level: 6
 	type: armor_mail
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		legs
@@ -7899,6 +7911,7 @@ item world_drops_item_296:
 	required_level: 6
 	type: armor_cloth
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		back
@@ -8073,6 +8086,7 @@ item world_drops_item_302:
 	required_level: 10
 	type: armor_mail
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		legs
@@ -8215,6 +8229,7 @@ item world_drops_item_307:
 	required_level: 8
 	type: none
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		finger_1
@@ -8416,6 +8431,7 @@ item world_drops_item_314:
 	required_level: 8
 	type: none
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		neck
@@ -8444,6 +8460,7 @@ item world_drops_item_315:
 	required_level: 10
 	type: armor_plate
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		feet
@@ -8474,6 +8491,7 @@ item world_drops_item_316:
 	required_level: 9
 	type: armor_cloth
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		hands
@@ -8558,6 +8576,7 @@ item world_drops_item_319:
 	required_level: 9
 	type: armor_plate
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		head
@@ -8588,6 +8607,7 @@ item world_drops_item_320:
 	required_level: 10
 	type: armor_plate
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		head
@@ -8619,6 +8639,7 @@ item world_drops_item_321:
 	required_level: 10
 	type: armor_plate
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		feet
@@ -8884,6 +8905,7 @@ item world_drops_item_330:
 	required_level: 10
 	type: armor_cloth
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		waist
@@ -8915,6 +8937,7 @@ item world_drops_item_331:
 	required_level: 8
 	type: none
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		neck
@@ -8970,6 +8993,7 @@ item world_drops_item_333:
 	required_level: 10
 	type: armor_plate
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		shoulders
@@ -9031,6 +9055,7 @@ item world_drops_item_335:
 	required_level: 8
 	type: armor_mail
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		head
@@ -9115,6 +9140,7 @@ item world_drops_item_338:
 	required_level: 10
 	type: armor_plate
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		feet
@@ -9203,6 +9229,7 @@ item world_drops_item_341:
 	required_level: 10
 	type: armor_cloth
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		chest
@@ -9231,6 +9258,7 @@ item world_drops_item_342:
 	required_level: 10
 	type: armor_mail
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		feet
@@ -9372,6 +9400,7 @@ item world_drops_item_347:
 	required_level: 8
 	type: armor_cloth
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		feet
@@ -9429,6 +9458,7 @@ item world_drops_item_349:
 	required_level: 8
 	type: armor_mail
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		chest
@@ -9547,6 +9577,7 @@ item world_drops_item_353:
 	required_level: 10
 	type: armor_cloth
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		legs
@@ -9601,6 +9632,7 @@ item world_drops_item_355:
 	required_level: 10
 	type: armor_plate
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		legs
@@ -9656,6 +9688,7 @@ item world_drops_item_357:
 	required_level: 9
 	type: armor_plate
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		waist
@@ -9745,6 +9778,7 @@ item world_drops_item_360:
 	required_level: 8
 	type: none
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		neck
@@ -9855,6 +9889,7 @@ item world_drops_item_364:
 	required_level: 8
 	type: armor_cloth
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		feet
@@ -9913,6 +9948,7 @@ item world_drops_item_366:
 	required_level: 10
 	type: armor_cloth
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		back
@@ -10026,6 +10062,7 @@ item world_drops_item_370:
 	required_level: 8
 	type: none
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		neck
@@ -10053,6 +10090,7 @@ item world_drops_item_371:
 	required_level: 8
 	type: armor_cloth
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		chest
@@ -10110,6 +10148,7 @@ item world_drops_item_373:
 	required_level: 9
 	type: armor_plate
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		feet
@@ -10139,6 +10178,7 @@ item world_drops_item_374:
 	required_level: 9
 	type: armor_cloth
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		feet
@@ -10227,6 +10267,7 @@ item world_drops_item_377:
 	required_level: 10
 	type: armor_plate
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		feet
@@ -10453,6 +10494,7 @@ item world_drops_item_385:
 	required_level: 9
 	type: armor_cloth
 	binds: when_equipped
+	budget_bias: -20
 	equipment_slots:
 	[
 		waist
@@ -10484,6 +10526,7 @@ item world_drops_item_386:
 	required_level: 9
 	type: armor_cloth
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		head
@@ -10515,6 +10558,7 @@ item world_drops_item_387:
 	required_level: 8
 	type: armor_mail
 	binds: when_equipped
+	budget_bias: -20
 	equipment_slots:
 	[
 		legs
@@ -10544,6 +10588,7 @@ item world_drops_item_388:
 	required_level: 9
 	type: armor_plate
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		hands
@@ -10602,6 +10647,7 @@ item world_drops_item_390:
 	required_level: 10
 	type: armor_plate
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		hands
@@ -10716,6 +10762,7 @@ item world_drops_item_394:
 	required_level: 8
 	type: armor_mail
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		chest
@@ -10744,6 +10791,7 @@ item world_drops_item_395:
 	required_level: 9
 	type: armor_plate
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		wrists
@@ -10802,6 +10850,7 @@ item world_drops_item_397:
 	required_level: 10
 	type: armor_mail
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		chest
@@ -10861,6 +10910,7 @@ item world_drops_item_399:
 	required_level: 10
 	type: none
 	binds: when_equipped
+	budget_bias: -10
 	equipment_slots:
 	[
 		finger_1
