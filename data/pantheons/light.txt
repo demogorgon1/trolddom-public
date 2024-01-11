@@ -7,10 +7,23 @@ faction light:
 pantheon light:
 {
 	string: "The Light"
+	icon: icon_holy
 	faction: light
 	opposition: underworld
 	
-	notification_string<gained_reputation>: "You've gained favor with the light."
-	notification_string<lost_reputation>: "You've lost favor with the light."
+	notification_string<gained_favor>: "You've gained favor with the light."
+	notification_string<lost_favor>: "You've lost favor with the light."
+	
+	deity_specifier: "a holy"
+	
+	player_levels:
+	[
+		"Heathen"
+		"Neutral"
+		"Follower"
+		"Disciple"
+		"Beacon"
+		"Paragon"		
+	]
 }
 

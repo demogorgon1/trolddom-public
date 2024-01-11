@@ -110,6 +110,8 @@ sprites:
 	sprite icon_chest_1 : { tags: [ icon mail plate chest ] }
 	sprite icon_chest_2 : { tags: [ icon mail plate chest ] }
 	sprite icon_default : { }
+	sprite icon_unholy : { }
+	sprite icon_holy : { }
 	
 }
 

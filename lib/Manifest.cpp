@@ -115,6 +115,7 @@ namespace tpublic
 		m_professionMetrics.ToStream(aStream);
 		m_abilityMetrics.ToStream(aStream);
 		m_wordList.ToStream(aStream);
+		m_worshipMetrics.ToStream(aStream);
 	}
 
 	bool
@@ -142,7 +143,9 @@ namespace tpublic
 			return false;
 		if (!m_abilityMetrics.FromStream(aStream))
 			return false;
-		if(!m_wordList.FromStream(aStream))
+		if (!m_wordList.FromStream(aStream))
+			return false;
+		if (!m_worshipMetrics.FromStream(aStream))
 			return false;
 
 		return true;

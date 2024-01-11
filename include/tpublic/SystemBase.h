@@ -32,6 +32,8 @@ namespace tpublic
 			const LootGenerator*	m_lootGenerator = NULL;
 			const Pantheons*		m_pantheons = NULL;
 			const Manifest*			m_manifest = NULL;
+			uint32_t				m_mapId = 0;
+			uint32_t				m_mapSeed = 0;
 		};
 
 		SystemBase(

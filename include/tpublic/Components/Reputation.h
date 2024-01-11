@@ -27,7 +27,7 @@ namespace tpublic
 					for(Map::const_iterator i = m_map.cbegin(); i != m_map.cend(); i++)
 					{
 						aWriter->WriteUInt(i->first);
-						aWriter->WriteUInt(i->second);
+						aWriter->WriteInt(i->second);
 					}
 				}
 
@@ -36,24 +36,26 @@ namespace tpublic
 					IReader*		aReader)
 				{
 					size_t count;
-					if(!aReader->ReadUInt(count))
+					if(!aReader->ReadInt(count))
 						return false;
 
 					for(size_t i = 0; i < count; i++)
 					{
-						std::pair<uint32_t, uint32_t> t;
-						if (!aReader->ReadUInt(t.first))
-							return false;
-						if (!aReader->ReadUInt(t.second))
+						uint32_t factionId;
+						if (!aReader->ReadUInt(factionId))
 							return false;
 
-						m_map.insert(t);
+						int32_t reputation;
+						if (!aReader->ReadInt(reputation))
+							return false;
+
+						m_map[factionId] = reputation;
 					}
 					return true;
 				}
 
 				// Public data
-				typedef std::unordered_map<uint32_t, uint32_t> Map;
+				typedef std::unordered_map<uint32_t, int32_t> Map;
 				Map			m_map;
 			};
 
@@ -69,42 +71,52 @@ namespace tpublic
 				aSchema->DefineCustomObjectNoSource<Table>(FIELD_TABLE, offsetof(Reputation, m_table));
 			}
 
-			uint32_t
-			Gain(
+			int32_t
+			Modify(
 				uint32_t			aFactionId,
-				uint32_t			aReputation,
-				uint32_t			aMaxReputation)
+				int32_t				aReputation,
+				int32_t				aMinReputation,
+				int32_t				aMaxReputation,
+				bool&				aOutReputationWasPositive)
 			{
+				assert(aFactionId != 0);
 				Table::Map::iterator i = m_table.m_map.find(aFactionId);
 				if(i != m_table.m_map.end())
 				{					
-					uint32_t add = aMaxReputation > i->second ? std::min(aReputation, aMaxReputation - i->second) : 0;
-					i->second += add;
-					return add;
+					int32_t oldValue = i->second;
+					int32_t newValue = i->second + aReputation;
+					if(newValue < aMinReputation)
+						newValue = aMinReputation;
+					if (newValue > aMaxReputation)
+						newValue = aMaxReputation;
+					i->second = newValue;
+					aOutReputationWasPositive = oldValue > 0;
+					return newValue - oldValue;
 				}
 
-				uint32_t v = std::min(aReputation, aMaxReputation);
-				m_table.m_map[aFactionId] = v;
-				return v;
+				int32_t newValue = aReputation;
+				if (newValue < aMinReputation)
+					newValue = aMinReputation;
+				if (newValue > aMaxReputation)
+					newValue = aMaxReputation;
+				aOutReputationWasPositive = false;
+				m_table.m_map[aFactionId] = newValue;
+				return newValue;
 			}
 
-			uint32_t
-			Lose(
-				uint32_t			aFactionId,
-				uint32_t			aReputation)
+			int32_t
+			GetReputation(
+				uint32_t			aFactionId) const
 			{
-				Table::Map::iterator i = m_table.m_map.find(aFactionId);
-				if(i == m_table.m_map.end())
+				Table::Map::const_iterator i = m_table.m_map.find(aFactionId);
+				if(i == m_table.m_map.cend())
 					return 0;
 
-				uint32_t subtract = std::min(aReputation, i->second);
-				i->second -= subtract;
-				return subtract;
+				return i->second;
 			}
 
 			// Public data
 			Table			m_table;
-
 		};
 	}
 

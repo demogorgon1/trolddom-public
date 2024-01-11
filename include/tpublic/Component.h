@@ -48,6 +48,7 @@ namespace tpublic
 			ID_REPUTATION,
 			ID_DEITY_RELATIONS,
 			ID_SHRINE,
+			ID_DEITY_DISCOVERY,
 
 			NUM_IDS
 		};
@@ -93,7 +94,8 @@ namespace tpublic
 			"openable",
 			"reputation",
 			"deity_relations",
-			"shrine"
+			"shrine",
+			"deity_discovery"
 		};		
 
 		static_assert(sizeof(COMPONENT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

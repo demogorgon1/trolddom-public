@@ -106,6 +106,17 @@ namespace tpublic
 			m_array.clear();
 		}
 
+		void
+		ForEach(
+			std::function<void(const _T&)>	aCallback) const
+		{
+			for(const Range& t : m_array)
+			{
+				for(_T i = t.m_min; i <= t.m_max; i++)
+					aCallback(i);
+			}
+		}
+
 		// Serialization
 		void		ToStream(
 						IWriter*			aWriter) const;

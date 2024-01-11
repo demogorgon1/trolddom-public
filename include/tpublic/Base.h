@@ -68,6 +68,8 @@ namespace tpublic::Base
 		return hash;
 	}
 
+	// Can't use std::min and std::max because Windows farts up the global namespace with macros
+
 	template <typename _T>
 	inline _T
 	Min(

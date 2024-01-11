@@ -91,6 +91,10 @@ namespace tpublic
 			{
 				m_manifest->m_abilityMetrics.FromSource(aNode);
 			}
+			else if (aNode->m_name == "worship_metrics")
+			{
+				m_manifest->m_worshipMetrics.FromSource(aNode);
+			}
 			else if(aNode->m_name == "sprites")
 			{
 				spriteSheetBuilder.AddSprites(aNode);

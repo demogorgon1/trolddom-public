@@ -17,6 +17,36 @@ namespace tpublic
 			static const Persistence::Id PERSISTENCE = Persistence::ID_MAIN;
 			static const Replication REPLICATION = REPLICATION_NONE;
 
+			struct Entry
+			{
+				void
+				ToStream(
+					IWriter*		aWriter) const
+				{
+					aWriter->WriteUInt(m_desecrations);
+					aWriter->WriteUInt(m_prayers);
+					aWriter->WriteUInt(m_offerings);
+				}
+
+				bool
+				FromStream(
+					IReader*		aReader)
+				{
+					if (!aReader->ReadUInt(m_desecrations))
+						return false;
+					if (!aReader->ReadUInt(m_prayers))
+						return false;
+					if (!aReader->ReadUInt(m_offerings))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t				m_desecrations = 0;
+				uint32_t				m_prayers = 0;
+				uint32_t				m_offerings = 0;
+			};
+
 			struct Table
 			{
 				void
@@ -27,7 +57,7 @@ namespace tpublic
 					for(Map::const_iterator i = m_map.cbegin(); i != m_map.cend(); i++)
 					{
 						aWriter->WriteUInt(i->first);
-						aWriter->WriteUInt(i->second);
+						i->second.ToStream(aWriter);
 					}
 				}
 
@@ -41,19 +71,21 @@ namespace tpublic
 
 					for(size_t i = 0; i < count; i++)
 					{
-						std::pair<uint32_t, uint32_t> t;
-						if (!aReader->ReadUInt(t.first))
-							return false;
-						if (!aReader->ReadUInt(t.second))
+						uint32_t deityId;
+						if (!aReader->ReadUInt(deityId))
 							return false;
 
-						m_map.insert(t);
+						Entry entry;
+						if (!entry.FromStream(aReader))
+							return false;
+
+						m_map[deityId] = entry;
 					}
 					return true;
 				}
 
 				// Public data
-				typedef std::unordered_map<uint32_t, uint32_t> Map;
+				typedef std::unordered_map<uint32_t, Entry> Map;
 				Map			m_map;
 			};
 
@@ -68,38 +100,26 @@ namespace tpublic
 			{
 				aSchema->DefineCustomObjectNoSource<Table>(FIELD_TABLE, offsetof(DeityRelations, m_table));
 			}
-
-			uint32_t
-			Gain(
-				uint32_t			aFactionId,
-				uint32_t			aReputation,
-				uint32_t			aMaxReputation)
+		
+			Entry*
+			GetEntryForUpdate(
+				uint32_t			aDeityId)
 			{
-				Table::Map::iterator i = m_table.m_map.find(aFactionId);
+				Table::Map::iterator i = m_table.m_map.find(aDeityId);
 				if(i != m_table.m_map.end())
-				{					
-					uint32_t add = aMaxReputation > i->second ? std::min(aReputation, aMaxReputation - i->second) : 0;
-					i->second += add;
-					return add;
-				}
+					return &i->second;
 
-				uint32_t v = std::min(aReputation, aMaxReputation);
-				m_table.m_map[aFactionId] = v;
-				return v;
+				return &(m_table.m_map[aDeityId] = Entry());
 			}
 
-			uint32_t
-			Lose(
-				uint32_t			aFactionId,
-				uint32_t			aReputation)
+			const Entry*
+			GetEntry(
+				uint32_t			aDeityId) const
 			{
-				Table::Map::iterator i = m_table.m_map.find(aFactionId);
-				if(i == m_table.m_map.end())
-					return 0;
-
-				uint32_t subtract = std::min(aReputation, i->second);
-				i->second -= subtract;
-				return subtract;
+				Table::Map::const_iterator i = m_table.m_map.find(aDeityId);
+				if (i == m_table.m_map.cend())
+					return NULL;
+				return &i->second;
 			}
 
 			// Public data

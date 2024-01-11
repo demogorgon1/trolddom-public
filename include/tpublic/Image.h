@@ -1,6 +1,9 @@
 #pragma once
 
 #include "DataErrorHandling.h"
+#include "IReader.h"
+#include "IWriter.h"
+#include "SourceNode.h"
 #include "Vec2.h"
 
 namespace tpublic
@@ -11,6 +14,32 @@ namespace tpublic
 	public:
 		struct RGBA
 		{
+			RGBA(
+				uint8_t								aR = 0,
+				uint8_t								aG = 0,
+				uint8_t								aB = 0,
+				uint8_t								aA = 0)
+				: m_r(aR)
+				, m_g(aG)
+				, m_b(aB)
+				, m_a(aA)
+			{
+
+			}
+
+			RGBA(
+				const SourceNode*					aSource)
+			{
+				const SourceNode* p = aSource->GetArray();
+				size_t count = p->m_children.size();
+				TP_VERIFY(count == 3 || count == 4, aSource->m_debugInfo, "Not a valid RGBA color.");
+				m_r = p->m_children[0]->GetUInt8();
+				m_g = p->m_children[1]->GetUInt8();
+				m_b = p->m_children[2]->GetUInt8();
+				m_a = count == 4 ? p->m_children[3]->GetUInt8() : 255;
+			}
+
+			// Public data
 			uint8_t		m_r;
 			uint8_t		m_g;
 			uint8_t		m_b;

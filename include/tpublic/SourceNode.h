@@ -313,6 +313,15 @@ namespace tpublic
 				aOut.push_back((_T)child->GetUInt32());
 		}
 
+		void
+		GetStringArray(
+			std::vector<std::string>&		aOut) const
+		{
+			TP_VERIFY(m_type == TYPE_ARRAY, m_debugInfo, "Not an array.");
+			for (const std::unique_ptr<SourceNode>& child : m_children)
+				aOut.push_back(child->GetString());
+		}
+
 		template <typename _T>
 		void
 		GetIntRange(

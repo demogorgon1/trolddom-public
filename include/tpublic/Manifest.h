@@ -11,6 +11,7 @@
 #include "ProfessionMetrics.h"
 #include "QuestMetrics.h"
 #include "WordList.h"
+#include "WorshipMetrics.h"
 #include "XPMetrics.h"
 
 namespace tpublic
@@ -398,6 +399,7 @@ namespace tpublic
 		QuestMetrics									m_questMetrics;
 		ProfessionMetrics								m_professionMetrics;
 		AbilityMetrics									m_abilityMetrics;
+		WorshipMetrics									m_worshipMetrics;
 		WordList::Data									m_wordList;
 
 		// Public data
