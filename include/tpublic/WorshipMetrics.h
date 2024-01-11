@@ -169,6 +169,13 @@ namespace tpublic
 
 			return m_levelColors[index];
 		}
+
+		uint32_t
+		GetMaxLevel() const
+		{	
+			TP_CHECK(m_levels.size() > 0, "No levels defined.");
+			return (uint32_t)m_levels.size() - 1;
+		}
 				
 		// Public data
 		int32_t								m_maxFavor = 0;

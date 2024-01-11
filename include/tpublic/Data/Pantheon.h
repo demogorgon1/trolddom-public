@@ -81,6 +81,8 @@ namespace tpublic
 							m_notificationStrings[SourceToNotificationString(aChild)] = aChild->GetString();
 						else if(aChild->m_name == "player_levels")
 							aChild->GetStringArray(m_playerLevels);
+						else if (aChild->m_name == "blessings")
+							aChild->GetIdArray(DataType::ID_AURA, m_blessingAuraIds);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -99,6 +101,7 @@ namespace tpublic
 				aWriter->WriteUInt(m_factionId);
 				aWriter->WriteUInt(m_oppositionPantheonId);
 				aWriter->WriteStrings(m_playerLevels);
+				aWriter->WriteUInts(m_blessingAuraIds);
 
 				for (uint32_t i = 0; i < (uint32_t)NUM_NOTIFICATION_STRINGS; i++)
 					aWriter->WriteString(m_notificationStrings[i]);
@@ -123,6 +126,8 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadStrings(m_playerLevels))
 					return false;
+				if (!aReader->ReadUInts(m_blessingAuraIds))
+					return false;
 
 				for(uint32_t i = 0; i < (uint32_t)NUM_NOTIFICATION_STRINGS; i++)
 				{
@@ -140,6 +145,7 @@ namespace tpublic
 			uint32_t							m_oppositionPantheonId = 0;
 			std::string							m_notificationStrings[NUM_NOTIFICATION_STRINGS];
 			std::vector<std::string>			m_playerLevels;
+			std::vector<uint32_t>				m_blessingAuraIds;
 		};
 
 	}

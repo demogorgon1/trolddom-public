@@ -142,7 +142,7 @@ namespace tpublic
 
 			// Public data
 			std::vector<std::unique_ptr<Entry>>					m_entries;
-			bool												m_dirty = false;
+			uint32_t											m_seq = 0;
 		};
 	}
 

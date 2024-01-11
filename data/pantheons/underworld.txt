@@ -25,5 +25,39 @@ pantheon underworld:
 		"Beacon"
 		"Paragon"		
 	]	
+	
+	blessings:
+	[
+		underworld_aura_1
+		underworld_aura_2
+		underworld_aura_3
+		underworld_aura_4
+		underworld_aura_5
+		underworld_aura_6
+		underworld_aura_7
+		underworld_aura_8
+		underworld_aura_9
+		underworld_aura_10
+	]
 }
 
+!define local UNHOLY_BLESSING
+{
+	type: buff
+	string: "Blessing of the Underworld"
+	icon: icon_unholy		
+	duration: 18000
+	description: @_description
+	stat_modifiers: { dexterity: { add_percent: @_percent } strength: { add_percent: @_percent } wisdom: { add_percent: @_percent } constitution: { add_percent: @_percent } spirit: { add_percent: @_percent } }
+}
+
+aura underworld_aura_1: !UNHOLY_BLESSING { _description: "Increases all your stats by 1%." _percent: 1 }
+aura underworld_aura_2: !UNHOLY_BLESSING { _description: "Increases all your stats by 2%." _percent: 2 }
+aura underworld_aura_3: !UNHOLY_BLESSING { _description: "Increases all your stats by 3%." _percent: 3 }
+aura underworld_aura_4: !UNHOLY_BLESSING { _description: "Increases all your stats by 4%." _percent: 4 }
+aura underworld_aura_5: !UNHOLY_BLESSING { _description: "Increases all your stats by 5%." _percent: 5 }
+aura underworld_aura_6: !UNHOLY_BLESSING { _description: "Increases all your stats by 6%." _percent: 6 }
+aura underworld_aura_7: !UNHOLY_BLESSING { _description: "Increases all your stats by 7%." _percent: 7 }
+aura underworld_aura_8: !UNHOLY_BLESSING { _description: "Increases all your stats by 8%." _percent: 8 }
+aura underworld_aura_9: !UNHOLY_BLESSING { _description: "Increases all your stats by 9%." _percent: 9 }
+aura underworld_aura_10: !UNHOLY_BLESSING { _description: "Increases all your stats by 10%." _percent: 10 }

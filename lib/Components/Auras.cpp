@@ -66,7 +66,7 @@ namespace tpublic::Components
 				entry->m_effects.push_back(std::unique_ptr<AuraEffectBase>(effect->m_auraEffectBase->Copy()));
 		}
 
-		m_dirty = true;
+		m_seq++;
 	}
 
 }

@@ -78,7 +78,7 @@ namespace tpublic::Systems
 					Helpers::RemoveCyclicFromVector(auras->m_entries, i);
 					i--;
 
-					auras->m_dirty = true;
+					auras->m_seq++;
 					auras->SetPendingPersistenceUpdate(tpublic::ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY);
 				}
 			}
@@ -98,10 +98,11 @@ namespace tpublic::Systems
 	{
 		{
 			Components::Auras* auras = GetComponent<Components::Auras>(aComponents);
+			Components::VisibleAuras* visibleAuras = GetComponent<Components::VisibleAuras>(aComponents);
 
-			if(auras->m_dirty)
+			if(auras->m_seq > visibleAuras->m_seq)
 			{
-				Components::VisibleAuras* visibleAuras = GetComponent<Components::VisibleAuras>(aComponents);
+				visibleAuras->m_seq = auras->m_seq;
 				visibleAuras->m_entries.clear();
 				visibleAuras->m_stunned = false;
 
@@ -118,7 +119,6 @@ namespace tpublic::Systems
 						visibleAuras->m_stunned = true;
 				}
 
-				auras->m_dirty = false;
 				visibleAuras->SetDirty();
 			}
 		}

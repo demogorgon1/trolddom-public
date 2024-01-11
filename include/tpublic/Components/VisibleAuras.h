@@ -80,6 +80,9 @@ namespace tpublic
 			// Public data
 			std::vector<Entry>	m_entries;			
 			bool				m_stunned = false;
+
+			// Internal
+			uint32_t			m_seq = 0;
 		};
 	}
 
