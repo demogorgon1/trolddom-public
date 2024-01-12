@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../DirectEffectBase.h"
+#include "../SimpleDirectEffect.h"
 
 namespace tpublic
 {
@@ -8,18 +9,18 @@ namespace tpublic
 	namespace DirectEffects
 	{
 
-		struct Kill
+		struct Simple
 			: public DirectEffectBase
 		{
-			static const DirectEffect::Id ID = DirectEffect::ID_KILL;
+			static const DirectEffect::Id ID = DirectEffect::ID_SIMPLE;
 
-			Kill()
+			Simple()
 			{
 
 			}
 
 			virtual 
-			~Kill()
+			~Simple()
 			{
 
 			}
@@ -45,6 +46,7 @@ namespace tpublic
 						const IWorldView*			aWorldView) override;
 
 			// Public data
+			SimpleDirectEffect::Id	m_id = SimpleDirectEffect::INVALID_ID;
 		};
 
 	}

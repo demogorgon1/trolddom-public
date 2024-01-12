@@ -1,3 +1,8 @@
+cooldown global:
+{
+	duration: 15
+}
+
 ability attack:
 {
 	string: "Attack"	
@@ -20,15 +25,20 @@ aura pushed:
 	type: debuff
 }
 
+cooldown push:
+{
+	duration: 100
+}
+
 ability push:
 {
 	string: "Push"	
-	cooldown: 100
+	cooldowns: [ global push ]
 	flags: [ target_other target_hostile ]	
 	states: [ default in_combat ]
 	icon: icon_push
 	
-	direct_effect push:
+	direct_effect simple<push>:
 	{
 	}
 	
@@ -45,16 +55,21 @@ ability open:
 	states: [ default in_combat ]
 	icon: icon_stuff
 	
-	direct_effect open:
+	direct_effect simple<open>:
 	{
 	}
+}
+
+cooldown strike:
+{
+	duration: 30
 }
 
 ability strike:
 {
 	string: "Strike"
 	range: 1	
-	cooldown: 30
+	cooldowns: [ global strike ]
 	flags: [ offensive target_other target_hostile can_be_dodged can_be_parried can_miss ]
 	states: [ default in_combat ]
 	icon: icon_strike
@@ -73,12 +88,12 @@ ability firebolt:
 	string: "Firebolt"
 	range: 7	
 	cast_time: 25
+	cooldowns: [ global ]
 	flags: [ spell offensive target_other target_hostile can_miss ]
 	states: [ default in_combat ]
 	icon: icon_firebolt
 	speed: 5
 	projectile: firebolt
-	cooldown: 0
 	resource_cost mana: 10
 	
 	direct_effect damage:
@@ -87,6 +102,11 @@ ability firebolt:
 		damage_type: physical
 		base: [ 10 20 ]
 	}
+}
+
+cooldown lake_of_fire:
+{
+	duration: 100
 }
 
 ability lake_of_fire:
@@ -98,7 +118,7 @@ ability lake_of_fire:
 	flags: [ spell target_aoe ]
 	states: [ default in_combat ]
 	icon: icon_lake_of_fire
-	cooldown: 100	
+	cooldowns: [ global lake_of_fire ]	
 	aoe_radius: 2
 	resource_cost mana: 10
 	
@@ -109,17 +129,22 @@ ability lake_of_fire:
 	}
 }
 
+cooldown gaze_of_death:
+{
+	duration: 100
+}
+
 ability gaze_of_death:
 {
 	string: "Gaze of Death"
 	description: "Kill target."
 	range: 100
-	cooldown: 100
+	cooldowns: [ global gaze_of_death ]
 	flags: [ offensive target_other target_hostile ]
 	states: [ default in_combat ]
 	icon: icon_green_sphere
 	
-	direct_effect kill:
+	direct_effect simple<kill>:
 	{
 	}
 }
@@ -134,11 +159,16 @@ aura dont_touch_me_bro:
 	aura_effect damage_input_modifier: { type_mask: [ all ] multiplier_num: 0 }
 }
 
+cooldown dont_touch_me_bro:
+{
+	duration: 100
+}
+
 ability dont_touch_me_bro:
 {
 	string: "Don't Touch Me, Bro"
 	description: "Reduce all incoming damage to 0 for 30 seconds."
-	cooldown: 100
+	cooldowns: [ global dont_touch_me_bro ]
 	flags: [ target_self ]
 	states: [ default in_combat ]	
 	icon: icon_impact_1
@@ -159,11 +189,16 @@ aura immortality:
 	aura_effect immortality: { }
 }
 
+cooldown immortality:
+{
+	duration: 100
+}
+
 ability immortality:
 {
 	string: "Immortality"
 	description: "Make it impossible to die for 30 seconds."
-	cooldown: 100
+	cooldowns: [ global immortality ]
 	flags: [ target_self ]
 	states: [ default in_combat ]	
 	icon: icon_skull_1
@@ -174,11 +209,16 @@ ability immortality:
 	}
 }
 
+cooldown smoke_bomb:
+{
+	duration: 100
+}
+
 ability smoke_bomb:
 {
 	string: "Smoke Bomb"
 	description: "Drop all threat."
-	cooldown: 100
+	cooldowns: [ global smoke_bomb ]
 	flags: [ target_self ]
 	states: [ default in_combat ]	
 	icon: icon_smoke
@@ -190,3 +230,52 @@ ability smoke_bomb:
 	}
 }
 
+cooldown shrine_cooldown:
+{
+	duration: 600
+}
+
+ability pray:
+{
+	string: "Pray"
+	description: "Pray at a shrine."
+	cast_time: 20
+	cooldowns: [ shrine_cooldown ]
+	flags: [ late_cooldown_trigger target_other always_in_range ]
+	states: [ default ]
+	icon: icon_stuff
+	
+	direct_effect simple<pray>:
+	{	
+	}
+}
+
+ability make_offering:
+{
+	string: "Make Offering"
+	description: "Make offering at a shrine."
+	cast_time: 20
+	cooldowns: [ shrine_cooldown ]
+	flags: [ late_cooldown_trigger target_other always_in_range ]
+	states: [ default ]
+	icon: icon_stuff
+	
+	direct_effect simple<make_offering>:
+	{	
+	}
+}
+
+ability desecrate:
+{
+	string: "Desecrate"
+	description: "Desecrate a shrine."
+	cast_time: 20
+	cooldowns: [ shrine_cooldown ]
+	flags: [ late_cooldown_trigger target_other always_in_range ]
+	states: [ default ]
+	icon: icon_stuff
+	
+	direct_effect simple<desecrate>:
+	{	
+	}
+}

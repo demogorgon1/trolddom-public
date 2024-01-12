@@ -78,9 +78,10 @@ namespace tpublic
 			ID_KILL,
 			ID_PUSH,
 			ID_THREAT,
-			ID_OPEN,
+			ID_SIMPLE,
 			ID_FISHING,
 			ID_START_QUEST,
+			ID_PRAY,
 
 			NUM_IDS
 		};
@@ -95,9 +96,10 @@ namespace tpublic
 			"kill",
 			"push",
 			"threat",
-			"open",
+			"simple",
 			"fishing",
-			"start_quest"
+			"start_quest",
+			"pray"
 		};
 
 		static_assert(sizeof(EFFECT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

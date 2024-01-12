@@ -1,11 +1,13 @@
 #include "Pcheader.h"
 
 #include <tpublic/Data/Ability.h>
+#include <tpublic/Data/Cooldown.h>
 
 #include <tpublic/Cooldowns.h>
 #include <tpublic/Helpers.h>
 #include <tpublic/IReader.h>
 #include <tpublic/IWriter.h>
+#include <tpublic/Manifest.h>
 
 namespace tpublic
 {
@@ -43,36 +45,60 @@ namespace tpublic
 	}
 	
 	void			
-	Cooldowns::Add(
+	Cooldowns::AddAbility(
+		const Manifest*			aManifest,
 		const Data::Ability*	aAbility,
 		int32_t					aTick)
 	{
-		int32_t end = aTick + aAbility->m_cooldown;
-
-		for (Entry& t : m_entries)
+		for(uint32_t cooldownId : aAbility->m_cooldowns)
 		{
-			if(t.m_abilityId == aAbility->m_id)
+			const Data::Cooldown* cooldown = aManifest->GetById<Data::Cooldown>(cooldownId);
+
+			int32_t end = aTick + cooldown->m_duration;
+			bool updated = false;
+
+			for (Entry& t : m_entries)
 			{
-				if(end > t.m_end)
-					t.m_end = end;
+				if (t.m_cooldownId == cooldownId)
+				{
+					if (end > t.m_end)
+						t.m_end = end;
 
-				return;
+					updated = true;
+					break;
+				}
 			}
-		}
 
-		m_entries.push_back({ aAbility->m_id, aTick, end });
+			if(!updated)
+				m_entries.push_back({ cooldownId, aTick, end });
+		}
 	}
 	
-	const Cooldowns::Entry*
-	Cooldowns::Get(
-		uint32_t				aAbilityId) const
+	//const Cooldowns::Entry*
+	//Cooldowns::Get(
+	//	uint32_t				aAbilityId) const
+	//{
+	//	for (const Entry& t : m_entries)
+	//	{
+	//		if(t.m_abilityId == aAbilityId)
+	//			return &t;
+	//	}
+	//	return NULL;
+	//}
+
+	bool			
+	Cooldowns::IsAbilityOnCooldown(
+		const Data::Ability*	aAbility) const
 	{
 		for (const Entry& t : m_entries)
 		{
-			if(t.m_abilityId == aAbilityId)
-				return &t;
+			for(uint32_t cooldownId : aAbility->m_cooldowns)
+			{
+				if(cooldownId == t.m_cooldownId)
+					return true;
+			}
 		}
-		return NULL;
+		return false;
 	}
 
 	void			

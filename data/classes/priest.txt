@@ -2,7 +2,8 @@ ability minor_heal:
 {
 	string: "Minor Heal"
 	range: 6
-	cooldown: 20
+	cooldowns: [ global ]
+	cast_time: 20
 	flags: [ spell target_other target_self target_friendly ]
 	states: [ default in_combat ]
 	icon: icon_heal
@@ -32,7 +33,7 @@ aura holy_blessing:
 	string: "Holy Blessing"
 	icon: icon_holy_blessing		
 	type: buff	
-	duration: 100
+	duration: 100	
 	aura_effect repeat: 
 	{ 
 		update_interval: 10
@@ -46,7 +47,7 @@ ability holy_blessing:
 	string: "Holy Blessing"
 	description: "Heals friendly target for 30 over 10 seconds."
 	range: 6
-	cooldown: 10
+	cooldowns: [ global ]
 	flags: [ spell target_other target_self target_friendly ]
 	states: [ default in_combat ]
 	icon: icon_holy_blessing
@@ -89,7 +90,7 @@ ability holy_condemnation:
 {
 	string: "Holy Condemnation"
 	range: 6
-	cooldown: 10
+	cooldowns: [ global ]
 	flags: [ spell target_other target_hostile ]
 	states: [ default in_combat ]
 	icon: icon_holy_condemnation

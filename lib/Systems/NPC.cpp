@@ -400,7 +400,7 @@ namespace tpublic::Systems
 							if (distanceSquared > (int32_t)(ability->m_range * ability->m_range))
 								continue;
 								
-							if(npc->m_cooldowns.Get(ability->m_id) != NULL)
+							if(npc->m_cooldowns.IsAbilityOnCooldown(ability))
 								continue;
 
 							if(!combat->HasResourcesForAbility(ability))
@@ -421,7 +421,7 @@ namespace tpublic::Systems
 							position->m_lastMoveTick = aContext->m_tick;
 							npc->m_npcMovement.Reset(aContext->m_tick);
 
-							npc->m_cooldowns.Add(useAbility, aContext->m_tick);
+							npc->m_cooldowns.AddAbility(GetManifest(), useAbility, aContext->m_tick);
 
 							if(useAbility->m_castTime > 0)
 							{

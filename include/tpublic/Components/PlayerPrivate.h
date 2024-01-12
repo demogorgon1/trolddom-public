@@ -76,27 +76,27 @@ namespace tpublic
 			}
 
 			// Public data
-			uint32_t										m_level = 1;
-			uint32_t										m_xp = 0;
-			bool											m_isDead = false;
-			Vec2											m_resurrectionPointPosition;
-			uint32_t										m_resurrectionPointMapId = 0;
-			GuildRegistrationHistory						m_guildRegistrationHistory;
-			PlayerProfessions								m_professions;
-			PlayerWorship									m_worship;
+			uint32_t														m_level = 1;
+			uint32_t														m_xp = 0;
+			bool															m_isDead = false;
+			Vec2															m_resurrectionPointPosition;
+			uint32_t														m_resurrectionPointMapId = 0;
+			GuildRegistrationHistory										m_guildRegistrationHistory;
+			PlayerProfessions												m_professions;
+			PlayerWorship													m_worship;
 
-			// Not serialized
-			bool											m_positionUpdatedOnServer = false;
-			bool											m_pvpCombatEvent = false;
-			int32_t											m_lastPVPCombatEventTick = 0;
+			// Not serialized, internal
+			bool															m_positionUpdatedOnServer = false;
+			bool															m_pvpCombatEvent = false;
+			int32_t															m_lastPVPCombatEventTick = 0;
 
 			struct ProfessionSkillUseEvent
 			{
-				uint32_t									m_professionId = 0;
-				uint32_t									m_professionSkill = 0;
+				uint32_t													m_professionId = 0;
+				uint32_t													m_professionSkill = 0;
 			};
 
-			std::vector<ProfessionSkillUseEvent>			m_professionSkillUseEvents;
+			std::vector<ProfessionSkillUseEvent>							m_professionSkillUseEvents;
 		};
 	}
 

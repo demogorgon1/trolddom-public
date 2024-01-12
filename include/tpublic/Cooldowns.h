@@ -10,6 +10,7 @@ namespace tpublic
 
 	class IReader;
 	class IWriter;
+	class Manifest;
 
 	class Cooldowns
 	{
@@ -20,7 +21,7 @@ namespace tpublic
 			ToStream(
 				IWriter*							aStream) const
 			{
-				aStream->WriteUInt(m_abilityId);
+				aStream->WriteUInt(m_cooldownId);
 				
 				if(aStream->IsNetworkStream())
 				{
@@ -53,7 +54,7 @@ namespace tpublic
 			FromStream(
 				IReader*							aStream)
 			{
-				if (!aStream->ReadUInt(m_abilityId))
+				if (!aStream->ReadUInt(m_cooldownId))
 					return false;
 
 				if (aStream->IsNetworkStream())
@@ -97,7 +98,7 @@ namespace tpublic
 			}
 
 			// Public data
-			uint32_t			m_abilityId = 0;
+			uint32_t			m_cooldownId = 0;
 			int32_t				m_start = 0;
 			int32_t				m_end = 0;
 		};
@@ -107,11 +108,14 @@ namespace tpublic
 
 		bool			Update(
 							int32_t					aTick);
-		void			Add(
+		void			AddAbility(
+							const Manifest*			aManifest,
 							const Data::Ability*	aAbility,
 							int32_t					aTick);
-		const Entry*	Get(
-							uint32_t				aAbilityId) const;
+		bool			IsAbilityOnCooldown(
+							const Data::Ability*	aAbility) const;
+		//const Entry*	Get(
+		//					uint32_t				aAbilityId) const;
 		void			ToStream(
 							IWriter*				aStream) const;
 		bool			FromStream(

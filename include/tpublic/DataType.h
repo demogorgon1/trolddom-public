@@ -46,6 +46,7 @@ namespace tpublic
 			ID_TAG_CONTEXT,
 			ID_PANTHEON,
 			ID_DEITY,
+			ID_COOLDOWN,
 
 			NUM_IDS
 		};
@@ -89,7 +90,8 @@ namespace tpublic
 			"word_generator",
 			"tag_context",
 			"pantheon",
-			"deity"
+			"deity",
+			"cooldown"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

@@ -21,25 +21,26 @@ namespace tpublic
 
 			enum Flag : uint32_t
 			{
-				FLAG_TARGET_SELF				= 0x00000001,
-				FLAG_TARGET_OTHER				= 0x00000002,
-				FLAG_TARGET_AOE					= 0x00000004,
-				FLAG_TARGET_HOSTILE				= 0x00000008,
-				FLAG_TARGET_FRIENDLY			= 0x00000010,
-				FLAG_CAN_MISS					= 0x00000020,
-				FLAG_CAN_BE_DODGED				= 0x00000040,
-				FLAG_CAN_BE_PARRIED				= 0x00000080,
-				FLAG_CAN_BE_BLOCKED				= 0x00000100,
-				FLAG_ATTACK						= 0x00000200,
-				FLAG_USE_WEAPON_ICON			= 0x00000400,				
-				FLAG_AOE_LOW_HEALTH_ONLY		= 0x00000800,
-				FLAG_AOE_LOW_HEALTH_PRIO		= 0x00001000,
-				FLAG_OFFENSIVE					= 0x00002000,
-				FLAG_SPELL						= 0x00004000,
-				FLAG_ALWAYS_IN_RANGE			= 0x00008000,
-				FLAG_ALWAYS_IN_LINE_OF_SIGHT	= 0x00010000,
-				FLAG_CRAFTING					= 0x00020000,
-				FLAG_HIDDEN						= 0x00040000
+				FLAG_TARGET_SELF					= 0x00000001,
+				FLAG_TARGET_OTHER					= 0x00000002,
+				FLAG_TARGET_AOE						= 0x00000004,
+				FLAG_TARGET_HOSTILE					= 0x00000008,
+				FLAG_TARGET_FRIENDLY				= 0x00000010,
+				FLAG_CAN_MISS						= 0x00000020,
+				FLAG_CAN_BE_DODGED					= 0x00000040,
+				FLAG_CAN_BE_PARRIED					= 0x00000080,
+				FLAG_CAN_BE_BLOCKED					= 0x00000100,
+				FLAG_ATTACK							= 0x00000200,
+				FLAG_USE_WEAPON_ICON				= 0x00000400,				
+				FLAG_AOE_LOW_HEALTH_ONLY			= 0x00000800,
+				FLAG_AOE_LOW_HEALTH_PRIO			= 0x00001000,
+				FLAG_OFFENSIVE						= 0x00002000,
+				FLAG_SPELL							= 0x00004000,
+				FLAG_ALWAYS_IN_RANGE				= 0x00008000,
+				FLAG_ALWAYS_IN_LINE_OF_SIGHT		= 0x00010000,
+				FLAG_CRAFTING						= 0x00020000,
+				FLAG_HIDDEN							= 0x00040000,
+				FLAG_LATE_COOLDOWN_TRIGGER			= 0x00080000
 			};
 
 			static inline Resource::Id
@@ -98,6 +99,8 @@ namespace tpublic
 						flags |= FLAG_CRAFTING;
 					else if (strcmp(identifier, "hidden") == 0)
 						flags |= FLAG_HIDDEN;
+					else if (strcmp(identifier, "late_cooldown_trigger") == 0)
+						flags |= FLAG_LATE_COOLDOWN_TRIGGER;
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid ability flag.", identifier);
 				});
@@ -120,7 +123,7 @@ namespace tpublic
 					std::unique_ptr<DirectEffectBase> effect(aSource->m_sourceContext->m_directEffectFactory->Create(m_directEffectId));
 					assert(effect);
 
-					if (!aSource->m_children.empty())
+					if (!aSource->m_children.empty() || aSource->m_annotation)
 						effect->FromSource(aSource);
 
 					m_directEffectBase = std::move(effect);
@@ -343,6 +346,7 @@ namespace tpublic
 			bool IsInstantMelee() const { return m_range == 1 && m_castTime == 0; }
 			bool IsCrafting() const { return m_flags & FLAG_CRAFTING; }
 			bool IsHidden() const { return m_flags & FLAG_HIDDEN; }
+			bool IsLateCooldownTrigger() const { return m_flags & FLAG_LATE_COOLDOWN_TRIGGER; }
 			bool IsChanneled() const { return m_channelTicks != 0 && m_channelTickAbilityId != 0; }
 			
 			bool 
@@ -391,8 +395,8 @@ namespace tpublic
 							m_speed = aMember->GetInt32();
 						else if (aMember->m_name == "delay")
 							m_delay = aMember->GetInt32();
-						else if (aMember->m_name == "cooldown")
-							m_cooldown = aMember->GetInt32();
+						else if (aMember->m_name == "cooldowns")
+							aMember->GetIdArray(DataType::ID_COOLDOWN, m_cooldowns);
 						else if (aMember->m_name == "cast_time")
 							m_castTime = aMember->GetInt32();
 						else if (aMember->m_name == "icon")
@@ -434,7 +438,7 @@ namespace tpublic
 				aWriter->WriteUInt(m_range);
 				aWriter->WriteInt(m_speed);
 				aWriter->WriteInt(m_delay);
-				aWriter->WriteInt(m_cooldown);
+				aWriter->WriteUInts(m_cooldowns);
 				aWriter->WriteUInt(m_iconSpriteId);
 				aWriter->WriteObjectPointers(m_directEffects);
 				aWriter->WritePOD(m_flags);
@@ -475,7 +479,7 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadInt(m_delay))
 					return false;
-				if (!aReader->ReadInt(m_cooldown))
+				if (!aReader->ReadUInts(m_cooldowns))
 					return false;
 				if (!aReader->ReadUInt(m_iconSpriteId))
 					return false;
@@ -527,7 +531,7 @@ namespace tpublic
 			uint32_t											m_range = 1;
 			int32_t												m_speed = 0;
 			int32_t												m_delay = 0;
-			int32_t												m_cooldown = 10;
+			std::vector<uint32_t>								m_cooldowns;
 			int32_t												m_castTime = 0;
 			uint32_t											m_flags = 0;
 			uint32_t											m_iconSpriteId = 0;

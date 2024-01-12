@@ -1,6 +1,7 @@
 #pragma once
 
 #include "EntityState.h"
+#include "SimpleDirectEffect.h"
 
 namespace tpublic
 {
@@ -28,12 +29,11 @@ namespace tpublic
 								int32_t							aChange) = 0;
 		virtual void		AddUpdateCallback(
 								UpdateCallback					aUpdateCallback) = 0;
-		virtual void		AddPushRequest(
+		virtual void		AddSimpleDirectEffect(
 								uint32_t						aSourceEntityInstanceId,
-								uint32_t						aTargetEntityInstanceId) = 0;
-		virtual void		AddOpenRequest(
-								uint32_t						aSourceEntityInstanceId,
-								uint32_t						aTargetEntityInstanceId) = 0;
+								uint32_t						aTargetEntityInstanceId,
+								SimpleDirectEffect::Id			aSimpleDirectEffectId) = 0;
+
 	};
 
 }

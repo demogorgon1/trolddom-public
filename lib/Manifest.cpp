@@ -5,6 +5,7 @@
 #include <tpublic/Data/AchievementCategory.h>
 #include <tpublic/Data/Aura.h>
 #include <tpublic/Data/Class.h>
+#include <tpublic/Data/Cooldown.h>
 #include <tpublic/Data/CreatureType.h>
 #include <tpublic/Data/Deity.h>
 #include <tpublic/Data/DialogueRoot.h>
@@ -49,6 +50,7 @@ namespace tpublic
 		RegisterDataContainer<Data::AchievementCategory>();
 		RegisterDataContainer<Data::Aura>();
 		RegisterDataContainer<Data::Class>();
+		RegisterDataContainer<Data::Cooldown>();
 		RegisterDataContainer<Data::CreatureType>();
 		RegisterDataContainer<Data::Deity>();
 		RegisterDataContainer<Data::DialogueRoot>();
