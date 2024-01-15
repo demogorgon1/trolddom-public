@@ -3,6 +3,7 @@
 #include <tpublic/Components/Lootable.h>
 
 #include "EntityState.h"
+#include "ItemInstanceReference.h"
 #include "Vec2.h"
 
 namespace tpublic
@@ -50,19 +51,18 @@ namespace tpublic
 			}
 
 			// Public data
-			Type				m_type = Type(0);
-			uint32_t			m_entityInstanceId = 0;
-			Vec2				m_priorityList[MAX_PRIORITY_LIST_LENGTH];
-			uint32_t			m_priorityListLength = 0;
-			bool				m_canMoveOnAllNonViewBlockingTiles = false;
+			Type					m_type = Type(0);
+			uint32_t				m_entityInstanceId = 0;
+			Vec2					m_priorityList[MAX_PRIORITY_LIST_LENGTH];
+			uint32_t				m_priorityListLength = 0;
+			bool					m_canMoveOnAllNonViewBlockingTiles = false;
 		};
 
 		struct EventQueueSpawnEntityRequest
 		{
-			// Public data
-			uint32_t			m_entityId = 0;
-			Vec2				m_position;
-			uint32_t			m_onlyVisibleToPlayerEntityInstanceId = 0;
+			uint32_t				m_entityId = 0;
+			Vec2					m_position;
+			uint32_t				m_onlyVisibleToPlayerEntityInstanceId = 0;
 		};
 
 		// Virtual interface
@@ -70,7 +70,8 @@ namespace tpublic
 												uint32_t											aSourceEntityInstanceId,
 												uint32_t											aTargetEntityInstanceId,
 												const Vec2&											aAOETarget,
-												const Data::Ability*								aAbility) = 0;
+												const Data::Ability*								aAbility,
+												const ItemInstanceReference&						aItem) = 0;
 		virtual void						EventQueueMove(
 												const EventQueueMoveRequest&						aMoveRequest) = 0;
 		virtual void						EventQueueIndividualKillXP(
@@ -111,6 +112,10 @@ namespace tpublic
 		virtual tpublic::EntityInstance*	EventQueueSpawnEntity(
 												uint32_t											aEntityId,
 												tpublic::EntityState::Id							aInitState) = 0;
+		virtual void						EventQueueMakeOffering(
+												uint32_t											aSourceEntityInstanceId,
+												uint32_t											aTargetEntityInstanceId,
+												const ItemInstanceReference&						aItem) = 0;
 	};
 
 }

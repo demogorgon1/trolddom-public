@@ -17,7 +17,7 @@ namespace tpublic
 
 		void
 		ApplyAura::FromSource(
-			const SourceNode*		aSource) 
+			const SourceNode*				aSource) 
 		{
 			aSource->ForEachChild([&](
 				const SourceNode* aChild)
@@ -36,7 +36,7 @@ namespace tpublic
 
 		void
 		ApplyAura::ToStream(
-			IWriter*				aStream) const 
+			IWriter*						aStream) const 
 		{
 			ToStreamBase(aStream);
 			aStream->WriteUInt(m_auraId);
@@ -45,7 +45,7 @@ namespace tpublic
 
 		bool
 		ApplyAura::FromStream(
-			IReader*				aStream) 
+			IReader*						aStream) 
 		{
 			if (!FromStreamBase(aStream))
 				return false;
@@ -58,17 +58,18 @@ namespace tpublic
 
 		void	
 		ApplyAura::Resolve(
-			int32_t					/*aTick*/,
-			std::mt19937&			/*aRandom*/,
-			const Manifest*			aManifest,
-			CombatEvent::Id			/*aId*/,
-			uint32_t				aAbilityId,
-			const EntityInstance*	aSource,
-			EntityInstance*			aTarget,
-			IResourceChangeQueue*	/*aCombatResultQueue*/,
-			IAuraEventQueue*		aAuraEventQueue,
-			IEventQueue*			aEventQueue,
-			const IWorldView*		/*aWorldView*/)
+			int32_t							/*aTick*/,
+			std::mt19937&					/*aRandom*/,
+			const Manifest*					aManifest,
+			CombatEvent::Id					/*aId*/,
+			uint32_t						aAbilityId,
+			const EntityInstance*			aSource,
+			EntityInstance*					aTarget,
+			const ItemInstanceReference&	/*aItem*/,
+			IResourceChangeQueue*			/*aCombatResultQueue*/,
+			IAuraEventQueue*				aAuraEventQueue,
+			IEventQueue*					aEventQueue,
+			const IWorldView*				/*aWorldView*/)
 		{
 			if(m_threat != 0 && aTarget->GetEntityId() != 0)
 				aEventQueue->EventQueueThreat(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), m_threat);

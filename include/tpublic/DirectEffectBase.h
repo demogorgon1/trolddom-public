@@ -22,6 +22,8 @@ namespace tpublic
 	class IWorldView;
 	class Manifest;
 
+	struct ItemInstanceReference;
+
 	class DirectEffectBase
 	{
 	public:
@@ -73,23 +75,24 @@ namespace tpublic
 
 		// Virtual methods
 		virtual void	FromSource(
-							const SourceNode*			/*aSource*/) { assert(false); }
+							const SourceNode*				/*aSource*/) { assert(false); }
 		virtual void	ToStream(
-							IWriter*					/*aStream*/) const { assert(false); }
+							IWriter*						/*aStream*/) const { assert(false); }
 		virtual bool	FromStream(
-							IReader*					/*aStream*/) { assert(false); return true; }
+							IReader*						/*aStream*/) { assert(false); return true; }
 		virtual void	Resolve(
-							int32_t						/*aTick*/,
-							std::mt19937&				/*aRandom*/,
-							const Manifest*				/*aManifest*/,
-							CombatEvent::Id				/*aId*/,
-							uint32_t					/*aAbilityId*/,
-							const EntityInstance*		/*aSource*/,
-							EntityInstance*				/*aTarget*/,
-							IResourceChangeQueue*		/*aCombatResultQueue*/,
-							IAuraEventQueue*			/*aAuraEventQueue*/,
-							IEventQueue*				/*aEventQueue*/,
-							const IWorldView*			/*aWorldView*/) { }
+							int32_t							/*aTick*/,
+							std::mt19937&					/*aRandom*/,
+							const Manifest*					/*aManifest*/,
+							CombatEvent::Id					/*aId*/,
+							uint32_t						/*aAbilityId*/,
+							const EntityInstance*			/*aSource*/,
+							EntityInstance*					/*aTarget*/,
+							const ItemInstanceReference&	/*aItem*/,
+							IResourceChangeQueue*			/*aCombatResultQueue*/,
+							IAuraEventQueue*				/*aAuraEventQueue*/,
+							IEventQueue*					/*aEventQueue*/,
+							const IWorldView*				/*aWorldView*/) { }
 
 		// Public data
 		uint32_t		m_flags = 0;		

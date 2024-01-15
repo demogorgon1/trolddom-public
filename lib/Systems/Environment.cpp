@@ -80,13 +80,13 @@ namespace tpublic::Systems
 
 		if (ticksSinceLastUpdate >= environment->m_tickInterval && environment->m_abilityId != 0)
 		{
-			const Data::Ability* ability = GetManifest()->GetById<tpublic::Data::Ability>(environment->m_abilityId);
+			const Data::Ability* ability = GetManifest()->GetById<Data::Ability>(environment->m_abilityId);
 
 			aContext->m_worldView->WorldViewEntityInstancesAtPosition(position->m_position, [&](
 				const EntityInstance* aEntityInstance)
 			{
 				if(aEntityInstance->GetEntityInstanceId() != aEntityInstanceId && aEntityInstance->GetEntityInstanceId() != owner->m_ownerEntityInstanceId)
-					aContext->m_eventQueue->EventQueueAbility(aEntityInstanceId, aEntityInstance->GetEntityInstanceId(), tpublic::Vec2(), ability);
+					aContext->m_eventQueue->EventQueueAbility(aEntityInstanceId, aEntityInstance->GetEntityInstanceId(), Vec2(), ability, ItemInstanceReference());
 
 				return false; // Don't stop
 			});

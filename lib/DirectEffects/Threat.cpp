@@ -13,7 +13,7 @@ namespace tpublic::DirectEffects
 
 	void
 	Threat::FromSource(
-		const SourceNode*			aSource) 
+		const SourceNode*				aSource) 
 	{
 		aSource->ForEachChild([&](
 			const SourceNode* aChild)
@@ -44,7 +44,7 @@ namespace tpublic::DirectEffects
 
 	void
 	Threat::ToStream(
-		IWriter*					aStream) const 
+		IWriter*						aStream) const 
 	{	
 		ToStreamBase(aStream);
 
@@ -57,7 +57,7 @@ namespace tpublic::DirectEffects
 
 	bool
 	Threat::FromStream(
-		IReader*					aStream) 
+		IReader*						aStream) 
 	{
 		if(!FromStreamBase(aStream))
 			return false;
@@ -88,17 +88,18 @@ namespace tpublic::DirectEffects
 
 	void
 	Threat::Resolve(
-		int32_t						/*aTick*/,
-		std::mt19937&				/*aRandom*/,
-		const Manifest*				/*aManifest*/,
-		CombatEvent::Id				/*aId*/,
-		uint32_t					/*aAbilityId*/,
-		const EntityInstance*		/*aSource*/,
-		EntityInstance*				aTarget,
-		IResourceChangeQueue*		/*aCombatResultQueue*/,
-		IAuraEventQueue*			/*aAuraEventQueue*/,
-		IEventQueue*				aEventQueue,
-		const IWorldView*			/*aWorldView*/) 
+		int32_t							/*aTick*/,
+		std::mt19937&					/*aRandom*/,
+		const Manifest*					/*aManifest*/,
+		CombatEvent::Id					/*aId*/,
+		uint32_t						/*aAbilityId*/,
+		const EntityInstance*			/*aSource*/,
+		EntityInstance*					aTarget,
+		const ItemInstanceReference&	/*aItem*/,
+		IResourceChangeQueue*			/*aCombatResultQueue*/,
+		IAuraEventQueue*				/*aAuraEventQueue*/,
+		IEventQueue*					aEventQueue,
+		const IWorldView*				/*aWorldView*/) 
 	{				
 		switch (m_applyTo)
 		{

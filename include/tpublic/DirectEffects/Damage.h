@@ -26,23 +26,24 @@ namespace tpublic
 
 			// EffectBase implementation
 			void	FromSource(
-						const SourceNode*		aSource) override;
+						const SourceNode*				aSource) override;
 			void	ToStream(
-						IWriter*				aStream) const override;
+						IWriter*						aStream) const override;
 			bool	FromStream(
-						IReader*				aStream) override;
+						IReader*						aStream) override;
 			void	Resolve(
-						int32_t					aTick,
-						std::mt19937&			aRandom,
-						const Manifest*			aManifest,
-						CombatEvent::Id			aId,
-						uint32_t				aAbilityId,
-						const EntityInstance*	aSource,
-						EntityInstance*			aTarget,
-						IResourceChangeQueue*	aResourceChangeQueue,
-						IAuraEventQueue*		aAuraEventQueue,
-						IEventQueue*			aEventQueue,
-						const IWorldView*		aWorldView) override;
+						int32_t							aTick,
+						std::mt19937&					aRandom,
+						const Manifest*					aManifest,
+						CombatEvent::Id					aId,
+						uint32_t						aAbilityId,
+						const EntityInstance*			aSource,
+						EntityInstance*					aTarget,
+						const ItemInstanceReference&	aItem,
+						IResourceChangeQueue*			aResourceChangeQueue,
+						IAuraEventQueue*				aAuraEventQueue,
+						IEventQueue*					aEventQueue,
+						const IWorldView*				aWorldView) override;
 
 			// Public data
 			DirectEffect::DamageType	m_damageType = DirectEffect::DAMAGE_TYPE_PHYSICAL;

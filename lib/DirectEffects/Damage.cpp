@@ -16,7 +16,7 @@ namespace tpublic::DirectEffects
 
 	void
 	Damage::FromSource(
-		const SourceNode*		aSource)
+		const SourceNode*			aSource)
 	{
 		aSource->ForEachChild([&](
 			const SourceNode*	aChild)
@@ -67,7 +67,7 @@ namespace tpublic::DirectEffects
 
 	void	
 	Damage::ToStream(
-		IWriter*				aStream) const
+		IWriter*					aStream) const
 	{
 		ToStreamBase(aStream);
 		aStream->WritePOD(m_damageType);
@@ -82,7 +82,7 @@ namespace tpublic::DirectEffects
 			
 	bool	
 	Damage::FromStream(
-		IReader*				aStream) 
+		IReader*					aStream) 
 	{
 		if(!FromStreamBase(aStream))
 			return false;
@@ -104,17 +104,18 @@ namespace tpublic::DirectEffects
 
 	void
 	Damage::Resolve(
-		int32_t						/*aTick*/,
-		std::mt19937&				aRandom,
-		const Manifest*				/*aManifest*/,
-		CombatEvent::Id				aId,
-		uint32_t					aAbilityId,
-		const EntityInstance*		aSource,
-		EntityInstance*				aTarget,
-		IResourceChangeQueue*		aResourceChangeQueue,
-		IAuraEventQueue*			/*aAuraEventQueue*/,
-		IEventQueue*				aEventQueue,
-		const IWorldView*			/*aWorldView*/) 
+		int32_t							/*aTick*/,
+		std::mt19937&					aRandom,
+		const Manifest*					/*aManifest*/,
+		CombatEvent::Id					aId,
+		uint32_t						aAbilityId,
+		const EntityInstance*			aSource,
+		EntityInstance*					aTarget,
+		const ItemInstanceReference&	/*aItem*/,
+		IResourceChangeQueue*			aResourceChangeQueue,
+		IAuraEventQueue*				/*aAuraEventQueue*/,
+		IEventQueue*					aEventQueue,
+		const IWorldView*				/*aWorldView*/) 
 	{
 		const Components::CombatPrivate* sourceCombatPrivate = aSource->GetComponent<Components::CombatPrivate>();
 		Components::CombatPublic* targetCombatPublic = aTarget->GetComponent<Components::CombatPublic>();

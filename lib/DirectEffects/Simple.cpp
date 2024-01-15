@@ -3,6 +3,7 @@
 #include <tpublic/DirectEffects/Simple.h>
 
 #include <tpublic/EntityInstance.h>
+#include <tpublic/IEventQueue.h>
 #include <tpublic/IResourceChangeQueue.h>
 
 namespace tpublic::DirectEffects
@@ -10,7 +11,7 @@ namespace tpublic::DirectEffects
 
 	void
 	Simple::FromSource(
-		const SourceNode*			aSource) 
+		const SourceNode*				aSource) 
 	{
 		TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing simple direct effect annotation.");
 		m_id = SimpleDirectEffect::StringToId(aSource->m_annotation->GetIdentifier());
@@ -35,7 +36,7 @@ namespace tpublic::DirectEffects
 
 	void
 	Simple::ToStream(
-		IWriter*					aStream) const 
+		IWriter*						aStream) const 
 	{
 		ToStreamBase(aStream);
 		aStream->WritePOD(m_id);
@@ -44,7 +45,7 @@ namespace tpublic::DirectEffects
 
 	bool
 	Simple::FromStream(
-		IReader*					aStream) 
+		IReader*						aStream) 
 	{
 		if(!FromStreamBase(aStream))
 			return false;
@@ -57,23 +58,23 @@ namespace tpublic::DirectEffects
 
 	void
 	Simple::Resolve(
-		int32_t						aTick,
-		std::mt19937&				/*aRandom*/,
-		const Manifest*				/*aManifest*/,
-		CombatEvent::Id				/*aId*/,
-		uint32_t					/*aAbilityId*/,
-		const EntityInstance*		aSource,
-		EntityInstance*				aTarget,
-		IResourceChangeQueue*		aCombatResultQueue,
-		IAuraEventQueue*			/*aAuraEventQueue*/,
-		IEventQueue*				/*aEventQueue*/,
-		const IWorldView*			/*aWorldView*/) 
+		int32_t							aTick,
+		std::mt19937&					/*aRandom*/,
+		const Manifest*					/*aManifest*/,
+		CombatEvent::Id					/*aId*/,
+		uint32_t						/*aAbilityId*/,
+		const EntityInstance*			aSource,
+		EntityInstance*					aTarget,
+		const ItemInstanceReference&	aItem,
+		IResourceChangeQueue*			aCombatResultQueue,
+		IAuraEventQueue*				/*aAuraEventQueue*/,
+		IEventQueue*					aEventQueue,
+		const IWorldView*				/*aWorldView*/) 
 	{		
 		switch(m_id)
 		{
 		case SimpleDirectEffect::ID_OPEN:
 		case SimpleDirectEffect::ID_PUSH:
-		case SimpleDirectEffect::ID_MAKE_OFFERING:
 		case SimpleDirectEffect::ID_PRAY:
 		case SimpleDirectEffect::ID_DESECRATE:
 		case SimpleDirectEffect::ID_START_QUEST:
@@ -85,6 +86,10 @@ namespace tpublic::DirectEffects
 			{
 				aTarget->SetState(EntityState::ID_DEAD, aTick);
 			});
+			break;
+
+		case SimpleDirectEffect::ID_MAKE_OFFERING:
+			aEventQueue->EventQueueMakeOffering(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), aItem);
 			break;
 
 		default:

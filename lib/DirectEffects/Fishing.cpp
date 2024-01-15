@@ -23,39 +23,40 @@ namespace tpublic::DirectEffects
 
 	void
 	Fishing::FromSource(
-		const SourceNode*			/*aSource*/) 
+		const SourceNode*				/*aSource*/) 
 	{
 	}
 
 	void
 	Fishing::ToStream(
-		IWriter*					aStream) const 
+		IWriter*						aStream) const 
 	{
 		ToStreamBase(aStream);
 	}
 
 	bool
 	Fishing::FromStream(
-		IReader*					aStream) 
+		IReader*						aStream) 
 	{
-		if(!FromStreamBase(aStream))
+		if(!FromStreamBase(aStream))	
 			return false;
 		return true;
 	}
 
 	void
 	Fishing::Resolve(
-		int32_t						/*aTick*/,
-		std::mt19937&				aRandom,
-		const Manifest*				aManifest,
-		CombatEvent::Id				/*aId*/,
-		uint32_t					/*aAbilityId*/,
-		const EntityInstance*		aSource,
-		EntityInstance*				aTarget,
-		IResourceChangeQueue*		/*aCombatResultQueue*/,
-		IAuraEventQueue*			/*aAuraEventQueue*/,
-		IEventQueue*				aEventQueue,
-		const IWorldView*			aWorldView) 
+		int32_t							/*aTick*/,
+		std::mt19937&					aRandom,
+		const Manifest*					aManifest,
+		CombatEvent::Id					/*aId*/,
+		uint32_t						/*aAbilityId*/,
+		const EntityInstance*			aSource,
+		EntityInstance*					aTarget,
+		const ItemInstanceReference&	/*aItem*/,
+		IResourceChangeQueue*			/*aCombatResultQueue*/,
+		IAuraEventQueue*				/*aAuraEventQueue*/,
+		IEventQueue*					aEventQueue,
+		const IWorldView*				aWorldView) 
 	{		
 		const tpublic::Components::Position* position = aTarget->GetComponent<tpublic::Components::Position>();
 		const tpublic::MapData* map = aWorldView->WorldViewGetMapData();
