@@ -10,11 +10,13 @@ pantheon light:
 	icon: icon_holy
 	faction: light
 	opposition: underworld
+	pray_ability: light_pray
 	
 	notification_string<gained_favor>: "You've gained favor with the light."
 	notification_string<lost_favor>: "You've lost favor with the light."
 	
 	deity_specifier: "a holy"
+	shrine_display_name_prefix: "Holy Altar of "
 	
 	player_levels:
 	[
@@ -39,6 +41,18 @@ pantheon light:
 		light_aura_9
 		light_aura_10
 	]	
+}
+
+ability light_pray:
+{
+	string: "Pray to The Light"
+	description: "Pray for a blessing from your holy deity."
+	cast_time: 20
+	cooldowns: [ pray ]
+	flags: [ late_cooldown_trigger target_self always_in_range ]
+	states: [ default ]
+	icon: icon_holy
+	direct_effect simple<pray>: light
 }
 
 !define local HOLY_BLESSING

@@ -15,6 +15,22 @@ namespace tpublic::DirectEffects
 		TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing simple direct effect annotation.");
 		m_id = SimpleDirectEffect::StringToId(aSource->m_annotation->GetIdentifier());
 		TP_VERIFY(m_id != SimpleDirectEffect::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid simple direct effect.", aSource->m_annotation->GetIdentifier());
+		const SimpleDirectEffect::Info* info = SimpleDirectEffect::GetInfo(m_id);
+
+		switch(aSource->m_type)
+		{
+		case SourceNode::TYPE_IDENTIFIER:
+			TP_VERIFY(info->m_paramType != DataType::INVALID_ID, aSource->m_debugInfo, "Invalid value.");
+			m_param = aSource->m_sourceContext->m_persistentIdTable->GetId(info->m_paramType, aSource->GetIdentifier());
+			break;
+
+		case SourceNode::TYPE_NUMBER:
+			m_param = aSource->GetUInt32();
+			break;
+
+		default:
+			break;
+		}
 	}
 
 	void
@@ -23,6 +39,7 @@ namespace tpublic::DirectEffects
 	{
 		ToStreamBase(aStream);
 		aStream->WritePOD(m_id);
+		aStream->WriteUInt(m_param);
 	}
 
 	bool
@@ -32,6 +49,8 @@ namespace tpublic::DirectEffects
 		if(!FromStreamBase(aStream))
 			return false;
 		if(!aStream->ReadPOD(m_id))
+			return false;
+		if(!aStream->ReadUInt(m_param))
 			return false;
 		return true;
 	}
@@ -57,11 +76,9 @@ namespace tpublic::DirectEffects
 		case SimpleDirectEffect::ID_MAKE_OFFERING:
 		case SimpleDirectEffect::ID_PRAY:
 		case SimpleDirectEffect::ID_DESECRATE:
-			aCombatResultQueue->AddSimpleDirectEffect(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), m_id);
+		case SimpleDirectEffect::ID_START_QUEST:
+			aCombatResultQueue->AddSimpleDirectEffect(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), m_id, m_param);
 			break;
-
-			//aCombatResultQueue->AddOpenRequest(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId());
-			//break;
 
 		case SimpleDirectEffect::ID_KILL:
 			aCombatResultQueue->AddUpdateCallback([aTarget, aTick]()
@@ -69,10 +86,6 @@ namespace tpublic::DirectEffects
 				aTarget->SetState(EntityState::ID_DEAD, aTick);
 			});
 			break;
-
-		//case SimpleDirectEffect::ID_PUSH:
-		//	aCombatResultQueue->AddPushRequest(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId());
-		//	break;
 
 		default:
 			assert(false);

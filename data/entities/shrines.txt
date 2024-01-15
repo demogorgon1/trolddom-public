@@ -1,10 +1,10 @@
 entity underworld_shrine:
 {
-	string: "Unholy Shrine"
 	systems: [ shrine ]
 	components:
 	{
 		shrine: { pantheon: underworld }
+		display_name: { }
 		position: { }				
 		sprite: 
 		{ 
@@ -24,11 +24,11 @@ entity underworld_shrine:
 
 entity holy_altar:
 {
-	string: "Holy Altar"
 	systems: [ shrine ]
 	components:
 	{
 		shrine: { pantheon: light }
+		display_name: { }
 		position: { }		
 		sprite: 
 		{ 

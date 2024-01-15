@@ -71,10 +71,14 @@ namespace tpublic
 							m_string = aChild->GetString();
 						else if (aChild->m_name == "deity_specifier")
 							m_deitySpecifier = aChild->GetString();
+						else if (aChild->m_name == "shrine_display_name_prefix")
+							m_shrineDisplayNamePrefix = aChild->GetString();
 						else if(aChild->m_name == "faction")
 							m_factionId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_FACTION, aChild->GetIdentifier());
 						else if (aChild->m_name == "icon")
 							m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
+						else if (aChild->m_name == "pray_ability")
+							m_prayAbilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
 						else if (aChild->m_name == "opposition")
 							m_oppositionPantheonId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PANTHEON, aChild->GetIdentifier());
 						else if(aChild->m_name == "notification_string")
@@ -100,8 +104,10 @@ namespace tpublic
 				aWriter->WriteString(m_deitySpecifier);
 				aWriter->WriteUInt(m_factionId);
 				aWriter->WriteUInt(m_oppositionPantheonId);
+				aWriter->WriteUInt(m_prayAbilityId);
 				aWriter->WriteStrings(m_playerLevels);
 				aWriter->WriteUInts(m_blessingAuraIds);
+				aWriter->WriteString(m_shrineDisplayNamePrefix);
 
 				for (uint32_t i = 0; i < (uint32_t)NUM_NOTIFICATION_STRINGS; i++)
 					aWriter->WriteString(m_notificationStrings[i]);
@@ -124,9 +130,13 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadUInt(m_oppositionPantheonId))
 					return false;
+				if (!aReader->ReadUInt(m_prayAbilityId))
+					return false;
 				if (!aReader->ReadStrings(m_playerLevels))
 					return false;
 				if (!aReader->ReadUInts(m_blessingAuraIds))
+					return false;
+				if(!aReader->ReadString(m_shrineDisplayNamePrefix))
 					return false;
 
 				for(uint32_t i = 0; i < (uint32_t)NUM_NOTIFICATION_STRINGS; i++)
@@ -146,6 +156,8 @@ namespace tpublic
 			std::string							m_notificationStrings[NUM_NOTIFICATION_STRINGS];
 			std::vector<std::string>			m_playerLevels;
 			std::vector<uint32_t>				m_blessingAuraIds;
+			uint32_t							m_prayAbilityId = 0;
+			std::string							m_shrineDisplayNamePrefix;
 		};
 
 	}

@@ -21,7 +21,7 @@ ability .spawn_of_umbracoth_quest_drop_start_quest:
 	description: "This item starts a quest."
 	flags: [ target_self ]
 	icon: icon_tentacle
-	direct_effect start_quest: { quest: spawn_of_umbracoth }
+	direct_effect simple<start_quest>: spawn_of_umbracoth
 	states: [ default in_combat ]
 	requirement self<must_not_have_completed_quest>: { id: spawn_of_umbracoth }
 	requirement self<must_not_have_active_quest>: { id: spawn_of_umbracoth }

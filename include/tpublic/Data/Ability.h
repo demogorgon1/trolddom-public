@@ -406,7 +406,7 @@ namespace tpublic
 						else if (aMember->m_name == "flags")
 							m_flags = GetFlags(aMember);
 						else if (aMember->m_tag == "direct_effect")
-							m_directEffects.push_back(std::make_unique<DirectEffectEntry>(aMember->GetObject()));
+							m_directEffects.push_back(std::make_unique<DirectEffectEntry>(aMember));
 						else if (aMember->m_tag == "aoe_entity_spawn")
 							m_aoeEntitySpawns.push_back(std::make_unique<AOEEntitySpawnEntry>(aMember->GetObject()));
 						else if (aMember->m_name == "states")

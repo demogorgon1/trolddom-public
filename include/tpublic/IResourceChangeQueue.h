@@ -32,7 +32,8 @@ namespace tpublic
 		virtual void		AddSimpleDirectEffect(
 								uint32_t						aSourceEntityInstanceId,
 								uint32_t						aTargetEntityInstanceId,
-								SimpleDirectEffect::Id			aSimpleDirectEffectId) = 0;
+								SimpleDirectEffect::Id			aSimpleDirectEffectId,
+								uint32_t						aParam) = 0;
 
 	};
 

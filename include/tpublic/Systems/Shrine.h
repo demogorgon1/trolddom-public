@@ -11,6 +11,7 @@ namespace tpublic::Systems
 	public:
 		static const System::Id ID = System::ID_SHRINE;
 		static const int32_t UPDATE_INTERVAL = 10;
+		static const int32_t DESPAWN_TICKS = 5;
 
 						Shrine(
 							const SystemData*	aData);
@@ -30,13 +31,7 @@ namespace tpublic::Systems
 							int32_t				aTicksInState,
 							ComponentBase**		aComponents,
 							Context*			aContext) override;
-		void			UpdatePublic(
-							uint32_t			aEntityId,
-							uint32_t			aEntityInstanceId,
-							EntityState::Id		aEntityState,
-							int32_t				aTicksInState,
-							ComponentBase**		aComponents,
-							Context*			aContext) override;
+
 	private:
 	};
 

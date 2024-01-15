@@ -3,6 +3,11 @@ cooldown global:
 	duration: 15
 }
 
+cooldown pray:
+{
+	duration: 6000
+}
+
 ability attack:
 {
 	string: "Attack"	
@@ -230,32 +235,11 @@ ability smoke_bomb:
 	}
 }
 
-cooldown shrine_cooldown:
-{
-	duration: 600
-}
-
-ability pray:
-{
-	string: "Pray"
-	description: "Pray at a shrine."
-	cast_time: 20
-	cooldowns: [ shrine_cooldown ]
-	flags: [ late_cooldown_trigger target_other always_in_range ]
-	states: [ default ]
-	icon: icon_stuff
-	
-	direct_effect simple<pray>:
-	{	
-	}
-}
-
 ability make_offering:
 {
 	string: "Make Offering"
 	description: "Make offering at a shrine."
 	cast_time: 20
-	cooldowns: [ shrine_cooldown ]
 	flags: [ late_cooldown_trigger target_other always_in_range ]
 	states: [ default ]
 	icon: icon_stuff
@@ -270,7 +254,6 @@ ability desecrate:
 	string: "Desecrate"
 	description: "Desecrate a shrine."
 	cast_time: 20
-	cooldowns: [ shrine_cooldown ]
 	flags: [ late_cooldown_trigger target_other always_in_range ]
 	states: [ default ]
 	icon: icon_stuff

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "DataType.h"
+
 namespace tpublic
 {
 
@@ -16,26 +18,29 @@ namespace tpublic
 			ID_KILL,
 			ID_PUSH,
 			ID_DESECRATE,
+			ID_START_QUEST,
 
 			NUM_IDS
 		};
 
 		struct Info
 		{
-			const char* m_name;
+			const char*		m_name;
+			DataType::Id	m_paramType;
 		};
 
 		// IMPORTANT: Must match Id enum
 		static constexpr const Info INFO[] =
 		{
-			{ NULL },
+			{ NULL,					DataType::INVALID_ID },
 
-			{ "open" },
-			{ "pray" },
-			{ "make_offering" },
-			{ "kill" },
-			{ "push" },
-			{ "desecrate" }
+			{ "open",				DataType::INVALID_ID },
+			{ "pray",				DataType::ID_PANTHEON },
+			{ "make_offering",		DataType::INVALID_ID },
+			{ "kill",				DataType::INVALID_ID },
+			{ "push",				DataType::INVALID_ID },
+			{ "desecrate",			DataType::INVALID_ID },
+			{ "start_quest",		DataType::ID_QUEST }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

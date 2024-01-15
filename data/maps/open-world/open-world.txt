@@ -9,11 +9,13 @@ map_entity_spawn .spirit_stone:
 
 map_entity_spawn .holy_altar:
 {	
+	spawn_timer: { despawn_required: true min_delay: 600 cooldown_range_min: 1200 cooldown_range_max: 4800 }
 	entity holy_altar: { init_state: default } 
 }
 
 map_entity_spawn .underworld_shrine:
 {	
+	spawn_timer: { despawn_required: true min_delay: 600 cooldown_range_min: 1200 cooldown_range_max: 4800 }
 	entity underworld_shrine: { init_state: default } 
 }
 

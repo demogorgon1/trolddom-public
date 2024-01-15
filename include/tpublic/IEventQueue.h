@@ -111,9 +111,6 @@ namespace tpublic
 		virtual tpublic::EntityInstance*	EventQueueSpawnEntity(
 												uint32_t											aEntityId,
 												tpublic::EntityState::Id							aInitState) = 0;
-		virtual void						EventQueueStartQuest(
-												uint32_t											aEntityInstanceId,
-												uint32_t											aQuestId) = 0;
 	};
 
 }

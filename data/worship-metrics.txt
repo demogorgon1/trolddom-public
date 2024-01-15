@@ -2,7 +2,7 @@ worship_metrics:
 {
 
 	min_favor: -2000
-	max_favor: 10000
+	max_favor: 27000
 	base_favor_update: 10
 	favor_loss_multiplier: 2
 	
@@ -11,8 +11,8 @@ worship_metrics:
 		0
 		1000
 		3000
-		6000
-		10000
+		9000
+		27000
 	]
 
 	level_colors:

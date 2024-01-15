@@ -47,6 +47,7 @@ namespace tpublic
 
 			// Public data
 			SimpleDirectEffect::Id	m_id = SimpleDirectEffect::INVALID_ID;
+			uint32_t				m_param = 0;
 		};
 
 	}

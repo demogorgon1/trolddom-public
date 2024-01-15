@@ -5,7 +5,6 @@
 #include "DirectEffects/Fishing.h"
 #include "DirectEffects/Heal.h"
 #include "DirectEffects/Simple.h"
-#include "DirectEffects/StartQuest.h"
 #include "DirectEffects/Threat.h"
 
 #include "DirectEffect.h"
@@ -23,7 +22,6 @@ namespace tpublic
 			_Register<DirectEffects::Fishing>();
 			_Register<DirectEffects::Heal>();
 			_Register<DirectEffects::Simple>();
-			_Register<DirectEffects::StartQuest>();
 			_Register<DirectEffects::Threat>();
 		}
 

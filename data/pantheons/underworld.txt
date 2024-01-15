@@ -10,11 +10,13 @@ pantheon underworld:
 	icon: icon_unholy
 	faction: underworld
 	opposition: light
+	pray_ability: underworld_pray
 	
 	notification_string<gained_favor>: "You've gained favor with the underworld."
 	notification_string<lost_favor>: "You've lost favor with the underworld."
 	
 	deity_specifier: "an unholy"
+	shrine_display_name_prefix: "Unholy Shrine of "
 	
 	player_levels:
 	[
@@ -39,6 +41,19 @@ pantheon underworld:
 		underworld_aura_9
 		underworld_aura_10
 	]
+}
+
+ability underworld_pray:
+{
+	string: "Pray to The Underworld"
+	description: "Pray for a blessing from your unholy deity."
+	cast_time: 20
+	cooldowns: [ pray ]
+	flags: [ late_cooldown_trigger target_self always_in_range ]
+	states: [ default ]
+	icon: icon_unholy
+	
+	direct_effect simple<pray>: underworld
 }
 
 !define local UNHOLY_BLESSING
