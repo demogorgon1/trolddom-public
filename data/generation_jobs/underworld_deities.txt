@@ -1,3 +1,71 @@
+!define local RAW_STATS_AURA
+{
+	tags: @_tags
+	stat_modifiers: 
+	{ 
+		<exists _spirit> spirit: { add: @_spirit } 
+		<exists _dexterity> dexterity: { add: @_dexterity } 
+		<exists _constitution> constitution: { add: @_constitution } 
+		<exists _strength> strength: { add: @_strength } 
+		<exists _wisdom> wisdom: { add: @_wisdom } 
+	}
+}
+
+aura .underworld_spirit_1: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_1 ] _spirit: 1 }
+aura .underworld_spirit_2: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_1 underworld_blessing_rank_2 ] _spirit: 2 }
+aura .underworld_spirit_3: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_2 underworld_blessing_rank_3 ] _spirit: 3 }
+aura .underworld_spirit_4: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_3 underworld_blessing_rank_4 ] _spirit: 4 }
+aura .underworld_spirit_5: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_4 underworld_blessing_rank_5 ] _spirit: 5 }
+aura .underworld_spirit_6: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_5 underworld_blessing_rank_6 ] _spirit: 6 }
+aura .underworld_spirit_7: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_6 underworld_blessing_rank_7 ] _spirit: 7 }
+aura .underworld_spirit_8: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_7 underworld_blessing_rank_8 ] _spirit: 8 }
+aura .underworld_spirit_9: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_8 underworld_blessing_rank_9 ] _spirit: 9 }
+aura .underworld_spirit_10: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_9 underworld_blessing_rank_10 ] _spirit: 10 }
+
+aura .underworld_constitution_1: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_1 ] _constitution: 1 }
+aura .underworld_constitution_2: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_1 underworld_blessing_rank_2 ] _constitution: 2 }
+aura .underworld_constitution_3: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_2 underworld_blessing_rank_3 ] _constitution: 3 }
+aura .underworld_constitution_4: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_3 underworld_blessing_rank_4 ] _constitution: 4 }
+aura .underworld_constitution_5: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_4 underworld_blessing_rank_5 ] _constitution: 5 }
+aura .underworld_constitution_6: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_5 underworld_blessing_rank_6 ] _constitution: 6 }
+aura .underworld_constitution_7: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_6 underworld_blessing_rank_7 ] _constitution: 7 }
+aura .underworld_constitution_8: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_7 underworld_blessing_rank_8 ] _constitution: 8 }
+aura .underworld_constitution_9: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_8 underworld_blessing_rank_9 ] _constitution: 9 }
+aura .underworld_constitution_10: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_9 underworld_blessing_rank_10 ] _constitution: 10 }
+
+aura .underworld_dexterity_1: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_1 ] _dexterity: 1 }
+aura .underworld_dexterity_2: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_1 underworld_blessing_rank_2 ] _dexterity: 2 }
+aura .underworld_dexterity_3: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_2 underworld_blessing_rank_3 ] _dexterity: 3 }
+aura .underworld_dexterity_4: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_3 underworld_blessing_rank_4 ] _dexterity: 4 }
+aura .underworld_dexterity_5: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_4 underworld_blessing_rank_5 ] _dexterity: 5 }
+aura .underworld_dexterity_6: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_5 underworld_blessing_rank_6 ] _dexterity: 6 }
+aura .underworld_dexterity_7: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_6 underworld_blessing_rank_7 ] _dexterity: 7 }
+aura .underworld_dexterity_8: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_7 underworld_blessing_rank_8 ] _dexterity: 8 }
+aura .underworld_dexterity_9: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_8 underworld_blessing_rank_9 ] _dexterity: 9 }
+aura .underworld_dexterity_10: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_9 underworld_blessing_rank_10 ] _dexterity: 10 }
+
+aura .underworld_strength_1: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_1 ] _strength: 1 }
+aura .underworld_strength_2: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_1 underworld_blessing_rank_2 ] _strength: 2 }
+aura .underworld_strength_3: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_2 underworld_blessing_rank_3 ] _strength: 3 }
+aura .underworld_strength_4: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_3 underworld_blessing_rank_4 ] _strength: 4 }
+aura .underworld_strength_5: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_4 underworld_blessing_rank_5 ] _strength: 5 }
+aura .underworld_strength_6: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_5 underworld_blessing_rank_6 ] _strength: 6 }
+aura .underworld_strength_7: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_6 underworld_blessing_rank_7 ] _strength: 7 }
+aura .underworld_strength_8: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_7 underworld_blessing_rank_8 ] _strength: 8 }
+aura .underworld_strength_9: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_8 underworld_blessing_rank_9 ] _strength: 9 }
+aura .underworld_strength_10: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_9 underworld_blessing_rank_10 ] _strength: 10 }
+
+aura .underworld_wisdom_1: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_1 ] _wisdom: 1 }
+aura .underworld_wisdom_2: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_1 underworld_blessing_rank_2 ] _wisdom: 2 }
+aura .underworld_wisdom_3: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_2 underworld_blessing_rank_3 ] _wisdom: 3 }
+aura .underworld_wisdom_4: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_3 underworld_blessing_rank_4 ] _wisdom: 4 }
+aura .underworld_wisdom_5: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_4 underworld_blessing_rank_5 ] _wisdom: 5 }
+aura .underworld_wisdom_6: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_5 underworld_blessing_rank_6 ] _wisdom: 6 }
+aura .underworld_wisdom_7: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_6 underworld_blessing_rank_7 ] _wisdom: 7 }
+aura .underworld_wisdom_8: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_7 underworld_blessing_rank_8 ] _wisdom: 8 }
+aura .underworld_wisdom_9: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_8 underworld_blessing_rank_9 ] _wisdom: 9 }
+aura .underworld_wisdom_10: !RAW_STATS_AURA { _tags: [ underworld_blessing_rank_9 underworld_blessing_rank_10 ] _wisdom: 10 }
+
 generation_job underworld_deities:
 {
 	random_seed: 38489142
@@ -10,6 +78,21 @@ generation_job underworld_deities:
 		pantheon: underworld
 		name_generator: demon_name	
 		must_not_have_tags: [ creature good ]
+		blessing_duration: 18000 # 30 minutes
+				
+		blessing_rank_tags: 
+		[ 
+			underworld_blessing_rank_1 
+			underworld_blessing_rank_2
+			underworld_blessing_rank_3 
+			underworld_blessing_rank_4
+			underworld_blessing_rank_5
+			underworld_blessing_rank_6
+			underworld_blessing_rank_7 
+			underworld_blessing_rank_8
+			underworld_blessing_rank_9 
+			underworld_blessing_rank_10
+		]
 				
 		count: 100
 	}

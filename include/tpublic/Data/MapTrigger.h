@@ -44,7 +44,6 @@ namespace tpublic
 			ToStream(
 				IWriter*				aStream) const override
 			{
-				ToStreamBase(aStream);
 				aStream->WritePOD(m_persistent);
 				aStream->WritePOD(m_default);
 			}
@@ -53,8 +52,6 @@ namespace tpublic
 			FromStream(
 				IReader*				aStream) override
 			{
-				if (!FromStreamBase(aStream))
-					return false;
 				if (!aStream->ReadPOD(m_persistent))
 					return false;
 				if (!aStream->ReadPOD(m_default))

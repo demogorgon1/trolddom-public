@@ -59,7 +59,6 @@ namespace tpublic
 			ToStream(
 				IWriter*				aStream) const override
 			{
-				ToStreamBase(aStream);
 				aStream->WritePOD(m_behavior);
 				aStream->WriteUInt(m_maxRange);
 				aStream->WriteUInt(m_maxTicks);
@@ -69,8 +68,6 @@ namespace tpublic
 			FromStream(
 				IReader*				aStream) override
 			{
-				if (!FromStreamBase(aStream))
-					return false;
 				if (!aStream->ReadPOD(m_behavior))
 					return false;
 				if (!aStream->ReadUInt(m_maxRange))

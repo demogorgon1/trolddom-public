@@ -189,8 +189,6 @@ namespace tpublic
 			ToStream(
 				IWriter*				aWriter) const override
 			{
-				ToStreamBase(aWriter);
-
 				m_generator.ToStream(aWriter);
 				aWriter->WriteUInt(m_maxOrder);
 				m_syllables.ToStream(aWriter);
@@ -203,9 +201,6 @@ namespace tpublic
 			FromStream(
 				IReader*				aReader) override
 			{
-				if (!FromStreamBase(aReader))
-					return false;
-
 				if(!m_generator.FromStream(aReader))
 					return false;
 				if(!aReader->ReadUInt(m_maxOrder))

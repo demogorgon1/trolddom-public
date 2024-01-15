@@ -209,7 +209,6 @@ namespace tpublic
 			ToStream(
 				IWriter*				aStream) const override
 			{
-				ToStreamBase(aStream);
 				aStream->WriteString(m_displayName);
 				aStream->WriteUInts(m_systems);
 
@@ -225,8 +224,6 @@ namespace tpublic
 			FromStream(
 				IReader*				aStream) override
 			{
-				if (!FromStreamBase(aStream))
-					return false;
 				if(!aStream->ReadString(m_displayName))
 					return false;
 				if(!aStream->ReadUInts(m_systems))

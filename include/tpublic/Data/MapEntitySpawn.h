@@ -297,7 +297,6 @@ namespace tpublic
 			ToStream(
 				IWriter*				aStream) const override
 			{
-				ToStreamBase(aStream);
 				aStream->WriteObjectPointers(m_entities);
 				m_spawnTimer.ToStream(aStream);
 			}
@@ -306,8 +305,6 @@ namespace tpublic
 			FromStream(
 				IReader*				aStream) override
 			{
-				if (!FromStreamBase(aStream))
-					return false;
 				if (!aStream->ReadObjectPointers(m_entities))
 					return false;
 				if(!m_spawnTimer.FromStream(aStream))

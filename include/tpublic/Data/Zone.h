@@ -42,8 +42,6 @@ namespace tpublic
 			ToStream(
 				IWriter*				aWriter) const override
 			{
-				ToStreamBase(aWriter);
-
 				aWriter->WriteString(m_string);
 			}
 			
@@ -51,9 +49,6 @@ namespace tpublic
 			FromStream(
 				IReader*				aReader) override
 			{
-				if (!FromStreamBase(aReader))
-					return false;
-
 				if(!aReader->ReadString(m_string))
 					return false;
 				return true;

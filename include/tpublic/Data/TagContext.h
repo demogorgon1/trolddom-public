@@ -85,8 +85,6 @@ namespace tpublic
 			ToStream(
 				IWriter*				aStream) const override
 			{
-				ToStreamBase(aStream);
-
 				aStream->WriteUInts(m_mustHaveTags);
 				aStream->WriteUInts(m_mustNotHaveTags);
 				aStream->WriteObjects(m_scoring);
@@ -96,9 +94,6 @@ namespace tpublic
 			FromStream(
 				IReader*				aStream) override
 			{
-				if (!FromStreamBase(aStream))
-					return false;
-
 				if(!aStream->ReadUInts(m_mustHaveTags))
 					return false;
 				if (!aStream->ReadUInts(m_mustNotHaveTags))

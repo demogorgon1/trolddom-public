@@ -252,14 +252,14 @@ namespace tpublic
 			ToStream(
 				IWriter*								aStream) const override
 			{
-				aStream->WriteObjectPointers(m_entries);
+				aStream->WriteObjectPointersWithBase(m_entries);
 			}
 
 			bool
 			FromStream(
 				IReader*								aStream) override
 			{
-				if(!aStream->ReadObjectPointers(m_entries))
+				if(!aStream->ReadObjectPointersWithBase(m_entries, 8192))
 					return false;
 
 				for (std::unique_ptr<_T>& t : m_entries)

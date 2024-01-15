@@ -659,8 +659,6 @@ namespace tpublic
 			ToStream(
 				IWriter*				aStream) const override
 			{
-				ToStreamBase(aStream);
-
 				aStream->WritePOD(m_type);
 				aStream->WriteOptionalObjectPointer(m_tileMap);
 				aStream->WriteOptionalObjectPointer(m_randomRoom);
@@ -671,9 +669,6 @@ namespace tpublic
 			FromStream(
 				IReader*				aStream) override
 			{
-				if (!FromStreamBase(aStream))
-					return false;
-
 				if (!aStream->ReadPOD(m_type))
 					return false;
 				if (!aStream->ReadOptionalObjectPointer(m_tileMap))

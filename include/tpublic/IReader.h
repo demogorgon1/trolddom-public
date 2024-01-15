@@ -173,6 +173,32 @@ namespace tpublic
 
 		template <typename _T>
 		bool
+		ReadObjectPointersWithBase(
+			std::vector<std::unique_ptr<_T>>&		aOut,
+			size_t									aMaxCount = 1024)
+		{
+			size_t count;
+			if(!ReadUInt(count))
+				return false;
+
+			if(count > aMaxCount)
+				return false;
+
+			aOut.resize(count);
+			for(std::unique_ptr<_T>& object : aOut)
+			{
+				object = std::make_unique<_T>();
+				if (!object->FromStreamBase(this))
+					return false;
+				if(!object->FromStream(this))
+					return false;
+			}
+
+			return true;
+		}
+
+		template <typename _T>
+		bool
 		ReadOptionalObjectPointer(
 			std::unique_ptr<_T>&					aOut)
 		{

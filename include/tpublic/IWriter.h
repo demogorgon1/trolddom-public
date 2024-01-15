@@ -105,6 +105,20 @@ namespace tpublic
 
 		template <typename _T>
 		void
+		WriteObjectPointersWithBase(
+			const std::vector<std::unique_ptr<_T>>&	aObjects)
+		{
+			WriteUInt(aObjects.size());
+			for(const std::unique_ptr<_T>& object : aObjects)
+			{
+				assert(object);
+				object->ToStreamBase(this);
+				object->ToStream(this);
+			}
+		}
+
+		template <typename _T>
+		void
 		WriteOptionalObjectPointer(
 			const std::unique_ptr<_T>&				aObject)
 		{

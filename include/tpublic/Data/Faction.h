@@ -69,7 +69,6 @@ namespace tpublic
 			ToStream(
 				IWriter*				aStream) const override
 			{
-				ToStreamBase(aStream);
 				aStream->WritePOD(m_flags);
 				aStream->WriteString(m_string);
 			}
@@ -78,8 +77,6 @@ namespace tpublic
 			FromStream(
 				IReader*				aStream) override
 			{
-				if (!FromStreamBase(aStream))
-					return false;
 				if(!aStream->ReadPOD(m_flags))
 					return false;
 				if(!aStream->ReadString(m_string))

@@ -33,7 +33,6 @@ namespace tpublic
 			ToStream(
 				IWriter*				aStream) const override
 			{
-				ToStreamBase(aStream);
 				aStream->WriteUInt(m_spriteSheetIndex);
 				aStream->WriteUInt(m_offsetX);
 				aStream->WriteUInt(m_offsetY);
@@ -47,8 +46,6 @@ namespace tpublic
 			FromStream(
 				IReader*				aStream) override
 			{
-				if (!FromStreamBase(aStream))
-					return false;
 				if (!aStream->ReadUInt(m_spriteSheetIndex))
 					return false;
 				if (!aStream->ReadUInt(m_offsetX))

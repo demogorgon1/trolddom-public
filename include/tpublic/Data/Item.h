@@ -197,7 +197,6 @@ namespace tpublic
 			ToStream(
 				IWriter*				aStream) const override
 			{
-				ToStreamBase(aStream);
 				aStream->WriteUInts(m_equipmentSlots);
 				aStream->WriteUInts(m_lootGroups);
 				aStream->WriteUInt(m_stackSize);
@@ -223,8 +222,6 @@ namespace tpublic
 			FromStream(
 				IReader*				aStream) override
 			{
-				if (!FromStreamBase(aStream))
-					return false;
 				if (!aStream->ReadUInts(m_equipmentSlots))
 					return false;
 				if (!aStream->ReadUInts(m_lootGroups))

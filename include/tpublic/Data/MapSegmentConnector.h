@@ -55,8 +55,6 @@ namespace tpublic
 			ToStream(
 				IWriter*				aStream) const override
 			{
-				ToStreamBase(aStream);
-				
 				aStream->WriteUInts(m_connects);
 			}
 
@@ -64,9 +62,6 @@ namespace tpublic
 			FromStream(
 				IReader*				aStream) override
 			{
-				if (!FromStreamBase(aStream))
-					return false;
-
 				if(!aStream->ReadUInts(m_connects))
 					return false;
 				return true;

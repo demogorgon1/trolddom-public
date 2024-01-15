@@ -1,5 +1,6 @@
 #include "Pcheader.h"
 
+#include <tpublic/Data/Aura.h>
 #include <tpublic/Data/LootGroup.h>
 #include <tpublic/Data/Pantheon.h>
 #include <tpublic/Data/Tag.h>
@@ -76,6 +77,7 @@ namespace tpublic
 		m_manifest = aManifest;
 		m_wordListQueryCache = std::make_unique<WordList::QueryCache>(&m_manifest->m_wordList);
 		m_taggedSpriteData = std::make_unique<TaggedDataCache<Data::Sprite>>(m_manifest);
+		m_taggedAuraData = std::make_unique<TaggedDataCache<Data::Aura>>(m_manifest);
 
 		// Initialize output path
 		{
@@ -493,6 +495,8 @@ namespace tpublic
 		uint32_t pantheonId = 0;
 		std::vector<uint32_t> mustHaveTags;
 		std::vector<uint32_t> mustNotHaveTags;
+		std::vector<uint32_t> blessingRankTags;
+		int32_t blessingDuration = 10 * 60 * 30;
 
 		aSource->ForEachChild([&](
 			const SourceNode* aChild)
@@ -507,6 +511,10 @@ namespace tpublic
 				aChild->GetIdArray(DataType::ID_TAG, mustHaveTags);
 			else if (aChild->m_name == "must_not_have_tags")
 				aChild->GetIdArray(DataType::ID_TAG, mustNotHaveTags);
+			else if (aChild->m_name == "blessing_rank_tags")
+				aChild->GetIdArray(DataType::ID_TAG, blessingRankTags);
+			else if (aChild->m_name == "blessing_duration")
+				blessingDuration = aChild->GetInt32();
 			else
 				TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 		});
@@ -610,37 +618,126 @@ namespace tpublic
 				title = descriptionAdjective + " " + descriptionNoun;
 			}
 
-			GeneratedSource* output = _CreateGeneratedSource();
+			std::vector<std::string> localBlessingRankNames;
+			uint32_t blessingRank = 0;
 
-			output->PrintF(0, "deity %s_deity_%u:", m_source->m_name.c_str(), m_nextDeityNumber++);
-			output->PrintF(0, "{");
-			output->PrintF(1, "string: \"%s\"", name.c_str());
+			Data::Aura combinedAura;
+			combinedAura.m_string = Helpers::Format("Blessing of %s", name.c_str());
+			combinedAura.m_iconSpriteId = pantheon->m_iconSpriteId;
+			combinedAura.m_duration = blessingDuration;
+			combinedAura.m_type = Data::Aura::TYPE_BUFF;
+			combinedAura.m_flags = Data::Aura::FLAG_UNIQUE;
 
-			if(!title.empty())
-				output->PrintF(1, "title: \"%s\"", title.c_str());
-
-			if (!titlePrefix.empty())
-				output->PrintF(1, "title_prefix: \"%s\"", titlePrefix.c_str());
-			
-			if (!titleSuffix.empty())
-				output->PrintF(1, "title_suffix: \"%s\"", titleSuffix.c_str());
-
-			if(tags.size() > 0)
+			for(uint32_t blessingRankTagId : blessingRankTags)
 			{
-				output->PrintF(1, "tags:");
-				output->PrintF(1, "[");
-				for (uint32_t tagId : tags)
+				TaggedData::Query query;
+				query.m_mustHaveTagIds = { blessingRankTagId };
+
+				for (uint32_t tagId : contextTags)
 				{
-					const Data::Tag* dataTag = m_manifest->GetById<Data::Tag>(tagId);
-					if(dataTag->m_transferable)
-						output->PrintF(2, "%s", dataTag->m_name.c_str());
+					TaggedData::Query::TagScoring scoring;
+					scoring.m_tagId = tagId;
+					scoring.m_score = 1;
+					query.m_tagScoring.push_back(scoring);
 				}
-				output->PrintF(1, "]");
+
+				const TaggedData::QueryResult* result = m_taggedAuraData->Get()->PerformQuery(query);
+				TP_VERIFY(result->m_entries.size() > 0, aSource->m_debugInfo, "Unable to get blessing aura for rank tag id: %u", blessingRankTagId);
+
+				uint32_t auraId = result->PickRandom(_GetRandom());
+				const Data::Aura* auraData = m_manifest->GetById<Data::Aura>(auraId);
+
+				combinedAura.m_description.clear();
+
+				if(auraData->m_statModifiers)
+				{
+					if(!combinedAura.m_statModifiers)
+						combinedAura.m_statModifiers = std::make_unique<StatModifiers>();
+
+					combinedAura.m_statModifiers->Combine(*auraData->m_statModifiers);
+
+					for (uint32_t k = 1; k < (uint32_t)tpublic::Stat::NUM_IDS; k++)
+					{
+						const std::optional<tpublic::Modifier>& modifier = auraData->m_statModifiers->m_modifiers[k];
+						if (modifier.has_value())
+						{
+							const tpublic::Stat::Info* statInfo = tpublic::Stat::GetInfo((tpublic::Stat::Id)k);
+							int32_t add = (int32_t)modifier->m_add;
+							int32_t addP = (int32_t)modifier->m_addPercent;
+							if (add > 0)
+								combinedAura.m_description += Helpers::Format("+%d %s\n", add, statInfo->m_longName);
+							else if (add < 0)
+								combinedAura.m_description += Helpers::Format("%d %s\n", add, statInfo->m_longName);
+
+							if (addP > 0)
+								combinedAura.m_description += Helpers::Format("+%d%% %s\n", add, statInfo->m_longName);
+							else if (addP < 0)
+								combinedAura.m_description += Helpers::Format("%d%% %s\n", add, statInfo->m_longName);
+						}
+					}
+				}
+
+				// FIXME: copy aura effects				
+
+				std::vector<uint8_t> binary;
+				VectorIO::Writer writer(binary);
+				combinedAura.ToStream(&writer);
+				std::string base64;
+				Base64::Encode(&binary[0], binary.size(), base64);
+								
+				GeneratedSource* output = _CreateGeneratedSource();
+				std::string auraName = Helpers::Format(".%s_deity_%u_blessing_rank_%u", m_source->m_name.c_str(), m_nextDeityNumber, blessingRank);
+				localBlessingRankNames.push_back(auraName);
+
+				output->PrintF(0, "aura %s: { binary: \"%s\" }", auraName.c_str(), base64.c_str());
+
+				blessingRank++;
 			}
 
-			output->PrintF(1, "pantheon: %s", pantheon->m_name.c_str());
+			// Deity source
+			{
+				GeneratedSource* output = _CreateGeneratedSource();
 
-			output->PrintF(0, "}");
+				output->PrintF(0, "deity %s_deity_%u:", m_source->m_name.c_str(), m_nextDeityNumber);
+				output->PrintF(0, "{");
+				output->PrintF(1, "string: \"%s\"", name.c_str());
+
+				if (!title.empty())
+					output->PrintF(1, "title: \"%s\"", title.c_str());
+
+				if (!titlePrefix.empty())
+					output->PrintF(1, "title_prefix: \"%s\"", titlePrefix.c_str());
+
+				if (!titleSuffix.empty())
+					output->PrintF(1, "title_suffix: \"%s\"", titleSuffix.c_str());
+
+				if (tags.size() > 0)
+				{
+					output->PrintF(1, "tags:");
+					output->PrintF(1, "[");
+					for (uint32_t tagId : tags)
+					{
+						const Data::Tag* dataTag = m_manifest->GetById<Data::Tag>(tagId);
+						if (dataTag->m_transferable)
+							output->PrintF(2, "%s", dataTag->m_name.c_str());
+					}
+					output->PrintF(1, "]");
+				}
+
+				output->PrintF(1, "pantheon: %s", pantheon->m_name.c_str());
+
+				output->PrintF(1, "blessing_auras:");
+				output->PrintF(1, "[");
+				for (const std::string& localBlessingRankName : localBlessingRankNames)
+				{
+					output->PrintF(2, "%s", localBlessingRankName.c_str());
+				}
+				output->PrintF(1, "]");
+
+				output->PrintF(0, "}");
+			}
+
+			m_nextDeityNumber++;
 		}
 	}
 

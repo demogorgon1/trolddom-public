@@ -100,8 +100,6 @@ namespace tpublic
 			ToStream(
 				IWriter*				aStream) const override
 			{
-				ToStreamBase(aStream);
-
 				aStream->WriteString(m_string);
 				aStream->WriteString(m_description);
 				aStream->WriteUInt(m_points);
@@ -118,9 +116,6 @@ namespace tpublic
 			FromStream(
 				IReader*				aStream) override
 			{
-				if (!FromStreamBase(aStream))
-					return false;
-
 				if (!aStream->ReadString(m_string))
 					return false;
 				if (!aStream->ReadString(m_description))

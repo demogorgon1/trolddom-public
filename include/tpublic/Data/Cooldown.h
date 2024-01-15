@@ -43,7 +43,6 @@ namespace tpublic
 			ToStream(
 				IWriter*				aStream) const override
 			{
-				ToStreamBase(aStream);
 				aStream->WriteInt(m_duration);
 			}
 
@@ -51,8 +50,6 @@ namespace tpublic
 			FromStream(
 				IReader*				aStream) override
 			{
-				if (!FromStreamBase(aStream))
-					return false;
 				if(!aStream->ReadInt(m_duration))
 					return false;
 				return true;

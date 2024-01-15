@@ -35,17 +35,14 @@ namespace tpublic
 
 			void
 			ToStream(
-				IWriter*				aStream) const override
+				IWriter*				/*aStream*/) const override
 			{
-				ToStreamBase(aStream);
 			}
 
 			bool
 			FromStream(
-				IReader*				aStream) override
+				IReader*				/*aStream*/) override
 			{
-				if (!FromStreamBase(aStream))
-					return false;
 				return true;
 			}
 

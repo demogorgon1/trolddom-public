@@ -11,7 +11,7 @@ namespace tpublic::Systems
 	public:
 		static const System::Id ID = System::ID_SHRINE;
 		static const int32_t UPDATE_INTERVAL = 10;
-		static const int32_t DESPAWN_TICKS = 5;
+		static const int32_t OPEN_WORLD_RESTORE_TICKS = 10 * 60 * 10; // 10 minutes
 
 						Shrine(
 							const SystemData*	aData);

@@ -15,7 +15,7 @@ namespace tpublic
 			: public DataBase
 		{
 			static const DataType::Id DATA_TYPE = DataType::ID_AURA;
-			static const bool TAGGED = false;
+			static const bool TAGGED = true;
 
 			struct AuraEffectEntry
 			{
@@ -165,7 +165,6 @@ namespace tpublic
 			ToStream(
 				IWriter*				aStream) const override
 			{
-				ToStreamBase(aStream);
 				aStream->WriteUInt(m_iconSpriteId);
 				aStream->WriteInt(m_duration);
 				aStream->WritePOD(m_type);
@@ -180,8 +179,6 @@ namespace tpublic
 			FromStream(
 				IReader*				aStream) override
 			{
-				if (!FromStreamBase(aStream))
-					return false;
 				if (!aStream->ReadUInt(m_iconSpriteId))
 					return false;
 				if (!aStream->ReadInt(m_duration))

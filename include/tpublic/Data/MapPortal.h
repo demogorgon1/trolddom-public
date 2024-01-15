@@ -44,7 +44,6 @@ namespace tpublic
 			ToStream(
 				IWriter*				aStream) const override
 			{
-				ToStreamBase(aStream);
 				aStream->WriteUInt(m_mapId);
 				aStream->WriteUInt(m_mapPlayerSpawnId);
 			}
@@ -53,8 +52,6 @@ namespace tpublic
 			FromStream(
 				IReader*				aStream) override
 			{
-				if (!FromStreamBase(aStream))
-					return false;
 				if (!aStream->ReadUInt(m_mapId))
 					return false;
 				if (!aStream->ReadUInt(m_mapPlayerSpawnId))

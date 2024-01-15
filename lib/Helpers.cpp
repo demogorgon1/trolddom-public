@@ -153,4 +153,14 @@ namespace tpublic::Helpers
 		}
 	}
 
+	std::string
+	Format(
+		const char*					aFormat,
+		...)
+	{
+		char buffer[1024];
+		TP_STRING_FORMAT_VARARGS(buffer, sizeof(buffer), aFormat);
+		return buffer;
+	}
+
 }

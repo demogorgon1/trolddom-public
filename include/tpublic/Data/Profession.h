@@ -50,8 +50,6 @@ namespace tpublic
 			ToStream(
 				IWriter*				aStream) const override
 			{
-				ToStreamBase(aStream);
-
 				aStream->WriteString(m_string);
 				aStream->WritePOD(m_type);
 				aStream->WriteUInt(m_iconSpriteId);
@@ -61,9 +59,6 @@ namespace tpublic
 			FromStream(
 				IReader*				aStream) override
 			{
-				if (!FromStreamBase(aStream))
-					return false;
-
 				if(!aStream->ReadString(m_string))
 					return false;
 				if (!aStream->ReadPOD(m_type))

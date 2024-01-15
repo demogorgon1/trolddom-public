@@ -431,7 +431,6 @@ namespace tpublic
 			ToStream(
 				IWriter*				aWriter) const override
 			{
-				ToStreamBase(aWriter);
 				aWriter->WriteString(m_displayName);
 				aWriter->WriteString(m_description);
 				aWriter->WriteUInt(m_talentTreeId);
@@ -465,8 +464,6 @@ namespace tpublic
 			FromStream(
 				IReader*				aReader) override
 			{
-				if(!FromStreamBase(aReader))
-					return false;
 				if(!aReader->ReadString(m_displayName))
 					return false;
 				if (!aReader->ReadString(m_description))

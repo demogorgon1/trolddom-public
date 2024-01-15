@@ -33,7 +33,6 @@ namespace tpublic
 			ToStream(
 				IWriter*				aStream) const override
 			{
-				ToStreamBase(aStream);
 				assert(m_data);
 				m_data->ToStream(aStream);
 			}
@@ -42,8 +41,6 @@ namespace tpublic
 			FromStream(
 				IReader*				aStream) override
 			{
-				if (!FromStreamBase(aStream))
-					return false;
 				m_data = std::make_unique<MapData>();
 				return m_data->FromStream(aStream);
 			}

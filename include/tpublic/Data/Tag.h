@@ -68,8 +68,6 @@ namespace tpublic
 			ToStream(
 				IWriter*				aWriter) const override
 			{
-				ToStreamBase(aWriter);
-
 				aWriter->WriteUInts(m_mutuallyExclusive);
 				aWriter->WriteBool(m_excplicit);
 				aWriter->WriteBool(m_transferable);
@@ -81,9 +79,6 @@ namespace tpublic
 			FromStream(
 				IReader*				aReader) override
 			{
-				if (!FromStreamBase(aReader))
-					return false;
-
 				if(!aReader->ReadUInts(m_mutuallyExclusive))
 					return false;
 				if (!aReader->ReadBool(m_excplicit))

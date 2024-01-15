@@ -252,7 +252,6 @@ namespace tpublic
 			ToStream(
 				IWriter*				aStream) const override
 			{
-				ToStreamBase(aStream);
 				aStream->WriteString(m_text);
 				aStream->WriteObjects(m_options);
 				aStream->WriteObjects(m_sell);
@@ -264,8 +263,6 @@ namespace tpublic
 			FromStream(
 				IReader*				aStream) override
 			{
-				if (!FromStreamBase(aStream))
-					return false;
 				if(!aStream->ReadString(m_text, 16 * 1024))
 					return false;
 				if (!aStream->ReadObjects(m_options))

@@ -203,7 +203,6 @@ namespace tpublic
 			ToStream(
 				IWriter*				aStream) const override
 			{
-				ToStreamBase(aStream);
 				aStream->WriteOptionalObject(m_cash);
 				aStream->WriteObjectPointers(m_slots);
 			}
@@ -212,8 +211,6 @@ namespace tpublic
 			FromStream(
 				IReader*				aStream) override
 			{
-				if(!FromStreamBase(aStream))
-					return false;
 				if(!aStream->ReadOptionalObject(m_cash))
 					return false;
 				if(!aStream->ReadObjectPointers(m_slots))

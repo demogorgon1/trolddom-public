@@ -34,6 +34,11 @@ namespace tpublic
 			// Public data
 			uint32_t	m_pantheonId = 0;
 			uint32_t	m_deityId = 0;
+
+			// Internal
+			std::string	m_desecratedName;
+			std::string	m_tappedName;
+			std::string	m_defaultName;
 		};
 	}
 

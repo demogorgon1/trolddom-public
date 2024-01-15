@@ -83,7 +83,6 @@ namespace tpublic
 			ToStream(
 				IWriter*				aStream) const override
 			{
-				ToStreamBase(aStream);
 				aStream->WriteObjectPointers(m_entries);
 			}
 
@@ -91,8 +90,6 @@ namespace tpublic
 			FromStream(
 				IReader*				aStream) override
 			{
-				if (!FromStreamBase(aStream))
-					return false;
 				if(!aStream->ReadObjectPointers(m_entries))
 					return false;
 				return true;

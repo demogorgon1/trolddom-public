@@ -17,6 +17,12 @@ entity underworld_shrine:
 					random_start_frame: true 
 					z_offset: -3
 				}
+				
+				{ 
+					states: [ despawning ] 
+					frames: [ underworld_shrine_used ] 		
+					z_offset: -3
+				}					
 			]		
 		}		
 	}
@@ -39,6 +45,12 @@ entity holy_altar:
 					frames: [ holy_altar ] 		
 					z_offset: -3
 				}
+				
+				{ 
+					states: [ despawning ] 
+					frames: [ holy_altar_used ] 		
+					z_offset: -3
+				}				
 			]		
 		}		
 	}

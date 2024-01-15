@@ -40,6 +40,9 @@ namespace tpublic
 		void		GetRandomStatWeights(
 						uint32_t					aSeed,
 						Stat::Collection&			aOut);
+		std::string	Format(
+						const char*					aFormat,
+						...);
 
 		template <typename _T>
 		void	

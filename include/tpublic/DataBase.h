@@ -1,10 +1,12 @@
 #pragma once
 
+#include "Base64.h"
 #include "DataErrorHandling.h"
 #include "DataType.h"
 #include "IReader.h"
 #include "IWriter.h"
 #include "Parser.h"
+#include "VectorIO.h"
 
 namespace tpublic
 {
@@ -42,6 +44,15 @@ namespace tpublic
 			if(aSource->m_name == "tags")
 			{	
 				aSource->GetIdArray(DataType::ID_TAG, m_tagIds);
+				return true;
+			}
+			else if(aSource->m_name == "binary")
+			{
+				std::vector<uint8_t> binary;
+				Base64::Decode(aSource->GetString(), binary);
+				VectorIO::Reader reader(binary);
+				bool ok = FromStream(&reader);
+				TP_VERIFY(ok, aSource->m_debugInfo, "Failed to read binary.");
 				return true;
 			}
 			return false;

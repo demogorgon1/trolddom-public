@@ -85,8 +85,6 @@ namespace tpublic
 							m_notificationStrings[SourceToNotificationString(aChild)] = aChild->GetString();
 						else if(aChild->m_name == "player_levels")
 							aChild->GetStringArray(m_playerLevels);
-						else if (aChild->m_name == "blessings")
-							aChild->GetIdArray(DataType::ID_AURA, m_blessingAuraIds);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -97,8 +95,6 @@ namespace tpublic
 			ToStream(
 				IWriter*				aWriter) const override
 			{
-				ToStreamBase(aWriter);
-
 				aWriter->WriteString(m_string);
 				aWriter->WriteUInt(m_iconSpriteId);
 				aWriter->WriteString(m_deitySpecifier);
@@ -106,7 +102,6 @@ namespace tpublic
 				aWriter->WriteUInt(m_oppositionPantheonId);
 				aWriter->WriteUInt(m_prayAbilityId);
 				aWriter->WriteStrings(m_playerLevels);
-				aWriter->WriteUInts(m_blessingAuraIds);
 				aWriter->WriteString(m_shrineDisplayNamePrefix);
 
 				for (uint32_t i = 0; i < (uint32_t)NUM_NOTIFICATION_STRINGS; i++)
@@ -117,9 +112,6 @@ namespace tpublic
 			FromStream(
 				IReader*				aReader) override
 			{
-				if (!FromStreamBase(aReader))
-					return false;
-
 				if(!aReader->ReadString(m_string))
 					return false;
 				if (!aReader->ReadUInt(m_iconSpriteId))
@@ -133,8 +125,6 @@ namespace tpublic
 				if (!aReader->ReadUInt(m_prayAbilityId))
 					return false;
 				if (!aReader->ReadStrings(m_playerLevels))
-					return false;
-				if (!aReader->ReadUInts(m_blessingAuraIds))
 					return false;
 				if(!aReader->ReadString(m_shrineDisplayNamePrefix))
 					return false;
@@ -155,7 +145,6 @@ namespace tpublic
 			uint32_t							m_oppositionPantheonId = 0;
 			std::string							m_notificationStrings[NUM_NOTIFICATION_STRINGS];
 			std::vector<std::string>			m_playerLevels;
-			std::vector<uint32_t>				m_blessingAuraIds;
 			uint32_t							m_prayAbilityId = 0;
 			std::string							m_shrineDisplayNamePrefix;
 		};

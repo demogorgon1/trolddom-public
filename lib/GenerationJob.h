@@ -1,5 +1,6 @@
 #pragma once
 
+#include <tpublic/Data/Aura.h>
 #include <tpublic/Data/Sprite.h>
 
 #include <tpublic/EquipmentSlot.h>
@@ -129,6 +130,7 @@ namespace tpublic
 		std::vector<std::unique_ptr<GeneratedSource>>	m_generatedSource;
 		std::unique_ptr<WordList::QueryCache>			m_wordListQueryCache;
 		std::unique_ptr<TaggedDataCache<Data::Sprite>>	m_taggedSpriteData;
+		std::unique_ptr<TaggedDataCache<Data::Aura>>	m_taggedAuraData;
 
 		uint32_t										m_nextItemNumber = 0;
 		uint32_t										m_nextDeityNumber = 0;

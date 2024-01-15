@@ -9,7 +9,9 @@
 
 #include <tpublic/Systems/Shrine.h>
 
+#include <tpublic/IWorldView.h>
 #include <tpublic/Manifest.h>
+#include <tpublic/MapData.h>
 #include <tpublic/Pantheons.h>
 
 namespace tpublic::Systems
@@ -67,8 +69,12 @@ namespace tpublic::Systems
 		assert(deity != NULL);
 		const Data::Pantheon* pantheon = GetManifest()->GetById<Data::Pantheon>(shrine->m_pantheonId);
 
+		shrine->m_defaultName = pantheon->m_shrineDisplayNamePrefix + deity->m_string;
+		shrine->m_desecratedName = "Desecrated " + shrine->m_defaultName;
+		shrine->m_tappedName = "Tapped " + shrine->m_defaultName;
+
 		Components::DisplayName* displayName = GetComponent<Components::DisplayName>(aComponents);		
-		displayName->m_string = pantheon->m_shrineDisplayNamePrefix + deity->m_string;
+		displayName->m_string = shrine->m_defaultName;
 	}
 	
 	EntityState::Id	
@@ -77,11 +83,17 @@ namespace tpublic::Systems
 		uint32_t			/*aEntityInstanceId*/,
 		EntityState::Id		aEntityState,
 		int32_t				aTicksInState,
-		ComponentBase**		/*aComponents*/,
-		Context*			/*aContext*/) 
+		ComponentBase**		aComponents,
+		Context*			aContext) 
 	{
-		if (aEntityState == EntityState::ID_DESPAWNING)
-			return aTicksInState < DESPAWN_TICKS ? EntityState::CONTINUE : EntityState::ID_DESPAWNED;
+		if (aEntityState == EntityState::ID_DESPAWNING && aContext->m_worldView->WorldViewGetMapData()->m_type == MapType::ID_OPEN_WORLD && aTicksInState > OPEN_WORLD_RESTORE_TICKS)
+		{
+			const Components::Shrine* shrine = GetComponent<Components::Shrine>(aComponents);
+			Components::DisplayName* displayName = GetComponent<Components::DisplayName>(aComponents);
+			displayName->m_string = shrine->m_defaultName;
+			displayName->SetDirty();
+			return EntityState::ID_DEFAULT;
+		}
 
 		return EntityState::CONTINUE;
 	}

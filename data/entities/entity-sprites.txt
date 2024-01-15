@@ -83,6 +83,8 @@ sprites:
 	sprite underworld_shrine_3: { }
 	sprite underworld_shrine_4: { }
 	sprite holy_altar: { }
+	sprite underworld_shrine_used: { }
+	sprite holy_altar_used: { }
 	
 }
 
