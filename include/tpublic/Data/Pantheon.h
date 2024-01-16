@@ -57,6 +57,20 @@ namespace tpublic
 				return m_playerLevels[index].c_str();
 			}
 
+			const char*
+			GetDeityLevelString(
+				uint32_t				aLevel) const
+			{
+				if (m_deityLevels.empty())
+					return "";
+
+				uint32_t index = aLevel;
+				if (index >= (uint32_t)m_deityLevels.size())
+					index = (uint32_t)m_deityLevels.size() - 1;
+
+				return m_deityLevels[index].c_str();
+			}
+
 			// Base implementation
 			void
 			FromSource(
@@ -83,8 +97,10 @@ namespace tpublic
 							m_oppositionPantheonId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PANTHEON, aChild->GetIdentifier());
 						else if(aChild->m_name == "notification_string")
 							m_notificationStrings[SourceToNotificationString(aChild)] = aChild->GetString();
-						else if(aChild->m_name == "player_levels")
+						else if (aChild->m_name == "player_levels")
 							aChild->GetStringArray(m_playerLevels);
+						else if (aChild->m_name == "deity_levels")
+							aChild->GetStringArray(m_deityLevels);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -102,6 +118,7 @@ namespace tpublic
 				aWriter->WriteUInt(m_oppositionPantheonId);
 				aWriter->WriteUInt(m_prayAbilityId);
 				aWriter->WriteStrings(m_playerLevels);
+				aWriter->WriteStrings(m_deityLevels);
 				aWriter->WriteString(m_shrineDisplayNamePrefix);
 
 				for (uint32_t i = 0; i < (uint32_t)NUM_NOTIFICATION_STRINGS; i++)
@@ -126,6 +143,8 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadStrings(m_playerLevels))
 					return false;
+				if (!aReader->ReadStrings(m_deityLevels))
+					return false;
 				if(!aReader->ReadString(m_shrineDisplayNamePrefix))
 					return false;
 
@@ -147,6 +166,7 @@ namespace tpublic
 			std::vector<std::string>			m_playerLevels;
 			uint32_t							m_prayAbilityId = 0;
 			std::string							m_shrineDisplayNamePrefix;
+			std::vector<std::string>			m_deityLevels;
 		};
 
 	}

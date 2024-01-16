@@ -27,6 +27,16 @@ pantheon light:
 		"Beacon"
 		"Paragon"		
 	]
+	
+	deity_levels:
+	[
+		"Minor Divine Entity"
+		"Divine Entity"
+		"Greater Divine Entity"
+		"Angel"
+		"Archangel"
+		"High Ruler"
+	]
 }
 
 ability light_pray:

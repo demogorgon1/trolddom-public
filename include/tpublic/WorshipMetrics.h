@@ -76,6 +76,8 @@ namespace tpublic
 					m_favorLossMultiplier = aChild->GetInt32();
 				else if(aChild->m_name == "levels")
 					aChild->GetUIntArray(m_levels);
+				else if (aChild->m_name == "deity_power_rank_percentiles")
+					aChild->GetUIntArray(m_deityPowerRankPercentiles);
 				else if (aChild->m_name == "level_colors")
 					aChild->GetObjectArray(m_levelColors);
 				else if (aChild->m_name == "item_cost_to_favor_conversion")
@@ -94,6 +96,7 @@ namespace tpublic
 			aStream->WriteInt(m_baseFavorUpdate);
 			aStream->WriteInt(m_favorLossMultiplier);
 			aStream->WriteUInts(m_levels);
+			aStream->WriteUInts(m_deityPowerRankPercentiles);
 			aStream->WriteObjects(m_levelColors);
 			aStream->WriteFloat(m_itemCostToFavorConversion);
 		}
@@ -112,6 +115,8 @@ namespace tpublic
 				return false;
 			if(!aStream->ReadUInts(m_levels))
 				return false;
+			if (!aStream->ReadUInts(m_deityPowerRankPercentiles))
+				return false;
 			if(!aStream->ReadObjects(m_levelColors))
 				return false;
 			if(!aStream->ReadFloat(m_itemCostToFavorConversion))
@@ -129,7 +134,7 @@ namespace tpublic
 			uint32_t level = 0;
 			for(uint32_t t : m_levels)
 			{
-				if((uint32_t)aFavor >= t)
+				if(t >= (uint32_t)aFavor)
 					break;
 
 				level++;
@@ -153,12 +158,16 @@ namespace tpublic
 			if(aLevel >= (uint32_t)m_levels.size())
 				return false;
 
-			aOutMin = m_levels[aLevel];
-
 			if(aLevel == (uint32_t)m_levels.size() - 1)
+			{
+				aOutMin = m_levels[aLevel - 1];
 				aOutMax = m_maxFavor;
+			}
 			else 
+			{
+				aOutMin = m_levels[aLevel];
 				aOutMax = m_levels[aLevel + 1];
+			}
 
 			return true;
 		}
@@ -190,6 +199,7 @@ namespace tpublic
 		float								m_itemCostToFavorConversion = 1.0f;
 		std::vector<uint32_t>				m_levels;
 		std::vector<LevelColors>			m_levelColors;
+		std::vector<uint32_t>				m_deityPowerRankPercentiles;
 	};
 
 }

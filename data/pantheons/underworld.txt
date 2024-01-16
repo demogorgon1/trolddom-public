@@ -27,6 +27,16 @@ pantheon underworld:
 		"Beacon"
 		"Paragon"		
 	]	
+	
+	deity_levels:
+	[
+		"Demonic Minion"
+		"Lesser Demon"
+		"Demon"
+		"Greater Demon"
+		"Lord"
+		"Absolute Ruler"
+	]
 }
 
 ability underworld_pray:
