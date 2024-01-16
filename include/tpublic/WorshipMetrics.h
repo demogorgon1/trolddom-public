@@ -78,6 +78,8 @@ namespace tpublic
 					aChild->GetUIntArray(m_levels);
 				else if (aChild->m_name == "level_colors")
 					aChild->GetObjectArray(m_levelColors);
+				else if (aChild->m_name == "item_cost_to_favor_conversion")
+					m_itemCostToFavorConversion = aChild->GetFloat();
 				else
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 			});
@@ -93,6 +95,7 @@ namespace tpublic
 			aStream->WriteInt(m_favorLossMultiplier);
 			aStream->WriteUInts(m_levels);
 			aStream->WriteObjects(m_levelColors);
+			aStream->WriteFloat(m_itemCostToFavorConversion);
 		}
 
 		bool
@@ -110,6 +113,8 @@ namespace tpublic
 			if(!aStream->ReadUInts(m_levels))
 				return false;
 			if(!aStream->ReadObjects(m_levelColors))
+				return false;
+			if(!aStream->ReadFloat(m_itemCostToFavorConversion))
 				return false;
 			return true;
 		}
@@ -182,6 +187,7 @@ namespace tpublic
 		int32_t								m_minFavor = 0;
 		int32_t								m_baseFavorUpdate = 0;
 		int32_t								m_favorLossMultiplier = 0;
+		float								m_itemCostToFavorConversion = 1.0f;
 		std::vector<uint32_t>				m_levels;
 		std::vector<LevelColors>			m_levelColors;
 	};
