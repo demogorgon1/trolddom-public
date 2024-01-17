@@ -51,6 +51,8 @@ namespace tpublic
 			ID_DEITY_DISCOVERY,
 			ID_AUCTIONEER,
 			ID_MAILBOX,
+			ID_PLAYER_AUCTIONS,
+			ID_PLAYER_INBOX,
 
 			NUM_IDS
 		};
@@ -99,7 +101,9 @@ namespace tpublic
 			"shrine",
 			"deity_discovery",
 			"auctioneer",
-			"mailbox"
+			"mailbox",
+			"player_auctions",
+			"player_inbox"
 		};		
 
 		static_assert(sizeof(COMPONENT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

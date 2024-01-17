@@ -14,7 +14,9 @@ player_components:
 	equipped_items	
 	guild_name
 	inventory
+	player_auctions
 	player_cooldowns
+	player_inbox
 	player_private
 	player_public
 	player_stats

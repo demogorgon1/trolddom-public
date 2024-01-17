@@ -22,7 +22,9 @@
 #include <tpublic/Components/NPC.h>
 #include <tpublic/Components/Openable.h>
 #include <tpublic/Components/Owner.h>
+#include <tpublic/Components/PlayerAuctions.h>
 #include <tpublic/Components/PlayerCooldowns.h>
+#include <tpublic/Components/PlayerInbox.h>
 #include <tpublic/Components/PlayerPrivate.h>
 #include <tpublic/Components/PlayerPublic.h>
 #include <tpublic/Components/PlayerStats.h>
@@ -71,9 +73,11 @@ namespace tpublic
 		_Register<Components::NPC>();
 		_Register<Components::Openable>();
 		_Register<Components::Owner>();
-		_Register<Components::PlayerPrivate>();
+		_Register<Components::PlayerAuctions>();
 		_Register<Components::PlayerCooldowns>();
+		_Register<Components::PlayerInbox>();
 		_Register<Components::PlayerPublic>();
+		_Register<Components::PlayerPrivate>();
 		_Register<Components::PlayerStats>();
 		_Register<Components::Position>();
 		_Register<Components::RecentAchievements>();
