@@ -1,0 +1,17 @@
+entity mailbox:
+{
+	string: "Mailbox"
+	
+	components:
+	{
+		position: { }		
+		mailbox: { }
+		sprite: 
+		{ 
+			animations:
+			[
+				{ states: [ default in_combat spawning ] frames: [ mailbox ] z_offset: -3 }
+			]		
+		}		
+	}
+}

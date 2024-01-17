@@ -7,6 +7,11 @@ map_entity_spawn .spirit_stone:
 	entity spirit_stone: { init_state: default } 
 }
 
+map_entity_spawn .mailbox:
+{	
+	entity mailbox: { init_state: default } 
+}
+
 map_entity_spawn .holy_altar:
 {	
 	spawn_timer: { despawn_required: true min_delay: 600 cooldown_range_min: 1200 cooldown_range_max: 4800 }
@@ -63,6 +68,11 @@ map_entity_spawn .rob_beaurichard:
 map_entity_spawn .harald_skrald:
 {
 	entity .harald_skrald: { weight: 1 }
+}
+
+map_entity_spawn .bidmaster_bob:
+{
+	entity .bidmaster_bob: { weight: 1 }
 }
 
 map_entity_spawn .fisherman:
@@ -160,8 +170,10 @@ map_palette .stuff:
 	entity_spawn .caelum: [ 220 189 0 ]
 	entity_spawn .brom: [ 210 189 0 ]
 	entity_spawn .harald_skrald: [ 200 189 0 ]
+	entity_spawn .bidmaster_bob: [ 20 189 0 ]
 	entity_spawn .fisherman: [ 0 2 255 ]
 	entity_spawn .spirit_stone: [ 0 0 0 ]	
+	entity_spawn .mailbox: [ 0 20 60 ]	
 	entity_spawn .holy_altar: [ 0 0 40 ]	
 	entity_spawn .underworld_shrine: [ 0 0 80 ]	
 	entity_spawn .spawn_of_umbracoth: [ 32 0 0 ]	

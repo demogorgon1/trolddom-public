@@ -28,50 +28,62 @@ namespace tpublic
 
 			ID_SHIELD,
 
+			ID_CONSUMABLE,
+			ID_TRADE_GOOD,
+			ID_MISCELLANEOUS,
+
 			NUM_IDS
 		};
 
-		enum Flag : uint8_t
+		enum Flag : uint16_t
 		{
-			FLAG_SWORD		= 0x01,
-			FLAG_MACE		= 0x02,
-			FLAG_AXE		= 0x04,
-			FLAG_KNIFE		= 0x08,
-			FLAG_TWO_HANDED	= 0x10,
-			FLAG_SHIELD		= 0x20,
-			FLAG_WEAPON		= 0x40,
-			FLAG_ARMOR		= 0x80
+			FLAG_SWORD				= 0x0001,
+			FLAG_MACE				= 0x0002,
+			FLAG_AXE				= 0x0004,
+			FLAG_KNIFE				= 0x0008,
+			FLAG_TWO_HANDED			= 0x0010,
+			FLAG_SHIELD				= 0x0020,
+			FLAG_WEAPON				= 0x0040,
+			FLAG_ARMOR				= 0x0080,
+
+			FLAG_NO_RESTRICTIONS	= 0x4000,
+			FLAG_NO_TOOLTIP			= 0x8000
 		};
 
 		struct Info
 		{
 			const char* m_name;
-			const char* m_displayName;			
-			uint8_t		m_flags;
+			const char* m_displayName;
+			const char* m_displayNameCategory;
+			uint16_t	m_flags;
 		};
 
 		// IMPORTANT: Must match Id enum
 		static constexpr const Info INFO[] =
 		{
-			{ NULL, NULL, 0 },
+			{ NULL, NULL, NULL, 0 },
 
-			{ "none",				"",						0 },
+			{ "none",				"",						"",						0 },
 
-			{ "armor_cloth",		"Cloth",				FLAG_ARMOR },
-			{ "armor_mail",			"Mail",					FLAG_ARMOR },
-			{ "armor_plate",		"Plate",				FLAG_ARMOR },
+			{ "armor_cloth",		"Cloth",				"Cloth Armor",			FLAG_ARMOR },
+			{ "armor_mail",			"Mail",					"Mail Armor",			FLAG_ARMOR },
+			{ "armor_plate",		"Plate",				"Plate Armor",			FLAG_ARMOR },
 
-			{ "weapon_1h_sword",	"One-Handed Sword",		FLAG_SWORD | FLAG_WEAPON },
-			{ "weapon_1h_mace",		"One-Handed Mace",		FLAG_MACE | FLAG_WEAPON },
-			{ "weapon_1h_axe",		"One-Handed Axe",		FLAG_AXE | FLAG_WEAPON },
-			{ "weapon_1h_knife",	"Knife",				FLAG_WEAPON },
+			{ "weapon_1h_sword",	"One-Handed Sword",		"One-Handed Swords",	FLAG_SWORD | FLAG_WEAPON },
+			{ "weapon_1h_mace",		"One-Handed Mace",		"One-Handed Maces",		FLAG_MACE | FLAG_WEAPON },
+			{ "weapon_1h_axe",		"One-Handed Axe",		"One-Handed Axes",		FLAG_AXE | FLAG_WEAPON },
+			{ "weapon_1h_knife",	"Knife",				"Knives",				FLAG_WEAPON },
 
-			{ "weapon_2h_sword",	"Two-Handed Sword",		FLAG_SWORD | FLAG_TWO_HANDED | FLAG_WEAPON },
-			{ "weapon_2h_mace",		"Two-Handed Mace",		FLAG_MACE | FLAG_TWO_HANDED | FLAG_WEAPON },
-			{ "weapon_2h_axe",		"Two-Handed Axe",		FLAG_AXE | FLAG_TWO_HANDED | FLAG_WEAPON },
-			{ "weapon_2h_staff",	"Staff",				FLAG_TWO_HANDED | FLAG_WEAPON },
+			{ "weapon_2h_sword",	"Two-Handed Sword",		"Two-Handed Swords",	FLAG_SWORD | FLAG_TWO_HANDED | FLAG_WEAPON },
+			{ "weapon_2h_mace",		"Two-Handed Mace",		"Two-Handed Maces",		FLAG_MACE | FLAG_TWO_HANDED | FLAG_WEAPON },
+			{ "weapon_2h_axe",		"Two-Handed Axe",		"Two-Handed Axes",		FLAG_AXE | FLAG_TWO_HANDED | FLAG_WEAPON },
+			{ "weapon_2h_staff",	"Staff",				"Staves",				FLAG_TWO_HANDED | FLAG_WEAPON },
 			
-			{ "shield",				"Shield",				FLAG_SHIELD | FLAG_ARMOR },
+			{ "shield",				"Shield",				"Shields",				FLAG_SHIELD | FLAG_ARMOR },
+
+			{ "consumable",			"Consumable",			"Consumables",			FLAG_NO_TOOLTIP | FLAG_NO_RESTRICTIONS },
+			{ "trade_good",			"Trade Good",			"Trade Goods",			FLAG_NO_TOOLTIP | FLAG_NO_RESTRICTIONS },
+			{ "miscellaneous",		"Miscellaneous",		"Miscellaneous",		FLAG_NO_TOOLTIP | FLAG_NO_RESTRICTIONS }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

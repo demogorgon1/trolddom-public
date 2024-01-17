@@ -4,6 +4,7 @@
 #include <tpublic/Components/Achievements.h>
 #include <tpublic/Components/ActionBars.h>
 #include <tpublic/Components/ActiveQuests.h>
+#include <tpublic/Components/Auctioneer.h>
 #include <tpublic/Components/Auras.h>
 #include <tpublic/Components/CombatPrivate.h>
 #include <tpublic/Components/CombatPublic.h>
@@ -17,6 +18,7 @@
 #include <tpublic/Components/GuildRegistrar.h>
 #include <tpublic/Components/Inventory.h>
 #include <tpublic/Components/Lootable.h>
+#include <tpublic/Components/Mailbox.h>
 #include <tpublic/Components/NPC.h>
 #include <tpublic/Components/Openable.h>
 #include <tpublic/Components/Owner.h>
@@ -51,6 +53,7 @@ namespace tpublic
 		_Register<Components::Achievements>();
 		_Register<Components::ActionBars>();
 		_Register<Components::ActiveQuests>();
+		_Register<Components::Auctioneer>();
 		_Register<Components::Auras>();
 		_Register<Components::CombatPrivate>();
 		_Register<Components::CombatPublic>();
@@ -64,6 +67,7 @@ namespace tpublic
 		_Register<Components::GuildRegistrar>();
 		_Register<Components::Inventory>();
 		_Register<Components::Lootable>();
+		_Register<Components::Mailbox>();
 		_Register<Components::NPC>();
 		_Register<Components::Openable>();
 		_Register<Components::Owner>();

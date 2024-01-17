@@ -191,6 +191,9 @@ namespace tpublic
 
 				if(m_itemLevel == 0)
 					m_itemLevel = m_requiredLevel;
+
+				if(m_itemType == ItemType::ID_NONE)
+					m_itemType = ItemType::ID_MISCELLANEOUS;
 			}
 
 			void

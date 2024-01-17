@@ -45,10 +45,12 @@ sprites:
 	cursor: { position: [ 0 32 ] }
 
 	sprite tentacle_monster: { }
+	sprite man_6: { }
 	
 	cursor: { position: [ 0 48 ] }
 	
 	sprite tentacle_monster_dead: { }
+	sprite man_6_dead: { }
 	
 }
 
@@ -85,6 +87,7 @@ sprites:
 	sprite holy_altar: { }
 	sprite underworld_shrine_used: { }
 	sprite holy_altar_used: { }
+	sprite mailbox: { }
 	
 }
 
