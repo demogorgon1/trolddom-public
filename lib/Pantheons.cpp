@@ -19,6 +19,7 @@ namespace tpublic
 			std::unique_ptr<Entry> entry = std::make_unique<Entry>();
 			entry->m_pantheon = aPantheon;
 			m_table[aPantheon->m_id] = std::move(entry);
+			return true;
 		});
 
 		aManifest->GetContainer<Data::Deity>()->ForEach([&](
@@ -28,6 +29,7 @@ namespace tpublic
 			TP_CHECK(i != m_table.end(), "Invalid pantheon id: %u", aDeity->m_pantheonId);
 			Entry* entry = i->second.get();
 			entry->m_deities.push_back(aDeity);
+			return true;
 		});
 	}
 	

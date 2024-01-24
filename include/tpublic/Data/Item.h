@@ -2,6 +2,7 @@
 
 #include "../DataBase.h"
 #include "../EquipmentSlot.h"
+#include "../Helpers.h"
 #include "../ItemBinding.h"
 #include "../ItemType.h"
 #include "../Rarity.h"
@@ -193,7 +194,12 @@ namespace tpublic
 					m_itemLevel = m_requiredLevel;
 
 				if(m_itemType == ItemType::ID_NONE)
-					m_itemType = ItemType::ID_MISCELLANEOUS;
+				{
+					if(m_useAbilityId != 0)
+						m_itemType = ItemType::ID_CONSUMABLE;
+					else
+						m_itemType = ItemType::ID_MISCELLANEOUS;
+				}
 			}
 
 			void
@@ -263,6 +269,10 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadPOD(m_itemBinding))
 					return false;
+
+				m_lcString = m_string;
+				Helpers::MakeLowerCase(m_lcString);
+
 				return true;
 			}
 
@@ -286,6 +296,9 @@ namespace tpublic
 			std::string					m_flavor;
 			int32_t						m_budgetBias = 0;
 			ItemBinding::Id				m_itemBinding = ItemBinding::ID_NEVER;
+
+			// Not serialized
+			std::string					m_lcString;
 		};
 
 	}

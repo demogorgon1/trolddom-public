@@ -53,6 +53,7 @@ namespace tpublic
 			spriteSheet->Extract(aSprite->m_offsetX, aSprite->m_offsetY, aSprite->m_width, aSprite->m_height, *image);
 			
  			m_tileImageTable[aSprite->m_id] = std::move(image);
+			return true;
 		});
 	}
 	

@@ -80,6 +80,7 @@ namespace tpublic
 				Data::Entity* aEntity)
 			{
 				_PostProcessEntity(aManifest, aEntity);
+				return true;
 			});
 		}
 

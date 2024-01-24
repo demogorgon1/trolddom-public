@@ -43,6 +43,11 @@ namespace tpublic
 		std::string	Format(
 						const char*					aFormat,
 						...);
+		void		MakeLowerCase(
+						std::string&				aString);
+		bool		StringContains(
+						const std::string&			aString,
+						const std::string&			aContains);
 
 		template <typename _T>
 		void	

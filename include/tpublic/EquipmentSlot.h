@@ -37,31 +37,32 @@ namespace tpublic
 			const char* m_name;
 			const char* m_tag;
 			const char* m_displayName;
+			bool		m_alternative;
 		};
 
 		// IMPORTANT: Must match Id enum
 		static constexpr const Info INFO[] =
 		{
-			{ NULL, NULL },
+			{ NULL, NULL, NULL },
 
-			{ "main_hand",	NULL,			"Main-Hand" },
-			{ "off_hand",	NULL,			"Off-Hand" },
-			{ "ranged",		NULL,			"Ranged" },
-			{ "head",		"head",			"Head" },
-			{ "chest",		"chest",		"Chest" },
-			{ "legs",		"legs",			"Legs" },
-			{ "feet",		"feet",			"Feet" },
-			{ "shoulders",	"shoulders",	"Shoulders" },
-			{ "wrists",		"wrists",		"Wrists" },
-			{ "waist",		"waist",		"Waist" },
-			{ "hands",		"hands",		"Hands" },
-			{ "back",		"back",			"Back" },
-			{ "neck",		"neck",			"Neck" },
-			{ "finger_1",	"finger",		"Finger" },
-			{ "finger_2",	"finger",		"Finger" },
-			{ "bag_1",		"bag",			"Bag" },
-			{ "bag_2",		"bag",			"Bag" },
-			{ "bag_3",		"bag",			"Bag" }
+			{ "main_hand",	NULL,			"Main-Hand",	false },
+			{ "off_hand",	NULL,			"Off-Hand",		false },
+			{ "ranged",		NULL,			"Ranged",		false },
+			{ "head",		"head",			"Head",			false },
+			{ "chest",		"chest",		"Chest",		false },
+			{ "legs",		"legs",			"Legs",			false },
+			{ "feet",		"feet",			"Feet",			false },
+			{ "shoulders",	"shoulders",	"Shoulders",	false },
+			{ "wrists",		"wrists",		"Wrists",		false },
+			{ "waist",		"waist",		"Waist",		false },
+			{ "hands",		"hands",		"Hands",		false },
+			{ "back",		"back",			"Back",			false },
+			{ "neck",		"neck",			"Neck",			false },
+			{ "finger_1",	"finger",		"Finger",		false },
+			{ "finger_2",	"finger",		"Finger",		true },
+			{ "bag_1",		"bag",			"Bag",			false },
+			{ "bag_2",		"bag",			"Bag",			true },
+			{ "bag_3",		"bag",			"Bag",			true }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

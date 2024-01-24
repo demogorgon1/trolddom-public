@@ -54,8 +54,7 @@ namespace tpublic
 				Data::WordGenerator* aNameGenerator)
 			{
 				_PostProcessWordGenerator(aManifest, aNameGenerator);
-
-
+				return true;
 			});
 		}
 

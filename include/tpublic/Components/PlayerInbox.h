@@ -2,6 +2,7 @@
 
 #include "../Component.h"
 #include "../ComponentBase.h"
+#include "../Mail.h"
 
 namespace tpublic
 {
@@ -17,66 +18,73 @@ namespace tpublic
 			static const Persistence::Id PERSISTENCE = Persistence::ID_MAIN;
 			static const Replication REPLICATION = REPLICATION_PRIVATE;
 
-			struct Mail
+			struct Entry
 			{
 				void
 				ToStream(
 					IWriter*	aWriter) const
 				{
-					aWriter->WriteUInt(m_serverTimeStamp);
-					aWriter->WriteString(m_sender);
-					aWriter->WriteString(m_subject);
-					aWriter->WriteString(m_body);
-					aWriter->WriteObjects(m_items);
-					aWriter->WriteInt(m_cash);
+					aWriter->WriteUInt(m_mailId);
+					aWriter->WriteUInt(m_sendTimeStamp);
+					aWriter->WriteUInt(m_recvTimeStamp);
 					aWriter->WriteBool(m_read);
+					aWriter->WriteObjectPointer(m_mail);
 				}
 
 				bool
 				FromStream(
 					IReader*	aReader)
 				{
-					if (!aReader->ReadUInt(m_serverTimeStamp))
+					if (!aReader->ReadUInt(m_mailId))
 						return false;
-					if (!aReader->ReadString(m_sender))
+					if (!aReader->ReadUInt(m_sendTimeStamp))
 						return false;
-					if (!aReader->ReadString(m_subject))
-						return false;
-					if (!aReader->ReadString(m_body))
-						return false;
-					if (!aReader->ReadObjects(m_items))
-						return false;
-					if (!aReader->ReadInt(m_cash))
+					if (!aReader->ReadUInt(m_recvTimeStamp))
 						return false;
 					if (!aReader->ReadBool(m_read))
+						return false;
+					if(!aReader->ReadObjectPointer(m_mail))
 						return false;
 					return true;
 				}
 
 				// Public data
-				uint64_t							m_serverTimeStamp = 0;
-				std::string							m_sender;
-				std::string							m_subject;
-				std::string							m_body;
-				std::vector<tpublic::ItemInstance>	m_items;
-				int64_t								m_cash = 0;
+				uint32_t							m_mailId = 0;
+				uint64_t							m_sendTimeStamp = 0;
+				uint64_t							m_recvTimeStamp = 0;
 				bool								m_read = false;
+				std::unique_ptr<tpublic::Mail>		m_mail;
 			};
 
 			enum Field
 			{
-				FIELD_MAILS
+				FIELD_MAILS,
+				FIELD_INCOMING
 			};
 
 			static void
 			CreateSchema(
 				ComponentSchema* aSchema)
 			{	
-				aSchema->DefineCustomObjectPointersNoSource<Mail>(FIELD_MAILS, offsetof(PlayerInbox, m_mails));
+				aSchema->DefineCustomObjectPointersNoSource<Entry>(FIELD_MAILS, offsetof(PlayerInbox, m_mails));
+				aSchema->DefineCustomObjectPointersNoSource<Entry>(FIELD_INCOMING, offsetof(PlayerInbox, m_incoming));
+			}
+
+			size_t
+			GetIncomingIndexByMailId(
+				uint32_t		aMailId) const
+			{
+				for(size_t i = 0; i < m_incoming.size(); i++)
+				{
+					if(m_incoming[i]->m_mailId == aMailId)
+						return i;
+				}
+				return SIZE_MAX;
 			}
 
 			// Public data
-			std::vector<std::unique_ptr<Mail>>		m_mails;
+			std::vector<std::unique_ptr<Entry>>		m_mails;
+			std::vector<std::unique_ptr<Entry>>		m_incoming;
 		};
 	}
 

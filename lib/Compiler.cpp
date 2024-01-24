@@ -142,6 +142,7 @@ namespace tpublic
 				aMap->m_data->Build(m_manifest);
 
 				aMap->m_data->ConstructMapPathData(m_manifest);
+				return true;
 			});			
 		}
 
@@ -170,6 +171,7 @@ namespace tpublic
 
 					mapImageOutput->Generate(aMap->m_data.get(), aMap->m_data->m_imageOutputPath.c_str());
 				}
+				return true;
 			});			
 		}
 

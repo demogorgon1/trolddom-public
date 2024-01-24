@@ -210,18 +210,24 @@ namespace tpublic
 
 			void
 			ForEach(
-				std::function<void(_T*)>				aCallback)
+				std::function<bool(_T*)>				aCallback)
 			{
 				for (std::unique_ptr<_T>& t : m_entries)
-					aCallback(t.get());
+				{
+					if(!aCallback(t.get()))
+						break;
+				}
 			}
 
 			void
 			ForEach(
-				std::function<void(const _T*)>			aCallback) const
+				std::function<bool(const _T*)>			aCallback) const
 			{
 				for (const std::unique_ptr<_T>& t : m_entries)
-					aCallback(t.get());
+				{
+					if (!aCallback(t.get()))
+						break;
+				}
 			}
 
 			// IDataContainer implementation

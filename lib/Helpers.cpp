@@ -4,6 +4,7 @@
 
 #include <tpublic/Helpers.h>
 #include <tpublic/Stat.h>
+#include <tpublic/UTF8.h>
 #include <tpublic/Vec2.h>
 
 namespace tpublic::Helpers
@@ -161,6 +162,47 @@ namespace tpublic::Helpers
 		char buffer[1024];
 		TP_STRING_FORMAT_VARARGS(buffer, sizeof(buffer), aFormat);
 		return buffer;
+	}
+
+	void
+	MakeLowerCase(
+		std::string&				aString)
+	{
+		UTF8::Decoder utf8(aString.c_str());
+		UTF8::Encoder out;
+		uint32_t characterCode;
+		while (utf8.GetNextCharacterCode(characterCode))
+			out.EncodeCharacter((uint32_t)tolower((int)characterCode));
+		out.Finalize();
+		aString = out.GetBuffer();
+	}
+
+	bool		
+	StringContains(
+		const std::string&			aString,
+		const std::string&			aContains)
+	{
+		size_t cLen = aString.length();
+		if(cLen == 0)
+			return true;
+		
+		size_t sLen = aString.length();
+		if(sLen < cLen)
+			return false;
+
+		const char* s = aString.c_str();
+		const char* c = aContains.c_str();
+
+		while(sLen >= cLen)
+		{
+			if(memcmp(s, c, cLen) == 0)
+				return true;
+
+			s++;
+			sLen--;
+		}
+
+		return false;
 	}
 
 }

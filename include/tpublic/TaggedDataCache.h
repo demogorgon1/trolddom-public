@@ -21,6 +21,8 @@ namespace tpublic
 			{
 				if(aData->m_tagIds.size() > 0)
 					m_taggedData.Add(aData->m_id, aData->m_tagIds);
+
+				return true;
 			});
 		}
 

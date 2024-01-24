@@ -45,6 +45,7 @@ namespace tpublic
 						group->GetOrCreateLevelBucket(level)->m_itemIds.push_back(aItem->m_id);
 				}				
 			}
+			return true;
 		});
 	}
 

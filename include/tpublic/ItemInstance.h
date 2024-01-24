@@ -8,6 +8,17 @@ namespace tpublic
 
 	struct ItemInstance
 	{
+		ItemInstance(
+			uint32_t		aItemId = 0,
+			uint32_t		aQuantity = 1,
+			bool			aSoulbound = false)
+			: m_itemId(aItemId)
+			, m_quantity(aQuantity)
+			, m_soulbound(aSoulbound)
+		{
+
+		}
+
 		bool	
 		IsSet() const
 		{
@@ -75,9 +86,9 @@ namespace tpublic
 		}
 
 		// Public data
-		uint32_t		m_itemId = 0;
-		uint32_t		m_quantity = 1;
-		bool			m_soulbound = false;
+		uint32_t		m_itemId;
+		uint32_t		m_quantity;
+		bool			m_soulbound;
 	};
 
 }
