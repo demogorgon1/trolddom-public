@@ -182,7 +182,7 @@ namespace tpublic::Helpers
 		const std::string&			aString,
 		const std::string&			aContains)
 	{
-		size_t cLen = aString.length();
+		size_t cLen = aContains.length();
 		if(cLen == 0)
 			return true;
 		
