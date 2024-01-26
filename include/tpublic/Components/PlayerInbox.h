@@ -18,6 +18,8 @@ namespace tpublic
 			static const Persistence::Id PERSISTENCE = Persistence::ID_MAIN;
 			static const Replication REPLICATION = REPLICATION_PRIVATE;
 
+			static const size_t INBOX_SIZE = 20;
+
 			struct Entry
 			{
 				void
@@ -80,6 +82,12 @@ namespace tpublic
 						return i;
 				}
 				return SIZE_MAX;
+			}
+
+			bool
+			IsFull() const
+			{
+				return m_mails.size() + m_incoming.size() >= INBOX_SIZE;
 			}
 
 			// Public data
