@@ -10,7 +10,12 @@ namespace tpublic
 	class Mail
 	{
 	public:
-		static const uint32_t FORMAT_VERSION = 1;
+		static const uint32_t FORMAT_VERSION = 2;
+
+		enum Flag : uint8_t
+		{
+			FLAG_AUTO_DELETE = 0x01
+		};
 
 		void
 		ToStream(
@@ -24,6 +29,7 @@ namespace tpublic
 			aWriter->WriteInt(m_cash);
 			aWriter->WriteString(m_subject);
 			aWriter->WriteString(m_body);
+			aWriter->WritePOD(m_flags); // Version 2
 		}
 
 		bool
@@ -33,7 +39,7 @@ namespace tpublic
 			uint32_t formatVersion;
 			if(!aReader->ReadUInt(formatVersion))
 				return false;
-			if(formatVersion != FORMAT_VERSION)
+			if(formatVersion > FORMAT_VERSION)
 				return false;
 
 			if (!aReader->ReadUInt(m_toCharacterId))
@@ -50,7 +56,25 @@ namespace tpublic
 				return false;
 			if (!aReader->ReadString(m_body))
 				return false;
+
+			if(formatVersion >= 2)
+			{
+				if(!aReader->ReadPOD(m_flags))
+					return false;
+			}
 			return true;
+		}
+
+		void
+		SetAutoDelete()
+		{
+			m_flags |= FLAG_AUTO_DELETE;
+		}
+
+		bool
+		ShouldAutoDelete() const
+		{
+			return m_flags & FLAG_AUTO_DELETE;
 		}
 
 		// Public data
@@ -61,6 +85,7 @@ namespace tpublic
 		int64_t								m_cash = 0;
 		std::string							m_subject;
 		std::string							m_body;
+		uint8_t								m_flags = 0;
 	};
 
 }

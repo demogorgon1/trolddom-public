@@ -61,7 +61,9 @@ namespace tpublic
 			enum Field
 			{
 				FIELD_MAILS,
-				FIELD_INCOMING
+				FIELD_INCOMING,
+				FIELD_LAST_CHECK_TIME,
+				FIELD_SEQ
 			};
 
 			static void
@@ -70,6 +72,8 @@ namespace tpublic
 			{	
 				aSchema->DefineCustomObjectPointersNoSource<Entry>(FIELD_MAILS, offsetof(PlayerInbox, m_mails));
 				aSchema->DefineCustomObjectPointersNoSource<Entry>(FIELD_INCOMING, offsetof(PlayerInbox, m_incoming));
+				aSchema->Define(ComponentSchema::TYPE_UINT64, FIELD_LAST_CHECK_TIME, NULL, offsetof(PlayerInbox, m_lastCheckTime));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_SEQ, NULL, offsetof(PlayerInbox, m_seq));
 			}
 
 			size_t
@@ -90,9 +94,41 @@ namespace tpublic
 				return m_mails.size() + m_incoming.size() >= INBOX_SIZE;
 			}
 
+			const Entry*
+			GetMail(
+				size_t			aIndex) const
+			{
+				if(aIndex >= m_mails.size())
+					return NULL;
+				return m_mails[aIndex].get();
+			}
+
+			Entry*
+			GetMail(
+				size_t			aIndex) 
+			{
+				if(aIndex >= m_mails.size())
+					return NULL;
+				return m_mails[aIndex].get();
+			}
+
+			size_t
+			GetMailIndexByMailId(
+				uint32_t		aMailId) const
+			{
+				for(size_t i = 0; i < m_mails.size(); i++)
+				{
+					if(m_mails[i]->m_mailId == aMailId)
+						return i;
+				}
+				return SIZE_MAX;
+			}
+
 			// Public data
 			std::vector<std::unique_ptr<Entry>>		m_mails;
 			std::vector<std::unique_ptr<Entry>>		m_incoming;
+			uint64_t								m_lastCheckTime = 0;
+			uint32_t								m_seq = 0;
 		};
 	}
 
