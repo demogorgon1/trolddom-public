@@ -12,6 +12,8 @@ namespace tpublic
 	public:
 		static const uint32_t FORMAT_VERSION = 2;
 
+		static const size_t MAX_ATTACHED_ITEMS = 8;
+
 		enum Flag : uint8_t
 		{
 			FLAG_AUTO_DELETE = 0x01

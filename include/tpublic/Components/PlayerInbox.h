@@ -124,6 +124,18 @@ namespace tpublic
 				return SIZE_MAX;
 			}
 
+			const Entry*
+			GetMailByMailId(
+				uint32_t		aMailId) const
+			{
+				for (size_t i = 0; i < m_mails.size(); i++)
+				{
+					if (m_mails[i]->m_mailId == aMailId)
+						return m_mails[i].get();
+				}
+				return NULL;
+			}
+
 			// Public data
 			std::vector<std::unique_ptr<Entry>>		m_mails;
 			std::vector<std::unique_ptr<Entry>>		m_incoming;

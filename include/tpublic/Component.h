@@ -53,6 +53,7 @@ namespace tpublic
 			ID_MAILBOX,
 			ID_PLAYER_AUCTIONS,
 			ID_PLAYER_INBOX,
+			ID_PLAYER_OUTBOX,
 
 			NUM_IDS
 		};
@@ -103,7 +104,8 @@ namespace tpublic
 			"auctioneer",
 			"mailbox",
 			"player_auctions",
-			"player_inbox"
+			"player_inbox",
+			"player_outbox"
 		};		
 
 		static_assert(sizeof(COMPONENT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

@@ -17,6 +17,7 @@ player_components:
 	player_auctions
 	player_cooldowns
 	player_inbox
+	player_outbox
 	player_private
 	player_public
 	player_stats

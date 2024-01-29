@@ -25,6 +25,7 @@
 #include <tpublic/Components/PlayerAuctions.h>
 #include <tpublic/Components/PlayerCooldowns.h>
 #include <tpublic/Components/PlayerInbox.h>
+#include <tpublic/Components/PlayerOutbox.h>
 #include <tpublic/Components/PlayerPrivate.h>
 #include <tpublic/Components/PlayerPublic.h>
 #include <tpublic/Components/PlayerStats.h>
@@ -76,6 +77,7 @@ namespace tpublic
 		_Register<Components::PlayerAuctions>();
 		_Register<Components::PlayerCooldowns>();
 		_Register<Components::PlayerInbox>();
+		_Register<Components::PlayerOutbox>();
 		_Register<Components::PlayerPublic>();
 		_Register<Components::PlayerPrivate>();
 		_Register<Components::PlayerStats>();
