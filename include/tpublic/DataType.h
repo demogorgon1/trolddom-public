@@ -119,6 +119,13 @@ namespace tpublic
 			return p;
 		}
 
+		inline constexpr bool
+		ValidateId(
+			Id				aId)
+		{
+			return (uint8_t)aId > 0 && (uint8_t)aId < (uint8_t)NUM_IDS;
+		}
+
 	}
 
 }

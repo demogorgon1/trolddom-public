@@ -164,4 +164,21 @@ namespace tpublic
 		}
 	}
 
+	const char* 
+	Manifest::GetNameByTypeAndId(
+		DataType::Id								aDataTypeId,
+		uint32_t									aId) const
+	{
+		if(!DataType::ValidateId(aDataTypeId))
+			return "";
+
+		const IDataContainer* container = m_containers[aDataTypeId].get();
+		assert(container != NULL);
+		const DataBase* base = container->GetExistingBaseById(aId);
+		if(base == NULL)
+			return "";
+
+		return base->m_name.c_str();
+	}
+
 }

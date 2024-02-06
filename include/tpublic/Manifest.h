@@ -320,6 +320,9 @@ namespace tpublic
 						IReader*						aStream);
 		void		PrepareRuntime(
 						uint8_t							aRuntime);
+		const char*	GetNameByTypeAndId(
+						DataType::Id					aDataTypeId,
+						uint32_t						aId) const;
 
 		template<typename _T>
 		DataContainer<_T>*
