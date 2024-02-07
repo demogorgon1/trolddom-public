@@ -2,6 +2,7 @@
 
 #include "Component.h"
 #include "ComponentBase.h"
+#include "ComponentSchema.h"
 #include "Parser.h"
 
 namespace tpublic

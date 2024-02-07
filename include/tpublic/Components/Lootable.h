@@ -2,6 +2,7 @@
 
 #include "../Component.h"
 #include "../ComponentBase.h"
+#include "../ComponentSchema.h"
 #include "../ItemInstance.h"
 #include "../PlayerTag.h"
 

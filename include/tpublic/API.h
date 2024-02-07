@@ -2,10 +2,12 @@
 
 #include "Base.h"
 
+#include "ComponentBase.h"
 #include "EntityInstance.h"
 #include "DataErrorHandling.h"
 #include "Hash.h"
 #include "Helpers.h"
+#include "ItemInstance.h"
 #include "LootRule.h"
 #include "Manifest.h"
 #include "PerfTimer.h"

@@ -3,9 +3,6 @@
 #include "Component.h"
 #include "ComponentSchema.h"
 #include "DataErrorHandling.h"
-#include "IReader.h"
-#include "IWriter.h"
-#include "Parser.h"
 #include "Persistence.h"
 
 namespace tpublic
@@ -35,16 +32,16 @@ namespace tpublic
 			PENDING_PERSISTENCE_UPDATE_HIGH_PRIORITY
 		};
 
-		ComponentBase()
-		{
+									ComponentBase();
+		virtual						~ComponentBase();
 
-		}
-
-		virtual 
-		~ComponentBase()
-		{
-			// FIXME: For now we'll need a virtual destructor, but with a proper component pool we can get rid of it (and the vtable)
-		}
+		void						SetComponentId(
+										uint32_t											aComponentId);
+		void						ResetPendingPersistenceUpdate();
+		void						SetPendingPersistenceUpdate(
+										PendingPersistenceUpdate							aPendingPersistenceUpdate);
+		void						ResetDirty();
+		void						SetDirty();
 
 		template <typename _T>
 		const _T*
@@ -67,42 +64,6 @@ namespace tpublic
 		Is() const
 		{
 			return m_componentId == _T::ID;
-		}
-
-		void
-		SetComponentId(
-			uint32_t											aComponentId)
-		{
-			assert(m_componentId == 0);
-			m_componentId = aComponentId;
-		}
-
-		void
-		ResetPendingPersistenceUpdate()
-		{
-			m_pendingPersistenceUpdate = PENDING_PERSISTENCE_UPDATE_NONE;
-		}
-
-		void
-		SetPendingPersistenceUpdate(
-			PendingPersistenceUpdate							aPendingPersistenceUpdate)
-		{
-			if((uint8_t)aPendingPersistenceUpdate > (uint8_t)m_pendingPersistenceUpdate)
-				m_pendingPersistenceUpdate = aPendingPersistenceUpdate;
-
-			m_dirty = true;
-		}
-
-		void
-		ResetDirty()
-		{
-			m_dirty = false;
-		}
-
-		void
-		SetDirty()
-		{
-			m_dirty = true;
 		}
 
 		// Data access
