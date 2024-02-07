@@ -50,6 +50,7 @@ namespace tpublic
 				&encodedSize,
 				&aOut[0]);
 			assert(result != 0);
+			(void)result;
 
 			aOut.resize(encodedSize + sizeof(size_t));
 
