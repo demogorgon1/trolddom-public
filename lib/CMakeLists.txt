@@ -14,10 +14,16 @@ else()
 		-Wextra 
 		-pedantic 
 		-Werror 
-		-Wno-unused-function 	# I want unused functions for debugging purposes
-		-Wno-reorder			# I want to be able to initialize class members in any order
-		-Wno-class-memaccess	# I want to be able to memset() things that I know are safe to memset()
+		-Wno-unused-function 		# I want unused functions for debugging purposes
+		-Wno-reorder				# I want to be able to initialize class members in any order		
 	)	
+	
+	if(TROLDDOM_PUBLIC_DISABLE_WARNING_CLASS_MEMACCESS)
+		# This option seems to be missing sometimes
+		add_compile_options(
+			-Wno-class-memaccess	# I want to be able to memset() things that I know are safe to memset()
+		)		
+	endif()
 endif()
 	
 add_library(tpublic STATIC ${CPP_FILES} ${H_FILES})

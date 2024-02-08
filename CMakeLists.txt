@@ -15,6 +15,7 @@ macro(trolddom_public_option OPTION_NAME OPTION_TEXT OPTION_DEFAULT)
 endmacro()
 
 trolddom_public_option(TROLDDOM_PUBLIC_PRECOMPILED_HEADERS "Enable precompiled headers." ON)
+trolddom_public_option(TROLDDOM_PUBLIC_DISABLE_WARNING_CLASS_MEMACCESS "-Wno-class-memaccess" ON)
 
 include(FetchContent)
 include(GNUInstallDirs)
