@@ -61,9 +61,10 @@ namespace tpublic
 		StringToOp(
 			const char* aString)
 		{
+			std::string_view s(aString);
 			for (uint8_t i = 1; i < (uint8_t)NUM_OPS; i++)
 			{
-				if (strcmp(OPS[i], aString) == 0)
+				if (s == OPS[i])
 					return (Op)i;
 			}
 

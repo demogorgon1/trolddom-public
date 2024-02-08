@@ -45,11 +45,13 @@ namespace tpublic
 		StringToId(
 			const char* aString)
 		{
+			std::string_view s(aString);
+
 			for (uint32_t i = 1; i < (uint32_t)NUM_IDS; i++)
 			{
 				if(ENTITY_STATE_NAMES[i] != NULL)
 				{
-					if (strcmp(ENTITY_STATE_NAMES[i], aString) == 0)
+					if (s == ENTITY_STATE_NAMES[i])
 						return (Id)i;
 				}
 			}

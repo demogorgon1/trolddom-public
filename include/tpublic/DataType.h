@@ -100,9 +100,10 @@ namespace tpublic
 		StringToId(
 			const char*		aString)
 		{
+			std::string_view t(aString);
 			for(uint8_t i = 1; i < (uint8_t)NUM_IDS; i++)
 			{
-				if(strcmp(STRINGS[i], aString) == 0)
+				if(t == STRINGS[i])
 					return (Id)i;
 			}
 

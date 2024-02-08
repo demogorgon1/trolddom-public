@@ -1,16 +1,19 @@
 #pragma once
 
+#include <atomic>
 #include <filesystem>
 #include <functional>
 #include <optional>
 #include <random>
 #include <set>
+#include <thread>
 #include <unordered_set>
 
 #include <assert.h>
 #include <inttypes.h>
 #include <stdarg.h>
 #include <stdlib.h>
+#include <string.h>
 
 #if defined(WIN32)
 

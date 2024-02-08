@@ -16,6 +16,7 @@ else()
 		-Werror 
 		-Wno-unused-function 		# I want unused functions for debugging purposes
 		-Wno-reorder				# I want to be able to initialize class members in any order		
+		-Wno-invalid-offsetof		# I want to be able to use offsetof with non-PODs when it works (tm)
 	)	
 	
 	if(TROLDDOM_PUBLIC_DISABLE_WARNING_CLASS_MEMACCESS)

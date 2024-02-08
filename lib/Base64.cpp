@@ -78,7 +78,7 @@ namespace tpublic
 				memset(dtable, 0x80, 256);
 				for (i = 0; i < sizeof(base64_table) - 1; i++)
 					dtable[base64_table[i]] = (unsigned char) i;
-				dtable['='] = 0;
+				dtable[(uint8_t)'='] = 0;
 
 				count = 0;
 				for (i = 0; i < len; i++) {
