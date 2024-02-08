@@ -92,7 +92,7 @@ namespace tpublic
 						}
 						else if(aChild->m_name == "dialogue_scripts")
 						{
-							aChild->GetIdArrayWithLookup<DialogueScript::Id, DialogueScript::INVALID_ID>(m_dialogueScripts, [aChild](
+							aChild->GetIdArrayWithLookup<DialogueScript::Id, DialogueScript::INVALID_ID>(m_dialogueScripts, [](
 								const char* aIdentifier) -> DialogueScript::Id
 							{
 								return DialogueScript::StringToId(aIdentifier);

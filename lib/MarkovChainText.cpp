@@ -6,6 +6,8 @@
 namespace tpublic::MarkovChainText
 {
 
+	uint32_t Source::HASH_SALT = 0x8429A591;
+
 	namespace
 	{
 

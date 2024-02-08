@@ -189,7 +189,7 @@ namespace tpublic
 
 				if(!walkable)
 				{
-					aOutBitMap.SetUnchecked(Vec2(x, y));
+					aOutBitMap.SetUnchecked(Vec2{x, y});
 				}
 				else
 				{
@@ -203,13 +203,13 @@ namespace tpublic
 						{
 							for (int32_t j = -2; j <= 2 && valid; j++)
 							{
-								if(m_waypoints->m_points.contains(Vec2(x + i, y + j)))
+								if(m_waypoints->m_points.contains(Vec2{x + i, y + j}))
 									valid = false;
 							}
 						}
 
 						if(valid)
-							m_waypoints->m_points.insert(Vec2(x, y));
+							m_waypoints->m_points.insert(Vec2{x, y});
 					}
 				}
 					
@@ -230,7 +230,7 @@ namespace tpublic
 		{
 			for (int32_t x = 0; x < aBitMap.m_width; x++)
 			{
-				if(aBitMap.GetUnchecked(Vec2(x, y)))
+				if(aBitMap.GetUnchecked(Vec2{x, y}))
 					*out = { 128, 128, 128, 255 };
 				else
 					*out = { 32, 32, 32, 255 };

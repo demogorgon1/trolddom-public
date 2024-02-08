@@ -54,11 +54,12 @@ namespace tpublic
 		static constexpr Id
 		StringToId(
 			const char*	aString)
-		{
+		{	
+			std::string_view s(aString);
 			for(uint32_t i = 1; i < (uint32_t)NUM_IDS; i++)
 			{
 				const Info* info = &INFO[i];
-				if(strcmp(info->m_string, aString) == 0)
+				if(s == info->m_string)
 					return (Id)i;
 			}
 			return INVALID_ID;

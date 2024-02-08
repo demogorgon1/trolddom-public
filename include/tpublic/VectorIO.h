@@ -46,11 +46,11 @@ namespace tpublic::VectorIO
 		}
 
 		// Redirect to parent stream (this is awful)
-		const AuraEffectFactory* GetAuraEffectFactory() const { assert(m_parentStream != NULL); return m_parentStream->GetAuraEffectFactory(); }
-		const ComponentManager* GetComponentManager() const { assert(m_parentStream != NULL); return m_parentStream->GetComponentManager(); }
-		const DirectEffectFactory* GetDirectEffectFactory() const { assert(m_parentStream != NULL); return m_parentStream->GetDirectEffectFactory(); }
-		const MapGeneratorFactory* GetMapGeneratorFactory() const { assert(m_parentStream != NULL); return m_parentStream->GetMapGeneratorFactory(); }
-		const ObjectiveTypeFactory* GetObjectiveTypeFactory() const { assert(m_parentStream != NULL); return m_parentStream->GetObjectiveTypeFactory(); }
+		const AuraEffectFactory* GetAuraEffectFactory() const override { assert(m_parentStream != NULL); return m_parentStream->GetAuraEffectFactory(); }
+		const ComponentManager* GetComponentManager() const override { assert(m_parentStream != NULL); return m_parentStream->GetComponentManager(); }
+		const DirectEffectFactory* GetDirectEffectFactory() const override { assert(m_parentStream != NULL); return m_parentStream->GetDirectEffectFactory(); }
+		const MapGeneratorFactory* GetMapGeneratorFactory() const override { assert(m_parentStream != NULL); return m_parentStream->GetMapGeneratorFactory(); }
+		const ObjectiveTypeFactory* GetObjectiveTypeFactory() const override { assert(m_parentStream != NULL); return m_parentStream->GetObjectiveTypeFactory(); }
 
 	private:
 

@@ -28,10 +28,11 @@ namespace tpublic
 		StringToId(
 			const char* aString)
 		{
+			std::string_view s(aString);
 			for (uint32_t i = 1; i < (uint32_t)NUM_IDS; i++)
 			{
 				assert(STRINGS[i] != NULL);
-				if (strcmp(STRINGS[i], aString) == 0)
+				if (s == aString)
 					return (Id)i;
 			}
 

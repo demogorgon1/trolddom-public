@@ -53,7 +53,7 @@ namespace tpublic::MarkovChainText
 	class Source
 	{
 	public:
-		static const uint32_t HASH_SALT = 0x8429A591;
+		static uint32_t HASH_SALT;
 
 		struct CharacterCounter
 		{

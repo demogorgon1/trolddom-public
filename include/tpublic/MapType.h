@@ -51,9 +51,10 @@ namespace tpublic
 		StringToId(
 			const char*		aString)
 		{
+			std::string_view s(aString);
 			for(uint8_t i = 1; i < (uint8_t)NUM_IDS; i++)
 			{
-				if(strcmp(STRINGS_ID[i], aString) == 0)
+				if(s == STRINGS_ID[i])
 					return (Id)i;
 			}
 
@@ -74,9 +75,10 @@ namespace tpublic
 		StringToResetMode(
 			const char*		aString)
 		{
+			std::string_view s(aString);
 			for(uint8_t i = 1; i < (uint8_t)NUM_RESET_MODES; i++)
 			{
-				if(strcmp(STRINGS_RESET_MODE[i], aString) == 0)
+				if(s == STRINGS_RESET_MODE[i])
 					return (ResetMode)i;
 			}
 

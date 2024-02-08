@@ -105,7 +105,7 @@ namespace tpublic
 		for(const std::unique_ptr<TempEntry>& tempEntry : tempEntries)
 		{
 			std::unique_ptr<Entry> entry = std::make_unique<Entry>();
-			entry->Allocate(tempEntry->m_max - tempEntry->m_min + Vec2(1, 1));
+			entry->Allocate(tempEntry->m_max - tempEntry->m_min + Vec2{1, 1});
 			entry->m_position = tempEntry->m_min;
 
 			for(const Vec2& position : tempEntry->m_positions)

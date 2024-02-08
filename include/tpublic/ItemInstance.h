@@ -75,15 +75,15 @@ namespace tpublic
 			return !this->operator==(aOther);
 		}
 
-		ItemInstance&
-		operator=(
-			const ItemInstance& aOther) 
-		{
-			m_itemId = aOther.m_itemId;
-			m_quantity = aOther.m_quantity;
-			m_soulbound = aOther.m_soulbound;
-			return *this;
-		}
+		//ItemInstance&
+		//operator=(
+		//	const ItemInstance& aOther) 
+		//{
+		//	m_itemId = aOther.m_itemId;
+		//	m_quantity = aOther.m_quantity;
+		//	m_soulbound = aOther.m_soulbound;
+		//	return *this;
+		//}
 
 		// Public data
 		uint32_t		m_itemId;

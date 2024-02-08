@@ -39,6 +39,9 @@ namespace tpublic
 		virtual void					GetWatchedEntities(
 											std::vector<uint32_t>&	/*aOutEntityIds*/) const { }
 
+		// Data access
+		ObjectiveType::Id				GetObjectiveTypeId() const { return m_objectiveTypeId; }
+
 	private:
 		ObjectiveType::Id		m_objectiveTypeId;
 	};

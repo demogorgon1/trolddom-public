@@ -36,7 +36,7 @@ namespace tpublic
 		// IMPORTANT: Must match Id enum
 		static constexpr const Info INFO[] =
 		{			
-			{ NULL, NULL },
+			{ NULL, NULL, 0, 0, 0, 0 },
 
 			{ "health",	"Health",	FLAG_DEFAULT_TO_MAX,	0, 220, 0 },
 			{ "mana",	"Mana",		FLAG_DEFAULT_TO_MAX,	0, 0, 220 },
@@ -58,10 +58,11 @@ namespace tpublic
 		StringToId(
 			const char*		aString)
 		{
+			std::string_view s(aString);
 			for(uint32_t i = 1; i < (uint32_t)NUM_IDS; i++)
 			{
 				const Info* t = &INFO[i];
-				if(strcmp(t->m_name, aString) == 0)
+				if(s == t->m_name)
 					return (Id)i;
 			}
 			return INVALID_ID;

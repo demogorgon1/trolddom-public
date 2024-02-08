@@ -250,7 +250,8 @@ namespace tpublic::WordList
 			}
 			else
 			{
-				tag = new Tag(tagId);
+				tag = new Tag();
+				tag->m_id = tagId;
 				m_tagTable[tagId] = std::unique_ptr<Tag>(tag);
 			}
 

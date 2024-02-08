@@ -24,9 +24,10 @@ namespace tpublic
 		StringToFlag(
 			const char* aString)
 		{
+			std::string_view s(aString);
 			for (uint8_t i = 0; i < 8 && FLAG_NAMES[i] != NULL; i++)
 			{
-				if(strcmp(FLAG_NAMES[i], aString) == 0)
+				if(s == FLAG_NAMES[i])
 					return 1 << i;
 			}
 			return 0;

@@ -142,7 +142,7 @@ namespace tpublic
 				}
 			}
 
-			m_entries.push_back({ aProfessionId, aProfessionLevel, 0 });
+			m_entries.push_back({ aProfessionId, aProfessionLevel, 0, {} });
 		}
 
 		void

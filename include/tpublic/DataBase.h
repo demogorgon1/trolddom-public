@@ -29,6 +29,12 @@ namespace tpublic
 
 		}
 
+		virtual
+		~DataBase()
+		{
+
+		}
+
 		void
 		VerifyBase() const
 		{

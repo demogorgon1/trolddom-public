@@ -1,11 +1,11 @@
 #pragma once
 
+#include "ComponentBase.h"
 #include "EntityState.h"
 
 namespace tpublic
 {
 
-	class ComponentBase;
 	class ComponentManager;
 
 	class EntityInstance

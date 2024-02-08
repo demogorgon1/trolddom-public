@@ -104,7 +104,7 @@ namespace tpublic
 
 	Parser::Parser(
 		SourceContext*	aSourceContext)
-		: m_root(aSourceContext, DataErrorHandling::DebugInfo("", 0), "", "", "")
+		: m_root(aSourceContext, DataErrorHandling::DebugInfo{"", 0}, "", "", "")
 	{
 
 	}
