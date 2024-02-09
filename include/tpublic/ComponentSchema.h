@@ -13,7 +13,7 @@ namespace tpublic
 	class ComponentSchema
 	{
 	public:		
-		static const uint8_t STORAGE_FORMAT_VERSION = 1;
+		static constexpr uint8_t STORAGE_FORMAT_VERSION = 1;
 		static const uint32_t MAX_FIELD_ID = 64;
 
 		enum Flag : uint8_t
