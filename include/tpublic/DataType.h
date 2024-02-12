@@ -47,6 +47,7 @@ namespace tpublic
 			ID_PANTHEON,
 			ID_DEITY,
 			ID_COOLDOWN,
+			ID_SOUND,
 
 			NUM_IDS
 		};
@@ -91,7 +92,8 @@ namespace tpublic
 			"tag_context",
 			"pantheon",
 			"deity",
-			"cooldown"
+			"cooldown",
+			"sound"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);
