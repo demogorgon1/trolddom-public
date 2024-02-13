@@ -32,6 +32,8 @@ namespace tpublic
 					{
 						if(aChild->m_name == "source")
 							m_source = (aChild->m_realPath + "/") + aChild->GetString();
+						else if(aChild->m_name == "streamed")
+							m_streamed = aChild->GetBool();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -40,18 +42,22 @@ namespace tpublic
 
 			void	
 			ToStream(
-				IWriter*				/*aWriter*/) const override
+				IWriter*				aWriter) const override
 			{
+				aWriter->WriteBool(m_streamed);
 			}
 			
 			bool
 			FromStream(
-				IReader*				/*aReader*/) override
+				IReader*				aReader) override
 			{
+				if(!aReader->ReadBool(m_streamed))
+					return false;
 				return true;
 			}
 
 			// Public data			
+			bool				m_streamed = false;
 			std::string			m_source; // Not serialized
 		};
 

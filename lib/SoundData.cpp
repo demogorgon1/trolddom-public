@@ -27,7 +27,7 @@ namespace tpublic
 		if(size > 10 * 1024 * 1024)
 			return false;
 		m_data.resize(size);
-		if(!aReader->Read(&m_data[0], size) != size)
+		if(aReader->Read(&m_data[0], size) != size)
 			return false;
 		return true;
 	}
