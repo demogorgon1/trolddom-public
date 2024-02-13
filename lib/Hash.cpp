@@ -148,6 +148,53 @@ namespace tpublic
 			aOutHash[4] = h5 ^ h1;
 		}
 
+		bool		
+		File(
+			const char*				aPath,
+			uint32_t				aOutHash[5])
+		{
+			FILE* f = fopen(aPath, "rb");
+			if(f == NULL)
+				return false;
+
+			bool ok = true;
+
+			try
+			{
+				fseek(f, 0, SEEK_END);
+				size_t fileSize = (size_t)ftell(f);
+				fseek(f, 0, SEEK_SET);
+
+				if(fileSize == 0)
+				{
+					memset(aOutHash, 0, sizeof(aOutHash));
+				}
+				else
+				{
+					std::vector<uint8_t> buffer;
+					buffer.resize(fileSize);
+					size_t readBytes = (size_t)fread(&buffer[0], 1, fileSize, f);
+
+					if(readBytes == fileSize)
+					{
+						MurmurHash2_160(&buffer[0], fileSize, 0x941B9021, aOutHash);
+					}
+					else
+					{
+						ok = false;
+					}
+				}
+			}
+			catch(...)
+			{
+				fclose(f);
+				return false;
+			}
+
+			fclose(f);
+			return ok;
+		}
+
 	}
 			
 }

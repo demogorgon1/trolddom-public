@@ -26,7 +26,7 @@ namespace tpublic
 							IReader*				aReader);
 		void			AddEntry(
 							uint32_t				aSoundId,
-							std::vector<uint8_t>&	aData)
+							std::vector<uint8_t>&	aData);
 		const Entry*	GetEntry(
 							uint32_t				aSoundId) const;
 

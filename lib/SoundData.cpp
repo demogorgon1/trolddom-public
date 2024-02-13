@@ -1,5 +1,6 @@
 #include "Pcheader.h"
 
+#include <tpublic/DataErrorHandling.h>
 #include <tpublic/IReader.h>
 #include <tpublic/IWriter.h>
 #include <tpublic/SoundData.h>

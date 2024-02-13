@@ -31,7 +31,7 @@ namespace tpublic
 					if(!FromSourceBase(aChild))
 					{
 						if(aChild->m_name == "source")
-							m_source = aChild->GetString();
+							m_source = (aChild->m_realPath + "/") + aChild->GetString();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}

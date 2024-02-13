@@ -55,6 +55,9 @@ namespace tpublic
 						uint32_t				aOutHash[5]);
 		uint32_t	String(
 						const char*				aString);
+		bool		File(
+						const char*				aPath,
+						uint32_t				aOutHash[5]);
 	
 		inline constexpr uint64_t
 		Splitmix_64(

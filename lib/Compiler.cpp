@@ -19,6 +19,7 @@
 #include "MapImageOutput.h"
 #include "PostProcessEntities.h"
 #include "PostProcessWordGenerators.h"
+#include "SoundDataBuilder.h"
 #include "SpriteSheetBuilder.h"
 
 namespace tpublic
@@ -154,6 +155,21 @@ namespace tpublic
 			std::string spritesPath = aDataOutputPath;
 			spritesPath += "/sprites.bin";
 			spriteSheetBuilder.ExportSheets(aCompressionLevel, spritesPath.c_str());
+		}
+
+		// Build sound data
+		{
+			std::string soundsPath = aDataOutputPath;
+			soundsPath += "/sounds.bin";
+
+			std::string cachePath = aDataOutputPath;
+			cachePath += "/cache/opus";
+
+			std::string toolsPath = aDataOutputPath;
+			toolsPath += "/../extra/tools";
+
+			SoundDataBuilder soundDataBuilder;
+			soundDataBuilder.Build(m_manifest, soundsPath.c_str(), cachePath.c_str(), toolsPath.c_str());
 		}
 
 		// Generate map image output for debugging purposes

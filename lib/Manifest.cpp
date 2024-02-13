@@ -30,6 +30,7 @@
 #include <tpublic/Data/ParticleSystem.h>
 #include <tpublic/Data/Profession.h>
 #include <tpublic/Data/Quest.h>
+#include <tpublic/Data/Sound.h>
 #include <tpublic/Data/Sprite.h>
 #include <tpublic/Data/Tag.h>
 #include <tpublic/Data/TagContext.h>
@@ -75,6 +76,7 @@ namespace tpublic
 		RegisterDataContainer<Data::ParticleSystem>();
 		RegisterDataContainer<Data::Profession>();
 		RegisterDataContainer<Data::Quest>();
+		RegisterDataContainer<Data::Sound>();
 		RegisterDataContainer<Data::Sprite>();
 		RegisterDataContainer<Data::Tag>();
 		RegisterDataContainer<Data::TagContext>();
