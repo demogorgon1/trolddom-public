@@ -35,24 +35,25 @@ namespace tpublic
 			const char*		m_description;
 			uint32_t		m_budgetCost;
 			bool			m_percentage;
+			bool			m_basic;
 		};
 
 		// IMPORTANT: Must match Id enum
 		static constexpr const Info INFO[] =
 		{			
-			{ NULL, NULL, NULL, NULL, 0, false },
+			{ NULL, NULL, NULL, NULL, 0, false, false },
 
-			{ "dexterity",				"DEX",			"Dexterity",								NULL,																	1,	false },
-			{ "strength",				"STR",			"Strength",									NULL,																	1,	false },
-			{ "wisdom",					"WIS",			"Wisdom",									NULL,																	1,	false },
-			{ "constitution",			"CON",			"Constitution",								NULL,																	1,	false },
-			{ "spirit",					"SPI",			"Spirit",									NULL,																	1,	false },
-			{ "armor",					"ARM",			"Armor",									NULL,																	1,	false },
-			{ "phys_crit_chance",		"CRIT",			"Critical Strike Chance (Physical)",		"Improves your chance to get a critical strike by %u%%.",				10,	true },
-			{ "spell_crit_chance",		"SPELLCRIT",	"Critical Strike Chance (Spells)",			"Improves your chance to get a critical strike with spells by %u%%.",	10,	true },
-			{ "dodge_chance",			"DODGE",		"Dodge Chance",								"Improves your chance to dodge an attack by %u%%.",						10,	true },
-			{ "block_chance",			"BLOCK",		"Block Chance",								"Improves your chance to block an attack by %u%%.",						10,	true },
-			{ "parry_chance",			"PARRY",		"Parry Chance",								"Improves your chance to parry an attack by %u%%.",						10,	true }
+			{ "dexterity",				"DEX",			"Dexterity",								NULL,																	1,	false,	true },
+			{ "strength",				"STR",			"Strength",									NULL,																	1,	false,	true },
+			{ "wisdom",					"WIS",			"Wisdom",									NULL,																	1,	false,	true },
+			{ "constitution",			"CON",			"Constitution",								NULL,																	1,	false,	true },
+			{ "spirit",					"SPI",			"Spirit",									NULL,																	1,	false,	true },
+			{ "armor",					"ARM",			"Armor",									NULL,																	1,	false,	true },
+			{ "phys_crit_chance",		"CRIT",			"Critical Strike Chance (Physical)",		"Improves your chance to get a critical strike by %u%%.",				10,	true,	false },
+			{ "spell_crit_chance",		"SPELLCRIT",	"Critical Strike Chance (Spells)",			"Improves your chance to get a critical strike with spells by %u%%.",	10,	true,	false },
+			{ "dodge_chance",			"DODGE",		"Dodge Chance",								"Improves your chance to dodge an attack by %u%%.",						10,	true,	false },
+			{ "block_chance",			"BLOCK",		"Block Chance",								"Improves your chance to block an attack by %u%%.",						10,	true,	false },
+			{ "parry_chance",			"PARRY",		"Parry Chance",								"Improves your chance to parry an attack by %u%%.",						10,	true,	false }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

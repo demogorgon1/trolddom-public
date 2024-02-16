@@ -311,6 +311,20 @@ namespace tpublic
 					m_denominator = aSource->m_children[1]->GetUInt32();
 				}
 
+				void
+				Combine(
+					const StatsConversionEntry&	aOther)
+				{
+					m_numerator *= aOther.m_numerator;
+					m_denominator *= aOther.m_denominator;
+				}
+
+				bool
+				IsSet() const
+				{
+					return m_numerator != 0;
+				}
+
 				// Public data
 				uint32_t											m_numerator = 0;
 				uint32_t											m_denominator = 1;

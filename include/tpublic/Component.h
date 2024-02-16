@@ -54,6 +54,7 @@ namespace tpublic
 			ID_PLAYER_AUCTIONS,
 			ID_PLAYER_INBOX,
 			ID_PLAYER_OUTBOX,
+			ID_CHARACTER_INFO_VIEW,
 
 			NUM_IDS
 		};
@@ -105,7 +106,8 @@ namespace tpublic
 			"mailbox",
 			"player_auctions",
 			"player_inbox",
-			"player_outbox"
+			"player_outbox",
+			"character_info_view"
 		};		
 
 		static_assert(sizeof(COMPONENT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

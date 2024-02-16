@@ -71,12 +71,20 @@ namespace tpublic
 
 		void
 		Apply(
-			Stat::Collection&		aStats)
+			Stat::Collection&		aStats,
+			Stat::Collection&		aAdded)
 		{
 			for (uint32_t i = 1; i < (uint32_t)Stat::NUM_IDS; i++)
 			{
 				if (m_modifiers[i].has_value())
+				{
+					uint32_t oldValue = aStats.m_stats[i];
 					aStats.m_stats[i] = m_modifiers[i].value().Calculate(aStats.m_stats[i]);
+					
+					// FIXME: negative stats
+					if(aStats.m_stats[i] > oldValue)
+						aAdded.m_stats[i] = aStats.m_stats[i] - oldValue;
+				}
 			}
 		}
 

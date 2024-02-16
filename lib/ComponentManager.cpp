@@ -6,6 +6,7 @@
 #include <tpublic/Components/ActiveQuests.h>
 #include <tpublic/Components/Auctioneer.h>
 #include <tpublic/Components/Auras.h>
+#include <tpublic/Components/CharacterInfoView.h>
 #include <tpublic/Components/CombatPrivate.h>
 #include <tpublic/Components/CombatPublic.h>
 #include <tpublic/Components/CompletedQuests.h>
@@ -58,6 +59,7 @@ namespace tpublic
 		_Register<Components::ActiveQuests>();
 		_Register<Components::Auctioneer>();
 		_Register<Components::Auras>();
+		_Register<Components::CharacterInfoView>();
 		_Register<Components::CombatPrivate>();
 		_Register<Components::CombatPublic>();
 		_Register<Components::CompletedQuests>();
