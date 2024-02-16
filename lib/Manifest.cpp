@@ -120,6 +120,7 @@ namespace tpublic
 		m_abilityMetrics.ToStream(aStream);
 		m_wordList.ToStream(aStream);
 		m_worshipMetrics.ToStream(aStream);
+		m_defaultSoundEffects.ToStream(aStream);
 	}
 
 	bool
@@ -150,6 +151,8 @@ namespace tpublic
 		if (!m_wordList.FromStream(aStream))
 			return false;
 		if (!m_worshipMetrics.FromStream(aStream))
+			return false;
+		if (!m_defaultSoundEffects.FromStream(aStream))
 			return false;
 
 		return true;

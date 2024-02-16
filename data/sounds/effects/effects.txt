@@ -30,4 +30,7 @@ sound spell_6: { source: "spell-6.wav" }
 sound spell_7: { source: "spell-7.wav" }
 sound spell_8: { source: "spell-8.wav" }
 sound walk_1: { source: "walk-1.wav" }
+sound buy_1: { source: "buy-1.wav" }
+sound sell_1: { source: "sell-1.wav" }
+
 

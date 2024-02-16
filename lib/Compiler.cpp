@@ -96,6 +96,10 @@ namespace tpublic
 			{
 				m_manifest->m_worshipMetrics.FromSource(aNode);
 			}
+			else if (aNode->m_name == "default_sound_effects")
+			{
+				m_manifest->m_defaultSoundEffects.FromSource(aNode);
+			}
 			else if(aNode->m_name == "sprites")
 			{
 				spriteSheetBuilder.AddSprites(aNode);

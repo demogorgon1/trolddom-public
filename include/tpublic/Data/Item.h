@@ -6,6 +6,7 @@
 #include "../ItemBinding.h"
 #include "../ItemType.h"
 #include "../Rarity.h"
+#include "../SoundEffect.h"
 #include "../Stat.h"
 #include "../UIntRange.h"
 
@@ -183,6 +184,10 @@ namespace tpublic
 						{
 							m_addedStats.push_back(AddedStat(aChild, true));
 						}
+						else if(aChild->m_name == "sound_effects")
+						{
+							m_soundEffects.FromSource(aChild);
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -225,6 +230,7 @@ namespace tpublic
 				aStream->WriteString(m_flavor);
 				aStream->WriteInt(m_budgetBias);
 				aStream->WritePOD(m_itemBinding);
+				m_soundEffects.ToStream(aStream);
 			}
 
 			bool
@@ -269,6 +275,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadPOD(m_itemBinding))
 					return false;
+				if(!m_soundEffects.FromStream(aStream))
+					return false;
 
 				m_lcString = m_string;
 				Helpers::MakeLowerCase(m_lcString);
@@ -296,6 +304,7 @@ namespace tpublic
 			std::string					m_flavor;
 			int32_t						m_budgetBias = 0;
 			ItemBinding::Id				m_itemBinding = ItemBinding::ID_NEVER;
+			SoundEffect::Collection		m_soundEffects;
 
 			// Not serialized
 			std::string					m_lcString;

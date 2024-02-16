@@ -1,0 +1,20 @@
+default_sound_effects:
+{
+	
+	melee:
+	{
+		hit: [ impact_6 impact_9 ]
+		miss: [ miss_1 miss_2 miss_3 ]
+		dodge: [ miss_1 miss_2 miss_3 ]
+	}
+	
+	misc:
+	{
+		move: [ walk_1 ]
+		equip: [ equip_1 ]
+		inventory: [ inventory_1 ]
+		vendor: [ sell_1 ]
+		trash: [ impact_8 ]
+	}
+
+}

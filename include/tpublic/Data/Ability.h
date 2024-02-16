@@ -6,6 +6,7 @@
 #include "../EntityState.h"
 #include "../Requirement.h"
 #include "../Resource.h"
+#include "../SoundEffect.h"
 
 namespace tpublic
 {
@@ -421,6 +422,8 @@ namespace tpublic
 							m_requiredProfession = RequiredProfession(aMember);
 						else if (aMember->m_tag == "requirement")
 							m_requirements.push_back(Requirement(aMember));
+						else if (aMember->m_name == "sound_effects")
+							m_soundEffects.FromSource(aMember);
 						else
 							TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
 					}
@@ -455,6 +458,7 @@ namespace tpublic
 				aWriter->WriteInt(m_channelInterval);
 				aWriter->WriteUInt(m_channelTickAbilityId);
 				aWriter->WriteObjects(m_requirements);
+				m_soundEffects.ToStream(aWriter);
 
 				for(uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 					aWriter->WriteUInt(m_resourceCosts[i]);
@@ -512,6 +516,8 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadObjects(m_requirements))
 					return false;
+				if(!m_soundEffects.FromStream(aReader))
+					return false;
 
 				for (uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 				{
@@ -548,6 +554,7 @@ namespace tpublic
 			int32_t												m_channelInterval = 10;
 			uint32_t											m_channelTickAbilityId = 0;
 			std::vector<Requirement>							m_requirements;
+			SoundEffect::Collection								m_soundEffects;
 		};
 
 	}

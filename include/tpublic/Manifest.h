@@ -2,6 +2,7 @@
 
 #include "AbilityMetrics.h"
 #include "DataBase.h"
+#include "DefaultSoundEffects.h"
 #include "IReader.h"
 #include "ItemMetrics.h"
 #include "IWriter.h"
@@ -410,6 +411,7 @@ namespace tpublic
 		AbilityMetrics									m_abilityMetrics;
 		WorshipMetrics									m_worshipMetrics;
 		WordList::Data									m_wordList;
+		DefaultSoundEffects								m_defaultSoundEffects;
 
 		// Public data
 		std::unique_ptr<IDataContainer>					m_containers[DataType::NUM_IDS];
