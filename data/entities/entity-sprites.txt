@@ -46,11 +46,13 @@ sprites:
 
 	sprite tentacle_monster: { }
 	sprite man_6: { }
+	sprite woman_2: { }
 	
 	cursor: { position: [ 0 48 ] }
 	
 	sprite tentacle_monster_dead: { }
 	sprite man_6_dead: { }
+	sprite woman_2_dead: { }
 	
 }
 

@@ -57,6 +57,8 @@ sprites:
 	sprite roof_se: { tile_layer: 10 }
 	sprite pavement: { flags: [ tile_walkable ] tile_layer: 1 }
 	sprite forest_entrance: { flags: [ tile_walkable ] tile_layer: 10 }
+	sprite ext_dungeon_wall: { flags: [ tile_block_line_of_sight ] tile_layer: 4 }
+	sprite ext_dungeon_entrance: { flags: [ tile_walkable ] tile_layer: 10 }
 
 	cursor: { position: [ 0 16 ] }
 	

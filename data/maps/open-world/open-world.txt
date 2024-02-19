@@ -80,6 +80,11 @@ map_entity_spawn .fisherman:
 	entity .fisherman: { weight: 1 }
 }
 
+map_entity_spawn .junjun:
+{
+	entity .junjun: { weight: 1 }
+}
+
 map_entity_spawn .spawn_of_umbracoth:
 {
 	entity .spawn_of_umbracoth: { weight: 1 }
@@ -157,6 +162,8 @@ map_palette .tiles:
 	tile wood_solid_wall_face: [ 100 200 200 ]
 	tile roof: [ 255 0 0 ]
 	tile forest_entrance: [ 123 255 123 ] 
+	tile ext_dungeon_wall: [ 0 0 32 ]
+	tile ext_dungeon_entrance: [ 0 0 64 ]
 }
 
 map_palette .stuff:
@@ -172,6 +179,7 @@ map_palette .stuff:
 	entity_spawn .harald_skrald: [ 200 189 0 ]
 	entity_spawn .bidmaster_bob: [ 20 189 0 ]
 	entity_spawn .fisherman: [ 0 2 255 ]
+	entity_spawn .junjun: [ 6 55 255 ]
 	entity_spawn .spirit_stone: [ 0 0 0 ]	
 	entity_spawn .mailbox: [ 0 20 60 ]	
 	entity_spawn .holy_altar: [ 0 0 40 ]	
