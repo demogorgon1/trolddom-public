@@ -78,11 +78,10 @@ namespace tpublic
 			{
 				if (m_modifiers[i].has_value())
 				{
-					uint32_t oldValue = aStats.m_stats[i];
+					float oldValue = aStats.m_stats[i];
 					aStats.m_stats[i] = m_modifiers[i].value().Calculate(aStats.m_stats[i]);
 					
-					// FIXME: negative stats
-					if(aStats.m_stats[i] > oldValue)
+					if(aStats.m_stats[i] != oldValue)
 						aAdded.m_stats[i] = aStats.m_stats[i] - oldValue;
 				}
 			}

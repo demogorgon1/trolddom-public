@@ -240,7 +240,7 @@ namespace tpublic
 				{
 					Stat::Id statId = Stat::StringToId(aChild->m_name.c_str());
 					TP_VERIFY(statId != Stat::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid stat.", aChild->m_name.c_str());
-					stackObject->m_itemSpecial.m_rawStats.m_stats[statId] = aChild->GetUInt32();
+					stackObject->m_itemSpecial.m_rawStats.m_stats[statId] = aChild->GetFloat();
 				}
 				else if(aChild->m_name == "weight")
 				{
@@ -461,16 +461,16 @@ namespace tpublic
 
 					for(uint32_t j = 1; j < (uint32_t)Stat::NUM_IDS; j++)
 					{
-						if(statWeights.m_stats[j] != 0)
+						if(statWeights.m_stats[j] != 0.0f)
 						{
 							const Stat::Info* statInfo = Stat::GetInfo((Stat::Id)j);
-							output->PrintF(1, "stat_weight %s: %u", statInfo->m_name, statWeights.m_stats[j]);
+							output->PrintF(1, "stat_weight %s: %f", statInfo->m_name, statWeights.m_stats[j]);
 						}
 
-						if(rawStats.m_stats[j] != 0)
+						if(rawStats.m_stats[j] != 0.0f)
 						{
 							const Stat::Info* statInfo = Stat::GetInfo((Stat::Id)j);
-							output->PrintF(1, "stat %s: %u", statInfo->m_name, rawStats.m_stats[j]);
+							output->PrintF(1, "stat %s: %f", statInfo->m_name, rawStats.m_stats[j]);
 						}
 					}
 

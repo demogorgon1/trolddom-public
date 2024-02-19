@@ -150,7 +150,7 @@ namespace tpublic::Helpers
 		{
 			size_t possibleStatIdIndex = RandomInRange<size_t>(wordRandom, 0, possibleStatIds.size() - 1);
 
-			aOut.m_stats[possibleStatIds[possibleStatIdIndex]]++;
+			aOut.m_stats[possibleStatIds[possibleStatIdIndex]] += 1.0f;
 		}
 	}
 

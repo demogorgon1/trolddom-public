@@ -45,6 +45,10 @@ namespace tpublic
 					{
 						m_eliteCash = aChild->GetFloat();
 					}
+					else if (aChild->m_name == "base_armor")
+					{
+						m_baseArmor = aChild->GetUInt32();
+					}
 					else if (aChild->m_name == "elite_resource")
 					{
 						TP_VERIFY(aChild->m_annotation, aChild->m_debugInfo, "Missing resource annotation.");
@@ -63,6 +67,7 @@ namespace tpublic
 			ToStream(
 				IWriter*				aWriter) const
 			{	
+				aWriter->WriteUInt(m_baseArmor);
 				m_baseWeaponDamage.ToStream(aWriter);
 				m_cash.ToStream(aWriter);
 				aWriter->WriteFloat(m_eliteWeaponDamage);
@@ -78,6 +83,8 @@ namespace tpublic
 			FromStream(
 				IReader*				aReader) 
 			{
+				if(!aReader->ReadUInt(m_baseArmor))
+					return false;
 				if (!m_baseWeaponDamage.FromStream(aReader))
 					return false;
 				if (!m_cash.FromStream(aReader))
@@ -101,6 +108,7 @@ namespace tpublic
 			UIntRange		m_cash;
 
 			uint32_t		m_baseResource[Resource::NUM_IDS] = { 0 };
+			uint32_t		m_baseArmor = 0;
 
 			float			m_eliteWeaponDamage = 0.0f;
 			float			m_eliteResource[Resource::NUM_IDS] = { 0 };

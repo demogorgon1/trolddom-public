@@ -287,17 +287,14 @@ namespace tpublic
 				ToStream(
 					IWriter*				aStream) const 
 				{
-					aStream->WriteUInt(m_numerator);
-					aStream->WriteUInt(m_denominator);
+					aStream->WriteFloat(m_value);
 				}
 			
 				bool	
 				FromStream(
 					IReader*				aStream) 
 				{
-					if(!aStream->ReadUInt(m_numerator))
-						return false;
-					if (!aStream->ReadUInt(m_denominator))
+					if(!aStream->ReadFloat(m_value))
 						return false;
 					return true;
 				}
@@ -307,27 +304,24 @@ namespace tpublic
 					const SourceNode*		aSource)
 				{
 					TP_VERIFY(aSource->m_type == SourceNode::TYPE_ARRAY && aSource->m_children.size() == 2, aSource->m_debugInfo, "Not a valid stats conversion.");
-					m_numerator = aSource->m_children[0]->GetUInt32();
-					m_denominator = aSource->m_children[1]->GetUInt32();
+					m_value = (float)aSource->m_children[0]->GetUInt32() / (float)aSource->m_children[1]->GetUInt32();
 				}
 
 				void
 				Combine(
 					const StatsConversionEntry&	aOther)
 				{
-					m_numerator *= aOther.m_numerator;
-					m_denominator *= aOther.m_denominator;
+					m_value += aOther.m_value;
 				}
 
 				bool
 				IsSet() const
 				{
-					return m_numerator != 0;
+					return m_value != 0;
 				}
 
 				// Public data
-				uint32_t											m_numerator = 0;
-				uint32_t											m_denominator = 1;
+				float						m_value = 0.0f;
 			};
 
 			struct StatsConversion

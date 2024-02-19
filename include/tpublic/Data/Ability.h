@@ -349,6 +349,7 @@ namespace tpublic
 			bool IsHidden() const { return m_flags & FLAG_HIDDEN; }
 			bool IsLateCooldownTrigger() const { return m_flags & FLAG_LATE_COOLDOWN_TRIGGER; }
 			bool IsChanneled() const { return m_channelTicks != 0 && m_channelTickAbilityId != 0; }
+			bool IsOffensive() const { return m_flags & FLAG_OFFENSIVE; }
 			
 			bool 
 			IsUsableInState(

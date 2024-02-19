@@ -33,7 +33,7 @@ namespace tpublic
 			const char*		m_shortName;
 			const char*		m_longName;
 			const char*		m_description;
-			uint32_t		m_budgetCost;
+			float			m_budgetCost;
 			bool			m_percentage;
 			bool			m_basic;
 		};
@@ -43,17 +43,17 @@ namespace tpublic
 		{			
 			{ NULL, NULL, NULL, NULL, 0, false, false },
 
-			{ "dexterity",				"DEX",			"Dexterity",								NULL,																	1,	false,	true },
-			{ "strength",				"STR",			"Strength",									NULL,																	1,	false,	true },
-			{ "wisdom",					"WIS",			"Wisdom",									NULL,																	1,	false,	true },
-			{ "constitution",			"CON",			"Constitution",								NULL,																	1,	false,	true },
-			{ "spirit",					"SPI",			"Spirit",									NULL,																	1,	false,	true },
-			{ "armor",					"ARM",			"Armor",									NULL,																	1,	false,	true },
-			{ "phys_crit_chance",		"CRIT",			"Critical Strike Chance (Physical)",		"Improves your chance to get a critical strike by %u%%.",				10,	true,	false },
-			{ "spell_crit_chance",		"SPELLCRIT",	"Critical Strike Chance (Spells)",			"Improves your chance to get a critical strike with spells by %u%%.",	10,	true,	false },
-			{ "dodge_chance",			"DODGE",		"Dodge Chance",								"Improves your chance to dodge an attack by %u%%.",						10,	true,	false },
-			{ "block_chance",			"BLOCK",		"Block Chance",								"Improves your chance to block an attack by %u%%.",						10,	true,	false },
-			{ "parry_chance",			"PARRY",		"Parry Chance",								"Improves your chance to parry an attack by %u%%.",						10,	true,	false }
+			{ "dexterity",				"DEX",			"Dexterity",								NULL,																	1.0f,	false,	true },
+			{ "strength",				"STR",			"Strength",									NULL,																	1.0f,	false,	true },
+			{ "wisdom",					"WIS",			"Wisdom",									NULL,																	1.0f,	false,	true },
+			{ "constitution",			"CON",			"Constitution",								NULL,																	1.0f,	false,	true },
+			{ "spirit",					"SPI",			"Spirit",									NULL,																	1.0f,	false,	true },
+			{ "armor",					"ARM",			"Armor",									NULL,																	1.0f,	false,	true },
+			{ "phys_crit_chance",		"CRIT",			"Critical Strike Chance (Physical)",		"Improves your chance to get a critical strike by %u%%.",				10.0f,	true,	false },
+			{ "spell_crit_chance",		"SPELLCRIT",	"Critical Strike Chance (Spells)",			"Improves your chance to get a critical strike with spells by %u%%.",	10.0f,	true,	false },
+			{ "dodge_chance",			"DODGE",		"Dodge Chance",								"Improves your chance to dodge an attack by %u%%.",						10.0f,	true,	false },
+			{ "block_chance",			"BLOCK",		"Block Chance",								"Improves your chance to block an attack by %u%%.",						10.0f,	true,	false },
+			{ "parry_chance",			"PARRY",		"Parry Chance",								"Improves your chance to parry an attack by %u%%.",						10.0f,	true,	false }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);
@@ -97,7 +97,7 @@ namespace tpublic
 			{
 				for (uint32_t i = 1; i < (uint32_t)NUM_IDS; i++)
 				{
-					if(m_stats[i] != 0)
+					if(m_stats[i] != 0.0f)
 						return false;
 				}
 				return true;
@@ -120,7 +120,7 @@ namespace tpublic
 				{
 					Id id = StringToId(aNode->m_name.c_str());
 					TP_VERIFY(id != INVALID_ID, aNode->m_debugInfo, "'%s' is not a valid stat.", aNode->m_name.c_str());
-					m_stats[id] = aNode->GetUInt32();
+					m_stats[id] = aNode->GetFloat();
 				});
 			}
 
@@ -129,7 +129,7 @@ namespace tpublic
 				IWriter*			aStream) const 
 			{
 				for(uint32_t i = 0; i < (uint32_t)NUM_IDS; i++)
-					aStream->WriteUInt(m_stats[i]);
+					aStream->WriteFloat(m_stats[i]);
 			}
 
 			bool
@@ -138,7 +138,7 @@ namespace tpublic
 			{
 				for (uint32_t i = 0; i < (uint32_t)NUM_IDS; i++)
 				{
-					if(!aStream->ReadUInt(m_stats[i]))
+					if(!aStream->ReadFloat(m_stats[i]))
 						return false;
 				}
 				return true;
@@ -149,10 +149,10 @@ namespace tpublic
 			{
 				for (uint32_t i = 1; i < (uint32_t)NUM_IDS; i++)
 				{
-					uint32_t value = m_stats[i];
+					float value = m_stats[i];
 					
 					if(value > 0)
-						printf(" %s=%u", GetInfo((Id)i)->m_shortName, value);
+						printf(" %s=%f", GetInfo((Id)i)->m_shortName, value);
 				}
 			}
 			
@@ -176,14 +176,14 @@ namespace tpublic
 				struct Entry
 				{
 					uint32_t	m_index = 0;
-					uint32_t	m_value = 0;
+					float		m_value = 0;
 				};
 
 				std::vector<Entry> entries;
 
 				for (uint32_t i = 1; i < (uint32_t)NUM_IDS; i++)
 				{
-					if(m_stats[i] > 0)
+					if(m_stats[i] > 0.0f)
 						entries.push_back({ i, m_stats[i] });
 				}
 
@@ -197,17 +197,17 @@ namespace tpublic
 					});
 
 					for(size_t i = (size_t)aNumberToKeep; i < entries.size(); i++)
-						m_stats[entries[i].m_index] = 0;
+						m_stats[entries[i].m_index] = 0.0f;
 				}
 			}
 
-			uint32_t
+			float
 			GetTotalBudgetCost() const
 			{
-				uint32_t sum = 0;
+				float sum = 0;
 				for (uint32_t i = 1; i < (uint32_t)NUM_IDS; i++)
 				{
-					if(m_stats[i] != 0)
+					if(m_stats[i] != 0.0f)
 					{
 						const Info* statInfo = GetInfo((Id)i);
 						sum += statInfo->m_budgetCost * m_stats[i];
@@ -217,7 +217,7 @@ namespace tpublic
 			}
 
 			// Public data
-			uint32_t		m_stats[NUM_IDS] = { 0 };
+			float		m_stats[NUM_IDS] = { 0 };
 		};
 
 	};

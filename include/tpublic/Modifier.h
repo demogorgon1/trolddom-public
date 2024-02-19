@@ -38,14 +38,14 @@ namespace tpublic
 			m_addPercent += aOther.m_addPercent;
 		}
 
-		uint32_t
+		float
 		Calculate(
-			uint32_t			aIn) const
+			float			aIn) const
 		{
-			float value = (((float)aIn + m_add) * (1.0f + m_addPercent / 100.0f));
+			float value = ((aIn + m_add) * (1.0f + m_addPercent / 100.0f));
 			if(value < 0.0f)
-				return 0;
-			return (uint32_t)value;
+				return 0.0f;
+			return value;
 		}
 
 		void

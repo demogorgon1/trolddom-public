@@ -32,6 +32,7 @@ namespace tpublic
 			TYPE_INT64,
 			TYPE_UINT32,
 			TYPE_UINT64,
+			TYPE_FLOAT,
 			TYPE_UINT32_ARRAY,
 			TYPE_CUSTOM
 		};

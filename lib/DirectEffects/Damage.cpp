@@ -118,6 +118,8 @@ namespace tpublic::DirectEffects
 		const IWorldView*				/*aWorldView*/) 
 	{
 		const Components::CombatPrivate* sourceCombatPrivate = aSource->GetComponent<Components::CombatPrivate>();
+		const Components::CombatPrivate* targetCombatPrivate = aTarget->GetComponent<Components::CombatPrivate>();
+		const Components::CombatPublic* sourceCombatPublic = aSource->GetComponent<Components::CombatPublic>();
 		Components::CombatPublic* targetCombatPublic = aTarget->GetComponent<Components::CombatPublic>();
 		const Components::Auras* targetAuras = aTarget->GetComponent<Components::Auras>();
 
@@ -148,9 +150,9 @@ namespace tpublic::DirectEffects
 			float chance = 0.0f;
 
 			if(m_flags & DirectEffect::FLAG_IS_MAGICAL)
-				chance = (float)sourceCombatPrivate->m_magicalCriticalStrikeChance / (float)UINT32_MAX;
+				chance = sourceCombatPrivate->m_magicalCriticalStrikeChance;
 			else
-				chance = (float)sourceCombatPrivate->m_physicalCriticalStrikeChance / (float)UINT32_MAX;
+				chance = sourceCombatPrivate->m_physicalCriticalStrikeChance;
 
 			if(Helpers::RandomFloat(aRandom) < chance)
 			{
@@ -158,6 +160,13 @@ namespace tpublic::DirectEffects
 
 				result = CombatEvent::ID_CRITICAL;
 			}
+		}
+
+		if((m_flags & DirectEffect::FLAG_IS_MAGICAL) == 0)
+		{
+			// Damage reduction from armor
+			float damageMultiplier = 1.0f - (float)targetCombatPrivate->m_armor / (float)(targetCombatPrivate->m_armor + 400 + 85 * sourceCombatPublic->m_level);
+			damage = (uint32_t)((float)damage * damageMultiplier);
 		}
 
 		size_t healthResourceIndex;
@@ -177,7 +186,7 @@ namespace tpublic::DirectEffects
 
 			int32_t threat = (int32_t)damage;
 			if(result == CombatEvent::ID_CRITICAL)
-				threat = (threat * 3) / 2;
+				threat = (threat * 3) / 2; // Crits generate more threat per damage than non-crits
 
 			if(aTarget->GetEntityId() != 0) // Not a player
 				aEventQueue->EventQueueThreat(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), threat);

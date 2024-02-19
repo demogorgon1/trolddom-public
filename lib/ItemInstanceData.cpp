@@ -44,7 +44,7 @@ namespace tpublic
 				for(uint32_t i = 1; i < (uint32_t)Stat::NUM_IDS; i++)
 				{
 					const Stat::Info* statInfo = Stat::GetInfo((Stat::Id)i);					
-					m_stats.m_stats[i] += (statWeights.m_stats[i] * (uint32_t)m_statBudget) / (totalStatWeight * statInfo->m_budgetCost);
+					m_stats.m_stats[i] += (statWeights.m_stats[i] * (float)m_statBudget) / ((float)totalStatWeight * statInfo->m_budgetCost);
 				}
 			}
 		}
@@ -81,7 +81,7 @@ namespace tpublic
 		{
 			uint32_t baseArmor = aManifest->m_itemMetrics.GetLevelBaseArmor(m_itemData->m_itemLevel);
 			baseArmor = 1 + (uint32_t)((float)baseArmor * multipliers.m_armor);
-			m_stats.m_stats[Stat::ID_ARMOR] += baseArmor; 
+			m_stats.m_stats[Stat::ID_ARMOR] += (float)baseArmor; 
 		}
 
 		if (m_cost == 0)
@@ -125,12 +125,12 @@ namespace tpublic
 		{
 			if(!addedStat.m_isBudgetWeight)
 			{
-				m_stats.m_stats[addedStat.m_id] += addedStat.m_value;
+				m_stats.m_stats[addedStat.m_id] += (float)addedStat.m_value;
 			}
 			else
 			{				
 				uint32_t weight = addedStat.m_value;
-				aOutStatWeights.m_stats[addedStat.m_id] += weight;
+				aOutStatWeights.m_stats[addedStat.m_id] += (float)weight;
 				aOutTotalStatWeight += weight;
 			}
 		}

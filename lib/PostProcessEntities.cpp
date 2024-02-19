@@ -63,6 +63,9 @@ namespace tpublic
 						combatPrivate->m_weaponDamageRangeMin = (uint32_t)(factor * (float)npcMetricsLevel->m_baseWeaponDamage.m_min);
 						combatPrivate->m_weaponDamageRangeMax = (uint32_t)(factor * (float)npcMetricsLevel->m_baseWeaponDamage.m_max);
 					}
+
+					// Set armor
+					combatPrivate->m_armor = npcMetricsLevel->m_baseArmor;
 				}
 			}
 		}

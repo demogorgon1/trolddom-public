@@ -188,6 +188,13 @@ namespace tpublic
 					}
 					break;
 
+				case TYPE_FLOAT:
+					{
+						float* t = (float*)&(((const uint8_t*)aObject)[field->m_offset]);
+						*t = aChild->GetFloat();					
+					}
+					break;
+
 				case TYPE_UINT32_ARRAY:
 					{
 						TP_VERIFY(aChild->m_type == SourceNode::TYPE_ARRAY, aChild->m_debugInfo, "Syntax error.");
@@ -458,6 +465,7 @@ namespace tpublic
 		case TYPE_INT64:			return sizeof(int64_t);
 		case TYPE_UINT32:			return sizeof(uint32_t);
 		case TYPE_UINT64:			return sizeof(uint64_t);
+		case TYPE_FLOAT:			return sizeof(float);
 		case TYPE_UINT32_ARRAY:		return sizeof(std::vector<uint32_t>);
 		case TYPE_CUSTOM:			return aField->m_customSize;
 		default:					assert(false);
@@ -558,6 +566,13 @@ namespace tpublic
 			}
 			break;
 
+		case TYPE_FLOAT:
+			{
+				const float* t = (const float*)&(((const uint8_t*)aObject)[aField->m_offset]);
+				aWriter->WriteFloat(*t);
+			}
+			break;
+
 		case TYPE_UINT32_ARRAY:
 			{
 				const std::vector<uint32_t>* t = (const std::vector<uint32_t>*)&(((const uint8_t*)aObject)[aField->m_offset]);
@@ -650,6 +665,14 @@ namespace tpublic
 			}
 			break;
 
+		case TYPE_FLOAT:
+			{
+				float* t = (float*)&(((const uint8_t*)aObject)[aField->m_offset]);
+				if(!aReader->ReadFloat(*t))
+					return false;
+			}
+			break;
+
 		case TYPE_UINT32_ARRAY:
 			{
 				std::vector<uint32_t>* t = (std::vector<uint32_t>*)&(((const uint8_t*)aObject)[aField->m_offset]);
@@ -729,6 +752,13 @@ namespace tpublic
 			{
 				const uint64_t* t = (const uint64_t*)&(((const uint8_t*)aObject)[aField->m_offset]);
 				TP_STRING_FORMAT(buffer, sizeof(buffer), "%zu", *t);
+			}
+			break;
+
+		case TYPE_FLOAT:
+			{
+				const float* t = (const float*)&(((const uint8_t*)aObject)[aField->m_offset]);
+				TP_STRING_FORMAT(buffer, sizeof(buffer), "%f", *t);
 			}
 			break;
 
