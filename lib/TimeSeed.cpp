@@ -163,9 +163,9 @@ namespace tpublic
 	TimeSeed::FromStream(
 		IReader*			aReader)
 	{
-		if (!aReader->ReadPOD(m_seed))
-			return false;
 		if (!aReader->ReadPOD(m_type))
+			return false;
+		if (!aReader->ReadPOD(m_seed))
 			return false;
 		if (!aReader->ReadUInt(m_fromTimeStamp))
 			return false;
