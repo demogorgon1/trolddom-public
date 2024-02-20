@@ -1,0 +1,95 @@
+map_entity_spawn .spirit_stone:
+{	
+	entity spirit_stone: { init_state: default } 
+}
+
+map_entity_spawn .holy_altar:
+{	
+	spawn_timer: { despawn_required: true min_delay: 600 cooldown_range_min: 1200 cooldown_range_max: 4800 }
+	entity holy_altar: { init_state: default } 
+}
+
+map_entity_spawn .underworld_shrine:
+{	
+	spawn_timer: { despawn_required: true min_delay: 600 cooldown_range_min: 1200 cooldown_range_max: 4800 }
+	entity underworld_shrine: { init_state: default } 
+}
+
+map_entity_spawn .mining:
+{	
+	spawn_timer: { despawn_required: true min_delay: 600 cooldown_range_min: 1200 cooldown_range_max: 4800 }
+
+	entity mining_copper_vein: { level: [ 1 6 ] weight: 1 init_state: default } 
+	entity mining_iron_vein: { level: [ 4 10 ] weight: 1 init_state: default } 
+}
+
+map_entity_spawn .herbalism:
+{	
+	spawn_timer: { despawn_required: true min_delay: 600 cooldown_range_min: 1200 cooldown_range_max: 4800 }
+
+	entity herbalism_dewleaf: { level: [ 1 6 ] weight: 1 init_state: default }
+	entity herbalism_mistflower: { level: [ 4 10 ] weight: 1 init_state: default } 
+}
+
+map_player_spawn .player_spawn:
+{
+}
+
+map_palette .tiles:
+{
+	tile water_1: [ 9 86 104 ]
+	tile pavement: [ 32 32 32 ]
+	tile mud: [ 67 61 32 ]
+	tile sand: [ 200 200 128 ]
+	tile dirt: [ 97 91 62 ]
+	tile grass: [ 64 105 0 ]
+	tile forest: [ 51 75 6 ]
+	tile rocks: [ 143 131 120 ]
+	tile rocks_dungeon_entrance: [ 200 200 200 ]
+	tile wood_wall: [ 255 255 0 ] 
+	tile wood_open_door: [ 255 200 0 ] 
+	tile wood_floor: [ 200 200 0 ] 
+	tile wood_solid_wall: [ 0 200 200 ]
+	tile wood_solid_wall_face: [ 100 200 200 ]
+	tile roof: [ 255 0 0 ]
+	tile forest_entrance: [ 123 255 123 ] 
+	tile ext_dungeon_wall: [ 0 0 32 ]
+	tile ext_dungeon_entrance: [ 0 0 64 ]
+}
+
+map_palette .stuff:
+{
+	entity_spawn .mining: [ 200 200 200 ]
+	entity_spawn .herbalism: [ 0 255 0 ]
+	entity_spawn .mailbox: [ 0 20 60 ]	
+	entity_spawn .holy_altar: [ 0 0 40 ]	
+	entity_spawn .underworld_shrine: [ 0 0 80 ]	
+	player_spawn .player_spawn: [ 0 0 255 ]
+}
+
+map gateway_world:
+{
+	string: "Gateway World"
+	type: open_world
+	default_tile: water_1
+	default_player_spawn: .player_spawn
+	default_fishing_loot_table: fish
+	view_attenuation: 0
+	view_attenuation_bias: 0
+	view_hidden_visibility: 35	
+	has_overview_map: false
+
+	layers:
+	[
+		{
+			palettes:	[ .tiles ]
+			source:		"gateway-world-tiles.png"
+		}
+
+		{
+			palettes:	[ .stuff ]
+			source:		"gateway-world-stuff.png"
+		}
+	]
+}
+ 

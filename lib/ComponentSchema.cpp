@@ -199,10 +199,17 @@ namespace tpublic
 					{
 						TP_VERIFY(aChild->m_type == SourceNode::TYPE_ARRAY, aChild->m_debugInfo, "Syntax error.");
 						std::vector<uint32_t>* t = (std::vector<uint32_t>*)&(((const uint8_t*)aObject)[field->m_offset]);
-						aChild->ForEachChild([t](
+						aChild->ForEachChild([field, t](
 							const SourceNode* aElement)
 						{
-							t->push_back(aElement->GetUInt32());
+							uint32_t value;
+
+							if (field->m_dataType != DataType::INVALID_ID)
+								value = aElement->m_sourceContext->m_persistentIdTable->GetId(field->m_dataType, aElement->GetIdentifier());
+							else
+								value = aElement->GetUInt32();
+
+							t->push_back(value);
 						});
 					}
 					break;

@@ -90,6 +90,9 @@ sprites:
 	sprite underworld_shrine_used: { }
 	sprite holy_altar_used: { }
 	sprite mailbox: { }
+	sprite gateway_1: { }
+	sprite gateway_2: { }
+	sprite gateway_3: { }
 	
 }
 

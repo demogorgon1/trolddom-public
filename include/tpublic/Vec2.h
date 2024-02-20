@@ -15,8 +15,7 @@ namespace tpublic
 			operator()(
 				const Vec2& aValue) const
 			{
-				static_assert(sizeof(aValue) == sizeof(uint64_t));
-				return (uint32_t)(Hash::Splitmix_64(*((const uint64_t*)&aValue)) & 0xFFFFFFFFULL);
+				return aValue.GetHash32();
 			}
 		};
 
@@ -46,6 +45,13 @@ namespace tpublic
 			Vec2 t = { m_x - aOther.m_x, m_y - aOther.m_y };
 			return t.m_x * t.m_x + t.m_y * t.m_y;
 		}
+
+		uint32_t
+		GetHash32() const
+		{
+			static_assert(sizeof(*this) == sizeof(uint64_t));
+			return (uint32_t)(Hash::Splitmix_64(*((const uint64_t*)this)) & 0xFFFFFFFFULL);
+		}		
 
 		bool
 		operator==(

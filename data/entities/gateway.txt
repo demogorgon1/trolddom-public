@@ -1,0 +1,29 @@
+entity gateway:
+{
+	string: "Gateway"
+	
+	systems: [ gateway ]
+	components:
+	{
+		position: { }		
+		gateway: 
+		{ 
+			maps: [ gateway_world ]
+			schedule: daily
+			use_position_for_randomization: true
+		}
+		sprite: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ gateway_1 gateway_2 gateway_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+	}
+}

@@ -85,6 +85,11 @@ map_entity_spawn .junjun:
 	entity .junjun: { weight: 1 }
 }
 
+map_entity_spawn .gateway:
+{
+	entity gateway: { weight: 1 }
+}
+
 map_entity_spawn .spawn_of_umbracoth:
 {
 	entity .spawn_of_umbracoth: { weight: 1 }
@@ -184,6 +189,7 @@ map_palette .stuff:
 	entity_spawn .mailbox: [ 0 20 60 ]	
 	entity_spawn .holy_altar: [ 0 0 40 ]	
 	entity_spawn .underworld_shrine: [ 0 0 80 ]	
+	entity_spawn .gateway: [ 54 23 85 ]	
 	entity_spawn .spawn_of_umbracoth: [ 32 0 0 ]	
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn dungeon_1_exit: [ 0 0 200 ]	
