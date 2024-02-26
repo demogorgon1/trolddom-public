@@ -11,6 +11,7 @@
 #include "PlayerComponents.h"
 #include "ProfessionMetrics.h"
 #include "QuestMetrics.h"
+#include "TileLayering.h"
 #include "WordList.h"
 #include "WorshipMetrics.h"
 #include "XPMetrics.h"
@@ -412,6 +413,7 @@ namespace tpublic
 		WorshipMetrics									m_worshipMetrics;
 		WordList::Data									m_wordList;
 		DefaultSoundEffects								m_defaultSoundEffects;
+		TileLayering									m_tileLayering;
 
 		// Public data
 		std::unique_ptr<IDataContainer>					m_containers[DataType::NUM_IDS];

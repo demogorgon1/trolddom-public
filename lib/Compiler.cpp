@@ -18,6 +18,7 @@
 #include "GenerationJob.h"
 #include "MapImageOutput.h"
 #include "PostProcessEntities.h"
+#include "PostProcessSprites.h"
 #include "PostProcessWordGenerators.h"
 #include "SoundDataBuilder.h"
 #include "SpriteSheetBuilder.h"
@@ -99,6 +100,10 @@ namespace tpublic
 			else if (aNode->m_name == "default_sound_effects")
 			{
 				m_manifest->m_defaultSoundEffects.FromSource(aNode);
+			}
+			else if (aNode->m_name == "tile_layering")
+			{
+				m_manifest->m_tileLayering.FromSource(aNode);
 			}
 			else if(aNode->m_name == "sprites")
 			{
@@ -198,6 +203,7 @@ namespace tpublic
 		// Post process stuff
 		PostProcessEntities::Run(m_manifest);
 		PostProcessWordGenerators::Run(m_manifest);
+		PostProcessSprites::Run(m_manifest);
 
 		// Run generation jobs
 		for(std::unique_ptr<GenerationJob>& generationJob : generationJobs)

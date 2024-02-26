@@ -147,7 +147,9 @@ namespace tpublic
 
 				Sprite* sprite = _CreateSprite(aNode, aNode->m_name.c_str(), width * height);
 				sourceImage.Extract(offsetX, offsetY, width, height, sprite->m_image);		
-				
+
+				sprite->m_info.m_averageColor = sprite->m_image.GetAverageColor();
+
 				offsetX += width; // Automatically advance horizontally
 
 				aNode->GetObject()->ForEachChild([&](

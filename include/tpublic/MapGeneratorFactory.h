@@ -1,7 +1,5 @@
 #pragma once
 
-#include "MapGenerators/Dungeon.h"
-
 #include "MapGeneratorBase.h"
 
 namespace tpublic
@@ -10,29 +8,15 @@ namespace tpublic
 	class MapGeneratorFactory
 	{
 	public:
-		MapGeneratorFactory()
-		{
-			_Register<MapGenerators::Dungeon>();
-		}
+								MapGeneratorFactory();
+								~MapGeneratorFactory();
 
-		~MapGeneratorFactory()
-		{
-
-		}
-
-		MapGeneratorBase*
-		Create(
-			uint32_t			aId) const
-		{
-			if(!m_functions[aId])
-				return NULL;
-
-			return m_functions[aId]();
-		}
+		MapGeneratorBase*		Create(
+									uint32_t			aId) const;
 
 	private:
 
-		std::function<MapGeneratorBase*()>			m_functions[MapGenerator::NUM_IDS];
+		std::function<MapGeneratorBase*()>		m_functions[MapGenerator::NUM_IDS];
 
 		template<typename _T>
 		void

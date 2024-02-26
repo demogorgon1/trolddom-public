@@ -11,6 +11,7 @@ namespace tpublic
 			INVALID_ID,
 
 			ID_DUNGEON,
+			ID_WORLD,
 
 			NUM_IDS
 		};
@@ -19,7 +20,8 @@ namespace tpublic
 		static constexpr const char* STRINGS[] =
 		{
 			NULL,
-			"dungeon"
+			"dungeon",
+			"world"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

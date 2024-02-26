@@ -39,6 +39,15 @@ namespace tpublic
 				m_a = count == 4 ? p->m_children[3]->GetUInt8() : 255;
 			}
 
+			RGBA(
+				std::mt19937&						aRandom)
+				: m_r((uint8_t)(aRandom() % 0xFF))
+				, m_g((uint8_t)(aRandom() % 0xFF))
+				, m_b((uint8_t)(aRandom() % 0xFF))
+				, m_a(255)
+			{
+			}
+
 			// Public data
 			uint8_t		m_r;
 			uint8_t		m_g;
@@ -97,6 +106,7 @@ namespace tpublic
 						void**						aOutData,
 						uint32_t*					aOutWidth,
 						uint32_t*					aOutHeight);
+		RGBA		GetAverageColor() const;
 		
 		// Data access
 		uint32_t	GetWidth() const { return m_width; }

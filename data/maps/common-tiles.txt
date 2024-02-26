@@ -8,60 +8,40 @@ sprites:
 
 	sprite dungeon_floor: { flags: [ tile_walkable ] }
 	sprite dungeon_wall: { flags: [ tile_block_line_of_sight ] }
-	sprite grass: { flags: [ tile_walkable ] tile_layer: 3 borders: 
-		[ grass_border_1 grass_border_2 grass_border_3 grass_border_4 grass_border_5 grass_border_6 grass_border_7
-		  grass_border_8 grass_border_9 grass_border_10 grass_border_11 grass_border_12 grass_border_13 grass_border_14
-		  grass_border_15 grass_border_16 grass_border_17 ] }
-	sprite dirt: { flags: [ tile_walkable ] tile_layer: 2 borders:
-		[ dirt_border_1 dirt_border_2 dirt_border_3 dirt_border_4 dirt_border_5 dirt_border_6 dirt_border_7
-		  dirt_border_8 dirt_border_9 dirt_border_10 dirt_border_11 dirt_border_12 dirt_border_13 dirt_border_14
-		  dirt_border_15 dirt_border_16 dirt_border_17 ] }	
 	sprite water_1: { flags: [ tile_fishable ] }
 	sprite water_2: { flags: [ tile_fishable ] }
 	sprite water_3: { flags: [ tile_fishable ] }
-	sprite forest: { flags: [ tile_block_line_of_sight ] tile_layer: 6 borders:
-		[ forest_border_1 forest_border_2 forest_border_3 forest_border_4 forest_border_5 forest_border_6 forest_border_7
-		  forest_border_8 forest_border_9 forest_border_10 forest_border_11 forest_border_12 forest_border_13 forest_border_14
-		  forest_border_15 forest_border_16 forest_border_17 ] }	
-	sprite rocks: { flags: [ tile_block_line_of_sight ] tile_layer: 5 borders:
-		[ rocks_border_1 rocks_border_2 rocks_border_3 rocks_border_4 rocks_border_5 rocks_border_6 rocks_border_7
-		  rocks_border_8 rocks_border_9 rocks_border_10 rocks_border_11 rocks_border_12 rocks_border_13 rocks_border_14
-		  rocks_border_15 rocks_border_16 rocks_border_17 ] }	
-	sprite rocks_dungeon_entrance: { flags: [ tile_walkable ] tile_layer: 5 borders:
+	sprite rocks_dungeon_entrance: { flags: [ tile_walkable tile_top ] borders:
 		[ rocks_border_1 rocks_border_2 rocks_border_3 rocks_border_4 rocks_border_5 rocks_border_6 rocks_border_7
 		  rocks_border_8 rocks_border_9 rocks_border_10 rocks_border_11 rocks_border_12 rocks_border_13 rocks_border_14
 		  rocks_border_15 rocks_border_16 rocks_border_17 ] }			  
-	sprite dungeon_wall_face: { flags: [ tile_block_line_of_sight ] }
-	sprite dungeon_wall_face_exit: { flags: [ tile_walkable ] }
-	sprite mud: { flags: [ tile_walkable ] tile_layer: 4 borders:
-		[ mud_border_1 mud_border_2 mud_border_3 mud_border_4 mud_border_5 mud_border_6 mud_border_7
-		  mud_border_8 mud_border_9 mud_border_10 mud_border_11 mud_border_12 mud_border_13 mud_border_14
-		  mud_border_15 mud_border_16 mud_border_17 ] }	
-	sprite sand: { flags: [ tile_walkable ] tile_layer: 1 borders:
-		[ sand_border_1 sand_border_2 sand_border_3 sand_border_4 sand_border_5 sand_border_6 sand_border_7
-		  sand_border_8 sand_border_9 sand_border_10 sand_border_11 sand_border_12 sand_border_13 sand_border_14
-		  sand_border_15 sand_border_16 sand_border_17 ] }	
-	sprite wood_wall: { flags: [ tile_block_line_of_sight ] tile_layer: 10 }
-	sprite wood_open_door: { flags: [ tile_walkable ] tile_layer: 10 }
-	sprite wood_floor: { flags: [ tile_walkable ] tile_layer: 10 }
-	sprite wood_solid_wall: { flags: [ tile_block_line_of_sight ] tile_layer: 10 }
-	sprite wood_solid_wall_face: { flags: [ tile_block_line_of_sight ] tile_layer: 10 }
-	sprite roof_nw: { tile_layer: 10 }
-	sprite roof_n: { tile_layer: 10 }
-	sprite roof_ne: { tile_layer: 10 }
-	sprite roof_w: { tile_layer: 10 }
-	sprite roof: { tile_layer: 10 }
-	sprite roof_e: { tile_layer: 10 }
-	sprite roof_sw: { tile_layer: 10 }
-	sprite roof_s: { tile_layer: 10 }
-	sprite roof_se: { tile_layer: 10 }
-	sprite pavement: { flags: [ tile_walkable ] tile_layer: 1 }
-	sprite forest_entrance: { flags: [ tile_walkable ] tile_layer: 10 }
-	sprite ext_dungeon_wall: { flags: [ tile_block_line_of_sight ] tile_layer: 4 }
-	sprite ext_dungeon_entrance: { flags: [ tile_walkable ] tile_layer: 10 }
+	sprite dungeon_wall_face: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite dungeon_wall_face_exit: { flags: [ tile_walkable tile_top ] }
+	sprite wood_wall: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_open_door: { flags: [ tile_walkable tile_top ] }
+	sprite wood_floor: { flags: [ tile_walkable tile_top ] }
+	sprite wood_solid_wall: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_solid_wall_face: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite roof_nw: { }
+	sprite roof_n: { }
+	sprite roof_ne: { }
+	sprite roof_w: { }
+	sprite roof: { }
+	sprite roof_e: { }
+	sprite roof_sw: { }
+	sprite roof_s: { }
+	sprite roof_se: { }
+	sprite pavement: { flags: [ tile_walkable ] }
+	sprite forest_entrance: { flags: [ tile_walkable tile_top  ] }
+	sprite ext_dungeon_wall: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite ext_dungeon_entrance: { flags: [ tile_walkable tile_top ] }
 
 	cursor: { position: [ 0 16 ] }
 	
+	sprite grass: { flags: [ tile_walkable ] borders: 
+		[ grass_border_1 grass_border_2 grass_border_3 grass_border_4 grass_border_5 grass_border_6 grass_border_7
+		  grass_border_8 grass_border_9 grass_border_10 grass_border_11 grass_border_12 grass_border_13 grass_border_14
+		  grass_border_15 grass_border_16 grass_border_17 ] }	
 	sprite grass_border_1: { }
 	sprite grass_border_2: { }
 	sprite grass_border_3: { }
@@ -78,13 +58,14 @@ sprites:
 	sprite grass_border_14: { }
 	sprite grass_border_15: { }
 	sprite grass_border_16: { }
-	
-	cursor: { position: [ 0 32 ] }
-
 	sprite grass_border_17: { }
 
-	cursor: { position: [ 0 48 ] }
-	
+	cursor: { position: [ 0 32 ] }
+
+	sprite dirt: { flags: [ tile_walkable ] borders:
+		[ dirt_border_1 dirt_border_2 dirt_border_3 dirt_border_4 dirt_border_5 dirt_border_6 dirt_border_7
+		  dirt_border_8 dirt_border_9 dirt_border_10 dirt_border_11 dirt_border_12 dirt_border_13 dirt_border_14
+		  dirt_border_15 dirt_border_16 dirt_border_17 ] }	
 	sprite dirt_border_1: { }
 	sprite dirt_border_2: { }
 	sprite dirt_border_3: { }
@@ -101,13 +82,14 @@ sprites:
 	sprite dirt_border_14: { }
 	sprite dirt_border_15: { }
 	sprite dirt_border_16: { }
-	
-	cursor: { position: [ 0 64 ] }
-
 	sprite dirt_border_17: { }
 
-	cursor: { position: [ 0 80 ] }
+	cursor: { position: [ 0 48 ] }
 	
+	sprite forest: { flags: [ tile_block_line_of_sight ]  borders:
+		[ forest_border_1 forest_border_2 forest_border_3 forest_border_4 forest_border_5 forest_border_6 forest_border_7
+		  forest_border_8 forest_border_9 forest_border_10 forest_border_11 forest_border_12 forest_border_13 forest_border_14
+		  forest_border_15 forest_border_16 forest_border_17 ] }	
 	sprite forest_border_1: { }
 	sprite forest_border_2: { }
 	sprite forest_border_3: { }
@@ -124,13 +106,14 @@ sprites:
 	sprite forest_border_14: { }
 	sprite forest_border_15: { }
 	sprite forest_border_16: { }
-	
-	cursor: { position: [ 0 96 ] }
-
 	sprite forest_border_17: { }
 
-	cursor: { position: [ 0 112 ] }
+	cursor: { position: [ 0 64 ] }
 	
+	sprite rocks: { flags: [ tile_block_line_of_sight ] borders:
+		[ rocks_border_1 rocks_border_2 rocks_border_3 rocks_border_4 rocks_border_5 rocks_border_6 rocks_border_7
+		  rocks_border_8 rocks_border_9 rocks_border_10 rocks_border_11 rocks_border_12 rocks_border_13 rocks_border_14
+		  rocks_border_15 rocks_border_16 rocks_border_17 ] }		
 	sprite rocks_border_1: { }
 	sprite rocks_border_2: { }
 	sprite rocks_border_3: { }
@@ -147,13 +130,14 @@ sprites:
 	sprite rocks_border_14: { }
 	sprite rocks_border_15: { }
 	sprite rocks_border_16: { }
-	
-	cursor: { position: [ 0 128 ] }
-
 	sprite rocks_border_17: { }
 
-	cursor: { position: [ 0 144 ] }
+	cursor: { position: [ 0 80 ] }
 	
+	sprite mud: { flags: [ tile_walkable ] borders:
+		[ mud_border_1 mud_border_2 mud_border_3 mud_border_4 mud_border_5 mud_border_6 mud_border_7
+		  mud_border_8 mud_border_9 mud_border_10 mud_border_11 mud_border_12 mud_border_13 mud_border_14
+		  mud_border_15 mud_border_16 mud_border_17 ] }		
 	sprite mud_border_1: { }
 	sprite mud_border_2: { }
 	sprite mud_border_3: { }
@@ -169,14 +153,15 @@ sprites:
 	sprite mud_border_13: { }
 	sprite mud_border_14: { }
 	sprite mud_border_15: { }
-	sprite mud_border_16: { }
-	
-	cursor: { position: [ 0 160 ] }
-
+	sprite mud_border_16: { }	
 	sprite mud_border_17: { }
 
-	cursor: { position: [ 0 176 ] }
+	cursor: { position: [ 0 96 ] }
 	
+	sprite sand: { flags: [ tile_walkable ] borders:
+		[ sand_border_1 sand_border_2 sand_border_3 sand_border_4 sand_border_5 sand_border_6 sand_border_7
+		  sand_border_8 sand_border_9 sand_border_10 sand_border_11 sand_border_12 sand_border_13 sand_border_14
+		  sand_border_15 sand_border_16 sand_border_17 ] }		
 	sprite sand_border_1: { }
 	sprite sand_border_2: { }
 	sprite sand_border_3: { }
@@ -192,10 +177,103 @@ sprites:
 	sprite sand_border_13: { }
 	sprite sand_border_14: { }
 	sprite sand_border_15: { }
-	sprite sand_border_16: { }
-	
-	cursor: { position: [ 0 192 ] }
-
+	sprite sand_border_16: { }	
 	sprite sand_border_17: { }
+
+	cursor: { position: [ 0 112 ] }
+	
+	sprite dark_grass: { flags: [ tile_walkable ] borders:
+		[ dark_grass_border_1 dark_grass_border_2 dark_grass_border_3 dark_grass_border_4 dark_grass_border_5 dark_grass_border_6 dark_grass_border_7
+		  dark_grass_border_8 dark_grass_border_9 dark_grass_border_10 dark_grass_border_11 dark_grass_border_12 dark_grass_border_13 dark_grass_border_14
+		  dark_grass_border_15 dark_grass_border_16 dark_grass_border_17 ] }		
+	sprite dark_grass_border_1: { }
+	sprite dark_grass_border_2: { }
+	sprite dark_grass_border_3: { }
+	sprite dark_grass_border_4: { }
+	sprite dark_grass_border_5: { }
+	sprite dark_grass_border_6: { }
+	sprite dark_grass_border_7: { }
+	sprite dark_grass_border_8: { }
+	sprite dark_grass_border_9: { }
+	sprite dark_grass_border_10: { }
+	sprite dark_grass_border_11: { }
+	sprite dark_grass_border_12: { }
+	sprite dark_grass_border_13: { }
+	sprite dark_grass_border_14: { }
+	sprite dark_grass_border_15: { }
+	sprite dark_grass_border_16: { }	
+	sprite dark_grass_border_17: { }
+	
+	cursor: { position: [ 0 128 ] }
+	
+	sprite snow: { flags: [ tile_walkable ] borders:
+		[ snow_border_1 snow_border_2 snow_border_3 snow_border_4 snow_border_5 snow_border_6 snow_border_7
+		  snow_border_8 snow_border_9 snow_border_10 snow_border_11 snow_border_12 snow_border_13 snow_border_14
+		  snow_border_15 snow_border_16 snow_border_17 ] }		
+	sprite snow_border_1: { }
+	sprite snow_border_2: { }
+	sprite snow_border_3: { }
+	sprite snow_border_4: { }
+	sprite snow_border_5: { }
+	sprite snow_border_6: { }
+	sprite snow_border_7: { }
+	sprite snow_border_8: { }
+	sprite snow_border_9: { }
+	sprite snow_border_10: { }
+	sprite snow_border_11: { }
+	sprite snow_border_12: { }
+	sprite snow_border_13: { }
+	sprite snow_border_14: { }
+	sprite snow_border_15: { }
+	sprite snow_border_16: { }	
+	sprite snow_border_17: { }	
+	
+	cursor: { position: [ 0 144 ] }
+	
+	sprite ice: { flags: [ tile_walkable ] borders:
+		[ ice_border_1 ice_border_2 ice_border_3 ice_border_4 ice_border_5 ice_border_6 ice_border_7
+		  ice_border_8 ice_border_9 ice_border_10 ice_border_11 ice_border_12 ice_border_13 ice_border_14
+		  ice_border_15 ice_border_16 ice_border_17 ] }		
+	sprite ice_border_1: { }
+	sprite ice_border_2: { }
+	sprite ice_border_3: { }
+	sprite ice_border_4: { }
+	sprite ice_border_5: { }
+	sprite ice_border_6: { }
+	sprite ice_border_7: { }
+	sprite ice_border_8: { }
+	sprite ice_border_9: { }
+	sprite ice_border_10: { }
+	sprite ice_border_11: { }
+	sprite ice_border_12: { }
+	sprite ice_border_13: { }
+	sprite ice_border_14: { }
+	sprite ice_border_15: { }
+	sprite ice_border_16: { }	
+	sprite ice_border_17: { }	
+	
+	cursor: { position: [ 0 160 ] }
+	
+	sprite snow_rocks: { flags: [ tile_block_line_of_sight ] borders:
+		[ snow_rocks_border_1 snow_rocks_border_2 snow_rocks_border_3 snow_rocks_border_4 snow_rocks_border_5 snow_rocks_border_6 snow_rocks_border_7
+		  snow_rocks_border_8 snow_rocks_border_9 snow_rocks_border_10 snow_rocks_border_11 snow_rocks_border_12 snow_rocks_border_13 snow_rocks_border_14
+		  snow_rocks_border_15 snow_rocks_border_16 snow_rocks_border_17 ] }		
+	sprite snow_rocks_border_1: { }
+	sprite snow_rocks_border_2: { }
+	sprite snow_rocks_border_3: { }
+	sprite snow_rocks_border_4: { }
+	sprite snow_rocks_border_5: { }
+	sprite snow_rocks_border_6: { }
+	sprite snow_rocks_border_7: { }
+	sprite snow_rocks_border_8: { }
+	sprite snow_rocks_border_9: { }
+	sprite snow_rocks_border_10: { }
+	sprite snow_rocks_border_11: { }
+	sprite snow_rocks_border_12: { }
+	sprite snow_rocks_border_13: { }
+	sprite snow_rocks_border_14: { }
+	sprite snow_rocks_border_15: { }
+	sprite snow_rocks_border_16: { }
+	sprite snow_rocks_border_17: { }
 
 }

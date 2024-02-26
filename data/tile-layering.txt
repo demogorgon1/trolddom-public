@@ -1,0 +1,13 @@
+tile_layering:
+[
+	ice
+	mud
+	sand
+	dirt
+	grass
+	dark_grass
+	snow
+	forest
+	rocks
+	snow_rocks	
+]

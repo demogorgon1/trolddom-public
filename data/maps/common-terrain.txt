@@ -1,0 +1,70 @@
+terrain coast:
+{
+	tile<snow>: { threshold<temperature>: { less_than: 32 } }
+	tile<dirt>: { threshold<temperature>: { less_than: 64 } }
+	tile<sand>: { }
+	
+	walkable: true
+	
+	debug_color: [ 255 255 0 ]
+}
+
+terrain ocean:
+{
+	tile<water_1>: { }
+
+	mutation_chance: 5
+	mutation<1>: flat
+	
+	border<coast>: [ flat coast ]
+	
+	connect_cost: 32
+	connect_conversion: coast
+	
+	debug_color: [ 0 0 255 ]
+}
+
+terrain flat:
+{
+	tile<snow>: { threshold<temperature>: { less_than: 32 } }
+	tile<dark_grass>: { threshold<humidity>: { more_than: 112 } }	
+	tile<mud>: { threshold<temperature>: { more_than: 64 } threshold<humidity>: { more_than: 112 } }  
+	tile<grass>: { threshold<humidity>: { more_than: 20 } }	
+	tile<dirt>: { }
+	
+	mutation_chance: 35
+	mutation<1>: trees
+	
+	walkable: true
+		
+	debug_color: [ 0 255 0 ]
+}
+
+terrain rocks:
+{
+	tile<snow_rocks>: { threshold<temperature>: { less_than: 32 } }
+	tile<rocks>: { }
+
+	mutation_chance: 10
+	mutation<1>: flat
+
+	connect_cost: 4
+	connect_conversion: flat
+				
+	debug_color: [ 128 128 128 ]
+}
+
+terrain trees:
+{
+	tile<forest>: { }
+
+	mutation_chance: 10
+	mutation<1>: flat
+	
+	grows_into<80>: flat
+	
+	connect_cost: 1
+	connect_conversion: flat
+	
+	debug_color: [ 0 128 0 ]	
+}

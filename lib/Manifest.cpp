@@ -4,6 +4,7 @@
 #include <tpublic/Data/Achievement.h>
 #include <tpublic/Data/AchievementCategory.h>
 #include <tpublic/Data/Aura.h>
+#include <tpublic/Data/Terrain.h>
 #include <tpublic/Data/Class.h>
 #include <tpublic/Data/Cooldown.h>
 #include <tpublic/Data/CreatureType.h>
@@ -24,6 +25,7 @@
 #include <tpublic/Data/MapSegment.h>
 #include <tpublic/Data/MapSegmentConnector.h>
 #include <tpublic/Data/MapTrigger.h>
+#include <tpublic/Data/Noise.h>
 #include <tpublic/Data/NPCBehaviorState.h>
 #include <tpublic/Data/Objective.h>
 #include <tpublic/Data/Pantheon.h>
@@ -50,6 +52,7 @@ namespace tpublic
 		RegisterDataContainer<Data::Achievement>();
 		RegisterDataContainer<Data::AchievementCategory>();
 		RegisterDataContainer<Data::Aura>();
+		RegisterDataContainer<Data::Terrain>();
 		RegisterDataContainer<Data::Class>();
 		RegisterDataContainer<Data::Cooldown>();
 		RegisterDataContainer<Data::CreatureType>();
@@ -70,6 +73,7 @@ namespace tpublic
 		RegisterDataContainer<Data::MapSegment>();
 		RegisterDataContainer<Data::MapSegmentConnector>();
 		RegisterDataContainer<Data::MapTrigger>();		
+		RegisterDataContainer<Data::Noise>();
 		RegisterDataContainer<Data::NPCBehaviorState>();
 		RegisterDataContainer<Data::Objective>();
 		RegisterDataContainer<Data::Pantheon>();
@@ -121,6 +125,7 @@ namespace tpublic
 		m_wordList.ToStream(aStream);
 		m_worshipMetrics.ToStream(aStream);
 		m_defaultSoundEffects.ToStream(aStream);
+		m_tileLayering.ToStream(aStream);
 	}
 
 	bool
@@ -153,6 +158,8 @@ namespace tpublic
 		if (!m_worshipMetrics.FromStream(aStream))
 			return false;
 		if (!m_defaultSoundEffects.FromStream(aStream))
+			return false;
+		if (!m_tileLayering.FromStream(aStream))
 			return false;
 
 		return true;

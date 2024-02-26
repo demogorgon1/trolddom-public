@@ -36,14 +36,10 @@ namespace tpublic
 		, m_x(0)
 		, m_y(0)
 		, m_tileMap(NULL)
-		, m_defaultTileSpriteId(0)
-		, m_defaultExitPortalId(0)
 		, m_walkableBits(NULL)
 		, m_blockLineOfSightBits(NULL)
 		, m_resetMode(MapType::RESET_MODE_MANUAL)
 		, m_type(MapType::ID_OPEN_WORLD)
-		, m_level(0)
-		, m_defaultFishingLootTableId(0)
 	{
 
 	}
@@ -57,56 +53,31 @@ namespace tpublic
 		, m_x(0)
 		, m_y(0)
 		, m_tileMap(NULL)
-		, m_defaultTileSpriteId(0)
-		, m_defaultPlayerSpawnId(0)
-		, m_viewAttenuation(0)
-		, m_level(0)
-		, m_viewAttenuationBias(0)
-		, m_viewHiddenVisibility(0)
 		, m_walkableBits(NULL)
 		, m_blockLineOfSightBits(NULL)
-		, m_hasOverviewMap(false)
-		, m_defaultFishingLootTableId(0)
 	{
 		aSource->GetObject()->ForEachChild([&](
 			const SourceNode* aNode)
 		{
-			if(aNode->m_name == "default_tile")
-				m_defaultTileSpriteId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aNode->GetIdentifier());
-			else if (aNode->m_name == "default_player_spawn")
-				m_defaultPlayerSpawnId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_PLAYER_SPAWN, aNode->GetIdentifier());
-			else if (aNode->m_name == "default_exit_portal")
-				m_defaultExitPortalId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_PORTAL, aNode->GetIdentifier());
-			else if (aNode->m_name == "default_fishing_loot_table")
-				m_defaultFishingLootTableId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_LOOT_TABLE, aNode->GetIdentifier());
-			else if(aNode->m_name == "image_output")
-				m_imageOutputPath = aNode->m_path + "/" + aNode->m_value;
-			else if(aNode->m_name == "layers")
-				_InitLayers(aNode->GetArray());
-			else if(aNode->m_name == "type")
-				m_type = MapType::StringToId(aNode->GetIdentifier());
-			else if (aNode->m_name == "reset")
-				m_resetMode = MapType::StringToResetMode(aNode->GetIdentifier());
-			else if(aNode->m_name == "string")
-				m_displayName = aNode->GetString();
-			else if (aNode->m_name == "view_attenuation")
-				m_viewAttenuation = aNode->GetUInt32();
-			else if (aNode->m_name == "view_attenuation_bias")
-				m_viewAttenuationBias = aNode->GetUInt32();
-			else if (aNode->m_name == "view_hidden_visibility")
-				m_viewHiddenVisibility = aNode->GetUInt32();
-			else if(aNode->m_name == "script")
-				m_scripts.push_back(std::make_unique<Script>(aNode));
-			else if(aNode->m_tag == "generator")
-				m_generator = std::make_unique<Generator>(aNode);
-			else if(aNode->m_name == "seed")
-				m_seed.FromSource(aNode);
-			else if (aNode->m_name == "level")
-				m_level = aNode->GetUInt32();
-			else if(aNode->m_name == "has_overview_map")
-				m_hasOverviewMap = aNode->GetBool();
-			else
-				TP_VERIFY(false, aNode->m_debugInfo, "'%s' is not a valid item.", aNode->m_name.c_str());
+			if(!m_mapInfo.FromSourceItem(aNode))
+			{
+				if(aNode->m_name == "image_output")
+					m_imageOutputPath = aNode->m_path + "/" + aNode->m_value;
+				else if(aNode->m_name == "layers")
+					_InitLayers(aNode->GetArray());
+				else if(aNode->m_name == "type")
+					m_type = MapType::StringToId(aNode->GetIdentifier());
+				else if (aNode->m_name == "reset")
+					m_resetMode = MapType::StringToResetMode(aNode->GetIdentifier());
+				else if(aNode->m_name == "script")
+					m_scripts.push_back(std::make_unique<Script>(aNode));
+				else if(aNode->m_tag == "generator")
+					m_generator = std::make_unique<Generator>(aNode);
+				else if(aNode->m_name == "seed")
+					m_seed.FromSource(aNode);
+				else
+					TP_VERIFY(false, aNode->m_debugInfo, "'%s' is not a valid item.", aNode->m_name.c_str());
+			}
 		});
 	}
 
@@ -132,7 +103,7 @@ namespace tpublic
 			assert(m_tileMap == NULL);
 			m_tileMap = new uint32_t[m_width * m_height];
 			for(int32_t i = 0, count = m_width * m_height; i < count; i++)
-				m_tileMap[i] = m_defaultTileSpriteId;		
+				m_tileMap[i] = m_mapInfo.m_defaultTileSpriteId;
 
 			// Allocate space for temporary level and zone maps
 			std::vector<uint32_t> levelMap;
@@ -267,15 +238,9 @@ namespace tpublic
 	MapData::ToStream(
 		IWriter*				aStream) const
 	{
+		m_mapInfo.ToStream(aStream);
 		aStream->WritePOD(m_type);
 		aStream->WritePOD(m_resetMode);
-		aStream->WriteString(m_displayName);
-		aStream->WriteUInt(m_defaultTileSpriteId);
-		aStream->WriteUInt(m_defaultPlayerSpawnId);
-		aStream->WriteUInt(m_defaultExitPortalId);
-		aStream->WriteUInt(m_viewAttenuation);
-		aStream->WriteUInt(m_viewAttenuationBias);
-		aStream->WriteUInt(m_viewHiddenVisibility);
 		aStream->WriteInt(m_x);
 		aStream->WriteInt(m_y);
 		aStream->WriteInt(m_width);
@@ -292,33 +257,18 @@ namespace tpublic
 		aStream->WriteOptionalObjectPointer(m_generator);
 		m_seed.ToStream(aStream);
 		aStream->WriteOptionalObjectPointer(m_worldInfoMap);
-		aStream->WriteUInt(m_level);
-		aStream->WriteBool(m_hasOverviewMap);
 		aStream->WriteOptionalObjectPointer(m_mapCovers);
-		aStream->WriteUInt(m_defaultFishingLootTableId);
 	}
 
 	bool	
 	MapData::FromStream(
 		IReader*				aStream)
 	{
+		if(!m_mapInfo.FromStream(aStream))
+			return false;
 		if (!aStream->ReadPOD(m_type))
 			return false;
 		if (!aStream->ReadPOD(m_resetMode))
-			return false;
-		if(!aStream->ReadString(m_displayName))
-			return false;
-		if (!aStream->ReadUInt(m_defaultTileSpriteId))
-			return false;
-		if (!aStream->ReadUInt(m_defaultPlayerSpawnId))
-			return false;
-		if (!aStream->ReadUInt(m_defaultExitPortalId))
-			return false;
-		if (!aStream->ReadUInt(m_viewAttenuation))
-			return false;
-		if (!aStream->ReadUInt(m_viewAttenuationBias))
-			return false;
-		if (!aStream->ReadUInt(m_viewHiddenVisibility))
 			return false;
 		if (!aStream->ReadInt(m_x))
 			return false;
@@ -359,13 +309,7 @@ namespace tpublic
 			return false;
 		if (!aStream->ReadOptionalObjectPointer(m_worldInfoMap))
 			return false;
-		if(!aStream->ReadUInt(m_level))	
-			return false;
-		if (!aStream->ReadBool(m_hasOverviewMap))
-			return false;
 		if (!aStream->ReadOptionalObjectPointer(m_mapCovers))
-			return false;
-		if (!aStream->ReadUInt(m_defaultFishingLootTableId))
 			return false;
 		return true;
 	}
@@ -427,15 +371,7 @@ namespace tpublic
 		// FIXME: wonky bonky, need a slam with the refactoring hammer
 		m_type = aMapData->m_type;
 		m_resetMode = aMapData->m_resetMode;
-		m_displayName = aMapData->m_displayName;
-		m_defaultTileSpriteId = aMapData->m_defaultTileSpriteId;
-		m_defaultPlayerSpawnId = aMapData->m_defaultPlayerSpawnId;
-		m_defaultExitPortalId = aMapData->m_defaultExitPortalId;
-		m_viewAttenuation = aMapData->m_viewAttenuation;
-		m_viewAttenuationBias = aMapData->m_viewAttenuationBias;
-		m_viewHiddenVisibility = aMapData->m_viewHiddenVisibility;
-		m_level = aMapData->m_level;
-		m_hasOverviewMap = aMapData->m_hasOverviewMap;
+		m_mapInfo = aMapData->m_mapInfo;
 
 		m_entitySpawns = aMapData->m_entitySpawns;
 		m_playerSpawns = aMapData->m_playerSpawns;
@@ -485,6 +421,26 @@ namespace tpublic
 			return m_tileMap[p.m_x + p.m_y * m_width];
 
 		return 0;
+	}
+
+	void		
+	MapData::WriteDebugTileMapPNG(
+		const Manifest*			aManifest,
+		const char*				aPath) const
+	{	
+		Image image;
+		image.Allocate((uint32_t)m_width, (uint32_t)m_height);
+
+		Image::RGBA* out = image.GetData();
+
+		for(int32_t i = 0; i < m_width * m_height; i++)
+		{
+			const Data::Sprite* sprite = aManifest->GetById<Data::Sprite>(m_tileMap[i]);
+			*out = sprite->m_info.m_averageColor;
+			out++;
+		}
+
+		image.SavePNG(aPath);
 	}
 
 	//--------------------------------------------------------------------

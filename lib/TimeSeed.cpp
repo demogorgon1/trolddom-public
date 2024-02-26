@@ -189,6 +189,10 @@ namespace tpublic
 
 		uint64_t hash = Hash::Splitmix_64(m_fromTimeStamp) ^ Hash::Splitmix_64(m_toTimeStamp);
 		m_seed = (uint32_t)((0xFFFFFFFFULL & hash) ^ (hash > 32ULL));
+
+		// Handle the very unlikely situation we get a seed of 0. Can't have that as it means "no seed".
+		if(m_seed == 0)
+			m_seed = 1;
 	}
 
 	bool		

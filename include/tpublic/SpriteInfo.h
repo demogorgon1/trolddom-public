@@ -1,6 +1,7 @@
 #pragma once
 
 #include "DataErrorHandling.h"
+#include "Image.h"
 #include "Vec2.h"
 
 namespace tpublic
@@ -14,9 +15,10 @@ namespace tpublic
 			FLAG_TILE_WALKABLE				= 0x01,
 			FLAG_TILE_BLOCK_LINE_OF_SIGHT	= 0x02,
 			FLAG_TILE_FISHABLE				= 0x04,
-			FLAG_STANDALONE					= 0x08,
-			FLAG_CENTERED					= 0x10,
-			FLAG_DOUBLED					= 0x20
+			FLAG_TILE_TOP					= 0x08,
+			FLAG_STANDALONE					= 0x10,
+			FLAG_CENTERED					= 0x20,
+			FLAG_DOUBLED					= 0x40
 		};
 
 		struct NamedAnchor
@@ -59,6 +61,8 @@ namespace tpublic
 				return FLAG_TILE_BLOCK_LINE_OF_SIGHT;
 			if (strcmp(aString, "tile_fishable") == 0)
 				return FLAG_TILE_FISHABLE;
+			if (strcmp(aString, "tile_top") == 0)
+				return FLAG_TILE_TOP;
 			if (strcmp(aString, "standalone") == 0)
 				return FLAG_STANDALONE;
 			if (strcmp(aString, "centered") == 0)
@@ -77,6 +81,7 @@ namespace tpublic
 			aStream->WriteUInts(m_borders);
 			m_origin.ToStream(aStream);
 			aStream->WriteObjects(m_namedAnchors);
+			aStream->WritePOD(m_averageColor);
 		}
 
 		bool
@@ -92,6 +97,8 @@ namespace tpublic
 			if(!m_origin.FromStream(aStream))
 				return false;
 			if(!aStream->ReadObjects(m_namedAnchors))
+				return false;
+			if(!aStream->ReadPOD(m_averageColor))
 				return false;
 			return true;
 		}
@@ -116,6 +123,7 @@ namespace tpublic
 		std::vector<uint32_t>		m_borders;
 		Vec2						m_origin;
 		std::vector<NamedAnchor>	m_namedAnchors;
+		Image::RGBA					m_averageColor;
 	};
 
 }

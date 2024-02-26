@@ -3,11 +3,13 @@
 #include <atomic>
 #include <filesystem>
 #include <functional>
+#include <map>
 #include <optional>
 #include <random>
 #include <set>
 #include <thread>
 #include <unordered_set>
+#include <vector>
 
 #include <assert.h>
 #include <inttypes.h>
@@ -71,7 +73,7 @@ namespace tpublic::Base
 		return hash;
 	}
 
-	// Can't use std::min and std::max because Windows farts up the global namespace with macros
+	// Can't use std::min and std::max because Windows farts up the global namespace with min() and max() macros
 
 	template <typename _T>
 	inline _T

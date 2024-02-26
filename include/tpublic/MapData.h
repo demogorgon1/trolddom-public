@@ -6,6 +6,7 @@
 #include "MapCovers.h"
 #include "MapGeneratorBase.h"
 #include "MapGeneratorFactory.h"
+#include "MapInfo.h"
 #include "MapType.h"
 #include "Parser.h"
 
@@ -23,6 +24,7 @@ namespace tpublic
 		{
 			INVALID_SEED_TYPE,
 
+			SEED_TYPE_TIME_SEED,	// Based on TimeSeed object
 			SEED_TYPE_RANDOM,		// New random seed every time
 			SEED_TYPE_CONSTANT,		// Always same seed (m_value)
 			SEED_TYPE_HOURLY,		// Based on server date (year-month-day-hour)
@@ -46,7 +48,9 @@ namespace tpublic
 				else
 				{
 					std::string_view seedTypeString(aSource->GetIdentifier());
-					if (seedTypeString == "random")
+					if (seedTypeString == "time_seed")
+						m_type = SEED_TYPE_TIME_SEED;
+					else if (seedTypeString == "random")
 						m_type = SEED_TYPE_RANDOM;
 					else if (seedTypeString == "hourly")
 						m_type = SEED_TYPE_HOURLY;
@@ -68,7 +72,6 @@ namespace tpublic
 				IWriter*					aStream) const
 			{
 				aStream->WritePOD(m_type);
-				aStream->WriteUInt(m_xor);
 
 				if(m_type == SEED_TYPE_CONSTANT)
 					aStream->WriteUInt(m_constant);
@@ -80,8 +83,6 @@ namespace tpublic
 			{
 				if (!aStream->ReadPOD(m_type))
 					return false;
-				if (!aStream->ReadUInt(m_xor))
-					return false;
 
 				if(m_type == SEED_TYPE_CONSTANT)
 				{
@@ -91,10 +92,23 @@ namespace tpublic
 				return true;
 			}
 
+			bool
+			IsOpenWorldValid() const
+			{
+				switch(m_type)
+				{
+				case SEED_TYPE_CONSTANT:
+				case SEED_TYPE_TIME_SEED:
+					return true;
+
+				default:
+					return false;
+				}
+			}
+
 			// Public data
 			SeedType			m_type = SEED_TYPE_CONSTANT;
-			uint32_t			m_constant = 1;
-			uint32_t			m_xor = 0x12345678;
+			uint32_t			m_constant = 0;
 		};
 
 		struct EntitySpawn
@@ -459,17 +473,14 @@ namespace tpublic
 						const MapData*			aMapData);
 		uint32_t	GetTile(
 						const Vec2&				aPosition) const;
+		void		WriteDebugTileMapPNG(
+						const Manifest*			aManifest,
+						const char*				aPath) const;
 
 		// Public data
 		MapType::Id									m_type;
 		MapType::ResetMode							m_resetMode;
-		std::string									m_displayName;
-		uint32_t									m_defaultTileSpriteId;
-		uint32_t									m_defaultPlayerSpawnId;
-		uint32_t									m_defaultExitPortalId;
-		uint32_t									m_viewAttenuation;
-		uint32_t									m_viewAttenuationBias;
-		uint32_t									m_viewHiddenVisibility;
+		MapInfo										m_mapInfo;
 		std::string									m_imageOutputPath;
 		int32_t										m_x;
 		int32_t										m_y;
@@ -486,10 +497,7 @@ namespace tpublic
 		std::unique_ptr<MapPathData>				m_mapPathData;
 		std::unique_ptr<Generator>					m_generator;
 		std::unique_ptr<WorldInfoMap>				m_worldInfoMap;
-		uint32_t									m_level;
-		bool										m_hasOverviewMap;
 		std::unique_ptr<MapCovers>					m_mapCovers;
-		uint32_t									m_defaultFishingLootTableId;
 
 		struct SourceLayer
 		{

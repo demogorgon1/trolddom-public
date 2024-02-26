@@ -100,14 +100,14 @@ namespace tpublic::DirectEffects
 			if(map->m_worldInfoMap)
 				level = map->m_worldInfoMap->Get(fishingPosition.value()).m_level;
 			else 
-				level = map->m_level;
+				level = map->m_mapInfo.m_level;
 
 			if(level == 0)
 				level = 1;
 
 			if(lootTableId == 0)
 			{
-				lootTableId = map->m_defaultFishingLootTableId;
+				lootTableId = map->m_mapInfo.m_defaultFishingLootTableId;
 			}
 
 			if(lootTableId != 0)
@@ -131,7 +131,7 @@ namespace tpublic::DirectEffects
 						splashPosition->m_position = fishingPosition.value();
 
 						tpublic::Components::Openable* splashOpenable = splashEntity->GetComponent<tpublic::Components::Openable>();
-						splashOpenable->m_lootTableId = map->m_defaultFishingLootTableId;
+						splashOpenable->m_lootTableId = map->m_mapInfo.m_defaultFishingLootTableId;
 						splashOpenable->m_requiredProfessionSkill = skillRequired;
 						splashOpenable->m_level = level;
 					}

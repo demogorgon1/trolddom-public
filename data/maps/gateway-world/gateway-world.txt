@@ -67,29 +67,129 @@ map_palette .stuff:
 	player_spawn .player_spawn: [ 0 0 255 ]
 }
 
+noise .rocks_overlay:
+{
+	divide<[0 255]>:
+	{
+		add:
+		{
+			divide<[0 10000]>:
+			{
+				perlin: { scale: 8000 }
+				constant: 4
+			}
+		
+			divide:
+			{
+				perlin: { scale: 4000 }
+				constant: 4
+			}
+			
+			perlin: { scale: 2000 }
+			perlin: { scale: 1000 }
+			perlin: { scale: 500 }
+			
+			constant: 5000			
+		}
+		
+		constant: 256
+	}
+}
+
+noise .humidity:
+{
+	divide<[0 255]>:
+	{
+		add:
+		{
+			perlin: { scale: 6000 }
+			perlin: { scale: 2000 }
+			perlin: { scale: 500 }
+			constant: 32000			
+		}
+		
+		constant: 256
+	}	
+}
+
+noise .temperature:
+{
+	divide<[0 255]>:
+	{
+		add:
+		{
+			perlin: { scale: 100 }
+			perlin: { scale: 50 }
+			
+			constant: 32000	
+		}
+		
+		constant: 256
+	}	
+}
+
 map gateway_world:
 {
 	string: "Gateway World"
 	type: open_world
-	default_tile: water_1
 	default_player_spawn: .player_spawn
+	has_overview_map: false
+	level: 10
+	seed: time_seed
+
+	default_tile: water_1
 	default_fishing_loot_table: fish
 	view_attenuation: 0
 	view_attenuation_bias: 0
 	view_hidden_visibility: 35	
-	has_overview_map: false
 
-	layers:
-	[
+	generator world:
+	{
+		terrain_palette_entry<ocean>: "."
+		terrain_palette_entry<flat>: "X"
+	
+		execute all:
 		{
-			palettes:	[ .tiles ]
-			source:		"gateway-world-tiles.png"
-		}
+			execute one_of:
+			{
+				execute paletted_map<1>:
+				[
+					"...."
+					".XX."
+					".XX."
+					"...."
+				]
+			}
+			
+			execute double: { passes: 5 }
+			execute median_filter: 1
+			execute grow: trees
+			execute despeckle: {}
+			execute double: { passes: 1 no_mutations: true }
+			execute add_borders: ocean
+			execute add_borders: ocean
+			
+			execute overlay: 
+			{
+				noise: .rocks_overlay
+				terrain<rocks>: { above: 128 exclude: [ ocean ] }
+			}
 
-		{
-			palettes:	[ .stuff ]
-			source:		"gateway-world-stuff.png"
-		}
-	]
+			execute terrain_modifier_map:
+			{
+				terrain_modifier: humidity
+				noise: .humidity
+			}		
+
+			execute terrain_modifier_map:
+			{
+				terrain_modifier: temperature
+				noise: .temperature
+			}		
+
+			execute debug_terrain_map: "test.png"
+			
+		}		
+	}
 }
  

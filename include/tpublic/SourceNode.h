@@ -215,6 +215,13 @@ namespace tpublic
 			return strtof(m_value.c_str(), NULL);
 		}
 
+		char
+		GetCharacter() const
+		{
+			TP_VERIFY(m_type == TYPE_STRING && m_value.length() == 1, m_debugInfo, "Not a character.");
+			return m_value[0];
+		}
+
 		bool
 		GetBool() const
 		{

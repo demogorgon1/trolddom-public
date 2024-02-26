@@ -48,6 +48,8 @@ namespace tpublic
 			ID_DEITY,
 			ID_COOLDOWN,
 			ID_SOUND,
+			ID_TERRAIN,
+			ID_NOISE,
 
 			NUM_IDS
 		};
@@ -93,7 +95,9 @@ namespace tpublic
 			"pantheon",
 			"deity",
 			"cooldown",
-			"sound"
+			"sound",
+			"terrain",
+			"noise"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

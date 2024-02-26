@@ -404,4 +404,30 @@ namespace tpublic
 		m_height = 0;
 	}
 
+	Image::RGBA		
+	Image::GetAverageColor() const
+	{
+		if (m_data == NULL || m_width == 0 || m_height == 0)
+			return RGBA();
+			
+		uint64_t r = 0;
+		uint64_t g = 0;
+		uint64_t b = 0;
+		uint64_t a = 0;
+
+		uint32_t count = m_width * m_height;
+		const RGBA* p = m_data;
+
+		for (uint32_t i = 0; i < count; i++)
+		{		
+			r += (uint64_t)p->m_r;
+			g += (uint64_t)p->m_g;
+			b += (uint64_t)p->m_b;
+			a += (uint64_t)p->m_a;
+			p++;
+		}
+
+		return RGBA((uint8_t)(r / (uint64_t)count), (uint8_t)(g / (uint64_t)count), (uint8_t)(b / (uint64_t)count), (uint8_t)(a / (uint64_t)count));
+	}
+
 }

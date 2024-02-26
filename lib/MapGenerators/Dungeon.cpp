@@ -423,7 +423,7 @@ namespace tpublic::MapGenerators
 				for (int32_t x = 0; x < mapData->m_width; x++)
 				{
 					if (*p == 0)
-						*p = mapData->m_defaultTileSpriteId;
+						*p = mapData->m_mapInfo.m_defaultTileSpriteId;
 
 					p++;
 				}
