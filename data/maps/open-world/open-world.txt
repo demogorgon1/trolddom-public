@@ -2,44 +2,6 @@ map_player_spawn dungeon_1_exit:
 {
 }
 
-map_entity_spawn .spirit_stone:
-{	
-	entity spirit_stone: { init_state: default } 
-}
-
-map_entity_spawn .mailbox:
-{	
-	entity mailbox: { init_state: default } 
-}
-
-map_entity_spawn .holy_altar:
-{	
-	spawn_timer: { despawn_required: true min_delay: 600 cooldown_range_min: 1200 cooldown_range_max: 4800 }
-	entity holy_altar: { init_state: default } 
-}
-
-map_entity_spawn .underworld_shrine:
-{	
-	spawn_timer: { despawn_required: true min_delay: 600 cooldown_range_min: 1200 cooldown_range_max: 4800 }
-	entity underworld_shrine: { init_state: default } 
-}
-
-map_entity_spawn .mining:
-{	
-	spawn_timer: { despawn_required: true min_delay: 600 cooldown_range_min: 1200 cooldown_range_max: 4800 }
-
-	entity mining_copper_vein: { level: [ 1 6 ] weight: 1 init_state: default } 
-	entity mining_iron_vein: { level: [ 4 10 ] weight: 1 init_state: default } 
-}
-
-map_entity_spawn .herbalism:
-{	
-	spawn_timer: { despawn_required: true min_delay: 600 cooldown_range_min: 1200 cooldown_range_max: 4800 }
-
-	entity herbalism_dewleaf: { level: [ 1 6 ] weight: 1 init_state: default }
-	entity herbalism_mistflower: { level: [ 4 10 ] weight: 1 init_state: default } 
-}
-
 map_entity_spawn .sylas:
 {
 	entity .sylas: { weight: 1 }
@@ -173,9 +135,14 @@ map_palette .tiles:
 
 map_palette .stuff:
 {
+	entity_spawn mining: [ 200 200 200 ]
+	entity_spawn herbalism: [ 0 255 0 ]
+	entity_spawn spirit_stone: [ 0 0 0 ]	
+	entity_spawn mailbox: [ 0 20 60 ]	
+	entity_spawn holy_altar: [ 0 0 40 ]	
+	entity_spawn underworld_shrine: [ 0 0 80 ]	
+
 	entity_spawn .wildlife: [ 255 255 0 ]
-	entity_spawn .mining: [ 200 200 200 ]
-	entity_spawn .herbalism: [ 0 255 0 ]
 	entity_spawn .sylas: [ 255 189 0 ]
 	entity_spawn .rob_beaurichard: [ 12 189 87 ]
 	entity_spawn .elysia: [ 240 189 0 ]
@@ -185,10 +152,6 @@ map_palette .stuff:
 	entity_spawn .bidmaster_bob: [ 20 189 0 ]
 	entity_spawn .fisherman: [ 0 2 255 ]
 	entity_spawn .junjun: [ 6 55 255 ]
-	entity_spawn .spirit_stone: [ 0 0 0 ]	
-	entity_spawn .mailbox: [ 0 20 60 ]	
-	entity_spawn .holy_altar: [ 0 0 40 ]	
-	entity_spawn .underworld_shrine: [ 0 0 80 ]	
 	entity_spawn .gateway: [ 54 23 85 ]	
 	entity_spawn .spawn_of_umbracoth: [ 32 0 0 ]	
 	player_spawn .player_spawn: [ 0 0 255 ]

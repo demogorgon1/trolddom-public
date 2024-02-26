@@ -1,0 +1,37 @@
+map_entity_spawn spirit_stone:
+{	
+	entity spirit_stone: { init_state: default } 
+}
+
+map_entity_spawn mailbox:
+{	
+	entity mailbox: { init_state: default } 
+}
+
+map_entity_spawn holy_altar:
+{	
+	spawn_timer: { despawn_required: true min_delay: 600 cooldown_range_min: 1200 cooldown_range_max: 4800 }
+	entity holy_altar: { init_state: default } 
+}
+
+map_entity_spawn underworld_shrine:
+{	
+	spawn_timer: { despawn_required: true min_delay: 600 cooldown_range_min: 1200 cooldown_range_max: 4800 }
+	entity underworld_shrine: { init_state: default } 
+}
+
+map_entity_spawn mining:
+{	
+	spawn_timer: { despawn_required: true min_delay: 600 cooldown_range_min: 1200 cooldown_range_max: 4800 }
+
+	entity mining_copper_vein: { level: [ 1 6 ] weight: 1 init_state: default } 
+	entity mining_iron_vein: { level: [ 4 10 ] weight: 1 init_state: default } 
+}
+
+map_entity_spawn herbalism:
+{	
+	spawn_timer: { despawn_required: true min_delay: 600 cooldown_range_min: 1200 cooldown_range_max: 4800 }
+
+	entity herbalism_dewleaf: { level: [ 1 6 ] weight: 1 init_state: default }
+	entity herbalism_mistflower: { level: [ 4 10 ] weight: 1 init_state: default } 
+}
