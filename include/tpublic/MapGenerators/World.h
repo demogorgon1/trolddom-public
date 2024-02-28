@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../MapData.h"
 #include "../MapGeneratorBase.h"
 #include "../TerrainModifier.h"
 
@@ -34,7 +35,8 @@ namespace tpublic::MapGenerators
 			EXECUTE_TYPE_ADD_BORDERS,
 			EXECUTE_TYPE_DEBUG_TERRAIN_MAP,
 			EXECUTE_TYPE_OVERLAY,
-			EXECUTE_TYPE_TERRAIN_MODIFIER_MAP
+			EXECUTE_TYPE_TERRAIN_MODIFIER_MAP,
+			EXECUTE_ADD_ENTITY_SPAWNS
 		};
 
 		struct PalettedMap
@@ -347,6 +349,138 @@ namespace tpublic::MapGenerators
 			std::string										m_debug;
 		};
 
+		struct AddEntitySpawns
+		{
+			struct NeighborTerrain
+			{
+				NeighborTerrain()
+				{
+
+				}
+
+				NeighborTerrain(					
+					const SourceNode*						aSource)
+				{
+					if(aSource->m_name == "neighbor_terrain_probability_bonus")
+					{
+						TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing terrain annotation.");
+						m_terrainId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TERRAIN, aSource->m_annotation->GetIdentifier());
+						m_probabilityBonus = aSource->GetUInt32();
+					}
+					else if(aSource->m_name == "neighbor_terrain_required")
+					{
+						m_terrainId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TERRAIN, aSource->GetIdentifier());
+						m_required = true;
+					}
+					else
+					{
+						assert(false);
+					}
+				}
+
+				void
+				ToStream(
+					IWriter*								aWriter) const
+				{
+					aWriter->WriteUInt(m_terrainId);
+					aWriter->WriteBool(m_required);
+					aWriter->WriteUInt(m_probabilityBonus);
+				}
+
+				bool
+				FromStream(
+					IReader*								aReader) 
+				{
+					if(!aReader->ReadUInt(m_terrainId))
+						return false;
+					if(!aReader->ReadBool(m_required))
+						return false;
+					if(!aReader->ReadUInt(m_probabilityBonus))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t									m_terrainId = 0;
+				bool										m_required = false;
+				uint32_t									m_probabilityBonus = 0;
+			};
+
+			AddEntitySpawns()
+			{
+
+			}
+
+			AddEntitySpawns(
+				const SourceNode*							aSource)
+			{
+				aSource->ForEachChild([&](
+					const SourceNode* aChild)
+				{
+					if(aChild->m_name == "entity_spawn")
+						aChild->GetIdArray(DataType::ID_MAP_ENTITY_SPAWN, m_mapEntitySpawns);
+					else if (aChild->m_name == "probability")
+						m_probability = aChild->GetUInt32();
+					else if (aChild->m_name == "min_distance_to_nearby")
+						m_minDistanceToNearby = aChild->GetUInt32();
+					else if (aChild->m_name == "terrain")
+						aChild->GetIdArray(DataType::ID_TERRAIN, m_terrains);
+					else if(aChild->m_name == "neighbor_terrain_probability_bonus" || aChild->m_name == "neighbor_terrain_required")
+						m_neighborTerrains.push_back(NeighborTerrain(aChild));
+					else
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+				});
+			}
+
+			void
+			ToStream(
+				IWriter*								aWriter) const
+			{
+				aWriter->WriteUInts(m_mapEntitySpawns);
+				aWriter->WriteUInt(m_probability);
+				aWriter->WriteUInts(m_terrains);
+				aWriter->WriteObjects(m_neighborTerrains);
+				aWriter->WriteUInt(m_minDistanceToNearby);
+			}
+
+			bool
+			FromStream(
+				IReader*								aReader)
+			{
+				if (!aReader->ReadUInts(m_mapEntitySpawns))
+					return false;
+				if (!aReader->ReadUInt(m_probability))
+					return false;
+				if (!aReader->ReadUInts(m_terrains))
+					return false;
+				if (!aReader->ReadObjects(m_neighborTerrains))
+					return false;
+				if (!aReader->ReadUInt(m_minDistanceToNearby))
+					return false;
+				return true;
+			}
+
+			bool
+			CheckTerrain(
+				uint32_t								aTerrainId) const
+			{
+				for(uint32_t t : m_terrains)
+				{
+					if(t == aTerrainId)
+						return true;
+				}
+				return false;
+			}
+
+			// Public data
+			std::vector<uint32_t>							m_mapEntitySpawns;
+			uint32_t										m_probability = 0;
+			std::vector<uint32_t>							m_terrains;			
+			std::vector<NeighborTerrain>					m_neighborTerrains;
+			uint32_t										m_minDistanceToNearby = 0;
+			bool											m_needWalkable = false;
+		};
+
 		struct Execute
 		{
 			Execute()
@@ -381,6 +515,8 @@ namespace tpublic::MapGenerators
 					m_type = EXECUTE_TYPE_OVERLAY;
 				else if (aSource->m_name == "terrain_modifier_map")
 					m_type = EXECUTE_TYPE_TERRAIN_MODIFIER_MAP;
+				else if (aSource->m_name == "add_entity_spawns")
+					m_type = EXECUTE_ADD_ENTITY_SPAWNS;
 
 				if(aSource->m_annotation)
 					m_weight = aSource->m_annotation->GetUInt32();
@@ -439,6 +575,10 @@ namespace tpublic::MapGenerators
 				case EXECUTE_TYPE_DESPECKLE:
 					break;
 
+				case EXECUTE_ADD_ENTITY_SPAWNS:
+					m_addEntitySpawns = std::make_unique<AddEntitySpawns>(aSource);
+					break;
+
 				default:
 					TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid execute item.", aSource->m_name.c_str());
 					break;
@@ -457,6 +597,7 @@ namespace tpublic::MapGenerators
 				aWriter->WriteOptionalObjectPointer(m_palettedMap);
 				aWriter->WriteOptionalObjectPointer(m_overlay);
 				aWriter->WriteOptionalObjectPointer(m_terrainModifierMap);
+				aWriter->WriteOptionalObjectPointer(m_addEntitySpawns);
 				aWriter->WriteObjectPointers(m_children);
 				aWriter->WriteUInt(m_totalWeightOfChildren);
 			}
@@ -481,6 +622,8 @@ namespace tpublic::MapGenerators
 					return false;
 				if (!aReader->ReadOptionalObjectPointer(m_terrainModifierMap))
 					return false;
+				if (!aReader->ReadOptionalObjectPointer(m_addEntitySpawns))
+					return false;
 				if(!aReader->ReadObjectPointers(m_children))
 					return false;
 				if(!aReader->ReadUInt(m_totalWeightOfChildren))
@@ -497,6 +640,7 @@ namespace tpublic::MapGenerators
 			std::unique_ptr<PalettedMap>					m_palettedMap;
 			std::unique_ptr<Overlay>						m_overlay;
 			std::unique_ptr<TerrainModifierMap>				m_terrainModifierMap;
+			std::unique_ptr<AddEntitySpawns>				m_addEntitySpawns;
 			std::vector<std::unique_ptr<Execute>>			m_children;
 			uint32_t										m_totalWeightOfChildren = 0;
 		};
@@ -565,6 +709,8 @@ namespace tpublic::MapGenerators
 			void			InitNoiseMap();
 			uint32_t		SampleNoiseMap(
 								const Vec2&					aPosition) const;
+			void			GenerateEntitySpawns(
+								const AddEntitySpawns*		aAddEntitySpawns);
 
 			// Public data
 			const TerrainPalette*							m_terrainPalette = NULL;
@@ -597,6 +743,9 @@ namespace tpublic::MapGenerators
 
 			static const int32_t NOISE_MAP_SIZE = 32;
 			uint32_t										m_noiseMap[NOISE_MAP_SIZE * NOISE_MAP_SIZE];			
+
+			std::vector<MapData::EntitySpawn>				m_entitySpawns;
+			std::unordered_set<Vec2, Vec2::Hasher>			m_entitySpawnPositions;
 		};
 
 		void			_AddTerrainPaletteEntry(

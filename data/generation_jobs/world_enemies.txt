@@ -73,7 +73,7 @@ generation_job world_enemies:
 	
 	# Melee Goblin (Level 1 - 8)
 	{
-		level_range: [ 1 8 ]
+		level_range: [ 1 8 ]		
 
 		npcs: !NPC_HUMANOID { _name_template: .melee_goblin	_sprite: .melee_goblin_sprite _count: 25 _elite: false }
 		npcs: !NPC_HUMANOID { _name_template: .melee_goblin	_sprite: .melee_goblin_sprite _count: 25 _elite: true }

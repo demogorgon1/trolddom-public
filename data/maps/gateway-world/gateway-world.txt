@@ -121,6 +121,28 @@ map gateway_world:
 				terrain_modifier: temperature
 				noise: .temperature
 			}		
+			
+			execute add_entity_spawns:
+			{
+				entity_spawn: [ herbalism ]
+				probability: 8
+				terrain: [ flat ]
+				neighbor_terrain_probability_bonus<trees>: 12
+				neighbor_terrain_probability_bonus<rocks>: 2
+				min_distance_to_nearby: 2
+			}
+			
+			execute add_entity_spawns:
+			{
+				entity_spawn: [ mining ]
+				probability: 100
+				terrain: [ rocks flat ]
+				neighbor_terrain_required: flat
+				neighbor_terrain_required: rocks
+				min_distance_to_nearby: 2
+			}			
+			
+			execute debug_terrain_map: "debug.png"
 		}		
 	}
 }

@@ -9,7 +9,6 @@
 #include <tpublic/Helpers.h>
 #include <tpublic/Image.h>
 #include <tpublic/Manifest.h>
-#include <tpublic/MapData.h>
 #include <tpublic/NoiseInstance.h>
 
 namespace tpublic::MapGenerators
@@ -106,8 +105,6 @@ namespace tpublic::MapGenerators
 		const char*						/*aDebugImagePath*/,
 		std::unique_ptr<MapData>&		aOutMapData) const 
 	{
-		printf("BUILD SEED %u\n", aSeed);
-
 		Builder builder;
 		builder.m_terrainPalette = &m_terrainPalette;
 		builder.m_manifest = aManifest;
@@ -214,20 +211,32 @@ namespace tpublic::MapGenerators
 		case EXECUTE_TYPE_DEBUG_TERRAIN_MAP:
 			{
 				TP_CHECK(m_terrainMap.size() > 0 && m_width > 0 && m_height > 0, "No terrain map.");
+
+				std::unordered_set<uint32_t> entitySpawnOffsets;
+				for(const MapData::EntitySpawn& entitySpawn : m_entitySpawns)
+					entitySpawnOffsets.insert((uint32_t)(entitySpawn.m_x + entitySpawn.m_y * (int32_t)m_width));
+
 				Image image;
 				image.Allocate(m_width, m_height);
 				Image::RGBA* out = image.GetData();
 				for(uint32_t i = 0; i < m_width * m_height; i++)
 				{
-					uint32_t terrainId = m_terrainMap[i];
-					if(terrainId != 0)
+					if(entitySpawnOffsets.contains(i))
 					{
-						const Data::Terrain* terrain = m_manifest->GetById<Data::Terrain>(terrainId);
-						*out = terrain->m_debugColor;
+						*out = { 255, 0, 0, 255 };
 					}
 					else
 					{
-						*out = { 0, 0, 0, 255 };
+						uint32_t terrainId = m_terrainMap[i];
+						if(terrainId != 0)
+						{
+							const Data::Terrain* terrain = m_manifest->GetById<Data::Terrain>(terrainId);
+							*out = terrain->m_debugColor;
+						}
+						else
+						{
+							*out = { 0, 0, 0, 255 };
+						}
 					}
 					out++;
 				}
@@ -241,6 +250,10 @@ namespace tpublic::MapGenerators
 
 		case EXECUTE_TYPE_TERRAIN_MODIFIER_MAP:
 			BuildTerrainModifierMap(aExecute->m_terrainModifierMap.get());
+			break;
+
+		case EXECUTE_ADD_ENTITY_SPAWNS:
+			GenerateEntitySpawns(aExecute->m_addEntitySpawns.get());
 			break;
 
 		default:
@@ -714,6 +727,10 @@ namespace tpublic::MapGenerators
 			playerSpawn.m_y = m_walkable.cbegin()->m_y;
 			aOutMapData->m_playerSpawns.push_back(playerSpawn);			
 		}
+
+		// Entity spawns
+		for(const MapData::EntitySpawn& entitySpawn : m_entitySpawns)
+			aOutMapData->m_entitySpawns.push_back(entitySpawn);
 	}
 
 	void		
@@ -959,6 +976,96 @@ namespace tpublic::MapGenerators
 		assert(aPosition.m_x >= 0 && aPosition.m_y >= 0 && aPosition.m_x < (int32_t)m_width && aPosition.m_y < (int32_t)m_height);
 		Vec2 p = { aPosition.m_x % NOISE_MAP_SIZE, aPosition.m_y % NOISE_MAP_SIZE };
 		return m_noiseMap[p.m_x + p.m_y * NOISE_MAP_SIZE];
+	}
+
+	void			
+	World::Builder::GenerateEntitySpawns(
+		const AddEntitySpawns* aAddEntitySpawns)
+	{
+		TP_CHECK(aAddEntitySpawns->m_mapEntitySpawns.size() > 0, "No entity spawns defined.");
+
+		for (int32_t y = 1; y < (int32_t)m_height - 1; y++)
+		{
+			for (int32_t x = 1; x < (int32_t)m_width - 1; x++)
+			{
+				int32_t i = x + y * (int32_t)m_width;
+				uint32_t terrainId = m_terrainMap[i];
+
+				if(aAddEntitySpawns->CheckTerrain(terrainId) && (!aAddEntitySpawns->m_needWalkable || m_walkable.contains({ x, y })))
+				{
+					// No need to check bounds as we avoid the edges already
+					uint32_t neighborTerrainIds[4] = 
+					{
+						m_terrainMap[i - 1],
+						m_terrainMap[i + 1],
+						m_terrainMap[i - (int32_t)m_width],
+						m_terrainMap[i + (int32_t)m_width],
+					};
+					
+					uint32_t probability = aAddEntitySpawns->m_probability;
+
+					for(const AddEntitySpawns::NeighborTerrain& neighborTerrain : aAddEntitySpawns->m_neighborTerrains)
+					{
+						bool hasNeighbor = 
+							neighborTerrainIds[0] == neighborTerrain.m_terrainId ||
+							neighborTerrainIds[1] == neighborTerrain.m_terrainId ||
+							neighborTerrainIds[2] == neighborTerrain.m_terrainId ||
+							neighborTerrainIds[3] == neighborTerrain.m_terrainId;
+
+						if(neighborTerrain.m_required)
+						{
+							if(!hasNeighbor)
+							{
+								probability = 0;
+								break;
+							}
+						}
+						else if(hasNeighbor)
+						{
+							probability += 	neighborTerrain.m_probabilityBonus;
+						}
+					}
+
+					if(probability > 0 && Roll(1, 1000) <= probability)
+					{
+						bool canPlace = true;
+
+						if(aAddEntitySpawns->m_minDistanceToNearby > 0 && m_entitySpawnPositions.size() > 0)
+						{
+							// Check if we placed any other entity too close
+							int32_t minX = x - (int32_t)aAddEntitySpawns->m_minDistanceToNearby;
+							int32_t maxX = x + (int32_t)aAddEntitySpawns->m_minDistanceToNearby;
+							int32_t minY = y - (int32_t)aAddEntitySpawns->m_minDistanceToNearby;
+							int32_t maxY = y + (int32_t)aAddEntitySpawns->m_minDistanceToNearby;
+							int32_t minDistanceSquared = (int32_t)(aAddEntitySpawns->m_minDistanceToNearby * aAddEntitySpawns->m_minDistanceToNearby);
+
+							for(int32_t iy = minY; iy <= maxY && canPlace; iy++)
+							{
+								for (int32_t ix = minX; ix <= maxX && canPlace; ix++)
+								{
+									int32_t dx = x - ix;
+									int32_t dy = y - iy;
+									int32_t distanceSquared = dx * dx + dy * dy;
+									if(distanceSquared <= minDistanceSquared && m_entitySpawnPositions.contains({ ix, iy }))
+										canPlace = false;
+								}
+							}
+						}
+
+						if(canPlace)
+						{
+							MapData::EntitySpawn t;
+							t.m_id = aAddEntitySpawns->m_mapEntitySpawns[Roll(0, (uint32_t)aAddEntitySpawns->m_mapEntitySpawns.size() - 1)];
+							t.m_x = x;
+							t.m_y = y;
+							m_entitySpawns.push_back(t);
+
+							m_entitySpawnPositions.insert({ x, y });
+						}
+					}
+				}
+			}
+		}
 	}
 
 }
