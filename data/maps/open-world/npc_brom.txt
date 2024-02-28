@@ -90,7 +90,7 @@ entity .brom:
 			{
 				abilities:
 				[					
-					{ id: strike }
+					{ id: npc_attack }
 				]
 			}	
 		}

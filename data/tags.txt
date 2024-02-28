@@ -1,10 +1,11 @@
-tag american_forename_male: { }
-tag american_forename_female: {}
-tag tolkienesque_forename: {}
-tag elven_placename: {}
-tag human_townname: {}
-tag theological_demon_name: {}
-tag theological_angel_name: {}
+tag american_forename_male: { transferable: false }
+tag american_forename_female: { transferable: false }
+tag american_surname: { transferable: false }
+tag tolkienesque_forename: { transferable: false }
+tag elven_placename: { transferable: false }
+tag human_townname: { transferable: false }
+tag theological_demon_name: { transferable: false }
+tag theological_angel_name: { transferable: false }
 tag noun: { transferable: false random_associated_stat_weights: true } 
 tag creature: { random_associated_stat_weights: true } 
 tag snake: { associated_stat_weights: { wisdom: 2 } }
@@ -21,6 +22,14 @@ tag monster: { associated_stat_weights: { strength: 1 constitution: 2 } }
 tag icon: { transferable: false }
 tag death: { random_associated_stat_weights: true }
 tag life: { random_associated_stat_weights: true }
+tag male: { }
+tag female: { }
+tag human: { }
+tag demon: { }
+tag goblin: { }
+tag boss: { }
+tag caster: { }
+tag melee: { }
 
 # Item tags
 tag weapon_1h_sword: {}

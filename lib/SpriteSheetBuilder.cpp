@@ -169,6 +169,10 @@ namespace tpublic
 					{
 						sprite->m_info.m_tileLayer = aSpriteComponent->GetUInt32();
 					}
+					else if (aSpriteComponent->m_name == "dead")
+					{
+						sprite->m_info.m_deadSpriteId = aSpriteComponent->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aSpriteComponent->GetIdentifier());
+					}
 					else if (aSpriteComponent->m_name == "tags")
 					{
 						aSpriteComponent->GetIdArray(DataType::ID_TAG, sprite->m_tags);

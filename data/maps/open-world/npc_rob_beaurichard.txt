@@ -112,7 +112,7 @@ entity .rob_beaurichard:
 			{
 				abilities:
 				[					
-					{ id: strike }
+					{ id: npc_attack }
 				]
 			}	
 		}

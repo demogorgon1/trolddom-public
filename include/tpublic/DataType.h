@@ -50,6 +50,7 @@ namespace tpublic
 			ID_SOUND,
 			ID_TERRAIN,
 			ID_NOISE,
+			ID_NAME_TEMPLATE,
 
 			NUM_IDS
 		};
@@ -97,7 +98,8 @@ namespace tpublic
 			"cooldown",
 			"sound",
 			"terrain",
-			"noise"
+			"noise",
+			"name_template"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

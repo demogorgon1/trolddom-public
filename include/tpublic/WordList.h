@@ -1,6 +1,6 @@
 #pragma once
 
-//#include "WordContext.h"
+#include "Data/TagContext.h"
 
 #include "Hash.h"
 #include "IReader.h"
@@ -127,15 +127,19 @@ namespace tpublic::WordList
 			return m_mustHaveTags == aOther.m_mustHaveTags && m_mustNotHaveTags == aOther.m_mustNotHaveTags && m_tagScoring == aOther.m_tagScoring;
 		}
 
-		//void
-		//AddContext(
-		//	const WordContext::Type*				aContext)
-		//{
-		//	m_mustHaveTags.Add(aContext->m_mustHaveTags);
-		//	m_mustNotHaveTags.Add(aContext->m_mustNotHaveTags);
-		//	for(const WordContext::Scoring& scoring : aContext->m_scorings)
-		//		m_tagScoring.Add(nc::MakePair(scoring.m_tagId, scoring.m_weight));
-		//}
+		void
+		AddTagContext(
+			const tpublic::Data::TagContext*			aTagContext)
+		{
+			for(uint32_t tagId : aTagContext->m_mustHaveTags)
+				m_mustHaveTags.push_back(tagId);
+
+			for (uint32_t tagId : aTagContext->m_mustNotHaveTags)
+				m_mustNotHaveTags.push_back(tagId);
+
+			for(const tpublic::Data::TagContext::Scoring& scoring : aTagContext->m_scoring)
+				m_tagScoring.push_back({ scoring.m_tagId, scoring.m_score });
+		}
 
 		uint32_t
 		GetHash() const

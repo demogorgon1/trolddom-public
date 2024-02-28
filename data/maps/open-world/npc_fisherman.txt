@@ -92,7 +92,7 @@ entity .fisherman:
 			{
 				abilities:
 				[					
-					{ id: strike }
+					{ id: npc_attack }
 				]
 			}	
 		}

@@ -6,22 +6,22 @@ sprites:
 
 	cursor: { position: [ 0 0 ] }
 
-	sprite goblin: { }
-	sprite goblin_boss: { }
-	sprite goblin_shaman: { }
-	sprite deer: { }
-	sprite boar: { }
-	sprite man_1: { }
-	sprite man_2: { }
-	sprite woman_1: { }
-	sprite man_3: { }
-	sprite man_4: { }
-	sprite man_5: { }
-	sprite fisherman_1: { }
-	sprite wolf_1: { }
-	sprite wolf_2: { }
-	sprite wolf_3: { }
-	sprite bear: { }
+	sprite goblin: { dead: goblin_dead tags: [ goblin melee ] }
+	sprite goblin_boss: { dead: goblin_boss_dead tags: [ goblin melee boss ] }
+	sprite goblin_shaman: { dead: goblin_shaman_dead tags: [ goblin caster ] }
+	sprite deer: { dead: deer_dead }
+	sprite boar: { dead: boar_dead }
+	sprite man_1: { dead: man_1_dead tags: [ male human ] }
+	sprite man_2: { dead: man_2_dead tags: [ male human ] }
+	sprite woman_1: { dead: woman_1_dead tags: [ female human ] }
+	sprite man_3: { dead: man_3_dead tags: [ male human ] }
+	sprite man_4: { dead: man_4_dead tags: [ male human ] }
+	sprite man_5: { dead: man_5_dead tags: [ male human ] }
+	sprite fisherman_1: { dead: fisherman_1_dead tags: [ male human ] }
+	sprite wolf_1: { dead: wolf_1_dead }
+	sprite wolf_2: { dead: wolf_2_dead }
+	sprite wolf_3: { dead: wolf_3_dead }
+	sprite bear: { dead: bear_dead }
 	
 	cursor: { position: [ 0 16 ] }
 	
@@ -44,9 +44,9 @@ sprites:
 	
 	cursor: { position: [ 0 32 ] }
 
-	sprite tentacle_monster: { }
-	sprite man_6: { }
-	sprite woman_2: { }
+	sprite tentacle_monster: { dead: tentacle_monster_dead }
+	sprite man_6: { dead: man_6_dead tags: [ male human ] }
+	sprite woman_2: { dead: woman_2_dead tags: [ female human ] }
 	
 	cursor: { position: [ 0 48 ] }
 	

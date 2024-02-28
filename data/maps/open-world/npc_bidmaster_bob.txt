@@ -44,7 +44,7 @@ entity .bidmaster_bob:
 			{
 				abilities:
 				[					
-					{ id: strike }
+					{ id: npc_attack }
 				]
 			}	
 		}

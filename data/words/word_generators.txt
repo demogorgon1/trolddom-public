@@ -33,3 +33,10 @@ word_generator angel_name:
 	syllables: [ 1 4 ]
 	max_consonant_sequence: 3
 }
+
+word_generator tolkienesque_name:
+{
+	source: { tags: [ tolkienesque_forename ] }
+	syllables: [ 1 4 ]
+	max_consonant_sequence: 3
+}

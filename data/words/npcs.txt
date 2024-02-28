@@ -1,0 +1,170 @@
+tag_context .american_forename_male:
+{
+	must_have_tags: [ american_forename_male ]
+}
+
+tag_context .american_forename_female:
+{
+	must_have_tags: [ american_forename_female ]
+}
+
+tag_context .american_surname:
+{
+	must_have_tags: [ american_surname ]
+}
+
+tag_context .adjective:
+{
+	must_have_tags: [ adjective ]
+}
+
+tag_context .noun:
+{
+	must_have_tags: [ noun ]
+}
+
+tag_context .adjective_evil:
+{
+	must_have_tags: [ adjective evil ]
+}
+
+tag_context .adjective_not_good:
+{
+	must_have_tags: [ adjective ]
+	must_not_have_tags: [ good ]
+}
+
+tag_context .noun_evil:
+{
+	must_have_tags: [ noun evil ]
+}
+
+tag_context .noun_not_good:
+{
+	must_have_tags: [ noun ]
+	must_not_have_tags: [ good ]
+}
+
+name_template npc_goblin:
+{
+	possibility<5>:	
+	{
+		tags: [ evil demon ]
+
+		generated_name: [ demon_name ]
+	}
+
+	possibility<3>:	
+	{
+		tags: [ evil demon ]
+
+		generated_name: [ demon_name ]
+		string: [ " the " ]
+		word: [ .adjective_evil .adjective_not_good .noun_evil .noun_not_good ]
+	}
+
+	possibility<1>:	
+	{
+		tags: [ evil demon ]
+
+		word: [ .adjective_evil .adjective_not_good ]
+		string: [ " " ]
+		generated_name: [ demon_name ]
+	}
+
+	possibility<5>:	
+	{
+		generated_name: [ tolkienesque_name ]
+	}
+
+	possibility<3>:	
+	{
+		generated_name: [ tolkienesque_name ]
+		string: [ " the " ]
+		word: [ .adjective .noun ]
+	}
+
+	possibility<1>:	
+	{
+		word: [ .adjective ]
+		string: [ " " ]
+		generated_name: [ tolkienesque_name ]
+	}
+}
+
+name_template npc_human:
+{
+	possibility<1>:	
+	{
+		tags: [ male human ]
+
+		word: [ .american_forename_male ]
+		string: [ " the " ]
+		word: [ .adjective_evil .adjective_not_good .noun_evil .noun_not_good ]
+	}
+	
+	possibility<1>:	
+	{
+		tags: [ female human ]
+
+		word: [ .american_forename_female ]
+		string: [ " the " ]
+		word: [ .adjective_evil .adjective_not_good .noun_evil .noun_not_good ]
+	}		
+	
+	possibility<1>:	
+	{
+		tags: [ male human ]
+
+		word: [ .adjective_evil .adjective_not_good ]
+		string: [ " " ]
+		word: [ .american_forename_male ]
+	}
+	
+	possibility<1>:	
+	{
+		tags: [ female human ]
+
+		word: [ .adjective_evil .adjective_not_good ]
+		string: [ " " ]
+		word: [ .american_forename_female ]
+	}		
+
+	possibility<1>:	
+	{
+		tags: [ male human ]
+
+		word: [ .american_forename_male ]
+		string: [ " " ]
+		word: [ .american_forename_male ]
+		string: [ "son" "man" ]
+	}
+
+	possibility<1>:	
+	{
+		tags: [ female human ]
+
+		word: [ .american_forename_female ]
+		string: [ " " ]
+		word: [ .american_forename_female ]
+		string: [ "son" "man" ]
+	}
+
+	possibility<5>:	
+	{
+		tags: [ male human ]
+
+		word: [ .american_forename_male ]
+		string: [ " " ]
+		word: [ .american_surname ]
+	}
+
+	possibility<5>:	
+	{
+		tags: [ female human ]
+
+		word: [ .american_forename_female ]
+		string: [ " " ]
+		word: [ .american_surname ]
+	}
+}

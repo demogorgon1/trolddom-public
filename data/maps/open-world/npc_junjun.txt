@@ -102,7 +102,7 @@ entity .junjun:
 			{
 				abilities:
 				[					
-					{ id: strike }
+					{ id: npc_attack }
 				]
 			}	
 		}

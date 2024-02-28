@@ -1,0 +1,1957 @@
+entity world_enemies_npc_0: !NPC
+{
+	_string: "Malevolent Marauder"
+	_level: 4
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.856444
+	_resource_health: 1.105785
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_1: !NPC
+{
+	_string: "Goblin Ravisher"
+	_level: 6
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.137850
+	_resource_health: 1.085582
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_2: !NPC
+{
+	_string: "Black Goblin Squire"
+	_level: 2
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.042229
+	_resource_health: 0.919200
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_3: !NPC
+{
+	_string: "Execrable Goblin Ravager"
+	_level: 8
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.923756
+	_resource_health: 0.938188
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_4: !NPC
+{
+	_string: "Hateful Goblin Myrmidon"
+	_level: 1
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.106064
+	_resource_health: 0.933417
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_5: !NPC
+{
+	_string: "Repugnant Goblin Vanguard"
+	_level: 8
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.183447
+	_resource_health: 0.957591
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_6: !NPC
+{
+	_string: "Goblin Vanguard"
+	_level: 3
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.871016
+	_resource_health: 0.813295
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_7: !NPC
+{
+	_string: "Goblin Mercenary"
+	_level: 5
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.089373
+	_resource_health: 0.839057
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_8: !NPC
+{
+	_string: "Goblin Ravisher"
+	_level: 7
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.139354
+	_resource_health: 0.915048
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_9: !NPC
+{
+	_string: "Goblin Vanguard"
+	_level: 7
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.085410
+	_resource_health: 0.888785
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_10: !NPC
+{
+	_string: "Execrable Goblin Brute"
+	_level: 4
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.110220
+	_resource_health: 0.989606
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_11: !NPC
+{
+	_string: "Pestilent Mercenary"
+	_level: 8
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.957757
+	_resource_health: 1.192719
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_12: !NPC
+{
+	_string: "Black Goblin Berserker"
+	_level: 7
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.896261
+	_resource_health: 0.806536
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_13: !NPC
+{
+	_string: "Goblin Myrmidon"
+	_level: 5
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.102800
+	_resource_health: 0.930474
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_14: !NPC
+{
+	_string: "Beastly Goblin Ravisher"
+	_level: 4
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.962647
+	_resource_health: 1.006796
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_15: !NPC
+{
+	_string: "Goblin Warrior"
+	_level: 2
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.028390
+	_resource_health: 0.967814
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_16: !NPC
+{
+	_string: "Maleficient Goblin Ravisher"
+	_level: 3
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.170335
+	_resource_health: 1.072928
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_17: !NPC
+{
+	_string: "Spiteful Squire"
+	_level: 7
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.815266
+	_resource_health: 0.854541
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_18: !NPC
+{
+	_string: "Malevolent Goblin Warrior"
+	_level: 7
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.189929
+	_resource_health: 1.045406
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_19: !NPC
+{
+	_string: "Angry Goblin Skirmisher"
+	_level: 6
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.113137
+	_resource_health: 0.874626
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_20: !NPC
+{
+	_string: "Ugly Goblin Skirmisher"
+	_level: 3
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.186995
+	_resource_health: 1.005386
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_21: !NPC
+{
+	_string: "Goblin Outlaw"
+	_level: 8
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.863280
+	_resource_health: 1.042651
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_22: !NPC
+{
+	_string: "Fatal Goblin Marauder"
+	_level: 5
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.904755
+	_resource_health: 0.924351
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_23: !NPC
+{
+	_string: "Goblin Warrior"
+	_level: 7
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.147736
+	_resource_health: 0.989884
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_24: !NPC
+{
+	_string: "Bitter Fighter"
+	_level: 6
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.960198
+	_resource_health: 1.038350
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_25: !NPC
+{
+	_string: "Stinking Marauder"
+	_level: 4
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.825792
+	_resource_health: 0.866221
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_26: !NPC
+{
+	_string: "Execrable Goblin Outlaw"
+	_level: 1
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.068519
+	_resource_health: 0.872396
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_27: !NPC
+{
+	_string: "Goblin Fighter"
+	_level: 5
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.982855
+	_resource_health: 1.021871
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_28: !NPC
+{
+	_string: "Goblin Ravisher"
+	_level: 6
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.881396
+	_resource_health: 1.164424
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_29: !NPC
+{
+	_string: "Lethal Goblin Ravager"
+	_level: 3
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.181464
+	_resource_health: 0.891305
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_30: !NPC
+{
+	_string: "Goblin Skirmisher"
+	_level: 2
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.105819
+	_resource_health: 0.956733
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_31: !NPC
+{
+	_string: "Malignant Goblin Skirmisher"
+	_level: 5
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.088616
+	_resource_health: 0.872680
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_32: !NPC
+{
+	_string: "Violent Goblin Mercenary"
+	_level: 7
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.189917
+	_resource_health: 1.126333
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_33: !NPC
+{
+	_string: "Goblin Slayer"
+	_level: 1
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.039442
+	_resource_health: 0.974021
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_34: !NPC
+{
+	_string: "Goblin Berserker"
+	_level: 8
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.914855
+	_resource_health: 1.140778
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_35: !NPC
+{
+	_string: "Infernal Goblin Revenant"
+	_level: 1
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.841055
+	_resource_health: 1.024276
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_36: !NPC
+{
+	_string: "Goblin Ravager"
+	_level: 8
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.889924
+	_resource_health: 1.170543
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_37: !NPC
+{
+	_string: "Nefarious Outlaw"
+	_level: 1
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.127137
+	_resource_health: 1.084265
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_38: !NPC
+{
+	_string: "Dark Goblin Ravisher"
+	_level: 6
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.093918
+	_resource_health: 1.187876
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_39: !NPC
+{
+	_string: "Depraved Goblin Avenger"
+	_level: 8
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.155243
+	_resource_health: 1.079919
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_40: !NPC
+{
+	_string: "Goblin Mercenary"
+	_level: 4
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.027617
+	_resource_health: 1.069199
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_41: !NPC
+{
+	_string: "Lethal Myrmidon"
+	_level: 2
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.087418
+	_resource_health: 1.121584
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_42: !NPC
+{
+	_string: "Infernal Goblin Reaver"
+	_level: 5
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.181890
+	_resource_health: 0.921390
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_43: !NPC
+{
+	_string: "Corrupt Goblin Brute"
+	_level: 2
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.809219
+	_resource_health: 1.160782
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_44: !NPC
+{
+	_string: "Depraved Goblin Warrior"
+	_level: 8
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.172817
+	_resource_health: 0.930729
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_45: !NPC
+{
+	_string: "Goblin Warden"
+	_level: 2
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.984179
+	_resource_health: 1.023183
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_46: !NPC
+{
+	_string: "Goblin Mercenary"
+	_level: 6
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.057840
+	_resource_health: 1.102315
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_47: !NPC
+{
+	_string: "Injurious Goblin Brute"
+	_level: 7
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.935620
+	_resource_health: 1.004215
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_48: !NPC
+{
+	_string: "Goblin Marauder"
+	_level: 8
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.844783
+	_resource_health: 0.835278
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_49: !NPC
+{
+	_string: "Goblin Squire"
+	_level: 1
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.921523
+	_resource_health: 0.979861
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_50: !NPC
+{
+	_string: "Goblin Skirmisher"
+	_level: 10
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.805983
+	_resource_health: 1.072336
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_51: !NPC
+{
+	_string: "Bloody Goblin Skirmisher"
+	_level: 10
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.102920
+	_resource_health: 1.175076
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_52: !NPC
+{
+	_string: "Infernal Goblin Warrior"
+	_level: 10
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.863157
+	_resource_health: 0.847157
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_53: !NPC
+{
+	_string: "Damned Goblin Outlaw"
+	_level: 10
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.923050
+	_resource_health: 1.050612
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_54: !NPC
+{
+	_string: "Malignant Ravisher"
+	_level: 9
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.945286
+	_resource_health: 1.182700
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_55: !NPC
+{
+	_string: "Goblin Ravager"
+	_level: 10
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.843087
+	_resource_health: 1.079153
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_56: !NPC
+{
+	_string: "Ugly Goblin Marauder"
+	_level: 10
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.167875
+	_resource_health: 1.090295
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_57: !NPC
+{
+	_string: "Bitter Goblin Warden"
+	_level: 9
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.886961
+	_resource_health: 0.896448
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_58: !NPC
+{
+	_string: "Goblin Ravisher"
+	_level: 10
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.915023
+	_resource_health: 0.961180
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_59: !NPC
+{
+	_string: "Goblin Marauder"
+	_level: 10
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.154718
+	_resource_health: 1.147302
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_60: !NPC
+{
+	_string: "Vicious Goblin Skirmisher"
+	_level: 10
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.046156
+	_resource_health: 0.989358
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_61: !NPC
+{
+	_string: "Malignant Goblin Slayer"
+	_level: 10
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.954729
+	_resource_health: 1.028192
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_62: !NPC
+{
+	_string: "Destructive Slayer"
+	_level: 10
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.066679
+	_resource_health: 1.126243
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_63: !NPC
+{
+	_string: "Goblin Berserker"
+	_level: 9
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.028417
+	_resource_health: 1.115780
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_64: !NPC
+{
+	_string: "Toxic Goblin Reaver"
+	_level: 9
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.994677
+	_resource_health: 1.087624
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_65: !NPC
+{
+	_string: "Murderous Goblin Mercenary"
+	_level: 10
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.179253
+	_resource_health: 1.109308
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_66: !NPC
+{
+	_string: "Goblin Berserker"
+	_level: 10
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.879055
+	_resource_health: 0.809813
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_67: !NPC
+{
+	_string: "Goblin Berserker"
+	_level: 10
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.820042
+	_resource_health: 0.814748
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_68: !NPC
+{
+	_string: "Goblin Warrior"
+	_level: 10
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.129415
+	_resource_health: 1.095226
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_69: !NPC
+{
+	_string: "Goblin Squire"
+	_level: 9
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.961926
+	_resource_health: 1.110221
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_70: !NPC
+{
+	_string: "Goblin Berserker"
+	_level: 10
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.948514
+	_resource_health: 1.103510
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_71: !NPC
+{
+	_string: "Goblin Skirmisher"
+	_level: 9
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.151099
+	_resource_health: 1.030338
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_72: !NPC
+{
+	_string: "Goblin Slayer"
+	_level: 9
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.082327
+	_resource_health: 1.174491
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_73: !NPC
+{
+	_string: "Vicious Goblin Myrmidon"
+	_level: 9
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.913884
+	_resource_health: 1.110072
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_74: !NPC
+{
+	_string: "Wicked Goblin Berserker"
+	_level: 10
+	_elite: false
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.020690
+	_resource_health: 1.091185
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_75: !NPC
+{
+	_string: "Goblin Avenger"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.800169
+	_resource_health: 0.952023
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_76: !NPC
+{
+	_string: "Calamitious Goblin Skirmisher"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.838550
+	_resource_health: 0.808516
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_77: !NPC
+{
+	_string: "Goblin Reaver"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.186888
+	_resource_health: 0.967177
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_78: !NPC
+{
+	_string: "Goblin Warden"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.194565
+	_resource_health: 1.179592
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_79: !NPC
+{
+	_string: "Loathsome Goblin Skirmisher"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.042400
+	_resource_health: 0.867234
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_80: !NPC
+{
+	_string: "Goblin Ravager"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.877775
+	_resource_health: 0.896420
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_81: !NPC
+{
+	_string: "Maleficient Goblin Vanguard"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.838288
+	_resource_health: 0.926138
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_82: !NPC
+{
+	_string: "Goblin Vanguard"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.889748
+	_resource_health: 0.907441
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_83: !NPC
+{
+	_string: "Toxic Goblin Berserker"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.183673
+	_resource_health: 1.015316
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_84: !NPC
+{
+	_string: "Grey Goblin Warden"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.075613
+	_resource_health: 1.093843
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_85: !NPC
+{
+	_string: "Goblin Brute"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.932606
+	_resource_health: 1.053737
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_86: !NPC
+{
+	_string: "Black Goblin Warden"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.017587
+	_resource_health: 1.164058
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_87: !NPC
+{
+	_string: "Dirty Goblin Mercenary"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.001162
+	_resource_health: 0.816910
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_88: !NPC
+{
+	_string: "Loathsome Mercenary"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.016800
+	_resource_health: 1.153774
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_89: !NPC
+{
+	_string: "Loathsome Goblin Berserker"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.073890
+	_resource_health: 0.864526
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_90: !NPC
+{
+	_string: "Depraved Vanguard"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.074266
+	_resource_health: 0.803789
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_91: !NPC
+{
+	_string: "Loathsome Goblin Avenger"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.124115
+	_resource_health: 1.082085
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_92: !NPC
+{
+	_string: "Goblin Revenant"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.134550
+	_resource_health: 1.141735
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_93: !NPC
+{
+	_string: "Baneful Goblin Outlaw"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.173395
+	_resource_health: 0.822238
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_94: !NPC
+{
+	_string: "Corrupt Goblin Mercenary"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.100453
+	_resource_health: 0.802154
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_95: !NPC
+{
+	_string: "Cruel Goblin Warrior"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.936104
+	_resource_health: 0.919468
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		evil
+		goblin
+	]
+}
+
+entity world_enemies_npc_96: !NPC
+{
+	_string: "Goblin Berserker"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.992201
+	_resource_health: 0.940626
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_97: !NPC
+{
+	_string: "Goblin Myrmidon"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.866617
+	_resource_health: 1.121972
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_98: !NPC
+{
+	_string: "Goblin Reaver"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 0.957863
+	_resource_health: 0.854925
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+
+entity world_enemies_npc_99: !NPC
+{
+	_string: "Goblin Ravager"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_weapon_damage: 1.003622
+	_resource_health: 1.046222
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	tags:
+	[
+		melee
+		goblin
+	]
+}
+

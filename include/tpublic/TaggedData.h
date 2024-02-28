@@ -124,24 +124,25 @@ namespace tpublic
 		{
 			struct Entry
 			{
-				bool
-				operator ==(
-					const Entry&							aOther) const
-				{
-					return m_id == aOther.m_id && m_weight == aOther.m_weight;
-				}
+				//bool
+				//operator ==(
+				//	const Entry&							aOther) const
+				//{
+				//	return m_id == aOther.m_id && m_weight == aOther.m_weight;
+				//}
 
 				// Public data
 				uint32_t				m_id = 0;
 				uint32_t				m_weight = 0;
+				std::vector<uint32_t>	m_tags;
 			};
 
-			uint32_t
-			PickRandom(
+			const Entry*
+			TryPickRandom(
 				std::mt19937&									aRandom) const
 			{
 				if(m_entries.empty())
-					return 0;
+					return NULL;
 
 				assert(m_totalWeight > 0);
 
@@ -154,11 +155,20 @@ namespace tpublic
 					sum += t.m_weight;
 
 					if(roll <= sum)
-						return t.m_id;
+						return &t;
 				}
 
 				assert(false);
-				return 0;
+				return NULL;
+			}
+
+			const Entry*
+			PickRandom(
+				std::mt19937&									aRandom) const
+			{
+				const Entry* t = TryPickRandom(aRandom);
+				TP_CHECK(t != NULL, "Empty query result.");
+				return t;
 			}
 
 			// Public data
@@ -178,6 +188,8 @@ namespace tpublic
 								uint32_t						aTagId) const;
 		const QueryResult*	PerformQuery(
 								const Query&					aQuery);
+		const QueryResult*	PerformQueryWithTagContext(
+								const Data::TagContext*			aTagContext);
 
 	private:
 

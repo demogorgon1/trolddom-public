@@ -1,12 +1,18 @@
 #include "Pcheader.h"
 
 #include <tpublic/Data/Aura.h>
+#include <tpublic/Data/CreatureType.h>
+#include <tpublic/Data/Faction.h>
 #include <tpublic/Data/LootGroup.h>
+#include <tpublic/Data/LootTable.h>
+#include <tpublic/Data/NameTemplate.h>
 #include <tpublic/Data/Pantheon.h>
 #include <tpublic/Data/Tag.h>
 #include <tpublic/Data/WordGenerator.h>
 
+#include <tpublic/CreateName.h>
 #include <tpublic/DataErrorHandling.h>
+#include <tpublic/FloatRange.h>
 #include <tpublic/GenerateWord.h>
 #include <tpublic/Helpers.h>
 #include <tpublic/ItemBinding.h>
@@ -59,6 +65,9 @@ namespace tpublic
 		const SourceNode*		aSource)
 		: m_source(aSource)
 		, m_manifest(NULL)
+		, m_nextItemNumber(0)
+		, m_nextDeityNumber(0)
+		, m_nextNPCNumber(0)
 	{
 
 	}
@@ -158,6 +167,8 @@ namespace tpublic
 				_ReadItems(aChild);
 			else if (aChild->m_name == "deities")
 				_ReadDeities(aChild);
+			else if (aChild->m_name == "npcs")
+				_ReadNPCs(aChild);
 			else
 				TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 		});
@@ -644,7 +655,7 @@ namespace tpublic
 				const TaggedData::QueryResult* result = m_taggedAuraData->Get()->PerformQuery(query);
 				TP_VERIFY(result->m_entries.size() > 0, aSource->m_debugInfo, "Unable to get blessing aura for rank tag id: %u", blessingRankTagId);
 
-				uint32_t auraId = result->PickRandom(_GetRandom());
+				uint32_t auraId = result->PickRandom(_GetRandom())->m_id;
 				const Data::Aura* auraData = m_manifest->GetById<Data::Aura>(auraId);
 
 				combinedAura.m_description.clear();
@@ -741,6 +752,121 @@ namespace tpublic
 		}
 	}
 
+	void
+	GenerationJob::_ReadNPCs(
+		const SourceNode*	aSource)
+	{
+		uint32_t count = 0;
+		uint32_t nameTemplateId = 0;
+		uint32_t spriteTagContextId = 0;
+		uint32_t creatureTypeId = 0;
+		FloatRange weaponDamageMultiplierRange = { 1.0f, 1.0f };
+		FloatRange healthMultiplierRange = { 1.0f, 1.0f };
+		bool elite = false;
+		uint32_t factionId = 0;
+		uint32_t lootTableId = 0;
+		std::vector<uint32_t> extraTags;
+
+		aSource->ForEachChild([&](
+			const SourceNode* aChild)
+		{
+			if (aChild->m_name == "count")
+				count = aChild->GetUInt32();
+			else if (aChild->m_name == "elite")
+				elite = aChild->GetBool();
+			else if (aChild->m_name == "weapon_damage_multiplier_range")
+				weaponDamageMultiplierRange = FloatRange(aChild);
+			else if (aChild->m_name == "health_multiplier_range")
+				healthMultiplierRange = FloatRange(aChild);
+			else if (aChild->m_name == "name_template")
+				nameTemplateId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_NAME_TEMPLATE, aChild->GetIdentifier());
+			else if (aChild->m_name == "faction")
+				factionId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_FACTION, aChild->GetIdentifier());
+			else if (aChild->m_name == "sprite")
+				spriteTagContextId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TAG_CONTEXT, aChild->GetIdentifier());
+			else if (aChild->m_name == "creature_type")
+				creatureTypeId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_CREATURE_TYPE, aChild->GetIdentifier());
+			else if (aChild->m_name == "loot_table")
+				lootTableId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_LOOT_TABLE, aChild->GetIdentifier());
+			else if (aChild->m_name == "extra_tags")
+				aChild->GetIdArray(DataType::ID_TAG, extraTags);
+			else
+				TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+		});
+
+		TP_VERIFY(nameTemplateId != 0, aSource->m_debugInfo, "No name template defined.");
+		const Data::NameTemplate* nameTemplate = m_manifest->GetById<Data::NameTemplate>(nameTemplateId);
+
+		TP_VERIFY(creatureTypeId != 0, aSource->m_debugInfo, "No creature type defined.");
+		const Data::CreatureType* creatureType = m_manifest->GetById<Data::CreatureType>(creatureTypeId);
+
+		TP_VERIFY(factionId != 0, aSource->m_debugInfo, "No faction defined.");
+		const Data::Faction* faction = m_manifest->GetById<Data::Faction>(factionId);
+
+		TP_VERIFY(lootTableId != 0, aSource->m_debugInfo, "No loot table defined.");
+		const Data::LootTable* lootTable = m_manifest->GetById<Data::LootTable>(lootTableId);
+
+		TP_VERIFY(spriteTagContextId != 0, aSource->m_debugInfo, "No sprite tag context defined.");
+		const Data::TagContext* spriteTagContext = m_manifest->GetById<Data::TagContext>(spriteTagContextId);
+		const TaggedData::QueryResult* spriteQueryResult = m_taggedSpriteData->Get()->PerformQueryWithTagContext(spriteTagContext);
+
+		for(uint32_t i = 0; i < count; i++)
+		{
+			const UIntRange& levelRange = _GetLevelRange();
+			uint32_t level = _GetRandomIntInRange(levelRange.m_min, levelRange.m_max);
+
+			std::unordered_set<uint32_t> tags;
+			for (uint32_t tagId : extraTags)
+				tags.insert(tagId);
+
+			std::string name;
+			CreateName(m_manifest, nameTemplate, m_wordListQueryCache.get(), _GetRandom(), name, tags);
+
+			const TaggedData::QueryResult::Entry* spriteEntry = spriteQueryResult->PickRandom(_GetRandom());
+			const Data::Sprite* sprite = m_manifest->GetById<Data::Sprite>(spriteEntry->m_id);
+			const Data::Sprite* spriteDead = m_manifest->GetById<Data::Sprite>(sprite->m_info.m_deadSpriteId);
+
+			for(uint32_t tagId : spriteEntry->m_tags)
+				tags.insert(tagId);
+
+			float weaponDamageMultiplier = weaponDamageMultiplierRange.GetRandom(_GetRandom());
+			float healthMultiplier = healthMultiplierRange.GetRandom(_GetRandom());
+
+			{
+				GeneratedSource* output = _CreateGeneratedSource();
+
+				output->PrintF(0, "entity %s_npc_%u: !NPC", m_source->m_name.c_str(), m_nextNPCNumber);
+				output->PrintF(0, "{");
+				output->PrintF(1, "_string: \"%s\"", name.c_str());
+				output->PrintF(1, "_level: %u", level);
+				output->PrintF(1, "_elite: %s", elite ? "true" : "false");
+				output->PrintF(1, "_faction: %s", faction->m_name.c_str());
+				output->PrintF(1, "_sprite: %s", sprite->m_name.c_str());
+				output->PrintF(1, "_sprite_dead: %s", spriteDead->m_name.c_str());
+				output->PrintF(1, "_weapon_damage: %f", weaponDamageMultiplier);
+				output->PrintF(1, "_resource_health: %f", healthMultiplier);
+				output->PrintF(1, "_creature_type: %s", creatureType->m_name.c_str());
+				output->PrintF(1, "_loot_table: %s", lootTable->m_name.c_str());
+
+				if (tags.size() > 0)
+				{
+					output->PrintF(1, "tags:");
+					output->PrintF(1, "[");
+					for (uint32_t tagId : tags)
+					{
+						const Data::Tag* dataTag = m_manifest->GetById<Data::Tag>(tagId);
+						output->PrintF(2, "%s", dataTag->m_name.c_str());
+					}
+					output->PrintF(1, "]");
+				}
+
+				output->PrintF(0, "}");
+			}
+
+			m_nextNPCNumber++;
+		}
+	}
+
 	void		
 	GenerationJob::_GetContextTags(
 		std::vector<uint32_t>&	aOut)
@@ -813,7 +939,7 @@ namespace tpublic
 		}
 
 		const TaggedData::QueryResult* result = m_taggedSpriteData->Get()->PerformQuery(query);
-		uint32_t iconSpriteId = result->PickRandom(_GetRandom());
+		uint32_t iconSpriteId = result->PickRandom(_GetRandom())->m_id;
 
 		if(iconSpriteId == 0)
 			iconSpriteId = m_manifest->GetExistingIdByName<Data::Sprite>("icon_default");

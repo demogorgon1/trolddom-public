@@ -1,5 +1,7 @@
 #include "Pcheader.h"
 
+#include <tpublic/Data/Tag.h>
+
 #include <tpublic/Manifest.h>
 #include <tpublic/TaggedData.h>
 
@@ -49,6 +51,20 @@ namespace tpublic
 		QueryResult* t = result.get();
 		m_queryTable[aQuery] = std::move(result);
 		return t;
+	}
+
+	const TaggedData::QueryResult* 
+	TaggedData::PerformQueryWithTagContext(
+		const Data::TagContext*			aTagContext)
+	{
+		Query query;
+		query.m_mustHaveTagIds = aTagContext->m_mustHaveTags;
+		query.m_mustNotHaveTagIds = aTagContext->m_mustNotHaveTags;
+
+		for(const Data::TagContext::Scoring& scoring : aTagContext->m_scoring)
+			query.m_tagScoring.push_back({ scoring.m_tagId, scoring.m_score });
+
+		return PerformQuery(query);
 	}
 
 	//---------------------------------------------------------------------------------------
@@ -143,6 +159,13 @@ namespace tpublic
 				QueryResult::Entry entry;
 				entry.m_id = dataId;
 				entry.m_weight = aQuery.CalculateScore(data->m_tagIds);
+				
+				for(uint32_t tagId : data->m_tagIds)
+				{
+					const Data::Tag* tagData = m_manifest->GetById<Data::Tag>(tagId);
+					if(tagData->m_transferable)
+						entry.m_tags.push_back(tagId);
+				}
 
 				aOut->m_entries.push_back(entry);
 				aOut->m_totalWeight += entry.m_weight;

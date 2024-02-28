@@ -1,5 +1,6 @@
 word_list: { import: "_source/american_forenames_male.txt" capitalize: true tags: [ american_forename_male ] }
 word_list: { import: "_source/american_forenames_female.txt" capitalize: true tags: [ american_forename_female ] }
+word_list: { import: "_source/american_surnames.txt" capitalize: true tags: [ american_surname ] }
 
 # We only need these for training name generators
 word_list: { import: "_source/tolkienesque_forenames.txt" capitalize: true tags: [ tolkienesque_forename ] hidden: true }

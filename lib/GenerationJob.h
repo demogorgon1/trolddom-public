@@ -132,8 +132,9 @@ namespace tpublic
 		std::unique_ptr<TaggedDataCache<Data::Sprite>>	m_taggedSpriteData;
 		std::unique_ptr<TaggedDataCache<Data::Aura>>	m_taggedAuraData;
 
-		uint32_t										m_nextItemNumber = 0;
-		uint32_t										m_nextDeityNumber = 0;
+		uint32_t										m_nextItemNumber;
+		uint32_t										m_nextDeityNumber;
+		uint32_t										m_nextNPCNumber;
 
 		template <typename _T>
 		_T
@@ -168,6 +169,8 @@ namespace tpublic
 		void							_ReadItems(
 											const SourceNode*				aSource);
 		void							_ReadDeities(
+											const SourceNode*				aSource);
+		void							_ReadNPCs(
 											const SourceNode*				aSource);
 		void							_GetContextTags(
 											std::vector<uint32_t>&			aOut);

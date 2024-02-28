@@ -23,3 +23,5 @@ word_list: { strings: [ "Red" "Green" "Blue" "Brown" "Purple" ] tags: [ adjectiv
 word_list: { strings: [ "White" "Pearly" ] tags: [ adjective color good ] }
 
 word_list: { strings: [ "Great" "High" "Grand" ] tags: [ adjective grandiose ] }
+
+word_list: { strings: [ "Warrior" "Fighter" "Marauder" "Berserker" "Skirmisher" "Vanguard" "Mercenary" "Reaver" "Myrmidon" "Warden" "Ravager" "Slayer" "Avenger" "Brute" "Squire" "Revenant" "Outlaw" "Ravisher" ] tags: [ melee noun ] }

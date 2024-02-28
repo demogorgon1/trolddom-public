@@ -71,7 +71,7 @@ namespace tpublic
 						if (aChild->m_name == "must_have_tags")
 							aChild->GetIdArray(DataType::ID_TAG, m_mustHaveTags);
 						else if (aChild->m_name == "must_not_have_tags")
-							aChild->GetIdArray(DataType::ID_TAG, m_mustHaveTags);
+							aChild->GetIdArray(DataType::ID_TAG, m_mustNotHaveTags);
 						else if (aChild->m_tag == "tag_score")
 							m_scoring.push_back(Scoring(aChild));
 						else

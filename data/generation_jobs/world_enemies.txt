@@ -1,0 +1,90 @@
+loot_table .world_drops:
+{
+	slots:
+	[
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+!define local NPC_HUMANOID
+{
+	creature_type: humanoid
+	faction: monsters
+	weapon_damage_multiplier_range: [ 0.8 1.2 ]
+	health_multiplier_range: [ 0.8 1.2 ]
+	loot_table: .world_drops
+
+	name_template: @_name_template
+	sprite: @_sprite
+	count: @_count
+	elite: @_elite	
+}
+
+tag_context .adjective_evil:
+{
+	must_have_tags: [ adjective evil ]
+}
+
+tag_context .noun_melee:
+{
+	must_have_tags: [ noun melee ]
+}
+
+############################################################################
+# Goblins
+
+name_template .melee_goblin:
+{
+	possibility<5>:
+	{
+		string: [ "Goblin " ]
+		word: [ .noun_melee ]
+	}
+
+	possibility<4>:
+	{
+		word: [ .adjective_evil ]
+		string: [ " Goblin " ]
+		word: [ .noun_melee ]
+	}
+
+	possibility<1>:
+	{
+		word: [ .adjective_evil ]
+		string: [ " " ]
+		word: [ .noun_melee ]
+	}
+
+}
+
+tag_context .melee_goblin_sprite:
+{
+	must_have_tags: [ goblin melee ]
+	must_not_have_tags: [ boss ]
+}
+
+############################################################################
+# World enemies generation
+
+generation_job world_enemies:
+{
+	random_seed: 904230944	
+	
+	# Melee Goblin (Level 1 - 8)
+	{
+		level_range: [ 1 8 ]
+
+		npcs: !NPC_HUMANOID { _name_template: .melee_goblin	_sprite: .melee_goblin_sprite _count: 25 _elite: false }
+		npcs: !NPC_HUMANOID { _name_template: .melee_goblin	_sprite: .melee_goblin_sprite _count: 25 _elite: true }
+	}
+	
+	# Melee Goblin (Level 9 - 10)
+	{
+		level_range: [ 9 10 ]
+		
+		npcs: !NPC_HUMANOID { _name_template: .melee_goblin	_sprite: .melee_goblin_sprite _count: 25 _elite: false }
+		npcs: !NPC_HUMANOID { _name_template: .melee_goblin	_sprite: .melee_goblin_sprite _count: 25 _elite: true }		
+	}
+	
+}

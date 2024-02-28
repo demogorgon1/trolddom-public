@@ -63,7 +63,7 @@ entity .harald_skrald:
 			{
 				abilities:
 				[					
-					{ id: strike }
+					{ id: npc_attack }
 				]
 			}	
 		}

@@ -59,7 +59,7 @@
 			{
 				<!exists _abilities> abilities:
 				[					
-					{ id: strike }
+					{ id: npc_attack }
 				]
 				
 				<exists _abilities> abilities: @_abilities
