@@ -265,7 +265,7 @@ namespace tpublic::MapGenerators
 			break;
 
 		case EXECUTE_TYPE_ADD_BOSS:
-			AddBoss(aExecute->m_value, aExecute->m_value2, aExecute->m_value3);
+			AddBoss(aExecute->m_value, aExecute->m_value2, aExecute->m_value3, aExecute->m_minorBosses.get());
 			break;
 
 		case EXECUTE_TYPE_LEVEL_RANGE:
@@ -747,12 +747,25 @@ namespace tpublic::MapGenerators
 		// Boss entity spawns
 		for(const std::unique_ptr<Boss>& boss : m_bosses)
 		{
-			MapData::EntitySpawn entitySpawn;
-			entitySpawn.m_entityId = boss->m_entity->m_id;
-			entitySpawn.m_mapEntitySpawnId = boss->m_mapEntitySpawnId;
-			entitySpawn.m_x = boss->m_position.m_x;
-			entitySpawn.m_y = boss->m_position.m_y;
-			aOutMapData->m_entitySpawns.push_back(entitySpawn);
+			{
+				MapData::EntitySpawn entitySpawn;
+				entitySpawn.m_entityId = boss->m_entity->m_id;
+				entitySpawn.m_mapEntitySpawnId = boss->m_mapEntitySpawnId;
+				entitySpawn.m_x = boss->m_position.m_x;
+				entitySpawn.m_y = boss->m_position.m_y;
+				aOutMapData->m_entitySpawns.push_back(entitySpawn);
+			}
+
+			// Sub-bosses
+			for(const MinorBoss& minorBoss : boss->m_subBosses)
+			{
+				MapData::EntitySpawn entitySpawn;
+				entitySpawn.m_entityId = minorBoss.m_entity->m_id;
+				entitySpawn.m_mapEntitySpawnId = boss->m_minorBosses->m_mapEntitySpawnId;
+				entitySpawn.m_x = minorBoss.m_position.m_x;
+				entitySpawn.m_y = minorBoss.m_position.m_y;
+				aOutMapData->m_entitySpawns.push_back(entitySpawn);
+			}
 		}
 
 		// More entity spawns
@@ -1110,12 +1123,14 @@ namespace tpublic::MapGenerators
 	World::Builder::AddBoss(
 		uint32_t					aTagContextId,
 		uint32_t					aInfluence,
-		uint32_t					aMapEntitySpawnId)
+		uint32_t					aMapEntitySpawnId,
+		const MinorBosses*			aMinorBosses)
 	{
 		std::unique_ptr<Boss> t = std::make_unique<Boss>();
 		t->m_tagContextId = aTagContextId;
 		t->m_influence = aInfluence;
 		t->m_mapEntitySpawnId = aMapEntitySpawnId;
+		t->m_minorBosses = aMinorBosses;
 		m_bosses.push_back(std::move(t));
 	}
 
@@ -1209,7 +1224,78 @@ namespace tpublic::MapGenerators
 				// Calculate area level based boss influence
 				levelMapPoint.m_level = m_levelRange.m_min + ((m_levelRange.m_max - m_levelRange.m_min + 1) * levelMapPoint.m_influence) / levelMapPoint.m_boss->m_influence;
 			}
+		}	
+
+		// Minor bosses
+		for (std::unique_ptr<Boss>& boss : m_bosses)
+		{
+			if(boss->m_minorBosses != NULL)
+			{
+				uint32_t count = boss->m_minorBosses->m_count.GetRandom(m_random);
+
+				uint32_t influence = 0;
+				uint32_t influenceStep = 0;
+
+				if(count > 1)
+				{
+					// Spread out the minor bosses over the desired influence range
+					influence = boss->m_minorBosses->m_influenceRange.m_max;
+					influenceStep = (boss->m_minorBosses->m_influenceRange.m_max - boss->m_minorBosses->m_influenceRange.m_min) / (count - 1);
+				}
+				else if(count == 1)
+				{
+					// With only one minor boss we'll just put it somewhere random in the range
+					influence = boss->m_minorBosses->m_influenceRange.GetRandom(m_random);
+				}
+
+				for(uint32_t i = 0; i < count; i++)
+				{
+					std::vector<Vec2> positions;
+					boss->m_distanceField->GetPositionsWithValue(influence, positions);
+					if(positions.size() > 0)
+					{
+						Vec2 position = position = positions[Roll(0, (uint32_t)positions.size() - 1)];
+						const LevelMapPoint& levelMapPoint = m_levelMap[position.m_x + position.m_y * (int32_t)m_width];
+						uint32_t minorBossLevel = levelMapPoint.m_level;
+
+						// Pick minor boss 			
+						const TaggedData::QueryResult* result = m_mapGeneratorRuntime->m_entities->PerformQueryWithTagContext(m_manifest->GetById<Data::TagContext>(boss->m_minorBosses->m_tagContextId));
+						const TaggedData::QueryResult::Entry* picked = result->TryPickRandomFiltered(m_random, [&](
+							const TaggedData::QueryResult::Entry* aEntry) -> bool
+						{
+							const Data::Entity* entity = m_manifest->GetById<Data::Entity>(aEntry->m_id);
+							const Components::CombatPublic* combatPublic = entity->TryGetComponent<Components::CombatPublic>();
+							if (combatPublic->m_level == minorBossLevel)
+								return true;
+							return false;
+						});
+
+						TP_CHECK(picked != NULL, "Unable to pick minor boss.");
+							
+						MinorBoss minorBoss;
+						minorBoss.m_entity = m_manifest->GetById<Data::Entity>(picked->m_id);
+						minorBoss.m_position = position;
+						boss->m_subBosses.push_back(minorBoss);
+					}
+
+					influence -= influenceStep;
+				}
+			}
 		}
+
+		{
+			Image image;
+			image.Allocate(m_width, m_height);
+			Image::RGBA* out = image.GetData();
+			for (std::unique_ptr<Boss>& boss : m_bosses)
+			{
+				out[boss->m_position.m_x + boss->m_position.m_y * (int32_t)m_width] = { 255, 0, 0, 255 };
+				for(const MinorBoss& t : boss->m_subBosses)
+					out[t.m_position.m_x + t.m_position.m_y * (int32_t)m_width] = { 0, 255, 0, 255 };
+			}
+			image.SavePNG("bosses.png");
+		}
+
 	}
 
 }

@@ -24,6 +24,7 @@ namespace tpublic::MapGenerators
 					World();
 		virtual		~World();
 
+		// FIXME: this thing needs to be refactored BAD (IExecute with an ExecuteFactory or something like that)
 		enum ExecuteType : uint8_t
 		{
 			INVALID_EXECUTE_TYPE,
@@ -486,6 +487,64 @@ namespace tpublic::MapGenerators
 			bool											m_needWalkable = false;
 		};
 
+		struct MinorBosses
+		{
+			MinorBosses()
+			{
+
+			}
+
+			MinorBosses(
+				const SourceNode*							aSource)
+			{
+				aSource->ForEachChild([&](
+					const SourceNode* aChild)
+				{
+					if(aChild->m_name == "count")
+						m_count = UIntRange(aChild);
+					else if (aChild->m_name == "map_entity_spawn")
+						m_mapEntitySpawnId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aChild->GetIdentifier());
+					else if (aChild->m_name == "tag_context")
+						m_tagContextId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TAG_CONTEXT, aChild->GetIdentifier());
+					else if (aChild->m_name == "influence_range")
+						m_influenceRange = UIntRange(aChild);
+					else
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+				});
+			}
+
+			void
+			ToStream(
+				IWriter*								aWriter) const
+			{
+				aWriter->WriteUInt(m_tagContextId);
+				m_count.ToStream(aWriter);
+				aWriter->WriteUInt(m_mapEntitySpawnId);
+				m_influenceRange.ToStream(aWriter);
+			}
+
+			bool
+			FromStream(
+				IReader*								aReader)
+			{
+				if (!aReader->ReadUInt(m_tagContextId))
+					return false;
+				if(!m_count.FromStream(aReader))
+					return false;
+				if (!aReader->ReadUInt(m_mapEntitySpawnId))
+					return false;
+				if (!m_influenceRange.FromStream(aReader))
+					return false;
+				return true;
+			}
+
+			// Public data
+			uint32_t								m_tagContextId = 0;
+			UIntRange								m_count;
+			uint32_t								m_mapEntitySpawnId = 0;
+			UIntRange								m_influenceRange;
+		};
+
 		struct Execute
 		{
 			Execute()
@@ -569,6 +628,8 @@ namespace tpublic::MapGenerators
 							m_value3 = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aChild->GetIdentifier());
 						else if (aChild->m_name == "influence")
 							m_value2 = aChild->GetUInt32();
+						else if(aChild->m_name == "minor_bosses")
+							m_minorBosses = std::make_unique<MinorBosses>(aChild);
 						else 
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					});
@@ -628,6 +689,7 @@ namespace tpublic::MapGenerators
 				aWriter->WriteOptionalObjectPointer(m_overlay);
 				aWriter->WriteOptionalObjectPointer(m_terrainModifierMap);
 				aWriter->WriteOptionalObjectPointer(m_addEntitySpawns);
+				aWriter->WriteOptionalObjectPointer(m_minorBosses);
 				aWriter->WriteObjectPointers(m_children);
 				aWriter->WriteUInt(m_totalWeightOfChildren);
 			}
@@ -658,6 +720,8 @@ namespace tpublic::MapGenerators
 					return false;
 				if (!aReader->ReadOptionalObjectPointer(m_addEntitySpawns))
 					return false;
+				if (!aReader->ReadOptionalObjectPointer(m_minorBosses))
+					return false;
 				if(!aReader->ReadObjectPointers(m_children))
 					return false;
 				if(!aReader->ReadUInt(m_totalWeightOfChildren))
@@ -677,6 +741,7 @@ namespace tpublic::MapGenerators
 			std::unique_ptr<Overlay>						m_overlay;
 			std::unique_ptr<TerrainModifierMap>				m_terrainModifierMap;
 			std::unique_ptr<AddEntitySpawns>				m_addEntitySpawns;
+			std::unique_ptr<MinorBosses>					m_minorBosses;
 			std::vector<std::unique_ptr<Execute>>			m_children;
 			uint32_t										m_totalWeightOfChildren = 0;
 		};
@@ -751,7 +816,8 @@ namespace tpublic::MapGenerators
 			void			AddBoss(
 								uint32_t					aTagContextId,
 								uint32_t					aInfluence,
-								uint32_t					aMapEntitySpawnId);
+								uint32_t					aMapEntitySpawnId,
+								const MinorBosses*			aMinorBosses);
 			void			InitBosses();
 
 			// Public data
@@ -790,14 +856,22 @@ namespace tpublic::MapGenerators
 			std::vector<MapData::EntitySpawn>				m_entitySpawns;
 			std::unordered_set<Vec2, Vec2::Hasher>			m_entitySpawnPositions;
 
+			struct MinorBoss
+			{
+				const Data::Entity*							m_entity = NULL;
+				Vec2										m_position;
+			};
+
 			struct Boss
 			{
 				uint32_t									m_tagContextId = 0;
 				uint32_t									m_influence = 32;
 				uint32_t									m_mapEntitySpawnId = 0;
+				const MinorBosses*							m_minorBosses = NULL;
 				const Data::Entity*							m_entity = NULL;
 				std::unique_ptr<DistanceField>				m_distanceField;
 				Vec2										m_position;
+				std::vector<MinorBoss>						m_subBosses;
 			};
 
 			struct LevelMapPoint
