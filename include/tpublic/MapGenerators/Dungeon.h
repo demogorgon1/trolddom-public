@@ -228,6 +228,7 @@ namespace tpublic::MapGenerators
 						IReader*					aReader) override;
 		bool		Build(
 						const Manifest*				aManifest,
+						MapGeneratorRuntime*		aMapGeneratorRuntime,
 						uint32_t					aSeed,
 						const MapData*				aSourceMapData,
 						const char*					aDebugImagePath,

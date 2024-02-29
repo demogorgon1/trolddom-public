@@ -154,7 +154,7 @@ namespace tpublic::DirectEffects
 			else
 				chance = sourceCombatPrivate->m_physicalCriticalStrikeChance;
 
-			if(Helpers::RandomFloat(aRandom) < chance)
+			if(Helpers::RandomFloat(aRandom) < chance / 100.0f)
 			{
 				damage = (damage * 3) / 2;
 

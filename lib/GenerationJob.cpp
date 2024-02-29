@@ -850,7 +850,7 @@ namespace tpublic
 
 				if (tags.size() > 0)
 				{
-					output->PrintF(1, "tags:");
+					output->PrintF(1, "_tags:");
 					output->PrintF(1, "[");
 					for (uint32_t tagId : tags)
 					{

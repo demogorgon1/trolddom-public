@@ -28,6 +28,8 @@ tag human: { }
 tag demon: { }
 tag goblin: { }
 tag boss: { }
+tag minor_boss: { }
+tag major_boss: { }
 tag caster: { }
 tag melee: { }
 

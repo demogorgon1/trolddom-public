@@ -14,7 +14,7 @@ namespace tpublic
 		, m_height(aHeight)
 		, m_data(new uint32_t[aWidth * aHeight])
 	{
-
+		Clear();
 	}
 
 	DistanceField::~DistanceField()
@@ -136,6 +136,94 @@ namespace tpublic
 		}
 
 		image.SavePNG(aPath);
+	}
+
+	void		
+	DistanceField::GenerateFromSinglePosition(
+		const Vec2&										aPosition,
+		const std::unordered_set<Vec2, Vec2::Hasher>&	aOpenSet,
+		uint32_t										aMaxDistance)
+	{
+		typedef std::multimap<uint32_t, Vec2> Queue;
+		Queue queue;
+		queue.insert({ 0, aPosition });
+		while (queue.size() > 0)
+		{
+			Queue::const_iterator front = queue.cbegin();
+			uint32_t previousDistance = front->first;
+			Vec2 position = front->second;
+			queue.erase(front);
+
+			uint32_t distance = previousDistance + 1;
+			uint32_t& distanceMapReference = GetReference(position);
+
+			if (distance < distanceMapReference && distance < aMaxDistance)
+			{
+				distanceMapReference = distance;
+
+				static const Vec2 NEIGHBORS[4] = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
+				for (size_t j = 0; j < 4; j++)
+				{
+					Vec2 p = { position.m_x + NEIGHBORS[j].m_x, position.m_y + NEIGHBORS[j].m_y };
+					if (aOpenSet.contains(p))
+						queue.insert({ distance, p });
+				}
+			}
+		}
+	}
+
+	void		
+	DistanceField::Filter(
+		std::function<uint32_t(uint32_t)>				aFunction)
+	{
+		for(int32_t i = 0, count = m_width * m_height; i < count; i++)
+			m_data[i] = aFunction(m_data[i]);
+	}
+
+	void		
+	DistanceField::CombineMin(
+		const DistanceField*							aOther)
+	{
+		assert(aOther->m_width == m_width && aOther->m_height == m_height);
+
+		for (int32_t i = 0, count = m_width * m_height; i < count; i++)
+		{
+			uint32_t otherValue = aOther->m_data[i];
+			uint32_t thisValue = m_data[i];
+			
+			if(thisValue == UINT32_MAX || (otherValue != UINT32_MAX && otherValue < thisValue))
+				m_data[i] = otherValue;
+		}
+	}
+
+	uint32_t	
+	DistanceField::GetMax() const
+	{
+		uint32_t maxValue = UINT32_MAX;
+		for (int32_t i = 0, count = m_width * m_height; i < count; i++)
+		{
+			uint32_t value = m_data[i];
+			if(value != UINT32_MAX && (maxValue == UINT32_MAX || value > maxValue))
+				maxValue = value;
+		}
+		return maxValue;
+	}
+	
+	void		
+	DistanceField::GetPositionsWithValue(
+		uint32_t										aValue,
+		std::vector<Vec2>&								aOut) const
+	{
+		int32_t i = 0;
+		for(int32_t y = 0; y < m_height; y++)
+		{
+			for(int32_t x = 0; x < m_width; x++)
+			{
+				if(m_data[i] == aValue)
+					aOut.push_back({ x, y });
+				i++;
+			}
+		}
 	}
 
 }

@@ -63,20 +63,36 @@ noise .temperature:
 	}	
 }
 
+tag_context .major_boss:
+{
+	must_have_tags: [ boss major_boss ]
+	must_not_have_tags: [ minor_boss ]
+}
+
+tag_context .minor_boss:
+{
+	must_have_tags: [ boss minor_boss ]
+	must_not_have_tags: [ major_boss ]
+}
+
+map_entity_spawn .major_boss:
+{	
+	spawn_timer: { cooldown_range_min: 36000 cooldown_range_max: 36000 }
+}
+
 map gateway_world:
 {
 	string: "Gateway World"
 	type: open_world
 	default_player_spawn: .player_spawn
 	has_overview_map: false
-	level: 10
 	seed: time_seed
 
 	default_tile: water_1
 	default_fishing_loot_table: fish
 	view_attenuation: 0
 	view_attenuation_bias: 0
-	view_hidden_visibility: 35	
+	view_hidden_visibility: 35		
 
 	generator world:
 	{
@@ -142,7 +158,9 @@ map gateway_world:
 				min_distance_to_nearby: 2
 			}			
 			
-			execute debug_terrain_map: "debug.png"
+			execute add_boss: { tag_context: .major_boss influence: 128 map_entity_spawn: .major_boss }
+			execute add_boss: { tag_context: .major_boss influence: 128 map_entity_spawn: .major_boss }
+			execute level_range: [ 8 10 ]
 		}		
 	}
 }

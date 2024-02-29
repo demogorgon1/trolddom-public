@@ -77,4 +77,6 @@
 			]		
 		}				
 	}
+	
+	<exists _tags> tags: @_tags
 }

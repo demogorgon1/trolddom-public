@@ -119,7 +119,8 @@ namespace tpublic
 			{
 				aStream->WriteInt(m_x);
 				aStream->WriteInt(m_y);
-				aStream->WriteUInt(m_id);
+				aStream->WriteUInt(m_mapEntitySpawnId);
+				aStream->WriteUInt(m_entityId);
 			}
 			
 			bool	
@@ -130,7 +131,9 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadInt(m_y))
 					return false;
-				if (!aStream->ReadUInt(m_id))
+				if (!aStream->ReadUInt(m_mapEntitySpawnId))
+					return false;
+				if (!aStream->ReadUInt(m_entityId))
 					return false;
 				return true;
 			}
@@ -138,7 +141,8 @@ namespace tpublic
 			// Public data
 			int32_t									m_x = 0;
 			int32_t									m_y = 0;
-			uint32_t								m_id = 0;
+			uint32_t								m_mapEntitySpawnId = 0;
+			uint32_t								m_entityId = 0;
 		};
 
 		struct PlayerSpawn

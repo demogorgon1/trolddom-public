@@ -1,8 +1,11 @@
 #pragma once
 
+#include "../Data/Entity.h"
+
 #include "../MapData.h"
 #include "../MapGeneratorBase.h"
 #include "../TerrainModifier.h"
+#include "../UIntRange.h"
 
 namespace tpublic
 {
@@ -36,7 +39,9 @@ namespace tpublic::MapGenerators
 			EXECUTE_TYPE_DEBUG_TERRAIN_MAP,
 			EXECUTE_TYPE_OVERLAY,
 			EXECUTE_TYPE_TERRAIN_MODIFIER_MAP,
-			EXECUTE_ADD_ENTITY_SPAWNS
+			EXECUTE_TYPE_ADD_ENTITY_SPAWNS,
+			EXECUTE_TYPE_ADD_BOSS,
+			EXECUTE_TYPE_LEVEL_RANGE,
 		};
 
 		struct PalettedMap
@@ -516,7 +521,11 @@ namespace tpublic::MapGenerators
 				else if (aSource->m_name == "terrain_modifier_map")
 					m_type = EXECUTE_TYPE_TERRAIN_MODIFIER_MAP;
 				else if (aSource->m_name == "add_entity_spawns")
-					m_type = EXECUTE_ADD_ENTITY_SPAWNS;
+					m_type = EXECUTE_TYPE_ADD_ENTITY_SPAWNS;
+				else if (aSource->m_name == "add_boss")
+					m_type = EXECUTE_TYPE_ADD_BOSS;
+				else if (aSource->m_name == "level_range")
+					m_type = EXECUTE_TYPE_LEVEL_RANGE;
 
 				if(aSource->m_annotation)
 					m_weight = aSource->m_annotation->GetUInt32();
@@ -550,6 +559,21 @@ namespace tpublic::MapGenerators
 					m_value = aSource->GetUInt32();
 					break;
 
+				case EXECUTE_TYPE_ADD_BOSS:
+					aSource->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if (aChild->m_name == "tag_context")
+							m_value = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TAG_CONTEXT, aChild->GetIdentifier());
+						else if (aChild->m_name == "map_entity_spawn")
+							m_value3 = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aChild->GetIdentifier());
+						else if (aChild->m_name == "influence")
+							m_value2 = aChild->GetUInt32();
+						else 
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					});
+					break;
+
 				case EXECUTE_TYPE_DOUBLE:
 					aSource->ForEachChild([&](
 						const SourceNode* aChild)
@@ -559,7 +583,7 @@ namespace tpublic::MapGenerators
 						else if(aChild->m_name == "no_mutations")
 							m_noMutations = aChild->GetBool();
 						else 
-							TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					});
 					break;
 
@@ -575,8 +599,12 @@ namespace tpublic::MapGenerators
 				case EXECUTE_TYPE_DESPECKLE:
 					break;
 
-				case EXECUTE_ADD_ENTITY_SPAWNS:
+				case EXECUTE_TYPE_ADD_ENTITY_SPAWNS:
 					m_addEntitySpawns = std::make_unique<AddEntitySpawns>(aSource);
+					break;
+
+				case EXECUTE_TYPE_LEVEL_RANGE:
+					aSource->GetUIntRange(m_value, m_value2);
 					break;
 
 				default:
@@ -592,6 +620,8 @@ namespace tpublic::MapGenerators
 				aWriter->WritePOD(m_type);
 				aWriter->WriteUInt(m_weight);
 				aWriter->WriteUInt(m_value);
+				aWriter->WriteUInt(m_value2);
+				aWriter->WriteUInt(m_value3);
 				aWriter->WriteBool(m_noMutations);
 				aWriter->WriteString(m_string);
 				aWriter->WriteOptionalObjectPointer(m_palettedMap);
@@ -611,6 +641,10 @@ namespace tpublic::MapGenerators
 				if(!aReader->ReadUInt(m_weight))
 					return false;
 				if (!aReader->ReadUInt(m_value))
+					return false;
+				if (!aReader->ReadUInt(m_value2))
+					return false;
+				if (!aReader->ReadUInt(m_value3))
 					return false;
 				if (!aReader->ReadBool(m_noMutations))
 					return false;
@@ -635,6 +669,8 @@ namespace tpublic::MapGenerators
 			ExecuteType										m_type = INVALID_EXECUTE_TYPE;
 			uint32_t										m_weight = 0;
 			uint32_t										m_value = 0;
+			uint32_t										m_value2 = 0;
+			uint32_t										m_value3 = 0;
 			bool											m_noMutations = false;
 			std::string										m_string;
 			std::unique_ptr<PalettedMap>					m_palettedMap;
@@ -654,6 +690,7 @@ namespace tpublic::MapGenerators
 							IReader*					aReader) override;
 		bool			Build(
 							const Manifest*				aManifest,
+							MapGeneratorRuntime*		aMapGeneratorRuntime,
 							uint32_t					aSeed,
 							const MapData*				aSourceMapData,
 							const char*					aDebugImagePath,
@@ -711,17 +748,23 @@ namespace tpublic::MapGenerators
 								const Vec2&					aPosition) const;
 			void			GenerateEntitySpawns(
 								const AddEntitySpawns*		aAddEntitySpawns);
+			void			AddBoss(
+								uint32_t					aTagContextId,
+								uint32_t					aInfluence,
+								uint32_t					aMapEntitySpawnId);
+			void			InitBosses();
 
 			// Public data
 			const TerrainPalette*							m_terrainPalette = NULL;
 			const Manifest*									m_manifest = NULL;
+			MapGeneratorRuntime*							m_mapGeneratorRuntime = NULL;
 			std::mt19937									m_random;
 
 			uint32_t										m_width = 0;
 			uint32_t										m_height = 0;
 			std::vector<uint32_t>							m_terrainMap;
 			std::vector<int32_t>							m_terrainModifierMaps[TerrainModifier::NUM_IDS];
-			uint32_t										m_maxWalkableAreaConnectDistance = 128;
+			uint32_t										m_maxWalkableAreaConnectDistance = 128;			
 
 			struct WalkableArea
 			{
@@ -746,6 +789,29 @@ namespace tpublic::MapGenerators
 
 			std::vector<MapData::EntitySpawn>				m_entitySpawns;
 			std::unordered_set<Vec2, Vec2::Hasher>			m_entitySpawnPositions;
+
+			struct Boss
+			{
+				uint32_t									m_tagContextId = 0;
+				uint32_t									m_influence = 32;
+				uint32_t									m_mapEntitySpawnId = 0;
+				const Data::Entity*							m_entity = NULL;
+				std::unique_ptr<DistanceField>				m_distanceField;
+				Vec2										m_position;
+			};
+
+			struct LevelMapPoint
+			{
+				const Boss*									m_boss = NULL;
+				uint32_t									m_influence = 0;
+				uint32_t									m_level = 0;
+			};
+
+			std::vector<std::unique_ptr<Boss>>				m_bosses;
+			std::unique_ptr<DistanceField>					m_bossDistanceCombined;
+			std::vector<LevelMapPoint>						m_levelMap;
+
+			UIntRange										m_levelRange;
 		};
 
 		void			_AddTerrainPaletteEntry(

@@ -10,7 +10,7 @@ entity world_enemies_npc_0: !NPC
 	_resource_health: 1.105785
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -30,7 +30,7 @@ entity world_enemies_npc_1: !NPC
 	_resource_health: 1.085582
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -49,7 +49,7 @@ entity world_enemies_npc_2: !NPC
 	_resource_health: 0.919200
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -69,7 +69,7 @@ entity world_enemies_npc_3: !NPC
 	_resource_health: 0.938188
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -89,7 +89,7 @@ entity world_enemies_npc_4: !NPC
 	_resource_health: 0.933417
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -109,7 +109,7 @@ entity world_enemies_npc_5: !NPC
 	_resource_health: 0.957591
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -129,7 +129,7 @@ entity world_enemies_npc_6: !NPC
 	_resource_health: 0.813295
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -148,7 +148,7 @@ entity world_enemies_npc_7: !NPC
 	_resource_health: 0.839057
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -167,7 +167,7 @@ entity world_enemies_npc_8: !NPC
 	_resource_health: 0.915048
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -186,7 +186,7 @@ entity world_enemies_npc_9: !NPC
 	_resource_health: 0.888785
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -205,7 +205,7 @@ entity world_enemies_npc_10: !NPC
 	_resource_health: 0.989606
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -225,7 +225,7 @@ entity world_enemies_npc_11: !NPC
 	_resource_health: 1.192719
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -245,7 +245,7 @@ entity world_enemies_npc_12: !NPC
 	_resource_health: 0.806536
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -265,7 +265,7 @@ entity world_enemies_npc_13: !NPC
 	_resource_health: 0.930474
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -284,7 +284,7 @@ entity world_enemies_npc_14: !NPC
 	_resource_health: 1.006796
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -304,7 +304,7 @@ entity world_enemies_npc_15: !NPC
 	_resource_health: 0.967814
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -323,7 +323,7 @@ entity world_enemies_npc_16: !NPC
 	_resource_health: 1.072928
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -343,7 +343,7 @@ entity world_enemies_npc_17: !NPC
 	_resource_health: 0.854541
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -363,7 +363,7 @@ entity world_enemies_npc_18: !NPC
 	_resource_health: 1.045406
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -383,7 +383,7 @@ entity world_enemies_npc_19: !NPC
 	_resource_health: 0.874626
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -403,7 +403,7 @@ entity world_enemies_npc_20: !NPC
 	_resource_health: 1.005386
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -423,7 +423,7 @@ entity world_enemies_npc_21: !NPC
 	_resource_health: 1.042651
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -442,7 +442,7 @@ entity world_enemies_npc_22: !NPC
 	_resource_health: 0.924351
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -462,7 +462,7 @@ entity world_enemies_npc_23: !NPC
 	_resource_health: 0.989884
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -481,7 +481,7 @@ entity world_enemies_npc_24: !NPC
 	_resource_health: 1.038350
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -501,7 +501,7 @@ entity world_enemies_npc_25: !NPC
 	_resource_health: 0.866221
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -521,7 +521,7 @@ entity world_enemies_npc_26: !NPC
 	_resource_health: 0.872396
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -541,7 +541,7 @@ entity world_enemies_npc_27: !NPC
 	_resource_health: 1.021871
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -560,7 +560,7 @@ entity world_enemies_npc_28: !NPC
 	_resource_health: 1.164424
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -579,7 +579,7 @@ entity world_enemies_npc_29: !NPC
 	_resource_health: 0.891305
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -599,7 +599,7 @@ entity world_enemies_npc_30: !NPC
 	_resource_health: 0.956733
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -618,7 +618,7 @@ entity world_enemies_npc_31: !NPC
 	_resource_health: 0.872680
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -638,7 +638,7 @@ entity world_enemies_npc_32: !NPC
 	_resource_health: 1.126333
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -658,7 +658,7 @@ entity world_enemies_npc_33: !NPC
 	_resource_health: 0.974021
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -677,7 +677,7 @@ entity world_enemies_npc_34: !NPC
 	_resource_health: 1.140778
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -696,7 +696,7 @@ entity world_enemies_npc_35: !NPC
 	_resource_health: 1.024276
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -716,7 +716,7 @@ entity world_enemies_npc_36: !NPC
 	_resource_health: 1.170543
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -735,7 +735,7 @@ entity world_enemies_npc_37: !NPC
 	_resource_health: 1.084265
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -755,7 +755,7 @@ entity world_enemies_npc_38: !NPC
 	_resource_health: 1.187876
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -775,7 +775,7 @@ entity world_enemies_npc_39: !NPC
 	_resource_health: 1.079919
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -795,7 +795,7 @@ entity world_enemies_npc_40: !NPC
 	_resource_health: 1.069199
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -814,7 +814,7 @@ entity world_enemies_npc_41: !NPC
 	_resource_health: 1.121584
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -834,7 +834,7 @@ entity world_enemies_npc_42: !NPC
 	_resource_health: 0.921390
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -854,7 +854,7 @@ entity world_enemies_npc_43: !NPC
 	_resource_health: 1.160782
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -874,7 +874,7 @@ entity world_enemies_npc_44: !NPC
 	_resource_health: 0.930729
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -894,7 +894,7 @@ entity world_enemies_npc_45: !NPC
 	_resource_health: 1.023183
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -913,7 +913,7 @@ entity world_enemies_npc_46: !NPC
 	_resource_health: 1.102315
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -932,7 +932,7 @@ entity world_enemies_npc_47: !NPC
 	_resource_health: 1.004215
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -952,7 +952,7 @@ entity world_enemies_npc_48: !NPC
 	_resource_health: 0.835278
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -971,7 +971,7 @@ entity world_enemies_npc_49: !NPC
 	_resource_health: 0.979861
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -990,7 +990,7 @@ entity world_enemies_npc_50: !NPC
 	_resource_health: 1.072336
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -1009,7 +1009,7 @@ entity world_enemies_npc_51: !NPC
 	_resource_health: 1.175076
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -1029,7 +1029,7 @@ entity world_enemies_npc_52: !NPC
 	_resource_health: 0.847157
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -1049,7 +1049,7 @@ entity world_enemies_npc_53: !NPC
 	_resource_health: 1.050612
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -1069,7 +1069,7 @@ entity world_enemies_npc_54: !NPC
 	_resource_health: 1.182700
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -1089,7 +1089,7 @@ entity world_enemies_npc_55: !NPC
 	_resource_health: 1.079153
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -1108,7 +1108,7 @@ entity world_enemies_npc_56: !NPC
 	_resource_health: 1.090295
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -1128,7 +1128,7 @@ entity world_enemies_npc_57: !NPC
 	_resource_health: 0.896448
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -1148,7 +1148,7 @@ entity world_enemies_npc_58: !NPC
 	_resource_health: 0.961180
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -1167,7 +1167,7 @@ entity world_enemies_npc_59: !NPC
 	_resource_health: 1.147302
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -1186,7 +1186,7 @@ entity world_enemies_npc_60: !NPC
 	_resource_health: 0.989358
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -1206,7 +1206,7 @@ entity world_enemies_npc_61: !NPC
 	_resource_health: 1.028192
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -1226,7 +1226,7 @@ entity world_enemies_npc_62: !NPC
 	_resource_health: 1.126243
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -1246,7 +1246,7 @@ entity world_enemies_npc_63: !NPC
 	_resource_health: 1.115780
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -1265,7 +1265,7 @@ entity world_enemies_npc_64: !NPC
 	_resource_health: 1.087624
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -1285,7 +1285,7 @@ entity world_enemies_npc_65: !NPC
 	_resource_health: 1.109308
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -1305,7 +1305,7 @@ entity world_enemies_npc_66: !NPC
 	_resource_health: 0.809813
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -1324,7 +1324,7 @@ entity world_enemies_npc_67: !NPC
 	_resource_health: 0.814748
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -1343,7 +1343,7 @@ entity world_enemies_npc_68: !NPC
 	_resource_health: 1.095226
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -1362,7 +1362,7 @@ entity world_enemies_npc_69: !NPC
 	_resource_health: 1.110221
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -1381,7 +1381,7 @@ entity world_enemies_npc_70: !NPC
 	_resource_health: 1.103510
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -1400,7 +1400,7 @@ entity world_enemies_npc_71: !NPC
 	_resource_health: 1.030338
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -1419,7 +1419,7 @@ entity world_enemies_npc_72: !NPC
 	_resource_health: 1.174491
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -1438,7 +1438,7 @@ entity world_enemies_npc_73: !NPC
 	_resource_health: 1.110072
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -1458,7 +1458,7 @@ entity world_enemies_npc_74: !NPC
 	_resource_health: 1.091185
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -1478,7 +1478,7 @@ entity world_enemies_npc_75: !NPC
 	_resource_health: 0.952023
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -1497,7 +1497,7 @@ entity world_enemies_npc_76: !NPC
 	_resource_health: 0.808516
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -1517,7 +1517,7 @@ entity world_enemies_npc_77: !NPC
 	_resource_health: 0.967177
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -1536,7 +1536,7 @@ entity world_enemies_npc_78: !NPC
 	_resource_health: 1.179592
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -1555,7 +1555,7 @@ entity world_enemies_npc_79: !NPC
 	_resource_health: 0.867234
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -1575,7 +1575,7 @@ entity world_enemies_npc_80: !NPC
 	_resource_health: 0.896420
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -1594,7 +1594,7 @@ entity world_enemies_npc_81: !NPC
 	_resource_health: 0.926138
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -1614,7 +1614,7 @@ entity world_enemies_npc_82: !NPC
 	_resource_health: 0.907441
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -1633,7 +1633,7 @@ entity world_enemies_npc_83: !NPC
 	_resource_health: 1.015316
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -1653,7 +1653,7 @@ entity world_enemies_npc_84: !NPC
 	_resource_health: 1.093843
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -1673,7 +1673,7 @@ entity world_enemies_npc_85: !NPC
 	_resource_health: 1.053737
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -1692,7 +1692,7 @@ entity world_enemies_npc_86: !NPC
 	_resource_health: 1.164058
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -1712,7 +1712,7 @@ entity world_enemies_npc_87: !NPC
 	_resource_health: 0.816910
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -1732,7 +1732,7 @@ entity world_enemies_npc_88: !NPC
 	_resource_health: 1.153774
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -1752,7 +1752,7 @@ entity world_enemies_npc_89: !NPC
 	_resource_health: 0.864526
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -1772,7 +1772,7 @@ entity world_enemies_npc_90: !NPC
 	_resource_health: 0.803789
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -1792,7 +1792,7 @@ entity world_enemies_npc_91: !NPC
 	_resource_health: 1.082085
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -1812,7 +1812,7 @@ entity world_enemies_npc_92: !NPC
 	_resource_health: 1.141735
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -1831,7 +1831,7 @@ entity world_enemies_npc_93: !NPC
 	_resource_health: 0.822238
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -1851,7 +1851,7 @@ entity world_enemies_npc_94: !NPC
 	_resource_health: 0.802154
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -1871,7 +1871,7 @@ entity world_enemies_npc_95: !NPC
 	_resource_health: 0.919468
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		evil
@@ -1891,7 +1891,7 @@ entity world_enemies_npc_96: !NPC
 	_resource_health: 0.940626
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -1910,7 +1910,7 @@ entity world_enemies_npc_97: !NPC
 	_resource_health: 1.121972
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -1929,7 +1929,7 @@ entity world_enemies_npc_98: !NPC
 	_resource_health: 0.854925
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
@@ -1948,10 +1948,3210 @@ entity world_enemies_npc_99: !NPC
 	_resource_health: 1.046222
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
-	tags:
+	_tags:
 	[
 		melee
 		goblin
+	]
+}
+
+entity world_enemies_npc_100: !NPC
+{
+	_string: "Ebyasdorg"
+	_level: 4
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.930414
+	_resource_health: 2.953589
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_101: !NPC
+{
+	_string: "Aifru"
+	_level: 5
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.843485
+	_resource_health: 2.920245
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_102: !NPC
+{
+	_string: "Harmonyrg"
+	_level: 1
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.618649
+	_resource_health: 2.816418
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_103: !NPC
+{
+	_string: "Agava"
+	_level: 3
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.852893
+	_resource_health: 2.262904
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_104: !NPC
+{
+	_string: "Hamton"
+	_level: 3
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.895695
+	_resource_health: 2.048999
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_105: !NPC
+{
+	_string: "Orig"
+	_level: 2
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.972987
+	_resource_health: 2.986425
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_106: !NPC
+{
+	_string: "Maasol"
+	_level: 8
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.655479
+	_resource_health: 2.373366
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_107: !NPC
+{
+	_string: "Arccuges"
+	_level: 3
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.876611
+	_resource_health: 2.577768
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_108: !NPC
+{
+	_string: "Amdrbork"
+	_level: 2
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.565015
+	_resource_health: 2.211780
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_109: !NPC
+{
+	_string: "Agamaclaw"
+	_level: 5
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.685814
+	_resource_health: 2.827463
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_110: !NPC
+{
+	_string: "Alal"
+	_level: 6
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.840369
+	_resource_health: 2.432151
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_111: !NPC
+{
+	_string: "Agrn"
+	_level: 5
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.982876
+	_resource_health: 2.247418
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_112: !NPC
+{
+	_string: "Paures"
+	_level: 4
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.788439
+	_resource_health: 2.633465
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_113: !NPC
+{
+	_string: "Agamuzol"
+	_level: 7
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.814682
+	_resource_health: 2.297717
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_114: !NPC
+{
+	_string: "Banthon"
+	_level: 5
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.861345
+	_resource_health: 2.960471
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_115: !NPC
+{
+	_string: "Punius"
+	_level: 1
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.954096
+	_resource_health: 2.988113
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_116: !NPC
+{
+	_string: "Forcelyrg"
+	_level: 7
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.987958
+	_resource_health: 2.749547
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_117: !NPC
+{
+	_string: "Beqoyagorg"
+	_level: 4
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.791475
+	_resource_health: 2.619713
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_118: !NPC
+{
+	_string: "Vargon"
+	_level: 8
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.749218
+	_resource_health: 2.969867
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_119: !NPC
+{
+	_string: "Marax"
+	_level: 4
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.843671
+	_resource_health: 2.805431
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_120: !NPC
+{
+	_string: "Bamonbork"
+	_level: 5
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.523485
+	_resource_health: 2.589078
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_121: !NPC
+{
+	_string: "Ormo"
+	_level: 7
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.792810
+	_resource_health: 2.767829
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_122: !NPC
+{
+	_string: "Behesbork"
+	_level: 5
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.952560
+	_resource_health: 2.659908
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_123: !NPC
+{
+	_string: "Mabeg"
+	_level: 4
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.638278
+	_resource_health: 2.725562
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_124: !NPC
+{
+	_string: "Jiluec"
+	_level: 1
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.671424
+	_resource_health: 2.540884
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_125: !NPC
+{
+	_string: "Flielak"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.951188
+	_resource_health: 2.459003
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_126: !NPC
+{
+	_string: "Aephingi"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.701337
+	_resource_health: 2.812325
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_127: !NPC
+{
+	_string: "Beqourthe"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.608995
+	_resource_health: 2.828654
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_128: !NPC
+{
+	_string: "Gabhiusclaw"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.529413
+	_resource_health: 2.445834
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_129: !NPC
+{
+	_string: "Lepa"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.665685
+	_resource_health: 2.343947
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_130: !NPC
+{
+	_string: "Maloniaitsdrugh"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.710553
+	_resource_health: 2.418761
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_131: !NPC
+{
+	_string: "Fonecarephrbork"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.506111
+	_resource_health: 2.794500
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_132: !NPC
+{
+	_string: "Lisoponjaw"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.855269
+	_resource_health: 2.849206
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_133: !NPC
+{
+	_string: "Naloushigoss"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.820636
+	_resource_health: 2.816912
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_134: !NPC
+{
+	_string: "Koralclaw"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.787089
+	_resource_health: 2.269739
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_135: !NPC
+{
+	_string: "Kolu"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.788080
+	_resource_health: 2.366863
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_136: !NPC
+{
+	_string: "Dalus"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.989179
+	_resource_health: 2.568852
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_137: !NPC
+{
+	_string: "Merchiel"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.702124
+	_resource_health: 2.625373
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_138: !NPC
+{
+	_string: "Grobon"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.882965
+	_resource_health: 2.750755
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_139: !NPC
+{
+	_string: "Daur"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.514884
+	_resource_health: 2.452366
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_140: !NPC
+{
+	_string: "Alagia"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.510772
+	_resource_health: 2.352598
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_141: !NPC
+{
+	_string: "Rales"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.815988
+	_resource_health: 2.137501
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_142: !NPC
+{
+	_string: "Saaxdorg"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.978514
+	_resource_health: 2.547819
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_143: !NPC
+{
+	_string: "Barch"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.925719
+	_resource_health: 2.129327
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_144: !NPC
+{
+	_string: "Cainzusurjaw"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.995140
+	_resource_health: 2.561641
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_145: !NPC
+{
+	_string: "Chamuol"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.613826
+	_resource_health: 2.629147
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_146: !NPC
+{
+	_string: "Forphus"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.678127
+	_resource_health: 2.805555
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_147: !NPC
+{
+	_string: "Wezurias"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.895487
+	_resource_health: 2.596789
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_148: !NPC
+{
+	_string: "Bastas"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.585759
+	_resource_health: 2.963313
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_149: !NPC
+{
+	_string: "Aeval"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.648013
+	_resource_health: 2.838743
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_150: !NPC
+{
+	_string: "Xapushyaku"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.694317
+	_resource_health: 2.371309
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_151: !NPC
+{
+	_string: "Abeva"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.522130
+	_resource_health: 2.830884
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_152: !NPC
+{
+	_string: "Focin"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.602686
+	_resource_health: 2.883847
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_153: !NPC
+{
+	_string: "Narce"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.706390
+	_resource_health: 2.655267
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_154: !NPC
+{
+	_string: "Zaliorebork"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.826737
+	_resource_health: 2.578693
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_155: !NPC
+{
+	_string: "Goleri"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.709751
+	_resource_health: 2.936737
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_156: !NPC
+{
+	_string: "Abazotugorg"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.629603
+	_resource_health: 2.158757
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_157: !NPC
+{
+	_string: "Fociol"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.927137
+	_resource_health: 2.383296
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_158: !NPC
+{
+	_string: "Kaks"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.625932
+	_resource_health: 2.327335
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_159: !NPC
+{
+	_string: "Surphicagorg"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.682563
+	_resource_health: 2.756279
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_160: !NPC
+{
+	_string: "Bavakulla"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.902243
+	_resource_health: 2.564794
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_161: !NPC
+{
+	_string: "Naphdrugh"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.565777
+	_resource_health: 2.422983
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_162: !NPC
+{
+	_string: "Prno"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.991752
+	_resource_health: 2.565633
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_163: !NPC
+{
+	_string: "Vele"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.687320
+	_resource_health: 2.785971
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_164: !NPC
+{
+	_string: "Maap"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.804454
+	_resource_health: 2.634946
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_165: !NPC
+{
+	_string: "Borbema"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.805355
+	_resource_health: 2.765163
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_166: !NPC
+{
+	_string: "Maal"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.537235
+	_resource_health: 2.232834
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_167: !NPC
+{
+	_string: "Alam"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.615805
+	_resource_health: 2.273559
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_168: !NPC
+{
+	_string: "Gaacu"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.791439
+	_resource_health: 2.789628
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_169: !NPC
+{
+	_string: "Limpt"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.791142
+	_resource_health: 2.596967
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_170: !NPC
+{
+	_string: "Borbaxclaw"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.791505
+	_resource_health: 2.903638
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_171: !NPC
+{
+	_string: "Gaapudrugh"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.976469
+	_resource_health: 2.675779
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_172: !NPC
+{
+	_string: "Ifranesdrugh"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.775531
+	_resource_health: 2.550670
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_173: !NPC
+{
+	_string: "Selethalyrg"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.652033
+	_resource_health: 2.690335
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_174: !NPC
+{
+	_string: "Fomol"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 1.534984
+	_resource_health: 2.104256
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		boss
+		minor_boss
+		goblin
+		melee
+	]
+}
+
+entity world_enemies_npc_175: !NPC
+{
+	_string: "Zerusclaw"
+	_level: 6
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.212334
+	_resource_health: 3.997450
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_176: !NPC
+{
+	_string: "Boks"
+	_level: 3
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.755987
+	_resource_health: 3.844121
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_177: !NPC
+{
+	_string: "Sorphan"
+	_level: 5
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.671551
+	_resource_health: 3.924248
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_178: !NPC
+{
+	_string: "Mergon"
+	_level: 5
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.390667
+	_resource_health: 3.653825
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_179: !NPC
+{
+	_string: "Deneta"
+	_level: 3
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.437500
+	_resource_health: 3.700118
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_180: !NPC
+{
+	_string: "Arcigorg"
+	_level: 4
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.669424
+	_resource_health: 3.558748
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_181: !NPC
+{
+	_string: "Adrteol"
+	_level: 7
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 3.174202
+	_resource_health: 3.950823
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_182: !NPC
+{
+	_string: "Chal"
+	_level: 6
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.222098
+	_resource_health: 3.592762
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_183: !NPC
+{
+	_string: "Jintbork"
+	_level: 4
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 3.143408
+	_resource_health: 3.625175
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_184: !NPC
+{
+	_string: "Dasaxclaw"
+	_level: 4
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.490778
+	_resource_health: 3.930821
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_185: !NPC
+{
+	_string: "Mehel"
+	_level: 7
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.788558
+	_resource_health: 3.608440
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_186: !NPC
+{
+	_string: "Preres"
+	_level: 6
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.994350
+	_resource_health: 3.558316
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_187: !NPC
+{
+	_string: "Sabiomon"
+	_level: 5
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.272932
+	_resource_health: 3.879797
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_188: !NPC
+{
+	_string: "Krieres"
+	_level: 3
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.746533
+	_resource_health: 3.915688
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_189: !NPC
+{
+	_string: "Foniorg"
+	_level: 8
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.863993
+	_resource_health: 3.866616
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_190: !NPC
+{
+	_string: "Bairtas"
+	_level: 5
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 3.068365
+	_resource_health: 3.883604
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_191: !NPC
+{
+	_string: "Amdritak"
+	_level: 1
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.546201
+	_resource_health: 3.877513
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_192: !NPC
+{
+	_string: "Ralpte"
+	_level: 1
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.459856
+	_resource_health: 3.735135
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_193: !NPC
+{
+	_string: "Busondajaw"
+	_level: 8
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 3.016798
+	_resource_health: 3.576690
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_194: !NPC
+{
+	_string: "Vavaliclaw"
+	_level: 8
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.574210
+	_resource_health: 3.937004
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_195: !NPC
+{
+	_string: "Kavias"
+	_level: 1
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 3.114524
+	_resource_health: 3.521193
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_196: !NPC
+{
+	_string: "Caphgorg"
+	_level: 2
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.706086
+	_resource_health: 3.785630
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_197: !NPC
+{
+	_string: "Chamasthas"
+	_level: 4
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.640008
+	_resource_health: 3.576160
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_198: !NPC
+{
+	_string: "Darchani"
+	_level: 2
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.995790
+	_resource_health: 3.885675
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_199: !NPC
+{
+	_string: "Amavaldorg"
+	_level: 4
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.270560
+	_resource_health: 3.927084
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_200: !NPC
+{
+	_string: "Inderenassyrg the Lethal"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.288133
+	_resource_health: 3.820044
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_201: !NPC
+{
+	_string: "Drcus the Toxic"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 3.186616
+	_resource_health: 3.703092
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_202: !NPC
+{
+	_string: "Ondusyapt the Violent"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.354946
+	_resource_health: 3.642796
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_203: !NPC
+{
+	_string: "Sokashes the Lethal"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.594425
+	_resource_health: 3.794117
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_204: !NPC
+{
+	_string: "Dasodyar the Beastly"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.819806
+	_resource_health: 3.581441
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_205: !NPC
+{
+	_string: "Gukax the Infernal"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.754284
+	_resource_health: 3.503075
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_206: !NPC
+{
+	_string: "Boriusax the Toxic"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.667967
+	_resource_health: 3.596935
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_207: !NPC
+{
+	_string: "Fonnt the Corrupt"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 3.111146
+	_resource_health: 3.559495
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_208: !NPC
+{
+	_string: "Eblo the Bitter"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.565158
+	_resource_health: 3.598758
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_209: !NPC
+{
+	_string: "Agiricral the Grey"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.728639
+	_resource_health: 3.749594
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_210: !NPC
+{
+	_string: "Hanely the Depraved"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 3.122096
+	_resource_health: 3.520029
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_211: !NPC
+{
+	_string: "Tabhasicen the Deadly"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 3.126194
+	_resource_health: 3.563465
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_212: !NPC
+{
+	_string: "Gligongerelcr the Injurious"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.559491
+	_resource_health: 3.710543
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_213: !NPC
+{
+	_string: "Incusgorg the Cruel"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.418094
+	_resource_health: 3.579886
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_214: !NPC
+{
+	_string: "Behagorg the Infernal"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 3.191319
+	_resource_health: 3.519275
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_215: !NPC
+{
+	_string: "Werakkii the Cruel"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.835408
+	_resource_health: 3.555875
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_216: !NPC
+{
+	_string: "Furmbork the Damned"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.752140
+	_resource_health: 3.861619
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_217: !NPC
+{
+	_string: "Pemi the Revolting"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 3.135010
+	_resource_health: 3.722171
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_218: !NPC
+{
+	_string: "Begomajaw the Pestilent"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.642199
+	_resource_health: 3.862430
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_219: !NPC
+{
+	_string: "Ancajaorg the Iniquitous"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 3.045786
+	_resource_health: 3.676659
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_220: !NPC
+{
+	_string: "Cilsorg the Vile"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 3.110707
+	_resource_health: 3.830607
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_221: !NPC
+{
+	_string: "Suraclaw the Lethal"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.780781
+	_resource_health: 3.529098
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_222: !NPC
+{
+	_string: "Kann the Fatal"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.875569
+	_resource_health: 3.546872
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_223: !NPC
+{
+	_string: "Samithioreon the Revolting"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.641292
+	_resource_health: 3.701859
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_224: !NPC
+{
+	_string: "Vabndorg the Bloody"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.421772
+	_resource_health: 3.700228
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_225: !NPC
+{
+	_string: "Porgonzondrugh the Nefarious"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.457108
+	_resource_health: 3.790107
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_226: !NPC
+{
+	_string: "Analochu the Stinking"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 3.140304
+	_resource_health: 3.661274
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_227: !NPC
+{
+	_string: "Rabesclaw the Nefarious"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 3.177570
+	_resource_health: 3.661289
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_228: !NPC
+{
+	_string: "Sakimasjaw the Angry"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.890773
+	_resource_health: 3.613739
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_229: !NPC
+{
+	_string: "Buayororg the Destructive"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.540631
+	_resource_health: 3.666474
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_230: !NPC
+{
+	_string: "Bhemorel the Harmful"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.913964
+	_resource_health: 3.914522
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_231: !NPC
+{
+	_string: "Vasos the Noxious"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 3.198362
+	_resource_health: 3.573632
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_232: !NPC
+{
+	_string: "Andrergorg the Bloody"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.737857
+	_resource_health: 3.862510
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_233: !NPC
+{
+	_string: "Daaphabifaorg the Baneful"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 3.101378
+	_resource_health: 3.854325
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_234: !NPC
+{
+	_string: "Hass the Obscene"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.676829
+	_resource_health: 3.907839
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_235: !NPC
+{
+	_string: "Grigoron the Wicked"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.240087
+	_resource_health: 3.576422
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_236: !NPC
+{
+	_string: "Wetimax the Ugly"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.251096
+	_resource_health: 3.804964
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_237: !NPC
+{
+	_string: "Apoam the Hideous"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.695433
+	_resource_health: 3.658615
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_238: !NPC
+{
+	_string: "Sorphalas the Execrable"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 3.166295
+	_resource_health: 3.967818
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_239: !NPC
+{
+	_string: "Andriclaw the Wrathful"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.909502
+	_resource_health: 3.595309
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_240: !NPC
+{
+	_string: "Goch the Harmful"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.433794
+	_resource_health: 3.534093
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_241: !NPC
+{
+	_string: "Fuss the Bitter"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.547784
+	_resource_health: 3.616392
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_242: !NPC
+{
+	_string: "Krnela the Corrupt"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.371861
+	_resource_health: 3.984549
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_243: !NPC
+{
+	_string: "Andrgorg the Vile"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.780725
+	_resource_health: 3.899749
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_244: !NPC
+{
+	_string: "Fuames the Loathsome"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.781839
+	_resource_health: 3.550632
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_245: !NPC
+{
+	_string: "Babhajaw the Atrocious"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.206947
+	_resource_health: 3.660991
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_246: !NPC
+{
+	_string: "Ukoas the Calamitious"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.909601
+	_resource_health: 3.857409
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_247: !NPC
+{
+	_string: "Baasol the Execrable"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 3.003702
+	_resource_health: 3.520010
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_248: !NPC
+{
+	_string: "Anciasyayrg the Malignant"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 2.773737
+	_resource_health: 3.681600
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
+	]
+}
+
+entity world_enemies_npc_249: !NPC
+{
+	_string: "Goras the Angry"
+	_level: 10
+	_elite: true
+	_faction: monsters
+	_sprite: goblin_boss
+	_sprite_dead: goblin_boss_dead
+	_weapon_damage: 3.146221
+	_resource_health: 3.764208
+	_creature_type: humanoid
+	_loot_table: __generation_jobs_world_drops
+	_tags:
+	[
+		melee
+		evil
+		major_boss
+		goblin
+		boss
 	]
 }
 

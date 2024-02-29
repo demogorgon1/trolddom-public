@@ -10,6 +10,7 @@ namespace tpublic
 
 	class Manifest;
 	class MapData;
+	class MapGeneratorRuntime;
 
 	class MapGeneratorBase
 	{
@@ -56,6 +57,7 @@ namespace tpublic
 									IReader*					/*aStream*/) { assert(false); return true; }		
 		virtual bool			Build(
 									const Manifest*				/*aManifest*/,
+									MapGeneratorRuntime*		/*aMapGeneratorRuntime*/,
 									uint32_t					/*aSeed*/,
 									const MapData*				/*aSourceMapData*/,
 									const char*					/*aDebugImagePath*/,

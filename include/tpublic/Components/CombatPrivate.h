@@ -32,7 +32,8 @@ namespace tpublic
 				FIELD_MANA_REGEN,
 				FIELD_HEALTH_REGEN_NOT_IN_COMBAT,
 				FIELD_HEALTH_REGEN,
-				FIELD_ARMOR
+				FIELD_ARMOR,
+				FIELD_BLOCK_VALUE
 			};
 
 			static void
@@ -53,6 +54,7 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_HEALTH_REGEN_NOT_IN_COMBAT, "health_regen_not_in_combat", offsetof(CombatPrivate, m_healthRegenNotInCombat));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_HEALTH_REGEN, "health_regen", offsetof(CombatPrivate, m_healthRegenerationPer5Sec));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_ARMOR, "armor", offsetof(CombatPrivate, m_armor));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_BLOCK_VALUE, "block_value", offsetof(CombatPrivate, m_blockValue));
 			}
 
 			void
@@ -61,17 +63,18 @@ namespace tpublic
 				m_weaponDamageRangeMin = 0;
 				m_weaponDamageRangeMax = 0;
 				m_weaponCooldown = 0;
-				m_physicalCriticalStrikeChance = 0.0f;
-				m_magicalCriticalStrikeChance = 0.0f;
-				m_dodgeChance = 0.0f;
-				m_parryChance = 0.0f;
-				m_missChance = 0.0f;
-				m_blockChance = 0.0f;
+				m_physicalCriticalStrikeChance = 5.0f;
+				m_magicalCriticalStrikeChance = 5.0f;
+				m_dodgeChance = 5.0f;
+				m_parryChance = 5.0f;
+				m_missChance = 5.0f;
+				m_blockChance = 5.0f;
 				m_manaRegenerationNotCastingPer5Sec = 0;
 				m_manaRegenerationPer5Sec = 0;
 				m_healthRegenNotInCombat = 0;
 				m_healthRegenerationPer5Sec = 0;
 				m_armor = 0;
+				m_blockValue = 0;
 			}
 
 			// Public data
@@ -89,6 +92,7 @@ namespace tpublic
 			uint32_t							m_healthRegenNotInCombat = 0;
 			uint32_t							m_healthRegenerationPer5Sec = 0;
 			uint32_t							m_armor = 0;
+			uint32_t							m_blockValue = 0;
 		};
 
 	}

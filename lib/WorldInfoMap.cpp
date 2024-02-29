@@ -60,8 +60,11 @@ namespace tpublic
 					{
 						for (int32_t j = j0; j < j1; j++)
 						{
-							detailsEntry->m_level = aLevelMap[j + i * aWidth];
-							detailsEntry->m_zoneId = aZoneMap[j + i * aWidth];
+							if(aLevelMap != NULL)
+								detailsEntry->m_level = aLevelMap[j + i * aWidth];
+
+							if(aZoneMap != NULL)
+								detailsEntry->m_zoneId = aZoneMap[j + i * aWidth];								
 
 							if (topLevelCellEntry.has_value())
 							{

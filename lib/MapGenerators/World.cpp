@@ -1,5 +1,7 @@
 #include "../Pcheader.h"
 
+#include <tpublic/Components/CombatPublic.h>
+
 #include <tpublic/Data/Noise.h>
 #include <tpublic/Data/Terrain.h>
 
@@ -9,7 +11,10 @@
 #include <tpublic/Helpers.h>
 #include <tpublic/Image.h>
 #include <tpublic/Manifest.h>
+#include <tpublic/MapGeneratorRuntime.h>
 #include <tpublic/NoiseInstance.h>
+#include <tpublic/TaggedData.h>
+#include <tpublic/WorldInfoMap.h>
 
 namespace tpublic::MapGenerators
 {
@@ -100,6 +105,7 @@ namespace tpublic::MapGenerators
 	bool		
 	World::Build(
 		const Manifest*					aManifest,
+		MapGeneratorRuntime*			aMapGeneratorRuntime,
 		uint32_t						aSeed,
 		const MapData*					aSourceMapData,
 		const char*						/*aDebugImagePath*/,
@@ -108,6 +114,7 @@ namespace tpublic::MapGenerators
 		Builder builder;
 		builder.m_terrainPalette = &m_terrainPalette;
 		builder.m_manifest = aManifest;
+		builder.m_mapGeneratorRuntime = aMapGeneratorRuntime;
 		builder.m_random.seed(aSeed);
 
 		for(const std::unique_ptr<Execute>& execute : m_executes)
@@ -120,6 +127,7 @@ namespace tpublic::MapGenerators
 
 		builder.InitNoiseMap();
 		builder.ConnectWalkableAreas();
+		builder.InitBosses();
 
 		builder.CreateMapData(aSourceMapData, aOutMapData);
 
@@ -252,8 +260,16 @@ namespace tpublic::MapGenerators
 			BuildTerrainModifierMap(aExecute->m_terrainModifierMap.get());
 			break;
 
-		case EXECUTE_ADD_ENTITY_SPAWNS:
+		case EXECUTE_TYPE_ADD_ENTITY_SPAWNS:
 			GenerateEntitySpawns(aExecute->m_addEntitySpawns.get());
+			break;
+
+		case EXECUTE_TYPE_ADD_BOSS:
+			AddBoss(aExecute->m_value, aExecute->m_value2, aExecute->m_value3);
+			break;
+
+		case EXECUTE_TYPE_LEVEL_RANGE:
+			m_levelRange = { aExecute->m_value, aExecute->m_value2 };
 			break;
 
 		default:
@@ -728,9 +744,31 @@ namespace tpublic::MapGenerators
 			aOutMapData->m_playerSpawns.push_back(playerSpawn);			
 		}
 
-		// Entity spawns
-		for(const MapData::EntitySpawn& entitySpawn : m_entitySpawns)
+		// Boss entity spawns
+		for(const std::unique_ptr<Boss>& boss : m_bosses)
+		{
+			MapData::EntitySpawn entitySpawn;
+			entitySpawn.m_entityId = boss->m_entity->m_id;
+			entitySpawn.m_mapEntitySpawnId = boss->m_mapEntitySpawnId;
+			entitySpawn.m_x = boss->m_position.m_x;
+			entitySpawn.m_y = boss->m_position.m_y;
 			aOutMapData->m_entitySpawns.push_back(entitySpawn);
+		}
+
+		// More entity spawns
+		for (const MapData::EntitySpawn& entitySpawn : m_entitySpawns)
+			aOutMapData->m_entitySpawns.push_back(entitySpawn);
+
+		// World info map
+		{
+			std::vector<uint32_t> levels;
+			levels.resize(m_width * m_height);
+			for(uint32_t i = 0, count = m_width * m_height; i < count; i++)
+				levels[i] = m_levelMap[i].m_level;
+
+			aOutMapData->m_worldInfoMap = std::make_unique<WorldInfoMap>();
+			aOutMapData->m_worldInfoMap->Build((int32_t)m_width, (int32_t)m_height, &levels[0], NULL);
+		}
 	}
 
 	void		
@@ -1055,7 +1093,7 @@ namespace tpublic::MapGenerators
 						if(canPlace)
 						{
 							MapData::EntitySpawn t;
-							t.m_id = aAddEntitySpawns->m_mapEntitySpawns[Roll(0, (uint32_t)aAddEntitySpawns->m_mapEntitySpawns.size() - 1)];
+							t.m_mapEntitySpawnId = aAddEntitySpawns->m_mapEntitySpawns[Roll(0, (uint32_t)aAddEntitySpawns->m_mapEntitySpawns.size() - 1)];
 							t.m_x = x;
 							t.m_y = y;
 							m_entitySpawns.push_back(t);
@@ -1064,6 +1102,112 @@ namespace tpublic::MapGenerators
 						}
 					}
 				}
+			}
+		}
+	}
+
+	void			
+	World::Builder::AddBoss(
+		uint32_t					aTagContextId,
+		uint32_t					aInfluence,
+		uint32_t					aMapEntitySpawnId)
+	{
+		std::unique_ptr<Boss> t = std::make_unique<Boss>();
+		t->m_tagContextId = aTagContextId;
+		t->m_influence = aInfluence;
+		t->m_mapEntitySpawnId = aMapEntitySpawnId;
+		m_bosses.push_back(std::move(t));
+	}
+
+	void			
+	World::Builder::InitBosses()
+	{
+		for(std::unique_ptr<Boss>& boss : m_bosses)
+		{
+			Vec2 position;
+
+			if(!m_bossDistanceCombined)
+			{
+				// First boss is placed randomly
+				position = *m_walkable.cbegin();
+			}
+			else
+			{
+				// Remaining bosses are more complicated to place - put them as far away from other bosses as possible (or a lil bit closer otherwise it would look weird)
+				std::vector<Vec2> positions;
+				m_bossDistanceCombined->GetPositionsWithValue(m_bossDistanceCombined->GetMax() - 5, positions);
+				if(positions.empty())
+				{
+					// Shouldn't really happen, just don't place any more bosses
+					break;
+				}
+
+				position = positions[Roll(0, (uint32_t)positions.size() - 1)];
+			}
+
+			boss->m_position = position;
+			boss->m_distanceField = std::make_unique<DistanceField>((int32_t)m_width, (int32_t)m_height);
+			boss->m_distanceField->GenerateFromSinglePosition(position, m_walkable, UINT32_MAX);
+
+			if(!m_bossDistanceCombined)
+				m_bossDistanceCombined = std::make_unique<DistanceField>((int32_t)m_width, (int32_t)m_height);
+
+			m_bossDistanceCombined->CombineMin(boss->m_distanceField.get());
+
+			// Convert boss distance field into an "influence field"
+			boss->m_distanceField->Filter([&](
+				uint32_t aValue)
+			{
+				if(aValue > boss->m_influence)
+					return UINT32_MAX;
+				else
+					return boss->m_influence - aValue;
+			});
+
+			// Pick boss 			
+			{
+				const TaggedData::QueryResult* result = m_mapGeneratorRuntime->m_entities->PerformQueryWithTagContext(m_manifest->GetById<Data::TagContext>(boss->m_tagContextId));
+				const TaggedData::QueryResult::Entry* picked = result->TryPickRandomFiltered(m_random, [&](
+					const TaggedData::QueryResult::Entry* aEntry) -> bool
+				{
+					const Data::Entity* entity = m_manifest->GetById<Data::Entity>(aEntry->m_id);
+					const Components::CombatPublic* combatPublic = entity->TryGetComponent<Components::CombatPublic>();
+					if(combatPublic->m_level == m_levelRange.m_max)
+						return true;
+					return false;
+				});
+
+				TP_CHECK(picked != NULL, "Unable to pick boss.");
+				boss->m_entity = m_manifest->GetById<Data::Entity>(picked->m_id);
+			}
+		}
+
+		// Make level map
+		m_levelMap.resize(m_width * m_height);
+		for(uint32_t i = 0, count = m_width * m_height; i < count; i++)
+		{
+			LevelMapPoint& levelMapPoint = m_levelMap[i];
+
+			// Find boss with highest influence here
+			levelMapPoint.m_boss = NULL;
+			levelMapPoint.m_influence = UINT32_MAX;
+			levelMapPoint.m_level = m_levelRange.m_min;
+
+			for (const std::unique_ptr<Boss>& boss : m_bosses)
+			{
+				uint32_t bossInfluence = boss->m_distanceField->m_data[i];
+
+				if(bossInfluence != UINT32_MAX && (levelMapPoint.m_boss == NULL || bossInfluence > levelMapPoint.m_influence))
+				{
+					levelMapPoint.m_boss = boss.get();
+					levelMapPoint.m_influence = bossInfluence;
+				}
+			}
+
+			if(levelMapPoint.m_boss != NULL)
+			{
+				// Calculate area level based boss influence
+				levelMapPoint.m_level = m_levelRange.m_min + ((m_levelRange.m_max - m_levelRange.m_min + 1) * levelMapPoint.m_influence) / levelMapPoint.m_boss->m_influence;
 			}
 		}
 	}

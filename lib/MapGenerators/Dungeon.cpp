@@ -81,6 +81,7 @@ namespace tpublic::MapGenerators
 	bool		
 	Dungeon::Build(
 		const Manifest*					aManifest,
+		MapGeneratorRuntime*			/*aMapGeneratorRuntime*/,
 		uint32_t						aSeed,
 		const MapData*					aSourceMapData,
 		const char*						aDebugImagePath,
@@ -401,7 +402,7 @@ namespace tpublic::MapGenerators
 				case Data::MapSegment::OBJECT_TYPE_ENTITY_SPAWN:
 					{
 						MapData::EntitySpawn t;
-						t.m_id = object.m_id;
+						t.m_mapEntitySpawnId = object.m_id;
 						t.m_x = generatedRoom->m_min.m_x + object.m_position.m_x;
 						t.m_y = generatedRoom->m_min.m_y + object.m_position.m_y;
 						mapData->m_entitySpawns.push_back(t);

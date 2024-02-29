@@ -124,14 +124,6 @@ namespace tpublic
 		{
 			struct Entry
 			{
-				//bool
-				//operator ==(
-				//	const Entry&							aOther) const
-				//{
-				//	return m_id == aOther.m_id && m_weight == aOther.m_weight;
-				//}
-
-				// Public data
 				uint32_t				m_id = 0;
 				uint32_t				m_weight = 0;
 				std::vector<uint32_t>	m_tags;
@@ -169,6 +161,44 @@ namespace tpublic
 				const Entry* t = TryPickRandom(aRandom);
 				TP_CHECK(t != NULL, "Empty query result.");
 				return t;
+			}
+
+			const Entry*
+			TryPickRandomFiltered(
+				std::mt19937&									aRandom,
+				std::function<bool(const Entry*)>				aFilter) const
+			{
+				std::vector<const Entry*> filtered;
+				uint32_t filteredTotalWeight = 0;
+
+				for (const Entry& t : m_entries)
+				{
+					if(aFilter(&t))
+					{
+						filtered.push_back(&t);
+						filteredTotalWeight += t.m_weight;
+					}
+				}
+
+				if (filtered.empty())
+					return NULL;
+
+				assert(filteredTotalWeight > 0);
+
+				std::uniform_int_distribution<uint32_t> distribution(1, filteredTotalWeight);
+				uint32_t roll = distribution(aRandom);
+
+				uint32_t sum = 0;
+				for (const Entry* t : filtered)
+				{
+					sum += t->m_weight;
+
+					if (roll <= sum)
+						return t;
+				}
+
+				assert(false);
+				return NULL;
 			}
 
 			// Public data
