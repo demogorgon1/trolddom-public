@@ -38,6 +38,9 @@ namespace tpublic
 		void		GetPositionsWithValue(
 						uint32_t										aValue,
 						std::vector<Vec2>&								aOut) const;
+		void		GetPositionsMoreThanValue(
+						uint32_t										aValue,
+						std::vector<Vec2>&								aOut) const;
 
 		// Public data
 		int32_t		m_width = 0;

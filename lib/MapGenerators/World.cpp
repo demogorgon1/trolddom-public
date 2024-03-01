@@ -130,12 +130,13 @@ namespace tpublic::MapGenerators
 		}
 
 		// Player spawns
+		for (const std::unique_ptr<PlayerSpawn>& playerSpawn : m_playerSpawns)
 		{
-			MapData::PlayerSpawn playerSpawn;
-			playerSpawn.m_id = aOutMapData->m_mapInfo.m_defaultPlayerSpawnId;
-			playerSpawn.m_x = m_walkable.cbegin()->m_x;
-			playerSpawn.m_y = m_walkable.cbegin()->m_y;
-			aOutMapData->m_playerSpawns.push_back(playerSpawn);			
+			MapData::PlayerSpawn t;
+			t.m_id = aOutMapData->m_mapInfo.m_defaultPlayerSpawnId;
+			t.m_x = playerSpawn->m_position.m_x;
+			t.m_y = playerSpawn->m_position.m_y;
+			aOutMapData->m_playerSpawns.push_back(t);			
 		}
 
 		// Boss entity spawns
@@ -453,6 +454,8 @@ namespace tpublic::MapGenerators
 			boss->m_distanceField = std::make_unique<DistanceField>((int32_t)m_width, (int32_t)m_height);
 			boss->m_distanceField->GenerateFromSinglePosition(position, m_walkable, UINT32_MAX);
 
+			m_entitySpawnPositions.insert(position);
+
 			if(!m_bossDistanceCombined)
 				m_bossDistanceCombined = std::make_unique<DistanceField>((int32_t)m_width, (int32_t)m_height);
 
@@ -477,7 +480,10 @@ namespace tpublic::MapGenerators
 					const Data::Entity* entity = m_manifest->GetById<Data::Entity>(aEntry->m_id);
 					const Components::CombatPublic* combatPublic = entity->TryGetComponent<Components::CombatPublic>();
 					if(combatPublic->m_level == m_levelRange.m_max)
+					{	
+						boss->m_factionId = combatPublic->m_factionId;
 						return true;
+					}
 					return false;
 				});
 
@@ -554,7 +560,7 @@ namespace tpublic::MapGenerators
 						{
 							const Data::Entity* entity = m_manifest->GetById<Data::Entity>(aEntry->m_id);
 							const Components::CombatPublic* combatPublic = entity->TryGetComponent<Components::CombatPublic>();
-							if (combatPublic->m_level == minorBossLevel)
+							if (combatPublic->m_level == minorBossLevel && combatPublic->m_factionId == boss->m_factionId)
 								return true;
 							return false;
 						});
@@ -565,6 +571,8 @@ namespace tpublic::MapGenerators
 						minorBoss.m_entity = m_manifest->GetById<Data::Entity>(picked->m_id);
 						minorBoss.m_position = position;
 						boss->m_subBosses.push_back(minorBoss);
+
+						m_entitySpawnPositions.insert(position);
 					}
 
 					influence -= influenceStep;
@@ -572,6 +580,241 @@ namespace tpublic::MapGenerators
 			}
 		}
 
+		// Enemy packs
+		{
+			std::unordered_set<Vec2, Vec2::Hasher> enemyPositions;
+
+			struct EnemyTypeKey
+			{
+				struct Hasher
+				{
+					uint32_t
+					operator()(
+						const EnemyTypeKey& aKey) const
+					{
+						uint64_t h = Hash::Splitmix_2_32(aKey.m_level, aKey.m_tagContextId);
+						return (uint32_t)(h ^ (aKey.m_elite ? 1ULL : 0ULL));
+					}
+				};
+
+				bool
+				operator ==(
+					const EnemyTypeKey& aOther) const
+				{
+					return m_tagContextId == aOther.m_tagContextId && m_level == aOther.m_level && m_elite == aOther.m_elite;
+				}
+
+				// Public data
+				uint32_t		m_tagContextId = 0;
+				uint32_t		m_level = 0;
+				bool			m_elite = false;
+			};
+
+			typedef std::unordered_map<EnemyTypeKey, uint32_t, EnemyTypeKey::Hasher> EnemyTypeTable;
+			EnemyTypeTable enemyTypeTable;
+
+			for (int32_t y = 0; y < (int32_t)m_height; y++)
+			{
+				for (int32_t x = 0; x < (int32_t)m_width; x++)
+				{
+					const LevelMapPoint& point = m_levelMap[x + y * (int32_t)m_width];
+					if (point.m_boss != NULL && !m_entitySpawnPositions.contains({ x, y }))
+					{
+						const Pack* pickedPack = NULL;
+
+						for (const Pack* pack : point.m_boss->m_packs)
+						{
+							if (point.m_influence >= pack->m_influenceRange.m_min && point.m_influence <= pack->m_influenceRange.m_max)
+							{
+								if (Roll(1, 1000) <= pack->m_probability)
+								{
+									// Check if anything is too close
+									bool canPlace = true;
+
+									int32_t minX = x - (int32_t)pack->m_minDistanceToNearBy;
+									int32_t maxX = x + (int32_t)pack->m_minDistanceToNearBy;
+									int32_t minY = y - (int32_t)pack->m_minDistanceToNearBy;
+									int32_t maxY = y + (int32_t)pack->m_minDistanceToNearBy;
+									int32_t minDistanceSquared = (int32_t)(pack->m_minDistanceToNearBy * pack->m_minDistanceToNearBy);
+
+									for (int32_t iy = minY; iy <= maxY && canPlace; iy++)
+									{
+										for (int32_t ix = minX; ix <= maxX && canPlace; ix++)
+										{
+											int32_t dx = x - ix;
+											int32_t dy = y - iy;
+											int32_t distanceSquared = dx * dx + dy * dy;
+											if (distanceSquared <= minDistanceSquared && enemyPositions.contains({ ix, iy }))
+												canPlace = false;
+										}
+									}
+
+									if (canPlace)
+									{
+										pickedPack = pack;
+										break;
+									}
+								}
+							}
+						}
+
+						if (pickedPack != NULL)
+						{
+							uint32_t level = point.m_level;
+
+							bool firstEnemy = true;
+
+							for (uint32_t tagContextId : pickedPack->m_tagContextIds)
+							{
+								uint32_t entityId = 0;
+
+								{
+									EnemyTypeKey enemyTypeKey;
+									enemyTypeKey.m_tagContextId = tagContextId;
+									enemyTypeKey.m_level = level;
+									enemyTypeKey.m_elite = pickedPack->m_elite;
+									EnemyTypeTable::const_iterator i = enemyTypeTable.find(enemyTypeKey);
+									if(i != enemyTypeTable.cend())
+									{
+										entityId = i->second;
+									}
+									else
+									{
+										const TaggedData::QueryResult* result = m_mapGeneratorRuntime->m_entities->PerformQueryWithTagContext(m_manifest->GetById<Data::TagContext>(tagContextId));
+										const TaggedData::QueryResult::Entry* picked = result->TryPickRandomFiltered(m_random, [&](
+											const TaggedData::QueryResult::Entry* aEntry) -> bool
+										{
+											const Data::Entity* entity = m_manifest->GetById<Data::Entity>(aEntry->m_id);
+											const Components::CombatPublic* combatPublic = entity->TryGetComponent<Components::CombatPublic>();
+											if (combatPublic->m_level == level && combatPublic->m_factionId == point.m_boss->m_factionId && combatPublic->IsElite() == pickedPack->m_elite)
+												return true;
+											return false;
+										});
+
+										TP_CHECK(picked != NULL, "Unable to pick enemy.");
+										entityId = picked->m_id;
+
+										enemyTypeTable[enemyTypeKey] = entityId;
+									}
+								}
+
+								std::optional<Vec2> position;
+
+								if (firstEnemy)
+								{
+									firstEnemy = false;
+									position = Vec2(x, y);
+								}
+								else
+								{
+									static const Vec2 NEIGHBORS[4] = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
+									for (size_t i = 0; i < 4; i++)
+									{
+										Vec2 p = { x + NEIGHBORS[i].m_x, y + NEIGHBORS[i].m_y };
+										if (!m_entitySpawnPositions.contains(p) && m_walkable.contains(p))
+										{
+											position = p;
+											break;
+										}
+									}
+								}
+
+								if (position.has_value())
+								{
+									MapData::EntitySpawn entitySpawn;
+									entitySpawn.m_entityId = entityId;
+									entitySpawn.m_mapEntitySpawnId = pickedPack->m_mapEntitySpawnId;
+									entitySpawn.m_x = position->m_x;
+									entitySpawn.m_y = position->m_y;
+									m_entitySpawns.push_back(entitySpawn);
+
+									m_entitySpawnPositions.insert(position.value());
+
+									enemyPositions.insert(position.value());
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	void			
+	World::Builder::InitPlayerSpawns()
+	{	
+		// First we'll identify positions that are furthest away from any boss
+		std::vector<Vec2> furthestPositions;
+		m_bossDistanceCombined->GetPositionsMoreThanValue(m_bossDistanceCombined->GetMax() - 16, furthestPositions);
+
+		std::vector<Vec2> spawnPositions;
+		int32_t minSpawnDistanceSquared = 32 * 32;
+
+		for(std::unique_ptr<PlayerSpawn>& playerSpawn : m_playerSpawns)
+		{
+			// Try finding a spot from positions furthest from bosses
+			std::optional<Vec2> position;
+			while(furthestPositions.size() > 0 && !position.has_value())
+			{
+				uint32_t i = Roll(0, (uint32_t)furthestPositions.size() - 1);
+				Vec2 tryPosition = furthestPositions[i];
+				Helpers::RemoveCyclicFromVector(furthestPositions, (size_t)i);
+
+				bool canUse = true;
+				for(const Vec2& spawnPosition : spawnPositions)
+				{
+					int32_t dx = spawnPosition.m_x - tryPosition.m_x;
+					int32_t dy = spawnPosition.m_y - tryPosition.m_y;
+					int32_t distanceSquared = dx * dx + dy * dy;
+					if(distanceSquared < minSpawnDistanceSquared)
+					{
+						canUse = false;
+						break;
+					}
+				}
+
+				if(canUse)
+					position = tryPosition;
+			}
+
+			if(!position.has_value() && m_playerSpawnDistanceCombined)
+			{
+				assert(furthestPositions.size() == 0);
+
+				std::vector<Vec2> positions;
+				m_playerSpawnDistanceCombined->GetPositionsMoreThanValue(m_playerSpawnDistanceCombined->GetMax() - 8, positions);
+				if(positions.size() > 0)
+				{
+					uint32_t i = Roll(0, (uint32_t)positions.size() - 1);
+					position = positions[i];
+				}
+			}
+
+			if(position.has_value())
+			{
+				spawnPositions.push_back(position.value());
+
+				playerSpawn->m_position = position.value();
+
+				DistanceField distanceField((int32_t)m_width, (int32_t)m_height);
+				distanceField.GenerateFromSinglePosition(playerSpawn->m_position, m_walkable, UINT32_MAX);
+
+				for(int32_t y = 0; y < distanceField.m_height; y++)
+				{
+					for (int32_t x = 0; x < distanceField.m_width; x++)
+					{
+						int32_t i = x + y * distanceField.m_width;
+						if(m_levelMap[i].m_boss != NULL)
+							distanceField.m_data[i] = UINT32_MAX;
+					}
+				}
+
+				if(!m_playerSpawnDistanceCombined)
+					m_playerSpawnDistanceCombined = std::make_unique<DistanceField>((int32_t)m_width, (int32_t)m_height);
+
+				m_playerSpawnDistanceCombined->CombineMin(&distanceField);
+			}
+		}		
 	}
 
 	//---------------------------------------------------------------------------------
@@ -592,6 +835,7 @@ namespace tpublic::MapGenerators
 		Register<ExecuteAddEntitySpawns>();
 		Register<ExecuteAddBoss>();
 		Register<ExecuteLevelRange>();
+		Register<ExecutePlayerSpawns>();
 	}
 
 	World::IExecuteFactory::~IExecuteFactory()
@@ -1139,6 +1383,10 @@ namespace tpublic::MapGenerators
 		t->m_influence = m_influence;
 		t->m_mapEntitySpawnId = m_mapEntitySpawnId;
 		t->m_minorBosses = m_minorBosses.get();
+
+		for(const std::unique_ptr<Pack>& pack : m_packs)
+			t->m_packs.push_back(pack.get());
+
 		aBuilder->m_bosses.push_back(std::move(t));
 	}
 
@@ -1147,6 +1395,17 @@ namespace tpublic::MapGenerators
 		Builder*						aBuilder) const 
 	{
 		aBuilder->m_levelRange = m_levelRange;
+	}
+
+	void				
+	World::ExecutePlayerSpawns::Run(
+		Builder*						aBuilder) const 
+	{
+		for(uint32_t i = 0; i < m_count; i++)
+		{
+			std::unique_ptr<Builder::PlayerSpawn> t = std::make_unique<Builder::PlayerSpawn>();
+			aBuilder->m_playerSpawns.push_back(std::move(t));
+		}
 	}
 
 	//---------------------------------------------------------------------------------
@@ -1266,6 +1525,7 @@ namespace tpublic::MapGenerators
 		builder.InitNoiseMap();
 		builder.ConnectWalkableAreas();
 		builder.InitBosses();
+		builder.InitPlayerSpawns();
 
 		builder.CreateMapData(aSourceMapData, aOutMapData);
 

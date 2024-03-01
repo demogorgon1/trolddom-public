@@ -2,6 +2,10 @@ faction monsters:
 {
 }
 
+faction goblins:
+{
+}
+
 faction wildlife:
 {
 	flags: [ neutral ]

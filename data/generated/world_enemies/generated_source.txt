@@ -3,7 +3,7 @@ entity world_enemies_npc_0: !NPC
 	_string: "Malevolent Marauder"
 	_level: 4
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.856444
@@ -23,7 +23,7 @@ entity world_enemies_npc_1: !NPC
 	_string: "Goblin Ravisher"
 	_level: 6
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.137850
@@ -42,7 +42,7 @@ entity world_enemies_npc_2: !NPC
 	_string: "Black Goblin Squire"
 	_level: 2
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.042229
@@ -62,7 +62,7 @@ entity world_enemies_npc_3: !NPC
 	_string: "Execrable Goblin Ravager"
 	_level: 8
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.923756
@@ -82,7 +82,7 @@ entity world_enemies_npc_4: !NPC
 	_string: "Hateful Goblin Myrmidon"
 	_level: 1
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.106064
@@ -102,7 +102,7 @@ entity world_enemies_npc_5: !NPC
 	_string: "Repugnant Goblin Vanguard"
 	_level: 8
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.183447
@@ -122,7 +122,7 @@ entity world_enemies_npc_6: !NPC
 	_string: "Goblin Vanguard"
 	_level: 3
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.871016
@@ -141,7 +141,7 @@ entity world_enemies_npc_7: !NPC
 	_string: "Goblin Mercenary"
 	_level: 5
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.089373
@@ -160,7 +160,7 @@ entity world_enemies_npc_8: !NPC
 	_string: "Goblin Ravisher"
 	_level: 7
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.139354
@@ -179,7 +179,7 @@ entity world_enemies_npc_9: !NPC
 	_string: "Goblin Vanguard"
 	_level: 7
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.085410
@@ -198,7 +198,7 @@ entity world_enemies_npc_10: !NPC
 	_string: "Execrable Goblin Brute"
 	_level: 4
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.110220
@@ -218,7 +218,7 @@ entity world_enemies_npc_11: !NPC
 	_string: "Pestilent Mercenary"
 	_level: 8
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.957757
@@ -238,7 +238,7 @@ entity world_enemies_npc_12: !NPC
 	_string: "Black Goblin Berserker"
 	_level: 7
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.896261
@@ -258,7 +258,7 @@ entity world_enemies_npc_13: !NPC
 	_string: "Goblin Myrmidon"
 	_level: 5
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.102800
@@ -277,7 +277,7 @@ entity world_enemies_npc_14: !NPC
 	_string: "Beastly Goblin Ravisher"
 	_level: 4
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.962647
@@ -297,7 +297,7 @@ entity world_enemies_npc_15: !NPC
 	_string: "Goblin Warrior"
 	_level: 2
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.028390
@@ -316,7 +316,7 @@ entity world_enemies_npc_16: !NPC
 	_string: "Maleficient Goblin Ravisher"
 	_level: 3
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.170335
@@ -336,7 +336,7 @@ entity world_enemies_npc_17: !NPC
 	_string: "Spiteful Squire"
 	_level: 7
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.815266
@@ -356,7 +356,7 @@ entity world_enemies_npc_18: !NPC
 	_string: "Malevolent Goblin Warrior"
 	_level: 7
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.189929
@@ -376,7 +376,7 @@ entity world_enemies_npc_19: !NPC
 	_string: "Angry Goblin Skirmisher"
 	_level: 6
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.113137
@@ -396,7 +396,7 @@ entity world_enemies_npc_20: !NPC
 	_string: "Ugly Goblin Skirmisher"
 	_level: 3
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.186995
@@ -416,7 +416,7 @@ entity world_enemies_npc_21: !NPC
 	_string: "Goblin Outlaw"
 	_level: 8
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.863280
@@ -435,7 +435,7 @@ entity world_enemies_npc_22: !NPC
 	_string: "Fatal Goblin Marauder"
 	_level: 5
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.904755
@@ -455,7 +455,7 @@ entity world_enemies_npc_23: !NPC
 	_string: "Goblin Warrior"
 	_level: 7
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.147736
@@ -474,7 +474,7 @@ entity world_enemies_npc_24: !NPC
 	_string: "Bitter Fighter"
 	_level: 6
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.960198
@@ -494,7 +494,7 @@ entity world_enemies_npc_25: !NPC
 	_string: "Stinking Marauder"
 	_level: 4
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.825792
@@ -514,7 +514,7 @@ entity world_enemies_npc_26: !NPC
 	_string: "Execrable Goblin Outlaw"
 	_level: 1
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.068519
@@ -534,7 +534,7 @@ entity world_enemies_npc_27: !NPC
 	_string: "Goblin Fighter"
 	_level: 5
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.982855
@@ -553,7 +553,7 @@ entity world_enemies_npc_28: !NPC
 	_string: "Goblin Ravisher"
 	_level: 6
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.881396
@@ -572,7 +572,7 @@ entity world_enemies_npc_29: !NPC
 	_string: "Lethal Goblin Ravager"
 	_level: 3
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.181464
@@ -592,7 +592,7 @@ entity world_enemies_npc_30: !NPC
 	_string: "Goblin Skirmisher"
 	_level: 2
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.105819
@@ -611,7 +611,7 @@ entity world_enemies_npc_31: !NPC
 	_string: "Malignant Goblin Skirmisher"
 	_level: 5
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.088616
@@ -631,7 +631,7 @@ entity world_enemies_npc_32: !NPC
 	_string: "Violent Goblin Mercenary"
 	_level: 7
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.189917
@@ -651,7 +651,7 @@ entity world_enemies_npc_33: !NPC
 	_string: "Goblin Slayer"
 	_level: 1
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.039442
@@ -670,7 +670,7 @@ entity world_enemies_npc_34: !NPC
 	_string: "Goblin Berserker"
 	_level: 8
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.914855
@@ -689,7 +689,7 @@ entity world_enemies_npc_35: !NPC
 	_string: "Infernal Goblin Revenant"
 	_level: 1
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.841055
@@ -709,7 +709,7 @@ entity world_enemies_npc_36: !NPC
 	_string: "Goblin Ravager"
 	_level: 8
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.889924
@@ -728,7 +728,7 @@ entity world_enemies_npc_37: !NPC
 	_string: "Nefarious Outlaw"
 	_level: 1
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.127137
@@ -748,7 +748,7 @@ entity world_enemies_npc_38: !NPC
 	_string: "Dark Goblin Ravisher"
 	_level: 6
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.093918
@@ -768,7 +768,7 @@ entity world_enemies_npc_39: !NPC
 	_string: "Depraved Goblin Avenger"
 	_level: 8
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.155243
@@ -788,7 +788,7 @@ entity world_enemies_npc_40: !NPC
 	_string: "Goblin Mercenary"
 	_level: 4
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.027617
@@ -807,7 +807,7 @@ entity world_enemies_npc_41: !NPC
 	_string: "Lethal Myrmidon"
 	_level: 2
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.087418
@@ -827,7 +827,7 @@ entity world_enemies_npc_42: !NPC
 	_string: "Infernal Goblin Reaver"
 	_level: 5
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.181890
@@ -847,7 +847,7 @@ entity world_enemies_npc_43: !NPC
 	_string: "Corrupt Goblin Brute"
 	_level: 2
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.809219
@@ -867,7 +867,7 @@ entity world_enemies_npc_44: !NPC
 	_string: "Depraved Goblin Warrior"
 	_level: 8
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.172817
@@ -887,7 +887,7 @@ entity world_enemies_npc_45: !NPC
 	_string: "Goblin Warden"
 	_level: 2
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.984179
@@ -906,7 +906,7 @@ entity world_enemies_npc_46: !NPC
 	_string: "Goblin Mercenary"
 	_level: 6
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.057840
@@ -925,7 +925,7 @@ entity world_enemies_npc_47: !NPC
 	_string: "Injurious Goblin Brute"
 	_level: 7
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.935620
@@ -945,7 +945,7 @@ entity world_enemies_npc_48: !NPC
 	_string: "Goblin Marauder"
 	_level: 8
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.844783
@@ -964,7 +964,7 @@ entity world_enemies_npc_49: !NPC
 	_string: "Goblin Squire"
 	_level: 1
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.921523
@@ -983,7 +983,7 @@ entity world_enemies_npc_50: !NPC
 	_string: "Goblin Skirmisher"
 	_level: 10
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.805983
@@ -1002,7 +1002,7 @@ entity world_enemies_npc_51: !NPC
 	_string: "Bloody Goblin Skirmisher"
 	_level: 10
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.102920
@@ -1022,7 +1022,7 @@ entity world_enemies_npc_52: !NPC
 	_string: "Infernal Goblin Warrior"
 	_level: 10
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.863157
@@ -1042,7 +1042,7 @@ entity world_enemies_npc_53: !NPC
 	_string: "Damned Goblin Outlaw"
 	_level: 10
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.923050
@@ -1062,7 +1062,7 @@ entity world_enemies_npc_54: !NPC
 	_string: "Malignant Ravisher"
 	_level: 9
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.945286
@@ -1082,7 +1082,7 @@ entity world_enemies_npc_55: !NPC
 	_string: "Goblin Ravager"
 	_level: 10
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.843087
@@ -1101,7 +1101,7 @@ entity world_enemies_npc_56: !NPC
 	_string: "Ugly Goblin Marauder"
 	_level: 10
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.167875
@@ -1121,7 +1121,7 @@ entity world_enemies_npc_57: !NPC
 	_string: "Bitter Goblin Warden"
 	_level: 9
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.886961
@@ -1141,7 +1141,7 @@ entity world_enemies_npc_58: !NPC
 	_string: "Goblin Ravisher"
 	_level: 10
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.915023
@@ -1160,7 +1160,7 @@ entity world_enemies_npc_59: !NPC
 	_string: "Goblin Marauder"
 	_level: 10
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.154718
@@ -1179,7 +1179,7 @@ entity world_enemies_npc_60: !NPC
 	_string: "Vicious Goblin Skirmisher"
 	_level: 10
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.046156
@@ -1199,7 +1199,7 @@ entity world_enemies_npc_61: !NPC
 	_string: "Malignant Goblin Slayer"
 	_level: 10
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.954729
@@ -1219,7 +1219,7 @@ entity world_enemies_npc_62: !NPC
 	_string: "Destructive Slayer"
 	_level: 10
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.066679
@@ -1239,7 +1239,7 @@ entity world_enemies_npc_63: !NPC
 	_string: "Goblin Berserker"
 	_level: 9
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.028417
@@ -1258,7 +1258,7 @@ entity world_enemies_npc_64: !NPC
 	_string: "Toxic Goblin Reaver"
 	_level: 9
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.994677
@@ -1278,7 +1278,7 @@ entity world_enemies_npc_65: !NPC
 	_string: "Murderous Goblin Mercenary"
 	_level: 10
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.179253
@@ -1298,7 +1298,7 @@ entity world_enemies_npc_66: !NPC
 	_string: "Goblin Berserker"
 	_level: 10
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.879055
@@ -1317,7 +1317,7 @@ entity world_enemies_npc_67: !NPC
 	_string: "Goblin Berserker"
 	_level: 10
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.820042
@@ -1336,7 +1336,7 @@ entity world_enemies_npc_68: !NPC
 	_string: "Goblin Warrior"
 	_level: 10
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.129415
@@ -1355,7 +1355,7 @@ entity world_enemies_npc_69: !NPC
 	_string: "Goblin Squire"
 	_level: 9
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.961926
@@ -1374,7 +1374,7 @@ entity world_enemies_npc_70: !NPC
 	_string: "Goblin Berserker"
 	_level: 10
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.948514
@@ -1393,7 +1393,7 @@ entity world_enemies_npc_71: !NPC
 	_string: "Goblin Skirmisher"
 	_level: 9
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.151099
@@ -1412,7 +1412,7 @@ entity world_enemies_npc_72: !NPC
 	_string: "Goblin Slayer"
 	_level: 9
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.082327
@@ -1431,7 +1431,7 @@ entity world_enemies_npc_73: !NPC
 	_string: "Vicious Goblin Myrmidon"
 	_level: 9
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.913884
@@ -1451,7 +1451,7 @@ entity world_enemies_npc_74: !NPC
 	_string: "Wicked Goblin Berserker"
 	_level: 10
 	_elite: false
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.020690
@@ -1471,7 +1471,7 @@ entity world_enemies_npc_75: !NPC
 	_string: "Goblin Avenger"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.800169
@@ -1490,7 +1490,7 @@ entity world_enemies_npc_76: !NPC
 	_string: "Calamitious Goblin Skirmisher"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.838550
@@ -1510,7 +1510,7 @@ entity world_enemies_npc_77: !NPC
 	_string: "Goblin Reaver"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.186888
@@ -1529,7 +1529,7 @@ entity world_enemies_npc_78: !NPC
 	_string: "Goblin Warden"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.194565
@@ -1548,7 +1548,7 @@ entity world_enemies_npc_79: !NPC
 	_string: "Loathsome Goblin Skirmisher"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.042400
@@ -1568,7 +1568,7 @@ entity world_enemies_npc_80: !NPC
 	_string: "Goblin Ravager"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.877775
@@ -1587,7 +1587,7 @@ entity world_enemies_npc_81: !NPC
 	_string: "Maleficient Goblin Vanguard"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.838288
@@ -1607,7 +1607,7 @@ entity world_enemies_npc_82: !NPC
 	_string: "Goblin Vanguard"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.889748
@@ -1626,7 +1626,7 @@ entity world_enemies_npc_83: !NPC
 	_string: "Toxic Goblin Berserker"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.183673
@@ -1646,7 +1646,7 @@ entity world_enemies_npc_84: !NPC
 	_string: "Grey Goblin Warden"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.075613
@@ -1666,7 +1666,7 @@ entity world_enemies_npc_85: !NPC
 	_string: "Goblin Brute"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.932606
@@ -1685,7 +1685,7 @@ entity world_enemies_npc_86: !NPC
 	_string: "Black Goblin Warden"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.017587
@@ -1705,7 +1705,7 @@ entity world_enemies_npc_87: !NPC
 	_string: "Dirty Goblin Mercenary"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.001162
@@ -1725,7 +1725,7 @@ entity world_enemies_npc_88: !NPC
 	_string: "Loathsome Mercenary"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.016800
@@ -1745,7 +1745,7 @@ entity world_enemies_npc_89: !NPC
 	_string: "Loathsome Goblin Berserker"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.073890
@@ -1765,7 +1765,7 @@ entity world_enemies_npc_90: !NPC
 	_string: "Depraved Vanguard"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.074266
@@ -1785,7 +1785,7 @@ entity world_enemies_npc_91: !NPC
 	_string: "Loathsome Goblin Avenger"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.124115
@@ -1805,7 +1805,7 @@ entity world_enemies_npc_92: !NPC
 	_string: "Goblin Revenant"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.134550
@@ -1824,7 +1824,7 @@ entity world_enemies_npc_93: !NPC
 	_string: "Baneful Goblin Outlaw"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.173395
@@ -1844,7 +1844,7 @@ entity world_enemies_npc_94: !NPC
 	_string: "Corrupt Goblin Mercenary"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.100453
@@ -1864,7 +1864,7 @@ entity world_enemies_npc_95: !NPC
 	_string: "Cruel Goblin Warrior"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.936104
@@ -1884,7 +1884,7 @@ entity world_enemies_npc_96: !NPC
 	_string: "Goblin Berserker"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.992201
@@ -1903,7 +1903,7 @@ entity world_enemies_npc_97: !NPC
 	_string: "Goblin Myrmidon"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.866617
@@ -1922,7 +1922,7 @@ entity world_enemies_npc_98: !NPC
 	_string: "Goblin Reaver"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 0.957863
@@ -1941,7 +1941,7 @@ entity world_enemies_npc_99: !NPC
 	_string: "Goblin Ravager"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin
 	_sprite_dead: goblin_dead
 	_weapon_damage: 1.003622
@@ -1960,7 +1960,7 @@ entity world_enemies_npc_100: !NPC
 	_string: "Ebyasdorg"
 	_level: 4
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.930414
@@ -1981,7 +1981,7 @@ entity world_enemies_npc_101: !NPC
 	_string: "Aifru"
 	_level: 5
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.843485
@@ -2002,7 +2002,7 @@ entity world_enemies_npc_102: !NPC
 	_string: "Harmonyrg"
 	_level: 1
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.618649
@@ -2023,7 +2023,7 @@ entity world_enemies_npc_103: !NPC
 	_string: "Agava"
 	_level: 3
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.852893
@@ -2044,7 +2044,7 @@ entity world_enemies_npc_104: !NPC
 	_string: "Hamton"
 	_level: 3
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.895695
@@ -2065,7 +2065,7 @@ entity world_enemies_npc_105: !NPC
 	_string: "Orig"
 	_level: 2
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.972987
@@ -2086,7 +2086,7 @@ entity world_enemies_npc_106: !NPC
 	_string: "Maasol"
 	_level: 8
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.655479
@@ -2107,7 +2107,7 @@ entity world_enemies_npc_107: !NPC
 	_string: "Arccuges"
 	_level: 3
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.876611
@@ -2128,7 +2128,7 @@ entity world_enemies_npc_108: !NPC
 	_string: "Amdrbork"
 	_level: 2
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.565015
@@ -2149,7 +2149,7 @@ entity world_enemies_npc_109: !NPC
 	_string: "Agamaclaw"
 	_level: 5
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.685814
@@ -2170,7 +2170,7 @@ entity world_enemies_npc_110: !NPC
 	_string: "Alal"
 	_level: 6
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.840369
@@ -2191,7 +2191,7 @@ entity world_enemies_npc_111: !NPC
 	_string: "Agrn"
 	_level: 5
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.982876
@@ -2212,7 +2212,7 @@ entity world_enemies_npc_112: !NPC
 	_string: "Paures"
 	_level: 4
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.788439
@@ -2233,7 +2233,7 @@ entity world_enemies_npc_113: !NPC
 	_string: "Agamuzol"
 	_level: 7
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.814682
@@ -2254,7 +2254,7 @@ entity world_enemies_npc_114: !NPC
 	_string: "Banthon"
 	_level: 5
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.861345
@@ -2275,7 +2275,7 @@ entity world_enemies_npc_115: !NPC
 	_string: "Punius"
 	_level: 1
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.954096
@@ -2296,7 +2296,7 @@ entity world_enemies_npc_116: !NPC
 	_string: "Forcelyrg"
 	_level: 7
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.987958
@@ -2317,7 +2317,7 @@ entity world_enemies_npc_117: !NPC
 	_string: "Beqoyagorg"
 	_level: 4
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.791475
@@ -2338,7 +2338,7 @@ entity world_enemies_npc_118: !NPC
 	_string: "Vargon"
 	_level: 8
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.749218
@@ -2359,7 +2359,7 @@ entity world_enemies_npc_119: !NPC
 	_string: "Marax"
 	_level: 4
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.843671
@@ -2380,7 +2380,7 @@ entity world_enemies_npc_120: !NPC
 	_string: "Bamonbork"
 	_level: 5
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.523485
@@ -2401,7 +2401,7 @@ entity world_enemies_npc_121: !NPC
 	_string: "Ormo"
 	_level: 7
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.792810
@@ -2422,7 +2422,7 @@ entity world_enemies_npc_122: !NPC
 	_string: "Behesbork"
 	_level: 5
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.952560
@@ -2443,7 +2443,7 @@ entity world_enemies_npc_123: !NPC
 	_string: "Mabeg"
 	_level: 4
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.638278
@@ -2464,7 +2464,7 @@ entity world_enemies_npc_124: !NPC
 	_string: "Jiluec"
 	_level: 1
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.671424
@@ -2485,7 +2485,7 @@ entity world_enemies_npc_125: !NPC
 	_string: "Flielak"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.951188
@@ -2506,7 +2506,7 @@ entity world_enemies_npc_126: !NPC
 	_string: "Aephingi"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.701337
@@ -2527,7 +2527,7 @@ entity world_enemies_npc_127: !NPC
 	_string: "Beqourthe"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.608995
@@ -2548,7 +2548,7 @@ entity world_enemies_npc_128: !NPC
 	_string: "Gabhiusclaw"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.529413
@@ -2569,7 +2569,7 @@ entity world_enemies_npc_129: !NPC
 	_string: "Lepa"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.665685
@@ -2590,7 +2590,7 @@ entity world_enemies_npc_130: !NPC
 	_string: "Maloniaitsdrugh"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.710553
@@ -2611,7 +2611,7 @@ entity world_enemies_npc_131: !NPC
 	_string: "Fonecarephrbork"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.506111
@@ -2632,7 +2632,7 @@ entity world_enemies_npc_132: !NPC
 	_string: "Lisoponjaw"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.855269
@@ -2653,7 +2653,7 @@ entity world_enemies_npc_133: !NPC
 	_string: "Naloushigoss"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.820636
@@ -2674,7 +2674,7 @@ entity world_enemies_npc_134: !NPC
 	_string: "Koralclaw"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.787089
@@ -2695,7 +2695,7 @@ entity world_enemies_npc_135: !NPC
 	_string: "Kolu"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.788080
@@ -2716,7 +2716,7 @@ entity world_enemies_npc_136: !NPC
 	_string: "Dalus"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.989179
@@ -2737,7 +2737,7 @@ entity world_enemies_npc_137: !NPC
 	_string: "Merchiel"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.702124
@@ -2758,7 +2758,7 @@ entity world_enemies_npc_138: !NPC
 	_string: "Grobon"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.882965
@@ -2779,7 +2779,7 @@ entity world_enemies_npc_139: !NPC
 	_string: "Daur"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.514884
@@ -2800,7 +2800,7 @@ entity world_enemies_npc_140: !NPC
 	_string: "Alagia"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.510772
@@ -2821,7 +2821,7 @@ entity world_enemies_npc_141: !NPC
 	_string: "Rales"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.815988
@@ -2842,7 +2842,7 @@ entity world_enemies_npc_142: !NPC
 	_string: "Saaxdorg"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.978514
@@ -2863,7 +2863,7 @@ entity world_enemies_npc_143: !NPC
 	_string: "Barch"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.925719
@@ -2884,7 +2884,7 @@ entity world_enemies_npc_144: !NPC
 	_string: "Cainzusurjaw"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.995140
@@ -2905,7 +2905,7 @@ entity world_enemies_npc_145: !NPC
 	_string: "Chamuol"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.613826
@@ -2926,7 +2926,7 @@ entity world_enemies_npc_146: !NPC
 	_string: "Forphus"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.678127
@@ -2947,7 +2947,7 @@ entity world_enemies_npc_147: !NPC
 	_string: "Wezurias"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.895487
@@ -2968,7 +2968,7 @@ entity world_enemies_npc_148: !NPC
 	_string: "Bastas"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.585759
@@ -2989,7 +2989,7 @@ entity world_enemies_npc_149: !NPC
 	_string: "Aeval"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.648013
@@ -3010,7 +3010,7 @@ entity world_enemies_npc_150: !NPC
 	_string: "Xapushyaku"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.694317
@@ -3031,7 +3031,7 @@ entity world_enemies_npc_151: !NPC
 	_string: "Abeva"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.522130
@@ -3052,7 +3052,7 @@ entity world_enemies_npc_152: !NPC
 	_string: "Focin"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.602686
@@ -3073,7 +3073,7 @@ entity world_enemies_npc_153: !NPC
 	_string: "Narce"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.706390
@@ -3094,7 +3094,7 @@ entity world_enemies_npc_154: !NPC
 	_string: "Zaliorebork"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.826737
@@ -3115,7 +3115,7 @@ entity world_enemies_npc_155: !NPC
 	_string: "Goleri"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.709751
@@ -3136,7 +3136,7 @@ entity world_enemies_npc_156: !NPC
 	_string: "Abazotugorg"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.629603
@@ -3157,7 +3157,7 @@ entity world_enemies_npc_157: !NPC
 	_string: "Fociol"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.927137
@@ -3178,7 +3178,7 @@ entity world_enemies_npc_158: !NPC
 	_string: "Kaks"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.625932
@@ -3199,7 +3199,7 @@ entity world_enemies_npc_159: !NPC
 	_string: "Surphicagorg"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.682563
@@ -3220,7 +3220,7 @@ entity world_enemies_npc_160: !NPC
 	_string: "Bavakulla"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.902243
@@ -3241,7 +3241,7 @@ entity world_enemies_npc_161: !NPC
 	_string: "Naphdrugh"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.565777
@@ -3262,7 +3262,7 @@ entity world_enemies_npc_162: !NPC
 	_string: "Prno"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.991752
@@ -3283,7 +3283,7 @@ entity world_enemies_npc_163: !NPC
 	_string: "Vele"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.687320
@@ -3304,7 +3304,7 @@ entity world_enemies_npc_164: !NPC
 	_string: "Maap"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.804454
@@ -3325,7 +3325,7 @@ entity world_enemies_npc_165: !NPC
 	_string: "Borbema"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.805355
@@ -3346,7 +3346,7 @@ entity world_enemies_npc_166: !NPC
 	_string: "Maal"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.537235
@@ -3367,7 +3367,7 @@ entity world_enemies_npc_167: !NPC
 	_string: "Alam"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.615805
@@ -3388,7 +3388,7 @@ entity world_enemies_npc_168: !NPC
 	_string: "Gaacu"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.791439
@@ -3409,7 +3409,7 @@ entity world_enemies_npc_169: !NPC
 	_string: "Limpt"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.791142
@@ -3430,7 +3430,7 @@ entity world_enemies_npc_170: !NPC
 	_string: "Borbaxclaw"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.791505
@@ -3451,7 +3451,7 @@ entity world_enemies_npc_171: !NPC
 	_string: "Gaapudrugh"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.976469
@@ -3472,7 +3472,7 @@ entity world_enemies_npc_172: !NPC
 	_string: "Ifranesdrugh"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.775531
@@ -3493,7 +3493,7 @@ entity world_enemies_npc_173: !NPC
 	_string: "Selethalyrg"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.652033
@@ -3514,7 +3514,7 @@ entity world_enemies_npc_174: !NPC
 	_string: "Fomol"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 1.534984
@@ -3535,7 +3535,7 @@ entity world_enemies_npc_175: !NPC
 	_string: "Zerusclaw"
 	_level: 6
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.212334
@@ -3556,7 +3556,7 @@ entity world_enemies_npc_176: !NPC
 	_string: "Boks"
 	_level: 3
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.755987
@@ -3577,7 +3577,7 @@ entity world_enemies_npc_177: !NPC
 	_string: "Sorphan"
 	_level: 5
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.671551
@@ -3598,7 +3598,7 @@ entity world_enemies_npc_178: !NPC
 	_string: "Mergon"
 	_level: 5
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.390667
@@ -3619,7 +3619,7 @@ entity world_enemies_npc_179: !NPC
 	_string: "Deneta"
 	_level: 3
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.437500
@@ -3640,7 +3640,7 @@ entity world_enemies_npc_180: !NPC
 	_string: "Arcigorg"
 	_level: 4
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.669424
@@ -3661,7 +3661,7 @@ entity world_enemies_npc_181: !NPC
 	_string: "Adrteol"
 	_level: 7
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 3.174202
@@ -3682,7 +3682,7 @@ entity world_enemies_npc_182: !NPC
 	_string: "Chal"
 	_level: 6
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.222098
@@ -3703,7 +3703,7 @@ entity world_enemies_npc_183: !NPC
 	_string: "Jintbork"
 	_level: 4
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 3.143408
@@ -3724,7 +3724,7 @@ entity world_enemies_npc_184: !NPC
 	_string: "Dasaxclaw"
 	_level: 4
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.490778
@@ -3745,7 +3745,7 @@ entity world_enemies_npc_185: !NPC
 	_string: "Mehel"
 	_level: 7
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.788558
@@ -3766,7 +3766,7 @@ entity world_enemies_npc_186: !NPC
 	_string: "Preres"
 	_level: 6
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.994350
@@ -3787,7 +3787,7 @@ entity world_enemies_npc_187: !NPC
 	_string: "Sabiomon"
 	_level: 5
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.272932
@@ -3808,7 +3808,7 @@ entity world_enemies_npc_188: !NPC
 	_string: "Krieres"
 	_level: 3
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.746533
@@ -3829,7 +3829,7 @@ entity world_enemies_npc_189: !NPC
 	_string: "Foniorg"
 	_level: 8
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.863993
@@ -3850,7 +3850,7 @@ entity world_enemies_npc_190: !NPC
 	_string: "Bairtas"
 	_level: 5
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 3.068365
@@ -3871,7 +3871,7 @@ entity world_enemies_npc_191: !NPC
 	_string: "Amdritak"
 	_level: 1
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.546201
@@ -3892,7 +3892,7 @@ entity world_enemies_npc_192: !NPC
 	_string: "Ralpte"
 	_level: 1
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.459856
@@ -3913,7 +3913,7 @@ entity world_enemies_npc_193: !NPC
 	_string: "Busondajaw"
 	_level: 8
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 3.016798
@@ -3934,7 +3934,7 @@ entity world_enemies_npc_194: !NPC
 	_string: "Vavaliclaw"
 	_level: 8
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.574210
@@ -3955,7 +3955,7 @@ entity world_enemies_npc_195: !NPC
 	_string: "Kavias"
 	_level: 1
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 3.114524
@@ -3976,7 +3976,7 @@ entity world_enemies_npc_196: !NPC
 	_string: "Caphgorg"
 	_level: 2
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.706086
@@ -3997,7 +3997,7 @@ entity world_enemies_npc_197: !NPC
 	_string: "Chamasthas"
 	_level: 4
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.640008
@@ -4018,7 +4018,7 @@ entity world_enemies_npc_198: !NPC
 	_string: "Darchani"
 	_level: 2
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.995790
@@ -4039,7 +4039,7 @@ entity world_enemies_npc_199: !NPC
 	_string: "Amavaldorg"
 	_level: 4
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.270560
@@ -4060,7 +4060,7 @@ entity world_enemies_npc_200: !NPC
 	_string: "Inderenassyrg the Lethal"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.288133
@@ -4082,7 +4082,7 @@ entity world_enemies_npc_201: !NPC
 	_string: "Drcus the Toxic"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 3.186616
@@ -4104,7 +4104,7 @@ entity world_enemies_npc_202: !NPC
 	_string: "Ondusyapt the Violent"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.354946
@@ -4126,7 +4126,7 @@ entity world_enemies_npc_203: !NPC
 	_string: "Sokashes the Lethal"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.594425
@@ -4148,7 +4148,7 @@ entity world_enemies_npc_204: !NPC
 	_string: "Dasodyar the Beastly"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.819806
@@ -4170,7 +4170,7 @@ entity world_enemies_npc_205: !NPC
 	_string: "Gukax the Infernal"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.754284
@@ -4192,7 +4192,7 @@ entity world_enemies_npc_206: !NPC
 	_string: "Boriusax the Toxic"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.667967
@@ -4214,7 +4214,7 @@ entity world_enemies_npc_207: !NPC
 	_string: "Fonnt the Corrupt"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 3.111146
@@ -4236,7 +4236,7 @@ entity world_enemies_npc_208: !NPC
 	_string: "Eblo the Bitter"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.565158
@@ -4258,7 +4258,7 @@ entity world_enemies_npc_209: !NPC
 	_string: "Agiricral the Grey"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.728639
@@ -4280,7 +4280,7 @@ entity world_enemies_npc_210: !NPC
 	_string: "Hanely the Depraved"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 3.122096
@@ -4302,7 +4302,7 @@ entity world_enemies_npc_211: !NPC
 	_string: "Tabhasicen the Deadly"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 3.126194
@@ -4324,7 +4324,7 @@ entity world_enemies_npc_212: !NPC
 	_string: "Gligongerelcr the Injurious"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.559491
@@ -4346,7 +4346,7 @@ entity world_enemies_npc_213: !NPC
 	_string: "Incusgorg the Cruel"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.418094
@@ -4368,7 +4368,7 @@ entity world_enemies_npc_214: !NPC
 	_string: "Behagorg the Infernal"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 3.191319
@@ -4390,7 +4390,7 @@ entity world_enemies_npc_215: !NPC
 	_string: "Werakkii the Cruel"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.835408
@@ -4412,7 +4412,7 @@ entity world_enemies_npc_216: !NPC
 	_string: "Furmbork the Damned"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.752140
@@ -4434,7 +4434,7 @@ entity world_enemies_npc_217: !NPC
 	_string: "Pemi the Revolting"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 3.135010
@@ -4456,7 +4456,7 @@ entity world_enemies_npc_218: !NPC
 	_string: "Begomajaw the Pestilent"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.642199
@@ -4478,7 +4478,7 @@ entity world_enemies_npc_219: !NPC
 	_string: "Ancajaorg the Iniquitous"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 3.045786
@@ -4500,7 +4500,7 @@ entity world_enemies_npc_220: !NPC
 	_string: "Cilsorg the Vile"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 3.110707
@@ -4522,7 +4522,7 @@ entity world_enemies_npc_221: !NPC
 	_string: "Suraclaw the Lethal"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.780781
@@ -4544,7 +4544,7 @@ entity world_enemies_npc_222: !NPC
 	_string: "Kann the Fatal"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.875569
@@ -4566,7 +4566,7 @@ entity world_enemies_npc_223: !NPC
 	_string: "Samithioreon the Revolting"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.641292
@@ -4588,7 +4588,7 @@ entity world_enemies_npc_224: !NPC
 	_string: "Vabndorg the Bloody"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.421772
@@ -4610,7 +4610,7 @@ entity world_enemies_npc_225: !NPC
 	_string: "Porgonzondrugh the Nefarious"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.457108
@@ -4632,7 +4632,7 @@ entity world_enemies_npc_226: !NPC
 	_string: "Analochu the Stinking"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 3.140304
@@ -4654,7 +4654,7 @@ entity world_enemies_npc_227: !NPC
 	_string: "Rabesclaw the Nefarious"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 3.177570
@@ -4676,7 +4676,7 @@ entity world_enemies_npc_228: !NPC
 	_string: "Sakimasjaw the Angry"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.890773
@@ -4698,7 +4698,7 @@ entity world_enemies_npc_229: !NPC
 	_string: "Buayororg the Destructive"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.540631
@@ -4720,7 +4720,7 @@ entity world_enemies_npc_230: !NPC
 	_string: "Bhemorel the Harmful"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.913964
@@ -4742,7 +4742,7 @@ entity world_enemies_npc_231: !NPC
 	_string: "Vasos the Noxious"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 3.198362
@@ -4764,7 +4764,7 @@ entity world_enemies_npc_232: !NPC
 	_string: "Andrergorg the Bloody"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.737857
@@ -4786,7 +4786,7 @@ entity world_enemies_npc_233: !NPC
 	_string: "Daaphabifaorg the Baneful"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 3.101378
@@ -4808,7 +4808,7 @@ entity world_enemies_npc_234: !NPC
 	_string: "Hass the Obscene"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.676829
@@ -4830,7 +4830,7 @@ entity world_enemies_npc_235: !NPC
 	_string: "Grigoron the Wicked"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.240087
@@ -4852,7 +4852,7 @@ entity world_enemies_npc_236: !NPC
 	_string: "Wetimax the Ugly"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.251096
@@ -4874,7 +4874,7 @@ entity world_enemies_npc_237: !NPC
 	_string: "Apoam the Hideous"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.695433
@@ -4896,7 +4896,7 @@ entity world_enemies_npc_238: !NPC
 	_string: "Sorphalas the Execrable"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 3.166295
@@ -4918,7 +4918,7 @@ entity world_enemies_npc_239: !NPC
 	_string: "Andriclaw the Wrathful"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.909502
@@ -4940,7 +4940,7 @@ entity world_enemies_npc_240: !NPC
 	_string: "Goch the Harmful"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.433794
@@ -4962,7 +4962,7 @@ entity world_enemies_npc_241: !NPC
 	_string: "Fuss the Bitter"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.547784
@@ -4984,7 +4984,7 @@ entity world_enemies_npc_242: !NPC
 	_string: "Krnela the Corrupt"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.371861
@@ -5006,7 +5006,7 @@ entity world_enemies_npc_243: !NPC
 	_string: "Andrgorg the Vile"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.780725
@@ -5028,7 +5028,7 @@ entity world_enemies_npc_244: !NPC
 	_string: "Fuames the Loathsome"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.781839
@@ -5050,7 +5050,7 @@ entity world_enemies_npc_245: !NPC
 	_string: "Babhajaw the Atrocious"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.206947
@@ -5072,7 +5072,7 @@ entity world_enemies_npc_246: !NPC
 	_string: "Ukoas the Calamitious"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.909601
@@ -5094,7 +5094,7 @@ entity world_enemies_npc_247: !NPC
 	_string: "Baasol the Execrable"
 	_level: 9
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 3.003702
@@ -5116,7 +5116,7 @@ entity world_enemies_npc_248: !NPC
 	_string: "Anciasyayrg the Malignant"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 2.773737
@@ -5138,7 +5138,7 @@ entity world_enemies_npc_249: !NPC
 	_string: "Goras the Angry"
 	_level: 10
 	_elite: true
-	_faction: monsters
+	_faction: goblins
 	_sprite: goblin_boss
 	_sprite_dead: goblin_boss_dead
 	_weapon_damage: 3.146221

@@ -85,6 +85,77 @@ namespace tpublic::MapGenerators
 			UIntRange								m_influenceRange;
 		};
 
+		struct Pack
+		{
+			Pack()
+			{
+
+			}
+
+			Pack(
+				const SourceNode*							aSource)
+			{
+				TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing probability annotation.");
+				m_probability = aSource->m_annotation->GetUInt32();
+
+				aSource->ForEachChild([&](
+					const SourceNode* aChild)
+				{
+					if (aChild->m_name == "min_distance_to_nearby")
+						m_minDistanceToNearBy = aChild->GetUInt32();
+					else if (aChild->m_name == "elite")
+						m_elite = aChild->GetBool();
+					else if (aChild->m_name == "map_entity_spawn")
+						m_mapEntitySpawnId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aChild->GetIdentifier());
+					else if (aChild->m_name == "tag_contexts")
+						aChild->GetIdArray(DataType::ID_TAG_CONTEXT, m_tagContextIds);
+					else if (aChild->m_name == "influence_range")
+						m_influenceRange = UIntRange(aChild);
+					else
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+				});
+			}
+
+			void
+			ToStream(
+				IWriter*								aWriter) const
+			{
+				aWriter->WriteUInts(m_tagContextIds);
+				aWriter->WriteUInt(m_minDistanceToNearBy);
+				aWriter->WriteUInt(m_probability);
+				aWriter->WriteBool(m_elite);
+				aWriter->WriteUInt(m_mapEntitySpawnId);
+				m_influenceRange.ToStream(aWriter);
+			}
+
+			bool
+			FromStream(
+				IReader*								aReader)
+			{
+				if (!aReader->ReadUInts(m_tagContextIds))
+					return false;
+				if (!aReader->ReadUInt(m_minDistanceToNearBy))
+					return false;
+				if (!aReader->ReadUInt(m_probability))
+					return false;
+				if(!aReader->ReadBool(m_elite))
+					return false;
+				if (!aReader->ReadUInt(m_mapEntitySpawnId))
+					return false;
+				if (!m_influenceRange.FromStream(aReader))
+					return false;
+				return true;
+			}
+
+			// Public data
+			std::vector<uint32_t>					m_tagContextIds;
+			uint32_t								m_minDistanceToNearBy = 0;
+			bool									m_elite = false;
+			uint32_t								m_mapEntitySpawnId = 0;
+			UIntRange								m_influenceRange;
+			uint32_t								m_probability = 0;
+		};
+
 		struct Builder
 		{
 			uint32_t		GetTerrainPaletteEntry(
@@ -114,6 +185,7 @@ namespace tpublic::MapGenerators
 			uint32_t		SampleNoiseMap(
 								const Vec2&					aPosition) const;
 			void			InitBosses();
+			void			InitPlayerSpawns();
 
 			// Public data
 			const TerrainPalette*							m_terrainPalette = NULL;
@@ -163,10 +235,12 @@ namespace tpublic::MapGenerators
 				uint32_t									m_influence = 32;
 				uint32_t									m_mapEntitySpawnId = 0;
 				const MinorBosses*							m_minorBosses = NULL;
+				std::vector<const Pack*>					m_packs;
 				const Data::Entity*							m_entity = NULL;
 				std::unique_ptr<DistanceField>				m_distanceField;
 				Vec2										m_position;
 				std::vector<MinorBoss>						m_subBosses;
+				uint32_t									m_factionId = 0;
 			};
 
 			struct LevelMapPoint
@@ -176,8 +250,15 @@ namespace tpublic::MapGenerators
 				uint32_t									m_level = 0;
 			};
 
+			struct PlayerSpawn
+			{
+				Vec2										m_position;
+			};
+
 			std::vector<std::unique_ptr<Boss>>				m_bosses;
 			std::unique_ptr<DistanceField>					m_bossDistanceCombined;
+			std::vector<std::unique_ptr<PlayerSpawn>>		m_playerSpawns;
+			std::unique_ptr<DistanceField>					m_playerSpawnDistanceCombined;
 			std::vector<LevelMapPoint>						m_levelMap;
 
 			UIntRange										m_levelRange;
@@ -203,6 +284,7 @@ namespace tpublic::MapGenerators
 				TYPE_ADD_ENTITY_SPAWNS,
 				TYPE_ADD_BOSS,
 				TYPE_LEVEL_RANGE,
+				TYPE_PLAYER_SPAWNS,
 
 				NUM_TYPES
 			};
@@ -240,6 +322,8 @@ namespace tpublic::MapGenerators
 					return TYPE_ADD_BOSS;
 				else if (t == "level_range")
 					return TYPE_LEVEL_RANGE;
+				else if (t == "player_spawns")
+					return TYPE_PLAYER_SPAWNS;
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid execute type.", aSource->m_name.c_str());
 				return INVALID_TYPE;
 			}
@@ -1213,6 +1297,8 @@ namespace tpublic::MapGenerators
 						m_influence = aChild->GetUInt32();
 					else if(aChild->m_name == "minor_bosses")
 						m_minorBosses = std::make_unique<MinorBosses>(aChild);
+					else if(aChild->m_name == "pack")
+						m_packs.push_back(std::make_unique<Pack>(aChild));
 					else 
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 				});
@@ -1226,6 +1312,7 @@ namespace tpublic::MapGenerators
 				aWriter->WriteUInt(m_tagContextId);
 				aWriter->WriteUInt(m_mapEntitySpawnId);
 				aWriter->WriteUInt(m_influence);
+				aWriter->WriteObjectPointers(m_packs);
 			}
 
 			bool
@@ -1241,6 +1328,8 @@ namespace tpublic::MapGenerators
 					return false;
 				if (!aReader->ReadUInt(m_influence))
 					return false;
+				if(!aReader->ReadObjectPointers(m_packs))
+					return false;
 				return true;
 			}
 
@@ -1252,6 +1341,7 @@ namespace tpublic::MapGenerators
 			uint32_t									m_tagContextId = 0;
 			uint32_t									m_mapEntitySpawnId = 0;
 			uint32_t									m_influence = 0;
+			std::vector<std::unique_ptr<Pack>>			m_packs;
 		};
 
 		struct ExecuteLevelRange : public IExecute
@@ -1294,6 +1384,45 @@ namespace tpublic::MapGenerators
 			UIntRange									m_levelRange;
 		};
 		
+		struct ExecutePlayerSpawns : public IExecute
+		{
+			static const Type TYPE = TYPE_PLAYER_SPAWNS;
+
+			ExecutePlayerSpawns() : IExecute(TYPE) { }
+			virtual	~ExecutePlayerSpawns() { }
+
+			// IExecute implementation
+			void
+			FromSource(
+				const IExecuteFactory*				/*aFactory*/,
+				const SourceNode*					aSource) override
+			{
+				m_count = aSource->GetUInt32();
+			}
+
+			void
+			ToStream(
+				IWriter*							aWriter) const override
+			{
+				aWriter->WriteUInt(m_count);
+			}
+
+			bool
+			FromStream(
+				const IExecuteFactory*				/*aFactory*/,
+				IReader*							aReader) override
+			{
+				if(!aReader->ReadUInt(m_count))
+					return false;
+				return true;
+			}
+
+			void				Run(
+									Builder*			aBuilder) const override;
+
+			// Public data
+			uint32_t									m_count = 1;
+		};
 		// MapGeneratorBase implementation
 		void			FromSource(
 							const SourceNode*			aSource) override;

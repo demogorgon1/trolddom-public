@@ -226,4 +226,21 @@ namespace tpublic
 		}
 	}
 
+	void		
+	DistanceField::GetPositionsMoreThanValue(
+		uint32_t										aValue,
+		std::vector<Vec2>&								aOut) const
+	{
+		int32_t i = 0;
+		for(int32_t y = 0; y < m_height; y++)
+		{
+			for(int32_t x = 0; x < m_width; x++)
+			{
+				if(m_data[i] > aValue && m_data[i] != UINT32_MAX)
+					aOut.push_back({ x, y });
+				i++;
+			}
+		}
+	}
+
 }
