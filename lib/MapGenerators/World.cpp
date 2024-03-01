@@ -136,7 +136,14 @@ namespace tpublic::MapGenerators
 			t.m_id = aOutMapData->m_mapInfo.m_defaultPlayerSpawnId;
 			t.m_x = playerSpawn->m_position.m_x;
 			t.m_y = playerSpawn->m_position.m_y;
-			aOutMapData->m_playerSpawns.push_back(t);			
+			aOutMapData->m_playerSpawns.push_back(t);		
+			
+			MapData::EntitySpawn object;
+			object.m_mapEntitySpawnId = m_params->m_objectMapEntitySpawnId;
+			object.m_entityId = m_params->m_playerSpawnEntityId;
+			object.m_x = t.m_x;
+			object.m_y = t.m_y;
+			aOutMapData->m_entitySpawns.push_back(object);
 		}
 
 		// Boss entity spawns
@@ -1442,6 +1449,14 @@ namespace tpublic::MapGenerators
 					t->FromSource(&m_executeFactory, aChild);
 					m_executes.m_children.push_back(std::move(t));
 				}
+				else if(aChild->m_name == "player_spawn_entity")
+				{
+					m_params.m_playerSpawnEntityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENTITY, aChild->GetIdentifier());
+				}
+				else if (aChild->m_name == "object_map_entity_spawn")
+				{
+					m_params.m_objectMapEntitySpawnId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aChild->GetIdentifier());
+				}
 				else
 				{
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -1466,6 +1481,7 @@ namespace tpublic::MapGenerators
 		}
 
 		m_executes.ToStream(aWriter);
+		m_params.ToStream(aWriter);
 	}
 	
 	bool		
@@ -1496,6 +1512,8 @@ namespace tpublic::MapGenerators
 
 		if(!m_executes.FromStream(&m_executeFactory, aReader))
 			return false;
+		if(!m_params.FromStream(aReader))
+			return false;
 		return true;
 	}
 
@@ -1510,6 +1528,7 @@ namespace tpublic::MapGenerators
 	{
 		Builder builder;
 		builder.m_terrainPalette = &m_terrainPalette;
+		builder.m_params = &m_params;
 		builder.m_manifest = aManifest;
 		builder.m_mapGeneratorRuntime = aMapGeneratorRuntime;
 		builder.m_random.seed(aSeed);

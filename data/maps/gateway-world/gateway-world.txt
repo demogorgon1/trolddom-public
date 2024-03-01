@@ -96,6 +96,10 @@ map_entity_spawn .pack:
 	spawn_timer: { cooldown_range_min: 600 cooldown_range_max: 1200 }
 }
 
+map_entity_spawn .object:
+{	
+}
+
 !define local BOSS
 {
 	tag_context: .major_boss 
@@ -112,7 +116,7 @@ map_entity_spawn .pack:
 	
 	pack<35>: 
 	{ 
-		influence_range: [ 0 48 ]		
+		influence_range: [ 10 55 ]		
 		tag_contexts: [ .melee_enemy ]		
 		elite: false
 		map_entity_spawn: .pack
@@ -120,7 +124,7 @@ map_entity_spawn .pack:
 	
 	pack<100>: 
 	{ 
-		influence_range: [ 48 80 ] 		
+		influence_range: [ 55 80 ] 		
 		tag_contexts: [ .melee_enemy .melee_enemy ]		
 		min_distance_to_nearby: 6
 		elite: false
@@ -129,7 +133,7 @@ map_entity_spawn .pack:
 	
 	pack<120>: 
 	{ 
-		influence_range: [ 80 100 ] 		
+		influence_range: [ 85 100 ] 		
 		tag_contexts: [ .melee_enemy .melee_enemy ]		
 		min_distance_to_nearby: 6
 		elite: true
@@ -164,6 +168,8 @@ map gateway_world:
 	{
 		terrain_palette_entry<ocean>: "."
 		terrain_palette_entry<flat>: "X"
+		player_spawn_entity: standing_stone
+		object_map_entity_spawn: .object
 	
 		execute all:
 		{

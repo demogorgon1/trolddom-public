@@ -47,12 +47,28 @@ sprites:
 	sprite tentacle_monster: { dead: tentacle_monster_dead }
 	sprite man_6: { dead: man_6_dead tags: [ male human ] }
 	sprite woman_2: { dead: woman_2_dead tags: [ female human ] }
+	sprite goblin_2: { dead: goblin_2_dead tags: [ goblin melee ] }
+	sprite goblin_3: { dead: goblin_3_dead tags: [ goblin melee ] }
+	sprite goblin_4: { dead: goblin_4_dead tags: [ goblin melee ] }
+	sprite goblin_shaman_2: { dead: goblin_shaman_2_dead tags: [ goblin caster ] }
+	sprite goblin_shaman_3: { dead: goblin_shaman_3_dead tags: [ goblin caster ] }
+	sprite goblin_bowman_1: { dead: goblin_bowman_1_dead tags: [ goblin ranged ] }
+	sprite goblin_boss_2: { dead: goblin_boss_2_dead tags: [ goblin melee boss ] }
+	sprite goblin_boss_3: { dead: goblin_boss_3_dead tags: [ goblin caster boss ] }
 	
 	cursor: { position: [ 0 48 ] }
 	
 	sprite tentacle_monster_dead: { }
 	sprite man_6_dead: { }
 	sprite woman_2_dead: { }
+	sprite goblin_2_dead: { }
+	sprite goblin_3_dead: { }
+	sprite goblin_4_dead: { }
+	sprite goblin_shaman_2_dead: { }
+	sprite goblin_shaman_3_dead: { }
+	sprite goblin_bowman_1_dead: { }
+	sprite goblin_boss_2_dead: { }
+	sprite goblin_boss_3_dead: { }
 	
 }
 
@@ -93,6 +109,7 @@ sprites:
 	sprite gateway_1: { }
 	sprite gateway_2: { }
 	sprite gateway_3: { }
+	sprite waypoint_1: { }
 	
 }
 

@@ -1,0 +1,24 @@
+!define local MISC_OBJECT
+{
+	components:
+	{
+		display_name: { string: @_string }
+		position: { }				
+		sprite: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: @_frames		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+	}
+}
+
+entity standing_stone: !MISC_OBJECT { _string: "Standing Stone" _frames: [ waypoint_1 ] }
+

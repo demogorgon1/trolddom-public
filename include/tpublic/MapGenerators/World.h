@@ -27,6 +27,32 @@ namespace tpublic::MapGenerators
 		struct IExecuteFactory;
 		typedef std::unordered_map<char, uint32_t> TerrainPalette;
 
+		struct Params
+		{
+			void
+			ToStream(
+				IWriter*									aWriter) const
+			{
+				aWriter->WriteUInt(m_playerSpawnEntityId);
+				aWriter->WriteUInt(m_objectMapEntitySpawnId);
+			}
+
+			bool
+			FromStream(
+				IReader*									aReader)
+			{
+				if (!aReader->ReadUInt(m_playerSpawnEntityId))
+					return false;
+				if (!aReader->ReadUInt(m_objectMapEntitySpawnId))
+					return false;
+				return true;
+			}
+
+			// Public data
+			uint32_t					m_playerSpawnEntityId = 0;
+			uint32_t					m_objectMapEntitySpawnId = 0;
+		};
+
 		struct MinorBosses
 		{
 			MinorBosses()
@@ -188,6 +214,7 @@ namespace tpublic::MapGenerators
 			void			InitPlayerSpawns();
 
 			// Public data
+			const Params*									m_params = NULL;
 			const TerrainPalette*							m_terrainPalette = NULL;
 			const Manifest*									m_manifest = NULL;
 			MapGeneratorRuntime*							m_mapGeneratorRuntime = NULL;
@@ -1423,6 +1450,7 @@ namespace tpublic::MapGenerators
 			// Public data
 			uint32_t									m_count = 1;
 		};
+
 		// MapGeneratorBase implementation
 		void			FromSource(
 							const SourceNode*			aSource) override;
@@ -1442,7 +1470,8 @@ namespace tpublic::MapGenerators
 
 		IExecuteFactory										m_executeFactory;
 		TerrainPalette										m_terrainPalette;
-
+		
+		Params												m_params;
 		CompoundExecute										m_executes;
 
 		void			_AddTerrainPaletteEntry(

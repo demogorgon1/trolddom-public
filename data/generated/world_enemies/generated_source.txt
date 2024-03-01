@@ -4,8 +4,8 @@ entity world_enemies_npc_0: !NPC
 	_level: 4
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
 	_weapon_damage: 0.856444
 	_resource_health: 1.105785
 	_creature_type: humanoid
@@ -24,8 +24,8 @@ entity world_enemies_npc_1: !NPC
 	_level: 6
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
 	_weapon_damage: 1.137850
 	_resource_health: 1.085582
 	_creature_type: humanoid
@@ -43,8 +43,8 @@ entity world_enemies_npc_2: !NPC
 	_level: 2
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
 	_weapon_damage: 1.042229
 	_resource_health: 0.919200
 	_creature_type: humanoid
@@ -63,8 +63,8 @@ entity world_enemies_npc_3: !NPC
 	_level: 8
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
 	_weapon_damage: 0.923756
 	_resource_health: 0.938188
 	_creature_type: humanoid
@@ -103,8 +103,8 @@ entity world_enemies_npc_5: !NPC
 	_level: 8
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
 	_weapon_damage: 1.183447
 	_resource_health: 0.957591
 	_creature_type: humanoid
@@ -142,8 +142,8 @@ entity world_enemies_npc_7: !NPC
 	_level: 5
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
 	_weapon_damage: 1.089373
 	_resource_health: 0.839057
 	_creature_type: humanoid
@@ -199,8 +199,8 @@ entity world_enemies_npc_10: !NPC
 	_level: 4
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_4
+	_sprite_dead: goblin_4_dead
 	_weapon_damage: 1.110220
 	_resource_health: 0.989606
 	_creature_type: humanoid
@@ -219,8 +219,8 @@ entity world_enemies_npc_11: !NPC
 	_level: 8
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
 	_weapon_damage: 0.957757
 	_resource_health: 1.192719
 	_creature_type: humanoid
@@ -239,8 +239,8 @@ entity world_enemies_npc_12: !NPC
 	_level: 7
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_3
+	_sprite_dead: goblin_3_dead
 	_weapon_damage: 0.896261
 	_resource_health: 0.806536
 	_creature_type: humanoid
@@ -259,8 +259,8 @@ entity world_enemies_npc_13: !NPC
 	_level: 5
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_4
+	_sprite_dead: goblin_4_dead
 	_weapon_damage: 1.102800
 	_resource_health: 0.930474
 	_creature_type: humanoid
@@ -278,8 +278,8 @@ entity world_enemies_npc_14: !NPC
 	_level: 4
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
 	_weapon_damage: 0.962647
 	_resource_health: 1.006796
 	_creature_type: humanoid
@@ -317,8 +317,8 @@ entity world_enemies_npc_16: !NPC
 	_level: 3
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
 	_weapon_damage: 1.170335
 	_resource_health: 1.072928
 	_creature_type: humanoid
@@ -337,8 +337,8 @@ entity world_enemies_npc_17: !NPC
 	_level: 7
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
 	_weapon_damage: 0.815266
 	_resource_health: 0.854541
 	_creature_type: humanoid
@@ -357,8 +357,8 @@ entity world_enemies_npc_18: !NPC
 	_level: 7
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_3
+	_sprite_dead: goblin_3_dead
 	_weapon_damage: 1.189929
 	_resource_health: 1.045406
 	_creature_type: humanoid
@@ -377,8 +377,8 @@ entity world_enemies_npc_19: !NPC
 	_level: 6
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_3
+	_sprite_dead: goblin_3_dead
 	_weapon_damage: 1.113137
 	_resource_health: 0.874626
 	_creature_type: humanoid
@@ -417,8 +417,8 @@ entity world_enemies_npc_21: !NPC
 	_level: 8
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
 	_weapon_damage: 0.863280
 	_resource_health: 1.042651
 	_creature_type: humanoid
@@ -436,8 +436,8 @@ entity world_enemies_npc_22: !NPC
 	_level: 5
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
 	_weapon_damage: 0.904755
 	_resource_health: 0.924351
 	_creature_type: humanoid
@@ -456,8 +456,8 @@ entity world_enemies_npc_23: !NPC
 	_level: 7
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
 	_weapon_damage: 1.147736
 	_resource_health: 0.989884
 	_creature_type: humanoid
@@ -475,8 +475,8 @@ entity world_enemies_npc_24: !NPC
 	_level: 6
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_3
+	_sprite_dead: goblin_3_dead
 	_weapon_damage: 0.960198
 	_resource_health: 1.038350
 	_creature_type: humanoid
@@ -495,8 +495,8 @@ entity world_enemies_npc_25: !NPC
 	_level: 4
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
 	_weapon_damage: 0.825792
 	_resource_health: 0.866221
 	_creature_type: humanoid
@@ -554,8 +554,8 @@ entity world_enemies_npc_28: !NPC
 	_level: 6
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_3
+	_sprite_dead: goblin_3_dead
 	_weapon_damage: 0.881396
 	_resource_health: 1.164424
 	_creature_type: humanoid
@@ -573,8 +573,8 @@ entity world_enemies_npc_29: !NPC
 	_level: 3
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
 	_weapon_damage: 1.181464
 	_resource_health: 0.891305
 	_creature_type: humanoid
@@ -593,8 +593,8 @@ entity world_enemies_npc_30: !NPC
 	_level: 2
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_4
+	_sprite_dead: goblin_4_dead
 	_weapon_damage: 1.105819
 	_resource_health: 0.956733
 	_creature_type: humanoid
@@ -612,8 +612,8 @@ entity world_enemies_npc_31: !NPC
 	_level: 5
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_4
+	_sprite_dead: goblin_4_dead
 	_weapon_damage: 1.088616
 	_resource_health: 0.872680
 	_creature_type: humanoid
@@ -632,8 +632,8 @@ entity world_enemies_npc_32: !NPC
 	_level: 7
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_4
+	_sprite_dead: goblin_4_dead
 	_weapon_damage: 1.189917
 	_resource_health: 1.126333
 	_creature_type: humanoid
@@ -652,8 +652,8 @@ entity world_enemies_npc_33: !NPC
 	_level: 1
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_3
+	_sprite_dead: goblin_3_dead
 	_weapon_damage: 1.039442
 	_resource_health: 0.974021
 	_creature_type: humanoid
@@ -671,8 +671,8 @@ entity world_enemies_npc_34: !NPC
 	_level: 8
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
 	_weapon_damage: 0.914855
 	_resource_health: 1.140778
 	_creature_type: humanoid
@@ -690,8 +690,8 @@ entity world_enemies_npc_35: !NPC
 	_level: 1
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_4
+	_sprite_dead: goblin_4_dead
 	_weapon_damage: 0.841055
 	_resource_health: 1.024276
 	_creature_type: humanoid
@@ -710,8 +710,8 @@ entity world_enemies_npc_36: !NPC
 	_level: 8
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
 	_weapon_damage: 0.889924
 	_resource_health: 1.170543
 	_creature_type: humanoid
@@ -729,8 +729,8 @@ entity world_enemies_npc_37: !NPC
 	_level: 1
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
 	_weapon_damage: 1.127137
 	_resource_health: 1.084265
 	_creature_type: humanoid
@@ -749,8 +749,8 @@ entity world_enemies_npc_38: !NPC
 	_level: 6
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
 	_weapon_damage: 1.093918
 	_resource_health: 1.187876
 	_creature_type: humanoid
@@ -769,8 +769,8 @@ entity world_enemies_npc_39: !NPC
 	_level: 8
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_3
+	_sprite_dead: goblin_3_dead
 	_weapon_damage: 1.155243
 	_resource_health: 1.079919
 	_creature_type: humanoid
@@ -789,8 +789,8 @@ entity world_enemies_npc_40: !NPC
 	_level: 4
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
 	_weapon_damage: 1.027617
 	_resource_health: 1.069199
 	_creature_type: humanoid
@@ -868,8 +868,8 @@ entity world_enemies_npc_44: !NPC
 	_level: 8
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
 	_weapon_damage: 1.172817
 	_resource_health: 0.930729
 	_creature_type: humanoid
@@ -888,8 +888,8 @@ entity world_enemies_npc_45: !NPC
 	_level: 2
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_4
+	_sprite_dead: goblin_4_dead
 	_weapon_damage: 0.984179
 	_resource_health: 1.023183
 	_creature_type: humanoid
@@ -907,8 +907,8 @@ entity world_enemies_npc_46: !NPC
 	_level: 6
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_3
+	_sprite_dead: goblin_3_dead
 	_weapon_damage: 1.057840
 	_resource_health: 1.102315
 	_creature_type: humanoid
@@ -926,8 +926,8 @@ entity world_enemies_npc_47: !NPC
 	_level: 7
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_4
+	_sprite_dead: goblin_4_dead
 	_weapon_damage: 0.935620
 	_resource_health: 1.004215
 	_creature_type: humanoid
@@ -946,8 +946,8 @@ entity world_enemies_npc_48: !NPC
 	_level: 8
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_4
+	_sprite_dead: goblin_4_dead
 	_weapon_damage: 0.844783
 	_resource_health: 0.835278
 	_creature_type: humanoid
@@ -984,8 +984,8 @@ entity world_enemies_npc_50: !NPC
 	_level: 10
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
 	_weapon_damage: 0.805983
 	_resource_health: 1.072336
 	_creature_type: humanoid
@@ -1003,8 +1003,8 @@ entity world_enemies_npc_51: !NPC
 	_level: 10
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_3
+	_sprite_dead: goblin_3_dead
 	_weapon_damage: 1.102920
 	_resource_health: 1.175076
 	_creature_type: humanoid
@@ -1023,8 +1023,8 @@ entity world_enemies_npc_52: !NPC
 	_level: 10
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_4
+	_sprite_dead: goblin_4_dead
 	_weapon_damage: 0.863157
 	_resource_health: 0.847157
 	_creature_type: humanoid
@@ -1043,8 +1043,8 @@ entity world_enemies_npc_53: !NPC
 	_level: 10
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_4
+	_sprite_dead: goblin_4_dead
 	_weapon_damage: 0.923050
 	_resource_health: 1.050612
 	_creature_type: humanoid
@@ -1063,8 +1063,8 @@ entity world_enemies_npc_54: !NPC
 	_level: 9
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_3
+	_sprite_dead: goblin_3_dead
 	_weapon_damage: 0.945286
 	_resource_health: 1.182700
 	_creature_type: humanoid
@@ -1083,8 +1083,8 @@ entity world_enemies_npc_55: !NPC
 	_level: 10
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_3
+	_sprite_dead: goblin_3_dead
 	_weapon_damage: 0.843087
 	_resource_health: 1.079153
 	_creature_type: humanoid
@@ -1102,8 +1102,8 @@ entity world_enemies_npc_56: !NPC
 	_level: 10
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_4
+	_sprite_dead: goblin_4_dead
 	_weapon_damage: 1.167875
 	_resource_health: 1.090295
 	_creature_type: humanoid
@@ -1122,8 +1122,8 @@ entity world_enemies_npc_57: !NPC
 	_level: 9
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
 	_weapon_damage: 0.886961
 	_resource_health: 0.896448
 	_creature_type: humanoid
@@ -1142,8 +1142,8 @@ entity world_enemies_npc_58: !NPC
 	_level: 10
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_3
+	_sprite_dead: goblin_3_dead
 	_weapon_damage: 0.915023
 	_resource_health: 0.961180
 	_creature_type: humanoid
@@ -1161,8 +1161,8 @@ entity world_enemies_npc_59: !NPC
 	_level: 10
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_3
+	_sprite_dead: goblin_3_dead
 	_weapon_damage: 1.154718
 	_resource_health: 1.147302
 	_creature_type: humanoid
@@ -1220,8 +1220,8 @@ entity world_enemies_npc_62: !NPC
 	_level: 10
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
 	_weapon_damage: 1.066679
 	_resource_health: 1.126243
 	_creature_type: humanoid
@@ -1259,8 +1259,8 @@ entity world_enemies_npc_64: !NPC
 	_level: 9
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_4
+	_sprite_dead: goblin_4_dead
 	_weapon_damage: 0.994677
 	_resource_health: 1.087624
 	_creature_type: humanoid
@@ -1299,8 +1299,8 @@ entity world_enemies_npc_66: !NPC
 	_level: 10
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
 	_weapon_damage: 0.879055
 	_resource_health: 0.809813
 	_creature_type: humanoid
@@ -1318,8 +1318,8 @@ entity world_enemies_npc_67: !NPC
 	_level: 10
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_4
+	_sprite_dead: goblin_4_dead
 	_weapon_damage: 0.820042
 	_resource_health: 0.814748
 	_creature_type: humanoid
@@ -1337,8 +1337,8 @@ entity world_enemies_npc_68: !NPC
 	_level: 10
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_4
+	_sprite_dead: goblin_4_dead
 	_weapon_damage: 1.129415
 	_resource_health: 1.095226
 	_creature_type: humanoid
@@ -1356,8 +1356,8 @@ entity world_enemies_npc_69: !NPC
 	_level: 9
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
 	_weapon_damage: 0.961926
 	_resource_health: 1.110221
 	_creature_type: humanoid
@@ -1375,8 +1375,8 @@ entity world_enemies_npc_70: !NPC
 	_level: 10
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
 	_weapon_damage: 0.948514
 	_resource_health: 1.103510
 	_creature_type: humanoid
@@ -1394,8 +1394,8 @@ entity world_enemies_npc_71: !NPC
 	_level: 9
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_3
+	_sprite_dead: goblin_3_dead
 	_weapon_damage: 1.151099
 	_resource_health: 1.030338
 	_creature_type: humanoid
@@ -1413,8 +1413,8 @@ entity world_enemies_npc_72: !NPC
 	_level: 9
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_4
+	_sprite_dead: goblin_4_dead
 	_weapon_damage: 1.082327
 	_resource_health: 1.174491
 	_creature_type: humanoid
@@ -1432,8 +1432,8 @@ entity world_enemies_npc_73: !NPC
 	_level: 9
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_3
+	_sprite_dead: goblin_3_dead
 	_weapon_damage: 0.913884
 	_resource_health: 1.110072
 	_creature_type: humanoid
@@ -1452,8 +1452,8 @@ entity world_enemies_npc_74: !NPC
 	_level: 10
 	_elite: false
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
 	_weapon_damage: 1.020690
 	_resource_health: 1.091185
 	_creature_type: humanoid
@@ -1472,8 +1472,8 @@ entity world_enemies_npc_75: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
 	_weapon_damage: 0.800169
 	_resource_health: 0.952023
 	_creature_type: humanoid
@@ -1491,8 +1491,8 @@ entity world_enemies_npc_76: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_4
+	_sprite_dead: goblin_4_dead
 	_weapon_damage: 0.838550
 	_resource_health: 0.808516
 	_creature_type: humanoid
@@ -1511,8 +1511,8 @@ entity world_enemies_npc_77: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_4
+	_sprite_dead: goblin_4_dead
 	_weapon_damage: 1.186888
 	_resource_health: 0.967177
 	_creature_type: humanoid
@@ -1588,8 +1588,8 @@ entity world_enemies_npc_81: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_4
+	_sprite_dead: goblin_4_dead
 	_weapon_damage: 0.838288
 	_resource_health: 0.926138
 	_creature_type: humanoid
@@ -1608,8 +1608,8 @@ entity world_enemies_npc_82: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_3
+	_sprite_dead: goblin_3_dead
 	_weapon_damage: 0.889748
 	_resource_health: 0.907441
 	_creature_type: humanoid
@@ -1647,8 +1647,8 @@ entity world_enemies_npc_84: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
 	_weapon_damage: 1.075613
 	_resource_health: 1.093843
 	_creature_type: humanoid
@@ -1667,8 +1667,8 @@ entity world_enemies_npc_85: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_3
+	_sprite_dead: goblin_3_dead
 	_weapon_damage: 0.932606
 	_resource_health: 1.053737
 	_creature_type: humanoid
@@ -1686,8 +1686,8 @@ entity world_enemies_npc_86: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_3
+	_sprite_dead: goblin_3_dead
 	_weapon_damage: 1.017587
 	_resource_health: 1.164058
 	_creature_type: humanoid
@@ -1706,8 +1706,8 @@ entity world_enemies_npc_87: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_3
+	_sprite_dead: goblin_3_dead
 	_weapon_damage: 1.001162
 	_resource_health: 0.816910
 	_creature_type: humanoid
@@ -1726,8 +1726,8 @@ entity world_enemies_npc_88: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
 	_weapon_damage: 1.016800
 	_resource_health: 1.153774
 	_creature_type: humanoid
@@ -1766,8 +1766,8 @@ entity world_enemies_npc_90: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_3
+	_sprite_dead: goblin_3_dead
 	_weapon_damage: 1.074266
 	_resource_health: 0.803789
 	_creature_type: humanoid
@@ -1806,8 +1806,8 @@ entity world_enemies_npc_92: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_3
+	_sprite_dead: goblin_3_dead
 	_weapon_damage: 1.134550
 	_resource_health: 1.141735
 	_creature_type: humanoid
@@ -1865,8 +1865,8 @@ entity world_enemies_npc_95: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_4
+	_sprite_dead: goblin_4_dead
 	_weapon_damage: 0.936104
 	_resource_health: 0.919468
 	_creature_type: humanoid
@@ -1885,8 +1885,8 @@ entity world_enemies_npc_96: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
 	_weapon_damage: 0.992201
 	_resource_health: 0.940626
 	_creature_type: humanoid
@@ -1904,8 +1904,8 @@ entity world_enemies_npc_97: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_3
+	_sprite_dead: goblin_3_dead
 	_weapon_damage: 0.866617
 	_resource_health: 1.121972
 	_creature_type: humanoid
@@ -1923,8 +1923,8 @@ entity world_enemies_npc_98: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_4
+	_sprite_dead: goblin_4_dead
 	_weapon_damage: 0.957863
 	_resource_health: 0.854925
 	_creature_type: humanoid
@@ -1942,8 +1942,8 @@ entity world_enemies_npc_99: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin
-	_sprite_dead: goblin_dead
+	_sprite: goblin_3
+	_sprite_dead: goblin_3_dead
 	_weapon_damage: 1.003622
 	_resource_health: 1.046222
 	_creature_type: humanoid
@@ -2066,8 +2066,8 @@ entity world_enemies_npc_105: !NPC
 	_level: 2
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.972987
 	_resource_health: 2.986425
 	_creature_type: humanoid
@@ -2087,8 +2087,8 @@ entity world_enemies_npc_106: !NPC
 	_level: 8
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.655479
 	_resource_health: 2.373366
 	_creature_type: humanoid
@@ -2171,8 +2171,8 @@ entity world_enemies_npc_110: !NPC
 	_level: 6
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.840369
 	_resource_health: 2.432151
 	_creature_type: humanoid
@@ -2213,8 +2213,8 @@ entity world_enemies_npc_112: !NPC
 	_level: 4
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.788439
 	_resource_health: 2.633465
 	_creature_type: humanoid
@@ -2255,8 +2255,8 @@ entity world_enemies_npc_114: !NPC
 	_level: 5
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.861345
 	_resource_health: 2.960471
 	_creature_type: humanoid
@@ -2276,8 +2276,8 @@ entity world_enemies_npc_115: !NPC
 	_level: 1
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.954096
 	_resource_health: 2.988113
 	_creature_type: humanoid
@@ -2297,8 +2297,8 @@ entity world_enemies_npc_116: !NPC
 	_level: 7
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.987958
 	_resource_health: 2.749547
 	_creature_type: humanoid
@@ -2339,8 +2339,8 @@ entity world_enemies_npc_118: !NPC
 	_level: 8
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.749218
 	_resource_health: 2.969867
 	_creature_type: humanoid
@@ -2360,8 +2360,8 @@ entity world_enemies_npc_119: !NPC
 	_level: 4
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.843671
 	_resource_health: 2.805431
 	_creature_type: humanoid
@@ -2402,8 +2402,8 @@ entity world_enemies_npc_121: !NPC
 	_level: 7
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.792810
 	_resource_health: 2.767829
 	_creature_type: humanoid
@@ -2423,8 +2423,8 @@ entity world_enemies_npc_122: !NPC
 	_level: 5
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.952560
 	_resource_health: 2.659908
 	_creature_type: humanoid
@@ -2465,8 +2465,8 @@ entity world_enemies_npc_124: !NPC
 	_level: 1
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.671424
 	_resource_health: 2.540884
 	_creature_type: humanoid
@@ -2486,8 +2486,8 @@ entity world_enemies_npc_125: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.951188
 	_resource_health: 2.459003
 	_creature_type: humanoid
@@ -2507,8 +2507,8 @@ entity world_enemies_npc_126: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.701337
 	_resource_health: 2.812325
 	_creature_type: humanoid
@@ -2528,8 +2528,8 @@ entity world_enemies_npc_127: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.608995
 	_resource_health: 2.828654
 	_creature_type: humanoid
@@ -2549,8 +2549,8 @@ entity world_enemies_npc_128: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.529413
 	_resource_health: 2.445834
 	_creature_type: humanoid
@@ -2591,8 +2591,8 @@ entity world_enemies_npc_130: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.710553
 	_resource_health: 2.418761
 	_creature_type: humanoid
@@ -2612,8 +2612,8 @@ entity world_enemies_npc_131: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.506111
 	_resource_health: 2.794500
 	_creature_type: humanoid
@@ -2717,8 +2717,8 @@ entity world_enemies_npc_136: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.989179
 	_resource_health: 2.568852
 	_creature_type: humanoid
@@ -2738,8 +2738,8 @@ entity world_enemies_npc_137: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.702124
 	_resource_health: 2.625373
 	_creature_type: humanoid
@@ -2759,8 +2759,8 @@ entity world_enemies_npc_138: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.882965
 	_resource_health: 2.750755
 	_creature_type: humanoid
@@ -2885,8 +2885,8 @@ entity world_enemies_npc_144: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.995140
 	_resource_health: 2.561641
 	_creature_type: humanoid
@@ -2906,8 +2906,8 @@ entity world_enemies_npc_145: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.613826
 	_resource_health: 2.629147
 	_creature_type: humanoid
@@ -2927,8 +2927,8 @@ entity world_enemies_npc_146: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.678127
 	_resource_health: 2.805555
 	_creature_type: humanoid
@@ -2969,8 +2969,8 @@ entity world_enemies_npc_148: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.585759
 	_resource_health: 2.963313
 	_creature_type: humanoid
@@ -2990,8 +2990,8 @@ entity world_enemies_npc_149: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.648013
 	_resource_health: 2.838743
 	_creature_type: humanoid
@@ -3011,8 +3011,8 @@ entity world_enemies_npc_150: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.694317
 	_resource_health: 2.371309
 	_creature_type: humanoid
@@ -3032,8 +3032,8 @@ entity world_enemies_npc_151: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.522130
 	_resource_health: 2.830884
 	_creature_type: humanoid
@@ -3053,8 +3053,8 @@ entity world_enemies_npc_152: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.602686
 	_resource_health: 2.883847
 	_creature_type: humanoid
@@ -3074,8 +3074,8 @@ entity world_enemies_npc_153: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.706390
 	_resource_health: 2.655267
 	_creature_type: humanoid
@@ -3095,8 +3095,8 @@ entity world_enemies_npc_154: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.826737
 	_resource_health: 2.578693
 	_creature_type: humanoid
@@ -3137,8 +3137,8 @@ entity world_enemies_npc_156: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.629603
 	_resource_health: 2.158757
 	_creature_type: humanoid
@@ -3158,8 +3158,8 @@ entity world_enemies_npc_157: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.927137
 	_resource_health: 2.383296
 	_creature_type: humanoid
@@ -3242,8 +3242,8 @@ entity world_enemies_npc_161: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.565777
 	_resource_health: 2.422983
 	_creature_type: humanoid
@@ -3284,8 +3284,8 @@ entity world_enemies_npc_163: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.687320
 	_resource_health: 2.785971
 	_creature_type: humanoid
@@ -3347,8 +3347,8 @@ entity world_enemies_npc_166: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.537235
 	_resource_health: 2.232834
 	_creature_type: humanoid
@@ -3368,8 +3368,8 @@ entity world_enemies_npc_167: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.615805
 	_resource_health: 2.273559
 	_creature_type: humanoid
@@ -3389,8 +3389,8 @@ entity world_enemies_npc_168: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.791439
 	_resource_health: 2.789628
 	_creature_type: humanoid
@@ -3410,8 +3410,8 @@ entity world_enemies_npc_169: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.791142
 	_resource_health: 2.596967
 	_creature_type: humanoid
@@ -3452,8 +3452,8 @@ entity world_enemies_npc_171: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.976469
 	_resource_health: 2.675779
 	_creature_type: humanoid
@@ -3515,8 +3515,8 @@ entity world_enemies_npc_174: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 1.534984
 	_resource_health: 2.104256
 	_creature_type: humanoid
@@ -3536,8 +3536,8 @@ entity world_enemies_npc_175: !NPC
 	_level: 6
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 2.212334
 	_resource_health: 3.997450
 	_creature_type: humanoid
@@ -3704,8 +3704,8 @@ entity world_enemies_npc_183: !NPC
 	_level: 4
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 3.143408
 	_resource_health: 3.625175
 	_creature_type: humanoid
@@ -3725,8 +3725,8 @@ entity world_enemies_npc_184: !NPC
 	_level: 4
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 2.490778
 	_resource_health: 3.930821
 	_creature_type: humanoid
@@ -3788,8 +3788,8 @@ entity world_enemies_npc_187: !NPC
 	_level: 5
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 2.272932
 	_resource_health: 3.879797
 	_creature_type: humanoid
@@ -3809,8 +3809,8 @@ entity world_enemies_npc_188: !NPC
 	_level: 3
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 2.746533
 	_resource_health: 3.915688
 	_creature_type: humanoid
@@ -3830,8 +3830,8 @@ entity world_enemies_npc_189: !NPC
 	_level: 8
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 2.863993
 	_resource_health: 3.866616
 	_creature_type: humanoid
@@ -3893,8 +3893,8 @@ entity world_enemies_npc_192: !NPC
 	_level: 1
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 2.459856
 	_resource_health: 3.735135
 	_creature_type: humanoid
@@ -3914,8 +3914,8 @@ entity world_enemies_npc_193: !NPC
 	_level: 8
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 3.016798
 	_resource_health: 3.576690
 	_creature_type: humanoid
@@ -3935,8 +3935,8 @@ entity world_enemies_npc_194: !NPC
 	_level: 8
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 2.574210
 	_resource_health: 3.937004
 	_creature_type: humanoid
@@ -4061,8 +4061,8 @@ entity world_enemies_npc_200: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 2.288133
 	_resource_health: 3.820044
 	_creature_type: humanoid
@@ -4127,8 +4127,8 @@ entity world_enemies_npc_203: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 2.594425
 	_resource_health: 3.794117
 	_creature_type: humanoid
@@ -4149,8 +4149,8 @@ entity world_enemies_npc_204: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 2.819806
 	_resource_health: 3.581441
 	_creature_type: humanoid
@@ -4171,8 +4171,8 @@ entity world_enemies_npc_205: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 2.754284
 	_resource_health: 3.503075
 	_creature_type: humanoid
@@ -4193,8 +4193,8 @@ entity world_enemies_npc_206: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 2.667967
 	_resource_health: 3.596935
 	_creature_type: humanoid
@@ -4281,8 +4281,8 @@ entity world_enemies_npc_210: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 3.122096
 	_resource_health: 3.520029
 	_creature_type: humanoid
@@ -4347,8 +4347,8 @@ entity world_enemies_npc_213: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 2.418094
 	_resource_health: 3.579886
 	_creature_type: humanoid
@@ -4413,8 +4413,8 @@ entity world_enemies_npc_216: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 2.752140
 	_resource_health: 3.861619
 	_creature_type: humanoid
@@ -4435,8 +4435,8 @@ entity world_enemies_npc_217: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 3.135010
 	_resource_health: 3.722171
 	_creature_type: humanoid
@@ -4457,8 +4457,8 @@ entity world_enemies_npc_218: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 2.642199
 	_resource_health: 3.862430
 	_creature_type: humanoid
@@ -4479,8 +4479,8 @@ entity world_enemies_npc_219: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 3.045786
 	_resource_health: 3.676659
 	_creature_type: humanoid
@@ -4501,8 +4501,8 @@ entity world_enemies_npc_220: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 3.110707
 	_resource_health: 3.830607
 	_creature_type: humanoid
@@ -4545,8 +4545,8 @@ entity world_enemies_npc_222: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 2.875569
 	_resource_health: 3.546872
 	_creature_type: humanoid
@@ -4633,8 +4633,8 @@ entity world_enemies_npc_226: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 3.140304
 	_resource_health: 3.661274
 	_creature_type: humanoid
@@ -4677,8 +4677,8 @@ entity world_enemies_npc_228: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 2.890773
 	_resource_health: 3.613739
 	_creature_type: humanoid
@@ -4721,8 +4721,8 @@ entity world_enemies_npc_230: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 2.913964
 	_resource_health: 3.914522
 	_creature_type: humanoid
@@ -4743,8 +4743,8 @@ entity world_enemies_npc_231: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 3.198362
 	_resource_health: 3.573632
 	_creature_type: humanoid
@@ -4765,8 +4765,8 @@ entity world_enemies_npc_232: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 2.737857
 	_resource_health: 3.862510
 	_creature_type: humanoid
@@ -4787,8 +4787,8 @@ entity world_enemies_npc_233: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 3.101378
 	_resource_health: 3.854325
 	_creature_type: humanoid
@@ -4809,8 +4809,8 @@ entity world_enemies_npc_234: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 2.676829
 	_resource_health: 3.907839
 	_creature_type: humanoid
@@ -4897,8 +4897,8 @@ entity world_enemies_npc_238: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 3.166295
 	_resource_health: 3.967818
 	_creature_type: humanoid
@@ -4941,8 +4941,8 @@ entity world_enemies_npc_240: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 2.433794
 	_resource_health: 3.534093
 	_creature_type: humanoid
@@ -4985,8 +4985,8 @@ entity world_enemies_npc_242: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 2.371861
 	_resource_health: 3.984549
 	_creature_type: humanoid
@@ -5007,8 +5007,8 @@ entity world_enemies_npc_243: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 2.780725
 	_resource_health: 3.899749
 	_creature_type: humanoid
@@ -5029,8 +5029,8 @@ entity world_enemies_npc_244: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 2.781839
 	_resource_health: 3.550632
 	_creature_type: humanoid
@@ -5139,8 +5139,8 @@ entity world_enemies_npc_249: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
 	_weapon_damage: 3.146221
 	_resource_health: 3.764208
 	_creature_type: humanoid
