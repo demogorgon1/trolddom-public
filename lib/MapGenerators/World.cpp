@@ -19,265 +19,6 @@
 namespace tpublic::MapGenerators
 {
 
-	//---------------------------------------------------------------------------------
-
-	World::World()
-		: MapGeneratorBase(ID)
-	{
-
-	}
-	
-	World::~World()
-	{
-
-	}
-
-	//---------------------------------------------------------------------------------
-
-	void		
-	World::FromSource(
-		const SourceNode*				aSource) 
-	{
-		aSource->ForEachChild([&](
-			const SourceNode* aChild)
-		{
-			if(!FromSourceBase(aChild))
-			{
-				if(aChild->m_name == "terrain_palette_entry")
-					_AddTerrainPaletteEntry(aChild);
-				else if(aChild->m_tag == "execute")
-					m_executes.push_back(std::make_unique<Execute>(aChild));
-				else
-					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
-			}
-		});
-	}
-	
-	void		
-	World::ToStream(
-		IWriter*						aWriter) const
-	{
-		ToStreamBase(aWriter);
-
-		{
-			aWriter->WriteUInt(m_terrainPalette.size());
-			for(TerrainPalette::const_iterator i = m_terrainPalette.cbegin(); i != m_terrainPalette.cend(); i++)
-			{
-				aWriter->WritePOD(i->first);
-				aWriter->WriteUInt(i->second);
-			}
-		}
-
-		aWriter->WriteObjectPointers(m_executes);
-	}
-	
-	bool		
-	World::FromStream(
-		IReader*						aReader) 
-	{
-		if(!FromStreamBase(aReader))
-			return false;
-
-		{
-			size_t count;
-			if(!aReader->ReadUInt(count))
-				return false;
-
-			for(size_t i = 0; i < count; i++)
-			{
-				char symbol;
-				if(!aReader->ReadPOD(symbol))
-					return false;
-
-				uint32_t terrainId;
-				if(!aReader->ReadUInt(terrainId))
-					return false;
-
-				m_terrainPalette[symbol] = terrainId;
-			}
-		}
-
-		if(!aReader->ReadObjectPointers(m_executes))
-			return false;
-		return true;
-	}
-
-	bool		
-	World::Build(
-		const Manifest*					aManifest,
-		MapGeneratorRuntime*			aMapGeneratorRuntime,
-		uint32_t						aSeed,
-		const MapData*					aSourceMapData,
-		const char*						/*aDebugImagePath*/,
-		std::unique_ptr<MapData>&		aOutMapData) const 
-	{
-		Builder builder;
-		builder.m_terrainPalette = &m_terrainPalette;
-		builder.m_manifest = aManifest;
-		builder.m_mapGeneratorRuntime = aMapGeneratorRuntime;
-		builder.m_random.seed(aSeed);
-
-		for(const std::unique_ptr<Execute>& execute : m_executes)
-			builder.Process(execute.get());
-
-		builder.IdentifyWalkableAreas();
-
-		if(builder.m_walkableAreas.size() == 0)
-			return false; // This should be very unlikely
-
-		builder.InitNoiseMap();
-		builder.ConnectWalkableAreas();
-		builder.InitBosses();
-
-		builder.CreateMapData(aSourceMapData, aOutMapData);
-
-		aOutMapData->WriteDebugTileMapPNG(aManifest, "mapdata.png");
-
-		return true;
-	}
-
-	//---------------------------------------------------------------------------------
-
-	void		
-	World::_AddTerrainPaletteEntry(
-		const SourceNode*				aSource)
-	{
-		TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing terrain annotation.");
-		uint32_t terrainId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TERRAIN, aSource->m_annotation->GetIdentifier());
-		char symbol = aSource->GetCharacter();
-		TP_VERIFY(!m_terrainPalette.contains(symbol), aSource->m_debugInfo, "'%c' is already defined in terrain palette.");
-		m_terrainPalette[symbol] = terrainId;
-	}
-
-	//---------------------------------------------------------------------------------
-
-	void		
-	World::Builder::Process(
-		const Execute*					aExecute)
-	{
-		switch(aExecute->m_type)
-		{
-		case EXECUTE_TYPE_ALL:	
-			for(const std::unique_ptr<Execute>& child : aExecute->m_children)
-			{
-				if (MaybeDoIt(child->m_weight))
-					Process(child.get());
-			}
-			break;
-
-		case EXECUTE_TYPE_ONE_OF:	
-			if(aExecute->m_children.size() > 0)
-			{
-				uint32_t roll = Roll(1, aExecute->m_totalWeightOfChildren);
-				uint32_t sum = 0;
-				const Execute* execute = NULL;
-				for (const std::unique_ptr<Execute>& child : aExecute->m_children)
-				{
-					sum += child->m_weight;
-					if(roll <= sum)
-					{
-						execute = child.get();
-						break;
-					}
-				}
-
-				assert(execute != NULL);
-
-				Process(execute);
-			}
-			break;
-
-		case EXECUTE_TYPE_PALETTED_MAP:
-			m_width = aExecute->m_palettedMap->m_width;
-			m_height = aExecute->m_palettedMap->m_height;
-			m_terrainMap.resize(aExecute->m_palettedMap->m_tiles.size());
-			for(size_t i = 0; i < m_terrainMap.size(); i++)
-				m_terrainMap[i] = GetTerrainPaletteEntry(aExecute->m_palettedMap->m_tiles[i]);
-			break;
-
-		case EXECUTE_TYPE_DOUBLE:
-			for(uint32_t i = 0; i < aExecute->m_value; i++)
-				Double(aExecute->m_noMutations);
-			break;
-
-		case EXECUTE_TYPE_MEDIAN_FILTER:
-			MedianFilter(aExecute->m_value);
-			break;
-
-		case EXECUTE_TYPE_GROW:
-			Grow(aExecute->m_value);
-			break;
-
-		case EXECUTE_TYPE_DESPECKLE:
-			Despeckle();
-			break;
-
-		case EXECUTE_TYPE_ADD_BORDERS:
-			AddBorders(aExecute->m_value);
-			break;
-
-		case EXECUTE_TYPE_DEBUG_TERRAIN_MAP:
-			{
-				TP_CHECK(m_terrainMap.size() > 0 && m_width > 0 && m_height > 0, "No terrain map.");
-
-				std::unordered_set<uint32_t> entitySpawnOffsets;
-				for(const MapData::EntitySpawn& entitySpawn : m_entitySpawns)
-					entitySpawnOffsets.insert((uint32_t)(entitySpawn.m_x + entitySpawn.m_y * (int32_t)m_width));
-
-				Image image;
-				image.Allocate(m_width, m_height);
-				Image::RGBA* out = image.GetData();
-				for(uint32_t i = 0; i < m_width * m_height; i++)
-				{
-					if(entitySpawnOffsets.contains(i))
-					{
-						*out = { 255, 0, 0, 255 };
-					}
-					else
-					{
-						uint32_t terrainId = m_terrainMap[i];
-						if(terrainId != 0)
-						{
-							const Data::Terrain* terrain = m_manifest->GetById<Data::Terrain>(terrainId);
-							*out = terrain->m_debugColor;
-						}
-						else
-						{
-							*out = { 0, 0, 0, 255 };
-						}
-					}
-					out++;
-				}
-				image.SavePNG(aExecute->m_string.c_str());
-			}
-			break;
-
-		case EXECUTE_TYPE_OVERLAY:
-			ApplyOverlay(aExecute->m_overlay.get());
-			break;
-
-		case EXECUTE_TYPE_TERRAIN_MODIFIER_MAP:
-			BuildTerrainModifierMap(aExecute->m_terrainModifierMap.get());
-			break;
-
-		case EXECUTE_TYPE_ADD_ENTITY_SPAWNS:
-			GenerateEntitySpawns(aExecute->m_addEntitySpawns.get());
-			break;
-
-		case EXECUTE_TYPE_ADD_BOSS:
-			AddBoss(aExecute->m_value, aExecute->m_value2, aExecute->m_value3, aExecute->m_minorBosses.get());
-			break;
-
-		case EXECUTE_TYPE_LEVEL_RANGE:
-			m_levelRange = { aExecute->m_value, aExecute->m_value2 };
-			break;
-
-		default:
-			TP_CHECK(false, "Invalid execute type.");
-			break;
-		}
-	}
-
 	uint32_t	
 	World::Builder::GetTerrainPaletteEntry(
 		char							aSymbol) const
@@ -334,353 +75,6 @@ namespace tpublic::MapGenerators
 		if(x >= 0 && y >= 0 && x < (int32_t)m_width && y < (int32_t)m_height)
 			return m_terrainMap[x + y * (int32_t)m_width];
 		return 0;
-	}
-
-	void		
-	World::Builder::Double(
-		bool						aNoMutations)
-	{
-		TP_CHECK(m_terrainMap.size() > 0 && m_width > 0 && m_height > 0, "No terrain map.");
-
-		uint32_t newWidth = m_width * 2;
-		uint32_t newHeight = m_height * 2;
-		std::vector<uint32_t> newTerrainMap;
-		newTerrainMap.resize(newWidth * newHeight, 0);
-
-		std::vector<Vec2> holes;
-
-		for (int32_t y = 0; y < (int32_t)m_height; y++)
-		{
-			for (int32_t x = 0; x < (int32_t)m_width; x++)
-			{
-				static const Vec2 OFFSETS[4] = { { 0, 0 }, { 1, 0 }, { 0, 1 }, { 1, 1 } };
-				uint32_t roll = Random2Bits();
-				for(uint32_t i = 0; i < 4; i++)
-				{
-					const Vec2& offset = OFFSETS[i];
-					Vec2 p = { 2 * x + offset.m_x, 2 * y + offset.m_y };
-					if(i == roll)
-						newTerrainMap[p.m_x + p.m_y * (int32_t)newWidth] = m_terrainMap[x + y * m_width];
-					else
-						holes.push_back(p);
-				}
-			}
-		}
-
-		while(holes.size() > 0)
-		{
-			std::vector<std::pair<int32_t, uint32_t>> changes;
-
-			for(size_t i = 0; i < holes.size(); i++)
-			{
-				const Vec2& hole = holes[i];
-
-				uint32_t candidates[4];
-				uint32_t numCandidates = 0;
-
-				static const Vec2 NEIGHBORS[4] = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
-				for(uint32_t j = 0; j < 4; j++)
-				{
-					Vec2 p = { hole.m_x + NEIGHBORS[j].m_x, hole.m_y + NEIGHBORS[j].m_y };
-					if(p.m_x >= 0 && p.m_y >= 0 && p.m_x < (int32_t)newWidth && p.m_y < (int32_t)newHeight)
-					{
-						uint32_t terrainId = newTerrainMap[p.m_x + p.m_y * (int32_t)newWidth];
-						if(terrainId != 0)
-							candidates[numCandidates++] = terrainId;
-					}
-				}
-
-				if(numCandidates > 0)
-				{
-					changes.push_back({ hole.m_x + hole.m_y * (int32_t)newWidth, candidates[Roll(0, numCandidates - 1)] });
-
-					Helpers::RemoveCyclicFromVector(holes, i);
-					i--;
-				}
-			}
-
-			assert(changes.size() > 0);
-
-			for(const std::pair<int32_t, uint32_t>& change : changes)
-				newTerrainMap[change.first] = change.second;
-		}
-
-		if(!aNoMutations)
-		{
-			for (uint32_t y = 1; y < newHeight - 1; y++)
-			{
-				for (uint32_t x = 1; x < newWidth - 1; x++)
-				{
-					uint32_t i = x + y * newWidth;
-					const Data::Terrain* terrain = m_manifest->GetById<Data::Terrain>(newTerrainMap[i]);
-					newTerrainMap[i] = terrain->Mutate(m_random);
-				}
-			}
-		}
-
-		m_terrainMap = std::move(newTerrainMap);
-		m_width = newWidth;
-		m_height = newHeight;
-	}
-
-	void		
-	World::Builder::MedianFilter(
-		uint32_t					aRadius)
-	{
-		typedef std::map<uint32_t, uint32_t> Counters;
-		Counters counters;
-
-		std::vector<uint32_t> newTerrainMap;
-		newTerrainMap.resize(m_terrainMap.size());
-
-		int32_t radiusSquared = (int32_t)(aRadius * aRadius);
-
-		for (int32_t y = 0; y < (int32_t)m_height; y++)
-		{
-			for (int32_t x = 0; x < (int32_t)m_width; x++)
-			{
-				counters.clear();
-
-				int32_t minX = Base::Max(x - (int32_t)aRadius, 0);
-				int32_t minY = Base::Max(y - (int32_t)aRadius, 0);
-				int32_t maxX = Base::Min(x + (int32_t)aRadius, (int32_t)m_width - 1);
-				int32_t maxY = Base::Min(y + (int32_t)aRadius, (int32_t)m_height - 1);
-				
-				for(int32_t iy = minY; iy <= maxY; iy++)
-				{
-					for (int32_t ix = minX; ix <= maxX; ix++)
-					{
-						Vec2 d = { ix - x, iy - y };
-						if(d.m_x * d.m_x + d.m_y * d.m_y <= radiusSquared)
-						{
-							uint32_t terrainId = m_terrainMap[ix + iy * (int32_t)m_width];
-
-							Counters::iterator i = counters.find(terrainId);
-							if (i == counters.end())
-								counters[terrainId] = 1;
-							else
-								i->second++;
-						}
-					}
-				}
-
-				assert(counters.size() > 0);
-				newTerrainMap[x + y * (int32_t)m_width] = counters.cbegin()->first;
-			}
-		}
-
-		m_terrainMap = std::move(newTerrainMap);
-	}
-
-	void		
-	World::Builder::Grow(
-		uint32_t					aTerrainId)
-	{
-		const Data::Terrain* terrain = m_manifest->GetById<Data::Terrain>(aTerrainId);
-
-		std::unordered_map<uint32_t, uint32_t> probabilites;
-		for(const Data::Terrain::GrowsInto& growsInto : terrain->m_growsInto)
-			probabilites[growsInto.m_terrainId] = growsInto.m_probability;
-
-		std::vector<uint32_t> changes;
-
-		for (uint32_t y = 0; y < m_height; y++)
-		{
-			for (uint32_t x = 0; x < m_width; x++)
-			{
-				uint32_t offset = x + y * m_width;
-				std::unordered_map<uint32_t, uint32_t>::const_iterator i = probabilites.find(m_terrainMap[offset]);
-				if(i != probabilites.cend())
-				{
-					uint32_t probability = i->second;
-					static const Vec2 NEIGHBORS[4] = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
-					for (uint32_t j = 0; j < 4; j++)
-					{
-						const Vec2& neighbor = NEIGHBORS[j];
-						if(GetTerrainIdWithOffset(x, y, neighbor.m_x, neighbor.m_y) == aTerrainId)
-						{
-							if (Roll(1, 100) <= probability)
-							{
-								changes.push_back(offset);
-								break;
-							}
-						}
-					}
-				}
-			}
-		}
-
-		for(uint32_t change : changes)
-			m_terrainMap[change] = aTerrainId;
-	}
-
-	void		
-	World::Builder::Despeckle()
-	{
-		std::vector<std::pair<uint32_t, uint32_t>> changes;
-
-		for (uint32_t y = 0; y < m_height; y++)
-		{
-			for (uint32_t x = 0; x < m_width; x++)
-			{
-				uint32_t offset = x + y * m_width;
-				uint32_t terrainId = m_terrainMap[offset];
-				uint32_t surroundingTerrainId = 0;
-
-				static const Vec2 NEIGHBORS[4] = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
-				for (uint32_t j = 0; j < 4; j++)
-				{
-					const Vec2& neighbor = NEIGHBORS[j];
-					uint32_t neighborTerrainId = GetTerrainIdWithOffset(x, y, neighbor.m_x, neighbor.m_y);
-					if(neighborTerrainId == terrainId || (surroundingTerrainId != 0 && surroundingTerrainId != neighborTerrainId))
-					{
-						surroundingTerrainId = 0;
-						break;
-					}
-					else if(surroundingTerrainId == 0)
-					{
-						surroundingTerrainId = neighborTerrainId;
-					}
-				}
-
-				if(surroundingTerrainId != 0)
-				{
-					changes.push_back({ offset, surroundingTerrainId });
-				}
-			}
-		}
-
-		for (const std::pair<uint32_t, uint32_t>& change : changes)
-			m_terrainMap[change.first] = change.second;
-	}
-
-	void		
-	World::Builder::AddBorders(
-		uint32_t					aTerrainId)
-	{
-		const Data::Terrain* terrain = m_manifest->GetById<Data::Terrain>(aTerrainId);
-		
-		std::unordered_map<uint32_t, uint32_t> borders;
-		for(const Data::Terrain::Border& border : terrain->m_borders)
-		{
-			for(uint32_t neighborTerrainId : border.m_neighborTerrain)
-				borders[neighborTerrainId] = border.m_terrainId;
-		}
-
-		std::vector<std::pair<uint32_t, uint32_t>> changes;
-
-		for (uint32_t y = 0; y < m_height; y++)
-		{
-			for (uint32_t x = 0; x < m_width; x++)
-			{
-				uint32_t offset = x + y * m_width;
-				if(m_terrainMap[offset] == aTerrainId)
-				{
-					uint32_t candidates[4];
-					uint32_t numCandidates = 0;
-
-					static const Vec2 NEIGHBORS[4] = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
-					for (uint32_t j = 0; j < 4; j++)
-					{
-						const Vec2& neighbor = NEIGHBORS[j];
-						uint32_t neighborTerrainId = GetTerrainIdWithOffset(x, y, neighbor.m_x, neighbor.m_y);
-						std::unordered_map<uint32_t, uint32_t>::const_iterator i = borders.find(neighborTerrainId);
-						if (i != borders.cend())
-							candidates[numCandidates++] = i->second;
-					}
-
-					if (numCandidates > 0)
-						changes.push_back({ offset, candidates[Roll(0, numCandidates - 1)] });
-				}
-			}
-		}
-
-		for (const std::pair<uint32_t, uint32_t>& change : changes)
-			m_terrainMap[change.first] = change.second;
-	}
-
-	void		
-	World::Builder::ApplyOverlay(
-		const Overlay*				aOverlay)
-	{
-		const Data::Noise* noise = m_manifest->GetById<Data::Noise>(aOverlay->m_noiseId);
-		NoiseInstance noiseInstance(noise, m_random);
-
-		uint32_t offset = 0;
-		for(int32_t y = 0; y < (int32_t)m_height; y++)
-		{
-			for (int32_t x = 0; x < (int32_t)m_width; x++)
-			{
-				int32_t sample = noiseInstance.Sample({ x, y });
-				uint32_t terrainId = m_terrainMap[offset];
-
-				uint32_t newTerrainId = 0;
-
-				for(const std::unique_ptr<OverlayTerrain>& overlayTerrain : aOverlay->m_terrains)
-				{
-					if(overlayTerrain->m_condition.Check(sample) && !overlayTerrain->IsExcluded(terrainId))
-					{
-						newTerrainId = overlayTerrain->m_terrainId;
-						break;
-					}
-				}
-
-				if(newTerrainId != 0)
-					m_terrainMap[offset] = newTerrainId;
-
-				offset++;
-			}
-		}
-	}
-
-	void		
-	World::Builder::BuildTerrainModifierMap(
-		const TerrainModifierMap*	aTerrainModifierMap)
-	{
-		TP_CHECK(TerrainModifier::ValidateId(aTerrainModifierMap->m_id), "No terrain modifier specified.");
-		std::vector<int32_t>& terrainModifierMap = m_terrainModifierMaps[aTerrainModifierMap->m_id];
-		terrainModifierMap.resize(m_width * m_height, 0);
-
-		const Data::Noise* noise = m_manifest->GetById<Data::Noise>(aTerrainModifierMap->m_noiseId);
-		NoiseInstance noiseInstance(noise, m_random);
-
-		uint32_t offset = 0;
-		for (int32_t y = 0; y < (int32_t)m_height; y++)
-		{
-			for (int32_t x = 0; x < (int32_t)m_width; x++)
-			{
-				int32_t sample = noiseInstance.Sample({ x, y });
-
-				terrainModifierMap[offset] = sample;
-
-				offset++;
-			}
-		}
-
-		if(!aTerrainModifierMap->m_debug.empty())
-		{
-			Image image;
-			image.Allocate(m_width, m_height);
-
-			Image::RGBA* out = image.GetData();
-
-			for (uint32_t i = 0; i < m_width * m_height; i++)
-			{
-				int32_t v = terrainModifierMap[i];
-				if(v < 0)
-					v = 0;
-				else if(v > 255)
-					v = 255;
-
-				out->m_r = (uint8_t)v;
-				out->m_g = (uint8_t)v;
-				out->m_b = (uint8_t)v;
-				out->m_a = 255;
-				out++;
-			}
-
-			image.SavePNG(aTerrainModifierMap->m_debug.c_str());
-		}
 	}
 
 	void		
@@ -1030,111 +424,6 @@ namespace tpublic::MapGenerators
 	}
 
 	void			
-	World::Builder::GenerateEntitySpawns(
-		const AddEntitySpawns* aAddEntitySpawns)
-	{
-		TP_CHECK(aAddEntitySpawns->m_mapEntitySpawns.size() > 0, "No entity spawns defined.");
-
-		for (int32_t y = 1; y < (int32_t)m_height - 1; y++)
-		{
-			for (int32_t x = 1; x < (int32_t)m_width - 1; x++)
-			{
-				int32_t i = x + y * (int32_t)m_width;
-				uint32_t terrainId = m_terrainMap[i];
-
-				if(aAddEntitySpawns->CheckTerrain(terrainId) && (!aAddEntitySpawns->m_needWalkable || m_walkable.contains({ x, y })))
-				{
-					// No need to check bounds as we avoid the edges already
-					uint32_t neighborTerrainIds[4] = 
-					{
-						m_terrainMap[i - 1],
-						m_terrainMap[i + 1],
-						m_terrainMap[i - (int32_t)m_width],
-						m_terrainMap[i + (int32_t)m_width],
-					};
-					
-					uint32_t probability = aAddEntitySpawns->m_probability;
-
-					for(const AddEntitySpawns::NeighborTerrain& neighborTerrain : aAddEntitySpawns->m_neighborTerrains)
-					{
-						bool hasNeighbor = 
-							neighborTerrainIds[0] == neighborTerrain.m_terrainId ||
-							neighborTerrainIds[1] == neighborTerrain.m_terrainId ||
-							neighborTerrainIds[2] == neighborTerrain.m_terrainId ||
-							neighborTerrainIds[3] == neighborTerrain.m_terrainId;
-
-						if(neighborTerrain.m_required)
-						{
-							if(!hasNeighbor)
-							{
-								probability = 0;
-								break;
-							}
-						}
-						else if(hasNeighbor)
-						{
-							probability += 	neighborTerrain.m_probabilityBonus;
-						}
-					}
-
-					if(probability > 0 && Roll(1, 1000) <= probability)
-					{
-						bool canPlace = true;
-
-						if(aAddEntitySpawns->m_minDistanceToNearby > 0 && m_entitySpawnPositions.size() > 0)
-						{
-							// Check if we placed any other entity too close
-							int32_t minX = x - (int32_t)aAddEntitySpawns->m_minDistanceToNearby;
-							int32_t maxX = x + (int32_t)aAddEntitySpawns->m_minDistanceToNearby;
-							int32_t minY = y - (int32_t)aAddEntitySpawns->m_minDistanceToNearby;
-							int32_t maxY = y + (int32_t)aAddEntitySpawns->m_minDistanceToNearby;
-							int32_t minDistanceSquared = (int32_t)(aAddEntitySpawns->m_minDistanceToNearby * aAddEntitySpawns->m_minDistanceToNearby);
-
-							for(int32_t iy = minY; iy <= maxY && canPlace; iy++)
-							{
-								for (int32_t ix = minX; ix <= maxX && canPlace; ix++)
-								{
-									int32_t dx = x - ix;
-									int32_t dy = y - iy;
-									int32_t distanceSquared = dx * dx + dy * dy;
-									if(distanceSquared <= minDistanceSquared && m_entitySpawnPositions.contains({ ix, iy }))
-										canPlace = false;
-								}
-							}
-						}
-
-						if(canPlace)
-						{
-							MapData::EntitySpawn t;
-							t.m_mapEntitySpawnId = aAddEntitySpawns->m_mapEntitySpawns[Roll(0, (uint32_t)aAddEntitySpawns->m_mapEntitySpawns.size() - 1)];
-							t.m_x = x;
-							t.m_y = y;
-							m_entitySpawns.push_back(t);
-
-							m_entitySpawnPositions.insert({ x, y });
-						}
-					}
-				}
-			}
-		}
-	}
-
-	void			
-	World::Builder::AddBoss(
-		uint32_t					aTagContextId,
-		uint32_t					aInfluence,
-		uint32_t					aMapEntitySpawnId,
-		const MinorBosses*			aMinorBosses)
-	{
-		std::unique_ptr<Boss> t = std::make_unique<Boss>();
-		t->m_tagContextId = aTagContextId;
-		t->m_influence = aInfluence;
-		t->m_mapEntitySpawnId = aMapEntitySpawnId;
-		t->m_minorBosses = aMinorBosses;
-		m_bosses.push_back(std::move(t));
-	}
-
-	void			
 	World::Builder::InitBosses()
 	{
 		for(std::unique_ptr<Boss>& boss : m_bosses)
@@ -1283,19 +572,719 @@ namespace tpublic::MapGenerators
 			}
 		}
 
+	}
+
+	//---------------------------------------------------------------------------------
+
+	World::IExecuteFactory::IExecuteFactory()
+	{
+		Register<ExecuteAll>();
+		Register<ExecuteOneOf>();
+		Register<ExecutePalettedMap>();
+		Register<ExecuteDouble>();
+		Register<ExecuteMedianFilter>();
+		Register<ExecuteGrow>();
+		Register<ExecuteDespeckle>();
+		Register<ExecuteAddBorders>();
+		Register<ExecuteDebugTerrainMap>();
+		Register<ExecuteOverlay>();
+		Register<ExecuteTerrainModifierMap>();
+		Register<ExecuteAddEntitySpawns>();
+		Register<ExecuteAddBoss>();
+		Register<ExecuteLevelRange>();
+	}
+
+	World::IExecuteFactory::~IExecuteFactory()
+	{
+
+	}
+
+	//---------------------------------------------------------------------------------
+
+	void				
+	World::ExecuteAll::Run(
+		Builder*						aBuilder) const 
+	{
+		for (const std::unique_ptr<IExecute>& child : m_compound.m_children)
 		{
-			Image image;
-			image.Allocate(m_width, m_height);
-			Image::RGBA* out = image.GetData();
-			for (std::unique_ptr<Boss>& boss : m_bosses)
+			if (aBuilder->MaybeDoIt(child->m_header.m_value))
+				child->Run(aBuilder);
+		}
+	}
+
+	void				
+	World::ExecuteOneOf::Run(
+		Builder*						aBuilder) const 
+	{
+		if (m_compound.m_children.size() > 0)
+		{
+			uint32_t totalWeightOfChildren = 0;
+			for (const std::unique_ptr<IExecute>& child : m_compound.m_children)
+				totalWeightOfChildren += child->m_header.m_value;
+
+			uint32_t roll = aBuilder->Roll(1, totalWeightOfChildren);
+			uint32_t sum = 0;
+			const IExecute* execute = NULL;
+			for (const std::unique_ptr<IExecute>& child : m_compound.m_children)
 			{
-				out[boss->m_position.m_x + boss->m_position.m_y * (int32_t)m_width] = { 255, 0, 0, 255 };
-				for(const MinorBoss& t : boss->m_subBosses)
-					out[t.m_position.m_x + t.m_position.m_y * (int32_t)m_width] = { 0, 255, 0, 255 };
+				sum += child->m_header.m_value;
+				if (roll <= sum)
+				{
+					execute = child.get();
+					break;
+				}
 			}
-			image.SavePNG("bosses.png");
+
+			assert(execute != NULL);
+
+			execute->Run(aBuilder);
+		}
+	}
+
+	void				
+	World::ExecutePalettedMap::Run(
+		Builder*						aBuilder) const 
+	{
+		aBuilder->m_width = m_width;
+		aBuilder->m_height = m_height;
+		aBuilder->m_terrainMap.resize(m_tiles.size());
+		for (size_t i = 0; i < aBuilder->m_terrainMap.size(); i++)
+			aBuilder->m_terrainMap[i] = aBuilder->GetTerrainPaletteEntry(m_tiles[i]);
+	}
+
+	void				
+	World::ExecuteDouble::Run(
+		Builder*						aBuilder) const 
+	{
+		TP_CHECK(aBuilder->m_terrainMap.size() > 0 && aBuilder->m_width > 0 && aBuilder->m_height > 0, "No terrain map.");
+
+		for(uint32_t k = 0; k < m_passes; k++)
+		{
+			uint32_t newWidth = aBuilder->m_width * 2;
+			uint32_t newHeight = aBuilder->m_height * 2;
+			std::vector<uint32_t> newTerrainMap;
+			newTerrainMap.resize(newWidth * newHeight, 0);
+
+			std::vector<Vec2> holes;
+
+			for (int32_t y = 0; y < (int32_t)aBuilder->m_height; y++)
+			{
+				for (int32_t x = 0; x < (int32_t)aBuilder->m_width; x++)
+				{
+					static const Vec2 OFFSETS[4] = { { 0, 0 }, { 1, 0 }, { 0, 1 }, { 1, 1 } };
+					uint32_t roll = aBuilder->Random2Bits();
+					for (uint32_t i = 0; i < 4; i++)
+					{
+						const Vec2& offset = OFFSETS[i];
+						Vec2 p = { 2 * x + offset.m_x, 2 * y + offset.m_y };
+						if (i == roll)
+							newTerrainMap[p.m_x + p.m_y * (int32_t)newWidth] = aBuilder->m_terrainMap[x + y * aBuilder->m_width];
+						else
+							holes.push_back(p);
+					}
+				}
+			}
+
+			while (holes.size() > 0)
+			{
+				std::vector<std::pair<int32_t, uint32_t>> changes;
+
+				for (size_t i = 0; i < holes.size(); i++)
+				{
+					const Vec2& hole = holes[i];
+
+					uint32_t candidates[4];
+					uint32_t numCandidates = 0;
+
+					static const Vec2 NEIGHBORS[4] = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
+					for (uint32_t j = 0; j < 4; j++)
+					{
+						Vec2 p = { hole.m_x + NEIGHBORS[j].m_x, hole.m_y + NEIGHBORS[j].m_y };
+						if (p.m_x >= 0 && p.m_y >= 0 && p.m_x < (int32_t)newWidth && p.m_y < (int32_t)newHeight)
+						{
+							uint32_t terrainId = newTerrainMap[p.m_x + p.m_y * (int32_t)newWidth];
+							if (terrainId != 0)
+								candidates[numCandidates++] = terrainId;
+						}
+					}
+
+					if (numCandidates > 0)
+					{
+						changes.push_back({ hole.m_x + hole.m_y * (int32_t)newWidth, candidates[aBuilder->Roll(0, numCandidates - 1)] });
+
+						Helpers::RemoveCyclicFromVector(holes, i);
+						i--;
+					}
+				}
+
+				assert(changes.size() > 0);
+
+				for (const std::pair<int32_t, uint32_t>& change : changes)
+					newTerrainMap[change.first] = change.second;
+			}
+
+			if (!m_noMutations)
+			{
+				for (uint32_t y = 1; y < newHeight - 1; y++)
+				{
+					for (uint32_t x = 1; x < newWidth - 1; x++)
+					{
+						uint32_t i = x + y * newWidth;
+						const Data::Terrain* terrain = aBuilder->m_manifest->GetById<Data::Terrain>(newTerrainMap[i]);
+						newTerrainMap[i] = terrain->Mutate(aBuilder->m_random);
+					}
+				}
+			}
+
+			aBuilder->m_terrainMap = std::move(newTerrainMap);
+			aBuilder->m_width = newWidth;
+			aBuilder->m_height = newHeight;
+		}
+	}
+
+	void				
+	World::ExecuteMedianFilter::Run(
+		Builder*						aBuilder) const 
+	{
+		typedef std::map<uint32_t, uint32_t> Counters;
+		Counters counters;
+
+		std::vector<uint32_t> newTerrainMap;
+		newTerrainMap.resize(aBuilder->m_terrainMap.size());
+
+		int32_t radiusSquared = (int32_t)(m_radius * m_radius);
+
+		for (int32_t y = 0; y < (int32_t)aBuilder->m_height; y++)
+		{
+			for (int32_t x = 0; x < (int32_t)aBuilder->m_width; x++)
+			{
+				counters.clear();
+
+				int32_t minX = Base::Max(x - (int32_t)m_radius, 0);
+				int32_t minY = Base::Max(y - (int32_t)m_radius, 0);
+				int32_t maxX = Base::Min(x + (int32_t)m_radius, (int32_t)aBuilder->m_width - 1);
+				int32_t maxY = Base::Min(y + (int32_t)m_radius, (int32_t)aBuilder->m_height - 1);
+
+				for (int32_t iy = minY; iy <= maxY; iy++)
+				{
+					for (int32_t ix = minX; ix <= maxX; ix++)
+					{
+						Vec2 d = { ix - x, iy - y };
+						if (d.m_x * d.m_x + d.m_y * d.m_y <= radiusSquared)
+						{
+							uint32_t terrainId = aBuilder->m_terrainMap[ix + iy * (int32_t)aBuilder->m_width];
+
+							Counters::iterator i = counters.find(terrainId);
+							if (i == counters.end())
+								counters[terrainId] = 1;
+							else
+								i->second++;
+						}
+					}
+				}
+
+				assert(counters.size() > 0);
+				newTerrainMap[x + y * (int32_t)aBuilder->m_width] = counters.cbegin()->first;
+			}
 		}
 
+		aBuilder->m_terrainMap = std::move(newTerrainMap);
+	}
+
+	void				
+	World::ExecuteGrow::Run(
+		Builder*						aBuilder) const 
+	{
+		const Data::Terrain* terrain = aBuilder->m_manifest->GetById<Data::Terrain>(m_terrainId);
+
+		std::unordered_map<uint32_t, uint32_t> probabilites;
+		for (const Data::Terrain::GrowsInto& growsInto : terrain->m_growsInto)
+			probabilites[growsInto.m_terrainId] = growsInto.m_probability;
+
+		std::vector<uint32_t> changes;
+
+		for (uint32_t y = 0; y < aBuilder->m_height; y++)
+		{
+			for (uint32_t x = 0; x < aBuilder->m_width; x++)
+			{
+				uint32_t offset = x + y * aBuilder->m_width;
+				std::unordered_map<uint32_t, uint32_t>::const_iterator i = probabilites.find(aBuilder->m_terrainMap[offset]);
+				if (i != probabilites.cend())
+				{
+					uint32_t probability = i->second;
+					static const Vec2 NEIGHBORS[4] = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
+					for (uint32_t j = 0; j < 4; j++)
+					{
+						const Vec2& neighbor = NEIGHBORS[j];
+						if (aBuilder->GetTerrainIdWithOffset(x, y, neighbor.m_x, neighbor.m_y) == m_terrainId)
+						{
+							if (aBuilder->Roll(1, 100) <= probability)
+							{
+								changes.push_back(offset);
+								break;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		for (uint32_t change : changes)
+			aBuilder->m_terrainMap[change] = m_terrainId;
+	}
+
+	void				
+	World::ExecuteDespeckle::Run(
+		Builder*						aBuilder) const 
+	{
+		std::vector<std::pair<uint32_t, uint32_t>> changes;
+
+		for (uint32_t y = 0; y < aBuilder->m_height; y++)
+		{
+			for (uint32_t x = 0; x < aBuilder->m_width; x++)
+			{
+				uint32_t offset = x + y * aBuilder->m_width;
+				uint32_t terrainId = aBuilder->m_terrainMap[offset];
+				uint32_t surroundingTerrainId = 0;
+
+				static const Vec2 NEIGHBORS[4] = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
+				for (uint32_t j = 0; j < 4; j++)
+				{
+					const Vec2& neighbor = NEIGHBORS[j];
+					uint32_t neighborTerrainId = aBuilder->GetTerrainIdWithOffset(x, y, neighbor.m_x, neighbor.m_y);
+					if (neighborTerrainId == terrainId || (surroundingTerrainId != 0 && surroundingTerrainId != neighborTerrainId))
+					{
+						surroundingTerrainId = 0;
+						break;
+					}
+					else if (surroundingTerrainId == 0)
+					{
+						surroundingTerrainId = neighborTerrainId;
+					}
+				}
+
+				if (surroundingTerrainId != 0)
+				{
+					changes.push_back({ offset, surroundingTerrainId });
+				}
+			}
+		}
+
+		for (const std::pair<uint32_t, uint32_t>& change : changes)
+			aBuilder->m_terrainMap[change.first] = change.second;
+	}
+
+	void				
+	World::ExecuteAddBorders::Run(
+		Builder*						aBuilder) const 
+	{
+		const Data::Terrain* terrain = aBuilder->m_manifest->GetById<Data::Terrain>(m_terrainId);
+
+		std::unordered_map<uint32_t, uint32_t> borders;
+		for (const Data::Terrain::Border& border : terrain->m_borders)
+		{
+			for (uint32_t neighborTerrainId : border.m_neighborTerrain)
+				borders[neighborTerrainId] = border.m_terrainId;
+		}
+
+		std::vector<std::pair<uint32_t, uint32_t>> changes;
+
+		for (uint32_t y = 0; y < aBuilder->m_height; y++)
+		{
+			for (uint32_t x = 0; x < aBuilder->m_width; x++)
+			{
+				uint32_t offset = x + y * aBuilder->m_width;
+				if (aBuilder->m_terrainMap[offset] == m_terrainId)
+				{
+					uint32_t candidates[4];
+					uint32_t numCandidates = 0;
+
+					static const Vec2 NEIGHBORS[4] = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
+					for (uint32_t j = 0; j < 4; j++)
+					{
+						const Vec2& neighbor = NEIGHBORS[j];
+						uint32_t neighborTerrainId = aBuilder->GetTerrainIdWithOffset(x, y, neighbor.m_x, neighbor.m_y);
+						std::unordered_map<uint32_t, uint32_t>::const_iterator i = borders.find(neighborTerrainId);
+						if (i != borders.cend())
+							candidates[numCandidates++] = i->second;
+					}
+
+					if (numCandidates > 0)
+						changes.push_back({ offset, candidates[aBuilder->Roll(0, numCandidates - 1)] });
+				}
+			}
+		}
+
+		for (const std::pair<uint32_t, uint32_t>& change : changes)
+			aBuilder->m_terrainMap[change.first] = change.second;
+	}
+
+	void				
+	World::ExecuteDebugTerrainMap::Run(
+		Builder*						aBuilder) const 
+	{
+		TP_CHECK(aBuilder->m_terrainMap.size() > 0 && aBuilder->m_width > 0 && aBuilder->m_height > 0, "No terrain map.");
+
+		std::unordered_set<uint32_t> entitySpawnOffsets;
+		for (const MapData::EntitySpawn& entitySpawn : aBuilder->m_entitySpawns)
+			entitySpawnOffsets.insert((uint32_t)(entitySpawn.m_x + entitySpawn.m_y * (int32_t)aBuilder->m_width));
+
+		Image image;
+		image.Allocate(aBuilder->m_width, aBuilder->m_height);
+		Image::RGBA* out = image.GetData();
+		for (uint32_t i = 0; i < aBuilder->m_width * aBuilder->m_height; i++)
+		{
+			if (entitySpawnOffsets.contains(i))
+			{
+				*out = { 255, 0, 0, 255 };
+			}
+			else
+			{
+				uint32_t terrainId = aBuilder->m_terrainMap[i];
+				if (terrainId != 0)
+				{
+					const Data::Terrain* terrain = aBuilder->m_manifest->GetById<Data::Terrain>(terrainId);
+					*out = terrain->m_debugColor;
+				}
+				else
+				{
+					*out = { 0, 0, 0, 255 };
+				}
+			}
+			out++;
+		}
+		image.SavePNG(m_path.c_str());
+	}
+
+	void				
+	World::ExecuteOverlay::Run(
+		Builder*						aBuilder) const 
+	{
+		const Data::Noise* noise = aBuilder->m_manifest->GetById<Data::Noise>(m_noiseId);
+		NoiseInstance noiseInstance(noise, aBuilder->m_random);
+
+		uint32_t offset = 0;
+		for (int32_t y = 0; y < (int32_t)aBuilder->m_height; y++)
+		{
+			for (int32_t x = 0; x < (int32_t)aBuilder->m_width; x++)
+			{
+				int32_t sample = noiseInstance.Sample({ x, y });
+				uint32_t terrainId = aBuilder->m_terrainMap[offset];
+
+				uint32_t newTerrainId = 0;
+
+				for (const std::unique_ptr<Terrain>& overlayTerrain : m_terrains)
+				{
+					if (overlayTerrain->m_condition.Check(sample) && !overlayTerrain->IsExcluded(terrainId))
+					{
+						newTerrainId = overlayTerrain->m_terrainId;
+						break;
+					}
+				}
+
+				if (newTerrainId != 0)
+					aBuilder->m_terrainMap[offset] = newTerrainId;
+
+				offset++;
+			}
+		}
+	}
+
+	void				
+	World::ExecuteTerrainModifierMap::Run(
+		Builder*						aBuilder) const 
+	{
+		TP_CHECK(TerrainModifier::ValidateId(m_id), "No terrain modifier specified.");
+		std::vector<int32_t>& terrainModifierMap = aBuilder->m_terrainModifierMaps[m_id];
+		terrainModifierMap.resize(aBuilder->m_width * aBuilder->m_height, 0);
+
+		const Data::Noise* noise = aBuilder->m_manifest->GetById<Data::Noise>(m_noiseId);
+		NoiseInstance noiseInstance(noise, aBuilder->m_random);
+
+		uint32_t offset = 0;
+		for (int32_t y = 0; y < (int32_t)aBuilder->m_height; y++)
+		{
+			for (int32_t x = 0; x < (int32_t)aBuilder->m_width; x++)
+			{
+				int32_t sample = noiseInstance.Sample({ x, y });
+
+				terrainModifierMap[offset] = sample;
+
+				offset++;
+			}
+		}
+
+		if (!m_debug.empty())
+		{
+			Image image;
+			image.Allocate(aBuilder->m_width, aBuilder->m_height);
+
+			Image::RGBA* out = image.GetData();
+
+			for (uint32_t i = 0; i < aBuilder->m_width * aBuilder->m_height; i++)
+			{
+				int32_t v = terrainModifierMap[i];
+				if (v < 0)
+					v = 0;
+				else if (v > 255)
+					v = 255;
+
+				out->m_r = (uint8_t)v;
+				out->m_g = (uint8_t)v;
+				out->m_b = (uint8_t)v;
+				out->m_a = 255;
+				out++;
+			}
+
+			image.SavePNG(m_debug.c_str());
+		}
+	}
+
+	void				
+	World::ExecuteAddEntitySpawns::Run(
+		Builder*						aBuilder) const 
+	{
+		TP_CHECK(m_mapEntitySpawns.size() > 0, "No entity spawns defined.");
+
+		for (int32_t y = 1; y < (int32_t)aBuilder->m_height - 1; y++)
+		{
+			for (int32_t x = 1; x < (int32_t)aBuilder->m_width - 1; x++)
+			{
+				int32_t i = x + y * (int32_t)aBuilder->m_width;
+				uint32_t terrainId = aBuilder->m_terrainMap[i];
+
+				if(CheckTerrain(terrainId) && (!m_needWalkable || aBuilder->m_walkable.contains({ x, y })))
+				{
+					// No need to check bounds as we avoid the edges already
+					uint32_t neighborTerrainIds[4] = 
+					{
+						aBuilder->m_terrainMap[i - 1],
+						aBuilder->m_terrainMap[i + 1],
+						aBuilder->m_terrainMap[i - (int32_t)aBuilder->m_width],
+						aBuilder->m_terrainMap[i + (int32_t)aBuilder->m_width],
+					};
+					
+					uint32_t probability = m_probability;
+
+					for(const NeighborTerrain& neighborTerrain : m_neighborTerrains)
+					{
+						bool hasNeighbor = 
+							neighborTerrainIds[0] == neighborTerrain.m_terrainId ||
+							neighborTerrainIds[1] == neighborTerrain.m_terrainId ||
+							neighborTerrainIds[2] == neighborTerrain.m_terrainId ||
+							neighborTerrainIds[3] == neighborTerrain.m_terrainId;
+
+						if(neighborTerrain.m_required)
+						{
+							if(!hasNeighbor)
+							{
+								probability = 0;
+								break;
+							}
+						}
+						else if(hasNeighbor)
+						{
+							probability += 	neighborTerrain.m_probabilityBonus;
+						}
+					}
+
+					if(probability > 0 && aBuilder->Roll(1, 1000) <= probability)
+					{
+						bool canPlace = true;
+
+						if(m_minDistanceToNearby > 0 && aBuilder->m_entitySpawnPositions.size() > 0)
+						{
+							// Check if we placed any other entity too close
+							int32_t minX = x - (int32_t)m_minDistanceToNearby;
+							int32_t maxX = x + (int32_t)m_minDistanceToNearby;
+							int32_t minY = y - (int32_t)m_minDistanceToNearby;
+							int32_t maxY = y + (int32_t)m_minDistanceToNearby;
+							int32_t minDistanceSquared = (int32_t)(m_minDistanceToNearby * m_minDistanceToNearby);
+
+							for(int32_t iy = minY; iy <= maxY && canPlace; iy++)
+							{
+								for (int32_t ix = minX; ix <= maxX && canPlace; ix++)
+								{
+									int32_t dx = x - ix;
+									int32_t dy = y - iy;
+									int32_t distanceSquared = dx * dx + dy * dy;
+									if(distanceSquared <= minDistanceSquared && aBuilder->m_entitySpawnPositions.contains({ ix, iy }))
+										canPlace = false;
+								}
+							}
+						}
+
+						if(canPlace)
+						{
+							MapData::EntitySpawn t;
+							t.m_mapEntitySpawnId = m_mapEntitySpawns[aBuilder->Roll(0, (uint32_t)m_mapEntitySpawns.size() - 1)];
+							t.m_x = x;
+							t.m_y = y;
+							aBuilder->m_entitySpawns.push_back(t);
+
+							aBuilder->m_entitySpawnPositions.insert({ x, y });
+						}
+					}
+				}
+			}
+		}
+	}
+
+	void				
+	World::ExecuteAddBoss::Run(
+		Builder*						aBuilder) const 
+	{
+		std::unique_ptr<Builder::Boss> t = std::make_unique<Builder::Boss>();
+		t->m_tagContextId = m_tagContextId;
+		t->m_influence = m_influence;
+		t->m_mapEntitySpawnId = m_mapEntitySpawnId;
+		t->m_minorBosses = m_minorBosses.get();
+		aBuilder->m_bosses.push_back(std::move(t));
+	}
+
+	void				
+	World::ExecuteLevelRange::Run(
+		Builder*						aBuilder) const 
+	{
+		aBuilder->m_levelRange = m_levelRange;
+	}
+
+	//---------------------------------------------------------------------------------
+
+	World::World()
+		: MapGeneratorBase(ID)
+	{
+		
+	}
+	
+	World::~World()
+	{
+
+	}
+
+	//---------------------------------------------------------------------------------
+
+	void		
+	World::FromSource(
+		const SourceNode*				aSource) 
+	{
+		aSource->ForEachChild([&](
+			const SourceNode* aChild)
+		{
+			if(!FromSourceBase(aChild))
+			{
+				if(aChild->m_name == "terrain_palette_entry")
+				{
+					_AddTerrainPaletteEntry(aChild);
+				}
+				else if(aChild->m_tag == "execute")
+				{
+					std::unique_ptr<IExecute> t(m_executeFactory.Create(IExecute::SourceToType(aChild)));
+					t->FromSource(&m_executeFactory, aChild);
+					m_executes.m_children.push_back(std::move(t));
+				}
+				else
+				{
+					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+				}
+			}
+		});
+	}
+	
+	void		
+	World::ToStream(
+		IWriter*						aWriter) const
+	{
+		ToStreamBase(aWriter);
+
+		{
+			aWriter->WriteUInt(m_terrainPalette.size());
+			for(TerrainPalette::const_iterator i = m_terrainPalette.cbegin(); i != m_terrainPalette.cend(); i++)
+			{
+				aWriter->WritePOD(i->first);
+				aWriter->WriteUInt(i->second);
+			}
+		}
+
+		m_executes.ToStream(aWriter);
+	}
+	
+	bool		
+	World::FromStream(
+		IReader*						aReader) 
+	{
+		if(!FromStreamBase(aReader))
+			return false;
+
+		{
+			size_t count;
+			if(!aReader->ReadUInt(count))
+				return false;
+
+			for(size_t i = 0; i < count; i++)
+			{
+				char symbol;
+				if(!aReader->ReadPOD(symbol))
+					return false;
+
+				uint32_t terrainId;
+				if(!aReader->ReadUInt(terrainId))
+					return false;
+
+				m_terrainPalette[symbol] = terrainId;
+			}
+		}
+
+		if(!m_executes.FromStream(&m_executeFactory, aReader))
+			return false;
+		return true;
+	}
+
+	bool		
+	World::Build(
+		const Manifest*					aManifest,
+		MapGeneratorRuntime*			aMapGeneratorRuntime,
+		uint32_t						aSeed,
+		const MapData*					aSourceMapData,
+		const char*						/*aDebugImagePath*/,
+		std::unique_ptr<MapData>&		aOutMapData) const 
+	{
+		Builder builder;
+		builder.m_terrainPalette = &m_terrainPalette;
+		builder.m_manifest = aManifest;
+		builder.m_mapGeneratorRuntime = aMapGeneratorRuntime;
+		builder.m_random.seed(aSeed);
+
+		for(const std::unique_ptr<IExecute>& execute : m_executes.m_children)
+			execute->Run(&builder);
+
+		builder.IdentifyWalkableAreas();
+
+		if(builder.m_walkableAreas.size() == 0)
+			return false; // This should be very unlikely
+
+		builder.InitNoiseMap();
+		builder.ConnectWalkableAreas();
+		builder.InitBosses();
+
+		builder.CreateMapData(aSourceMapData, aOutMapData);
+
+		aOutMapData->WriteDebugTileMapPNG(aManifest, "mapdata.png");
+
+		return true;
+	}
+
+	//---------------------------------------------------------------------------------
+
+	void		
+	World::_AddTerrainPaletteEntry(
+		const SourceNode*				aSource)
+	{
+		TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing terrain annotation.");
+		uint32_t terrainId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TERRAIN, aSource->m_annotation->GetIdentifier());
+		char symbol = aSource->GetCharacter();
+		TP_VERIFY(!m_terrainPalette.contains(symbol), aSource->m_debugInfo, "'%c' is already defined in terrain palette.");
+		m_terrainPalette[symbol] = terrainId;
 	}
 
 }

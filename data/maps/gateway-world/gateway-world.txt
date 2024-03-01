@@ -108,7 +108,7 @@ map gateway_world:
 		{
 			execute one_of:
 			{
-				execute paletted_map<1>:
+				execute paletted_map:
 				[
 					"...."
 					".XX."
