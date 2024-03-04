@@ -1,5 +1,6 @@
 #pragma once
 
+#include <tpublic/Data/Ability.h>
 #include <tpublic/Data/Aura.h>
 #include <tpublic/Data/Sprite.h>
 
@@ -62,7 +63,8 @@ namespace tpublic
 				TYPE_ITEM_CLASS,
 				TYPE_ITEM_SPECIAL,
 				TYPE_DESIGNATION,
-				TYPE_LEVEL_RANGE
+				TYPE_LEVEL_RANGE,
+				TYPE_ABILITY
 			};
 
 			struct RandomTags
@@ -119,6 +121,7 @@ namespace tpublic
 			ItemClass									m_itemClass;
 			ItemSpecial									m_itemSpecial;
 			Designation									m_designation;
+			uint32_t									m_abilityId = 0;
 			UIntRange									m_range;
 			std::unique_ptr<std::mt19937>				m_randomNumberGenerator;
 		};
@@ -159,34 +162,36 @@ namespace tpublic
 
 		void							_ReadSource();
 		void							_ReadCompound(
-											const SourceNode*				aSource);
+											const SourceNode*					aSource);
 		void							_ReadStackObject(
-											StackObject::Type				aType,
-											const SourceNode*				aSource);
+											StackObject::Type					aType,
+											const SourceNode*					aSource);
 		void							_ReadStackObjectArray(
-											StackObject::Type				aType,
-											const SourceNode*				aSource);
+											StackObject::Type					aType,
+											const SourceNode*					aSource);
 		void							_ReadItems(
-											const SourceNode*				aSource);
+											const SourceNode*					aSource);
 		void							_ReadDeities(
-											const SourceNode*				aSource);
+											const SourceNode*					aSource);
 		void							_ReadNPCs(
-											const SourceNode*				aSource);
+											const SourceNode*					aSource);
 		void							_GetContextTags(
-											std::vector<uint32_t>&			aOut);
+											std::vector<uint32_t>&				aOut);
 		std::mt19937&					_GetRandom();		
 		const UIntRange&				_GetLevelRange() const;
+		void							_GetAbilities(
+											std::vector<const Data::Ability*>&	aOut) const;
 		const char*						_PickIconName(
-											uint32_t						aMustHaveTagId,
-											const std::vector<uint32_t>&	aTags);
+											uint32_t							aMustHaveTagId,
+											const std::vector<uint32_t>&		aTags);
 		GeneratedSource*				_CreateGeneratedSource();
 		void							_CreateDesignation(
-											const char*						aBaseName,
-											const StackObject::Designation*	aDesignation,
-											const std::vector<uint32_t>&	aContextTags,
-											std::vector<uint32_t>&			aTags,
-											Stat::Collection&				aStatWeights,
-											std::string&					aOut);
+											const char*							aBaseName,
+											const StackObject::Designation*		aDesignation,
+											const std::vector<uint32_t>&		aContextTags,
+											std::vector<uint32_t>&				aTags,
+											Stat::Collection&					aStatWeights,
+											std::string&						aOut);
 		const StackObject::ItemSpecial*	_PickItemSpecial();
 	};
 

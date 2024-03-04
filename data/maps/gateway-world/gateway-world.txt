@@ -81,6 +81,12 @@ tag_context .melee_enemy:
 	must_not_have_tags: [ boss ]
 }
 
+tag_context .caster_enemy:
+{
+	must_have_tags: [ caster ]
+	must_not_have_tags: [ boss ]
+}
+
 map_entity_spawn .major_boss:
 {	
 	spawn_timer: { cooldown_range_min: 36000 cooldown_range_max: 48000 }
@@ -114,15 +120,23 @@ map_entity_spawn .object:
 		influence_range: [ 32 112 ]
 	}
 	
-	pack<35>: 
+	pack<24>: 
 	{ 
 		influence_range: [ 10 55 ]		
 		tag_contexts: [ .melee_enemy ]		
 		elite: false
 		map_entity_spawn: .pack
 	}
-	
-	pack<100>: 
+
+	pack<8>: 
+	{ 
+		influence_range: [ 10 55 ]		
+		tag_contexts: [ .caster_enemy ]		
+		elite: false
+		map_entity_spawn: .pack
+	}
+
+	pack<64>: 
 	{ 
 		influence_range: [ 55 80 ] 		
 		tag_contexts: [ .melee_enemy .melee_enemy ]		
@@ -130,8 +144,17 @@ map_entity_spawn .object:
 		elite: false
 		map_entity_spawn: .pack
 	}	
-	
-	pack<120>: 
+
+	pack<32>: 
+	{ 
+		influence_range: [ 55 80 ] 		
+		tag_contexts: [ .melee_enemy .caster_enemy ]		
+		min_distance_to_nearby: 6
+		elite: false
+		map_entity_spawn: .pack
+	}	
+
+	pack<64>: 
 	{ 
 		influence_range: [ 85 100 ] 		
 		tag_contexts: [ .melee_enemy .melee_enemy ]		
@@ -139,8 +162,17 @@ map_entity_spawn .object:
 		elite: true
 		map_entity_spawn: .pack
 	}		
-	
-	pack<140>: 
+
+	pack<64>: 
+	{ 
+		influence_range: [ 85 100 ] 		
+		tag_contexts: [ .melee_enemy .caster_enemy ]		
+		min_distance_to_nearby: 6
+		elite: true
+		map_entity_spawn: .pack
+	}		
+
+	pack<64>: 
 	{ 
 		influence_range: [ 100 120 ] 		
 		tag_contexts: [ .melee_enemy .melee_enemy ]		
@@ -148,6 +180,16 @@ map_entity_spawn .object:
 		elite: true
 		map_entity_spawn: .pack
 	}			
+	
+	pack<64>: 
+	{ 
+		influence_range: [ 100 120 ] 		
+		tag_contexts: [ .melee_enemy .caster_enemy ]		
+		min_distance_to_nearby: 6
+		elite: true
+		map_entity_spawn: .pack
+	}			
+	
 }
 
 map gateway_world:

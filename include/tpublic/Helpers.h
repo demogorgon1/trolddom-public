@@ -65,6 +65,29 @@ namespace tpublic
 		}
 
 		template <typename _T>
+		bool
+		GetAndRemoveCyclicFromVector(
+			std::mt19937&							aRandom,
+			std::vector<_T>&						aVector,
+			_T&										aOut)
+		{
+			if(aVector.size() == 0)
+				return false;
+
+			size_t i = 0;
+
+			if(aVector.size() > 1)
+			{
+				std::uniform_int_distribution<size_t> distribution(0, aVector.size() - 1);
+				i = distribution(aRandom);
+			}
+
+			aOut = aVector[i];
+			RemoveCyclicFromVector(aVector, i);
+			return true;
+		}
+
+		template <typename _T>
 		_T
 		RandomInRange(
 			std::mt19937&							aRandom,

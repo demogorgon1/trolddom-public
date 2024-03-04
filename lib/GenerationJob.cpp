@@ -163,6 +163,8 @@ namespace tpublic
 				_ReadStackObject(StackObject::TYPE_LEVEL_RANGE, aChild);
 			else if (aChild->m_name == "item_specials")
 				_ReadStackObjectArray(StackObject::TYPE_ITEM_SPECIAL, aChild);
+			else if (aChild->m_name == "abilities")
+				_ReadStackObjectArray(StackObject::TYPE_ABILITY, aChild);
 			else if (aChild->m_name == "items")
 				_ReadItems(aChild);
 			else if (aChild->m_name == "deities")
@@ -206,6 +208,12 @@ namespace tpublic
 		case StackObject::TYPE_LEVEL_RANGE:
 			{
 				stackObject->m_range = UIntRange(aSource);
+			}
+			break;
+
+		case StackObject::TYPE_ABILITY:
+			{
+				stackObject->m_abilityId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aSource->GetIdentifier());
 			}
 			break;
 
@@ -766,6 +774,7 @@ namespace tpublic
 		uint32_t factionId = 0;
 		uint32_t lootTableId = 0;
 		std::vector<uint32_t> extraTags;
+		UIntRange abilityCount;
 
 		aSource->ForEachChild([&](
 			const SourceNode* aChild)
@@ -790,6 +799,8 @@ namespace tpublic
 				lootTableId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_LOOT_TABLE, aChild->GetIdentifier());
 			else if (aChild->m_name == "extra_tags")
 				aChild->GetIdArray(DataType::ID_TAG, extraTags);
+			else if(aChild->m_name == "abilities")
+				abilityCount = UIntRange(aChild);
 			else
 				TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 		});
@@ -832,6 +843,33 @@ namespace tpublic
 			float weaponDamageMultiplier = weaponDamageMultiplierRange.GetRandom(_GetRandom());
 			float healthMultiplier = healthMultiplierRange.GetRandom(_GetRandom());
 
+			uint32_t numAbilities = abilityCount.GetRandom(_GetRandom());
+			std::unordered_set<const Data::Ability*> abilities;
+			if(numAbilities > 0)
+			{
+				std::vector<const Data::Ability*> availableAbilities;
+				_GetAbilities(availableAbilities);
+				for(size_t j = 0; j < availableAbilities.size(); j++)
+				{
+					const Data::Ability* abilityData = availableAbilities[j];
+					if(abilityData->m_npcLevelRange.has_value())
+					{
+						if (level < abilityData->m_npcLevelRange->m_min || level > abilityData->m_npcLevelRange->m_max)
+						{
+							Helpers::RemoveCyclicFromVector(availableAbilities, j);
+							j--;
+						}
+					}
+				}
+
+				for (uint32_t j = 0; j < numAbilities; j++)
+				{
+					const Data::Ability* pickedAbility;
+					if(Helpers::GetAndRemoveCyclicFromVector(_GetRandom(), availableAbilities, pickedAbility))
+						abilities.insert(pickedAbility);
+				}
+			}
+
 			{
 				GeneratedSource* output = _CreateGeneratedSource();
 
@@ -847,6 +885,12 @@ namespace tpublic
 				output->PrintF(1, "_resource_health: %f", healthMultiplier);
 				output->PrintF(1, "_creature_type: %s", creatureType->m_name.c_str());
 				output->PrintF(1, "_loot_table: %s", lootTable->m_name.c_str());
+				output->PrintF(1, "_abilities:");
+				output->PrintF(1, "[");
+				output->PrintF(2, "{ id: npc_attack }");
+				for(const Data::Ability* ability : abilities)
+					output->PrintF(2, "{ id: %s }", ability->m_name.c_str());
+				output->PrintF(1, "]");
 
 				if (tags.size() > 0)
 				{
@@ -917,6 +961,17 @@ namespace tpublic
 
 		TP_VERIFY(levelRange != NULL, m_source->m_debugInfo, "Missing level range.");
 		return *levelRange;
+	}
+
+	void							
+	GenerationJob::_GetAbilities(
+		std::vector<const Data::Ability*>&	aOut) const
+	{
+		for (const std::unique_ptr<StackObject>& stackObject : m_stack)
+		{
+			if (stackObject->m_type == StackObject::TYPE_ABILITY)
+				aOut.push_back(m_manifest->GetById<Data::Ability>(stackObject->m_abilityId));
+		}
 	}
 
 	const char* 

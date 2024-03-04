@@ -10,15 +10,31 @@ loot_table .world_drops:
 !define local NPC_HUMANOID
 {
 	creature_type: humanoid
+	loot_table: .world_drops
 	weapon_damage_multiplier_range: [ 0.8 1.2 ]
 	health_multiplier_range: [ 0.8 1.2 ]
-	loot_table: .world_drops
-
+	
 	faction: @_faction
 	name_template: @_name_template
 	sprite: @_sprite
 	count: @_count
 	elite: @_elite	
+	abilities: @_abilities
+}
+
+!define local NPC_HUMANOID_WEAK
+{
+	creature_type: humanoid
+	loot_table: .world_drops
+	weapon_damage_multiplier_range: [ 0.7 0.9 ]
+	health_multiplier_range: [ 0.7 0.9 ]
+	
+	faction: @_faction
+	name_template: @_name_template
+	sprite: @_sprite
+	count: @_count
+	elite: @_elite	
+	abilities: @_abilities
 }
 
 !define local NPC_HUMANOID_MINOR_BOSS
@@ -34,6 +50,7 @@ loot_table .world_drops:
 	name_template: @_name_template
 	sprite: @_sprite
 	count: @_count
+	abilities: @_abilities
 }
 
 !define local NPC_HUMANOID_MAJOR_BOSS
@@ -49,6 +66,7 @@ loot_table .world_drops:
 	name_template: @_name_template
 	sprite: @_sprite
 	count: @_count
+	abilities: @_abilities
 }
 
 tag_context .adjective_evil:
@@ -59,6 +77,11 @@ tag_context .adjective_evil:
 tag_context .noun_melee:
 {
 	must_have_tags: [ noun melee ]
+}
+
+tag_context .noun_caster:
+{
+	must_have_tags: [ noun caster ]
 }
 
 ############################################################################
@@ -87,9 +110,32 @@ name_template .melee_goblin:
 	}
 }
 
+name_template .caster_goblin:
+{
+	possibility<5>:
+	{
+		string: [ "Goblin " ]
+		word: [ .noun_caster ]
+	}
+
+	possibility<4>:
+	{
+		word: [ .adjective_evil ]
+		string: [ " Goblin " ]
+		word: [ .noun_caster ]
+	}
+
+	possibility<1>:
+	{
+		word: [ .adjective_evil ]
+		string: [ " " ]
+		word: [ .noun_caster ]
+	}
+}
+
 !define local GOBLIN_NAME_ENDINGS [ "bork" "org" "dorg" "drugh" "yrg" "gorg" "jaw" "ol" "claw" ] 
 
-name_template .melee_goblin_minor_boss:
+name_template .goblin_minor_boss:
 {
 	possibility<2>:
 	{
@@ -103,7 +149,7 @@ name_template .melee_goblin_minor_boss:
 	}
 }
 
-name_template .melee_goblin_major_boss:
+name_template .goblin_major_boss:
 {
 	possibility<2>:
 	{
@@ -132,50 +178,103 @@ tag_context .melee_goblin_boss_sprite:
 	must_have_tags: [ goblin boss melee ]
 }
 
+tag_context .caster_goblin_sprite:
+{
+	must_have_tags: [ goblin caster ]
+	must_not_have_tags: [ boss ]
+}
+
+tag_context .caster_goblin_boss_sprite:
+{
+	must_have_tags: [ goblin boss caster ]
+}
+
 ############################################################################
 # World enemies generation
 
 generation_job world_enemies:
 {
-	random_seed: 904230944	
+	random_seed: 904230944
 	
-	# Melee Goblin (Level 1 - 8)
-	{
-		level_range: [ 1 8 ]		
+	############################################################################
+	# Goblins
 
-		npcs: !NPC_HUMANOID { _faction: goblins _name_template: .melee_goblin _sprite: .melee_goblin_sprite _count: 25 _elite: false }
-		npcs: !NPC_HUMANOID { _faction: goblins _name_template: .melee_goblin _sprite: .melee_goblin_sprite _count: 25 _elite: true }
-	}
-	
-	# Melee Goblin (Level 9 - 10)
+	# Melee
 	{
-		level_range: [ 9 10 ]
+		abilities: [ npc_strike ]
+	
+		{
+			level_range: [ 1 8 ]		
+
+			npcs: !NPC_HUMANOID { _faction: goblins _name_template: .melee_goblin _sprite: .melee_goblin_sprite _count: 16 _elite: false _abilities: 0 }
+			npcs: !NPC_HUMANOID { _faction: goblins _name_template: .melee_goblin _sprite: .melee_goblin_sprite _count: 16 _elite: true _abilities: 0 }
+		}
 		
-		npcs: !NPC_HUMANOID { _faction: goblins _name_template: .melee_goblin _sprite: .melee_goblin_sprite _count: 25 _elite: false }
-		npcs: !NPC_HUMANOID { _faction: goblins _name_template: .melee_goblin _sprite: .melee_goblin_sprite _count: 25 _elite: true }		
-	}
+		{
+			level_range: [ 9 10 ]
+			
+			npcs: !NPC_HUMANOID { _faction: goblins _name_template: .melee_goblin _sprite: .melee_goblin_sprite _count: 16 _elite: false _abilities: 0 }
+			npcs: !NPC_HUMANOID { _faction: goblins _name_template: .melee_goblin _sprite: .melee_goblin_sprite _count: 16 _elite: true _abilities: 0 }		
+		}
+			
+		{
+			level_range: [ 1 8 ]		
+			npcs: !NPC_HUMANOID_MINOR_BOSS { _faction: goblins _name_template: .goblin_minor_boss _sprite: .melee_goblin_boss_sprite _count: 16 _abilities: 1 }
+		}
 		
-	# Minor Boss Goblin (Level 1 - 8)
-	{
-		level_range: [ 1 8 ]		
-		npcs: !NPC_HUMANOID_MINOR_BOSS { _faction: goblins _name_template: .melee_goblin_minor_boss _sprite: .melee_goblin_boss_sprite _count: 25 }
+		{
+			level_range: [ 9 10 ]		
+			npcs: !NPC_HUMANOID_MINOR_BOSS { _faction: goblins _name_template: .goblin_minor_boss _sprite: .melee_goblin_boss_sprite _count: 32 _abilities: 1 }
+		}	
+
+		{
+			level_range: [ 1 8 ]		
+			npcs: !NPC_HUMANOID_MAJOR_BOSS { _faction: goblins _name_template: .goblin_minor_boss _sprite: .melee_goblin_boss_sprite _count: 16 _abilities: 2 }
+		}
+
+		{
+			level_range: [ 9 10 ]		
+			npcs: !NPC_HUMANOID_MAJOR_BOSS { _faction: goblins _name_template: .goblin_major_boss _sprite: .melee_goblin_boss_sprite _count: 32 _abilities: 2 }
+		}		
 	}
+
+	# Caster
+	{
+		abilities: [ npc_firebolt ]
 	
-	# Minor Boss Goblin (Level 9 - 10)
-	{
-		level_range: [ 9 10 ]		
-		npcs: !NPC_HUMANOID_MINOR_BOSS { _faction: goblins _name_template: .melee_goblin_minor_boss _sprite: .melee_goblin_boss_sprite _count: 50 }
-	}	
+		{
+			level_range: [ 1 8 ]		
 
-	# Major Boss Goblin (Level 1 - 8)
-	{
-		level_range: [ 1 8 ]		
-		npcs: !NPC_HUMANOID_MAJOR_BOSS { _faction: goblins _name_template: .melee_goblin_minor_boss _sprite: .melee_goblin_boss_sprite _count: 25 }
+			npcs: !NPC_HUMANOID_WEAK { _faction: goblins _name_template: .caster_goblin _sprite: .caster_goblin_sprite _count: 16 _elite: false _abilities: 1 }
+			npcs: !NPC_HUMANOID_WEAK { _faction: goblins _name_template: .caster_goblin _sprite: .caster_goblin_sprite _count: 16 _elite: true _abilities: 1 }
+		}
+		
+		{
+			level_range: [ 9 10 ]
+			
+			npcs: !NPC_HUMANOID_WEAK { _faction: goblins _name_template: .caster_goblin _sprite: .caster_goblin_sprite _count: 16 _elite: false _abilities: 1 }
+			npcs: !NPC_HUMANOID_WEAK { _faction: goblins _name_template: .caster_goblin _sprite: .caster_goblin_sprite _count: 16 _elite: true _abilities: 1 }		
+		}
+			
+		{
+			level_range: [ 1 8 ]		
+			npcs: !NPC_HUMANOID_MINOR_BOSS { _faction: goblins _name_template: .goblin_minor_boss _sprite: .caster_goblin_boss_sprite _count: 16 _abilities: 2 }
+		}
+		
+		{
+			level_range: [ 9 10 ]		
+			npcs: !NPC_HUMANOID_MINOR_BOSS { _faction: goblins _name_template: .goblin_minor_boss _sprite: .caster_goblin_boss_sprite _count: 32 _abilities: 2 }
+		}	
+
+		{
+			level_range: [ 1 8 ]		
+			npcs: !NPC_HUMANOID_MAJOR_BOSS { _faction: goblins _name_template: .goblin_minor_boss _sprite: .caster_goblin_boss_sprite _count: 16 _abilities: 3 }
+		}
+
+		{
+			level_range: [ 9 10 ]		
+			npcs: !NPC_HUMANOID_MAJOR_BOSS { _faction: goblins _name_template: .goblin_major_boss _sprite: .caster_goblin_boss_sprite _count: 32 _abilities: 3 }
+		}		
 	}
 
-	# Major Boss Goblin (Level 9 - 10)
-	{
-		level_range: [ 9 10 ]		
-		npcs: !NPC_HUMANOID_MAJOR_BOSS { _faction: goblins _name_template: .melee_goblin_major_boss _sprite: .melee_goblin_boss_sprite _count: 50 }
-	}		
 }
