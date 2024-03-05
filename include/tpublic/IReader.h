@@ -22,11 +22,32 @@ namespace tpublic
 			return Read(&aOut, sizeof(aOut)) == sizeof(aOut);
 		}
 
+		template <typename _T>
+		bool	
+		ReadOptionalPOD(
+			std::optional<_T>&						aOut)
+		{
+			bool hasValue;
+			if(!ReadBool(hasValue))
+				return false;
+
+			if(hasValue)
+			{
+				_T value;
+				if(Read(&value, sizeof(_T)) != sizeof(_T))
+					return false;
+
+				aOut = value;
+			}	
+				
+			return true;
+		}
+
 		bool
 		ReadFloat(
 			float&									aOut)
 		{
-			// FIXME: clever encoding
+			// FIXME: clever less-than-4-bytes-on-average encoding
 			return Read(&aOut, sizeof(float)) == sizeof(float);
 		}
 

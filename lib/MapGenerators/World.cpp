@@ -4,6 +4,7 @@
 
 #include <tpublic/Data/Doodad.h>
 #include <tpublic/Data/Faction.h>
+#include <tpublic/Data/MapEntitySpawn.h>
 #include <tpublic/Data/Noise.h>
 #include <tpublic/Data/Terrain.h>
 

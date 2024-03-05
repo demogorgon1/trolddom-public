@@ -1,5 +1,6 @@
 entity underworld_shrine:
 {
+	debug_color: [ 200 0 0 ]
 	systems: [ shrine ]
 	components:
 	{
@@ -30,6 +31,7 @@ entity underworld_shrine:
 
 entity holy_altar:
 {
+	debug_color: [ 200 200 0 ]
 	systems: [ shrine ]
 	components:
 	{

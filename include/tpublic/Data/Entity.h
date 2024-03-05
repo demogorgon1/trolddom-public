@@ -4,6 +4,7 @@
 #include "../ComponentManager.h"
 #include "../DataBase.h"
 #include "../EntityInstance.h"
+#include "../Image.h"
 #include "../Resource.h"
 #include "../System.h"
 
@@ -197,6 +198,10 @@ namespace tpublic
 						{
 							m_modifiers.FromSource(aMember);
 						}
+						else if (aMember->m_name == "debug_color")
+						{
+							m_debugColor = Image::RGBA(aMember);
+						}
 						else
 						{
 							TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
@@ -210,6 +215,7 @@ namespace tpublic
 				IWriter*				aStream) const override
 			{
 				aStream->WriteString(m_displayName);
+				aStream->WriteOptionalPOD(m_debugColor);
 				aStream->WriteUInts(m_systems);
 
 				{
@@ -226,6 +232,8 @@ namespace tpublic
 			{
 				if(!aStream->ReadString(m_displayName))
 					return false;
+				if (!aStream->ReadOptionalPOD(m_debugColor))
+					return false;
 				if(!aStream->ReadUInts(m_systems))
 					return false;
 				if(!aStream->ReadObjectPointers(m_components))
@@ -235,6 +243,7 @@ namespace tpublic
 
 			// Public data
 			std::string										m_displayName;
+			std::optional<Image::RGBA>						m_debugColor;
 			std::vector<uint32_t>							m_systems;
 			std::vector<std::unique_ptr<ComponentEntry>>	m_components;
 

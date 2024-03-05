@@ -315,6 +315,14 @@ map gateway_world:
 				neighbor_terrain_required: rocks
 				min_distance_to_nearby: 2
 			}			
+
+			execute add_entity_spawns:
+			{
+				entity_spawn: [ underworld_shrine holy_altar ]
+				probability: 2
+				terrain: [ flat ]
+				min_distance_to_nearby: 1
+			}		
 			
 			execute add_boss: !BOSS{}
 			execute add_boss: !BOSS{}

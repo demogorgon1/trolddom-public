@@ -16,11 +16,21 @@ namespace tpublic
 			Write(&aValue, sizeof(aValue));
 		}
 
+		template <typename _T>
+		void
+		WriteOptionalPOD(
+			const std::optional<_T>&				aValue)
+		{
+			WriteBool(aValue.has_value());
+			if(aValue.has_value())
+				Write(&aValue.value(), sizeof(_T));
+		}
+
 		void
 		WriteFloat(
 			float									aValue)
 		{
-			// FIXME: some clever encoding
+			// FIXME: some clever less-than-4-bytes-on-average encoding
 			Write(&aValue, sizeof(aValue));
 		}
 
