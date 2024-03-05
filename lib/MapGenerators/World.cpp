@@ -2,12 +2,14 @@
 
 #include <tpublic/Components/CombatPublic.h>
 
+#include <tpublic/Data/Doodad.h>
 #include <tpublic/Data/Noise.h>
 #include <tpublic/Data/Terrain.h>
 
 #include <tpublic/MapGenerators/World.h>
 
 #include <tpublic/DistanceField.h>
+#include <tpublic/DoodadPlacement.h>
 #include <tpublic/Helpers.h>
 #include <tpublic/Image.h>
 #include <tpublic/Manifest.h>
@@ -183,6 +185,23 @@ namespace tpublic::MapGenerators
 
 			aOutMapData->m_worldInfoMap = std::make_unique<WorldInfoMap>();
 			aOutMapData->m_worldInfoMap->Build((int32_t)m_width, (int32_t)m_height, &levels[0], NULL);
+		}
+
+		// Doodads
+		{
+			std::unordered_map<Vec2, uint32_t, Vec2::Hasher> coverageMap;
+			for (const Doodad& doodad : m_doodads)
+			{
+				Vec2 mapSize = { (int32_t)m_width, (int32_t)m_height };
+				const Data::Doodad* doodadData = m_manifest->GetById<Data::Doodad>(doodad.m_doodadId);
+				if (doodadData->m_spriteIds.size() > 0 && DoodadPlacement::Check(aOutMapData->m_tileMap, mapSize, doodadData, doodad.m_position, coverageMap))
+				{
+					std::uniform_int_distribution<size_t> distribution(0, doodadData->m_spriteIds.size() - 1);
+					aOutMapData->m_doodads[doodad.m_position] = doodadData->m_spriteIds[distribution(m_random)];
+
+					DoodadPlacement::AddToCoverageMap(doodadData, doodad.m_position, coverageMap);
+				}
+			}
 		}
 	}
 
@@ -1222,19 +1241,45 @@ namespace tpublic::MapGenerators
 				int32_t sample = noiseInstance.Sample({ x, y });
 				uint32_t terrainId = aBuilder->m_terrainMap[offset];
 
-				uint32_t newTerrainId = 0;
-
-				for (const std::unique_ptr<Terrain>& overlayTerrain : m_terrains)
+				// Terrain?
 				{
-					if (overlayTerrain->m_condition.Check(sample) && !overlayTerrain->IsExcluded(terrainId))
+					uint32_t newTerrainId = 0;
+
+					for (const std::unique_ptr<Terrain>& overlayTerrain : m_terrains)
 					{
-						newTerrainId = overlayTerrain->m_terrainId;
-						break;
+						if (overlayTerrain->m_condition.Check(sample) && !overlayTerrain->IsExcluded(terrainId))
+						{
+							newTerrainId = overlayTerrain->m_terrainId;
+							break;
+						}
 					}
+
+					if (newTerrainId != 0)
+						aBuilder->m_terrainMap[offset] = newTerrainId;
 				}
 
-				if (newTerrainId != 0)
-					aBuilder->m_terrainMap[offset] = newTerrainId;
+				// Doodad?
+				if(sample >= 0)
+				{
+					uint32_t s = (uint32_t)sample;
+
+					for (const std::unique_ptr<Doodad>& overlayDoodad : m_doodads)
+					{
+						if(s >= overlayDoodad->m_range.m_min && s <= overlayDoodad->m_range.m_max && overlayDoodad->HasTerrainId(terrainId))
+						{
+							uint32_t probability = overlayDoodad->m_probability.m_min + 
+								((overlayDoodad->m_probability.m_max - overlayDoodad->m_probability.m_min) * (s - overlayDoodad->m_range.m_min)) / (overlayDoodad->m_range.m_max - overlayDoodad->m_range.m_min);
+
+							if(aBuilder->Roll(1, 100) <= probability)
+							{
+								Builder::Doodad doodad;
+								doodad.m_doodadId = overlayDoodad->m_doodadId;
+								doodad.m_position = { x, y };
+								aBuilder->m_doodads.push_back(doodad);
+							}
+						}
+					}
+				}
 
 				offset++;
 			}

@@ -258,6 +258,15 @@ namespace tpublic
 		m_seed.ToStream(aStream);
 		aStream->WriteOptionalObjectPointer(m_worldInfoMap);
 		aStream->WriteOptionalObjectPointer(m_mapCovers);
+
+		{
+			aStream->WriteUInt(m_doodads.size());
+			for(DoodadSpriteTable::const_iterator i = m_doodads.cbegin(); i != m_doodads.cend(); i++)
+			{
+				i->first.ToStream(aStream);
+				aStream->WriteUInt(i->second);
+			}
+		}
 	}
 
 	bool	
@@ -311,6 +320,23 @@ namespace tpublic
 			return false;
 		if (!aStream->ReadOptionalObjectPointer(m_mapCovers))
 			return false;
+
+		{
+			size_t count;
+			if(!aStream->ReadUInt(count))
+				return false;
+			for(size_t i = 0; i < count; i++)
+			{
+				Vec2 position;
+				if(!position.FromStream(aStream))
+					return false;
+				uint32_t doodadId;
+				if(!aStream->ReadUInt(doodadId))
+					return false;
+				m_doodads[position] = doodadId;
+			}
+
+		}
 		return true;
 	}
 
@@ -410,6 +436,8 @@ namespace tpublic
 			m_mapCovers = std::make_unique<MapCovers>();
 			m_mapCovers->CopyFrom(aMapData->m_mapCovers.get());
 		}
+
+		m_doodads = aMapData->m_doodads;
 	}
 
 	uint32_t	

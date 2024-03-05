@@ -63,6 +63,36 @@ noise .temperature:
 	}	
 }
 
+noise .doodad_brown_rocks_overlay:
+{
+	divide<[0 255]>:
+	{
+		add:
+		{
+			perlin: { scale: 9000 }
+			perlin: { scale: 5000 }
+			perlin: { scale: 1200 }
+			constant: 32000			
+		}
+		
+		constant: 256
+	}	
+}
+
+noise .doodad_grass_overlay:
+{
+	divide<[0 255]>:
+	{
+		add:
+		{
+			perlin: { scale: 9000 }
+			constant: 32000			
+		}
+		
+		constant: 256
+	}	
+}
+
 tag_context .major_boss:
 {
 	must_have_tags: [ boss major_boss ]
@@ -237,7 +267,20 @@ map gateway_world:
 			execute overlay: 
 			{
 				noise: .rocks_overlay
-				terrain<rocks>: { above: 128 exclude: [ ocean ] }
+				terrain<rocks>: { above: 128 exclude: [ ocean ] }				
+				doodad<small_rocks>: { range: [ 0 128 ] probability: [ 0 16 ] terrain: [ flat ] }
+			}
+			
+			execute overlay: 
+			{
+				noise: .doodad_brown_rocks_overlay
+				doodad<small_rocks_brown>: { range: [ 192 256 ] probability: [ 0 10 ] terrain: [ flat ] }
+			}
+
+			execute overlay: 
+			{
+				noise: .doodad_grass_overlay
+				doodad<grass_patch>: { range: [ 129 256 ] probability: [ 0 32 ] terrain: [ flat ] }
 			}
 
 			execute terrain_modifier_map:

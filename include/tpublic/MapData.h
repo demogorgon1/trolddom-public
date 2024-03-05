@@ -502,6 +502,9 @@ namespace tpublic
 		std::unique_ptr<Generator>					m_generator;
 		std::unique_ptr<WorldInfoMap>				m_worldInfoMap;
 		std::unique_ptr<MapCovers>					m_mapCovers;
+		
+		typedef std::unordered_map<Vec2, uint32_t, Vec2::Hasher> DoodadSpriteTable;
+		DoodadSpriteTable							m_doodads;
 
 		struct SourceLayer
 		{

@@ -1,0 +1,56 @@
+sprites:
+{
+	source: "common-doodads.png"
+
+	size: { width: 16 height: 16 }
+
+	cursor: { position: [ 0 0 ] }
+
+	sprite doodad_rocks_1: { }
+	sprite doodad_rocks_2: { }
+	sprite doodad_rocks_3: { }
+	sprite doodad_rocks_4: { }
+	sprite doodad_grass_1: { }
+	sprite doodad_grass_2: { }
+	sprite doodad_rocks_5: { }
+	sprite doodad_rocks_6: { }
+	sprite doodad_rocks_7: { }
+	sprite doodad_rocks_8: { }
+	sprite doodad_rocks_9: { }
+	sprite doodad_rocks_10: { }
+	sprite doodad_rocks_11: { }
+	sprite doodad_rocks_12: { }
+	sprite doodad_rocks_13: { }
+	sprite doodad_rocks_14: { }
+}
+
+doodad small_rocks:
+{
+	sprites: [ doodad_rocks_1 doodad_rocks_2 doodad_rocks_3 doodad_rocks_4 doodad_rocks_10 doodad_rocks_13 doodad_rocks_14 ]
+	map_palette<"x">: { must_be_one_of: [ grass dirt mud snow dark_grass sand ] occupy: true  }
+	map_palette<"y">: { must_not_be_one_of: [ forest ] } 
+	map: [ "y"
+	       "x" ]
+	map_offset: [ 0 -1 ]
+}
+
+doodad small_rocks_brown:
+{
+	sprites: [ doodad_rocks_5 doodad_rocks_6 doodad_rocks_7 doodad_rocks_8 doodad_rocks_9 doodad_rocks_11 doodad_rocks_12 ]
+	map_palette<"x">: { must_be_one_of: [ grass dirt mud snow dark_grass sand ] occupy: true }
+	map_palette<"y">: { must_not_be_one_of: [ forest ] } 
+	map: [ "y"
+	       "x" ]
+	map_offset: [ 0 -1 ]
+}
+
+doodad grass_patch:
+{
+	sprites: [ doodad_grass_1 doodad_grass_2 ]
+	map_palette<"x">: { must_be_one_of: [ grass dirt mud dark_grass ] }
+	map_palette<"y">: { must_not_be_one_of: [ forest rocks ] } 
+	map: [ "yyy"
+	       "yxy" 
+		   "yyy" ]
+	map_offset: [ -1 -1 ]
+}

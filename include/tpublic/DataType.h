@@ -51,6 +51,7 @@ namespace tpublic
 			ID_TERRAIN,
 			ID_NOISE,
 			ID_NAME_TEMPLATE,
+			ID_DOODAD,
 
 			NUM_IDS
 		};
@@ -99,7 +100,8 @@ namespace tpublic
 			"sound",
 			"terrain",
 			"noise",
-			"name_template"
+			"name_template",
+			"doodad"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

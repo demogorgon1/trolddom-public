@@ -282,11 +282,18 @@ namespace tpublic::MapGenerators
 				Vec2										m_position;
 			};
 
+			struct Doodad
+			{
+				Vec2										m_position;
+				uint32_t									m_doodadId = 0;
+			};
+
 			std::vector<std::unique_ptr<Boss>>				m_bosses;
 			std::unique_ptr<DistanceField>					m_bossDistanceCombined;
 			std::vector<std::unique_ptr<PlayerSpawn>>		m_playerSpawns;
 			std::unique_ptr<DistanceField>					m_playerSpawnDistanceCombined;
 			std::vector<LevelMapPoint>						m_levelMap;
+			std::vector<Doodad>								m_doodads;
 
 			UIntRange										m_levelRange;
 		};
@@ -1046,6 +1053,77 @@ namespace tpublic::MapGenerators
 				std::vector<uint32_t>	m_exclude;
 			};
 
+			struct Doodad
+			{
+				Doodad()
+				{
+
+				}
+
+				Doodad(
+					const SourceNode*					aSource)
+				{
+					TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing doodad annotation.");
+					m_doodadId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_DOODAD, aSource->m_annotation->GetIdentifier());
+
+					aSource->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if (aChild->m_name == "range")
+							m_range = UIntRange(aChild);
+						else if (aChild->m_name == "probability")
+							m_probability = UIntRange(aChild);
+						else if (aChild->m_name == "terrain")
+							aChild->GetIdArray(DataType::ID_TERRAIN, m_terrainIds);
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					});
+				}
+
+				void
+				ToStream(
+					IWriter*							aWriter) const 
+				{
+					aWriter->WriteUInt(m_doodadId);
+					aWriter->WriteUInts(m_terrainIds);
+					m_range.ToStream(aWriter);
+					m_probability.ToStream(aWriter);
+				}
+
+				bool
+				FromStream(
+					IReader*							aReader) 
+				{
+					if (!aReader->ReadUInt(m_doodadId))
+						return false;
+					if (!aReader->ReadUInts(m_terrainIds))
+						return false;
+					if (!m_range.FromStream(aReader))
+						return false;
+					if (!m_probability.FromStream(aReader))
+						return false;
+					return true;
+				}
+
+				bool
+				HasTerrainId(
+					uint32_t							aTerrainId) const
+				{
+					for(uint32_t t : m_terrainIds)
+					{
+						if(t == aTerrainId)
+							return true;
+					}
+					return false;
+				}
+
+				// Public data
+				uint32_t				m_doodadId = 0;
+				UIntRange				m_range;
+				UIntRange				m_probability;
+				std::vector<uint32_t>	m_terrainIds;
+			};
+
 			// IExecute implementation
 			void
 			FromSource(
@@ -1059,6 +1137,8 @@ namespace tpublic::MapGenerators
 						m_noiseId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_NOISE, aChild->GetIdentifier());
 					else if (aChild->m_name == "terrain")
 						m_terrains.push_back(std::make_unique<Terrain>(aChild));
+					else if (aChild->m_name == "doodad")
+						m_doodads.push_back(std::make_unique<Doodad>(aChild));
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 				});
@@ -1071,6 +1151,7 @@ namespace tpublic::MapGenerators
 			{
 				aWriter->WriteUInt(m_noiseId);
 				aWriter->WriteObjectPointers(m_terrains);
+				aWriter->WriteObjectPointers(m_doodads);
 			}
 
 			bool
@@ -1082,6 +1163,8 @@ namespace tpublic::MapGenerators
 					return false;
 				if (!aReader->ReadObjectPointers(m_terrains))
 					return false;
+				if (!aReader->ReadObjectPointers(m_doodads))
+					return false;
 				return true;
 			}
 
@@ -1091,6 +1174,7 @@ namespace tpublic::MapGenerators
 			// Public data
 			uint32_t										m_noiseId = 0;
 			std::vector<std::unique_ptr<Terrain>>			m_terrains;
+			std::vector<std::unique_ptr<Doodad>>			m_doodads;
 		};
 
 		struct ExecuteTerrainModifierMap : public IExecute

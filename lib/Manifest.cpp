@@ -11,6 +11,7 @@
 #include <tpublic/Data/Deity.h>
 #include <tpublic/Data/DialogueRoot.h>
 #include <tpublic/Data/DialogueScreen.h>
+#include <tpublic/Data/Doodad.h>
 #include <tpublic/Data/Entity.h>
 #include <tpublic/Data/Expression.h>
 #include <tpublic/Data/Faction.h>
@@ -60,6 +61,7 @@ namespace tpublic
 		RegisterDataContainer<Data::Deity>();
 		RegisterDataContainer<Data::DialogueRoot>();
 		RegisterDataContainer<Data::DialogueScreen>();
+		RegisterDataContainer<Data::Doodad>();
 		RegisterDataContainer<Data::Entity>();
 		RegisterDataContainer<Data::Expression>();
 		RegisterDataContainer<Data::Faction>();
