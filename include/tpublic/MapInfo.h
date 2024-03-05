@@ -9,6 +9,13 @@ namespace tpublic
 	class MapInfo
 	{
 	public:
+		enum OverviewMapType : uint8_t
+		{
+			OVERVIEW_MAP_TYPE_NONE,
+			OVERVIEW_MAP_TYPE_ZONES,
+			OVERVIEW_MAP_TYPE_DYNAMIC
+		};
+
 		bool
 		FromSourceItem(
 			const SourceNode*	aItem)
@@ -60,7 +67,14 @@ namespace tpublic
 			}
 			else if (aItem->m_name == "has_overview_map")
 			{
-				m_hasOverviewMap = aItem->GetBool();
+				if(aItem->GetBool())
+					m_overviewMapType = OVERVIEW_MAP_TYPE_ZONES;
+				return true;
+			}
+			else if (aItem->m_name == "has_dynamic_overview_map")
+			{
+				if (aItem->GetBool())
+					m_overviewMapType = OVERVIEW_MAP_TYPE_DYNAMIC;
 				return true;
 			}
 			return false;
@@ -79,7 +93,7 @@ namespace tpublic
 			aWriter->WriteUInt(m_viewHiddenVisibility);
 			aWriter->WriteUInt(m_level);
 			aWriter->WriteUInt(m_defaultFishingLootTableId);
-			aWriter->WritePOD(m_hasOverviewMap);
+			aWriter->WritePOD(m_overviewMapType);
 		}
 
 		bool
@@ -104,7 +118,7 @@ namespace tpublic
 				return false;
 			if (!aReader->ReadUInt(m_defaultFishingLootTableId))
 				return false;
-			if (!aReader->ReadPOD(m_hasOverviewMap))
+			if (!aReader->ReadPOD(m_overviewMapType))
 				return false;
 			return true;
 		}
@@ -119,7 +133,8 @@ namespace tpublic
 		uint32_t									m_viewHiddenVisibility = 0;
 		uint32_t									m_level = 0;
 		uint32_t									m_defaultFishingLootTableId = 0;
-		bool										m_hasOverviewMap = false;
+		OverviewMapType								m_overviewMapType = OVERVIEW_MAP_TYPE_NONE;
+		
 	};
 
 }
