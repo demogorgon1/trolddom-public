@@ -227,6 +227,8 @@ namespace tpublic
 					aChild->GetIdArrayWithLookup<ItemType::Id, ItemType::INVALID_ID>(stackObject->m_itemClass.m_types, [](const char* aString) { return ItemType::StringToId(aString); });
 				else if(aChild->m_name == "min_level")
 					stackObject->m_itemClass.m_minLevel = aChild->GetUInt32();
+				else if (aChild->m_name == "min_rarity")
+					stackObject->m_itemClass.m_minRarity = Rarity::StringToId(aChild->GetIdentifier());
 				else if (aChild->m_name == "max_level")
 					stackObject->m_itemClass.m_maxLevel = aChild->GetUInt32();
 				else if (aChild->m_name == "weight")
@@ -346,6 +348,9 @@ namespace tpublic
 					if(itemClass->m_minLevel != 0 && itemLevel < itemClass->m_minLevel )
 						continue;
 
+					if(itemClass->m_minRarity != Rarity::INVALID_ID && (uint32_t)rarity < (uint32_t)itemClass->m_minRarity)
+						continue;
+
 					if (itemClass->m_maxLevel != 0 && itemLevel > itemClass->m_maxLevel)
 						continue;
 
@@ -446,7 +451,7 @@ namespace tpublic
 
 					int32_t itemBudgetBias = budgetBias - (int32_t)rawStats.GetTotalBudgetCost();
 
-					const char* iconName = _PickIconName(lastEquipmentSlotTagId, allTags);
+					const char* iconName = _PickIconName(mustHaveTags, allTags);
 
 					GeneratedSource* output = _CreateGeneratedSource();
 
@@ -983,14 +988,14 @@ namespace tpublic
 
 	const char* 
 	GenerationJob::_PickIconName(
-		uint32_t							aMustHaveTagId,
+		const std::unordered_set<uint32_t>& aMustHaveTags,
 		const std::vector<uint32_t>&		aTags)
 	{
 		TaggedData::Query query;
 		query.m_mustHaveTagIds = { m_manifest->GetExistingIdByName<Data::Tag>("icon") };
 
-		if(aMustHaveTagId != 0)
-			query.m_mustHaveTagIds.push_back(aMustHaveTagId);
+		for(uint32_t mustHaveTagId : aMustHaveTags)
+			query.m_mustHaveTagIds.push_back(mustHaveTagId);
 
 		for(uint32_t tagId : aTags)
 		{

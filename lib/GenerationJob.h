@@ -78,6 +78,7 @@ namespace tpublic
 			{
 				std::vector<EquipmentSlot::Id>			m_slots;
 				std::vector<ItemType::Id>				m_types;
+				Rarity::Id								m_minRarity = Rarity::ID_COMMON;
 				uint32_t								m_minLevel = 0;
 				uint32_t								m_maxLevel = 0;
 				uint32_t								m_weight = 1;
@@ -182,7 +183,7 @@ namespace tpublic
 		void							_GetAbilities(
 											std::vector<const Data::Ability*>&	aOut) const;
 		const char*						_PickIconName(
-											uint32_t							aMustHaveTagId,
+											const std::unordered_set<uint32_t>&	aMustHaveTags,
 											const std::vector<uint32_t>&		aTags);
 		GeneratedSource*				_CreateGeneratedSource();
 		void							_CreateDesignation(
