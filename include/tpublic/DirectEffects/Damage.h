@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../DirectEffectBase.h"
+#include "../UIntCurve.h"
 
 namespace tpublic
 {
@@ -51,6 +52,8 @@ namespace tpublic
 
 			uint32_t					m_damageBaseRangeMin = 0;
 			uint32_t					m_damageBaseRangeMax = 0;
+
+			UIntCurve<uint32_t>			m_levelCurve;
 		};
 
 	}

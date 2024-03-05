@@ -775,6 +775,7 @@ namespace tpublic
 		uint32_t lootTableId = 0;
 		std::vector<uint32_t> extraTags;
 		UIntRange abilityCount;
+		bool hasMana = false;
 
 		aSource->ForEachChild([&](
 			const SourceNode* aChild)
@@ -783,6 +784,8 @@ namespace tpublic
 				count = aChild->GetUInt32();
 			else if (aChild->m_name == "elite")
 				elite = aChild->GetBool();
+			else if (aChild->m_name == "has_mana")
+				hasMana = aChild->GetBool();
 			else if (aChild->m_name == "weapon_damage_multiplier_range")
 				weaponDamageMultiplierRange = FloatRange(aChild);
 			else if (aChild->m_name == "health_multiplier_range")
@@ -883,13 +886,17 @@ namespace tpublic
 				output->PrintF(1, "_sprite_dead: %s", spriteDead->m_name.c_str());
 				output->PrintF(1, "_weapon_damage: %f", weaponDamageMultiplier);
 				output->PrintF(1, "_resource_health: %f", healthMultiplier);
+
+				if(hasMana) 
+					output->PrintF(1, "_resource_mana: 1");
+
 				output->PrintF(1, "_creature_type: %s", creatureType->m_name.c_str());
 				output->PrintF(1, "_loot_table: %s", lootTable->m_name.c_str());
 				output->PrintF(1, "_abilities:");
 				output->PrintF(1, "[");
-				output->PrintF(2, "{ id: npc_attack }");
 				for(const Data::Ability* ability : abilities)
 					output->PrintF(2, "{ id: %s }", ability->m_name.c_str());
+				output->PrintF(2, "{ id: npc_attack }");
 				output->PrintF(1, "]");
 
 				if (tags.size() > 0)

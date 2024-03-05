@@ -1515,8 +1515,8 @@ entity world_enemies_npc_64: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -1541,8 +1541,8 @@ entity world_enemies_npc_65: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -1567,8 +1567,8 @@ entity world_enemies_npc_66: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -1593,8 +1593,8 @@ entity world_enemies_npc_67: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -1619,8 +1619,8 @@ entity world_enemies_npc_68: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -1645,8 +1645,8 @@ entity world_enemies_npc_69: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -1671,8 +1671,8 @@ entity world_enemies_npc_70: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -1697,8 +1697,8 @@ entity world_enemies_npc_71: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -1723,8 +1723,8 @@ entity world_enemies_npc_72: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -1749,8 +1749,8 @@ entity world_enemies_npc_73: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -1775,8 +1775,8 @@ entity world_enemies_npc_74: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -1801,8 +1801,8 @@ entity world_enemies_npc_75: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -1827,8 +1827,8 @@ entity world_enemies_npc_76: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -1853,8 +1853,8 @@ entity world_enemies_npc_77: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -1879,8 +1879,8 @@ entity world_enemies_npc_78: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -1905,8 +1905,8 @@ entity world_enemies_npc_79: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -1931,8 +1931,8 @@ entity world_enemies_npc_80: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -1957,8 +1957,8 @@ entity world_enemies_npc_81: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -1983,8 +1983,8 @@ entity world_enemies_npc_82: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2009,8 +2009,8 @@ entity world_enemies_npc_83: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2035,8 +2035,8 @@ entity world_enemies_npc_84: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2061,8 +2061,8 @@ entity world_enemies_npc_85: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2087,8 +2087,8 @@ entity world_enemies_npc_86: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2113,8 +2113,8 @@ entity world_enemies_npc_87: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2139,8 +2139,8 @@ entity world_enemies_npc_88: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2165,8 +2165,8 @@ entity world_enemies_npc_89: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2191,8 +2191,8 @@ entity world_enemies_npc_90: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2217,8 +2217,8 @@ entity world_enemies_npc_91: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2243,8 +2243,8 @@ entity world_enemies_npc_92: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2269,8 +2269,8 @@ entity world_enemies_npc_93: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2295,8 +2295,8 @@ entity world_enemies_npc_94: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2321,8 +2321,8 @@ entity world_enemies_npc_95: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2347,8 +2347,8 @@ entity world_enemies_npc_96: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2373,8 +2373,8 @@ entity world_enemies_npc_97: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2399,8 +2399,8 @@ entity world_enemies_npc_98: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2425,8 +2425,8 @@ entity world_enemies_npc_99: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2451,8 +2451,8 @@ entity world_enemies_npc_100: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2477,8 +2477,8 @@ entity world_enemies_npc_101: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2503,8 +2503,8 @@ entity world_enemies_npc_102: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2529,8 +2529,8 @@ entity world_enemies_npc_103: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2555,8 +2555,8 @@ entity world_enemies_npc_104: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2581,8 +2581,8 @@ entity world_enemies_npc_105: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2607,8 +2607,8 @@ entity world_enemies_npc_106: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2633,8 +2633,8 @@ entity world_enemies_npc_107: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2659,8 +2659,8 @@ entity world_enemies_npc_108: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2685,8 +2685,8 @@ entity world_enemies_npc_109: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2711,8 +2711,8 @@ entity world_enemies_npc_110: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2737,8 +2737,8 @@ entity world_enemies_npc_111: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2763,8 +2763,8 @@ entity world_enemies_npc_112: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2789,8 +2789,8 @@ entity world_enemies_npc_113: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2815,8 +2815,8 @@ entity world_enemies_npc_114: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2841,8 +2841,8 @@ entity world_enemies_npc_115: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2867,8 +2867,8 @@ entity world_enemies_npc_116: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2893,8 +2893,8 @@ entity world_enemies_npc_117: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2919,8 +2919,8 @@ entity world_enemies_npc_118: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2945,8 +2945,8 @@ entity world_enemies_npc_119: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2971,8 +2971,8 @@ entity world_enemies_npc_120: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -2997,8 +2997,8 @@ entity world_enemies_npc_121: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3023,8 +3023,8 @@ entity world_enemies_npc_122: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3049,8 +3049,8 @@ entity world_enemies_npc_123: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3075,8 +3075,8 @@ entity world_enemies_npc_124: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3101,8 +3101,8 @@ entity world_enemies_npc_125: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3127,8 +3127,8 @@ entity world_enemies_npc_126: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3153,8 +3153,8 @@ entity world_enemies_npc_127: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3179,8 +3179,8 @@ entity world_enemies_npc_128: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3206,8 +3206,8 @@ entity world_enemies_npc_129: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3233,8 +3233,8 @@ entity world_enemies_npc_130: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3260,8 +3260,8 @@ entity world_enemies_npc_131: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3287,8 +3287,8 @@ entity world_enemies_npc_132: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3314,8 +3314,8 @@ entity world_enemies_npc_133: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3341,8 +3341,8 @@ entity world_enemies_npc_134: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3368,8 +3368,8 @@ entity world_enemies_npc_135: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3395,8 +3395,8 @@ entity world_enemies_npc_136: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3422,8 +3422,8 @@ entity world_enemies_npc_137: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3449,8 +3449,8 @@ entity world_enemies_npc_138: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3476,8 +3476,8 @@ entity world_enemies_npc_139: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3503,8 +3503,8 @@ entity world_enemies_npc_140: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3530,8 +3530,8 @@ entity world_enemies_npc_141: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3557,8 +3557,8 @@ entity world_enemies_npc_142: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3584,8 +3584,8 @@ entity world_enemies_npc_143: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3611,8 +3611,8 @@ entity world_enemies_npc_144: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3638,8 +3638,8 @@ entity world_enemies_npc_145: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3665,8 +3665,8 @@ entity world_enemies_npc_146: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3692,8 +3692,8 @@ entity world_enemies_npc_147: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3719,8 +3719,8 @@ entity world_enemies_npc_148: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3746,8 +3746,8 @@ entity world_enemies_npc_149: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3773,8 +3773,8 @@ entity world_enemies_npc_150: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3800,8 +3800,8 @@ entity world_enemies_npc_151: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3827,8 +3827,8 @@ entity world_enemies_npc_152: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3854,8 +3854,8 @@ entity world_enemies_npc_153: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3881,8 +3881,8 @@ entity world_enemies_npc_154: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3908,8 +3908,8 @@ entity world_enemies_npc_155: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3935,8 +3935,8 @@ entity world_enemies_npc_156: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3962,8 +3962,8 @@ entity world_enemies_npc_157: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -3989,8 +3989,8 @@ entity world_enemies_npc_158: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4016,8 +4016,8 @@ entity world_enemies_npc_159: !NPC
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_strike }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4039,12 +4039,13 @@ entity world_enemies_npc_160: !NPC
 	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.740821
 	_resource_health: 0.890279
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4064,12 +4065,13 @@ entity world_enemies_npc_161: !NPC
 	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.785370
 	_resource_health: 0.823206
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4089,12 +4091,13 @@ entity world_enemies_npc_162: !NPC
 	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.723998
 	_resource_health: 0.755225
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4114,12 +4117,13 @@ entity world_enemies_npc_163: !NPC
 	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.712198
 	_resource_health: 0.785340
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4138,12 +4142,13 @@ entity world_enemies_npc_164: !NPC
 	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.844425
 	_resource_health: 0.756401
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4162,12 +4167,13 @@ entity world_enemies_npc_165: !NPC
 	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.750356
 	_resource_health: 0.867461
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4186,12 +4192,13 @@ entity world_enemies_npc_166: !NPC
 	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.742651
 	_resource_health: 0.788028
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4210,12 +4217,13 @@ entity world_enemies_npc_167: !NPC
 	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.754273
 	_resource_health: 0.862427
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4234,12 +4242,13 @@ entity world_enemies_npc_168: !NPC
 	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.717083
 	_resource_health: 0.852932
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4258,12 +4267,13 @@ entity world_enemies_npc_169: !NPC
 	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.852271
 	_resource_health: 0.742994
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4283,12 +4293,13 @@ entity world_enemies_npc_170: !NPC
 	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.714112
 	_resource_health: 0.870833
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4308,12 +4319,13 @@ entity world_enemies_npc_171: !NPC
 	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.763102
 	_resource_health: 0.789224
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4332,12 +4344,13 @@ entity world_enemies_npc_172: !NPC
 	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.843101
 	_resource_health: 0.874733
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4356,12 +4369,13 @@ entity world_enemies_npc_173: !NPC
 	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.853867
 	_resource_health: 0.899361
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4381,12 +4395,13 @@ entity world_enemies_npc_174: !NPC
 	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.729414
 	_resource_health: 0.804132
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4405,12 +4420,13 @@ entity world_enemies_npc_175: !NPC
 	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.878839
 	_resource_health: 0.798658
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4430,12 +4446,13 @@ entity world_enemies_npc_176: !NPC
 	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.745781
 	_resource_health: 0.865994
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4455,12 +4472,13 @@ entity world_enemies_npc_177: !NPC
 	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.786639
 	_resource_health: 0.730989
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4479,12 +4497,13 @@ entity world_enemies_npc_178: !NPC
 	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.817484
 	_resource_health: 0.817116
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4503,12 +4522,13 @@ entity world_enemies_npc_179: !NPC
 	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.841095
 	_resource_health: 0.778885
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4527,12 +4547,13 @@ entity world_enemies_npc_180: !NPC
 	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.842271
 	_resource_health: 0.792696
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4552,12 +4573,13 @@ entity world_enemies_npc_181: !NPC
 	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.732576
 	_resource_health: 0.805565
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4576,12 +4598,13 @@ entity world_enemies_npc_182: !NPC
 	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.733573
 	_resource_health: 0.890626
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4600,12 +4623,13 @@ entity world_enemies_npc_183: !NPC
 	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.830199
 	_resource_health: 0.877850
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4624,12 +4648,13 @@ entity world_enemies_npc_184: !NPC
 	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.787648
 	_resource_health: 0.810397
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4648,12 +4673,13 @@ entity world_enemies_npc_185: !NPC
 	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.790928
 	_resource_health: 0.721967
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4673,12 +4699,13 @@ entity world_enemies_npc_186: !NPC
 	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.793593
 	_resource_health: 0.738774
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4698,12 +4725,13 @@ entity world_enemies_npc_187: !NPC
 	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.801263
 	_resource_health: 0.807922
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4723,12 +4751,13 @@ entity world_enemies_npc_188: !NPC
 	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.866065
 	_resource_health: 0.784826
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4748,12 +4777,13 @@ entity world_enemies_npc_189: !NPC
 	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.715497
 	_resource_health: 0.773146
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4772,12 +4802,13 @@ entity world_enemies_npc_190: !NPC
 	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.860647
 	_resource_health: 0.720992
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4796,12 +4827,13 @@ entity world_enemies_npc_191: !NPC
 	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.799838
 	_resource_health: 0.735853
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4820,12 +4852,13 @@ entity world_enemies_npc_192: !NPC
 	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.715108
 	_resource_health: 0.880795
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4844,12 +4877,13 @@ entity world_enemies_npc_193: !NPC
 	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.792600
 	_resource_health: 0.865178
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4868,12 +4902,13 @@ entity world_enemies_npc_194: !NPC
 	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.848234
 	_resource_health: 0.844090
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4892,12 +4927,13 @@ entity world_enemies_npc_195: !NPC
 	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.740141
 	_resource_health: 0.802812
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4917,12 +4953,13 @@ entity world_enemies_npc_196: !NPC
 	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.729747
 	_resource_health: 0.764402
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4941,12 +4978,13 @@ entity world_enemies_npc_197: !NPC
 	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.771898
 	_resource_health: 0.784217
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4966,12 +5004,13 @@ entity world_enemies_npc_198: !NPC
 	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.806368
 	_resource_health: 0.755344
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -4990,12 +5029,13 @@ entity world_enemies_npc_199: !NPC
 	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.824455
 	_resource_health: 0.870871
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5014,12 +5054,13 @@ entity world_enemies_npc_200: !NPC
 	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.887648
 	_resource_health: 0.756476
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5039,12 +5080,13 @@ entity world_enemies_npc_201: !NPC
 	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.719198
 	_resource_health: 0.776107
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5063,12 +5105,13 @@ entity world_enemies_npc_202: !NPC
 	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.856393
 	_resource_health: 0.750699
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5087,12 +5130,13 @@ entity world_enemies_npc_203: !NPC
 	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.814884
 	_resource_health: 0.800929
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5111,12 +5155,13 @@ entity world_enemies_npc_204: !NPC
 	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.844648
 	_resource_health: 0.753976
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5135,12 +5180,13 @@ entity world_enemies_npc_205: !NPC
 	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.820832
 	_resource_health: 0.818096
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5160,12 +5206,13 @@ entity world_enemies_npc_206: !NPC
 	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.880415
 	_resource_health: 0.819700
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5185,12 +5232,13 @@ entity world_enemies_npc_207: !NPC
 	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.741596
 	_resource_health: 0.881877
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5210,12 +5258,13 @@ entity world_enemies_npc_208: !NPC
 	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.814271
 	_resource_health: 0.896453
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5235,12 +5284,13 @@ entity world_enemies_npc_209: !NPC
 	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.869157
 	_resource_health: 0.770663
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5259,12 +5309,13 @@ entity world_enemies_npc_210: !NPC
 	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.838039
 	_resource_health: 0.737507
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5283,12 +5334,13 @@ entity world_enemies_npc_211: !NPC
 	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.896980
 	_resource_health: 0.744674
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5307,12 +5359,13 @@ entity world_enemies_npc_212: !NPC
 	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.701020
 	_resource_health: 0.816156
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5332,12 +5385,13 @@ entity world_enemies_npc_213: !NPC
 	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.714904
 	_resource_health: 0.722624
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5356,12 +5410,13 @@ entity world_enemies_npc_214: !NPC
 	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.750785
 	_resource_health: 0.796577
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5381,12 +5436,13 @@ entity world_enemies_npc_215: !NPC
 	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.755482
 	_resource_health: 0.705220
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5406,12 +5462,13 @@ entity world_enemies_npc_216: !NPC
 	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.845324
 	_resource_health: 0.714268
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5431,12 +5488,13 @@ entity world_enemies_npc_217: !NPC
 	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.826257
 	_resource_health: 0.708470
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5456,12 +5514,13 @@ entity world_enemies_npc_218: !NPC
 	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.844177
 	_resource_health: 0.705358
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5481,12 +5540,13 @@ entity world_enemies_npc_219: !NPC
 	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.842136
 	_resource_health: 0.701656
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5506,12 +5566,13 @@ entity world_enemies_npc_220: !NPC
 	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.768810
 	_resource_health: 0.754584
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5530,12 +5591,13 @@ entity world_enemies_npc_221: !NPC
 	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.743955
 	_resource_health: 0.727050
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5554,12 +5616,13 @@ entity world_enemies_npc_222: !NPC
 	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.830332
 	_resource_health: 0.850009
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5578,12 +5641,13 @@ entity world_enemies_npc_223: !NPC
 	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.727227
 	_resource_health: 0.746792
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5602,12 +5666,13 @@ entity world_enemies_npc_224: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.616245
 	_resource_health: 2.165548
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5628,12 +5693,13 @@ entity world_enemies_npc_225: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.961722
 	_resource_health: 2.625374
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5654,12 +5720,13 @@ entity world_enemies_npc_226: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.565518
 	_resource_health: 2.285269
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5680,12 +5747,13 @@ entity world_enemies_npc_227: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.924408
 	_resource_health: 2.940914
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5706,12 +5774,13 @@ entity world_enemies_npc_228: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.566535
 	_resource_health: 2.086233
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5732,12 +5801,13 @@ entity world_enemies_npc_229: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.821913
 	_resource_health: 2.025793
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5758,12 +5828,13 @@ entity world_enemies_npc_230: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.696571
 	_resource_health: 2.659908
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5784,12 +5855,13 @@ entity world_enemies_npc_231: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.826253
 	_resource_health: 2.892508
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5810,12 +5882,13 @@ entity world_enemies_npc_232: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.788030
 	_resource_health: 2.218212
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5836,12 +5909,13 @@ entity world_enemies_npc_233: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.519725
 	_resource_health: 2.364873
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5862,12 +5936,13 @@ entity world_enemies_npc_234: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.722008
 	_resource_health: 2.639536
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5888,12 +5963,13 @@ entity world_enemies_npc_235: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.914088
 	_resource_health: 2.308042
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5914,12 +5990,13 @@ entity world_enemies_npc_236: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.830124
 	_resource_health: 2.217001
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5940,12 +6017,13 @@ entity world_enemies_npc_237: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.866867
 	_resource_health: 2.242640
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5966,12 +6044,13 @@ entity world_enemies_npc_238: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.641227
 	_resource_health: 2.022228
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -5992,12 +6071,13 @@ entity world_enemies_npc_239: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.668861
 	_resource_health: 2.094342
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6018,12 +6098,13 @@ entity world_enemies_npc_240: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.872480
 	_resource_health: 2.680371
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6044,12 +6125,13 @@ entity world_enemies_npc_241: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.910706
 	_resource_health: 2.862522
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6070,12 +6152,13 @@ entity world_enemies_npc_242: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.687165
 	_resource_health: 2.654908
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6096,12 +6179,13 @@ entity world_enemies_npc_243: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.818020
 	_resource_health: 2.581839
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6122,12 +6206,13 @@ entity world_enemies_npc_244: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.971666
 	_resource_health: 2.008801
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6148,12 +6233,13 @@ entity world_enemies_npc_245: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.738803
 	_resource_health: 2.376138
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6174,12 +6260,13 @@ entity world_enemies_npc_246: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.708756
 	_resource_health: 2.267930
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6200,12 +6287,13 @@ entity world_enemies_npc_247: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.645204
 	_resource_health: 2.556161
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6226,12 +6314,13 @@ entity world_enemies_npc_248: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.509160
 	_resource_health: 2.697057
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6252,12 +6341,13 @@ entity world_enemies_npc_249: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.794356
 	_resource_health: 2.916438
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6278,12 +6368,13 @@ entity world_enemies_npc_250: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.823426
 	_resource_health: 2.771924
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6304,12 +6395,13 @@ entity world_enemies_npc_251: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.812660
 	_resource_health: 2.828332
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6330,12 +6422,13 @@ entity world_enemies_npc_252: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.816993
 	_resource_health: 2.151313
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6356,12 +6449,13 @@ entity world_enemies_npc_253: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.767699
 	_resource_health: 2.949301
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6382,12 +6476,13 @@ entity world_enemies_npc_254: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.744472
 	_resource_health: 2.717111
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6408,12 +6503,13 @@ entity world_enemies_npc_255: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.997493
 	_resource_health: 2.017018
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6434,12 +6530,13 @@ entity world_enemies_npc_256: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.956020
 	_resource_health: 2.469884
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6460,12 +6557,13 @@ entity world_enemies_npc_257: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.895823
 	_resource_health: 2.757489
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6486,12 +6584,13 @@ entity world_enemies_npc_258: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.637632
 	_resource_health: 2.509336
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6512,12 +6611,13 @@ entity world_enemies_npc_259: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.832910
 	_resource_health: 2.779246
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6538,12 +6638,13 @@ entity world_enemies_npc_260: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.623595
 	_resource_health: 2.440640
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6564,12 +6665,13 @@ entity world_enemies_npc_261: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.917401
 	_resource_health: 2.301747
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6590,12 +6692,13 @@ entity world_enemies_npc_262: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.992132
 	_resource_health: 2.749213
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6616,12 +6719,13 @@ entity world_enemies_npc_263: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.741266
 	_resource_health: 2.713187
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6642,12 +6746,13 @@ entity world_enemies_npc_264: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.932970
 	_resource_health: 2.978411
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6668,12 +6773,13 @@ entity world_enemies_npc_265: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.895295
 	_resource_health: 2.650559
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6694,12 +6800,13 @@ entity world_enemies_npc_266: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.560384
 	_resource_health: 2.174105
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6720,12 +6827,13 @@ entity world_enemies_npc_267: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.692715
 	_resource_health: 2.718679
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6746,12 +6854,13 @@ entity world_enemies_npc_268: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.840299
 	_resource_health: 2.462560
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6772,12 +6881,13 @@ entity world_enemies_npc_269: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.894527
 	_resource_health: 2.416800
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6798,12 +6908,13 @@ entity world_enemies_npc_270: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.585989
 	_resource_health: 2.005763
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6824,12 +6935,13 @@ entity world_enemies_npc_271: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 1.881585
 	_resource_health: 2.681821
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6850,12 +6962,13 @@ entity world_enemies_npc_272: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.508378
 	_resource_health: 3.814861
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6876,12 +6989,13 @@ entity world_enemies_npc_273: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.743017
 	_resource_health: 3.740103
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6902,12 +7016,13 @@ entity world_enemies_npc_274: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.934713
 	_resource_health: 3.557446
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6928,12 +7043,13 @@ entity world_enemies_npc_275: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.793741
 	_resource_health: 3.506428
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6954,12 +7070,13 @@ entity world_enemies_npc_276: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.425579
 	_resource_health: 3.556953
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -6980,12 +7097,13 @@ entity world_enemies_npc_277: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.891094
 	_resource_health: 3.600542
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7006,12 +7124,13 @@ entity world_enemies_npc_278: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.242117
 	_resource_health: 3.591173
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7032,12 +7151,13 @@ entity world_enemies_npc_279: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.841048
 	_resource_health: 3.916451
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7058,12 +7178,13 @@ entity world_enemies_npc_280: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.995045
 	_resource_health: 3.729384
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7084,12 +7205,13 @@ entity world_enemies_npc_281: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.280435
 	_resource_health: 3.817729
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7110,12 +7232,13 @@ entity world_enemies_npc_282: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 3.089164
 	_resource_health: 3.894954
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7136,12 +7259,13 @@ entity world_enemies_npc_283: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.732425
 	_resource_health: 3.769013
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7162,12 +7286,13 @@ entity world_enemies_npc_284: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.758696
 	_resource_health: 3.734144
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7188,12 +7313,13 @@ entity world_enemies_npc_285: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 3.025478
 	_resource_health: 3.880374
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7214,12 +7340,13 @@ entity world_enemies_npc_286: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 3.036463
 	_resource_health: 3.984872
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7240,12 +7367,13 @@ entity world_enemies_npc_287: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.210758
 	_resource_health: 3.840903
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7266,12 +7394,13 @@ entity world_enemies_npc_288: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.915615
 	_resource_health: 3.762893
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7293,12 +7422,13 @@ entity world_enemies_npc_289: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.718165
 	_resource_health: 3.752000
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7320,12 +7450,13 @@ entity world_enemies_npc_290: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.975892
 	_resource_health: 3.757372
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7347,12 +7478,13 @@ entity world_enemies_npc_291: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.644355
 	_resource_health: 3.772283
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7374,12 +7506,13 @@ entity world_enemies_npc_292: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 3.015175
 	_resource_health: 3.751217
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7401,12 +7534,13 @@ entity world_enemies_npc_293: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.683947
 	_resource_health: 3.724979
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7428,12 +7562,13 @@ entity world_enemies_npc_294: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.521293
 	_resource_health: 3.948938
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7455,12 +7590,13 @@ entity world_enemies_npc_295: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.663059
 	_resource_health: 3.853533
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7482,12 +7618,13 @@ entity world_enemies_npc_296: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.352522
 	_resource_health: 3.660370
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7509,12 +7646,13 @@ entity world_enemies_npc_297: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.674826
 	_resource_health: 3.738575
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7536,12 +7674,13 @@ entity world_enemies_npc_298: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.622449
 	_resource_health: 3.686785
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7563,12 +7702,13 @@ entity world_enemies_npc_299: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.276137
 	_resource_health: 3.505975
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7590,12 +7730,13 @@ entity world_enemies_npc_300: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.223971
 	_resource_health: 3.712679
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7617,12 +7758,13 @@ entity world_enemies_npc_301: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.822919
 	_resource_health: 3.798598
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7644,12 +7786,13 @@ entity world_enemies_npc_302: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.203244
 	_resource_health: 3.527028
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7671,12 +7814,13 @@ entity world_enemies_npc_303: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.517925
 	_resource_health: 3.864331
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7698,12 +7842,13 @@ entity world_enemies_npc_304: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 3.007862
 	_resource_health: 3.669455
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7725,12 +7870,13 @@ entity world_enemies_npc_305: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.238346
 	_resource_health: 3.909727
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7752,12 +7898,13 @@ entity world_enemies_npc_306: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.973350
 	_resource_health: 3.991500
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7779,12 +7926,13 @@ entity world_enemies_npc_307: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.743109
 	_resource_health: 3.968021
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7806,12 +7954,13 @@ entity world_enemies_npc_308: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 3.001049
 	_resource_health: 3.652947
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7833,12 +7982,13 @@ entity world_enemies_npc_309: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.613434
 	_resource_health: 3.924077
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7860,12 +8010,13 @@ entity world_enemies_npc_310: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.912190
 	_resource_health: 3.761155
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7887,12 +8038,13 @@ entity world_enemies_npc_311: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.660580
 	_resource_health: 3.913089
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7914,12 +8066,13 @@ entity world_enemies_npc_312: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 3.002721
 	_resource_health: 3.537856
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7941,12 +8094,13 @@ entity world_enemies_npc_313: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.244595
 	_resource_health: 3.665247
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7968,12 +8122,13 @@ entity world_enemies_npc_314: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.542726
 	_resource_health: 3.754672
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -7995,12 +8150,13 @@ entity world_enemies_npc_315: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.534506
 	_resource_health: 3.922074
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -8022,12 +8178,13 @@ entity world_enemies_npc_316: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.340249
 	_resource_health: 3.645089
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -8049,12 +8206,13 @@ entity world_enemies_npc_317: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.897360
 	_resource_health: 3.647268
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -8076,12 +8234,13 @@ entity world_enemies_npc_318: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.366245
 	_resource_health: 3.926664
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[
@@ -8103,12 +8262,13 @@ entity world_enemies_npc_319: !NPC
 	_sprite_dead: goblin_boss_3_dead
 	_weapon_damage: 2.307127
 	_resource_health: 3.819646
+	_resource_mana: 1
 	_creature_type: humanoid
 	_loot_table: __generation_jobs_world_drops
 	_abilities:
 	[
-		{ id: npc_attack }
 		{ id: npc_firebolt }
+		{ id: npc_attack }
 	]
 	_tags:
 	[

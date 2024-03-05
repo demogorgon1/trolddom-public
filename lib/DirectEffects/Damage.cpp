@@ -27,6 +27,10 @@ namespace tpublic::DirectEffects
 				{
 					m_damageType = DirectEffect::StringToDamageType(aChild->GetIdentifier());
 				}
+				else if(aChild->m_name == "level_curve")
+				{
+					m_levelCurve = UIntCurve<uint32_t>(aChild);
+				}
 				else if(aChild->m_name == "base")
 				{
 					if(aChild->m_type == SourceNode::TYPE_ARRAY)
@@ -72,6 +76,7 @@ namespace tpublic::DirectEffects
 		ToStreamBase(aStream);
 		aStream->WritePOD(m_damageType);
 		aStream->WritePOD(m_damageBase);
+		m_levelCurve.ToStream(aStream);
 
 		if(m_damageBase == DirectEffect::DAMAGE_BASE_RANGE)
 		{
@@ -89,6 +94,8 @@ namespace tpublic::DirectEffects
 		if (!aStream->ReadPOD(m_damageType))
 			return false;
 		if (!aStream->ReadPOD(m_damageBase))
+			return false;
+		if(!m_levelCurve.FromStream(aStream))
 			return false;
 
 		if (m_damageBase == DirectEffect::DAMAGE_BASE_RANGE)
@@ -142,6 +149,8 @@ namespace tpublic::DirectEffects
 		default:
 			break;
 		}
+
+		damage += m_levelCurve.Sample(sourceCombatPublic->m_level);
 
 		CombatEvent::Id result = aId;
 

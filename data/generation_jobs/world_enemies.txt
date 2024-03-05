@@ -20,6 +20,8 @@ loot_table .world_drops:
 	count: @_count
 	elite: @_elite	
 	abilities: @_abilities
+	
+	<exists _has_mana> has_mana: @_has_mana
 }
 
 !define local NPC_HUMANOID_WEAK
@@ -35,6 +37,8 @@ loot_table .world_drops:
 	count: @_count
 	elite: @_elite	
 	abilities: @_abilities
+
+	<exists _has_mana> has_mana: @_has_mana	
 }
 
 !define local NPC_HUMANOID_MINOR_BOSS
@@ -51,6 +55,8 @@ loot_table .world_drops:
 	sprite: @_sprite
 	count: @_count
 	abilities: @_abilities
+	
+	<exists _has_mana> has_mana: @_has_mana	
 }
 
 !define local NPC_HUMANOID_MAJOR_BOSS
@@ -67,6 +73,8 @@ loot_table .world_drops:
 	sprite: @_sprite
 	count: @_count
 	abilities: @_abilities
+	
+	<exists _has_mana> has_mana: @_has_mana	
 }
 
 tag_context .adjective_evil:
@@ -245,35 +253,35 @@ generation_job world_enemies:
 		{
 			level_range: [ 1 8 ]		
 
-			npcs: !NPC_HUMANOID_WEAK { _faction: goblins _name_template: .caster_goblin _sprite: .caster_goblin_sprite _count: 16 _elite: false _abilities: 1 }
-			npcs: !NPC_HUMANOID_WEAK { _faction: goblins _name_template: .caster_goblin _sprite: .caster_goblin_sprite _count: 16 _elite: true _abilities: 1 }
+			npcs: !NPC_HUMANOID_WEAK { _faction: goblins _name_template: .caster_goblin _sprite: .caster_goblin_sprite _count: 16 _elite: false _abilities: 1 _has_mana: true }
+			npcs: !NPC_HUMANOID_WEAK { _faction: goblins _name_template: .caster_goblin _sprite: .caster_goblin_sprite _count: 16 _elite: true _abilities: 1 _has_mana: true }
 		}
 		
 		{
 			level_range: [ 9 10 ]
 			
-			npcs: !NPC_HUMANOID_WEAK { _faction: goblins _name_template: .caster_goblin _sprite: .caster_goblin_sprite _count: 16 _elite: false _abilities: 1 }
-			npcs: !NPC_HUMANOID_WEAK { _faction: goblins _name_template: .caster_goblin _sprite: .caster_goblin_sprite _count: 16 _elite: true _abilities: 1 }		
+			npcs: !NPC_HUMANOID_WEAK { _faction: goblins _name_template: .caster_goblin _sprite: .caster_goblin_sprite _count: 16 _elite: false _abilities: 1 _has_mana: true }
+			npcs: !NPC_HUMANOID_WEAK { _faction: goblins _name_template: .caster_goblin _sprite: .caster_goblin_sprite _count: 16 _elite: true _abilities: 1 _has_mana: true }		
 		}
 			
 		{
 			level_range: [ 1 8 ]		
-			npcs: !NPC_HUMANOID_MINOR_BOSS { _faction: goblins _name_template: .goblin_minor_boss _sprite: .caster_goblin_boss_sprite _count: 16 _abilities: 2 }
+			npcs: !NPC_HUMANOID_MINOR_BOSS { _faction: goblins _name_template: .goblin_minor_boss _sprite: .caster_goblin_boss_sprite _count: 16 _abilities: 2 _has_mana: true }
 		}
 		
 		{
 			level_range: [ 9 10 ]		
-			npcs: !NPC_HUMANOID_MINOR_BOSS { _faction: goblins _name_template: .goblin_minor_boss _sprite: .caster_goblin_boss_sprite _count: 32 _abilities: 2 }
+			npcs: !NPC_HUMANOID_MINOR_BOSS { _faction: goblins _name_template: .goblin_minor_boss _sprite: .caster_goblin_boss_sprite _count: 32 _abilities: 2 _has_mana: true }
 		}	
 
 		{
 			level_range: [ 1 8 ]		
-			npcs: !NPC_HUMANOID_MAJOR_BOSS { _faction: goblins _name_template: .goblin_minor_boss _sprite: .caster_goblin_boss_sprite _count: 16 _abilities: 3 }
+			npcs: !NPC_HUMANOID_MAJOR_BOSS { _faction: goblins _name_template: .goblin_minor_boss _sprite: .caster_goblin_boss_sprite _count: 16 _abilities: 3 _has_mana: true }
 		}
 
 		{
 			level_range: [ 9 10 ]		
-			npcs: !NPC_HUMANOID_MAJOR_BOSS { _faction: goblins _name_template: .goblin_major_boss _sprite: .caster_goblin_boss_sprite _count: 32 _abilities: 3 }
+			npcs: !NPC_HUMANOID_MAJOR_BOSS { _faction: goblins _name_template: .goblin_major_boss _sprite: .caster_goblin_boss_sprite _count: 32 _abilities: 3 _has_mana: true }
 		}		
 	}
 

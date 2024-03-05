@@ -41,6 +41,7 @@ ability npc_strike:
 		flags: [ can_be_critical ]
 		damage_type: physical
 		base: weapon
+		level_curve: [ [ 1 5 ] [ 10 20 ] ]
 	}
 }
 
@@ -62,5 +63,6 @@ ability npc_firebolt:
 		flags: [ can_be_critical ]
 		damage_type: physical
 		base: [ 10 20 ]
+		level_curve: [ [ 1 0 ] [ 10 20 ] ]
 	}
 }
