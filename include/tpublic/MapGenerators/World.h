@@ -268,6 +268,7 @@ namespace tpublic::MapGenerators
 				Vec2										m_position;
 				std::vector<MinorBoss>						m_subBosses;
 				uint32_t									m_factionId = 0;
+				uint32_t									m_influenceTileTransformThreshold = 0;
 			};
 
 			struct LevelMapPoint
@@ -1406,6 +1407,8 @@ namespace tpublic::MapGenerators
 						m_mapEntitySpawnId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aChild->GetIdentifier());
 					else if (aChild->m_name == "influence")
 						m_influence = aChild->GetUInt32();
+					else if (aChild->m_name == "influence_tile_transform_threshold")
+						m_influenceTileTransformThreshold = UIntRange(aChild);
 					else if(aChild->m_name == "minor_bosses")
 						m_minorBosses = std::make_unique<MinorBosses>(aChild);
 					else if(aChild->m_name == "pack")
@@ -1423,6 +1426,7 @@ namespace tpublic::MapGenerators
 				aWriter->WriteUInt(m_tagContextId);
 				aWriter->WriteUInt(m_mapEntitySpawnId);
 				aWriter->WriteUInt(m_influence);
+				m_influenceTileTransformThreshold.ToStream(aWriter);
 				aWriter->WriteObjectPointers(m_packs);
 			}
 
@@ -1439,6 +1443,8 @@ namespace tpublic::MapGenerators
 					return false;
 				if (!aReader->ReadUInt(m_influence))
 					return false;
+				if(!m_influenceTileTransformThreshold.FromStream(aReader))
+					return false;
 				if(!aReader->ReadObjectPointers(m_packs))
 					return false;
 				return true;
@@ -1452,6 +1458,7 @@ namespace tpublic::MapGenerators
 			uint32_t									m_tagContextId = 0;
 			uint32_t									m_mapEntitySpawnId = 0;
 			uint32_t									m_influence = 0;
+			UIntRange									m_influenceTileTransformThreshold;
 			std::vector<std::unique_ptr<Pack>>			m_packs;
 		};
 

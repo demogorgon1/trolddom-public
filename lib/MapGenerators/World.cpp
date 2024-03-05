@@ -3,6 +3,7 @@
 #include <tpublic/Components/CombatPublic.h>
 
 #include <tpublic/Data/Doodad.h>
+#include <tpublic/Data/Faction.h>
 #include <tpublic/Data/Noise.h>
 #include <tpublic/Data/Terrain.h>
 
@@ -126,9 +127,20 @@ namespace tpublic::MapGenerators
 					break;
 				}
 			}
-			
+		
 			if(tileSpriteId != 0)
+			{
+				const LevelMapPoint& levelMapPoint = m_levelMap[i];
+				if(levelMapPoint.m_boss != NULL && levelMapPoint.m_influence > levelMapPoint.m_boss->m_influenceTileTransformThreshold && levelMapPoint.m_boss->m_factionId)
+				{
+					const Data::Faction* faction = m_manifest->GetById<Data::Faction>(levelMapPoint.m_boss->m_factionId);
+					uint32_t toTileSpriteId = faction->GetInfluenceTileTransform(tileSpriteId);
+					if(toTileSpriteId != 0)
+						tileSpriteId = toTileSpriteId;
+				}
+
 				aOutMapData->m_tileMap[i] = tileSpriteId;
+			}
 		}
 
 		// Player spawns
@@ -1433,6 +1445,7 @@ namespace tpublic::MapGenerators
 		std::unique_ptr<Builder::Boss> t = std::make_unique<Builder::Boss>();
 		t->m_tagContextId = m_tagContextId;
 		t->m_influence = m_influence;
+		t->m_influenceTileTransformThreshold = m_influenceTileTransformThreshold.GetRandom(aBuilder->m_random);
 		t->m_mapEntitySpawnId = m_mapEntitySpawnId;
 		t->m_minorBosses = m_minorBosses.get();
 

@@ -4,6 +4,8 @@ faction monsters:
 
 faction goblins:
 {
+	influence_tile_transform: { from: grass to: dirt }
+	influence_tile_transform: { from: dark_grass to: mud }
 }
 
 faction wildlife:

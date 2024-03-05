@@ -119,17 +119,17 @@ tag_context .caster_enemy:
 
 map_entity_spawn .major_boss:
 {	
-	spawn_timer: { cooldown_range_min: 36000 cooldown_range_max: 48000 }
+	spawn_timer: { cooldown_range_min: 36000 cooldown_range_max: 48000 min_delay: 32000 }
 }
 
 map_entity_spawn .minor_boss:
 {	
-	spawn_timer: { cooldown_range_min: 24000 cooldown_range_max: 36000 }
+	spawn_timer: { cooldown_range_min: 24000 cooldown_range_max: 36000 min_delay: 20000 }
 }
 
 map_entity_spawn .pack:
 {	
-	spawn_timer: { cooldown_range_min: 600 cooldown_range_max: 1200 }
+	spawn_timer: { cooldown_range_min: 600 cooldown_range_max: 1200 min_delay: 500 }
 }
 
 map_entity_spawn .object:
@@ -140,6 +140,7 @@ map_entity_spawn .object:
 {
 	tag_context: .major_boss 
 	influence: 128 
+	influence_tile_transform_threshold: [ 32 96 ]
 	map_entity_spawn: .major_boss 
 	
 	minor_bosses:
@@ -319,7 +320,7 @@ map gateway_world:
 			execute add_boss: !BOSS{}
 			
 			execute level_range: [ 8 10 ]
-			execute player_spawns: 4
+			execute player_spawns: 4								
 		}		
 	}
 }
