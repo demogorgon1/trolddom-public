@@ -228,14 +228,14 @@ map gateway_world:
 	string: "Gateway World"
 	type: open_world
 	default_player_spawn: .player_spawn
-	has_overview_map: false
+	has_dynamic_overview_map: true
 	seed: time_seed
 
 	default_tile: water_1
 	default_fishing_loot_table: fish
 	view_attenuation: 0
 	view_attenuation_bias: 0
-	view_hidden_visibility: 35		
+	view_hidden_visibility: 35			
 
 	generator world:
 	{
