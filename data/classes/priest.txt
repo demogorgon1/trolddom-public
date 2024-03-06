@@ -107,6 +107,8 @@ class priest:
 	string: "Priest"	
 	description: "Channel the holy powers to heal and support your friends or smite your enemies with divine punishment."
 	
+	systems: [ combat health_regen mana_regen ]
+	
 	sprite: priest
 	sprite_dead: priest_dead
 	

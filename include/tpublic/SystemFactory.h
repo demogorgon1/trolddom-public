@@ -7,6 +7,7 @@
 #include "Systems/ManaRegen.h"
 #include "Systems/NPC.h"
 #include "Systems/Openable.h"
+#include "Systems/Rage.h"
 #include "Systems/Shrine.h"
 
 #include "System.h"
@@ -30,6 +31,7 @@ namespace tpublic
 			_Register<Systems::ManaRegen>();
 			_Register<Systems::NPC>();
 			_Register<Systems::Openable>();
+			_Register<Systems::Rage>();
 			_Register<Systems::Shrine>();
 		}
 

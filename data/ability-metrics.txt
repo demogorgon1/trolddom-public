@@ -11,4 +11,13 @@ ability_metrics:
 		[ 50 600 ]
 	]
 	
+	rage_constant_at_level:
+	[
+		[ 1 3 ]
+		[ 10 10 ]
+	]
+	
+	rage_hit_base_per_second: 4
+	rage_crit_base_per_second: 7
+	
 }

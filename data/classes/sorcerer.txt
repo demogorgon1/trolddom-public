@@ -3,6 +3,8 @@ class sorcerer:
 	string: "Sorcerer"	
 	description: "Master the elemental magic and destroy your enemies with fire, ice, and lightning."
 	
+	systems: [ combat health_regen mana_regen ]
+	
 	sprite: sorcerer
 	sprite_dead: sorcerer_dead
 	

@@ -113,10 +113,10 @@ namespace tpublic::DirectEffects
 	Damage::Resolve(
 		int32_t							/*aTick*/,
 		std::mt19937&					aRandom,
-		const Manifest*					/*aManifest*/,
+		const Manifest*					aManifest,
 		CombatEvent::Id					aId,
 		uint32_t						aAbilityId,
-		const EntityInstance*			aSource,
+		EntityInstance*					aSource,
 		EntityInstance*					aTarget,
 		const ItemInstanceReference&	/*aItem*/,
 		IResourceChangeQueue*			aResourceChangeQueue,
@@ -126,7 +126,7 @@ namespace tpublic::DirectEffects
 	{
 		const Components::CombatPrivate* sourceCombatPrivate = aSource->GetComponent<Components::CombatPrivate>();
 		const Components::CombatPrivate* targetCombatPrivate = aTarget->GetComponent<Components::CombatPrivate>();
-		const Components::CombatPublic* sourceCombatPublic = aSource->GetComponent<Components::CombatPublic>();
+		Components::CombatPublic* sourceCombatPublic = aSource->GetComponent<Components::CombatPublic>();
 		Components::CombatPublic* targetCombatPublic = aTarget->GetComponent<Components::CombatPublic>();
 		const Components::Auras* targetAuras = aTarget->GetComponent<Components::Auras>();
 
@@ -178,12 +178,40 @@ namespace tpublic::DirectEffects
 			damage = (uint32_t)((float)damage * damageMultiplier);
 		}
 
+		if (targetAuras != NULL)
+			damage = targetAuras->FilterDamageInput(m_damageType, damage);
+
+		// Rage
+		if(m_flags & DirectEffect::FLAG_GENERATE_RAGE)
+		{
+			size_t rageResourceIndex;
+			if (sourceCombatPublic->GetResourceIndex(Resource::ID_RAGE, rageResourceIndex))
+			{
+				const AbilityMetrics* abilityMetrics = &aManifest->m_abilityMetrics;
+				int32_t rageConstant = (int32_t)abilityMetrics->m_rageConstantAtLevelCurve.Sample(sourceCombatPublic->m_level) + 1;
+				int32_t rageBasePerSecond = result == CombatEvent::ID_CRITICAL ? (int32_t)abilityMetrics->m_rageCritBasePerSecond : (int32_t)abilityMetrics->m_rageHitBasePerSecond;
+				int32_t rageBase = (sourceCombatPrivate->m_weaponCooldown * rageBasePerSecond) / 20;
+				int32_t rage = (int32_t)damage / rageConstant + rageBase;
+				int32_t rageMax = (4 * (int32_t)damage) / rageConstant;
+				if(rage > rageMax)
+					rage = rageMax;
+
+				aResourceChangeQueue->AddResourceChange(
+					result,
+					aAbilityId,
+					aSource->GetEntityInstanceId(),
+					aTarget->GetEntityInstanceId(),
+					sourceCombatPublic,
+					rageResourceIndex,
+					rage);
+			}
+
+		}
+
+		// Health
 		size_t healthResourceIndex;
 		if(targetCombatPublic->GetResourceIndex(Resource::ID_HEALTH, healthResourceIndex))
 		{
-			if(targetAuras != NULL)
-				damage = targetAuras->FilterDamageInput(m_damageType, damage);
-
 			aResourceChangeQueue->AddResourceChange(
 				result,
 				aAbilityId,
@@ -192,12 +220,15 @@ namespace tpublic::DirectEffects
 				targetCombatPublic,
 				healthResourceIndex,
 				-(int32_t)damage);
+		}
 
+		// Threat
+		{
 			int32_t threat = (int32_t)damage;
-			if(result == CombatEvent::ID_CRITICAL)
+			if (result == CombatEvent::ID_CRITICAL)
 				threat = (threat * 3) / 2; // Crits generate more threat per damage than non-crits
 
-			if(aTarget->GetEntityId() != 0) // Not a player
+			if (aTarget->GetEntityId() != 0) // Not a player
 				aEventQueue->EventQueueThreat(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), threat);
 		}
 	}

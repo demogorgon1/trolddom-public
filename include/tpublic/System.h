@@ -18,6 +18,7 @@ namespace tpublic
 			ID_OPENABLE,
 			ID_SHRINE,
 			ID_GATEWAY,
+			ID_RAGE,
 
 			NUM_IDS
 		};
@@ -33,7 +34,8 @@ namespace tpublic
 			"mana_regen",
 			"openable",
 			"shrine",
-			"gateway"
+			"gateway",
+			"rage"
 		};
 
 		static_assert(sizeof(SYSTEM_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

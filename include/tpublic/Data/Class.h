@@ -6,6 +6,7 @@
 #include "../ItemType.h"
 #include "../Resource.h"
 #include "../Stat.h"
+#include "../System.h"
 
 namespace tpublic
 {
@@ -520,15 +521,23 @@ namespace tpublic
 							std::vector<ItemType::Id> itemTypes;
 							aMember->GetIdArrayWithLookup<ItemType::Id, ItemType::INVALID_ID>(itemTypes, [&](
 								const char* aIdentifier) -> ItemType::Id
-								{
-									return ItemType::StringToId(aIdentifier);
-								});
+							{
+								return ItemType::StringToId(aIdentifier);
+							});
 							for (ItemType::Id itemType : itemTypes)
 							{
 								uint32_t t = (uint32_t)itemType;
 								static_assert((uint32_t)ItemType::NUM_IDS <= 32);
 								m_itemTypesMask |= (1 << t);
 							}
+						}
+						else if (aMember->m_name == "systems")
+						{
+							aMember->GetIdArrayWithLookup<uint32_t, System::INVALID_ID>(m_systems, [&](
+								const char* aIdentifier) -> uint32_t
+							{
+								return (uint32_t)System::StringToId(aIdentifier);
+							});
 						}
 						else
 						{
@@ -556,6 +565,7 @@ namespace tpublic
 				m_statsConversion.ToStream(aStream);
 				aStream->WriteUInts(m_talentTrees);
 				aStream->WritePOD(m_itemTypesMask);
+				aStream->WriteUInts(m_systems);
 			}
 			
 			bool	
@@ -590,6 +600,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadPOD(m_itemTypesMask))
 					return false;
+				if(!aStream->ReadUInts(m_systems))
+					return false;
 				return true;
 			}
 
@@ -608,6 +620,7 @@ namespace tpublic
 			StatsConversion											m_statsConversion;
 			std::vector<uint32_t>									m_talentTrees;
 			uint32_t												m_itemTypesMask = 0;
+			std::vector<uint32_t>									m_systems;
 		};
 
 	}

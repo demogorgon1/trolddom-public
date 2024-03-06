@@ -93,7 +93,7 @@ namespace tpublic::DirectEffects
 		const Manifest*					/*aManifest*/,
 		CombatEvent::Id					/*aId*/,
 		uint32_t						/*aAbilityId*/,
-		const EntityInstance*			/*aSource*/,
+		EntityInstance*					/*aSource*/,
 		EntityInstance*					aTarget,
 		const ItemInstanceReference&	/*aItem*/,
 		IResourceChangeQueue*			/*aCombatResultQueue*/,
