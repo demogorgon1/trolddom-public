@@ -26,6 +26,8 @@ namespace tpublic
 					m_spell.FromSource(aChild);
 				else if (aChild->m_name == "misc")
 					m_misc.FromSource(aChild);
+				else if(aChild->m_name == "consumable")
+					m_consumableSoundId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SOUND, aChild->GetIdentifier());
 				else
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 			});
@@ -39,6 +41,7 @@ namespace tpublic
 			m_ranged.ToStream(aStream);
 			m_spell.ToStream(aStream);
 			m_misc.ToStream(aStream);
+			aStream->WriteUInt(m_consumableSoundId);				
 		}
 
 		bool
@@ -53,6 +56,8 @@ namespace tpublic
 				return false;
 			if (!m_misc.FromStream(aStream))
 				return false;
+			if(!aStream->ReadUInt(m_consumableSoundId))
+				return false;
 			return true;
 		}
 				
@@ -61,6 +66,7 @@ namespace tpublic
 		SoundEffect::Collection	m_ranged;
 		SoundEffect::Collection	m_spell;
 		SoundEffect::Collection	m_misc;
+		uint32_t				m_consumableSoundId = 0;
 	};
 
 }

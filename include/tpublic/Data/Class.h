@@ -516,6 +516,10 @@ namespace tpublic
 						{
 							aMember->GetIdArray(DataType::ID_TALENT_TREE, m_talentTrees);
 						}
+						else if (aMember->m_name == "start_inventory")
+						{
+							aMember->GetIdArray(DataType::ID_ITEM, m_startInventory);
+						}
 						else if (aMember->m_name == "item_types")
 						{
 							std::vector<ItemType::Id> itemTypes;
@@ -566,6 +570,7 @@ namespace tpublic
 				aStream->WriteUInts(m_talentTrees);
 				aStream->WritePOD(m_itemTypesMask);
 				aStream->WriteUInts(m_systems);
+				aStream->WriteUInts(m_startInventory);
 			}
 			
 			bool	
@@ -600,7 +605,9 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadPOD(m_itemTypesMask))
 					return false;
-				if(!aStream->ReadUInts(m_systems))
+				if (!aStream->ReadUInts(m_systems))
+					return false;
+				if (!aStream->ReadUInts(m_startInventory))
 					return false;
 				return true;
 			}
@@ -615,6 +622,7 @@ namespace tpublic
 			uint32_t												m_defaultAttackAbilityId = 0;
 			std::unique_ptr<LevelProgression>						m_levelProgression;
 			std::vector<StartEquipment>								m_startEquipment;
+			std::vector<uint32_t>									m_startInventory;
 			ActionBar												m_defaultActionBar;
 			std::vector<std::unique_ptr<StartMap>>					m_startMaps;
 			StatsConversion											m_statsConversion;

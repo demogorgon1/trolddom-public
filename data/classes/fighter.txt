@@ -127,13 +127,33 @@ ability throw_rock:
 	speed: 6
 	projectile: throw_rock
 	cast_time: 20
-	talent_tree: fighter_subtlety
+	talent_tree: fighter_subtlety	
 	
 	direct_effect damage:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical			
 		base: [ 3 6 ]
+	}
+}
+
+ability strike:
+{
+	string: "Strike"
+	range: 1	
+	cooldowns: [ global ]
+	flags: [ offensive target_other target_hostile can_be_dodged can_be_parried can_miss ]
+	states: [ default in_combat ]
+	icon: icon_strike
+	delay: 3
+	resource_cost rage: 10
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		base: weapon
+		level_curve: [ [ 1 3 ] [ 10 12 ] ]
 	}
 }
 
@@ -165,14 +185,18 @@ class fighter:
 	color_1: [ 128 32 0 ] 
 	color_2: [ 70 32 0 ] 
 	default_attack: fighter_attack
-	default_action_bar: [ fighter_attack strike gaze_of_death throw_rock dont_touch_me_bro immortality push ]
+	default_action_bar: [ fighter_attack strike push ]
 	talent_trees: [ fighter_protection fighter_combat fighter_subtlety ]
 	
 	item_types: [ armor_cloth armor_mail armor_plate weapon_1h_sword weapon_1h_mace weapon_1h_axe weapon_1h_knife
 	              weapon_2h_sword weapon_2h_mace weapon_2h_axe weapon_2h_staff shield ]
 
 	start_map open_world: [ ]
-	start_equipment main_hand: weapon_the_dev_tool
+	start_equipment main_hand: weapon_rusty_sword
+	start_equipment chest: chest_flimsy_mail_shirt
+	start_equipment feet: feet_flimsy_mail_boots
+	start_equipment legs: legs_flimsy_mail_pants
+	start_inventory: [ consumable_dry_bread consumable_dry_bread consumable_dry_bread consumable_dry_bread consumable_dry_bread ]
 	
 	stats_conversion:
 	{
@@ -196,12 +220,7 @@ class fighter:
 			[
 				fighter_attack
 				strike
-				gaze_of_death
-				throw_rock
-				dont_touch_me_bro
-				immortality 
 				push
-				smoke_bomb
 			]
 						
 			stats:
@@ -218,5 +237,140 @@ class fighter:
 			
 			add_unarmed_weapon_damage: [ 2 4 ]
 		}
+		
+		{
+			level: 2
+			
+			unlock_abilities:
+			[
+				throw_rock
+			]
+			
+			stats:
+			{
+				strength: 1
+				constitution: 1
+			}
+			
+			resource health: { add_max: 10 }
+		}
+		
+		{
+			level: 3
+			
+			unlock_abilities:
+			[
+				smoke_bomb
+			]
+			
+			stats:
+			{
+				dexterity: 1
+				constitution: 1
+				spirit: 1
+			}			
+		}		
+		
+		{
+			level: 4
+			
+			unlock_abilities:
+			[
+			]
+			
+			stats:
+			{
+				strength: 1
+				constitution: 1
+			}			
+		}				
+		
+		{
+			level: 5
+			
+			unlock_abilities:
+			[
+			]
+			
+			stats:
+			{
+				dexterity: 1
+				constitution: 1
+				spirit: 1
+			}			
+		}		
+		
+		{
+			level: 6
+			
+			unlock_abilities:
+			[
+			]
+			
+			stats:
+			{
+				strength: 1
+				constitution: 1
+			}			
+		}				
+
+		{
+			level: 7
+			
+			unlock_abilities:
+			[
+			]
+			
+			stats:
+			{
+				dexterity: 1
+				constitution: 1
+				spirit: 1
+			}			
+		}		
+		
+		{
+			level: 8
+			
+			unlock_abilities:
+			[
+			]
+			
+			stats:
+			{
+				strength: 1
+				constitution: 1
+			}			
+		}				
+
+		{
+			level: 9
+			
+			unlock_abilities:
+			[
+			]
+			
+			stats:
+			{
+				dexterity: 1
+				constitution: 1
+				spirit: 1
+			}			
+		}		
+		
+		{
+			level: 10
+			
+			unlock_abilities:
+			[
+			]
+			
+			stats:
+			{
+				strength: 1
+				constitution: 1
+			}			
+		}				
+		
 	]
 }

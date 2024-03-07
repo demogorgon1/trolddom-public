@@ -134,7 +134,7 @@ namespace tpublic
 			uint32_t level = 0;
 			for(uint32_t t : m_levels)
 			{
-				if(t >= (uint32_t)aFavor)
+				if((uint32_t)aFavor >= t)
 					break;
 
 				level++;

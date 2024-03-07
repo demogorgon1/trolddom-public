@@ -181,7 +181,7 @@ namespace tpublic::DirectEffects
 		if (targetAuras != NULL)
 			damage = targetAuras->FilterDamageInput(m_damageType, damage);
 
-		// Rage
+		// Rage generation for source
 		if(m_flags & DirectEffect::FLAG_GENERATE_RAGE)
 		{
 			size_t rageResourceIndex;
@@ -200,12 +200,31 @@ namespace tpublic::DirectEffects
 					result,
 					aAbilityId,
 					aSource->GetEntityInstanceId(),
-					aTarget->GetEntityInstanceId(),
+					aSource->GetEntityInstanceId(),
 					sourceCombatPublic,
 					rageResourceIndex,
 					rage);
 			}
+		}
 
+		// Rage geneation for target
+		{
+			size_t rageResourceIndex;
+			if (targetCombatPublic->GetResourceIndex(Resource::ID_RAGE, rageResourceIndex))
+			{
+				const AbilityMetrics* abilityMetrics = &aManifest->m_abilityMetrics;
+				int32_t rageConstant = (int32_t)abilityMetrics->m_rageConstantAtLevelCurve.Sample(targetCombatPublic->m_level) + 1;
+				int32_t rage = (int32_t)(5 * damage) / (8 * rageConstant) + 1;
+
+				aResourceChangeQueue->AddResourceChange(
+					result,
+					aAbilityId,
+					aSource->GetEntityInstanceId(),
+					aTarget->GetEntityInstanceId(),
+					targetCombatPublic,
+					rageResourceIndex,
+					rage);
+			}
 		}
 
 		// Health

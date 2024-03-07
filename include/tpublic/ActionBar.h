@@ -9,7 +9,7 @@ namespace tpublic
 	class ActionBar
 	{
 	public:
-		static const size_t MAX_SIZE = 10;
+		static const size_t MAX_SIZE = 12;
 
 		void
 		SetSlot(

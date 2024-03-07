@@ -38,11 +38,12 @@ namespace tpublic
 				FLAG_AOE_LOW_HEALTH_PRIO			= 0x00001000,
 				FLAG_OFFENSIVE						= 0x00002000,
 				FLAG_SPELL							= 0x00004000,
-				FLAG_ALWAYS_IN_RANGE				= 0x00008000,
-				FLAG_ALWAYS_IN_LINE_OF_SIGHT		= 0x00010000,
-				FLAG_CRAFTING						= 0x00020000,
-				FLAG_HIDDEN							= 0x00040000,
-				FLAG_LATE_COOLDOWN_TRIGGER			= 0x00080000
+				FLAG_CONSUMABLE						= 0x00008000,
+				FLAG_ALWAYS_IN_RANGE				= 0x00010000,
+				FLAG_ALWAYS_IN_LINE_OF_SIGHT		= 0x00020000,
+				FLAG_CRAFTING						= 0x00040000,
+				FLAG_HIDDEN							= 0x00080000,
+				FLAG_LATE_COOLDOWN_TRIGGER			= 0x00100000
 			};
 
 			static inline Resource::Id
@@ -91,6 +92,8 @@ namespace tpublic
 						flags |= FLAG_AOE_LOW_HEALTH_PRIO;
 					else if (strcmp(identifier, "offensive") == 0)
 						flags |= FLAG_OFFENSIVE;
+					else if (strcmp(identifier, "consumable") == 0)
+						flags |= FLAG_CONSUMABLE;
 					else if (strcmp(identifier, "spell") == 0)
 						flags |= FLAG_SPELL;
 					else if (strcmp(identifier, "always_in_range") == 0)
@@ -351,6 +354,7 @@ namespace tpublic
 			bool IsLateCooldownTrigger() const { return m_flags & FLAG_LATE_COOLDOWN_TRIGGER; }
 			bool IsChanneled() const { return m_channelTicks != 0 && m_channelTickAbilityId != 0; }
 			bool IsOffensive() const { return m_flags & FLAG_OFFENSIVE; }
+			bool IsConsumable() const { return m_flags & FLAG_CONSUMABLE; }
 			
 			bool 
 			IsUsableInState(

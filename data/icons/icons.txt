@@ -122,6 +122,11 @@ sprites:
 	sprite icon_head_4 : { tags: [ icon armor_mail armor_plate head ] }
 	sprite icon_head_5 : { tags: [ icon armor_mail armor_plate head ] }
 	sprite icon_head_6 : { tags: [ icon armor_mail armor_plate head ] }
+	sprite icon_head_7 : { tags: [ icon armor_plate legs ] }
+	sprite icon_head_8 : { tags: [ icon armor_plate legs ] }
+	sprite icon_bread_1 : { tags: [ icon ] }
+	sprite icon_red_apple : { tags: [ icon ] }
+	sprite icon_green_apple : { tags: [ icon ] }
 	
 }
 

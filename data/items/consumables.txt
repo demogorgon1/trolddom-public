@@ -7,6 +7,7 @@ ability consumable_small_healing_potion:
 	direct_effect heal: { base: 20 }
 	consume_items: { consumable_small_healing_potion: 1 }
 	states: [ default in_combat ]
+	sound_effects: { use_local: [ drink_1 ] }
 }
 
 item consumable_small_healing_potion:
@@ -15,7 +16,7 @@ item consumable_small_healing_potion:
 	item_level: 1 
 	icon: icon_small_red_potion
 	string: "Small Healing Potion"
-	stack: 4	
+	stack: 10	
 	required_level: 1
 	use_ability: consumable_small_healing_potion
 	level_range: [ 1 5 ]
@@ -30,6 +31,7 @@ ability consumable_small_mana_potion:
 	#direct_effect heal: { base: 20 }
 	consume_items: { consumable_small_mana_potion: 1 }
 	states: [ default in_combat ]
+	sound_effects: { use_local: [ drink_1 ] }
 }
 
 item consumable_small_mana_potion:
@@ -38,7 +40,7 @@ item consumable_small_mana_potion:
 	item_level: 1 
 	icon: icon_small_blue_potion
 	string: "Small Mana Potion"
-	stack: 4	
+	stack: 10
 	required_level: 1
 	use_ability: consumable_small_mana_potion
 	level_range: [ 1 5 ]

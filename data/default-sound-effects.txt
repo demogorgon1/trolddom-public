@@ -16,5 +16,7 @@ default_sound_effects:
 		vendor: [ sell_1 ]
 		trash: [ impact_8 ]
 	}
+	
+	consumable: eat_1
 
 }
