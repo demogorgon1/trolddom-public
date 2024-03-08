@@ -110,6 +110,9 @@ sprites:
 	sprite gateway_2: { }
 	sprite gateway_3: { }
 	sprite waypoint_1: { }
+	sprite green_gateway_1: { }
+	sprite green_gateway_2: { }
+	sprite green_gateway_3: { }
 	
 }
 

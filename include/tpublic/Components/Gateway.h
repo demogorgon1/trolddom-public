@@ -24,7 +24,8 @@ namespace tpublic
 				FIELD_MAPS,
 				FIELD_ACTIVE_GATEWAY_INSTANCE,
 				FIELD_SCHEDULE,
-				FIELD_USE_POSITION_FOR_RANDOMIZATION
+				FIELD_USE_POSITION_FOR_RANDOMIZATION,
+				FIELD_PLAYER_WORLDS
 			};
 
 			struct Schedule
@@ -65,6 +66,7 @@ namespace tpublic
 				aSchema->DefineCustomObjectNoSource<GatewayInstance>(FIELD_ACTIVE_GATEWAY_INSTANCE, offsetof(Gateway, m_activeGatewayInstance));
 				aSchema->DefineCustomObject<Schedule>(FIELD_SCHEDULE, "schedule", offsetof(Gateway, m_schedule));
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_USE_POSITION_FOR_RANDOMIZATION, "use_position_for_randomization", offsetof(Gateway, m_usePositionForRandomization));
+				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_PLAYER_WORLDS, "player_worlds", offsetof(Gateway, m_playerWorlds));
 			}
 
 			// Public data
@@ -72,6 +74,7 @@ namespace tpublic
 			GatewayInstance			m_activeGatewayInstance;
 			Schedule				m_schedule;
 			bool					m_usePositionForRandomization = false;
+			bool					m_playerWorlds = false;
 		};
 	}
 

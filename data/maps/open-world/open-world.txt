@@ -52,6 +52,11 @@ map_entity_spawn .gateway:
 	entity gateway: { weight: 1 }
 }
 
+map_entity_spawn .player_world_gateway:
+{
+	entity player_world_gateway: { weight: 1 }
+}
+
 map_entity_spawn .spawn_of_umbracoth:
 {
 	entity .spawn_of_umbracoth: { weight: 1 }
@@ -153,6 +158,7 @@ map_palette .stuff:
 	entity_spawn .fisherman: [ 0 2 255 ]
 	entity_spawn .junjun: [ 6 55 255 ]
 	entity_spawn .gateway: [ 54 23 85 ]	
+	entity_spawn .player_world_gateway: [ 23 60 85 ]	
 	entity_spawn .spawn_of_umbracoth: [ 32 0 0 ]	
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn dungeon_1_exit: [ 0 0 200 ]	

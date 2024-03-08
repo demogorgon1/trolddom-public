@@ -27,3 +27,31 @@ entity gateway:
 		}		
 	}
 }
+
+entity player_world_gateway:
+{
+	string: "Player Worlds"
+	
+	components:
+	{
+		position: { }		
+		gateway: 
+		{ 
+			maps: [ player_world ]
+			player_worlds: true
+		}
+		sprite: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ green_gateway_1 green_gateway_2 green_gateway_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+	}
+}
