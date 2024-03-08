@@ -108,12 +108,17 @@ namespace tpublic::Systems
 
 				for (const std::unique_ptr<Components::Auras::Entry>& entry : auras->m_entries)
 				{
-					Components::VisibleAuras::Entry t;
-					t.m_auraId = entry->m_auraId;
-					t.m_entityInstanceId = entry->m_entityInstanceId;
-					t.m_start = entry->m_start;
-					t.m_end = entry->m_end;
-					visibleAuras->m_entries.push_back(t);
+					const Data::Aura* aura = GetManifest()->GetById<Data::Aura>(entry->m_auraId);
+
+					if(aura->m_type != Data::Aura::TYPE_HIDDEN)
+					{
+						Components::VisibleAuras::Entry t;
+						t.m_auraId = entry->m_auraId;
+						t.m_entityInstanceId = entry->m_entityInstanceId;
+						t.m_start = entry->m_start;
+						t.m_end = entry->m_end;
+						visibleAuras->m_entries.push_back(t);
+					}
 
 					if(!visibleAuras->m_stunned && entry->HasEffect(AuraEffect::ID_STUN))
 						visibleAuras->m_stunned = true;
