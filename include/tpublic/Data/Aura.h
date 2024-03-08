@@ -76,7 +76,8 @@ namespace tpublic
 			enum Flag : uint8_t
 			{
 				FLAG_UNIQUE = 0x01,
-				FLAG_CHANNELED = 0x02
+				FLAG_CHANNELED = 0x02,
+				FLAG_HIDE_DESCRIPTION = 0x04
 			};
 
 			static Type
@@ -107,6 +108,8 @@ namespace tpublic
 						flags |= FLAG_UNIQUE;
 					else if (strcmp(string, "channeled") == 0)
 						flags |= FLAG_CHANNELED;
+					else if (strcmp(string, "hide_description") == 0)
+						flags |= FLAG_HIDE_DESCRIPTION;
 					else
 						TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid aura flag.", string);
 				});

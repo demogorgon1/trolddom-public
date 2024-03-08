@@ -98,7 +98,7 @@ ability knock:
 	description: "Stuns target for 3 seconds."
 	range: 1
 	cooldowns: [ global throw_rock ]
-	flags: [ offensive target_other target_hostile can_be_dodged can_be_parried can_miss ]
+	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_miss ]
 	states: [ default in_combat ]
 	icon: icon_knock
 	delay: 3
@@ -121,7 +121,7 @@ ability throw_rock:
 	string: "Throw Rock"
 	range: 6
 	cooldowns: [ global throw_rock ]
-	flags: [ offensive target_other target_hostile can_be_dodged can_miss ]
+	flags: [ ranged offensive target_other target_hostile can_be_dodged can_miss ]
 	states: [ default ]
 	icon: icon_throw_rock
 	speed: 6
@@ -142,11 +142,12 @@ ability strike:
 	string: "Strike"
 	range: 1	
 	cooldowns: [ global ]
-	flags: [ offensive target_other target_hostile can_be_dodged can_be_parried can_miss ]
+	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_miss ]
 	states: [ default in_combat ]
 	icon: icon_strike
 	delay: 3
 	resource_cost rage: 10
+	talent_tree: fighter_combat
 	
 	direct_effect damage:
 	{
@@ -160,7 +161,7 @@ ability strike:
 ability fighter_attack:
 {
 	string: "Attack"
-	flags: [ offensive attack target_other target_hostile can_be_dodged can_be_parried can_miss use_weapon_icon ]	
+	flags: [ melee offensive attack target_other target_hostile can_be_dodged can_be_parried can_miss use_weapon_icon ]	
 	states: [ default in_combat ]
 	delay: 3
 	

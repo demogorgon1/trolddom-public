@@ -30,12 +30,12 @@
 {
 	string: @_string
 	description: @_description
-	flags: [ target_self ]
+	flags: [ target_self consumable ]
 	icon: @_icon
 	consume_items: @_item
 	states: [ default in_combat ]	
 	direct_effect apply_aura: { aura: @_aura }
-	sound_effects: { hit: [] }
+	cooldowns: [ global ]
 }
 
 !define local ITEM_FOOD

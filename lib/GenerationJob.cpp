@@ -345,7 +345,7 @@ namespace tpublic
 				{
 					const StackObject::ItemClass* itemClass = &stackObject->m_itemClass;
 
-					if(itemClass->m_minLevel != 0 && itemLevel < itemClass->m_minLevel )
+					if(itemClass->m_minLevel != 0 && itemLevel < itemClass->m_minLevel)
 						continue;
 
 					if(itemClass->m_minRarity != Rarity::INVALID_ID && (uint32_t)rarity < (uint32_t)itemClass->m_minRarity)
@@ -650,7 +650,7 @@ namespace tpublic
 			combinedAura.m_iconSpriteId = pantheon->m_iconSpriteId;
 			combinedAura.m_duration = blessingDuration;
 			combinedAura.m_type = Data::Aura::TYPE_BUFF;
-			combinedAura.m_flags = Data::Aura::FLAG_UNIQUE;
+			combinedAura.m_flags = Data::Aura::FLAG_UNIQUE | Data::Aura::FLAG_HIDE_DESCRIPTION;
 
 			for(uint32_t blessingRankTagId : blessingRankTags)
 			{

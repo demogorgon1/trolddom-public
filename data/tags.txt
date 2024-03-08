@@ -61,3 +61,25 @@ tag finger: {}
 tag neck: {}
 tag potion: { } 
 
+# Worship tags
+tag light_blessing_rank_1: {}
+tag light_blessing_rank_2: {}
+tag light_blessing_rank_3: {}
+tag light_blessing_rank_4: {}
+tag light_blessing_rank_5: {}
+tag light_blessing_rank_6: {}
+tag light_blessing_rank_7: {}
+tag light_blessing_rank_8: {}
+tag light_blessing_rank_9: {}
+tag light_blessing_rank_10: {}
+
+tag underworld_blessing_rank_1: {}
+tag underworld_blessing_rank_2: {}
+tag underworld_blessing_rank_3: {}
+tag underworld_blessing_rank_4: {}
+tag underworld_blessing_rank_5: {}
+tag underworld_blessing_rank_6: {}
+tag underworld_blessing_rank_7: {}
+tag underworld_blessing_rank_8: {}
+tag underworld_blessing_rank_9: {}
+tag underworld_blessing_rank_10: {}

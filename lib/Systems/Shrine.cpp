@@ -52,6 +52,7 @@ namespace tpublic::Systems
 
 			const Pantheons::Entry* pantheonEntry = GetData()->m_pantheons->GetEntry(shrine->m_pantheonId);
 			TP_CHECK(pantheonEntry != NULL, "Invalid pantheon id: %u", shrine->m_pantheonId);
+			TP_CHECK(pantheonEntry->m_deities.size() > 1, "No deities defined for pantheon: %s", pantheonEntry->m_pantheon->m_name.c_str());
 
 			// The deity is derived from map and position (so a specific shrine will always have the same associated deity)
 			Hash::CheckSum locationHash;

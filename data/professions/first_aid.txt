@@ -44,7 +44,8 @@ aura recently_bandaged:
 {
 	string: @_string
 	description: @_description
-	flags: [ target_other target_self target_friendly ]
+	cooldowns: [ global ]
+	flags: [ target_other target_self target_friendly consumable ]
 	icon: @_icon
 	consume_items: { consumable_linen_bandage: 1 }
 	states: [ default in_combat ]	

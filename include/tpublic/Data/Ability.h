@@ -38,12 +38,14 @@ namespace tpublic
 				FLAG_AOE_LOW_HEALTH_PRIO			= 0x00001000,
 				FLAG_OFFENSIVE						= 0x00002000,
 				FLAG_SPELL							= 0x00004000,
-				FLAG_CONSUMABLE						= 0x00008000,
-				FLAG_ALWAYS_IN_RANGE				= 0x00010000,
-				FLAG_ALWAYS_IN_LINE_OF_SIGHT		= 0x00020000,
-				FLAG_CRAFTING						= 0x00040000,
-				FLAG_HIDDEN							= 0x00080000,
-				FLAG_LATE_COOLDOWN_TRIGGER			= 0x00100000
+				FLAG_MELEE							= 0x00008000,
+				FLAG_RANGED							= 0x00010000,
+				FLAG_CONSUMABLE						= 0x00020000,
+				FLAG_ALWAYS_IN_RANGE				= 0x00040000,
+				FLAG_ALWAYS_IN_LINE_OF_SIGHT		= 0x00080000,
+				FLAG_CRAFTING						= 0x00100000,
+				FLAG_HIDDEN							= 0x00200000,
+				FLAG_LATE_COOLDOWN_TRIGGER			= 0x00400000
 			};
 
 			static inline Resource::Id
@@ -96,6 +98,10 @@ namespace tpublic
 						flags |= FLAG_CONSUMABLE;
 					else if (strcmp(identifier, "spell") == 0)
 						flags |= FLAG_SPELL;
+					else if (strcmp(identifier, "melee") == 0)
+						flags |= FLAG_MELEE;
+					else if (strcmp(identifier, "ranged") == 0)
+						flags |= FLAG_RANGED;
 					else if (strcmp(identifier, "always_in_range") == 0)
 						flags |= FLAG_ALWAYS_IN_RANGE;
 					else if (strcmp(identifier, "always_in_line_of_sight") == 0)
@@ -347,6 +353,7 @@ namespace tpublic
 			bool CanBeBlocked() const { return m_flags & FLAG_CAN_BE_BLOCKED; }
 			bool IsAttack() const { return m_flags & FLAG_ATTACK; }
 			bool AlwaysInRange() const { return m_flags & FLAG_ALWAYS_IN_RANGE; }
+			bool IsMelee() const { return m_flags & FLAG_MELEE; }
 			bool AlwaysInLineOfSight() const { return m_flags & FLAG_ALWAYS_IN_LINE_OF_SIGHT; }
 			bool IsInstantMelee() const { return m_range == 1 && m_castTime == 0; }
 			bool IsCrafting() const { return m_flags & FLAG_CRAFTING; }
