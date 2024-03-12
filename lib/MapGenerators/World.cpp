@@ -782,78 +782,90 @@ namespace tpublic::MapGenerators
 	void			
 	World::Builder::InitPlayerSpawns()
 	{	
-		// First we'll identify positions that are furthest away from any boss
-		std::vector<Vec2> furthestPositions;
-		m_bossDistanceCombined->GetPositionsMoreThanValue(m_bossDistanceCombined->GetMax() - 16, furthestPositions);
-
-		std::vector<Vec2> spawnPositions;
-		int32_t minSpawnDistanceSquared = 32 * 32;
-
-		for(std::unique_ptr<PlayerSpawn>& playerSpawn : m_playerSpawns)
+		if(!m_bossDistanceCombined)
 		{
-			// Try finding a spot from positions furthest from bosses
-			std::optional<Vec2> position;
-			while(furthestPositions.size() > 0 && !position.has_value())
-			{
-				uint32_t i = Roll(0, (uint32_t)furthestPositions.size() - 1);
-				Vec2 tryPosition = furthestPositions[i];
-				Helpers::RemoveCyclicFromVector(furthestPositions, (size_t)i);
+			// No bosses, just put player spawn some random place. Only allow one player spawn
+			if(m_playerSpawns.size() > 1)
+				m_playerSpawns.resize(1);
 
-				bool canUse = true;
-				for(const Vec2& spawnPosition : spawnPositions)
+			if (m_playerSpawns.size() == 1)
+				m_playerSpawns[0]->m_position = *m_walkable.cbegin();
+		}
+		else
+		{
+			// First we'll identify positions that are furthest away from any boss
+			std::vector<Vec2> furthestPositions;
+			m_bossDistanceCombined->GetPositionsMoreThanValue(m_bossDistanceCombined->GetMax() - 16, furthestPositions);
+
+			std::vector<Vec2> spawnPositions;
+			int32_t minSpawnDistanceSquared = 32 * 32;
+
+			for(std::unique_ptr<PlayerSpawn>& playerSpawn : m_playerSpawns)
+			{
+				// Try finding a spot from positions furthest from bosses
+				std::optional<Vec2> position;
+				while(furthestPositions.size() > 0 && !position.has_value())
 				{
-					int32_t dx = spawnPosition.m_x - tryPosition.m_x;
-					int32_t dy = spawnPosition.m_y - tryPosition.m_y;
-					int32_t distanceSquared = dx * dx + dy * dy;
-					if(distanceSquared < minSpawnDistanceSquared)
+					uint32_t i = Roll(0, (uint32_t)furthestPositions.size() - 1);
+					Vec2 tryPosition = furthestPositions[i];
+					Helpers::RemoveCyclicFromVector(furthestPositions, (size_t)i);
+
+					bool canUse = true;
+					for(const Vec2& spawnPosition : spawnPositions)
 					{
-						canUse = false;
-						break;
+						int32_t dx = spawnPosition.m_x - tryPosition.m_x;
+						int32_t dy = spawnPosition.m_y - tryPosition.m_y;
+						int32_t distanceSquared = dx * dx + dy * dy;
+						if(distanceSquared < minSpawnDistanceSquared)
+						{
+							canUse = false;
+							break;
+						}
+					}
+
+					if(canUse)
+						position = tryPosition;
+				}
+
+				if(!position.has_value() && m_playerSpawnDistanceCombined)
+				{
+					assert(furthestPositions.size() == 0);
+
+					std::vector<Vec2> positions;
+					m_playerSpawnDistanceCombined->GetPositionsMoreThanValue(m_playerSpawnDistanceCombined->GetMax() - 8, positions);
+					if(positions.size() > 0)
+					{
+						uint32_t i = Roll(0, (uint32_t)positions.size() - 1);
+						position = positions[i];
 					}
 				}
 
-				if(canUse)
-					position = tryPosition;
-			}
-
-			if(!position.has_value() && m_playerSpawnDistanceCombined)
-			{
-				assert(furthestPositions.size() == 0);
-
-				std::vector<Vec2> positions;
-				m_playerSpawnDistanceCombined->GetPositionsMoreThanValue(m_playerSpawnDistanceCombined->GetMax() - 8, positions);
-				if(positions.size() > 0)
+				if(position.has_value())
 				{
-					uint32_t i = Roll(0, (uint32_t)positions.size() - 1);
-					position = positions[i];
-				}
-			}
+					spawnPositions.push_back(position.value());
 
-			if(position.has_value())
-			{
-				spawnPositions.push_back(position.value());
+					playerSpawn->m_position = position.value();
 
-				playerSpawn->m_position = position.value();
+					DistanceField distanceField((int32_t)m_width, (int32_t)m_height);
+					distanceField.GenerateFromSinglePosition(playerSpawn->m_position, m_walkable, UINT32_MAX);
 
-				DistanceField distanceField((int32_t)m_width, (int32_t)m_height);
-				distanceField.GenerateFromSinglePosition(playerSpawn->m_position, m_walkable, UINT32_MAX);
-
-				for(int32_t y = 0; y < distanceField.m_height; y++)
-				{
-					for (int32_t x = 0; x < distanceField.m_width; x++)
+					for(int32_t y = 0; y < distanceField.m_height; y++)
 					{
-						int32_t i = x + y * distanceField.m_width;
-						if(m_levelMap[i].m_boss != NULL)
-							distanceField.m_data[i] = UINT32_MAX;
+						for (int32_t x = 0; x < distanceField.m_width; x++)
+						{
+							int32_t i = x + y * distanceField.m_width;
+							if(m_levelMap[i].m_boss != NULL)
+								distanceField.m_data[i] = UINT32_MAX;
+						}
 					}
+
+					if(!m_playerSpawnDistanceCombined)
+						m_playerSpawnDistanceCombined = std::make_unique<DistanceField>((int32_t)m_width, (int32_t)m_height);
+
+					m_playerSpawnDistanceCombined->CombineMin(&distanceField);
 				}
-
-				if(!m_playerSpawnDistanceCombined)
-					m_playerSpawnDistanceCombined = std::make_unique<DistanceField>((int32_t)m_width, (int32_t)m_height);
-
-				m_playerSpawnDistanceCombined->CombineMin(&distanceField);
-			}
-		}		
+			}		
+		}
 	}
 
 	//---------------------------------------------------------------------------------
