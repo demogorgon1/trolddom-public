@@ -5,6 +5,7 @@
 #include "../EventHistory.h"
 #include "../PlayerGateways.h"
 #include "../PlayerProfessions.h"
+#include "../PlayerWorld.h"
 #include "../PlayerWorship.h"
 #include "../Vec2.h"
 
@@ -60,7 +61,8 @@ namespace tpublic
 				FIELD_GUILD_REGISTRATION_HISTORY,
 				FIELD_PROFESSIONS,
 				FIELD_WORSHIP,
-				FIELD_GATEWAYS
+				FIELD_GATEWAYS,
+				FIELD_SELECTED_PLAYER_WORLD
 			};
 
 			static void
@@ -76,6 +78,7 @@ namespace tpublic
 				aSchema->DefineCustomObjectNoSource<PlayerProfessions>(FIELD_PROFESSIONS, offsetof(PlayerPrivate, m_professions));
 				aSchema->DefineCustomObjectNoSource<PlayerWorship>(FIELD_WORSHIP, offsetof(PlayerPrivate, m_worship));
 				aSchema->DefineCustomObjectNoSource<PlayerGateways>(FIELD_GATEWAYS, offsetof(PlayerPrivate, m_gateways));
+				aSchema->DefineCustomObjectNoSource<PlayerWorld::Key>(FIELD_SELECTED_PLAYER_WORLD, offsetof(PlayerPrivate, m_selectedPlayerWorld));
 			}
 
 			// Public data
@@ -88,6 +91,7 @@ namespace tpublic
 			PlayerProfessions												m_professions;
 			PlayerWorship													m_worship;
 			PlayerGateways													m_gateways;
+			PlayerWorld::Key												m_selectedPlayerWorld;
 
 			// Not serialized, internal
 			bool															m_positionUpdatedOnServer = false;

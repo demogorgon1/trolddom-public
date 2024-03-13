@@ -103,7 +103,6 @@ map player_world:
 	type: open_world
 	default_player_spawn: .player_spawn
 	has_dynamic_overview_map: true
-	seed: random
 
 	default_tile: water_1
 	default_fishing_loot_table: fish

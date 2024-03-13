@@ -49,12 +49,14 @@ namespace tpublic
 	}
 		
 	void
-	EntityInstance::WriteNetworkPublic(
+	EntityInstance::WriteNetwork(
 		const ComponentManager* aComponentManager,
 		IWriter*				aWriter,
 		uint8_t					aFlags) const
 	{
-		bool onlyDirty = aFlags & NETWORK_WRITE_FLAG_ONLY_DIRTY;
+		bool onlyDirtyFlag = aFlags & NETWORK_WRITE_FLAG_ONLY_DIRTY;
+		bool publicFlag = aFlags & NETWORK_WRITE_FLAG_PUBLIC;
+		bool privateFlag = aFlags & NETWORK_WRITE_FLAG_PRIVATE;
 
 		aWriter->WritePOD(m_state);
 
@@ -64,32 +66,9 @@ namespace tpublic
 			ComponentBase::Replication componentReplication = aComponentManager->GetComponentReplication(component->GetComponentId());
 			uint8_t componentFlags = aComponentManager->GetComponentFlags(component->GetComponentId());
 
-			if((component->IsDirty() || !onlyDirty) && componentReplication == ComponentBase::REPLICATION_PUBLIC && (componentFlags & ComponentBase::FLAG_REPLICATE_ONLY_ON_REQUEST) == 0)
-			{
-				aWriter->WriteUInt(i);
-				aComponentManager->WriteNetwork(aWriter, component.get());
-			}
-			i++;
-		}
-	}
-
-	void
-	EntityInstance::WriteNetworkPrivate(
-		const ComponentManager* aComponentManager,
-		IWriter*				aWriter,
-		uint8_t					aFlags) const
-	{
-		bool onlyDirty = aFlags & NETWORK_WRITE_FLAG_ONLY_DIRTY;
-
-		aWriter->WritePOD(m_state);
-
-		uint32_t i = 0;
-		for(const std::unique_ptr<ComponentBase>& component : m_components)
-		{		
-			ComponentBase::Replication componentReplication = aComponentManager->GetComponentReplication(component->GetComponentId());
-			uint8_t componentFlags = aComponentManager->GetComponentFlags(component->GetComponentId());
-
-			if((component->IsDirty() || !onlyDirty) && componentReplication == ComponentBase::REPLICATION_PRIVATE && (componentFlags & ComponentBase::FLAG_REPLICATE_ONLY_ON_REQUEST) == 0)
+			if((component->IsDirty() || !onlyDirtyFlag) && 
+				(componentFlags & ComponentBase::FLAG_REPLICATE_ONLY_ON_REQUEST) == 0 &&
+				((componentReplication == ComponentBase::REPLICATION_PUBLIC && publicFlag) || (componentReplication == ComponentBase::REPLICATION_PRIVATE && privateFlag)))
 			{
 				aWriter->WriteUInt(i);
 				aComponentManager->WriteNetwork(aWriter, component.get());

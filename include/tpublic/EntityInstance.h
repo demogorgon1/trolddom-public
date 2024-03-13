@@ -13,7 +13,9 @@ namespace tpublic
 	public:
 		enum NetworkWriteFlag : uint8_t
 		{
-			NETWORK_WRITE_FLAG_ONLY_DIRTY = 0x01
+			NETWORK_WRITE_FLAG_ONLY_DIRTY	= 0x01,
+			NETWORK_WRITE_FLAG_PUBLIC		= 0x02,
+			NETWORK_WRITE_FLAG_PRIVATE		= 0x04
 		};
 
 								EntityInstance(
@@ -28,11 +30,7 @@ namespace tpublic
 									int32_t								aTick);
 		void					AddComponent(
 									ComponentBase*						aComponent);
-		void					WriteNetworkPublic(
-									const ComponentManager*				aComponentManager,
-									IWriter*							aWriter,
-									uint8_t								aFlags) const;
-		void					WriteNetworkPrivate(
+		void					WriteNetwork(
 									const ComponentManager*				aComponentManager,
 									IWriter*							aWriter,
 									uint8_t								aFlags) const;
