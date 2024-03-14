@@ -78,6 +78,15 @@ namespace tpublic
 			return Splitmix_64(combined);
 		}
 
+		inline constexpr uint64_t
+		Combine_3_32(
+			uint32_t							aValue1,
+			uint32_t							aValue2,
+			uint32_t							aValue3)
+		{
+			return Splitmix_2_32((uint32_t)(Splitmix_2_32(aValue1, aValue2) >> 32ULL), aValue3);
+		}
+
 		template <typename _T>
 		inline constexpr uint32_t
 		PODVector_32(
