@@ -23,14 +23,15 @@ namespace tpublic
 		{
 			const char* m_name;
 			const char* m_displayName;
+			const char* m_sizeDescription;
 		};
 
 		// IMPORTANT: Must match Type enum
 		static constexpr const Info INFO[] =
 		{
-			{ NULL,					NULL },
+			{ NULL,					NULL,			NULL },
 
-			{ "small_island",		"Small Island" },
+			{ "small_island",		"Small Island",	"Small" },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_TYPES);
