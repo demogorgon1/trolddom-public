@@ -1,0 +1,21 @@
+player_world_type small_island:
+{
+	string: "Small Island"
+	size: small
+
+	tiles: 
+	[ 
+		water_1 
+		grass
+		dark_grass
+		dirt
+		mud
+		sand
+		forest
+		rocks
+		snow_rocks
+		snow
+		ice
+		pavement
+	]
+}

@@ -32,6 +32,7 @@
 #include <tpublic/Data/Objective.h>
 #include <tpublic/Data/Pantheon.h>
 #include <tpublic/Data/ParticleSystem.h>
+#include <tpublic/Data/PlayerWorldType.h>
 #include <tpublic/Data/Profession.h>
 #include <tpublic/Data/Quest.h>
 #include <tpublic/Data/Sound.h>
@@ -82,6 +83,7 @@ namespace tpublic
 		RegisterDataContainer<Data::Objective>();
 		RegisterDataContainer<Data::Pantheon>();
 		RegisterDataContainer<Data::ParticleSystem>();
+		RegisterDataContainer<Data::PlayerWorldType>();
 		RegisterDataContainer<Data::Profession>();
 		RegisterDataContainer<Data::Quest>();
 		RegisterDataContainer<Data::Sound>();

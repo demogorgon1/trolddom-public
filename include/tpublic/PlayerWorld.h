@@ -3,6 +3,7 @@
 #include "Hash.h"
 #include "IReader.h"
 #include "IWriter.h"
+#include "Vec2.h"
 
 namespace tpublic
 {
@@ -10,59 +11,59 @@ namespace tpublic
 	namespace PlayerWorld
 	{
 
-		enum Type : uint8_t
+		enum Size : uint8_t
 		{
-			INVALID_TYPE,
+			INVALID_SIZE,
 
-			TYPE_SMALL_ISLAND,
+			SIZE_SMALL,
 
-			NUM_TYPES
+			NUM_SIZES
 		};
 
 		struct Info
 		{
 			const char* m_name;
 			const char* m_displayName;
-			const char* m_sizeDescription;
+			Vec2		m_size;
 		};
 
 		// IMPORTANT: Must match Type enum
 		static constexpr const Info INFO[] =
 		{
-			{ NULL,					NULL,			NULL },
+			{ NULL,					NULL,			Vec2() },
 
-			{ "small_island",		"Small Island",	"Small" },
+			{ "small",				"Small",		Vec2(64, 64) },
 		};
 
-		static_assert(sizeof(INFO) / sizeof(Info) == NUM_TYPES);
+		static_assert(sizeof(INFO) / sizeof(Info) == NUM_SIZES);
 
 		inline constexpr const Info*
 		GetInfo(
-			Type				aType)
+			Size				aSize)
 		{
-			assert((uint32_t)aType < (uint32_t)NUM_TYPES);
-			return &INFO[aType];
+			assert((uint32_t)aSize < (uint32_t)NUM_SIZES);
+			return &INFO[aSize];
 		}
 
-		inline constexpr Type
-		StringToType(
+		inline constexpr Size
+		StringToSize(
 			const char*			aString)
 		{
 			std::string_view s(aString);
-			for(uint32_t i = 1; i < (uint32_t)NUM_TYPES; i++)
+			for(uint32_t i = 1; i < (uint32_t)NUM_SIZES; i++)
 			{
 				const Info* t = &INFO[i];
 				if(s == t->m_name)
-					return (Type)i;
+					return (Size)i;
 			}
-			return INVALID_TYPE;
+			return INVALID_SIZE;
 		}
 
 		inline constexpr bool
-		ValidateType(
-			Type				aType)
+		ValidateSize(
+			Size				aSize)
 		{
-			return (uint32_t)aType >= 1 && (uint32_t)aType < (uint32_t)NUM_TYPES;
+			return (uint32_t)aSize >= 1 && (uint32_t)aSize < (uint32_t)NUM_SIZES;
 		}
 
 		class Key

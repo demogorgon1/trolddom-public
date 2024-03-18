@@ -52,6 +52,7 @@ namespace tpublic
 			ID_NOISE,
 			ID_NAME_TEMPLATE,
 			ID_DOODAD,
+			ID_PLAYER_WORLD_TYPE,
 
 			NUM_IDS
 		};
@@ -101,7 +102,8 @@ namespace tpublic
 			"terrain",
 			"noise",
 			"name_template",
-			"doodad"
+			"doodad",
+			"player_world_type"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);
