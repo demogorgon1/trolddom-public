@@ -111,6 +111,13 @@ namespace tpublic
 				return m_characterId != 0 && m_playerWorldId != 0;
 			}
 
+			void
+			Clear()
+			{
+				m_characterId = 0;
+				m_playerWorldId = 0;
+			}
+
 			// Public data
 			uint32_t		m_characterId = 0;
 			uint32_t		m_playerWorldId = 0;

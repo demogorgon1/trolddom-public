@@ -34,6 +34,7 @@ namespace tpublic
 						const TimeSeed&		aOther) const;
 		bool		operator!=(
 						const TimeSeed&		aOther) const;
+		bool		IsSet() const;
 
 		// Public data
 		Type				m_type = INVALID_TYPE;

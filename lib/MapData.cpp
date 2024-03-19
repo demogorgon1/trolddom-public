@@ -348,9 +348,18 @@ namespace tpublic
 		if(m_tileMap == NULL)
 			return;
 
-		assert(m_walkableBits == NULL);
-		assert(m_blockLineOfSightBits == NULL);
-		assert(m_tileMap != NULL);
+		if(m_walkableBits != NULL)
+		{
+			delete[] m_walkableBits;
+			m_walkableBits = NULL;
+		}
+
+		if(m_blockLineOfSightBits != NULL)
+		{
+			delete[] m_blockLineOfSightBits;
+			m_blockLineOfSightBits = NULL;
+		}
+
 		assert(m_width > 0 && m_height > 0);
 
 		_InitBits(aManifest);

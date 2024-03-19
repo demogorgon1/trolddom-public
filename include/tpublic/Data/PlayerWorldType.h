@@ -44,6 +44,18 @@ namespace tpublic
 						{
 							aChild->GetIdArray(DataType::ID_SPRITE, m_tiles);
 						}
+						else if (aChild->m_name == "view_attenuation")
+						{
+							m_viewAttenuation = aChild->GetUInt32();
+						}
+						else if (aChild->m_name == "view_attenuation_bias")
+						{
+							m_viewAttenuationBias = aChild->GetUInt32();
+						}
+						else if (aChild->m_name == "view_hidden_visibility")
+						{
+							m_viewHiddenVisibility = aChild->GetUInt32();
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -59,6 +71,9 @@ namespace tpublic
 				aWriter->WriteString(m_string);
 				aWriter->WritePOD(m_size);
 				aWriter->WriteUInts(m_tiles);
+				aWriter->WriteUInt(m_viewAttenuation);
+				aWriter->WriteUInt(m_viewAttenuationBias);
+				aWriter->WriteUInt(m_viewHiddenVisibility);
 			}
 			
 			bool
@@ -69,7 +84,13 @@ namespace tpublic
 					return false;
 				if(!aReader->ReadPOD(m_size))
 					return false;
-				if(!aReader->ReadUInts(m_tiles))
+				if (!aReader->ReadUInts(m_tiles))
+					return false;
+				if (!aReader->ReadUInt(m_viewAttenuation))
+					return false;
+				if (!aReader->ReadUInt(m_viewAttenuationBias))
+					return false;
+				if (!aReader->ReadUInt(m_viewHiddenVisibility))
 					return false;
 				return true;
 			}
@@ -78,6 +99,9 @@ namespace tpublic
 			std::string				m_string;
 			PlayerWorld::Size		m_size = PlayerWorld::INVALID_SIZE;
 			std::vector<uint32_t>	m_tiles;
+			uint32_t				m_viewAttenuation = 0;
+			uint32_t				m_viewAttenuationBias = 0;
+			uint32_t				m_viewHiddenVisibility = 0;
 		};
 
 	}

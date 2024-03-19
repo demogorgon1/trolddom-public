@@ -209,4 +209,10 @@ namespace tpublic
 		return m_type != aOther.m_type || m_seed != aOther.m_seed || m_fromTimeStamp != aOther.m_fromTimeStamp || m_toTimeStamp != aOther.m_toTimeStamp;
 	}
 
+	bool		
+	TimeSeed::IsSet() const
+	{
+		return m_type != INVALID_TYPE;
+	}
+
 }
