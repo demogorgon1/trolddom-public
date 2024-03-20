@@ -19,13 +19,57 @@ namespace tpublic
 
 		uint32_t
 		_MakeColorKey(
-			uint8_t		aR,
-			uint8_t		aG, 
-			uint8_t		aB)
+			uint8_t						aR,
+			uint8_t						aG, 
+			uint8_t						aB)
 		{
 			return (((uint32_t)aR) << 16) | (((uint32_t)aG) << 8) | ((uint32_t)aB);
 		}
 
+		void
+		_WriteObjectTable(
+			IWriter*					aStream,
+			const MapData::ObjectTable&	aObjectTable)
+		{
+			aStream->WriteUInt(aObjectTable.size());
+			for (MapData::ObjectTable::const_iterator i = aObjectTable.cbegin(); i != aObjectTable.cend(); i++)
+			{
+				i->first.ToStream(aStream);
+				aStream->WriteUInt(i->second);
+			}
+		}
+
+		bool
+		_ReadObjectTable(
+			IReader*					aStream,
+			MapData::ObjectTable&		aObjectTable)
+		{
+			size_t count;
+			if (!aStream->ReadUInt(count))
+				return false;
+			for (size_t i = 0; i < count; i++)
+			{
+				Vec2 position;
+				if (!position.FromStream(aStream))
+					return false;
+				uint32_t id;
+				if (!aStream->ReadUInt(id))
+					return false;
+				aObjectTable[position] = id;
+			}
+			return true;
+		}
+
+		uint32_t
+		_GetObject(
+			const MapData::ObjectTable&	aObjectTable,
+			const Vec2&					aPosition)
+		{
+			MapData::ObjectTable::const_iterator i = aObjectTable.find(aPosition);
+			if(i != aObjectTable.cend())
+				return i->second;
+			return 0;
+		}
 	}
 
 	//--------------------------------------------------------------------
@@ -258,15 +302,8 @@ namespace tpublic
 		m_seed.ToStream(aStream);
 		aStream->WriteOptionalObjectPointer(m_worldInfoMap);
 		aStream->WriteOptionalObjectPointer(m_mapCovers);
-
-		{
-			aStream->WriteUInt(m_doodads.size());
-			for(DoodadSpriteTable::const_iterator i = m_doodads.cbegin(); i != m_doodads.cend(); i++)
-			{
-				i->first.ToStream(aStream);
-				aStream->WriteUInt(i->second);
-			}
-		}
+		_WriteObjectTable(aStream, m_doodads);
+		_WriteObjectTable(aStream, m_walls);
 	}
 
 	bool	
@@ -320,23 +357,10 @@ namespace tpublic
 			return false;
 		if (!aStream->ReadOptionalObjectPointer(m_mapCovers))
 			return false;
-
-		{
-			size_t count;
-			if(!aStream->ReadUInt(count))
-				return false;
-			for(size_t i = 0; i < count; i++)
-			{
-				Vec2 position;
-				if(!position.FromStream(aStream))
-					return false;
-				uint32_t doodadId;
-				if(!aStream->ReadUInt(doodadId))
-					return false;
-				m_doodads[position] = doodadId;
-			}
-
-		}
+		if (!_ReadObjectTable(aStream, m_doodads))
+			return false;
+		if (!_ReadObjectTable(aStream, m_walls))
+			return false;
 		return true;
 	}
 
@@ -447,6 +471,7 @@ namespace tpublic
 		}
 
 		m_doodads = aMapData->m_doodads;
+		m_walls = aMapData->m_walls;
 	}
 
 	uint32_t	
@@ -478,6 +503,20 @@ namespace tpublic
 		}
 
 		image.SavePNG(aPath);
+	}
+
+	uint32_t	
+	MapData::GetDoodad(
+		const Vec2&				aPosition) const
+	{
+		return _GetObject(m_doodads, aPosition);
+	}
+	
+	uint32_t	
+	MapData::GetWall(
+		const Vec2&				aPosition) const
+	{
+		return _GetObject(m_walls, aPosition);
 	}
 
 	//--------------------------------------------------------------------
@@ -607,12 +646,14 @@ namespace tpublic
 		{
 			for(int32_t x = 0; x < m_width; x++)
 			{
+				bool hasWall = GetWall({ x, y }) != 0;
+
 				const Data::Sprite* sprite = aManifest->GetById<tpublic::Data::Sprite>(*in);
 				
-				if(sprite->m_info.m_flags & SpriteInfo::FLAG_TILE_WALKABLE)
+				if(!hasWall && (sprite->m_info.m_flags & SpriteInfo::FLAG_TILE_WALKABLE))
 					*outWalkable |= 1 << bit;
 
-				if (sprite->m_info.m_flags & SpriteInfo::FLAG_TILE_BLOCK_LINE_OF_SIGHT)
+				if (hasWall || (sprite->m_info.m_flags & SpriteInfo::FLAG_TILE_BLOCK_LINE_OF_SIGHT))
 					*outBlockLineOfSight |= 1 << bit;
 
 				// Next tile

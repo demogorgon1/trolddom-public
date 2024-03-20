@@ -480,6 +480,10 @@ namespace tpublic
 		void		WriteDebugTileMapPNG(
 						const Manifest*			aManifest,
 						const char*				aPath) const;
+		uint32_t	GetDoodad(
+						const Vec2&				aPosition) const;
+		uint32_t	GetWall(
+						const Vec2&				aPosition) const;
 
 		// Public data
 		MapType::Id									m_type;
@@ -503,8 +507,10 @@ namespace tpublic
 		std::unique_ptr<WorldInfoMap>				m_worldInfoMap;
 		std::unique_ptr<MapCovers>					m_mapCovers;
 		
-		typedef std::unordered_map<Vec2, uint32_t, Vec2::Hasher> DoodadSpriteTable;
-		DoodadSpriteTable							m_doodads;
+		typedef std::unordered_map<Vec2, uint32_t, Vec2::Hasher> ObjectTable;
+
+		ObjectTable									m_doodads;
+		ObjectTable									m_walls;
 
 		struct SourceLayer
 		{

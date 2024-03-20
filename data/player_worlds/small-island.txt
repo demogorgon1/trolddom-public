@@ -19,6 +19,11 @@ player_world_type small_island:
 		pavement
 	]
 	
+	walls:
+	[
+		stone_wall
+	]
+	
 	view_attenuation: 0
 	view_attenuation_bias: 0
 	view_hidden_visibility: 35	

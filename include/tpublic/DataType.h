@@ -53,6 +53,7 @@ namespace tpublic
 			ID_NAME_TEMPLATE,
 			ID_DOODAD,
 			ID_PLAYER_WORLD_TYPE,
+			ID_WALL,
 
 			NUM_IDS
 		};
@@ -103,7 +104,8 @@ namespace tpublic
 			"noise",
 			"name_template",
 			"doodad",
-			"player_world_type"
+			"player_world_type",
+			"wall"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

@@ -44,6 +44,10 @@ namespace tpublic
 						{
 							aChild->GetIdArray(DataType::ID_SPRITE, m_tiles);
 						}
+						else if (aChild->m_name == "walls")
+						{
+							aChild->GetIdArray(DataType::ID_WALL, m_walls);
+						}
 						else if (aChild->m_name == "view_attenuation")
 						{
 							m_viewAttenuation = aChild->GetUInt32();
@@ -71,6 +75,7 @@ namespace tpublic
 				aWriter->WriteString(m_string);
 				aWriter->WritePOD(m_size);
 				aWriter->WriteUInts(m_tiles);
+				aWriter->WriteUInts(m_walls);
 				aWriter->WriteUInt(m_viewAttenuation);
 				aWriter->WriteUInt(m_viewAttenuationBias);
 				aWriter->WriteUInt(m_viewHiddenVisibility);
@@ -86,6 +91,8 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadUInts(m_tiles))
 					return false;
+				if (!aReader->ReadUInts(m_walls))
+					return false;
 				if (!aReader->ReadUInt(m_viewAttenuation))
 					return false;
 				if (!aReader->ReadUInt(m_viewAttenuationBias))
@@ -99,6 +106,7 @@ namespace tpublic
 			std::string				m_string;
 			PlayerWorld::Size		m_size = PlayerWorld::INVALID_SIZE;
 			std::vector<uint32_t>	m_tiles;
+			std::vector<uint32_t>	m_walls;
 			uint32_t				m_viewAttenuation = 0;
 			uint32_t				m_viewAttenuationBias = 0;
 			uint32_t				m_viewHiddenVisibility = 0;

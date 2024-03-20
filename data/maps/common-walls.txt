@@ -1,0 +1,48 @@
+sprites:
+{
+	source: "common-walls.png"
+
+	size: { width: 16 height: 16 }
+
+	cursor: { position: [ 0 0 ] }
+
+	sprite stone_wall_w_e: { }
+	sprite stone_wall_n_s: { }
+	sprite stone_wall_w_s: { }
+	sprite stone_wall_e_s: { }
+	sprite stone_wall_n_e: { }
+	sprite stone_wall_w_n: { }
+	sprite stone_wall_w_e_s: { }
+	sprite stone_wall_w_e_n: { }
+	sprite stone_wall_w_n_s: { }
+	sprite stone_wall_e_n_s: { }
+	sprite stone_wall_w_e_n_s: { }
+	sprite stone_wall: { }
+	sprite stone_wall_n: { }
+	sprite stone_wall_w: { }
+	sprite stone_wall_e: { }
+	sprite stone_wall_s: { }	
+}
+
+wall stone_wall:
+{
+	sprites: 
+	[ 
+        stone_wall
+		stone_wall_e
+		stone_wall_w	
+		stone_wall_w_e
+		stone_wall_n
+        stone_wall_n_e
+        stone_wall_w_n
+        stone_wall_w_e_n
+		stone_wall_s
+        stone_wall_e_s
+	    stone_wall_w_s
+        stone_wall_w_e_s		
+		stone_wall_n_s
+        stone_wall_e_n_s		
+        stone_wall_w_n_s
+        stone_wall_w_e_n_s
+	]
+}
