@@ -24,6 +24,9 @@ namespace tpublic
 			m_tileMap = &aMapSegment->m_tileMap->m_tiles[0];			
 			m_size = aMapSegment->m_tileMap->m_size;
 
+			if(!aMapSegment->m_tileMap->m_coverTiles.empty())
+				m_coverTileMap = &aMapSegment->m_tileMap->m_coverTiles[0];
+
 			for (const Data::MapSegment::Object& object : aMapSegment->m_tileMap->m_objects)
 			{
 				switch(object.m_type)
@@ -386,7 +389,7 @@ namespace tpublic
 	}
 
 	bool				
-	 MapSegmentInstance::_HasConnectorAtPositio(
+	 MapSegmentInstance::_HasConnectorAtPosition(
 		const Vec2&			aPosition) const
 	{
 		for(const std::unique_ptr<Connector>& connector : m_connectors)

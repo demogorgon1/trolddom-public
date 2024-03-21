@@ -24,6 +24,11 @@ player_world_type small_island:
 		stone_wall
 	]
 	
+	structures:
+	[
+		wood_house_small_1
+	]
+	
 	view_attenuation: 0
 	view_attenuation_bias: 0
 	view_hidden_visibility: 35	

@@ -1,0 +1,22 @@
+!define local WOOD_HOUSE_PALETTE
+[
+	{ symbol: "." tiles: [ wood_floor ] cover_tiles: [ roof ] }		
+	{ symbol: "#" tiles: [ wood_solid_wall ] cover_tiles: [ roof ] }
+	{ symbol: "X" tiles: [ wood_wall ] }
+	{ symbol: "D" tiles: [ wood_floor ] cover_tiles: [ wood_open_door ] }
+	{ symbol: "Y" tiles: [ wood_solid_wall_face	 ] cover_tiles: [ roof ] }
+]
+
+map_segment wood_house_small_1<paletted>:
+{	
+	string: "Small Wooden House"
+	palette: !WOOD_HOUSE_PALETTE {}
+	paletted_map:
+	[
+		"#YYYYY#"
+		"#.....#"
+		"#.....#"
+		"#.....#"
+		"XXXDXXX"
+	]		
+}

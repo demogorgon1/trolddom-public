@@ -101,6 +101,30 @@ namespace tpublic
 			return distribution(aRandom);
 		}	
 		
+		template <typename _T>
+		_T
+		Clamp(
+			_T										aValue,
+			_T										aMin,
+			_T										aMax)
+		{
+			_T v = aValue < aMin ? aMin : aValue;
+			return v > aMax ? aMax : v;
+		}
+
+		template <typename _T>
+		_T
+		NearestGreaterOrEqualPowerOfTwo(
+			_T										aValue)
+		{
+			// This isn't exactly performant, but it's portable and works with any type.
+			// Don't do this for in high performance inner loops.
+			_T v = 1;
+			while (v < aValue)
+				v <<= 1;
+			return v;
+		}
+
 	}
 
 }

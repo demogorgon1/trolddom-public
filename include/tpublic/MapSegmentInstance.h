@@ -33,6 +33,7 @@ namespace tpublic
 		// Public data
 		const Data::MapSegment*					m_mapSegment = NULL;
 		const uint32_t*							m_tileMap = NULL;
+		const uint32_t*							m_coverTileMap = NULL;
 		Vec2									m_size;
 
 		std::vector<uint32_t>					m_generatedTileMap;
@@ -48,7 +49,7 @@ namespace tpublic
 								std::mt19937&				aRandom);
 		uint32_t			_SampleGeneratedTileMap(
 								const Vec2&					aPosition) const;
-		bool				_HasConnectorAtPositio(
+		bool				_HasConnectorAtPosition(
 								const Vec2&					aPosition) const;
 	};
 

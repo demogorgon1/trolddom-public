@@ -194,6 +194,22 @@ namespace tpublic
 			}
 		}
 	}
+	
+	void		
+	Image::InsertRaw(
+		uint32_t					aX,
+		uint32_t					aY,
+		const void*					aData,
+		uint32_t					aWidth,
+		uint32_t					aHeight,
+		uint32_t					aPitch)
+	{
+		assert(HasData());
+		assert(aX + aWidth <= m_width && aY + aHeight <= m_height);
+
+		for (uint32_t y = 0; y < aHeight; y++)
+			memcpy(GetData() + aX + (aY + y) * m_width, (const uint8_t*)aData + y * aPitch, sizeof(RGBA) * aWidth);
+	}
 
 	void		
 	Image::Clear(

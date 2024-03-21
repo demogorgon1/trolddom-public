@@ -115,6 +115,11 @@ namespace tpublic
 							aChild->GetIdArray(DataType::ID_SPRITE, m_tileSpriteIds);
 							TP_VERIFY(m_tileSpriteIds.size() > 0, aChild->m_debugInfo, "Must have at least one sprite specified.");
 						}
+						else if (aChild->m_name == "cover_tiles")
+						{
+							aChild->GetIdArray(DataType::ID_SPRITE, m_coverTileSpriteIds);
+							TP_VERIFY(m_coverTileSpriteIds.size() > 0, aChild->m_debugInfo, "Must have at least one cover sprite specified.");
+						}
 						else if (aChild->m_name == "portals")
 						{
 							aChild->GetIdArray(DataType::ID_MAP_PORTAL, m_mapPortalIds);
@@ -145,6 +150,7 @@ namespace tpublic
 				// Public data
 				uint32_t				m_symbol = 0;
 				std::vector<uint32_t>	m_tileSpriteIds;
+				std::vector<uint32_t>	m_coverTileSpriteIds;
 				std::vector<uint32_t>	m_mapPortalIds;
 				std::vector<uint32_t>	m_mapPlayerSpawnIds;
 				std::vector<uint32_t>	m_mapEntitySpawnIds;
@@ -370,7 +376,23 @@ namespace tpublic
 								{
 									m_tiles[offset] = paletteEntry->m_tileSpriteIds[0];
 								}			
-								
+
+								if(paletteEntry->m_coverTileSpriteIds.size() > 0)
+								{
+									if(m_coverTiles.empty())
+										m_coverTiles.resize(m_size.m_x * m_size.m_y, 0);
+
+									if (paletteEntry->m_coverTileSpriteIds.size() > 1)
+									{
+										std::uniform_int_distribution<size_t> distribution(0, paletteEntry->m_coverTileSpriteIds.size() - 1);
+										m_coverTiles[offset] = paletteEntry->m_coverTileSpriteIds[distribution(aRandom)];
+									}
+									else if (paletteEntry->m_coverTileSpriteIds.size() == 1)
+									{
+										m_coverTiles[offset] = paletteEntry->m_coverTileSpriteIds[0];
+									}
+								}
+
 								if(paletteEntry->m_mapPlayerSpawnIds.size() > 0 )
 								{
 									Object t;
@@ -459,6 +481,7 @@ namespace tpublic
 				{
 					m_size.ToStream(aWriter);
 					aWriter->WriteUInts(m_tiles);
+					aWriter->WriteUInts(m_coverTiles);
 					aWriter->WriteObjects(m_objects);
 				}
 
@@ -472,6 +495,10 @@ namespace tpublic
 						return false;
 					if(m_tiles.size() != (size_t)(m_size.m_x * m_size.m_y))
 						return false;
+					if (!aReader->ReadUInts(m_coverTiles))
+						return false;
+					if (!m_coverTiles.empty() && m_coverTiles.size() != (size_t)(m_size.m_x * m_size.m_y))
+						return false;
 					if(!aReader->ReadObjects(m_objects))
 						return false;
 					return true;
@@ -480,6 +507,7 @@ namespace tpublic
 				// Public data
 				Vec2					m_size;
 				std::vector<uint32_t>	m_tiles;
+				std::vector<uint32_t>	m_coverTiles;
 				std::vector<Object>		m_objects;
 			};
 
@@ -635,7 +663,9 @@ namespace tpublic
 				{
 					if(!FromSourceBase(aChild))
 					{
-						if (aChild->m_name == "palette" && m_type == TYPE_PALETTED)
+						if(aChild->m_name == "string")
+							m_string = aChild->GetString();
+						else if (aChild->m_name == "palette" && m_type == TYPE_PALETTED)
 							palette = std::make_unique<Palette>(aChild);
 						else if (aChild->m_name == "paletted_map" && m_type == TYPE_PALETTED)
 							m_tileMap = std::make_unique<TileMap>(palette.get(), aChild, random);
@@ -663,6 +693,7 @@ namespace tpublic
 				aStream->WriteOptionalObjectPointer(m_tileMap);
 				aStream->WriteOptionalObjectPointer(m_randomRoom);
 				aStream->WriteObjectPointers(m_tileMapModifiers);
+				aStream->WriteString(m_string);
 			}
 
 			bool
@@ -677,11 +708,14 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadObjectPointers(m_tileMapModifiers))
 					return false;
+				if(!aStream->ReadString(m_string))
+					return false;
 				return true;
 			}
 
 			// Public data
 			Type											m_type = INVALID_TYPE;
+			std::string										m_string;
 			std::unique_ptr<TileMap>						m_tileMap;
 			std::vector<std::unique_ptr<TileMapModifier>>	m_tileMapModifiers;
 			std::unique_ptr<RandomRoom>						m_randomRoom;

@@ -82,6 +82,13 @@ namespace tpublic
 						uint32_t					aX,
 						uint32_t					aY,
 						const Image&				aImage);
+		void		InsertRaw(
+						uint32_t					aX,
+						uint32_t					aY,
+						const void*					aData,
+						uint32_t					aWidth,
+						uint32_t					aHeight,
+						uint32_t					aPitch);
 		void		Clear(
 						const RGBA&					aColor);
 		void		DrawVerticalGradient(
