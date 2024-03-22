@@ -504,6 +504,17 @@ namespace tpublic
 					return true;
 				}
 
+				void
+				MakeMask(
+					std::vector<bool>&	aOut) const
+				{
+					for(size_t i = 0; i < m_tiles.size(); i++)
+					{
+						bool bit = m_tiles[i] != 0 || (!m_coverTiles.empty() && m_coverTiles[i] != 0);
+						aOut.push_back(bit);
+					}
+				}
+
 				// Public data
 				Vec2					m_size;
 				std::vector<uint32_t>	m_tiles;
