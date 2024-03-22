@@ -684,6 +684,8 @@ namespace tpublic
 							m_randomRoom = std::make_unique<RandomRoom>(aChild);
 						else if (aChild->m_tag == "tile_map_modifier")
 							m_tileMapModifiers.push_back(std::make_unique<TileMapModifier>(aChild));
+						else if(aChild->m_name == "underlying_tile")
+							m_underlyingTileSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -705,6 +707,7 @@ namespace tpublic
 				aStream->WriteOptionalObjectPointer(m_randomRoom);
 				aStream->WriteObjectPointers(m_tileMapModifiers);
 				aStream->WriteString(m_string);
+				aStream->WriteUInt(m_underlyingTileSpriteId);
 			}
 
 			bool
@@ -721,6 +724,8 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadString(m_string))
 					return false;
+				if(!aStream->ReadUInt(m_underlyingTileSpriteId))
+					return false;
 				return true;
 			}
 
@@ -730,6 +735,7 @@ namespace tpublic
 			std::unique_ptr<TileMap>						m_tileMap;
 			std::vector<std::unique_ptr<TileMapModifier>>	m_tileMapModifiers;
 			std::unique_ptr<RandomRoom>						m_randomRoom;
+			uint32_t										m_underlyingTileSpriteId = 0;
 		};
 
 	}

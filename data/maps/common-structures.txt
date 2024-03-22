@@ -10,6 +10,7 @@
 map_segment wood_house_small_1<paletted>:
 {	
 	string: "Small Wooden House"
+	underlying_tile: dirt
 	palette: !WOOD_HOUSE_PALETTE {}
 	paletted_map:
 	[
