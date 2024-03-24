@@ -77,6 +77,11 @@ namespace tpublic
 					m_overviewMapType = OVERVIEW_MAP_TYPE_DYNAMIC;
 				return true;
 			}
+			else if(aItem->m_name == "auto_doodads")
+			{
+				m_autoDoodads = aItem->GetBool();
+				return true;
+			}
 			return false;
 		}
 
@@ -94,6 +99,7 @@ namespace tpublic
 			aWriter->WriteUInt(m_level);
 			aWriter->WriteUInt(m_defaultFishingLootTableId);
 			aWriter->WritePOD(m_overviewMapType);
+			aWriter->WriteBool(m_autoDoodads);
 		}
 
 		bool
@@ -120,6 +126,8 @@ namespace tpublic
 				return false;
 			if (!aReader->ReadPOD(m_overviewMapType))
 				return false;
+			if (!aReader->ReadBool(m_autoDoodads))
+				return false;
 			return true;
 		}
 
@@ -134,6 +142,7 @@ namespace tpublic
 		uint32_t									m_level = 0;
 		uint32_t									m_defaultFishingLootTableId = 0;
 		OverviewMapType								m_overviewMapType = OVERVIEW_MAP_TYPE_NONE;
+		bool										m_autoDoodads = false;
 		
 	};
 

@@ -4,6 +4,7 @@
 #include <tpublic/Data/Tag.h>
 
 #include <tpublic/AuraEffectFactory.h>
+#include <tpublic/AutoDoodads.h>
 #include <tpublic/Compiler.h>
 #include <tpublic/ComponentManager.h>
 #include <tpublic/Compression.h>
@@ -145,11 +146,13 @@ namespace tpublic
 		// Build map data
 		{
 			spriteSheetBuilder.ExportPreliminaryManifestData(m_sourceContext.m_persistentIdTable.get(), m_manifest);
+			
+			AutoDoodads autoDoodads(m_manifest);
 
 			m_manifest->GetContainer<tpublic::Data::Map>()->ForEach([&](
 				Data::Map* aMap)
 			{
-				aMap->m_data->Build(m_manifest);
+				aMap->m_data->Build(m_manifest, &autoDoodads);
 
 				aMap->m_data->ConstructMapPathData(m_manifest);
 				return true;

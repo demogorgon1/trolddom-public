@@ -3,6 +3,7 @@
 #include <tpublic/Data/MapPalette.h>
 #include <tpublic/Data/Sprite.h>
 
+#include <tpublic/AutoDoodads.h>
 #include <tpublic/Image.h>
 #include <tpublic/Manifest.h>
 #include <tpublic/MapData.h>
@@ -139,7 +140,8 @@ namespace tpublic
 
 	void	
 	MapData::Build(
-		const Manifest*			aManifest)
+		const Manifest*			aManifest,
+		const AutoDoodads*		aAutoDoodads)
 	{
 		if(m_sourceLayers.size() > 0)
 		{
@@ -262,6 +264,18 @@ namespace tpublic
 			{
 				m_mapCovers = std::make_unique<MapCovers>();
 				m_mapCovers->Build(m_width, m_height, &coverMap[0]);
+			}
+
+			if(m_mapInfo.m_autoDoodads)
+			{
+				std::unordered_map<Vec2, uint32_t, Vec2::Hasher> coverageMap;
+				aAutoDoodads->GenerateDoodads(0, m_tileMap, { m_width, m_height }, { 0, 0 }, { m_width, m_height }, coverageMap, [&](
+					const Vec2& aPosition,
+					uint32_t	/*aDoodadId*/,
+					uint32_t	aSpriteId)
+				{
+					m_doodads[aPosition] = aSpriteId;
+				});
 			}
 		}
 	}

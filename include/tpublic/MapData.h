@@ -13,6 +13,7 @@
 namespace tpublic
 {
 
+	class AutoDoodads;
 	class Manifest;
 	class MapPathData;
 	class WorldInfoMap;
@@ -457,7 +458,8 @@ namespace tpublic
 					~MapData();
 
 		void		Build(
-						const Manifest*			aManifest);
+						const Manifest*			aManifest,
+						const AutoDoodads*		aAutoDoodads);
 		void		ConstructMapPathData(
 						const Manifest*			aManifest);
 		void		ToStream(

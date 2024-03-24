@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../DataBase.h"
+#include "../UIntRange.h"
 #include "../Vec2.h"
 
 namespace tpublic
@@ -126,6 +127,10 @@ namespace tpublic
 							m_mapOffset.m_x = aChild->GetArrayIndex(0)->GetInt32();
 							m_mapOffset.m_y = aChild->GetArrayIndex(1)->GetInt32();
 						}
+						else if(aChild->m_name == "auto_probability")
+						{
+							m_autoProbability = UIntRange(aChild);
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -143,6 +148,7 @@ namespace tpublic
 				m_mapSize.ToStream(aWriter);
 				m_mapOffset.ToStream(aWriter);
 				aWriter->WriteUInts(m_map);
+				aWriter->WriteOptionalObject(m_autoProbability);
 			}
 			
 			bool
@@ -161,6 +167,8 @@ namespace tpublic
 					return false;
 				if(m_map.size() != (size_t)(m_mapSize.m_x * m_mapSize.m_y))
 					return false;
+				if(!aReader->ReadOptionalObject(m_autoProbability))
+					return false;
 				return true;
 			}
 
@@ -170,6 +178,7 @@ namespace tpublic
 			Vec2												m_mapSize;
 			std::vector<uint32_t>								m_map;
 			Vec2												m_mapOffset;
+			std::optional<UIntRange>							m_autoProbability;
 		};
 
 	}

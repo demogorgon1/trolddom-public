@@ -32,6 +32,8 @@ doodad small_rocks:
 	map: [ "y"
 	       "x" ]
 	map_offset: [ 0 -1 ]
+	
+	auto_probability: [ 1 32 ]
 }
 
 doodad small_rocks_brown:
@@ -42,6 +44,8 @@ doodad small_rocks_brown:
 	map: [ "y"
 	       "x" ]
 	map_offset: [ 0 -1 ]
+	
+	auto_probability: [ 1 32 ]
 }
 
 doodad grass_patch:
@@ -53,4 +57,6 @@ doodad grass_patch:
 	       "yxy" 
 		   "yyy" ]
 	map_offset: [ -1 -1 ]
+	
+	auto_probability: [ 1 64 ]
 }
