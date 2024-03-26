@@ -26,4 +26,4 @@ word_list: { strings: [ "Great" "High" "Grand" ] tags: [ adjective grandiose ] }
 
 word_list: { strings: [ "Warrior" "Fighter" "Marauder" "Berserker" "Skirmisher" "Vanguard" "Mercenary" "Reaver" "Myrmidon" "Warden" "Ravager" "Slayer" "Avenger" "Brute" "Squire" "Revenant" "Outlaw" "Ravisher" ] tags: [ melee noun ] }
 word_list: { strings: [ "Wizard" "Sorceror" "Mage" "Pyromancer" "Stormcaller" "Enchanter" "Occultist" "Conjurer" "Spellcaster" "Spellweaver" "Magus" "Warlock" "Magician" "Stormweaver" ] tags: [ caster noun ] }
-word_list: { strings: [ "Hexer" "Hexweaver" "Shaman" "Healer" "Soothsayer" "Oracle" "Priest" ] tags: [ healer noun ] }
+word_list: { strings: [ "Acolyte" "Disciple" "Hexer" "Hexweaver" "Shaman" "Healer" "Soothsayer" "Oracle" "Priest" ] tags: [ healer noun ] }
