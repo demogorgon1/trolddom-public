@@ -28,8 +28,10 @@ player_world_type small_island:
 	[
 		wood_house_small_1
 	]
-	
+		
 	view_attenuation: 0
 	view_attenuation_bias: 0
 	view_hidden_visibility: 35	
+	
+	start_position_entity: standing_stone
 }
