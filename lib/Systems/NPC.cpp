@@ -123,7 +123,13 @@ namespace tpublic::Systems
 
 				if(lootable->m_playerTag.IsSet())
 				{
-					GetData()->m_lootGenerator->GenerateLootable(*aContext->m_random, combat->m_level, combat->m_creatureTypeId, combat->IsElite(), lootable);
+					GetData()->m_lootGenerator->GenerateLootable(
+						*aContext->m_random, 
+						combat->m_level, 
+						combat->m_creatureTypeId, 
+						combat->IsElite(), 
+						aContext->m_worldView->WorldViewGetPlayerWorldCharacterId(), 
+						lootable);
 
 					if(lootable->m_availableLoot.size() > 0)
 					{

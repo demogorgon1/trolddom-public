@@ -8,13 +8,20 @@ namespace tpublic
 
 	struct ItemInstance
 	{
+		enum Flag : uint8_t
+		{
+			FLAG_SOULBOUND = 0x01
+		};
+
 		ItemInstance(
 			uint32_t		aItemId = 0,
 			uint32_t		aQuantity = 1,
-			bool			aSoulbound = false)
+			uint32_t		aWorldboundCharacterId = 0,
+			uint8_t			aFlags = 0)
 			: m_itemId(aItemId)
 			, m_quantity(aQuantity)
-			, m_soulbound(aSoulbound)
+			, m_worldboundCharacterId(aWorldboundCharacterId)
+			, m_flags(aFlags)
 		{
 
 		}
@@ -25,12 +32,38 @@ namespace tpublic
 			return m_itemId != 0;
 		}
 
+		bool
+		IsSoulbound() const
+		{
+			return m_flags & FLAG_SOULBOUND;
+		}
+
+		void
+		SetSoulbound()
+		{
+			m_flags |= FLAG_SOULBOUND;
+		}
+
+		bool
+		IsWorldbound() const
+		{
+			return m_worldboundCharacterId != 0;
+		}
+
+		void
+		SetWorldbound(
+			uint32_t		aCharacterId)
+		{
+			m_worldboundCharacterId = aCharacterId;
+		}
+
 		void
 		Clear()
 		{
 			m_itemId = 0;
 			m_quantity = 1;
-			m_soulbound = false;
+			m_worldboundCharacterId = 0;
+			m_flags = 0;
 		}
 
 		void
@@ -41,7 +74,8 @@ namespace tpublic
 			if(IsSet())
 			{
 				aWriter->WriteUInt(m_quantity);
-				aWriter->WriteBool(m_soulbound);
+				aWriter->WriteUInt(m_worldboundCharacterId);
+				aWriter->WritePOD(m_flags);
 			}
 		}
 
@@ -55,7 +89,9 @@ namespace tpublic
 			{
 				if (!aReader->ReadUInt(m_quantity))
 					return false;
-				if(!aReader->ReadBool(m_soulbound))
+				if (!aReader->ReadUInt(m_worldboundCharacterId))
+					return false;
+				if(!aReader->ReadPOD(m_flags))
 					return false;
 			}
 			return true;
@@ -65,7 +101,7 @@ namespace tpublic
 		operator ==(
 			const ItemInstance&	aOther) const
 		{
-			return m_itemId == aOther.m_itemId && m_quantity == aOther.m_quantity && m_soulbound == aOther.m_soulbound;
+			return m_itemId == aOther.m_itemId && m_quantity == aOther.m_quantity && m_flags == aOther.m_flags && m_worldboundCharacterId == aOther.m_worldboundCharacterId;
 		}
 
 		bool
@@ -75,20 +111,11 @@ namespace tpublic
 			return !this->operator==(aOther);
 		}
 
-		//ItemInstance&
-		//operator=(
-		//	const ItemInstance& aOther) 
-		//{
-		//	m_itemId = aOther.m_itemId;
-		//	m_quantity = aOther.m_quantity;
-		//	m_soulbound = aOther.m_soulbound;
-		//	return *this;
-		//}
-
 		// Public data
 		uint32_t		m_itemId;
 		uint32_t		m_quantity;
-		bool			m_soulbound;
+		uint32_t		m_worldboundCharacterId;
+		uint8_t			m_flags;
 	};
 
 }

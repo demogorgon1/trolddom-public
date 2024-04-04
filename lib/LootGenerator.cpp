@@ -60,6 +60,7 @@ namespace tpublic
 		uint32_t				aLevel,
 		uint32_t				aCreatureTypeId,
 		bool					aIsElite,
+		uint32_t				aPlayerWorldCharacterId,
 		Components::Lootable*	aLootable) const
 	{
 		const Data::LootTable* lootTable = m_manifest->GetById<tpublic::Data::LootTable>(aLootable->m_lootTableId);
@@ -94,11 +95,12 @@ namespace tpublic
 		}
 
 		// Items
-		GenerateItems(aRandom, aLevel, aCreatureTypeId, lootTable, [aLootable](
+		GenerateItems(aRandom, aLevel, aCreatureTypeId, lootTable, [aLootable, aPlayerWorldCharacterId](
 			const tpublic::ItemInstance& aItemInstance)
 		{
 			Components::Lootable::AvailableLoot loot;
 			loot.m_itemInstance = aItemInstance;
+			loot.m_itemInstance.m_worldboundCharacterId = aPlayerWorldCharacterId;			
 			aLootable->m_availableLoot.push_back(loot);
 		});
 	}

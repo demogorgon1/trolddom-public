@@ -29,6 +29,7 @@ namespace tpublic
 						uint32_t					aLevel,
 						uint32_t					aCreatureTypeId,
 						bool						aIsElite,
+						uint32_t					aPlayerWorldCharacterId,
 						Components::Lootable*		aLootable) const;
 		void		GenerateItems(
 						std::mt19937&				aRandom,
