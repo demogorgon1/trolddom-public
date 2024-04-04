@@ -34,6 +34,7 @@ tag caster: { }
 tag melee: { }
 tag healer: { }
 tag ranged: { }
+tag player_world_minion: { }
 
 # Item tags
 tag weapon_1h_sword: {}

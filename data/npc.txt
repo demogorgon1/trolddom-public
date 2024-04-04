@@ -29,7 +29,7 @@
 		tag: { }
 		lootable : 
 		{ 
-			loot_table: @_loot_table
+			<exists _loot_table> loot_table: @_loot_table
 		}
 		combat_public: 
 		{  

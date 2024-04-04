@@ -68,6 +68,10 @@ namespace tpublic
 						{
 							m_startPositionEntityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENTITY, aChild->GetIdentifier());
 						}
+						else if (aChild->m_name == "minion_map_entity_spawn")
+						{
+							m_minionMapEntitySpawnId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aChild->GetIdentifier());
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -89,6 +93,7 @@ namespace tpublic
 				aWriter->WriteUInt(m_viewAttenuationBias);
 				aWriter->WriteUInt(m_viewHiddenVisibility);
 				aWriter->WriteUInt(m_startPositionEntityId);
+				aWriter->WriteUInt(m_minionMapEntitySpawnId);
 			}
 			
 			bool
@@ -113,6 +118,8 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadUInt(m_startPositionEntityId))
 					return false;
+				if (!aReader->ReadUInt(m_minionMapEntitySpawnId))
+					return false;
 				return true;
 			}
 
@@ -126,6 +133,7 @@ namespace tpublic
 			uint32_t				m_viewAttenuationBias = 0;
 			uint32_t				m_viewHiddenVisibility = 0;
 			uint32_t				m_startPositionEntityId = 0;
+			uint32_t				m_minionMapEntitySpawnId = 0;
 		};
 
 	}

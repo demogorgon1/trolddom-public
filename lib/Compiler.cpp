@@ -66,76 +66,7 @@ namespace tpublic
 		m_parser.GetRoot()->ForEachChild([&](
 			const SourceNode* aNode)
 		{
-			if(aNode->m_name == "player_components")
-			{
-				m_manifest->m_playerComponents.FromSource(aNode);
-			}
-			else if (aNode->m_name == "xp_metrics")
-			{
-				m_manifest->m_xpMetrics.FromSource(aNode);
-			}
-			else if (aNode->m_name == "item_metrics")
-			{
-				m_manifest->m_itemMetrics.FromSource(aNode);
-			}
-			else if (aNode->m_name == "npc_metrics")
-			{
-				m_manifest->m_npcMetrics.FromSource(aNode);
-			}
-			else if (aNode->m_name == "quest_metrics")
-			{
-				m_manifest->m_questMetrics.FromSource(aNode);
-			}
-			else if (aNode->m_name == "profession_metrics")
-			{
-				m_manifest->m_professionMetrics.FromSource(aNode);
-			}
-			else if (aNode->m_name == "ability_metrics")
-			{
-				m_manifest->m_abilityMetrics.FromSource(aNode);
-			}
-			else if (aNode->m_name == "worship_metrics")
-			{
-				m_manifest->m_worshipMetrics.FromSource(aNode);
-			}
-			else if (aNode->m_name == "default_sound_effects")
-			{
-				m_manifest->m_defaultSoundEffects.FromSource(aNode);
-			}
-			else if (aNode->m_name == "tile_layering")
-			{
-				m_manifest->m_tileLayering.FromSource(aNode);
-			}
-			else if(aNode->m_name == "sprites")
-			{
-				spriteSheetBuilder.AddSprites(aNode);
-			}
-			else if (aNode->m_name == "word_list")
-			{
-				WordList::Data::FromSource(aNode, &m_manifest->m_wordList);
-			}
-			else if(aNode->m_tag == "generation_job")
-			{
-				generationJobs.push_back(std::make_unique<GenerationJob>(aNode));
-			}
-			else
-			{
-				DataType::Id dataType = DataType::StringToId(aNode->m_tag.c_str());
-				TP_VERIFY(dataType != DataType::INVALID_ID, aNode->m_debugInfo, "'%s' is not a valid data type.", aNode->m_tag.c_str());
-
-				assert(m_manifest->m_containers[dataType]);
-			
-				DataBase* base = m_manifest->m_containers[dataType]->GetBaseByName(m_sourceContext.m_persistentIdTable.get(), aNode->m_name.c_str());
-
-				TP_VERIFY(!base->m_defined, aNode->m_debugInfo, "'%s' has already been defined.", aNode->m_name.c_str());
-
-				base->m_debugInfo = aNode->m_debugInfo;
-
-				base->FromSource(aNode);
-
-				base->m_defined = true;
-				base->m_componentManager = m_sourceContext.m_componentManager.get();
-			}
+			_ProcessNode(&spriteSheetBuilder, &generationJobs, aNode);
 		});		
 
 		// Prepare word list manifest
@@ -264,6 +195,92 @@ namespace tpublic
 
 		uint64_t elapsed = timer.GetElapsedMilliseconds();		
 		printf("'%s' parsed in %zu ms.\n", aPath, elapsed);
+	}
+
+	void	
+	Compiler::_ProcessNode(
+		SpriteSheetBuilder*								aSpriteSheetBuilder,
+		std::vector<std::unique_ptr<GenerationJob>>*	aGenerationJobs,
+		const SourceNode*								aNode)
+	{
+		if (aNode->m_name == "player_components")
+		{
+			m_manifest->m_playerComponents.FromSource(aNode);
+		}
+		else if (aNode->m_name == "xp_metrics")
+		{
+			m_manifest->m_xpMetrics.FromSource(aNode);
+		}
+		else if (aNode->m_name == "item_metrics")
+		{
+			m_manifest->m_itemMetrics.FromSource(aNode);
+		}
+		else if (aNode->m_name == "npc_metrics")
+		{
+			m_manifest->m_npcMetrics.FromSource(aNode);
+		}
+		else if (aNode->m_name == "quest_metrics")
+		{
+			m_manifest->m_questMetrics.FromSource(aNode);
+		}
+		else if (aNode->m_name == "profession_metrics")
+		{
+			m_manifest->m_professionMetrics.FromSource(aNode);
+		}
+		else if (aNode->m_name == "ability_metrics")
+		{
+			m_manifest->m_abilityMetrics.FromSource(aNode);
+		}
+		else if (aNode->m_name == "worship_metrics")
+		{
+			m_manifest->m_worshipMetrics.FromSource(aNode);
+		}
+		else if (aNode->m_name == "default_sound_effects")
+		{
+			m_manifest->m_defaultSoundEffects.FromSource(aNode);
+		}
+		else if (aNode->m_name == "tile_layering")
+		{
+			m_manifest->m_tileLayering.FromSource(aNode);
+		}
+		else if (aNode->m_name == "sprites")
+		{
+			aSpriteSheetBuilder->AddSprites(aNode);
+		}
+		else if (aNode->m_name == "word_list")
+		{
+			WordList::Data::FromSource(aNode, &m_manifest->m_wordList);
+		}
+		else if (aNode->m_tag == "generation_job")
+		{
+			aGenerationJobs->push_back(std::make_unique<GenerationJob>(aNode));
+		}
+		else if(aNode->IsAnonymousObject())
+		{
+			aNode->ForEachChild([&](
+				const SourceNode* aChild)
+			{
+				_ProcessNode(aSpriteSheetBuilder, aGenerationJobs, aChild);
+			});
+		}
+		else
+		{
+			DataType::Id dataType = DataType::StringToId(aNode->m_tag.c_str());
+			TP_VERIFY(dataType != DataType::INVALID_ID, aNode->m_debugInfo, "'%s' is not a valid data type.", aNode->m_tag.c_str());
+
+			assert(m_manifest->m_containers[dataType]);
+
+			DataBase* base = m_manifest->m_containers[dataType]->GetBaseByName(m_sourceContext.m_persistentIdTable.get(), aNode->m_name.c_str());
+
+			TP_VERIFY(!base->m_defined, aNode->m_debugInfo, "'%s' has already been defined.", aNode->m_name.c_str());
+
+			base->m_debugInfo = aNode->m_debugInfo;
+
+			base->FromSource(aNode);
+
+			base->m_defined = true;
+			base->m_componentManager = m_sourceContext.m_componentManager.get();
+		}
 	}
 
 }

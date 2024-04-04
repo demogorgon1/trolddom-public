@@ -55,6 +55,7 @@ sprites:
 	sprite goblin_bowman_1: { dead: goblin_bowman_1_dead tags: [ goblin ranged ] }
 	sprite goblin_boss_2: { dead: goblin_boss_2_dead tags: [ goblin melee boss ] }
 	sprite goblin_boss_3: { dead: goblin_boss_3_dead tags: [ goblin caster boss ] }
+	sprite arcane_construct: { dead: arcane_construct_dead tags: [ melee ] }
 	
 	cursor: { position: [ 0 48 ] }
 	
@@ -69,6 +70,7 @@ sprites:
 	sprite goblin_bowman_1_dead: { }
 	sprite goblin_boss_2_dead: { }
 	sprite goblin_boss_3_dead: { }
+	sprite arcane_construct_dead: { }
 	
 }
 

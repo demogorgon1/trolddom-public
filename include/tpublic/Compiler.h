@@ -8,20 +8,23 @@
 namespace tpublic
 {
 
+	class GenerationJob;
+	class SpriteSheetBuilder;
+
 	class Compiler
 	{
 	public:
 				Compiler(
-					Manifest*			aManifest);
+					Manifest*										aManifest);
 				~Compiler();
 
 		void	Parse(
-					const char*			aRootPath);
+					const char*										aRootPath);
 		void	Build(
-					const char*			aPersistentIdTablePath,
-					const char*			aDataOutputPath,
-					const char*			aGeneratedSourceOutputPath,
-					Compression::Level	aCompressionLevel);
+					const char*										aPersistentIdTablePath,
+					const char*										aDataOutputPath,
+					const char*										aGeneratedSourceOutputPath,
+					Compression::Level								aCompressionLevel);
 
 	private:
 
@@ -30,8 +33,12 @@ namespace tpublic
 		SourceContext						m_sourceContext;		
 
 		void	_ParseDirectory(
-					const char*			aRootPath,
-					const char*			aPath);
+					const char*										aRootPath,
+					const char*										aPath);
+		void	_ProcessNode(
+					SpriteSheetBuilder*								aSpriteSheetBuilder,
+					std::vector<std::unique_ptr<GenerationJob>>*	aGenerationJobs,
+					const SourceNode*								aNode);
 	};
 
 }

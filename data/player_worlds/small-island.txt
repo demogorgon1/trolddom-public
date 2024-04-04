@@ -1,3 +1,8 @@
+map_entity_spawn .small_island_minion:
+{	
+	spawn_timer: { cooldown_range_min: 600 cooldown_range_max: 1200 min_delay: 500 }
+}
+
 player_world_type small_island:
 {
 	string: "Small Island"
@@ -34,4 +39,5 @@ player_world_type small_island:
 	view_hidden_visibility: 35	
 	
 	start_position_entity: standing_stone
+	minion_map_entity_spawn: .small_island_minion
 }

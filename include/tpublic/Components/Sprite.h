@@ -124,7 +124,6 @@ namespace tpublic
 				});
 			}
 
-			// ComponentBase implementation
 			void
 			UpdateStateAnimations()
 			{
