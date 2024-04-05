@@ -420,6 +420,24 @@ namespace tpublic
 		return (m_walkableBits[j] & (1 << k)) != 0;
 	}
 
+	int32_t
+	MapData::TraceWalkableTiles(
+		const Vec2&				aPosition,
+		const Vec2&				aDirection,
+		int32_t					aMaxDistance) const
+	{
+		Vec2 p = aPosition;
+		int32_t distance = 0;
+		while(IsTileWalkable(p.m_x, p.m_y) && distance < aMaxDistance)
+		{
+			p.m_x += aDirection.m_x;
+			p.m_y += aDirection.m_y;
+			distance++;
+		}
+
+		return distance;
+	}
+
 	bool	
 	MapData::DoesTileblockLineOfSight(
 		int32_t					aX,

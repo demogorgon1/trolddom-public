@@ -27,7 +27,8 @@ namespace tpublic
 	bool
 	ItemList::AddToInventory(
 		const ItemInstance&							aItemInstance,
-		const Data::Item*							aItemData)
+		const Data::Item*							aItemData,
+		bool										aAutoGrow)
 	{
 		if(aItemData->m_unique && HasItems(aItemInstance.m_itemId, 1))
 			return false;
@@ -52,6 +53,16 @@ namespace tpublic
 				}
 			}
 		}
+
+		if(aAutoGrow)
+		{
+			Entry t;
+			t.m_item = aItemInstance;
+			m_entries.push_back(t);
+			m_version++;
+			return true;
+		}
+
 		return false;
 	}
 

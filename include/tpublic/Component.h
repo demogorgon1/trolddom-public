@@ -50,12 +50,13 @@ namespace tpublic
 			ID_SHRINE,
 			ID_DEITY_DISCOVERY,
 			ID_AUCTIONEER,
-			ID_MAILBOX,
+			ID_INTERACTABLE_OBJECT,
 			ID_PLAYER_AUCTIONS,
 			ID_PLAYER_INBOX,
 			ID_PLAYER_OUTBOX,
 			ID_CHARACTER_INFO_VIEW,
 			ID_GATEWAY,
+			ID_PLAYER_WORLD_STASH,
 
 			NUM_IDS
 		};
@@ -104,12 +105,13 @@ namespace tpublic
 			"shrine",
 			"deity_discovery",
 			"auctioneer",
-			"mailbox",
+			"interactable_object",
 			"player_auctions",
 			"player_inbox",
 			"player_outbox",
 			"character_info_view",
-			"gateway"
+			"gateway",
+			"player_world_stash"
 		};		
 
 		static_assert(sizeof(COMPONENT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

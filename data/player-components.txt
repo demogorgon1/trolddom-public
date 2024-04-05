@@ -22,6 +22,7 @@ player_components:
 	player_private
 	player_public
 	player_stats
+	player_world_stash
 	position
 	recent_achievements
 	reputation

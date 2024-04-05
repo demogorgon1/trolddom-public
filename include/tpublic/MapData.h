@@ -472,6 +472,10 @@ namespace tpublic
 		bool		IsTileWalkable(
 						int32_t					aX,
 						int32_t					aY) const;
+		int32_t		TraceWalkableTiles(
+						const Vec2&				aPosition,
+						const Vec2&				aDirection,
+						int32_t					aMaxDistance) const;
 		bool		DoesTileblockLineOfSight(
 						int32_t					aX,
 						int32_t					aY) const;

@@ -45,7 +45,8 @@ namespace tpublic
 								IReader*									aReader);
 		bool				AddToInventory(
 								const ItemInstance&							aItemInstance,
-								const Data::Item*							aItemData);
+								const Data::Item*							aItemData,
+								bool										aAutoGrow = false);
 		bool				CanAddMultipleToInventory(
 								uint32_t									aItemId,
 								uint32_t									aQuantity,

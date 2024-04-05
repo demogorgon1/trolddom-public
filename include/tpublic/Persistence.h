@@ -12,6 +12,7 @@ namespace tpublic::Persistence
 		ID_VOLATILE,
 		ID_MAIN,
 		ID_STATS,
+		ID_PLAYER_WORLD_STASH,
 
 		NUM_IDS
 	};
@@ -38,10 +39,11 @@ namespace tpublic::Persistence
 		{ NULL, PLAYER_PERSISTENCE_TYPE_NONE },
 
 		// Player
-		{ "account",	PLAYER_PERSISTENCE_TYPE_PER_ACCOUNT },
-		{ "volatile",	PLAYER_PERSISTENCE_TYPE_PER_CHARACTER },
-		{ "main",		PLAYER_PERSISTENCE_TYPE_PER_CHARACTER },
-		{ "stats",		PLAYER_PERSISTENCE_TYPE_PER_CHARACTER }
+		{ "account",			PLAYER_PERSISTENCE_TYPE_PER_ACCOUNT },
+		{ "volatile",			PLAYER_PERSISTENCE_TYPE_PER_CHARACTER },
+		{ "main",				PLAYER_PERSISTENCE_TYPE_PER_CHARACTER },
+		{ "stats",				PLAYER_PERSISTENCE_TYPE_PER_CHARACTER },
+		{ "player_world_stash",	PLAYER_PERSISTENCE_TYPE_PER_CHARACTER }
 	};
 
 	static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

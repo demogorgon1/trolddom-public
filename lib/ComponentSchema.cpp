@@ -131,99 +131,99 @@ namespace tpublic
 				TP_VERIFY(field != NULL, aChild->m_debugInfo, "'%s' is not a valid component field.", fieldName);
 				TP_VERIFY(field->m_offset != UINT32_MAX, aChild->m_debugInfo, "'%s' is a deprecated component field.", fieldName);
 
-				switch(field->m_type)
+				if(field->m_customReadSource)
 				{
-				case TYPE_VEC2:
+					void* t = (void*)&(((const uint8_t*)aObject)[field->m_offset]);
+					field->m_customReadSource(aChild, t);
+				}
+				else
+				{
+					switch(field->m_type)
 					{
-						TP_VERIFY(aChild->m_children.size() == 2 && aChild->m_type == SourceNode::TYPE_ARRAY, aChild->m_debugInfo, "Syntax error.");
-						Vec2* t = (Vec2*)&(((const uint8_t*)aObject)[field->m_offset]);
-						t->m_x = aChild->m_children[0]->GetInt32();
-						t->m_y = aChild->m_children[1]->GetInt32();
-					}
-					break;
-
-				case TYPE_STRING:
-					{
-						std::string* t = (std::string*)&(((const uint8_t*)aObject)[field->m_offset]);
-						*t = aChild->GetString();					
-					}
-					break;
-
-				case TYPE_BOOL:
-					{
-						bool* t = (bool*)&(((const uint8_t*)aObject)[field->m_offset]);
-						*t = aChild->GetBool();					
-					}
-					break;
-
-				case TYPE_INT32:
-					{
-						int32_t* t = (int32_t*)&(((const uint8_t*)aObject)[field->m_offset]);
-						*t = aChild->GetInt32();					
-					}
-					break;
-
-				case TYPE_INT64:
-					{
-						int64_t* t = (int64_t*)&(((const uint8_t*)aObject)[field->m_offset]);
-						*t = aChild->GetInt64();					
-					}
-					break;
-
-				case TYPE_UINT32:
-					{
-						uint32_t* t = (uint32_t*)&(((const uint8_t*)aObject)[field->m_offset]);
-				
-						if (field->m_dataType != DataType::INVALID_ID)
-							*t = aSource->m_sourceContext->m_persistentIdTable->GetId(field->m_dataType, aChild->GetIdentifier());
-						else
-							*t = aChild->GetUInt32();
-					}
-					break;
-
-				case TYPE_UINT64:
-					{
-						uint64_t* t = (uint64_t*)&(((const uint8_t*)aObject)[field->m_offset]);
-						*t = aChild->GetUInt64();					
-					}
-					break;
-
-				case TYPE_FLOAT:
-					{
-						float* t = (float*)&(((const uint8_t*)aObject)[field->m_offset]);
-						*t = aChild->GetFloat();					
-					}
-					break;
-
-				case TYPE_UINT32_ARRAY:
-					{
-						TP_VERIFY(aChild->m_type == SourceNode::TYPE_ARRAY, aChild->m_debugInfo, "Syntax error.");
-						std::vector<uint32_t>* t = (std::vector<uint32_t>*)&(((const uint8_t*)aObject)[field->m_offset]);
-						aChild->ForEachChild([field, t](
-							const SourceNode* aElement)
+					case TYPE_VEC2:
 						{
-							uint32_t value;
+							TP_VERIFY(aChild->m_children.size() == 2 && aChild->m_type == SourceNode::TYPE_ARRAY, aChild->m_debugInfo, "Syntax error.");
+							Vec2* t = (Vec2*)&(((const uint8_t*)aObject)[field->m_offset]);
+							t->m_x = aChild->m_children[0]->GetInt32();
+							t->m_y = aChild->m_children[1]->GetInt32();
+						}
+						break;
 
+					case TYPE_STRING:
+						{
+							std::string* t = (std::string*)&(((const uint8_t*)aObject)[field->m_offset]);
+							*t = aChild->GetString();					
+						}
+						break;
+
+					case TYPE_BOOL:
+						{
+							bool* t = (bool*)&(((const uint8_t*)aObject)[field->m_offset]);
+							*t = aChild->GetBool();					
+						}
+						break;
+
+					case TYPE_INT32:
+						{
+							int32_t* t = (int32_t*)&(((const uint8_t*)aObject)[field->m_offset]);
+							*t = aChild->GetInt32();					
+						}
+						break;
+
+					case TYPE_INT64:
+						{
+							int64_t* t = (int64_t*)&(((const uint8_t*)aObject)[field->m_offset]);
+							*t = aChild->GetInt64();					
+						}
+						break;
+
+					case TYPE_UINT32:
+						{
+							uint32_t* t = (uint32_t*)&(((const uint8_t*)aObject)[field->m_offset]);
+				
 							if (field->m_dataType != DataType::INVALID_ID)
-								value = aElement->m_sourceContext->m_persistentIdTable->GetId(field->m_dataType, aElement->GetIdentifier());
+								*t = aSource->m_sourceContext->m_persistentIdTable->GetId(field->m_dataType, aChild->GetIdentifier());
 							else
-								value = aElement->GetUInt32();
+								*t = aChild->GetUInt32();
+						}
+						break;
 
-							t->push_back(value);
-						});
+					case TYPE_UINT64:
+						{
+							uint64_t* t = (uint64_t*)&(((const uint8_t*)aObject)[field->m_offset]);
+							*t = aChild->GetUInt64();					
+						}
+						break;
+
+					case TYPE_FLOAT:
+						{
+							float* t = (float*)&(((const uint8_t*)aObject)[field->m_offset]);
+							*t = aChild->GetFloat();					
+						}
+						break;
+
+					case TYPE_UINT32_ARRAY:
+						{
+							TP_VERIFY(aChild->m_type == SourceNode::TYPE_ARRAY, aChild->m_debugInfo, "Syntax error.");
+							std::vector<uint32_t>* t = (std::vector<uint32_t>*)&(((const uint8_t*)aObject)[field->m_offset]);
+							aChild->ForEachChild([field, t](
+								const SourceNode* aElement)
+							{
+								uint32_t value;
+
+								if (field->m_dataType != DataType::INVALID_ID)
+									value = aElement->m_sourceContext->m_persistentIdTable->GetId(field->m_dataType, aElement->GetIdentifier());
+								else
+									value = aElement->GetUInt32();
+
+								t->push_back(value);
+							});
+						}
+						break;
+
+					default:
+						break;
 					}
-					break;
-
-				case TYPE_CUSTOM:
-					{
-						void* t = (void*) & (((const uint8_t*)aObject)[field->m_offset]);
-						assert(field->m_customReadSource);
-						field->m_customReadSource(aChild, t);
-					}
-					break;
-
-				default:
-					break;
 				}
 			}
 		});

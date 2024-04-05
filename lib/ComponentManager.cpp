@@ -18,9 +18,9 @@
 #include <tpublic/Components/Gateway.h>
 #include <tpublic/Components/GuildName.h>
 #include <tpublic/Components/GuildRegistrar.h>
+#include <tpublic/Components/InteractableObject.h>
 #include <tpublic/Components/Inventory.h>
 #include <tpublic/Components/Lootable.h>
-#include <tpublic/Components/Mailbox.h>
 #include <tpublic/Components/NPC.h>
 #include <tpublic/Components/Openable.h>
 #include <tpublic/Components/Owner.h>
@@ -31,6 +31,7 @@
 #include <tpublic/Components/PlayerPrivate.h>
 #include <tpublic/Components/PlayerPublic.h>
 #include <tpublic/Components/PlayerStats.h>
+#include <tpublic/Components/PlayerWorldStash.h>
 #include <tpublic/Components/Position.h>
 #include <tpublic/Components/RecentAchievements.h>
 #include <tpublic/Components/Reputation.h>
@@ -72,9 +73,9 @@ namespace tpublic
 		_Register<Components::Gateway>();
 		_Register<Components::GuildName>();
 		_Register<Components::GuildRegistrar>();
+		_Register<Components::InteractableObject>();
 		_Register<Components::Inventory>();
 		_Register<Components::Lootable>();
-		_Register<Components::Mailbox>();
 		_Register<Components::NPC>();
 		_Register<Components::Openable>();
 		_Register<Components::Owner>();
@@ -85,6 +86,7 @@ namespace tpublic
 		_Register<Components::PlayerPublic>();
 		_Register<Components::PlayerPrivate>();
 		_Register<Components::PlayerStats>();
+		_Register<Components::PlayerWorldStash>();
 		_Register<Components::Position>();
 		_Register<Components::RecentAchievements>();
 		_Register<Components::Reputation>();
