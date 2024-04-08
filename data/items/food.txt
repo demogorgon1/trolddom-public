@@ -5,7 +5,7 @@
 {
 	string: @_string
 	icon: @_icon
-	states: [ default in_combat ]
+	states: [ default ]
 	flags: [ always_in_range always_in_line_of_sight ]	
 	direct_effect heal: { base: @_heal_tick }	
 	sound_effects: { hit: [ eat_1 ] }
@@ -16,7 +16,7 @@
 	string: "Eating"
 	icon: @_icon
 	type: buff
-	flags: [ channeled ]
+	flags: [ channeled cancel_in_combat ]
 	duration: 100
 	aura_effect repeat: 
 	{ 
@@ -33,7 +33,7 @@
 	flags: [ target_self consumable ]
 	icon: @_icon
 	consume_items: @_item
-	states: [ default in_combat ]	
+	states: [ default ]	
 	direct_effect apply_aura: { aura: @_aura }
 	cooldowns: [ global ]
 }

@@ -77,7 +77,8 @@ namespace tpublic
 			{
 				FLAG_UNIQUE = 0x01,
 				FLAG_CHANNELED = 0x02,
-				FLAG_HIDE_DESCRIPTION = 0x04
+				FLAG_HIDE_DESCRIPTION = 0x04,
+				FLAG_CANCEL_IN_COMBAT = 0x08
 			};
 
 			static Type
@@ -110,6 +111,8 @@ namespace tpublic
 						flags |= FLAG_CHANNELED;
 					else if (strcmp(string, "hide_description") == 0)
 						flags |= FLAG_HIDE_DESCRIPTION;
+					else if (strcmp(string, "cancel_in_combat") == 0)
+						flags |= FLAG_CANCEL_IN_COMBAT;
 					else
 						TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid aura flag.", string);
 				});

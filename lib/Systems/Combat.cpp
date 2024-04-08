@@ -34,7 +34,7 @@ namespace tpublic::Systems
 	Combat::UpdatePrivate(
 		uint32_t			/*aEntityId*/,
 		uint32_t			aEntityInstanceId,
-		EntityState::Id		/*aEntityState*/,
+		EntityState::Id		aEntityState,
 		int32_t				/*aTicksInState*/,
 		ComponentBase**		aComponents,
 		Context*			aContext) 
@@ -45,6 +45,10 @@ namespace tpublic::Systems
 			for(size_t i = 0; i < auras->m_entries.size(); i++)
 			{
 				std::unique_ptr<Components::Auras::Entry>& entry = auras->m_entries[i];
+
+				const Data::Aura* aura = GetManifest()->GetById<Data::Aura>(entry->m_auraId);
+				if((aura->m_flags & Data::Aura::FLAG_CANCEL_IN_COMBAT) != 0 && aEntityState == EntityState::ID_IN_COMBAT)
+					entry->m_cancel = true;
 				
 				if(!entry->m_cancel)
 				{
