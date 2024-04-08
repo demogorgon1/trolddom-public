@@ -127,6 +127,11 @@ sprites:
 	sprite icon_bread_1 : { tags: [ icon ] }
 	sprite icon_red_apple : { tags: [ icon ] }
 	sprite icon_green_apple : { tags: [ icon ] }
+	sprite icon_banana : { tags: [ icon ] }
+	sprite icon_mushroom_1 : { tags: [ icon ] }
+	sprite icon_mushroom_2 : { tags: [ icon ] }
+	sprite icon_blue_orb : { tags: [ icon ] }
+	sprite icon_red_orb : { tags: [ icon ] }
 	
 }
 
