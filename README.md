@@ -1,3 +1,5 @@
+![Trolddom](https://github.com/demogorgon1/trolddom-public/blob/master/logo_460x215.png?raw=true)
+
 # trolddom-public
 Gameplay code and content for the Trolddom game. These parts are released as Open Source under the MIT license. Note that this doesn't include all code, it just defines and implements all skills, maps, classes, NPCs, etc. You can see this repository as a (very specialized) Open Source software library that is used by the game.
 
