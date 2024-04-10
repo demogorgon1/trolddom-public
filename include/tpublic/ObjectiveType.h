@@ -11,6 +11,7 @@ namespace tpublic
 			INVALID_ID,
 
 			ID_KILL_NPC,
+			ID_COLLECT_ITEMS,
 
 			NUM_IDS
 		};
@@ -19,7 +20,8 @@ namespace tpublic
 		static constexpr const char* STRINGS[] =
 		{
 			NULL,
-			"kill_npc"
+			"kill_npc",
+			"collect_items"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);
@@ -32,7 +34,7 @@ namespace tpublic
 			for (uint32_t i = 1; i < (uint32_t)NUM_IDS; i++)
 			{
 				assert(STRINGS[i] != NULL);
-				if (s == aString)
+				if (s == STRINGS[i])
 					return (Id)i;
 			}
 

@@ -78,6 +78,7 @@ namespace tpublic::DirectEffects
 		case SimpleDirectEffect::ID_PRAY:
 		case SimpleDirectEffect::ID_DESECRATE:
 		case SimpleDirectEffect::ID_START_QUEST:
+		case SimpleDirectEffect::ID_EDIT_PLAYER_WORLDS:
 			aCombatResultQueue->AddSimpleDirectEffect(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), m_id, m_param);
 			break;
 

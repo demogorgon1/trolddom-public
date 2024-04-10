@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../DataBase.h"
+#include "../Requirement.h"
 
 namespace tpublic
 {
@@ -72,6 +73,8 @@ namespace tpublic
 							m_lootGroupId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_LOOT_GROUP, aChild->GetIdentifier());
 						else if (aChild->m_name == "creature_types")
 							aChild->GetIdArray(DataType::ID_CREATURE_TYPE, m_creatureTypes);
+						else if(aChild->m_tag == "requirement")
+							m_requirements.push_back(Requirement(aChild));
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					});
@@ -84,6 +87,7 @@ namespace tpublic
 					aStream->WriteUInt(m_weight);
 					aStream->WriteUInt(m_lootGroupId);
 					aStream->WriteUInts(m_creatureTypes);
+					aStream->WriteObjects(m_requirements);
 				}
 
 				bool
@@ -95,6 +99,8 @@ namespace tpublic
 					if (!aStream->ReadUInt(m_lootGroupId))
 						return false;
 					if (!aStream->ReadUInts(m_creatureTypes))
+						return false;
+					if(!aStream->ReadObjects(m_requirements))
 						return false;
 					return true;
 				}
@@ -121,10 +127,13 @@ namespace tpublic
 				uint32_t						m_weight = 1;
 				uint32_t						m_lootGroupId = 0;
 				std::vector<uint32_t>			m_creatureTypes;
+				std::vector<Requirement>		m_requirements;
 			};
 
 			struct Slot
 			{
+				static const size_t MAX_POSSIBILTY_COUNT = 32;
+
 				Slot()
 				{
 
@@ -141,6 +150,8 @@ namespace tpublic
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					});
+
+					TP_VERIFY(m_possibilities.size() <= MAX_POSSIBILTY_COUNT, aSource->m_debugInfo, "Maximum possibility count exceeded by %zu.", m_possibilities.size() - MAX_POSSIBILTY_COUNT);
 				}
 
 				void

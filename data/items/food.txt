@@ -30,7 +30,7 @@
 {
 	string: @_string
 	description: @_description
-	flags: [ target_self consumable ]
+	flags: [ target_self item ]
 	icon: @_icon
 	consume_items: @_item
 	states: [ default ]	

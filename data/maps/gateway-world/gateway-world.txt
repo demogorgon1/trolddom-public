@@ -223,6 +223,23 @@ map_entity_spawn .object:
 	
 }
 
+loot_table .gateway_world:
+{
+	slots:
+	[
+		{
+			possibility: { weight: 1 }
+			
+			possibility: 
+			{ 
+				weight: 1 
+				loot_group: gateway_world_quest_item_1 
+				requirement self<must_have_active_quest>: { id: gateway_world_quest_1 }
+			}
+		}
+	]	
+}
+
 map gateway_world:
 {
 	string: "Gateway World"
@@ -236,6 +253,8 @@ map gateway_world:
 	view_attenuation: 0
 	view_attenuation_bias: 0
 	view_hidden_visibility: 35			
+	
+	map_loot_tables: [ .gateway_world ]
 
 	generator world:
 	{

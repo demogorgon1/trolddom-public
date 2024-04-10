@@ -30,7 +30,7 @@ namespace tpublic
 		const Data::Item*							aItemData,
 		bool										aAutoGrow)
 	{
-		if(aItemData->m_unique && HasItems(aItemInstance.m_itemId, 1))
+		if(aItemData->IsUnique() && HasItems(aItemInstance.m_itemId, 1))
 			return false;
 
 		for(Entry& t : m_entries)
@@ -72,7 +72,7 @@ namespace tpublic
 		uint32_t									aQuantity,
 		const Data::Item*							aItemData) const
 	{
-		if (aItemData->m_unique && HasItems(aItemId, 1))
+		if (aItemData->IsUnique() && HasItems(aItemId, 1))
 			return false;
 
 		if(aQuantity == 0)
@@ -112,7 +112,7 @@ namespace tpublic
 		uint32_t									aQuantity,
 		const Data::Item*							aItemData) 
 	{
-		if (aItemData->m_unique && HasItems(aItemId, 1))
+		if (aItemData->IsUnique() && HasItems(aItemId, 1))
 			return;
 
 		if(aQuantity == 0)

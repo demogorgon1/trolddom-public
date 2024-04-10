@@ -7,15 +7,28 @@
 namespace tpublic
 {
 
+	namespace Components
+	{
+		struct Inventory;
+	}
+
 	class ObjectiveInstanceBase;
 	class SourceNode;
 
 	class ObjectiveTypeBase
 	{
 	public:
+		enum Flag : uint32_t
+		{
+			FLAG_UNMANAGED = 0x00000001,
+			FLAG_WATCH_INVENTORY = 0x00000002
+		};
+
 		ObjectiveTypeBase(
-			ObjectiveType::Id										aObjectiveTypeId)
+			ObjectiveType::Id										aObjectiveTypeId,
+			uint32_t												aFlags)
 			: m_objectiveTypeId(aObjectiveTypeId)
+			, m_flags(aFlags)
 		{
 
 		}
@@ -38,12 +51,17 @@ namespace tpublic
 		// Virtual methods
 		virtual void					GetWatchedEntities(
 											std::vector<uint32_t>&	/*aOutEntityIds*/) const { }
+		virtual void					PostCompletionInventoryUpdate(
+											Components::Inventory*	/*aInventory*/) const { }
 
 		// Data access
 		ObjectiveType::Id				GetObjectiveTypeId() const { return m_objectiveTypeId; }
+		uint32_t						GetFlags() const { return m_flags; }
 
 	private:
+
 		ObjectiveType::Id		m_objectiveTypeId;
+		uint32_t				m_flags;
 	};
 
 }

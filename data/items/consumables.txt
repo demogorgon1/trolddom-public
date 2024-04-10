@@ -2,7 +2,7 @@ ability consumable_small_healing_potion:
 {
 	string: "Small Healing Potion"
 	description: "Restores 20 health."
-	flags: [ target_self consumable ]
+	flags: [ target_self item ]
 	icon: icon_small_red_potion
 	direct_effect heal: { base: 20 }
 	consume_items: { consumable_small_healing_potion: 1 }
@@ -27,7 +27,7 @@ ability consumable_small_mana_potion:
 {
 	string: "Small Mana Potion"
 	description: "Restores 20 mana."
-	flags: [ target_self consumable ]
+	flags: [ target_self item ]
 	icon: icon_small_blue_potion
 	#direct_effect heal: { base: 20 }
 	consume_items: { consumable_small_mana_potion: 1 }

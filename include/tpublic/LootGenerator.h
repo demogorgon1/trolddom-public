@@ -13,6 +13,7 @@ namespace tpublic
 		struct LootTable;
 	}
 
+	class EntityInstance;
 	class Manifest;
 
 	class LootGenerator
@@ -21,22 +22,35 @@ namespace tpublic
 		typedef std::function<void(const tpublic::ItemInstance&)> ItemCallback;
 
 					LootGenerator(
-						const Manifest*				aManifest);			
+						const Manifest*								aManifest);			
 					~LootGenerator();
 
 		void		GenerateLootable(
-						std::mt19937&				aRandom,
-						uint32_t					aLevel,
-						uint32_t					aCreatureTypeId,
-						bool						aIsElite,
-						uint32_t					aPlayerWorldCharacterId,
-						Components::Lootable*		aLootable) const;
+						std::mt19937&								aRandom,
+						const std::vector<const EntityInstance*>&	aPlayerEntityInstances,
+						const EntityInstance*						aLootableEntityInstance,
+						uint32_t									aLevel,
+						uint32_t									aCreatureTypeId,
+						bool										aIsElite,
+						uint32_t									aPlayerWorldCharacterId,
+						Components::Lootable*						aLootable) const;
+		void		GenerateLootableItems(
+						std::mt19937&								aRandom,
+						const std::vector<const EntityInstance*>&	aPlayerEntityInstances,
+						const EntityInstance*						aLootableEntityInstance,
+						uint32_t									aLevel,
+						uint32_t									aCreatureTypeId,
+						const Data::LootTable*						aLootTable,
+						uint32_t									aPlayerWorldCharacterId,
+						Components::Lootable*						aLootable) const;
 		void		GenerateItems(
-						std::mt19937&				aRandom,
-						uint32_t					aLevel,
-						uint32_t					aCreatureTypeId,
-						const Data::LootTable*		aLootTable,
-						ItemCallback				aItemCallback) const;						
+						std::mt19937&								aRandom,
+						const std::vector<const EntityInstance*>&	aPlayerEntityInstances,
+						const EntityInstance*						aLootableEntityInstance,
+						uint32_t									aLevel,
+						uint32_t									aCreatureTypeId,
+						const Data::LootTable*						aLootTable,
+						ItemCallback								aItemCallback) const;						
 
 	private:
 
@@ -51,7 +65,7 @@ namespace tpublic
 		{
 			LevelBucket*
 			GetOrCreateLevelBucket(
-				uint32_t						aLevel)
+				uint32_t											aLevel)
 			{
 				LevelBucketTable::iterator i = m_levelBucketTable.find(aLevel);
 				if (i != m_levelBucketTable.end())
@@ -64,7 +78,7 @@ namespace tpublic
 
 			const LevelBucket*
 			GetLevelBucket(
-				uint32_t						aLevel) const
+				uint32_t											aLevel) const
 			{
 				LevelBucketTable::const_iterator i = m_levelBucketTable.find(aLevel);
 				if (i == m_levelBucketTable.cend())
@@ -82,7 +96,7 @@ namespace tpublic
 		GroupTable						m_groups;
 
 		Group*		_GetOrCreateGroup(
-						uint32_t				aLootGroupId);
+						uint32_t									aLootGroupId);
 	};
 
 }

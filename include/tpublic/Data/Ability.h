@@ -40,7 +40,7 @@ namespace tpublic
 				FLAG_SPELL							= 0x00004000,
 				FLAG_MELEE							= 0x00008000,
 				FLAG_RANGED							= 0x00010000,
-				FLAG_CONSUMABLE						= 0x00020000,
+				FLAG_ITEM							= 0x00020000,
 				FLAG_ALWAYS_IN_RANGE				= 0x00040000,
 				FLAG_ALWAYS_IN_LINE_OF_SIGHT		= 0x00080000,
 				FLAG_CRAFTING						= 0x00100000,
@@ -94,8 +94,8 @@ namespace tpublic
 						flags |= FLAG_AOE_LOW_HEALTH_PRIO;
 					else if (strcmp(identifier, "offensive") == 0)
 						flags |= FLAG_OFFENSIVE;
-					else if (strcmp(identifier, "consumable") == 0)
-						flags |= FLAG_CONSUMABLE;
+					else if (strcmp(identifier, "item") == 0)
+						flags |= FLAG_ITEM;
 					else if (strcmp(identifier, "spell") == 0)
 						flags |= FLAG_SPELL;
 					else if (strcmp(identifier, "melee") == 0)
@@ -361,7 +361,7 @@ namespace tpublic
 			bool IsLateCooldownTrigger() const { return m_flags & FLAG_LATE_COOLDOWN_TRIGGER; }
 			bool IsChanneled() const { return m_channelTicks != 0 && m_channelTickAbilityId != 0; }
 			bool IsOffensive() const { return m_flags & FLAG_OFFENSIVE; }
-			bool IsConsumable() const { return m_flags & FLAG_CONSUMABLE; }
+			bool IsItem() const { return m_flags & FLAG_ITEM; }
 			
 			bool 
 			IsUsableInState(
@@ -405,6 +405,8 @@ namespace tpublic
 							m_aoeRadius = aMember->GetUInt32();
 						else if (aMember->m_name == "aoe_cap")
 							m_aoeCap = aMember->GetUInt32();
+						else if (aMember->m_name == "required_level")
+							m_requiredLevel = aMember->GetUInt32();
 						else if (aMember->m_name == "speed")
 							m_speed = aMember->GetInt32();
 						else if (aMember->m_name == "delay")
@@ -475,6 +477,7 @@ namespace tpublic
 				aWriter->WriteObjects(m_requirements);
 				m_soundEffects.ToStream(aWriter);
 				aWriter->WriteOptionalObject(m_npcLevelRange);
+				aWriter->WriteUInt(m_requiredLevel);
 
 				for(uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 					aWriter->WriteUInt(m_resourceCosts[i]);
@@ -536,6 +539,8 @@ namespace tpublic
 					return false;
 				if(!aReader->ReadOptionalObject(m_npcLevelRange))
 					return false;
+				if (!aReader->ReadUInt(m_requiredLevel))
+					return false;
 
 				for (uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 				{
@@ -574,6 +579,7 @@ namespace tpublic
 			std::vector<Requirement>							m_requirements;
 			SoundEffect::Collection								m_soundEffects;
 			std::optional<UIntRange>							m_npcLevelRange;
+			uint32_t											m_requiredLevel = 0;
 		};
 
 	}

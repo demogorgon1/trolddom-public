@@ -50,6 +50,12 @@ namespace tpublic::ObjectiveTypes
 			return m_killed == m_objective->m_count;
 		}
 
+		uint32_t				
+		GetHash() const override
+		{
+			return m_killed;
+		}
+
 		void	
 		ToStream(
 			IWriter*						aWriter) const override
@@ -75,7 +81,7 @@ namespace tpublic::ObjectiveTypes
 	//-------------------------------------------------------------------------------------------
 
 	KillNPC::KillNPC()
-		: ObjectiveTypeBase(ID)
+		: ObjectiveTypeBase(ID, FLAGS)
 	{
 
 	}

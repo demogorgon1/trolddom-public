@@ -39,6 +39,9 @@ namespace tpublic
 			PlayerTag		m_playerTag;
 			LootRule::Id	m_lootRule = LootRule::INVALID_ID;
 			Rarity::Id		m_lootThreshold = Rarity::INVALID_ID;
+
+			// Internal server data
+			uint32_t		m_playerEntityInstanceId = 0;
 		};
 	}
 

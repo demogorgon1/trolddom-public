@@ -88,10 +88,10 @@ namespace tpublic
 
 		bool	
 		CheckList(
-			const std::vector<Requirement>&		aRequirements,
-			const EntityInstance*				aSelf,
-			const EntityInstance*				aTarget,
-			const Requirement**					aOutFailedRequirement)
+			const std::vector<Requirement>&						aRequirements,
+			const EntityInstance*								aSelf,
+			const EntityInstance*								aTarget,
+			const Requirement**									aOutFailedRequirement)
 		{
 			for(const Requirement& requirement : aRequirements)
 			{
@@ -107,10 +107,35 @@ namespace tpublic
 		}
 
 		bool	
+		CheckAnyList(
+			const std::vector<Requirement>&						aRequirements,
+			const std::vector<const EntityInstance*>&			aSelves,
+			const EntityInstance*								aTarget)
+		{
+			for(const EntityInstance* self : aSelves)
+			{
+				bool ok = true;
+
+				for (const Requirement& requirement : aRequirements)
+				{
+					if (!Check(self, aTarget, &requirement))
+					{
+						ok = false;
+						break;
+					}
+				}
+
+				if(ok)
+					return true;
+			}
+			return false;
+		}
+
+		bool	
 		CheckOpenable(
-			const EntityInstance*			aSelf,
-			const EntityInstance*			aTarget,
-			bool*							aOutInstant)
+			const EntityInstance*								aSelf,
+			const EntityInstance*								aTarget,
+			bool*												aOutInstant)
 		{
 			const Components::Openable* openable = aTarget->GetComponent<Components::Openable>();
 			if(openable == NULL)

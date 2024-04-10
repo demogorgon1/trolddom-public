@@ -9,6 +9,7 @@
 
 #include <tpublic/LootGenerator.h>
 #include <tpublic/Manifest.h>
+#include <tpublic/Requirements.h>
 
 namespace tpublic
 {
@@ -56,12 +57,14 @@ namespace tpublic
 
 	void		
 	LootGenerator::GenerateLootable(
-		std::mt19937&			aRandom,
-		uint32_t				aLevel,
-		uint32_t				aCreatureTypeId,
-		bool					aIsElite,
-		uint32_t				aPlayerWorldCharacterId,
-		Components::Lootable*	aLootable) const
+		std::mt19937&								aRandom,
+		const std::vector<const EntityInstance*>&	aPlayerEntityInstances,
+		const EntityInstance*						aLootableEntityInstance,
+		uint32_t									aLevel,
+		uint32_t									aCreatureTypeId,
+		bool										aIsElite,
+		uint32_t									aPlayerWorldCharacterId,
+		Components::Lootable*						aLootable) const
 	{
 		const Data::LootTable* lootTable = m_manifest->GetById<tpublic::Data::LootTable>(aLootable->m_lootTableId);
 
@@ -96,7 +99,21 @@ namespace tpublic
 		}
 
 		// Items
-		GenerateItems(aRandom, aLevel, aCreatureTypeId, lootTable, [aLootable, aPlayerWorldCharacterId](
+		GenerateLootableItems(aRandom, aPlayerEntityInstances, aLootableEntityInstance, aLevel, aCreatureTypeId, lootTable, aPlayerWorldCharacterId, aLootable);
+	}
+
+	void		
+	LootGenerator::GenerateLootableItems(
+		std::mt19937&								aRandom,
+		const std::vector<const EntityInstance*>&	aPlayerEntityInstances,
+		const EntityInstance*						aLootableEntityInstance,
+		uint32_t									aLevel,
+		uint32_t									aCreatureTypeId,
+		const Data::LootTable*						aLootTable,
+		uint32_t									aPlayerWorldCharacterId,
+		Components::Lootable*						aLootable) const
+	{
+		GenerateItems(aRandom, aPlayerEntityInstances, aLootableEntityInstance, aLevel, aCreatureTypeId, aLootTable, [aLootable, aPlayerWorldCharacterId](
 			const tpublic::ItemInstance& aItemInstance)
 		{
 			Components::Lootable::AvailableLoot loot;
@@ -108,38 +125,57 @@ namespace tpublic
 
 	void		
 	LootGenerator::GenerateItems(
-		std::mt19937&				aRandom,
-		uint32_t					aLevel,
-		uint32_t					aCreatureTypeId,
-		const Data::LootTable*		aLootTable,
-		ItemCallback				aItemCallback) const
+		std::mt19937&								aRandom,
+		const std::vector<const EntityInstance*>&	aPlayerEntityInstances,
+		const EntityInstance*						aLootableEntityInstance,
+		uint32_t									aLevel,
+		uint32_t									aCreatureTypeId,
+		const Data::LootTable*						aLootTable,
+		ItemCallback								aItemCallback) const
 	{	
 		for(const std::unique_ptr<Data::LootTable::Slot>& slot : aLootTable->m_slots)
 		{
-			uint32_t totalWeight = 0;
+			struct Entry
+			{
+				uint32_t	m_accumWeight = 0;
+				uint32_t	m_lootGroupId = 0;
+			};
+
+			Entry entries[Data::LootTable::Slot::MAX_POSSIBILTY_COUNT];
+			size_t entryCount = 0;
+
+			uint32_t accumWeight = 0;
 
 			for(const Data::LootTable::Possibility& possibility : slot->m_possibilities)
 			{
-				if(possibility.HasCreatureType(aCreatureTypeId))
-					totalWeight += possibility.m_weight;
+				if(!possibility.HasCreatureType(aCreatureTypeId))
+					continue;
+
+				if(aLootableEntityInstance != NULL)
+				{
+					if (!Requirements::CheckAnyList(possibility.m_requirements, aPlayerEntityInstances, aLootableEntityInstance))
+						continue;
+				}
+
+				TP_CHECK(entryCount < Data::LootTable::Slot::MAX_POSSIBILTY_COUNT, "Too many loot slot possibilities.");
+
+				accumWeight += possibility.m_weight;
+				Entry& t = entries[entryCount++];
+				t.m_accumWeight = accumWeight;
+				t.m_lootGroupId = possibility.m_lootGroupId;
 			}
 
-			std::uniform_int_distribution<uint32_t> distribution(1, totalWeight);
+			std::uniform_int_distribution<uint32_t> distribution(1, accumWeight);
 			uint32_t possibilityRoll = distribution(aRandom);
-			uint32_t accumWeight = 0;
 			uint32_t lootGroupId = 0;
 
-			for (const Data::LootTable::Possibility& possibility : slot->m_possibilities)
+			for(size_t i = 0; i < entryCount; i++)
 			{
-				if (possibility.HasCreatureType(aCreatureTypeId))
+				const Entry& t = entries[i];
+				if (possibilityRoll <= t.m_accumWeight)
 				{
-					accumWeight += possibility.m_weight;
-
-					if (possibilityRoll <= accumWeight)
-					{
-						lootGroupId = possibility.m_lootGroupId;
-						break;
-					}
+					lootGroupId = t.m_lootGroupId;
+					break;
 				}
 			}
 

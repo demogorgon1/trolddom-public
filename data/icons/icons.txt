@@ -132,6 +132,10 @@ sprites:
 	sprite icon_mushroom_2 : { tags: [ icon ] }
 	sprite icon_blue_orb : { tags: [ icon ] }
 	sprite icon_red_orb : { tags: [ icon ] }
+
+	cursor: { position: [ 0 112 ] }	
+	sprite icon_blue_shard : { tags: [ icon ] }
+	sprite icon_red_shard : { tags: [ icon ] }
 	
 }
 

@@ -10,6 +10,7 @@
 #include <tpublic/Components/ThreatTarget.h>
 
 #include <tpublic/Data/Faction.h>
+#include <tpublic/Data/LootTable.h>
 #include <tpublic/Data/NPCBehaviorState.h>
 
 #include <tpublic/Systems/NPC.h>
@@ -123,82 +124,9 @@ namespace tpublic::Systems
 
 				if(lootable->m_playerTag.IsSet())
 				{
-					GetData()->m_lootGenerator->GenerateLootable(
-						*aContext->m_random, 
-						combat->m_level, 
-						combat->m_creatureTypeId, 
-						combat->IsElite(), 
-						aContext->m_worldView->WorldViewGetPlayerWorldCharacterId(), 
-						lootable);
-
-					if(lootable->m_availableLoot.size() > 0)
-					{
-						if(lootable->m_playerTag.IsGroup())
-						{
-							uint64_t groupId = lootable->m_playerTag.GetGroupId();
-
-							if(tag->m_lootRule == LootRule::ID_FREE_FOR_ALL)
-							{
-								// Anyone in group can loot
-								lootable->SetPlayerTagForAllAvailableLoot(PlayerTag(PlayerTag::TYPE_ANYONE));
-							}
-							else
-							{
-								// Group and master loot is decided on per item basis
-								size_t index = 0;
-								for(Components::Lootable::AvailableLoot& loot : lootable->m_availableLoot)
-								{
-									assert(loot.m_itemInstance.IsSet());
-									ItemInstanceData itemInstanceData(GetManifest(), loot.m_itemInstance);
-									uint32_t rarity = (uint32_t)itemInstanceData.m_itemData->m_rarity;
-
-									if(rarity < (uint32_t)tag->m_lootThreshold)
-									{
-										// This item rarity is below the threshold, which means it will be assigned using round-robin
-										uint32_t characterId = aContext->m_eventQueue->EventQueueGetNextGroupRoundRobinCharacterId(groupId);
-										if(characterId != 0)
-										{
-											loot.m_playerTag.SetCharacter(characterId, 0);
-										}										
-									}
-									else
-									{
-										// Item is above the rarity threshold, so whoever gets to loot it can't be decided here
-										switch(tag->m_lootRule)
-										{
-										case LootRule::ID_GROUP:
-											{
-												std::vector<uint32_t> groupMembers;
-												aContext->m_worldView->WorldViewGroupEntityInstances(groupId, [&](
-													const EntityInstance* aEntityInstance) -> bool
-												{
-													groupMembers.push_back(aEntityInstance->GetEntityInstanceId());
-													return false;
-												});
-												aContext->m_eventQueue->EventQueueGroupLoot(aEntityInstanceId, groupId, loot, index, groupMembers);
-											}
-											break;
-
-										case LootRule::ID_MASTER:
-											loot.m_playerTag = PlayerTag(PlayerTag::TYPE_MASTER);
-											break;
-
-										default:
-											assert(false);
-											break;
-										}										
-									}
-
-									index++;
-								}
-							}
-						}						
-						else
-						{
-							// No group
-							lootable->SetPlayerTagForAllAvailableLoot(lootable->m_playerTag);
-						}
-					}
+					const MapData* mapData = aContext->m_worldView->WorldViewGetMapData();
+					if(lootable->m_lootTableId != 0 || mapData->m_mapInfo.m_mapLootTableIds.size() > 0)
+						aContext->m_eventQueue->EventQueueGenerateLoot(aEntityInstanceId);
 				}
 			}
 

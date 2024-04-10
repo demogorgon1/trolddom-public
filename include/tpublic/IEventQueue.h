@@ -116,6 +116,8 @@ namespace tpublic
 												uint32_t											aSourceEntityInstanceId,
 												uint32_t											aTargetEntityInstanceId,
 												const ItemInstanceReference&						aItem) = 0;
+		virtual void						EventQueueGenerateLoot(
+												uint32_t											aLootableEntityInstanceId) = 0;
 	};
 
 }

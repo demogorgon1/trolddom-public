@@ -82,6 +82,11 @@ namespace tpublic
 				m_autoDoodads = aItem->GetBool();
 				return true;
 			}
+			else if(aItem->m_name == "map_loot_tables")
+			{
+				aItem->GetIdArray(DataType::ID_LOOT_TABLE, m_mapLootTableIds);
+				return true;
+			}
 			return false;
 		}
 
@@ -100,6 +105,7 @@ namespace tpublic
 			aWriter->WriteUInt(m_defaultFishingLootTableId);
 			aWriter->WritePOD(m_overviewMapType);
 			aWriter->WriteBool(m_autoDoodads);
+			aWriter->WriteUInts(m_mapLootTableIds);
 		}
 
 		bool
@@ -128,6 +134,8 @@ namespace tpublic
 				return false;
 			if (!aReader->ReadBool(m_autoDoodads))
 				return false;
+			if (!aReader->ReadUInts(m_mapLootTableIds))
+				return false;
 			return true;
 		}
 
@@ -143,7 +151,7 @@ namespace tpublic
 		uint32_t									m_defaultFishingLootTableId = 0;
 		OverviewMapType								m_overviewMapType = OVERVIEW_MAP_TYPE_NONE;
 		bool										m_autoDoodads = false;
-		
+		std::vector<uint32_t>						m_mapLootTableIds;
 	};
 
 }

@@ -1,0 +1,24 @@
+ability player_world_orb:
+{
+	string: "Orb of Junjun"
+	description: "Architect your world."
+	flags: [ target_self item ]
+	icon: icon_blue_orb
+	cooldowns: [ global ]	
+	states: [ default ]
+	direct_effect simple<edit_player_worlds>: { }
+	sound_effects: { use_local: [ inventory_1 ] }
+	required_level: 10	
+}
+
+item player_world_orb:
+{
+	binds: when_picked_up
+	type: miscellaneous
+	flags: [ unique not_sellable ]
+	item_level: 10
+	rarity: rare
+	icon: icon_blue_orb		
+	string: "Orb of Junjun"
+	use_ability: player_world_orb
+}

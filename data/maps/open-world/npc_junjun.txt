@@ -1,23 +1,10 @@
-dialogue_screen .junjun_6:
+dialogue_screen .junjun_5:
 {
 	text:
 	[
 		"Due to the mechanics of this particular type of interplanar travel, any items or other things your might pick up on the other side won't be transferable to here."
 		"Just because you own another world it doesn't mean it will benefit you in this one. If you have multiple worlds they'll all be connected in the sense that items can be moved freely between them."
-	]
-	
-	options:
-	[
-		{ goto: .junjun_5 text: "Okay, sure, let's do it!" }
-	]			
-}
-
-dialogue_screen .junjun_5:
-{
-	text:
-	[
-		"Excellent, I can help you with that. How big do you want it?"
-	]
+	]		
 }
 
 dialogue_screen .junjun_4:
@@ -25,14 +12,12 @@ dialogue_screen .junjun_4:
 	text: 
 	[	
 		"Advanced plane traveling enthusiasts might enjoy making their own worlds, either for their own leisure or for others to join."
-		"This gateway allows you to either you to either construct or modify you own worlds or transport yourself to the worlds of people who have decided to share them with you."
-		"Beware that constructing your own world isn't free. All these additional worlds stress the fabric on which the universe is running on."		
+		"This gateway allows you to transport yourself to the worlds of people who have decided to share them with you."
 	]	
 	
 	options:
 	[
-		{ goto: .junjun_5 text: "My own world? That's neat! Help me make on of those!" }
-		{ goto: .junjun_6 text: "Tell me more about how these worlds work." }
+		{ goto: .junjun_5 text: "Tell me more about how these worlds work." }
 	]		
 }
 
@@ -83,6 +68,7 @@ dialogue_screen .junjun_greetings:
 	options:
 	[
 		{ goto: .junjun_1 text: "What kinds of wizardry are you up to here?" }
+		{ quest: gateway_world_quest_1 }
 	]
 }
 

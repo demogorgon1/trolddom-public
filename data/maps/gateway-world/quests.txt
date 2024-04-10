@@ -1,0 +1,42 @@
+item gateway_world_quest_item_1:
+{
+	binds: when_picked_up
+	loot_groups: [ gateway_world_quest_item_1 ]		
+	string: "Radiant Shard" 
+	icon: icon_blue_shard
+	stack: 10
+	item_level: 8
+	flags: [ not_sellable ]
+}
+
+objective gateway_world_quest_1_objective:
+{
+	string: "Radiant Shards"
+	collect_items: { item: gateway_world_quest_item_1 count: 10 }
+}
+
+quest gateway_world_quest_1:
+{
+	string: "Gateway Research"
+
+	text:
+	[
+		"Text."
+	]
+	
+	description: 
+	[
+		"Description."
+	]
+	
+	completion:
+	[
+		"Completion."
+	]
+
+	level: 8
+	objectives: [ gateway_world_quest_1_objective ]
+	
+	#next_quest: gateway_world_quest_2
+}
+

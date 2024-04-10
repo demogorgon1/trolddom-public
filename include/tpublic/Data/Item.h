@@ -22,6 +22,31 @@ namespace tpublic
 			static const DataType::Id DATA_TYPE = DataType::ID_ITEM;
 			static const bool TAGGED = true;
 
+			enum Flag : uint32_t
+			{
+				FLAG_UNIQUE							= 0x00000001,
+				FLAG_NOT_SELLABLE					= 0x00000002
+			};
+
+			static inline uint32_t
+			SourceToFlags(
+				const SourceNode*			aSource)
+			{
+				uint32_t flags = 0;
+				aSource->GetArray()->ForEachChild([&](
+					const SourceNode*		aChild)
+				{
+					const char* identifier = aChild->GetIdentifier();
+					if (strcmp(identifier, "unique") == 0)
+						flags |= FLAG_UNIQUE;
+					else if (strcmp(identifier, "not_sellable") == 0)
+						flags |= FLAG_NOT_SELLABLE;
+					else
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item flag.", identifier);
+				});
+				return flags;
+			}
+
 			struct AddedStat
 			{
 				AddedStat()
@@ -85,6 +110,10 @@ namespace tpublic
 				return false;
 			}				
 
+			// Helpers
+			bool	IsUnique() const { return m_flags & FLAG_UNIQUE; }
+			bool	IsNotSellable() const { return m_flags & FLAG_NOT_SELLABLE; }
+
 			// Base implementation
 			void
 			FromSource(
@@ -129,10 +158,6 @@ namespace tpublic
 						{
 							m_cost = aChild->GetUInt32();
 						}
-						else if (aChild->m_name == "unique")
-						{
-							m_unique = aChild->GetBool();
-						}
 						else if (aChild->m_name == "use_ability")
 						{
 							m_useAbilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
@@ -167,6 +192,10 @@ namespace tpublic
 						else if (aChild->m_name == "string")
 						{
 							m_string = aChild->GetString();
+						}
+						else if (aChild->m_name == "flags")
+						{
+							m_flags = SourceToFlags(aChild);
 						}
 						else if (aChild->m_name == "flavor")
 						{
@@ -222,7 +251,6 @@ namespace tpublic
 				aStream->WriteUInt(m_iconSpriteId);
 				aStream->WriteUInt(m_cost);
 				aStream->WritePOD(m_rarity);
-				aStream->WriteBool(m_unique);
 				aStream->WriteObjects(m_addedStats);
 				aStream->WriteOptionalObject(m_weaponDamage);
 				aStream->WriteUInt(m_weaponCooldown);
@@ -231,6 +259,7 @@ namespace tpublic
 				aStream->WriteInt(m_budgetBias);
 				aStream->WritePOD(m_itemBinding);
 				m_soundEffects.ToStream(aStream);
+				aStream->WritePOD(m_flags);
 			}
 
 			bool
@@ -259,8 +288,6 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadPOD(m_rarity))
 					return false;
-				if(!aStream->ReadBool(m_unique))
-					return false;
 				if (!aStream->ReadObjects(m_addedStats))
 					return false;
 				if (!aStream->ReadOptionalObject(m_weaponDamage))
@@ -276,6 +303,8 @@ namespace tpublic
 				if (!aStream->ReadPOD(m_itemBinding))
 					return false;
 				if(!m_soundEffects.FromStream(aStream))
+					return false;
+				if (!aStream->ReadPOD(m_flags))
 					return false;
 
 				m_lcString = m_string;
@@ -296,7 +325,6 @@ namespace tpublic
 			uint32_t					m_iconSpriteId = 0;
 			uint32_t					m_cost = 0;
 			Rarity::Id					m_rarity = Rarity::ID_COMMON;
-			bool						m_unique = false;
 			std::vector<AddedStat>		m_addedStats;
 			std::optional<UIntRange>	m_weaponDamage;
 			uint32_t					m_weaponCooldown = 0;
@@ -305,6 +333,7 @@ namespace tpublic
 			int32_t						m_budgetBias = 0;
 			ItemBinding::Id				m_itemBinding = ItemBinding::ID_NEVER;
 			SoundEffect::Collection		m_soundEffects;
+			uint32_t					m_flags = 0;
 
 			// Not serialized
 			std::string					m_lcString;

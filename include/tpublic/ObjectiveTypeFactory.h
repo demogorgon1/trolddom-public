@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ObjectiveTypes/CollectItems.h"
 #include "ObjectiveTypes/KillNPC.h"
 
 #include "ObjectiveTypeBase.h"
@@ -12,6 +13,7 @@ namespace tpublic
 	public:
 		ObjectiveTypeFactory()
 		{
+			_Register<ObjectiveTypes::CollectItems>();
 			_Register<ObjectiveTypes::KillNPC>();
 		}
 
