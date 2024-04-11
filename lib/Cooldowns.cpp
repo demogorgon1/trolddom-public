@@ -74,18 +74,6 @@ namespace tpublic
 		}
 	}
 	
-	//const Cooldowns::Entry*
-	//Cooldowns::Get(
-	//	uint32_t				aAbilityId) const
-	//{
-	//	for (const Entry& t : m_entries)
-	//	{
-	//		if(t.m_abilityId == aAbilityId)
-	//			return &t;
-	//	}
-	//	return NULL;
-	//}
-
 	bool			
 	Cooldowns::IsAbilityOnCooldown(
 		const Data::Ability*	aAbility) const
@@ -104,7 +92,7 @@ namespace tpublic
 	void			
 	Cooldowns::ToStream(
 		IWriter*				aStream) const
-	{
+	{	
 		aStream->WriteObjects(m_entries);
 	}
 	

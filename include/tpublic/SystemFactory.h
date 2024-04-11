@@ -2,6 +2,7 @@
 
 #include "Systems/Combat.h"
 #include "Systems/Environment.h"
+#include "Systems/Door.h"
 #include "Systems/Gateway.h"
 #include "Systems/HealthRegen.h"
 #include "Systems/ManaRegen.h"
@@ -25,7 +26,8 @@ namespace tpublic
 			: m_data(aData)
 		{
 			_Register<Systems::Combat>();
-			_Register<Systems::Environment>(); 
+			_Register<Systems::Door>();
+			_Register<Systems::Environment>();
 			_Register<Systems::Gateway>();
 			_Register<Systems::HealthRegen>();
 			_Register<Systems::ManaRegen>();

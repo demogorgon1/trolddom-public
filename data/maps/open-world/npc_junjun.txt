@@ -69,6 +69,7 @@ dialogue_screen .junjun_greetings:
 	[
 		{ goto: .junjun_1 text: "What kinds of wizardry are you up to here?" }
 		{ quest: gateway_world_quest_1 }
+		{ quest: gateway_world_quest_2 }
 	]
 }
 
@@ -137,6 +138,35 @@ entity .junjun:
 			[
 				{ states: [ default in_combat spawning ] frames: [ woman_2 ] }			
 				{ states: [ dead ] frames: [ woman_2_dead ] z_offset: -2 }			
+			]		
+		}		
+	}
+}
+
+entity .junjun_door:
+{
+	string: "Gate"
+	
+	systems: [ door ]
+	
+	components:
+	{
+		position: { }		
+		sound_source: { }
+		openable: 
+		{
+			requirements:
+			{
+				self<must_have_completed_quest>: { id: gateway_world_quest_2 }
+			}
+			sound: inventory_1
+		}
+		sprite: 
+		{ 
+			animations:
+			[
+				{ states: [ default spawning ] frames: [ door_closed_1 ] z_offset: -3 }
+				{ states: [ dead ] frames: [ door_open_1 ] z_offset: -3 }
 			]		
 		}		
 	}

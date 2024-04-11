@@ -153,7 +153,7 @@ namespace tpublic
 
 				if(aLootableEntityInstance != NULL)
 				{
-					if (!Requirements::CheckAnyList(possibility.m_requirements, aPlayerEntityInstances, aLootableEntityInstance))
+					if (!Requirements::CheckAnyList(m_manifest, possibility.m_requirements, aPlayerEntityInstances, aLootableEntityInstance))
 						continue;
 				}
 

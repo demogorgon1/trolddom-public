@@ -136,6 +136,8 @@ sprites:
 	cursor: { position: [ 0 112 ] }	
 	sprite icon_blue_shard : { tags: [ icon ] }
 	sprite icon_red_shard : { tags: [ icon ] }
+	sprite icon_gold_totem : { tags: [ icon ] }
+	sprite icon_grey_orb : { tags: [ icon ] }
 	
 }
 

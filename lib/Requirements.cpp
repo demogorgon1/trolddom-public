@@ -9,7 +9,10 @@
 #include <tpublic/Components/Position.h>
 #include <tpublic/Components/VisibleAuras.h>
 
+#include <tpublic/Data/Entity.h>
+
 #include <tpublic/EntityInstance.h>
+#include <tpublic/Manifest.h>
 
 namespace tpublic
 {
@@ -19,6 +22,7 @@ namespace tpublic
 
 		bool	
 		Check(
+			const Manifest*						aManifest,
 			const EntityInstance*				aSelf,
 			const EntityInstance*				aTarget,
 			const Requirement*					aRequirement)
@@ -78,6 +82,17 @@ namespace tpublic
 				}
 				break;
 
+			case Requirement::TYPE_MUST_HAVE_TAG:
+				{
+					if(entity->IsPlayer())
+						return false;
+
+					const Data::Entity* entityData = aManifest->GetById<Data::Entity>(entity->GetEntityId());
+					if(!entityData->HasTag(aRequirement->m_id))
+						return false;
+				}
+				break;
+
 			default:
 				assert(false);
 				break;
@@ -88,6 +103,7 @@ namespace tpublic
 
 		bool	
 		CheckList(
+			const Manifest*										aManifest,
 			const std::vector<Requirement>&						aRequirements,
 			const EntityInstance*								aSelf,
 			const EntityInstance*								aTarget,
@@ -95,7 +111,7 @@ namespace tpublic
 		{
 			for(const Requirement& requirement : aRequirements)
 			{
-				if(!Check(aSelf, aTarget, &requirement))
+				if(!Check(aManifest, aSelf, aTarget, &requirement))
 				{
 					if(aOutFailedRequirement != NULL)
 						*aOutFailedRequirement = &requirement;
@@ -108,6 +124,7 @@ namespace tpublic
 
 		bool	
 		CheckAnyList(
+			const Manifest*										aManifest,
 			const std::vector<Requirement>&						aRequirements,
 			const std::vector<const EntityInstance*>&			aSelves,
 			const EntityInstance*								aTarget)
@@ -118,7 +135,7 @@ namespace tpublic
 
 				for (const Requirement& requirement : aRequirements)
 				{
-					if (!Check(self, aTarget, &requirement))
+					if (!Check(aManifest, self, aTarget, &requirement))
 					{
 						ok = false;
 						break;

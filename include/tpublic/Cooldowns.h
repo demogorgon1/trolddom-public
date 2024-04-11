@@ -1,5 +1,20 @@
 #pragma once
 
+namespace
+{
+	inline std::string
+	_FormatDateTime(
+		time_t	aTimeStamp)
+	{
+		struct tm x;
+		memset(&x, 0, sizeof(x));
+		localtime_s(&x, &aTimeStamp);
+		char buffer[1024];
+		snprintf(buffer, sizeof(buffer), "%d-%02d-%02d %02u:%02u:%02u", x.tm_year + 1900, x.tm_mon + 1, x.tm_mday, x.tm_hour, x.tm_min, x.tm_sec);
+		return buffer;
+	}
+}
+
 namespace tpublic
 {
 
@@ -47,6 +62,14 @@ namespace tpublic
 						endTimeStamp = startTimeStamp + (uint64_t)(m_end - m_start) / 10;
 
 					aStream->WriteUInt(endTimeStamp);
+
+					if(m_cooldownId == 2)
+					{
+						printf("WRITE: current: %u @ [%s] start: [%s] end: [%s]\n", currentTick, 
+							_FormatDateTime((time_t)currentTimeStamp).c_str(),
+							_FormatDateTime((time_t)startTimeStamp).c_str(),
+							_FormatDateTime((time_t)endTimeStamp).c_str());
+					}
 				}
 			}
 			
@@ -92,6 +115,16 @@ namespace tpublic
 					{
 						m_end = 0;
 					}
+
+					if (m_cooldownId == 2)
+					{
+						printf("READ: current: %u @ [%s] start: %u @ [%s] end: %u @ [%s]\n", currentTick,
+							_FormatDateTime((time_t)currentTimeStamp).c_str(),
+							m_start,
+							_FormatDateTime((time_t)startTimeStamp).c_str(),
+							m_end,
+							_FormatDateTime((time_t)endTimeStamp).c_str());
+					}
 				}
 
 				return true;
@@ -114,8 +147,6 @@ namespace tpublic
 							int32_t					aTick);
 		bool			IsAbilityOnCooldown(
 							const Data::Ability*	aAbility) const;
-		//const Entry*	Get(
-		//					uint32_t				aAbilityId) const;
 		void			ToStream(
 							IWriter*				aStream) const;
 		bool			FromStream(

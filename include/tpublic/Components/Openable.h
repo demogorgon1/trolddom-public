@@ -2,6 +2,7 @@
 
 #include "../Component.h"
 #include "../ComponentBase.h"
+#include "../Requirement.h"
 
 namespace tpublic
 {
@@ -91,7 +92,9 @@ namespace tpublic
 				FIELD_OPENED,
 				FIELD_INSTANT,
 				FIELD_DURATION,
-				FIELD_LEVEL
+				FIELD_LEVEL,
+				FIELD_REQUIREMENTS,
+				FIELD_SOUND,
 			};
 
 			static void
@@ -109,20 +112,24 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_OPENED, NULL, offsetof(Openable, m_opened));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_DURATION, "duration", offsetof(Openable, m_duration));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_LEVEL, "level", offsetof(Openable, m_level));
+				aSchema->DefineCustomObjects<Requirement>(FIELD_REQUIREMENTS, "requirements", offsetof(Openable, m_requirements));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_SOUND, "sound", offsetof(Openable, m_soundId))->SetDataType(DataType::ID_SOUND);
 			}
 
 			// Public data
-			uint32_t				m_lootTableId = 0;
-			uint32_t				m_requiredItemId = 0;
-			Verb					m_verb;
-			uint32_t				m_requiredProfessionId = 0;
-			uint32_t				m_requiredProfessionSkill = 0;
-			uint32_t				m_range = 1;
-			bool					m_instant = false;
-			bool					m_despawn = false;
-			bool					m_opened = false;
-			uint32_t				m_duration = 0;
-			uint32_t				m_level = 1;
+			uint32_t					m_lootTableId = 0;
+			uint32_t					m_requiredItemId = 0;
+			Verb						m_verb;
+			uint32_t					m_requiredProfessionId = 0;
+			uint32_t					m_requiredProfessionSkill = 0;
+			uint32_t					m_range = 1;
+			bool						m_instant = false;
+			bool						m_despawn = false;
+			bool						m_opened = false;
+			uint32_t					m_duration = 0;
+			uint32_t					m_level = 1;
+			std::vector<Requirement>	m_requirements;
+			uint32_t					m_soundId = 0;
 		};
 
 	}

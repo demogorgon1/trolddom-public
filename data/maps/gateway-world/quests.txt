@@ -1,3 +1,7 @@
+############################################################
+# Gateway World Quest 1
+loot_group gateway_world_quest_item_1: { }
+
 item gateway_world_quest_item_1:
 {
 	binds: when_picked_up
@@ -21,6 +25,82 @@ quest gateway_world_quest_1:
 
 	text:
 	[
+		"Enter the gateway, collect 10 radiant shards, and return to Junjun."
+	]
+	
+	description: 
+	[
+		"I've noticed a rather strange phenomenon that only occurs in these artificial worlds."
+		"The arcane energy that binds them together sometimes coalesces into crystal form, more often than not attached to the inhabitant creatures."
+		"If you want to assist in my research, please see if you can find some of those for me."
+	]
+	
+	completion:
+	[
+		"Those are some nice crystal shards!"
+	]
+	
+	progress:
+	[
+		"Do you have anything for me?"
+	]
+
+	level: 8
+	objectives: [ gateway_world_quest_1_objective ]
+	
+	next_quest: gateway_world_quest_2
+}
+
+############################################################
+# Gateway World Quest 2
+loot_group gateway_world_quest_item_2: { }
+
+ability gateway_world_quest_item_3:
+{
+	string: "Unimbued Orb"
+	description: "Imbue with arcane energy."
+	flags: [ target_self item ]
+	icon: icon_grey_orb
+	cooldowns: [ global ]	
+	states: [ default ]
+	sound_effects: { use_local: [ inventory_1 ] }
+}
+
+item gateway_world_quest_item_3:
+{
+	binds: when_picked_up
+	type: miscellaneous
+	flags: [ unique not_sellable ]
+	item_level: 10
+	rarity: common
+	icon: icon_grey_orb		
+	string: "Unimbued Orb"
+	use_ability: gateway_world_quest_item_3
+}
+
+item gateway_world_quest_item_2:
+{
+	binds: when_picked_up
+	loot_groups: [ gateway_world_quest_item_2 ]		
+	string: "Strange Totem" 
+	icon: icon_gold_totem
+	stack: 1
+	item_level: 10
+	flags: [ not_sellable ]
+}
+
+objective gateway_world_quest_2_objective:
+{
+	string: "Strange Totem"
+	collect_items: { item: gateway_world_quest_item_2 count: 1 }
+}
+
+quest gateway_world_quest_2:
+{
+	string: "Gateway Research"
+
+	text:
+	[
 		"Text."
 	]
 	
@@ -33,10 +113,14 @@ quest gateway_world_quest_1:
 	[
 		"Completion."
 	]
-
-	level: 8
-	objectives: [ gateway_world_quest_1_objective ]
 	
-	#next_quest: gateway_world_quest_2
-}
+	progress:
+	[
+		"Progress."
+	]
 
+	level: 10
+	objectives: [ gateway_world_quest_2_objective ]	
+	reward_all_items: [ gateway_world_quest_item_3 ]
+	prerequisites: [ gateway_world_quest_1 ]
+}

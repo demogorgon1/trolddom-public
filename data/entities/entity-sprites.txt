@@ -57,6 +57,7 @@ sprites:
 	sprite goblin_boss_3: { dead: goblin_boss_3_dead tags: [ goblin caster boss ] }
 	sprite arcane_construct: { dead: arcane_construct_dead tags: [ melee ] }
 	sprite arcane_construct_caster: { dead: arcane_construct_caster_dead tags: [ melee ] }
+	sprite arcane_anomaly: { dead: arcane_anomaly_dead tags: [ ] }
 	
 	cursor: { position: [ 0 48 ] }
 	
@@ -73,6 +74,7 @@ sprites:
 	sprite goblin_boss_3_dead: { }
 	sprite arcane_construct_dead: { }
 	sprite arcane_construct_caster_dead: { }
+	sprite arcane_anomaly_dead: { }
 	
 }
 
@@ -118,6 +120,10 @@ sprites:
 	sprite green_gateway_2: { }
 	sprite green_gateway_3: { }
 	sprite chest_1: { }
+	sprite door_closed_1: { }
+
+	cursor: { position: [ 0 32 ] }
+	sprite door_open_1: { }
 	
 }
 

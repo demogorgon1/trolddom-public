@@ -57,6 +57,7 @@ namespace tpublic
 			ID_CHARACTER_INFO_VIEW,
 			ID_GATEWAY,
 			ID_PLAYER_WORLD_STASH,
+			ID_SOUND_SOURCE,
 
 			NUM_IDS
 		};
@@ -111,7 +112,8 @@ namespace tpublic
 			"player_outbox",
 			"character_info_view",
 			"gateway",
-			"player_world_stash"
+			"player_world_stash",
+			"sound_source"
 		};		
 
 		static_assert(sizeof(COMPONENT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

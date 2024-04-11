@@ -26,7 +26,8 @@ namespace tpublic
 			TYPE_MUST_HAVE_COMPLETED_QUEST,
 			TYPE_MUST_NOT_HAVE_COMPLETED_QUEST,
 			TYPE_MUST_HAVE_ACTIVE_QUEST,
-			TYPE_MUST_NOT_HAVE_ACTIVE_QUEST
+			TYPE_MUST_NOT_HAVE_ACTIVE_QUEST,
+			TYPE_MUST_HAVE_TAG,
 		};
 
 		static DataType::Id
@@ -45,6 +46,9 @@ namespace tpublic
 			case TYPE_MUST_NOT_HAVE_ACTIVE_QUEST:
 				return DataType::ID_QUEST;
 
+			case TYPE_MUST_HAVE_TAG:
+				return DataType::ID_TAG;
+
 			default:
 				break;
 			}
@@ -58,7 +62,14 @@ namespace tpublic
 		}
 
 		Requirement(
-			const SourceNode* aSource)
+			const SourceNode*	aSource)
+		{
+			FromSource(aSource);
+		}
+
+		void
+		FromSource(
+			const SourceNode*	aSource)
 		{
 			if (aSource->m_name == "target")
 				m_target = TARGET_TARGET;
@@ -81,6 +92,8 @@ namespace tpublic
 				m_type = TYPE_MUST_HAVE_ACTIVE_QUEST;
 			else if (typeString == "must_not_have_active_quest")
 				m_type = TYPE_MUST_NOT_HAVE_ACTIVE_QUEST;
+			else if (typeString == "must_have_tag")
+				m_type = TYPE_MUST_HAVE_TAG;
 			else
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid type.", aSource->m_annotation->GetIdentifier());
 
@@ -96,7 +109,7 @@ namespace tpublic
 
 		void
 		ToStream(
-			IWriter* aWriter) const
+			IWriter*			aWriter) const
 		{
 			aWriter->WritePOD(m_target);
 			aWriter->WritePOD(m_type);
@@ -105,7 +118,7 @@ namespace tpublic
 
 		bool
 		FromStream(
-			IReader* aReader)
+			IReader*			aReader)
 		{
 			if (!aReader->ReadPOD(m_target))
 				return false;

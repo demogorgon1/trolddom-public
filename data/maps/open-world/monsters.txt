@@ -112,3 +112,27 @@ entity .spawn_of_umbracoth: !NPC
 	_can_move_on_all_non_view_blocking_tiles: true
 }
 
+##########################################################################################
+# Arcane Anomaly
+
+loot_table .arcane_anomaly: 
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+	]	
+}
+
+entity .arcane_anomaly: !NPC
+{
+	_string: "Arcane Anomaly"
+	_level: 10
+	_faction: monsters
+	_sprite: arcane_anomaly
+	_sprite_dead: arcane_anomaly_dead
+	_weapon_damage: 1.5
+	_resource_health: 1.5
+	_elite: true
+	_loot_table: .arcane_anomaly
+	_creature_type: elemental
+}
