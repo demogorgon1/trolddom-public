@@ -39,6 +39,7 @@
 #include <tpublic/Components/Shrine.h>
 #include <tpublic/Components/SoundSource.h>
 #include <tpublic/Components/Sprite.h>
+#include <tpublic/Components/Stash.h>
 #include <tpublic/Components/Tag.h>
 #include <tpublic/Components/Talents.h>
 #include <tpublic/Components/ThreatSource.h>
@@ -95,6 +96,7 @@ namespace tpublic
 		_Register<Components::Shrine>();
 		_Register<Components::SoundSource>();
 		_Register<Components::Sprite>();
+		_Register<Components::Stash>();
 		_Register<Components::Tag>();
 		_Register<Components::Talents>();
 		_Register<Components::ThreatSource>();

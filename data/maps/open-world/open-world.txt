@@ -73,6 +73,11 @@ map_entity_spawn .junjun_door:
 	spawn_timer: { despawn_required: true }
 }
 
+map_entity_spawn .stash:
+{
+	entity stash: { }
+}
+
 map_player_spawn .player_spawn:
 {
 }
@@ -173,6 +178,7 @@ map_palette .stuff:
 	entity_spawn .spawn_of_umbracoth: [ 32 0 0 ]		
 	entity_spawn .arcane_anomaly: [ 33 0 0 ]		
 	entity_spawn .junjun_door: [ 0 43 0 ]		
+	entity_spawn .stash: [ 0 43 66 ]		
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn dungeon_1_exit: [ 0 0 200 ]	
 	portal .dungeon_1_entrance: [ 0 234 0 ]	

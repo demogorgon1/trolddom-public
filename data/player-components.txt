@@ -27,6 +27,7 @@ player_components:
 	recent_achievements
 	reputation
 	sprite
+	stash
 	talents
 	threat_source
 	trade

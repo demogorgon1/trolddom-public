@@ -22,7 +22,8 @@ namespace tpublic
 				INVALID_TYPE,
 
 				TYPE_MAILBOX,
-				TYPE_PLAYER_WORLD_STASH
+				TYPE_PLAYER_WORLD_STASH,
+				TYPE_STASH
 			};
 
 			static Type
@@ -32,8 +33,10 @@ namespace tpublic
 				std::string_view t(aString);
 				if(t == "mailbox")
 					return TYPE_MAILBOX;
-				else if(t == "player_world_stash")
+				else if (t == "player_world_stash")
 					return TYPE_PLAYER_WORLD_STASH;
+				else if (t == "stash")
+					return TYPE_STASH;
 				return INVALID_TYPE;
 			}
 			

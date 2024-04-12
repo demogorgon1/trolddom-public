@@ -18,5 +18,6 @@
 
 entity mailbox: !INTERACTABLE_OBJECT { _string: "Mailbox" _type: mailbox _sprite: mailbox }
 entity player_world_stash: !INTERACTABLE_OBJECT { _string: "Stash" _type: player_world_stash _sprite: chest_1 }
+entity stash: !INTERACTABLE_OBJECT { _string: "Stash" _type: stash _sprite: chest_1 }
 
 
