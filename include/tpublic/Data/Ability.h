@@ -427,6 +427,8 @@ namespace tpublic
 							m_iconSpriteId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aMember->GetIdentifier());
 						else if (aMember->m_name == "projectile")
 							m_projectileParticleSystemId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PARTICLE_SYSTEM, aMember->GetIdentifier());
+						else if (aMember->m_name == "source_particle_system")
+							m_sourceParticleSystemId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PARTICLE_SYSTEM, aMember->GetIdentifier());
 						else if (aMember->m_name == "require_nearby_dead_entity")
 							m_requireNearbyDeadEntityId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENTITY, aMember->GetIdentifier());
 						else if (aMember->m_name == "flags")
@@ -472,6 +474,7 @@ namespace tpublic
 				aWriter->WriteObjectPointers(m_directEffects);
 				aWriter->WritePOD(m_flags);
 				aWriter->WriteUInt(m_projectileParticleSystemId);
+				aWriter->WriteUInt(m_sourceParticleSystemId);
 				aWriter->WriteInt(m_castTime);
 				aWriter->WriteUInt(m_aoeRadius);
 				aWriter->WriteUInt(m_aoeCap);
@@ -519,6 +522,8 @@ namespace tpublic
 				if(!aReader->ReadPOD(m_flags))
 					return false;
 				if (!aReader->ReadUInt(m_projectileParticleSystemId))
+					return false;
+				if (!aReader->ReadUInt(m_sourceParticleSystemId))
 					return false;
 				if (!aReader->ReadInt(m_castTime))
 					return false;
@@ -575,6 +580,7 @@ namespace tpublic
 			uint32_t											m_flags = 0;
 			uint32_t											m_iconSpriteId = 0;
 			uint32_t											m_projectileParticleSystemId = 0;
+			uint32_t											m_sourceParticleSystemId = 0;
 			uint32_t											m_aoeRadius = 0;
 			uint32_t											m_aoeCap = 0;
 			std::vector<std::unique_ptr<DirectEffectEntry>>		m_directEffects;

@@ -1,163 +1,3 @@
-talent_tree fighter_protection:
-{
-	string: "Protection"
-	icon: icon_fighter_protection
-	
-	map_palette:
-	{
-		talent fighter_protection_stoicism: "A"
-		talent fighter_protection_knock: "B"
-		sprite talent_tree_down_arrow: "d"
-	}
-	
-	map:
-	[
-		".A."
-		".d."
-		".B."
-	]
-}
-
-talent fighter_protection_stoicism:
-{
-	string: "Stoicism"
-	icon: icon_star_1
-	prerequisites: [ ]	
-	talent_tree_points_required: 0
-	points:
-	[
-		{ aura: fighter_protection_stoicism_1 }
-		{ aura: fighter_protection_stoicism_2 }
-		{ aura: fighter_protection_stoicism_3 }
-	]
-}
-
-aura fighter_protection_stoicism_1:
-{
-	type: hidden
-	description: "Increases your Constitution by 2%."
-	stat_modifiers: { constitution: { add_percent: 2 } }
-}
-
-aura fighter_protection_stoicism_2:
-{
-	type: hidden
-	description: "Increases your Constitution by 4%."
-	stat_modifiers: { constitution: { add_percent: 4 } }
-}
-
-aura fighter_protection_stoicism_3:
-{
-	type: hidden
-	description: "Increases your Constitution by 6%."
-	stat_modifiers: { constitution: { add_percent: 6 } }
-}
-
-talent fighter_protection_knock:
-{
-	string: "Knock"
-	icon: icon_knock
-	prerequisites: [ fighter_protection_stoicism ]
-	talent_tree_points_required: 0
-	points:
-	[
-		{ ability: knock }		
-	]
-}
-
-talent_tree fighter_subtlety:
-{
-	string: "Subtlety"
-	icon: icon_fighter_subtlety
-}
-
-talent_tree fighter_combat:
-{
-	string: "Combat"
-	icon: icon_fighter_combat
-}
-
-aura knock:
-{
-	string: "Knock"
-	description: "Stunned."
-	icon: icon_stun		
-	type: debuff
-	duration: 30	
-	aura_effect stun: { }
-}
-
-cooldown knock:
-{
-	duration: 100
-}
-
-ability knock:
-{
-	string: "Knock"
-	description: "Stuns target for 3 seconds."
-	range: 1
-	cooldowns: [ global throw_rock ]
-	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_miss ]
-	states: [ default in_combat ]
-	icon: icon_knock
-	delay: 3
-	talent_tree: fighter_protection
-
-	direct_effect apply_aura:
-	{	
-		aura: knock
-		threat: 10
-	}
-}
-
-cooldown throw_rock:
-{
-	duration: 60
-}
-
-ability throw_rock:
-{
-	string: "Throw Rock"
-	range: 6
-	cooldowns: [ global throw_rock ]
-	flags: [ ranged offensive target_other target_hostile can_be_dodged can_miss ]
-	states: [ default ]
-	icon: icon_throw_rock
-	speed: 6
-	projectile: throw_rock
-	cast_time: 20
-	talent_tree: fighter_subtlety	
-	
-	direct_effect damage:
-	{
-		flags: [ can_be_critical ]
-		damage_type: physical			
-		base: [ 3 6 ]
-	}
-}
-
-ability strike:
-{
-	string: "Strike"
-	range: 1	
-	cooldowns: [ global ]
-	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_miss ]
-	states: [ default in_combat ]
-	icon: icon_strike
-	delay: 3
-	resource_cost rage: 10
-	talent_tree: fighter_combat
-	
-	direct_effect damage:
-	{
-		flags: [ can_be_critical ]
-		damage_type: physical
-		base: weapon
-		level_curve: [ [ 1 3 ] [ 10 12 ] ]
-	}
-}
-
 ability fighter_attack:
 {
 	string: "Attack"
@@ -243,8 +83,7 @@ class fighter:
 			level: 2
 			
 			unlock_abilities:
-			[
-				throw_rock
+			[				
 			]
 			
 			stats:
@@ -261,7 +100,7 @@ class fighter:
 			
 			unlock_abilities:
 			[
-				smoke_bomb
+				throw_rock				
 			]
 			
 			stats:
@@ -291,6 +130,7 @@ class fighter:
 			
 			unlock_abilities:
 			[
+				whirlwind
 			]
 			
 			stats:
@@ -320,6 +160,7 @@ class fighter:
 			
 			unlock_abilities:
 			[
+				smoke_bomb
 			]
 			
 			stats:
@@ -374,4 +215,225 @@ class fighter:
 		}				
 		
 	]
+}
+
+#########################################################################
+# Protection
+
+talent_tree fighter_protection:
+{
+	string: "Protection"
+	icon: icon_fighter_protection
+	
+	map_palette:
+	{
+		talent fighter_protection_stoicism: "A"
+		talent fighter_protection_knock: "B"
+		sprite talent_tree_down_arrow: "d"
+	}
+	
+	map:
+	[
+		".A."
+		".d."
+		".B."
+	]
+}
+
+talent fighter_protection_stoicism:
+{
+	string: "Stoicism"
+	icon: icon_star_1
+	prerequisites: [ ]	
+	talent_tree_points_required: 0
+	points:
+	[
+		{ aura: fighter_protection_stoicism_1 }
+		{ aura: fighter_protection_stoicism_2 }
+		{ aura: fighter_protection_stoicism_3 }
+	]
+}
+
+aura fighter_protection_stoicism_1:
+{
+	type: hidden
+	description: "Increases your Constitution by 2%."
+	stat_modifiers: { constitution: { add_percent: 2 } }
+}
+
+aura fighter_protection_stoicism_2:
+{
+	type: hidden
+	description: "Increases your Constitution by 4%."
+	stat_modifiers: { constitution: { add_percent: 4 } }
+}
+
+aura fighter_protection_stoicism_3:
+{
+	type: hidden
+	description: "Increases your Constitution by 6%."
+	stat_modifiers: { constitution: { add_percent: 6 } }
+}
+
+talent fighter_protection_knock:
+{
+	string: "Knock"
+	icon: icon_knock
+	prerequisites: [ fighter_protection_stoicism ]
+	talent_tree_points_required: 0
+	points:
+	[
+		{ ability: knock }		
+	]
+}
+
+aura knock:
+{
+	string: "Knock"
+	description: "Stunned."
+	icon: icon_stun		
+	type: debuff
+	duration: 30	
+	aura_effect stun: { }
+}
+
+cooldown knock:
+{
+	duration: 100
+}
+
+ability knock:
+{
+	string: "Knock"
+	description: "Stuns target for 3 seconds."
+	range: 1
+	cooldowns: [ global throw_rock ]
+	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_miss ]
+	states: [ default in_combat ]
+	icon: icon_knock
+	delay: 3
+	resource_cost rage: 10
+	talent_tree: fighter_protection
+
+	direct_effect apply_aura:
+	{	
+		aura: knock
+		threat: 10
+	}
+}
+
+#########################################################################
+# Subtlety
+
+talent_tree fighter_subtlety:
+{
+	string: "Subtlety"
+	icon: icon_fighter_subtlety
+}
+
+cooldown throw_rock:
+{
+	duration: 60
+}
+
+ability throw_rock:
+{
+	string: "Throw Rock"
+	range: 6
+	cooldowns: [ global throw_rock ]
+	flags: [ ranged offensive target_other target_hostile can_be_dodged can_miss ]
+	states: [ default ]
+	icon: icon_throw_rock
+	speed: 6
+	projectile: throw_rock
+	cast_time: 20
+	talent_tree: fighter_subtlety	
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical			
+		base: [ 3 6 ]
+	}
+}
+
+cooldown smoke_bomb:
+{
+	duration: 100
+}
+
+ability smoke_bomb:
+{
+	string: "Smoke Bomb"
+	description: "Drop all threat."
+	cooldowns: [ global smoke_bomb ]
+	flags: [ target_self ]
+	states: [ default in_combat ]	
+	icon: icon_smoke
+	talent_tree: fighter_subtlety	
+	
+	direct_effect threat:
+	{	
+		apply_to: all
+		multiply: 0
+	}
+}
+
+#########################################################################
+# Combat
+
+talent_tree fighter_combat:
+{
+	string: "Combat"
+	icon: icon_fighter_combat
+}
+
+ability strike:
+{
+	string: "Strike"
+	range: 1	
+	cooldowns: [ global ]
+	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_miss ]
+	states: [ default in_combat ]
+	icon: icon_strike
+	delay: 3
+	resource_cost rage: 10
+	talent_tree: fighter_combat
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		base: weapon
+		level_curve: [ [ 1 4 ] [ 10 15 ] ]
+	}
+}
+
+cooldown whirlwind:
+{
+	duration: 50
+}
+
+ability whirlwind:
+{
+	string: "Whirlwind"
+	range: 1	
+	cooldowns: [ global ]
+	flags: [ melee target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_miss ]
+	states: [ default in_combat ]
+	icon: icon_whirlwind
+	delay: 3
+	aoe_radius: 1
+	aoe_cap: 3
+	resource_cost rage: 10
+	talent_tree: fighter_combat
+	source_particle_system: whirlwind
+
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		base: weapon
+		level_curve: [ [ 1 3 ] [ 10 12 ] ]
+	}
 }

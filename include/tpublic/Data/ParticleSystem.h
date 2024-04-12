@@ -36,6 +36,8 @@ namespace tpublic
 							m_count = aChild->GetUInt32();
 						else if (aChild->m_name == "sprite_interval")
 							m_spriteInterval = aChild->GetUInt32();
+						else if (aChild->m_name == "duration")
+							m_duration = aChild->GetUInt32();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					});
@@ -49,6 +51,7 @@ namespace tpublic
 					aWriter->WritePOD(m_flags);
 					aWriter->WriteUInt(m_count);
 					aWriter->WriteUInt(m_spriteInterval);
+					aWriter->WriteUInt(m_duration);
 				}
 
 				bool
@@ -63,6 +66,8 @@ namespace tpublic
 						return false;
 					if (!aReader->ReadUInt(m_spriteInterval))
 						return false;
+					if (!aReader->ReadUInt(m_duration))
+						return false;
 					return true;
 				}
 
@@ -71,6 +76,7 @@ namespace tpublic
 				uint8_t								m_flags = 0;
 				uint32_t							m_count = 0;
 				uint32_t							m_spriteInterval = 100; // ms
+				uint32_t							m_duration = 0; // ms
 			};
 
 			void

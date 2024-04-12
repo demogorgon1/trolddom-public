@@ -191,27 +191,6 @@ ability immortality:
 	}
 }
 
-cooldown smoke_bomb:
-{
-	duration: 100
-}
-
-ability smoke_bomb:
-{
-	string: "Smoke Bomb"
-	description: "Drop all threat."
-	cooldowns: [ global smoke_bomb ]
-	flags: [ target_self ]
-	states: [ default in_combat ]	
-	icon: icon_smoke
-	
-	direct_effect threat:
-	{	
-		apply_to: all
-		multiply: 0
-	}
-}
-
 ability make_offering:
 {
 	string: "Make Offering"
