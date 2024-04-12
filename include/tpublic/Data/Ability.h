@@ -45,7 +45,9 @@ namespace tpublic
 				FLAG_ALWAYS_IN_LINE_OF_SIGHT		= 0x00080000,
 				FLAG_CRAFTING						= 0x00100000,
 				FLAG_HIDDEN							= 0x00200000,
-				FLAG_LATE_COOLDOWN_TRIGGER			= 0x00400000
+				FLAG_LATE_COOLDOWN_TRIGGER			= 0x00400000,
+				FLAG_TARGET_AOE_FRIENDLY			= 0x00800000,
+				FLAG_TARGET_AOE_HOSTILE				= 0x01000000
 			};
 
 			static inline Resource::Id
@@ -112,6 +114,10 @@ namespace tpublic
 						flags |= FLAG_HIDDEN;
 					else if (strcmp(identifier, "late_cooldown_trigger") == 0)
 						flags |= FLAG_LATE_COOLDOWN_TRIGGER;
+					else if (strcmp(identifier, "target_aoe_hostile") == 0)
+						flags |= FLAG_TARGET_AOE_HOSTILE;
+					else if (strcmp(identifier, "target_aoe_friendly") == 0)
+						flags |= FLAG_TARGET_AOE_FRIENDLY;
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid ability flag.", identifier);
 				});
@@ -347,6 +353,8 @@ namespace tpublic
 			bool TargetAOE() const { return m_flags & FLAG_TARGET_AOE; }
 			bool TargetFriendly() const { return m_flags & FLAG_TARGET_FRIENDLY; }
 			bool TargetHostile() const { return m_flags & FLAG_TARGET_HOSTILE; }
+			bool TargetAOEFriendly() const { return m_flags & FLAG_TARGET_AOE_FRIENDLY; }
+			bool TargetAOEHostile() const { return m_flags & FLAG_TARGET_AOE_HOSTILE; }
 			bool CanMiss() const { return m_flags & FLAG_CAN_MISS; }
 			bool CanBeDodged() const { return m_flags & FLAG_CAN_BE_DODGED; }
 			bool CanBeParried() const { return m_flags & FLAG_CAN_BE_PARRIED; }
@@ -419,6 +427,8 @@ namespace tpublic
 							m_iconSpriteId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aMember->GetIdentifier());
 						else if (aMember->m_name == "projectile")
 							m_projectileParticleSystemId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PARTICLE_SYSTEM, aMember->GetIdentifier());
+						else if (aMember->m_name == "require_nearby_dead_entity")
+							m_requireNearbyDeadEntityId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENTITY, aMember->GetIdentifier());
 						else if (aMember->m_name == "flags")
 							m_flags = GetFlags(aMember);
 						else if (aMember->m_tag == "direct_effect")
@@ -478,6 +488,7 @@ namespace tpublic
 				m_soundEffects.ToStream(aWriter);
 				aWriter->WriteOptionalObject(m_npcLevelRange);
 				aWriter->WriteUInt(m_requiredLevel);
+				aWriter->WriteUInt(m_requireNearbyDeadEntityId);
 
 				for(uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 					aWriter->WriteUInt(m_resourceCosts[i]);
@@ -541,6 +552,8 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadUInt(m_requiredLevel))
 					return false;
+				if (!aReader->ReadUInt(m_requireNearbyDeadEntityId))
+					return false;
 
 				for (uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 				{
@@ -580,6 +593,7 @@ namespace tpublic
 			SoundEffect::Collection								m_soundEffects;
 			std::optional<UIntRange>							m_npcLevelRange;
 			uint32_t											m_requiredLevel = 0;
+			uint32_t											m_requireNearbyDeadEntityId = 0;
 		};
 
 	}

@@ -64,7 +64,7 @@ map_entity_spawn .spawn_of_umbracoth:
 
 map_entity_spawn .arcane_anomaly:
 {
-	entity .arcane_anomaly: { weight: 1 }
+	entity arcane_anomaly: { weight: 1 }
 }
 
 map_entity_spawn .junjun_door:

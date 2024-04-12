@@ -72,11 +72,11 @@ namespace tpublic
 		uint32_t									aQuantity,
 		const Data::Item*							aItemData) const
 	{
+		if (aQuantity == 0)
+			return true;
+
 		if (aItemData->IsUnique() && HasItems(aItemId, 1))
 			return false;
-
-		if(aQuantity == 0)
-			return true;
 
 		uint32_t remaining = aQuantity;
 				
@@ -106,17 +106,17 @@ namespace tpublic
 		return false;
 	}
 
-	void
+	bool
 	ItemList::AddMultipleToInventory(
 		uint32_t									aItemId,
 		uint32_t									aQuantity,
 		const Data::Item*							aItemData) 
 	{
-		if (aItemData->IsUnique() && HasItems(aItemId, 1))
-			return;
+		if (aQuantity == 0)
+			return true;
 
-		if(aQuantity == 0)
-			return;
+		if (aItemData->IsUnique() && HasItems(aItemId, 1))
+			return false;
 
 		uint32_t remaining = aQuantity;
 
@@ -153,7 +153,7 @@ namespace tpublic
 
 		m_version++;
 
-		assert(remaining == 0);
+		return remaining == 0;
 	}
 
 	bool

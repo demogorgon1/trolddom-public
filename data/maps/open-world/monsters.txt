@@ -123,14 +123,14 @@ loot_table .arcane_anomaly:
 	]	
 }
 
-entity .arcane_anomaly: !NPC
+entity arcane_anomaly: !NPC
 {
 	_string: "Arcane Anomaly"
 	_level: 10
 	_faction: monsters
 	_sprite: arcane_anomaly
 	_sprite_dead: arcane_anomaly_dead
-	_weapon_damage: 1.5
+	_weapon_damage: 2.3
 	_resource_health: 1.5
 	_elite: true
 	_loot_table: .arcane_anomaly

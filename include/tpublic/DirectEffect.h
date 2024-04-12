@@ -80,6 +80,7 @@ namespace tpublic
 			ID_THREAT,
 			ID_SIMPLE,
 			ID_FISHING,
+			ID_CONSUME_AND_PRODUCE,
 
 			NUM_IDS
 		};
@@ -95,7 +96,8 @@ namespace tpublic
 			"push",
 			"threat",
 			"simple",
-			"fishing"
+			"fishing",
+			"consume_and_produce"
 		};
 
 		static_assert(sizeof(EFFECT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

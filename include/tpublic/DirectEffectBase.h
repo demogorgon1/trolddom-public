@@ -5,6 +5,7 @@
 #include "IReader.h"
 #include "IWriter.h"
 #include "Parser.h"
+#include "Requirement.h"
 
 namespace tpublic
 {
@@ -53,6 +54,11 @@ namespace tpublic
 				});
 				return true;
 			}
+			else if(aSource->m_tag == "requirement")
+			{
+				m_requirements.push_back(Requirement(aSource));
+				return true;
+			}
 
 			return false;
 		}
@@ -62,6 +68,7 @@ namespace tpublic
 			IWriter*									aStream) const 
 		{
 			aStream->WriteUInt(m_flags);
+			aStream->WriteObjects(m_requirements);
 		}
 		
 		bool	
@@ -69,6 +76,8 @@ namespace tpublic
 			IReader*									aStream) 
 		{
 			if(!aStream->ReadUInt(m_flags))
+				return false;
+			if(!aStream->ReadObjects(m_requirements))
 				return false;
 			return true;
 		}
@@ -95,7 +104,8 @@ namespace tpublic
 							const IWorldView*				/*aWorldView*/) { }
 
 		// Public data
-		uint32_t		m_flags = 0;		
+		uint32_t					m_flags = 0;		
+		std::vector<Requirement>	m_requirements;
 	};
 
 }

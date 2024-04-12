@@ -57,13 +57,24 @@ loot_group gateway_world_quest_item_2: { }
 
 ability gateway_world_quest_item_3:
 {
-	string: "Unimbued Orb"
+	string: "Imbuing Orb"
 	description: "Imbue with arcane energy."
-	flags: [ target_self item ]
+	flags: [ target_self target_aoe target_aoe_hostile item ]
 	icon: icon_grey_orb
 	cooldowns: [ global ]	
 	states: [ default ]
 	sound_effects: { use_local: [ inventory_1 ] }
+	aoe_radius: 2
+	aoe_cap: 1
+	cast_time: 20	
+	
+	direct_effect consume_and_produce:
+	{
+		requirement target<must_be_type>: { id: arcane_anomaly }
+		requirement target<must_be_in_state>: { id: dead }
+		produce_source_item: player_world_orb
+		consume_source_item: gateway_world_quest_item_3
+	}
 }
 
 item gateway_world_quest_item_3:

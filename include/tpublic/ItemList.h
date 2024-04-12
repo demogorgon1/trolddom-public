@@ -51,7 +51,7 @@ namespace tpublic
 								uint32_t									aItemId,
 								uint32_t									aQuantity,
 								const Data::Item*							aItemData) const;
-		void				AddMultipleToInventory(
+		bool				AddMultipleToInventory(
 								uint32_t									aItemId,
 								uint32_t									aQuantity,
 								const Data::Item*							aItemData);

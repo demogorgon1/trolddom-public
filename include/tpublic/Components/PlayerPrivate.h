@@ -2,6 +2,7 @@
 
 #include "../Component.h"
 #include "../ComponentBase.h"
+#include "../ErrorNotification.h"
 #include "../EventHistory.h"
 #include "../PlayerGateways.h"
 #include "../PlayerProfessions.h"
@@ -103,7 +104,8 @@ namespace tpublic
 				uint32_t													m_professionSkill = 0;
 			};
 
-			std::vector<ProfessionSkillUseEvent>							m_professionSkillUseEvents;
+			std::vector<ProfessionSkillUseEvent>							m_professionSkillUseEvents;			
+			ErrorNotification::Id											m_errorNotification = ErrorNotification::INVALID_ID;
 		};
 	}
 

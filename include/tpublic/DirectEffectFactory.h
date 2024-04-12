@@ -1,6 +1,7 @@
 #pragma once
 
 #include "DirectEffects/ApplyAura.h"
+#include "DirectEffects/ConsumeAndProduce.h"
 #include "DirectEffects/Damage.h"
 #include "DirectEffects/Fishing.h"
 #include "DirectEffects/Heal.h"
@@ -18,6 +19,7 @@ namespace tpublic
 		DirectEffectFactory()
 		{
 			_Register<DirectEffects::ApplyAura>();
+			_Register<DirectEffects::ConsumeAndProduce>();
 			_Register<DirectEffects::Damage>();
 			_Register<DirectEffects::Fishing>();
 			_Register<DirectEffects::Heal>();
