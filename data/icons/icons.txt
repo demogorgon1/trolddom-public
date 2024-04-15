@@ -139,6 +139,8 @@ sprites:
 	sprite icon_gold_totem : { tags: [ icon ] }
 	sprite icon_grey_orb : { tags: [ icon ] }
 	sprite icon_whirlwind : { tags: [ icon ] }
+	sprite icon_parry : { tags: [ icon ] }
+	sprite icon_block : { tags: [ icon ] }
 	
 }
 

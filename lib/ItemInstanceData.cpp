@@ -82,6 +82,14 @@ namespace tpublic
 			uint32_t baseArmor = aManifest->m_itemMetrics.GetLevelBaseArmor(m_itemData->m_itemLevel);
 			baseArmor = 1 + (uint32_t)((float)baseArmor * multipliers.m_armor);
 			m_stats.m_stats[Stat::ID_ARMOR] += (float)baseArmor; 
+
+			if (itemTypeInfo->m_flags & ItemType::FLAG_SHIELD)
+			{
+				uint32_t blockValue = (uint32_t)((float)baseArmor * aManifest->m_itemMetrics.m_shieldArmorToBaseBlockValue);
+				if(blockValue == 0)
+					blockValue = 1;
+				m_stats.m_stats[Stat::ID_BLOCK_VALUE] += (float)blockValue;
+			}
 		}
 
 		if (m_cost == 0)

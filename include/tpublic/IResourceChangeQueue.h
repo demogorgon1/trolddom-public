@@ -26,7 +26,8 @@ namespace tpublic
 								uint32_t						aTargetEntityInstanceId,
 								Components::CombatPublic*		aCombat,
 								size_t							aResourceIndex,
-								int32_t							aChange) = 0;
+								int32_t							aChange,
+								uint32_t						aBlocked) = 0;
 		virtual void		AddUpdateCallback(
 								UpdateCallback					aUpdateCallback) = 0;
 		virtual void		AddSimpleDirectEffect(

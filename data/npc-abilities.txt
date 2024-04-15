@@ -8,7 +8,7 @@ ability npc_attack:
 	string: "Attack"
 	range: 1	
 	cooldowns: [ global npc_attack ]
-	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_miss ]
+	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
 	states: [ default in_combat ]
 	icon: icon_strike
 	delay: 3
@@ -31,7 +31,7 @@ ability npc_strike:
 	string: "Strike"
 	range: 1	
 	cooldowns: [ global npc_strike ]
-	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_miss ]
+	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
 	states: [ default in_combat ]
 	icon: icon_strike
 	delay: 3

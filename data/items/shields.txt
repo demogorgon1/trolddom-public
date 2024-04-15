@@ -1,0 +1,9 @@
+item shield_wooden_buckler:
+{
+	equipment_slots: [ off_hand ]
+	type: shield
+	required_level: 1
+	icon: icon_shield_1
+	rarity: common
+	string: "Wooden Buckler" 
+}

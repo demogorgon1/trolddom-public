@@ -113,7 +113,8 @@ namespace tpublic::DirectEffects
 				aTarget->GetEntityInstanceId(),
 				targetCombatPublic,
 				healthResourceIndex,
-				(int32_t)heal);
+				(int32_t)heal,
+				0);
 
 			// Anyone on the target's threat target list should gain threat from this
 			const Components::ThreatSource* targetThreatSource = aTarget->GetComponent<Components::ThreatSource>();

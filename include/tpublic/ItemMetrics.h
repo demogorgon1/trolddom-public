@@ -161,6 +161,10 @@ namespace tpublic
 				{
 					m_vendorCostMultiplier = aChild->GetFloat();
 				}
+				else if (aChild->m_name == "shield_armor_to_base_block_value")
+				{
+					m_shieldArmorToBaseBlockValue = aChild->GetFloat();
+				}
 				else
 				{
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -304,6 +308,7 @@ namespace tpublic
 		Multipliers								m_equipmentSlotMultipliers[EquipmentSlot::NUM_IDS];
 		Multipliers								m_rarityMultipliers[Rarity::NUM_IDS];
 		float									m_vendorCostMultiplier = 0.5f;
+		float									m_shieldArmorToBaseBlockValue = 0.0f;
 	};
 
 }

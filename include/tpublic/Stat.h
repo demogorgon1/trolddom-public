@@ -23,6 +23,7 @@ namespace tpublic
 			ID_DODGE_CHANCE,
 			ID_BLOCK_CHANCE,
 			ID_PARRY_CHANCE,
+			ID_BLOCK_VALUE,
 
 			NUM_IDS
 		};
@@ -53,7 +54,8 @@ namespace tpublic
 			{ "spell_crit_chance",		"SPELLCRIT",	"Critical Strike Chance (Spells)",			"Improves your chance to get a critical strike with spells by %u%%.",	10.0f,	true,	false },
 			{ "dodge_chance",			"DODGE",		"Dodge Chance",								"Improves your chance to dodge an attack by %u%%.",						10.0f,	true,	false },
 			{ "block_chance",			"BLOCK",		"Block Chance",								"Improves your chance to block an attack by %u%%.",						10.0f,	true,	false },
-			{ "parry_chance",			"PARRY",		"Parry Chance",								"Improves your chance to parry an attack by %u%%.",						10.0f,	true,	false }
+			{ "parry_chance",			"PARRY",		"Parry Chance",								"Improves your chance to parry an attack by %u%%.",						10.0f,	true,	false },
+			{ "block_value",			"BLOCKVALUE",	"Block Value",								"Increases damage absorbed by blocks by %u.",							1.0f,	false,	false }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

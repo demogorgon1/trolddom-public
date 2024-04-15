@@ -181,6 +181,17 @@ namespace tpublic::DirectEffects
 		if (targetAuras != NULL)
 			damage = targetAuras->FilterDamageInput(m_damageType, damage);
 
+		uint32_t blocked = 0;
+
+		if(aId == CombatEvent::ID_BLOCK && targetCombatPrivate != NULL)
+		{
+			blocked = targetCombatPrivate->m_blockValue;
+			if(blocked > damage)
+				blocked = damage;
+
+			damage -= blocked;			
+		}
+
 		// Rage generation for source
 		if(m_flags & DirectEffect::FLAG_GENERATE_RAGE)
 		{
@@ -203,7 +214,8 @@ namespace tpublic::DirectEffects
 					aSource->GetEntityInstanceId(),
 					sourceCombatPublic,
 					rageResourceIndex,
-					rage);
+					rage,
+					0);
 			}
 		}
 
@@ -223,7 +235,8 @@ namespace tpublic::DirectEffects
 					aTarget->GetEntityInstanceId(),
 					targetCombatPublic,
 					rageResourceIndex,
-					rage);
+					rage,
+					0);
 			}
 		}
 
@@ -238,7 +251,8 @@ namespace tpublic::DirectEffects
 				aTarget->GetEntityInstanceId(),
 				targetCombatPublic,
 				healthResourceIndex,
-				-(int32_t)damage);
+				-(int32_t)damage,
+				blocked);
 		}
 
 		// Threat
