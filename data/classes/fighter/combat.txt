@@ -1,0 +1,125 @@
+talent_tree fighter_combat:
+{
+	string: "Combat"
+	icon: icon_fighter_combat
+	
+	map_palette:
+	{
+		talent fighter_combat_deflection: "A"
+		sprite talent_tree_down_arrow: "d"
+	}
+	
+	map:
+	[
+		"A"
+	]
+	
+}
+
+talent fighter_combat_deflection:
+{
+	string: "Deflection"
+	icon: icon_parry
+	prerequisites: [ ]	
+	talent_tree_points_required: 0
+	points:
+	[
+		{ aura: fighter_combat_deflection_1 }
+		{ aura: fighter_combat_deflection_2 }
+		{ aura: fighter_combat_deflection_3 }
+	]
+}
+
+aura fighter_combat_deflection_1:
+{
+	type: hidden
+	description: "Increases your chance to parry by 2%."
+	stat_modifiers: { parry_chance: { add: 2 } }
+}
+
+aura fighter_combat_deflection_2:
+{
+	type: hidden
+	description: "Increases your chance to parry by 4%."
+	stat_modifiers: { parry_chance: { add: 4 } }
+}
+
+aura fighter_combat_deflection_3:
+{
+	type: hidden
+	description: "Increases your chance to parry by 6%."
+	stat_modifiers: { parry_chance: { add: 6 } }
+}
+
+ability strike:
+{
+	string: "Strike"
+	range: 1	
+	cooldowns: [ global ]
+	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+	states: [ default in_combat ]
+	icon: icon_strike
+	delay: 3
+	resource_cost rage: 10
+	talent_tree: fighter_combat
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		base: weapon
+		level_curve: [ [ 1 4 ] [ 10 15 ] ]
+	}
+}
+
+cooldown whirlwind:
+{
+	duration: 50
+}
+
+ability whirlwind:
+{
+	string: "Whirlwind"
+	range: 1	
+	cooldowns: [ global whirlwind ]
+	flags: [ melee target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+	states: [ default in_combat ]
+	icon: icon_whirlwind
+	delay: 3
+	aoe_radius: 1
+	aoe_cap: 3
+	resource_cost rage: 10
+	talent_tree: fighter_combat
+	source_particle_system: whirlwind
+
+	direct_effect damage:
+	{
+		requirement target<must_be_in_state>: { id: default }
+		flags: [ can_be_critical ]
+		damage_type: physical
+		base: weapon
+	}
+}
+
+cooldown charge:
+{
+	duration: 100
+}
+
+ability charge:
+{
+	string: "Charge"
+	range: 6
+	cooldowns: [ charge ]
+	flags: [ target_other target_hostile ]
+	states: [ default ]
+	icon: icon_charge
+	talent_tree: fighter_combat 
+	
+	direct_effect move:
+	{
+		destination: target_adjacent
+		move_flags: [ walkable_path_required ]
+		max_steps: 10
+	}
+}

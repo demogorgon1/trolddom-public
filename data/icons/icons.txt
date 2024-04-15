@@ -141,6 +141,7 @@ sprites:
 	sprite icon_whirlwind : { tags: [ icon ] }
 	sprite icon_parry : { tags: [ icon ] }
 	sprite icon_block : { tags: [ icon ] }
+	sprite icon_charge : { tags: [ icon ] }
 	
 }
 

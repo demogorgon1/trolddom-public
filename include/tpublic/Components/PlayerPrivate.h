@@ -93,7 +93,6 @@ namespace tpublic
 			PlayerGateways													m_gateways;
 
 			// Not serialized, internal
-			bool															m_positionUpdatedOnServer = false;
 			bool															m_pvpCombatEvent = false;
 			bool															m_tryEditPlayerWorlds = false;
 			int32_t															m_lastPVPCombatEventTick = 0;

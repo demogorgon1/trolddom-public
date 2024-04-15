@@ -58,6 +58,13 @@ namespace tpublic
 			bool					m_canMoveOnAllNonViewBlockingTiles = false;
 		};
 
+		struct EventQueueMoveAdjacentRequest
+		{
+			uint32_t				m_entityInstanceId = 0;
+			uint32_t				m_adjacentEntityInstanceId = 0;
+			uint32_t				m_maxSteps = 0;
+		};
+
 		struct EventQueueSpawnEntityRequest
 		{
 			uint32_t				m_entityId = 0;
@@ -74,6 +81,8 @@ namespace tpublic
 												const ItemInstanceReference&						aItem) = 0;
 		virtual void						EventQueueMove(
 												const EventQueueMoveRequest&						aMoveRequest) = 0;
+		virtual void						EventQueueMoveAdjacent(
+												const EventQueueMoveAdjacentRequest&				aMoveAdjacentRequest) = 0;
 		virtual void						EventQueueIndividualKillXP(
 												uint32_t											aCharacterId,
 												uint32_t											aCharacterLevel,

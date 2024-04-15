@@ -38,6 +38,7 @@ namespace tpublic
 			// Not serialized, internal server stuff
 			uint32_t	m_lastMoveTick = 0;
 			bool		m_detached = false;
+			bool		m_updatedOnServer = false;
 		};
 	}
 

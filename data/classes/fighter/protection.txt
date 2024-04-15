@@ -1,0 +1,137 @@
+talent_tree fighter_protection:
+{
+	string: "Protection"
+	icon: icon_fighter_protection
+	
+	map_palette:
+	{
+		talent fighter_protection_stoicism: "A"
+		talent fighter_protection_knock: "B"
+		talent fighter_protection_shield_block: "C"
+		sprite talent_tree_down_arrow: "d"
+	}
+	
+	map:
+	[
+		".A.C."
+		".d..."
+		".B..."
+	]
+}
+
+talent fighter_protection_stoicism:
+{
+	string: "Stoicism"
+	icon: icon_star_1
+	prerequisites: [ ]	
+	talent_tree_points_required: 0
+	points:
+	[
+		{ aura: fighter_protection_stoicism_1 }
+		{ aura: fighter_protection_stoicism_2 }
+		{ aura: fighter_protection_stoicism_3 }
+	]
+}
+
+talent fighter_protection_shield_block:
+{
+	string: "Shield Block"
+	icon: icon_block
+	prerequisites: [ ]	
+	talent_tree_points_required: 0
+	points:
+	[
+		{ aura: fighter_protection_shield_block_1 }
+		{ aura: fighter_protection_shield_block_2 }
+		{ aura: fighter_protection_shield_block_3 }
+	]
+}
+
+aura fighter_protection_stoicism_1:
+{
+	type: hidden
+	description: "Increases your Constitution by 2%."
+	stat_modifiers: { constitution: { add_percent: 2 } }
+}
+
+aura fighter_protection_stoicism_2:
+{
+	type: hidden
+	description: "Increases your Constitution by 4%."
+	stat_modifiers: { constitution: { add_percent: 4 } }
+}
+
+aura fighter_protection_stoicism_3:
+{
+	type: hidden
+	description: "Increases your Constitution by 6%."
+	stat_modifiers: { constitution: { add_percent: 6 } }
+}
+
+aura fighter_protection_shield_block_1:
+{
+	type: hidden
+	description: "Increases your chance to block by 2%."
+	stat_modifiers: { block_chance: { add: 2 } }
+}
+
+aura fighter_protection_shield_block_2:
+{
+	type: hidden
+	description: "Increases your chance to block by 4%."
+	stat_modifiers: { block_chance: { add: 4 } }
+}
+
+aura fighter_protection_shield_block_3:
+{
+	type: hidden
+	description: "Increases your chance to block by 6%."
+	stat_modifiers: { block_chance: { add: 6 } }
+}
+
+talent fighter_protection_knock:
+{
+	string: "Knock"
+	icon: icon_knock
+	prerequisites: [ fighter_protection_stoicism ]
+	talent_tree_points_required: 0
+	points:
+	[
+		{ ability: knock }		
+	]
+}
+
+aura knock:
+{
+	string: "Knock"
+	description: "Stunned."
+	icon: icon_stun		
+	type: debuff
+	duration: 30	
+	aura_effect stun: { }
+}
+
+cooldown knock:
+{
+	duration: 100
+}
+
+ability knock:
+{
+	string: "Knock"
+	description: "Stuns target for 3 seconds."
+	range: 1
+	cooldowns: [ global throw_rock ]
+	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_miss ]
+	states: [ default in_combat ]
+	icon: icon_knock
+	delay: 3
+	resource_cost rage: 10
+	talent_tree: fighter_protection
+
+	direct_effect apply_aura:
+	{	
+		aura: knock
+		threat: 10
+	}
+}

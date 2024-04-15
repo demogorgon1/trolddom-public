@@ -1,0 +1,236 @@
+ability fighter_attack:
+{
+	string: "Attack"
+	flags: [ melee offensive attack target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss use_weapon_icon ]	
+	states: [ default in_combat ]
+	delay: 3
+	
+	direct_effect damage:
+	{
+		flags: [ generate_rage can_be_critical ]
+		damage_type: physical			
+		base: weapon
+	}
+}
+
+class fighter:
+{
+	string: "Fighter"	
+	description: "Defeat your enemies in hand-to-hand combat while being able to take a beating."
+	
+	systems: [ combat health_regen rage ]
+	
+	sprite: fighter
+	sprite_dead: fighter_dead
+	
+	color_1: [ 128 32 0 ] 
+	color_2: [ 70 32 0 ] 
+	default_attack: fighter_attack
+	default_action_bar: [ fighter_attack strike push ]
+	talent_trees: [ fighter_protection fighter_combat fighter_subtlety ]
+	
+	item_types: [ armor_cloth armor_mail armor_plate weapon_1h_sword weapon_1h_mace weapon_1h_axe weapon_1h_knife
+	              weapon_2h_sword weapon_2h_mace weapon_2h_axe weapon_2h_staff shield ]
+
+	start_map open_world: [ ]
+	start_equipment main_hand: weapon_rusty_sword
+	start_equipment chest: chest_flimsy_mail_shirt
+	start_equipment feet: feet_flimsy_mail_boots
+	start_equipment legs: legs_flimsy_mail_pants
+	start_inventory: [ consumable_dry_bread consumable_dry_bread consumable_dry_bread consumable_dry_bread consumable_dry_bread ]
+	
+	stats_conversion:
+	{
+		str_to_dps: [ 1 1 ]
+		str_weapon_damage_min: [ 1 2 ]
+		str_weapon_damage_max: [ 3 2 ]
+		dex_to_phys_crit: [ 1 20 ]
+		dex_to_dodge: [ 1 20 ]
+		dex_to_parry: [ 1 25 ]
+		str_to_parry: [ 1 40 ]
+		con_to_health: [ 10 1 ]		
+		spi_to_health_regen: [ 1 1 ]
+	}
+
+	level_progression:
+	[
+		{
+			level: 1
+			
+			unlock_abilities:
+			[
+				fighter_attack
+				strike
+				push
+			]
+						
+			stats:
+			{
+				dexterity: 4
+				strength: 6
+				wisdom: 2
+				constitution: 4
+				spirit: 5
+			}
+			
+			resource health: { add_max: 80 }
+			resource rage: { add_max: 100 }
+			
+			add_unarmed_weapon_damage: [ 2 4 ]
+		}
+		
+		{
+			level: 2
+			
+			unlock_abilities:
+			[				
+				charge
+			]
+			
+			stats:
+			{
+				strength: 1
+				constitution: 1
+			}
+			
+			resource health: { add_max: 8 }
+		}
+		
+		{
+			level: 3
+			
+			unlock_abilities:
+			[
+				throw_rock				
+			]
+			
+			stats:
+			{
+				dexterity: 1
+				constitution: 1
+				spirit: 1
+			}			
+			
+			resource health: { add_max: 8 }
+		}		
+		
+		{
+			level: 4
+			
+			unlock_abilities:
+			[
+			]
+			
+			stats:
+			{
+				strength: 1
+				constitution: 1
+			}			
+			
+			resource health: { add_max: 8 }			
+		}				
+		
+		{
+			level: 5
+			
+			unlock_abilities:
+			[
+				whirlwind
+			]
+			
+			stats:
+			{
+				dexterity: 1
+				constitution: 1
+				spirit: 1
+			}			
+			
+			resource health: { add_max: 8 }
+		}		
+		
+		{
+			level: 6
+			
+			unlock_abilities:
+			[
+			]
+			
+			stats:
+			{
+				strength: 1
+				constitution: 1
+			}			
+			
+			resource health: { add_max: 8 }			
+		}				
+
+		{
+			level: 7
+			
+			unlock_abilities:
+			[
+				smoke_bomb
+			]
+			
+			stats:
+			{
+				dexterity: 1
+				constitution: 1
+				spirit: 1
+			}	
+
+			resource health: { add_max: 8 }
+		}		
+		
+		{
+			level: 8
+			
+			unlock_abilities:
+			[
+			]
+			
+			stats:
+			{
+				strength: 1
+				constitution: 1
+			}			
+			
+			resource health: { add_max: 8 }			
+		}				
+
+		{
+			level: 9
+			
+			unlock_abilities:
+			[
+			]
+			
+			stats:
+			{
+				dexterity: 1
+				constitution: 1
+				spirit: 1
+			}			
+			
+			resource health: { add_max: 8 }			
+		}		
+		
+		{
+			level: 10
+			
+			unlock_abilities:
+			[
+			]
+			
+			stats:
+			{
+				strength: 1
+				constitution: 1
+			}			
+			
+			resource health: { add_max: 8 }			
+		}				
+		
+	]
+}
+
