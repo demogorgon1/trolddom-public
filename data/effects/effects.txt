@@ -30,7 +30,7 @@ sprites:
 	cursor: { position: [ 0 20 ] }	
 	size: { width: 24 height: 24 }
 
-	sprite effect_whirlwind: { flags: [ centered doubled ] }
+	sprite effect_whirlwind: { flags: [ centered ] }
 }
 
 particle_system throw_rock:
@@ -38,7 +38,7 @@ particle_system throw_rock:
 	particle:
 	{
 		sprites: [ effect_rock ]
-		flags: [ attached no_rotation ]
+		flags: [ attached no_rotation no_scaling ]
 		count: 1		
 	}
 }
@@ -48,7 +48,7 @@ particle_system firebolt:
 	particle:
 	{
 		sprites: [ effect_firebolt ]
-		flags: [ attached no_rotation ]
+		flags: [ attached no_rotation no_scaling ]
 		count: 1		
 	}
 }
@@ -110,8 +110,11 @@ particle_system whirlwind:
 	particle:
 	{
 		sprites: [ effect_whirlwind ]
-		flags: [ attached ]
-		duration: 1000
+		flags: [ attached blend_add ]
+		duration: 500
 		count: 1		
+		scale: 1.5
+		alpha: 0.6
+		rotation_rate: 1440
 	}
 }

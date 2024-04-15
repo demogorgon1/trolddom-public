@@ -9,7 +9,9 @@ namespace tpublic
 		enum Flag : uint8_t
 		{
 			FLAG_ATTACHED		= 0x01,
-			FLAG_NO_ROTATION	= 0x02
+			FLAG_NO_ROTATION	= 0x02,
+			FLAG_NO_SCALING		= 0x04,
+			FLAG_BLEND_ADD		= 0x08
 		};
 
 		// IMPORTANT: Must match Flag enum
@@ -17,6 +19,8 @@ namespace tpublic
 		{
 			"attached",
 			"no_rotation",
+			"no_scaling",
+			"blend_add",
 			NULL
 		};
 

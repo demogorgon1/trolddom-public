@@ -38,6 +38,12 @@ namespace tpublic
 							m_spriteInterval = aChild->GetUInt32();
 						else if (aChild->m_name == "duration")
 							m_duration = aChild->GetUInt32();
+						else if (aChild->m_name == "scale")
+							m_scale = aChild->GetFloat();
+						else if (aChild->m_name == "alpha")
+							m_alpha = aChild->GetFloat();
+						else if (aChild->m_name == "rotation_rate")
+							m_rotationRate = aChild->GetInt32();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					});
@@ -52,6 +58,9 @@ namespace tpublic
 					aWriter->WriteUInt(m_count);
 					aWriter->WriteUInt(m_spriteInterval);
 					aWriter->WriteUInt(m_duration);
+					aWriter->WriteFloat(m_scale);
+					aWriter->WriteFloat(m_alpha);
+					aWriter->WriteInt(m_rotationRate);
 				}
 
 				bool
@@ -68,6 +77,12 @@ namespace tpublic
 						return false;
 					if (!aReader->ReadUInt(m_duration))
 						return false;
+					if(!aReader->ReadFloat(m_scale))
+						return false;
+					if (!aReader->ReadFloat(m_alpha))
+						return false;
+					if (!aReader->ReadInt(m_rotationRate))
+						return false;
 					return true;
 				}
 
@@ -77,6 +92,9 @@ namespace tpublic
 				uint32_t							m_count = 0;
 				uint32_t							m_spriteInterval = 100; // ms
 				uint32_t							m_duration = 0; // ms
+				float								m_scale = 1.0f;
+				float								m_alpha = 1.0f;
+				int32_t								m_rotationRate = 0; // degrees/second
 			};
 
 			void
