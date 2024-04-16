@@ -429,8 +429,6 @@ namespace tpublic
 							m_projectileParticleSystemId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PARTICLE_SYSTEM, aMember->GetIdentifier());
 						else if (aMember->m_name == "source_particle_system")
 							m_sourceParticleSystemId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PARTICLE_SYSTEM, aMember->GetIdentifier());
-						else if (aMember->m_name == "require_nearby_dead_entity")
-							m_requireNearbyDeadEntityId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENTITY, aMember->GetIdentifier());
 						else if (aMember->m_name == "flags")
 							m_flags = GetFlags(aMember);
 						else if (aMember->m_tag == "direct_effect")
@@ -449,6 +447,8 @@ namespace tpublic
 							m_requiredProfession = RequiredProfession(aMember);
 						else if (aMember->m_tag == "requirement")
 							m_requirements.push_back(Requirement(aMember));
+						else if (aMember->m_tag == "aoe_requirement")
+							m_aoeRequirements.push_back(Requirement(aMember));
 						else if (aMember->m_name == "sound_effects")
 							m_soundEffects.FromSource(aMember);
 						else if(aMember->m_name == "npc_level_range")
@@ -488,10 +488,10 @@ namespace tpublic
 				aWriter->WriteInt(m_channelInterval);
 				aWriter->WriteUInt(m_channelTickAbilityId);
 				aWriter->WriteObjects(m_requirements);
+				aWriter->WriteObjects(m_aoeRequirements);
 				m_soundEffects.ToStream(aWriter);
 				aWriter->WriteOptionalObject(m_npcLevelRange);
 				aWriter->WriteUInt(m_requiredLevel);
-				aWriter->WriteUInt(m_requireNearbyDeadEntityId);
 
 				for(uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 					aWriter->WriteUInt(m_resourceCosts[i]);
@@ -551,13 +551,13 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadObjects(m_requirements))
 					return false;
+				if (!aReader->ReadObjects(m_aoeRequirements))
+					return false;
 				if(!m_soundEffects.FromStream(aReader))
 					return false;
 				if(!aReader->ReadOptionalObject(m_npcLevelRange))
 					return false;
 				if (!aReader->ReadUInt(m_requiredLevel))
-					return false;
-				if (!aReader->ReadUInt(m_requireNearbyDeadEntityId))
 					return false;
 
 				for (uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
@@ -596,10 +596,10 @@ namespace tpublic
 			int32_t												m_channelInterval = 10;
 			uint32_t											m_channelTickAbilityId = 0;
 			std::vector<Requirement>							m_requirements;
+			std::vector<Requirement>							m_aoeRequirements;
 			SoundEffect::Collection								m_soundEffects;
 			std::optional<UIntRange>							m_npcLevelRange;
 			uint32_t											m_requiredLevel = 0;
-			uint32_t											m_requireNearbyDeadEntityId = 0;
 		};
 
 	}

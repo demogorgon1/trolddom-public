@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../DirectEffectBase.h"
+#include "../SecondaryAbility.h"
 
 namespace tpublic
 {
@@ -86,9 +87,10 @@ namespace tpublic
 						const IWorldView*				aWorldView) override;
 
 			// Public data
-			Destination		m_destination = INVALID_DESTINATION;			
-			uint8_t			m_moveFlags = 0;
-			uint32_t		m_maxSteps = 0;
+			Destination						m_destination = INVALID_DESTINATION;			
+			uint8_t							m_moveFlags = 0;
+			uint32_t						m_maxSteps = 0;
+			std::optional<SecondaryAbility>	m_triggerAbilitiesOnResolve;
 		};
 
 	}

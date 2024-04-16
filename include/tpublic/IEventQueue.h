@@ -16,6 +16,7 @@ namespace tpublic
 
 	class CastInProgress;
 	class EntityInstance;
+	class SecondaryAbility;
 
 	class IEventQueue
 	{
@@ -51,25 +52,26 @@ namespace tpublic
 			}
 
 			// Public data
-			Type					m_type = Type(0);
-			uint32_t				m_entityInstanceId = 0;
-			Vec2					m_priorityList[MAX_PRIORITY_LIST_LENGTH];
-			uint32_t				m_priorityListLength = 0;
-			bool					m_canMoveOnAllNonViewBlockingTiles = false;
+			Type								m_type = Type(0);
+			uint32_t							m_entityInstanceId = 0;
+			Vec2								m_priorityList[MAX_PRIORITY_LIST_LENGTH];
+			uint32_t							m_priorityListLength = 0;
+			bool								m_canMoveOnAllNonViewBlockingTiles = false;
 		};
 
 		struct EventQueueMoveAdjacentRequest
 		{
-			uint32_t				m_entityInstanceId = 0;
-			uint32_t				m_adjacentEntityInstanceId = 0;
-			uint32_t				m_maxSteps = 0;
+			uint32_t							m_entityInstanceId = 0;
+			uint32_t							m_adjacentEntityInstanceId = 0;
+			uint32_t							m_maxSteps = 0;
+			const SecondaryAbility*				m_triggerAbilityOnResolve = NULL;
 		};
 
 		struct EventQueueSpawnEntityRequest
 		{
-			uint32_t				m_entityId = 0;
-			Vec2					m_position;
-			uint32_t				m_onlyVisibleToPlayerEntityInstanceId = 0;
+			uint32_t							m_entityId = 0;
+			Vec2								m_position;
+			uint32_t							m_onlyVisibleToPlayerEntityInstanceId = 0;
 		};
 
 		// Virtual interface

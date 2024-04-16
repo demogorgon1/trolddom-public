@@ -27,6 +27,8 @@ namespace tpublic
 						m_moveFlags = SourceToMoveFlags(aChild);
 					else if (aChild->m_name == "max_steps")
 						m_maxSteps = aChild->GetUInt32();
+					else if(aChild->m_name == "trigger_ability_on_resolve")
+						m_triggerAbilitiesOnResolve = SecondaryAbility(aChild);
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 				}
@@ -41,6 +43,7 @@ namespace tpublic
 			aStream->WritePOD(m_destination);
 			aStream->WritePOD(m_moveFlags);
 			aStream->WriteUInt(m_maxSteps);
+			aStream->WriteOptionalObject(m_triggerAbilitiesOnResolve);
 		}
 
 		bool
@@ -54,6 +57,8 @@ namespace tpublic
 			if (!aStream->ReadPOD(m_moveFlags))
 				return false;
 			if(!aStream->ReadUInt(m_maxSteps))
+				return false;
+			if(!aStream->ReadOptionalObject(m_triggerAbilitiesOnResolve))
 				return false;
 			return true;
 		}
@@ -81,8 +86,13 @@ namespace tpublic
 					IEventQueue::EventQueueMoveAdjacentRequest t;
 					t.m_entityInstanceId = aSource->GetEntityInstanceId();
 					t.m_adjacentEntityInstanceId = aTarget->GetEntityInstanceId();
+					
 					if(m_moveFlags & MOVE_FLAG_WALKABLE_PATH_REQUIRED)
 						t.m_maxSteps = m_maxSteps;
+
+					if(m_triggerAbilitiesOnResolve.has_value())
+						t.m_triggerAbilityOnResolve = &(m_triggerAbilitiesOnResolve.value());
+
 					aEventQueue->EventQueueMoveAdjacent(t);
 				}
 				break;

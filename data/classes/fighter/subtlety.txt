@@ -32,7 +32,7 @@ ability throw_rock:
 
 cooldown smoke_bomb:
 {
-	duration: 100
+	duration: 600
 }
 
 ability smoke_bomb:

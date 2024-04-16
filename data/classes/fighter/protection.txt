@@ -121,7 +121,7 @@ ability knock:
 	string: "Knock"
 	description: "Stuns target for 3 seconds."
 	range: 1
-	cooldowns: [ global throw_rock ]
+	cooldowns: [ global knock ]
 	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_miss ]
 	states: [ default in_combat ]
 	icon: icon_knock

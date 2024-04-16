@@ -66,12 +66,12 @@ ability gateway_world_quest_item_3:
 	sound_effects: { use_local: [ inventory_1 ] }
 	aoe_radius: 2
 	aoe_cap: 1
+	aoe_requirement target<must_be_type>: { id: arcane_anomaly }
+	aoe_requirement target<must_be_in_state>: { id: dead }
 	cast_time: 20	
 	
 	direct_effect consume_and_produce:
 	{
-		requirement target<must_be_type>: { id: arcane_anomaly }
-		requirement target<must_be_in_state>: { id: dead }
 		produce_source_item: player_world_orb
 		consume_source_item: gateway_world_quest_item_3
 	}

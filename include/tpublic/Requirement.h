@@ -30,7 +30,8 @@ namespace tpublic
 			TYPE_MUST_NOT_HAVE_ACTIVE_QUEST,
 			TYPE_MUST_HAVE_TAG,
 			TYPE_MUST_BE_TYPE,
-			TYPE_MUST_BE_IN_STATE
+			TYPE_MUST_BE_IN_STATE,
+			TYPE_MUST_NOT_BE_IN_STATE,
 		};
 
 		static DataType::Id
@@ -104,6 +105,8 @@ namespace tpublic
 				m_type = TYPE_MUST_BE_TYPE;
 			else if (typeString == "must_be_in_state")
 				m_type = TYPE_MUST_BE_IN_STATE;
+			else if (typeString == "must_not_be_in_state")
+				m_type = TYPE_MUST_NOT_BE_IN_STATE;
 			else
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid type.", aSource->m_annotation->GetIdentifier());
 
@@ -112,7 +115,7 @@ namespace tpublic
 			{
 				if (aChild->m_name == "id")
 				{
-					if(m_type == TYPE_MUST_BE_IN_STATE)
+					if(m_type == TYPE_MUST_BE_IN_STATE || m_type == TYPE_MUST_NOT_BE_IN_STATE)
 					{
 						EntityState::Id entityState = EntityState::StringToId(aChild->GetIdentifier());
 						TP_VERIFY(entityState != EntityState::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid entity state.", aChild->GetIdentifier());

@@ -88,13 +88,13 @@ ability whirlwind:
 	delay: 3
 	aoe_radius: 1
 	aoe_cap: 3
+	aoe_requirement target<must_not_be_in_state>: { id: dead }
 	resource_cost rage: 10
 	talent_tree: fighter_combat
-	source_particle_system: whirlwind
+	source_particle_system: whirlwind	
 
 	direct_effect damage:
 	{
-		requirement target<must_be_in_state>: { id: default }
 		flags: [ can_be_critical ]
 		damage_type: physical
 		base: weapon
@@ -104,6 +104,37 @@ ability whirlwind:
 cooldown charge:
 {
 	duration: 100
+}
+
+aura charge_stun:
+{
+	string: "Charge"
+	description: "Stunned."
+	icon: icon_stun		
+	type: debuff
+	duration: 20	
+	aura_effect stun: { }
+}
+
+ability charge_trigger:
+{
+	string: "Charge"
+	flags: [ target_hostile ]
+	states: [ default in_combat ]
+	icon: icon_charge
+
+	direct_effect apply_aura:
+	{	
+		aura: charge_stun
+		threat: 10
+	}
+	
+	direct_effect modify_resource:
+	{
+		target_self: true
+		resource: rage
+		range: 8
+	}
 }
 
 ability charge:
@@ -121,5 +152,6 @@ ability charge:
 		destination: target_adjacent
 		move_flags: [ walkable_path_required ]
 		max_steps: 10
+		trigger_ability_on_resolve<target>: charge_trigger
 	}
 }

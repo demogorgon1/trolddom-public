@@ -82,6 +82,7 @@ namespace tpublic
 			ID_FISHING,
 			ID_CONSUME_AND_PRODUCE,
 			ID_MOVE,
+			ID_MODIFY_RESOURCE,
 
 			NUM_IDS
 		};
@@ -99,7 +100,8 @@ namespace tpublic
 			"simple",
 			"fishing",
 			"consume_and_produce",
-			"move"
+			"move",
+			"modify_resource"
 		};
 
 		static_assert(sizeof(EFFECT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);
