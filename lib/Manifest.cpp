@@ -1,6 +1,7 @@
 #include "Pcheader.h"
 
 #include <tpublic/Data/Ability.h>
+#include <tpublic/Data/AbilityModifier.h>
 #include <tpublic/Data/Achievement.h>
 #include <tpublic/Data/AchievementCategory.h>
 #include <tpublic/Data/Aura.h>
@@ -53,6 +54,7 @@ namespace tpublic
 	Manifest::Manifest()
 	{
 		RegisterDataContainer<Data::Ability>();
+		RegisterDataContainer<Data::AbilityModifier>();
 		RegisterDataContainer<Data::Achievement>();
 		RegisterDataContainer<Data::AchievementCategory>();
 		RegisterDataContainer<Data::Aura>();

@@ -31,6 +31,8 @@ namespace tpublic
 							m_abilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
 						else if (aChild->m_name == "aura")
 							m_auraId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_AURA, aChild->GetIdentifier());
+						else if (aChild->m_name == "ability_modifier")
+							m_abilityModifierId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY_MODIFIER, aChild->GetIdentifier());
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					});
@@ -42,6 +44,7 @@ namespace tpublic
 				{
 					aStream->WriteUInt(m_abilityId);
 					aStream->WriteUInt(m_auraId);
+					aStream->WriteUInt(m_abilityModifierId);
 				}
 
 				bool
@@ -52,12 +55,15 @@ namespace tpublic
 						return false;
 					if (!aStream->ReadUInt(m_auraId))
 						return false;
+					if (!aStream->ReadUInt(m_abilityModifierId))
+						return false;
 					return true;
 				}
 
 				// Public data
 				uint32_t				m_abilityId = 0;
 				uint32_t				m_auraId = 0;
+				uint32_t				m_abilityModifierId = 0;
 			};
 
 			void

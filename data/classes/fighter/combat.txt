@@ -8,14 +8,15 @@ talent_tree fighter_combat:
 		talent fighter_combat_deflection: "A"
 		talent fighter_combat_riposte: "B"
 		talent fighter_combat_ferocity: "C"
+		talent fighter_combat_improved_strike: "D"
 		sprite talent_tree_down_arrow: "d"
 	}
 	
 	map:
 	[
-		"A.."
-		"d.."
-		"B.C"
+		"D.A.."
+		"..d.."
+		"..B.C"
 	]
 	
 }
@@ -144,6 +145,42 @@ aura fighter_combat_ferocity_buff:
 	{
 		phys_crit_chance: { add: 5 }
 	}
+}
+
+###############################################################################
+# Improved Strike
+
+talent fighter_combat_improved_strike:
+{
+	string: "Improved Strike"
+	icon: icon_strike
+	points:
+	[
+		{ ability_modifier: improved_strike_1 }
+		{ ability_modifier: improved_strike_2 }
+		{ ability_modifier: improved_strike_3 }
+	]
+}
+
+ability_modifier improved_strike_1:
+{	
+	string: "Reduces rage cost of Strike by 1."
+	ability: strike	
+	modify_resource_cost rage: -1
+}
+
+ability_modifier improved_strike_2:
+{
+	string: "Reduces rage cost of Strike by 2."
+	ability: strike	
+	modify_resource_cost rage: -2
+}
+
+ability_modifier improved_strike_3:
+{
+	string: "Reduces rage cost of Strike by 3."
+	ability: strike	
+	modify_resource_cost rage: -3
 }
 
 ###############################################################################
