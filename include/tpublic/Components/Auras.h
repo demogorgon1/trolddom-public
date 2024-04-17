@@ -41,7 +41,7 @@ namespace tpublic
 
 					uint64_t endTimeStamp = 0;
 
-					if(m_end > m_start)
+					if(m_end != 0 && m_end > m_start)
 						endTimeStamp = startTimeStamp + (uint64_t)(m_end - m_start) / 10;
 
 					aWriter->WriteUInt(endTimeStamp);
@@ -131,14 +131,17 @@ namespace tpublic
 			}
 
 			bool		HasEffect(
-							AuraEffect::Id					aId) const;
+							AuraEffect::Id								aId) const;
 			int32_t		FilterDamageInput(
-							DirectEffect::DamageType		aDamageType,
-							int32_t							aDamage) const;
+							DirectEffect::DamageType					aDamageType,
+							int32_t										aDamage) const;
+			void		OnCombatEvent(
+							CombatEvent::Id								aCombatEventId,
+							AuraEffectBase::SecondaryAbilityCallback	aCallback) const;
 			void		RemoveAura(
-							uint32_t						aAuraId);
+							uint32_t									aAuraId);
 			void		OnLoadedFromPersistence(
-							const Manifest*					aManifest);
+							const Manifest*								aManifest);
 
 			// Public data
 			std::vector<std::unique_ptr<Entry>>					m_entries;

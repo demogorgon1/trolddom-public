@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AuraEffect.h"
+#include "CombatEvent.h"
 #include "DirectEffect.h"
 #include "IReader.h"
 #include "IWriter.h"
@@ -11,9 +12,13 @@
 namespace tpublic
 {
 
+	class SecondaryAbility;
+
 	class AuraEffectBase
 	{
 	public:
+		typedef std::function<void(const SecondaryAbility&)> SecondaryAbilityCallback;
+
 		AuraEffectBase(
 			AuraEffect::Id								aId)
 			: m_id(aId)
@@ -110,29 +115,32 @@ namespace tpublic
 
 		// Virtual methods
 		virtual void			FromSource(
-									const SourceNode*			/*aSource*/) { assert(false); }
+									const SourceNode*				/*aSource*/) { assert(false); }
 		virtual void			ToStream(
-									IWriter*					/*aStream*/) const { assert(false); }
+									IWriter*						/*aStream*/) const { assert(false); }
 		virtual bool			FromStream(
-									IReader*					/*aStream*/) { assert(false); return true; }
+									IReader*						/*aStream*/) { assert(false); return true; }
 		virtual bool			OnApplication(
-									uint32_t					/*aSourceEntityInstanceId*/,
-									uint32_t					/*aTargetEntityInstanceId*/,
-									SystemBase::Context*		/*aContext*/,
-									const Manifest*				/*aManifest*/) { return true; }
+									uint32_t						/*aSourceEntityInstanceId*/,
+									uint32_t						/*aTargetEntityInstanceId*/,
+									SystemBase::Context*			/*aContext*/,
+									const Manifest*					/*aManifest*/) { return true; }
 		virtual bool			OnUpdate(
-									uint32_t					/*aSourceEntityInstanceId*/,
-									uint32_t					/*aTargetEntityInstanceId*/,
-									SystemBase::Context*		/*aContext*/,
-									const Manifest*				/*aManifest*/) { return false; }
+									uint32_t						/*aSourceEntityInstanceId*/,
+									uint32_t						/*aTargetEntityInstanceId*/,
+									SystemBase::Context*			/*aContext*/,
+									const Manifest*					/*aManifest*/) { return false; }
 		virtual AuraEffectBase*	Copy() const { assert(false); return NULL; }
 		virtual int32_t			FilterDamageInput(
-									DirectEffect::DamageType	/*aDamageType*/,
-									int32_t						aDamage) const { return aDamage; }
+									DirectEffect::DamageType		/*aDamageType*/,
+									int32_t							aDamage) const { return aDamage; }
+		virtual void			OnCombatEvent(
+									CombatEvent::Id					/*aCombatEventId*/,
+									SecondaryAbilityCallback		/*aCallback*/) const { }
 		virtual bool			GetStatModifier(
-									Stat::Id					/*aStat*/,
-									uint32_t&					/*aOutNum*/,
-									uint32_t&					/*aOutDenom*/) const { return false; }		
+									Stat::Id						/*aStat*/,
+									uint32_t&						/*aOutNum*/,
+									uint32_t&						/*aOutDenom*/) const { return false; }		
 
 		// Public data
 		int32_t			m_updateInterval = 0;

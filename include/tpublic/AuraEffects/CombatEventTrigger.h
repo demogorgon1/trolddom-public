@@ -1,0 +1,101 @@
+#pragma once
+
+#include "../AuraEffectBase.h"
+#include "../SecondaryAbility.h"
+
+namespace tpublic
+{
+
+	namespace AuraEffects
+	{
+
+		struct CombatEventTrigger
+			: public AuraEffectBase
+		{
+			static const AuraEffect::Id ID = AuraEffect::ID_COMBAT_EVENT_TRIGGER;
+
+			CombatEventTrigger()
+				: AuraEffectBase(ID)
+			{
+
+			}
+
+			virtual 
+			~CombatEventTrigger()
+			{
+
+			}
+
+			// AuraEffectBase implementation
+			void
+			FromSource(
+				const SourceNode*		aSource) override
+			{
+				aSource->ForEachChild([&](
+					const SourceNode* aChild) 
+				{
+					if(!FromSourceBase(aChild))
+					{
+						if(aChild->m_name == "combat_event")
+						{
+							m_combatEventId = CombatEvent::StringToId(aChild->GetIdentifier());
+							TP_VERIFY(m_combatEventId != CombatEvent::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid combat event.", aChild->GetIdentifier());
+						}
+						else if(aChild->m_name == "ability")
+						{
+							m_ability = SecondaryAbility(aChild);
+						}
+						else
+						{
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+						}
+					}
+				});
+			}
+
+			void
+			ToStream(
+				IWriter*				aStream) const override
+			{
+				ToStreamBase(aStream);
+
+				aStream->WritePOD(m_combatEventId);
+				m_ability.ToStream(aStream);
+			}
+
+			bool
+			FromStream(
+				IReader*				aStream) override
+			{
+				if(!FromStreamBase(aStream))
+					return false;
+
+				if (!aStream->ReadPOD(m_combatEventId))
+					return false;
+				if (!m_ability.FromStream(aStream))
+					return false;
+				return true;
+			}
+
+			AuraEffectBase* 
+			Copy() const override
+			{
+				CombatEventTrigger* t = new CombatEventTrigger();
+				t->CopyBase(this);
+				t->m_combatEventId = m_combatEventId;
+				t->m_ability = m_ability;
+				return t;
+			}
+
+			void	OnCombatEvent(						
+						CombatEvent::Id					aCombatEventId,
+						SecondaryAbilityCallback		aCallback) const override;
+
+			// Public data
+			CombatEvent::Id		m_combatEventId = CombatEvent::ID_HIT;
+			SecondaryAbility	m_ability;
+		};
+
+	}
+
+}

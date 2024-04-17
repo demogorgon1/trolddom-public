@@ -6,16 +6,21 @@ talent_tree fighter_combat:
 	map_palette:
 	{
 		talent fighter_combat_deflection: "A"
+		talent fighter_combat_riposte: "B"
 		sprite talent_tree_down_arrow: "d"
 	}
 	
 	map:
 	[
 		"A"
+		"d"
+		"B"
 	]
 	
 }
 
+###############################################################################
+# Deflection
 talent fighter_combat_deflection:
 {
 	string: "Deflection"
@@ -51,6 +56,48 @@ aura fighter_combat_deflection_3:
 	stat_modifiers: { parry_chance: { add: 6 } }
 }
 
+###############################################################################
+# Riposte
+
+talent fighter_combat_riposte:
+{
+	string: "Riposte"
+	icon: icon_rage
+	prerequisites: [ fighter_combat_deflection ]	
+	talent_tree_points_required: 3
+	points:
+	[
+		{ aura: fighter_combat_riposte }
+	]
+}
+
+ability fighter_combat_riposte:
+{
+	string: "Riposte"
+	states: [ default in_combat ]
+	icon: icon_rage
+
+	direct_effect modify_resource:
+	{
+		resource: rage
+		range: 5
+	}
+}
+
+aura fighter_combat_riposte:
+{
+	type: hidden
+	description: "You gain 5 rage when you parry an attack."
+	aura_effect combat_event_trigger: 
+	{ 
+		combat_event: parry
+		ability<target>: fighter_combat_riposte
+	}
+}
+
+###############################################################################
+# Strike
+
 ability strike:
 {
 	string: "Strike"
@@ -71,6 +118,9 @@ ability strike:
 		level_curve: [ [ 1 4 ] [ 10 15 ] ]
 	}
 }
+
+###############################################################################
+# Whirlwind
 
 cooldown whirlwind:
 {
@@ -100,6 +150,9 @@ ability whirlwind:
 		base: weapon
 	}
 }
+
+###############################################################################
+# Charge
 
 cooldown charge:
 {

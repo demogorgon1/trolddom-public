@@ -14,6 +14,7 @@ namespace tpublic
 			ID_IMMORTALITY,
 			ID_DAMAGE_INPUT_MODIFIER,
 			ID_REPEAT,
+			ID_COMBAT_EVENT_TRIGGER,
 
 			NUM_IDS
 		};
@@ -25,7 +26,8 @@ namespace tpublic
 			"stun",
 			"immortality",
 			"damage_input_modifier",
-			"repeat"
+			"repeat",
+			"combat_event_trigger"
 		};
 
 		static_assert(sizeof(EFFECT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);
@@ -43,6 +45,14 @@ namespace tpublic
 			}
 
 			return INVALID_ID;
+		}
+
+		inline constexpr const char*
+		IdToString(
+			Id			aId)
+		{
+			assert((uint32_t)aId > INVALID_ID && (uint32_t)aId < NUM_IDS);
+			return EFFECT_NAMES[aId];
 		}
 
 	}

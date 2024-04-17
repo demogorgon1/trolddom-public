@@ -15,12 +15,14 @@ namespace tpublic
 			ID_BLOCK,
 			ID_CRITICAL,
 
-			NUM_IDS
+			NUM_IDS,
+
+			INVALID_ID
 		};
 
 		constexpr bool 
 		IsHit(
-			Id		aId)
+			Id			aId)
 		{
 			switch(aId)
 			{
@@ -32,6 +34,26 @@ namespace tpublic
 			default:
 				return false;
 			}
+		}
+
+		constexpr Id
+		StringToId(
+			const char*	aString)
+		{
+			std::string_view t(aString);
+			if (t == "hit")
+				return ID_HIT;
+			if (t == "miss")
+				return ID_MISS;
+			if (t == "dodge")
+				return ID_DODGE;
+			if (t == "parry")
+				return ID_PARRY;
+			if (t == "block")
+				return ID_BLOCK;
+			if (t == "critical")
+				return ID_CRITICAL;
+			return INVALID_ID;
 		}
 
 	}

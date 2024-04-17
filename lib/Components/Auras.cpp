@@ -9,7 +9,7 @@ namespace tpublic::Components
 
 	bool
 	Auras::HasEffect(
-		AuraEffect::Id					aId) const
+		AuraEffect::Id								aId) const
 	{
 		for(const std::unique_ptr<Entry>& entry : m_entries)
 		{
@@ -22,8 +22,8 @@ namespace tpublic::Components
 
 	int32_t
 	Auras::FilterDamageInput(
-		DirectEffect::DamageType		aDamageType,
-		int32_t							aDamage) const
+		DirectEffect::DamageType					aDamageType,
+		int32_t										aDamage) const
 	{
 		int32_t damage = aDamage;
 
@@ -39,8 +39,20 @@ namespace tpublic::Components
 	}
 
 	void		
+	Auras::OnCombatEvent(
+		CombatEvent::Id								aCombatEventId,
+		AuraEffectBase::SecondaryAbilityCallback	aCallback) const
+	{
+		for (const std::unique_ptr<Entry>& entry : m_entries)
+		{
+			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
+				effect->OnCombatEvent(aCombatEventId, aCallback);
+		}
+	}
+
+	void		
 	Auras::RemoveAura(
-		uint32_t						aAuraId)
+		uint32_t									aAuraId)
 	{
 		for(size_t i = 0; i < m_entries.size(); i++)
 		{
@@ -56,14 +68,21 @@ namespace tpublic::Components
 
 	void				
 	Auras::OnLoadedFromPersistence(
-		const Manifest*					aManifest) 
+		const Manifest*								aManifest) 
 	{
 		for(std::unique_ptr<Entry>& entry : m_entries)
 		{
 			const Data::Aura* auraData = aManifest->GetById<tpublic::Data::Aura>(entry->m_auraId);
 
-			for(const std::unique_ptr<Data::Aura::AuraEffectEntry>& effect : auraData->m_auraEffects)
-				entry->m_effects.push_back(std::unique_ptr<AuraEffectBase>(effect->m_auraEffectBase->Copy()));
+			if(auraData->m_auraEffects.size() == 0)
+			{
+				entry->m_noEffects = true;
+			}				
+			else
+			{
+				for (const std::unique_ptr<Data::Aura::AuraEffectEntry>& effect : auraData->m_auraEffects)
+					entry->m_effects.push_back(std::unique_ptr<AuraEffectBase>(effect->m_auraEffectBase->Copy()));
+			}
 		}
 
 		m_seq++;

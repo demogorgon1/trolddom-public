@@ -5,6 +5,8 @@
 namespace tpublic
 {
 
+	class EntityInstance;
+
 	class SecondaryAbility
 	{
 	public:	
@@ -59,6 +61,20 @@ namespace tpublic
 			if (!aReader->ReadPOD(m_target))
 				return false;
 			return true;
+		}
+
+		EntityInstance*
+		ResolveTarget(
+			EntityInstance*			aSelf,
+			EntityInstance*			aTarget) const
+		{
+			switch(m_target)
+			{
+			case TARGET_SELF:		return aSelf;
+			case TARGET_TARGET:		return aTarget;
+			default:				break;
+			}
+			return NULL;
 		}
 
 		// Public data
