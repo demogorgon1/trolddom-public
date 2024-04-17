@@ -12,10 +12,11 @@ namespace tpublic::AuraEffects
 
 	void	
 	CombatEventTrigger::OnCombatEvent(		
+		CombatEventType					aType,
 		CombatEvent::Id					aCombatEventId,
 		SecondaryAbilityCallback		aCallback) const
 	{
-		if(m_combatEventId == aCombatEventId)
+		if(m_combatEventId == aCombatEventId && m_combatEventType == aType)
 			aCallback(m_ability);
 	}
 

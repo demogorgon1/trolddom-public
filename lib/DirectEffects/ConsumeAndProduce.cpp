@@ -65,12 +65,12 @@ namespace tpublic
 			return true;
 		}
 
-		void	
+		CombatEvent::Id
 		ConsumeAndProduce::Resolve(
 			int32_t							/*aTick*/,
 			std::mt19937&					/*aRandom*/,
 			const Manifest*					aManifest,
-			CombatEvent::Id					/*aId*/,
+			CombatEvent::Id					aId,
 			uint32_t						/*aAbilityId*/,
 			EntityInstance*					aSource,
 			EntityInstance*					/*aTarget*/,
@@ -116,6 +116,7 @@ namespace tpublic
 					}
 				}
 			}
+			return aId;
 		}
 
 	}

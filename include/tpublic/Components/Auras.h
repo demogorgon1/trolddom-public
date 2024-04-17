@@ -136,6 +136,7 @@ namespace tpublic
 							DirectEffect::DamageType					aDamageType,
 							int32_t										aDamage) const;
 			void		OnCombatEvent(
+							tpublic::AuraEffectBase::CombatEventType	aType,
 							CombatEvent::Id								aCombatEventId,
 							AuraEffectBase::SecondaryAbilityCallback	aCallback) const;
 			void		RemoveAura(

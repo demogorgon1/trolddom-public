@@ -41,7 +41,7 @@ namespace tpublic
 
 		bool
 		FromSourceBase(
-			const SourceNode*							aSource)
+			const SourceNode*										aSource)
 		{
 			if(aSource->m_name == "flags")
 			{
@@ -65,7 +65,7 @@ namespace tpublic
 
 		void	
 		ToStreamBase(
-			IWriter*									aStream) const 
+			IWriter*												aStream) const 
 		{
 			aStream->WriteUInt(m_flags);
 			aStream->WriteObjects(m_requirements);
@@ -73,7 +73,7 @@ namespace tpublic
 		
 		bool	
 		FromStreamBase(
-			IReader*									aStream) 
+			IReader*												aStream) 
 		{
 			if(!aStream->ReadUInt(m_flags))
 				return false;
@@ -83,25 +83,25 @@ namespace tpublic
 		}
 
 		// Virtual methods
-		virtual void	FromSource(
-							const SourceNode*				/*aSource*/) { assert(false); }
-		virtual void	ToStream(
-							IWriter*						/*aStream*/) const { assert(false); }
-		virtual bool	FromStream(
-							IReader*						/*aStream*/) { assert(false); return true; }
-		virtual void	Resolve(
-							int32_t							/*aTick*/,
-							std::mt19937&					/*aRandom*/,
-							const Manifest*					/*aManifest*/,
-							CombatEvent::Id					/*aId*/,
-							uint32_t						/*aAbilityId*/,
-							EntityInstance*					/*aSource*/,
-							EntityInstance*					/*aTarget*/,
-							const ItemInstanceReference&	/*aItem*/,
-							IResourceChangeQueue*			/*aCombatResultQueue*/,
-							IAuraEventQueue*				/*aAuraEventQueue*/,
-							IEventQueue*					/*aEventQueue*/,
-							const IWorldView*				/*aWorldView*/) { }
+		virtual void			FromSource(
+									const SourceNode*				/*aSource*/) { assert(false); }
+		virtual void			ToStream(
+									IWriter*						/*aStream*/) const { assert(false); }
+		virtual bool			FromStream(
+									IReader*						/*aStream*/) { assert(false); return true; }
+		virtual CombatEvent::Id	Resolve(
+									int32_t							/*aTick*/,
+									std::mt19937&					/*aRandom*/,
+									const Manifest*					/*aManifest*/,
+									CombatEvent::Id					aId,
+									uint32_t						/*aAbilityId*/,
+									EntityInstance*					/*aSource*/,
+									EntityInstance*					/*aTarget*/,
+									const ItemInstanceReference&	/*aItem*/,
+									IResourceChangeQueue*			/*aCombatResultQueue*/,
+									IAuraEventQueue*				/*aAuraEventQueue*/,
+									IEventQueue*					/*aEventQueue*/,
+									const IWorldView*				/*aWorldView*/) { return aId; }
 
 		// Public data
 		uint32_t					m_flags = 0;		

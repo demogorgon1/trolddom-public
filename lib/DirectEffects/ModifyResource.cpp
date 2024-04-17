@@ -66,7 +66,7 @@ namespace tpublic::DirectEffects
 		return true;
 	}
 
-	void
+	CombatEvent::Id
 	ModifyResource::Resolve(
 		int32_t							/*aTick*/,
 		std::mt19937&					aRandom,
@@ -97,6 +97,8 @@ namespace tpublic::DirectEffects
 				m_range.GetRandom(aRandom),
 				0);
 		}
+
+		return aId;
 	}
 
 }

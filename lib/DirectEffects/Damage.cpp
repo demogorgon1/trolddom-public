@@ -109,7 +109,7 @@ namespace tpublic::DirectEffects
 		return true;
 	}
 
-	void
+	CombatEvent::Id
 	Damage::Resolve(
 		int32_t							/*aTick*/,
 		std::mt19937&					aRandom,
@@ -131,7 +131,7 @@ namespace tpublic::DirectEffects
 		const Components::Auras* targetAuras = aTarget->GetComponent<Components::Auras>();
 
 		if(targetCombatPublic == NULL)
-			return;
+			return aId;
 
 		uint32_t damage = 0;
 
@@ -183,7 +183,7 @@ namespace tpublic::DirectEffects
 
 		uint32_t blocked = 0;
 
-		if(aId == CombatEvent::ID_BLOCK && targetCombatPrivate != NULL)
+		if(result == CombatEvent::ID_BLOCK && targetCombatPrivate != NULL)
 		{
 			blocked = targetCombatPrivate->m_blockValue;
 			if(blocked > damage)
@@ -264,6 +264,8 @@ namespace tpublic::DirectEffects
 			if (aTarget->GetEntityId() != 0) // Not a player
 				aEventQueue->EventQueueThreat(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), threat);
 		}
+
+		return result;
 	}
 
 

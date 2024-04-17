@@ -8,11 +8,12 @@ namespace tpublic
 
 		enum Id : uint8_t
 		{
-			ID_HIT,
+			// Order is prioritized: if multiple combat events are associated with same ability, highest value takes precedence
 			ID_MISS,
 			ID_DODGE,
 			ID_PARRY,
 			ID_BLOCK,
+			ID_HIT,
 			ID_CRITICAL,
 
 			NUM_IDS,

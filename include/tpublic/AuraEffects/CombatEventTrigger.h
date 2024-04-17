@@ -38,6 +38,8 @@ namespace tpublic
 					{
 						if(aChild->m_name == "combat_event")
 						{
+							TP_VERIFY(aChild->m_annotation, aChild->m_debugInfo, "Missing combat event type annotation.");
+							m_combatEventType = AuraEffectBase::SourceToCombatEventType(aChild->m_annotation.get());
 							m_combatEventId = CombatEvent::StringToId(aChild->GetIdentifier());
 							TP_VERIFY(m_combatEventId != CombatEvent::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid combat event.", aChild->GetIdentifier());
 						}
@@ -60,6 +62,7 @@ namespace tpublic
 				ToStreamBase(aStream);
 
 				aStream->WritePOD(m_combatEventId);
+				aStream->WritePOD(m_combatEventType);
 				m_ability.ToStream(aStream);
 			}
 
@@ -72,6 +75,8 @@ namespace tpublic
 
 				if (!aStream->ReadPOD(m_combatEventId))
 					return false;
+				if (!aStream->ReadPOD(m_combatEventType))
+					return false;
 				if (!m_ability.FromStream(aStream))
 					return false;
 				return true;
@@ -83,17 +88,20 @@ namespace tpublic
 				CombatEventTrigger* t = new CombatEventTrigger();
 				t->CopyBase(this);
 				t->m_combatEventId = m_combatEventId;
+				t->m_combatEventType = m_combatEventType;
 				t->m_ability = m_ability;
 				return t;
 			}
 
 			void	OnCombatEvent(						
+						CombatEventType					aType,
 						CombatEvent::Id					aCombatEventId,
 						SecondaryAbilityCallback		aCallback) const override;
 
 			// Public data
-			CombatEvent::Id		m_combatEventId = CombatEvent::ID_HIT;
-			SecondaryAbility	m_ability;
+			AuraEffectBase::CombatEventType	m_combatEventType = AuraEffectBase::INVALID_COMBAT_EVENT_TYPE;
+			CombatEvent::Id					m_combatEventId = CombatEvent::ID_HIT;
+			SecondaryAbility				m_ability;
 		};
 
 	}

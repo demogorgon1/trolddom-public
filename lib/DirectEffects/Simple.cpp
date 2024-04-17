@@ -56,12 +56,12 @@ namespace tpublic::DirectEffects
 		return true;
 	}
 
-	void
+	CombatEvent::Id
 	Simple::Resolve(
 		int32_t							aTick,
 		std::mt19937&					/*aRandom*/,
 		const Manifest*					/*aManifest*/,
-		CombatEvent::Id					/*aId*/,
+		CombatEvent::Id					aId,
 		uint32_t						/*aAbilityId*/,
 		EntityInstance*					aSource,
 		EntityInstance*					aTarget,
@@ -98,6 +98,7 @@ namespace tpublic::DirectEffects
 			break;
 		}
 		
+		return aId;
 	}
 
 }

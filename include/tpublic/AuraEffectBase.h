@@ -18,6 +18,27 @@ namespace tpublic
 	{
 	public:
 		typedef std::function<void(const SecondaryAbility&)> SecondaryAbilityCallback;
+		
+		enum CombatEventType : uint8_t
+		{
+			INVALID_COMBAT_EVENT_TYPE,
+
+			COMBAT_EVENT_TYPE_SOURCE,
+			COMBAT_EVENT_TYPE_TARGET
+		};
+
+		static CombatEventType
+		SourceToCombatEventType(
+			const SourceNode*							aSource)
+		{
+			std::string_view t(aSource->GetIdentifier());
+			if(t == "source")
+				return COMBAT_EVENT_TYPE_SOURCE;
+			else if (t == "target")
+				return COMBAT_EVENT_TYPE_TARGET;
+			TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid combat event type.", aSource->GetIdentifier());
+			return INVALID_COMBAT_EVENT_TYPE;
+		}
 
 		AuraEffectBase(
 			AuraEffect::Id								aId)
@@ -135,6 +156,7 @@ namespace tpublic
 									DirectEffect::DamageType		/*aDamageType*/,
 									int32_t							aDamage) const { return aDamage; }
 		virtual void			OnCombatEvent(
+									CombatEventType					/*aType*/,
 									CombatEvent::Id					/*aCombatEventId*/,
 									SecondaryAbilityCallback		/*aCallback*/) const { }
 		virtual bool			GetStatModifier(

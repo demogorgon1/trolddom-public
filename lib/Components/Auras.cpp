@@ -40,13 +40,14 @@ namespace tpublic::Components
 
 	void		
 	Auras::OnCombatEvent(
+		tpublic::AuraEffectBase::CombatEventType	aType,
 		CombatEvent::Id								aCombatEventId,
 		AuraEffectBase::SecondaryAbilityCallback	aCallback) const
 	{
 		for (const std::unique_ptr<Entry>& entry : m_entries)
 		{
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
-				effect->OnCombatEvent(aCombatEventId, aCallback);
+				effect->OnCombatEvent(aType, aCombatEventId, aCallback);
 		}
 	}
 

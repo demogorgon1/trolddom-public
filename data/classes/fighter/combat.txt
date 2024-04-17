@@ -7,14 +7,15 @@ talent_tree fighter_combat:
 	{
 		talent fighter_combat_deflection: "A"
 		talent fighter_combat_riposte: "B"
+		talent fighter_combat_ferocity: "C"
 		sprite talent_tree_down_arrow: "d"
 	}
 	
 	map:
 	[
-		"A"
-		"d"
-		"B"
+		"A.."
+		"d.."
+		"B.C"
 	]
 	
 }
@@ -90,8 +91,58 @@ aura fighter_combat_riposte:
 	description: "You gain 5 rage when you parry an attack."
 	aura_effect combat_event_trigger: 
 	{ 
-		combat_event: parry
+		combat_event<target>: parry
 		ability<target>: fighter_combat_riposte
+	}
+}
+
+###############################################################################
+# Ferocity
+
+talent fighter_combat_ferocity:
+{
+	string: "Ferocity"
+	icon: icon_crit
+	talent_tree_points_required: 3
+	points:
+	[
+		{ aura: fighter_combat_ferocity }
+	]
+}
+
+ability fighter_combat_ferocity_trigger:
+{
+	string: "Ferocity"
+	states: [ default in_combat ]
+	icon: icon_crit
+	
+	direct_effect apply_aura:
+	{
+		aura: fighter_combat_ferocity_buff
+		apply_to_party_members_in_range: 8
+	}
+}
+
+aura fighter_combat_ferocity:
+{
+	type: hidden
+	description: "Your critical strikes increase your critical strike chance by 5% for 10 seconds. Also affects nearby party members."
+	aura_effect combat_event_trigger: 
+	{ 
+		combat_event<source>: critical
+		ability<self>: fighter_combat_ferocity_trigger
+	}
+}
+
+aura fighter_combat_ferocity_buff:
+{
+	string: "Ferocity"
+	type: buff
+	icon: icon_crit
+	duration: 100
+	stat_modifiers:
+	{
+		phys_crit_chance: { add: 5 }
 	}
 }
 
