@@ -144,6 +144,10 @@ sprites:
 	sprite icon_charge : { tags: [ icon ] }
 	sprite icon_rage : { tags: [ icon ] }	
 	sprite icon_crit : { tags: [ icon ] }
+	sprite icon_hamstring : { tags: [ icon ] }
+	sprite icon_kick : { tags: [ icon ] }
+	sprite icon_rend : { tags: [ icon ] }
+	sprite icon_mortal_strike : { tags: [ icon ] }
 	
 }
 

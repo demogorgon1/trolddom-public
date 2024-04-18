@@ -9,14 +9,18 @@ talent_tree fighter_combat:
 		talent fighter_combat_riposte: "B"
 		talent fighter_combat_ferocity: "C"
 		talent fighter_combat_improved_strike: "D"
+		talent fighter_combat_mortal_strike: "E"
 		sprite talent_tree_down_arrow: "d"
+		sprite talent_tree_down: "|"
 	}
 	
 	map:
 	[
 		"D.A.."
-		"..d.."
-		"..B.C"
+		"|.d.."
+		"|.B.C"
+		"d...."
+		"E...."
 	]
 	
 }
@@ -184,6 +188,65 @@ ability_modifier improved_strike_3:
 }
 
 ###############################################################################
+# Mortal Strike
+
+talent fighter_combat_mortal_strike:
+{
+	string: "Improved Strike"
+	icon: icon_strike
+	prerequisites: [ fighter_combat_improved_strike ]
+	talent_tree_points_required: 6	
+	points:
+	[
+		{ ability: mortal_strike }
+	]
+}
+
+cooldown mortal_strike:
+{
+	duration: 60
+}
+
+aura mortal_strike:
+{
+	string: "Mortal Strike"
+	description: "Healing received reduced by 50%."
+	type: debuff
+	icon: icon_mortal_strike
+	duration: 100
+	aura_effect heal_input_modifier: 
+	{ 
+		multiplier: 0.5
+	}
+}
+
+ability mortal_strike:
+{
+	string: "Mortal Strike"
+	range: 1	
+	cooldowns: [ global mortal_strike ]
+	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+	states: [ default in_combat ]
+	icon: icon_mortal_strike
+	delay: 3
+	resource_cost rage: 20
+	talent_tree: fighter_combat
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		base: weapon
+		level_curve: [ [ 2 4 ] [ 12 18 ] ]
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: mortal_strike
+	}
+}
+
+###############################################################################
 # Strike
 
 ability strike:
@@ -203,7 +266,7 @@ ability strike:
 		flags: [ can_be_critical ]
 		damage_type: physical
 		base: weapon
-		level_curve: [ [ 1 4 ] [ 10 15 ] ]
+		level_curve: [ [ 1 2 ] [ 6 9 ] ]
 	}
 }
 

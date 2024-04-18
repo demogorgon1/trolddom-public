@@ -30,12 +30,25 @@ namespace tpublic::Components
 		for (const std::unique_ptr<Entry>& entry : m_entries)
 		{
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
-			{
-				damage = effect->FilterDamageInput(aDamageType, aDamage);
-			}
+				damage = effect->FilterDamageInput(aDamageType, damage);
 		}
 						
 		return damage;
+	}
+
+	int32_t		
+	Auras::FilterHealInput(
+		int32_t										aHeal) const
+	{
+		int32_t heal = aHeal;
+
+		for (const std::unique_ptr<Entry>& entry : m_entries)
+		{
+			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
+				heal = effect->FilterHealInput(heal);
+		}
+
+		return heal;
 	}
 
 	void		

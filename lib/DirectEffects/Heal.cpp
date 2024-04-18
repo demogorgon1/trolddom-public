@@ -1,5 +1,6 @@
 #include "../Pcheader.h"
 
+#include <tpublic/Components/Auras.h>
 #include <tpublic/Components/CombatPrivate.h>
 #include <tpublic/Components/CombatPublic.h>
 #include <tpublic/Components/ThreatSource.h>
@@ -102,6 +103,10 @@ namespace tpublic::DirectEffects
 				result = CombatEvent::ID_CRITICAL;
 			}
 		}
+
+		Components::Auras* targetAuras = aTarget->GetComponent<Components::Auras>();
+		if(targetAuras != NULL)
+			heal = targetAuras->FilterHealInput(heal);
 
 		size_t healthResourceIndex;
 		if(targetCombatPublic->GetResourceIndex(Resource::ID_HEALTH, healthResourceIndex))

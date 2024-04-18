@@ -49,6 +49,9 @@ namespace tpublic::Systems
 				const Data::Aura* aura = GetManifest()->GetById<Data::Aura>(entry->m_auraId);
 				if((aura->m_flags & Data::Aura::FLAG_CANCEL_IN_COMBAT) != 0 && aEntityState == EntityState::ID_IN_COMBAT)
 					entry->m_cancel = true;
+
+				if((aura->m_flags & Data::Aura::FLAG_PERSIST_IN_DEATH) == 0 && aEntityState == EntityState::ID_DEAD)
+					entry->m_cancel = true;
 				
 				if(!entry->m_cancel)
 				{
