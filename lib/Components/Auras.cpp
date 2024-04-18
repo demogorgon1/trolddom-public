@@ -20,6 +20,30 @@ namespace tpublic::Components
 		return false;
 	}
 
+	MoveSpeed::Id	
+	Auras::GetMoveSpeed() const
+	{
+		MoveSpeed::Id moveSpeed = MoveSpeed::INVALID_ID;
+
+		for (const std::unique_ptr<Entry>& entry : m_entries)
+		{
+			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
+			{
+				MoveSpeed::Id t = effect->GetMoveSpeedModifier();
+				if(t != MoveSpeed::INVALID_ID)
+				{
+					if(moveSpeed == MoveSpeed::INVALID_ID || t < moveSpeed)
+						moveSpeed = t;
+				}
+			}
+		}
+
+		if(moveSpeed != MoveSpeed::INVALID_ID)
+			return moveSpeed;
+
+		return MoveSpeed::ID_NORMAL;
+	}
+
 	int32_t
 	Auras::FilterDamageInput(
 		DirectEffect::DamageType					aDamageType,

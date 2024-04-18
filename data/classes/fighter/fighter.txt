@@ -119,6 +119,7 @@ class fighter:
 			
 			unlock_abilities:
 			[
+				hamstring
 			]
 			
 			stats:

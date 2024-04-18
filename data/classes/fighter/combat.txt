@@ -193,7 +193,7 @@ ability_modifier improved_strike_3:
 talent fighter_combat_mortal_strike:
 {
 	string: "Improved Strike"
-	icon: icon_strike
+	icon: icon_mortal_strike
 	prerequisites: [ fighter_combat_improved_strike ]
 	talent_tree_points_required: 6	
 	points:
@@ -346,7 +346,7 @@ ability charge:
 	string: "Charge"
 	range: 6
 	cooldowns: [ charge ]
-	flags: [ target_other target_hostile ]
+	flags: [ target_other target_hostile trigger_move_cooldown ]
 	states: [ default ]
 	icon: icon_charge
 	talent_tree: fighter_combat 

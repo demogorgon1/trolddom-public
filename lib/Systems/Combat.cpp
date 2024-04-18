@@ -103,36 +103,42 @@ namespace tpublic::Systems
 		ComponentBase**		aComponents,
 		Context*			/*aContext*/) 
 	{
+		Components::Auras* auras = GetComponent<Components::Auras>(aComponents);
+		Components::VisibleAuras* visibleAuras = GetComponent<Components::VisibleAuras>(aComponents);
+
+		if(auras->m_seq > visibleAuras->m_seq)
 		{
-			Components::Auras* auras = GetComponent<Components::Auras>(aComponents);
-			Components::VisibleAuras* visibleAuras = GetComponent<Components::VisibleAuras>(aComponents);
+			visibleAuras->m_seq = auras->m_seq;
+			visibleAuras->m_entries.clear();
+			visibleAuras->m_stunned = false;
 
-			if(auras->m_seq > visibleAuras->m_seq)
+			for (const std::unique_ptr<Components::Auras::Entry>& entry : auras->m_entries)
 			{
-				visibleAuras->m_seq = auras->m_seq;
-				visibleAuras->m_entries.clear();
-				visibleAuras->m_stunned = false;
+				const Data::Aura* aura = GetManifest()->GetById<Data::Aura>(entry->m_auraId);
 
-				for (const std::unique_ptr<Components::Auras::Entry>& entry : auras->m_entries)
+				if(aura->m_type != Data::Aura::TYPE_HIDDEN)
 				{
-					const Data::Aura* aura = GetManifest()->GetById<Data::Aura>(entry->m_auraId);
-
-					if(aura->m_type != Data::Aura::TYPE_HIDDEN)
-					{
-						Components::VisibleAuras::Entry t;
-						t.m_auraId = entry->m_auraId;
-						t.m_entityInstanceId = entry->m_entityInstanceId;
-						t.m_start = entry->m_start;
-						t.m_end = entry->m_end;
-						visibleAuras->m_entries.push_back(t);
-					}
-
-					if(!visibleAuras->m_stunned && entry->HasEffect(AuraEffect::ID_STUN))
-						visibleAuras->m_stunned = true;
+					Components::VisibleAuras::Entry t;
+					t.m_auraId = entry->m_auraId;
+					t.m_entityInstanceId = entry->m_entityInstanceId;
+					t.m_start = entry->m_start;
+					t.m_end = entry->m_end;
+					visibleAuras->m_entries.push_back(t);
 				}
 
-				visibleAuras->SetDirty();
+				if(!visibleAuras->m_stunned && entry->HasEffect(AuraEffect::ID_STUN))
+					visibleAuras->m_stunned = true;
 			}
+
+			visibleAuras->SetDirty();
+		}
+
+		MoveSpeed::Id moveSpeed = auras->GetMoveSpeed();		
+		Components::CombatPublic* combatPublic = GetComponent<Components::CombatPublic>(aComponents);
+		if(combatPublic->m_moveSpeed != moveSpeed)
+		{
+			combatPublic->m_moveSpeed = moveSpeed;
+			combatPublic->SetDirty();
 		}
 	}
 

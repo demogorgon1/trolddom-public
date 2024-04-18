@@ -4,6 +4,56 @@ talent_tree fighter_subtlety:
 	icon: icon_fighter_subtlety
 }
 
+###############################################################################
+# Hamstring
+
+cooldown hamstring:
+{
+	duration: 50
+}
+
+aura hamstring:
+{
+	string: "Hamstring"
+	description: "Reduced movement speed."
+	type: debuff
+	icon: icon_hamstring
+	duration: 60
+	
+	aura_effect move_speed_modifier:
+	{
+		move_speed: slow
+	}
+}
+
+ability hamstring:
+{
+	string: "Hamstring"
+	range: 1
+	cooldowns: [ global hamstring ]
+	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+	states: [ default in_combat ]
+	icon: icon_hamstring
+	delay: 3
+	resource_cost rage: 5
+	talent_tree: fighter_subtlety	
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical			
+		base: [ 4 8 ]
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: hamstring
+	}
+}
+
+###############################################################################
+# Throw Rock
+
 cooldown throw_rock:
 {
 	duration: 60
@@ -29,6 +79,9 @@ ability throw_rock:
 		base: [ 3 6 ]
 	}
 }
+
+###############################################################################
+# Smoke Bomb
 
 cooldown smoke_bomb:
 {

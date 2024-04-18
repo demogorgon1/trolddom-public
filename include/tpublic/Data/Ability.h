@@ -47,7 +47,8 @@ namespace tpublic
 				FLAG_HIDDEN							= 0x00200000,
 				FLAG_LATE_COOLDOWN_TRIGGER			= 0x00400000,
 				FLAG_TARGET_AOE_FRIENDLY			= 0x00800000,
-				FLAG_TARGET_AOE_HOSTILE				= 0x01000000
+				FLAG_TARGET_AOE_HOSTILE				= 0x01000000,
+				FLAG_TRIGGER_MOVE_COOLDOWN			= 0x02000000
 			};
 
 			static inline Resource::Id
@@ -118,6 +119,8 @@ namespace tpublic
 						flags |= FLAG_TARGET_AOE_HOSTILE;
 					else if (strcmp(identifier, "target_aoe_friendly") == 0)
 						flags |= FLAG_TARGET_AOE_FRIENDLY;
+					else if (strcmp(identifier, "trigger_move_cooldown") == 0)
+						flags |= FLAG_TRIGGER_MOVE_COOLDOWN;
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid ability flag.", identifier);
 				});
@@ -370,6 +373,7 @@ namespace tpublic
 			bool IsChanneled() const { return m_channelTicks != 0 && m_channelTickAbilityId != 0; }
 			bool IsOffensive() const { return m_flags & FLAG_OFFENSIVE; }
 			bool IsItem() const { return m_flags & FLAG_ITEM; }
+			bool ShouldTriggerMoveCooldown() const { return m_flags & FLAG_TRIGGER_MOVE_COOLDOWN; }
 			
 			bool 
 			IsUsableInState(

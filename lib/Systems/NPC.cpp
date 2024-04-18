@@ -373,29 +373,33 @@ namespace tpublic::Systems
 								aContext->m_eventQueue->EventQueueAbility(aEntityInstanceId, target->GetEntityInstanceId(), Vec2(), useAbility, ItemInstanceReference(), NULL);
 							}
 						}
-						else if(npc->m_moveCooldownUntilTick < aContext->m_tick && distanceSquared > 1)
+						else if(distanceSquared > 1)
 						{
-							if(npc->m_npcMovement.ShouldResetIfLOS(aContext->m_tick))
+							const MoveSpeed::Info* moveSpeedInfo = MoveSpeed::GetInfo(combat->m_moveSpeed);
+							if(npc->m_moveCooldownUntilTick + moveSpeedInfo->m_tickBias < aContext->m_tick)
 							{
-								if(aContext->m_worldView->WorldViewLineOfSight(position->m_position, targetPosition->m_position))
-									npc->m_npcMovement.Reset(aContext->m_tick);
-							}
+								if (npc->m_npcMovement.ShouldResetIfLOS(aContext->m_tick))
+								{
+									if (aContext->m_worldView->WorldViewLineOfSight(position->m_position, targetPosition->m_position))
+										npc->m_npcMovement.Reset(aContext->m_tick);
+								}
 
-							IEventQueue::EventQueueMoveRequest moveRequest;
-							if(npc->m_npcMovement.GetMoveRequest(
-								aContext->m_worldView->WorldViewGetMapData()->m_mapPathData.get(), 
-								position->m_position, 
-								targetPosition->m_position, 
-								aContext->m_tick, 
-								position->m_lastMoveTick, 
-								moveRequest))
-							{
-								moveRequest.m_entityInstanceId = aEntityInstanceId;
-								moveRequest.m_canMoveOnAllNonViewBlockingTiles = npc->m_canMoveOnAllNonViewBlockingTiles;
+								IEventQueue::EventQueueMoveRequest moveRequest;
+								if (npc->m_npcMovement.GetMoveRequest(
+									aContext->m_worldView->WorldViewGetMapData()->m_mapPathData.get(),
+									position->m_position,
+									targetPosition->m_position,
+									aContext->m_tick,
+									position->m_lastMoveTick,
+									moveRequest))
+								{
+									moveRequest.m_entityInstanceId = aEntityInstanceId;
+									moveRequest.m_canMoveOnAllNonViewBlockingTiles = npc->m_canMoveOnAllNonViewBlockingTiles;
 
-								aContext->m_eventQueue->EventQueueMove(moveRequest);
+									aContext->m_eventQueue->EventQueueMove(moveRequest);
 
-								npc->m_moveCooldownUntilTick = aContext->m_tick + 2;
+									npc->m_moveCooldownUntilTick = aContext->m_tick + 2;
+								}
 							}
 						}
 					}

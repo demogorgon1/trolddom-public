@@ -5,6 +5,7 @@
 #include "DirectEffect.h"
 #include "IReader.h"
 #include "IWriter.h"
+#include "MoveSpeed.h"
 #include "Parser.h"
 #include "Stat.h"
 #include "SystemBase.h"
@@ -157,6 +158,7 @@ namespace tpublic
 									int32_t							aDamage) const { return aDamage; }
 		virtual int32_t			FilterHealInput(
 									int32_t							aHeal) const { return aHeal; }
+		virtual MoveSpeed::Id	GetMoveSpeedModifier() const { return MoveSpeed::INVALID_ID; }
 		virtual void			OnCombatEvent(
 									CombatEventType					/*aType*/,
 									CombatEvent::Id					/*aCombatEventId*/,

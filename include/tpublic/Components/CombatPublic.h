@@ -6,6 +6,7 @@
 #include "../CastInProgress.h"
 #include "../ComponentBase.h"
 #include "../LootRule.h"
+#include "../MoveSpeed.h"
 #include "../Rarity.h"
 #include "../Resource.h"
 
@@ -75,7 +76,8 @@ namespace tpublic
 				FIELD_LOOT_RULE,
 				FIELD_LOOT_THRESHOLD,
 				FIELD_COMBAT_FLAGS,
-				FIELD_CREATURE_TYPE_ID
+				FIELD_CREATURE_TYPE_ID,
+				FIELD_MOVE_SPEED
 			};
 
 			static void
@@ -93,6 +95,7 @@ namespace tpublic
 				aSchema->DefineCustomPODNoSource<Rarity::Id>(FIELD_LOOT_THRESHOLD, offsetof(CombatPublic, m_lootThreshold))->SetFlags(ComponentSchema::FLAG_NO_STORAGE);
 				aSchema->DefineCustomPODNoSource<uint8_t>(FIELD_COMBAT_FLAGS, offsetof(CombatPublic, m_combatFlags));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_CREATURE_TYPE_ID, "creature_type", offsetof(CombatPublic, m_creatureTypeId))->SetDataType(DataType::ID_CREATURE_TYPE)->SetFlags(ComponentSchema::FLAG_NO_STORAGE);
+				aSchema->DefineCustomPODNoSource<MoveSpeed::Id>(FIELD_MOVE_SPEED, offsetof(CombatPublic, m_moveSpeed))->SetFlags(ComponentSchema::FLAG_NO_STORAGE);
 
 				aSchema->AddSourceModifier<CombatPublic>("not_pushable", [](
 					CombatPublic*		aCombatPublic,
@@ -306,6 +309,7 @@ namespace tpublic
 			LootRule::Id					m_lootRule = LootRule::INVALID_ID;
 			Rarity::Id						m_lootThreshold = Rarity::INVALID_ID;
 			uint8_t							m_combatFlags = COMBAT_FLAG_PUSHABLE;
+			MoveSpeed::Id					m_moveSpeed = MoveSpeed::ID_NORMAL;
 
 			// Internal server-side only
 			int32_t							m_lastCombatEventTick = 0;

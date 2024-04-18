@@ -5,6 +5,7 @@
 #include "../AuraEffectBase.h"
 #include "../ComponentBase.h"
 #include "../Manifest.h"
+#include "../MoveSpeed.h"
 
 namespace tpublic
 {
@@ -130,21 +131,22 @@ namespace tpublic
 				});
 			}
 
-			bool		HasEffect(
-							AuraEffect::Id								aId) const;
-			int32_t		FilterDamageInput(
-							DirectEffect::DamageType					aDamageType,
-							int32_t										aDamage) const;
-			int32_t		FilterHealInput(
-							int32_t										aHeal) const;
-			void		OnCombatEvent(
-							tpublic::AuraEffectBase::CombatEventType	aType,
-							CombatEvent::Id								aCombatEventId,
-							AuraEffectBase::SecondaryAbilityCallback	aCallback) const;
-			void		RemoveAura(
-							uint32_t									aAuraId);
-			void		OnLoadedFromPersistence(
-							const Manifest*								aManifest);
+			bool			HasEffect(
+								AuraEffect::Id								aId) const;
+			MoveSpeed::Id	GetMoveSpeed() const;
+			int32_t			FilterDamageInput(
+								DirectEffect::DamageType					aDamageType,
+								int32_t										aDamage) const;
+			int32_t			FilterHealInput(
+								int32_t										aHeal) const;
+			void			OnCombatEvent(
+								tpublic::AuraEffectBase::CombatEventType	aType,
+								CombatEvent::Id								aCombatEventId,
+								AuraEffectBase::SecondaryAbilityCallback	aCallback) const;
+			void			RemoveAura(
+								uint32_t									aAuraId);
+			void			OnLoadedFromPersistence(
+								const Manifest*								aManifest);
 
 			// Public data
 			std::vector<std::unique_ptr<Entry>>					m_entries;
