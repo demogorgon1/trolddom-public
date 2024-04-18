@@ -86,7 +86,7 @@ namespace tpublic::Systems
 				const EntityInstance* aEntityInstance)
 			{
 				if(aEntityInstance->GetEntityInstanceId() != aEntityInstanceId && aEntityInstance->GetEntityInstanceId() != owner->m_ownerEntityInstanceId)
-					aContext->m_eventQueue->EventQueueAbility(aEntityInstanceId, aEntityInstance->GetEntityInstanceId(), Vec2(), ability, ItemInstanceReference());
+					aContext->m_eventQueue->EventQueueAbility(aEntityInstanceId, aEntityInstance->GetEntityInstanceId(), Vec2(), ability, ItemInstanceReference(), NULL);
 
 				return false; // Don't stop
 			});

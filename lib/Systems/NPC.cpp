@@ -157,7 +157,8 @@ namespace tpublic::Systems
 					npc->m_castInProgress->m_targetEntityInstanceId,
 					npc->m_castInProgress->m_aoeTarget,
 					GetManifest()->GetById<Data::Ability>(npc->m_castInProgress->m_abilityId),
-					ItemInstanceReference());
+					ItemInstanceReference(),
+					NULL);
 				npc->m_castInProgress.reset();
 			}
 
@@ -338,7 +339,7 @@ namespace tpublic::Systems
 							if(npc->m_cooldowns.IsAbilityOnCooldown(ability))
 								continue;
 
-							if(!combat->HasResourcesForAbility(ability))
+							if(!combat->HasResourcesForAbility(ability, NULL))
 								continue;
 
 							if(!aContext->m_worldView->WorldViewLineOfSight(targetPosition->m_position, position->m_position))
@@ -369,7 +370,7 @@ namespace tpublic::Systems
 							}
 							else
 							{
-								aContext->m_eventQueue->EventQueueAbility(aEntityInstanceId, target->GetEntityInstanceId(), Vec2(), useAbility, ItemInstanceReference());
+								aContext->m_eventQueue->EventQueueAbility(aEntityInstanceId, target->GetEntityInstanceId(), Vec2(), useAbility, ItemInstanceReference(), NULL);
 							}
 						}
 						else if(npc->m_moveCooldownUntilTick < aContext->m_tick && distanceSquared > 1)

@@ -12,6 +12,7 @@ namespace tpublic
 	namespace Data
 	{
 		struct Ability;
+		struct AbilityModifier;
 	}
 
 	class CastInProgress;
@@ -76,59 +77,60 @@ namespace tpublic
 
 		// Virtual interface
 		virtual EventQueueAbilityResult		EventQueueAbility(
-												uint32_t											aSourceEntityInstanceId,
-												uint32_t											aTargetEntityInstanceId,
-												const Vec2&											aAOETarget,
-												const Data::Ability*								aAbility,
-												const ItemInstanceReference&						aItem) = 0;
+												uint32_t													aSourceEntityInstanceId,
+												uint32_t													aTargetEntityInstanceId,
+												const Vec2&													aAOETarget,
+												const Data::Ability*										aAbility,
+												const ItemInstanceReference&								aItem,
+												const std::vector<const Data::AbilityModifier*>*			aModifiers) = 0;
 		virtual void						EventQueueMove(
-												const EventQueueMoveRequest&						aMoveRequest) = 0;
+												const EventQueueMoveRequest&								aMoveRequest) = 0;
 		virtual void						EventQueueMoveAdjacent(
-												const EventQueueMoveAdjacentRequest&				aMoveAdjacentRequest) = 0;
+												const EventQueueMoveAdjacentRequest&						aMoveAdjacentRequest) = 0;
 		virtual void						EventQueueIndividualKillXP(
-												uint32_t											aCharacterId,
-												uint32_t											aCharacterLevel,
-												uint32_t											aKillLevel,
-												uint32_t											aKillEntityId) = 0;
+												uint32_t													aCharacterId,
+												uint32_t													aCharacterLevel,
+												uint32_t													aKillLevel,
+												uint32_t													aKillEntityId) = 0;
 		virtual void						EventQueueGroupKillXP(
-												uint64_t											aGroupId,
-												uint32_t											aKillLevel,
-												uint32_t											aKillEntityId) = 0;
+												uint64_t													aGroupId,
+												uint32_t													aKillLevel,
+												uint32_t													aKillEntityId) = 0;
 		virtual void						EventQueueGroupLoot(
-												uint32_t											aEntityInstanceId,
-												uint64_t											aGroupId,
-												const tpublic::Components::Lootable::AvailableLoot& aLoot,
-												size_t												aLootIndex,
-												const std::vector<uint32_t>&						aGroupMemberEntityInstanceIds) = 0;
+												uint32_t													aEntityInstanceId,
+												uint64_t													aGroupId,
+												const tpublic::Components::Lootable::AvailableLoot&			aLoot,
+												size_t														aLootIndex,
+												const std::vector<uint32_t>&								aGroupMemberEntityInstanceIds) = 0;
 		virtual void						EventQueueChanneling(
-												uint32_t											aSourceEntityInstanceId,
-												const CastInProgress&								aCastInProgress) = 0;
+												uint32_t													aSourceEntityInstanceId,
+												const CastInProgress&										aCastInProgress) = 0;
 		virtual void						EventQueueCancelChanneling(
-												uint32_t											aSourceEntityInstanceId,
-												uint32_t											aTargetEntityInstanceId,
-												uint32_t											aChanneledAbilityId,
-												int32_t												aStart) = 0;
+												uint32_t													aSourceEntityInstanceId,
+												uint32_t													aTargetEntityInstanceId,
+												uint32_t													aChanneledAbilityId,
+												int32_t														aStart) = 0;
 		virtual void						EventQueueInterrupt(
-												uint32_t											aSourceEntityInstanceId,
-												uint32_t											aTargetEntityInstanceId) = 0;
+												uint32_t													aSourceEntityInstanceId,
+												uint32_t													aTargetEntityInstanceId) = 0;
 		virtual uint32_t					EventQueueGetNextGroupRoundRobinCharacterId(
-												uint64_t											aGroupId) = 0;
+												uint64_t													aGroupId) = 0;
 		virtual void						EventQueueThreat(
-												uint32_t											aSourceEntityInstanceId,
-												uint32_t											aTargetEntityInstanceId,
-												int32_t												aThreat,
-												const std::optional<float>&							aMultiply = std::optional<float>()) = 0;
+												uint32_t													aSourceEntityInstanceId,
+												uint32_t													aTargetEntityInstanceId,
+												int32_t														aThreat,
+												const std::optional<float>&									aMultiply = std::optional<float>()) = 0;
 		virtual void						EventQueueThreatClear(
-												uint32_t											aEntityInstanceId) = 0;
+												uint32_t													aEntityInstanceId) = 0;
 		virtual tpublic::EntityInstance*	EventQueueSpawnEntity(
-												uint32_t											aEntityId,
-												tpublic::EntityState::Id							aInitState) = 0;
+												uint32_t													aEntityId,
+												tpublic::EntityState::Id									aInitState) = 0;
 		virtual void						EventQueueMakeOffering(
-												uint32_t											aSourceEntityInstanceId,
-												uint32_t											aTargetEntityInstanceId,
-												const ItemInstanceReference&						aItem) = 0;
+												uint32_t													aSourceEntityInstanceId,
+												uint32_t													aTargetEntityInstanceId,
+												const ItemInstanceReference&								aItem) = 0;
 		virtual void						EventQueueGenerateLoot(
-												uint32_t											aLootableEntityInstanceId) = 0;
+												uint32_t													aLootableEntityInstanceId) = 0;
 	};
 
 }

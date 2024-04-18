@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Data/Ability.h"
+#include "../Data/AbilityModifier.h"
 
 #include "../CastInProgress.h"
 #include "../ComponentBase.h"
@@ -233,12 +234,23 @@ namespace tpublic
 
 			bool
 			HasResourcesForAbility(
-				const Data::Ability*	aAbility) const
+				const Data::Ability*								aAbility,
+				const std::vector<const Data::AbilityModifier*>*	aModifiers) const
 			{
 				for(uint32_t resourceId = 1; resourceId < (uint32_t)Resource::NUM_IDS; resourceId++)
 				{
-					uint32_t cost = aAbility->m_resourceCosts[resourceId];
-					if(cost > 0 && cost > GetResource(resourceId))
+					int32_t cost = (int32_t)aAbility->m_resourceCosts[resourceId];
+
+					if(aModifiers != NULL && cost != 0)
+					{
+						for (const Data::AbilityModifier* modifier : *aModifiers)
+						{
+							if (modifier->m_modifyResourceCost.has_value() && modifier->m_modifyResourceCost->m_resourceId == resourceId)
+								cost += modifier->m_modifyResourceCost->m_value;
+						}						
+					}
+
+					if(cost > 0 && (uint32_t)cost > GetResource(resourceId))
 						return false;
 				}
 				return true;
@@ -246,11 +258,22 @@ namespace tpublic
 
 			bool
 			SubtractResourcesForAbility(
-				const Data::Ability*	aAbility)
+				const Data::Ability*								aAbility,
+				const std::vector<const Data::AbilityModifier*>*	aModifiers)
 			{
 				for (uint32_t resourceId = 1; resourceId < (uint32_t)Resource::NUM_IDS; resourceId++)
 				{
 					uint32_t cost = aAbility->m_resourceCosts[resourceId];
+
+					if(aModifiers != NULL && cost != 0)
+					{
+						for (const Data::AbilityModifier* modifier : *aModifiers)
+						{
+							if (modifier->m_modifyResourceCost.has_value() && modifier->m_modifyResourceCost->m_resourceId == resourceId)
+								cost += modifier->m_modifyResourceCost->m_value;
+						}						
+					}
+
 					if(cost > 0)
 					{
 						size_t index;

@@ -1,6 +1,7 @@
 player_components:
 [
 	abilities
+	ability_modifiers
 	achievements
 	action_bars
 	active_quests
