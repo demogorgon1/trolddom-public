@@ -48,7 +48,7 @@ namespace tpublic
 				FLAG_LATE_COOLDOWN_TRIGGER			= 0x00400000,
 				FLAG_TARGET_AOE_FRIENDLY			= 0x00800000,
 				FLAG_TARGET_AOE_HOSTILE				= 0x01000000,
-				FLAG_TRIGGER_MOVE_COOLDOWN			= 0x02000000
+				FLAG_TRIGGER_MOVE_COOLDOWN			= 0x02000000,
 			};
 
 			static inline Resource::Id
@@ -363,6 +363,7 @@ namespace tpublic
 			bool CanBeParried() const { return m_flags & FLAG_CAN_BE_PARRIED; }
 			bool CanBeBlocked() const { return m_flags & FLAG_CAN_BE_BLOCKED; }
 			bool IsAttack() const { return m_flags & FLAG_ATTACK; }
+			bool IsSpell() const { return m_flags & FLAG_SPELL; }
 			bool AlwaysInRange() const { return m_flags & FLAG_ALWAYS_IN_RANGE; }
 			bool IsMelee() const { return m_flags & FLAG_MELEE; }
 			bool AlwaysInLineOfSight() const { return m_flags & FLAG_ALWAYS_IN_LINE_OF_SIGHT; }

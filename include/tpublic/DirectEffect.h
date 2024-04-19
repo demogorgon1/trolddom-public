@@ -16,10 +16,10 @@ namespace tpublic
 		enum DamageType : uint8_t
 		{
 			DAMAGE_TYPE_PHYSICAL,
-			DAMAGE_TYPE_COLD,		
+			DAMAGE_TYPE_FROST,		
 			DAMAGE_TYPE_FIRE,			
 			DAMAGE_TYPE_ARCANE,
-			DAMAGE_TYPE_EVIL,		
+			DAMAGE_TYPE_UNHOLY,		
 			DAMAGE_TYPE_HOLY,			
 			DAMAGE_TYPE_POISON,
 
@@ -53,14 +53,14 @@ namespace tpublic
 		{
 			if(strcmp(aString, "physical") == 0)
 				return DAMAGE_TYPE_PHYSICAL;
-			if (strcmp(aString, "cold") == 0)
-				return DAMAGE_TYPE_COLD;
+			if (strcmp(aString, "frost") == 0)
+				return DAMAGE_TYPE_FROST;
 			if (strcmp(aString, "fire") == 0)
 				return DAMAGE_TYPE_FIRE;
 			if (strcmp(aString, "arcane") == 0)
 				return DAMAGE_TYPE_ARCANE;
-			if (strcmp(aString, "evil") == 0)
-				return DAMAGE_TYPE_EVIL;
+			if (strcmp(aString, "unholy") == 0)
+				return DAMAGE_TYPE_UNHOLY;
 			if (strcmp(aString, "holy") == 0)
 				return DAMAGE_TYPE_HOLY;
 			if (strcmp(aString, "poison") == 0)
@@ -83,6 +83,7 @@ namespace tpublic
 			ID_CONSUME_AND_PRODUCE,
 			ID_MOVE,
 			ID_MODIFY_RESOURCE,
+			ID_INTERRUPT,
 
 			NUM_IDS
 		};
@@ -101,7 +102,8 @@ namespace tpublic
 			"fishing",
 			"consume_and_produce",
 			"move",
-			"modify_resource"
+			"modify_resource",
+			"interrupt"
 		};
 
 		static_assert(sizeof(EFFECT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

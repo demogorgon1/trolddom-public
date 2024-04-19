@@ -5,6 +5,32 @@ talent_tree fighter_subtlety:
 }
 
 ###############################################################################
+# Kick
+
+cooldown kick:
+{
+	duration: 100
+}
+
+ability kick:
+{
+	string: "Kick"
+	range: 1
+	cooldowns: [ global kick ]
+	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+	states: [ default in_combat ]
+	icon: icon_kick
+	delay: 3
+	resource_cost rage: 5
+	talent_tree: fighter_subtlety	
+	
+	direct_effect interrupt:
+	{	
+		lockout_ticks: 40
+	}
+}
+
+###############################################################################
 # Hamstring
 
 cooldown hamstring:

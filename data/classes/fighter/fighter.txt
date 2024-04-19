@@ -84,7 +84,7 @@ class fighter:
 			
 			unlock_abilities:
 			[				
-				charge
+				hamstring
 			]
 			
 			stats:
@@ -119,7 +119,7 @@ class fighter:
 			
 			unlock_abilities:
 			[
-				hamstring
+				charge
 			]
 			
 			stats:
@@ -136,7 +136,7 @@ class fighter:
 			
 			unlock_abilities:
 			[
-				whirlwind
+				kick
 			]
 			
 			stats:
@@ -154,6 +154,7 @@ class fighter:
 			
 			unlock_abilities:
 			[
+				whirlwind
 			]
 			
 			stats:

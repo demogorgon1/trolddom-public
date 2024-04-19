@@ -28,7 +28,6 @@ namespace tpublic
 											const tpublic::Vec2&	aFrom,
 											const tpublic::Vec2&	aTo) const = 0;
 		virtual uint32_t				WorldViewGetPlayerWorldCharacterId() const = 0;
-
 	};
 
 }

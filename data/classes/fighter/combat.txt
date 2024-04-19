@@ -237,7 +237,7 @@ ability mortal_strike:
 		flags: [ can_be_critical ]
 		damage_type: physical
 		base: weapon
-		level_curve: [ [ 2 4 ] [ 12 18 ] ]
+		level_curve: [ [ 1 4 ] [ 10 18 ] ]
 	}
 	
 	direct_effect apply_aura:
@@ -266,7 +266,7 @@ ability strike:
 		flags: [ can_be_critical ]
 		damage_type: physical
 		base: weapon
-		level_curve: [ [ 1 2 ] [ 6 9 ] ]
+		level_curve: [ [ 1 2 ] [ 10 9 ] ]
 	}
 }
 

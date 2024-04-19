@@ -50,13 +50,13 @@ ability npc_firebolt:
 	string: "Firebolt"
 	range: 7	
 	cast_time: 25
-	cooldowns: [ global ]
+	cooldowns: [ global spell_fire_lockout ]
 	flags: [ spell offensive target_other target_hostile can_miss ]
 	states: [ default in_combat ]
 	icon: icon_firebolt
 	speed: 5
 	projectile: firebolt
-	resource_cost mana: 10
+	resource_cost mana: 10	
 	
 	direct_effect damage:
 	{

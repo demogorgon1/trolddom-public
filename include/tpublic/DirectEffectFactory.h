@@ -5,6 +5,7 @@
 #include "DirectEffects/Damage.h"
 #include "DirectEffects/Fishing.h"
 #include "DirectEffects/Heal.h"
+#include "DirectEffects/Interrupt.h"
 #include "DirectEffects/ModifyResource.h"
 #include "DirectEffects/Move.h"
 #include "DirectEffects/Simple.h"
@@ -25,6 +26,7 @@ namespace tpublic
 			_Register<DirectEffects::Damage>();
 			_Register<DirectEffects::Fishing>();
 			_Register<DirectEffects::Heal>();
+			_Register<DirectEffects::Interrupt>();
 			_Register<DirectEffects::ModifyResource>();
 			_Register<DirectEffects::Move>();
 			_Register<DirectEffects::Simple>();

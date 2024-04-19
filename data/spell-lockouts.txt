@@ -1,0 +1,3 @@
+!define local SPELL_LOCKOUT { trigger: interrupt }
+
+cooldown spell_fire_lockout: !SPELL_LOCKOUT {}

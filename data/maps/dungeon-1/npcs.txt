@@ -57,7 +57,7 @@ entity .goblin_shaman: !NPC
 	_resource_mana: 1
 	_loot_table: .trash
 	_creature_type: humanoid
-	_abilities: [ { id: firebolt }{ id: strike } ]
+	_abilities: [ { id: npc_firebolt }{ id: npc_attack } ]
 }
 	
 

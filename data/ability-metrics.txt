@@ -18,6 +18,5 @@ ability_metrics:
 	]
 	
 	rage_hit_base_per_second: 4
-	rage_crit_base_per_second: 7
-	
+	rage_crit_base_per_second: 7	
 }

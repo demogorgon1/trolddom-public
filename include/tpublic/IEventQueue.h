@@ -112,7 +112,9 @@ namespace tpublic
 												int32_t														aStart) = 0;
 		virtual void						EventQueueInterrupt(
 												uint32_t													aSourceEntityInstanceId,
-												uint32_t													aTargetEntityInstanceId) = 0;
+												uint32_t													aTargetEntityInstanceId,
+												uint32_t													aCooldownId,
+												int32_t														aLockoutTicks) = 0;
 		virtual uint32_t					EventQueueGetNextGroupRoundRobinCharacterId(
 												uint64_t													aGroupId) = 0;
 		virtual void						EventQueueThreat(

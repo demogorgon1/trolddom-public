@@ -146,6 +146,14 @@ namespace tpublic::Systems
 		for(uint32_t threatRemovedInstanceId : threatRemovedEntityInstanceIds)
 			aContext->m_eventQueue->EventQueueThreat(threatRemovedInstanceId, aEntityInstanceId, INT32_MIN);
 
+		if(combat->m_interrupt.has_value() && npc->m_castInProgress.has_value())
+		{
+			if(combat->m_interrupt->m_cooldownId != 0)
+				npc->m_cooldowns.AddCooldown(combat->m_interrupt->m_cooldownId, combat->m_interrupt->m_ticks, aContext->m_tick);
+
+			npc->m_castInProgress.reset();
+		}
+
 		EntityState::Id returnValue = EntityState::CONTINUE;
 
 		if(aEntityState == EntityState::ID_DEFAULT || aEntityState == EntityState::ID_IN_COMBAT)
@@ -303,11 +311,7 @@ namespace tpublic::Systems
 
 					returnValue = EntityState::ID_EVADING;
 				}
-				else if(auras->HasEffect(AuraEffect::ID_STUN))
-				{
-					npc->m_castInProgress.reset();
-				}
-				else
+				else if(!auras->HasEffect(AuraEffect::ID_STUN))
 				{
 					uint32_t topThreatEntityInstanceId = threat->m_table.GetTop()->m_entityInstanceId;
 					npc->m_targetEntityInstanceId = topThreatEntityInstanceId;
@@ -486,6 +490,8 @@ namespace tpublic::Systems
 			position->m_block = block;
 			position->SetDirty();
 		}
+
+		combat->m_interrupt.reset();
 	}
 
 }

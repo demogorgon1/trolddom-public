@@ -115,16 +115,6 @@ namespace tpublic
 					{
 						m_end = 0;
 					}
-
-					if (m_cooldownId == 2)
-					{
-						printf("READ: current: %u @ [%s] start: %u @ [%s] end: %u @ [%s]\n", currentTick,
-							_FormatDateTime((time_t)currentTimeStamp).c_str(),
-							m_start,
-							_FormatDateTime((time_t)startTimeStamp).c_str(),
-							m_end,
-							_FormatDateTime((time_t)endTimeStamp).c_str());
-					}
 				}
 
 				return true;
@@ -144,6 +134,10 @@ namespace tpublic
 		void			AddAbility(
 							const Manifest*			aManifest,
 							const Data::Ability*	aAbility,
+							int32_t					aTick);
+		void			AddCooldown(
+							uint32_t				aCooldownId,
+							int32_t					aDuration,
 							int32_t					aTick);
 		bool			IsAbilityOnCooldown(
 							const Data::Ability*	aAbility) const;

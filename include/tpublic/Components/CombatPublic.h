@@ -34,6 +34,12 @@ namespace tpublic
 				COMBAT_FLAG_ELITE = 0x10
 			};
 
+			struct Interrupt
+			{
+				uint32_t		m_cooldownId = 0;
+				int32_t			m_ticks = 0;
+			};
+
 			struct ResourceEntry
 			{	
 				void
@@ -316,6 +322,7 @@ namespace tpublic
 			int32_t							m_lastCastingTick = -50;
 			int32_t							m_last5SecRuleManaRegenTick = 0;
 			int32_t							m_lastBaseManaRegenTick = 0;
+			std::optional<Interrupt>		m_interrupt;
 		};
 
 	}

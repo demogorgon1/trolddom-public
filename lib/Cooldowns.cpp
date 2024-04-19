@@ -54,26 +54,36 @@ namespace tpublic
 		{
 			const Data::Cooldown* cooldown = aManifest->GetById<Data::Cooldown>(cooldownId);
 
-			int32_t end = aTick + cooldown->m_duration;
-			bool updated = false;
-
-			for (Entry& t : m_entries)
-			{
-				if (t.m_cooldownId == cooldownId)
-				{
-					if (end > t.m_end)
-						t.m_end = end;
-
-					updated = true;
-					break;
-				}
-			}
-
-			if(!updated)
-				m_entries.push_back({ cooldownId, aTick, end });
+			if(cooldown->m_trigger == Data::Cooldown::TRIGGER_ABILITY)
+				AddCooldown(cooldownId, cooldown->m_duration, aTick);
 		}
 	}
 	
+	void			
+	Cooldowns::AddCooldown(
+		uint32_t				aCooldownId,
+		int32_t					aDuration,
+		int32_t					aTick)
+	{
+		int32_t end = aTick + aDuration;
+		bool updated = false;
+
+		for (Entry& t : m_entries)
+		{
+			if (t.m_cooldownId == aCooldownId)
+			{
+				if (end > t.m_end)
+					t.m_end = end;
+
+				updated = true;
+				break;
+			}
+		}
+
+		if (!updated)
+			m_entries.push_back({ aCooldownId, aTick, end });
+	}
+
 	bool			
 	Cooldowns::IsAbilityOnCooldown(
 		const Data::Ability*	aAbility) const

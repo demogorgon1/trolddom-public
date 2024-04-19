@@ -14,7 +14,7 @@ namespace tpublic::AuraEffects
 		SystemBase::Context*		aContext,
 		const Manifest*				/*aManifest*/) 
 	{
-		aContext->m_eventQueue->EventQueueInterrupt(aSourceEntityInstanceId, aTargetEntityInstanceId);
+		aContext->m_eventQueue->EventQueueInterrupt(aSourceEntityInstanceId, aTargetEntityInstanceId, 0, 0);
 		return true;
 	}
 
