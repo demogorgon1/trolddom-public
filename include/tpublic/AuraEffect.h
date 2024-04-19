@@ -17,6 +17,7 @@ namespace tpublic
 			ID_COMBAT_EVENT_TRIGGER,
 			ID_HEAL_INPUT_MODIFIER,
 			ID_MOVE_SPEED_MODIFIER,
+			ID_DAMAGE_OUTPUT_MODIFIER,
 
 			NUM_IDS
 		};
@@ -31,7 +32,8 @@ namespace tpublic
 			"repeat",
 			"combat_event_trigger",
 			"heal_input_modifier",
-			"move_speed_modifier"
+			"move_speed_modifier",
+			"damage_output_modifier"
 		};
 
 		static_assert(sizeof(EFFECT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

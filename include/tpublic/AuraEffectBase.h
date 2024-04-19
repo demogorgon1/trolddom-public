@@ -156,6 +156,9 @@ namespace tpublic
 		virtual int32_t			FilterDamageInput(
 									DirectEffect::DamageType		/*aDamageType*/,
 									int32_t							aDamage) const { return aDamage; }
+		virtual int32_t			FilterDamageOutput(
+									DirectEffect::DamageType		/*aDamageType*/,
+									int32_t							aDamage) const { return aDamage; }
 		virtual int32_t			FilterHealInput(
 									int32_t							aHeal) const { return aHeal; }
 		virtual MoveSpeed::Id	GetMoveSpeedModifier() const { return MoveSpeed::INVALID_ID; }

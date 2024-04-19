@@ -8,6 +8,7 @@ talent_tree fighter_subtlety:
 		talent fighter_subtlety_agility: "A"
 		talent fighter_subtlety_improved_rend: "B"
 		talent fighter_subtlety_smoke_bomb: "C"
+		talent fighter_subtlety_hemorrhage: "D"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_down: "|"
 	}
@@ -15,8 +16,8 @@ talent_tree fighter_subtlety:
 	map:
 	[
 		"A.B"
-		"..."
-		"C.."
+		"..d"
+		"C.D"
 	]	
 }
 
@@ -129,6 +130,32 @@ ability_modifier improved_rend_3:
 	string: "Increases duration of Rend by 3 seconds."
 	ability: rend
 	modify_aura_update_count: 3
+}
+
+###############################################################################
+# Hemorrhage
+
+talent fighter_subtlety_hemorrhage:
+{
+	string: "Hemorrhage"
+	icon: icon_stuff
+	prerequisites: [ fighter_subtlety_improved_rend ]
+	talent_tree_points_required: 3
+	points:
+	[
+		{ aura: fighter_subtlety_hemorrhage }
+	]
+}
+
+aura fighter_subtlety_hemorrhage:
+{
+	type: hidden
+	description: "Increases damage done by your bleed effects by 30%."
+	aura_effect damage_output_modifier:
+	{
+		type_mask: [ bleed ]
+		multiplier: 1.3
+	}
 }
 
 ###############################################################################
@@ -245,8 +272,9 @@ ability rend_tick:
 	
 	direct_effect damage:
 	{
-		damage_type: physical
-		level_curve: [ [ 1 1 ] [ 10 7 ] ]
+		damage_type: bleed
+		base: weapon_average
+		base_multiplier: 0.333
 	}
 }
 

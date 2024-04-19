@@ -16,6 +16,7 @@ namespace tpublic
 		enum DamageType : uint8_t
 		{
 			DAMAGE_TYPE_PHYSICAL,
+			DAMAGE_TYPE_BLEED,
 			DAMAGE_TYPE_FROST,		
 			DAMAGE_TYPE_FIRE,			
 			DAMAGE_TYPE_ARCANE,
@@ -31,7 +32,8 @@ namespace tpublic
 		enum DamageBase : uint8_t
 		{
 			DAMAGE_BASE_RANGE,
-			DAMAGE_BASE_WEAPON
+			DAMAGE_BASE_WEAPON,
+			DAMAGE_BASE_WEAPON_AVERAGE
 		};
 
 		inline uint32_t	
@@ -53,6 +55,8 @@ namespace tpublic
 		{
 			if(strcmp(aString, "physical") == 0)
 				return DAMAGE_TYPE_PHYSICAL;
+			if (strcmp(aString, "bleed") == 0)
+				return DAMAGE_TYPE_BLEED;
 			if (strcmp(aString, "frost") == 0)
 				return DAMAGE_TYPE_FROST;
 			if (strcmp(aString, "fire") == 0)

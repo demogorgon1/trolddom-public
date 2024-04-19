@@ -137,6 +137,9 @@ namespace tpublic
 			int32_t			FilterDamageInput(
 								DirectEffect::DamageType					aDamageType,
 								int32_t										aDamage) const;
+			int32_t			FilterDamageOutput(
+								DirectEffect::DamageType					aDamageType,
+								int32_t										aDamage) const;
 			int32_t			FilterHealInput(
 								int32_t										aHeal) const;
 			void			OnCombatEvent(

@@ -31,6 +31,10 @@ namespace tpublic::DirectEffects
 				{
 					m_levelCurve = UIntCurve<uint32_t>(aChild);
 				}
+				else if(aChild->m_name == "base_multiplier")
+				{
+					m_damageBaseMultiplier = aChild->GetFloat();
+				}
 				else if(aChild->m_name == "base")
 				{
 					if(aChild->m_type == SourceNode::TYPE_ARRAY)
@@ -56,6 +60,10 @@ namespace tpublic::DirectEffects
 					{
 						m_damageBase = DirectEffect::DAMAGE_BASE_WEAPON;
 					}
+					else if (aChild->m_type == SourceNode::TYPE_IDENTIFIER && aChild->m_value == "weapon_average")
+					{
+						m_damageBase = DirectEffect::DAMAGE_BASE_WEAPON_AVERAGE;
+					}
 					else
 					{
 						TP_VERIFY(false, aChild->m_debugInfo, "Not a valid damage base.", aChild->m_name.c_str());
@@ -77,6 +85,7 @@ namespace tpublic::DirectEffects
 		aStream->WritePOD(m_damageType);
 		aStream->WritePOD(m_damageBase);
 		m_levelCurve.ToStream(aStream);
+		aStream->WriteFloat(m_damageBaseMultiplier);
 
 		if(m_damageBase == DirectEffect::DAMAGE_BASE_RANGE)
 		{
@@ -96,6 +105,8 @@ namespace tpublic::DirectEffects
 		if (!aStream->ReadPOD(m_damageBase))
 			return false;
 		if(!m_levelCurve.FromStream(aStream))
+			return false;
+		if(!aStream->ReadFloat(m_damageBaseMultiplier))
 			return false;
 
 		if (m_damageBase == DirectEffect::DAMAGE_BASE_RANGE)
@@ -129,6 +140,7 @@ namespace tpublic::DirectEffects
 		Components::CombatPublic* sourceCombatPublic = aSource->GetComponent<Components::CombatPublic>();
 		Components::CombatPublic* targetCombatPublic = aTarget->GetComponent<Components::CombatPublic>();
 		const Components::Auras* targetAuras = aTarget->GetComponent<Components::Auras>();
+		const Components::Auras* sourceAuras = aSource->GetComponent<Components::Auras>();
 
 		if(targetCombatPublic == NULL)
 			return aId;
@@ -146,8 +158,20 @@ namespace tpublic::DirectEffects
 			damage = Helpers::RandomInRange(aRandom, sourceCombatPrivate->m_weaponDamageRangeMin, sourceCombatPrivate->m_weaponDamageRangeMax);
 			break;
 
+		case DirectEffect::DAMAGE_BASE_WEAPON_AVERAGE:
+			TP_CHECK(sourceCombatPrivate != NULL, "No weapon damage available.");
+			damage = (sourceCombatPrivate->m_weaponDamageRangeMin + sourceCombatPrivate->m_weaponDamageRangeMax) / 2;
+			break;
+
 		default:
 			break;
+		}
+
+		if(damage > 0)
+		{
+			damage = (uint32_t)((float)damage * m_damageBaseMultiplier);
+			if(damage == 0)
+				damage = 1;
 		}
 
 		damage += m_levelCurve.Sample(sourceCombatPublic->m_level);
@@ -171,12 +195,15 @@ namespace tpublic::DirectEffects
 			}
 		}
 
-		if((m_flags & DirectEffect::FLAG_IS_MAGICAL) == 0)
+		if(m_damageType == DirectEffect::DAMAGE_TYPE_PHYSICAL)
 		{
 			// Damage reduction from armor
 			float damageMultiplier = 1.0f - (float)targetCombatPrivate->m_armor / (float)(targetCombatPrivate->m_armor + 400 + 85 * sourceCombatPublic->m_level);
 			damage = (uint32_t)((float)damage * damageMultiplier);
 		}
+
+		if (sourceAuras != NULL)
+			damage = sourceAuras->FilterDamageOutput(m_damageType, damage);
 
 		if (targetAuras != NULL)
 			damage = targetAuras->FilterDamageInput(m_damageType, damage);

@@ -60,6 +60,22 @@ namespace tpublic::Components
 		return damage;
 	}
 
+	int32_t
+	Auras::FilterDamageOutput(
+		DirectEffect::DamageType					aDamageType,
+		int32_t										aDamage) const
+	{
+		int32_t damage = aDamage;
+
+		for (const std::unique_ptr<Entry>& entry : m_entries)
+		{
+			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
+				damage = effect->FilterDamageOutput(aDamageType, damage);
+		}
+						
+		return damage;
+	}
+
 	int32_t		
 	Auras::FilterHealInput(
 		int32_t										aHeal) const

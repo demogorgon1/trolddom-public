@@ -52,6 +52,7 @@ namespace tpublic
 
 			uint32_t					m_damageBaseRangeMin = 0;
 			uint32_t					m_damageBaseRangeMax = 0;
+			float						m_damageBaseMultiplier = 1.0f;
 
 			UIntCurve<uint32_t>			m_levelCurve;
 		};
