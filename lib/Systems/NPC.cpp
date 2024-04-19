@@ -108,7 +108,7 @@ namespace tpublic::Systems
 
 		const Data::Faction* faction = GetManifest()->GetById<Data::Faction>(combat->m_factionId);
 
-		if (aEntityState != EntityState::ID_DEAD && combat->GetResource(Resource::ID_HEALTH) == 0 && !auras->HasEffect(AuraEffect::ID_IMMORTALITY))
+		if (aEntityState != EntityState::ID_DEAD && combat->GetResource(Resource::ID_HEALTH) == 0 && !auras->HasEffect(AuraEffect::ID_IMMORTALITY, NULL))
 		{
 			const Components::Tag* tag = GetComponent<Components::Tag>(aComponents);
 			if(tag->m_playerTag.IsSet())
@@ -311,9 +311,13 @@ namespace tpublic::Systems
 
 					returnValue = EntityState::ID_EVADING;
 				}
-				else if(!auras->HasEffect(AuraEffect::ID_STUN))
+				else if(!auras->HasEffect(AuraEffect::ID_STUN, NULL))
 				{
-					uint32_t topThreatEntityInstanceId = threat->m_table.GetTop()->m_entityInstanceId;
+					uint32_t topThreatEntityInstanceId;
+
+					if(!auras->HasEffect(AuraEffect::ID_TAUNT, &topThreatEntityInstanceId))
+						topThreatEntityInstanceId = threat->m_table.GetTop()->m_entityInstanceId;
+
 					npc->m_targetEntityInstanceId = topThreatEntityInstanceId;
 					
 					const EntityInstance* target = aContext->m_worldView->WorldViewSingleEntityInstance(npc->m_targetEntityInstanceId);

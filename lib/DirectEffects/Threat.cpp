@@ -24,6 +24,8 @@ namespace tpublic::DirectEffects
 					m_applyTo = APPLY_TO_ALL;
 				else if (strcmp(aChild->GetIdentifier(), "target") == 0)
 					m_applyTo = APPLY_TO_TARGET;
+				else if (strcmp(aChild->GetIdentifier(), "source") == 0)
+					m_applyTo = APPLY_TO_SOURCE;
 				else
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid identifier.", aChild->GetIdentifier());
 			}
@@ -33,7 +35,10 @@ namespace tpublic::DirectEffects
 			}
 			else if (aChild->m_name == "add")
 			{
-				m_add = aChild->GetInt32();
+				if(aChild->IsIdentifier("top"))
+					m_add = INT32_MAX;
+				else
+					m_add = aChild->GetInt32();
 			}
 			else
 			{
@@ -61,10 +66,8 @@ namespace tpublic::DirectEffects
 	{
 		if(!FromStreamBase(aStream))
 			return false;
-
 		if(!aStream->ReadPOD(m_applyTo))
 			return false;
-
 		if (!aStream->ReadInt(m_add))
 			return false;
 
@@ -93,7 +96,7 @@ namespace tpublic::DirectEffects
 		const Manifest*					/*aManifest*/,
 		CombatEvent::Id					aId,
 		uint32_t						/*aAbilityId*/,
-		EntityInstance*					/*aSource*/,
+		EntityInstance*					aSource,
 		EntityInstance*					aTarget,
 		const ItemInstanceReference&	/*aItem*/,
 		IResourceChangeQueue*			/*aCombatResultQueue*/,
@@ -127,6 +130,12 @@ namespace tpublic::DirectEffects
 				{
 					aEventQueue->EventQueueThreat(aTarget->GetEntityInstanceId(), combatPublic->m_targetEntityInstanceId, m_add, m_multiply);
 				}
+			}
+			break;
+
+		case APPLY_TO_SOURCE:
+			{
+				aEventQueue->EventQueueThreat(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), m_add, m_multiply);
 			}
 			break;
 

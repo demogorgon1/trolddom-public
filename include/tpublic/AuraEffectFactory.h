@@ -8,6 +8,7 @@
 #include "AuraEffects/MoveSpeedModifier.h"
 #include "AuraEffects/Repeat.h"
 #include "AuraEffects/Stun.h"
+#include "AuraEffects/Taunt.h"
 
 #include "AuraEffect.h"
 
@@ -27,6 +28,7 @@ namespace tpublic
 			_Register<AuraEffects::MoveSpeedModifier>();
 			_Register<AuraEffects::Repeat>();
 			_Register<AuraEffects::Stun>();
+			_Register<AuraEffects::Taunt>();
 		}
 
 		~AuraEffectFactory()

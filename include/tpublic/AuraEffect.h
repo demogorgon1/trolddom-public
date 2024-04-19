@@ -18,6 +18,7 @@ namespace tpublic
 			ID_HEAL_INPUT_MODIFIER,
 			ID_MOVE_SPEED_MODIFIER,
 			ID_DAMAGE_OUTPUT_MODIFIER,
+			ID_TAUNT,
 
 			NUM_IDS
 		};
@@ -33,7 +34,8 @@ namespace tpublic
 			"combat_event_trigger",
 			"heal_input_modifier",
 			"move_speed_modifier",
-			"damage_output_modifier"
+			"damage_output_modifier",
+			"taunt"
 		};
 
 		static_assert(sizeof(EFFECT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

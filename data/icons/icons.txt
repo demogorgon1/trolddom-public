@@ -153,6 +153,8 @@ sprites:
 	
 	cursor: { position: [ 0 128 ] }	
 	sprite icon_envenom : { tags: [ icon ] }
+	sprite icon_taunt : { tags: [ icon ] }
+	sprite icon_bash : { tags: [ icon ] }
 	
 }
 

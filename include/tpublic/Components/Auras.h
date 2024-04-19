@@ -132,7 +132,8 @@ namespace tpublic
 			}
 
 			bool			HasEffect(
-								AuraEffect::Id								aId) const;
+								AuraEffect::Id								aId,
+								uint32_t*									aOutSourceEntityInstanceId) const;
 			MoveSpeed::Id	GetMoveSpeed() const;
 			int32_t			FilterDamageInput(
 								DirectEffect::DamageType					aDamageType,

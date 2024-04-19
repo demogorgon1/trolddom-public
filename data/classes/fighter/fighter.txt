@@ -100,8 +100,8 @@ class fighter:
 			level: 3
 			
 			unlock_abilities:
-			[
-				throw_rock				
+			[				
+				charge				
 			]
 			
 			stats:
@@ -119,7 +119,7 @@ class fighter:
 			
 			unlock_abilities:
 			[
-				charge
+				kick
 			]
 			
 			stats:
@@ -136,7 +136,7 @@ class fighter:
 			
 			unlock_abilities:
 			[
-				kick
+				taunt
 			]
 			
 			stats:
@@ -189,7 +189,7 @@ class fighter:
 			
 			unlock_abilities:
 			[
-				
+				throw_rock			
 			]
 			
 			stats:

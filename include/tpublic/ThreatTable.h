@@ -38,6 +38,9 @@ namespace tpublic
 							uint32_t					aTick,
 							uint32_t					aEntityInstanceId,
 							float						aFactor);
+		void			MakeTop(
+							int32_t						aTick,
+							uint32_t					aEntityInstanceId);
 		void			Remove(
 							uint32_t					aEntityInstanceId);
 		void			Clear();
@@ -61,6 +64,8 @@ namespace tpublic
 					Entry*						aEntry,
 					Entry*						aInsertBefore);
 		void	_Remove(
+					Entry*						aEntry);
+		void	_Detach(
 					Entry*						aEntry);
 		void	_Add(
 					Entry*						aEntry,

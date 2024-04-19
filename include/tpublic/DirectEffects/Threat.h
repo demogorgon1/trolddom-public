@@ -27,6 +27,7 @@ namespace tpublic
 			enum ApplyTo : uint8_t 
 			{
 				APPLY_TO_TARGET,
+				APPLY_TO_SOURCE,
 				APPLY_TO_ALL
 			};
 

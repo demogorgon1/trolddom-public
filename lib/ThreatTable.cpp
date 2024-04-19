@@ -106,6 +106,35 @@ namespace tpublic
 		}
 	}
 
+	void			
+	ThreatTable::MakeTop(
+		int32_t						aTick,
+		uint32_t					aEntityInstanceId)
+	{
+		if(m_head != NULL)
+		{
+			Entry* entry = NULL;
+			Table::iterator i = m_table.find(aEntityInstanceId);
+			if (i != m_table.end())
+				entry = i->second;
+			
+			if(entry != m_head)
+			{
+				int32_t topThreat = m_head->m_threat;
+
+				entry->m_threat = topThreat;
+				entry->m_tick = aTick;
+
+				_Detach(entry);
+				_InsertBefore(entry, m_head);
+			}
+		}
+		else
+		{
+			Add(aTick, aEntityInstanceId, 1);
+		}
+	}
+
 	void	
 	ThreatTable::Remove(
 		uint32_t					aEntityInstanceId)
@@ -183,6 +212,15 @@ namespace tpublic
 	ThreatTable::_Remove(
 		Entry*			aEntry)
 	{
+		_Detach(aEntry);
+
+		delete aEntry;
+	}
+
+	void	
+	ThreatTable::_Detach(
+		Entry*			aEntry)
+	{
 		if (aEntry->m_next != NULL)
 			aEntry->m_next->m_prev = aEntry->m_prev;
 		else
@@ -192,8 +230,6 @@ namespace tpublic
 			aEntry->m_prev->m_next = aEntry->m_next;
 		else
 			m_head = aEntry->m_next;
-
-		delete aEntry;
 	}
 
 	void

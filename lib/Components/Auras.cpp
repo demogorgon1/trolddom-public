@@ -9,13 +9,28 @@ namespace tpublic::Components
 
 	bool
 	Auras::HasEffect(
-		AuraEffect::Id								aId) const
+		AuraEffect::Id								aId,
+		uint32_t*									aOutSourceEntityInstanceId) const
 	{
-		for(const std::unique_ptr<Entry>& entry : m_entries)
+		int32_t latestTick = INT32_MIN;
+
+		for (const std::unique_ptr<Entry>& entry : m_entries)
 		{
-			if(entry->HasEffect(aId))
-				return true;
+			if (entry->HasEffect(aId))
+			{
+				if(aOutSourceEntityInstanceId == NULL)
+					return true;
+
+				if(entry->m_start > latestTick)
+				{
+					*aOutSourceEntityInstanceId = entry->m_entityInstanceId;
+					latestTick = entry->m_start;
+				}
+			}
 		}
+
+		if(latestTick != INT32_MIN)
+			return true;
 
 		return false;
 	}

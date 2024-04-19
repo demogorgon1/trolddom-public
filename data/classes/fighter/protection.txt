@@ -19,6 +19,9 @@ talent_tree fighter_protection:
 	]
 }
 
+###############################################################################
+# Stoicism
+
 talent fighter_protection_stoicism:
 {
 	string: "Stoicism"
@@ -30,20 +33,6 @@ talent fighter_protection_stoicism:
 		{ aura: fighter_protection_stoicism_1 }
 		{ aura: fighter_protection_stoicism_2 }
 		{ aura: fighter_protection_stoicism_3 }
-	]
-}
-
-talent fighter_protection_shield_block:
-{
-	string: "Shield Block"
-	icon: icon_block
-	prerequisites: [ ]	
-	talent_tree_points_required: 0
-	points:
-	[
-		{ aura: fighter_protection_shield_block_1 }
-		{ aura: fighter_protection_shield_block_2 }
-		{ aura: fighter_protection_shield_block_3 }
 	]
 }
 
@@ -68,6 +57,23 @@ aura fighter_protection_stoicism_3:
 	stat_modifiers: { constitution: { add_percent: 6 } }
 }
 
+###############################################################################
+# Shield Block
+
+talent fighter_protection_shield_block:
+{
+	string: "Shield Block"
+	icon: icon_block
+	prerequisites: [ ]	
+	talent_tree_points_required: 0
+	points:
+	[
+		{ aura: fighter_protection_shield_block_1 }
+		{ aura: fighter_protection_shield_block_2 }
+		{ aura: fighter_protection_shield_block_3 }
+	]
+}
+
 aura fighter_protection_shield_block_1:
 {
 	type: hidden
@@ -88,6 +94,9 @@ aura fighter_protection_shield_block_3:
 	description: "Increases your chance to block by 6%."
 	stat_modifiers: { block_chance: { add: 6 } }
 }
+
+###############################################################################
+# Knock
 
 talent fighter_protection_knock:
 {
@@ -133,5 +142,49 @@ ability knock:
 	{	
 		aura: knock
 		threat: 10
+	}
+}
+
+###############################################################################
+# Taunt
+
+cooldown taunt:
+{
+	duration: 100
+}
+
+aura taunt:
+{
+	string: "Taunted"
+	icon: icon_taunt
+	type: debuff
+	duration: 50	
+	
+	aura_effect taunt: 
+	{
+	}
+}
+
+ability taunt:
+{
+	string: "Taunt"
+	description: "Forces target to attack you for 5 seconds."
+	range: 4
+	cooldowns: [ global taunt ]
+	flags: [ offensive target_other target_hostile ]
+	states: [ default in_combat ]
+	icon: icon_taunt
+	delay: 3
+	talent_tree: fighter_protection
+
+	direct_effect threat:
+	{	
+		apply_to: source
+		add: top
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: taunt
 	}
 }
