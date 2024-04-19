@@ -171,7 +171,7 @@ class fighter:
 			
 			unlock_abilities:
 			[
-				smoke_bomb
+				rend
 			]
 			
 			stats:
@@ -189,6 +189,7 @@ class fighter:
 			
 			unlock_abilities:
 			[
+				
 			]
 			
 			stats:
