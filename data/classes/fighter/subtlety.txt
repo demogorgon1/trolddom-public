@@ -10,6 +10,7 @@ talent_tree fighter_subtlety:
 		talent fighter_subtlety_bypass: "C"
 		talent fighter_subtlety_smoke_bomb: "D"
 		talent fighter_subtlety_hemorrhage: "E"
+		talent fighter_subtlety_envenom: "F"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_down: "|"
 	}
@@ -18,7 +19,7 @@ talent_tree fighter_subtlety:
 	[
 		"..A.B"
 		"....d"
-		"..C.E"
+		"F.C.E"
 		"..d.."
 		"..D.."
 	]	
@@ -192,6 +193,82 @@ aura fighter_subtlety_hemorrhage:
 	{
 		type_mask: [ bleed ]
 		multiplier: 1.3
+	}
+}
+
+###############################################################################
+# Envenom
+
+talent fighter_subtlety_envenom:
+{
+	string: "Envenom"
+	icon: icon_envenom
+	talent_tree_points_required: 3
+	points:
+	[
+		{ ability: envenom }
+	]
+}
+
+cooldown envenom:
+{
+	duration: 60
+}
+
+ability envenom_tick:
+{
+	string: "Envenom"
+	icon: icon_envenom	
+	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]
+	
+	direct_effect damage:
+	{
+		damage_type: poison
+		base: weapon_average
+		base_multiplier: 0.25
+	}
+}
+
+aura envenom:
+{
+	string: "Envenom"
+	description: "Poisoned."
+	type: debuff
+	icon: icon_envenom
+	duration: based_on_effects
+	
+	aura_effect repeat: 
+	{ 
+		update_interval: 10
+		update_count: 6
+		ability: envenom_tick
+	}
+}
+
+ability envenom:
+{
+	string: "Envenom"
+	range: 1	
+	cooldowns: [ global envenom ]
+	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+	states: [ default in_combat ]
+	icon: icon_envenom
+	delay: 3
+	resource_cost rage: 20
+	talent_tree: fighter_subtlety
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		base: weapon
+		base_multiplier: 0.75
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: envenom
 	}
 }
 

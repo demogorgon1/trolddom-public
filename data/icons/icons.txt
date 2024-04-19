@@ -151,6 +151,9 @@ sprites:
 	sprite icon_bypass : { tags: [ icon ] }
 	sprite icon_agility : { tags: [ icon ] }
 	
+	cursor: { position: [ 0 128 ] }	
+	sprite icon_envenom : { tags: [ icon ] }
+	
 }
 
 
