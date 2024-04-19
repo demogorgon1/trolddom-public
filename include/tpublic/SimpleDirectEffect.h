@@ -20,6 +20,7 @@ namespace tpublic
 			ID_DESECRATE,
 			ID_START_QUEST,
 			ID_EDIT_PLAYER_WORLDS,
+			ID_PASS,
 
 			NUM_IDS
 		};
@@ -42,7 +43,8 @@ namespace tpublic
 			{ "push",				DataType::INVALID_ID },
 			{ "desecrate",			DataType::INVALID_ID },
 			{ "start_quest",		DataType::ID_QUEST },
-			{ "edit_player_worlds",	DataType::INVALID_ID }
+			{ "edit_player_worlds",	DataType::INVALID_ID },
+			{ "pass",				DataType::INVALID_ID }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

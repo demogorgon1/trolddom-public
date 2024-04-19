@@ -7,17 +7,20 @@ talent_tree fighter_subtlety:
 	{
 		talent fighter_subtlety_agility: "A"
 		talent fighter_subtlety_improved_rend: "B"
-		talent fighter_subtlety_smoke_bomb: "C"
-		talent fighter_subtlety_hemorrhage: "D"
+		talent fighter_subtlety_bypass: "C"
+		talent fighter_subtlety_smoke_bomb: "D"
+		talent fighter_subtlety_hemorrhage: "E"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_down: "|"
 	}
 	
 	map:
 	[
-		"A.B"
-		"..d"
-		"C.D"
+		"..A.B"
+		"....d"
+		"..C.E"
+		"..d.."
+		"..D.."
 	]	
 }
 
@@ -28,7 +31,7 @@ talent fighter_subtlety_smoke_bomb:
 {
 	string: "Smoke Bomb"
 	icon: icon_smoke
-	prerequisites: [ ]	
+	prerequisites: [ fighter_subtlety_bypass ]	
 	talent_tree_points_required: 3
 	points:
 	[
@@ -55,6 +58,40 @@ ability smoke_bomb:
 	{	
 		apply_to: all
 		multiply: 0
+	}
+}
+
+###############################################################################
+# Bypass
+
+talent fighter_subtlety_bypass:
+{
+	string: "Bypass"
+	icon: icon_bypass
+	prerequisites: [ ]	
+	talent_tree_points_required: 3
+	points:
+	[
+		{ ability: bypass }
+	]
+}
+
+cooldown bypass:
+{
+	duration: 100
+}
+
+ability bypass:
+{
+	string: "Bypass"
+	cooldowns: [ global bypass ]
+	flags: [ target_other target_hostile target_friendly ]
+	states: [ default in_combat ]	
+	icon: icon_bypass
+	talent_tree: fighter_subtlety	
+	
+	direct_effect simple<pass>:
+	{	
 	}
 }
 

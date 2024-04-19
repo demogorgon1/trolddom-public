@@ -75,6 +75,7 @@ namespace tpublic::DirectEffects
 		{
 		case SimpleDirectEffect::ID_OPEN:
 		case SimpleDirectEffect::ID_PUSH:
+		case SimpleDirectEffect::ID_PASS:
 		case SimpleDirectEffect::ID_PRAY:
 		case SimpleDirectEffect::ID_DESECRATE:
 		case SimpleDirectEffect::ID_START_QUEST:
