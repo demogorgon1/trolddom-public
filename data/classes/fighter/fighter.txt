@@ -84,7 +84,7 @@ class fighter:
 			
 			unlock_abilities:
 			[				
-				hamstring
+				rend
 			]
 			
 			stats:
@@ -154,7 +154,7 @@ class fighter:
 			
 			unlock_abilities:
 			[
-				whirlwind
+				hamstring				
 			]
 			
 			stats:
@@ -170,8 +170,8 @@ class fighter:
 			level: 7
 			
 			unlock_abilities:
-			[
-				rend
+			[			
+				whirlwind			
 			]
 			
 			stats:

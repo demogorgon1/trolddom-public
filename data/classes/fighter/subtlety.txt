@@ -5,14 +5,18 @@ talent_tree fighter_subtlety:
 	
 	map_palette:
 	{
-		talent fighter_subtlety_smoke_bomb: "A"
+		talent fighter_subtlety_agility: "A"
+		talent fighter_subtlety_improved_rend: "B"
+		talent fighter_subtlety_smoke_bomb: "C"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_down: "|"
 	}
 	
 	map:
 	[
-		"A"
+		"A.B"
+		"..."
+		"C.."
 	]	
 }
 
@@ -24,7 +28,7 @@ talent fighter_subtlety_smoke_bomb:
 	string: "Smoke Bomb"
 	icon: icon_smoke
 	prerequisites: [ ]	
-	talent_tree_points_required: 0
+	talent_tree_points_required: 3
 	points:
 	[
 		{ ability: smoke_bomb }
@@ -51,6 +55,80 @@ ability smoke_bomb:
 		apply_to: all
 		multiply: 0
 	}
+}
+
+###############################################################################
+# Agility
+
+talent fighter_subtlety_agility:
+{
+	string: "Agility"
+	icon: icon_agility
+	prerequisites: [ ]	
+	talent_tree_points_required: 0
+	points:
+	[
+		{ aura: fighter_subtlety_agility_1 }
+		{ aura: fighter_subtlety_agility_2 }
+		{ aura: fighter_subtlety_agility_3 }
+	]
+}
+
+aura fighter_subtlety_agility_1:
+{
+	type: hidden
+	description: "Increases your dexterity by 2%."
+	stat_modifiers: { dexterity: { add_percent: 2 } }
+}
+
+aura fighter_subtlety_agility_2:
+{
+	type: hidden
+	description: "Increases your dexterity by 4%."
+	stat_modifiers: { dexterity: { add_percent: 4 } }
+}
+
+aura fighter_subtlety_agility_3:
+{
+	type: hidden
+	description: "Increases your dexterity by 6%."
+	stat_modifiers: { dexterity: { add_percent: 6 } }
+}
+
+###############################################################################
+# Improved Rend
+
+talent fighter_subtlety_improved_rend:
+{
+	string: "Improved Rend"
+	icon: icon_rend
+	points:
+	[
+		{ ability_modifier: improved_rend_1 }
+		{ ability_modifier: improved_rend_2 }
+		{ ability_modifier: improved_rend_3 }
+	]
+}
+
+ability_modifier improved_rend_1:
+{	
+	string: "Increases duration of Rend by 1 second."
+	ability: rend
+	modify_aura_update_count: 1
+}
+
+ability_modifier improved_rend_2:
+{
+	string: "Increases duration of Rend by 2 seconds."
+	ability: rend
+	modify_aura_update_count: 2
+}
+
+ability_modifier improved_rend_3:
+{
+	string: "Increases duration of Rend by 3 seconds."
+	ability: rend
+	modify_aura_update_count: 3
 }
 
 ###############################################################################
@@ -178,7 +256,7 @@ aura rend:
 	description: "Bleeding."
 	type: debuff
 	icon: icon_rend
-	duration: 60
+	duration: based_on_effects
 	
 	aura_effect repeat: 
 	{ 

@@ -148,6 +148,7 @@ sprites:
 	sprite icon_kick : { tags: [ icon ] }
 	sprite icon_rend : { tags: [ icon ] }
 	sprite icon_mortal_strike : { tags: [ icon ] }
+	sprite icon_agility : { tags: [ icon ] }
 	
 }
 

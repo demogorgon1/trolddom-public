@@ -15,6 +15,7 @@ namespace tpublic
 		struct AbilityModifier;
 	}
 
+	class AbilityModifierList;
 	class CastInProgress;
 	class EntityInstance;
 	class SecondaryAbility;
@@ -82,7 +83,7 @@ namespace tpublic
 												const Vec2&													aAOETarget,
 												const Data::Ability*										aAbility,
 												const ItemInstanceReference&								aItem,
-												const std::vector<const Data::AbilityModifier*>*			aModifiers) = 0;
+												const AbilityModifierList*									aAbilityModifierList) = 0;
 		virtual void						EventQueueMove(
 												const EventQueueMoveRequest&								aMoveRequest) = 0;
 		virtual void						EventQueueMoveAdjacent(

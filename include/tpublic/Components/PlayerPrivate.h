@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../AbilityModifierList.h"
 #include "../Component.h"
 #include "../ComponentBase.h"
 #include "../ErrorNotification.h"
@@ -105,6 +106,8 @@ namespace tpublic
 
 			std::vector<ProfessionSkillUseEvent>							m_professionSkillUseEvents;			
 			ErrorNotification::Id											m_errorNotification = ErrorNotification::INVALID_ID;
+
+			const tpublic::AbilityModifierList*								m_abilityModifierList = NULL;
 		};
 	}
 

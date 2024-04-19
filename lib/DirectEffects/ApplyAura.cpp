@@ -1,6 +1,7 @@
 #include "../Pcheader.h"
 
 #include <tpublic/Components/CombatPublic.h>
+#include <tpublic/Components/PlayerPrivate.h>
 #include <tpublic/Components/Position.h>
 
 #include <tpublic/Data/Aura.h>
@@ -81,7 +82,7 @@ namespace tpublic
 			IEventQueue*					aEventQueue,
 			const IWorldView*				aWorldView)
 		{
-			std::vector<uint32_t> targetEntityInstanceIds = { aTarget->GetEntityInstanceId() };
+			std::vector<const EntityInstance*> targetEntities = { aTarget };
 			const Data::Aura* aura = aManifest->GetById<tpublic::Data::Aura>(m_auraId);
 
 			if(m_applyToPartyMembersInRange != 0)
@@ -98,26 +99,36 @@ namespace tpublic
 						{
 							const Components::Position* position = aEntityInstance->GetComponent<Components::Position>();
 							if(Helpers::IsWithinDistance(position, targetPosition, (int32_t)m_applyToPartyMembersInRange))
-								targetEntityInstanceIds.push_back(aEntityInstance->GetEntityInstanceId());
+								targetEntities.push_back(aEntityInstance);
 						}
 						return false;
 					});
 				}
 			}
 
-			for(uint32_t targetEntityInstanceId : targetEntityInstanceIds)
+			const Components::PlayerPrivate* playerPrivate = aSource->GetComponent<Components::PlayerPrivate>();
+			const AbilityModifierList* abilityModifierList = playerPrivate != NULL ? playerPrivate->m_abilityModifierList : NULL;
+			int32_t modifyAuraUpdateCount = 0;
+			if (abilityModifierList != NULL)
+				modifyAuraUpdateCount = abilityModifierList->GetAbilityModifyAuraUpdateCount(aAbilityId);
+
+			for(const EntityInstance* targetEntity : targetEntities)
 			{
-				if (m_threat != 0 && aTarget->GetEntityId() != 0)
-					aEventQueue->EventQueueThreat(aSource->GetEntityInstanceId(), targetEntityInstanceId, m_threat);
+				if (m_threat != 0 && targetEntity->GetEntityId() != 0)
+					aEventQueue->EventQueueThreat(aSource->GetEntityInstanceId(), targetEntity->GetEntityInstanceId(), m_threat);
 
 				std::vector<std::unique_ptr<AuraEffectBase>> effects;
 				for (const std::unique_ptr<Data::Aura::AuraEffectEntry>& t : aura->m_auraEffects)
 				{
 					std::unique_ptr<AuraEffectBase> effect(t->m_auraEffectBase->Copy());
+
+					if (effect->m_updateCount != 0 && modifyAuraUpdateCount != 0)
+						effect->m_updateCount = (uint32_t)((int32_t)effect->m_updateCount + modifyAuraUpdateCount);
+
 					effects.push_back(std::move(effect));
 				}
 
-				aAuraEventQueue->ApplyAura(aAbilityId, m_auraId, aSource->GetEntityInstanceId(), targetEntityInstanceId, effects);
+				aAuraEventQueue->ApplyAura(aAbilityId, m_auraId, aSource->GetEntityInstanceId(), targetEntity->GetEntityInstanceId(), effects);
 			}
 
 			return aId;
