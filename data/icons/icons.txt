@@ -157,7 +157,7 @@ sprites:
 	sprite icon_bash : { tags: [ icon ] }
 	sprite icon_poison_bomb : { tags: [ icon ] }
 	sprite icon_banner : { tags: [ icon ] }
-	
+	sprite icon_strength : { tags: [ icon ] }
 	
 }
 

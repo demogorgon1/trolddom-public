@@ -11,14 +11,15 @@ talent_tree fighter_combat:
 		talent fighter_combat_improved_strike: "D"
 		talent fighter_combat_mortal_strike: "E"
 		talent fighter_combat_improved_charge: "F"
+		talent fighter_combat_improved_strength: "G"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_down: "|"
 	}
 	
 	map:
 	[
-		"D.A...."
-		"|.d...."
+		"D.A...G"
+		"|.d...d"
 		"|.B.C.F"
 		"d......"
 		"E......"
@@ -27,11 +28,13 @@ talent_tree fighter_combat:
 }
 
 ###############################################################################
-# Improved charge
+# Improved Charge
 
 talent fighter_combat_improved_charge:
 {
 	string: "Improved Charge"
+	talent_tree_points_required: 3
+	prerequisites: [ fighter_combat_improved_strength ]		
 	icon: icon_charge
 	points:
 	[
@@ -44,6 +47,42 @@ ability_modifier improved_charge:
 	string: "Increases range of Charge by 1."
 	ability: charge
 	modify_range: 1
+}
+
+###############################################################################
+# Improved Strength
+
+talent fighter_combat_improved_strength:
+{
+	string: "Improved Strength"
+	icon: icon_strength	
+	points:
+	[
+		{ aura: fighter_combat_improved_strength_1 }
+		{ aura: fighter_combat_improved_strength_2 }
+		{ aura: fighter_combat_improved_strength_3 }
+	]
+}
+
+aura fighter_combat_improved_strength_1:
+{
+	type: hidden
+	description: "Increases your strength by 2%."
+	stat_modifiers: { strength: { add_percent: 2 } }
+}
+
+aura fighter_combat_improved_strength_2:
+{
+	type: hidden
+	description: "Increases your strength by 4%."
+	stat_modifiers: { strength: { add_percent: 4 } }
+}
+
+aura fighter_combat_improved_strength_3:
+{
+	type: hidden
+	description: "Increases your strength by 6%."
+	stat_modifiers: { strength: { add_percent: 6 } }
 }
 
 ###############################################################################
