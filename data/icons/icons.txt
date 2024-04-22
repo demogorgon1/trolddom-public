@@ -155,6 +155,9 @@ sprites:
 	sprite icon_envenom : { tags: [ icon ] }
 	sprite icon_taunt : { tags: [ icon ] }
 	sprite icon_bash : { tags: [ icon ] }
+	sprite icon_poison_bomb : { tags: [ icon ] }
+	sprite icon_banner : { tags: [ icon ] }
+	
 	
 }
 
