@@ -31,16 +31,11 @@ sprites:
 	size: { width: 24 height: 24 }
 
 	sprite effect_whirlwind: { flags: [ centered ] }
-}
-
-particle_system throw_rock:
-{
-	particle:
-	{
-		sprites: [ effect_rock ]
-		flags: [ attached no_rotation no_scaling ]
-		count: 1		
-	}
+	sprite effect_cloud_0: { flags: [ centered ] }
+	sprite effect_cloud_1: { flags: [ centered ] }
+	sprite effect_cloud_2: { flags: [ centered ] }
+	sprite effect_cloud_3: { flags: [ centered ] }
+	
 }
 
 particle_system firebolt:
@@ -102,19 +97,5 @@ entity fire:
 			]			
 		}
 		
-	}
-}
-
-particle_system whirlwind:
-{
-	particle:
-	{
-		sprites: [ effect_whirlwind ]
-		flags: [ attached blend_add ]
-		duration: 500
-		count: 1		
-		scale: 1.5
-		alpha: 0.6
-		rotation_rate: 1440
 	}
 }

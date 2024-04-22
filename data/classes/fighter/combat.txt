@@ -279,6 +279,20 @@ cooldown whirlwind:
 	duration: 50
 }
 
+particle_system whirlwind:
+{
+	particle:
+	{
+		sprites: [ effect_whirlwind ]
+		flags: [ attached blend_add ]
+		duration: 500
+		count: 1		
+		scale: 1.5
+		alpha: 0.6
+		rotation_rate: 1440
+	}
+}
+
 ability whirlwind:
 {
 	string: "Whirlwind"

@@ -11,18 +11,111 @@ talent_tree fighter_subtlety:
 		talent fighter_subtlety_smoke_bomb: "D"
 		talent fighter_subtlety_hemorrhage: "E"
 		talent fighter_subtlety_envenom: "F"
+		talent fighter_subtlety_poison_bomb: "G"
 		sprite talent_tree_down_arrow: "d"
+		sprite talent_tree_left_arrow: "l"
 		sprite talent_tree_down: "|"
 	}
 	
 	map:
 	[
-		"..A.B"
-		"....d"
-		"F.C.E"
-		"..d.."
-		"..D.."
+		"..A.B.."
+		"....d.."
+		"DlC.E.F"
+		"......d"
+		"......G"
 	]	
+}
+
+###############################################################################
+# Poison Bomb
+
+talent fighter_subtlety_poison_bomb:
+{
+	string: "Poison Bom"
+	icon: icon_poison_bomb
+	prerequisites: [ fighter_subtlety_envenom ]	
+	talent_tree_points_required: 6
+	points:
+	[
+		{ ability: poison_bomb }
+	]
+}
+
+cooldown poison_bomb:
+{
+	duration: 100
+}
+
+ability poison_bomb_tick:
+{
+	string: "Poison Bomb"
+	icon: icon_poison_bomb	
+	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]
+	
+	direct_effect damage:
+	{
+		damage_type: poison
+		base: weapon_average
+		base_multiplier: 0.15
+	}
+}
+
+aura poison_bomb:
+{
+	string: "Poison Bomb"
+	description: "Poisoned."
+	type: debuff
+	icon: icon_poison_bomb
+	duration: based_on_effects
+	
+	aura_effect repeat: 
+	{ 
+		update_interval: 20
+		update_count: 5
+		ability: envenom_tick
+	}
+}
+
+particle_system poison_bomb:
+{
+	particle:
+	{
+		sprites: [ effect_cloud_0 effect_cloud_1 effect_cloud_2 effect_cloud_3 ]
+		sprite_interval: 125
+		flags: [ attached blend_add no_loop ]
+		duration: 600
+		count: 1		
+		scale: 3
+		alpha: 0.25
+		color_mod: [ 64 255 64 ]
+		fade_in: 100
+		fade_out: 500
+		rotation_rate: 50
+	}
+}
+
+ability poison_bomb:
+{
+	string: "Poison Bomb"
+	range: 1	
+	cooldowns: [ global poison_bomb ]
+	flags: [ melee target_self target_aoe target_aoe_hostile ]
+	states: [ default in_combat ]
+	icon: icon_poison_bomb
+	delay: 3
+	aoe_radius: 2
+	aoe_cap: 6
+	aoe_requirement target<must_not_be_in_state>: { id: dead }
+	resource_cost rage: 15
+	talent_tree: fighter_subtlety
+	source_particle_system: poison_bomb	
+
+	direct_effect apply_aura:
+	{
+		aura: poison_bomb
+	}
 }
 
 ###############################################################################
@@ -351,6 +444,16 @@ ability hamstring:
 cooldown throw_rock:
 {
 	duration: 60
+}
+
+particle_system throw_rock:
+{
+	particle:
+	{
+		sprites: [ effect_rock ]
+		flags: [ attached no_rotation no_scaling ]
+		count: 1		
+	}
 }
 
 ability throw_rock:

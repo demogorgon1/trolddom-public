@@ -29,23 +29,55 @@ namespace tpublic
 						const SourceNode* aChild)
 					{
 						if(aChild->m_name == "sprites")						
+						{
 							aChild->GetIdArray(DataType::ID_SPRITE, m_sprites);
+						}
 						else if(aChild->m_name == "flags")
+						{
 							m_flags = aChild->GetFlags<uint8_t>([](const char* aString) { return Particle::StringToFlag(aString); });
+						}
 						else if (aChild->m_name == "count")
+						{
 							m_count = aChild->GetUInt32();
+						}
 						else if (aChild->m_name == "sprite_interval")
+						{
 							m_spriteInterval = aChild->GetUInt32();
+						}
+						else if (aChild->m_name == "fade_in")
+						{
+							m_fadeIn = aChild->GetUInt32();
+						}
+						else if (aChild->m_name == "fade_out")
+						{
+							m_fadeOut = aChild->GetUInt32();
+						}
 						else if (aChild->m_name == "duration")
+						{
 							m_duration = aChild->GetUInt32();
+						}
 						else if (aChild->m_name == "scale")
+						{
 							m_scale = aChild->GetFloat();
+						}
 						else if (aChild->m_name == "alpha")
+						{
 							m_alpha = aChild->GetFloat();
+						}
 						else if (aChild->m_name == "rotation_rate")
+						{
 							m_rotationRate = aChild->GetInt32();
+						}
+						else if (aChild->m_name == "color_mod")
+						{
+							m_colorModR = aChild->GetArrayIndex(0)->GetUInt8();
+							m_colorModG = aChild->GetArrayIndex(1)->GetUInt8();
+							m_colorModB = aChild->GetArrayIndex(2)->GetUInt8();
+						}
 						else
+						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+						}
 					});
 				}
 
@@ -55,8 +87,13 @@ namespace tpublic
 				{
 					aWriter->WriteUInts(m_sprites);
 					aWriter->WritePOD(m_flags);
+					aWriter->WritePOD(m_colorModR);
+					aWriter->WritePOD(m_colorModG);
+					aWriter->WritePOD(m_colorModB);
 					aWriter->WriteUInt(m_count);
 					aWriter->WriteUInt(m_spriteInterval);
+					aWriter->WriteUInt(m_fadeIn);
+					aWriter->WriteUInt(m_fadeOut);
 					aWriter->WriteUInt(m_duration);
 					aWriter->WriteFloat(m_scale);
 					aWriter->WriteFloat(m_alpha);
@@ -69,11 +106,21 @@ namespace tpublic
 				{
 					if(!aReader->ReadUInts(m_sprites))
 						return false;
-					if(!aReader->ReadPOD(m_flags))
+					if (!aReader->ReadPOD(m_flags))
+						return false;
+					if (!aReader->ReadPOD(m_colorModR))
+						return false;
+					if (!aReader->ReadPOD(m_colorModG))
+						return false;
+					if (!aReader->ReadPOD(m_colorModB))
 						return false;
 					if (!aReader->ReadUInt(m_count))
 						return false;
 					if (!aReader->ReadUInt(m_spriteInterval))
+						return false;
+					if (!aReader->ReadUInt(m_fadeIn))
+						return false;
+					if (!aReader->ReadUInt(m_fadeOut))
 						return false;
 					if (!aReader->ReadUInt(m_duration))
 						return false;
@@ -95,6 +142,11 @@ namespace tpublic
 				float								m_scale = 1.0f;
 				float								m_alpha = 1.0f;
 				int32_t								m_rotationRate = 0; // degrees/second
+				uint32_t							m_fadeIn = 0; // ms
+				uint32_t							m_fadeOut = 0; // ms
+				uint8_t								m_colorModR = 255;
+				uint8_t								m_colorModG = 255;
+				uint8_t								m_colorModB = 255;
 			};
 
 			void

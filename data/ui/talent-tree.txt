@@ -18,6 +18,10 @@ sprites:
 	sprite talent_tree_cell : { }
 
 	cursor: { position: [ 0 22 ] }
+	sprite talent_tree_left_arrow: { }
+	sprite talent_tree_right_arrow: { }
+
+	cursor: { position: [ 0 44 ] }
 	sprite talent_tree_cell_yellow_bright : { }
 	sprite talent_tree_cell_green : { }
 	sprite talent_tree_cell_yellow : { }
