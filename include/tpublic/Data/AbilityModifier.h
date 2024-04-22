@@ -78,6 +78,8 @@ namespace tpublic
 							m_modifyResourceCost = ModifyResourceCost(aChild);
 						else if (aChild->m_name == "modify_aura_update_count")
 							m_modifyAuraUpdateCount = aChild->GetInt32();
+						else if (aChild->m_name == "modify_range")
+							m_modifyRange = aChild->GetInt32();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -92,6 +94,7 @@ namespace tpublic
 				aWriter->WriteUInt(m_abilityId);
 				aWriter->WriteOptionalObject(m_modifyResourceCost);
 				aWriter->WriteInt(m_modifyAuraUpdateCount);
+				aWriter->WriteInt(m_modifyRange);
 			}
 			
 			bool
@@ -106,6 +109,8 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadInt(m_modifyAuraUpdateCount))
 					return false;
+				if (!aReader->ReadInt(m_modifyRange))
+					return false;
 				return true;
 			}
 
@@ -113,6 +118,7 @@ namespace tpublic
 			std::string								m_string;
 			uint32_t								m_abilityId = 0;
 			std::optional<ModifyResourceCost>		m_modifyResourceCost;
+			int32_t									m_modifyRange = 0;
 			int32_t									m_modifyAuraUpdateCount = 0;
 		};
 

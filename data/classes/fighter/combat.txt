@@ -10,19 +10,40 @@ talent_tree fighter_combat:
 		talent fighter_combat_ferocity: "C"
 		talent fighter_combat_improved_strike: "D"
 		talent fighter_combat_mortal_strike: "E"
+		talent fighter_combat_improved_charge: "F"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_down: "|"
 	}
 	
 	map:
 	[
-		"D.A.."
-		"|.d.."
-		"|.B.C"
-		"d...."
-		"E...."
+		"D.A...."
+		"|.d...."
+		"|.B.C.F"
+		"d......"
+		"E......"
 	]
 	
+}
+
+###############################################################################
+# Improved charge
+
+talent fighter_combat_improved_charge:
+{
+	string: "Improved Charge"
+	icon: icon_charge
+	points:
+	[
+		{ ability_modifier: improved_charge }
+	]
+}
+
+ability_modifier improved_charge:
+{	
+	string: "Increases range of Charge by 1."
+	ability: charge
+	modify_range: 1
 }
 
 ###############################################################################
