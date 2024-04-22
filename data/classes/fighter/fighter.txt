@@ -137,6 +137,7 @@ class fighter:
 			unlock_abilities:
 			[
 				taunt
+				bash
 			]
 			
 			stats:

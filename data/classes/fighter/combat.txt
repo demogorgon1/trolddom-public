@@ -275,6 +275,7 @@ aura mortal_strike:
 	type: debuff
 	icon: icon_mortal_strike
 	duration: 100
+	flags: [ unique ]
 	aura_effect heal_input_modifier: 
 	{ 
 		multiplier: 0.5

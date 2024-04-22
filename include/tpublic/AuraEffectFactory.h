@@ -9,6 +9,7 @@
 #include "AuraEffects/Repeat.h"
 #include "AuraEffects/Stun.h"
 #include "AuraEffects/Taunt.h"
+#include "AuraEffects/ThreatModifier.h"
 
 #include "AuraEffect.h"
 
@@ -29,6 +30,7 @@ namespace tpublic
 			_Register<AuraEffects::Repeat>();
 			_Register<AuraEffects::Stun>();
 			_Register<AuraEffects::Taunt>();
+			_Register<AuraEffects::ThreatModifier>();
 		}
 
 		~AuraEffectFactory()

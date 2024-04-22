@@ -8,15 +8,37 @@ talent_tree fighter_protection:
 		talent fighter_protection_stoicism: "A"
 		talent fighter_protection_knock: "B"
 		talent fighter_protection_shield_block: "C"
+		talent fighter_protection_improved_bash: "D"
 		sprite talent_tree_down_arrow: "d"
 	}
 	
 	map:
 	[
-		".A.C."
-		".d..."
-		".B..."
+		"..A.C"
+		"..d.."
+		"D.B.."
 	]
+}
+
+###############################################################################
+# Improved Bash
+
+talent fighter_protection_improved_bash:
+{
+	string: "Improved Bash"
+	talent_tree_points_required: 3
+	prerequisites: [ ]		
+	icon: icon_bash
+	points:
+	[
+		{ ability_modifier: improved_bash }
+	]
+}
+
+ability_modifier improved_bash:
+{	
+	string: "Bash generates 10 rage."
+	ability: bash
 }
 
 ###############################################################################
@@ -142,6 +164,62 @@ ability knock:
 	{	
 		aura: knock
 		threat: 10
+	}
+}
+
+###############################################################################
+# Bash
+
+cooldown bash:
+{
+	duration: 50
+}
+
+aura bash:
+{
+	string: "Threatening"
+	description: "Threat generated increased by 50%."
+	type: buff
+	flags: [ unique ]
+	icon: icon_bash
+	duration: 300
+	aura_effect threat_modifier: 
+	{ 
+		multiplier: 1.5
+	}
+}
+
+ability bash:
+{
+	string: "Bash"
+	range: 1	
+	cooldowns: [ global bash ]
+	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+	states: [ default in_combat ]
+	icon: icon_bash
+	delay: 3
+	talent_tree: fighter_protection
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		base: weapon
+		base_multiplier: 0.5
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: bash
+		target_self: true
+	}
+	
+	direct_effect modify_resource:
+	{
+		must_have_ability_modifier: improved_bash
+		resource: rage
+		target_self: true
+		range: 10
 	}
 }
 

@@ -161,6 +161,8 @@ namespace tpublic
 									int32_t							aDamage) const { return aDamage; }
 		virtual int32_t			FilterHealInput(
 									int32_t							aHeal) const { return aHeal; }
+		virtual int32_t			FilterThreat(
+									int32_t							aThreat) const { return aThreat; }
 		virtual MoveSpeed::Id	GetMoveSpeedModifier() const { return MoveSpeed::INVALID_ID; }
 		virtual void			OnCombatEvent(
 									CombatEventType					/*aType*/,

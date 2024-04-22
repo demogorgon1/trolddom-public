@@ -106,6 +106,21 @@ namespace tpublic::Components
 		return heal;
 	}
 
+	int32_t		
+	Auras::FilterThreat(
+		int32_t										aThreat) const
+	{
+		int32_t threat = aThreat;
+
+		for (const std::unique_ptr<Entry>& entry : m_entries)
+		{
+			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
+				threat = effect->FilterThreat(threat);
+		}
+
+		return threat;
+	}
+
 	void		
 	Auras::OnCombatEvent(
 		tpublic::AuraEffectBase::CombatEventType	aType,

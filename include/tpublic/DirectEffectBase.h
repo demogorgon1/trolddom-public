@@ -59,15 +59,21 @@ namespace tpublic
 				m_requirements.push_back(Requirement(aSource));
 				return true;
 			}
+			else if (aSource->m_name == "must_have_ability_modifier")
+			{
+				m_mustHaveAbilityModifierId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY_MODIFIER, aSource->GetIdentifier());
+				return true;
+			}
 
 			return false;
 		}
 
 		void	
-		ToStreamBase(
+		ToStreamBase(	
 			IWriter*												aStream) const 
 		{
 			aStream->WriteUInt(m_flags);
+			aStream->WriteUInt(m_mustHaveAbilityModifierId);
 			aStream->WriteObjects(m_requirements);
 		}
 		
@@ -75,7 +81,9 @@ namespace tpublic
 		FromStreamBase(
 			IReader*												aStream) 
 		{
-			if(!aStream->ReadUInt(m_flags))
+			if (!aStream->ReadUInt(m_flags))
+				return false;
+			if (!aStream->ReadUInt(m_mustHaveAbilityModifierId))
 				return false;
 			if(!aStream->ReadObjects(m_requirements))
 				return false;
@@ -106,6 +114,7 @@ namespace tpublic
 		// Public data
 		uint32_t					m_flags = 0;		
 		std::vector<Requirement>	m_requirements;
+		uint32_t					m_mustHaveAbilityModifierId = 0;
 	};
 
 }

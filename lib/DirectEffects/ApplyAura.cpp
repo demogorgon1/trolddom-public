@@ -36,6 +36,8 @@ namespace tpublic
 						m_threat = aChild->GetInt32();
 					else if(aChild->m_name == "apply_to_party_members_in_range")
 						m_applyToPartyMembersInRange = aChild->GetUInt32();
+					else if (aChild->m_name == "target_self")
+						m_targetSelf = aChild->GetBool();
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 				}
@@ -50,6 +52,7 @@ namespace tpublic
 			aStream->WriteUInt(m_auraId);
 			aStream->WriteInt(m_threat);
 			aStream->WriteUInt(m_applyToPartyMembersInRange);
+			aStream->WriteBool(m_targetSelf);
 		}
 
 		bool
@@ -63,6 +66,8 @@ namespace tpublic
 			if (!aStream->ReadInt(m_threat))
 				return false;
 			if (!aStream->ReadUInt(m_applyToPartyMembersInRange))
+				return false;
+			if(!aStream->ReadBool(m_targetSelf))
 				return false;
 			return true;
 		}
@@ -82,20 +87,22 @@ namespace tpublic
 			IEventQueue*					aEventQueue,
 			const IWorldView*				aWorldView)
 		{
-			std::vector<const EntityInstance*> targetEntities = { aTarget };
+			EntityInstance* target = m_targetSelf ? aSource : aTarget;
+
+			std::vector<const EntityInstance*> targetEntities = { target };
 			const Data::Aura* aura = aManifest->GetById<tpublic::Data::Aura>(m_auraId);
 
 			if(m_applyToPartyMembersInRange != 0)
 			{
-				const Components::CombatPublic* combatPublic = aTarget->GetComponent<Components::CombatPublic>();
+				const Components::CombatPublic* combatPublic = target->GetComponent<Components::CombatPublic>();
 				if(combatPublic->m_combatGroupId != 0)
 				{
-					const Components::Position* targetPosition = aTarget->GetComponent<Components::Position>();
+					const Components::Position* targetPosition = target->GetComponent<Components::Position>();
 
 					aWorldView->WorldViewGroupEntityInstances(combatPublic->m_combatGroupId, [&](
 						const EntityInstance* aEntityInstance) -> bool
 					{
-						if(aEntityInstance != aTarget)
+						if(aEntityInstance != target)
 						{
 							const Components::Position* position = aEntityInstance->GetComponent<Components::Position>();
 							if(Helpers::IsWithinDistance(position, targetPosition, (int32_t)m_applyToPartyMembersInRange))

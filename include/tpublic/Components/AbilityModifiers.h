@@ -24,9 +24,21 @@ namespace tpublic
 
 			static void
 			CreateSchema(
-				ComponentSchema* aSchema)
+				ComponentSchema*	aSchema)
 			{
 				aSchema->Define(ComponentSchema::TYPE_UINT32_ARRAY, FIELD_ACTIVE, NULL, offsetof(AbilityModifiers, m_active));
+			}
+
+			bool
+			HasActive(
+				uint32_t			aAbilityModifierId) const
+			{
+				for(uint32_t t : m_active)
+				{
+					if(t == aAbilityModifierId)
+						return true;
+				}
+				return false;
 			}
 
 			// Public data
