@@ -1,6 +1,7 @@
 #include "Pcheader.h"
 
 #include <tpublic/Components/ActiveQuests.h>
+#include <tpublic/Components/CombatPublic.h>
 #include <tpublic/Components/CompletedQuests.h>
 #include <tpublic/Components/EquippedItems.h>
 #include <tpublic/Components/Inventory.h>
@@ -111,6 +112,30 @@ namespace tpublic
 				{
 					if(entity->GetState() == (EntityState::Id)aRequirement->m_id)
 						return false;
+				}
+				break;
+
+			case Requirement::TYPE_MUST_BE_HOSTILE:
+				{
+					const Components::CombatPublic* combatPublic = entity->GetComponent<Components::CombatPublic>();
+					const Components::CombatPublic* selfCombatPublic = aSelf->GetComponent<Components::CombatPublic>();
+					if(combatPublic->m_factionId == selfCombatPublic->m_factionId)				
+						return false;	
+				}
+				break;
+
+			case Requirement::TYPE_MUST_BE_GROUP_MEMBER:
+				{
+					if(entity->GetEntityInstanceId() != aSelf->GetEntityInstanceId())
+					{
+						const Components::CombatPublic* combatPublic = entity->GetComponent<Components::CombatPublic>();
+						if(combatPublic->m_combatGroupId == 0)
+							return false;
+
+						const Components::CombatPublic* selfCombatPublic = aSelf->GetComponent<Components::CombatPublic>();
+						if (combatPublic->m_combatGroupId != selfCombatPublic->m_combatGroupId)
+							return false;
+					}
 				}
 				break;
 

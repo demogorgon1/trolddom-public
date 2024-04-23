@@ -88,6 +88,7 @@ namespace tpublic
 			ID_MOVE,
 			ID_MODIFY_RESOURCE,
 			ID_INTERRUPT,
+			ID_SPAWN_ENTITY,
 
 			NUM_IDS
 		};
@@ -107,7 +108,8 @@ namespace tpublic
 			"consume_and_produce",
 			"move",
 			"modify_resource",
-			"interrupt"
+			"interrupt",
+			"spawn_entity"
 		};
 
 		static_assert(sizeof(EFFECT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

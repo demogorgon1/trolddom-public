@@ -9,6 +9,7 @@
 #include "DirectEffects/ModifyResource.h"
 #include "DirectEffects/Move.h"
 #include "DirectEffects/Simple.h"
+#include "DirectEffects/SpawnEntity.h"
 #include "DirectEffects/Threat.h"
 
 #include "DirectEffect.h"
@@ -30,6 +31,7 @@ namespace tpublic
 			_Register<DirectEffects::ModifyResource>();
 			_Register<DirectEffects::Move>();
 			_Register<DirectEffects::Simple>();
+			_Register<DirectEffects::SpawnEntity>();
 			_Register<DirectEffects::Threat>();
 		}
 

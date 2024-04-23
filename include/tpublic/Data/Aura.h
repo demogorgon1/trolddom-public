@@ -79,7 +79,8 @@ namespace tpublic
 				FLAG_CHANNELED = 0x02,
 				FLAG_HIDE_DESCRIPTION = 0x04,
 				FLAG_CANCEL_IN_COMBAT = 0x08,
-				FLAG_PERSIST_IN_DEATH = 0x10
+				FLAG_PERSIST_IN_DEATH = 0x10,
+				FLAG_SILENT = 0x20
 			};
 
 			static Type
@@ -116,6 +117,8 @@ namespace tpublic
 						flags |= FLAG_CANCEL_IN_COMBAT;
 					else if (strcmp(string, "persist_in_death") == 0)
 						flags |= FLAG_PERSIST_IN_DEATH;
+					else if (strcmp(string, "silent") == 0)
+						flags |= FLAG_SILENT;
 					else
 						TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid aura flag.", string);
 				});

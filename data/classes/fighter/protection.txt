@@ -9,6 +9,7 @@ talent_tree fighter_protection:
 		talent fighter_protection_knock: "B"
 		talent fighter_protection_shield_block: "C"
 		talent fighter_protection_improved_bash: "D"
+		talent fighter_protection_banner_of_command: "E"
 		sprite talent_tree_down_arrow: "d"
 	}
 	
@@ -17,7 +18,111 @@ talent_tree fighter_protection:
 		"..A.C"
 		"..d.."
 		"D.B.."
+		"d...."
+		"E...."
 	]
+}
+
+##############################################################################
+# Banner of Command
+
+talent fighter_protection_banner_of_command:
+{
+	string: "Banner of Command"
+	icon: icon_banner
+	prerequisites: [ fighter_protection_improved_bash ]
+	talent_tree_points_required: 6
+	points:
+	[
+		{ ability: banner_of_command }		
+	]
+}
+
+cooldown banner_of_command:
+{
+	duration: 300
+}
+
+aura banner_of_command:
+{
+	string: "Banner of Command"
+	type: buff
+	flags: [ unique silent ]
+	icon: icon_banner
+	duration: 20
+	stat_modifiers: { strength: { add_percent: 5 } }
+}
+
+ability banner_of_command_tick:
+{
+	string: "Banner of Command"
+	range: 8	
+	cooldowns: [ global poison_bomb ]
+	flags: [ target_self target_aoe target_aoe_hostile target_aoe_friendly ]
+	states: [ default in_combat ]
+	icon: icon_banner
+	delay: 3
+	aoe_radius: 8
+	aoe_requirement target<must_not_be_in_state>: { id: dead }
+	talent_tree: fighter_subtlety
+	
+	direct_effect apply_aura:
+	{
+		requirement target<must_be_group_member>: {}
+		aura: banner_of_command
+	}
+	
+	direct_effect threat:
+	{
+		requirement target<must_be_hostile>: {}
+		add: 10
+		apply_to: source
+	}
+}
+
+entity banner_of_command:
+{
+	systems: [ environment ]
+
+	components:
+	{
+		display_name: { string: "Banner of Command" }
+		position: { }			
+		owner: { }
+		environment:
+		{
+			tick_interval: 15
+			duration: 300
+			ability: banner_of_command_tick
+		}
+		sprite: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ banner ]
+					z_offset: -3
+				}
+			]		
+		}		
+	}	
+}
+
+ability banner_of_command:
+{
+	string: "Banner of Command"
+	cooldowns: [ global banner_of_command ]
+	flags: [ target_self ]
+	states: [ default in_combat ]
+	icon: icon_banner
+	resource_cost rage: 10
+	talent_tree: fighter_protection
+
+	direct_effect spawn_entity:
+	{
+		entity: banner_of_command
+	}
 }
 
 ###############################################################################

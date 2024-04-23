@@ -124,6 +124,7 @@ sprites:
 
 	cursor: { position: [ 0 32 ] }
 	sprite door_open_1: { }
+	sprite banner: { }
 	
 }
 

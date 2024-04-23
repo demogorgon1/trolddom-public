@@ -18,31 +18,34 @@ namespace tpublic::DirectEffects
 		aSource->ForEachChild([&](
 			const SourceNode* aChild)
 		{
-			if(aChild->m_name == "apply_to")
+			if(!FromSourceBase(aChild))
 			{
-				if(strcmp(aChild->GetIdentifier(), "all") == 0)
-					m_applyTo = APPLY_TO_ALL;
-				else if (strcmp(aChild->GetIdentifier(), "target") == 0)
-					m_applyTo = APPLY_TO_TARGET;
-				else if (strcmp(aChild->GetIdentifier(), "source") == 0)
-					m_applyTo = APPLY_TO_SOURCE;
+				if (aChild->m_name == "apply_to")
+				{
+					if (strcmp(aChild->GetIdentifier(), "all") == 0)
+						m_applyTo = APPLY_TO_ALL;
+					else if (strcmp(aChild->GetIdentifier(), "target") == 0)
+						m_applyTo = APPLY_TO_TARGET;
+					else if (strcmp(aChild->GetIdentifier(), "source") == 0)
+						m_applyTo = APPLY_TO_SOURCE;
+					else
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid identifier.", aChild->GetIdentifier());
+				}
+				else if (aChild->m_name == "multiply")
+				{
+					m_multiply = aChild->GetFloat();
+				}
+				else if (aChild->m_name == "add")
+				{
+					if (aChild->IsIdentifier("top"))
+						m_add = INT32_MAX;
+					else
+						m_add = aChild->GetInt32();
+				}
 				else
-					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid identifier.", aChild->GetIdentifier());
-			}
-			else if(aChild->m_name == "multiply")
-			{
-				m_multiply = aChild->GetFloat();
-			}
-			else if (aChild->m_name == "add")
-			{
-				if(aChild->IsIdentifier("top"))
-					m_add = INT32_MAX;
-				else
-					m_add = aChild->GetInt32();
-			}
-			else
-			{
-				TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->GetIdentifier());
+				{
+					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->GetIdentifier());
+				}
 			}
 		});
 	}

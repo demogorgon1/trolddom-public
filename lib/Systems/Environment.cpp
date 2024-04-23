@@ -81,15 +81,24 @@ namespace tpublic::Systems
 		if (ticksSinceLastUpdate >= environment->m_tickInterval && environment->m_abilityId != 0)
 		{
 			const Data::Ability* ability = GetManifest()->GetById<Data::Ability>(environment->m_abilityId);
-
-			aContext->m_worldView->WorldViewEntityInstancesAtPosition(position->m_position, [&](
-				const EntityInstance* aEntityInstance)
+			
+			if(ability->TargetAOE() && ability->TargetSelf())
 			{
-				if(aEntityInstance->GetEntityInstanceId() != aEntityInstanceId && aEntityInstance->GetEntityInstanceId() != owner->m_ownerEntityInstanceId)
-					aContext->m_eventQueue->EventQueueAbility(aEntityInstanceId, aEntityInstance->GetEntityInstanceId(), Vec2(), ability, ItemInstanceReference(), NULL);
+				// This is a self targeted AOE ability
+				aContext->m_eventQueue->EventQueueAbility(owner->m_ownerEntityInstanceId, aEntityInstanceId, Vec2(), ability, ItemInstanceReference(), NULL);
+			}
+			else
+			{
+				// For all other abilities just target it at whatever other entity at the same position
+				aContext->m_worldView->WorldViewEntityInstancesAtPosition(position->m_position, [&](
+					const EntityInstance* aEntityInstance)
+				{
+					if(aEntityInstance->GetEntityInstanceId() != aEntityInstanceId && aEntityInstance->GetEntityInstanceId() != owner->m_ownerEntityInstanceId)
+						aContext->m_eventQueue->EventQueueAbility(aEntityInstanceId, aEntityInstance->GetEntityInstanceId(), Vec2(), ability, ItemInstanceReference(), NULL);
 
-				return false; // Don't stop
-			});
+					return false; // Don't stop
+				});
+			}
 
 			environment->m_lastUpdateTick = aContext->m_tick;
 		}

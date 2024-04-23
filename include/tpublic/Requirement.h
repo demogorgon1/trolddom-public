@@ -32,6 +32,8 @@ namespace tpublic
 			TYPE_MUST_BE_TYPE,
 			TYPE_MUST_BE_IN_STATE,
 			TYPE_MUST_NOT_BE_IN_STATE,
+			TYPE_MUST_BE_HOSTILE,
+			TYPE_MUST_BE_GROUP_MEMBER
 		};
 
 		static DataType::Id
@@ -107,6 +109,10 @@ namespace tpublic
 				m_type = TYPE_MUST_BE_IN_STATE;
 			else if (typeString == "must_not_be_in_state")
 				m_type = TYPE_MUST_NOT_BE_IN_STATE;
+			else if (typeString == "must_be_hostile")
+				m_type = TYPE_MUST_BE_HOSTILE;
+			else if (typeString == "must_be_group_member")
+				m_type = TYPE_MUST_BE_GROUP_MEMBER;
 			else
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid type.", aSource->m_annotation->GetIdentifier());
 
