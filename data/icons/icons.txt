@@ -158,6 +158,8 @@ sprites:
 	sprite icon_poison_bomb : { tags: [ icon ] }
 	sprite icon_banner : { tags: [ icon ] }
 	sprite icon_strength : { tags: [ icon ] }
+	sprite icon_fortify : { tags: [ icon ] }
+	sprite icon_toughness : { tags: [ icon ] }
 	
 }
 

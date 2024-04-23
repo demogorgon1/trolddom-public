@@ -136,8 +136,7 @@ class fighter:
 			
 			unlock_abilities:
 			[
-				taunt
-				bash
+				taunt				
 			]
 			
 			stats:
@@ -207,6 +206,7 @@ class fighter:
 			
 			unlock_abilities:
 			[
+				bash
 			]
 			
 			stats:
@@ -223,7 +223,8 @@ class fighter:
 			level: 10
 			
 			unlock_abilities:
-			[
+			[			
+				fortify
 			]
 			
 			stats:
