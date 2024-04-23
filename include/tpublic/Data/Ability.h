@@ -434,6 +434,8 @@ namespace tpublic
 							m_projectileParticleSystemId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PARTICLE_SYSTEM, aMember->GetIdentifier());
 						else if (aMember->m_name == "source_particle_system")
 							m_sourceParticleSystemId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PARTICLE_SYSTEM, aMember->GetIdentifier());
+						else if (aMember->m_name == "target_particle_system")
+							m_targetParticleSystemId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PARTICLE_SYSTEM, aMember->GetIdentifier());
 						else if (aMember->m_name == "flags")
 							m_flags = GetFlags(aMember);
 						else if (aMember->m_tag == "direct_effect")
@@ -480,6 +482,7 @@ namespace tpublic
 				aWriter->WritePOD(m_flags);
 				aWriter->WriteUInt(m_projectileParticleSystemId);
 				aWriter->WriteUInt(m_sourceParticleSystemId);
+				aWriter->WriteUInt(m_targetParticleSystemId);
 				aWriter->WriteInt(m_castTime);
 				aWriter->WriteUInt(m_aoeRadius);
 				aWriter->WriteUInt(m_aoeCap);
@@ -529,6 +532,8 @@ namespace tpublic
 				if (!aReader->ReadUInt(m_projectileParticleSystemId))
 					return false;
 				if (!aReader->ReadUInt(m_sourceParticleSystemId))
+					return false;
+				if (!aReader->ReadUInt(m_targetParticleSystemId))
 					return false;
 				if (!aReader->ReadInt(m_castTime))
 					return false;
@@ -586,6 +591,7 @@ namespace tpublic
 			uint32_t											m_iconSpriteId = 0;
 			uint32_t											m_projectileParticleSystemId = 0;
 			uint32_t											m_sourceParticleSystemId = 0;
+			uint32_t											m_targetParticleSystemId = 0;
 			uint32_t											m_aoeRadius = 0;
 			uint32_t											m_aoeCap = 0;
 			std::vector<std::unique_ptr<DirectEffectEntry>>		m_directEffects;

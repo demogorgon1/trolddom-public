@@ -160,6 +160,7 @@ sprites:
 	sprite icon_strength : { tags: [ icon ] }
 	sprite icon_fortify : { tags: [ icon ] }
 	sprite icon_toughness : { tags: [ icon ] }
+	sprite icon_smite : { tags: [ icon ] }
 	
 }
 

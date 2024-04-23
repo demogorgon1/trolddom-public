@@ -26,6 +26,7 @@ sprites:
 	sprite effect_fire_fade_0: { }
 	sprite effect_fire_fade_1: { }
 	sprite effect_fire_fade_2: { }
+	sprite effect_lightning: { flags: [ centered ] }
 	
 	cursor: { position: [ 0 20 ] }	
 	size: { width: 24 height: 24 }

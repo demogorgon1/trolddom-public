@@ -1,0 +1,167 @@
+talent_tree priest_holy:
+{
+	string: "Holy"
+	icon: icon_star_1
+	
+	map_palette:
+	{
+	}
+	
+	map:
+	[
+	]
+	
+}
+
+###############################################################################
+# Minor Heal
+
+ability minor_heal:
+{
+	string: "Minor Heal"
+	range: 6
+	cooldowns: [ global ]
+	cast_time: 20
+	flags: [ spell target_other target_self target_friendly ]
+	states: [ default in_combat ]
+	icon: icon_heal
+	resource_cost mana: 10
+
+	direct_effect heal:
+	{	
+		base: [ 8 12 ]
+	}
+}
+
+###############################################################################
+# Smite
+
+particle_system smite:
+{
+	particle:
+	{
+		sprites: [ effect_lightning ]
+		flags: [ attached blend_add ]
+		duration: 500
+		count: 1		
+		scale: 0.8
+		alpha: 0.5
+		fade_in: 250
+		fade_out: 250
+	}
+}
+
+ability smite:
+{
+	string: "Smite"
+	range: 6
+	cooldowns: [ global ]
+	cast_time: 20
+	flags: [ spell target_other target_hostile ]
+	states: [ default in_combat ]
+	icon: icon_smite
+	resource_cost mana: 10
+	target_particle_system: smite	
+	delay: 3
+
+	direct_effect damage:
+	{	
+		damage_type: holy
+		flags: [ can_be_critical ]
+		level_curve: [ [ 1 25 ] [ 10 50 ] ]
+	}	
+}
+
+###############################################################################
+# Holy Blessing
+
+ability holy_blessing_tick:
+{
+	string: "Holy Blessing"
+	icon: icon_holy_blessing		
+	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]
+	
+	direct_effect heal:
+	{	
+		base: [ 3 5 ]
+	}	
+}
+
+aura holy_blessing:
+{
+	string: "Holy Blessing"
+	icon: icon_holy_blessing		
+	type: buff	
+	duration: 100	
+	aura_effect repeat: 
+	{ 
+		update_interval: 10
+		update_count: 10
+		ability: holy_blessing_tick
+	}
+}
+
+ability holy_blessing:
+{
+	string: "Holy Blessing"
+	description: "Heals friendly target for 30 over 10 seconds."
+	range: 6
+	cooldowns: [ global ]
+	flags: [ spell target_other target_self target_friendly ]
+	states: [ default in_combat ]
+	icon: icon_holy_blessing
+	resource_cost mana: 10
+
+	direct_effect apply_aura:
+	{	
+		aura: holy_blessing
+	}
+}
+
+###############################################################################
+# Holy Condemnation
+
+ability holy_condemnation_tick:
+{
+	string: "Holy Condemnation"
+	icon: icon_holy_condemnation		
+	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]
+	
+	direct_effect damage:
+	{	
+		base: [ 3 5 ]
+	}	
+}
+
+aura holy_condemnation:
+{
+	string: "Holy Condemnation"
+	icon: icon_holy_condemnation		
+	type: debuff
+	duration: 100	
+	aura_effect repeat: 
+	{ 
+		update_interval: 10
+		update_count: 10
+		ability: holy_condemnation_tick
+	}
+}
+
+ability holy_condemnation:
+{
+	string: "Holy Condemnation"
+	range: 6
+	cooldowns: [ global ]
+	flags: [ spell target_other target_hostile ]
+	states: [ default in_combat ]
+	icon: icon_holy_condemnation
+	resource_cost mana: 10
+
+	direct_effect apply_aura:
+	{	
+		aura: holy_condemnation
+	}
+}
+

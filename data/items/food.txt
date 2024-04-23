@@ -8,6 +8,7 @@
 	states: [ default ]
 	flags: [ always_in_range always_in_line_of_sight ]	
 	direct_effect heal: { base: @_heal_tick }	
+	direct_effect modify_resource: { range: @_heal_tick resource: mana }
 	sound_effects: { hit: [ eat_1 ] }
 }
 
@@ -54,7 +55,7 @@
 # Dry Bread
 ${ 
 	_string: "Dry Bread" 
-	_description: "Restores 80 health over 10 seconds. Can't be used in combat."
+	_description: "Restores 80 health and mana over 10 seconds. Can't be used in combat."
 	_level: 1
 	_icon: icon_bread_1 
 	_heal_tick: 8
@@ -75,7 +76,7 @@ item consumable_dry_bread: !ITEM_FOOD {}
 # Red Apple
 ${ 
 	_string: "Red Apple" 
-	_description: "Restores 110 health over 10 seconds. Can't be used in combat."
+	_description: "Restores 110 health and mana over 10 seconds. Can't be used in combat."
 	_level: 3
 	_icon: icon_red_apple
 	_heal_tick: 11
@@ -96,7 +97,7 @@ item consumable_red_apple: !ITEM_FOOD {}
 # Green Apple
 ${ 
 	_string: "Green Apple" 
-	_description: "Restores 140 health over 10 seconds. Can't be used in combat."
+	_description: "Restores 140 health and mana over 10 seconds. Can't be used in combat."
 	_level: 5
 	_icon: icon_green_apple
 	_heal_tick: 14
