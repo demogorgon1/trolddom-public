@@ -171,6 +171,8 @@ sprites:
 	
 	cursor: { position: [ 0 144 ] }	
 	sprite icon_shine : { tags: [ icon ] }
+	sprite icon_favor : { tags: [ icon ] }
+	sprite icon_resurrection : { tags: [ icon ] }
 }
 
 

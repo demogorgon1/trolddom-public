@@ -298,6 +298,7 @@ aura knock:
 	icon: icon_stun		
 	type: debuff
 	duration: 30	
+	flags: [ unique ]
 	aura_effect stun: { }
 }
 
@@ -396,6 +397,7 @@ aura taunt:
 	icon: icon_taunt
 	type: debuff
 	duration: 50	
+	flags: [ unique ]
 	
 	aura_effect taunt: 
 	{

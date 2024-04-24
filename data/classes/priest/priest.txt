@@ -107,6 +107,7 @@ class priest:
 			
 			unlock_abilities:
 			[
+				resurrection
 			]
 			
 			stats:

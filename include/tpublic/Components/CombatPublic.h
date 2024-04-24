@@ -299,6 +299,16 @@ namespace tpublic
 				return true;
 			}
 
+			void
+			SetResurrectResources()
+			{				
+				for (ResourceEntry& t : m_resources)
+				{
+					const Resource::Info* resourceInfo = Resource::GetInfo((Resource::Id)t.m_id);
+					t.m_current = resourceInfo->m_resurrectValue;
+				}
+			}
+
 			// Helpers
 			bool IsMasterLooter() const { return (m_combatFlags & COMBAT_FLAG_MASTER_LOOTER) != 0; }
 			bool IsElite() const { return (m_combatFlags & COMBAT_FLAG_ELITE) != 0; }

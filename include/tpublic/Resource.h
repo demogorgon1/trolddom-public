@@ -28,6 +28,7 @@ namespace tpublic
 			const char*		m_name;
 			const char*		m_capitalizedName;
 			uint8_t			m_flags;
+			uint32_t		m_resurrectValue;
 			uint8_t			m_colorR;
 			uint8_t			m_colorG;
 			uint8_t			m_colorB;
@@ -38,10 +39,10 @@ namespace tpublic
 		{			
 			{ NULL, NULL, 0, 0, 0, 0 },
 
-			{ "health",	"Health",	FLAG_DEFAULT_TO_MAX,	0, 220, 0 },
-			{ "mana",	"Mana",		FLAG_DEFAULT_TO_MAX,	0, 0, 220 },
-			{ "rage",	"Rage",		0,						220, 0, 0 },
-			{ "energy",	"Energy",	FLAG_DEFAULT_TO_MAX,    220, 220, 0 }
+			{ "health",	"Health",	FLAG_DEFAULT_TO_MAX,	1, 0, 220, 0 },
+			{ "mana",	"Mana",		FLAG_DEFAULT_TO_MAX,	0, 0, 0, 220 },
+			{ "rage",	"Rage",		0,						0, 220, 0, 0 },
+			{ "energy",	"Energy",	FLAG_DEFAULT_TO_MAX,    0, 220, 220, 0 }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

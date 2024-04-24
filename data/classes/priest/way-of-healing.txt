@@ -10,18 +10,89 @@ talent_tree priest_healing:
 		talent priest_spiritual_guidance: "C"
 		talent priest_prayer_of_sanctuary: "D"
 		talent priest_eternal_shine: "E"
+		talent priest_healing_favor: "F"
+		talent priest_improved_blessing: "G"
 		sprite talent_tree_down_arrow: "d"				
 	}
 	
 	map:
 	[
-		"A.C"
-		"d.d"
-		"B.E"
-		"d.."
-		"D.."
+		"..A.C.."
+		"..d.d.."
+		"G.B.E.F"
+		"..d...."
+		"..D...."
 	]
 	
+}
+
+###############################################################################
+# Improved Blessing
+
+talent priest_improved_blessing:
+{
+	string: "Improved Blessing"
+	icon: icon_holy_blessing
+	talent_tree_points_required: 3
+	points:
+	[
+		{ ability_modifier: improved_blessing_1 }
+		{ ability_modifier: improved_blessing_2 }
+		{ ability_modifier: improved_blessing_3 }
+	]
+}
+
+ability_modifier improved_blessing_1:
+{	
+	string: "Increases duration of Blessing by 1 second."
+	ability: blessing
+	modify_aura_update_count: 1
+}
+
+ability_modifier improved_blessing_2:
+{	
+	string: "Increases duration of Blessing by 2 second."
+	ability: blessing
+	modify_aura_update_count: 2
+}
+
+ability_modifier improved_blessing_3:
+{	
+	string: "Increases duration of Blessing by 3 second."
+	ability: blessing
+	modify_aura_update_count: 3
+}
+
+###############################################################################
+# Healing Favor
+
+talent priest_healing_favor:
+{
+	string: "Healing Favor"
+	icon: icon_favor
+	talent_tree_points_required: 3
+	points:
+	[
+		{ ability_modifier: healing_favor }
+	]
+}
+
+ability_modifier healing_favor:
+{	
+	string: "Greater Heal and Minor Heal increases target armor by 10% for 10 seconds."
+}
+
+aura healing_favor:
+{
+	string: "Healing Favor"
+	icon: icon_favor
+	type: buff	
+	duration: 100
+	flags: [ unique ]
+	stat_modifiers: 
+	{ 
+		armor: { add_percent: 10 } 
+	}
 }
 
 ###############################################################################
@@ -45,6 +116,7 @@ aura eternal_shine:
 	icon: icon_shine
 	type: buff	
 	duration: 12000
+	flags: [ unique ]
 	stat_modifiers: 
 	{ 
 		strength: { add_percent: 2 } 
@@ -101,6 +173,7 @@ ability prayer_of_sanctuary:
 	aoe_radius: 5
 	aoe_cap: 5
 	aoe_requirement target<must_not_be_in_state>: { id: dead }
+	aoe_requirement target<must_be_group_member>: { }
 
 	direct_effect heal:
 	{	
@@ -223,6 +296,12 @@ ability greater_heal:
 	{	
 		base: [ 20 30 ]
 	}
+	
+	direct_effect apply_aura:
+	{	
+		must_have_ability_modifier: healing_favor
+		aura: healing_favor
+	}	
 }
 
 ###############################################################################
@@ -243,6 +322,12 @@ ability minor_heal:
 	direct_effect heal:
 	{	
 		base: [ 8 12 ]
+	}
+	
+	direct_effect apply_aura:
+	{	
+		must_have_ability_modifier: healing_favor
+		aura: healing_favor
 	}
 }
 
@@ -268,6 +353,7 @@ aura blessing:
 	icon: icon_holy_blessing		
 	type: buff	
 	duration: 100	
+	flags: [ unique ]
 	aura_effect repeat: 
 	{ 
 		update_interval: 10
@@ -294,3 +380,27 @@ ability blessing:
 	}
 }
 
+###############################################################################
+# Resurrection
+
+ability resurrection:
+{
+	string: "Resurrection"
+	description: "Resurrects dead party member. Only possible outside of combat."
+	range: 7
+	cast_time: 50
+	cooldowns: [ global ]
+	flags: [ spell target_aoe target_aoe_friendly ]
+	states: [ default ]
+	icon: icon_resurrection
+	resource_cost mana: 30
+	talent_tree: priest_healing
+	aoe_cap: 1
+	aoe_radius: 0
+	aoe_requirement target<must_be_in_state>: { id: dead }
+	aoe_requirement target<must_be_group_member>: { }
+
+	direct_effect simple<resurrect>:
+	{			
+	}
+}

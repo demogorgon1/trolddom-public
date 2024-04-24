@@ -69,6 +69,7 @@ aura poison_bomb:
 	type: debuff
 	icon: icon_poison_bomb
 	duration: based_on_effects
+	flags: [ unique ]
 	
 	aura_effect repeat: 
 	{ 
@@ -330,6 +331,7 @@ aura envenom:
 	type: debuff
 	icon: icon_envenom
 	duration: based_on_effects
+	flags: [ unique ]
 	
 	aura_effect repeat: 
 	{ 
@@ -406,6 +408,7 @@ aura hamstring:
 	type: debuff
 	icon: icon_hamstring
 	duration: 60
+	flags: [ unique ]
 	
 	aura_effect move_speed_modifier:
 	{
@@ -502,6 +505,7 @@ aura rend:
 	type: debuff
 	icon: icon_rend
 	duration: based_on_effects
+	flags: [ unique ]
 	
 	aura_effect repeat: 
 	{ 

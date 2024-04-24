@@ -76,6 +76,7 @@ aura condemnation:
 	icon: icon_holy_condemnation		
 	type: debuff
 	duration: 100	
+	flags: [ unique ]
 	aura_effect repeat: 
 	{ 
 		update_interval: 10
