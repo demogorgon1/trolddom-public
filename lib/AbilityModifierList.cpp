@@ -96,4 +96,18 @@ namespace tpublic
 		return result;
 	}
 
+	int32_t														
+	AbilityModifierList::GetAbilityModifyCastTime(
+		uint32_t						aAbilityId) const
+	{
+		int32_t result = 0;
+		const std::vector<const Data::AbilityModifier*>* abilityModifiers = GetAbility(aAbilityId);
+		if (abilityModifiers != NULL)
+		{
+			for (const Data::AbilityModifier* abilityModifier : *abilityModifiers)
+				result += abilityModifier->m_modifyCastTime;
+		}
+		return result;
+	}
+
 }

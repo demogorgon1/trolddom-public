@@ -1,5 +1,6 @@
 #include "../Pcheader.h"
 
+#include <tpublic/Components/AbilityModifiers.h>
 #include <tpublic/Components/Auras.h>
 #include <tpublic/Components/CombatPrivate.h>
 #include <tpublic/Components/CombatPublic.h>
@@ -34,6 +35,10 @@ namespace tpublic::DirectEffects
 				else if(aChild->m_name == "base_multiplier")
 				{
 					m_damageBaseMultiplier = aChild->GetFloat();
+				}
+				else if(aChild->m_name == "conditional_critical_chance_bonus")
+				{
+					m_conditionalCriticalChanceBonuses.push_back(ConditionalCriticalChanceBonus(aChild));
 				}
 				else if(aChild->m_name == "base")
 				{
@@ -86,6 +91,7 @@ namespace tpublic::DirectEffects
 		aStream->WritePOD(m_damageBase);
 		m_levelCurve.ToStream(aStream);
 		aStream->WriteFloat(m_damageBaseMultiplier);
+		aStream->WriteObjects(m_conditionalCriticalChanceBonuses);
 
 		if(m_damageBase == DirectEffect::DAMAGE_BASE_RANGE)
 		{
@@ -107,6 +113,8 @@ namespace tpublic::DirectEffects
 		if(!m_levelCurve.FromStream(aStream))
 			return false;
 		if(!aStream->ReadFloat(m_damageBaseMultiplier))
+			return false;
+		if(!aStream->ReadObjects(m_conditionalCriticalChanceBonuses))
 			return false;
 
 		if (m_damageBase == DirectEffect::DAMAGE_BASE_RANGE)
@@ -186,6 +194,8 @@ namespace tpublic::DirectEffects
 				chance = sourceCombatPrivate->m_magicalCriticalStrikeChance;
 			else
 				chance = sourceCombatPrivate->m_physicalCriticalStrikeChance;
+
+			chance += _GetCriticalChanceBonus(aSource);
 
 			if(Helpers::RandomFloat(aRandom) < chance / 100.0f)
 			{
@@ -295,5 +305,26 @@ namespace tpublic::DirectEffects
 		return result;
 	}
 
+	float			
+	Damage::_GetCriticalChanceBonus(
+		const EntityInstance*				aSource) const
+	{
+		if(m_conditionalCriticalChanceBonuses.empty())
+			return 0.0f;
+
+		const Components::AbilityModifiers* abilityModifiers = aSource->GetComponent<Components::AbilityModifiers>();
+		if(abilityModifiers == NULL)
+			return 0.0f;
+
+		float bonus = 0.0f;
+
+		for(const ConditionalCriticalChanceBonus& t : m_conditionalCriticalChanceBonuses)
+		{
+			if(abilityModifiers->HasActive(t.m_abilityModifierId))
+				bonus += t.m_percent;
+		}
+
+		return bonus;
+	}
 
 }

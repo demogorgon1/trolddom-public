@@ -64,9 +64,9 @@ namespace tpublic
 				m_mustHaveAbilityModifierId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY_MODIFIER, aSource->GetIdentifier());
 				return true;
 			}
-			else if (aSource->m_name == "must_not_have_ability_modifier")
+			else if (aSource->m_name == "must_not_have_ability_modifiers")
 			{
-				m_mustNotHaveAbilityModifierId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY_MODIFIER, aSource->GetIdentifier());
+				aSource->GetIdArray(DataType::ID_ABILITY_MODIFIER, m_mustNotHaveAbilityModifierIds);
 				return true;
 			}
 
@@ -79,7 +79,7 @@ namespace tpublic
 		{
 			aStream->WriteUInt(m_flags);
 			aStream->WriteUInt(m_mustHaveAbilityModifierId);
-			aStream->WriteUInt(m_mustNotHaveAbilityModifierId);
+			aStream->WriteUInts(m_mustNotHaveAbilityModifierIds);
 			aStream->WriteObjects(m_requirements);
 		}
 		
@@ -91,7 +91,7 @@ namespace tpublic
 				return false;
 			if (!aStream->ReadUInt(m_mustHaveAbilityModifierId))
 				return false;
-			if (!aStream->ReadUInt(m_mustNotHaveAbilityModifierId))
+			if (!aStream->ReadUInts(m_mustNotHaveAbilityModifierIds))
 				return false;
 			if(!aStream->ReadObjects(m_requirements))
 				return false;
@@ -123,7 +123,7 @@ namespace tpublic
 		uint32_t					m_flags = 0;		
 		std::vector<Requirement>	m_requirements;
 		uint32_t					m_mustHaveAbilityModifierId = 0;
-		uint32_t					m_mustNotHaveAbilityModifierId = 0;
+		std::vector<uint32_t>		m_mustNotHaveAbilityModifierIds;
 	};
 
 }

@@ -173,6 +173,9 @@ sprites:
 	sprite icon_shine : { tags: [ icon ] }
 	sprite icon_favor : { tags: [ icon ] }
 	sprite icon_resurrection : { tags: [ icon ] }
+	sprite icon_swift_justice : { tags: [ icon ] }
+	sprite icon_pain : { tags: [ icon ] }
+	
 }
 
 

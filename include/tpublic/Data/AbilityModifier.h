@@ -53,7 +53,7 @@ namespace tpublic
 				Resource::Id			m_resourceId = Resource::INVALID_ID;
 				int32_t					m_value = 0;
 			};
-
+		
 			void
 			Verify() const
 			{
@@ -80,6 +80,8 @@ namespace tpublic
 							m_modifyAuraUpdateCount = aChild->GetInt32();
 						else if (aChild->m_name == "modify_range")
 							m_modifyRange = aChild->GetInt32();
+						else if (aChild->m_name == "modify_cast_time")
+							m_modifyCastTime = aChild->GetInt32();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -95,6 +97,7 @@ namespace tpublic
 				aWriter->WriteOptionalObject(m_modifyResourceCost);
 				aWriter->WriteInt(m_modifyAuraUpdateCount);
 				aWriter->WriteInt(m_modifyRange);
+				aWriter->WriteInt(m_modifyCastTime);
 			}
 			
 			bool
@@ -105,21 +108,24 @@ namespace tpublic
 					return false;
 				if(!aReader->ReadUInt(m_abilityId))
 					return false;
-				if(!aReader->ReadOptionalObject(m_modifyResourceCost))
+				if (!aReader->ReadOptionalObject(m_modifyResourceCost))
 					return false;
 				if (!aReader->ReadInt(m_modifyAuraUpdateCount))
 					return false;
 				if (!aReader->ReadInt(m_modifyRange))
 					return false;
+				if (!aReader->ReadInt(m_modifyCastTime))
+					return false;
 				return true;
 			}
 
 			// Public data
-			std::string								m_string;
-			uint32_t								m_abilityId = 0;
-			std::optional<ModifyResourceCost>		m_modifyResourceCost;
-			int32_t									m_modifyRange = 0;
-			int32_t									m_modifyAuraUpdateCount = 0;
+			std::string									m_string;
+			uint32_t									m_abilityId = 0;
+			std::optional<ModifyResourceCost>			m_modifyResourceCost;
+			int32_t										m_modifyRange = 0;
+			int32_t										m_modifyAuraUpdateCount = 0;
+			int32_t										m_modifyCastTime = 0;
 		};
 
 	}
