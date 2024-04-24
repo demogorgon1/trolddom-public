@@ -1,0 +1,103 @@
+talent_tree priest_condemnation:
+{
+	string: "Way of Condemnation"
+	icon: icon_condemnation
+	
+	map_palette:
+	{
+	}
+	
+	map:
+	[
+	]
+	
+}
+
+###############################################################################
+# Smite
+
+particle_system smite:
+{
+	particle:
+	{
+		sprites: [ effect_lightning ]
+		flags: [ attached blend_add ]
+		duration: 500
+		count: 1		
+		scale: 0.8
+		alpha: 0.5
+		fade_in: 250
+		fade_out: 250
+	}
+}
+
+ability smite:
+{
+	string: "Smite"
+	range: 6
+	cooldowns: [ global ]
+	cast_time: 20
+	flags: [ spell target_other target_hostile ]
+	states: [ default in_combat ]
+	icon: icon_smite
+	resource_cost mana: 10
+	target_particle_system: smite	
+	delay: 3
+	talent_tree: priest_condemnation
+
+	direct_effect damage:
+	{	
+		damage_type: fire
+		flags: [ can_be_critical ]
+		level_curve: [ [ 1 25 ] [ 10 50 ] ]
+	}	
+}
+
+###############################################################################
+# Condemnation
+
+ability condemnation_tick:
+{
+	string: "Condemnation"
+	icon: icon_holy_condemnation		
+	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]
+	
+	direct_effect damage:
+	{	
+		damage_type: fire
+		level_curve: [ [ 1 4 ] [ 10 8 ] ]
+	}	
+}
+
+aura condemnation:
+{
+	string: "Condemnation"
+	icon: icon_holy_condemnation		
+	type: debuff
+	duration: 100	
+	aura_effect repeat: 
+	{ 
+		update_interval: 10
+		update_count: 10
+		ability: holy_condemnation_tick
+	}
+}
+
+ability condemnation:
+{
+	string: "Condemnation"
+	range: 6
+	cooldowns: [ global ]
+	flags: [ spell target_other target_hostile ]
+	states: [ default in_combat ]
+	icon: icon_holy_condemnation
+	resource_cost mana: 10
+	talent_tree: priest_condemnation
+
+	direct_effect apply_aura:
+	{	
+		aura: condemnation
+	}
+}
+

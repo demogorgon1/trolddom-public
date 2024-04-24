@@ -1,7 +1,7 @@
 class priest:
 {
 	string: "Priest"	
-	description: "Channel the holy powers to heal and support your friends or smite your enemies with divine punishment."
+	description: "Follow the way of healing, condemnation, or the dragon."
 	
 	systems: [ combat health_regen mana_regen ]
 	
@@ -11,16 +11,16 @@ class priest:
 	color_1: [ 210 210 210 ] 
 	color_2: [ 100 100 64 ]
 	default_attack: attack
-	default_action_bar: [ attack minor_heal push ]
-	talent_trees: [ priest_holy ]
+	default_action_bar: [ attack minor_heal smite push ]
+	talent_trees: [ priest_healing priest_condemnation priest_dragon ]
 	
 	item_types: [ armor_cloth weapon_1h_knife weapon_2h_staff ]
 
 	start_map open_world: [ ]	
 	start_equipment main_hand: weapon_gnarly_staff
-	#start_equipment chest: chest_flimsy_mail_shirt
-	#start_equipment feet: feet_flimsy_mail_boots
-	#start_equipment legs: legs_flimsy_mail_pants
+	start_equipment chest: chest_tattered_robe
+	start_equipment feet: feet_tattered_slippers
+	start_equipment legs: legs_tattered_pants
 	start_inventory: [ consumable_dry_bread consumable_dry_bread consumable_dry_bread consumable_dry_bread consumable_dry_bread ]
 	
 	stats_conversion:
@@ -72,7 +72,7 @@ class priest:
 			
 			unlock_abilities:
 			[				
-				holy_blessing
+				blessing
 			]
 			
 			stats:
@@ -89,7 +89,7 @@ class priest:
 			
 			unlock_abilities:
 			[			
-				holy_condemnation
+				condemnation
 			]
 			
 			stats:

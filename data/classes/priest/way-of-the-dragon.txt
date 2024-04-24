@@ -1,0 +1,14 @@
+talent_tree priest_dragon:
+{
+	string: "Way of the Dragon"
+	icon: icon_dragon
+	
+	map_palette:
+	{
+	}
+	
+	map:
+	[
+	]
+	
+}

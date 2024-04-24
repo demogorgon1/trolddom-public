@@ -143,6 +143,8 @@ namespace tpublic
 								int32_t										aDamage) const;
 			int32_t			FilterHealInput(
 								int32_t										aHeal) const;
+			int32_t			FilterHealOutput(
+								int32_t										aHeal) const;
 			int32_t			FilterThreat(
 								int32_t										aThreat) const;
 			void			OnCombatEvent(

@@ -104,6 +104,10 @@ namespace tpublic::DirectEffects
 			}
 		}
 
+		Components::Auras* sourceAuras = aSource->GetComponent<Components::Auras>();
+		if (sourceAuras != NULL)
+			heal = sourceAuras->FilterHealOutput(heal);
+
 		Components::Auras* targetAuras = aTarget->GetComponent<Components::Auras>();
 		if(targetAuras != NULL)
 			heal = targetAuras->FilterHealInput(heal);

@@ -161,7 +161,16 @@ sprites:
 	sprite icon_fortify : { tags: [ icon ] }
 	sprite icon_toughness : { tags: [ icon ] }
 	sprite icon_smite : { tags: [ icon ] }
+	sprite icon_cloth_shirt_4 : { tags: [ icon armor_cloth chest ] }
+	sprite icon_dragon : { tags: [ icon ] }
+	sprite icon_condemnation : { tags: [ icon ] }
+	sprite icon_spirit : { tags: [ icon ] }
+	sprite icon_greater_heal : { tags: [ icon ] }
+	sprite icon_conduit : { tags: [ icon ] }
+	sprite icon_sanctuary : { tags: [ icon ] }		
 	
+	cursor: { position: [ 0 144 ] }	
+	sprite icon_shine : { tags: [ icon ] }
 }
 
 

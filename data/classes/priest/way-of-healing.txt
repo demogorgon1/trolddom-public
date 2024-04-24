@@ -1,0 +1,296 @@
+talent_tree priest_healing:
+{
+	string: "Way of Healing"
+	icon: icon_star_1
+	
+	map_palette:
+	{
+		talent priest_healing_conduit: "A"
+		talent priest_greater_heal: "B"
+		talent priest_spiritual_guidance: "C"
+		talent priest_prayer_of_sanctuary: "D"
+		talent priest_eternal_shine: "E"
+		sprite talent_tree_down_arrow: "d"				
+	}
+	
+	map:
+	[
+		"A.C"
+		"d.d"
+		"B.E"
+		"d.."
+		"D.."
+	]
+	
+}
+
+###############################################################################
+# Eternal Shine
+
+talent priest_eternal_shine:
+{
+	string: "Eternal Shine"
+	icon: icon_shine
+	talent_tree_points_required: 3
+	prerequisites: [ priest_spiritual_guidance ]
+	points:
+	[
+		{ ability: eternal_shine }
+	]
+}
+
+aura eternal_shine:
+{
+	string: "Eternal Shine"
+	icon: icon_shine
+	type: buff	
+	duration: 12000
+	stat_modifiers: 
+	{ 
+		strength: { add_percent: 2 } 
+		dexterity: { add_percent: 2 } 
+		wisdom: { add_percent: 2 } 
+		constitution: { add_percent: 2 } 
+		spirit: { add_percent: 2 } 
+	}
+}
+
+ability eternal_shine:
+{
+	string: "Eternal Shine"
+	range: 7
+	cooldowns: [ global ]
+	flags: [ spell target_other target_self target_friendly ]
+	states: [ default in_combat ]
+	icon: icon_shine
+	resource_cost mana: 25
+	talent_tree: priest_healing
+
+	direct_effect apply_aura:
+	{	
+		aura: eternal_shine
+	}
+}
+
+###############################################################################
+# Prayer of Sanctuary
+
+talent priest_prayer_of_sanctuary:
+{
+	string: "Prayer of Sanctuary"
+	icon: icon_sanctuary
+	talent_tree_points_required: 6
+	prerequisites: [ priest_greater_heal ]
+	points:
+	[
+		{ ability: prayer_of_sanctuary }
+	]
+}
+
+ability prayer_of_sanctuary:
+{
+	string: "Prayer of Sanctuary"
+	range: 7
+	cooldowns: [ global ]
+	cast_time: 25
+	flags: [ spell target_other target_self target_friendly target_aoe target_aoe_friendly aoe_low_health_only ]
+	states: [ default in_combat ]
+	icon: icon_sanctuary
+	resource_cost mana: 35
+	talent_tree: priest_healing
+	aoe_radius: 5
+	aoe_cap: 5
+	aoe_requirement target<must_not_be_in_state>: { id: dead }
+
+	direct_effect heal:
+	{	
+		base: [ 22 33 ]
+	}
+}
+
+###############################################################################
+# Spiritual Guidance
+
+talent priest_spiritual_guidance:
+{
+	string: "Spiritual Guidance"
+	icon: icon_spirit
+	prerequisites: [ ]	
+	talent_tree_points_required: 0
+	points:
+	[
+		{ aura: priest_spiritual_guidance_1 }
+		{ aura: priest_spiritual_guidance_2 }
+		{ aura: priest_spiritual_guidance_3 }
+	]
+}
+
+aura priest_spiritual_guidance_1:
+{
+	type: hidden
+	description: "Increases your Spirit by 2%."
+	stat_modifiers: { spirit: { add_percent: 2 } }
+}
+
+aura priest_spiritual_guidance_2:
+{
+	type: hidden
+	description: "Increases your Spirit by 4%."
+	stat_modifiers: { spirit: { add_percent: 4 } }
+}
+
+aura priest_spiritual_guidance_3:
+{
+	type: hidden
+	description: "Increases your Spirit by 6%."
+	stat_modifiers: { spirit: { add_percent: 6 } }
+}
+
+###############################################################################
+# Healing Conduit
+
+talent priest_healing_conduit:
+{
+	string: "Healing Conduit"
+	icon: icon_conduit
+	talent_tree_points_required: 0
+	points:
+	[
+		{ aura: priest_healing_conduit_1 }
+		{ aura: priest_healing_conduit_2 }
+		{ aura: priest_healing_conduit_3 }
+	]
+}
+
+aura priest_healing_conduit_1:
+{
+	type: hidden
+	description: "Increases your healing done by 10%."
+	aura_effect heal_output_modifier:
+	{
+		multiplier: 1.1
+	}
+}
+
+aura priest_healing_conduit_2:
+{
+	type: hidden
+	description: "Increases your healing done by 20%."
+	aura_effect heal_output_modifier:
+	{
+		multiplier: 1.2
+	}
+}
+
+aura priest_healing_conduit_3:
+{
+	type: hidden
+	description: "Increases your healing done by 30%."
+	aura_effect heal_output_modifier:
+	{
+		multiplier: 1.3
+	}
+}
+
+###############################################################################
+# Greater Heal
+
+talent priest_greater_heal:
+{
+	string: "Greater Heal"
+	icon: icon_greater_heal
+	talent_tree_points_required: 3
+	prerequisites: [ priest_healing_conduit ]
+	points:
+	[
+		{ ability: greater_heal }
+	]
+}
+
+ability greater_heal:
+{
+	string: "Greater Heal"
+	range: 7
+	cooldowns: [ global ]
+	cast_time: 25
+	flags: [ spell target_other target_self target_friendly ]
+	states: [ default in_combat ]
+	icon: icon_greater_heal
+	resource_cost mana: 20
+	talent_tree: priest_healing
+
+	direct_effect heal:
+	{	
+		base: [ 20 30 ]
+	}
+}
+
+###############################################################################
+# Minor Heal
+
+ability minor_heal:
+{
+	string: "Minor Heal"
+	range: 7
+	cooldowns: [ global ]
+	cast_time: 20
+	flags: [ spell target_other target_self target_friendly ]
+	states: [ default in_combat ]
+	icon: icon_heal
+	resource_cost mana: 8
+	talent_tree: priest_healing
+
+	direct_effect heal:
+	{	
+		base: [ 8 12 ]
+	}
+}
+
+###############################################################################
+# Blessing
+
+ability blessing_tick:
+{
+	string: "Blessing"
+	icon: icon_holy_blessing		
+	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]
+	
+	direct_effect heal:
+	{	
+		base: [ 3 5 ]
+	}	
+}
+
+aura blessing:
+{
+	string: "Blessing"
+	icon: icon_holy_blessing		
+	type: buff	
+	duration: 100	
+	aura_effect repeat: 
+	{ 
+		update_interval: 10
+		update_count: 10
+		ability: blessing_tick
+	}
+}
+
+ability blessing:
+{
+	string: "Blessing"
+	description: "Heals friendly target for 30 over 10 seconds."
+	range: 6
+	cooldowns: [ global ]
+	flags: [ spell target_other target_self target_friendly ]
+	states: [ default in_combat ]
+	icon: icon_holy_blessing
+	resource_cost mana: 10
+	talent_tree: priest_healing
+
+	direct_effect apply_aura:
+	{	
+		aura: blessing
+	}
+}
+

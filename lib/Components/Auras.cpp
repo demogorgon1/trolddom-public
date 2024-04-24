@@ -106,6 +106,22 @@ namespace tpublic::Components
 		return heal;
 	}
 
+
+	int32_t		
+	Auras::FilterHealOutput(
+		int32_t										aHeal) const
+	{
+		int32_t heal = aHeal;
+
+		for (const std::unique_ptr<Entry>& entry : m_entries)
+		{
+			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
+				heal = effect->FilterHealOutput(heal);
+		}
+
+		return heal;
+	}
+
 	int32_t		
 	Auras::FilterThreat(
 		int32_t										aThreat) const

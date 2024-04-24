@@ -4,6 +4,7 @@
 #include "AuraEffects/DamageInputModifier.h"
 #include "AuraEffects/DamageOutputModifier.h"
 #include "AuraEffects/HealInputModifier.h"
+#include "AuraEffects/HealOutputModifier.h"
 #include "AuraEffects/Immortality.h"
 #include "AuraEffects/MoveSpeedModifier.h"
 #include "AuraEffects/Repeat.h"
@@ -25,6 +26,7 @@ namespace tpublic
 			_Register<AuraEffects::DamageInputModifier>();
 			_Register<AuraEffects::DamageOutputModifier>();
 			_Register<AuraEffects::HealInputModifier>();
+			_Register<AuraEffects::HealOutputModifier>();
 			_Register<AuraEffects::Immortality>();
 			_Register<AuraEffects::MoveSpeedModifier>();
 			_Register<AuraEffects::Repeat>();

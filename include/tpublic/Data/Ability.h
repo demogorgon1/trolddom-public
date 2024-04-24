@@ -358,6 +358,7 @@ namespace tpublic
 			bool TargetHostile() const { return m_flags & FLAG_TARGET_HOSTILE; }
 			bool TargetAOEFriendly() const { return m_flags & FLAG_TARGET_AOE_FRIENDLY; }
 			bool TargetAOEHostile() const { return m_flags & FLAG_TARGET_AOE_HOSTILE; }
+			bool TargetAOELowHealthOnly() const { return m_flags & FLAG_AOE_LOW_HEALTH_ONLY; }
 			bool CanMiss() const { return m_flags & FLAG_CAN_MISS; }
 			bool CanBeDodged() const { return m_flags & FLAG_CAN_BE_DODGED; }
 			bool CanBeParried() const { return m_flags & FLAG_CAN_BE_PARRIED; }

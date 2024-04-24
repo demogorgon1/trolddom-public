@@ -9,3 +9,15 @@ item chest_flimsy_mail_shirt:
 	rarity: common
 	string: "Flimsy Mail Shirt"
 }
+
+item chest_tattered_robe:
+{
+	type: armor_cloth
+	equipment_slots: [ chest ]
+	loot_groups: [ world_drops_junk ]
+	required_level: 1
+	item_level: 1
+	icon: icon_cloth_shirt_4
+	rarity: common
+	string: "Tattered Robe"
+}
