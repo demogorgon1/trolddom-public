@@ -178,6 +178,7 @@ sprites:
 	sprite icon_tree : { tags: [ icon ] }
 	sprite icon_dwindle : { tags: [ icon ] }
 	sprite icon_fear : { tags: [ icon ] }
+	sprite icon_wisdom : { tags: [ icon ] }
 	
 }
 

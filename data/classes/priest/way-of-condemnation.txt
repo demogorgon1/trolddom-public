@@ -11,6 +11,7 @@ talent_tree priest_condemnation:
 		talent priest_improved_condemnation: "D"
 		talent priest_spiritual_crisis: "E"
 		talent priest_fear: "F"
+		talent priest_wisdom: "G"
 		sprite talent_tree_down_arrow: "d"						
 		sprite talent_tree_right_arrow: "r"						
 	}
@@ -19,9 +20,49 @@ talent_tree priest_condemnation:
 	[
 		"A.C...."
 		"d.d...."
-		"B.D.ErF"
+		"B.D.E.G"
+		"....d.."
+		"....F.."
 	]
 	
+}
+
+###############################################################################
+# Inner Wisdom
+
+talent priest_wisdom:
+{
+	string: "Inner Wisdom"
+	icon: icon_wisdom
+	prerequisites: [ ]	
+	talent_tree_points_required: 3
+	points:
+	[
+		{ aura: priest_wisdom_1 }
+		{ aura: priest_wisdom_2 }
+		{ aura: priest_wisdom_3 }
+	]
+}
+
+aura priest_wisdom_1:
+{
+	type: hidden
+	description: "Increases your Wisdom by 2%."
+	stat_modifiers: { wisdom: { add_percent: 2 } }
+}
+
+aura priest_wisdom_2:
+{
+	type: hidden
+	description: "Increases your Wisdom by 4%."
+	stat_modifiers: { wisdom: { add_percent: 4 } }
+}
+
+aura priest_wisdom_3:
+{
+	type: hidden
+	description: "Increases your Wisdom by 6%."
+	stat_modifiers: { wisdom: { add_percent: 6 } }
 }
 
 ###############################################################################
@@ -32,7 +73,7 @@ talent priest_fear:
 	string: "Fear"
 	icon: icon_fear
 	prerequisites: [ priest_spiritual_crisis ]
-	talent_tree_points_required: 3
+	talent_tree_points_required: 6
 	points:
 	[
 		{ ability: fear }
