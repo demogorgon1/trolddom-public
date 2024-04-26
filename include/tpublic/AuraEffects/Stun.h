@@ -28,8 +28,19 @@ namespace tpublic
 			// AuraEffectBase implementation
 			void
 			FromSource(
-				const SourceNode*						/*aSource*/) override
+				const SourceNode*						aSource) override
 			{
+				aSource->ForEachChild([&](
+					const SourceNode* aChild)
+				{
+					if(!FromSourceBase(aChild))
+					{
+						if(aChild->m_name == "fear")
+							m_fear = aChild->GetBool();
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					}
+				});
 			}
 
 			void
@@ -37,6 +48,8 @@ namespace tpublic
 				IWriter*								aStream) const override
 			{
 				ToStreamBase(aStream);
+
+				aStream->WriteBool(m_fear);
 			}
 
 			bool
@@ -45,14 +58,18 @@ namespace tpublic
 			{
 				if(!FromStreamBase(aStream))
 					return false;
+
+				if(!aStream->ReadBool(m_fear))
+					return false;
 				return true;
 			}
 
 			AuraEffectBase* 
 			Copy() const override
 			{
-				AuraEffectBase* t = new Stun();
+				Stun* t = new Stun();
 				t->CopyBase(this);
+				t->m_fear = m_fear;
 				return t;
 			}
 
@@ -61,6 +78,14 @@ namespace tpublic
 								uint32_t				aTargetEntityInstanceId,
 								SystemBase::Context*	aContext,
 								const Manifest*			aManifest) override;
+			bool			OnUpdate(
+								uint32_t				aSourceEntityInstanceId,
+								uint32_t				aTargetEntityInstanceId,
+								SystemBase::Context*	aContext,
+								const Manifest*			aManifest) override;
+
+			// Public data
+			bool		m_fear = false;
 		};
 
 	}

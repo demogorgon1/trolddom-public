@@ -176,6 +176,8 @@ sprites:
 	sprite icon_swift_justice : { tags: [ icon ] }
 	sprite icon_pain : { tags: [ icon ] }
 	sprite icon_tree : { tags: [ icon ] }
+	sprite icon_dwindle : { tags: [ icon ] }
+	sprite icon_fear : { tags: [ icon ] }
 	
 }
 

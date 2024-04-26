@@ -124,6 +124,7 @@ class priest:
 			
 			unlock_abilities:
 			[
+				dwindle
 			]
 			
 			stats:

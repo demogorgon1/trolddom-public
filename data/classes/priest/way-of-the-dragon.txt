@@ -12,3 +12,28 @@ talent_tree priest_dragon:
 	]
 	
 }
+
+###############################################################################
+# Dwindle
+
+cooldown dwindle:
+{
+	duration: 600
+}
+
+ability dwindle:
+{
+	string: "Dwindle"
+	description: "Reduce threat on all targets."
+	cooldowns: [ global dwindle ]
+	flags: [ target_self ]
+	states: [ default in_combat ]	
+	icon: icon_dwindle
+	talent_tree: priest_dragon	
+	
+	direct_effect threat:
+	{	
+		apply_to: all
+		multiply: 0.5
+	}
+}

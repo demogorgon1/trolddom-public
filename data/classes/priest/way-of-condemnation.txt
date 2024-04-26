@@ -10,16 +10,68 @@ talent_tree priest_condemnation:
 		talent priest_searing_pain: "C"
 		talent priest_improved_condemnation: "D"
 		talent priest_spiritual_crisis: "E"
+		talent priest_fear: "F"
 		sprite talent_tree_down_arrow: "d"						
+		sprite talent_tree_right_arrow: "r"						
 	}
 	
 	map:
 	[
-		"A.C.."
-		"d.d.E"
-		"B.D.."
+		"A.C...."
+		"d.d...."
+		"B.D.ErF"
 	]
 	
+}
+
+###############################################################################
+# Fear
+
+talent priest_fear:
+{
+	string: "Fear"
+	icon: icon_fear
+	prerequisites: [ priest_spiritual_crisis ]
+	talent_tree_points_required: 3
+	points:
+	[
+		{ ability: fear }
+	]
+}
+
+aura fear:
+{
+	string: "Fear"
+	icon: icon_fear		
+	type: debuff
+	duration: 120	
+	flags: [ unique ]
+	aura_effect stun:
+	{
+		fear: true
+		update_interval: 5
+		update_count: 24
+	}
+}
+
+ability fear:
+{
+	string: "Fear"
+	range: 6
+	cooldowns: [ global ]
+	flags: [ spell target_other target_hostile ]
+	states: [ default in_combat ]
+	icon: icon_fear
+	resource_cost mana: 20
+	delay: 3
+	talent_tree: priest_condemnation
+	cast_time: 20
+
+	direct_effect apply_aura:
+	{
+		aura: fear
+		threat: 25
+	}
 }
 
 ###############################################################################
@@ -101,7 +153,7 @@ ability spiritual_crisis:
 
 talent priest_improved_condemnation:
 {
-	string: "Searing Pain"
+	string: "Improved Condemnation"
 	icon: icon_holy_condemnation
 	talent_tree_points_required: 3
 	prerequisites: [ priest_searing_pain ]
@@ -326,4 +378,5 @@ ability condemnation:
 		aura: condemnation
 	}
 }
+
 
