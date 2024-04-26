@@ -135,6 +135,10 @@ namespace tpublic
 								AuraEffect::Id								aId,
 								uint32_t*									aOutSourceEntityInstanceId) const;
 			MoveSpeed::Id	GetMoveSpeed() const;
+			float			GetAttackHaste(
+								const Manifest*								aManifest) const;
+			float			GetSpellHaste(
+								const Manifest*								aManifest) const;
 			int32_t			FilterDamageInput(
 								DirectEffect::DamageType					aDamageType,
 								int32_t										aDamage) const;

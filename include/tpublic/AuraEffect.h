@@ -21,6 +21,7 @@ namespace tpublic
 			ID_TAUNT,
 			ID_THREAT_MODIFIER,
 			ID_HEAL_OUTPUT_MODIFIER,
+			ID_HASTE_MODIFIER,
 
 			NUM_IDS
 		};
@@ -39,7 +40,8 @@ namespace tpublic
 			"damage_output_modifier",
 			"taunt",
 			"threat_modifier",
-			"heal_output_modifier"
+			"heal_output_modifier",
+			"haste_modifier",
 		};
 
 		static_assert(sizeof(EFFECT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

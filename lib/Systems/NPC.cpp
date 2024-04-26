@@ -16,6 +16,7 @@
 #include <tpublic/Systems/NPC.h>
 
 #include <tpublic/EntityInstance.h>
+#include <tpublic/Haste.h>
 #include <tpublic/Helpers.h>
 #include <tpublic/IEventQueue.h>
 #include <tpublic/IGroupRoundRobin.h>
@@ -365,15 +366,23 @@ namespace tpublic::Systems
 							position->m_lastMoveTick = aContext->m_tick;
 							npc->m_npcMovement.Reset(aContext->m_tick);
 
-							npc->m_cooldowns.AddAbility(GetManifest(), useAbility, aContext->m_tick);
+							float cooldownModifier = 0.0f;
+							if(useAbility->IsAttack() && useAbility->IsMelee())
+								cooldownModifier = auras->GetAttackHaste(GetManifest());
+
+							npc->m_cooldowns.AddAbility(GetManifest(), useAbility, aContext->m_tick, cooldownModifier);
 
 							if(useAbility->m_castTime > 0)
-							{
+							{	
+								int32_t castTime = useAbility->m_castTime;
+								if(useAbility->IsSpell())
+									castTime = Haste::CalculateCastTime(castTime, auras->GetSpellHaste(GetManifest()));
+
 								CastInProgress cast;
 								cast.m_abilityId = useAbility->m_id;
 								cast.m_targetEntityInstanceId = target->GetEntityInstanceId();
 								cast.m_start = aContext->m_tick;
-								cast.m_end = cast.m_start + useAbility->m_castTime;
+								cast.m_end = cast.m_start + castTime;
 								npc->m_castInProgress = cast;
 							}
 							else

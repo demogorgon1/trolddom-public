@@ -175,6 +175,7 @@ sprites:
 	sprite icon_resurrection : { tags: [ icon ] }
 	sprite icon_swift_justice : { tags: [ icon ] }
 	sprite icon_pain : { tags: [ icon ] }
+	sprite icon_tree : { tags: [ icon ] }
 	
 }
 

@@ -24,6 +24,8 @@ namespace tpublic
 			ID_BLOCK_CHANCE,
 			ID_PARRY_CHANCE,
 			ID_BLOCK_VALUE,
+			ID_ATTACK_HASTE,
+			ID_SPELL_HASTE,
 
 			NUM_IDS
 		};
@@ -55,7 +57,9 @@ namespace tpublic
 			{ "dodge_chance",			"DODGE",		"Dodge Chance",								"Improves your chance to dodge an attack by %u%%.",						10.0f,	true,	false },
 			{ "block_chance",			"BLOCK",		"Block Chance",								"Improves your chance to block an attack by %u%%.",						10.0f,	true,	false },
 			{ "parry_chance",			"PARRY",		"Parry Chance",								"Improves your chance to parry an attack by %u%%.",						10.0f,	true,	false },
-			{ "block_value",			"BLOCKVALUE",	"Block Value",								"Increases damage absorbed by blocks by %u.",							1.0f,	false,	false }
+			{ "block_value",			"BLOCKVALUE",	"Block Value",								"Increases damage absorbed by blocks by %u.",							1.0f,	false,	false },
+			{ "attack_haste",			"HASTE",		"Attack Haste",								"Increases attack speed by %u%%.",										10.0f,	true,	false },
+			{ "spell_haste",			"SPELLHASTE",	"Spell Haste",								"Increases cast speed by %u%%.",										10.0f,	true,	false },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

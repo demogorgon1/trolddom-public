@@ -9,16 +9,91 @@ talent_tree priest_condemnation:
 		talent priest_swift_justice: "B"
 		talent priest_searing_pain: "C"
 		talent priest_improved_condemnation: "D"
+		talent priest_spiritual_crisis: "E"
 		sprite talent_tree_down_arrow: "d"						
 	}
 	
 	map:
 	[
-		"A.C"
-		"d.d"
-		"B.D"
+		"A.C.."
+		"d.d.E"
+		"B.D.."
 	]
 	
+}
+
+###############################################################################
+# Spiritual Crisis
+
+talent priest_spiritual_crisis:
+{
+	string: "Spiritual Crisis"
+	icon: icon_tree
+	talent_tree_points_required: 3
+	points:
+	[
+		{ ability: spiritual_crisis }
+	]
+}
+
+cooldown spiritual_crisis:
+{
+	duration: 200
+}
+
+particle_system spiritual_crisis:
+{
+	particle:
+	{
+		sprites: [ effect_hammer ]
+		flags: [ attached blend_add ]
+		duration: 500
+		count: 1		
+		scale: 0.8
+		alpha: 0.5
+		fade_in: 250
+		fade_out: 250
+	}
+}
+
+aura spiritual_crisis:
+{
+	string: "Spiritual Crisis"
+	icon: icon_tree		
+	type: debuff
+	duration: 200	
+	flags: [ unique ]
+	stat_modifiers:
+	{
+		attack_haste: { add: -15 } 
+		spell_haste: { add: -15 } 
+	}
+}
+
+ability spiritual_crisis:
+{
+	string: "Spiritual Crisis"
+	range: 6
+	cooldowns: [ global spiritual_crisis ]
+	flags: [ spell target_other target_hostile ]
+	states: [ default in_combat ]
+	icon: icon_tree
+	resource_cost mana: 20
+	target_particle_system: spiritual_crisis	
+	delay: 3
+	talent_tree: priest_condemnation
+
+	direct_effect damage:
+	{	
+		damage_type: fire
+		flags: [ can_be_critical ]
+		level_curve: [ [ 1 6 ] [ 10 12 ] ]
+	}	
+
+	direct_effect apply_aura:
+	{
+		aura: spiritual_crisis
+	}
 }
 
 ###############################################################################

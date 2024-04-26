@@ -48,14 +48,25 @@ namespace tpublic
 	Cooldowns::AddAbility(
 		const Manifest*			aManifest,
 		const Data::Ability*	aAbility,
-		int32_t					aTick)
+		int32_t					aTick,
+		float					aCooldownModifier)
 	{
 		for(uint32_t cooldownId : aAbility->m_cooldowns)
 		{
 			const Data::Cooldown* cooldown = aManifest->GetById<Data::Cooldown>(cooldownId);
 
 			if(cooldown->m_trigger == Data::Cooldown::TRIGGER_ABILITY)
-				AddCooldown(cooldownId, cooldown->m_duration, aTick);
+			{
+				if(aCooldownModifier == 0.0f)
+				{
+					AddCooldown(cooldownId, cooldown->m_duration, aTick);
+				}
+				else
+				{
+					int32_t duration = (int32_t)((1.0f - (aCooldownModifier / 100.0f)) * (float)cooldown->m_duration);
+					AddCooldown(cooldownId, duration, aTick);
+				}
+			}
 		}
 	}
 	

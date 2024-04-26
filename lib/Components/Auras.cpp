@@ -59,6 +59,44 @@ namespace tpublic::Components
 		return MoveSpeed::ID_NORMAL;
 	}
 
+	float			
+	Auras::GetAttackHaste(
+		const Manifest*								aManifest) const
+	{
+		float haste = 0.0f;
+		for (const std::unique_ptr<Entry>& entry : m_entries)
+		{
+			const Data::Aura* aura = aManifest->GetById<Data::Aura>(entry->m_auraId);
+
+			if(aura->m_statModifiers)
+			{
+				const std::optional<Modifier>& modifier = aura->m_statModifiers->m_modifiers[Stat::ID_ATTACK_HASTE];
+				if(modifier.has_value())
+					haste += modifier->m_add;
+			}
+		}
+		return haste;
+	}
+	
+	float			
+	Auras::GetSpellHaste(
+		const Manifest*								aManifest) const
+	{
+		float haste = 0.0f;
+		for (const std::unique_ptr<Entry>& entry : m_entries)
+		{
+			const Data::Aura* aura = aManifest->GetById<Data::Aura>(entry->m_auraId);
+
+			if (aura->m_statModifiers)
+			{
+				const std::optional<Modifier>& modifier = aura->m_statModifiers->m_modifiers[Stat::ID_SPELL_HASTE];
+				if (modifier.has_value())
+					haste += modifier->m_add;
+			}
+		}
+		return haste;
+	}
+
 	int32_t
 	Auras::FilterDamageInput(
 		DirectEffect::DamageType					aDamageType,

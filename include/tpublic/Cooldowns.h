@@ -134,7 +134,8 @@ namespace tpublic
 		void			AddAbility(
 							const Manifest*			aManifest,
 							const Data::Ability*	aAbility,
-							int32_t					aTick);
+							int32_t					aTick,
+							float					aCooldownModifier);
 		void			AddCooldown(
 							uint32_t				aCooldownId,
 							int32_t					aDuration,
