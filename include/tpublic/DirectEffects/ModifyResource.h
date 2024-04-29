@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../CombatFunction.h"
 #include "../DirectEffectBase.h"
 #include "../IntRange.h"
 #include "../Resource.h"
@@ -49,8 +50,8 @@ namespace tpublic
 
 			// Public data
 			Resource::Id	m_resourceId = Resource::INVALID_ID;
-			IntRange		m_range;
 			bool			m_targetSelf = false;
+			CombatFunction	m_function;
 		};
 
 	}

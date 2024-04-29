@@ -147,7 +147,7 @@ ability fighter_combat_riposte:
 	direct_effect modify_resource:
 	{
 		resource: rage
-		range: 5
+		function: 5
 	}
 }
 
@@ -413,7 +413,7 @@ ability charge_trigger:
 	{
 		target_self: true
 		resource: rage
-		range: 8
+		function: 8
 	}
 }
 

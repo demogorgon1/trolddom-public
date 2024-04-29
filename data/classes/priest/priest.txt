@@ -107,7 +107,7 @@ class priest:
 			
 			unlock_abilities:
 			[
-				resurrection
+				meditation
 			]
 			
 			stats:
@@ -124,7 +124,7 @@ class priest:
 			
 			unlock_abilities:
 			[
-				dwindle
+				resurrection
 			]
 			
 			stats:
@@ -142,6 +142,7 @@ class priest:
 			
 			unlock_abilities:
 			[
+				dwindle
 			]
 			
 			stats:

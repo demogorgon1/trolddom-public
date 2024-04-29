@@ -152,6 +152,18 @@ namespace tpublic
 				return 0;
 			}
 
+			uint32_t
+			GetResourceMax(
+				uint32_t				aResourceId) const
+			{
+				for (const ResourceEntry& t : m_resources)
+				{
+					if (t.m_id == aResourceId)
+						return t.m_max;
+				}
+				return 0;
+			}
+
 			ResourceEntry*
 			GetResourceEntry(
 				uint32_t				aResourceId)

@@ -379,7 +379,7 @@ ability bash:
 		must_have_ability_modifier: improved_bash
 		resource: rage
 		target_self: true
-		range: 10
+		function: 10
 	}
 }
 

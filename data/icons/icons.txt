@@ -181,6 +181,7 @@ sprites:
 	sprite icon_wisdom : { tags: [ icon ] }
 	sprite icon_dodge : { tags: [ icon ] }
 	sprite icon_dragon_skin : { tags: [ icon ] }
+	sprite icon_meditation : { tags: [ icon ] }
 		
 }
 

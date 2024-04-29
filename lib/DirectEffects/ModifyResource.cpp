@@ -20,9 +20,9 @@ namespace tpublic::DirectEffects
 		{
 			if(!FromSourceBase(aChild))
 			{
-				if(aChild->m_name == "range")
+				if(aChild->m_name == "function")
 				{
-					m_range = IntRange(aChild);
+					m_function = CombatFunction(aChild);
 				}
 				else if(aChild->m_name == "resource")
 				{
@@ -47,7 +47,7 @@ namespace tpublic::DirectEffects
 	{
 		ToStreamBase(aStream);
 		aStream->WritePOD(m_resourceId);
-		m_range.ToStream(aStream);
+		m_function.ToStream(aStream);
 		aStream->WriteBool(m_targetSelf);
 	}
 			
@@ -59,7 +59,7 @@ namespace tpublic::DirectEffects
 			return false;
 		if (!aStream->ReadPOD(m_resourceId))
 			return false;
-		if(!m_range.FromStream(aStream))
+		if(!m_function.FromStream(aStream))
 			return false;
 		if(!aStream->ReadBool(m_targetSelf))
 			return false;
@@ -69,7 +69,7 @@ namespace tpublic::DirectEffects
 	CombatEvent::Id
 	ModifyResource::Resolve(
 		int32_t							/*aTick*/,
-		std::mt19937&					aRandom,
+		std::mt19937&					/*aRandom*/,
 		const Manifest*					/*aManifest*/,
 		CombatEvent::Id					aId,
 		uint32_t						aAbilityId,
@@ -94,7 +94,7 @@ namespace tpublic::DirectEffects
 				target->GetEntityInstanceId(),
 				combatPublic,
 				resourceIndex,
-				m_range.GetRandom(aRandom),
+				(int32_t)m_function.EvaluateEntityInstance(aSource),
 				0);
 		}
 

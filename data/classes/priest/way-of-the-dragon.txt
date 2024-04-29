@@ -7,12 +7,15 @@ talent_tree priest_dragon:
 	{
 		talent priest_dragon_dodge: "A"
 		talent priest_dragon_skin: "B"
+		talent priest_dragon_improved_dwindle: "C"
 		sprite talent_tree_down_arrow: "d"
 	}
 	
 	map:
 	[
 		"A.B"
+		"d.."
+		"C.."
 	]
 	
 }
@@ -94,6 +97,38 @@ aura priest_dragon_skin_3:
 }
 
 ###############################################################################
+# Improved Dwindle
+
+talent priest_dragon_improved_dwindle:
+{
+	string: "Skin of the Dragon"
+	icon: icon_dragon_skin
+	prerequisites: [ priest_dragon_dodge ]	
+	talent_tree_points_required: 3
+	points:
+	[
+		{ ability_modifier: improved_dwindle }
+	]
+}
+
+ability_modifier improved_dwindle: 
+{
+	string: "Dwindle increases your chance to dodge by 80% for 10 seconds."
+}
+
+aura improved_dwindle:
+{
+	string: "Dwindle"
+	type: buff
+	icon: icon_dwindle
+	duration: 100
+	stat_modifiers:
+	{
+		dodge_chance: { add: 80 }
+	}
+}
+
+###############################################################################
 # Dwindle
 
 cooldown dwindle:
@@ -116,4 +151,64 @@ ability dwindle:
 		apply_to: all
 		multiply: 0.5
 	}
+	
+	direct_effect apply_aura:
+	{
+		aura: improved_dwindle
+	}
 }
+
+###############################################################################
+# Meditation
+
+cooldown meditation:
+{
+	duration: 3000
+}
+
+ability meditation:
+{
+	string: "Meditation"
+	description: "Restore 50% of your mana over 9 seconds."
+	cooldowns: [ global meditation ]
+	flags: [ target_self ]
+	states: [ default in_combat ]	
+	icon: icon_meditation
+	talent_tree: priest_dragon	
+	
+	direct_effect apply_aura:
+	{
+		aura: meditation
+	}
+}
+
+ability meditation_tick:
+{
+	string: "Meditation"
+	icon: icon_meditation		
+	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]
+	
+	direct_effect modify_resource:
+	{
+		resource: mana
+		function: { expression: a_mul_x a: 0.1 x: mana_max }
+	}
+}
+
+aura meditation:
+{
+	string: "Meditation"
+	type: buff
+	icon: icon_meditation
+	duration: based_on_effects
+	flags: [ unique channeled ]
+	
+	aura_effect repeat:
+	{
+		ability: meditation_tick
+		update_interval: 16
+		update_count: 5
+	}
+}
+

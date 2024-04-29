@@ -1,5 +1,7 @@
 #pragma once
 
+#include "IReader.h"
+#include "IWriter.h"
 #include "Parser.h"
 
 namespace tpublic
