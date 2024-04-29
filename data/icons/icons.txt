@@ -179,7 +179,9 @@ sprites:
 	sprite icon_dwindle : { tags: [ icon ] }
 	sprite icon_fear : { tags: [ icon ] }
 	sprite icon_wisdom : { tags: [ icon ] }
-	
+	sprite icon_dodge : { tags: [ icon ] }
+	sprite icon_dragon_skin : { tags: [ icon ] }
+		
 }
 
 

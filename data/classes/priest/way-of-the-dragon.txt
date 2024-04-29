@@ -5,12 +5,92 @@ talent_tree priest_dragon:
 	
 	map_palette:
 	{
+		talent priest_dragon_dodge: "A"
+		talent priest_dragon_skin: "B"
+		sprite talent_tree_down_arrow: "d"
 	}
 	
 	map:
 	[
+		"A.B"
 	]
 	
+}
+
+###############################################################################
+# Stop Trying To Hit Me
+
+talent priest_dragon_dodge:
+{
+	string: "Stop Trying To Hit Me"
+	icon: icon_dodge
+	prerequisites: [ ]	
+	talent_tree_points_required: 0
+	points:
+	[
+		{ aura: priest_dragon_dodge_1 }
+		{ aura: priest_dragon_dodge_2 }
+		{ aura: priest_dragon_dodge_3 }
+	]
+}
+
+aura priest_dragon_dodge_1:
+{
+	type: hidden
+	description: "Increases your chance to dodge by 2%."
+	stat_modifiers: { dodge_chance: { add: 2 } }
+}
+
+aura priest_dragon_dodge_2:
+{
+	type: hidden
+	description: "Increases your chance to dodge by 4%."
+	stat_modifiers: { dodge_chance: { add: 4 } }
+}
+
+aura priest_dragon_dodge_3:
+{
+	type: hidden
+	description: "Increases your chance to dodge by 6%."
+	stat_modifiers: { dodge_chance: { add: 6 } }
+}
+
+###############################################################################
+# Skin of the Dragon
+
+talent priest_dragon_skin:
+{
+	string: "Skin of the Dragon"
+	icon: icon_dragon_skin
+	prerequisites: [ ]	
+	talent_tree_points_required: 0
+	points:
+	[
+		{ aura: priest_dragon_skin_1 }
+		{ aura: priest_dragon_skin_2 }
+		{ aura: priest_dragon_skin_3 }
+	]
+}
+
+aura priest_dragon_skin_1:
+{
+	type: hidden
+	description: "Increases your armor by 20%."
+	stat_modifiers: { armor: { add_percent: 20 } }
+}
+
+aura priest_dragon_skin_2:
+{
+	type: hidden
+	description: "Increases your armor by 40%."
+	stat_modifiers: { armor: { add_percent: 40 } }
+}
+
+aura priest_dragon_skin_3:
+{
+	type: hidden
+	description: "Increases your armor by 60%."
+	stat_modifiers: { armor: { add_percent: 60 } }
 }
 
 ###############################################################################
