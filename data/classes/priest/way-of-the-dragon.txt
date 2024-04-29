@@ -8,14 +8,16 @@ talent_tree priest_dragon:
 		talent priest_dragon_dodge: "A"
 		talent priest_dragon_skin: "B"
 		talent priest_dragon_improved_dwindle: "C"
+		talent priest_dragon_resistance_aura: "D"
 		sprite talent_tree_down_arrow: "d"
+		sprite talent_tree_left_arrow: "l"
 	}
 	
 	map:
 	[
-		"A.B"
-		"d.."
-		"C.."
+		"..A.B"
+		"..d.."
+		"D.C.."		
 	]
 	
 }
@@ -56,6 +58,36 @@ aura priest_dragon_dodge_3:
 	type: hidden
 	description: "Increases your chance to dodge by 6%."
 	stat_modifiers: { dodge_chance: { add: 6 } }
+}
+
+###############################################################################
+# Resistance Aura
+
+talent priest_dragon_resistance_aura:
+{
+	string: "Resistance Aura"
+	icon: icon_resistance_aura
+	prerequisites: [ ]	
+	talent_tree_points_required: 3
+	points:
+	[
+		{ aura: priest_dragon_resistance_aura_1 }
+		{ aura: priest_dragon_resistance_aura_2 }
+	]
+}
+
+aura priest_dragon_resistance_aura_1:
+{
+	type: hidden
+	description: "Decrease damage taken by magical spells and effects by 10%."
+	aura_effect damage_input_modifier: { type_mask: [ frost fire arcane unholy holy ] multiplier: 0.9 }
+}
+
+aura priest_dragon_resistance_aura_2:
+{
+	type: hidden
+	description: "Decrease damage taken by magical spells and effects by 20%."
+	aura_effect damage_input_modifier: { type_mask: [ frost fire arcane unholy holy ] multiplier: 0.8 }
 }
 
 ###############################################################################
@@ -101,8 +133,8 @@ aura priest_dragon_skin_3:
 
 talent priest_dragon_improved_dwindle:
 {
-	string: "Skin of the Dragon"
-	icon: icon_dragon_skin
+	string: "Improved Dwindle"
+	icon: icon_dwindle
 	prerequisites: [ priest_dragon_dodge ]	
 	talent_tree_points_required: 3
 	points:

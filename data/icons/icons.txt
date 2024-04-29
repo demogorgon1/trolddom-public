@@ -182,6 +182,7 @@ sprites:
 	sprite icon_dodge : { tags: [ icon ] }
 	sprite icon_dragon_skin : { tags: [ icon ] }
 	sprite icon_meditation : { tags: [ icon ] }
+	sprite icon_resistance_aura : { tags: [ icon ] }
 		
 }
 
