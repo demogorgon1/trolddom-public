@@ -11,8 +11,9 @@ class sorcerer:
 	color_1: [ 0 59 210 ] 
 	color_2: [ 0 10 64 ]
 	default_attack: attack
-	default_action_bar: [ attack firebolt lake_of_fire gaze_of_death dont_touch_me_bro immortality push ]
-	
+	default_action_bar: [ attack firebolt push ]
+	talent_trees: [ sorcerer_arcane sorcerer_elemental sorcerer_battle_mage ]
+
 	item_types: [ armor_cloth weapon_1h_knife weapon_2h_staff ]
 	
 	start_map open_world: [ ]
@@ -43,10 +44,6 @@ class sorcerer:
 			[
 				attack
 				firebolt
-				lake_of_fire
-				gaze_of_death
-				dont_touch_me_bro 
-				immortality 
 				push
 			]
 						
@@ -64,5 +61,155 @@ class sorcerer:
 			
 			add_unarmed_weapon_damage: [ 2 4 ]			
 		}
+		
+		{
+			level: 2
+			
+			unlock_abilities:
+			[			
+				lake_of_fire
+			]
+			
+			stats:
+			{
+				wisdom: 1
+				constitution: 1
+			}
+			
+			resource health: { add_max: 6 }
+		}
+		
+		{
+			level: 3
+			
+			unlock_abilities:
+			[			
+			]
+			
+			stats:
+			{
+				dexterity: 1
+				strength: 1
+				spirit: 1
+			}			
+			
+			resource health: { add_max: 6 }
+		}		
+		
+		{
+			level: 4
+			
+			unlock_abilities:
+			[
+			]
+			
+			stats:
+			{
+				wisdom: 1
+				constitution: 1
+			}			
+			
+			resource health: { add_max: 6 }			
+		}				
+		
+		{
+			level: 5
+			
+			unlock_abilities:
+			[
+			]
+			
+			stats:
+			{
+				dexterity: 1
+				strength: 1
+				spirit: 1
+			}			
+			
+			resource health: { add_max: 6 }
+		}		
+		
+		{
+			level: 6
+			
+			unlock_abilities:
+			[
+			]
+			
+			stats:
+			{
+				wisdom: 1
+				constitution: 1
+			}			
+			
+			resource health: { add_max: 6 }			
+		}				
+
+		{
+			level: 7
+			
+			unlock_abilities:
+			[			
+			]
+			
+			stats:
+			{
+				dexterity: 1
+				strength: 1
+				spirit: 1
+			}	
+
+			resource health: { add_max: 6 }
+		}		
+		
+		{
+			level: 8
+			
+			unlock_abilities:
+			[
+			]
+			
+			stats:
+			{
+				wisdom: 1
+				constitution: 1
+			}			
+			
+			resource health: { add_max: 6 }			
+		}				
+
+		{
+			level: 9
+			
+			unlock_abilities:
+			[
+			]
+			
+			stats:
+			{
+				dexterity: 1
+				strength: 1
+				spirit: 1
+			}			
+			
+			resource health: { add_max: 6 }			
+		}		
+		
+		{
+			level: 10
+			
+			unlock_abilities:
+			[			
+			]
+			
+			stats:
+			{
+				wisdom: 1
+				constitution: 1
+			}			
+			
+			resource health: { add_max: 6 }			
+		}				
+		
 	]
 }

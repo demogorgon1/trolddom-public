@@ -1,0 +1,131 @@
+talent_tree sorcerer_elemental:
+{
+	string: "Elemental"
+	icon: icon_elemental
+	
+	map_palette:
+	{
+		sprite talent_tree_down_arrow: "d"						
+	}
+	
+	map:
+	[
+	]
+	
+}
+
+###############################################################################
+# Lake of Fire
+
+cooldown lake_of_fire:
+{
+	duration: 200
+}
+
+ability lake_of_fire:
+{
+	string: "Lake of Fire"
+	description: "Spawn a lake of fire that damages enemies who touch it."	
+	range: 8
+	cast_time: 25
+	flags: [ spell target_aoe ]
+	states: [ default in_combat ]
+	icon: icon_lake_of_fire
+	cooldowns: [ global lake_of_fire ]	
+	aoe_radius: 2
+	resource_cost mana: 25
+	talent_tree: sorcerer_elemental
+	
+	aoe_entity_spawn lake_of_fire:
+	{
+		probability: 100
+		init_state: spawning
+	}
+}
+
+ability lake_of_fire_tick:
+{
+	string: "Lake of Fire"
+	flags: [ offensive always_in_range always_in_line_of_sight ]
+	icon: icon_fire
+	direct_effect damage:
+	{
+		flags: [ ]
+		damage_type: fire
+		base: [ 2 4 ]
+	}
+}
+
+entity lake_of_fire:
+{
+	systems: [ environment ]
+	
+	components:
+	{
+		position: { }		
+		owner: { }
+		environment: 
+		{
+			tick_interval: 10
+			duration: 60 
+			ability: lake_of_fire_tick
+		}		
+		sprite: 
+		{ 
+			animations: 
+			[
+				{ 
+					states: [ default ] 
+					frames: [ effect_fire_0 effect_fire_1 effect_fire_2 ] 
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -1
+				}
+				
+				{ 
+					states: [ spawning despawning ] 
+					frames: [ effect_fire_fade_0 effect_fire_fade_1 effect_fire_fade_2 ] 
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -1
+				}				
+			]			
+		}
+		
+	}
+}
+
+###############################################################################
+# Firebolt
+
+ability firebolt:
+{
+	string: "Firebolt"
+	range: 8
+	cast_time: 25
+	cooldowns: [ global ]
+	flags: [ spell offensive target_other target_hostile can_miss ]
+	states: [ default in_combat ]
+	icon: icon_firebolt
+	talent_tree: sorcerer_elemental
+	speed: 5
+	projectile: firebolt
+	resource_cost mana: 20
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: fire
+		base: [ 10 20 ]
+	}
+}
+
+particle_system firebolt:
+{
+	particle:
+	{
+		sprites: [ effect_firebolt ]
+		flags: [ attached no_rotation no_scaling ]
+		count: 1		
+	}
+}

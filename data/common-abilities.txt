@@ -65,52 +65,6 @@ ability open:
 	}
 }
 
-ability firebolt:
-{
-	string: "Firebolt"
-	range: 7	
-	cast_time: 25
-	cooldowns: [ global ]
-	flags: [ spell offensive target_other target_hostile can_miss ]
-	states: [ default in_combat ]
-	icon: icon_firebolt
-	speed: 5
-	projectile: firebolt
-	resource_cost mana: 15
-	
-	direct_effect damage:
-	{
-		flags: [ can_be_critical ]
-		damage_type: physical
-		base: [ 10 20 ]
-	}
-}
-
-cooldown lake_of_fire:
-{
-	duration: 100
-}
-
-ability lake_of_fire:
-{
-	string: "Lake of Fire"
-	description: "Spawn a lake of fire that damages enemies who touch it."	
-	range: 7
-	cast_time: 25
-	flags: [ spell target_aoe ]
-	states: [ default in_combat ]
-	icon: icon_lake_of_fire
-	cooldowns: [ global lake_of_fire ]	
-	aoe_radius: 2
-	resource_cost mana: 15
-	
-	aoe_entity_spawn fire:
-	{
-		probability: 100
-		init_state: spawning
-	}
-}
-
 cooldown gaze_of_death:
 {
 	duration: 100

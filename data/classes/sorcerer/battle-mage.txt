@@ -1,0 +1,15 @@
+talent_tree sorcerer_battle_mage:
+{
+	string: "Battle-Mage"
+	icon: icon_battle_mage
+	
+	map_palette:
+	{
+		sprite talent_tree_down_arrow: "d"						
+	}
+	
+	map:
+	[
+	]
+	
+}

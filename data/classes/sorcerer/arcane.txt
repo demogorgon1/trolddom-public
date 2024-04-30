@@ -1,0 +1,15 @@
+talent_tree sorcerer_arcane:
+{
+	string: "Arcane"
+	icon: icon_arcane
+	
+	map_palette:
+	{
+		sprite talent_tree_down_arrow: "d"						
+	}
+	
+	map:
+	[
+	]
+	
+}

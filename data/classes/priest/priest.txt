@@ -11,7 +11,7 @@ class priest:
 	color_1: [ 210 210 210 ] 
 	color_2: [ 100 100 64 ]
 	default_attack: attack
-	default_action_bar: [ attack minor_heal smite push ]
+	default_action_bar: [ attack minor_heal push ]
 	talent_trees: [ priest_healing priest_condemnation priest_dragon ]
 	
 	item_types: [ armor_cloth weapon_1h_knife weapon_2h_staff ]
@@ -49,7 +49,6 @@ class priest:
 				attack
 				push
 				minor_heal
-				smite
 			]
 						
 			stats:
@@ -72,7 +71,7 @@ class priest:
 			
 			unlock_abilities:
 			[				
-				blessing
+				smite			
 			]
 			
 			stats:
@@ -89,7 +88,7 @@ class priest:
 			
 			unlock_abilities:
 			[			
-				condemnation
+				blessing
 			]
 			
 			stats:
@@ -107,7 +106,7 @@ class priest:
 			
 			unlock_abilities:
 			[
-				meditation
+				condemnation
 			]
 			
 			stats:
@@ -124,7 +123,7 @@ class priest:
 			
 			unlock_abilities:
 			[
-				resurrection
+				meditation
 			]
 			
 			stats:
@@ -142,7 +141,7 @@ class priest:
 			
 			unlock_abilities:
 			[
-				dwindle
+				resurrection
 			]
 			
 			stats:
@@ -159,6 +158,7 @@ class priest:
 			
 			unlock_abilities:
 			[			
+				dwindle
 			]
 			
 			stats:
