@@ -9,17 +9,168 @@ talent_tree priest_dragon:
 		talent priest_dragon_skin: "B"
 		talent priest_dragon_improved_dwindle: "C"
 		talent priest_dragon_resistance_aura: "D"
+		talent priest_dragon_punch: "E"
+		talent priest_dragon_fury: "F"
+		talent priest_dragon_breath: "G"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_left_arrow: "l"
+		sprite talent_tree_right_arrow: "r"
 	}
 	
 	map:
 	[
-		"..A.B"
-		"..d.."
-		"D.C.."		
+		"..A.B.."
+		"..d...."
+		"D.C.ErF"
+		"....d.."
+		"....G.."
 	]
 	
+}
+
+###############################################################################
+# Dragon Breath
+
+talent priest_dragon_breath:
+{
+	string: "Dragon Breath"
+	icon: icon_dragon_breath
+	prerequisites: [ priest_dragon_punch ]	
+	talent_tree_points_required: 6
+	points:
+	[
+		{ ability: dragon_breath }
+	]
+}
+
+ability dragon_breath:
+{
+	string: "Dragon Breath"
+	range: 2	
+	cooldowns: [ global ]
+	flags: [ spell offensive target_other target_hostile ]
+	states: [ default in_combat ]
+	icon: icon_dragon_breath
+	delay: 3
+	resource_cost mana: 35
+	talent_tree: priest_dragon
+	cast_time: 20
+	
+	direct_effect apply_aura:
+	{
+		aura: dragon_breath
+	}
+}
+
+ability dragon_breath_tick:
+{
+	string: "Dragon Breath"
+	icon: icon_dragon_breath		
+	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]
+	
+	direct_effect damage:
+	{	
+		damage_type: fire		
+		level_curve: [ [ 1 4 ] [ 10 8 ] ]
+	}		
+}
+
+aura dragon_breath:
+{
+	string: "Dragon Breath"
+	icon: icon_dragon_breath		
+	type: debuff
+	duration: 40
+	flags: [ unique channeled ]
+	aura_effect repeat: 
+	{ 
+		update_interval: 10
+		update_count: 4
+		ability: dragon_breath_tick
+	}
+}
+
+###############################################################################
+# Dragon Punch
+
+talent priest_dragon_punch:
+{
+	string: "Dragon Punch"
+	icon: icon_dragon_punch
+	prerequisites: [ ]	
+	talent_tree_points_required: 3
+	points:
+	[
+		{ ability: dragon_punch }
+	]
+}
+
+cooldown dragon_punch:
+{
+	duration: 60
+}
+
+ability dragon_punch:
+{
+	string: "Dragon Punch"
+	range: 1	
+	cooldowns: [ global dragon_punch ]
+	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+	states: [ default in_combat ]
+	icon: icon_dragon_punch
+	delay: 3
+	resource_cost mana: 30
+	talent_tree: priest_dragon
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: fire
+		base: weapon
+		level_curve: [ [ 1 4 ] [ 10 18 ] ]
+	}	
+	
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: improved_dragon_punch
+		probability: 20
+		aura: improved_dragon_punch
+		target_self: true
+	}
+}
+
+###############################################################################
+# Fury
+
+talent priest_dragon_fury:
+{
+	string: "Fury"
+	icon: icon_fury
+	prerequisites: [ priest_dragon_punch ]	
+	talent_tree_points_required: 3
+	points:
+	[
+		{ ability_modifier: improved_dragon_punch }
+	]
+}
+
+ability_modifier improved_dragon_punch:
+{
+	string: "Dragon Punch has a chance to increase your attack speed by 50% for 10 seconds."
+}
+
+aura improved_dragon_punch:
+{
+	string: "Fury"
+	icon: icon_fury
+	type: buff
+	duration: 100	
+	flags: [ unique ]
+	stat_modifiers:
+	{
+		attack_haste: { add: 50 } 
+	}
 }
 
 ###############################################################################
@@ -177,6 +328,7 @@ ability dwindle:
 	states: [ default in_combat ]	
 	icon: icon_dwindle
 	talent_tree: priest_dragon	
+	resource_cost mana: 20
 	
 	direct_effect threat:
 	{	

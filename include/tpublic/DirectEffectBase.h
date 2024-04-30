@@ -54,6 +54,11 @@ namespace tpublic
 				});
 				return true;
 			}
+			else if(aSource->m_name == "probability")
+			{
+				m_probability = aSource->GetUInt32();
+				return true;
+			}
 			else if(aSource->m_tag == "requirement")
 			{
 				m_requirements.push_back(Requirement(aSource));
@@ -78,6 +83,7 @@ namespace tpublic
 			IWriter*												aStream) const 
 		{
 			aStream->WriteUInt(m_flags);
+			aStream->WriteUInt(m_probability);
 			aStream->WriteUInt(m_mustHaveAbilityModifierId);
 			aStream->WriteUInts(m_mustNotHaveAbilityModifierIds);
 			aStream->WriteObjects(m_requirements);
@@ -88,6 +94,8 @@ namespace tpublic
 			IReader*												aStream) 
 		{
 			if (!aStream->ReadUInt(m_flags))
+				return false;
+			if (!aStream->ReadUInt(m_probability))
 				return false;
 			if (!aStream->ReadUInt(m_mustHaveAbilityModifierId))
 				return false;
@@ -124,6 +132,7 @@ namespace tpublic
 		std::vector<Requirement>	m_requirements;
 		uint32_t					m_mustHaveAbilityModifierId = 0;
 		std::vector<uint32_t>		m_mustNotHaveAbilityModifierIds;
+		uint32_t					m_probability = 0;
 	};
 
 }

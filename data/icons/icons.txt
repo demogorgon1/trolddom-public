@@ -183,6 +183,9 @@ sprites:
 	sprite icon_dragon_skin : { tags: [ icon ] }
 	sprite icon_meditation : { tags: [ icon ] }
 	sprite icon_resistance_aura : { tags: [ icon ] }
+	sprite icon_dragon_punch : { tags: [ icon ] }
+	sprite icon_fury : { tags: [ icon ] }
+	sprite icon_dragon_breath : { tags: [ icon ] }
 		
 }
 
