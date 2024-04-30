@@ -67,7 +67,9 @@ ability dragon_breath_tick:
 	string: "Dragon Breath"
 	icon: icon_dragon_breath		
 	states: [ default in_combat ]
-	flags: [ always_in_range always_in_line_of_sight ]
+	flags: [ always_in_range always_in_line_of_sight target_aoe target_aoe_hostile ]
+	aoe_cap: 5
+	aoe_radius: 1
 	
 	direct_effect damage:
 	{	
