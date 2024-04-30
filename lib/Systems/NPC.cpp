@@ -1,6 +1,7 @@
 #include "../Pcheader.h"
 
 #include <tpublic/Components/Auras.h>
+#include <tpublic/Components/CombatPrivate.h>
 #include <tpublic/Components/CombatPublic.h>
 #include <tpublic/Components/Lootable.h>
 #include <tpublic/Components/NPC.h>
@@ -62,20 +63,20 @@ namespace tpublic::Systems
 	{		
 		Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
 	
-		// Initialize resources
+		// Initialize resources		
 		{
-			Components::CombatPublic* combat = GetComponent<Components::CombatPublic>(aComponents);
+			Components::CombatPublic* combatPublic = GetComponent<Components::CombatPublic>(aComponents);
 
 			for (const Components::NPC::ResourceEntry& resource : npc->m_resources.m_entries)
 			{
-				combat->AddResourceMax(resource.m_id, resource.m_max);
+				combatPublic->AddResourceMax(resource.m_id, resource.m_max);
 
 				const Resource::Info* info = Resource::GetInfo((Resource::Id)resource.m_id);
 				if (info->m_flags & Resource::FLAG_DEFAULT_TO_MAX)
-					combat->SetResourceToMax(resource.m_id);
+					combatPublic->SetResourceToMax(resource.m_id);
 			}
 
-			combat->SetDirty();
+			combatPublic->SetDirty();
 		}
 
 		// Remember spawn position
@@ -348,7 +349,7 @@ namespace tpublic::Systems
 							if(npc->m_cooldowns.IsAbilityOnCooldown(ability))
 								continue;
 
-							if(!combat->HasResourcesForAbility(ability, NULL))
+							if(!combat->HasResourcesForAbility(ability, NULL, combat->GetResourceMax(Resource::ID_MANA)))
 								continue;
 
 							if(!aContext->m_worldView->WorldViewLineOfSight(targetPosition->m_position, position->m_position))

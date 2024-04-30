@@ -135,7 +135,7 @@ ability eternal_shine:
 	flags: [ spell target_other target_self target_friendly ]
 	states: [ default in_combat ]
 	icon: icon_shine
-	resource_cost mana: 25
+	resource_cost mana: 15
 	talent_tree: priest_healing
 
 	direct_effect apply_aura:
@@ -168,7 +168,7 @@ ability prayer_of_sanctuary:
 	flags: [ spell target_other target_self target_friendly target_aoe target_aoe_friendly aoe_low_health_only ]
 	states: [ default in_combat ]
 	icon: icon_sanctuary
-	resource_cost mana: 35
+	resource_cost mana: 25
 	talent_tree: priest_healing
 	aoe_radius: 5
 	aoe_cap: 5
@@ -289,7 +289,7 @@ ability greater_heal:
 	flags: [ spell target_other target_self target_friendly ]
 	states: [ default in_combat ]
 	icon: icon_greater_heal
-	resource_cost mana: 20
+	resource_cost mana: 25
 	talent_tree: priest_healing
 
 	direct_effect heal:
@@ -316,7 +316,7 @@ ability minor_heal:
 	flags: [ spell target_other target_self target_friendly ]
 	states: [ default in_combat ]
 	icon: icon_heal
-	resource_cost mana: 8
+	resource_cost mana: 15
 	talent_tree: priest_healing
 
 	direct_effect heal:
@@ -371,7 +371,7 @@ ability blessing:
 	flags: [ spell target_other target_self target_friendly ]
 	states: [ default in_combat ]
 	icon: icon_holy_blessing
-	resource_cost mana: 10
+	resource_cost mana: 15
 	talent_tree: priest_healing
 
 	direct_effect apply_aura:
@@ -393,7 +393,7 @@ ability resurrection:
 	flags: [ spell target_aoe target_aoe_friendly ]
 	states: [ default ]
 	icon: icon_resurrection
-	resource_cost mana: 30
+	resource_cost mana: 35
 	talent_tree: priest_healing
 	aoe_cap: 1
 	aoe_radius: 0

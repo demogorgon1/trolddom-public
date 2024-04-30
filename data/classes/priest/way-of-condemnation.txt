@@ -103,7 +103,7 @@ ability fear:
 	flags: [ spell target_other target_hostile ]
 	states: [ default in_combat ]
 	icon: icon_fear
-	resource_cost mana: 20
+	resource_cost mana: 10
 	delay: 3
 	talent_tree: priest_condemnation
 	cast_time: 20
@@ -171,7 +171,7 @@ ability spiritual_crisis:
 	flags: [ spell target_other target_hostile ]
 	states: [ default in_combat ]
 	icon: icon_tree
-	resource_cost mana: 20
+	resource_cost mana: 10
 	target_particle_system: spiritual_crisis	
 	delay: 3
 	talent_tree: priest_condemnation

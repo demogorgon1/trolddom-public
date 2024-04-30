@@ -76,7 +76,7 @@ ability firebolt:
 	icon: icon_firebolt
 	speed: 5
 	projectile: firebolt
-	resource_cost mana: 10
+	resource_cost mana: 15
 	
 	direct_effect damage:
 	{
@@ -102,7 +102,7 @@ ability lake_of_fire:
 	icon: icon_lake_of_fire
 	cooldowns: [ global lake_of_fire ]	
 	aoe_radius: 2
-	resource_cost mana: 10
+	resource_cost mana: 15
 	
 	aoe_entity_spawn fire:
 	{

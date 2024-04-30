@@ -56,7 +56,7 @@ ability npc_firebolt:
 	icon: icon_firebolt
 	speed: 5
 	projectile: firebolt
-	resource_cost mana: 10	
+	resource_cost mana: 15	
 	
 	direct_effect damage:
 	{

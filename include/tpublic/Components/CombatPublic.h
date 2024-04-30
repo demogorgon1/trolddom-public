@@ -256,7 +256,8 @@ namespace tpublic
 			bool
 			HasResourcesForAbility(
 				const Data::Ability*								aAbility,
-				const std::vector<const Data::AbilityModifier*>*	aModifiers) const
+				const std::vector<const Data::AbilityModifier*>*	aModifiers,
+				uint32_t											aBaseMana) const
 			{
 				for(uint32_t resourceId = 1; resourceId < (uint32_t)Resource::NUM_IDS; resourceId++)
 				{
@@ -271,6 +272,12 @@ namespace tpublic
 						}						
 					}
 
+					if (resourceId == (uint32_t)Resource::ID_MANA)
+					{
+						// Mana cost is always as percentage of base mana
+						cost = ((int32_t)aBaseMana * cost) / 100;
+					}
+
 					if(cost > 0 && (uint32_t)cost > GetResource(resourceId))
 						return false;
 				}
@@ -280,7 +287,8 @@ namespace tpublic
 			bool
 			SubtractResourcesForAbility(
 				const Data::Ability*								aAbility,
-				const std::vector<const Data::AbilityModifier*>*	aModifiers)
+				const std::vector<const Data::AbilityModifier*>*	aModifiers,
+				uint32_t											aBaseMana)
 			{
 				for (uint32_t resourceId = 1; resourceId < (uint32_t)Resource::NUM_IDS; resourceId++)
 				{
@@ -293,6 +301,12 @@ namespace tpublic
 							if (modifier->m_modifyResourceCost.has_value() && modifier->m_modifyResourceCost->m_resourceId == resourceId)
 								cost += modifier->m_modifyResourceCost->m_value;
 						}						
+					}
+
+					if (resourceId == (uint32_t)Resource::ID_MANA)
+					{
+						// Mana cost is always as percentage of base mana
+						cost = ((int32_t)aBaseMana * cost) / 100;
 					}
 
 					if(cost > 0)

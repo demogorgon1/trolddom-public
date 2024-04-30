@@ -48,6 +48,12 @@ namespace tpublic
 							resourceEntry.m_id = resourceId;
 							resourceEntry.m_max = (uint32_t)value;
 							npc->m_resources.m_entries.push_back(resourceEntry);							
+
+							if(resourceId == Resource::ID_MANA)
+							{
+								// Initialize base mana 
+								combatPrivate->m_baseMana = resourceEntry.m_max;
+							}
 						}
 					}
 

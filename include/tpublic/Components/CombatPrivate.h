@@ -35,7 +35,8 @@ namespace tpublic
 				FIELD_ARMOR,
 				FIELD_BLOCK_VALUE,
 				FIELD_RAGE_DECAY_NOT_IN_COMBAT,
-				FIELD_RAGE_GENERATION_IN_COMBAT
+				FIELD_RAGE_GENERATION_IN_COMBAT,
+				FIELD_BASE_MANA
 			};
 
 			static void
@@ -58,6 +59,7 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_ARMOR, "armor", offsetof(CombatPrivate, m_armor));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_BLOCK_VALUE, "block_value", offsetof(CombatPrivate, m_blockValue));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_RAGE_DECAY_NOT_IN_COMBAT, "rage_decay_not_in_combat", offsetof(CombatPrivate, m_rageDecayNotInCombatPer5Sec));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_BASE_MANA, "base_mana", offsetof(CombatPrivate, m_baseMana));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_RAGE_GENERATION_IN_COMBAT, "rage_generation_in_combat", offsetof(CombatPrivate, m_rageGenerationInCombatPer5Sec));
 			}
 
@@ -81,6 +83,7 @@ namespace tpublic
 				m_blockValue = 0;
 				m_rageDecayNotInCombatPer5Sec = 6;
 				m_rageGenerationInCombatPer5Sec = 0;
+				m_baseMana = 0;
 			}
 
 			// Public data
@@ -101,6 +104,7 @@ namespace tpublic
 			uint32_t							m_blockValue = 0;
 			uint32_t							m_rageDecayNotInCombatPer5Sec = 0;
 			uint32_t							m_rageGenerationInCombatPer5Sec = 0;
+			uint32_t							m_baseMana = 0;
 		};
 
 	}
