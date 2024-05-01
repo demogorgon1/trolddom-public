@@ -388,6 +388,7 @@ namespace tpublic::MapGenerators
 			// We got a connection - make a path
 			std::vector<Vec2> path;
 			bool ok = aDistanceField.MakePath(m_random, connectPosition.value(), path);
+			(void)ok;
 			assert(ok);
 
 			size_t otherWalkableAreaIndex = GetWalkableAreaIndexByPosition(connectPosition.value());

@@ -22,6 +22,7 @@ namespace tpublic
 			ID_THREAT_MODIFIER,
 			ID_HEAL_OUTPUT_MODIFIER,
 			ID_HASTE_MODIFIER,
+			ID_IMMOBILIZE,
 
 			NUM_IDS
 		};
@@ -42,6 +43,7 @@ namespace tpublic
 			"threat_modifier",
 			"heal_output_modifier",
 			"haste_modifier",
+			"immobilize",
 		};
 
 		static_assert(sizeof(EFFECT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

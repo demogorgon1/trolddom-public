@@ -110,7 +110,7 @@ namespace tpublic::Systems
 		{
 			visibleAuras->m_seq = auras->m_seq;
 			visibleAuras->m_entries.clear();
-			visibleAuras->m_stunned = false;
+			visibleAuras->m_auraFlags = 0;
 
 			for (const std::unique_ptr<Components::Auras::Entry>& entry : auras->m_entries)
 			{
@@ -126,8 +126,11 @@ namespace tpublic::Systems
 					visibleAuras->m_entries.push_back(t);
 				}
 
-				if(!visibleAuras->m_stunned && entry->HasEffect(AuraEffect::ID_STUN))
-					visibleAuras->m_stunned = true;
+				if(entry->HasEffect(AuraEffect::ID_STUN))
+					visibleAuras->m_auraFlags |= Components::VisibleAuras::AURA_FLAG_STUNNED;
+
+				if (entry->HasEffect(AuraEffect::ID_IMMOBILIZE))
+					visibleAuras->m_auraFlags |= Components::VisibleAuras::AURA_FLAG_IMMOBILIZED;
 			}
 
 			visibleAuras->SetDirty();

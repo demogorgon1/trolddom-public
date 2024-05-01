@@ -17,6 +17,12 @@ namespace tpublic
 			static const Persistence::Id PERSISTENCE = Persistence::ID_NONE;
 			static const Replication REPLICATION = REPLICATION_PUBLIC;
 
+			enum AuraFlag : uint8_t
+			{
+				AURA_FLAG_STUNNED		= 0x01,
+				AURA_FLAG_IMMOBILIZED	= 0x02
+			};
+
 			struct Entry
 			{
 				void
@@ -54,7 +60,7 @@ namespace tpublic
 			enum Field
 			{
 				FIELD_ENTRIES,
-				FIELD_STUNNED
+				FIELD_AURA_FLAGS
 			};
 			
 			static void
@@ -62,7 +68,7 @@ namespace tpublic
 				ComponentSchema* aSchema)
 			{
 				aSchema->DefineCustomObjectsNoSource<Entry>(FIELD_ENTRIES, offsetof(VisibleAuras, m_entries));
-				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_STUNNED, NULL, offsetof(VisibleAuras, m_stunned));
+				aSchema->DefineCustomPODNoSource<uint8_t>(FIELD_AURA_FLAGS, offsetof(VisibleAuras, m_auraFlags));
 			}
 
 			bool 
@@ -77,9 +83,13 @@ namespace tpublic
 				return false;
 			}
 
+			// Helpers
+			bool		IsStunned() const { return m_auraFlags & AURA_FLAG_STUNNED; }
+			bool		IsImmobilized() const { return m_auraFlags & AURA_FLAG_IMMOBILIZED; }
+
 			// Public data
 			std::vector<Entry>	m_entries;			
-			bool				m_stunned = false;
+			uint8_t				m_auraFlags = 0;
 
 			// Internal
 			uint32_t			m_seq = 0;

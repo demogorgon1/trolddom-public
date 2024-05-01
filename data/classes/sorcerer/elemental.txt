@@ -5,17 +5,183 @@ talent_tree sorcerer_elemental:
 	
 	map_palette:
 	{
+		talent sorcerer_elemental_heat: "A"
+		talent sorcerer_elemental_cold: "B"
+		talent sorcerer_elemental_lake_of_fire: "C"
+		talent sorcerer_elemental_freeze_for_all: "D"
+		talent sorcerer_elemental_improved_frost_explosion: "E"
 		sprite talent_tree_down_arrow: "d"						
+		sprite talent_tree_right_arrow: "r"						
+		sprite talent_tree_down: "|"		
+		sprite talent_tree_horizontal: "-"		
+		sprite talent_tree_right_to_down: "x"		
 	}
 	
 	map:
 	[
+		"x-A.B.."
+		"d.|.d.."
+		"..|.DrE"
+		"..d...."
+		"..C...."
 	]
 	
 }
 
 ###############################################################################
+# Freeze For All
+
+talent sorcerer_elemental_freeze_for_all:
+{
+	string: "Freeze For All"
+	icon: icon_freeze_for_all
+	prerequisites: [ sorcerer_elemental_cold ]
+	talent_tree_points_required: 3
+	points:
+	[
+		{ ability_modifier: freeze_for_all }
+	]
+}
+
+ability_modifier freeze_for_all:
+{
+	string: "Your frost spells reduce the movement speed of the target for 8 seconds."
+}
+
+aura freeze_for_all:
+{
+	string: "Freeze For All"
+	description: "Reduced movement speed."
+	icon: icon_freeze_for_all		
+	type: debuff
+	duration: 80
+	flags: [ unique ]
+	
+	aura_effect move_speed_modifier:
+	{
+		move_speed: very_slow
+	}
+}
+
+###############################################################################
+# Improved Frost Explosion
+
+talent sorcerer_elemental_improved_frost_explosion:
+{
+	string: "Improved Frost Explosion"
+	icon: icon_frost_explosion
+	prerequisites: [ sorcerer_elemental_freeze_for_all ]
+	talent_tree_points_required: 3
+	points:
+	[
+		{ ability_modifier: improved_frost_explosion }
+	]
+}
+
+ability_modifier improved_frost_explosion:
+{
+	string: "Frost Explosion freezes enemies in place for 5 seconds."
+}
+
+aura improved_frost_explosion:
+{
+	string: "Frost Explosion"
+	description: "Immobilized."
+	icon: icon_frost_explosion		
+	type: debuff
+	duration: 50	
+	flags: [ unique ]
+	aura_effect immobilize: { }
+}
+
+###############################################################################
+# Heat
+
+talent sorcerer_elemental_heat:
+{
+	string: "Heat"
+	icon: icon_heat
+	talent_tree_points_required: 0
+	points:
+	[
+		{ aura: sorcerer_elemental_heat_1 }
+		{ aura: sorcerer_elemental_heat_2 }
+		{ aura: sorcerer_elemental_heat_3 }
+	]
+}
+
+aura sorcerer_elemental_heat_1:
+{
+	type: hidden
+	description: "Increases damage of your fire spells by 10%."
+	aura_effect damage_output_modifier: { type_mask: [ fire ] multiplier: 1.1 }
+}
+
+aura sorcerer_elemental_heat_2:
+{
+	type: hidden
+	description: "Increases damage of your fire spells by 20%."
+	aura_effect damage_output_modifier: { type_mask: [ fire ] multiplier: 1.2 }
+}
+
+aura sorcerer_elemental_heat_3:
+{
+	type: hidden
+	description: "Increases damage of your fire spells by 30%."
+	aura_effect damage_output_modifier: { type_mask: [ fire ] multiplier: 1.3 }
+}
+
+###############################################################################
+# Cold
+
+talent sorcerer_elemental_cold:
+{
+	string: "Cold"
+	icon: icon_cold
+	talent_tree_points_required: 0
+	points:
+	[
+		{ aura: sorcerer_elemental_cold_1 }
+		{ aura: sorcerer_elemental_cold_2 }
+		{ aura: sorcerer_elemental_cold_3 }
+	]
+}
+
+aura sorcerer_elemental_cold_1:
+{
+	type: hidden
+	description: "Increases damage of your frost spells by 10%."
+	aura_effect damage_output_modifier: { type_mask: [ frost ] multiplier: 1.1 }
+}
+
+aura sorcerer_elemental_cold_2:
+{
+	type: hidden
+	description: "Increases damage of your frost spells by 20%."
+	aura_effect damage_output_modifier: { type_mask: [ frost ] multiplier: 1.2 }
+}
+
+aura sorcerer_elemental_cold_3:
+{
+	type: hidden
+	description: "Increases damage of your frost spells by 30%."
+	aura_effect damage_output_modifier: { type_mask: [ frost ] multiplier: 1.3 }
+}
+
+###############################################################################
 # Lake of Fire
+
+talent sorcerer_elemental_lake_of_fire:
+{
+	string: "Lake of Fire"
+	icon: icon_lake_of_fire
+	talent_tree_points_required: 6
+	prerequisites: [ sorcerer_elemental_heat ]
+	points:
+	[
+		{ ability: lake_of_fire }
+	]
+}
 
 cooldown lake_of_fire:
 {
@@ -188,6 +354,12 @@ ability ice_lance:
 		damage_type: frost
 		base: [ 10 20 ]
 	}
+	
+	direct_effect apply_aura:
+	{	
+		must_have_ability_modifier: freeze_for_all
+		aura: freeze_for_all
+	}	
 }
 
 particle_system ice_lance:
@@ -230,6 +402,18 @@ ability frost_explosion:
 		flags: [ can_be_critical ]
 		damage_type: frost
 		base: [ 10 20 ]
+	}
+	
+	direct_effect apply_aura:
+	{	
+		must_have_ability_modifier: improved_frost_explosion
+		aura: improved_frost_explosion
+	}
+	
+	direct_effect apply_aura:
+	{	
+		must_have_ability_modifier: freeze_for_all
+		aura: freeze_for_all
 	}
 }
 

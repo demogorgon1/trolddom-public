@@ -391,7 +391,7 @@ namespace tpublic::Systems
 								aContext->m_eventQueue->EventQueueAbility(aEntityInstanceId, target->GetEntityInstanceId(), Vec2(), useAbility, ItemInstanceReference(), NULL);
 							}
 						}
-						else if(distanceSquared > 1)
+						else if(distanceSquared > 1 && !auras->HasEffect(AuraEffect::ID_IMMOBILIZE, NULL))
 						{
 							const MoveSpeed::Info* moveSpeedInfo = MoveSpeed::GetInfo(combat->m_moveSpeed);
 							if(npc->m_moveCooldownUntilTick + moveSpeedInfo->m_tickBias < aContext->m_tick)

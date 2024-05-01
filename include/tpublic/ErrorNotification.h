@@ -33,6 +33,7 @@ namespace tpublic
 			ID_CANNOT_SELL_ITEM,
 			ID_COULD_NOT_DO_THAT,
 			ID_FAILED_TO_CREATE_WORLD,
+			ID_IMMOBILIZED,
 
 			NUM_IDS
 		};
@@ -75,7 +76,8 @@ namespace tpublic
 			{ "You don't have your own world!" },
 			{ "Can't sell item!" },
 			{ "Could not do that!" },
-			{ "Failed to create world!" }
+			{ "Failed to create world!" },
+			{ "Immobilized!" }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);
