@@ -67,7 +67,7 @@ class sorcerer:
 			
 			unlock_abilities:
 			[			
-				lake_of_fire
+				ice_lance
 			]
 			
 			stats:
@@ -101,6 +101,7 @@ class sorcerer:
 			
 			unlock_abilities:
 			[
+				fireball
 			]
 			
 			stats:
@@ -117,6 +118,7 @@ class sorcerer:
 			
 			unlock_abilities:
 			[
+				frost_explosion
 			]
 			
 			stats:

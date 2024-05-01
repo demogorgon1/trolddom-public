@@ -7,6 +7,7 @@ sprites:
 
 	sprite effect_rock: { flags: [ centered doubled ] }
 	sprite effect_firebolt: { flags: [ centered doubled ] }
+	sprite effect_ice_lance: { flags: [ centered doubled ] }
 	
 	cursor: { position: [ 0 4 ] }
 	size: { width: 16 height: 16 }
@@ -37,5 +38,9 @@ sprites:
 	sprite effect_cloud_1: { flags: [ centered ] }
 	sprite effect_cloud_2: { flags: [ centered ] }
 	sprite effect_cloud_3: { flags: [ centered ] }
+	sprite effect_expl_0: { flags: [ centered ] }
+	sprite effect_expl_1: { flags: [ centered ] }
+	sprite effect_expl_2: { flags: [ centered ] }
+	sprite effect_expl_3: { flags: [ centered ] }
 	
 }

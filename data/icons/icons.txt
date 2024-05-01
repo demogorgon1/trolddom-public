@@ -191,7 +191,22 @@ sprites:
 	sprite icon_elemental : { tags: [ icon ] }
 	sprite icon_arcane : { tags: [ icon ] }
 	sprite icon_battle_mage : { tags: [ icon ] }
-		
+	sprite icon_fireball : { tags: [ icon ] }
+	sprite icon_ice_lance : { tags: [ icon ] }
+	sprite icon_frost_explosion : { tags: [ icon ] }
+	sprite icon_freeze_for_all : { tags: [ icon ] }
+	sprite icon_heat : { tags: [ icon ] }
+	sprite icon_cold : { tags: [ icon ] }
+	sprite icon_teleport : { tags: [ icon ] }
+	sprite icon_arcane_missile : { tags: [ icon ] }
+	sprite icon_void_lightning : { tags: [ icon ] }
+	sprite icon_sleep : { tags: [ icon ] }
+	sprite icon_mage_shield : { tags: [ icon ] }
+	sprite icon_wizard_strike : { tags: [ icon ] }
+	sprite icon_sunshine : { tags: [ icon ] }
+	
+	cursor: { position: [ 0 176 ] }		
+	
 }
 
 
