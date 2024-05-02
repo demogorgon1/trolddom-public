@@ -22,6 +22,7 @@ ability power_shield:
 	string: "Power Shield"
 	description: "Absorbs damage for up to 30 seconds."
 	cooldowns: [ global ]
+	resource_cost mana: 20
 	flags: [ target_self ]
 	states: [ default in_combat ]	
 	icon: icon_mage_shield

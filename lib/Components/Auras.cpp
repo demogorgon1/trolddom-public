@@ -207,6 +207,29 @@ namespace tpublic::Components
 		return damage;
 	}
 
+	bool			
+	Auras::UpdateCastTime(
+		const Manifest*								aManifest,
+		uint32_t									aAbilityId,
+		int32_t&									aCastTime)
+	{
+		bool modified = false;
+
+		for (std::unique_ptr<Entry>& entry : m_entries)
+		{
+			for (std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
+			{
+				if(effect->UpdateCastTime(aManifest, aAbilityId, entry->m_charges, aCastTime))
+					modified = true;
+			}
+		}
+
+		if(modified)
+			m_seq++;
+
+		return modified;
+	}
+
 	void		
 	Auras::RemoveAura(
 		uint32_t									aAuraId)

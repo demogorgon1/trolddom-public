@@ -163,6 +163,10 @@ namespace tpublic
 								DirectEffect::DamageType					aDamageType,
 								int32_t										aDamage,
 								int32_t&									aOutAbsorbed);
+			bool			UpdateCastTime(
+								const Manifest*								aManifest,
+								uint32_t									aAbilityId,
+								int32_t&									aCastTime);
 			void			RemoveAura(
 								uint32_t									aAuraId);
 			void			OnLoadedFromPersistence(

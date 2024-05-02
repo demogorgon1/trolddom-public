@@ -24,6 +24,7 @@ namespace tpublic
 			ID_HASTE_MODIFIER,
 			ID_IMMOBILIZE,
 			ID_ABSORB,
+			ID_CAST_MODIFIER,
 
 			NUM_IDS
 		};
@@ -45,7 +46,8 @@ namespace tpublic
 			"heal_output_modifier",
 			"haste_modifier",
 			"immobilize",
-			"absorb"
+			"absorb",
+			"cast_modifier"
 		};
 
 		static_assert(sizeof(EFFECT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

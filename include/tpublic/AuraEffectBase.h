@@ -179,6 +179,11 @@ namespace tpublic
 									Stat::Id						/*aStat*/,
 									uint32_t&						/*aOutNum*/,
 									uint32_t&						/*aOutDenom*/) const { return false; }		
+		virtual bool			UpdateCastTime(
+									const Manifest*					/*aManifest*/,
+									uint32_t						/*aAbilityId*/,
+									uint32_t&						/*aCharges*/,
+									int32_t&						/*aCastTime*/) { return false; }
 
 		// Public data
 		int32_t			m_updateInterval = 0;

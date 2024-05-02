@@ -5,11 +5,182 @@ talent_tree sorcerer_arcane:
 	
 	map_palette:
 	{
+		talent sorcerer_arcane_word_of_the_wise: "A"
+		talent sorcerer_arcane_improved_arcane_missile: "B"
+		talent sorcerer_arcane_insight: "C"
 		sprite talent_tree_down_arrow: "d"						
 	}
 	
 	map:
 	[
+		"A.B"		
+		"..d"
+		"..C"
 	]
 	
+}
+
+###############################################################################
+# Insight
+
+talent sorcerer_arcane_insight:
+{
+	string: "Insight"
+	icon: icon_insight
+	talent_tree_points_required: 3
+	prerequisites: [ sorcerer_arcane_improved_arcane_missile ]
+	points:
+	[
+		{ aura: arcane_insight }
+	]
+}
+
+aura arcane_insight:
+{
+	type: hidden
+	description: "Your next spell cast after a critical is instant."
+	aura_effect combat_event_trigger: 
+	{ 
+		combat_event<source>: critical
+		ability<self>: sorcerer_arcane_insight_trigger
+	}
+}
+
+ability sorcerer_arcane_insight_trigger:
+{
+	string: "Insight"
+	states: [ default in_combat ]
+	icon: icon_insight
+	
+	direct_effect apply_aura:
+	{
+		aura: arcane_insight_buff
+	}
+}
+
+aura arcane_insight_buff:
+{
+	string: "Insight"
+	type: buff
+	icon: icon_insight
+	flags: [ unique charged ]
+	charges: 1
+	duration: 100
+	aura_effect cast_modifier: 
+	{ 
+		ability_flags: [ spell ]
+		cast_time_multiplier: 0
+		use_charge: true
+	}
+}
+
+###############################################################################
+# Improved Arcane Missile
+
+talent sorcerer_arcane_improved_arcane_missile:
+{
+	string: "Improved Arcane Missile"
+	icon: icon_arcane_missile
+	talent_tree_points_required: 0
+	points:
+	[
+		{ ability_modifier: improved_arcane_missile_1 }
+		{ ability_modifier: improved_arcane_missile_2 }
+		{ ability_modifier: improved_arcane_missile_3 }
+	]
+}
+
+ability_modifier improved_arcane_missile_1:
+{
+	string: "Increases critical chance of Arcane Missile by 15%."	
+}
+
+ability_modifier improved_arcane_missile_2:
+{
+	string: "Increases critical chance of Arcane Missile by 30%."	
+}
+
+ability_modifier improved_arcane_missile_3:
+{
+	string: "Increases critical chance of Arcane Missile by 45%."	
+}
+
+###############################################################################
+# Word of the Wise
+
+talent sorcerer_arcane_word_of_the_wise:
+{
+	string: "Word of the Wise"
+	icon: icon_wisdom
+	talent_tree_points_required: 0
+	points:
+	[
+		{ aura: sorcerer_arcane_word_of_the_wise_1 }
+		{ aura: sorcerer_arcane_word_of_the_wise_2 }
+		{ aura: sorcerer_arcane_word_of_the_wise_3 }
+	]
+}
+
+aura sorcerer_arcane_word_of_the_wise_1:
+{
+	type: hidden
+	description: "Increases your Wisdom by 2%."
+	stat_modifiers: { wisdom: { add_percent: 2 } }
+}
+
+aura sorcerer_arcane_word_of_the_wise_2:
+{
+	type: hidden
+	description: "Increases your Wisdom by 4%."
+	stat_modifiers: { wisdom: { add_percent: 4 } }
+}
+
+aura sorcerer_arcane_word_of_the_wise_3:
+{
+	type: hidden
+	description: "Increases your Wisdom by 6%."
+	stat_modifiers: { wisdom: { add_percent: 6 } }
+}
+
+###############################################################################
+# Arcane Missile
+
+cooldown arcane_missile:
+{
+	duration: 50
+}
+
+ability arcane_missile:
+{
+	string: "Arcane Missile"
+	range: 8
+	cooldowns: [ global arcane_missile ]
+	flags: [ spell offensive target_other target_hostile can_miss ]
+	states: [ default in_combat ]
+	icon: icon_arcane_missile
+	talent_tree: sorcerer_arcane
+	speed: 8
+	projectile: arcane_missile
+	resource_cost mana: 15
+	
+	direct_effect damage:
+	{
+		conditional_critical_chance_bonus<improved_arcane_missile_1>: 15
+		conditional_critical_chance_bonus<improved_arcane_missile_2>: 30
+		conditional_critical_chance_bonus<improved_arcane_missile_3>: 45
+	
+		flags: [ can_be_critical ]
+		damage_type: arcane
+		base: [ 8 12 ]
+	}
+}
+
+particle_system arcane_missile:
+{
+	particle:
+	{
+		sprites: [ effect_arcane_missile ]
+		flags: [ attached no_rotation no_scaling ]
+		count: 1		
+	}
 }
