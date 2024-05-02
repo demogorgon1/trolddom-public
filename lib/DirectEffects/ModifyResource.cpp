@@ -89,10 +89,12 @@ namespace tpublic::DirectEffects
 		{
 			aResourceChangeQueue->AddResourceChange(
 				aId,
+				DirectEffect::INVALID_DAMAGE_TYPE,
 				aAbilityId,
 				aSource->GetEntityInstanceId(),
 				target->GetEntityInstanceId(),
 				combatPublic,
+				NULL,
 				resourceIndex,
 				(int32_t)m_function.EvaluateEntityInstance(aSource),
 				0);

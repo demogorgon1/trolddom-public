@@ -28,6 +28,7 @@ namespace tpublic
 					IWriter*					aWriter) const
 				{
 					aWriter->WriteUInt(m_auraId);
+					aWriter->WriteUInt(m_charges);
 
 					// Convert ticks into global UTC time stamps
 					int32_t currentTick = aWriter->GetTick();
@@ -54,7 +55,9 @@ namespace tpublic
 				{
 					if (!aReader->ReadUInt(m_auraId))
 						return false;
-					
+					if (!aReader->ReadUInt(m_charges))
+						return false;
+
 					// Convert global UTC time stamps into ticks
 					uint64_t startTimeStamp;
 					uint64_t endTimeStamp;
@@ -101,6 +104,7 @@ namespace tpublic
 				uint32_t										m_auraId = 0;
 				int32_t											m_start = 0;
 				int32_t											m_end = 0;
+				uint32_t										m_charges = 0;
 
 				// Not serialized
 				uint32_t										m_entityInstanceId = 0; 
@@ -155,6 +159,10 @@ namespace tpublic
 								tpublic::AuraEffectBase::CombatEventType	aType,
 								CombatEvent::Id								aCombatEventId,
 								AuraEffectBase::SecondaryAbilityCallback	aCallback) const;
+			int32_t			FilterDamageInputOnUpdate(		
+								DirectEffect::DamageType					aDamageType,
+								int32_t										aDamage,
+								int32_t&									aOutAbsorbed);
 			void			RemoveAura(
 								uint32_t									aAuraId);
 			void			OnLoadedFromPersistence(

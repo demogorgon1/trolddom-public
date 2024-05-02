@@ -147,7 +147,7 @@ namespace tpublic::DirectEffects
 		const Components::CombatPrivate* targetCombatPrivate = aTarget->GetComponent<Components::CombatPrivate>();
 		Components::CombatPublic* sourceCombatPublic = aSource->GetComponent<Components::CombatPublic>();
 		Components::CombatPublic* targetCombatPublic = aTarget->GetComponent<Components::CombatPublic>();
-		const Components::Auras* targetAuras = aTarget->GetComponent<Components::Auras>();
+		Components::Auras* targetAuras = aTarget->GetComponent<Components::Auras>();
 		const Components::Auras* sourceAuras = aSource->GetComponent<Components::Auras>();
 
 		if(targetCombatPublic == NULL)
@@ -246,10 +246,12 @@ namespace tpublic::DirectEffects
 
 				aResourceChangeQueue->AddResourceChange(
 					result,
+					m_damageType,
 					aAbilityId,
 					aSource->GetEntityInstanceId(),
 					aSource->GetEntityInstanceId(),
 					sourceCombatPublic,
+					NULL,
 					rageResourceIndex,
 					rage,
 					0);
@@ -267,10 +269,12 @@ namespace tpublic::DirectEffects
 
 				aResourceChangeQueue->AddResourceChange(
 					result,
+					m_damageType,
 					aAbilityId,
 					aSource->GetEntityInstanceId(),
 					aTarget->GetEntityInstanceId(),
 					targetCombatPublic,
+					targetAuras,
 					rageResourceIndex,
 					rage,
 					0);
@@ -283,10 +287,12 @@ namespace tpublic::DirectEffects
 		{
 			aResourceChangeQueue->AddResourceChange(
 				result,
+				m_damageType,
 				aAbilityId,
 				aSource->GetEntityInstanceId(),
 				aTarget->GetEntityInstanceId(),
 				targetCombatPublic,
+				targetAuras,
 				healthResourceIndex,
 				-(int32_t)damage,
 				blocked);

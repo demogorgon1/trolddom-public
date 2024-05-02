@@ -21,7 +21,8 @@ namespace tpublic
 			INVALID_EXPRESSION,
 
 			EXPRESSION_A,
-			EXPRESSION_A_MUL_X
+			EXPRESSION_A_MUL_X,
+			EXPRESSION_A_MUL_X_PLUS_B
 		};
 
 		enum Input : uint8_t
@@ -31,7 +32,8 @@ namespace tpublic
 			INPUT_HEALTH_CURRENT,
 			INPUT_HEALTH_MAX,
 			INPUT_MANA_CURRENT,
-			INPUT_MANA_MAX
+			INPUT_MANA_MAX,
+			INPUT_LEVEL
 		};
 
 		static Expression
@@ -43,6 +45,8 @@ namespace tpublic
 				return EXPRESSION_A;
 			else if(t == "a_mul_x")
 				return EXPRESSION_A_MUL_X;
+			else if (t == "a_mul_x_plus_b")
+				return EXPRESSION_A_MUL_X_PLUS_B;
 			TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid expression.", aSource->GetIdentifier());
 			return INVALID_EXPRESSION;
 		}
@@ -60,6 +64,8 @@ namespace tpublic
 				return INPUT_HEALTH_CURRENT;
 			else if (t == "mana_max")
 				return INPUT_HEALTH_MAX;
+			else if (t == "level")
+				return INPUT_LEVEL;
 			TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid input.", aSource->GetIdentifier());
 			return INVALID_INPUT;
 		}
@@ -88,6 +94,8 @@ namespace tpublic
 						m_x = SourceToInput(aChild);
 					else if(aChild->m_name == "a")
 						m_a = aChild->GetFloat();
+					else if (aChild->m_name == "b")
+						m_b = aChild->GetFloat();
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 				});
@@ -101,6 +109,7 @@ namespace tpublic
 			aWriter->WritePOD(m_expression);
 			aWriter->WritePOD(m_x);
 			aWriter->WriteFloat(m_a);
+			aWriter->WriteFloat(m_b);
 		}
 
 		bool
@@ -111,9 +120,17 @@ namespace tpublic
 				return false;
 			if (!aReader->ReadPOD(m_x))
 				return false;
-			if(!aReader->ReadFloat(m_a))
+			if (!aReader->ReadFloat(m_a))
+				return false;
+			if (!aReader->ReadFloat(m_b))
 				return false;
 			return true;
+		}
+
+		bool 
+		IsSet() const
+		{
+			return m_expression != INVALID_EXPRESSION;
 		}
 
 		float		Evaluate(
@@ -126,5 +143,6 @@ namespace tpublic
 		Expression		m_expression = INVALID_EXPRESSION;
 		Input			m_x = INVALID_INPUT;
 		float			m_a = 0.0f;
+		float			m_b = 0.0f;
 	};
 }

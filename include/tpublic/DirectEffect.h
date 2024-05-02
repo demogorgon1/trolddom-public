@@ -15,6 +15,8 @@ namespace tpublic
 
 		enum DamageType : uint8_t
 		{
+			INVALID_DAMAGE_TYPE,
+
 			DAMAGE_TYPE_PHYSICAL,
 			DAMAGE_TYPE_BLEED,
 			DAMAGE_TYPE_FROST,		

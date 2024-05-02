@@ -1,5 +1,6 @@
 #pragma once
 
+#include "AuraEffects/Absorb.h"
 #include "AuraEffects/CombatEventTrigger.h"
 #include "AuraEffects/DamageInputModifier.h"
 #include "AuraEffects/DamageOutputModifier.h"
@@ -23,6 +24,7 @@ namespace tpublic
 	public:
 		AuraEffectFactory()
 		{
+			_Register<AuraEffects::Absorb>();
 			_Register<AuraEffects::CombatEventTrigger>();
 			_Register<AuraEffects::DamageInputModifier>();
 			_Register<AuraEffects::DamageOutputModifier>();

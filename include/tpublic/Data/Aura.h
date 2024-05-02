@@ -2,6 +2,7 @@
 
 #include "../AuraEffectBase.h"
 #include "../AuraEffectFactory.h"
+#include "../CombatFunction.h"
 #include "../DataBase.h"
 #include "../StatModifiers.h"
 
@@ -75,12 +76,13 @@ namespace tpublic
 
 			enum Flag : uint8_t
 			{
-				FLAG_UNIQUE = 0x01,
-				FLAG_CHANNELED = 0x02,
-				FLAG_HIDE_DESCRIPTION = 0x04,
-				FLAG_CANCEL_IN_COMBAT = 0x08,
-				FLAG_PERSIST_IN_DEATH = 0x10,
-				FLAG_SILENT = 0x20
+				FLAG_UNIQUE				= 0x01,
+				FLAG_CHANNELED			= 0x02,
+				FLAG_HIDE_DESCRIPTION	= 0x04,
+				FLAG_CANCEL_IN_COMBAT	= 0x08,
+				FLAG_PERSIST_IN_DEATH	= 0x10,
+				FLAG_SILENT				= 0x20,
+				FLAG_CHARGED			= 0x40
 			};
 
 			static Type
@@ -119,6 +121,8 @@ namespace tpublic
 						flags |= FLAG_PERSIST_IN_DEATH;
 					else if (strcmp(string, "silent") == 0)
 						flags |= FLAG_SILENT;
+					else if (strcmp(string, "charged") == 0)
+						flags |= FLAG_CHARGED;
 					else
 						TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid aura flag.", string);
 				});
@@ -167,6 +171,8 @@ namespace tpublic
 							m_description = aChild->GetString();
 						else if (aChild->m_name == "stat_modifiers")
 							m_statModifiers = std::make_unique<StatModifiers>(aChild);
+						else if(aChild->m_name == "charges")
+							m_charges = CombatFunction(aChild);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 					}
@@ -185,6 +191,7 @@ namespace tpublic
 				aStream->WriteString(m_string);
 				aStream->WriteString(m_description);
 				aStream->WriteOptionalObjectPointer(m_statModifiers);
+				m_charges.ToStream(aStream);
 			}
 
 			bool
@@ -207,6 +214,8 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadOptionalObjectPointer(m_statModifiers))
 					return false;
+				if(!m_charges.FromStream(aStream))
+					return false;
 				return true;
 			}
 
@@ -219,6 +228,7 @@ namespace tpublic
 			uint8_t											m_flags = 0;
 			std::vector<std::unique_ptr<AuraEffectEntry>>	m_auraEffects;
 			std::unique_ptr<StatModifiers>					m_statModifiers;
+			CombatFunction									m_charges;
 		};
 
 	}

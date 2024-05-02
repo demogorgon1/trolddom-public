@@ -79,6 +79,9 @@ namespace tpublic::Systems
 					}
 				}
 
+				if((aura->m_flags & Data::Aura::FLAG_CHARGED) != 0 && entry->m_charges == 0)
+					entry->m_cancel = true;
+
 				if(entry->m_cancel || (!entry->m_noEffects && entry->m_effects.size() == 0) || (entry->m_end != 0 && aContext->m_tick >= entry->m_end))
 				{
 					entry.reset();

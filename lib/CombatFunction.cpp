@@ -40,6 +40,11 @@ namespace tpublic
 					return (float)aCombatPublic->GetResourceMax(Resource::ID_MANA);
 				break;
 
+			case CombatFunction::INPUT_LEVEL:
+				if (aCombatPublic != NULL)
+					return (float)aCombatPublic->m_level;
+				break;
+
 			default:
 				break;
 			}
@@ -62,6 +67,9 @@ namespace tpublic
 
 		case EXPRESSION_A_MUL_X:
 			return m_a * _GetInput(aCombatPublic, aCombatPrivate, m_x);
+
+		case EXPRESSION_A_MUL_X_PLUS_B:
+			return m_a * _GetInput(aCombatPublic, aCombatPrivate, m_x) + m_b;
 
 		default:
 			break;

@@ -13,3 +13,37 @@ talent_tree sorcerer_battle_mage:
 	]
 	
 }
+
+###############################################################################
+# Power Shield
+
+ability power_shield:
+{
+	string: "Power Shield"
+	description: "Absorbs damage for up to 30 seconds."
+	cooldowns: [ global ]
+	flags: [ target_self ]
+	states: [ default in_combat ]	
+	icon: icon_mage_shield
+	talent_tree: sorcerer_battle_mage	
+	
+	direct_effect apply_aura:
+	{
+		aura: power_shield
+	}
+}
+
+aura power_shield:
+{	
+	string: "Power Shield"
+	description: "Absorbs damage."
+	type: buff
+	duration: 300
+	flags: [ unique charged ]	
+	icon: icon_mage_shield
+	charges: { expression: a_mul_x_plus_b a: 1.5 b: 8 x: level }	
+	aura_effect absorb:
+	{
+	}
+	
+}

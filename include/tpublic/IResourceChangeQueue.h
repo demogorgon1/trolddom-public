@@ -8,6 +8,7 @@ namespace tpublic
 
 	namespace Components
 	{
+		struct Auras;
 		struct CombatPublic;
 	}
 
@@ -20,21 +21,23 @@ namespace tpublic
 
 		// Virtual interface
 		virtual void		AddResourceChange(
-								CombatEvent::Id					aCombatEventId,
-								uint32_t						aAbilityId,
-								uint32_t						aSourceEntityInstanceId,
-								uint32_t						aTargetEntityInstanceId,
-								Components::CombatPublic*		aCombat,
-								size_t							aResourceIndex,
-								int32_t							aChange,
-								uint32_t						aBlocked) = 0;
+								CombatEvent::Id						aCombatEventId,
+								tpublic::DirectEffect::DamageType	aDamageType,
+								uint32_t							aAbilityId,
+								uint32_t							aSourceEntityInstanceId,
+								uint32_t							aTargetEntityInstanceId,
+								Components::CombatPublic*			aCombat,
+								Components::Auras*					aAuras,
+								size_t								aResourceIndex,
+								int32_t								aChange,
+								uint32_t							aBlocked) = 0;
 		virtual void		AddUpdateCallback(
-								UpdateCallback					aUpdateCallback) = 0;
+								UpdateCallback						aUpdateCallback) = 0;
 		virtual void		AddSimpleDirectEffect(
-								uint32_t						aSourceEntityInstanceId,
-								uint32_t						aTargetEntityInstanceId,
-								SimpleDirectEffect::Id			aSimpleDirectEffectId,
-								uint32_t						aParam) = 0;
+								uint32_t							aSourceEntityInstanceId,
+								uint32_t							aTargetEntityInstanceId,
+								SimpleDirectEffect::Id				aSimpleDirectEffectId,
+								uint32_t							aParam) = 0;
 
 	};
 

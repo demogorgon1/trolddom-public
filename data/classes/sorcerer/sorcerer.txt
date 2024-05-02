@@ -18,6 +18,10 @@ class sorcerer:
 	
 	start_map open_world: [ ]
 	start_equipment main_hand: weapon_gnarly_staff
+	start_equipment chest: chest_tattered_robe
+	start_equipment feet: feet_tattered_slippers
+	start_equipment legs: legs_tattered_pants
+	start_inventory: [ consumable_dry_bread consumable_dry_bread consumable_dry_bread consumable_dry_bread consumable_dry_bread ]
 
 	stats_conversion:
 	{
@@ -84,6 +88,7 @@ class sorcerer:
 			
 			unlock_abilities:
 			[			
+				power_shield
 			]
 			
 			stats:

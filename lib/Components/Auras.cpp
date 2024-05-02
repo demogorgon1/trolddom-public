@@ -188,6 +188,25 @@ namespace tpublic::Components
 		}
 	}
 
+	int32_t			
+	Auras::FilterDamageInputOnUpdate(
+		DirectEffect::DamageType					aDamageType,
+		int32_t										aDamage,
+		int32_t&									aOutAbsorbed)
+	{
+		int32_t damage = aDamage;
+		for (std::unique_ptr<Entry>& entry : m_entries)
+		{
+			for (std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
+				damage = effect->FilterDamageInputOnUpdate(aDamageType, damage, entry->m_charges, aOutAbsorbed);
+		}
+
+		if(damage != aDamage)
+			m_seq++;
+
+		return damage;
+	}
+
 	void		
 	Auras::RemoveAura(
 		uint32_t									aAuraId)

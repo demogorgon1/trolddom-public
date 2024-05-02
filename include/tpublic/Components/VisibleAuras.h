@@ -33,6 +33,7 @@ namespace tpublic
 					aStream->WriteUInt(m_entityInstanceId);
 					aStream->WriteInt(m_start);
 					aStream->WriteInt(m_end);
+					aStream->WriteUInt(m_charges);
 				}
 
 				bool
@@ -47,6 +48,8 @@ namespace tpublic
 						return false;
 					if (!aStream->ReadInt(m_end))
 						return false;
+					if (!aStream->ReadUInt(m_charges))
+						return false;
 					return true;
 				}
 
@@ -55,6 +58,7 @@ namespace tpublic
 				uint32_t		m_entityInstanceId = 0;
 				int32_t			m_start = 0;
 				int32_t			m_end = 0;
+				uint32_t		m_charges = 0;
 			};
 
 			enum Field

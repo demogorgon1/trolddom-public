@@ -152,6 +152,11 @@ namespace tpublic
 									uint32_t						/*aTargetEntityInstanceId*/,
 									SystemBase::Context*			/*aContext*/,
 									const Manifest*					/*aManifest*/) { return false; }
+		virtual int32_t			FilterDamageInputOnUpdate(
+									DirectEffect::DamageType		/*aDamageType*/,
+									int32_t							aDamage,
+									uint32_t&						/*aCharges*/,
+									int32_t&						/*aOutAbsorbed*/) { return aDamage; }
 		virtual AuraEffectBase*	Copy() const { assert(false); return NULL; }
 		virtual int32_t			FilterDamageInput(
 									DirectEffect::DamageType		/*aDamageType*/,

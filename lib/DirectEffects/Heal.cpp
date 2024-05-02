@@ -117,10 +117,12 @@ namespace tpublic::DirectEffects
 		{
 			aResourceChangeQueue->AddResourceChange(
 				result,
+				DirectEffect::INVALID_DAMAGE_TYPE,
 				aAbilityId,
 				aSource->GetEntityInstanceId(),
 				aTarget->GetEntityInstanceId(),
 				targetCombatPublic,
+				NULL,
 				healthResourceIndex,
 				(int32_t)heal,
 				0);
