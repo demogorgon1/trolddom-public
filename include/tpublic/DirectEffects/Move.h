@@ -18,12 +18,14 @@ namespace tpublic
 			{
 				INVALID_DESTINATION,
 
-				DESTINATION_TARGET_ADJACENT
+				DESTINATION_TARGET_ADJACENT,
+				DESTINATION_AOE_CENTER
 			};
 
 			enum MoveFlag : uint8_t
 			{
-				MOVE_FLAG_WALKABLE_PATH_REQUIRED = 0x01
+				MOVE_FLAG_WALKABLE_PATH_REQUIRED	= 0x01,
+				MOVE_FLAG_SET_TELEPORTED			= 0x02
 			};
 
 			static Destination
@@ -33,6 +35,8 @@ namespace tpublic
 				std::string_view t(aSource->GetIdentifier());
 				if(t == "target_adjacent")
 					return DESTINATION_TARGET_ADJACENT;
+				else if (t == "aoe_center")
+					return DESTINATION_AOE_CENTER;
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid destination.", aSource->GetIdentifier());
 				return INVALID_DESTINATION;
 			}
@@ -48,6 +52,8 @@ namespace tpublic
 					std::string_view t(aChild->GetIdentifier());
 					if (t == "walkable_path_required")
 						moveFlags |= MOVE_FLAG_WALKABLE_PATH_REQUIRED;
+					else if (t == "set_teleported")
+						moveFlags |= MOVE_FLAG_SET_TELEPORTED;
 					else
 						TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid move flag.", aSource->GetIdentifier());
 				});
@@ -65,14 +71,14 @@ namespace tpublic
 
 			}
 
-			// EffectBase implementation
+			// DirectEffectBase implementation
 			void			FromSource(
 								const SourceNode*				aSource) override;
 			void			ToStream(
 								IWriter*						aStream) const override;
 			bool			FromStream(
 								IReader*						aStream) override;
-			CombatEvent::Id	Resolve(
+			Result			Resolve(
 								int32_t							aTick,	
 								std::mt19937&					aRandom,
 								const Manifest*					aManifest,
@@ -80,6 +86,7 @@ namespace tpublic
 								uint32_t						aAbilityId,
 								EntityInstance*					aSource,
 								EntityInstance*					aTarget,
+								const Vec2&						aAOETarget,
 								const ItemInstanceReference&	aItem,
 								IResourceChangeQueue*			aCombatResultQueue,
 								IAuraEventQueue*				aAuraEventQueue,

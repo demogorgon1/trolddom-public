@@ -59,6 +59,8 @@ namespace tpublic
 			Vec2								m_priorityList[MAX_PRIORITY_LIST_LENGTH];
 			uint32_t							m_priorityListLength = 0;
 			bool								m_canMoveOnAllNonViewBlockingTiles = false;
+			bool								m_setUpdatedOnServerFlag = false;
+			bool								m_setTeleportedFlag = false;
 		};
 
 		struct EventQueueMoveAdjacentRequest

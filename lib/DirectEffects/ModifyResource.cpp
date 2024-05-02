@@ -66,7 +66,7 @@ namespace tpublic::DirectEffects
 		return true;
 	}
 
-	CombatEvent::Id
+	DirectEffectBase::Result
 	ModifyResource::Resolve(
 		int32_t							/*aTick*/,
 		std::mt19937&					/*aRandom*/,
@@ -75,6 +75,7 @@ namespace tpublic::DirectEffects
 		uint32_t						aAbilityId,
 		EntityInstance*					aSource,
 		EntityInstance*					aTarget,
+		const Vec2&						/*aAOETarget*/,
 		const ItemInstanceReference&	/*aItem*/,
 		IResourceChangeQueue*			aResourceChangeQueue,
 		IAuraEventQueue*				/*aAuraEventQueue*/,
@@ -100,7 +101,7 @@ namespace tpublic::DirectEffects
 				0);
 		}
 
-		return aId;
+		return Result();
 	}
 
 }

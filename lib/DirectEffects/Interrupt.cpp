@@ -46,15 +46,16 @@ namespace tpublic::DirectEffects
 		return true;
 	}
 
-	CombatEvent::Id
+	DirectEffectBase::Result
 	Interrupt::Resolve(
 		int32_t							/*aTick*/,
 		std::mt19937&					/*aRandom*/,
 		const Manifest*					aManifest,
-		CombatEvent::Id					aId,
+		CombatEvent::Id					/*aId*/,
 		uint32_t						/*aAbilityId*/,
 		EntityInstance*					aSource,
 		EntityInstance*					aTarget,
+		const Vec2&						/*aAOETarget*/,
 		const ItemInstanceReference&	/*aItem*/,
 		IResourceChangeQueue*			/*aCombatResultQueue*/,
 		IAuraEventQueue*				/*aAuraEventQueue*/,
@@ -73,7 +74,7 @@ namespace tpublic::DirectEffects
 			}
 		}
 
-		return aId;
+		return Result();
 	}
 
 }

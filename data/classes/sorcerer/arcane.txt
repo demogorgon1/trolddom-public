@@ -8,6 +8,7 @@ talent_tree sorcerer_arcane:
 		talent sorcerer_arcane_word_of_the_wise: "A"
 		talent sorcerer_arcane_improved_arcane_missile: "B"
 		talent sorcerer_arcane_insight: "C"
+		talent sorcerer_arcane_teleport: "D"
 		sprite talent_tree_down_arrow: "d"						
 	}
 	
@@ -15,9 +16,67 @@ talent_tree sorcerer_arcane:
 	[
 		"A.B"		
 		"..d"
-		"..C"
+		"D.C"
 	]
 	
+}
+
+###############################################################################
+# Teleport
+
+talent sorcerer_arcane_teleport:
+{
+	string: "Teleport"
+	icon: icon_teleport
+	talent_tree_points_required: 3
+	points:
+	[
+		{ ability: teleport }
+	]
+}
+
+cooldown teleport:
+{
+	duration: 200
+}
+
+ability teleport:
+{
+	string: "Teleport"
+	range: 10
+	cast_time: 15
+	cooldowns: [ global teleport ]
+	flags: [ spell target_aoe target_aoe_always_self ]
+	states: [ default in_combat ]
+	icon: icon_teleport
+	resource_cost mana: 20
+	talent_tree: sorcerer_arcane
+	aoe_cap: 1
+	aoe_radius: 0
+	delay: 3
+	source_particle_system: teleport
+
+	direct_effect move:
+	{			
+		destination: aoe_center
+		move_flags: [ set_teleported ]
+	}
+}
+
+particle_system teleport:
+{
+	particle:
+	{
+		sprites: [ effect_teleport_0 effect_teleport_1 effect_teleport_2 effect_teleport_1 effect_teleport_0 ]
+		sprite_interval: 100
+		flags: [ attached blend_add ]
+		duration: 500
+		count: 1		
+		scale: 1.8
+		alpha: 0.8
+		fade_in: 100
+		fade_out: 100
+	}
 }
 
 ###############################################################################

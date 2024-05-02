@@ -68,7 +68,7 @@ namespace tpublic::DirectEffects
 		return true;
 	}
 
-	CombatEvent::Id
+	DirectEffectBase::Result
 	Heal::Resolve(
 		int32_t							/*aTick*/,
 		std::mt19937&					aRandom,
@@ -77,6 +77,7 @@ namespace tpublic::DirectEffects
 		uint32_t						aAbilityId,
 		EntityInstance*					aSource,
 		EntityInstance*					aTarget,
+		const Vec2&						/*aAOETarget*/,
 		const ItemInstanceReference&	/*aItem*/,
 		IResourceChangeQueue*			aResourceChangeQueue,
 		IAuraEventQueue*				/*aAuraEventQueue*/,
@@ -87,7 +88,7 @@ namespace tpublic::DirectEffects
 		Components::CombatPublic* targetCombatPublic = aTarget->GetComponent<Components::CombatPublic>();
 
 		if(sourceCombatPrivate == NULL || targetCombatPublic == NULL)
-			return aId;
+			return Result();
 
 		uint32_t heal = Helpers::RandomInRange(aRandom, m_baseMin, m_baseMax);
 				
@@ -143,7 +144,7 @@ namespace tpublic::DirectEffects
 			}
 		}
 
-		return aId;
+		return { result };
 	}
 
 }

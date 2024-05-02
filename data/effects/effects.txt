@@ -43,5 +43,11 @@ sprites:
 	sprite effect_expl_1: { flags: [ centered ] }
 	sprite effect_expl_2: { flags: [ centered ] }
 	sprite effect_expl_3: { flags: [ centered ] }
+
+	cursor: { position: [ 0 44 ] }
+	size: { width: 16 height: 16 }
+	sprite effect_teleport_0: { flags: [ centered ] }
+	sprite effect_teleport_1: { flags: [ centered ] }
+	sprite effect_teleport_2: { flags: [ centered ] }
 	
 }

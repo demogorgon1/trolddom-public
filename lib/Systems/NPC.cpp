@@ -499,9 +499,12 @@ namespace tpublic::Systems
 			aEntityState != EntityState::ID_DESPAWNING && 
 			aEntityState != EntityState::ID_DESPAWNED;
 
-		if(position->m_block != block)
+		if(position->IsBlocking() != block)
 		{
-			position->m_block = block;
+			if(block)
+				position->SetBlocking();
+			else
+				position->ClearBlocking();
 			position->SetDirty();
 		}
 

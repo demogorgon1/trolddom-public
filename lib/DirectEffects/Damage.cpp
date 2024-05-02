@@ -128,7 +128,7 @@ namespace tpublic::DirectEffects
 		return true;
 	}
 
-	CombatEvent::Id
+	DirectEffectBase::Result
 	Damage::Resolve(
 		int32_t							/*aTick*/,
 		std::mt19937&					aRandom,
@@ -137,6 +137,7 @@ namespace tpublic::DirectEffects
 		uint32_t						aAbilityId,
 		EntityInstance*					aSource,
 		EntityInstance*					aTarget,
+		const Vec2&						/*aAOETarget*/,
 		const ItemInstanceReference&	/*aItem*/,
 		IResourceChangeQueue*			aResourceChangeQueue,
 		IAuraEventQueue*				/*aAuraEventQueue*/,
@@ -151,7 +152,7 @@ namespace tpublic::DirectEffects
 		const Components::Auras* sourceAuras = aSource->GetComponent<Components::Auras>();
 
 		if(targetCombatPublic == NULL)
-			return aId;
+			return Result();
 
 		uint32_t damage = 0;
 
@@ -308,7 +309,7 @@ namespace tpublic::DirectEffects
 				aEventQueue->EventQueueThreat(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), threat);
 		}
 
-		return result;
+		return { result };
 	}
 
 	float			

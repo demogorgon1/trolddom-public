@@ -34,9 +34,12 @@ namespace tpublic::Systems
 	{
 		Components::Position* position = GetComponent<Components::Position>(aComponents);
 		bool shouldBlock = aEntityState != EntityState::ID_DEAD;
-		if(shouldBlock != position->m_block)
+		if(shouldBlock != position->IsBlocking())
 		{
-			position->m_block = shouldBlock;
+			if(shouldBlock)
+				position->SetBlocking();
+			else
+				position->ClearBlocking();
 			position->SetDirty();
 		}
 

@@ -24,6 +24,7 @@ namespace tpublic
 	class Manifest;
 
 	struct ItemInstanceReference;
+	struct Vec2;
 
 	class DirectEffectBase
 	{
@@ -38,6 +39,12 @@ namespace tpublic
 		{
 
 		}
+
+		struct Result
+		{
+			CombatEvent::Id		m_updatedEventId = CombatEvent::INVALID_ID;
+			bool				m_generateImmediateCombatLogEvent = false;
+		};
 
 		bool
 		FromSourceBase(
@@ -113,19 +120,20 @@ namespace tpublic
 									IWriter*						/*aStream*/) const { assert(false); }
 		virtual bool			FromStream(
 									IReader*						/*aStream*/) { assert(false); return true; }
-		virtual CombatEvent::Id	Resolve(
+		virtual Result			Resolve(
 									int32_t							/*aTick*/,
 									std::mt19937&					/*aRandom*/,
 									const Manifest*					/*aManifest*/,
-									CombatEvent::Id					aId,
+									CombatEvent::Id					/*aId*/,
 									uint32_t						/*aAbilityId*/,
 									EntityInstance*					/*aSource*/,
 									EntityInstance*					/*aTarget*/,
+									const Vec2&						/*aAOETarget*/,
 									const ItemInstanceReference&	/*aItem*/,
 									IResourceChangeQueue*			/*aCombatResultQueue*/,
 									IAuraEventQueue*				/*aAuraEventQueue*/,
 									IEventQueue*					/*aEventQueue*/,
-									const IWorldView*				/*aWorldView*/) { return aId; }
+									const IWorldView*				/*aWorldView*/) { return Result(); }
 
 		// Public data
 		uint32_t					m_flags = 0;		

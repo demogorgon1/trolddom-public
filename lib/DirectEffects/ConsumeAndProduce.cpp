@@ -65,15 +65,16 @@ namespace tpublic
 			return true;
 		}
 
-		CombatEvent::Id
+		DirectEffectBase::Result
 		ConsumeAndProduce::Resolve(
 			int32_t							/*aTick*/,
 			std::mt19937&					/*aRandom*/,
 			const Manifest*					aManifest,
-			CombatEvent::Id					aId,
+			CombatEvent::Id					/*aId*/,
 			uint32_t						/*aAbilityId*/,
 			EntityInstance*					aSource,
 			EntityInstance*					/*aTarget*/,
+			const Vec2&						/*aAOETarget*/,
 			const ItemInstanceReference&	/*aItem*/,
 			IResourceChangeQueue*			/*aCombatResultQueue*/,
 			IAuraEventQueue*				/*aAuraEventQueue*/,
@@ -116,7 +117,7 @@ namespace tpublic
 					}
 				}
 			}
-			return aId;
+			return Result();
 		}
 
 	}

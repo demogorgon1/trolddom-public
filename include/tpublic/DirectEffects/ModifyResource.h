@@ -34,7 +34,7 @@ namespace tpublic
 								IWriter*						aStream) const override;
 			bool			FromStream(
 								IReader*						aStream) override;
-			CombatEvent::Id	Resolve(
+			Result			Resolve(
 								int32_t							aTick,
 								std::mt19937&					aRandom,
 								const Manifest*					aManifest,
@@ -42,6 +42,7 @@ namespace tpublic
 								uint32_t						aAbilityId,
 								EntityInstance*					aSource,
 								EntityInstance*					aTarget,
+								const Vec2&						aAOETarget,
 								const ItemInstanceReference&	aItem,
 								IResourceChangeQueue*			aResourceChangeQueue,
 								IAuraEventQueue*				aAuraEventQueue,

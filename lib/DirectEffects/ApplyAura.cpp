@@ -72,15 +72,16 @@ namespace tpublic
 			return true;
 		}
 
-		CombatEvent::Id
+		DirectEffectBase::Result
 		ApplyAura::Resolve(
 			int32_t							/*aTick*/,
 			std::mt19937&					/*aRandom*/,
 			const Manifest*					aManifest,
-			CombatEvent::Id					aId,
+			CombatEvent::Id					/*aId*/,
 			uint32_t						aAbilityId,
 			EntityInstance*					aSource,
 			EntityInstance*					aTarget,
+			const Vec2&						/*aAOETarget*/,
 			const ItemInstanceReference&	/*aItem*/,
 			IResourceChangeQueue*			/*aCombatResultQueue*/,
 			IAuraEventQueue*				aAuraEventQueue,
@@ -138,7 +139,7 @@ namespace tpublic
 				aAuraEventQueue->ApplyAura(aAbilityId, m_auraId, aSource->GetEntityInstanceId(), targetEntity->GetEntityInstanceId(), effects);
 			}
 
-			return aId;
+			return Result();
 		}
 
 	}
