@@ -184,3 +184,37 @@ particle_system arcane_missile:
 		count: 1		
 	}
 }
+
+###############################################################################
+# Sleep
+
+ability sleep:
+{
+	string: "Sleep"
+	range: 8
+	cooldowns: [ global ]
+	flags: [ spell offensive target_other target_hostile can_miss ]
+	states: [ default in_combat ]
+	icon: icon_sleep
+	talent_tree: sorcerer_arcane
+	resource_cost mana: 15
+	cast_time: 20
+	
+	direct_effect apply_aura:
+	{
+		aura: sleep
+		threat: 25
+	}
+}
+
+aura sleep:
+{
+	string: "Sleep"
+	description: "Sleeping."
+	icon: icon_sleep
+	type: debuff
+	duration: 120
+	flags: [ unique ]
+	aura_effect stun: { }
+}
+

@@ -158,6 +158,7 @@ class sorcerer:
 			
 			unlock_abilities:
 			[			
+				sleep
 			]
 			
 			stats:
