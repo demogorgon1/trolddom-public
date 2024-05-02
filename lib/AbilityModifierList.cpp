@@ -25,19 +25,22 @@ namespace tpublic
 		{
 			const Data::AbilityModifier* abilityModifier = aManifest->GetById<Data::AbilityModifier>(abilityModifierId);
 
-			AbilityTable::iterator i = m_abilityTable.find(abilityModifier->m_abilityId);
-			Ability* entry = NULL;
-			if(i != m_abilityTable.end())
+			for(uint32_t abilityId : abilityModifier->m_abilityIds)
 			{
-				entry = i->second.get();
-			}
-			else
-			{
-				entry = new Ability();
-				m_abilityTable[abilityModifier->m_abilityId] = std::unique_ptr<Ability>(entry);
-			}
+				AbilityTable::iterator i = m_abilityTable.find(abilityId);
+				Ability* entry = NULL;
+				if (i != m_abilityTable.end())
+				{
+					entry = i->second.get();
+				}
+				else
+				{
+					entry = new Ability();
+					m_abilityTable[abilityId] = std::unique_ptr<Ability>(entry);
+				}
 
-			entry->m_modifiers.push_back(abilityModifier);
+				entry->m_modifiers.push_back(abilityModifier);
+			}
 		}
 
 		for (AbilityTable::iterator i = m_abilityTable.begin(); i != m_abilityTable.end();)

@@ -10,6 +10,8 @@ talent_tree sorcerer_elemental:
 		talent sorcerer_elemental_lake_of_fire: "C"
 		talent sorcerer_elemental_freeze_for_all: "D"
 		talent sorcerer_elemental_improved_frost_explosion: "E"
+		talent sorcerer_elemental_smolder: "F"
+		talent sorcerer_elemental_storm: "G"
 		sprite talent_tree_down_arrow: "d"						
 		sprite talent_tree_right_arrow: "r"						
 		sprite talent_tree_down: "|"		
@@ -19,13 +21,103 @@ talent_tree sorcerer_elemental:
 	
 	map:
 	[
-		"x-A.B.."
+		"x-A.B.G"
 		"d.|.d.."
-		"..|.DrE"
+		"F.|.DrE"
 		"..d...."
 		"..C...."
 	]
 	
+}
+
+###############################################################################
+# Storm
+
+talent sorcerer_elemental_storm:
+{
+	string: "Storm"
+	icon: icon_impact_1
+	points: 
+	[
+		{ ability_modifier: storm_1 }
+		{ ability_modifier: storm_2 }
+	]
+}
+
+ability_modifier storm_1:
+{
+	string: "Decreases casting time of Ice Lance and Firebolt by 0.5 seconds."
+	abilities: [ firebolt ice_lance ]
+	modify_cast_time: -5
+}
+
+ability_modifier storm_2:
+{
+	string: "Decreases casting time of Ice Lance and Firebolt by 1 second."
+	abilities: [ firebolt ice_lance ]
+	modify_cast_time: -10
+}
+
+###############################################################################
+# Smolder
+
+talent sorcerer_elemental_smolder:
+{
+	string: "Smolder"
+	icon: icon_fire
+	prerequisites: [ sorcerer_elemental_heat ]
+	talent_tree_points_required: 3
+	points:
+	[
+		{ ability_modifier: smolder_1 }
+		{ ability_modifier: smolder_2 }
+		{ ability_modifier: smolder_3 }
+	]
+}
+
+ability_modifier smolder_1:
+{
+	string: "Firebolt and Fireball has a chance to increase your spell haste by 15% for 5 seconds."
+}
+
+ability_modifier smolder_2:
+{
+	string: "Firebolt and Fireball has a chance to increase your spell haste by 30% for 5 seconds."
+}
+
+ability_modifier smolder_3:
+{
+	string: "Firebolt and Fireball has a chance to increase your spell haste by 45% for 5 seconds."
+}
+
+aura smolder_1:
+{
+	string: "Smolder"
+	icon: icon_fire		
+	type: buff
+	duration: 50
+	flags: [ unique ]	
+	stat_modifiers: { spell_haste: { add: 15 } }
+}
+
+aura smolder_2:
+{
+	string: "Smolder"
+	icon: icon_fire		
+	type: buff
+	duration: 50
+	flags: [ unique ]	
+	stat_modifiers: { spell_haste: { add: 30 } }
+}
+
+aura smolder_3:
+{
+	string: "Smolder"
+	icon: icon_fire		
+	type: buff
+	duration: 50
+	flags: [ unique ]	
+	stat_modifiers: { spell_haste: { add: 45 } }
 }
 
 ###############################################################################
@@ -284,6 +376,30 @@ ability firebolt:
 		damage_type: fire
 		base: [ 10 20 ]
 	}
+	
+	direct_effect apply_aura:
+	{
+		probability: 15
+		must_have_ability_modifier: smolder_1
+		aura: smolder_1
+		target_self: true
+	}
+	
+	direct_effect apply_aura:
+	{
+		probability: 15
+		must_have_ability_modifier: smolder_2
+		aura: smolder_2
+		target_self: true
+	}
+
+	direct_effect apply_aura:
+	{
+		probability: 15
+		must_have_ability_modifier: smolder_3
+		aura: smolder_3
+		target_self: true
+	}
 }
 
 particle_system firebolt:
@@ -319,6 +435,30 @@ ability fireball:
 		damage_type: fire
 		base: [ 20 30 ]
 	}
+	
+	direct_effect apply_aura:
+	{
+		probability: 15
+		must_have_ability_modifier: smolder_1
+		aura: smolder_1
+		target_self: true
+	}
+	
+	direct_effect apply_aura:
+	{
+		probability: 15
+		must_have_ability_modifier: smolder_2
+		aura: smolder_2
+		target_self: true
+	}
+
+	direct_effect apply_aura:
+	{
+		probability: 15
+		must_have_ability_modifier: smolder_3
+		aura: smolder_3
+		target_self: true
+	}	
 }
 
 particle_system fireball:
