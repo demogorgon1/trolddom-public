@@ -211,6 +211,7 @@ sprites:
 	sprite icon_improved_teleport : { tags: [ icon ] }
 	sprite icon_charging_combat : { tags: [ icon ] }
 	sprite icon_mage_swiftness : { tags: [ icon ] }
+	sprite icon_void_blade_storm : { tags: [ icon ] }	
 	
 }
 

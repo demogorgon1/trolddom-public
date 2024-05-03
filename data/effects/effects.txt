@@ -43,6 +43,7 @@ sprites:
 	sprite effect_expl_1: { flags: [ centered ] }
 	sprite effect_expl_2: { flags: [ centered ] }
 	sprite effect_expl_3: { flags: [ centered ] }
+	sprite effect_void_blade_storm: { flags: [ centered ] }
 
 	cursor: { position: [ 0 44 ] }
 	size: { width: 16 height: 16 }
