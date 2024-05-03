@@ -88,7 +88,7 @@ aura healing_favor:
 	icon: icon_favor
 	type: buff	
 	duration: 100
-	flags: [ unique ]
+	flags: [ unique magic ]
 	stat_modifiers: 
 	{ 
 		armor: { add_percent: 10 } 
@@ -116,7 +116,7 @@ aura eternal_shine:
 	icon: icon_shine
 	type: buff	
 	duration: 12000
-	flags: [ unique ]
+	flags: [ unique magic ]
 	stat_modifiers: 
 	{ 
 		strength: { add_percent: 2 } 
@@ -353,7 +353,7 @@ aura blessing:
 	icon: icon_holy_blessing		
 	type: buff	
 	duration: 100	
-	flags: [ unique ]
+	flags: [ unique magic ]
 	aura_effect repeat: 
 	{ 
 		update_interval: 10

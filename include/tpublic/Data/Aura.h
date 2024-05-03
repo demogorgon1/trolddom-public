@@ -69,6 +69,8 @@ namespace tpublic
 
 			enum Type : uint8_t
 			{	
+				INVALID_TYPE, 
+
 				TYPE_HIDDEN,
 				TYPE_DEBUFF,
 				TYPE_BUFF
@@ -82,7 +84,8 @@ namespace tpublic
 				FLAG_CANCEL_IN_COMBAT	= 0x08,
 				FLAG_PERSIST_IN_DEATH	= 0x10,
 				FLAG_SILENT				= 0x20,
-				FLAG_CHARGED			= 0x40
+				FLAG_CHARGED			= 0x40,
+				FLAG_MAGIC				= 0x80
 			};
 
 			static Type
@@ -123,6 +126,8 @@ namespace tpublic
 						flags |= FLAG_SILENT;
 					else if (strcmp(string, "charged") == 0)
 						flags |= FLAG_CHARGED;
+					else if (strcmp(string, "magic") == 0)
+						flags |= FLAG_MAGIC;
 					else
 						TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid aura flag.", string);
 				});

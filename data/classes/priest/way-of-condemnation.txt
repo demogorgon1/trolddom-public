@@ -86,7 +86,7 @@ aura fear:
 	icon: icon_fear		
 	type: debuff
 	duration: 120	
-	flags: [ unique ]
+	flags: [ unique magic ]
 	aura_effect stun:
 	{
 		fear: true
@@ -155,7 +155,7 @@ aura spiritual_crisis:
 	icon: icon_tree		
 	type: debuff
 	duration: 200	
-	flags: [ unique ]
+	flags: [ unique magic ]
 	stat_modifiers:
 	{
 		attack_haste: { add: -15 } 
@@ -394,7 +394,7 @@ aura condemnation:
 	icon: icon_holy_condemnation		
 	type: debuff
 	duration: 100	
-	flags: [ unique ]
+	flags: [ unique magic ]
 	aura_effect repeat: 
 	{ 
 		update_interval: 10

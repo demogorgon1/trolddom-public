@@ -1,55 +1,20 @@
 #pragma once
 
-#include "DirectEffects/ApplyAura.h"
-#include "DirectEffects/ConsumeAndProduce.h"
-#include "DirectEffects/Damage.h"
-#include "DirectEffects/Fishing.h"
-#include "DirectEffects/Heal.h"
-#include "DirectEffects/Interrupt.h"
-#include "DirectEffects/ModifyResource.h"
-#include "DirectEffects/Move.h"
-#include "DirectEffects/Simple.h"
-#include "DirectEffects/SpawnEntity.h"
-#include "DirectEffects/Threat.h"
-
 #include "DirectEffect.h"
 
 namespace tpublic
 {
 
+	class DirectEffectBase;
+
 	class DirectEffectFactory
 	{
 	public:
-		DirectEffectFactory()
-		{
-			_Register<DirectEffects::ApplyAura>();
-			_Register<DirectEffects::ConsumeAndProduce>();
-			_Register<DirectEffects::Damage>();
-			_Register<DirectEffects::Fishing>();
-			_Register<DirectEffects::Heal>();
-			_Register<DirectEffects::Interrupt>();
-			_Register<DirectEffects::ModifyResource>();
-			_Register<DirectEffects::Move>();
-			_Register<DirectEffects::Simple>();
-			_Register<DirectEffects::SpawnEntity>();
-			_Register<DirectEffects::Threat>();
-		}
-
-		~DirectEffectFactory()
-		{
-
-		}
-
-		DirectEffectBase*
-		Create(
-			uint32_t			aId) const
-		{
-			if(!m_functions[aId])
-				return NULL;
-
-			return m_functions[aId]();
-		}
-
+								DirectEffectFactory();
+								~DirectEffectFactory();
+						
+		DirectEffectBase*		Create(
+									uint32_t			aId) const;
 	private:
 
 		std::function<DirectEffectBase*()>			m_functions[DirectEffect::NUM_IDS];

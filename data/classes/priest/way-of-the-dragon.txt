@@ -168,7 +168,7 @@ aura improved_dragon_punch:
 	icon: icon_fury
 	type: buff
 	duration: 100	
-	flags: [ unique ]
+	flags: [ unique magic ]
 	stat_modifiers:
 	{
 		attack_haste: { add: 50 } 
@@ -307,6 +307,7 @@ aura improved_dwindle:
 	type: buff
 	icon: icon_dwindle
 	duration: 100
+	flags: [ unique magic ]
 	stat_modifiers:
 	{
 		dodge_chance: { add: 80 }

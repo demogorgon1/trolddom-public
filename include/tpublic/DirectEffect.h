@@ -91,6 +91,7 @@ namespace tpublic
 			ID_MODIFY_RESOURCE,
 			ID_INTERRUPT,
 			ID_SPAWN_ENTITY,
+			ID_REMOVE_AURA,
 
 			NUM_IDS
 		};
@@ -111,7 +112,8 @@ namespace tpublic
 			"move",
 			"modify_resource",
 			"interrupt",
-			"spawn_entity"
+			"spawn_entity",
+			"remove_aura"
 		};
 
 		static_assert(sizeof(EFFECT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

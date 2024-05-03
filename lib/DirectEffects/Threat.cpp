@@ -138,6 +138,7 @@ namespace tpublic::DirectEffects
 			break;
 
 		case APPLY_TO_SOURCE:
+			if(!aTarget->IsPlayer())
 			{
 				aEventQueue->EventQueueThreat(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), m_add, m_multiply);
 			}

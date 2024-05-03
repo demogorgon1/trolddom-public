@@ -1,60 +1,20 @@
 #pragma once
 
-#include "AuraEffects/Absorb.h"
-#include "AuraEffects/CastModifier.h"
-#include "AuraEffects/CombatEventTrigger.h"
-#include "AuraEffects/DamageInputModifier.h"
-#include "AuraEffects/DamageOutputModifier.h"
-#include "AuraEffects/HealInputModifier.h"
-#include "AuraEffects/HealOutputModifier.h"
-#include "AuraEffects/Immobilize.h"
-#include "AuraEffects/Immortality.h"
-#include "AuraEffects/MoveSpeedModifier.h"
-#include "AuraEffects/Repeat.h"
-#include "AuraEffects/Stun.h"
-#include "AuraEffects/Taunt.h"
-#include "AuraEffects/ThreatModifier.h"
-
 #include "AuraEffect.h"
 
 namespace tpublic
 {
 
+	class AuraEffectBase;
+
 	class AuraEffectFactory
 	{
 	public:
-		AuraEffectFactory()
-		{
-			_Register<AuraEffects::Absorb>();
-			_Register<AuraEffects::CastModifier>();
-			_Register<AuraEffects::CombatEventTrigger>();
-			_Register<AuraEffects::DamageInputModifier>();
-			_Register<AuraEffects::DamageOutputModifier>();
-			_Register<AuraEffects::HealInputModifier>();
-			_Register<AuraEffects::HealOutputModifier>();
-			_Register<AuraEffects::Immobilize>();
-			_Register<AuraEffects::Immortality>();
-			_Register<AuraEffects::MoveSpeedModifier>();
-			_Register<AuraEffects::Repeat>();
-			_Register<AuraEffects::Stun>();
-			_Register<AuraEffects::Taunt>();
-			_Register<AuraEffects::ThreatModifier>();
-		}
+							AuraEffectFactory();
+							~AuraEffectFactory();
 
-		~AuraEffectFactory()
-		{
-
-		}
-
-		AuraEffectBase*
-		Create(
-			uint32_t			aId) const
-		{
-			if(!m_functions[aId])
-				return NULL;
-
-			return m_functions[aId]();
-		}
+		AuraEffectBase*		Create(
+								uint32_t			aId) const;
 
 	private:
 

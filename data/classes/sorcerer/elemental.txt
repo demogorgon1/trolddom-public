@@ -96,7 +96,7 @@ aura smolder_1:
 	icon: icon_fire		
 	type: buff
 	duration: 50
-	flags: [ unique ]	
+	flags: [ unique magic ]	
 	stat_modifiers: { spell_haste: { add: 15 } }
 }
 
@@ -106,7 +106,7 @@ aura smolder_2:
 	icon: icon_fire		
 	type: buff
 	duration: 50
-	flags: [ unique ]	
+	flags: [ unique magic ]	
 	stat_modifiers: { spell_haste: { add: 30 } }
 }
 
@@ -116,7 +116,7 @@ aura smolder_3:
 	icon: icon_fire		
 	type: buff
 	duration: 50
-	flags: [ unique ]	
+	flags: [ unique magic ]	
 	stat_modifiers: { spell_haste: { add: 45 } }
 }
 
@@ -147,7 +147,7 @@ aura freeze_for_all:
 	icon: icon_freeze_for_all		
 	type: debuff
 	duration: 80
-	flags: [ unique ]
+	flags: [ unique magic ]
 	
 	aura_effect move_speed_modifier:
 	{
@@ -182,7 +182,7 @@ aura improved_frost_explosion:
 	icon: icon_frost_explosion		
 	type: debuff
 	duration: 50	
-	flags: [ unique ]
+	flags: [ unique magic ]
 	aura_effect immobilize: { }
 }
 
