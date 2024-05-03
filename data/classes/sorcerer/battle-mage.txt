@@ -11,19 +11,49 @@ talent_tree sorcerer_battle_mage:
 		talent sorcerer_battle_mage_swiftness: "D"
 		talent sorcerer_battle_mage_critical_thinking: "E"			   
 		talent sorcerer_battle_mage_void_blade_storm: "F"
+		talent sorcerer_battle_mage_armor: "G"
 		sprite talent_tree_down_arrow: "d"						
 		sprite talent_tree_left_arrow: "l"						
 	}
 	
 	map:
 	[
-		"..A.B"
-		"....d"
-		"ElC.D"
-		"..d.."
-		"..F.."
+		"..A.B.."
+		"....d.."
+		"ElC.D.G"
+		"..d...."
+		"..F...."
 	]
 	
+}
+
+###############################################################################
+# Mage Armor
+
+talent sorcerer_battle_mage_armor:
+{
+	string: "Mage Armor"
+	icon: icon_chest_1	
+	talent_tree_points_required: 3
+	points:
+	[
+		{ aura: sorcerer_battle_mage_armor_1 }
+		{ aura: sorcerer_battle_mage_armor_2 }
+	]
+}
+
+aura sorcerer_battle_mage_armor_1:
+{
+	type: hidden
+	description: "Increases your constitution by 3%."
+	stat_modifiers: { constitution: { add_percent: 3 } }
+}
+
+aura sorcerer_battle_mage_armor_2:
+{
+	type: hidden
+	description: "Increases your constitution by 6%."
+	stat_modifiers: { constitution: { add_percent: 6 } }
 }
 
 ###############################################################################
