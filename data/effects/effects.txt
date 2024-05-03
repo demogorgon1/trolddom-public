@@ -49,5 +49,8 @@ sprites:
 	sprite effect_teleport_0: { flags: [ centered ] }
 	sprite effect_teleport_1: { flags: [ centered ] }
 	sprite effect_teleport_2: { flags: [ centered ] }
+	sprite effect_void_lightning_0: { }
+	sprite effect_void_lightning_1: { }
+	sprite effect_void_lightning_2: { }
 	
 }

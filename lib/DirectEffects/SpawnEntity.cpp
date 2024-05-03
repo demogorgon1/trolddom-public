@@ -21,6 +21,8 @@ namespace tpublic::DirectEffects
 		{
 			if(aChild->m_name == "entity")
 				m_entityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENTITY, aChild->GetIdentifier());
+			else if(aChild->m_name == "at_target")
+				m_atTarget = aChild->GetBool();
 			else
 				TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->GetIdentifier());
 		});
@@ -32,6 +34,7 @@ namespace tpublic::DirectEffects
 	{	
 		ToStreamBase(aStream);
 		aStream->WriteUInt(m_entityId);
+		aStream->WriteBool(m_atTarget);
 	}
 
 	bool
@@ -40,7 +43,9 @@ namespace tpublic::DirectEffects
 	{
 		if(!FromStreamBase(aStream))
 			return false;
-		if(!aStream->ReadUInt(m_entityId))
+		if (!aStream->ReadUInt(m_entityId))
+			return false;
+		if (!aStream->ReadBool(m_atTarget))
 			return false;
 		return true;
 	}
@@ -53,7 +58,7 @@ namespace tpublic::DirectEffects
 		CombatEvent::Id					/*aId*/,
 		uint32_t						/*aAbilityId*/,
 		EntityInstance*					aSource,
-		EntityInstance*					/*aTarget*/,
+		EntityInstance*					aTarget,
 		const Vec2&						/*aAOETarget*/,
 		const ItemInstanceReference&	/*aItem*/,
 		IResourceChangeQueue*			/*aCombatResultQueue*/,
@@ -65,9 +70,12 @@ namespace tpublic::DirectEffects
 
 		// Position
 		{
-			const Components::Position* sourcePosition = aSource->GetComponent<Components::Position>();
 			Components::Position* spawnedEntityPosition = spawnedEntity->GetComponent<Components::Position>();
-			spawnedEntityPosition->m_position = sourcePosition->m_position;
+
+			if (m_atTarget)
+				spawnedEntityPosition->m_position = aTarget->GetComponent<Components::Position>()->m_position;
+			else
+				spawnedEntityPosition->m_position = aSource->GetComponent<Components::Position>()->m_position;
 		}
 
 		// Owner

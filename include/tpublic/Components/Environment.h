@@ -36,7 +36,7 @@ namespace tpublic
 			// Public data
 			int32_t			m_tickInterval = 5;
 			int32_t			m_duration = 10;
-			uint32_t		m_abilityId = 0;
+			uint32_t		m_abilityId = 0;			
 
 			// Not serialized
 			int32_t			m_lastUpdateTick = 0;

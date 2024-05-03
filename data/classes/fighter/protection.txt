@@ -81,14 +81,12 @@ ability banner_of_command_tick:
 {
 	string: "Banner of Command"
 	range: 8	
-	cooldowns: [ global poison_bomb ]
 	flags: [ target_self target_aoe target_aoe_hostile target_aoe_friendly ]
 	states: [ default in_combat ]
 	icon: icon_banner
 	delay: 3
 	aoe_radius: 8
 	aoe_requirement target<must_not_be_in_state>: { id: dead }
-	talent_tree: fighter_subtlety
 	
 	direct_effect apply_aura:
 	{

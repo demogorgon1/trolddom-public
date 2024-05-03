@@ -48,6 +48,7 @@ namespace tpublic
 
 			// Public data
 			uint32_t				m_entityId = 0;
+			bool					m_atTarget = false;
 		};
 
 	}
