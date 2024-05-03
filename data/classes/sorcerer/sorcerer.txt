@@ -17,7 +17,7 @@ ability sorcerer_attack:
 		must_have_ability_modifier: charging_combat_1
 		resource: mana
 		target_self: true
-		function: { expression: a_mul_x a: 0.04 x: mana_base }
+		function: { expression: a_mul_x a: 0.03 x: mana_base }
 	}
 	
 	direct_effect modify_resource:
@@ -25,7 +25,7 @@ ability sorcerer_attack:
 		must_have_ability_modifier: charging_combat_2
 		resource: mana
 		target_self: true
-		function: { expression: a_mul_x a: 0.08 x: mana_base }
+		function: { expression: a_mul_x a: 0.06 x: mana_base }
 	}
 
 	direct_effect modify_resource:
@@ -33,7 +33,7 @@ ability sorcerer_attack:
 		must_have_ability_modifier: charging_combat_3
 		resource: mana
 		target_self: true
-		function: { expression: a_mul_x a: 0.12 x: mana_base }
+		function: { expression: a_mul_x a: 0.09 x: mana_base }
 	}	
 }
 

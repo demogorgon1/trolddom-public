@@ -7,14 +7,90 @@ talent_tree sorcerer_battle_mage:
 	{	
 		talent sorcerer_battle_mage_charging_combat: "A"
 		talent sorcerer_battle_mage_improved_power_shield: "B"
+		talent sorcerer_battle_mage_wizard_strike: "C"
+		talent sorcerer_battle_mage_swiftness: "D"
 		sprite talent_tree_down_arrow: "d"						
 	}
 	
 	map:
 	[
 		"A.B"
+		"..d"
+		"C.D"
 	]
 	
+}
+
+###############################################################################
+# Swiftness
+
+talent sorcerer_battle_mage_swiftness:
+{
+	string: "Swiftness"
+	icon: icon_mage_swiftness
+	points:
+	[
+		{ ability_modifier: mage_swiftness }
+	]
+}
+
+ability_modifier mage_swiftness:
+{
+	string: "Power Shield increases your movement speed for 3 seconds."
+}
+
+aura mage_swiftness:
+{	
+	string: "Swiftness"
+	description: "Movement speed increased."
+	type: buff
+	duration: 30
+	flags: [ unique magic ]	
+	icon: icon_mage_swiftness
+	aura_effect move_speed_modifier:
+	{
+		move_speed: fast
+	}
+}
+
+###############################################################################
+# Wizard Strike
+
+talent sorcerer_battle_mage_wizard_strike:
+{
+	string: "Wizard Strike"
+	icon: icon_wizard_strike
+	talent_tree_points_required: 3
+	points:
+	[
+		{ ability: wizard_strike }
+	]
+}
+
+cooldown wizard_strike:
+{
+	duration: 50
+}
+
+ability wizard_strike:
+{
+	string: "Wizard Strike"
+	range: 1	
+	cooldowns: [ global wizard_strike ]
+	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+	states: [ default in_combat ]
+	icon: icon_wizard_strike
+	delay: 3
+	resource_cost mana: 15
+	talent_tree: sorcerer_battle_mage
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: arcane
+		base: weapon
+		level_curve: [ [ 1 4 ] [ 10 17 ] ]
+	}		
 }
 
 ###############################################################################
@@ -53,7 +129,7 @@ ability_modifier improved_power_shield_3:
 	description: "Absorbs damage."
 	type: buff
 	duration: 300
-	flags: [ unique charged ]	
+	flags: [ unique charged magic ]	
 	icon: icon_mage_shield
 	charges: { expression: a_mul_x_plus_b a: 1.5 b: 8 x: level }		
 	aura_effect absorb: { }	
@@ -85,28 +161,33 @@ talent sorcerer_battle_mage_charging_combat:
 
 ability_modifier charging_combat_1:
 {
-	string: "Your melee attacks restore 4% of your base mana."
+	string: "Your melee attacks restore 3% of your base mana."
 }
 
 ability_modifier charging_combat_2:
 {
-	string: "Your melee attacks restore 8% of your base mana."
+	string: "Your melee attacks restore 6% of your base mana."
 }
 
 ability_modifier charging_combat_3:
 {
-	string: "Your melee attacks restore 12% of your base mana."
+	string: "Your melee attacks restore 9% of your base mana."
 }
 
 ###############################################################################
 # Power Shield
 
+cooldown power_shield:
+{
+	duration: 100
+}
+
 ability power_shield:
 {
 	string: "Power Shield"
 	description: "Absorbs damage for up to 30 seconds."
-	cooldowns: [ global ]
-	resource_cost mana: 20
+	cooldowns: [ global power_shield ]
+	resource_cost mana: 25
 	flags: [ target_self ]
 	states: [ default in_combat ]	
 	icon: icon_mage_shield
@@ -135,6 +216,12 @@ ability power_shield:
 		must_have_ability_modifier: improved_power_shield_3
 		aura: improved_power_shield_3
 	}
+	
+	direct_effect apply_aura:
+	{	
+		must_have_ability_modifier: mage_swiftness
+		aura: mage_swiftness
+	}
 }
 
 aura power_shield:
@@ -143,7 +230,7 @@ aura power_shield:
 	description: "Absorbs damage."
 	type: buff
 	duration: 300
-	flags: [ unique charged ]	
+	flags: [ unique charged magic ]	
 	icon: icon_mage_shield
 	charges: { expression: a_mul_x_plus_b a: 1.5 b: 8 x: level }	
 	
