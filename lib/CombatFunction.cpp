@@ -15,7 +15,7 @@ namespace tpublic
 		float
 		_GetInput(
 			const Components::CombatPublic*		aCombatPublic,
-			const Components::CombatPrivate*	/*aCombatPrivate*/,
+			const Components::CombatPrivate*	aCombatPrivate,
 			CombatFunction::Input				aInput)
 		{
 			switch(aInput)
@@ -43,6 +43,11 @@ namespace tpublic
 			case CombatFunction::INPUT_LEVEL:
 				if (aCombatPublic != NULL)
 					return (float)aCombatPublic->m_level;
+				break;
+
+			case CombatFunction::INPUT_MANA_BASE:
+				if (aCombatPrivate != NULL)
+					return (float)aCombatPrivate->m_baseMana;
 				break;
 
 			default:

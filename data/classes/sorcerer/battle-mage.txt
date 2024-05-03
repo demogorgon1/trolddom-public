@@ -4,14 +4,98 @@ talent_tree sorcerer_battle_mage:
 	icon: icon_battle_mage
 	
 	map_palette:
-	{
+	{	
+		talent sorcerer_battle_mage_charging_combat: "A"
+		talent sorcerer_battle_mage_improved_power_shield: "B"
 		sprite talent_tree_down_arrow: "d"						
 	}
 	
 	map:
 	[
+		"A.B"
 	]
 	
+}
+
+###############################################################################
+# Improved Power Shield
+
+talent sorcerer_battle_mage_improved_power_shield:
+{
+	string: "Improved Power Shield"
+	icon: icon_mage_shield
+	points:
+	[
+		{ ability_modifier: improved_power_shield_1 }
+		{ ability_modifier: improved_power_shield_2 }
+		{ ability_modifier: improved_power_shield_3 }
+	]
+}
+
+ability_modifier improved_power_shield_1:
+{
+	string: "Power Shield reduces all damage taken by 10%."
+}
+
+ability_modifier improved_power_shield_2:
+{
+	string: "Power Shield reduces all damage taken by 20%."
+}
+
+ability_modifier improved_power_shield_3:
+{
+	string: "Power Shield reduces all damage taken by 30%."
+}
+
+!define local IMPROVED_POWER_SHIELD
+{	
+	string: "Power Shield"
+	description: "Absorbs damage."
+	type: buff
+	duration: 300
+	flags: [ unique charged ]	
+	icon: icon_mage_shield
+	charges: { expression: a_mul_x_plus_b a: 1.5 b: 8 x: level }		
+	aura_effect absorb: { }	
+	aura_effect damage_input_modifier:
+	{
+		type_mask: [ all ]
+		multiplier: @_multiplier
+	}
+}
+
+aura improved_power_shield_1: !IMPROVED_POWER_SHIELD { _multiplier: 0.9 }
+aura improved_power_shield_2: !IMPROVED_POWER_SHIELD { _multiplier: 0.8 }
+aura improved_power_shield_3: !IMPROVED_POWER_SHIELD { _multiplier: 0.7 }
+
+###############################################################################
+# Charging Combat
+
+talent sorcerer_battle_mage_charging_combat:
+{
+	string: "Charging Combat"
+	icon: icon_charging_combat
+	points:
+	[
+		{ ability_modifier: charging_combat_1 }
+		{ ability_modifier: charging_combat_2 }
+		{ ability_modifier: charging_combat_3 }
+	]
+}
+
+ability_modifier charging_combat_1:
+{
+	string: "Your melee attacks restore 4% of your base mana."
+}
+
+ability_modifier charging_combat_2:
+{
+	string: "Your melee attacks restore 8% of your base mana."
+}
+
+ability_modifier charging_combat_3:
+{
+	string: "Your melee attacks restore 12% of your base mana."
 }
 
 ###############################################################################
@@ -30,7 +114,26 @@ ability power_shield:
 	
 	direct_effect apply_aura:
 	{
+		must_not_have_ability_modifiers: [ improved_power_shield_1 improved_power_shield_2 improved_power_shield_3 ]
 		aura: power_shield
+	}
+	
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: improved_power_shield_1
+		aura: improved_power_shield_1
+	}
+
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: improved_power_shield_2
+		aura: improved_power_shield_2
+	}
+
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: improved_power_shield_3
+		aura: improved_power_shield_3
 	}
 }
 
@@ -43,8 +146,8 @@ aura power_shield:
 	flags: [ unique charged ]	
 	icon: icon_mage_shield
 	charges: { expression: a_mul_x_plus_b a: 1.5 b: 8 x: level }	
+	
 	aura_effect absorb:
 	{
 	}
-	
 }

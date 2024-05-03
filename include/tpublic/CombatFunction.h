@@ -33,7 +33,8 @@ namespace tpublic
 			INPUT_HEALTH_MAX,
 			INPUT_MANA_CURRENT,
 			INPUT_MANA_MAX,
-			INPUT_LEVEL
+			INPUT_LEVEL,
+			INPUT_MANA_BASE
 		};
 
 		static Expression
@@ -61,9 +62,11 @@ namespace tpublic
 			else if (t == "health_max")
 				return INPUT_HEALTH_MAX;
 			else if (t == "mana_current")
-				return INPUT_HEALTH_CURRENT;
+				return INPUT_MANA_CURRENT;
 			else if (t == "mana_max")
-				return INPUT_HEALTH_MAX;
+				return INPUT_MANA_MAX;
+			else if (t == "mana_base")
+				return INPUT_MANA_BASE;
 			else if (t == "level")
 				return INPUT_LEVEL;
 			TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid input.", aSource->GetIdentifier());

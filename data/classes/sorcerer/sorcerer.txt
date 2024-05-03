@@ -1,3 +1,42 @@
+ability sorcerer_attack:
+{
+	string: "Attack"
+	flags: [ melee offensive attack target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss use_weapon_icon ]	
+	states: [ default in_combat ]
+	delay: 3
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical			
+		base: weapon
+	}
+	
+	direct_effect modify_resource:
+	{
+		must_have_ability_modifier: charging_combat_1
+		resource: mana
+		target_self: true
+		function: { expression: a_mul_x a: 0.04 x: mana_base }
+	}
+	
+	direct_effect modify_resource:
+	{
+		must_have_ability_modifier: charging_combat_2
+		resource: mana
+		target_self: true
+		function: { expression: a_mul_x a: 0.08 x: mana_base }
+	}
+
+	direct_effect modify_resource:
+	{
+		must_have_ability_modifier: charging_combat_3
+		resource: mana
+		target_self: true
+		function: { expression: a_mul_x a: 0.12 x: mana_base }
+	}	
+}
+
 class sorcerer:
 {
 	string: "Sorcerer"	
@@ -10,11 +49,11 @@ class sorcerer:
 	
 	color_1: [ 0 59 210 ] 
 	color_2: [ 0 10 64 ]
-	default_attack: attack
-	default_action_bar: [ attack firebolt push ]
+	default_attack: sorcerer_attack
+	default_action_bar: [ sorcerer_attack firebolt push ]
 	talent_trees: [ sorcerer_arcane sorcerer_elemental sorcerer_battle_mage ]
 
-	item_types: [ armor_cloth weapon_1h_knife weapon_2h_staff ]
+	item_types: [ armor_cloth weapon_1h_sword weapon_1h_knife weapon_2h_staff ]
 	
 	start_map open_world: [ ]
 	start_equipment main_hand: weapon_gnarly_staff
@@ -35,7 +74,7 @@ class sorcerer:
 		wis_to_mag_crit: [ 1 30 ]
 		con_to_health: [ 10 1 ]
 		wis_to_mana: [ 10 1 ]
-		spi_to_mana_regen_per_5_sec: [ 5 1 ]
+		spi_to_mana_regen_per_5_sec: [ 1 2 ]
 		spi_to_health_regen: [ 1 1 ]		
 	}
 
