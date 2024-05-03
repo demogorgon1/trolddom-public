@@ -208,6 +208,7 @@ sprites:
 	cursor: { position: [ 0 176 ] }		
 	sprite icon_insight : { tags: [ icon ] }
 	sprite icon_counterspell : { tags: [ icon ] }
+	sprite icon_improved_teleport : { tags: [ icon ] }
 	
 }
 
