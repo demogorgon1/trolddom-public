@@ -277,3 +277,34 @@ aura sleep:
 	aura_effect stun: { }
 }
 
+###############################################################################
+# Counterspell
+
+cooldown counterspell:
+{
+	duration: 150
+}
+
+ability counterspell:
+{
+	string: "Counterspell"
+	range: 8
+	cooldowns: [ global counterspell ]
+	flags: [ spell offensive target_other target_hostile can_miss ]
+	states: [ default in_combat ]
+	icon: icon_counterspell
+	delay: 3
+	resource_cost mana: 10
+	talent_tree: sorcerer_arcane	
+	
+	direct_effect interrupt:
+	{	
+		lockout_ticks: 40
+	}
+	
+	direct_effect threat:
+	{
+		apply_to: source
+		add: 20
+	}
+}

@@ -372,7 +372,7 @@ ability envenom:
 
 cooldown kick:
 {
-	duration: 100
+	duration: 150
 }
 
 ability kick:
@@ -391,6 +391,12 @@ ability kick:
 	{	
 		lockout_ticks: 40
 	}
+	
+	direct_effect threat:
+	{
+		apply_to: source
+		add: 20
+	}	
 }
 
 ###############################################################################

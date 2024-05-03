@@ -176,6 +176,7 @@ class sorcerer:
 			
 			unlock_abilities:
 			[
+				counterspell
 			]
 			
 			stats:

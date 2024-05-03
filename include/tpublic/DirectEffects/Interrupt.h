@@ -48,6 +48,7 @@ namespace tpublic
 
 			// Public data
 			int32_t				m_lockoutTicks = 0;
+
 		};
 
 	}
