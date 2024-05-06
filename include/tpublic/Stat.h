@@ -53,7 +53,7 @@ namespace tpublic
 			{ "wisdom",					"WIS",			"Wisdom",									NULL,																	1.0f,	false,	true },
 			{ "constitution",			"CON",			"Constitution",								NULL,																	1.0f,	false,	true },
 			{ "spirit",					"SPI",			"Spirit",									NULL,																	1.0f,	false,	true },
-			{ "armor",					"ARM",			"Armor",									NULL,																	1.0f,	false,	true },
+			{ "armor",					"ARM",			"Armor",									NULL,																	1.0f,	false,	false },
 			{ "phys_crit_chance",		"CRIT",			"Critical Strike Chance (Physical)",		"Improves your chance to get a critical strike by %u%%.",				10.0f,	true,	false },
 			{ "spell_crit_chance",		"SPELLCRIT",	"Critical Strike Chance (Spells)",			"Improves your chance to get a critical strike with spells by %u%%.",	10.0f,	true,	false },
 			{ "dodge_chance",			"DODGE",		"Dodge Chance",								"Improves your chance to dodge an attack by %u%%.",						10.0f,	true,	false },
