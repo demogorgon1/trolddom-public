@@ -1,6 +1,7 @@
 talent_tree priest_healing:
 {
 	string: "Way of Healing"
+	description: "Heal yourself and your party members."
 	icon: icon_star_1
 	
 	map_palette:

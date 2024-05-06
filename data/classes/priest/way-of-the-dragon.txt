@@ -1,6 +1,7 @@
 talent_tree priest_dragon:
 {
 	string: "Way of the Dragon"
+	description: "Become a fighter of faith."
 	icon: icon_dragon
 	
 	map_palette:

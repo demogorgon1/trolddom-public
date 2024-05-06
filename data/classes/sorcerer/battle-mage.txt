@@ -1,6 +1,7 @@
 talent_tree sorcerer_battle_mage:
 {
 	string: "Battle-Mage"
+	description: "Arcane melee combat."
 	icon: icon_battle_mage
 	
 	map_palette:

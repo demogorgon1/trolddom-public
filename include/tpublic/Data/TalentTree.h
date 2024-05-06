@@ -157,6 +157,10 @@ namespace tpublic
 						{
 							m_string = aChild->GetString();
 						}
+						else if (aChild->m_name == "description")
+						{
+							m_description = aChild->GetString();
+						}
 						else if (aChild->m_name == "icon")
 						{
 							m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
@@ -186,6 +190,7 @@ namespace tpublic
 				IWriter*				aStream) const override
 			{
 				aStream->WriteString(m_string);
+				aStream->WriteString(m_description);
 				aStream->WriteUInt(m_iconSpriteId);
 				aStream->WriteOptionalObjectPointer(m_mapPalette);
 				aStream->WriteStrings(m_map);
@@ -196,6 +201,8 @@ namespace tpublic
 				IReader*				aStream) override
 			{
 				if(!aStream->ReadString(m_string))
+					return false;
+				if (!aStream->ReadString(m_description))
 					return false;
 				if(!aStream->ReadUInt(m_iconSpriteId))
 					return false;
@@ -208,6 +215,7 @@ namespace tpublic
 
 			// Public data
 			std::string					m_string;
+			std::string					m_description;
 			uint32_t					m_iconSpriteId = 0;
 			std::unique_ptr<MapPalette>	m_mapPalette;
 			std::vector<std::string>	m_map;

@@ -40,7 +40,7 @@ ability sorcerer_attack:
 class sorcerer:
 {
 	string: "Sorcerer"	
-	description: "Master the elemental magic and destroy your enemies with fire, ice, and lightning."
+	description: "Master of magic."
 	
 	systems: [ combat health_regen mana_regen ]
 	

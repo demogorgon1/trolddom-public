@@ -1,6 +1,7 @@
 talent_tree fighter_combat:
 {
 	string: "Combat"
+	description: "Master of hand-to-hand combat."	
 	icon: icon_fighter_combat
 	
 	map_palette:

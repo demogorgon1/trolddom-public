@@ -1,7 +1,7 @@
 class priest:
 {
 	string: "Priest"	
-	description: "Follow the way of healing, condemnation, or the dragon."
+	description: "Become a follower of the faith."
 	
 	systems: [ combat health_regen mana_regen ]
 	

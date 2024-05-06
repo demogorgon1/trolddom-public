@@ -1,6 +1,7 @@
 talent_tree fighter_subtlety:
 {
 	string: "Subtlety"
+	description: "Provide sustained damage over time capabilities."	
 	icon: icon_fighter_subtlety
 	
 	map_palette:

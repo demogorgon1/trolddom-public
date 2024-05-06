@@ -1,6 +1,7 @@
 talent_tree fighter_protection:
 {
 	string: "Protection"
+	description: "Become a tank."	
 	icon: icon_fighter_protection
 	
 	map_palette:

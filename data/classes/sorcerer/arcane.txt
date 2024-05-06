@@ -1,6 +1,7 @@
 talent_tree sorcerer_arcane:
 {
 	string: "Arcane"
+	description: "Master of arcane magic."
 	icon: icon_arcane
 	
 	map_palette:
