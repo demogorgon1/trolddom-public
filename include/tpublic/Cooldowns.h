@@ -62,14 +62,6 @@ namespace tpublic
 						endTimeStamp = startTimeStamp + (uint64_t)(m_end - m_start) / 10;
 
 					aStream->WriteUInt(endTimeStamp);
-
-					if(m_cooldownId == 2)
-					{
-						printf("WRITE: current: %u @ [%s] start: [%s] end: [%s]\n", currentTick, 
-							_FormatDateTime((time_t)currentTimeStamp).c_str(),
-							_FormatDateTime((time_t)startTimeStamp).c_str(),
-							_FormatDateTime((time_t)endTimeStamp).c_str());
-					}
 				}
 			}
 			

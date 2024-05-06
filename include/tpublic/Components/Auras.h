@@ -171,6 +171,9 @@ namespace tpublic
 								int32_t&									aCastTime);
 			void			RemoveAura(
 								uint32_t									aAuraId);
+			void			RemoveAurasByFlags(
+								const Manifest*								aManifest,
+								uint32_t									aFlags);
 			void			OnLoadedFromPersistence(
 								const Manifest*								aManifest);
 

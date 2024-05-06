@@ -76,16 +76,17 @@ namespace tpublic
 				TYPE_BUFF
 			};
 
-			enum Flag : uint8_t
+			enum Flag : uint32_t
 			{
-				FLAG_UNIQUE				= 0x01,
-				FLAG_CHANNELED			= 0x02,
-				FLAG_HIDE_DESCRIPTION	= 0x04,
-				FLAG_CANCEL_IN_COMBAT	= 0x08,
-				FLAG_PERSIST_IN_DEATH	= 0x10,
-				FLAG_SILENT				= 0x20,
-				FLAG_CHARGED			= 0x40,
-				FLAG_MAGIC				= 0x80
+				FLAG_UNIQUE				= 0x00000001,
+				FLAG_CHANNELED			= 0x00000002,
+				FLAG_HIDE_DESCRIPTION	= 0x00000004,
+				FLAG_CANCEL_IN_COMBAT	= 0x00000008,
+				FLAG_PERSIST_IN_DEATH	= 0x00000010,
+				FLAG_SILENT				= 0x00000020,
+				FLAG_CHARGED			= 0x00000040,
+				FLAG_MAGIC				= 0x00000080,
+				FLAG_BLESSING			= 0x00000100,
 			};
 
 			static Type
@@ -128,6 +129,8 @@ namespace tpublic
 						flags |= FLAG_CHARGED;
 					else if (strcmp(string, "magic") == 0)
 						flags |= FLAG_MAGIC;
+					else if (strcmp(string, "blessing") == 0)
+						flags |= FLAG_BLESSING;
 					else
 						TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid aura flag.", string);
 				});
@@ -198,7 +201,7 @@ namespace tpublic
 				aStream->WriteOptionalObjectPointer(m_statModifiers);
 				m_charges.ToStream(aStream);
 			}
-
+			 
 			bool
 			FromStream(
 				IReader*				aStream) override
@@ -230,7 +233,7 @@ namespace tpublic
 			uint32_t										m_iconSpriteId = 0;
 			int32_t											m_duration = 0;
 			Type											m_type = TYPE_HIDDEN;
-			uint8_t											m_flags = 0;
+			uint32_t										m_flags = 0;
 			std::vector<std::unique_ptr<AuraEffectEntry>>	m_auraEffects;
 			std::unique_ptr<StatModifiers>					m_statModifiers;
 			CombatFunction									m_charges;

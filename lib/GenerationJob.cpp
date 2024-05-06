@@ -650,7 +650,7 @@ namespace tpublic
 			combinedAura.m_iconSpriteId = pantheon->m_iconSpriteId;
 			combinedAura.m_duration = blessingDuration;
 			combinedAura.m_type = Data::Aura::TYPE_BUFF;
-			combinedAura.m_flags = Data::Aura::FLAG_UNIQUE | Data::Aura::FLAG_HIDE_DESCRIPTION;
+			combinedAura.m_flags = Data::Aura::FLAG_UNIQUE | Data::Aura::FLAG_HIDE_DESCRIPTION | Data::Aura::FLAG_BLESSING;
 
 			for(uint32_t blessingRankTagId : blessingRankTags)
 			{
