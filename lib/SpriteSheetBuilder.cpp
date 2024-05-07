@@ -92,6 +92,8 @@ namespace tpublic
 
 		Image sourceImage;
 
+		bool makeAltGreyscale = false;
+
 		aSource->ForEachChild([&](
 			const SourceNode*		aNode)
 		{
@@ -99,6 +101,10 @@ namespace tpublic
 			{				
 				std::string path = aNode->m_realPath + "/" + aNode->m_value;
 				sourceImage.LoadPNG(path.c_str());
+			}
+			else if(aNode->m_name == "make_alt_greyscale")
+			{
+				makeAltGreyscale = aNode->GetBool();
 			}
 			else if(aNode->m_name == "cursor")
 			{				
@@ -175,7 +181,7 @@ namespace tpublic
 					}
 					else if (aSpriteComponent->m_name == "tags")
 					{
-						aSpriteComponent->GetIdArray(DataType::ID_TAG, sprite->m_tags);
+						aSpriteComponent->GetIdArray(DataType::ID_TAG, sprite->m_tags);						
 					}
 					else if(aSpriteComponent->m_name == "borders")
 					{
@@ -207,6 +213,18 @@ namespace tpublic
 						TP_VERIFY(false, aNode->m_debugInfo, "Invalid item in 'sprite'.");
 					}
 				});
+
+				if(makeAltGreyscale)
+				{
+					// Make alternate greyscale version of sprite
+					Sprite* altGreyscaleSprite = _CreateSprite(NULL, NULL, width * height);
+					altGreyscaleSprite->m_image.Copy(sprite->m_image);
+					altGreyscaleSprite->m_image.MakeGreyscale();
+
+					altGreyscaleSprite->m_info.m_flags = sprite->m_info.m_flags & (SpriteInfo::FLAG_CENTERED | SpriteInfo::FLAG_DOUBLED);
+
+					sprite->m_altGreyscale = altGreyscaleSprite;
+				}
 			}
 			else
 			{
@@ -256,6 +274,18 @@ namespace tpublic
 
 			sprite->m_data = data;
 		}
+
+		// Update alternate greyscale sprite ids
+		for (SpriteTable::iterator i = m_spriteTable.begin(); i != m_spriteTable.end(); i++)
+		{
+			Sprite* sprite = i->second.get();
+			if(sprite->m_altGreyscale != NULL)
+			{
+				assert(sprite->m_altGreyscale->m_data->m_id != 0);
+				sprite->m_data->m_info.m_altGreyscaleSpriteId = sprite->m_altGreyscale->m_data->m_id;
+			}
+		}
+
 	}
 
 	void	

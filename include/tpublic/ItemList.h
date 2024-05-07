@@ -69,6 +69,8 @@ namespace tpublic
 								const Data::Ability::Items*					aConsumeItems);
 		bool				CanConsume(
 								const Data::Ability::Items*					aConsumeItems) const;
+		uint32_t			GetMaxConsumeCount(
+								const Data::Ability::Items*					aConsumeItems) const;
 		bool				Move(
 								uint32_t									aSourceIndex,
 								const Data::Item*							aSourceItemData,

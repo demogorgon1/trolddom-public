@@ -45,6 +45,7 @@ namespace tpublic
 				, m_sheetIndex(0)
 				, m_index(0)
 				, m_data(NULL)
+				, m_altGreyscale(NULL)
 			{
 
 			}
@@ -60,6 +61,7 @@ namespace tpublic
 			uint32_t						m_index;
 			std::vector<uint32_t>			m_tags;
 			Data::Sprite*					m_data;
+			const Sprite*					m_altGreyscale;
 		};
 
 		struct Sheet

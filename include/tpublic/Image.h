@@ -64,6 +64,8 @@ namespace tpublic
 		void		Allocate(
 						uint32_t					aWidth,
 						uint32_t					aHeight);
+		void		Copy(
+						const Image&				aImage);
 		void		LoadPNG(
 						const char*					aPath);
 		void		SavePNG(
@@ -108,6 +110,7 @@ namespace tpublic
 						uint32_t					aY,
 						const char*					aFormat,
 						...);
+		void		MakeGreyscale();
 		void		Release();
 		void		Detach(
 						void**						aOutData,

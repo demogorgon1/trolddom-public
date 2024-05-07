@@ -79,6 +79,7 @@ namespace tpublic
 			aStream->WritePOD(m_flags);
 			aStream->WriteUInt(m_tileLayer);
 			aStream->WriteUInt(m_deadSpriteId);
+			aStream->WriteUInt(m_altGreyscaleSpriteId);
 			aStream->WriteUInts(m_borders);
 			m_origin.ToStream(aStream);
 			aStream->WriteObjects(m_namedAnchors);
@@ -94,6 +95,8 @@ namespace tpublic
 			if (!aStream->ReadUInt(m_tileLayer))
 				return false;
 			if (!aStream->ReadUInt(m_deadSpriteId))
+				return false;
+			if (!aStream->ReadUInt(m_altGreyscaleSpriteId))
 				return false;
 			if (!aStream->ReadUInts(m_borders))
 				return false;
@@ -128,6 +131,7 @@ namespace tpublic
 		std::vector<NamedAnchor>	m_namedAnchors;
 		Image::RGBA					m_averageColor;
 		uint32_t					m_deadSpriteId = 0;
+		uint32_t					m_altGreyscaleSpriteId = 0;
 	};
 
 }

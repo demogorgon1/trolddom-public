@@ -96,6 +96,16 @@ namespace tpublic
 	}
 	
 	void		
+	Image::Copy(
+		const Image&	aImage)
+	{
+		assert(aImage.HasData());
+		
+		Allocate(aImage.GetWidth(), aImage.GetHeight());
+		memcpy(m_data, aImage.GetData(), aImage.GetSize());
+	}
+
+	void		
 	Image::LoadPNG(
 		const char*		aPath)
 	{
@@ -391,6 +401,22 @@ namespace tpublic
 			}
 			p++;
 			xPosition += SmallPixelFont::XSIZE;
+		}
+	}
+
+	void		
+	Image::MakeGreyscale()
+	{
+		assert(HasData());
+
+		RGBA* p = m_data;
+		for(uint32_t i = 0, count = m_width * m_height; i < count; i++)
+		{
+			uint8_t c = (uint8_t)(((uint32_t)p->m_r + (uint32_t)p->m_g + (uint32_t)p->m_b) / 3);
+			p->m_r = c;
+			p->m_g = c;
+			p->m_b = c;
+			p++;
 		}
 	}
 

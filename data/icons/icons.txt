@@ -2,6 +2,8 @@ sprites:
 {
 	source: "icons.png"
 	
+	make_alt_greyscale: true
+	
 	cursor: { position: [ 0 0 ] }
 	size: { width: 16 height: 16 }
 

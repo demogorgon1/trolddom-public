@@ -269,6 +269,23 @@ namespace tpublic
 		return true;
 	}
 
+	uint32_t			
+	ItemList::GetMaxConsumeCount(
+		const Data::Ability::Items*					aConsumeItems) const
+	{
+		uint32_t result = UINT32_MAX;
+
+		for(const Data::Ability::Item& consumeItem : aConsumeItems->m_items)
+		{
+			uint32_t count = (uint32_t)GetItemCount(consumeItem.m_itemId);
+			uint32_t consumeCount = count / consumeItem.m_quantity;
+			if(consumeCount < result)
+				result = consumeCount;
+		}
+
+		return result;
+	}
+
 	bool
 	ItemList::Move(
 		uint32_t									aSourceIndex,
