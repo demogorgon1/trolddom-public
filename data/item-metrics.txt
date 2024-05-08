@@ -69,7 +69,7 @@ item_metrics:
 	item_type_multipliers weapon_2h_mace: 	{ 				cost: 8     stat_budget: 2.0 }
 	item_type_multipliers weapon_2h_axe: 	{ 				cost: 8     stat_budget: 2.0 }
 	item_type_multipliers weapon_2h_staff: 	{ 				cost: 7     stat_budget: 2.0 }
-	item_type_multipliers shield: 			{ armor: 7		cost: 5     stat_budget: 1.0 }
+	item_type_multipliers shield: 			{ armor: 20		cost: 5     stat_budget: 1.0 }
 	
 	equipment_slot_multipliers head:		{ armor: 3		cost: 2 	stat_budget: 1.6 }
 	equipment_slot_multipliers chest:		{ armor: 4		cost: 2.5   stat_budget: 1.8 }

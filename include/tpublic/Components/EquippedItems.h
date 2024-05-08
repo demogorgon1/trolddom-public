@@ -1,9 +1,12 @@
 #pragma once
 
+#include "../Data/Item.h"
+
 #include "../Component.h"
 #include "../ComponentBase.h"
 #include "../EquipmentSlot.h"
 #include "../ItemInstance.h"
+#include "../Manifest.h"
 
 namespace tpublic
 {
@@ -39,6 +42,21 @@ namespace tpublic
 							return false;
 					}
 					return true;
+				}
+
+				bool 
+				HasEquipped(
+					const Manifest*		aManifest,
+					EquipmentSlot::Id	aEquipmentSlotId,
+					uint16_t			aFlags) const
+				{
+					const ItemInstance& item = m_items[aEquipmentSlotId];
+					if(!item.IsSet())
+						return false;
+
+					const Data::Item* itemData = aManifest->GetById<Data::Item>(item.m_itemId);
+					const ItemType::Info* itemTypeInfo = ItemType::GetInfo(itemData->m_itemType);
+					return (itemTypeInfo->m_flags & aFlags) == aFlags;
 				}
 
 				// Public data
