@@ -49,7 +49,7 @@ sprites:
 	sprite icon_knife_1 : { tags: [ icon weapon_1h_sword weapon_1h_knife ]}
 	sprite icon_sword_2 : { tags: [ icon weapon_1h_sword weapon_1h_knife weapon_2h_sword ] }
 	sprite icon_sword_3 : { tags: [ icon weapon_1h_sword weapon_1h_knife weapon_2h_sword ] }
-	sprite icon_axe_1 : { tags: [ icon weapon_1h_axe weapon_1h_axe weapon_2h_axe ] }
+	sprite icon_axe_1 : { tags: [ icon weapon_1h_axe weapon_2h_axe ] }
 	sprite icon_shield_1 : { tags: [ icon shield ] }
 	sprite icon_shoulders_1 : { tags: [ icon armor_cloth armor_mail armor_plate shoulders ] }
 	sprite icon_green_bag : { tags: [ icon bag ] }
@@ -57,8 +57,8 @@ sprites:
 	sprite icon_brown_bag : { tags: [ icon bag ] }
 	sprite icon_mail_belt_1 : { tags: [ icon armor_mail armor_plate waist ] }
 	sprite icon_mail_bracers_1 : { tags: [ icon armor_mail armor_plate wrists ] }
-	sprite icon_cape_1 : { tags: [ icon back ] }
-	sprite icon_cape_2 : { tags: [ icon back ] }
+	sprite icon_cape_1 : { tags: [ icon armor_cloth back ] }
+	sprite icon_cape_2 : { tags: [ icon armor_cloth back ] }
 	sprite icon_necklace_1 : { tags: [ icon neck ] }
 	sprite icon_necklace_2 : { tags: [ icon neck ] }
 
@@ -220,13 +220,16 @@ sprites:
 	sprite icon_shield_2 : { tags: [ icon shield ] }
 	sprite icon_shield_3 : { tags: [ icon shield ] }
 	sprite icon_gloves_3 : { tags: [ icon armor_cloth armor_mail armor_plate hands ] } 
-	sprite icon_axe_2 : { tags: [ icon weapon_1h_axe weapon_1h_axe weapon_2h_axe ] }
+	sprite icon_axe_2 : { tags: [ icon weapon_1h_axe weapon_2h_axe ] }
 	sprite icon_brown_bag_2 : { tags: [ icon bag ] }
 	sprite icon_blue_bag_1 : { tags: [ icon bag ] }
 	sprite icon_sword_5 : { tags: [ icon weapon_1h_sword weapon_2h_sword ] }
 
 	cursor: { position: [ 0 192 ] }		
 	sprite icon_knife_2 : { tags: [ icon weapon_1h_knife ]}
+	sprite icon_mace_1 : { tags: [ icon weapon_1h_mace weapon_2h_mace ] }
+	sprite icon_mace_2 : { tags: [ icon weapon_1h_mace weapon_2h_mace ] }
+	sprite icon_mace_3 : { tags: [ icon weapon_1h_mace weapon_2h_mace ] }
 	
 }
 

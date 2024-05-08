@@ -165,6 +165,8 @@ namespace tpublic
 				_ReadStackObjectArray(StackObject::TYPE_ITEM_SPECIAL, aChild);
 			else if (aChild->m_name == "abilities")
 				_ReadStackObjectArray(StackObject::TYPE_ABILITY, aChild);
+			else if (aChild->m_name == "weapon_speeds")
+				_ReadStackObjectArray(StackObject::TYPE_WEAPON_SPEED, aChild);
 			else if (aChild->m_name == "items")
 				_ReadItems(aChild);
 			else if (aChild->m_name == "deities")
@@ -253,6 +255,21 @@ namespace tpublic
 			});
 			break;
 
+		case StackObject::TYPE_WEAPON_SPEED:			
+			aSource->ForEachChild([&](
+				const SourceNode* aChild)
+			{
+				if(aChild->m_name == "speed")
+					stackObject->m_weaponSpeed.m_speed = aChild->GetInt32();
+				else if (aChild->m_name == "weight")
+					stackObject->m_weaponSpeed.m_weight = aChild->GetUInt32();
+				else if (aChild->m_name == "types")
+					aChild->GetIdArrayWithLookup<ItemType::Id, ItemType::INVALID_ID>(stackObject->m_weaponSpeed.m_types, [](const char* aString) { return ItemType::StringToId(aString); });
+				else
+					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+			});
+			break;
+
 		case StackObject::TYPE_ITEM_SPECIAL:
 			aSource->ForEachChild([&](
 				const SourceNode* aChild)
@@ -306,6 +323,16 @@ namespace tpublic
 		ItemBinding::Id itemBinding = ItemBinding::ID_WHEN_EQUIPPED;
 		std::vector<uint32_t> specialPropabilities;		
 		int32_t budgetBias = 0;
+		
+		enum Type
+		{
+			INVALID_TYPE,
+
+			TYPE_WEAPONS_AND_SHIELDS,
+			TYPE_ARMOR_AND_JEWELRY
+		};
+
+		Type type = INVALID_TYPE;
 
 		aSource->ForEachChild([&](
 			const SourceNode* aChild)
@@ -324,12 +351,17 @@ namespace tpublic
 				baseStatWeights.FromSource(aChild);
 			else if(aChild->m_name == "special_propabilities")
 				aChild->GetUIntArray(specialPropabilities);
+			else if (aChild->m_name == "type" && aChild->IsIdentifier("weapons_and_shields"))
+				type = TYPE_WEAPONS_AND_SHIELDS;
+			else if (aChild->m_name == "type" && aChild->IsIdentifier("armor_and_jewelry"))
+				type = TYPE_ARMOR_AND_JEWELRY;
 			else
 				TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 		});
 
 		TP_VERIFY(rarity != Rarity::INVALID_ID, aSource->m_debugInfo, "Invalid rarity.");
 		TP_VERIFY(lootGroups.size() > 0, aSource->m_debugInfo, "No loot groups.");
+		TP_VERIFY(type != INVALID_TYPE, aSource->m_debugInfo, "No type.");
 
 		for(uint32_t i = 0; i < count; i++)
 		{
@@ -337,18 +369,18 @@ namespace tpublic
 			uint32_t itemLevel = _GetRandomIntInRange(levelRange.m_min, levelRange.m_max);
 
 			WeightedRandom<const StackObject::ItemClass*> possibleItemClasses;
-			WeightedRandom<const StackObject::Designation*> possibleDesignations;
+			WeightedRandom<const StackObject::Designation*> possibleDesignations;			
 
 			for (const std::unique_ptr<StackObject>& stackObject : m_stack)
 			{
-				if(stackObject->m_type == StackObject::TYPE_ITEM_CLASS)
+				if (stackObject->m_type == StackObject::TYPE_ITEM_CLASS)
 				{
 					const StackObject::ItemClass* itemClass = &stackObject->m_itemClass;
 
-					if(itemClass->m_minLevel != 0 && itemLevel < itemClass->m_minLevel)
+					if (itemClass->m_minLevel != 0 && itemLevel < itemClass->m_minLevel)
 						continue;
 
-					if(itemClass->m_minRarity != Rarity::INVALID_ID && (uint32_t)rarity < (uint32_t)itemClass->m_minRarity)
+					if (itemClass->m_minRarity != Rarity::INVALID_ID && (uint32_t)rarity < (uint32_t)itemClass->m_minRarity)
 						continue;
 
 					if (itemClass->m_maxLevel != 0 && itemLevel > itemClass->m_maxLevel)
@@ -356,11 +388,7 @@ namespace tpublic
 
 					possibleItemClasses.AddPossibility(itemClass->m_weight, itemClass);
 				}
-			}
-
-			for (const std::unique_ptr<StackObject>& stackObject : m_stack)
-			{
-				if (stackObject->m_type == StackObject::TYPE_DESIGNATION)
+				else if (stackObject->m_type == StackObject::TYPE_DESIGNATION)
 				{
 					const StackObject::Designation* designation = &stackObject->m_designation;
 
@@ -368,8 +396,8 @@ namespace tpublic
 				}
 			}
 
-			const StackObject::ItemClass* itemClass;
-			const StackObject::Designation* designation;
+			const StackObject::ItemClass* itemClass = NULL;
+			const StackObject::Designation* designation = NULL;
 
 			if(possibleItemClasses.Pick(_GetRandom(), itemClass) && possibleDesignations.Pick(_GetRandom(), designation))
 			{
@@ -384,20 +412,42 @@ namespace tpublic
 					uint32_t itemTypeTagId = m_manifest->TryGetExistingIdByName<Data::Tag>(ItemType::GetInfo(itemType)->m_name);
 					if(itemTypeTagId != 0)
 						mustHaveTags.insert(itemTypeTagId);
+				}				
+
+				const StackObject::WeaponSpeed* weaponSpeed = NULL;
+
+				if (type == TYPE_WEAPONS_AND_SHIELDS)
+				{
+					WeightedRandom<const StackObject::WeaponSpeed*> possibleWeaponSpeeds;
+					for (const std::unique_ptr<StackObject>& stackObject : m_stack)
+					{
+						if (stackObject->m_type == StackObject::TYPE_WEAPON_SPEED && stackObject->m_weaponSpeed.HasType(itemType))
+							possibleWeaponSpeeds.AddPossibility(stackObject->m_weaponSpeed.m_weight, &stackObject->m_weaponSpeed);
+					}
+					possibleWeaponSpeeds.Pick(_GetRandom(), weaponSpeed);
 				}
 
-				for(EquipmentSlot::Id equipmentSlot : itemClass->m_slots)
+				std::vector<uint32_t> allTags;
+				Stat::Collection rawStats;
+				std::string itemString;
+				std::unordered_set<uint32_t> allTagsSet;
+				Stat::Collection statWeights;
+
+				if(type == TYPE_ARMOR_AND_JEWELRY)
 				{
-					uint32_t equipmentSlotTagId = m_manifest->TryGetExistingIdByName<Data::Tag>(EquipmentSlot::GetInfo(equipmentSlot)->m_tag);
-					if (equipmentSlotTagId != 0)
+					for (EquipmentSlot::Id equipmentSlot : itemClass->m_slots)
 					{
-						mustHaveTags.insert(equipmentSlotTagId);
-						lastEquipmentSlotTagId = equipmentSlotTagId;
+						uint32_t equipmentSlotTagId = m_manifest->TryGetExistingIdByName<Data::Tag>(EquipmentSlot::GetInfo(equipmentSlot)->m_tag);
+						if (equipmentSlotTagId != 0)
+						{
+							mustHaveTags.insert(equipmentSlotTagId);
+							lastEquipmentSlotTagId = equipmentSlotTagId;
+						}
 					}
 				}
 
 				WordList::QueryParams wordListQuery;
-				for(uint32_t tagId : mustHaveTags)
+				for (uint32_t tagId : mustHaveTags)
 					wordListQuery.m_mustHaveTags.push_back(tagId);
 				wordListQuery.Prepare();
 				const WordList::Word* baseNameWord = m_wordListQueryCache->PerformQuery(wordListQuery)->GetRandomWord(_GetRandom());
@@ -407,10 +457,8 @@ namespace tpublic
 					std::vector<uint32_t> contextTags;
 					_GetContextTags(contextTags);
 
-					std::vector<uint32_t> allTags = baseNameWord->m_allTags;
+					allTags = baseNameWord->m_allTags;
 
-					std::string itemString;
-					Stat::Collection statWeights;
 					_CreateDesignation(baseNameWord->m_word.c_str(), designation, contextTags, allTags, statWeights, itemString);
 
 					if(statWeights.IsEmpty())
@@ -419,9 +467,6 @@ namespace tpublic
 					statWeights.RemoveLowStats(maxDifferentStats);
 					statWeights.Add(baseStatWeights);
 
-					Stat::Collection rawStats;
-
-					std::unordered_set<uint32_t> allTagsSet;
 					for(uint32_t tagId : allTags)
 					{
 						const Data::Tag* tag = m_manifest->GetById<Data::Tag>(tagId);
@@ -449,9 +494,8 @@ namespace tpublic
 						}
 					}
 
-					int32_t itemBudgetBias = budgetBias - (int32_t)rawStats.GetTotalBudgetCost();
-
 					const char* iconName = _PickIconName(mustHaveTags, allTags);
+					int32_t itemBudgetBias = budgetBias - (int32_t)rawStats.GetTotalBudgetCost();
 
 					GeneratedSource* output = _CreateGeneratedSource();
 
@@ -465,10 +509,13 @@ namespace tpublic
 					output->PrintF(1, "type: %s", ItemType::GetInfo(itemType)->m_name);
 					output->PrintF(1, "binds: %s", ItemBinding::GetInfo(itemBinding)->m_name);
 
-					if(itemBudgetBias != 0)
+					if (itemBudgetBias != 0)
 						output->PrintF(1, "budget_bias: %d", itemBudgetBias);
 
-					if(itemClass->m_slots.size() > 0)
+					if(weaponSpeed != NULL && itemType != ItemType::ID_SHIELD)
+						output->PrintF(1, "weapon_cooldown: %d", weaponSpeed->m_speed);
+
+					if (itemClass->m_slots.size() > 0)
 					{
 						output->PrintF(1, "equipment_slots:");
 						output->PrintF(1, "[");
@@ -479,19 +526,19 @@ namespace tpublic
 
 					output->PrintF(1, "tags:");
 					output->PrintF(1, "[");
-					for(uint32_t tagId : allTagsSet)
+					for (uint32_t tagId : allTagsSet)
 						output->PrintF(2, "%s", m_manifest->GetById<Data::Tag>(tagId)->m_name.c_str());
 					output->PrintF(1, "]");
 
-					for(uint32_t j = 1; j < (uint32_t)Stat::NUM_IDS; j++)
+					for (uint32_t j = 1; j < (uint32_t)Stat::NUM_IDS; j++)
 					{
-						if(statWeights.m_stats[j] != 0.0f)
+						if (statWeights.m_stats[j] != 0.0f)
 						{
 							const Stat::Info* statInfo = Stat::GetInfo((Stat::Id)j);
 							output->PrintF(1, "stat_weight %s: %f", statInfo->m_name, statWeights.m_stats[j]);
 						}
 
-						if(rawStats.m_stats[j] != 0.0f)
+						if (rawStats.m_stats[j] != 0.0f)
 						{
 							const Stat::Info* statInfo = Stat::GetInfo((Stat::Id)j);
 							output->PrintF(1, "stat %s: %f", statInfo->m_name, rawStats.m_stats[j]);
@@ -500,10 +547,10 @@ namespace tpublic
 
 					output->PrintF(1, "loot_groups:");
 					output->PrintF(1, "[");
-					for(uint32_t lootGroupId : lootGroups)
+					for (uint32_t lootGroupId : lootGroups)
 						output->PrintF(2, "%s", m_manifest->GetById<Data::LootGroup>(lootGroupId)->m_name.c_str());
 					output->PrintF(1, "]");
-				
+
 					output->PrintF(0, "}");
 				}
 			}

@@ -186,6 +186,7 @@ namespace tpublic
 			aStream->WriteUInts(m_levelBase2HWeaponDPS);
 			aStream->WriteFloat(m_vendorCostMultiplier);
 			aStream->WriteFloat(m_offHandDPSMultiplier);
+			aStream->WriteFloat(m_shieldArmorToBaseBlockValue);
 
 			for(uint32_t i = 1; i < (uint32_t)ItemType::NUM_IDS; i++)
 				m_itemTypeMultipliers[i].ToStream(aStream);
@@ -212,6 +213,8 @@ namespace tpublic
 			if (!aStream->ReadFloat(m_vendorCostMultiplier))
 				return false;
 			if (!aStream->ReadFloat(m_offHandDPSMultiplier))
+				return false;
+			if (!aStream->ReadFloat(m_shieldArmorToBaseBlockValue))
 				return false;
 
 			for (uint32_t i = 1; i < (uint32_t)ItemType::NUM_IDS; i++)

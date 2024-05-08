@@ -64,8 +64,8 @@ namespace tpublic
 
 				uint32_t avgDamage = (dps * m_weaponCooldown) / 10;
 				
-				m_weaponDamage.m_min = avgDamage / 2;
-				m_weaponDamage.m_max = (avgDamage * 3) / 2;
+				m_weaponDamage.m_min = (avgDamage * 3) / 4;
+				m_weaponDamage.m_max = (avgDamage * 5) / 4;
 				
 				if(m_weaponDamage.m_min == 0)
 					m_weaponDamage.m_min = 1;

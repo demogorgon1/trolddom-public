@@ -1,12 +1,14 @@
 word_list: { tags: [ weapon_1h_sword ] strings: [ "Sword" "Scimitar" "Falchion" "Blade" "Gladius" "Rapier" "Cutter" "Cutlass" "Messer" "Longsword" "Short Sword" "Saber" ] }
 word_list: { tags: [ weapon_1h_mace ] strings: [ "Mace" "Flail" "Club" "Knocker" "Breaker" "Crusher" "Mallet" "Hammer" "Maul" "Warhammer" "Bat" ] }
 word_list: { tags: [ weapon_1h_axe ] strings: [ "Axe" "Cleaver" "Hatchet" "Chopper" ] }
-word_list: { tags: [ weapon_1h_knife ] strings: [ "Knife" "Dagger" "Cutter" "Slicer" "Blade" "Machete" "Scalpel" "Skewer" "Shank" "Shiv" "Switchblade" "Tickler" "Stiletto" "Skiver" ] }
+word_list: { tags: [ weapon_1h_knife ] strings: [ "Knife" "Dagger" "Cutter" "Slicer" "Blade" "Machete" "Scalpel" "Skewer" "Shank" "Shiv" "Switchblade" "Tickler" "Stiletto" "Skiver" "Sticker" ] }
 
 word_list: { tags: [ weapon_2h_sword ] strings: [ "Sword" "Scimitar" "Falchion" "Blade" "Longsword" "Broadsword" "Claymore" "Flamberge" ] }
 word_list: { tags: [ weapon_2h_mace ] strings: [ "Mace" "Club" "Knocker" "Breaker" "Crusher" "Mallet" "Hammer" "Maul" "Warhammer" ] }
 word_list: { tags: [ weapon_2h_axe ] strings: [ "Axe" "Cleaver" "Chopper" "Battle Axe" "Greataxe" ] }
 word_list: { tags: [ weapon_2h_staff ] strings: [ "Staff" "Stick" "Club" "Rod" "Stave" "Cane" ] }
+
+word_list: { tags: [ shield ] strings: [ "Buckler" "Defender" "Shield" "Aegis" "Guard" "Protector" "Bulwark" ] }
 
 word_list: { tags: [ armor_cloth head ] strings: [ "Hood" "Veil" "Turban" "Cap" "Cowl" "Headwrap" "Wrap" "Headscarf" "Coif" "Mantle" "Bandana" "Tiara" "Circlet" ] }
 word_list: { tags: [ armor_cloth legs ] strings: [ "Leggings" "Trousers" "Breeches" "Pantaloons" "Pants" "Skirt" "Tights" "Hosen" "Bloomers" "Legwraps" "Looms" "Gaiters" "Hose" "Silks" ] }

@@ -2,128 +2,272 @@ generation_job world_drops:
 {
 	random_seed: 419578923
 	
-	item_classes:
-	[
-		{ slots: [ head ] types: [ armor_cloth armor_mail ] min_level: 5 }
-		{ slots: [ chest ] types: [ armor_cloth armor_mail ] }	
-		{ slots: [ legs ] types: [ armor_cloth armor_mail ] }	
-		{ slots: [ shoulders ] types: [ armor_cloth armor_mail ] min_level: 6 }	
-		{ slots: [ wrists ] types: [ armor_cloth armor_mail ] }	
-		{ slots: [ waist ] types: [ armor_cloth armor_mail ] }	
-		{ slots: [ hands ] types: [ armor_cloth armor_mail ] }	
-		{ slots: [ feet ] types: [ armor_cloth armor_mail ] }			
-		{ slots: [ head ] types: [ armor_plate ] min_level: 9 }
-		{ slots: [ chest ] types: [ armor_plate ] min_level: 8 }
-		{ slots: [ legs ] types: [ armor_plate ] min_level: 8 }	
-		{ slots: [ shoulders ] types: [ armor_plate ] min_level: 10 }	
-		{ slots: [ wrists ] types: [ armor_plate ] min_level: 6 }	
-		{ slots: [ waist ] types: [ armor_plate ] min_level: 7 }	
-		{ slots: [ hands ] types: [ armor_plate ] min_level: 7 }	
-		{ slots: [ feet ] types: [ armor_plate ] min_level: 7 }	
-		{ slots: [ back ] types: [ armor_cloth ] }	
-		{ slots: [ finger_1 finger_2 ] min_level: 4 min_rarity: uncommon }	
-		{ slots: [ neck ] min_level: 4 min_rarity: uncommon }			
-	]
+	######################################################################################
+	# Weapons and shields
+	{	
+		item_classes:
+		[
+			{ slots: [ main_hand ] types: [ weapon_1h_sword weapon_1h_mace weapon_1h_axe weapon_2h_sword weapon_2h_mace weapon_2h_axe weapon_2h_staff ] weight: 3 }			
+			{ slots: [ main_hand off_hand ] types: [ weapon_1h_sword weapon_1h_mace weapon_1h_axe weapon_1h_knife ] weight: 3 }			
+			{ slots: [ off_hand ] types: [ shield ] }			
+		]
+		
+		weapon_speeds:
+		[
+			{ speed: 15 types: [ weapon_1h_sword weapon_1h_mace weapon_1h_axe weapon_1h_knife ] }
+			{ speed: 16 types: [ weapon_1h_sword weapon_1h_mace weapon_1h_axe weapon_1h_knife ] }
+			{ speed: 17 types: [ weapon_1h_sword weapon_1h_mace weapon_1h_axe weapon_1h_knife ] }
+			{ speed: 18 types: [ weapon_1h_sword weapon_1h_mace weapon_1h_axe weapon_1h_knife ] }
+			{ speed: 19 types: [ weapon_1h_sword weapon_1h_mace weapon_1h_axe weapon_1h_knife ] }
+			{ speed: 20 types: [ weapon_1h_sword weapon_1h_mace weapon_1h_axe weapon_1h_knife ] }
+			{ speed: 22 types: [ weapon_1h_sword weapon_1h_mace weapon_1h_axe ] }
+			{ speed: 24 types: [ weapon_1h_sword weapon_1h_mace weapon_1h_axe ] }
+			{ speed: 26 types: [ weapon_1h_sword weapon_1h_mace weapon_1h_axe weapon_2h_sword weapon_2h_mace weapon_2h_axe weapon_2h_staff ] }
+			{ speed: 28 types: [ weapon_2h_sword weapon_2h_mace weapon_2h_axe weapon_2h_staff ] }
+			{ speed: 30 types: [ weapon_2h_sword weapon_2h_mace weapon_2h_axe weapon_2h_staff ] }
+			{ speed: 32 types: [ weapon_2h_sword weapon_2h_mace weapon_2h_axe ] }
+			{ speed: 34 types: [ weapon_2h_sword weapon_2h_mace weapon_2h_axe ] }
+			{ speed: 36 types: [ weapon_2h_sword weapon_2h_mace weapon_2h_axe ] }
+			{ speed: 38 types: [ weapon_2h_sword weapon_2h_mace weapon_2h_axe ] }
+		]
 	
-	# Common (junk) items
-	{
-		designations:
-		[				
-			{ weight: 20 prefix: [ adjective " " ] }
-		]
-		
-		level_range: [ 1 10 ]
-		
-		items:
+		# Common (junk) items
 		{
-			rarity: common
-			binds: never
-			max_different_stats: 0
-			loot_groups: [ world_drops_junk ]
-			count: 100			
-		}		
-	}
-
-	# Uncommon, rare, and epic items
-	{
-		designations:
-		[				
-			{ weight: 20 prefix: [ adjective " " ] }
-			{ weight: 10 suffix: [ " of the " noun ] }
-		]
-
-		{
-			level_range: [ 3 10 ]
+			designations:
+			[				
+				{ weight: 20 prefix: [ adjective " " ] }
+			]
+			
+			level_range: [ 3 10 ]	
 			
 			items:
 			{
-				rarity: uncommon
-				binds: when_equipped
-				max_different_stats: 3
-				loot_groups: [ world_drops_uncommon ]
-				count: 100	
-			}
+				type: weapons_and_shields
+				rarity: common
+				binds: never
+				max_different_stats: 0
+				loot_groups: [ world_drops_junk ]		
+				count: 25				
+			}				
 		}
 		
-		item_specials:
-		[
-			{ raw_stat phys_crit_chance: 1 }
-			{ raw_stat spell_crit_chance: 1 }
-			{ raw_stat dodge_chance: 1 }
-			{ raw_stat block_chance: 1 }
-			{ raw_stat parry_chance: 1 }
-		]
-
-		designations:
-		[				
-			{ weight: 5 prefix: [ adjective " " ] suffix: [ " of the " noun ] }
-			{ weight: 5 prefix: [ adjective " " noun " " ] }
-			{ weight: 5 suffix: [ " of the " adjective " " noun ] }
-			{ weight: 2 suffix: [ " of the " character_adjective " " noun ] }
-			{ weight: 2 prefix: [ predator "slayer " ] }
-			{ weight: 2 prefix: [ creature "slayer " ] }
-			{ weight: 2 prefix: [ predator "killer " ] }
-			{ weight: 2 prefix: [ creature "killer " ] }
-		]
-
+		# Uncommon, rare, and epic items
 		{
-			level_range: [ 5 10 ]
-		
-			items:
+			designations:
+			[				
+				{ weight: 20 prefix: [ adjective " " ] }
+				{ weight: 10 suffix: [ " of the " noun ] }
+			]
+
 			{
-				rarity: rare
-				binds: when_equipped				
-				max_different_stats: 2
-				special_propabilities: [ 16 ]
-				stat_weights: { constitution: 1 }
-				loot_groups: [ world_drops_rare ]		
-				count: 100				
+				level_range: [ 3 10 ]
+				
+				items:
+				{
+					type: weapons_and_shields
+					rarity: uncommon
+					binds: when_equipped
+					max_different_stats: 3
+					loot_groups: [ world_drops_uncommon ]
+					count: 50	
+				}
+			}
+			
+			item_specials:
+			[
+				{ raw_stat phys_crit_chance: 1 }
+				{ raw_stat spell_crit_chance: 1 }
+				{ raw_stat dodge_chance: 1 }
+				{ raw_stat block_chance: 1 }
+				{ raw_stat parry_chance: 1 }
+			]
+
+			designations:
+			[				
+				{ weight: 5 prefix: [ adjective " " ] suffix: [ " of the " noun ] }
+				{ weight: 5 prefix: [ adjective " " noun " " ] }
+				{ weight: 5 suffix: [ " of the " adjective " " noun ] }
+				{ weight: 2 suffix: [ " of the " character_adjective " " noun ] }
+				{ weight: 2 prefix: [ predator "slayer " ] }
+				{ weight: 2 prefix: [ creature "slayer " ] }
+				{ weight: 2 prefix: [ predator "killer " ] }
+				{ weight: 2 prefix: [ creature "killer " ] }
+			]
+
+			{
+				level_range: [ 5 10 ]
+			
+				items:
+				{
+					type: weapons_and_shields
+					rarity: rare
+					binds: when_equipped				
+					max_different_stats: 2
+					special_propabilities: [ 16 ]
+					stat_weights: { constitution: 1 }
+					loot_groups: [ world_drops_rare ]		
+					count: 50				
+				}
+			}
+
+			designations:
+			[				
+				{ weight: 1 prefix: [ adjective " " predator "slayer " ] }
+				{ weight: 1 prefix: [ adjective " " creature "slayer " ] }
+				{ weight: 1 prefix: [ adjective " " predator "killer " ] }
+				{ weight: 1 prefix: [ adjective " " creature "killer " ] }
+			]
+
+			{
+				level_range: [ 8 10 ]
+
+				items:
+				{
+					type: weapons_and_shields
+					rarity: epic
+					binds: when_equipped				
+					max_different_stats: 2
+					special_propabilities: [ 40 5 ]
+					stat_weights: { constitution: 1 }
+					loot_groups: [ world_drops_epic ]		
+					count: 75				
+				}
 			}
 		}
+	}
 
-		designations:
-		[				
-			{ weight: 1 prefix: [ adjective " " predator "slayer " ] }
-			{ weight: 1 prefix: [ adjective " " creature "slayer " ] }
-			{ weight: 1 prefix: [ adjective " " predator "killer " ] }
-			{ weight: 1 prefix: [ adjective " " creature "killer " ] }
-		]
-
-		{
-			level_range: [ 8 10 ]
-
-			items:
-			{
-				rarity: epic
-				binds: when_equipped				
-				max_different_stats: 2
-				special_propabilities: [ 40 5 ]
-				stat_weights: { constitution: 1 }
-				loot_groups: [ world_drops_epic ]		
-				count: 100				
-			}
-		}
+	######################################################################################
+	# Armor and jewelry
+	{
 	
-	}	
+		item_classes:
+		[
+			{ slots: [ head ] types: [ armor_cloth armor_mail ] min_level: 5 }
+			{ slots: [ chest ] types: [ armor_cloth armor_mail ] }	
+			{ slots: [ legs ] types: [ armor_cloth armor_mail ] }	
+			{ slots: [ shoulders ] types: [ armor_cloth armor_mail ] min_level: 6 }	
+			{ slots: [ wrists ] types: [ armor_cloth armor_mail ] }	
+			{ slots: [ waist ] types: [ armor_cloth armor_mail ] }	
+			{ slots: [ hands ] types: [ armor_cloth armor_mail ] }	
+			{ slots: [ feet ] types: [ armor_cloth armor_mail ] }			
+			{ slots: [ head ] types: [ armor_plate ] min_level: 9 }
+			{ slots: [ chest ] types: [ armor_plate ] min_level: 8 }
+			{ slots: [ legs ] types: [ armor_plate ] min_level: 8 }	
+			{ slots: [ shoulders ] types: [ armor_plate ] min_level: 10 }	
+			{ slots: [ wrists ] types: [ armor_plate ] min_level: 6 }	
+			{ slots: [ waist ] types: [ armor_plate ] min_level: 7 }	
+			{ slots: [ hands ] types: [ armor_plate ] min_level: 7 }	
+			{ slots: [ feet ] types: [ armor_plate ] min_level: 7 }	
+			{ slots: [ back ] types: [ armor_cloth ] }	
+			{ slots: [ finger_1 finger_2 ] min_level: 4 min_rarity: uncommon }	
+			{ slots: [ neck ] min_level: 4 min_rarity: uncommon }			
+		]
+		
+		# Common (junk) items
+		{
+			designations:
+			[				
+				{ weight: 20 prefix: [ adjective " " ] }
+			]
+			
+			level_range: [ 1 10 ]
+			
+			items:
+			{
+				type: armor_and_jewelry
+				rarity: common
+				binds: never
+				max_different_stats: 0
+				loot_groups: [ world_drops_junk ]
+				count: 100			
+			}		
+		}
+
+		# Uncommon, rare, and epic items
+		{
+			designations:
+			[				
+				{ weight: 20 prefix: [ adjective " " ] }
+				{ weight: 10 suffix: [ " of the " noun ] }
+			]
+
+			{
+				level_range: [ 3 10 ]
+				
+				items:
+				{
+					type: armor_and_jewelry
+					rarity: uncommon
+					binds: when_equipped
+					max_different_stats: 3
+					loot_groups: [ world_drops_uncommon ]
+					count: 100	
+				}
+			}
+			
+			item_specials:
+			[
+				{ raw_stat phys_crit_chance: 1 }
+				{ raw_stat spell_crit_chance: 1 }
+				{ raw_stat dodge_chance: 1 }
+				{ raw_stat block_chance: 1 }
+				{ raw_stat parry_chance: 1 }
+			]
+
+			designations:
+			[				
+				{ weight: 5 prefix: [ adjective " " ] suffix: [ " of the " noun ] }
+				{ weight: 5 prefix: [ adjective " " noun " " ] }
+				{ weight: 5 suffix: [ " of the " adjective " " noun ] }
+				{ weight: 2 suffix: [ " of the " character_adjective " " noun ] }
+				{ weight: 2 prefix: [ predator "slayer " ] }
+				{ weight: 2 prefix: [ creature "slayer " ] }
+				{ weight: 2 prefix: [ predator "killer " ] }
+				{ weight: 2 prefix: [ creature "killer " ] }
+			]
+
+			{
+				level_range: [ 5 10 ]
+			
+				items:
+				{
+					type: armor_and_jewelry
+					rarity: rare
+					binds: when_equipped				
+					max_different_stats: 2
+					special_propabilities: [ 16 ]
+					stat_weights: { constitution: 1 }
+					loot_groups: [ world_drops_rare ]		
+					count: 100				
+				}
+			}
+
+			designations:
+			[				
+				{ weight: 1 prefix: [ adjective " " predator "slayer " ] }
+				{ weight: 1 prefix: [ adjective " " creature "slayer " ] }
+				{ weight: 1 prefix: [ adjective " " predator "killer " ] }
+				{ weight: 1 prefix: [ adjective " " creature "killer " ] }
+			]
+
+			{
+				level_range: [ 8 10 ]
+
+				items:
+				{
+					type: armor_and_jewelry
+					rarity: epic
+					binds: when_equipped				
+					max_different_stats: 2
+					special_propabilities: [ 40 5 ]
+					stat_weights: { constitution: 1 }
+					loot_groups: [ world_drops_epic ]		
+					count: 100				
+				}
+			}
+		
+		}	
+		
+	}
 	
 }

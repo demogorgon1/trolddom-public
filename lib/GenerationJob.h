@@ -64,7 +64,8 @@ namespace tpublic
 				TYPE_ITEM_SPECIAL,
 				TYPE_DESIGNATION,
 				TYPE_LEVEL_RANGE,
-				TYPE_ABILITY
+				TYPE_ABILITY,
+				TYPE_WEAPON_SPEED
 			};
 
 			struct RandomTags
@@ -117,11 +118,32 @@ namespace tpublic
 				uint32_t								m_weight = 1;
 			};
 
+			struct WeaponSpeed
+			{
+				bool 
+				HasType(
+					ItemType::Id						aType) const
+				{
+					for(ItemType::Id type : m_types)
+					{
+						if(type == aType)
+							return true;
+					}
+					return false;
+				}
+
+				// Public data
+				int32_t									m_speed = 0;
+				std::vector<ItemType::Id>				m_types;
+				uint32_t								m_weight = 1;
+			};
+
 			Type										m_type;
 			RandomTags									m_randomTags;
 			ItemClass									m_itemClass;
 			ItemSpecial									m_itemSpecial;
 			Designation									m_designation;
+			WeaponSpeed									m_weaponSpeed;
 			uint32_t									m_abilityId = 0;
 			UIntRange									m_range;
 			std::unique_ptr<std::mt19937>				m_randomNumberGenerator;
