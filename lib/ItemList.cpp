@@ -28,13 +28,16 @@ namespace tpublic
 	ItemList::AddToInventory(
 		const ItemInstance&							aItemInstance,
 		const Data::Item*							aItemData,
+		uint32_t									aSize,
 		bool										aAutoGrow)
 	{
 		if(aItemData->IsUnique() && HasItems(aItemInstance.m_itemId, 1))
 			return false;
-
-		for(Entry& t : m_entries)
+		
+		for(uint32_t i = 0; i < (uint32_t)m_entries.size() && i < aSize; i++)
 		{
+			Entry& t = m_entries[i];
+
 			if(!t.m_item.IsSet())
 			{
 				t.m_item = aItemInstance;
@@ -70,7 +73,8 @@ namespace tpublic
 	ItemList::CanAddMultipleToInventory(
 		uint32_t									aItemId,
 		uint32_t									aQuantity,
-		const Data::Item*							aItemData) const
+		const Data::Item*							aItemData,
+		uint32_t									aSize) const
 	{
 		if (aQuantity == 0)
 			return true;
@@ -80,8 +84,10 @@ namespace tpublic
 
 		uint32_t remaining = aQuantity;
 				
-		for (const Entry& t : m_entries)
+		for (uint32_t i = 0; i < (uint32_t)m_entries.size() && i < aSize; i++)
 		{
+			const Entry& t = m_entries[i];
+
 			if(!t.m_item.IsSet())
 			{
 				uint32_t toAdd = remaining;
@@ -110,7 +116,8 @@ namespace tpublic
 	ItemList::AddMultipleToInventory(
 		uint32_t									aItemId,
 		uint32_t									aQuantity,
-		const Data::Item*							aItemData) 
+		const Data::Item*							aItemData,
+		uint32_t									aSize) 
 	{
 		if (aQuantity == 0)
 			return true;
@@ -120,8 +127,10 @@ namespace tpublic
 
 		uint32_t remaining = aQuantity;
 
-		for (Entry& t : m_entries)
+		for (uint32_t i = 0; i < (uint32_t)m_entries.size() && i < aSize; i++) 
 		{
+			Entry& t = m_entries[i];
+
 			if (!t.m_item.IsSet())
 			{
 				uint32_t toAdd = remaining;
@@ -160,7 +169,8 @@ namespace tpublic
 	ItemList::Destroy(
 		uint32_t									aIndex,
 		const Data::Item*							aItemData,
-		uint32_t									aQuantity)
+		uint32_t									aQuantity,
+		uint32_t									aSize)
 	{
 		if ((size_t)aIndex >= m_entries.size() || (size_t)aIndex >= m_entries.size())
 			return false;
@@ -183,6 +193,8 @@ namespace tpublic
 			entry.m_item.Clear();
 					
 		m_version++;
+
+		Shrink((size_t)aSize);
 
 		return true;
 	}
@@ -211,7 +223,8 @@ namespace tpublic
 	void
 	ItemList::RemoveItems(
 		uint32_t									aItemId,
-		uint32_t									aQuantity)
+		uint32_t									aQuantity,
+		uint32_t									aSize)
 	{
 		uint32_t remaining = aQuantity;
 
@@ -236,11 +249,14 @@ namespace tpublic
 
 		assert(remaining == 0);
 		m_version++;
+
+		Shrink((size_t)aSize);
 	}
 
 	bool
 	ItemList::Consume(
-		const Data::Ability::Items*					aConsumeItems)
+		const Data::Ability::Items*					aConsumeItems,
+		uint32_t									aSize)
 	{
 		// First pass to see if we actually have everything
 		if(!CanConsume(aConsumeItems))
@@ -248,7 +264,7 @@ namespace tpublic
 
 		// Second pass we remove stuff
 		for (const Data::Ability::Item& item : aConsumeItems->m_items)
-			RemoveItems(item.m_itemId, item.m_quantity);
+			RemoveItems(item.m_itemId, item.m_quantity, aSize);
 
 		return true;
 	}
@@ -291,7 +307,8 @@ namespace tpublic
 		uint32_t									aSourceIndex,
 		const Data::Item*							aSourceItemData,
 		uint32_t									aDestinationIndex,
-		uint32_t									aSplitQuantity)
+		uint32_t									aSplitQuantity,
+		uint32_t									aSize)
 	{
 		if((size_t)aSourceIndex >= m_entries.size() || (size_t)aDestinationIndex >= m_entries.size())
 			return false;
@@ -375,6 +392,8 @@ namespace tpublic
 			}
 
 			m_version++;
+
+			Shrink((size_t)aSize);
 		}
 
 		return true;
@@ -433,6 +452,39 @@ namespace tpublic
 		}
 
 		return count;
+	}
+
+	void				
+	ItemList::Resize(
+		size_t										aTargetSize)
+	{
+		if(m_entries.size() < aTargetSize)
+		{
+			m_entries.resize(aTargetSize);
+
+			m_version++;
+		}
+		else if(m_entries.size() > aTargetSize)
+		{
+			Shrink(aTargetSize);
+		}		
+	}
+
+	void				
+	ItemList::Shrink(
+		size_t										aTargetSize)
+	{
+		if(m_entries.size() > aTargetSize)
+		{
+			size_t removeCount = 0;
+			for(size_t i = m_entries.size() - 1; i >= aTargetSize && !m_entries[i].m_item.IsSet(); i--)
+				removeCount++;
+
+			assert(removeCount <= m_entries.size());
+			m_entries.resize(m_entries.size() - removeCount);
+
+			m_version++;
+		}		
 	}
 
 }

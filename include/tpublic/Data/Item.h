@@ -185,6 +185,10 @@ namespace tpublic
 						{
 							m_weaponCooldown = aChild->GetUInt32();
 						}
+						else if (aChild->m_name == "bag_slots")
+						{
+							m_bagSlots = aChild->GetUInt32();
+						}
 						else if (aChild->m_name == "weapon_damage")
 						{
 							m_weaponDamage = UIntRange(aChild);
@@ -254,6 +258,7 @@ namespace tpublic
 				aStream->WriteObjects(m_addedStats);
 				aStream->WriteOptionalObject(m_weaponDamage);
 				aStream->WriteUInt(m_weaponCooldown);
+				aStream->WriteUInt(m_bagSlots);
 				aStream->WriteString(m_string);
 				aStream->WriteString(m_flavor);
 				aStream->WriteInt(m_budgetBias);
@@ -293,6 +298,8 @@ namespace tpublic
 				if (!aStream->ReadOptionalObject(m_weaponDamage))
 					return false;
 				if (!aStream->ReadUInt(m_weaponCooldown))
+					return false;
+				if (!aStream->ReadUInt(m_bagSlots))
 					return false;
 				if (!aStream->ReadString(m_string))
 					return false;
@@ -334,6 +341,7 @@ namespace tpublic
 			ItemBinding::Id				m_itemBinding = ItemBinding::ID_NEVER;
 			SoundEffect::Collection		m_soundEffects;
 			uint32_t					m_flags = 0;
+			uint32_t					m_bagSlots = 0;
 
 			// Not serialized
 			std::string					m_lcString;

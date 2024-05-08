@@ -152,7 +152,7 @@ namespace tpublic::ObjectiveTypes
 	CollectItems::PostCompletionInventoryUpdate(
 		Components::Inventory*				aInventory) const 
 	{
-		aInventory->m_itemList.RemoveItems(m_itemId, m_count);
+		aInventory->m_itemList.RemoveItems(m_itemId, m_count, aInventory->m_size);
 		aInventory->SetPendingPersistenceUpdate(ComponentBase::PENDING_PERSISTENCE_UPDATE_MEDIUM_PRIORITY);
 	}
 

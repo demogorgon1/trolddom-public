@@ -94,15 +94,15 @@ namespace tpublic
 					{
 						if (itemList.HasItems(m_consumeSourceItemId, m_consumeSourceItemCount))
 						{
-							itemList.RemoveItems(m_consumeSourceItemId, m_consumeSourceItemCount);
+							itemList.RemoveItems(m_consumeSourceItemId, m_consumeSourceItemCount, inventory->m_size);
 
 							if(m_produceSourceItemId != 0)
-								ok = itemList.AddMultipleToInventory(m_produceSourceItemId, m_produceSourceItemCount, aManifest->GetById<Data::Item>(m_produceSourceItemId));
+								ok = itemList.AddMultipleToInventory(m_produceSourceItemId, m_produceSourceItemCount, aManifest->GetById<Data::Item>(m_produceSourceItemId), inventory->m_size);
 						}
 					}
 					else if(m_produceSourceItemId != 0)
 					{
-						ok = itemList.AddMultipleToInventory(m_produceSourceItemId, m_produceSourceItemCount, aManifest->GetById<Data::Item>(m_produceSourceItemId));
+						ok = itemList.AddMultipleToInventory(m_produceSourceItemId, m_produceSourceItemCount, aManifest->GetById<Data::Item>(m_produceSourceItemId), inventory->m_size);
 					}
 
 					if (ok)

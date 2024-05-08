@@ -214,7 +214,18 @@ sprites:
 	sprite icon_charging_combat : { tags: [ icon ] }
 	sprite icon_mage_swiftness : { tags: [ icon ] }
 	sprite icon_void_blade_storm : { tags: [ icon ] }	
-	
+	sprite icon_sword_4 : { tags: [ icon weapon_1h_sword weapon_1h_knife weapon_2h_sword ] }
+	sprite icon_shirt_1 : { tags: [ icon armor_cloth armor_mail armor_plate chest ] } 
+	sprite icon_boots_1 : { tags: [ icon armor_cloth armor_mail armor_plate feet ] } 
+	sprite icon_shield_2 : { tags: [ icon shield ] }
+	sprite icon_shield_3 : { tags: [ icon shield ] }
+	sprite icon_gloves_3 : { tags: [ icon armor_cloth armor_mail armor_plate hands ] } 
+	sprite icon_axe_2 : { tags: [ icon weapon_1h_axe weapon_1h_axe weapon_2h_axe ] }
+	sprite icon_brown_bag_2 : { tags: [ icon bag ] }
+	sprite icon_blue_bag_1 : { tags: [ icon bag ] }
+	sprite icon_sword_5 : { tags: [ icon weapon_1h_sword weapon_2h_sword ] }
+
+	cursor: { position: [ 0 192 ] }		
 }
 
 

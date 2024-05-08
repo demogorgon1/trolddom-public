@@ -17,10 +17,12 @@ namespace tpublic
 			static const uint8_t FLAGS = FLAG_PLAYER_ONLY;
 			static const Persistence::Id PERSISTENCE = Persistence::ID_MAIN;
 			static const Replication REPLICATION = REPLICATION_PRIVATE;
+			static const size_t BASE_SIZE = 16;
 
 			enum Field
 			{
-				FIELD_ITEM_LIST
+				FIELD_ITEM_LIST,
+				FIELD_SIZE
 			};
 
 			static void
@@ -28,6 +30,7 @@ namespace tpublic
 				ComponentSchema*		aSchema)
 			{
 				aSchema->DefineCustomObjectNoSource<ItemList>(FIELD_ITEM_LIST, offsetof(Inventory, m_itemList));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_SIZE, NULL, offsetof(Inventory, m_size));
 			}
 
 			void
@@ -41,6 +44,7 @@ namespace tpublic
 
 			// Public data
 			ItemList							m_itemList;
+			uint32_t							m_size = 0;
 
 			// Not serialized
 			std::vector<tpublic::ItemInstance>	m_itemLootNotifications;
