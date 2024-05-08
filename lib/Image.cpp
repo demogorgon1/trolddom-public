@@ -405,17 +405,18 @@ namespace tpublic
 	}
 
 	void		
-	Image::MakeGreyscale()
+	Image::MakeGreyscale(
+		uint32_t			aAlpha)
 	{
 		assert(HasData());
 
 		RGBA* p = m_data;
 		for(uint32_t i = 0, count = m_width * m_height; i < count; i++)
 		{
-			uint8_t c = (uint8_t)(((uint32_t)p->m_r + (uint32_t)p->m_g + (uint32_t)p->m_b) / 3);
-			p->m_r = c;
-			p->m_g = c;
-			p->m_b = c;
+			uint32_t c = ((uint32_t)p->m_r + (uint32_t)p->m_g + (uint32_t)p->m_b) / 3;
+			p->m_r = (uint8_t)((c * aAlpha + (uint32_t)p->m_r * (255 - aAlpha)) / 255);
+			p->m_g = (uint8_t)((c * aAlpha + (uint32_t)p->m_g * (255 - aAlpha)) / 255);
+			p->m_b = (uint8_t)((c * aAlpha + (uint32_t)p->m_b * (255 - aAlpha)) / 255);
 			p++;
 		}
 	}

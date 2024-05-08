@@ -110,7 +110,8 @@ namespace tpublic
 						uint32_t					aY,
 						const char*					aFormat,
 						...);
-		void		MakeGreyscale();
+		void		MakeGreyscale(
+						uint32_t					aAlpha);
 		void		Release();
 		void		Detach(
 						void**						aOutData,

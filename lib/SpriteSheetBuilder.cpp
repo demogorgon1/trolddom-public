@@ -219,7 +219,7 @@ namespace tpublic
 					// Make alternate greyscale version of sprite
 					Sprite* altGreyscaleSprite = _CreateSprite(NULL, NULL, width * height);
 					altGreyscaleSprite->m_image.Copy(sprite->m_image);
-					altGreyscaleSprite->m_image.MakeGreyscale();
+					altGreyscaleSprite->m_image.MakeGreyscale(150);
 
 					altGreyscaleSprite->m_info.m_flags = sprite->m_info.m_flags & (SpriteInfo::FLAG_CENTERED | SpriteInfo::FLAG_DOUBLED);
 

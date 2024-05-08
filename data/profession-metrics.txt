@@ -3,10 +3,10 @@ profession_metrics:
 
 	levels: 
 	[
-		{ string: "Apprentice" required_level: 5 required_skill: 0 training_cost: 200 max_skill: 75 }
-		{ string: "Journeyman" required_level: 10 required_skill: 50 training_cost: 600 max_skill: 150 }		
-		{ string: "Expert" required_level: 20 required_skill: 125 training_cost: 1200 max_skill: 225 }		
-		{ string: "Artisan" required_level: 35 required_skill: 200 training_cost: 6000 max_skill: 300 }		
+		{ string: "Apprentice" required_level: 0 required_skill: 0 training_cost: 200 max_skill: 75 }
+		{ string: "Journeyman" required_level: 5 required_skill: 50 training_cost: 600 max_skill: 150 }		
+		{ string: "Expert" required_level: 15 required_skill: 125 training_cost: 1200 max_skill: 225 }		
+		{ string: "Artisan" required_level: 25 required_skill: 200 training_cost: 6000 max_skill: 300 }		
 	]
 
 	skills:
