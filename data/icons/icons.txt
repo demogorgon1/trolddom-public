@@ -226,6 +226,8 @@ sprites:
 	sprite icon_sword_5 : { tags: [ icon weapon_1h_sword weapon_2h_sword ] }
 
 	cursor: { position: [ 0 192 ] }		
+	sprite icon_knife_2 : { tags: [ icon weapon_1h_knife ]}
+	
 }
 
 

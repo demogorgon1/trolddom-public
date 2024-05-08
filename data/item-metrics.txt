@@ -93,5 +93,6 @@ item_metrics:
 	rarity_multipliers mythic:				{ armor: 1.8	cost: 5 	stat_budget: 1.7    weapon_damage: 1.5 }
 	
 	shield_armor_to_base_block_value: 		0.025
+	offhand_dps_multiplier:					0.5
 
 }

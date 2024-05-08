@@ -165,6 +165,10 @@ namespace tpublic
 				{
 					m_shieldArmorToBaseBlockValue = aChild->GetFloat();
 				}
+				else if (aChild->m_name == "offhand_dps_multiplier")
+				{
+					m_offHandDPSMultiplier = aChild->GetFloat();
+				}
 				else
 				{
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -181,6 +185,7 @@ namespace tpublic
 			aStream->WriteUInts(m_levelBase1HWeaponDPS);
 			aStream->WriteUInts(m_levelBase2HWeaponDPS);
 			aStream->WriteFloat(m_vendorCostMultiplier);
+			aStream->WriteFloat(m_offHandDPSMultiplier);
 
 			for(uint32_t i = 1; i < (uint32_t)ItemType::NUM_IDS; i++)
 				m_itemTypeMultipliers[i].ToStream(aStream);
@@ -205,6 +210,8 @@ namespace tpublic
 			if (!aStream->ReadUInts(m_levelBase2HWeaponDPS))
 				return false;
 			if (!aStream->ReadFloat(m_vendorCostMultiplier))
+				return false;
+			if (!aStream->ReadFloat(m_offHandDPSMultiplier))
 				return false;
 
 			for (uint32_t i = 1; i < (uint32_t)ItemType::NUM_IDS; i++)
@@ -309,6 +316,7 @@ namespace tpublic
 		Multipliers								m_rarityMultipliers[Rarity::NUM_IDS];
 		float									m_vendorCostMultiplier = 0.5f;
 		float									m_shieldArmorToBaseBlockValue = 0.0f;
+		float									m_offHandDPSMultiplier = 0.5f;
 	};
 
 }
