@@ -230,6 +230,16 @@ sprites:
 	sprite icon_mace_1 : { tags: [ icon weapon_1h_mace weapon_2h_mace ] }
 	sprite icon_mace_2 : { tags: [ icon weapon_1h_mace weapon_2h_mace ] }
 	sprite icon_mace_3 : { tags: [ icon weapon_1h_mace weapon_2h_mace ] }
+	sprite icon_plate_chest_1 : { tags: [ icon armor_plate chest ] } 
+	sprite icon_crown_1 : { tags: [ icon armor_plate armor_mail armor_cloth head ] } 
+	sprite icon_herbs_1 : { tags: [ icon life ] }
+	sprite icon_flower_1 : { tags: [ icon life ] }
+	sprite icon_herbs_2 : { tags: [ icon life ] }
+	sprite icon_herbs_3 : { tags: [ icon life ] }
+	sprite icon_herbs_4 : { tags: [ icon life ] }
+	sprite icon_flower_2 : { tags: [ icon life ] }
+	sprite icon_small_green_potion : { tags: [ icon potion ] }
+	sprite icon_stew_1 : { tags: [ icon ] }
 	
 }
 
