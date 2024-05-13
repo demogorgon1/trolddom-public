@@ -1,0 +1,6 @@
+profession cooking<secondary>:
+{
+	string: "Cooking"
+	icon: icon_cooking
+}
+

@@ -47,6 +47,16 @@ map_entity_spawn .junjun:
 	entity .junjun: { weight: 1 }
 }
 
+map_entity_spawn .xazax:
+{
+	entity .xazax: { weight: 1 }
+}
+
+map_entity_spawn .rorion:
+{
+	entity .rorion: { weight: 1 }
+}
+
 map_entity_spawn .gateway:
 {
 	entity gateway: { weight: 1 }
@@ -178,6 +188,8 @@ map_palette .stuff:
 	entity_spawn .spawn_of_umbracoth: [ 32 0 0 ]		
 	entity_spawn .arcane_anomaly: [ 33 0 0 ]		
 	entity_spawn .junjun_door: [ 0 43 0 ]		
+	entity_spawn .xazax: [ 55 95 12 ]		
+	entity_spawn .rorion: [ 12 95 55 ]		
 	entity_spawn .stash: [ 0 43 66 ]		
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn dungeon_1_exit: [ 0 0 200 ]	

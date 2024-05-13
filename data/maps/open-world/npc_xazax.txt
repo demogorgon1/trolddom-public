@@ -1,0 +1,108 @@
+dialogue_screen .xazax_alchemy:
+{
+	text: 
+	[	
+		"Alchemy? It's more than just mixing potions; it's a journey into the mysteries of creation itself. With the right ingredients and skill, you can heal wounds, bolster strength, or transmute base metals into gold. Interested? Step right up and embark on your path to becoming a true master of the alchemical arts!"
+	]
+	
+	options:
+	[
+		{ goto: .xazax_greetings text: "I see." }
+	]
+}
+
+dialogue_screen .xazax_trainer:
+{
+	train_profession<0>: alchemy
+	train_profession<1>: alchemy
+	train_ability: craft_small_healing_potion
+	train_ability: craft_small_mana_potion
+}
+
+dialogue_screen .xazax_greetings:
+{
+	text: 
+	[	
+		"Why are you interrupting my research?"
+	]
+	
+	options:
+	[
+		{ goto: .xazax_alchemy text: "What can I use alchemy for?" }
+		{ goto: .xazax_trainer text: "Please teach me about alchemy." }
+	]
+}
+
+dialogue_root .xazax_dialogue:
+{
+	.xazax_greetings: { }
+}
+
+entity .xazax:
+{
+	string: "Xazax"
+	
+	systems: [ combat npc ]
+	
+	modifiers: 
+	{ 
+		weapon_damage: 2
+		resource<health>: 2
+	}		
+	
+	components:
+	{
+		position: { }		
+		threat_target: { }
+		visible_auras: { }
+		auras: { }
+		tag: { }
+		guild_name:
+		{
+			string: "Alchemy Trainer"
+		}		
+		lootable: 
+		{ 
+			loot_table: .npc
+		}
+		combat_public: 
+		{  
+			level: 10
+			faction: npcs		
+			creature_type: humanoid
+			dialogue_root: .xazax_dialogue
+			
+			modifier not_pushable: {}
+		}			
+		combat_private:
+		{
+			physical_critical_strike_chance: 5
+			dodge_chance: 5
+			parry_chance: 5
+			miss_chance: 5
+			block_chance: 5
+		}
+		npc: 
+		{ 			
+			state default:
+			{
+			}
+			
+			state in_combat:
+			{
+				abilities:
+				[					
+					{ id: npc_attack }
+				]
+			}	
+		}
+		sprite: 
+		{ 
+			animations:
+			[
+				{ states: [ default in_combat spawning ] frames: [ man_7 ] }			
+				{ states: [ dead ] frames: [ man_7_dead ] z_offset: -2 }			
+			]		
+		}		
+	}
+}

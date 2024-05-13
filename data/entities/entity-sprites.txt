@@ -58,6 +58,8 @@ sprites:
 	sprite arcane_construct: { dead: arcane_construct_dead tags: [ melee ] }
 	sprite arcane_construct_caster: { dead: arcane_construct_caster_dead tags: [ melee ] }
 	sprite arcane_anomaly: { dead: arcane_anomaly_dead tags: [ ] }
+	sprite man_7: { dead: man_7_dead tags: [ male human ] }
+	sprite man_8: { dead: man_8_dead tags: [ male human ] }
 	
 	cursor: { position: [ 0 48 ] }
 	
@@ -75,6 +77,8 @@ sprites:
 	sprite arcane_construct_dead: { }
 	sprite arcane_construct_caster_dead: { }
 	sprite arcane_anomaly_dead: { }
+	sprite man_7_dead: { }
+	sprite man_8_dead: { }
 	
 }
 
@@ -125,6 +129,7 @@ sprites:
 	cursor: { position: [ 0 32 ] }
 	sprite door_open_1: { }
 	sprite banner: { }
+	sprite wild_herbs: { }
 	
 }
 

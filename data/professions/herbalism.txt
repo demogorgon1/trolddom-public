@@ -10,6 +10,23 @@ ${
 }
 
 #############################################################################
+# Wild Herbs
+${
+	_icon: icon_herbs_2
+	_item_string: "Wild Herbs"
+	_entity_string: "Wild Herbs"
+	_loot_group: .herbalism_wild_herbs
+	_loot_table: .herbalism_wild_herbs
+	_profession_skill: 0
+	_sprite: wild_herbs
+}
+
+loot_group .herbalism_wild_herbs: { }
+loot_table .herbalism_wild_herbs: { slots: [ { possibility: { loot_group: .herbalism_wild_herbs } } ] }
+item item_wild_herbs: !GATHER_ITEM { }
+entity herbalism_wild_herbs: !GATHER_ENTITY { }
+
+#############################################################################
 # Dewleaf
 ${
 	_icon: icon_dewleaf
@@ -22,7 +39,14 @@ ${
 }
 
 loot_group .herbalism_dewleaf: { }
-loot_table .herbalism_dewleaf: { slots: [ { possibility: { loot_group: .herbalism_dewleaf } } ] }
+loot_table .herbalism_dewleaf: 
+{ 
+	slots: 
+	[ 
+		{ possibility: { loot_group: .herbalism_dewleaf } } 
+		{ possibility: { weight: 4 } possibility: { loot_group: .herbalism_wild_herbs } }
+	] 
+}
 item item_dewleaf: !GATHER_ITEM { }
 entity herbalism_dewleaf: !GATHER_ENTITY { }
 
@@ -39,6 +63,13 @@ ${
 }
 
 loot_group .herbalism_mistflower: { }
-loot_table .herbalism_mistflower: { slots: [ { possibility: { loot_group: .herbalism_mistflower } } ] }
+loot_table .herbalism_mistflower: 
+{ 
+	slots: 
+	[ 
+		{ possibility: { loot_group: .herbalism_mistflower } } 
+		{ possibility: { weight: 4 } possibility: { loot_group: .herbalism_wild_herbs } }
+	] 
+}
 item item_mistflower: !GATHER_ITEM { }
 entity herbalism_mistflower: !GATHER_ENTITY { }

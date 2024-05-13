@@ -240,6 +240,14 @@ sprites:
 	sprite icon_flower_2 : { tags: [ icon life ] }
 	sprite icon_small_green_potion : { tags: [ icon potion ] }
 	sprite icon_stew_1 : { tags: [ icon ] }
+	sprite icon_cooking : { tags: [ icon ] }
+	sprite icon_alchemy : { tags: [ icon ] }
+
+	cursor: { position: [ 0 208 ] }		
+	sprite icon_white_powder : { tags: [ icon ] }
+	sprite icon_spice_container : { tags: [ icon ] }
+	sprite icon_anvil : { tags: [ icon ] }
+	sprite icon_mace_4 : { tags: [ icon weapon_1h_mace ] }
 	
 }
 

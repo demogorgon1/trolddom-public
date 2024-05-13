@@ -1,0 +1,5 @@
+profession blacksmithing<primary>:
+{
+	string: "Blacksmithing"
+	icon: icon_anvil
+}

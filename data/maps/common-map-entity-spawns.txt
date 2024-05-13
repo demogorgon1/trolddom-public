@@ -32,6 +32,7 @@ map_entity_spawn herbalism:
 {	
 	spawn_timer: { despawn_required: true min_delay: 600 cooldown_range_min: 1200 cooldown_range_max: 4800 }
 
-	entity herbalism_dewleaf: { level: [ 1 6 ] weight: 1 init_state: default }
-	entity herbalism_mistflower: { level: [ 4 10 ] weight: 1 init_state: default } 
+	entity herbalism_dewleaf: { level: [ 1 6 ] weight: 3 init_state: default }
+	entity herbalism_mistflower: { level: [ 4 10 ] weight: 3 init_state: default } 
+	entity herbalism_wild_herbs: { level: [ 1 10 ] weight: 1 init_state: default }
 }

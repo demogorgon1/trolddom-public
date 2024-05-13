@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Helpers.h"
 #include "IReader.h"
 #include "IWriter.h"
 
@@ -158,6 +159,21 @@ namespace tpublic
 					return;
 				}
 			}
+		}
+
+		bool
+		RemoveProfession(
+			uint32_t			aProfessionId)
+		{
+			for(size_t i = 0; i < m_entries.size(); i++)
+			{
+				if(m_entries[i].m_professionId == aProfessionId)
+				{
+					Helpers::RemoveCyclicFromVector(m_entries, i);
+					return true;
+				}
+			}
+			return false;
 		}
 
 		bool

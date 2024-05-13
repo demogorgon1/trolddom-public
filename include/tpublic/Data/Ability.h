@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../DataBase.h"
+#include "../DataReference.h"
 #include "../DirectEffectFactory.h"
 #include "../DirectEffectBase.h"
 #include "../EntityState.h"
@@ -465,6 +466,10 @@ namespace tpublic
 							m_soundEffects.FromSource(aMember);
 						else if(aMember->m_name == "npc_level_range")
 							m_npcLevelRange = UIntRange(aMember);
+						else if (aMember->m_name == "icon_from")
+							m_iconFrom = DataReference(aMember);
+						else if (aMember->m_name == "description_from")
+							m_descriptionFrom = DataReference(aMember);
 						else
 							TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
 					}
@@ -505,6 +510,8 @@ namespace tpublic
 				m_soundEffects.ToStream(aWriter);
 				aWriter->WriteOptionalObject(m_npcLevelRange);
 				aWriter->WriteUInt(m_requiredLevel);
+				m_iconFrom.ToStream(aWriter);
+				m_descriptionFrom.ToStream(aWriter);
 
 				for(uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 					aWriter->WriteUInt(m_resourceCosts[i]);
@@ -574,6 +581,10 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadUInt(m_requiredLevel))
 					return false;
+				if (!m_iconFrom.FromStream(aReader))
+					return false;
+				if (!m_descriptionFrom.FromStream(aReader))
+					return false;
 
 				for (uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 				{
@@ -616,6 +627,8 @@ namespace tpublic
 			SoundEffect::Collection								m_soundEffects;
 			std::optional<UIntRange>							m_npcLevelRange;
 			uint32_t											m_requiredLevel = 0;
+			DataReference										m_iconFrom;
+			DataReference										m_descriptionFrom;
 		};
 
 	}

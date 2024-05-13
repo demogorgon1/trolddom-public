@@ -1,0 +1,43 @@
+profession alchemy<primary>:
+{
+	string: "Alchemy"
+	icon: icon_alchemy
+}
+
+!define local ALCHEMY_CRAFT
+{
+	string: @_string
+	icon_from<item>: @_item
+	description_from<item>: @_item
+	cast_time: 20
+	flags: [ crafting ]	
+	states: [ default in_combat ]
+	consume_items: @_materials
+	produce_items: @_produce
+	required_profession<@_skill>: alchemy
+}
+
+#####################################################
+# Small Healing Potion
+
+ability craft_small_healing_potion: !ALCHEMY_CRAFT
+{
+	_string: "Small Healing Potion"
+	_item: consumable_small_healing_potion
+	_produce: { consumable_small_healing_potion: 1 } 
+	_materials: { item_dewleaf: 2 }
+	_skill: 0
+}
+
+#####################################################
+# Small Mana Potion
+
+ability craft_small_mana_potion: !ALCHEMY_CRAFT
+{
+	_string: "Small Mana Potion"
+	_item: consumable_small_mana_potion
+	_produce: { consumable_small_mana_potion: 1 } 
+	_materials: { item_dewleaf: 1 item_mistflower: 1 }
+	_skill: 15
+}
+

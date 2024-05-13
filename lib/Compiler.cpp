@@ -18,6 +18,7 @@
 #include "FileWriter.h"
 #include "GenerationJob.h"
 #include "MapImageOutput.h"
+#include "PostProcessAbilities.h"
 #include "PostProcessEntities.h"
 #include "PostProcessSprites.h"
 #include "PostProcessWordGenerators.h"
@@ -137,6 +138,7 @@ namespace tpublic
 		// Post process stuff
 		PostProcessEntities::Run(m_manifest);
 		PostProcessWordGenerators::Run(m_manifest);
+		PostProcessAbilities::Run(m_manifest);
 		PostProcessSprites::Run(m_manifest);
 
 		// Run generation jobs

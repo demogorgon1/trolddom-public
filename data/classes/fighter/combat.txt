@@ -254,7 +254,7 @@ ability_modifier improved_strike_3:
 
 talent fighter_combat_mortal_strike:
 {
-	string: "Improved Strike"
+	string: "Mortal Strike"
 	icon: icon_mortal_strike
 	prerequisites: [ fighter_combat_improved_strike ]
 	talent_tree_points_required: 6	
