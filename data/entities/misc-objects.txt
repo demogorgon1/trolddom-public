@@ -1,8 +1,8 @@
 !define local MISC_OBJECT
 {
+	string: @_string
 	components:
 	{
-		display_name: { string: @_string }
 		position: { }				
 		sprite: 
 		{ 
@@ -21,4 +21,6 @@
 }
 
 entity standing_stone: !MISC_OBJECT { _string: "Standing Stone" _frames: [ waypoint_1 ] }
+entity anvil: !MISC_OBJECT { _string: "Anvil" _frames: [ anvil ] }
+entity furnace: !MISC_OBJECT { _string: "Furnace" _frames: [ furnace ] }
 

@@ -139,6 +139,58 @@ namespace tpublic
 				}
 				break;
 
+			case Requirement::TYPE_MUST_HAVE_ITEM_EQUIPPED:
+				{
+					if (!entity->IsPlayer())
+						return false;
+
+					const Components::EquippedItems* equippedItems = entity->GetComponent<Components::EquippedItems>();
+					const Data::Item* item = aManifest->GetById<Data::Item>(aRequirement->m_id);
+					bool isEquipped = false;
+
+					for(uint32_t equipmentSlotId : item->m_equipmentSlots)
+					{
+						if(equippedItems->m_slots.m_items[equipmentSlotId].m_itemId == aRequirement->m_id)
+						{
+							isEquipped = true;
+							break;
+						}
+					}
+
+					if(!isEquipped)
+						return false;
+				}
+				break;
+
+			case Requirement::TYPE_MUST_HAVE_ITEM:
+				{
+					if (!entity->IsPlayer())
+						return false;
+
+					const Components::EquippedItems* equippedItems = entity->GetComponent<Components::EquippedItems>();
+					const Data::Item* item = aManifest->GetById<Data::Item>(aRequirement->m_id);
+					bool hasItem = false;
+
+					for(uint32_t equipmentSlotId : item->m_equipmentSlots)
+					{
+						if(equippedItems->m_slots.m_items[equipmentSlotId].m_itemId == aRequirement->m_id)
+						{
+							hasItem = true;
+							break;
+						}
+					}
+
+					if(!hasItem)
+					{
+						const Components::Inventory* inventory = entity->GetComponent<Components::Inventory>();
+						hasItem = inventory->m_itemList.HasItems(aRequirement->m_id, 1);
+					}
+
+					if(!hasItem)
+						return false;
+				}
+				break;
+
 			default:
 				assert(false);
 				break;

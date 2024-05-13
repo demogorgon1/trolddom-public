@@ -59,6 +59,18 @@ namespace tpublic
 					return (itemTypeInfo->m_flags & aFlags) == aFlags;
 				}
 
+				bool
+				HasEquippedSpecificItem(
+					uint32_t			aItemId) const
+				{
+					for (uint32_t i = 0; i < (uint32_t)EquipmentSlot::NUM_IDS; i++)
+					{
+						if(m_items[i].m_itemId == aItemId)
+							return true;
+					}
+					return false;
+				}
+
 				// Public data
 				ItemInstance	m_items[EquipmentSlot::NUM_IDS];
 			};

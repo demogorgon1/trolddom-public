@@ -33,7 +33,9 @@ namespace tpublic
 			TYPE_MUST_BE_IN_STATE,
 			TYPE_MUST_NOT_BE_IN_STATE,
 			TYPE_MUST_BE_HOSTILE,
-			TYPE_MUST_BE_GROUP_MEMBER
+			TYPE_MUST_BE_GROUP_MEMBER,
+			TYPE_MUST_HAVE_ITEM_EQUIPPED,
+			TYPE_MUST_HAVE_ITEM
 		};
 
 		static DataType::Id
@@ -57,6 +59,10 @@ namespace tpublic
 
 			case TYPE_MUST_BE_TYPE:
 				return DataType::ID_ENTITY;
+
+			case TYPE_MUST_HAVE_ITEM_EQUIPPED:
+			case TYPE_MUST_HAVE_ITEM:
+				return DataType::ID_ITEM;
 
 			default:
 				break;
@@ -113,6 +119,10 @@ namespace tpublic
 				m_type = TYPE_MUST_BE_HOSTILE;
 			else if (typeString == "must_be_group_member")
 				m_type = TYPE_MUST_BE_GROUP_MEMBER;
+			else if (typeString == "must_have_item_equipped")
+				m_type = TYPE_MUST_HAVE_ITEM_EQUIPPED;
+			else if (typeString == "must_have_item")
+				m_type = TYPE_MUST_HAVE_ITEM;
 			else
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid type.", aSource->m_annotation->GetIdentifier());
 

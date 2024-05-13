@@ -15,6 +15,10 @@ profession blacksmithing<primary>:
 	consume_items: @_materials
 	produce_items: @_produce
 	required_profession<@_skill>: blacksmithing
+	requirement self<must_have_item>: { id: weapon_blacksmithing_hammer }
+		
+	<exists _requires_furnace and _requires_furnace> must_have_nearby_entity: furnace
+	<exists _requires_anvil and _requires_anvil> must_have_nearby_entity: anvil
 }
 
 #####################################################
@@ -27,6 +31,7 @@ ability craft_copper_ingot: !BLACKSMITHING_CRAFT
 	_produce: { item_copper_ingot: 1 } 
 	_materials: { item_copper_ore: 1 }
 	_skill: 0
+	_requires_furnace: true
 }
 
 #####################################################
@@ -39,4 +44,5 @@ ability craft_iron_ingot: !BLACKSMITHING_CRAFT
 	_produce: { item_iron_ingot: 1 } 
 	_materials: { item_iron_ore: 1 }
 	_skill: 15
+	_requires_furnace: true
 }

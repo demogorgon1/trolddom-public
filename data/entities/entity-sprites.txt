@@ -130,6 +130,8 @@ sprites:
 	sprite door_open_1: { }
 	sprite banner: { }
 	sprite wild_herbs: { }
+	sprite furnace: { }
+	sprite anvil: { }
 	
 }
 

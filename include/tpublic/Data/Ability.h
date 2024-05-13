@@ -442,6 +442,8 @@ namespace tpublic
 							m_sourceParticleSystemId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PARTICLE_SYSTEM, aMember->GetIdentifier());
 						else if (aMember->m_name == "target_particle_system")
 							m_targetParticleSystemId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PARTICLE_SYSTEM, aMember->GetIdentifier());
+						else if (aMember->m_name == "must_have_nearby_entity")
+							m_mustHaveNearbyEntityId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENTITY, aMember->GetIdentifier());
 						else if (aMember->m_name == "flags")
 							m_flags = GetFlags(aMember);
 						else if (aMember->m_tag == "direct_effect")
@@ -505,6 +507,7 @@ namespace tpublic
 				aWriter->WriteUInt(m_channelTicks);
 				aWriter->WriteInt(m_channelInterval);
 				aWriter->WriteUInt(m_channelTickAbilityId);
+				aWriter->WriteUInt(m_mustHaveNearbyEntityId);
 				aWriter->WriteObjects(m_requirements);
 				aWriter->WriteObjects(m_aoeRequirements);
 				m_soundEffects.ToStream(aWriter);
@@ -571,6 +574,8 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadUInt(m_channelTickAbilityId))
 					return false;
+				if (!aReader->ReadUInt(m_mustHaveNearbyEntityId))
+					return false;
 				if (!aReader->ReadObjects(m_requirements))
 					return false;
 				if (!aReader->ReadObjects(m_aoeRequirements))
@@ -629,6 +634,7 @@ namespace tpublic
 			uint32_t											m_requiredLevel = 0;
 			DataReference										m_iconFrom;
 			DataReference										m_descriptionFrom;
+			uint32_t											m_mustHaveNearbyEntityId = 0;
 		};
 
 	}
