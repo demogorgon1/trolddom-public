@@ -15,6 +15,8 @@ dialogue_screen .rorion_trainer:
 {
 	train_profession<0>: blacksmithing
 	train_profession<1>: blacksmithing
+	train_ability: craft_copper_ingot
+	train_ability: craft_iron_ingot
 }
 
 dialogue_screen .rorion_greetings:

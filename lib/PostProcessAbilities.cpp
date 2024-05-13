@@ -27,7 +27,15 @@ namespace tpublic
 			switch (aAbility->m_descriptionFrom.m_type)
 			{
 			case DataType::INVALID_ID:		break;
-			case DataType::ID_ITEM:			aAbility->m_description = aManifest->GetById<Data::Ability>(aManifest->GetById<Data::Item>(aAbility->m_descriptionFrom.m_id)->m_useAbilityId)->m_description; break;
+			
+			case DataType::ID_ITEM:			
+				{ 
+					const Data::Item* item = aManifest->GetById<Data::Item>(aAbility->m_descriptionFrom.m_id);
+					if(item->m_useAbilityId != 0)
+						aAbility->m_description = aManifest->GetById<Data::Ability>(item->m_useAbilityId)->m_description;
+				}
+				break; 
+			
 			default:						TP_VERIFY(false, aAbility->m_debugInfo, "Invalid data reference.");
 			}
 		}

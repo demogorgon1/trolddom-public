@@ -20,6 +20,7 @@ namespace tpublic
 		{
 			const char* m_name;
 			const char* m_displayName;
+			const char* m_tooManyMessage;
 			uint32_t	m_maxCount;
 		};
 
@@ -28,8 +29,8 @@ namespace tpublic
 		{
 			{ NULL, NULL, 0 },
 
-			{ "primary",	"Primary",		2 },
-			{ "secondary",	"Secondary",	UINT32_MAX }
+			{ "primary",	"Primary",	 "You already have two primary professions. You'll have to unlearn one of them.",	2 },
+			{ "secondary",	"Secondary", NULL,																				UINT32_MAX }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

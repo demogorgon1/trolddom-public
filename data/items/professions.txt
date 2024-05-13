@@ -22,3 +22,19 @@ item weapon_fishing_rod:
 	string: "Fishing Rod"
 	weapon_cooldown: 20		
 }
+
+item item_copper_ingot:
+{
+	item_level: 1
+	icon: icon_copper_ingot
+	string: "Copper Ingot"
+	stack: 20	
+}
+
+item item_iron_ingot:
+{
+	item_level: 1
+	icon: icon_iron_ingot
+	string: "Iron Ingot"
+	stack: 20	
+}
