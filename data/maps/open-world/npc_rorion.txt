@@ -2,7 +2,7 @@ dialogue_screen .rorion_blacksmithing:
 {
 	text: 
 	[	
-		"It's about shaping destiny with hammer and flame. From mighty swords to sturdy armor, every strike crafts greatness."
+		"It's about forging destiny with hammer and flame. From mighty swords to sturdy armor, every strike crafts greatness."
 	]
 	
 	options:

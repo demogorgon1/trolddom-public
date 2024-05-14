@@ -4,3 +4,28 @@ profession cooking<secondary>:
 	icon: icon_cooking
 }
 
+!define local COOKING_CRAFT
+{
+	string: @_string
+	icon_from<item>: @_item
+	description_from<item>: @_item
+	cast_time: 20
+	flags: [ crafting ]	
+	states: [ default in_combat ]
+	consume_items: @_materials
+	produce_items: @_produce
+	required_profession<@_skill>: cooking
+	must_have_nearby_entity: fireplace
+}
+
+#####################################################
+# Dry Bread
+
+ability craft_dry_bread: !COOKING_CRAFT
+{
+	_string: "Dry Bread"
+	_item: consumable_dry_bread
+	_produce: { consumable_dry_bread: 1 } 
+	_materials: { item_flour: 1 item_water: 1 }	
+	_skill: 0
+}

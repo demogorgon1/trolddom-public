@@ -41,3 +41,15 @@ ability craft_small_mana_potion: !ALCHEMY_CRAFT
 	_skill: 15
 }
 
+#####################################################
+# Elixir of the Giant
+
+ability craft_elixir_of_the_giant: !ALCHEMY_CRAFT
+{
+	_string: "Elixir of the Giant"
+	_item: consumable_elixir_of_the_giant
+	_produce: { consumable_elixir_of_the_giant: 1 } 
+	_materials: { item_dewleaf: 2 item_mistflower: 1 }
+	_skill: 25
+}
+

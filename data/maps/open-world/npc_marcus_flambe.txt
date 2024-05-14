@@ -1,0 +1,114 @@
+dialogue_screen .marcus_flambe_vendor:
+{
+	sell item_flour: { quantity: 1 }	
+	sell item_water: { quantity: 1 }	
+}
+
+dialogue_screen .marcus_flambe_cooking:
+{
+	text: 
+	[	
+		"Give a man a loaf of dry bread and he'll eat for a day. Teach a man how to make his own dry bread and he'll eat for a lifetime. As long as he has flour, of course."
+	]
+	
+	options:
+	[
+		{ goto: .marcus_flambe_greetings text: "Alright." }
+	]
+}
+
+dialogue_screen .marcus_flambe_trainer:
+{
+	train_profession<0>: cooking
+	train_profession<1>: cooking
+	train_ability: craft_dry_bread
+}
+
+dialogue_screen .marcus_flambe_greetings:
+{
+	text: 
+	[	
+		"You look hungry."
+	]
+	
+	options:
+	[
+		{ goto: .marcus_flambe_vendor text: "Let me browse your goods." }
+		{ goto: .marcus_flambe_cooking text: "What can I use cooking for?" }
+		{ goto: .marcus_flambe_trainer text: "Please teach me about cooking." }
+	]
+}
+
+dialogue_root .marcus_flambe_dialogue:
+{
+	.marcus_flambe_greetings: { }
+}
+
+entity .marcus_flambe:
+{
+	string: "Marcus Flambé"
+	
+	systems: [ combat npc ]
+	
+	modifiers: 
+	{ 
+		weapon_damage: 2
+		resource<health>: 2
+	}		
+	
+	components:
+	{
+		position: { }		
+		threat_target: { }
+		visible_auras: { }
+		auras: { }
+		tag: { }
+		guild_name:
+		{
+			string: "Chef"
+		}		
+		lootable: 
+		{ 
+			loot_table: .npc
+		}
+		combat_public: 
+		{  
+			level: 10
+			faction: npcs		
+			creature_type: humanoid
+			dialogue_root: .marcus_flambe_dialogue
+			
+			modifier not_pushable: {}
+		}			
+		combat_private:
+		{
+			physical_critical_strike_chance: 5
+			dodge_chance: 5
+			parry_chance: 5
+			miss_chance: 5
+			block_chance: 5
+		}
+		npc: 
+		{ 			
+			state default:
+			{
+			}
+			
+			state in_combat:
+			{
+				abilities:
+				[					
+					{ id: npc_attack }
+				]
+			}	
+		}
+		sprite: 
+		{ 
+			animations:
+			[
+				{ states: [ default in_combat spawning ] frames: [ cook_1 ] }			
+				{ states: [ dead ] frames: [ cook_1_dead ] z_offset: -2 }			
+			]		
+		}		
+	}
+}

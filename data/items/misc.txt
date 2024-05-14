@@ -1,3 +1,6 @@
+#####################################################
+# Orb of Junjun
+
 ability player_world_orb:
 {
 	string: "Orb of Junjun"
@@ -21,4 +24,28 @@ item player_world_orb:
 	icon: icon_blue_orb		
 	string: "Orb of Junjun"
 	use_ability: player_world_orb
+}
+
+#####################################################
+# Flour
+
+item item_flour:
+{
+	type: miscellaneous
+	item_level: 1
+	icon: icon_white_powder
+	string: "Flour"
+	stack: 20
+}
+
+#####################################################
+# Water
+
+item item_water:
+{
+	type: miscellaneous
+	item_level: 1
+	icon: icon_jug
+	string: "Water"
+	stack: 20
 }
