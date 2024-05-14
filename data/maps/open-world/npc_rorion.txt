@@ -17,6 +17,12 @@ dialogue_screen .rorion_trainer:
 	train_profession<1>: blacksmithing
 	train_ability: craft_copper_ingot
 	train_ability: craft_iron_ingot
+	train_ability: craft_copper_bracers
+	train_ability: craft_copper_belt
+	train_ability: craft_copper_gauntlets
+	train_ability: craft_copper_boots
+	train_ability: craft_copper_breeches
+	train_ability: craft_copper_armor
 }
 
 dialogue_screen .rorion_greetings:

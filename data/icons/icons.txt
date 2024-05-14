@@ -250,6 +250,12 @@ sprites:
 	sprite icon_mace_4 : { tags: [ icon weapon_1h_mace ] }
 	sprite icon_copper_ingot : { tags: [ icon ] }
 	sprite icon_iron_ingot : { tags: [ icon ] }
+	sprite icon_mail_shirt_2 : { tags: [ icon armor_mail armor_plate chest ] } 
+	sprite icon_mail_bracers_2 : { tags: [ icon armor_mail armor_plate wrists ] } 
+	sprite icon_mail_boots_2 : { tags: [ icon armor_mail armor_plate feet ] } 
+	sprite icon_mail_gloves_2 : { tags: [ icon armor_mail armor_plate hands ] } 
+	sprite icon_mail_belt_2 : { tags: [ icon armor_mail armor_plate waist ] } 
+	sprite icon_mail_pants_2 : { tags: [ icon armor_mail armor_plate legs ] } 
 	
 }
 

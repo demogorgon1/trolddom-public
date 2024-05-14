@@ -46,3 +46,155 @@ ability craft_iron_ingot: !BLACKSMITHING_CRAFT
 	_skill: 15
 	_requires_furnace: true
 }
+
+#####################################################
+# Copper Bracers
+
+item wrists_copper_bracers:
+{
+	string: "Copper Bracers"
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots: [ wrists ]
+	required_level: 2
+	icon: icon_mail_bracers_2
+	rarity: uncommon
+	stat_weight strength: 1 
+}
+
+ability craft_copper_bracers: !BLACKSMITHING_CRAFT
+{
+	_string: "Copper Bracers"
+	_item: wrists_copper_bracers
+	_produce: { wrists_copper_bracers: 1 } 
+	_materials: { item_copper_ingot: 2 }
+	_skill: 10
+	_requires_anvil: true
+}
+
+#####################################################
+# Copper Belt
+
+item waist_copper_belt:
+{
+	string: "Copper Belt"
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots: [ waist ]
+	required_level: 3
+	icon: icon_mail_belt_2
+	rarity: uncommon
+	stat_weight spirit: 1 
+}
+
+ability craft_copper_belt: !BLACKSMITHING_CRAFT
+{
+	_string: "Copper Belt"
+	_item: waist_copper_belt
+	_produce: { waist_copper_belt: 1 } 
+	_materials: { item_copper_ingot: 2 }
+	_skill: 20
+	_requires_anvil: true
+}
+
+#####################################################
+# Copper Gauntlets
+
+item hands_copper_gauntlets:
+{
+	string: "Copper Gauntlets"
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots: [ hands ]
+	required_level: 4
+	icon: icon_mail_gloves_2
+	rarity: uncommon
+	stat_weight constitution: 1 
+	stat_weight dexterity: 1 
+}
+
+ability craft_copper_gauntlets: !BLACKSMITHING_CRAFT
+{
+	_string: "Copper Gauntlets"
+	_item: hands_copper_gauntlets
+	_produce: { hands_copper_gauntlets: 1 } 
+	_materials: { item_copper_ingot: 3 }
+	_skill: 30
+	_requires_anvil: true
+}
+
+#####################################################
+# Copper Boots
+
+item feet_copper_boots:
+{
+	string: "Copper Boots"
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots: [ feet ]
+	required_level: 4
+	icon: icon_mail_boots_2
+	rarity: uncommon
+	stat_weight strength: 1 
+}
+
+ability craft_copper_boots: !BLACKSMITHING_CRAFT
+{
+	_string: "Copper Boots"
+	_item: feet_copper_boots
+	_produce: { feet_copper_boots: 1 } 
+	_materials: { item_copper_ingot: 3 }
+	_skill: 40
+	_requires_anvil: true
+}
+
+#####################################################
+# Copper Breeches
+
+item legs_copper_breeches:
+{
+	string: "Copper Breeches"
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots: [ legs ]
+	required_level: 5
+	icon: icon_mail_pants_2
+	rarity: uncommon
+	stat_weight constitution: 1 
+}
+
+ability craft_copper_breeches: !BLACKSMITHING_CRAFT
+{
+	_string: "Copper Breeches"
+	_item: legs_copper_breeches
+	_produce: { legs_copper_breeches: 1 } 
+	_materials: { item_copper_ingot: 4 }
+	_skill: 50
+	_requires_anvil: true
+}
+
+#####################################################
+# Copper Armor
+
+item chest_copper_armor:
+{
+	string: "Copper Armor"
+	type: armor_mail
+	binds: when_equipped
+	equipment_slots: [ chest ]
+	required_level: 6
+	icon: icon_mail_shirt_2
+	rarity: uncommon
+	stat_weight constitution: 1 
+	stat_weight strength: 1 
+}
+
+ability craft_copper_armor: !BLACKSMITHING_CRAFT
+{
+	_string: "Copper Armor"
+	_item: chest_copper_armor
+	_produce: { chest_copper_armor: 1 } 
+	_materials: { item_copper_ingot: 5 }
+	_skill: 60
+	_requires_anvil: true
+}
