@@ -64,9 +64,9 @@ class sorcerer:
 
 	stats_conversion:
 	{
-		str_to_dps: [ 1 1 ]
-		str_weapon_damage_min: [ 1 2 ]
-		str_weapon_damage_max: [ 3 2 ]
+		str_to_dps: [ 2 5 ]
+		str_weapon_damage_min: [ 2 3 ]
+		str_weapon_damage_max: [ 4 3 ]		
 		dex_to_phys_crit: [ 1 20 ]
 		dex_to_dodge: [ 1 20 ]
 		dex_to_parry: [ 1 25 ]
