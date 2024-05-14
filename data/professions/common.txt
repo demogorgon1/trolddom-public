@@ -1,6 +1,10 @@
 !define GATHER_ITEM
 {
-	item_level: 1
+	<exists _item_level> item_level: @_item_level
+	<!exists _item_level> item_level: 1
+	<exists _rarity> rarity: @_rarity
+	<exists _value_multiplier> value_multiplier: @_value_multiplier
+	
 	icon: @_icon
 	string: @_item_string
 	loot_groups: [ @_loot_group ]

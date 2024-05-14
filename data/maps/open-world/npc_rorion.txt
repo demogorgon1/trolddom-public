@@ -22,6 +22,7 @@ dialogue_screen .rorion_trainer:
 	train_ability: craft_copper_gauntlets
 	train_ability: craft_copper_boots
 	train_ability: craft_copper_breeches
+	train_ability: craft_copper_blade
 	train_ability: craft_copper_armor
 }
 

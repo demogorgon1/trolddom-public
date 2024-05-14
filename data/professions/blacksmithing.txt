@@ -174,6 +174,31 @@ ability craft_copper_breeches: !BLACKSMITHING_CRAFT
 }
 
 #####################################################
+# Copper Blade
+
+item weapon_copper_blade:
+{
+	string: "Copper Blade"
+	type: weapon_1h_sword
+	binds: when_equipped
+	equipment_slots: [ main_hand ]
+	required_level: 5
+	icon: icon_sword_6
+	rarity: uncommon
+	stat_weight dexterity: 1
+}
+
+ability craft_copper_blade: !BLACKSMITHING_CRAFT
+{
+	_string: "Copper Blade"
+	_item: weapon_copper_blade
+	_produce: { weapon_copper_blade: 1 } 
+	_materials: { item_copper_ingot: 6 item_verdigrisite: 1 }
+	_skill: 55
+	_requires_anvil: true
+}
+
+#####################################################
 # Copper Armor
 
 item chest_copper_armor:

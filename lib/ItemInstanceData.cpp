@@ -95,7 +95,7 @@ namespace tpublic
 		if (m_cost == 0)
 		{
 			uint32_t baseCost = aManifest->m_itemMetrics.GetLevelBaseCost(m_itemData->m_itemLevel);
-			baseCost = (uint32_t)((float)baseCost * multipliers.m_cost * rarityMultipliers.m_cost);
+			baseCost = (uint32_t)((float)baseCost * multipliers.m_cost * rarityMultipliers.m_cost * m_itemData->m_valueMultiplier);
 			m_cost = baseCost;
 		}
 

@@ -256,6 +256,13 @@ sprites:
 	sprite icon_mail_gloves_2 : { tags: [ icon armor_mail armor_plate hands ] } 
 	sprite icon_mail_belt_2 : { tags: [ icon armor_mail armor_plate waist ] } 
 	sprite icon_mail_pants_2 : { tags: [ icon armor_mail armor_plate legs ] } 
+	sprite icon_gemstone_1 : { tags: [ icon ] }
+	sprite icon_gemstone_2 : { tags: [ icon ] }
+	sprite icon_gemstone_3 : { tags: [ icon ] }
+	sprite icon_gemstone_4 : { tags: [ icon ] }
+	
+	cursor: { position: [ 0 224 ] }		
+	sprite icon_sword_6 : { tags: [ icon weapon_1h_sword weapon_1h_knife weapon_2h_sword ] }
 	
 }
 

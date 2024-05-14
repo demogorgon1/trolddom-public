@@ -221,6 +221,10 @@ namespace tpublic
 						{
 							m_soundEffects.FromSource(aChild);
 						}
+						else if (aChild->m_name == "value_multiplier")
+						{
+							m_valueMultiplier = aChild->GetFloat();
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -265,6 +269,7 @@ namespace tpublic
 				aStream->WritePOD(m_itemBinding);
 				m_soundEffects.ToStream(aStream);
 				aStream->WritePOD(m_flags);
+				aStream->WriteFloat(m_valueMultiplier);
 			}
 
 			bool
@@ -313,6 +318,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadPOD(m_flags))
 					return false;
+				if (!aStream->ReadFloat(m_valueMultiplier))
+					return false;
 
 				m_lcString = m_string;
 				Helpers::MakeLowerCase(m_lcString);
@@ -342,6 +349,7 @@ namespace tpublic
 			SoundEffect::Collection		m_soundEffects;
 			uint32_t					m_flags = 0;
 			uint32_t					m_bagSlots = 0;
+			float						m_valueMultiplier = 1.0f;
 
 			// Not serialized
 			std::string					m_lcString;
