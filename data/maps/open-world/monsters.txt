@@ -136,3 +136,91 @@ entity arcane_anomaly: !NPC
 	_loot_table: .arcane_anomaly
 	_creature_type: elemental
 }
+
+##########################################################################################
+# Crab Man
+
+loot_table .crab_man_2: 
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+	]	
+}
+
+entity crab_man_2: !NPC
+{
+	_string: "Crab Man"
+	_level: 2
+	_faction: monsters
+	_sprite: crab_monster_1
+	_sprite_dead: crab_monster_1_dead
+	_loot_table: .crab_man_2
+	_creature_type: humanoid
+}
+
+##########################################################################################
+# Crab Warrior
+
+loot_table .crab_man_3: 
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+	]	
+}
+
+entity crab_man_3: !NPC
+{
+	_string: "Crab Warrior"
+	_level: 3
+	_faction: monsters
+	_sprite: crab_monster_1
+	_sprite_dead: crab_monster_1_dead
+	_loot_table: .crab_man_3
+	_creature_type: humanoid
+}
+
+##########################################################################################
+# Crab Seer
+
+loot_table .crab_caster_3: 
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+	]	
+}
+
+entity crab_caster_3: !NPC
+{
+	_string: "Crab Warrior"
+	_level: 3
+	_faction: monsters
+	_sprite: crab_monster_1
+	_sprite_dead: crab_monster_1_dead
+	_loot_table: .crab_caster_3
+	_creature_type: humanoid
+}
+
+##########################################################################################
+# Suspiciously Large Crab Man
+
+loot_table .crab_boss_4: 
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+	]	
+}
+
+entity crab_boss_4: !NPC
+{
+	_string: "Suspiciously Large Crab Man"
+	_level: 4
+	_faction: monsters
+	_sprite: crab_monster_boss_1
+	_sprite_dead: crab_monster_boss_1_dead
+	_loot_table: .crab_boss_4
+	_creature_type: humanoid
+}

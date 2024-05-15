@@ -67,6 +67,11 @@ map_entity_spawn .theodore:
 	entity .theodore: { weight: 1 }
 }
 
+map_entity_spawn .sheriff_wellington:
+{
+	entity .sheriff_wellington: { weight: 1 }
+}
+
 map_entity_spawn .marcus_flambe:
 {
 	entity .marcus_flambe: { weight: 1 }
@@ -105,6 +110,22 @@ map_entity_spawn .spawn_of_umbracoth:
 map_entity_spawn .arcane_anomaly:
 {
 	entity arcane_anomaly: { weight: 1 }
+}
+
+map_entity_spawn .crab_man:
+{
+	entity crab_man_2: { weight: 1 }
+}
+
+map_entity_spawn .crab_man_3:
+{
+	entity crab_man_3: { weight: 1 }
+	entity crab_caster_3: { weight: 1 }
+}
+
+map_entity_spawn .crab_boss_4:
+{
+	entity crab_boss_4: { weight: 1 }
 }
 
 map_entity_spawn .junjun_door:
@@ -228,6 +249,10 @@ map_palette .stuff:
 	entity_spawn .marcus_flambe: [ 12 195 55 ]			
 	entity_spawn .hobart: [ 12 195 155 ]	
 	entity_spawn .theodore: [ 142 195 155 ]	
+	entity_spawn .sheriff_wellington: [ 192 195 155 ]	
+	entity_spawn .crab_man: [ 192 195 15 ]	
+	entity_spawn .crab_man_3: [ 192 15 15 ]	
+	entity_spawn .crab_boss_4: [ 192 15 195 ]	
 	entity_spawn .stash: [ 0 43 66 ]		
 	entity_spawn .furnace: [ 100 43 66 ]		
 	entity_spawn .anvil: [ 150 43 66 ]		
