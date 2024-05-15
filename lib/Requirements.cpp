@@ -124,6 +124,14 @@ namespace tpublic
 				}
 				break;
 
+			case Requirement::TYPE_MUST_BE_FACTION:
+				{
+					const Components::CombatPublic* combatPublic = entity->GetComponent<Components::CombatPublic>();
+					if(combatPublic->m_factionId != aRequirement->m_id)
+						return false;	
+				}
+				break;
+
 			case Requirement::TYPE_MUST_BE_GROUP_MEMBER:
 				{
 					if(entity->GetEntityInstanceId() != aSelf->GetEntityInstanceId())

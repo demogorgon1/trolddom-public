@@ -35,7 +35,8 @@ namespace tpublic
 			TYPE_MUST_BE_HOSTILE,
 			TYPE_MUST_BE_GROUP_MEMBER,
 			TYPE_MUST_HAVE_ITEM_EQUIPPED,
-			TYPE_MUST_HAVE_ITEM
+			TYPE_MUST_HAVE_ITEM,
+			TYPE_MUST_BE_FACTION
 		};
 
 		static DataType::Id
@@ -63,6 +64,9 @@ namespace tpublic
 			case TYPE_MUST_HAVE_ITEM_EQUIPPED:
 			case TYPE_MUST_HAVE_ITEM:
 				return DataType::ID_ITEM;
+
+			case TYPE_MUST_BE_FACTION:
+				return DataType::ID_FACTION;
 
 			default:
 				break;
@@ -123,6 +127,8 @@ namespace tpublic
 				m_type = TYPE_MUST_HAVE_ITEM_EQUIPPED;
 			else if (typeString == "must_have_item")
 				m_type = TYPE_MUST_HAVE_ITEM;
+			else if (typeString == "must_be_faction")
+				m_type = TYPE_MUST_BE_FACTION;
 			else
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid type.", aSource->m_annotation->GetIdentifier());
 

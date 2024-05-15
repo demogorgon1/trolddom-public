@@ -1,0 +1,126 @@
+objective .theodore_1:
+{
+	string: "Wildlife Culled"
+	
+	maps: [ open_world ]
+	
+	kill_npc:
+	{
+		entities: [ .deer_1 .deer_2 .boar_1 .boar_2 ]
+		count: 3
+	}
+}
+
+quest .theodore_1:
+{
+	string: "Seasonal Culling"
+
+	text:
+	[
+		"Exterminate wildlife in the area."
+	]
+	
+	description: 
+	[
+		"Those damn wild boars and deer have been pestering the local countryside. Their numbers have been going through the roof and we must cull them."
+		"Maybe you can lend a hand with the killing?"
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"Nice."
+	]
+
+	objectives: [ .theodore_1 ]
+	level: 1
+	
+	reward_one_item: [ consumable_small_healing_potion consumable_small_mana_potion ]
+}
+
+dialogue_screen .theodore_greetings:
+{
+	text: 
+	[	
+		"Shh! I'm hunting!"
+	]
+	
+	options:
+	[
+		{ quest: .theodore_1 }
+	]
+}
+
+dialogue_root .theodore_dialogue:
+{
+	.theodore_greetings: { }
+}
+
+entity .theodore:
+{
+	string: "Theodore"
+	
+	systems: [ combat npc ]
+	
+	modifiers: 
+	{ 
+		weapon_damage: 2
+		resource<health>: 2
+	}		
+	
+	components:
+	{
+		position: { }		
+		threat_target: { }
+		visible_auras: { }
+		auras: { }
+		tag: { }
+		lootable: 
+		{ 
+			loot_table: .npc
+		}
+		combat_public: 
+		{  
+			level: 10
+			faction: npcs		
+			creature_type: humanoid
+			dialogue_root: .theodore_dialogue
+			
+			modifier not_pushable: {}
+		}			
+		combat_private:
+		{
+			physical_critical_strike_chance: 5
+			dodge_chance: 5
+			parry_chance: 5
+			miss_chance: 5
+			block_chance: 5
+		}
+		npc: 
+		{ 			
+			state default:
+			{
+			}
+			
+			state in_combat:
+			{
+				abilities:
+				[					
+					{ id: npc_attack }
+				]
+			}	
+		}
+		sprite: 
+		{ 
+			animations:
+			[
+				{ states: [ default in_combat spawning ] frames: [ man_1 ] }			
+				{ states: [ dead ] frames: [ man_1_dead ] z_offset: -2 }			
+			]		
+		}		
+	}
+}

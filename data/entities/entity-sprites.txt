@@ -83,10 +83,12 @@ sprites:
 	cursor: { position: [ 0 64 ] }
 
 	sprite cook_1: { dead: cook_1_dead tags: [ male human ] }
+	sprite man_9: { dead: man_9_dead tags: [ male human ] }
 
 	cursor: { position: [ 0 80 ] }
 
 	sprite cook_1_dead: { }
+	sprite man_9_dead: { }
 	
 }
 

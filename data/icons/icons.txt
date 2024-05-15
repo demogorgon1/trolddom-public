@@ -264,6 +264,7 @@ sprites:
 	cursor: { position: [ 0 224 ] }		
 	sprite icon_sword_6 : { tags: [ icon weapon_1h_sword weapon_1h_knife weapon_2h_sword ] }
 	sprite icon_jug : { tags: [ icon ] }
+	sprite icon_tag : { tags: [ icon ] }	
 	
 }
 

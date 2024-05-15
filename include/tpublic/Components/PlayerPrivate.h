@@ -97,6 +97,7 @@ namespace tpublic
 			bool															m_pvpCombatEvent = false;
 			bool															m_tryEditPlayerWorlds = false;
 			int32_t															m_lastPVPCombatEventTick = 0;
+			uint32_t														m_xpGain = 0;
 
 			struct ProfessionSkillUseEvent
 			{

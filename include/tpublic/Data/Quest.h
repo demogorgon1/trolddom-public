@@ -82,6 +82,8 @@ namespace tpublic
 							aChild->GetIdArray(DataType::ID_OBJECTIVE, m_objectives);
 						else if (aChild->m_name == "prerequisites")
 							aChild->GetIdArray(DataType::ID_QUEST, m_prerequisites);
+						else if (aChild->m_name == "quest_items")
+							aChild->GetIdArray(DataType::ID_ITEM, m_questItems);
 						else if (aChild->m_name == "reward_one_item")
 							aChild->GetIdArray(DataType::ID_ITEM, m_rewardOneItem);
 						else if (aChild->m_name == "reward_all_items")
@@ -107,6 +109,7 @@ namespace tpublic
 				aStream->WriteUInts(m_prerequisites);
 				aStream->WriteUInt(m_level);
 				aStream->WritePOD(m_type);
+				aStream->WriteUInts(m_questItems);
 				aStream->WriteUInts(m_rewardOneItem);
 				aStream->WriteUInts(m_rewardAllItems);
 				aStream->WriteUInt(m_nextQuestId);
@@ -134,6 +137,8 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadPOD(m_type))
 					return false;
+				if (!aStream->ReadUInts(m_questItems))
+					return false;
 				if (!aStream->ReadUInts(m_rewardOneItem))
 					return false;
 				if (!aStream->ReadUInts(m_rewardAllItems))
@@ -153,6 +158,7 @@ namespace tpublic
 			std::vector<uint32_t>	m_prerequisites;			
 			uint32_t				m_level = 1;
 			Type					m_type = TYPE_NORMAL;
+			std::vector<uint32_t>	m_questItems;
 			std::vector<uint32_t>	m_rewardOneItem;
 			std::vector<uint32_t>	m_rewardAllItems;
 			uint32_t				m_nextQuestId = 0;

@@ -2,6 +2,7 @@
 
 #include "ObjectiveTypes/CollectItems.h"
 #include "ObjectiveTypes/KillNPC.h"
+#include "ObjectiveTypes/UseAbility.h"
 
 #include "ObjectiveTypeBase.h"
 
@@ -15,6 +16,7 @@ namespace tpublic
 		{
 			_Register<ObjectiveTypes::CollectItems>();
 			_Register<ObjectiveTypes::KillNPC>();
+			_Register<ObjectiveTypes::UseAbility>();
 		}
 
 		~ObjectiveTypeFactory()

@@ -12,6 +12,7 @@ namespace tpublic
 		struct Inventory;
 	}
 
+	class EntityInstance;
 	class ObjectiveTypeBase;
 
 	class ObjectiveInstanceBase
@@ -54,6 +55,9 @@ namespace tpublic
 										const Components::Inventory*	/*aInventory*/) {}
 		virtual bool				GetProgress(
 										Progress&						/*aOut*/) { return false; }							
+		virtual void				OnAbilityEvent(
+										uint32_t						/*aAbilityId*/,
+										const EntityInstance*			/*aEntityInstance*/) {}
 
 		// Virtual interface
 		virtual bool				IsCompleted() const = 0;

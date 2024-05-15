@@ -57,6 +57,16 @@ map_entity_spawn .rorion:
 	entity .rorion: { weight: 1 }
 }
 
+map_entity_spawn .hobart:
+{
+	entity .hobart: { weight: 1 }
+}
+
+map_entity_spawn .theodore:
+{
+	entity .theodore: { weight: 1 }
+}
+
 map_entity_spawn .marcus_flambe:
 {
 	entity .marcus_flambe: { weight: 1 }
@@ -216,6 +226,8 @@ map_palette .stuff:
 	entity_spawn .xazax: [ 55 95 12 ]		
 	entity_spawn .rorion: [ 12 95 55 ]		
 	entity_spawn .marcus_flambe: [ 12 195 55 ]			
+	entity_spawn .hobart: [ 12 195 155 ]	
+	entity_spawn .theodore: [ 142 195 155 ]	
 	entity_spawn .stash: [ 0 43 66 ]		
 	entity_spawn .furnace: [ 100 43 66 ]		
 	entity_spawn .anvil: [ 150 43 66 ]		

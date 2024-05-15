@@ -50,7 +50,8 @@ namespace tpublic
 				FLAG_TARGET_AOE_FRIENDLY			= 0x00800000,
 				FLAG_TARGET_AOE_HOSTILE				= 0x01000000,
 				FLAG_TARGET_AOE_ALWAYS_SELF			= 0x02000000,
-				FLAG_TRIGGER_MOVE_COOLDOWN			= 0x04000000
+				FLAG_TRIGGER_MOVE_COOLDOWN			= 0x04000000,
+				FLAG_QUEST_TRIGGER					= 0x08000000
 			};
 
 			static inline Resource::Id
@@ -125,6 +126,8 @@ namespace tpublic
 						flags |= FLAG_TARGET_AOE_ALWAYS_SELF;
 					else if (strcmp(identifier, "trigger_move_cooldown") == 0)
 						flags |= FLAG_TRIGGER_MOVE_COOLDOWN;
+					else if (strcmp(identifier, "quest_trigger") == 0)
+						flags |= FLAG_QUEST_TRIGGER;
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid ability flag.", identifier);
 				});
@@ -381,6 +384,7 @@ namespace tpublic
 			bool IsOffensive() const { return m_flags & FLAG_OFFENSIVE; }
 			bool IsItem() const { return m_flags & FLAG_ITEM; }
 			bool ShouldTriggerMoveCooldown() const { return m_flags & FLAG_TRIGGER_MOVE_COOLDOWN; }
+			bool IsQuestTrigger() const { return m_flags & FLAG_QUEST_TRIGGER; }
 			
 			bool 
 			IsUsableInState(

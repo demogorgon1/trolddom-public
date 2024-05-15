@@ -10,7 +10,8 @@ namespace tpublic
 		{
 			INVALID_TYPE,
 
-			TYPE_KILL_NPC
+			TYPE_KILL_NPC,
+			TYPE_USE_ABILITY
 		};
 
 		// Public data
