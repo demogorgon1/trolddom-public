@@ -182,26 +182,25 @@ namespace tpublic::Systems
 
 			if(aContext->m_tick - threat->m_lastPingTick >= Components::ThreatTarget::PING_INTERVAL_TICKS)
 			{
-				aContext->m_worldView->WorldViewAllEntityInstances([&](
+				IWorldView::EntityQuery entityQuery;
+				entityQuery.m_position = position->m_position;
+				entityQuery.m_maxDistance = 4;
+				entityQuery.m_flags = IWorldView::EntityQuery::FLAG_LINE_OF_SIGHT;
+
+				aContext->m_worldView->WorldViewQueryEntityInstances(entityQuery, [&](
 					const EntityInstance* aEntity)
 				{
 					if(aEntity->GetState() != EntityState::ID_DEAD)
 					{
-						bool isWithinDistance = Helpers::IsWithinDistance(aEntity->GetComponent<Components::Position>(), position, 3);
-
 						if (aEntity->IsPlayer() && (!faction->IsNeutralOrFriendly() || combat->m_targetEntityInstanceId == aEntity->GetEntityInstanceId()))
 						{
-							if (isWithinDistance)
-								aContext->m_eventQueue->EventQueueThreat(aEntity->GetEntityInstanceId(), aEntityInstanceId, 0);
+							aContext->m_eventQueue->EventQueueThreat(aEntity->GetEntityInstanceId(), aEntityInstanceId, 0);
 						}
 						else if(topThreatEntity != NULL && aEntity->GetState() != EntityState::ID_IN_COMBAT && !faction->IsNeutralOrFriendly())
 						{
-							if (isWithinDistance)
-							{
-								const tpublic::Components::CombatPublic* nearbyNonPlayerCombatPublic = aEntity->GetComponent<tpublic::Components::CombatPublic>();
-								if(nearbyNonPlayerCombatPublic != NULL && nearbyNonPlayerCombatPublic->m_factionId == combat->m_factionId)
-									aContext->m_eventQueue->EventQueueThreat(topThreatEntity->GetEntityInstanceId(), aEntity->GetEntityInstanceId(), 0);
-							}
+							const tpublic::Components::CombatPublic* nearbyNonPlayerCombatPublic = aEntity->GetComponent<tpublic::Components::CombatPublic>();
+							if(nearbyNonPlayerCombatPublic != NULL && nearbyNonPlayerCombatPublic->m_factionId == combat->m_factionId)
+								aContext->m_eventQueue->EventQueueThreat(topThreatEntity->GetEntityInstanceId(), aEntity->GetEntityInstanceId(), 0);
 						}
 					}
 
