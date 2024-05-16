@@ -1,47 +1,3 @@
-objective .theodore_1:
-{
-	string: "Wildlife Culled"
-	
-	maps: [ open_world ]
-	
-	kill_npc:
-	{
-		entities: [ .deer_1 .deer_2 .boar_1 .boar_2 ]
-		count: 3
-	}
-}
-
-quest .theodore_1:
-{
-	string: "Seasonal Culling"
-
-	text:
-	[
-		"Exterminate wildlife in the area."
-	]
-	
-	description: 
-	[
-		"Those damn wild boars and deer have been pestering the local countryside. Their numbers have been going through the roof and we must cull them."
-		"Maybe you can lend a hand with the killing?"
-	]
-
-	progress:
-	[
-		"Any progress?"
-	]
-	
-	completion:
-	[
-		"Nice."
-	]
-
-	objectives: [ .theodore_1 ]
-	level: 1
-	
-	reward_one_item: [ consumable_small_healing_potion consumable_small_mana_potion ]
-}
-
 dialogue_screen .theodore_greetings:
 {
 	text: 
@@ -52,6 +8,7 @@ dialogue_screen .theodore_greetings:
 	options:
 	[
 		{ quest: .theodore_1 }
+		{ quest: .theodore_2 }
 	]
 }
 
@@ -124,3 +81,135 @@ entity .theodore:
 		}		
 	}
 }
+
+##########################################################################################
+# Quest 1
+
+objective .theodore_1:
+{
+	string: "Wildlife Culled"
+	
+	maps: [ open_world ]
+	
+	kill_npc:
+	{
+		entities: [ .deer_1 .deer_2 .boar_1 .boar_2 ]
+		count: 3
+	}
+}
+
+quest .theodore_1:
+{
+	string: "Seasonal Culling"
+
+	text:
+	[
+		"Exterminate wildlife in the area."
+	]
+	
+	description: 
+	[
+		"Those damn wild boars and deer have been pestering the local countryside. Their numbers have been going through the roof and we must cull them."
+		"Maybe you can lend a hand with the killing?"
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"Nice."
+	]
+
+	objectives: [ .theodore_1 ]
+	level: 1
+	
+	reward_one_item: [ consumable_small_healing_potion consumable_small_mana_potion ]
+}
+
+##########################################################################################
+# Quest 2
+
+objective .theodore_2:
+{
+	string: "Lost Satchel"
+	
+	maps: [ open_world ]
+	
+	collect_items: { item: .theodore_quest_item count: 1 }
+}
+
+loot_group .theodore_quest_item: {}
+
+item .theodore_quest_item:
+{
+	icon: icon_brown_bag
+	item_level: 3
+	loot_groups: [ .theodore_quest_item ]
+	flags: [ unique ]
+	string: "Lost Satchel"
+}
+
+loot_table .theodore_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .theodore_quest_item }			
+		}		
+	]
+}
+
+entity .theodore_quest_item:
+{
+	string: "Lost Satchel"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ satchel ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .theodore_quest_item
+			verb: pick_up
+			range: 1 
+			despawn: true 			
+		}		
+	}
+}
+
+quest .theodore_2:
+{
+	string: "Lost Satchel"
+
+	text:
+	[
+		"Venture unto the south eastern peninsula and find Theodore's lost satchel."
+	]
+	
+	description: 
+	[
+		"Yesterday when out strolling for a walk, suddenly a wolf jumped at me from out of nowhere! The foul beast tried to bite me, but I managed to"
+		"block its attack with me trusty old satchel. The cowardly animal grabbed it and ran off! It ran off south east where I've seen it's been crawling with"
+		"wolves recently. I would have hunted it down myself to retrieve my satchel, but, uhm, I strained my ankle. Can you go get it for me?"
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"Nice."
+	]
+
+	objectives: [ .theodore_2 ]
+	level: 3
+	prerequisites: [ .theodore_1 ]
+	reward_one_item: [ consumable_small_healing_potion consumable_small_mana_potion ]
+}
+

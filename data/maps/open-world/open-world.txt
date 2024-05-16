@@ -128,6 +128,11 @@ map_entity_spawn .crab_boss_4:
 	entity crab_boss_4: { weight: 1 }
 }
 
+map_entity_spawn .crab_boss_5:
+{
+	entity crab_boss_5: { weight: 1 }
+}
+
 map_entity_spawn .junjun_door:
 {
 	entity .junjun_door: { }
@@ -137,6 +142,11 @@ map_entity_spawn .junjun_door:
 map_entity_spawn .stash:
 {
 	entity stash: { }
+}
+
+map_entity_spawn .theodore_quest_item:
+{
+	entity .theodore_quest_item: { init_state: default }
 }
 
 map_player_spawn .player_spawn:
@@ -218,6 +228,7 @@ map_palette .tiles:
 	tile forest_entrance: [ 123 255 123 ] 
 	tile ext_dungeon_wall: [ 0 0 32 ]
 	tile ext_dungeon_entrance: [ 0 0 64 ]
+	tile ext_cave_entrance: [ 0 0 128 ]
 }
 
 map_palette .stuff:
@@ -253,6 +264,8 @@ map_palette .stuff:
 	entity_spawn .crab_man: [ 192 195 15 ]	
 	entity_spawn .crab_man_3: [ 192 15 15 ]	
 	entity_spawn .crab_boss_4: [ 192 15 195 ]	
+	entity_spawn .crab_boss_5: [ 192 1 195 ]	
+	entity_spawn .theodore_quest_item: [ 53 13 166 ]		
 	entity_spawn .stash: [ 0 43 66 ]		
 	entity_spawn .furnace: [ 100 43 66 ]		
 	entity_spawn .anvil: [ 150 43 66 ]		

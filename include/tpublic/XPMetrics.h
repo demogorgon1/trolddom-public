@@ -339,8 +339,6 @@ namespace tpublic
 		{
 			// FIXME: include elite flag
 			int32_t diff = (int32_t)aKillLevel - (int32_t)aPlayerLevel;
-			if(diff < 0)
-				diff = -diff;
 			uint32_t adjustment = GetAdjustment(diff);
 			return (GetXPFromKill(aKillLevel) * adjustment) / 100;
 		}
@@ -352,8 +350,6 @@ namespace tpublic
 			bool				aElite) const
 		{
 			int32_t diff = (int32_t)aQuestLevel - (int32_t)aPlayerLevel;
-			if (diff < 0)
-				diff = -diff;
 			uint32_t adjustment = GetAdjustment(diff);
 			uint32_t xp = (GetXPFromQuest(aQuestLevel) * adjustment) / 100;
 

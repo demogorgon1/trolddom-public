@@ -35,6 +35,7 @@ sprites:
 	sprite forest_entrance: { flags: [ tile_walkable tile_top  ] }
 	sprite ext_dungeon_wall: { flags: [ tile_block_line_of_sight tile_top ] }
 	sprite ext_dungeon_entrance: { flags: [ tile_walkable tile_top ] }
+	sprite ext_cave_entrance: { flags: [ tile_walkable tile_top ] }
 
 	cursor: { position: [ 0 16 ] }
 	

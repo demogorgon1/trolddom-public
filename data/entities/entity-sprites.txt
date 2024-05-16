@@ -151,6 +151,8 @@ sprites:
 	sprite fireplace_1: { }
 	sprite fireplace_2: { }
 	sprite fireplace_3: { }
+	sprite satchel: { }
+	sprite chest_2: { }
 	
 }
 

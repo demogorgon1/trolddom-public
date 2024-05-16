@@ -11,6 +11,8 @@ dialogue_screen .sheriff_wellington_greetings:
 	[
 		{ quest: .sheriff_wellington_1 }
 		{ quest: .sheriff_wellington_2 }
+		{ quest<completion_only>: spawn_of_umbracoth_2 }
+		{ quest<completion_only>: .crab_boss_5_quest }
 	]
 }
 

@@ -25,7 +25,8 @@ namespace tpublic
 					TYPE_OPEN,
 					TYPE_PICK,
 					TYPE_MINE,
-					TYPE_CATCH
+					TYPE_CATCH,
+					TYPE_PICK_UP
 				};
 
 				void
@@ -41,6 +42,8 @@ namespace tpublic
 						m_type = TYPE_MINE;
 					else if (t == "catch")
 						m_type = TYPE_CATCH;
+					else if (t == "pick_up")
+						m_type = TYPE_PICK_UP;
 					else
 						TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid verb.", aSource->GetIdentifier());
 				}
@@ -70,6 +73,7 @@ namespace tpublic
 					case TYPE_PICK:		return "Pick";
 					case TYPE_MINE:		return "Mine";
 					case TYPE_CATCH:	return "Catch";
+					case TYPE_PICK_UP:	return "Pick Up";
 					default:			break;
 					}
 					assert(false);

@@ -20,7 +20,6 @@ dialogue_screen .sylas_greetings:
 	[
 		{ goto: .sylas_vendor text: "Let me browse your goods." }
 		{ quest: test_dungeon_kill_ignorg }
-		{ quest<completion_only>: spawn_of_umbracoth_2 }
 	]
 }
 

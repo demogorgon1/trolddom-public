@@ -78,12 +78,12 @@ quest spawn_of_umbracoth_2:
 
 	text:
 	[
-		"The fisherman figured you should go talk Sylas about the tentacle."
+		"The fisherman figured you should go talk Sheriff Wellington about the tentacle."
 	]
 	
 	description: 
 	[
-		"You found it on a monster in the woods? That's strange. Maybe go ask Sylas."
+		"You found it on a monster in the woods? That's strange. Maybe go ask Sheriff Wellington."
 	]
 	
 	completion:
@@ -93,7 +93,7 @@ quest spawn_of_umbracoth_2:
 	]
 
 	level: 5	
-	
+	quest_items: [ .spawn_of_umbracoth_quest_drop ]
 	reward_one_item: [ legs_heroic_ringmail_leggings back_graceful_cape neck_miststone_chain ]
 }
 
@@ -104,8 +104,8 @@ entity .spawn_of_umbracoth: !NPC
 	_faction: monsters
 	_sprite: tentacle_monster
 	_sprite_dead: tentacle_monster_dead 
-	_weapon_damage: 1.5
-	_resource_health: 1.5
+	_weapon_damage: 2
+	_resource_health: 2
 	_elite: true
 	_loot_table: .spawn_of_umbracoth
 	_creature_type: beast
@@ -194,13 +194,15 @@ loot_table .crab_caster_3:
 
 entity crab_caster_3: !NPC
 {
-	_string: "Crab Warrior"
+	_string: "Crab Seer"
 	_level: 3
 	_faction: monsters
+	_resource_mana: 1
 	_sprite: crab_monster_1
 	_sprite_dead: crab_monster_1_dead
 	_loot_table: .crab_caster_3
 	_creature_type: humanoid
+	_abilities: [ { id: npc_firebolt } { id: npc_attack } ]
 }
 
 ##########################################################################################
@@ -219,8 +221,83 @@ entity crab_boss_4: !NPC
 	_string: "Suspiciously Large Crab Man"
 	_level: 4
 	_faction: monsters
+	_resource_health: 1.5
 	_sprite: crab_monster_boss_1
 	_sprite_dead: crab_monster_boss_1_dead
 	_loot_table: .crab_boss_4
+	_creature_type: humanoid
+}
+
+##########################################################################################
+# Suspiciously Large Crab Man (2)
+
+loot_group .crab_boss_5_quest_drop: { }
+
+ability .crab_boss_5_quest_drop_start_quest:	
+{
+	string: "Suspiciously Large Crab Claw"
+	description: "This item starts a quest."
+	flags: [ target_self ]
+	icon: icon_claw_2
+	direct_effect simple<start_quest>: .crab_boss_5_quest
+	states: [ default in_combat ]
+	requirement self<must_not_have_completed_quest>: { id: .crab_boss_5_quest }
+	requirement self<must_not_have_active_quest>: { id: .crab_boss_5_quest }
+}
+
+quest .crab_boss_5_quest:
+{
+	string: "Suspiciously Large Crab Claw"
+
+	text:
+	[
+		"Bring the suspiciously large crab claw to Sheriff Wellington."
+	]
+	
+	description: 
+	[
+		"This crab claw is larger than what you usually find attached to these crab men."
+	]
+	
+	completion:
+	[
+		"Nice."
+	]
+
+	level: 5
+	quest_items: [ .crab_boss_5_quest_drop ]
+}
+
+item .crab_boss_5_quest_drop:
+{
+	loot_groups: [ .crab_boss_5_quest_drop ]		
+	string: "Suspiciously Large Crab Claw" 
+	icon: icon_claw_2
+	item_level: 5
+	flags: [ unique not_sellable ]
+	use_ability: .crab_boss_5_quest_drop_start_quest
+}
+
+loot_table .crab_boss_5: 
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .crab_boss_5_quest_drop }			
+		}			
+		
+		!WORLD_DROPS {}
+	]	
+}
+
+entity crab_boss_5: !NPC
+{
+	_string: "Suspiciously Large Crab Man"
+	_level: 4
+	_faction: monsters
+	_resource_health: 1.5	
+	_sprite: crab_monster_boss_1
+	_sprite_dead: crab_monster_boss_1_dead
+	_loot_table: .crab_boss_5
 	_creature_type: humanoid
 }
