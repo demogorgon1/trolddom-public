@@ -20,6 +20,7 @@ namespace tpublic
 			uint8_t		m_flags = 0;
 		};
 
+		typedef std::function<bool(const EntityInstance*, int32_t)> EntityDistanceCallback;
 		typedef std::function<bool(const EntityInstance*)> EntityCallback;
 
 		virtual							~IWorldView() {}	
@@ -28,7 +29,7 @@ namespace tpublic
 		virtual const MapData*			WorldViewGetMapData() const = 0;
 		virtual size_t					WorldViewQueryEntityInstances(
 											const EntityQuery&		aEntityQuery,
-											EntityCallback			aEntityCallback) const = 0;
+											EntityDistanceCallback	aEntityCallback) const = 0;
 		virtual const EntityInstance*	WorldViewSingleEntityInstance(
 											uint32_t				aEntityInstanceId) const = 0;
 		virtual size_t					WorldViewEntityInstancesAtPosition(

@@ -184,17 +184,21 @@ namespace tpublic::Systems
 			{
 				IWorldView::EntityQuery entityQuery;
 				entityQuery.m_position = position->m_position;
-				entityQuery.m_maxDistance = 4;
+				entityQuery.m_maxDistance = GetManifest()->m_npcMetrics.GetMaxAggroRange();
 				entityQuery.m_flags = IWorldView::EntityQuery::FLAG_LINE_OF_SIGHT;
 
 				aContext->m_worldView->WorldViewQueryEntityInstances(entityQuery, [&](
-					const EntityInstance* aEntity)
+					const EntityInstance* aEntity,
+					int32_t				  aDistanceSquared)
 				{
 					if(aEntity->GetState() != EntityState::ID_DEAD)
 					{
 						if (aEntity->IsPlayer() && (!faction->IsNeutralOrFriendly() || combat->m_targetEntityInstanceId == aEntity->GetEntityInstanceId()))
 						{
-							aContext->m_eventQueue->EventQueueThreat(aEntity->GetEntityInstanceId(), aEntityInstanceId, 0);
+							const tpublic::Components::CombatPublic* playerCombatPublic = aEntity->GetComponent<tpublic::Components::CombatPublic>();
+							int32_t aggroRange = GetManifest()->m_npcMetrics.GetAggroRangeForLevelDifference((int32_t)combat->m_level, (int32_t)playerCombatPublic->m_level);
+							if(aDistanceSquared <= aggroRange * aggroRange)
+								aContext->m_eventQueue->EventQueueThreat(aEntity->GetEntityInstanceId(), aEntityInstanceId, 0);
 						}
 						else if(topThreatEntity != NULL && aEntity->GetState() != EntityState::ID_IN_COMBAT && !faction->IsNeutralOrFriendly())
 						{

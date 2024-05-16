@@ -134,6 +134,14 @@ namespace tpublic
 					TP_VERIFY(level > 0 && level < 100, aChild->m_debugInfo, "Invalid level annotation.");
 					AddLevel(level)->FromSource(aChild);
 				}
+				else if(aChild->m_name == "aggro_ranges")
+				{
+					aChild->GetUIntArray(m_aggroRanges);
+				}
+				else if(aChild->m_name == "aggro_range_base_level_difference")
+				{
+					m_aggroRangeBaseLevelDifference = aChild->GetInt32();
+				}
 				else
 				{
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -143,6 +151,9 @@ namespace tpublic
 			// Check that we don't have any null levels
 			for(const std::unique_ptr<Level>& level : m_levels)
 				TP_VERIFY(level, aSource->m_debugInfo, "Missing level definition.");
+
+			// Also we need to have at least one aggro range
+			TP_VERIFY(m_aggroRanges.size() > 0, aSource->m_debugInfo, "No aggro ranges defined.");
 		}
 
 		void
@@ -150,6 +161,8 @@ namespace tpublic
 			IWriter*						aStream) const 
 		{
 			aStream->WriteObjectPointers(m_levels);
+			aStream->WriteUInts(m_aggroRanges);
+			aStream->WriteInt(m_aggroRangeBaseLevelDifference);
 		}
 
 		bool
@@ -157,6 +170,10 @@ namespace tpublic
 			IReader*						aStream) 
 		{
 			if(!aStream->ReadObjectPointers(m_levels))
+				return false;
+			if(!aStream->ReadUInts(m_aggroRanges))
+				return false;
+			if(!aStream->ReadInt(m_aggroRangeBaseLevelDifference))
 				return false;
 			return true;
 		}
@@ -190,9 +207,28 @@ namespace tpublic
 				return NULL;
 			return m_levels[i].get();
 		}
-				
+
+		int32_t 
+		GetMaxAggroRange() const
+		{
+			assert(m_aggroRanges.size() > 0);
+			return (int32_t)m_aggroRanges[0];
+		}
+
+		int32_t
+		GetAggroRangeForLevelDifference(
+			int32_t							aNPCLevel,
+			int32_t							aTargetLevel) const
+		{	
+			assert(m_aggroRanges.size() > 0);
+			int32_t i = Base::Max(0, aTargetLevel - aNPCLevel - m_aggroRangeBaseLevelDifference);
+			return m_aggroRanges[Base::Min(i, (int32_t)m_aggroRanges.size() - 1)];
+		}
+
 		// Public data
 		std::vector<std::unique_ptr<Level>>		m_levels;
+		std::vector<uint32_t>					m_aggroRanges;
+		int32_t									m_aggroRangeBaseLevelDifference = 0;
 	};
 
 }
