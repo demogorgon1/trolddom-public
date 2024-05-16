@@ -77,6 +77,11 @@ map_entity_spawn .marcus_flambe:
 	entity .marcus_flambe: { weight: 1 }
 }
 
+map_entity_spawn .svara:
+{
+	entity .svara: { weight: 1 }
+}
+
 map_entity_spawn .gateway:
 {
 	entity gateway: { weight: 1 }
@@ -95,6 +100,11 @@ map_entity_spawn .furnace:
 map_entity_spawn .fireplace:
 {
 	entity fireplace: { weight: 1 }
+}
+
+map_entity_spawn .fireplace_unlit:
+{
+	entity fireplace_unlit: { weight: 1 }
 }
 
 map_entity_spawn .player_world_gateway:
@@ -258,6 +268,7 @@ map_palette .stuff:
 	entity_spawn .xazax: [ 55 95 12 ]		
 	entity_spawn .rorion: [ 12 95 55 ]		
 	entity_spawn .marcus_flambe: [ 12 195 55 ]			
+	entity_spawn .svara: [ 12 195 255 ]			
 	entity_spawn .hobart: [ 12 195 155 ]	
 	entity_spawn .theodore: [ 142 195 155 ]	
 	entity_spawn .sheriff_wellington: [ 192 195 155 ]	
@@ -270,6 +281,7 @@ map_palette .stuff:
 	entity_spawn .furnace: [ 100 43 66 ]		
 	entity_spawn .anvil: [ 150 43 66 ]		
 	entity_spawn .fireplace: [ 250 43 66 ]		
+	entity_spawn .fireplace_unlit: [ 250 243 66 ]		
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn dungeon_1_exit: [ 0 0 200 ]	
 	portal .dungeon_1_entrance: [ 0 234 0 ]	

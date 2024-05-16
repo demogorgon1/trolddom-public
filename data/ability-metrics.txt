@@ -19,4 +19,10 @@ ability_metrics:
 	
 	rage_hit_base_per_second: 4
 	rage_crit_base_per_second: 7	
+	
+	untrain_talents_cost_at_level:
+	[
+		[ 1 300 ]
+		[ 10 2500 ]
+	]
 }

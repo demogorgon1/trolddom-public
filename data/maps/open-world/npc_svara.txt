@@ -1,0 +1,99 @@
+expression .svara_can_afford:
+{
+	less_than_or_equal: 
+	{
+		client_untrain_talents_price: {}
+		client_wallet_cash: {}
+	}
+}
+
+dialogue_screen .svara_greetings:
+{
+	text: 
+	[	
+		"I'm Svara the resident deprogrammer.\n"
+		"\n"
+		"My services are reasonably priced at {$client_untrain_talents_price$}."
+	]
+	
+	options:
+	[
+		{ 
+			text: "Yes, please, I want to forget everything." 
+			script: untrain_talents 
+			condition: .svara_can_afford 
+			confirmation: "This will reset all your talent points.\n\nDo you want to proceed?"
+		}
+	]
+}
+
+dialogue_root .svara_dialogue:
+{
+	.svara_greetings: { }
+}
+
+entity .svara:
+{
+	string: "Svara the Deprogrammer"
+	
+	systems: [ combat npc ]
+	
+	modifiers: 
+	{ 
+		weapon_damage: 2
+		resource<health>: 2
+	}	
+	
+	components:
+	{
+		position: { }		
+		threat_target: { }
+		visible_auras: { }
+		auras: { }
+		tag: { }
+		lootable: 
+		{ 
+			loot_table: .npc
+		}
+		combat_public: 
+		{  
+			level: 10
+			faction: npcs		
+			creature_type: humanoid			
+			dialogue_root: .svara_dialogue
+			
+			modifier not_pushable: {}
+		}			
+		combat_private:
+		{
+			physical_critical_strike_chance: 5
+			dodge_chance: 5
+			parry_chance: 5
+			miss_chance: 5
+			block_chance: 5
+		}
+		npc: 
+		{ 			
+			state default:
+			{
+				dialogue_scripts: [ untrain_talents ]			
+			}
+			
+			state in_combat:
+			{
+				abilities:
+				[					
+					{ id: npc_attack }
+				]
+			}	
+		}
+		sprite: 
+		{ 
+			animations:
+			[
+				{ states: [ default in_combat spawning ] frames: [ woman_3 ] }			
+				{ states: [ dead ] frames: [ woman_3_dead ] z_offset: -2 }			
+			]		
+		}		
+	}	
+}

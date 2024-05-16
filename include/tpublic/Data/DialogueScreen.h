@@ -46,6 +46,10 @@ namespace tpublic
 						{
 							m_string = aChild->GetString();
 						}
+						else if (aChild->m_name == "confirmation")
+						{
+							m_confirmation = aChild->GetString();
+						}
 						else if(aChild->m_name == "script")
 						{
 							m_dialogueScript = DialogueScript::StringToId(aChild->GetIdentifier());
@@ -71,6 +75,7 @@ namespace tpublic
 					IWriter*			aWriter) const
 				{
 					aWriter->WriteString(m_string);
+					aWriter->WriteString(m_confirmation);
 					aWriter->WriteUInt(m_dialogueScreenId);
 					aWriter->WriteUInt(m_questId);
 					aWriter->WritePOD(m_dialogueScript);
@@ -85,6 +90,8 @@ namespace tpublic
 					IReader*			aReader) 
 				{
 					if(!aReader->ReadString(m_string))
+						return false;
+					if (!aReader->ReadString(m_confirmation))
 						return false;
 					if (!aReader->ReadUInt(m_dialogueScreenId))
 						return false;
@@ -105,6 +112,7 @@ namespace tpublic
 
 				// Public data
 				std::string					m_string;
+				std::string					m_confirmation;
 				uint32_t					m_dialogueScreenId = 0;		
 				uint32_t					m_questId = 0;
 				bool						m_questOffer = true;
