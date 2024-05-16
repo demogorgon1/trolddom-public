@@ -99,6 +99,7 @@ namespace tpublic
 				FIELD_LEVEL,
 				FIELD_REQUIREMENTS,
 				FIELD_SOUND,
+				FIELD_REQUIRED_QUEST_ID,
 			};
 
 			static void
@@ -110,6 +111,7 @@ namespace tpublic
 				aSchema->DefineCustomObject<Verb>(FIELD_VERB, "verb", offsetof(Openable, m_verb));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_REQUIRED_PROFESSION_ID, "required_profession", offsetof(Openable, m_requiredProfessionId))->SetDataType(DataType::ID_PROFESSION);
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_REQUIRED_PROFESSION_SKILL, "required_profession_skill", offsetof(Openable, m_requiredProfessionSkill));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_REQUIRED_QUEST_ID, "required_quest", offsetof(Openable, m_requiredQuestId))->SetDataType(DataType::ID_QUEST);
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_RANGE, "range", offsetof(Openable, m_range));
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_DESPAWN, "despawn", offsetof(Openable, m_despawn));
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_INSTANT, "instant", offsetof(Openable, m_instant));
@@ -126,6 +128,7 @@ namespace tpublic
 			Verb						m_verb;
 			uint32_t					m_requiredProfessionId = 0;
 			uint32_t					m_requiredProfessionSkill = 0;
+			uint32_t					m_requiredQuestId = 0;
 			uint32_t					m_range = 1;
 			bool						m_instant = false;
 			bool						m_despawn = false;

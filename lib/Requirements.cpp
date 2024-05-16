@@ -295,6 +295,13 @@ namespace tpublic
 				}
 			}
 
+			if(openable->m_requiredQuestId)
+			{
+				const tpublic::Components::ActiveQuests* activeQuests = aSelf->GetComponent<tpublic::Components::ActiveQuests>();
+				if(!activeQuests->HasQuest(openable->m_requiredQuestId))
+					return false;
+			}
+
 			if(aOutInstant != NULL)
 				*aOutInstant = openable->m_instant;
 

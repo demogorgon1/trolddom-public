@@ -148,7 +148,7 @@ item .theodore_quest_item:
 	icon: icon_brown_bag
 	item_level: 3
 	loot_groups: [ .theodore_quest_item ]
-	flags: [ unique ]
+	flags: [ unique not_sellable ]
 	string: "Lost Satchel"
 }
 
@@ -176,7 +176,8 @@ entity .theodore_quest_item:
 			loot_table: .theodore_quest_item
 			verb: pick_up
 			range: 1 
-			despawn: true 			
+			despawn: true 		
+			required_quest: .theodore_2
 		}		
 	}
 }

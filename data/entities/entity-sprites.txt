@@ -88,6 +88,7 @@ sprites:
 	sprite crab_monster_1: { dead: crab_monster_1_dead tags: [ crab_monster caster melee ] }
 	sprite crab_monster_boss_1: { dead: crab_monster_boss_1_dead tags: [ crab_monster caster melee boss ] }
 	sprite woman_3: { dead: woman_3_dead tags: [ female human ] }
+	sprite man_11: { dead: man_11_dead tags: [ male human ] }
 
 	cursor: { position: [ 0 80 ] }
 
@@ -97,6 +98,7 @@ sprites:
 	sprite crab_monster_1_dead: { }
 	sprite crab_monster_boss_1_dead: { }
 	sprite woman_3_dead: { }
+	sprite man_11_dead: { }
 	
 }
 
@@ -156,6 +158,8 @@ sprites:
 	sprite satchel: { }
 	sprite chest_2: { }
 	sprite fireplace_unlit: { }
+	sprite mushroom_1: { }
+	sprite mushroom_2: { }
 	
 }
 

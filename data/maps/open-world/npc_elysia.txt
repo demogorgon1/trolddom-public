@@ -26,6 +26,7 @@ dialogue_screen .elysia_greetings:
 	
 	options:
 	[
+		{ quest: .elysia_1 }
 		{ goto: .elysia_herbalism text: "Tell me about herbalism." }
 		{ goto: .elysia_trainer text: "Teach me the way of the herbalist." }
 	]
@@ -104,3 +105,88 @@ entity .elysia:
 		}		
 	}
 }
+
+##########################################################################################
+# Quest 1
+
+objective .elysia_1:
+{
+	string: "Spongy Mushrooms"
+	
+	maps: [ open_world ]
+	
+	collect_items: { item: .elysia_quest_item count: 5 }
+}
+
+loot_group .elysia_quest_item: {}
+
+item .elysia_quest_item:
+{
+	icon: icon_mushroom_1
+	item_level: 4
+	loot_groups: [ .elysia_quest_item ]
+	flags: [ not_sellable ]
+	string: "Spongy Mushroom"
+	stack: 5
+}
+
+loot_table .elysia_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .elysia_quest_item }			
+		}		
+	]
+}
+
+entity .elysia_quest_item:
+{
+	string: "Spongy Mushroom"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ mushroom_2 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .elysia_quest_item
+			verb: pick
+			range: 1 
+			despawn: true 			
+			required_quest: .elysia_1
+		}		
+	}
+}
+
+quest .elysia_1:
+{
+	string: "Rare Mushrooms"
+
+	text:
+	[
+		"Venture into the dark woods to the east and collect mushrooms."
+	]
+	
+	description: 
+	[
+		"Everyone loves mushrooms, right? Unfortunately I've run out and would love if you'd go into the woods to the east and collect some for me?"
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"Nice."
+	]
+
+	objectives: [ .elysia_1 ]
+	level: 4
+	reward_one_item: [ consumable_small_healing_potion consumable_small_mana_potion ]
+}
+
+

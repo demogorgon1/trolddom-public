@@ -67,6 +67,11 @@ map_entity_spawn .theodore:
 	entity .theodore: { weight: 1 }
 }
 
+map_entity_spawn .tom:
+{
+	entity .tom: { weight: 1 }
+}
+
 map_entity_spawn .sheriff_wellington:
 {
 	entity .sheriff_wellington: { weight: 1 }
@@ -156,7 +161,14 @@ map_entity_spawn .stash:
 
 map_entity_spawn .theodore_quest_item:
 {
+	spawn_timer: { despawn_required: true min_delay: 300 cooldown_range_min: 600 cooldown_range_max: 1200 }
 	entity .theodore_quest_item: { init_state: default }
+}
+
+map_entity_spawn .elysia_quest_item:
+{
+	spawn_timer: { despawn_required: true min_delay: 300 cooldown_range_min: 600 cooldown_range_max: 1200 }
+	entity .elysia_quest_item: { init_state: default }
 }
 
 map_player_spawn .player_spawn:
@@ -218,6 +230,16 @@ zone .zone_10:
 	string: "Xazax's Hideaway"
 }
 
+zone .zone_11:
+{
+	string: "The Old Fort"
+}
+
+zone .zone_12:
+{
+	string: "Peninsula Cave"
+}
+
 map_palette .tiles:
 {
 	tile water_1: [ 9 86 104 ]
@@ -271,12 +293,14 @@ map_palette .stuff:
 	entity_spawn .svara: [ 12 195 255 ]			
 	entity_spawn .hobart: [ 12 195 155 ]	
 	entity_spawn .theodore: [ 142 195 155 ]	
+	entity_spawn .tom: [ 140 192 16 ]	
 	entity_spawn .sheriff_wellington: [ 192 195 155 ]	
 	entity_spawn .crab_man: [ 192 195 15 ]	
 	entity_spawn .crab_man_3: [ 192 15 15 ]	
 	entity_spawn .crab_boss_4: [ 192 15 195 ]	
 	entity_spawn .crab_boss_5: [ 192 1 195 ]	
 	entity_spawn .theodore_quest_item: [ 53 13 166 ]		
+	entity_spawn .elysia_quest_item: [ 53 13 169 ]		
 	entity_spawn .stash: [ 0 43 66 ]		
 	entity_spawn .furnace: [ 100 43 66 ]		
 	entity_spawn .anvil: [ 150 43 66 ]		
@@ -313,6 +337,8 @@ map_palette .zones:
 	zone .zone_8: [ 0 255 0 ]	
 	zone .zone_9: [ 220 0 255 ]	
 	zone .zone_10: [ 0 140 14 ]	
+	zone .zone_11: [ 168 65 243 ]	
+	zone .zone_12: [ 144 230 255 ]	
 }
 
 map open_world:
