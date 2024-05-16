@@ -180,7 +180,9 @@ namespace tpublic::Systems
 					topThreatEntity = NULL;
 			}
 
-			if(aContext->m_tick - threat->m_lastPingTick >= Components::ThreatTarget::PING_INTERVAL_TICKS)
+			bool passive = (aEntityState == EntityState::ID_DEFAULT) && aTicksInState < 15;
+
+			if(aContext->m_tick - threat->m_lastPingTick >= Components::ThreatTarget::PING_INTERVAL_TICKS && !passive)
 			{
 				IWorldView::EntityQuery entityQuery;
 				entityQuery.m_position = position->m_position;
