@@ -49,3 +49,16 @@ item item_water:
 	string: "Water"
 	stack: 20
 }
+
+#####################################################
+# Potatoes
+
+item item_potatoes:
+{
+	type: miscellaneous
+	item_level: 1
+	icon: icon_potatoes
+	string: "Potatoes"
+	stack: 20
+	loot_groups: [ potatoes world_drops_junk ]
+}

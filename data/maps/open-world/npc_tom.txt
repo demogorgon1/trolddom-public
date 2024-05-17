@@ -7,6 +7,7 @@ dialogue_screen .tom_greetings:
 	
 	options:
 	[
+		{ quest<offer_only>: .tom_1 }
 	]
 }
 
@@ -82,3 +83,34 @@ entity .tom:
 
 ############################################################
 # Quest 1
+
+quest .tom_1:
+{
+	string: "The Ernston Potato Farm"
+
+	text:
+	[
+		"Go check up on the potato farm to the east."
+	]
+	
+	description: 
+	[
+		"The Ernstons have been operating their potato farming venture out east for years, but with all the recent crab man activity it might"
+		"be a good idea to go check if they have any problems."
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"Did old Red tell you that we might need help with the crab man situation?\n"
+		"\n"
+		"Well, there has been some activity further east along the coast, but they've largely left us alone so far. You can go check with my wife out front"
+		"if she has anything to add."
+	]
+
+	level: 4
+}

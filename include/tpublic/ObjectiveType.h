@@ -13,6 +13,7 @@ namespace tpublic
 			ID_KILL_NPC,
 			ID_COLLECT_ITEMS,
 			ID_USE_ABILITY,
+			ID_DIALOGUE_TRIGGER,
 
 			NUM_IDS
 		};
@@ -23,7 +24,8 @@ namespace tpublic
 			NULL,
 			"kill_npc",
 			"collect_items",
-			"use_ability"
+			"use_ability",
+			"dialogue_trigger"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

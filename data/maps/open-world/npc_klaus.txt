@@ -1,0 +1,85 @@
+dialogue_screen .klaus_greetings:
+{
+	text: 
+	[	
+		"Gnomes are NOT real! Someone needs to talk some sense into that kid!"
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .tom_1 }
+	]
+}
+
+dialogue_root .klaus_dialogue:
+{
+	.klaus_greetings: { }
+}
+
+entity .klaus:
+{
+	string: "Klaus Ernston"
+	
+	systems: [ combat npc ]
+	
+	modifiers: 
+	{ 
+		weapon_damage: 2
+		resource<health>: 2
+	}		
+	
+	components:
+	{
+		position: { }		
+		threat_target: { }
+		visible_auras: { }
+		auras: { }
+		tag: { }
+		lootable: 
+		{ 
+			loot_table: .npc
+		}
+		combat_public: 
+		{  
+			level: 10
+			faction: npcs		
+			creature_type: humanoid
+			dialogue_root: .klaus_dialogue
+			
+			modifier not_pushable: {}
+		}			
+		combat_private:
+		{
+			physical_critical_strike_chance: 5
+			dodge_chance: 5
+			parry_chance: 5
+			miss_chance: 5
+			block_chance: 5
+		}
+		npc: 
+		{ 			
+			state default:
+			{
+			}
+			
+			state in_combat:
+			{
+				abilities:
+				[					
+					{ id: npc_attack }
+				]
+			}	
+		}
+		sprite: 
+		{ 
+			animations:
+			[
+				{ states: [ default in_combat spawning ] frames: [ man_12 ] }			
+				{ states: [ dead ] frames: [ man_12_dead ] z_offset: -2 }			
+			]		
+		}		
+	}
+}
+
+############################################################
+# Quest 1

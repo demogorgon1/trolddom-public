@@ -498,11 +498,11 @@ namespace tpublic::Systems
 			}
 		}
 
-		bool block = 
-			aEntityState != EntityState::ID_DEAD && 
-			aEntityState != EntityState::ID_EVADING && 
-			aEntityState != EntityState::ID_DESPAWNING && 
-			aEntityState != EntityState::ID_DESPAWNED;
+		bool block = npc->m_blocking && 
+			(aEntityState != EntityState::ID_DEAD && 
+			 aEntityState != EntityState::ID_EVADING && 
+			 aEntityState != EntityState::ID_DESPAWNING && 
+			 aEntityState != EntityState::ID_DESPAWNED);
 
 		if(position->IsBlocking() != block)
 		{

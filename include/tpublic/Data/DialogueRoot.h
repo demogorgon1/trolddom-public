@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../DataBase.h"
+#include "../DialogueScript.h"
 
 namespace tpublic
 {
@@ -30,9 +31,18 @@ namespace tpublic
 						const SourceNode* aChild)
 					{
 						if(aChild->m_name == "conditions")
+						{
 							aChild->GetIdArray(DataType::ID_EXPRESSION, m_conditionExpressionIds);
+						}
+						else if (aChild->m_name == "script")
+						{
+							m_dialogueScript = DialogueScript::StringToId(aChild->GetIdentifier());
+							TP_VERIFY(m_dialogueScript != DialogueScript::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid dialogue script.", aChild->GetIdentifier());
+						}
 						else
+						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+						}
 					});
 				}
 
@@ -42,6 +52,7 @@ namespace tpublic
 				{
 					aWriter->WriteUInt(m_dialogueScreenId);
 					aWriter->WriteUInts(m_conditionExpressionIds);
+					aWriter->WritePOD(m_dialogueScript);
 				}
 
 				bool
@@ -52,12 +63,15 @@ namespace tpublic
 						return false;
 					if(!aReader->ReadUInts(m_conditionExpressionIds))
 						return false;
+					if(!aReader->ReadPOD(m_dialogueScript))
+						return false;
 					return true;
 				}
 
 				// Public data
 				uint32_t				m_dialogueScreenId = 0;
 				std::vector<uint32_t>	m_conditionExpressionIds;
+				DialogueScript::Id		m_dialogueScript = DialogueScript::ID_NONE;
 			};
 
 			void

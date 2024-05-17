@@ -277,4 +277,28 @@ sprites:
 	sprite snow_rocks_border_16: { }
 	sprite snow_rocks_border_17: { }
 
+	cursor: { position: [ 0 176 ] }
+	
+	sprite farmland: { flags: [ tile_walkable ] borders:
+		[ farmland_border_1 farmland_border_2 farmland_border_3 farmland_border_4 farmland_border_5 farmland_border_6 farmland_border_7
+		  farmland_border_8 farmland_border_9 farmland_border_10 farmland_border_11 farmland_border_12 farmland_border_13 farmland_border_14
+		  farmland_border_15 farmland_border_16 farmland_border_17 ] }		
+	sprite farmland_border_1: { }
+	sprite farmland_border_2: { }
+	sprite farmland_border_3: { }
+	sprite farmland_border_4: { }
+	sprite farmland_border_5: { }
+	sprite farmland_border_6: { }
+	sprite farmland_border_7: { }
+	sprite farmland_border_8: { }
+	sprite farmland_border_9: { }
+	sprite farmland_border_10: { }
+	sprite farmland_border_11: { }
+	sprite farmland_border_12: { }
+	sprite farmland_border_13: { }
+	sprite farmland_border_14: { }
+	sprite farmland_border_15: { }
+	sprite farmland_border_16: { }
+	sprite farmland_border_17: { }
+
 }

@@ -1,0 +1,88 @@
+dialogue_screen .clara_greetings:
+{
+	text: 
+	[	
+		"Looks like a fine harvest this year."
+	]
+	
+	options:
+	[
+	]
+}
+
+dialogue_root .clara_dialogue:
+{
+	.clara_greetings: { }
+}
+
+entity .clara:
+{
+	string: "Clara Ernston"
+	
+	systems: [ combat npc ]
+	
+	modifiers: 
+	{ 
+		weapon_damage: 2
+		resource<health>: 2
+	}		
+	
+	components:
+	{
+		position: { }		
+		threat_target: { }
+		visible_auras: { }
+		auras: { }
+		tag: { }
+		guild_name:
+		{
+			string: "Potato Farmer"
+		}	
+		lootable: 
+		{ 
+			loot_table: .npc
+		}
+		combat_public: 
+		{  
+			level: 10
+			faction: npcs		
+			creature_type: humanoid
+			dialogue_root: .clara_dialogue
+			
+			modifier not_pushable: {}
+		}			
+		combat_private:
+		{
+			physical_critical_strike_chance: 5
+			dodge_chance: 5
+			parry_chance: 5
+			miss_chance: 5
+			block_chance: 5
+		}
+		npc: 
+		{ 			
+			state default:
+			{
+			}
+			
+			state in_combat:
+			{
+				abilities:
+				[					
+					{ id: npc_attack }
+				]
+			}	
+		}
+		sprite: 
+		{ 
+			animations:
+			[
+				{ states: [ default in_combat spawning ] frames: [ woman_4 ] }			
+				{ states: [ dead ] frames: [ woman_4_dead ] z_offset: -2 }			
+			]		
+		}		
+	}
+}
+
+############################################################
+# Quest 1

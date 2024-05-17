@@ -13,6 +13,7 @@ namespace tpublic
 			ID_NONE,
 			ID_CREATE_GUILD,
 			ID_UNTRAIN_TALENTS,
+			ID_TRIGGER,
 
 			NUM_IDS
 		};
@@ -30,6 +31,7 @@ namespace tpublic
 			{ "none" },
 			{ "create_guild" },
 			{ "untrain_talents" },
+			{ "trigger" }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

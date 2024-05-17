@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ObjectiveTypes/CollectItems.h"
+#include "ObjectiveTypes/DialogueTrigger.h"
 #include "ObjectiveTypes/KillNPC.h"
 #include "ObjectiveTypes/UseAbility.h"
 
@@ -15,6 +16,7 @@ namespace tpublic
 		ObjectiveTypeFactory()
 		{
 			_Register<ObjectiveTypes::CollectItems>();
+			_Register<ObjectiveTypes::DialogueTrigger>();
 			_Register<ObjectiveTypes::KillNPC>();
 			_Register<ObjectiveTypes::UseAbility>();
 		}

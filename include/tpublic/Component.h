@@ -60,6 +60,7 @@ namespace tpublic
 			ID_SOUND_SOURCE,
 			ID_STASH,
 			ID_ABILITY_MODIFIERS,
+			ID_VISIBILITY,
 
 			NUM_IDS
 		};
@@ -117,7 +118,8 @@ namespace tpublic
 			"player_world_stash",
 			"sound_source",
 			"stash",
-			"ability_modifiers"
+			"ability_modifiers",
+			"visibility"
 		};		
 
 		static_assert(sizeof(COMPONENT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

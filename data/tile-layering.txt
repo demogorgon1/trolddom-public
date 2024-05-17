@@ -6,6 +6,7 @@ tile_layering:
 	dirt
 	grass
 	dark_grass
+	farmland
 	snow
 	forest
 	rocks

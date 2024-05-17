@@ -1,0 +1,205 @@
+dialogue_screen .gnome_billy_1_b:
+{
+	text: 
+	[	
+		"Stealing? Please! This is big business! Without our operations the economy would collapse."
+	]
+	
+	options:
+	[
+		{ text: "That makes sense." }
+	]	
+}
+
+dialogue_screen .gnome_billy_1_a:
+{
+	text: 
+	[	
+		"What's it to you?"
+	]
+	
+	options:
+	[
+		{ goto: .gnome_billy_1_b text: "Why are you stealing stuff from kids?" }
+	]	
+}
+
+dialogue_screen .gnome_greetings:
+{
+	text: 
+	[	
+		"What are you looking at?"
+	]
+	
+	options:
+	[
+		{ goto: .gnome_billy_1_a text: "Are you gnome?" }
+		{ quest: .gnome_1 }
+	]
+}
+
+dialogue_root .gnome_dialogue:
+{
+	.gnome_greetings: { script: trigger }
+}
+
+entity .gnome:
+{
+	string: "Gnome"
+	
+	systems: [ combat npc ]
+	
+	modifiers: 
+	{ 
+		weapon_damage: 2
+		resource<health>: 2
+	}		
+	
+	components:
+	{
+		position: { }		
+		threat_target: { }
+		visible_auras: { }
+		auras: { }
+		tag: { }
+		lootable: 
+		{ 
+			loot_table: .npc
+		}
+		combat_public: 
+		{  
+			level: 10
+			faction: npcs		
+			creature_type: humanoid
+			dialogue_root: .gnome_dialogue
+			
+			modifier not_pushable: {}
+		}			
+		combat_private:
+		{
+			physical_critical_strike_chance: 5
+			dodge_chance: 5
+			parry_chance: 5
+			miss_chance: 5
+			block_chance: 5
+		}
+		npc: 
+		{ 			
+			state default:
+			{
+				dialogue_scripts: [ trigger ]			
+			}
+			
+			state in_combat:
+			{
+				abilities:
+				[					
+					{ id: npc_attack }
+				]
+			}	
+			
+			blocking: false
+		}
+		sprite: 
+		{ 
+			animations:
+			[
+				{ states: [ default in_combat spawning ] frames: [ gnome_1 ] }			
+				{ states: [ dead ] frames: [ gnome_1_dead ] z_offset: -2 }			
+			]		
+		}		
+		visibility:
+		{
+			requirements:
+			{
+				requirement self<must_have_completed_quest>: { id: .tom_1 }
+				requirement self<must_not_have_completed_quest>: { id: .gnome_1 }
+			}
+		}
+	}
+}
+
+############################################################
+# Quest 1
+
+objective .gnome_1:
+{
+	string: "Merchandise"
+	
+	maps: [ open_world ]
+	
+	collect_items: { item: .gnome_1_quest_item count: 1 }
+}
+
+loot_group .gnome_1_quest_item: {}
+
+item .gnome_1_quest_item:
+{
+	icon: icon_box
+	item_level: 5
+	loot_groups: [ .gnome_1_quest_item ]
+	flags: [ unique not_sellable ]
+	string: "Merchandise"
+	flavor: "It's a bunch of old socks."
+}
+
+loot_table .gnome_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .gnome_1_quest_item }			
+		}		
+	]
+}
+
+entity .gnome_1_quest_item:
+{
+	string: "Merchandise"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ chest_2 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .gnome_1_quest_item
+			verb: open
+			range: 1 
+			despawn: true 		
+			required_quest: .gnome_1
+		}		
+	}
+}
+
+quest .gnome_1:
+{
+	string: "Business Proposal"
+
+	text:
+	[
+		"Retrieve the merchandise from the abandoned house out east."
+	]
+	
+	description: 
+	[
+		"I have a business proposal for you. There is an abandoned house out east and rumor has it, that within that house there is a chest full of merchandise."
+		"If you can retrieve it for me I will make it worth your while."
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"Excellent. I have something for you, let me just go get it..."
+	]
+
+	reward_cash_multiplier: 0
+	prerequisites: [ .tom_1 ]
+	objectives: [ .gnome_1 ]
+	level: 4
+}

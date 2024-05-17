@@ -70,7 +70,8 @@ namespace tpublic
 		uint32_t
 		GetCashRewardForLevel(
 			uint32_t						aLevel,
-			bool							aElite) const
+			bool							aElite,
+			float							aMultiplier) const
 		{	
 			if(m_cashRewardForLevel.size() == 0)
 				return 0;
@@ -84,6 +85,9 @@ namespace tpublic
 
 			if(aElite)
 				cash = (cash * m_eliteCashAdjustment) / 100;
+
+			if(aMultiplier != 1.0f)
+				cash = (uint32_t)((float)cash * aMultiplier);
 
 			return cash;
 		}

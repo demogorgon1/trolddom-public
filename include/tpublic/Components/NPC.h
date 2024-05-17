@@ -283,7 +283,8 @@ namespace tpublic
 				FIELD_RESOURCES,
 				FIELD_DESPAWN_TIME,
 				FIELD_DEFAULT_BEHAVIOR_STATE,
-				FIELD_CAN_MOVE_ON_ALL_NON_VIEW_BLOCKING_TILES
+				FIELD_CAN_MOVE_ON_ALL_NON_VIEW_BLOCKING_TILES,
+				FIELD_BLOCKING
 			};
 
 			static void
@@ -295,6 +296,7 @@ namespace tpublic
 				aSchema->DefineCustomObject<DespawnTime>(FIELD_DESPAWN_TIME, "despawn_time", offsetof(NPC, m_despawnTime));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_DEFAULT_BEHAVIOR_STATE, "default_behavior_state", offsetof(NPC, m_defaultBehaviorState))->SetDataType(DataType::ID_NPC_BEHAVIOR_STATE);
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_CAN_MOVE_ON_ALL_NON_VIEW_BLOCKING_TILES, "can_move_on_all_non_view_blocking_tiles", offsetof(NPC, m_canMoveOnAllNonViewBlockingTiles));
+				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_BLOCKING, "blocking", offsetof(NPC, m_blocking));
 			}
 
 			const StateEntry*
@@ -315,6 +317,7 @@ namespace tpublic
 			DespawnTime									m_despawnTime;
 			uint32_t									m_defaultBehaviorState = 0;
 			bool										m_canMoveOnAllNonViewBlockingTiles = false;
+			bool										m_blocking = true;
 
 			// Not serialized
 			Cooldowns									m_cooldowns;

@@ -72,6 +72,26 @@ map_entity_spawn .tom:
 	entity .tom: { weight: 1 }
 }
 
+map_entity_spawn .clara:
+{
+	entity .clara: { weight: 1 }
+}
+
+map_entity_spawn .klaus:
+{
+	entity .klaus: { weight: 1 }
+}
+
+map_entity_spawn .billy:
+{
+	entity .billy: { weight: 1 }
+}
+
+map_entity_spawn .gnome:
+{
+	entity .gnome: { weight: 1 }
+}
+
 map_entity_spawn .sheriff_wellington:
 {
 	entity .sheriff_wellington: { weight: 1 }
@@ -171,6 +191,12 @@ map_entity_spawn .elysia_quest_item:
 	entity .elysia_quest_item: { init_state: default }
 }
 
+map_entity_spawn .gnome_1_quest_item:
+{
+	spawn_timer: { despawn_required: true min_delay: 300 cooldown_range_min: 600 cooldown_range_max: 1200 }
+	entity .gnome_1_quest_item: { init_state: default }
+}
+
 map_player_spawn .player_spawn:
 {
 }
@@ -249,6 +275,7 @@ map_palette .tiles:
 	tile dirt: [ 97 91 62 ]
 	tile grass: [ 64 105 0 ]
 	tile forest: [ 51 75 6 ]
+	tile farmland: [ 128 128 0 ]
 	tile rocks: [ 143 131 120 ]
 	tile rocks_dungeon_entrance: [ 200 200 200 ]
 	tile wood_wall: [ 255 255 0 ] 
@@ -271,6 +298,7 @@ map_palette .stuff:
 	entity_spawn mailbox: [ 0 20 60 ]	
 	entity_spawn holy_altar: [ 0 0 40 ]	
 	entity_spawn underworld_shrine: [ 0 0 80 ]	
+	entity_spawn potatoes: [ 212 255 42 ]
 
 	entity_spawn .wildlife: [ 255 255 0 ]
 	entity_spawn .sylas: [ 255 189 0 ]
@@ -294,6 +322,10 @@ map_palette .stuff:
 	entity_spawn .hobart: [ 12 195 155 ]	
 	entity_spawn .theodore: [ 142 195 155 ]	
 	entity_spawn .tom: [ 140 192 16 ]	
+	entity_spawn .clara: [ 40 90 180 ]	
+	entity_spawn .klaus: [ 180 90 40 ]	
+	entity_spawn .billy: [ 90 180 40 ]	
+	entity_spawn .gnome: [ 90 180 88 ]	
 	entity_spawn .sheriff_wellington: [ 192 195 155 ]	
 	entity_spawn .crab_man: [ 192 195 15 ]	
 	entity_spawn .crab_man_3: [ 192 15 15 ]	
@@ -301,6 +333,7 @@ map_palette .stuff:
 	entity_spawn .crab_boss_5: [ 192 1 195 ]	
 	entity_spawn .theodore_quest_item: [ 53 13 166 ]		
 	entity_spawn .elysia_quest_item: [ 53 13 169 ]		
+	entity_spawn .gnome_1_quest_item: [ 53 13 162 ]		
 	entity_spawn .stash: [ 0 43 66 ]		
 	entity_spawn .furnace: [ 100 43 66 ]		
 	entity_spawn .anvil: [ 150 43 66 ]		

@@ -20,8 +20,9 @@ namespace tpublic
 	public:
 		enum Flag : uint32_t
 		{
-			FLAG_UNMANAGED = 0x00000001,
-			FLAG_WATCH_INVENTORY = 0x00000002
+			FLAG_UNMANAGED			= 0x00000001,
+			FLAG_WATCH_INVENTORY	= 0x00000002,
+			FLAG_BOOLEAN			= 0x00000004
 		};
 
 		ObjectiveTypeBase(

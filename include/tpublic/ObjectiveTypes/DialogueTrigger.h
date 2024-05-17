@@ -5,15 +5,15 @@
 namespace tpublic::ObjectiveTypes
 {
 
-	class UseAbility
+	class DialogueTrigger
 		: public ObjectiveTypeBase
 	{
 	public:
-		static const ObjectiveType::Id ID = ObjectiveType::ID_USE_ABILITY;
-		static const uint32_t FLAGS = FLAG_UNMANAGED;
+		static const ObjectiveType::Id ID = ObjectiveType::ID_DIALOGUE_TRIGGER;
+		static const uint32_t FLAGS = FLAG_UNMANAGED | FLAG_BOOLEAN;
 
-								UseAbility();
-		virtual					~UseAbility();
+								DialogueTrigger();
+		virtual					~DialogueTrigger();
 
 		// ObjectiveTypeBase implementation
 		void					FromSource(
@@ -29,8 +29,6 @@ namespace tpublic::ObjectiveTypes
 		class Instance;
 
 		std::vector<uint32_t>	m_entityIds;
-		uint32_t				m_abilityId = 0;
-		uint32_t				m_count = 1;
 	};
 
 }

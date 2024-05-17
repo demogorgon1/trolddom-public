@@ -1,0 +1,140 @@
+dialogue_screen .billy_gnomes:
+{
+	text: 
+	[	
+		"They're short, have beady little eyes, big bushy beards, fat noses and they wear pointy hats!"
+	]
+	
+	options:
+	[
+		{ goto: .billy_greetings text: "Oh, obviously." }
+	]
+}
+
+dialogue_screen .billy_greetings:
+{
+	text: 
+	[	
+		"Gnomes keep stealing my stuff!"
+	]
+	
+	options:
+	[
+		{ goto: .billy_gnomes text: "What does a gnome look like?" }
+		{ quest: .billy_1 }
+	]
+}
+
+dialogue_root .billy_dialogue:
+{
+	.billy_greetings: { }
+}
+
+entity .billy:
+{
+	string: "Billy Ernston"
+	
+	systems: [ combat npc ]
+	
+	modifiers: 
+	{ 
+		weapon_damage: 2
+		resource<health>: 2
+	}		
+	
+	components:
+	{
+		position: { }		
+		threat_target: { }
+		visible_auras: { }
+		auras: { }
+		tag: { }
+		lootable: 
+		{ 
+			loot_table: .npc
+		}
+		combat_public: 
+		{  
+			level: 10
+			faction: npcs		
+			creature_type: humanoid
+			dialogue_root: .billy_dialogue
+			
+			modifier not_pushable: {}
+		}			
+		combat_private:
+		{
+			physical_critical_strike_chance: 5
+			dodge_chance: 5
+			parry_chance: 5
+			miss_chance: 5
+			block_chance: 5
+		}
+		npc: 
+		{ 			
+			state default:
+			{
+			}
+			
+			state in_combat:
+			{
+				abilities:
+				[					
+					{ id: npc_attack }
+				]
+			}	
+		}
+		sprite: 
+		{ 
+			animations:
+			[
+				{ states: [ default in_combat spawning ] frames: [ kid_1 ] }			
+				{ states: [ dead ] frames: [ kid_1_dead ] z_offset: -2 }			
+			]		
+		}		
+	}
+}
+
+############################################################
+# Quest 1
+
+objective .billy_1:
+{
+	string: "Look For Gnomes"
+	
+	maps: [ open_world ]
+	
+	dialogue_trigger:
+	{
+		entities: [ .gnome ]
+	}
+}
+
+quest .billy_1:
+{
+	string: "Gnomes Are Real!"
+
+	text:
+	[
+		"Figure out if gnomes are real or not."
+	]
+	
+	description: 
+	[
+		"My dad refuse to believe me and all my mom can think about are potatoes. Gnomes keep breaking into our house and night and they've been stealing my stuff!"
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"What's your problem?"
+	]
+
+	prerequisites: [ .tom_1 ]
+	objectives: [ .billy_1 ]
+	level: 4
+}

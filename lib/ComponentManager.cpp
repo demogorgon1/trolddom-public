@@ -48,6 +48,7 @@
 #include <tpublic/Components/Trade.h>
 #include <tpublic/Components/VendorBuyback.h>
 #include <tpublic/Components/VisibleAuras.h>
+#include <tpublic/Components/Visibility.h>
 #include <tpublic/Components/Wallet.h>
 #include <tpublic/Components/ZoneDiscovery.h>
 
@@ -106,6 +107,7 @@ namespace tpublic
 		_Register<Components::Trade>();
 		_Register<Components::VendorBuyback>();
 		_Register<Components::VisibleAuras>();
+		_Register<Components::Visibility>();
 		_Register<Components::Wallet>();
 		_Register<Components::ZoneDiscovery>();
 	}

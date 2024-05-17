@@ -76,6 +76,8 @@ namespace tpublic
 							aChild->GetArray()->ForEachChild([&](const SourceNode* aLine) { appendString(m_completion, aLine->GetString()); });
 						else if (aChild->m_name == "level")
 							m_level = aChild->GetUInt32();
+						else if (aChild->m_name == "reward_cash_multiplier")
+							m_rewardCashMultiplier = aChild->GetFloat();
 						else if (aChild->m_name == "type")
 							m_type = SourceToType(aChild);
 						else if (aChild->m_name == "objectives")
@@ -113,6 +115,7 @@ namespace tpublic
 				aStream->WriteUInts(m_rewardOneItem);
 				aStream->WriteUInts(m_rewardAllItems);
 				aStream->WriteUInt(m_nextQuestId);
+				aStream->WriteUInt(m_rewardCashMultiplier);
 			}
 
 			bool
@@ -145,6 +148,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInt(m_nextQuestId))
 					return false;
+				if (!aStream->ReadFloat(m_rewardCashMultiplier))
+					return false;
 				return true;
 			}
 
@@ -162,6 +167,7 @@ namespace tpublic
 			std::vector<uint32_t>	m_rewardOneItem;
 			std::vector<uint32_t>	m_rewardAllItems;
 			uint32_t				m_nextQuestId = 0;
+			float					m_rewardCashMultiplier = 1.0f;
 		};
 
 	}

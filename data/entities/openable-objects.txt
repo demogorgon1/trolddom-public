@@ -1,0 +1,25 @@
+!define OPENABLE_OBJECT
+{
+	string: @_string
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ @_sprite ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: @_loot_table 
+			verb: @_verb 
+			range: 1 
+			despawn: true 						
+		}		
+	}
+}
+
+#####################################################
+# Potatoes
+
+loot_group potatoes: {}
+loot_table .potatoes: { slots: [ { possibility: { loot_group: potatoes } } ] }
+entity potatoes: !OPENABLE_OBJECT { _string: "Potatoes" _sprite: wild_herbs _loot_table: .potatoes _verb: pick } 

@@ -90,6 +90,8 @@ namespace tpublic
 		FromSource(
 			const SourceNode*	aSource)
 		{
+			TP_VERIFY(aSource->m_type == SourceNode::TYPE_OBJECT, aSource->m_debugInfo, "Not an object.");
+
 			if (aSource->m_name == "target")
 				m_target = TARGET_TARGET;
 			else if (aSource->m_name == "self")

@@ -58,6 +58,8 @@ namespace tpublic
 		virtual void				OnAbilityEvent(
 										uint32_t						/*aAbilityId*/,
 										const EntityInstance*			/*aEntityInstance*/) {}
+		virtual void				OnDialogueTrigger(
+										const EntityInstance*			/*aEntityInstance*/) {}
 
 		// Virtual interface
 		virtual bool				IsCompleted() const = 0;
