@@ -18,7 +18,7 @@ map_entity_spawn .monster_melee:
 
 map_entity_spawn .ignorg:
 {
-	entity .ignorg: 
+	entity dungeon_1_ignorg: 
 	{ 
 		spawn_condition:
 		{	

@@ -7,6 +7,7 @@ dialogue_screen .clara_greetings:
 	
 	options:
 	[
+		{ quest: .clara_1 }
 	]
 }
 
@@ -86,3 +87,42 @@ entity .clara:
 
 ############################################################
 # Quest 1
+
+objective .clara_1:
+{
+	string: "Potatoes"
+	
+	maps: [ open_world ]
+	
+	collect_items: { item: item_potatoes count: 8 }
+}
+
+quest .clara_1:
+{
+	string: "Potatoes!"
+
+	text:
+	[
+		"Help with the potato harvest."
+	]
+	
+	description: 
+	[
+		"Crab men? Well, one of the sheriff's deputies passed through recently. Maybe you can catch up with him if you follow the path out east.\n\n"
+		"Anyway, I have much more important things going on in my life. The potatoes are ready to be harvested. Can you lend a hand?"
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"Beautiful!"
+	]
+
+	prerequisites: [ .tom_1 ]
+	objectives: [ .clara_1 ]
+	level: 4
+}

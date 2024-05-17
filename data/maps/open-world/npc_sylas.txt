@@ -18,8 +18,12 @@ dialogue_screen .sylas_greetings:
 	
 	options:
 	[
-		{ goto: .sylas_vendor text: "Let me browse your goods." }
-		{ quest: test_dungeon_kill_ignorg }
+		{ quest<completion_only>: .deputy_larsen_2 }
+		{ quest<completion_only>: .dark_cove_goblin_commander_guzbrorg_quest }
+		{ quest: .sylas_1 }
+		{ quest: .sylas_2 }
+		{ quest<offer_only>: .sylas_3 }
+		{ goto: .sylas_vendor text: "Let me browse your goods." }		
 	]
 }
 
@@ -92,3 +96,137 @@ entity .sylas:
 		}		
 	}
 }
+
+############################################################
+# Quest 1
+
+objective .sylas_1:
+{
+	string: "Goblin Scouts Killed"
+	
+	maps: [ open_world ]
+	
+	kill_npc:
+	{
+		entities: [ eldertree_woods_goblin_scout_5 ]
+		count: 6
+	}
+}
+
+quest .sylas_1:
+{
+	string: "Goblin Activity"
+
+	text:
+	[
+		"Hunter down goblins in Eldertree Woods."
+	]
+	
+	description: 
+	[
+		"Goblins have ventured out from their caves under the mountains and have been spotted all over the forest. I need you to hunt them down."
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"Nice."
+	]
+
+	objectives: [ .deputy_larsen_1 ]
+	level: 5	
+}
+
+############################################################
+# Quest 2
+
+objective .sylas_2:
+{
+	string: "Kill Ignorg"
+	
+	maps: [ dungeon_1 ]
+	
+	kill_npc:
+	{
+		entities: [ dungeon_1_ignorg ]
+	}
+}
+
+quest .sylas_2:
+{
+	string: "Kill Ignorg!"
+
+	text:
+	[
+		"Venture into the dungeon and slay Ignorg."
+	]
+	
+	description: 
+	[
+		""
+	]
+
+	progress:
+	[
+		"Did you get cold feet?"
+	]
+	
+	completion:
+	[
+		"Nice."
+	]
+
+	objectives: [ .sylas_2 ]
+	level: 6
+	type: dungeon
+	prerequisites: [ .sylas_1 ]
+	
+	reward_one_item: [ consumable_small_healing_potion consumable_small_mana_potion ]
+	reward_all_items: [ legs_flimsy_mail_pants ]
+}
+
+############################################################
+# Quest 3
+
+quest .sylas_3:
+{
+	string: "Secret Document"
+
+	text:
+	[
+		"Bring the secret document to Xyzax in the mountains north of Cape Arrival."
+	]
+	
+	description: 
+	[
+		"This is worse than I thought, we need to find out what the goblins are planning to do. I can't read their vile language, but I know someone who can."
+		"Seek out Xazax the alchemist. He resides in the mountains just north of the town at Cape Arrival. Take the goblin document to him."
+	]
+
+	progress:
+	[
+		"Take the document to Xyzax."
+	]
+	
+	completion:
+	[
+		"What is this? Hmm, you got this from a goblin? Well, yes, I am able to read their texts. Let me see."
+	]
+
+	level: 7
+	prerequisites: [ .dark_cove_goblin_commander_guzbrorg_quest ]
+	quest_items: [ .sylas_3 ]
+}
+
+item .sylas_3:
+{
+	string: "Secret Document" 
+	icon: icon_scroll_1
+	item_level: 7
+	flags: [ unique not_sellable ]
+}
+

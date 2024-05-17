@@ -93,6 +93,7 @@ sprites:
 	sprite man_12: { dead: man_12_dead tags: [ male human ] }
 	sprite kid_1: { dead: kid_1_dead tags: [ human ] }
 	sprite gnome_1: { dead: gnome_1_dead tags: [ ] }
+	sprite man_13: { dead: man_13_dead tags: [ male human ] }
 
 	cursor: { position: [ 0 80 ] }
 
@@ -107,6 +108,7 @@ sprites:
 	sprite man_12_dead: { }
 	sprite kid_1_dead: { }
 	sprite gnome_1_dead: { }
+	sprite man_13_dead: { }
 	
 }
 
@@ -168,6 +170,9 @@ sprites:
 	sprite fireplace_unlit: { }
 	sprite mushroom_1: { }
 	sprite mushroom_2: { }
+	sprite bonfire_1: { }
+	sprite bonfire_2: { }
+	sprite bonfire_3: { }
 	
 }
 

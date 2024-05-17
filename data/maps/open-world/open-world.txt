@@ -97,6 +97,11 @@ map_entity_spawn .sheriff_wellington:
 	entity .sheriff_wellington: { weight: 1 }
 }
 
+map_entity_spawn .deputy_larsen:
+{
+	entity .deputy_larsen: { weight: 1 }
+}
+
 map_entity_spawn .marcus_flambe:
 {
 	entity .marcus_flambe: { weight: 1 }
@@ -120,6 +125,11 @@ map_entity_spawn .anvil:
 map_entity_spawn .furnace:
 {
 	entity furnace: { weight: 1 }
+}
+
+map_entity_spawn .bonfire:
+{
+	entity bonfire: { weight: 1 }
 }
 
 map_entity_spawn .fireplace:
@@ -158,6 +168,17 @@ map_entity_spawn .crab_man_3:
 	entity crab_caster_3: { weight: 1 }
 }
 
+map_entity_spawn .crab_man_4:
+{
+	entity crab_man_4: { weight: 1 }
+	entity crab_caster_4: { weight: 1 }
+}
+
+map_entity_spawn .crab_brute_5:
+{
+	entity crab_brute_5: { weight: 1 }
+}
+
 map_entity_spawn .crab_boss_4:
 {
 	entity crab_boss_4: { weight: 1 }
@@ -166,6 +187,22 @@ map_entity_spawn .crab_boss_4:
 map_entity_spawn .crab_boss_5:
 {
 	entity crab_boss_5: { weight: 1 }
+}
+
+map_entity_spawn .eldertree_woods_goblin_scout_5:
+{
+	entity eldertree_woods_goblin_scout_5: { weight: 1 }
+}
+
+map_entity_spawn .dark_cove_goblin_6:
+{
+	entity dark_cove_goblin_warrior_6: { weight: 1 }
+	entity dark_cove_goblin_shaman_6: { weight: 1 }
+}
+
+map_entity_spawn .dark_cove_goblin_commander_guzbrorg:
+{
+	entity dark_cove_goblin_commander_guzbrorg: { weight: 1 }
 }
 
 map_entity_spawn .junjun_door:
@@ -274,6 +311,7 @@ map_palette .tiles:
 	tile sand: [ 200 200 128 ]
 	tile dirt: [ 97 91 62 ]
 	tile grass: [ 64 105 0 ]
+	tile dark_grass: [ 48 90 14 ]
 	tile forest: [ 51 75 6 ]
 	tile farmland: [ 128 128 0 ]
 	tile rocks: [ 143 131 120 ]
@@ -327,10 +365,16 @@ map_palette .stuff:
 	entity_spawn .billy: [ 90 180 40 ]	
 	entity_spawn .gnome: [ 90 180 88 ]	
 	entity_spawn .sheriff_wellington: [ 192 195 155 ]	
+	entity_spawn .deputy_larsen: [ 92 135 155 ]	
 	entity_spawn .crab_man: [ 192 195 15 ]	
 	entity_spawn .crab_man_3: [ 192 15 15 ]	
+	entity_spawn .crab_man_4: [ 193 15 15 ]	
 	entity_spawn .crab_boss_4: [ 192 15 195 ]	
 	entity_spawn .crab_boss_5: [ 192 1 195 ]	
+	entity_spawn .crab_brute_5: [ 193 15 195 ]	
+	entity_spawn .eldertree_woods_goblin_scout_5: [ 213 5 95 ]		
+	entity_spawn .dark_cove_goblin_6: [ 213 7 95 ]		
+	entity_spawn .dark_cove_goblin_commander_guzbrorg: [ 213 99 95 ]		
 	entity_spawn .theodore_quest_item: [ 53 13 166 ]		
 	entity_spawn .elysia_quest_item: [ 53 13 169 ]		
 	entity_spawn .gnome_1_quest_item: [ 53 13 162 ]		
@@ -339,6 +383,7 @@ map_palette .stuff:
 	entity_spawn .anvil: [ 150 43 66 ]		
 	entity_spawn .fireplace: [ 250 43 66 ]		
 	entity_spawn .fireplace_unlit: [ 250 243 66 ]		
+	entity_spawn .bonfire: [ 251 43 66 ]		
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn dungeon_1_exit: [ 0 0 200 ]	
 	portal .dungeon_1_entrance: [ 0 234 0 ]	

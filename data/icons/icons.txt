@@ -268,6 +268,7 @@ sprites:
 	sprite icon_claw_2 : { tags: [ icon ] }
 	sprite icon_potatoes : { tags: [ icon ] }
 	sprite icon_box : { tags: [ icon ] }
+	sprite icon_scroll_1 : { tags: [ icon ] }
 	
 }
 

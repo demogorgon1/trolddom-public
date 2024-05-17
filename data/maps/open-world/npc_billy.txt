@@ -131,7 +131,7 @@ quest .billy_1:
 	
 	completion:
 	[
-		"What's your problem?"
+		"Gee! I knew it! I wonder what they're up to?"
 	]
 
 	prerequisites: [ .tom_1 ]

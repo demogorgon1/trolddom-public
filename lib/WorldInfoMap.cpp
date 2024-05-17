@@ -204,7 +204,6 @@ namespace tpublic
 				m_zoneOutlineTable[zoneId] = std::move(t);
 			}
 		}
-
 		return true;
 	}
 

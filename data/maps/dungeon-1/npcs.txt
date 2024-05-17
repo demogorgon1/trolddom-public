@@ -16,7 +16,7 @@ loot_table .trash:
 	]	
 }
 
-entity .ignorg: !NPC 
+entity dungeon_1_ignorg: !NPC 
 { 
 	_string: "Ignorg" 
 	_level: 6 
@@ -32,7 +32,7 @@ entity .ignorg: !NPC
 
 entity .goblin: !NPC
 {
-	_string: "Goblin"
+	_string: "Goblin Warrior"
 	_level: 5
 	_elite: true
 	_faction: monsters 

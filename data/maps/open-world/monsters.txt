@@ -145,6 +145,7 @@ loot_table .crab_man_2:
 	slots:
 	[
 		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
 	]	
 }
 
@@ -167,6 +168,7 @@ loot_table .crab_man_3:
 	slots:
 	[
 		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
 	]	
 }
 
@@ -189,6 +191,7 @@ loot_table .crab_caster_3:
 	slots:
 	[
 		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
 	]	
 }
 
@@ -213,6 +216,7 @@ loot_table .crab_boss_4:
 	slots:
 	[
 		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
 	]	
 }
 
@@ -287,6 +291,7 @@ loot_table .crab_boss_5:
 		}			
 		
 		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
 	]	
 }
 
@@ -299,5 +304,208 @@ entity crab_boss_5: !NPC
 	_sprite: crab_monster_boss_1
 	_sprite_dead: crab_monster_boss_1_dead
 	_loot_table: .crab_boss_5
+	_creature_type: humanoid
+}
+
+##########################################################################################
+# Crab Enforcer
+
+loot_table .crab_man_4: 
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+entity crab_man_4: !NPC
+{
+	_string: "Crab Enforcer"
+	_level: 4
+	_faction: monsters
+	_sprite: crab_monster_1
+	_sprite_dead: crab_monster_1_dead
+	_loot_table: .crab_man_4
+	_creature_type: humanoid
+}
+
+##########################################################################################
+# Crab Soothsayer
+
+loot_table .crab_caster_4: 
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+entity crab_caster_4: !NPC
+{
+	_string: "Crab Soothsayer"
+	_level: 4
+	_faction: monsters
+	_resource_mana: 1
+	_sprite: crab_monster_1
+	_sprite_dead: crab_monster_1_dead
+	_loot_table: .crab_caster_4
+	_creature_type: humanoid
+	_abilities: [ { id: npc_firebolt } { id: npc_attack } ]
+}
+
+##########################################################################################
+# Crab Brute
+
+loot_table .crab_brute_5: 
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+entity crab_brute_5: !NPC
+{
+	_string: "Crab Brute"
+	_level: 5
+	_faction: monsters
+	_resource_health: 1.5
+	_weapon_damage: 1.6
+	_sprite: crab_monster_boss_1
+	_sprite_dead: crab_monster_boss_1_dead
+	_loot_table: .crab_brute_5
+	_creature_type: humanoid
+}
+
+##########################################################################################
+# Eldertree Woods Goblins
+
+loot_table .eldertree_woods_goblins_5: 
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+entity eldertree_woods_goblin_scout_5: !NPC
+{
+	_string: "Goblin Scout"
+	_level: 5
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_loot_table: .eldertree_woods_goblins_5
+	_creature_type: humanoid
+}
+
+##########################################################################################
+# Dark Cove Goblins
+
+loot_table .dark_cove_goblins_6: 
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+entity dark_cove_goblin_warrior_6: !NPC
+{
+	_string: "Goblin Warrior"
+	_level: 6
+	_faction: monsters
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead
+	_loot_table: .dark_cove_goblins_6
+	_creature_type: humanoid
+}
+
+entity dark_cove_goblin_shaman_6: !NPC
+{
+	_string: "Goblin Shaman"
+	_level: 6
+	_faction: monsters
+	_resource_mana: 1
+	_sprite: goblin_shaman
+	_sprite_dead: goblin_shaman_dead
+	_loot_table: .dark_cove_goblins_6
+	_creature_type: humanoid
+	_abilities: [ { id: npc_firebolt } { id: npc_attack } ]
+}
+
+ability .dark_cove_goblin_commander_guzbrorg_quest_drop_start_quest:	
+{
+	string: "Secret Document"
+	description: "This item starts a quest."
+	flags: [ target_self ]
+	icon: icon_scroll_1
+	direct_effect simple<start_quest>: .dark_cove_goblin_commander_guzbrorg_quest
+	states: [ default in_combat ]
+	requirement self<must_not_have_completed_quest>: { id: .dark_cove_goblin_commander_guzbrorg_quest }
+	requirement self<must_not_have_active_quest>: { id: .dark_cove_goblin_commander_guzbrorg_quest }
+}
+
+quest .dark_cove_goblin_commander_guzbrorg_quest:
+{
+	string: "Secret Document"
+
+	text:
+	[
+		"Bring the secret document back to Sylas."
+	]
+	
+	description: 
+	[
+		"The goblin was holding on to this tight, it must be something important. Better return this to Sylas."
+	]
+	
+	completion:
+	[
+		"Very interesting. You said you found the goblin holding this in a fortified keep in the woods?"
+	]
+
+	level: 7
+	quest_items: [ .dark_cove_goblin_commander_guzbrorg_quest_drop ]
+}
+
+loot_group .dark_cove_goblin_commander_guzbrorg_quest_drop: { }
+
+item .dark_cove_goblin_commander_guzbrorg_quest_drop:
+{
+	string: "Secret Document" 
+	loot_groups: [ .dark_cove_goblin_commander_guzbrorg_quest_drop ]		
+	icon: icon_scroll_1
+	item_level: 7
+	flags: [ unique not_sellable ]
+	use_ability: .dark_cove_goblin_commander_guzbrorg_quest_drop_start_quest
+}
+
+loot_table .dark_cove_goblin_commander_guzbrorg: 
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .dark_cove_goblin_commander_guzbrorg_quest_drop }			
+		}			
+	
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+entity dark_cove_goblin_commander_guzbrorg: !NPC
+{
+	_string: "Commander Guzbrorg"
+	_level: 7
+	_faction: monsters
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead
+	_loot_table: .dark_cove_goblin_commander_guzbrorg
 	_creature_type: humanoid
 }

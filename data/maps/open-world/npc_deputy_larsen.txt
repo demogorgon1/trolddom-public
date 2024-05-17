@@ -1,0 +1,168 @@
+dialogue_screen .deputy_larsen_greetings:
+{
+	text: 
+	[	
+		"Greetings."
+	]
+	
+	options:
+	[
+		{ quest: .deputy_larsen_1 }
+		{ quest<offer_only>: .deputy_larsen_2 }
+	]
+}
+
+dialogue_root .deputy_larsen_dialogue:
+{
+	.deputy_larsen_greetings: { }
+}
+
+entity .deputy_larsen:
+{
+	string: "Deputy Larsen"
+	
+	systems: [ combat npc ]
+	
+	modifiers: 
+	{ 
+		weapon_damage: 2
+		resource<health>: 2
+	}		
+	
+	components:
+	{
+		position: { }		
+		threat_target: { }
+		visible_auras: { }
+		auras: { }
+		tag: { }
+		lootable: 
+		{ 
+			loot_table: .npc
+		}
+		combat_public: 
+		{  
+			level: 10
+			faction: npcs		
+			creature_type: humanoid
+			dialogue_root: .deputy_larsen_dialogue
+			
+			modifier not_pushable: {}
+		}			
+		combat_private:
+		{
+			physical_critical_strike_chance: 5
+			dodge_chance: 5
+			parry_chance: 5
+			miss_chance: 5
+			block_chance: 5
+		}
+		npc: 
+		{ 			
+			state default:
+			{
+			}
+			
+			state in_combat:
+			{
+				abilities:
+				[					
+					{ id: npc_attack }
+				]
+			}	
+		}
+		sprite: 
+		{ 
+			animations:
+			[
+				{ states: [ default in_combat spawning ] frames: [ man_13 ] }			
+				{ states: [ dead ] frames: [ man_13_dead ] z_offset: -2 }			
+			]		
+		}		
+	}
+}
+
+############################################################
+# Quest 1
+
+objective .deputy_larsen_1:
+{
+	string: "Crab Men Killed"
+	
+	maps: [ open_world ]
+	
+	kill_npc:
+	{
+		entities: [ crab_man_4 crab_caster_4 crab_brute_5 ]
+		count: 8
+	}
+}
+
+quest .deputy_larsen_1:
+{
+	string: "Crab Man Invasion"
+
+	text:
+	[
+		"Venture east and kill crab men."
+	]
+	
+	description: 
+	[
+		"The Sheriff sent me here to see how bad it looked out here on the coast and it's pretty grim.\n"
+		"\n"
+		"Just a short while ago, crab men were only encountered rarely and almost never on land, but now they're crawling all over the place. What is causing them to come out of the sea in such"
+		"large numbers?\n"
+		"\n"
+		"Under any circumstances, it's probably a good idea if you go and thin out their numbers."
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"Nice."
+	]
+
+	objectives: [ .deputy_larsen_1 ]
+	level: 4	
+}
+
+############################################################
+# Quest 2
+
+quest .deputy_larsen_2:
+{
+	string: "Bigger Problems"
+
+	text:
+	[
+		"Find Sylas in Eldertree Woods."
+	]
+	
+	description: 
+	[
+		"Good job with the crab men, that will help holding them at bay for a while longer.\n"
+		"\n"
+		"Unfortunately, they're not the only dangers we're facing at the moment. There have been reports of sinister activity in the Eldersong Woods to the north.\n"
+		"\n"
+		"The ranger Sylas is up there somewhere. You should seek him out and see if you can assist him."
+	]
+
+	progress:
+	[
+		"Did you find him?"
+	]
+	
+	completion:
+	[
+		"Glad to hear that the crab men of the south has been pushed back, but we have other problems up here."
+	]
+
+	prerequisites: [ .deputy_larsen_1 ]
+	level: 5
+}
+
