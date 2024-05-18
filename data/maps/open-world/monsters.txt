@@ -201,8 +201,8 @@ entity crab_caster_3: !NPC
 	_level: 3
 	_faction: monsters
 	_resource_mana: 1
-	_sprite: crab_monster_1
-	_sprite_dead: crab_monster_1_dead
+	_sprite: crab_caster_1
+	_sprite_dead: crab_caster_1_dead
 	_loot_table: .crab_caster_3
 	_creature_type: humanoid
 	_abilities: [ { id: npc_firebolt } { id: npc_attack } ]
@@ -348,8 +348,8 @@ entity crab_caster_4: !NPC
 	_level: 4
 	_faction: monsters
 	_resource_mana: 1
-	_sprite: crab_monster_1
-	_sprite_dead: crab_monster_1_dead
+	_sprite: crab_caster_1
+	_sprite_dead: crab_caster_1_dead
 	_loot_table: .crab_caster_4
 	_creature_type: humanoid
 	_abilities: [ { id: npc_firebolt } { id: npc_attack } ]

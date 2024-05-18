@@ -94,6 +94,7 @@ sprites:
 	sprite kid_1: { dead: kid_1_dead tags: [ human ] }
 	sprite gnome_1: { dead: gnome_1_dead tags: [ ] }
 	sprite man_13: { dead: man_13_dead tags: [ male human ] }
+	sprite crab_caster_1: { dead: crab_caster_1_dead tags: [ crab_monster caster melee ] }
 
 	cursor: { position: [ 0 80 ] }
 
@@ -109,6 +110,7 @@ sprites:
 	sprite kid_1_dead: { }
 	sprite gnome_1_dead: { }
 	sprite man_13_dead: { }
+	sprite crab_caster_1_dead: { }
 	
 }
 
