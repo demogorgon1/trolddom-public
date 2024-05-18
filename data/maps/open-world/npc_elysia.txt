@@ -27,6 +27,7 @@ dialogue_screen .elysia_greetings:
 	options:
 	[
 		{ quest: .elysia_1 }
+		{ quest: .elysia_2 requirement self<must_have_discovered_zone>: { id: .zone_3 } }
 		{ goto: .elysia_herbalism text: "Tell me about herbalism." }
 		{ goto: .elysia_trainer text: "Teach me the way of the herbalist." }
 	]
@@ -188,5 +189,91 @@ quest .elysia_1:
 	level: 4
 	reward_one_item: [ consumable_small_healing_potion consumable_small_mana_potion ]
 }
+
+##########################################################################################
+# Quest 2
+
+objective .elysia_2:
+{
+	string: "Elderwood Mushrooms"
+	
+	maps: [ open_world ]
+	
+	collect_items: { item: .elysia_quest_item_2 count: 5 }
+}
+
+loot_group .elysia_quest_item_2: {}
+
+item .elysia_quest_item_2:
+{
+	icon: icon_mushroom_2
+	item_level: 5
+	loot_groups: [ .elysia_quest_item ]
+	flags: [ not_sellable ]
+	string: "Elderwood Mushroom"
+	stack: 5
+}
+
+loot_table .elysia_quest_item_2:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .elysia_quest_item_2 }			
+		}		
+	]
+}
+
+entity .elysia_quest_item_2:
+{
+	string: "Elderwood Mushroom"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ mushroom_2 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .elysia_quest_item_2
+			verb: pick
+			range: 1 
+			despawn: true 			
+			required_quest: .elysia_2
+		}		
+	}
+}
+
+quest .elysia_2:
+{
+	string: "Elderwood Mushrooms"
+
+	text:
+	[
+		"Go back to the Eldertree Woods and collect mushrooms for Elysia."
+	]
+	
+	description: 
+	[
+		"You recently went to the Eldertree Woods? Are you planning on going back any time soon? That place is home to some really spicy mushrooms that I'd love to"
+		"get my hands on. Would you mind getting some for me if you get the chance?"
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"Nice."
+	]
+
+	prerequisites: [ .elysia_1 ]
+	objectives: [ .elysia_2 ]
+	level: 5
+	reward_one_item: [ consumable_small_healing_potion consumable_small_mana_potion ]
+}
+
 
 

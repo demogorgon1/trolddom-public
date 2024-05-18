@@ -9,6 +9,7 @@
 #include <tpublic/Components/PlayerPrivate.h>
 #include <tpublic/Components/Position.h>
 #include <tpublic/Components/VisibleAuras.h>
+#include <tpublic/Components/ZoneDiscovery.h>
 
 #include <tpublic/Data/Entity.h>
 
@@ -195,6 +196,17 @@ namespace tpublic
 					}
 
 					if(!hasItem)
+						return false;
+				}
+				break;
+
+			case Requirement::TYPE_MUST_HAVE_DISCOVERED_ZONE:
+				{
+					if(!entity->IsPlayer())
+						return false;
+
+					const Components::ZoneDiscovery* zoneDiscovery = entity->GetComponent<Components::ZoneDiscovery>();
+					if(!zoneDiscovery->m_zones.HasValue(aRequirement->m_id))
 						return false;
 				}
 				break;

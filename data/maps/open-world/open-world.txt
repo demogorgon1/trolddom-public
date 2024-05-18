@@ -228,6 +228,12 @@ map_entity_spawn .elysia_quest_item:
 	entity .elysia_quest_item: { init_state: default }
 }
 
+map_entity_spawn .elysia_quest_item_2:
+{
+	spawn_timer: { despawn_required: true min_delay: 300 cooldown_range_min: 600 cooldown_range_max: 1200 }
+	entity .elysia_quest_item_2: { init_state: default }
+}
+
 map_entity_spawn .gnome_1_quest_item:
 {
 	spawn_timer: { despawn_required: true min_delay: 300 cooldown_range_min: 600 cooldown_range_max: 1200 }
@@ -377,6 +383,7 @@ map_palette .stuff:
 	entity_spawn .dark_cove_goblin_commander_guzbrorg: [ 213 99 95 ]		
 	entity_spawn .theodore_quest_item: [ 53 13 166 ]		
 	entity_spawn .elysia_quest_item: [ 53 13 169 ]		
+	entity_spawn .elysia_quest_item_2: [ 54 13 169 ]		
 	entity_spawn .gnome_1_quest_item: [ 53 13 162 ]		
 	entity_spawn .stash: [ 0 43 66 ]		
 	entity_spawn .furnace: [ 100 43 66 ]		
