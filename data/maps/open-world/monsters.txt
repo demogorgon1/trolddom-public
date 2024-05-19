@@ -1,3 +1,9 @@
+npc_behavior_state .wandering_short:
+{
+	behavior: wandering
+	max_range: 1
+}
+
 ##########################################################################################
 # Spawn of Umbracoth
 
@@ -158,6 +164,7 @@ entity crab_man_2: !NPC
 	_sprite_dead: crab_monster_1_dead
 	_loot_table: .crab_man_2
 	_creature_type: humanoid
+	_default_behavior_state: .wandering_short
 }
 
 ##########################################################################################
@@ -181,6 +188,7 @@ entity crab_man_3: !NPC
 	_sprite_dead: crab_monster_1_dead
 	_loot_table: .crab_man_3
 	_creature_type: humanoid
+	_default_behavior_state: .wandering_short
 }
 
 ##########################################################################################
@@ -206,6 +214,7 @@ entity crab_caster_3: !NPC
 	_loot_table: .crab_caster_3
 	_creature_type: humanoid
 	_abilities: [ { id: npc_firebolt } { id: npc_attack } ]
+	_default_behavior_state: .wandering_short	
 }
 
 ##########################################################################################
@@ -316,7 +325,7 @@ loot_table .crab_man_4:
 	[
 		!WORLD_DROPS {}
 		!WORLD_DROPS_CLOTH{}
-	]	
+	]		
 }
 
 entity crab_man_4: !NPC
@@ -328,6 +337,7 @@ entity crab_man_4: !NPC
 	_sprite_dead: crab_monster_1_dead
 	_loot_table: .crab_man_4
 	_creature_type: humanoid
+	_default_behavior_state: .wandering_short	
 }
 
 ##########################################################################################
@@ -353,6 +363,7 @@ entity crab_caster_4: !NPC
 	_loot_table: .crab_caster_4
 	_creature_type: humanoid
 	_abilities: [ { id: npc_firebolt } { id: npc_attack } ]
+	_default_behavior_state: .wandering_short	
 }
 
 ##########################################################################################
@@ -378,6 +389,7 @@ entity crab_brute_5: !NPC
 	_sprite_dead: crab_monster_boss_1_dead
 	_loot_table: .crab_brute_5
 	_creature_type: humanoid
+	_default_behavior_state: .wandering_short	
 }
 
 ##########################################################################################
@@ -389,7 +401,7 @@ loot_table .eldertree_woods_goblins_5:
 	[
 		!WORLD_DROPS {}
 		!WORLD_DROPS_CLOTH{}
-	]	
+	]		
 }
 
 entity eldertree_woods_goblin_scout_5: !NPC

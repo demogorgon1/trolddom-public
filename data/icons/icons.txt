@@ -269,6 +269,8 @@ sprites:
 	sprite icon_potatoes : { tags: [ icon ] }
 	sprite icon_box : { tags: [ icon ] }
 	sprite icon_scroll_1 : { tags: [ icon ] }
+	sprite icon_severed_hoof : { tags: [ icon ] }
+	sprite icon_coarse_hair : { tags: [ icon ] }
 	
 }
 

@@ -63,6 +63,26 @@ item .wolf_teeth:
 	level_range: [ 4 6 ]
 }
 
+item .severed_hoof:
+{
+	loot_groups: [ .deer_drops ]		
+	string: "Severed Hoof"
+	stack: 4	
+	item_level: 5
+	icon: icon_severed_hoof
+	level_range: [ 5 7 ]
+}
+
+item .coarse_hair:
+{
+	loot_groups: [ .boar_drops ]		
+	string: "Coarse Hair"
+	stack: 4	
+	item_level: 5
+	icon: icon_coarse_hair
+	level_range: [ 5 7 ]
+}
+
 !define local WILDLIFE_LOOT_TABLE
 {
 	slots:
@@ -227,6 +247,34 @@ entity .bear_6: !NPC
 	_default_behavior_state: .wildlife
 }
 
+entity .deer_5: !NPC
+{
+	_string: "Grey Deer"
+	_level: 5
+	_faction: wildlife
+	_sprite: deer_2
+	_sprite_dead: deer_2_dead 
+	_weapon_damage: 1 
+	_resource_health: 1
+	_loot_table: .deer	
+	_creature_type: beast
+	_default_behavior_state: .wildlife
+}
+	
+entity .boar_5: !NPC
+{
+	_string: "Black Boar"
+	_level: 5
+	_faction: wildlife
+	_sprite: boar_2
+	_sprite_dead: boar_2_dead 
+	_weapon_damage: 1 
+	_resource_health: 1
+	_loot_table: .boar	
+	_creature_type: beast
+	_default_behavior_state: .wildlife
+}
+
 map_entity_spawn .wildlife:
 {	
 	entity .deer_1: { level: 1 weight: 1 } 
@@ -239,6 +287,8 @@ map_entity_spawn .wildlife:
 	entity .bear_4: { level: 4 weight: 1 } 
 	entity .bear_5: { level: 5 weight: 1 } 
 	entity .bear_6: { level: 6 weight: 1 } 
+	entity .deer_5: { level: 5 weight: 1 } 
+	entity .boar_5: { level: 5 weight: 1 } 
 	
 	spawn_timer: { cooldown_range_min: 450 cooldown_range_max: 600 min_delay: 300 }
 }
