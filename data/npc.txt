@@ -38,6 +38,8 @@
 			creature_type: @_creature_type
 			
 			<exists _elite and _elite> modifier elite: {}
+			<exists _not_pushable and _not_pushable> modifier not_pushable: {}
+			<exists _dialogue_root> dialogue_root: @_dialogue_root			
 		}			
 		combat_private:
 		{
@@ -53,10 +55,11 @@
 		{ 			
 			state default:
 			{
+				<exists _dialogue_scripts> dialogue_scripts: @_dialogue_scripts
 			}
 			
 			state in_combat:
-			{
+			{			
 				<!exists _abilities> abilities:
 				[					
 					{ id: npc_attack }
@@ -67,6 +70,7 @@
 
 			<exists _default_behavior_state> default_behavior_state: @_default_behavior_state
 			<exists _can_move_on_all_non_view_blocking_tiles> can_move_on_all_non_view_blocking_tiles: @_can_move_on_all_non_view_blocking_tiles
+			<exists _blocking> blocking: @_blocking
 		}
 		sprite: 
 		{ 
@@ -76,6 +80,19 @@
 				{ states: [ dead ] frames: [ @_sprite_dead ] z_offset: -2 }			
 			]		
 		}				
+		<exists _auctioneer and _auctioneer> auctioneer: { }
+		<exists _guild_name> guild_name:
+		{
+			string: @_guild_name
+		}				
+		<exists _visibility_requirements> visibility:
+		{
+			requirements: @_visibility_requirements
+		}
+		<exists _guild_registrar_price_tiers> guild_registrar: 
+		{
+			registration_price_tiers: @_guild_registrar_price_tiers
+		}
 	}
 	
 	<exists _tags> tags: @_tags

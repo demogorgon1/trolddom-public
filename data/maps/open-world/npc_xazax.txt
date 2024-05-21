@@ -40,71 +40,17 @@ dialogue_root .xazax_dialogue:
 	.xazax_greetings: { }
 }
 
-entity .xazax:
+entity .xazax: !NPC
 {
-	string: "Xazax"
-	
-	systems: [ combat npc ]
-	
-	modifiers: 
-	{ 
-		weapon_damage: 2
-		resource<health>: 2
-	}		
-	
-	components:
-	{
-		position: { }		
-		threat_target: { }
-		visible_auras: { }
-		auras: { }
-		tag: { }
-		guild_name:
-		{
-			string: "Alchemy Trainer"
-		}		
-		lootable: 
-		{ 
-			loot_table: .npc
-		}
-		combat_public: 
-		{  
-			level: 10
-			faction: npcs		
-			creature_type: humanoid
-			dialogue_root: .xazax_dialogue
-			
-			modifier not_pushable: {}
-		}			
-		combat_private:
-		{
-			physical_critical_strike_chance: 5
-			dodge_chance: 5
-			parry_chance: 5
-			miss_chance: 5
-			block_chance: 5
-		}
-		npc: 
-		{ 			
-			state default:
-			{
-			}
-			
-			state in_combat:
-			{
-				abilities:
-				[					
-					{ id: npc_attack }
-				]
-			}	
-		}
-		sprite: 
-		{ 
-			animations:
-			[
-				{ states: [ default in_combat spawning ] frames: [ man_7 ] }			
-				{ states: [ dead ] frames: [ man_7_dead ] z_offset: -2 }			
-			]		
-		}		
-	}
+	_string: "Xazax"
+	_guild_name: "Alchemy Trainer"
+	_dialogue_root: .xazax_dialogue	
+	_sprite: man_7
+	_sprite_dead: man_7_dead	
+	_level: 10
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
 }
+

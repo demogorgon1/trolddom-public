@@ -1,60 +1,14 @@
-entity .bidmaster_bob:
+entity .bidmaster_bob: !NPC
 {
-	string: "Bidmaster Bob"
-	
-	systems: [ combat npc ]
-	
-	modifiers: 
-	{ 
-		weapon_damage: 2
-		resource<health>: 2
-	}	
-	
-	components:
-	{
-		position: { }		
-		threat_target: { }
-		visible_auras: { }
-		auras: { }
-		tag: { }
-		auctioneer: { }
-		lootable: { loot_table: .npc }
-		guild_name:
-		{
-			string: "Auctioneer"
-		}		
-		combat_public: 
-		{  
-			level: 10
-			faction: npcs		
-			creature_type: humanoid			
-			modifier not_pushable: {}
-		}			
-		combat_private:
-		{
-			physical_critical_strike_chance: 5
-			dodge_chance: 5
-			parry_chance: 5
-			miss_chance: 5
-			block_chance: 5
-		}
-		npc: 
-		{ 			
-			state in_combat:
-			{
-				abilities:
-				[					
-					{ id: npc_attack }
-				]
-			}	
-		}
-		sprite: 
-		{ 
-			animations:
-			[
-				{ states: [ default in_combat spawning ] frames: [ man_6 ] }			
-				{ states: [ dead ] frames: [ man_6_dead ] z_offset: -2 }			
-			]		
-		}		
-	}	
+	_string: "Bidmaster Bob"
+	_loot_table: .npc
+	_guild_name: "Auctioneer"
+	_level: 10
+	_faction: npcs
+	_creature_type: humanoid
+	_not_pushable: true
+	_sprite: man_6
+	_sprite_dead: man_6_dead
+	_auctioneer: true
 }
+	
