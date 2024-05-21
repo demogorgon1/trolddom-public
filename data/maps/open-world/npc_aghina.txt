@@ -1,0 +1,101 @@
+dialogue_screen .aghina_greetings:
+{
+	text: 
+	[	
+		"Greetings."
+	]
+	
+	options:
+	[
+		{ quest: .aghina_1 }
+	]
+}
+
+dialogue_root .aghina_dialogue:
+{
+	.aghina_greetings: { }
+}
+
+entity .aghina: !NPC
+{
+	_string: "Aghina"
+	_dialogue_root: .aghina_dialogue	
+	_sprite: woman_5
+	_sprite_dead: woman_5_dead	
+	_level: 10
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .aghina_1:
+{
+	string: "Assist Camus"
+	
+	maps: [ open_world ]
+	
+	manual: { }
+}
+
+entity .camus:
+{
+	string: "Camus"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ man_1_dead ] z_offset: -3 } ] }		
+		openable: 
+		{ 
+			verb: inspect
+			range: 1 
+			required_quest: .aghina_1			
+			complete_manual_objective: .aghina_1
+			trigger_ability: .aghina_1
+		}		
+	}
+}
+
+ability .aghina_1:
+{
+	direct_effect spawn_entity:
+	{
+		map_entity_spawn: .crab_ambusher_6
+		entity: crab_ambusher_6
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+	}
+}
+
+quest .aghina_1:
+{
+	string: "Strand Under Siege"
+
+	text:
+	[
+		"Find Camus by the coast to the east."
+	]
+	
+	description: 
+	[
+		"My fellow ranger and I was about to set up camp for the night, out by the strand, but suddenly crab men emerged from the water! We slayed a countless number of them, but they just keep coming!"
+		"Poor Camus got wounded and I was completely overrun and had to retreat. I want to return, but I'm too exhausted from the battle. Please go and assist him!"
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"Nice."
+	]
+
+	objectives: [ .aghina_1 ]
+	level: 6	
+}

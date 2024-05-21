@@ -135,7 +135,8 @@ namespace tpublic
 			std::vector<std::unique_ptr<Quest>>						m_quests;
 
 			// Internal
-			std::vector<uint32_t>									m_tryStartQuestIds;
+			std::unordered_set<uint32_t>							m_tryStartQuestIds;
+			std::unordered_set<uint32_t>							m_completeManualObjectiveIds;
 		};
 
 	}

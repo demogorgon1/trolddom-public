@@ -26,7 +26,8 @@ namespace tpublic
 					TYPE_PICK,
 					TYPE_MINE,
 					TYPE_CATCH,
-					TYPE_PICK_UP
+					TYPE_PICK_UP,
+					TYPE_INSPECT
 				};
 
 				void
@@ -44,6 +45,8 @@ namespace tpublic
 						m_type = TYPE_CATCH;
 					else if (t == "pick_up")
 						m_type = TYPE_PICK_UP;
+					else if (t == "inspect")
+						m_type = TYPE_INSPECT;
 					else
 						TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid verb.", aSource->GetIdentifier());
 				}
@@ -74,6 +77,7 @@ namespace tpublic
 					case TYPE_MINE:		return "Mine";
 					case TYPE_CATCH:	return "Catch";
 					case TYPE_PICK_UP:	return "Pick Up";
+					case TYPE_INSPECT:	return "Inspect";
 					default:			break;
 					}
 					assert(false);
@@ -100,6 +104,8 @@ namespace tpublic
 				FIELD_REQUIREMENTS,
 				FIELD_SOUND,
 				FIELD_REQUIRED_QUEST_ID,
+				FIELD_COMPLETE_MANUAL_OBJECTIVE_ID,
+				FIELD_TRIGGER_ABILITY_ID
 			};
 
 			static void
@@ -120,6 +126,8 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_LEVEL, "level", offsetof(Openable, m_level));
 				aSchema->DefineCustomObjects<Requirement>(FIELD_REQUIREMENTS, "requirements", offsetof(Openable, m_requirements));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_SOUND, "sound", offsetof(Openable, m_soundId))->SetDataType(DataType::ID_SOUND);
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_COMPLETE_MANUAL_OBJECTIVE_ID, "complete_manual_objective", offsetof(Openable, m_completeManualObjectiveId))->SetDataType(DataType::ID_OBJECTIVE);
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_TRIGGER_ABILITY_ID, "trigger_ability", offsetof(Openable, m_triggerAbilityId))->SetDataType(DataType::ID_ABILITY);
 			}
 
 			// Public data
@@ -137,6 +145,8 @@ namespace tpublic
 			uint32_t					m_level = 1;
 			std::vector<Requirement>	m_requirements;
 			uint32_t					m_soundId = 0;
+			uint32_t					m_completeManualObjectiveId = 0;
+			uint32_t					m_triggerAbilityId = 0;
 		};
 
 	}

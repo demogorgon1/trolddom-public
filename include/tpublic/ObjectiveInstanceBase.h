@@ -60,6 +60,7 @@ namespace tpublic
 										const EntityInstance*			/*aEntityInstance*/) {}
 		virtual void				OnDialogueTrigger(
 										const EntityInstance*			/*aEntityInstance*/) {}
+		virtual void				OnCompleteManualObjective() {}
 
 		// Virtual interface
 		virtual bool				IsCompleted() const = 0;

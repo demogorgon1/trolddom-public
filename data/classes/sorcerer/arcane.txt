@@ -130,7 +130,7 @@ ability void_lightning:
 	direct_effect spawn_entity:
 	{
 		entity: void_lightning
-		at_target: true
+		spawn_flags: [ at_target ]
 	}
 	
 	direct_effect damage:

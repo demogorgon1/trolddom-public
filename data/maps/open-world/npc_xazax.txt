@@ -30,6 +30,7 @@ dialogue_screen .xazax_greetings:
 	options:
 	[
 		{ quest<completion_only>: .sylas_3 }
+		{ quest<offer_only>: .xazax_1 }
 		{ goto: .xazax_alchemy text: "What can I use alchemy for?" }
 		{ goto: .xazax_trainer text: "Please teach me about alchemy." }
 	]
@@ -53,4 +54,36 @@ entity .xazax: !NPC
 	_loot_table: .npc
 	_not_pushable: true	
 }
+
+############################################################
+# Quest 1
+
+quest .xazax_1:
+{
+	string: "The Doom Speaker"
+
+	text:
+	[
+		"Return to Sylas in Eldertree Woods."
+	]
+	
+	description: 
+	[
+		"FIXME"
+	]
+
+	progress:
+	[
+		"You should go back to Sylas and talk to him."
+	]
+	
+	completion:
+	[
+		"FIXME"
+	]
+
+	prerequisites: [ .sylas_3 ]
+	level: 7
+}
+
 

@@ -222,6 +222,8 @@ namespace tpublic
 							m_cooldownRangeMax = aChild->GetInt32();
 						else if (aChild->m_name == "despawn_required")
 							m_despawnRequired = aChild->GetBool();
+						else if (aChild->m_name == "only_when_triggered")
+							m_onlyWhenTriggered = aChild->GetBool();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					});
@@ -235,6 +237,7 @@ namespace tpublic
 					aStream->WriteInt(m_cooldownRangeMin);
 					aStream->WriteInt(m_cooldownRangeMax);
 					aStream->WriteBool(m_despawnRequired);
+					aStream->WriteBool(m_onlyWhenTriggered);
 				}
 
 				bool
@@ -249,6 +252,8 @@ namespace tpublic
 						return false;
 					if (!aStream->ReadBool(m_despawnRequired))
 						return false;
+					if (!aStream->ReadBool(m_onlyWhenTriggered))
+						return false;
 					return true;
 				}
 
@@ -257,6 +262,7 @@ namespace tpublic
 				int32_t											m_cooldownRangeMin = 30 * 10; // 30 secs
 				int32_t											m_cooldownRangeMax = 50 * 10; // 50 secs
 				bool											m_despawnRequired = false; 
+				bool											m_onlyWhenTriggered = false;
 			};
 
 			void

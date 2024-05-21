@@ -236,7 +236,12 @@ namespace tpublic::Systems
 			break;
 
 		case EntityState::ID_DEFAULT:
-			if (!threat->m_table.IsEmpty())
+			if(npc->m_spawnWithTarget.has_value())
+			{
+				aContext->m_eventQueue->EventQueueThreat(npc->m_spawnWithTarget->m_entityInstanceId, aEntityInstanceId, npc->m_spawnWithTarget->m_threat);
+				npc->m_spawnWithTarget.reset();
+			}
+			else if (!threat->m_table.IsEmpty())
 			{
 				threat->m_lastPingTick = 0; // Force a threat ping (will cause nearby allies to join)
 
@@ -256,6 +261,10 @@ namespace tpublic::Systems
 				}				
 
 				returnValue = EntityState::ID_IN_COMBAT;
+			}
+			else if(npc->m_despawnTime.m_ticksOutOfCombat != 0 && aTicksInState > npc->m_despawnTime.m_ticksOutOfCombat)
+			{
+				returnValue = EntityState::ID_DESPAWNING;
 			}
 			else if(npc->m_npcBehaviorState == NULL && npc->m_defaultBehaviorState != 0)
 			{

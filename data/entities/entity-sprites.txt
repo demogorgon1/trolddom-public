@@ -97,6 +97,7 @@ sprites:
 	sprite crab_caster_1: { dead: crab_caster_1_dead tags: [ crab_monster caster melee ] }
 	sprite deer_2: { dead: deer_2_dead }
 	sprite boar_2: { dead: boar_2_dead }
+	sprite woman_5: { dead: woman_5_dead tags: [ female human ] }
 
 	cursor: { position: [ 0 80 ] }
 
@@ -115,6 +116,7 @@ sprites:
 	sprite crab_caster_1_dead: { }
 	sprite deer_2_dead: { }
 	sprite boar_2_dead: { }
+	sprite woman_5_dead: { }
 	
 }
 

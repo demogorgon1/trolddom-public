@@ -258,10 +258,14 @@ namespace tpublic
 							m_ticksWithoutLoot = aChild->GetInt32();
 						else if (aChild->m_name == "with_loot_ticks")
 							m_ticksWithLoot = aChild->GetInt32();
+						else if (aChild->m_name == "out_of_combat_ticks")
+							m_ticksOutOfCombat = aChild->GetInt32();
 						else if (aChild->m_name == "without_loot_mins")
 							m_ticksWithoutLoot = aChild->GetInt32() * 10 * 60;
 						else if (aChild->m_name == "with_loot_mins")
 							m_ticksWithLoot = aChild->GetInt32() * 10 * 60;
+						else if (aChild->m_name == "out_of_combat_mins")
+							m_ticksOutOfCombat = aChild->GetInt32() * 10 * 60;
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					});
@@ -273,6 +277,7 @@ namespace tpublic
 				{
 					aStream->WriteInt(m_ticksWithoutLoot);
 					aStream->WriteInt(m_ticksWithLoot);
+					aStream->WriteInt(m_ticksOutOfCombat);
 				}
 
 				bool
@@ -283,11 +288,15 @@ namespace tpublic
 						return false;
 					if (!aStream->ReadInt(m_ticksWithLoot))
 						return false;
+					if (!aStream->ReadInt(m_ticksOutOfCombat))
+						return false;
 					return true;
 				}
+
 				// Public data
 				int32_t								m_ticksWithoutLoot = 2 * 60 * 10; // 2 min
 				int32_t								m_ticksWithLoot = 5 * 60 * 10; // 5 min
+				int32_t								m_ticksOutOfCombat = 0; // Disabled
 			};
 
 			enum Field
@@ -342,6 +351,14 @@ namespace tpublic
 			const Data::NPCBehaviorState*				m_npcBehaviorState = NULL;
 			uint32_t									m_npcBehaviorStateTick = 0;
 			NPCMovement									m_npcMovement;
+
+			struct SpawnWithTarget
+			{
+				uint32_t								m_entityInstanceId = 0;
+				int32_t									m_threat = 0;
+			};
+
+			std::optional<SpawnWithTarget>				m_spawnWithTarget;
 		};
 	}
 

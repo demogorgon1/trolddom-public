@@ -130,7 +130,8 @@ namespace tpublic
 												uint32_t													aEntityInstanceId) = 0;
 		virtual tpublic::EntityInstance*	EventQueueSpawnEntity(
 												uint32_t													aEntityId,
-												tpublic::EntityState::Id									aInitState) = 0;
+												tpublic::EntityState::Id									aInitState,
+												uint32_t													aMapEntitySpawnId) = 0;
 		virtual void						EventQueueMakeOffering(
 												uint32_t													aSourceEntityInstanceId,
 												uint32_t													aTargetEntityInstanceId,

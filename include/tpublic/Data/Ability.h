@@ -353,8 +353,6 @@ namespace tpublic
 			Verify() const
 			{
 				VerifyBase();
-
-				TP_VERIFY(!m_displayName.empty(), m_debugInfo, "'%s' has no 'display_name'.", m_name.c_str());
 			}
 
 			// Helpers

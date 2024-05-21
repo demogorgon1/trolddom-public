@@ -14,6 +14,7 @@ namespace tpublic
 			ID_COLLECT_ITEMS,
 			ID_USE_ABILITY,
 			ID_DIALOGUE_TRIGGER,
+			ID_MANUAL,
 
 			NUM_IDS
 		};
@@ -25,7 +26,8 @@ namespace tpublic
 			"kill_npc",
 			"collect_items",
 			"use_ability",
-			"dialogue_trigger"
+			"dialogue_trigger",
+			"manual"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

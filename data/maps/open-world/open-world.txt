@@ -102,6 +102,17 @@ map_entity_spawn .deputy_larsen:
 	entity .deputy_larsen: { weight: 1 }
 }
 
+map_entity_spawn .aghina:
+{
+	entity .aghina: { weight: 1 }
+}
+
+map_entity_spawn .camus:
+{
+	spawn_timer: { despawn_required: true min_delay: 300 cooldown_range_min: 600 cooldown_range_max: 1200 }
+	entity .camus: { init_state: default }
+}
+
 map_entity_spawn .marcus_flambe:
 {
 	entity .marcus_flambe: { weight: 1 }
@@ -177,6 +188,11 @@ map_entity_spawn .crab_man_4:
 map_entity_spawn .crab_brute_5:
 {
 	entity crab_brute_5: { weight: 1 }
+}
+
+map_entity_spawn .crab_ambusher_6:
+{
+	spawn_timer: { only_when_triggered: true }
 }
 
 map_entity_spawn .crab_boss_4:
@@ -372,12 +388,15 @@ map_palette .stuff:
 	entity_spawn .gnome: [ 90 180 88 ]	
 	entity_spawn .sheriff_wellington: [ 192 195 155 ]	
 	entity_spawn .deputy_larsen: [ 92 135 155 ]	
+	entity_spawn .aghina: [ 192 13 115 ]	
+	entity_spawn .camus: [ 202 13 115 ]	
 	entity_spawn .crab_man: [ 192 195 15 ]	
 	entity_spawn .crab_man_3: [ 192 15 15 ]	
 	entity_spawn .crab_man_4: [ 193 15 15 ]	
 	entity_spawn .crab_boss_4: [ 192 15 195 ]	
 	entity_spawn .crab_boss_5: [ 192 1 195 ]	
 	entity_spawn .crab_brute_5: [ 193 15 195 ]	
+	entity_spawn .crab_ambusher_6: [ 193 30 195 ]	
 	entity_spawn .eldertree_woods_goblin_scout_5: [ 213 5 95 ]		
 	entity_spawn .dark_cove_goblin_6: [ 213 7 95 ]		
 	entity_spawn .dark_cove_goblin_commander_guzbrorg: [ 213 99 95 ]		

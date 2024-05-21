@@ -1,3 +1,6 @@
+# Shared potions cooldown
+cooldown potions: { duration: 600 }
+
 #####################################################
 # Small Healing Potion
 
@@ -9,7 +12,7 @@ ability consumable_small_healing_potion:
 	icon: icon_small_red_potion
 	direct_effect heal: { base: 20 }
 	consume_items: { consumable_small_healing_potion: 1 }
-	cooldowns: [ global ]	
+	cooldowns: [ global potions ]	
 	states: [ default in_combat ]
 	sound_effects: { use_local: [ drink_1 ] }
 }
@@ -37,7 +40,7 @@ ability consumable_small_mana_potion:
 	icon: icon_small_blue_potion
 	#direct_effect heal: { base: 20 }
 	consume_items: { consumable_small_mana_potion: 1 }
-	cooldowns: [ global ]
+	cooldowns: [ global potions ]
 	states: [ default in_combat ]
 	sound_effects: { use_local: [ drink_1 ] }
 }

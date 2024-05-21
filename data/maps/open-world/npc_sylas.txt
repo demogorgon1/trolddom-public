@@ -20,9 +20,11 @@ dialogue_screen .sylas_greetings:
 	[
 		{ quest<completion_only>: .deputy_larsen_2 }
 		{ quest<completion_only>: .dark_cove_goblin_commander_guzbrorg_quest }
+		{ quest<completion_only>: .xazax_1 }		
 		{ quest: .sylas_1 }
 		{ quest: .sylas_2 }
 		{ quest<offer_only>: .sylas_3 }
+		{ quest: .sylas_4 }
 		{ goto: .sylas_vendor text: "Let me browse your goods." }		
 	]
 }
@@ -115,7 +117,7 @@ quest .sylas_2:
 	
 	description: 
 	[
-		""
+		"FIXME"
 	]
 
 	progress:
@@ -178,3 +180,47 @@ item .sylas_3:
 	flags: [ unique not_sellable ]
 }
 
+############################################################
+# Quest 4
+
+objective .sylas_4:
+{
+	string: "Slay the Doom Speaker"
+	
+	maps: [ dungeon_1 ]
+	
+	kill_npc:
+	{
+		entities: [ dungeon_1_doom_speaker ]
+	}
+}
+
+quest .sylas_4:
+{
+	string: "The Doom Speaker"
+
+	text:
+	[
+		"Venture into the goblin caves and slay the Doom Speaker."
+	]
+	
+	description: 
+	[
+		"FIXME"
+	]
+
+	progress:
+	[
+		"Did you get cold feet?"
+	]
+	
+	completion:
+	[
+		"Nice."
+	]
+
+	objectives: [ .sylas_3 ]
+	level: 7
+	type: dungeon
+	prerequisites: [ .xazax_1 ]
+}

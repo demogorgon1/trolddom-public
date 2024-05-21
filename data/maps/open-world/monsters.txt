@@ -401,6 +401,32 @@ entity crab_brute_5: !NPC
 }
 
 ##########################################################################################
+# Crab Ambusher
+
+loot_table .crab_ambusher_6: 
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+entity crab_ambusher_6: !NPC
+{
+	_string: "Crab Ambusher"
+	_level: 6
+	_faction: monsters
+	_resource_health: 2
+	_weapon_damage: 2.3
+	_sprite: crab_monster_1
+	_sprite_dead: crab_monster_1_dead
+	_loot_table: .crab_ambusher_6
+	_creature_type: humanoid
+	_despawn_time: { out_of_combat_ticks: 100 }
+}
+
+##########################################################################################
 # Eldertree Woods Goblins
 
 loot_table .eldertree_woods_goblins_5: 
