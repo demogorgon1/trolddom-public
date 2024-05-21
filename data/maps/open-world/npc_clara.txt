@@ -68,6 +68,45 @@ quest .clara_1:
 	]
 
 	prerequisites: [ .tom_1 ]
-	objectives: [ .clara_1 ]
+	objectives: [ .clara_1 ]	
 	level: 4
+	reward_all_items: [ recipe_potato_stew ]
+}
+
+ability .learn_potato_stew:
+{
+	string: "Recipe: Potato Stew"
+	description: "Learn to make Potato Stew."
+	flags: [ target_self ]
+	cast_time: 20
+	icon: icon_scroll_1
+	cooldowns: [ global ]	
+	consume_items: { recipe_potato_stew: 1 }
+	required_profession<25>: cooking
+	requirement self<must_not_have_profession_ability>: { id: recipe_potato_stew }
+	direct_effect learn_profession_ability:
+	{
+		profession: cooking
+		ability: recipe_potato_stew
+	}
+}
+
+item recipe_potato_stew:
+{
+	binds: when_picked_up
+	type: miscellaneous
+	flags: [ unique ]
+	item_level: 4
+	icon: icon_scroll_1
+	string: "Recipe: Potato Stew"
+	use_ability: .learn_potato_stew
+}
+
+ability recipe_potato_stew: !COOKING_CRAFT
+{
+	_string: "Potato Stew"
+	_item: consumable_potato_stew
+	_produce: { consumable_potato_stew: 1 } 
+	_materials: { item_potatoes: 1 item_wild_herbs: 1 item_water: 1 }	
+	_skill: 25
 }

@@ -37,7 +37,8 @@ namespace tpublic
 			TYPE_MUST_HAVE_ITEM_EQUIPPED,
 			TYPE_MUST_HAVE_ITEM,
 			TYPE_MUST_BE_FACTION,
-			TYPE_MUST_HAVE_DISCOVERED_ZONE
+			TYPE_MUST_HAVE_DISCOVERED_ZONE,
+			TYPE_MUST_NOT_HAVE_PROFESSION_ABILITY
 		};
 
 		static DataType::Id
@@ -71,6 +72,9 @@ namespace tpublic
 
 			case TYPE_MUST_HAVE_DISCOVERED_ZONE:
 				return DataType::ID_ZONE;
+
+			case TYPE_MUST_NOT_HAVE_PROFESSION_ABILITY:
+				return DataType::ID_ABILITY;
 
 			default:
 				break;
@@ -137,6 +141,8 @@ namespace tpublic
 				m_type = TYPE_MUST_BE_FACTION;
 			else if (typeString == "must_have_discovered_zone")
 				m_type = TYPE_MUST_HAVE_DISCOVERED_ZONE;
+			else if (typeString == "must_not_have_profession_ability")
+				m_type = TYPE_MUST_NOT_HAVE_PROFESSION_ABILITY;
 			else
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid type.", aSource->m_annotation->GetIdentifier());
 

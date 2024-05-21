@@ -211,6 +211,25 @@ namespace tpublic
 				}
 				break;
 
+			case Requirement::TYPE_MUST_NOT_HAVE_PROFESSION_ABILITY:
+				{
+					if(!entity->IsPlayer())
+						return false;
+
+					const Data::Ability* ability = aManifest->GetById<Data::Ability>(aRequirement->m_id);
+					if(!ability->m_requiredProfession.has_value())
+						return false;
+
+					const Components::PlayerPrivate* playerPrivate = entity->GetComponent<Components::PlayerPrivate>();
+					const PlayerProfessions::Entry* entry = playerPrivate->m_professions.GetProfession(ability->m_requiredProfession->m_professionId);
+					if(entry == NULL)
+						return false;
+
+					if(entry->HasAbility(ability->m_id))
+						return false;
+				}				
+				break;
+
 			default:
 				assert(false);
 				break;

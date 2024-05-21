@@ -36,6 +36,7 @@
 	consume_items: @_item
 	states: [ default ]	
 	direct_effect apply_aura: { aura: @_aura }
+	<exists _buff> direct_effect apply_aura: { aura: @_buff }
 	cooldowns: [ global ]
 }
 
@@ -49,6 +50,16 @@
 	use_ability: @_ability
 	loot_groups: @_loot_groups
 	level_range: @_level_range
+}
+
+!define local AURA_FOOD_BUFF
+{
+	string: @_string
+	icon: @_icon
+	type: buff
+	flags: [ ]
+	duration: 12000
+	<exists _stat_modifiers> stat_modifiers: @_stat_modifiers
 }
 
 #####################################################
@@ -113,3 +124,24 @@ ability consumable_green_apple_tick: !ABILITY_FOOD_TICK {}
 aura consumable_green_apple: !AURA_FOOD {}
 ability consumable_green_apple: !ABILITY_FOOD {}
 item consumable_green_apple: !ITEM_FOOD {}
+
+#####################################################
+# Potato Stew
+${ 
+	_string: "Potato Stew" 
+	_description: "Restores 130 health and mana over 10 seconds. Can't be used in combat."
+	_level: 4
+	_icon: icon_stew_2
+	_heal_tick: 13
+	_ability_tick: consumable_potato_stew_tick
+	_ability: consumable_potato_stew
+	_aura: consumable_potato_stew
+	_item: { consumable_potato_stew: 1 } 
+	_loot_groups: [ ]
+}
+
+aura consumable_potato_stew_buff: !AURA_FOOD_BUFF { _stat_modifiers: { constitution: { add: 2 } } }
+ability consumable_potato_stew_tick: !ABILITY_FOOD_TICK {}
+aura consumable_potato_stew: !AURA_FOOD {}
+ability consumable_potato_stew: !ABILITY_FOOD { _buff: consumable_potato_stew_buff }
+item consumable_potato_stew: !ITEM_FOOD {}

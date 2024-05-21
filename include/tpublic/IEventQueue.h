@@ -140,6 +140,10 @@ namespace tpublic
 		virtual void						EventQueueChat(
 												uint32_t													aEntityInstanceId,
 												const Chat&													aChat) = 0;
+		virtual void						EventQueueLearnProfessionAbility(
+												uint32_t													aEntityInstanceId,
+												uint32_t													aProfessionId,
+												uint32_t													aAbilityId) = 0;
 	};
 
 }

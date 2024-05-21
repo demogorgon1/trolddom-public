@@ -271,6 +271,7 @@ sprites:
 	sprite icon_scroll_1 : { tags: [ icon ] }
 	sprite icon_severed_hoof : { tags: [ icon ] }
 	sprite icon_coarse_hair : { tags: [ icon ] }
+	sprite icon_stew_2 : { tags: [ icon ] }
 	
 }
 
