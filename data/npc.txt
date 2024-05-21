@@ -66,6 +66,8 @@
 				]
 				
 				<exists _abilities> abilities: @_abilities
+				
+				<exists _in_combat_barks> barks: @_in_combat_barks
 			}	
 
 			<exists _default_behavior_state> default_behavior_state: @_default_behavior_state

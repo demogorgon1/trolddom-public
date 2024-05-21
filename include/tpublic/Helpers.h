@@ -100,6 +100,20 @@ namespace tpublic
 			std::uniform_int_distribution<_T> distribution(aMin, aMax);
 			return distribution(aRandom);
 		}	
+
+		template <typename _T>
+		const _T* 
+		RandomItemPointer(
+			std::mt19937&							aRandom,
+			const std::vector<_T>&					aVector)
+		{
+			if(aVector.empty())
+				return NULL;
+			if(aVector.size() == 1)
+				return &aVector[0];
+			std::uniform_int_distribution<size_t> distribution(0, aVector.size() - 1);
+			return &aVector[distribution(aRandom)];
+		}
 		
 		template <typename _T>
 		_T

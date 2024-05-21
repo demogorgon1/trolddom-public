@@ -3,6 +3,7 @@
 #include "../Data/NPCBehaviorState.h"
 
 #include "../CastInProgress.h"
+#include "../Chat.h"
 #include "../Component.h"
 #include "../Cooldowns.h"
 #include "../DialogueScript.h"
@@ -90,6 +91,14 @@ namespace tpublic
 								m_abilities.push_back(AbilityEntry(aAbility));
 							});
 						}
+						else if (aChild->m_name == "barks")
+						{
+							aChild->GetArray()->ForEachChild([&](
+								const SourceNode* aAbility)
+							{
+								m_barks.push_back(Chat(aAbility));
+							});
+						}
 						else if(aChild->m_name == "dialogue_scripts")
 						{
 							aChild->GetIdArrayWithLookup<DialogueScript::Id, DialogueScript::INVALID_ID>(m_dialogueScripts, [](
@@ -112,6 +121,7 @@ namespace tpublic
 					aStream->WritePOD(m_entityState);
 					aStream->WriteObjects(m_abilities);
 					aStream->WritePODs(m_dialogueScripts);
+					aStream->WriteObjects(m_barks);
 				}
 
 				bool
@@ -123,6 +133,8 @@ namespace tpublic
 					if(!aStream->ReadObjects(m_abilities))
 						return false;
 					if(!aStream->ReadPODs(m_dialogueScripts))
+						return false;
+					if (!aStream->ReadObjects(m_barks))
 						return false;
 					return true;
 				}
@@ -143,6 +155,7 @@ namespace tpublic
 				EntityState::Id						m_entityState = EntityState::ID_DEFAULT;
 				std::vector<AbilityEntry>			m_abilities;
 				std::vector<DialogueScript::Id>		m_dialogueScripts;
+				std::vector<Chat>					m_barks;
 			};
 
 			struct ResourceEntry

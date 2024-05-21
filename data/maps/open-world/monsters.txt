@@ -239,6 +239,10 @@ entity crab_boss_4: !NPC
 	_sprite_dead: crab_monster_boss_1_dead
 	_loot_table: .crab_boss_4
 	_creature_type: humanoid
+	_in_combat_barks:
+	[
+		{ type: say text: "*Angry crab noises*" }
+	]
 }
 
 ##########################################################################################
@@ -314,6 +318,10 @@ entity crab_boss_5: !NPC
 	_sprite_dead: crab_monster_boss_1_dead
 	_loot_table: .crab_boss_5
 	_creature_type: humanoid
+	_in_combat_barks:
+	[
+		{ type: say text: "*Angry crab noises*" }
+	]	
 }
 
 ##########################################################################################

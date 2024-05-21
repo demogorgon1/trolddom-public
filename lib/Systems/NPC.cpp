@@ -205,7 +205,8 @@ namespace tpublic::Systems
 						else if(topThreatEntity != NULL && aEntity->GetState() != EntityState::ID_IN_COMBAT && !faction->IsNeutralOrFriendly())
 						{
 							const tpublic::Components::CombatPublic* nearbyNonPlayerCombatPublic = aEntity->GetComponent<tpublic::Components::CombatPublic>();
-							if(nearbyNonPlayerCombatPublic != NULL && nearbyNonPlayerCombatPublic->m_factionId == combat->m_factionId)
+							int32_t aggroAssistRange = GetManifest()->m_npcMetrics.m_aggroAssistRange;
+							if(nearbyNonPlayerCombatPublic != NULL && nearbyNonPlayerCombatPublic->m_factionId == combat->m_factionId && aDistanceSquared <= aggroAssistRange * aggroAssistRange)
 								aContext->m_eventQueue->EventQueueThreat(topThreatEntity->GetEntityInstanceId(), aEntity->GetEntityInstanceId(), 0);
 						}
 					}
@@ -245,6 +246,14 @@ namespace tpublic::Systems
 				npc->m_npcBehaviorState = NULL;
 				npc->m_moveCooldownUntilTick = 0;
 				npc->SetDirty();
+
+				const Components::NPC::StateEntry* inCombatState = npc->GetState(EntityState::ID_IN_COMBAT);
+				if(inCombatState != NULL && inCombatState->m_barks.size() > 0)
+				{
+					const Chat* bark = Helpers::RandomItemPointer(*aContext->m_random, inCombatState->m_barks);
+					assert(bark != NULL);
+					aContext->m_eventQueue->EventQueueChat(aEntityInstanceId, *bark);
+				}				
 
 				returnValue = EntityState::ID_IN_COMBAT;
 			}

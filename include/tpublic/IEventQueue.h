@@ -17,6 +17,7 @@ namespace tpublic
 
 	class AbilityModifierList;
 	class CastInProgress;
+	class Chat;
 	class EntityInstance;
 	class SecondaryAbility;
 
@@ -136,6 +137,9 @@ namespace tpublic
 												const ItemInstanceReference&								aItem) = 0;
 		virtual void						EventQueueGenerateLoot(
 												uint32_t													aLootableEntityInstanceId) = 0;
+		virtual void						EventQueueChat(
+												uint32_t													aEntityInstanceId,
+												const Chat&													aChat) = 0;
 	};
 
 }

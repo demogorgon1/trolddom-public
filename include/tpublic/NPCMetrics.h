@@ -142,6 +142,10 @@ namespace tpublic
 				{
 					m_aggroRangeBaseLevelDifference = aChild->GetInt32();
 				}
+				else if (aChild->m_name == "aggro_assist_range")
+				{
+					m_aggroAssistRange = aChild->GetInt32();
+				}
 				else
 				{
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -163,6 +167,7 @@ namespace tpublic
 			aStream->WriteObjectPointers(m_levels);
 			aStream->WriteUInts(m_aggroRanges);
 			aStream->WriteInt(m_aggroRangeBaseLevelDifference);
+			aStream->WriteInt(m_aggroAssistRange);
 		}
 
 		bool
@@ -173,7 +178,9 @@ namespace tpublic
 				return false;
 			if(!aStream->ReadUInts(m_aggroRanges))
 				return false;
-			if(!aStream->ReadInt(m_aggroRangeBaseLevelDifference))
+			if (!aStream->ReadInt(m_aggroRangeBaseLevelDifference))
+				return false;
+			if (!aStream->ReadInt(m_aggroAssistRange))
 				return false;
 			return true;
 		}
@@ -229,6 +236,7 @@ namespace tpublic
 		std::vector<std::unique_ptr<Level>>		m_levels;
 		std::vector<uint32_t>					m_aggroRanges;
 		int32_t									m_aggroRangeBaseLevelDifference = 0;
+		int32_t									m_aggroAssistRange = 0;
 	};
 
 }
