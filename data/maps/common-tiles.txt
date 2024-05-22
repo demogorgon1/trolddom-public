@@ -301,4 +301,79 @@ sprites:
 	sprite farmland_border_16: { }
 	sprite farmland_border_17: { }
 
+	cursor: { position: [ 0 192 ] }
+
+	sprite forest_2: 
+	{ 
+		flags: [ tile_block_line_of_sight ] 
+		borders: [ forest_2_border_1 forest_2_border_2 forest_2_border_3 forest_2_border_4 forest_2_border_5 forest_2_border_6 forest_2_border_7
+		           forest_2_border_8 forest_2_border_9 forest_2_border_10 forest_2_border_11 forest_2_border_12 forest_2_border_13 forest_2_border_14
+		           forest_2_border_15 forest_2_border_16 forest_2_border_17 ] 
+				   
+		# Special case if bordering forest
+		borders<forest>: [ forest_2_border_1b forest_2_border_2b forest_2_border_3b forest_2_border_4b forest_2_border_5b forest_2_border_6b forest_2_border_7b
+						   forest_2_border_8b forest_2_border_9b forest_2_border_10b forest_2_border_11b forest_2_border_12b forest_2_border_13b forest_2_border_14b
+						   forest_2_border_15b forest_2_border_16b forest_2_border_17b ] 
+	}	
+	sprite forest_2_border_1: { }
+	sprite forest_2_border_2: { }
+	sprite forest_2_border_3: { }
+	sprite forest_2_border_4: { }
+	sprite forest_2_border_5: { }
+	sprite forest_2_border_6: { }
+	sprite forest_2_border_7: { }
+	sprite forest_2_border_8: { }
+	sprite forest_2_border_9: { }
+	sprite forest_2_border_10: { }
+	sprite forest_2_border_11: { }
+	sprite forest_2_border_12: { }
+	sprite forest_2_border_13: { }
+	sprite forest_2_border_14: { }
+	sprite forest_2_border_15: { }
+	sprite forest_2_border_16: { }
+	sprite forest_2_border_17: { }
+
+	cursor: { position: [ 16 208 ] }
+	
+	sprite forest_2_border_1b: { }
+	sprite forest_2_border_2b: { }
+	sprite forest_2_border_3b: { }
+	sprite forest_2_border_4b: { }
+	sprite forest_2_border_5b: { }
+	sprite forest_2_border_6b: { }
+	sprite forest_2_border_7b: { }
+	sprite forest_2_border_8b: { }
+	sprite forest_2_border_9b: { }
+	sprite forest_2_border_10b: { }
+	sprite forest_2_border_11b: { }
+	sprite forest_2_border_12b: { }
+	sprite forest_2_border_13b: { }
+	sprite forest_2_border_14b: { }
+	sprite forest_2_border_15b: { }
+	sprite forest_2_border_16b: { }
+	sprite forest_2_border_17b: { }
+
+	cursor: { position: [ 0 224 ] }
+
+	sprite grass_2: { flags: [ tile_walkable ] borders: 
+		[ grass_2_border_1 grass_2_border_2 grass_2_border_3 grass_2_border_4 grass_2_border_5 grass_2_border_6 grass_2_border_7
+		  grass_2_border_8 grass_2_border_9 grass_2_border_10 grass_2_border_11 grass_2_border_12 grass_2_border_13 grass_2_border_14
+		  grass_2_border_15 grass_2_border_16 grass_2_border_17 ] }	
+	sprite grass_2_border_1: { }
+	sprite grass_2_border_2: { }
+	sprite grass_2_border_3: { }
+	sprite grass_2_border_4: { }
+	sprite grass_2_border_5: { }
+	sprite grass_2_border_6: { }
+	sprite grass_2_border_7: { }
+	sprite grass_2_border_8: { }
+	sprite grass_2_border_9: { }
+	sprite grass_2_border_10: { }
+	sprite grass_2_border_11: { }
+	sprite grass_2_border_12: { }
+	sprite grass_2_border_13: { }
+	sprite grass_2_border_14: { }
+	sprite grass_2_border_15: { }
+	sprite grass_2_border_16: { }
+	sprite grass_2_border_17: { }
 }

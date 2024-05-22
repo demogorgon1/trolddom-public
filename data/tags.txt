@@ -27,6 +27,7 @@ tag female: { }
 tag human: { }
 tag demon: { }
 tag goblin: { }
+tag undead: { }
 tag boss: { }
 tag minor_boss: { }
 tag major_boss: { }

@@ -4,11 +4,13 @@ tile_layering:
 	mud
 	sand
 	dirt
+	grass_2
 	grass
 	dark_grass
 	farmland
 	snow
 	forest
+	forest_2
 	rocks
 	snow_rocks	
 ]

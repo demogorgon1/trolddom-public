@@ -117,6 +117,17 @@ sprites:
 	sprite deer_2_dead: { }
 	sprite boar_2_dead: { }
 	sprite woman_5_dead: { }
+
+	cursor: { position: [ 0 96 ] }
+
+	sprite man_14: { dead: man_14_dead tags: [ male human ] }
+	sprite ghost_1: { dead: ghost_1_dead tags: [ undead ] }
+	sprite ghost_2: { dead: ghost_2_dead tags: [ undead ] }
+
+	cursor: { position: [ 0 112 ] }
+
+	sprite ghost_1_dead: { }
+	sprite ghost_2_dead: { }
 	
 }
 

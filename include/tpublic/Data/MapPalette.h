@@ -21,7 +21,8 @@ namespace tpublic
 				ENTRY_TYPE_PLAYER_SPAWN,
 				ENTRY_TYPE_PORTAL,
 				ENTRY_TYPE_LEVEL,
-				ENTRY_TYPE_ZONE
+				ENTRY_TYPE_ZONE,
+				ENTRY_TYPE_WALL
 			};
 
 			struct Color
@@ -107,6 +108,11 @@ namespace tpublic
 						{
 							entry.m_type = ENTRY_TYPE_ZONE;
 							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ZONE, aChild->m_name.c_str());
+						}
+						else if (aChild->m_tag == "wall")
+						{
+							entry.m_type = ENTRY_TYPE_WALL;
+							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_WALL, aChild->m_name.c_str());
 						}
 						else
 						{

@@ -84,6 +84,13 @@ namespace tpublic
 			m_origin.ToStream(aStream);
 			aStream->WriteObjects(m_namedAnchors);
 			aStream->WritePOD(m_averageColor);
+
+			aStream->WriteUInt(m_borderTable.size());
+			for(BorderTable::const_iterator i = m_borderTable.cbegin(); i != m_borderTable.cend(); i++)
+			{
+				aStream->WriteUInt(i->first);
+				aStream->WriteUInts(*i->second);
+			}
 		}
 
 		bool
@@ -106,6 +113,23 @@ namespace tpublic
 				return false;
 			if(!aStream->ReadPOD(m_averageColor))
 				return false;
+
+			{
+				size_t count;
+				if(!aStream->ReadUInt(count))
+					return false;
+				for(size_t i = 0; i < count; i++)
+				{
+					uint32_t spriteId;
+					if (!aStream->ReadUInt(spriteId))
+						return false;
+					std::shared_ptr<std::vector<uint32_t>> t = std::make_shared<std::vector<uint32_t>>();
+					if(!aStream->ReadUInts(*t))
+						return false;
+					m_borderTable[spriteId] = std::move(t);
+				}
+			}
+
 			return true;
 		}
 
@@ -123,6 +147,29 @@ namespace tpublic
 			return dummy;
 		}
 
+		std::vector<uint32_t>*
+		GetOrCreateBorderArray(
+			uint32_t		aSpriteId)
+		{
+			BorderTable::iterator i = m_borderTable.find(aSpriteId);
+			if(i != m_borderTable.end())
+				return i->second.get();
+			std::vector<uint32_t>* t = new std::vector<uint32_t>();
+			m_borderTable[aSpriteId] = std::shared_ptr<std::vector<uint32_t>>(t);
+			return t;
+		}
+
+		const std::vector<uint32_t>&
+		GetBorderArray(
+			uint32_t		aSpriteId) const
+		{
+			BorderTable::const_iterator i = m_borderTable.find(aSpriteId);
+			if(i != m_borderTable.cend())
+				return *i->second;
+
+			return m_borders;
+		}
+
 		// Public data
 		uint8_t						m_flags = 0;
 		uint32_t					m_tileLayer = 0;
@@ -132,6 +179,10 @@ namespace tpublic
 		Image::RGBA					m_averageColor;
 		uint32_t					m_deadSpriteId = 0;
 		uint32_t					m_altGreyscaleSpriteId = 0;
+
+		// This is a bit wonky, only using a shared_ptr here so SpriteInfo can be copied easily.
+		typedef std::unordered_map<uint32_t, std::shared_ptr<std::vector<uint32_t>>> BorderTable;
+		BorderTable					m_borderTable;
 	};
 
 }

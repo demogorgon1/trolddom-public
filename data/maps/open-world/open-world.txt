@@ -107,6 +107,11 @@ map_entity_spawn .aghina:
 	entity .aghina: { weight: 1 }
 }
 
+map_entity_spawn .ezekiel:
+{
+	entity .ezekiel: { weight: 1 }
+}
+
 map_entity_spawn .camus:
 {
 	spawn_timer: { despawn_required: true min_delay: 300 cooldown_range_min: 600 cooldown_range_max: 1200 }
@@ -221,6 +226,11 @@ map_entity_spawn .dark_cove_goblin_commander_guzbrorg:
 	entity dark_cove_goblin_commander_guzbrorg: { weight: 1 }
 }
 
+map_entity_spawn .risen_spirit_7:
+{
+	entity risen_spirit_7: { weight: 1 }
+}
+
 map_entity_spawn .junjun_door:
 {
 	entity .junjun_door: { }
@@ -333,8 +343,10 @@ map_palette .tiles:
 	tile sand: [ 200 200 128 ]
 	tile dirt: [ 97 91 62 ]
 	tile grass: [ 64 105 0 ]
+	tile grass_2: [ 164 105 40 ]
 	tile dark_grass: [ 48 90 14 ]
 	tile forest: [ 51 75 6 ]
+	tile forest_2: [ 100 75 6 ]
 	tile farmland: [ 128 128 0 ]
 	tile rocks: [ 143 131 120 ]
 	tile rocks_dungeon_entrance: [ 200 200 200 ]
@@ -389,6 +401,7 @@ map_palette .stuff:
 	entity_spawn .sheriff_wellington: [ 192 195 155 ]	
 	entity_spawn .deputy_larsen: [ 92 135 155 ]	
 	entity_spawn .aghina: [ 192 13 115 ]	
+	entity_spawn .ezekiel: [ 195 13 115 ]	
 	entity_spawn .camus: [ 202 13 115 ]	
 	entity_spawn .crab_man: [ 192 195 15 ]	
 	entity_spawn .crab_man_3: [ 192 15 15 ]	
@@ -400,6 +413,7 @@ map_palette .stuff:
 	entity_spawn .eldertree_woods_goblin_scout_5: [ 213 5 95 ]		
 	entity_spawn .dark_cove_goblin_6: [ 213 7 95 ]		
 	entity_spawn .dark_cove_goblin_commander_guzbrorg: [ 213 99 95 ]		
+	entity_spawn .risen_spirit_7: [ 69 127 55 ]		
 	entity_spawn .theodore_quest_item: [ 53 13 166 ]		
 	entity_spawn .elysia_quest_item: [ 53 13 169 ]		
 	entity_spawn .elysia_quest_item_2: [ 54 13 169 ]		
@@ -413,6 +427,7 @@ map_palette .stuff:
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn dungeon_1_exit: [ 0 0 200 ]	
 	portal .dungeon_1_entrance: [ 0 234 0 ]	
+	wall stone_wall: [ 128 128 128 ]
 }
 
 map_palette .levels:

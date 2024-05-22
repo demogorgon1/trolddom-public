@@ -240,6 +240,10 @@ namespace tpublic
 										hasZoneMap = true;
 										break;
 
+									case Data::MapPalette::ENTRY_TYPE_WALL:
+										m_walls[{ mapX, mapY }] = entry->m_value;
+										break;
+
 									default:
 										assert(false);
 										break;

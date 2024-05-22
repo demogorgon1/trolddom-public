@@ -185,7 +185,15 @@ namespace tpublic
 					}
 					else if(aSpriteComponent->m_name == "borders")
 					{
-						aSpriteComponent->GetIdArray(DataType::ID_SPRITE, sprite->m_info.m_borders);
+						std::vector<uint32_t>* borders = &sprite->m_info.m_borders;
+
+						if(aSpriteComponent->m_annotation)
+						{
+							uint32_t spriteId = aSpriteComponent->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aSpriteComponent->m_annotation->GetIdentifier());
+							borders = sprite->m_info.GetOrCreateBorderArray(spriteId);
+						}
+
+						aSpriteComponent->GetIdArray(DataType::ID_SPRITE, *borders);
 					}
 					else if(aSpriteComponent->m_name == "origin")
 					{

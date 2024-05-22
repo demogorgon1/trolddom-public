@@ -144,7 +144,7 @@ objective .elysia_2:
 	
 	maps: [ open_world ]
 	
-	collect_items: { item: .elysia_quest_item_2 count: 5 }
+	collect_items: { item: .elysia_quest_item_2 count: 8 }
 }
 
 loot_group .elysia_quest_item_2: {}

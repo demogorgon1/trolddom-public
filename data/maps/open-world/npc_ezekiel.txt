@@ -1,0 +1,82 @@
+dialogue_screen .ezekiel_greetings:
+{
+	text: 
+	[	
+		"Greetings."
+	]
+	
+	options:
+	[
+		{ quest: .ezekiel_1 }
+	]
+}
+
+dialogue_root .ezekiel_dialogue:
+{
+	.ezekiel_greetings: { }
+}
+
+entity .ezekiel: !NPC
+{
+	_string: "Ezekiel"
+	_guild_name: "Vampire Hunter"
+	_dialogue_root: .ezekiel_dialogue	
+	_sprite: man_14
+	_sprite_dead: man_14_dead	
+	_level: 10
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .ezekiel_1:
+{
+	string: "Kill Undead"
+	
+	maps: [ open_world ]
+	
+	kill_npc:
+	{
+		entities: [ risen_spirit_7 ]
+		count: 8
+	}
+}
+
+quest .ezekiel_1:
+{
+	string: "The Haunting of Eastshore"
+
+	text:
+	[
+		"Destroy undead creatures in the town of Eastshore."
+	]
+	
+	description: 
+	[
+		"What are you doing here, $class$?\n"
+		"\n"
+		"It's rare to see anyone on this part of the island. People usually venture past the wall and into Eastshore or beyond."
+		"Magic has permeated through these lands for generations, wizards and other practitioners of the foul arts of sorcery has been residing"
+		"in the mountains, causing upheaval in the natural order.\n"
+		"\n"
+		"This town was abandoned long ago when spirits came out of the ground and the death came alive. It needs to be cleansed. If you're on"
+		"the side of good, you'll help me."
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"Nice."
+	]
+
+	objectives: [ .ezekiel_1 ]
+	level: 7	
+}

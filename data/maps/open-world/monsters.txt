@@ -555,3 +555,29 @@ entity dark_cove_goblin_commander_guzbrorg: !NPC
 	_loot_table: .dark_cove_goblin_commander_guzbrorg
 	_creature_type: humanoid
 }
+
+##########################################################################################
+# Risen Spirit
+
+loot_table .risen_spirit_7: 
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+entity risen_spirit_7: !NPC
+{
+	_string: "Risen Spirit"
+	_level: 7
+	_faction: monsters
+	_resource_health: 1.1
+	_weapon_damage: 1.3
+	_sprite: ghost_2
+	_sprite_dead: ghost_2_dead
+	_loot_table: .risen_spirit_7
+	_creature_type: undead
+	_default_behavior_state: .wandering_short	
+}
