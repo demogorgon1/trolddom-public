@@ -123,11 +123,14 @@ sprites:
 	sprite man_14: { dead: man_14_dead tags: [ male human ] }
 	sprite ghost_1: { dead: ghost_1_dead tags: [ undead ] }
 	sprite ghost_2: { dead: ghost_2_dead tags: [ undead ] }
+	sprite man_15: { dead: man_15_dead tags: [ male human ] }
 
 	cursor: { position: [ 0 112 ] }
 
+	sprite man_14_dead: { }
 	sprite ghost_1_dead: { }
 	sprite ghost_2_dead: { }
+	sprite man_15_dead: { }
 	
 }
 
@@ -192,6 +195,9 @@ sprites:
 	sprite bonfire_1: { }
 	sprite bonfire_2: { }
 	sprite bonfire_3: { }
+
+	cursor: { position: [ 0 48 ] }
+	sprite wild_herbs_2: { }
 	
 }
 

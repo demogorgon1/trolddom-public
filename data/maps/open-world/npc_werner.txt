@@ -1,0 +1,129 @@
+dialogue_screen .werner_benny:
+{
+	text: 
+	[			
+		"We've recently had some problems with red spots on our linen at night. I'm afraid there could be a vampire roaming the woods, sucking our blood at night, but it seems very unlikely."
+		"There not supposed to be any left. Either way, it's nice to have a vampire hunter looking out for us. Every night he goes out in the woods, searching for traces of any blood suckers. He's very brave."
+	]		
+	
+	options:
+	[
+		{ text: "Okay." }
+	]
+}
+
+dialogue_screen .werner_greetings:
+{
+	text: 
+	[	
+		"Either we've got bed bugs or we're getting visited by vampires at night. Which is it?"
+	]		
+	
+	options:
+	[
+		{ quest: .werner_1 }
+		{ goto: .werner_benny text: "What's Benny up to? Why is he staying in your house?" }
+	]
+}
+
+dialogue_root .werner_dialogue:
+{
+	.werner_greetings: { }
+}
+
+entity .werner: !NPC
+{
+	_string: "Werner Thomgard"
+	_dialogue_root: .werner_dialogue	
+	_sprite: man_4
+	_sprite_dead: man_4_dead	
+	_level: 10
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+##########################################################################################
+# Quest 1
+
+objective .werner_1:
+{
+	string: "Mudweed"
+	
+	maps: [ open_world ]
+	
+	collect_items: { item: .werner_quest_item count: 5 }
+}
+
+loot_group .werner_quest_item: {}
+
+item .werner_quest_item:
+{
+	icon: icon_mushroom_2
+	item_level: 7
+	loot_groups: [ .werner_quest_item ]
+	flags: [ not_sellable ]
+	string: "Mudweed"
+	stack: 5
+}
+
+loot_table .werner_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .werner_quest_item }			
+		}		
+	]
+}
+
+entity .werner_quest_item:
+{
+	string: "Mudweed"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ wild_herbs_2 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .werner_quest_item
+			verb: pick
+			range: 1 
+			despawn: true 			
+			required_quest: .werner_1
+		}		
+	}
+}
+
+quest .werner_1:
+{
+	string: "Mudweed"
+
+	text:
+	[
+		"Gather mudweed along the coast up north."
+	]
+	
+	description: 
+	[
+		"Linda and I have been a bit sickly recently. We've been drinking a lot of mudweed brew to get better, but unfortunately I've already picked all the nearby mudweed."
+		"Can you go get some for us further up north? It grows along the coast, in the mud."
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"Nice."
+	]
+
+	objectives: [ .werner_1 ]
+	level: 7
+}
+

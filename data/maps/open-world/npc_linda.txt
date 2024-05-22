@@ -1,0 +1,44 @@
+dialogue_screen .linda_benny:
+{
+	text: 
+	[	
+		"Benny? Oh, he's great. The undead usually don't come all the way down here, but it's nice to have someone who knows how to deal with them."
+		"He's usually hangs around here during the day. Sometimes he takes a nap."
+	]		
+	
+	options:
+	[
+		{ text: "Okay." }
+	]
+}
+
+dialogue_screen .linda_greetings:
+{
+	text: 
+	[	
+		"It's probably just bed bugs."
+	]		
+	
+	options:
+	[
+		{ goto: .linda_benny text: "What's Benny up to? Why is he staying in your house?" }
+	]
+}
+
+dialogue_root .linda_dialogue:
+{
+	.linda_greetings: { }
+}
+
+entity .linda: !NPC
+{
+	_string: "Linda Thomgard"
+	_dialogue_root: .linda_dialogue	
+	_sprite: woman_1
+	_sprite_dead: woman_1_dead	
+	_level: 10
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}

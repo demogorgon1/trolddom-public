@@ -1,13 +1,49 @@
+dialogue_screen .ezekiel_benny:
+{
+	text: 
+	[	
+		"What?! Get out of here, I have no time for nonsense. Benny is a very promising vampire hunter and has"
+		"been my assistant for a long time.\n"
+		"\n"
+		"Go away, bother someone else with your insane conspiracy theories."
+	]
+	
+	options:
+	[
+		{ text: "Huh." }		
+	]
+}
+
+dialogue_screen .ezekiel_vampires:
+{
+	text: 
+	[	
+		"Have you seen any?\n"
+		"\n"
+		"Ha! Of course you haven't, I've vanquished them all. I take my job very serious.\n"
+		"\n"
+		"In the absence of vampires, I'll hunt other undead creatures. Need to stay on my toes, you know."
+	]
+	
+	options:
+	[
+		{ text: "I see." }		
+	]
+}
+
 dialogue_screen .ezekiel_greetings:
 {
 	text: 
 	[	
-		"Greetings."
+		"The dead should be resting in the dirt."
 	]
 	
 	options:
 	[
 		{ quest: .ezekiel_1 }
+		{ quest<offer_only>: .ezekiel_2 }
+		{ goto: .ezekiel_vampires text: "Any vampires around these parts?" }
+		{ goto: .ezekiel_benny text: "I think Benny might be a vampire." requirement self<must_have_completed_quest>: { id: .ezekiel_2 } }
 	]
 }
 
@@ -74,9 +110,42 @@ quest .ezekiel_1:
 	
 	completion:
 	[
-		"Nice."
+		"Good job. Maybe you'll become a vampire hunter like me one day."
 	]
 
 	objectives: [ .ezekiel_1 ]
+	level: 7	
+}
+
+############################################################
+# Quest 2
+
+quest .ezekiel_2:
+{
+	string: "The Thomgards"
+	text:
+	[
+		"Seek out Benny in the south eastern corner of Eastshore."
+	]
+	
+	description: 
+	[
+		"The only people crazy enough to still live in the area are the Thomgards. They live in a small fishing cabin by the coast to the south east.\n"
+		"\n"
+		"A while ago I sent my assistant down to check up on them and haven't heard from him since. Can you check up on him and the Thomgards? I'm sure"
+		"everything is fine, he's a very promising vampire hunter."
+	]
+
+	progress:
+	[
+		"What are you waiting for?"
+	]
+	
+	completion:
+	[
+		"Ezekiel sent you? He's not coming down here, is he? I have everything under control."
+	]
+
+	prerequisites: [ .ezekiel_1 ]
 	level: 7	
 }

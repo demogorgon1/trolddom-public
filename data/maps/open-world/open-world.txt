@@ -112,6 +112,21 @@ map_entity_spawn .ezekiel:
 	entity .ezekiel: { weight: 1 }
 }
 
+map_entity_spawn .benny:
+{
+	entity .benny: { weight: 1 }
+}
+
+map_entity_spawn .werner:
+{
+	entity .werner: { weight: 1 }
+}
+
+map_entity_spawn .linda:
+{
+	entity .linda: { weight: 1 }
+}
+
 map_entity_spawn .camus:
 {
 	spawn_timer: { despawn_required: true min_delay: 300 cooldown_range_min: 600 cooldown_range_max: 1200 }
@@ -231,6 +246,11 @@ map_entity_spawn .risen_spirit_7:
 	entity risen_spirit_7: { weight: 1 }
 }
 
+map_entity_spawn .sea_spirit_7:
+{
+	entity sea_spirit_7: { weight: 1 }
+}
+
 map_entity_spawn .junjun_door:
 {
 	entity .junjun_door: { }
@@ -258,6 +278,12 @@ map_entity_spawn .elysia_quest_item_2:
 {
 	spawn_timer: { despawn_required: true min_delay: 300 cooldown_range_min: 600 cooldown_range_max: 1200 }
 	entity .elysia_quest_item_2: { init_state: default }
+}
+
+map_entity_spawn .werner_quest_item:
+{
+	spawn_timer: { despawn_required: true min_delay: 300 cooldown_range_min: 600 cooldown_range_max: 1200 }
+	entity .werner_quest_item: { init_state: default }
 }
 
 map_entity_spawn .gnome_1_quest_item:
@@ -403,6 +429,9 @@ map_palette .stuff:
 	entity_spawn .aghina: [ 192 13 115 ]	
 	entity_spawn .ezekiel: [ 195 13 115 ]	
 	entity_spawn .camus: [ 202 13 115 ]	
+	entity_spawn .benny: [ 50 43 215 ]	
+	entity_spawn .linda: [ 50 43 115 ]	
+	entity_spawn .werner: [ 97 43 215 ]	
 	entity_spawn .crab_man: [ 192 195 15 ]	
 	entity_spawn .crab_man_3: [ 192 15 15 ]	
 	entity_spawn .crab_man_4: [ 193 15 15 ]	
@@ -414,9 +443,11 @@ map_palette .stuff:
 	entity_spawn .dark_cove_goblin_6: [ 213 7 95 ]		
 	entity_spawn .dark_cove_goblin_commander_guzbrorg: [ 213 99 95 ]		
 	entity_spawn .risen_spirit_7: [ 69 127 55 ]		
+	entity_spawn .sea_spirit_7: [ 69 127 155 ]		
 	entity_spawn .theodore_quest_item: [ 53 13 166 ]		
 	entity_spawn .elysia_quest_item: [ 53 13 169 ]		
 	entity_spawn .elysia_quest_item_2: [ 54 13 169 ]		
+	entity_spawn .werner_quest_item: [ 54 104 169 ]		
 	entity_spawn .gnome_1_quest_item: [ 53 13 162 ]		
 	entity_spawn .stash: [ 0 43 66 ]		
 	entity_spawn .furnace: [ 100 43 66 ]		

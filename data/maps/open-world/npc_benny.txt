@@ -1,0 +1,30 @@
+dialogue_screen .benny_greetings:
+{
+	text: 
+	[	
+		"What a fine day to relax in the shade."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .ezekiel_2 }
+	]
+}
+
+dialogue_root .benny_dialogue:
+{
+	.benny_greetings: { }
+}
+
+entity .benny: !NPC
+{
+	_string: "Benny"
+	_dialogue_root: .benny_dialogue	
+	_sprite: man_15
+	_sprite_dead: man_15_dead	
+	_level: 10
+	_faction: npcs		
+	_creature_type: undead
+	_loot_table: .npc
+	_not_pushable: true	
+}

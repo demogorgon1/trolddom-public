@@ -581,3 +581,29 @@ entity risen_spirit_7: !NPC
 	_creature_type: undead
 	_default_behavior_state: .wandering_short	
 }
+
+##########################################################################################
+# Sea Spirit
+
+loot_table .sea_spirit_7: 
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+entity sea_spirit_7: !NPC
+{
+	_string: "Sea Spirit"
+	_level: 7
+	_faction: monsters
+	_resource_health: 1.1
+	_weapon_damage: 1.3
+	_sprite: ghost_2
+	_sprite_dead: ghost_2_dead
+	_loot_table: .sea_spirit_7
+	_creature_type: undead
+	_default_behavior_state: .wandering_short	
+}
