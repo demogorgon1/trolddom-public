@@ -14,7 +14,7 @@ loot_table .spawn_of_umbracoth:
 	slots:
 	[
 		{
-			possibility: { loot_group: .spawn_of_umbracoth_quest_drop }			
+			possibility: { loot_group: .spawn_of_umbracoth_quest_drop requirement self<must_not_have_completed_quest>: { id: spawn_of_umbracoth } }			
 		}		
 	
 		!WORLD_DROPS{ _extra_possibility: { loot_group: .spawn_of_umbracoth_junk weight: 250 } }
@@ -617,7 +617,7 @@ loot_table .living_dead_8:
 	[
 		{
 			possibility: { weight: 1 }			
-			possibility: { loot_group: .orgh_quest_item weight: 4 }			
+			possibility: { loot_group: .orgh_quest_item weight: 4 requirement self<must_have_active_quest>: { id: .orgh_1 } }			
 		}			
 	
 		!WORLD_DROPS {}
