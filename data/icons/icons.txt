@@ -272,6 +272,7 @@ sprites:
 	sprite icon_severed_hoof : { tags: [ icon ] }
 	sprite icon_coarse_hair : { tags: [ icon ] }
 	sprite icon_stew_2 : { tags: [ icon ] }
+	sprite icon_brain_1 : { tags: [ icon ] }
 	
 }
 

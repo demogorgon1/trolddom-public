@@ -143,6 +143,11 @@ map_entity_spawn .svara:
 	entity .svara: { weight: 1 }
 }
 
+map_entity_spawn .orgh:
+{
+	entity .orgh: { weight: 1 }
+}
+
 map_entity_spawn .gateway:
 {
 	entity gateway: { weight: 1 }
@@ -249,6 +254,11 @@ map_entity_spawn .risen_spirit_7:
 map_entity_spawn .sea_spirit_7:
 {
 	entity sea_spirit_7: { weight: 1 }
+}
+
+map_entity_spawn .living_dead_8:
+{
+	entity living_dead_8: { weight: 1 }
 }
 
 map_entity_spawn .junjun_door:
@@ -432,6 +442,7 @@ map_palette .stuff:
 	entity_spawn .benny: [ 50 43 215 ]	
 	entity_spawn .linda: [ 50 43 115 ]	
 	entity_spawn .werner: [ 97 43 215 ]	
+	entity_spawn .orgh: [ 6 255 10 ]	
 	entity_spawn .crab_man: [ 192 195 15 ]	
 	entity_spawn .crab_man_3: [ 192 15 15 ]	
 	entity_spawn .crab_man_4: [ 193 15 15 ]	
@@ -444,6 +455,7 @@ map_palette .stuff:
 	entity_spawn .dark_cove_goblin_commander_guzbrorg: [ 213 99 95 ]		
 	entity_spawn .risen_spirit_7: [ 69 127 55 ]		
 	entity_spawn .sea_spirit_7: [ 69 127 155 ]		
+	entity_spawn .living_dead_8: [ 169 127 155 ]		
 	entity_spawn .theodore_quest_item: [ 53 13 166 ]		
 	entity_spawn .elysia_quest_item: [ 53 13 169 ]		
 	entity_spawn .elysia_quest_item_2: [ 54 13 169 ]		

@@ -70,6 +70,7 @@ dialogue_screen .junjun_greetings:
 		{ goto: .junjun_1 text: "What kinds of wizardry are you up to here?" }
 		{ quest: gateway_world_quest_1 }
 		{ quest: gateway_world_quest_2 }
+		{ quest<completion_only>: .ezekiel_3 }
 	]
 }
 

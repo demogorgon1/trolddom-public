@@ -1,0 +1,92 @@
+dialogue_screen .orgh_vendor:
+{
+	sell weapon_pick_axe: { quantity: 1 }	
+	sell weapon_blacksmithing_hammer: { quantity: 1 }	
+	sell weapon_fishing_rod: { quantity: 1 }	
+}
+
+dialogue_screen .orgh_greetings:
+{
+	text: 
+	[	
+		"What can I do for you?"
+	]
+	
+	options:
+	[
+		{ quest: .orgh_1 }
+		{ goto: .orgh_vendor text: "Let me browse your goods." }				
+	]
+}
+
+dialogue_root .orgh_dialogue:
+{
+	.orgh_greetings: { }
+}
+
+entity .orgh: !NPC
+{
+	_string: "Orgh"
+	_dialogue_root: .orgh_dialogue	
+	_sprite: man_16
+	_sprite_dead: man_16_dead	
+	_level: 10
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .orgh_quest_item: { }
+
+item .orgh_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .orgh_quest_item ]		
+	string: "Rotting Brain" 
+	icon: icon_brain_1
+	stack: 6
+	item_level: 8
+	flags: [ not_sellable ]
+}
+
+objective .orgh_1:
+{
+	string: "Rotting Brains"
+	collect_items: { item: .orgh_quest_item count: 6 }
+}
+
+quest .orgh_1:
+{
+	string: "Brains"
+
+	text:
+	[
+		"Collect brains for Orgh from the living dead in northern Dirith Mountains."
+	]
+	
+	description: 
+	[
+		"The mistress needs some reagents for her research, maybe you can help?\n"
+		"\n"
+		"Up north you'll find an old abandoned town where the dead have climbed out of their graves. Most of them still have intact brains. Go collect some of them for me and I'll extract the important juices."		
+		"Be careful, they'll probably not hand them over willingly."
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"Those are some nice brains. Let me just take them off your hands."
+	]
+
+	objectives: [ .orgh_1 ]
+	level: 8
+}
+

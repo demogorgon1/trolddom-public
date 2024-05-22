@@ -124,6 +124,8 @@ sprites:
 	sprite ghost_1: { dead: ghost_1_dead tags: [ undead ] }
 	sprite ghost_2: { dead: ghost_2_dead tags: [ undead ] }
 	sprite man_15: { dead: man_15_dead tags: [ male human ] }
+	sprite man_16: { dead: man_16_dead tags: [ male human ] }
+	sprite zombie_1: { dead: zombie_1_dead tags: [ undead ] }
 
 	cursor: { position: [ 0 112 ] }
 
@@ -131,6 +133,8 @@ sprites:
 	sprite ghost_1_dead: { }
 	sprite ghost_2_dead: { }
 	sprite man_15_dead: { }
+	sprite man_16_dead: { }
+	sprite zombie_1_dead: { }
 	
 }
 

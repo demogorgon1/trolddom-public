@@ -588,7 +588,7 @@ entity risen_spirit_7: !NPC
 loot_table .sea_spirit_7: 
 {
 	slots:
-	[
+	[		
 		!WORLD_DROPS {}
 		!WORLD_DROPS_CLOTH{}
 	]	
@@ -604,6 +604,37 @@ entity sea_spirit_7: !NPC
 	_sprite: ghost_2
 	_sprite_dead: ghost_2_dead
 	_loot_table: .sea_spirit_7
+	_creature_type: undead
+	_default_behavior_state: .wandering_short	
+}
+
+##########################################################################################
+# Living Dead
+
+loot_table .living_dead_8: 
+{
+	slots:
+	[
+		{
+			possibility: { weight: 1 }			
+			possibility: { loot_group: .orgh_quest_item weight: 4 }			
+		}			
+	
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+entity living_dead_8: !NPC
+{
+	_string: "Living Dead"
+	_level: 8
+	_faction: monsters
+	_resource_health: 1.4
+	_weapon_damage: 1.1
+	_sprite: zombie_1
+	_sprite_dead: zombie_1_dead
+	_loot_table: .living_dead_8
 	_creature_type: undead
 	_default_behavior_state: .wandering_short	
 }
