@@ -638,3 +638,35 @@ entity living_dead_8: !NPC
 	_creature_type: undead
 	_default_behavior_state: .wandering_short	
 }
+
+##########################################################################################
+# Drowned Screecher
+
+loot_table .drowned_screecher_8: 
+{
+	slots:
+	[
+		{
+			possibility: { weight: 1 }			
+			possibility: { loot_group: .orgh_quest_item_2 weight: 4 requirement self<must_have_active_quest>: { id: .orgh_2 } }			
+		}			
+	
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+entity drowned_screecher_8: !NPC
+{
+	_string: "Drowned Schreecher"
+	_level: 8
+	_faction: monsters
+	_resource_health: 1.1
+	_weapon_damage: 1.1
+	_sprite: ghost_2
+	_sprite_dead: ghost_2_dead
+	_loot_table: .drowned_screecher_8
+	_creature_type: undead
+	_default_behavior_state: .wandering_short	
+	_abilities: [ { id: npc_firebolt } { id: npc_attack } ]
+}

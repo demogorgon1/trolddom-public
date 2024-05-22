@@ -15,6 +15,7 @@ dialogue_screen .orgh_greetings:
 	options:
 	[
 		{ quest: .orgh_1 }
+		{ quest: .orgh_2 }
 		{ goto: .orgh_vendor text: "Let me browse your goods." }				
 	]
 }
@@ -87,6 +88,60 @@ quest .orgh_1:
 	]
 
 	objectives: [ .orgh_1 ]
+	level: 8
+}
+
+############################################################
+# Quest 2
+
+loot_group .orgh_quest_item_2: { }
+
+item .orgh_quest_item_2:
+{
+	binds: when_picked_up
+	loot_groups: [ .orgh_quest_item_2 ]		
+	string: "Schreecher Essence" 
+	icon: icon_residue_1
+	stack: 6
+	item_level: 8
+	flags: [ not_sellable ]
+}
+
+objective .orgh_2:
+{
+	string: "Drowned Schreechers"
+	collect_items: { item: .orgh_quest_item_2 count: 6 }
+}
+
+quest .orgh_2:
+{
+	string: "Spiritual Residue"
+
+	text:
+	[
+		"Collect essences from the spirits haunting the coastline."
+	]
+	
+	description: 
+	[
+		"I got some nice juice out of those brains, maybe you can collect some more exotic ingredients for me?\n"
+		"\n"
+		"The coast to the east is haunted by the spirits of people who have drowned around the island. When vanquished they tend to leave behind some physical residue that is useful for making"
+		"potions. I'll need a bunch of that for the mistress."
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"Doesn't look like much, but what do I know. Thanks."
+	]
+
+	prerequisites: [ .orgh_1 ]
+	objectives: [ .orgh_2 ]
 	level: 8
 }
 
