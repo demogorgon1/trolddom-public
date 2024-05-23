@@ -127,6 +127,8 @@ sprites:
 	sprite man_16: { dead: man_16_dead tags: [ male human ] }
 	sprite zombie_1: { dead: zombie_1_dead tags: [ undead ] }
 	sprite woman_6: { dead: woman_6_dead tags: [ female human ] }
+	sprite goblin_boss_4: { dead: goblin_boss_4_dead tags: [ goblin melee boss ] }
+	sprite man_17: { dead: man_17_dead tags: [ male human ] }
 
 	cursor: { position: [ 0 112 ] }
 
@@ -137,6 +139,8 @@ sprites:
 	sprite man_16_dead: { }
 	sprite zombie_1_dead: { }
 	sprite woman_6_dead: { }
+	sprite goblin_boss_4_dead: { }
+	sprite man_17_dead: { }
 	
 }
 

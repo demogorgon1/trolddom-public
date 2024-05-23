@@ -34,7 +34,7 @@ pantheon underworld:
 		"Lesser Demon"
 		"Demon"
 		"Greater Demon"
-		"Lord"
+		"Dark Lord"
 		"Absolute Ruler"
 	]
 }

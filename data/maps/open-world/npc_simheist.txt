@@ -8,6 +8,8 @@ dialogue_screen .simheist_greetings:
 	options:
 	[
 		{ quest: .simheist_1 }
+		{ quest: .simheist_2 }
+		{ quest<offer_only>: .simheist_3 }
 	]
 }
 
@@ -78,4 +80,82 @@ quest .simheist_1:
 
 	objectives: [ .simheist_1 ]
 	level: 9
+}
+
+##########################################################################################
+# Quest 2
+
+objective .simheist_2:
+{
+	string: "Hogroth the Slippery slain"
+	
+	maps: [ open_world ]
+	
+	kill_npc:
+	{
+		entities: [ hogroth_the_slippery ]
+		count: 1
+	}
+}
+
+quest .simheist_2:
+{
+	string: "Hogroth the Slippery"
+
+	text:
+	[
+		"Track down and kill Hogroth in the woods."
+	]
+	
+	description: 
+	[
+		"One of the leaders of the goblins, Hogroth the Slippery, has escaped into the woods. You must track him down and kill him. Follow the path to the west and you'll find the entrance into"
+		"the ancient forest."
+	]
+
+	progress:
+	[
+		"You must make haste!"
+	]
+	
+	completion:
+	[
+		"Good."
+	]
+
+	objectives: [ .simheist_2 ]
+	level: 9
+	prerequisites: [ .simheist_1 ]
+}
+
+##########################################################################################
+# Quest 3
+
+quest .simheist_3:
+{
+	string: "Lord of the Mist"
+
+	text:
+	[
+		"Seek out the Lord of the Mist in the ancient forest."
+	]
+	
+	description: 
+	[
+		"I don't know what is going on, but it's clear that the ancient woods are being corrupted by dark magic. You need to seek out"
+		"Zumhorn, the Lord of the Mist, deep in the woods. Offer you assistance to him."
+	]
+
+	progress:
+	[
+		"Why are you still here?"
+	]
+	
+	completion:
+	[
+		"Greetings, honourable $class$."
+	]
+
+	level: 9
+	prerequisites: [ .simheist_2 ]
 }

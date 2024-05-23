@@ -722,3 +722,29 @@ entity goblin_firestarter_9: !NPC
 	_abilities: [ { id: npc_firebolt } { id: npc_attack } ]
 	_default_behavior_state: .wandering_short	
 }
+
+##########################################################################################
+# Hogroth the Slippery
+
+loot_table .hogroth_the_slippery: 
+{
+	slots:
+	[	
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]		
+}
+
+entity hogroth_the_slippery: !NPC
+{
+	_string: "Hogroth the Slippery"
+	_level: 9
+	_faction: monsters
+	_sprite: goblin_boss_4
+	_sprite_dead: goblin_boss_4_dead
+	_loot_table: .hogroth_the_slippery
+	_creature_type: humanoid
+	_resource_health: 2.1
+	_weapon_damage: 2.2
+}
+

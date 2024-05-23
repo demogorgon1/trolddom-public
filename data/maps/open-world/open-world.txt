@@ -153,6 +153,11 @@ map_entity_spawn .simheist:
 	entity .simheist: { weight: 1 }
 }
 
+map_entity_spawn .zumhorn:
+{
+	entity .zumhorn: { weight: 1 }
+}
+
 map_entity_spawn .gateway:
 {
 	entity gateway: { weight: 1 }
@@ -281,6 +286,11 @@ map_entity_spawn .dinith_bay_goblin_9:
 	entity goblin_ranger_9: { weight: 1 }
 	entity goblin_firestarter_9: { weight: 1 }
 	entity goblin_pillager_9: { weight: 1 }
+}
+
+map_entity_spawn .hogroth_the_slippery:
+{
+	entity hogroth_the_slippery: { weight: 1 }
 }
 
 map_entity_spawn .junjun_door:
@@ -466,6 +476,7 @@ map_palette .stuff:
 	entity_spawn .werner: [ 97 43 215 ]	
 	entity_spawn .orgh: [ 6 255 10 ]	
 	entity_spawn .simheist: [ 60 250 10 ]	
+	entity_spawn .zumhorn: [ 70 250 10 ]	
 	entity_spawn .crab_man: [ 192 195 15 ]	
 	entity_spawn .crab_man_3: [ 192 15 15 ]	
 	entity_spawn .crab_man_4: [ 193 15 15 ]	
@@ -481,6 +492,7 @@ map_palette .stuff:
 	entity_spawn .living_dead_8: [ 169 127 155 ]		
 	entity_spawn .goblin_ranger_9: [ 124 127 155 ]			
 	entity_spawn .dinith_bay_goblin_9: [ 213 30 95 ]		
+	entity_spawn .hogroth_the_slippery: [ 213 130 95 ]		
 	entity_spawn .drowned_screecher_8: [ 189 127 155 ]			
 	entity_spawn .theodore_quest_item: [ 53 13 166 ]		
 	entity_spawn .elysia_quest_item: [ 53 13 169 ]		

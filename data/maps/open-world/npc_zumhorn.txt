@@ -1,0 +1,32 @@
+dialogue_screen .zumhorn_greetings:
+{
+	text: 
+	[	
+		"I am the Lord of these trees."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .simheist_3 }
+	]
+}
+
+dialogue_root .zumhorn_dialogue:
+{
+	.zumhorn_greetings: { }
+}
+
+entity .zumhorn: !NPC
+{
+	_string: "Zumhorn"
+	_guild_name: "Lord of the Mist"
+	_dialogue_root: .zumhorn_dialogue	
+	_sprite: man_17
+	_sprite_dead: man_17_dead	
+	_level: 10
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
