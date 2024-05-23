@@ -670,3 +670,55 @@ entity drowned_screecher_8: !NPC
 	_default_behavior_state: .wandering_short	
 	_abilities: [ { id: npc_firebolt } { id: npc_attack } ]
 }
+
+##########################################################################################
+# Dirith Bay Goblins
+
+loot_table .dirith_bay_goblins: 
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .simheist_quest_item requirement self<must_have_active_quest>: { id: .simheist_1 } }			
+		}	
+	
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]		
+}
+
+entity goblin_ranger_9: !NPC
+{
+	_string: "Goblin Ranger"
+	_level: 9
+	_faction: monsters
+	_sprite: goblin
+	_sprite_dead: goblin_dead
+	_loot_table: .dirith_bay_goblins
+	_creature_type: humanoid
+}
+
+entity goblin_pillager_9: !NPC
+{
+	_string: "Goblin Pillager"
+	_level: 9
+	_faction: monsters
+	_sprite: goblin_4
+	_sprite_dead: goblin_4_dead
+	_loot_table: .dirith_bay_goblins
+	_creature_type: humanoid
+	_default_behavior_state: .wandering_short	
+}
+
+entity goblin_firestarter_9: !NPC
+{
+	_string: "Goblin Firecaster"
+	_level: 9
+	_faction: monsters
+	_sprite: goblin_shaman_2
+	_sprite_dead: goblin_shaman_2_dead
+	_loot_table: .dirith_bay_goblins
+	_creature_type: humanoid
+	_abilities: [ { id: npc_firebolt } { id: npc_attack } ]
+	_default_behavior_state: .wandering_short	
+}

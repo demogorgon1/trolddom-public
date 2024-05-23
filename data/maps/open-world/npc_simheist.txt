@@ -1,0 +1,81 @@
+dialogue_screen .simheist_greetings:
+{
+	text: 
+	[	
+		"Greetings."
+	]		
+	
+	options:
+	[
+		{ quest: .simheist_1 }
+	]
+}
+
+dialogue_root .simheist_dialogue:
+{
+	.simheist_greetings: { }
+}
+
+entity .simheist: !NPC
+{
+	_string: "Simheist"
+	_dialogue_root: .simheist_dialogue	
+	_sprite: woman_6
+	_sprite_dead: woman_6_dead	
+	_level: 10
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+##########################################################################################
+# Quest 1
+
+loot_group .simheist_quest_item: { }
+
+item .simheist_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .simheist_quest_item ]		
+	string: "Goblin Ear" 
+	icon: icon_ear_2
+	stack: 12
+	item_level: 9
+	flags: [ not_sellable ]
+}
+
+objective .simheist_1:
+{
+	string: "Goblin Ears"
+	collect_items: { item: .simheist_quest_item count: 12 }
+}
+
+quest .simheist_1:
+{
+	string: "Green Menace"
+
+	text:
+	[
+		"Kill goblins in Dirith Bay and return their ears to Simheist."
+	]
+	
+	description: 
+	[
+		"Not long ago the goblins emerged from deep beneath the mountains and have since been spreading their influence over the island. Somehow they've crossed the water and now the Dirith bay area"
+		"has been infested with their foul presence as well. They need to be driven back! We can't let them enter the ancient forest!"
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"This soothes me."
+	]
+
+	objectives: [ .simheist_1 ]
+	level: 9
+}

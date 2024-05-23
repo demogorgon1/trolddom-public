@@ -165,56 +165,59 @@ namespace tpublic
 				t.m_lootGroupId = possibility.m_lootGroupId;
 			}
 
-			std::uniform_int_distribution<uint32_t> distribution(1, accumWeight);
-			uint32_t possibilityRoll = distribution(aRandom);
-			uint32_t lootGroupId = 0;
-
-			for(size_t i = 0; i < entryCount; i++)
+			if(entryCount > 0)
 			{
-				const Entry& t = entries[i];
-				if (possibilityRoll <= t.m_accumWeight)
+				std::uniform_int_distribution<uint32_t> distribution(1, accumWeight);
+				uint32_t possibilityRoll = distribution(aRandom);
+				uint32_t lootGroupId = 0;
+
+				for (size_t i = 0; i < entryCount; i++)
 				{
-					lootGroupId = t.m_lootGroupId;
-					break;
+					const Entry& t = entries[i];
+					if (possibilityRoll <= t.m_accumWeight)
+					{
+						lootGroupId = t.m_lootGroupId;
+						break;
+					}
+				}
+
+				if (lootGroupId != 0)
+				{
+					GroupTable::const_iterator i = m_groups.find(lootGroupId);
+					if (i != m_groups.end())
+					{
+						const Group* group = i->second.get();
+						const LevelBucket* levelBucket = aLevel != 0 ? group->GetLevelBucket(aLevel) : NULL;
+
+						uint32_t itemId = 0;
+
+						if (levelBucket != NULL)
+						{
+							size_t totalItemCount = group->m_defaultLevelBucket.m_itemIds.size() + levelBucket->m_itemIds.size();
+							assert(totalItemCount > 0);
+							std::uniform_int_distribution<size_t> d(0, totalItemCount - 1);
+							size_t roll = d(aRandom);
+							if (roll < group->m_defaultLevelBucket.m_itemIds.size())
+								itemId = group->m_defaultLevelBucket.m_itemIds[roll];
+							else
+								itemId = levelBucket->m_itemIds[roll - group->m_defaultLevelBucket.m_itemIds.size()];
+						}
+						else if (group->m_defaultLevelBucket.m_itemIds.size() > 0)
+						{
+							std::uniform_int_distribution<size_t> d(0, group->m_defaultLevelBucket.m_itemIds.size() - 1);
+							size_t roll = d(aRandom);
+							itemId = group->m_defaultLevelBucket.m_itemIds[roll];
+						}
+
+						if (itemId != 0)
+						{
+							tpublic::ItemInstance itemInstance;
+							itemInstance.m_itemId = itemId;
+							aItemCallback(itemInstance);
+						}
+					}
 				}
 			}
-
-			if(lootGroupId != 0)
-			{
-				GroupTable::const_iterator i = m_groups.find(lootGroupId);
-				if(i != m_groups.end())
-				{
-					const Group* group = i->second.get();
-					const LevelBucket* levelBucket = aLevel != 0 ? group->GetLevelBucket(aLevel) : NULL;
-
-					uint32_t itemId = 0;
-
-					if(levelBucket != NULL)
-					{
-						size_t totalItemCount = group->m_defaultLevelBucket.m_itemIds.size() + levelBucket->m_itemIds.size();
-						assert(totalItemCount > 0);
-						std::uniform_int_distribution<size_t> d(0, totalItemCount - 1);
-						size_t roll = d(aRandom);
-						if(roll < group->m_defaultLevelBucket.m_itemIds.size())
-							itemId = group->m_defaultLevelBucket.m_itemIds[roll];
-						else
-							itemId = levelBucket->m_itemIds[roll - group->m_defaultLevelBucket.m_itemIds.size()];
-					}
-					else if(group->m_defaultLevelBucket.m_itemIds.size() > 0)
-					{
-						std::uniform_int_distribution<size_t> d(0, group->m_defaultLevelBucket.m_itemIds.size() - 1);
-						size_t roll = d(aRandom);
-						itemId = group->m_defaultLevelBucket.m_itemIds[roll];
-					}
-
-					if(itemId != 0)
-					{
-						tpublic::ItemInstance itemInstance;
-						itemInstance.m_itemId = itemId;
-						aItemCallback(itemInstance);
-					}
-				}
-			}						
 		}
 	}
 

@@ -126,6 +126,7 @@ sprites:
 	sprite man_15: { dead: man_15_dead tags: [ male human ] }
 	sprite man_16: { dead: man_16_dead tags: [ male human ] }
 	sprite zombie_1: { dead: zombie_1_dead tags: [ undead ] }
+	sprite woman_6: { dead: woman_6_dead tags: [ female human ] }
 
 	cursor: { position: [ 0 112 ] }
 
@@ -135,6 +136,7 @@ sprites:
 	sprite man_15_dead: { }
 	sprite man_16_dead: { }
 	sprite zombie_1_dead: { }
+	sprite woman_6_dead: { }
 	
 }
 
