@@ -38,7 +38,7 @@ objective .aghina_1:
 	
 	maps: [ open_world ]
 	
-	manual: { }
+	manual_boolean: { }
 }
 
 entity .camus:

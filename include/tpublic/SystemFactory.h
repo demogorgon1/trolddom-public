@@ -10,6 +10,7 @@
 #include "Systems/Openable.h"
 #include "Systems/Rage.h"
 #include "Systems/Shrine.h"
+#include "Systems/Trigger.h"
 
 #include "System.h"
 
@@ -35,6 +36,7 @@ namespace tpublic
 			_Register<Systems::Openable>();
 			_Register<Systems::Rage>();
 			_Register<Systems::Shrine>();
+			_Register<Systems::Trigger>();
 		}
 
 		~SystemFactory()

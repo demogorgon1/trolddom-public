@@ -334,6 +334,11 @@ map_entity_spawn .gnome_1_quest_item:
 	entity .gnome_1_quest_item: { init_state: default }
 }
 
+map_entity_spawn .zumhorn_1:
+{
+	entity .zumhorn_1: { init_state: default }
+}
+
 map_player_spawn .player_spawn:
 {
 }
@@ -499,6 +504,7 @@ map_palette .stuff:
 	entity_spawn .elysia_quest_item_2: [ 54 13 169 ]		
 	entity_spawn .werner_quest_item: [ 54 104 169 ]		
 	entity_spawn .gnome_1_quest_item: [ 53 13 162 ]		
+	entity_spawn .zumhorn_1: [ 40 50 219 ]
 	entity_spawn .stash: [ 0 43 66 ]		
 	entity_spawn .furnace: [ 100 43 66 ]		
 	entity_spawn .anvil: [ 150 43 66 ]		

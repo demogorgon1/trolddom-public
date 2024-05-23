@@ -20,6 +20,7 @@ namespace tpublic
 			ID_GATEWAY,
 			ID_RAGE,
 			ID_DOOR,
+			ID_TRIGGER,
 
 			NUM_IDS
 		};
@@ -37,7 +38,8 @@ namespace tpublic
 			"shrine",
 			"gateway",
 			"rage",
-			"door"
+			"door",
+			"trigger"
 		};
 
 		static_assert(sizeof(SYSTEM_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

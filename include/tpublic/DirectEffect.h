@@ -93,6 +93,7 @@ namespace tpublic
 			ID_SPAWN_ENTITY,
 			ID_REMOVE_AURA,
 			ID_LEARN_PROFESSION_ABILITY,
+			ID_ACTIVATE_TRIGGER,
 
 			NUM_IDS
 		};
@@ -115,7 +116,8 @@ namespace tpublic
 			"interrupt",
 			"spawn_entity",
 			"remove_aura",
-			"learn_profession_ability"
+			"learn_profession_ability",
+			"activate_trigger"
 		};
 
 		static_assert(sizeof(EFFECT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

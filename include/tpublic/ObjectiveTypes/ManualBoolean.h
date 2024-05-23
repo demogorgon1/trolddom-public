@@ -5,15 +5,15 @@
 namespace tpublic::ObjectiveTypes
 {
 
-	class Manual
+	class ManualBoolean
 		: public ObjectiveTypeBase
 	{
 	public:
-		static const ObjectiveType::Id ID = ObjectiveType::ID_MANUAL;
+		static const ObjectiveType::Id ID = ObjectiveType::ID_MANUAL_BOOLEAN;
 		static const uint32_t FLAGS = FLAG_UNMANAGED | FLAG_BOOLEAN;
 
-								Manual();
-		virtual					~Manual();
+								ManualBoolean();
+		virtual					~ManualBoolean();
 
 		// ObjectiveTypeBase implementation
 		void					FromSource(

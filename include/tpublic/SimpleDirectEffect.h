@@ -22,6 +22,7 @@ namespace tpublic
 			ID_EDIT_PLAYER_WORLDS,
 			ID_PASS,
 			ID_RESURRECT,
+			ID_ACTIVATE_TRIGGER,
 
 			NUM_IDS
 		};
@@ -46,7 +47,8 @@ namespace tpublic
 			{ "start_quest",		DataType::ID_QUEST },
 			{ "edit_player_worlds",	DataType::INVALID_ID },
 			{ "pass",				DataType::INVALID_ID },
-			{ "resurrect",			DataType::INVALID_ID }
+			{ "resurrect",			DataType::INVALID_ID },
+			{ "activate_trigger",	DataType::INVALID_ID }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

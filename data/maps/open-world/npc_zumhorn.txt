@@ -8,6 +8,7 @@ dialogue_screen .zumhorn_greetings:
 	options:
 	[
 		{ quest<completion_only>: .simheist_3 }
+		{ quest: .zumhorn_1 }
 	]
 }
 
@@ -30,3 +31,90 @@ entity .zumhorn: !NPC
 	_not_pushable: true	
 }
 
+############################################################
+# Quest 1
+
+objective .zumhorn_1:
+{
+	string: "Pools Cleansed"
+	
+	maps: [ open_world ]
+	
+	manual_counter:
+	{
+		count: 5
+	}
+}
+
+cooldown .zumhorn_1:
+{
+	duration: 40
+}
+
+ability .zumhorn_1:
+{
+	string: "Vial of Cleansing"
+	description: "Cleanse pool of water."
+	flags: [ target_self target_aoe target_aoe_hostile item ]
+	icon: icon_green_bottle
+	cooldowns: [ global .zumhorn_1 ]	
+	states: [ default ]
+	sound_effects: { use_local: [ drink_1 ] }
+	aoe_radius: 8
+	aoe_cap: 1
+	aoe_requirement target<must_be_type>: { id: .zumhorn_1 }
+	cast_time: 20	
+	direct_effect simple<activate_trigger>: { }
+}
+
+item .zumhorn_1:
+{
+	binds: when_picked_up
+	type: miscellaneous
+	flags: [ unique not_sellable ]
+	item_level: 1
+	icon: icon_green_bottle		
+	string: "Vial of Cleansing"
+	use_ability: .zumhorn_1
+}
+
+entity .zumhorn_1:
+{
+	components:
+	{
+		position: { }		
+		visibility: { }		
+		trigger: { lock_out_ticks: 6000 trigger_manual_objective: .zumhorn_1 }
+		combat_public: { faction: monsters }
+	}
+}
+
+quest .zumhorn_1:
+{
+	string: "Cleansing the Waters"
+
+	text:
+	[
+		"Cleanse the pools within the ancient forest."
+	]
+	
+	description: 
+	[
+		"The blessed water of this forest protects it from outside interference, magical or otherwise. Somehow the waters have become tainted and have lost some of their powers."
+		"I need you take this vial and pour a few drops into the other pools of water. This will revitalize the forest until we get to the roots of the corruption."
+	]
+
+	progress:
+	[
+		"Do you feel the mist on your skin?"
+	]
+	
+	completion:
+	[
+		"This is good."
+	]
+	
+	level: 9
+	quest_items: [ .zumhorn_1 ]
+	objectives: [ .zumhorn_1 ]
+}

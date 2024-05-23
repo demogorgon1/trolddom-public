@@ -14,7 +14,8 @@ namespace tpublic
 			ID_COLLECT_ITEMS,
 			ID_USE_ABILITY,
 			ID_DIALOGUE_TRIGGER,
-			ID_MANUAL,
+			ID_MANUAL_BOOLEAN,
+			ID_MANUAL_COUNTER,
 
 			NUM_IDS
 		};
@@ -27,7 +28,8 @@ namespace tpublic
 			"collect_items",
 			"use_ability",
 			"dialogue_trigger",
-			"manual"
+			"manual_boolean",
+			"manual_counter"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

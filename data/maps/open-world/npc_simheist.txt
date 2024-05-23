@@ -153,7 +153,7 @@ quest .simheist_3:
 	
 	completion:
 	[
-		"Greetings, honourable $class$."
+		"Greetings, honourable $class$. Gaze upon these clear waters with your soul and you will receive salvation."
 	]
 
 	level: 9

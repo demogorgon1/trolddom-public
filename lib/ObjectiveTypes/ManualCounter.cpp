@@ -1,6 +1,6 @@
 #include "../Pcheader.h"
 
-#include <tpublic/ObjectiveTypes/Manual.h>
+#include <tpublic/ObjectiveTypes/ManualCounter.h>
 
 #include <tpublic/EntityInstance.h>
 #include <tpublic/ObjectiveInstanceBase.h>
@@ -9,12 +9,12 @@
 namespace tpublic::ObjectiveTypes
 {
 
-	class Manual::Instance
+	class ManualCounter::Instance
 		: public ObjectiveInstanceBase
 	{
 	public:
 		Instance(
-			const Manual*					aObjective)
+			const ManualCounter*			aObjective)
 			: m_objective(aObjective)
 		{
 
@@ -30,34 +30,34 @@ namespace tpublic::ObjectiveTypes
 		GetProgress(
 			Progress&						aOut) override
 		{
-			aOut = { m_completed ? 1UL : 0UL, 1UL };
+			aOut = { m_count, m_objective->m_count };
 			return true;
 		}
 
 		bool	
 		IsCompleted() const override
 		{
-			return m_completed;
+			return m_count == m_objective->m_count;
 		}
 
 		uint32_t				
 		GetHash() const override
 		{
-			return m_completed ? 1 : 0;
+			return m_count;
 		}
 
 		void	
 		ToStream(
 			IWriter*						aWriter) const override
 		{
-			aWriter->WriteBool(m_completed);
+			aWriter->WriteUInt(m_count);
 		}
 		
 		bool	
 		FromStream(
 			IReader*						aReader) override
 		{
-			if(!aReader->ReadBool(m_completed))
+			if(!aReader->ReadUInt(m_count))
 				return false;
 			return true;
 		}
@@ -65,28 +65,28 @@ namespace tpublic::ObjectiveTypes
 		void					
 		OnCompleteManualObjective() override
 		{
-			if(!m_completed)
+			if(m_count < m_objective->m_count)
 			{
-				m_completed = true;
+				m_count++;
 				OnUpdate();
 			}
 		}
 
 	private:
 		
-		const Manual*		m_objective = NULL;
-		bool				m_completed = false;
+		const ManualCounter*	m_objective = NULL;
+		uint32_t				m_count = 0;
 	};
 
 	//-------------------------------------------------------------------------------------------
 
-	Manual::Manual()
+	ManualCounter::ManualCounter()
 		: ObjectiveTypeBase(ID, FLAGS)
 	{
 
 	}
 	
-	Manual::~Manual()
+	ManualCounter::~ManualCounter()
 	{
 
 	}
@@ -94,31 +94,37 @@ namespace tpublic::ObjectiveTypes
 	//-------------------------------------------------------------------------------------------
 
 	void		
-	Manual::FromSource(
+	ManualCounter::FromSource(
 		const SourceNode*					aSource)
 	{
 		aSource->ForEachChild([&](
 			const SourceNode* aChild)
 		{
-			TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());							
+			if(aChild->m_name == "count")
+				m_count = aChild->GetUInt32();
+			else
+				TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());							
 		});
 	}
 
 	void		
-	Manual::ToStream(
-		IWriter*							/*aWriter*/) 
+	ManualCounter::ToStream(
+		IWriter*							aWriter) 
 	{
+		aWriter->WriteUInt(m_count);
 	}
 	
 	bool		
-	Manual::FromStream(
-		IReader*							/*aReader*/) 
+	ManualCounter::FromStream(
+		IReader*							aReader) 
 	{
+		if(!aReader->ReadUInt(m_count))
+			return false;
 		return true;
 	}
 
 	ObjectiveInstanceBase* 
-	Manual::CreateInstance() const 
+	ManualCounter::CreateInstance() const 
 	{
 		return new Instance(this);
 	}

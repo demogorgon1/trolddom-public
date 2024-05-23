@@ -46,6 +46,7 @@
 #include <tpublic/Components/ThreatSource.h>
 #include <tpublic/Components/ThreatTarget.h>
 #include <tpublic/Components/Trade.h>
+#include <tpublic/Components/Trigger.h>
 #include <tpublic/Components/VendorBuyback.h>
 #include <tpublic/Components/VisibleAuras.h>
 #include <tpublic/Components/Visibility.h>
@@ -105,6 +106,7 @@ namespace tpublic
 		_Register<Components::ThreatSource>();
 		_Register<Components::ThreatTarget>();
 		_Register<Components::Trade>();
+		_Register<Components::Trigger>();
 		_Register<Components::VendorBuyback>();
 		_Register<Components::VisibleAuras>();
 		_Register<Components::Visibility>();
