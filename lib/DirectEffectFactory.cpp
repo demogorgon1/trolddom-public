@@ -1,6 +1,5 @@
 #include "Pcheader.h"
 
-#include <tpublic/DirectEffects/ActivateTrigger.h>
 #include <tpublic/DirectEffects/ApplyAura.h>
 #include <tpublic/DirectEffects/ConsumeAndProduce.h>
 #include <tpublic/DirectEffects/Damage.h>
@@ -22,7 +21,6 @@ namespace tpublic
 
 	DirectEffectFactory::DirectEffectFactory()
 	{
-		_Register<DirectEffects::ActivateTrigger>();
 		_Register<DirectEffects::ApplyAura>();
 		_Register<DirectEffects::ConsumeAndProduce>();
 		_Register<DirectEffects::Damage>();

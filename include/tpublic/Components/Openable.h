@@ -27,7 +27,8 @@ namespace tpublic
 					TYPE_MINE,
 					TYPE_CATCH,
 					TYPE_PICK_UP,
-					TYPE_INSPECT
+					TYPE_INSPECT,
+					TYPE_TOUCH
 				};
 
 				void
@@ -47,6 +48,8 @@ namespace tpublic
 						m_type = TYPE_PICK_UP;
 					else if (t == "inspect")
 						m_type = TYPE_INSPECT;
+					else if (t == "touch")
+						m_type = TYPE_TOUCH;
 					else
 						TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid verb.", aSource->GetIdentifier());
 				}
@@ -78,6 +81,7 @@ namespace tpublic
 					case TYPE_CATCH:	return "Catch";
 					case TYPE_PICK_UP:	return "Pick Up";
 					case TYPE_INSPECT:	return "Inspect";
+					case TYPE_TOUCH:	return "Touch";
 					default:			break;
 					}
 					assert(false);
@@ -105,7 +109,8 @@ namespace tpublic
 				FIELD_SOUND,
 				FIELD_REQUIRED_QUEST_ID,
 				FIELD_COMPLETE_MANUAL_OBJECTIVE_ID,
-				FIELD_TRIGGER_ABILITY_ID
+				FIELD_TRIGGER_ABILITY_ID,
+				FIELD_REQUIRED_INCOMPLETE_QUEST_OBJECTIVE_ID
 			};
 
 			static void
@@ -128,6 +133,7 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_SOUND, "sound", offsetof(Openable, m_soundId))->SetDataType(DataType::ID_SOUND);
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_COMPLETE_MANUAL_OBJECTIVE_ID, "complete_manual_objective", offsetof(Openable, m_completeManualObjectiveId))->SetDataType(DataType::ID_OBJECTIVE);
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_TRIGGER_ABILITY_ID, "trigger_ability", offsetof(Openable, m_triggerAbilityId))->SetDataType(DataType::ID_ABILITY);
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_REQUIRED_INCOMPLETE_QUEST_OBJECTIVE_ID, "required_incomplete_quest_objective", offsetof(Openable, m_requiredIncompleteQuestObjectiveId))->SetDataType(DataType::ID_OBJECTIVE);
 			}
 
 			// Public data
@@ -137,6 +143,7 @@ namespace tpublic
 			uint32_t					m_requiredProfessionId = 0;
 			uint32_t					m_requiredProfessionSkill = 0;
 			uint32_t					m_requiredQuestId = 0;
+			uint32_t					m_requiredIncompleteQuestObjectiveId = 0;
 			uint32_t					m_range = 1;
 			bool						m_instant = false;
 			bool						m_despawn = false;

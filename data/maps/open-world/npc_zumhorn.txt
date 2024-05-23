@@ -9,6 +9,7 @@ dialogue_screen .zumhorn_greetings:
 	[
 		{ quest<completion_only>: .simheist_3 }
 		{ quest: .zumhorn_1 }
+		{ quest: .zumhorn_2 }
 	]
 }
 
@@ -118,3 +119,106 @@ quest .zumhorn_1:
 	quest_items: [ .zumhorn_1 ]
 	objectives: [ .zumhorn_1 ]
 }
+
+############################################################
+# Quest 2
+
+objective .zumhorn_2:
+{
+	string: "Avatar of Corruption Defeated"
+	
+	maps: [ open_world ]
+	
+	kill_npc:
+	{
+		entities: [ .zumhorn_2_boss ]
+		count: 1
+	}
+}
+
+entity .zumhorn_2:
+{
+	string: "Young Tree"
+	systems: [ openable ]
+	components:
+	{
+		position: { }				
+		sprite: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ tree_1 ]
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}	
+		openable:
+		{
+			range: 1
+			required_quest: .zumhorn_2
+			trigger_ability: .zumhorn_2
+			verb: touch
+			required_incomplete_quest_objective: .zumhorn_2
+		}
+	}
+}
+
+ability .zumhorn_2:
+{
+	direct_effect spawn_entity:
+	{
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: .zumhorn_2_boss
+		map_entity_spawn: .zumhorn_2_boss
+	}
+}
+
+entity .zumhorn_2_boss: !NPC
+{
+	_string: "Avatar of Corruption"
+	_level: 9
+	_elite: true
+	_faction: monsters
+	_sprite: arcane_construct_2
+	_sprite_dead: arcane_construct_2_dead
+	_creature_type: elemental
+	_resource_health: 2.1
+	_weapon_damage: 2.2
+}
+
+quest .zumhorn_2:
+{
+	string: "Avatar of Corruption"
+
+	text:
+	[
+		"Touch the young tree located in the center of the woods and defeat the avatar of corruption."
+	]
+	
+	description: 
+	[
+		"With the water cleansed, one final task is ahead of you. You must find the lone young tree in the center of the woods and lay your hand on it. This wall cause corruption to materialize itself"
+		"as an avatar. You must defeat it."
+	]
+
+	progress:
+	[
+		"Are we there yet?"
+	]
+	
+	completion:
+	[
+		"Finally the trees can have some rest."
+	]
+	
+	level: 9
+	type: elite
+	objectives: [ .zumhorn_2 ]
+	prerequisites: [ .zumhorn_1 ] 
+}
+

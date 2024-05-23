@@ -178,6 +178,16 @@ map_entity_spawn .bonfire:
 	entity bonfire: { weight: 1 }
 }
 
+map_entity_spawn .zumhorn_2:
+{
+	entity .zumhorn_2: { weight: 1 init_state: default }
+}
+
+map_entity_spawn .zumhorn_2_boss:
+{
+	spawn_timer: { only_when_triggered: true }
+}
+
 map_entity_spawn .fireplace:
 {
 	entity fireplace: { weight: 1 }
@@ -511,6 +521,8 @@ map_palette .stuff:
 	entity_spawn .fireplace: [ 250 43 66 ]		
 	entity_spawn .fireplace_unlit: [ 250 243 66 ]		
 	entity_spawn .bonfire: [ 251 43 66 ]		
+	entity_spawn .zumhorn_2: [ 255 104 102 ]
+	entity_spawn .zumhorn_2_boss: [ 205 104 102 ]
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn dungeon_1_exit: [ 0 0 200 ]	
 	portal .dungeon_1_entrance: [ 0 234 0 ]	

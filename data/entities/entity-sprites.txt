@@ -129,6 +129,7 @@ sprites:
 	sprite woman_6: { dead: woman_6_dead tags: [ female human ] }
 	sprite goblin_boss_4: { dead: goblin_boss_4_dead tags: [ goblin melee boss ] }
 	sprite man_17: { dead: man_17_dead tags: [ male human ] }
+	sprite arcane_construct_2: { dead: arcane_construct_2_dead tags: [ melee ] }
 
 	cursor: { position: [ 0 112 ] }
 
@@ -141,6 +142,7 @@ sprites:
 	sprite woman_6_dead: { }
 	sprite goblin_boss_4_dead: { }
 	sprite man_17_dead: { }
+	sprite arcane_construct_2_dead: { }	
 	
 }
 
@@ -208,6 +210,7 @@ sprites:
 
 	cursor: { position: [ 0 48 ] }
 	sprite wild_herbs_2: { }
+	sprite tree_1: { }
 	
 }
 
