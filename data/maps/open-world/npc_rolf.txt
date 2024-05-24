@@ -1,0 +1,60 @@
+dialogue_screen .rolf_greetings:
+{
+	text: 
+	[	
+		"Greetings."
+	]		
+	
+	options:
+	[
+		{ quest<offer_only>: .rolf_1 requirement self<must_not_have_completed_quest>: { id: .frinrir_1 } requirement self<must_not_have_active_quest>: { id: .frinrir_1 } }
+	]
+}
+
+dialogue_root .rolf_dialogue:
+{
+	.rolf_greetings: { }
+}
+
+entity .rolf: !NPC
+{
+	_string: "Rolf"
+	_dialogue_root: .rolf_dialogue	
+	_sprite: man_2
+	_sprite_dead: man_2_dead	
+	_level: 10
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+##########################################################################################
+# Quest 1
+
+quest .rolf_1:
+{
+	string: "The Mountain Fortress"
+	text:
+	[
+		"Find the hermit in the mountain fortress and see if he needs any help."
+	]
+	
+	description: 
+	[
+		"You think it's weird that I live here in the middle of nowhere? Then you should go meet my friend who lives somewhere deep inside the mountain fortress the the east. I've heard it's not looking good these days,"
+		"maybe you can go see how he's doing?"
+	]
+
+	progress:
+	[
+		"Hmm?"
+	]
+	
+	completion:
+	[
+		"Did old Rolf send you? He shouldn't worry about me, I'm living the good life here."
+	]
+	
+	level: 9
+}

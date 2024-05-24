@@ -8,6 +8,7 @@ dialogue_screen .hermit_greetings:
 	options:
 	[
 		{ quest<completion_only>: .frinrir_1 }
+		{ quest<completion_only>: .rolf_1 }
 		{ quest: .hermit_1 }
 		{ quest: .hermit_2 }
 	]

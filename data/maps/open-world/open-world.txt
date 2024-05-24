@@ -163,6 +163,11 @@ map_entity_spawn .frinrir:
 	entity .frinrir: { weight: 1 }
 }
 
+map_entity_spawn .rolf:
+{
+	entity .rolf: { weight: 1 }
+}
+
 map_entity_spawn .hermit:
 {
 	entity .hermit: { weight: 1 }
@@ -313,6 +318,18 @@ map_entity_spawn .abandoned_keep_undead_9:
 	entity skeleton_9_a: { weight: 1 }
 	entity skeleton_9_b: { weight: 1 }
 	entity skeleton_9_c: { weight: 1 }
+}
+
+map_entity_spawn .wasteland_crab_men_10:
+{
+	entity wasteland_crab_man_10_a: { weight: 1 }
+	entity wasteland_crab_man_10_b: { weight: 1 }
+}
+
+map_entity_spawn .wasteland_undead_10:
+{
+	entity wasteland_undead_10_a: { weight: 1 }
+	entity wasteland_undead_10_b: { weight: 1 }
 }
 
 map_entity_spawn .ghastly_entity_9:
@@ -539,6 +556,7 @@ map_palette .stuff:
 	entity_spawn .zumhorn: [ 70 250 10 ]	
 	entity_spawn .frinrir: [ 80 250 10 ]	
 	entity_spawn .hermit: [ 90 250 10 ]	
+	entity_spawn .rolf: [ 100 250 10 ]	
 	entity_spawn .crab_man: [ 192 195 15 ]	
 	entity_spawn .crab_man_3: [ 192 15 15 ]	
 	entity_spawn .crab_man_4: [ 193 15 15 ]	
@@ -557,6 +575,8 @@ map_palette .stuff:
 	entity_spawn .abandoned_keep_undead_9: [ 223 30 95 ]		
 	entity_spawn .skeleton_chef_9: [ 233 30 95 ]		
 	entity_spawn .ghastly_entity_9: [ 233 130 95 ]		
+	entity_spawn .wasteland_undead_10: [ 243 32 95 ]		
+	entity_spawn .wasteland_crab_men_10: [ 95 32 243 ]		
 	entity_spawn .hermit_trigger: [ 253 30 95 ]		
 	entity_spawn .hogroth_the_slippery: [ 213 130 95 ]		
 	entity_spawn .dungeon_crab_man_9: [ 164 127 155 ]			

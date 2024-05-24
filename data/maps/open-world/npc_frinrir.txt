@@ -7,7 +7,7 @@ dialogue_screen .frinrir_greetings:
 	
 	options:
 	[
-		{ quest<offer_only>: .frinrir_1 }
+		{ quest<offer_only>: .frinrir_1 requirement self<must_not_have_completed_quest>: { id: .rolf_1 } requirement self<must_not_have_active_quest>: { id: .rolf_1 } }
 	]
 }
 

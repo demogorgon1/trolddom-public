@@ -850,3 +850,75 @@ entity dungeon_crab_man_9: !NPC
 	_creature_type: humanoid
 	_default_behavior_state: .wandering_short
 }
+
+##########################################################################################
+# Wasteland Undead
+
+loot_table .wasteland_undead: 
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]		
+}
+
+entity wasteland_undead_10_a: !NPC
+{
+	_string: "Wasteland Zombie"
+	_level: 10
+	_faction: monsters
+	_sprite: zombie_1
+	_sprite_dead: zombie_1_dead
+	_loot_table: .wasteland_undead
+	_creature_type: undead
+}
+
+entity wasteland_undead_10_b: !NPC
+{
+	_string: "Wasteland Zombie"
+	_level: 10
+	_faction: monsters
+	_sprite: zombie_1
+	_sprite_dead: zombie_1_dead
+	_loot_table: .wasteland_undead
+	_creature_type: undead
+}
+
+##########################################################################################
+# Wasterland Crab Men
+
+loot_table .wasteland_crab_men: 
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]		
+}
+
+entity wasteland_crab_man_10_a: !NPC
+{
+	_string: "Crab Destroyer"
+	_level: 10
+	_faction: monsters
+	_sprite: crab_monster_1
+	_sprite_dead: crab_monster_1_dead
+	_loot_table: .wasteland_crab_men
+	_creature_type: humanoid
+	_default_behavior_state: .wandering_short	
+}
+
+entity wasteland_crab_man_10_b: !NPC
+{
+	_string: "Crab Spellflinger"
+	_level: 10
+	_faction: monsters
+	_resource_mana: 1
+	_sprite: crab_caster_1
+	_sprite_dead: crab_caster_1_dead
+	_loot_table: .wasteland_crab_men
+	_creature_type: humanoid
+	_abilities: [ { id: npc_firebolt } { id: npc_attack } ]
+	_default_behavior_state: .wandering_short	
+}
