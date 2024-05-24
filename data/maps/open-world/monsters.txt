@@ -748,3 +748,105 @@ entity hogroth_the_slippery: !NPC
 	_weapon_damage: 2.2
 }
 
+##########################################################################################
+# Abandoned Keep Undead
+
+loot_table .abandoned_keep_undead: 
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]		
+}
+
+loot_table .skeleton_chef: 
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]		
+}
+
+entity skeleton_9_a: !NPC
+{
+	_string: "Risen Warrior"
+	_level: 9
+	_faction: monsters
+	_sprite: skeleton_warrior_1
+	_sprite_dead: skeleton_warrior_1_dead
+	_loot_table: .abandoned_keep_undead
+	_creature_type: undead
+}
+
+entity skeleton_9_b: !NPC
+{
+	_string: "Risen Warrior"
+	_level: 9
+	_faction: monsters
+	_sprite: skeleton_warrior_2
+	_sprite_dead: skeleton_warrior_2_dead
+	_loot_table: .abandoned_keep_undead
+	_creature_type: undead
+}
+
+entity skeleton_9_c: !NPC
+{
+	_string: "Risen Mage"
+	_level: 9
+	_faction: monsters
+	_sprite: skeleton_caster_1
+	_sprite_dead: skeleton_caster_1_dead
+	_loot_table: .abandoned_keep_undead
+	_creature_type: undead
+	_abilities: [ { id: npc_firebolt } { id: npc_attack } ]
+}
+
+entity ghastly_entity_9: !NPC
+{
+	_string: "Ghastly Entity"
+	_level: 9
+	_faction: monsters
+	_sprite: ghost_1
+	_sprite_dead: ghost_1_dead
+	_loot_table: .abandoned_keep_undead
+	_creature_type: undead
+	_abilities: [ { id: npc_attack } ]
+}
+
+entity skeleton_chef_9: !NPC
+{
+	_string: "Risen Chef"
+	_level: 9
+	_faction: monsters
+	_sprite: skeleton_chef
+	_sprite_dead: skeleton_chef_dead
+	_loot_table: .skeleton_chef
+	_creature_type: undead
+	_abilities: [ { id: npc_attack } ]
+}
+
+##########################################################################################
+# Dungeon Crab Man
+
+loot_table .dungeon_crab_man_9: 
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+entity dungeon_crab_man_9: !NPC
+{
+	_string: "Crab Ruffian"
+	_level: 9
+	_faction: monsters
+	_sprite: crab_monster_1
+	_sprite_dead: crab_monster_1_dead
+	_loot_table: .dungeon_crab_man_9
+	_creature_type: humanoid
+	_default_behavior_state: .wandering_short
+}

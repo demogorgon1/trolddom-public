@@ -67,7 +67,7 @@ namespace tpublic::Systems
 		if (aEntityState == EntityState::ID_DESPAWNING)
 			return aTicksInState < DESPAWN_TICKS ? EntityState::CONTINUE : EntityState::ID_DESPAWNED;
 
-		if(aContext->m_tick > environment->m_despawnTick)
+		if(aContext->m_tick > environment->m_despawnTick && environment->m_duration != 0)
 			return EntityState::ID_DESPAWNING;
 
 		const Components::Position* position = GetComponent<Components::Position>(aComponents);
@@ -85,7 +85,13 @@ namespace tpublic::Systems
 			if(ability->TargetAOE() && ability->TargetSelf())
 			{
 				// This is a self targeted AOE ability
-				aContext->m_eventQueue->EventQueueAbility(owner->m_ownerEntityInstanceId, aEntityInstanceId, Vec2(), ability, ItemInstanceReference(), NULL);
+				aContext->m_eventQueue->EventQueueAbility(
+					owner->m_ownerEntityInstanceId != 0 ? owner->m_ownerEntityInstanceId : aEntityInstanceId,
+					aEntityInstanceId, 
+					Vec2(), 
+					ability, 
+					ItemInstanceReference(), 
+					NULL);
 			}
 			else
 			{

@@ -57,7 +57,7 @@ namespace tpublic
 			case Requirement::TYPE_MUST_HAVE_COMPLETED_QUEST:
 			case Requirement::TYPE_MUST_NOT_HAVE_COMPLETED_QUEST:
 				{
-					if(aRequirement->m_target != Requirement::TARGET_SELF)
+					if (!entity->IsPlayer())
 						return false;
 
 					const Components::CompletedQuests* completedQuests = entity->GetComponent<Components::CompletedQuests>();
@@ -72,7 +72,7 @@ namespace tpublic
 			case Requirement::TYPE_MUST_HAVE_ACTIVE_QUEST:
 			case Requirement::TYPE_MUST_NOT_HAVE_ACTIVE_QUEST:
 				{
-					if(aRequirement->m_target != Requirement::TARGET_SELF)
+					if(!entity->IsPlayer())
 						return false;
 
 					const Components::ActiveQuests* activeQuests = entity->GetComponent<Components::ActiveQuests>();
@@ -287,6 +287,7 @@ namespace tpublic
 
 		bool	
 		CheckOpenable(
+			const Manifest*										aManifest,
 			const EntityInstance*								aSelf,
 			const EntityInstance*								aTarget,
 			bool*												aOutInstant)
@@ -332,6 +333,9 @@ namespace tpublic
 				if(!activeQuests->HasQuest(openable->m_requiredQuestId))
 					return false;
 			}
+
+			if(!CheckList(aManifest, openable->m_requirements, aSelf, aTarget, NULL))
+				return false;
 
 			if(aOutInstant != NULL)
 				*aOutInstant = openable->m_instant;

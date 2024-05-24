@@ -32,8 +32,8 @@ namespace tpublic
 			}
 
 			// Public data
-			int32_t		m_lockOutTicks = 0;
-			uint32_t	m_triggerManualObjectiveId = 0;
+			int32_t			m_lockOutTicks = 0;
+			uint32_t		m_triggerManualObjectiveId = 0;
 
 			// Internal
 			typedef std::unordered_map<uint32_t, int32_t> LockOutTable;

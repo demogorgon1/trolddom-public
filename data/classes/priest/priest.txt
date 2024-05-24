@@ -37,6 +37,7 @@ class priest:
 		wis_to_mana: [ 10 1 ]
 		spi_to_mana_regen_per_5_sec: [ 2 3 ]
 		spi_to_health_regen: [ 1 1 ]
+		str_to_block_value: [ 1 20 ]
 	}	
 
 	level_progression:

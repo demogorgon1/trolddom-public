@@ -313,6 +313,7 @@ namespace tpublic
 				}
 				else
 				{
+					TP_VERIFY(c != '\n', debugInfo, "New-line in string.");
 					buffer.push_back(c);
 				}
 				break;

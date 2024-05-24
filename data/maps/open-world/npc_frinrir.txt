@@ -1,0 +1,74 @@
+dialogue_screen .frinrir_greetings:
+{
+	text: 
+	[	
+		"Greetings."
+	]		
+	
+	options:
+	[
+		{ quest<offer_only>: .frinrir_1 }
+	]
+}
+
+dialogue_root .frinrir_dialogue:
+{
+	.frinrir_greetings: { }
+}
+
+entity .frinrir: !NPC
+{
+	_string: "Frinrir"
+	_dialogue_root: .frinrir_dialogue	
+	_sprite: man_18
+	_sprite_dead: man_18_dead	
+	_level: 10
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+##########################################################################################
+# Quest 1
+
+item .frinrir_1:
+{
+	binds: when_picked_up
+	type: miscellaneous
+	flags: [ unique not_sellable ]
+	item_level: 1
+	icon: icon_green_bag		
+	string: "Supplies"
+}
+
+quest .frinrir_1:
+{
+	string: "The Hermit"
+	text:
+	[
+		"Find the hermit in the mountain fortress and deliver him the supplies."
+	]
+	
+	description: 
+	[
+		"The old mountain fortress to the north have been affected by the leaking arcane forces of the area and the dead has risen from the catacombs."
+		"Most people who be smart enough to just stay clear of them, but for some reason the old hermit, who has been living in there for ages, refuses"
+		"to leave. Maybe you can deliver these supplies to him and see how he's holding up?\n"
+		"\n"
+		"You'll find the entrance up north if you follow the road."
+	]
+
+	progress:
+	[
+		"Hmm?"
+	]
+	
+	completion:
+	[
+		"Oh, this is great. Thanks."
+	]
+
+	quest_items: [ .frinrir_1 ]
+	level: 9
+}

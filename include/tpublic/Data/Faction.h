@@ -137,6 +137,7 @@ namespace tpublic
 
 			// Helpers
 			bool IsNeutralOrFriendly() const { return (m_flags & FLAG_NEUTRAL) != 0 || (m_flags & FLAG_FRIENDLY) != 0; }
+			bool IsFriendly() const { return (m_flags & FLAG_FRIENDLY) != 0; }
 
 			// Public data
 			uint8_t						m_flags;

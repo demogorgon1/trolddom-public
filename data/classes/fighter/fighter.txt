@@ -50,6 +50,7 @@ class fighter:
 		str_to_parry: [ 1 40 ]
 		con_to_health: [ 10 1 ]		
 		spi_to_health_regen: [ 1 1 ]
+		str_to_block_value: [ 1 20 ]
 	}
 
 	level_progression:

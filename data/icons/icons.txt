@@ -276,6 +276,7 @@ sprites:
 	sprite icon_residue_1 : { tags: [ icon ] }
 	sprite icon_ear_1 : { tags: [ icon ] }
 	sprite icon_ear_2 : { tags: [ icon ] }
+	sprite icon_key_1 : { tags: [ icon ] }
 	
 }
 

@@ -1,0 +1,202 @@
+dialogue_screen .hermit_greetings:
+{
+	text: 
+	[	
+		"Rare to have guests in here."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .frinrir_1 }
+		{ quest: .hermit_1 }
+		{ quest: .hermit_2 }
+	]
+}
+
+dialogue_root .hermit_dialogue:
+{
+	.hermit_greetings: { }
+}
+
+entity .hermit: !NPC
+{
+	_string: "The Hermit"
+	_dialogue_root: .hermit_dialogue	
+	_sprite: man_3
+	_sprite_dead: man_3_dead	
+	_level: 10
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+##########################################################################################
+# Quest 1
+
+objective .hermit_1:
+{
+	string: "Ghastly Entity Vanquished"
+	
+	maps: [ open_world ]
+	
+	kill_npc:
+	{
+		entities: [ ghastly_entity_9 ]
+		count: 1
+	}
+}
+
+quest .hermit_1:
+{
+	string: "Ghastly Entity"
+
+	text:
+	[
+		"Find the ghastly entity and destroy it."
+	]
+	
+	description: 
+	[
+		"Not only risen skeletons haunt these halls. I've seen a ghastly entity, some kind of spiritual remnant, more around in the shadows. I just need to lock my door to avoid skeletons, but ghosts?"
+		"Who knows what will keep them out! Can you find it and get rid of it?"
+	]
+
+	progress:
+	[
+		"Ghosts, what do we need them for?"
+	]
+	
+	completion:
+	[
+		"Now I'll be able to sleep better at night, thanks!"
+	]
+
+	objectives: [ .hermit_1 ]
+	level: 9
+}
+
+##########################################################################################
+# Quest 2
+
+entity .hermit_door:
+{
+	string: "Gate"
+	
+	systems: [ door ]
+	
+	components:
+	{
+		position: { }		
+		sound_source: { }
+		openable: 
+		{
+			requirements:
+			{
+				self<must_have_item>: { id: .hermit_2 }
+			}
+			sound: inventory_1
+		}
+		sprite: 
+		{ 
+			animations:
+			[
+				{ states: [ default spawning ] frames: [ door_closed_1 ] z_offset: -3 }
+				{ states: [ dead ] frames: [ door_open_1 ] z_offset: -3 }
+			]		
+		}		
+	}
+}
+
+ability .hermit_trigger:
+{
+	flags: [ target_self target_aoe target_aoe_hostile ]
+	delay: 3
+	aoe_radius: 5
+	aoe_requirement target<must_have_active_quest>: { id: .hermit_2 }	
+	direct_effect simple<activate_trigger>: { }
+}
+
+entity .hermit_trigger:
+{
+	systems: [ environment ]
+	
+	components:
+	{
+		owner: { }
+		position: { }		
+		visibility: { }
+		combat_public: 
+		{ 
+			faction: monsters # To allow AOE trigger to hit player
+		}
+		trigger: 
+		{ 
+			trigger_manual_objective: .hermit_2
+		}
+		environment: 
+		{
+			tick_interval: 25
+			duration: 0
+			ability: .hermit_trigger
+		}
+	}
+}
+
+item .hermit_2:
+{
+	binds: when_picked_up
+	type: miscellaneous
+	flags: [ unique not_sellable ]
+	item_level: 1
+	icon: icon_key_1
+	string: "Dungeon Key"
+}
+
+objective .hermit_2:
+{
+	string: "Dungeon Investigated"
+	
+	maps: [ open_world ]
+	
+	manual_boolean:
+	{
+	}
+}
+
+quest .hermit_2:
+{
+	string: "Strange Sounds"
+
+	text:
+	[
+		"Investigate strange sounds coming from the dungeon."
+	]
+	
+	description: 
+	[
+		"Since your so comfortable running around this place, maybe you can go check something else for me as well."
+		"A few nights ago some strange sounds started to come from the dungeon. Take this key to get down there and find out what is going on.\n"
+		"\n"
+		"You'll find the dungeon to the north."
+	]
+
+	progress:
+	[
+		"Got spooked?"
+	]
+	
+	completion:
+	[
+		"Crab men? Are you serious? You mean like men who are also crabs? That's just ridiculous. Anyway, let's keep that door locked.\n"
+		"\n"
+		"I don't think I need any more of your help for now, go back to Frinrir and tell me I'm fine."		
+	]
+
+	objectives: [ .hermit_2 ]
+	prerequisites: [ .hermit_1 ]
+	quest_items: [ .hermit_2 ]
+	level: 9
+}
+
+

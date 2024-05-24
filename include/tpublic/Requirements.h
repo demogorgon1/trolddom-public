@@ -28,6 +28,7 @@ namespace tpublic
 					const std::vector<const EntityInstance*>&			aSelves,
 					const EntityInstance*								aTarget);
 		bool	CheckOpenable(
+					const Manifest*										aManifest,
 					const EntityInstance*								aSelf,
 					const EntityInstance*								aTarget,
 					bool*												aOutInstant);
