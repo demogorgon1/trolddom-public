@@ -328,6 +328,7 @@ map_entity_spawn .hermit_trigger:
 map_entity_spawn .skeleton_chef_9:
 {
 	entity skeleton_chef_9: { weight: 1 }
+	spawn_timer: { min_delay: 300 cooldown_range_min: 600 cooldown_range_max: 1200 }
 }
 
 map_entity_spawn .hogroth_the_slippery:
