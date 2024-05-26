@@ -22,6 +22,16 @@ namespace tpublic
 		fclose(m_f);
 	}
 
+	void		
+	FileWriter::PrintF(
+		const char*		aFormat,
+		...)
+	{
+		char buffer[8192];
+		TP_STRING_FORMAT_VARARGS(buffer, sizeof(buffer), aFormat);
+		Write(buffer, strlen(buffer));
+	}
+
 	//------------------------------------------------------------------------
 
 	void		

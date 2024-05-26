@@ -17,6 +17,7 @@
 
 #include "FileWriter.h"
 #include "GenerationJob.h"
+#include "JSONManifest.h"
 #include "MapImageOutput.h"
 #include "PostProcessAbilities.h"
 #include "PostProcessEntities.h"
@@ -144,6 +145,17 @@ namespace tpublic
 		// Run generation jobs
 		for(std::unique_ptr<GenerationJob>& generationJob : generationJobs)
 			generationJob->Run(m_manifest, aGeneratedSourceOutputPath);
+
+		// Export JSON manifest
+		{
+			std::string spriteDataPath = aDataOutputPath;
+			spriteDataPath += "/sprites.bin";
+			JSONManifest jsonManifest(m_manifest, spriteDataPath.c_str());
+
+			std::string path = aDataOutputPath;
+			path += "/manifest.json";
+			jsonManifest.Export(path.c_str());
+		}
 
 		// Export manifest 
 		{

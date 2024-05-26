@@ -13,6 +13,10 @@ namespace tpublic
 						const char*			aPath);
 		virtual		~FileWriter();
 
+		void		PrintF(
+						const char*			aFormat,
+						...);
+
 		// IWriter implementation
 		void		Write(
 						const void*			aBuffer,
