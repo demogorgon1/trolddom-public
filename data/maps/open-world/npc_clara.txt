@@ -64,7 +64,7 @@ quest .clara_1:
 	
 	completion:
 	[
-		"Beautiful!"
+		"Thank you so much for your help with the potatoes! Here, take my special potato stew recipe. It's been in my family for generations. I hope you enjoy it as much as we do!"
 	]
 
 	prerequisites: [ .tom_1 ]
