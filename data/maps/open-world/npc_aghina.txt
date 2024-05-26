@@ -2,7 +2,7 @@ dialogue_screen .aghina_greetings:
 {
 	text: 
 	[	
-		"Greetings."
+		"Thank the stars you've arrived! We were ambushed by crab monsters. My friend is still back there, badly wounded. I barely managed to escape."
 	]
 	
 	options:
@@ -93,7 +93,7 @@ quest .aghina_1:
 	
 	completion:
 	[
-		"Nice."
+		"No... It can't be. He was like a brother to me. Thank you for trying. This place is more dangerous than we ever imagined."
 	]
 
 	objectives: [ .aghina_1 ]
