@@ -127,7 +127,7 @@ quest .elysia_1:
 	
 	completion:
 	[
-		"Nice."
+		"Ah, you made it! And look at all those mushrooms! I know that forest is perilous. Your efforts are greatly appreciated. Thank you!"
 	]
 
 	objectives: [ .elysia_1 ]
@@ -211,7 +211,7 @@ quest .elysia_2:
 	
 	completion:
 	[
-		"Nice."
+		"Back so soon? And with even more mushrooms? You're a true adventurer! These will definitely add some flavor to our stew. Thank you for going above and beyond!"
 	]
 
 	prerequisites: [ .elysia_1 ]
