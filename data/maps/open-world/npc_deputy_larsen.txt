@@ -72,7 +72,7 @@ quest .deputy_larsen_1:
 	
 	completion:
 	[
-		"Nice."
+		"You're back! And it looks like you took care of those crab monsters. Well done! The beach will be much safer now, thanks to you."
 	]
 
 	objectives: [ .deputy_larsen_1 ]
