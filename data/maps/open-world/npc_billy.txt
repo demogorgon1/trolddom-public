@@ -79,7 +79,7 @@ quest .billy_1:
 	
 	completion:
 	[
-		"Gee! I knew it! I wonder what they're up to?"
+		"Wait, you saw a gnome too? I knew it! They're real! I don't care what my dad says; those sneaky little pests are out there!"
 	]
 
 	prerequisites: [ .tom_1 ]
