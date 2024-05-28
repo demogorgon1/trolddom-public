@@ -14,6 +14,19 @@ dialogue_screen .ezekiel_benny:
 	]
 }
 
+dialogue_screen .ezekiel_benny_head:
+{
+	text: 
+	[	
+		"Is that... No! It can't be! Are those fangs? Definitely looks like it. Oh no..."
+	]
+	
+	options:
+	[
+		{ text: "Yeah, unfortunately..." script: trigger }		
+	]
+}
+
 dialogue_screen .ezekiel_vampires:
 {
 	text: 
@@ -43,8 +56,24 @@ dialogue_screen .ezekiel_greetings:
 		{ quest: .ezekiel_1 }
 		{ quest<offer_only>: .ezekiel_2 }
 		{ quest<offer_only>: .ezekiel_3 }
-		{ goto: .ezekiel_vampires text: "Any vampires around these parts?" }
-		{ goto: .ezekiel_benny text: "I think Benny might be a vampire." requirement self<must_have_completed_quest>: { id: .ezekiel_2 } }
+		{ quest<completion_only>: .benny_1 }
+
+		{ 
+			goto: .ezekiel_vampires text: "Any vampires around these parts?" 
+			requirement self<must_not_have_completed_quest>: { id: .benny_1 }   
+		}
+		
+		{ 
+			goto: .ezekiel_benny text: "I think Benny might be a vampire." 
+			requirement self<must_have_completed_quest>: { id: .ezekiel_2 }   
+			requirement self<must_not_have_completed_quest>: { id: .benny_1 }   
+			requirement self<must_not_have_active_quest>: { id: .benny_1 }   
+		}
+		
+		{ 
+			goto: .ezekiel_benny_head text: "I'm sorry about this, but look at what I have here..." 
+			requirement self<must_have_active_quest>: { id: .benny_1 }   
+		}		
 	]
 }
 
@@ -65,6 +94,7 @@ entity .ezekiel: !NPC
 	_creature_type: humanoid
 	_loot_table: .npc
 	_not_pushable: true	
+	_dialogue_scripts: [ trigger ]	
 }
 
 ############################################################

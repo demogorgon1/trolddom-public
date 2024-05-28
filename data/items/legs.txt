@@ -12,6 +12,7 @@ item legs_flimsy_mail_pants:
 item legs_heroic_ringmail_leggings:
 {
 	type: armor_mail
+	binds: when_picked_up
 	equipment_slots: [ legs ]
 	required_level: 5
 	icon: icon_mail_pants_1

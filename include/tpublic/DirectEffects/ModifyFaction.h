@@ -1,7 +1,5 @@
 #pragma once
 
-#include <tpublic/Data/Aura.h>
-
 #include "../DirectEffectBase.h"
 
 namespace tpublic
@@ -10,23 +8,23 @@ namespace tpublic
 	namespace DirectEffects
 	{
 
-		struct RemoveAura
+		struct ModifyFaction
 			: public DirectEffectBase
 		{
-			static const DirectEffect::Id ID = DirectEffect::ID_REMOVE_AURA;
+			static const DirectEffect::Id ID = DirectEffect::ID_MODIFY_FACTION;
 
-			RemoveAura()
+			ModifyFaction()
 			{
 
 			}
 
 			virtual 
-			~RemoveAura()
+			~ModifyFaction()
 			{
 
 			}
 
-			// EffectBase implementation
+			// DirectEffectBase implementation
 			void			FromSource(
 								const SourceNode*				aSource) override;
 			void			ToStream(
@@ -34,7 +32,7 @@ namespace tpublic
 			bool			FromStream(
 								IReader*						aStream) override;
 			Result			Resolve(
-								int32_t							aTick,	
+								int32_t							aTick,
 								std::mt19937&					aRandom,
 								const Manifest*					aManifest,
 								CombatEvent::Id					aId,
@@ -49,8 +47,8 @@ namespace tpublic
 								const IWorldView*				aWorldView) override;
 
 			// Public data
-			Data::Aura::Type		m_auraType = Data::Aura::INVALID_TYPE;
-			uint32_t				m_auraFlags = 0;
+			bool			m_targetSelf = false;
+			uint32_t		m_factionId = 0;
 		};
 
 	}

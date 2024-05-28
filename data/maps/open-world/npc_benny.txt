@@ -1,3 +1,20 @@
+dialogue_screen .benny_garlic:
+{
+	text: 
+	[	
+		"Ahh... Hmm...\n"
+		"\n"
+		"*Grunts in severe discomfort*\n"
+		"\n"
+		"It's... No..."
+	]		
+	
+	options:
+	[
+		{ script: npc_trigger text: "Here, take a sniff! It's wonderful!" }
+	]
+}
+
 dialogue_screen .benny_greetings:
 {
 	text: 
@@ -7,7 +24,8 @@ dialogue_screen .benny_greetings:
 	
 	options:
 	[
-		{ quest<completion_only>: .ezekiel_2 }
+		{ quest<completion_only>: .ezekiel_2 requirement self<must_not_have_item_equipped>: neck_garlic }
+		{ goto: .benny_garlic requirement self<must_have_item_equipped>: neck_garlic text: "How do you like my necklace?" }
 	]
 }
 
@@ -25,6 +43,123 @@ entity .benny: !NPC
 	_level: 10
 	_faction: npcs		
 	_creature_type: undead
-	_loot_table: .npc
 	_not_pushable: true	
+	_loot_table: .benny
+	_default_trigger_ability: .benny
+	_default_on_enter_ability: .benny_reset
+	_dialogue_scripts: [ npc_trigger ]
+}
+
+############################################################
+# Quest 1
+
+item neck_garlic:
+{
+	equipment_slots: [ neck ]
+	binds: when_picked_up
+	required_level: 9
+	loot_groups: [ .skeleton_chef ]
+	icon: icon_neck_garlic
+	rarity: uncommon
+	string: "Garlic Necklace" 
+	flavor: "What a delicious smell."
+	stat_weight constitution: 1 
+	stat_weight spirit: 2
+}
+
+ability .benny_reset:
+{
+	direct_effect modify_faction: { faction: npcs }
+	delay: 1
+}
+
+ability .benny:
+{
+	flags: [ always_in_range always_in_line_of_sight ]
+	
+	direct_effect modify_faction:
+	{
+		faction: monsters
+		target_self: true
+	}
+	
+	direct_effect threat:
+	{
+		apply_to: target
+		add: 20
+	}
+}
+
+loot_group .benny: { }
+
+loot_table .benny: 
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .benny requirement self<must_not_have_completed_quest>: { id: .benny_1 } }			
+		}
+		
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]		
+}
+
+item .benny_quest_drop:
+{
+	loot_groups: [ .benny ]		
+	string: "Benny's Head" 
+	binds: when_picked_up
+	icon: icon_tentacle
+	item_level: 10
+	flags: [ unique not_sellable ]
+	use_ability: .benny_quest_drop_start_quest
+}
+
+ability .benny_quest_drop_start_quest:	
+{
+	string: "Benny's Head"
+	description: "This item starts a quest."
+	flags: [ target_self ]
+	icon: icon_tentacle
+	direct_effect simple<start_quest>: .benny_1
+	states: [ default in_combat ]
+	requirement self<must_not_have_completed_quest>: { id: .benny_1 }
+	requirement self<must_not_have_active_quest>: { id: .benny_1 }
+}
+
+objective .benny_1:
+{
+	string: "Talk to Ezekiel"
+	
+	maps: [ open_world ]
+	
+	dialogue_trigger:
+	{
+		entities: [ .ezekiel ]
+	}
+}
+
+quest .benny_1:
+{
+	string: "Benny's Head"
+
+	text:
+	[
+		"Bring Benny's head back to Ezekiel and see if he still don't believe he was a vampire."
+	]
+	
+	description: 
+	[
+		"Those teeth ought to prove it."
+	]
+	
+	completion:
+	[
+		"This is all very unexpected. I assume he was turned into a vampire since I saw him last time 5 days ago."
+	]
+
+	level: 10
+	quest_items: [ .benny_quest_drop ]
+	objectives: [ .benny_1 ]
 }

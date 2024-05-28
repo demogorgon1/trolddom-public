@@ -134,7 +134,7 @@ namespace tpublic
 
 			return true;
 		}
-
+		
 		// Virtual methods
 		virtual void			FromSource(
 									const SourceNode*				/*aSource*/) { assert(false); }
@@ -152,6 +152,11 @@ namespace tpublic
 									uint32_t						/*aTargetEntityInstanceId*/,
 									SystemBase::Context*			/*aContext*/,
 									const Manifest*					/*aManifest*/) { return false; }
+		virtual void			OnFade(
+									uint32_t						/*aSourceEntityInstanceId*/,
+									uint32_t						/*aTargetEntityInstanceId*/,
+									SystemBase::Context*			/*aContext*/,
+									const Manifest*					/*aManifest*/) { }
 		virtual int32_t			FilterDamageInputOnUpdate(
 									DirectEffect::DamageType		/*aDamageType*/,
 									int32_t							aDamage,

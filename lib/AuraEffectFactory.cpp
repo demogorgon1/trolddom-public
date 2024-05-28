@@ -1,5 +1,6 @@
 #include "Pcheader.h"
 
+#include <tpublic/AuraEffects/AbilityOnFade.h>
 #include <tpublic/AuraEffects/Absorb.h>
 #include <tpublic/AuraEffects/CastModifier.h>
 #include <tpublic/AuraEffects/CombatEventTrigger.h>
@@ -22,6 +23,7 @@ namespace tpublic
 
 	AuraEffectFactory::AuraEffectFactory()
 	{
+		_Register<AuraEffects::AbilityOnFade>();
 		_Register<AuraEffects::Absorb>();
 		_Register<AuraEffects::CastModifier>();
 		_Register<AuraEffects::CombatEventTrigger>();

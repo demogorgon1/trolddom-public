@@ -108,6 +108,12 @@ namespace tpublic::Systems
 		const Components::Auras* auras = GetComponent<Components::Auras>(aComponents);
 		const Components::NPC::StateEntry* state = npc->GetState(aEntityState);
 
+		if (state != NULL && state->m_onEnterAbilityId != 0 && aTicksInState == 1)
+		{
+			const Data::Ability* onEnterAbility = GetManifest()->GetById<Data::Ability>(state->m_onEnterAbilityId);
+			aContext->m_eventQueue->EventQueueAbility(aEntityInstanceId, aEntityInstanceId, Vec2(), onEnterAbility, ItemInstanceReference(), NULL);
+		}
+
 		const Data::Faction* faction = GetManifest()->GetById<Data::Faction>(combat->m_factionId);
 
 		if (aEntityState != EntityState::ID_DEAD && combat->GetResource(Resource::ID_HEALTH) == 0 && !auras->HasEffect(AuraEffect::ID_IMMORTALITY, NULL))

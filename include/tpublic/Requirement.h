@@ -38,7 +38,8 @@ namespace tpublic
 			TYPE_MUST_HAVE_ITEM,
 			TYPE_MUST_BE_FACTION,
 			TYPE_MUST_HAVE_DISCOVERED_ZONE,
-			TYPE_MUST_NOT_HAVE_PROFESSION_ABILITY
+			TYPE_MUST_NOT_HAVE_PROFESSION_ABILITY,
+			TYPE_MUST_NOT_HAVE_ITEM_EQUIPPED,
 		};
 
 		static DataType::Id
@@ -63,6 +64,7 @@ namespace tpublic
 			case TYPE_MUST_BE_TYPE:
 				return DataType::ID_ENTITY;
 
+			case TYPE_MUST_NOT_HAVE_ITEM_EQUIPPED:
 			case TYPE_MUST_HAVE_ITEM_EQUIPPED:
 			case TYPE_MUST_HAVE_ITEM:
 				return DataType::ID_ITEM;
@@ -83,6 +85,21 @@ namespace tpublic
 			return DataType::INVALID_ID;
 		}
 
+		static uint32_t 
+		TypeAndSourceToId(
+			Type				aType,
+			const SourceNode*	aSource)
+		{
+			if (aType == TYPE_MUST_BE_IN_STATE || aType == TYPE_MUST_NOT_BE_IN_STATE)
+			{
+				EntityState::Id entityState = EntityState::StringToId(aSource->GetIdentifier());
+				TP_VERIFY(entityState != EntityState::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid entity state.", aSource->GetIdentifier());
+				return (uint32_t)entityState;
+			}
+
+			return aSource->m_sourceContext->m_persistentIdTable->GetId(GetDataType(aType), aSource->GetIdentifier());
+		}
+
 		Requirement()
 		{
 
@@ -98,8 +115,6 @@ namespace tpublic
 		FromSource(
 			const SourceNode*	aSource)
 		{
-			TP_VERIFY(aSource->m_type == SourceNode::TYPE_OBJECT, aSource->m_debugInfo, "Not an object.");
-
 			if (aSource->m_name == "target")
 				m_target = TARGET_TARGET;
 			else if (aSource->m_name == "self")
@@ -135,6 +150,8 @@ namespace tpublic
 				m_type = TYPE_MUST_BE_GROUP_MEMBER;
 			else if (typeString == "must_have_item_equipped")
 				m_type = TYPE_MUST_HAVE_ITEM_EQUIPPED;
+			else if (typeString == "must_not_have_item_equipped")
+				m_type = TYPE_MUST_NOT_HAVE_ITEM_EQUIPPED;
 			else if (typeString == "must_have_item")
 				m_type = TYPE_MUST_HAVE_ITEM;
 			else if (typeString == "must_be_faction")
@@ -146,27 +163,21 @@ namespace tpublic
 			else
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid type.", aSource->m_annotation->GetIdentifier());
 
-			aSource->ForEachChild([&](
-				const SourceNode* aChild)
+			if(aSource->m_type == SourceNode::TYPE_IDENTIFIER)
 			{
-				if (aChild->m_name == "id")
+				m_id = TypeAndSourceToId(m_type, aSource);
+			}
+			else
+			{
+				aSource->GetObject()->ForEachChild([&](
+					const SourceNode* aChild)
 				{
-					if(m_type == TYPE_MUST_BE_IN_STATE || m_type == TYPE_MUST_NOT_BE_IN_STATE)
-					{
-						EntityState::Id entityState = EntityState::StringToId(aChild->GetIdentifier());
-						TP_VERIFY(entityState != EntityState::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid entity state.", aChild->GetIdentifier());
-						m_id = (uint32_t)entityState;
-					}
+					if (aChild->m_name == "id")
+						m_id = TypeAndSourceToId(m_type, aChild);
 					else
-					{
-						m_id = aChild->m_sourceContext->m_persistentIdTable->GetId(GetDataType(m_type), aChild->GetIdentifier());
-					}
-				}
-				else
-				{
-					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
-				}
-			});
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+				});
+			}
 		}
 
 		void

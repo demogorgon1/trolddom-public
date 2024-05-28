@@ -76,6 +76,8 @@
 			state default:
 			{
 				<exists _dialogue_scripts> dialogue_scripts: @_dialogue_scripts
+				<exists _default_trigger_ability> trigger_ability: @_default_trigger_ability
+				<exists _default_on_enter_ability> on_enter_ability: @_default_on_enter_ability				
 			}
 			
 			state in_combat:

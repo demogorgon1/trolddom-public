@@ -7,6 +7,7 @@
 #include <tpublic/DirectEffects/Heal.h>
 #include <tpublic/DirectEffects/Interrupt.h>
 #include <tpublic/DirectEffects/LearnProfessionAbility.h>
+#include <tpublic/DirectEffects/ModifyFaction.h>
 #include <tpublic/DirectEffects/ModifyResource.h>
 #include <tpublic/DirectEffects/Move.h>
 #include <tpublic/DirectEffects/RemoveAura.h>
@@ -28,6 +29,7 @@ namespace tpublic
 		_Register<DirectEffects::Heal>();
 		_Register<DirectEffects::Interrupt>();
 		_Register<DirectEffects::LearnProfessionAbility>();
+		_Register<DirectEffects::ModifyFaction>();
 		_Register<DirectEffects::ModifyResource>();
 		_Register<DirectEffects::Move>();
 		_Register<DirectEffects::RemoveAura>();

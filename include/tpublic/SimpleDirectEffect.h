@@ -23,6 +23,7 @@ namespace tpublic
 			ID_PASS,
 			ID_RESURRECT,
 			ID_ACTIVATE_TRIGGER,
+			ID_SET_OWN_STATE,
 
 			NUM_IDS
 		};
@@ -31,24 +32,26 @@ namespace tpublic
 		{
 			const char*		m_name;
 			DataType::Id	m_paramType;
+			bool			m_isEntityState;
 		};
 
 		// IMPORTANT: Must match Id enum
 		static constexpr const Info INFO[] =
 		{
-			{ NULL,					DataType::INVALID_ID },
+			{ NULL,					DataType::INVALID_ID,	false },
 
-			{ "open",				DataType::INVALID_ID },
-			{ "pray",				DataType::ID_PANTHEON },
-			{ "make_offering",		DataType::INVALID_ID },
-			{ "kill",				DataType::INVALID_ID },
-			{ "push",				DataType::INVALID_ID },
-			{ "desecrate",			DataType::INVALID_ID },
-			{ "start_quest",		DataType::ID_QUEST },
-			{ "edit_player_worlds",	DataType::INVALID_ID },
-			{ "pass",				DataType::INVALID_ID },
-			{ "resurrect",			DataType::INVALID_ID },
-			{ "activate_trigger",	DataType::INVALID_ID }
+			{ "open",				DataType::INVALID_ID,	false },
+			{ "pray",				DataType::ID_PANTHEON,	false },
+			{ "make_offering",		DataType::INVALID_ID,	false },
+			{ "kill",				DataType::INVALID_ID,	false },
+			{ "push",				DataType::INVALID_ID,	false },
+			{ "desecrate",			DataType::INVALID_ID,	false },
+			{ "start_quest",		DataType::ID_QUEST,		false },
+			{ "edit_player_worlds",	DataType::INVALID_ID,	false },
+			{ "pass",				DataType::INVALID_ID,	false },
+			{ "resurrect",			DataType::INVALID_ID,	false },
+			{ "activate_trigger",	DataType::INVALID_ID,	false },
+			{ "set_own_state",		DataType::INVALID_ID,	true }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

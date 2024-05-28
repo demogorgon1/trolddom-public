@@ -107,7 +107,15 @@ namespace tpublic
 								return DialogueScript::StringToId(aIdentifier);
 							});
 						}
-						else 
+						else if(aChild->m_name == "trigger_ability")
+						{
+							m_triggerAbilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
+						}
+						else if (aChild->m_name == "on_enter_ability")
+						{
+							m_onEnterAbilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
+						}
+						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 						}
@@ -122,6 +130,8 @@ namespace tpublic
 					aStream->WriteObjects(m_abilities);
 					aStream->WritePODs(m_dialogueScripts);
 					aStream->WriteObjects(m_barks);
+					aStream->WriteUInt(m_triggerAbilityId);
+					aStream->WriteUInt(m_onEnterAbilityId);
 				}
 
 				bool
@@ -135,6 +145,10 @@ namespace tpublic
 					if(!aStream->ReadPODs(m_dialogueScripts))
 						return false;
 					if (!aStream->ReadObjects(m_barks))
+						return false;
+					if(!aStream->ReadUInt(m_triggerAbilityId))
+						return false;
+					if (!aStream->ReadUInt(m_onEnterAbilityId))
 						return false;
 					return true;
 				}
@@ -156,6 +170,8 @@ namespace tpublic
 				std::vector<AbilityEntry>			m_abilities;
 				std::vector<DialogueScript::Id>		m_dialogueScripts;
 				std::vector<Chat>					m_barks;
+				uint32_t							m_triggerAbilityId = 0;
+				uint32_t							m_onEnterAbilityId = 0;
 			};
 
 			struct ResourceEntry

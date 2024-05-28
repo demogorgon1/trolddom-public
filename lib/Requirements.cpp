@@ -149,6 +149,7 @@ namespace tpublic
 				break;
 
 			case Requirement::TYPE_MUST_HAVE_ITEM_EQUIPPED:
+			case Requirement::TYPE_MUST_NOT_HAVE_ITEM_EQUIPPED:
 				{
 					if (!entity->IsPlayer())
 						return false;
@@ -166,7 +167,9 @@ namespace tpublic
 						}
 					}
 
-					if(!isEquipped)
+					bool shouldBeEquipped = aRequirement->m_type == Requirement::TYPE_MUST_HAVE_ITEM_EQUIPPED;
+
+					if(isEquipped != shouldBeEquipped)
 						return false;
 				}
 				break;

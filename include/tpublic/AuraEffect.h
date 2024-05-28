@@ -25,6 +25,7 @@ namespace tpublic
 			ID_IMMOBILIZE,
 			ID_ABSORB,
 			ID_CAST_MODIFIER,
+			ID_ABILITY_ON_FADE,
 
 			NUM_IDS
 		};
@@ -47,7 +48,8 @@ namespace tpublic
 			"haste_modifier",
 			"immobilize",
 			"absorb",
-			"cast_modifier"
+			"cast_modifier",
+			"ability_on_fade",
 		};
 
 		static_assert(sizeof(EFFECT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

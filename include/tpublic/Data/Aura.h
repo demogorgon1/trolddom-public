@@ -78,15 +78,17 @@ namespace tpublic
 
 			enum Flag : uint32_t
 			{
-				FLAG_UNIQUE				= 0x00000001,
-				FLAG_CHANNELED			= 0x00000002,
-				FLAG_HIDE_DESCRIPTION	= 0x00000004,
-				FLAG_CANCEL_IN_COMBAT	= 0x00000008,
-				FLAG_PERSIST_IN_DEATH	= 0x00000010,
-				FLAG_SILENT				= 0x00000020,
-				FLAG_CHARGED			= 0x00000040,
-				FLAG_MAGIC				= 0x00000080,
-				FLAG_BLESSING			= 0x00000100,
+				FLAG_UNIQUE					= 0x00000001,
+				FLAG_CHANNELED				= 0x00000002,
+				FLAG_HIDE_DESCRIPTION		= 0x00000004,
+				FLAG_CANCEL_IN_COMBAT		= 0x00000008,
+				FLAG_PERSIST_IN_DEATH		= 0x00000010,
+				FLAG_SILENT					= 0x00000020,
+				FLAG_CHARGED				= 0x00000040,
+				FLAG_MAGIC					= 0x00000080,
+				FLAG_BLESSING				= 0x00000100,
+				FLAG_INDEFINITE				= 0x00000200,
+				FLAG_CANCEL_OUTSIDE_COMBAT	= 0x00000400,
 			};
 
 			static Type
@@ -104,11 +106,11 @@ namespace tpublic
 				return Type(0);
 			}
 
-			static uint8_t
+			static uint32_t
 			SourceToFlags(
 				const SourceNode*		aSource)
 			{
-				uint8_t flags = 0;
+				uint32_t flags = 0;
 				aSource->GetArray()->ForEachChild([&](
 					const SourceNode*	aFlag)
 				{
@@ -131,6 +133,10 @@ namespace tpublic
 						flags |= FLAG_MAGIC;
 					else if (strcmp(string, "blessing") == 0)
 						flags |= FLAG_BLESSING;
+					else if (strcmp(string, "indefinite") == 0)
+						flags |= FLAG_INDEFINITE; 
+					else if (strcmp(string, "cancel_outside_combat") == 0)
+						flags |= FLAG_CANCEL_OUTSIDE_COMBAT;
 					else
 						TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid aura flag.", string);
 				});

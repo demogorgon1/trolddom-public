@@ -39,10 +39,10 @@ item .spawn_of_umbracoth_quest_drop:
 	string: "Glowing Tentacle" 
 	flavor: "Slimy."
 	icon: icon_tentacle
-	stack: 4
 	item_level: 5
 	flags: [ unique not_sellable ]
 	use_ability: .spawn_of_umbracoth_quest_drop_start_quest
+	binds: when_picked_up
 }
 
 item .spawn_of_umbracoth_junk:
@@ -760,10 +760,17 @@ loot_table .abandoned_keep_undead:
 	]		
 }
 
+loot_group .skeleton_chef: { }
+
 loot_table .skeleton_chef: 
 {
 	slots:
 	[
+		{
+			possibility: { loot_group: .skeleton_chef }			
+			possibility: { }			
+		}			
+
 		!WORLD_DROPS {}
 		!WORLD_DROPS_CLOTH{}
 	]		

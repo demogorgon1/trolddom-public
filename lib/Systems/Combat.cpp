@@ -50,6 +50,9 @@ namespace tpublic::Systems
 				if((aura->m_flags & Data::Aura::FLAG_CANCEL_IN_COMBAT) != 0 && aEntityState == EntityState::ID_IN_COMBAT)
 					entry->m_cancel = true;
 
+				if ((aura->m_flags & Data::Aura::FLAG_CANCEL_OUTSIDE_COMBAT) != 0 && aEntityState != EntityState::ID_IN_COMBAT)
+					entry->m_cancel = true;
+
 				if((aura->m_flags & Data::Aura::FLAG_PERSIST_IN_DEATH) == 0 && aEntityState == EntityState::ID_DEAD)
 					entry->m_cancel = true;
 				
@@ -72,6 +75,8 @@ namespace tpublic::Systems
 
 						if(!effect->Update(entry->m_entityInstanceId, aEntityInstanceId, aContext, GetManifest()))
 						{
+							effect->OnFade(entry->m_entityInstanceId, aEntityInstanceId, aContext, GetManifest());
+
 							effect.reset();
 							Helpers::RemoveCyclicFromVector(entry->m_effects, j);
 							j--;
@@ -84,6 +89,9 @@ namespace tpublic::Systems
 
 				if(entry->m_cancel || (!entry->m_noEffects && entry->m_effects.size() == 0) || (entry->m_end != 0 && aContext->m_tick >= entry->m_end))
 				{
+					for(std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
+						effect->OnFade(entry->m_entityInstanceId, aEntityInstanceId, aContext, GetManifest());
+
 					entry.reset();
 					Helpers::RemoveCyclicFromVector(auras->m_entries, i);
 					i--;

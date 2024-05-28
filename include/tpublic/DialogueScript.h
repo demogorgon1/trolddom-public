@@ -14,6 +14,7 @@ namespace tpublic
 			ID_CREATE_GUILD,
 			ID_UNTRAIN_TALENTS,
 			ID_TRIGGER,
+			ID_NPC_TRIGGER,
 
 			NUM_IDS
 		};
@@ -31,7 +32,8 @@ namespace tpublic
 			{ "none" },
 			{ "create_guild" },
 			{ "untrain_talents" },
-			{ "trigger" }
+			{ "trigger" },
+			{ "npc_trigger" },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

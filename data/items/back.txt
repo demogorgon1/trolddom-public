@@ -1,6 +1,7 @@
 item back_graceful_cape:
 {
 	equipment_slots: [ back ]
+	binds: when_picked_up
 	type: armor_cloth
 	required_level: 5
 	icon: icon_cape_1

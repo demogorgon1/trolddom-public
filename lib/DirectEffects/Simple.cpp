@@ -21,8 +21,17 @@ namespace tpublic::DirectEffects
 		switch(aSource->m_type)
 		{
 		case SourceNode::TYPE_IDENTIFIER:
-			TP_VERIFY(info->m_paramType != DataType::INVALID_ID, aSource->m_debugInfo, "Invalid value.");
-			m_param = aSource->m_sourceContext->m_persistentIdTable->GetId(info->m_paramType, aSource->GetIdentifier());
+			if(info->m_isEntityState)
+			{
+				EntityState::Id entityState = EntityState::StringToId(aSource->GetIdentifier());
+				TP_VERIFY(entityState != EntityState::INVALID_ID, aSource->m_debugInfo, "Invalid entity state.");
+				m_param = (uint32_t)entityState;
+			}
+			else
+			{
+				TP_VERIFY(info->m_paramType != DataType::INVALID_ID, aSource->m_debugInfo, "Invalid value.");
+				m_param = aSource->m_sourceContext->m_persistentIdTable->GetId(info->m_paramType, aSource->GetIdentifier());
+			}
 			break;
 
 		case SourceNode::TYPE_NUMBER:
@@ -90,6 +99,13 @@ namespace tpublic::DirectEffects
 			aCombatResultQueue->AddUpdateCallback([aTarget, aTick]()
 			{
 				aTarget->SetState(EntityState::ID_DEAD, aTick);
+			});
+			break;
+
+		case SimpleDirectEffect::ID_SET_OWN_STATE:
+			aCombatResultQueue->AddUpdateCallback([aSource, aTick, entityState = (EntityState::Id)m_param]()
+			{
+				aSource->SetState(entityState, aTick);
 			});
 			break;
 
