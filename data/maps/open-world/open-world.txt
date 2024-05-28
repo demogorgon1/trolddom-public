@@ -436,7 +436,7 @@ zone .zone_3:
 
 zone .zone_4:
 {
-	string: "Dark Cove"
+	string: "The Hidden Cove"
 }
 
 zone .zone_5:
@@ -446,12 +446,12 @@ zone .zone_5:
 
 zone .zone_6:
 {
-	string: "Dinith Mountains"
+	string: "Aetheris Mountains"
 }
 
 zone .zone_7:
 {
-	string: "Dinith Bay"
+	string: "Aetheris Bay"
 }
 
 zone .zone_8:
@@ -633,7 +633,7 @@ map_palette .zones:
 
 map open_world:
 {
-	string: "First Island"
+	string: "Aetheris Isle"
 	type: open_world
 	default_tile: water_1
 	default_player_spawn: .player_spawn
