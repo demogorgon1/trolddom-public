@@ -306,7 +306,7 @@ map_entity_spawn .goblin_ranger_9:
 	entity goblin_ranger_9: { weight: 1 }
 }
 
-map_entity_spawn .dinith_bay_goblin_9:
+map_entity_spawn .aetheris_bay_goblin_9:
 {
 	entity goblin_ranger_9: { weight: 1 }
 	entity goblin_firestarter_9: { weight: 1 }
@@ -461,7 +461,7 @@ zone .zone_8:
 
 zone .zone_9:
 {
-	string: "Northern Wastes"
+	string: "Bramble Heath"
 }
 
 zone .zone_10:
@@ -571,7 +571,7 @@ map_palette .stuff:
 	entity_spawn .sea_spirit_7: [ 69 127 155 ]		
 	entity_spawn .living_dead_8: [ 169 127 155 ]		
 	entity_spawn .goblin_ranger_9: [ 124 127 155 ]			
-	entity_spawn .dinith_bay_goblin_9: [ 213 30 95 ]		
+	entity_spawn .aetheris_bay_goblin_9: [ 213 30 95 ]		
 	entity_spawn .abandoned_keep_undead_9: [ 223 30 95 ]		
 	entity_spawn .skeleton_chef_9: [ 233 30 95 ]		
 	entity_spawn .ghastly_entity_9: [ 233 130 95 ]		

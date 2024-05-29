@@ -186,10 +186,10 @@ quest .ezekiel_2:
 
 quest .ezekiel_3:
 {
-	string: "The Wizard of Dinith Mountains"
+	string: "The Wizard of Aetheris Mountains"
 	text:
 	[
-		"Seek out the wizard in Dinith Mountains in the north."
+		"Seek out the wizard in Aetheris Mountains in the north."
 	]
 	
 	description: 
