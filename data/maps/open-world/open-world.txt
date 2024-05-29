@@ -178,21 +178,6 @@ map_entity_spawn .gateway:
 	entity gateway: { weight: 1 }
 }
 
-map_entity_spawn .anvil:
-{
-	entity anvil: { weight: 1 }
-}
-
-map_entity_spawn .furnace:
-{
-	entity furnace: { weight: 1 }
-}
-
-map_entity_spawn .bonfire:
-{
-	entity bonfire: { weight: 1 }
-}
-
 map_entity_spawn .zumhorn_2:
 {
 	entity .zumhorn_2: { weight: 1 init_state: default }
@@ -201,16 +186,6 @@ map_entity_spawn .zumhorn_2:
 map_entity_spawn .zumhorn_2_boss:
 {
 	spawn_timer: { only_when_triggered: true }
-}
-
-map_entity_spawn .fireplace:
-{
-	entity fireplace: { weight: 1 }
-}
-
-map_entity_spawn .fireplace_unlit:
-{
-	entity fireplace_unlit: { weight: 1 }
 }
 
 map_entity_spawn .player_world_gateway:
@@ -370,11 +345,6 @@ map_entity_spawn .hermit_door:
 	spawn_timer: { despawn_required: true }
 }
 
-map_entity_spawn .stash:
-{
-	entity stash: { }
-}
-
 map_entity_spawn .theodore_quest_item:
 {
 	spawn_timer: { despawn_required: true min_delay: 300 cooldown_range_min: 600 cooldown_range_max: 1200 }
@@ -515,6 +485,12 @@ map_palette .stuff:
 	entity_spawn holy_altar: [ 0 0 40 ]	
 	entity_spawn underworld_shrine: [ 0 0 80 ]	
 	entity_spawn potatoes: [ 212 255 42 ]
+	entity_spawn stash: [ 0 43 66 ]		
+	entity_spawn furnace: [ 100 43 66 ]		
+	entity_spawn anvil: [ 150 43 66 ]		
+	entity_spawn fireplace: [ 250 43 66 ]		
+	entity_spawn fireplace_unlit: [ 250 243 66 ]		
+	entity_spawn bonfire: [ 251 43 66 ]		
 
 	entity_spawn .wildlife: [ 255 255 0 ]
 	entity_spawn .sylas: [ 255 189 0 ]
@@ -587,12 +563,6 @@ map_palette .stuff:
 	entity_spawn .werner_quest_item: [ 54 104 169 ]		
 	entity_spawn .gnome_1_quest_item: [ 53 13 162 ]		
 	entity_spawn .zumhorn_1: [ 40 50 219 ]
-	entity_spawn .stash: [ 0 43 66 ]		
-	entity_spawn .furnace: [ 100 43 66 ]		
-	entity_spawn .anvil: [ 150 43 66 ]		
-	entity_spawn .fireplace: [ 250 43 66 ]		
-	entity_spawn .fireplace_unlit: [ 250 243 66 ]		
-	entity_spawn .bonfire: [ 251 43 66 ]		
 	entity_spawn .zumhorn_2: [ 255 104 102 ]
 	entity_spawn .zumhorn_2_boss: [ 205 104 102 ]
 	player_spawn .player_spawn: [ 0 0 255 ]

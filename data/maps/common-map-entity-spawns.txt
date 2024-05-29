@@ -43,3 +43,33 @@ map_entity_spawn potatoes:
 
 	entity potatoes: { init_state: default }
 }
+
+map_entity_spawn anvil:
+{
+	entity anvil: { weight: 1 }
+}
+
+map_entity_spawn furnace:
+{
+	entity furnace: { weight: 1 }
+}
+
+map_entity_spawn bonfire:
+{
+	entity bonfire: { weight: 1 }
+}
+
+map_entity_spawn fireplace:
+{
+	entity fireplace: { weight: 1 }
+}
+
+map_entity_spawn fireplace_unlit:
+{
+	entity fireplace_unlit: { weight: 1 }
+}
+
+map_entity_spawn stash:
+{
+	entity stash: { }
+}

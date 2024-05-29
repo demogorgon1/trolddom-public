@@ -4,13 +4,13 @@ map_trigger .ignorg_killed:
 	default: false
 }
 
-map_entity_spawn .monster_caster:
+map_entity_spawn .goblin_caster:
 {	
 	entity .goblin_shaman: { weight: 1 } 
 	spawn_timer: !TRASH_RESPAWN_TIMER{}
 }
 
-map_entity_spawn .monster_melee:
+map_entity_spawn .goblin_melee:
 {	
 	entity .goblin: { weight: 1 } 
 	spawn_timer: !TRASH_RESPAWN_TIMER{}
@@ -43,29 +43,68 @@ map_palette .tiles:
 	tile dungeon_wall: [ 255 255 255 ]
 	tile dungeon_wall_face: [ 128 128 128 ]
 	tile dungeon_wall_face_exit: [ 200 200 200 ]
+	tile rocks: [ 143 131 120 ]
+	tile water_1: [ 9 86 104 ]
+	tile pavement: [ 32 32 32 ]
+	tile mud: [ 67 61 32 ]
+	tile dirt: [ 97 91 62 ]
+	tile grass: [ 64 105 0 ]
+	tile dark_grass: [ 48 90 14 ]
+	tile forest: [ 51 75 6 ]
+	tile roof: [ 255 0 0 ]
+	tile ext_cave_entrance: [ 0 0 128 ]
+	tile wood_wall: [ 255 255 0 ] 
+	tile wood_open_door: [ 255 200 0 ] 
+	tile wood_floor: [ 200 200 0 ] 
+	tile wood_solid_wall: [ 0 200 200 ]
+	tile wood_solid_wall_face: [ 100 200 200 ]	
+	tile forest_entrance: [ 123 255 123 ] 
 }
 
 map_palette .stuff:
 {
-	entity_spawn .monster_caster: [ 255 0 0 ]
-	entity_spawn .monster_melee: [ 128 0 0 ]
+	entity_spawn mining: [ 200 200 200 ]
+	entity_spawn herbalism: [ 0 255 0 ]
+	entity_spawn holy_altar: [ 0 0 40 ]	
+	entity_spawn underworld_shrine: [ 0 0 80 ]	
+	entity_spawn furnace: [ 100 43 66 ]		
+	entity_spawn anvil: [ 150 43 66 ]		
+	entity_spawn fireplace: [ 250 43 66 ]		
+	entity_spawn fireplace_unlit: [ 250 243 66 ]		
+	entity_spawn bonfire: [ 251 43 66 ]		
+
+	entity_spawn .goblin_caster: [ 255 0 0 ]
+	entity_spawn .goblin_melee: [ 128 0 0 ]
 	entity_spawn .ignorg: [ 255 255 0 ]
+
 	player_spawn .player_spawn: [ 0 0 255 ]
-	portal .exit: [ 0 255 0 ]	
+	
+	portal .exit: [ 0 253 0 ]	
+}
+
+map_palette .levels:
+{
+	level<6>: [ 0 127 127 ]
+	level<7>: [ 127 0 127 ]
+	level<8>: [ 127 0 255 ]
+	level<9>: [ 255 0 255 ]
+	level<10>: [ 255 255 0 ]
 }
 
 map dungeon_1:
 {
-	string: "Goblin Caves"
+	string: "Aetheris Stronghold"
 	type: private
 	reset: manual
 	default_tile: dungeon_wall
 	default_player_spawn: .player_spawn
 	default_exit_portal: .exit
-	view_attenuation: 30
-	view_attenuation_bias: 50
-	view_hidden_visibility: 0		
-	level: 5
+	default_fishing_loot_table: fish
+	view_attenuation: 0
+	view_attenuation_bias: 0
+	view_hidden_visibility: 35	
+	auto_doodads: true
+	level: 6
 
 	layers:
 	[
@@ -78,6 +117,17 @@ map dungeon_1:
 			palettes:	[ .stuff ]
 			source:		"dungeon-1-1.png"
 		}
+		
+		{
+			palettes:	[ .levels ]
+			source:		"dungeon-1-levels.png"
+		}
+
+		{ 
+			palettes: 	[ .tiles ]
+			source:		"dungeon-1-cover.png"
+			cover: 		true
+		}		
 	]
 	
 	script:
