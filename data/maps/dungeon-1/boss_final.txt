@@ -1,0 +1,69 @@
+############################################################
+# Loot
+
+loot_table .zarvok:
+{
+	slots:
+	[
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+############################################################
+# Boss
+
+entity dungeon_1_zarvok: !NPC 
+{ 
+	_string: "Zarvok the Cunning" 
+	_level: 10
+	_elite: true
+	_faction: monsters 
+	_sprite: goblin_boss_4
+	_sprite_dead: goblin_boss_4_dead 
+	_weapon_damage: 2
+	_resource_health: 2 
+	_loot_table: .zarvok
+	_creature_type: humanoid
+}
+
+entity dungeon_1_gribble: !NPC 
+{ 
+	_string: "Gribble" 
+	_level: 10
+	_elite: true
+	_faction: monsters 
+	_sprite: goblin_boss_2
+	_sprite_dead: goblin_boss_2_dead 
+	_weapon_damage: 2
+	_resource_health: 2 
+	_creature_type: humanoid
+}
+
+map_trigger .zarvok_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .zarvok:
+{
+	entity dungeon_1_zarvok: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .zarvok_killed
+		}
+	}
+}
+
+map_entity_spawn .gribble:
+{
+	entity dungeon_1_gribble: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .zarvok_killed
+		}
+	}
+}

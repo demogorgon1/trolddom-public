@@ -1,0 +1,225 @@
+npc_behavior_state .wandering:
+{
+	behavior: wandering
+	max_range: 2
+}
+
+############################################################
+# Goblins
+
+loot_table .trash:
+{
+	slots:
+	[
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+entity .goblin_5: !NPC
+{
+	_string: "Goblin Warrior"
+	_level: 5
+	_elite: true
+	_faction: monsters 
+	_sprite: goblin
+	_sprite_dead: goblin_dead 
+	_weapon_damage: 1 
+	_resource_health: 1
+	_loot_table: .trash
+	_creature_type: humanoid
+}
+
+entity .goblin_shaman_5: !NPC
+{
+	_string: "Goblin Shaman"
+	_level: 5
+	_elite: true
+	_faction: monsters 
+	_sprite: goblin_shaman
+	_sprite_dead: goblin_shaman_dead 
+	_weapon_damage: 0.7
+	_resource_health: 0.8
+	_resource_mana: 1
+	_loot_table: .trash
+	_creature_type: humanoid
+	_abilities: [ { id: npc_firebolt }{ id: npc_attack } ]
+}
+	
+entity .goblin_6: !NPC
+{
+	_string: "Goblin Thrasher"
+	_level: 6
+	_elite: true
+	_faction: monsters 
+	_sprite: goblin_2
+	_sprite_dead: goblin_2_dead 
+	_weapon_damage: 1 
+	_resource_health: 1
+	_loot_table: .trash
+	_creature_type: humanoid
+}
+
+entity .goblin_shaman_6: !NPC
+{
+	_string: "Goblin Soothsayer"
+	_level: 6
+	_elite: true
+	_faction: monsters 
+	_sprite: goblin_shaman_2
+	_sprite_dead: goblin_shaman_2_dead 
+	_weapon_damage: 0.7
+	_resource_health: 0.8
+	_resource_mana: 1
+	_loot_table: .trash
+	_creature_type: humanoid
+	_abilities: [ { id: npc_firebolt }{ id: npc_attack } ]
+}
+	
+entity .goblin_7: !NPC
+{
+	_string: "Goblin Mercenary"
+	_level: 7
+	_elite: true
+	_faction: monsters 
+	_sprite: goblin_3
+	_sprite_dead: goblin_3_dead 
+	_weapon_damage: 1 
+	_resource_health: 1
+	_loot_table: .trash
+	_creature_type: humanoid
+}
+
+entity .goblin_shaman_7: !NPC
+{
+	_string: "Goblin Firetamer"
+	_level: 7
+	_elite: true
+	_faction: monsters 
+	_sprite: goblin_shaman_3
+	_sprite_dead: goblin_shaman_3_dead 
+	_weapon_damage: 0.7
+	_resource_health: 0.8
+	_resource_mana: 1
+	_loot_table: .trash
+	_creature_type: humanoid
+	_abilities: [ { id: npc_firebolt }{ id: npc_attack } ]
+}
+
+entity .goblin_8: !NPC
+{
+	_string: "Goblin Enforcer"
+	_level: 8
+	_elite: true
+	_faction: monsters 
+	_sprite: goblin_4
+	_sprite_dead: goblin_4_dead 
+	_weapon_damage: 1 
+	_resource_health: 1
+	_loot_table: .trash
+	_creature_type: humanoid
+}
+
+entity .goblin_9: !NPC
+{
+	_string: "Goblin Elite Guard"
+	_level: 9
+	_elite: true
+	_faction: monsters 
+	_sprite: goblin_5
+	_sprite_dead: goblin_5_dead 
+	_weapon_damage: 1 
+	_resource_health: 1
+	_loot_table: .trash
+	_creature_type: humanoid
+}
+
+map_entity_spawn .goblin_melee:
+{	
+	entity .goblin_5: { level: 6 spawn_condition: { if_not: .ignorg_killed } } 
+	entity .goblin_6: { level: 7 spawn_condition: { if_not: .umbracoth_killed } } 
+	entity .goblin_7: { level: 8 spawn_condition: { if_not: .snarltooth_killed } } 
+	entity .goblin_8: { level: 9 spawn_condition: { if_not: .grunthar_killed } } 
+	entity .goblin_9: { level: 10 spawn_condition: { if_not: .zarvok_killed } } 
+	
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+map_entity_spawn .goblin_caster:
+{	
+	entity .goblin_shaman_5: { level: 6 spawn_condition: { if_not: .ignorg_killed } } 
+	entity .goblin_shaman_6: { level: 7 spawn_condition: { if_not: .umbracoth_killed } } 
+	entity .goblin_shaman_7: { level: 8 spawn_condition: { if_not: .snarltooth_killed } } 
+	entity .goblin_shaman_7: { level: 9 spawn_condition: { if_not: .grunthar_killed } } 
+	entity .goblin_shaman_7: { level: 10 spawn_condition: { if_not: .zarvok_killed } } 
+	
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+############################################################
+# Wolves
+
+loot_table .wolf:
+{
+	slots:
+	[
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+entity .wolf_7_a: !NPC
+{
+	_string: "Mountain Wolf"
+	_level: 7
+	_elite: true
+	_faction: monsters 
+	_sprite: wolf_1
+	_sprite_dead: wolf_1_dead 
+	_weapon_damage: 1.2
+	_resource_health: 0.9
+	_loot_table: .wolf
+	_creature_type: humanoid
+	_default_behavior_state: .wandering
+}
+
+entity .wolf_7_b: !NPC
+{
+	_string: "Mountain Wolf"
+	_level: 7
+	_elite: true
+	_faction: monsters 
+	_sprite: wolf_2
+	_sprite_dead: wolf_2_dead 
+	_weapon_damage: 1.2
+	_resource_health: 0.9
+	_loot_table: .wolf
+	_creature_type: humanoid
+	_default_behavior_state: .wandering
+}
+
+entity .wolf_7_c: !NPC
+{
+	_string: "Mountain Wolf"
+	_level: 7
+	_elite: true
+	_faction: monsters 
+	_sprite: wolf_3
+	_sprite_dead: wolf_3_dead 
+	_weapon_damage: 1.2
+	_resource_health: 0.9
+	_loot_table: .wolf
+	_creature_type: humanoid
+	_default_behavior_state: .wandering
+}
+
+map_entity_spawn .wolf:
+{	
+	entity .wolf_7_a: { spawn_condition: { if_not: .snarltooth_killed } } 
+	entity .wolf_7_b: { spawn_condition: { if_not: .snarltooth_killed } } 
+	entity .wolf_7_c: { spawn_condition: { if_not: .snarltooth_killed } } 
+	
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+

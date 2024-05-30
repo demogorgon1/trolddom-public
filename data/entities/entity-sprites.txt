@@ -135,6 +135,7 @@ sprites:
 	sprite skeleton_warrior_2: { dead: skeleton_warrior_2_dead tags: [ melee undead ] }
 	sprite skeleton_caster_1: { dead: skeleton_caster_1_dead tags: [ caster undead ] }
 	sprite skeleton_chef: { dead: skeleton_chef_dead tags: [ ] }
+	sprite tentacle_monster_2: { dead: tentacle_monster_2_dead }
 
 	cursor: { position: [ 0 112 ] }
 
@@ -153,6 +154,19 @@ sprites:
 	sprite skeleton_warrior_2_dead: { }
 	sprite skeleton_caster_1_dead: { }
 	sprite skeleton_chef_dead: { }
+	sprite tentacle_monster_2_dead: { }
+
+	cursor: { position: [ 0 128 ] }
+
+	sprite wolf_4: { dead: wolf_4_dead }
+	sprite troll_1: { dead: troll_1_dead }
+	sprite goblin_5: { dead: goblin_5_dead }
+
+	cursor: { position: [ 0 144 ] }
+
+	sprite wolf_4_dead: { }
+	sprite troll_1_dead: { }
+	sprite goblin_5_dead: { }
 	
 }
 

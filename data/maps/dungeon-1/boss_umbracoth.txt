@@ -1,0 +1,116 @@
+############################################################
+# Loot
+
+loot_table .umbracoth:
+{
+	slots:
+	[
+		!WORLD_DROPS{}
+	]	
+}
+
+############################################################
+# Boss
+
+encounter .umbracoth:
+{
+	
+}
+
+entity dungeon_1_umbracoth: !NPC 
+{ 
+	_string: "Umbracoth" 
+	_guild_name: "Messenger from the Void"
+	_level: 8 
+	_elite: true
+	_faction: monsters 
+	_sprite: tentacle_monster
+	_sprite_dead: tentacle_monster_dead 
+	_weapon_damage: 1.5
+	_resource_health: 3 
+	_loot_table: .umbracoth
+	_creature_type: demon
+	_encounter: .umbracoth
+}
+
+map_trigger .umbracoth_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .umbracoth:
+{
+	entity dungeon_1_umbracoth: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .umbracoth_killed
+		}
+	}
+}
+
+npc_behavior_state .goblin_cultist: 
+{
+	behavior: use_ability
+}
+
+entity .goblin_cultist: !NPC
+{
+	_string: "Goblin Cultist"
+	_level: 8
+	_elite: true
+	_faction: monsters 
+	_sprite: goblin_shaman
+	_sprite_dead: goblin_shaman_dead 
+	_weapon_damage: 1.7
+	_resource_health: 1.8
+	_resource_mana: 1
+	_creature_type: humanoid
+	_default_abilities: [ { id: .goblin_cultist target: [ dungeon_1_umbracoth ] use_probability: 10 } ]
+	_default_behavior_state: .goblin_cultist
+	_encounter: .umbracoth
+}
+
+map_entity_spawn .goblin_cultist:
+{
+	entity .goblin_cultist: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .umbracoth_killed
+			encounter_not_active: .umbracoth
+		}
+	}
+}
+
+aura .goblin_cultist:
+{
+	string: "Suppressed"
+	description: "Stunned and immune to all damage."
+	icon: icon_stun
+	type: debuff
+	duration: 120
+	flags: [ unique ]
+	aura_effect stun: { }
+	aura_effect damage_input_modifier: { type_mask: [ all ] multiplier_num: 0 }
+}
+
+cooldown .goblin_cultist:
+{
+	duration: 40
+}
+
+ability .goblin_cultist:
+{
+	flags: [ target_other target_friendly ]
+	range: 5
+	cooldowns: [ .goblin_cultist ]
+	string: "Suppression"
+	cast_time: 20
+	icon: icon_stuff	
+	direct_effect apply_aura:
+	{
+		aura: .goblin_cultist
+	}
+}

@@ -78,6 +78,7 @@
 				<exists _dialogue_scripts> dialogue_scripts: @_dialogue_scripts
 				<exists _default_trigger_ability> trigger_ability: @_default_trigger_ability
 				<exists _default_on_enter_ability> on_enter_ability: @_default_on_enter_ability				
+				<exists _default_abilities> abilities: @_default_abilities
 			}
 			
 			state in_combat:
@@ -96,6 +97,7 @@
 			<exists _can_move_on_all_non_view_blocking_tiles> can_move_on_all_non_view_blocking_tiles: @_can_move_on_all_non_view_blocking_tiles
 			<exists _blocking> blocking: @_blocking			
 			<exists _despawn_time> despawn_time: @_despawn_time
+			<exists _encounter> encounter: @_encounter
 		}
 		sprite: 
 		{ 

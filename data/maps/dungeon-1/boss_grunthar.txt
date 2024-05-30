@@ -1,0 +1,45 @@
+############################################################
+# Loot
+
+loot_table .grunthar:
+{
+	slots:
+	[
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+############################################################
+# Boss
+
+entity dungeon_1_grunthar: !NPC 
+{ 
+	_string: "Grunthar the Stonebreaker" 
+	_level: 9
+	_elite: true
+	_faction: monsters 
+	_sprite: troll_1
+	_sprite_dead: troll_1_dead 
+	_weapon_damage: 2
+	_resource_health: 2 
+	_loot_table: .grunthar
+	_creature_type: humanoid
+}
+
+map_trigger .grunthar_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .grunthar:
+{
+	entity dungeon_1_grunthar: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .grunthar_killed
+		}
+	}
+}

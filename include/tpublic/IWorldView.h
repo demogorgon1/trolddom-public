@@ -15,9 +15,10 @@ namespace tpublic
 				FLAG_LINE_OF_SIGHT = 0x01
 			};
 
-			Vec2		m_position;
-			int32_t		m_maxDistance = INT32_MAX;
-			uint8_t		m_flags = 0;
+			Vec2								m_position;
+			int32_t								m_maxDistance = INT32_MAX;
+			uint8_t								m_flags = 0;
+			const std::vector<uint32_t>*		m_entityIds = NULL;
 		};
 
 		typedef std::function<bool(const EntityInstance*, int32_t)> EntityDistanceCallback;

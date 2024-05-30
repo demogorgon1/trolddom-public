@@ -1,32 +1,3 @@
-map_trigger .ignorg_killed:
-{
-	persistent: true
-	default: false
-}
-
-map_entity_spawn .goblin_caster:
-{	
-	entity .goblin_shaman: { weight: 1 } 
-	spawn_timer: !TRASH_RESPAWN_TIMER{}
-}
-
-map_entity_spawn .goblin_melee:
-{	
-	entity .goblin: { weight: 1 } 
-	spawn_timer: !TRASH_RESPAWN_TIMER{}
-}
-
-map_entity_spawn .ignorg:
-{
-	entity dungeon_1_ignorg: 
-	{ 
-		spawn_condition:
-		{	
-			if_not: .ignorg_killed
-		}
-	}
-}
-
 map_player_spawn .player_spawn:
 {
 }
@@ -75,7 +46,16 @@ map_palette .stuff:
 
 	entity_spawn .goblin_caster: [ 255 0 0 ]
 	entity_spawn .goblin_melee: [ 128 0 0 ]
+	entity_spawn .wolf: [ 128 64 0 ]
+
 	entity_spawn .ignorg: [ 255 255 0 ]
+	entity_spawn .biznorg: [ 200 255 0 ]
+	entity_spawn .umbracoth: [ 120 255 0 ]
+	entity_spawn .goblin_cultist: [ 120 255 100 ]
+	entity_spawn .snarltooth: [ 60 255 0 ]
+	entity_spawn .grunthar: [ 50 255 70 ]
+	entity_spawn .zarvok: [ 10 255 120 ]
+	entity_spawn .gribble: [ 255 155 50 ]
 
 	player_spawn .player_spawn: [ 0 0 255 ]
 	
@@ -133,12 +113,43 @@ map dungeon_1:
 	script:
 	{
 		condition trigger_not_set: .ignorg_killed
-		condition entity_state: { entity_spawn: .ignorg state: dead }
-		
-		run: 
-		{
-			set_trigger: .ignorg_killed
-		}
+		condition entity_state: { entity_spawn: .ignorg state: dead }		
+		run: { set_trigger: .ignorg_killed }
+	}
+
+	script:
+	{
+		condition trigger_not_set: .biznorg_killed
+		condition entity_state: { entity_spawn: .biznorg state: dead }		
+		run: { set_trigger: .biznorg_killed }
+	}
+
+	script:
+	{
+		condition trigger_not_set: .umbracoth_killed
+		condition entity_state: { entity_spawn: .umbracoth state: dead }		
+		run: { set_trigger: .umbracoth_killed }
+	}
+
+	script:
+	{
+		condition trigger_not_set: .snarltooth_killed
+		condition entity_state: { entity_spawn: .snarltooth state: dead }		
+		run: { set_trigger: .snarltooth_killed }
+	}
+
+	script:
+	{
+		condition trigger_not_set: .grunthar_killed
+		condition entity_state: { entity_spawn: .grunthar state: dead }		
+		run: { set_trigger: .grunthar_killed }
+	}
+
+	script:
+	{
+		condition trigger_not_set: .zarvok_killed
+		condition entity_state: { entity_spawn: .zarvok state: dead }		
+		run: { set_trigger: .zarvok_killed }
 	}
 	
 }

@@ -55,6 +55,7 @@ namespace tpublic
 			ID_PLAYER_WORLD_TYPE,
 			ID_WALL,
 			ID_ABILITY_MODIFIER,
+			ID_ENCOUNTER,
 
 			NUM_IDS
 		};
@@ -107,7 +108,8 @@ namespace tpublic
 			"doodad",
 			"player_world_type",
 			"wall",
-			"ability_modifier"
+			"ability_modifier",
+			"encounter"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

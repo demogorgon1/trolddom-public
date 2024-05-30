@@ -1,0 +1,45 @@
+############################################################
+# Loot
+
+loot_table .ignorg:
+{
+	slots:
+	[
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+############################################################
+# Boss
+
+entity dungeon_1_ignorg: !NPC 
+{ 
+	_string: "Ignorg" 
+	_level: 6 
+	_elite: true
+	_faction: monsters 
+	_sprite: goblin_boss 
+	_sprite_dead: goblin_boss_dead 
+	_weapon_damage: 1 
+	_resource_health: 2 
+	_loot_table: .ignorg
+	_creature_type: humanoid
+}
+
+map_trigger .ignorg_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .ignorg:
+{
+	entity dungeon_1_ignorg: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .ignorg_killed
+		}
+	}
+}

@@ -1,0 +1,44 @@
+############################################################
+# Loot
+
+loot_table .snarltooth:
+{
+	slots:
+	[
+		!WORLD_DROPS{}
+	]	
+}
+
+############################################################
+# Boss
+
+entity dungeon_1_snarltooth: !NPC 
+{ 
+	_string: "Snarltooth" 
+	_level: 8 
+	_elite: true
+	_faction: monsters 
+	_sprite: wolf_4
+	_sprite_dead: wolf_4_dead 
+	_weapon_damage: 1.5
+	_resource_health: 2 
+	_loot_table: .snarltooth
+	_creature_type: humanoid
+}
+
+map_trigger .snarltooth_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .snarltooth:
+{
+	entity dungeon_1_snarltooth: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .snarltooth_killed
+		}
+	}
+}

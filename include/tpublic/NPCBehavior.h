@@ -12,6 +12,7 @@ namespace tpublic
 
 			ID_DO_NOTHING,
 			ID_WANDERING,
+			ID_USE_ABILITY,
 
 			NUM_IDS
 		};
@@ -22,7 +23,8 @@ namespace tpublic
 			NULL,
 
 			"do_nothing",
-			"wandering"
+			"wandering",
+			"use_ability"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

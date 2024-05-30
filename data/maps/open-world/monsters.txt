@@ -108,13 +108,13 @@ entity .spawn_of_umbracoth: !NPC
 	_string: "Spawn of Umbracoth"
 	_level: 5
 	_faction: monsters
-	_sprite: tentacle_monster
-	_sprite_dead: tentacle_monster_dead 
+	_sprite: tentacle_monster_2
+	_sprite_dead: tentacle_monster_2_dead 
 	_weapon_damage: 2
 	_resource_health: 2
 	_elite: true
 	_loot_table: .spawn_of_umbracoth
-	_creature_type: beast
+	_creature_type: demon
 	_can_move_on_all_non_view_blocking_tiles: true
 }
 

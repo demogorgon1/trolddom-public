@@ -1,0 +1,45 @@
+############################################################
+# Loot
+
+loot_table .biznorg:
+{
+	slots:
+	[
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+############################################################
+# Boss
+
+entity dungeon_1_biznorg: !NPC 
+{ 
+	_string: "Biznorg" 
+	_level: 7 
+	_elite: true
+	_faction: monsters 
+	_sprite: goblin_boss_3
+	_sprite_dead: goblin_boss_3_dead 
+	_weapon_damage: 0.8 
+	_resource_health: 2 
+	_loot_table: .biznorg
+	_creature_type: humanoid
+}
+
+map_trigger .biznorg_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .biznorg:
+{
+	entity dungeon_1_biznorg: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .biznorg_killed
+		}
+	}
+}

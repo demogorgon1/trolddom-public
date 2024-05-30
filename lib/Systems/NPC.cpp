@@ -148,11 +148,14 @@ namespace tpublic::Systems
 
 		npc->m_cooldowns.Update(aContext->m_tick);
 
-		std::vector<uint32_t> threatRemovedEntityInstanceIds;
-		threat->m_table.Update(aContext->m_tick, threatRemovedEntityInstanceIds);
+		if(npc->m_encounterId != 0)
+		{
+			std::vector<uint32_t> threatRemovedEntityInstanceIds;
+			threat->m_table.Update(aContext->m_tick, threatRemovedEntityInstanceIds);
 
-		for(uint32_t threatRemovedInstanceId : threatRemovedEntityInstanceIds)
-			aContext->m_eventQueue->EventQueueThreat(threatRemovedInstanceId, aEntityInstanceId, INT32_MIN);
+			for (uint32_t threatRemovedInstanceId : threatRemovedEntityInstanceIds)
+				aContext->m_eventQueue->EventQueueThreat(threatRemovedInstanceId, aEntityInstanceId, INT32_MIN);
+		}
 
 		if(combat->m_interrupt.has_value() && npc->m_castInProgress.has_value())
 		{
@@ -266,15 +269,18 @@ namespace tpublic::Systems
 					aContext->m_eventQueue->EventQueueChat(aEntityInstanceId, *bark);
 				}				
 
+				if(npc->m_encounterId != 0)
+					aContext->m_eventQueue->EventQueueStartEncounter(aEntityInstanceId, npc->m_encounterId);
+
 				returnValue = EntityState::ID_IN_COMBAT;
 			}
 			else if(npc->m_despawnTime.m_ticksOutOfCombat != 0 && aTicksInState > npc->m_despawnTime.m_ticksOutOfCombat)
 			{
 				returnValue = EntityState::ID_DESPAWNING;
 			}
-			else if(npc->m_npcBehaviorState == NULL && npc->m_defaultBehaviorState != 0)
+			else if(npc->m_npcBehaviorState == NULL && npc->m_defaultBehaviorStateId != 0)
 			{
-				npc->m_npcBehaviorState = GetManifest()->GetById<Data::NPCBehaviorState>(npc->m_defaultBehaviorState);
+				npc->m_npcBehaviorState = GetManifest()->GetById<Data::NPCBehaviorState>(npc->m_defaultBehaviorStateId);
 				npc->m_npcBehaviorStateTick = aContext->m_tick;
 			}
 			else if(npc->m_npcBehaviorState != NULL)
@@ -315,6 +321,66 @@ namespace tpublic::Systems
 							}
 
 							npc->m_moveCooldownUntilTick = aContext->m_tick + 10 + (uint32_t)aContext->m_random->operator()() % 10;
+						}
+						break;
+
+					case NPCBehavior::ID_USE_ABILITY:
+						if (!npc->m_castInProgress.has_value() && !auras->HasEffect(AuraEffect::ID_STUN, NULL))
+						{
+							for(const Components::NPC::AbilityEntry& abilityEntry : state->m_abilities)
+							{
+								const Data::Ability* ability = GetManifest()->GetById<Data::Ability>(abilityEntry.m_abilityId);
+								if(npc->m_cooldowns.IsAbilityOnCooldown(ability))
+									continue;
+
+								if (!combat->HasResourcesForAbility(ability, NULL, combat->GetResourceMax(Resource::ID_MANA)))
+									continue;
+
+								if (abilityEntry.m_useProbability == UINT32_MAX || (*aContext->m_random)() < abilityEntry.m_useProbability)
+								{
+									uint32_t targetEntityInstanceId = 0;
+
+									IWorldView::EntityQuery entityQuery;
+									entityQuery.m_position = position->m_position;
+									entityQuery.m_maxDistance = ability->m_range;
+									entityQuery.m_entityIds = &abilityEntry.m_targetEntityIds;
+									entityQuery.m_flags = IWorldView::EntityQuery::FLAG_LINE_OF_SIGHT;
+
+									aContext->m_worldView->WorldViewQueryEntityInstances(entityQuery, [&](
+										const EntityInstance* aEntityInstance,
+										int32_t /*aDistanceSquared*/) -> bool
+										{
+											// FIXME: we might need to check if this is compatible with this ability
+											targetEntityInstanceId = aEntityInstance->GetEntityInstanceId();
+											return true;
+										});
+
+									if (targetEntityInstanceId != 0)
+									{
+										npc->m_cooldowns.AddAbility(GetManifest(), ability, aContext->m_tick, 0.0f); // FIXME: cooldown modifier from haste?
+
+										if (ability->m_castTime > 0)
+										{
+											int32_t castTime = ability->m_castTime;
+											if (ability->IsSpell())
+												castTime = Haste::CalculateCastTime(castTime, auras->GetSpellHaste(GetManifest()));
+
+											CastInProgress cast;
+											cast.m_abilityId = ability->m_id;
+											cast.m_targetEntityInstanceId = targetEntityInstanceId;
+											cast.m_start = aContext->m_tick;
+											cast.m_end = cast.m_start + castTime;
+											npc->m_castInProgress = cast;
+										}
+										else
+										{
+											aContext->m_eventQueue->EventQueueAbility(aEntityInstanceId, targetEntityInstanceId, Vec2(), ability, ItemInstanceReference(), NULL);
+										}
+
+										break;
+									}
+								}
+							}
 						}
 						break;
 

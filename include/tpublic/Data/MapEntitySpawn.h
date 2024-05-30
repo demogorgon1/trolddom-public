@@ -21,7 +21,8 @@ namespace tpublic
 				{
 					TYPE_NONE,
 					TYPE_IF,
-					TYPE_IF_NOT
+					TYPE_IF_NOT,
+					TYPE_ENCOUNTER_NOT_ACTIVE
 				};
 
 				struct SubCondition
@@ -35,13 +36,26 @@ namespace tpublic
 						const SourceNode*	aNode)
 					{
 						if (aNode->m_name == "if")
+						{
 							m_type = TYPE_IF;
+							m_dataType = DataType::ID_MAP_TRIGGER;
+						}
 						else if (aNode->m_name == "if_not")
+						{
 							m_type = TYPE_IF_NOT;
+							m_dataType = DataType::ID_MAP_TRIGGER;
+						}
+						else if (aNode->m_name == "encounter_not_active")
+						{
+							m_type = TYPE_ENCOUNTER_NOT_ACTIVE;
+							m_dataType = DataType::ID_ENCOUNTER;
+						}
 						else
+						{
 							TP_VERIFY(false, aNode->m_debugInfo, "'%s' is not a valid item.", aNode->m_name.c_str());
+						}
 
-						m_mapTriggerId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_TRIGGER, aNode->GetIdentifier());
+						m_id = aNode->m_sourceContext->m_persistentIdTable->GetId(m_dataType, aNode->GetIdentifier());
 					}
 
 					void
@@ -49,7 +63,8 @@ namespace tpublic
 						IWriter* aStream) const
 					{
 						aStream->WritePOD(m_type);
-						aStream->WriteUInt(m_mapTriggerId);
+						aStream->WriteUInt(m_id);
+						aStream->WritePOD(m_dataType);
 					}
 
 					bool
@@ -58,14 +73,17 @@ namespace tpublic
 					{
 						if (!aStream->ReadPOD(m_type))
 							return false;
-						if (!aStream->ReadUInt(m_mapTriggerId))
+						if (!aStream->ReadUInt(m_id))
+							return false;
+						if (!aStream->ReadPOD(m_dataType))
 							return false;
 						return true;
 					}
 
 					// Public data
 					Type										m_type = TYPE_NONE;
-					uint32_t									m_mapTriggerId = 0;
+					DataType::Id								m_dataType = DataType::INVALID_ID;
+					uint32_t									m_id = 0;
 				};
 
 				SpawnCondition()

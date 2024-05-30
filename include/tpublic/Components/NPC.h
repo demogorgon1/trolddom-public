@@ -42,6 +42,8 @@ namespace tpublic
 							m_abilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
 						else if(aChild->m_name == "use_probability")
 							m_useProbability = aChild->GetProbability();
+						else if (aChild->m_name == "target")
+							aChild->GetIdArray(DataType::ID_ENTITY, m_targetEntityIds);
 						else 
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 					});
@@ -53,6 +55,7 @@ namespace tpublic
 				{
 					aStream->WriteUInt(m_abilityId);
 					aStream->WriteUInt(m_useProbability);
+					aStream->WriteUInts(m_targetEntityIds);
 				}
 
 				bool
@@ -61,7 +64,9 @@ namespace tpublic
 				{
 					if(!aStream->ReadUInt(m_abilityId))
 						return false;
-					if(!aStream->ReadUInt(m_useProbability))
+					if (!aStream->ReadUInt(m_useProbability))
+						return false;
+					if (!aStream->ReadUInts(m_targetEntityIds))
 						return false;
 					return true;
 				}	
@@ -69,6 +74,7 @@ namespace tpublic
 				// Public data
 				uint32_t							m_abilityId = 0;
 				uint32_t							m_useProbability = UINT32_MAX;
+				std::vector<uint32_t>				m_targetEntityIds;
 			};
 
 			struct StateEntry
@@ -322,7 +328,8 @@ namespace tpublic
 				FIELD_DESPAWN_TIME,
 				FIELD_DEFAULT_BEHAVIOR_STATE,
 				FIELD_CAN_MOVE_ON_ALL_NON_VIEW_BLOCKING_TILES,
-				FIELD_BLOCKING
+				FIELD_BLOCKING,
+				FIELD_ENCOUNTER
 			};
 
 			static void
@@ -332,9 +339,10 @@ namespace tpublic
 				aSchema->DefineCustomObjectPointersSingleAppend<StateEntry>(FIELD_STATES, "state", offsetof(NPC, m_states));
 				aSchema->DefineCustomObject<Resources>(FIELD_RESOURCES, "resources", offsetof(NPC, m_resources));
 				aSchema->DefineCustomObject<DespawnTime>(FIELD_DESPAWN_TIME, "despawn_time", offsetof(NPC, m_despawnTime));
-				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_DEFAULT_BEHAVIOR_STATE, "default_behavior_state", offsetof(NPC, m_defaultBehaviorState))->SetDataType(DataType::ID_NPC_BEHAVIOR_STATE);
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_DEFAULT_BEHAVIOR_STATE, "default_behavior_state", offsetof(NPC, m_defaultBehaviorStateId))->SetDataType(DataType::ID_NPC_BEHAVIOR_STATE);
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_CAN_MOVE_ON_ALL_NON_VIEW_BLOCKING_TILES, "can_move_on_all_non_view_blocking_tiles", offsetof(NPC, m_canMoveOnAllNonViewBlockingTiles));
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_BLOCKING, "blocking", offsetof(NPC, m_blocking));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_ENCOUNTER, "encounter", offsetof(NPC, m_encounterId))->SetDataType(DataType::ID_ENCOUNTER);
 			}
 
 			const StateEntry*
@@ -353,9 +361,10 @@ namespace tpublic
 			std::vector<std::unique_ptr<StateEntry>>	m_states;
 			Resources									m_resources;
 			DespawnTime									m_despawnTime;
-			uint32_t									m_defaultBehaviorState = 0;
+			uint32_t									m_defaultBehaviorStateId = 0;
 			bool										m_canMoveOnAllNonViewBlockingTiles = false;
 			bool										m_blocking = true;
+			uint32_t									m_encounterId = 0;
 
 			// Not serialized
 			Cooldowns									m_cooldowns;
