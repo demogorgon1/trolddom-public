@@ -24,6 +24,7 @@ namespace tpublic
 		DataType::Id		aDataType,
 		const char*			aName)
 	{
+		TP_CHECK(aDataType != DataType::INVALID_ID, "Invalid data type.");
 		std::unordered_map<std::string, uint32_t>::iterator it = m_tables[aDataType].find(aName);
 		if(it == m_tables[aDataType].end())
 		{

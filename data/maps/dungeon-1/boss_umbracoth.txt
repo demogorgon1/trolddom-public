@@ -14,7 +14,27 @@ loot_table .umbracoth:
 
 encounter .umbracoth:
 {
-	
+	main_entities: [ dungeon_1_umbracoth ]
+
+	spawn:
+	{
+		map_entity_spawn: .umbracoth_spawn
+		possible_entities: [ .umbracoth_spawn ]
+		entity_count: 1
+		interval: [ 70 100 ]
+		
+		condition<entity_health_less_than>:
+		{
+			id: dungeon_1_umbracoth
+			value: 70			
+		}
+		
+		condition<entity_health_greater_than>:
+		{
+			id: dungeon_1_umbracoth
+			value: 15			
+		}		
+	}
 }
 
 entity dungeon_1_umbracoth: !NPC 
@@ -27,7 +47,7 @@ entity dungeon_1_umbracoth: !NPC
 	_sprite: tentacle_monster
 	_sprite_dead: tentacle_monster_dead 
 	_weapon_damage: 1.5
-	_resource_health: 3 
+	_resource_health: 4
 	_loot_table: .umbracoth
 	_creature_type: demon
 	_encounter: .umbracoth
@@ -64,7 +84,7 @@ entity .goblin_cultist: !NPC
 	_sprite: goblin_shaman
 	_sprite_dead: goblin_shaman_dead 
 	_weapon_damage: 1.7
-	_resource_health: 1.8
+	_resource_health: 1.5
 	_resource_mana: 1
 	_creature_type: humanoid
 	_default_abilities: [ { id: .goblin_cultist target: [ dungeon_1_umbracoth ] use_probability: 10 } ]
@@ -113,4 +133,23 @@ ability .goblin_cultist:
 	{
 		aura: .goblin_cultist
 	}
+}
+
+entity .umbracoth_spawn: !NPC
+{
+	_string: "Spawn of Umbracoth"
+	_level: 8
+	_elite: true
+	_faction: monsters 
+	_sprite: tentacle_monster_2
+	_sprite_dead: tentacle_monster_2_dead 
+	_weapon_damage: 1.5
+	_resource_health: 0.7
+	_creature_type: demon
+	_encounter: .umbracoth
+	_inactive_encounter_despawn: true
+}
+
+map_entity_spawn .umbracoth_spawn:
+{
 }

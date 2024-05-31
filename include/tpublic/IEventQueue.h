@@ -146,6 +146,7 @@ namespace tpublic
 												uint32_t													aProfessionId,
 												uint32_t													aAbilityId) = 0;
 		virtual void						EventQueueStartEncounter(
+												uint32_t													aEntityId,	
 												uint32_t													aEntityInstanceId,
 												uint32_t													aEncounterId) = 0;
 

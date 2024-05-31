@@ -156,6 +156,10 @@ namespace tpublic::Systems
 			for (uint32_t threatRemovedInstanceId : threatRemovedEntityInstanceIds)
 				aContext->m_eventQueue->EventQueueThreat(threatRemovedInstanceId, aEntityInstanceId, INT32_MIN);
 		}
+		else if(npc->m_inactiveEncounterDespawn && !aContext->m_worldView->WorldViewIsEncounterActive(npc->m_encounterId))
+		{
+			return EntityState::ID_DESPAWNING;
+		}
 
 		if(combat->m_interrupt.has_value() && npc->m_castInProgress.has_value())
 		{
@@ -270,7 +274,7 @@ namespace tpublic::Systems
 				}				
 
 				if(npc->m_encounterId != 0)
-					aContext->m_eventQueue->EventQueueStartEncounter(aEntityInstanceId, npc->m_encounterId);
+					aContext->m_eventQueue->EventQueueStartEncounter(aEntityId, aEntityInstanceId, npc->m_encounterId);
 
 				returnValue = EntityState::ID_IN_COMBAT;
 			}
