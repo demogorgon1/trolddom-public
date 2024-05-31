@@ -43,6 +43,8 @@ namespace tpublic
 											const Vec2&				aFrom,
 											const Vec2&				aTo) const = 0;
 		virtual uint32_t				WorldViewGetPlayerWorldCharacterId() const = 0;
+		virtual bool					WorldViewIsEncounterActive(
+											uint32_t				aEncounterId) const = 0;
 	};
 
 }

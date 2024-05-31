@@ -44,6 +44,7 @@ namespace tpublic
 		void			Remove(
 							uint32_t					aEntityInstanceId);
 		void			Clear();
+		void			DebugPrint() const;
 
 		// Data access
 		bool			IsEmpty() const { return m_head == NULL; }

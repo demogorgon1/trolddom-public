@@ -148,7 +148,7 @@ namespace tpublic::Systems
 
 		npc->m_cooldowns.Update(aContext->m_tick);
 
-		if(npc->m_encounterId != 0)
+		if(npc->m_encounterId == 0)
 		{
 			std::vector<uint32_t> threatRemovedEntityInstanceIds;
 			threat->m_table.Update(aContext->m_tick, threatRemovedEntityInstanceIds);

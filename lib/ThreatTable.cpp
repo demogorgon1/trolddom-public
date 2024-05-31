@@ -163,6 +163,13 @@ namespace tpublic
 		m_table.clear();
 	}
 
+	void			
+	ThreatTable::DebugPrint() const
+	{
+		for(const Entry* t = GetTop(); t != NULL; t = t->m_next)
+			printf("%u: %d threat @ %d tick\n", t->m_entityInstanceId, t->m_threat, t->m_tick);
+	}
+
 	//------------------------------------------------------------------------------
 
 	ThreatTable::Entry* 
