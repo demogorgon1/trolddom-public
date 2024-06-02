@@ -13,6 +13,11 @@ loot_table .grunthar:
 ############################################################
 # Boss
 
+encounter .grunthar:
+{
+	main_entities: [ dungeon_1_grunthar ]
+}
+
 entity dungeon_1_grunthar: !NPC 
 { 
 	_string: "Grunthar the Stonebreaker" 
@@ -25,6 +30,18 @@ entity dungeon_1_grunthar: !NPC
 	_resource_health: 2 
 	_loot_table: .grunthar
 	_creature_type: humanoid
+	_encounter: .grunthar
+	
+	_abilities: 
+	[
+		{
+			id: .grunthar target: self
+		}
+		
+		{
+			id: npc_attack
+		}
+	]		
 }
 
 map_trigger .grunthar_killed:
@@ -43,3 +60,56 @@ map_entity_spawn .grunthar:
 		}
 	}
 }
+
+ability .grunthar_tick:
+{
+	string: "Earthquake"
+	flags: [ target_self target_aoe target_aoe_hostile ]
+	icon: icon_stuff
+	delay: 3
+	aoe_radius: 10
+	aoe_cap: 10
+	aoe_requirement target<must_not_be_in_state>: { id: dead }	
+
+	direct_effect damage:
+	{
+		damage_type: physical
+		base: [ 30 40 ]
+	}
+}
+
+aura .grunthar:
+{
+	string: "Earthquake"
+	icon: icon_stuff		
+	type: buff
+	duration: based_on_effects
+	flags: [ unique channeled ]
+
+	aura_effect repeat:
+	{
+		update_interval: 15
+		update_count: 4
+		ability: .grunthar_tick
+	}
+}
+
+cooldown .grunthar:
+{
+	duration: 200
+}
+
+ability .grunthar:
+{
+	string: "Earthquake"
+	cast_time: 20
+	cooldowns: [ global .grunthar ]
+	flags: [ target_self ]
+	icon: icon_stuff 
+
+	direct_effect apply_aura:
+	{	
+		aura: .grunthar
+	}
+}
+

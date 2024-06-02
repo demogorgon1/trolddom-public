@@ -171,6 +171,8 @@ namespace tpublic
 					{
 						if (aChild->m_name == "icon")
 							m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
+						else if (aChild->m_name == "encounter")
+							m_encounterId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENCOUNTER, aChild->GetIdentifier());
 						else if (aChild->m_name == "duration")
 							m_duration = SourceToDuration(aChild);
 						else if (aChild->m_name == "type")
@@ -206,6 +208,7 @@ namespace tpublic
 				aStream->WriteString(m_description);
 				aStream->WriteOptionalObjectPointer(m_statModifiers);
 				m_charges.ToStream(aStream);
+				aStream->WriteUInt(m_encounterId);
 			}
 			 
 			bool
@@ -230,6 +233,12 @@ namespace tpublic
 					return false;
 				if(!m_charges.FromStream(aStream))
 					return false;
+
+				if(!aStream->IsEnd())
+				{
+					if (!aStream->ReadUInt(m_encounterId))
+						return false;
+				}
 				return true;
 			}
 
@@ -243,6 +252,7 @@ namespace tpublic
 			std::vector<std::unique_ptr<AuraEffectEntry>>	m_auraEffects;
 			std::unique_ptr<StatModifiers>					m_statModifiers;
 			CombatFunction									m_charges;
+			uint32_t										m_encounterId = 0;
 		};
 
 	}

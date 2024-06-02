@@ -131,7 +131,8 @@ namespace tpublic
 		virtual tpublic::EntityInstance*	EventQueueSpawnEntity(
 												uint32_t													aEntityId,
 												tpublic::EntityState::Id									aInitState,
-												uint32_t													aMapEntitySpawnId) = 0;
+												uint32_t													aMapEntitySpawnId,
+												bool														aDetachedFromSpawn) = 0;
 		virtual void						EventQueueMakeOffering(
 												uint32_t													aSourceEntityInstanceId,
 												uint32_t													aTargetEntityInstanceId,

@@ -27,6 +27,13 @@ namespace tpublic
 
 			struct AbilityEntry
 			{
+				enum TargetType : uint8_t
+				{
+					TARGET_TYPE_DEFAULT,
+					TARGET_TYPE_RANDOM_PLAYER,
+					TARGET_TYPE_SELF
+				};
+
 				AbilityEntry()
 				{
 
@@ -42,9 +49,13 @@ namespace tpublic
 							m_abilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
 						else if(aChild->m_name == "use_probability")
 							m_useProbability = aChild->GetProbability();
-						else if (aChild->m_name == "target")
+						else if (aChild->m_name == "target" && aChild->m_type == SourceNode::TYPE_ARRAY)
 							aChild->GetIdArray(DataType::ID_ENTITY, m_targetEntityIds);
-						else 
+						else if(aChild->m_name == "target" && aChild->IsIdentifier("random_player"))
+							m_targetType = TARGET_TYPE_RANDOM_PLAYER;
+						else if (aChild->m_name == "target" && aChild->IsIdentifier("self"))
+							m_targetType = TARGET_TYPE_SELF;
+						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 					});
 				}
@@ -56,6 +67,7 @@ namespace tpublic
 					aStream->WriteUInt(m_abilityId);
 					aStream->WriteUInt(m_useProbability);
 					aStream->WriteUInts(m_targetEntityIds);
+					aStream->WritePOD(m_targetType);
 				}
 
 				bool
@@ -68,6 +80,8 @@ namespace tpublic
 						return false;
 					if (!aStream->ReadUInts(m_targetEntityIds))
 						return false;
+					if(!aStream->ReadPOD(m_targetType))
+						return false;
 					return true;
 				}	
 
@@ -75,6 +89,8 @@ namespace tpublic
 				uint32_t							m_abilityId = 0;
 				uint32_t							m_useProbability = UINT32_MAX;
 				std::vector<uint32_t>				m_targetEntityIds;
+				TargetType							m_targetType = TARGET_TYPE_DEFAULT;
+				
 			};
 
 			struct StateEntry
@@ -372,6 +388,7 @@ namespace tpublic
 			// Not serialized
 			Cooldowns									m_cooldowns;
 			std::optional<CastInProgress>				m_castInProgress;
+			std::optional<CastInProgress>				m_channeling;
 			uint32_t									m_targetEntityInstanceId = 0;
 			int32_t										m_moveCooldownUntilTick = 0;
 			Vec2										m_spawnPosition;

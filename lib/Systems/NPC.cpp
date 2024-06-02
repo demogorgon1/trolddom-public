@@ -166,6 +166,32 @@ namespace tpublic::Systems
 			if(combat->m_interrupt->m_cooldownId != 0)
 				npc->m_cooldowns.AddCooldown(combat->m_interrupt->m_cooldownId, combat->m_interrupt->m_ticks, aContext->m_tick);
 
+			if(npc->m_castInProgress->m_channeling)
+				aContext->m_eventQueue->EventQueueCancelChanneling(aEntityInstanceId, npc->m_castInProgress->m_targetEntityInstanceId, npc->m_castInProgress->m_abilityId, npc->m_castInProgress->m_start);
+
+			npc->m_castInProgress.reset();
+		}
+
+		{
+			CastInProgress channeling;
+			if(aContext->m_worldView->WorldViewGetChanneling(aEntityInstanceId, channeling))
+			{
+				npc->m_castInProgress = channeling;
+			}
+		}
+
+		if (npc->m_castInProgress && aContext->m_tick >= npc->m_castInProgress->m_end)
+		{
+			if (!npc->m_castInProgress->m_channeling)
+			{
+				aContext->m_eventQueue->EventQueueAbility(
+					aEntityInstanceId,
+					npc->m_castInProgress->m_targetEntityInstanceId,
+					npc->m_castInProgress->m_aoeTarget,
+					GetManifest()->GetById<Data::Ability>(npc->m_castInProgress->m_abilityId),
+					ItemInstanceReference(),
+					NULL);
+			}
 			npc->m_castInProgress.reset();
 		}
 
@@ -173,18 +199,6 @@ namespace tpublic::Systems
 
 		if(aEntityState == EntityState::ID_DEFAULT || aEntityState == EntityState::ID_IN_COMBAT)
 		{
-			if(npc->m_castInProgress && aContext->m_tick >= npc->m_castInProgress->m_end)
-			{				
-				aContext->m_eventQueue->EventQueueAbility(
-					aEntityInstanceId, 
-					npc->m_castInProgress->m_targetEntityInstanceId,
-					npc->m_castInProgress->m_aoeTarget,
-					GetManifest()->GetById<Data::Ability>(npc->m_castInProgress->m_abilityId),
-					ItemInstanceReference(),
-					NULL);
-				npc->m_castInProgress.reset();
-			}
-
 			const EntityInstance* topThreatEntity = NULL;
 			if(!threat->m_table.IsEmpty())
 			{
@@ -442,21 +456,69 @@ namespace tpublic::Systems
 						{
 							const Data::Ability* ability = GetManifest()->GetById<tpublic::Data::Ability>(abilityEntry.m_abilityId);
 
-							if (distanceSquared > (int32_t)(ability->m_range * ability->m_range))
-								continue;
-								
-							if(npc->m_cooldowns.IsAbilityOnCooldown(ability))
-								continue;
-
-							if(!combat->HasResourcesForAbility(ability, NULL, combat->GetResourceMax(Resource::ID_MANA)))
-								continue;
-
-							if(!aContext->m_worldView->WorldViewLineOfSight(targetPosition->m_position, position->m_position))
-								continue;
-
-							if (abilityEntry.m_useProbability == UINT32_MAX || (*aContext->m_random)() < abilityEntry.m_useProbability)
+							if (abilityEntry.m_targetType == Components::NPC::AbilityEntry::TARGET_TYPE_DEFAULT)
 							{
+								if (distanceSquared > (int32_t)(ability->m_range * ability->m_range))
+									continue;
+								
+								if (npc->m_cooldowns.IsAbilityOnCooldown(ability))
+									continue;
+
+								if (!combat->HasResourcesForAbility(ability, NULL, combat->GetResourceMax(Resource::ID_MANA)))
+									continue;
+
+								if(!aContext->m_worldView->WorldViewLineOfSight(targetPosition->m_position, position->m_position))
+									continue;
+
+								if (abilityEntry.m_useProbability == UINT32_MAX || (*aContext->m_random)() < abilityEntry.m_useProbability)
+								{
+									useAbility = ability;
+									break;
+								}
+							}
+							else if(abilityEntry.m_targetType == Components::NPC::AbilityEntry::TARGET_TYPE_RANDOM_PLAYER)
+							{
+								if (npc->m_cooldowns.IsAbilityOnCooldown(ability))
+									continue;
+
+								if (!combat->HasResourcesForAbility(ability, NULL, combat->GetResourceMax(Resource::ID_MANA)))
+									continue;
+
+								IWorldView::EntityQuery entityQuery;
+								entityQuery.m_position = position->m_position;
+								entityQuery.m_maxDistance = ability->m_range;
+								entityQuery.m_flags = IWorldView::EntityQuery::FLAG_LINE_OF_SIGHT;
+
+								std::vector<const EntityInstance*> possibleTargets;
+								aContext->m_worldView->WorldViewQueryEntityInstances(entityQuery, [&](
+									const EntityInstance* aEntity,
+									int32_t				  /*aDistanceSquared*/)
+								{
+									if (aEntity->GetState() != EntityState::ID_DEAD && aEntity->IsPlayer())
+										possibleTargets.push_back(aEntity);
+									return false;
+								});
+
+
+								if(possibleTargets.size() > 0)
+								{									
+									const EntityInstance* selectedTarget = possibleTargets[Helpers::RandomInRange<size_t>(*aContext->m_random, 0, possibleTargets.size() - 1)];
+
+									useAbility = ability;
+									npc->m_targetEntityInstanceId = selectedTarget->GetEntityInstanceId();
+									break;
+								}
+							}
+							else if (abilityEntry.m_targetType == Components::NPC::AbilityEntry::TARGET_TYPE_SELF)
+							{
+								if (npc->m_cooldowns.IsAbilityOnCooldown(ability))
+									continue;
+
+								if (!combat->HasResourcesForAbility(ability, NULL, combat->GetResourceMax(Resource::ID_MANA)))
+									continue;
+
 								useAbility = ability;
+								npc->m_targetEntityInstanceId = aEntityInstanceId;
 								break;
 							}
 						}
@@ -480,14 +542,14 @@ namespace tpublic::Systems
 
 								CastInProgress cast;
 								cast.m_abilityId = useAbility->m_id;
-								cast.m_targetEntityInstanceId = target->GetEntityInstanceId();
+								cast.m_targetEntityInstanceId = npc->m_targetEntityInstanceId;
 								cast.m_start = aContext->m_tick;
 								cast.m_end = cast.m_start + castTime;
 								npc->m_castInProgress = cast;
 							}
 							else
 							{
-								aContext->m_eventQueue->EventQueueAbility(aEntityInstanceId, target->GetEntityInstanceId(), Vec2(), useAbility, ItemInstanceReference(), NULL);
+								aContext->m_eventQueue->EventQueueAbility(aEntityInstanceId, npc->m_targetEntityInstanceId, Vec2(), useAbility, ItemInstanceReference(), NULL);
 							}
 						}
 						else if(distanceSquared > 1 && !auras->HasEffect(AuraEffect::ID_IMMOBILIZE, NULL))

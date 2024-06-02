@@ -13,6 +13,11 @@ loot_table .ignorg:
 ############################################################
 # Boss
 
+encounter .ignorg:
+{
+	main_entities: [ dungeon_1_ignorg ]
+}
+
 entity dungeon_1_ignorg: !NPC 
 { 
 	_string: "Ignorg" 
@@ -21,10 +26,22 @@ entity dungeon_1_ignorg: !NPC
 	_faction: monsters 
 	_sprite: goblin_boss 
 	_sprite_dead: goblin_boss_dead 
-	_weapon_damage: 1 
-	_resource_health: 2 
+	_weapon_damage: 1.2 
+	_resource_health: 3 
 	_loot_table: .ignorg
 	_creature_type: humanoid
+	_encounter: .ignorg
+	
+	_abilities: 
+	[
+		{
+			id: .ignorg
+		}
+	
+		{
+			id: npc_attack
+		}
+	]	
 }
 
 map_trigger .ignorg_killed:
@@ -41,5 +58,30 @@ map_entity_spawn .ignorg:
 		{	
 			if_not: .ignorg_killed
 		}
+	}
+}
+
+cooldown .ignorg:
+{
+	duration: 50
+}
+
+ability .ignorg:
+{
+	string: "Whirlwind"
+	cooldowns: [ global .ignorg ]
+	flags: [ target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+	states: [ default in_combat ]
+	icon: icon_whirlwind
+	delay: 3
+	aoe_radius: 1
+	aoe_cap: 3
+	aoe_requirement target<must_not_be_in_state>: { id: dead }
+	source_particle_system: whirlwind	
+
+	direct_effect damage:
+	{
+		damage_type: physical
+		base: weapon
 	}
 }

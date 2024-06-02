@@ -126,7 +126,7 @@ namespace tpublic::DirectEffects
 					{
 						uint32_t fishingSplashEntityId = aManifest->GetExistingIdByName<tpublic::Data::Entity>("fishing_splash");
 
-						tpublic::EntityInstance* splashEntity = aEventQueue->EventQueueSpawnEntity(fishingSplashEntityId, tpublic::EntityState::ID_DEFAULT, 0);
+						tpublic::EntityInstance* splashEntity = aEventQueue->EventQueueSpawnEntity(fishingSplashEntityId, tpublic::EntityState::ID_DEFAULT, 0, false);
 
 						tpublic::Components::Position* splashPosition = splashEntity->GetComponent<tpublic::Components::Position>();
 						splashPosition->m_position = fishingPosition.value();

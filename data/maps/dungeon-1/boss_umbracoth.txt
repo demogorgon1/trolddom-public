@@ -51,6 +51,68 @@ entity dungeon_1_umbracoth: !NPC
 	_loot_table: .umbracoth
 	_creature_type: demon
 	_encounter: .umbracoth
+	
+	_abilities: 
+	[
+		{
+			id: .umbracoth
+			target: random_player
+		}
+	
+		{
+			id: npc_attack
+		}
+	]
+}
+
+ability .umbracoth_tick:
+{
+	string: "Void Condemnation"
+	icon: icon_holy_condemnation		
+	flags: [ always_in_range always_in_line_of_sight ]
+	
+	direct_effect damage:
+	{	
+		damage_type: unholy	
+		base: [ 25 30 ]
+	}	
+	
+}
+
+aura .umbracoth:
+{
+	string: "Void Condemnation"
+	icon: icon_holy_condemnation		
+	type: debuff
+	duration: based_on_effects
+	flags: [ magic ]
+	encounter: .umbracoth
+	aura_effect repeat: 
+	{ 
+		update_interval: 20
+		update_count: 10
+		ability: .umbracoth_tick
+	}
+}
+
+cooldown .umbracoth:
+{
+	duration: 100
+}
+
+ability .umbracoth:
+{
+	string: "Void Condemnation"
+	range: 10	
+	cast_time: 10
+	cooldowns: [ global .umbracoth ]
+	flags: [ spell target_other target_hostile ]
+	icon: icon_holy_condemnation
+
+	direct_effect apply_aura:
+	{	
+		aura: .umbracoth
+	}
 }
 
 map_trigger .umbracoth_killed:
@@ -87,9 +149,17 @@ entity .goblin_cultist: !NPC
 	_resource_health: 1.5
 	_resource_mana: 1
 	_creature_type: humanoid
-	_default_abilities: [ { id: .goblin_cultist target: [ dungeon_1_umbracoth ] use_probability: 10 } ]
 	_default_behavior_state: .goblin_cultist
 	_encounter: .umbracoth
+	
+	_default_abilities: 
+	[ 
+		{ 
+			id: .goblin_cultist 
+			target: [ dungeon_1_umbracoth ] 
+			use_probability: 10 
+		} 
+	]	
 }
 
 map_entity_spawn .goblin_cultist:

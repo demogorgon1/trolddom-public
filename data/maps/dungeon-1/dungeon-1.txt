@@ -54,6 +54,7 @@ map_palette .stuff:
 	entity_spawn .goblin_cultist: [ 120 255 100 ]
 	entity_spawn .umbracoth_spawn: [ 255 50 100 ]
 	entity_spawn .snarltooth: [ 60 255 0 ]
+	entity_spawn .snarltooth_spawn: [ 0 205 160 ]
 	entity_spawn .grunthar: [ 50 255 70 ]
 	entity_spawn .zarvok: [ 10 255 120 ]
 	entity_spawn .gribble: [ 255 155 50 ]

@@ -12,6 +12,25 @@ loot_table .snarltooth:
 ############################################################
 # Boss
 
+encounter .snarltooth:
+{
+	main_entities: [ dungeon_1_snarltooth ]
+	
+	spawn:
+	{
+		map_entity_spawn: .snarltooth_spawn
+		possible_entities: [ .snarltooth_spawn ]
+		entity_count: 2
+		interval: [ 90 100 ]
+		
+		condition<entity_health_less_than>:
+		{
+			id: dungeon_1_snarltooth
+			value: 50			
+		}
+	}	
+}
+
 entity dungeon_1_snarltooth: !NPC 
 { 
 	_string: "Snarltooth" 
@@ -21,9 +40,22 @@ entity dungeon_1_snarltooth: !NPC
 	_sprite: wolf_4
 	_sprite_dead: wolf_4_dead 
 	_weapon_damage: 1.5
-	_resource_health: 2 
+	_resource_health: 3.4 
 	_loot_table: .snarltooth
 	_creature_type: humanoid
+	_encounter: .snarltooth
+	
+	_abilities: 
+	[
+		{
+			id: .snarltooth
+			target: self
+		}
+	
+		{
+			id: npc_attack
+		}
+	]	
 }
 
 map_trigger .snarltooth_killed:
@@ -42,3 +74,55 @@ map_entity_spawn .snarltooth:
 		}
 	}
 }
+
+aura .snarltooth:
+{
+	string: "Frenzy"
+	icon: icon_stuff		
+	type: buff
+	duration: 60
+	flags: [ unique ]
+
+	stat_modifiers:
+	{
+		attack_haste: { add: 60 } 
+	}
+}
+
+cooldown .snarltooth:
+{
+	duration: 200
+}
+
+ability .snarltooth:
+{
+	string: "Frenzy"
+	cast_time: 10
+	cooldowns: [ global .snarltooth ]
+	flags: [ target_self ]
+	icon: icon_stuff 
+
+	direct_effect apply_aura:
+	{	
+		aura: .snarltooth
+	}
+}
+
+entity .snarltooth_spawn: !NPC
+{
+	_string: "Wolf"
+	_level: 8
+	_faction: monsters 
+	_sprite: wolf_1
+	_sprite_dead: wolf_1_dead
+	_weapon_damage: 1
+	_resource_health: 1
+	_creature_type: beast
+	_encounter: .snarltooth
+	_inactive_encounter_despawn: true
+}
+
+map_entity_spawn .snarltooth_spawn:
+{
+}
+

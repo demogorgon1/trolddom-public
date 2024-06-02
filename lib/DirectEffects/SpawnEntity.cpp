@@ -77,7 +77,7 @@ namespace tpublic::DirectEffects
 		IEventQueue*					aEventQueue,
 		const IWorldView*				/*aWorldView*/) 
 	{					
-		EntityInstance* spawnedEntity = aEventQueue->EventQueueSpawnEntity(m_entityId, EntityState::ID_DEFAULT, m_mapEntitySpawnId);
+		EntityInstance* spawnedEntity = aEventQueue->EventQueueSpawnEntity(m_entityId, EntityState::ID_DEFAULT, m_mapEntitySpawnId, false);
 
 		if(m_mapEntitySpawnId == 0)
 		{

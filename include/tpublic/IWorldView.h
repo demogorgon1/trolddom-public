@@ -3,6 +3,7 @@
 namespace tpublic
 {
 
+	class CastInProgress;
 	class MapData;
 
 	class IWorldView
@@ -45,6 +46,10 @@ namespace tpublic
 		virtual uint32_t				WorldViewGetPlayerWorldCharacterId() const = 0;
 		virtual bool					WorldViewIsEncounterActive(
 											uint32_t				aEncounterId) const = 0;
+		virtual bool					WorldViewGetChanneling(
+											uint32_t				aSourceEntityInstanceId,
+											CastInProgress&			aOut) const = 0;
+
 	};
 
 }
