@@ -10,7 +10,7 @@ aura recently_bandaged:
 	icon: icon_recently_bandaged
 	type: debuff
 	flags: [ unique ]
-	duration: 150
+	duration: 600
 }
 
 #####################################################
