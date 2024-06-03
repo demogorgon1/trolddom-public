@@ -33,7 +33,7 @@ talent_tree fighter_subtlety:
 
 talent fighter_subtlety_poison_bomb:
 {
-	string: "Poison Bom"
+	string: "Poison Bomb"
 	icon: icon_poison_bomb
 	prerequisites: [ fighter_subtlety_envenom ]	
 	talent_tree_points_required: 6
