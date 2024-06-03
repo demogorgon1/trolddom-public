@@ -70,7 +70,7 @@ namespace tpublic::DirectEffects
 
 	DirectEffectBase::Result
 	Heal::Resolve(
-		int32_t							/*aTick*/,
+		int32_t							aTick,
 		std::mt19937&					aRandom,
 		const Manifest*					/*aManifest*/,
 		CombatEvent::Id					aId,
@@ -139,7 +139,7 @@ namespace tpublic::DirectEffects
 
 				for(std::unordered_map<uint32_t, int32_t>::const_iterator i = targetThreatSource->m_targets.cbegin(); i != targetThreatSource->m_targets.cend(); i++)
 				{
-					aEventQueue->EventQueueThreat(aSource->GetEntityInstanceId(), i->first, threat);
+					aEventQueue->EventQueueThreat(aSource->GetEntityInstanceId(), i->first, threat, aTick);
 				}
 			}
 		}

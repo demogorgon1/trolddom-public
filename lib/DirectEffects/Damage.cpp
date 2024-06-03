@@ -130,7 +130,7 @@ namespace tpublic::DirectEffects
 
 	DirectEffectBase::Result
 	Damage::Resolve(
-		int32_t							/*aTick*/,
+		int32_t							aTick,
 		std::mt19937&					aRandom,
 		const Manifest*					aManifest,
 		CombatEvent::Id					aId,
@@ -306,7 +306,7 @@ namespace tpublic::DirectEffects
 				threat = (threat * 3) / 2; // Crits generate more threat per damage than non-crits
 
 			if (aTarget->GetEntityId() != 0) // Not a player
-				aEventQueue->EventQueueThreat(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), threat);
+				aEventQueue->EventQueueThreat(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), threat, aTick);
 		}
 
 		return { result };

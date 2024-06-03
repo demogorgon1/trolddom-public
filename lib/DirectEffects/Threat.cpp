@@ -94,7 +94,7 @@ namespace tpublic::DirectEffects
 
 	DirectEffectBase::Result
 	Threat::Resolve(
-		int32_t							/*aTick*/,
+		int32_t							aTick,
 		std::mt19937&					/*aRandom*/,
 		const Manifest*					/*aManifest*/,
 		CombatEvent::Id					/*aId*/,
@@ -120,7 +120,7 @@ namespace tpublic::DirectEffects
 					{
 						uint32_t entityInstanceId = i->first;
 
-						aEventQueue->EventQueueThreat(aTarget->GetEntityInstanceId(), entityInstanceId, m_add, m_multiply);
+						aEventQueue->EventQueueThreat(aTarget->GetEntityInstanceId(), entityInstanceId, m_add, aTick, m_multiply);
 					}
 				}
 			}
@@ -132,7 +132,7 @@ namespace tpublic::DirectEffects
 
 				if(combatPublic->m_targetEntityInstanceId != 0)
 				{
-					aEventQueue->EventQueueThreat(aTarget->GetEntityInstanceId(), combatPublic->m_targetEntityInstanceId, m_add, m_multiply);
+					aEventQueue->EventQueueThreat(aTarget->GetEntityInstanceId(), combatPublic->m_targetEntityInstanceId, m_add, aTick, m_multiply);
 				}
 			}
 			break;
@@ -140,7 +140,7 @@ namespace tpublic::DirectEffects
 		case APPLY_TO_SOURCE:
 			if(!aTarget->IsPlayer())
 			{
-				aEventQueue->EventQueueThreat(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), m_add, m_multiply);
+				aEventQueue->EventQueueThreat(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), m_add, aTick, m_multiply);
 			}
 			break;
 

@@ -74,7 +74,7 @@ namespace tpublic
 
 		DirectEffectBase::Result
 		ApplyAura::Resolve(
-			int32_t							/*aTick*/,
+			int32_t							aTick,
 			std::mt19937&					/*aRandom*/,
 			const Manifest*					aManifest,
 			CombatEvent::Id					/*aId*/,
@@ -123,7 +123,7 @@ namespace tpublic
 			for(const EntityInstance* targetEntity : targetEntities)
 			{
 				if (m_threat != 0 && targetEntity->GetEntityId() != 0)
-					aEventQueue->EventQueueThreat(aSource->GetEntityInstanceId(), targetEntity->GetEntityInstanceId(), m_threat);
+					aEventQueue->EventQueueThreat(aSource->GetEntityInstanceId(), targetEntity->GetEntityInstanceId(), m_threat, aTick);
 
 				std::vector<std::unique_ptr<AuraEffectBase>> effects;
 				for (const std::unique_ptr<Data::Aura::AuraEffectEntry>& t : aura->m_auraEffects)

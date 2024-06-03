@@ -154,7 +154,7 @@ namespace tpublic::Systems
 			threat->m_table.Update(aContext->m_tick, threatRemovedEntityInstanceIds);
 
 			for (uint32_t threatRemovedInstanceId : threatRemovedEntityInstanceIds)
-				aContext->m_eventQueue->EventQueueThreat(threatRemovedInstanceId, aEntityInstanceId, INT32_MIN);
+				aContext->m_eventQueue->EventQueueThreat(threatRemovedInstanceId, aEntityInstanceId, INT32_MIN, aContext->m_tick);
 		}
 		else if(npc->m_inactiveEncounterDespawn && !aContext->m_worldView->WorldViewIsEncounterActive(npc->m_encounterId))
 		{
@@ -200,9 +200,12 @@ namespace tpublic::Systems
 		if(aEntityState == EntityState::ID_DEFAULT || aEntityState == EntityState::ID_IN_COMBAT)
 		{
 			const EntityInstance* topThreatEntity = NULL;
+			const ThreatTable::Entry* topThreatEntry = NULL;
+
 			if(!threat->m_table.IsEmpty())
 			{
-				topThreatEntity = aContext->m_worldView->WorldViewSingleEntityInstance(threat->m_table.GetTop()->m_entityInstanceId);
+				topThreatEntry = threat->m_table.GetTop();
+				topThreatEntity = aContext->m_worldView->WorldViewSingleEntityInstance(topThreatEntry->m_entityInstanceId);
 				if(topThreatEntity != NULL && topThreatEntity->GetState() == EntityState::ID_DEAD)
 					topThreatEntity = NULL;
 			}
@@ -227,14 +230,14 @@ namespace tpublic::Systems
 							const tpublic::Components::CombatPublic* playerCombatPublic = aEntity->GetComponent<tpublic::Components::CombatPublic>();
 							int32_t aggroRange = GetManifest()->m_npcMetrics.GetAggroRangeForLevelDifference((int32_t)combat->m_level, (int32_t)playerCombatPublic->m_level);
 							if(aDistanceSquared <= aggroRange * aggroRange)
-								aContext->m_eventQueue->EventQueueThreat(aEntity->GetEntityInstanceId(), aEntityInstanceId, 0);
+								aContext->m_eventQueue->EventQueueThreat(aEntity->GetEntityInstanceId(), aEntityInstanceId, 0, aContext->m_tick);
 						}
 						else if(topThreatEntity != NULL && aEntity->GetState() != EntityState::ID_IN_COMBAT && !faction->IsNeutralOrFriendly())
 						{
 							const tpublic::Components::CombatPublic* nearbyNonPlayerCombatPublic = aEntity->GetComponent<tpublic::Components::CombatPublic>();
 							int32_t aggroAssistRange = GetManifest()->m_npcMetrics.m_aggroAssistRange;
 							if(nearbyNonPlayerCombatPublic != NULL && nearbyNonPlayerCombatPublic->m_factionId == combat->m_factionId && aDistanceSquared <= aggroAssistRange * aggroAssistRange)
-								aContext->m_eventQueue->EventQueueThreat(topThreatEntity->GetEntityInstanceId(), aEntity->GetEntityInstanceId(), 0);
+								aContext->m_eventQueue->EventQueueThreat(topThreatEntity->GetEntityInstanceId(), aEntity->GetEntityInstanceId(), 0, topThreatEntry->m_tick);
 						}
 					}
 
@@ -265,7 +268,7 @@ namespace tpublic::Systems
 		case EntityState::ID_DEFAULT:
 			if(npc->m_spawnWithTarget.has_value())
 			{
-				aContext->m_eventQueue->EventQueueThreat(npc->m_spawnWithTarget->m_entityInstanceId, aEntityInstanceId, npc->m_spawnWithTarget->m_threat);
+				aContext->m_eventQueue->EventQueueThreat(npc->m_spawnWithTarget->m_entityInstanceId, aEntityInstanceId, npc->m_spawnWithTarget->m_threat, aContext->m_tick);
 				npc->m_spawnWithTarget.reset();
 			}
 			else if (!threat->m_table.IsEmpty())
