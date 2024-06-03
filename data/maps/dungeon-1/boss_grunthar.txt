@@ -76,6 +76,14 @@ ability .grunthar_tick:
 		damage_type: physical
 		base: [ 30 40 ]
 	}
+	
+	source_visual<tile_shake>:
+	{
+		radius: 10
+		flags: [ line_of_sight ]
+		duration: 17
+		amount: 1
+	}		
 }
 
 aura .grunthar:

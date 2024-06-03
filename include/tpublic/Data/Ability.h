@@ -9,6 +9,7 @@
 #include "../Resource.h"
 #include "../SoundEffect.h"
 #include "../UIntRange.h"
+#include "../Visual.h"
 
 namespace tpublic
 {
@@ -474,6 +475,8 @@ namespace tpublic
 							m_iconFrom = DataReference(aMember);
 						else if (aMember->m_name == "description_from")
 							m_descriptionFrom = DataReference(aMember);
+						else if(aMember->m_name == "source_visual")
+							m_sourceVisuals.push_back(Visual(aMember));
 						else
 							TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
 					}
@@ -517,6 +520,7 @@ namespace tpublic
 				aWriter->WriteUInt(m_requiredLevel);
 				m_iconFrom.ToStream(aWriter);
 				m_descriptionFrom.ToStream(aWriter);
+				aWriter->WriteObjects(m_sourceVisuals);
 
 				for(uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 					aWriter->WriteUInt(m_resourceCosts[i]);
@@ -592,6 +596,8 @@ namespace tpublic
 					return false;
 				if (!m_descriptionFrom.FromStream(aReader))
 					return false;
+				if(!aReader->ReadObjects(m_sourceVisuals))
+					return false;
 
 				for (uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 				{
@@ -637,6 +643,7 @@ namespace tpublic
 			DataReference										m_iconFrom;
 			DataReference										m_descriptionFrom;
 			uint32_t											m_mustHaveNearbyEntityId = 0;
+			std::vector<Visual>									m_sourceVisuals;
 		};
 
 	}

@@ -46,6 +46,8 @@ map_palette .stuff:
 
 	entity_spawn .goblin_caster: [ 255 0 0 ]
 	entity_spawn .goblin_melee: [ 128 0 0 ]
+	entity_spawn .goblin_door_guard_1: [ 128 0 54 ]
+	entity_spawn .goblin_door_guard_2: [ 128 0 193 ]
 	entity_spawn .wolf: [ 128 64 0 ]
 
 	entity_spawn .ignorg: [ 255 255 0 ]
@@ -58,6 +60,11 @@ map_palette .stuff:
 	entity_spawn .grunthar: [ 50 255 70 ]
 	entity_spawn .zarvok: [ 10 255 120 ]
 	entity_spawn .gribble: [ 255 155 50 ]
+	
+	entity_spawn .biznorg_door: [ 50 30 120 ]
+	entity_spawn .door_1: [ 50 30 160 ]
+	entity_spawn .door_2: [ 50 30 190 ]
+	entity_spawn .final_door: [ 70 30 90 ]
 
 	player_spawn .player_spawn: [ 0 0 255 ]
 	
@@ -152,6 +159,20 @@ map dungeon_1:
 		condition trigger_not_set: .zarvok_killed
 		condition entity_state: { entity_spawn: .zarvok state: dead }		
 		run: { set_trigger: .zarvok_killed }
+	}
+
+	script:
+	{
+		condition trigger_not_set: .goblin_door_guard_1_killed
+		condition entity_state: { entity_spawn: .goblin_door_guard_1 state: dead }		
+		run: { set_trigger: .goblin_door_guard_1_killed }
+	}
+
+	script:
+	{
+		condition trigger_not_set: .goblin_door_guard_2_killed
+		condition entity_state: { entity_spawn: .goblin_door_guard_2 state: dead }		
+		run: { set_trigger: .goblin_door_guard_2_killed }
 	}
 	
 }

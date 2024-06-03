@@ -1,0 +1,35 @@
+!define local DOOR
+{
+	string: "Gate"
+	
+	systems: [ door ]
+	
+	components:
+	{
+		position: { }		
+		sound_source: { }
+		openable: 
+		{
+			unlock_map_trigger: @_map_trigger
+			sound: inventory_1
+		}
+		sprite: 
+		{ 
+			animations:
+			[
+				{ states: [ default spawning ] frames: [ door_closed_1 ] z_offset: -3 }
+				{ states: [ dead ] frames: [ door_open_1 ] z_offset: -3 }
+			]		
+		}		
+	}
+}
+
+entity .biznorg_door: !DOOR { _map_trigger: .biznorg_killed }
+entity .door_1: !DOOR { _map_trigger: .goblin_door_guard_1_killed }
+entity .door_2: !DOOR { _map_trigger: .goblin_door_guard_2_killed }
+entity .final_door: !DOOR { _map_trigger: .zarvok_killed }
+
+map_entity_spawn .biznorg_door: { entity .biznorg_door: { } }
+map_entity_spawn .door_1: { entity .door_1: { } }
+map_entity_spawn .door_2: { entity .door_2: { } }
+map_entity_spawn .final_door: { entity .final_door: { } }

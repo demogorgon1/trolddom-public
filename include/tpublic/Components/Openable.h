@@ -110,7 +110,8 @@ namespace tpublic
 				FIELD_REQUIRED_QUEST_ID,
 				FIELD_COMPLETE_MANUAL_OBJECTIVE_ID,
 				FIELD_TRIGGER_ABILITY_ID,
-				FIELD_REQUIRED_INCOMPLETE_QUEST_OBJECTIVE_ID
+				FIELD_REQUIRED_INCOMPLETE_QUEST_OBJECTIVE_ID,
+				FIELD_UNLOCK_MAP_TRIGGER_ID
 			};
 
 			static void
@@ -134,6 +135,7 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_COMPLETE_MANUAL_OBJECTIVE_ID, "complete_manual_objective", offsetof(Openable, m_completeManualObjectiveId))->SetDataType(DataType::ID_OBJECTIVE);
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_TRIGGER_ABILITY_ID, "trigger_ability", offsetof(Openable, m_triggerAbilityId))->SetDataType(DataType::ID_ABILITY);
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_REQUIRED_INCOMPLETE_QUEST_OBJECTIVE_ID, "required_incomplete_quest_objective", offsetof(Openable, m_requiredIncompleteQuestObjectiveId))->SetDataType(DataType::ID_OBJECTIVE);
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_UNLOCK_MAP_TRIGGER_ID, "unlock_map_trigger", offsetof(Openable, m_unlockMapTriggerId))->SetDataType(DataType::ID_MAP_TRIGGER);
 			}
 
 			// Public data
@@ -154,6 +156,7 @@ namespace tpublic
 			uint32_t					m_soundId = 0;
 			uint32_t					m_completeManualObjectiveId = 0;
 			uint32_t					m_triggerAbilityId = 0;
+			uint32_t					m_unlockMapTriggerId = 0;
 		};
 
 	}

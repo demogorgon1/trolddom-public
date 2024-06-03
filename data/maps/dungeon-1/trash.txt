@@ -157,6 +157,59 @@ map_entity_spawn .goblin_caster:
 }
 
 ############################################################
+# Door Guards
+
+entity .goblin_door_guard_1: !NPC
+{
+	_string: "Blizvork"
+	_level: 8
+	_elite: true
+	_faction: monsters 
+	_sprite: goblin
+	_sprite_dead: goblin_dead 
+	_weapon_damage: 1 
+	_resource_health: 1
+	_loot_table: .trash
+	_creature_type: humanoid
+}
+
+entity .goblin_door_guard_2: !NPC
+{
+	_string: "Olkorg"
+	_level: 10
+	_elite: true
+	_faction: monsters 
+	_sprite: goblin
+	_sprite_dead: goblin_dead 
+	_weapon_damage: 1 
+	_resource_health: 1
+	_loot_table: .trash
+	_creature_type: humanoid
+}
+
+map_trigger .goblin_door_guard_1_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_trigger .goblin_door_guard_2_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .goblin_door_guard_1:
+{	
+	entity .goblin_door_guard_1: { spawn_condition: { if_not: .goblin_door_guard_1_killed } } 	
+}
+
+map_entity_spawn .goblin_door_guard_2:
+{	
+	entity .goblin_door_guard_2: { spawn_condition: { if_not: .goblin_door_guard_2_killed } } 	
+}
+
+############################################################
 # Wolves
 
 loot_table .wolf:
