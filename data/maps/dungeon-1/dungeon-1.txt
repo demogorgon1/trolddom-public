@@ -94,6 +94,7 @@ map dungeon_1:
 	view_hidden_visibility: 35	
 	auto_doodads: true
 	level: 6
+	max_players: 5
 
 	layers:
 	[

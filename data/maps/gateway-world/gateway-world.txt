@@ -255,6 +255,7 @@ map gateway_world:
 	default_player_spawn: .player_spawn
 	has_dynamic_overview_map: true
 	seed: time_seed
+	max_players: 80
 
 	default_tile: water_1
 	default_fishing_loot_table: fish

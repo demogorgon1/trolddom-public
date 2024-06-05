@@ -55,6 +55,11 @@ namespace tpublic
 				m_viewHiddenVisibility = aItem->GetUInt32();
 				return true;
 			}
+			else if (aItem->m_name == "max_players")
+			{
+				m_maxPlayers = aItem->GetUInt32();
+				return true;
+			}
 			else if (aItem->m_name == "level")
 			{
 				m_level = aItem->GetUInt32();
@@ -106,6 +111,7 @@ namespace tpublic
 			aWriter->WritePOD(m_overviewMapType);
 			aWriter->WriteBool(m_autoDoodads);
 			aWriter->WriteUInts(m_mapLootTableIds);
+			aWriter->WriteUInt(m_maxPlayers);
 		}
 
 		bool
@@ -136,6 +142,8 @@ namespace tpublic
 				return false;
 			if (!aReader->ReadUInts(m_mapLootTableIds))
 				return false;
+			if (!aReader->ReadUInt(m_maxPlayers))
+				return false;
 			return true;
 		}
 
@@ -152,6 +160,7 @@ namespace tpublic
 		OverviewMapType								m_overviewMapType = OVERVIEW_MAP_TYPE_NONE;
 		bool										m_autoDoodads = false;
 		std::vector<uint32_t>						m_mapLootTableIds;
+		uint32_t									m_maxPlayers = 5;
 	};
 
 }

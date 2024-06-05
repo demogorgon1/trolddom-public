@@ -613,6 +613,7 @@ map open_world:
 	view_hidden_visibility: 35	
 	has_overview_map: true
 	auto_doodads: true
+	max_players: 80
 
 	layers:
 	[
