@@ -1,0 +1,69 @@
+emote agree: { strings: [ 
+	"You agree." 
+	"$source$ agrees."
+	"You agree with $target$."
+	"$source$ agrees with $target$."
+]}
+
+emote beg: { strings: [ 
+	"You beg." 
+	"$source$ begs."
+	"You beg $target$."
+	"$source$ begs $target$."
+]}
+
+emote disagree: { strings: [ 
+	"You disagree." 
+	"$source$ disagrees."
+	"You disagree with $target$."
+	"$source$ disagrees with $target$."
+]}
+
+emote goodbye: { strings: [ 
+	"You wave goodbye to everyone!" 
+	"$source$ waves goodbye to everyone!"
+	"You wave goodbye to $target$!"
+	"$source$ waves goodbye to $target$!"
+]}
+
+emote greet: { strings: [ 
+	"You greet everyone!" 
+	"$source$ greets everyone!"
+	"You greet $target$!"
+	"$source$ greets $target$!"
+]}
+
+emote hello: { strings: [ 
+	"You greet everyone with a warm hello!" 
+	"$source$ greets everyone with a warm hello!"
+	"You greet $target$ with a warm hello!"
+	"$source$ greets $target$ with a warm hello!"
+]}
+
+emote lol: { strings: [ 
+	"You laugh out loud." 
+	"$source$ laughs out loud."
+	"You laugh out loud at $target$."
+	"$source$ laughs out loud at $target$."
+]}
+
+emote rofl: { strings: [ 
+	"You roll at the floor laughing." 
+	"$source$ rolls at the floor laughing."
+	"You roll at the floor laughing at $target$."
+	"$source$ rolls at the floor laughing at $target$."
+]}
+
+emote sorry: { strings: [ 
+	"You apologize to everyone." 
+	"$source$ apologizes to everyone."
+	"You apologize to $target$."
+	"$source$ apologizes to $target$."
+]}
+
+emote yawn: { strings: [ 
+	"You yawn sleepily." 
+	"$source$ yawns sleepily."
+	"You yawn sleepily at $target$."
+	"$source$ yawns sleepily at $target$."
+]}

@@ -56,6 +56,7 @@ namespace tpublic
 			ID_WALL,
 			ID_ABILITY_MODIFIER,
 			ID_ENCOUNTER,
+			ID_EMOTE,
 
 			NUM_IDS
 		};
@@ -109,7 +110,8 @@ namespace tpublic
 			"player_world_type",
 			"wall",
 			"ability_modifier",
-			"encounter"
+			"encounter",
+			"emote"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

@@ -13,6 +13,7 @@
 #include <tpublic/Data/DialogueRoot.h>
 #include <tpublic/Data/DialogueScreen.h>
 #include <tpublic/Data/Doodad.h>
+#include <tpublic/Data/Emote.h>
 #include <tpublic/Data/Encounter.h>
 #include <tpublic/Data/Entity.h>
 #include <tpublic/Data/Expression.h>
@@ -67,6 +68,7 @@ namespace tpublic
 		RegisterDataContainer<Data::DialogueRoot>();
 		RegisterDataContainer<Data::DialogueScreen>();
 		RegisterDataContainer<Data::Doodad>();
+		RegisterDataContainer<Data::Emote>();
 		RegisterDataContainer<Data::Encounter>();
 		RegisterDataContainer<Data::Entity>();
 		RegisterDataContainer<Data::Expression>();
