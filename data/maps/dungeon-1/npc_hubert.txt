@@ -1,0 +1,88 @@
+dialogue_screen .hubert_greetings:
+{
+	text: 
+	[	
+	]
+	
+	options:
+	[
+		{ quest: .hubert_1 }
+	]
+}
+
+dialogue_root .hubert_dialogue:
+{
+	.hubert_greetings: { }
+}
+
+entity .hubert: !NPC
+{
+	_string: "Hubert"
+	_dialogue_root: .hubert_dialogue	
+	_sprite: man_19
+	_sprite_dead: man_19_dead	
+	_level: 10
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .hubert
+	_not_pushable: true	
+}
+
+loot_table .hubert:
+{
+	slots:
+	[
+		!WORLD_DROPS{}	
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+map_entity_spawn .hubert:
+{
+	entity .hubert: { }
+}
+
+############################################################
+# Quest 1
+
+objective .hubert_1:
+{
+	string: "Snarltooth Killed"
+	
+	maps: [ dungeon_1 ]
+	
+	kill_npc:
+	{
+		entities: [ dungeon_1_snarltooth ]
+		count: 1
+	}
+}
+
+quest .hubert_1:
+{
+	string: "Big Bad Wolf"
+
+	text:
+	[
+		"Find Snarltooth and slay it."
+	]
+	
+	description: 
+	[
+		"FIXME"
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"Nice."
+	]
+	
+	type: dungeon
+	objectives: [ .hubert_1 ]
+	level: 8	
+}

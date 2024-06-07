@@ -161,12 +161,14 @@ sprites:
 	sprite wolf_4: { dead: wolf_4_dead }
 	sprite troll_1: { dead: troll_1_dead }
 	sprite goblin_5: { dead: goblin_5_dead }
+	sprite man_19: { dead: man_19_dead tags: [ male human ] }
 
 	cursor: { position: [ 0 144 ] }
 
 	sprite wolf_4_dead: { }
 	sprite troll_1_dead: { }
 	sprite goblin_5_dead: { }
+	sprite man_19_dead: { }
 	
 }
 

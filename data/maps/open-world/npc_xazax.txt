@@ -60,7 +60,7 @@ entity .xazax: !NPC
 
 quest .xazax_1:
 {
-	string: "The Doom Speaker"
+	string: "Secret Document"
 
 	text:
 	[
@@ -69,7 +69,10 @@ quest .xazax_1:
 	
 	description: 
 	[
-		"FIXME"
+		"Let's see... The document speaks of a goblin warlord referring to himself as Zarvok the Cunning. Those guys definitely got some inflated egos, don't they?"
+		"Anyway, this cunning goblin has plans to summon some kind being to do his bidding. This document doesn't provide much details, but you should probably"
+		"go back to Sylas and tell him about this."
+
 	]
 
 	progress:
@@ -79,7 +82,7 @@ quest .xazax_1:
 	
 	completion:
 	[
-		"FIXME"
+		"What did Xazax have to say about the document?"
 	]
 
 	prerequisites: [ .sylas_3 ]

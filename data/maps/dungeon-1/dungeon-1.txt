@@ -60,6 +60,7 @@ map_palette .stuff:
 	entity_spawn .grunthar: [ 50 255 70 ]
 	entity_spawn .zarvok: [ 10 255 120 ]
 	entity_spawn .gribble: [ 255 155 50 ]
+	entity_spawn .hubert: [ 155 155 250 ]
 	
 	entity_spawn .biznorg_door: [ 50 30 120 ]
 	entity_spawn .door_1: [ 50 30 160 ]
