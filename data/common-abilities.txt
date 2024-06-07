@@ -28,6 +28,7 @@ aura pushed:
 	string: "Pushed"
 	icon: icon_push
 	type: debuff
+	flags: [ unique ]
 }
 
 cooldown push:
