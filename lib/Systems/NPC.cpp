@@ -592,6 +592,8 @@ namespace tpublic::Systems
 		case EntityState::ID_EVADING:
 			if(position->m_position == npc->m_anchorPosition)
 			{
+				npc->m_restoreResources = true;
+
 				returnValue = EntityState::ID_DEFAULT;
 			}
 			else if(npc->m_moveCooldownUntilTick < aContext->m_tick)
@@ -631,8 +633,16 @@ namespace tpublic::Systems
 		Context*			/*aContext*/) 
 	{
 		Components::CombatPublic* combat = GetComponent<Components::CombatPublic>(aComponents);
-		const Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
+		Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
 		Components::Position* position = GetComponent<Components::Position>(aComponents);
+
+		if(npc->m_restoreResources)
+		{
+			combat->SetDefaultResources();
+			combat->SetDirty();
+
+			npc->m_restoreResources = false;
+		}
 
 		if(combat->m_targetEntityInstanceId != npc->m_targetEntityInstanceId)
 		{

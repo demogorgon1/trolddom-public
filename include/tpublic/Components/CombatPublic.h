@@ -335,6 +335,20 @@ namespace tpublic
 				}
 			}
 
+			void
+			SetDefaultResources()
+			{
+				for (ResourceEntry& t : m_resources)
+				{
+					const Resource::Info* resourceInfo = Resource::GetInfo((Resource::Id)t.m_id);
+
+					if(resourceInfo->m_flags & Resource::FLAG_DEFAULT_TO_MAX)
+						t.m_current = t.m_max;
+					else
+						t.m_current = 0;
+				}
+			}
+
 			// Helpers
 			bool IsMasterLooter() const { return (m_combatFlags & COMBAT_FLAG_MASTER_LOOTER) != 0; }
 			bool IsElite() const { return (m_combatFlags & COMBAT_FLAG_ELITE) != 0; }

@@ -396,6 +396,7 @@ namespace tpublic
 			const Data::NPCBehaviorState*				m_npcBehaviorState = NULL;
 			uint32_t									m_npcBehaviorStateTick = 0;
 			NPCMovement									m_npcMovement;
+			bool										m_restoreResources = false;
 
 			struct SpawnWithTarget
 			{
