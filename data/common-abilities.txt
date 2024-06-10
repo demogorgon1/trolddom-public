@@ -173,3 +173,23 @@ ability desecrate:
 	{	
 	}
 }
+
+cooldown:
+{
+	duration: 18000
+}
+
+ability recall:
+{
+	string: "Recall"
+	cooldowns: [ global recall ]
+	description: "Return to your Spirit Stone."
+	cast_time: 50
+	flags: [ late_cooldown_trigger target_self always_in_range ]
+	states: [ default in_combat ]
+	icon: icon_recall
+	
+	direct_effect simple<recall>:
+	{
+	}
+}

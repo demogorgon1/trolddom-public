@@ -24,6 +24,7 @@ namespace tpublic
 			ID_RESURRECT,
 			ID_ACTIVATE_TRIGGER,
 			ID_SET_OWN_STATE,
+			ID_RECALL,
 
 			NUM_IDS
 		};
@@ -51,7 +52,8 @@ namespace tpublic
 			{ "pass",				DataType::INVALID_ID,	false },
 			{ "resurrect",			DataType::INVALID_ID,	false },
 			{ "activate_trigger",	DataType::INVALID_ID,	false },
-			{ "set_own_state",		DataType::INVALID_ID,	true }
+			{ "set_own_state",		DataType::INVALID_ID,	true },
+			{ "recall",				DataType::INVALID_ID,	false },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

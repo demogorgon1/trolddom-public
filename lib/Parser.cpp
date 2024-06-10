@@ -465,8 +465,31 @@ namespace tpublic
 			if (child->m_annotation)
 				_InnerResolveMacrosAndReferences(child->m_annotation.get());
 
-			_InnerResolveMacrosAndReferences(child.get());
+			bool isMacroInvocation = child->m_type == SourceNode::TYPE_MACRO_INVOCATION;
+
+			_InnerResolveMacrosAndReferences(child.get());		
+
+			// If this is a macro invocation that produces a (non-empty) array, and we're currently in an array, do an append
+			if(isMacroInvocation && child->m_type == SourceNode::TYPE_ARRAY && aNode->m_type == SourceNode::TYPE_ARRAY && child->m_children.size() > 0)
+			{
+				size_t j = i;
+
+				std::unique_ptr<SourceNode> detached = std::move(child);
+
+				for(std::unique_ptr<SourceNode>& t : detached->m_children)
+				{					
+					if(j == i)
+						child = std::move(t);
+					else
+						aNode->m_children.insert(aNode->m_children.begin() + j, std::move(t));
+					j++;
+				}
+
+				i = j + 1;
+			}
 		}
+
+
 	}
 
 	void

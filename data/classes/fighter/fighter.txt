@@ -26,7 +26,7 @@ class fighter:
 	color_1: [ 128 32 0 ] 
 	color_2: [ 70 32 0 ] 
 	default_attack: fighter_attack
-	default_action_bar: [ fighter_attack strike push ]
+	default_action_bar: [ fighter_attack strike !DEFAULT_ABILITIES{} ]
 	talent_trees: [ fighter_combat fighter_subtlety fighter_protection ]
 	
 	item_types: [ armor_cloth armor_mail armor_plate weapon_1h_sword weapon_1h_mace weapon_1h_axe weapon_1h_knife
@@ -62,7 +62,8 @@ class fighter:
 			[
 				fighter_attack
 				strike
-				push
+				
+				!DEFAULT_ABILITIES{}
 			]
 						
 			stats:

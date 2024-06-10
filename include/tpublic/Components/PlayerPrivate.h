@@ -96,6 +96,7 @@ namespace tpublic
 			// Not serialized, internal
 			bool															m_pvpCombatEvent = false;
 			bool															m_tryEditPlayerWorlds = false;
+			bool															m_recall = false;
 			int32_t															m_lastPVPCombatEventTick = 0;
 			uint32_t														m_xpGain = 0;
 

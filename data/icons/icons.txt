@@ -278,6 +278,9 @@ sprites:
 	sprite icon_ear_2 : { tags: [ icon ] }
 	sprite icon_key_1 : { tags: [ icon ] }
 	sprite icon_neck_garlic : { tags: [ icon ] }
+	
+	cursor: { position: [ 0 240 ] }		
+	sprite icon_recall : { tags: [ icon ] }
 }
 
 

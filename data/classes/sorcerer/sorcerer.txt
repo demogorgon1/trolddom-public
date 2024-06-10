@@ -50,7 +50,7 @@ class sorcerer:
 	color_1: [ 0 59 210 ] 
 	color_2: [ 0 10 64 ]
 	default_attack: sorcerer_attack
-	default_action_bar: [ sorcerer_attack firebolt push ]
+	default_action_bar: [ sorcerer_attack firebolt !DEFAULT_ABILITIES{} ]
 	talent_trees: [ sorcerer_arcane sorcerer_elemental sorcerer_battle_mage ]
 
 	item_types: [ armor_cloth weapon_1h_sword weapon_1h_knife weapon_2h_staff ]
@@ -88,7 +88,8 @@ class sorcerer:
 			[
 				attack
 				firebolt
-				push
+				
+				!DEFAULT_ABILITIES{}
 			]
 						
 			stats:
