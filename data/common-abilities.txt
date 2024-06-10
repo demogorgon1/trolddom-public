@@ -174,7 +174,7 @@ ability desecrate:
 	}
 }
 
-cooldown:
+cooldown recall:
 {
 	duration: 18000
 }
