@@ -526,6 +526,10 @@ namespace tpublic
 						{
 							aMember->GetIdArray(DataType::ID_ITEM, m_startInventory);
 						}
+						else if (aMember->m_name == "sprites_walk")
+						{
+							aMember->GetIdArray(DataType::ID_SPRITE, m_walkSpriteIds);
+						}
 						else if (aMember->m_name == "item_types")
 						{
 							std::vector<ItemType::Id> itemTypes;
@@ -577,6 +581,7 @@ namespace tpublic
 				aStream->WritePOD(m_itemTypesMask);
 				aStream->WriteUInts(m_systems);
 				aStream->WriteUInts(m_startInventory);
+				aStream->WriteUInts(m_walkSpriteIds);
 			}
 			
 			bool	
@@ -615,6 +620,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInts(m_startInventory))
 					return false;
+				if (!aStream->ReadUInts(m_walkSpriteIds))
+					return false;
 				return true;
 			}
 
@@ -623,6 +630,7 @@ namespace tpublic
 			std::string												m_description;
 			uint32_t												m_spriteId = 0;
 			uint32_t												m_spriteDeadId = 0;
+			std::vector<uint32_t>									m_walkSpriteIds;
 			Color													m_color1;
 			Color													m_color2;
 			uint32_t												m_defaultAttackAbilityId = 0;

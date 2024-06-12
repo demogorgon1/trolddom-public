@@ -16,4 +16,16 @@ sprites:
 	sprite priest_dead: { }
 	sprite sorcerer_dead: { }	
 
+	cursor: { position: [ 0 32 ] }
+	
+	sprite fighter_walk_1: { }
+	sprite priest_walk_1: { }
+	sprite sorcerer_walk_1: { }	
+
+	cursor: { position: [ 0 48 ] }
+	
+	sprite fighter_walk_2: { }
+	sprite priest_walk_2: { }
+	sprite sorcerer_walk_2: { }	
+
 }

@@ -20,7 +20,8 @@ namespace tpublic
 			enum PositionFlag : uint8_t
 			{
 				POSITION_FLAG_BLOCKING		= 0x01,
-				POSITION_FLAG_TELEPORTED	= 0x02
+				POSITION_FLAG_TELEPORTED	= 0x02,
+				POSITION_FLAG_MOVING		= 0x04
 			};
 
 			enum Field : uint32_t
@@ -44,6 +45,9 @@ namespace tpublic
 			bool	IsTeleported() const { return m_positionFlags & POSITION_FLAG_TELEPORTED; }
 			void	SetTeleported() { m_positionFlags |= POSITION_FLAG_TELEPORTED; }
 			void	ClearTeleported() { m_positionFlags &= ~POSITION_FLAG_TELEPORTED; }
+			bool	IsMoving() const { return m_positionFlags & POSITION_FLAG_MOVING; }
+			void	SetMoving() { m_positionFlags |= POSITION_FLAG_MOVING; }
+			void	ClearMoving() { m_positionFlags &= ~POSITION_FLAG_MOVING; }
 
 			// Public data
 			Vec2		m_position;

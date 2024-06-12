@@ -46,6 +46,7 @@ class sorcerer:
 	
 	sprite: sorcerer
 	sprite_dead: sorcerer_dead
+	sprites_walk: [ sorcerer_walk_1 sorcerer_walk_2 ]
 	
 	color_1: [ 0 59 210 ] 
 	color_2: [ 0 10 64 ]
@@ -86,7 +87,7 @@ class sorcerer:
 			
 			unlock_abilities:
 			[
-				attack
+				sorcerer_attack
 				firebolt
 				
 				!DEFAULT_ABILITIES{}

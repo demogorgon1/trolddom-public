@@ -7,6 +7,7 @@ class priest:
 	
 	sprite: priest
 	sprite_dead: priest_dead
+	sprites_walk: [ priest_walk_1 priest_walk_2 ]
 	
 	color_1: [ 210 210 210 ] 
 	color_2: [ 100 100 64 ]
