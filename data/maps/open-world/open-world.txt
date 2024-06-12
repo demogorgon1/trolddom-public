@@ -474,6 +474,8 @@ map_palette .tiles:
 	tile ext_dungeon_wall: [ 0 0 32 ]
 	tile ext_dungeon_entrance: [ 0 0 64 ]
 	tile ext_cave_entrance: [ 0 0 128 ]
+	tile wood_wall_window: [ 255 128 64 ] 
+	tile wood_solid_wall_face_window: [ 100 100 50 ]
 }
 
 map_palette .stuff:

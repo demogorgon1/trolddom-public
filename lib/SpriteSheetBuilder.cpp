@@ -195,6 +195,10 @@ namespace tpublic
 
 						aSpriteComponent->GetIdArray(DataType::ID_SPRITE, *borders);
 					}
+					else if (aSpriteComponent->m_name == "alt_tiles")
+					{
+						aSpriteComponent->GetIdArray(DataType::ID_SPRITE, sprite->m_info.m_altTileSpriteIds);
+					}
 					else if(aSpriteComponent->m_name == "origin")
 					{
 						TP_VERIFY(aSpriteComponent->m_type == SourceNode::TYPE_ARRAY && aSpriteComponent->m_children.size() == 2, aSpriteComponent->m_debugInfo, "Not a valid vector.");

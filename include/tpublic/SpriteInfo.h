@@ -81,6 +81,7 @@ namespace tpublic
 			aStream->WriteUInt(m_deadSpriteId);
 			aStream->WriteUInt(m_altGreyscaleSpriteId);
 			aStream->WriteUInts(m_borders);
+			aStream->WriteUInts(m_altTileSpriteIds);
 			m_origin.ToStream(aStream);
 			aStream->WriteObjects(m_namedAnchors);
 			aStream->WritePOD(m_averageColor);
@@ -106,6 +107,8 @@ namespace tpublic
 			if (!aStream->ReadUInt(m_altGreyscaleSpriteId))
 				return false;
 			if (!aStream->ReadUInts(m_borders))
+				return false;
+			if (!aStream->ReadUInts(m_altTileSpriteIds))
 				return false;
 			if(!m_origin.FromStream(aStream))
 				return false;
@@ -179,6 +182,7 @@ namespace tpublic
 		Image::RGBA					m_averageColor;
 		uint32_t					m_deadSpriteId = 0;
 		uint32_t					m_altGreyscaleSpriteId = 0;
+		std::vector<uint32_t>		m_altTileSpriteIds;
 
 		// This is a bit wonky, only using a shared_ptr here so SpriteInfo can be copied easily.
 		typedef std::unordered_map<uint32_t, std::shared_ptr<std::vector<uint32_t>>> BorderTable;
