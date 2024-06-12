@@ -48,7 +48,7 @@ ability dragon_breath:
 {
 	string: "Dragon Breath"
 	range: 2	
-	cooldowns: [ global ]
+	cooldowns: [ global spell_fire_lockout ]
 	flags: [ spell offensive target_other target_hostile ]
 	states: [ default in_combat ]
 	icon: icon_dragon_breath
@@ -118,7 +118,7 @@ ability dragon_punch:
 {
 	string: "Dragon Punch"
 	range: 1	
-	cooldowns: [ global dragon_punch ]
+	cooldowns: [ global dragon_punch spell_fire_lockout ]
 	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
 	states: [ default in_combat ]
 	icon: icon_dragon_punch

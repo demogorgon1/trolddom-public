@@ -52,7 +52,8 @@ namespace tpublic
 				FLAG_TARGET_AOE_HOSTILE				= 0x01000000,
 				FLAG_TARGET_AOE_ALWAYS_SELF			= 0x02000000,
 				FLAG_TRIGGER_MOVE_COOLDOWN			= 0x04000000,
-				FLAG_QUEST_TRIGGER					= 0x08000000
+				FLAG_QUEST_TRIGGER					= 0x08000000,
+				FLAG_INTERRUPTABLE					= 0x10000000
 			};
 
 			static inline Resource::Id
@@ -129,6 +130,8 @@ namespace tpublic
 						flags |= FLAG_TRIGGER_MOVE_COOLDOWN;
 					else if (strcmp(identifier, "quest_trigger") == 0)
 						flags |= FLAG_QUEST_TRIGGER;
+					else if (strcmp(identifier, "interruptable") == 0)
+						flags |= FLAG_INTERRUPTABLE;
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid ability flag.", identifier);
 				});
@@ -384,6 +387,7 @@ namespace tpublic
 			bool IsItem() const { return m_flags & FLAG_ITEM; }
 			bool ShouldTriggerMoveCooldown() const { return m_flags & FLAG_TRIGGER_MOVE_COOLDOWN; }
 			bool IsQuestTrigger() const { return m_flags & FLAG_QUEST_TRIGGER; }
+			bool IsInterruptable() const { return m_flags & FLAG_INTERRUPTABLE; }
 			
 			bool 
 			IsUsableInState(
@@ -429,6 +433,8 @@ namespace tpublic
 							m_aoeCap = aMember->GetUInt32();
 						else if (aMember->m_name == "required_level")
 							m_requiredLevel = aMember->GetUInt32();
+						else if (aMember->m_name == "min_range")
+							m_minRange = aMember->GetUInt32();
 						else if (aMember->m_name == "speed")
 							m_speed = aMember->GetInt32();
 						else if (aMember->m_name == "delay")
@@ -521,6 +527,7 @@ namespace tpublic
 				m_iconFrom.ToStream(aWriter);
 				m_descriptionFrom.ToStream(aWriter);
 				aWriter->WriteObjects(m_sourceVisuals);
+				aWriter->WriteUInt(m_minRange);
 
 				for(uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 					aWriter->WriteUInt(m_resourceCosts[i]);
@@ -598,6 +605,8 @@ namespace tpublic
 					return false;
 				if(!aReader->ReadObjects(m_sourceVisuals))
 					return false;
+				if (!aReader->ReadUInt(m_minRange))
+					return false;
 
 				for (uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 				{
@@ -612,6 +621,7 @@ namespace tpublic
 			std::string											m_displayName;
 			std::string											m_description;
 			uint32_t											m_range = 1;
+			uint32_t											m_minRange = 0;
 			int32_t												m_speed = 0;
 			int32_t												m_delay = 0;
 			std::vector<uint32_t>								m_cooldowns;

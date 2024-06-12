@@ -106,6 +106,21 @@ entity .goblin_shaman_7: !NPC
 	_abilities: [ { id: npc_firebolt }{ id: npc_attack } ]
 }
 
+entity .goblin_hunter_8: !NPC
+{
+	_string: "Goblin Hunter"
+	_level: 8
+	_elite: true
+	_faction: monsters 
+	_sprite: goblin_bowman_1
+	_sprite_dead: goblin_bowman_1_dead 
+	_weapon_damage: 1 
+	_resource_health: 1
+	_loot_table: .trash
+	_creature_type: humanoid	
+	_abilities: [ { id: npc_shoot }{ id: npc_attack } ]
+}
+
 entity .goblin_8: !NPC
 {
 	_string: "Goblin Enforcer"
@@ -152,6 +167,13 @@ map_entity_spawn .goblin_caster:
 	entity .goblin_shaman_7: { level: 8 spawn_condition: { if_not: .snarltooth_killed } } 
 	entity .goblin_shaman_7: { level: 9 spawn_condition: { if_not: .grunthar_killed } } 
 	entity .goblin_shaman_7: { level: 10 spawn_condition: { if_not: .zarvok_killed } } 
+	
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+map_entity_spawn .goblin_ranged:
+{	
+	entity .goblin_hunter_8: { level: 9 spawn_condition: { if_not: .grunthar_killed } } 
 	
 	spawn_timer: !TRASH_RESPAWN_TIMER{}
 }

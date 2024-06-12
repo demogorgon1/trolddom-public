@@ -118,8 +118,8 @@ ability void_lightning:
 	string: "Void Lightning"
 	range: 7
 	cast_time: 20
-	cooldowns: [ global void_lightning ]		
-	flags: [ spell offensive target_other target_hostile can_miss ]
+	cooldowns: [ global void_lightning spell_arcane_lockout ]		
+	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
 	states: [ default in_combat ]
 	icon: icon_void_lightning
 	talent_tree: sorcerer_arcane
@@ -210,8 +210,8 @@ ability teleport:
 	string: "Teleport"
 	range: 10
 	cast_time: 15
-	cooldowns: [ global teleport ]
-	flags: [ spell target_aoe target_aoe_always_self ]
+	cooldowns: [ global teleport spell_arcane_lockout ]
+	flags: [ spell target_aoe target_aoe_always_self interruptable ]
 	states: [ default in_combat ]
 	icon: icon_teleport
 	resource_cost mana: 20
@@ -384,7 +384,7 @@ ability arcane_missile:
 {
 	string: "Arcane Missile"
 	range: 8
-	cooldowns: [ global arcane_missile ]
+	cooldowns: [ global arcane_missile spell_arcane_lockout ]
 	flags: [ spell offensive target_other target_hostile can_miss ]
 	states: [ default in_combat ]
 	icon: icon_arcane_missile
@@ -422,8 +422,8 @@ ability sleep:
 {
 	string: "Sleep"
 	range: 8
-	cooldowns: [ global ]
-	flags: [ spell offensive target_other target_hostile can_miss ]
+	cooldowns: [ global spell_arcane_lockout ]
+	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
 	states: [ default in_combat ]
 	icon: icon_sleep
 	talent_tree: sorcerer_arcane
@@ -460,7 +460,7 @@ ability counterspell:
 {
 	string: "Counterspell"
 	range: 8
-	cooldowns: [ global counterspell ]
+	cooldowns: [ global counterspell spell_arcane_lockout ]
 	flags: [ spell offensive target_other target_hostile can_miss ]
 	states: [ default in_combat ]
 	icon: icon_counterspell

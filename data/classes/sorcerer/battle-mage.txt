@@ -95,7 +95,7 @@ ability void_blade_storm:
 {
 	string: "Void Blade Storm"
 	range: 1	
-	cooldowns: [ global void_blade_storm ]
+	cooldowns: [ global void_blade_storm spell_arcane_lockout ]
 	flags: [ melee target_hostile target_other target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
 	states: [ default in_combat ]
 	icon: icon_void_blade_storm
@@ -202,7 +202,7 @@ ability wizard_strike:
 {
 	string: "Wizard Strike"
 	range: 1	
-	cooldowns: [ global wizard_strike ]
+	cooldowns: [ global wizard_strike spell_arcane_lockout ]
 	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
 	states: [ default in_combat ]
 	icon: icon_wizard_strike
@@ -312,7 +312,7 @@ ability power_shield:
 {
 	string: "Power Shield"
 	description: "Absorbs damage for up to 30 seconds."
-	cooldowns: [ global power_shield ]
+	cooldowns: [ global power_shield spell_arcane_lockout ]
 	resource_cost mana: 25
 	flags: [ target_self ]
 	states: [ default in_combat ]	

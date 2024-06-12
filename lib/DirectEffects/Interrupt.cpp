@@ -66,11 +66,15 @@ namespace tpublic::DirectEffects
 		if(targetCombatPublic->m_castInProgress.has_value())
 		{
 			const Data::Ability* ability = aManifest->GetById<Data::Ability>(targetCombatPublic->m_castInProgress->m_abilityId);
-			for(uint32_t cooldownId : ability->m_cooldowns)
+
+			if(ability->IsInterruptable())
 			{
-				const Data::Cooldown* cooldown = aManifest->GetById<Data::Cooldown>(cooldownId);
-				if(cooldown->m_trigger == Data::Cooldown::TRIGGER_INTERRUPT)
-					aEventQueue->EventQueueInterrupt(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), cooldownId, m_lockoutTicks);
+				for (uint32_t cooldownId : ability->m_cooldowns)
+				{
+					const Data::Cooldown* cooldown = aManifest->GetById<Data::Cooldown>(cooldownId);
+					if (cooldown->m_trigger == Data::Cooldown::TRIGGER_INTERRUPT)
+						aEventQueue->EventQueueInterrupt(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), cooldownId, m_lockoutTicks);
+				}
 			}
 		}
 

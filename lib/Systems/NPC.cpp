@@ -262,6 +262,9 @@ namespace tpublic::Systems
 				{
 					returnValue = EntityState::ID_DESPAWNING;
 				}
+
+				if(npc->m_targetEntityInstanceId != 0)
+					npc->m_targetEntityInstanceId = 0;
 			}
 			break;
 
@@ -463,7 +466,10 @@ namespace tpublic::Systems
 							{
 								if (distanceSquared > (int32_t)(ability->m_range * ability->m_range))
 									continue;
-								
+
+								if (distanceSquared < (int32_t)(ability->m_minRange * ability->m_minRange))
+									continue;
+
 								if (npc->m_cooldowns.IsAbilityOnCooldown(ability))
 									continue;
 
@@ -495,9 +501,9 @@ namespace tpublic::Systems
 								std::vector<const EntityInstance*> possibleTargets;
 								aContext->m_worldView->WorldViewQueryEntityInstances(entityQuery, [&](
 									const EntityInstance* aEntity,
-									int32_t				  /*aDistanceSquared*/)
+									int32_t				  aDistanceSquared)
 								{
-									if (aEntity->GetState() != EntityState::ID_DEAD && aEntity->IsPlayer())
+									if (aEntity->GetState() != EntityState::ID_DEAD && aEntity->IsPlayer() && aDistanceSquared >= (int32_t)(ability->m_minRange * ability->m_minRange))
 										possibleTargets.push_back(aEntity);
 									return false;
 								});

@@ -53,5 +53,11 @@ sprites:
 	sprite effect_void_lightning_0: { }
 	sprite effect_void_lightning_1: { }
 	sprite effect_void_lightning_2: { }
+
+	cursor: { position: [ 0 60 ] }
+	size: { width: 7 height: 7 }
+	sprite effect_arrow: { flags: [ centered doubled ] }
 	
 }
+
+

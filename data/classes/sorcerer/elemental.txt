@@ -287,10 +287,10 @@ ability lake_of_fire:
 	description: "Spawn a lake of fire that damages enemies who touch it."	
 	range: 8
 	cast_time: 25
-	flags: [ spell target_aoe ]
+	flags: [ spell target_aoe interruptable ]
 	states: [ default in_combat ]
 	icon: icon_lake_of_fire
-	cooldowns: [ global lake_of_fire ]	
+	cooldowns: [ global lake_of_fire spell_fire_lockout ]	
 	aoe_radius: 2
 	resource_cost mana: 25
 	talent_tree: sorcerer_elemental
@@ -362,8 +362,8 @@ ability firebolt:
 	string: "Firebolt"
 	range: 8
 	cast_time: 20
-	cooldowns: [ global ]
-	flags: [ spell offensive target_other target_hostile can_miss ]
+	cooldowns: [ global spell_fire_lockout ]
+	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
 	states: [ default in_combat ]
 	icon: icon_firebolt
 	talent_tree: sorcerer_elemental
@@ -421,8 +421,8 @@ ability fireball:
 	string: "Fireball"
 	range: 8
 	cast_time: 30
-	cooldowns: [ global ]
-	flags: [ spell offensive target_other target_hostile can_miss ]
+	cooldowns: [ global spell_fire_lockout ]
+	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
 	states: [ default in_combat ]
 	icon: icon_fireball
 	talent_tree: sorcerer_elemental
@@ -480,8 +480,8 @@ ability ice_lance:
 	string: "Ice Lance"
 	range: 8
 	cast_time: 20
-	cooldowns: [ global ]
-	flags: [ spell offensive target_other target_hostile can_miss ]
+	cooldowns: [ global spell_frost_lockout ]
+	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
 	states: [ default in_combat ]
 	icon: icon_ice_lance
 	talent_tree: sorcerer_elemental
@@ -525,7 +525,7 @@ ability frost_explosion:
 {
 	string: "Frost Explosion"
 	range: 1
-	cooldowns: [ global frost_explosion ]
+	cooldowns: [ global frost_explosion spell_frost_lockout ]
 	flags: [ spell target_self target_aoe target_aoe_hostile ]
 	states: [ default in_combat ]
 	icon: icon_frost_explosion

@@ -46,6 +46,7 @@ map_palette .stuff:
 
 	entity_spawn .goblin_caster: [ 255 0 0 ]
 	entity_spawn .goblin_melee: [ 128 0 0 ]
+	entity_spawn .goblin_ranged: [ 64 0 0 ]
 	entity_spawn .goblin_door_guard_1: [ 128 0 54 ]
 	entity_spawn .goblin_door_guard_2: [ 128 0 193 ]
 	entity_spawn .wolf: [ 128 64 0 ]

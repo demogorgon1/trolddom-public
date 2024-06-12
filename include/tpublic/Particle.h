@@ -12,7 +12,8 @@ namespace tpublic
 			FLAG_NO_ROTATION	= 0x02,
 			FLAG_NO_SCALING		= 0x04,
 			FLAG_BLEND_ADD		= 0x08,
-			FLAG_NO_LOOP		= 0x10
+			FLAG_NO_LOOP		= 0x10,
+			FLAG_FACE_TARGET	= 0x20
 		};
 
 		// IMPORTANT: Must match Flag enum
@@ -23,6 +24,7 @@ namespace tpublic
 			"no_scaling",
 			"blend_add",
 			"no_loop",
+			"face_target",
 			NULL
 		};
 

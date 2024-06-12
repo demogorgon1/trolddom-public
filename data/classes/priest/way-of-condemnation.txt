@@ -101,7 +101,7 @@ ability fear:
 	string: "Fear"
 	range: 6
 	cooldowns: [ global ]
-	flags: [ spell target_other target_hostile ]
+	flags: [ spell target_other target_hostile interruptable ]
 	states: [ default in_combat ]
 	icon: icon_fear
 	resource_cost mana: 10
@@ -314,9 +314,9 @@ ability smite:
 {
 	string: "Smite"
 	range: 6
-	cooldowns: [ global ]
+	cooldowns: [ global spell_fire_lockout ]
 	cast_time: 20
-	flags: [ spell target_other target_hostile ]
+	flags: [ spell target_other target_hostile interruptable ]
 	states: [ default in_combat ]
 	icon: icon_smite
 	resource_cost mana: 10
@@ -408,7 +408,7 @@ ability condemnation:
 {
 	string: "Condemnation"
 	range: 6
-	cooldowns: [ global ]
+	cooldowns: [ global spell_healing_lockout ]
 	flags: [ spell target_other target_hostile ]
 	states: [ default in_combat ]
 	icon: icon_holy_condemnation

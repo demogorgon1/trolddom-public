@@ -132,7 +132,7 @@ ability eternal_shine:
 {
 	string: "Eternal Shine"
 	range: 7
-	cooldowns: [ global ]
+	cooldowns: [ global spell_healing_lockout ]
 	flags: [ spell target_other target_self target_friendly ]
 	states: [ default in_combat ]
 	icon: icon_shine
@@ -164,9 +164,9 @@ ability prayer_of_sanctuary:
 {
 	string: "Prayer of Sanctuary"
 	range: 7
-	cooldowns: [ global ]
+	cooldowns: [ global spell_healing_lockout ]
 	cast_time: 25
-	flags: [ spell target_other target_self target_friendly target_aoe target_aoe_friendly aoe_low_health_only ]
+	flags: [ spell target_other target_self target_friendly target_aoe target_aoe_friendly aoe_low_health_only interruptable ]
 	states: [ default in_combat ]
 	icon: icon_sanctuary
 	resource_cost mana: 25
@@ -285,9 +285,9 @@ ability greater_heal:
 {
 	string: "Greater Heal"
 	range: 7
-	cooldowns: [ global ]
+	cooldowns: [ global spell_healing_lockout ]
 	cast_time: 25
-	flags: [ spell target_other target_self target_friendly ]
+	flags: [ spell target_other target_self target_friendly interruptable ]
 	states: [ default in_combat ]
 	icon: icon_greater_heal
 	resource_cost mana: 25
@@ -312,9 +312,9 @@ ability minor_heal:
 {
 	string: "Minor Heal"
 	range: 7
-	cooldowns: [ global ]
+	cooldowns: [ global spell_healing_lockout ]
 	cast_time: 20
-	flags: [ spell target_other target_self target_friendly ]
+	flags: [ spell target_other target_self target_friendly interruptable ]
 	states: [ default in_combat ]
 	icon: icon_heal
 	resource_cost mana: 15
@@ -368,7 +368,7 @@ ability blessing:
 	string: "Blessing"
 	description: "Heals friendly target for 30 over 10 seconds."
 	range: 6
-	cooldowns: [ global ]
+	cooldowns: [ global spell_healing_lockout ]
 	flags: [ spell target_other target_self target_friendly ]
 	states: [ default in_combat ]
 	icon: icon_holy_blessing
@@ -390,8 +390,8 @@ ability resurrection:
 	description: "Resurrects dead party member. Only possible outside of combat."
 	range: 7
 	cast_time: 50
-	cooldowns: [ global ]
-	flags: [ spell target_aoe target_aoe_friendly ]
+	cooldowns: [ global spell_healing_lockout ]
+	flags: [ spell target_aoe target_aoe_friendly interruptable ]
 	states: [ default ]
 	icon: icon_resurrection
 	resource_cost mana: 35

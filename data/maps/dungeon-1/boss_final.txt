@@ -128,7 +128,7 @@ ability .gribble:
 	string: "Fireball"
 	range: 10
 	cast_time: 20
-	flags: [ spell offensive target_other target_hostile can_miss ]
+	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
 	states: [ default in_combat ]
 	icon: icon_firebolt
 	speed: 5

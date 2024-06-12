@@ -36,6 +36,7 @@ namespace tpublic
 			ID_IMMOBILIZED,
 			ID_ITEM_NOT_EQUIPPED,
 			ID_MISSING_ITEM,
+			ID_TARGET_TOO_CLOSE,
 
 			NUM_IDS
 		};
@@ -82,6 +83,7 @@ namespace tpublic
 			{ "Immobilized!" },
 			{ "Item not equipped!" },
 			{ "Missing item!" },
+			{ "Target too close!" },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);
