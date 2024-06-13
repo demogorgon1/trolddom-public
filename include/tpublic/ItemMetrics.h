@@ -139,6 +139,21 @@ namespace tpublic
 						m_levelBase2HWeaponDPS[level] = dps;
 					});
 				}
+				else if(aChild->m_name == "base_ranged_dps")
+				{
+					aChild->GetArray()->ForEachChild([&](
+						const SourceNode* aEntry)
+					{
+						TP_VERIFY(aEntry->m_type == SourceNode::TYPE_ARRAY && aEntry->m_children.size() == 2, aEntry->m_debugInfo, "Not a level-dps pair.");
+						uint32_t level = aEntry->m_children[0]->GetUInt32();
+						uint32_t dps = aEntry->m_children[1]->GetUInt32();
+
+						if(level >= m_levelBaseRangedDPS.size())
+							m_levelBaseRangedDPS.resize(level + 1);
+
+						m_levelBaseRangedDPS[level] = dps;
+					});
+				}
 				else if(aChild->m_tag == "item_type_multipliers")
 				{
 					ItemType::Id itemType = ItemType::StringToId(aChild->m_name.c_str());
@@ -184,6 +199,7 @@ namespace tpublic
 			aStream->WriteUInts(m_levelBaseCost);
 			aStream->WriteUInts(m_levelBase1HWeaponDPS);
 			aStream->WriteUInts(m_levelBase2HWeaponDPS);
+			aStream->WriteUInts(m_levelBaseRangedDPS);
 			aStream->WriteFloat(m_vendorCostMultiplier);
 			aStream->WriteFloat(m_offHandDPSMultiplier);
 			aStream->WriteFloat(m_shieldArmorToBaseBlockValue);
@@ -209,6 +225,8 @@ namespace tpublic
 			if (!aStream->ReadUInts(m_levelBase1HWeaponDPS))
 				return false;
 			if (!aStream->ReadUInts(m_levelBase2HWeaponDPS))
+				return false;
+			if (!aStream->ReadUInts(m_levelBaseRangedDPS))
 				return false;
 			if (!aStream->ReadFloat(m_vendorCostMultiplier))
 				return false;
@@ -274,6 +292,15 @@ namespace tpublic
 			return m_levelBase2HWeaponDPS[aLevel];
 		}
 
+		uint32_t
+		GetLevelBaseRangedDPS(
+			uint32_t						aLevel) const
+		{
+			if (aLevel >= m_levelBaseRangedDPS.size())
+				return 1;
+			return m_levelBaseRangedDPS[aLevel];
+		}
+
 		const Multipliers&
 		GetItemTypeMultipliers(
 			ItemType::Id					aItemType) const
@@ -314,6 +341,7 @@ namespace tpublic
 		std::vector<uint32_t>					m_levelBaseCost;
 		std::vector<uint32_t>					m_levelBase1HWeaponDPS;
 		std::vector<uint32_t>					m_levelBase2HWeaponDPS;
+		std::vector<uint32_t>					m_levelBaseRangedDPS;
 		Multipliers								m_itemTypeMultipliers[ItemType::NUM_IDS];
 		Multipliers								m_equipmentSlotMultipliers[EquipmentSlot::NUM_IDS];
 		Multipliers								m_rarityMultipliers[Rarity::NUM_IDS];

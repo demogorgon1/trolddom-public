@@ -76,6 +76,32 @@ namespace tpublic
 
 			m_isWeapon = true;
 		}
+		else if(itemTypeInfo->m_flags & ItemType::FLAG_RANGED)
+		{
+			if (m_weaponCooldown == 0)
+				m_weaponCooldown = 20;
+
+			if (m_weaponDamage.m_min == 0 && m_weaponDamage.m_max == 0)
+			{
+				// Like with weapons, come up with damage based on item level
+				uint32_t dps = aManifest->m_itemMetrics.GetLevelBaseRangedDPS(m_itemData->m_itemLevel);
+
+				dps = (uint32_t)((float)dps * multipliers.m_weaponDamage);
+
+				uint32_t avgDamage = (dps * m_weaponCooldown) / 10;
+
+				m_weaponDamage.m_min = (avgDamage * 3) / 4;
+				m_weaponDamage.m_max = (avgDamage * 5) / 4;
+
+				if (m_weaponDamage.m_min == 0)
+					m_weaponDamage.m_min = 1;
+
+				if (m_weaponDamage.m_max <= m_weaponDamage.m_min)
+					m_weaponDamage.m_max = m_weaponDamage.m_min + 1;
+			}
+
+			m_isRanged = true;
+		}
 
 		if(itemTypeInfo->m_flags & ItemType::FLAG_ARMOR)
 		{

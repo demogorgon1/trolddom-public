@@ -53,7 +53,9 @@ namespace tpublic
 				FLAG_TARGET_AOE_ALWAYS_SELF			= 0x02000000,
 				FLAG_TRIGGER_MOVE_COOLDOWN			= 0x04000000,
 				FLAG_QUEST_TRIGGER					= 0x08000000,
-				FLAG_INTERRUPTABLE					= 0x10000000
+				FLAG_INTERRUPTABLE					= 0x10000000,
+				FLAG_RANGED_CAST_TIME				= 0x20000000,
+				FLAG_USE_RANGED_ICON				= 0x40000000
 			};
 
 			static inline Resource::Id
@@ -132,6 +134,10 @@ namespace tpublic
 						flags |= FLAG_QUEST_TRIGGER;
 					else if (strcmp(identifier, "interruptable") == 0)
 						flags |= FLAG_INTERRUPTABLE;
+					else if (strcmp(identifier, "ranged_cast_time") == 0)
+						flags |= FLAG_RANGED_CAST_TIME;
+					else if (strcmp(identifier, "use_ranged_icon") == 0)
+						flags |= FLAG_USE_RANGED_ICON;
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid ability flag.", identifier);
 				});
@@ -388,6 +394,8 @@ namespace tpublic
 			bool ShouldTriggerMoveCooldown() const { return m_flags & FLAG_TRIGGER_MOVE_COOLDOWN; }
 			bool IsQuestTrigger() const { return m_flags & FLAG_QUEST_TRIGGER; }
 			bool IsInterruptable() const { return m_flags & FLAG_INTERRUPTABLE; }
+			bool IsRangedCastTime() const { return m_flags & FLAG_RANGED_CAST_TIME; }
+			bool IsRanged() const { return m_flags & FLAG_RANGED; }
 			
 			bool 
 			IsUsableInState(

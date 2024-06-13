@@ -27,6 +27,7 @@ namespace tpublic
 		Stat::Collection		m_stats;
 		uint32_t				m_vendorValue = 0;
 		bool					m_isWeapon = false;
+		bool					m_isRanged = false;
 		UIntRange				m_weaponDamage;
 		uint32_t				m_weaponCooldown = 0;
 		uint32_t				m_cost = 0;

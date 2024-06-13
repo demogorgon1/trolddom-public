@@ -28,6 +28,9 @@ namespace tpublic
 
 			ID_SHIELD,
 
+			ID_RANGED_BOW,
+			ID_RANGED_CROSSBOW,
+
 			ID_CONSUMABLE,
 			ID_TRADE_GOOD,
 			ID_MISCELLANEOUS,
@@ -45,6 +48,7 @@ namespace tpublic
 			FLAG_SHIELD				= 0x0020,
 			FLAG_WEAPON				= 0x0040,
 			FLAG_ARMOR				= 0x0080,
+			FLAG_RANGED				= 0x0100,
 
 			FLAG_NO_RESTRICTIONS	= 0x4000,
 			FLAG_NO_TOOLTIP			= 0x8000
@@ -80,6 +84,9 @@ namespace tpublic
 			{ "weapon_2h_staff",	"Staff",				"Staves",				FLAG_TWO_HANDED | FLAG_WEAPON },
 			
 			{ "shield",				"Shield",				"Shields",				FLAG_SHIELD | FLAG_ARMOR },
+
+			{ "ranged_bow",			"Bow",					"Bows",					FLAG_RANGED },
+			{ "ranged_crossbow",	"Crossbow",				"Crossbows",			FLAG_RANGED },
 
 			{ "consumable",			"Consumable",			"Consumables",			FLAG_NO_TOOLTIP | FLAG_NO_RESTRICTIONS },
 			{ "trade_good",			"Trade Good",			"Trade Goods",			FLAG_NO_TOOLTIP | FLAG_NO_RESTRICTIONS },

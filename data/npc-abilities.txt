@@ -94,7 +94,7 @@ ability npc_shoot:
 	min_range: 3
 	cast_time: 20
 	cooldowns: [ global ]
-	flags: [ spell offensive target_other target_hostile can_miss ]
+	flags: [ ranged offensive target_other target_hostile can_miss ]
 	states: [ default in_combat ]
 	icon: icon_throw_rock
 	speed: 6

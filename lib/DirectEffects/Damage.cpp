@@ -69,6 +69,14 @@ namespace tpublic::DirectEffects
 					{
 						m_damageBase = DirectEffect::DAMAGE_BASE_WEAPON_AVERAGE;
 					}
+					else if (aChild->m_type == SourceNode::TYPE_IDENTIFIER && aChild->m_value == "ranged")
+					{
+						m_damageBase = DirectEffect::DAMAGE_BASE_RANGED;
+					}
+					else if (aChild->m_type == SourceNode::TYPE_IDENTIFIER && aChild->m_value == "ranged_average")
+					{
+						m_damageBase = DirectEffect::DAMAGE_BASE_RANGED_AVERAGE;
+					}
 					else
 					{
 						TP_VERIFY(false, aChild->m_debugInfo, "Not a valid damage base.", aChild->m_name.c_str());
@@ -170,6 +178,16 @@ namespace tpublic::DirectEffects
 		case DirectEffect::DAMAGE_BASE_WEAPON_AVERAGE:
 			TP_CHECK(sourceCombatPrivate != NULL, "No weapon damage available.");
 			damage = (sourceCombatPrivate->m_weaponDamageRangeMin + sourceCombatPrivate->m_weaponDamageRangeMax) / 2;
+			break;
+
+		case DirectEffect::DAMAGE_BASE_RANGED:
+			TP_CHECK(sourceCombatPrivate != NULL, "No ranged damage available.");
+			damage = Helpers::RandomInRange(aRandom, sourceCombatPrivate->m_rangedDamageRangeMin, sourceCombatPrivate->m_rangedDamageRangeMax);
+			break;
+
+		case DirectEffect::DAMAGE_BASE_RANGED_AVERAGE:
+			TP_CHECK(sourceCombatPrivate != NULL, "No ranged damage available.");
+			damage = (sourceCombatPrivate->m_rangedDamageRangeMin + sourceCombatPrivate->m_rangedDamageRangeMax) / 2;
 			break;
 
 		default:

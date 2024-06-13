@@ -340,6 +340,12 @@ namespace tpublic
 							m_strWeaponDamageMin.FromSource(aItem);
 						else if (aItem->m_name == "str_weapon_damage_max")
 							m_strWeaponDamageMax.FromSource(aItem);
+						else if (aItem->m_name == "dex_to_ranged_dps")
+							m_dexToRangedDps.FromSource(aItem);
+						else if (aItem->m_name == "dex_ranged_damage_min")
+							m_dexRangedDamageMin.FromSource(aItem);
+						else if (aItem->m_name == "dex_ranged_damage_max")
+							m_dexRangedDamageMax.FromSource(aItem);
 						else if (aItem->m_name == "dex_to_phys_crit")
 							m_dexToPhysCrit.FromSource(aItem);
 						else if (aItem->m_name == "dex_to_dodge")
@@ -370,8 +376,11 @@ namespace tpublic
 					IWriter*				aStream) const 
 				{
 					m_strToDps.ToStream(aStream);
+					m_dexToRangedDps.ToStream(aStream);
 					m_strWeaponDamageMin.ToStream(aStream);
 					m_strWeaponDamageMax.ToStream(aStream);
+					m_dexRangedDamageMin.ToStream(aStream);
+					m_dexRangedDamageMax.ToStream(aStream);
 					m_dexToPhysCrit.ToStream(aStream);
 					m_dexToDodge.ToStream(aStream);
 					m_dexToParry.ToStream(aStream);
@@ -390,9 +399,15 @@ namespace tpublic
 				{
 					if (!m_strToDps.FromStream(aStream))
 						return false;
+					if (!m_dexToRangedDps.FromStream(aStream))
+						return false;
 					if (!m_strWeaponDamageMin.FromStream(aStream))
 						return false;
 					if (!m_strWeaponDamageMax.FromStream(aStream))
+						return false;
+					if (!m_dexRangedDamageMin.FromStream(aStream))
+						return false;
+					if (!m_dexRangedDamageMax.FromStream(aStream))
 						return false;
 					if (!m_dexToPhysCrit.FromStream(aStream))
 						return false;
@@ -421,6 +436,9 @@ namespace tpublic
 				StatsConversionEntry								m_strToDps;
 				StatsConversionEntry								m_strWeaponDamageMin;
 				StatsConversionEntry								m_strWeaponDamageMax;
+				StatsConversionEntry								m_dexToRangedDps;
+				StatsConversionEntry								m_dexRangedDamageMin;
+				StatsConversionEntry								m_dexRangedDamageMax;
 				StatsConversionEntry								m_dexToPhysCrit;
 				StatsConversionEntry								m_dexToDodge;
 				StatsConversionEntry								m_dexToParry;

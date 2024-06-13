@@ -16,7 +16,6 @@ namespace tpublic
 			static const Persistence::Id PERSISTENCE = Persistence::ID_NONE;
 			static const Replication REPLICATION = REPLICATION_PUBLIC;
 
-			// FIXME: this doesn't need to exist on server
 
 			struct Animation
 			{

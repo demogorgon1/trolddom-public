@@ -4,6 +4,7 @@ ability fighter_attack:
 	flags: [ melee offensive attack target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss use_weapon_icon ]	
 	states: [ default in_combat ]
 	delay: 3
+	icon: icon_fist
 	
 	direct_effect damage:
 	{
@@ -12,6 +13,37 @@ ability fighter_attack:
 		base: weapon
 	}
 }
+
+particle_system fighter_shoot:
+{
+	particle:
+	{
+		sprites: [ effect_arrow ]
+		flags: [ attached no_rotation no_scaling face_target ]
+		count: 1		
+	}
+}
+
+ability fighter_shoot:
+{
+	string: "Shoot"
+	range: 8	
+	min_range: 3
+	cooldowns: [ global ]
+	flags: [ ranged offensive target_other target_hostile can_miss ranged_cast_time use_ranged_icon ]
+	states: [ default in_combat ]
+	speed: 6
+	projectile: fighter_shoot	
+	icon: icon_question
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		base: ranged
+	}
+}
+
 
 class fighter:
 {
@@ -31,7 +63,7 @@ class fighter:
 	talent_trees: [ fighter_combat fighter_subtlety fighter_protection ]
 	
 	item_types: [ armor_cloth armor_mail armor_plate weapon_1h_sword weapon_1h_mace weapon_1h_axe weapon_1h_knife
-	              weapon_2h_sword weapon_2h_mace weapon_2h_axe weapon_2h_staff shield ]
+	              weapon_2h_sword weapon_2h_mace weapon_2h_axe weapon_2h_staff shield ranged_bow ranged_crossbow ]
 
 	start_map open_world: [ ]
 	start_equipment main_hand: weapon_rusty_sword
@@ -45,6 +77,9 @@ class fighter:
 		str_to_dps: [ 2 5 ]
 		str_weapon_damage_min: [ 2 3 ]
 		str_weapon_damage_max: [ 4 3 ]
+		dex_to_ranged_dps: [ 2 7 ]
+		dex_ranged_damage_min: [ 2 3 ]
+		dex_ranged_damage_max: [ 4 3 ]
 		dex_to_phys_crit: [ 1 20 ]
 		dex_to_dodge: [ 1 20 ]
 		dex_to_parry: [ 1 25 ]
@@ -62,6 +97,7 @@ class fighter:
 			unlock_abilities:
 			[
 				fighter_attack
+				fighter_shoot
 				strike
 				
 				!DEFAULT_ABILITIES{}

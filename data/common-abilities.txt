@@ -14,6 +14,7 @@ ability attack:
 	flags: [ melee offensive attack target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss use_weapon_icon ]	
 	states: [ default in_combat ]
 	delay: 3
+	icon: icon_fist
 	
 	direct_effect damage:
 	{

@@ -37,6 +37,7 @@ namespace tpublic
 			ID_ITEM_NOT_EQUIPPED,
 			ID_MISSING_ITEM,
 			ID_TARGET_TOO_CLOSE,
+			ID_RANGED_WEAPON_REQUIRED,
 
 			NUM_IDS
 		};
@@ -84,6 +85,7 @@ namespace tpublic
 			{ "Item not equipped!" },
 			{ "Missing item!" },
 			{ "Target too close!" },
+			{ "Ranged weapon required!" }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

@@ -281,6 +281,12 @@ sprites:
 	
 	cursor: { position: [ 0 240 ] }		
 	sprite icon_recall : { tags: [ icon ] }
+	sprite icon_bow_1 : { tags: [ icon ranged_bow ] }
+	sprite icon_bow_2 : { tags: [ icon ranged_bow ] }
+	sprite icon_crossbow_1 : { tags: [ icon ranged_crossbow ] }
+	sprite icon_fist : { tags: [ icon ] }
+	sprite icon_question : { tags: [ icon ] }
+	
 }
 
 

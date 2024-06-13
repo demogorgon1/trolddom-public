@@ -22,6 +22,9 @@ namespace tpublic
 				FIELD_WEAPON_DAMAGE_RANGE_MIN,
 				FIELD_WEAPON_DAMAGE_RANGE_MAX,
 				FIELD_WEAPON_COOLDOWN,
+				FIELD_RANGED_DAMAGE_RANGE_MIN,
+				FIELD_RANGED_DAMAGE_RANGE_MAX,
+				FIELD_RANGED_COOLDOWN,
 				FIELD_PHYSICAL_CRITICAL_STRIKE_CHANCE,
 				FIELD_MAGICAL_CRITICAL_STRIKE_CHANCE,
 				FIELD_DODGE_CHANCE,
@@ -46,6 +49,9 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_WEAPON_DAMAGE_RANGE_MIN, "weapon_damage_range_min", offsetof(CombatPrivate, m_weaponDamageRangeMin));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_WEAPON_DAMAGE_RANGE_MAX, "weapon_damage_range_max", offsetof(CombatPrivate, m_weaponDamageRangeMax));
 				aSchema->Define(ComponentSchema::TYPE_INT32, FIELD_WEAPON_COOLDOWN, "weapon_cooldown", offsetof(CombatPrivate, m_weaponCooldown));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_WEAPON_DAMAGE_RANGE_MIN, "ranged_damage_range_min", offsetof(CombatPrivate, m_rangedDamageRangeMin));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_WEAPON_DAMAGE_RANGE_MAX, "ranged_damage_range_max", offsetof(CombatPrivate, m_rangedDamageRangeMax));
+				aSchema->Define(ComponentSchema::TYPE_INT32, FIELD_WEAPON_COOLDOWN, "ranged_cooldown", offsetof(CombatPrivate, m_rangedCooldown));
 				aSchema->Define(ComponentSchema::TYPE_FLOAT, FIELD_PHYSICAL_CRITICAL_STRIKE_CHANCE, "physical_critical_strike_chance", offsetof(CombatPrivate, m_physicalCriticalStrikeChance));
 				aSchema->Define(ComponentSchema::TYPE_FLOAT, FIELD_MAGICAL_CRITICAL_STRIKE_CHANCE, "magical_critical_strike_chance", offsetof(CombatPrivate, m_magicalCriticalStrikeChance));
 				aSchema->Define(ComponentSchema::TYPE_FLOAT, FIELD_DODGE_CHANCE, "dodge_chance", offsetof(CombatPrivate, m_dodgeChance));
@@ -69,6 +75,9 @@ namespace tpublic
 				m_weaponDamageRangeMin = 0;
 				m_weaponDamageRangeMax = 0;
 				m_weaponCooldown = 0;
+				m_rangedDamageRangeMin = 0;
+				m_rangedDamageRangeMax = 0;
+				m_rangedCooldown = 0;
 				m_physicalCriticalStrikeChance = 5.0f;
 				m_magicalCriticalStrikeChance = 5.0f;
 				m_dodgeChance = 5.0f;
@@ -90,6 +99,9 @@ namespace tpublic
 			uint32_t							m_weaponDamageRangeMin = 0;
 			uint32_t							m_weaponDamageRangeMax = 0;
 			int32_t								m_weaponCooldown = 0;
+			uint32_t							m_rangedDamageRangeMin = 0;
+			uint32_t							m_rangedDamageRangeMax = 0;
+			int32_t								m_rangedCooldown = 0;
 			float								m_physicalCriticalStrikeChance = 0.0f;
 			float								m_magicalCriticalStrikeChance = 0.0f;
 			float								m_dodgeChance = 0.0f;

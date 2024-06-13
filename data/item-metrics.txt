@@ -58,6 +58,20 @@ item_metrics:
 		[ 10 25 ]
 	]
 
+	base_ranged_dps:
+	[
+		[ 1 12 ]
+		[ 2 13 ]
+		[ 3 15 ]
+		[ 4 16 ]
+		[ 5 18 ]
+		[ 6 19 ]
+		[ 7 21 ]
+		[ 8 22 ]
+		[ 9 24 ]
+		[ 10 25 ]
+	]
+
 	item_type_multipliers armor_cloth: 		{ armor: 1 		cost: 1     stat_budget: 1.0 }
 	item_type_multipliers armor_mail: 		{ armor: 2 		cost: 1.5   stat_budget: 1.0 }
 	item_type_multipliers armor_plate: 		{ armor: 3 		cost: 3     stat_budget: 1.0 }
@@ -70,6 +84,8 @@ item_metrics:
 	item_type_multipliers weapon_2h_axe: 	{ 				cost: 8     stat_budget: 2.0 }
 	item_type_multipliers weapon_2h_staff: 	{ 				cost: 7     stat_budget: 2.0 }
 	item_type_multipliers shield: 			{ armor: 20		cost: 5     stat_budget: 1.0 }
+	item_type_multipliers ranged_bow: 		{ 				cost: 7     stat_budget: 0.8 }
+	item_type_multipliers ranged_crossbow: 	{ 				cost: 7     stat_budget: 0.8 }
 	
 	equipment_slot_multipliers head:		{ armor: 3		cost: 2 	stat_budget: 1.6 }
 	equipment_slot_multipliers chest:		{ armor: 4		cost: 2.5   stat_budget: 1.8 }
