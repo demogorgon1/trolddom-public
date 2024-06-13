@@ -367,6 +367,7 @@ namespace tpublic
 
 			// Helpers
 			bool TargetSelf() const { return m_flags & FLAG_TARGET_SELF; }
+			bool TargetSelfOnly() const { return TargetSelf() && !TargetOther(); }
 			bool TargetOther() const { return m_flags & FLAG_TARGET_OTHER; }
 			bool TargetAOE() const { return m_flags & FLAG_TARGET_AOE; }
 			bool TargetFriendly() const { return m_flags & FLAG_TARGET_FRIENDLY; }

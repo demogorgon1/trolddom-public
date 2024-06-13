@@ -135,6 +135,7 @@ entity banner_of_command:
 ability banner_of_command:
 {
 	string: "Banner of Command"
+	description: "Places a banner that lasts for 30 seconds, increases the strength of nearby allies while building threat on enemies."
 	cooldowns: [ global banner_of_command ]
 	flags: [ target_self ]
 	states: [ default in_combat ]
@@ -351,6 +352,7 @@ aura bash:
 ability bash:
 {
 	string: "Bash"
+	description: "Does $damage$ to target increases your threat by 50% for 30 seconds."
 	range: 1	
 	cooldowns: [ global bash ]
 	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
@@ -472,6 +474,7 @@ aura improved_fortify:
 ability fortify:
 {
 	string: "Fortify"
+	description: "Reduces all incoming damage for 10 seconds." 
 	range: 1	
 	cooldowns: [ global fortify ]
 	flags: [ target_self ]

@@ -1,6 +1,7 @@
 ability fighter_attack:
 {
 	string: "Attack"
+	description: "Deals $damage$ to target."
 	flags: [ melee offensive attack target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss use_weapon_icon ]	
 	states: [ default in_combat ]
 	delay: 3
@@ -27,6 +28,7 @@ particle_system fighter_shoot:
 ability fighter_shoot:
 {
 	string: "Shoot"
+	description: "Fires your ranged weapon at target, dealing $damage$ damage."
 	range: 8	
 	min_range: 3
 	cooldowns: [ global ]
@@ -43,7 +45,6 @@ ability fighter_shoot:
 		base: ranged
 	}
 }
-
 
 class fighter:
 {

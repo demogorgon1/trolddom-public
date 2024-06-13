@@ -99,6 +99,7 @@ aura fear:
 ability fear:
 {
 	string: "Fear"
+	description: "Inflicts terror on the target, causing it to run away from you for 12 seconds."
 	range: 6
 	cooldowns: [ global ]
 	flags: [ spell target_other target_hostile interruptable ]
@@ -167,6 +168,7 @@ aura spiritual_crisis:
 ability spiritual_crisis:
 {
 	string: "Spiritual Crisis"
+	description: "Deals $damage$ damage to target and reduces their haste by 15% for 20 seconds."
 	range: 6
 	cooldowns: [ global spiritual_crisis ]
 	flags: [ spell target_other target_hostile ]
@@ -313,6 +315,7 @@ particle_system smite:
 ability smite:
 {
 	string: "Smite"
+	description: "Does $damage$ damage to target."
 	range: 6
 	cooldowns: [ global spell_fire_lockout ]
 	cast_time: 20
@@ -407,6 +410,7 @@ aura condemnation:
 ability condemnation:
 {
 	string: "Condemnation"
+	description: "Inflicts damage to the target over 10 seconds."
 	range: 6
 	cooldowns: [ global spell_healing_lockout ]
 	flags: [ spell target_other target_hostile ]

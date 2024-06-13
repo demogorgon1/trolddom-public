@@ -101,6 +101,7 @@ particle_system poison_bomb:
 ability poison_bomb:
 {
 	string: "Poison Bomb"
+	description: "Throws a poison bomb that deals damage to nearby enemies over 10 seconds. Damage is based on your weapon."
 	range: 1	
 	cooldowns: [ global poison_bomb ]
 	flags: [ melee target_self target_aoe target_aoe_hostile ]
@@ -143,7 +144,7 @@ cooldown smoke_bomb:
 ability smoke_bomb:
 {
 	string: "Smoke Bomb"
-	description: "Drop all threat."
+	description: "Drops all threat."
 	cooldowns: [ global smoke_bomb ]
 	flags: [ target_self ]
 	states: [ default in_combat ]	
@@ -180,6 +181,7 @@ cooldown bypass:
 ability bypass:
 {
 	string: "Bypass"
+	description: "Sneaks past target."
 	cooldowns: [ global bypass ]
 	flags: [ target_other target_hostile target_friendly ]
 	states: [ default in_combat ]	
@@ -345,6 +347,7 @@ aura envenom:
 ability envenom:
 {
 	string: "Envenom"
+	description: "Deals $damage$ to target and poisons it for 6 seconds."
 	range: 1	
 	cooldowns: [ global envenom ]
 	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
@@ -379,6 +382,7 @@ cooldown kick:
 ability kick:
 {
 	string: "Kick"
+	description: "Interrupts target spell casting."
 	range: 1
 	cooldowns: [ global kick ]
 	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
@@ -426,6 +430,7 @@ aura hamstring:
 ability hamstring:
 {
 	string: "Hamstring"
+	description: "Deals $damage$ damage to target and reduces its movement speed for 6 seconds."
 	range: 1
 	cooldowns: [ global hamstring ]
 	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
@@ -469,6 +474,7 @@ particle_system throw_rock:
 ability throw_rock:
 {
 	string: "Throw Rock"
+	description: "Deals $damage$ damage to target."
 	range: 6
 	cooldowns: [ global throw_rock ]
 	flags: [ ranged offensive target_other target_hostile can_be_dodged can_miss ]
@@ -525,6 +531,7 @@ aura rend:
 ability rend:
 {
 	string: "Rend"
+	description: "Wounds the target, dealing damage over time."
 	range: 1
 	cooldowns: [ global ]
 	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]

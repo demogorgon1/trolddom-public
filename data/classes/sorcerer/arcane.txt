@@ -116,6 +116,7 @@ entity void_lightning:
 ability void_lightning:
 {
 	string: "Void Lightning"
+	description: "Deals $damage$ to target and creates an arcane storm that lasts 5 seconds, dealing damage to nearby enemies."	
 	range: 7
 	cast_time: 20
 	cooldowns: [ global void_lightning spell_arcane_lockout ]		
@@ -208,6 +209,7 @@ cooldown teleport:
 ability teleport:
 {
 	string: "Teleport"
+	description: "Transports yourself to the target destination."
 	range: 10
 	cast_time: 15
 	cooldowns: [ global teleport spell_arcane_lockout ]
@@ -383,6 +385,7 @@ cooldown arcane_missile:
 ability arcane_missile:
 {
 	string: "Arcane Missile"
+	description: "Deals $damage$ damage to target."
 	range: 8
 	cooldowns: [ global arcane_missile spell_arcane_lockout ]
 	flags: [ spell offensive target_other target_hostile can_miss ]
@@ -421,6 +424,7 @@ particle_system arcane_missile:
 ability sleep:
 {
 	string: "Sleep"
+	description: "Puts target to sleep for 12 seconds."
 	range: 8
 	cooldowns: [ global spell_arcane_lockout ]
 	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
@@ -459,6 +463,7 @@ cooldown counterspell:
 ability counterspell:
 {
 	string: "Counterspell"
+	description: "Interrupts target spell casting."
 	range: 8
 	cooldowns: [ global counterspell spell_arcane_lockout ]
 	flags: [ spell offensive target_other target_hostile can_miss ]

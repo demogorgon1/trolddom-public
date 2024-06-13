@@ -47,6 +47,7 @@ talent priest_dragon_breath:
 ability dragon_breath:
 {
 	string: "Dragon Breath"
+	description: "Deals damage to nearby enemies over 4 seconds."
 	range: 2	
 	cooldowns: [ global spell_fire_lockout ]
 	flags: [ spell offensive target_other target_hostile ]
@@ -117,6 +118,7 @@ cooldown dragon_punch:
 ability dragon_punch:
 {
 	string: "Dragon Punch"
+	description: "Deals $damage$ damage to target."
 	range: 1	
 	cooldowns: [ global dragon_punch spell_fire_lockout ]
 	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
@@ -326,7 +328,7 @@ cooldown dwindle:
 ability dwindle:
 {
 	string: "Dwindle"
-	description: "Reduce threat on all targets."
+	description: "Reduces your threat on all targets."
 	cooldowns: [ global dwindle ]
 	flags: [ target_self ]
 	states: [ default in_combat ]	
@@ -357,7 +359,7 @@ cooldown meditation:
 ability meditation:
 {
 	string: "Meditation"
-	description: "Restore 50% of your mana over 9 seconds."
+	description: "Restores 50% of your mana over 9 seconds."
 	cooldowns: [ global meditation ]
 	flags: [ target_self ]
 	states: [ default in_combat ]	

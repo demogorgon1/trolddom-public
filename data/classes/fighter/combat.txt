@@ -286,6 +286,7 @@ aura mortal_strike:
 ability mortal_strike:
 {
 	string: "Mortal Strike"
+	description: "Deals $damage$ to target and reduces healing by 50% for 10 seconds."
 	range: 1	
 	cooldowns: [ global mortal_strike ]
 	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
@@ -315,6 +316,7 @@ ability mortal_strike:
 ability strike:
 {
 	string: "Strike"
+	description: "A powerful attack that inflicts $damage$ on target."
 	range: 1	
 	cooldowns: [ global ]
 	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
@@ -358,6 +360,7 @@ particle_system whirlwind:
 ability whirlwind:
 {
 	string: "Whirlwind"
+	description: "Inflicts $damage$ damage on up to 3 adjacent enemies."
 	range: 1	
 	cooldowns: [ global whirlwind ]
 	flags: [ melee target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
@@ -421,6 +424,7 @@ ability charge_trigger:
 ability charge:
 {
 	string: "Charge"
+	description: "Generates rage while rushing at target, stunning it for 2 seconds."
 	range: 7
 	cooldowns: [ charge ]
 	flags: [ target_other target_hostile trigger_move_cooldown ]

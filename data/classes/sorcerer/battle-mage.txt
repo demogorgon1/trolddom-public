@@ -94,6 +94,7 @@ particle_system void_blade_storm:
 ability void_blade_storm:
 {
 	string: "Void Blade Storm"
+	description: "Inflicts $damage$ damage on up to 3 nearby enemies."
 	range: 1	
 	cooldowns: [ global void_blade_storm spell_arcane_lockout ]
 	flags: [ melee target_hostile target_other target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
@@ -201,6 +202,7 @@ cooldown wizard_strike:
 ability wizard_strike:
 {
 	string: "Wizard Strike"
+	description: "Deals $damage$ damage to target."
 	range: 1	
 	cooldowns: [ global wizard_strike spell_arcane_lockout ]
 	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]

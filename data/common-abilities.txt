@@ -1,6 +1,7 @@
 cooldown global:
 {
 	duration: 15
+	shared: true
 }
 
 cooldown pray:
@@ -11,6 +12,7 @@ cooldown pray:
 ability attack:
 {
 	string: "Attack"	
+	description: "Deals $damage$ to target."
 	flags: [ melee offensive attack target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss use_weapon_icon ]	
 	states: [ default in_combat ]
 	delay: 3
@@ -40,6 +42,7 @@ cooldown push:
 ability push:
 {
 	string: "Push"	
+	description: "Shoves target out of the way."
 	cooldowns: [ global push ]
 	flags: [ target_other target_hostile ]	
 	states: [ default in_combat ]
@@ -75,7 +78,7 @@ cooldown gaze_of_death:
 ability gaze_of_death:
 {
 	string: "Gaze of Death"
-	description: "Kill target."
+	description: "Kills target."
 	range: 100
 	cooldowns: [ global gaze_of_death ]
 	flags: [ offensive target_other target_hostile ]
@@ -105,7 +108,7 @@ cooldown dont_touch_me_bro:
 ability dont_touch_me_bro:
 {
 	string: "Don't Touch Me, Bro"
-	description: "Reduce all incoming damage to 0 for 30 seconds."
+	description: "Reduces all incoming damage to 0 for 30 seconds."
 	cooldowns: [ global dont_touch_me_bro ]
 	flags: [ target_self ]
 	states: [ default in_combat ]	
@@ -135,7 +138,7 @@ cooldown immortality:
 ability immortality:
 {
 	string: "Immortality"
-	description: "Make it impossible to die for 30 seconds."
+	description: "Makes it impossible to die for 30 seconds."
 	cooldowns: [ global immortality ]
 	flags: [ target_self ]
 	states: [ default in_combat ]	
@@ -150,7 +153,7 @@ ability immortality:
 ability make_offering:
 {
 	string: "Make Offering"
-	description: "Make offering at a shrine."
+	description: "Makes offering at a shrine."
 	cast_time: 20
 	flags: [ late_cooldown_trigger target_other always_in_range ]
 	states: [ default ]
@@ -164,7 +167,7 @@ ability make_offering:
 ability desecrate:
 {
 	string: "Desecrate"
-	description: "Desecrate a shrine."
+	description: "Desecrates a shrine."
 	cast_time: 20
 	flags: [ late_cooldown_trigger target_other always_in_range ]
 	states: [ default ]

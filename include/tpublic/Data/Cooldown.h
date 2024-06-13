@@ -55,6 +55,8 @@ namespace tpublic
 							m_duration = aChild->GetInt32();
 						else if(aChild->m_name == "trigger")
 							m_trigger = SourceToTrigger(aChild);
+						else if(aChild->m_name == "shared")
+							m_shared = aChild->GetBool();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -68,6 +70,7 @@ namespace tpublic
 			{
 				aStream->WritePOD(m_trigger);
 				aStream->WriteInt(m_duration);
+				aStream->WriteBool(m_shared);
 			}
 
 			bool
@@ -78,12 +81,15 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadInt(m_duration))
 					return false;
+				if (!aStream->ReadBool(m_shared))
+					return false;
 				return true;
 			}
 
 			// Public data
 			Trigger			m_trigger = TRIGGER_ABILITY;
 			int32_t			m_duration = 0;
+			bool			m_shared = false;
 		};
 
 	}
