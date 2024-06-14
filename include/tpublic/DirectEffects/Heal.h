@@ -45,6 +45,9 @@ namespace tpublic
 								IAuraEventQueue*				aAuraEventQueue,
 								IEventQueue*					aEventQueue,
 								const IWorldView*				aWorldView) override;
+			bool			CalculateToolTipHeal(
+								const EntityInstance*			aEntityInstance,
+								UIntRange&						aOutDamage) const override;
 
 			// Public data
 			uint32_t			m_baseMin = 0;

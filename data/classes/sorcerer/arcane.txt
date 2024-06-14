@@ -116,7 +116,7 @@ entity void_lightning:
 ability void_lightning:
 {
 	string: "Void Lightning"
-	description: "Deals $damage$ to target and creates an arcane storm that lasts 5 seconds, dealing damage to nearby enemies."	
+	description: "Deals $damage$ damage to target and creates an arcane storm that lasts 5 seconds, dealing damage to nearby enemies."	
 	range: 7
 	cast_time: 20
 	cooldowns: [ global void_lightning spell_arcane_lockout ]		

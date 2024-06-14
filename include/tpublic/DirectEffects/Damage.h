@@ -22,7 +22,7 @@ namespace tpublic
 				}
 
 				ConditionalCriticalChanceBonus(
-					const SourceNode*							aSource)
+					const SourceNode*								aSource)
 				{
 					TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing ability modifier annotation.");
 					m_abilityModifierId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY_MODIFIER, aSource->m_annotation->GetIdentifier());
@@ -31,7 +31,7 @@ namespace tpublic
 
 				void	
 				ToStream(
-					IWriter*									aStream) const
+					IWriter*										aStream) const
 				{
 					aStream->WriteUInt(m_abilityModifierId);
 					aStream->WriteFloat(m_percent);
@@ -39,7 +39,7 @@ namespace tpublic
 
 				bool
 				FromStream(
-					IReader*									aStream)
+					IReader*										aStream)
 				{
 					if(!aStream->ReadUInt(m_abilityModifierId))
 						return false;
@@ -64,27 +64,30 @@ namespace tpublic
 
 			}
 
-			// EffectBase implementation
+			// DirectEffectBase implementation
 			void			FromSource(
-								const SourceNode*				aSource) override;
+								const SourceNode*					aSource) override;
 			void			ToStream(
-								IWriter*						aStream) const override;
+								IWriter*							aStream) const override;
 			bool			FromStream(
-								IReader*						aStream) override;
+								IReader*							aStream) override;
 			Result			Resolve(
-								int32_t							aTick,
-								std::mt19937&					aRandom,
-								const Manifest*					aManifest,
-								CombatEvent::Id					aId,
-								uint32_t						aAbilityId,
-								EntityInstance*					aSource,
-								EntityInstance*					aTarget,
-								const Vec2&						aAOETarget,
-								const ItemInstanceReference&	aItem,
-								IResourceChangeQueue*			aResourceChangeQueue,
-								IAuraEventQueue*				aAuraEventQueue,
-								IEventQueue*					aEventQueue,
-								const IWorldView*				aWorldView) override;
+								int32_t								aTick,
+								std::mt19937&						aRandom,
+								const Manifest*						aManifest,
+								CombatEvent::Id						aId,
+								uint32_t							aAbilityId,
+								EntityInstance*						aSource,
+								EntityInstance*						aTarget,
+								const Vec2&							aAOETarget,
+								const ItemInstanceReference&		aItem,
+								IResourceChangeQueue*				aResourceChangeQueue,
+								IAuraEventQueue*					aAuraEventQueue,
+								IEventQueue*						aEventQueue,
+								const IWorldView*					aWorldView) override;
+			bool			CalculateToolTipDamage(
+								const EntityInstance*				aEntityInstance,
+								UIntRange&							aOutDamage) const override;
 
 			// Public data
 			DirectEffect::DamageType					m_damageType = DirectEffect::DAMAGE_TYPE_PHYSICAL;
@@ -98,7 +101,11 @@ namespace tpublic
 			std::vector<ConditionalCriticalChanceBonus>	m_conditionalCriticalChanceBonuses;
 
 			float			_GetCriticalChanceBonus(
-								const EntityInstance*			aSource) const;
+								const EntityInstance*				aSource) const;
+			void			_GetDamageRange(
+								const Components::CombatPublic*		aCombatPublic,
+								const Components::CombatPrivate*	aCombatPrivate,
+								UIntRange&							aOut) const;
 		};
 
 	}

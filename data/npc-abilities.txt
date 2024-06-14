@@ -9,7 +9,7 @@ ability npc_attack:
 	range: 1	
 	cooldowns: [ global npc_attack ]
 	flags: [ melee attack offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
-	states: [ default in_combat ]
+	states: [ in_combat ]
 	icon: icon_strike
 	delay: 3
 	
@@ -32,7 +32,7 @@ ability npc_strike:
 	range: 1	
 	cooldowns: [ global npc_strike ]
 	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
-	states: [ default in_combat ]
+	states: [ in_combat ]
 	icon: icon_strike
 	delay: 3
 	
@@ -62,7 +62,7 @@ ability npc_firebolt:
 	cast_time: 25
 	cooldowns: [ global spell_fire_lockout ]
 	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
-	states: [ default in_combat ]
+	states: [ in_combat ]
 	icon: icon_firebolt
 	speed: 5
 	projectile: npc_firebolt
@@ -95,7 +95,7 @@ ability npc_shoot:
 	cast_time: 20
 	cooldowns: [ global ]
 	flags: [ ranged offensive target_other target_hostile can_miss ]
-	states: [ default in_combat ]
+	states: [ in_combat ]
 	icon: icon_throw_rock
 	speed: 6
 	projectile: npc_shoot
@@ -106,5 +106,27 @@ ability npc_shoot:
 		damage_type: physical
 		base: weapon
 		base_multiplier: 0.7
+	}
+}
+
+cooldown npc_heal:
+{
+	duration: 100
+}
+
+ability npc_heal:
+{
+	string: "Heal"
+	range: 8	
+	cast_time: 30
+	cooldowns: [ global npc_heal ]
+	flags: [ spell target_other target_friendly ]
+	states: [ in_combat ]
+	icon: icon_throw_rock
+	delay: 3
+	
+	direct_effect heal:
+	{
+		base: 20
 	}
 }

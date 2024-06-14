@@ -347,7 +347,7 @@ aura envenom:
 ability envenom:
 {
 	string: "Envenom"
-	description: "Deals $damage$ to target and poisons it for 6 seconds."
+	description: "Deals $damage$ damage to target and poisons it for 6 seconds."
 	range: 1	
 	cooldowns: [ global envenom ]
 	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]

@@ -22,6 +22,7 @@ namespace tpublic
 	class IResourceChangeQueue;
 	class IWorldView;
 	class Manifest;
+	class UIntRange;
 
 	struct ItemInstanceReference;
 	struct Vec2;
@@ -134,6 +135,12 @@ namespace tpublic
 									IAuraEventQueue*				/*aAuraEventQueue*/,
 									IEventQueue*					/*aEventQueue*/,
 									const IWorldView*				/*aWorldView*/) { return Result(); }
+		virtual bool		CalculateToolTipDamage(
+									const EntityInstance*			/*aEntityInstance*/,
+									UIntRange&						/*aOutDamage*/) const { return false; }
+		virtual bool		CalculateToolTipHeal(
+									const EntityInstance*			/*aEntityInstance*/,
+									UIntRange&						/*aOutHeal*/) const { return false; }
 
 		// Public data
 		uint32_t					m_flags = 0;		

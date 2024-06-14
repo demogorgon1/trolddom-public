@@ -286,7 +286,7 @@ aura mortal_strike:
 ability mortal_strike:
 {
 	string: "Mortal Strike"
-	description: "Deals $damage$ to target and reduces healing by 50% for 10 seconds."
+	description: "Deals $damage$ damage to target and reduces healing by 50% for 10 seconds."
 	range: 1	
 	cooldowns: [ global mortal_strike ]
 	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
@@ -316,7 +316,7 @@ ability mortal_strike:
 ability strike:
 {
 	string: "Strike"
-	description: "A powerful attack that inflicts $damage$ on target."
+	description: "A powerful attack that inflicts $damage$ damage on target."
 	range: 1	
 	cooldowns: [ global ]
 	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]

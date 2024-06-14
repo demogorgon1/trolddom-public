@@ -7,7 +7,7 @@ cooldown potions: { duration: 600 }
 ability consumable_small_healing_potion:	
 {
 	string: "Small Healing Potion"
-	description: "Restores 20 health."
+	description: "Restores $heal$ health."
 	flags: [ target_self item ]
 	icon: icon_small_red_potion
 	direct_effect heal: { base: 20 }

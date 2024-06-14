@@ -147,4 +147,14 @@ namespace tpublic::DirectEffects
 		return { result };
 	}
 
+	bool			
+	Heal::CalculateToolTipHeal(
+		const EntityInstance*	/*aEntityInstance*/,
+		UIntRange&				aOutDamage) const 
+	{
+		aOutDamage.m_min = m_baseMin;
+		aOutDamage.m_max = m_baseMax;
+		return true;
+	}
+
 }

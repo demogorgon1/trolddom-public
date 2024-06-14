@@ -162,46 +162,10 @@ namespace tpublic::DirectEffects
 		if(targetCombatPublic == NULL)
 			return Result();
 
-		uint32_t damage = 0;
+		UIntRange damageRange;
+		_GetDamageRange(sourceCombatPublic, sourceCombatPrivate, damageRange);
 
-		switch(m_damageBase)
-		{
-		case DirectEffect::DAMAGE_BASE_RANGE:		
-			damage = Helpers::RandomInRange(aRandom, m_damageBaseRangeMin, m_damageBaseRangeMax); 
-			break;
-
-		case DirectEffect::DAMAGE_BASE_WEAPON:
-			TP_CHECK(sourceCombatPrivate != NULL, "No weapon damage available.");
-			damage = Helpers::RandomInRange(aRandom, sourceCombatPrivate->m_weaponDamageRangeMin, sourceCombatPrivate->m_weaponDamageRangeMax);
-			break;
-
-		case DirectEffect::DAMAGE_BASE_WEAPON_AVERAGE:
-			TP_CHECK(sourceCombatPrivate != NULL, "No weapon damage available.");
-			damage = (sourceCombatPrivate->m_weaponDamageRangeMin + sourceCombatPrivate->m_weaponDamageRangeMax) / 2;
-			break;
-
-		case DirectEffect::DAMAGE_BASE_RANGED:
-			TP_CHECK(sourceCombatPrivate != NULL, "No ranged damage available.");
-			damage = Helpers::RandomInRange(aRandom, sourceCombatPrivate->m_rangedDamageRangeMin, sourceCombatPrivate->m_rangedDamageRangeMax);
-			break;
-
-		case DirectEffect::DAMAGE_BASE_RANGED_AVERAGE:
-			TP_CHECK(sourceCombatPrivate != NULL, "No ranged damage available.");
-			damage = (sourceCombatPrivate->m_rangedDamageRangeMin + sourceCombatPrivate->m_rangedDamageRangeMax) / 2;
-			break;
-
-		default:
-			break;
-		}
-
-		if(damage > 0)
-		{
-			damage = (uint32_t)((float)damage * m_damageBaseMultiplier);
-			if(damage == 0)
-				damage = 1;
-		}
-
-		damage += m_levelCurve.Sample(sourceCombatPublic->m_level);
+		uint32_t damage = damageRange.GetRandom(aRandom);
 
 		CombatEvent::Id result = aId;
 
@@ -330,6 +294,19 @@ namespace tpublic::DirectEffects
 		return { result };
 	}
 
+	bool			
+	Damage::CalculateToolTipDamage(
+		const EntityInstance*				aEntityInstance,
+		UIntRange&							aOutDamage)	const
+	{
+		const Components::CombatPublic* combatPublic = aEntityInstance->GetComponent<Components::CombatPublic>();
+		const Components::CombatPrivate* combatPrivate = aEntityInstance->GetComponent<Components::CombatPrivate>();
+
+		_GetDamageRange(combatPublic, combatPrivate, aOutDamage);
+		
+		return true;
+	}
+
 	float			
 	Damage::_GetCriticalChanceBonus(
 		const EntityInstance*				aSource) const
@@ -350,6 +327,68 @@ namespace tpublic::DirectEffects
 		}
 
 		return bonus;
+	}
+
+	void			
+	Damage::_GetDamageRange(
+		const Components::CombatPublic*		aCombatPublic,
+		const Components::CombatPrivate*	aCombatPrivate,
+		UIntRange&							aOut) const
+	{
+		switch (m_damageBase)
+		{
+		case DirectEffect::DAMAGE_BASE_RANGE:
+			aOut = { m_damageBaseRangeMin, m_damageBaseRangeMax };
+			break;
+
+		case DirectEffect::DAMAGE_BASE_WEAPON:
+			TP_CHECK(aCombatPrivate != NULL, "No weapon damage available.");
+			aOut = { aCombatPrivate->m_weaponDamageRangeMin, aCombatPrivate->m_weaponDamageRangeMax };
+			break;
+
+		case DirectEffect::DAMAGE_BASE_WEAPON_AVERAGE:
+			{
+				TP_CHECK(aCombatPrivate != NULL, "No weapon damage available.");
+				uint32_t average = (aCombatPrivate->m_weaponDamageRangeMin + aCombatPrivate->m_weaponDamageRangeMax) / 2;
+				aOut = { average, average };
+			}
+			break;
+
+		case DirectEffect::DAMAGE_BASE_RANGED:
+			TP_CHECK(aCombatPrivate != NULL, "No weapon damage available.");
+			aOut = { aCombatPrivate->m_rangedDamageRangeMin, aCombatPrivate->m_rangedDamageRangeMax };
+			break;
+
+		case DirectEffect::DAMAGE_BASE_RANGED_AVERAGE:
+			{
+				TP_CHECK(aCombatPrivate != NULL, "No weapon damage available.");
+				uint32_t average = (aCombatPrivate->m_rangedDamageRangeMin + aCombatPrivate->m_rangedDamageRangeMax) / 2;
+				aOut = { average, average };
+			}
+			break;
+
+		default:
+			break;
+		}
+
+		if (aOut.m_min > 0)
+		{
+			aOut.m_min = (uint32_t)((float)aOut.m_min * m_damageBaseMultiplier);
+			if (aOut.m_min == 0)
+				aOut.m_min = 1;
+		}
+
+		if (aOut.m_max > 0)
+		{
+			aOut.m_max = (uint32_t)((float)aOut.m_max * m_damageBaseMultiplier);
+			if (aOut.m_max == 0)
+				aOut.m_max = 1;
+		}
+
+		uint32_t bonus = m_levelCurve.Sample(aCombatPublic->m_level);
+
+		aOut.m_min += bonus;
+		aOut.m_max += bonus;
 	}
 
 }
