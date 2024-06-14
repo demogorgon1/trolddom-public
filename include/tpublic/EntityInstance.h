@@ -69,6 +69,18 @@ namespace tpublic
 			return NULL;
 		}
 
+		template <typename _T>
+		bool
+		HasComponent() const
+		{
+			for(const std::unique_ptr<ComponentBase>& component : m_components)
+			{
+				if(component && component->GetComponentId() == _T::ID)
+					return true;
+			}
+			return false;
+		}
+
 		// Data access
 		uint32_t										GetEntityInstanceId() const { assert(m_entityInstanceId != 0); return m_entityInstanceId; }
 		uint32_t										GetEntityId() const { return m_entityId; }

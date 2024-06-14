@@ -66,7 +66,7 @@ ability npc_firebolt:
 	icon: icon_firebolt
 	speed: 5
 	projectile: npc_firebolt
-	resource_cost mana: 15	
+	resource_cost mana: 10	
 	
 	direct_effect damage:
 	{
@@ -111,7 +111,7 @@ ability npc_shoot:
 
 cooldown npc_heal:
 {
-	duration: 100
+	duration: 80
 }
 
 ability npc_heal:
@@ -119,14 +119,16 @@ ability npc_heal:
 	string: "Heal"
 	range: 8	
 	cast_time: 30
-	cooldowns: [ global npc_heal ]
-	flags: [ spell target_other target_friendly ]
+	cooldowns: [ global npc_heal spell_healing_lockout ]
+	flags: [ spell target_other target_friendly interruptable ]
 	states: [ in_combat ]
 	icon: icon_throw_rock
 	delay: 3
+	resource_cost mana: 10
 	
 	direct_effect heal:
 	{
 		base: 20
+		max_health_percentage: true
 	}
 }

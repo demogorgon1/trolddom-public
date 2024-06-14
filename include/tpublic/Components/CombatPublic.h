@@ -135,6 +135,18 @@ namespace tpublic
 			}
 
 			uint32_t
+			GetResourcePercentage(
+				uint32_t				aResourceId) const
+			{
+				for (const ResourceEntry& t : m_resources)
+				{
+					if(t.m_id == aResourceId && t.m_max > 0)
+						return (100 * t.m_current) / t.m_max;
+				}
+				return 0;
+			}
+
+			uint32_t
 			GetResource(
 				uint32_t				aResourceId,
 				uint32_t*				aOutMax = NULL) const

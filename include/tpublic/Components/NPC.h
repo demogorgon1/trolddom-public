@@ -31,6 +31,7 @@ namespace tpublic
 				{
 					TARGET_TYPE_DEFAULT,
 					TARGET_TYPE_RANDOM_PLAYER,
+					TARGET_TYPE_LOW_HEALTH_FRIEND_OR_SELF,
 					TARGET_TYPE_SELF
 				};
 
@@ -55,6 +56,8 @@ namespace tpublic
 							m_targetType = TARGET_TYPE_RANDOM_PLAYER;
 						else if (aChild->m_name == "target" && aChild->IsIdentifier("self"))
 							m_targetType = TARGET_TYPE_SELF;
+						else if (aChild->m_name == "target" && aChild->IsIdentifier("low_health_friend_or_self"))
+							m_targetType = TARGET_TYPE_LOW_HEALTH_FRIEND_OR_SELF;
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 					});

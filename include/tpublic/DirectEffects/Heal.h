@@ -52,6 +52,7 @@ namespace tpublic
 			// Public data
 			uint32_t			m_baseMin = 0;
 			uint32_t			m_baseMax = 0;
+			bool				m_maxHealthPercentage = false;
 		};
 
 	}

@@ -38,6 +38,10 @@ namespace tpublic::DirectEffects
 						m_baseMax = m_baseMin;
 					}					
 				}
+				else if(aChild->m_name == "max_health_percentage")
+				{
+					m_maxHealthPercentage = aChild->GetBool();
+				}
 				else
 				{
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
@@ -91,6 +95,13 @@ namespace tpublic::DirectEffects
 			return Result();
 
 		uint32_t heal = Helpers::RandomInRange(aRandom, m_baseMin, m_baseMax);
+
+		if(m_maxHealthPercentage)
+		{	
+			const Components::CombatPublic::ResourceEntry* targetHealth = targetCombatPublic->GetResourceEntry(Resource::ID_HEALTH);
+			
+			heal = (targetHealth->m_max * heal) / 100;
+		}
 				
 		CombatEvent::Id result = aId;
 

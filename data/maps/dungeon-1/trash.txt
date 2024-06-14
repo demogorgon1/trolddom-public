@@ -43,7 +43,12 @@ entity .goblin_shaman_5: !NPC
 	_resource_mana: 1
 	_loot_table: .trash
 	_creature_type: humanoid
-	_abilities: [ { id: npc_firebolt }{ id: npc_attack } ]
+	_abilities: 
+	[ 
+		{ id: npc_heal target: low_health_friend_or_self }
+		{ id: npc_firebolt }
+		{ id: npc_attack } 
+	]
 }
 	
 entity .goblin_6: !NPC
@@ -73,7 +78,12 @@ entity .goblin_shaman_6: !NPC
 	_resource_mana: 1
 	_loot_table: .trash
 	_creature_type: humanoid
-	_abilities: [ { id: npc_firebolt }{ id: npc_attack } ]
+	_abilities: 
+	[ 
+		{ id: npc_heal target: low_health_friend_or_self }
+		{ id: npc_firebolt }
+		{ id: npc_attack } 
+	]
 }
 	
 entity .goblin_7: !NPC

@@ -485,6 +485,45 @@ namespace tpublic::Systems
 									break;
 								}
 							}
+							else if (abilityEntry.m_targetType == Components::NPC::AbilityEntry::TARGET_TYPE_LOW_HEALTH_FRIEND_OR_SELF)
+							{
+								if (npc->m_cooldowns.IsAbilityOnCooldown(ability))
+									continue;
+
+								if (!combat->HasResourcesForAbility(ability, NULL, combat->GetResourceMax(Resource::ID_MANA)))
+									continue;
+
+								IWorldView::EntityQuery entityQuery;
+								entityQuery.m_position = position->m_position;
+								entityQuery.m_maxDistance = ability->m_range;
+								entityQuery.m_flags = IWorldView::EntityQuery::FLAG_LINE_OF_SIGHT;
+
+								std::vector<const EntityInstance*> possibleTargets;
+								aContext->m_worldView->WorldViewQueryEntityInstances(entityQuery, [&](
+									const EntityInstance* aEntity,
+									int32_t				  aDistanceSquared)
+								{
+									if (aEntity->GetState() == EntityState::ID_IN_COMBAT && aDistanceSquared >= (int32_t)(ability->m_minRange * ability->m_minRange))
+									{
+										const Components::CombatPublic* otherCombatPublic = aEntity->GetComponent<Components::CombatPublic>();
+										if(otherCombatPublic != NULL && aEntity->HasComponent<Components::NPC>())
+										{
+											if(otherCombatPublic->m_factionId == combat->m_factionId && otherCombatPublic->GetResourcePercentage(Resource::ID_HEALTH) < 80)
+												possibleTargets.push_back(aEntity);
+										}
+									}
+									return false;
+								});
+
+								if (possibleTargets.size() > 0)
+								{
+									const EntityInstance* selectedTarget = possibleTargets[Helpers::RandomInRange<size_t>(*aContext->m_random, 0, possibleTargets.size() - 1)];
+
+									useAbility = ability;
+									npc->m_targetEntityInstanceId = selectedTarget->GetEntityInstanceId();
+									break;
+								}
+							}
 							else if(abilityEntry.m_targetType == Components::NPC::AbilityEntry::TARGET_TYPE_RANDOM_PLAYER)
 							{
 								if (npc->m_cooldowns.IsAbilityOnCooldown(ability))
