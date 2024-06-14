@@ -5,6 +5,7 @@ loot_table .grunthar:
 {
 	slots:
 	[
+		{ possibility: { loot_group: .grunthar  } }			
 		!WORLD_DROPS{}
 		!WORLD_DROPS_CLOTH{}
 	]	
@@ -12,6 +13,8 @@ loot_table .grunthar:
 
 ############################################################
 # Boss
+
+loot_group .grunthar: {}
 
 encounter .grunthar:
 {

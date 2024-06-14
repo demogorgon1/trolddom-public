@@ -286,6 +286,49 @@ sprites:
 	sprite icon_crossbow_1 : { tags: [ icon ranged_crossbow ] }
 	sprite icon_fist : { tags: [ icon ] }
 	sprite icon_question : { tags: [ icon ] }
+	sprite icon_axe_3 : { tags: [ icon ] }
+	sprite icon_mace_5 : { tags: [ icon ] }
+	sprite icon_sword_7 : { tags: [ icon ] }
+	sprite icon_sword_8 : { tags: [ icon ] }
+	sprite icon_staff_2 : { tags: [ icon ] }
+	sprite icon_staff_3 : { tags: [ icon ] }
+	sprite icon_staff_4 : { tags: [ icon ] }
+	sprite icon_axe_4 : { tags: [ icon ] }
+	sprite icon_sword_9 : { tags: [ icon ] }
+	sprite icon_shield_4 : { tags: [ icon ] }
+
+	cursor: { position: [ 0 256 ] }		
+	sprite icon_plate_helmet_1 : { tags: [ icon ] }
+	sprite icon_plate_chest_2 : { tags: [ icon ] }
+	sprite icon_plate_legs_1 : { tags: [ icon ] }
+	sprite icon_plate_shoulders_1 : { tags: [ icon ] }
+	sprite icon_plate_bracers_1 : { tags: [ icon ] }
+	sprite icon_plate_belt_1 : { tags: [ icon ] }
+	sprite icon_plate_hands_1 : { tags: [ icon ] }
+	sprite icon_cloth_head_1 : { tags: [ icon ] }
+	sprite icon_cloth_shirt_5 : { tags: [ icon ] }
+	sprite icon_cloth_legs_1 : { tags: [ icon ] }
+	sprite icon_cloth_feet_1 : { tags: [ icon ] }
+	sprite icon_cloth_shoulders_1 : { tags: [ icon ] }
+	sprite icon_cloth_bracers_1 : { tags: [ icon ] }
+	sprite icon_cloth_belt_1 : { tags: [ icon ] }
+	sprite icon_cloth_hands_1 : { tags: [ icon ] }
+
+	cursor: { position: [ 0 272 ] }		
+	sprite icon_mail_head_1 : { tags: [ icon ] }
+	sprite icon_mail_shirt_3 : { tags: [ icon ] }
+	sprite icon_mail_legs_1 : { tags: [ icon ] }
+	sprite icon_mail_feet_1 : { tags: [ icon ] }
+	sprite icon_mail_shoulders_1 : { tags: [ icon ] }
+	sprite icon_mail_bracers_3 : { tags: [ icon ] }
+	sprite icon_mail_belt_3 : { tags: [ icon ] }
+	sprite icon_mail_hands_1 : { tags: [ icon ] }
+	sprite icon_ring_6 : { tags: [ icon ] }
+	sprite icon_necklace_3 : { tags: [ icon ] }
+	sprite icon_necklace_4 : { tags: [ icon ] }
+	sprite icon_cape_3 : { tags: [ icon ] }
+	sprite icon_cape_4 : { tags: [ icon ] }
+	sprite icon_knife_3 : { tags: [ icon ]}
 	
 }
 

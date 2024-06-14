@@ -84,5 +84,6 @@ quest .hubert_1:
 	
 	type: dungeon
 	objectives: [ .hubert_1 ]
+	reward_one_item: [ dungeon_1_mail_belt_1 dungeon_1_cloth_belt_1 dungeon_1_plate_belt_1 ]
 	level: 8	
 }

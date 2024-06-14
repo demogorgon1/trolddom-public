@@ -1,10 +1,13 @@
 ############################################################
 # Loot
 
+loot_group .ignorg: {}
+
 loot_table .ignorg:
 {
 	slots:
 	[
+		{ possibility: { loot_group: .ignorg  } }			
 		!WORLD_DROPS{}
 		!WORLD_DROPS_CLOTH{}
 	]	

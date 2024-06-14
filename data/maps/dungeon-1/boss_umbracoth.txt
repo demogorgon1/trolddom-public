@@ -1,10 +1,13 @@
 ############################################################
 # Loot
 
+loot_group .umbracoth: {}
+
 loot_table .umbracoth:
 {
 	slots:
 	[
+		{ possibility: { loot_group: .umbracoth } }			
 		!WORLD_DROPS{}
 	]	
 }

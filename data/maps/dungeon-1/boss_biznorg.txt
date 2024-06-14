@@ -1,10 +1,13 @@
 ############################################################
 # Loot
 
+loot_group .biznorg: {}
+
 loot_table .biznorg:
 {
 	slots:
 	[
+		{ possibility: { loot_group: .biznorg  } }			
 		!WORLD_DROPS{}
 		!WORLD_DROPS_CLOTH{}
 	]	

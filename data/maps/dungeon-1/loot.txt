@@ -1,0 +1,624 @@
+############################################################
+# Ignorg
+
+item dungeon_1_axe_1:
+{
+	string: "Goblin Cleaver"
+	weapon_cooldown: 20
+	type: weapon_1h_axe
+	equipment_slots: [ main_hand off_hand ]
+	loot_groups: [ .ignorg ]
+	required_level: 6
+	icon: icon_axe_3
+	rarity: rare
+	binds: when_picked_up
+	
+	stat_weight strength: 2
+	stat_weight constitution: 1
+}
+
+item dungeon_1_cloth_feet_1:
+{
+	string: "Wizard's Slippers"
+	type: armor_cloth
+	equipment_slots: [ feet ]
+	loot_groups: [ .ignorg ]
+	required_level: 6
+	icon: icon_cloth_feet_1
+	rarity: rare
+	binds: when_picked_up
+	
+	stat_weight wisdom: 1
+	stat_weight spirit: 1			
+}
+
+item dungeon_1_mail_feet_1:
+{
+	string: "Skeletal Sabatons"
+	type: armor_mail
+	equipment_slots: [ feet ]
+	loot_groups: [ .ignorg ]
+	required_level: 6
+	icon: icon_mail_feet_1
+	rarity: rare
+	
+	stat_weight strength: 1
+	stat_weight dexterity: 1				
+}
+
+item dungeon_1_plate_feet_1:
+{
+	string: "Warrior's Footguards"
+	type: armor_plate
+	equipment_slots: [ feet ]
+	loot_groups: [ .ignorg ]
+	required_level: 6
+	icon: icon_plate_feet_1
+	rarity: rare
+	
+	stat_weight strength: 1
+	stat_weight constitution: 1				
+}
+
+item dungeon_1_plate_bracers_1:
+{
+	string: "Warrior's Wristguards"
+	type: armor_plate
+	equipment_slots: [ wrists ]
+	loot_groups: [ .ignorg ]
+	required_level: 6
+	icon: icon_plate_bracers_1
+	rarity: rare
+	binds: when_picked_up
+	
+	stat_weight strength: 1
+	stat_weight constitution: 1		
+}
+
+item dungeon_1_cloth_bracers_1:
+{
+	string: "Wizard's Bracers"
+	type: armor_cloth
+	equipment_slots: [ wrists ]
+	loot_groups: [ .ignorg ]
+	required_level: 6
+	icon: icon_cloth_bracers_1
+	rarity: rare
+	binds: when_picked_up
+	
+	stat_weight wisdom: 1
+	stat_weight spirit: 1			
+}
+
+item dungeon_1_mail_bracers_1:
+{
+	string: "Skeletal Wristguards"
+	type: armor_mail
+	equipment_slots: [ wrists ]
+	loot_groups: [ .ignorg ]
+	required_level: 6
+	icon: icon_mail_bracers_3
+	rarity: rare
+	binds: when_picked_up
+	
+	stat_weight strength: 1
+	stat_weight dexterity: 1					
+}
+
+############################################################
+# Grunthar
+
+item dungeon_1_mace_1:
+{
+	string: "Skull Crusher"
+	weapon_cooldown: 22
+	type: weapon_1h_mace
+	equipment_slots: [ main_hand off_hand ]
+	loot_groups: [ .grunthar ]
+	required_level: 9
+	icon: icon_mace_5
+	rarity: rare
+	binds: when_picked_up
+	
+	stat_weight strength: 1 
+}
+
+item dungeon_1_cape_2:
+{
+	string: "Cape of the Lost Hero"
+	equipment_slots: [ back ]
+	loot_groups: [ .grunthar ]
+	required_level: 9
+	icon: icon_cape_4
+	rarity: rare
+	binds: when_picked_up
+	
+	stat_weight dexterity: 1	
+	stat_weight constitution: 1			
+}
+
+item dungeon_1_plate_helmet_1:
+{
+	string: "Warrior's Faceguard"
+	type: armor_plate
+	equipment_slots: [ head ]
+	loot_groups: [ .grunthar ]
+	required_level: 9
+	icon: icon_plate_helmet_1
+	rarity: rare
+	binds: when_picked_up
+	
+	stat_weight strength: 1
+	stat_weight constitution: 1
+}
+
+item dungeon_1_mail_head_1:
+{
+	string: "Skeletal Skullmask"
+	type: armor_mail
+	equipment_slots: [ head ]
+	loot_groups: [ .grunthar ]
+	required_level: 9
+	icon: icon_mail_head_1
+	rarity: rare
+	binds: when_picked_up
+	
+	stat_weight strength: 1
+	stat_weight dexterity: 1			
+}
+
+item dungeon_1_cloth_head_1:
+{
+	string: "Wizard's Hood"
+	type: armor_cloth
+	equipment_slots: [ head ]
+	loot_groups: [ .grunthar ]
+	required_level: 9
+	icon: icon_cloth_head_1
+	rarity: rare
+	binds: when_picked_up
+	
+	stat_weight wisdom: 1
+	stat_weight spirit: 1		
+}
+
+############################################################
+# Zarvok
+
+item dungeon_1_sword_1:
+{
+	string: "Ancient Longsword"
+	weapon_cooldown: 20
+	type: weapon_1h_sword
+	equipment_slots: [ main_hand off_hand ]
+	loot_groups: [ .zarvok ]
+	required_level: 10
+	icon: icon_sword_7
+	rarity: rare
+	binds: when_picked_up
+	
+	budget_bias: -10
+	
+	stat parry_chance: 1
+	stat_weight dexterity: 1
+}
+
+item dungeon_1_knife_1:
+{
+	string: "Snakeblade"
+	weapon_cooldown: 15
+	type: weapon_1h_knife
+	equipment_slots: [ main_hand off_hand ]
+	loot_groups: [ .zarvok ]
+	required_level: 10
+	icon: icon_sword_8
+	rarity: rare
+	binds: when_picked_up
+	
+	stat_weight strength: 1
+	stat_weight dexterity: 3
+}
+
+item dungeon_1_staff_1:
+{
+	string: "Glowing Staff of the Druid"
+	weapon_cooldown: 30
+	type: weapon_2h_staff
+	equipment_slots: [ main_hand ]
+	loot_groups: [ .zarvok ]
+	required_level: 10
+	icon: icon_staff_2
+	rarity: rare
+	binds: when_picked_up
+	
+	stat_weight wisdom: 1
+	stat_weight spirit: 2	
+}
+
+item dungeon_1_staff_2:
+{
+	string: "Nemesis Staff"
+	weapon_cooldown: 30
+	type: weapon_2h_staff
+	equipment_slots: [ main_hand ]
+	loot_groups: [ .zarvok ]
+	required_level: 10
+	icon: icon_staff_3
+	rarity: rare
+	binds: when_picked_up
+	
+	stat_weight constitution: 1
+	stat_weight wisdom: 2	
+}
+
+item dungeon_1_axe_2:
+{
+	string: "Lord's Battle Axe"
+	weapon_cooldown: 34
+	type: weapon_2h_axe
+	equipment_slots: [ main_hand ]
+	loot_groups: [ .zarvok ]
+	required_level: 10
+	icon: icon_axe_4
+	rarity: rare
+	binds: when_picked_up
+
+	budget_bias: -10
+	stat phys_crit_chance: 1
+	stat_weight strength: 1
+	stat_weight constitution: 1
+}
+
+item dungeon_1_plate_chest_1:
+{
+	string: "Warrior's Chestguard"
+	type: armor_plate
+	equipment_slots: [ chest ]
+	loot_groups: [ .zarvok_2 ]
+	required_level: 10
+	icon: icon_plate_chest_2
+	rarity: rare
+	binds: when_picked_up
+	
+	stat_weight strength: 1
+	stat_weight constitution: 1	
+}
+
+item dungeon_1_cloth_shirt_1:
+{
+	string: "Wizard's Robe"
+	type: armor_cloth
+	equipment_slots: [ chest ]
+	loot_groups: [ .zarvok_2 ]
+	required_level: 10
+	icon: icon_cloth_shirt_5
+	rarity: rare
+	binds: when_picked_up
+	
+	stat_weight wisdom: 1
+	stat_weight spirit: 1			
+}
+
+item dungeon_1_mail_shirt_1:
+{
+	string: "Skeletal Hauberk"
+	type: armor_mail
+	equipment_slots: [ chest ]
+	loot_groups: [ .zarvok_2 ]
+	required_level: 10
+	icon: icon_mail_shirt_3
+	rarity: rare
+	binds: when_picked_up
+	
+	stat_weight strength: 1
+	stat_weight dexterity: 1				
+}
+
+item dungeon_1_ring_1:
+{
+	string: "Golden Loop"
+	equipment_slots: [ finger_1 finger_2 ]
+	loot_groups: [ .zarvok_2 ]
+	required_level: 10
+	icon: icon_ring_6
+	rarity: rare
+	binds: when_picked_up
+		
+	stat_weight constitution: 1
+}
+
+item dungeon_1_neck_1:
+{
+	string: "Ancient Sapphire"
+	equipment_slots: [ neck ]
+	loot_groups: [ .zarvok_2 ]
+	required_level: 10
+	icon: icon_necklace_3
+	rarity: rare
+	binds: when_picked_up
+	
+	stat_weight wisdom: 1	
+	stat_weight constitution: 1	
+}
+
+############################################################
+# Biznorg
+
+item dungeon_1_staff_3:
+{
+	string: "Eldertree Walking Stick"
+	weapon_cooldown: 30
+	type: weapon_2h_staff
+	equipment_slots: [ main_hand ]
+	loot_groups: [ .biznorg ]
+	required_level: 7
+	icon: icon_staff_4
+	rarity: rare
+	binds: when_picked_up
+	
+	stat_weight wisdom: 2
+	stat_weight spirit: 1		
+}
+
+item dungeon_1_plate_shoulders_1:
+{
+	string: "Warrior's Shoulderguards"
+	type: armor_plate
+	equipment_slots: [ shoulders ]
+	loot_groups: [ .biznorg ]
+	required_level: 7
+	icon: icon_plate_shoulders_1
+	rarity: rare
+	binds: when_picked_up
+	
+	stat_weight strength: 1
+	stat_weight constitution: 1		
+}
+
+item dungeon_1_cloth_shoulders_1:
+{
+	string: "Wizard's Mantle"
+	type: armor_cloth
+	equipment_slots: [ shoulders ]
+	loot_groups: [ .biznorg ]
+	required_level: 7
+	icon: icon_cloth_shoulders_1
+	rarity: rare
+	binds: when_picked_up
+	
+	stat_weight wisdom: 1
+	stat_weight spirit: 1			
+}
+
+item dungeon_1_mail_shoulders_1:
+{
+	string: "Skeletal Mantle"
+	type: armor_mail
+	equipment_slots: [ shoulders ]
+	loot_groups: [ .biznorg ]
+	required_level: 7
+	icon: icon_mail_shoulders_1
+	rarity: rare
+	binds: when_picked_up
+	
+	stat_weight strength: 1
+	stat_weight dexterity: 1				
+}
+
+item dungeon_1_cape_1:
+{
+	string: "Cloak of Biznorg"
+	equipment_slots: [ back ]
+	loot_groups: [ .biznorg ]
+	required_level: 7
+	icon: icon_cape_3
+	rarity: rare
+	binds: when_picked_up
+	
+	stat_weight spirit: 1		
+	stat_weight wisdom: 1		
+	stat_weight constitution: 1		
+}
+
+############################################################
+# Umbracoth
+
+item dungeon_1_sword_2:
+{
+	string: "Demonic Slicer"
+	weapon_cooldown: 20
+	type: weapon_1h_sword
+	equipment_slots: [ main_hand off_hand ]
+	loot_groups: [ .umbracoth ]
+	required_level: 7
+	icon: icon_sword_9
+	rarity: rare
+	binds: when_picked_up
+	
+	stat_weight wisdom: 1
+}
+
+item dungeon_1_shield_1:
+{
+	string: "Demonic Shield"
+	type: shield
+	equipment_slots: [ off_hand ]
+	loot_groups: [ .umbracoth ]
+	required_level: 7
+	icon: icon_shield_4
+	rarity: rare
+	binds: when_picked_up
+	
+	budget_bias: -10
+	stat block_chance: 1
+	stat_weight constitution: 1
+}
+
+item dungeon_1_plate_hands_1:
+{
+	string: "Warrior's Handguards"
+	type: armor_plate
+	equipment_slots: [ hands ]
+	loot_groups: [ .umbracoth ]
+	required_level: 7
+	icon: icon_plate_hands_1
+	rarity: rare
+	binds: when_picked_up
+	
+	stat_weight strength: 1
+	stat_weight constitution: 1		
+}
+
+item dungeon_1_cloth_hands_1:
+{
+	string: "Wizard's Gloves"
+	type: armor_cloth
+	equipment_slots: [ hands ]
+	loot_groups: [ .umbracoth ]
+	required_level: 7
+	icon: icon_cloth_hands_1
+	rarity: rare
+	binds: when_picked_up
+	
+	stat_weight wisdom: 1
+	stat_weight spirit: 1			
+}
+
+item dungeon_1_mail_hands_1:
+{
+	string: "Skeletal Grasp"
+	type: armor_mail
+	equipment_slots: [ hands ]
+	loot_groups: [ .umbracoth ]
+	required_level: 7
+	icon: icon_mail_hands_1
+	rarity: rare
+	binds: when_picked_up
+		
+	stat_weight strength: 1
+	stat_weight dexterity: 1					
+}
+
+############################################################
+# Snarltooth
+
+item dungeon_1_plate_legs_1:
+{
+	string: "Warrior's Legguards"
+	type: armor_plate
+	equipment_slots: [ legs ]
+	loot_groups: [ .snarltooth ]
+	required_level: 8
+	icon: icon_plate_legs_1
+	rarity: rare
+	binds: when_picked_up
+	
+	stat_weight strength: 1
+	stat_weight constitution: 1	
+}
+
+item dungeon_1_cloth_legs_1:
+{
+	string: "Wizard's Leggings"
+	type: armor_cloth
+	equipment_slots: [ legs ]
+	loot_groups: [ .snarltooth ]
+	required_level: 8
+	icon: icon_cloth_legs_1
+	rarity: rare
+	binds: when_picked_up
+	
+	stat_weight wisdom: 1
+	stat_weight spirit: 1			
+}
+
+item dungeon_1_mail_legs_1:
+{
+	string: "Skeletal Greaves"
+	type: armor_mail
+	equipment_slots: [ legs ]
+	loot_groups: [ .snarltooth ]
+	required_level: 8
+	icon: icon_mail_legs_1
+	rarity: rare
+	binds: when_picked_up
+	
+	stat_weight strength: 1
+	stat_weight dexterity: 1				
+}
+
+item dungeon_1_neck_2:
+{
+	string: "Corrupted Heirloom"
+	equipment_slots: [ neck ]
+	loot_groups: [ .snarltooth ]
+	required_level: 8
+	icon: icon_necklace_4
+	rarity: rare
+	binds: when_picked_up
+	
+	stat_weight strength: 1	
+	stat_weight constitution: 1		
+}
+
+item dungeon_1_knife_2:
+{
+	string: "Broken Fang of Snarltooth"
+	weapon_cooldown: 20
+	type: weapon_1h_knife
+	equipment_slots: [ main_hand off_hand ]
+	loot_groups: [ .snarltooth ]
+	required_level: 8
+	icon: icon_knife_3
+	rarity: rare
+	binds: when_picked_up
+	
+	budget_bias: -10
+	stat_weight constitution: 1
+	stat phys_crit_chance: 1
+}
+
+############################################################
+# Quests
+
+item dungeon_1_mail_belt_1:
+{
+	string: "Skeletal Girdle"
+	type: armor_mail
+	equipment_slots: [ waist ]
+	required_level: 8
+	icon: icon_mail_belt_3
+	rarity: rare
+	binds: when_picked_up
+	
+	stat_weight strength: 1
+	stat_weight dexterity: 1					
+}
+
+item dungeon_1_cloth_belt_1:
+{
+	string: "Wizard's Belt"
+	type: armor_cloth
+	equipment_slots: [ waist ]
+	required_level: 8
+	icon: icon_cloth_belt_1
+	rarity: rare
+	binds: when_picked_up
+	
+	stat_weight wisdom: 1
+	stat_weight spirit: 1			
+}
+
+item dungeon_1_plate_belt_1:
+{
+	string: "Warrior's Waistguard"
+	type: armor_plate
+	equipment_slots: [ waist ]
+	required_level: 8
+	icon: icon_plate_belt_1
+	rarity: rare
+	binds: when_picked_up
+	
+	stat_weight strength: 1
+	stat_weight constitution: 1		
+}
