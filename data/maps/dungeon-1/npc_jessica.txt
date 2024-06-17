@@ -1,0 +1,51 @@
+dialogue_screen .jessica_greetings:
+{
+	text: 
+	[	
+		"Grr."
+	]
+	
+	options:
+	[
+		{ text: "Okay." }
+	]
+}
+
+dialogue_root .jessica_dialogue:
+{
+	.jessica_greetings: { }
+}
+
+npc_behavior_state .jessica:
+{
+	behavior: wandering
+	max_range: 1
+}
+
+entity .jessica: !NPC
+{
+	_string: "Jessica"
+	_dialogue_root: .jessica_dialogue	
+	_sprite: bear_2
+	_sprite_dead: bear_2_dead	
+	_level: 10
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .jessica
+	_not_pushable: true	
+	_elite: true
+	_default_behavior_state: .jessica
+}
+
+loot_table .jessica:
+{
+	slots:
+	[
+		!WORLD_DROPS{}	
+	]	
+}
+
+map_entity_spawn .jessica:
+{
+	entity .jessica: { }
+}

@@ -301,6 +301,7 @@ sprites:
 	sprite icon_plate_helmet_1 : { tags: [ icon ] }
 	sprite icon_plate_chest_2 : { tags: [ icon ] }
 	sprite icon_plate_legs_1 : { tags: [ icon ] }
+	sprite icon_plate_feet_1 : { tags: [ icon ] }
 	sprite icon_plate_shoulders_1 : { tags: [ icon ] }
 	sprite icon_plate_bracers_1 : { tags: [ icon ] }
 	sprite icon_plate_belt_1 : { tags: [ icon ] }

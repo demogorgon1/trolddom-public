@@ -162,6 +162,7 @@ sprites:
 	sprite troll_1: { dead: troll_1_dead }
 	sprite goblin_5: { dead: goblin_5_dead }
 	sprite man_19: { dead: man_19_dead tags: [ male human ] }
+	sprite bear_2: { dead: bear_2_dead }
 
 	cursor: { position: [ 0 144 ] }
 
@@ -169,6 +170,7 @@ sprites:
 	sprite troll_1_dead: { }
 	sprite goblin_5_dead: { }
 	sprite man_19_dead: { }
+	sprite bear_2_dead: { }
 	
 }
 

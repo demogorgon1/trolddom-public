@@ -1,12 +1,28 @@
+dialogue_screen .hubert_hideaway:
+{
+	text: 
+	[	
+		"Well, with the increased goblin activity recently, they've become a bit of nuisance, but they usually stay clear of this part of the valley, thanks to Jessica."
+		"I can't imagine goblin flesh being particularly tasty, but she loves it!"
+	]
+	
+	options:
+	[
+		{ goto: .hubert_greetings text: "I see." }
+	]
+}
+
 dialogue_screen .hubert_greetings:
 {
 	text: 
 	[	
+		"Welcome to my little corner of the world."
 	]
 	
 	options:
 	[
 		{ quest: .hubert_1 }
+		{ goto: .hubert_hideaway text: "Isn't this a dangerous place to live?" }
 	]
 }
 
@@ -69,7 +85,8 @@ quest .hubert_1:
 	
 	description: 
 	[
-		"FIXME"
+		"The goblins don't really bother me, but those pesky wolves are getting out of control. Jessica keeps them away, mostly, but recently they've become nosier."
+		"If you want to help me, you should go and hunt down their pack leader. Do so and I'll reward you handsomely."
 	]
 
 	progress:
@@ -79,7 +96,7 @@ quest .hubert_1:
 	
 	completion:
 	[
-		"Nice."
+		"That will teach those beasts a lesson. Hopefully they'll leave me alone now."
 	]
 	
 	type: dungeon
