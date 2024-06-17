@@ -4,9 +4,35 @@ item ranged_crusty_shortbow:
 	equipment_slots: [ ranged ]
 	loot_groups: [ world_drops_junk ]
 	required_level: 1
-	item_level: 1
 	icon: icon_bow_1
 	rarity: common
 	string: "Crusty Shortbow"
 	weapon_cooldown: 20			
 }
+
+item ranged_simheist_1:
+{
+	type: ranged_bow
+	binds: when_picked_up
+	equipment_slots: [ ranged ]
+	required_level: 9
+	icon: icon_bow_2
+	rarity: uncommon
+	string: "Ranger's Longbow"
+	stat_weight spirit: 2
+	stat_weight constitution: 1
+}
+
+item ranged_sylas_1:
+{
+	type: ranged_crossbow
+	binds: when_picked_up
+	equipment_slots: [ ranged ]
+	required_level: 10
+	icon: icon_crossbow_1
+	rarity: rare
+	string: "Chestpiercer"
+	stat_weight dexterity: 1
+	stat_weight strength: 1
+}
+

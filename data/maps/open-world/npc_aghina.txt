@@ -98,4 +98,6 @@ quest .aghina_1:
 
 	objectives: [ .aghina_1 ]
 	level: 6	
+	
+	reward_one_item: [ chest_aghina_1 legs_aghina_1 back_aghina_1 ]
 }

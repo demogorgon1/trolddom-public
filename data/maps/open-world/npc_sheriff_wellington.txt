@@ -82,7 +82,7 @@ quest .sheriff_wellington_1:
 	objectives: [ .sheriff_wellington_1 ]
 	level: 2
 	
-	reward_one_item: [ consumable_small_healing_potion consumable_small_mana_potion ]
+	reward_one_item: [ chest_sheriff_wellington_1 legs_sheriff_wellington_1 ]
 }
 
 ############################################################
@@ -156,5 +156,6 @@ quest .sheriff_wellington_2:
 	objectives: [ .sheriff_wellington_2_a .sheriff_wellington_2_b .sheriff_wellington_2_c ]
 	prerequisites: [ .sheriff_wellington_1 ]
 	level: 3
-	reward_one_item: [ consumable_small_healing_potion consumable_small_mana_potion ]
+	
+	reward_one_item: [ chest_sheriff_wellington_2 weapon_sheriff_wellington_1 ]
 }

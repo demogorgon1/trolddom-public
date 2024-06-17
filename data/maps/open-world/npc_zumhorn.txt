@@ -118,6 +118,8 @@ quest .zumhorn_1:
 	level: 9
 	quest_items: [ .zumhorn_1 ]
 	objectives: [ .zumhorn_1 ]
+	
+	reward_one_item: [ back_zumhorn_1 feet_zumhorn_1 ]
 }
 
 ############################################################
@@ -220,5 +222,7 @@ quest .zumhorn_2:
 	type: elite
 	objectives: [ .zumhorn_2 ]
 	prerequisites: [ .zumhorn_1 ] 
+	
+	reward_one_item: [ weapon_zumhorn_1 chest_zumhorn_1 weapon_zumhorn_2 ]
 }
 

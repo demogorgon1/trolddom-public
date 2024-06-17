@@ -146,6 +146,8 @@ quest .ezekiel_1:
 
 	objectives: [ .ezekiel_1 ]
 	level: 7	
+	
+	reward_one_item: [ hands_ezekiel_1 hands_ezekiel_2 ]
 }
 
 ############################################################

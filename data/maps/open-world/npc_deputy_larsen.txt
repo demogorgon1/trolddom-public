@@ -77,6 +77,8 @@ quest .deputy_larsen_1:
 
 	objectives: [ .deputy_larsen_1 ]
 	level: 4	
+	
+	reward_one_item: [ legs_deputy_larsen_1 feet_deputy_larsen_1 ]
 }
 
 ############################################################

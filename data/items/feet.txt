@@ -21,3 +21,53 @@ item feet_tattered_slippers:
 	icon: icon_shoe_1		
 	string: "Tattered Slippers"
 }
+
+item feet_theodore_1:
+{
+	type: armor_mail
+	binds: when_picked_up
+	equipment_slots: [ feet ]
+	required_level: 3
+	rarity: uncommon
+	icon: icon_boots_1		
+	string: "Sneaking Boots"
+	stat_weight dexterity: 1
+}
+
+item feet_deputy_larsen_1:
+{
+	type: armor_cloth
+	binds: when_picked_up
+	equipment_slots: [ feet ]
+	required_level: 4
+	rarity: uncommon
+	icon: icon_boots_1		
+	string: "Waterproof Trudgers"
+	stat_weight constitution: 1
+}
+
+item feet_hermit_1:
+{
+	type: armor_plate
+	binds: when_picked_up
+	equipment_slots: [ feet ]
+	required_level: 8
+	rarity: uncommon
+	icon: icon_mail_boots_2		
+	string: "Hermit's Floorscrapers"
+	stat_weight constitution: 1
+	stat_weight spirit: 1
+}
+
+item feet_zumhorn_1:
+{
+	type: armor_cloth
+	binds: when_picked_up
+	equipment_slots: [ feet ]
+	required_level: 9
+	rarity: uncommon
+	icon: icon_boots_1		
+	string: "Ancient Forest Slippers"
+	stat_weight wisdom: 1
+	stat_weight spirit: 2
+}

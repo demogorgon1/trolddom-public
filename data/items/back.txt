@@ -10,3 +10,53 @@ item back_graceful_cape:
 	stat_weight spirit: 3 
 	stat_weight wisdom: 2
 }
+
+item back_theodore_1:
+{
+	equipment_slots: [ back ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 3
+	icon: icon_cape_2
+	rarity: uncommon
+	string: "Hunter's Cape" 
+	stat_weight constitution: 1
+}
+
+item back_elysia_1:
+{
+	equipment_slots: [ back ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 5
+	icon: icon_cape_1
+	rarity: uncommon
+	string: "Forest Dweller's Cape" 
+	stat_weight dexterity: 1
+}
+
+item back_aghina_1:
+{
+	equipment_slots: [ back ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 6
+	icon: icon_cape_2
+	rarity: uncommon
+	string: "Seafarer's Cloak" 
+	stat_weight dexterity: 1
+	stat_weight spirit: 1
+}
+
+item back_zumhorn_1:
+{
+	equipment_slots: [ back ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 9
+	icon: icon_cape_1
+	rarity: uncommon
+	string: "Woodland Protector's Cloak" 
+	stat_weight dexterity: 1
+	stat_weight constitution: 2
+}

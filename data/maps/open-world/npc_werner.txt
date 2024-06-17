@@ -125,5 +125,7 @@ quest .werner_1:
 
 	objectives: [ .werner_1 ]
 	level: 7
+	
+	reward_one_item: [ consumable_small_healing_potion consumable_small_mana_potion ]
 }
 

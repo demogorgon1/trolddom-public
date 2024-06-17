@@ -145,3 +145,24 @@ ability consumable_potato_stew_tick: !ABILITY_FOOD_TICK {}
 aura consumable_potato_stew: !AURA_FOOD {}
 ability consumable_potato_stew: !ABILITY_FOOD { _buff: consumable_potato_stew_buff }
 item consumable_potato_stew: !ITEM_FOOD {}
+
+#####################################################
+# Boiled Potato
+${ 
+	_string: "Boiled Potato" 
+	_description: "Restores 130 health and mana over 10 seconds. Can't be used in combat."
+	_level: 4
+	_icon: icon_boiled_potato
+	_heal_tick: 13
+	_ability_tick: consumable_boiled_potato_tick
+	_ability: consumable_boiled_potato
+	_aura: consumable_boiled_potato
+	_item: { consumable_boiled_potato: 1 } 
+	_loot_groups: [ ]
+}
+
+aura consumable_boiled_potato_buff: !AURA_FOOD_BUFF { _stat_modifiers: { spirit: { add: 2 } } }
+ability consumable_boiled_potato_tick: !ABILITY_FOOD_TICK {}
+aura consumable_boiled_potato: !AURA_FOOD {}
+ability consumable_boiled_potato: !ABILITY_FOOD { _buff: consumable_boiled_potato_buff }
+item consumable_boiled_potato: !ITEM_FOOD {}

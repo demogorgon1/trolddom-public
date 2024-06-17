@@ -74,7 +74,7 @@ quest .theodore_1:
 	objectives: [ .theodore_1 ]
 	level: 1
 	
-	reward_one_item: [ consumable_small_healing_potion consumable_small_mana_potion ]
+	reward_one_item: [ waist_theodore_1 hands_theodore_1 ]
 }
 
 ##########################################################################################
@@ -159,6 +159,7 @@ quest .theodore_2:
 	objectives: [ .theodore_2 ]
 	level: 3
 	prerequisites: [ .theodore_1 ]
-	reward_one_item: [ consumable_small_healing_potion consumable_small_mana_potion ]
+	
+	reward_one_item: [ back_theodore_1 feet_theodore_1 ]
 }
 

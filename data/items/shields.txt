@@ -7,3 +7,15 @@ item shield_wooden_buckler:
 	rarity: common
 	string: "Wooden Buckler" 
 }
+
+item shield_crab_defender_shield:
+{
+	equipment_slots: [ off_hand ]
+	binds: when_picked_up
+	type: shield
+	required_level: 5
+	icon: icon_shield_2
+	rarity: uncommon
+	string: "Crab Defender Shield" 
+	stat_weight spirit: 1
+}

@@ -1,0 +1,59 @@
+item waist_theodore_1:
+{
+	type: armor_mail
+	equipment_slots: [ waist ]
+	required_level: 1
+	icon: icon_belt_1
+	rarity: common
+	string: "Studded Leather Belt"
+}
+
+item waist_hobart_1:
+{
+	type: armor_cloth
+	binds: when_picked_up
+	equipment_slots: [ waist ]
+	required_level: 1
+	icon: icon_belt_2
+	rarity: common
+	string: "Woven Hemp Belt"
+}
+
+item waist_sylas_1:
+{
+	type: armor_cloth
+	binds: when_picked_up
+	equipment_slots: [ waist ]
+	required_level: 5
+	icon: icon_belt_1
+	rarity: uncommon
+	string: "Strangling Rope"
+	stat_weight wisdom: 1
+	stat_weight spirit: 1
+}
+
+item waist_sylas_2:
+{
+	type: armor_plate
+	binds: when_picked_up
+	equipment_slots: [ waist ]
+	required_level: 6
+	icon: icon_mail_belt_2
+	rarity: rare
+	string: "Goblin Bone Belt"
+	stat_weight strength: 1
+	stat_weight constitution: 1
+}
+
+item waist_hermit_1:
+{
+	type: armor_mail
+	binds: when_picked_up
+	equipment_slots: [ waist ]
+	required_level: 8
+	icon: icon_belt_2
+	rarity: uncommon
+	string: "Ghastly Iron Belt"
+	stat_weight wisdom: 1
+	stat_weight constitution: 1
+}

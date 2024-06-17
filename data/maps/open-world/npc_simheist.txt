@@ -126,6 +126,8 @@ quest .simheist_2:
 	objectives: [ .simheist_2 ]
 	level: 9
 	prerequisites: [ .simheist_1 ]
+	
+	reward_one_item: [ ranged_simheist_1 hands_simheist_1 wrists_simheist_1 ]
 }
 
 ##########################################################################################

@@ -162,4 +162,6 @@ quest .benny_1:
 	level: 10
 	quest_items: [ .benny_quest_drop ]
 	objectives: [ .benny_1 ]
+	
+	reward_all_items: [ weapon_benny_1 ]
 }

@@ -4,7 +4,6 @@ item chest_flimsy_mail_shirt:
 	equipment_slots: [ chest ]
 	loot_groups: [ world_drops_junk ]
 	required_level: 1
-	item_level: 1
 	icon: icon_mail_shirt_1
 	rarity: common
 	string: "Flimsy Mail Shirt"
@@ -16,8 +15,70 @@ item chest_tattered_robe:
 	equipment_slots: [ chest ]
 	loot_groups: [ world_drops_junk ]
 	required_level: 1
-	item_level: 1
 	icon: icon_cloth_shirt_4
 	rarity: common
 	string: "Tattered Robe"
+}
+
+item chest_sheriff_wellington_1:
+{
+	type: armor_mail
+	binds: when_picked_up
+	equipment_slots: [ chest ]
+	required_level: 2
+	icon: icon_mail_shirt_2
+	rarity: uncommon
+	string: "Deputy's Chain Tunic"
+	stat_weight spirit: 1 
+}
+
+item chest_sheriff_wellington_2:
+{
+	type: armor_cloth
+	binds: when_picked_up
+	equipment_slots: [ chest ]
+	required_level: 3
+	icon: icon_cloth_shirt_3
+	rarity: uncommon
+	string: "Elegant Robe"
+	stat_weight wisdom: 1 
+}
+
+item chest_aghina_1:
+{
+	type: armor_plate
+	binds: when_picked_up
+	equipment_slots: [ chest ]
+	required_level: 6
+	icon: icon_chest_1
+	rarity: uncommon
+	string: "Steel Plated Chestguard"
+	stat_weight constitution: 1 
+	stat_weight spirit: 1 
+}
+
+item chest_sylas_1:
+{
+	type: armor_cloth
+	binds: when_picked_up
+	equipment_slots: [ chest ]
+	required_level: 6
+	icon: icon_cloth_shirt_2
+	rarity: rare
+	string: "Soothsayer's Robe"
+	stat_weight wisdom: 2 
+	stat_weight constitution: 1 
+}
+
+item chest_zumhorn_1:
+{
+	type: armor_plate
+	binds: when_picked_up
+	equipment_slots: [ chest ]
+	required_level: 9
+	icon: icon_chest_2
+	rarity: rare
+	string: "Ironwood Hauberk"
+	stat_weight strength: 1 
+	stat_weight dexterity: 1 
 }

@@ -1,0 +1,61 @@
+item wrists_hobart_1:
+{
+	type: armor_mail
+	binds: when_picked_up
+	equipment_slots: [ wrists ]
+	required_level: 1
+	icon: icon_mail_bracers_1
+	rarity: common
+	string: "Chain Bracers"
+}
+
+item wrists_elysia_1:
+{
+	type: armor_cloth
+	binds: when_picked_up
+	equipment_slots: [ wrists ]
+	required_level: 5
+	icon: icon_bracers_1
+	rarity: uncommon
+	string: "Mushroom Master Cuffs"
+	stat_weight wisdom: 1
+	stat_weight constitution: 1
+}
+
+item wrists_sylas_1:
+{
+	type: armor_plate
+	binds: when_picked_up
+	equipment_slots: [ wrists ]
+	required_level: 5
+	icon: icon_bracers_2
+	rarity: uncommon
+	string: "Goblin Slayer Wristguards"
+	stat_weight strength: 1
+}
+
+item wrists_hermit_1:
+{
+	type: armor_mail
+	binds: when_picked_up
+	equipment_slots: [ wrists ]
+	required_level: 9
+	icon: icon_mail_bracers_1
+	rarity: uncommon
+	string: "Rusted Chain Cuffs"
+	stat_weight strength: 1
+	stat_weight dexterity: 1
+}
+
+item wrists_simheist_1:
+{
+	type: armor_cloth
+	binds: when_picked_up
+	equipment_slots: [ wrists ]
+	required_level: 9
+	icon: icon_bracers_2
+	rarity: uncommon
+	string: "Darkened Silk Bracers"
+	stat_weight wisdom: 1
+}
+

@@ -85,4 +85,6 @@ quest .billy_1:
 	prerequisites: [ .tom_1 ]
 	objectives: [ .billy_1 ]
 	level: 4
+	
+	reward_all_items: [ consumable_boiled_potato consumable_boiled_potato consumable_boiled_potato ]
 }

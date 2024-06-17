@@ -9,3 +9,56 @@ item hands_flimsy_mail_gloves:
 	rarity: common
 	string: "Flimsy Mail Gloves"
 }
+
+item hands_theodore_1:
+{
+	type: armor_cloth
+	binds: when_picked_up
+	equipment_slots: [ hands ]
+	required_level: 1
+	icon: icon_gloves_1
+	rarity: common
+	string: "Thin Leather Gloves"
+}
+
+item hands_ezekiel_1:
+{
+	type: armor_mail
+	binds: when_picked_up
+	equipment_slots: [ hands ]
+	required_level: 7
+	icon: icon_gloves_2
+	rarity: uncommon
+	string: "Dusty Chain Gloves"
+	stat_weight strength: 1
+	stat_weight wisdom: 1
+}
+
+item hands_ezekiel_2:
+{
+	type: armor_cloth
+	binds: when_picked_up
+	equipment_slots: [ hands ]
+	required_level: 7
+	icon: icon_gloves_1
+	rarity: uncommon
+	string: "Bloodied Leather Gloves"
+	stat_weight spirit: 1
+	stat_weight dexterity: 1
+}
+
+
+item hands_simheist_1:
+{
+	type: armor_plate
+	binds: when_picked_up
+	equipment_slots: [ hands ]
+	required_level: 9
+	icon: icon_gloves_3
+	rarity: uncommon
+	string: "Abandoned Gauntlets"
+	stat_weight constitution: 1
+	stat_weight dexterity: 2
+}
+
+

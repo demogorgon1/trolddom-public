@@ -143,5 +143,7 @@ quest .orgh_2:
 	prerequisites: [ .orgh_1 ]
 	objectives: [ .orgh_2 ]
 	level: 8
+	
+	reward_one_item: [ feet_orgh_1 waist_orgh_1 ]
 }
 

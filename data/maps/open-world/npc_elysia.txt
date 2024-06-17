@@ -132,7 +132,8 @@ quest .elysia_1:
 
 	objectives: [ .elysia_1 ]
 	level: 4
-	reward_one_item: [ consumable_small_healing_potion consumable_small_mana_potion ]
+	
+	reward_one_item: [ consumable_elixir_of_the_bear consumable_elixir_of_the_owl ]
 }
 
 ##########################################################################################
@@ -217,7 +218,9 @@ quest .elysia_2:
 	prerequisites: [ .elysia_1 ]
 	objectives: [ .elysia_2 ]
 	level: 5
-	reward_one_item: [ consumable_small_healing_potion consumable_small_mana_potion ]
+	
+	reward_all_items: [ consumable_elixir_of_the_giant ]
+	reward_one_item: [ wrists_elysia_1 back_elysia_1 ]
 }
 
 

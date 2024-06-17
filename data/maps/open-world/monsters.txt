@@ -283,6 +283,8 @@ quest .crab_boss_5_quest:
 
 	level: 5
 	quest_items: [ .crab_boss_5_quest_drop ]
+	
+	reward_one_item: [ shield_crab_defender_shield weapon_staff_of_the_clever_crab ]
 }
 
 item .crab_boss_5_quest_drop:

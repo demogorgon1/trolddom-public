@@ -89,6 +89,8 @@ quest .sylas_1:
 
 	objectives: [ .sylas_1 ]
 	level: 5	
+	
+	reward_one_item: [ wrists_sylas_1 waist_sylas_1 ]
 }
 
 ############################################################
@@ -135,8 +137,7 @@ quest .sylas_2:
 	type: dungeon
 	prerequisites: [ .sylas_1 ]
 	
-	reward_one_item: [ consumable_small_healing_potion consumable_small_mana_potion ]
-	reward_all_items: [ legs_flimsy_mail_pants ]
+	reward_one_item: [ waist_sylas_2 ring_sylas_1 chest_sylas_1 ]
 }
 
 ############################################################
@@ -223,4 +224,6 @@ quest .sylas_4:
 	level: 10
 	type: dungeon
 	prerequisites: [ .xazax_1 ]
+	
+	reward_one_item: [ ranged_sylas_1 neck_sylas_1 neck_sylas_2 ]
 }

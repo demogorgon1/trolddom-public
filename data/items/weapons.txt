@@ -49,3 +49,69 @@ item weapon_the_dev_tool:
 	weapon_cooldown: 20		
 	weapon_damage: [ 1000 2000 ]
 }
+
+item weapon_sheriff_wellington_1:
+{
+	type: weapon_1h_mace
+	binds: when_picked_up
+	equipment_slots: [ main_hand ]
+	required_level: 3
+	icon: icon_mace_2
+	rarity: uncommon
+	string: "Baton of the Law"
+	stat_weight constitution: 1 
+}
+
+item weapon_staff_of_the_clever_crab:
+{
+	type: weapon_2h_staff
+	binds: when_picked_up
+	equipment_slots: [ main_hand ]
+	required_level: 5
+	icon: icon_staff_1
+	rarity: uncommon
+	string: "Staff of the Clever Crab"
+	stat_weight wisdom: 1 
+}
+
+item weapon_zumhorn_1:
+{
+	type: weapon_2h_staff
+	binds: when_picked_up
+	equipment_slots: [ main_hand ]
+	required_level: 9
+	icon: icon_staff_1
+	rarity: rare
+	string: "Staff of Zumhorn's Disciple"
+	stat_weight wisdom: 1 
+	stat_weight spirit: 2
+}
+
+item weapon_zumhorn_2:
+{
+	type: weapon_1h_knife
+	binds: when_picked_up
+	equipment_slots: [ main_hand off_hand ]
+	required_level: 9
+	icon: icon_knife_1
+	rarity: rare
+	string: "Intricate Wood Slicer"
+	stat_weight dexterity: 2
+	stat_weight constitution: 1
+}
+
+item weapon_benny_1:
+{
+	type: weapon_1h_knife
+	binds: when_picked_up
+	equipment_slots: [ main_hand off_hand ]
+	required_level: 10
+	icon: icon_knife_1
+	rarity: uncommon
+	string: "Wooden Stake"
+	stat_weight constitution: 1
+}
+
+
+
+

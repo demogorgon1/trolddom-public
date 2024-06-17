@@ -94,3 +94,79 @@ item consumable_elixir_of_the_giant:
 	use_ability: consumable_elixir_of_the_giant
 	level_range: [ 4 10 ]
 }
+
+#####################################################
+# Elixir of the Owl
+
+aura consumable_elixir_of_the_owl:
+{
+	string: "Elixir of the Owl"
+	type: buff
+	icon: icon_small_cyan_potion
+	duration: 12000
+	flags: [ unique ]
+	stat_modifiers: { wisdom: { add: 5 } }
+}
+
+ability consumable_elixir_of_the_owl:	
+{
+	string: "Elixir of the Owl"
+	description: "Increases your Wisdom by 5 for 20 minutes."
+	flags: [ target_self item ]
+	icon: icon_small_cyan_potion
+	direct_effect apply_aura: { aura: consumable_elixir_of_the_owl }
+	consume_items: { consumable_elixir_of_the_owl: 1 }
+	cooldowns: [ global ]
+	states: [ default in_combat ]
+	sound_effects: { use_local: [ drink_1 ] }
+}
+
+item consumable_elixir_of_the_owl:
+{
+	loot_groups: [ world_drops_rare_consumable ]
+	item_level: 4 
+	icon: icon_small_cyan_potion
+	string: "Elixir of the Owl"
+	stack: 10
+	required_level: 4
+	use_ability: consumable_elixir_of_the_owl
+	level_range: [ 4 10 ]
+}
+
+#####################################################
+# Elixir of the Bear
+
+aura consumable_elixir_of_the_bear:
+{
+	string: "Elixir of the Bear"
+	type: buff
+	icon: icon_small_purple_potion
+	duration: 12000
+	flags: [ unique ]
+	stat_modifiers: { strength: { add: 5 } }
+}
+
+ability consumable_elixir_of_the_bear:	
+{
+	string: "Elixir of the Bear"
+	description: "Increases your Strength by 5 for 20 minutes."
+	flags: [ target_self item ]
+	icon: icon_small_purple_potion
+	direct_effect apply_aura: { aura: consumable_elixir_of_the_bear }
+	consume_items: { consumable_elixir_of_the_bear: 1 }
+	cooldowns: [ global ]
+	states: [ default in_combat ]
+	sound_effects: { use_local: [ drink_1 ] }
+}
+
+item consumable_elixir_of_the_bear:
+{
+	loot_groups: [ world_drops_rare_consumable ]
+	item_level: 4 
+	icon: icon_small_purple_potion
+	string: "Elixir of the Bear"
+	stack: 10
+	required_level: 4
+	use_ability: consumable_elixir_of_the_bear
+	level_range: [ 4 10 ]
+}

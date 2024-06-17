@@ -32,3 +32,39 @@ item legs_tattered_pants:
 	rarity: common
 	string: "Tattered Pants"
 }
+
+item legs_sheriff_wellington_1:
+{
+	type: armor_cloth
+	equipment_slots: [ legs ]
+	required_level: 2
+	icon: icon_pants_2
+	rarity: uncommon
+	string: "Deputy's Slacks"
+	stat_weight spirit: 1 
+}
+
+item legs_deputy_larsen_1:
+{
+	type: armor_mail
+	binds: when_picked_up
+	equipment_slots: [ legs ]
+	required_level: 4
+	rarity: uncommon
+	icon: icon_mail_pants_2		
+	string: "Crab-Wrangler's Leggings"
+	stat_weight constitution: 1
+}
+
+item legs_aghina_1:
+{
+	type: armor_cloth
+	binds: when_picked_up
+	equipment_slots: [ legs ]
+	required_level: 6
+	rarity: uncommon
+	icon: icon_pants_1		
+	string: "Thick Legwarmers"
+	stat_weight constitution: 1
+	stat_weight wisdom: 2
+}

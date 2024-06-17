@@ -75,6 +75,7 @@ quest .hermit_1:
 
 	objectives: [ .hermit_1 ]
 	level: 9
+	
 }
 
 ##########################################################################################
@@ -198,6 +199,8 @@ quest .hermit_2:
 	prerequisites: [ .hermit_1 ]
 	quest_items: [ .hermit_2 ]
 	level: 9
+	
+	reward_one_item: [ neck_hermit_1 wrists_hermit_1 ]
 }
 
 

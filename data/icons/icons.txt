@@ -330,7 +330,11 @@ sprites:
 	sprite icon_cape_3 : { tags: [ icon ] }
 	sprite icon_cape_4 : { tags: [ icon ] }
 	sprite icon_knife_3 : { tags: [ icon ]}
+	sprite icon_boiled_potato : { tags: [ icon potion ] }
+	sprite icon_small_purple_potion : { tags: [ icon potion ] }
 	
+	cursor: { position: [ 0 288 ] }		
+	sprite icon_small_cyan_potion : { tags: [ icon potion ] }
 }
 
 
