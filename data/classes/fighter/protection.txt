@@ -365,8 +365,7 @@ ability bash:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		base: weapon
-		base_multiplier: 0.5
+		function: { expression: a_mul_x x: weapon a: 0.5 }				
 	}
 	
 	direct_effect apply_aura:

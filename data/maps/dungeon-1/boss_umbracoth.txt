@@ -77,7 +77,7 @@ ability .umbracoth_tick:
 	direct_effect damage:
 	{	
 		damage_type: unholy	
-		base: [ 25 30 ]
+		function: { expression: a a: 27 }													
 	}	
 	
 }

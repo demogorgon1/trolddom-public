@@ -158,3 +158,44 @@ item recipe_mana_potion:
 	string: "Recipe: Mana Potion"
 	use_ability: .learn_mana_potion
 }
+
+#####################################################
+# Spell Juice
+
+ability craft_spell_juice: !ALCHEMY_CRAFT
+{
+	_string: "Spell Juice"
+	_item: consumable_spell_juice
+	_produce: { consumable_spell_juice: 1 } 
+	_materials: { item_mistflower: 5 }
+	_skill: 45
+}
+
+ability .learn_spell_juice:
+{
+	string: "Recipe: Spell Juice"
+	description: "Teaches you how to make Spell Juice."
+	flags: [ target_self ]
+	cast_time: 20
+	icon: icon_scroll_1
+	cooldowns: [ global ]	
+	consume_items: { recipe_spell_juice: 1 }
+	required_profession<40>: alchemy
+	requirement self<must_not_have_profession_ability>: { id: craft_spell_juice }
+	direct_effect learn_profession_ability:
+	{
+		profession: alchemy
+		ability: craft_spell_juice
+	}
+}
+
+item recipe_spell_juice:
+{
+	type: miscellaneous
+	item_level: 6
+	rarity: uncommon
+	loot_groups: [ world_drops_uncommon ]
+	icon: icon_scroll_1
+	string: "Recipe: Spell Juice"
+	use_ability: .learn_spell_juice
+}

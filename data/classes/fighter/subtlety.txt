@@ -58,8 +58,7 @@ ability poison_bomb_tick:
 	direct_effect damage:
 	{
 		damage_type: poison
-		base: weapon_average
-		base_multiplier: 0.15
+		function: { expression: a_mul_x x: weapon_average a: 0.15 }				
 	}
 }
 
@@ -322,8 +321,7 @@ ability envenom_tick:
 	direct_effect damage:
 	{
 		damage_type: poison
-		base: weapon_average
-		base_multiplier: 0.25
+		function: { expression: a_mul_x x: weapon_average a: 0.25 }				
 	}
 }
 
@@ -361,8 +359,7 @@ ability envenom:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		base: weapon
-		base_multiplier: 0.75
+		function: { expression: a_mul_x x: weapon a: 0.75 }						
 	}
 	
 	direct_effect apply_aura:
@@ -444,7 +441,7 @@ ability hamstring:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical			
-		base: [ 4 8 ]
+		function: { expression: a a: 6 }						
 	}
 	
 	direct_effect apply_aura:
@@ -489,7 +486,8 @@ ability throw_rock:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical			
-		base: [ 3 6 ]
+		function: { expression: a a: 4 }				
+
 	}
 }
 
@@ -506,8 +504,7 @@ ability rend_tick:
 	direct_effect damage:
 	{
 		damage_type: bleed
-		base: weapon_average
-		base_multiplier: 0.333
+		function: { expression: a_mul_x x: weapon_average a: 0.333 }						
 	}
 }
 

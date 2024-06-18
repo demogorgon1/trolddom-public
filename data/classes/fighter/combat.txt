@@ -300,8 +300,7 @@ ability mortal_strike:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		base: weapon
-		level_curve: [ [ 1 4 ] [ 10 18 ] ]
+		function: { expression: x_plus_a x: weapon a: [ [ 1 4 ] [ 10 18 ] ] }
 	}
 	
 	direct_effect apply_aura:
@@ -330,8 +329,7 @@ ability strike:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		base: weapon
-		level_curve: [ [ 1 2 ] [ 10 9 ] ]
+		function: { expression: x_plus_a x: weapon a: [ [ 1 2 ] [ 10 9 ] ] }
 	}
 }
 
@@ -378,7 +376,7 @@ ability whirlwind:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		base: weapon
+		function: { expression: x x: weapon }		
 	}
 }
 

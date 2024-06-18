@@ -11,7 +11,7 @@ ability fighter_attack:
 	{
 		flags: [ generate_rage can_be_critical ]
 		damage_type: physical			
-		base: weapon
+		function: { expression: x x: weapon }		
 	}
 }
 
@@ -42,7 +42,7 @@ ability fighter_shoot:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		base: ranged
+		function: { expression: x x: ranged }				
 	}
 }
 

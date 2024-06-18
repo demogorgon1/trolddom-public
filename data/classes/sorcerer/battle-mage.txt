@@ -112,7 +112,7 @@ ability void_blade_storm:
 	{
 		flags: [ can_be_critical ]
 		damage_type: arcane
-		base: weapon
+		function: { expression: x x: weapon }										
 	}
 }
 
@@ -216,8 +216,7 @@ ability wizard_strike:
 	{
 		flags: [ can_be_critical ]
 		damage_type: arcane
-		base: weapon
-		level_curve: [ [ 1 4 ] [ 10 17 ] ]
+		function: { expression: x_plus_a x: weapon a: [ [ 1 4 ] [ 10 17 ] ] }											
 	}		
 }
 

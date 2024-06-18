@@ -183,7 +183,7 @@ ability spiritual_crisis:
 	{	
 		damage_type: fire
 		flags: [ can_be_critical ]
-		level_curve: [ [ 1 6 ] [ 10 12 ] ]
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 6 ] [ 10 12 ] ] }				
 	}	
 
 	direct_effect apply_aura:
@@ -332,7 +332,7 @@ ability smite:
 		must_not_have_ability_modifiers: [ improved_smite_1 improved_smite_2 improved_smite_3 ]
 		damage_type: fire
 		flags: [ can_be_critical ]
-		level_curve: [ [ 1 25 ] [ 10 50 ] ]
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.8 b: [ [ 1 25 ] [ 10 50 ] ] }			
 	}	
 	
 	direct_effect damage:
@@ -340,7 +340,7 @@ ability smite:
 		must_have_ability_modifier: improved_smite_1 
 		damage_type: fire
 		flags: [ can_be_critical ]
-		level_curve: [ [ 1 27 ] [ 10 55 ] ]
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.8 b: [ [ 1 27 ] [ 10 55 ] ] }			
 	}		
 	
 	direct_effect damage:
@@ -348,7 +348,7 @@ ability smite:
 		must_have_ability_modifier: improved_smite_2
 		damage_type: fire
 		flags: [ can_be_critical ]
-		level_curve: [ [ 1 30 ] [ 10 60 ] ]
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.8 b: [ [ 1 30 ] [ 10 60 ] ] }			
 	}		
 
 	direct_effect damage:
@@ -356,7 +356,7 @@ ability smite:
 		must_have_ability_modifier: improved_smite_3 
 		damage_type: fire
 		flags: [ can_be_critical ]
-		level_curve: [ [ 1 32 ] [ 10 65 ] ]
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.8 b: [ [ 1 32 ] [ 10 65 ] ] }					
 	}			
 }
 
@@ -377,7 +377,8 @@ ability condemnation_tick:
 		conditional_critical_chance_bonus<improved_condemnation_2>: 20
 		conditional_critical_chance_bonus<improved_condemnation_3>: 30
 		damage_type: fire		
-		level_curve: [ [ 1 4 ] [ 10 8 ] ]
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.25 b: [ [ 1 4 ] [ 10 8 ] ] }					
+		
 	}	
 	
 	direct_effect damage:
@@ -387,7 +388,7 @@ ability condemnation_tick:
 		conditional_critical_chance_bonus<improved_condemnation_2>: 20
 		conditional_critical_chance_bonus<improved_condemnation_3>: 30
 		damage_type: fire
-		level_curve: [ [ 1 4 ] [ 10 8 ] ]
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.25 b: [ [ 1 4 ] [ 10 8 ] ] }					
 		flags: [ can_be_critical ]
 	}		
 }

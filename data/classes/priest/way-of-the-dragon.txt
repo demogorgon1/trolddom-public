@@ -76,7 +76,7 @@ ability dragon_breath_tick:
 	direct_effect damage:
 	{	
 		damage_type: fire		
-		level_curve: [ [ 1 4 ] [ 10 8 ] ]
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.25 b: [ [ 1 4 ] [ 10 8 ] ] }					
 	}		
 }
 
@@ -132,8 +132,7 @@ ability dragon_punch:
 	{
 		flags: [ can_be_critical ]
 		damage_type: fire
-		base: weapon
-		level_curve: [ [ 1 4 ] [ 10 18 ] ]
+		function: { expression: a_mul_x_plus_b x: weapon a: 1 b: [ [ 1 4 ] [ 10 8 ] ] }							
 	}	
 	
 	direct_effect apply_aura:

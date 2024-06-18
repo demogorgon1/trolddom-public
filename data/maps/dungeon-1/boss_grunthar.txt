@@ -77,7 +77,7 @@ ability .grunthar_tick:
 	direct_effect damage:
 	{
 		damage_type: physical
-		base: [ 30 40 ]
+		function: { expression: a a: 35 }													
 	}
 	
 	source_visual<tile_shake>:

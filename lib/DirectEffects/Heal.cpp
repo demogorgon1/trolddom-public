@@ -25,27 +25,12 @@ namespace tpublic::DirectEffects
 		{
 			if(!FromSourceBase(aChild))
 			{
-				if(aChild->m_name == "base")
-				{
-					if(aChild->m_type == SourceNode::TYPE_ARRAY && aChild->m_children.size() == 2)
-					{
-						m_baseMin = aChild->m_children[0]->GetUInt32();
-						m_baseMax = aChild->m_children[1]->GetUInt32();
-					}
-					else
-					{
-						m_baseMin = aChild->GetUInt32();
-						m_baseMax = m_baseMin;
-					}					
-				}
+				if(aChild->m_name == "function")
+					m_function = CombatFunction(aChild);
 				else if(aChild->m_name == "max_health_percentage")
-				{
 					m_maxHealthPercentage = aChild->GetBool();
-				}
 				else
-				{
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
-				}
 			}
 		});
 	}
@@ -55,8 +40,8 @@ namespace tpublic::DirectEffects
 		IWriter*						aStream) const 
 	{
 		ToStreamBase(aStream);
-		aStream->WriteUInt(m_baseMin);
-		aStream->WriteUInt(m_baseMax);
+		m_function.ToStream(aStream);
+		aStream->WriteBool(m_maxHealthPercentage);
 	}
 			
 	bool	
@@ -65,9 +50,9 @@ namespace tpublic::DirectEffects
 	{
 		if(!FromStreamBase(aStream))
 			return false;
-		if (!aStream->ReadUInt(m_baseMin))
+		if(!m_function.FromStream(aStream))
 			return false;
-		if (!aStream->ReadUInt(m_baseMax))
+		if (!aStream->ReadBool(m_maxHealthPercentage))
 			return false;
 		return true;
 	}
@@ -94,7 +79,7 @@ namespace tpublic::DirectEffects
 		if(sourceCombatPrivate == NULL || targetCombatPublic == NULL)
 			return Result();
 
-		uint32_t heal = Helpers::RandomInRange(aRandom, m_baseMin, m_baseMax);
+		uint32_t heal = (uint32_t)m_function.EvaluateEntityInstance(aRandom, aSource);
 
 		if(m_maxHealthPercentage)
 		{	
@@ -160,11 +145,10 @@ namespace tpublic::DirectEffects
 
 	bool			
 	Heal::CalculateToolTipHeal(
-		const EntityInstance*	/*aEntityInstance*/,
-		UIntRange&				aOutDamage) const 
+		const EntityInstance*	aEntityInstance,
+		UIntRange&				aOutHeal) const 
 	{
-		aOutDamage.m_min = m_baseMin;
-		aOutDamage.m_max = m_baseMax;
+		m_function.ToRange(aEntityInstance, aOutHeal);
 		return true;
 	}
 

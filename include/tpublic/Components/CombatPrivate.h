@@ -39,7 +39,9 @@ namespace tpublic
 				FIELD_BLOCK_VALUE,
 				FIELD_RAGE_DECAY_NOT_IN_COMBAT,
 				FIELD_RAGE_GENERATION_IN_COMBAT,
-				FIELD_BASE_MANA
+				FIELD_BASE_MANA,
+				FIELD_SPELL_DAMAGE,
+				FIELD_HEALING
 			};
 
 			static void
@@ -67,6 +69,8 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_RAGE_DECAY_NOT_IN_COMBAT, "rage_decay_not_in_combat", offsetof(CombatPrivate, m_rageDecayNotInCombatPer5Sec));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_BASE_MANA, "base_mana", offsetof(CombatPrivate, m_baseMana));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_RAGE_GENERATION_IN_COMBAT, "rage_generation_in_combat", offsetof(CombatPrivate, m_rageGenerationInCombatPer5Sec));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_SPELL_DAMAGE, "spell_damage", offsetof(CombatPrivate, m_spellDamage));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_HEALING, "healing", offsetof(CombatPrivate, m_healing));
 			}
 
 			void
@@ -93,6 +97,8 @@ namespace tpublic
 				m_rageDecayNotInCombatPer5Sec = 6;
 				m_rageGenerationInCombatPer5Sec = 0;
 				m_baseMana = 0;
+				m_spellDamage = 0;
+				m_healing = 0;
 			}
 
 			// Public data
@@ -117,6 +123,8 @@ namespace tpublic
 			uint32_t							m_rageDecayNotInCombatPer5Sec = 0;
 			uint32_t							m_rageGenerationInCombatPer5Sec = 0;
 			uint32_t							m_baseMana = 0;
+			uint32_t							m_spellDamage = 0;
+			uint32_t							m_healing = 0;
 		};
 
 	}

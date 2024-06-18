@@ -143,6 +143,12 @@ namespace tpublic
 			}			
 		}
 
+		bool
+		IsSet() const
+		{
+			return !m_points.empty();
+		}
+
 	private:
 
 		std::vector<Point>		m_points;

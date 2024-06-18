@@ -7,7 +7,7 @@
 	icon: @_icon
 	states: [ default ]
 	flags: [ always_in_range always_in_line_of_sight ]	
-	direct_effect heal: { base: @_heal_tick }	
+	direct_effect heal: { function: @_heal_tick }	
 	direct_effect modify_resource: { function: @_heal_tick resource: mana }
 	sound_effects: { hit: [ eat_1 ] }	
 }

@@ -69,7 +69,7 @@ namespace tpublic::DirectEffects
 	DirectEffectBase::Result
 	ModifyResource::Resolve(
 		int32_t							/*aTick*/,
-		std::mt19937&					/*aRandom*/,
+		std::mt19937&					aRandom,
 		const Manifest*					/*aManifest*/,
 		CombatEvent::Id					aId,
 		uint32_t						aAbilityId,
@@ -97,7 +97,7 @@ namespace tpublic::DirectEffects
 				combatPublic,
 				NULL,
 				resourceIndex,
-				(int32_t)m_function.EvaluateEntityInstance(aSource),
+				(int32_t)m_function.EvaluateEntityInstance(aRandom, aSource),
 				0);
 		}
 

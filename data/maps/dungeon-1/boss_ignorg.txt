@@ -85,6 +85,6 @@ ability .ignorg:
 	direct_effect damage:
 	{
 		damage_type: physical
-		base: weapon
+		function: { expression: x x: weapon }													
 	}
 }

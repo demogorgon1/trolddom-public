@@ -28,6 +28,10 @@ namespace tpublic
 			ID_BLOCK_VALUE,
 			ID_ATTACK_HASTE,
 			ID_SPELL_HASTE,
+			ID_SPELL_DAMAGE,
+			ID_HEALING,
+			ID_HEALTH_PER_5_SECONDS,
+			ID_MANA_PER_5_SECONDS,
 
 			NUM_IDS
 		};
@@ -62,6 +66,10 @@ namespace tpublic
 			{ "block_value",			"BLOCKVALUE",	"Block Value",								"Increases damage absorbed by blocks by %u.",							1.0f,	false,	false },
 			{ "attack_haste",			"HASTE",		"Attack Haste",								"Increases attack speed by %u%%.",										10.0f,	true,	false },
 			{ "spell_haste",			"SPELLHASTE",	"Spell Haste",								"Increases cast speed by %u%%.",										10.0f,	true,	false },
+			{ "spell_damage",			"SPELLDMG",		"Spell Damage",								NULL,																	1.0f,	false,	false },
+			{ "healing",				"HEALING",		"Healing",									NULL,																	1.0f,	false,	false },
+			{ "health_per_5",			"HP5",			"Health Per 5 Seconds",						NULL,																	1.0f,	false,	false },
+			{ "mana_per_5",				"MP5",			"Mana Per 5 Seconds",						NULL,																	1.0f,	false,	false },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

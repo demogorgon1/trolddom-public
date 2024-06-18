@@ -1,6 +1,7 @@
 #pragma once
 
 #include "SourceNode.h"
+#include "UIntCurve.h"
 
 namespace tpublic
 {
@@ -12,17 +13,50 @@ namespace tpublic
 	}
 
 	class EntityInstance;
+	class UIntRange;
 
 	class CombatFunction
 	{
 	public:
+		struct RandomSource
+		{
+			enum Type
+			{
+				TYPE_RANDOM,
+				TYPE_MIN,
+				TYPE_MAX
+			};
+
+			RandomSource(
+				Type							aType = TYPE_RANDOM,
+				std::mt19937*					aRandom = NULL)
+				: m_type(aType)
+				, m_random(aRandom)
+			{
+
+			}
+
+			RandomSource(
+				std::mt19937&					aRandom)
+				: m_type(TYPE_RANDOM)
+				, m_random(&aRandom)
+			{
+
+			}
+
+			Type				m_type;
+			std::mt19937*		m_random;
+		};
+
 		enum Expression : uint8_t
 		{
 			INVALID_EXPRESSION,
 
 			EXPRESSION_A,
 			EXPRESSION_A_MUL_X,
-			EXPRESSION_A_MUL_X_PLUS_B
+			EXPRESSION_A_MUL_X_PLUS_B,
+			EXPRESSION_X_PLUS_A,
+			EXPRESSION_X
 		};
 
 		enum Input : uint8_t
@@ -34,7 +68,13 @@ namespace tpublic
 			INPUT_MANA_CURRENT,
 			INPUT_MANA_MAX,
 			INPUT_LEVEL,
-			INPUT_MANA_BASE
+			INPUT_MANA_BASE,
+			INPUT_SPELL_DAMAGE,
+			INPUT_HEALING,
+			INPUT_WEAPON,
+			INPUT_WEAPON_AVERAGE,
+			INPUT_RANGED,
+			INPUT_RANGED_AVERAGE
 		};
 
 		static Expression
@@ -48,6 +88,10 @@ namespace tpublic
 				return EXPRESSION_A_MUL_X;
 			else if (t == "a_mul_x_plus_b")
 				return EXPRESSION_A_MUL_X_PLUS_B;
+			else if (t == "x_plus_a")
+				return EXPRESSION_X_PLUS_A;
+			else if (t == "x")
+				return EXPRESSION_X;
 			TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid expression.", aSource->GetIdentifier());
 			return INVALID_EXPRESSION;
 		}
@@ -69,6 +113,18 @@ namespace tpublic
 				return INPUT_MANA_BASE;
 			else if (t == "level")
 				return INPUT_LEVEL;
+			else if (t == "spell_damage")
+				return INPUT_SPELL_DAMAGE;
+			else if (t == "healing")
+				return INPUT_HEALING;
+			else if (t == "weapon")
+				return INPUT_WEAPON;
+			else if (t == "weapon_average")
+				return INPUT_WEAPON_AVERAGE;
+			else if (t == "ranged")
+				return INPUT_RANGED;
+			else if (t == "ranged_average")
+				return INPUT_RANGED_AVERAGE;
 			TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid input.", aSource->GetIdentifier());
 			return INVALID_INPUT;
 		}
@@ -86,21 +142,46 @@ namespace tpublic
 				m_expression = EXPRESSION_A;
 				m_a = aSource->GetFloat();
 			}
+			else if (aSource->m_type == SourceNode::TYPE_ARRAY)
+			{
+				m_expression = EXPRESSION_A;
+				m_aLevelCurve = UIntCurve<uint32_t>(aSource);
+			}
 			else
 			{
 				aSource->ForEachChild([&](
 					const SourceNode* aChild)
 				{
 					if(aChild->m_name == "expression")
+					{
 						m_expression = SourceToExpression(aChild);
+					}
 					else if(aChild->m_name == "x")
+					{
 						m_x = SourceToInput(aChild);
+					}
 					else if(aChild->m_name == "a")
-						m_a = aChild->GetFloat();
+					{
+						if(aChild->m_type == SourceNode::TYPE_NUMBER)
+							m_a = aChild->GetFloat();
+						else
+							m_aLevelCurve = UIntCurve<uint32_t>(aChild);
+					}
 					else if (aChild->m_name == "b")
-						m_b = aChild->GetFloat();
+					{
+						if (aChild->m_type == SourceNode::TYPE_NUMBER)
+							m_b = aChild->GetFloat();
+						else
+							m_bLevelCurve = UIntCurve<uint32_t>(aChild);
+					}
+					else if (aChild->m_name == "spread")
+					{
+						m_spread = aChild->GetFloat();
+					}
 					else
+					{
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					}
 				});
 			}
 		}
@@ -113,6 +194,9 @@ namespace tpublic
 			aWriter->WritePOD(m_x);
 			aWriter->WriteFloat(m_a);
 			aWriter->WriteFloat(m_b);
+			aWriter->WriteFloat(m_spread);
+			m_aLevelCurve.ToStream(aWriter);
+			m_bLevelCurve.ToStream(aWriter);
 		}
 
 		bool
@@ -127,6 +211,12 @@ namespace tpublic
 				return false;
 			if (!aReader->ReadFloat(m_b))
 				return false;
+			if (!aReader->ReadFloat(m_spread))
+				return false;
+			if(!m_aLevelCurve.FromStream(aReader))
+				return false;
+			if (!m_bLevelCurve.FromStream(aReader))
+				return false;
 			return true;
 		}
 
@@ -137,15 +227,24 @@ namespace tpublic
 		}
 
 		float		Evaluate(
+						RandomSource						aRandomSource,
 						const Components::CombatPublic*		aCombatPublic,
 						const Components::CombatPrivate*	aCombatPrivate) const;
 		float		EvaluateEntityInstance(
+						RandomSource						aRandomSource,
 						const EntityInstance*				aEntityInstance) const;
+		void		ToRange(
+						const EntityInstance*				aEntityInstance,
+						UIntRange&							aOut) const;
 	
 		// Public data
-		Expression		m_expression = INVALID_EXPRESSION;
-		Input			m_x = INVALID_INPUT;
-		float			m_a = 0.0f;
-		float			m_b = 0.0f;
+		Expression				m_expression = INVALID_EXPRESSION;
+		Input					m_x = INVALID_INPUT;
+		float					m_a = 0.0f;
+		float					m_b = 0.0f;
+		float					m_spread = 0.0f;
+
+		UIntCurve<uint32_t>		m_aLevelCurve;
+		UIntCurve<uint32_t>		m_bLevelCurve;
 	};
 }

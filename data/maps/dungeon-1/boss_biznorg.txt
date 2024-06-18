@@ -85,6 +85,6 @@ ability .biznorg:
 	direct_effect damage:
 	{
 		damage_type: fire
-		base: [ 70 80 ]
+		function: { expression: a a: 75 }															
 	}
 }

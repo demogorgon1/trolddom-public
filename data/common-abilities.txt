@@ -21,8 +21,8 @@ ability attack:
 	direct_effect damage:
 	{
 		flags: [ can_be_critical ]
-		damage_type: physical			
-		base: weapon
+		damage_type: physical		
+		function: { expression: x x: weapon }													
 	}
 }
 

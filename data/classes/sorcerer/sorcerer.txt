@@ -11,7 +11,7 @@ ability sorcerer_attack:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical			
-		base: weapon
+		function: { expression: x x: weapon }															
 	}
 	
 	direct_effect modify_resource:

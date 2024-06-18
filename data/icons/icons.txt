@@ -337,7 +337,7 @@ sprites:
 	sprite icon_small_cyan_potion : { tags: [ icon potion ] }
 	sprite icon_red_potion : { tags: [ icon potion ] }
 	sprite icon_blue_potion : { tags: [ icon potion ] }
-	sprite icon_brown : { tags: [ icon potion ] }
+	sprite icon_brown_potion : { tags: [ icon potion ] }
 	sprite icon_wooden_stake : { tags: [ icon ] }
 	sprite icon_necklace_5 : { tags: [ icon ] }
 	sprite icon_eyeball : { tags: [ icon ] }

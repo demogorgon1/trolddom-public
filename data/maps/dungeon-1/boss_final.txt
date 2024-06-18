@@ -124,7 +124,7 @@ ability .zarvok:
 	direct_effect damage:
 	{
 		damage_type: physical
-		base: weapon
+		function: { expression: x x: weapon }													
 	}
 }
 
@@ -142,7 +142,8 @@ ability .gribble:
 	direct_effect damage:
 	{
 		damage_type: fire
-		base: [ 50 60 ]
+		function: { expression: a a: 55 }													
+
 	}
 	
 	direct_effect spawn_entity:
@@ -160,7 +161,7 @@ ability .gribble_fire_tick:
 	direct_effect damage:
 	{
 		damage_type: fire
-		base: [ 30 40 ]
+		function: { expression: a a: 35 }													
 	}
 }
 

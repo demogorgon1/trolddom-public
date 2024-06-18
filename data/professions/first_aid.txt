@@ -22,7 +22,7 @@ aura recently_bandaged:
 	icon: @_icon
 	states: [ default in_combat ]
 	flags: [ always_in_range always_in_line_of_sight ]	
-	direct_effect heal: { base: @_heal_tick }	
+	direct_effect heal: { function: @_heal_tick }	
 }
 
 !define local AURA_BANDAGE

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../CombatFunction.h"
 #include "../DirectEffectBase.h"
 
 namespace tpublic
@@ -47,11 +48,10 @@ namespace tpublic
 								const IWorldView*				aWorldView) override;
 			bool			CalculateToolTipHeal(
 								const EntityInstance*			aEntityInstance,
-								UIntRange&						aOutDamage) const override;
+								UIntRange&						aOutHeal) const override;
 
 			// Public data
-			uint32_t			m_baseMin = 0;
-			uint32_t			m_baseMax = 0;
+			CombatFunction		m_function;
 			bool				m_maxHealthPercentage = false;
 		};
 
