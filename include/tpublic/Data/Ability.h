@@ -385,7 +385,7 @@ namespace tpublic
 			bool AlwaysInRange() const { return m_flags & FLAG_ALWAYS_IN_RANGE; }
 			bool IsMelee() const { return m_flags & FLAG_MELEE; }
 			bool AlwaysInLineOfSight() const { return m_flags & FLAG_ALWAYS_IN_LINE_OF_SIGHT; }
-			bool IsInstantMelee() const { return m_range == 1 && m_castTime == 0; }
+			bool IsInstantMelee() const { return m_range == 1 && m_castTime == 0 && IsMelee(); }
 			bool IsCrafting() const { return m_flags & FLAG_CRAFTING; }
 			bool IsHidden() const { return m_flags & FLAG_HIDDEN; }
 			bool IsLateCooldownTrigger() const { return m_flags & FLAG_LATE_COOLDOWN_TRIGGER; }

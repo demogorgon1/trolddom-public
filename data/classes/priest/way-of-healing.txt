@@ -177,7 +177,9 @@ ability prayer_of_sanctuary:
 	aoe_cap: 5
 	aoe_requirement target<must_not_be_in_state>: { id: dead }
 	aoe_requirement target<must_be_group_member>: { }
-
+	delay: 2
+	target_particle_system: heal
+	
 	direct_effect heal:
 	{	
 		base: [ 22 33 ]
@@ -295,7 +297,9 @@ ability greater_heal:
 	icon: icon_greater_heal
 	resource_cost mana: 25
 	talent_tree: priest_healing
-
+	target_particle_system: heal	
+	delay: 2
+	
 	direct_effect heal:
 	{	
 		base: [ 20 30 ]
@@ -323,6 +327,8 @@ ability minor_heal:
 	icon: icon_heal
 	resource_cost mana: 15
 	talent_tree: priest_healing
+	target_particle_system: heal	
+	delay: 2
 
 	direct_effect heal:
 	{	
@@ -345,6 +351,8 @@ ability blessing_tick:
 	icon: icon_holy_blessing		
 	states: [ default in_combat ]
 	flags: [ always_in_range always_in_line_of_sight ]
+	target_particle_system: small_heal	
+	delay: 2
 	
 	direct_effect heal:
 	{	

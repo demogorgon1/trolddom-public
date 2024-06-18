@@ -125,6 +125,7 @@ ability npc_heal:
 	icon: icon_throw_rock
 	delay: 3
 	resource_cost mana: 10
+	target_particle_system: heal
 	
 	direct_effect heal:
 	{

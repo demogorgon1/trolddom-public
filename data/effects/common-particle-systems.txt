@@ -1,0 +1,31 @@
+particle_system heal:
+{
+	particle:
+	{
+		sprites: [ effect_heal_0 effect_heal_1 effect_heal_2 effect_heal_3 effect_heal_4 effect_heal_5 ]
+		flags: [ attached blend_add ]
+		duration: 500
+		count: 1		
+		scale: 0.45
+		alpha: 0.4
+		offset_y: -0.25
+		fade_in: 50
+		fade_out: 250
+	}
+}
+
+particle_system small_heal:
+{
+	particle:
+	{
+		sprites: [ effect_small_heal_0 effect_small_heal_1 effect_small_heal_2 effect_small_heal_3 effect_small_heal_4 effect_small_heal_5 ]
+		flags: [ attached blend_add ]
+		duration: 500
+		count: 1		
+		scale: 0.45
+		alpha: 0.4
+		offset_y: -0.25
+		fade_in: 50
+		fade_out: 250
+	}
+}

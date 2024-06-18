@@ -58,6 +58,18 @@ sprites:
 	cursor: { position: [ 0 60 ] }
 	size: { width: 7 height: 7 }
 	sprite effect_arrow: { flags: [ centered doubled ] }
+	sprite effect_heal_0: { flags: [ centered ] }
+	sprite effect_heal_1: { flags: [ centered ] }
+	sprite effect_heal_2: { flags: [ centered ] }
+	sprite effect_heal_3: { flags: [ centered ] }
+	sprite effect_heal_4: { flags: [ centered ] }
+	sprite effect_heal_5: { flags: [ centered ] }
+	sprite effect_small_heal_0: { flags: [ centered ] }
+	sprite effect_small_heal_1: { flags: [ centered ] }
+	sprite effect_small_heal_2: { flags: [ centered ] }
+	sprite effect_small_heal_3: { flags: [ centered ] }
+	sprite effect_small_heal_4: { flags: [ centered ] }
+	sprite effect_small_heal_5: { flags: [ centered ] }
 	
 }
 
