@@ -69,7 +69,7 @@ namespace tpublic
 		const Data::LootTable* lootTable = m_manifest->GetById<tpublic::Data::LootTable>(aLootable->m_lootTableId);
 
 		// Cash
-		if(aPlayerWorldCharacterId != 0)
+		if(aPlayerWorldCharacterId == 0)
 		{
 			if(lootTable->m_cash.has_value())
 			{

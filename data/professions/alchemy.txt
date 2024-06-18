@@ -42,6 +42,30 @@ ability craft_small_mana_potion: !ALCHEMY_CRAFT
 }
 
 #####################################################
+# Elixir of the Bear
+
+ability craft_elixir_of_the_bear: !ALCHEMY_CRAFT
+{
+	_string: "Elixir of the Bear"
+	_item: consumable_elixir_of_the_bear
+	_produce: { consumable_elixir_of_the_bear: 1 } 
+	_materials: { item_dewleaf: 3 item_mistflower: 1 }
+	_skill: 25
+}
+
+#####################################################
+# Elixir of the Owl
+
+ability craft_elixir_of_the_owl: !ALCHEMY_CRAFT
+{
+	_string: "Elixir of the Owl"
+	_item: consumable_elixir_of_the_owl
+	_produce: { consumable_elixir_of_the_owl: 1 } 
+	_materials: { item_dewleaf: 1 item_mistflower: 3 }
+	_skill: 25
+}
+
+#####################################################
 # Elixir of the Giant
 
 ability craft_elixir_of_the_giant: !ALCHEMY_CRAFT
@@ -49,7 +73,88 @@ ability craft_elixir_of_the_giant: !ALCHEMY_CRAFT
 	_string: "Elixir of the Giant"
 	_item: consumable_elixir_of_the_giant
 	_produce: { consumable_elixir_of_the_giant: 1 } 
-	_materials: { item_dewleaf: 2 item_mistflower: 1 }
-	_skill: 25
+	_materials: { item_dewleaf: 3 item_mistflower: 3 }
+	_skill: 35
 }
 
+#####################################################
+# Healing Potion
+
+ability craft_healing_potion: !ALCHEMY_CRAFT
+{
+	_string: "Healing Potion"
+	_item: consumable_healing_potion
+	_produce: { consumable_healing_potion: 1 } 
+	_materials: { item_dewleaf: 4 }
+	_skill: 40
+}
+
+ability .learn_healing_potion:
+{
+	string: "Recipe: Healing Potion"
+	description: "Teaches you how to make a Healing Potion."
+	flags: [ target_self ]
+	cast_time: 20
+	icon: icon_scroll_1
+	cooldowns: [ global ]	
+	consume_items: { recipe_healing_potion: 1 }
+	required_profession<35>: alchemy
+	requirement self<must_not_have_profession_ability>: { id: craft_healing_potion }
+	direct_effect learn_profession_ability:
+	{
+		profession: alchemy
+		ability: craft_healing_potion
+	}
+}
+
+item recipe_healing_potion:
+{
+	type: miscellaneous
+	item_level: 5
+	rarity: uncommon
+	loot_groups: [ world_drops_uncommon ]
+	icon: icon_scroll_1
+	string: "Recipe: Healing Potion"
+	use_ability: .learn_healing_potion
+}
+
+#####################################################
+# Mana Potion
+
+ability craft_mana_potion: !ALCHEMY_CRAFT
+{
+	_string: "Mana Potion"
+	_item: consumable_mana_potion
+	_produce: { consumable_mana_potion: 1 } 
+	_materials: { item_mistflower: 4 }
+	_skill: 40
+}
+
+ability .learn_mana_potion:
+{
+	string: "Recipe: Mana Potion"
+	description: "Teaches you how to make a Mana Potion."
+	flags: [ target_self ]
+	cast_time: 20
+	icon: icon_scroll_1
+	cooldowns: [ global ]	
+	consume_items: { recipe_mana_potion: 1 }
+	required_profession<35>: alchemy
+	requirement self<must_not_have_profession_ability>: { id: craft_mana_potion }
+	direct_effect learn_profession_ability:
+	{
+		profession: alchemy
+		ability: craft_mana_potion
+	}
+}
+
+item recipe_mana_potion:
+{
+	type: miscellaneous
+	item_level: 5
+	rarity: uncommon
+	loot_groups: [ world_drops_uncommon ]
+	icon: icon_scroll_1
+	string: "Recipe: Mana Potion"
+	use_ability: .learn_mana_potion
+}

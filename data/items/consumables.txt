@@ -38,7 +38,7 @@ ability consumable_small_mana_potion:
 	description: "Restores 20 mana."
 	flags: [ target_self item ]
 	icon: icon_small_blue_potion
-	#direct_effect heal: { base: 20 }
+	direct_effect modify_resource: { resource: mana function: 20 }
 	consume_items: { consumable_small_mana_potion: 1 }
 	cooldowns: [ global potions ]
 	states: [ default in_combat ]
@@ -55,6 +55,60 @@ item consumable_small_mana_potion:
 	required_level: 1
 	use_ability: consumable_small_mana_potion
 	level_range: [ 1 5 ]
+}
+
+#####################################################
+# Healing Potion
+
+ability consumable_healing_potion:	
+{
+	string: "Healing Potion"
+	description: "Restores $heal$ health."
+	flags: [ target_self item ]
+	icon: icon_red_potion
+	direct_effect heal: { base: 40 }
+	consume_items: { consumable_healing_potion: 1 }
+	cooldowns: [ global potions ]	
+	states: [ default in_combat ]
+	sound_effects: { use_local: [ drink_1 ] }
+}
+
+item consumable_healing_potion:
+{
+	loot_groups: [ world_drops_consumable ]
+	icon: icon_red_potion
+	string: "Healing Potion"
+	stack: 10	
+	required_level: 4
+	use_ability: consumable_healing_potion
+	level_range: [ 5 10 ]
+}
+
+#####################################################
+# Mana Potion
+
+ability consumable_mana_potion:	
+{
+	string: "Mana Potion"
+	description: "Restores 40 mana."
+	flags: [ target_self item ]
+	icon: icon_blue_potion
+	direct_effect modify_resource: { resource: mana function: 40 }
+	consume_items: { consumable_mana_potion: 1 }
+	cooldowns: [ global potions ]
+	states: [ default in_combat ]
+	sound_effects: { use_local: [ drink_1 ] }
+}
+
+item consumable_mana_potion:
+{
+	loot_groups: [ world_drops_consumable ]
+	icon: icon_blue_potion
+	string: "Mana Potion"
+	stack: 10
+	required_level: 4
+	use_ability: consumable_mana_potion
+	level_range: [ 5 10 ]
 }
 
 #####################################################
@@ -85,7 +139,7 @@ ability consumable_elixir_of_the_giant:
 
 item consumable_elixir_of_the_giant:
 {
-	loot_groups: [ world_drops_rare_consumable ]
+	loot_groups: [ world_drops_uncommon ]
 	item_level: 4 
 	icon: icon_small_green_potion
 	string: "Elixir of the Giant"
@@ -123,7 +177,7 @@ ability consumable_elixir_of_the_owl:
 
 item consumable_elixir_of_the_owl:
 {
-	loot_groups: [ world_drops_rare_consumable ]
+	loot_groups: [ world_drops_uncommon ]
 	item_level: 4 
 	icon: icon_small_cyan_potion
 	string: "Elixir of the Owl"
@@ -161,7 +215,7 @@ ability consumable_elixir_of_the_bear:
 
 item consumable_elixir_of_the_bear:
 {
-	loot_groups: [ world_drops_rare_consumable ]
+	loot_groups: [ world_drops_uncommon ]
 	item_level: 4 
 	icon: icon_small_purple_potion
 	string: "Elixir of the Bear"

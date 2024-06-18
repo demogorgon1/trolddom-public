@@ -330,11 +330,18 @@ sprites:
 	sprite icon_cape_3 : { tags: [ icon ] }
 	sprite icon_cape_4 : { tags: [ icon ] }
 	sprite icon_knife_3 : { tags: [ icon ]}
-	sprite icon_boiled_potato : { tags: [ icon potion ] }
+	sprite icon_boiled_potato : { tags: [ icon ] }
 	sprite icon_small_purple_potion : { tags: [ icon potion ] }
 	
 	cursor: { position: [ 0 288 ] }		
 	sprite icon_small_cyan_potion : { tags: [ icon potion ] }
+	sprite icon_red_potion : { tags: [ icon potion ] }
+	sprite icon_blue_potion : { tags: [ icon potion ] }
+	sprite icon_brown : { tags: [ icon potion ] }
+	sprite icon_wooden_stake : { tags: [ icon ] }
+	sprite icon_necklace_5 : { tags: [ icon ] }
+	sprite icon_eyeball : { tags: [ icon ] }
+	sprite icon_necklace_6 : { tags: [ icon ] }
 }
 
 

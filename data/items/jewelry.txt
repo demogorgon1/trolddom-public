@@ -39,7 +39,7 @@ item neck_sylas_1:
 	equipment_slots: [ neck ]
 	binds: when_picked_up
 	required_level: 6
-	icon: icon_necklace_1
+	icon: icon_eyeball
 	rarity: rare
 	string: "Evil Eye" 
 	stat_weight constitution: 1 
@@ -51,7 +51,7 @@ item neck_hermit_1:
 	equipment_slots: [ neck ]
 	binds: when_picked_up
 	required_level: 9
-	icon: icon_necklace_2
+	icon: icon_necklace_5
 	rarity: uncommon
 	string: "Hermit's Teeth on a String" 
 	stat_weight constitution: 3
@@ -65,7 +65,7 @@ item neck_sylas_2:
 	required_level: 10
 	icon: icon_necklace_2
 	rarity: rare
-	string: "Razorbeak Chain" 
+	string: "Razor Edged Gemstone" 
 	stat_weight constitution: 1
 	stat_weight strength: 3
 }
@@ -75,7 +75,7 @@ item neck_sylas_3:
 	equipment_slots: [ neck ]
 	binds: when_picked_up
 	required_level: 10
-	icon: icon_necklace_1
+	icon: icon_necklace_6
 	rarity: rare
 	string: "Bones of the Clever Goblin" 
 	stat_weight constitution: 1

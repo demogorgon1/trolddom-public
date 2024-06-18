@@ -9,6 +9,7 @@ sprites:
 	sprite effect_firebolt: { flags: [ centered doubled ] }
 	sprite effect_ice_lance: { flags: [ centered doubled ] }
 	sprite effect_arcane_missile: { flags: [ centered doubled ] }
+	sprite effect_small_splash: { flags: [ centered doubled ] }
 	
 	cursor: { position: [ 0 4 ] }
 	size: { width: 16 height: 16 }
