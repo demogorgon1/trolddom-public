@@ -106,7 +106,7 @@ item weapon_benny_1:
 	binds: when_picked_up
 	equipment_slots: [ main_hand off_hand ]
 	required_level: 10
-	icon: icon_knife_1
+	icon: icon_wooden_stake
 	rarity: uncommon
 	string: "Wooden Stake"
 	stat_weight constitution: 1
