@@ -178,6 +178,10 @@ namespace tpublic
 					{
 						m_spread = aChild->GetFloat();
 					}
+					else if (aChild->m_name == "elite_multiplier")
+					{
+						m_eliteMultiplier = aChild->GetFloat();
+					}
 					else
 					{
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -197,6 +201,8 @@ namespace tpublic
 			aWriter->WriteFloat(m_spread);
 			m_aLevelCurve.ToStream(aWriter);
 			m_bLevelCurve.ToStream(aWriter);
+
+			aWriter->WriteFloat(m_eliteMultiplier);
 		}
 
 		bool
@@ -217,6 +223,13 @@ namespace tpublic
 				return false;
 			if (!m_bLevelCurve.FromStream(aReader))
 				return false;
+
+			if(!aReader->IsEnd())
+			{
+				if (!aReader->ReadFloat(m_eliteMultiplier))
+					return false;
+			}
+
 			return true;
 		}
 
@@ -243,6 +256,7 @@ namespace tpublic
 		float					m_a = 0.0f;
 		float					m_b = 0.0f;
 		float					m_spread = 0.0f;
+		float					m_eliteMultiplier = 1.0f;
 
 		UIntCurve<uint32_t>		m_aLevelCurve;
 		UIntCurve<uint32_t>		m_bLevelCurve;

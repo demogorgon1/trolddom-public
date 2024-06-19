@@ -70,6 +70,16 @@ cooldown .biznorg:
 	duration: 65
 }
 
+particle_system .biznorg:
+{
+	particle:
+	{
+		sprites: [ effect_firebolt_b ]
+		flags: [ attached no_rotation no_scaling face_target ]
+		count: 1		
+	}
+}
+
 ability .biznorg:
 {
 	string: "Fireball"
@@ -80,7 +90,7 @@ ability .biznorg:
 	states: [ default in_combat ]
 	icon: icon_firebolt
 	speed: 5
-	projectile: firebolt
+	projectile: .biznorg
 	
 	direct_effect damage:
 	{

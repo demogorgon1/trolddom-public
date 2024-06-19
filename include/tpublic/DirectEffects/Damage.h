@@ -92,22 +92,12 @@ namespace tpublic
 
 			// Public data
 			DirectEffect::DamageType					m_damageType = DirectEffect::DAMAGE_TYPE_PHYSICAL;
-			//DirectEffect::DamageBase					m_damageBase = DirectEffect::DAMAGE_BASE_RANGE;
 
-			//uint32_t									m_damageBaseRangeMin = 0;
-			//uint32_t									m_damageBaseRangeMax = 0;
-			//float										m_damageBaseMultiplier = 1.0f;
-
-			//UIntCurve<uint32_t>							m_levelCurve;
 			CombatFunction								m_function;
 			std::vector<ConditionalCriticalChanceBonus>	m_conditionalCriticalChanceBonuses;
 
 			float			_GetCriticalChanceBonus(
 								const EntityInstance*				aSource) const;
-			//void			_GetDamageRange(
-			//					const Components::CombatPublic*		aCombatPublic,
-			//					const Components::CombatPrivate*	aCombatPrivate,
-			//					UIntRange&							aOut) const;
 		};
 
 	}

@@ -48,8 +48,8 @@ particle_system npc_firebolt:
 {
 	particle:
 	{
-		sprites: [ effect_firebolt ]
-		flags: [ attached no_rotation no_scaling ]
+		sprites: [ effect_firebolt_b ]
+		flags: [ attached no_rotation no_scaling face_target ]
 		count: 1		
 	}
 }
@@ -71,7 +71,7 @@ ability npc_firebolt:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical		
-		function: { expression: a a: [ [ 1 15 ] [ 10 35 ] ] }													
+		function: { expression: a a: [ [ 1 15 ] [ 10 35 ] ] elite_multiplier: 1.7 }			
 	}
 }
 

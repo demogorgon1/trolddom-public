@@ -128,6 +128,16 @@ ability .zarvok:
 	}
 }
 
+particle_system .gribble:
+{
+	particle:
+	{
+		sprites: [ effect_firebolt_b ]
+		flags: [ attached no_rotation no_scaling face_target ]
+		count: 1		
+	}
+}
+
 ability .gribble:
 {
 	string: "Fireball"
@@ -137,7 +147,7 @@ ability .gribble:
 	states: [ default in_combat ]
 	icon: icon_firebolt
 	speed: 5
-	projectile: firebolt
+	projectile: .gribble
 	
 	direct_effect damage:
 	{

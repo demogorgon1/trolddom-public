@@ -174,6 +174,9 @@ namespace tpublic
 			break;
 		}
 
+		if(aCombatPublic->IsElite())
+			output *= m_eliteMultiplier;
+
 		if(m_spread > 0.0f)
 		{
 			switch (aRandomSource.m_type)
