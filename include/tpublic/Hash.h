@@ -18,6 +18,8 @@ namespace tpublic
 			void	AddData(
 						const void*				aBuffer,
 						size_t					aBufferSize);
+			void	AddString(	
+						const char*				aString);
 			bool	operator==(
 						const CheckSum&			aOther) const;
 			bool	operator!=(

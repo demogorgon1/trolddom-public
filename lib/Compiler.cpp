@@ -10,6 +10,7 @@
 #include <tpublic/Compression.h>
 #include <tpublic/DataErrorHandling.h>
 #include <tpublic/DirectEffectFactory.h>
+#include <tpublic/Document.h>
 #include <tpublic/MemoryWriter.h>
 #include <tpublic/ObjectiveTypeFactory.h>
 #include <tpublic/PerfTimer.h>
@@ -268,6 +269,10 @@ namespace tpublic
 		else if (aNode->m_tag == "generation_job")
 		{
 			aGenerationJobs->push_back(std::make_unique<GenerationJob>(aNode));
+		}
+		else if(aNode->m_name == "changelog")
+		{
+			m_manifest->m_changelog = std::make_unique<Document>(aNode);
 		}
 		else if(aNode->IsAnonymousObject())
 		{

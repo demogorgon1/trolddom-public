@@ -52,6 +52,13 @@ namespace tpublic
 			m_processedBytes += aBufferSize;
 		}
 
+		void	
+		CheckSum::AddString(
+			const char*				aString)
+		{
+			AddData(aString, strlen(aString));
+		}
+
 		bool	
 		CheckSum::operator==(
 			const CheckSum&			aOther) const

@@ -19,6 +19,8 @@
 namespace tpublic
 {
 
+	class Document;
+
 	class Manifest
 	{
 	public:
@@ -414,6 +416,7 @@ namespace tpublic
 		WordList::Data									m_wordList;
 		DefaultSoundEffects								m_defaultSoundEffects;
 		TileLayering									m_tileLayering;
+		std::unique_ptr<Document>						m_changelog;
 
 		// Public data
 		std::unique_ptr<IDataContainer>					m_containers[DataType::NUM_IDS];

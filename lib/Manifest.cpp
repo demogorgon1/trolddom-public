@@ -48,6 +48,7 @@
 #include <tpublic/Data/WordGenerator.h>
 #include <tpublic/Data/Zone.h>
 
+#include <tpublic/Document.h>
 #include <tpublic/Manifest.h>
 
 namespace tpublic
@@ -140,6 +141,7 @@ namespace tpublic
 		m_worshipMetrics.ToStream(aStream);
 		m_defaultSoundEffects.ToStream(aStream);
 		m_tileLayering.ToStream(aStream);
+		aStream->WriteOptionalObjectPointer(m_changelog);
 	}
 
 	bool
@@ -174,6 +176,8 @@ namespace tpublic
 		if (!m_defaultSoundEffects.FromStream(aStream))
 			return false;
 		if (!m_tileLayering.FromStream(aStream))
+			return false;
+		if(!aStream->ReadOptionalObjectPointer(m_changelog))
 			return false;
 
 		return true;
