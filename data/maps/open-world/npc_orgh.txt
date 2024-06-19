@@ -1,9 +1,4 @@
-dialogue_screen .orgh_vendor:
-{
-	sell weapon_pick_axe: { quantity: 1 }	
-	sell weapon_blacksmithing_hammer: { quantity: 1 }	
-	sell weapon_fishing_rod: { quantity: 1 }	
-}
+dialogue_screen .orgh_vendor: !TRADE_SUPPLIES{}
 
 dialogue_screen .orgh_greetings:
 {

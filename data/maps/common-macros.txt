@@ -1,1 +1,8 @@
 !define TRASH_RESPAWN_TIMER { cooldown_range_min: 36000 cooldown_range_max: 40000 min_delay: 35000 }
+
+!define TRADE_SUPPLIES
+{
+	sell weapon_pick_axe: { quantity: 1 }	
+	sell weapon_blacksmithing_hammer: { quantity: 1 }	
+	sell weapon_fishing_rod: { quantity: 1 }	
+}

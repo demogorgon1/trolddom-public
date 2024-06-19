@@ -1,3 +1,5 @@
+dialogue_screen .rolf_vendor: !TRADE_SUPPLIES{}
+
 dialogue_screen .rolf_greetings:
 {
 	text: 
@@ -8,6 +10,7 @@ dialogue_screen .rolf_greetings:
 	options:
 	[
 		{ quest<offer_only>: .rolf_1 requirement self<must_not_have_completed_quest>: { id: .frinrir_1 } requirement self<must_not_have_active_quest>: { id: .frinrir_1 } }
+		{ goto: .rolf_vendor text: "Let me browse your goods." }
 	]
 }
 

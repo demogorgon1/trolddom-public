@@ -1,8 +1,4 @@
-dialogue_screen .sylas_vendor:
-{
-	sell consumable_small_healing_potion: { quantity: 1 }	
-	sell consumable_small_mana_potion: { quantity: 1 }	
-}
+dialogue_screen .sylas_vendor: !TRADE_SUPPLIES{}
 
 dialogue_screen .sylas_greetings:
 {
