@@ -28,6 +28,7 @@ particle_system fighter_shoot:
 ability fighter_shoot:
 {
 	string: "Shoot"
+	tags: [ ability_ranged ]
 	description: "Fires your ranged weapon at target, dealing $damage$ damage."
 	range: 8	
 	min_range: 3

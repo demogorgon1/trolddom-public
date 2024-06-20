@@ -360,6 +360,7 @@ entity lake_of_fire:
 ability firebolt:
 {
 	string: "Firebolt"
+	tags: [ ability_ranged ]
 	description: "Deals $damage$ damage to target."
 	range: 8
 	cast_time: 20

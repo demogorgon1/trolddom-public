@@ -315,6 +315,7 @@ particle_system smite:
 ability smite:
 {
 	string: "Smite"
+	tags: [ ability_ranged ]
 	description: "Does $damage$ damage to target."
 	range: 6
 	cooldowns: [ global spell_fire_lockout ]
