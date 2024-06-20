@@ -116,6 +116,7 @@ item recipe_healing_potion:
 	icon: icon_scroll_1
 	string: "Recipe: Healing Potion"
 	use_ability: .learn_healing_potion
+	level_range: [ 5 10 ]
 }
 
 #####################################################
@@ -157,6 +158,7 @@ item recipe_mana_potion:
 	icon: icon_scroll_1
 	string: "Recipe: Mana Potion"
 	use_ability: .learn_mana_potion
+	level_range: [ 5 10 ]
 }
 
 #####################################################
@@ -198,4 +200,5 @@ item recipe_spell_juice:
 	icon: icon_scroll_1
 	string: "Recipe: Spell Juice"
 	use_ability: .learn_spell_juice
+	level_range: [ 6 10 ]
 }

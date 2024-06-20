@@ -164,6 +164,7 @@ talent priest_prayer_of_sanctuary:
 ability prayer_of_sanctuary:
 {
 	string: "Prayer of Sanctuary"
+	tags: [ ability_aoe_heal ]
 	description: "Heals yourself and all nearby allies for $heal$."
 	range: 7
 	cooldowns: [ global spell_healing_lockout ]
@@ -288,6 +289,7 @@ talent priest_greater_heal:
 ability greater_heal:
 {
 	string: "Greater Heal"
+	tags: [ ability_large_heal_single_target ]
 	description: "Heals target for $heal$."
 	range: 7
 	cooldowns: [ global spell_healing_lockout ]
@@ -318,6 +320,7 @@ ability greater_heal:
 ability minor_heal:
 {
 	string: "Minor Heal"
+	tags: [ ability_small_heal_single_target ]
 	description: "Heals target for $heal$."
 	range: 7
 	cooldowns: [ global spell_healing_lockout ]
@@ -348,6 +351,7 @@ ability minor_heal:
 ability blessing_tick:
 {
 	string: "Blessing"
+	tags: [ ability_heal_over_time ]
 	icon: icon_holy_blessing		
 	states: [ default in_combat ]
 	flags: [ always_in_range always_in_line_of_sight ]
