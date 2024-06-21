@@ -63,3 +63,23 @@ particle_system orange_spell_hit:
 		fade_out: 150
 	}
 }
+
+particle_system level_up:
+{
+	particle:
+	{
+		sprites: [ effect_level_up_0 effect_level_up_1 effect_level_up_2 effect_level_up_3 effect_level_up_4 effect_level_up_5 
+		           effect_level_up_6 effect_level_up_7 effect_level_up_8 effect_level_up_9 effect_level_up_10 effect_level_up_11 effect_level_up_12 ]
+		flags: [ attached blend_add no_loop ]
+		sprite_interval: 80
+		duration: 960
+		count: 1		
+		scale: 0.75
+		alpha: 0.95
+		fade_in: 50
+		fade_out: 150
+		offset_y: 0
+		move_y: -0.9
+	}
+}
+

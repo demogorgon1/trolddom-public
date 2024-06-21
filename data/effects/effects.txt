@@ -81,6 +81,21 @@ sprites:
 	sprite effect_orange_spell_hit_2: { flags: [ centered ] }	
 	sprite effect_orange_spell_hit_3: { flags: [ centered ] }	
 	
+	cursor: { position: [ 0 67 ] }
+	size: { width: 14 height: 14 }
+	sprite effect_level_up_0: { flags: [ centered ] }	
+	sprite effect_level_up_1: { flags: [ centered ] }	
+	sprite effect_level_up_2: { flags: [ centered ] }	
+	sprite effect_level_up_3: { flags: [ centered ] }	
+	sprite effect_level_up_4: { flags: [ centered ] }	
+	sprite effect_level_up_5: { flags: [ centered ] }	
+	sprite effect_level_up_6: { flags: [ centered ] }	
+	sprite effect_level_up_7: { flags: [ centered ] }	
+	sprite effect_level_up_8: { flags: [ centered ] }	
+	sprite effect_level_up_9: { flags: [ centered ] }	
+	sprite effect_level_up_10: { flags: [ centered ] }	
+	sprite effect_level_up_11: { flags: [ centered ] }	
+	sprite effect_level_up_12: { flags: [ centered ] }	
 }
 
 

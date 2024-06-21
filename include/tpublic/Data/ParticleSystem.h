@@ -72,6 +72,14 @@ namespace tpublic
 						{
 							m_offsetY = aChild->GetFloat();
 						}
+						else if (aChild->m_name == "move_x")
+						{
+							m_moveX = aChild->GetFloat();
+						}
+						else if (aChild->m_name == "move_y")
+						{
+							m_moveY = aChild->GetFloat();
+						}
 						else if (aChild->m_name == "rotation_rate")
 						{
 							m_rotationRate = aChild->GetInt32();
@@ -108,6 +116,8 @@ namespace tpublic
 					aWriter->WriteInt(m_rotationRate);
 					aWriter->WriteFloat(m_offsetX);
 					aWriter->WriteFloat(m_offsetY);
+					aWriter->WriteFloat(m_moveX);
+					aWriter->WriteFloat(m_moveY);
 				}
 
 				bool
@@ -144,6 +154,10 @@ namespace tpublic
 						return false;
 					if (!aReader->ReadFloat(m_offsetY))
 						return false;
+					if (!aReader->ReadFloat(m_moveX))
+						return false;
+					if (!aReader->ReadFloat(m_moveY))
+						return false;
 					return true;
 				}
 
@@ -163,6 +177,8 @@ namespace tpublic
 				uint8_t								m_colorModB = 255;
 				float								m_offsetX = 0.0f;
 				float								m_offsetY = 0.0f;
+				float								m_moveX = 0.0f;
+				float								m_moveY = 0.0f;
 			};
 
 			void

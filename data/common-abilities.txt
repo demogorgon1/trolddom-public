@@ -197,3 +197,8 @@ ability recall:
 	{
 	}
 }
+
+ability level_up:
+{
+	target_particle_system: level_up
+}
