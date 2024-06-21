@@ -477,7 +477,7 @@ ability throw_rock:
 	flags: [ ranged offensive target_other target_hostile can_be_dodged can_miss ]
 	states: [ default ]
 	icon: icon_throw_rock
-	speed: 6
+	speed: 8
 	projectile: throw_rock
 	cast_time: 20
 	talent_tree: fighter_subtlety	

@@ -35,7 +35,7 @@ ability fighter_shoot:
 	cooldowns: [ global ]
 	flags: [ ranged offensive target_other target_hostile can_miss ranged_cast_time use_ranged_icon ]
 	states: [ default in_combat ]
-	speed: 6
+	speed: 8
 	projectile: fighter_shoot	
 	icon: icon_question
 	

@@ -89,7 +89,7 @@ ability .biznorg:
 	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
 	states: [ default in_combat ]
 	icon: icon_firebolt
-	speed: 5
+	speed: 6
 	projectile: .biznorg
 	
 	direct_effect damage:

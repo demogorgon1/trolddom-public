@@ -369,7 +369,7 @@ ability firebolt:
 	states: [ default in_combat ]
 	icon: icon_firebolt
 	talent_tree: sorcerer_elemental
-	speed: 5
+	speed: 7
 	projectile: firebolt
 	resource_cost mana: 20
 	target_particle_system: orange_spell_hit
@@ -431,7 +431,7 @@ ability fireball:
 	states: [ default in_combat ]
 	icon: icon_fireball
 	talent_tree: sorcerer_elemental
-	speed: 5
+	speed: 7
 	projectile: fireball
 	resource_cost mana: 30
 	target_particle_system: orange_spell_hit
@@ -492,7 +492,7 @@ ability ice_lance:
 	states: [ default in_combat ]
 	icon: icon_ice_lance
 	talent_tree: sorcerer_elemental
-	speed: 5
+	speed: 7
 	projectile: ice_lance
 	resource_cost mana: 25
 	target_particle_system: blue_spell_hit

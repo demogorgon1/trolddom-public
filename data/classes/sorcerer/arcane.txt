@@ -392,7 +392,7 @@ ability arcane_missile:
 	states: [ default in_combat ]
 	icon: icon_arcane_missile
 	talent_tree: sorcerer_arcane
-	speed: 8
+	speed: 9
 	projectile: arcane_missile
 	resource_cost mana: 15
 	

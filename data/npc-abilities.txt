@@ -63,7 +63,7 @@ ability npc_firebolt:
 	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
 	states: [ in_combat ]
 	icon: icon_firebolt
-	speed: 5
+	speed: 6
 	projectile: npc_firebolt
 	resource_cost mana: 10	
 	
@@ -95,7 +95,7 @@ ability npc_shoot:
 	flags: [ ranged offensive target_other target_hostile can_miss ]
 	states: [ in_combat ]
 	icon: icon_throw_rock
-	speed: 6
+	speed: 7
 	projectile: npc_shoot
 	
 	direct_effect damage:
