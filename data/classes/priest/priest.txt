@@ -84,6 +84,7 @@ class priest:
 			}
 			
 			resource health: { add_max: 6 }
+			resource mana: { add_max: 6 }
 		}
 		
 		{
@@ -101,7 +102,8 @@ class priest:
 				spirit: 1
 			}			
 			
-			resource health: { add_max: 6 }
+			resource health: { add_max: 6 }			
+			resource mana: { add_max: 6 }			
 		}		
 		
 		{
@@ -119,6 +121,7 @@ class priest:
 			}			
 			
 			resource health: { add_max: 6 }			
+			resource mana: { add_max: 6 }			
 		}				
 		
 		{
@@ -137,6 +140,7 @@ class priest:
 			}			
 			
 			resource health: { add_max: 6 }
+			resource mana: { add_max: 6 }			
 		}		
 		
 		{
@@ -153,7 +157,8 @@ class priest:
 				constitution: 1
 			}			
 			
-			resource health: { add_max: 6 }			
+			resource health: { add_max: 6 }		
+			resource mana: { add_max: 6 }
 		}				
 
 		{
@@ -172,6 +177,7 @@ class priest:
 			}	
 
 			resource health: { add_max: 6 }
+			resource mana: { add_max: 6 }			
 		}		
 		
 		{
@@ -188,6 +194,7 @@ class priest:
 			}			
 			
 			resource health: { add_max: 6 }			
+			resource mana: { add_max: 6 }			
 		}				
 
 		{
@@ -205,6 +212,7 @@ class priest:
 			}			
 			
 			resource health: { add_max: 6 }			
+			resource mana: { add_max: 6 }			
 		}		
 		
 		{
@@ -221,6 +229,7 @@ class priest:
 			}			
 			
 			resource health: { add_max: 6 }			
+			resource mana: { add_max: 6 }			
 		}				
 		
 	]

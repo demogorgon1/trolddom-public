@@ -104,7 +104,7 @@ ability void_blade_storm:
 	aoe_radius: 1
 	aoe_cap: 3
 	aoe_requirement target<must_not_be_in_state>: { id: dead }
-	resource_cost mana: 35
+	resource_cost mana: 20
 	talent_tree: sorcerer_battle_mage
 	target_particle_system: void_blade_storm	
 
@@ -209,7 +209,7 @@ ability wizard_strike:
 	states: [ default in_combat ]
 	icon: icon_wizard_strike
 	delay: 3
-	resource_cost mana: 15
+	resource_cost mana: 8
 	talent_tree: sorcerer_battle_mage
 	
 	direct_effect damage:
@@ -314,7 +314,7 @@ ability power_shield:
 	string: "Power Shield"
 	description: "Absorbs damage for up to 30 seconds."
 	cooldowns: [ global power_shield spell_arcane_lockout ]
-	resource_cost mana: 25
+	resource_cost mana: 15
 	flags: [ target_self ]
 	states: [ default in_combat ]	
 	icon: icon_mage_shield

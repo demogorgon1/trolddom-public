@@ -323,7 +323,7 @@ ability smite:
 	flags: [ spell target_other target_hostile interruptable ]
 	states: [ default in_combat ]
 	icon: icon_smite
-	resource_cost mana: 10
+	resource_cost mana: 12
 	target_particle_system: smite	
 	delay: 3
 	talent_tree: priest_condemnation

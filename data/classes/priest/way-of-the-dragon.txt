@@ -54,7 +54,7 @@ ability dragon_breath:
 	states: [ default in_combat ]
 	icon: icon_dragon_breath
 	delay: 3
-	resource_cost mana: 25
+	resource_cost mana: 20
 	talent_tree: priest_dragon
 	cast_time: 20
 	
@@ -125,7 +125,7 @@ ability dragon_punch:
 	states: [ default in_combat ]
 	icon: icon_dragon_punch
 	delay: 3
-	resource_cost mana: 15
+	resource_cost mana: 10
 	talent_tree: priest_dragon
 	
 	direct_effect damage:

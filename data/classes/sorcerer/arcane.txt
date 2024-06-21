@@ -126,7 +126,7 @@ ability void_lightning:
 	talent_tree: sorcerer_arcane
 	speed: 6
 	projectile: void_lightning
-	resource_cost mana: 20
+	resource_cost mana: 15
 	
 	direct_effect spawn_entity:
 	{
@@ -216,7 +216,7 @@ ability teleport:
 	flags: [ spell target_aoe target_aoe_always_self interruptable ]
 	states: [ default in_combat ]
 	icon: icon_teleport
-	resource_cost mana: 20
+	resource_cost mana: 15
 	talent_tree: sorcerer_arcane
 	aoe_cap: 1
 	aoe_radius: 0
@@ -394,7 +394,7 @@ ability arcane_missile:
 	talent_tree: sorcerer_arcane
 	speed: 9
 	projectile: arcane_missile
-	resource_cost mana: 15
+	resource_cost mana: 10
 	
 	direct_effect damage:
 	{
@@ -431,7 +431,7 @@ ability sleep:
 	states: [ default in_combat ]
 	icon: icon_sleep
 	talent_tree: sorcerer_arcane
-	resource_cost mana: 15
+	resource_cost mana: 10
 	cast_time: 20
 	
 	direct_effect apply_aura:
