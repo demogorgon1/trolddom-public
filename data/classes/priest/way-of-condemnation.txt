@@ -87,7 +87,7 @@ aura fear:
 	icon: icon_fear		
 	type: debuff
 	duration: 120	
-	flags: [ unique magic ]
+	flags: [ unique magic single_target ]
 	aura_effect stun:
 	{
 		fear: true

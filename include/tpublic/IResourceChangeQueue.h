@@ -30,7 +30,8 @@ namespace tpublic
 								Components::Auras*					aAuras,
 								size_t								aResourceIndex,
 								int32_t								aChange,
-								uint32_t							aBlocked) = 0;
+								uint32_t							aBlocked,
+								bool								aSilent) = 0;
 		virtual void		AddUpdateCallback(
 								UpdateCallback						aUpdateCallback) = 0;
 		virtual void		AddSimpleDirectEffect(

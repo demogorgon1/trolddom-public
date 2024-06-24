@@ -122,7 +122,8 @@ namespace tpublic::DirectEffects
 				NULL,
 				healthResourceIndex,
 				(int32_t)heal,
-				0);
+				0,
+				false);
 
 			// Anyone on the target's threat target list should gain threat from this
 			const Components::ThreatSource* targetThreatSource = aTarget->GetComponent<Components::ThreatSource>();

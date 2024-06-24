@@ -42,6 +42,7 @@ namespace tpublic::Systems
 	{
 		{
 			Components::Auras* auras = GetComponent<Components::Auras>(aComponents);
+			Components::CombatPublic* combatPublic = GetComponent<Components::CombatPublic>(aComponents);
 
 			for(size_t i = 0; i < auras->m_entries.size(); i++)
 			{
@@ -56,7 +57,18 @@ namespace tpublic::Systems
 
 				if((aura->m_flags & Data::Aura::FLAG_PERSIST_IN_DEATH) == 0 && aEntityState == EntityState::ID_DEAD)
 					entry->m_cancel = true;
-				
+
+				if ((aura->m_flags & Data::Aura::FLAG_CANCEL_ON_DAMAGE) != 0 && combatPublic->m_damageAccum > 0)
+					entry->m_cancel = true;
+
+				if (aura->m_flags & Data::Aura::FLAG_SINGLE_TARGET)
+				{
+					const EntityInstance* sourceEntity = aContext->m_worldView->WorldViewSingleEntityInstance(entry->m_entityInstanceId);
+					const Components::CombatPublic* sourceCombatPublic = sourceEntity != NULL ? sourceEntity->GetComponent<Components::CombatPublic>() : NULL;
+					if(sourceCombatPublic != NULL && sourceCombatPublic->m_singleTargetAuraEntityInstanceId != aEntityInstanceId)
+						entry->m_cancel = true;
+				}
+
 				if(!entry->m_cancel)
 				{
 					if(entry->m_channeledAbilityId != 0)
@@ -158,6 +170,8 @@ namespace tpublic::Systems
 			combatPublic->m_moveSpeed = moveSpeed;
 			combatPublic->SetDirty();
 		}
+
+		combatPublic->m_damageAccum = 0;
 	}
 
 }

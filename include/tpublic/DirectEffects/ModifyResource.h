@@ -52,6 +52,7 @@ namespace tpublic
 			// Public data
 			Resource::Id	m_resourceId = Resource::INVALID_ID;
 			bool			m_targetSelf = false;
+			bool			m_silent = false;
 			CombatFunction	m_function;
 		};
 

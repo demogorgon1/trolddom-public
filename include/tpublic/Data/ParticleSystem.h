@@ -44,6 +44,10 @@ namespace tpublic
 						{
 							m_spriteInterval = aChild->GetUInt32();
 						}
+						else if (aChild->m_name == "spawn_interval")
+						{
+							m_spawnInterval = aChild->GetUInt32();
+						}
 						else if (aChild->m_name == "fade_in")
 						{
 							m_fadeIn = aChild->GetUInt32();
@@ -108,6 +112,7 @@ namespace tpublic
 					aWriter->WritePOD(m_colorModB);
 					aWriter->WriteUInt(m_count);
 					aWriter->WriteUInt(m_spriteInterval);
+					aWriter->WriteUInt(m_spawnInterval);
 					aWriter->WriteUInt(m_fadeIn);
 					aWriter->WriteUInt(m_fadeOut);
 					aWriter->WriteUInt(m_duration);
@@ -138,6 +143,8 @@ namespace tpublic
 						return false;
 					if (!aReader->ReadUInt(m_spriteInterval))
 						return false;
+					if (!aReader->ReadUInt(m_spawnInterval))
+						return false;
 					if (!aReader->ReadUInt(m_fadeIn))
 						return false;
 					if (!aReader->ReadUInt(m_fadeOut))
@@ -166,6 +173,7 @@ namespace tpublic
 				uint8_t								m_flags = 0;
 				uint32_t							m_count = 0;
 				uint32_t							m_spriteInterval = 100; // ms
+				uint32_t							m_spawnInterval = 0; // ms
 				uint32_t							m_duration = 0; // ms
 				float								m_scale = 1.0f;
 				float								m_alpha = 1.0f;

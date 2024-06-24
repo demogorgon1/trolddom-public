@@ -385,6 +385,8 @@ namespace tpublic
 			int32_t							m_last5SecRuleManaRegenTick = 0;
 			int32_t							m_lastBaseManaRegenTick = 0;
 			std::optional<Interrupt>		m_interrupt;
+			uint32_t						m_damageAccum = 0;
+			uint32_t						m_singleTargetAuraEntityInstanceId = 0;
 		};
 
 	}

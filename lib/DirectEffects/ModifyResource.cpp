@@ -29,9 +29,13 @@ namespace tpublic::DirectEffects
 					m_resourceId = Resource::StringToId(aChild->GetIdentifier());
 					TP_VERIFY(m_resourceId != Resource::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid resource.", aChild->GetIdentifier());
 				}
-				else if(aChild->m_name == "target_self")
+				else if (aChild->m_name == "target_self")
 				{
 					m_targetSelf = aChild->GetBool();
+				}
+				else if (aChild->m_name == "silent")
+				{
+					m_silent = aChild->GetBool();
 				}
 				else
 				{
@@ -49,6 +53,7 @@ namespace tpublic::DirectEffects
 		aStream->WritePOD(m_resourceId);
 		m_function.ToStream(aStream);
 		aStream->WriteBool(m_targetSelf);
+		aStream->WriteBool(m_silent);
 	}
 			
 	bool	
@@ -63,6 +68,12 @@ namespace tpublic::DirectEffects
 			return false;
 		if(!aStream->ReadBool(m_targetSelf))
 			return false;
+
+		if(!aStream->IsEnd())
+		{
+			if (!aStream->ReadBool(m_silent))
+				return false;
+		}
 		return true;
 	}
 
@@ -98,7 +109,8 @@ namespace tpublic::DirectEffects
 				NULL,
 				resourceIndex,
 				(int32_t)m_function.EvaluateEntityInstance(aRandom, aSource),
-				0);
+				0,
+				m_silent);
 		}
 
 		return Result();

@@ -242,7 +242,8 @@ namespace tpublic::DirectEffects
 					NULL,
 					rageResourceIndex,
 					rage,
-					0);
+					0,
+					false);
 			}
 		}
 
@@ -265,7 +266,8 @@ namespace tpublic::DirectEffects
 					targetAuras,
 					rageResourceIndex,
 					rage,
-					0);
+					0,
+					false);
 			}
 		}
 
@@ -283,7 +285,8 @@ namespace tpublic::DirectEffects
 				targetAuras,
 				healthResourceIndex,
 				-(int32_t)damage,
-				blocked);
+				blocked,
+				false);
 		}
 
 		// Threat

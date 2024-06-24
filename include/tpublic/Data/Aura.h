@@ -89,6 +89,8 @@ namespace tpublic
 				FLAG_BLESSING				= 0x00000100,
 				FLAG_INDEFINITE				= 0x00000200,
 				FLAG_CANCEL_OUTSIDE_COMBAT	= 0x00000400,
+				FLAG_CANCEL_ON_DAMAGE		= 0x00000800,
+				FLAG_SINGLE_TARGET			= 0x00001000
 			};
 
 			static Type
@@ -137,6 +139,10 @@ namespace tpublic
 						flags |= FLAG_INDEFINITE; 
 					else if (strcmp(string, "cancel_outside_combat") == 0)
 						flags |= FLAG_CANCEL_OUTSIDE_COMBAT;
+					else if (strcmp(string, "cancel_on_damage") == 0)
+						flags |= FLAG_CANCEL_ON_DAMAGE;
+					else if (strcmp(string, "single_target") == 0)
+						flags |= FLAG_SINGLE_TARGET;
 					else
 						TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid aura flag.", string);
 				});
@@ -173,6 +179,8 @@ namespace tpublic
 							m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
 						else if (aChild->m_name == "encounter")
 							m_encounterId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENCOUNTER, aChild->GetIdentifier());
+						else if (aChild->m_name == "particle_system")
+							m_particleSystemId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PARTICLE_SYSTEM, aChild->GetIdentifier());
 						else if (aChild->m_name == "duration")
 							m_duration = SourceToDuration(aChild);
 						else if (aChild->m_name == "type")
@@ -209,6 +217,7 @@ namespace tpublic
 				aStream->WriteOptionalObjectPointer(m_statModifiers);
 				m_charges.ToStream(aStream);
 				aStream->WriteUInt(m_encounterId);
+				aStream->WriteUInt(m_particleSystemId);
 			}
 			 
 			bool
@@ -239,6 +248,12 @@ namespace tpublic
 					if (!aStream->ReadUInt(m_encounterId))
 						return false;
 				}
+
+				if(!aStream->IsEnd())
+				{
+					if (!aStream->ReadUInt(m_particleSystemId))
+						return false;
+				}
 				return true;
 			}
 
@@ -253,6 +268,7 @@ namespace tpublic
 			std::unique_ptr<StatModifiers>					m_statModifiers;
 			CombatFunction									m_charges;
 			uint32_t										m_encounterId = 0;
+			uint32_t										m_particleSystemId = 0;
 		};
 
 	}

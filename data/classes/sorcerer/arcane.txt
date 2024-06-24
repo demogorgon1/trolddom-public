@@ -437,7 +437,28 @@ ability sleep:
 	direct_effect apply_aura:
 	{
 		aura: sleep
-		threat: 25
+		threat: 5
+	}
+}
+
+ability sleep_tick:
+{
+	string: "Sleep"
+	icon: icon_sleep		
+	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]
+	
+	direct_effect modify_resource:
+	{
+		resource: health
+		function: { expression: a_mul_x a: 0.2 x: health_max }
+		silent: true
+	}
+	
+	direct_effect threat:
+	{
+		add: 5
+		apply_to: source
 	}
 }
 
@@ -445,11 +466,37 @@ aura sleep:
 {
 	string: "Sleep"
 	description: "Sleeping."
+	particle_system: sleep
 	icon: icon_sleep
 	type: debuff
 	duration: 120
-	flags: [ unique magic ]
+	flags: [ unique magic cancel_on_damage single_target ]
 	aura_effect stun: { }
+	aura_effect repeat: 
+	{ 
+		update_interval: 20
+		update_count: 6
+		ability: sleep_tick
+	}
+}
+
+particle_system sleep:
+{
+	particle:
+	{
+		sprites: [ effect_z ]
+		flags: [ attached no_loop ]
+		duration: 1000
+		spawn_interval: 1200
+		count: 12		
+		scale: 0.125
+		alpha: 0.80
+		fade_in: 500
+		fade_out: 500
+		offset_x: 0.5
+		offset_y: 0.5	
+		move_y: -0.5
+	}
 }
 
 ###############################################################################
