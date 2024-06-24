@@ -28,60 +28,10 @@ namespace tpublic::DirectEffects
 				{
 					m_damageType = DirectEffect::StringToDamageType(aChild->GetIdentifier());
 				}
-				//else if(aChild->m_name == "level_curve")
-				//{
-				//	m_levelCurve = UIntCurve<uint32_t>(aChild);
-				//}
-				//else if(aChild->m_name == "base_multiplier")
-				//{
-				//	m_damageBaseMultiplier = aChild->GetFloat();
-				//}
 				else if(aChild->m_name == "conditional_critical_chance_bonus")
 				{
 					m_conditionalCriticalChanceBonuses.push_back(ConditionalCriticalChanceBonus(aChild));
 				}
-				//else if(aChild->m_name == "base")
-				//{
-				//	if(aChild->m_type == SourceNode::TYPE_ARRAY)
-				//	{
-				//		m_damageBase = DirectEffect::DAMAGE_BASE_RANGE;
-
-				//		if(aChild->m_children.size() == 1)
-				//		{
-				//			m_damageBaseRangeMin = aChild->m_children[0]->GetUInt32();
-				//			m_damageBaseRangeMax = m_damageBaseRangeMin;
-				//		}
-				//		else if (aChild->m_children.size() == 2)
-				//		{
-				//			m_damageBaseRangeMin = aChild->m_children[0]->GetUInt32();
-				//			m_damageBaseRangeMax = aChild->m_children[1]->GetUInt32();
-				//		}
-				//		else
-				//		{
-				//			TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid damage base definition.", aChild->m_name.c_str());
-				//		}
-				//	}
-				//	else if(aChild->m_type == SourceNode::TYPE_IDENTIFIER && aChild->m_value == "weapon")
-				//	{
-				//		m_damageBase = DirectEffect::DAMAGE_BASE_WEAPON;
-				//	}
-				//	else if (aChild->m_type == SourceNode::TYPE_IDENTIFIER && aChild->m_value == "weapon_average")
-				//	{
-				//		m_damageBase = DirectEffect::DAMAGE_BASE_WEAPON_AVERAGE;
-				//	}
-				//	else if (aChild->m_type == SourceNode::TYPE_IDENTIFIER && aChild->m_value == "ranged")
-				//	{
-				//		m_damageBase = DirectEffect::DAMAGE_BASE_RANGED;
-				//	}
-				//	else if (aChild->m_type == SourceNode::TYPE_IDENTIFIER && aChild->m_value == "ranged_average")
-				//	{
-				//		m_damageBase = DirectEffect::DAMAGE_BASE_RANGED_AVERAGE;
-				//	}
-				//	else
-				//	{
-				//		TP_VERIFY(false, aChild->m_debugInfo, "Not a valid damage base.", aChild->m_name.c_str());
-				//	}
-				//}
 				else if(aChild->m_name == "function")
 				{
 					m_function = CombatFunction(aChild);
@@ -100,16 +50,7 @@ namespace tpublic::DirectEffects
 	{
 		ToStreamBase(aStream);
 		aStream->WritePOD(m_damageType);
-		//aStream->WritePOD(m_damageBase);
-		//m_levelCurve.ToStream(aStream);
-		//aStream->WriteFloat(m_damageBaseMultiplier);
 		aStream->WriteObjects(m_conditionalCriticalChanceBonuses);
-
-		//if(m_damageBase == DirectEffect::DAMAGE_BASE_RANGE)
-		//{
-		//	aStream->WriteUInt(m_damageBaseRangeMin);
-		//	aStream->WriteUInt(m_damageBaseRangeMax);
-		//}
 		m_function.ToStream(aStream);
 	}
 			
@@ -121,23 +62,8 @@ namespace tpublic::DirectEffects
 			return false;
 		if (!aStream->ReadPOD(m_damageType))
 			return false;
-		//if (!aStream->ReadPOD(m_damageBase))
-		//	return false;
-		//if(!m_levelCurve.FromStream(aStream))
-		//	return false;
-		//if(!aStream->ReadFloat(m_damageBaseMultiplier))
-		//	return false;
 		if(!aStream->ReadObjects(m_conditionalCriticalChanceBonuses))
 			return false;
-
-		//if (m_damageBase == DirectEffect::DAMAGE_BASE_RANGE)
-		//{
-		//	if (!aStream->ReadUInt(m_damageBaseRangeMin))
-		//		return false;
-		//	if (!aStream->ReadUInt(m_damageBaseRangeMax))
-		//		return false;
-		//}
-
 		if(!m_function.FromStream(aStream))
 			return false;
 
@@ -333,67 +259,5 @@ namespace tpublic::DirectEffects
 
 		return bonus;
 	}
-
-	//void			
-	//Damage::_GetDamageRange(
-	//	const Components::CombatPublic*		aCombatPublic,
-	//	const Components::CombatPrivate*	aCombatPrivate,
-	//	UIntRange&							aOut) const
-	//{
-	//	switch (m_damageBase)
-	//	{
-	//	case DirectEffect::DAMAGE_BASE_RANGE:
-	//		aOut = { m_damageBaseRangeMin, m_damageBaseRangeMax };
-	//		break;
-
-	//	case DirectEffect::DAMAGE_BASE_WEAPON:
-	//		TP_CHECK(aCombatPrivate != NULL, "No weapon damage available.");
-	//		aOut = { aCombatPrivate->m_weaponDamageRangeMin, aCombatPrivate->m_weaponDamageRangeMax };
-	//		break;
-
-	//	case DirectEffect::DAMAGE_BASE_WEAPON_AVERAGE:
-	//		{
-	//			TP_CHECK(aCombatPrivate != NULL, "No weapon damage available.");
-	//			uint32_t average = (aCombatPrivate->m_weaponDamageRangeMin + aCombatPrivate->m_weaponDamageRangeMax) / 2;
-	//			aOut = { average, average };
-	//		}
-	//		break;
-
-	//	case DirectEffect::DAMAGE_BASE_RANGED:
-	//		TP_CHECK(aCombatPrivate != NULL, "No weapon damage available.");
-	//		aOut = { aCombatPrivate->m_rangedDamageRangeMin, aCombatPrivate->m_rangedDamageRangeMax };
-	//		break;
-
-	//	case DirectEffect::DAMAGE_BASE_RANGED_AVERAGE:
-	//		{
-	//			TP_CHECK(aCombatPrivate != NULL, "No weapon damage available.");
-	//			uint32_t average = (aCombatPrivate->m_rangedDamageRangeMin + aCombatPrivate->m_rangedDamageRangeMax) / 2;
-	//			aOut = { average, average };
-	//		}
-	//		break;
-
-	//	default:
-	//		break;
-	//	}
-
-	//	if (aOut.m_min > 0)
-	//	{
-	//		aOut.m_min = (uint32_t)((float)aOut.m_min * m_damageBaseMultiplier);
-	//		if (aOut.m_min == 0)
-	//			aOut.m_min = 1;
-	//	}
-
-	//	if (aOut.m_max > 0)
-	//	{
-	//		aOut.m_max = (uint32_t)((float)aOut.m_max * m_damageBaseMultiplier);
-	//		if (aOut.m_max == 0)
-	//			aOut.m_max = 1;
-	//	}
-
-	//	uint32_t bonus = m_levelCurve.Sample(aCombatPublic->m_level);
-
-	//	aOut.m_min += bonus;
-	//	aOut.m_max += bonus;
-	//}
 
 }
