@@ -88,7 +88,7 @@ quest .aghina_1:
 
 	progress:
 	[
-		"Any progress?"
+		"Did you find him?"
 	]
 	
 	completion:

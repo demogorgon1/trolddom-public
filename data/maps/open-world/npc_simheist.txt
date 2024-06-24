@@ -120,7 +120,7 @@ quest .simheist_2:
 	
 	completion:
 	[
-		"Good."
+		"Did you get him before he managed to hide in the woods? Good."
 	]
 
 	objectives: [ .simheist_2 ]

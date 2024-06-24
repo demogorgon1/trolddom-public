@@ -123,7 +123,7 @@ quest .werner_1:
 	
 	completion:
 	[
-		"Nice."
+		"That's wonderful. Here, have something for your troubles."
 	]
 
 	objectives: [ .werner_1 ]

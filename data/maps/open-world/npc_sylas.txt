@@ -80,7 +80,7 @@ quest .sylas_1:
 	
 	completion:
 	[
-		"Nice."
+		"Good, they need to be contained. They've lived under the mountains forever and they need to stay down there."
 	]
 
 	objectives: [ .sylas_1 ]
@@ -115,7 +115,8 @@ quest .sylas_2:
 	
 	description: 
 	[
-		"FIXME"
+		"Ignorg, one of the horrible goblin lords who command the vermin under the mountain, is said to have appeared in one of the upper levels of the dungeon. I need you to slay him and hopefully"
+		"the goblins will retreat back into their little hiding holes."
 	]
 
 	progress:
@@ -125,7 +126,7 @@ quest .sylas_2:
 	
 	completion:
 	[
-		"Nice."
+		"You managed to slay the foul goblin lord? That's amazing. This will hopefully keep them disorganized for a while."
 	]
 
 	objectives: [ .sylas_2 ]
@@ -203,17 +204,17 @@ quest .sylas_4:
 	
 	description: 
 	[
-		"FIXME"
+		"Another goblin lord down there? Seems like it wasn't Ignorg alone who was running the show. You must kill this Zarvok and hopefully it will be the end of it."
 	]
 
 	progress:
 	[
-		"Did you get cold feet?"
+		"You must make haste!"
 	]
 	
 	completion:
 	[
-		"Nice."
+		"Maybe we can finally rest now. Seems like it might not be the case, though."
 	]
 
 	objectives: [ .sylas_4 ]

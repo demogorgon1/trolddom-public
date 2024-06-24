@@ -68,7 +68,7 @@ quest .theodore_1:
 	
 	completion:
 	[
-		"Nice."
+		"Nice. Very nice."
 	]
 
 	objectives: [ .theodore_1 ]
@@ -153,7 +153,7 @@ quest .theodore_2:
 	
 	completion:
 	[
-		"Nice."
+		"Thanks. Hopefully my ankle will be better soon."
 	]
 
 	objectives: [ .theodore_2 ]

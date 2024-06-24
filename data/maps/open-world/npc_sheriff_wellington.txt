@@ -76,7 +76,7 @@ quest .sheriff_wellington_1:
 	
 	completion:
 	[
-		"Nice."
+		"Thanks, that should keep them off for a while. I'm afraid they'll keep coming, though."
 	]
 
 	objectives: [ .sheriff_wellington_1 ]
@@ -150,7 +150,7 @@ quest .sheriff_wellington_2:
 	
 	completion:
 	[
-		"Nice."
+		"You're a seasoned crab killer now, aren't you? If you keep it up I might have to hire you as another deputy."
 	]
 
 	objectives: [ .sheriff_wellington_2_a .sheriff_wellington_2_b .sheriff_wellington_2_c ]

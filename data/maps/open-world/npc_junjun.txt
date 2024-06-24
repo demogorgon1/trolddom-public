@@ -1,3 +1,12 @@
+dialogue_screen .junjun_6:
+{
+	text:
+	[
+		"I keep an arcane anomaly in my dungeon. If you try to destroy it, it will collapse for a while and you can use it for the imbuing."
+	]		
+}
+
+
 dialogue_screen .junjun_5:
 {
 	text:
@@ -67,6 +76,7 @@ dialogue_screen .junjun_greetings:
 	
 	options:
 	[
+		{ goto: .junjun_6 text: "How do I imbue my orb?" requirement self<must_have_completed_quest>: gateway_world_quest_2 }
 		{ goto: .junjun_1 text: "What kinds of wizardry are you up to here?" }
 		{ quest: gateway_world_quest_1 }
 		{ quest: gateway_world_quest_2 }

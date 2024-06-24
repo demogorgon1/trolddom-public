@@ -70,7 +70,7 @@ quest spawn_of_umbracoth:
 	
 	completion:
 	[
-		"Aye, that's one fine specimen of a slimy tentacle. I've encountered plenty tentacled monsters at sea, so I know what I'm talking about!"
+		"Aye, that's one fine specimen of a slimy tentacle. I've encountered plenty tentacled monsters at sea, so I know what I'm talking about. How salty is it? Probably a lot. Can I have a lick?"
 	]
 
 	level: 5

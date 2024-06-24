@@ -37,7 +37,7 @@ quest gateway_world_quest_1:
 	
 	completion:
 	[
-		"Those are some nice crystal shards!"
+		"Those are some nice crystal shards! They'll be very helpful, thank you."
 	]
 	
 	progress:
@@ -112,22 +112,27 @@ quest gateway_world_quest_2:
 
 	text:
 	[
-		"Text."
+		"Enter the gateway, find a Strange Totem, and return it to Junjun."
 	]
 	
 	description: 
 	[
-		"Description."
+		"Certain of the more powerful creatures that you can encounter in gateway worlds have been observed to carry some strange objects. I'd be most interested in"
+		"getting a closer look at one of those. Do you think you can bring back one of those for me?\n"
+		"\n"
+		"If you're interested in learning more about how worlds can be created with arcane magic, I might be able to help you."
 	]
 	
 	completion:
 	[
-		"Completion."
+		"Amazing, I hope your quest wasn't too dangerous.\n"
+		"\n"
+		"Here, take this orb. It needs to be imbued with the required arcane powers and you can use it to create your own little world if you want to."
 	]
 	
 	progress:
 	[
-		"Progress."
+		"Have you found anything?"
 	]
 
 	level: 10
