@@ -73,7 +73,7 @@ ability .hobart_1:
 	requirement target<must_be_faction>: { id: wildlife }
 	requirement target<must_not_have_aura>: { id: .hobart_1 }
 	direct_effect apply_aura: { aura: .hobart_1 }
-	sound_effects: { use_local: [ inventory_1 ] }
+	sound_effects: !SOUND_INVENTORY{}
 }
 
 item .hobart_1:

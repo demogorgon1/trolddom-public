@@ -14,7 +14,7 @@ ability consumable_small_healing_potion:
 	consume_items: { consumable_small_healing_potion: 1 }
 	cooldowns: [ global potions ]	
 	states: [ default in_combat ]
-	sound_effects: { use_local: [ drink_1 ] }
+	sound_effects: !SOUND_DRINK_POTION{}
 	delay: 2
 	target_particle_system: small_heal	
 }
@@ -44,7 +44,7 @@ ability consumable_small_mana_potion:
 	consume_items: { consumable_small_mana_potion: 1 }
 	cooldowns: [ global potions ]
 	states: [ default in_combat ]
-	sound_effects: { use_local: [ drink_1 ] }
+	sound_effects: !SOUND_DRINK_POTION{}
 }
 
 item consumable_small_mana_potion:
@@ -72,7 +72,7 @@ ability consumable_healing_potion:
 	consume_items: { consumable_healing_potion: 1 }
 	cooldowns: [ global potions ]	
 	states: [ default in_combat ]
-	sound_effects: { use_local: [ drink_1 ] }
+	sound_effects: !SOUND_DRINK_POTION{}
 	delay: 2
 	target_particle_system: small_heal
 }
@@ -101,7 +101,7 @@ ability consumable_mana_potion:
 	consume_items: { consumable_mana_potion: 1 }
 	cooldowns: [ global potions ]
 	states: [ default in_combat ]
-	sound_effects: { use_local: [ drink_1 ] }
+	sound_effects: !SOUND_DRINK_POTION{}
 }
 
 item consumable_mana_potion:
@@ -138,7 +138,7 @@ ability consumable_elixir_of_the_giant:
 	consume_items: { consumable_elixir_of_the_giant: 1 }
 	cooldowns: [ global ]
 	states: [ default in_combat ]
-	sound_effects: { use_local: [ drink_1 ] }
+	sound_effects: !SOUND_DRINK_POTION{}
 }
 
 item consumable_elixir_of_the_giant:
@@ -176,7 +176,7 @@ ability consumable_elixir_of_the_owl:
 	consume_items: { consumable_elixir_of_the_owl: 1 }
 	cooldowns: [ global ]
 	states: [ default in_combat ]
-	sound_effects: { use_local: [ drink_1 ] }
+	sound_effects: !SOUND_DRINK_POTION{}
 }
 
 item consumable_elixir_of_the_owl:
@@ -214,7 +214,7 @@ ability consumable_elixir_of_the_bear:
 	consume_items: { consumable_elixir_of_the_bear: 1 }
 	cooldowns: [ global ]
 	states: [ default in_combat ]
-	sound_effects: { use_local: [ drink_1 ] }
+	sound_effects: !SOUND_DRINK_POTION{}
 }
 
 item consumable_elixir_of_the_bear:
@@ -252,7 +252,7 @@ ability consumable_spell_juice:
 	consume_items: { consumable_spell_juice: 1 }
 	cooldowns: [ global ]
 	states: [ default in_combat ]
-	sound_effects: { use_local: [ drink_1 ] }
+	sound_effects: !SOUND_DRINK_POTION{}
 }
 
 item consumable_spell_juice:

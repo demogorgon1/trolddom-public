@@ -15,6 +15,7 @@ sound inventory_2: { source: "inventory-2.wav" }
 sound miss_1: { source: "miss-1.wav" }
 sound miss_2: { source: "miss-2.wav" }
 sound miss_3: { source: "miss-3.wav" }
+sound miss_4: { source: "miss-4.wav" }
 sound monster_1: { source: "monster-1.wav" }
 sound monster_2: { source: "monster-2.wav" }
 sound monster_3: { source: "monster-3.wav" }
@@ -29,9 +30,16 @@ sound spell_5: { source: "spell-5.wav" }
 sound spell_6: { source: "spell-6.wav" }
 sound spell_7: { source: "spell-7.wav" }
 sound spell_8: { source: "spell-8.wav" }
+sound spell_9: { source: "spell-9.wav" }
+sound spell_10: { source: "spell-10.wav" }
+sound spell_11: { source: "spell-11.wav" }
+sound spell_12: { source: "spell-12.wav" }
 sound walk_1: { source: "walk-1.wav" }
 sound buy_1: { source: "buy-1.wav" }
 sound sell_1: { source: "sell-1.wav" }
 sound eat_1: { source: "eat-1.wav" }
+sound arrow_1: { source: "arrow-1.wav" }
+sound parry_1: { source: "parry-1.wav" }
+sound block_1: { source: "block-1.wav" }
 
 

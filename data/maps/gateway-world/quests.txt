@@ -63,7 +63,7 @@ ability gateway_world_quest_item_3:
 	icon: icon_grey_orb
 	cooldowns: [ global ]	
 	states: [ default ]
-	sound_effects: { use_local: [ inventory_1 ] }
+	sound_effects: !SOUND_INVENTORY{}
 	aoe_radius: 2
 	aoe_cap: 1
 	aoe_requirement target<must_be_type>: { id: arcane_anomaly }

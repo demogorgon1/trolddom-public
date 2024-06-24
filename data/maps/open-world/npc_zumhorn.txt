@@ -60,7 +60,7 @@ ability .zumhorn_1:
 	icon: icon_green_bottle
 	cooldowns: [ global .zumhorn_1 ]	
 	states: [ default ]
-	sound_effects: { use_local: [ drink_1 ] }
+	sound_effects: !SOUND_DRINK_POTION{}	
 	aoe_radius: 8
 	aoe_cap: 1
 	aoe_requirement target<must_be_type>: { id: .zumhorn_1 }

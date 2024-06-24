@@ -38,7 +38,7 @@ ability fighter_shoot:
 	speed: 8
 	projectile: fighter_shoot	
 	icon: icon_question
-	
+
 	direct_effect damage:
 	{
 		flags: [ can_be_critical ]

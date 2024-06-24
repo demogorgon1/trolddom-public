@@ -1,11 +1,24 @@
+!define SOUND_HEAL 			{ hit: [ spell_4 ] }		
+!define SOUND_HEAL_SMALL 	{ hit: [ spell_9 ] }				
+!define SOUND_EAT 			{ hit: [ eat_1 ] }		
+!define SOUND_DRINK_POTION	{ use_local: [ drink_1 ] }		
+!define SOUND_INVENTORY		{ use_local: [ inventory_1 ] }		
+
 default_sound_effects:
 {
 	
 	melee:
 	{
 		hit: [ impact_6 impact_9 ]
-		miss: [ miss_1 miss_2 miss_3 ]
-		dodge: [ miss_1 miss_2 miss_3 ]
+		miss: [ miss_1 miss_2 miss_3 miss_4 ]
+		dodge: [ miss_1 miss_2 miss_3 miss_4 ]
+		parry: [ parry_1 ]
+		block: [ block_1 ]
+	}
+	
+	offensive_spell:
+	{
+		hit: [ spell_11 ]
 	}
 	
 	misc:

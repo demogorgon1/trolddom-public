@@ -139,6 +139,7 @@ ability eternal_shine:
 	icon: icon_shine
 	resource_cost mana: 15
 	talent_tree: priest_healing
+	sound_effects: !SOUND_HEAL{}
 
 	direct_effect apply_aura:
 	{	
@@ -301,6 +302,7 @@ ability greater_heal:
 	talent_tree: priest_healing
 	target_particle_system: heal	
 	delay: 2
+	sound_effects: !SOUND_HEAL{}
 	
 	direct_effect heal:
 	{	
@@ -332,6 +334,7 @@ ability minor_heal:
 	talent_tree: priest_healing
 	target_particle_system: heal	
 	delay: 2
+	sound_effects: !SOUND_HEAL{}	
 
 	direct_effect heal:
 	{	
@@ -357,6 +360,7 @@ ability blessing_tick:
 	flags: [ always_in_range always_in_line_of_sight ]
 	target_particle_system: small_heal	
 	delay: 2
+	sound_effects: !SOUND_HEAL_SMALL{}
 	
 	direct_effect heal:
 	{	

@@ -10,7 +10,7 @@ ability player_world_orb:
 	cooldowns: [ global ]	
 	states: [ default ]
 	direct_effect simple<edit_player_worlds>: { }
-	sound_effects: { use_local: [ inventory_1 ] }
+	sound_effects: !SOUND_INVENTORY{}
 	required_level: 10	
 }
 
