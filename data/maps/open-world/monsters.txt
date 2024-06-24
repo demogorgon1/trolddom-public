@@ -209,6 +209,7 @@ entity crab_caster_3: !NPC
 	_level: 3
 	_faction: monsters
 	_resource_mana: 1
+	_resource_health: 0.7
 	_sprite: crab_caster_1
 	_sprite_dead: crab_caster_1_dead
 	_loot_table: .crab_caster_3
@@ -368,6 +369,7 @@ entity crab_caster_4: !NPC
 	_level: 4
 	_faction: monsters
 	_resource_mana: 1
+	_resource_health: 0.7
 	_sprite: crab_caster_1
 	_sprite_dead: crab_caster_1_dead
 	_loot_table: .crab_caster_4
@@ -480,6 +482,7 @@ entity dark_cove_goblin_shaman_6: !NPC
 	_level: 6
 	_faction: monsters
 	_resource_mana: 1
+	_resource_health: 0.7
 	_sprite: goblin_shaman
 	_sprite_dead: goblin_shaman_dead
 	_loot_table: .dark_cove_goblins_6
@@ -924,6 +927,7 @@ entity wasteland_crab_man_10_b: !NPC
 	_level: 10
 	_faction: monsters
 	_resource_mana: 1
+	_resource_health: 0.7
 	_sprite: crab_caster_1
 	_sprite_dead: crab_caster_1_dead
 	_loot_table: .wasteland_crab_men

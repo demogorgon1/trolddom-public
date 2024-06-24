@@ -7,10 +7,10 @@ loot_group world_drops_epic: {}
 
 !define WORLD_DROPS
 {
-	possibility: { weight: 500 }
-	possibility: { weight: 400 loot_group: world_drops_junk }
+	possibility: { weight: 550 }
+	possibility: { weight: 500 loot_group: world_drops_junk }
 	possibility: { weight: 400 loot_group: world_drops_consumable }	
-	possibility: { weight: 80 loot_group: world_drops_uncommon }	
+	possibility: { weight: 70 loot_group: world_drops_uncommon }	
 	possibility: { weight: 8 loot_group: world_drops_rare }	
 	possibility: { weight: 1 loot_group: world_drops_epic }	
 		

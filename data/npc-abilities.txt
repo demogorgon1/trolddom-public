@@ -71,7 +71,7 @@ ability npc_firebolt:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical		
-		function: { expression: a a: [ [ 1 15 ] [ 10 35 ] ] elite_multiplier: 1.7 }			
+		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] ] elite_multiplier: 1.7 }			
 	}
 }
 
