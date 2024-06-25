@@ -110,7 +110,7 @@ item .benny_quest_drop:
 	loot_groups: [ .benny ]		
 	string: "Benny's Head" 
 	binds: when_picked_up
-	icon: icon_tentacle
+	icon: icon_severed_head
 	item_level: 10
 	flags: [ unique not_sellable ]
 	use_ability: .benny_quest_drop_start_quest
@@ -121,7 +121,7 @@ ability .benny_quest_drop_start_quest:
 	string: "Benny's Head"
 	description: "This item starts a quest."
 	flags: [ target_self ]
-	icon: icon_tentacle
+	icon: icon_severed_head
 	direct_effect simple<start_quest>: .benny_1
 	states: [ default in_combat ]
 	requirement self<must_not_have_completed_quest>: { id: .benny_1 }

@@ -342,6 +342,7 @@ sprites:
 	sprite icon_necklace_5 : { tags: [ icon ] }
 	sprite icon_eyeball : { tags: [ icon ] }
 	sprite icon_necklace_6 : { tags: [ icon ] }
+	sprite icon_severed_head : { tags: [ icon ] }
 }
 
 

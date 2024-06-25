@@ -22,6 +22,7 @@
 #include "MapImageOutput.h"
 #include "PostProcessAbilities.h"
 #include "PostProcessEntities.h"
+#include "PostProcessItems.h"
 #include "PostProcessSprites.h"
 #include "PostProcessWordGenerators.h"
 #include "SoundDataBuilder.h"
@@ -142,6 +143,7 @@ namespace tpublic
 		PostProcessWordGenerators::Run(m_manifest);
 		PostProcessAbilities::Run(m_manifest);
 		PostProcessSprites::Run(m_manifest);
+		PostProcessItems::Run(m_manifest);
 
 		// Run generation jobs
 		for(std::unique_ptr<GenerationJob>& generationJob : generationJobs)

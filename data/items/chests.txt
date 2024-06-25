@@ -31,6 +31,7 @@ item chest_sheriff_wellington_1:
 	rarity: uncommon
 	string: "Deputy's Chain Tunic"
 	stat_weight spirit: 1 
+	armor_style_visual: { armor_style: brown decoration_color: [ 128 32 32 200 ] }
 }
 
 item chest_sheriff_wellington_2:
@@ -43,6 +44,7 @@ item chest_sheriff_wellington_2:
 	rarity: uncommon
 	string: "Elegant Robe"
 	stat_weight wisdom: 1 
+	armor_style_visual: { armor_style: cyan decoration_color: [ 255 255 0 128 ] }
 }
 
 item chest_aghina_1:
@@ -56,6 +58,7 @@ item chest_aghina_1:
 	string: "Steel Plated Chestguard"
 	stat_weight constitution: 1 
 	stat_weight spirit: 1 
+	armor_style_visual: { armor_style: green decoration_color: [ 32 32 32 255 ] }
 }
 
 item chest_sylas_1:
@@ -69,6 +72,7 @@ item chest_sylas_1:
 	string: "Soothsayer's Robe"
 	stat_weight wisdom: 2 
 	stat_weight constitution: 1 
+	armor_style_visual: { armor_style: purple decoration_color: [ 40 40 200 200 ] }
 }
 
 item chest_zumhorn_1:
@@ -82,4 +86,5 @@ item chest_zumhorn_1:
 	string: "Ironwood Hauberk"
 	stat_weight strength: 1 
 	stat_weight dexterity: 1 
+	armor_style_visual: { armor_style: brown decoration_color: [ 255 255 0 150 ] }
 }
