@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../ActionBar.h"
+#include "../ArmorStyle.h"
 #include "../DataBase.h"
 #include "../EquipmentSlot.h"
 #include "../ItemType.h"
@@ -25,6 +26,59 @@ namespace tpublic
 				uint8_t					m_r = 0;
 				uint8_t					m_g = 0;
 				uint8_t					m_b = 0;
+			};
+
+			struct SpriteCollection
+			{
+				SpriteCollection()
+				{
+
+				}
+
+				SpriteCollection(
+					const SourceNode*		aSource)
+				{
+					aSource->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if (aChild->m_name == "sprite")
+							m_spriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
+						else if (aChild->m_name == "sprite_dead")
+							m_deadSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
+						else if (aChild->m_name == "sprites_walk")
+							aChild->GetIdArray(DataType::ID_SPRITE, m_walkSpriteIds);
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' not a valid item.", aChild->m_name.c_str());
+					});
+				}
+
+				void	
+				ToStream(
+					IWriter*				aStream) const 
+				{
+					aStream->WriteUInt(m_spriteId);
+					aStream->WriteUInt(m_deadSpriteId);
+					aStream->WriteUInts(m_walkSpriteIds);
+				}
+			
+				bool	
+				FromStream(
+					IReader*				aStream) 
+				{
+					if (!aStream->ReadUInt(m_spriteId))
+						return false;
+					if (!aStream->ReadUInt(m_deadSpriteId))
+						return false;
+					if (!aStream->ReadUInts(m_walkSpriteIds))
+						return false;
+					return true;
+				}
+
+
+				// Public data
+				uint32_t				m_spriteId = 0;
+				uint32_t				m_deadSpriteId = 0;
+				std::vector<uint32_t>	m_walkSpriteIds;
 			};
 
 			struct StartEquipment
@@ -470,6 +524,12 @@ namespace tpublic
 				return (m_itemTypesMask & (1 << i)) != 0;
 			}
 
+			uint32_t
+			GetDefaultSpriteId() const
+			{
+				return m_armorStyles[m_defaultArmorStyleId].m_spriteId;
+			}
+
 			// Base implementation
 			void
 			FromSource(
@@ -487,14 +547,6 @@ namespace tpublic
 						else if (aMember->m_name == "description")
 						{
 							m_description = aMember->GetString();
-						}
-						else if (aMember->m_name == "sprite")
-						{
-							m_spriteId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aMember->GetIdentifier());
-						}
-						else if (aMember->m_name == "sprite_dead")
-						{
-							m_spriteDeadId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aMember->GetIdentifier());
 						}
 						else if (aMember->m_name == "color_1")
 						{
@@ -544,9 +596,10 @@ namespace tpublic
 						{
 							aMember->GetIdArray(DataType::ID_ITEM, m_startInventory);
 						}
-						else if (aMember->m_name == "sprites_walk")
+						else if(aMember->m_name == "default_armor_style")
 						{
-							aMember->GetIdArray(DataType::ID_SPRITE, m_walkSpriteIds);
+							m_defaultArmorStyleId = ArmorStyle::StringToId(aMember->GetIdentifier());
+							TP_VERIFY(m_defaultArmorStyleId != ArmorStyle::INVALID_ID, aMember->m_debugInfo, "'%s' not a valid armor style.", aMember->GetIdentifier());
 						}
 						else if (aMember->m_name == "item_types")
 						{
@@ -571,6 +624,25 @@ namespace tpublic
 								return (uint32_t)System::StringToId(aIdentifier);
 							});
 						}
+						else if(aMember->m_tag == "armor_style")
+						{
+							ArmorStyle::Id armorStyleId = ArmorStyle::StringToId(aMember->m_name.c_str());
+							TP_VERIFY(armorStyleId != ArmorStyle::INVALID_ID, aMember->m_debugInfo, "'%s' not a valid armor style.", aMember->m_name.c_str());
+							m_armorStyles[armorStyleId] = SpriteCollection(aMember);
+						}
+						else if (aMember->m_tag == "weapon_sprites")
+						{
+							ItemType::Id itemTypeId = ItemType::StringToId(aMember->m_name.c_str());
+							TP_VERIFY(itemTypeId != ItemType::INVALID_ID, aMember->m_debugInfo, "'%s' not a valid item type.", aMember->m_name.c_str());
+							bool weapon = ItemType::GetInfo(itemTypeId)->m_flags & ItemType::FLAG_WEAPON;
+							bool shield = ItemType::GetInfo(itemTypeId)->m_flags & ItemType::FLAG_SHIELD;
+							TP_VERIFY(weapon || shield, aMember->m_debugInfo, "'%s' is not a weapon or a shield.", aMember->m_name.c_str());
+							m_weaponSprites[itemTypeId] = std::make_unique<SpriteCollection>(aMember);
+						}
+						else if(aMember->m_name == "armor_decoration")
+						{
+							m_armorDecoration = SpriteCollection(aMember);
+						}
 						else
 						{
 							TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
@@ -586,8 +658,6 @@ namespace tpublic
 				aStream->WriteString(m_displayName);
 				aStream->WriteString(m_description);
 				aStream->WriteOptionalObjectPointer(m_levelProgression);
-				aStream->WriteUInt(m_spriteId);
-				aStream->WriteUInt(m_spriteDeadId);
 				aStream->WriteUInt(m_defaultAttackAbilityId);
 				aStream->WriteObjects(m_startEquipment);
 				m_defaultActionBar.ToStream(aStream);
@@ -599,7 +669,14 @@ namespace tpublic
 				aStream->WritePOD(m_itemTypesMask);
 				aStream->WriteUInts(m_systems);
 				aStream->WriteUInts(m_startInventory);
-				aStream->WriteUInts(m_walkSpriteIds);
+				aStream->WritePOD(m_defaultArmorStyleId);
+				m_armorDecoration.ToStream(aStream);
+
+				for(uint32_t i = 1; i < (uint32_t)ArmorStyle::NUM_IDS; i++)
+					m_armorStyles[i].ToStream(aStream);
+
+				for (uint32_t i = 1; i < (uint32_t)ItemType::NUM_IDS; i++)
+					aStream->WriteOptionalObjectPointer(m_weaponSprites[i]);
 			}
 			
 			bool	
@@ -611,10 +688,6 @@ namespace tpublic
 				if (!aStream->ReadString(m_description))
 					return false;
 				if(!aStream->ReadOptionalObjectPointer(m_levelProgression))
-					return false;
-				if (!aStream->ReadUInt(m_spriteId))
-					return false;
-				if (!aStream->ReadUInt(m_spriteDeadId))
 					return false;
 				if (!aStream->ReadUInt(m_defaultAttackAbilityId))
 					return false;
@@ -638,17 +711,29 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInts(m_startInventory))
 					return false;
-				if (!aStream->ReadUInts(m_walkSpriteIds))
+				if(!aStream->ReadPOD(m_defaultArmorStyleId))
 					return false;
+				if(!m_armorDecoration.FromStream(aStream))
+					return false;
+
+				for (uint32_t i = 1; i < (uint32_t)ArmorStyle::NUM_IDS; i++)
+				{
+					if(!m_armorStyles[i].FromStream(aStream))
+						return false;
+				}
+
+				for (uint32_t i = 1; i < (uint32_t)ItemType::NUM_IDS; i++)
+				{
+					if(!aStream->ReadOptionalObjectPointer(m_weaponSprites[i]))
+						return false;
+				}
+
 				return true;
 			}
 
 			// Public data
 			std::string												m_displayName;
 			std::string												m_description;
-			uint32_t												m_spriteId = 0;
-			uint32_t												m_spriteDeadId = 0;
-			std::vector<uint32_t>									m_walkSpriteIds;
 			Color													m_color1;
 			Color													m_color2;
 			uint32_t												m_defaultAttackAbilityId = 0;
@@ -661,6 +746,10 @@ namespace tpublic
 			std::vector<uint32_t>									m_talentTrees;
 			uint32_t												m_itemTypesMask = 0;
 			std::vector<uint32_t>									m_systems;
+			ArmorStyle::Id											m_defaultArmorStyleId = ArmorStyle::ID_BROWN;
+			SpriteCollection										m_armorStyles[ArmorStyle::NUM_IDS];
+			std::unique_ptr<SpriteCollection>						m_weaponSprites[ItemType::NUM_IDS];
+			SpriteCollection										m_armorDecoration;
 		};
 
 	}

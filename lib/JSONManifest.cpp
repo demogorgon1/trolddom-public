@@ -135,7 +135,7 @@ namespace tpublic
 		{
 			std::unique_ptr<ClassExport> classExport = std::make_unique<ClassExport>();
 			classExport->m_data = aClass;
-			classExport->m_sprite = _GetSpriteExport(aClass->m_spriteId);
+			classExport->m_sprite = _GetSpriteExport(aClass->GetDefaultSpriteId());
 
 			for(uint32_t talentTreeId : aClass->m_talentTrees)
 			{

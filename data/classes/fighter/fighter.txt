@@ -54,10 +54,28 @@ class fighter:
 	
 	systems: [ combat health_regen rage ]
 	
-	sprite: fighter
-	sprite_dead: fighter_dead
-	sprites_walk: [ fighter_walk_1 fighter_walk_2 ]
+	armor_style none:   { sprite: fighter_naked sprite_dead: fighter_naked_dead sprites_walk: [ fighter_naked_walk_1 fighter_naked_walk_2 ] }
+	armor_style brown:  { sprite: fighter       sprite_dead: fighter_dead       sprites_walk: [ fighter_walk_1       fighter_walk_2 ] }
+	armor_style green:  { sprite: fighter_2     sprite_dead: fighter_2_dead     sprites_walk: [ fighter_2_walk_1     fighter_2_walk_2 ] }
+	armor_style cyan:   { sprite: fighter_3     sprite_dead: fighter_3_dead     sprites_walk: [ fighter_3_walk_1     fighter_3_walk_2 ] }
+	armor_style red:    { sprite: fighter_4     sprite_dead: fighter_4_dead     sprites_walk: [ fighter_4_walk_1     fighter_4_walk_2 ] }
+	armor_style purple: { sprite: fighter_5     sprite_dead: fighter_5_dead     sprites_walk: [ fighter_5_walk_1     fighter_5_walk_2 ] }
+	armor_style black:  { sprite: fighter_6     sprite_dead: fighter_6_dead     sprites_walk: [ fighter_6_walk_1     fighter_6_walk_2 ] }
+	armor_style white:  { sprite: fighter_7     sprite_dead: fighter_7_dead     sprites_walk: [ fighter_7_walk_1     fighter_7_walk_2 ] }
+	armor_style yellow: { sprite: fighter_8     sprite_dead: fighter_8_dead     sprites_walk: [ fighter_8_walk_1     fighter_8_walk_2 ] }
 	
+	weapon_sprites weapon_1h_sword: { sprite: fighter_sword_1h sprites_walk: [ fighter_walk_1_sword_1h fighter_walk_2_sword_1h ] }
+	weapon_sprites weapon_1h_mace:  { sprite: fighter_mace_1h  sprites_walk: [ fighter_walk_1_mace_1h  fighter_walk_2_mace_1h ] }
+	weapon_sprites weapon_1h_axe:   { sprite: fighter_axe_1h   sprites_walk: [ fighter_walk_1_axe_1h   fighter_walk_2_axe_1h ] }
+	weapon_sprites weapon_1h_knife: { sprite: fighter_knife_1h sprites_walk: [ fighter_walk_1_knife_1h fighter_walk_2_knife_2h ] }
+	weapon_sprites weapon_2h_sword: { sprite: fighter_sword_2h sprites_walk: [ fighter_walk_1_sword_2h fighter_walk_2_sword_2h ] }
+	weapon_sprites weapon_2h_mace:  { sprite: fighter_mace_2h  sprites_walk: [ fighter_walk_1_mace_2h  fighter_walk_2_mace_2h ] }
+	weapon_sprites weapon_2h_axe:   { sprite: fighter_axe_2h   sprites_walk: [ fighter_walk_1_axe_2h   fighter_walk_2_axe_2h ] }
+	weapon_sprites weapon_2h_staff: { sprite: fighter_staff    sprites_walk: [ fighter_walk_1_staff    fighter_walk_2_staff ] }
+	weapon_sprites shield: 			{ sprite: fighter_shield   sprites_walk: [ fighter_walk_1_shield   fighter_walk_2_shield ] }
+	
+	armor_decoration: { sprite: fighter_decoration sprite_dead: fighter_decoration_dead sprites_walk: [ fighter_decoration_walk_1 fighter_decoration_walk_2 ] }
+
 	color_1: [ 128 32 0 ] 
 	color_2: [ 70 32 0 ] 
 	default_attack: fighter_attack

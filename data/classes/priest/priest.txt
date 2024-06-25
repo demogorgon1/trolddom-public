@@ -5,10 +5,23 @@ class priest:
 	
 	systems: [ combat health_regen mana_regen ]
 	
-	sprite: priest
-	sprite_dead: priest_dead
-	sprites_walk: [ priest_walk_1 priest_walk_2 ]
-	
+	armor_style none:   { sprite: priest_naked sprite_dead: priest_naked_dead sprites_walk: [ priest_naked_walk_1 priest_naked_walk_2 ] }	
+	armor_style brown:  { sprite: priest       sprite_dead: priest_dead       sprites_walk: [ priest_walk_1       priest_walk_2 ] }
+	armor_style green:  { sprite: priest_2     sprite_dead: priest_2_dead     sprites_walk: [ priest_2_walk_1     priest_2_walk_2 ] }
+	armor_style cyan:   { sprite: priest_3     sprite_dead: priest_3_dead     sprites_walk: [ priest_3_walk_1     priest_3_walk_2 ] }
+	armor_style red:    { sprite: priest_4     sprite_dead: priest_4_dead     sprites_walk: [ priest_4_walk_1     priest_4_walk_2 ] }
+	armor_style purple: { sprite: priest_5     sprite_dead: priest_5_dead     sprites_walk: [ priest_5_walk_1     priest_5_walk_2 ] }
+	armor_style black:  { sprite: priest_6     sprite_dead: priest_6_dead     sprites_walk: [ priest_6_walk_1     priest_6_walk_2 ] }
+	armor_style white:  { sprite: priest_7     sprite_dead: priest_7_dead     sprites_walk: [ priest_7_walk_1     priest_7_walk_2 ] }
+	armor_style yellow: { sprite: priest_8     sprite_dead: priest_8_dead     sprites_walk: [ priest_8_walk_1     priest_8_walk_2 ] }
+		
+	weapon_sprites weapon_1h_sword: { sprite: priest_sword_1h sprites_walk: [ priest_walk_1_sword_1h priest_walk_2_sword_1h ] }
+	weapon_sprites weapon_1h_mace:  { sprite: priest_mace_1h  sprites_walk: [ priest_walk_1_mace_1h  priest_walk_2_mace_1h ] }
+	weapon_sprites weapon_1h_knife: { sprite: priest_knife_1h sprites_walk: [ priest_walk_1_knife_1h priest_walk_2_knife_1h ] }
+	weapon_sprites weapon_2h_staff: { sprite: priest_staff    sprites_walk: [ priest_walk_1_staff    priest_walk_2_staff ] }
+		
+	armor_decoration: { sprite: priest_decoration sprite_dead: priest_decoration_dead sprites_walk: [ priest_decoration_walk_1 priest_decoration_walk_2 ] }
+		
 	color_1: [ 210 210 210 ] 
 	color_2: [ 100 100 64 ]
 	default_attack: attack

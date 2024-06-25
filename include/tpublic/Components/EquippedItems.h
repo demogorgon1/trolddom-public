@@ -6,6 +6,7 @@
 #include "../ComponentBase.h"
 #include "../EquipmentSlot.h"
 #include "../ItemInstance.h"
+#include "../ItemType.h"
 #include "../Manifest.h"
 
 namespace tpublic
@@ -70,6 +71,51 @@ namespace tpublic
 					}
 					return false;
 				}
+
+				ArmorStyle::Visual
+				GetArmorStyleVisual(
+					const Manifest*		aManifest) const
+				{
+					const ItemInstance& chest = m_items[EquipmentSlot::ID_CHEST];
+					if(chest.IsSet())
+					{
+						const Data::Item* itemData = aManifest->GetById<Data::Item>(chest.m_itemId);
+						return itemData->GetArmorStyleVisual();
+					}
+
+					ArmorStyle::Visual none;
+					none.m_id = ArmorStyle::ID_NONE;
+					return none;
+				}
+
+				ItemType::Id
+				GetMainHandItemType(
+					const Manifest*		aManifest) const
+				{
+					const ItemInstance& mainHand = m_items[EquipmentSlot::ID_MAIN_HAND];
+					if (mainHand.IsSet())
+					{
+						const Data::Item* itemData = aManifest->GetById<Data::Item>(mainHand.m_itemId);
+						return itemData->m_itemType;
+					}
+
+					return ItemType::ID_NONE;
+				}
+
+				ItemType::Id
+				GetOffHandItemType(
+					const Manifest*		aManifest) const
+				{
+					const ItemInstance& offHand = m_items[EquipmentSlot::ID_OFF_HAND];
+					if (offHand.IsSet())
+					{
+						const Data::Item* itemData = aManifest->GetById<Data::Item>(offHand.m_itemId);
+						return itemData->m_itemType;
+					}
+
+					return ItemType::ID_NONE;
+				}
+
 
 				// Public data
 				ItemInstance	m_items[EquipmentSlot::NUM_IDS];

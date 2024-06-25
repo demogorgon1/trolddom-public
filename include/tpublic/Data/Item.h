@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../ArmorStyle.h"
 #include "../DataBase.h"
 #include "../EquipmentSlot.h"
 #include "../Helpers.h"
@@ -109,6 +110,17 @@ namespace tpublic
 				}
 				return false;
 			}				
+
+			const ArmorStyle::Visual&
+			GetArmorStyleVisual() const
+			{
+				if(m_armorStyleVisual)
+					return m_armorStyleVisual.value();
+
+				// FIXME: this is a bit lazy... (don't have some weird race condition during init)
+				static ArmorStyle::Visual defaultArmorStyleVisual;
+				return defaultArmorStyleVisual;
+			}
 
 			// Helpers
 			bool	IsUnique() const { return m_flags & FLAG_UNIQUE; }
@@ -225,6 +237,10 @@ namespace tpublic
 						{
 							m_valueMultiplier = aChild->GetFloat();
 						}
+						else if(aChild->m_name == "armor_style_visual")
+						{
+							m_armorStyleVisual = ArmorStyle::Visual(aChild);
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -270,6 +286,7 @@ namespace tpublic
 				m_soundEffects.ToStream(aStream);
 				aStream->WritePOD(m_flags);
 				aStream->WriteFloat(m_valueMultiplier);
+				aStream->WriteOptionalObject(m_armorStyleVisual);
 			}
 
 			bool
@@ -320,6 +337,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadFloat(m_valueMultiplier))
 					return false;
+				if(!aStream->ReadOptionalObject(m_armorStyleVisual))
+					return false;
 
 				m_lcString = m_string;
 				Helpers::MakeLowerCase(m_lcString);
@@ -328,28 +347,29 @@ namespace tpublic
 			}
 
 			// Public data
-			std::vector<uint32_t>		m_equipmentSlots;
-			std::vector<uint32_t>		m_lootGroups;
-			uint32_t					m_stackSize = 1;
-			uint32_t					m_useAbilityId = 0;
-			ItemType::Id				m_itemType = ItemType::ID_NONE;
-			UIntRange					m_levelRange;
-			uint32_t					m_requiredLevel = 0;
-			uint32_t					m_itemLevel = 0;
-			uint32_t					m_iconSpriteId = 0;
-			uint32_t					m_cost = 0;
-			Rarity::Id					m_rarity = Rarity::ID_COMMON;
-			std::vector<AddedStat>		m_addedStats;
-			std::optional<UIntRange>	m_weaponDamage;
-			uint32_t					m_weaponCooldown = 0;
-			std::string					m_string;
-			std::string					m_flavor;
-			int32_t						m_budgetBias = 0;
-			ItemBinding::Id				m_itemBinding = ItemBinding::ID_NEVER;
-			SoundEffect::Collection		m_soundEffects;
-			uint32_t					m_flags = 0;
-			uint32_t					m_bagSlots = 0;
-			float						m_valueMultiplier = 1.0f;
+			std::vector<uint32_t>				m_equipmentSlots;
+			std::vector<uint32_t>				m_lootGroups;
+			uint32_t							m_stackSize = 1;
+			uint32_t							m_useAbilityId = 0;
+			ItemType::Id						m_itemType = ItemType::ID_NONE;
+			UIntRange							m_levelRange;
+			uint32_t							m_requiredLevel = 0;
+			uint32_t							m_itemLevel = 0;
+			uint32_t							m_iconSpriteId = 0;
+			uint32_t							m_cost = 0;
+			Rarity::Id							m_rarity = Rarity::ID_COMMON;
+			std::vector<AddedStat>				m_addedStats;
+			std::optional<UIntRange>			m_weaponDamage;
+			uint32_t							m_weaponCooldown = 0;
+			std::string							m_string;
+			std::string							m_flavor;
+			int32_t								m_budgetBias = 0;
+			ItemBinding::Id						m_itemBinding = ItemBinding::ID_NEVER;
+			SoundEffect::Collection				m_soundEffects;
+			uint32_t							m_flags = 0;
+			uint32_t							m_bagSlots = 0;
+			float								m_valueMultiplier = 1.0f;
+			std::optional<ArmorStyle::Visual>	m_armorStyleVisual;
 
 			// Not serialized
 			std::string					m_lcString;

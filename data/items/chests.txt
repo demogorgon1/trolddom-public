@@ -7,6 +7,7 @@ item chest_flimsy_mail_shirt:
 	icon: icon_mail_shirt_1
 	rarity: common
 	string: "Flimsy Mail Shirt"
+	armor_style_visual: { armor_style: brown decoration_color: [ 32 32 32 255 ] }
 }
 
 item chest_tattered_robe:

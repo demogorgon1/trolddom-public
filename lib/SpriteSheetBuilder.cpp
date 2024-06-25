@@ -144,6 +144,10 @@ namespace tpublic
 					});
 				}
 			}
+			else if(aNode->m_name == "skip")
+			{
+				offsetX += width; 
+			}
 			else if(aNode->m_tag == "sprite")
 			{
 				TP_VERIFY(!aNode->m_name.empty(), aNode->m_debugInfo, "Sprite must be named.");

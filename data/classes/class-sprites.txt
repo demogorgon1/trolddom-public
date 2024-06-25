@@ -5,27 +5,236 @@ sprites:
 	size: { width: 16 height: 16 }
 
 	cursor: { position: [ 0 0 ] }
-
+	sprite fighter_naked: { }
 	sprite fighter: { }
-	sprite priest: { }
-	sprite sorcerer: { }
+	sprite fighter_2: { }
+	sprite fighter_3: { }
+	sprite fighter_4: { }
+	sprite fighter_5: { }
+	sprite fighter_6: { }
+	sprite fighter_7: { }
+	sprite fighter_8: { }
+	sprite fighter_staff: { }
+	sprite fighter_sword_1h: { }
+	sprite fighter_axe_1h: { }
+	sprite fighter_mace_1h: { }
+	sprite fighter_knife_1h: { }
+	sprite fighter_sword_2h: { }
+	sprite fighter_axe_2h: { }
+	sprite fighter_mace_2h: { }
+	sprite fighter_shield: { }
 	
 	cursor: { position: [ 0 16 ] }
-	
+	sprite fighter_naked_dead: { }
 	sprite fighter_dead: { }
-	sprite priest_dead: { }
-	sprite sorcerer_dead: { }	
-
-	cursor: { position: [ 0 32 ] }
+	sprite fighter_2_dead: { }
+	sprite fighter_3_dead: { }
+	sprite fighter_4_dead: { }
+	sprite fighter_5_dead: { }
+	sprite fighter_6_dead: { }
+	sprite fighter_7_dead: { }
+	sprite fighter_8_dead: { }
 	
+	cursor: { position: [ 0 32 ] }
+	sprite fighter_naked_walk_1: { }
 	sprite fighter_walk_1: { }
+	sprite fighter_2_walk_1: { }
+	sprite fighter_3_walk_1: { }
+	sprite fighter_4_walk_1: { }
+	sprite fighter_5_walk_1: { }
+	sprite fighter_6_walk_1: { }
+	sprite fighter_7_walk_1: { }
+	sprite fighter_8_walk_1: { }
+	sprite fighter_walk_1_staff: { }
+	sprite fighter_walk_1_sword_1h: { }
+	sprite fighter_walk_1_axe_1h: { }
+	sprite fighter_walk_1_mace_1h: { }
+	sprite fighter_walk_1_knife_1h: { }
+	sprite fighter_walk_1_sword_2h: { }
+	sprite fighter_walk_1_axe_2h: { }
+	sprite fighter_walk_1_mace_2h: { }
+	sprite fighter_walk_1_shield: { }
+	
+	cursor: { position: [ 0 48 ] }
+	sprite fighter_naked_walk_2: { }
+	sprite fighter_walk_2: { }
+	sprite fighter_2_walk_2: { }
+	sprite fighter_3_walk_2: { }
+	sprite fighter_4_walk_2: { }
+	sprite fighter_5_walk_2: { }
+	sprite fighter_6_walk_2: { }
+	sprite fighter_7_walk_2: { }
+	sprite fighter_8_walk_2: { }
+	sprite fighter_walk_2_staff: { }
+	sprite fighter_walk_2_sword_1h: { }
+	sprite fighter_walk_2_axe_1h: { }
+	sprite fighter_walk_2_mace_1h: { }
+	sprite fighter_walk_2_knife_1h: { }
+	sprite fighter_walk_2_sword_2h: { }
+	sprite fighter_walk_2_axe_2h: { }
+	sprite fighter_walk_2_mace_2h: { }
+	sprite fighter_walk_2_shield: { }
+
+	cursor: { position: [ 0 64 ] }
+	sprite priest_naked: { }
+	sprite priest: { }
+	sprite priest_2: { }
+	sprite priest_3: { }
+	sprite priest_4: { }
+	sprite priest_5: { }
+	sprite priest_6: { }
+	sprite priest_7: { }
+	sprite priest_8: { }
+	sprite priest_staff: { }
+	sprite priest_sword_1h: { }
+	skip: { }
+	sprite priest_mace_1h: { }
+	sprite priest_knife_1h: { }
+	
+	cursor: { position: [ 0 80 ] }
+	sprite priest_naked_dead: { }
+	sprite priest_dead: { }
+	sprite priest_2_dead: { }
+	sprite priest_3_dead: { }
+	sprite priest_4_dead: { }
+	sprite priest_5_dead: { }
+	sprite priest_6_dead: { }
+	sprite priest_7_dead: { }
+	sprite priest_8_dead: { }
+	
+	cursor: { position: [ 0 96 ] }
+	sprite priest_naked_walk_1: { }
 	sprite priest_walk_1: { }
-	sprite sorcerer_walk_1: { }	
+	sprite priest_2_walk_1: { }
+	sprite priest_3_walk_1: { }
+	sprite priest_4_walk_1: { }
+	sprite priest_5_walk_1: { }
+	sprite priest_6_walk_1: { }
+	sprite priest_7_walk_1: { }
+	sprite priest_8_walk_1: { }
+	sprite priest_walk_1_staff: { }
+	sprite priest_walk_1_sword_1h: { }
+	skip: { }
+	sprite priest_walk_1_mace_1h: { }
+	sprite priest_walk_1_knife_1h: { }
+	
+	cursor: { position: [ 0 112 ] }
+	sprite priest_naked_walk_2: { }
+	sprite priest_walk_2: { }
+	sprite priest_2_walk_2: { }
+	sprite priest_3_walk_2: { }
+	sprite priest_4_walk_2: { }
+	sprite priest_5_walk_2: { }
+	sprite priest_6_walk_2: { }
+	sprite priest_7_walk_2: { }
+	sprite priest_8_walk_2: { }
+	sprite priest_walk_2_staff: { }
+	sprite priest_walk_2_sword_1h: { }
+	skip: { }
+	sprite priest_walk_2_mace_1h: { }
+	sprite priest_walk_2_knife_1h: { }
+	
+	cursor: { position: [ 0 128 ] }
+	sprite sorcerer_naked: { }
+	sprite sorcerer: { }
+	sprite sorcerer_2: { }
+	sprite sorcerer_3: { }
+	sprite sorcerer_4: { }
+	sprite sorcerer_5: { }
+	sprite sorcerer_6: { }
+	sprite sorcerer_7: { }
+	sprite sorcerer_8: { }
+	sprite sorcerer_staff: { }
+	sprite sorcerer_sword_1h: { }
+	skip: { }
+	skip: { }
+	sprite sorcerer_knife_1h: { }
+	
+	cursor: { position: [ 0 144 ] }
+	sprite sorcerer_naked_dead: { }
+	sprite sorcerer_dead: { }
+	sprite sorcerer_2_dead: { }
+	sprite sorcerer_3_dead: { }
+	sprite sorcerer_4_dead: { }
+	sprite sorcerer_5_dead: { }
+	sprite sorcerer_6_dead: { }
+	sprite sorcerer_7_dead: { }
+	sprite sorcerer_8_dead: { }
+	
+	cursor: { position: [ 0 160 ] }
+	sprite sorcerer_naked_walk_1: { }	
+	sprite sorcerer_walk_1: { }
+	sprite sorcerer_2_walk_1: { }
+	sprite sorcerer_3_walk_1: { }
+	sprite sorcerer_4_walk_1: { }
+	sprite sorcerer_5_walk_1: { }
+	sprite sorcerer_6_walk_1: { }
+	sprite sorcerer_7_walk_1: { }
+	sprite sorcerer_8_walk_1: { }
+	sprite sorcerer_walk_1_staff: { }
+	sprite sorcerer_walk_1_sword_1h: { }
+	skip: { }
+	skip: { }
+	sprite sorcerer_walk_1_knife_1h: { }
+	
+	cursor: { position: [ 0 176 ] }
+	sprite sorcerer_naked_walk_2: { }
+	sprite sorcerer_walk_2: { }
+	sprite sorcerer_2_walk_2: { }
+	sprite sorcerer_3_walk_2: { }
+	sprite sorcerer_4_walk_2: { }
+	sprite sorcerer_5_walk_2: { }
+	sprite sorcerer_6_walk_2: { }
+	sprite sorcerer_7_walk_2: { }
+	sprite sorcerer_8_walk_2: { }
+	sprite sorcerer_walk_2_staff: { }
+	sprite sorcerer_walk_2_sword_1h: { }
+	skip: { }
+	skip: { }
+	sprite sorcerer_walk_2_knife_1h: { }
+
+}
+
+sprites:
+{
+	source: "classes-decorations.png"
+
+	size: { width: 16 height: 16 }
+	
+	cursor: { position: [ 0 0 ] }
+	sprite fighter_decoration: { }
+	
+	cursor: { position: [ 0 16 ] }
+	sprite fighter_decoration_dead: { }
+	
+	cursor: { position: [ 0 32 ] }
+	sprite fighter_decoration_walk_1: { }
 
 	cursor: { position: [ 0 48 ] }
+	sprite fighter_decoration_walk_2: { }
+
+	cursor: { position: [ 0 64 ] }
+	sprite priest_decoration: { }
 	
-	sprite fighter_walk_2: { }
-	sprite priest_walk_2: { }
-	sprite sorcerer_walk_2: { }	
+	cursor: { position: [ 0 80 ] }
+	sprite priest_decoration_dead: { }
+	
+	cursor: { position: [ 0 96 ] }
+	sprite priest_decoration_walk_1: { }
+
+	cursor: { position: [ 0 112 ] }
+	sprite priest_decoration_walk_2: { }
+
+	cursor: { position: [ 0 128 ] }
+	sprite sorcerer_decoration: { }
+	
+	cursor: { position: [ 0 144 ] }
+	sprite sorcerer_decoration_dead: { }
+	
+	cursor: { position: [ 0 160 ] }
+	sprite sorcerer_decoration_walk_1: { }
+
+	cursor: { position: [ 0 176 ] }
+	sprite sorcerer_decoration_walk_2: { }
 
 }
