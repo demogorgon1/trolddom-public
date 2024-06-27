@@ -530,6 +530,18 @@ namespace tpublic
 				return m_armorStyles[m_defaultArmorStyleId].m_spriteId;
 			}
 
+			uint32_t
+			GetStartEquipmentItemId(
+				EquipmentSlot::Id		aEquipmentSlotId) const
+			{
+				for(const StartEquipment& t : m_startEquipment)
+				{
+					if(t.m_equipmentSlotId == aEquipmentSlotId)
+						return t.m_itemId;
+				}
+				return 0;
+			}
+
 			// Base implementation
 			void
 			FromSource(
