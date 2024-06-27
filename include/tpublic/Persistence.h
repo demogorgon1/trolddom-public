@@ -42,7 +42,7 @@ namespace tpublic::Persistence
 		{ "account",			PLAYER_PERSISTENCE_TYPE_PER_ACCOUNT },
 		{ "volatile",			PLAYER_PERSISTENCE_TYPE_PER_CHARACTER },
 		{ "main",				PLAYER_PERSISTENCE_TYPE_PER_CHARACTER },
-		{ "stats",				PLAYER_PERSISTENCE_TYPE_PER_ACCOUNT },
+		{ "stats",				PLAYER_PERSISTENCE_TYPE_PER_CHARACTER },
 		{ "player_world_stash",	PLAYER_PERSISTENCE_TYPE_PER_CHARACTER }
 	};
 

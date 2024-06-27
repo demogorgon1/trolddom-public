@@ -19,6 +19,7 @@ item chest_tattered_robe:
 	icon: icon_cloth_shirt_4
 	rarity: common
 	string: "Tattered Robe"
+	armor_style_visual: { armor_style: brown decoration_color: [ 32 32 32 128 ] }
 }
 
 item chest_sheriff_wellington_1:
