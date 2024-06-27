@@ -276,9 +276,9 @@ namespace tpublic
 				}
 
 				// Public data
-				int32_t											m_minDelay = 10 * 10; // 10 secs
-				int32_t											m_cooldownRangeMin = 30 * 10; // 30 secs
-				int32_t											m_cooldownRangeMax = 50 * 10; // 50 secs
+				int32_t											m_minDelay = 30 * 10; // 30 secs
+				int32_t											m_cooldownRangeMin = 60 * 10; // 1 min
+				int32_t											m_cooldownRangeMax = 120 * 10; // 2 min
 				bool											m_despawnRequired = false; 
 				bool											m_onlyWhenTriggered = false;
 			};

@@ -335,5 +335,5 @@ map_entity_spawn .wildlife:
 	entity .wolf_9_b: { level: 9 weight: 1 } 
 	entity .wolf_9_c: { level: 9 weight: 1 } 
 	
-	spawn_timer: { cooldown_range_min: 450 cooldown_range_max: 600 min_delay: 300 }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}	
 }

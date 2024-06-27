@@ -129,7 +129,7 @@ map_entity_spawn .minor_boss:
 
 map_entity_spawn .pack:
 {	
-	spawn_timer: { cooldown_range_min: 600 cooldown_range_max: 1200 min_delay: 500 }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}	
 }
 
 map_entity_spawn .object:

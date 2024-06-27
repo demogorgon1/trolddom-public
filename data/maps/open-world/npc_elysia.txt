@@ -154,7 +154,7 @@ item .elysia_quest_item_2:
 {
 	icon: icon_mushroom_2
 	item_level: 5
-	loot_groups: [ .elysia_quest_item ]
+	loot_groups: [ .elysia_quest_item_2 ]
 	flags: [ not_sellable ]
 	string: "Elderwood Mushroom"
 	stack: 5

@@ -201,84 +201,100 @@ map_entity_spawn .spawn_of_umbracoth:
 map_entity_spawn .arcane_anomaly:
 {
 	entity arcane_anomaly: { weight: 1 }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn .crab_man:
 {
 	entity crab_man_2: { weight: 1 }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn .crab_man_3:
 {
 	entity crab_man_3: { weight: 1 }
 	entity crab_caster_3: { weight: 1 }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn .crab_man_4:
 {
 	entity crab_man_4: { weight: 1 }
 	entity crab_caster_4: { weight: 1 }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn .crab_brute_5:
 {
 	entity crab_brute_5: { weight: 1 }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn .crab_ambusher_6:
 {
 	spawn_timer: { only_when_triggered: true }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn .crab_boss_4:
 {
 	entity crab_boss_4: { weight: 1 }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn .crab_boss_5:
 {
 	entity crab_boss_5: { weight: 1 }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn .eldertree_woods_goblin_scout_5:
 {
 	entity eldertree_woods_goblin_scout_5: { weight: 1 }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn .dark_cove_goblin_6:
 {
 	entity dark_cove_goblin_warrior_6: { weight: 1 }
 	entity dark_cove_goblin_shaman_6: { weight: 1 }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn .dark_cove_goblin_commander_guzbrorg:
 {
 	entity dark_cove_goblin_commander_guzbrorg: { weight: 1 }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn .risen_spirit_7:
 {
 	entity risen_spirit_7: { weight: 1 }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn .sea_spirit_7:
 {
 	entity sea_spirit_7: { weight: 1 }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn .living_dead_8:
 {
 	entity living_dead_8: { weight: 1 }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn .drowned_screecher_8:
 {
 	entity drowned_screecher_8: { weight: 1 }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn .goblin_ranger_9:
 {
 	entity goblin_ranger_9: { weight: 1 }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn .aetheris_bay_goblin_9:
@@ -286,6 +302,7 @@ map_entity_spawn .aetheris_bay_goblin_9:
 	entity goblin_ranger_9: { weight: 1 }
 	entity goblin_firestarter_9: { weight: 1 }
 	entity goblin_pillager_9: { weight: 1 }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn .abandoned_keep_undead_9:
@@ -293,23 +310,27 @@ map_entity_spawn .abandoned_keep_undead_9:
 	entity skeleton_9_a: { weight: 1 }
 	entity skeleton_9_b: { weight: 1 }
 	entity skeleton_9_c: { weight: 1 }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn .wasteland_crab_men_10:
 {
 	entity wasteland_crab_man_10_a: { weight: 1 }
 	entity wasteland_crab_man_10_b: { weight: 1 }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn .wasteland_undead_10:
 {
 	entity wasteland_undead_10_a: { weight: 1 }
 	entity wasteland_undead_10_b: { weight: 1 }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn .ghastly_entity_9:
 {
 	entity ghastly_entity_9: { weight: 1 }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn .hermit_trigger:
@@ -320,17 +341,19 @@ map_entity_spawn .hermit_trigger:
 map_entity_spawn .skeleton_chef_9:
 {
 	entity skeleton_chef_9: { weight: 1 }
-	spawn_timer: { min_delay: 300 cooldown_range_min: 600 cooldown_range_max: 1200 }
+	spawn_timer: !NPC_RESPAWN_RARE{}
 }
 
 map_entity_spawn .hogroth_the_slippery:
 {
 	entity hogroth_the_slippery: { weight: 1 }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}	
 }
 
 map_entity_spawn .dungeon_crab_man_9:
 {
 	entity dungeon_crab_man_9: { weight: 1 }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}		
 }
 
 map_entity_spawn .junjun_door:
