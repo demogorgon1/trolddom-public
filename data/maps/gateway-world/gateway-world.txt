@@ -327,7 +327,7 @@ map gateway_world:
 			execute add_entity_spawns:
 			{
 				entity_spawn: [ herbalism ]
-				probability: 8
+				probability: 6
 				terrain: [ flat ]
 				neighbor_terrain_probability_bonus<trees>: 12
 				neighbor_terrain_probability_bonus<rocks>: 2
@@ -337,8 +337,8 @@ map gateway_world:
 			execute add_entity_spawns:
 			{
 				entity_spawn: [ mining ]
-				probability: 100
-				terrain: [ rocks flat ]
+				probability: 70
+				terrain: [ rocks ]
 				neighbor_terrain_required: flat
 				neighbor_terrain_required: rocks
 				min_distance_to_nearby: 2
@@ -347,7 +347,7 @@ map gateway_world:
 			execute add_entity_spawns:
 			{
 				entity_spawn: [ underworld_shrine holy_altar ]
-				probability: 2
+				probability: 1
 				terrain: [ flat ]
 				min_distance_to_nearby: 1
 			}		
