@@ -45,7 +45,7 @@ item waist_sylas_2:
 	stat_weight constitution: 1
 }
 
-item waist_hermit_1:
+item waist_orgh_1:
 {
 	type: armor_mail
 	binds: when_picked_up

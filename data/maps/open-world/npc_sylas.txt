@@ -134,7 +134,7 @@ quest .sylas_2:
 	type: dungeon
 	prerequisites: [ .sylas_1 ]
 	
-	reward_one_item: [ waist_sylas_2 ring_sylas_1 chest_sylas_1 ]
+	reward_one_item: [ waist_sylas_2 neck_sylas_1 chest_sylas_1 ]
 }
 
 ############################################################
@@ -222,5 +222,5 @@ quest .sylas_4:
 	type: dungeon
 	prerequisites: [ .xazax_1 ]
 	
-	reward_one_item: [ ranged_sylas_1 neck_sylas_1 neck_sylas_2 ]
+	reward_one_item: [ ranged_sylas_1 neck_sylas_3 neck_sylas_2 ]
 }

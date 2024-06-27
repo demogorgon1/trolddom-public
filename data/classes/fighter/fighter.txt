@@ -67,7 +67,7 @@ class fighter:
 	weapon_sprites weapon_1h_sword: { sprite: fighter_sword_1h sprites_walk: [ fighter_walk_1_sword_1h fighter_walk_2_sword_1h ] }
 	weapon_sprites weapon_1h_mace:  { sprite: fighter_mace_1h  sprites_walk: [ fighter_walk_1_mace_1h  fighter_walk_2_mace_1h ] }
 	weapon_sprites weapon_1h_axe:   { sprite: fighter_axe_1h   sprites_walk: [ fighter_walk_1_axe_1h   fighter_walk_2_axe_1h ] }
-	weapon_sprites weapon_1h_knife: { sprite: fighter_knife_1h sprites_walk: [ fighter_walk_1_knife_1h fighter_walk_2_knife_2h ] }
+	weapon_sprites weapon_1h_knife: { sprite: fighter_knife_1h sprites_walk: [ fighter_walk_1_knife_1h fighter_walk_2_knife_1h ] }
 	weapon_sprites weapon_2h_sword: { sprite: fighter_sword_2h sprites_walk: [ fighter_walk_1_sword_2h fighter_walk_2_sword_2h ] }
 	weapon_sprites weapon_2h_mace:  { sprite: fighter_mace_2h  sprites_walk: [ fighter_walk_1_mace_2h  fighter_walk_2_mace_2h ] }
 	weapon_sprites weapon_2h_axe:   { sprite: fighter_axe_2h   sprites_walk: [ fighter_walk_1_axe_2h   fighter_walk_2_axe_2h ] }

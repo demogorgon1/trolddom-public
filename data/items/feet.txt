@@ -46,7 +46,7 @@ item feet_deputy_larsen_1:
 	stat_weight constitution: 1
 }
 
-item feet_hermit_1:
+item feet_orgh_1:
 {
 	type: armor_plate
 	binds: when_picked_up
@@ -54,7 +54,7 @@ item feet_hermit_1:
 	required_level: 8
 	rarity: uncommon
 	icon: icon_mail_boots_2		
-	string: "Hermit's Floorscrapers"
+	string: "Servant's Floorscrapers"
 	stat_weight constitution: 1
 	stat_weight spirit: 1
 }

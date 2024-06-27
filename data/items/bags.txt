@@ -1,37 +1,40 @@
 item bag_small_brown_pouch:
 {
 	equipment_slots: [ bag_1 bag_2 bag_3 ]
-	loot_groups: [ world_drops_junk ]
+	loot_groups: [ world_drops_uncommon ]
 	type: miscellaneous
 	required_level: 1
 	icon: icon_brown_bag
 	rarity: common
 	string: "Small Brown Pouch" 
 	bag_slots: 4
+	level_range: [ 3 6 ]
 }
 
 item bag_small_green_pouch:
 {
 	equipment_slots: [ bag_1 bag_2 bag_3 ]
-	loot_groups: [ world_drops_junk ]
+	loot_groups: [ world_drops_uncommon ]
 	type: miscellaneous
 	required_level: 1
 	icon: icon_green_bag
 	rarity: common
 	string: "Small Green Pouch" 
 	bag_slots: 4
+	level_range: [ 3 6 ]
 }
 
 item bag_small_red_pouch:
 {
 	equipment_slots: [ bag_1 bag_2 bag_3 ]
-	loot_groups: [ world_drops_junk ]
+	loot_groups: [ world_drops_uncommon ]
 	type: miscellaneous
 	required_level: 1
 	icon: icon_red_bag
 	rarity: common
 	string: "Small Red Pouch" 
 	bag_slots: 4
+	level_range: [ 3 6 ]
 }
 
 item bag_brown_bag:
@@ -45,6 +48,7 @@ item bag_brown_bag:
 	rarity: uncommon
 	string: "Brown Bag" 
 	bag_slots: 6
+	level_range: [ 5 10 ]
 }
 
 item bag_blue_bag:
@@ -58,4 +62,5 @@ item bag_blue_bag:
 	rarity: uncommon
 	string: "Blue Bag" 
 	bag_slots: 6
+	level_range: [ 5 10 ]
 }
