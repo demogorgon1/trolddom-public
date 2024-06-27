@@ -31,5 +31,6 @@ default_sound_effects:
 	}
 	
 	consumable: eat_1
+	level_up: spell_13
 
 }

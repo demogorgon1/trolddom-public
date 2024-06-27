@@ -34,6 +34,7 @@ sound spell_9: { source: "spell-9.wav" }
 sound spell_10: { source: "spell-10.wav" }
 sound spell_11: { source: "spell-11.wav" }
 sound spell_12: { source: "spell-12.wav" }
+sound spell_13: { source: "spell-13.wav" }
 sound walk_1: { source: "walk-1.wav" }
 sound buy_1: { source: "buy-1.wav" }
 sound sell_1: { source: "sell-1.wav" }
