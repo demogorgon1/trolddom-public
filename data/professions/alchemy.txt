@@ -93,7 +93,7 @@ ability .learn_healing_potion:
 {
 	string: "Recipe: Healing Potion"
 	description: "Teaches you how to make a Healing Potion."
-	flags: [ target_self ]
+	flags: [ target_self item ]
 	cast_time: 20
 	icon: icon_scroll_1
 	cooldowns: [ global ]	
@@ -135,7 +135,7 @@ ability .learn_mana_potion:
 {
 	string: "Recipe: Mana Potion"
 	description: "Teaches you how to make a Mana Potion."
-	flags: [ target_self ]
+	flags: [ target_self item ]
 	cast_time: 20
 	icon: icon_scroll_1
 	cooldowns: [ global ]	
@@ -177,7 +177,7 @@ ability .learn_spell_juice:
 {
 	string: "Recipe: Spell Juice"
 	description: "Teaches you how to make Spell Juice."
-	flags: [ target_self ]
+	flags: [ target_self item ]
 	cast_time: 20
 	icon: icon_scroll_1
 	cooldowns: [ global ]	

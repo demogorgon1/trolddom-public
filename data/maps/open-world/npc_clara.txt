@@ -77,7 +77,7 @@ ability .learn_potato_stew:
 {
 	string: "Recipe: Potato Stew"
 	description: "Learn to make Potato Stew."
-	flags: [ target_self ]
+	flags: [ target_self item ]
 	cast_time: 20
 	icon: icon_scroll_1
 	cooldowns: [ global ]	
