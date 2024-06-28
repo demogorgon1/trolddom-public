@@ -343,6 +343,16 @@ sprites:
 	sprite icon_eyeball : { tags: [ icon ] }
 	sprite icon_necklace_6 : { tags: [ icon ] }
 	sprite icon_severed_head : { tags: [ icon ] }
+	sprite icon_wizard_hat_3 : { tags: [ icon armor_cloth head ] }
+	sprite icon_wizard_hat_4 : { tags: [ icon armor_cloth head ] }
+	sprite icon_cloth_shirt_5 : { tags: [ icon armor_cloth chest ] }
+	sprite icon_cloth_shirt_6 : { tags: [ icon armor_cloth chest ] }
+	sprite icon_pants_3 : { tags: [ icon armor_cloth legs ] }
+	sprite icon_slippers_1 : { tags: [ icon armor_cloth feet ] }
+	sprite icon_slippers_2 : { tags: [ icon armor_cloth feet ] }
+	sprite icon_cloth_belt_2 : { tags: [ icon armor_cloth waist ] }
+	sprite icon_cloth_belt_3 : { tags: [ icon armor_cloth waist ] }
+	
 }
 
 
