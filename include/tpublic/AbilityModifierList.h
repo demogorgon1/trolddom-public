@@ -11,6 +11,7 @@ namespace tpublic
 	class AbilityModifierList
 	{
 	public:
+		void														Reset();
 		bool														SetAbilityModifierIds(
 																		const Manifest*						aManifest,
 																		const std::vector<uint32_t>&		aAbilityModifierIds);

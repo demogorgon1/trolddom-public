@@ -129,6 +129,42 @@ namespace tpublic
 				std::vector<uint32_t>	m_tags;
 			};
 
+			typedef std::function<bool(uint32_t)> Filter;
+
+			const Entry*
+			TryPickRandomWithFilter(
+				std::mt19937&									aRandom,
+				Filter											aFilter) const
+			{
+				if (m_entries.empty())
+					return NULL;
+
+				uint32_t filteredTotalWeight = 0;
+				for (const Entry& t : m_entries)
+				{
+					if(aFilter(t.m_id))
+						filteredTotalWeight += t.m_weight;
+				}
+
+				std::uniform_int_distribution<uint32_t> distribution(1, filteredTotalWeight);
+				uint32_t roll = distribution(aRandom);
+
+				uint32_t sum = 0;
+				for (const Entry& t : m_entries)
+				{
+					if(aFilter(t.m_id))
+					{
+						sum += t.m_weight;
+
+						if (roll <= sum)
+							return &t;
+					}
+				}
+
+				assert(false);
+				return NULL;
+			}
+
 			const Entry*
 			TryPickRandom(
 				std::mt19937&									aRandom) const

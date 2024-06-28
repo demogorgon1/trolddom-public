@@ -224,6 +224,25 @@ namespace tpublic
 							sprite->m_info.m_namedAnchors.push_back(t);
 						});
 					}
+					else if(aSpriteComponent->m_name == "icon_meta_data")
+					{
+						SpriteInfo::IconMetaData t;
+						aSpriteComponent->GetObject()->ForEachChild([&](
+							const SourceNode* aChild)
+						{
+							if (aChild->m_name == "min_level")
+								t.m_minLevel = aChild->GetUInt32();
+							else if(aChild->m_name == "max_level")
+								t.m_maxLevel = aChild->GetUInt32();
+							else if (aChild->m_name == "min_rarity")
+								t.m_minRarity = Rarity::StringToId(aChild->GetIdentifier());
+							else if (aChild->m_name == "max_rarity")
+								t.m_maxRarity = Rarity::StringToId(aChild->GetIdentifier());
+							else
+								TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+						});
+						sprite->m_info.m_iconMetaData = t;
+					}
 					else
 					{
 						TP_VERIFY(false, aNode->m_debugInfo, "Invalid item in 'sprite'.");

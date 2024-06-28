@@ -92,6 +92,22 @@ name_template npc_goblin:
 	}
 }
 
+name_template npc_goblin_simple:
+{
+	possibility<5>:	
+	{
+		tags: [ evil demon ]
+
+		generated_name: [ demon_name ]
+	}
+
+	possibility<5>:	
+	{
+		generated_name: [ tolkienesque_name ]
+	}
+
+}
+
 name_template npc_human:
 {
 	possibility<1>:	

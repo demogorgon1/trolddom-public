@@ -103,14 +103,30 @@ namespace tpublic
 					Segment(
 						const SourceNode*				aSource)
 					{
-						if(aSource->m_type == SourceNode::TYPE_IDENTIFIER)
+						if (aSource->m_type == SourceNode::TYPE_OBJECT)
+						{
+							aSource->GetObject()->ForEachChild([&](
+								const SourceNode* aChild)
+							{
+								if(aChild->m_name == "name_template")
+									m_nameTemplateId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_NAME_TEMPLATE, aChild->GetIdentifier());
+								else 
+									TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+							});
+						}
+						else if(aSource->m_type == SourceNode::TYPE_IDENTIFIER)
+						{
 							m_tagId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TAG, aSource->GetIdentifier());
+						}
 						else
+						{
 							m_string = aSource->GetString();
+						}
 					}
 
 					uint32_t							m_tagId = 0;
 					std::string							m_string;
+					uint32_t							m_nameTemplateId = 0;
 				};
 
 				std::vector<Segment>					m_prefix;
@@ -205,6 +221,8 @@ namespace tpublic
 		void							_GetAbilities(
 											std::vector<const Data::Ability*>&	aOut) const;
 		const char*						_PickIconName(
+											uint32_t							aLevel,
+											Rarity::Id							aRarity,
 											const std::unordered_set<uint32_t>&	aMustHaveTags,
 											const std::vector<uint32_t>&		aTags);
 		GeneratedSource*				_CreateGeneratedSource();

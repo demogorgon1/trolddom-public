@@ -34,7 +34,7 @@ generation_job world_drops:
 		# Common (junk) items
 		{
 			designations:
-			[				
+			[	
 				{ weight: 20 prefix: [ adjective " " ] }
 			]
 			
@@ -47,7 +47,7 @@ generation_job world_drops:
 				binds: never
 				max_different_stats: 0
 				loot_groups: [ world_drops_junk ]		
-				count: 25				
+				count: 80				
 			}				
 		}
 		
@@ -69,7 +69,7 @@ generation_job world_drops:
 					binds: when_equipped
 					max_different_stats: 3
 					loot_groups: [ world_drops_uncommon ]
-					count: 50	
+					count: 200
 				}
 			}
 			
@@ -84,6 +84,7 @@ generation_job world_drops:
 
 			designations:
 			[				
+				{ weight: 8 suffix: [ " of " { name_template: npc_goblin_simple } ] }						
 				{ weight: 5 prefix: [ adjective " " ] suffix: [ " of the " noun ] }
 				{ weight: 5 prefix: [ adjective " " noun " " ] }
 				{ weight: 5 suffix: [ " of the " adjective " " noun ] }
@@ -92,6 +93,12 @@ generation_job world_drops:
 				{ weight: 2 prefix: [ creature "slayer " ] }
 				{ weight: 2 prefix: [ predator "killer " ] }
 				{ weight: 2 prefix: [ creature "killer " ] }
+				{ weight: 1 suffix: [ " of " american_forename_male ] }						
+				{ weight: 1 suffix: [ " of " american_forename_female ] }						
+				{ weight: 1 prefix: [ american_forename_male "'s " ] }
+				{ weight: 1 prefix: [ american_forename_female "'s " ] }
+				{ weight: 1 prefix: [ american_forename_male "'s " adjective " " ] }
+				{ weight: 1 prefix: [ american_forename_female "'s " adjective " " ] }
 			]
 
 			{
@@ -106,7 +113,7 @@ generation_job world_drops:
 					special_propabilities: [ 16 ]
 					stat_weights: { constitution: 1 }
 					loot_groups: [ world_drops_rare ]		
-					count: 50				
+					count: 200				
 				}
 			}
 
@@ -130,7 +137,7 @@ generation_job world_drops:
 					special_propabilities: [ 40 5 ]
 					stat_weights: { constitution: 1 }
 					loot_groups: [ world_drops_epic ]		
-					count: 75				
+					count: 300
 				}
 			}
 		}
@@ -179,7 +186,7 @@ generation_job world_drops:
 				binds: never
 				max_different_stats: 0
 				loot_groups: [ world_drops_junk ]
-				count: 100			
+				count: 400			
 			}		
 		}
 
@@ -201,7 +208,7 @@ generation_job world_drops:
 					binds: when_equipped
 					max_different_stats: 3
 					loot_groups: [ world_drops_uncommon ]
-					count: 100	
+					count: 400	
 				}
 			}
 			
@@ -216,6 +223,7 @@ generation_job world_drops:
 
 			designations:
 			[				
+				{ weight: 8 suffix: [ " of " { name_template: npc_goblin_simple } ] }						
 				{ weight: 5 prefix: [ adjective " " ] suffix: [ " of the " noun ] }
 				{ weight: 5 prefix: [ adjective " " noun " " ] }
 				{ weight: 5 suffix: [ " of the " adjective " " noun ] }
@@ -224,6 +232,12 @@ generation_job world_drops:
 				{ weight: 2 prefix: [ creature "slayer " ] }
 				{ weight: 2 prefix: [ predator "killer " ] }
 				{ weight: 2 prefix: [ creature "killer " ] }
+				{ weight: 1 suffix: [ " of " american_forename_male ] }						
+				{ weight: 1 suffix: [ " of " american_forename_female ] }						
+				{ weight: 1 prefix: [ american_forename_male "'s " ] }
+				{ weight: 1 prefix: [ american_forename_female "'s " ] }
+				{ weight: 1 prefix: [ american_forename_male "'s " adjective " " ] }
+				{ weight: 1 prefix: [ american_forename_female "'s " adjective " " ] }
 			]
 
 			{
@@ -238,7 +252,7 @@ generation_job world_drops:
 					special_propabilities: [ 16 ]
 					stat_weights: { constitution: 1 }
 					loot_groups: [ world_drops_rare ]		
-					count: 100				
+					count: 400				
 				}
 			}
 
@@ -262,7 +276,7 @@ generation_job world_drops:
 					special_propabilities: [ 40 5 ]
 					stat_weights: { constitution: 1 }
 					loot_groups: [ world_drops_epic ]		
-					count: 100				
+					count: 400				
 				}
 			}
 		

@@ -2,6 +2,7 @@
 
 #include "DataErrorHandling.h"
 #include "Image.h"
+#include "Rarity.h"
 #include "Vec2.h"
 
 namespace tpublic
@@ -51,6 +52,40 @@ namespace tpublic
 			Vec2					m_size;
 		};
 
+		struct IconMetaData
+		{
+			void
+			ToStream(
+				IWriter*	aStream) const 
+			{
+				aStream->WriteUInt(m_minLevel);
+				aStream->WriteUInt(m_maxLevel);
+				aStream->WritePOD(m_minRarity);
+				aStream->WritePOD(m_maxRarity);
+			}
+
+			bool
+			FromStream(
+				IReader*	aStream) 
+			{
+				if (!aStream->ReadUInt(m_minLevel))
+					return false;
+				if (!aStream->ReadUInt(m_maxLevel))
+					return false;
+				if (!aStream->ReadPOD(m_minRarity))
+					return false;
+				if (!aStream->ReadPOD(m_maxRarity))
+					return false;
+				return true;
+			}
+
+			// Public data
+			uint32_t				m_minLevel = 0;
+			uint32_t				m_maxLevel = 0;
+			Rarity::Id				m_minRarity = Rarity::INVALID_ID;
+			Rarity::Id				m_maxRarity = Rarity::INVALID_ID;
+		};
+
 		static inline uint8_t 
 		StringToFlag(			
 			const char*		aString)
@@ -85,6 +120,7 @@ namespace tpublic
 			m_origin.ToStream(aStream);
 			aStream->WriteObjects(m_namedAnchors);
 			aStream->WritePOD(m_averageColor);
+			aStream->WriteOptionalObject(m_iconMetaData);
 
 			aStream->WriteUInt(m_borderTable.size());
 			for(BorderTable::const_iterator i = m_borderTable.cbegin(); i != m_borderTable.cend(); i++)
@@ -115,6 +151,8 @@ namespace tpublic
 			if(!aStream->ReadObjects(m_namedAnchors))
 				return false;
 			if(!aStream->ReadPOD(m_averageColor))
+				return false;
+			if(!aStream->ReadOptionalObject(m_iconMetaData))
 				return false;
 
 			{
@@ -173,6 +211,29 @@ namespace tpublic
 			return m_borders;
 		}
 
+		bool
+		FilterByIconMetaData(
+			uint32_t		aLevel,
+			Rarity::Id		aRarity) const
+		{
+			if(!m_iconMetaData)
+				return false;
+
+			if(m_iconMetaData->m_minLevel != 0 && aLevel < m_iconMetaData->m_minLevel)
+				return false;
+
+			if (m_iconMetaData->m_maxLevel != 0 && aLevel > m_iconMetaData->m_maxLevel)
+				return false;
+
+			if (m_iconMetaData->m_minRarity != Rarity::INVALID_ID && aRarity < m_iconMetaData->m_minRarity)
+				return false;
+
+			if (m_iconMetaData->m_maxRarity != Rarity::INVALID_ID && aRarity < m_iconMetaData->m_maxRarity)
+				return false;
+
+			return true;
+		}
+
 		// Public data
 		uint8_t						m_flags = 0;
 		uint32_t					m_tileLayer = 0;
@@ -183,6 +244,7 @@ namespace tpublic
 		uint32_t					m_deadSpriteId = 0;
 		uint32_t					m_altGreyscaleSpriteId = 0;
 		std::vector<uint32_t>		m_altTileSpriteIds;
+		std::optional<IconMetaData>	m_iconMetaData;
 
 		// This is a bit wonky, only using a shared_ptr here so SpriteInfo can be copied easily.
 		typedef std::unordered_map<uint32_t, std::shared_ptr<std::vector<uint32_t>>> BorderTable;

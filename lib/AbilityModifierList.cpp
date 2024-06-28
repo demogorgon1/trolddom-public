@@ -8,6 +8,13 @@
 namespace tpublic
 {
 
+	void														
+	AbilityModifierList::Reset()
+	{
+		m_abilityTable.clear();
+		m_abilityModifierIds.clear();
+	}
+
 	bool
 	AbilityModifierList::SetAbilityModifierIds(
 		const Manifest*					aManifest,

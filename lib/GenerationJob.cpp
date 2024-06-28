@@ -494,7 +494,7 @@ namespace tpublic
 						}
 					}
 
-					const char* iconName = _PickIconName(mustHaveTags, allTags);
+					const char* iconName = _PickIconName(itemLevel, rarity, mustHaveTags, allTags);
 					int32_t itemBudgetBias = budgetBias - (int32_t)rawStats.GetTotalBudgetCost();
 
 					GeneratedSource* output = _CreateGeneratedSource();
@@ -1035,6 +1035,8 @@ namespace tpublic
 
 	const char* 
 	GenerationJob::_PickIconName(
+		uint32_t							aLevel,
+		Rarity::Id							aRarity,
 		const std::unordered_set<uint32_t>& aMustHaveTags,
 		const std::vector<uint32_t>&		aTags)
 	{
@@ -1053,7 +1055,15 @@ namespace tpublic
 		}
 
 		const TaggedData::QueryResult* result = m_taggedSpriteData->Get()->PerformQuery(query);
-		uint32_t iconSpriteId = result->PickRandom(_GetRandom())->m_id;
+		const TaggedData::QueryResult::Entry* entry = result->TryPickRandomWithFilter(_GetRandom(), [&](
+			uint32_t aSpriteId) -> bool
+		{
+			const Data::Sprite* sprite = m_manifest->GetById<Data::Sprite>(aSpriteId);
+			return sprite->m_info.FilterByIconMetaData(aLevel, aRarity);
+		});
+
+		TP_CHECK(entry != NULL, "Unable to pick icon.");
+		uint32_t iconSpriteId = entry->m_id;
 
 		if(iconSpriteId == 0)
 			iconSpriteId = m_manifest->GetExistingIdByName<Data::Sprite>("icon_default");
@@ -1082,7 +1092,20 @@ namespace tpublic
 
 		for(const StackObject::Designation::Segment& segment : aDesignation->m_prefix)
 		{
-			if(segment.m_tagId != 0)
+			if (segment.m_nameTemplateId != 0)
+			{
+				const Data::NameTemplate* nameTemplate = m_manifest->GetById<Data::NameTemplate>(segment.m_nameTemplateId);
+
+				std::string generatedName;
+				std::unordered_set<uint32_t> newTags;
+				CreateName(m_manifest, nameTemplate, m_wordListQueryCache.get(), _GetRandom(), generatedName, newTags);
+
+				for(uint32_t tagId : newTags)
+					aTags.push_back(tagId);
+
+				prefix += generatedName;
+			}
+			else if(segment.m_tagId != 0)
 			{
 				WordList::QueryParams wordListQuery;
 				wordListQuery.m_mustHaveTags.push_back(segment.m_tagId);
@@ -1117,7 +1140,20 @@ namespace tpublic
 
 		for (const StackObject::Designation::Segment& segment : aDesignation->m_suffix)
 		{
-			if (segment.m_tagId != 0)
+			if (segment.m_nameTemplateId != 0)
+			{
+				const Data::NameTemplate* nameTemplate = m_manifest->GetById<Data::NameTemplate>(segment.m_nameTemplateId);
+
+				std::string generatedName;
+				std::unordered_set<uint32_t> newTags;
+				CreateName(m_manifest, nameTemplate, m_wordListQueryCache.get(), _GetRandom(), generatedName, newTags);
+
+				for (uint32_t tagId : newTags)
+					aTags.push_back(tagId);
+
+				suffix += generatedName;
+			}
+			else if (segment.m_tagId != 0)
 			{
 				WordList::QueryParams wordListQuery;
 				wordListQuery.m_mustHaveTags.push_back(segment.m_tagId);
