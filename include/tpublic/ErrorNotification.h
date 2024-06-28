@@ -38,6 +38,8 @@ namespace tpublic
 			ID_MISSING_ITEM,
 			ID_TARGET_TOO_CLOSE,
 			ID_RANGED_WEAPON_REQUIRED,
+			ID_NO_OTHER_SPIRIT_STONES_DISCOVERED,
+			ID_CANNOT_FIND_PATH,
 
 			NUM_IDS
 		};
@@ -85,7 +87,9 @@ namespace tpublic
 			{ "Item not equipped!" },
 			{ "Missing item!" },
 			{ "Target too close!" },
-			{ "Ranged weapon required!" }
+			{ "Ranged weapon required!" },
+			{ "No other spirit stones discovered!" },
+			{ "Can't find path!" }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

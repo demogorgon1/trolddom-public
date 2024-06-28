@@ -62,6 +62,7 @@ namespace tpublic
 			ID_ABILITY_MODIFIERS,
 			ID_VISIBILITY,
 			ID_TRIGGER,
+			ID_SPIRIT_STONE_DISCOVERY,
 
 			NUM_IDS
 		};
@@ -121,7 +122,8 @@ namespace tpublic
 			"stash",
 			"ability_modifiers",
 			"visibility",
-			"trigger"
+			"trigger",
+			"spirit_stone_discovery"
 		};		
 
 		static_assert(sizeof(COMPONENT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

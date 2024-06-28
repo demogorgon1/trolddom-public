@@ -39,6 +39,7 @@
 #include <tpublic/Components/ResurrectionPoint.h>
 #include <tpublic/Components/Shrine.h>
 #include <tpublic/Components/SoundSource.h>
+#include <tpublic/Components/SpiritStoneDiscovery.h>
 #include <tpublic/Components/Sprite.h>
 #include <tpublic/Components/Stash.h>
 #include <tpublic/Components/Tag.h>
@@ -99,6 +100,7 @@ namespace tpublic
 		_Register<Components::ResurrectionPoint>();
 		_Register<Components::Shrine>();
 		_Register<Components::SoundSource>();
+		_Register<Components::SpiritStoneDiscovery>();
 		_Register<Components::Sprite>();
 		_Register<Components::Stash>();
 		_Register<Components::Tag>();

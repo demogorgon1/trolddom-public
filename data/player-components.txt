@@ -27,6 +27,7 @@ player_components:
 	position
 	recent_achievements
 	reputation
+	spirit_stone_discovery
 	sprite
 	stash
 	talents
