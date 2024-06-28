@@ -10,7 +10,7 @@ ability consumable_small_healing_potion:
 	description: "Restores $heal$ health."
 	flags: [ target_self item ]
 	icon: icon_small_red_potion
-	direct_effect heal: { function: 20 }
+	direct_effect heal: { function: 40 }
 	consume_items: { consumable_small_healing_potion: 1 }
 	cooldowns: [ global potions ]	
 	states: [ default in_combat ]
@@ -37,10 +37,10 @@ item consumable_small_healing_potion:
 ability consumable_small_mana_potion:	
 {
 	string: "Small Mana Potion"
-	description: "Restores 20 mana."
+	description: "Restores 40 mana."
 	flags: [ target_self item ]
 	icon: icon_small_blue_potion
-	direct_effect modify_resource: { resource: mana function: 20 }
+	direct_effect modify_resource: { resource: mana function: 40 }
 	consume_items: { consumable_small_mana_potion: 1 }
 	cooldowns: [ global potions ]
 	states: [ default in_combat ]
@@ -68,7 +68,7 @@ ability consumable_healing_potion:
 	description: "Restores $heal$ health."
 	flags: [ target_self item ]
 	icon: icon_red_potion
-	direct_effect heal: { function: 40 }
+	direct_effect heal: { function: 65 }
 	consume_items: { consumable_healing_potion: 1 }
 	cooldowns: [ global potions ]	
 	states: [ default in_combat ]
@@ -94,10 +94,10 @@ item consumable_healing_potion:
 ability consumable_mana_potion:	
 {
 	string: "Mana Potion"
-	description: "Restores 40 mana."
+	description: "Restores 65 mana."
 	flags: [ target_self item ]
 	icon: icon_blue_potion
-	direct_effect modify_resource: { resource: mana function: 40 }
+	direct_effect modify_resource: { resource: mana function: 65 }
 	consume_items: { consumable_mana_potion: 1 }
 	cooldowns: [ global potions ]
 	states: [ default in_combat ]

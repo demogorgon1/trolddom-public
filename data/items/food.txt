@@ -66,10 +66,10 @@
 # Dry Bread
 ${ 
 	_string: "Dry Bread" 
-	_description: "Restores 80 health and mana over 10 seconds. Can't be used in combat."
+	_description: "Restores 120 health and mana over 10 seconds. Can't be used in combat."
 	_level: 1
 	_icon: icon_bread_1 
-	_heal_tick: 8
+	_heal_tick: 12
 	_ability_tick: consumable_dry_bread_tick
 	_ability: consumable_dry_bread
 	_aura: consumable_dry_bread
@@ -87,10 +87,10 @@ item consumable_dry_bread: !ITEM_FOOD {}
 # Red Apple
 ${ 
 	_string: "Red Apple" 
-	_description: "Restores 110 health and mana over 10 seconds. Can't be used in combat."
+	_description: "Restores 160 health and mana over 10 seconds. Can't be used in combat."
 	_level: 3
 	_icon: icon_red_apple
-	_heal_tick: 11
+	_heal_tick: 16
 	_ability_tick: consumable_red_apple_tick
 	_ability: consumable_red_apple
 	_aura: consumable_red_apple
@@ -108,10 +108,10 @@ item consumable_red_apple: !ITEM_FOOD {}
 # Green Apple
 ${ 
 	_string: "Green Apple" 
-	_description: "Restores 140 health and mana over 10 seconds. Can't be used in combat."
+	_description: "Restores 210 health and mana over 10 seconds. Can't be used in combat."
 	_level: 5
 	_icon: icon_green_apple
-	_heal_tick: 14
+	_heal_tick: 21
 	_ability_tick: consumable_green_apple_tick
 	_ability: consumable_green_apple
 	_aura: consumable_green_apple
@@ -129,10 +129,10 @@ item consumable_green_apple: !ITEM_FOOD {}
 # Potato Stew
 ${ 
 	_string: "Potato Stew" 
-	_description: "Restores 130 health and mana over 10 seconds. Can't be used in combat."
+	_description: "Restores 190 health and mana over 10 seconds. Can't be used in combat."
 	_level: 4
 	_icon: icon_stew_2
-	_heal_tick: 13
+	_heal_tick: 19
 	_ability_tick: consumable_potato_stew_tick
 	_ability: consumable_potato_stew
 	_aura: consumable_potato_stew
@@ -150,10 +150,10 @@ item consumable_potato_stew: !ITEM_FOOD {}
 # Boiled Potato
 ${ 
 	_string: "Boiled Potato" 
-	_description: "Restores 130 health and mana over 10 seconds. Can't be used in combat."
+	_description: "Restores 190 health and mana over 10 seconds. Can't be used in combat."
 	_level: 4
 	_icon: icon_boiled_potato
-	_heal_tick: 13
+	_heal_tick: 19
 	_ability_tick: consumable_boiled_potato_tick
 	_ability: consumable_boiled_potato
 	_aura: consumable_boiled_potato

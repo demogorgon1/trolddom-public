@@ -81,11 +81,11 @@ aura recently_bandaged:
 # Linen Bandage
 ${ 
 	_string: "Linen Bandage" 
-	_description: "Restores 25 health over 5 seconds."
+	_description: "Restores 50 health over 5 seconds."
 	_craft_description: "Craft a Linen Bandage."
 	_level: 1
 	_icon: icon_linen_bandage 
-	_heal_tick: 5
+	_heal_tick: 10
 	_ability_tick: consumable_linen_bandage_tick
 	_ability: consumable_linen_bandage
 	_aura: consumable_linen_bandage
@@ -104,11 +104,11 @@ ability craft_linen_bandage: !ABILITY_CRAFT_BANDAGE {}
 # Heavy Linen Bandage
 ${ 
 	_string: "Heavy Linen Bandage" 
-	_description: "Restores 35 health over 5 seconds."
+	_description: "Restores 70 health over 5 seconds."
 	_craft_description: "Craft a Heavy Linen Bandage."
 	_level: 4
 	_icon: icon_heavy_linen_bandage 
-	_heal_tick: 7
+	_heal_tick: 14
 	_ability_tick: consumable_heavy_linen_bandage_tick
 	_ability: consumable_heavy_linen_bandage
 	_aura: consumable_heavy_linen_bandage
