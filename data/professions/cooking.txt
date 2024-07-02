@@ -15,3 +15,51 @@ ability craft_dry_bread: !COOKING_CRAFT
 	_materials: { item_flour: 1 item_water: 1 }	
 	_skill: 0
 }
+
+#####################################################
+# Pickled Herring
+
+ability craft_pickled_herring: !COOKING_CRAFT
+{
+	_string: "Pickled Herring"
+	_item: consumable_pickled_herring
+	_produce: { consumable_pickled_herring: 1 } 
+	_materials: { item_herring: 1 }	
+	_skill: 15
+}
+
+#####################################################
+# Pickled Sucker
+
+ability craft_pickled_sucker: !COOKING_CRAFT
+{
+	_string: "Pickled Sucker"
+	_item: consumable_pickled_sucker
+	_produce: { consumable_pickled_sucker: 1 } 
+	_materials: { item_large_sucker: 1 }	
+	_skill: 25
+}
+
+#####################################################
+# Pickled Eel Pie
+
+ability craft_pickled_eel_pie: !COOKING_CRAFT
+{
+	_string: "Pickled Eel Pie"
+	_item: consumable_pickled_eel_pie
+	_produce: { consumable_pickled_eel_pie: 1 } 
+	_materials: { item_flour: 1 item_water: 1 item_eel: 1 }	
+	_skill: 35
+}
+
+#####################################################
+# Pickled Moonfish
+
+ability craft_pickled_moonfish: !COOKING_CRAFT
+{
+	_string: "Pickled Moonfish"
+	_item: consumable_pickled_moonfish
+	_produce: { consumable_pickled_moonfish: 1 } 
+	_materials: { item_blue_moonfish: 1 }	
+	_skill: 45
+}

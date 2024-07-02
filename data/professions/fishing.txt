@@ -98,5 +98,41 @@ item item_herring:
 	level_range: [ 1 5 ]
 }
 
+################################################################################
+# Large Sucker
 
+item item_large_sucker:
+{
+	loot_groups: [ fish ]		
+	string: "Large Sucker"
+	icon: icon_fish_1
+	stack: 20
+	item_level: 4
+	level_range: [ 4 8 ]
+}
 
+################################################################################
+# Eel
+
+item item_eel:
+{
+	loot_groups: [ fish ]		
+	string: "Eel"
+	icon: icon_eel_1
+	stack: 20
+	item_level: 5
+	level_range: [ 5 10 ]
+}
+
+################################################################################
+# Blue Moonfish
+
+item item_blue_moonfish:
+{
+	loot_groups: [ fish ]		
+	string: "Blue Moonfish"
+	icon: icon_fish_2
+	stack: 20
+	item_level: 7
+	level_range: [ 8 10 ]
+}

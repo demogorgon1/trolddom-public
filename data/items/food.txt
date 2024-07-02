@@ -166,3 +166,109 @@ ability consumable_boiled_potato_tick: !ABILITY_FOOD_TICK {}
 aura consumable_boiled_potato: !AURA_FOOD {}
 ability consumable_boiled_potato: !ABILITY_FOOD { _buff: consumable_boiled_potato_buff }
 item consumable_boiled_potato: !ITEM_FOOD {}
+
+#####################################################
+# Pickled Herring
+${ 
+	_string: "Pickled Herring" 
+	_description: "Restores 160 health and mana over 10 seconds. Can't be used in combat."
+	_level: 3
+	_icon: icon_small_blue_fish
+	_heal_tick: 16
+	_ability_tick: consumable_pickled_herring_tick
+	_ability: consumable_pickled_herring
+	_aura: consumable_pickled_herring
+	_item: { consumable_pickled_herring: 1 } 
+	_loot_groups: [ ]
+}
+
+aura consumable_pickled_herring_buff: !AURA_FOOD_BUFF { _stat_modifiers: { spirit: { add: 1 } } }
+ability consumable_pickled_herring_tick: !ABILITY_FOOD_TICK {}
+aura consumable_pickled_herring: !AURA_FOOD {}
+ability consumable_pickled_herring: !ABILITY_FOOD { _buff: consumable_pickled_herring_buff }
+item consumable_pickled_herring: !ITEM_FOOD {}
+
+#####################################################
+# Pickled Sucker
+${ 
+	_string: "Pickled Sucker" 
+	_description: "Restores 210 health and mana over 10 seconds. Can't be used in combat."
+	_level: 5
+	_icon: icon_fish_1
+	_heal_tick: 21
+	_ability_tick: consumable_pickled_sucker_tick
+	_ability: consumable_pickled_sucker
+	_aura: consumable_pickled_sucker
+	_item: { consumable_pickled_sucker: 1 } 
+	_loot_groups: [ ]
+}
+
+aura consumable_pickled_sucker_buff: !AURA_FOOD_BUFF { _stat_modifiers: { spirit: { add: 1 } constitution: { add: 1 } } }
+ability consumable_pickled_sucker_tick: !ABILITY_FOOD_TICK {}
+aura consumable_pickled_sucker: !AURA_FOOD {}
+ability consumable_pickled_sucker: !ABILITY_FOOD { _buff: consumable_pickled_sucker_buff }
+item consumable_pickled_sucker: !ITEM_FOOD {}
+
+#####################################################
+# Pickled Eel Pie
+${ 
+	_string: "Pickled Eel Pie" 
+	_description: "Restores 250 health and mana over 10 seconds. Can't be used in combat."
+	_level: 7
+	_icon: icon_eel_1
+	_heal_tick: 25
+	_ability_tick: consumable_pickled_eel_pie_tick
+	_ability: consumable_pickled_eel_pie
+	_aura: consumable_pickled_eel_pie
+	_item: { consumable_pickled_eel_pie: 1 } 
+	_loot_groups: [ ]
+}
+
+aura consumable_pickled_eel_pie_buff: !AURA_FOOD_BUFF { _stat_modifiers: { strength: { add: 5 } } }
+ability consumable_pickled_eel_pie_tick: !ABILITY_FOOD_TICK {}
+aura consumable_pickled_eel_pie: !AURA_FOOD {}
+ability consumable_pickled_eel_pie: !ABILITY_FOOD { _buff: consumable_pickled_eel_pie_buff }
+item consumable_pickled_eel_pie: !ITEM_FOOD {}
+
+#####################################################
+# Pickled Moonfish
+${ 
+	_string: "Pickled Moonfish" 
+	_description: "Restores 290 health and mana over 10 seconds. Can't be used in combat."
+	_level: 9
+	_icon: icon_fish_2
+	_heal_tick: 29
+	_ability_tick: consumable_pickled_moonfish_tick
+	_ability: consumable_pickled_moonfish
+	_aura: consumable_pickled_moonfish
+	_item: { consumable_pickled_moonfish: 1 } 
+	_loot_groups: [ ]
+}
+
+aura consumable_pickled_moonfish_buff: !AURA_FOOD_BUFF { _stat_modifiers: { wisdom: { add: 5 } } }
+ability consumable_pickled_moonfish_tick: !ABILITY_FOOD_TICK {}
+aura consumable_pickled_moonfish: !AURA_FOOD {}
+ability consumable_pickled_moonfish: !ABILITY_FOOD { _buff: consumable_pickled_moonfish_buff }
+item consumable_pickled_moonfish: !ITEM_FOOD {}
+
+#####################################################
+# Ripe Banana
+${ 
+	_string: "Ripe Banana" 
+	_description: "Restores 320 health and mana over 10 seconds. Can't be used in combat."
+	_level: 10
+	_icon: icon_banana
+	_heal_tick: 32
+	_ability_tick: consumable_banana_tick
+	_ability: consumable_banana
+	_aura: consumable_banana
+	_item: { consumable_banana: 1 } 
+	_loot_groups: [ world_drops_consumable ]
+	_level_range: [ 9 10 ]
+}
+
+ability consumable_banana_tick: !ABILITY_FOOD_TICK {}
+aura consumable_banana: !AURA_FOOD {}
+ability consumable_banana: !ABILITY_FOOD {}
+item consumable_banana: !ITEM_FOOD {}
+
