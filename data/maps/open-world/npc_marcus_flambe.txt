@@ -22,6 +22,10 @@ dialogue_screen .marcus_flambe_trainer:
 	train_profession<0>: cooking
 	train_profession<1>: cooking
 	train_ability: craft_dry_bread
+	train_ability: craft_pickled_herring
+	train_ability: craft_pickled_sucker
+	train_ability: craft_pickled_eel_pie
+	train_ability: craft_pickled_moonfish
 }
 
 dialogue_screen .marcus_flambe_greetings:
