@@ -20,7 +20,8 @@ namespace tpublic
 
 		struct ComponentEntry
 		{
-			ComponentBase*	m_componentBase = NULL;
+			ComponentBase*			m_allocated = NULL;
+			const ComponentBase*	m_static = NULL;
 		};
 
 								EntityInstance(
@@ -55,8 +56,10 @@ namespace tpublic
 		{
 			for(ComponentEntry& component : m_components)
 			{
-				if (component.m_componentBase != NULL && component.m_componentBase->GetComponentId() == _T::ID)
-					return (_T*)component.m_componentBase;
+				if (component.m_allocated != NULL && component.m_allocated->GetComponentId() == _T::ID)
+					return (_T*)component.m_allocated;
+				else if (component.m_static != NULL && component.m_static->GetComponentId() == _T::ID)
+					return (_T*)component.m_static;
 			}
 			return NULL;
 		}
@@ -67,8 +70,10 @@ namespace tpublic
 		{
 			for(const ComponentEntry& component : m_components)
 			{
-				if (component.m_componentBase != NULL && component.m_componentBase->GetComponentId() == _T::ID)
-					return (const _T*)component.m_componentBase;
+				if (component.m_allocated != NULL && component.m_allocated->GetComponentId() == _T::ID)
+					return (const _T*)component.m_allocated;
+				else if (component.m_static != NULL && component.m_static->GetComponentId() == _T::ID)
+					return (const _T*)component.m_static;
 			}
 			return NULL;
 		}
@@ -79,7 +84,9 @@ namespace tpublic
 		{
 			for(const ComponentEntry& component : m_components)
 			{
-				if(component.m_componentBase != NULL && component.m_componentBase->GetComponentId() == _T::ID)
+				if (component.m_allocated != NULL && component.m_allocated->GetComponentId() == _T::ID)
+					return true;
+				else if (component.m_static != NULL && component.m_static->GetComponentId() == _T::ID)
 					return true;
 			}
 			return false;

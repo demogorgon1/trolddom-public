@@ -7,7 +7,7 @@ entity underworld_shrine:
 		shrine: { pantheon: underworld }
 		display_name: { }
 		position: { }				
-		sprite: 
+		sprite<static>: 
 		{ 
 			animations:
 			[
@@ -38,7 +38,7 @@ entity holy_altar:
 		shrine: { pantheon: light }
 		display_name: { }
 		position: { }		
-		sprite: 
+		sprite<static>: 
 		{ 
 			animations:
 			[

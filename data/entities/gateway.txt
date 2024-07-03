@@ -12,7 +12,7 @@ entity gateway:
 			schedule: daily
 			use_position_for_randomization: true
 		}
-		sprite: 
+		sprite<static>: 
 		{ 
 			animations:
 			[
@@ -40,7 +40,7 @@ entity player_world_gateway:
 			maps: [ player_world ]
 			player_worlds: true
 		}
-		sprite: 
+		sprite<static>: 
 		{ 
 			animations:
 			[

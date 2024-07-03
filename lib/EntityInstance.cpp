@@ -23,7 +23,10 @@ namespace tpublic
 	EntityInstance::~EntityInstance()
 	{
 		for (ComponentEntry& t : m_components)
-			m_componentManager->ReleaseComponent(t.m_componentBase);
+		{
+			if(t.m_allocated != NULL)
+				m_componentManager->ReleaseComponent(t.m_allocated);
+		}
 	}
 
 	void
@@ -65,16 +68,20 @@ namespace tpublic
 		uint32_t i = 0;
 		for(const ComponentEntry& component : m_components)
 		{
-			ComponentBase::Replication componentReplication = m_componentManager->GetComponentReplication(component.m_componentBase->GetComponentId());
-			uint8_t componentFlags = m_componentManager->GetComponentFlags(component.m_componentBase->GetComponentId());
-
-			if((component.m_componentBase->IsDirty() || !onlyDirtyFlag) &&
-				(componentFlags & ComponentBase::FLAG_REPLICATE_ONLY_ON_REQUEST) == 0 &&
-				((componentReplication == ComponentBase::REPLICATION_PUBLIC && publicFlag) || (componentReplication == ComponentBase::REPLICATION_PRIVATE && privateFlag)))
+			if(component.m_allocated != NULL)
 			{
-				aWriter->WriteUInt(i);
-				m_componentManager->WriteNetwork(aWriter, component.m_componentBase);
+				ComponentBase::Replication componentReplication = m_componentManager->GetComponentReplication(component.m_allocated->GetComponentId());
+				uint8_t componentFlags = m_componentManager->GetComponentFlags(component.m_allocated->GetComponentId());
+
+				if ((component.m_allocated->IsDirty() || !onlyDirtyFlag) &&
+					(componentFlags & ComponentBase::FLAG_REPLICATE_ONLY_ON_REQUEST) == 0 &&
+					((componentReplication == ComponentBase::REPLICATION_PUBLIC && publicFlag) || (componentReplication == ComponentBase::REPLICATION_PRIVATE && privateFlag)))
+				{
+					aWriter->WriteUInt(i);
+					m_componentManager->WriteNetwork(aWriter, component.m_allocated);
+				}
 			}
+
 			i++;
 		}
 	}
@@ -96,13 +103,15 @@ namespace tpublic
 			if((size_t)index >= m_components.size())
 				return false;
 
-			if(aOutUpdatedComponents != NULL)
-				aOutUpdatedComponents->push_back(m_components[index].m_componentBase);
+			ComponentEntry& component = m_components[index];
 
-			if(m_components[index].m_componentBase == NULL)
+			if(component.m_allocated == NULL)
 				return false;
 
-			if(!m_componentManager->ReadNetwork(aReader, m_components[index].m_componentBase))
+			if (aOutUpdatedComponents != NULL)
+				aOutUpdatedComponents->push_back(component.m_allocated);
+
+			if(!m_componentManager->ReadNetwork(aReader, component.m_allocated))
 				return false;
 		}
 		return true;
@@ -116,7 +125,7 @@ namespace tpublic
 
 		for (const ComponentEntry& component : m_components)
 		{
-			if(component.m_componentBase->IsDirty())
+			if(component.m_allocated != NULL && component.m_allocated->IsDirty())
 				return true;
 		}
 		return false;
@@ -128,7 +137,10 @@ namespace tpublic
 		m_dirty = false;
 
 		for (ComponentEntry& component : m_components)
-			component.m_componentBase->ResetDirty();
+		{
+			if(component.m_allocated != NULL)
+				component.m_allocated->ResetDirty();
+		}
 	}
 
 	ComponentBase*
@@ -137,8 +149,15 @@ namespace tpublic
 	{
 		for (ComponentEntry& component : m_components)
 		{
-			if(component.m_componentBase != NULL && component.m_componentBase->GetComponentId() == aComponentId)
-				return component.m_componentBase;
+			if(component.m_allocated != NULL && component.m_allocated->GetComponentId() == aComponentId)
+			{
+				return component.m_allocated;
+			}
+			else if (component.m_static != NULL && component.m_static->GetComponentId() == aComponentId)
+			{
+				// FIXME: shouldn't do this. This essentially allows systems to update static components. 
+				return (ComponentBase*)component.m_static;
+			}			
 		}
 		return NULL;
 	}
@@ -149,8 +168,10 @@ namespace tpublic
 	{
 		for (const ComponentEntry& component : m_components)
 		{
-			if (component.m_componentBase != NULL && component.m_componentBase->GetComponentId() == aComponentId)
-				return component.m_componentBase;
+			if (component.m_allocated != NULL && component.m_allocated->GetComponentId() == aComponentId)
+				return component.m_allocated;
+			else if (component.m_static != NULL && component.m_static->GetComponentId() == aComponentId)
+				return component.m_static;
 		}
 		return NULL;
 	}

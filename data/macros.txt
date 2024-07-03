@@ -61,7 +61,7 @@
 			<exists _not_pushable and _not_pushable> modifier not_pushable: {}
 			<exists _dialogue_root> dialogue_root: @_dialogue_root			
 		}			
-		combat_private:
+		combat_private<static>:
 		{
 			physical_critical_strike_chance: 5
 			dodge_chance: 5
@@ -100,7 +100,7 @@
 			<exists _encounter> encounter: @_encounter
 			<exists _inactive_encounter_despawn> inactive_encounter_despawn: @_inactive_encounter_despawn
 		}
-		sprite: 
+		sprite<static>: 
 		{ 
 			animations:
 			[
@@ -108,16 +108,16 @@
 				{ states: [ dead ] frames: [ @_sprite_dead ] z_offset: -2 }			
 			]		
 		}				
-		<exists _auctioneer and _auctioneer> auctioneer: { }
-		<exists _guild_name> guild_name:
+		<exists _auctioneer and _auctioneer> auctioneer<static>: { }
+		<exists _guild_name> guild_name<static>:
 		{
 			string: @_guild_name
 		}				
-		<exists _visibility_requirements> visibility:
+		<exists _visibility_requirements> visibility<static>:
 		{
 			requirements: @_visibility_requirements
 		}
-		<exists _guild_registrar_price_tiers> guild_registrar: 
+		<exists _guild_registrar_price_tiers> guild_registrar<static>: 
 		{
 			registration_price_tiers: @_guild_registrar_price_tiers
 		}

@@ -5,7 +5,7 @@
 	components:
 	{
 		position: { }		
-		sprite: { animations: [ { states: [ default ] frames: [ @_sprite ] z_offset: -3 } ] }		
+		sprite<static>: { animations: [ { states: [ default ] frames: [ @_sprite ] z_offset: -3 } ] }		
 
 		openable: 
 		{ 

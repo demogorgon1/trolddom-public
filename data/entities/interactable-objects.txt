@@ -5,8 +5,8 @@
 	components:
 	{
 		position: { }		
-		interactable_object: { type: @_type }
-		sprite: 
+		interactable_object<static>: { type: @_type }
+		sprite<static>: 
 		{ 
 			animations:
 			[

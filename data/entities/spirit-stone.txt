@@ -5,8 +5,8 @@ entity spirit_stone:
 	components:
 	{
 		position: { }		
-		resurrection_point: { }
-		sprite: 
+		resurrection_point<static>: { }
+		sprite<static>: 
 		{ 
 			animations:
 			[

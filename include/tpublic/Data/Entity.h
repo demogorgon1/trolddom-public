@@ -52,6 +52,43 @@ namespace tpublic
 
 			struct ComponentEntry
 			{
+				enum Flag : uint8_t
+				{
+					FLAG_STATIC = 0x01
+				};
+
+				static uint8_t
+				SourceToFlag(
+					const SourceNode*		aSource)
+				{
+					std::string_view t(aSource->GetIdentifier());
+					if(t == "static")
+						return FLAG_STATIC;
+					TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid component entry flag.", aSource->GetIdentifier());
+					return 0;
+				}
+
+				static uint8_t
+				SourceToFlags(
+					const SourceNode*		aSource)
+				{
+					uint8_t flags = 0;
+					if(aSource->m_type == SourceNode::TYPE_IDENTIFIER)
+					{
+						flags = SourceToFlag(aSource);
+					}
+					else
+					{
+						aSource->GetArray()->ForEachChild([&flags](
+							const SourceNode* aChild)
+						{
+							flags |= SourceToFlag(aChild);
+						});
+					}
+
+					return flags;
+				}
+
 				ComponentEntry()
 					: m_componentId(0)
 				{
@@ -64,10 +101,12 @@ namespace tpublic
 					m_componentId = Component::StringToId(aSource->m_name.c_str());
 					TP_VERIFY(m_componentId != Component::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid component.", aSource->m_name.c_str());
 
+					if(aSource->m_annotation)
+						m_flags = SourceToFlags(aSource->m_annotation.get());
+
 					const ComponentManager* componentManager = aSource->m_sourceContext->m_componentManager.get();
 
 					std::unique_ptr<ComponentBase> component(componentManager->AllocateComponentNonPooled(m_componentId));
-					assert(component);
 
 					uint8_t flags = componentManager->GetComponentFlags(m_componentId);
 					TP_VERIFY((flags & ComponentBase::FLAG_PLAYER_ONLY) == 0, aSource->m_debugInfo, "'%s' is a player-only component.", aSource->m_name.c_str());
@@ -84,6 +123,7 @@ namespace tpublic
 					IWriter*				aStream) const 
 				{
 					aStream->WriteUInt(m_componentId);
+					aStream->WritePOD(m_flags);
 					aComponentManager->WriteNetwork(aStream, m_componentBase.get());
 				}
 			
@@ -92,6 +132,8 @@ namespace tpublic
 					IReader*				aStream) 
 				{
 					if(!aStream->ReadUInt(m_componentId))
+						return false;
+					if(!aStream->ReadPOD(m_flags))
 						return false;
 
 					m_componentBase.reset(aStream->GetComponentManager()->AllocateComponentNonPooled(m_componentId));
@@ -102,7 +144,9 @@ namespace tpublic
 
 				// Public data
 				uint32_t							m_componentId = 0;
+				uint8_t								m_flags = 0;
 				std::unique_ptr<ComponentBase>		m_componentBase;
+				
 			};
 
 			void
@@ -121,10 +165,13 @@ namespace tpublic
 				for(const std::unique_ptr<ComponentEntry>& componentEntry : m_components)
 				{
 					EntityInstance::ComponentEntry t;
-					t.m_componentBase = aComponentManager->AllocateComponent(componentEntry->m_componentId);
-					entity->AddComponent(t);
+					
+					if(componentEntry->m_flags & ComponentEntry::FLAG_STATIC)
+						t.m_static = componentEntry->m_componentBase.get();
+					else
+						t.m_allocated = aComponentManager->AllocateComponent(componentEntry->m_componentId);
 
-					//entity->AddComponent(aComponentManager->Create(componentEntry->m_componentId));
+					entity->AddComponent(t);
 				}
 
 				return entity.release();
@@ -139,8 +186,13 @@ namespace tpublic
 				uint32_t index = 0;
 				for (const std::unique_ptr<ComponentEntry>& componentEntry : m_components)
 				{
-					aWriter->WriteUInt(index++);
-					aComponentManager->WriteNetwork(aWriter, componentEntry->m_componentBase.get());
+					if((componentEntry->m_flags & ComponentEntry::FLAG_STATIC) == 0)
+					{
+						aWriter->WriteUInt(index);
+						aComponentManager->WriteNetwork(aWriter, componentEntry->m_componentBase.get());
+					}
+
+					index++;
 				}
 			}
 
@@ -186,19 +238,19 @@ namespace tpublic
 						{
 							aMember->GetObject()->ForEachChild([&](
 								const SourceNode* aComponentMember)
-								{
-									m_components.push_back(std::make_unique<ComponentEntry>(aComponentMember));
-								});
+							{
+								m_components.push_back(std::make_unique<ComponentEntry>(aComponentMember));
+							});
 						}
 						else if (aMember->m_name == "systems")
 						{
 							aMember->GetArray()->ForEachChild([&](
 								const SourceNode* aArrayItem)
-								{
-									uint32_t systemId = System::StringToId(aArrayItem->GetIdentifier());
-									TP_VERIFY(systemId != System::INVALID_ID, aArrayItem->m_debugInfo, "'%s' not a valid system.", aArrayItem->m_name.c_str());
-									m_systems.push_back(systemId);
-								});
+							{
+								uint32_t systemId = System::StringToId(aArrayItem->GetIdentifier());
+								TP_VERIFY(systemId != System::INVALID_ID, aArrayItem->m_debugInfo, "'%s' not a valid system.", aArrayItem->m_name.c_str());
+								m_systems.push_back(systemId);
+							});
 						}
 						else if (aMember->m_name == "modifiers")
 						{
