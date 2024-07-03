@@ -69,6 +69,16 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_PLAYER_WORLDS, "player_worlds", offsetof(Gateway, m_playerWorlds));
 			}
 
+			void
+			Reset()
+			{
+				m_maps.clear();
+				m_activeGatewayInstance = GatewayInstance();
+				m_schedule = Schedule();
+				m_usePositionForRandomization = false;
+				m_playerWorlds = false;
+			}
+
 			// Public data
 			std::vector<uint32_t>	m_maps;
 			GatewayInstance			m_activeGatewayInstance;

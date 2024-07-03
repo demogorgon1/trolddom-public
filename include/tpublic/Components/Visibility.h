@@ -65,6 +65,12 @@ namespace tpublic
 				aSchema->DefineCustomObject<Requirements>(FIELD_REQUIREMENTS, "requirements", offsetof(Visibility, m_requirements));
 			}
 
+			void
+			Reset()
+			{
+				m_requirements.m_entries.clear();
+			}
+
 			// Public data
 			Requirements					m_requirements;
 		};

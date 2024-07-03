@@ -41,6 +41,12 @@ namespace tpublic
 				return false;
 			}
 
+			void
+			Reset()
+			{
+				m_active.clear();
+			}
+
 			// Public data
 			std::vector<uint32_t>	m_active;
 		};

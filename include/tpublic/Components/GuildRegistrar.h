@@ -28,6 +28,12 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32_ARRAY, FIELD_REGISTRATION_PRICE_TIERS, "registration_price_tiers", offsetof(GuildRegistrar, m_registrationPriceTiers));
 			}
 
+			void
+			Reset()
+			{
+				m_registrationPriceTiers.clear();
+			}
+
 			// Public data
 			std::vector<uint32_t>		m_registrationPriceTiers;
 		};

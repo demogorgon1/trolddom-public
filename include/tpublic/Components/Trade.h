@@ -28,6 +28,12 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_OTHER_CHARACTER_ID, NULL, offsetof(Trade, m_otherCharacterId));
 			}
 
+			void
+			Reset()
+			{
+				m_otherCharacterId = 0;
+			}
+
 			// Public data
 			uint32_t		m_otherCharacterId = 0;
 		};

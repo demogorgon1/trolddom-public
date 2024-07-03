@@ -31,6 +31,12 @@ namespace tpublic
 				aSchema->DefineCustomObjectNoSource<ItemList>(FIELD_ITEMS, offsetof(Stash, m_items));
 			}
 
+			void
+			Reset()
+			{
+				m_items.Reset();
+			}
+
 			// Public data
 			ItemList		m_items;
 		};

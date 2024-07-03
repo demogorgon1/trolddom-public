@@ -41,6 +41,12 @@ namespace tpublic
 				return false;
 			}
 
+			void
+			Reset()
+			{
+				m_available.clear();
+			}
+
 			std::vector<uint32_t>	m_available;
 		};
 

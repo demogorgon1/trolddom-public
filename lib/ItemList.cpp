@@ -487,5 +487,12 @@ namespace tpublic
 		}		
 	}
 
+	void				
+	ItemList::Reset()
+	{
+		m_entries.clear();
+		m_version = 0;
+	}
+
 }
 

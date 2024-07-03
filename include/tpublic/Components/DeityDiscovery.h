@@ -30,6 +30,12 @@ namespace tpublic
 				aSchema->DefineCustomObjectNoSource<RangeBasedSet<uint32_t>>(FIELD_DEITIES, offsetof(DeityDiscovery, m_deities));
 			}
 
+			void
+			Reset()
+			{
+				m_deities.Reset();
+			}
+
 			// Public data
 			RangeBasedSet<uint32_t>		m_deities;
 		};

@@ -22,6 +22,12 @@ namespace tpublic
 			{
 			}
 
+			void
+			Reset()
+			{
+
+			}
+
 			// Public data
 		};
 	}

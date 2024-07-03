@@ -68,9 +68,14 @@ namespace tpublic
 				return false;
 			}
 
+			void
+			Reset()
+			{
+				m_spiritStones.clear();
+			}
+
 			// Public data
-			std::vector<SpiritStone>	m_spiritStones;
-			
+			std::vector<SpiritStone>	m_spiritStones;			
 		};
 	}
 

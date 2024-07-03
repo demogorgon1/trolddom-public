@@ -31,6 +31,13 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_SOUND, NULL, offsetof(SoundSource, m_soundId));
 			}
 
+			void
+			Reset()
+			{
+				m_tick = 0;
+				m_soundId = 0;
+			}
+
 			// Public data
 			int32_t			m_tick = 0;
 			uint32_t		m_soundId = 0;

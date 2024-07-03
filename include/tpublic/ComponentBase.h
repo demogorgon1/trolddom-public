@@ -8,6 +8,8 @@
 namespace tpublic
 {
 
+	struct ComponentPoolChunkBase;
+
 	class ComponentBase
 	{
 	public:
@@ -32,11 +34,12 @@ namespace tpublic
 			PENDING_PERSISTENCE_UPDATE_HIGH_PRIORITY
 		};
 
-									ComponentBase();
-		virtual						~ComponentBase();
-
 		void						SetComponentId(
 										uint32_t											aComponentId);
+		void						InitAllocation(
+										uint32_t											aComponentId,
+										ComponentPoolChunkBase*								aComponentPoolChunkBase,
+										uint8_t												aIndex);
 		void						ResetPendingPersistenceUpdate();
 		void						SetPendingPersistenceUpdate(
 										PendingPersistenceUpdate							aPendingPersistenceUpdate);
@@ -70,10 +73,14 @@ namespace tpublic
 		uint32_t					GetComponentId() const { return m_componentId; }
 		PendingPersistenceUpdate	GetPendingPersistenceUpdate() const { return m_pendingPersistenceUpdate; }
 		bool						IsDirty() const { return m_dirty; }
+		ComponentPoolChunkBase*		GetComponentPoolChunkBase() { return m_componentPoolChunkBase; }
+		uint8_t						GetComponentPoolChunkIndex() const { return m_componentPoolChunkIndex; }
 
 	private:
 
 		uint32_t					m_componentId = 0;
+		ComponentPoolChunkBase*		m_componentPoolChunkBase = NULL;
+		uint8_t						m_componentPoolChunkIndex = 0;
 		PendingPersistenceUpdate	m_pendingPersistenceUpdate = PENDING_PERSISTENCE_UPDATE_NONE;
 		bool						m_dirty = false;
 	};

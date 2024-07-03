@@ -122,18 +122,35 @@ namespace tpublic
 	}
 
 	ComponentBase*
-	ComponentManager::Create(
+	ComponentManager::AllocateComponentNonPooled(
 		uint32_t				aId) const
 	{
 		assert(aId < Component::NUM_IDS);
 		const ComponentType& t = m_componentTypes[aId];
-
+	
 		if(!t.m_create)
 			return NULL;
 
 		ComponentBase* component = t.m_create();
-		component->SetComponentId(aId);
+		component->InitAllocation(aId, NULL, 0);
 		return component;
+	}
+
+	ComponentBase*
+	ComponentManager::AllocateComponent(
+		uint32_t				aId) 
+	{
+		assert(aId < Component::NUM_IDS);
+		ComponentType& t = m_componentTypes[aId];
+		return t.m_pool->Allocate();
+	}
+
+	void						
+	ComponentManager::ReleaseComponent(
+		ComponentBase*			aComponent)
+	{
+		ComponentType& t = m_componentTypes[aComponent->GetComponentId()];
+		t.m_pool->Release(aComponent);
 	}
 
 	uint8_t				

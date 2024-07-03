@@ -58,6 +58,12 @@ namespace tpublic
 				};
 			}
 
+			void
+			Reset()
+			{
+				m_type = INVALID_TYPE;
+			}
+
 			// Public data
 			Type			m_type = INVALID_TYPE;
 		};

@@ -29,6 +29,14 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_INT64, FIELD_CASH, NULL, offsetof(Wallet, m_cash));
 			}
 
+			void
+			Reset()
+			{
+				m_cash = 0;
+
+				m_loot = 0;
+			}
+
 			// Public data
 			int64_t			m_cash = 0;
 

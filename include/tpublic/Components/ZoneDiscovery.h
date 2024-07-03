@@ -30,6 +30,12 @@ namespace tpublic
 				aSchema->DefineCustomObjectNoSource<RangeBasedSet<uint32_t>>(FIELD_ZONES, offsetof(ZoneDiscovery, m_zones));
 			}
 
+			void
+			Reset()
+			{
+				m_zones.Reset();
+			}
+
 			// Public data
 			RangeBasedSet<uint32_t>		m_zones;
 		};

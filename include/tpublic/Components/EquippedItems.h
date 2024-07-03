@@ -147,6 +147,14 @@ namespace tpublic
 				}
 			}
 
+			void
+			Reset()
+			{
+				for (uint32_t i = 0; i < (uint32_t)EquipmentSlot::NUM_IDS; i++)
+					m_slots.m_items[i].Clear();
+				m_version = 0;
+			}
+
 			// Public data
 			Slots			m_slots;
 			uint32_t		m_version = 0;

@@ -138,6 +138,29 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_UNLOCK_MAP_TRIGGER_ID, "unlock_map_trigger", offsetof(Openable, m_unlockMapTriggerId))->SetDataType(DataType::ID_MAP_TRIGGER);
 			}
 
+			void
+			Reset()
+			{
+				m_lootTableId = 0;
+				m_requiredItemId = 0;
+				m_verb = Verb();
+				m_requiredProfessionId = 0;
+				m_requiredProfessionSkill = 0;
+				m_requiredQuestId = 0;
+				m_requiredIncompleteQuestObjectiveId = 0;
+				m_range = 1;
+				m_instant = false;
+				m_despawn = false;
+				m_opened = false;
+				m_duration = 0;
+				m_level = 1;
+				m_requirements.clear();
+				m_soundId = 0;
+				m_completeManualObjectiveId = 0;
+				m_triggerAbilityId = 0;
+				m_unlockMapTriggerId = 0;
+			}
+
 			// Public data
 			uint32_t					m_lootTableId = 0;
 			uint32_t					m_requiredItemId = 0;

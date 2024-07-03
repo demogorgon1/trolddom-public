@@ -373,6 +373,31 @@ namespace tpublic
 				}
 			}
 
+			void
+			Reset()
+			{
+				m_targetEntityInstanceId = 0;
+				m_level = 1;
+				m_factionId = 0;
+				m_dialogueRootId = 0;
+				m_creatureTypeId = 0;
+				m_combatGroupId = 0;
+				m_resources.clear();
+				m_castInProgress.reset();
+				m_lootRule = LootRule::INVALID_ID;
+				m_lootThreshold = Rarity::INVALID_ID;
+				m_combatFlags = COMBAT_FLAG_PUSHABLE;
+				m_moveSpeed = MoveSpeed::ID_NORMAL;
+
+				m_lastCombatEventTick = 0;
+				m_lastCastingTick = -50;
+				m_last5SecRuleManaRegenTick = 0;
+				m_lastBaseManaRegenTick = 0;
+				m_interrupt.reset();
+				m_damageAccum = 0;
+				m_singleTargetAuraEntityInstanceId = 0;
+			}
+
 			// Helpers
 			bool IsMasterLooter() const { return (m_combatFlags & COMBAT_FLAG_MASTER_LOOTER) != 0; }
 			bool IsElite() const { return (m_combatFlags & COMBAT_FLAG_ELITE) != 0; }

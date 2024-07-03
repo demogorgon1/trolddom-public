@@ -104,6 +104,15 @@ namespace tpublic
 				m_version++;
 			}
 
+			void
+			Reset()
+			{
+				for (size_t i = 0; i < Items::COUNT; i++)
+					m_items.m_items[i].Clear();
+				m_items.m_nextIndex = 0;
+				m_version = 0;
+			}
+
 			// Public data
 			Items			m_items;
 			uint32_t		m_version = 0;

@@ -59,6 +59,12 @@ namespace tpublic
 				aSchema->DefineCustomObjectPointersNoSource<Entry>(FIELD_OUTGOING, offsetof(PlayerOutbox, m_outgoing));
 			}	
 
+			void
+			Reset()
+			{
+				m_outgoing.clear();
+			}
+
 			// Public data
 			std::vector<std::unique_ptr<Entry>>		m_outgoing;
 		};

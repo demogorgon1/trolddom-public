@@ -38,6 +38,17 @@ namespace tpublic
 				aSchema->DefineCustomPODNoSource<uint8_t>(FIELD_POSITION_FLAGS, offsetof(Position, m_positionFlags));
 			}
 
+			void
+			Reset()
+			{
+				m_position = Vec2();
+				m_positionFlags = 0;
+
+				m_lastMoveTick = 0;
+				m_detached = false;
+				m_updatedOnServer = false;
+			}
+
 			// Helpers
 			bool	IsBlocking() const { return m_positionFlags & POSITION_FLAG_BLOCKING; }
 			void	SetBlocking() { m_positionFlags |= POSITION_FLAG_BLOCKING; }
@@ -54,7 +65,7 @@ namespace tpublic
 			uint8_t		m_positionFlags = 0;
 
 			// Not serialized, internal server stuff
-			uint32_t	m_lastMoveTick = 0;
+			int32_t		m_lastMoveTick = 0;
 			bool		m_detached = false;
 			bool		m_updatedOnServer = false;
 		};

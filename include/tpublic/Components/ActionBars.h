@@ -44,6 +44,12 @@ namespace tpublic
 					m_actionBars.push_back(std::make_unique<ActionBar>());
 				m_actionBars[aRow]->SetSlot((size_t)aIndex, aAbilityId);
 			}
+
+			void
+			Reset()
+			{
+				m_actionBars.clear();
+			}
 		
 			// Public data
 			std::vector<std::unique_ptr<ActionBar>>		m_actionBars;

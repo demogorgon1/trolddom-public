@@ -66,7 +66,7 @@ namespace tpublic
 
 					const ComponentManager* componentManager = aSource->m_sourceContext->m_componentManager.get();
 
-					std::unique_ptr<ComponentBase> component(componentManager->Create(m_componentId));
+					std::unique_ptr<ComponentBase> component(componentManager->AllocateComponentNonPooled(m_componentId));
 					assert(component);
 
 					uint8_t flags = componentManager->GetComponentFlags(m_componentId);
@@ -94,7 +94,7 @@ namespace tpublic
 					if(!aStream->ReadUInt(m_componentId))
 						return false;
 
-					m_componentBase.reset(aStream->GetComponentManager()->Create(m_componentId));
+					m_componentBase.reset(aStream->GetComponentManager()->AllocateComponentNonPooled(m_componentId));
 					if(!aStream->GetComponentManager()->ReadNetwork(aStream, m_componentBase.get()))
 						return false;
 					return true;
@@ -113,13 +113,19 @@ namespace tpublic
 
 			EntityInstance*
 			CreateInstance(
-				const ComponentManager*	aComponentManager,
+				ComponentManager*		aComponentManager,
 				uint32_t				aEntityInstanceId) const 
 			{
-				std::unique_ptr<tpublic::EntityInstance> entity = std::make_unique<tpublic::EntityInstance>(m_id, aEntityInstanceId);
+				std::unique_ptr<EntityInstance> entity = std::make_unique<EntityInstance>(aComponentManager, m_id, aEntityInstanceId);
 
 				for(const std::unique_ptr<ComponentEntry>& componentEntry : m_components)
-					entity->AddComponent(aComponentManager->Create(componentEntry->m_componentId));
+				{
+					EntityInstance::ComponentEntry t;
+					t.m_componentBase = aComponentManager->AllocateComponent(componentEntry->m_componentId);
+					entity->AddComponent(t);
+
+					//entity->AddComponent(aComponentManager->Create(componentEntry->m_componentId));
+				}
 
 				return entity.release();
 			}

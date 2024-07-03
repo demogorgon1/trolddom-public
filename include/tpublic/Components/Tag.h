@@ -35,6 +35,16 @@ namespace tpublic
 				aSchema->DefineCustomPODNoSource<Rarity::Id>(FIELD_LOOT_THRESHOLD, offsetof(Tag, m_lootThreshold));
 			}
 
+			void
+			Reset()
+			{
+				m_playerTag.Clear();
+				m_lootRule = LootRule::INVALID_ID;
+				m_lootThreshold = Rarity::INVALID_ID;
+
+				m_playerEntityInstanceId = 0;
+			}
+
 			// Public data
 			PlayerTag		m_playerTag;
 			LootRule::Id	m_lootRule = LootRule::INVALID_ID;

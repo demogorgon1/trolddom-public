@@ -124,6 +124,13 @@ namespace tpublic
 				return true;
 			}
 
+			void
+			Reset()
+			{
+				m_entries.clear();
+				m_availablePoints = 0;
+			}
+
 			// Public data
 			std::vector<Entry>			m_entries;
 			uint32_t					m_availablePoints = 0;

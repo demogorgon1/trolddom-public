@@ -138,6 +138,13 @@ namespace tpublic
 				}
 			}
 
+			void
+			Reset()
+			{
+				m_table.m_map.clear();
+				m_totalPoints = 0;
+			}
+
 			// Public data
 			Table					m_table;
 			uint32_t				m_totalPoints = 0;

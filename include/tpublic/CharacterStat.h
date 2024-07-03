@@ -111,8 +111,14 @@ namespace tpublic
 				return true;
 			}			
 
+			void
+			Reset()
+			{
+				memset(m_value, 0, sizeof(m_value));
+			}
+
 			// Public data
-			uint64_t	m_value[NUM_IDS];
+			uint64_t	m_value[NUM_IDS] = { 0 };
 		};
 
 	}

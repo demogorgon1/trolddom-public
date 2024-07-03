@@ -87,6 +87,15 @@ namespace tpublic
 				return false;
 			}
 
+			void
+			Reset()
+			{
+				m_entries.clear();
+				m_auraFlags = 0;
+
+				m_seq = 0;
+			}
+
 			// Helpers
 			bool		IsStunned() const { return m_auraFlags & AURA_FLAG_STUNNED; }
 			bool		IsImmobilized() const { return m_auraFlags & AURA_FLAG_IMMOBILIZED; }

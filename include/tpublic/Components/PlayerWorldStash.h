@@ -135,6 +135,12 @@ namespace tpublic
 				return count;
 			}
 
+			void
+			Reset()
+			{
+				m_items.m_table.clear();
+			}
+
 			// Public data
 			Items			m_items;
 		};

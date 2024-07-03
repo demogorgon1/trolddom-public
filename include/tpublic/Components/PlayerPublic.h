@@ -35,6 +35,14 @@ namespace tpublic
 				aSchema->DefineCustomObjectNoSource<Stat::Collection>(FIELD_STATS, offsetof(PlayerPublic, m_stats));
 			}
 
+			void
+			Reset()
+			{
+				m_classId = 0;
+				m_characterId = 0;
+				m_stats.Reset();
+			}
+
 			// Public data
 			uint32_t			m_classId = 0;
 			uint32_t			m_characterId = 0;

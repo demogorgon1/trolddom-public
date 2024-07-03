@@ -9,17 +9,21 @@ namespace tpublic
 {
 
 	EntityInstance::EntityInstance(
+		ComponentManager*		aComponentManager,
 		uint32_t				aEntityId,
 		uint32_t				aEntityInstanceId)
 		: m_entityInstanceId(aEntityInstanceId)
 		, m_entityId(aEntityId)
 		, m_state(EntityState::INVALID_ID)
+		, m_componentManager(aComponentManager)
 	{
 
 	}
 
 	EntityInstance::~EntityInstance()
 	{
+		for (ComponentEntry& t : m_components)
+			m_componentManager->ReleaseComponent(t.m_componentBase);
 	}
 
 	void
@@ -42,15 +46,13 @@ namespace tpublic
 
 	void
 	EntityInstance::AddComponent(
-		ComponentBase*			aComponent)
+		ComponentEntry&			aComponentEntry)
 	{
-		// FIXME: this kinda defeats much of the purpose of using ECS. Will need some optimization at some point.
-		m_components.push_back(std::unique_ptr<ComponentBase>(aComponent));
+		m_components.push_back(aComponentEntry);
 	}
 		
 	void
 	EntityInstance::WriteNetwork(
-		const ComponentManager* aComponentManager,
 		IWriter*				aWriter,
 		uint8_t					aFlags) const
 	{
@@ -61,17 +63,17 @@ namespace tpublic
 		aWriter->WritePOD(m_state);
 
 		uint32_t i = 0;
-		for(const std::unique_ptr<ComponentBase>& component : m_components)
+		for(const ComponentEntry& component : m_components)
 		{
-			ComponentBase::Replication componentReplication = aComponentManager->GetComponentReplication(component->GetComponentId());
-			uint8_t componentFlags = aComponentManager->GetComponentFlags(component->GetComponentId());
+			ComponentBase::Replication componentReplication = m_componentManager->GetComponentReplication(component.m_componentBase->GetComponentId());
+			uint8_t componentFlags = m_componentManager->GetComponentFlags(component.m_componentBase->GetComponentId());
 
-			if((component->IsDirty() || !onlyDirtyFlag) && 
+			if((component.m_componentBase->IsDirty() || !onlyDirtyFlag) &&
 				(componentFlags & ComponentBase::FLAG_REPLICATE_ONLY_ON_REQUEST) == 0 &&
 				((componentReplication == ComponentBase::REPLICATION_PUBLIC && publicFlag) || (componentReplication == ComponentBase::REPLICATION_PRIVATE && privateFlag)))
 			{
 				aWriter->WriteUInt(i);
-				aComponentManager->WriteNetwork(aWriter, component.get());
+				m_componentManager->WriteNetwork(aWriter, component.m_componentBase);
 			}
 			i++;
 		}
@@ -79,7 +81,6 @@ namespace tpublic
 
 	bool
 	EntityInstance::ReadNetwork(
-		const ComponentManager*				aComponentManager,
 		IReader*							aReader,
 		std::vector<const ComponentBase*>*	aOutUpdatedComponents) 
 	{
@@ -96,12 +97,12 @@ namespace tpublic
 				return false;
 
 			if(aOutUpdatedComponents != NULL)
-				aOutUpdatedComponents->push_back(m_components[index].get());
+				aOutUpdatedComponents->push_back(m_components[index].m_componentBase);
 
-			if(!m_components[index])
+			if(m_components[index].m_componentBase == NULL)
 				return false;
 
-			if(!aComponentManager->ReadNetwork(aReader, m_components[index].get()))
+			if(!m_componentManager->ReadNetwork(aReader, m_components[index].m_componentBase))
 				return false;
 		}
 		return true;
@@ -113,9 +114,9 @@ namespace tpublic
 		if(m_dirty)
 			return true;
 
-		for (const std::unique_ptr<ComponentBase>& component : m_components)
+		for (const ComponentEntry& component : m_components)
 		{
-			if(component->IsDirty())
+			if(component.m_componentBase->IsDirty())
 				return true;
 		}
 		return false;
@@ -126,18 +127,18 @@ namespace tpublic
 	{
 		m_dirty = false;
 
-		for (std::unique_ptr<ComponentBase>& component : m_components)
-			component->ResetDirty();
+		for (ComponentEntry& component : m_components)
+			component.m_componentBase->ResetDirty();
 	}
 
 	ComponentBase*
 	EntityInstance::GetComponentBase(
 		uint32_t							aComponentId)
 	{
-		for (std::unique_ptr<ComponentBase>& component : m_components)
+		for (ComponentEntry& component : m_components)
 		{
-			if(component && component->GetComponentId() == aComponentId)
-				return component.get();
+			if(component.m_componentBase != NULL && component.m_componentBase->GetComponentId() == aComponentId)
+				return component.m_componentBase;
 		}
 		return NULL;
 	}
@@ -146,10 +147,10 @@ namespace tpublic
 	EntityInstance::GetComponentBase(
 		uint32_t							aComponentId) const
 	{
-		for (const std::unique_ptr<ComponentBase>& component : m_components)
+		for (const ComponentEntry& component : m_components)
 		{
-			if(component && component->GetComponentId() == aComponentId)
-				return component.get();
+			if (component.m_componentBase != NULL && component.m_componentBase->GetComponentId() == aComponentId)
+				return component.m_componentBase;
 		}
 		return NULL;
 	}

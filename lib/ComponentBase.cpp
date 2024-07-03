@@ -5,22 +5,23 @@
 namespace tpublic
 {
 
-	ComponentBase::ComponentBase()
-	{
-
-	}
-
-	ComponentBase::~ComponentBase()
-	{
-		// FIXME: For now we'll need a virtual destructor, but with a proper component pool we can get rid of it (and the vtable)
-	}
-
 	void
 	ComponentBase::SetComponentId(
 		uint32_t											aComponentId)
 	{
 		assert(m_componentId == 0);
 		m_componentId = aComponentId;
+	}
+
+	void						
+	ComponentBase::InitAllocation(
+		uint32_t											aComponentId,
+		ComponentPoolChunkBase*								aComponentPoolChunkBase,
+		uint8_t												aIndex)
+	{
+		m_componentId = aComponentId;
+		m_componentPoolChunkBase = aComponentPoolChunkBase;
+		m_componentPoolChunkIndex = aIndex;
 	}
 
 	void

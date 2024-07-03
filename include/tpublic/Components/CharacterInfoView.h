@@ -32,6 +32,13 @@ namespace tpublic
 				aSchema->DefineCustomObjectNoSource<Stat::Collection>(FIELD_STATS_FROM_AURAS, offsetof(CharacterInfoView, m_statsFromAuras));
 			}
 
+			void
+			Reset()
+			{
+				m_statsFromItems.Reset();
+				m_statsFromAuras.Reset();
+			}
+
 			// Public data
 			Stat::Collection	m_statsFromItems;
 			Stat::Collection	m_statsFromAuras;

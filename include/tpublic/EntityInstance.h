@@ -18,7 +18,13 @@ namespace tpublic
 			NETWORK_WRITE_FLAG_PRIVATE		= 0x04
 		};
 
+		struct ComponentEntry
+		{
+			ComponentBase*	m_componentBase = NULL;
+		};
+
 								EntityInstance(
+									ComponentManager*					aComponentManager,
 									uint32_t							aEntityId,
 									uint32_t							aEntityInstanceId);			
 								~EntityInstance();
@@ -29,13 +35,11 @@ namespace tpublic
 									EntityState::Id						aState,
 									int32_t								aTick);
 		void					AddComponent(
-									ComponentBase*						aComponent);
+									ComponentEntry&						aComponentEntry);
 		void					WriteNetwork(
-									const ComponentManager*				aComponentManager,
 									IWriter*							aWriter,
 									uint8_t								aFlags) const;
 		bool					ReadNetwork(
-									const ComponentManager*				aComponentManager,
 									IReader*							aReader,
 									std::vector<const ComponentBase*>*	aOutUpdatedComponents);
 		bool					IsDirty() const;
@@ -49,10 +53,10 @@ namespace tpublic
 		_T*
 		GetComponent()
 		{
-			for(std::unique_ptr<ComponentBase>& component : m_components)
+			for(ComponentEntry& component : m_components)
 			{
-				if(component && component->GetComponentId() == _T::ID)
-					return (_T*)component.get();
+				if (component.m_componentBase != NULL && component.m_componentBase->GetComponentId() == _T::ID)
+					return (_T*)component.m_componentBase;
 			}
 			return NULL;
 		}
@@ -61,10 +65,10 @@ namespace tpublic
 		const _T*
 		GetComponent() const
 		{
-			for(const std::unique_ptr<ComponentBase>& component : m_components)
+			for(const ComponentEntry& component : m_components)
 			{
-				if(component && component->GetComponentId() == _T::ID)
-					return (const _T*)component.get();
+				if (component.m_componentBase != NULL && component.m_componentBase->GetComponentId() == _T::ID)
+					return (const _T*)component.m_componentBase;
 			}
 			return NULL;
 		}
@@ -73,9 +77,9 @@ namespace tpublic
 		bool
 		HasComponent() const
 		{
-			for(const std::unique_ptr<ComponentBase>& component : m_components)
+			for(const ComponentEntry& component : m_components)
 			{
-				if(component && component->GetComponentId() == _T::ID)
+				if(component.m_componentBase != NULL && component.m_componentBase->GetComponentId() == _T::ID)
 					return true;
 			}
 			return false;
@@ -86,16 +90,17 @@ namespace tpublic
 		uint32_t										GetEntityId() const { return m_entityId; }
 		EntityState::Id									GetState() const { return m_state; }
 		bool											IsPlayer() const { return m_entityId == 0; }
-		std::vector<std::unique_ptr<ComponentBase>>&	GetComponents() { return m_components; }
+		std::vector<ComponentEntry>&					GetComponents() { return m_components; }
 		int32_t											GetStateTick() const { return m_stateTick; }
 		
 	private:
 		
+		ComponentManager*							m_componentManager;
 		uint32_t									m_entityId = 0;
 		uint32_t									m_entityInstanceId = 0;
 		EntityState::Id								m_state = EntityState::ID_DEFAULT;
 		int32_t										m_stateTick = 0;
-		std::vector<std::unique_ptr<ComponentBase>>	m_components;
+		std::vector<ComponentEntry>					m_components;
 		bool										m_dirty = false;
 	};
 

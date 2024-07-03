@@ -96,6 +96,7 @@ namespace tpublic
 								size_t										aTargetSize);
 		void				Shrink(
 								size_t										aTargetSize);
+		void				Reset();
 
 		// Public data
 		std::vector<Entry>		m_entries;

@@ -262,6 +262,13 @@ namespace tpublic::Components
 		}
 	}
 
+	void			
+	Auras::Reset()
+	{
+		m_entries.clear();
+		m_seq = 0;
+	}
+
 	//------------------------------------------------------------------------
 
 	void				

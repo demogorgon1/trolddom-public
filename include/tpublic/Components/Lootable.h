@@ -102,6 +102,17 @@ namespace tpublic
 				return false;
 			}
 
+			void
+			Reset()
+			{
+				m_lootTableId = 0;
+				m_playerTag.Clear();
+				m_cash = false;
+				m_availableCash = 0;
+				m_availableLoot.clear();
+				m_version = 0;
+			}
+
 			// Public data
 			uint32_t					m_lootTableId = 0;
 			PlayerTag					m_playerTag;

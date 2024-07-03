@@ -115,6 +115,12 @@ namespace tpublic
 				return i->second;
 			}
 
+			void
+			Reset()
+			{
+				m_table.m_map.clear();
+			}
+
 			// Public data
 			Table			m_table;
 		};

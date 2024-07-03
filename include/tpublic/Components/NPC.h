@@ -378,6 +378,32 @@ namespace tpublic
 				return NULL;
 			}
 
+			void
+			Reset()
+			{
+				m_states.clear();
+				m_resources.m_entries.clear();
+				m_despawnTime = DespawnTime();
+				m_defaultBehaviorStateId = 0;
+				m_canMoveOnAllNonViewBlockingTiles = false;
+				m_blocking = true;
+				m_inactiveEncounterDespawn = false;
+				m_encounterId = 0;
+
+				m_cooldowns.m_entries.clear();
+				m_castInProgress.reset();
+				m_channeling.reset();
+				m_targetEntityInstanceId = 0;
+				m_moveCooldownUntilTick = 0;
+				m_spawnPosition = Vec2();
+				m_anchorPosition = Vec2();
+				m_npcBehaviorState = NULL;
+				m_npcBehaviorStateTick = 0;
+				m_npcMovement.Reset(0);
+				m_restoreResources = false;
+				m_spawnWithTarget.reset();
+			}
+
 			// Public data			
 			std::vector<std::unique_ptr<StateEntry>>	m_states;
 			Resources									m_resources;

@@ -45,6 +45,12 @@ namespace tpublic
 				return i->first;
 			}
 
+			void
+			Reset()
+			{
+				m_targets.clear();
+			}
+
 			// Public data
 			// Not serialized, server only
 			std::unordered_map<uint32_t, int32_t>			m_targets;

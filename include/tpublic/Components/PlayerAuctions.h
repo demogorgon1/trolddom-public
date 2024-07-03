@@ -192,6 +192,15 @@ namespace tpublic
 				}
 				return false;
 			}
+			
+			void
+			Reset()
+			{
+				m_pendingCreateAuctions.clear();
+				m_pendingCancelAuctions.clear();
+				m_pendingBids.clear();
+				m_pendingBuyouts.clear();
+			}
 
 			// Public data
 			std::vector<CreateAuction>		m_pendingCreateAuctions;

@@ -131,6 +131,15 @@ namespace tpublic
 				}
 			}
 
+			void
+			Reset()
+			{
+				m_quests.clear();
+
+				m_tryStartQuestIds.clear();
+				m_completeManualObjectiveIds.clear();
+			}
+
 			// Public data
 			std::vector<std::unique_ptr<Quest>>						m_quests;
 

@@ -136,6 +136,15 @@ namespace tpublic
 				return NULL;
 			}
 
+			void
+			Reset()
+			{
+				m_mails.clear();
+				m_incoming.clear();
+				m_lastCheckTime = 0;
+				m_seq = 0;
+			}
+
 			// Public data
 			std::vector<std::unique_ptr<Entry>>		m_mails;
 			std::vector<std::unique_ptr<Entry>>		m_incoming;

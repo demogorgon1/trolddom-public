@@ -28,6 +28,12 @@ namespace tpublic
 			{
 				aSchema->DefineCustomObjectNoSource<Cooldowns>(FIELD_COOLDOWNS, offsetof(PlayerCooldowns, m_cooldowns));
 			}
+
+			void
+			Reset()
+			{
+				m_cooldowns.m_entries.clear();
+			}
 			
 			// Public data
 			Cooldowns		m_cooldowns;

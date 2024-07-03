@@ -29,6 +29,12 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_STRING, FIELD_STRING, "string", offsetof(DisplayName, m_string));
 			}
 
+			void
+			Reset()
+			{
+				m_string.clear();
+			}
+
 			// Public data
 			std::string		m_string;
 		};

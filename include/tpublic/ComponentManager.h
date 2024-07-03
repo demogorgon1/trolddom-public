@@ -2,6 +2,7 @@
 
 #include "Component.h"
 #include "ComponentBase.h"
+#include "ComponentPool.h"
 #include "ComponentSchema.h"
 #include "Parser.h"
 
@@ -18,8 +19,12 @@ namespace tpublic
 									ComponentManager();
 									~ComponentManager();
 
-		ComponentBase*				Create(
+		ComponentBase*				AllocateComponentNonPooled(
 										uint32_t				aId) const;
+		ComponentBase*				AllocateComponent(
+										uint32_t				aId);
+		void						ReleaseComponent(
+										ComponentBase*			aComponent);
 		uint8_t						GetComponentFlags(
 										uint32_t				aId) const;
 		Persistence::Id				GetComponentPersistence(
@@ -55,6 +60,7 @@ namespace tpublic
 			uint8_t								m_flags = 0;
 			Persistence::Id						m_persistence = Persistence::ID_NONE;
 			ComponentBase::Replication			m_replication = ComponentBase::REPLICATION_NONE;
+			std::unique_ptr<ComponentPoolBase>	m_pool;
 		};
 
 		ComponentType							m_componentTypes[Component::NUM_IDS];
@@ -71,6 +77,7 @@ namespace tpublic
 			t.m_flags = _T::FLAGS;
 			t.m_persistence = _T::PERSISTENCE;
 			t.m_replication = _T::REPLICATION;
+			t.m_pool.reset(new ComponentPool<_T>());
 
 			t.m_create = []() { return new _T(); };
 

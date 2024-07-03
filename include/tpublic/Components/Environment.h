@@ -33,6 +33,17 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_ABILITY, "ability", offsetof(Environment, m_abilityId))->SetDataType(DataType::ID_ABILITY);
 			}
 
+			void
+			Reset()
+			{
+				m_tickInterval = 5;
+				m_duration = 10;
+				m_abilityId = 0;
+
+				m_lastUpdateTick = 0;
+				m_despawnTick = 0;
+			}
+
 			// Public data
 			int32_t			m_tickInterval = 5;
 			int32_t			m_duration = 10;

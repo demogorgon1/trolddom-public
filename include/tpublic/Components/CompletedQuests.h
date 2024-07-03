@@ -30,6 +30,12 @@ namespace tpublic
 				aSchema->DefineCustomObjectNoSource<RangeBasedSet<uint32_t>>(FIELD_QUEST_IDS, offsetof(CompletedQuests, m_questIds));
 			}
 
+			void
+			Reset()
+			{
+				m_questIds.Reset();
+			}
+
 			// Public data
 			RangeBasedSet<uint32_t>		m_questIds;
 		};

@@ -149,6 +149,13 @@ namespace tpublic
 				m_animations.push_back(std::move(t));
 			}
 
+			void
+			Reset()
+			{
+				m_animations.clear();
+				memset(m_stateAnimations, 0, sizeof(m_stateAnimations));
+			}
+
 			// Public data
 			std::vector<std::unique_ptr<Animation>>	m_animations;
 			const Animation*						m_stateAnimations[EntityState::NUM_IDS] = { 0 };

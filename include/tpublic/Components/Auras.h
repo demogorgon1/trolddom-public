@@ -174,6 +174,7 @@ namespace tpublic
 			void			RemoveAurasByFlags(
 								const Manifest*								aManifest,
 								uint32_t									aFlags);
+			void			Reset();
 			void			OnLoadedFromPersistence(
 								const Manifest*								aManifest);
 

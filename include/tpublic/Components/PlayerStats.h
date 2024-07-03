@@ -54,6 +54,12 @@ namespace tpublic
 				return false;
 			}
 
+			void
+			Reset()
+			{
+				m_stats.Reset();
+			}
+
 			// Public data
 			CharacterStat::Collection	m_stats;
 		};

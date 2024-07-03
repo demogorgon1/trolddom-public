@@ -31,6 +31,15 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_TRIGGER_MANUAL_OBJECTIVE_ID, "trigger_manual_objective", offsetof(Trigger, m_triggerManualObjectiveId))->SetDataType(DataType::ID_OBJECTIVE);
 			}
 
+			void
+			Reset()
+			{
+				m_lockOutTicks = 0;
+				m_triggerManualObjectiveId = 0;
+
+				m_lockOutTable.clear();
+			}
+
 			// Public data
 			int32_t			m_lockOutTicks = 0;
 			uint32_t		m_triggerManualObjectiveId = 0;

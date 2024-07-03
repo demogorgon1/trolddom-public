@@ -42,6 +42,15 @@ namespace tpublic
 				m_itemList.m_version = version;
 			}
 
+			void
+			Reset()
+			{
+				m_itemList.Reset();
+				m_size = 0;
+
+				m_itemLootNotifications.clear();
+			}
+
 			// Public data
 			ItemList							m_itemList;
 			uint32_t							m_size = 0;

@@ -25,6 +25,13 @@ namespace tpublic
 			{
 			}
 
+			void
+			Reset()
+			{
+				m_table.Clear();
+				m_lastPingTick = 0;
+			}
+
 			// Public data
 			// Not serialized, server only
 			ThreatTable		m_table;

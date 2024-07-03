@@ -31,6 +31,17 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_DEITY_ID, "deity", offsetof(Shrine, m_deityId))->SetDataType(DataType::ID_DEITY);
 			}
 
+			void
+			Reset()
+			{
+				m_pantheonId = 0;
+				m_deityId = 0;
+
+				m_desecratedName.clear();
+				m_tappedName.clear();
+				m_defaultName.clear();
+			}
+
 			// Public data
 			uint32_t	m_pantheonId = 0;
 			uint32_t	m_deityId = 0;

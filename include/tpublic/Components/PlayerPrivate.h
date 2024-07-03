@@ -82,6 +82,30 @@ namespace tpublic
 				aSchema->DefineCustomObjectNoSource<PlayerGateways>(FIELD_GATEWAYS, offsetof(PlayerPrivate, m_gateways));
 			}
 
+			void
+			Reset()
+			{
+				m_level = 1;
+				m_xp = 0;
+				m_isDead = false;
+				m_resurrectionPointPosition = Vec2();
+				m_resurrectionPointMapId = 0;
+				m_guildRegistrationHistory = GuildRegistrationHistory();
+				m_professions.m_entries.clear();
+				m_worship.m_table.clear();
+				m_gateways.m_currentSeed = 0;
+				m_gateways.m_lockedSeeds.clear();
+
+				m_pvpCombatEvent = false;
+				m_tryEditPlayerWorlds = false;
+				m_recall = false;
+				m_lastPVPCombatEventTick = 0;
+				m_xpGain = 0;
+				m_professionSkillUseEvents.clear();
+				m_errorNotification = ErrorNotification::INVALID_ID;
+				m_abilityModifierList = NULL;
+			}
+
 			// Public data
 			uint32_t														m_level = 1;
 			uint32_t														m_xp = 0;

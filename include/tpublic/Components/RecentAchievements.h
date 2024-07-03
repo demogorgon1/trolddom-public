@@ -81,6 +81,13 @@ namespace tpublic
 				}
 			}
 
+			void
+			Reset()
+			{
+				m_entries.clear();
+				m_totalPoints = 0;
+			}
+
 			// Public data
 			std::vector<Entry>		m_entries;
 			uint32_t				m_totalPoints = 0;
