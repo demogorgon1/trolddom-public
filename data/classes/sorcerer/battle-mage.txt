@@ -359,9 +359,28 @@ aura power_shield:
 	duration: 300
 	flags: [ unique charged magic ]	
 	icon: icon_mage_shield
-	charges: { expression: a_mul_x_plus_b a: 1.5 b: 8 x: level }	
+	charges: { expression: a_mul_x_plus_b a: 2.15 b: 14 x: level }	
+	particle_system: power_shield
 	
 	aura_effect absorb:
 	{
+	}
+}
+
+particle_system power_shield:
+{
+	particle:
+	{
+		sprites: [ effect_power_shield_0 effect_power_shield_1 effect_power_shield_2 ]
+		flags: [ attached ]
+		sprite_interval: 150
+		count: 1
+		duration: 30000
+		scale: 1
+		alpha: 0.45
+		fade_in: 500
+		fade_out: 500
+		offset_x: 0.5
+		offset_y: 0.5	
 	}
 }
