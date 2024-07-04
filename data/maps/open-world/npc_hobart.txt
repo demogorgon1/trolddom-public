@@ -42,7 +42,7 @@ objective .hobart_1:
 	{
 		ability: .hobart_1
 		entities: [ .deer_1 .deer_2 .boar_1 .boar_2 ]
-		count: 3
+		count: 6
 	}
 }
 

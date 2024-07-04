@@ -89,7 +89,7 @@ class sorcerer:
 		wis_to_mag_crit: [ 1 30 ]
 		con_to_health: [ 10 1 ]
 		wis_to_mana: [ 10 1 ]
-		spi_to_mana_regen_per_5_sec: [ 3 2 ]
+		spi_to_mana_regen_per_5_sec: [ 4 3 ]
 		spi_to_health_regen: [ 1 1 ]		
 		str_to_block_value: [ 1 20 ]
 	}

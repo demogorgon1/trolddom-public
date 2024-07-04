@@ -357,9 +357,10 @@ sprites:
 	cursor: { position: [ 0 304 ] }		
 	sprite icon_cloth_belt_2 : { tags: [ icon armor_cloth waist ] icon_meta_data: !ICON_UNCOMMON_5{} }
 	sprite icon_cloth_belt_3 : { tags: [ icon armor_cloth waist ] icon_meta_data: !ICON_UNCOMMON_5{} }
-	sprite icon_fish_1 : { }
-	sprite icon_eel_1 : { }
-	sprite icon_fish_2 : { }
+	sprite icon_fish_1 : { tags: [ icon ] }
+	sprite icon_eel_1 : { tags: [ icon ] }
+	sprite icon_fish_2 : { tags: [ icon ] }
+	sprite icon_flower_3 : { tags: [ icon life ] }
 	
 }
 

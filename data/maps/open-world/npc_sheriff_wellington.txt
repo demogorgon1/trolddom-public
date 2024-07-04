@@ -46,7 +46,7 @@ objective .sheriff_wellington_1:
 	kill_npc:
 	{
 		entities: [ crab_man_2 ]
-		count: 6
+		count: 8
 	}
 }
 
@@ -97,7 +97,7 @@ objective .sheriff_wellington_2_a:
 	kill_npc:
 	{
 		entities: [ crab_man_3 ]
-		count: 3
+		count: 4
 	}
 }
 
@@ -110,7 +110,7 @@ objective .sheriff_wellington_2_b:
 	kill_npc:
 	{
 		entities: [ crab_caster_3 ]
-		count: 3
+		count: 4
 	}
 }
 

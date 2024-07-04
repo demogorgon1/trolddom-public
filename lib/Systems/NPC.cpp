@@ -576,6 +576,8 @@ namespace tpublic::Systems
 							position->m_lastMoveTick = aContext->m_tick;
 							npc->m_npcMovement.Reset(aContext->m_tick);
 
+							aContext->m_eventQueue->EventQueueThreat(npc->m_targetEntityInstanceId, aEntityInstanceId, 1, aContext->m_tick);
+
 							float cooldownModifier = 0.0f;
 							if(useAbility->IsAttack() && useAbility->IsMelee())
 								cooldownModifier = auras->GetAttackHaste(GetManifest());

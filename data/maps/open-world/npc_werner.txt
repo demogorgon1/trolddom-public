@@ -63,7 +63,7 @@ loot_group .werner_quest_item: {}
 
 item .werner_quest_item:
 {
-	icon: icon_mushroom_2
+	icon: icon_flower_3
 	item_level: 7
 	loot_groups: [ .werner_quest_item ]
 	flags: [ not_sellable ]

@@ -371,7 +371,7 @@ ability firebolt:
 	talent_tree: sorcerer_elemental
 	speed: 7
 	projectile: firebolt
-	resource_cost mana: 10
+	resource_cost mana: 12
 	target_particle_system: orange_spell_hit
 	
 	direct_effect damage:
@@ -425,7 +425,7 @@ ability fireball:
 	string: "Fireball"
 	description: "Deals $damage$ damage to target."
 	range: 8
-	cast_time: 30
+	cast_time: 28
 	cooldowns: [ global spell_fire_lockout ]
 	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
 	states: [ default in_combat ]
@@ -433,7 +433,7 @@ ability fireball:
 	talent_tree: sorcerer_elemental
 	speed: 7
 	projectile: fireball
-	resource_cost mana: 15
+	resource_cost mana: 18
 	target_particle_system: orange_spell_hit
 	
 	direct_effect damage:

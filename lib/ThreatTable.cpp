@@ -28,6 +28,9 @@ namespace tpublic
 			Entry* next = t->m_next;
 
 			int32_t ticksSinceLastUpdate = aTick - t->m_tick;
+
+			printf("%d ", ticksSinceLastUpdate);
+
 			if(ticksSinceLastUpdate > TIMEOUT_TICKS)
 			{
 				aOutRemoved.push_back(t->m_entityInstanceId);
@@ -46,18 +49,19 @@ namespace tpublic
 		uint32_t					aEntityInstanceId,
 		int32_t						aThreat)
 	{
-		Entry* entry;
-
 		Table::iterator i = m_table.find(aEntityInstanceId);
 		if(i != m_table.end())
 		{
-			entry = i->second;
+			if(aThreat != 0)
+			{
+				_Add(i->second, aThreat);
 
-			_Add(entry, aThreat);
+				i->second->m_tick = aTick;
+			}
 		}
 		else
 		{
-			entry = new Entry();
+			Entry* entry = new Entry();
 			m_table[aEntityInstanceId] = entry;
 
 			entry->m_entityInstanceId = aEntityInstanceId;
@@ -75,9 +79,9 @@ namespace tpublic
 				// Insert at end of list
 				_InsertAtEnd(entry);
 			}
-		}
 
-		entry->m_tick = aTick;
+			entry->m_tick = aTick;
+		}
 	}
 
 	void			
