@@ -67,14 +67,16 @@ namespace tpublic
 			if(aBufferSize < sizeof(size_t))
 				return false;
 
-			size_t uncompressedSize = *((size_t*)(((const uint8_t*)aBuffer) + aBufferSize - sizeof(size_t)));
+			const uint8_t* p = (const uint8_t*)aBuffer;
+			p += aBufferSize - sizeof(size_t);
+			size_t uncompressedSize = *((const size_t*)p);
 			size_t maxEncodedSize = BrotliEncoderMaxCompressedSize(uncompressedSize);
 			if(aBufferSize - sizeof(size_t) > maxEncodedSize)
 				return false;
 
 			aOut.resize(uncompressedSize);
 
-			size_t decodedSize;
+			size_t decodedSize = uncompressedSize;
 
 			BROTLI_BOOL result = BrotliDecoderDecompress(
 				aBufferSize - sizeof(size_t),

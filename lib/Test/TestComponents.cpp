@@ -40,32 +40,32 @@ namespace tpublic::Test
 			// Allocate enough to fill exactly one chunk
 			for (uint8_t i = 0; i < ComponentPoolChunkBase::SIZE; i++)
 			{
-				assert(componentPool.GetFullChunkCount() == 0);
-				assert(i == 0 || componentPool.GetPartialChunkCount() == 1);
+				TP_TEST(componentPool.GetFullChunkCount() == 0);
+				TP_TEST(i == 0 || componentPool.GetPartialChunkCount() == 1);
 
 				ComponentBase* componentBase = componentPool.Allocate();
-				assert(componentBase->GetComponentPoolChunkIndex() == i);
+				TP_TEST(componentBase->GetComponentPoolChunkIndex() == i);
 				components.push_back(componentBase);
 
-				assert(componentBase->Cast<TestComponent>()->m_dummy == 123);
+				TP_TEST(componentBase->Cast<TestComponent>()->m_dummy == 123);
 			}
 
-			assert(componentPool.GetFullChunkCount() == 1);
-			assert(componentPool.GetPartialChunkCount() == 0);
+			TP_TEST(componentPool.GetFullChunkCount() == 1);
+			TP_TEST(componentPool.GetPartialChunkCount() == 0);
 
 			// Allocate another one, should end up in new chunk
 			{
 				ComponentBase* componentBase = componentPool.Allocate();
-				assert(componentBase->GetComponentPoolChunkIndex() == 0);
+				TP_TEST(componentBase->GetComponentPoolChunkIndex() == 0);
 
-				assert(componentPool.GetFullChunkCount() == 1);
-				assert(componentPool.GetPartialChunkCount() == 1);
+				TP_TEST(componentPool.GetFullChunkCount() == 1);
+				TP_TEST(componentPool.GetPartialChunkCount() == 1);
 
 				// Free it again, should get rid of the new chunk too
 				componentPool.Release(componentBase);
 
-				assert(componentPool.GetFullChunkCount() == 1);
-				assert(componentPool.GetPartialChunkCount() == 0);
+				TP_TEST(componentPool.GetFullChunkCount() == 1);
+				TP_TEST(componentPool.GetPartialChunkCount() == 0);
 			}
 
 			// Free the first component of first chunk
@@ -73,26 +73,26 @@ namespace tpublic::Test
 				componentPool.Release(components[0]);
 				components[0] = NULL;
 
-				assert(componentPool.GetFullChunkCount() == 0);
-				assert(componentPool.GetPartialChunkCount() == 1);
+				TP_TEST(componentPool.GetFullChunkCount() == 0);
+				TP_TEST(componentPool.GetPartialChunkCount() == 1);
 			}
 
 			// Allocate again, should get the slot we just freed
 			{
 				ComponentBase* componentBase = componentPool.Allocate();
-				assert(componentBase->GetComponentPoolChunkIndex() == 0);
+				TP_TEST(componentBase->GetComponentPoolChunkIndex() == 0);
 				components[0] = componentBase;
 
-				assert(componentPool.GetFullChunkCount() == 1);
-				assert(componentPool.GetPartialChunkCount() == 0);
+				TP_TEST(componentPool.GetFullChunkCount() == 1);
+				TP_TEST(componentPool.GetPartialChunkCount() == 0);
 			}
 
 			// Free everything
 			for (ComponentBase* componentBase : components)
 				componentPool.Release(componentBase);
 
-			assert(componentPool.GetFullChunkCount() == 0);
-			assert(componentPool.GetPartialChunkCount() == 0);
+			TP_TEST(componentPool.GetFullChunkCount() == 0);
+			TP_TEST(componentPool.GetPartialChunkCount() == 0);
 		}
 
 		// Component manager
@@ -104,13 +104,13 @@ namespace tpublic::Test
 
 			{
 				Components::CombatPublic* combatPublic = componentBase1->Cast<Components::CombatPublic>();
-				assert(combatPublic->m_level == 1);
+				TP_TEST(combatPublic->m_level == 1);
 				combatPublic->m_level = 123;
 			}
 
 			{
 				Components::CombatPublic* combatPublic = componentBase2->Cast<Components::CombatPublic>();
-				assert(combatPublic->m_level == 1);
+				TP_TEST(combatPublic->m_level == 1);
 			}
 
 			componentManager.ReleaseComponent(componentBase1);
@@ -120,7 +120,7 @@ namespace tpublic::Test
 
 			{
 				Components::CombatPublic* combatPublic = componentBase3->Cast<Components::CombatPublic>();
-				assert(combatPublic->m_level == 1);
+				TP_TEST(combatPublic->m_level == 1);
 			}
 		}
 	}

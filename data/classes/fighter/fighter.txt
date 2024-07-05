@@ -50,7 +50,7 @@ ability fighter_shoot:
 class fighter:
 {
 	string: "Fighter"	
-	description: "Defeat your enemies in hand-to-hand combat while being able to take a beating."
+	description: "Defeat your enemies in hand-to-hand combat."
 	
 	systems: [ combat health_regen rage ]
 	

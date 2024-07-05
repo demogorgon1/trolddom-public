@@ -36,19 +36,26 @@ namespace tpublic
 	do																																\
 	{																																\
 		if(!(_Condition))																											\
-			tpublic::DataErrorHandling::VerificationError(_DebugInfo, "" __VA_ARGS__);											\
+			tpublic::DataErrorHandling::VerificationError(_DebugInfo, "" __VA_ARGS__);												\
 	} while(false)
 
 #define TP_VERIFY_STRING_ID(_StringId, _DebugInfo)																					\
 	do																																\
 	{																																\
-		if(!tpublic::DataErrorHandling::VerifyStringId(_StringId))																\
-			tpublic::DataErrorHandling::VerificationError(_DebugInfo, "Invalid string identifier: '%s'", _StringId.c_str());	\
+		if(!tpublic::DataErrorHandling::VerifyStringId(_StringId))																	\
+			tpublic::DataErrorHandling::VerificationError(_DebugInfo, "Invalid string identifier: '%s'", _StringId.c_str());		\
 	} while(false)
 	
 #define TP_CHECK(_Condition, ...)																									\
 	do																																\
 	{																																\
 		if(!(_Condition))																											\
-			tpublic::DataErrorHandling::FatalError("" __VA_ARGS__);																\
+			tpublic::DataErrorHandling::FatalError("" __VA_ARGS__);																	\
+	} while(false)
+
+#define TP_TEST(_Condition)																											\
+	do																																\
+	{																																\
+		if(!(_Condition))																											\
+			tpublic::DataErrorHandling::FatalError("[%s:%u] Test failed: %s" __FILE__, __LINE__, #_Condition);						\
 	} while(false)
