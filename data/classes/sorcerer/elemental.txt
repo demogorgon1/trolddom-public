@@ -185,6 +185,23 @@ aura improved_frost_explosion:
 	duration: 50	
 	flags: [ unique magic ]
 	aura_effect immobilize: { }
+	particle_system: improved_frost_explosion
+}
+
+particle_system improved_frost_explosion:
+{
+	particle:
+	{
+		sprites: [ effect_frozen ]
+		flags: [ attached blend_add ]
+		count: 1
+		scale: 1
+		alpha: 0.45
+		fade_in: 250	
+		fade_out: 250
+		offset_x: 0.5
+		offset_y: 0.5	
+	}
 }
 
 ###############################################################################
@@ -292,7 +309,7 @@ ability lake_of_fire:
 	icon: icon_lake_of_fire
 	cooldowns: [ global lake_of_fire spell_fire_lockout ]	
 	aoe_radius: 2
-	resource_cost mana: 18
+	resource_cost mana: 30
 	talent_tree: sorcerer_elemental
 	
 	aoe_entity_spawn lake_of_fire:
@@ -371,7 +388,7 @@ ability firebolt:
 	talent_tree: sorcerer_elemental
 	speed: 7
 	projectile: firebolt
-	resource_cost mana: 12
+	resource_cost mana: 25
 	target_particle_system: orange_spell_hit
 	
 	direct_effect damage:
@@ -433,7 +450,7 @@ ability fireball:
 	talent_tree: sorcerer_elemental
 	speed: 7
 	projectile: fireball
-	resource_cost mana: 18
+	resource_cost mana: 35
 	target_particle_system: orange_spell_hit
 	
 	direct_effect damage:
@@ -494,7 +511,7 @@ ability ice_lance:
 	talent_tree: sorcerer_elemental
 	speed: 7
 	projectile: ice_lance
-	resource_cost mana: 12
+	resource_cost mana: 25
 	target_particle_system: blue_spell_hit
 	
 	direct_effect damage:
@@ -539,12 +556,11 @@ ability frost_explosion:
 	states: [ default in_combat ]
 	icon: icon_frost_explosion
 	talent_tree: sorcerer_elemental
-	resource_cost mana: 18
+	resource_cost mana: 30
 	delay: 3
 	aoe_radius: 3
 	aoe_cap: 8
 	aoe_requirement target<must_not_be_in_state>: { id: dead }
-	resource_cost mana: 15
 	source_particle_system: frost_explosion
 
 	direct_effect damage:

@@ -506,6 +506,14 @@ namespace tpublic
 			m_mapCovers->CopyFrom(aMapData->m_mapCovers.get());
 		}
 
+		if(aMapData->m_mapPathData)
+		{
+			assert(!m_mapPathData);
+
+			m_mapPathData = std::make_unique<MapPathData>();
+			m_mapPathData->CopyFrom(aMapData->m_mapPathData.get());
+		}
+
 		m_doodads = aMapData->m_doodads;
 		m_walls = aMapData->m_walls;
 	}

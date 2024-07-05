@@ -300,6 +300,7 @@ aura knock:
 	duration: 30	
 	flags: [ unique ]
 	aura_effect stun: { }
+	particle_system: knock
 }
 
 cooldown knock:
@@ -324,6 +325,24 @@ ability knock:
 	{	
 		aura: knock
 		threat: 10
+	}
+}
+
+
+particle_system knock:
+{
+	particle:
+	{
+		sprites: [ effect_stun_0 effect_stun_1 effect_stun_2 effect_stun_3 ]
+		flags: [ attached ]
+		sprite_interval: 125
+		count: 1
+		scale: 1
+		alpha: 0.45
+		fade_in: 250	
+		fade_out: 250
+		offset_x: 0.5
+		offset_y: 0.5	
 	}
 }
 

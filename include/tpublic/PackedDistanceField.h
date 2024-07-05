@@ -47,8 +47,20 @@ namespace tpublic
 		}
 
 		void
+		CopyFrom(
+			const PackedDistanceField*	aOther)
+		{
+			assert(m_elems == NULL);
+			m_elemCount = aOther->m_elemCount;
+			m_size = aOther->m_size;
+			m_encoding = aOther->m_encoding;
+			m_elems = new uint32_t[m_elemCount];
+			memcpy(m_elems, aOther->m_elems, sizeof(uint32_t) * m_elemCount);
+		}
+
+		void
 		ToStream(
-			IWriter*		aWriter) const
+			IWriter*					aWriter) const
 		{
 			assert(m_elems != NULL);
 			m_size.ToStream(aWriter);
@@ -59,7 +71,7 @@ namespace tpublic
 
 		bool
 		FromStream(
-			IReader*		aReader) 
+			IReader*					aReader) 
 		{
 			assert(m_elems == NULL);
 			if(!m_size.FromStream(aReader))
@@ -100,8 +112,8 @@ namespace tpublic
 
 		void		
 		Create(
-			const uint32_t*	aDistanceField,
-			const Vec2&		aSize)
+			const uint32_t*				aDistanceField,
+			const Vec2&					aSize)
 		{
 			assert(aSize.m_x > 0 && aSize.m_y > 0);
 			assert(m_elems == NULL);
@@ -165,7 +177,7 @@ namespace tpublic
 
 		uint32_t
 		Get(
-			const Vec2&		aPosition) const
+			const Vec2&					aPosition) const
 		{
 			assert(m_elems != NULL);
 			assert((uint32_t)m_encoding < (uint32_t)NUM_ENCODINGS);

@@ -115,6 +115,8 @@ namespace tpublic
 				delete [] m_areaMap;
 		}
 
+		void		CopyFrom(
+						const MapPathData*		aOther);
 		void		ToStream(
 						IWriter*				aWriter) const;
 		bool		FromStream(

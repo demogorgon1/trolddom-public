@@ -5,6 +5,35 @@
 namespace tpublic
 {
 
+	void		
+	MapPathData::CopyFrom(
+		const MapPathData*		aOther)
+	{
+		assert(m_areaMap == NULL);
+
+		m_routes = aOther->m_routes;
+		m_size = aOther->m_size;
+		size_t elems = (size_t)(m_size.m_x * m_size.m_y);
+		m_areaMap = new uint16_t[elems];
+		memcpy(m_areaMap, aOther->m_areaMap, elems * sizeof(uint16_t));
+
+		for (Areas::const_iterator i = aOther->m_areas.cbegin(); i != aOther->m_areas.cend(); i++)
+		{
+			std::unique_ptr<Area> t = std::make_unique<Area>();
+			t->m_id = i->second->m_id;
+			t->m_origin = i->second->m_origin;
+
+			for(Area::Neighbors::const_iterator j = i->second->m_neighbors.cbegin(); j != i->second->m_neighbors.cend(); j++)
+			{
+				std::unique_ptr<PackedDistanceField> k = std::make_unique<PackedDistanceField>();
+				k->CopyFrom(j->second.get());
+				t->m_neighbors[j->first] = std::move(k);
+			}
+
+			m_areas[i->first] = std::move(t);
+		}
+	}
+
 	void
 	MapPathData::ToStream(
 		IWriter*				aWriter) const

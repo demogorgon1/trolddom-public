@@ -29,8 +29,6 @@ namespace tpublic
 
 			int32_t ticksSinceLastUpdate = aTick - t->m_tick;
 
-			printf("%d ", ticksSinceLastUpdate);
-
 			if(ticksSinceLastUpdate > TIMEOUT_TICKS)
 			{
 				aOutRemoved.push_back(t->m_entityInstanceId);
