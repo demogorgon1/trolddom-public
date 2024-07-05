@@ -431,6 +431,34 @@ entity crab_ambusher_6: !NPC
 }
 
 ##########################################################################################
+# Crab Agent
+
+loot_table .crab_man_6: 
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .randy_quest_items }			
+		}			
+
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]		
+}
+
+entity crab_man_6: !NPC
+{
+	_string: "Crab Agent"
+	_level: 6
+	_faction: monsters
+	_sprite: crab_monster_1
+	_sprite_dead: crab_monster_1_dead
+	_loot_table: .crab_man_6
+	_creature_type: humanoid
+	_default_behavior_state: .wandering_short	
+}
+
+##########################################################################################
 # Eldertree Woods Goblins
 
 loot_table .eldertree_woods_goblins_5: 

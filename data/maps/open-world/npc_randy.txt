@@ -1,0 +1,104 @@
+dialogue_screen .randy_greetings:
+{
+	text: 
+	[	
+		"Greetings. What brings you out here?"
+	]
+	
+	options:
+	[
+		{ quest: .randy_1 }
+	]
+}
+
+dialogue_root .randy_dialogue:
+{
+	.randy_greetings: { }
+}
+
+entity .randy: !NPC
+{
+	_string: "Randy Ernston"
+	_dialogue_root: .randy_dialogue	
+	_sprite: man_4
+	_sprite_dead: man_4_dead	
+	_level: 10
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .randy_quest_items: { }
+
+item .randy_quest_item_1:
+{
+	binds: when_picked_up
+	loot_groups: [ .randy_quest_items ]		
+	string: "Crab Claw" 
+	icon: icon_claw_2
+	stack: 5
+	item_level: 6
+	flags: [ not_sellable ]
+}
+
+objective .randy_1:
+{
+	string: "Crab Claws"
+	collect_items: { item: .randy_quest_item_1 count: 5 }
+}
+
+item .randy_quest_item_2:
+{
+	binds: when_picked_up
+	loot_groups: [ .randy_quest_items ]		
+	string: "Crab Antenna" 
+	icon: icon_antenna
+	stack: 5
+	item_level: 6
+	flags: [ not_sellable ]
+}
+
+objective .randy_2:
+{
+	string: "Crab Antennas"
+	collect_items: { item: .randy_quest_item_2 count: 5 }
+}
+
+quest .randy_1:
+{
+	string: "It's Not All Crab"
+
+	text:
+	[
+		"Collect crab parts at the beach to the east."
+	]
+	
+	description: 
+	[
+		"I've been thinking about these crab men that have been so plentiful recently and how the whole situation might be beneficial.\n"
+		"\n"
+		"You see, coming from the mainland I know that there is a large market for small gadgets and items that seem kinda exotic. City people love that kind of stuff.\n"
+		"\n"
+		"Usually crabs are small so I'm figuring someone ought to be intrigued if they see a giant crab claw. I'm sure we can make a profit if I bring some of them back to the city. If you can bring me crab"
+		"parts I'll make it worth your while."
+	]
+
+	progress:
+	[
+		"Did they bite your toes?"
+	]
+	
+	completion:
+	[
+		"Nice! I'm sure there is good business in this, somewhere."
+	]
+
+	objectives: [ .randy_1 .randy_2 ]
+	level: 6	
+	
+	reward_cash_multiplier: 20
+}

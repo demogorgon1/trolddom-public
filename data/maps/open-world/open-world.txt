@@ -57,6 +57,11 @@ map_entity_spawn .rorion:
 	entity .rorion: { weight: 1 }
 }
 
+map_entity_spawn .randy:
+{
+	entity .randy: { weight: 1 }
+}
+
 map_entity_spawn .hobart:
 {
 	entity .hobart: { weight: 1 }
@@ -221,6 +226,12 @@ map_entity_spawn .crab_man_4:
 {
 	entity crab_man_4: { weight: 1 }
 	entity crab_caster_4: { weight: 1 }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn .crab_man_6:
+{
+	entity crab_man_6: { weight: 1 }
 	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
@@ -538,6 +549,7 @@ map_palette .stuff:
 	entity_spawn .marcus_flambe: [ 12 195 55 ]			
 	entity_spawn .svara: [ 12 195 255 ]			
 	entity_spawn .hobart: [ 12 195 155 ]	
+	entity_spawn .randy: [ 125 95 151 ]	
 	entity_spawn .theodore: [ 142 195 155 ]	
 	entity_spawn .tom: [ 140 192 16 ]	
 	entity_spawn .clara: [ 40 90 180 ]	
@@ -561,6 +573,7 @@ map_palette .stuff:
 	entity_spawn .crab_man: [ 192 195 15 ]	
 	entity_spawn .crab_man_3: [ 192 15 15 ]	
 	entity_spawn .crab_man_4: [ 193 15 15 ]	
+	entity_spawn .crab_man_6: [ 195 12 15 ]	
 	entity_spawn .crab_boss_4: [ 192 15 195 ]	
 	entity_spawn .crab_boss_5: [ 192 1 195 ]	
 	entity_spawn .crab_brute_5: [ 193 15 195 ]	

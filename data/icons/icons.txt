@@ -362,6 +362,7 @@ sprites:
 	sprite icon_fish_2 : { tags: [ icon ] }
 	sprite icon_flower_3 : { tags: [ icon life ] }
 	sprite icon_exhausted : { tags: [ icon ] }
+	sprite icon_antenna : { tags: [ icon ] }
 	
 }
 
