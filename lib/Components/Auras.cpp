@@ -35,6 +35,19 @@ namespace tpublic::Components
 		return false;
 	}
 
+	bool			
+	Auras::HasAura(
+		uint32_t									aAuraId) const
+	{
+		for (const std::unique_ptr<Entry>& entry : m_entries)
+		{
+			if(entry->m_auraId == aAuraId)
+				return true;
+		}
+
+		return false;
+	}
+
 	MoveSpeed::Id	
 	Auras::GetMoveSpeed() const
 	{

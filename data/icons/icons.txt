@@ -361,6 +361,7 @@ sprites:
 	sprite icon_eel_1 : { tags: [ icon ] }
 	sprite icon_fish_2 : { tags: [ icon ] }
 	sprite icon_flower_3 : { tags: [ icon life ] }
+	sprite icon_exhausted : { tags: [ icon ] }
 	
 }
 

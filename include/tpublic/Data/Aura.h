@@ -90,7 +90,8 @@ namespace tpublic
 				FLAG_INDEFINITE				= 0x00000200,
 				FLAG_CANCEL_OUTSIDE_COMBAT	= 0x00000400,
 				FLAG_CANCEL_ON_DAMAGE		= 0x00000800,
-				FLAG_SINGLE_TARGET			= 0x00001000
+				FLAG_SINGLE_TARGET			= 0x00001000,
+				FLAG_PRIVATE				= 0x00002000
 			};
 
 			static Type
@@ -143,6 +144,8 @@ namespace tpublic
 						flags |= FLAG_CANCEL_ON_DAMAGE;
 					else if (strcmp(string, "single_target") == 0)
 						flags |= FLAG_SINGLE_TARGET;
+					else if (strcmp(string, "private") == 0)
+						flags |= FLAG_PRIVATE;
 					else
 						TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid aura flag.", string);
 				});

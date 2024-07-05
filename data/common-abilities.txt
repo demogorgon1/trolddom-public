@@ -202,3 +202,13 @@ ability level_up:
 {
 	target_particle_system: level_up
 }
+
+aura exhausted:
+{
+	string: "Exhausted"
+	description: "You can't Spirit Travel."
+	flags: [ private ]
+	icon: icon_exhausted	
+	type: debuff
+	duration: 3000
+}

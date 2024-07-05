@@ -138,8 +138,8 @@ namespace tpublic
 			bool			HasEffect(
 								AuraEffect::Id								aId,
 								uint32_t*									aOutSourceEntityInstanceId) const;
-			bool			HasType(
-								Data::Aura::Type							aType) const;
+			bool			HasAura(
+								uint32_t									aAuraId) const;
 			MoveSpeed::Id	GetMoveSpeed() const;
 			float			GetAttackHaste(
 								const Manifest*								aManifest) const;
