@@ -56,7 +56,8 @@ namespace tpublic
 			EXPRESSION_A_MUL_X,
 			EXPRESSION_A_MUL_X_PLUS_B,
 			EXPRESSION_X_PLUS_A,
-			EXPRESSION_X
+			EXPRESSION_X,
+			EXPRESSION_A_MUL_X_PLUS_B_MUL_Y
 		};
 
 		enum Input : uint8_t
@@ -88,6 +89,8 @@ namespace tpublic
 				return EXPRESSION_A_MUL_X;
 			else if (t == "a_mul_x_plus_b")
 				return EXPRESSION_A_MUL_X_PLUS_B;
+			else if (t == "a_mul_x_plus_b_mul_y")
+				return EXPRESSION_A_MUL_X_PLUS_B_MUL_Y;
 			else if (t == "x_plus_a")
 				return EXPRESSION_X_PLUS_A;
 			else if (t == "x")
@@ -160,6 +163,10 @@ namespace tpublic
 					{
 						m_x = SourceToInput(aChild);
 					}
+					else if (aChild->m_name == "y")
+					{
+						m_y = SourceToInput(aChild);
+					}
 					else if(aChild->m_name == "a")
 					{
 						if(aChild->m_type == SourceNode::TYPE_NUMBER)
@@ -201,8 +208,8 @@ namespace tpublic
 			aWriter->WriteFloat(m_spread);
 			m_aLevelCurve.ToStream(aWriter);
 			m_bLevelCurve.ToStream(aWriter);
-
 			aWriter->WriteFloat(m_eliteMultiplier);
+			aWriter->WritePOD(m_y);
 		}
 
 		bool
@@ -230,6 +237,12 @@ namespace tpublic
 					return false;
 			}
 
+			if(!aReader->IsEnd())
+			{
+				if (!aReader->ReadPOD(m_y))
+					return false;
+			}
+
 			return true;
 		}
 
@@ -253,6 +266,7 @@ namespace tpublic
 		// Public data
 		Expression				m_expression = INVALID_EXPRESSION;
 		Input					m_x = INVALID_INPUT;
+		Input					m_y = INVALID_INPUT;
 		float					m_a = 0.0f;
 		float					m_b = 0.0f;
 		float					m_spread = 0.0f;

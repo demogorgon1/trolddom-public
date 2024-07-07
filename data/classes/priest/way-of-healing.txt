@@ -306,7 +306,7 @@ ability greater_heal:
 	
 	direct_effect heal:
 	{	
-		function: { expression: a_mul_x_plus_b x: healing a: 1 b: 25 }
+		function: { expression: a_mul_x_plus_b x: healing a: 1 b: [ [ 1 25 ] [ 10 50 ] ] }
 	}
 	
 	direct_effect apply_aura:
@@ -338,7 +338,7 @@ ability minor_heal:
 
 	direct_effect heal:
 	{	
-		function: { expression: a_mul_x_plus_b x: healing a: 0.7 b: 10 }
+		function: { expression: a_mul_x_plus_b x: healing a: 0.7 b: [ [ 1 10 ] [ 10 20 ] ] }
 	}
 	
 	direct_effect apply_aura:
@@ -364,7 +364,7 @@ ability blessing_tick:
 	
 	direct_effect heal:
 	{	
-		function: { expression: a_mul_x_plus_b x: healing a: 0.25 b: 4 }
+		function: { expression: a_mul_x_plus_b x: healing a: 0.25 b: [ [ 1 4 ] [ 10 8 ] ] }
 	}	
 }
 

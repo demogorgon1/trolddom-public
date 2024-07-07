@@ -162,6 +162,10 @@ namespace tpublic
 			output = _GetA(aCombatPublic, this) * _GetInput(aRandomSource, aCombatPublic, aCombatPrivate, m_x) + _GetB(aCombatPublic, this);
 			break;
 
+		case EXPRESSION_A_MUL_X_PLUS_B_MUL_Y:
+			output = _GetA(aCombatPublic, this) * _GetInput(aRandomSource, aCombatPublic, aCombatPrivate, m_x) + _GetB(aCombatPublic, this) * _GetInput(aRandomSource, aCombatPublic, aCombatPrivate, m_y);
+			break;
+
 		case EXPRESSION_X_PLUS_A:
 			output = _GetInput(aRandomSource, aCombatPublic, aCombatPrivate, m_x) + _GetA(aCombatPublic, this);
 			break;
