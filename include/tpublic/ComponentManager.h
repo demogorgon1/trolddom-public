@@ -25,6 +25,8 @@ namespace tpublic
 										uint32_t				aId);
 		void						ReleaseComponent(
 										ComponentBase*			aComponent);
+		const ComponentSchema*		GetComponentSchema(
+										uint32_t				aId) const;
 		uint8_t						GetComponentFlags(
 										uint32_t				aId) const;
 		Persistence::Id				GetComponentPersistence(

@@ -153,6 +153,15 @@ namespace tpublic
 		t.m_pool->Release(aComponent);
 	}
 
+	const ComponentSchema* 
+	ComponentManager::GetComponentSchema(
+		uint32_t				aId) const
+	{
+		assert(aId < Component::NUM_IDS);
+		const ComponentType& t = m_componentTypes[aId];
+		return &t.m_schema;
+	}
+
 	uint8_t				
 	ComponentManager::GetComponentFlags(
 		uint32_t				aId) const

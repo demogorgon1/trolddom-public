@@ -20,6 +20,7 @@
 #if defined(WIN32)
 
 	#define TP_STRING_FORMAT_VARARGS(Buffer, BufferSize, Format)						\
+		do																				\
 		{																				\
 			va_list _list;																\
 			va_start(_list, Format);													\
@@ -27,16 +28,18 @@
 			if(n < 0)																	\
 				Buffer[0] = '\0';														\
 			va_end(_list);																\
-		}
+		} while(false)
 
 	#define TP_STRING_FORMAT(Buffer, BufferSize, Format, ...)							\
+		do																				\
 		{																				\
 			sprintf_s(Buffer, BufferSize, Format, __VA_ARGS__);							\
-		}
+		} while(false)
 
 #else
 
 	#define TP_STRING_FORMAT_VARARGS(Buffer, BufferSize, Format)						\
+		do																				\
 		{																				\
 			va_list _list;																\
 			va_start(_list, Format);													\
@@ -44,12 +47,13 @@
 			if(n < 0)																	\
 				Buffer[0] = '\0';														\
 			va_end(_list);																\
-		}
+		} while(false)
 
 	#define TP_STRING_FORMAT(Buffer, BufferSize, Format, ...)							\
+		do																				\
 		{																				\
 			snprintf(Buffer, BufferSize, Format, __VA_ARGS__);							\
-		}
+		} while(false)
 
 #endif
 

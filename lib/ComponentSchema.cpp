@@ -1,8 +1,10 @@
 #include "Pcheader.h"
 
+#include <tpublic/Base64.h>
 #include <tpublic/ComponentSchema.h>
 #include <tpublic/Helpers.h>
 #include <tpublic/Vec2.h>
+#include <tpublic/VectorIO.h>
 
 namespace tpublic
 {
@@ -413,6 +415,171 @@ namespace tpublic
 		return true;
 	}
 
+	void			
+	ComponentSchema::ExportText(
+		const void*			aObject,
+		ExportTextCallback	aExportTextCallback) const
+	{
+		for (const Field& field : m_fields)
+		{
+			bool deprecated = field.m_offset == UINT32_MAX;
+			if (!deprecated && (field.m_flags & FLAG_NO_STORAGE) == 0)
+			{
+				std::string value = _ValueAsString(aObject, &field);
+
+				char buffer[1024];
+				if(field.m_name != NULL)						
+					TP_STRING_FORMAT(buffer, sizeof(buffer), "%s:%s", field.m_name, value.c_str());
+				else
+					TP_STRING_FORMAT(buffer, sizeof(buffer), "%u:%s", field.m_id, value.c_str());
+
+				aExportTextCallback(buffer);
+			}
+		}
+	}
+
+	void			
+	ComponentSchema::ImportText(
+		const char*			aText,
+		void*				aObject) const
+	{
+		enum ParseState
+		{
+			PARSE_STATE_INIT,
+			PARSE_STATE_FIELD_ID,
+			PARSE_STATE_FIELD_NAME,
+		};
+
+		ParseState parseState = PARSE_STATE_INIT;
+		const char* p = aText;
+
+		std::vector<char> buffer;
+		const Field* field = NULL;
+
+		while(*p != '\0')
+		{
+			char c = *p;
+
+			switch(parseState)
+			{
+			case PARSE_STATE_INIT:
+				buffer.push_back(c);
+				if (c >= '0' && c <= '9')
+					parseState = PARSE_STATE_FIELD_ID;
+				else 
+					parseState = PARSE_STATE_FIELD_NAME;
+				break;
+
+			case PARSE_STATE_FIELD_ID:
+			case PARSE_STATE_FIELD_NAME:
+				if(c == ':')
+				{
+					buffer.push_back('\0');
+					if(parseState == PARSE_STATE_FIELD_ID)
+						field = _GetFieldById(strtoul(&buffer[0], NULL, 10));
+					else 
+						field = _GetFieldByName(&buffer[0]);
+					p++;
+					break;
+				}
+				else 
+				{
+					buffer.push_back(c);
+				}
+				break;
+			}
+			p++;
+		}
+
+		TP_CHECK(*p != '\0', "Missing component field value.");
+		TP_CHECK(field != NULL, "Missing component field.");
+
+		switch(field->m_type)
+		{
+		case TYPE_VEC2:
+			{				
+				Vec2* t = (Vec2*)&(((const uint8_t*)aObject)[field->m_offset]);
+				int32_t result = sscanf(p, "%d,%d", &t->m_x, &t->m_y);
+				TP_CHECK(result == 2, "Invalid value.");
+			}
+			break;
+
+		case TYPE_STRING:
+			{
+				std::string* t = (std::string*)&(((const uint8_t*)aObject)[field->m_offset]);
+				*t = p;
+			}
+			break;
+
+		case TYPE_BOOL:
+			{
+				bool* t = (bool*)&(((const uint8_t*)aObject)[field->m_offset]);
+				*t = strcmp(p, "true") == 0;
+			}
+			break;
+
+		case TYPE_INT32:
+			{
+				int32_t* t = (int32_t*)&(((const uint8_t*)aObject)[field->m_offset]);
+				int32_t result = sscanf(p, "%d", t);
+				TP_CHECK(result == 1, "Invalid value.");
+			}
+			break;
+
+		case TYPE_INT64:
+			{
+				int64_t* t = (int64_t*)&(((const uint8_t*)aObject)[field->m_offset]);
+				int32_t result = sscanf(p, "%zd", t);
+				TP_CHECK(result == 1, "Invalid value.");
+			}
+			break;
+
+		case TYPE_UINT32:
+			{
+				uint32_t* t = (uint32_t*)&(((const uint8_t*)aObject)[field->m_offset]);
+				int32_t result = sscanf(p, "%u", t);
+				TP_CHECK(result == 1, "Invalid value.");
+			}
+			break;
+
+		case TYPE_UINT64:
+			{
+				uint64_t* t = (uint64_t*)&(((const uint8_t*)aObject)[field->m_offset]);
+				int32_t result = sscanf(p, "%zu", t);
+				TP_CHECK(result == 1, "Invalid value.");
+		}
+			break;
+
+		case TYPE_FLOAT:
+			{
+				float* t = (float*)&(((const uint8_t*)aObject)[field->m_offset]);
+				int32_t result = sscanf(p, "%f", t);
+				TP_CHECK(result == 1, "Invalid value.");
+			}
+			break;
+
+		case TYPE_UINT32_ARRAY:
+			{
+				std::vector<uint32_t>* t = (std::vector<uint32_t>*)&(((const uint8_t*)aObject)[field->m_offset]);
+				t->clear();
+				std::stringstream tokenizer(p);
+				std::string token;
+				while (std::getline(tokenizer, token, ','))
+				{
+					Helpers::TrimString(token);
+					uint32_t v;
+					int32_t result = sscanf(p, "%u", &v);
+					TP_CHECK(result == 1, "Invalid value.");
+					t->push_back(v);
+				}
+			}
+			break;
+
+		default:
+			break;
+		}
+	}
+
 	std::string
 	ComponentSchema::AsDebugString(
 		const void*			aObject) const
@@ -791,7 +958,14 @@ namespace tpublic
 
 		case TYPE_CUSTOM:
 			{
-				strcpy(buffer, "(custom)");
+				const void* t = (const void*)&(((const uint8_t*)aObject)[aField->m_offset]);
+
+				std::vector<uint8_t> serialized;
+				VectorIO::Writer writer(serialized);
+				aField->m_customWrite(&writer, t);
+				std::string base64;
+				Base64::Encode(&serialized[0], serialized.size(), base64);
+				return base64; // Return base64 directly
 			}
 			break;
 

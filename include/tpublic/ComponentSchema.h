@@ -44,6 +44,7 @@ namespace tpublic
 			READ_TYPE_SOURCE
 		};
 
+		typedef std::function<void(const char*)> ExportTextCallback;
 		typedef std::function<void(IWriter*, const void*)> CustomWriteCallback;
 		typedef std::function<bool(IReader*, void*)> CustomReadCallback;
 		typedef std::function<void(const SourceNode*, void*)> CustomReadSourceCallback;
@@ -114,6 +115,12 @@ namespace tpublic
 							const Manifest*			aManifest,
 							IReader*				aReader,
 							void*					aObject) const;			
+		void			ExportText(
+							const void*				aObject,
+							ExportTextCallback		aExportTextCallback) const;
+		void			ImportText(
+							const char*				aText,
+							void*					aObject) const;
 		std::string		AsDebugString(
 							const void*				aObject) const;
 		void			Validate() const;
