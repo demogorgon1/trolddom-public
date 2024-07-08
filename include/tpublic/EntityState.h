@@ -59,6 +59,16 @@ namespace tpublic
 			return INVALID_ID;
 		}
 
+		inline constexpr const char*
+		IdToString(
+			Id			aId)
+		{
+			assert((uint8_t)aId < (uint8_t)NUM_IDS);
+			const char* t = ENTITY_STATE_NAMES[aId];
+			assert(t != NULL);
+			return t;
+		}
+
 		inline constexpr bool
 		CanBeAttacked(
 			Id			aId)

@@ -7,6 +7,8 @@
 namespace tpublic
 {
 
+	class Manifest;
+
 	class Mail
 	{
 	public:
@@ -19,65 +21,16 @@ namespace tpublic
 			FLAG_AUTO_DELETE = 0x01
 		};
 
-		void
-		ToStream(
-			IWriter*		aWriter) const
-		{
-			aWriter->WriteUInt(FORMAT_VERSION);
-			aWriter->WriteUInt(m_toCharacterId);
-			aWriter->WriteUInt(m_fromCharacterId);
-			aWriter->WriteString(m_fromName);
-			aWriter->WriteObjects(m_items);
-			aWriter->WriteInt(m_cash);
-			aWriter->WriteString(m_subject);
-			aWriter->WriteString(m_body);
-			aWriter->WritePOD(m_flags); // Version 2
-		}
-
-		bool
-		FromStream(
-			IReader*		aReader)
-		{
-			uint32_t formatVersion;
-			if(!aReader->ReadUInt(formatVersion))
-				return false;
-			if(formatVersion > FORMAT_VERSION)
-				return false;
-
-			if (!aReader->ReadUInt(m_toCharacterId))
-				return false;
-			if (!aReader->ReadUInt(m_fromCharacterId))
-				return false;
-			if(!aReader->ReadString(m_fromName))
-				return false;
-			if(!aReader->ReadObjects(m_items))
-				return false;
-			if (!aReader->ReadInt(m_cash))
-				return false;
-			if (!aReader->ReadString(m_subject))
-				return false;
-			if (!aReader->ReadString(m_body))
-				return false;
-
-			if(formatVersion >= 2)
-			{
-				if(!aReader->ReadPOD(m_flags))
-					return false;
-			}
-			return true;
-		}
-
-		void
-		SetAutoDelete()
-		{
-			m_flags |= FLAG_AUTO_DELETE;
-		}
-
-		bool
-		ShouldAutoDelete() const
-		{
-			return m_flags & FLAG_AUTO_DELETE;
-		}
+		void		ToStream(
+						IWriter*		aWriter) const;
+		bool		FromStream(
+						IReader*		aReader);
+		void		SetAutoDelete();
+		bool		ShouldAutoDelete() const;
+		void		FromString(
+						const char*		aString,
+						const Manifest*	aManifest,
+						uint32_t		aOverrideToCharacterId = 0);
 
 		// Public data
 		uint32_t							m_toCharacterId = 0;
