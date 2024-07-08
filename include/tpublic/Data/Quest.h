@@ -115,7 +115,7 @@ namespace tpublic
 				aStream->WriteUInts(m_rewardOneItem);
 				aStream->WriteUInts(m_rewardAllItems);
 				aStream->WriteUInt(m_nextQuestId);
-				aStream->WriteUInt(m_rewardCashMultiplier);
+				aStream->WriteFloat(m_rewardCashMultiplier);
 			}
 
 			bool

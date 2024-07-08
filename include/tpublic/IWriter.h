@@ -1,5 +1,7 @@
 #pragma once
 
+#include "VarSizeUInt.h"
+
 namespace tpublic
 {
 
@@ -30,7 +32,6 @@ namespace tpublic
 		WriteFloat(
 			float									aValue)
 		{
-			// FIXME: some clever less-than-4-bytes-on-average encoding
 			Write(&aValue, sizeof(aValue));
 		}
 
@@ -39,8 +40,8 @@ namespace tpublic
 		WriteInt(
 			_T										aValue)
 		{
-			// FIXME: varsize
-			Write(&aValue, sizeof(aValue));
+			uint64_t v = aValue >= 0 ? ((uint64_t)aValue << 1) : (((uint64_t)(-aValue) << 1) | 1);
+			WriteUInt(v);
 		}
 
 		template <typename _T>
@@ -48,8 +49,9 @@ namespace tpublic
 		WriteUInt(
 			_T										aValue)
 		{
-			// FIXME: varsize
-			Write(&aValue, sizeof(aValue));
+			VarSizeUInt::Encoder<_T> t;
+			t.Encode(aValue);
+			Write(t.GetBuffer(), t.GetBufferSize());
 		}
 
 		template <typename _T>
@@ -77,7 +79,7 @@ namespace tpublic
 		{
 			WriteUInt(aValues.size());
 			for (const _T& value : aValues)
-				WriteUInt(value);
+				WriteUInt<_T>(value);
 		}
 
 		template <typename _T>

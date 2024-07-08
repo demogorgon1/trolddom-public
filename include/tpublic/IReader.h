@@ -1,5 +1,7 @@
 #pragma once
 
+#include "VarSizeUInt.h"
+
 namespace tpublic
 {
 
@@ -47,7 +49,6 @@ namespace tpublic
 		ReadFloat(
 			float&									aOut)
 		{
-			// FIXME: clever less-than-4-bytes-on-average encoding
 			return Read(&aOut, sizeof(float)) == sizeof(float);
 		}
 
@@ -56,8 +57,15 @@ namespace tpublic
 		ReadInt(
 			_T&										aOut)
 		{
-			// FIXME: varsize
-			return Read(&aOut, sizeof(aOut)) == sizeof(aOut);
+			uint64_t v;
+			if (!ReadUInt(v))
+				return false;
+
+			if (v & 1)
+				aOut = -(_T)(v >> 1);
+			else
+				aOut = (_T)(v >> 1);
+			return true;
 		}
 
 		template <typename _T>
@@ -65,8 +73,18 @@ namespace tpublic
 		ReadUInt(
 			_T&										aOut)
 		{
-			// FIXME: varsize
-			return Read(&aOut, sizeof(aOut)) == sizeof(aOut);
+			bool readError = false;
+			aOut = VarSizeUInt::Decode<_T>([&]() -> uint8_t
+			{
+				uint8_t byte;
+				if(!ReadPOD<uint8_t>(byte))
+				{
+					readError = true;
+					return 0;
+				}
+				return byte;
+			});
+			return !readError;		
 		}
 
 		template <typename _T>

@@ -35,7 +35,7 @@ namespace tpublic::DirectEffects
 	{	
 		ToStreamBase(aStream);
 
-		aStream->WriteInt(m_factionId);
+		aStream->WriteUInt(m_factionId);
 		aStream->WriteBool(m_targetSelf);
 	}
 

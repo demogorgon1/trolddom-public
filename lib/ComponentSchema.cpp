@@ -288,7 +288,7 @@ namespace tpublic
 		}
 
 		// Mark end
-		aWriter->WriteUInt(0);
+		aWriter->WriteUInt<uint32_t>(0);
 	}
 	
 	bool			

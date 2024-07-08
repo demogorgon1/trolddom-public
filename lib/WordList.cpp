@@ -150,7 +150,7 @@ namespace tpublic::WordList
 				}
 			}
 
-			aWriter->WriteUInt(0); // Marks end
+			aWriter->WriteUInt<uint32_t>(0); // Marks end
 		}
 
 		aWriter->WriteUInt(outputWordArray.size());

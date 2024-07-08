@@ -36,7 +36,7 @@ namespace tpublic
 					IReader*		aReader)
 				{
 					size_t count;
-					if(!aReader->ReadInt(count))
+					if(!aReader->ReadUInt(count))
 						return false;
 
 					for(size_t i = 0; i < count; i++)

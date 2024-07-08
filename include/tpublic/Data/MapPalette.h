@@ -38,7 +38,7 @@ namespace tpublic
 				ToStream(
 					IWriter*			aStream) const 
 				{
-					aStream->WriteUInt(m_type);
+					aStream->WritePOD(m_type);
 					aStream->Write(&m_color, sizeof(m_color));
 					aStream->WriteUInt(m_value);
 				}
@@ -47,7 +47,7 @@ namespace tpublic
 				FromStream(
 					IReader*			aStream) 
 				{
-					if (!aStream->ReadUInt(m_type))
+					if (!aStream->ReadPOD(m_type))
 						return false;
 					if(aStream->Read(&m_color, sizeof(m_color)) != sizeof(m_color))
 						return false;

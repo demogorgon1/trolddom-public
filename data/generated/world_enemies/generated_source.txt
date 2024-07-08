@@ -1,6 +1,6 @@
 entity world_enemies_npc_0: !NPC
 {
-	_string: "Malevolent Marauder"
+	_string: "Corrupt Ravager"
 	_level: 4
 	_elite: false
 	_faction: goblins
@@ -24,7 +24,7 @@ entity world_enemies_npc_0: !NPC
 
 entity world_enemies_npc_1: !NPC
 {
-	_string: "Ebon Goblin Reaver"
+	_string: "Ebon Goblin Avenger"
 	_level: 1
 	_elite: false
 	_faction: goblins
@@ -48,7 +48,7 @@ entity world_enemies_npc_1: !NPC
 
 entity world_enemies_npc_2: !NPC
 {
-	_string: "Loathsome Goblin Outlaw"
+	_string: "Execrable Goblin Outlaw"
 	_level: 2
 	_elite: false
 	_faction: goblins
@@ -72,7 +72,7 @@ entity world_enemies_npc_2: !NPC
 
 entity world_enemies_npc_3: !NPC
 {
-	_string: "Goblin Ravager"
+	_string: "Goblin Mercenary"
 	_level: 8
 	_elite: false
 	_faction: goblins
@@ -118,7 +118,7 @@ entity world_enemies_npc_4: !NPC
 
 entity world_enemies_npc_5: !NPC
 {
-	_string: "Goblin Mercenary"
+	_string: "Goblin Slayer"
 	_level: 2
 	_elite: false
 	_faction: goblins
@@ -141,7 +141,7 @@ entity world_enemies_npc_5: !NPC
 
 entity world_enemies_npc_6: !NPC
 {
-	_string: "Goblin Vanguard"
+	_string: "Goblin Fighter"
 	_level: 8
 	_elite: false
 	_faction: goblins
@@ -164,7 +164,7 @@ entity world_enemies_npc_6: !NPC
 
 entity world_enemies_npc_7: !NPC
 {
-	_string: "Bloody Goblin Slayer"
+	_string: "Wrathful Goblin Vanguard"
 	_level: 8
 	_elite: false
 	_faction: goblins
@@ -188,7 +188,7 @@ entity world_enemies_npc_7: !NPC
 
 entity world_enemies_npc_8: !NPC
 {
-	_string: "Goblin Berserker"
+	_string: "Goblin Warden"
 	_level: 7
 	_elite: false
 	_faction: goblins
@@ -211,7 +211,7 @@ entity world_enemies_npc_8: !NPC
 
 entity world_enemies_npc_9: !NPC
 {
-	_string: "Goblin Warrior"
+	_string: "Goblin Myrmidon"
 	_level: 2
 	_elite: false
 	_faction: goblins
@@ -280,7 +280,7 @@ entity world_enemies_npc_11: !NPC
 
 entity world_enemies_npc_12: !NPC
 {
-	_string: "Atrocious Goblin Marauder"
+	_string: "Malevolent Goblin Ravager"
 	_level: 5
 	_elite: false
 	_faction: goblins
@@ -304,7 +304,7 @@ entity world_enemies_npc_12: !NPC
 
 entity world_enemies_npc_13: !NPC
 {
-	_string: "Goblin Ravager"
+	_string: "Goblin Mercenary"
 	_level: 3
 	_elite: false
 	_faction: goblins
@@ -327,7 +327,7 @@ entity world_enemies_npc_13: !NPC
 
 entity world_enemies_npc_14: !NPC
 {
-	_string: "Corrupt Goblin Warrior"
+	_string: "Vile Goblin Myrmidon"
 	_level: 4
 	_elite: false
 	_faction: goblins
@@ -351,7 +351,7 @@ entity world_enemies_npc_14: !NPC
 
 entity world_enemies_npc_15: !NPC
 {
-	_string: "Corrupt Reaver"
+	_string: "Vile Avenger"
 	_level: 6
 	_elite: false
 	_faction: goblins
@@ -375,7 +375,7 @@ entity world_enemies_npc_15: !NPC
 
 entity world_enemies_npc_16: !NPC
 {
-	_string: "Angry Goblin Avenger"
+	_string: "Spiteful Goblin Berserker"
 	_level: 8
 	_elite: true
 	_faction: goblins
@@ -422,7 +422,7 @@ entity world_enemies_npc_17: !NPC
 
 entity world_enemies_npc_18: !NPC
 {
-	_string: "Violent Goblin Squire"
+	_string: "Fatal Goblin Squire"
 	_level: 3
 	_elite: true
 	_faction: goblins
@@ -446,7 +446,7 @@ entity world_enemies_npc_18: !NPC
 
 entity world_enemies_npc_19: !NPC
 {
-	_string: "Goblin Fighter"
+	_string: "Goblin Reaver"
 	_level: 3
 	_elite: true
 	_faction: goblins
@@ -469,7 +469,7 @@ entity world_enemies_npc_19: !NPC
 
 entity world_enemies_npc_20: !NPC
 {
-	_string: "Obscene Goblin Berserker"
+	_string: "Iniquitous Goblin Warden"
 	_level: 4
 	_elite: true
 	_faction: goblins
@@ -493,7 +493,7 @@ entity world_enemies_npc_20: !NPC
 
 entity world_enemies_npc_21: !NPC
 {
-	_string: "Corrupt Goblin Myrmidon"
+	_string: "Vile Goblin Warrior"
 	_level: 5
 	_elite: true
 	_faction: goblins
@@ -563,7 +563,7 @@ entity world_enemies_npc_23: !NPC
 
 entity world_enemies_npc_24: !NPC
 {
-	_string: "Noxious Goblin Revenant"
+	_string: "Bitter Goblin Revenant"
 	_level: 5
 	_elite: true
 	_faction: goblins
@@ -587,7 +587,7 @@ entity world_enemies_npc_24: !NPC
 
 entity world_enemies_npc_25: !NPC
 {
-	_string: "Revolting Goblin Marauder"
+	_string: "Maleficient Goblin Ravager"
 	_level: 4
 	_elite: true
 	_faction: goblins
@@ -634,7 +634,7 @@ entity world_enemies_npc_26: !NPC
 
 entity world_enemies_npc_27: !NPC
 {
-	_string: "Revolting Goblin Berserker"
+	_string: "Maleficient Goblin Warden"
 	_level: 5
 	_elite: true
 	_faction: goblins
@@ -658,7 +658,7 @@ entity world_enemies_npc_27: !NPC
 
 entity world_enemies_npc_28: !NPC
 {
-	_string: "Violent Goblin Marauder"
+	_string: "Fatal Goblin Ravager"
 	_level: 4
 	_elite: true
 	_faction: goblins
@@ -682,7 +682,7 @@ entity world_enemies_npc_28: !NPC
 
 entity world_enemies_npc_29: !NPC
 {
-	_string: "Goblin Vanguard"
+	_string: "Goblin Fighter"
 	_level: 3
 	_elite: true
 	_faction: goblins
@@ -728,7 +728,7 @@ entity world_enemies_npc_30: !NPC
 
 entity world_enemies_npc_31: !NPC
 {
-	_string: "Goblin Fighter"
+	_string: "Goblin Reaver"
 	_level: 6
 	_elite: true
 	_faction: goblins
@@ -751,7 +751,7 @@ entity world_enemies_npc_31: !NPC
 
 entity world_enemies_npc_32: !NPC
 {
-	_string: "Harmful Goblin Outlaw"
+	_string: "Noxious Goblin Outlaw"
 	_level: 10
 	_elite: false
 	_faction: goblins
@@ -775,7 +775,7 @@ entity world_enemies_npc_32: !NPC
 
 entity world_enemies_npc_33: !NPC
 {
-	_string: "Goblin Myrmidon"
+	_string: "Goblin Warrior"
 	_level: 9
 	_elite: false
 	_faction: goblins
@@ -822,7 +822,7 @@ entity world_enemies_npc_34: !NPC
 
 entity world_enemies_npc_35: !NPC
 {
-	_string: "Rancorous Goblin Marauder"
+	_string: "Injurious Goblin Ravager"
 	_level: 10
 	_elite: false
 	_faction: goblins
@@ -846,7 +846,7 @@ entity world_enemies_npc_35: !NPC
 
 entity world_enemies_npc_36: !NPC
 {
-	_string: "Depraved Goblin Avenger"
+	_string: "Destructive Goblin Berserker"
 	_level: 10
 	_elite: false
 	_faction: goblins
@@ -870,7 +870,7 @@ entity world_enemies_npc_36: !NPC
 
 entity world_enemies_npc_37: !NPC
 {
-	_string: "Goblin Marauder"
+	_string: "Goblin Ravager"
 	_level: 9
 	_elite: false
 	_faction: goblins
@@ -893,7 +893,7 @@ entity world_enemies_npc_37: !NPC
 
 entity world_enemies_npc_38: !NPC
 {
-	_string: "Bloody Goblin Reaver"
+	_string: "Wrathful Goblin Avenger"
 	_level: 9
 	_elite: false
 	_faction: goblins
@@ -917,7 +917,7 @@ entity world_enemies_npc_38: !NPC
 
 entity world_enemies_npc_39: !NPC
 {
-	_string: "Goblin Warrior"
+	_string: "Goblin Myrmidon"
 	_level: 10
 	_elite: false
 	_faction: goblins
@@ -963,7 +963,7 @@ entity world_enemies_npc_40: !NPC
 
 entity world_enemies_npc_41: !NPC
 {
-	_string: "Revolting Goblin Brute"
+	_string: "Maleficient Goblin Brute"
 	_level: 10
 	_elite: false
 	_faction: goblins
@@ -987,7 +987,7 @@ entity world_enemies_npc_41: !NPC
 
 entity world_enemies_npc_42: !NPC
 {
-	_string: "Goblin Warrior"
+	_string: "Goblin Myrmidon"
 	_level: 9
 	_elite: false
 	_faction: goblins
@@ -1010,7 +1010,7 @@ entity world_enemies_npc_42: !NPC
 
 entity world_enemies_npc_43: !NPC
 {
-	_string: "Stinking Goblin Revenant"
+	_string: "Obscene Goblin Revenant"
 	_level: 10
 	_elite: false
 	_faction: goblins
@@ -1080,7 +1080,7 @@ entity world_enemies_npc_45: !NPC
 
 entity world_enemies_npc_46: !NPC
 {
-	_string: "Goblin Ravager"
+	_string: "Goblin Mercenary"
 	_level: 9
 	_elite: false
 	_faction: goblins
@@ -1103,7 +1103,7 @@ entity world_enemies_npc_46: !NPC
 
 entity world_enemies_npc_47: !NPC
 {
-	_string: "Baneful Goblin Ravager"
+	_string: "Depraved Goblin Mercenary"
 	_level: 10
 	_elite: false
 	_faction: goblins
@@ -1127,7 +1127,7 @@ entity world_enemies_npc_47: !NPC
 
 entity world_enemies_npc_48: !NPC
 {
-	_string: "Infernal Goblin Warrior"
+	_string: "Grey Goblin Myrmidon"
 	_level: 10
 	_elite: true
 	_faction: goblins
@@ -1151,7 +1151,7 @@ entity world_enemies_npc_48: !NPC
 
 entity world_enemies_npc_49: !NPC
 {
-	_string: "Obscene Goblin Myrmidon"
+	_string: "Iniquitous Goblin Warrior"
 	_level: 10
 	_elite: true
 	_faction: goblins
@@ -1221,7 +1221,7 @@ entity world_enemies_npc_51: !NPC
 
 entity world_enemies_npc_52: !NPC
 {
-	_string: "Goblin Marauder"
+	_string: "Goblin Ravager"
 	_level: 10
 	_elite: true
 	_faction: goblins
@@ -1244,7 +1244,7 @@ entity world_enemies_npc_52: !NPC
 
 entity world_enemies_npc_53: !NPC
 {
-	_string: "Ebon Goblin Reaver"
+	_string: "Ebon Goblin Avenger"
 	_level: 10
 	_elite: true
 	_faction: goblins
@@ -1268,7 +1268,7 @@ entity world_enemies_npc_53: !NPC
 
 entity world_enemies_npc_54: !NPC
 {
-	_string: "Dirty Goblin Berserker"
+	_string: "Deadly Goblin Warden"
 	_level: 9
 	_elite: true
 	_faction: goblins
@@ -1292,7 +1292,7 @@ entity world_enemies_npc_54: !NPC
 
 entity world_enemies_npc_55: !NPC
 {
-	_string: "Fatal Goblin Skirmisher"
+	_string: "Toxic Goblin Skirmisher"
 	_level: 10
 	_elite: true
 	_faction: goblins
@@ -1362,7 +1362,7 @@ entity world_enemies_npc_57: !NPC
 
 entity world_enemies_npc_58: !NPC
 {
-	_string: "Destructive Goblin Berserker"
+	_string: "Lethal Goblin Warden"
 	_level: 9
 	_elite: true
 	_faction: goblins
@@ -1409,7 +1409,7 @@ entity world_enemies_npc_59: !NPC
 
 entity world_enemies_npc_60: !NPC
 {
-	_string: "Lethal Goblin Mercenary"
+	_string: "Murderous Goblin Slayer"
 	_level: 9
 	_elite: true
 	_faction: goblins
@@ -1433,7 +1433,7 @@ entity world_enemies_npc_60: !NPC
 
 entity world_enemies_npc_61: !NPC
 {
-	_string: "Fatal Mercenary"
+	_string: "Toxic Slayer"
 	_level: 10
 	_elite: true
 	_faction: goblins
@@ -1457,7 +1457,7 @@ entity world_enemies_npc_61: !NPC
 
 entity world_enemies_npc_62: !NPC
 {
-	_string: "Goblin Avenger"
+	_string: "Goblin Berserker"
 	_level: 10
 	_elite: true
 	_faction: goblins
@@ -1507,8 +1507,8 @@ entity world_enemies_npc_64: !NPC
 	_level: 7
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss_2
-	_sprite_dead: goblin_boss_2_dead
+	_sprite: goblin_boss_4
+	_sprite_dead: goblin_boss_4_dead
 	_weapon_damage: 1.685642
 	_resource_health: 2.758776
 	_creature_type: humanoid
@@ -1585,8 +1585,8 @@ entity world_enemies_npc_67: !NPC
 	_level: 6
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_4
+	_sprite_dead: goblin_boss_4_dead
 	_weapon_damage: 1.778413
 	_resource_health: 2.633227
 	_creature_type: humanoid
@@ -1611,8 +1611,8 @@ entity world_enemies_npc_68: !NPC
 	_level: 4
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss_2
-	_sprite_dead: goblin_boss_2_dead
+	_sprite: goblin_boss_4
+	_sprite_dead: goblin_boss_4_dead
 	_weapon_damage: 1.835100
 	_resource_health: 2.240009
 	_creature_type: humanoid
@@ -1767,8 +1767,8 @@ entity world_enemies_npc_74: !NPC
 	_level: 6
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss_2
-	_sprite_dead: goblin_boss_2_dead
+	_sprite: goblin_boss_4
+	_sprite_dead: goblin_boss_4_dead
 	_weapon_damage: 1.917502
 	_resource_health: 2.502905
 	_creature_type: humanoid
@@ -1845,8 +1845,8 @@ entity world_enemies_npc_77: !NPC
 	_level: 6
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss_2
-	_sprite_dead: goblin_boss_2_dead
+	_sprite: goblin_boss_4
+	_sprite_dead: goblin_boss_4_dead
 	_weapon_damage: 1.647861
 	_resource_health: 2.423656
 	_creature_type: humanoid
@@ -1871,8 +1871,8 @@ entity world_enemies_npc_78: !NPC
 	_level: 5
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss_2
-	_sprite_dead: goblin_boss_2_dead
+	_sprite: goblin_boss_4
+	_sprite_dead: goblin_boss_4_dead
 	_weapon_damage: 1.680746
 	_resource_health: 2.751133
 	_creature_type: humanoid
@@ -1923,8 +1923,8 @@ entity world_enemies_npc_80: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_4
+	_sprite_dead: goblin_boss_4_dead
 	_weapon_damage: 1.884301
 	_resource_health: 2.509054
 	_creature_type: humanoid
@@ -1949,8 +1949,8 @@ entity world_enemies_npc_81: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_4
+	_sprite_dead: goblin_boss_4_dead
 	_weapon_damage: 1.930414
 	_resource_health: 2.953589
 	_creature_type: humanoid
@@ -2287,8 +2287,8 @@ entity world_enemies_npc_94: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss_2
-	_sprite_dead: goblin_boss_2_dead
+	_sprite: goblin_boss_4
+	_sprite_dead: goblin_boss_4_dead
 	_weapon_damage: 1.670765
 	_resource_health: 2.307993
 	_creature_type: humanoid
@@ -2339,8 +2339,8 @@ entity world_enemies_npc_96: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss_2
-	_sprite_dead: goblin_boss_2_dead
+	_sprite: goblin_boss_4
+	_sprite_dead: goblin_boss_4_dead
 	_weapon_damage: 1.742382
 	_resource_health: 2.701259
 	_creature_type: humanoid
@@ -2365,8 +2365,8 @@ entity world_enemies_npc_97: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss_2
-	_sprite_dead: goblin_boss_2_dead
+	_sprite: goblin_boss_4
+	_sprite_dead: goblin_boss_4_dead
 	_weapon_damage: 1.675471
 	_resource_health: 2.582949
 	_creature_type: humanoid
@@ -2391,8 +2391,8 @@ entity world_enemies_npc_98: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss_2
-	_sprite_dead: goblin_boss_2_dead
+	_sprite: goblin_boss_4
+	_sprite_dead: goblin_boss_4_dead
 	_weapon_damage: 1.749218
 	_resource_health: 2.969867
 	_creature_type: humanoid
@@ -2573,8 +2573,8 @@ entity world_enemies_npc_105: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_4
+	_sprite_dead: goblin_boss_4_dead
 	_weapon_damage: 1.924980
 	_resource_health: 2.402673
 	_creature_type: humanoid
@@ -2677,8 +2677,8 @@ entity world_enemies_npc_109: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_4
+	_sprite_dead: goblin_boss_4_dead
 	_weapon_damage: 1.826669
 	_resource_health: 2.421106
 	_creature_type: humanoid
@@ -2703,8 +2703,8 @@ entity world_enemies_npc_110: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss_2
-	_sprite_dead: goblin_boss_2_dead
+	_sprite: goblin_boss_4
+	_sprite_dead: goblin_boss_4_dead
 	_weapon_damage: 1.506111
 	_resource_health: 2.794500
 	_creature_type: humanoid
@@ -2755,8 +2755,8 @@ entity world_enemies_npc_112: !NPC
 	_level: 7
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_4
+	_sprite_dead: goblin_boss_4_dead
 	_weapon_damage: 2.841272
 	_resource_health: 3.908456
 	_creature_type: humanoid
@@ -2885,8 +2885,8 @@ entity world_enemies_npc_117: !NPC
 	_level: 8
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss_2
-	_sprite_dead: goblin_boss_2_dead
+	_sprite: goblin_boss_4
+	_sprite_dead: goblin_boss_4_dead
 	_weapon_damage: 3.067461
 	_resource_health: 3.712021
 	_creature_type: humanoid
@@ -3093,8 +3093,8 @@ entity world_enemies_npc_125: !NPC
 	_level: 3
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_4
+	_sprite_dead: goblin_boss_4_dead
 	_weapon_damage: 2.475591
 	_resource_health: 3.559701
 	_creature_type: humanoid
@@ -3145,8 +3145,8 @@ entity world_enemies_npc_127: !NPC
 	_level: 2
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss_2
-	_sprite_dead: goblin_boss_2_dead
+	_sprite: goblin_boss_4
+	_sprite_dead: goblin_boss_4_dead
 	_weapon_damage: 2.348175
 	_resource_health: 3.834431
 	_creature_type: humanoid
@@ -3194,7 +3194,7 @@ entity world_enemies_npc_128: !NPC
 
 entity world_enemies_npc_129: !NPC
 {
-	_string: "Stob the Depraved"
+	_string: "Stob the Destructive"
 	_level: 10
 	_elite: true
 	_faction: goblins
@@ -3221,12 +3221,12 @@ entity world_enemies_npc_129: !NPC
 
 entity world_enemies_npc_130: !NPC
 {
-	_string: "Yeim the Calamitious"
+	_string: "Yeim the Wicked"
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_4
+	_sprite_dead: goblin_boss_4_dead
 	_weapon_damage: 2.753561
 	_resource_health: 3.532765
 	_creature_type: humanoid
@@ -3248,7 +3248,7 @@ entity world_enemies_npc_130: !NPC
 
 entity world_enemies_npc_131: !NPC
 {
-	_string: "Andrithas the Baneful"
+	_string: "Andrithas the Depraved"
 	_level: 10
 	_elite: true
 	_faction: goblins
@@ -3275,7 +3275,7 @@ entity world_enemies_npc_131: !NPC
 
 entity world_enemies_npc_132: !NPC
 {
-	_string: "Roleerisdorg the Bitter"
+	_string: "Roleerisdorg the Stinking"
 	_level: 9
 	_elite: true
 	_faction: goblins
@@ -3302,7 +3302,7 @@ entity world_enemies_npc_132: !NPC
 
 entity world_enemies_npc_133: !NPC
 {
-	_string: "Grcuron the Injurious"
+	_string: "Grcuron the Damned"
 	_level: 10
 	_elite: true
 	_faction: goblins
@@ -3329,7 +3329,7 @@ entity world_enemies_npc_133: !NPC
 
 entity world_enemies_npc_134: !NPC
 {
-	_string: "Krocethegorg the Calamitious"
+	_string: "Krocethegorg the Wicked"
 	_level: 10
 	_elite: true
 	_faction: goblins
@@ -3356,12 +3356,12 @@ entity world_enemies_npc_134: !NPC
 
 entity world_enemies_npc_135: !NPC
 {
-	_string: "Sulessdorg the Grey"
+	_string: "Sulessdorg the Harmful"
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_4
+	_sprite_dead: goblin_boss_4_dead
 	_weapon_damage: 2.592906
 	_resource_health: 3.991075
 	_creature_type: humanoid
@@ -3383,7 +3383,7 @@ entity world_enemies_npc_135: !NPC
 
 entity world_enemies_npc_136: !NPC
 {
-	_string: "Arcavesas the Baneful"
+	_string: "Arcavesas the Depraved"
 	_level: 9
 	_elite: true
 	_faction: goblins
@@ -3410,12 +3410,12 @@ entity world_enemies_npc_136: !NPC
 
 entity world_enemies_npc_137: !NPC
 {
-	_string: "Puras the Fatal"
+	_string: "Puras the Toxic"
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_4
+	_sprite_dead: goblin_boss_4_dead
 	_weapon_damage: 2.702401
 	_resource_health: 3.905193
 	_creature_type: humanoid
@@ -3441,8 +3441,8 @@ entity world_enemies_npc_138: !NPC
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss_2
-	_sprite_dead: goblin_boss_2_dead
+	_sprite: goblin_boss_4
+	_sprite_dead: goblin_boss_4_dead
 	_weapon_damage: 2.424273
 	_resource_health: 3.588627
 	_creature_type: humanoid
@@ -3464,12 +3464,12 @@ entity world_enemies_npc_138: !NPC
 
 entity world_enemies_npc_139: !NPC
 {
-	_string: "Gonisbork the Vicious"
+	_string: "Gonisbork the Hateful"
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss_2
-	_sprite_dead: goblin_boss_2_dead
+	_sprite: goblin_boss_4
+	_sprite_dead: goblin_boss_4_dead
 	_weapon_damage: 3.174556
 	_resource_health: 3.752994
 	_creature_type: humanoid
@@ -3518,7 +3518,7 @@ entity world_enemies_npc_140: !NPC
 
 entity world_enemies_npc_141: !NPC
 {
-	_string: "Nabes the Hateful"
+	_string: "Nabes the Repugnant"
 	_level: 9
 	_elite: true
 	_faction: goblins
@@ -3572,12 +3572,12 @@ entity world_enemies_npc_142: !NPC
 
 entity world_enemies_npc_143: !NPC
 {
-	_string: "Baticlaw the Destructive"
+	_string: "Baticlaw the Lethal"
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss
-	_sprite_dead: goblin_boss_dead
+	_sprite: goblin_boss_4
+	_sprite_dead: goblin_boss_4_dead
 	_weapon_damage: 2.726492
 	_resource_health: 3.972840
 	_creature_type: humanoid
@@ -3626,7 +3626,7 @@ entity world_enemies_npc_144: !NPC
 
 entity world_enemies_npc_145: !NPC
 {
-	_string: "Likaiake the Calamitious"
+	_string: "Likaiake the Wicked"
 	_level: 9
 	_elite: true
 	_faction: goblins
@@ -3657,8 +3657,8 @@ entity world_enemies_npc_146: !NPC
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss_2
-	_sprite_dead: goblin_boss_2_dead
+	_sprite: goblin_boss_4
+	_sprite_dead: goblin_boss_4_dead
 	_weapon_damage: 3.041881
 	_resource_health: 3.663445
 	_creature_type: humanoid
@@ -3680,7 +3680,7 @@ entity world_enemies_npc_146: !NPC
 
 entity world_enemies_npc_147: !NPC
 {
-	_string: "Osumpus the Harmful"
+	_string: "Osumpus the Noxious"
 	_level: 10
 	_elite: true
 	_faction: goblins
@@ -3707,7 +3707,7 @@ entity world_enemies_npc_147: !NPC
 
 entity world_enemies_npc_148: !NPC
 {
-	_string: "Grigoces the Malevolent"
+	_string: "Grigoces the Corrupt"
 	_level: 9
 	_elite: true
 	_faction: goblins
@@ -3734,7 +3734,7 @@ entity world_enemies_npc_148: !NPC
 
 entity world_enemies_npc_149: !NPC
 {
-	_string: "Cemthelat the Grey"
+	_string: "Cemthelat the Harmful"
 	_level: 9
 	_elite: true
 	_faction: goblins
@@ -3761,7 +3761,7 @@ entity world_enemies_npc_149: !NPC
 
 entity world_enemies_npc_150: !NPC
 {
-	_string: "Baphiusol the Dirty"
+	_string: "Baphiusol the Deadly"
 	_level: 10
 	_elite: true
 	_faction: goblins
@@ -3788,12 +3788,12 @@ entity world_enemies_npc_150: !NPC
 
 entity world_enemies_npc_151: !NPC
 {
-	_string: "Chriurynin the Wrathful"
+	_string: "Chriurynin the Rancorous"
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_boss_2
-	_sprite_dead: goblin_boss_2_dead
+	_sprite: goblin_boss_4
+	_sprite_dead: goblin_boss_4_dead
 	_weapon_damage: 2.869751
 	_resource_health: 3.906215
 	_creature_type: humanoid
@@ -3815,7 +3815,7 @@ entity world_enemies_npc_151: !NPC
 
 entity world_enemies_npc_152: !NPC
 {
-	_string: "Sorabus the Wicked"
+	_string: "Sorabus the Cruel"
 	_level: 9
 	_elite: true
 	_faction: goblins
@@ -3842,7 +3842,7 @@ entity world_enemies_npc_152: !NPC
 
 entity world_enemies_npc_153: !NPC
 {
-	_string: "Dasaxclaw the Lethal"
+	_string: "Dasaxclaw the Murderous"
 	_level: 9
 	_elite: true
 	_faction: goblins
@@ -3869,7 +3869,7 @@ entity world_enemies_npc_153: !NPC
 
 entity world_enemies_npc_154: !NPC
 {
-	_string: "Anca the Vicious"
+	_string: "Anca the Hateful"
 	_level: 10
 	_elite: true
 	_faction: goblins
@@ -3896,7 +3896,7 @@ entity world_enemies_npc_154: !NPC
 
 entity world_enemies_npc_155: !NPC
 {
-	_string: "Arigon the Rancorous"
+	_string: "Arigon the Injurious"
 	_level: 9
 	_elite: true
 	_faction: goblins
@@ -3923,7 +3923,7 @@ entity world_enemies_npc_155: !NPC
 
 entity world_enemies_npc_156: !NPC
 {
-	_string: "Prekalimasorg the Fatal"
+	_string: "Prekalimasorg the Toxic"
 	_level: 9
 	_elite: true
 	_faction: goblins
@@ -4004,7 +4004,7 @@ entity world_enemies_npc_158: !NPC
 
 entity world_enemies_npc_159: !NPC
 {
-	_string: "Limordorg the Malignant"
+	_string: "Limordorg the Vicious"
 	_level: 9
 	_elite: true
 	_faction: goblins
@@ -4031,12 +4031,12 @@ entity world_enemies_npc_159: !NPC
 
 entity world_enemies_npc_160: !NPC
 {
-	_string: "Dirty Goblin Mage"
+	_string: "Deadly Goblin Sorceror"
 	_level: 4
 	_elite: false
 	_faction: goblins
-	_sprite: goblin_shaman_3
-	_sprite_dead: goblin_shaman_3_dead
+	_sprite: goblin_shaman_2
+	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.740821
 	_resource_health: 0.890279
 	_resource_mana: 1
@@ -4057,12 +4057,12 @@ entity world_enemies_npc_160: !NPC
 
 entity world_enemies_npc_161: !NPC
 {
-	_string: "Fatal Goblin Warlock"
+	_string: "Toxic Goblin Magus"
 	_level: 3
 	_elite: false
 	_faction: goblins
-	_sprite: goblin_shaman
-	_sprite_dead: goblin_shaman_dead
+	_sprite: goblin_shaman_3
+	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.785370
 	_resource_health: 0.823206
 	_resource_mana: 1
@@ -4083,12 +4083,12 @@ entity world_enemies_npc_161: !NPC
 
 entity world_enemies_npc_162: !NPC
 {
-	_string: "Rancorous Goblin Enchanter"
+	_string: "Injurious Goblin Stormcaller"
 	_level: 3
 	_elite: false
 	_faction: goblins
-	_sprite: goblin_shaman_3
-	_sprite_dead: goblin_shaman_3_dead
+	_sprite: goblin_shaman_2
+	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.723998
 	_resource_health: 0.755225
 	_resource_mana: 1
@@ -4109,12 +4109,12 @@ entity world_enemies_npc_162: !NPC
 
 entity world_enemies_npc_163: !NPC
 {
-	_string: "Goblin Stormcaller"
+	_string: "Goblin Pyromancer"
 	_level: 3
 	_elite: false
 	_faction: goblins
-	_sprite: goblin_shaman
-	_sprite_dead: goblin_shaman_dead
+	_sprite: goblin_shaman_3
+	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.712198
 	_resource_health: 0.785340
 	_resource_mana: 1
@@ -4134,12 +4134,12 @@ entity world_enemies_npc_163: !NPC
 
 entity world_enemies_npc_164: !NPC
 {
-	_string: "Goblin Warlock"
+	_string: "Goblin Magus"
 	_level: 1
 	_elite: false
 	_faction: goblins
-	_sprite: goblin_shaman_2
-	_sprite_dead: goblin_shaman_2_dead
+	_sprite: goblin_shaman
+	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.844425
 	_resource_health: 0.756401
 	_resource_mana: 1
@@ -4159,12 +4159,12 @@ entity world_enemies_npc_164: !NPC
 
 entity world_enemies_npc_165: !NPC
 {
-	_string: "Goblin Enchanter"
+	_string: "Goblin Stormcaller"
 	_level: 6
 	_elite: false
 	_faction: goblins
-	_sprite: goblin_shaman
-	_sprite_dead: goblin_shaman_dead
+	_sprite: goblin_shaman_3
+	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.750356
 	_resource_health: 0.867461
 	_resource_mana: 1
@@ -4184,12 +4184,12 @@ entity world_enemies_npc_165: !NPC
 
 entity world_enemies_npc_166: !NPC
 {
-	_string: "Goblin Magus"
+	_string: "Goblin Spellweaver"
 	_level: 4
 	_elite: false
 	_faction: goblins
-	_sprite: goblin_shaman
-	_sprite_dead: goblin_shaman_dead
+	_sprite: goblin_shaman_3
+	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.742651
 	_resource_health: 0.788028
 	_resource_mana: 1
@@ -4209,12 +4209,12 @@ entity world_enemies_npc_166: !NPC
 
 entity world_enemies_npc_167: !NPC
 {
-	_string: "Goblin Enchanter"
+	_string: "Goblin Stormcaller"
 	_level: 2
 	_elite: false
 	_faction: goblins
-	_sprite: goblin_shaman
-	_sprite_dead: goblin_shaman_dead
+	_sprite: goblin_shaman_3
+	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.754273
 	_resource_health: 0.862427
 	_resource_mana: 1
@@ -4234,12 +4234,12 @@ entity world_enemies_npc_167: !NPC
 
 entity world_enemies_npc_168: !NPC
 {
-	_string: "Goblin Magician"
+	_string: "Goblin Warlock"
 	_level: 2
 	_elite: false
 	_faction: goblins
-	_sprite: goblin_shaman
-	_sprite_dead: goblin_shaman_dead
+	_sprite: goblin_shaman_3
+	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.717083
 	_resource_health: 0.852932
 	_resource_mana: 1
@@ -4259,12 +4259,12 @@ entity world_enemies_npc_168: !NPC
 
 entity world_enemies_npc_169: !NPC
 {
-	_string: "Obscene Goblin Magus"
+	_string: "Iniquitous Goblin Spellweaver"
 	_level: 1
 	_elite: false
 	_faction: goblins
-	_sprite: goblin_shaman
-	_sprite_dead: goblin_shaman_dead
+	_sprite: goblin_shaman_3
+	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.852271
 	_resource_health: 0.742994
 	_resource_mana: 1
@@ -4285,12 +4285,12 @@ entity world_enemies_npc_169: !NPC
 
 entity world_enemies_npc_170: !NPC
 {
-	_string: "Iniquitous Goblin Pyromancer"
+	_string: "Atrocious Goblin Mage"
 	_level: 4
 	_elite: false
 	_faction: goblins
-	_sprite: goblin_shaman_2
-	_sprite_dead: goblin_shaman_2_dead
+	_sprite: goblin_shaman
+	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.714112
 	_resource_health: 0.870833
 	_resource_mana: 1
@@ -4311,12 +4311,12 @@ entity world_enemies_npc_170: !NPC
 
 entity world_enemies_npc_171: !NPC
 {
-	_string: "Goblin Conjurer"
+	_string: "Goblin Occultist"
 	_level: 8
 	_elite: false
 	_faction: goblins
-	_sprite: goblin_shaman_2
-	_sprite_dead: goblin_shaman_2_dead
+	_sprite: goblin_shaman
+	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.763102
 	_resource_health: 0.789224
 	_resource_mana: 1
@@ -4336,12 +4336,12 @@ entity world_enemies_npc_171: !NPC
 
 entity world_enemies_npc_172: !NPC
 {
-	_string: "Goblin Conjurer"
+	_string: "Goblin Occultist"
 	_level: 6
 	_elite: false
 	_faction: goblins
-	_sprite: goblin_shaman_2
-	_sprite_dead: goblin_shaman_2_dead
+	_sprite: goblin_shaman
+	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.843101
 	_resource_health: 0.874733
 	_resource_mana: 1
@@ -4361,12 +4361,12 @@ entity world_enemies_npc_172: !NPC
 
 entity world_enemies_npc_173: !NPC
 {
-	_string: "Violent Goblin Warlock"
+	_string: "Fatal Goblin Magus"
 	_level: 1
 	_elite: false
 	_faction: goblins
-	_sprite: goblin_shaman
-	_sprite_dead: goblin_shaman_dead
+	_sprite: goblin_shaman_3
+	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.853867
 	_resource_health: 0.899361
 	_resource_mana: 1
@@ -4387,12 +4387,12 @@ entity world_enemies_npc_173: !NPC
 
 entity world_enemies_npc_174: !NPC
 {
-	_string: "Goblin Magus"
+	_string: "Goblin Spellweaver"
 	_level: 6
 	_elite: false
 	_faction: goblins
-	_sprite: goblin_shaman_3
-	_sprite_dead: goblin_shaman_3_dead
+	_sprite: goblin_shaman_2
+	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.729414
 	_resource_health: 0.804132
 	_resource_mana: 1
@@ -4412,12 +4412,12 @@ entity world_enemies_npc_174: !NPC
 
 entity world_enemies_npc_175: !NPC
 {
-	_string: "Grey Warlock"
+	_string: "Harmful Magus"
 	_level: 8
 	_elite: false
 	_faction: goblins
-	_sprite: goblin_shaman
-	_sprite_dead: goblin_shaman_dead
+	_sprite: goblin_shaman_3
+	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.878839
 	_resource_health: 0.798658
 	_resource_mana: 1
@@ -4438,12 +4438,12 @@ entity world_enemies_npc_175: !NPC
 
 entity world_enemies_npc_176: !NPC
 {
-	_string: "Infernal Goblin Spellcaster"
+	_string: "Grey Goblin Conjurer"
 	_level: 4
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_shaman_2
-	_sprite_dead: goblin_shaman_2_dead
+	_sprite: goblin_shaman
+	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.745781
 	_resource_health: 0.865994
 	_resource_mana: 1
@@ -4464,12 +4464,12 @@ entity world_enemies_npc_176: !NPC
 
 entity world_enemies_npc_177: !NPC
 {
-	_string: "Goblin Enchanter"
+	_string: "Goblin Stormcaller"
 	_level: 7
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_shaman_2
-	_sprite_dead: goblin_shaman_2_dead
+	_sprite: goblin_shaman
+	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.786639
 	_resource_health: 0.730989
 	_resource_mana: 1
@@ -4489,12 +4489,12 @@ entity world_enemies_npc_177: !NPC
 
 entity world_enemies_npc_178: !NPC
 {
-	_string: "Goblin Wizard"
+	_string: "Goblin Stormweaver"
 	_level: 3
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_shaman
-	_sprite_dead: goblin_shaman_dead
+	_sprite: goblin_shaman_3
+	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.817484
 	_resource_health: 0.817116
 	_resource_mana: 1
@@ -4514,12 +4514,12 @@ entity world_enemies_npc_178: !NPC
 
 entity world_enemies_npc_179: !NPC
 {
-	_string: "Goblin Occultist"
+	_string: "Goblin Enchanter"
 	_level: 7
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_shaman_3
-	_sprite_dead: goblin_shaman_3_dead
+	_sprite: goblin_shaman_2
+	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.841095
 	_resource_health: 0.778885
 	_resource_mana: 1
@@ -4539,12 +4539,12 @@ entity world_enemies_npc_179: !NPC
 
 entity world_enemies_npc_180: !NPC
 {
-	_string: "Lethal Goblin Warlock"
+	_string: "Murderous Goblin Magus"
 	_level: 4
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_shaman_3
-	_sprite_dead: goblin_shaman_3_dead
+	_sprite: goblin_shaman_2
+	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.842271
 	_resource_health: 0.792696
 	_resource_mana: 1
@@ -4565,12 +4565,12 @@ entity world_enemies_npc_180: !NPC
 
 entity world_enemies_npc_181: !NPC
 {
-	_string: "Goblin Magus"
+	_string: "Goblin Spellweaver"
 	_level: 5
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_shaman
-	_sprite_dead: goblin_shaman_dead
+	_sprite: goblin_shaman_3
+	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.732576
 	_resource_health: 0.805565
 	_resource_mana: 1
@@ -4590,12 +4590,12 @@ entity world_enemies_npc_181: !NPC
 
 entity world_enemies_npc_182: !NPC
 {
-	_string: "Goblin Stormcaller"
+	_string: "Goblin Pyromancer"
 	_level: 4
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_shaman_2
-	_sprite_dead: goblin_shaman_2_dead
+	_sprite: goblin_shaman
+	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.733573
 	_resource_health: 0.890626
 	_resource_mana: 1
@@ -4615,12 +4615,12 @@ entity world_enemies_npc_182: !NPC
 
 entity world_enemies_npc_183: !NPC
 {
-	_string: "Goblin Spellcaster"
+	_string: "Goblin Conjurer"
 	_level: 6
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_shaman_3
-	_sprite_dead: goblin_shaman_3_dead
+	_sprite: goblin_shaman_2
+	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.830199
 	_resource_health: 0.877850
 	_resource_mana: 1
@@ -4640,12 +4640,12 @@ entity world_enemies_npc_183: !NPC
 
 entity world_enemies_npc_184: !NPC
 {
-	_string: "Goblin Stormcaller"
+	_string: "Goblin Pyromancer"
 	_level: 6
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_shaman
-	_sprite_dead: goblin_shaman_dead
+	_sprite: goblin_shaman_3
+	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.787648
 	_resource_health: 0.810397
 	_resource_mana: 1
@@ -4665,12 +4665,12 @@ entity world_enemies_npc_184: !NPC
 
 entity world_enemies_npc_185: !NPC
 {
-	_string: "Angry Goblin Spellcaster"
+	_string: "Spiteful Goblin Conjurer"
 	_level: 8
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_shaman_3
-	_sprite_dead: goblin_shaman_3_dead
+	_sprite: goblin_shaman_2
+	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.790928
 	_resource_health: 0.721967
 	_resource_mana: 1
@@ -4691,12 +4691,12 @@ entity world_enemies_npc_185: !NPC
 
 entity world_enemies_npc_186: !NPC
 {
-	_string: "Hideous Magician"
+	_string: "Hideous Warlock"
 	_level: 3
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_shaman
-	_sprite_dead: goblin_shaman_dead
+	_sprite: goblin_shaman_3
+	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.793593
 	_resource_health: 0.738774
 	_resource_mana: 1
@@ -4717,12 +4717,12 @@ entity world_enemies_npc_186: !NPC
 
 entity world_enemies_npc_187: !NPC
 {
-	_string: "Malevolent Goblin Magus"
+	_string: "Corrupt Goblin Spellweaver"
 	_level: 4
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_shaman_2
-	_sprite_dead: goblin_shaman_2_dead
+	_sprite: goblin_shaman
+	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.801263
 	_resource_health: 0.807922
 	_resource_mana: 1
@@ -4743,12 +4743,12 @@ entity world_enemies_npc_187: !NPC
 
 entity world_enemies_npc_188: !NPC
 {
-	_string: "Bitter Magician"
+	_string: "Stinking Warlock"
 	_level: 1
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_shaman_2
-	_sprite_dead: goblin_shaman_2_dead
+	_sprite: goblin_shaman
+	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.866065
 	_resource_health: 0.784826
 	_resource_mana: 1
@@ -4769,12 +4769,12 @@ entity world_enemies_npc_188: !NPC
 
 entity world_enemies_npc_189: !NPC
 {
-	_string: "Goblin Enchanter"
+	_string: "Goblin Stormcaller"
 	_level: 2
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_shaman_2
-	_sprite_dead: goblin_shaman_2_dead
+	_sprite: goblin_shaman
+	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.715497
 	_resource_health: 0.773146
 	_resource_mana: 1
@@ -4794,12 +4794,12 @@ entity world_enemies_npc_189: !NPC
 
 entity world_enemies_npc_190: !NPC
 {
-	_string: "Goblin Mage"
+	_string: "Goblin Sorceror"
 	_level: 1
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_shaman_3
-	_sprite_dead: goblin_shaman_3_dead
+	_sprite: goblin_shaman_2
+	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.860647
 	_resource_health: 0.720992
 	_resource_mana: 1
@@ -4819,12 +4819,12 @@ entity world_enemies_npc_190: !NPC
 
 entity world_enemies_npc_191: !NPC
 {
-	_string: "Goblin Stormcaller"
+	_string: "Goblin Pyromancer"
 	_level: 6
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_shaman
-	_sprite_dead: goblin_shaman_dead
+	_sprite: goblin_shaman_3
+	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.799838
 	_resource_health: 0.735853
 	_resource_mana: 1
@@ -4844,12 +4844,12 @@ entity world_enemies_npc_191: !NPC
 
 entity world_enemies_npc_192: !NPC
 {
-	_string: "Goblin Conjurer"
+	_string: "Goblin Occultist"
 	_level: 9
 	_elite: false
 	_faction: goblins
-	_sprite: goblin_shaman_2
-	_sprite_dead: goblin_shaman_2_dead
+	_sprite: goblin_shaman
+	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.715108
 	_resource_health: 0.880795
 	_resource_mana: 1
@@ -4869,12 +4869,12 @@ entity world_enemies_npc_192: !NPC
 
 entity world_enemies_npc_193: !NPC
 {
-	_string: "Goblin Wizard"
+	_string: "Goblin Stormweaver"
 	_level: 9
 	_elite: false
 	_faction: goblins
-	_sprite: goblin_shaman_2
-	_sprite_dead: goblin_shaman_2_dead
+	_sprite: goblin_shaman
+	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.792600
 	_resource_health: 0.865178
 	_resource_mana: 1
@@ -4894,12 +4894,12 @@ entity world_enemies_npc_193: !NPC
 
 entity world_enemies_npc_194: !NPC
 {
-	_string: "Goblin Conjurer"
+	_string: "Goblin Occultist"
 	_level: 10
 	_elite: false
 	_faction: goblins
-	_sprite: goblin_shaman_3
-	_sprite_dead: goblin_shaman_3_dead
+	_sprite: goblin_shaman_2
+	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.848234
 	_resource_health: 0.844090
 	_resource_mana: 1
@@ -4919,12 +4919,12 @@ entity world_enemies_npc_194: !NPC
 
 entity world_enemies_npc_195: !NPC
 {
-	_string: "Deadly Goblin Sorceror"
+	_string: "Angry Goblin Wizard"
 	_level: 9
 	_elite: false
 	_faction: goblins
-	_sprite: goblin_shaman
-	_sprite_dead: goblin_shaman_dead
+	_sprite: goblin_shaman_3
+	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.740141
 	_resource_health: 0.802812
 	_resource_mana: 1
@@ -4945,12 +4945,12 @@ entity world_enemies_npc_195: !NPC
 
 entity world_enemies_npc_196: !NPC
 {
-	_string: "Goblin Mage"
+	_string: "Goblin Sorceror"
 	_level: 10
 	_elite: false
 	_faction: goblins
-	_sprite: goblin_shaman_3
-	_sprite_dead: goblin_shaman_3_dead
+	_sprite: goblin_shaman_2
+	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.729747
 	_resource_health: 0.764402
 	_resource_mana: 1
@@ -4970,12 +4970,12 @@ entity world_enemies_npc_196: !NPC
 
 entity world_enemies_npc_197: !NPC
 {
-	_string: "Spiteful Goblin Conjurer"
+	_string: "Malignant Goblin Occultist"
 	_level: 9
 	_elite: false
 	_faction: goblins
-	_sprite: goblin_shaman_2
-	_sprite_dead: goblin_shaman_2_dead
+	_sprite: goblin_shaman
+	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.771898
 	_resource_health: 0.784217
 	_resource_mana: 1
@@ -4996,12 +4996,12 @@ entity world_enemies_npc_197: !NPC
 
 entity world_enemies_npc_198: !NPC
 {
-	_string: "Goblin Wizard"
+	_string: "Goblin Stormweaver"
 	_level: 10
 	_elite: false
 	_faction: goblins
-	_sprite: goblin_shaman_2
-	_sprite_dead: goblin_shaman_2_dead
+	_sprite: goblin_shaman
+	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.806368
 	_resource_health: 0.755344
 	_resource_mana: 1
@@ -5021,12 +5021,12 @@ entity world_enemies_npc_198: !NPC
 
 entity world_enemies_npc_199: !NPC
 {
-	_string: "Goblin Pyromancer"
+	_string: "Goblin Mage"
 	_level: 9
 	_elite: false
 	_faction: goblins
-	_sprite: goblin_shaman_2
-	_sprite_dead: goblin_shaman_2_dead
+	_sprite: goblin_shaman
+	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.824455
 	_resource_health: 0.870871
 	_resource_mana: 1
@@ -5046,12 +5046,12 @@ entity world_enemies_npc_199: !NPC
 
 entity world_enemies_npc_200: !NPC
 {
-	_string: "Infernal Goblin Magus"
+	_string: "Grey Goblin Spellweaver"
 	_level: 10
 	_elite: false
 	_faction: goblins
-	_sprite: goblin_shaman
-	_sprite_dead: goblin_shaman_dead
+	_sprite: goblin_shaman_3
+	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.887648
 	_resource_health: 0.756476
 	_resource_mana: 1
@@ -5072,12 +5072,12 @@ entity world_enemies_npc_200: !NPC
 
 entity world_enemies_npc_201: !NPC
 {
-	_string: "Goblin Stormweaver"
+	_string: "Goblin Magician"
 	_level: 9
 	_elite: false
 	_faction: goblins
-	_sprite: goblin_shaman_2
-	_sprite_dead: goblin_shaman_2_dead
+	_sprite: goblin_shaman
+	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.719198
 	_resource_health: 0.776107
 	_resource_mana: 1
@@ -5097,12 +5097,12 @@ entity world_enemies_npc_201: !NPC
 
 entity world_enemies_npc_202: !NPC
 {
-	_string: "Goblin Wizard"
+	_string: "Goblin Stormweaver"
 	_level: 9
 	_elite: false
 	_faction: goblins
-	_sprite: goblin_shaman_2
-	_sprite_dead: goblin_shaman_2_dead
+	_sprite: goblin_shaman
+	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.856393
 	_resource_health: 0.750699
 	_resource_mana: 1
@@ -5122,12 +5122,12 @@ entity world_enemies_npc_202: !NPC
 
 entity world_enemies_npc_203: !NPC
 {
-	_string: "Goblin Stormweaver"
+	_string: "Goblin Magician"
 	_level: 9
 	_elite: false
 	_faction: goblins
-	_sprite: goblin_shaman_3
-	_sprite_dead: goblin_shaman_3_dead
+	_sprite: goblin_shaman_2
+	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.814884
 	_resource_health: 0.800929
 	_resource_mana: 1
@@ -5147,12 +5147,12 @@ entity world_enemies_npc_203: !NPC
 
 entity world_enemies_npc_204: !NPC
 {
-	_string: "Goblin Spellcaster"
+	_string: "Goblin Conjurer"
 	_level: 9
 	_elite: false
 	_faction: goblins
-	_sprite: goblin_shaman
-	_sprite_dead: goblin_shaman_dead
+	_sprite: goblin_shaman_3
+	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.844648
 	_resource_health: 0.753976
 	_resource_mana: 1
@@ -5172,12 +5172,12 @@ entity world_enemies_npc_204: !NPC
 
 entity world_enemies_npc_205: !NPC
 {
-	_string: "Nefarious Goblin Warlock"
+	_string: "Nefarious Goblin Magus"
 	_level: 10
 	_elite: false
 	_faction: goblins
-	_sprite: goblin_shaman
-	_sprite_dead: goblin_shaman_dead
+	_sprite: goblin_shaman_3
+	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.820832
 	_resource_health: 0.818096
 	_resource_mana: 1
@@ -5198,12 +5198,12 @@ entity world_enemies_npc_205: !NPC
 
 entity world_enemies_npc_206: !NPC
 {
-	_string: "Black Goblin Conjurer"
+	_string: "Black Goblin Occultist"
 	_level: 9
 	_elite: false
 	_faction: goblins
-	_sprite: goblin_shaman
-	_sprite_dead: goblin_shaman_dead
+	_sprite: goblin_shaman_3
+	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.880415
 	_resource_health: 0.819700
 	_resource_mana: 1
@@ -5224,12 +5224,12 @@ entity world_enemies_npc_206: !NPC
 
 entity world_enemies_npc_207: !NPC
 {
-	_string: "Hideous Goblin Spellweaver"
+	_string: "Hideous Goblin Spellcaster"
 	_level: 10
 	_elite: false
 	_faction: goblins
-	_sprite: goblin_shaman_2
-	_sprite_dead: goblin_shaman_2_dead
+	_sprite: goblin_shaman
+	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.741596
 	_resource_health: 0.881877
 	_resource_mana: 1
@@ -5250,12 +5250,12 @@ entity world_enemies_npc_207: !NPC
 
 entity world_enemies_npc_208: !NPC
 {
-	_string: "Angry Goblin Conjurer"
+	_string: "Spiteful Goblin Occultist"
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_shaman_2
-	_sprite_dead: goblin_shaman_2_dead
+	_sprite: goblin_shaman
+	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.814271
 	_resource_health: 0.896453
 	_resource_mana: 1
@@ -5276,12 +5276,12 @@ entity world_enemies_npc_208: !NPC
 
 entity world_enemies_npc_209: !NPC
 {
-	_string: "Goblin Occultist"
+	_string: "Goblin Enchanter"
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_shaman_3
-	_sprite_dead: goblin_shaman_3_dead
+	_sprite: goblin_shaman_2
+	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.869157
 	_resource_health: 0.770663
 	_resource_mana: 1
@@ -5301,12 +5301,12 @@ entity world_enemies_npc_209: !NPC
 
 entity world_enemies_npc_210: !NPC
 {
-	_string: "Goblin Magician"
+	_string: "Goblin Warlock"
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_shaman_3
-	_sprite_dead: goblin_shaman_3_dead
+	_sprite: goblin_shaman_2
+	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.838039
 	_resource_health: 0.737507
 	_resource_mana: 1
@@ -5326,12 +5326,12 @@ entity world_enemies_npc_210: !NPC
 
 entity world_enemies_npc_211: !NPC
 {
-	_string: "Goblin Spellweaver"
+	_string: "Goblin Spellcaster"
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_shaman
-	_sprite_dead: goblin_shaman_dead
+	_sprite: goblin_shaman_3
+	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.896980
 	_resource_health: 0.744674
 	_resource_mana: 1
@@ -5351,12 +5351,12 @@ entity world_enemies_npc_211: !NPC
 
 entity world_enemies_npc_212: !NPC
 {
-	_string: "Violent Goblin Conjurer"
+	_string: "Fatal Goblin Occultist"
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_shaman_3
-	_sprite_dead: goblin_shaman_3_dead
+	_sprite: goblin_shaman_2
+	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.701020
 	_resource_health: 0.816156
 	_resource_mana: 1
@@ -5377,12 +5377,12 @@ entity world_enemies_npc_212: !NPC
 
 entity world_enemies_npc_213: !NPC
 {
-	_string: "Goblin Wizard"
+	_string: "Goblin Stormweaver"
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_shaman
-	_sprite_dead: goblin_shaman_dead
+	_sprite: goblin_shaman_3
+	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.714904
 	_resource_health: 0.722624
 	_resource_mana: 1
@@ -5402,12 +5402,12 @@ entity world_enemies_npc_213: !NPC
 
 entity world_enemies_npc_214: !NPC
 {
-	_string: "Angry Goblin Spellcaster"
+	_string: "Spiteful Goblin Conjurer"
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_shaman_3
-	_sprite_dead: goblin_shaman_3_dead
+	_sprite: goblin_shaman_2
+	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.750785
 	_resource_health: 0.796577
 	_resource_mana: 1
@@ -5428,12 +5428,12 @@ entity world_enemies_npc_214: !NPC
 
 entity world_enemies_npc_215: !NPC
 {
-	_string: "Corrupt Goblin Occultist"
+	_string: "Vile Goblin Enchanter"
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_shaman_3
-	_sprite_dead: goblin_shaman_3_dead
+	_sprite: goblin_shaman_2
+	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.755482
 	_resource_health: 0.705220
 	_resource_mana: 1
@@ -5454,12 +5454,12 @@ entity world_enemies_npc_215: !NPC
 
 entity world_enemies_npc_216: !NPC
 {
-	_string: "Damned Goblin Stormweaver"
+	_string: "Calamitious Goblin Magician"
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_shaman_2
-	_sprite_dead: goblin_shaman_2_dead
+	_sprite: goblin_shaman
+	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.845324
 	_resource_health: 0.714268
 	_resource_mana: 1
@@ -5480,12 +5480,12 @@ entity world_enemies_npc_216: !NPC
 
 entity world_enemies_npc_217: !NPC
 {
-	_string: "Vile Goblin Stormcaller"
+	_string: "Revolting Goblin Pyromancer"
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_shaman_2
-	_sprite_dead: goblin_shaman_2_dead
+	_sprite: goblin_shaman
+	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.826257
 	_resource_health: 0.708470
 	_resource_mana: 1
@@ -5506,12 +5506,12 @@ entity world_enemies_npc_217: !NPC
 
 entity world_enemies_npc_218: !NPC
 {
-	_string: "Toxic Goblin Enchanter"
+	_string: "Pestilent Goblin Stormcaller"
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_shaman
-	_sprite_dead: goblin_shaman_dead
+	_sprite: goblin_shaman_3
+	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.844177
 	_resource_health: 0.705358
 	_resource_mana: 1
@@ -5532,12 +5532,12 @@ entity world_enemies_npc_218: !NPC
 
 entity world_enemies_npc_219: !NPC
 {
-	_string: "Violent Goblin Mage"
+	_string: "Fatal Goblin Sorceror"
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_shaman_3
-	_sprite_dead: goblin_shaman_3_dead
+	_sprite: goblin_shaman_2
+	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.842136
 	_resource_health: 0.701656
 	_resource_mana: 1
@@ -5558,12 +5558,12 @@ entity world_enemies_npc_219: !NPC
 
 entity world_enemies_npc_220: !NPC
 {
-	_string: "Goblin Warlock"
+	_string: "Goblin Magus"
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_shaman_3
-	_sprite_dead: goblin_shaman_3_dead
+	_sprite: goblin_shaman_2
+	_sprite_dead: goblin_shaman_2_dead
 	_weapon_damage: 0.768810
 	_resource_health: 0.754584
 	_resource_mana: 1
@@ -5583,12 +5583,12 @@ entity world_enemies_npc_220: !NPC
 
 entity world_enemies_npc_221: !NPC
 {
-	_string: "Goblin Wizard"
+	_string: "Goblin Stormweaver"
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_shaman
-	_sprite_dead: goblin_shaman_dead
+	_sprite: goblin_shaman_3
+	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.743955
 	_resource_health: 0.727050
 	_resource_mana: 1
@@ -5608,12 +5608,12 @@ entity world_enemies_npc_221: !NPC
 
 entity world_enemies_npc_222: !NPC
 {
-	_string: "Goblin Sorceror"
+	_string: "Goblin Wizard"
 	_level: 10
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_shaman
-	_sprite_dead: goblin_shaman_dead
+	_sprite: goblin_shaman_3
+	_sprite_dead: goblin_shaman_3_dead
 	_weapon_damage: 0.830332
 	_resource_health: 0.850009
 	_resource_mana: 1
@@ -5633,12 +5633,12 @@ entity world_enemies_npc_222: !NPC
 
 entity world_enemies_npc_223: !NPC
 {
-	_string: "Goblin Magus"
+	_string: "Goblin Spellweaver"
 	_level: 9
 	_elite: true
 	_faction: goblins
-	_sprite: goblin_shaman_2
-	_sprite_dead: goblin_shaman_2_dead
+	_sprite: goblin_shaman
+	_sprite_dead: goblin_shaman_dead
 	_weapon_damage: 0.727227
 	_resource_health: 0.746792
 	_resource_mana: 1
@@ -7386,7 +7386,7 @@ entity world_enemies_npc_287: !NPC
 
 entity world_enemies_npc_288: !NPC
 {
-	_string: "Osmturema the Fatal"
+	_string: "Osmturema the Toxic"
 	_level: 10
 	_elite: true
 	_faction: goblins
@@ -7414,7 +7414,7 @@ entity world_enemies_npc_288: !NPC
 
 entity world_enemies_npc_289: !NPC
 {
-	_string: "Leian the Iniquitous"
+	_string: "Leian the Atrocious"
 	_level: 10
 	_elite: true
 	_faction: goblins
@@ -7442,7 +7442,7 @@ entity world_enemies_npc_289: !NPC
 
 entity world_enemies_npc_290: !NPC
 {
-	_string: "Deras the Infernal"
+	_string: "Deras the Grey"
 	_level: 10
 	_elite: true
 	_faction: goblins
@@ -7470,7 +7470,7 @@ entity world_enemies_npc_290: !NPC
 
 entity world_enemies_npc_291: !NPC
 {
-	_string: "Ebron the Atrocious"
+	_string: "Ebron the Malevolent"
 	_level: 10
 	_elite: true
 	_faction: goblins
@@ -7498,7 +7498,7 @@ entity world_enemies_npc_291: !NPC
 
 entity world_enemies_npc_292: !NPC
 {
-	_string: "Raks the Stinking"
+	_string: "Raks the Obscene"
 	_level: 9
 	_elite: true
 	_faction: goblins
@@ -7554,7 +7554,7 @@ entity world_enemies_npc_293: !NPC
 
 entity world_enemies_npc_294: !NPC
 {
-	_string: "Foral the Infernal"
+	_string: "Foral the Grey"
 	_level: 9
 	_elite: true
 	_faction: goblins
@@ -7582,7 +7582,7 @@ entity world_enemies_npc_294: !NPC
 
 entity world_enemies_npc_295: !NPC
 {
-	_string: "Suasharahjaw the Vicious"
+	_string: "Suasharahjaw the Hateful"
 	_level: 9
 	_elite: true
 	_faction: goblins
@@ -7610,7 +7610,7 @@ entity world_enemies_npc_295: !NPC
 
 entity world_enemies_npc_296: !NPC
 {
-	_string: "Pamymour the Bloody"
+	_string: "Pamymour the Wrathful"
 	_level: 10
 	_elite: true
 	_faction: goblins
@@ -7638,7 +7638,7 @@ entity world_enemies_npc_296: !NPC
 
 entity world_enemies_npc_297: !NPC
 {
-	_string: "Criantclaw the Hateful"
+	_string: "Criantclaw the Repugnant"
 	_level: 10
 	_elite: true
 	_faction: goblins
@@ -7694,7 +7694,7 @@ entity world_enemies_npc_298: !NPC
 
 entity world_enemies_npc_299: !NPC
 {
-	_string: "Roras the Grey"
+	_string: "Roras the Harmful"
 	_level: 10
 	_elite: true
 	_faction: goblins
@@ -7722,7 +7722,7 @@ entity world_enemies_npc_299: !NPC
 
 entity world_enemies_npc_300: !NPC
 {
-	_string: "Malu the Rancorous"
+	_string: "Malu the Injurious"
 	_level: 9
 	_elite: true
 	_faction: goblins
@@ -7750,7 +7750,7 @@ entity world_enemies_npc_300: !NPC
 
 entity world_enemies_npc_301: !NPC
 {
-	_string: "Luriaka the Cruel"
+	_string: "Luriaka the Dirty"
 	_level: 9
 	_elite: true
 	_faction: goblins
@@ -7778,7 +7778,7 @@ entity world_enemies_npc_301: !NPC
 
 entity world_enemies_npc_302: !NPC
 {
-	_string: "Gocos the Malignant"
+	_string: "Gocos the Vicious"
 	_level: 9
 	_elite: true
 	_faction: goblins
@@ -7806,7 +7806,7 @@ entity world_enemies_npc_302: !NPC
 
 entity world_enemies_npc_303: !NPC
 {
-	_string: "Bara the Toxic"
+	_string: "Bara the Pestilent"
 	_level: 9
 	_elite: true
 	_faction: goblins
@@ -7834,7 +7834,7 @@ entity world_enemies_npc_303: !NPC
 
 entity world_enemies_npc_304: !NPC
 {
-	_string: "Rakino the Lethal"
+	_string: "Rakino the Murderous"
 	_level: 9
 	_elite: true
 	_faction: goblins
@@ -7862,7 +7862,7 @@ entity world_enemies_npc_304: !NPC
 
 entity world_enemies_npc_305: !NPC
 {
-	_string: "Haliorg the Bloody"
+	_string: "Haliorg the Wrathful"
 	_level: 10
 	_elite: true
 	_faction: goblins
@@ -7890,7 +7890,7 @@ entity world_enemies_npc_305: !NPC
 
 entity world_enemies_npc_306: !NPC
 {
-	_string: "Habesdrugh the Repugnant"
+	_string: "Habesdrugh the Repulsive"
 	_level: 9
 	_elite: true
 	_faction: goblins
@@ -7918,7 +7918,7 @@ entity world_enemies_npc_306: !NPC
 
 entity world_enemies_npc_307: !NPC
 {
-	_string: "Leleol the Calamitious"
+	_string: "Leleol the Wicked"
 	_level: 9
 	_elite: true
 	_faction: goblins
@@ -7946,7 +7946,7 @@ entity world_enemies_npc_307: !NPC
 
 entity world_enemies_npc_308: !NPC
 {
-	_string: "Fuamon the Noxious"
+	_string: "Fuamon the Bitter"
 	_level: 9
 	_elite: true
 	_faction: goblins
@@ -7974,7 +7974,7 @@ entity world_enemies_npc_308: !NPC
 
 entity world_enemies_npc_309: !NPC
 {
-	_string: "Sils the Stinking"
+	_string: "Sils the Obscene"
 	_level: 9
 	_elite: true
 	_faction: goblins
@@ -8002,7 +8002,7 @@ entity world_enemies_npc_309: !NPC
 
 entity world_enemies_npc_310: !NPC
 {
-	_string: "Limoras the Infernal"
+	_string: "Limoras the Grey"
 	_level: 9
 	_elite: true
 	_faction: goblins
@@ -8030,7 +8030,7 @@ entity world_enemies_npc_310: !NPC
 
 entity world_enemies_npc_311: !NPC
 {
-	_string: "Toyz the Repulsive"
+	_string: "Toyz the Loathsome"
 	_level: 9
 	_elite: true
 	_faction: goblins
@@ -8058,7 +8058,7 @@ entity world_enemies_npc_311: !NPC
 
 entity world_enemies_npc_312: !NPC
 {
-	_string: "Alll the Calamitious"
+	_string: "Alll the Wicked"
 	_level: 10
 	_elite: true
 	_faction: goblins
@@ -8086,7 +8086,7 @@ entity world_enemies_npc_312: !NPC
 
 entity world_enemies_npc_313: !NPC
 {
-	_string: "Mavasol the Wicked"
+	_string: "Mavasol the Cruel"
 	_level: 9
 	_elite: true
 	_faction: goblins
@@ -8114,7 +8114,7 @@ entity world_enemies_npc_313: !NPC
 
 entity world_enemies_npc_314: !NPC
 {
-	_string: "Haax the Malignant"
+	_string: "Haax the Vicious"
 	_level: 10
 	_elite: true
 	_faction: goblins
@@ -8142,7 +8142,7 @@ entity world_enemies_npc_314: !NPC
 
 entity world_enemies_npc_315: !NPC
 {
-	_string: "Incialith the Obscene"
+	_string: "Incialith the Iniquitous"
 	_level: 10
 	_elite: true
 	_faction: goblins
@@ -8170,7 +8170,7 @@ entity world_enemies_npc_315: !NPC
 
 entity world_enemies_npc_316: !NPC
 {
-	_string: "Prousyahe the Wicked"
+	_string: "Prousyahe the Cruel"
 	_level: 9
 	_elite: true
 	_faction: goblins

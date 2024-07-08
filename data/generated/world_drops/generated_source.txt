@@ -25,7 +25,7 @@ item world_drops_item_0:
 item world_drops_item_1:
 {
 	string: "Repulsive Saber"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: common
 	item_level: 8
 	required_level: 8
@@ -176,7 +176,7 @@ item world_drops_item_6:
 item world_drops_item_7:
 {
 	string: "Loathsome Saber"
-	icon: icon_sword_2
+	icon: icon_knife_1
 	rarity: common
 	item_level: 7
 	required_level: 7
@@ -201,7 +201,7 @@ item world_drops_item_7:
 item world_drops_item_8:
 {
 	string: "Fatal Dagger"
-	icon: icon_sword_2
+	icon: icon_knife_1
 	rarity: common
 	item_level: 4
 	required_level: 4
@@ -304,7 +304,7 @@ item world_drops_item_11:
 item world_drops_item_12:
 {
 	string: "Large Skewer"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: common
 	item_level: 5
 	required_level: 5
@@ -353,7 +353,7 @@ item world_drops_item_13:
 item world_drops_item_14:
 {
 	string: "Large Falchion"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: common
 	item_level: 7
 	required_level: 7
@@ -401,7 +401,7 @@ item world_drops_item_15:
 item world_drops_item_16:
 {
 	string: "Elegant Flamberge"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: common
 	item_level: 7
 	required_level: 7
@@ -449,7 +449,7 @@ item world_drops_item_17:
 item world_drops_item_18:
 {
 	string: "Adept Broadsword"
-	icon: icon_sword_2
+	icon: icon_sword_3
 	rarity: common
 	item_level: 7
 	required_level: 7
@@ -521,7 +521,7 @@ item world_drops_item_20:
 item world_drops_item_21:
 {
 	string: "Savvy Rapier"
-	icon: icon_sword_2
+	icon: icon_knife_1
 	rarity: common
 	item_level: 9
 	required_level: 9
@@ -594,7 +594,7 @@ item world_drops_item_23:
 item world_drops_item_24:
 {
 	string: "Endless Cutter"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: common
 	item_level: 3
 	required_level: 3
@@ -643,7 +643,7 @@ item world_drops_item_25:
 item world_drops_item_26:
 {
 	string: "Deadly Tickler"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: common
 	item_level: 10
 	required_level: 10
@@ -669,7 +669,7 @@ item world_drops_item_26:
 item world_drops_item_27:
 {
 	string: "Endless Claymore"
-	icon: icon_sword_2
+	icon: icon_sword_3
 	rarity: common
 	item_level: 6
 	required_level: 6
@@ -693,7 +693,7 @@ item world_drops_item_27:
 item world_drops_item_28:
 {
 	string: "Deadly Falchion"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: common
 	item_level: 8
 	required_level: 8
@@ -766,7 +766,7 @@ item world_drops_item_30:
 item world_drops_item_31:
 {
 	string: "Depraved Longsword"
-	icon: icon_sword_2
+	icon: icon_sword_3
 	rarity: common
 	item_level: 5
 	required_level: 5
@@ -887,7 +887,7 @@ item world_drops_item_35:
 item world_drops_item_36:
 {
 	string: "Apt Blade"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: common
 	item_level: 9
 	required_level: 9
@@ -1108,7 +1108,7 @@ item world_drops_item_44:
 item world_drops_item_45:
 {
 	string: "Depraved Messer"
-	icon: icon_sword_2
+	icon: icon_sword_3
 	rarity: common
 	item_level: 4
 	required_level: 4
@@ -1235,7 +1235,7 @@ item world_drops_item_49:
 item world_drops_item_50:
 {
 	string: "Incorruptible Switchblade"
-	icon: icon_sword_2
+	icon: icon_knife_1
 	rarity: common
 	item_level: 7
 	required_level: 7
@@ -1383,7 +1383,7 @@ item world_drops_item_55:
 item world_drops_item_56:
 {
 	string: "Bleak Tickler"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: common
 	item_level: 4
 	required_level: 4
@@ -1483,7 +1483,7 @@ item world_drops_item_59:
 item world_drops_item_60:
 {
 	string: "Audacious Saber"
-	icon: icon_sword_2
+	icon: icon_knife_1
 	rarity: common
 	item_level: 5
 	required_level: 5
@@ -1534,7 +1534,7 @@ item world_drops_item_61:
 item world_drops_item_62:
 {
 	string: "Purple Cutlass"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: common
 	item_level: 7
 	required_level: 7
@@ -1634,7 +1634,7 @@ item world_drops_item_65:
 item world_drops_item_66:
 {
 	string: "Immortal Switchblade"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: common
 	item_level: 8
 	required_level: 8
@@ -1735,7 +1735,7 @@ item world_drops_item_69:
 item world_drops_item_70:
 {
 	string: "Malignant Machete"
-	icon: icon_sword_2
+	icon: icon_sword_3
 	rarity: common
 	item_level: 8
 	required_level: 8
@@ -1860,7 +1860,7 @@ item world_drops_item_74:
 item world_drops_item_75:
 {
 	string: "Infernal Longsword"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: common
 	item_level: 9
 	required_level: 9
@@ -1910,7 +1910,7 @@ item world_drops_item_76:
 item world_drops_item_77:
 {
 	string: "Lethal Sticker"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: common
 	item_level: 5
 	required_level: 5
@@ -1936,7 +1936,7 @@ item world_drops_item_77:
 item world_drops_item_78:
 {
 	string: "Endless Knife"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: common
 	item_level: 3
 	required_level: 3
@@ -2040,7 +2040,7 @@ item world_drops_item_81:
 item world_drops_item_82:
 {
 	string: "Cruel Flamberge"
-	icon: icon_sword_2
+	icon: icon_sword_3
 	rarity: uncommon
 	item_level: 4
 	required_level: 4
@@ -2302,7 +2302,7 @@ item world_drops_item_91:
 item world_drops_item_92:
 {
 	string: "Blade of the Phantasm"
-	icon: icon_sword_6
+	icon: icon_sword_3
 	rarity: uncommon
 	item_level: 8
 	required_level: 8
@@ -2434,7 +2434,7 @@ item world_drops_item_96:
 item world_drops_item_97:
 {
 	string: "Infernal Machete"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: uncommon
 	item_level: 7
 	required_level: 7
@@ -2487,7 +2487,7 @@ item world_drops_item_98:
 item world_drops_item_99:
 {
 	string: "Elegant Saber"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: uncommon
 	item_level: 8
 	required_level: 8
@@ -2600,7 +2600,7 @@ item world_drops_item_102:
 item world_drops_item_103:
 {
 	string: "Noxious Gladius"
-	icon: icon_sword_6
+	icon: icon_knife_1
 	rarity: uncommon
 	item_level: 8
 	required_level: 8
@@ -2627,7 +2627,7 @@ item world_drops_item_103:
 item world_drops_item_104:
 {
 	string: "Corrupt Sticker"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: uncommon
 	item_level: 6
 	required_level: 6
@@ -2708,7 +2708,7 @@ item world_drops_item_106:
 item world_drops_item_107:
 {
 	string: "Deathless Stiletto"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: uncommon
 	item_level: 9
 	required_level: 9
@@ -2952,7 +2952,7 @@ item world_drops_item_115:
 item world_drops_item_116:
 {
 	string: "Damned Shank"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: uncommon
 	item_level: 6
 	required_level: 6
@@ -3117,7 +3117,7 @@ item world_drops_item_121:
 item world_drops_item_122:
 {
 	string: "Toxic Dagger"
-	icon: icon_sword_2
+	icon: icon_sword_3
 	rarity: uncommon
 	item_level: 3
 	required_level: 3
@@ -3144,7 +3144,7 @@ item world_drops_item_122:
 item world_drops_item_123:
 {
 	string: "Pearly Skewer"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: uncommon
 	item_level: 7
 	required_level: 7
@@ -3172,7 +3172,7 @@ item world_drops_item_123:
 item world_drops_item_124:
 {
 	string: "Sword of the Oracle"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: uncommon
 	item_level: 7
 	required_level: 7
@@ -3258,7 +3258,7 @@ item world_drops_item_126:
 item world_drops_item_127:
 {
 	string: "Weird Claymore"
-	icon: icon_sword_6
+	icon: icon_sword_3
 	rarity: uncommon
 	item_level: 10
 	required_level: 10
@@ -3522,7 +3522,7 @@ item world_drops_item_136:
 item world_drops_item_137:
 {
 	string: "Wild Longsword"
-	icon: icon_sword_2
+	icon: icon_knife_1
 	rarity: uncommon
 	item_level: 3
 	required_level: 3
@@ -3574,7 +3574,7 @@ item world_drops_item_138:
 item world_drops_item_139:
 {
 	string: "Scimitar of the Pyromancer"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: uncommon
 	item_level: 10
 	required_level: 10
@@ -3629,7 +3629,7 @@ item world_drops_item_140:
 item world_drops_item_141:
 {
 	string: "Broadsword of the Kraken"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: uncommon
 	item_level: 4
 	required_level: 4
@@ -3684,7 +3684,7 @@ item world_drops_item_142:
 item world_drops_item_143:
 {
 	string: "Able Scimitar"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: uncommon
 	item_level: 9
 	required_level: 9
@@ -3762,7 +3762,7 @@ item world_drops_item_145:
 item world_drops_item_146:
 {
 	string: "Depraved Cutlass"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: uncommon
 	item_level: 5
 	required_level: 5
@@ -3842,7 +3842,7 @@ item world_drops_item_148:
 item world_drops_item_149:
 {
 	string: "Pearly Longsword"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: uncommon
 	item_level: 5
 	required_level: 5
@@ -3972,7 +3972,7 @@ item world_drops_item_153:
 item world_drops_item_154:
 {
 	string: "Beastly Longsword"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: uncommon
 	item_level: 6
 	required_level: 6
@@ -3999,7 +3999,7 @@ item world_drops_item_154:
 item world_drops_item_155:
 {
 	string: "Able Machete"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: uncommon
 	item_level: 6
 	required_level: 6
@@ -4054,7 +4054,7 @@ item world_drops_item_156:
 item world_drops_item_157:
 {
 	string: "Blade of the Berserker"
-	icon: icon_sword_6
+	icon: icon_sword_3
 	rarity: uncommon
 	item_level: 10
 	required_level: 10
@@ -4159,7 +4159,7 @@ item world_drops_item_160:
 item world_drops_item_161:
 {
 	string: "Skewer of the Witness"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: uncommon
 	item_level: 4
 	required_level: 4
@@ -4211,7 +4211,7 @@ item world_drops_item_162:
 item world_drops_item_163:
 {
 	string: "Claymore of the Spellcaster"
-	icon: icon_sword_2
+	icon: icon_sword_3
 	rarity: uncommon
 	item_level: 3
 	required_level: 3
@@ -4290,7 +4290,7 @@ item world_drops_item_165:
 item world_drops_item_166:
 {
 	string: "Incorruptible Flamberge"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: uncommon
 	item_level: 8
 	required_level: 8
@@ -4424,7 +4424,7 @@ item world_drops_item_170:
 item world_drops_item_171:
 {
 	string: "Cutter of the Priest"
-	icon: icon_sword_6
+	icon: icon_knife_1
 	rarity: uncommon
 	item_level: 5
 	required_level: 5
@@ -4452,7 +4452,7 @@ item world_drops_item_171:
 item world_drops_item_172:
 {
 	string: "Blade of the Reaver"
-	icon: icon_sword_2
+	icon: icon_sword_3
 	rarity: uncommon
 	item_level: 3
 	required_level: 3
@@ -4747,7 +4747,7 @@ item world_drops_item_182:
 item world_drops_item_183:
 {
 	string: "Large Flamberge"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: uncommon
 	item_level: 7
 	required_level: 7
@@ -5098,7 +5098,7 @@ item world_drops_item_195:
 item world_drops_item_196:
 {
 	string: "Messer of the Brute"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: uncommon
 	item_level: 10
 	required_level: 10
@@ -5419,7 +5419,7 @@ item world_drops_item_207:
 item world_drops_item_208:
 {
 	string: "Scimitar of the Ravisher"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: uncommon
 	item_level: 9
 	required_level: 9
@@ -5473,7 +5473,7 @@ item world_drops_item_209:
 item world_drops_item_210:
 {
 	string: "Ebon Rapier"
-	icon: icon_sword_6
+	icon: icon_knife_1
 	rarity: uncommon
 	item_level: 5
 	required_level: 5
@@ -5575,7 +5575,7 @@ item world_drops_item_213:
 item world_drops_item_214:
 {
 	string: "Sagacious Saber"
-	icon: icon_sword_2
+	icon: icon_knife_1
 	rarity: uncommon
 	item_level: 4
 	required_level: 4
@@ -5629,7 +5629,7 @@ item world_drops_item_215:
 item world_drops_item_216:
 {
 	string: "Slicer of the Fighter"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: uncommon
 	item_level: 8
 	required_level: 8
@@ -5849,7 +5849,7 @@ item world_drops_item_223:
 item world_drops_item_224:
 {
 	string: "Obscene Broadsword"
-	icon: icon_sword_6
+	icon: icon_sword_3
 	rarity: uncommon
 	item_level: 10
 	required_level: 10
@@ -6193,7 +6193,7 @@ item world_drops_item_236:
 item world_drops_item_237:
 {
 	string: "Hateful Skiver"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: uncommon
 	item_level: 5
 	required_level: 5
@@ -6249,7 +6249,7 @@ item world_drops_item_238:
 item world_drops_item_239:
 {
 	string: "Sticker of the Brute"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: uncommon
 	item_level: 9
 	required_level: 9
@@ -6329,7 +6329,7 @@ item world_drops_item_241:
 item world_drops_item_242:
 {
 	string: "Modest Dagger"
-	icon: icon_sword_2
+	icon: icon_knife_1
 	rarity: uncommon
 	item_level: 4
 	required_level: 4
@@ -6411,7 +6411,7 @@ item world_drops_item_244:
 item world_drops_item_245:
 {
 	string: "Violent Longsword"
-	icon: icon_sword_6
+	icon: icon_sword_3
 	rarity: uncommon
 	item_level: 9
 	required_level: 9
@@ -6516,7 +6516,7 @@ item world_drops_item_248:
 item world_drops_item_249:
 {
 	string: "Ugly Longsword"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: uncommon
 	item_level: 5
 	required_level: 5
@@ -6597,7 +6597,7 @@ item world_drops_item_251:
 item world_drops_item_252:
 {
 	string: "Wicked Gladius"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: uncommon
 	item_level: 10
 	required_level: 10
@@ -6651,7 +6651,7 @@ item world_drops_item_253:
 item world_drops_item_254:
 {
 	string: "Cutter of the Anaconda"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: uncommon
 	item_level: 4
 	required_level: 4
@@ -6683,7 +6683,7 @@ item world_drops_item_254:
 item world_drops_item_255:
 {
 	string: "Flauntless Falchion"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: uncommon
 	item_level: 10
 	required_level: 10
@@ -6734,7 +6734,7 @@ item world_drops_item_256:
 item world_drops_item_257:
 {
 	string: "Daring Cutter"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: uncommon
 	item_level: 4
 	required_level: 4
@@ -6868,7 +6868,7 @@ item world_drops_item_261:
 item world_drops_item_262:
 {
 	string: "Cutter of the Shaman"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: uncommon
 	item_level: 10
 	required_level: 10
@@ -6974,7 +6974,7 @@ item world_drops_item_265:
 item world_drops_item_266:
 {
 	string: "Apt Blade"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: uncommon
 	item_level: 4
 	required_level: 4
@@ -7002,7 +7002,7 @@ item world_drops_item_266:
 item world_drops_item_267:
 {
 	string: "Heroic Saber"
-	icon: icon_sword_2
+	icon: icon_knife_1
 	rarity: uncommon
 	item_level: 3
 	required_level: 3
@@ -7106,7 +7106,7 @@ item world_drops_item_270:
 item world_drops_item_271:
 {
 	string: "Dirty Sword"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: uncommon
 	item_level: 4
 	required_level: 4
@@ -7133,7 +7133,7 @@ item world_drops_item_271:
 item world_drops_item_272:
 {
 	string: "Longsword of the Stormweaver"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: uncommon
 	item_level: 3
 	required_level: 3
@@ -7160,7 +7160,7 @@ item world_drops_item_272:
 item world_drops_item_273:
 {
 	string: "Lethal Sword"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: uncommon
 	item_level: 7
 	required_level: 7
@@ -7458,7 +7458,7 @@ item world_drops_item_283:
 item world_drops_item_284:
 {
 	string: "Flamberge of the Elder"
-	icon: icon_sword_6
+	icon: icon_sword_3
 	rarity: rare
 	item_level: 9
 	required_level: 9
@@ -7538,7 +7538,7 @@ item world_drops_item_286:
 item world_drops_item_287:
 {
 	string: "Tickler of the Ancient"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: rare
 	item_level: 5
 	required_level: 5
@@ -7623,7 +7623,7 @@ item world_drops_item_289:
 item world_drops_item_290:
 {
 	string: "Messer of the Hexer"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: rare
 	item_level: 9
 	required_level: 9
@@ -7680,7 +7680,7 @@ item world_drops_item_291:
 item world_drops_item_292:
 {
 	string: "Heroic Blade of the Mage"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: rare
 	item_level: 10
 	required_level: 10
@@ -7740,7 +7740,7 @@ item world_drops_item_293:
 item world_drops_item_294:
 {
 	string: "Black Messer"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: rare
 	item_level: 9
 	required_level: 9
@@ -7797,7 +7797,7 @@ item world_drops_item_295:
 item world_drops_item_296:
 {
 	string: "Bearslayer Gladius"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: rare
 	item_level: 9
 	required_level: 9
@@ -7966,7 +7966,7 @@ item world_drops_item_301:
 item world_drops_item_302:
 {
 	string: "Destructive Berserker Scimitar"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: rare
 	item_level: 9
 	required_level: 9
@@ -7994,7 +7994,7 @@ item world_drops_item_302:
 item world_drops_item_303:
 {
 	string: "Able Blade"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: rare
 	item_level: 9
 	required_level: 9
@@ -8081,7 +8081,7 @@ item world_drops_item_305:
 item world_drops_item_306:
 {
 	string: "Broadsword of the Unafraid Ancient"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: rare
 	item_level: 9
 	required_level: 9
@@ -8192,7 +8192,7 @@ item world_drops_item_309:
 item world_drops_item_310:
 {
 	string: "Cutlass of the Spellweaver"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: rare
 	item_level: 5
 	required_level: 5
@@ -8296,7 +8296,7 @@ item world_drops_item_313:
 item world_drops_item_314:
 {
 	string: "Clean Messer of the Myrmidon"
-	icon: icon_sword_6
+	icon: icon_sword_3
 	rarity: rare
 	item_level: 6
 	required_level: 6
@@ -8325,7 +8325,7 @@ item world_drops_item_314:
 item world_drops_item_315:
 {
 	string: "Bearkiller Broadsword"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: rare
 	item_level: 8
 	required_level: 8
@@ -8441,7 +8441,7 @@ item world_drops_item_318:
 item world_drops_item_319:
 {
 	string: "Jaguarkiller Falchion"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: rare
 	item_level: 10
 	required_level: 10
@@ -8784,7 +8784,7 @@ item world_drops_item_330:
 item world_drops_item_331:
 {
 	string: "Dauntless Stiletto"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: rare
 	item_level: 6
 	required_level: 6
@@ -8813,7 +8813,7 @@ item world_drops_item_331:
 item world_drops_item_332:
 {
 	string: "Blade of the Confident Fighter"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: rare
 	item_level: 8
 	required_level: 8
@@ -8873,7 +8873,7 @@ item world_drops_item_333:
 item world_drops_item_334:
 {
 	string: "Gallant Stiletto of the Revenant"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: rare
 	item_level: 5
 	required_level: 5
@@ -8929,7 +8929,7 @@ item world_drops_item_335:
 item world_drops_item_336:
 {
 	string: "Murderous Shiv"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: rare
 	item_level: 6
 	required_level: 6
@@ -9015,7 +9015,7 @@ item world_drops_item_338:
 item world_drops_item_339:
 {
 	string: "Rancorous Sword"
-	icon: icon_sword_6
+	icon: icon_sword_3
 	rarity: rare
 	item_level: 7
 	required_level: 7
@@ -9071,7 +9071,7 @@ item world_drops_item_340:
 item world_drops_item_341:
 {
 	string: "Depraved Cutlass"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: rare
 	item_level: 9
 	required_level: 9
@@ -9124,7 +9124,7 @@ item world_drops_item_342:
 item world_drops_item_343:
 {
 	string: "Ross's Injurious Blade"
-	icon: icon_sword_6
+	icon: icon_knife_1
 	rarity: rare
 	item_level: 6
 	required_level: 6
@@ -9349,7 +9349,7 @@ item world_drops_item_350:
 item world_drops_item_351:
 {
 	string: "Violent Saber"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: rare
 	item_level: 6
 	required_level: 6
@@ -9461,7 +9461,7 @@ item world_drops_item_354:
 item world_drops_item_355:
 {
 	string: "Scalpel of the Observer"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: rare
 	item_level: 6
 	required_level: 6
@@ -9488,7 +9488,7 @@ item world_drops_item_355:
 item world_drops_item_356:
 {
 	string: "Skiver of the Modest Soothsayer"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: rare
 	item_level: 10
 	required_level: 10
@@ -9518,7 +9518,7 @@ item world_drops_item_356:
 item world_drops_item_357:
 {
 	string: "Vicious Succubus Longsword"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: rare
 	item_level: 5
 	required_level: 5
@@ -9576,7 +9576,7 @@ item world_drops_item_358:
 item world_drops_item_359:
 {
 	string: "Machete of Bill"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: rare
 	item_level: 6
 	required_level: 6
@@ -9604,7 +9604,7 @@ item world_drops_item_359:
 item world_drops_item_360:
 {
 	string: "Cougarslayer Cutter"
-	icon: icon_sword_6
+	icon: icon_knife_1
 	rarity: rare
 	item_level: 7
 	required_level: 7
@@ -9634,7 +9634,7 @@ item world_drops_item_360:
 item world_drops_item_361:
 {
 	string: "Harmful Messer"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: rare
 	item_level: 10
 	required_level: 10
@@ -9689,7 +9689,7 @@ item world_drops_item_362:
 item world_drops_item_363:
 {
 	string: "Execrable Skiver of the Healer"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: rare
 	item_level: 8
 	required_level: 8
@@ -9771,7 +9771,7 @@ item world_drops_item_365:
 item world_drops_item_366:
 {
 	string: "Falchion of the Snake"
-	icon: icon_sword_6
+	icon: icon_knife_1
 	rarity: rare
 	item_level: 8
 	required_level: 8
@@ -9912,7 +9912,7 @@ item world_drops_item_370:
 item world_drops_item_371:
 {
 	string: "Pantherkiller Stiletto"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: rare
 	item_level: 6
 	required_level: 6
@@ -9944,7 +9944,7 @@ item world_drops_item_371:
 item world_drops_item_372:
 {
 	string: "Brilliant Blade"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: rare
 	item_level: 5
 	required_level: 5
@@ -10029,7 +10029,7 @@ item world_drops_item_374:
 item world_drops_item_375:
 {
 	string: "Wolfslayer Tickler"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: rare
 	item_level: 10
 	required_level: 10
@@ -10142,7 +10142,7 @@ item world_drops_item_378:
 item world_drops_item_379:
 {
 	string: "Valorous Longsword of the Warlock"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: rare
 	item_level: 6
 	required_level: 6
@@ -10171,7 +10171,7 @@ item world_drops_item_379:
 item world_drops_item_380:
 {
 	string: "Saber of Hulel"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: rare
 	item_level: 7
 	required_level: 7
@@ -10309,7 +10309,7 @@ item world_drops_item_384:
 item world_drops_item_385:
 {
 	string: "Modest Inquisitor Sticker"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: rare
 	item_level: 5
 	required_level: 5
@@ -10483,7 +10483,7 @@ item world_drops_item_390:
 item world_drops_item_391:
 {
 	string: "Messer of the Gallant Succubus"
-	icon: icon_sword_6
+	icon: icon_sword_3
 	rarity: rare
 	item_level: 8
 	required_level: 8
@@ -10568,7 +10568,7 @@ item world_drops_item_393:
 item world_drops_item_394:
 {
 	string: "Blade of Ardögas"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: rare
 	item_level: 7
 	required_level: 7
@@ -10628,7 +10628,7 @@ item world_drops_item_395:
 item world_drops_item_396:
 {
 	string: "Jeffrey's Cutlass"
-	icon: icon_sword_6
+	icon: icon_knife_1
 	rarity: rare
 	item_level: 8
 	required_level: 8
@@ -10878,7 +10878,7 @@ item world_drops_item_404:
 item world_drops_item_405:
 {
 	string: "Hateful Skiver of the Beholder"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: rare
 	item_level: 9
 	required_level: 9
@@ -10907,7 +10907,7 @@ item world_drops_item_405:
 item world_drops_item_406:
 {
 	string: "Brilliant Longsword of the Anaconda"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: rare
 	item_level: 10
 	required_level: 10
@@ -11326,7 +11326,7 @@ item world_drops_item_420:
 item world_drops_item_421:
 {
 	string: "Georgia's Knife"
-	icon: icon_sword_6
+	icon: icon_knife_1
 	rarity: rare
 	item_level: 10
 	required_level: 10
@@ -11730,7 +11730,7 @@ item world_drops_item_434:
 item world_drops_item_435:
 {
 	string: "Crazy Sticker"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: rare
 	item_level: 7
 	required_level: 7
@@ -11757,7 +11757,7 @@ item world_drops_item_435:
 item world_drops_item_436:
 {
 	string: "Skewer of Balom"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: rare
 	item_level: 5
 	required_level: 5
@@ -11843,7 +11843,7 @@ item world_drops_item_438:
 item world_drops_item_439:
 {
 	string: "Courageous Snake Tickler"
-	icon: icon_sword_6
+	icon: icon_sword_3
 	rarity: rare
 	item_level: 10
 	required_level: 10
@@ -12019,7 +12019,7 @@ item world_drops_item_444:
 item world_drops_item_445:
 {
 	string: "Short Sword of the Indestructible Giant"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: rare
 	item_level: 9
 	required_level: 9
@@ -12137,7 +12137,7 @@ item world_drops_item_448:
 item world_drops_item_449:
 {
 	string: "Leigh's Falchion"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: rare
 	item_level: 10
 	required_level: 10
@@ -12162,7 +12162,7 @@ item world_drops_item_449:
 item world_drops_item_450:
 {
 	string: "Repugnant Sticker"
-	icon: icon_sword_6
+	icon: icon_knife_1
 	rarity: rare
 	item_level: 10
 	required_level: 10
@@ -12245,7 +12245,7 @@ item world_drops_item_452:
 item world_drops_item_453:
 {
 	string: "Blue Myrmidon Scalpel"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: rare
 	item_level: 9
 	required_level: 9
@@ -12444,7 +12444,7 @@ item world_drops_item_459:
 item world_drops_item_460:
 {
 	string: "Samantha's Grey Blade"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: rare
 	item_level: 6
 	required_level: 6
@@ -12497,7 +12497,7 @@ item world_drops_item_461:
 item world_drops_item_462:
 {
 	string: "Valiant Switchblade of the Marauder"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: rare
 	item_level: 10
 	required_level: 10
@@ -12555,7 +12555,7 @@ item world_drops_item_463:
 item world_drops_item_464:
 {
 	string: "Henrietta's Falchion"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: rare
 	item_level: 9
 	required_level: 9
@@ -12638,7 +12638,7 @@ item world_drops_item_466:
 item world_drops_item_467:
 {
 	string: "Able Cutlass"
-	icon: icon_sword_6
+	icon: icon_sword_3
 	rarity: rare
 	item_level: 9
 	required_level: 9
@@ -12877,7 +12877,7 @@ item world_drops_item_474:
 item world_drops_item_475:
 {
 	string: "Slicer of Eran"
-	icon: icon_sword_6
+	icon: icon_knife_1
 	rarity: rare
 	item_level: 10
 	required_level: 10
@@ -12930,7 +12930,7 @@ item world_drops_item_476:
 item world_drops_item_477:
 {
 	string: "Knife of the Pyromancer"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: rare
 	item_level: 5
 	required_level: 5
@@ -12958,7 +12958,7 @@ item world_drops_item_477:
 item world_drops_item_478:
 {
 	string: "Jackalslayer Cutter"
-	icon: icon_sword_6
+	icon: icon_knife_1
 	rarity: rare
 	item_level: 9
 	required_level: 9
@@ -13018,7 +13018,7 @@ item world_drops_item_479:
 item world_drops_item_480:
 {
 	string: "Clean Messer"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: epic
 	item_level: 8
 	required_level: 8
@@ -13106,7 +13106,7 @@ item world_drops_item_482:
 item world_drops_item_483:
 {
 	string: "Modest Knife"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -13135,7 +13135,7 @@ item world_drops_item_483:
 item world_drops_item_484:
 {
 	string: "Old Jaguarslayer Gladius"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -13166,7 +13166,7 @@ item world_drops_item_484:
 item world_drops_item_485:
 {
 	string: "Krakenkiller Messer"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -13252,7 +13252,7 @@ item world_drops_item_487:
 item world_drops_item_488:
 {
 	string: "Violent Skirmisher Dagger"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -13648,7 +13648,7 @@ item world_drops_item_501:
 item world_drops_item_502:
 {
 	string: "Pantherkiller Flamberge"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -13677,7 +13677,7 @@ item world_drops_item_502:
 item world_drops_item_503:
 {
 	string: "Skiver of Emily"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: epic
 	item_level: 8
 	required_level: 8
@@ -13877,7 +13877,7 @@ item world_drops_item_509:
 item world_drops_item_510:
 {
 	string: "Corrupt Dagger"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -13993,7 +13993,7 @@ item world_drops_item_513:
 item world_drops_item_514:
 {
 	string: "Falchion of the Witness"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -14019,7 +14019,7 @@ item world_drops_item_514:
 item world_drops_item_515:
 {
 	string: "Brown Rapier"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: epic
 	item_level: 8
 	required_level: 8
@@ -14193,7 +14193,7 @@ item world_drops_item_520:
 item world_drops_item_521:
 {
 	string: "Green Warlock Skiver"
-	icon: icon_sword_6
+	icon: icon_knife_1
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -14283,7 +14283,7 @@ item world_drops_item_523:
 item world_drops_item_524:
 {
 	string: "Brown Tigerkiller Scimitar"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -14428,7 +14428,7 @@ item world_drops_item_528:
 item world_drops_item_529:
 {
 	string: "Shank of Elór"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -14540,7 +14540,7 @@ item world_drops_item_532:
 item world_drops_item_533:
 {
 	string: "Iniquitous Falchion of the Sphinx"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: epic
 	item_level: 8
 	required_level: 8
@@ -14572,7 +14572,7 @@ item world_drops_item_533:
 item world_drops_item_534:
 {
 	string: "Timeless Ravisher Scimitar"
-	icon: icon_sword_6
+	icon: icon_sword_3
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -14658,7 +14658,7 @@ item world_drops_item_536:
 item world_drops_item_537:
 {
 	string: "Fat Switchblade"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: epic
 	item_level: 8
 	required_level: 8
@@ -14953,7 +14953,7 @@ item world_drops_item_546:
 item world_drops_item_547:
 {
 	string: "Sticker of the Phantasm"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: epic
 	item_level: 8
 	required_level: 8
@@ -14981,7 +14981,7 @@ item world_drops_item_547:
 item world_drops_item_548:
 {
 	string: "Daring Falchion"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -15010,7 +15010,7 @@ item world_drops_item_548:
 item world_drops_item_549:
 {
 	string: "Skewer of the Everlasting Hexweaver"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -15121,7 +15121,7 @@ item world_drops_item_552:
 item world_drops_item_553:
 {
 	string: "Switchblade of the Stormcaller"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -15151,7 +15151,7 @@ item world_drops_item_553:
 item world_drops_item_554:
 {
 	string: "Aspslayer Slicer"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: epic
 	item_level: 8
 	required_level: 8
@@ -15214,7 +15214,7 @@ item world_drops_item_555:
 item world_drops_item_556:
 {
 	string: "Everlasting Basilisk Tickler"
-	icon: icon_sword_6
+	icon: icon_sword_3
 	rarity: epic
 	item_level: 8
 	required_level: 8
@@ -15244,7 +15244,7 @@ item world_drops_item_556:
 item world_drops_item_557:
 {
 	string: "Endless Dagger"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: epic
 	item_level: 8
 	required_level: 8
@@ -15423,7 +15423,7 @@ item world_drops_item_562:
 item world_drops_item_563:
 {
 	string: "Scimitar of the Healer"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -15508,7 +15508,7 @@ item world_drops_item_565:
 item world_drops_item_566:
 {
 	string: "Adept Wolfslayer Scimitar"
-	icon: icon_sword_6
+	icon: icon_sword_3
 	rarity: epic
 	item_level: 8
 	required_level: 8
@@ -15567,7 +15567,7 @@ item world_drops_item_567:
 item world_drops_item_568:
 {
 	string: "Blade of the Acolyte"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -15705,7 +15705,7 @@ item world_drops_item_572:
 item world_drops_item_573:
 {
 	string: "Destructive Saber of the Liar"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -15795,7 +15795,7 @@ item world_drops_item_575:
 item world_drops_item_576:
 {
 	string: "Giantslayer Scimitar"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -15999,7 +15999,7 @@ item world_drops_item_582:
 item world_drops_item_583:
 {
 	string: "Obscene Gladius"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: epic
 	item_level: 8
 	required_level: 8
@@ -16114,7 +16114,7 @@ item world_drops_item_586:
 item world_drops_item_587:
 {
 	string: "Scalpel of Fors"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -16202,7 +16202,7 @@ item world_drops_item_589:
 item world_drops_item_590:
 {
 	string: "Pestilent Sword of the Nightmare"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: epic
 	item_level: 8
 	required_level: 8
@@ -16256,7 +16256,7 @@ item world_drops_item_591:
 item world_drops_item_592:
 {
 	string: "Slicer of the Snake"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -16316,7 +16316,7 @@ item world_drops_item_593:
 item world_drops_item_594:
 {
 	string: "Falchion of Manthoph"
-	icon: icon_sword_6
+	icon: icon_knife_1
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -16377,7 +16377,7 @@ item world_drops_item_595:
 item world_drops_item_596:
 {
 	string: "Red Anaconda Cutter"
-	icon: icon_sword_6
+	icon: icon_knife_1
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -16437,7 +16437,7 @@ item world_drops_item_597:
 item world_drops_item_598:
 {
 	string: "Cutlass of the Conjurer"
-	icon: icon_sword_6
+	icon: icon_sword_3
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -16637,7 +16637,7 @@ item world_drops_item_604:
 item world_drops_item_605:
 {
 	string: "Tickler of Hámad"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -16694,7 +16694,7 @@ item world_drops_item_606:
 item world_drops_item_607:
 {
 	string: "Baneful Falchion"
-	icon: icon_sword_6
+	icon: icon_sword_3
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -16778,7 +16778,7 @@ item world_drops_item_609:
 item world_drops_item_610:
 {
 	string: "Cutter of Elen"
-	icon: icon_sword_6
+	icon: icon_knife_1
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -17003,7 +17003,7 @@ item world_drops_item_617:
 item world_drops_item_618:
 {
 	string: "Bitter Sticker of the Outlaw"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -17264,7 +17264,7 @@ item world_drops_item_626:
 item world_drops_item_627:
 {
 	string: "Red Blade"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: epic
 	item_level: 8
 	required_level: 8
@@ -17350,7 +17350,7 @@ item world_drops_item_629:
 item world_drops_item_630:
 {
 	string: "Krakenslayer Scimitar"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -17520,7 +17520,7 @@ item world_drops_item_635:
 item world_drops_item_636:
 {
 	string: "Astute Cutlass"
-	icon: icon_sword_6
+	icon: icon_sword_3
 	rarity: epic
 	item_level: 8
 	required_level: 8
@@ -17606,7 +17606,7 @@ item world_drops_item_638:
 item world_drops_item_639:
 {
 	string: "Daring Messer"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: epic
 	item_level: 8
 	required_level: 8
@@ -17693,7 +17693,7 @@ item world_drops_item_641:
 item world_drops_item_642:
 {
 	string: "Bearslayer Falchion"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -18001,7 +18001,7 @@ item world_drops_item_652:
 item world_drops_item_653:
 {
 	string: "Shank of the Dirty Slayer"
-	icon: icon_sword_6
+	icon: icon_knife_1
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -18459,7 +18459,7 @@ item world_drops_item_668:
 item world_drops_item_669:
 {
 	string: "Clean Slayer Scalpel"
-	icon: icon_sword_6
+	icon: icon_knife_1
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -18714,7 +18714,7 @@ item world_drops_item_677:
 item world_drops_item_678:
 {
 	string: "Pearly Occultist Switchblade"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -18771,7 +18771,7 @@ item world_drops_item_679:
 item world_drops_item_680:
 {
 	string: "Repugnant Blade of the Horror"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -18881,7 +18881,7 @@ item world_drops_item_683:
 item world_drops_item_684:
 {
 	string: "Jackalslayer Saber"
-	icon: icon_sword_6
+	icon: icon_knife_1
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -18975,7 +18975,7 @@ item world_drops_item_686:
 item world_drops_item_687:
 {
 	string: "Krakenkiller Sword"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -19234,7 +19234,7 @@ item world_drops_item_695:
 item world_drops_item_696:
 {
 	string: "Skewer of the Elder"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: epic
 	item_level: 8
 	required_level: 8
@@ -19263,7 +19263,7 @@ item world_drops_item_696:
 item world_drops_item_697:
 {
 	string: "Cutlass of Matthew"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: epic
 	item_level: 8
 	required_level: 8
@@ -19376,7 +19376,7 @@ item world_drops_item_700:
 item world_drops_item_701:
 {
 	string: "Broadsword of the Sincere Wizard"
-	icon: icon_sword_6
+	icon: icon_sword_3
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -19465,7 +19465,7 @@ item world_drops_item_703:
 item world_drops_item_704:
 {
 	string: "Sticker of the Rational Familiar"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -19928,7 +19928,7 @@ item world_drops_item_719:
 item world_drops_item_720:
 {
 	string: "Blade of Anga"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -19958,7 +19958,7 @@ item world_drops_item_720:
 item world_drops_item_721:
 {
 	string: "Malignant Machete"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: epic
 	item_level: 8
 	required_level: 8
@@ -20014,7 +20014,7 @@ item world_drops_item_722:
 item world_drops_item_723:
 {
 	string: "Skinny Cougarslayer Stiletto"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -20044,7 +20044,7 @@ item world_drops_item_723:
 item world_drops_item_724:
 {
 	string: "Flamberge of the Fat Hexer"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: epic
 	item_level: 8
 	required_level: 8
@@ -20426,7 +20426,7 @@ item world_drops_item_736:
 item world_drops_item_737:
 {
 	string: "Pantherslayer Messer"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: epic
 	item_level: 8
 	required_level: 8
@@ -20487,7 +20487,7 @@ item world_drops_item_738:
 item world_drops_item_739:
 {
 	string: "Shank of Mesas"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -20545,7 +20545,7 @@ item world_drops_item_740:
 item world_drops_item_741:
 {
 	string: "Cutter of the Leopard"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -20574,7 +20574,7 @@ item world_drops_item_741:
 item world_drops_item_742:
 {
 	string: "Knife of Bala"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -20605,7 +20605,7 @@ item world_drops_item_742:
 item world_drops_item_743:
 {
 	string: "Violent Falchion"
-	icon: icon_sword_6
+	icon: icon_knife_1
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -20747,7 +20747,7 @@ item world_drops_item_747:
 item world_drops_item_748:
 {
 	string: "Verna's Skewer"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -21029,7 +21029,7 @@ item world_drops_item_757:
 item world_drops_item_758:
 {
 	string: "Gallant Messer"
-	icon: icon_knife_1
+	icon: icon_sword_3
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -21228,7 +21228,7 @@ item world_drops_item_764:
 item world_drops_item_765:
 {
 	string: "Strange Cougarslayer Skiver"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -21258,7 +21258,7 @@ item world_drops_item_765:
 item world_drops_item_766:
 {
 	string: "Depraved Machete"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -21285,7 +21285,7 @@ item world_drops_item_766:
 item world_drops_item_767:
 {
 	string: "Purple Shiv"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -21551,7 +21551,7 @@ item world_drops_item_775:
 item world_drops_item_776:
 {
 	string: "Scimitar of Lorene"
-	icon: icon_sword_2
+	icon: icon_sword_6
 	rarity: epic
 	item_level: 8
 	required_level: 8
@@ -21580,7 +21580,7 @@ item world_drops_item_776:
 item world_drops_item_777:
 {
 	string: "Misty's Loathsome Switchblade"
-	icon: icon_sword_3
+	icon: icon_sword_2
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -21888,7 +21888,7 @@ item world_drops_item_788:
 item world_drops_item_789:
 {
 	string: "Daring Shinplates"
-	icon: icon_mail_pants_1
+	icon: icon_mail_pants_2
 	rarity: common
 	item_level: 2
 	required_level: 2
@@ -22804,7 +22804,7 @@ item world_drops_item_825:
 item world_drops_item_826:
 {
 	string: "Stinking Greaves"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: common
 	item_level: 3
 	required_level: 3
@@ -22904,7 +22904,7 @@ item world_drops_item_829:
 item world_drops_item_830:
 {
 	string: "Mad Leggings"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: common
 	item_level: 7
 	required_level: 7
@@ -23174,7 +23174,7 @@ item world_drops_item_840:
 item world_drops_item_841:
 {
 	string: "Loathsome Shinplates"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: common
 	item_level: 9
 	required_level: 9
@@ -23397,7 +23397,7 @@ item world_drops_item_849:
 item world_drops_item_850:
 {
 	string: "Immortal Scales"
-	icon: icon_head_7
+	icon: icon_mail_pants_1
 	rarity: common
 	item_level: 10
 	required_level: 10
@@ -23421,7 +23421,7 @@ item world_drops_item_850:
 item world_drops_item_851:
 {
 	string: "Repugnant Shankguards"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: common
 	item_level: 9
 	required_level: 9
@@ -24239,7 +24239,7 @@ item world_drops_item_883:
 item world_drops_item_884:
 {
 	string: "Pearly Shinplates"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: common
 	item_level: 4
 	required_level: 4
@@ -24264,7 +24264,7 @@ item world_drops_item_884:
 item world_drops_item_885:
 {
 	string: "Repugnant Scales"
-	icon: icon_mail_pants_1
+	icon: icon_mail_pants_2
 	rarity: common
 	item_level: 9
 	required_level: 9
@@ -25057,7 +25057,7 @@ item world_drops_item_916:
 item world_drops_item_917:
 {
 	string: "Malevolent Chausses"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: common
 	item_level: 1
 	required_level: 1
@@ -25354,7 +25354,7 @@ item world_drops_item_928:
 item world_drops_item_929:
 {
 	string: "Infernal Scales"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: common
 	item_level: 2
 	required_level: 2
@@ -25429,7 +25429,7 @@ item world_drops_item_931:
 item world_drops_item_932:
 {
 	string: "Bloody Scales"
-	icon: icon_mail_pants_1
+	icon: icon_mail_pants_2
 	rarity: common
 	item_level: 8
 	required_level: 8
@@ -25479,7 +25479,7 @@ item world_drops_item_933:
 item world_drops_item_934:
 {
 	string: "Bleak Shinplates"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: common
 	item_level: 5
 	required_level: 5
@@ -25628,7 +25628,7 @@ item world_drops_item_939:
 item world_drops_item_940:
 {
 	string: "Harmful Leggings"
-	icon: icon_head_7
+	icon: icon_mail_pants_1
 	rarity: common
 	item_level: 10
 	required_level: 10
@@ -25926,7 +25926,7 @@ item world_drops_item_951:
 item world_drops_item_952:
 {
 	string: "Malevolent Leggings"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: common
 	item_level: 7
 	required_level: 7
@@ -26150,7 +26150,7 @@ item world_drops_item_960:
 item world_drops_item_961:
 {
 	string: "Repulsive Shinplates"
-	icon: icon_mail_pants_1
+	icon: icon_mail_pants_2
 	rarity: common
 	item_level: 5
 	required_level: 5
@@ -26746,7 +26746,7 @@ item world_drops_item_984:
 item world_drops_item_985:
 {
 	string: "Baneful Leggings"
-	icon: icon_mail_pants_1
+	icon: icon_mail_pants_2
 	rarity: common
 	item_level: 10
 	required_level: 10
@@ -27490,7 +27490,7 @@ item world_drops_item_1014:
 item world_drops_item_1015:
 {
 	string: "Brilliant Chausses"
-	icon: icon_mail_pants_1
+	icon: icon_mail_pants_2
 	rarity: common
 	item_level: 4
 	required_level: 4
@@ -27540,7 +27540,7 @@ item world_drops_item_1016:
 item world_drops_item_1017:
 {
 	string: "Dauntless Greaves"
-	icon: icon_mail_pants_1
+	icon: icon_mail_pants_2
 	rarity: common
 	item_level: 9
 	required_level: 9
@@ -28160,7 +28160,7 @@ item world_drops_item_1041:
 item world_drops_item_1042:
 {
 	string: "Enduring Greaves"
-	icon: icon_head_7
+	icon: icon_mail_pants_1
 	rarity: common
 	item_level: 8
 	required_level: 8
@@ -28380,7 +28380,7 @@ item world_drops_item_1050:
 item world_drops_item_1051:
 {
 	string: "Depraved Shankguards"
-	icon: icon_mail_pants_1
+	icon: icon_mail_pants_2
 	rarity: common
 	item_level: 4
 	required_level: 4
@@ -28551,7 +28551,7 @@ item world_drops_item_1057:
 item world_drops_item_1058:
 {
 	string: "Loathsome Scales"
-	icon: icon_mail_pants_1
+	icon: icon_mail_pants_2
 	rarity: common
 	item_level: 9
 	required_level: 9
@@ -28675,7 +28675,7 @@ item world_drops_item_1062:
 item world_drops_item_1063:
 {
 	string: "Bloody Leggings"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: common
 	item_level: 8
 	required_level: 8
@@ -29146,7 +29146,7 @@ item world_drops_item_1081:
 item world_drops_item_1082:
 {
 	string: "Murderous Greaves"
-	icon: icon_head_7
+	icon: icon_mail_pants_1
 	rarity: common
 	item_level: 9
 	required_level: 9
@@ -29518,7 +29518,7 @@ item world_drops_item_1096:
 item world_drops_item_1097:
 {
 	string: "Angry Leggings"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: common
 	item_level: 5
 	required_level: 5
@@ -30041,7 +30041,7 @@ item world_drops_item_1117:
 item world_drops_item_1118:
 {
 	string: "Execrable Leggings"
-	icon: icon_mail_pants_1
+	icon: icon_mail_pants_2
 	rarity: common
 	item_level: 3
 	required_level: 3
@@ -30562,7 +30562,7 @@ item world_drops_item_1138:
 item world_drops_item_1139:
 {
 	string: "Bloody Leggings"
-	icon: icon_mail_pants_1
+	icon: icon_mail_pants_2
 	rarity: common
 	item_level: 8
 	required_level: 8
@@ -30686,7 +30686,7 @@ item world_drops_item_1143:
 item world_drops_item_1144:
 {
 	string: "Grand Chausses"
-	icon: icon_mail_pants_1
+	icon: icon_mail_pants_2
 	rarity: common
 	item_level: 8
 	required_level: 8
@@ -31008,7 +31008,7 @@ item world_drops_item_1156:
 item world_drops_item_1157:
 {
 	string: "Revolting Shankguards"
-	icon: icon_mail_pants_1
+	icon: icon_mail_pants_2
 	rarity: common
 	item_level: 6
 	required_level: 6
@@ -31710,7 +31710,7 @@ item world_drops_item_1184:
 item world_drops_item_1185:
 {
 	string: "Large Crown"
-	icon: icon_head_6
+	icon: icon_head_3
 	rarity: uncommon
 	item_level: 10
 	required_level: 10
@@ -31839,7 +31839,7 @@ item world_drops_item_1189:
 item world_drops_item_1190:
 {
 	string: "Fatal Leggings"
-	icon: icon_mail_pants_2
+	icon: icon_head_7
 	rarity: uncommon
 	item_level: 9
 	required_level: 9
@@ -31999,7 +31999,7 @@ item world_drops_item_1195:
 item world_drops_item_1196:
 {
 	string: "Timeless Leggings"
-	icon: icon_mail_pants_1
+	icon: icon_mail_pants_2
 	rarity: uncommon
 	item_level: 3
 	required_level: 3
@@ -32232,7 +32232,7 @@ item world_drops_item_1204:
 item world_drops_item_1205:
 {
 	string: "Obscene Scales"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: uncommon
 	item_level: 7
 	required_level: 7
@@ -32516,7 +32516,7 @@ item world_drops_item_1215:
 item world_drops_item_1216:
 {
 	string: "Courageous Leggings"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: uncommon
 	item_level: 6
 	required_level: 6
@@ -33632,7 +33632,7 @@ item world_drops_item_1257:
 item world_drops_item_1258:
 {
 	string: "Chausses of the Shaman"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: uncommon
 	item_level: 6
 	required_level: 6
@@ -33793,7 +33793,7 @@ item world_drops_item_1263:
 item world_drops_item_1264:
 {
 	string: "Elegant Scales"
-	icon: icon_mail_pants_2
+	icon: icon_head_8
 	rarity: uncommon
 	item_level: 10
 	required_level: 10
@@ -33871,7 +33871,7 @@ item world_drops_item_1266:
 item world_drops_item_1267:
 {
 	string: "Wicked Scales"
-	icon: icon_mail_pants_1
+	icon: icon_mail_pants_2
 	rarity: uncommon
 	item_level: 9
 	required_level: 9
@@ -34210,7 +34210,7 @@ item world_drops_item_1279:
 item world_drops_item_1280:
 {
 	string: "Immortal Shinplates"
-	icon: icon_mail_pants_1
+	icon: icon_mail_pants_2
 	rarity: uncommon
 	item_level: 6
 	required_level: 6
@@ -34316,7 +34316,7 @@ item world_drops_item_1283:
 item world_drops_item_1284:
 {
 	string: "Dirty Greaves"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: uncommon
 	item_level: 3
 	required_level: 3
@@ -34609,7 +34609,7 @@ item world_drops_item_1294:
 item world_drops_item_1295:
 {
 	string: "Wrathful Greaves"
-	icon: icon_mail_pants_1
+	icon: icon_mail_pants_2
 	rarity: uncommon
 	item_level: 6
 	required_level: 6
@@ -34767,7 +34767,7 @@ item world_drops_item_1300:
 item world_drops_item_1301:
 {
 	string: "Resolute Headpiece"
-	icon: icon_head_3
+	icon: icon_head_6
 	rarity: uncommon
 	item_level: 8
 	required_level: 8
@@ -35212,7 +35212,7 @@ item world_drops_item_1317:
 item world_drops_item_1318:
 {
 	string: "Loathsome Shankguards"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: uncommon
 	item_level: 4
 	required_level: 4
@@ -35530,7 +35530,7 @@ item world_drops_item_1329:
 item world_drops_item_1330:
 {
 	string: "Damned Scales"
-	icon: icon_head_8
+	icon: icon_mail_pants_2
 	rarity: uncommon
 	item_level: 8
 	required_level: 8
@@ -35846,7 +35846,7 @@ item world_drops_item_1341:
 item world_drops_item_1342:
 {
 	string: "Shankguards of the Hexer"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: uncommon
 	item_level: 3
 	required_level: 3
@@ -36247,7 +36247,7 @@ item world_drops_item_1356:
 item world_drops_item_1357:
 {
 	string: "Bleak Scales"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: uncommon
 	item_level: 8
 	required_level: 8
@@ -36429,7 +36429,7 @@ item world_drops_item_1363:
 item world_drops_item_1364:
 {
 	string: "Enduring Crest"
-	icon: icon_head_3
+	icon: icon_head_6
 	rarity: uncommon
 	item_level: 6
 	required_level: 6
@@ -37170,7 +37170,7 @@ item world_drops_item_1391:
 item world_drops_item_1392:
 {
 	string: "Forward Helm"
-	icon: icon_head_3
+	icon: icon_head_6
 	rarity: uncommon
 	item_level: 9
 	required_level: 9
@@ -37665,7 +37665,7 @@ item world_drops_item_1410:
 item world_drops_item_1411:
 {
 	string: "Immortal Leggings"
-	icon: icon_mail_pants_2
+	icon: icon_head_7
 	rarity: uncommon
 	item_level: 10
 	required_level: 10
@@ -38063,7 +38063,7 @@ item world_drops_item_1425:
 item world_drops_item_1426:
 {
 	string: "Iniquitous Greaves"
-	icon: icon_mail_pants_1
+	icon: icon_mail_pants_2
 	rarity: uncommon
 	item_level: 3
 	required_level: 3
@@ -38244,7 +38244,7 @@ item world_drops_item_1432:
 item world_drops_item_1433:
 {
 	string: "Shankguards of the Observer"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: uncommon
 	item_level: 3
 	required_level: 3
@@ -38349,7 +38349,7 @@ item world_drops_item_1436:
 item world_drops_item_1437:
 {
 	string: "Leggings of the Mercenary"
-	icon: icon_mail_pants_2
+	icon: icon_head_7
 	rarity: uncommon
 	item_level: 10
 	required_level: 10
@@ -38564,7 +38564,7 @@ item world_drops_item_1444:
 item world_drops_item_1445:
 {
 	string: "Fatal Shinplates"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: uncommon
 	item_level: 3
 	required_level: 3
@@ -38775,7 +38775,7 @@ item world_drops_item_1452:
 item world_drops_item_1453:
 {
 	string: "Adept Leggings"
-	icon: icon_mail_pants_2
+	icon: icon_head_7
 	rarity: uncommon
 	item_level: 8
 	required_level: 8
@@ -39043,7 +39043,7 @@ item world_drops_item_1462:
 item world_drops_item_1463:
 {
 	string: "Greaves of the Incubus"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: uncommon
 	item_level: 9
 	required_level: 9
@@ -39253,7 +39253,7 @@ item world_drops_item_1470:
 item world_drops_item_1471:
 {
 	string: "Hideous Crown"
-	icon: icon_head_6
+	icon: icon_head_3
 	rarity: uncommon
 	item_level: 9
 	required_level: 9
@@ -39548,7 +39548,7 @@ item world_drops_item_1481:
 item world_drops_item_1482:
 {
 	string: "Greaves of the Magus"
-	icon: icon_head_8
+	icon: icon_mail_pants_2
 	rarity: uncommon
 	item_level: 9
 	required_level: 9
@@ -39706,7 +39706,7 @@ item world_drops_item_1487:
 item world_drops_item_1488:
 {
 	string: "White Greaves"
-	icon: icon_mail_pants_1
+	icon: icon_mail_pants_2
 	rarity: uncommon
 	item_level: 4
 	required_level: 4
@@ -40137,7 +40137,7 @@ item world_drops_item_1503:
 item world_drops_item_1504:
 {
 	string: "Leggings of the Manticore"
-	icon: icon_mail_pants_1
+	icon: icon_mail_pants_2
 	rarity: uncommon
 	item_level: 4
 	required_level: 4
@@ -40694,7 +40694,7 @@ item world_drops_item_1524:
 item world_drops_item_1525:
 {
 	string: "Leggings of the Reaver"
-	icon: icon_head_8
+	icon: icon_mail_pants_2
 	rarity: uncommon
 	item_level: 10
 	required_level: 10
@@ -41413,7 +41413,7 @@ item world_drops_item_1551:
 item world_drops_item_1552:
 {
 	string: "Black Greaves"
-	icon: icon_mail_pants_1
+	icon: icon_mail_pants_2
 	rarity: uncommon
 	item_level: 9
 	required_level: 9
@@ -41601,7 +41601,7 @@ item world_drops_item_1558:
 item world_drops_item_1559:
 {
 	string: "Leggings of the Nightmare"
-	icon: icon_mail_pants_1
+	icon: icon_mail_pants_2
 	rarity: uncommon
 	item_level: 8
 	required_level: 8
@@ -41991,7 +41991,7 @@ item world_drops_item_1573:
 item world_drops_item_1574:
 {
 	string: "Indestructible Leggings"
-	icon: icon_mail_pants_2
+	icon: icon_head_7
 	rarity: uncommon
 	item_level: 8
 	required_level: 8
@@ -42124,7 +42124,7 @@ item world_drops_item_1578:
 item world_drops_item_1579:
 {
 	string: "Courageous Leggings"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: uncommon
 	item_level: 5
 	required_level: 5
@@ -42206,7 +42206,7 @@ item world_drops_item_1581:
 item world_drops_item_1582:
 {
 	string: "Shinplates of the Healthy Slayer"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: rare
 	item_level: 8
 	required_level: 8
@@ -42799,7 +42799,7 @@ item world_drops_item_1602:
 item world_drops_item_1603:
 {
 	string: "Scales of the Tiger"
-	icon: icon_mail_pants_2
+	icon: icon_head_7
 	rarity: rare
 	item_level: 9
 	required_level: 9
@@ -42968,7 +42968,7 @@ item world_drops_item_1608:
 item world_drops_item_1609:
 {
 	string: "Murderous Scales of the Jaguar"
-	icon: icon_mail_pants_1
+	icon: icon_mail_pants_2
 	rarity: rare
 	item_level: 10
 	required_level: 10
@@ -43576,7 +43576,7 @@ item world_drops_item_1630:
 item world_drops_item_1631:
 {
 	string: "Orderly Greaves"
-	icon: icon_mail_pants_2
+	icon: icon_head_8
 	rarity: rare
 	item_level: 8
 	required_level: 8
@@ -43960,7 +43960,7 @@ item world_drops_item_1644:
 item world_drops_item_1645:
 {
 	string: "Chausses of Darrell"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: rare
 	item_level: 9
 	required_level: 9
@@ -44094,7 +44094,7 @@ item world_drops_item_1649:
 item world_drops_item_1650:
 {
 	string: "Scales of the Hexer"
-	icon: icon_mail_pants_2
+	icon: icon_head_7
 	rarity: rare
 	item_level: 8
 	required_level: 8
@@ -44208,7 +44208,7 @@ item world_drops_item_1653:
 item world_drops_item_1654:
 {
 	string: "Shinplates of the Horror"
-	icon: icon_mail_pants_1
+	icon: icon_mail_pants_2
 	rarity: rare
 	item_level: 6
 	required_level: 6
@@ -45025,7 +45025,7 @@ item world_drops_item_1682:
 item world_drops_item_1683:
 {
 	string: "Hideous Skullcap of the Drake"
-	icon: icon_head_6
+	icon: icon_head_3
 	rarity: rare
 	item_level: 5
 	required_level: 5
@@ -45459,7 +45459,7 @@ item world_drops_item_1697:
 item world_drops_item_1698:
 {
 	string: "Maurice's Grand Scales"
-	icon: icon_head_8
+	icon: icon_mail_pants_2
 	rarity: rare
 	item_level: 9
 	required_level: 9
@@ -46426,7 +46426,7 @@ item world_drops_item_1732:
 item world_drops_item_1733:
 {
 	string: "Old Scales of the Outlaw"
-	icon: icon_mail_pants_2
+	icon: icon_head_7
 	rarity: rare
 	item_level: 9
 	required_level: 9
@@ -47469,7 +47469,7 @@ item world_drops_item_1769:
 item world_drops_item_1770:
 {
 	string: "Bob's Scales"
-	icon: icon_mail_pants_2
+	icon: icon_head_8
 	rarity: rare
 	item_level: 9
 	required_level: 9
@@ -47495,7 +47495,7 @@ item world_drops_item_1770:
 item world_drops_item_1771:
 {
 	string: "Wolfkiller Chausses"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: rare
 	item_level: 6
 	required_level: 6
@@ -47723,7 +47723,7 @@ item world_drops_item_1778:
 item world_drops_item_1779:
 {
 	string: "Crown of the Myrmidon"
-	icon: icon_head_6
+	icon: icon_head_3
 	rarity: rare
 	item_level: 9
 	required_level: 9
@@ -47999,7 +47999,7 @@ item world_drops_item_1788:
 item world_drops_item_1789:
 {
 	string: "Mad Scales"
-	icon: icon_head_7
+	icon: icon_mail_pants_1
 	rarity: rare
 	item_level: 9
 	required_level: 9
@@ -48165,7 +48165,7 @@ item world_drops_item_1794:
 item world_drops_item_1795:
 {
 	string: "Chausses of the Slayer"
-	icon: icon_mail_pants_1
+	icon: icon_mail_pants_2
 	rarity: rare
 	item_level: 9
 	required_level: 9
@@ -49066,7 +49066,7 @@ item world_drops_item_1826:
 item world_drops_item_1827:
 {
 	string: "Loathsome Scales"
-	icon: icon_mail_pants_1
+	icon: icon_mail_pants_2
 	rarity: rare
 	item_level: 10
 	required_level: 10
@@ -49712,7 +49712,7 @@ item world_drops_item_1849:
 item world_drops_item_1850:
 {
 	string: "Skinny Hydra Scales"
-	icon: icon_mail_pants_2
+	icon: icon_head_8
 	rarity: rare
 	item_level: 9
 	required_level: 9
@@ -50613,7 +50613,7 @@ item world_drops_item_1881:
 item world_drops_item_1882:
 {
 	string: "Crown of Arindr"
-	icon: icon_head_3
+	icon: icon_head_6
 	rarity: rare
 	item_level: 9
 	required_level: 9
@@ -51410,7 +51410,7 @@ item world_drops_item_1910:
 item world_drops_item_1911:
 {
 	string: "Mindy's Visage"
-	icon: icon_head_3
+	icon: icon_head_6
 	rarity: rare
 	item_level: 10
 	required_level: 10
@@ -52097,7 +52097,7 @@ item world_drops_item_1935:
 item world_drops_item_1936:
 {
 	string: "Chausses of the Acolyte"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: rare
 	item_level: 6
 	required_level: 6
@@ -52237,7 +52237,7 @@ item world_drops_item_1940:
 item world_drops_item_1941:
 {
 	string: "Headpiece of the Dragon"
-	icon: icon_head_6
+	icon: icon_head_3
 	rarity: rare
 	item_level: 10
 	required_level: 10
@@ -52600,7 +52600,7 @@ item world_drops_item_1953:
 item world_drops_item_1954:
 {
 	string: "Leggings of the Adder"
-	icon: icon_head_8
+	icon: icon_mail_pants_2
 	rarity: rare
 	item_level: 8
 	required_level: 8
@@ -53056,7 +53056,7 @@ item world_drops_item_1969:
 item world_drops_item_1970:
 {
 	string: "Destructive Greaves"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: rare
 	item_level: 6
 	required_level: 6
@@ -53108,7 +53108,7 @@ item world_drops_item_1971:
 item world_drops_item_1972:
 {
 	string: "Repulsive Shinplates"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: rare
 	item_level: 5
 	required_level: 5
@@ -53221,7 +53221,7 @@ item world_drops_item_1975:
 item world_drops_item_1976:
 {
 	string: "Nefarious Leggings"
-	icon: icon_mail_pants_1
+	icon: icon_mail_pants_2
 	rarity: rare
 	item_level: 8
 	required_level: 8
@@ -53772,7 +53772,7 @@ item world_drops_item_1994:
 item world_drops_item_1995:
 {
 	string: "Revolting Snake Greaves"
-	icon: icon_mail_pants_2
+	icon: icon_head_7
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -53917,7 +53917,7 @@ item world_drops_item_1999:
 item world_drops_item_2000:
 {
 	string: "Corrupt Greaves"
-	icon: icon_mail_pants_2
+	icon: icon_head_7
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -54000,7 +54000,7 @@ item world_drops_item_2002:
 item world_drops_item_2003:
 {
 	string: "Timeless Headgear"
-	icon: icon_head_3
+	icon: icon_head_6
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -56069,7 +56069,7 @@ item world_drops_item_2075:
 item world_drops_item_2076:
 {
 	string: "Astute Scales"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -56096,7 +56096,7 @@ item world_drops_item_2076:
 item world_drops_item_2077:
 {
 	string: "Leggings of Mane"
-	icon: icon_mail_pants_2
+	icon: icon_head_7
 	rarity: epic
 	item_level: 8
 	required_level: 8
@@ -56431,7 +56431,7 @@ item world_drops_item_2088:
 item world_drops_item_2089:
 {
 	string: "Purple Visage"
-	icon: icon_head_6
+	icon: icon_head_3
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -56622,7 +56622,7 @@ item world_drops_item_2095:
 item world_drops_item_2096:
 {
 	string: "Loathsome Scales"
-	icon: icon_mail_pants_2
+	icon: icon_head_7
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -56942,7 +56942,7 @@ item world_drops_item_2106:
 item world_drops_item_2107:
 {
 	string: "Fat Greaves"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -57085,7 +57085,7 @@ item world_drops_item_2111:
 item world_drops_item_2112:
 {
 	string: "Cunning Fighter Crest"
-	icon: icon_head_3
+	icon: icon_head_6
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -57222,7 +57222,7 @@ item world_drops_item_2116:
 item world_drops_item_2117:
 {
 	string: "Basiliskslayer Greaves"
-	icon: icon_head_7
+	icon: icon_mail_pants_1
 	rarity: epic
 	item_level: 8
 	required_level: 8
@@ -57339,7 +57339,7 @@ item world_drops_item_2120:
 item world_drops_item_2121:
 {
 	string: "Brilliant Scales"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -57774,7 +57774,7 @@ item world_drops_item_2135:
 item world_drops_item_2136:
 {
 	string: "Pretty Cougarslayer Leggings"
-	icon: icon_mail_pants_1
+	icon: icon_mail_pants_2
 	rarity: epic
 	item_level: 8
 	required_level: 8
@@ -57805,7 +57805,7 @@ item world_drops_item_2136:
 item world_drops_item_2137:
 {
 	string: "Brilliant Chausses"
-	icon: icon_mail_pants_1
+	icon: icon_mail_pants_2
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -57973,7 +57973,7 @@ item world_drops_item_2142:
 item world_drops_item_2143:
 {
 	string: "Leggings of Andris"
-	icon: icon_mail_pants_2
+	icon: icon_head_8
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -58521,7 +58521,7 @@ item world_drops_item_2161:
 item world_drops_item_2162:
 {
 	string: "Helm of Cerúmo"
-	icon: icon_head_3
+	icon: icon_head_6
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -58636,7 +58636,7 @@ item world_drops_item_2165:
 item world_drops_item_2166:
 {
 	string: "Hood of Teor"
-	icon: icon_head_3
+	icon: icon_head_6
 	rarity: epic
 	item_level: 8
 	required_level: 8
@@ -58867,7 +58867,7 @@ item world_drops_item_2173:
 item world_drops_item_2174:
 {
 	string: "Snakeslayer Scales"
-	icon: icon_mail_pants_1
+	icon: icon_mail_pants_2
 	rarity: epic
 	item_level: 8
 	required_level: 8
@@ -59210,7 +59210,7 @@ item world_drops_item_2185:
 item world_drops_item_2186:
 {
 	string: "Crazy Leggings"
-	icon: icon_mail_pants_2
+	icon: icon_head_7
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -59737,7 +59737,7 @@ item world_drops_item_2204:
 item world_drops_item_2205:
 {
 	string: "Cunning Chausses"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -60375,7 +60375,7 @@ item world_drops_item_2226:
 item world_drops_item_2227:
 {
 	string: "Shankguards of the Leopard"
-	icon: icon_mail_pants_1
+	icon: icon_mail_pants_2
 	rarity: epic
 	item_level: 8
 	required_level: 8
@@ -60611,7 +60611,7 @@ item world_drops_item_2234:
 item world_drops_item_2235:
 {
 	string: "Scales of the Clever Snake"
-	icon: icon_head_8
+	icon: icon_mail_pants_2
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -60784,7 +60784,7 @@ item world_drops_item_2240:
 item world_drops_item_2241:
 {
 	string: "Flauntless Jaguarslayer Scales"
-	icon: icon_head_8
+	icon: icon_mail_pants_2
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -61042,7 +61042,7 @@ item world_drops_item_2249:
 item world_drops_item_2250:
 {
 	string: "Shinplates of the Succubus"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: epic
 	item_level: 8
 	required_level: 8
@@ -61101,7 +61101,7 @@ item world_drops_item_2251:
 item world_drops_item_2252:
 {
 	string: "Crown of the Enchanter"
-	icon: icon_head_6
+	icon: icon_head_3
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -61653,7 +61653,7 @@ item world_drops_item_2270:
 item world_drops_item_2271:
 {
 	string: "Scales of the Priest"
-	icon: icon_mail_pants_1
+	icon: icon_mail_pants_2
 	rarity: epic
 	item_level: 10
 	required_level: 10
@@ -61711,7 +61711,7 @@ item world_drops_item_2272:
 item world_drops_item_2273:
 {
 	string: "Leggings of Kirk"
-	icon: icon_mail_pants_2
+	icon: icon_mail_pants_1
 	rarity: epic
 	item_level: 8
 	required_level: 8
@@ -63175,7 +63175,7 @@ item world_drops_item_2323:
 item world_drops_item_2324:
 {
 	string: "Wild Vanguard Leggings"
-	icon: icon_head_8
+	icon: icon_mail_pants_2
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -63395,7 +63395,7 @@ item world_drops_item_2331:
 item world_drops_item_2332:
 {
 	string: "Deathless Headguard"
-	icon: icon_head_3
+	icon: icon_head_6
 	rarity: epic
 	item_level: 9
 	required_level: 9
@@ -63623,7 +63623,7 @@ item world_drops_item_2339:
 item world_drops_item_2340:
 {
 	string: "Visage of the Iniquitous Adversary"
-	icon: icon_head_3
+	icon: icon_head_6
 	rarity: epic
 	item_level: 8
 	required_level: 8
@@ -64285,7 +64285,7 @@ item world_drops_item_2362:
 item world_drops_item_2363:
 {
 	string: "Leggings of the Stormcaller"
-	icon: icon_head_7
+	icon: icon_mail_pants_1
 	rarity: epic
 	item_level: 8
 	required_level: 8
@@ -64664,7 +64664,7 @@ item world_drops_item_2375:
 item world_drops_item_2376:
 {
 	string: "Modest Visage"
-	icon: icon_head_6
+	icon: icon_head_3
 	rarity: epic
 	item_level: 10
 	required_level: 10

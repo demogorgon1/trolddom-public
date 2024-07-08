@@ -519,7 +519,7 @@ namespace tpublic
 				aWriter->WriteUInt(m_aoeRadius);
 				aWriter->WriteUInt(m_aoeCap);
 				aWriter->WriteObjectPointers(m_aoeEntitySpawns);
-				aWriter->WriteUInts(m_entityStates);
+				aWriter->WritePODs(m_entityStates);
 				aWriter->WriteOptionalObjectPointer(m_consumeItems);
 				aWriter->WriteOptionalObjectPointer(m_produceItems);
 				aWriter->WriteOptionalObject(m_requiredProfession);
@@ -580,7 +580,7 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadObjectPointers(m_aoeEntitySpawns))
 					return false;
-				if(!aReader->ReadUInts(m_entityStates))
+				if(!aReader->ReadPODs(m_entityStates))
 					return false;
 				if (!aReader->ReadOptionalObjectPointer(m_consumeItems))
 					return false;
