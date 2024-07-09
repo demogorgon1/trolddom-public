@@ -31,6 +31,8 @@ namespace tpublic
 						const char*		aString,
 						const Manifest*	aManifest,
 						uint32_t		aOverrideToCharacterId = 0);
+		std::string	GetItemString(
+						const Manifest*	aManifest) const;
 
 		// Public data
 		uint32_t							m_toCharacterId = 0;

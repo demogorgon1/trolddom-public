@@ -142,4 +142,28 @@ namespace tpublic
 			m_toCharacterId = aOverrideToCharacterId;
 	}
 
+	std::string	
+	Mail::GetItemString(
+		const Manifest* aManifest) const
+	{
+		std::string t;
+
+		for(size_t i = 0; i < m_items.size(); i++)
+		{
+			const ItemInstance& itemInstance = m_items[i]; 
+
+			if(i > 0)			
+				t += ",";
+			
+			const Data::Item* item = aManifest->GetById<Data::Item>(itemInstance.m_itemId);
+			t += item->m_string;
+
+			if(itemInstance.m_quantity > 1)
+				t += Helpers::Format("(%u)", itemInstance.m_quantity);
+		}
+
+		return t;
+	}
+
+
 }
