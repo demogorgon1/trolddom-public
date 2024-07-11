@@ -69,6 +69,8 @@ namespace tpublic
 										const char*			aName) = 0;
 			virtual const DataBase*	GetExistingBaseById(
 										uint32_t			aId) const = 0;
+			virtual const DataBase*	GetExistingBaseByName(
+										const char*			aName) const = 0;
 
 		private:
 
@@ -302,6 +304,16 @@ namespace tpublic
 			{
 				typename std::unordered_map<uint32_t, _T*>::const_iterator i = m_idTable.find(aId);
 				if(i != m_idTable.cend())
+					return i->second;
+				return NULL;
+			}
+
+			const DataBase* 
+			GetExistingBaseByName(
+				const char*								aName) const override
+			{
+				typename std::unordered_map<std::string, _T*>::const_iterator i = m_nameTable.find(aName);
+				if(i != m_nameTable.cend())
 					return i->second;
 				return NULL;
 			}
