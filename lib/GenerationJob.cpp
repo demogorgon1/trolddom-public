@@ -403,7 +403,6 @@ namespace tpublic
 			{
 				ItemType::Id itemType = ItemType::ID_NONE;
 				std::unordered_set<uint32_t> mustHaveTags;
-				uint32_t lastEquipmentSlotTagId = 0;
 
 				if(itemClass->m_types.size() > 0)
 				{
@@ -441,7 +440,6 @@ namespace tpublic
 						if (equipmentSlotTagId != 0)
 						{
 							mustHaveTags.insert(equipmentSlotTagId);
-							lastEquipmentSlotTagId = equipmentSlotTagId;
 						}
 					}
 				}

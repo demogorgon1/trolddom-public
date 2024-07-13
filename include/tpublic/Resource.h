@@ -38,7 +38,7 @@ namespace tpublic
 		// IMPORTANT: Must match Id enum
 		static constexpr const Info INFO[] =
 		{			
-			{ NULL, NULL, 0, 0, 0, 0 },
+			{ NULL, NULL, 0, 0, 0, 0, 0, false },
 
 			{ "health",	"Health",	FLAG_DEFAULT_TO_MAX,	1, 0, 220, 0, true },		
 			{ "mana",	"Mana",		FLAG_DEFAULT_TO_MAX,	0, 0, 0, 220, true },		

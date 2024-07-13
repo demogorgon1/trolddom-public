@@ -29,7 +29,7 @@ namespace tpublic
 		// IMPORTANT: Must match Id enum
 		static constexpr const Info INFO[] =
 		{			
-			{ NULL, 0 },
+			{ NULL, 0, 0, 0 },
 
 			{ "very_slow",	6,	400, 500 },
 			{ "slow",		4,  300, 400 },

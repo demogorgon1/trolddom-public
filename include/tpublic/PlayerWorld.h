@@ -32,7 +32,7 @@ namespace tpublic
 		{
 			{ NULL,					NULL,			Vec2() },
 
-			{ "small",				"Small",		Vec2(64, 64) },
+			{ "small",				"Small",		Vec2{64, 64} },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_SIZES);

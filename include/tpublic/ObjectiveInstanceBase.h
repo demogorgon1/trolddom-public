@@ -89,7 +89,6 @@ namespace tpublic
 		const ObjectiveTypeBase*						m_type = NULL;
 		uint32_t										m_characterId = 0;
 		uint32_t										m_objectiveId = 0;
-		uint32_t										m_objectiveIndex = 0;
 		std::atomic_bool								m_detached = false;
 		std::shared_ptr<std::atomic_uint32_t>			m_updateSeq;
 	};

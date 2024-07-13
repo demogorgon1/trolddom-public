@@ -174,7 +174,7 @@ namespace tpublic
 
 				if(fileSize == 0)
 				{
-					memset(aOutHash, 0, sizeof(aOutHash));
+					memset(aOutHash, 0, sizeof(uint32_t) * 5);
 				}
 				else
 				{

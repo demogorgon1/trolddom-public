@@ -22,7 +22,7 @@ namespace tpublic
 			armorStyles.AddPossibility(1, ArmorStyle::ID_RED);
 			armorStyles.AddPossibility(1, ArmorStyle::ID_PURPLE);
 
-			aManifest->GetContainer<Data::Item>()->ForEach([aManifest, &armorStyles](
+			aManifest->GetContainer<Data::Item>()->ForEach([&armorStyles](
 				Data::Item* aItem)
 			{
 				// Chest armor needs visuals

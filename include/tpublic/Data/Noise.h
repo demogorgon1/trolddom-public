@@ -98,6 +98,10 @@ namespace tpublic
 								TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());								
 						});
 						break;
+
+					default:
+						assert(false);
+						break;
 					}
 				}
 

@@ -14,8 +14,7 @@ namespace tpublic::ObjectiveTypes
 	{
 	public:
 		Instance(
-			const ManualBoolean*					aObjective)
-			: m_objective(aObjective)
+			const ManualBoolean*					/*aObjective*/)
 		{
 
 		}
@@ -30,7 +29,7 @@ namespace tpublic::ObjectiveTypes
 		GetProgress(
 			Progress&						aOut) override
 		{
-			aOut = { m_completed ? 1UL : 0UL, 1UL };
+			aOut = { (uint32_t)(m_completed ? 1 : 0), (uint32_t)1 };
 			return true;
 		}
 
@@ -74,8 +73,7 @@ namespace tpublic::ObjectiveTypes
 
 	private:
 		
-		const ManualBoolean*		m_objective = NULL;
-		bool				m_completed = false;
+		bool						m_completed = false;
 	};
 
 	//-------------------------------------------------------------------------------------------

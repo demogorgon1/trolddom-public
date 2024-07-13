@@ -589,7 +589,7 @@ namespace tpublic::MapGenerators
 					boss->m_distanceField->GetPositionsWithValue(influence, positions);
 					if(positions.size() > 0)
 					{
-						Vec2 position = position = positions[Roll(0, (uint32_t)positions.size() - 1)];
+						Vec2 position = positions[Roll(0, (uint32_t)positions.size() - 1)];
 						const LevelMapPoint& levelMapPoint = m_levelMap[position.m_x + position.m_y * (int32_t)m_width];
 						uint32_t minorBossLevel = levelMapPoint.m_level;
 
@@ -743,7 +743,7 @@ namespace tpublic::MapGenerators
 								if (firstEnemy)
 								{
 									firstEnemy = false;
-									position = Vec2(x, y);
+									position = Vec2{x, y};
 								}
 								else
 								{

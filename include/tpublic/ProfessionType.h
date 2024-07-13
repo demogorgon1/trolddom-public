@@ -27,7 +27,7 @@ namespace tpublic
 		// IMPORTANT: Must match Id enum
 		static constexpr const Info INFO[] =
 		{
-			{ NULL, NULL, 0 },
+			{ NULL, NULL, 0, 0 },
 
 			{ "primary",	"Primary",	 "You already have two primary professions. You'll have to unlearn one of them.",	2 },
 			{ "secondary",	"Secondary", NULL,																				UINT32_MAX }
