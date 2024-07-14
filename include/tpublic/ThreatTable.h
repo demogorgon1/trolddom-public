@@ -28,14 +28,14 @@ namespace tpublic
 						~ThreatTable();
 
 		void			Update(
-							uint32_t					aTick,
+							int32_t						aTick,
 							std::vector<uint32_t>&		aOutRemoved);
 		void			Add(
-							uint32_t					aTick,
+							int32_t						aTick,
 							uint32_t					aEntityInstanceId,
 							int32_t						aThreat);
 		void			Multiply(
-							uint32_t					aTick,
+							int32_t						aTick,
 							uint32_t					aEntityInstanceId,
 							float						aFactor);
 		void			MakeTop(

@@ -291,6 +291,7 @@ namespace tpublic::Systems
 				npc->m_targetEntityInstanceId = threat->m_table.GetTop()->m_entityInstanceId;
 				npc->m_npcBehaviorState = NULL;
 				npc->m_moveCooldownUntilTick = 0;
+				npc->m_lastAttackTick = aContext->m_tick;
 				npc->SetDirty();
 
 				const Components::NPC::StateEntry* inCombatState = npc->GetState(EntityState::ID_IN_COMBAT);
@@ -445,7 +446,10 @@ namespace tpublic::Systems
 					uint32_t topThreatEntityInstanceId;
 
 					if(!auras->HasEffect(AuraEffect::ID_TAUNT, &topThreatEntityInstanceId))
-						topThreatEntityInstanceId = threat->m_table.GetTop()->m_entityInstanceId;
+					{
+						const ThreatTable::Entry* topThreatEntry = threat->m_table.GetTop();
+						topThreatEntityInstanceId = topThreatEntry->m_entityInstanceId;
+					}
 
 					npc->m_targetEntityInstanceId = topThreatEntityInstanceId;
 					
@@ -459,11 +463,6 @@ namespace tpublic::Systems
 					else if (state != NULL && !npc->m_castInProgress)						
 					{
 						const Components::Position* targetPosition = target->GetComponent<Components::Position>();
-
-						//int32_t dx = targetPosition->m_position.m_x - position->m_position.m_x;
-						//int32_t dy = targetPosition->m_position.m_y - position->m_position.m_y;
-						//int32_t distanceSquared = dx * dx + dy * dy;
-
 						int32_t distanceSquared = Helpers::CalculateDistanceSquared(targetPosition, position);
 
 						const Data::Ability* useAbility = NULL;
@@ -586,6 +585,9 @@ namespace tpublic::Systems
 							position->m_lastMoveTick = aContext->m_tick;
 							npc->m_npcMovement.Reset(aContext->m_tick);
 
+							if(useAbility->IsOffensive())
+								npc->m_lastAttackTick = aContext->m_tick;
+
 							aContext->m_eventQueue->EventQueueThreat(npc->m_targetEntityInstanceId, aEntityInstanceId, 1, aContext->m_tick);
 
 							float cooldownModifier = 0.0f;
@@ -614,30 +616,47 @@ namespace tpublic::Systems
 						}
 						else if(distanceSquared > 1 && !auras->HasEffect(AuraEffect::ID_IMMOBILIZE, NULL))
 						{
-							const MoveSpeed::Info* moveSpeedInfo = MoveSpeed::GetInfo(combat->m_moveSpeed);
-							if(npc->m_moveCooldownUntilTick + moveSpeedInfo->m_tickBias < aContext->m_tick)
+							int32_t ticksSinceLastAttack = aContext->m_tick - npc->m_lastAttackTick;
+							if(ticksSinceLastAttack > 80 && npc->m_large) 
 							{
-								if (npc->m_npcMovement.ShouldResetIfLOS(aContext->m_tick))
+								// We're a large NPC and we haven't been able to hurt anyone for some time. We're probably getting cheesed. Evade!
+								aContext->m_eventQueue->EventQueueThreatClear(aEntityInstanceId);
+							}
+							else
+							{
+								const MoveSpeed::Info* moveSpeedInfo = MoveSpeed::GetInfo(combat->m_moveSpeed);
+								if (npc->m_moveCooldownUntilTick + moveSpeedInfo->m_tickBias < aContext->m_tick)
 								{
-									if (aContext->m_worldView->WorldViewLineOfSight(position->m_position, targetPosition->m_position))
+									if (npc->m_npcMovement.ShouldResetIfLOS(aContext->m_tick))
+									{
+										if (aContext->m_worldView->WorldViewLineOfSight(position->m_position, targetPosition->m_position))
+											npc->m_npcMovement.Reset(aContext->m_tick);
+									}
+
+									IEventQueue::EventQueueMoveRequest moveRequest;
+									if (npc->m_npcMovement.GetMoveRequest(
+										aContext->m_worldView->WorldViewGetMapData()->m_mapPathData.get(),
+										position->m_position,
+										targetPosition->m_position,
+										aContext->m_tick,
+										position->m_lastMoveTick,
+										moveRequest))
+									{
+										moveRequest.m_entityInstanceId = aEntityInstanceId;
+										moveRequest.m_canMoveOnAllNonViewBlockingTiles = npc->m_canMoveOnAllNonViewBlockingTiles;
+
+										aContext->m_eventQueue->EventQueueMove(moveRequest);
+
+										npc->m_moveCooldownUntilTick = aContext->m_tick + 2;
+									}
+									else
+									{
+										// Seems like we're stuck chasing the top threat target. Reduce threat on that one.
+										position->m_lastMoveTick = aContext->m_tick;
 										npc->m_npcMovement.Reset(aContext->m_tick);
-								}
 
-								IEventQueue::EventQueueMoveRequest moveRequest;
-								if (npc->m_npcMovement.GetMoveRequest(
-									aContext->m_worldView->WorldViewGetMapData()->m_mapPathData.get(),
-									position->m_position,
-									targetPosition->m_position,
-									aContext->m_tick,
-									position->m_lastMoveTick,
-									moveRequest))
-								{
-									moveRequest.m_entityInstanceId = aEntityInstanceId;
-									moveRequest.m_canMoveOnAllNonViewBlockingTiles = npc->m_canMoveOnAllNonViewBlockingTiles;
-
-									aContext->m_eventQueue->EventQueueMove(moveRequest);
-
-									npc->m_moveCooldownUntilTick = aContext->m_tick + 2;
+										aContext->m_eventQueue->EventQueueThreat(npc->m_targetEntityInstanceId, aEntityInstanceId, 0, 0, 0.5f);
+									}
 								}
 							}
 						}

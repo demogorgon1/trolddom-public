@@ -24,46 +24,52 @@ namespace tpublic
 		switch(m_mode)
 		{
 		case MODE_DIRECT:
-			// Move directly towards the destination, no pathfinding, nice and cheap
-			if (aCurrentTick - aLastMoveTick > 8 && !m_directOnly)
 			{
-				// We've been stuck for a bit, gotta try something more complex
-				Reset(aCurrentTick);
-
-				m_mode = MODE_COMPLEX;
-			}
-			else
-			{					
-				Vec2 d = aDestination - aPosition;
-
-				if(d.m_x != 0 || d.m_y != 0)
+				int32_t ticksSinceLastMove = aCurrentTick - aLastMoveTick;
+				// Move directly towards the destination, no pathfinding, nice and cheap
+				if (ticksSinceLastMove > 8 && !m_directOnly)
 				{
-					bool horizontal = std::abs(d.m_x) > std::abs(d.m_y);
-					bool vertical = std::abs(d.m_y) > std::abs(d.m_x);
+					// We've been stuck for a bit, gotta try something more complex
+					Reset(aCurrentTick);
+					m_mode = MODE_COMPLEX;
+				}
+				else if(ticksSinceLastMove > 20 && m_directOnly)
+				{
+					return false;
+				}
+				else
+				{
+					Vec2 d = aDestination - aPosition;
 
-					if (d.m_x < 0 && horizontal)
-						aOut.AddToPriorityList({ -1, 0 });
-					else if (d.m_x > 0 && horizontal)
-						aOut.AddToPriorityList({ 1, 0 });
+					if (d.m_x != 0 || d.m_y != 0)
+					{
+						bool horizontal = std::abs(d.m_x) > std::abs(d.m_y);
+						bool vertical = std::abs(d.m_y) > std::abs(d.m_x);
 
-					if (d.m_y < 0 && vertical)
-						aOut.AddToPriorityList({ 0, -1 });
-					else if (d.m_y > 0 && vertical)
-						aOut.AddToPriorityList({ 0, 1 });
+						if (d.m_x < 0 && horizontal)
+							aOut.AddToPriorityList({ -1, 0 });
+						else if (d.m_x > 0 && horizontal)
+							aOut.AddToPriorityList({ 1, 0 });
 
-					if (d.m_x < 0 && !horizontal)
-						aOut.AddToPriorityList({ -1, 0 });
-					else if (d.m_x > 0 && !horizontal)
-						aOut.AddToPriorityList({ 1, 0 });
+						if (d.m_y < 0 && vertical)
+							aOut.AddToPriorityList({ 0, -1 });
+						else if (d.m_y > 0 && vertical)
+							aOut.AddToPriorityList({ 0, 1 });
 
-					if (d.m_y < 0 && !vertical)
-						aOut.AddToPriorityList({ 0, -1 });
-					else if (d.m_y > 0 && !vertical)
-						aOut.AddToPriorityList({ 0, 1 });
+						if (d.m_x < 0 && !horizontal)
+							aOut.AddToPriorityList({ -1, 0 });
+						else if (d.m_x > 0 && !horizontal)
+							aOut.AddToPriorityList({ 1, 0 });
 
-					aOut.m_type = IEventQueue::EventQueueMoveRequest::TYPE_SIMPLE;
+						if (d.m_y < 0 && !vertical)
+							aOut.AddToPriorityList({ 0, -1 });
+						else if (d.m_y > 0 && !vertical)
+							aOut.AddToPriorityList({ 0, 1 });
 
-					return true;
+						aOut.m_type = IEventQueue::EventQueueMoveRequest::TYPE_SIMPLE;
+
+						return true;
+					}
 				}
 			}
 			break;

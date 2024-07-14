@@ -19,7 +19,7 @@ namespace tpublic
 
 	void	
 	ThreatTable::Update(
-		uint32_t					aTick,
+		int32_t						aTick,
 		std::vector<uint32_t>&		aOutRemoved)
 	{
 		Entry* t = m_head;
@@ -43,7 +43,7 @@ namespace tpublic
 	
 	void	
 	ThreatTable::Add(
-		uint32_t					aTick,
+		int32_t						aTick,
 		uint32_t					aEntityInstanceId,
 		int32_t						aThreat)
 	{
@@ -54,7 +54,8 @@ namespace tpublic
 			{
 				_Add(i->second, aThreat);
 
-				i->second->m_tick = aTick;
+				if(aTick > i->second->m_tick)
+					i->second->m_tick = aTick;
 			}
 		}
 		else
@@ -78,13 +79,14 @@ namespace tpublic
 				_InsertAtEnd(entry);
 			}
 
-			entry->m_tick = aTick;
+			if (aTick > entry->m_tick)
+				entry->m_tick = aTick;
 		}
 	}
 
 	void			
 	ThreatTable::Multiply(
-		uint32_t					aTick,
+		int32_t						aTick,
 		uint32_t					aEntityInstanceId,
 		float						aFactor)
 	{
@@ -104,7 +106,8 @@ namespace tpublic
 
 			_Add(entry, threatChange);
 
-			entry->m_tick = aTick;
+			if (aTick > entry->m_tick)
+				entry->m_tick = aTick;
 		}
 	}
 
@@ -125,7 +128,9 @@ namespace tpublic
 				int32_t topThreat = m_head->m_threat;
 
 				entry->m_threat = topThreat;
-				entry->m_tick = aTick;
+
+				if (aTick > entry->m_tick)
+					entry->m_tick = aTick;
 
 				_Detach(entry);
 				_InsertBefore(entry, m_head);

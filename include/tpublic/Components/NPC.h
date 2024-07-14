@@ -405,6 +405,7 @@ namespace tpublic
 				m_npcMovement.Reset(0);
 				m_restoreResources = false;
 				m_spawnWithTarget.reset();
+				m_lastAttackTick = 0;
 			}
 
 			// Public data			
@@ -430,6 +431,7 @@ namespace tpublic
 			uint32_t									m_npcBehaviorStateTick = 0;
 			NPCMovement									m_npcMovement;
 			bool										m_restoreResources = false;
+			int32_t										m_lastAttackTick = 0;
 
 			struct SpawnWithTarget
 			{
