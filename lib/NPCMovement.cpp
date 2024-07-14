@@ -5,6 +5,13 @@
 namespace tpublic
 {
 
+	void	
+	NPCMovement::SetDirectOnly(
+		bool								aDirectOnly)
+	{
+		m_directOnly = aDirectOnly;
+	}
+
 	bool	
 	NPCMovement::GetMoveRequest(
 		const MapPathData*					aMapPathData,
@@ -18,7 +25,7 @@ namespace tpublic
 		{
 		case MODE_DIRECT:
 			// Move directly towards the destination, no pathfinding, nice and cheap
-			if (aCurrentTick - aLastMoveTick > 8)
+			if (aCurrentTick - aLastMoveTick > 8 && !m_directOnly)
 			{
 				// We've been stuck for a bit, gotta try something more complex
 				Reset(aCurrentTick);

@@ -203,6 +203,12 @@ map_entity_spawn .spawn_of_umbracoth:
 	entity .spawn_of_umbracoth: { weight: 1 }
 }
 
+map_entity_spawn .zuthyg_the_golden:
+{
+	entity zuthyg_the_golden: { weight: 1 }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
 map_entity_spawn .arcane_anomaly:
 {
 	entity arcane_anomaly: { weight: 1 }
@@ -541,6 +547,7 @@ map_palette .stuff:
 	entity_spawn .gateway: [ 54 23 85 ]	
 	entity_spawn .player_world_gateway: [ 23 60 85 ]	
 	entity_spawn .spawn_of_umbracoth: [ 32 0 0 ]		
+	entity_spawn .zuthyg_the_golden: [ 32 2 102 ]		
 	entity_spawn .arcane_anomaly: [ 33 0 0 ]		
 	entity_spawn .junjun_door: [ 0 43 0 ]		
 	entity_spawn .hermit_door: [ 0 46 0 ]		

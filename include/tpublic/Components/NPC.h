@@ -349,7 +349,8 @@ namespace tpublic
 				FIELD_CAN_MOVE_ON_ALL_NON_VIEW_BLOCKING_TILES,
 				FIELD_BLOCKING,
 				FIELD_ENCOUNTER,
-				FIELD_INACTIVE_ENCOUNTER_DESPAWN
+				FIELD_INACTIVE_ENCOUNTER_DESPAWN,
+				FIELD_LARGE
 			};
 
 			static void
@@ -364,6 +365,7 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_BLOCKING, "blocking", offsetof(NPC, m_blocking));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_ENCOUNTER, "encounter", offsetof(NPC, m_encounterId))->SetDataType(DataType::ID_ENCOUNTER);
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_INACTIVE_ENCOUNTER_DESPAWN, "inactive_encounter_despawn", offsetof(NPC, m_inactiveEncounterDespawn));
+				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_BLOCKING, "large", offsetof(NPC, m_large));
 			}
 
 			const StateEntry*
@@ -387,6 +389,7 @@ namespace tpublic
 				m_defaultBehaviorStateId = 0;
 				m_canMoveOnAllNonViewBlockingTiles = false;
 				m_blocking = true;
+				m_large = false;
 				m_inactiveEncounterDespawn = false;
 				m_encounterId = 0;
 
@@ -411,6 +414,7 @@ namespace tpublic
 			uint32_t									m_defaultBehaviorStateId = 0;
 			bool										m_canMoveOnAllNonViewBlockingTiles = false;
 			bool										m_blocking = true;
+			bool										m_large = false;
 			bool										m_inactiveEncounterDespawn = false;
 			uint32_t									m_encounterId = 0;
 

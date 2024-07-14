@@ -301,7 +301,8 @@ namespace tpublic
 
 			const Components::Position* selfPosition = aSelf->GetComponent<Components::Position>();
 			const Components::Position* targetPosition = aTarget->GetComponent<Components::Position>();
-			if(selfPosition->m_position.DistanceSquared(targetPosition->m_position) > (int32_t)(openable->m_range * openable->m_range))
+			int32_t distanceSquared = Helpers::CalculateDistanceSquared(selfPosition, targetPosition);
+			if(distanceSquared > (int32_t)(openable->m_range * openable->m_range))
 				return false;
 			
 			if (openable->m_requiredProfessionId != 0)

@@ -10,6 +10,8 @@ namespace tpublic
 	class NPCMovement
 	{
 	public:	
+		void	SetDirectOnly(
+					bool								aDirectOnly);
 		bool	GetMoveRequest(						
 					const MapPathData*					aMapPathData,
 					const Vec2&							aPosition,
@@ -24,11 +26,13 @@ namespace tpublic
 
 	private:
 
+		bool						m_directOnly = false;
+		
 		enum Mode
 		{
 			MODE_DIRECT,
 			MODE_COMPLEX
-		};
+		};		
 
 		Mode						m_mode = MODE_DIRECT;
 		std::optional<Vec2>			m_storedDestination;

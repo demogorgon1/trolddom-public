@@ -963,3 +963,29 @@ entity wasteland_crab_man_10_b: !NPC
 	_abilities: [ { id: npc_firebolt } { id: npc_attack } ]
 	_default_behavior_state: .wandering_short	
 }
+
+##########################################################################################
+# Zuthyg the Golden
+
+loot_table .zuthyg_the_golden:
+{
+	slots:
+	[	
+		!WORLD_DROPS {}
+	]		
+}
+
+entity zuthyg_the_golden: !NPC
+{
+	_string: "Zuthyg the Golden"
+	_level: 12
+	_elite: true
+	_large: true
+	_faction: wildlife
+	_sprite: dragon_1
+	_sprite_dead: dragon_1_dead
+	_loot_table: .zuthyg_the_golden
+	_creature_type: dragon
+	_resource_health: 4.1
+	_weapon_damage: 3.2
+}

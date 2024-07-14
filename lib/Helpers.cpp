@@ -10,6 +10,28 @@
 namespace tpublic::Helpers
 {
 
+	namespace
+	{
+		int32_t
+		_CalculateDistanceSquaredToLargeEntity(
+			const Vec2&					aFrom,
+			const Components::Position* aTo)
+		{
+			assert(aTo->IsLarge());
+
+			Vec2 p = aTo->m_position;
+
+			if (aFrom.m_x > p.m_x)
+				p.m_x++;
+			if(aFrom.m_y > p.m_y)
+				p.m_y++;
+
+			return p.DistanceSquared(aFrom);
+		}
+	}
+
+	//---------------------------------------------------------------------------------
+
 	void		
 	StringAppend(
 		char*						aBuffer,
@@ -55,6 +77,43 @@ namespace tpublic::Helpers
 			return false;
 
 		return IsWithinDistance(aA->m_position, aB->m_position, aDistance);
+	}
+
+	int32_t		
+	CalculateDistanceSquared(
+		const Components::Position* aA,
+		const Components::Position* aB)
+	{
+		bool largeA = aA->IsLarge();
+		bool largeB = aB->IsLarge();
+
+		// Small/small
+		if(!largeA && !largeB)
+			return aA->m_position.DistanceSquared(aB->m_position);
+
+		// Large/small
+		if(largeA && !largeB)
+			return _CalculateDistanceSquaredToLargeEntity(aB->m_position, aA);
+
+		// Small/large
+		if (!largeA && largeB)
+			return _CalculateDistanceSquaredToLargeEntity(aA->m_position, aB);
+
+		// Large/large
+		// FIXME: we don't need this for now
+		assert(false);
+		return 0;
+	}
+	
+	int32_t		
+	CalculateDistanceSquared(
+		const Components::Position* aA,
+		const Vec2&					aB)
+	{
+		if(!aA->IsLarge())
+			return aA->m_position.DistanceSquared(aB);
+
+		return _CalculateDistanceSquaredToLargeEntity(aB, aA);
 	}
 
 	float		

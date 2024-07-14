@@ -30,6 +30,12 @@ namespace tpublic
 						const Components::Position*	aA,
 						const Components::Position*	aB,
 						int32_t						aDistance);
+		int32_t		CalculateDistanceSquared(
+						const Components::Position* aA,
+						const Components::Position*	aB);
+		int32_t		CalculateDistanceSquared(
+						const Components::Position* aA,
+						const Vec2&					aB);
 		float		RandomFloat(
 						std::mt19937&				aRandom);
 		bool		LoadTextFile(

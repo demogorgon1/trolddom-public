@@ -79,10 +79,18 @@ namespace tpublic::Systems
 			combatPublic->SetDirty();
 		}
 
-		// Remember spawn position
+		// Remember spawn position and set position size flag if needed
 		{
-			const Components::Position* position = GetComponent<Components::Position>(aComponents);
+			Components::Position* position = GetComponent<Components::Position>(aComponents);
 			npc->m_spawnPosition = position->m_position;
+
+			if(npc->m_large)
+			{
+				position->SetLarge();
+				position->SetDirty();
+
+				npc->m_npcMovement.SetDirectOnly(true);
+			}
 		}
 	}
 
@@ -452,9 +460,11 @@ namespace tpublic::Systems
 					{
 						const Components::Position* targetPosition = target->GetComponent<Components::Position>();
 
-						int32_t dx = targetPosition->m_position.m_x - position->m_position.m_x;
-						int32_t dy = targetPosition->m_position.m_y - position->m_position.m_y;
-						int32_t distanceSquared = dx * dx + dy * dy;
+						//int32_t dx = targetPosition->m_position.m_x - position->m_position.m_x;
+						//int32_t dy = targetPosition->m_position.m_y - position->m_position.m_y;
+						//int32_t distanceSquared = dx * dx + dy * dy;
+
+						int32_t distanceSquared = Helpers::CalculateDistanceSquared(targetPosition, position);
 
 						const Data::Ability* useAbility = NULL;
 

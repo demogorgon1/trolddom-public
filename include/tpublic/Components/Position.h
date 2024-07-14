@@ -23,7 +23,8 @@ namespace tpublic
 				POSITION_FLAG_TELEPORTED	= 0x02,
 				POSITION_FLAG_MOVING		= 0x04,
 				POSITION_FLAG_SUPER_USER	= 0x08,
-				POSITION_FLAG_INVISIBLE		= 0x10
+				POSITION_FLAG_INVISIBLE		= 0x10,
+				POSITION_FLAG_LARGE			= 0x20
 			};
 
 			enum Field : uint32_t
@@ -51,6 +52,16 @@ namespace tpublic
 				m_updatedOnServer = false;
 			}
 
+			//int32_t
+			//DistqanceSquared(
+			//	const Position*		aOther) const
+			//{
+			//	if(aPosition->)
+
+			//	Vec2 p1 = m_position;
+			//	if()
+			//}
+
 			// Helpers
 			bool	IsBlocking() const { return m_positionFlags & POSITION_FLAG_BLOCKING; }
 			void	SetBlocking() { m_positionFlags |= POSITION_FLAG_BLOCKING; }
@@ -67,6 +78,9 @@ namespace tpublic
 			bool	IsInvisible() const { return m_positionFlags & POSITION_FLAG_INVISIBLE; }
 			void	SetInvisible() { m_positionFlags |= POSITION_FLAG_INVISIBLE; }
 			void	ClearInvisible() { m_positionFlags &= ~POSITION_FLAG_INVISIBLE; }
+			bool	IsLarge() const { return m_positionFlags & POSITION_FLAG_LARGE; }
+			void	SetLarge() { m_positionFlags |= POSITION_FLAG_LARGE; }
+			void	ClearLarge() { m_positionFlags &= ~POSITION_FLAG_LARGE; }
 
 			// Public data
 			Vec2		m_position;

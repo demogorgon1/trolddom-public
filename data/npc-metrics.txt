@@ -14,6 +14,8 @@ npc_metrics:
 	level<8>:  { base_weapon_damage: [ 18 20 ] base_resource<health>: 237 base_resource<mana>: 157 elite_weapon_damage: 2.7 elite_resource<health>: 3.4 elite_resource<mana>: 1 cash: [ 58 116 ] elite_cash: 5 base_armor: 422 }
 	level<9>:  { base_weapon_damage: [ 20 23 ] base_resource<health>: 261 base_resource<mana>: 173 elite_weapon_damage: 2.8 elite_resource<health>: 3.6 elite_resource<mana>: 1 cash: [ 64 128 ] elite_cash: 5 base_armor: 460 }
 	level<10>: { base_weapon_damage: [ 21 26 ] base_resource<health>: 287 base_resource<mana>: 190 elite_weapon_damage: 2.9 elite_resource<health>: 3.8 elite_resource<mana>: 1 cash: [ 70 140 ] elite_cash: 5 base_armor: 500 }
+	level<11>: { base_weapon_damage: [ 23 27 ] base_resource<health>: 310 base_resource<mana>: 210 elite_weapon_damage: 3.0 elite_resource<health>: 3.9 elite_resource<mana>: 1 cash: [ 76 152 ] elite_cash: 5 base_armor: 542 }
+	level<12>: { base_weapon_damage: [ 25 29 ] base_resource<health>: 340 base_resource<mana>: 230 elite_weapon_damage: 3.0 elite_resource<health>: 4.0 elite_resource<mana>: 1 cash: [ 82 164 ] elite_cash: 5 base_armor: 590 }
 	
 	aggro_range_base_level_difference: -3
 	aggro_ranges:
