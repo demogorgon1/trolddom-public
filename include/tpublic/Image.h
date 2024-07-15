@@ -91,6 +91,21 @@ namespace tpublic
 						uint32_t					aWidth,
 						uint32_t					aHeight,
 						uint32_t					aPitch);
+		void		InsertRawBlended(
+						uint32_t					aX,
+						uint32_t					aY,
+						const void*					aData,
+						uint32_t					aWidth,
+						uint32_t					aHeight,
+						uint32_t					aPitch);
+		void		InsertRawBlendedWithColor(
+						uint32_t					aX,
+						uint32_t					aY,
+						const void*					aData,
+						uint32_t					aWidth,
+						uint32_t					aHeight,
+						uint32_t					aPitch,
+						const RGBA&					aColor);
 		void		Clear(
 						const RGBA&					aColor);
 		void		DrawVerticalGradient(

@@ -222,6 +222,97 @@ namespace tpublic
 	}
 
 	void		
+	Image::InsertRawBlended(
+		uint32_t					aX,
+		uint32_t					aY,
+		const void*					aData,
+		uint32_t					aWidth,
+		uint32_t					aHeight,
+		uint32_t					aPitch)
+	{
+		assert(HasData());
+		assert(aX + aWidth <= m_width && aY + aHeight <= m_height);
+
+		for (uint32_t y = 0; y < aHeight; y++)
+		{
+			RGBA* out = GetData() + aX + (aY + y) * m_width;
+			const RGBA* in = (const RGBA*)((const uint8_t*)aData + y * aPitch);
+
+			for (uint32_t x = 0; x < aWidth; x++)
+			{
+				uint32_t r1 = ((uint32_t)out->m_r * (uint32_t)(255 - in->m_a)) / 255;
+				uint32_t g1 = ((uint32_t)out->m_g * (uint32_t)(255 - in->m_a)) / 255;
+				uint32_t b1 = ((uint32_t)out->m_b * (uint32_t)(255 - in->m_a)) / 255;
+				uint32_t a1 = ((uint32_t)out->m_a * (uint32_t)(255 - in->m_a)) / 255;
+
+				uint32_t r2 = ((uint32_t)in->m_r * (uint32_t)in->m_a) / 255;
+				uint32_t g2 = ((uint32_t)in->m_g * (uint32_t)in->m_a) / 255;
+				uint32_t b2 = ((uint32_t)in->m_b * (uint32_t)in->m_a) / 255;
+				uint32_t a2 = ((uint32_t)in->m_a * (uint32_t)in->m_a) / 255;
+
+				uint32_t r = r1 + r2;
+				uint32_t g = g1 + g2;
+				uint32_t b = b1 + b2;
+				uint32_t a = a1 + a2;
+
+				RGBA c = { (uint8_t)r, (uint8_t)g, (uint8_t)b, (uint8_t)a };
+
+				*out = c;
+
+				out++;
+				in++;
+			}
+		}
+	}
+
+	void		
+	Image::InsertRawBlendedWithColor(
+		uint32_t					aX,
+		uint32_t					aY,
+		const void*					aData,
+		uint32_t					aWidth,
+		uint32_t					aHeight,
+		uint32_t					aPitch,
+		const RGBA&					aColor)
+	{
+		assert(HasData());
+		assert(aX + aWidth <= m_width && aY + aHeight <= m_height);
+
+		for (uint32_t y = 0; y < aHeight; y++)
+		{
+			RGBA* out = GetData() + aX + (aY + y) * m_width;
+			const RGBA* in = (const RGBA*)((const uint8_t*)aData + y * aPitch);
+
+			for (uint32_t x = 0; x < aWidth; x++)
+			{
+				uint8_t inA = (uint8_t)(((uint32_t)in->m_a * (uint32_t)aColor.m_a) / 255);
+
+				uint32_t r1 = ((uint32_t)out->m_r * (uint32_t)(255 - inA)) / 255;
+				uint32_t g1 = ((uint32_t)out->m_g * (uint32_t)(255 - inA)) / 255;
+				uint32_t b1 = ((uint32_t)out->m_b * (uint32_t)(255 - inA)) / 255;
+				uint32_t a1 = ((uint32_t)out->m_a * (uint32_t)(255 - inA)) / 255;
+
+				uint32_t r2 = ((((uint32_t)in->m_r * (uint32_t)inA) / 255) * (uint32_t)aColor.m_r) / 255;
+				uint32_t g2 = ((((uint32_t)in->m_g * (uint32_t)inA) / 255) * (uint32_t)aColor.m_g) / 255;
+				uint32_t b2 = ((((uint32_t)in->m_b * (uint32_t)inA) / 255) * (uint32_t)aColor.m_b) / 255;
+				uint32_t a2 = ((uint32_t)in->m_a * (uint32_t)inA) / 255;
+
+				uint32_t r = r1 + r2;
+				uint32_t g = g1 + g2;
+				uint32_t b = b1 + b2;
+				uint32_t a = a1 + a2;
+
+				RGBA c = { (uint8_t)r, (uint8_t)g, (uint8_t)b, (uint8_t)a };
+
+				*out = c;
+
+				out++;
+				in++;
+			}
+		}
+	}
+
+	void		
 	Image::Clear(
 		const RGBA&		aColor)
 	{

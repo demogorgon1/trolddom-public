@@ -38,6 +38,7 @@ sprites:
 	sprite ext_cave_entrance: { flags: [ tile_walkable tile_top ] }
 	sprite wood_wall_window: { flags: [ tile_block_line_of_sight tile_top ] }
 	sprite wood_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite forest_2_entrance: { flags: [ tile_walkable tile_top  ] }
 
 	cursor: { position: [ 0 16 ] }
 	
