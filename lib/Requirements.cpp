@@ -42,6 +42,19 @@ namespace tpublic
 
 			switch(aRequirement->m_type)
 			{
+			case Requirement::TYPE_MUST_HAVE_LESS_HEALTH_THAN:
+				{
+					const Components::CombatPublic* combatPublic = entity->GetComponent<Components::CombatPublic>();
+					const Components::CombatPublic::ResourceEntry* health = combatPublic->GetResourceEntry(Resource::ID_HEALTH);
+					if(health != NULL && health->m_max > 0)
+					{
+						uint32_t percent = (health->m_current * 100) / health->m_max;
+						if(percent >= aRequirement->m_id)
+							return false;
+					}
+				}
+				break;
+
 			case Requirement::TYPE_MUST_HAVE_AURA:
 			case Requirement::TYPE_MUST_NOT_HAVE_AURA:
 				{

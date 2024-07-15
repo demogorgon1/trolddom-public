@@ -19,3 +19,19 @@ item shield_crab_defender_shield:
 	string: "Crab Defender Shield" 
 	stat_weight spirit: 1
 }
+
+item shield_zuthyg_1:
+{
+	string: "Shield of the Dragon Slayer"
+	type: shield
+	equipment_slots: [ off_hand ]
+	required_level: 10
+	icon: icon_shield_5
+	rarity: epic
+	binds: when_picked_up
+	level_range: 12 
+	loot_groups: [ zuthyg_the_golden ]
+	stat dodge_chance: 1
+	stat_weight constitution: 1
+	stat_weight strength: 1
+}

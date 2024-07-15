@@ -29,6 +29,7 @@
 #include <tpublic/LootGenerator.h>
 #include <tpublic/Manifest.h>
 #include <tpublic/MapData.h>
+#include <tpublic/Requirements.h>
 
 namespace tpublic::Systems
 {
@@ -470,6 +471,13 @@ namespace tpublic::Systems
 						for (const Components::NPC::AbilityEntry& abilityEntry : state->m_abilities)
 						{
 							const Data::Ability* ability = GetManifest()->GetById<tpublic::Data::Ability>(abilityEntry.m_abilityId);
+
+							if(abilityEntry.m_requirements.size() > 0)
+							{
+								const EntityInstance* self = aContext->m_worldView->WorldViewSingleEntityInstance(aEntityInstanceId);
+								if(self != NULL && !Requirements::CheckList(GetManifest(), abilityEntry.m_requirements, self, target))
+									continue;
+							}
 
 							if (abilityEntry.m_targetType == Components::NPC::AbilityEntry::TARGET_TYPE_DEFAULT)
 							{

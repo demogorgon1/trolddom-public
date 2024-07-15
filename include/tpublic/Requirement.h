@@ -40,6 +40,7 @@ namespace tpublic
 			TYPE_MUST_HAVE_DISCOVERED_ZONE,
 			TYPE_MUST_NOT_HAVE_PROFESSION_ABILITY,
 			TYPE_MUST_NOT_HAVE_ITEM_EQUIPPED,
+			TYPE_MUST_HAVE_LESS_HEALTH_THAN
 		};
 
 		static DataType::Id
@@ -77,6 +78,9 @@ namespace tpublic
 
 			case TYPE_MUST_NOT_HAVE_PROFESSION_ABILITY:
 				return DataType::ID_ABILITY;
+
+			case TYPE_MUST_HAVE_LESS_HEALTH_THAN:
+				return DataType::INVALID_ID;
 
 			default:
 				break;
@@ -160,10 +164,16 @@ namespace tpublic
 				m_type = TYPE_MUST_HAVE_DISCOVERED_ZONE;
 			else if (typeString == "must_not_have_profession_ability")
 				m_type = TYPE_MUST_NOT_HAVE_PROFESSION_ABILITY;
+			else if (typeString == "must_have_less_health_than")
+				m_type = TYPE_MUST_HAVE_LESS_HEALTH_THAN;
 			else
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid type.", aSource->m_annotation->GetIdentifier());
 
-			if(aSource->m_type == SourceNode::TYPE_IDENTIFIER)
+			if(aSource->m_type == SourceNode::TYPE_NUMBER)
+			{
+				m_id = aSource->GetUInt32();
+			}
+			else if(aSource->m_type == SourceNode::TYPE_IDENTIFIER)
 			{
 				m_id = TypeAndSourceToId(m_type, aSource);
 			}

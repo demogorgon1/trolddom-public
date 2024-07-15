@@ -967,10 +967,21 @@ entity wasteland_crab_man_10_b: !NPC
 ##########################################################################################
 # Zuthyg the Golden
 
+loot_group zuthyg_the_golden: { }
+
 loot_table .zuthyg_the_golden:
 {
 	slots:
 	[	
+		{ 
+			possibility: { loot_group: zuthyg_the_golden } 
+		}	
+		
+		{
+			possibility: { loot_group: world_drops_epic weight: 1 } 
+			possibility: { loot_group: world_drops_rare weight: 3 } 
+		}		
+		
 		!WORLD_DROPS {}
 	]		
 }
@@ -981,11 +992,116 @@ entity zuthyg_the_golden: !NPC
 	_level: 12
 	_elite: true
 	_large: true
-	_faction: wildlife
+	_faction: monsters
 	_sprite: dragon_1
 	_sprite_dead: dragon_1_dead
 	_loot_table: .zuthyg_the_golden
 	_creature_type: dragon
 	_resource_health: 4.1
 	_weapon_damage: 3.2
+	
+	_abilities: 
+	[
+		{
+			id: .zuthyg_the_golden_1
+			target: random_player
+			requirement self<must_have_less_health_than>: 90
+		}
+
+		{
+			id: npc_attack
+		}
+	]		
+}
+
+particle_system .zuthyg_the_golden:
+{
+	particle:
+	{
+		sprites: [ effect_firebolt_b ]
+		flags: [ attached no_rotation no_scaling face_target ]
+		count: 1		
+	}
+}
+
+cooldown .zuthyg_the_golden_1:
+{
+	duration: 120
+}
+
+ability .zuthyg_the_golden_1:
+{
+	string: "Fireball"
+	range: 10
+	cast_time: 20
+	cooldowns: [ .zuthyg_the_golden_1 ]
+	flags: [ spell offensive target_other target_hostile can_miss ]
+	states: [ default in_combat ]
+	icon: icon_firebolt
+	speed: 6
+	projectile: .zuthyg_the_golden
+	
+	direct_effect damage:
+	{
+		damage_type: fire
+		function: { expression: a a: 55 }													
+
+	}
+	
+	direct_effect spawn_entity:
+	{
+		spawn_flags: [ at_target ]
+		entity: .zuthyg_the_golden_fire		
+	}
+}
+
+ability .zuthyg_the_golden_fire_tick:
+{
+	string: "Fire"
+	flags: [ offensive always_in_range always_in_line_of_sight ]
+	icon: icon_fire
+	direct_effect damage:
+	{
+		damage_type: fire
+		function: { expression: a a: 35 }													
+	}
+}
+
+entity .zuthyg_the_golden_fire:
+{
+	systems: [ environment ]
+	
+	components:
+	{
+		position: { }		
+		owner: { }
+		environment: 
+		{
+			tick_interval: 10
+			duration: 300 
+			ability: .zuthyg_the_golden_fire_tick
+		}		
+		sprite: 
+		{ 
+			animations: 
+			[
+				{ 
+					states: [ default ] 
+					frames: [ effect_fire_0 effect_fire_1 effect_fire_2 ] 
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -1
+				}
+				
+				{ 
+					states: [ spawning despawning ] 
+					frames: [ effect_fire_fade_0 effect_fire_fade_1 effect_fire_fade_2 ] 
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -1
+				}				
+			]			
+		}
+		
+	}
 }

@@ -9,6 +9,7 @@
 #include "../DialogueScript.h"
 #include "../EntityState.h"
 #include "../NPCMovement.h"
+#include "../Requirement.h"
 #include "../Resource.h"
 
 namespace tpublic
@@ -58,6 +59,8 @@ namespace tpublic
 							m_targetType = TARGET_TYPE_SELF;
 						else if (aChild->m_name == "target" && aChild->IsIdentifier("low_health_friend_or_self"))
 							m_targetType = TARGET_TYPE_LOW_HEALTH_FRIEND_OR_SELF;
+						else if(aChild->m_tag == "requirement")
+							m_requirements.push_back(Requirement(aChild));
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 					});
@@ -71,6 +74,7 @@ namespace tpublic
 					aStream->WriteUInt(m_useProbability);
 					aStream->WriteUInts(m_targetEntityIds);
 					aStream->WritePOD(m_targetType);
+					aStream->WriteObjects(m_requirements);
 				}
 
 				bool
@@ -85,6 +89,8 @@ namespace tpublic
 						return false;
 					if(!aStream->ReadPOD(m_targetType))
 						return false;
+					if(!aStream->ReadObjects(m_requirements))
+						return false;
 					return true;
 				}	
 
@@ -93,6 +99,7 @@ namespace tpublic
 				uint32_t							m_useProbability = UINT32_MAX;
 				std::vector<uint32_t>				m_targetEntityIds;
 				TargetType							m_targetType = TARGET_TYPE_DEFAULT;
+				std::vector<Requirement>			m_requirements;
 				
 			};
 

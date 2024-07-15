@@ -81,3 +81,34 @@ item neck_sylas_3:
 	stat_weight constitution: 1
 	stat_weight wisdom: 3
 }
+
+item neck_zuthyg_1:
+{
+	equipment_slots: [ neck ]
+	binds: when_picked_up
+	required_level: 10
+	icon: icon_necklace_7
+	rarity: epic
+	string: "Dragon's Gem" 
+	budget_bias: 10
+	stat_weight constitution: 1
+	stat_weight wisdom: 2
+	stat_weight spell_damage: 3
+	loot_groups: [ zuthyg_the_golden ]
+	level_range: 12 
+}
+
+item ring_zuthyg_1:
+{
+	equipment_slots: [ finger_1 finger_2 ]
+	binds: when_picked_up
+	required_level: 10
+	icon: icon_ring_7
+	rarity: epic
+	string: "Glowing Blood Ring" 
+	stat_weight constitution: 1
+	stat_weight strength: 1
+	stat phys_crit_chance: 1
+	loot_groups: [ zuthyg_the_golden ]
+	level_range: 12 	
+}

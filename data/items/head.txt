@@ -1,0 +1,17 @@
+item head_zuthyg_1:
+{
+	string: "Bone-Horned Helmet"
+	type: armor_plate
+	equipment_slots: [ head ]
+	required_level: 10
+	icon: icon_helmet_1
+	rarity: epic
+	binds: when_picked_up
+	loot_groups: [ zuthyg_the_golden ]
+	level_range: 12 
+	budget_bias: 10
+	stat_weight strength: 2
+	stat_weight constitution: 1
+	stat_weight dexterity: 2
+}
+

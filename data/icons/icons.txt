@@ -363,6 +363,12 @@ sprites:
 	sprite icon_flower_3 : { tags: [ icon life ] }
 	sprite icon_exhausted : { tags: [ icon ] }
 	sprite icon_antenna : { tags: [ icon ] }
+	sprite icon_necklace_7 : { tags: [ icon ] }
+	sprite icon_shield_5 : { tags: [ icon ] }
+	sprite icon_mace_6 : { tags: [ icon ] }
+	sprite icon_ring_7 : { tags: [ icon ] }
+	sprite icon_staff_5 : { tags: [ icon ] }
+	sprite icon_helmet_1 : { tags: [ icon ] }
 	
 }
 
