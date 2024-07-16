@@ -61,6 +61,7 @@ entity .rob_beaurichard: !NPC
 {
 	_string: "Rob Beaurichard"
 	_guild_registrar_price_tiers: [ 5000 10000 20000 40000 ]
+	_dialogue_scripts: [ create_guild ]
 	_dialogue_root: .rob_beaurichard_dialogue	
 	_sprite: man_2
 	_sprite_dead: man_2_dead	
