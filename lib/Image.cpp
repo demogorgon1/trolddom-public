@@ -290,17 +290,15 @@ namespace tpublic
 				uint32_t r1 = ((uint32_t)out->m_r * (uint32_t)(255 - inA)) / 255;
 				uint32_t g1 = ((uint32_t)out->m_g * (uint32_t)(255 - inA)) / 255;
 				uint32_t b1 = ((uint32_t)out->m_b * (uint32_t)(255 - inA)) / 255;
-				uint32_t a1 = ((uint32_t)out->m_a * (uint32_t)(255 - inA)) / 255;
 
 				uint32_t r2 = ((((uint32_t)in->m_r * (uint32_t)inA) / 255) * (uint32_t)aColor.m_r) / 255;
 				uint32_t g2 = ((((uint32_t)in->m_g * (uint32_t)inA) / 255) * (uint32_t)aColor.m_g) / 255;
 				uint32_t b2 = ((((uint32_t)in->m_b * (uint32_t)inA) / 255) * (uint32_t)aColor.m_b) / 255;
-				uint32_t a2 = ((uint32_t)in->m_a * (uint32_t)inA) / 255;
 
 				uint32_t r = r1 + r2;
 				uint32_t g = g1 + g2;
 				uint32_t b = b1 + b2;
-				uint32_t a = a1 + a2;
+				uint32_t a = 255;
 
 				RGBA c = { (uint8_t)r, (uint8_t)g, (uint8_t)b, (uint8_t)a };
 

@@ -76,8 +76,8 @@ namespace tpublic
 			if (m_sourceHeight % m_targetHeight != 0)
 				sourceSampleAreaHeight++;
 
-			if (sourceY0 + t->m_sourceSampleAreaHeight == m_sourceHeight + 1)
-				t->m_sourceSampleAreaHeight--;
+			if (sourceY0 + sourceSampleAreaHeight == m_sourceHeight + 1)
+				sourceSampleAreaHeight--;
 
 			for(uint32_t x = 0; x < m_targetWidth; x++)
 			{
