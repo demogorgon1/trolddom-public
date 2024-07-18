@@ -206,7 +206,7 @@ map_entity_spawn .spawn_of_umbracoth:
 map_entity_spawn .zuthyg_the_golden:
 {
 	entity zuthyg_the_golden: { weight: 1 }
-	spawn_timer: !NPC_RESPAWN_NORMAL{}
+	spawn_timer: !NPC_RESPAWN_WORLD_BOSS{}
 }
 
 map_entity_spawn .arcane_anomaly:

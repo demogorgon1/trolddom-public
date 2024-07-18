@@ -18,7 +18,7 @@ namespace tpublic
 		const Manifest*			aManifest)
 		: m_manifest(aManifest)
 	{
-		m_manifest->GetContainer<tpublic::Data::Item>()->ForEach([&](
+		m_manifest->GetContainer<Data::Item>()->ForEach([&](
 			const Data::Item*	aItem)
 		{
 			UIntRange levelRange = aItem->m_levelRange;
@@ -30,6 +30,10 @@ namespace tpublic
 
 				if(levelRange.m_min < 1)
 					levelRange.m_min = 1;
+
+				// For rare and epic items, make it possible for higher level NPCs to drop them as well
+				if (aItem->m_rarity == Rarity::ID_RARE || aItem->m_rarity == Rarity::ID_EPIC)
+					levelRange.m_max += 2;
 			}
 
 			for(uint32_t lootGroupId : aItem->m_lootGroups)

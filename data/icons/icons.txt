@@ -369,6 +369,11 @@ sprites:
 	sprite icon_ring_7 : { tags: [ icon ] }
 	sprite icon_staff_5 : { tags: [ icon ] }
 	sprite icon_helmet_1 : { tags: [ icon ] }
+	sprite icon_boots_2 : { tags: [ icon armor_mail armor_plate feet ] icon_meta_data: !ICON_UNCOMMON_5{} }
+	sprite icon_shoulders_2 : { tags: [ icon armor_cloth armor_mail armor_plate shoulders ] icon_meta_data: !ICON_UNCOMMON_5{} }
+
+	cursor: { position: [ 0 320 ] }		
+	sprite icon_shoulders_3 : { tags: [ icon armor_cloth armor_mail armor_plate shoulders ] icon_meta_data: !ICON_UNCOMMON_5{} }
 	
 }
 

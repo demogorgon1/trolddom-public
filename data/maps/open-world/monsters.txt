@@ -983,6 +983,7 @@ loot_table .zuthyg_the_golden:
 		}		
 		
 		!WORLD_DROPS {}
+		!WORLD_DROPS {}
 	]		
 }
 
