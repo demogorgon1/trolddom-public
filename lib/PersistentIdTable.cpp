@@ -113,14 +113,14 @@ namespace tpublic
 			}
 
 			fclose(f);
+
+			std::filesystem::rename(tmpPath, m_path);
 		}
 		catch(...)
 		{
 			fclose(f);
 			TP_CHECK(false, "Failed to save persistent id table: %s", tmpPath);
 		}
-
-		std::filesystem::rename(tmpPath, m_path);
 	}
 
 }
