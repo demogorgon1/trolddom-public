@@ -73,3 +73,10 @@ map_entity_spawn stash:
 {
 	entity stash: { }
 }
+
+map_entity_spawn default_chest:
+{
+	spawn_timer: !CHEST_RESPAWN {}
+
+	entity default_chest: { init_state: default }
+}

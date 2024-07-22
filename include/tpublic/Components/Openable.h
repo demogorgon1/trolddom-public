@@ -111,7 +111,9 @@ namespace tpublic
 				FIELD_COMPLETE_MANUAL_OBJECTIVE_ID,
 				FIELD_TRIGGER_ABILITY_ID,
 				FIELD_REQUIRED_INCOMPLETE_QUEST_OBJECTIVE_ID,
-				FIELD_UNLOCK_MAP_TRIGGER_ID
+				FIELD_UNLOCK_MAP_TRIGGER_ID,
+				FIELD_KILL,
+				FIELD_DEAD_DESPAWN_TICKS
 			};
 
 			static void
@@ -127,8 +129,10 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_RANGE, "range", offsetof(Openable, m_range));
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_DESPAWN, "despawn", offsetof(Openable, m_despawn));
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_INSTANT, "instant", offsetof(Openable, m_instant));
+				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_KILL, "kill", offsetof(Openable, m_kill));
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_OPENED, NULL, offsetof(Openable, m_opened));
-				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_DURATION, "duration", offsetof(Openable, m_duration));
+				aSchema->Define(ComponentSchema::TYPE_INT32, FIELD_DURATION, "duration", offsetof(Openable, m_duration));
+				aSchema->Define(ComponentSchema::TYPE_INT32, FIELD_DEAD_DESPAWN_TICKS, "dead_despawn_ticks", offsetof(Openable, m_deadDespawnTicks));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_LEVEL, "level", offsetof(Openable, m_level));
 				aSchema->DefineCustomObjects<Requirement>(FIELD_REQUIREMENTS, "requirements", offsetof(Openable, m_requirements));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_SOUND, "sound", offsetof(Openable, m_soundId))->SetDataType(DataType::ID_SOUND);
@@ -152,6 +156,8 @@ namespace tpublic
 				m_instant = false;
 				m_despawn = false;
 				m_opened = false;
+				m_deadDespawnTicks = 0;
+				m_kill = false;
 				m_duration = 0;
 				m_level = 1;
 				m_requirements.clear();
@@ -159,6 +165,7 @@ namespace tpublic
 				m_completeManualObjectiveId = 0;
 				m_triggerAbilityId = 0;
 				m_unlockMapTriggerId = 0;
+
 			}
 
 			// Public data
@@ -173,7 +180,9 @@ namespace tpublic
 			bool						m_instant = false;
 			bool						m_despawn = false;
 			bool						m_opened = false;
-			uint32_t					m_duration = 0;
+			bool						m_kill = false;
+			int32_t						m_deadDespawnTicks = 0;
+			int32_t						m_duration = 0;
 			uint32_t					m_level = 1;
 			std::vector<Requirement>	m_requirements;
 			uint32_t					m_soundId = 0;

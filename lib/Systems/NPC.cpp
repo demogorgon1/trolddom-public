@@ -26,7 +26,6 @@
 #include <tpublic/IThreatEventQueue.h>
 #include <tpublic/IWorldView.h>
 #include <tpublic/ISystemEventQueue.h>
-#include <tpublic/LootGenerator.h>
 #include <tpublic/Manifest.h>
 #include <tpublic/MapData.h>
 #include <tpublic/Requirements.h>

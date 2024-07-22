@@ -24,8 +24,6 @@ namespace tpublic::Systems
 							int32_t				aTicksInState,
 							ComponentBase**		aComponents,
 							Context*			aContext) override;
-
-	private:
 	};
 
 }

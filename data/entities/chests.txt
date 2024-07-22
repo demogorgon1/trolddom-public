@@ -1,0 +1,64 @@
+!define local CHEST
+{
+	string: @_string
+	systems: [ openable ]
+	components:
+	{
+		position: { }				
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: @_frames		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+				
+				{ 
+					states: [ dead ] 
+					frames: @_frames_open 
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3 
+				}		
+			]		
+		}		
+		tag: { }
+		openable: 
+		{ 
+			verb: open
+			range: 1 
+			kill: true
+			dead_despawn_ticks: 300
+		}	
+		lootable: 
+		{ 
+			loot_table: @_loot_table
+		}
+	}
+}
+
+loot_table .default_chest:
+{
+	slots:
+	[
+		# Guaranteed to have at least an uncommon item
+		{
+			possibility: { weight: 200 loot_group: world_drops_uncommon }	
+			possibility: { weight: 10 loot_group: world_drops_rare }	
+			possibility: { weight: 1 loot_group: world_drops_epic }	
+		}
+		
+		# A bunch of random stuff as well
+		!WORLD_DROPS {}
+		!WORLD_DROPS {}
+		!WORLD_DROPS {}
+	]	
+	
+	cash_multiplier: 3.5
+}
+
+entity default_chest: !CHEST { _string: "Chest" _frames: [ chest_2 ] _frames_open: [ chest_2_open ] _loot_table: .default_chest }

@@ -1,3 +1,5 @@
+!define CHEST_RESPAWN { cooldown_range_min: 6000 cooldown_range_max: 9000 min_delay: 5000 }
+
 loot_group world_drops_cloth: {}
 loot_group world_drops_junk: {}
 loot_group world_drops_consumable: {}

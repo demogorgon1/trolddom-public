@@ -194,6 +194,10 @@ namespace tpublic
 						{
 							m_cash = CashRange(aChild->GetArray());
 						}
+						else if (aChild->m_name == "cash_multiplier")
+						{
+							m_cashMultiplier = aChild->GetFloat();
+						}
 						else if (aChild->m_name == "slots")
 						{
 							aChild->GetArray()->ForEachChild([&](
@@ -216,6 +220,7 @@ namespace tpublic
 			{
 				aStream->WriteOptionalObject(m_cash);
 				aStream->WriteObjectPointers(m_slots);
+				aStream->WriteFloat(m_cashMultiplier);
 			}
 
 			bool
@@ -226,11 +231,14 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadObjectPointers(m_slots))
 					return false;
+				if(!aStream->ReadFloat(m_cashMultiplier))
+					return false;
 				return true;
 			}
 
 			// Public data
 			std::optional<CashRange>			m_cash;
+			float								m_cashMultiplier = 1.0f;
 			std::vector<std::unique_ptr<Slot>>	m_slots;
 		};
 

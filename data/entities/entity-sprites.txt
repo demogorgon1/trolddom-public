@@ -254,6 +254,7 @@ sprites:
 	cursor: { position: [ 0 48 ] }
 	sprite wild_herbs_2: { }
 	sprite tree_1: { }
+	sprite chest_2_open: { }
 	
 }
 

@@ -81,25 +81,23 @@ namespace tpublic
 				aLootable->m_availableCash = distribution(aRandom);
 				aLootable->m_cash = aLootable->m_availableCash > 0;
 			}
-			else if(aCreatureTypeId != 0)
+			else if(aCreatureTypeId == 0 || m_manifest->GetById<tpublic::Data::CreatureType>(aCreatureTypeId)->m_flags & Data::CreatureType::FLAG_CASH_LOOT)
 			{
-				if(m_manifest->GetById<tpublic::Data::CreatureType>(aCreatureTypeId)->m_flags & Data::CreatureType::FLAG_CASH_LOOT)
+				const NPCMetrics::Level* npcMetricsLevel = m_manifest->m_npcMetrics.GetLevel(aLevel);
+				if (npcMetricsLevel != NULL)
 				{
-					const NPCMetrics::Level* npcMetricsLevel = m_manifest->m_npcMetrics.GetLevel(aLevel);
-					if (npcMetricsLevel != NULL)
-					{
-						std::uniform_int_distribution<uint32_t> distribution(npcMetricsLevel->m_cash.m_min, npcMetricsLevel->m_cash.m_max);
-						aLootable->m_availableCash = (int64_t)distribution(aRandom);
+					std::uniform_int_distribution<uint32_t> distribution(npcMetricsLevel->m_cash.m_min, npcMetricsLevel->m_cash.m_max);
+					aLootable->m_availableCash = (int64_t)distribution(aRandom);
 
-						if(aLootable->m_availableCash > 0 && aIsElite)
-						{
-							aLootable->m_availableCash = (int64_t)((float)aLootable->m_availableCash * npcMetricsLevel->m_eliteCash);
-						}
+					if(aLootable->m_availableCash > 0 && aIsElite)
+						aLootable->m_availableCash = (int64_t)((float)aLootable->m_availableCash * npcMetricsLevel->m_eliteCash);
 
-						aLootable->m_cash = aLootable->m_availableCash > 0;						
-					}
+					aLootable->m_cash = aLootable->m_availableCash > 0;						
 				}
 			}
+
+			if(aLootable->m_availableCash > 0)
+				aLootable->m_availableCash = (int64_t)((float)aLootable->m_availableCash * lootTable->m_cashMultiplier);
 		}
 
 		// Items
