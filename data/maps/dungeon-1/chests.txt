@@ -1,0 +1,18 @@
+map_trigger .chest_1_opened:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .chest_1:
+{
+	entity default_chest: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .chest_1_opened
+		}
+		
+		init_state: default
+	}
+}

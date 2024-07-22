@@ -68,6 +68,7 @@ map_palette .stuff:
 	entity_spawn .door_1: [ 50 30 160 ]
 	entity_spawn .door_2: [ 50 30 190 ]
 	entity_spawn .final_door: [ 70 30 90 ]
+	entity_spawn .chest_1: [ 40 143 66 ]		
 
 	player_spawn .player_spawn: [ 0 0 255 ]
 	
@@ -179,5 +180,11 @@ map dungeon_1:
 		run: { set_trigger: .goblin_door_guard_2_killed }
 	}
 	
+	script:
+	{
+		condition trigger_not_set: .chest_1_opened
+		condition entity_state: { entity_spawn: .chest_1 state: dead }		
+		run: { set_trigger: .chest_1_opened }
+	}	
 }
  
