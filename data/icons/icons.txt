@@ -375,6 +375,11 @@ sprites:
 	cursor: { position: [ 0 320 ] }		
 	sprite icon_shoulders_3 : { tags: [ icon armor_cloth armor_mail armor_plate shoulders ] icon_meta_data: !ICON_UNCOMMON_5{} }
 	sprite icon_bracers_3 : { tags: [ icon armor_cloth armor_mail armor_plate wrists ] icon_meta_data: !ICON_UNCOMMON_5{} }
+	sprite icon_robe_1 : { tags: [ icon armor_cloth chest ] icon_meta_data: !ICON_UNCOMMON_5{} }
+	sprite icon_robe_2 : { tags: [ icon armor_cloth chest ] icon_meta_data: !ICON_UNCOMMON_5{} }
+	sprite icon_robe_3 : { tags: [ icon armor_cloth chest ] icon_meta_data: !ICON_UNCOMMON_5{} }
+	sprite icon_chest_3 : { tags: [ icon armor_mail chest ] icon_meta_data: !ICON_UNCOMMON_5{} }
+	sprite icon_boots_3 : { tags: [ icon armor_mail armor_plate feet ] icon_meta_data: !ICON_UNCOMMON_5{} }
 	
 }
 
