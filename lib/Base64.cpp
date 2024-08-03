@@ -18,6 +18,58 @@ namespace tpublic
 				"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
 			unsigned char*
+			_Base64EncodeNoAlloc(
+				const unsigned char*	src, 
+				size_t					len,
+				unsigned char*			buffer,
+				size_t					buffer_size,
+				size_t*					out_len)
+			{
+				unsigned char *out, *pos;
+				const unsigned char *end, *in;
+				size_t olen;
+
+				olen = len * 4 / 3 + 4; /* 3-byte blocks to 4-byte */
+				olen++; /* nul termination */
+				if (olen < len)
+					return NULL; /* integer overflow */
+
+				if(olen > buffer_size)
+					return NULL; /* doesn't fit in supplied buffer */
+
+				out = buffer;
+
+				end = src + len;
+				in = src;
+				pos = out;
+				while (end - in >= 3) {
+					*pos++ = base64_table[in[0] >> 2];
+					*pos++ = base64_table[((in[0] & 0x03) << 4) | (in[1] >> 4)];
+					*pos++ = base64_table[((in[1] & 0x0f) << 2) | (in[2] >> 6)];
+					*pos++ = base64_table[in[2] & 0x3f];
+					in += 3;
+				}
+
+				if (end - in) {
+					*pos++ = base64_table[in[0] >> 2];
+					if (end - in == 1) {
+						*pos++ = base64_table[(in[0] & 0x03) << 4];
+						*pos++ = '=';
+					} else {
+						*pos++ = base64_table[((in[0] & 0x03) << 4) |
+							(in[1] >> 4)];
+						*pos++ = base64_table[(in[1] & 0x0f) << 2];
+					}
+					*pos++ = '=';
+				}
+
+				*pos = '\0';
+				if (out_len)
+					*out_len = pos - out;
+				return out;
+			}
+
+			unsigned char*
 			_Base64Encode(
 				const unsigned char*	src, 
 				size_t					len,
@@ -129,6 +181,22 @@ namespace tpublic
 			}
 		}
 
+		//-----------------------------------------------------------------------------------------
+
+		bool	
+		EncodeToBuffer(
+			const void*					aIn,
+			size_t						aInSize,
+			char*						aBuffer,
+			size_t						aBufferSize)
+		{
+			size_t outLen = 0;
+			unsigned char* p = _Base64EncodeNoAlloc((const unsigned char*)aIn, aInSize, (unsigned char*)aBuffer, aBufferSize, &outLen);
+			if(p == NULL)
+				return false;
+			return true;
+		}
+
 		void	
 		Encode(
 			const void*					aIn,
@@ -136,7 +204,7 @@ namespace tpublic
 			std::string&				aOut)
 		{
 			size_t outLen = 0;
-			unsigned char* p = _Base64Encode((const unsigned char*)aIn, (size_t)aInSize, &outLen);
+			unsigned char* p = _Base64Encode((const unsigned char*)aIn, aInSize, &outLen);
 			TP_CHECK(p != NULL, "_Base64Encode() failed");
 			aOut = (char*)p;
 			delete [] p;
@@ -148,7 +216,7 @@ namespace tpublic
 			std::vector<uint8_t>&		aOut)
 		{
 			size_t outLen = 0;
-			unsigned char* p = _Base64Decode((const unsigned char*)aIn, (size_t)strlen(aIn), &outLen);
+			unsigned char* p = _Base64Decode((const unsigned char*)aIn, strlen(aIn), &outLen);
 			TP_CHECK(p != NULL, "_Base64Decode() failed");
 			aOut.resize(outLen);
 			memcpy(&aOut[0], p, outLen);

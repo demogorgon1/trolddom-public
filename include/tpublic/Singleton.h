@@ -51,6 +51,12 @@ namespace tpublic
 			return m_object;
 		}
 
+		static bool
+		IsCreated() 
+		{
+			return m_singletonGuard != 0;
+		}
+
 		void
 		Destroy()
 		{
@@ -72,9 +78,9 @@ namespace tpublic
 	};
 
 	template<typename T>
-	std::atomic_int Singleton<T>::m_singletonGuard;
+	std::atomic_int Singleton<T>::m_singletonGuard = 0;
 
 	template<typename T>
-	T* Singleton<T>::m_object;
+	T* Singleton<T>::m_object = NULL;
 
 };

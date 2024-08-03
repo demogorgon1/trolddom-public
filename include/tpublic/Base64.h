@@ -6,6 +6,11 @@ namespace tpublic
 	namespace Base64
 	{
 
+		bool	EncodeToBuffer(
+					const void*				aIn,
+					size_t					aInSize,
+					char*					aBuffer,
+					size_t					aBufferSize);
 		void	Encode(
 					const void*				aIn,
 					size_t					aInSize,
