@@ -31,7 +31,9 @@ namespace tpublic
 				COMBAT_FLAG_MASTER_LOOTER = 0x01,
 				COMBAT_FLAG_PVP = 0x02,
 				COMBAT_FLAG_PUSHABLE = 0x08,
-				COMBAT_FLAG_ELITE = 0x10
+				COMBAT_FLAG_ELITE = 0x10,
+				COMBAT_FLAG_HIDE_LEVEL = 0x20,
+				COMBAT_FLAG_NOT_TARGETABLE = 0x40
 			};
 
 			struct Interrupt
@@ -115,6 +117,20 @@ namespace tpublic
 					const SourceNode*	/*aSource*/)
 				{
 					aCombatPublic->m_combatFlags |= COMBAT_FLAG_ELITE;
+				});
+
+				aSchema->AddSourceModifier<CombatPublic>("hide_level", [](
+					CombatPublic*		aCombatPublic,
+					const SourceNode*	/*aSource*/)
+				{
+					aCombatPublic->m_combatFlags |= COMBAT_FLAG_HIDE_LEVEL;
+				});
+
+				aSchema->AddSourceModifier<CombatPublic>("not_targetable", [](
+					CombatPublic*		aCombatPublic,
+					const SourceNode*	/*aSource*/)
+				{
+					aCombatPublic->m_combatFlags |= COMBAT_FLAG_NOT_TARGETABLE;
 				});
 			}
 
@@ -401,6 +417,8 @@ namespace tpublic
 			// Helpers
 			bool IsMasterLooter() const { return (m_combatFlags & COMBAT_FLAG_MASTER_LOOTER) != 0; }
 			bool IsElite() const { return (m_combatFlags & COMBAT_FLAG_ELITE) != 0; }
+			bool ShouldHideLevel() const { return (m_combatFlags & COMBAT_FLAG_HIDE_LEVEL) != 0; }
+			bool IsNotTargetable() const { return (m_combatFlags & COMBAT_FLAG_NOT_TARGETABLE) != 0; }
 
 			// Public data
 			uint32_t						m_targetEntityInstanceId = 0;

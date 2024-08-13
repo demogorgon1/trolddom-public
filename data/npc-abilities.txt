@@ -75,6 +75,65 @@ ability npc_firebolt:
 	}
 }
 
+cooldown npc_poison_bite:
+{
+	duration: 60
+}
+
+ability npc_poison_bite_tick:
+{
+	string: "Poison Bite"
+	icon: icon_poison	
+	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]
+	
+	direct_effect damage:
+	{
+		damage_type: poison
+		function: { expression: a a: [ [ 1 2 ] [ 10 7 ] ] elite_multiplier: 1.7 }			
+	}
+}
+
+aura npc_poison_bite:
+{
+	string: "Poison Bite"
+	description: "Poisoned."
+	type: debuff
+	icon: icon_poison
+	duration: based_on_effects
+
+	aura_effect repeat: 
+	{ 
+		update_interval: 25
+		update_count: 8
+		ability: npc_poison_bite_tick
+	}
+}
+
+ability npc_poison_bite:
+{
+	string: "Poison Bite"
+	range: 1	
+	cast_time: 15
+	cooldowns: [ global npc_poison_bite ]
+	flags: [ melee offensive target_other target_hostile can_miss interruptable ]
+	states: [ in_combat ]
+	icon: icon_strike
+	delay: 3
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: poison		
+		function: { expression: a a: [ [ 1 4 ] [ 10 15 ] ] elite_multiplier: 1.7 }		
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: npc_poison_bite
+	}
+}
+
 particle_system npc_shoot:
 {
 	particle:

@@ -144,6 +144,30 @@ entity arcane_anomaly: !NPC
 }
 
 ##########################################################################################
+# Cave Spider
+
+loot_table .cave_spider_4: 
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+	]	
+}
+
+entity cave_spider_4: !NPC
+{
+	_string: "Cave Spider"
+	_level: 4
+	_faction: monsters
+	_sprite: spider_1
+	_sprite_dead: spider_1_dead
+	_loot_table: .cave_spider_4
+	_creature_type: beast
+	_abilities: [ { id: npc_poison_bite } { id: npc_attack } ]
+	_default_behavior_state: .wandering_short
+}
+
+##########################################################################################
 # Crab Man
 
 loot_table .crab_man_2: 
@@ -926,7 +950,7 @@ entity wasteland_undead_10_b: !NPC
 }
 
 ##########################################################################################
-# Wasterland Crab Men
+# Wasteland Crab Men
 
 loot_table .wasteland_crab_men: 
 {

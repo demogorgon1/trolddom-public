@@ -1,6 +1,6 @@
 changelog:
 {
-	heading: "Early Access v1.0.0"
+	heading: "Early Access v0.1.0"
 	
 	text: "Welcome to the early access release of Trolddom!"	
 

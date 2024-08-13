@@ -75,7 +75,7 @@ aura poison_bomb:
 	{ 
 		update_interval: 20
 		update_count: 5
-		ability: envenom_tick
+		ability: poison_bomb_tick
 	}
 }
 

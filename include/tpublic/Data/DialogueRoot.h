@@ -15,6 +15,60 @@ namespace tpublic
 			static const DataType::Id DATA_TYPE = DataType::ID_DIALOGUE_ROOT;
 			static const bool TAGGED = true;
 
+			struct Verb
+			{
+				enum Type : uint8_t
+				{
+					TYPE_TALK,
+					TYPE_READ
+				};
+
+				void
+				FromSource(
+					const SourceNode*	aSource)
+				{
+					std::string_view t(aSource->GetIdentifier());
+					if (t == "talk")
+						m_type = TYPE_TALK;
+					else if (t == "read")
+						m_type = TYPE_READ;
+					else
+						TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid verb.", aSource->GetIdentifier());
+				}
+
+				void
+				ToStream(
+					IWriter*			aWriter) const
+				{
+					aWriter->WritePOD(m_type);
+				}
+
+				bool
+				FromStream(
+					IReader*			aReader) 
+				{
+					if(!aReader->ReadPOD(m_type))
+						return false;
+					return true;
+				}
+
+				const char*
+				GetDisplayString() const
+				{
+					switch(m_type)
+					{
+					case TYPE_TALK:		return "Talk";
+					case TYPE_READ:		return "Read";
+					default:			break;
+					}
+					assert(false);
+					return "";
+				}
+
+				// Public data
+				Type				m_type = TYPE_TALK;
+			};
+
 			struct Entry
 			{
 				Entry()
@@ -89,7 +143,12 @@ namespace tpublic
 					const SourceNode* aChild)
 				{
 					if(!FromSourceBase(aChild))
-						m_entries.push_back(std::make_unique<Entry>(aChild));
+					{
+						if(aChild->m_name == "verb")
+							m_verb.FromSource(aChild);
+						else
+							m_entries.push_back(std::make_unique<Entry>(aChild));
+					}
 				});
 			}
 
@@ -98,6 +157,7 @@ namespace tpublic
 				IWriter*				aStream) const override
 			{
 				aStream->WriteObjectPointers(m_entries);
+				m_verb.ToStream(aStream);
 			}
 
 			bool
@@ -106,11 +166,14 @@ namespace tpublic
 			{
 				if(!aStream->ReadObjectPointers(m_entries))
 					return false;
+				if(!m_verb.FromStream(aStream))
+					return false;
 				return true;
 			}
 
-			// Public data
+			// Public data			
 			std::vector<std::unique_ptr<Entry>>		m_entries;
+			Verb									m_verb;
 		};
 
 	}

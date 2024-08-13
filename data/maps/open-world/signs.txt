@@ -1,0 +1,41 @@
+dialogue_screen .danger_spiders:
+{
+	text: 
+	[	
+		"Danger! Turn around while you can!"
+	]
+	
+	options:
+	[
+	]
+}
+
+dialogue_root .danger_spiders:
+{
+	verb: read
+
+	.danger_spiders: { }
+}
+
+entity .danger_spiders: 
+{
+	string: "Sign"
+	components:
+	{
+		position: { }		
+		combat_public: 
+		{  
+			modifier not_pushable: {}
+			modifier hide_level: {}
+			modifier not_targetable: {}
+			dialogue_root: .danger_spiders			
+		}			
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ states: [ default ] frames: [ sign_1 ] z_offset: -3 }			
+			]		
+		}				
+	}
+}

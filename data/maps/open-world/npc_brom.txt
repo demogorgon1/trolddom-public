@@ -26,6 +26,7 @@ dialogue_screen .brom_greetings:
 	
 	options:
 	[
+		{ quest: .brom_1 }
 		{ goto: .brom_mining text: "What can I use mining for?" }
 		{ goto: .brom_trainer text: "Please teach me how to mine." }
 	]
@@ -48,4 +49,54 @@ entity .brom: !NPC
 	_creature_type: humanoid
 	_loot_table: .npc
 	_not_pushable: true	
+}
+
+##########################################################################################
+# Quest 1
+
+objective .brom_1:
+{
+	string: "Cave Spiders Killed"
+	
+	maps: [ open_world ]
+	
+	kill_npc:
+	{
+		entities: [ cave_spider_4 ]
+		count: 6
+	}
+}
+
+quest .brom_1:
+{
+	string: "Creepy Crawlies"
+
+	text:
+	[
+		"Secure the abandoned mine to the north."
+	]
+	
+	description: 
+	[
+		"You know what I don't like? Spiders! And they're all over the mine!\n"
+		"\n"
+		"Supposedly, they're very important to reduce the amount of mosquitoes, flies, and other annoying insects... But I don't think"
+		"these particular spiders eat those. These bastards are the size of horses! Please, can you go take care of the problem?\n"
+		"\n"
+		"You can find the mine to the north."
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"Whew. That's more like it. Here, let me give you something for your trouble."
+	]
+
+	objectives: [ .brom_1 ]
+	level: 4
+	reward_cash_multiplier: 2.2
 }

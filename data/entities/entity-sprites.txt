@@ -163,6 +163,7 @@ sprites:
 	sprite goblin_5: { dead: goblin_5_dead }
 	sprite man_19: { dead: man_19_dead tags: [ male human ] }
 	sprite bear_2: { dead: bear_2_dead }
+	sprite spider_1: { dead: spider_1_dead }
 
 	cursor: { position: [ 0 144 ] }
 
@@ -171,6 +172,7 @@ sprites:
 	sprite goblin_5_dead: { }
 	sprite man_19_dead: { }
 	sprite bear_2_dead: { }
+	sprite spider_1_dead: { }
 	
 }
 
@@ -255,6 +257,7 @@ sprites:
 	sprite wild_herbs_2: { }
 	sprite tree_1: { }
 	sprite chest_2_open: { }
+	sprite sign_1: { }
 	
 }
 
