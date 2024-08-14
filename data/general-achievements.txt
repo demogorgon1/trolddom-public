@@ -23,3 +23,5 @@ achievement quests_2: { category: general string: "Journeyman Adventurer" descri
 achievement quests_3: { category: general string: "Expert Adventurer" description: "Complete 200 quests." points: 10 priority: 0 stat_trigger quests_completed: 200 icon: icon_exclamation_mark root: quests_1 }
 achievement quests_4: { category: general string: "Artisan Adventurer" description: "Complete 500 quests." points: 10 priority: 0 stat_trigger quests_completed: 500 icon: icon_exclamation_mark root: quests_1 }
 achievement quests_5: { category: general string: "Master Adventurer" description: "Complete 1000 quests." points: 10 priority: 0 stat_trigger quests_completed: 1000 icon: icon_exclamation_mark root: quests_1 }
+
+achievement multi_level_10: { category: general string: "Leveling the Playing Field" description: "Reach level 10 as a Fighter, a Priest, and a Sorcerer." points: 20 need_achievements: [ fighter_level_10 priest_level_10 sorcerer_level_10 ] icon: icon_road account_wide: true }

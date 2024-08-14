@@ -384,6 +384,7 @@ sprites:
 	sprite icon_fighter : { tags: [ icon ] }
 	sprite icon_priest : { tags: [ icon ] }
 	sprite icon_sorcerer : { tags: [ icon ] }
+	sprite icon_road : { tags: [ icon ] }
 	
 }
 
