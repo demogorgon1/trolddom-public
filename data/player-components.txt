@@ -3,6 +3,7 @@ player_components:
 	abilities
 	ability_modifiers
 	achievements
+	account_achievements
 	action_bars
 	active_quests
 	auras

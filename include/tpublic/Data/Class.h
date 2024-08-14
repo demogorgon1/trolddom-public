@@ -222,6 +222,10 @@ namespace tpublic
 						{
 							m_level = aMember->GetUInt32();
 						}
+						else if (aMember->m_name == "achievement")
+						{
+							m_achievementId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ACHIEVEMENT, aMember->GetIdentifier());
+						}
 						else if (aMember->m_name == "unlock_abilities")
 						{
 							aMember->GetIdArray(DataType::ID_ABILITY, m_unlockAbilities);
@@ -257,6 +261,7 @@ namespace tpublic
 					aStream->WriteObjects(m_resourceUpdates);
 					aStream->WriteUInt(m_addUnarmedWeaponDamageMin);
 					aStream->WriteUInt(m_addUnarmedWeaponDamageMax);
+					aStream->WriteUInt(m_achievementId);
 				}
 			
 				bool	
@@ -275,6 +280,8 @@ namespace tpublic
 						return false;
 					if (!aStream->ReadUInt(m_addUnarmedWeaponDamageMax))
 						return false;
+					if (!aStream->ReadUInt(m_achievementId))
+						return false;
 					return true;
 				}
 
@@ -285,6 +292,7 @@ namespace tpublic
 				std::vector<LevelProgressionLevelResourceUpdate>	m_resourceUpdates;
 				uint32_t											m_addUnarmedWeaponDamageMin = 0;
 				uint32_t											m_addUnarmedWeaponDamageMax = 0;
+				uint32_t											m_achievementId = 0;
 			};
 
 			struct LevelProgression

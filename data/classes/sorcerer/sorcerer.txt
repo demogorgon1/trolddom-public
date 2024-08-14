@@ -284,7 +284,22 @@ class sorcerer:
 			
 			resource health: { add_max: 6 }		
 			resource mana: { add_max: 6 }
+			
+			achievement: sorcerer_level_10
 		}				
 		
 	]
+}
+
+###############################################################################
+# Achievements
+
+achievement sorcerer_level_10: 
+{ 
+	category: general 
+	string: "Sorcerer (Level 10)" 
+	description: "Reach level 10 as a Sorcerer." 
+	points: 10 
+	icon: icon_sorcerer 
+	no_progress_values: true 
 }

@@ -243,7 +243,22 @@ class priest:
 			
 			resource health: { add_max: 6 }			
 			resource mana: { add_max: 6 }			
+			
+			achievement: priest_level_10
 		}				
 		
 	]
+}
+
+###############################################################################
+# Achievements
+
+achievement priest_level_10: 
+{ 
+	category: general 
+	string: "Priest (Level 10)" 
+	description: "Reach level 10 as a Priest." 
+	points: 10 
+	icon: icon_priest
+	no_progress_values: true 
 }

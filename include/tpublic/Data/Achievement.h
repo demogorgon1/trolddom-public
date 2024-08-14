@@ -140,16 +140,16 @@ namespace tpublic
 			}
 
 			// Public data
-			std::string					m_string;
-			std::string					m_description;
-			uint32_t					m_points = 10;
-			uint32_t					m_priority = 0;
-			uint32_t					m_categoryId = 0;
-			uint32_t					m_rootId = 0;
-			uint32_t					m_iconSpriteId = 0;
-			std::optional<StatTrigger>	m_statTrigger;
-			uint64_t					m_sortKey = 0;
-			bool						m_noProgressValues = false;
+			std::string						m_string;
+			std::string						m_description;
+			uint32_t						m_points = 10;
+			uint32_t						m_priority = 0;
+			uint32_t						m_categoryId = 0;
+			uint32_t						m_rootId = 0;
+			uint32_t						m_iconSpriteId = 0;
+			std::optional<StatTrigger>		m_statTrigger;
+			uint64_t						m_sortKey = 0;
+			bool							m_noProgressValues = false;
 		};
 
 	}

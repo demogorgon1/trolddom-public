@@ -3,6 +3,7 @@
 #include <tpublic/Components/Abilities.h>
 #include <tpublic/Components/AbilityModifiers.h>
 #include <tpublic/Components/Achievements.h>
+#include <tpublic/Components/AccountAchievements.h>
 #include <tpublic/Components/ActionBars.h>
 #include <tpublic/Components/ActiveQuests.h>
 #include <tpublic/Components/Auctioneer.h>
@@ -64,6 +65,7 @@ namespace tpublic
 		_Register<Components::Abilities>();
 		_Register<Components::AbilityModifiers>();
 		_Register<Components::Achievements>();
+		_Register<Components::AccountAchievements>();
 		_Register<Components::ActionBars>();
 		_Register<Components::ActiveQuests>();
 		_Register<Components::Auctioneer>();

@@ -293,8 +293,22 @@ class fighter:
 			}			
 			
 			resource health: { add_max: 8 }			
+			achievement: fighter_level_10
 		}				
 		
 	]
+}
+
+###############################################################################
+# Achievements
+
+achievement fighter_level_10: 
+{ 
+	category: general 
+	string: "Fighter (Level 10)" 
+	description: "Reach level 10 as a Fighter." 
+	points: 10 
+	icon: icon_fighter 
+	no_progress_values: true 
 }
 

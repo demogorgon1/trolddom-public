@@ -381,6 +381,9 @@ sprites:
 	sprite icon_chest_3 : { tags: [ icon armor_mail chest ] icon_meta_data: !ICON_UNCOMMON_5{} }
 	sprite icon_boots_3 : { tags: [ icon armor_mail armor_plate feet ] icon_meta_data: !ICON_UNCOMMON_5{} }
 	sprite icon_poison : { tags: [ icon ] }
+	sprite icon_fighter : { tags: [ icon ] }
+	sprite icon_priest : { tags: [ icon ] }
+	sprite icon_sorcerer : { tags: [ icon ] }
 	
 }
 

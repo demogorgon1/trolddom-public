@@ -10,13 +10,13 @@ namespace tpublic
 	namespace Components
 	{
 
-		struct Achievements
+		struct AccountAchievements
 			: public ComponentBase
 		{
 		public:
-			static const Component::Id ID = Component::ID_ACHIEVEMENTS;
+			static const Component::Id ID = Component::ID_ACCOUNT_ACHIEVEMENTS;
 			static const uint8_t FLAGS = FLAG_PLAYER_ONLY | FLAG_REPLICATE_ONLY_ON_REQUEST;
-			static const Persistence::Id PERSISTENCE = Persistence::ID_STATS;
+			static const Persistence::Id PERSISTENCE = Persistence::ID_ACCOUNT;
 			static const Replication REPLICATION = REPLICATION_PUBLIC;
 
 			enum Field
@@ -29,8 +29,8 @@ namespace tpublic
 			CreateSchema(
 				ComponentSchema*	aSchema)
 			{
-				aSchema->DefineCustomObjectNoSource<AchievementTable>(FIELD_TABLE, offsetof(Achievements, m_table));
-				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_TOTAL_POINTS, NULL, offsetof(Achievements, m_totalPoints));
+				aSchema->DefineCustomObjectNoSource<AchievementTable>(FIELD_TABLE, offsetof(AccountAchievements, m_table));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_TOTAL_POINTS, NULL, offsetof(AccountAchievements, m_totalPoints));
 			}
 
 			bool
