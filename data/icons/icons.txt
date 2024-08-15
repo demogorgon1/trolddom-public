@@ -385,6 +385,8 @@ sprites:
 	sprite icon_priest : { tags: [ icon ] }
 	sprite icon_sorcerer : { tags: [ icon ] }
 	sprite icon_road : { tags: [ icon ] }
+	sprite icon_golden_dragon : { tags: [ icon ] }
+	sprite icon_aetheris_stronghold : { tags: [ icon ] }
 	
 }
 

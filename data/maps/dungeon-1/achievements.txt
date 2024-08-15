@@ -1,0 +1,10 @@
+achievement_category .dungeon_1: { string: "Dungeon: Aetheris Stronghold" order_key: 3 }
+
+achievement dungeon_1_ignorg: { sort_key: 1 category: .dungeon_1 string: "Ignorg" description: "Slay Ignorg." points: 10 priority: 0 kill_trigger: dungeon_1_ignorg icon: icon_skull_1 no_progress_values: true }
+achievement dungeon_1_biznorg: { sort_key: 2 category: .dungeon_1 string: "Biznorg" description: "Slay Biznorg." points: 10 priority: 0 kill_trigger: dungeon_1_biznorg icon: icon_skull_1 no_progress_values: true }
+achievement dungeon_1_umbracoth: { sort_key: 3 category: .dungeon_1 string: "Umbracoth" description: "Slay Umbracoth." points: 10 priority: 0 kill_trigger: dungeon_1_umbracoth icon: icon_skull_1 no_progress_values: true }
+achievement dungeon_1_snarltooth: { sort_key: 4 category: .dungeon_1 string: "Snarltooth" description: "Slay Snarltooth." points: 10 priority: 0 kill_trigger: dungeon_1_snarltooth icon: icon_skull_1 no_progress_values: true }
+achievement dungeon_1_grunthar: { sort_key: 5 category: .dungeon_1 string: "Grunthar" description: "Slay Grunthar." points: 10 priority: 0 kill_trigger: dungeon_1_grunthar icon: icon_skull_1 no_progress_values: true }
+achievement dungeon_1_zarvok: { sort_key: 6 category: .dungeon_1 string: "Zarvok the Cunning" description: "Slay Zarvok the Cunning." points: 10 priority: 0 kill_trigger: dungeon_1_zarvok icon: icon_skull_1 no_progress_values: true }
+
+achievement dungeon_1: { category: .dungeon_1 string: "Aetheris Stronghold" description: "Finish Aetheris Stronghold." points: 20 need_achievements: [ dungeon_1_ignorg dungeon_1_biznorg dungeon_1_umbracoth dungeon_1_snarltooth dungeon_1_grunthar dungeon_1_zarvok ] icon: icon_aetheris_stronghold }

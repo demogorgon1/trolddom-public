@@ -1,0 +1,4 @@
+achievement_category .open_world: { string: "Aetheris Isle" order_key: 2 }
+
+achievement kill_golden_dragon: { category: .open_world string: "Golden Dragon Slayer" description: "Slay Zuthyg the Golden." points: 10 priority: 0 kill_trigger: zuthyg_the_golden icon: icon_golden_dragon no_progress_values: true }
+achievement vampire_hunter: { category: .open_world string: "Vampire Hunter" description: "Slay that pesky vampire." points: 10 priority: 0 kill_trigger: .benny icon: icon_wooden_stake no_progress_values: true }

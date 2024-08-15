@@ -80,6 +80,8 @@ namespace tpublic
 							m_points = aChild->GetUInt32();
 						else if (aChild->m_name == "priority")
 							m_priority = aChild->GetUInt32();
+						else if (aChild->m_name == "sort_key")
+							m_sortKey = (uint64_t)aChild->GetUInt32();
 						else if (aChild->m_name == "no_progress_values")
 							m_noProgressValues = aChild->GetBool();
 						else if (aChild->m_name == "account_wide")
@@ -90,6 +92,8 @@ namespace tpublic
 							m_rootId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ACHIEVEMENT, aChild->GetIdentifier());
 						else if (aChild->m_name == "icon")
 							m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
+						else if (aChild->m_name == "kill_trigger")
+							m_killTriggerEntityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENTITY, aChild->GetIdentifier());
 						else if (aChild->m_tag == "stat_trigger")
 							m_statTrigger = StatTrigger(aChild);
 						else if(aChild->m_name == "need_achievements")
@@ -116,6 +120,7 @@ namespace tpublic
 				aStream->WriteBool(m_noProgressValues);
 				aStream->WriteUInts(m_needAchievementIds);
 				aStream->WriteBool(m_accountWide);
+				aStream->WriteUInt(m_killTriggerEntityId);
 			}
 
 			bool
@@ -146,6 +151,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadBool(m_accountWide))
 					return false;
+				if (!aStream->ReadUInt(m_killTriggerEntityId))
+					return false;
 				return true;
 			}
 
@@ -159,6 +166,7 @@ namespace tpublic
 			uint32_t						m_iconSpriteId = 0;
 			std::optional<StatTrigger>		m_statTrigger;
 			std::vector<uint32_t>			m_needAchievementIds;
+			uint32_t						m_killTriggerEntityId = 0;
 			uint64_t						m_sortKey = 0;
 			bool							m_noProgressValues = false;
 			bool							m_accountWide = false;

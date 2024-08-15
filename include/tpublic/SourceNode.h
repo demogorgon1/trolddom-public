@@ -71,7 +71,7 @@ namespace tpublic
 		uint64_t
 		GetSortKey() const
 		{
-			return ((uint64_t)Hash::String(m_debugInfo.m_file.c_str()) << 32ULL) | (uint64_t)m_debugInfo.m_line;
+			return (((uint64_t)Hash::String(m_debugInfo.m_file.c_str()) << 32ULL) | (uint64_t)m_debugInfo.m_line) | 0xFFFFULL;
 		}
 
 		void
