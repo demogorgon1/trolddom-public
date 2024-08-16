@@ -134,6 +134,9 @@ namespace tpublic
 		{
 			Field* from = _GetFieldById(aFromId);
 			Field* to = _GetFieldById(aToId);
+
+			TP_UNUSED(from);
+
 			assert(from != NULL && to != NULL);
 			assert(from->m_offset == UINT32_MAX); // Must be deprecated
 
