@@ -57,6 +57,8 @@
 
 #endif
 
+#define TP_UNUSED(_X) (void)_X;
+
 namespace tpublic::Base
 {
 
