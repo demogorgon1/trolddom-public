@@ -34,7 +34,7 @@ item weapon_gnarly_staff:
 	icon: icon_staff_1
 	rarity: common
 	string: "Gnarly Staff"
-	weapon_cooldown: 30		
+	weapon_cooldown: 20		
 }
 
 item weapon_the_dev_tool:
@@ -72,6 +72,7 @@ item weapon_staff_of_the_clever_crab:
 	rarity: uncommon
 	string: "Staff of the Clever Crab"
 	stat_weight wisdom: 1 
+	weapon_cooldown: 20		
 }
 
 item weapon_zumhorn_1:
@@ -85,6 +86,7 @@ item weapon_zumhorn_1:
 	string: "Staff of Zumhorn's Disciple"
 	stat_weight wisdom: 1 
 	stat_weight spirit: 2
+	weapon_cooldown: 20		
 }
 
 item weapon_zumhorn_2:
@@ -143,6 +145,6 @@ item weapon_zuthyg_2:
 	stat_weight wisdom: 2
 	stat_weight healing: 1
 	level_range: 12 
-	weapon_cooldown: 30
+	weapon_cooldown: 20
 }
 

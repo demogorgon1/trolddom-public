@@ -222,7 +222,7 @@ item dungeon_1_knife_1:
 item dungeon_1_staff_1:
 {
 	string: "Glowing Staff of the Druid"
-	weapon_cooldown: 30
+	weapon_cooldown: 20
 	type: weapon_2h_staff
 	equipment_slots: [ main_hand ]
 	loot_groups: [ .zarvok ]
@@ -238,7 +238,7 @@ item dungeon_1_staff_1:
 item dungeon_1_staff_2:
 {
 	string: "Nemesis Staff"
-	weapon_cooldown: 30
+	weapon_cooldown: 20
 	type: weapon_2h_staff
 	equipment_slots: [ main_hand ]
 	loot_groups: [ .zarvok ]
@@ -347,7 +347,7 @@ item dungeon_1_neck_1:
 item dungeon_1_staff_3:
 {
 	string: "Eldertree Walking Stick"
-	weapon_cooldown: 30
+	weapon_cooldown: 20
 	type: weapon_2h_staff
 	equipment_slots: [ main_hand ]
 	loot_groups: [ .biznorg ]
