@@ -20,7 +20,7 @@ namespace tpublic::DirectEffects
 				if (aChild->m_name == "profession")
 					m_professionId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PROFESSION, aChild->GetIdentifier());
 				else if (aChild->m_name == "ability")
-					m_professionId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
+					m_abilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
 				else
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->GetIdentifier());
 			}

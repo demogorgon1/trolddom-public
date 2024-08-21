@@ -402,6 +402,9 @@ namespace tpublic
 			IsUsableInState(
 				EntityState::Id			aEntityState) const
 			{
+				if(m_entityStates.empty())
+					return true;
+
 				for(EntityState::Id entityState : m_entityStates)
 				{
 					if(aEntityState == entityState)
