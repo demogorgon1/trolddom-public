@@ -103,6 +103,7 @@ namespace tpublic::DirectEffects
 				aId,
 				DirectEffect::INVALID_DAMAGE_TYPE,
 				aAbilityId,
+				aSource->GetEntityId(),
 				aSource->GetEntityInstanceId(),
 				target->GetEntityInstanceId(),
 				combatPublic,

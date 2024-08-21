@@ -24,6 +24,7 @@ namespace tpublic
 								CombatEvent::Id						aCombatEventId,
 								tpublic::DirectEffect::DamageType	aDamageType,
 								uint32_t							aAbilityId,
+								uint32_t							aSourceEntityId,
 								uint32_t							aSourceEntityInstanceId,
 								uint32_t							aTargetEntityInstanceId,
 								Components::CombatPublic*			aCombat,

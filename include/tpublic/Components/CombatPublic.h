@@ -412,6 +412,7 @@ namespace tpublic
 				m_interrupt.reset();
 				m_damageAccum = 0;
 				m_singleTargetAuraEntityInstanceId = 0;
+				m_lastDamageFromEntityId = 0;
 			}
 
 			// Helpers
@@ -442,6 +443,7 @@ namespace tpublic
 			std::optional<Interrupt>		m_interrupt;
 			uint32_t						m_damageAccum = 0;
 			uint32_t						m_singleTargetAuraEntityInstanceId = 0;
+			uint32_t						m_lastDamageFromEntityId = 0;
 		};
 
 	}
