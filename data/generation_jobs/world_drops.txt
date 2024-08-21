@@ -19,18 +19,19 @@ generation_job world_drops:
 			{ speed: 17 types: [ weapon_1h_sword weapon_1h_mace weapon_1h_axe weapon_1h_knife ] }
 			{ speed: 18 types: [ weapon_1h_sword weapon_1h_mace weapon_1h_axe weapon_1h_knife ] }
 			{ speed: 19 types: [ weapon_1h_sword weapon_1h_mace weapon_1h_axe weapon_1h_knife ] }
-			{ speed: 20 types: [ weapon_1h_sword weapon_1h_mace weapon_1h_axe weapon_1h_knife ] }
-			{ speed: 22 types: [ weapon_1h_sword weapon_1h_mace weapon_1h_axe ] }
-			{ speed: 24 types: [ weapon_1h_sword weapon_1h_mace weapon_1h_axe ] }
+			{ speed: 20 types: [ weapon_1h_sword weapon_1h_mace weapon_1h_axe weapon_1h_knife weapon_2h_staff ] }
+			{ speed: 22 types: [ weapon_1h_sword weapon_1h_mace weapon_1h_axe weapon_2h_staff ] }
+			{ speed: 24 types: [ weapon_1h_sword weapon_1h_mace weapon_1h_axe weapon_2h_staff ] }
 			{ speed: 26 types: [ weapon_1h_sword weapon_1h_mace weapon_1h_axe weapon_2h_sword weapon_2h_mace weapon_2h_axe weapon_2h_staff ] }
-			{ speed: 28 types: [ weapon_2h_sword weapon_2h_mace weapon_2h_axe weapon_2h_staff ] }
-			{ speed: 30 types: [ weapon_2h_sword weapon_2h_mace weapon_2h_axe weapon_2h_staff ] }
+			{ speed: 28 types: [ weapon_2h_sword weapon_2h_mace weapon_2h_axe ] }
+			{ speed: 30 types: [ weapon_2h_sword weapon_2h_mace weapon_2h_axe ] }
 			{ speed: 32 types: [ weapon_2h_sword weapon_2h_mace weapon_2h_axe ] }
 			{ speed: 34 types: [ weapon_2h_sword weapon_2h_mace weapon_2h_axe ] }
 			{ speed: 36 types: [ weapon_2h_sword weapon_2h_mace weapon_2h_axe ] }
 			{ speed: 38 types: [ weapon_2h_sword weapon_2h_mace weapon_2h_axe ] }
 		]
 	
+		# Common (junk) items
 		# Common (junk) items
 		{
 			designations:

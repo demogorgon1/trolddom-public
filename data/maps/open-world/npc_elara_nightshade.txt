@@ -1,0 +1,85 @@
+dialogue_screen .elara_nightshade_greetings:
+{
+	text: 
+	[	
+		"I usually turn people like you into frogs."
+	]
+	
+	options:
+	[
+		{ quest: .elara_nightshade_1 }
+	]
+}
+
+dialogue_root .elara_nightshade_dialogue:
+{
+	.elara_nightshade_greetings: { }
+}
+
+entity .elara_nightshade: !NPC
+{
+	_string: "Elara Nightshade"
+	_dialogue_root: .elara_nightshade_dialogue	
+	_sprite: woman_7
+	_sprite_dead: woman_7_dead	
+	_level: 10
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .elara_nightshade_quest_item: { }
+
+item .elara_nightshade_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .elara_nightshade_quest_item ]		
+	string: "Spider Goo" 
+	icon: icon_poison
+	stack: 6
+	item_level: 1
+	flags: [ not_sellable ]
+}
+
+objective .elara_nightshade_1:
+{
+	string: "Spider Goo"
+	collect_items: { item: .elara_nightshade_quest_item count: 6 }
+}
+
+quest .elara_nightshade_1:
+{
+	string: "Special Ingredient"
+
+	text:
+	[
+		"Collect spider goo from spiders and return to Elara."
+	]
+	
+	description: 
+	[
+		"I'm having some friends over later and I want to make my special punch. Unfortunately I just"
+		"realized that I'm out of spider goo. Can you go grab me some from the woods outside my house?\n"
+		"\n"
+		"That would be ever so helpful."
+	]
+
+	progress:
+	[
+		"What are you waiting for? Can't you see my punch is lacking some texture?"
+	]
+	
+	completion:
+	[
+		"Great. Want to taste test?"
+	]
+
+	objectives: [ .elara_nightshade_1 ]
+	level: 1		
+	
+	reward_one_item: [ chest_elara_nightshade_1 legs_elara_nightshade_1 back_elara_nightshade_1 ]
+}

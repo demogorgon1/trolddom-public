@@ -168,6 +168,34 @@ entity cave_spider_4: !NPC
 }
 
 ##########################################################################################
+# Forest Spider
+
+loot_table .forest_spider_1: 
+{
+	slots:
+	[
+		{
+			possibility: { weight: 1 }			
+			possibility: { loot_group: .elara_nightshade_quest_item weight: 4 requirement self<must_have_active_quest>: { id: .elara_nightshade_1 } }			
+		}			
+	
+		!WORLD_DROPS {}
+	]	
+}
+
+entity forest_spider_1: !NPC
+{
+	_string: "Forest Spider"
+	_level: 1
+	_faction: monsters
+	_sprite: spider_2
+	_sprite_dead: spider_2_dead
+	_loot_table: .forest_spider_1
+	_creature_type: beast
+	_default_behavior_state: .wandering_short
+}
+
+##########################################################################################
 # Crab Man
 
 loot_table .crab_man_2: 

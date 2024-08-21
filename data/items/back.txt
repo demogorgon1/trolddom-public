@@ -60,3 +60,16 @@ item back_zumhorn_1:
 	stat_weight dexterity: 1
 	stat_weight constitution: 2
 }
+
+item back_elara_nightshade_1:
+{
+	equipment_slots: [ back ]
+	binds: when_picked_up
+	type: armor_cloth
+	item_level: 3
+	required_level: 1
+	icon: icon_cape_2
+	rarity: uncommon
+	string: "Cloak of the Witch" 
+	stat_weight constitution: 1
+}

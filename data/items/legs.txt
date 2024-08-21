@@ -68,3 +68,17 @@ item legs_aghina_1:
 	stat_weight constitution: 1
 	stat_weight wisdom: 2
 }
+
+item legs_elara_nightshade_1:
+{
+	type: armor_mail
+	binds: when_picked_up
+	equipment_slots: [ legs ]
+	required_level: 1
+	item_level: 3
+	rarity: uncommon
+	icon: icon_pants_1		
+	string: "Ragged Mail Leggings"
+	stat_weight strength: 1
+}
+

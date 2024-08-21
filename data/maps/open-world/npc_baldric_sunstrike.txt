@@ -1,0 +1,27 @@
+dialogue_screen .baldric_sunstrike_greetings:
+{
+	text: 
+	[	
+		"Serve The Light or die trying."
+	]
+
+}
+
+dialogue_root .baldric_sunstrike_dialogue:
+{
+	.baldric_sunstrike_greetings: { }
+}
+
+entity .baldric_sunstrike: !NPC
+{
+	_string: "Baldric Sunstrike"
+	_dialogue_root: .baldric_sunstrike_dialogue	
+	_sprite: man_20
+	_sprite_dead: man_20_dead	
+	_level: 10
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

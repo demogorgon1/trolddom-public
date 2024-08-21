@@ -82,6 +82,16 @@ map_entity_spawn .clara:
 	entity .clara: { weight: 1 }
 }
 
+map_entity_spawn .elara_nightshade:
+{
+	entity .elara_nightshade: { weight: 1 }
+}
+
+map_entity_spawn .baldric_sunstrike:
+{
+	entity .baldric_sunstrike: { weight: 1 }
+}
+
 map_entity_spawn .klaus:
 {
 	entity .klaus: { weight: 1 }
@@ -243,6 +253,12 @@ map_entity_spawn .crab_man_4:
 map_entity_spawn .cave_spider_4:
 {
 	entity cave_spider_4: { weight: 1 }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn .forest_spider_1:
+{
+	entity forest_spider_1: { weight: 1 }
 	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
@@ -500,6 +516,11 @@ zone .zone_12:
 	string: "Peninsula Cave"
 }
 
+zone .zone_13:
+{
+	string: "Twilight Thicket"
+}
+
 map_palette .tiles:
 {
 	tile water_1: [ 9 86 104 ]
@@ -546,6 +567,7 @@ map_palette .stuff:
 	entity_spawn fireplace_unlit: [ 250 243 66 ]		
 	entity_spawn bonfire: [ 251 43 66 ]		
 	entity_spawn default_chest: [ 40 143 66 ]		
+	entity_spawn cauldron: [ 43 113 166 ]		
 
 	entity_spawn .wildlife: [ 255 255 0 ]
 	entity_spawn .sylas: [ 255 189 0 ]
@@ -573,6 +595,8 @@ map_palette .stuff:
 	entity_spawn .theodore: [ 142 195 155 ]	
 	entity_spawn .tom: [ 140 192 16 ]	
 	entity_spawn .clara: [ 40 90 180 ]	
+	entity_spawn .elara_nightshade: [ 44 95 110 ]	
+	entity_spawn .baldric_sunstrike: [ 34 105 10 ]	
 	entity_spawn .klaus: [ 180 90 40 ]	
 	entity_spawn .billy: [ 90 180 40 ]	
 	entity_spawn .gnome: [ 90 180 88 ]	
@@ -594,6 +618,7 @@ map_palette .stuff:
 	entity_spawn .crab_man_3: [ 192 15 15 ]	
 	entity_spawn .crab_man_4: [ 193 15 15 ]	
 	entity_spawn .cave_spider_4: [ 193 111 153 ]	
+	entity_spawn .forest_spider_1: [ 193 121 113 ]	
 	entity_spawn .crab_man_6: [ 195 12 15 ]	
 	entity_spawn .crab_boss_4: [ 192 15 195 ]	
 	entity_spawn .crab_boss_5: [ 192 1 195 ]	
@@ -659,6 +684,7 @@ map_palette .zones:
 	zone .zone_10: [ 0 140 14 ]	
 	zone .zone_11: [ 168 65 243 ]	
 	zone .zone_12: [ 144 230 255 ]	
+	zone .zone_13: [ 239 204 26 ]	
 }
 
 map open_world:
