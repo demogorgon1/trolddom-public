@@ -346,6 +346,34 @@ namespace tpublic
 				return true;
 			}
 
+			void
+			ToPropertyTable(
+				PropertyTable&			aOut) const override
+			{
+				ToPropertyTableBase(aOut);
+				aOut["string"] = m_string;
+				aOut["item_level"] = Helpers::Format("%u", m_itemLevel).c_str();
+				aOut["required_level"] = Helpers::Format("%u", m_requiredLevel).c_str();
+				aOut["rarity"] = Rarity::GetInfo(m_rarity)->m_name;
+				aOut["item_type"] = ItemType::GetInfo(m_itemType)->m_name;
+
+				std::string slots;
+				for(uint32_t equipmentSlotId : m_equipmentSlots)
+				{
+					if(!slots.empty())
+						slots += ",";
+					slots += EquipmentSlot::GetInfo((EquipmentSlot::Id)equipmentSlotId)->m_name;
+				}
+				if(!slots.empty())
+					aOut["slots"] = slots;
+
+				if(m_weaponCooldown != 0)
+					aOut["weapon_cooldown"] = Helpers::Format("%u", m_weaponCooldown).c_str();
+
+				if (m_weaponDamage)
+					aOut["weapon_damage"] = Helpers::Format("%u-%u", m_weaponDamage->m_min, m_weaponDamage->m_max).c_str();
+			}
+
 			// Public data
 			std::vector<uint32_t>				m_equipmentSlots;
 			std::vector<uint32_t>				m_lootGroups;

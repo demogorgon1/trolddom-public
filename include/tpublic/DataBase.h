@@ -3,6 +3,7 @@
 #include "Base64.h"
 #include "DataErrorHandling.h"
 #include "DataType.h"
+#include "Helpers.h"
 #include "IReader.h"
 #include "IWriter.h"
 #include "Parser.h"
@@ -15,6 +16,8 @@ namespace tpublic
 	
 	struct DataBase
 	{
+		typedef std::unordered_map<std::string, std::string> PropertyTable;
+
 		enum Runtime : uint8_t
 		{
 			RUNTIME_SERVER = 0x01,
@@ -102,18 +105,28 @@ namespace tpublic
 			return false;
 		}
 
+		void
+		ToPropertyTableBase(
+			PropertyTable&						aOut) const
+		{
+			aOut["name"] = m_name;
+			aOut["id"] = Helpers::Format("%u", m_id);
+		}
+
 		// Virtual interface
 		virtual void	FromSource(
 							const SourceNode*	aNode) = 0;
 		virtual void	ToStream(
 							IWriter*			aStream) const = 0;
 		virtual bool	FromStream(
-							IReader*			aStream) = 0;							
+							IReader*			aStream) = 0;	
 
 		// Virtual methods
 		virtual void	PrepareRuntime(
 							uint8_t				/*aRuntime*/,
 							const Manifest*		/*aManifest*/) { }
+		virtual void	ToPropertyTable(
+							PropertyTable&		aOut) const { ToPropertyTableBase(aOut); }
 
 		// Public data
 		std::string									m_name;

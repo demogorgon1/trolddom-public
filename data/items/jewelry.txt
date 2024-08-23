@@ -3,7 +3,7 @@ item ring_iron_ring:
 	equipment_slots: [ finger_1 finger_2 ]
 	binds: when_equipped
 	loot_groups: [ world_drops_uncommon ]
-	required_level: 2
+	required_level: 4
 	icon: icon_ring_1
 	rarity: uncommon	
 	string: "Iron Ring"
@@ -15,7 +15,7 @@ item ring_sapphire_ring:
 	equipment_slots: [ finger_1 finger_2 ]
 	binds: when_equipped
 	loot_groups: [ world_drops_uncommon ]
-	required_level: 2
+	required_level: 4
 	icon: icon_ring_2
 	rarity: uncommon
 	string: "Sapphire Ring"

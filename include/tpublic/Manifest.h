@@ -28,8 +28,8 @@ namespace tpublic
 		{
 		public:
 			IDataContainer(
-				DataType::Id								aDataType,
-				bool										aHasTaggedData)
+				DataType::Id													aDataType,
+				bool															aHasTaggedData)
 				: m_dataType(aDataType)
 				, m_tagged(aHasTaggedData)
 			{
@@ -44,7 +44,7 @@ namespace tpublic
 
 			bool
 			IsDataType(
-				DataType::Id								aDataType) const
+				DataType::Id													aDataType) const
 			{
 				return m_dataType == aDataType;
 			}
@@ -58,19 +58,21 @@ namespace tpublic
 			// Virtual interface
 			virtual void			Verify() const = 0;
 			virtual void			PrepareRuntime(
-										uint8_t				aRuntime,
-										const Manifest*		aManifest) = 0;
+										uint8_t									aRuntime,
+										const Manifest*							aManifest) = 0;
 			virtual void			ToStream(
-										IWriter*			aStream) const = 0;
+										IWriter*								aStream) const = 0;
 			virtual bool			FromStream(	
-										IReader*			aStream) = 0;
+										IReader*								aStream) = 0;
 			virtual DataBase*		GetBaseByName(
-										PersistentIdTable*	aPersistentIdTable,
-										const char*			aName) = 0;
+										PersistentIdTable*						aPersistentIdTable,
+										const char*								aName) = 0;
 			virtual const DataBase*	GetExistingBaseById(
-										uint32_t			aId) const = 0;
+										uint32_t								aId) const = 0;
 			virtual const DataBase*	GetExistingBaseByName(
-										const char*			aName) const = 0;
+										const char*								aName) const = 0;
+			virtual void			ForEachBase(
+										std::function<bool(const DataBase*)>	aCallback) const = 0;
 
 		private:
 
@@ -96,8 +98,8 @@ namespace tpublic
 
 			_T*
 			GetByName(
-				PersistentIdTable*						aPersistentIdTable,
-				const char*								aName)
+				PersistentIdTable*												aPersistentIdTable,
+				const char*														aName)
 			{
 				assert(!m_hasUnnamedEntries);
 
@@ -126,7 +128,7 @@ namespace tpublic
 
 			_T*
 			GetExistingByName(
-				const char*								aName)
+				const char*														aName)
 			{
 				typename std::unordered_map<std::string, _T*>::iterator it = m_nameTable.find(aName);
 				if(it == m_nameTable.end())
@@ -136,7 +138,7 @@ namespace tpublic
 
 			const _T*
 			GetExistingByName(
-				const char*								aName) const
+				const char*														aName) const
 			{
 				typename std::unordered_map<std::string, _T*>::const_iterator it = m_nameTable.find(aName);
 				if(it == m_nameTable.cend())
@@ -146,7 +148,7 @@ namespace tpublic
 
 			uint32_t
 			GetExistingIdByName(
-				const char*								aName) const
+				const char*														aName) const
 			{
 				const _T* t = GetExistingByName(aName);
 				TP_CHECK(t != NULL, "'%s' is not defined.", aName);
@@ -155,7 +157,7 @@ namespace tpublic
 
 			uint32_t
 			TryGetExistingIdByName(
-				const char*								aName) const
+				const char*														aName) const
 			{
 				const _T* t = GetExistingByName(aName);
 				if(t == NULL)
@@ -178,7 +180,7 @@ namespace tpublic
 
 			const _T*
 			TryGetById(
-				uint32_t								aId) const
+				uint32_t														aId) const
 			{
 				auto it = m_idTable.find(aId);
 				if(it == m_idTable.end())
@@ -188,7 +190,7 @@ namespace tpublic
 
 			_T*
 			TryGetById(
-				uint32_t								aId) 
+				uint32_t														aId) 
 			{
 				auto it = m_idTable.find(aId);
 				if(it == m_idTable.end())
@@ -198,7 +200,7 @@ namespace tpublic
 
 			const _T*
 			GetById(
-				uint32_t								aId) const
+				uint32_t														aId) const
 			{
 				const _T* t = TryGetById(aId);
 				TP_CHECK(t != NULL, "Invalid '%s' id: %u", DataType::IdToString(_T::DATA_TYPE), aId);
@@ -207,7 +209,7 @@ namespace tpublic
 
 			_T*
 			GetById(
-				uint32_t								aId) 
+				uint32_t														aId) 
 			{
 				_T* t = TryGetById(aId);
 				TP_CHECK(t != NULL, "Invalid '%s' id: %u", DataType::IdToString(_T::DATA_TYPE), aId);
@@ -216,7 +218,7 @@ namespace tpublic
 
 			void
 			ForEach(
-				std::function<bool(_T*)>				aCallback)
+				std::function<bool(_T*)>										aCallback)
 			{
 				for (std::unique_ptr<_T>& t : m_entries)
 				{
@@ -227,7 +229,7 @@ namespace tpublic
 
 			void
 			ForEach(
-				std::function<bool(const _T*)>			aCallback) const
+				std::function<bool(const _T*)>									aCallback) const
 			{
 				for (const std::unique_ptr<_T>& t : m_entries)
 				{
@@ -253,8 +255,8 @@ namespace tpublic
 
 			void		
 			PrepareRuntime(
-				uint8_t									aRuntime,
-				const Manifest*							aManifest) override
+				uint8_t															aRuntime,
+				const Manifest*													aManifest) override
 			{
 				for (const std::unique_ptr<_T>& t : m_entries)
 					t->PrepareRuntime(aRuntime, aManifest);
@@ -262,14 +264,14 @@ namespace tpublic
 
 			void
 			ToStream(
-				IWriter*								aStream) const override
+				IWriter*														aStream) const override
 			{
 				aStream->WriteObjectPointersWithBase(m_entries);
 			}
 
 			bool
 			FromStream(
-				IReader*								aStream) override
+				IReader*														aStream) override
 			{
 				if(!aStream->ReadObjectPointersWithBase(m_entries, 8192))
 					return false;
@@ -292,15 +294,15 @@ namespace tpublic
 
 			DataBase*
 			GetBaseByName(
-				PersistentIdTable*						aPersistentIdTable,
-				const char*								aName) override
+				PersistentIdTable*												aPersistentIdTable,
+				const char*														aName) override
 			{
 				return GetByName(aPersistentIdTable, aName);
 			}
 
 			const DataBase* 
 			GetExistingBaseById(
-				uint32_t								aId) const override
+				uint32_t														aId) const override
 			{
 				typename std::unordered_map<uint32_t, _T*>::const_iterator i = m_idTable.find(aId);
 				if(i != m_idTable.cend())
@@ -310,12 +312,23 @@ namespace tpublic
 
 			const DataBase* 
 			GetExistingBaseByName(
-				const char*								aName) const override
+				const char*														aName) const override
 			{
 				typename std::unordered_map<std::string, _T*>::const_iterator i = m_nameTable.find(aName);
 				if(i != m_nameTable.cend())
 					return i->second;
 				return NULL;
+			}
+
+			void			
+			ForEachBase(
+				std::function<bool(const DataBase*)>							aCallback) const override
+			{
+				for (const std::unique_ptr<_T>& t : m_entries)
+				{
+					if (!aCallback(t.get()))
+						break;
+				}
 			}
 
 			// Public data

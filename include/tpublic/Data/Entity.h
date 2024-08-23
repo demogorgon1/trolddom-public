@@ -299,6 +299,14 @@ namespace tpublic
 				return true;
 			}
 
+			void
+			ToPropertyTable(
+				PropertyTable&			aOut) const override
+			{
+				ToPropertyTableBase(aOut);
+				aOut["string"] = m_displayName;
+			}
+
 			// Public data
 			std::string										m_displayName;
 			std::optional<Image::RGBA>						m_debugColor;
