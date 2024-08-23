@@ -127,7 +127,7 @@ namespace tpublic
 	ComponentManager::AllocateComponentNonPooled(
 		uint32_t				aId) const
 	{
-		assert(aId < Component::NUM_IDS);
+		assert(aId > 0 && aId < Component::NUM_IDS);
 		const ComponentType& t = m_componentTypes[aId];
 	
 		if(!t.m_create)
@@ -142,8 +142,9 @@ namespace tpublic
 	ComponentManager::AllocateComponent(
 		uint32_t				aId) 
 	{
-		assert(aId < Component::NUM_IDS);
+		assert(aId > 0 && aId < Component::NUM_IDS);
 		ComponentType& t = m_componentTypes[aId];
+		assert(t.m_pool);
 		return t.m_pool->Allocate();
 	}
 
@@ -151,7 +152,9 @@ namespace tpublic
 	ComponentManager::ReleaseComponent(
 		ComponentBase*			aComponent)
 	{
+		assert(aComponent->GetComponentId() > 0 && aComponent->GetComponentId() < Component::NUM_IDS);
 		ComponentType& t = m_componentTypes[aComponent->GetComponentId()];
+		assert(t.m_pool);
 		t.m_pool->Release(aComponent);
 	}
 
@@ -159,7 +162,7 @@ namespace tpublic
 	ComponentManager::GetComponentSchema(
 		uint32_t				aId) const
 	{
-		assert(aId < Component::NUM_IDS);
+		assert(aId > 0 && aId < Component::NUM_IDS);
 		const ComponentType& t = m_componentTypes[aId];
 		return &t.m_schema;
 	}
@@ -168,7 +171,7 @@ namespace tpublic
 	ComponentManager::GetComponentFlags(
 		uint32_t				aId) const
 	{
-		assert(aId < Component::NUM_IDS);
+		assert(aId > 0 && aId < Component::NUM_IDS);
 		const ComponentType& t = m_componentTypes[aId];
 		return t.m_flags;
 	}
@@ -177,7 +180,7 @@ namespace tpublic
 	ComponentManager::GetComponentPersistence(
 		uint32_t				aId) const
 	{
-		assert(aId < Component::NUM_IDS);
+		assert(aId > 0 && aId < Component::NUM_IDS);
 		const ComponentType& t = m_componentTypes[aId];
 		return t.m_persistence;
 	}
@@ -186,7 +189,7 @@ namespace tpublic
 	ComponentManager::GetComponentReplication(
 		uint32_t				aId) const
 	{
-		assert(aId < Component::NUM_IDS);
+		assert(aId > 0 && aId < Component::NUM_IDS);
 		const ComponentType& t = m_componentTypes[aId];
 		return t.m_replication;
 	}
@@ -195,6 +198,7 @@ namespace tpublic
 	ComponentManager::AsDebugString(
 		const ComponentBase*	aComponent) const
 	{
+		assert(aComponent->GetComponentId() > 0 && aComponent->GetComponentId() < Component::NUM_IDS);
 		const ComponentType& t = m_componentTypes[aComponent->GetComponentId()];
 
 		return t.m_schema.AsDebugString(aComponent);
@@ -205,6 +209,7 @@ namespace tpublic
 		IWriter*				aWriter,
 		const ComponentBase*	aComponent) const
 	{
+		assert(aComponent->GetComponentId() > 0 && aComponent->GetComponentId() < Component::NUM_IDS);
 		const ComponentType& t = m_componentTypes[aComponent->GetComponentId()];
 
 		t.m_schema.WriteNetwork(aWriter, aComponent);
@@ -215,6 +220,7 @@ namespace tpublic
 		IReader*				aReader,
 		ComponentBase*			aComponent) const
 	{
+		assert(aComponent->GetComponentId() > 0 && aComponent->GetComponentId() < Component::NUM_IDS);
 		const ComponentType& t = m_componentTypes[aComponent->GetComponentId()];
 
 		return t.m_schema.ReadNetwork(aReader, aComponent);
@@ -225,6 +231,7 @@ namespace tpublic
 		IWriter*				aWriter,
 		const ComponentBase*	aComponent) const
 	{
+		assert(aComponent->GetComponentId() > 0 && aComponent->GetComponentId() < Component::NUM_IDS);
 		const ComponentType& t = m_componentTypes[aComponent->GetComponentId()];
 
 		t.m_schema.WriteStorage(aWriter, aComponent);
@@ -236,6 +243,7 @@ namespace tpublic
 		ComponentBase*			aComponent,
 		const Manifest*			aManifest) const
 	{
+		assert(aComponent->GetComponentId() > 0 && aComponent->GetComponentId() < Component::NUM_IDS);
 		const ComponentType& t = m_componentTypes[aComponent->GetComponentId()];
 
 		return t.m_schema.ReadStorage(aManifest, aReader, aComponent);
@@ -246,6 +254,7 @@ namespace tpublic
 		const SourceNode*		aSource,
 		ComponentBase*			aComponent) const
 	{
+		assert(aComponent->GetComponentId() > 0 && aComponent->GetComponentId() < Component::NUM_IDS);
 		const ComponentType& t = m_componentTypes[aComponent->GetComponentId()];
 
 		t.m_schema.ReadSource(aSource, aComponent);
