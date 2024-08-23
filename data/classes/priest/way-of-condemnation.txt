@@ -402,6 +402,7 @@ aura condemnation:
 	type: debuff
 	duration: 100	
 	flags: [ unique magic ]
+	sound: spell_14
 	aura_effect repeat: 
 	{ 
 		update_interval: 10
@@ -415,7 +416,7 @@ ability condemnation:
 	string: "Condemnation"
 	description: "Inflicts damage to the target over 10 seconds."
 	range: 6
-	cooldowns: [ global spell_healing_lockout ]
+	cooldowns: [ global spell_fire_lockout ]
 	flags: [ spell target_other target_hostile ]
 	states: [ default in_combat ]
 	icon: icon_holy_condemnation

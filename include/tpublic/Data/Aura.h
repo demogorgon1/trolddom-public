@@ -200,6 +200,8 @@ namespace tpublic
 							m_statModifiers = std::make_unique<StatModifiers>(aChild);
 						else if(aChild->m_name == "charges")
 							m_charges = CombatFunction(aChild);
+						else if (aChild->m_name == "sound")
+							m_soundId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SOUND, aChild->GetIdentifier());
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 					}
@@ -221,6 +223,7 @@ namespace tpublic
 				m_charges.ToStream(aStream);
 				aStream->WriteUInt(m_encounterId);
 				aStream->WriteUInt(m_particleSystemId);
+				aStream->WriteUInt(m_soundId);
 			}
 			 
 			bool
@@ -257,6 +260,12 @@ namespace tpublic
 					if (!aStream->ReadUInt(m_particleSystemId))
 						return false;
 				}
+
+				if(!aStream->IsEnd())
+				{
+					if(!aStream->ReadUInt(m_soundId))
+						return false;
+				}
 				return true;
 			}
 
@@ -272,6 +281,7 @@ namespace tpublic
 			CombatFunction									m_charges;
 			uint32_t										m_encounterId = 0;
 			uint32_t										m_particleSystemId = 0;
+			uint32_t										m_soundId = 0;
 		};
 
 	}
