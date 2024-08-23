@@ -320,13 +320,14 @@ ability smite:
 	range: 6
 	cooldowns: [ global spell_fire_lockout ]
 	cast_time: 20
-	flags: [ spell target_other target_hostile interruptable ]
+	flags: [ spell offensive target_other target_hostile interruptable ]
 	states: [ default in_combat ]
 	icon: icon_smite
 	resource_cost mana: 12
 	target_particle_system: smite	
 	delay: 3
 	talent_tree: priest_condemnation
+	
 
 	direct_effect damage:
 	{	
