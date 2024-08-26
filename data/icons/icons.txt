@@ -387,6 +387,8 @@ sprites:
 	sprite icon_road : { tags: [ icon ] }
 	sprite icon_golden_dragon : { tags: [ icon ] }
 	sprite icon_aetheris_stronghold : { tags: [ icon ] }
+	sprite icon_star_3 : { tags: [ icon ] }
+	sprite icon_staff_6 : { tags: [ icon weapon_2h_staff ] icon_meta_data: !ICON_UNCOMMON_5{} }
 	
 }
 

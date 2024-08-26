@@ -31,15 +31,6 @@ namespace tpublic
 
 		static_assert(NUM_DAMAGE_TYPES <= 32); // Must fit into a bitfield
 
-		//enum DamageBase : uint8_t
-		//{
-		//	DAMAGE_BASE_RANGE,
-		//	DAMAGE_BASE_WEAPON,
-		//	DAMAGE_BASE_WEAPON_AVERAGE,
-		//	DAMAGE_BASE_RANGED,
-		//	DAMAGE_BASE_RANGED_AVERAGE
-		//};
-
 		inline uint32_t	
 		StringToFlag(
 			const char* aString)

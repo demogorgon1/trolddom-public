@@ -75,6 +75,59 @@ ability npc_firebolt:
 	}
 }
 
+cooldown npc_curse:
+{
+	duration: 80
+}
+
+ability npc_curse_tick:
+{
+	string: "Curse of Suffering"
+	icon: icon_holy_condemnation	
+	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]
+	
+	direct_effect damage:
+	{
+		damage_type: unholy
+		function: { expression: a a: [ [ 1 4 ] [ 10 10 ] ] elite_multiplier: 1.7 }			
+	}
+}
+
+aura npc_curse:
+{
+	string: "Curse of Suffering"
+	description: "Cursed."
+	type: debuff
+	icon: icon_holy_condemnation
+	duration: based_on_effects
+	flags: [ unique magic ]
+
+	aura_effect repeat: 
+	{ 
+		update_interval: 20
+		update_count: 6
+		ability: npc_curse_tick
+	}
+}
+
+ability npc_curse:
+{
+	string: "Curse of Suffering"
+	range: 6
+	cast_time: 15
+	cooldowns: [ global npc_curse ]
+	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
+	states: [ in_combat ]
+	icon: icon_holy_condemnation
+	delay: 3
+	
+	direct_effect apply_aura:
+	{
+		aura: npc_curse
+	}
+}
+
 cooldown npc_poison_bite:
 {
 	duration: 60

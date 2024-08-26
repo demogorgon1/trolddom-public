@@ -622,7 +622,12 @@ loot_table .dark_cove_goblin_commander_guzbrorg:
 	slots:
 	[
 		{
-			possibility: { loot_group: .dark_cove_goblin_commander_guzbrorg_quest_drop }			
+			possibility: 
+			{ 
+				loot_group: .dark_cove_goblin_commander_guzbrorg_quest_drop 
+				requirement self<must_not_have_completed_quest>: { id: .dark_cove_goblin_commander_guzbrorg_quest }
+				requirement self<must_not_have_active_quest>: { id: .dark_cove_goblin_commander_guzbrorg_quest }				
+			}			
 		}			
 	
 		!WORLD_DROPS {}
@@ -639,6 +644,35 @@ entity dark_cove_goblin_commander_guzbrorg: !NPC
 	_sprite_dead: goblin_boss_2_dead
 	_loot_table: .dark_cove_goblin_commander_guzbrorg
 	_creature_type: humanoid
+}
+
+loot_table .dark_cove_goblin_grimwort: 
+{
+	slots:
+	[
+		{
+			possibility: 
+			{ 
+				loot_group: .eldrin_the_enchanter_quest_item 
+				requirement self<must_have_active_quest>: { id: .eldrin_the_enchanter_1 }				
+			}			
+		}			
+	
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+entity dark_cove_goblin_grimwort: !NPC
+{
+	_string: "Grimwort"
+	_level: 6
+	_faction: monsters
+	_sprite: goblin_shaman_4
+	_sprite_dead: goblin_shaman_4_dead
+	_loot_table: .dark_cove_goblin_grimwort
+	_creature_type: humanoid
+	_abilities: [ { id: npc_curse } { id: npc_attack } ]
 }
 
 ##########################################################################################

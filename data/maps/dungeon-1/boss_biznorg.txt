@@ -7,6 +7,7 @@ loot_table .biznorg:
 {
 	slots:
 	[
+		{ possibility: { loot_group: eldrin_the_enchanter_quest_item_2 requirement self<must_have_active_quest>: { id: eldrin_the_enchanter_2 } } }
 		{ possibility: { loot_group: .biznorg  } }			
 		!WORLD_DROPS{}
 		!WORLD_DROPS_CLOTH{}

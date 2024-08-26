@@ -1,0 +1,140 @@
+dialogue_screen .eldrin_the_enchanter_greetings:
+{
+	text: 
+	[	
+		"Greetings."
+	]		
+	
+	options:
+	[
+		{ quest: .eldrin_the_enchanter_1 }
+		{ quest: eldrin_the_enchanter_2 }
+	]
+}
+
+dialogue_root .eldrin_the_enchanter_dialogue:
+{
+	.eldrin_the_enchanter_greetings: { }
+}
+
+entity .eldrin_the_enchanter: !NPC
+{
+	_string: "Eldrin the Enchanter"
+	_dialogue_root: .eldrin_the_enchanter_dialogue	
+	_sprite: man_21
+	_sprite_dead: man_21_dead	
+	_level: 10
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+##########################################################################################
+# Quest 1
+
+loot_group .eldrin_the_enchanter_quest_item: { }
+
+item .eldrin_the_enchanter_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .eldrin_the_enchanter_quest_item ]		
+	string: "Cursing Rod" 
+	icon: icon_staff_6
+	item_level: 6
+	flags: [ not_sellable unique ]
+}
+
+objective .eldrin_the_enchanter_1:
+{
+	string: "Cursing Rod"
+	collect_items: { item: .eldrin_the_enchanter_quest_item count: 1 }
+}
+
+quest .eldrin_the_enchanter_1:
+{
+	string: "Goblin Cursing Rod"
+
+	text:
+	[
+		"Locate Grimwort and acquire his wand."
+	]
+	
+	description: 
+	[
+		"Rumor has it that some goblin is running around with an interesting wand, or \"cursing rod\" as they like to call them."
+		"The location of this goblin, who goes by the name of Grimwort, is unknown. If you can locate him, kill him, and return his"
+		"wand to me I'll reward you."
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"How peculiar. I wasn't aware that goblins possessed this kind of magic."
+	]
+
+	objectives: [ .eldrin_the_enchanter_1 ]
+	reward_cash_multiplier: 3.7
+	next_quest: eldrin_the_enchanter_2
+	level: 6
+}
+
+##########################################################################################
+# Quest 2
+
+loot_group eldrin_the_enchanter_quest_item_2: { }
+
+item .eldrin_the_enchanter_quest_item_2:
+{
+	binds: when_picked_up
+	loot_groups: [ eldrin_the_enchanter_quest_item_2 ]		
+	string: "Glowing Rocks" 
+	icon: icon_stuff
+	item_level: 7	
+	flags: [ not_sellable unique ]
+}
+
+objective .eldrin_the_enchanter_2:
+{
+	string: "Glowing Rocks"
+	collect_items: { item: .eldrin_the_enchanter_quest_item_2 count: 1 }
+}
+
+quest eldrin_the_enchanter_2:
+{
+	string: "Magical Artifacts"
+
+	text:
+	[
+		"Locate a powerful goblin wizard under the mountains and secure his magic artifacts."
+	]
+	
+	description: 
+	[
+		"I'm surprised that these stupid creatures possess this kind of magical artifacts. Where are they coming from? I want you to"
+		"venture into the dungeons and seek out a more powerful goblin wizard than Grimwort. Please return to me any magical objects"
+		"you might find on such a creature."
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"This is similar to what was used to infuse Grimwort's wand with magical energy. Thank you, I'll try to figure out where it is"
+		"coming from."
+	]
+
+	objectives: [ .eldrin_the_enchanter_2 ]
+	reward_all_items: [ ring_eldrin_the_enchanter_1 ]
+	level: 7
+	type: dungeon
+	prerequisites: [ .eldrin_the_enchanter_1 ]
+}
+

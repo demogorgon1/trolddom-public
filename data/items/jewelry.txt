@@ -101,6 +101,7 @@ item neck_zuthyg_1:
 item ring_zuthyg_1:
 {
 	equipment_slots: [ finger_1 finger_2 ]
+	flags: [ unique ]
 	binds: when_picked_up
 	required_level: 10
 	icon: icon_ring_7
@@ -112,3 +113,16 @@ item ring_zuthyg_1:
 	loot_groups: [ zuthyg_the_golden ]
 	level_range: 12 	
 }
+
+item ring_eldrin_the_enchanter_1:
+{
+	equipment_slots: [ finger_1 finger_2 ]
+	binds: when_picked_up
+	required_level: 7
+	icon: icon_ring_2
+	rarity: rare
+	string: "Eldrin's Ring"
+	stat_weight constitution: 1
+	stat_weight health_per_5: 3
+}
+

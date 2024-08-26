@@ -167,6 +167,8 @@ sprites:
 	sprite woman_7: { dead: woman_7_dead }
 	sprite man_20: { dead: man_20_dead }
 	sprite spider_2: { dead: spider_2_dead }
+	sprite goblin_shaman_4: { dead: goblin_shaman_4_dead tags: [ goblin caster ] }
+	sprite man_21: { dead: man_21_dead }
 
 	cursor: { position: [ 0 144 ] }
 
@@ -179,6 +181,8 @@ sprites:
 	sprite woman_7_dead: { }
 	sprite man_20_dead: { }
 	sprite spider_2_dead: { }
+	sprite goblin_shaman_4_dead: { }
+	sprite man_21_dead: { }
 	
 }
 

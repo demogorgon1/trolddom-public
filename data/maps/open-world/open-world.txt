@@ -311,6 +311,18 @@ map_entity_spawn .dark_cove_goblin_commander_guzbrorg:
 	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
+map_entity_spawn .dark_cove_goblin_grimwort:
+{
+	entity dark_cove_goblin_grimwort: { weight: 1 }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn .eldrin_the_enchanter:
+{
+	entity .eldrin_the_enchanter: { weight: 1 }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
 map_entity_spawn .risen_spirit_7:
 {
 	entity risen_spirit_7: { weight: 1 }
@@ -627,6 +639,8 @@ map_palette .stuff:
 	entity_spawn .eldertree_woods_goblin_scout_5: [ 213 5 95 ]		
 	entity_spawn .dark_cove_goblin_6: [ 213 7 95 ]		
 	entity_spawn .dark_cove_goblin_commander_guzbrorg: [ 213 99 95 ]		
+	entity_spawn .dark_cove_goblin_grimwort: [ 113 199 93 ]		
+	entity_spawn .eldrin_the_enchanter: [ 114 121 97 ]		
 	entity_spawn .risen_spirit_7: [ 69 127 55 ]		
 	entity_spawn .sea_spirit_7: [ 69 127 155 ]		
 	entity_spawn .living_dead_8: [ 169 127 155 ]		
