@@ -59,4 +59,6 @@ achievement light_follower:
 	description: "Become a Follower of The Light." 
 	points: 10
 	icon: icon_holy
+	account_wide: true
+	available_in_front_end: true	
 }

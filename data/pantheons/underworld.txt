@@ -60,4 +60,6 @@ achievement underworld_follower:
 	description: "Become a Follower of The Underworld." 
 	points: 10
 	icon: icon_unholy
+	account_wide: true
+	available_in_front_end: true	
 }

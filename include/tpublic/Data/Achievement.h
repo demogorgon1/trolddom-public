@@ -124,6 +124,8 @@ namespace tpublic
 							m_noProgressValues = aChild->GetBool();
 						else if (aChild->m_name == "account_wide")
 							m_accountWide = aChild->GetBool();
+						else if (aChild->m_name == "available_in_front_end")
+							m_availableInFrontEnd = aChild->GetBool();
 						else if (aChild->m_name == "category")
 							m_categoryId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ACHIEVEMENT_CATEGORY, aChild->GetIdentifier());
 						else if (aChild->m_name == "root")
@@ -162,6 +164,7 @@ namespace tpublic
 				aStream->WriteUInts(m_needAchievementIds);
 				aStream->WriteBool(m_accountWide);
 				aStream->WriteUInt(m_killTriggerEntityId);
+				aStream->WriteBool(m_availableInFrontEnd);
 			}
 
 			bool
@@ -196,6 +199,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInt(m_killTriggerEntityId))
 					return false;
+				if (!aStream->ReadBool(m_availableInFrontEnd))
+					return false;
 				return true;
 			}
 
@@ -214,6 +219,7 @@ namespace tpublic
 			uint64_t							m_sortKey = 0;
 			bool								m_noProgressValues = false;
 			bool								m_accountWide = false;
+			bool								m_availableInFrontEnd = false;
 		};
 
 	}
