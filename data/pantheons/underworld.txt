@@ -52,3 +52,12 @@ ability underworld_pray:
 	direct_effect simple<pray>: underworld
 }
 
+achievement underworld_follower:
+{
+	category: worship
+	reputation_trigger underworld: !WORSHIP_LEVEL_2{}
+	string: "Follower of The Underworld" 
+	description: "Become a Follower of The Underworld." 
+	points: 10
+	icon: icon_unholy
+}

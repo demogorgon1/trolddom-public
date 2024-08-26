@@ -54,6 +54,44 @@ namespace tpublic
 				uint32_t			m_threshold = 0;
 			};
 
+			struct ReputationTrigger
+			{
+				ReputationTrigger()
+				{
+
+				}
+
+				ReputationTrigger(
+					const SourceNode*	aSource)
+				{					
+					m_factionId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_FACTION, aSource->m_name.c_str());
+					m_threshold = aSource->GetUInt32();
+				}
+
+				void
+				ToStream(
+					IWriter*			aWriter) const
+				{
+					aWriter->WriteUInt(m_factionId);
+					aWriter->WriteUInt(m_threshold);
+				}
+
+				bool
+				FromStream(
+					IReader*			aReader)
+				{
+					if(!aReader->ReadUInt(m_factionId))
+						return false;
+					if(!aReader->ReadUInt(m_threshold))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t			m_factionId = 0;
+				uint32_t			m_threshold = 0;				
+			};
+
 			void
 			Verify() const
 			{
@@ -96,6 +134,8 @@ namespace tpublic
 							m_killTriggerEntityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENTITY, aChild->GetIdentifier());
 						else if (aChild->m_tag == "stat_trigger")
 							m_statTrigger = StatTrigger(aChild);
+						else if (aChild->m_tag == "reputation_trigger")
+							m_reputationTrigger = ReputationTrigger(aChild);
 						else if(aChild->m_name == "need_achievements")
 							aChild->GetIdArray(DataType::ID_ACHIEVEMENT, m_needAchievementIds);
 						else
@@ -116,6 +156,7 @@ namespace tpublic
 				aStream->WriteUInt(m_rootId);
 				aStream->WriteUInt(m_iconSpriteId);
 				aStream->WriteOptionalObject(m_statTrigger);
+				aStream->WriteOptionalObject(m_reputationTrigger);
 				aStream->WriteUInt(m_sortKey);
 				aStream->WriteBool(m_noProgressValues);
 				aStream->WriteUInts(m_needAchievementIds);
@@ -141,7 +182,9 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInt(m_iconSpriteId))
 					return false;
-				if(!aStream->ReadOptionalObject(m_statTrigger))
+				if (!aStream->ReadOptionalObject(m_statTrigger))
+					return false;
+				if (!aStream->ReadOptionalObject(m_reputationTrigger))
 					return false;
 				if (!aStream->ReadUInt(m_sortKey))
 					return false;
@@ -157,19 +200,20 @@ namespace tpublic
 			}
 
 			// Public data
-			std::string						m_string;
-			std::string						m_description;
-			uint32_t						m_points = 10;
-			uint32_t						m_priority = 0;
-			uint32_t						m_categoryId = 0;
-			uint32_t						m_rootId = 0;
-			uint32_t						m_iconSpriteId = 0;
-			std::optional<StatTrigger>		m_statTrigger;
-			std::vector<uint32_t>			m_needAchievementIds;
-			uint32_t						m_killTriggerEntityId = 0;
-			uint64_t						m_sortKey = 0;
-			bool							m_noProgressValues = false;
-			bool							m_accountWide = false;
+			std::string							m_string;
+			std::string							m_description;
+			uint32_t							m_points = 10;
+			uint32_t							m_priority = 0;
+			uint32_t							m_categoryId = 0;
+			uint32_t							m_rootId = 0;
+			uint32_t							m_iconSpriteId = 0;
+			std::optional<StatTrigger>			m_statTrigger;
+			std::optional<ReputationTrigger>	m_reputationTrigger;
+			std::vector<uint32_t>				m_needAchievementIds;
+			uint32_t							m_killTriggerEntityId = 0;
+			uint64_t							m_sortKey = 0;
+			bool								m_noProgressValues = false;
+			bool								m_accountWide = false;
 		};
 
 	}

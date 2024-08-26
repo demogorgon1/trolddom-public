@@ -91,6 +91,7 @@ namespace tpublic
 						newValue = aMaxReputation;
 					i->second = newValue;
 					aOutReputationWasPositive = oldValue > 0;
+					m_wasUpdated = true;
 					return newValue - oldValue;
 				}
 
@@ -101,6 +102,7 @@ namespace tpublic
 					newValue = aMaxReputation;
 				aOutReputationWasPositive = false;
 				m_table.m_map[aFactionId] = newValue;
+				m_wasUpdated = true;
 				return newValue;
 			}
 
@@ -123,6 +125,9 @@ namespace tpublic
 
 			// Public data
 			Table			m_table;
+
+			// Internal
+			bool			m_wasUpdated = false;
 		};
 	}
 

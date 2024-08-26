@@ -50,3 +50,13 @@ ability light_pray:
 	icon: icon_holy
 	direct_effect simple<pray>: light
 }
+
+achievement light_follower:
+{
+	category: worship
+	reputation_trigger light: !WORSHIP_LEVEL_2{}
+	string: "Follower of The Light" 
+	description: "Become a Follower of The Light." 
+	points: 10
+	icon: icon_holy
+}
