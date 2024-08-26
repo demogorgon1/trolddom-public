@@ -411,5 +411,27 @@ sprites:
 	sprite grass_2_alt_2: { flags: [ tile_walkable ] }
 	sprite wood_floor_alt_1: { flags: [ tile_walkable ] }
 	sprite wood_floor_alt_2: { flags: [ tile_walkable ] }
-	
+
+	cursor: { position: [ 0 256 ] }
+	sprite shallow_water_1: { flags: [ tile_walkable tile_fishable ] borders: 
+		[ shallow_water_1_border_1 shallow_water_1_border_2 shallow_water_1_border_3 shallow_water_1_border_4 shallow_water_1_border_5 shallow_water_1_border_6 shallow_water_1_border_7
+		  shallow_water_1_border_8 shallow_water_1_border_9 shallow_water_1_border_10 shallow_water_1_border_11 shallow_water_1_border_12 shallow_water_1_border_13 shallow_water_1_border_14
+		  shallow_water_1_border_15 shallow_water_1_border_16 shallow_water_1_border_17 ] }	
+	sprite shallow_water_1_border_1: { }
+	sprite shallow_water_1_border_2: { }
+	sprite shallow_water_1_border_3: { }
+	sprite shallow_water_1_border_4: { }
+	sprite shallow_water_1_border_5: { }
+	sprite shallow_water_1_border_6: { }
+	sprite shallow_water_1_border_7: { }
+	sprite shallow_water_1_border_8: { }
+	sprite shallow_water_1_border_9: { }
+	sprite shallow_water_1_border_10: { }
+	sprite shallow_water_1_border_11: { }
+	sprite shallow_water_1_border_12: { }
+	sprite shallow_water_1_border_13: { }
+	sprite shallow_water_1_border_14: { }
+	sprite shallow_water_1_border_15: { }
+	sprite shallow_water_1_border_16: { }
+	sprite shallow_water_1_border_17: { }
 }

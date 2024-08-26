@@ -536,6 +536,7 @@ zone .zone_13:
 map_palette .tiles:
 {
 	tile water_1: [ 9 86 104 ]
+	tile shallow_water_1: [ 100 140 116 ]
 	tile pavement: [ 32 32 32 ]
 	tile mud: [ 67 61 32 ]
 	tile sand: [ 200 200 128 ]
