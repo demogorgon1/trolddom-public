@@ -28,7 +28,7 @@ namespace tpublic
 						const char*										aPath) const;
 		void		GenerateFromSinglePosition(
 						const Vec2&										aPosition,
-						const std::unordered_set<Vec2, Vec2::Hasher>&	aOpenSet,
+						const std::set<Vec2>&							aOpenSet,
 						uint32_t										aMaxDistance);
 		void		Filter(
 						std::function<uint32_t(uint32_t)>				aFunction);

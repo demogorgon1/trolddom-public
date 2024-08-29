@@ -142,7 +142,7 @@ namespace tpublic
 	void		
 	DistanceField::GenerateFromSinglePosition(
 		const Vec2&										aPosition,
-		const std::unordered_set<Vec2, Vec2::Hasher>&	aOpenSet,
+		const std::set<Vec2>&							aOpenSet,
 		uint32_t										aMaxDistance)
 	{
 		typedef std::multimap<uint32_t, Vec2> Queue;

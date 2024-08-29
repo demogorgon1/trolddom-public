@@ -60,6 +60,15 @@ namespace tpublic
 			return aOther.m_x == m_x && aOther.m_y == m_y;
 		}
 
+		bool
+		operator<(
+			const Vec2&	aOther) const
+		{
+			if(aOther.m_x == m_x)
+				return m_y < aOther.m_y;
+			return m_x < aOther.m_x;
+		}
+
 		// Public data
 		int32_t		m_x = 0;
 		int32_t		m_y = 0;

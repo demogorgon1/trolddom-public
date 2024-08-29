@@ -39,7 +39,7 @@ namespace tpublic::MapGenerators
 		if(aProbabilty == 0 || aProbabilty == 100)
 			return true;
 
-		tpublic::UniformDistribution<uint32_t> distribution(1, aProbabilty);
+		UniformDistribution<uint32_t> distribution(1, aProbabilty);
 		return distribution(m_random) <= aProbabilty;
 	}
 
@@ -51,7 +51,7 @@ namespace tpublic::MapGenerators
 		if(aMax <= aMin)
 			return aMin;
 
-		tpublic::UniformDistribution distribution(aMin, aMax);
+		UniformDistribution distribution(aMin, aMax);
 		return distribution(m_random);
 	}
 
@@ -221,7 +221,7 @@ namespace tpublic::MapGenerators
 	void		
 	World::Builder::IdentifyWalkableAreas()
 	{
-		std::unordered_set<Vec2, Vec2::Hasher> positions;
+		std::set<Vec2> positions;
 
 		for (int32_t y = 0; y < (int32_t)m_height; y++)
 		{
@@ -241,7 +241,7 @@ namespace tpublic::MapGenerators
 			Vec2 startPosition = *positions.begin();
 
 			// Flood-fill from there
-			std::unordered_set<Vec2, Vec2::Hasher> queue;
+			std::set<Vec2> queue;
 			queue.insert(startPosition);
 
 			WalkableArea* walkableArea = new WalkableArea();
@@ -322,7 +322,7 @@ namespace tpublic::MapGenerators
 
 		// Initialize queue with walkable area edge
 		{
-			std::unordered_set<Vec2, Vec2::Hasher> edge;
+			std::set<Vec2> edge;
 
 			for (const Vec2& position : walkableArea->m_positions)
 			{
@@ -453,6 +453,8 @@ namespace tpublic::MapGenerators
 				*p = 0;
 			p++;
 		}
+
+		printf("NoiseMap Hash = %08X\n", Hash::CRC_32(m_noiseMap, sizeof(uint32_t) * (size_t)(NOISE_MAP_SIZE * NOISE_MAP_SIZE)));
 	}
 
 	uint32_t		

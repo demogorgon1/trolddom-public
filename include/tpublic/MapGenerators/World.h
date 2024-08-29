@@ -237,18 +237,18 @@ namespace tpublic::MapGenerators
 				}
 
 				// Public data
-				std::unordered_set<Vec2, Vec2::Hasher>		m_positions;
+				std::set<Vec2>								m_positions;
 				bool										m_complete = false;
 			};
 
 			std::vector<std::unique_ptr<WalkableArea>>		m_walkableAreas;
-			std::unordered_set<Vec2, Vec2::Hasher>			m_walkable;
+			std::set<Vec2>									m_walkable;
 
 			static const int32_t NOISE_MAP_SIZE = 32;
 			uint32_t										m_noiseMap[NOISE_MAP_SIZE * NOISE_MAP_SIZE];			
 
 			std::vector<MapData::EntitySpawn>				m_entitySpawns;
-			std::unordered_set<Vec2, Vec2::Hasher>			m_entitySpawnPositions;
+			std::set<Vec2>									m_entitySpawnPositions;
 
 			struct MinorBoss
 			{
