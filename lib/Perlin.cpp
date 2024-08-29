@@ -113,7 +113,7 @@ namespace tpublic
 
 			for(int32_t i = 0; i < 256; i++)
 			{
-				std::uniform_int_distribution<size_t> distribution(0, values.size() - 1);
+				tpublic::UniformDistribution<size_t> distribution(0, values.size() - 1);
 				size_t j = distribution(aRandom);				
 				int32_t value = values[j];
 				Helpers::RemoveCyclicFromVector(values, j);

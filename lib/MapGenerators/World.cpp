@@ -39,7 +39,7 @@ namespace tpublic::MapGenerators
 		if(aProbabilty == 0 || aProbabilty == 100)
 			return true;
 
-		std::uniform_int_distribution<uint32_t> distribution(1, aProbabilty);
+		tpublic::UniformDistribution<uint32_t> distribution(1, aProbabilty);
 		return distribution(m_random) <= aProbabilty;
 	}
 
@@ -51,7 +51,7 @@ namespace tpublic::MapGenerators
 		if(aMax <= aMin)
 			return aMin;
 
-		std::uniform_int_distribution distribution(aMin, aMax);
+		tpublic::UniformDistribution distribution(aMin, aMax);
 		return distribution(m_random);
 	}
 
@@ -209,7 +209,7 @@ namespace tpublic::MapGenerators
 				const Data::Doodad* doodadData = m_manifest->GetById<Data::Doodad>(doodad.m_doodadId);
 				if (doodadData->m_spriteIds.size() > 0 && DoodadPlacement::Check(aOutMapData->m_tileMap, mapSize, doodadData, doodad.m_position, coverageMap))
 				{
-					std::uniform_int_distribution<size_t> distribution(0, doodadData->m_spriteIds.size() - 1);
+					tpublic::UniformDistribution<size_t> distribution(0, doodadData->m_spriteIds.size() - 1);
 					aOutMapData->m_doodads[doodad.m_position] = doodadData->m_spriteIds[distribution(m_random)];
 
 					DoodadPlacement::AddToCoverageMap(doodadData, doodad.m_position, coverageMap);

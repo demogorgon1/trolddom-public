@@ -3,6 +3,7 @@
 #include "IReader.h"
 #include "IWriter.h"
 #include "SourceNode.h"
+#include "UniformDistribution.h"
 
 namespace tpublic
 {
@@ -84,7 +85,7 @@ namespace tpublic
 			std::mt19937&			aRandom) const
 		{
 			assert(m_min <= m_max);
-			std::uniform_int_distribution distribution(m_min, m_max);
+			UniformDistribution distribution(m_min, m_max);
 			return distribution(aRandom);
 		}
 

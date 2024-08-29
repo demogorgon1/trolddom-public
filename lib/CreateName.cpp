@@ -26,7 +26,7 @@ namespace tpublic
 		const Data::NameTemplate::Possibility* possibility = NULL;
 		
 		{
-			std::uniform_int_distribution<uint32_t> distribution(1, aNameTemplate->m_totalWeight);
+			tpublic::UniformDistribution<uint32_t> distribution(1, aNameTemplate->m_totalWeight);
 			uint32_t roll = distribution(aRandom);
 			uint32_t sum = 0;
 			for(const std::unique_ptr<Data::NameTemplate::Possibility>& p : aNameTemplate->m_possibilities)

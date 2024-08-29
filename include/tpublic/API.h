@@ -17,6 +17,7 @@
 #include "RangeBasedSet.h"
 #include "Rarity.h"
 #include "UIntRange.h"
+#include "UniformDistribution.h"
 #include "UTF8.h"
 #include "Vec2.h"
 

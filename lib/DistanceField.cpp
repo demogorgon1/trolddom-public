@@ -2,6 +2,7 @@
 
 #include <tpublic/DistanceField.h>
 #include <tpublic/Image.h>
+#include <tpublic/UniformDistribution.h>
 #include <tpublic/Vec2.h>
 
 namespace tpublic
@@ -105,7 +106,7 @@ namespace tpublic
 			}
 			else
 			{
-				std::uniform_int_distribution<uint32_t> distribution(0, numCandidates - 1);
+				UniformDistribution<uint32_t> distribution(0, numCandidates - 1);
 				position = candidatePositions[distribution(aRandom)];
 			}
 

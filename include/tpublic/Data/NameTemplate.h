@@ -117,7 +117,7 @@ namespace tpublic
 					std::mt19937&		aRandom) const
 				{
 					assert(m_type == TYPE_STRING && m_string.size() > 0);
-					std::uniform_int_distribution<size_t> distribution(0, m_string.size() - 1);
+					tpublic::UniformDistribution<size_t> distribution(0, m_string.size() - 1);
 					return m_string[distribution(aRandom)].c_str();
 				}
 
@@ -126,7 +126,7 @@ namespace tpublic
 					std::mt19937&		aRandom) const
 				{
 					assert(m_type == TYPE_WORD && m_wordTagContextId.size() > 0);
-					std::uniform_int_distribution<size_t> distribution(0, m_wordTagContextId.size() - 1);
+					tpublic::UniformDistribution<size_t> distribution(0, m_wordTagContextId.size() - 1);
 					return m_wordTagContextId[distribution(aRandom)];
 				}
 
@@ -135,7 +135,7 @@ namespace tpublic
 					std::mt19937&		aRandom) const
 				{
 					assert(m_type == TYPE_GENERATED_NAME && m_nameWordGeneratorId.size() > 0);
-					std::uniform_int_distribution<size_t> distribution(0, m_nameWordGeneratorId.size() - 1);
+					tpublic::UniformDistribution<size_t> distribution(0, m_nameWordGeneratorId.size() - 1);
 					return m_nameWordGeneratorId[distribution(aRandom)];
 				}
 

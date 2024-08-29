@@ -84,7 +84,7 @@ namespace tpublic
 			std::mt19937&			aRandom) const
 		{
 			assert(m_min <= m_max);
-			std::uniform_int_distribution distribution(m_min, m_max);
+			tpublic::UniformDistribution distribution(m_min, m_max);
 			return distribution(aRandom);
 		}
 

@@ -129,7 +129,7 @@ namespace tpublic
 				if(t.size() == 1)
 					return t[0];
 				
-				std::uniform_int_distribution<size_t> distribution(0, t.size() - 1);
+				tpublic::UniformDistribution<size_t> distribution(0, t.size() - 1);
 				return t[distribution(aRandom)];
 			}
 

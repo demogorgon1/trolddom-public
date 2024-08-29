@@ -249,7 +249,7 @@ namespace tpublic::WordList
 				if(m_words.size() == 1)
 					return m_words[0];
 
-				std::uniform_int_distribution<size_t> distribution(0, m_words.size() - 1);
+				tpublic::UniformDistribution<size_t> distribution(0, m_words.size() - 1);
 				return m_words[distribution(aRandom)];
 			}
 

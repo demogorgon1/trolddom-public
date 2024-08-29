@@ -6,6 +6,7 @@
 #include <tpublic/Systems/Gateway.h>
 
 #include <tpublic/TimeSeed.h>
+#include <tpublic/UniformDistribution.h>
 
 namespace tpublic::Systems
 {
@@ -49,7 +50,7 @@ namespace tpublic::Systems
 			if(gateway->m_maps.size() > 1)
 			{
 				std::mt19937 random(timeSeed.m_seed);
-				std::uniform_int_distribution<size_t> distribution(0, gateway->m_maps.size() - 1);
+				UniformDistribution<size_t> distribution(0, gateway->m_maps.size() - 1);
 				gateway->m_activeGatewayInstance.m_mapId = gateway->m_maps[distribution(random)];
 			}
 			else

@@ -121,7 +121,7 @@ namespace tpublic::DirectEffects
 				if(playerPrivate->m_professions.HasProfessionSkill(fishingProfessionId, skillRequired))
 				{
 					// Each tick has 10% chance of making a splash
-					std::uniform_int_distribution<uint32_t> distribution(1, 100);
+					tpublic::UniformDistribution<uint32_t> distribution(1, 100);
 					if(distribution(aRandom) < 10)
 					{
 						uint32_t fishingSplashEntityId = aManifest->GetExistingIdByName<tpublic::Data::Entity>("fishing_splash");

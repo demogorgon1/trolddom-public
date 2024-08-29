@@ -1,5 +1,7 @@
 #pragma once
 
+#include "UniformDistribution.h"
+
 namespace tpublic
 {
 
@@ -84,7 +86,7 @@ namespace tpublic
 
 			if(aVector.size() > 1)
 			{
-				std::uniform_int_distribution<size_t> distribution(0, aVector.size() - 1);
+				UniformDistribution<size_t> distribution(0, aVector.size() - 1);
 				i = distribution(aRandom);
 			}
 
@@ -103,7 +105,7 @@ namespace tpublic
 			if(aMin == aMax)
 				return aMin;
 
-			std::uniform_int_distribution<_T> distribution(aMin, aMax);
+			UniformDistribution<_T> distribution(aMin, aMax);
 			return distribution(aRandom);
 		}	
 
@@ -117,7 +119,7 @@ namespace tpublic
 				return NULL;
 			if(aVector.size() == 1)
 				return &aVector[0];
-			std::uniform_int_distribution<size_t> distribution(0, aVector.size() - 1);
+			UniformDistribution<size_t> distribution(0, aVector.size() - 1);
 			return &aVector[distribution(aRandom)];
 		}
 		

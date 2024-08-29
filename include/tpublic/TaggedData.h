@@ -146,7 +146,7 @@ namespace tpublic
 						filteredTotalWeight += t.m_weight;
 				}
 
-				std::uniform_int_distribution<uint32_t> distribution(1, filteredTotalWeight);
+				tpublic::UniformDistribution<uint32_t> distribution(1, filteredTotalWeight);
 				uint32_t roll = distribution(aRandom);
 
 				uint32_t sum = 0;
@@ -174,7 +174,7 @@ namespace tpublic
 
 				assert(m_totalWeight > 0);
 
-				std::uniform_int_distribution<uint32_t> distribution(1, m_totalWeight);
+				tpublic::UniformDistribution<uint32_t> distribution(1, m_totalWeight);
 				uint32_t roll = distribution(aRandom);
 				
 				uint32_t sum = 0;
@@ -221,7 +221,7 @@ namespace tpublic
 
 				assert(filteredTotalWeight > 0);
 
-				std::uniform_int_distribution<uint32_t> distribution(1, filteredTotalWeight);
+				tpublic::UniformDistribution<uint32_t> distribution(1, filteredTotalWeight);
 				uint32_t roll = distribution(aRandom);
 
 				uint32_t sum = 0;

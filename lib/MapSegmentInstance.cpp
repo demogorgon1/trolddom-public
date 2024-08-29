@@ -173,12 +173,12 @@ namespace tpublic
 			Vec2 position;
 
 			{
-				std::uniform_int_distribution<int32_t> distribution(addRange.m_min.m_x, addRange.m_max.m_x);
+				tpublic::UniformDistribution<int32_t> distribution(addRange.m_min.m_x, addRange.m_max.m_x);
 				position.m_x = distribution(aRandom);
 			}
 
 			{
-				std::uniform_int_distribution<int32_t> distribution(addRange.m_min.m_y, addRange.m_max.m_y);
+				tpublic::UniformDistribution<int32_t> distribution(addRange.m_min.m_y, addRange.m_max.m_y);
 				position.m_y = distribution(aRandom);
 			}
 
@@ -332,7 +332,7 @@ namespace tpublic
 				size_t randomIndex;
 				
 				{
-					std::uniform_int_distribution<size_t> distribution(0, candidates.size() - 1);
+					tpublic::UniformDistribution<size_t> distribution(0, candidates.size() - 1);
 					randomIndex = distribution(aRandom);
 				}
 
@@ -347,7 +347,7 @@ namespace tpublic
 				{
 					for (;;)
 					{
-						std::uniform_int_distribution<size_t> distribution(0, positions.size() - 1);
+						tpublic::UniformDistribution<size_t> distribution(0, positions.size() - 1);
 						Vec2 position = positions[distribution(aRandom)];
 
 						m_generatedTileMap[position.m_x + position.m_y * m_size.m_x] = defaultFloorTile;

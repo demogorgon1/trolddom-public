@@ -47,7 +47,7 @@ namespace tpublic
 				return true;
 			}
 
-			std::uniform_int_distribution<uint32_t> distribution(1, m_totalWeight);
+			tpublic::UniformDistribution<uint32_t> distribution(1, m_totalWeight);
 			uint32_t roll = distribution(aRandom);		
 			uint32_t sum = 0;
 

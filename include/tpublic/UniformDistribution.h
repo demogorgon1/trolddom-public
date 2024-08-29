@@ -3,7 +3,7 @@
 namespace tpublic
 {
 
-	// We need our own of these since std::uniform_int_distribution isn't generating the same numbers across different platforms
+	// We need our own of these since tpublic::UniformDistribution isn't generating the same numbers across different platforms
 	template <typename _T>
 	class UniformDistribution
 	{

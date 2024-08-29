@@ -266,7 +266,7 @@ namespace tpublic
 			{
 				// Should we mutate at all?
 				{
-					std::uniform_int_distribution<uint32_t> distribution(1, 100);
+					tpublic::UniformDistribution<uint32_t> distribution(1, 100);
 					if(distribution(aRandom) > m_mutationChance)
 						return m_id;
 				}
@@ -275,7 +275,7 @@ namespace tpublic
 				uint32_t terrainId = 0;
 
 				{
-					std::uniform_int_distribution<uint32_t> distribution(1, m_mutationTotalWeight);
+					tpublic::UniformDistribution<uint32_t> distribution(1, m_mutationTotalWeight);
 					uint32_t roll = distribution(aRandom);
 					uint32_t sum = 0;
 					for(const Mutation& mutation : m_mutations)

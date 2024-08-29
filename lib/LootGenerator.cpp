@@ -77,7 +77,7 @@ namespace tpublic
 		{
 			if(lootTable->m_cash.has_value())
 			{
-				std::uniform_int_distribution<int64_t> distribution(lootTable->m_cash->m_min, lootTable->m_cash->m_max);
+				tpublic::UniformDistribution<int64_t> distribution(lootTable->m_cash->m_min, lootTable->m_cash->m_max);
 				aLootable->m_availableCash = distribution(aRandom);
 				aLootable->m_cash = aLootable->m_availableCash > 0;
 			}
@@ -86,7 +86,7 @@ namespace tpublic
 				const NPCMetrics::Level* npcMetricsLevel = m_manifest->m_npcMetrics.GetLevel(aLevel);
 				if (npcMetricsLevel != NULL)
 				{
-					std::uniform_int_distribution<uint32_t> distribution(npcMetricsLevel->m_cash.m_min, npcMetricsLevel->m_cash.m_max);
+					tpublic::UniformDistribution<uint32_t> distribution(npcMetricsLevel->m_cash.m_min, npcMetricsLevel->m_cash.m_max);
 					aLootable->m_availableCash = (int64_t)distribution(aRandom);
 
 					if(aLootable->m_availableCash > 0 && aIsElite)
@@ -169,7 +169,7 @@ namespace tpublic
 
 			if(entryCount > 0)
 			{
-				std::uniform_int_distribution<uint32_t> distribution(1, accumWeight);
+				tpublic::UniformDistribution<uint32_t> distribution(1, accumWeight);
 				uint32_t possibilityRoll = distribution(aRandom);
 				uint32_t lootGroupId = 0;
 
@@ -197,7 +197,7 @@ namespace tpublic
 						{
 							size_t totalItemCount = group->m_defaultLevelBucket.m_itemIds.size() + levelBucket->m_itemIds.size();
 							assert(totalItemCount > 0);
-							std::uniform_int_distribution<size_t> d(0, totalItemCount - 1);
+							tpublic::UniformDistribution<size_t> d(0, totalItemCount - 1);
 							size_t roll = d(aRandom);
 							if (roll < group->m_defaultLevelBucket.m_itemIds.size())
 								itemId = group->m_defaultLevelBucket.m_itemIds[roll];
@@ -206,7 +206,7 @@ namespace tpublic
 						}
 						else if (group->m_defaultLevelBucket.m_itemIds.size() > 0)
 						{
-							std::uniform_int_distribution<size_t> d(0, group->m_defaultLevelBucket.m_itemIds.size() - 1);
+							tpublic::UniformDistribution<size_t> d(0, group->m_defaultLevelBucket.m_itemIds.size() - 1);
 							size_t roll = d(aRandom);
 							itemId = group->m_defaultLevelBucket.m_itemIds[roll];
 						}

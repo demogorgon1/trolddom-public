@@ -184,7 +184,7 @@ namespace tpublic
 			_T											aMin,
 			_T											aMax)
 		{
-			std::uniform_int_distribution<_T> distribution(aMin, aMax);
+			tpublic::UniformDistribution<_T> distribution(aMin, aMax);
 			return distribution(_GetRandom());
 		}
 

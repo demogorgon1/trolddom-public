@@ -3,6 +3,7 @@
 #include "Hash.h"
 #include "IReader.h"
 #include "IWriter.h"
+#include "UniformDistribution.h"
 
 namespace tpublic::MarkovChainText
 {
@@ -184,7 +185,7 @@ namespace tpublic::MarkovChainText
 			Get(
 				std::mt19937&																	aRandom) const
 			{
-				std::uniform_int_distribution<uint32_t> distribution(1, m_totalWeight);
+				UniformDistribution<uint32_t> distribution(1, m_totalWeight);
 				uint32_t roll = distribution(aRandom);
 
 				// FIXME: sort entries and do binary search

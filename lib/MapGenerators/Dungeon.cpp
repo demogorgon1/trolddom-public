@@ -125,7 +125,7 @@ namespace tpublic::MapGenerators
 			}
 			else
 			{
-				std::uniform_int_distribution<size_t> distribution(0, possibleRootRooms.size() - 1);
+				tpublic::UniformDistribution<size_t> distribution(0, possibleRootRooms.size() - 1);
 				rootRoom = possibleRootRooms[distribution(m_random)];
 			}
 		}
@@ -170,7 +170,7 @@ namespace tpublic::MapGenerators
 			
 			if (m_openConnectors.size() > 1)
 			{
-				std::uniform_int_distribution<size_t> distribution(0, m_openConnectors.size() - 1);
+				tpublic::UniformDistribution<size_t> distribution(0, m_openConnectors.size() - 1);
 				i = distribution(m_random);
 			}
 
@@ -199,7 +199,7 @@ namespace tpublic::MapGenerators
 
 			if(candidates.size() > 1)
 			{
-				std::uniform_int_distribution<uint32_t> distribution(1, totalWeight);
+				tpublic::UniformDistribution<uint32_t> distribution(1, totalWeight);
 				uint32_t roll = distribution(m_random);
 				uint32_t sum = 0;
 
@@ -274,7 +274,7 @@ namespace tpublic::MapGenerators
 
 				if(matchingConnectors.size() > 1)
 				{
-					std::uniform_int_distribution<size_t> distribution(0, matchingConnectors.size() - 1);
+					tpublic::UniformDistribution<size_t> distribution(0, matchingConnectors.size() - 1);
 					size_t i = distribution(m_random);
 					match = matchingConnectors[i];
 					matchingConnectors.erase(matchingConnectors.begin() + i);
@@ -462,7 +462,7 @@ namespace tpublic::MapGenerators
 		const Data::MapSegment* mapSegment = NULL;
 
 		{
-			std::uniform_int_distribution<uint32_t> distribution(1, aSourceRoom->m_totalSegmentWeight);
+			tpublic::UniformDistribution<uint32_t> distribution(1, aSourceRoom->m_totalSegmentWeight);
 			uint32_t roll = distribution(m_random);			
 			uint32_t weightSum = 0;
 

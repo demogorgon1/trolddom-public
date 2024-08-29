@@ -369,7 +369,7 @@ namespace tpublic
 
 								if(paletteEntry->m_tileSpriteIds.size() > 1)
 								{
-									std::uniform_int_distribution<size_t> distribution(0, paletteEntry->m_tileSpriteIds.size() - 1);
+									tpublic::UniformDistribution<size_t> distribution(0, paletteEntry->m_tileSpriteIds.size() - 1);
 									m_tiles[offset] = paletteEntry->m_tileSpriteIds[distribution(aRandom)];
 								}
 								else if(paletteEntry->m_tileSpriteIds.size() == 1)
@@ -384,7 +384,7 @@ namespace tpublic
 
 									if (paletteEntry->m_coverTileSpriteIds.size() > 1)
 									{
-										std::uniform_int_distribution<size_t> distribution(0, paletteEntry->m_coverTileSpriteIds.size() - 1);
+										tpublic::UniformDistribution<size_t> distribution(0, paletteEntry->m_coverTileSpriteIds.size() - 1);
 										m_coverTiles[offset] = paletteEntry->m_coverTileSpriteIds[distribution(aRandom)];
 									}
 									else if (paletteEntry->m_coverTileSpriteIds.size() == 1)
@@ -405,7 +405,7 @@ namespace tpublic
 									}
 									else
 									{
-										std::uniform_int_distribution<size_t> distribution(0, paletteEntry->m_mapPlayerSpawnIds.size() - 1);
+										tpublic::UniformDistribution<size_t> distribution(0, paletteEntry->m_mapPlayerSpawnIds.size() - 1);
 										t.m_id = paletteEntry->m_mapPlayerSpawnIds[distribution(aRandom)];
 									}
 
@@ -424,7 +424,7 @@ namespace tpublic
 									}
 									else
 									{
-										std::uniform_int_distribution<size_t> distribution(0, paletteEntry->m_mapPortalIds.size() - 1);
+										tpublic::UniformDistribution<size_t> distribution(0, paletteEntry->m_mapPortalIds.size() - 1);
 										t.m_id = paletteEntry->m_mapPortalIds[distribution(aRandom)];
 									}
 
@@ -443,7 +443,7 @@ namespace tpublic
 									}
 									else
 									{
-										std::uniform_int_distribution<size_t> distribution(0, paletteEntry->m_mapEntitySpawnIds.size() - 1);
+										tpublic::UniformDistribution<size_t> distribution(0, paletteEntry->m_mapEntitySpawnIds.size() - 1);
 										t.m_id = paletteEntry->m_mapEntitySpawnIds[distribution(aRandom)];
 									}
 
@@ -462,7 +462,7 @@ namespace tpublic
 									}
 									else
 									{
-										std::uniform_int_distribution<size_t> distribution(0, paletteEntry->m_mapSegmentConnectorIds.size() - 1);
+										tpublic::UniformDistribution<size_t> distribution(0, paletteEntry->m_mapSegmentConnectorIds.size() - 1);
 										t.m_id = paletteEntry->m_mapSegmentConnectorIds[distribution(aRandom)];
 									}
 
@@ -619,7 +619,7 @@ namespace tpublic
 										else
 										{
 											TP_CHECK(m_faceSpriteIds.size() > 1);
-											std::uniform_int_distribution<size_t> distribution(0, m_faceSpriteIds.size() - 1);
+											tpublic::UniformDistribution<size_t> distribution(0, m_faceSpriteIds.size() - 1);
 											spriteId = m_faceSpriteIds[distribution(aRandom)];
 										}
 									}
