@@ -1595,7 +1595,7 @@ namespace tpublic::MapGenerators
 		MapGeneratorRuntime*			aMapGeneratorRuntime,
 		uint32_t						aSeed,
 		const MapData*					aSourceMapData,
-		const char*						/*aDebugImagePath*/,
+		const char*						aDebugImagePath,
 		std::unique_ptr<MapData>&		aOutMapData) const 
 	{
 		Builder builder;
@@ -1620,7 +1620,8 @@ namespace tpublic::MapGenerators
 
 		builder.CreateMapData(aSourceMapData, aOutMapData);
 
-		aOutMapData->WriteDebugTileMapPNG(aManifest, "mapdata.png");
+		if(aDebugImagePath != NULL && aDebugImagePath[0] != '\0')
+			aOutMapData->WriteDebugTileMapPNG(aManifest, aDebugImagePath);
 
 		return true;
 	}
