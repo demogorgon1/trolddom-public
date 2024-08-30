@@ -9,11 +9,11 @@ loot_group world_drops_epic: {}
 
 !define WORLD_DROPS
 {
-	possibility: { weight: 550 }
+	possibility: { weight: 950 }
 	possibility: { weight: 500 loot_group: world_drops_junk }
-	possibility: { weight: 400 loot_group: world_drops_consumable }	
-	possibility: { weight: 70 loot_group: world_drops_uncommon }	
-	possibility: { weight: 8 loot_group: world_drops_rare }	
+	possibility: { weight: 100 loot_group: world_drops_consumable }	
+	possibility: { weight: 85 loot_group: world_drops_uncommon }	
+	possibility: { weight: 10 loot_group: world_drops_rare }	
 	possibility: { weight: 1 loot_group: world_drops_epic }	
 		
 	<exists _extra_possibility> possibility: @_extra_possibility
