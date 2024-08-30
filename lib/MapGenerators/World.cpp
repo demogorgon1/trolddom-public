@@ -235,6 +235,8 @@ namespace tpublic::MapGenerators
 			}
 		}
 
+		uint32_t nextWalkableAreaId = 0;
+
 		while(positions.size() > 0)
 		{
 			// Grab walkable position not assigned to an area yet
@@ -245,6 +247,7 @@ namespace tpublic::MapGenerators
 			queue.insert(startPosition);
 
 			WalkableArea* walkableArea = new WalkableArea();
+			walkableArea->m_id = nextWalkableAreaId++;
 			m_walkableAreas.push_back(std::unique_ptr<WalkableArea>(walkableArea));
 
 			while(queue.size() > 0)
@@ -268,6 +271,8 @@ namespace tpublic::MapGenerators
 			const std::unique_ptr<WalkableArea>& aLHS,
 			const std::unique_ptr<WalkableArea>& aRHS)
 		{
+			if(aLHS->m_positions.size() == aRHS->m_positions.size())
+				return aLHS->m_id < aRHS->m_id;
 			return aLHS->m_positions.size() < aRHS->m_positions.size();
 		});
 	}
@@ -453,8 +458,6 @@ namespace tpublic::MapGenerators
 				*p = 0;
 			p++;
 		}
-
-		printf("NoiseMap Hash = %08X\n", Hash::CRC_32(m_noiseMap, sizeof(uint32_t) * (size_t)(NOISE_MAP_SIZE * NOISE_MAP_SIZE)));
 	}
 
 	uint32_t		

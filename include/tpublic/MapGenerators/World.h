@@ -237,6 +237,7 @@ namespace tpublic::MapGenerators
 				}
 
 				// Public data
+				uint32_t									m_id = 0;
 				std::set<Vec2>								m_positions;
 				bool										m_complete = false;
 			};
