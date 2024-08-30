@@ -20,15 +20,16 @@ namespace tpublic
 				memset(&x, 0, sizeof(x));
 				time_t t = (time_t)aTimeStamp;
 				#if defined(WIN32)
-					localtime_s(&x, &t);
+					gmtime_s(&x, &t);
 				#else
-					localtime_r(&t, &x);
+					gmtime_r(&t, &x);
 				#endif
 				m_year = (uint32_t)x.tm_year;
 				m_month = (uint32_t)x.tm_mon;
 				m_week = (uint32_t)x.tm_yday / 7;
 				m_day = (uint32_t)x.tm_mday;
 				m_hour = (uint32_t)x.tm_hour;
+				m_minute = (uint32_t)x.tm_min;
 			}
 
 			uint64_t
@@ -40,6 +41,14 @@ namespace tpublic
 
 				switch(aTimeSeedType)
 				{
+				case TimeSeed::TYPE_MINUTELY:
+					x.tm_year = (int)m_year;
+					x.tm_mon = (int)m_month;
+					x.tm_mday = (int)m_day;
+					x.tm_hour = (int)m_hour;
+					x.tm_min = (int)m_minute;
+					break;
+
 				case TimeSeed::TYPE_HOURLY:
 					x.tm_year = (int)m_year;
 					x.tm_mon = (int)m_month;
@@ -71,7 +80,11 @@ namespace tpublic
 					break;
 				}
 
-				return (uint64_t)mktime(&x);
+				#if defined(WIN32)
+					return (uint64_t)_mkgmtime(&x);
+				#else
+					return (uint64_t)timegm(&x);
+				#endif
 			}
 
 			uint64_t
@@ -83,6 +96,7 @@ namespace tpublic
 
 				switch(aTimeSeedType)
 				{
+				case TimeSeed::TYPE_MINUTELY:	return GetPeriodTimeStamp(aTimeSeedType) + 60;
 				case TimeSeed::TYPE_HOURLY:		return GetPeriodTimeStamp(aTimeSeedType) + 60 * 60;
 				case TimeSeed::TYPE_DAILY:		return GetPeriodTimeStamp(aTimeSeedType) + 60 * 60 * 24;
 				case TimeSeed::TYPE_WEEKLY:		return GetPeriodTimeStamp(aTimeSeedType) + 60 * 60 * 24 * 7;
@@ -114,7 +128,7 @@ namespace tpublic
 			void
 			DebugPrint() const
 			{
-				printf("%u-%02u-%02u (week %u, hour %u)\n", m_year + 1900, m_month + 1, m_day, m_week + 1, m_hour);
+				printf("%u-%02u-%02u (week %u, hour %u, minute %u)\n", m_year + 1900, m_month + 1, m_day, m_week + 1, m_hour, m_minute);
 			}
 
 			// Public data
@@ -123,6 +137,7 @@ namespace tpublic
 			uint32_t	m_week = 0;
 			uint32_t	m_day = 0;
 			uint32_t	m_hour = 0;
+			uint32_t	m_minute = 0;
 		};
 
 	}
@@ -134,6 +149,8 @@ namespace tpublic
 		const char*			aString)
 	{
 		std::string_view t(aString);
+		if (t == "minutely")
+			return TYPE_MINUTELY;
 		if (t == "hourly")
 			return TYPE_HOURLY;
 		if (t == "daily")

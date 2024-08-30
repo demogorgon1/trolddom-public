@@ -13,6 +13,7 @@ namespace tpublic
 		{
 			INVALID_TYPE,
 
+			TYPE_MINUTELY,
 			TYPE_HOURLY,
 			TYPE_DAILY,
 			TYPE_WEEKLY,

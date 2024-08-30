@@ -114,12 +114,21 @@ namespace tpublic
 
 			fclose(f);
 
-			std::filesystem::rename(tmpPath, m_path);
+			for(uint32_t i = 0; i < 10; i++)
+			{
+				std::error_code ec;
+				std::filesystem::rename(tmpPath, m_path, ec);
+				if(!ec)
+					break;
+
+				printf("failed, will try again\n");
+				std::this_thread::sleep_for(std::chrono::milliseconds(200));
+			}
 		}
-		catch(...)
+		catch(std::exception& e)
 		{
 			fclose(f);
-			TP_CHECK(false, "Failed to save persistent id table: %s", tmpPath);
+			TP_CHECK(false, "Failed to save persistent id table: %s (%s)", tmpPath, e.what());
 		}
 	}
 
