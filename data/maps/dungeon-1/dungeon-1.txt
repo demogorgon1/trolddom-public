@@ -43,6 +43,7 @@ map_palette .stuff:
 	entity_spawn fireplace: [ 250 43 66 ]		
 	entity_spawn fireplace_unlit: [ 250 243 66 ]		
 	entity_spawn bonfire: [ 251 43 66 ]		
+	entity_spawn demo_limit: [ 13 193 16 ]	
 
 	entity_spawn .goblin_caster: [ 255 0 0 ]
 	entity_spawn .goblin_melee: [ 128 0 0 ]

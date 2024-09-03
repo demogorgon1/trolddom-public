@@ -85,3 +85,10 @@ map_entity_spawn default_chest:
 
 	entity default_chest: { init_state: default }
 }
+
+map_entity_spawn demo_limit:
+{
+	entity demo_limit: { init_state: default }
+}
+
+

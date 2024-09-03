@@ -276,6 +276,10 @@ namespace tpublic
 		{
 			m_manifest->m_changelog = std::make_unique<Document>(aNode);
 		}
+		else if (aNode->m_name == "changelog_demo")
+		{
+			m_manifest->m_changelogDemo = std::make_unique<Document>(aNode);
+		}
 		else if(aNode->IsAnonymousObject())
 		{
 			aNode->ForEachChild([&](

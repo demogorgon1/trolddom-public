@@ -24,7 +24,9 @@ namespace tpublic
 				POSITION_FLAG_MOVING		= 0x04,
 				POSITION_FLAG_SUPER_USER	= 0x08,
 				POSITION_FLAG_INVISIBLE		= 0x10,
-				POSITION_FLAG_LARGE			= 0x20
+				POSITION_FLAG_LARGE			= 0x20,
+				POSITION_FLAG_DEMO_ONLY		= 0x40,
+				POSITION_FLAG_DEMO_PLAYER	= 0x80,
 			};
 
 			enum Field : uint32_t
@@ -39,6 +41,20 @@ namespace tpublic
 			{
 				aSchema->Define(ComponentSchema::TYPE_VEC2, FIELD_POSITION, NULL, offsetof(Position, m_position));
 				aSchema->DefineCustomPODNoSource<uint8_t>(FIELD_POSITION_FLAGS, offsetof(Position, m_positionFlags));
+
+				aSchema->AddSourceModifier<Position>("blocking", [](
+					Position*			aPosition,
+					const SourceNode*	/*aSource*/)
+				{
+					aPosition->m_positionFlags |= POSITION_FLAG_BLOCKING;
+				});
+
+				aSchema->AddSourceModifier<Position>("demo_only", [](
+					Position*			aPosition,
+					const SourceNode*	/*aSource*/)
+				{
+					aPosition->m_positionFlags |= POSITION_FLAG_DEMO_ONLY;
+				});
 			}
 
 			void
@@ -51,16 +67,6 @@ namespace tpublic
 				m_detached = false;
 				m_updatedOnServer = false;
 			}
-
-			//int32_t
-			//DistqanceSquared(
-			//	const Position*		aOther) const
-			//{
-			//	if(aPosition->)
-
-			//	Vec2 p1 = m_position;
-			//	if()
-			//}
 
 			// Helpers
 			bool	IsBlocking() const { return m_positionFlags & POSITION_FLAG_BLOCKING; }
@@ -81,6 +87,12 @@ namespace tpublic
 			bool	IsLarge() const { return m_positionFlags & POSITION_FLAG_LARGE; }
 			void	SetLarge() { m_positionFlags |= POSITION_FLAG_LARGE; }
 			void	ClearLarge() { m_positionFlags &= ~POSITION_FLAG_LARGE; }
+			bool	IsDemoOnly() const { return m_positionFlags & POSITION_FLAG_DEMO_ONLY; }
+			void	SetDemoOnly() { m_positionFlags |= POSITION_FLAG_DEMO_ONLY; }
+			void	ClearDemoOnly() { m_positionFlags &= ~POSITION_FLAG_DEMO_ONLY; }
+			bool	IsDemoPlayer() const { return m_positionFlags & POSITION_FLAG_DEMO_PLAYER; }
+			void	SetDemoPlayer() { m_positionFlags |= POSITION_FLAG_DEMO_PLAYER; }
+			void	ClearDemoPlayer() { m_positionFlags &= ~POSITION_FLAG_DEMO_PLAYER; }
 
 			// Public data
 			Vec2		m_position;

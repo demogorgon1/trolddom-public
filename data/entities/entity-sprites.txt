@@ -269,6 +269,7 @@ sprites:
 	sprite chest_2_open: { }
 	sprite sign_1: { }
 	sprite cauldron_1: { }
+	sprite no_access_1: { }
 	
 }
 

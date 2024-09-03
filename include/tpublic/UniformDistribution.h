@@ -29,7 +29,7 @@ namespace tpublic
 		{
 			uint64_t r = (uint64_t)aRandom();
 
-			return m_min + (_T)(((uint64_t)(m_max - m_min + 1) * r) / 0x100000000ULL);
+			return m_min + (_T)(((uint64_t)(m_max - m_min + _T(1)) * r) / 0x100000000ULL);
 		}
 		
 	private:

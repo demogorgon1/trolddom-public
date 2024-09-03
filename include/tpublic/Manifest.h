@@ -442,6 +442,7 @@ namespace tpublic
 		DefaultSoundEffects								m_defaultSoundEffects;
 		TileLayering									m_tileLayering;
 		std::unique_ptr<Document>						m_changelog;
+		std::unique_ptr<Document>						m_changelogDemo;
 
 		// Public data
 		std::unique_ptr<IDataContainer>					m_containers[DataType::NUM_IDS];

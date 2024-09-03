@@ -1,0 +1,45 @@
+dialogue_screen .demo_limit:
+{
+	text: 
+	[	
+		"Demo ends here."
+	]
+	
+	options:
+	[
+	]
+}
+
+dialogue_root .demo_limit:
+{
+	verb: read
+
+	.demo_limit: { }
+}
+
+entity demo_limit: 
+{
+	string: "Sign"
+	components:
+	{
+		position: 
+		{
+			modifier blocking: { }
+			modifier demo_only: { }
+		}		
+		combat_public: 
+		{  
+			modifier not_pushable: {}
+			modifier hide_level: {}
+			modifier not_targetable: {}
+			dialogue_root: .demo_limit			
+		}			
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ states: [ default ] frames: [ no_access_1 ] z_offset: -3 }			
+			]		
+		}				
+	}
+}

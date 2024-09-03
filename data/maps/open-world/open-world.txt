@@ -581,6 +581,7 @@ map_palette .stuff:
 	entity_spawn bonfire: [ 251 43 66 ]		
 	entity_spawn default_chest: [ 40 143 66 ]		
 	entity_spawn cauldron: [ 43 113 166 ]		
+	entity_spawn demo_limit: [ 13 193 16 ]		
 
 	entity_spawn .wildlife: [ 255 255 0 ]
 	entity_spawn .sylas: [ 255 189 0 ]

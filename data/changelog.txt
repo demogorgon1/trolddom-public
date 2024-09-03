@@ -2,7 +2,7 @@ changelog:
 {
 	heading: "Early Access v0.1.0"
 	
-	text: "Welcome to the early access release of Trolddom!"	
+	text: "Welcome to the Early Access release of Trolddom!"	
 
 	list:
 	[
@@ -11,6 +11,33 @@ changelog:
 		{ text: "Form a party of fellow adventurers and venture into the deep dungeons under the mountain." }
 		{ text: "Join a guild or try to make gold on the auction house." }
 		{ text: "Lots of other stuff to do and more content added as development progresses." }		
+	]
+
+	text: "Please report any bugs or other issues you encounter using the Bugs and Feedback tool accessible inside the game."
+}
+
+changelog_demo:
+{
+	heading: "Demo v0.1.0"
+	
+	text: "Welcome to the demo of Trolddom, only available for a limited time!"	
+
+	list:
+	[
+		{ text: "Play through level 1 to 6 as one of three different classes." }
+		{ text: "Explore Aetheris Isle, do quests, collect loot, and kill monsters." }
+		{ text: "Form a party of fellow adventurers and venture into the deep dungeons under the mountain." }
+		{ text: "Join a guild or try to make gold on the auction house." }
+		{ text: "Lots of other stuff to do." }		
+	]
+	
+	text: "Notes about this demo:"
+	
+	list:
+	[
+		{ text: "You can only have a single character per account." }
+		{ text: "Limited to first 6 levels." }
+		{ text: "Any character progress is carried over to the full version of the game." }
 	]
 
 	text: "Please report any bugs or other issues you encounter using the Bugs and Feedback tool accessible inside the game."
