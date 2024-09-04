@@ -351,7 +351,8 @@ item dungeon_1_staff_3:
 	type: weapon_2h_staff
 	equipment_slots: [ main_hand ]
 	loot_groups: [ .biznorg ]
-	required_level: 7
+	required_level: 6
+	item_level: 7
 	icon: icon_staff_4
 	rarity: rare
 	binds: when_picked_up
@@ -366,7 +367,8 @@ item dungeon_1_plate_shoulders_1:
 	type: armor_plate
 	equipment_slots: [ shoulders ]
 	loot_groups: [ .biznorg ]
-	required_level: 7
+	required_level: 6
+	item_level: 7
 	icon: icon_plate_shoulders_1
 	rarity: rare
 	binds: when_picked_up
@@ -381,7 +383,8 @@ item dungeon_1_cloth_shoulders_1:
 	type: armor_cloth
 	equipment_slots: [ shoulders ]
 	loot_groups: [ .biznorg ]
-	required_level: 7
+	required_level: 6
+	item_level: 7
 	icon: icon_cloth_shoulders_1
 	rarity: rare
 	binds: when_picked_up
@@ -396,7 +399,8 @@ item dungeon_1_mail_shoulders_1:
 	type: armor_mail
 	equipment_slots: [ shoulders ]
 	loot_groups: [ .biznorg ]
-	required_level: 7
+	required_level: 6
+	item_level: 7
 	icon: icon_mail_shoulders_1
 	rarity: rare
 	binds: when_picked_up
@@ -410,7 +414,8 @@ item dungeon_1_cape_1:
 	string: "Cloak of Biznorg"
 	equipment_slots: [ back ]
 	loot_groups: [ .biznorg ]
-	required_level: 7
+	required_level: 6
+	item_level: 7
 	icon: icon_cape_3
 	rarity: rare
 	binds: when_picked_up
@@ -430,7 +435,8 @@ item dungeon_1_sword_2:
 	type: weapon_1h_sword
 	equipment_slots: [ main_hand off_hand ]
 	loot_groups: [ .umbracoth ]
-	required_level: 7
+	required_level: 6
+	item_level: 7	
 	icon: icon_sword_9
 	rarity: rare
 	binds: when_picked_up
@@ -444,7 +450,8 @@ item dungeon_1_shield_1:
 	type: shield
 	equipment_slots: [ off_hand ]
 	loot_groups: [ .umbracoth ]
-	required_level: 7
+	required_level: 6
+	item_level: 7
 	icon: icon_shield_4
 	rarity: rare
 	binds: when_picked_up
@@ -460,7 +467,8 @@ item dungeon_1_plate_hands_1:
 	type: armor_plate
 	equipment_slots: [ hands ]
 	loot_groups: [ .umbracoth ]
-	required_level: 7
+	required_level: 6
+	item_level: 7
 	icon: icon_plate_hands_1
 	rarity: rare
 	binds: when_picked_up
@@ -475,7 +483,8 @@ item dungeon_1_cloth_hands_1:
 	type: armor_cloth
 	equipment_slots: [ hands ]
 	loot_groups: [ .umbracoth ]
-	required_level: 7
+	required_level: 6
+	item_level: 7
 	icon: icon_cloth_hands_1
 	rarity: rare
 	binds: when_picked_up
@@ -490,7 +499,8 @@ item dungeon_1_mail_hands_1:
 	type: armor_mail
 	equipment_slots: [ hands ]
 	loot_groups: [ .umbracoth ]
-	required_level: 7
+	required_level: 6
+	item_level: 7
 	icon: icon_mail_hands_1
 	rarity: rare
 	binds: when_picked_up
