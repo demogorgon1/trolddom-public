@@ -15,7 +15,7 @@ ${
 	_icon: icon_herbs_2
 	_item_string: "Wild Herbs"
 	_entity_string: "Wild Herbs"
-	_loot_group: .herbalism_wild_herbs
+	_loot_groups: [ .herbalism_wild_herbs ]
 	_loot_table: .herbalism_wild_herbs
 	_profession_skill: 0
 	_sprite: wild_herbs
@@ -32,7 +32,7 @@ ${
 	_icon: icon_dewleaf
 	_item_string: "Dewleaf"
 	_entity_string: "Dewleaf"
-	_loot_group: .herbalism_dewleaf
+	_loot_groups: [ .herbalism_dewleaf ]
 	_loot_table: .herbalism_dewleaf
 	_profession_skill: 0
 	_sprite: dewleaf
@@ -56,7 +56,7 @@ ${
 	_icon: icon_mistflower
 	_item_string: "Mistflower"
 	_entity_string: "Mistflower"
-	_loot_group: .herbalism_mistflower
+	_loot_groups: [ .herbalism_mistflower ]
 	_loot_table: .herbalism_mistflower
 	_profession_skill: 20
 	_sprite: mistflower

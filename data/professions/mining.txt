@@ -16,7 +16,7 @@ ${
 	${
 		_icon: icon_gemstone_1
 		_item_string: "Verdigrisite"
-		_loot_group: .mining_verdigrisite
+		_loot_groups: [ .mining_verdigrisite world_drops_uncommon ]
 		_rarity: uncommon
 		_item_level: 1
 		_value_multiplier: 4
@@ -32,7 +32,7 @@ ${
 	${
 		_icon: icon_gemstone_2
 		_item_string: "Roseate"
-		_loot_group: .mining_roseate
+		_loot_groups: [ .mining_roseate world_drops_uncommon ]
 		_rarity: uncommon
 		_item_level: 3
 		_value_multiplier: 5
@@ -48,7 +48,7 @@ ${
 	${
 		_icon: icon_gemstone_3
 		_item_string: "Azure Mirage Stone"
-		_loot_group: .mining_azure_mirage_stone
+		_loot_groups: [ .mining_azure_mirage_stone world_drops_uncommon ]
 		_rarity: uncommon
 		_item_level: 6	
 		_value_multiplier: 6
@@ -64,7 +64,7 @@ ${
 	${
 		_icon: icon_gemstone_4
 		_item_string: "Amethystine"
-		_loot_group: .mining_amethystine
+		_loot_groups: [ .mining_amethystine world_drops_uncommon ]
 		_rarity: uncommon
 		_item_level: 10	
 		_value_multiplier: 7
@@ -81,7 +81,7 @@ ${
 		_icon: icon_copper
 		_item_string: "Copper Ore"
 		_entity_string: "Copper Vein"
-		_loot_group: .mining_copper
+		_loot_groups: [ .mining_copper ]
 		_loot_table: .mining_copper
 		_profession_skill: 0
 		_sprite: copper_vein
@@ -107,7 +107,7 @@ ${
 		_icon: icon_iron
 		_item_string: "Iron Ore"
 		_entity_string: "Iron Vein"
-		_loot_group: .mining_iron
+		_loot_groups: [ .mining_iron ]
 		_loot_table: .mining_iron
 		_profession_skill: 20
 		_sprite: iron_vein

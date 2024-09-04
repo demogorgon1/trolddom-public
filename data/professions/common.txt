@@ -7,7 +7,7 @@
 	
 	icon: @_icon
 	string: @_item_string
-	loot_groups: [ @_loot_group ]
+	loot_groups: @_loot_groups
 	stack: 20	
 }
 
