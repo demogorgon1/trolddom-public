@@ -32,7 +32,7 @@ entity demo_limit:
 			modifier not_pushable: {}
 			modifier hide_level: {}
 			modifier not_targetable: {}
-			dialogue_root: .demo_limit			
+			dialogue_root: .demo_limit		
 		}			
 		sprite<static>: 
 		{ 
