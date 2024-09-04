@@ -1,9 +1,12 @@
 #include "../Pcheader.h"
 
+#include <tpublic/Data/Ability.h>
+
 #include <tpublic/DirectEffects/LearnProfessionAbility.h>
 
 #include <tpublic/EntityInstance.h>
 #include <tpublic/IEventQueue.h>
+#include <tpublic/Manifest.h>
 
 namespace tpublic::DirectEffects
 {
@@ -68,7 +71,25 @@ namespace tpublic::DirectEffects
 		const IWorldView*				/*aWorldView*/) 
 	{				
 		aEventQueue->EventQueueLearnProfessionAbility(aTarget->GetEntityInstanceId(), m_professionId, m_abilityId);
-		return Result();
+		return Result();	
+	}
+
+	uint32_t		
+	LearnProfessionAbility::GetToolTipItemId(
+		const Manifest*					aManifest) const
+	{
+		const Data::Ability* ability = aManifest->GetById<Data::Ability>(m_abilityId);
+		if(!ability->m_produceItems)
+			return 0;
+
+		if(ability->m_produceItems->m_items.size() != 1)
+			return 0;
+
+		const Data::Ability::Item& item = ability->m_produceItems->m_items[0];
+		if(item.m_quantity != 1)
+			return 0;
+
+		return item.m_itemId;
 	}
 
 }

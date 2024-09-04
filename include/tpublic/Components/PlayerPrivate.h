@@ -123,6 +123,7 @@ namespace tpublic
 			bool															m_recall = false;
 			int32_t															m_lastPVPCombatEventTick = 0;
 			uint32_t														m_xpGain = 0;
+			bool															m_professionsUpdated = false;
 
 			struct ProfessionSkillUseEvent
 			{

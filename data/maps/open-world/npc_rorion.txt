@@ -24,6 +24,7 @@ dialogue_screen .rorion_trainer:
 	train_ability: craft_copper_breeches
 	train_ability: craft_copper_blade
 	train_ability: craft_copper_armor
+	train_ability: craft_shiny_armguards
 }
 
 dialogue_screen .rorion_greetings:

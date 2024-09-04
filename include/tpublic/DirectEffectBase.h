@@ -147,6 +147,8 @@ namespace tpublic
 									const AbilityModifierList*		/*aAbilityModifierList*/,
 									uint32_t						/*aAbilityId*/,
 									UIntRange&						/*aOutHeal*/) const { return false; }
+		virtual uint32_t		GetToolTipItemId(
+									const Manifest*					/*aManifest*/) const { return 0; }
 
 		// Public data
 		uint32_t					m_flags = 0;		

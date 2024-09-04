@@ -45,6 +45,8 @@ namespace tpublic
 								IAuraEventQueue*				aAuraEventQueue,
 								IEventQueue*					aEventQueue,
 								const IWorldView*				aWorldView) override;
+			uint32_t		GetToolTipItemId(
+								const Manifest*					aManifest) const override;
 
 			// Public data
 			uint32_t			m_professionId = 0;
