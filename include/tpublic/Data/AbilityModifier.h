@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../DataBase.h"
+#include "../DirectEffect.h"
 #include "../Resource.h"
 
 namespace tpublic
@@ -70,22 +71,47 @@ namespace tpublic
 				{
 					if(!FromSourceBase(aChild))
 					{
-						if (aChild->m_name == "string")
+						if (aChild->m_name == "description")
+						{
+							m_description = aChild->GetString();
+						}
+						else if (aChild->m_name == "string")
+						{
 							m_string = aChild->GetString();
+						}
 						else if (aChild->m_name == "ability")
+						{
 							m_abilityIds.push_back(aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier()));
+						}
 						else if (aChild->m_name == "abilities")
+						{
 							aChild->GetIdArray(DataType::ID_ABILITY, m_abilityIds);
+						}
 						else if (aChild->m_tag == "modify_resource_cost")
+						{
 							m_modifyResourceCost = ModifyResourceCost(aChild);
+						}
 						else if (aChild->m_name == "modify_aura_update_count")
+						{
 							m_modifyAuraUpdateCount = aChild->GetInt32();
+						}
 						else if (aChild->m_name == "modify_range")
+						{
 							m_modifyRange = aChild->GetInt32();
+						}
 						else if (aChild->m_name == "modify_cast_time")
+						{
 							m_modifyCastTime = aChild->GetInt32();
+						}
+						else if(aChild->m_name == "modify_damage_type")
+						{
+							m_modifyDamageType = DirectEffect::StringToDamageType(aChild->GetIdentifier());
+							TP_VERIFY(m_modifyDamageType != DirectEffect::INVALID_DAMAGE_TYPE, aChild->m_debugInfo, "'%s' is not a valid damage type.", aChild->GetIdentifier());
+						}
 						else
+						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+						}
 					}
 				});
 			}
@@ -94,19 +120,23 @@ namespace tpublic
 			ToStream(
 				IWriter*				aWriter) const override
 			{
+				aWriter->WriteString(m_description);
 				aWriter->WriteString(m_string);
 				aWriter->WriteUInts(m_abilityIds);
 				aWriter->WriteOptionalObject(m_modifyResourceCost);
 				aWriter->WriteInt(m_modifyAuraUpdateCount);
 				aWriter->WriteInt(m_modifyRange);
 				aWriter->WriteInt(m_modifyCastTime);
+				aWriter->WritePOD(m_modifyDamageType);
 			}
 			
 			bool
 			FromStream(
 				IReader*				aReader) override
 			{
-				if(!aReader->ReadString(m_string))
+				if(!aReader->ReadString(m_description))
+					return false;
+				if (!aReader->ReadString(m_string))
 					return false;
 				if(!aReader->ReadUInts(m_abilityIds))
 					return false;
@@ -118,16 +148,20 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadInt(m_modifyCastTime))
 					return false;
+				if(!aReader->ReadPOD(m_modifyDamageType))
+					return false;
 				return true;
 			}
 
 			// Public data
 			std::string									m_string;
+			std::string									m_description;
 			std::vector<uint32_t>						m_abilityIds;
 			std::optional<ModifyResourceCost>			m_modifyResourceCost;
 			int32_t										m_modifyRange = 0;
 			int32_t										m_modifyAuraUpdateCount = 0;
 			int32_t										m_modifyCastTime = 0;
+			DirectEffect::DamageType					m_modifyDamageType = DirectEffect::INVALID_DAMAGE_TYPE;
 		};
 
 	}

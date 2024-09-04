@@ -44,7 +44,7 @@ talent fighter_protection_improved_fortify:
 
 ability_modifier improved_fortify:
 {	
-	string: "Fortify reduces damage taken by an additional 10% and does no longer reduce movement speed."
+	description: "Fortify reduces damage taken by an additional 10% and does no longer reduce movement speed."
 	ability: fortify
 }
 
@@ -166,7 +166,7 @@ talent fighter_protection_improved_bash:
 
 ability_modifier improved_bash:
 {	
-	string: "Bash generates 10 rage."
+	description: "Bash generates 10 rage."
 	ability: bash
 }
 

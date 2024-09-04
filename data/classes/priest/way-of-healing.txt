@@ -45,21 +45,21 @@ talent priest_improved_blessing:
 
 ability_modifier improved_blessing_1:
 {	
-	string: "Increases duration of Blessing by 1 second."
+	description: "Increases duration of Blessing by 1 second."
 	ability: blessing
 	modify_aura_update_count: 1
 }
 
 ability_modifier improved_blessing_2:
 {	
-	string: "Increases duration of Blessing by 2 second."
+	description: "Increases duration of Blessing by 2 second."
 	ability: blessing
 	modify_aura_update_count: 2
 }
 
 ability_modifier improved_blessing_3:
 {	
-	string: "Increases duration of Blessing by 3 second."
+	description: "Increases duration of Blessing by 3 second."
 	ability: blessing
 	modify_aura_update_count: 3
 }
@@ -80,7 +80,7 @@ talent priest_healing_favor:
 
 ability_modifier healing_favor:
 {	
-	string: "Greater Heal and Minor Heal increases target armor by 10% for 10 seconds."
+	description: "Greater Heal and Minor Heal increases target armor by 10% for 10 seconds."
 }
 
 aura healing_favor:

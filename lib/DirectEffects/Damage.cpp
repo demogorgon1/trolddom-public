@@ -1,9 +1,9 @@
 #include "../Pcheader.h"
 
-#include <tpublic/Components/AbilityModifiers.h>
 #include <tpublic/Components/Auras.h>
 #include <tpublic/Components/CombatPrivate.h>
 #include <tpublic/Components/CombatPublic.h>
+#include <tpublic/Components/PlayerPrivate.h>
 
 #include <tpublic/DirectEffects/Damage.h>
 
@@ -92,6 +92,7 @@ namespace tpublic::DirectEffects
 		Components::CombatPublic* targetCombatPublic = aTarget->GetComponent<Components::CombatPublic>();
 		Components::Auras* targetAuras = aTarget->GetComponent<Components::Auras>();
 		const Components::Auras* sourceAuras = aSource->GetComponent<Components::Auras>();
+		const Components::AbilityModifiers* abilityModifiers = aSource->GetComponent<Components::AbilityModifiers>();
 
 		if(targetCombatPublic == NULL)
 			return Result();
@@ -109,7 +110,7 @@ namespace tpublic::DirectEffects
 			else
 				chance = sourceCombatPrivate->m_physicalCriticalStrikeChance;
 
-			chance += _GetCriticalChanceBonus(aSource);
+			chance += _GetCriticalChanceBonus(abilityModifiers);
 
 			if(Helpers::RandomFloat(aRandom) < chance / 100.0f)
 			{
@@ -119,7 +120,11 @@ namespace tpublic::DirectEffects
 			}
 		}
 
-		if(m_damageType == DirectEffect::DAMAGE_TYPE_PHYSICAL)
+		const Components::PlayerPrivate* playerPrivate = aSource->GetEntityId() == 0 ? aSource->GetComponent<Components::PlayerPrivate>() : NULL;
+
+		DirectEffect::DamageType damageType = _GetDamageType(aSource, playerPrivate != NULL ? playerPrivate->m_abilityModifierList : NULL, aAbilityId);
+
+		if(damageType == DirectEffect::DAMAGE_TYPE_PHYSICAL)
 		{
 			// Damage reduction from armor
 			float damageMultiplier = 1.0f - (float)targetCombatPrivate->m_armor / (float)(targetCombatPrivate->m_armor + 400 + 85 * sourceCombatPublic->m_level);
@@ -127,10 +132,10 @@ namespace tpublic::DirectEffects
 		}
 
 		if (sourceAuras != NULL)
-			damage = sourceAuras->FilterDamageOutput(m_damageType, damage);
+			damage = sourceAuras->FilterDamageOutput(damageType, damage);
 
 		if (targetAuras != NULL)
-			damage = targetAuras->FilterDamageInput(m_damageType, damage);
+			damage = targetAuras->FilterDamageInput(damageType, damage);
 
 		uint32_t blocked = 0;
 
@@ -160,7 +165,7 @@ namespace tpublic::DirectEffects
 
 				aResourceChangeQueue->AddResourceChange(
 					result,
-					m_damageType,
+					damageType,
 					aAbilityId,
 					aSource->GetEntityId(),
 					aSource->GetEntityInstanceId(),
@@ -185,7 +190,7 @@ namespace tpublic::DirectEffects
 
 				aResourceChangeQueue->AddResourceChange(
 					result,
-					m_damageType,
+					damageType,
 					aAbilityId,
 					aSource->GetEntityId(),
 					aSource->GetEntityInstanceId(),
@@ -205,7 +210,7 @@ namespace tpublic::DirectEffects
 		{
 			aResourceChangeQueue->AddResourceChange(
 				result,
-				m_damageType,
+				damageType,
 				aAbilityId,
 				aSource->GetEntityId(),
 				aSource->GetEntityInstanceId(),
@@ -234,29 +239,46 @@ namespace tpublic::DirectEffects
 	bool			
 	Damage::CalculateToolTipDamage(
 		const EntityInstance*				aEntityInstance,
-		UIntRange&							aOutDamage)	const
+		const AbilityModifierList*			aAbilityModifierList,
+		uint32_t							aAbilityId,
+		UIntRange&							aOutDamage,
+		DirectEffect::DamageType&			aOutDamageType)	const
 	{
 		m_function.ToRange(aEntityInstance, aOutDamage);
-		
+		aOutDamageType = _GetDamageType(aEntityInstance, aAbilityModifierList, aAbilityId);
 		return true;
+	}
+
+	DirectEffect::DamageType	
+	Damage::_GetDamageType(
+		const EntityInstance*				/*aEntityInstance*/,		
+		const AbilityModifierList*			aAbilityModifierList,
+		uint32_t							aAbilityId) const
+	{
+		DirectEffect::DamageType damageType = m_damageType;
+
+		if(aAbilityModifierList != NULL && aAbilityId != 0)
+		{
+			DirectEffect::DamageType modifyDamageType = aAbilityModifierList->GetAbilityModifyDamageType(aAbilityId);
+			if (modifyDamageType != DirectEffect::INVALID_DAMAGE_TYPE)
+				damageType = modifyDamageType;
+		}
+
+		return damageType;
 	}
 
 	float			
 	Damage::_GetCriticalChanceBonus(
-		const EntityInstance*				aSource) const
+		const Components::AbilityModifiers*	aAbilityModifiers) const
 	{
-		if(m_conditionalCriticalChanceBonuses.empty())
-			return 0.0f;
-
-		const Components::AbilityModifiers* abilityModifiers = aSource->GetComponent<Components::AbilityModifiers>();
-		if(abilityModifiers == NULL)
+		if(m_conditionalCriticalChanceBonuses.empty() || aAbilityModifiers == NULL)
 			return 0.0f;
 
 		float bonus = 0.0f;
 
 		for(const ConditionalCriticalChanceBonus& t : m_conditionalCriticalChanceBonuses)
 		{
-			if(abilityModifiers->HasActive(t.m_abilityModifierId))
+			if(aAbilityModifiers->HasActive(t.m_abilityModifierId))
 				bonus += t.m_percent;
 		}
 

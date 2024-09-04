@@ -147,8 +147,10 @@ namespace tpublic::DirectEffects
 
 	bool			
 	Heal::CalculateToolTipHeal(
-		const EntityInstance*	aEntityInstance,
-		UIntRange&				aOutHeal) const 
+		const EntityInstance*		aEntityInstance,
+		const AbilityModifierList*	/*aAbilityModifierList*/,
+		uint32_t					/*aAbilityId*/,
+		UIntRange&					aOutHeal) const 
 	{
 		m_function.ToRange(aEntityInstance, aOutHeal);
 		return true;

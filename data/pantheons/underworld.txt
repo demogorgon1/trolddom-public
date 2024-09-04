@@ -37,6 +37,13 @@ pantheon underworld:
 		"Dark Lord"
 		"Absolute Ruler"
 	]
+	
+	class_modifier priest:
+	{
+		string: "Unholy Condemnation"
+		reputation_trigger: !WORSHIP_LEVEL_2{}
+		ability_modifier: underworld_priest
+	}	
 }
 
 ability underworld_pray:
@@ -62,4 +69,12 @@ achievement underworld_follower:
 	icon: icon_unholy
 	account_wide: true
 	available_in_front_end: true	
+}
+
+ability_modifier underworld_priest:
+{
+	string: "Unholy Condemnation"
+	description: "Spiritual Crisis, Smite and Condemnation does unholy damage."
+	abilities: [ spiritual_crisis smite condemnation ]
+	modify_damage_type: unholy	
 }

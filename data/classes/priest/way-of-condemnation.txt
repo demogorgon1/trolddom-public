@@ -211,17 +211,17 @@ talent priest_improved_condemnation:
 
 ability_modifier improved_condemnation_1:
 {	
-	string: "Increases critical strike chance of Condemnation by 10%."	
+	description: "Increases critical strike chance of Condemnation by 10%."	
 }
 
 ability_modifier improved_condemnation_2:
 {	
-	string: "Increases critical strike chance of Condemnation by 20%."	
+	description: "Increases critical strike chance of Condemnation by 20%."	
 }
 
 ability_modifier improved_condemnation_3:
 {	
-	string: "Increases critical strike chance of Condemnation by 30%."	
+	description: "Increases critical strike chance of Condemnation by 30%."	
 }
 
 ###############################################################################
@@ -239,7 +239,7 @@ talent priest_searing_pain:
 
 ability_modifier searing_pain:
 {	
-	string: "Damage caused by Condemnation can be critical."	
+	description: "Damage caused by Condemnation can be critical."	
 }
 
 ###############################################################################
@@ -259,17 +259,17 @@ talent priest_improved_smite:
 
 ability_modifier improved_smite_1:
 {	
-	string: "Increases damage done by Smite by 10%."	
+	description: "Increases damage done by Smite by 10%."	
 }
 
 ability_modifier improved_smite_2:
 {	
-	string: "Increases damage done by Smite by 20%."	
+	description: "Increases damage done by Smite by 20%."	
 }
 
 ability_modifier improved_smite_3:
 {	
-	string: "Increases damage done by Smite by 30%."	
+	description: "Increases damage done by Smite by 30%."	
 }
 
 ###############################################################################
@@ -289,7 +289,7 @@ talent priest_swift_justice:
 
 ability_modifier swift_justice:
 {	
-	string: "Reduces casting time of Smite by 20%."	
+	description: "Reduces casting time of Smite by 20%."	
 	ability: smite
 	modify_cast_time: -4
 }
@@ -328,7 +328,6 @@ ability smite:
 	delay: 3
 	talent_tree: priest_condemnation
 	
-
 	direct_effect damage:
 	{	
 		must_not_have_ability_modifiers: [ improved_smite_1 improved_smite_2 improved_smite_3 ]

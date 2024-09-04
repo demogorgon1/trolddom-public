@@ -1,5 +1,7 @@
 #pragma once
 
+#include <tpublic/Components/AbilityModifiers.h>
+
 #include "../CombatFunction.h"
 #include "../DirectEffectBase.h"
 #include "../UIntCurve.h"
@@ -88,7 +90,10 @@ namespace tpublic
 								const IWorldView*					aWorldView) override;
 			bool			CalculateToolTipDamage(
 								const EntityInstance*				aEntityInstance,
-								UIntRange&							aOutDamage) const override;
+								const AbilityModifierList*			aAbilityModifierList,
+								uint32_t							aAbilityId,
+								UIntRange&							aOutDamage,
+								DirectEffect::DamageType&			aOutDamageType) const override;
 
 			// Public data
 			DirectEffect::DamageType					m_damageType = DirectEffect::DAMAGE_TYPE_PHYSICAL;
@@ -96,8 +101,12 @@ namespace tpublic
 			CombatFunction								m_function;
 			std::vector<ConditionalCriticalChanceBonus>	m_conditionalCriticalChanceBonuses;
 
-			float			_GetCriticalChanceBonus(
-								const EntityInstance*				aSource) const;
+			DirectEffect::DamageType	_GetDamageType(
+											const EntityInstance*				aEntityInstance,
+											const AbilityModifierList*			aAbilityModifierList,
+											uint32_t							aAbilityId) const;
+			float						_GetCriticalChanceBonus(
+											const Components::AbilityModifiers*	aAbilityModifiers) const;
 		};
 
 	}

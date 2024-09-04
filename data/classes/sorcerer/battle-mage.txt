@@ -163,7 +163,7 @@ talent sorcerer_battle_mage_swiftness:
 
 ability_modifier mage_swiftness:
 {
-	string: "Power Shield increases your movement speed for 3 seconds."
+	description: "Power Shield increases your movement speed for 3 seconds."
 }
 
 aura mage_swiftness:
@@ -237,17 +237,17 @@ talent sorcerer_battle_mage_improved_power_shield:
 
 ability_modifier improved_power_shield_1:
 {
-	string: "Power Shield reduces all damage taken by 10%."
+	description: "Power Shield reduces all damage taken by 10%."
 }
 
 ability_modifier improved_power_shield_2:
 {
-	string: "Power Shield reduces all damage taken by 20%."
+	description: "Power Shield reduces all damage taken by 20%."
 }
 
 ability_modifier improved_power_shield_3:
 {
-	string: "Power Shield reduces all damage taken by 30%."
+	description: "Power Shield reduces all damage taken by 30%."
 }
 
 !define local IMPROVED_POWER_SHIELD
@@ -288,17 +288,17 @@ talent sorcerer_battle_mage_charging_combat:
 
 ability_modifier charging_combat_1:
 {
-	string: "Your melee attacks restore 3% of your base mana."
+	description: "Your melee attacks restore 3% of your base mana."
 }
 
 ability_modifier charging_combat_2:
 {
-	string: "Your melee attacks restore 6% of your base mana."
+	description: "Your melee attacks restore 6% of your base mana."
 }
 
 ability_modifier charging_combat_3:
 {
-	string: "Your melee attacks restore 9% of your base mana."
+	description: "Your melee attacks restore 9% of your base mana."
 }
 
 ###############################################################################

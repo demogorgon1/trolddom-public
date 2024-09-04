@@ -37,6 +37,13 @@ pantheon light:
 		"Archangel"
 		"High Ruler"
 	]
+	
+	class_modifier priest:
+	{
+		string: "Holy Condemnation"
+		reputation_trigger: !WORSHIP_LEVEL_2{}
+		ability_modifier: light_priest
+	}
 }
 
 ability light_pray:
@@ -61,4 +68,12 @@ achievement light_follower:
 	icon: icon_holy
 	account_wide: true
 	available_in_front_end: true	
+}
+
+ability_modifier light_priest:
+{
+	string: "Holy Condemnation"
+	description: "Spiritual Crisis, Smite and Condemnation does holy damage."
+	abilities: [ spiritual_crisis smite condemnation ]
+	modify_damage_type: holy	
 }

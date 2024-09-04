@@ -31,6 +31,22 @@ namespace tpublic
 
 		static_assert(NUM_DAMAGE_TYPES <= 32); // Must fit into a bitfield
 
+		// IMPORTANT: Must match DamageType enum
+		static constexpr const char* DAMAGE_TYPE_NAMES[] =
+		{
+			NULL,
+			"Physical",
+			"Bleed",
+			"Frost",
+			"Fire",
+			"Arcane",
+			"Unholy",
+			"Holy",
+			"Poison"
+		};
+
+		static_assert(sizeof(DAMAGE_TYPE_NAMES) / sizeof(const char*) == (size_t)NUM_DAMAGE_TYPES);
+
 		inline uint32_t	
 		StringToFlag(
 			const char* aString)
@@ -65,6 +81,14 @@ namespace tpublic
 			if (strcmp(aString, "poison") == 0)
 				return DAMAGE_TYPE_POISON;
 			return DamageType(0);
+		}
+
+		inline const char*
+		DamageTypeToName(
+			DamageType	aDamageType)
+		{
+			assert((uint32_t)aDamageType >= 0 && (uint32_t)aDamageType < (uint32_t)NUM_DAMAGE_TYPES);
+			return DAMAGE_TYPE_NAMES[aDamageType];
 		}
 
 		enum Id : uint32_t

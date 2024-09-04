@@ -43,7 +43,7 @@ talent sorcerer_arcane_improved_counterspell:
 
 ability_modifier improved_counterspell:
 {
-	string: "Counterspell also removes a beneficial magic effect from target."
+	description: "Counterspell also removes a beneficial magic effect from target."
 }
 
 ###############################################################################
@@ -171,7 +171,7 @@ talent sorcerer_arcane_improved_teleport:
 
 ability_modifier improved_teleport:
 {
-	string: "Teleport increases your chance to dodge by 50% for 6 seconds."	
+	description: "Teleport increases your chance to dodge by 50% for 6 seconds."	
 }
 
 aura improved_teleport:
@@ -324,17 +324,17 @@ talent sorcerer_arcane_improved_arcane_missile:
 
 ability_modifier improved_arcane_missile_1:
 {
-	string: "Increases critical chance of Arcane Missile by 15%."	
+	description: "Increases critical chance of Arcane Missile by 15%."	
 }
 
 ability_modifier improved_arcane_missile_2:
 {
-	string: "Increases critical chance of Arcane Missile by 30%."	
+	description: "Increases critical chance of Arcane Missile by 30%."	
 }
 
 ability_modifier improved_arcane_missile_3:
 {
-	string: "Increases critical chance of Arcane Missile by 45%."	
+	description: "Increases critical chance of Arcane Missile by 45%."	
 }
 
 ###############################################################################

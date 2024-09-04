@@ -45,7 +45,7 @@ talent fighter_combat_improved_charge:
 
 ability_modifier improved_charge:
 {	
-	string: "Increases range of Charge by 1."
+	description: "Increases range of Charge by 1."
 	ability: charge
 	modify_range: 1
 }
@@ -230,21 +230,21 @@ talent fighter_combat_improved_strike:
 
 ability_modifier improved_strike_1:
 {	
-	string: "Reduces rage cost of Strike by 1."
+	description: "Reduces rage cost of Strike by 1."
 	ability: strike	
 	modify_resource_cost rage: -1
 }
 
 ability_modifier improved_strike_2:
 {
-	string: "Reduces rage cost of Strike by 2."
+	description: "Reduces rage cost of Strike by 2."
 	ability: strike	
 	modify_resource_cost rage: -2
 }
 
 ability_modifier improved_strike_3:
 {
-	string: "Reduces rage cost of Strike by 3."
+	description: "Reduces rage cost of Strike by 3."
 	ability: strike	
 	modify_resource_cost rage: -3
 }

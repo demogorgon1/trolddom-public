@@ -16,6 +16,7 @@ namespace tpublic
 		struct CombatPrivate;
 	}
 
+	class AbilityModifierList;
 	class EntityInstance;
 	class IAuraEventQueue;
 	class IEventQueue;
@@ -137,9 +138,14 @@ namespace tpublic
 									const IWorldView*				/*aWorldView*/) { return Result(); }
 		virtual bool			CalculateToolTipDamage(
 									const EntityInstance*			/*aEntityInstance*/,
-									UIntRange&						/*aOutDamage*/) const { return false; }
+									const AbilityModifierList*		/*aAbilityModifierList*/,
+									uint32_t						/*aAbilityId*/,
+									UIntRange&						/*aOutDamage*/,
+									DirectEffect::DamageType&		/*aOutDamageType*/) const { return false; }
 		virtual bool			CalculateToolTipHeal(
 									const EntityInstance*			/*aEntityInstance*/,
+									const AbilityModifierList*		/*aAbilityModifierList*/,
+									uint32_t						/*aAbilityId*/,
 									UIntRange&						/*aOutHeal*/) const { return false; }
 
 		// Public data

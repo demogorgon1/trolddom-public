@@ -1,5 +1,7 @@
 #pragma once
 
+#include "DirectEffect.h"
+
 namespace tpublic
 {
 
@@ -24,6 +26,8 @@ namespace tpublic
 		int32_t														GetAbilityModifyRange(
 																		uint32_t							aAbilityId) const;
 		int32_t														GetAbilityModifyCastTime(
+																		uint32_t							aAbilityId) const;
+		DirectEffect::DamageType									GetAbilityModifyDamageType(
 																		uint32_t							aAbilityId) const;
 
 	private:

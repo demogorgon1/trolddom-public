@@ -161,7 +161,7 @@ talent priest_dragon_fury:
 
 ability_modifier improved_dragon_punch:
 {
-	string: "Dragon Punch has a chance to increase your attack speed by 50% for 10 seconds."
+	description: "Dragon Punch has a chance to increase your attack speed by 50% for 10 seconds."
 }
 
 aura improved_dragon_punch:
@@ -300,7 +300,7 @@ talent priest_dragon_improved_dwindle:
 
 ability_modifier improved_dwindle: 
 {
-	string: "Dwindle increases your chance to dodge by 80% for 10 seconds."
+	description: "Dwindle increases your chance to dodge by 80% for 10 seconds."
 }
 
 aura improved_dwindle:

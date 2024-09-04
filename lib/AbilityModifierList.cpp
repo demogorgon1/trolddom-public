@@ -120,4 +120,20 @@ namespace tpublic
 		return result;
 	}
 
+	DirectEffect::DamageType									
+	AbilityModifierList::GetAbilityModifyDamageType(
+		uint32_t						aAbilityId) const
+	{
+		const std::vector<const Data::AbilityModifier*>* abilityModifiers = GetAbility(aAbilityId);
+		if (abilityModifiers != NULL)
+		{
+			for (const Data::AbilityModifier* abilityModifier : *abilityModifiers)
+			{
+				if(abilityModifier->m_modifyDamageType != DirectEffect::INVALID_DAMAGE_TYPE)
+					return abilityModifier->m_modifyDamageType;
+			}
+		}
+		return DirectEffect::INVALID_DAMAGE_TYPE;
+	}
+
 }

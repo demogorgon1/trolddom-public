@@ -48,6 +48,8 @@ namespace tpublic
 								const IWorldView*				aWorldView) override;
 			bool			CalculateToolTipHeal(
 								const EntityInstance*			aEntityInstance,
+								const AbilityModifierList*		aAbilityModifierList,
+								uint32_t						aAbilityId,
 								UIntRange&						aOutHeal) const override;
 
 			// Public data

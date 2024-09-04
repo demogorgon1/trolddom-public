@@ -47,14 +47,14 @@ talent sorcerer_elemental_storm:
 
 ability_modifier storm_1:
 {
-	string: "Decreases casting time of Ice Lance and Firebolt by 0.5 seconds."
+	description: "Decreases casting time of Ice Lance and Firebolt by 0.5 seconds."
 	abilities: [ firebolt ice_lance ]
 	modify_cast_time: -5
 }
 
 ability_modifier storm_2:
 {
-	string: "Decreases casting time of Ice Lance and Firebolt by 1 second."
+	description: "Decreases casting time of Ice Lance and Firebolt by 1 second."
 	abilities: [ firebolt ice_lance ]
 	modify_cast_time: -10
 }
@@ -78,17 +78,17 @@ talent sorcerer_elemental_smolder:
 
 ability_modifier smolder_1:
 {
-	string: "Firebolt and Fireball has a chance to increase your spell haste by 15% for 5 seconds."
+	description: "Firebolt and Fireball has a chance to increase your spell haste by 15% for 5 seconds."
 }
 
 ability_modifier smolder_2:
 {
-	string: "Firebolt and Fireball has a chance to increase your spell haste by 30% for 5 seconds."
+	description: "Firebolt and Fireball has a chance to increase your spell haste by 30% for 5 seconds."
 }
 
 ability_modifier smolder_3:
 {
-	string: "Firebolt and Fireball has a chance to increase your spell haste by 45% for 5 seconds."
+	description: "Firebolt and Fireball has a chance to increase your spell haste by 45% for 5 seconds."
 }
 
 aura smolder_1:
@@ -138,7 +138,7 @@ talent sorcerer_elemental_freeze_for_all:
 
 ability_modifier freeze_for_all:
 {
-	string: "Your frost spells reduce the movement speed of the target for 8 seconds."
+	description: "Your frost spells reduce the movement speed of the target for 8 seconds."
 }
 
 aura freeze_for_all:
@@ -173,7 +173,7 @@ talent sorcerer_elemental_improved_frost_explosion:
 
 ability_modifier improved_frost_explosion:
 {
-	string: "Frost Explosion freezes enemies in place for 5 seconds."
+	description: "Frost Explosion freezes enemies in place for 5 seconds."
 }
 
 aura improved_frost_explosion:
