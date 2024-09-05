@@ -252,7 +252,8 @@ namespace tpublic::Systems
 					return false;
 				});
 
-				threat->m_lastPingTick = aContext->m_tick;
+				// Add a little randomness to when the ping is done to spread out server load
+				threat->m_lastPingTick = aContext->m_tick + (int32_t)((*aContext->m_random)() % 2);
 			}
 		}
 
