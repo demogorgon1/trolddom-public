@@ -74,6 +74,8 @@ namespace tpublic
 			ComponentPoolChunkBase* chunk = aComponentBase->GetComponentPoolChunkBase();
 			uint8_t i = aComponentBase->GetComponentPoolChunkIndex();
 
+			assert(chunk != NULL);
+
 			std::lock_guard lock(m_lock);
 
 			bool wasFull = chunk->IsFull();
