@@ -164,6 +164,10 @@ namespace tpublic
 			coverMap.resize(m_width * m_height, 0);
 			bool hasCoverMap = false;
 
+			std::vector<uint32_t> subZoneMap;
+			subZoneMap.resize(m_width * m_height, 0);
+			bool hasSubZoneMap = false;
+
 			// Process layers
 			for(std::unique_ptr<SourceLayer>& layer : m_sourceLayers)
 			{
@@ -240,6 +244,11 @@ namespace tpublic
 										hasZoneMap = true;
 										break;
 
+									case Data::MapPalette::ENTRY_TYPE_SUB_ZONE:
+										subZoneMap[mapX + mapY * m_width] = entry->m_value;
+										hasSubZoneMap = true;
+										break;
+
 									case Data::MapPalette::ENTRY_TYPE_WALL:
 										m_walls[{ mapX, mapY }] = entry->m_value;
 										break;
@@ -258,10 +267,10 @@ namespace tpublic
 				}
 			}
 
-			if(hasLevelMap || hasZoneMap)
+			if(hasLevelMap || hasZoneMap || hasSubZoneMap)
 			{
 				m_worldInfoMap = std::make_unique<WorldInfoMap>();
-				m_worldInfoMap->Build(m_width, m_height, &levelMap[0], &zoneMap[0]);
+				m_worldInfoMap->Build(m_width, m_height, &levelMap[0], &zoneMap[0], &subZoneMap[0]);
 			}
 
 			if(hasCoverMap)

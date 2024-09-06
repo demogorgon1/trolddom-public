@@ -27,7 +27,8 @@ namespace tpublic
 		int32_t			aWidth,
 		int32_t			aHeight,
 		const uint32_t* aLevelMap,
-		const uint32_t* aZoneMap)
+		const uint32_t* aZoneMap,
+		const uint32_t* aSubZoneMap)
 	{		
 		// Build maps
 		{
@@ -65,6 +66,9 @@ namespace tpublic
 
 							if(aZoneMap != NULL)
 								detailsEntry->m_zoneId = aZoneMap[j + i * aWidth];								
+
+							if (aSubZoneMap != NULL)
+								detailsEntry->m_subZoneId = aSubZoneMap[j + i * aWidth];
 
 							if (topLevelCellEntry.has_value())
 							{

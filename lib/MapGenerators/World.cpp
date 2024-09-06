@@ -197,7 +197,7 @@ namespace tpublic::MapGenerators
 				levels[i] = m_levelMap[i].m_level;
 
 			aOutMapData->m_worldInfoMap = std::make_unique<WorldInfoMap>();
-			aOutMapData->m_worldInfoMap->Build((int32_t)m_width, (int32_t)m_height, &levels[0], NULL);
+			aOutMapData->m_worldInfoMap->Build((int32_t)m_width, (int32_t)m_height, &levels[0], NULL, NULL);
 		}
 
 		// Doodads

@@ -22,7 +22,8 @@ namespace tpublic
 				ENTRY_TYPE_PORTAL,
 				ENTRY_TYPE_LEVEL,
 				ENTRY_TYPE_ZONE,
-				ENTRY_TYPE_WALL
+				ENTRY_TYPE_WALL,
+				ENTRY_TYPE_SUB_ZONE
 			};
 
 			struct Color
@@ -107,6 +108,11 @@ namespace tpublic
 						else if (aChild->m_tag == "zone")
 						{
 							entry.m_type = ENTRY_TYPE_ZONE;
+							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ZONE, aChild->m_name.c_str());
+						}
+						else if (aChild->m_tag == "sub_zone")
+						{
+							entry.m_type = ENTRY_TYPE_SUB_ZONE;
 							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ZONE, aChild->m_name.c_str());
 						}
 						else if (aChild->m_tag == "wall")

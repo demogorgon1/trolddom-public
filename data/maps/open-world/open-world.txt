@@ -533,6 +533,23 @@ zone .zone_13:
 	string: "Twilight Thicket"
 }
 
+zone .town:
+{
+	string: "Tidewatch"
+	town: true
+}
+
+zone .undead:
+{
+	string: "Blouville"
+}
+
+zone .junjun:
+{
+	string: "Fortress of Junjun"
+	town: true
+}
+
 map_palette .tiles:
 {
 	tile water_1: [ 9 86 104 ]
@@ -703,6 +720,13 @@ map_palette .zones:
 	zone .zone_13: [ 239 204 26 ]	
 }
 
+map_palette .sub_zones:
+{
+	sub_zone .town: [ 191 20 180 ]
+	sub_zone .undead: [ 64 211 154 ]
+	sub_zone .junjun: [ 64 111 211 ]
+}
+
 map open_world:
 {
 	string: "Aetheris Isle"
@@ -744,6 +768,11 @@ map open_world:
 			source:		"open-world-4.png"
 			cover: 		true
 		}
+		
+		{
+			palettes:	[ .sub_zones ]
+			source:		"open-world-5.png"
+		}						
 	]
 }
  

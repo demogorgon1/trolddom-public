@@ -16,7 +16,7 @@ namespace tpublic
 			operator ==(
 				const Entry&						aOther) const
 			{
-				return m_level == aOther.m_level && m_zoneId == aOther.m_zoneId;
+				return m_level == aOther.m_level && m_zoneId == aOther.m_zoneId && m_subZoneId == aOther.m_subZoneId;
 			}
 
 			void			
@@ -25,6 +25,7 @@ namespace tpublic
 			{
 				aWriter->WriteUInt(m_level);
 				aWriter->WriteUInt(m_zoneId);
+				aWriter->WriteUInt(m_subZoneId);
 			}
 			
 			bool			
@@ -35,12 +36,15 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadUInt(m_zoneId))
 					return false;
+				if (!aReader->ReadUInt(m_subZoneId))
+					return false;
 				return true;
 			}
 
 			// Public data
 			uint32_t				m_level = 0;
 			uint32_t				m_zoneId = 0;
+			uint32_t				m_subZoneId = 0;
 		};		
 
 		struct ZoneOutline
@@ -71,7 +75,8 @@ namespace tpublic
 								int32_t				aWidth,
 								int32_t				aHeight,
 								const uint32_t*		aLevelMap,
-								const uint32_t*		aZoneMap);
+								const uint32_t*		aZoneMap,
+								const uint32_t*		aSubZoneMap);
 		const Entry&		Get(
 								const Vec2&			aPosition) const;
 		const ZoneOutline*	GetZoneOutline(
