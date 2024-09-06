@@ -19,14 +19,14 @@ namespace tpublic
 
 			enum PositionFlag : uint8_t
 			{
-				POSITION_FLAG_BLOCKING		= 0x01,
-				POSITION_FLAG_TELEPORTED	= 0x02,
-				POSITION_FLAG_MOVING		= 0x04,
-				POSITION_FLAG_SUPER_USER	= 0x08,
-				POSITION_FLAG_INVISIBLE		= 0x10,
-				POSITION_FLAG_LARGE			= 0x20,
-				POSITION_FLAG_DEMO_ONLY		= 0x40,
-				POSITION_FLAG_DEMO_PLAYER	= 0x80,
+				POSITION_FLAG_BLOCKING			= 0x01,
+				POSITION_FLAG_TELEPORTED		= 0x02,
+				POSITION_FLAG_MOVING			= 0x04,
+				POSITION_FLAG_IN_TOWN_PLAYER	= 0x08,
+				POSITION_FLAG_INVISIBLE			= 0x10,
+				POSITION_FLAG_LARGE				= 0x20,
+				POSITION_FLAG_DEMO_ONLY			= 0x40,
+				POSITION_FLAG_DEMO_PLAYER		= 0x80,
 			};
 
 			enum Field : uint32_t
@@ -78,9 +78,9 @@ namespace tpublic
 			bool	IsMoving() const { return m_positionFlags & POSITION_FLAG_MOVING; }
 			void	SetMoving() { m_positionFlags |= POSITION_FLAG_MOVING; }
 			void	ClearMoving() { m_positionFlags &= ~POSITION_FLAG_MOVING; }
-			bool	IsSuperUser() const { return m_positionFlags & POSITION_FLAG_SUPER_USER; }
-			void	SetSuperUser() { m_positionFlags |= POSITION_FLAG_SUPER_USER; }
-			void	ClearSuperUser() { m_positionFlags &= ~POSITION_FLAG_SUPER_USER; }
+			bool	IsInTownPlayer() const { return m_positionFlags & POSITION_FLAG_IN_TOWN_PLAYER; }
+			void	SetInTownPlayer() { m_positionFlags |= POSITION_FLAG_IN_TOWN_PLAYER; }
+			void	ClearInTownPlayer() { m_positionFlags &= ~POSITION_FLAG_IN_TOWN_PLAYER; }
 			bool	IsInvisible() const { return m_positionFlags & POSITION_FLAG_INVISIBLE; }
 			void	SetInvisible() { m_positionFlags |= POSITION_FLAG_INVISIBLE; }
 			void	ClearInvisible() { m_positionFlags &= ~POSITION_FLAG_INVISIBLE; }
