@@ -137,6 +137,11 @@ map_entity_spawn .werner:
 	entity .werner: { weight: 1 }
 }
 
+map_entity_spawn .ironfoot:
+{
+	entity .ironfoot: { weight: 1 }
+}
+
 map_entity_spawn .linda:
 {
 	entity .linda: { weight: 1 }
@@ -550,6 +555,10 @@ zone .junjun:
 	town: true
 }
 
+route .town_farm_patrol:
+{
+}
+
 map_palette .tiles:
 {
 	tile water_1: [ 9 86 104 ]
@@ -639,6 +648,7 @@ map_palette .stuff:
 	entity_spawn .benny: [ 50 43 215 ]	
 	entity_spawn .linda: [ 50 43 115 ]	
 	entity_spawn .werner: [ 97 43 215 ]	
+	entity_spawn .ironfoot: [ 192 143 16 ]	
 	entity_spawn .orgh: [ 6 255 10 ]	
 	entity_spawn .simheist: [ 60 250 10 ]	
 	entity_spawn .zumhorn: [ 70 250 10 ]	
@@ -727,6 +737,11 @@ map_palette .sub_zones:
 	sub_zone .junjun: [ 64 111 211 ]
 }
 
+map_palette .routes:
+{
+	route .town_farm_patrol: [ 34 208 163 ]
+}
+
 map open_world:
 {
 	string: "Aetheris Isle"
@@ -773,6 +788,11 @@ map open_world:
 			palettes:	[ .sub_zones ]
 			source:		"open-world-5.png"
 		}						
+		
+		{
+			palettes:	[ .routes ]
+			source:		"open-world-6.png"
+		}								
 	]
 }
  

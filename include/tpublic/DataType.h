@@ -57,6 +57,7 @@ namespace tpublic
 			ID_ABILITY_MODIFIER,
 			ID_ENCOUNTER,
 			ID_EMOTE,
+			ID_ROUTE,
 
 			NUM_IDS
 		};
@@ -111,7 +112,8 @@ namespace tpublic
 			"wall",
 			"ability_modifier",
 			"encounter",
-			"emote"
+			"emote",
+			"route"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

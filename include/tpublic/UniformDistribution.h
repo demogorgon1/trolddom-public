@@ -3,7 +3,7 @@
 namespace tpublic
 {
 
-	// We need our own of these since tpublic::UniformDistribution isn't generating the same numbers across different platforms
+	// We need our own of these since std::uniform_int_distribution isn't generating the same numbers across different platforms
 	template <typename _T>
 	class UniformDistribution
 	{
@@ -27,8 +27,14 @@ namespace tpublic
 		operator()(
 			_RandomGenType&	aRandom) const
 		{
-			uint64_t r = (uint64_t)aRandom();
+			return Generate(aRandom());
+		}
 
+		_T
+		Generate(
+			uint32_t		aRandom) const
+		{
+			uint64_t r = (uint64_t)aRandom;
 			return m_min + (_T)(((uint64_t)(m_max - m_min + _T(1)) * r) / 0x100000000ULL);
 		}
 		

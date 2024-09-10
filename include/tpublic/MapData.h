@@ -16,6 +16,7 @@ namespace tpublic
 	class AutoDoodads;
 	class Manifest;
 	class MapPathData;
+	class MapRouteData;
 	class WorldInfoMap;
 
 	class MapData
@@ -462,6 +463,8 @@ namespace tpublic
 						const AutoDoodads*		aAutoDoodads);
 		void		ConstructMapPathData(
 						const Manifest*			aManifest);
+		void		ConstructMapRouteData(
+						const Manifest*			aManifest);
 		void		ToStream(
 						IWriter*				aStream) const;
 		bool		FromStream(
@@ -512,6 +515,7 @@ namespace tpublic
 		std::unique_ptr<Generator>					m_generator;
 		std::unique_ptr<WorldInfoMap>				m_worldInfoMap;
 		std::unique_ptr<MapCovers>					m_mapCovers;
+		std::unique_ptr<MapRouteData>				m_mapRouteData;
 		
 		typedef std::unordered_map<Vec2, uint32_t, Vec2::Hasher> ObjectTable;
 

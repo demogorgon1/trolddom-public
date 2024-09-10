@@ -26,8 +26,8 @@ namespace tpublic
 						std::vector<Vec2>&								aOut) const;
 		void		SaveDebugPNG(
 						const char*										aPath) const;
-		void		GenerateFromSinglePosition(
-						const Vec2&										aPosition,
+		void		Generate(
+						const std::vector<Vec2>&						aOrigin,
 						const std::set<Vec2>&							aOpenSet,
 						uint32_t										aMaxDistance);
 		void		Filter(

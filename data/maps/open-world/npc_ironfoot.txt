@@ -1,0 +1,41 @@
+dialogue_screen .ironfoot_vendor: !TRADE_SUPPLIES{}
+
+dialogue_screen .ironfoot_greetings:
+{
+	text: 
+	[	
+		"Greetings fellow traveler. What brings you here?"
+	]		
+	
+	options:
+	[
+		{ goto: .ironfoot_vendor text: "Let me browse your goods." }
+	]
+}
+
+dialogue_root .ironfoot_dialogue:
+{
+	.ironfoot_greetings: { }
+}
+
+npc_behavior_state .ironfoot:
+{
+	behavior: patrolling
+	pause_when_targeted_by_nearby_player: true
+}
+
+entity .ironfoot: !NPC
+{
+	_string: "Ironfoot"
+	_dialogue_root: .ironfoot_dialogue	
+	_sprite: man_22
+	_sprite_dead: man_22_dead	
+	_level: 10
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_route: .town_farm_patrol
+	_default_behavior_state: .ironfoot
+}
+

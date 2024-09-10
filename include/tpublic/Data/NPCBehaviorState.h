@@ -36,7 +36,7 @@ namespace tpublic
 						if (aChild->m_name == "behavior")
 						{
 							m_behavior = NPCBehavior::StringToId(aChild->GetIdentifier());
-							TP_VERIFY(m_behavior != NPCBehavior::INVALID_ID, aChild->m_debugInfo, "'%s' is not NPC behavior.", aChild->GetIdentifier());
+							TP_VERIFY(m_behavior != NPCBehavior::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid NPC behavior.", aChild->GetIdentifier());
 						}
 						else if (aChild->m_name == "max_range")
 						{
@@ -45,6 +45,10 @@ namespace tpublic
 						else if (aChild->m_name == "max_ticks")
 						{
 							m_maxTicks = aChild->GetUInt32();
+						}
+						else if(aChild->m_name == "pause_when_targeted_by_nearby_player")
+						{
+							m_pauseWhenTargetedByNearbyPlayer = aChild->GetBool();
 						}
 						else
 						{
@@ -62,6 +66,7 @@ namespace tpublic
 				aStream->WritePOD(m_behavior);
 				aStream->WriteUInt(m_maxRange);
 				aStream->WriteUInt(m_maxTicks);
+				aStream->WriteBool(m_pauseWhenTargetedByNearbyPlayer);
 			}
 
 			bool
@@ -74,6 +79,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInt(m_maxTicks))
 					return false;
+				if(!aStream->ReadBool(m_pauseWhenTargetedByNearbyPlayer))
+					return false;
 				return true;
 			}
 
@@ -81,6 +88,7 @@ namespace tpublic
 			NPCBehavior::Id			m_behavior = NPCBehavior::INVALID_ID;
 			uint32_t				m_maxRange = 0;
 			uint32_t				m_maxTicks = 0;
+			bool					m_pauseWhenTargetedByNearbyPlayer = false;
 		};
 
 	}

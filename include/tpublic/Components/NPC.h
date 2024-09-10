@@ -357,7 +357,8 @@ namespace tpublic
 				FIELD_BLOCKING,
 				FIELD_ENCOUNTER,
 				FIELD_INACTIVE_ENCOUNTER_DESPAWN,
-				FIELD_LARGE
+				FIELD_LARGE,
+				FIELD_ROUTE,
 			};
 
 			static void
@@ -373,6 +374,7 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_ENCOUNTER, "encounter", offsetof(NPC, m_encounterId))->SetDataType(DataType::ID_ENCOUNTER);
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_INACTIVE_ENCOUNTER_DESPAWN, "inactive_encounter_despawn", offsetof(NPC, m_inactiveEncounterDespawn));
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_BLOCKING, "large", offsetof(NPC, m_large));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_ROUTE, "route", offsetof(NPC, m_routeId))->SetDataType(DataType::ID_ROUTE);
 			}
 
 			const StateEntry*
@@ -399,6 +401,7 @@ namespace tpublic
 				m_large = false;
 				m_inactiveEncounterDespawn = false;
 				m_encounterId = 0;
+				m_routeId = 0;
 
 				m_cooldowns.m_entries.clear();
 				m_castInProgress.reset();
@@ -413,6 +416,7 @@ namespace tpublic
 				m_restoreResources = false;
 				m_spawnWithTarget.reset();
 				m_lastAttackTick = 0;
+				m_routeIsReversing = false;
 			}
 
 			// Public data			
@@ -425,6 +429,7 @@ namespace tpublic
 			bool										m_large = false;
 			bool										m_inactiveEncounterDespawn = false;
 			uint32_t									m_encounterId = 0;
+			uint32_t									m_routeId = 0;
 
 			// Not serialized
 			Cooldowns									m_cooldowns;
@@ -436,9 +441,10 @@ namespace tpublic
 			Vec2										m_anchorPosition;
 			const Data::NPCBehaviorState*				m_npcBehaviorState = NULL;
 			uint32_t									m_npcBehaviorStateTick = 0;
-			NPCMovement									m_npcMovement;
+			NPCMovement									m_npcMovement;			
 			bool										m_restoreResources = false;
 			int32_t										m_lastAttackTick = 0;
+			bool										m_routeIsReversing = false;
 
 			struct SpawnWithTarget
 			{

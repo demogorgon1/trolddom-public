@@ -497,7 +497,7 @@ namespace tpublic::MapGenerators
 
 			boss->m_position = position;
 			boss->m_distanceField = std::make_unique<DistanceField>((int32_t)m_width, (int32_t)m_height);
-			boss->m_distanceField->GenerateFromSinglePosition(position, m_walkable, UINT32_MAX);
+			boss->m_distanceField->Generate({ position }, m_walkable, UINT32_MAX);
 
 			m_entitySpawnPositions.insert(position);
 
@@ -853,7 +853,7 @@ namespace tpublic::MapGenerators
 					playerSpawn->m_position = position.value();
 
 					DistanceField distanceField((int32_t)m_width, (int32_t)m_height);
-					distanceField.GenerateFromSinglePosition(playerSpawn->m_position, m_walkable, UINT32_MAX);
+					distanceField.Generate({ playerSpawn->m_position }, m_walkable, UINT32_MAX);
 
 					for(int32_t y = 0; y < distanceField.m_height; y++)
 					{

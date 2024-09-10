@@ -140,14 +140,17 @@ namespace tpublic
 	}
 
 	void		
-	DistanceField::GenerateFromSinglePosition(
-		const Vec2&										aPosition,
+	DistanceField::Generate(
+		const std::vector<Vec2>&						aOrigin,
 		const std::set<Vec2>&							aOpenSet,
 		uint32_t										aMaxDistance)
 	{
 		typedef std::multimap<uint32_t, Vec2> Queue;
 		Queue queue;
-		queue.insert({ 0, aPosition });
+
+		for(const Vec2& origin : aOrigin)
+			queue.insert({ 0, origin });
+
 		while (queue.size() > 0)
 		{
 			Queue::const_iterator front = queue.cbegin();

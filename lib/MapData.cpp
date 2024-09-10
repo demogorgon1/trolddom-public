@@ -8,6 +8,7 @@
 #include <tpublic/Manifest.h>
 #include <tpublic/MapData.h>
 #include <tpublic/MapPathData.h>
+#include <tpublic/MapRouteData.h>
 #include <tpublic/WorldInfoMap.h>
 
 #include "MapPathDataBuilder.h"
@@ -253,6 +254,14 @@ namespace tpublic
 										m_walls[{ mapX, mapY }] = entry->m_value;
 										break;
 
+									case Data::MapPalette::ENTRY_TYPE_ROUTE:
+										{
+											if (!m_mapRouteData)
+												m_mapRouteData = std::make_unique<MapRouteData>();
+											m_mapRouteData->GetOrCreateRoute(entry->m_value)->m_positions.insert({ mapX, mapY });
+										}
+										break;
+
 									default:
 										assert(false);
 										break;
@@ -305,6 +314,14 @@ namespace tpublic
 		builder.Export(m_mapPathData.get());
 	}
 
+	void
+	MapData::ConstructMapRouteData(
+		const Manifest*			aManifest)
+	{
+		if(m_mapRouteData)
+			m_mapRouteData->Build(aManifest, m_tileMap, m_width, m_height);
+	}
+
 	void	
 	MapData::ToStream(
 		IWriter*				aStream) const
@@ -331,6 +348,7 @@ namespace tpublic
 		aStream->WriteOptionalObjectPointer(m_mapCovers);
 		_WriteObjectTable(aStream, m_doodads);
 		_WriteObjectTable(aStream, m_walls);
+		aStream->WriteOptionalObjectPointer(m_mapRouteData);
 	}
 
 	bool	
@@ -388,12 +406,14 @@ namespace tpublic
 			return false;
 		if (!_ReadObjectTable(aStream, m_walls))
 			return false;
+		if(!aStream->ReadOptionalObjectPointer(m_mapRouteData))
+			return false;
 		return true;
 	}
 
 	void	
 	MapData::PrepareRuntime(
-		uint8_t					/*aRuntime*/,
+		uint8_t					aRuntime,
 		const Manifest*			aManifest)
 	{
 		if(m_tileMap == NULL)
@@ -414,6 +434,9 @@ namespace tpublic
 		assert(m_width > 0 && m_height > 0);
 
 		_InitBits(aManifest);
+
+		if(m_mapRouteData && (aRuntime & DataBase::RUNTIME_SERVER) != 0)
+			m_mapRouteData->Prepare();
 	}
 
 	bool	
@@ -521,6 +544,14 @@ namespace tpublic
 
 			m_mapPathData = std::make_unique<MapPathData>();
 			m_mapPathData->CopyFrom(aMapData->m_mapPathData.get());
+		}
+
+		if (aMapData->m_mapRouteData)
+		{
+			assert(!m_mapRouteData);
+
+			m_mapRouteData = std::make_unique<MapRouteData>();
+			m_mapRouteData->CopyFrom(aMapData->m_mapRouteData.get());
 		}
 
 		m_doodads = aMapData->m_doodads;

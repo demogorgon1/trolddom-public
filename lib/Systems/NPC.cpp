@@ -28,6 +28,7 @@
 #include <tpublic/ISystemEventQueue.h>
 #include <tpublic/Manifest.h>
 #include <tpublic/MapData.h>
+#include <tpublic/MapRouteData.h>
 #include <tpublic/Requirements.h>
 
 namespace tpublic::Systems
@@ -327,6 +328,58 @@ namespace tpublic::Systems
 				{
 					switch(npc->m_npcBehaviorState->m_behavior)
 					{
+					case NPCBehavior::ID_PATROLLING:
+						if (npc->m_moveCooldownUntilTick < aContext->m_tick && npc->m_routeId != 0)
+						{
+							bool paused = false;
+
+							if(npc->m_npcBehaviorState->m_pauseWhenTargetedByNearbyPlayer)
+							{
+								std::vector<uint32_t> entityIds = { 0 }; // Players
+
+								IWorldView::EntityQuery entityQuery;
+								entityQuery.m_position = position->m_position;
+								entityQuery.m_maxDistance = 3;
+								entityQuery.m_entityIds = &entityIds; 
+								aContext->m_worldView->WorldViewQueryEntityInstances(entityQuery, [&](
+									const EntityInstance* aEntityInstance,
+									int32_t /*aDistanceSquared*/) -> bool
+								{
+									if (aEntityInstance->GetComponent<Components::CombatPublic>()->m_targetEntityInstanceId == aEntityInstanceId)
+									{
+										paused = true;
+										return true;
+									}
+									return false;
+								});
+							}
+
+							if(!paused)
+							{
+								const MapRouteData* mapRouteData = aContext->m_worldView->WorldViewGetMapData()->m_mapRouteData.get();
+								if (mapRouteData != NULL)
+								{
+									Vec2 direction;
+									bool shouldChangeDirection = false;
+									if (mapRouteData->GetDirection(npc->m_routeId, position->m_position, npc->m_routeIsReversing, direction, shouldChangeDirection))
+									{
+										IEventQueue::EventQueueMoveRequest moveRequest;
+										moveRequest.AddToPriorityList(direction);
+										moveRequest.m_type = IEventQueue::EventQueueMoveRequest::TYPE_SIMPLE;
+										moveRequest.m_entityInstanceId = aEntityInstanceId;
+
+										aContext->m_eventQueue->EventQueueMove(moveRequest);
+
+										if (shouldChangeDirection)
+											npc->m_routeIsReversing = !npc->m_routeIsReversing;
+									}
+								}
+							}
+
+							npc->m_moveCooldownUntilTick = aContext->m_tick + 12;
+						}
+						break;
+
 					case NPCBehavior::ID_WANDERING:
 						if (npc->m_moveCooldownUntilTick < aContext->m_tick)
 						{
@@ -383,11 +436,11 @@ namespace tpublic::Systems
 									aContext->m_worldView->WorldViewQueryEntityInstances(entityQuery, [&](
 										const EntityInstance* aEntityInstance,
 										int32_t /*aDistanceSquared*/) -> bool
-										{
-											// FIXME: we might need to check if this is compatible with this ability
-											targetEntityInstanceId = aEntityInstance->GetEntityInstanceId();
-											return true;
-										});
+									{
+										// FIXME: we might need to check if this is compatible with this ability
+										targetEntityInstanceId = aEntityInstance->GetEntityInstanceId();
+										return true;
+									});
 
 									if (targetEntityInstanceId != 0)
 									{

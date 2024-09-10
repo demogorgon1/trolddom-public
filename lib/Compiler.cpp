@@ -90,6 +90,7 @@ namespace tpublic
 				aMap->m_data->Build(m_manifest, &autoDoodads);
 
 				aMap->m_data->ConstructMapPathData(m_manifest);
+				aMap->m_data->ConstructMapRouteData(m_manifest);
 				return true;
 			});			
 		}

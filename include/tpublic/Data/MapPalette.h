@@ -23,7 +23,8 @@ namespace tpublic
 				ENTRY_TYPE_LEVEL,
 				ENTRY_TYPE_ZONE,
 				ENTRY_TYPE_WALL,
-				ENTRY_TYPE_SUB_ZONE
+				ENTRY_TYPE_SUB_ZONE,
+				ENTRY_TYPE_ROUTE
 			};
 
 			struct Color
@@ -119,6 +120,11 @@ namespace tpublic
 						{
 							entry.m_type = ENTRY_TYPE_WALL;
 							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_WALL, aChild->m_name.c_str());
+						}
+						else if (aChild->m_tag == "route")
+						{
+							entry.m_type = ENTRY_TYPE_ROUTE;
+							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ROUTE, aChild->m_name.c_str());
 						}
 						else
 						{
