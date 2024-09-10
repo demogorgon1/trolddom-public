@@ -32,7 +32,7 @@ namespace tpublic
 		for (const std::unique_ptr<Route>& t : aOther->m_routes)
 		{
 			std::unique_ptr<Route> copy = std::make_unique<Route>();
-			*copy = *t;
+			copy->CopyFrom(t.get());
 			m_routes.push_back(std::move(copy));
 		}
 	}
@@ -46,10 +46,13 @@ namespace tpublic
 		{
 			m_routeTable[t->m_routeId] = t.get();
 
-			t->m_waypointToIndexTable.clear();
+			for(std::unique_ptr<SubRoute>& subRoute : t->m_subRoutes)
+			{
+				subRoute->m_waypointToIndexTable.clear();
 
-			for(size_t i = 0; i < t->m_waypoints.size(); i++)
-				t->m_waypointToIndexTable[t->m_waypoints[i]] = i;
+				for (size_t i = 0; i < subRoute->m_waypoints.size(); i++)
+					subRoute->m_waypointToIndexTable[subRoute->m_waypoints[i]] = i;
+			}
 		}
 	}
 
@@ -106,63 +109,102 @@ namespace tpublic
 		const Data::Route* routeData = aManifest->GetById<Data::Route>(aRoute->m_routeId);
 		TP_UNUSED(routeData);
 
-		if(aRoute->m_positions.empty())
-			return;
-
 		static const Vec2 NEIGHBORS[4] = { { 1, 0 }, { -1, 0 }, { 0, 1}, { 0, -1 } };
-		Vec2 startPosition = *aRoute->m_positions.cbegin();
-		
-		for(const Vec2& position : aRoute->m_positions)
+
+		while(!aRoute->m_positions.empty())
 		{
-			size_t neighborCount = 0;
-			for(size_t i = 0; i < 4 && neighborCount < 2; i++)
+			std::unique_ptr<SubRoute> subRoute = std::make_unique<SubRoute>();
+
+			Vec2 startPosition = *aRoute->m_positions.cbegin();
+
+			for (const Vec2& position : aRoute->m_positions)
 			{
-				Vec2 p = position + NEIGHBORS[i];
-				if(aRoute->m_positions.contains(p))
-					neighborCount++;
-			}
-
-			if(neighborCount == 1)
-			{
-				startPosition = position;
-				break;
-			}
-		}
-
-		Vec2 position = startPosition;
-
-		while(aRoute->m_positions.size() > 0)
-		{
-			aRoute->m_waypoints.push_back(position);
-			aRoute->m_positions.erase(position);		
-
-			std::optional<Vec2> nextPosition;
-
-			for (size_t i = 0; i < 4; i++)
-			{
-				Vec2 p = position + NEIGHBORS[i];
-				if (aRoute->m_positions.contains(p))
+				size_t neighborCount = 0;
+				for (size_t i = 0; i < 4 && neighborCount < 2; i++)
 				{
-					nextPosition = p;
+					Vec2 p = position + NEIGHBORS[i];
+					if (aRoute->m_positions.contains(p))
+						neighborCount++;
+				}
+
+				if (neighborCount == 1)
+				{
+					startPosition = position;
 					break;
 				}
 			}
 
-			if(!nextPosition)
-				break;
+			Vec2 position = startPosition;
 
-			position = nextPosition.value();
+			while (aRoute->m_positions.size() > 0)
+			{
+				subRoute->m_waypoints.push_back(position);
+				aRoute->m_positions.erase(position);
+
+				std::optional<Vec2> nextPosition;
+
+				for (size_t i = 0; i < 4; i++)
+				{
+					Vec2 p = position + NEIGHBORS[i];
+					if (aRoute->m_positions.contains(p))
+					{
+						nextPosition = p;
+						break;
+					}
+				}
+
+				if (!nextPosition)
+					break;
+
+				position = nextPosition.value();
+			}
+
+			DistanceField distanceField(aMapWidth, aMapHeight);
+			distanceField.Generate(subRoute->m_waypoints, aWalkable, UINT32_MAX);
+
+			subRoute->m_directionField.GenerateFromDistanceField(distanceField);
+
+			if(subRoute->m_waypoints.size() >= 8)
+			{
+				int32_t startToEndDistanceSquared = subRoute->m_waypoints[0].DistanceSquared(subRoute->m_waypoints[subRoute->m_waypoints.size() - 1]);
+				if(startToEndDistanceSquared == 1)
+				{
+					// Start and end are neighbors
+					subRoute->m_isLoop = true;
+				}
+			}
+
+			aRoute->m_subRoutes.push_back(std::move(subRoute));
+		}
+	}
+
+	size_t	
+	MapRouteData::GetSubRouteIndexByPosition(
+		uint32_t				aRouteId,
+		const Vec2&				aPosition) const
+	{
+		RouteTable::const_iterator i = m_routeTable.find(aRouteId);
+		if (i == m_routeTable.cend())
+			return SIZE_MAX;
+
+		size_t index = 0;
+
+		for(const std::unique_ptr<SubRoute>& subRoute : i->second->m_subRoutes)
+		{
+			SubRoute::WaypointToIndexTable::const_iterator j = subRoute->m_waypointToIndexTable.find(aPosition);
+			if(j != subRoute->m_waypointToIndexTable.cend())
+				return index;
+
+			index++;
 		}
 
-		DistanceField distanceField(aMapWidth, aMapHeight);
-		distanceField.Generate(aRoute->m_waypoints, aWalkable, UINT32_MAX);
-
-		aRoute->m_directionField.GenerateFromDistanceField(distanceField);
+		return SIZE_MAX;
 	}
 
 	bool	
 	MapRouteData::GetDirection(
 		uint32_t				aRouteId,
+		size_t					aSubRouteIndex,
 		const Vec2&				aPosition,
 		bool					aIsReversing,
 		Vec2&					aOutDirection,
@@ -178,9 +220,15 @@ namespace tpublic
 			route = i->second;
 		}
 
+		const SubRoute* subRoute = NULL;
+		if(aSubRouteIndex >= route->m_subRoutes.size())
+			return false;
+
+		subRoute = route->m_subRoutes[aSubRouteIndex].get();
+
 		{
-			Route::WaypointToIndexTable::const_iterator i = route->m_waypointToIndexTable.find(aPosition);
-			if(i != route->m_waypointToIndexTable.cend())
+			SubRoute::WaypointToIndexTable::const_iterator i = subRoute->m_waypointToIndexTable.find(aPosition);
+			if(i != subRoute->m_waypointToIndexTable.cend())
 			{
 				size_t index = i->second;
 				size_t nextIndex = 0;
@@ -189,8 +237,15 @@ namespace tpublic
 				{
 					if(index == 0)
 					{
-						nextIndex = 1;
-						aOutChangeDirection = true;
+						if(subRoute->m_isLoop)
+						{
+							nextIndex = subRoute->m_waypoints.size() - 1;
+						}
+						else
+						{
+							nextIndex = 1;
+							aOutChangeDirection = true;
+						}
 					}
 					else
 					{
@@ -199,10 +254,17 @@ namespace tpublic
 				}
 				else
 				{
-					if(index == route->m_waypoints.size() - 1)
+					if(index == subRoute->m_waypoints.size() - 1)
 					{
-						nextIndex = route->m_waypoints.size() - 2;
-						aOutChangeDirection = true;
+						if(subRoute->m_isLoop)
+						{
+							nextIndex = 0;
+						}
+						else
+						{
+							nextIndex = subRoute->m_waypoints.size() - 2;
+							aOutChangeDirection = true;
+						}
 					}
 					else
 					{
@@ -210,14 +272,14 @@ namespace tpublic
 					}
 				}
 
-				if(nextIndex >= route->m_waypoints.size())
+				if(nextIndex >= subRoute->m_waypoints.size())
 					return false;
 
-				aOutDirection = route->m_waypoints[nextIndex] - aPosition;
+				aOutDirection = subRoute->m_waypoints[nextIndex] - aPosition;
 			}
 			else
 			{
-				DirectionField::Direction direction = route->m_directionField.GetDirection(aPosition);
+				DirectionField::Direction direction = subRoute->m_directionField.GetDirection(aPosition);
 
 				switch(direction)
 				{

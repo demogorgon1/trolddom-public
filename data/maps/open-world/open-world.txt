@@ -1,3 +1,8 @@
+npc_behavior_state .default_patrol:
+{
+	behavior: patrolling
+}
+
 map_player_spawn dungeon_1_exit:
 {
 }
@@ -559,6 +564,10 @@ route .town_farm_patrol:
 {
 }
 
+route .default_patrol:
+{
+}
+
 map_palette .tiles:
 {
 	tile water_1: [ 9 86 104 ]
@@ -740,6 +749,7 @@ map_palette .sub_zones:
 map_palette .routes:
 {
 	route .town_farm_patrol: [ 34 208 163 ]
+	route .default_patrol: [ 192 16 186 ]
 }
 
 map open_world:

@@ -1,7 +1,14 @@
 npc_behavior_state .wandering_short:
 {
+	on_route<.default_patrol>: .default_patrol
 	behavior: wandering
 	max_range: 1
+}
+
+npc_behavior_state .passive:
+{
+	on_route<.default_patrol>: .default_patrol
+	behavior: do_nothing
 }
 
 ##########################################################################################
@@ -531,6 +538,7 @@ entity eldertree_woods_goblin_scout_5: !NPC
 	_sprite_dead: goblin_dead
 	_loot_table: .eldertree_woods_goblins_5
 	_creature_type: humanoid
+	_default_behavior_state: .passive
 }
 
 ##########################################################################################

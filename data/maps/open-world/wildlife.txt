@@ -103,6 +103,7 @@ loot_table .bear: !WILDLIFE_LOOT_TABLE { _loot_group: .bear_drops }
 
 npc_behavior_state .wildlife:
 {
+	on_route<.default_patrol>: .default_patrol
 	behavior: wandering
 	max_range: 2
 }

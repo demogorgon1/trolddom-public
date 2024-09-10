@@ -34,7 +34,7 @@ entity .ironfoot: !NPC
 	_faction: npcs		
 	_creature_type: humanoid
 	_loot_table: .npc
-	_not_pushable: true	
+	_not_pushable: false	
 	_route: .town_farm_patrol
 	_default_behavior_state: .ironfoot
 }

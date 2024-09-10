@@ -13,6 +13,40 @@ namespace tpublic
 	class MapRouteData
 	{
 	public:		
+		struct SubRoute
+		{
+			void
+			ToStream(
+				IWriter*					aWriter) const
+			{
+				aWriter->WriteObjects(m_waypoints);
+				m_directionField.ToStream(aWriter);
+				aWriter->WriteBool(m_isLoop);
+			}
+
+			bool
+			FromStream(
+				IReader*					aReader)
+			{
+				if(!aReader->ReadObjects(m_waypoints))
+					return false;
+				if(!m_directionField.FromStream(aReader))
+					return false;
+				if(!aReader->ReadBool(m_isLoop))
+					return false;
+				return true;
+			}
+
+			// Public data
+			std::vector<Vec2>						m_waypoints;
+			DirectionField							m_directionField;
+			bool									m_isLoop = false;
+
+			// Runtime (need prepare), not serialized
+			typedef std::unordered_map<Vec2, size_t, Vec2::Hasher> WaypointToIndexTable;
+			WaypointToIndexTable					m_waypointToIndexTable;
+		};
+
 		struct Route
 		{
 			void
@@ -20,8 +54,7 @@ namespace tpublic
 				IWriter*					aWriter) const
 			{
 				aWriter->WriteUInt(m_routeId);
-				aWriter->WriteObjects(m_waypoints);
-				m_directionField.ToStream(aWriter);
+				aWriter->WriteObjectPointers(m_subRoutes);
 			}
 
 			bool
@@ -30,25 +63,32 @@ namespace tpublic
 			{
 				if(!aReader->ReadUInt(m_routeId))
 					return false;
-				if(!aReader->ReadObjects(m_waypoints))
-					return false;
-				if(!m_directionField.FromStream(aReader))
+				if(!aReader->ReadObjectPointers(m_subRoutes))
 					return false;
 				return true;
 			}
 
-			// Public data
-			uint32_t						m_routeId = 0;
-			std::vector<Vec2>				m_waypoints;
-			DirectionField					m_directionField;
+			void
+			CopyFrom(	
+				const Route*				aOther)
+			{
+				m_routeId = aOther->m_routeId;
+				for(const std::unique_ptr<SubRoute>& subRoute : aOther->m_subRoutes)
+				{
+					std::unique_ptr<SubRoute> t = std::make_unique<SubRoute>();
+					*t = *subRoute;
+					m_subRoutes.push_back(std::move(t));
+				}
+				m_positions = aOther->m_positions;
+			}
 
-			// Runtime (need prepare), not serialized
-			typedef std::unordered_map<Vec2, size_t, Vec2::Hasher> WaypointToIndexTable;
-			WaypointToIndexTable			m_waypointToIndexTable;
+			// Public data
+			uint32_t								m_routeId = 0;
+			std::vector<std::unique_ptr<SubRoute>>	m_subRoutes;
 
 			// For building, not serialized
 			typedef std::unordered_set<Vec2, Vec2::Hasher> Positions;
-			Positions						m_positions;
+			Positions								m_positions;
 		};
 
 		void	ToStream(
@@ -71,18 +111,22 @@ namespace tpublic
 					int32_t					aMapWidth,
 					int32_t					aMapHeight,
 					Route*					aRoute);		
+		size_t	GetSubRouteIndexByPosition(
+					uint32_t				aRouteId,
+					const Vec2&				aPosition) const;
 		bool	GetDirection(
 					uint32_t				aRouteId,
+					size_t					aSubRouteIndex,
 					const Vec2&				aPosition,
 					bool					aIsReversing,
 					Vec2&					aOutDirection,
 					bool&					aOutChangeDirection) const;
 
 		// Public data
-		std::vector<std::unique_ptr<Route>>	m_routes;
+		std::vector<std::unique_ptr<Route>>			m_routes;
 
 		typedef std::unordered_map<uint32_t, const Route*> RouteTable;
-		RouteTable							m_routeTable;
+		RouteTable									m_routeTable;
 	};
 
 }

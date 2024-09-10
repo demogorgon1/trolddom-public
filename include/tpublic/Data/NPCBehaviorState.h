@@ -15,6 +15,45 @@ namespace tpublic
 			static const DataType::Id DATA_TYPE = DataType::ID_NPC_BEHAVIOR_STATE;
 			static const bool TAGGED = false;
 
+			struct OnRoute
+			{
+				OnRoute()
+				{
+
+				}
+
+				OnRoute(
+					const SourceNode*	aSource)
+				{
+					TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing route annotation.");
+					m_routeId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ROUTE, aSource->m_annotation->GetIdentifier());
+					m_npcBehaviorStateId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_NPC_BEHAVIOR_STATE, aSource->GetIdentifier());
+				}
+
+				void
+				ToStream(
+					IWriter*			aWriter) const
+				{
+					aWriter->WriteUInt(m_routeId);
+					aWriter->WriteUInt(m_npcBehaviorStateId);
+				}
+
+				bool
+				FromStream(
+					IReader*			aReader)
+				{
+					if (!aReader->ReadUInt(m_routeId))
+						return false;
+					if (!aReader->ReadUInt(m_npcBehaviorStateId))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t			m_routeId = 0;
+				uint32_t			m_npcBehaviorStateId = 0;
+			};
+
 			void
 			Verify() const
 			{
@@ -50,6 +89,10 @@ namespace tpublic
 						{
 							m_pauseWhenTargetedByNearbyPlayer = aChild->GetBool();
 						}
+						else if(aChild->m_name == "on_route")
+						{
+							m_onRoute = OnRoute(aChild);
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -67,6 +110,7 @@ namespace tpublic
 				aStream->WriteUInt(m_maxRange);
 				aStream->WriteUInt(m_maxTicks);
 				aStream->WriteBool(m_pauseWhenTargetedByNearbyPlayer);
+				aStream->WriteOptionalObject(m_onRoute);
 			}
 
 			bool
@@ -81,6 +125,8 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadBool(m_pauseWhenTargetedByNearbyPlayer))
 					return false;
+				if (!aStream->ReadOptionalObject(m_onRoute))
+					return false;
 				return true;
 			}
 
@@ -89,6 +135,8 @@ namespace tpublic
 			uint32_t				m_maxRange = 0;
 			uint32_t				m_maxTicks = 0;
 			bool					m_pauseWhenTargetedByNearbyPlayer = false;
+			std::optional<OnRoute>	m_onRoute;
+
 		};
 
 	}

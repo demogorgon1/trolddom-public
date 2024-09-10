@@ -417,6 +417,7 @@ namespace tpublic
 				m_spawnWithTarget.reset();
 				m_lastAttackTick = 0;
 				m_routeIsReversing = false;
+				m_subRouteIndex = SIZE_MAX;
 			}
 
 			// Public data			
@@ -445,6 +446,8 @@ namespace tpublic
 			bool										m_restoreResources = false;
 			int32_t										m_lastAttackTick = 0;
 			bool										m_routeIsReversing = false;
+			size_t										m_subRouteIndex = SIZE_MAX;
+			uint32_t									m_effectiveRouteId = 0;
 
 			struct SpawnWithTarget
 			{

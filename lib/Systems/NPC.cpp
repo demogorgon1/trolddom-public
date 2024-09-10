@@ -80,7 +80,7 @@ namespace tpublic::Systems
 			combatPublic->SetDirty();
 		}
 
-		// Remember spawn position and set position size flag if needed
+		// Remember spawn position, set position size flag if needed
 		{
 			Components::Position* position = GetComponent<Components::Position>(aComponents);
 			npc->m_spawnPosition = position->m_position;
@@ -92,6 +92,11 @@ namespace tpublic::Systems
 
 				npc->m_npcMovement.SetDirectOnly(true);
 			}
+		}
+
+		// Initialize effective route id
+		{
+			npc->m_effectiveRouteId = npc->m_routeId;
 		}
 	}
 
@@ -317,6 +322,20 @@ namespace tpublic::Systems
 			{
 				npc->m_npcBehaviorState = GetManifest()->GetById<Data::NPCBehaviorState>(npc->m_defaultBehaviorStateId);
 				npc->m_npcBehaviorStateTick = aContext->m_tick;
+
+				if(npc->m_npcBehaviorState->m_onRoute)
+				{
+					const MapRouteData* mapRouteData = aContext->m_worldView->WorldViewGetMapData()->m_mapRouteData.get();
+					if (mapRouteData != NULL)
+					{
+						npc->m_subRouteIndex = mapRouteData->GetSubRouteIndexByPosition(npc->m_npcBehaviorState->m_onRoute->m_routeId, position->m_position);
+						if(npc->m_subRouteIndex != SIZE_MAX)
+						{
+							npc->m_effectiveRouteId = npc->m_npcBehaviorState->m_onRoute->m_routeId;
+							npc->m_npcBehaviorState = GetManifest()->GetById<Data::NPCBehaviorState>(npc->m_npcBehaviorState->m_onRoute->m_npcBehaviorStateId);
+						}
+					}					
+				}
 			}
 			else if(npc->m_npcBehaviorState != NULL)
 			{
@@ -329,8 +348,8 @@ namespace tpublic::Systems
 					switch(npc->m_npcBehaviorState->m_behavior)
 					{
 					case NPCBehavior::ID_PATROLLING:
-						if (npc->m_moveCooldownUntilTick < aContext->m_tick && npc->m_routeId != 0)
-						{
+						if (npc->m_moveCooldownUntilTick < aContext->m_tick && npc->m_effectiveRouteId != 0)
+						{							
 							bool paused = false;
 
 							if(npc->m_npcBehaviorState->m_pauseWhenTargetedByNearbyPlayer)
@@ -359,9 +378,12 @@ namespace tpublic::Systems
 								const MapRouteData* mapRouteData = aContext->m_worldView->WorldViewGetMapData()->m_mapRouteData.get();
 								if (mapRouteData != NULL)
 								{
+									if(npc->m_subRouteIndex == SIZE_MAX)
+										npc->m_subRouteIndex = mapRouteData->GetSubRouteIndexByPosition(npc->m_effectiveRouteId, position->m_position);
+
 									Vec2 direction;
 									bool shouldChangeDirection = false;
-									if (mapRouteData->GetDirection(npc->m_routeId, position->m_position, npc->m_routeIsReversing, direction, shouldChangeDirection))
+									if (mapRouteData->GetDirection(npc->m_effectiveRouteId, npc->m_subRouteIndex, position->m_position, npc->m_routeIsReversing, direction, shouldChangeDirection))
 									{
 										IEventQueue::EventQueueMoveRequest moveRequest;
 										moveRequest.AddToPriorityList(direction);
