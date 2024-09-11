@@ -51,7 +51,7 @@ map_palette .stuff:
 	entity_spawn .goblin_door_guard_1: [ 128 0 54 ]
 	entity_spawn .goblin_door_guard_2: [ 128 0 193 ]
 	entity_spawn .wolf: [ 128 64 0 ]
-
+	entity_spawn .goblin_patrol: [ 255 165 0 ]
 	entity_spawn .ignorg: [ 255 255 0 ]
 	entity_spawn .biznorg: [ 200 255 0 ]
 	entity_spawn .umbracoth: [ 120 255 0 ]
@@ -83,6 +83,11 @@ map_palette .levels:
 	level<8>: [ 127 0 255 ]
 	level<9>: [ 255 0 255 ]
 	level<10>: [ 255 255 0 ]
+}
+
+map_palette .routes:
+{
+	route .patrol: [ 192 16 186 ]
 }
 
 map dungeon_1:
@@ -123,6 +128,11 @@ map dungeon_1:
 			source:		"dungeon-1-cover.png"
 			cover: 		true
 		}		
+		
+		{ 
+			palettes: 	[ .routes ]
+			source:		"dungeon-1-routes.png"
+		}				
 	]
 	
 	script:

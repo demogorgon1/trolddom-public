@@ -96,7 +96,8 @@ namespace tpublic::Systems
 
 		// Initialize effective route id
 		{
-			npc->m_effectiveRouteId = npc->m_routeId;
+			if(npc->m_routeId != 0)
+				npc->m_effectiveRouteId = npc->m_routeId;
 		}
 	}
 
