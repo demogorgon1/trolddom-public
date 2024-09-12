@@ -281,6 +281,10 @@ namespace tpublic
 		{
 			m_manifest->m_changelogDemo = std::make_unique<Document>(aNode);
 		}
+		else if(aNode->m_name == "base_tile_border_pattern_sprite")
+		{
+			m_manifest->m_baseTileBorderPatternSpriteId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aNode->GetIdentifier());
+		}
 		else if(aNode->IsAnonymousObject())
 		{
 			aNode->ForEachChild([&](

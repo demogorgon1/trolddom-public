@@ -8,9 +8,9 @@ sprites:
 
 	sprite dungeon_floor: { flags: [ tile_walkable ] alt_tiles: [ dungeon_floor_alt_1 dungeon_floor_alt_2 ] }
 	sprite dungeon_wall: { flags: [ tile_block_line_of_sight ] }
-	sprite water_1: { flags: [ tile_fishable ] }
-	sprite water_2: { flags: [ tile_fishable ] }
-	sprite water_3: { flags: [ tile_fishable ] }
+	sprite water_1: { flags: [ tile_fishable tile_water ] water_floor: sand }
+	sprite water_2: { flags: [ tile_fishable tile_water ] water_floor: sand }
+	sprite water_3: { flags: [ tile_fishable tile_water ] water_floor: sand }
 	sprite rocks_dungeon_entrance: { flags: [ tile_walkable tile_top ] borders:
 		[ rocks_border_1 rocks_border_2 rocks_border_3 rocks_border_4 rocks_border_5 rocks_border_6 rocks_border_7
 		  rocks_border_8 rocks_border_9 rocks_border_10 rocks_border_11 rocks_border_12 rocks_border_13 rocks_border_14
@@ -39,7 +39,10 @@ sprites:
 	sprite wood_wall_window: { flags: [ tile_block_line_of_sight tile_top ] }
 	sprite wood_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top ] }
 	sprite forest_2_entrance: { flags: [ tile_walkable tile_top  ] }
-
+	sprite water: { flags: [ tile_fishable tile_water ] water_floor: sand water_animation: [ water_1 water_2 water_3 ] }
+	sprite shallow_water: { flags: [ tile_fishable tile_water tile_walkable ] water_floor: sand water_animation: [ water_1 water_2 water_3 ] 
+	    borders: [ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ] }
+		
 	cursor: { position: [ 0 16 ] }
 	
 	sprite grass: { flags: [ tile_walkable ] borders: 
@@ -412,26 +415,4 @@ sprites:
 	sprite wood_floor_alt_1: { flags: [ tile_walkable ] }
 	sprite wood_floor_alt_2: { flags: [ tile_walkable ] }
 
-	cursor: { position: [ 0 256 ] }
-	sprite shallow_water_1: { flags: [ tile_walkable tile_fishable ] borders: 
-		[ shallow_water_1_border_1 shallow_water_1_border_2 shallow_water_1_border_3 shallow_water_1_border_4 shallow_water_1_border_5 shallow_water_1_border_6 shallow_water_1_border_7
-		  shallow_water_1_border_8 shallow_water_1_border_9 shallow_water_1_border_10 shallow_water_1_border_11 shallow_water_1_border_12 shallow_water_1_border_13 shallow_water_1_border_14
-		  shallow_water_1_border_15 shallow_water_1_border_16 shallow_water_1_border_17 ] }	
-	sprite shallow_water_1_border_1: { }
-	sprite shallow_water_1_border_2: { }
-	sprite shallow_water_1_border_3: { }
-	sprite shallow_water_1_border_4: { }
-	sprite shallow_water_1_border_5: { }
-	sprite shallow_water_1_border_6: { }
-	sprite shallow_water_1_border_7: { }
-	sprite shallow_water_1_border_8: { }
-	sprite shallow_water_1_border_9: { }
-	sprite shallow_water_1_border_10: { }
-	sprite shallow_water_1_border_11: { }
-	sprite shallow_water_1_border_12: { }
-	sprite shallow_water_1_border_13: { }
-	sprite shallow_water_1_border_14: { }
-	sprite shallow_water_1_border_15: { }
-	sprite shallow_water_1_border_16: { }
-	sprite shallow_water_1_border_17: { }
 }

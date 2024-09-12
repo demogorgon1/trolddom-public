@@ -145,6 +145,7 @@ namespace tpublic
 		m_tileLayering.ToStream(aStream);
 		aStream->WriteOptionalObjectPointer(m_changelog);
 		aStream->WriteOptionalObjectPointer(m_changelogDemo);
+		aStream->WriteUInt(m_baseTileBorderPatternSpriteId);
 	}
 
 	bool
@@ -183,6 +184,8 @@ namespace tpublic
 		if(!aStream->ReadOptionalObjectPointer(m_changelog))
 			return false;
 		if (!aStream->ReadOptionalObjectPointer(m_changelogDemo))
+			return false;
+		if(!aStream->ReadUInt(m_baseTileBorderPatternSpriteId))
 			return false;
 
 		return true;

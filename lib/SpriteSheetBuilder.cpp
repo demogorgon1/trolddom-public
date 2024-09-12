@@ -183,6 +183,10 @@ namespace tpublic
 					{
 						sprite->m_info.m_deadSpriteId = aSpriteComponent->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aSpriteComponent->GetIdentifier());
 					}
+					else if (aSpriteComponent->m_name == "water_floor")
+					{
+						sprite->m_info.m_waterFloorSpriteId = aSpriteComponent->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aSpriteComponent->GetIdentifier());
+					}
 					else if (aSpriteComponent->m_name == "tags")
 					{
 						aSpriteComponent->GetIdArray(DataType::ID_TAG, sprite->m_tags);						
@@ -197,11 +201,16 @@ namespace tpublic
 							borders = sprite->m_info.GetOrCreateBorderArray(spriteId);
 						}
 
-						aSpriteComponent->GetIdArray(DataType::ID_SPRITE, *borders);
+
+						aSpriteComponent->GetNullOptionalIdArray(DataType::ID_SPRITE, *borders);
 					}
 					else if (aSpriteComponent->m_name == "alt_tiles")
 					{
 						aSpriteComponent->GetIdArray(DataType::ID_SPRITE, sprite->m_info.m_altTileSpriteIds);
+					}
+					else if (aSpriteComponent->m_name == "water_animation")
+					{
+						aSpriteComponent->GetIdArray(DataType::ID_SPRITE, sprite->m_info.m_waterAnimationSpriteIds);
 					}
 					else if(aSpriteComponent->m_name == "origin")
 					{

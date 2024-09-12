@@ -15,7 +15,7 @@ map_palette .tiles:
 	tile dungeon_wall_face: [ 128 128 128 ]
 	tile dungeon_wall_face_exit: [ 200 200 200 ]
 	tile rocks: [ 143 131 120 ]
-	tile water_1: [ 9 86 104 ]
+	tile water: [ 9 86 104 ]
 	tile pavement: [ 32 32 32 ]
 	tile mud: [ 67 61 32 ]
 	tile dirt: [ 97 91 62 ]

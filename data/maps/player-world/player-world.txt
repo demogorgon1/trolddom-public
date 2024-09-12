@@ -105,7 +105,7 @@ map player_world:
 	has_dynamic_overview_map: true
 	max_players: 20
 
-	default_tile: water_1
+	default_tile: water
 	default_fishing_loot_table: fish
 	view_attenuation: 0
 	view_attenuation_bias: 0

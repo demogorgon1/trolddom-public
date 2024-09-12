@@ -443,6 +443,7 @@ namespace tpublic
 		TileLayering									m_tileLayering;
 		std::unique_ptr<Document>						m_changelog;
 		std::unique_ptr<Document>						m_changelogDemo;
+		uint32_t										m_baseTileBorderPatternSpriteId = 0;
 
 		// Public data
 		std::unique_ptr<IDataContainer>					m_containers[DataType::NUM_IDS];

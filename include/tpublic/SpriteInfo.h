@@ -17,9 +17,10 @@ namespace tpublic
 			FLAG_TILE_BLOCK_LINE_OF_SIGHT	= 0x02,
 			FLAG_TILE_FISHABLE				= 0x04,
 			FLAG_TILE_TOP					= 0x08,
-			FLAG_STANDALONE					= 0x10,
-			FLAG_CENTERED					= 0x20,
-			FLAG_DOUBLED					= 0x40
+			FLAG_TILE_WATER					= 0x10,
+			FLAG_STANDALONE					= 0x20,
+			FLAG_CENTERED					= 0x40,
+			FLAG_DOUBLED					= 0x80
 		};
 
 		struct NamedAnchor
@@ -98,6 +99,8 @@ namespace tpublic
 				return FLAG_TILE_FISHABLE;
 			if (strcmp(aString, "tile_top") == 0)
 				return FLAG_TILE_TOP;
+			if (strcmp(aString, "tile_water") == 0)
+				return FLAG_TILE_WATER;
 			if (strcmp(aString, "standalone") == 0)
 				return FLAG_STANDALONE;
 			if (strcmp(aString, "centered") == 0)
@@ -115,7 +118,9 @@ namespace tpublic
 			aStream->WriteUInt(m_tileLayer);
 			aStream->WriteUInt(m_deadSpriteId);
 			aStream->WriteUInt(m_altGreyscaleSpriteId);
+			aStream->WriteUInt(m_waterFloorSpriteId);
 			aStream->WriteUInts(m_borders);
+			aStream->WriteUInts(m_waterAnimationSpriteIds);
 			aStream->WriteUInts(m_altTileSpriteIds);
 			m_origin.ToStream(aStream);
 			aStream->WriteObjects(m_namedAnchors);
@@ -142,7 +147,11 @@ namespace tpublic
 				return false;
 			if (!aStream->ReadUInt(m_altGreyscaleSpriteId))
 				return false;
+			if (!aStream->ReadUInt(m_waterFloorSpriteId))
+				return false;
 			if (!aStream->ReadUInts(m_borders))
+				return false;
+			if (!aStream->ReadUInts(m_waterAnimationSpriteIds))
 				return false;
 			if (!aStream->ReadUInts(m_altTileSpriteIds))
 				return false;
@@ -245,10 +254,15 @@ namespace tpublic
 		uint32_t					m_altGreyscaleSpriteId = 0;
 		std::vector<uint32_t>		m_altTileSpriteIds;
 		std::optional<IconMetaData>	m_iconMetaData;
+		uint32_t					m_waterFloorSpriteId = 0;
+		std::vector<uint32_t>		m_waterAnimationSpriteIds;
 
 		// This is a bit wonky, only using a shared_ptr here so SpriteInfo can be copied easily.
 		typedef std::unordered_map<uint32_t, std::shared_ptr<std::vector<uint32_t>>> BorderTable;
 		BorderTable					m_borderTable;
+
+		// Not serialized, client runtime only
+		std::vector<uint32_t>		m_borderComposition;
 	};
 
 }

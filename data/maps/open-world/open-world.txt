@@ -570,8 +570,8 @@ route .default_patrol:
 
 map_palette .tiles:
 {
-	tile water_1: [ 9 86 104 ]
-	tile shallow_water_1: [ 100 140 116 ]
+	tile water: [ 9 86 104 ]
+	tile shallow_water: [ 100 140 116 ]
 	tile pavement: [ 32 32 32 ]
 	tile mud: [ 67 61 32 ]
 	tile sand: [ 200 200 128 ]
@@ -756,7 +756,7 @@ map open_world:
 {
 	string: "Aetheris Isle"
 	type: open_world
-	default_tile: water_1
+	default_tile: water
 	default_player_spawn: .player_spawn
 	default_fishing_loot_table: fish
 	view_attenuation: 0

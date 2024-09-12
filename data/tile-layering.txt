@@ -1,6 +1,6 @@
 tile_layering:
 [
-	shallow_water_1
+	shallow_water
 	ice
 	mud
 	sand
@@ -15,3 +15,5 @@ tile_layering:
 	rocks
 	snow_rocks	
 ]
+
+base_tile_border_pattern_sprite: grass
