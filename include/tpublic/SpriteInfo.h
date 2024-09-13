@@ -11,16 +11,17 @@ namespace tpublic
 	class SpriteInfo
 	{
 	public:
-		enum Flag : uint8_t
+		enum Flag : uint16_t
 		{
-			FLAG_TILE_WALKABLE				= 0x01,
-			FLAG_TILE_BLOCK_LINE_OF_SIGHT	= 0x02,
-			FLAG_TILE_FISHABLE				= 0x04,
-			FLAG_TILE_TOP					= 0x08,
-			FLAG_TILE_WATER					= 0x10,
-			FLAG_STANDALONE					= 0x20,
-			FLAG_CENTERED					= 0x40,
-			FLAG_DOUBLED					= 0x80
+			FLAG_TILE_WALKABLE				= 0x0001,
+			FLAG_TILE_BLOCK_LINE_OF_SIGHT	= 0x0002,
+			FLAG_TILE_FISHABLE				= 0x0004,
+			FLAG_TILE_TOP					= 0x0008,
+			FLAG_TILE_WATER					= 0x0010,
+			FLAG_TILE_NO_WAVES				= 0x0020,
+			FLAG_STANDALONE					= 0x0040,
+			FLAG_CENTERED					= 0x0080,
+			FLAG_DOUBLED					= 0x0100
 		};
 
 		struct NamedAnchor
@@ -87,7 +88,7 @@ namespace tpublic
 			Rarity::Id				m_maxRarity = Rarity::INVALID_ID;
 		};
 
-		static inline uint8_t 
+		static inline uint16_t 
 		StringToFlag(			
 			const char*		aString)
 		{
@@ -101,6 +102,8 @@ namespace tpublic
 				return FLAG_TILE_TOP;
 			if (strcmp(aString, "tile_water") == 0)
 				return FLAG_TILE_WATER;
+			if (strcmp(aString, "tile_no_waves") == 0)
+				return FLAG_TILE_NO_WAVES;
 			if (strcmp(aString, "standalone") == 0)
 				return FLAG_STANDALONE;
 			if (strcmp(aString, "centered") == 0)
@@ -119,6 +122,7 @@ namespace tpublic
 			aStream->WriteUInt(m_deadSpriteId);
 			aStream->WriteUInt(m_altGreyscaleSpriteId);
 			aStream->WriteUInt(m_waterFloorSpriteId);
+			aStream->WriteUInt(m_overviewMapOverrideSpriteId);
 			aStream->WriteUInts(m_borders);
 			aStream->WriteUInts(m_waterAnimationSpriteIds);
 			aStream->WriteUInts(m_altTileSpriteIds);
@@ -148,6 +152,8 @@ namespace tpublic
 			if (!aStream->ReadUInt(m_altGreyscaleSpriteId))
 				return false;
 			if (!aStream->ReadUInt(m_waterFloorSpriteId))
+				return false;
+			if (!aStream->ReadUInt(m_overviewMapOverrideSpriteId))
 				return false;
 			if (!aStream->ReadUInts(m_borders))
 				return false;
@@ -244,7 +250,7 @@ namespace tpublic
 		}
 
 		// Public data
-		uint8_t						m_flags = 0;
+		uint16_t					m_flags = 0;
 		uint32_t					m_tileLayer = 0;
 		std::vector<uint32_t>		m_borders;
 		Vec2						m_origin;
@@ -256,6 +262,7 @@ namespace tpublic
 		std::optional<IconMetaData>	m_iconMetaData;
 		uint32_t					m_waterFloorSpriteId = 0;
 		std::vector<uint32_t>		m_waterAnimationSpriteIds;
+		uint32_t					m_overviewMapOverrideSpriteId = 0;
 
 		// This is a bit wonky, only using a shared_ptr here so SpriteInfo can be copied easily.
 		typedef std::unordered_map<uint32_t, std::shared_ptr<std::vector<uint32_t>>> BorderTable;

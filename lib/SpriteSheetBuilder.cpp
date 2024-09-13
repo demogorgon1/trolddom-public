@@ -170,7 +170,7 @@ namespace tpublic
 						aSpriteComponent->GetArray()->ForEachChild([&](
 							const SourceNode* aFlag)
 						{
-							uint8_t flag = SpriteInfo::StringToFlag(aFlag->GetIdentifier());
+							uint16_t flag = SpriteInfo::StringToFlag(aFlag->GetIdentifier());
 							TP_VERIFY(flag != 0, aFlag->m_debugInfo, "Not a valid sprite flag.");
 							sprite->m_info.m_flags |= flag;
 						});
@@ -187,6 +187,10 @@ namespace tpublic
 					{
 						sprite->m_info.m_waterFloorSpriteId = aSpriteComponent->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aSpriteComponent->GetIdentifier());
 					}
+					else if (aSpriteComponent->m_name == "overview_map_override")
+					{
+						sprite->m_info.m_overviewMapOverrideSpriteId = aSpriteComponent->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aSpriteComponent->GetIdentifier());
+					}					
 					else if (aSpriteComponent->m_name == "tags")
 					{
 						aSpriteComponent->GetIdArray(DataType::ID_TAG, sprite->m_tags);						

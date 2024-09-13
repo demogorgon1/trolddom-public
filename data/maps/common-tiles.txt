@@ -40,7 +40,7 @@ sprites:
 	sprite wood_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top ] }
 	sprite forest_2_entrance: { flags: [ tile_walkable tile_top  ] }
 	sprite water: { flags: [ tile_fishable tile_water ] water_floor: sand water_animation: [ water_1 water_2 water_3 ] }
-	sprite shallow_water: { flags: [ tile_fishable tile_water tile_walkable ] water_floor: sand water_animation: [ water_1 water_2 water_3 ] 
+	sprite shallow_water: { flags: [ tile_fishable tile_water tile_walkable tile_no_waves ] overview_map_override: water water_floor: sand water_animation: [ water_1 water_2 water_3 ] 
 	    borders: [ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ] }
 		
 	cursor: { position: [ 0 16 ] }
