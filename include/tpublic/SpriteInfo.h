@@ -270,6 +270,7 @@ namespace tpublic
 
 		// Not serialized, client runtime only
 		std::vector<uint32_t>		m_borderComposition;
+		uint32_t					m_baseTileSpriteId = 0;
 	};
 
 }

@@ -1,7 +1,7 @@
 talent_tree priest_condemnation:
 {
 	string: "Way of Condemnation"
-	description: "Punish enemies of the faith."
+	description: "Rain punishment on disbelievers."
 	icon: icon_condemnation
 	
 	map_palette:
