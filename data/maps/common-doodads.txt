@@ -23,6 +23,8 @@ sprites:
 	sprite doodad_rocks_13: { }
 	sprite doodad_rocks_14: { }
 	sprite doodad_pier_edge_1: { }
+	sprite doodad_crates_1: { }
+	sprite doodad_sack_1: { }
 }
 
 doodad small_rocks:
@@ -72,4 +74,18 @@ doodad pier_edge:
 	map_offset: [ 0 -1 ]
 	
 	auto_probability: 100
+}
+
+doodad crates:
+{
+	sprites: [ doodad_crates_1 ]
+	map_palette<"x">: { occupy: true }
+	map: [ "x" ]	
+}
+
+doodad sack:
+{
+	sprites: [ doodad_sack_1 ]
+	map_palette<"x">: { occupy: true }
+	map: [ "x" ]		
 }

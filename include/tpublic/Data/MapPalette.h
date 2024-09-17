@@ -24,7 +24,8 @@ namespace tpublic
 				ENTRY_TYPE_ZONE,
 				ENTRY_TYPE_WALL,
 				ENTRY_TYPE_SUB_ZONE,
-				ENTRY_TYPE_ROUTE
+				ENTRY_TYPE_ROUTE,
+				ENTRY_TYPE_DOODAD
 			};
 
 			struct Color
@@ -125,6 +126,11 @@ namespace tpublic
 						{
 							entry.m_type = ENTRY_TYPE_ROUTE;
 							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ROUTE, aChild->m_name.c_str());
+						}
+						else if (aChild->m_tag == "doodad")
+						{
+							entry.m_type = ENTRY_TYPE_DOODAD;
+							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_DOODAD, aChild->m_name.c_str());
 						}
 						else
 						{

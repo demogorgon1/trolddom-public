@@ -45,6 +45,7 @@
 #include <tpublic/Data/TagContext.h>
 #include <tpublic/Data/Talent.h>
 #include <tpublic/Data/TalentTree.h>
+#include <tpublic/Data/TileModifier.h>
 #include <tpublic/Data/Wall.h>
 #include <tpublic/Data/WordGenerator.h>
 #include <tpublic/Data/Zone.h>
@@ -102,6 +103,7 @@ namespace tpublic
 		RegisterDataContainer<Data::TagContext>();
 		RegisterDataContainer<Data::Talent>();
 		RegisterDataContainer<Data::TalentTree>();
+		RegisterDataContainer<Data::TileModifier>();
 		RegisterDataContainer<Data::Wall>();
 		RegisterDataContainer<Data::WordGenerator>();
 		RegisterDataContainer<Data::Zone>();				

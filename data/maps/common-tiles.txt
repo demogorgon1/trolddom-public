@@ -42,7 +42,7 @@ sprites:
 	sprite water: { flags: [ tile_fishable tile_water ] water_floor: sand water_animation: [ water_1 water_2 water_3 ] }
 	sprite shallow_water: { flags: [ tile_fishable tile_water tile_walkable tile_no_waves ] overview_map_override: water water_floor: sand water_animation: [ water_1 water_2 water_3 ] 
 	    borders: [ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ] }
-		
+				
 	cursor: { position: [ 0 16 ] }
 	
 	sprite grass: { flags: [ tile_walkable ] borders: 
@@ -66,6 +66,17 @@ sprites:
 	sprite grass_border_15: { }
 	sprite grass_border_16: { }
 	sprite grass_border_17: { }
+	
+	sprite wood_wall_grass_1: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_grass_2: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_start: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_end: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite ext_dungeon_wall_grass_1: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite ext_dungeon_wall_grass_2: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite ext_dungeon_wall_start: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite ext_dungeon_wall_end: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_window_grass_1: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_window_grass_2: { flags: [ tile_block_line_of_sight tile_top ] }
 
 	cursor: { position: [ 0 32 ] }
 

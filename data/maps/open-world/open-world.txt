@@ -752,6 +752,12 @@ map_palette .routes:
 	route .default_patrol: [ 192 16 186 ]
 }
 
+map_palette .doodads:
+{
+	doodad crates: [ 45 39 100 ]
+	doodad sack: [ 35 100 200 ]
+}
+
 map open_world:
 {
 	string: "Aetheris Isle"
@@ -803,6 +809,12 @@ map open_world:
 			palettes:	[ .routes ]
 			source:		"open-world-6.png"
 		}								
+		
+		{
+			palettes:	[ .doodads ]
+			source:		"open-world-7.png"
+		}								
+		
 	]
 }
  

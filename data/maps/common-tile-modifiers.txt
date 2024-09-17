@@ -1,0 +1,161 @@
+tile_modifier wood_wall_grass:
+{
+	sprites: [ wood_wall_grass_1 wood_wall_grass_2 ]
+	
+	requirement<center_must_be>: [ wood_wall ]
+	requirement<south_must_be>: [ grass grass_alt_1 grass_alt_2 ]
+	
+	probability: 90
+}
+
+tile_modifier wood_wall_window_grass:
+{
+	sprites: [ wood_wall_window_grass_1 wood_wall_window_grass_2 ]
+	
+	requirement<center_must_be>: [ wood_wall_window ]
+	requirement<south_must_be>: [ grass grass_alt_1 grass_alt_2 ]
+	
+	probability: 90
+}
+
+tile_modifier ext_dungeon_wall_grass:
+{
+	sprites: [ ext_dungeon_wall_grass_1 ext_dungeon_wall_grass_2 ]
+	
+	requirement<center_must_be>: [ ext_dungeon_wall ]
+	requirement<south_must_be>: [ grass grass_alt_1 grass_alt_2 ]
+	
+	probability: 90
+}
+
+tile_modifier wood_wall_start:
+{
+	sprites: [ wood_wall_start ]
+	
+	requirement<center_must_be>: [ wood_wall ]
+	requirement<west_must_not_be>: [ wood_wall wood_wall_grass_1 wood_wall_grass_2 wood_wall_window wood_wall_window_grass_1 wood_wall_window_grass_2 pavement dungeon_floor wood_floor ]
+	
+	probability: 100
+	priority: true
+}
+
+tile_modifier ext_dungeon_wall_start:
+{
+	sprites: [ ext_dungeon_wall_start ]
+	
+	requirement<center_must_be>: [ ext_dungeon_wall ]
+	requirement<west_must_not_be>: [ ext_dungeon_wall ext_dungeon_wall_grass_1 ext_dungeon_wall_grass_2 ext_dungeon_wall_window ext_dungeon_wall_window_grass_1 ext_dungeon_wall_window_grass_2 ext_dungeon_entrance pavement dungeon_floor wood_floor ]
+	
+	probability: 100
+	priority: true
+}
+
+tile_modifier wood_wall_end:
+{
+	sprites: [ wood_wall_end ]
+	
+	requirement<center_must_be>: [ wood_wall ]
+	requirement<east_must_not_be>: [ wood_wall wood_wall_grass_1 wood_wall_grass_2 wood_wall_window wood_wall_window_grass_1 wood_wall_window_grass_2 pavement dungeon_floor wood_floor ]
+	
+	probability: 100
+	priority: true
+}
+
+tile_modifier ext_dungeon_wall_end:
+{
+	sprites: [ ext_dungeon_wall_end ]
+	
+	requirement<center_must_be>: [ ext_dungeon_wall ]
+	requirement<east_must_not_be>: [ ext_dungeon_wall ext_dungeon_wall_grass_1 ext_dungeon_wall_grass_2 ext_dungeon_wall_window ext_dungeon_wall_window_grass_1 ext_dungeon_wall_window_grass_2 ext_dungeon_entrance pavement dungeon_floor wood_floor ]
+	
+	probability: 100
+	priority: true
+}
+
+tile_modifier roof_nw:
+{
+	sprites: [ roof_nw ]
+	
+	requirement<center_must_be>: [ roof ]
+	requirement<north_must_not_be>: [ roof ]
+	requirement<west_must_not_be>: [ roof ]
+	
+	probability: 100
+	priority: true
+}
+
+tile_modifier roof_ne:
+{
+	sprites: [ roof_ne ]
+	
+	requirement<center_must_be>: [ roof ]
+	requirement<north_must_not_be>: [ roof ]
+	requirement<east_must_not_be>: [ roof ]
+	
+	probability: 100
+	priority: true
+}
+
+tile_modifier roof_sw:
+{
+	sprites: [ roof_sw ]
+	
+	requirement<center_must_be>: [ roof ]
+	requirement<south_must_not_be>: [ roof ]
+	requirement<west_must_not_be>: [ roof ]
+	
+	probability: 100
+	priority: true
+}
+
+tile_modifier roof_se:
+{
+	sprites: [ roof_se ]
+	
+	requirement<center_must_be>: [ roof ]
+	requirement<south_must_not_be>: [ roof ]
+	requirement<east_must_not_be>: [ roof ]
+	
+	probability: 100
+	priority: true
+}
+
+tile_modifier roof_n:
+{
+	sprites: [ roof_n ]
+	
+	requirement<center_must_be>: [ roof ]
+	requirement<north_must_not_be>: [ roof ]
+	
+	probability: 100
+}
+
+tile_modifier roof_e:
+{
+	sprites: [ roof_e ]
+	
+	requirement<center_must_be>: [ roof ]
+	requirement<east_must_not_be>: [ roof ]
+	
+	probability: 100
+}
+
+tile_modifier roof_s:
+{
+	sprites: [ roof_n ]
+	
+	requirement<center_must_be>: [ roof ]
+	requirement<south_must_not_be>: [ roof ]
+	
+	probability: 100
+}
+
+tile_modifier roof_w:
+{
+	sprites: [ roof_w ]
+	
+	requirement<center_must_be>: [ roof ]
+	requirement<west_must_not_be>: [ roof ]
+	
+	probability: 100
+}

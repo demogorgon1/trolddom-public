@@ -1,14 +1,17 @@
 #include "Pcheader.h"
 
+#include <tpublic/Data/Doodad.h>
 #include <tpublic/Data/MapPalette.h>
 #include <tpublic/Data/Sprite.h>
 
 #include <tpublic/AutoDoodads.h>
+#include <tpublic/DoodadPlacement.h>
 #include <tpublic/Image.h>
 #include <tpublic/Manifest.h>
 #include <tpublic/MapData.h>
 #include <tpublic/MapPathData.h>
 #include <tpublic/MapRouteData.h>
+#include <tpublic/UniformDistribution.h>
 #include <tpublic/WorldInfoMap.h>
 
 #include "MapPathDataBuilder.h"
@@ -144,6 +147,8 @@ namespace tpublic
 		const Manifest*			aManifest,
 		const AutoDoodads*		aAutoDoodads)
 	{
+		std::mt19937 random;
+
 		if(m_sourceLayers.size() > 0)
 		{
 			// Allocate space for tile map
@@ -168,6 +173,8 @@ namespace tpublic
 			std::vector<uint32_t> subZoneMap;
 			subZoneMap.resize(m_width * m_height, 0);
 			bool hasSubZoneMap = false;
+
+			std::unordered_map<Vec2, uint32_t, Vec2::Hasher> doodadCoverageMap;
 
 			// Process layers
 			for(std::unique_ptr<SourceLayer>& layer : m_sourceLayers)
@@ -262,6 +269,18 @@ namespace tpublic
 										}
 										break;
 
+									case Data::MapPalette::ENTRY_TYPE_DOODAD:
+										{
+											const Data::Doodad* doodad = aManifest->GetById<Data::Doodad>(entry->m_value);
+											if(doodad->m_spriteIds.size() > 0)
+											{
+												DoodadPlacement::AddToCoverageMap(doodad, { mapX, mapY }, doodadCoverageMap);
+												UniformDistribution<size_t> distribution(0, doodad->m_spriteIds.size() - 1);
+												m_doodads[{ mapX, mapY }] = doodad->m_spriteIds[distribution(random)];
+											}
+										}
+										break;
+
 									default:
 										assert(false);
 										break;
@@ -290,8 +309,7 @@ namespace tpublic
 
 			if(m_mapInfo.m_autoDoodads)
 			{
-				std::unordered_map<Vec2, uint32_t, Vec2::Hasher> coverageMap;
-				aAutoDoodads->GenerateDoodads(0, m_tileMap, { m_width, m_height }, { 0, 0 }, { m_width, m_height }, coverageMap, [&](
+				aAutoDoodads->GenerateDoodads(0, m_tileMap, { m_width, m_height }, { 0, 0 }, { m_width, m_height }, doodadCoverageMap, [&](
 					const Vec2& aPosition,
 					uint32_t	/*aDoodadId*/,
 					uint32_t	aSpriteId)

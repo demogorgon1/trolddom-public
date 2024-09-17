@@ -211,6 +211,8 @@ namespace tpublic
 					else if (aSpriteComponent->m_name == "alt_tiles")
 					{
 						aSpriteComponent->GetIdArray(DataType::ID_SPRITE, sprite->m_info.m_altTileSpriteIds);
+
+						sprite->m_info.m_altTileSpriteIds.push_back(0); // Add a zero option to represent the original
 					}
 					else if (aSpriteComponent->m_name == "water_animation")
 					{
