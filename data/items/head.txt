@@ -15,3 +15,16 @@ item head_zuthyg_1:
 	stat_weight dexterity: 2
 }
 
+item head_baldric_suntrike_1:
+{
+	string: "Crown of the Follower"
+	type: armor_cloth
+	equipment_slots: [ head ]
+	required_level: 6
+	icon: icon_crown_1
+	rarity: uncommon
+	binds: when_picked_up
+	stat_weight wisdom: 1
+	stat_weight constitution: 1
+}
+

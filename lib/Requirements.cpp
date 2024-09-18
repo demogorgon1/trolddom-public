@@ -8,6 +8,7 @@
 #include <tpublic/Components/Openable.h>
 #include <tpublic/Components/PlayerPrivate.h>
 #include <tpublic/Components/Position.h>
+#include <tpublic/Components/Reputation.h>
 #include <tpublic/Components/VisibleAuras.h>
 #include <tpublic/Components/ZoneDiscovery.h>
 
@@ -244,6 +245,18 @@ namespace tpublic
 					if(entry->HasAbility(ability->m_id))
 						return false;
 				}				
+				break;
+
+			case Requirement::TYPE_MUST_HAVE_NEGATIVE_REPUTATION:
+				{
+					if (!entity->IsPlayer())
+						return false;
+
+					const Components::Reputation* reputation = entity->GetComponent<Components::Reputation>();
+					int32_t factionReputation = reputation->GetReputation(aRequirement->m_id);
+					if(factionReputation >= 0)
+						return false;
+				}
 				break;
 
 			default:

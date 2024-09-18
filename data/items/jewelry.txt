@@ -126,3 +126,14 @@ item ring_eldrin_the_enchanter_1:
 	stat_weight health_per_5: 3
 }
 
+item ring_baldric_sunstrike_1:
+{
+	equipment_slots: [ finger_1 finger_2 ]
+	binds: when_picked_up
+	required_level: 6
+	icon: icon_ring_8
+	rarity: uncommon
+	string: "Jeweled Bone Ring"
+	stat_weight mana_per_5: 2
+	stat_weight constitution: 1
+}

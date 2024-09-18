@@ -40,7 +40,8 @@ namespace tpublic
 			TYPE_MUST_HAVE_DISCOVERED_ZONE,
 			TYPE_MUST_NOT_HAVE_PROFESSION_ABILITY,
 			TYPE_MUST_NOT_HAVE_ITEM_EQUIPPED,
-			TYPE_MUST_HAVE_LESS_HEALTH_THAN
+			TYPE_MUST_HAVE_LESS_HEALTH_THAN,
+			TYPE_MUST_HAVE_NEGATIVE_REPUTATION
 		};
 
 		static DataType::Id
@@ -71,6 +72,7 @@ namespace tpublic
 				return DataType::ID_ITEM;
 
 			case TYPE_MUST_BE_FACTION:
+			case TYPE_MUST_HAVE_NEGATIVE_REPUTATION:
 				return DataType::ID_FACTION;
 
 			case TYPE_MUST_HAVE_DISCOVERED_ZONE:
@@ -166,6 +168,8 @@ namespace tpublic
 				m_type = TYPE_MUST_NOT_HAVE_PROFESSION_ABILITY;
 			else if (typeString == "must_have_less_health_than")
 				m_type = TYPE_MUST_HAVE_LESS_HEALTH_THAN;
+			else if (typeString == "must_have_negative_reputation")
+				m_type = TYPE_MUST_HAVE_NEGATIVE_REPUTATION;
 			else
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid type.", aSource->m_annotation->GetIdentifier());
 

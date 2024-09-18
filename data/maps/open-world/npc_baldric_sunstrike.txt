@@ -1,15 +1,47 @@
+expression .baldric_sunstrike_follower:
+{
+	greater_than_or_equal: 
+	{
+		client_reputation: 
+		{
+			id<faction>: light
+		}
+		
+		constant: !WORSHIP_LEVEL_2{}
+	}
+}
+
 dialogue_screen .baldric_sunstrike_greetings:
+{
+	text: 
+	[	
+		"Greetings, fellow follower of the light."		
+	]
+	
+	options:
+	[
+		{ quest: .baldric_sunstrike_1 }
+	]
+}
+
+dialogue_screen .baldric_sunstrike_greetings_2:
 {
 	text: 
 	[	
 		"Serve The Light or die trying."
 	]
-
 }
 
 dialogue_root .baldric_sunstrike_dialogue:
 {
-	.baldric_sunstrike_greetings: { }
+	.baldric_sunstrike_greetings: { conditions: [ .baldric_sunstrike_follower ] }
+	.baldric_sunstrike_greetings_2: { inv_conditions: [ .baldric_sunstrike_follower ] }
+}
+
+
+npc_behavior_state .baldric_sunstrike: 
+{
+	behavior: use_ability
 }
 
 entity .baldric_sunstrike: !NPC
@@ -23,5 +55,125 @@ entity .baldric_sunstrike: !NPC
 	_creature_type: humanoid
 	_loot_table: .npc
 	_not_pushable: true	
+	_default_behavior_state: .baldric_sunstrike
+	_default_abilities: 
+	[ 
+		{ 
+			id: .baldric_sunstrike 
+			target: random_player
+			use_probability: 10 
+			requirement target<must_have_negative_reputation>: light
+			requirement target<must_not_have_aura>: .baldric_sunstrike
+		} 
+	]		
 }
 
+ability .baldric_sunstrike_tick:
+{
+	string: "Holy Condemnation"
+	icon: icon_holy_condemnation		
+	flags: [ always_in_range always_in_line_of_sight ]
+	
+	direct_effect damage:
+	{	
+		damage_type: holy	
+		function: { expression: a a: 9 }													
+	}	
+	
+}
+
+aura .baldric_sunstrike:
+{
+	string: "Holy Condemnation"
+	description: "You've been condemned."
+	icon: icon_holy_condemnation		
+	type: debuff
+	duration: based_on_effects
+	flags: [ magic ]
+	aura_effect repeat: 
+	{ 
+		update_interval: 20
+		update_count: 10
+		ability: .baldric_sunstrike_tick
+	}
+}
+
+cooldown .baldric_sunstrike:
+{
+	duration: 40
+}
+
+ability .baldric_sunstrike:
+{
+	flags: [ target_other target_friendly ]
+	range: 5
+	cooldowns: [ .baldric_sunstrike ]
+	string: "Holy Condemnation"
+	cast_time: 20
+	icon: icon_stuff	
+	direct_effect apply_aura:
+	{
+		aura: .baldric_sunstrike
+	}
+}
+
+############################################################
+# Quest 1
+
+loot_group .baldric_sunstrike_quest_item_1: { }
+
+item .baldric_sunstrike_quest_item_1:
+{
+	binds: when_picked_up
+	loot_groups: [ .baldric_sunstrike_quest_item_1 ]		
+	string: "Demon Blood" 
+	icon: icon_blood
+	stack: 6
+	item_level: 1
+	flags: [ not_sellable ]
+}
+
+objective .baldric_sunstrike_1:
+{
+	string: "Demon Blood"
+	collect_items: { item: .baldric_sunstrike_quest_item_1 count: 6 }
+}
+
+
+quest .baldric_sunstrike_1:
+{
+	string: "Cleansing of the Temple"
+
+	text:
+	[
+		"Find the Temple of Luminara in eastern Eldertree Woods, kill demons, and collect their blood."
+	]
+	
+	description: 
+	[
+		"You've arrive at the most dire time. The ancient Temple of Luminara, once a place of holy sanctuary, has fallen under foul corruption. Demons..."
+		"they've infested its sacred ruins.\n"
+		"\n"
+		"These creatures defile all that is good and pure. The light of the gods grows dim, and if they remain unchecked, the temple will become a gateway for even"
+		"darker forces. We cannot allow this blight to spread.\n"
+		"\n"
+		"Go, $name$. Find the temple ruins, and cleanse them of the demons that plague them. You must restore the holy altars, for only through their power can the"
+		"darkness be purged completely. Bring back some of the vile demonic blood to prove your deeds.\n"
+		"\n"
+		"You'll find the temple ruins in the eastern parts of Eldertree Woods."
+	]
+
+	progress:
+	[
+		"Holy justice needs to be delivered."
+	]
+	
+	completion:
+	[
+		"$name$, you're back! And... I can feel it. The air feels lighter, the corruption that once tainted the temple has lifted. You've done it."
+	]
+
+	objectives: [ .baldric_sunstrike_1 ]
+	reward_one_item: [ ring_baldric_sunstrike_1 ranged_baldric_suntrike_1 head_baldric_suntrike_1 ]
+	level: 6	
+}

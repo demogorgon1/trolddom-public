@@ -442,7 +442,7 @@ namespace tpublic::Systems
 								const Data::Ability* ability = GetManifest()->GetById<Data::Ability>(abilityEntry.m_abilityId);
 								if(npc->m_cooldowns.IsAbilityOnCooldown(ability))
 									continue;
-
+									
 								if (!combat->HasResourcesForAbility(ability, NULL, combat->GetResourceMax(Resource::ID_MANA)))
 									continue;
 
@@ -450,20 +450,52 @@ namespace tpublic::Systems
 								{
 									uint32_t targetEntityInstanceId = 0;
 
-									IWorldView::EntityQuery entityQuery;
-									entityQuery.m_position = position->m_position;
-									entityQuery.m_maxDistance = ability->m_range;
-									entityQuery.m_entityIds = &abilityEntry.m_targetEntityIds;
-									entityQuery.m_flags = IWorldView::EntityQuery::FLAG_LINE_OF_SIGHT;
-
-									aContext->m_worldView->WorldViewQueryEntityInstances(entityQuery, [&](
-										const EntityInstance* aEntityInstance,
-										int32_t /*aDistanceSquared*/) -> bool
+									if(abilityEntry.m_targetEntityIds.size() > 0)
 									{
-										// FIXME: we might need to check if this is compatible with this ability
-										targetEntityInstanceId = aEntityInstance->GetEntityInstanceId();
-										return true;
-									});
+										IWorldView::EntityQuery entityQuery;
+										entityQuery.m_position = position->m_position;
+										entityQuery.m_maxDistance = ability->m_range;
+										entityQuery.m_entityIds = &abilityEntry.m_targetEntityIds;
+										entityQuery.m_flags = IWorldView::EntityQuery::FLAG_LINE_OF_SIGHT;
+
+										aContext->m_worldView->WorldViewQueryEntityInstances(entityQuery, [&](
+											const EntityInstance* aEntityInstance,
+											int32_t /*aDistanceSquared*/) -> bool
+										{
+											// FIXME: we might need to check if this is compatible with this ability
+											targetEntityInstanceId = aEntityInstance->GetEntityInstanceId();
+											return true;
+										});
+									}
+									else if(abilityEntry.m_targetType == Components::NPC::AbilityEntry::TARGET_TYPE_RANDOM_PLAYER)										
+									{
+										const EntityInstance* self = aContext->m_worldView->WorldViewSingleEntityInstance(aEntityInstanceId);
+
+										IWorldView::EntityQuery entityQuery;
+										entityQuery.m_position = position->m_position;
+										entityQuery.m_maxDistance = ability->m_range;
+										entityQuery.m_flags = IWorldView::EntityQuery::FLAG_LINE_OF_SIGHT;
+
+										std::vector<const EntityInstance*> possibleTargets;
+										aContext->m_worldView->WorldViewQueryEntityInstances(entityQuery, [&](
+											const EntityInstance* aEntity,
+											int32_t				  aDistanceSquared)
+										{
+											if (aEntity->GetState() != EntityState::ID_DEAD && aEntity->IsPlayer() && aDistanceSquared >= (int32_t)(ability->m_minRange * ability->m_minRange))
+											{
+												if(Requirements::CheckList(GetManifest(), abilityEntry.m_requirements, self, aEntity))
+													possibleTargets.push_back(aEntity);
+											}
+											return false;
+										});
+
+										if(possibleTargets.size() > 0)
+										{									
+											const EntityInstance* selectedTarget = possibleTargets[Helpers::RandomInRange<size_t>(*aContext->m_random, 0, possibleTargets.size() - 1)];
+											
+											targetEntityInstanceId = selectedTarget->GetEntityInstanceId();
+										}
+									}
 
 									if (targetEntityInstanceId != 0)
 									{

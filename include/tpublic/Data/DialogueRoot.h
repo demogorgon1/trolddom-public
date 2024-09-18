@@ -88,6 +88,10 @@ namespace tpublic
 						{
 							aChild->GetIdArray(DataType::ID_EXPRESSION, m_conditionExpressionIds);
 						}
+						else if (aChild->m_name == "inv_conditions")
+						{
+							aChild->GetIdArray(DataType::ID_EXPRESSION, m_invConditionExpressionIds);
+						}
 						else if (aChild->m_name == "script")
 						{
 							m_dialogueScript = DialogueScript::StringToId(aChild->GetIdentifier());
@@ -106,6 +110,7 @@ namespace tpublic
 				{
 					aWriter->WriteUInt(m_dialogueScreenId);
 					aWriter->WriteUInts(m_conditionExpressionIds);
+					aWriter->WriteUInts(m_invConditionExpressionIds);
 					aWriter->WritePOD(m_dialogueScript);
 				}
 
@@ -115,7 +120,9 @@ namespace tpublic
 				{
 					if(!aReader->ReadUInt(m_dialogueScreenId))
 						return false;
-					if(!aReader->ReadUInts(m_conditionExpressionIds))
+					if (!aReader->ReadUInts(m_conditionExpressionIds))
+						return false;
+					if (!aReader->ReadUInts(m_invConditionExpressionIds))
 						return false;
 					if(!aReader->ReadPOD(m_dialogueScript))
 						return false;
@@ -125,6 +132,7 @@ namespace tpublic
 				// Public data
 				uint32_t				m_dialogueScreenId = 0;
 				std::vector<uint32_t>	m_conditionExpressionIds;
+				std::vector<uint32_t>	m_invConditionExpressionIds;
 				DialogueScript::Id		m_dialogueScript = DialogueScript::ID_NONE;
 			};
 

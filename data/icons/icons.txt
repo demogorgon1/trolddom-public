@@ -389,6 +389,10 @@ sprites:
 	sprite icon_aetheris_stronghold : { tags: [ icon ] }
 	sprite icon_star_3 : { tags: [ icon ] }
 	sprite icon_staff_6 : { tags: [ icon weapon_2h_staff ] icon_meta_data: !ICON_UNCOMMON_5{} }
+
+	cursor: { position: [ 0 336 ] }		
+	sprite icon_ring_8 : { tags: [ icon finger ] icon_meta_data: !ICON_UNCOMMON_5{} }
+	sprite icon_blood : { tags: [ icon ] }
 	
 }
 

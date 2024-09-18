@@ -1059,6 +1059,59 @@ entity wasteland_crab_man_10_b: !NPC
 }
 
 ##########################################################################################
+# Demonic Spawn / Minion
+
+loot_table .demon_6: 
+{
+	slots:
+	[
+		{
+			possibility: { weight: 1 }			
+			possibility: { loot_group: .baldric_sunstrike_quest_item_1 weight: 4 requirement self<must_have_active_quest>: { id: .baldric_sunstrike_1 } }			
+		}	
+		
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+entity demon_melee_6: !NPC
+{
+	_string: "Demonic Spawn"
+	_level: 6
+	_faction: monsters
+	_sprite: demon_1
+	_sprite_dead: demon_1_dead
+	_loot_table: .demon_6
+	_creature_type: demon
+	_default_behavior_state: .wandering_short
+}
+
+loot_table .demon_caster_6: 
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+entity demon_caster_6: !NPC
+{
+	_string: "Demonic Minion"
+	_level: 6
+	_faction: monsters
+	_resource_mana: 1
+	_resource_health: 0.5
+	_sprite: demon_2
+	_sprite_dead: demon_2_dead
+	_loot_table: .demon_6
+	_creature_type: demon
+	_abilities: [ { id: npc_curse } { id: npc_firebolt } { id: npc_attack } ]
+	_default_behavior_state: .wandering_short	
+}
+
+##########################################################################################
 # Zuthyg the Golden
 
 loot_group zuthyg_the_golden: { }

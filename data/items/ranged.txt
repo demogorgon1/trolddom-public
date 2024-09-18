@@ -36,3 +36,14 @@ item ranged_sylas_1:
 	stat_weight strength: 1
 }
 
+item ranged_baldric_suntrike_1:
+{
+	type: ranged_crossbow
+	binds: when_picked_up
+	equipment_slots: [ ranged ]
+	required_level: 6
+	icon: icon_crossbow_1
+	rarity: uncommon
+	string: "Heavy Crossbow"
+	stat_weight dexterity: 1
+}

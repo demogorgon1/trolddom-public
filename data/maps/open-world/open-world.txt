@@ -240,6 +240,13 @@ map_entity_spawn .arcane_anomaly:
 	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
+map_entity_spawn .demon_6:
+{
+	entity demon_melee_6: { weight: 1 }
+	entity demon_caster_6: { weight: 1 }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
 map_entity_spawn .crab_man:
 {
 	entity crab_man_2: { weight: 1 }
@@ -560,6 +567,11 @@ zone .junjun:
 	town: true
 }
 
+zone .temple:
+{
+	string: "Temple of Luminara"
+}
+
 route .town_farm_patrol:
 {
 }
@@ -667,6 +679,7 @@ map_palette .stuff:
 	entity_spawn .crab_man: [ 192 195 15 ]	
 	entity_spawn .crab_man_3: [ 192 15 15 ]	
 	entity_spawn .crab_man_4: [ 193 15 15 ]	
+	entity_spawn .demon_6: [ 230 44 55 ]
 	entity_spawn .cave_spider_4: [ 193 111 153 ]	
 	entity_spawn .forest_spider_1: [ 193 121 113 ]	
 	entity_spawn .crab_man_6: [ 195 12 15 ]	
@@ -744,6 +757,7 @@ map_palette .sub_zones:
 	sub_zone .town: [ 191 20 180 ]
 	sub_zone .undead: [ 64 211 154 ]
 	sub_zone .junjun: [ 64 111 211 ]
+	sub_zone .temple: [ 88 211 64 ]
 }
 
 map_palette .routes:
@@ -767,6 +781,7 @@ map_palette .doodads:
 	doodad bench: [ 58 221 113 ]
 	doodad altar: [ 54 29 64 ]
 	doodad wall_banner_red: [ 243 29 53 ]
+	doodad broken_pillar: [ 136 130 200 ]
 }
 
 map open_world:
