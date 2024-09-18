@@ -762,7 +762,11 @@ map_palette .doodads:
 	doodad bookshelf: [ 35 140 100 ]
 	doodad alchemy_bookshelf: [ 135 100 200 ]
 	doodad empty_bookshelf: [ 135 200 200 ]
-	doodad chair_right: [ 45 200 100 ]
+	doodad chair_right: [ 45 200 100 ]	
+	doodad chair_bottom: [ 56 201 195 ]
+	doodad bench: [ 58 221 113 ]
+	doodad altar: [ 54 29 64 ]
+	doodad wall_banner_red: [ 243 29 53 ]
 }
 
 map open_world:

@@ -65,7 +65,7 @@ namespace tpublic
 							if(possibleDoodad->m_spriteIds.size() > 0 && DoodadPlacement::Check(aTileMap, aSize, possibleDoodad, position, aOutCoverageMap))
 							{
 								assert(possibleDoodad->m_autoProbability.has_value());
-								uint32_t randomValue = (uint32_t)Hash::Splitmix_2_32(aSeed, position.GetHash32());
+								uint32_t randomValue = (uint32_t)Hash::Splitmix_2_32(aSeed + possibleDoodad->m_id, position.GetHash32());
 								uint32_t roll = (possibleDoodad->m_autoProbability->m_max * (randomValue >> 16)) / 0x10000;
 								if(roll < possibleDoodad->m_autoProbability->m_min)
 								{								
