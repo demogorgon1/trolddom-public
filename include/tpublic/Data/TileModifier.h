@@ -38,15 +38,15 @@ namespace tpublic
 				{
 					switch(aType)
 					{
-					case TYPE_CENTER_MUST_BE:		return Vec2(0, 0);
-					case TYPE_EAST_MUST_BE:			return Vec2(1, 0);
-					case TYPE_EAST_MUST_NOT_BE:		return Vec2(1, 0);
-					case TYPE_WEST_MUST_BE:			return Vec2(-1, 0);
-					case TYPE_WEST_MUST_NOT_BE:		return Vec2(-1, 0);
-					case TYPE_SOUTH_MUST_BE:		return Vec2(0, 1);
-					case TYPE_SOUTH_MUST_NOT_BE:	return Vec2(0, 1);
-					case TYPE_NORTH_MUST_BE:		return Vec2(0, -1);
-					case TYPE_NORTH_MUST_NOT_BE:	return Vec2(0, -1);
+					case TYPE_CENTER_MUST_BE:		return Vec2{0, 0};
+					case TYPE_EAST_MUST_BE:			return Vec2{1, 0};
+					case TYPE_EAST_MUST_NOT_BE:		return Vec2{1, 0};
+					case TYPE_WEST_MUST_BE:			return Vec2{-1, 0};
+					case TYPE_WEST_MUST_NOT_BE:		return Vec2{-1, 0};
+					case TYPE_SOUTH_MUST_BE:		return Vec2{0, 1};
+					case TYPE_SOUTH_MUST_NOT_BE:	return Vec2{0, 1};
+					case TYPE_NORTH_MUST_BE:		return Vec2{0, -1};
+					case TYPE_NORTH_MUST_NOT_BE:	return Vec2{0, -1};
 					default:						break;
 					}
 
