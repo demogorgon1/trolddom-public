@@ -40,6 +40,11 @@ sprites:
 	sprite effect_stun_2: { flags: [ centered ] }
 	sprite effect_stun_3: { flags: [ centered ] }
 	sprite effect_frozen: { flags: [ centered ] }
+	sprite effect_melee_swing_0: { flags: [ centered ] }
+	sprite effect_melee_swing_1: { flags: [ centered ] }
+	sprite effect_melee_swing_2: { flags: [ centered ] }
+	sprite effect_melee_swing_3: { flags: [ centered ] }
+	sprite effect_melee_swing_4: { flags: [ centered ] }
 	
 	cursor: { position: [ 0 20 ] }	
 	size: { width: 24 height: 24 }
@@ -89,6 +94,19 @@ sprites:
 	sprite effect_orange_spell_hit_1: { flags: [ centered ] }	
 	sprite effect_orange_spell_hit_2: { flags: [ centered ] }	
 	sprite effect_orange_spell_hit_3: { flags: [ centered ] }	
+	sprite effect_orange_ding_0: { flags: [ centered ] }	
+	sprite effect_orange_ding_1: { flags: [ centered ] }	
+	sprite effect_orange_ding_2: { flags: [ centered ] }	
+	sprite effect_orange_ding_3: { flags: [ centered ] }	
+	sprite effect_orange_ding_4: { flags: [ centered ] }	
+	sprite effect_orange_ding_5: { flags: [ centered ] }	
+	sprite effect_orange_ding_6: { flags: [ centered ] }	
+	sprite effect_orange_ding_7: { flags: [ centered ] }	
+	sprite effect_orange_ding_8: { flags: [ centered ] }	
+	sprite effect_orange_ding_9: { flags: [ centered ] }	
+	sprite effect_orange_ding_10: { flags: [ centered ] }	
+	sprite effect_orange_ding_11: { flags: [ centered ] }	
+	sprite effect_orange_ding_12: { flags: [ centered ] }	
 	
 	cursor: { position: [ 0 67 ] }
 	size: { width: 14 height: 14 }

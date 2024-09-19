@@ -283,6 +283,20 @@ aura mortal_strike:
 	}
 }
 
+particle_system mortal_strike:
+{
+	particle:
+	{
+		sprites: [ effect_melee_swing_0 effect_melee_swing_1 effect_melee_swing_2 effect_melee_swing_3 effect_melee_swing_4 ]
+		flags: [ attached face_target no_loop blend_add ]
+		sprite_interval: 33
+		duration: 165
+		count: 1	
+		alpha: 0.4
+		color_mod: [ 200 64 32 ]
+	}
+}
+
 ability mortal_strike:
 {
 	string: "Mortal Strike"
@@ -295,6 +309,7 @@ ability mortal_strike:
 	delay: 3
 	resource_cost rage: 20
 	talent_tree: fighter_combat
+	melee_particle_system: mortal_strike
 	
 	direct_effect damage:
 	{
@@ -312,6 +327,20 @@ ability mortal_strike:
 ###############################################################################
 # Strike
 
+particle_system strike:
+{
+	particle:
+	{
+		sprites: [ effect_melee_swing_0 effect_melee_swing_1 effect_melee_swing_2 effect_melee_swing_3 effect_melee_swing_4 ]
+		flags: [ attached face_target no_loop blend_add ]
+		sprite_interval: 33
+		duration: 165
+		count: 1	
+		alpha: 0.4
+		color_mod: [ 255 255 214 ]
+	}
+}
+
 ability strike:
 {
 	string: "Strike"
@@ -324,6 +353,7 @@ ability strike:
 	delay: 3
 	resource_cost rage: 10
 	talent_tree: fighter_combat
+	melee_particle_system: strike
 	
 	direct_effect damage:
 	{
