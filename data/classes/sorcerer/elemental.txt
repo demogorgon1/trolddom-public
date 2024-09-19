@@ -429,7 +429,8 @@ particle_system firebolt:
 	particle:
 	{
 		sprites: [ effect_firebolt_b ]
-		flags: [ attached no_rotation no_scaling face_target ]
+		flags: [ attached no_rotation face_target ]
+		scale: 0.4
 		count: 1		
 	}
 }
@@ -489,9 +490,10 @@ particle_system fireball:
 {
 	particle:
 	{
-		sprites: [ effect_firebolt ]
-		flags: [ attached no_rotation no_scaling ]
+		sprites: [ effect_fireball ]
+		flags: [ attached no_rotation face_target ]
 		count: 1		
+		scale: 0.5
 	}
 }
 
@@ -533,7 +535,8 @@ particle_system ice_lance:
 	particle:
 	{
 		sprites: [ effect_frostbolt ]
-		flags: [ attached no_rotation no_scaling face_target ]
+		flags: [ attached no_rotation face_target ]
+		scale: 0.4
 		count: 1		
 	}
 }

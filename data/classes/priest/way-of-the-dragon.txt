@@ -115,6 +115,20 @@ cooldown dragon_punch:
 	duration: 60
 }
 
+particle_system dragon_punch:
+{
+	particle:
+	{
+		sprites: [ effect_melee_swing_0 effect_melee_swing_1 effect_melee_swing_2 effect_melee_swing_3 effect_melee_swing_4 ]
+		flags: [ attached face_target no_loop blend_add ]
+		sprite_interval: 33
+		duration: 165
+		count: 1	
+		alpha: 0.4
+		color_mod: [ 255 128 0 ]
+	}
+}
+
 ability dragon_punch:
 {
 	string: "Dragon Punch"
@@ -127,6 +141,7 @@ ability dragon_punch:
 	delay: 3
 	resource_cost mana: 10
 	talent_tree: priest_dragon
+	melee_particle_system: dragon_punch
 	
 	direct_effect damage:
 	{

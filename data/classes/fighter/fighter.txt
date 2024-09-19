@@ -18,10 +18,11 @@ ability fighter_attack:
 particle_system fighter_shoot:
 {
 	particle:
-	{
+	{	
 		sprites: [ effect_arrow ]
-		flags: [ attached no_rotation no_scaling face_target ]
-		count: 1		
+		flags: [ attached no_rotation face_target ]
+		scale: 0.3
+		count: 1			
 	}
 }
 

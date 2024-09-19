@@ -49,8 +49,9 @@ particle_system npc_firebolt:
 	particle:
 	{
 		sprites: [ effect_firebolt_b ]
-		flags: [ attached no_rotation no_scaling face_target ]
-		count: 1		
+		flags: [ attached no_rotation face_target ]
+		scale: 0.4
+		count: 1	
 	}
 }
 
@@ -190,11 +191,12 @@ ability npc_poison_bite:
 particle_system npc_shoot:
 {
 	particle:
-	{
+	{	
 		sprites: [ effect_arrow ]
-		flags: [ attached no_rotation no_scaling face_target ]
-		count: 1		
-	}
+		flags: [ attached no_rotation face_target ]
+		scale: 0.3
+		count: 1			
+	}	
 }
 
 ability npc_shoot:
