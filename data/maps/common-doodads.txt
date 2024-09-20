@@ -65,7 +65,7 @@ doodad small_rocks:
 doodad flowers:
 {
 	sprites: [ doodad_flowers_1 doodad_flowers_2 doodad_flowers_3 ]
-	map_palette<"x">: { must_be_one_of: [ grass grass_2 ] occupy: true  }
+	map_palette<"x">: { must_be_one_of: [ grass ] occupy: true  }
 	map_palette<"y">: { must_not_be_one_of: [ forest forest_2 ] } 
 	map: [ "y"
 	       "x" ]
