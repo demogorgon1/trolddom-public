@@ -27,6 +27,7 @@
 		combat 
 		npc 		
 		<exists _resource_mana> mana_regen
+		<exists _vendor_stock> vendor_restock
 	]
 	
 	modifiers: 
@@ -101,7 +102,7 @@
 			<exists _encounter> encounter: @_encounter
 			<exists _inactive_encounter_despawn> inactive_encounter_despawn: @_inactive_encounter_despawn
 			<exists _route> route: @_route
-		}
+		}		
 		sprite<static>: 
 		{ 
 			animations:
@@ -111,6 +112,10 @@
 			]		
 		}				
 		<exists _auctioneer and _auctioneer> auctioneer<static>: { }
+		<exists _vendor_stock> vendor_stock: 
+		{
+			item_list: @_vendor_stock
+		}
 		<exists _guild_name> guild_name<static>:
 		{
 			string: @_guild_name

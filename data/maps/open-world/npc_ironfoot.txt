@@ -1,4 +1,12 @@
-dialogue_screen .ironfoot_vendor: !TRADE_SUPPLIES{}
+dialogue_screen .ironfoot_vendor: 
+{
+	sell item_flour: { quantity: 1 }	
+	sell item_water: { quantity: 1 }	
+	
+	sell consumable_small_healing_potion: { quantity: 1 cost: 450 }	
+	sell consumable_small_mana_potion: { quantity: 1 cost: 450 }	
+	sell consumable_pickled_herring: { quantity: 1 cost: 250 }
+}
 
 dialogue_screen .ironfoot_greetings:
 {
@@ -37,5 +45,12 @@ entity .ironfoot: !NPC
 	_not_pushable: false	
 	_route: .town_farm_patrol
 	_default_behavior_state: .ironfoot
+	_vendor_stock: 
+	[
+		{ item: consumable_small_healing_potion count: 2 restock_ticks: 6000 }
+		{ item: consumable_small_mana_potion count: 2 restock_ticks: 6000 }
+		{ item: consumable_dry_bread count: 2 restock_ticks: 6000 }
+		{ item: consumable_pickled_herring count: 2 restock_ticks: 6000 }
+	]
 }
 

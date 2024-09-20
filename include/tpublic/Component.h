@@ -64,6 +64,7 @@ namespace tpublic
 			ID_TRIGGER,
 			ID_SPIRIT_STONE_DISCOVERY,
 			ID_ACCOUNT_ACHIEVEMENTS,
+			ID_VENDOR_STOCK,
 
 			NUM_IDS
 		};
@@ -125,7 +126,8 @@ namespace tpublic
 			"visibility",
 			"trigger",
 			"spirit_stone_discovery",
-			"account_achievements"
+			"account_achievements",
+			"vendor_stock"
 		};		
 
 		static_assert(sizeof(COMPONENT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

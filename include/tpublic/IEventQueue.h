@@ -152,7 +152,12 @@ namespace tpublic
 												uint32_t													aEntityId,	
 												uint32_t													aEntityInstanceId,
 												uint32_t													aEncounterId) = 0;
-
+		virtual void						EventQueueBuyFromVendor(
+												uint32_t													aPlayerEntityInstanceId,
+												uint32_t													aVendorEntityInstanceId,
+												uint32_t													aItemId,
+												uint32_t													aQuantity,
+												int64_t														aCost) = 0;
 	};
 
 }

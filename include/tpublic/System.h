@@ -21,6 +21,7 @@ namespace tpublic
 			ID_RAGE,
 			ID_DOOR,
 			ID_TRIGGER,
+			ID_VENDOR_RESTOCK,
 
 			NUM_IDS
 		};
@@ -39,7 +40,8 @@ namespace tpublic
 			"gateway",
 			"rage",
 			"door",
-			"trigger"
+			"trigger", 
+			"vendor_restock"
 		};
 
 		static_assert(sizeof(SYSTEM_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

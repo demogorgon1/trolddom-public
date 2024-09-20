@@ -11,6 +11,7 @@
 #include "Systems/Rage.h"
 #include "Systems/Shrine.h"
 #include "Systems/Trigger.h"
+#include "Systems/VendorRestock.h"
 
 #include "System.h"
 
@@ -37,6 +38,7 @@ namespace tpublic
 			_Register<Systems::Rage>();
 			_Register<Systems::Shrine>();
 			_Register<Systems::Trigger>();
+			_Register<Systems::VendorRestock>();
 		}
 
 		~SystemFactory()

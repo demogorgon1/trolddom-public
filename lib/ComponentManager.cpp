@@ -50,6 +50,7 @@
 #include <tpublic/Components/Trade.h>
 #include <tpublic/Components/Trigger.h>
 #include <tpublic/Components/VendorBuyback.h>
+#include <tpublic/Components/VendorStock.h>
 #include <tpublic/Components/VisibleAuras.h>
 #include <tpublic/Components/Visibility.h>
 #include <tpublic/Components/Wallet.h>
@@ -112,6 +113,7 @@ namespace tpublic
 		_Register<Components::Trade>();
 		_Register<Components::Trigger>();
 		_Register<Components::VendorBuyback>();
+		_Register<Components::VendorStock>();
 		_Register<Components::VisibleAuras>();
 		_Register<Components::Visibility>();
 		_Register<Components::Wallet>();
