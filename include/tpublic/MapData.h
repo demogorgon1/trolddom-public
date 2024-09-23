@@ -479,7 +479,10 @@ namespace tpublic
 						const Vec2&				aPosition,
 						const Vec2&				aDirection,
 						int32_t					aMaxDistance) const;
-		bool		DoesTileblockLineOfSight(
+		bool		DoesTileBlockLineOfSight(
+						int32_t					aX,
+						int32_t					aY) const;
+		bool		IsTileAlwaysObscured(
 						int32_t					aX,
 						int32_t					aY) const;
 		void		CopyFrom(
@@ -511,6 +514,7 @@ namespace tpublic
 		std::vector<std::unique_ptr<Script>>		m_scripts;
 		uint32_t*									m_walkableBits;
 		uint32_t*									m_blockLineOfSightBits;
+		uint32_t*									m_alwaysObscuredBits;
 		std::unique_ptr<MapPathData>				m_mapPathData;
 		std::unique_ptr<Generator>					m_generator;
 		std::unique_ptr<WorldInfoMap>				m_worldInfoMap;

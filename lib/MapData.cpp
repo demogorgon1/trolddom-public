@@ -87,6 +87,7 @@ namespace tpublic
 		, m_tileMap(NULL)
 		, m_walkableBits(NULL)
 		, m_blockLineOfSightBits(NULL)
+		, m_alwaysObscuredBits(NULL)
 		, m_resetMode(MapType::RESET_MODE_MANUAL)
 		, m_type(MapType::ID_OPEN_WORLD)
 	{
@@ -103,6 +104,7 @@ namespace tpublic
 		, m_y(0)
 		, m_tileMap(NULL)
 		, m_walkableBits(NULL)
+		, m_alwaysObscuredBits(NULL)
 		, m_blockLineOfSightBits(NULL)
 	{
 		aSource->GetObject()->ForEachChild([&](
@@ -139,7 +141,10 @@ namespace tpublic
 			delete [] m_walkableBits;
 
 		if (m_blockLineOfSightBits != NULL)
-			delete[] m_blockLineOfSightBits;
+			delete [] m_blockLineOfSightBits;
+
+		if(m_alwaysObscuredBits != NULL)
+			delete [] m_alwaysObscuredBits;
 	}
 
 	void	
@@ -449,6 +454,12 @@ namespace tpublic
 			m_blockLineOfSightBits = NULL;
 		}
 
+		if(m_alwaysObscuredBits != NULL)
+		{
+			delete[] m_alwaysObscuredBits;
+			m_alwaysObscuredBits = NULL;
+		}
+
 		assert(m_width > 0 && m_height > 0);
 
 		_InitBits(aManifest);
@@ -493,7 +504,7 @@ namespace tpublic
 	}
 
 	bool	
-	MapData::DoesTileblockLineOfSight(
+	MapData::DoesTileBlockLineOfSight(
 		int32_t					aX,
 		int32_t					aY) const
 	{
@@ -507,6 +518,23 @@ namespace tpublic
 		uint32_t j = i / 32;
 		uint32_t k = i % 32;
 		return (m_blockLineOfSightBits[j] & (1 << k)) != 0;
+	}
+
+	bool	
+	MapData::IsTileAlwaysObscured(
+		int32_t					aX,
+		int32_t					aY) const
+	{
+		assert(m_alwaysObscuredBits != NULL);
+		int32_t x = aX - m_x;
+		int32_t y = aY - m_y;
+		if(x < 0 || y < 0 || x >= m_width || y >= m_height)
+			return false;
+	
+		uint32_t i = (uint32_t)(x + y * m_width);
+		uint32_t j = i / 32;
+		uint32_t k = i % 32;
+		return (m_alwaysObscuredBits[j] & (1 << k)) != 0;
 	}
 
 	void	
@@ -735,38 +763,77 @@ namespace tpublic
 
 		m_walkableBits = new uint32_t[count];
 		m_blockLineOfSightBits = new uint32_t[count];
+		m_alwaysObscuredBits = new uint32_t[count];
 
 		memset(m_walkableBits, 0, sizeof(uint32_t) * (size_t)count);
 		memset(m_blockLineOfSightBits, 0, sizeof(uint32_t) * (size_t)count);
+		memset(m_alwaysObscuredBits, 0, sizeof(uint32_t) * (size_t)count);
 
-		const uint32_t* in = m_tileMap;
-		uint32_t* outWalkable = m_walkableBits;
-		uint32_t* outBlockLineOfSight = m_blockLineOfSightBits;
-		uint32_t bit = 0;
-
-		for(int32_t y = 0; y < m_height; y++)
 		{
-			for(int32_t x = 0; x < m_width; x++)
+			const uint32_t* in = m_tileMap;
+			uint32_t* outWalkable = m_walkableBits;
+			uint32_t* outBlockLineOfSight = m_blockLineOfSightBits;
+			uint32_t bit = 0;
+
+			for (int32_t y = 0; y < m_height; y++)
 			{
-				bool hasWall = GetWall({ x, y }) != 0;
-
-				const Data::Sprite* sprite = aManifest->GetById<tpublic::Data::Sprite>(*in);
-				
-				if(!hasWall && (sprite->m_info.m_flags & SpriteInfo::FLAG_TILE_WALKABLE))
-					*outWalkable |= 1 << bit;
-
-				if (hasWall || (sprite->m_info.m_flags & SpriteInfo::FLAG_TILE_BLOCK_LINE_OF_SIGHT))
-					*outBlockLineOfSight |= 1 << bit;
-
-				// Next tile
-				in++;
-				bit++;
-
-				if(bit == 32)
+				for (int32_t x = 0; x < m_width; x++)
 				{
-					bit = 0;
-					outWalkable++;
-					outBlockLineOfSight++;
+					bool hasWall = GetWall({ x, y }) != 0;
+
+					const Data::Sprite* sprite = aManifest->GetById<tpublic::Data::Sprite>(*in);
+
+					if (!hasWall && (sprite->m_info.m_flags & SpriteInfo::FLAG_TILE_WALKABLE))
+						*outWalkable |= 1 << bit;
+
+					if (hasWall || (sprite->m_info.m_flags & SpriteInfo::FLAG_TILE_BLOCK_LINE_OF_SIGHT))
+						*outBlockLineOfSight |= 1 << bit;
+
+					// Next tile
+					in++;
+					bit++;
+
+					if (bit == 32)
+					{
+						bit = 0;
+						outWalkable++;
+						outBlockLineOfSight++;
+					}
+				}
+			}
+		}
+
+		{
+			uint32_t* out = m_alwaysObscuredBits;
+			uint32_t bit = 0;
+
+			// If a tile blocks line of sight and is also completely surrounded by line of sight blockers, flag it as "always obscured"
+			for (int32_t y = 0; y < m_height; y++)
+			{
+				for (int32_t x = 0; x < m_width; x++)
+				{
+					bool obscured = true;
+
+					for(int32_t yi = -1; yi <= 1 && obscured; yi++)
+					{
+						for (int32_t xi = -1; xi <= 1 && obscured; xi++)
+						{
+							if (!DoesTileBlockLineOfSight(x + xi, y + yi))
+								obscured = false;
+						}
+					}
+
+					if(obscured)
+						*out |= 1 << bit;
+
+					// Next tile
+					bit++;
+
+					if (bit == 32)
+					{
+						bit = 0;
+						out++;
+					}
 				}
 			}
 		}
