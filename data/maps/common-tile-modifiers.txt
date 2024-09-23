@@ -142,7 +142,7 @@ tile_modifier roof_e:
 
 tile_modifier roof_s:
 {
-	sprites: [ roof_n ]
+	sprites: [ roof_s ]
 	
 	requirement<center_must_be>: [ roof ]
 	requirement<south_must_not_be>: [ roof ]
