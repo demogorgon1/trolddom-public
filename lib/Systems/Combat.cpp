@@ -125,7 +125,7 @@ namespace tpublic::Systems
 	Combat::UpdatePublic(
 		uint32_t			/*aEntityId*/,
 		uint32_t			/*aEntityInstanceId*/,
-		EntityState::Id		/*aEntityState*/,
+		EntityState::Id		aEntityState,
 		int32_t				/*aTicksInState*/,
 		ComponentBase**		aComponents,
 		Context*			/*aContext*/) 
@@ -172,6 +172,12 @@ namespace tpublic::Systems
 		}
 
 		combatPublic->m_damageAccum = 0;
+
+		if(aEntityState == EntityState::ID_DEAD)
+		{
+			if(combatPublic->SetZeroResources())
+				combatPublic->SetDirty();
+		}
 	}
 
 }

@@ -389,6 +389,21 @@ namespace tpublic
 				}
 			}
 
+			bool
+			SetZeroResources()
+			{
+				bool changed = false;
+				for (ResourceEntry& t : m_resources)
+				{
+					if(t.m_current > 0)
+					{
+						changed = true;
+						t.m_current = 0;
+					}
+				}
+				return changed;
+			}
+
 			void
 			Reset()
 			{
