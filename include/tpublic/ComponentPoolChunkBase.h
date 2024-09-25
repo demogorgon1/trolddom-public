@@ -20,6 +20,7 @@ namespace tpublic
 		// Virtual interface
 		virtual ComponentBase*	GetComponentBase(
 									uint8_t				aIndex) = 0;
+		virtual void			Validate() const = 0;
 
 		// Public data
 		uint8_t							m_realCount = 0;

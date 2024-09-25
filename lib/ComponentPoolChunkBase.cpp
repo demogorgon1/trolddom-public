@@ -44,6 +44,7 @@ namespace tpublic
 	ComponentPoolChunkBase::Release(
 		uint8_t				aIndex) 
 	{
+		assert(aIndex < m_size);
 		assert(m_realCount > 0);
 
 		if (aIndex + 1 == m_size)

@@ -34,17 +34,17 @@ namespace tpublic
 			PENDING_PERSISTENCE_UPDATE_HIGH_PRIORITY
 		};
 
-		void						SetComponentId(
-										uint32_t											aComponentId);
-		void						InitAllocation(
-										uint32_t											aComponentId,
-										ComponentPoolChunkBase*								aComponentPoolChunkBase,
-										uint8_t												aIndex);
-		void						ResetPendingPersistenceUpdate();
-		void						SetPendingPersistenceUpdate(
-										PendingPersistenceUpdate							aPendingPersistenceUpdate);
-		void						ResetDirty();
-		void						SetDirty();
+		void							SetComponentId(
+											uint32_t											aComponentId);
+		void							InitAllocation(
+											uint32_t											aComponentId,
+											ComponentPoolChunkBase*								aComponentPoolChunkBase,
+											uint8_t												aIndex);
+		void							ResetPendingPersistenceUpdate();
+		void							SetPendingPersistenceUpdate(
+											PendingPersistenceUpdate							aPendingPersistenceUpdate);
+		void							ResetDirty();
+		void							SetDirty();
 
 		template <typename _T>
 		const _T*
@@ -70,11 +70,12 @@ namespace tpublic
 		}
 
 		// Data access
-		uint32_t					GetComponentId() const { return m_componentId; }
-		PendingPersistenceUpdate	GetPendingPersistenceUpdate() const { return m_pendingPersistenceUpdate; }
-		bool						IsDirty() const { return m_dirty; }
-		ComponentPoolChunkBase*		GetComponentPoolChunkBase() { return m_componentPoolChunkBase; }
-		uint8_t						GetComponentPoolChunkIndex() const { return m_componentPoolChunkIndex; }
+		uint32_t						GetComponentId() const { return m_componentId; }
+		PendingPersistenceUpdate		GetPendingPersistenceUpdate() const { return m_pendingPersistenceUpdate; }
+		bool							IsDirty() const { return m_dirty; }
+		ComponentPoolChunkBase*			GetComponentPoolChunkBase() { return m_componentPoolChunkBase; }
+		const ComponentPoolChunkBase*	GetComponentPoolChunkBase() const { return m_componentPoolChunkBase; }
+		uint8_t							GetComponentPoolChunkIndex() const { return m_componentPoolChunkIndex; }
 
 	private:
 
@@ -83,6 +84,7 @@ namespace tpublic
 		uint8_t						m_componentPoolChunkIndex = 0;
 		PendingPersistenceUpdate	m_pendingPersistenceUpdate = PENDING_PERSISTENCE_UPDATE_NONE;
 		bool						m_dirty = false;
+
 	};
 
 }

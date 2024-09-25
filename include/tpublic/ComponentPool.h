@@ -60,6 +60,7 @@ namespace tpublic
 			}
 
 			ComponentBase* componentBase = chunk->GetComponentBase(i);
+			
 			componentBase->InitAllocation(_T::ID, chunk, i);
 			componentBase->Cast<_T>()->Reset();
 			return componentBase;
@@ -93,6 +94,15 @@ namespace tpublic
 				m_fullChunks.RemoveChunk(chunk);
 				m_partialChunks.AddChunk(chunk);
 			}
+		}
+
+		void			
+		Validate() const override
+		{
+			std::lock_guard lock((std::mutex&)m_lock);
+
+			m_fullChunks.Validate(true);
+			m_partialChunks.Validate(false);
 		}
 
 	private:		

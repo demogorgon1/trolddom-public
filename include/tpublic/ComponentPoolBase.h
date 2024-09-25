@@ -14,6 +14,7 @@ namespace tpublic
 		virtual ComponentBase*	Allocate() = 0;
 		virtual void			Release(
 									ComponentBase*		aComponentBase) = 0;		
+		virtual void			Validate() const = 0;
 	};
 
 }

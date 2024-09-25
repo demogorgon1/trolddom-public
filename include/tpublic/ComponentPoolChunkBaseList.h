@@ -14,6 +14,12 @@ namespace tpublic
 					ComponentPoolChunkBase* aChunk);
 		void	RemoveChunk(
 					ComponentPoolChunkBase* aChunk);
+		bool	HasChunk(
+					ComponentPoolChunkBase* aChunk) const;
+		void	ValidateHasChunk(
+					ComponentPoolChunkBase* aChunk) const;
+		void	Validate(
+					bool					aFullExpected) const;
 
 		// Public data
 		size_t					m_count = 0;

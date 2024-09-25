@@ -63,4 +63,50 @@ namespace tpublic
 		aChunk->m_prev = NULL;
 	}
 
+	bool
+	ComponentPoolChunkBaseList::HasChunk(
+		ComponentPoolChunkBase* aChunk) const
+	{
+		for (const ComponentPoolChunkBase* t = m_head; t != NULL; t = t->m_next)
+		{
+			if(t == aChunk)
+				return true;
+		}
+		return false;
+	}
+
+	void
+	ComponentPoolChunkBaseList::ValidateHasChunk(
+		ComponentPoolChunkBase* aChunk) const
+	{
+		assert(HasChunk(aChunk));
+	}
+
+	void	
+	ComponentPoolChunkBaseList::Validate(
+		bool					aFullExpected) const
+	{
+		size_t count = 0;
+
+		for(const ComponentPoolChunkBase* t = m_head; t != NULL; t = t->m_next)
+		{
+			t->Validate();
+
+			if(aFullExpected)
+			{
+				assert(t->m_freeListSize == 0);
+				assert(t->m_realCount == ComponentPoolChunkBase::SIZE);
+				assert(t->m_size == ComponentPoolChunkBase::SIZE);
+			}
+			else
+			{
+				assert(t->m_realCount < ComponentPoolChunkBase::SIZE);
+			}
+
+			count++;
+		}
+
+		assert(count == m_count);
+	}
+
 }

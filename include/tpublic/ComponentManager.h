@@ -12,6 +12,7 @@ namespace tpublic
 	class IReader;
 	class IWriter;
 	class Manifest;
+	class UniqueComponent;
 
 	class ComponentManager
 	{
@@ -19,8 +20,9 @@ namespace tpublic
 									ComponentManager();
 									~ComponentManager();
 
-		ComponentBase*				AllocateComponentNonPooled(
-										uint32_t				aId) const;
+		void						AllocateUniqueComponent(
+										uint32_t				aId,
+										UniqueComponent&		aOut) const;
 		ComponentBase*				AllocateComponent(
 										uint32_t				aId);
 		void						ReleaseComponent(
@@ -58,6 +60,7 @@ namespace tpublic
 		{
 			uint32_t							m_id = 0;
 			std::function<ComponentBase*()>		m_create;
+			std::function<void(ComponentBase*)>	m_delete;
 			ComponentSchema						m_schema;
 			uint8_t								m_flags = 0;
 			Persistence::Id						m_persistence = Persistence::ID_NONE;
@@ -82,6 +85,7 @@ namespace tpublic
 			t.m_pool.reset(new ComponentPool<_T>());
 
 			t.m_create = []() { return new _T(); };
+			t.m_delete = [](ComponentBase* aComponentBase) { delete aComponentBase->Cast<_T>(); };
 
 			_InitComponentType(t);
 		}

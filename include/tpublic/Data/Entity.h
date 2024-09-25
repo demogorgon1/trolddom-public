@@ -7,6 +7,7 @@
 #include "../Image.h"
 #include "../Resource.h"
 #include "../System.h"
+#include "../UniqueComponent.h"
 
 namespace tpublic
 {
@@ -106,15 +107,13 @@ namespace tpublic
 
 					const ComponentManager* componentManager = aSource->m_sourceContext->m_componentManager.get();
 
-					std::unique_ptr<ComponentBase> component(componentManager->AllocateComponentNonPooled(m_componentId));
+					componentManager->AllocateUniqueComponent(m_componentId, m_component);
 
 					uint8_t flags = componentManager->GetComponentFlags(m_componentId);
 					TP_VERIFY((flags & ComponentBase::FLAG_PLAYER_ONLY) == 0, aSource->m_debugInfo, "'%s' is a player-only component.", aSource->m_name.c_str());
 
 					if(!aSource->m_children.empty())
-						aSource->m_sourceContext->m_componentManager->ReadSource(aSource, component.get());
-
-					m_componentBase = std::move(component);
+						aSource->m_sourceContext->m_componentManager->ReadSource(aSource, m_component.GetPointer());
 				}
 
 				void	
@@ -124,7 +123,7 @@ namespace tpublic
 				{
 					aStream->WriteUInt(m_componentId);
 					aStream->WritePOD(m_flags);
-					aComponentManager->WriteNetwork(aStream, m_componentBase.get());
+					aComponentManager->WriteNetwork(aStream, m_component.GetPointer());
 				}
 			
 				bool	
@@ -136,8 +135,8 @@ namespace tpublic
 					if(!aStream->ReadPOD(m_flags))
 						return false;
 
-					m_componentBase.reset(aStream->GetComponentManager()->AllocateComponentNonPooled(m_componentId));
-					if(!aStream->GetComponentManager()->ReadNetwork(aStream, m_componentBase.get()))
+					aStream->GetComponentManager()->AllocateUniqueComponent(m_componentId, m_component);
+					if(!aStream->GetComponentManager()->ReadNetwork(aStream, m_component.GetPointer()))
 						return false;
 					return true;
 				}
@@ -145,8 +144,7 @@ namespace tpublic
 				// Public data
 				uint32_t							m_componentId = 0;
 				uint8_t								m_flags = 0;
-				std::unique_ptr<ComponentBase>		m_componentBase;
-				
+				UniqueComponent						m_component;
 			};
 
 			void
@@ -167,7 +165,7 @@ namespace tpublic
 					EntityInstance::ComponentEntry t;
 					
 					if(componentEntry->m_flags & ComponentEntry::FLAG_STATIC)
-						t.m_static = componentEntry->m_componentBase.get();
+						t.m_static = componentEntry->m_component.GetPointer();
 					else
 						t.m_allocated = aComponentManager->AllocateComponent(componentEntry->m_componentId);
 
@@ -189,7 +187,7 @@ namespace tpublic
 					if((componentEntry->m_flags & ComponentEntry::FLAG_STATIC) == 0)
 					{
 						aWriter->WriteUInt(index);
-						aComponentManager->WriteNetwork(aWriter, componentEntry->m_componentBase.get());
+						aComponentManager->WriteNetwork(aWriter, componentEntry->m_component.GetPointer());
 					}
 
 					index++;
@@ -202,8 +200,8 @@ namespace tpublic
 			{
 				for (std::unique_ptr<ComponentEntry>& componentEntry : m_components)
 				{
-					if(componentEntry->m_componentBase->Is<_T>())
-						return componentEntry->m_componentBase->Cast<_T>();
+					if(componentEntry->m_component.GetPointer()->Is<_T>())
+						return componentEntry->m_component.GetPointer()->Cast<_T>();
 				}
 				return NULL;
 			}
@@ -214,8 +212,8 @@ namespace tpublic
 			{
 				for (const std::unique_ptr<ComponentEntry>& componentEntry : m_components)
 				{
-					if(componentEntry->m_componentBase->Is<_T>())
-						return componentEntry->m_componentBase->Cast<_T>();
+					if(componentEntry->m_component.GetPointer()->Is<_T>())
+						return componentEntry->m_component.GetPointer()->Cast<_T>();
 				}
 				return NULL;
 			}

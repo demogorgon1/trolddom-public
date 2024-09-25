@@ -57,6 +57,7 @@
 #include <tpublic/Components/ZoneDiscovery.h>
 
 #include <tpublic/ComponentManager.h>
+#include <tpublic/UniqueComponent.h>
 
 namespace tpublic
 {
@@ -125,19 +126,18 @@ namespace tpublic
 
 	}
 
-	ComponentBase*
-	ComponentManager::AllocateComponentNonPooled(
-		uint32_t				aId) const
+	void						
+	ComponentManager::AllocateUniqueComponent(
+		uint32_t				aId,
+		UniqueComponent&		aOut) const
 	{
 		assert(aId > 0 && aId < Component::NUM_IDS);
 		const ComponentType& t = m_componentTypes[aId];
-	
-		if(!t.m_create)
-			return NULL;
+		assert(t.m_create);
+		assert(t.m_delete);
+		aOut.Set(t.m_create(), t.m_delete);
 
-		ComponentBase* component = t.m_create();
-		component->InitAllocation(aId, NULL, 0);
-		return component;
+		aOut.GetPointer()->InitAllocation(aId, NULL, 0);
 	}
 
 	ComponentBase*
@@ -147,7 +147,8 @@ namespace tpublic
 		assert(aId > 0 && aId < Component::NUM_IDS);
 		ComponentType& t = m_componentTypes[aId];
 		assert(t.m_pool);
-		return t.m_pool->Allocate();
+		ComponentBase* component = t.m_pool->Allocate();
+		return component;
 	}
 
 	void						
