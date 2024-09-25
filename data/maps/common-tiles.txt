@@ -101,7 +101,7 @@ sprites:
 	sprite dirt_border_15: { }
 	sprite dirt_border_16: { }
 	sprite dirt_border_17: { }
-
+	
 	cursor: { position: [ 0 48 ] }
 	
 	sprite forest: { flags: [ tile_block_line_of_sight ]  borders:
@@ -125,6 +125,16 @@ sprites:
 	sprite forest_border_15: { }
 	sprite forest_border_16: { }
 	sprite forest_border_17: { }
+	
+	sprite roof_2_nw: { }
+	sprite roof_2_n: { }
+	sprite roof_2_ne: { }
+	sprite roof_2_w: { }
+	sprite roof_2: { }
+	sprite roof_2_e: { }
+	sprite roof_2_sw: { }
+	sprite roof_2_s: { }
+	sprite roof_2_se: { }	
 
 	cursor: { position: [ 0 64 ] }
 	
@@ -149,6 +159,16 @@ sprites:
 	sprite rocks_border_15: { }
 	sprite rocks_border_16: { }
 	sprite rocks_border_17: { }
+	
+	sprite roof_3_nw: { }
+	sprite roof_3_n: { }
+	sprite roof_3_ne: { }
+	sprite roof_3_w: { }
+	sprite roof_3: { }
+	sprite roof_3_e: { }
+	sprite roof_3_sw: { }
+	sprite roof_3_s: { }
+	sprite roof_3_se: { }	
 
 	cursor: { position: [ 0 80 ] }
 	

@@ -131,7 +131,7 @@ namespace tpublic::DirectEffects
 
 			if(targetThreatSource != NULL)
 			{
-				int32_t threat = (int32_t)heal;
+				int32_t threat = (int32_t)heal / 2;
 				if(result == CombatEvent::ID_CRITICAL)
 					threat = (threat * 3) / 2;
 
