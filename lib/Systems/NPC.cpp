@@ -260,7 +260,7 @@ namespace tpublic::Systems
 							const tpublic::Components::CombatPublic* nearbyNonPlayerCombatPublic = aEntity->GetComponent<tpublic::Components::CombatPublic>();
 							int32_t aggroAssistRange = GetManifest()->m_npcMetrics.m_aggroAssistRange;
 							if(nearbyNonPlayerCombatPublic != NULL && nearbyNonPlayerCombatPublic->m_factionId == combat->m_factionId && aDistanceSquared <= aggroAssistRange * aggroAssistRange)
-								aContext->m_eventQueue->EventQueueThreat(topThreatEntity->GetEntityInstanceId(), aEntity->GetEntityInstanceId(), 0, topThreatEntry->m_tick);
+								aContext->m_eventQueue->EventQueueThreat(topThreatEntity->GetEntityInstanceId(), aEntity->GetEntityInstanceId(), 0, threat->m_table.GetTick());
 						}
 					}
 
@@ -566,7 +566,7 @@ namespace tpublic::Systems
 					{
 						const ThreatTable::Entry* topThreatEntry = threat->m_table.GetTop();
 						topThreatEntityInstanceId = topThreatEntry->m_entityInstanceId;
-					}
+					}					
 
 					npc->m_targetEntityInstanceId = topThreatEntityInstanceId;
 					
@@ -771,7 +771,7 @@ namespace tpublic::Systems
 
 										aContext->m_eventQueue->EventQueueMove(moveRequest);
 
-										npc->m_moveCooldownUntilTick = aContext->m_tick + 2;
+										npc->m_moveCooldownUntilTick = aContext->m_tick + 3;
 									}
 									else
 									{

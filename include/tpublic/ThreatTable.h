@@ -19,7 +19,6 @@ namespace tpublic
 		{
 			uint32_t					m_entityInstanceId = 0;
 			int32_t						m_threat = 0;
-			int32_t						m_tick = 0;
 			Entry*						m_next = NULL;
 			Entry*						m_prev = NULL;
 		};
@@ -49,6 +48,7 @@ namespace tpublic
 		// Data access
 		bool			IsEmpty() const { return m_head == NULL; }
 		const Entry*	GetTop() const { return m_head; }
+		int32_t			GetTick() const { return m_tick; }
 
 	private:
 
@@ -56,6 +56,7 @@ namespace tpublic
 		Table							m_table;
 		Entry*							m_head;
 		Entry*							m_tail;
+		int32_t							m_tick;
 
 		Entry*	_FindHighestLessThan(
 					int32_t						aThreat);

@@ -8,6 +8,7 @@ namespace tpublic
 	ThreatTable::ThreatTable()
 		: m_head(NULL)
 		, m_tail(NULL)
+		, m_tick(0)
 	{
 
 	}
@@ -22,22 +23,25 @@ namespace tpublic
 		int32_t						aTick,
 		std::vector<uint32_t>&		aOutRemoved)
 	{
-		Entry* t = m_head;
-		while(t != NULL)
+		if(m_head == NULL)
+			return;
+
+		int32_t ticksSinceLastEvent = aTick - m_tick;
+		if (ticksSinceLastEvent > TIMEOUT_TICKS)
 		{
-			Entry* next = t->m_next;
-
-			int32_t ticksSinceLastUpdate = aTick - t->m_tick;
-
-			if(ticksSinceLastUpdate > TIMEOUT_TICKS)
+			while (m_head != NULL)
 			{
-				aOutRemoved.push_back(t->m_entityInstanceId);
+				aOutRemoved.push_back(m_head->m_entityInstanceId);
 
-				m_table.erase(t->m_entityInstanceId);
-				_Remove(t);
+				Entry* next = m_head->m_next;
+				delete m_head;
+				m_head = next;
 			}
 
-			t = next;
+			m_head = NULL;
+			m_tail = NULL;
+			m_table.clear();
+			m_tick = 0;
 		}
 	}
 	
@@ -51,12 +55,7 @@ namespace tpublic
 		if(i != m_table.end())
 		{
 			if(aThreat != 0)
-			{
 				_Add(i->second, aThreat);
-
-				if(aTick > i->second->m_tick)
-					i->second->m_tick = aTick;
-			}
 		}
 		else
 		{
@@ -78,10 +77,10 @@ namespace tpublic
 				// Insert at end of list
 				_InsertAtEnd(entry);
 			}
-
-			if (aTick > entry->m_tick)
-				entry->m_tick = aTick;
 		}
+
+		if(aTick > m_tick)
+			m_tick = aTick;
 	}
 
 	void			
@@ -105,10 +104,10 @@ namespace tpublic
 				threatChange = (int32_t)((float)entry->m_threat * (aFactor - 1.0f));
 
 			_Add(entry, threatChange);
-
-			if (aTick > entry->m_tick)
-				entry->m_tick = aTick;
 		}
+
+		if (aTick > m_tick)
+			m_tick = aTick;
 	}
 
 	void			
@@ -129,9 +128,6 @@ namespace tpublic
 
 				entry->m_threat = topThreat;
 
-				if (aTick > entry->m_tick)
-					entry->m_tick = aTick;
-
 				_Detach(entry);
 				_InsertBefore(entry, m_head);
 			}
@@ -140,6 +136,9 @@ namespace tpublic
 		{
 			Add(aTick, aEntityInstanceId, 1);
 		}
+
+		if (aTick > m_tick)
+			m_tick = aTick;
 	}
 
 	void	
@@ -168,13 +167,15 @@ namespace tpublic
 		m_head = NULL;
 		m_tail = NULL;
 		m_table.clear();
+		m_tick = 0;
 	}
 
 	void			
 	ThreatTable::DebugPrint() const
 	{
+		printf("(tick %d)\n", m_tick);
 		for(const Entry* t = GetTop(); t != NULL; t = t->m_next)
-			printf("%u: %d threat @ %d tick\n", t->m_entityInstanceId, t->m_threat, t->m_tick);
+			printf("%u: %d threat\n", t->m_entityInstanceId, t->m_threat);
 	}
 
 	//------------------------------------------------------------------------------
