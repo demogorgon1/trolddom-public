@@ -47,6 +47,8 @@ sprites:
 	sprite doodad_broken_pillar_1: { }
 	sprite doodad_broken_pillar_2: { }
 	sprite doodad_broken_pillar_3: { }
+	sprite doodad_wall_banner_mining_1: { }
+	sprite doodad_wall_banner_blacksmithing_1: { }
 
 }
 
@@ -125,6 +127,8 @@ doodad bench: { sprites: [ doodad_bench_1 ] map_palette<"x">: { occupy: true } m
 doodad altar: { sprites: [ doodad_altar_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad wall_banner_red: { sprites: [ doodad_wall_banner_red_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad broken_pillar: { sprites: [ doodad_broken_pillar_1 doodad_broken_pillar_2 doodad_broken_pillar_3 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad wall_banner_mining: { sprites: [ doodad_wall_banner_mining_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad wall_banner_blacksmithing: { sprites: [ doodad_wall_banner_blacksmithing_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 
 
 

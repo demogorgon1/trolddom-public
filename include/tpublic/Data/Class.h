@@ -621,6 +621,10 @@ namespace tpublic
 							m_defaultArmorStyleId = ArmorStyle::StringToId(aMember->GetIdentifier());
 							TP_VERIFY(m_defaultArmorStyleId != ArmorStyle::INVALID_ID, aMember->m_debugInfo, "'%s' not a valid armor style.", aMember->GetIdentifier());
 						}
+						else if(aMember->m_name == "remains")
+						{
+							aMember->GetIdArray(DataType::ID_ENTITY, m_remains);
+						}
 						else if (aMember->m_name == "item_types")
 						{
 							std::vector<ItemType::Id> itemTypes;
@@ -689,6 +693,7 @@ namespace tpublic
 				aStream->WritePOD(m_itemTypesMask);
 				aStream->WriteUInts(m_systems);
 				aStream->WriteUInts(m_startInventory);
+				aStream->WriteUInts(m_remains);
 				aStream->WritePOD(m_defaultArmorStyleId);
 				m_armorDecoration.ToStream(aStream);
 
@@ -731,6 +736,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInts(m_startInventory))
 					return false;
+				if (!aStream->ReadUInts(m_remains))
+					return false;
 				if(!aStream->ReadPOD(m_defaultArmorStyleId))
 					return false;
 				if(!m_armorDecoration.FromStream(aStream))
@@ -766,6 +773,7 @@ namespace tpublic
 			std::vector<uint32_t>									m_talentTrees;
 			uint32_t												m_itemTypesMask = 0;
 			std::vector<uint32_t>									m_systems;
+			std::vector<uint32_t>									m_remains;
 			ArmorStyle::Id											m_defaultArmorStyleId = ArmorStyle::ID_BROWN;
 			SpriteCollection										m_armorStyles[ArmorStyle::NUM_IDS];
 			std::unique_ptr<SpriteCollection>						m_weaponSprites[ItemType::NUM_IDS];

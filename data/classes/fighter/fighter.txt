@@ -77,6 +77,8 @@ class fighter:
 	
 	armor_decoration: { sprite: fighter_decoration sprite_dead: fighter_decoration_dead sprites_walk: [ fighter_decoration_walk_1 fighter_decoration_walk_2 ] }
 
+	remains: [ player_remains_1 player_remains_2 player_remains_3 ]
+
 	color_1: [ 128 32 0 ] 
 	color_2: [ 70 32 0 ] 
 	default_attack: fighter_attack

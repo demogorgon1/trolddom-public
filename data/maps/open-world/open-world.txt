@@ -784,6 +784,8 @@ map_palette .doodads:
 	doodad altar: [ 54 29 64 ]
 	doodad wall_banner_red: [ 243 29 53 ]
 	doodad broken_pillar: [ 136 130 200 ]
+	doodad wall_banner_mining: [ 243 19 53 ]
+	doodad wall_banner_blacksmithing: [ 243 59 53 ]
 }
 
 map open_world:

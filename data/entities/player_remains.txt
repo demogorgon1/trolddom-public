@@ -1,0 +1,32 @@
+!define local PLAYER_REMAINS
+{
+	systems: [ environment ]
+	components:
+	{
+		display_name: { }
+		position: { }	
+		owner<static>: { }
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: @_frames		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+		environment:
+		{
+			duration: 6000			
+		}
+	}
+}
+
+entity player_remains_1: !PLAYER_REMAINS { _frames: [ skeletal_remains_1 ] }
+entity player_remains_2: !PLAYER_REMAINS { _frames: [ skeletal_remains_2 ] }
+entity player_remains_3: !PLAYER_REMAINS { _frames: [ skeletal_remains_3 ] }
+

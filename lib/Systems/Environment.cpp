@@ -74,11 +74,10 @@ namespace tpublic::Systems
 		assert(position != NULL);
 
 		const Components::Owner* owner = GetComponent<Components::Owner>(aComponents);		
-		assert(owner != NULL);
 
 		int32_t ticksSinceLastUpdate = aContext->m_tick - environment->m_lastUpdateTick;
 
-		if (ticksSinceLastUpdate >= environment->m_tickInterval && environment->m_abilityId != 0)
+		if (ticksSinceLastUpdate >= environment->m_tickInterval && environment->m_abilityId != 0 && owner != NULL)
 		{
 			const Data::Ability* ability = GetManifest()->GetById<Data::Ability>(environment->m_abilityId);
 			

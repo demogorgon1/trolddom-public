@@ -62,6 +62,8 @@ class sorcerer:
 	
 	armor_decoration: { sprite: sorcerer_decoration sprite_dead: sorcerer_decoration_dead sprites_walk: [ sorcerer_decoration_walk_1 sorcerer_decoration_walk_2 ] }
 			
+	remains: [ player_remains_1 player_remains_2 player_remains_3 ]
+			
 	color_1: [ 0 59 210 ] 
 	color_2: [ 0 10 64 ]
 	default_attack: sorcerer_attack

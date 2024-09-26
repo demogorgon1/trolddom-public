@@ -22,6 +22,8 @@ class priest:
 		
 	armor_decoration: { sprite: priest_decoration sprite_dead: priest_decoration_dead sprites_walk: [ priest_decoration_walk_1 priest_decoration_walk_2 ] }
 		
+	remains: [ player_remains_1 player_remains_2 player_remains_3 ]
+
 	color_1: [ 210 210 210 ] 
 	color_2: [ 100 100 64 ]
 	default_attack: attack
