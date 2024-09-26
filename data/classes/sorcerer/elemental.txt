@@ -388,7 +388,7 @@ ability firebolt:
 	talent_tree: sorcerer_elemental
 	speed: 7
 	projectile: firebolt
-	resource_cost mana: 25
+	resource_cost mana: 18
 	target_particle_system: orange_spell_hit
 	
 	direct_effect damage:
@@ -451,7 +451,7 @@ ability fireball:
 	talent_tree: sorcerer_elemental
 	speed: 7
 	projectile: fireball
-	resource_cost mana: 35
+	resource_cost mana: 28
 	target_particle_system: orange_spell_hit
 	
 	direct_effect damage:
@@ -513,7 +513,7 @@ ability ice_lance:
 	talent_tree: sorcerer_elemental
 	speed: 7
 	projectile: ice_lance
-	resource_cost mana: 25
+	resource_cost mana: 18
 	target_particle_system: blue_spell_hit
 	
 	direct_effect damage:

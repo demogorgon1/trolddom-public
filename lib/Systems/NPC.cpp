@@ -769,7 +769,7 @@ namespace tpublic::Systems
 									{
 										// Seems like we're stuck chasing the top threat target. Reduce threat on that one.
 										position->m_lastMoveTick = aContext->m_tick;
-										npc->m_npcMovement.Reset(aContext->m_tick);
+										//npc->m_npcMovement.Reset(aContext->m_tick);
 
 										aContext->m_eventQueue->EventQueueThreat(npc->m_targetEntityInstanceId, aEntityInstanceId, 0, 0, 0.5f);
 									}
