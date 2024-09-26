@@ -278,7 +278,7 @@ entity crab_caster_3: !NPC
 }
 
 ##########################################################################################
-# Suspiciously Large Crab Man
+# Giant Crab Man
 
 loot_table .crab_boss_4: 
 {
@@ -291,7 +291,7 @@ loot_table .crab_boss_4:
 
 entity crab_boss_4: !NPC
 {
-	_string: "Suspiciously Large Crab Man"
+	_string: "Giant Crab Man"
 	_level: 4
 	_faction: monsters
 	_resource_health: 1.5
@@ -306,7 +306,7 @@ entity crab_boss_4: !NPC
 }
 
 ##########################################################################################
-# Suspiciously Large Crab Man (2)
+# Suspiciously Large Crab Man
 
 loot_group .crab_boss_5_quest_drop: { }
 
@@ -338,7 +338,7 @@ quest .crab_boss_5_quest:
 	
 	completion:
 	[
-		"Nice."
+		"You're saying we've got ourselves a crab problem to the south as well? That's not good. I hope they're not all as large as this one."
 	]
 
 	level: 5
@@ -380,10 +380,6 @@ entity crab_boss_5: !NPC
 	_sprite_dead: crab_monster_boss_1_dead
 	_loot_table: .crab_boss_5
 	_creature_type: humanoid
-	_in_combat_barks:
-	[
-		{ type: say text: "*Angry crab noises*" }
-	]	
 }
 
 ##########################################################################################
@@ -681,6 +677,10 @@ entity dark_cove_goblin_grimwort: !NPC
 	_loot_table: .dark_cove_goblin_grimwort
 	_creature_type: humanoid
 	_abilities: [ { id: npc_curse } { id: npc_attack } ]
+	_in_combat_barks:
+	[
+		{ type: say text: "It's mine! I found it!" }
+	]		
 }
 
 ##########################################################################################
@@ -1160,6 +1160,16 @@ entity zuthyg_the_golden: !NPC
 			id: npc_attack
 		}
 	]		
+	
+	_in_combat_barks:
+	[
+		{ type: say text: "You're nothing but food for the worms!" flags: [ no_chat_bubble ] }
+	]	
+
+	_dead_barks:
+	[
+		{ type: say text: "This can't be happening..." flags: [ no_chat_bubble ] }
+	]
 }
 
 particle_system .zuthyg_the_golden:
@@ -1249,7 +1259,6 @@ entity .zuthyg_the_golden_fire:
 					z_offset: -1
 				}				
 			]			
-		}
-		
+		}		
 	}
 }

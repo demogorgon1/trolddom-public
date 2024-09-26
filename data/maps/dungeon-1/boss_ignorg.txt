@@ -45,6 +45,16 @@ entity dungeon_1_ignorg: !NPC
 			id: npc_attack
 		}
 	]	
+	
+	_in_combat_barks:
+	[
+		{ type: say text: "We will purge you from this island! You cannot stop us!" flags: [ no_chat_bubble ] }
+	]			
+	
+	_dead_barks:
+	[
+		{ type: say text: "I'll tell my boss... Urgh." flags: [ no_chat_bubble ] }
+	]	
 }
 
 map_trigger .ignorg_killed:

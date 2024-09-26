@@ -116,7 +116,7 @@ objective .sheriff_wellington_2_b:
 
 objective .sheriff_wellington_2_c:
 {
-	string: "Suspiciously Large Crab Man Killed"
+	string: "Giant Crab Man Killed"
 	
 	maps: [ open_world ]
 	
@@ -139,8 +139,9 @@ quest .sheriff_wellington_2:
 	description: 
 	[
 		"Further out the peninsula you'll find the old abandoned fort. I've had word that there is even more crab activity out there."
-		"Rumor has it that there is a suspiciously large crab man spotted there as well. You seem to be reasonable adept at killing these"
-		"critters, maybe you can go deal with them as well?"		
+		"You seem to be reasonable adept at killing these critters, maybe you can go deal with them as well?\n"
+		"\n"
+		"Rumor has it that a giant crab man has been spotted there as well, so be careful."
 	]
 
 	progress:

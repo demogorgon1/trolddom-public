@@ -45,6 +45,11 @@ entity dungeon_1_grunthar: !NPC
 			id: npc_attack
 		}
 	]		
+	
+	_dead_barks:
+	[
+		{ type: say text: "Grunthar no feel good..." flags: [ no_chat_bubble ] }
+	]		
 }
 
 map_trigger .grunthar_killed:

@@ -155,6 +155,14 @@ namespace tpublic::Systems
 
 			npc->m_castInProgress.reset();
 
+			const Components::NPC::StateEntry* deadState = npc->GetState(EntityState::ID_DEAD);
+			if (deadState != NULL && deadState->m_barks.size() > 0)
+			{
+				const Chat* bark = Helpers::RandomItemPointer(*aContext->m_random, deadState->m_barks);
+				assert(bark != NULL);
+				aContext->m_eventQueue->EventQueueChat(aEntityInstanceId, *bark);
+			}
+
 			return EntityState::ID_DEAD;
 		}
 
@@ -769,7 +777,6 @@ namespace tpublic::Systems
 									{
 										// Seems like we're stuck chasing the top threat target. Reduce threat on that one.
 										position->m_lastMoveTick = aContext->m_tick;
-										//npc->m_npcMovement.Reset(aContext->m_tick);
 
 										aContext->m_eventQueue->EventQueueThreat(npc->m_targetEntityInstanceId, aEntityInstanceId, 0, 0, 0.5f);
 									}
