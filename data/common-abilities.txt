@@ -189,7 +189,7 @@ ability recall:
 	cooldowns: [ global recall ]
 	description: "Return to your Spirit Stone."
 	cast_time: 50
-	flags: [ late_cooldown_trigger target_self always_in_range ]
+	flags: [ late_cooldown_trigger target_self always_in_range interrupt_on_damage ]
 	states: [ default in_combat ]
 	icon: icon_recall
 	

@@ -55,7 +55,8 @@ namespace tpublic
 				FLAG_QUEST_TRIGGER					= 0x08000000,
 				FLAG_INTERRUPTABLE					= 0x10000000,
 				FLAG_RANGED_CAST_TIME				= 0x20000000,
-				FLAG_USE_RANGED_ICON				= 0x40000000
+				FLAG_USE_RANGED_ICON				= 0x40000000,
+				FLAG_INTERRUPT_ON_DAMAGE			= 0x80000000
 			};
 
 			static inline Resource::Id
@@ -138,6 +139,8 @@ namespace tpublic
 						flags |= FLAG_RANGED_CAST_TIME;
 					else if (strcmp(identifier, "use_ranged_icon") == 0)
 						flags |= FLAG_USE_RANGED_ICON;
+					else if (strcmp(identifier, "interrupt_on_damage") == 0)
+						flags |= FLAG_INTERRUPT_ON_DAMAGE;
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid ability flag.", identifier);
 				});
@@ -382,6 +385,7 @@ namespace tpublic
 			bool CanBeBlocked() const { return m_flags & FLAG_CAN_BE_BLOCKED; }
 			bool IsAttack() const { return m_flags & FLAG_ATTACK; }
 			bool IsSpell() const { return m_flags & FLAG_SPELL; }
+			bool ShouldInterruptOnDamage() const { return m_flags & FLAG_INTERRUPT_ON_DAMAGE; }
 			bool AlwaysInRange() const { return m_flags & FLAG_ALWAYS_IN_RANGE; }
 			bool IsMelee() const { return m_flags & FLAG_MELEE; }
 			bool AlwaysInLineOfSight() const { return m_flags & FLAG_ALWAYS_IN_LINE_OF_SIGHT; }

@@ -173,7 +173,7 @@ namespace tpublic::Systems
 
 		combatPublic->m_damageAccum = 0;
 
-		if(aEntityState == EntityState::ID_DEAD)
+		if(aEntityState == EntityState::ID_DEAD && !combatPublic->m_doNotZeroResources)
 		{
 			if(combatPublic->SetZeroResources())
 				combatPublic->SetDirty();

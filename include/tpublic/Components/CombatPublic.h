@@ -428,6 +428,7 @@ namespace tpublic
 				m_damageAccum = 0;
 				m_singleTargetAuraEntityInstanceId = 0;
 				m_lastDamageFromEntityId = 0;
+				m_doNotZeroResources = false;
 			}
 
 			// Helpers
@@ -459,6 +460,7 @@ namespace tpublic
 			uint32_t						m_damageAccum = 0;
 			uint32_t						m_singleTargetAuraEntityInstanceId = 0;
 			uint32_t						m_lastDamageFromEntityId = 0;
+			bool							m_doNotZeroResources = false;
 		};
 
 	}
