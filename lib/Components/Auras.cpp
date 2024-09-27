@@ -10,7 +10,7 @@ namespace tpublic::Components
 	bool
 	Auras::HasEffect(
 		AuraEffect::Id								aId,
-		uint32_t*									aOutSourceEntityInstanceId) const
+		SourceEntityInstance*						aOutSourceEntityInstance) const
 	{
 		int32_t latestTick = INT32_MIN;
 
@@ -18,12 +18,13 @@ namespace tpublic::Components
 		{
 			if (entry->HasEffect(aId))
 			{
-				if(aOutSourceEntityInstanceId == NULL)
+				if(aOutSourceEntityInstance == NULL)
 					return true;
 
 				if(entry->m_start > latestTick)
 				{
-					*aOutSourceEntityInstanceId = entry->m_entityInstanceId;
+					*aOutSourceEntityInstance = entry->m_sourceEntityInstance;
+
 					latestTick = entry->m_start;
 				}
 			}

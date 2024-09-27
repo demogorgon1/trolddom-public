@@ -63,7 +63,7 @@ namespace tpublic::Systems
 
 				if (aura->m_flags & Data::Aura::FLAG_SINGLE_TARGET)
 				{
-					const EntityInstance* sourceEntity = aContext->m_worldView->WorldViewSingleEntityInstance(entry->m_entityInstanceId);
+					const EntityInstance* sourceEntity = aContext->m_worldView->WorldViewSingleEntityInstance(entry->m_sourceEntityInstance.m_entityInstanceId);
 					const Components::CombatPublic* sourceCombatPublic = sourceEntity != NULL ? sourceEntity->GetComponent<Components::CombatPublic>() : NULL;
 					if(sourceCombatPublic != NULL && sourceCombatPublic->m_singleTargetAuraEntityInstanceId != aEntityInstanceId)
 						entry->m_cancel = true;
@@ -79,16 +79,16 @@ namespace tpublic::Systems
 						castInProgress.m_start = entry->m_start;
 						castInProgress.m_end = entry->m_end;
 						castInProgress.m_targetEntityInstanceId = aEntityInstanceId;
-						aContext->m_eventQueue->EventQueueChanneling(entry->m_entityInstanceId, castInProgress);
+						aContext->m_eventQueue->EventQueueChanneling(entry->m_sourceEntityInstance.m_entityInstanceId, castInProgress);
 					}
 	
 					for(size_t j = 0; j < entry->m_effects.size(); j++)
 					{
 						std::unique_ptr<AuraEffectBase>& effect = entry->m_effects[j];
 
-						if(!effect->Update(entry->m_entityInstanceId, aEntityInstanceId, aContext, GetManifest()))
+						if(!effect->Update(entry->m_sourceEntityInstance, aEntityInstanceId, aContext, GetManifest()))
 						{
-							effect->OnFade(entry->m_entityInstanceId, aEntityInstanceId, aContext, GetManifest());
+							effect->OnFade(entry->m_sourceEntityInstance, aEntityInstanceId, aContext, GetManifest());
 
 							effect.reset();
 							Helpers::RemoveCyclicFromVector(entry->m_effects, j);
@@ -106,7 +106,7 @@ namespace tpublic::Systems
 				if(entry->m_cancel || (!entry->m_noEffects && entry->m_effects.size() == 0) || (entry->m_end != 0 && aContext->m_tick >= entry->m_end))
 				{
 					for(std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
-						effect->OnFade(entry->m_entityInstanceId, aEntityInstanceId, aContext, GetManifest());
+						effect->OnFade(entry->m_sourceEntityInstance, aEntityInstanceId, aContext, GetManifest());
 
 					entry.reset();
 					Helpers::RemoveCyclicFromVector(auras->m_entries, i);
@@ -147,7 +147,7 @@ namespace tpublic::Systems
 				{
 					Components::VisibleAuras::Entry t;
 					t.m_auraId = entry->m_auraId;
-					t.m_entityInstanceId = entry->m_entityInstanceId;
+					t.m_entityInstanceId = entry->m_sourceEntityInstance.m_entityInstanceId;
 					t.m_start = entry->m_start;
 					t.m_end = entry->m_end;
 					visibleAuras->m_entries.push_back(t);

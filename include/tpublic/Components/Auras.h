@@ -107,7 +107,7 @@ namespace tpublic
 				uint32_t										m_charges = 0;
 
 				// Not serialized
-				uint32_t										m_entityInstanceId = 0; 
+				SourceEntityInstance							m_sourceEntityInstance; 
 				uint32_t										m_channeledAbilityId = 0;	
 				bool											m_cancel = false;
 				bool											m_noEffects = false;
@@ -137,7 +137,7 @@ namespace tpublic
 
 			bool			HasEffect(
 								AuraEffect::Id								aId,
-								uint32_t*									aOutSourceEntityInstanceId) const;
+								SourceEntityInstance*						aOutSourceEntityInstance) const;
 			bool			HasAura(
 								uint32_t									aAuraId) const;
 			MoveSpeed::Id	GetMoveSpeed() const;

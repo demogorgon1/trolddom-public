@@ -20,8 +20,8 @@ namespace tpublic
 
 	void	
 	ThreatTable::Update(
-		int32_t						aTick,
-		std::vector<uint32_t>&		aOutRemoved)
+		int32_t								aTick,
+		std::vector<SourceEntityInstance>&	aOutRemoved)
 	{
 		if(m_head == NULL)
 			return;
@@ -31,7 +31,7 @@ namespace tpublic
 		{
 			while (m_head != NULL)
 			{
-				aOutRemoved.push_back(m_head->m_entityInstanceId);
+				aOutRemoved.push_back(m_head->m_key);
 
 				Entry* next = m_head->m_next;
 				delete m_head;
@@ -47,11 +47,11 @@ namespace tpublic
 	
 	void	
 	ThreatTable::Add(
-		int32_t						aTick,
-		uint32_t					aEntityInstanceId,
-		int32_t						aThreat)
+		int32_t								aTick,
+		const SourceEntityInstance&			aSourceEntityInstance,
+		int32_t								aThreat)
 	{
-		Table::iterator i = m_table.find(aEntityInstanceId);
+		Table::iterator i = m_table.find(aSourceEntityInstance);
 		if(i != m_table.end())
 		{
 			if(aThreat != 0)
@@ -60,10 +60,9 @@ namespace tpublic
 		else
 		{
 			Entry* entry = new Entry();
-			m_table[aEntityInstanceId] = entry;
+			m_table[aSourceEntityInstance] = entry;
 
-			entry->m_entityInstanceId = aEntityInstanceId;
-
+			entry->m_key = aSourceEntityInstance;
 			entry->m_threat = aThreat;
 
 			Entry* insertBefore = _FindHighestLessThan(aThreat);
@@ -86,12 +85,12 @@ namespace tpublic
 	void			
 	ThreatTable::Multiply(
 		int32_t						aTick,
-		uint32_t					aEntityInstanceId,
+		const SourceEntityInstance& aSourceEntityInstance,
 		float						aFactor)
 	{
 		assert(aFactor > 0.0f);
 
-		Table::iterator i = m_table.find(aEntityInstanceId);
+		Table::iterator i = m_table.find(aSourceEntityInstance);
 		if (i != m_table.end())
 		{
 			Entry* entry = i->second;
@@ -113,12 +112,12 @@ namespace tpublic
 	void			
 	ThreatTable::MakeTop(
 		int32_t						aTick,
-		uint32_t					aEntityInstanceId)
+		const SourceEntityInstance& aSourceEntityInstanceq)
 	{
 		if(m_head != NULL)
 		{
 			Entry* entry = NULL;
-			Table::iterator i = m_table.find(aEntityInstanceId);
+			Table::iterator i = m_table.find(aSourceEntityInstanceq);
 			if (i != m_table.end())
 				entry = i->second;
 			
@@ -134,7 +133,7 @@ namespace tpublic
 		}
 		else
 		{
-			Add(aTick, aEntityInstanceId, 1);
+			Add(aTick, aSourceEntityInstanceq, 1);
 		}
 
 		if (aTick > m_tick)
@@ -143,14 +142,30 @@ namespace tpublic
 
 	void	
 	ThreatTable::Remove(
-		uint32_t					aEntityInstanceId)
+		const SourceEntityInstance& aSourceEntityInstanceq)
 	{
-		Table::iterator i = m_table.find(aEntityInstanceId);
+		Table::iterator i = m_table.find(aSourceEntityInstanceq);
 		if (i != m_table.end())
 		{
 			_Remove(i->second);
 
 			m_table.erase(i);
+		}
+	}
+
+	void			
+	ThreatTable::Touch(
+		int32_t									aTick)
+	{
+		if (aTick > m_tick)
+		{
+			// Only update tick if we have any threat sources with more than 0 threat
+			bool hasNonZeroSources = false;
+			for(const Entry* t = m_head; t != NULL && !hasNonZeroSources; t = t->m_next)
+				hasNonZeroSources = t->m_threat > 0;
+
+			if(hasNonZeroSources)
+				m_tick = aTick;
 		}
 	}
 
@@ -175,7 +190,7 @@ namespace tpublic
 	{
 		printf("(tick %d)\n", m_tick);
 		for(const Entry* t = GetTop(); t != NULL; t = t->m_next)
-			printf("%u: %d threat\n", t->m_entityInstanceId, t->m_threat);
+			printf("%u[%u]: %d threat\n", t->m_key.m_entityInstanceId, t->m_key.m_entityInstanceSeq, t->m_threat);
 	}
 
 	//------------------------------------------------------------------------------
@@ -253,6 +268,9 @@ namespace tpublic
 		int32_t			aThreat)
 	{
 		aEntry->m_threat += aThreat;
+		
+		if(aEntry->m_threat < 0)
+			aEntry->m_threat = 0;
 
 		if (aThreat > 0)
 		{

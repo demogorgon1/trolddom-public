@@ -23,6 +23,7 @@ namespace tpublic
 	class IResourceChangeQueue;
 	class IWorldView;
 	class Manifest;
+	class SourceEntityInstance;
 	class UIntRange;
 
 	struct ItemInstanceReference;
@@ -128,6 +129,7 @@ namespace tpublic
 									const Manifest*					/*aManifest*/,
 									CombatEvent::Id					/*aId*/,
 									uint32_t						/*aAbilityId*/,
+									const SourceEntityInstance&		/*aSourceEntityInstance*/,
 									EntityInstance*					/*aSource*/,
 									EntityInstance*					/*aTarget*/,
 									const Vec2&						/*aAOETarget*/,

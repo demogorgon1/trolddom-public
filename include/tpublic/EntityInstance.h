@@ -49,6 +49,7 @@ namespace tpublic
 									uint32_t							aComponentId);
 		const ComponentBase*	GetComponentBase(
 									uint32_t							aComponentId) const;
+		void					IncrementSeq();
 
 		template <typename _T>
 		_T*
@@ -99,6 +100,7 @@ namespace tpublic
 		bool											IsPlayer() const { return m_entityId == 0; }
 		std::vector<ComponentEntry>&					GetComponents() { return m_components; }
 		int32_t											GetStateTick() const { return m_stateTick; }
+		uint8_t											GetSeq() const { return m_seq; }
 		
 	private:
 		
@@ -107,6 +109,7 @@ namespace tpublic
 		uint32_t									m_entityInstanceId = 0;
 		EntityState::Id								m_state = EntityState::ID_DEFAULT;
 		int32_t										m_stateTick = 0;
+		uint8_t										m_seq = 0;
 		std::vector<ComponentEntry>					m_components;
 		bool										m_dirty = false;
 	};

@@ -12,6 +12,8 @@ namespace tpublic
 		struct CombatPublic;
 	}
 
+	class SourceEntityInstance;
+
 	class IResourceChangeQueue
 	{
 	public:
@@ -21,25 +23,25 @@ namespace tpublic
 
 		// Virtual interface
 		virtual void		AddResourceChange(
-								CombatEvent::Id						aCombatEventId,
-								tpublic::DirectEffect::DamageType	aDamageType,
-								uint32_t							aAbilityId,
-								uint32_t							aSourceEntityId,
-								uint32_t							aSourceEntityInstanceId,
-								uint32_t							aTargetEntityInstanceId,
-								Components::CombatPublic*			aCombat,
-								Components::Auras*					aAuras,
-								size_t								aResourceIndex,
-								int32_t								aChange,
-								uint32_t							aBlocked,
-								bool								aSilent) = 0;
+								CombatEvent::Id							aCombatEventId,
+								tpublic::DirectEffect::DamageType		aDamageType,
+								uint32_t								aAbilityId,
+								uint32_t								aSourceEntityId,
+								uint32_t								aSourceEntityInstanceId,
+								uint32_t								aTargetEntityInstanceId,
+								Components::CombatPublic*				aCombat,
+								Components::Auras*						aAuras,
+								size_t									aResourceIndex,
+								int32_t									aChange,
+								uint32_t								aBlocked,
+								bool									aSilent) = 0;
 		virtual void		AddUpdateCallback(
-								UpdateCallback						aUpdateCallback) = 0;
+								UpdateCallback							aUpdateCallback) = 0;
 		virtual void		AddSimpleDirectEffect(
-								uint32_t							aSourceEntityInstanceId,
-								uint32_t							aTargetEntityInstanceId,
-								SimpleDirectEffect::Id				aSimpleDirectEffectId,
-								uint32_t							aParam) = 0;
+								const SourceEntityInstance&				aSourceEntityInstance,
+								uint32_t								aTargetEntityInstanceId,
+								SimpleDirectEffect::Id					aSimpleDirectEffectId,
+								uint32_t								aParam) = 0;
 
 	};
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../ComponentBase.h"
+#include "../SourceEntityInstance.h"
 
 namespace tpublic
 {
@@ -14,28 +15,22 @@ namespace tpublic
 			static const Component::Id ID = Component::ID_OWNER;
 			static const uint8_t FLAGS = 0;
 			static const Persistence::Id PERSISTENCE = Persistence::ID_NONE;
-			static const Replication REPLICATION = REPLICATION_PUBLIC;
-
-			enum Field
-			{
-				FIELD_OWNER_ENTITY_INSTANCE_ID
-			};
+			static const Replication REPLICATION = REPLICATION_NONE;
 
 			static void
 			CreateSchema(
-				ComponentSchema*		aSchema)
+				ComponentSchema*		/*aSchema*/)
 			{
-				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_OWNER_ENTITY_INSTANCE_ID, NULL, offsetof(Owner, m_ownerEntityInstanceId));
 			}
 
 			void
 			Reset()
 			{
-				m_ownerEntityInstanceId = 0;
+				m_ownerSourceEntityInstance = SourceEntityInstance();
 			}
 
 			// Public data
-			uint32_t		m_ownerEntityInstanceId = 0;
+			SourceEntityInstance		m_ownerSourceEntityInstance;
 		};
 	}
 

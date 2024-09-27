@@ -71,7 +71,7 @@ namespace tpublic
 			}
 
 			void		OnFade(
-							uint32_t					aSourceEntityInstanceId,
+							const SourceEntityInstance&	aSourceEntityInstance,
 							uint32_t					aTargetEntityInstanceId,
 							SystemBase::Context*		aContext,
 							const Manifest*				aManifest) override;

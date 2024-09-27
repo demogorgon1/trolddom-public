@@ -79,6 +79,7 @@ namespace tpublic
 	ComponentPoolChunkBaseList::ValidateHasChunk(
 		ComponentPoolChunkBase* aChunk) const
 	{
+		(void)aChunk;
 		assert(HasChunk(aChunk));
 	}
 

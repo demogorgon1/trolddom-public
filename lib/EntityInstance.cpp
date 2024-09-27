@@ -176,4 +176,10 @@ namespace tpublic
 		return NULL;
 	}
 
+	void					
+	EntityInstance::IncrementSeq()
+	{
+		m_seq++;		
+	}
+
 }

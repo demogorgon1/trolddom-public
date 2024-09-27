@@ -39,6 +39,7 @@ namespace tpublic
 								const Manifest*					aManifest,
 								CombatEvent::Id					aId,
 								uint32_t						aAbilityId,
+								const SourceEntityInstance&		aSourceEntityInstance,
 								EntityInstance*					aSource,
 								EntityInstance*					aTarget,
 								const Vec2&						aAOETarget,

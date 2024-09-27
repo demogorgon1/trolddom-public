@@ -58,7 +58,7 @@ particle_system npc_firebolt:
 ability npc_firebolt:
 {
 	string: "Firebolt"
-	range: 7	
+	range: 8
 	cast_time: 25
 	cooldowns: [ global spell_fire_lockout ]
 	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
@@ -115,7 +115,7 @@ aura npc_curse:
 ability npc_curse:
 {
 	string: "Curse of Suffering"
-	range: 6
+	range: 7
 	cast_time: 15
 	cooldowns: [ global npc_curse ]
 	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
@@ -228,7 +228,7 @@ cooldown npc_heal:
 ability npc_heal:
 {
 	string: "Heal"
-	range: 8	
+	range: 7
 	cast_time: 30
 	cooldowns: [ global npc_heal spell_healing_lockout ]
 	flags: [ spell target_other target_friendly interruptable ]

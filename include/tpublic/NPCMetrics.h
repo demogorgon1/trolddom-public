@@ -146,6 +146,10 @@ namespace tpublic
 				{
 					m_aggroAssistRange = aChild->GetInt32();
 				}
+				else if (aChild->m_name == "min_leash_range")
+				{
+					m_minLeashRange = aChild->GetInt32();
+				}
 				else
 				{
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -168,6 +172,7 @@ namespace tpublic
 			aStream->WriteUInts(m_aggroRanges);
 			aStream->WriteInt(m_aggroRangeBaseLevelDifference);
 			aStream->WriteInt(m_aggroAssistRange);
+			aStream->WriteInt(m_minLeashRange);
 		}
 
 		bool
@@ -181,6 +186,8 @@ namespace tpublic
 			if (!aStream->ReadInt(m_aggroRangeBaseLevelDifference))
 				return false;
 			if (!aStream->ReadInt(m_aggroAssistRange))
+				return false;
+			if (!aStream->ReadInt(m_minLeashRange))
 				return false;
 			return true;
 		}
@@ -237,6 +244,7 @@ namespace tpublic
 		std::vector<uint32_t>					m_aggroRanges;
 		int32_t									m_aggroRangeBaseLevelDifference = 0;
 		int32_t									m_aggroAssistRange = 0;
+		int32_t									m_minLeashRange = 0;
 	};
 
 }

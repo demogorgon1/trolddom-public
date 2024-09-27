@@ -79,6 +79,7 @@ namespace tpublic
 			const Manifest*					aManifest,
 			CombatEvent::Id					/*aId*/,
 			uint32_t						aAbilityId,
+			const SourceEntityInstance&		aSourceEntityInstance,
 			EntityInstance*					aSource,
 			EntityInstance*					aTarget,
 			const Vec2&						/*aAOETarget*/,
@@ -123,7 +124,7 @@ namespace tpublic
 			for(const EntityInstance* targetEntity : targetEntities)
 			{
 				if (m_threat != 0 && targetEntity->GetEntityId() != 0)
-					aEventQueue->EventQueueThreat(aSource->GetEntityInstanceId(), targetEntity->GetEntityInstanceId(), m_threat, aTick);
+					aEventQueue->EventQueueThreat(aSourceEntityInstance, targetEntity->GetEntityInstanceId(), m_threat, aTick);
 
 				std::vector<std::unique_ptr<AuraEffectBase>> effects;
 				for (const std::unique_ptr<Data::Aura::AuraEffectEntry>& t : aura->m_auraEffects)
@@ -136,7 +137,7 @@ namespace tpublic
 					effects.push_back(std::move(effect));
 				}
 
-				aAuraEventQueue->ApplyAura(aAbilityId, m_auraId, aSource->GetEntityInstanceId(), targetEntity->GetEntityInstanceId(), effects);
+				aAuraEventQueue->ApplyAura(aAbilityId, m_auraId, aSourceEntityInstance, targetEntity->GetEntityInstanceId(), effects);
 			}
 
 			return Result();

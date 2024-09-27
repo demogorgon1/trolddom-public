@@ -7,6 +7,7 @@
 
 #include <tpublic/EntityInstance.h>
 #include <tpublic/IEventQueue.h>
+#include <tpublic/SourceEntityInstance.h>
 
 namespace tpublic::DirectEffects
 {
@@ -99,7 +100,8 @@ namespace tpublic::DirectEffects
 		const Manifest*					/*aManifest*/,
 		CombatEvent::Id					/*aId*/,
 		uint32_t						/*aAbilityId*/,
-		EntityInstance*					aSource,
+		const SourceEntityInstance&		aSourceEntityInstance,
+		EntityInstance*					/*aSource*/,
 		EntityInstance*					aTarget,
 		const Vec2&						/*aAOETarget*/,
 		const ItemInstanceReference&	/*aItem*/,
@@ -120,7 +122,7 @@ namespace tpublic::DirectEffects
 					{
 						uint32_t entityInstanceId = i->first;
 
-						aEventQueue->EventQueueThreat(aTarget->GetEntityInstanceId(), entityInstanceId, m_add, aTick, m_multiply);
+						aEventQueue->EventQueueThreat({ aTarget->GetEntityInstanceId(), aTarget->GetSeq() }, entityInstanceId, m_add, aTick, m_multiply);
 					}
 				}
 			}
@@ -132,7 +134,7 @@ namespace tpublic::DirectEffects
 
 				if(combatPublic->m_targetEntityInstanceId != 0)
 				{
-					aEventQueue->EventQueueThreat(aTarget->GetEntityInstanceId(), combatPublic->m_targetEntityInstanceId, m_add, aTick, m_multiply);
+					aEventQueue->EventQueueThreat({ aTarget->GetEntityInstanceId(), aTarget->GetSeq() }, combatPublic->m_targetEntityInstanceId, m_add, aTick, m_multiply);
 				}
 			}
 			break;
@@ -140,7 +142,7 @@ namespace tpublic::DirectEffects
 		case APPLY_TO_SOURCE:
 			if(!aTarget->IsPlayer())
 			{
-				aEventQueue->EventQueueThreat(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), m_add, aTick, m_multiply);
+				aEventQueue->EventQueueThreat(aSourceEntityInstance, aTarget->GetEntityInstanceId(), m_add, aTick, m_multiply);
 			}
 			break;
 

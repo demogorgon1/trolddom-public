@@ -28,6 +28,7 @@ namespace tpublic
 			for(uint8_t i = 0; i < m_freeListSize; i++)
 			{
 				uint8_t j = m_freeList[i];
+				(void)j;
 
 				assert(j < m_size);
 				assert(m_components[j].GetComponentId() == _T::ID);

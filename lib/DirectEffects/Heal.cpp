@@ -64,6 +64,7 @@ namespace tpublic::DirectEffects
 		const Manifest*					/*aManifest*/,
 		CombatEvent::Id					aId,
 		uint32_t						aAbilityId,
+		const SourceEntityInstance&		aSourceEntityInstance,
 		EntityInstance*					aSource,
 		EntityInstance*					aTarget,
 		const Vec2&						/*aAOETarget*/,
@@ -137,7 +138,7 @@ namespace tpublic::DirectEffects
 
 				for(std::unordered_map<uint32_t, int32_t>::const_iterator i = targetThreatSource->m_targets.cbegin(); i != targetThreatSource->m_targets.cend(); i++)
 				{
-					aEventQueue->EventQueueThreat(aSource->GetEntityInstanceId(), i->first, threat, aTick);
+					aEventQueue->EventQueueThreat(aSourceEntityInstance, i->first, threat, aTick);
 				}
 			}
 		}

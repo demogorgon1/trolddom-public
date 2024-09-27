@@ -14,7 +14,7 @@ namespace tpublic
 		virtual void		ApplyAura(
 								uint32_t										aAbilityId,
 								uint32_t										aAuraId,
-								uint32_t										aSourceEntityInstanceId,
+								const SourceEntityInstance&						aSourceEntityInstance,
 								uint32_t										aTargetEntityInstanceId,
 								std::vector<std::unique_ptr<AuraEffectBase>>&	aAuraEffects) = 0;
 	};

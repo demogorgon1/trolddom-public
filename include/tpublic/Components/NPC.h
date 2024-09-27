@@ -11,6 +11,7 @@
 #include "../NPCMovement.h"
 #include "../Requirement.h"
 #include "../Resource.h"
+#include "../ThreatTable.h"
 
 namespace tpublic
 {
@@ -406,7 +407,7 @@ namespace tpublic
 				m_cooldowns.m_entries.clear();
 				m_castInProgress.reset();
 				m_channeling.reset();
-				m_targetEntityInstanceId = 0;
+				m_targetEntity = SourceEntityInstance();
 				m_moveCooldownUntilTick = 0;
 				m_spawnPosition = Vec2();
 				m_anchorPosition = Vec2();
@@ -416,8 +417,10 @@ namespace tpublic
 				m_restoreResources = false;
 				m_spawnWithTarget.reset();
 				m_lastAttackTick = 0;
+				m_lastCombatMoveTick = 0;
 				m_routeIsReversing = false;
 				m_subRouteIndex = SIZE_MAX;
+				m_lastTargetPosition = Vec2();
 			}
 
 			// Public data			
@@ -436,7 +439,7 @@ namespace tpublic
 			Cooldowns									m_cooldowns;
 			std::optional<CastInProgress>				m_castInProgress;
 			std::optional<CastInProgress>				m_channeling;
-			uint32_t									m_targetEntityInstanceId = 0;
+			SourceEntityInstance						m_targetEntity;
 			int32_t										m_moveCooldownUntilTick = 0;
 			Vec2										m_spawnPosition;
 			Vec2										m_anchorPosition;
@@ -445,13 +448,15 @@ namespace tpublic
 			NPCMovement									m_npcMovement;			
 			bool										m_restoreResources = false;
 			int32_t										m_lastAttackTick = 0;
+			int32_t										m_lastCombatMoveTick = 0;
 			bool										m_routeIsReversing = false;
 			size_t										m_subRouteIndex = SIZE_MAX;
 			uint32_t									m_effectiveRouteId = 0;
+			Vec2										m_lastTargetPosition;
 
 			struct SpawnWithTarget
 			{
-				uint32_t								m_entityInstanceId = 0;
+				SourceEntityInstance					m_entity;
 				int32_t									m_threat = 0;
 			};
 

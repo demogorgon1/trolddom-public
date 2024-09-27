@@ -31,10 +31,10 @@ namespace tpublic
 		{			
 			{ NULL, 0, 0, 0 },
 
-			{ "very_slow",	6,	400, 500 },
-			{ "slow",		4,  300, 400 },
-			{ "normal",		0,	200, 300 },
-			{ "fast",		-1, 150, 200 }
+			{ "very_slow",	6,	430, 520 },
+			{ "slow",		4,  330, 420 },
+			{ "normal",		0,	230, 320 },
+			{ "fast",		-1, 180, 220 }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

@@ -77,6 +77,7 @@ namespace tpublic::DirectEffects
 		const Manifest*					aManifest,
 		CombatEvent::Id					aId,
 		uint32_t						aAbilityId,
+		const SourceEntityInstance&		aSourceEntityInstance,
 		EntityInstance*					aSource,
 		EntityInstance*					aTarget,
 		const Vec2&						/*aAOETarget*/,
@@ -230,7 +231,7 @@ namespace tpublic::DirectEffects
 				threat = (threat * 3) / 2; // Crits generate more threat per damage than non-crits
 
 			if (aTarget->GetEntityId() != 0) // Not a player
-				aEventQueue->EventQueueThreat(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), threat, aTick);
+				aEventQueue->EventQueueThreat(aSourceEntityInstance, aTarget->GetEntityInstanceId(), threat, aTick);
 		}
 
 		return { result };

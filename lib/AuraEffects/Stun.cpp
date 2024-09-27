@@ -13,25 +13,25 @@ namespace tpublic::AuraEffects
 
 	bool			
 	Stun::OnApplication(
-		uint32_t					aSourceEntityInstanceId,
+		const SourceEntityInstance&	aSourceEntityInstance,
 		uint32_t					aTargetEntityInstanceId,
 		SystemBase::Context*		aContext,
 		const Manifest*				/*aManifest*/) 
 	{
-		aContext->m_eventQueue->EventQueueInterrupt(aSourceEntityInstanceId, aTargetEntityInstanceId, 0, 0);
+		aContext->m_eventQueue->EventQueueInterrupt(aSourceEntityInstance.m_entityInstanceId, aTargetEntityInstanceId, 0, 0);
 		return true;
 	}
 
 	bool		
 	Stun::OnUpdate(
-		uint32_t					aSourceEntityInstanceId,
+		const SourceEntityInstance& aSourceEntityInstance,
 		uint32_t					aTargetEntityInstanceId,
 		SystemBase::Context*		aContext,
 		const Manifest*				/*aManifest*/) 
 	{
 		if(m_fear)
 		{
-			const EntityInstance* sourceEntity = aContext->m_worldView->WorldViewSingleEntityInstance(aSourceEntityInstanceId);
+			const EntityInstance* sourceEntity = aContext->m_worldView->WorldViewSingleEntityInstance(aSourceEntityInstance.m_entityInstanceId);
 			const EntityInstance* targetEntity = aContext->m_worldView->WorldViewSingleEntityInstance(aTargetEntityInstanceId);
 
 			if(sourceEntity != NULL && targetEntity != NULL)

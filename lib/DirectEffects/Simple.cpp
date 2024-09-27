@@ -5,6 +5,7 @@
 #include <tpublic/EntityInstance.h>
 #include <tpublic/IEventQueue.h>
 #include <tpublic/IResourceChangeQueue.h>
+#include <tpublic/SourceEntityInstance.h>
 
 namespace tpublic::DirectEffects
 {
@@ -72,6 +73,7 @@ namespace tpublic::DirectEffects
 		const Manifest*					/*aManifest*/,
 		CombatEvent::Id					/*aId*/,
 		uint32_t						/*aAbilityId*/,
+		const SourceEntityInstance&		aSourceEntityInstance,
 		EntityInstance*					aSource,
 		EntityInstance*					aTarget,
 		const Vec2&						/*aAOETarget*/,
@@ -93,7 +95,7 @@ namespace tpublic::DirectEffects
 		case SimpleDirectEffect::ID_EDIT_PLAYER_WORLDS:
 		case SimpleDirectEffect::ID_ACTIVATE_TRIGGER:
 		case SimpleDirectEffect::ID_RECALL:
-			aCombatResultQueue->AddSimpleDirectEffect(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), m_id, m_param);
+			aCombatResultQueue->AddSimpleDirectEffect(aSourceEntityInstance, aTarget->GetEntityInstanceId(), m_id, m_param);
 			break;
 
 		case SimpleDirectEffect::ID_KILL:

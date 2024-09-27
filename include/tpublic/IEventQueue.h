@@ -20,6 +20,7 @@ namespace tpublic
 	class Chat;
 	class EntityInstance;
 	class SecondaryAbility;
+	class SourceEntityInstance;
 
 	class IEventQueue
 	{
@@ -82,7 +83,7 @@ namespace tpublic
 
 		// Virtual interface
 		virtual EventQueueAbilityResult		EventQueueAbility(
-												uint32_t													aSourceEntityInstanceId,
+												const SourceEntityInstance&									aSourceEntityInstance,
 												uint32_t													aTargetEntityInstanceId,
 												const Vec2&													aAOETarget,
 												const Data::Ability*										aAbility,
@@ -123,7 +124,7 @@ namespace tpublic
 		virtual uint32_t					EventQueueGetNextGroupRoundRobinCharacterId(
 												uint64_t													aGroupId) = 0;
 		virtual void						EventQueueThreat(
-												uint32_t													aSourceEntityInstanceId,
+												const SourceEntityInstance&									aSourceEntityInstance,
 												uint32_t													aTargetEntityInstanceId,
 												int32_t														aThreat,
 												int32_t														aTick,

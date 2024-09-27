@@ -12,7 +12,7 @@ namespace tpublic::AuraEffects
 
 	void
 	AbilityOnFade::OnFade(
-		uint32_t						aSourceEntityInstanceId,
+		const SourceEntityInstance&		aSourceEntityInstance,
 		uint32_t						aTargetEntityInstanceId,
 		SystemBase::Context*			aContext,
 		const Manifest*					aManifest) 
@@ -20,7 +20,7 @@ namespace tpublic::AuraEffects
 		if(m_abilityId != 0)
 		{
 			const Data::Ability* ability = aManifest->GetById<Data::Ability>(m_abilityId);
-			aContext->m_eventQueue->EventQueueAbility(aSourceEntityInstanceId, aTargetEntityInstanceId, Vec2(), ability, ItemInstanceReference(), NULL);
+			aContext->m_eventQueue->EventQueueAbility(aSourceEntityInstance, aTargetEntityInstanceId, Vec2(), ability, ItemInstanceReference(), NULL);
 		}
 	}
 

@@ -1,5 +1,8 @@
 #pragma once
 
+#include "Hash.h"
+#include "SourceEntityInstance.h"
+
 namespace tpublic
 {
 
@@ -13,11 +16,11 @@ namespace tpublic
 	class ThreatTable
 	{
 	public:
-		static const int32_t TIMEOUT_TICKS = 90;
+		static const int32_t TIMEOUT_TICKS = 100;
 
 		struct Entry
 		{
-			uint32_t					m_entityInstanceId = 0;
+			SourceEntityInstance		m_key;
 			int32_t						m_threat = 0;
 			Entry*						m_next = NULL;
 			Entry*						m_prev = NULL;
@@ -27,21 +30,23 @@ namespace tpublic
 						~ThreatTable();
 
 		void			Update(
-							int32_t						aTick,
-							std::vector<uint32_t>&		aOutRemoved);
+							int32_t									aTick,
+							std::vector<SourceEntityInstance>&		aOutRemoved);
 		void			Add(
-							int32_t						aTick,
-							uint32_t					aEntityInstanceId,
-							int32_t						aThreat);
+							int32_t									aTick,
+							const SourceEntityInstance&				aSourceEntityInstance,
+							int32_t									aThreat);
 		void			Multiply(
-							int32_t						aTick,
-							uint32_t					aEntityInstanceId,
-							float						aFactor);
+							int32_t									aTick,
+							const SourceEntityInstance&				aSourceEntityInstance,
+							float									aFactor);
 		void			MakeTop(
-							int32_t						aTick,
-							uint32_t					aEntityInstanceId);
+							int32_t									aTick,
+							const SourceEntityInstance&				aSourceEntityInstance);
 		void			Remove(
-							uint32_t					aEntityInstanceId);
+							const SourceEntityInstance&				aSourceEntityInstance);
+		void			Touch(
+							int32_t									aTick);
 		void			Clear();
 		void			DebugPrint() const;
 
@@ -52,7 +57,7 @@ namespace tpublic
 
 	private:
 
-		typedef std::unordered_map<uint32_t, Entry*> Table;
+		typedef std::unordered_map<SourceEntityInstance, Entry*, SourceEntityInstance::Hasher> Table;
 		Table							m_table;
 		Entry*							m_head;
 		Entry*							m_tail;

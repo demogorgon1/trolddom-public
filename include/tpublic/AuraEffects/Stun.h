@@ -74,15 +74,15 @@ namespace tpublic
 			}
 
 			bool			OnApplication(
-								uint32_t				aSourceEntityInstanceId,
-								uint32_t				aTargetEntityInstanceId,
-								SystemBase::Context*	aContext,
-								const Manifest*			aManifest) override;
+								const SourceEntityInstance&	aSourceEntityInstance,
+								uint32_t					aTargetEntityInstanceId,
+								SystemBase::Context*		aContext,
+								const Manifest*				aManifest) override;
 			bool			OnUpdate(
-								uint32_t				aSourceEntityInstanceId,
-								uint32_t				aTargetEntityInstanceId,
-								SystemBase::Context*	aContext,
-								const Manifest*			aManifest) override;
+								const SourceEntityInstance&	aSourceEntityInstance,
+								uint32_t					aTargetEntityInstanceId,
+								SystemBase::Context*		aContext,
+								const Manifest*				aManifest) override;
 
 			// Public data
 			bool		m_fear = false;

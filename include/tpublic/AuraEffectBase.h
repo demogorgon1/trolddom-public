@@ -8,6 +8,7 @@
 #include "MoveSpeed.h"
 #include "Parser.h"
 #include "Stat.h"
+#include "SourceEntityInstance.h"
 #include "SystemBase.h"
 
 namespace tpublic
@@ -100,14 +101,14 @@ namespace tpublic
 
 		bool
 		Update(
-			uint32_t									aSourceEntityInstanceId,
+			const SourceEntityInstance&					aSourceEntityInstance,
 			uint32_t									aTargetEntityInstanceId,
 			SystemBase::Context*						aContext,
 			const Manifest*								aManifest)
 		{
 			if(!m_applied)
 			{
-				if (!OnApplication(aSourceEntityInstanceId, aTargetEntityInstanceId, aContext, aManifest))
+				if (!OnApplication(aSourceEntityInstance, aTargetEntityInstanceId, aContext, aManifest))
 					return false;
 
 				m_applied = true;
@@ -116,13 +117,13 @@ namespace tpublic
 			if(m_updateCount == 0)
 				return true; // Effects that don't require updates will have this initialized to zero
 
-			if(aSourceEntityInstanceId == 0)
+			if(!aSourceEntityInstance.IsSet())
 				return false;
 
 			int32_t ticksSinceLastUpdate = aContext->m_tick - m_lastUpdate;
 			if(ticksSinceLastUpdate >= m_updateInterval)
 			{
-				if(!OnUpdate(aSourceEntityInstanceId, aTargetEntityInstanceId, aContext, aManifest))
+				if(!OnUpdate(aSourceEntityInstance, aTargetEntityInstanceId, aContext, aManifest))
 					return false;
 
 				m_lastUpdate = aContext->m_tick;
@@ -142,18 +143,18 @@ namespace tpublic
 									IWriter*						/*aStream*/) const { assert(false); }
 		virtual bool			FromStream(
 									IReader*						/*aStream*/) { assert(false); return true; }
-		virtual bool			OnApplication(
-									uint32_t						/*aSourceEntityInstanceId*/,
+		virtual bool			OnApplication(									
+									const SourceEntityInstance&		/*aSourceEntityInstance*/,
 									uint32_t						/*aTargetEntityInstanceId*/,
 									SystemBase::Context*			/*aContext*/,
 									const Manifest*					/*aManifest*/) { return true; }
 		virtual bool			OnUpdate(
-									uint32_t						/*aSourceEntityInstanceId*/,
+									const SourceEntityInstance&		/*aSourceEntityInstance*/,
 									uint32_t						/*aTargetEntityInstanceId*/,
 									SystemBase::Context*			/*aContext*/,
 									const Manifest*					/*aManifest*/) { return false; }
 		virtual void			OnFade(
-									uint32_t						/*aSourceEntityInstanceId*/,
+									const SourceEntityInstance&		/*aSourceEntityInstance*/,
 									uint32_t						/*aTargetEntityInstanceId*/,
 									SystemBase::Context*			/*aContext*/,
 									const Manifest*					/*aManifest*/) { }

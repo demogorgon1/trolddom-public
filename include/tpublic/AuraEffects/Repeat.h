@@ -78,10 +78,10 @@ namespace tpublic
 			}
 
 			bool					OnUpdate(
-										uint32_t				aSourceEntityInstanceId,
-										uint32_t				aTargetEntityInstanceId,
-										SystemBase::Context*	aContext,
-										const Manifest*			aManifest) override;
+										const SourceEntityInstance&	aSourceEntityInstance,
+										uint32_t					aTargetEntityInstanceId,
+										SystemBase::Context*		aContext,
+										const Manifest*				aManifest) override;
 
 			// Public data
 			uint32_t		m_abilityId = 0;
