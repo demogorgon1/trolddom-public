@@ -179,6 +179,10 @@ namespace tpublic
 			subZoneMap.resize(m_width * m_height, 0);
 			bool hasSubZoneMap = false;
 
+			std::vector<uint8_t> flagsMap;
+			flagsMap.resize(m_width * m_height, 0);
+			bool hasFlagsMap = false;
+
 			std::unordered_map<Vec2, uint32_t, Vec2::Hasher> doodadCoverageMap;
 
 			// Process layers
@@ -286,6 +290,11 @@ namespace tpublic
 										}
 										break;
 
+									case Data::MapPalette::ENTRY_TYPE_FLAGS:
+										flagsMap[mapX + mapY * m_width] = (uint8_t)entry->m_value;
+										hasFlagsMap = true;
+										break;
+
 									default:
 										assert(false);
 										break;
@@ -300,10 +309,10 @@ namespace tpublic
 				}
 			}
 
-			if(hasLevelMap || hasZoneMap || hasSubZoneMap)
+			if(hasLevelMap || hasZoneMap || hasSubZoneMap || hasFlagsMap)
 			{
 				m_worldInfoMap = std::make_unique<WorldInfoMap>();
-				m_worldInfoMap->Build(m_width, m_height, &levelMap[0], &zoneMap[0], &subZoneMap[0]);
+				m_worldInfoMap->Build(m_width, m_height, &levelMap[0], &zoneMap[0], &subZoneMap[0], &flagsMap[0]);
 			}
 
 			if(hasCoverMap)

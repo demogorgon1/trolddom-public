@@ -788,6 +788,11 @@ map_palette .doodads:
 	doodad wall_banner_blacksmithing: [ 243 59 53 ]
 }
 
+map_palette .flags:
+{
+	flags<[ demo ]>: [ 237 45 132 ]
+}
+
 map open_world:
 {
 	string: "Aetheris Isle"
@@ -843,6 +848,11 @@ map open_world:
 		{
 			palettes:	[ .doodads ]
 			source:		"open-world-7.png"
+		}								
+
+		{
+			palettes:	[ .flags ]
+			source:		"open-world-8.png"
 		}								
 		
 	]

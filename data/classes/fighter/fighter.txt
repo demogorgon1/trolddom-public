@@ -216,7 +216,7 @@ class fighter:
 			
 			unlock_abilities:
 			[
-				hamstring				
+				bash				
 			]
 			
 			stats:
@@ -268,7 +268,7 @@ class fighter:
 			
 			unlock_abilities:
 			[
-				bash
+				hamstring
 			]
 			
 			stats:

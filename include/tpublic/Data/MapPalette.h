@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../DataBase.h"
+#include "../WorldInfoMap.h"
 
 namespace tpublic
 {
@@ -25,7 +26,8 @@ namespace tpublic
 				ENTRY_TYPE_WALL,
 				ENTRY_TYPE_SUB_ZONE,
 				ENTRY_TYPE_ROUTE,
-				ENTRY_TYPE_DOODAD
+				ENTRY_TYPE_DOODAD,
+				ENTRY_TYPE_FLAGS,
 			};
 
 			struct Color
@@ -131,6 +133,12 @@ namespace tpublic
 						{
 							entry.m_type = ENTRY_TYPE_DOODAD;
 							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_DOODAD, aChild->m_name.c_str());
+						}
+						else if (aChild->m_name == "flags")
+						{
+							entry.m_type = ENTRY_TYPE_FLAGS;
+							TP_VERIFY(aChild->m_annotation, aChild->m_debugInfo, "Missing flags annotation.");
+							entry.m_value = WorldInfoMap::SourceToFlags(aChild->m_annotation.get());
 						}
 						else
 						{

@@ -90,6 +90,11 @@ map_palette .routes:
 	route .patrol: [ 192 16 186 ]
 }
 
+map_palette .flags:
+{
+	flags<[ demo ]>: [ 237 45 132 ]
+}
+
 map dungeon_1:
 {
 	string: "Aetheris Stronghold"
@@ -133,6 +138,11 @@ map dungeon_1:
 			palettes: 	[ .routes ]
 			source:		"dungeon-1-routes.png"
 		}				
+		
+		{ 
+			palettes: 	[ .flags ]
+			source:		"dungeon-1-demo.png"
+		}						
 	]
 	
 	script:

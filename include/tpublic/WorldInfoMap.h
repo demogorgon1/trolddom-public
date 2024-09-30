@@ -2,6 +2,7 @@
 
 #include "IReader.h"
 #include "IWriter.h"
+#include "SourceNode.h"
 #include "Vec2.h"
 
 namespace tpublic
@@ -10,13 +11,34 @@ namespace tpublic
 	class WorldInfoMap
 	{
 	public:		
+		enum Flag : uint8_t 
+		{
+			FLAG_DEMO = 0x01
+		};
+
+		static uint8_t
+		SourceToFlags(
+			const SourceNode*						aSource)
+		{
+			uint8_t flags = 0;
+			aSource->GetArray()->ForEachChild([&](
+				const SourceNode* aChild)
+			{
+				if(aChild->IsIdentifier("demo"))
+					flags |= FLAG_DEMO;
+				else
+					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid flag.", aChild->GetIdentifier());					
+			});
+			return flags;
+		}
+
 		struct Entry
 		{
 			bool
 			operator ==(
 				const Entry&						aOther) const
 			{
-				return m_level == aOther.m_level && m_zoneId == aOther.m_zoneId && m_subZoneId == aOther.m_subZoneId;
+				return m_level == aOther.m_level && m_zoneId == aOther.m_zoneId && m_subZoneId == aOther.m_subZoneId && m_flags == aOther.m_flags;
 			}
 
 			void			
@@ -26,6 +48,7 @@ namespace tpublic
 				aWriter->WriteUInt(m_level);
 				aWriter->WriteUInt(m_zoneId);
 				aWriter->WriteUInt(m_subZoneId);
+				aWriter->WritePOD(m_flags);
 			}
 			
 			bool			
@@ -38,6 +61,8 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadUInt(m_subZoneId))
 					return false;
+				if (!aReader->ReadPOD(m_flags))
+					return false;
 				return true;
 			}
 
@@ -45,6 +70,7 @@ namespace tpublic
 			uint32_t				m_level = 0;
 			uint32_t				m_zoneId = 0;
 			uint32_t				m_subZoneId = 0;
+			uint8_t					m_flags = 0;
 		};		
 
 		struct ZoneOutline
@@ -76,7 +102,8 @@ namespace tpublic
 								int32_t				aHeight,
 								const uint32_t*		aLevelMap,
 								const uint32_t*		aZoneMap,
-								const uint32_t*		aSubZoneMap);
+								const uint32_t*		aSubZoneMap,
+								const uint8_t*		aFlagsMap);
 		const Entry&		Get(
 								const Vec2&			aPosition) const;
 		const ZoneOutline*	GetZoneOutline(
