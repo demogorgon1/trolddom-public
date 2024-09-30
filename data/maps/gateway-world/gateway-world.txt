@@ -119,12 +119,12 @@ tag_context .caster_enemy:
 
 map_entity_spawn .major_boss:
 {	
-	spawn_timer: { cooldown_range_min: 36000 cooldown_range_max: 48000 min_delay: 32000 }
+	spawn_timer: { normal: 36000 fast_trigger: 0 } 
 }
 
 map_entity_spawn .minor_boss:
 {	
-	spawn_timer: { cooldown_range_min: 24000 cooldown_range_max: 36000 min_delay: 20000 }
+	spawn_timer: { normal: 18000 fast_trigger: 0 } 
 }
 
 map_entity_spawn .pack:

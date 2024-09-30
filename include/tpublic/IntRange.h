@@ -80,7 +80,7 @@ namespace tpublic
 			return true;
 		}
 
-		uint32_t
+		int32_t
 		GetRandom(
 			std::mt19937&			aRandom) const
 		{

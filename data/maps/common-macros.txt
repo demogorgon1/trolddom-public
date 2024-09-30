@@ -1,4 +1,6 @@
-!define TRASH_RESPAWN_TIMER { cooldown_range_min: 36000 cooldown_range_max: 40000 min_delay: 35000 }
+!define TRASH_RESPAWN_TIMER { normal: 36000 fast_trigger: 0 } 
+!define QUEST_ITEM_RESPAWN_TIMER { despawn_required: true normal: [ 1000 1400 ] fast: [ 600 1000 ] fast_trigger: 600 }
+!define CHEST_RESPAWN { despawn_required: true normal: [ 6000 9000 ] fast_trigger: 0 }
 
 !define TRADE_SUPPLIES
 {

@@ -154,7 +154,7 @@ map_entity_spawn .linda:
 
 map_entity_spawn .camus:
 {
-	spawn_timer: { despawn_required: true min_delay: 300 cooldown_range_min: 600 cooldown_range_max: 1200 }
+	spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{}
 	entity .camus: { init_state: default }
 }
 
@@ -443,31 +443,31 @@ map_entity_spawn .hermit_door:
 
 map_entity_spawn .theodore_quest_item:
 {
-	spawn_timer: { despawn_required: true min_delay: 300 cooldown_range_min: 600 cooldown_range_max: 1200 }
+	spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{}
 	entity .theodore_quest_item: { init_state: default }
 }
 
 map_entity_spawn .elysia_quest_item:
 {
-	spawn_timer: { despawn_required: true min_delay: 300 cooldown_range_min: 600 cooldown_range_max: 1200 }
+	spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{}
 	entity .elysia_quest_item: { init_state: default }
 }
 
 map_entity_spawn .elysia_quest_item_2:
 {
-	spawn_timer: { despawn_required: true min_delay: 300 cooldown_range_min: 600 cooldown_range_max: 1200 }
+	spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{}
 	entity .elysia_quest_item_2: { init_state: default }
 }
 
 map_entity_spawn .werner_quest_item:
 {
-	spawn_timer: { despawn_required: true min_delay: 300 cooldown_range_min: 600 cooldown_range_max: 1200 }
+	spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{}
 	entity .werner_quest_item: { init_state: default }
 }
 
 map_entity_spawn .gnome_1_quest_item:
 {
-	spawn_timer: { despawn_required: true min_delay: 300 cooldown_range_min: 600 cooldown_range_max: 1200 }
+	spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{}
 	entity .gnome_1_quest_item: { init_state: default }
 }
 

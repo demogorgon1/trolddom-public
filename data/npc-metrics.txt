@@ -1,6 +1,6 @@
-!define NPC_RESPAWN_NORMAL { cooldown_range_min: 800 cooldown_range_max: 950 min_delay: 650 }
-!define NPC_RESPAWN_RARE { cooldown_range_min: 6000 cooldown_range_max: 9000 min_delay: 5000 }
-!define NPC_RESPAWN_WORLD_BOSS { cooldown_range_min: 83400 cooldown_range_max: 87400 min_delay: 80000 }
+!define NPC_RESPAWN_NORMAL { }
+!define NPC_RESPAWN_RARE { normal: [ 6000 9000 ] fast_trigger: 0 }
+!define NPC_RESPAWN_WORLD_BOSS { normal: [ 83400 87400 ] fast_trigger: 0 }
 
 npc_metrics:
 {

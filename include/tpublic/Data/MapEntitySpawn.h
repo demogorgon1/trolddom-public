@@ -2,6 +2,7 @@
 
 #include "../DataBase.h"
 #include "../EntityState.h"
+#include "../IntRange.h"
 
 namespace tpublic
 {
@@ -232,12 +233,12 @@ namespace tpublic
 					aNode->GetObject()->ForEachChild([&](
 						const SourceNode* aChild)
 					{
-						if(aChild->m_name == "min_delay")
-							m_minDelay = aChild->GetInt32();
-						else if (aChild->m_name == "cooldown_range_min")
-							m_cooldownRangeMin = aChild->GetInt32();
-						else if (aChild->m_name == "cooldown_range_max")
-							m_cooldownRangeMax = aChild->GetInt32();
+						if(aChild->m_name == "normal")
+							m_normal = IntRange(aChild);
+						else if (aChild->m_name == "fast")
+							m_fast = IntRange(aChild);
+						else if (aChild->m_name == "fast_trigger")
+							m_fastTrigger = aChild->GetInt32();
 						else if (aChild->m_name == "despawn_required")
 							m_despawnRequired = aChild->GetBool();
 						else if (aChild->m_name == "only_when_triggered")
@@ -251,9 +252,9 @@ namespace tpublic
 				ToStream(
 					IWriter*		aStream) const
 				{
-					aStream->WriteInt(m_minDelay);
-					aStream->WriteInt(m_cooldownRangeMin);
-					aStream->WriteInt(m_cooldownRangeMax);
+					m_normal.ToStream(aStream);
+					m_fast.ToStream(aStream);
+					aStream->WriteInt(m_fastTrigger);
 					aStream->WriteBool(m_despawnRequired);
 					aStream->WriteBool(m_onlyWhenTriggered);
 				}
@@ -262,11 +263,11 @@ namespace tpublic
 				FromStream(
 					IReader*		aStream) 
 				{
-					if (!aStream->ReadInt(m_minDelay))
+					if (!m_normal.FromStream(aStream))
 						return false;
-					if (!aStream->ReadInt(m_cooldownRangeMin))
+					if (!m_fast.FromStream(aStream))
 						return false;
-					if (!aStream->ReadInt(m_cooldownRangeMax))
+					if (!aStream->ReadInt(m_fastTrigger))
 						return false;
 					if (!aStream->ReadBool(m_despawnRequired))
 						return false;
@@ -276,9 +277,9 @@ namespace tpublic
 				}
 
 				// Public data
-				int32_t											m_minDelay = 30 * 10; // 30 secs
-				int32_t											m_cooldownRangeMin = 60 * 10; // 1 min
-				int32_t											m_cooldownRangeMax = 120 * 10; // 2 min
+				IntRange										m_normal = { 4 * 60 * 10, 5 * 60 * 10 }; // 4-5 minutes
+				IntRange										m_fast = { 1 * 60 * 10, 2 * 60 * 10 }; // 1-2 minutes
+				int32_t											m_fastTrigger = 2 * 60 * 10; // 2 minutes
 				bool											m_despawnRequired = false; 
 				bool											m_onlyWhenTriggered = false;
 			};
