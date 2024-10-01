@@ -25,8 +25,8 @@ namespace tpublic
 
 			if (levelRange.m_min == 0 && aItem->m_requiredLevel > 0)
 			{
-				levelRange.m_max = aItem->m_requiredLevel + 1;
-				levelRange.m_min = aItem->m_requiredLevel - 1;
+				levelRange.m_max = aItem->m_requiredLevel + 2;
+				levelRange.m_min = aItem->m_requiredLevel;
 
 				if(levelRange.m_min < 1)
 					levelRange.m_min = 1;

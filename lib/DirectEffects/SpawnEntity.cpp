@@ -68,7 +68,7 @@ namespace tpublic::DirectEffects
 		const Manifest*					/*aManifest*/,
 		CombatEvent::Id					/*aId*/,
 		uint32_t						/*aAbilityId*/,
-		const SourceEntityInstance&		aSourceEntityInstance,
+		const SourceEntityInstance&		/*aSourceEntityInstance*/,
 		EntityInstance*					aSource,
 		EntityInstance*					aTarget,
 		const Vec2&						/*aAOETarget*/,
@@ -102,7 +102,7 @@ namespace tpublic::DirectEffects
 		{
 			// Initial NPC threat on target
 			Components::NPC* npc = spawnedEntity->GetComponent<Components::NPC>();
-			npc->m_spawnWithTarget = { aSourceEntityInstance, m_npcTargetThreat };
+			npc->m_spawnWithTarget = { { aTarget->GetEntityInstanceId(), aTarget->GetSeq() }, m_npcTargetThreat };
 		}
 
 		return Result();

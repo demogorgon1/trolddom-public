@@ -32,7 +32,7 @@
 			verb: open
 			range: 1 
 			kill: true
-			dead_despawn_ticks: 300
+			dead_despawn_ticks: 1200
 		}	
 		lootable: 
 		{ 
