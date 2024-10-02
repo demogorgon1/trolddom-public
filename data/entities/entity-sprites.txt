@@ -172,6 +172,8 @@ sprites:
 	sprite man_22: { dead: man_22_dead }
 	sprite demon_1: { dead: demon_1_dead }
 	sprite demon_2: { dead: demon_2_dead }
+	sprite crab_monster_2: { dead: crab_monster_2_dead tags: [ crab_monster caster melee ] }
+	sprite crab_monster_boss_2: { dead: crab_monster_boss_2_dead tags: [ crab_monster caster melee boss ] }
 
 	cursor: { position: [ 0 144 ] }
 
@@ -189,6 +191,16 @@ sprites:
 	sprite man_22_dead: { }
 	sprite demon_1_dead: { }
 	sprite demon_2_dead: { }
+	sprite crab_monster_2_dead: { }
+	sprite crab_monster_boss_2_dead: { }
+	
+	cursor: { position: [ 0 160 ] }
+
+	sprite crab_caster_2: { dead: crab_caster_2_dead tags: [ crab_monster caster melee ] }
+	
+	cursor: { position: [ 0 176 ] }
+
+	sprite crab_caster_2_dead: { }
 	
 }
 

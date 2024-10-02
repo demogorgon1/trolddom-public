@@ -243,8 +243,8 @@ entity crab_man_3: !NPC
 	_string: "Crab Warrior"
 	_level: 3
 	_faction: monsters
-	_sprite: crab_monster_1
-	_sprite_dead: crab_monster_1_dead
+	_sprite: crab_monster_2
+	_sprite_dead: crab_monster_2_dead
 	_loot_table: .crab_man_3
 	_creature_type: humanoid
 	_default_behavior_state: .wandering_short
@@ -269,8 +269,8 @@ entity crab_caster_3: !NPC
 	_faction: monsters
 	_resource_mana: 1
 	_resource_health: 0.7
-	_sprite: crab_caster_1
-	_sprite_dead: crab_caster_1_dead
+	_sprite: crab_caster_2
+	_sprite_dead: crab_caster_2_dead
 	_loot_table: .crab_caster_3
 	_creature_type: humanoid
 	_abilities: [ { id: npc_firebolt } { id: npc_attack } ]
@@ -295,8 +295,8 @@ entity crab_boss_4: !NPC
 	_level: 4
 	_faction: monsters
 	_resource_health: 1.5
-	_sprite: crab_monster_boss_1
-	_sprite_dead: crab_monster_boss_1_dead
+	_sprite: crab_monster_boss_2
+	_sprite_dead: crab_monster_boss_2_dead
 	_loot_table: .crab_boss_4
 	_creature_type: humanoid
 	_in_combat_barks:
@@ -478,8 +478,8 @@ entity crab_ambusher_6: !NPC
 	_faction: monsters
 	_resource_health: 2
 	_weapon_damage: 2.3
-	_sprite: crab_monster_1
-	_sprite_dead: crab_monster_1_dead
+	_sprite: crab_monster_2
+	_sprite_dead: crab_monster_2_dead
 	_loot_table: .crab_ambusher_6
 	_creature_type: humanoid
 	_despawn_time: { out_of_combat_ticks: 100 }
@@ -506,8 +506,8 @@ entity crab_man_6: !NPC
 	_string: "Crab Agent"
 	_level: 6
 	_faction: monsters
-	_sprite: crab_monster_1
-	_sprite_dead: crab_monster_1_dead
+	_sprite: crab_monster_2
+	_sprite_dead: crab_monster_2_dead
 	_loot_table: .crab_man_6
 	_creature_type: humanoid
 	_default_behavior_state: .wandering_short	
