@@ -379,7 +379,7 @@ ability firebolt:
 	string: "Firebolt"
 	tags: [ ability_ranged ]
 	description: "Deals $damage$ damage to target."
-	range: 8
+	range: 9
 	cast_time: 20
 	cooldowns: [ global spell_fire_lockout ]
 	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
@@ -388,14 +388,14 @@ ability firebolt:
 	talent_tree: sorcerer_elemental
 	speed: 7
 	projectile: firebolt
-	resource_cost mana: 18
+	resource_cost mana: 15
 	target_particle_system: orange_spell_hit
 	
 	direct_effect damage:
 	{
 		flags: [ can_be_critical ]
 		damage_type: fire
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 20 ] [ 10 32 ] ] }											
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 24 ] [ 10 36 ] ] }											
 		
 	}
 	
@@ -442,7 +442,7 @@ ability fireball:
 {
 	string: "Fireball"
 	description: "Deals $damage$ damage to target."
-	range: 8
+	range: 9
 	cast_time: 28
 	cooldowns: [ global spell_fire_lockout ]
 	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
@@ -451,14 +451,14 @@ ability fireball:
 	talent_tree: sorcerer_elemental
 	speed: 7
 	projectile: fireball
-	resource_cost mana: 28
+	resource_cost mana: 24
 	target_particle_system: orange_spell_hit
 	
 	direct_effect damage:
 	{
 		flags: [ can_be_critical ]
 		damage_type: fire
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 1 b: [ [ 1 35 ] [ 10 55 ] ] }											
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 1 b: [ [ 1 36 ] [ 10 55 ] ] }											
 	}
 	
 	direct_effect apply_aura:
@@ -505,7 +505,7 @@ ability ice_lance:
 	string: "Ice Lance"
 	description: "Deals $damage$ damage to target."
 	range: 8
-	cast_time: 20
+	cast_time: 10
 	cooldowns: [ global spell_frost_lockout ]
 	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
 	states: [ default in_combat ]
