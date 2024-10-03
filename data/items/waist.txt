@@ -1,6 +1,7 @@
 item waist_theodore_1:
 {
 	type: armor_mail
+	binds: when_picked_up
 	equipment_slots: [ waist ]
 	required_level: 1
 	icon: icon_belt_1
