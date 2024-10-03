@@ -22,7 +22,7 @@ ability consumable_small_healing_potion:
 item consumable_small_healing_potion:
 {
 	loot_groups: [ world_drops_consumable ]
-	item_level: 1 
+	item_level: 2 
 	icon: icon_small_red_potion
 	string: "Small Healing Potion"
 	stack: 10	
@@ -50,7 +50,7 @@ ability consumable_small_mana_potion:
 item consumable_small_mana_potion:
 {
 	loot_groups: [ world_drops_consumable ]
-	item_level: 1 
+	item_level: 2 
 	icon: icon_small_blue_potion
 	string: "Small Mana Potion"
 	stack: 10

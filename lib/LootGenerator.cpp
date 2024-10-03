@@ -23,10 +23,10 @@ namespace tpublic
 		{
 			UIntRange levelRange = aItem->m_levelRange;
 
-			if (levelRange.m_min == 0 && aItem->m_requiredLevel > 0)
+			if (levelRange.m_min == 0 && aItem->m_itemLevel > 0)
 			{
-				levelRange.m_max = aItem->m_requiredLevel + 2;
-				levelRange.m_min = aItem->m_requiredLevel;
+				levelRange.m_max = aItem->m_itemLevel + 2;
+				levelRange.m_min = aItem->m_itemLevel;
 
 				if(levelRange.m_min < 1)
 					levelRange.m_min = 1;

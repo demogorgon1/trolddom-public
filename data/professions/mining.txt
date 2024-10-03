@@ -18,7 +18,7 @@ ${
 		_item_string: "Verdigrisite"
 		_loot_groups: [ .mining_verdigrisite world_drops_uncommon ]
 		_rarity: uncommon
-		_item_level: 1
+		_item_level: 2
 		_value_multiplier: 4
 	}
 
