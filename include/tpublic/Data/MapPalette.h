@@ -28,6 +28,7 @@ namespace tpublic
 				ENTRY_TYPE_ROUTE,
 				ENTRY_TYPE_DOODAD,
 				ENTRY_TYPE_FLAGS,
+				ENTRY_TYPE_CLIFF
 			};
 
 			struct Color
@@ -139,6 +140,11 @@ namespace tpublic
 							entry.m_type = ENTRY_TYPE_FLAGS;
 							TP_VERIFY(aChild->m_annotation, aChild->m_debugInfo, "Missing flags annotation.");
 							entry.m_value = WorldInfoMap::SourceToFlags(aChild->m_annotation.get());
+						}
+						else if (aChild->m_tag == "cliff")
+						{
+							entry.m_type = ENTRY_TYPE_CLIFF;
+							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_CLIFF, aChild->m_name.c_str());
 						}
 						else
 						{

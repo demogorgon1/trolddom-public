@@ -479,6 +479,9 @@ namespace tpublic
 						const Vec2&				aPosition,
 						const Vec2&				aDirection,
 						int32_t					aMaxDistance) const;
+		uint8_t		GetElevation(
+						int32_t					aX,
+						int32_t					aY) const;
 		bool		DoesTileBlockLineOfSight(
 						int32_t					aX,
 						int32_t					aY) const;
@@ -507,6 +510,7 @@ namespace tpublic
 		int32_t										m_width;
 		int32_t										m_height;
 		uint32_t*									m_tileMap;
+		uint8_t*									m_elevationMap;
 		Seed										m_seed;
 		std::vector<EntitySpawn>					m_entitySpawns;
 		std::vector<PlayerSpawn>					m_playerSpawns;

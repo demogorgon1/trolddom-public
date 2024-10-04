@@ -59,6 +59,8 @@ namespace tpublic
 			ID_EMOTE,
 			ID_ROUTE,
 			ID_TILE_MODIFIER,
+			ID_CLIFF_STYLE,
+			ID_MAP_CLIFF,
 
 			NUM_IDS
 		};
@@ -115,7 +117,9 @@ namespace tpublic
 			"encounter",
 			"emote",
 			"route",
-			"tile_modifier"
+			"tile_modifier",
+			"cliff_style",
+			"map_cliff"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

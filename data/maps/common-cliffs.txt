@@ -1,0 +1,184 @@
+sprites:
+{
+	source: "common-cliffs.png"
+
+	size: { width: 16 height: 16 }
+
+	cursor: { position: [ 0 0 ] }
+
+	sprite rocky_cliff_1_a: { }
+	sprite rocky_cliff_1_b: { }
+	sprite rocky_cliff_1_c: { }
+	sprite rocky_cliff_2_a: { }
+	sprite rocky_cliff_2_b: { }
+	sprite rocky_cliff_2_c: { }
+	sprite rocky_cliff_3_a: { }
+	sprite rocky_cliff_3_b: { }
+	sprite rocky_cliff_3_c: { }
+	sprite rocky_cliff_4_a: { }
+	sprite rocky_cliff_4_b: { }
+	sprite rocky_cliff_4_c: { }
+	sprite rocky_cliff_5: { }
+	sprite rocky_cliff_6: { }
+	sprite rocky_cliff_7: { }
+	sprite rocky_cliff_8: { }
+	
+	cursor: { position: [ 0 16 ] }
+	
+	sprite rocky_cliff_9: { }
+	sprite rocky_cliff_10: { }
+	sprite rocky_cliff_11: { }
+	sprite rocky_cliff_12: { }
+	sprite rocky_cliff_13: { }
+	sprite rocky_cliff_14: { }
+	sprite rocky_cliff_15: { }
+	sprite rocky_cliff_16: { }
+	sprite rocky_cliff_17: { }
+	sprite rocky_cliff_18: { }
+	sprite rocky_cliff_19: { }
+	sprite rocky_cliff_20: { }
+}
+
+cliff_style rocks:
+{
+	tile<[ rocky_cliff_13 ]>:
+	[
+		"x00"
+		"11R"
+		"111"
+	]
+
+	tile<[ rocky_cliff_14 ]>:
+	[
+		"00x"
+		"R11"
+		"111"
+	]
+
+	tile<[ rocky_cliff_15 ]>:
+	[
+		"11x"
+		"110"
+		"1R0"
+	]
+
+	tile<[ rocky_cliff_16 ]>:
+	[
+		"1R0"
+		"110"
+		"11x"
+	]
+	
+	tile<[ rocky_cliff_17 ]>:
+	[
+		"111"
+		"R11"
+		"00x"
+	]
+
+	tile<[ rocky_cliff_18 ]>:
+	[
+		"111"
+		"11R"
+		"x00"
+	]
+
+	tile<[ rocky_cliff_19 ]>:
+	[
+		"0R1"
+		"011"
+		"x11"
+	]
+
+	tile<[ rocky_cliff_20 ]>:
+	[
+		"x11"
+		"011"
+		"0R1"
+	]	
+
+	tile<[ rocky_cliff_5 ]>:
+	[
+		"x0x"
+		"011"
+		"x11"
+	]
+	
+	tile<[ rocky_cliff_6 ]>:
+	[
+		"x0x"
+		"110"
+		"11x"
+	]
+
+	tile<[ rocky_cliff_7 ]>:
+	[
+		"11x"
+		"110"
+		"x0x"
+	]
+
+	tile<[ rocky_cliff_8 ]>:
+	[
+		"x11"
+		"011"
+		"x0x"
+	]
+
+	tile<[ rocky_cliff_9 ]>:
+	[
+		"011"
+		"111"
+		"111"
+	]
+
+	tile<[ rocky_cliff_10 ]>:
+	[
+		"110"
+		"111"
+		"111"
+	]
+
+	tile<[ rocky_cliff_11 ]>:
+	[
+		"111"
+		"111"
+		"110"
+	]
+
+	tile<[ rocky_cliff_12 ]>:
+	[
+		"111"
+		"111"
+		"011"
+	]
+
+	tile<[ rocky_cliff_1_a rocky_cliff_1_b rocky_cliff_1_c]>:
+	[
+		"x0x"
+		"x1x"
+		"x1x"
+	]
+
+	tile<[ rocky_cliff_2_a rocky_cliff_2_b rocky_cliff_2_c]>:
+	[
+		"xxx"
+		"011"
+		"xxx"
+	]
+
+	tile<[ rocky_cliff_3_a rocky_cliff_3_b rocky_cliff_3_c]>:
+	[
+		"x1x"
+		"x1x"
+		"x0x"
+	]
+
+	tile<[ rocky_cliff_4_a rocky_cliff_4_b rocky_cliff_4_c]>:
+	[
+		"xxx"
+		"110"
+		"xxx"
+	]
+
+}

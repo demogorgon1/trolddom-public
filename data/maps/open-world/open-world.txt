@@ -580,6 +580,19 @@ route .default_patrol:
 {
 }
 
+map_cliff .rocky_cliff:
+{
+	cliff_style: rocks
+	elevation: 1
+}
+
+map_cliff .rocky_cliff_ramp:
+{
+	cliff_style: rocks
+	elevation: 1
+	ramp: true
+}
+
 map_palette .tiles:
 {
 	tile water: [ 9 86 104 ]
@@ -717,9 +730,11 @@ map_palette .stuff:
 	entity_spawn .zumhorn_2: [ 255 104 102 ]
 	entity_spawn .zumhorn_2_boss: [ 205 104 102 ]
 	entity_spawn .danger_spiders: [ 230 99 106 ]
+	
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn dungeon_1_exit: [ 0 0 200 ]	
 	portal .dungeon_1_entrance: [ 0 234 0 ]	
+	
 	wall stone_wall: [ 128 128 128 ]
 }
 
@@ -793,6 +808,12 @@ map_palette .flags:
 	flags<[ demo ]>: [ 237 45 132 ]
 }
 
+map_palette .cliffs:
+{
+	cliff .rocky_cliff: [ 197 169 34 ]
+	cliff .rocky_cliff_ramp: [ 36 152 174 ]
+}
+
 map open_world:
 {
 	string: "Aetheris Isle"
@@ -853,6 +874,11 @@ map open_world:
 		{
 			palettes:	[ .flags ]
 			source:		"open-world-8.png"
+		}								
+
+		{
+			palettes:	[ .cliffs ]
+			source:		"open-world-9.png"
 		}								
 		
 	]

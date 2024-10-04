@@ -7,6 +7,7 @@
 #include <tpublic/Data/Aura.h>
 #include <tpublic/Data/Terrain.h>
 #include <tpublic/Data/Class.h>
+#include <tpublic/Data/CliffStyle.h>
 #include <tpublic/Data/Cooldown.h>
 #include <tpublic/Data/CreatureType.h>
 #include <tpublic/Data/Deity.h>
@@ -22,6 +23,7 @@
 #include <tpublic/Data/LootGroup.h>
 #include <tpublic/Data/LootTable.h>
 #include <tpublic/Data/Map.h>
+#include <tpublic/Data/MapCliff.h>
 #include <tpublic/Data/MapEntitySpawn.h>
 #include <tpublic/Data/MapPalette.h>
 #include <tpublic/Data/MapPlayerSpawn.h>
@@ -65,6 +67,7 @@ namespace tpublic
 		RegisterDataContainer<Data::Aura>();
 		RegisterDataContainer<Data::Terrain>();
 		RegisterDataContainer<Data::Class>();
+		RegisterDataContainer<Data::CliffStyle>();
 		RegisterDataContainer<Data::Cooldown>();
 		RegisterDataContainer<Data::CreatureType>();
 		RegisterDataContainer<Data::Deity>();
@@ -80,6 +83,7 @@ namespace tpublic
 		RegisterDataContainer<Data::LootGroup>();
 		RegisterDataContainer<Data::LootTable>();
 		RegisterDataContainer<Data::Map>();
+		RegisterDataContainer<Data::MapCliff>();
 		RegisterDataContainer<Data::MapEntitySpawn>();
 		RegisterDataContainer<Data::MapPalette>();
 		RegisterDataContainer<Data::MapPlayerSpawn>();

@@ -122,6 +122,19 @@ namespace tpublic
 			UniformDistribution<size_t> distribution(0, aVector.size() - 1);
 			return &aVector[distribution(aRandom)];
 		}
+
+		template <typename _T>
+		const _T& 
+		RandomItem(
+			std::mt19937&							aRandom,
+			const std::vector<_T>&					aVector)
+		{
+			assert(aVector.size() != 0);
+			if(aVector.size() == 1)
+				return aVector[0];
+			UniformDistribution<size_t> distribution(0, aVector.size() - 1);
+			return aVector[distribution(aRandom)];
+		}
 		
 		template <typename _T>
 		_T

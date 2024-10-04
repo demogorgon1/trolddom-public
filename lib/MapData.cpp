@@ -1,10 +1,13 @@
 #include "Pcheader.h"
 
+#include <tpublic/Data/CliffStyle.h>
 #include <tpublic/Data/Doodad.h>
+#include <tpublic/Data/MapCliff.h>
 #include <tpublic/Data/MapPalette.h>
 #include <tpublic/Data/Sprite.h>
 
 #include <tpublic/AutoDoodads.h>
+#include <tpublic/CliffBuilder.h>
 #include <tpublic/DoodadPlacement.h>
 #include <tpublic/Image.h>
 #include <tpublic/Manifest.h>
@@ -85,6 +88,7 @@ namespace tpublic
 		, m_x(0)
 		, m_y(0)
 		, m_tileMap(NULL)
+		, m_elevationMap(NULL)
 		, m_walkableBits(NULL)
 		, m_blockLineOfSightBits(NULL)
 		, m_alwaysObscuredBits(NULL)
@@ -103,6 +107,7 @@ namespace tpublic
 		, m_x(0)
 		, m_y(0)
 		, m_tileMap(NULL)
+		, m_elevationMap(NULL)
 		, m_walkableBits(NULL)
 		, m_alwaysObscuredBits(NULL)
 		, m_blockLineOfSightBits(NULL)
@@ -145,6 +150,9 @@ namespace tpublic
 
 		if(m_alwaysObscuredBits != NULL)
 			delete [] m_alwaysObscuredBits;
+
+		if(m_elevationMap != NULL)
+			delete [] m_elevationMap;
 	}
 
 	void	
@@ -156,11 +164,16 @@ namespace tpublic
 
 		if(m_sourceLayers.size() > 0)
 		{
-			// Allocate space for tile map
+			// Allocate space for tile map and elevation map
 			assert(m_tileMap == NULL);
+			assert(m_elevationMap == NULL);
 			m_tileMap = new uint32_t[m_width * m_height];
+			m_elevationMap = new uint8_t[m_width * m_height];
 			for(int32_t i = 0, count = m_width * m_height; i < count; i++)
+			{
 				m_tileMap[i] = m_mapInfo.m_defaultTileSpriteId;
+				m_elevationMap[i] = 0;
+			}
 
 			// Allocate space for temporary level and zone maps
 			std::vector<uint32_t> levelMap;
@@ -182,6 +195,8 @@ namespace tpublic
 			std::vector<uint8_t> flagsMap;
 			flagsMap.resize(m_width * m_height, 0);
 			bool hasFlagsMap = false;
+
+			std::unique_ptr<CliffBuilder> cliffBuilder;
 
 			std::unordered_map<Vec2, uint32_t, Vec2::Hasher> doodadCoverageMap;
 
@@ -295,6 +310,18 @@ namespace tpublic
 										hasFlagsMap = true;
 										break;
 
+									case Data::MapPalette::ENTRY_TYPE_CLIFF:
+										{
+											if(!cliffBuilder)
+												cliffBuilder = std::make_unique<CliffBuilder>();
+
+											const Data::MapCliff* mapCliff = aManifest->GetById<Data::MapCliff>(entry->m_value);
+											const Data::CliffStyle* cliffStyle = aManifest->GetById<Data::CliffStyle>(mapCliff->m_cliffStyleId);
+											cliffBuilder->AddCliff({ mapX, mapY }, cliffStyle, mapCliff->m_elevation, mapCliff->m_ramp);
+											m_elevationMap[mapX + mapY * m_width] = mapCliff->m_elevation;
+										}
+										break;
+
 									default:
 										assert(false);
 										break;
@@ -329,6 +356,15 @@ namespace tpublic
 					uint32_t	aSpriteId)
 				{
 					m_doodads[aPosition] = aSpriteId;
+				});
+			}
+
+			if(cliffBuilder)
+			{
+				cliffBuilder->Generate([&](
+					const CliffBuilder::Tile& aTile)
+				{
+					m_doodads[aTile.m_position] = aTile.m_spriteId;
 				});
 			}
 		}
@@ -381,6 +417,7 @@ namespace tpublic
 		_WriteObjectTable(aStream, m_doodads);
 		_WriteObjectTable(aStream, m_walls);
 		aStream->WriteOptionalObjectPointer(m_mapRouteData);
+		aStream->Write(m_elevationMap, m_width * m_height);
 	}
 
 	bool	
@@ -440,6 +477,15 @@ namespace tpublic
 			return false;
 		if(!aStream->ReadOptionalObjectPointer(m_mapRouteData))
 			return false;
+
+		if (m_width != 0 && m_height != 0)
+		{
+			assert(m_elevationMap == NULL);
+			m_elevationMap = new uint8_t[m_width * m_height];
+			if(aStream->Read(m_elevationMap, (size_t)m_width * m_height) != (size_t)(m_width * m_height))
+				return false;
+		}
+
 		return true;
 	}
 
@@ -512,6 +558,17 @@ namespace tpublic
 		return distance;
 	}
 
+	uint8_t
+	MapData::GetElevation(
+		int32_t					aX,
+		int32_t					aY) const
+	{
+		if (aX < 0 || aY < 0 || aX >= m_width || aY >= m_height)
+			return 0;
+
+		return m_elevationMap[aX + aY * m_width];
+	}
+
 	bool	
 	MapData::DoesTileBlockLineOfSight(
 		int32_t					aX,
@@ -526,7 +583,10 @@ namespace tpublic
 		uint32_t i = (uint32_t)(x + y * m_width);
 		uint32_t j = i / 32;
 		uint32_t k = i % 32;
-		return (m_blockLineOfSightBits[j] & (1 << k)) != 0;
+		if(m_blockLineOfSightBits[j] & (1 << k))
+			return true;
+
+		return false;
 	}
 
 	bool	
@@ -575,6 +635,13 @@ namespace tpublic
 			m_y = aMapData->m_y;
 			m_tileMap = new uint32_t[m_width * m_height];
 			memcpy(m_tileMap, aMapData->m_tileMap, m_width * m_height * sizeof(uint32_t));
+		}
+
+		if(aMapData->m_elevationMap != NULL)
+		{
+			assert(m_elevationMap == NULL);
+			m_elevationMap = new uint8_t[m_width * m_height];
+			memcpy(m_elevationMap, aMapData->m_elevationMap, m_width * m_height);
 		}
 
 		if(aMapData->m_worldInfoMap)
@@ -788,11 +855,22 @@ namespace tpublic
 			{
 				for (int32_t x = 0; x < m_width; x++)
 				{
+					bool nonWalkableDoodad = false;
+
+					{
+						uint32_t doodadSpriteId = GetDoodad({ x, y });
+						if(doodadSpriteId != 0)
+						{
+							const Data::Sprite* doodadSprite = aManifest->GetById<tpublic::Data::Sprite>(doodadSpriteId);
+							nonWalkableDoodad = (doodadSprite->m_info.m_flags & SpriteInfo::FLAG_TILE_WALKABLE) == 0;
+						}
+					}
+
 					bool hasWall = GetWall({ x, y }) != 0;
 
 					const Data::Sprite* sprite = aManifest->GetById<tpublic::Data::Sprite>(*in);
 
-					if (!hasWall && (sprite->m_info.m_flags & SpriteInfo::FLAG_TILE_WALKABLE))
+					if (!hasWall && !nonWalkableDoodad && (sprite->m_info.m_flags & SpriteInfo::FLAG_TILE_WALKABLE))
 						*outWalkable |= 1 << bit;
 
 					if (hasWall || (sprite->m_info.m_flags & SpriteInfo::FLAG_TILE_BLOCK_LINE_OF_SIGHT))

@@ -6,49 +6,49 @@ sprites:
 
 	cursor: { position: [ 0 0 ] }
 
-	sprite doodad_rocks_1: { }
-	sprite doodad_rocks_2: { }
-	sprite doodad_rocks_3: { }
-	sprite doodad_rocks_4: { }
-	sprite doodad_grass_1: { }
-	sprite doodad_grass_2: { }
-	sprite doodad_rocks_5: { }
-	sprite doodad_rocks_6: { }
-	sprite doodad_rocks_7: { }
-	sprite doodad_rocks_8: { }
-	sprite doodad_rocks_9: { }
-	sprite doodad_rocks_10: { }
-	sprite doodad_rocks_11: { }
-	sprite doodad_rocks_12: { }
-	sprite doodad_rocks_13: { }
-	sprite doodad_rocks_14: { }
-	sprite doodad_pier_edge_1: { }
-	sprite doodad_crates_1: { }
-	sprite doodad_sack_1: { }
-	sprite doodad_table_1: { }
-	sprite doodad_chair_left_1: { }
-	sprite doodad_bed_1: { }
-	sprite doodad_empty_bookshelf_1: { }
-	sprite doodad_bookshelf_1: { }
-	sprite doodad_bookshelf_2: { }
-	sprite doodad_bookshelf_3: { }
-	sprite doodad_bookshelf_potions_1: { }
-	sprite doodad_chair_right_1: { }
-	sprite doodad_chair_bottom_1: { }
-	sprite doodad_flowers_1: { }
-	sprite doodad_flowers_2: { }
-	sprite doodad_flowers_3: { }
+	sprite doodad_rocks_1: { flags: [ tile_walkable ] }
+	sprite doodad_rocks_2: { flags: [ tile_walkable ] }
+	sprite doodad_rocks_3: { flags: [ tile_walkable ] }
+	sprite doodad_rocks_4: { flags: [ tile_walkable ] }
+	sprite doodad_grass_1: { flags: [ tile_walkable ] }
+	sprite doodad_grass_2: { flags: [ tile_walkable ] }
+	sprite doodad_rocks_5: { flags: [ tile_walkable ] }
+	sprite doodad_rocks_6: { flags: [ tile_walkable ] }
+	sprite doodad_rocks_7: { flags: [ tile_walkable ] }
+	sprite doodad_rocks_8: { flags: [ tile_walkable ] }
+	sprite doodad_rocks_9: { flags: [ tile_walkable ] }
+	sprite doodad_rocks_10: { flags: [ tile_walkable ] }
+	sprite doodad_rocks_11: { flags: [ tile_walkable ] }
+	sprite doodad_rocks_12: { flags: [ tile_walkable ] }
+	sprite doodad_rocks_13: { flags: [ tile_walkable ] }
+	sprite doodad_rocks_14: { flags: [ tile_walkable ] }
+	sprite doodad_pier_edge_1: { flags: [ tile_walkable ] }
+	sprite doodad_crates_1: { flags: [ tile_walkable ] }
+	sprite doodad_sack_1: { flags: [ tile_walkable ] }
+	sprite doodad_table_1: { flags: [ tile_walkable ] }
+	sprite doodad_chair_left_1: { flags: [ tile_walkable ] }
+	sprite doodad_bed_1: { flags: [ tile_walkable ] }
+	sprite doodad_empty_bookshelf_1: { flags: [ tile_walkable ] }
+	sprite doodad_bookshelf_1: { flags: [ tile_walkable ] }
+	sprite doodad_bookshelf_2: { flags: [ tile_walkable ] }
+	sprite doodad_bookshelf_3: { flags: [ tile_walkable ] }
+	sprite doodad_bookshelf_potions_1: { flags: [ tile_walkable ] }
+	sprite doodad_chair_right_1: { flags: [ tile_walkable ] }
+	sprite doodad_chair_bottom_1: { flags: [ tile_walkable ] }
+	sprite doodad_flowers_1: { flags: [ tile_walkable ] }
+	sprite doodad_flowers_2: { flags: [ tile_walkable ] }
+	sprite doodad_flowers_3: { flags: [ tile_walkable ] }
 	
 	cursor: { position: [ 0 16 ] }
-	sprite doodad_table_2: { }
-	sprite doodad_bench_1: { }
-	sprite doodad_altar_1: { }
-	sprite doodad_wall_banner_red_1: { }
-	sprite doodad_broken_pillar_1: { }
-	sprite doodad_broken_pillar_2: { }
-	sprite doodad_broken_pillar_3: { }
-	sprite doodad_wall_banner_mining_1: { }
-	sprite doodad_wall_banner_blacksmithing_1: { }
+	sprite doodad_table_2: { flags: [ tile_walkable ] }
+	sprite doodad_bench_1: { flags: [ tile_walkable ] }
+	sprite doodad_altar_1: { flags: [ tile_walkable ] }
+	sprite doodad_wall_banner_red_1: { flags: [ tile_walkable ] }
+	sprite doodad_broken_pillar_1: { flags: [ tile_walkable ] }
+	sprite doodad_broken_pillar_2: { flags: [ tile_walkable ] }
+	sprite doodad_broken_pillar_3: { flags: [ tile_walkable ] }
+	sprite doodad_wall_banner_mining_1: { flags: [ tile_walkable ] }
+	sprite doodad_wall_banner_blacksmithing_1: { flags: [ tile_walkable ] }
 
 }
 
