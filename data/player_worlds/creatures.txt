@@ -1,6 +1,6 @@
-${ _tags: [ player_world_minion ] }
+${ _tags: [ player_world_creature ] }
 
-loot_table .player_world_minions_loot:
+loot_table .player_world_creatures_loot:
 {
 	slots:
 	[
@@ -21,7 +21,7 @@ loot_table .player_world_minions_loot:
 		_weapon_damage: 1 
 		_resource_health: 1
 		_creature_type: elemental
-		_loot_table: .player_world_minions_loot
+		_loot_table: .player_world_creatures_loot
 	}
 
 	${ _elite: false }

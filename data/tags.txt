@@ -35,7 +35,7 @@ tag caster: { }
 tag melee: { }
 tag healer: { }
 tag ranged: { }
-tag player_world_minion: { }
+tag player_world_creature: { }
 
 # Ability tags
 tag ability_small_heal_single_target: {}

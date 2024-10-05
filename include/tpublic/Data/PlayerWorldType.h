@@ -68,9 +68,9 @@ namespace tpublic
 						{
 							m_startPositionEntityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENTITY, aChild->GetIdentifier());
 						}
-						else if (aChild->m_name == "minion_map_entity_spawn")
+						else if (aChild->m_name == "creature_map_entity_spawn")
 						{
-							m_minionMapEntitySpawnId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aChild->GetIdentifier());
+							m_creatureMapEntitySpawnId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aChild->GetIdentifier());
 						}
 						else if (aChild->m_name == "stash_entity")
 						{
@@ -97,7 +97,7 @@ namespace tpublic
 				aWriter->WriteUInt(m_viewAttenuationBias);
 				aWriter->WriteUInt(m_viewHiddenVisibility);
 				aWriter->WriteUInt(m_startPositionEntityId);
-				aWriter->WriteUInt(m_minionMapEntitySpawnId);
+				aWriter->WriteUInt(m_creatureMapEntitySpawnId);
 				aWriter->WriteUInt(m_stashEntityId);
 			}
 			
@@ -123,7 +123,7 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadUInt(m_startPositionEntityId))
 					return false;
-				if (!aReader->ReadUInt(m_minionMapEntitySpawnId))
+				if (!aReader->ReadUInt(m_creatureMapEntitySpawnId))
 					return false;
 				if (!aReader->ReadUInt(m_stashEntityId))
 					return false;
@@ -140,7 +140,7 @@ namespace tpublic
 			uint32_t				m_viewAttenuationBias = 0;
 			uint32_t				m_viewHiddenVisibility = 0;
 			uint32_t				m_startPositionEntityId = 0;
-			uint32_t				m_minionMapEntitySpawnId = 0;
+			uint32_t				m_creatureMapEntitySpawnId = 0;
 			uint32_t				m_stashEntityId = 0;
 		};
 

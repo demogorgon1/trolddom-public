@@ -1,4 +1,4 @@
-map_entity_spawn .small_island_minion:
+map_entity_spawn .small_island_creature:
 {	
 	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
@@ -40,5 +40,5 @@ player_world_type small_island:
 	
 	start_position_entity: standing_stone
 	stash_entity: player_world_stash
-	minion_map_entity_spawn: .small_island_minion
+	creature_map_entity_spawn: .small_island_creature
 }
