@@ -126,6 +126,7 @@ entity .theodore_quest_item:
 			range: 1 
 			despawn: true 		
 			required_quest: .theodore_2
+			level: 3
 		}		
 	}
 }

@@ -319,18 +319,13 @@ namespace tpublic
 			const Manifest*										aManifest,
 			const EntityInstance*								aSelf,
 			const EntityInstance*								aTarget,
-			bool*												aOutInstant)
+			bool*												aOutInstant,
+			bool*												aOutOutOfRange)
 		{
 			const Components::Openable* openable = aTarget->GetComponent<Components::Openable>();
 			if(openable == NULL)
 				return false;
 
-			const Components::Position* selfPosition = aSelf->GetComponent<Components::Position>();
-			const Components::Position* targetPosition = aTarget->GetComponent<Components::Position>();
-			int32_t distanceSquared = Helpers::CalculateDistanceSquared(selfPosition, targetPosition);
-			if(distanceSquared > (int32_t)(openable->m_range * openable->m_range))
-				return false;
-			
 			if (openable->m_requiredProfessionId != 0)
 			{
 				const tpublic::Components::PlayerPrivate* playerPrivate = aSelf->GetComponent<tpublic::Components::PlayerPrivate>();
@@ -366,6 +361,30 @@ namespace tpublic
 
 			if(!CheckList(aManifest, openable->m_requirements, aSelf, aTarget, NULL))
 				return false;
+
+			const Components::Position* selfPosition = aSelf->GetComponent<Components::Position>();
+			const Components::Position* targetPosition = aTarget->GetComponent<Components::Position>();
+			bool outOfRange = false;
+
+			if(openable->m_range == 1)
+			{
+				// Special case for range 1: can also do neighboring diagonals
+				Vec2 d = selfPosition->m_position - targetPosition->m_position;
+				outOfRange = d.m_x < -1 || d.m_y < -1 || d.m_x > 1 || d.m_y > 1;
+			}
+			else
+			{
+				int32_t distanceSquared = Helpers::CalculateDistanceSquared(selfPosition, targetPosition);
+				outOfRange = distanceSquared > (int32_t)(openable->m_range * openable->m_range);
+			}
+
+			if(outOfRange)
+			{
+				if (aOutOutOfRange != NULL)
+					*aOutOutOfRange = true;
+
+				return false;
+			}
 
 			if(aOutInstant != NULL)
 				*aOutInstant = openable->m_instant;

@@ -31,7 +31,8 @@ namespace tpublic
 					const Manifest*										aManifest,
 					const EntityInstance*								aSelf,
 					const EntityInstance*								aTarget,
-					bool*												aOutInstant);
+					bool*												aOutInstant,
+					bool*												aOutOutOfRange);
 	}
 
 }

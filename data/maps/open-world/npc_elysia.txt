@@ -101,6 +101,7 @@ entity .elysia_quest_item:
 			verb: pick
 			range: 1 
 			despawn: true 			
+			level: 4
 			required_quest: .elysia_1
 		}		
 	}
@@ -184,6 +185,7 @@ entity .elysia_quest_item_2:
 			loot_table: .elysia_quest_item_2
 			verb: pick
 			range: 1 
+			level: 5
 			despawn: true 			
 			required_quest: .elysia_2
 		}		

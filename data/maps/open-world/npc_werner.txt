@@ -94,6 +94,7 @@ entity .werner_quest_item:
 		{ 
 			loot_table: .werner_quest_item
 			verb: pick
+			level: 7
 			range: 1 
 			despawn: true 			
 			required_quest: .werner_1
