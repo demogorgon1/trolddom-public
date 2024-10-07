@@ -121,7 +121,7 @@ namespace tpublic
 			if (i != m_table.end())
 				entry = i->second;
 			
-			if(entry != m_head)
+			if(entry != m_head && entry != NULL)
 			{
 				int32_t topThreat = m_head->m_threat;
 
