@@ -61,6 +61,7 @@ namespace tpublic
 			ID_TILE_MODIFIER,
 			ID_CLIFF_STYLE,
 			ID_MAP_CLIFF,
+			ID_CONTEXT_HELP,
 
 			NUM_IDS
 		};
@@ -119,7 +120,8 @@ namespace tpublic
 			"route",
 			"tile_modifier",
 			"cliff_style",
-			"map_cliff"
+			"map_cliff",
+			"context_help"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

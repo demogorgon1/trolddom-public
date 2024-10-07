@@ -39,6 +39,11 @@ ability fishing:
 	requirement self<must_have_item_equipped>: { id: weapon_fishing_rod }
 }
 
+context_help fishing:
+{
+	string: "Right-click to catch fish."
+}
+
 entity fishing_splash:
 {
 	string: "Splash"
@@ -69,6 +74,7 @@ entity fishing_splash:
 			instant: true
 			required_item: weapon_fishing_rod
 			duration: 20
+			context_help: fishing
 		}				
 	}
 }

@@ -113,7 +113,8 @@ namespace tpublic
 				FIELD_REQUIRED_INCOMPLETE_QUEST_OBJECTIVE_ID,
 				FIELD_UNLOCK_MAP_TRIGGER_ID,
 				FIELD_KILL,
-				FIELD_DEAD_DESPAWN_TICKS
+				FIELD_DEAD_DESPAWN_TICKS,
+				FIELD_CONTEXT_HELP
 			};
 
 			static void
@@ -140,6 +141,7 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_TRIGGER_ABILITY_ID, "trigger_ability", offsetof(Openable, m_triggerAbilityId))->SetDataType(DataType::ID_ABILITY);
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_REQUIRED_INCOMPLETE_QUEST_OBJECTIVE_ID, "required_incomplete_quest_objective", offsetof(Openable, m_requiredIncompleteQuestObjectiveId))->SetDataType(DataType::ID_OBJECTIVE);
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_UNLOCK_MAP_TRIGGER_ID, "unlock_map_trigger", offsetof(Openable, m_unlockMapTriggerId))->SetDataType(DataType::ID_MAP_TRIGGER);
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_CONTEXT_HELP, "context_help", offsetof(Openable, m_contextHelpId))->SetDataType(DataType::ID_CONTEXT_HELP);
 			}
 
 			void
@@ -165,6 +167,7 @@ namespace tpublic
 				m_completeManualObjectiveId = 0;
 				m_triggerAbilityId = 0;
 				m_unlockMapTriggerId = 0;
+				m_contextHelpId = 0;
 
 			}
 
@@ -189,6 +192,7 @@ namespace tpublic
 			uint32_t					m_completeManualObjectiveId = 0;
 			uint32_t					m_triggerAbilityId = 0;
 			uint32_t					m_unlockMapTriggerId = 0;
+			uint32_t					m_contextHelpId = 0;
 		};
 
 	}

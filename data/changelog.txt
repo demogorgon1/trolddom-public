@@ -1,5 +1,6 @@
 changelog:
 {
+	#######################################################################################
 	heading: "Early Access v0.1.0"
 	
 	text: "Welcome to the Early Access release of Trolddom!"	
@@ -18,6 +19,28 @@ changelog:
 
 changelog_demo:
 {
+	#######################################################################################
+	heading: "Demo v0.1.1"
+
+	text: "Changes:"
+
+	list:
+	[
+		{ text: "You can now create more than one character when playing the demo." }
+		{ text: "Some UI interactions should be more intuitive." }
+		{ text: "New chat commands: /afk and /dnd" }
+	]
+
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Quests where you need to pick up items should work like intended." }
+		{ text: "Fixed a couple of server stability issues." }
+		{ text: "Miscellaneous minor stuff." }
+	]
+
+	#######################################################################################
 	heading: "Demo v0.1.0"
 	
 	text: "Welcome to the demo of Trolddom, only available for a limited time!"	

@@ -8,6 +8,7 @@
 #include <tpublic/Data/Terrain.h>
 #include <tpublic/Data/Class.h>
 #include <tpublic/Data/CliffStyle.h>
+#include <tpublic/Data/ContextHelp.h>
 #include <tpublic/Data/Cooldown.h>
 #include <tpublic/Data/CreatureType.h>
 #include <tpublic/Data/Deity.h>
@@ -68,6 +69,7 @@ namespace tpublic
 		RegisterDataContainer<Data::Terrain>();
 		RegisterDataContainer<Data::Class>();
 		RegisterDataContainer<Data::CliffStyle>();
+		RegisterDataContainer<Data::ContextHelp>();
 		RegisterDataContainer<Data::Cooldown>();
 		RegisterDataContainer<Data::CreatureType>();
 		RegisterDataContainer<Data::Deity>();
