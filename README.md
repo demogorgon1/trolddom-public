@@ -12,7 +12,7 @@ Gameplay code and content for the [Trolddom](https://trolddom.com) game. These p
 You're more than welcome to come up with new stuff for the game. New classes, monsters, anything, or maybe just balance tweaks. Just submit a pull request and I'll try to integrate it into the game. 
 
 ## Data
-The game is very data-driven and I've put effort into being able to author many different kinds of content, without having to write any code. The ```.txt``` files you can find in the directory structure in ```data/``` defines most of the stuff you can find in the game. These files should be largely self-documenting, but I'll try to make some more comprehensive documentation at some later point.
+The game is very data-driven and I've put effort into being able to author many different kinds of content, without having to write any code. The ```.txt``` files you can find in the directory structure in ```data/``` defines most of the stuff you can find in the game. These files should be largely self-documenting (future me: lol), but I'll try to make some more comprehensive documentation at some later point.
 
 During the data build step, these files are compiled into *the manifest*, which is a single binary file with all the data shared between clients and servers. 
 
