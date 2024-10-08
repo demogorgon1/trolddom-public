@@ -1,5 +1,7 @@
 xp_metrics:
 {
+	max_level_demo: 6
+
 	# XP required to level
 	levels:	
 	[
