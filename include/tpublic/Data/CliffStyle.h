@@ -26,7 +26,7 @@ namespace tpublic
 			{
 				Tile()
 				{
-					
+					memset(m_cells, 0, sizeof(m_cells));
 				}
 
 				Tile(
@@ -82,7 +82,7 @@ namespace tpublic
 
 				// Public data
 				std::vector<uint32_t>		m_sprites;
-				Cell						m_cells[9] = { 0 };
+				Cell						m_cells[9];
 			};
 
 			void
