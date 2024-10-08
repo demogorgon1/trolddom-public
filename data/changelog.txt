@@ -20,6 +20,17 @@ changelog:
 changelog_demo:
 {
 	#######################################################################################
+	heading: "Demo v0.1.2"
+
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Fixed client crash when trying to make offering at a shrine." }
+		{ text: "Mining ore nodes are more visible." }
+	]
+
+	#######################################################################################
 	heading: "Demo v0.1.1"
 
 	text: "Changes:"
