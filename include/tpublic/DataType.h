@@ -62,6 +62,7 @@ namespace tpublic
 			ID_CLIFF_STYLE,
 			ID_MAP_CLIFF,
 			ID_CONTEXT_HELP,
+			ID_MINION_MODE,
 
 			NUM_IDS
 		};
@@ -121,7 +122,8 @@ namespace tpublic
 			"tile_modifier",
 			"cliff_style",
 			"map_cliff",
-			"context_help"
+			"context_help",
+			"minion_mode"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

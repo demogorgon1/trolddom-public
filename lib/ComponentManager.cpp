@@ -23,12 +23,15 @@
 #include <tpublic/Components/InteractableObject.h>
 #include <tpublic/Components/Inventory.h>
 #include <tpublic/Components/Lootable.h>
+#include <tpublic/Components/MinionPrivate.h>
+#include <tpublic/Components/MinionPublic.h>
 #include <tpublic/Components/NPC.h>
 #include <tpublic/Components/Openable.h>
 #include <tpublic/Components/Owner.h>
 #include <tpublic/Components/PlayerAuctions.h>
 #include <tpublic/Components/PlayerCooldowns.h>
 #include <tpublic/Components/PlayerInbox.h>
+#include <tpublic/Components/PlayerMinions.h>
 #include <tpublic/Components/PlayerOutbox.h>
 #include <tpublic/Components/PlayerPrivate.h>
 #include <tpublic/Components/PlayerPublic.h>
@@ -87,12 +90,15 @@ namespace tpublic
 		_Register<Components::InteractableObject>();
 		_Register<Components::Inventory>();
 		_Register<Components::Lootable>();
+		_Register<Components::MinionPrivate>();
+		_Register<Components::MinionPublic>();
 		_Register<Components::NPC>();
 		_Register<Components::Openable>();
 		_Register<Components::Owner>();
 		_Register<Components::PlayerAuctions>();
 		_Register<Components::PlayerCooldowns>();
 		_Register<Components::PlayerInbox>();
+		_Register<Components::PlayerMinions>();
 		_Register<Components::PlayerOutbox>();
 		_Register<Components::PlayerPublic>();
 		_Register<Components::PlayerPrivate>();

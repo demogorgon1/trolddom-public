@@ -6,6 +6,7 @@
 #include "Systems/Gateway.h"
 #include "Systems/HealthRegen.h"
 #include "Systems/ManaRegen.h"
+#include "Systems/Minion.h"
 #include "Systems/NPC.h"
 #include "Systems/Openable.h"
 #include "Systems/Rage.h"
@@ -33,6 +34,7 @@ namespace tpublic
 			_Register<Systems::Gateway>();
 			_Register<Systems::HealthRegen>();
 			_Register<Systems::ManaRegen>();
+			_Register<Systems::Minion>();
 			_Register<Systems::NPC>();
 			_Register<Systems::Openable>();
 			_Register<Systems::Rage>();

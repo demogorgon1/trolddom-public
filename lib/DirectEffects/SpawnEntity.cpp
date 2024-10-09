@@ -1,7 +1,12 @@
 #include "../Pcheader.h"
 
+#include <tpublic/Components/DisplayName.h>
+#include <tpublic/Components/GuildName.h>
+#include <tpublic/Components/MinionPrivate.h>
+#include <tpublic/Components/MinionPublic.h>
 #include <tpublic/Components/NPC.h>
 #include <tpublic/Components/Owner.h>
+#include <tpublic/Components/PlayerPublic.h>
 #include <tpublic/Components/Position.h>
 
 #include <tpublic/DirectEffects/SpawnEntity.h>
@@ -103,6 +108,33 @@ namespace tpublic::DirectEffects
 			// Initial NPC threat on target
 			Components::NPC* npc = spawnedEntity->GetComponent<Components::NPC>();
 			npc->m_spawnWithTarget = { { aTarget->GetEntityInstanceId(), aTarget->GetSeq() }, m_npcTargetThreat };
+		}
+
+		// Minion?
+		{
+			Components::MinionPublic* minionPublic = spawnedEntity->GetComponent<Components::MinionPublic>();
+			if(minionPublic != NULL)
+			{
+				minionPublic->m_ownerEntityInstanceId = aSource->GetEntityInstanceId();
+				minionPublic->SetDirty();
+			}
+
+			Components::MinionPrivate* minionPrivate = spawnedEntity->GetComponent<Components::MinionPrivate>();
+			if (minionPrivate != NULL && aSource->IsPlayer())
+			{
+				const Components::PlayerPublic* playerPublic = aSource->GetComponent<Components::PlayerPublic>();
+
+				if(minionPrivate->m_seed == 0) // No minion seed, derive one from the spawner's character id
+					minionPrivate->m_seed = (uint32_t)Hash::Splitmix_2_32(playerPublic->m_characterId, 0);
+
+				minionPrivate->SetDirty();
+
+				// Guild name should show owner
+				const Components::DisplayName* displayName = aSource->GetComponent<Components::DisplayName>();
+				Components::GuildName* guildName = spawnedEntity->GetComponent<Components::GuildName>();
+				guildName->m_string = displayName->m_string + "'s Minion";
+				guildName->SetDirty();
+			}
 		}
 
 		return Result();

@@ -20,6 +20,7 @@ player_components:
 	player_auctions
 	player_cooldowns
 	player_inbox
+	player_minions
 	player_outbox
 	player_private
 	player_public

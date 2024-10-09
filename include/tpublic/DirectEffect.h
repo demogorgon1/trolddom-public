@@ -111,6 +111,7 @@ namespace tpublic
 			ID_REMOVE_AURA,
 			ID_LEARN_PROFESSION_ABILITY,
 			ID_MODIFY_FACTION,
+			ID_SPAWN_MINION,
 
 			NUM_IDS
 		};
@@ -134,7 +135,8 @@ namespace tpublic
 			"spawn_entity",
 			"remove_aura",
 			"learn_profession_ability",
-			"modify_faction"
+			"modify_faction",
+			"spawn_minion"
 		};
 
 		static_assert(sizeof(EFFECT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

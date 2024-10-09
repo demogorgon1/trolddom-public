@@ -65,6 +65,9 @@ namespace tpublic
 			ID_SPIRIT_STONE_DISCOVERY,
 			ID_ACCOUNT_ACHIEVEMENTS,
 			ID_VENDOR_STOCK,
+			ID_PLAYER_MINIONS,
+			ID_MINION_PUBLIC,
+			ID_MINION_PRIVATE,
 
 			NUM_IDS
 		};
@@ -127,8 +130,11 @@ namespace tpublic
 			"trigger",
 			"spirit_stone_discovery",
 			"account_achievements",
-			"vendor_stock"
-		};		
+			"vendor_stock",
+			"player_minions",
+			"minion_public",
+			"minion_private"
+		};
 
 		static_assert(sizeof(COMPONENT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);
 

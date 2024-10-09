@@ -1,0 +1,85 @@
+!define local MERCENARY_CONTRACT_ITEM
+{
+	flags: [ unique not_sellable ]
+	binds: when_picked_up
+	type: miscellaneous
+	item_level: @_level
+	required_level: @_level
+	rarity: uncommon
+	icon: icon_scroll_1
+	string: @_item_name
+	use_ability: @_ability
+}
+
+!define local MERCENARY_CONTRACT_ABILITY
+{
+	string: @_item_name
+	description: "Summons a mercenary."
+	flags: [ target_self item ]
+	cast_time: 20
+	icon: icon_scroll_1
+	required_level: @_level
+	cooldowns: [ global ]	
+
+	direct_effect spawn_entity:
+	{
+		spawn_flags: [ no_owner ]
+		entity: @_entity
+	}
+}
+
+##############################################################################
+# Mercenary Contract: Barbarian
+{
+	${
+		_item_name: "Mercenary Contract: Barbarian"
+		_ability: .mercenary_contract_barbarian
+		_entity: .mercenary_contract_barbarian
+		_name_template: .mercenary_contract_barbarian		
+		_level: 5	
+		_creature_type: humanoid
+		_sprite: goblin
+		_sprite_dead: goblin_dead
+		_minion_modes: [ .mercenary_contract_barbarian_aggressive .mercenary_contract_barbarian_defensive .mercenary_contract_barbarian_passive ]
+		_default_minion_mode: .mercenary_contract_barbarian_defensive
+	}
+	
+	tag_context .mercenary_contract_barbarian:
+	{
+		must_have_tags: [ american_forename_male ]
+	}
+	
+	name_template .mercenary_contract_barbarian:
+	{
+		possibility<1>:
+		{
+			word: [ .mercenary_contract_barbarian ]
+		}
+	}
+
+	minion_mode .mercenary_contract_barbarian_aggressive:
+	{
+		string: "Aggressive"
+		icon: icon_stuff
+		follow_distance: 5
+	}
+
+	minion_mode .mercenary_contract_barbarian_defensive:
+	{
+		string: "Defensive"
+		icon: icon_stuff
+		follow_distance: 5
+	}
+
+	minion_mode .mercenary_contract_barbarian_passive:
+	{
+		string: "Passive"
+		icon: icon_stuff
+		follow_distance: 5
+	}
+	
+	ability .mercenary_contract_barbarian: !MERCENARY_CONTRACT_ABILITY{}
+	entity .mercenary_contract_barbarian: !MINION{}
+	item mercenary_contract_barbarian: !MERCENARY_CONTRACT_ITEM{}
+}
+

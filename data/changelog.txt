@@ -20,6 +20,23 @@ changelog:
 changelog_demo:
 {
 	#######################################################################################
+	heading: "Demo v0.1.3"
+
+	text: "Changes:"
+
+	list:
+	[
+		{ text: "Cultists in the Umbracoth encounter are no longer elite." }
+	]
+
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Improved Dwindle works like intended." }
+	]
+	
+	#######################################################################################
 	heading: "Demo v0.1.2"
 
 	text: "Issues fixed:"

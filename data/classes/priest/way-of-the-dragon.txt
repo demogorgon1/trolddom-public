@@ -320,7 +320,7 @@ ability_modifier improved_dwindle:
 
 aura improved_dwindle:
 {
-	string: "Dwindle"
+	string: "Improved Dwindle"
 	type: buff
 	icon: icon_dwindle
 	duration: 100
@@ -358,6 +358,8 @@ ability dwindle:
 	
 	direct_effect apply_aura:
 	{
+		must_have_ability_modifier: improved_dwindle
+	
 		aura: improved_dwindle
 	}
 }

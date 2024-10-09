@@ -22,6 +22,7 @@ namespace tpublic
 			ID_DOOR,
 			ID_TRIGGER,
 			ID_VENDOR_RESTOCK,
+			ID_MINION,
 
 			NUM_IDS
 		};
@@ -41,7 +42,8 @@ namespace tpublic
 			"rage",
 			"door",
 			"trigger", 
-			"vendor_restock"
+			"vendor_restock",
+			"minion"
 		};
 
 		static_assert(sizeof(SYSTEM_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

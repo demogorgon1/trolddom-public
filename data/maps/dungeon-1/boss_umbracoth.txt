@@ -144,7 +144,6 @@ entity .goblin_cultist: !NPC
 {
 	_string: "Goblin Cultist"
 	_level: 8
-	_elite: true
 	_faction: monsters 
 	_sprite: goblin_shaman
 	_sprite_dead: goblin_shaman_dead 
