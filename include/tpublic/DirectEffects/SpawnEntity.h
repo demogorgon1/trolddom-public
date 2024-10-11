@@ -73,6 +73,7 @@ namespace tpublic
 								const IWorldView*				aWorldView) override;
 
 			// Public data
+			EntityState::Id			m_initState = EntityState::ID_DEFAULT;
 			uint32_t				m_mapEntitySpawnId = 0;
 			uint32_t				m_entityId = 0;
 			uint8_t					m_spawnFlags = 0;

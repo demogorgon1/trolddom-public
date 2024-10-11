@@ -36,6 +36,10 @@ namespace tpublic
 							m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
 						else if (aChild->m_name == "follow_distance")
 							m_followDistance = aChild->GetUInt32();
+						else if (aChild->m_name == "aggro_range")
+							m_aggroRange = aChild->GetUInt32();
+						else if (aChild->m_name == "attack_owner_threat_target")
+							m_attackOwnerThreatTarget = aChild->GetBool();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -49,6 +53,8 @@ namespace tpublic
 				aStream->WriteString(m_string);
 				aStream->WriteUInt(m_iconSpriteId);
 				aStream->WriteUInt(m_followDistance);
+				aStream->WriteUInt(m_aggroRange);
+				aStream->WriteBool(m_attackOwnerThreatTarget);
 			}
 
 			bool
@@ -61,6 +67,10 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInt(m_followDistance))
 					return false;
+				if (!aStream->ReadUInt(m_aggroRange))
+					return false;
+				if(!aStream->ReadBool(m_attackOwnerThreatTarget))
+					return false;
 				return true;
 			}
 
@@ -68,6 +78,8 @@ namespace tpublic
 			std::string		m_string;
 			uint32_t		m_iconSpriteId = 0;
 			uint32_t		m_followDistance = 0;
+			uint32_t		m_aggroRange = 0;
+			bool			m_attackOwnerThreatTarget = false;
 		};
 
 	}

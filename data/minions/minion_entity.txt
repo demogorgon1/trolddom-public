@@ -4,7 +4,9 @@
 	[ 
 		combat 
 		minion
+		health_regen
 		<exists _resource_mana> mana_regen
+		<exists _has_rage> rage
 	]
 	
 	modifiers: 
@@ -45,10 +47,14 @@
 		{ 						
 			<exists _minion_modes> minion_modes: @_minion_modes
 			<exists _default_minion_mode> current_minion_mode: @_default_minion_mode
+			<exists _commands> commands: @_commands
+			<exists _abilities> abilities: @_abilities
 		}		
 		minion_private: 
 		{ 			
 			<exists _name_template> name_template: @_name_template
+			<exists _has_rage> resources: { rage: 100 }
+			<exists _ability_prio> ability_prio: @_ability_prio
 		}		
 		sprite<static>: 
 		{ 

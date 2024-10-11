@@ -1,8 +1,11 @@
 #pragma once
 
+#include "../CastInProgress.h"
 #include "../Component.h"
 #include "../ComponentBase.h"
+#include "../NPCMovement.h"
 #include "../Resource.h"
+#include "../SourceEntityInstance.h"
 
 namespace tpublic
 {
@@ -110,6 +113,7 @@ namespace tpublic
 				FIELD_SEED,
 				FIELD_NAME_TEMPLATE,
 				FIELD_RESOURCES,
+				FIELD_ABILITY_PRIO
 			};
 
 			static void
@@ -119,6 +123,7 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_SEED, "seed", offsetof(MinionPrivate, m_seed));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_NAME_TEMPLATE, "name_template", offsetof(MinionPrivate, m_nameTemplateId))->SetDataType(DataType::ID_NAME_TEMPLATE);
 				aSchema->DefineCustomObject<Resources>(FIELD_RESOURCES, "resources", offsetof(MinionPrivate, m_resources));
+				aSchema->Define(ComponentSchema::TYPE_UINT32_ARRAY, FIELD_ABILITY_PRIO, "ability_prio", offsetof(MinionPrivate, m_abilityPrio))->SetDataType(DataType::ID_ABILITY);
 			}
 
 			void
@@ -127,12 +132,31 @@ namespace tpublic
 				m_seed = 0;
 				m_nameTemplateId = 0;
 				m_resources.m_entries.clear();
+				m_abilityPrio.clear();
+
+				m_npcMovement.Reset(0);
+				m_moveCooldownUntilTick = 0;
+				m_castInProgress.reset();
+				m_channeling.reset();
+				m_targetEntity = SourceEntityInstance();
+				m_ownerPositionAtLastMoveCommand = Vec2();
+				m_playerCombat = false;
 			}
 
 			// Public data
-			uint32_t				m_seed = 0;
-			uint32_t				m_nameTemplateId = 0;
-			Resources				m_resources;
+			uint32_t						m_seed = 0;
+			uint32_t						m_nameTemplateId = 0;
+			Resources						m_resources;
+			std::vector<uint32_t>			m_abilityPrio;
+
+			// Internal
+			NPCMovement						m_npcMovement;
+			int32_t							m_moveCooldownUntilTick = 0;
+			std::optional<CastInProgress>	m_castInProgress;
+			std::optional<CastInProgress>	m_channeling;
+			SourceEntityInstance			m_targetEntity;
+			Vec2							m_ownerPositionAtLastMoveCommand;
+			bool							m_playerCombat = false;
 		};
 	}
 

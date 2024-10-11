@@ -1,5 +1,7 @@
 #pragma once
 
+#include "LootRule.h"
+#include "Rarity.h"
 #include "UniformDistribution.h"
 
 namespace tpublic
@@ -14,6 +16,9 @@ namespace tpublic
 	{
 		struct Collection;
 	}
+
+	class EntityInstance;
+	class IWorldView;
 
 	struct Vec2;
 
@@ -56,6 +61,19 @@ namespace tpublic
 		bool		StringContains(
 						const std::string&			aString,
 						const std::string&			aContains);
+		bool		IsPlayerOrMinion(
+						const EntityInstance*		aEntityInstance);
+		uint64_t	GetCombatGroupInfo(
+						const EntityInstance*		aEntityInstance,
+						const IWorldView*			aWorldView,
+						LootRule::Id&				aOutLootRule,
+						Rarity::Id&					aOutLootThreshold);
+		bool		GetControllingPlayerInfo(
+						const EntityInstance*		aEntityInstance,
+						const IWorldView*			aWorldView,
+						uint32_t&					aOutCharacterId,
+						uint32_t&					aOutEntityInstanceId,
+						uint32_t&					aOutLevel);
 
 		template <typename _T>
 		void	

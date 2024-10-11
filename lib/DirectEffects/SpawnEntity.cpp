@@ -26,15 +26,30 @@ namespace tpublic::DirectEffects
 			const SourceNode* aChild)
 		{
 			if(aChild->m_name == "entity")
+			{
 				m_entityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENTITY, aChild->GetIdentifier());
+			}
 			else if (aChild->m_name == "map_entity_spawn")
+			{
 				m_mapEntitySpawnId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aChild->GetIdentifier());
+			}
 			else if(aChild->m_name == "spawn_flags")
+			{
 				m_spawnFlags = SourceToSpawnFlags(aChild);
+			}
 			else if(aChild->m_name == "npc_target_threat")
+			{
 				m_npcTargetThreat = aChild->GetInt32();
+			}
+			else if(aChild->m_name == "init_state")
+			{
+				m_initState = EntityState::StringToId(aChild->GetIdentifier());
+				TP_VERIFY(m_initState != EntityState::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid entity state.", aChild->GetIdentifier());
+			}
 			else
+			{
 				TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->GetIdentifier());
+			}
 		});
 	}
 
@@ -47,6 +62,7 @@ namespace tpublic::DirectEffects
 		aStream->WriteUInt(m_entityId);
 		aStream->WritePOD(m_spawnFlags);
 		aStream->WriteInt(m_npcTargetThreat);
+		aStream->WritePOD(m_initState);
 	}
 
 	bool
@@ -62,6 +78,8 @@ namespace tpublic::DirectEffects
 		if (!aStream->ReadPOD(m_spawnFlags))
 			return false;
 		if (!aStream->ReadInt(m_npcTargetThreat))
+			return false;
+		if (!aStream->ReadPOD(m_initState))
 			return false;
 		return true;
 	}
@@ -83,7 +101,7 @@ namespace tpublic::DirectEffects
 		IEventQueue*					aEventQueue,
 		const IWorldView*				/*aWorldView*/) 
 	{					
-		EntityInstance* spawnedEntity = aEventQueue->EventQueueSpawnEntity(m_entityId, EntityState::ID_DEFAULT, m_mapEntitySpawnId, false);
+		EntityInstance* spawnedEntity = aEventQueue->EventQueueSpawnEntity(m_entityId, m_initState, m_mapEntitySpawnId, false);
 
 		if(m_mapEntitySpawnId == 0)
 		{

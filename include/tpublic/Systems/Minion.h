@@ -11,6 +11,9 @@ namespace tpublic::Systems
 	public:
 		static const System::Id ID = System::ID_MINION;
 
+		static const int32_t SPAWN_TICKS = 4;
+		static const int32_t DESPAWN_TICKS = 4;
+
 						Minion(
 							const SystemData*	aData);
 		virtual			~Minion();

@@ -4,6 +4,7 @@
 
 #include "EntityState.h"
 #include "ItemInstanceReference.h"
+#include "UniformDistribution.h"
 #include "Vec2.h"
 
 namespace tpublic
@@ -50,10 +51,26 @@ namespace tpublic
 
 			void
 			AddToPriorityList(
-				const Vec2& aDirection)
+				const Vec2&		aDirection)
 			{
 				assert(m_priorityListLength < MAX_PRIORITY_LIST_LENGTH);
 				m_priorityList[m_priorityListLength++] = aDirection;
+			}
+
+			void
+			ShufflePriorityList(
+				std::mt19937&	aRandom)
+			{
+				if(m_priorityListLength > 1)
+				{
+					// Fisher-yates shuffle
+					for (uint32_t i = m_priorityListLength - 1; i > 0; i--)
+					{
+						UniformDistribution<uint32_t> distribution(0, i);
+						uint32_t j = distribution(aRandom);
+						std::swap(m_priorityList[i], m_priorityList[j]);
+					}
+				}
 			}
 
 			// Public data

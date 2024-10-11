@@ -1,8 +1,13 @@
 #include "Pcheader.h"
 
+#include <tpublic/Components/CombatPublic.h>
+#include <tpublic/Components/MinionPublic.h>
+#include <tpublic/Components/PlayerPublic.h>
 #include <tpublic/Components/Position.h>
 
+#include <tpublic/EntityInstance.h>
 #include <tpublic/Helpers.h>
+#include <tpublic/IWorldView.h>
 #include <tpublic/Stat.h>
 #include <tpublic/UTF8.h>
 #include <tpublic/Vec2.h>
@@ -262,6 +267,76 @@ namespace tpublic::Helpers
 		}
 
 		return false;
+	}
+
+	bool		
+	IsPlayerOrMinion(
+		const EntityInstance*		aEntityInstance)
+	{
+		if (aEntityInstance->IsPlayer())
+			return true;
+
+		return aEntityInstance->HasComponent<Components::MinionPublic>();
+	}
+
+	uint64_t	
+	GetCombatGroupInfo(
+		const EntityInstance*		aEntityInstance,
+		const IWorldView*			aWorldView,
+		LootRule::Id&				aOutLootRule,
+		Rarity::Id&					aOutLootThreshold)
+	{
+		const EntityInstance* entity = aEntityInstance;
+		const Components::MinionPublic* minionPublic = entity->GetComponent<Components::MinionPublic>();
+
+		if(minionPublic != NULL)
+		{
+			entity = aWorldView->WorldViewSingleEntityInstance(minionPublic->m_ownerEntityInstanceId);
+			if(entity == NULL)
+				return 0;
+		}
+
+		const Components::CombatPublic* combatPublic = entity->GetComponent<Components::CombatPublic>();
+		if(combatPublic == NULL)
+			return 0;
+
+		aOutLootRule = combatPublic->m_lootRule;
+		aOutLootThreshold = combatPublic->m_lootThreshold;
+
+		return combatPublic->m_combatGroupId;
+	}
+
+	bool		
+	GetControllingPlayerInfo(
+		const EntityInstance*		aEntityInstance,
+		const IWorldView*			aWorldView,
+		uint32_t&					aOutCharacterId,
+		uint32_t&					aOutEntityInstanceId,
+		uint32_t&					aOutLevel)
+	{
+		const EntityInstance* entity = aEntityInstance;
+		const Components::MinionPublic* minionPublic = entity->GetComponent<Components::MinionPublic>();
+
+		if (minionPublic != NULL)
+		{
+			entity = aWorldView->WorldViewSingleEntityInstance(minionPublic->m_ownerEntityInstanceId);
+			if (entity == NULL)
+				return false;
+		}
+
+		const Components::CombatPublic* combatPublic = entity->GetComponent<Components::CombatPublic>();
+		if (combatPublic == NULL)
+			return false;
+
+		const Components::PlayerPublic* playerPublic = entity->GetComponent<Components::PlayerPublic>();
+		if (playerPublic == NULL)
+			return false;
+
+		aOutCharacterId = playerPublic->m_characterId;
+		aOutEntityInstanceId = entity->GetEntityInstanceId();
+		aOutLevel = combatPublic->m_level;
+		
+		return true;
 	}
 
 }

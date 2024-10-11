@@ -429,6 +429,8 @@ namespace tpublic
 				m_singleTargetAuraEntityInstanceId = 0;
 				m_lastDamageFromEntityId = 0;
 				m_doNotZeroResources = false;
+				m_pvpCombatEvent = false;
+				m_lastPVPCombatEventTick = 0;
 			}
 
 			// Helpers
@@ -461,6 +463,8 @@ namespace tpublic
 			uint32_t						m_singleTargetAuraEntityInstanceId = 0;
 			uint32_t						m_lastDamageFromEntityId = 0;
 			bool							m_doNotZeroResources = false;
+			bool							m_pvpCombatEvent = false;
+			int32_t							m_lastPVPCombatEventTick = 0;
 		};
 
 	}

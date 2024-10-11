@@ -110,6 +110,18 @@ namespace tpublic
 		return false;
 	}
 
+	const Cooldowns::Entry*
+	Cooldowns::GetCooldown(
+		uint32_t				aCooldownId) const
+	{
+		for (const Entry& t : m_entries)
+		{
+			if(t.m_cooldownId == aCooldownId)
+				return &t;
+		}
+		return NULL;
+	}
+
 	void			
 	Cooldowns::ToStream(
 		IWriter*				aStream) const

@@ -1,20 +1,5 @@
 #pragma once
 
-//namespace
-//{
-//	inline std::string
-//	_FormatDateTime(
-//		time_t	aTimeStamp)
-//	{
-//		struct tm x;
-//		memset(&x, 0, sizeof(x));
-//		localtime_s(&x, &aTimeStamp);
-//		char buffer[1024];
-//		snprintf(buffer, sizeof(buffer), "%d-%02d-%02d %02u:%02u:%02u", x.tm_year + 1900, x.tm_mon + 1, x.tm_mday, x.tm_hour, x.tm_min, x.tm_sec);
-//		return buffer;
-//	}
-//}
-
 namespace tpublic
 {
 
@@ -134,6 +119,8 @@ namespace tpublic
 							int32_t					aTick);
 		bool			IsAbilityOnCooldown(
 							const Data::Ability*	aAbility) const;
+		const Entry*	GetCooldown(
+							uint32_t				aCooldownId) const;
 		void			ToStream(
 							IWriter*				aStream) const;
 		bool			FromStream(

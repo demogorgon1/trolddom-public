@@ -8,6 +8,7 @@
 #include <tpublic/Components/Position.h>
 #include <tpublic/Components/Sprite.h>
 #include <tpublic/Components/Tag.h>
+#include <tpublic/Components/ThreatSource.h>
 #include <tpublic/Components/ThreatTarget.h>
 
 #include <tpublic/Data/Faction.h>
@@ -252,7 +253,9 @@ namespace tpublic::Systems
 				{
 					if(aEntity->GetState() != EntityState::ID_DEAD)
 					{
-						if (aEntityState == EntityState::ID_DEFAULT && aEntity->IsPlayer() && (!faction->IsNeutralOrFriendly() || combat->m_targetEntityInstanceId == aEntity->GetEntityInstanceId()))
+						bool isThreatSource = aEntity->HasComponent<tpublic::Components::ThreatSource>();
+
+						if (aEntityState == EntityState::ID_DEFAULT && isThreatSource && (!faction->IsNeutralOrFriendly() || combat->m_targetEntityInstanceId == aEntity->GetEntityInstanceId()))
 						{
 							const tpublic::Components::CombatPublic* playerCombatPublic = aEntity->GetComponent<tpublic::Components::CombatPublic>();
 							int32_t aggroRange = GetManifest()->m_npcMetrics.GetAggroRangeForLevelDifference((int32_t)combat->m_level, (int32_t)playerCombatPublic->m_level);
@@ -726,8 +729,6 @@ namespace tpublic::Systems
 
 								if(useAbility->IsOffensive())
 									npc->m_lastAttackTick = aContext->m_tick;
-
-								//aContext->m_eventQueue->EventQueueThreat(npc->m_targetEntity, aEntityInstanceId, 1, aContext->m_tick);
 
 								float cooldownModifier = 0.0f;
 								if(useAbility->IsAttack() && useAbility->IsMelee())

@@ -345,8 +345,16 @@ namespace tpublic
 
 		while(!queue.empty())
 		{
-			QueueItem t = queue[queue.size() - 1];
-			queue.pop_back();
+			// FIXME: optimize
+			size_t j = 0;
+			for(size_t i = 1; i < queue.size(); i++)
+			{
+				if(queue[i].m_route.m_length < queue[j].m_route.m_length)
+					j = i;					
+			}
+
+			QueueItem t = queue[j];
+			queue.erase(queue.begin() + j);
 
 			visited.insert(t.m_area->m_id);
 

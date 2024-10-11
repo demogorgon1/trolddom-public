@@ -96,10 +96,8 @@ namespace tpublic
 				m_gateways.m_currentSeed = 0;
 				m_gateways.m_lockedSeeds.clear();
 
-				m_pvpCombatEvent = false;
 				m_tryEditPlayerWorlds = false;
 				m_recall = false;
-				m_lastPVPCombatEventTick = 0;
 				m_xpGain = 0;
 				m_professionSkillUseEvents.clear();
 				m_errorNotification = ErrorNotification::INVALID_ID;
@@ -118,10 +116,8 @@ namespace tpublic
 			PlayerGateways													m_gateways;
 
 			// Not serialized, internal
-			bool															m_pvpCombatEvent = false;
 			bool															m_tryEditPlayerWorlds = false;
 			bool															m_recall = false;
-			int32_t															m_lastPVPCombatEventTick = 0;
 			uint32_t														m_xpGain = 0;
 			bool															m_professionsUpdated = false;
 

@@ -393,6 +393,12 @@ sprites:
 	cursor: { position: [ 0 336 ] }		
 	sprite icon_ring_8 : { tags: [ icon finger ] icon_meta_data: !ICON_UNCOMMON_5{} }
 	sprite icon_blood : { tags: [ icon ] }
+	sprite icon_defensive : { tags: [ icon ] }
+	sprite icon_aggressive : { tags: [ icon ] }
+	sprite icon_passive : { tags: [ icon ] }
+	sprite icon_move_command : { tags: [ icon ] }
+	sprite icon_attack_command : { tags: [ icon ] }
+	sprite icon_heal_command : { tags: [ icon ] }
 	
 }
 

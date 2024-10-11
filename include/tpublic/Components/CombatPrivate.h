@@ -120,7 +120,7 @@ namespace tpublic
 			uint32_t							m_healthRegenerationPer5Sec = 0;
 			uint32_t							m_armor = 0;
 			uint32_t							m_blockValue = 0;
-			uint32_t							m_rageDecayNotInCombatPer5Sec = 0;
+			uint32_t							m_rageDecayNotInCombatPer5Sec = 6;
 			uint32_t							m_rageGenerationInCombatPer5Sec = 0;
 			uint32_t							m_baseMana = 0;
 			uint32_t							m_spellDamage = 0;

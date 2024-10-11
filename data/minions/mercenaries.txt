@@ -25,6 +25,7 @@
 	{
 		spawn_flags: [ no_owner ]
 		entity: @_entity
+		init_state: spawning
 	}
 }
 
@@ -37,11 +38,15 @@
 		_entity: .mercenary_contract_barbarian
 		_name_template: .mercenary_contract_barbarian		
 		_level: 5	
+		_has_rage: true
 		_creature_type: humanoid
 		_sprite: goblin
 		_sprite_dead: goblin_dead
 		_minion_modes: [ .mercenary_contract_barbarian_aggressive .mercenary_contract_barbarian_defensive .mercenary_contract_barbarian_passive ]
 		_default_minion_mode: .mercenary_contract_barbarian_defensive
+		_commands: [ move attack ]
+		_abilities: [ .mercenary_contract_barbarian_attack .mercenary_contract_barbarian_whirlwind ]
+		_ability_prio: [ .mercenary_contract_barbarian_whirlwind .mercenary_contract_barbarian_attack ]
 	}
 	
 	tag_context .mercenary_contract_barbarian:
@@ -60,24 +65,93 @@
 	minion_mode .mercenary_contract_barbarian_aggressive:
 	{
 		string: "Aggressive"
-		icon: icon_stuff
-		follow_distance: 5
+		icon: icon_aggressive
+		follow_distance: 3
+		aggro_range: 5
+		attack_owner_threat_target: true
 	}
 
 	minion_mode .mercenary_contract_barbarian_defensive:
 	{
 		string: "Defensive"
-		icon: icon_stuff
-		follow_distance: 5
+		icon: icon_defensive
+		follow_distance: 3
+		attack_owner_threat_target: true
 	}
 
 	minion_mode .mercenary_contract_barbarian_passive:
 	{
 		string: "Passive"
-		icon: icon_stuff
-		follow_distance: 5
+		icon: icon_passive
+		follow_distance: 3
 	}
 	
+	cooldown .mercenary_contract_barbarian_attack:
+	{
+		duration: 20
+	}
+	
+	ability .mercenary_contract_barbarian_attack:
+	{
+		string: "Attack"
+		description: "Deals $damage$ damage to target."
+		flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+		states: [ default in_combat ]
+		delay: 3
+		icon: icon_sword_1
+		cooldowns: [ .mercenary_contract_barbarian_attack ]
+		
+		direct_effect damage:
+		{
+			flags: [ generate_rage can_be_critical ]
+			damage_type: physical			
+			function: { expression: x x: weapon }		
+		}
+	}	
+
+	cooldown .mercenary_contract_barbarian_whirlwind:
+	{
+		duration: 50
+	}
+
+	particle_system .mercenary_contract_barbarian_whirlwind:
+	{
+		particle:
+		{
+			sprites: [ effect_whirlwind ]
+			flags: [ attached blend_add ]
+			duration: 500
+			count: 1		
+			scale: 1.5
+			alpha: 0.6
+			rotation_rate: 1440
+		}
+	}
+
+	ability .mercenary_contract_barbarian_whirlwind:
+	{
+		string: "Whirlwind"
+		description: "Inflicts $damage$ damage on up to 3 adjacent enemies."
+		range: 1	
+		cooldowns: [ global whirlwind ]
+		flags: [ melee target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+		states: [ default in_combat ]
+		icon: icon_whirlwind
+		delay: 3
+		aoe_radius: 1
+		aoe_cap: 3
+		aoe_requirement target<must_not_be_in_state>: { id: dead }
+		resource_cost rage: 10
+		source_particle_system: .mercenary_contract_barbarian_whirlwind	
+
+		direct_effect damage:
+		{
+			flags: [ can_be_critical ]
+			damage_type: physical
+			function: { expression: x x: weapon }		
+		}
+	}
+
 	ability .mercenary_contract_barbarian: !MERCENARY_CONTRACT_ABILITY{}
 	entity .mercenary_contract_barbarian: !MINION{}
 	item mercenary_contract_barbarian: !MERCENARY_CONTRACT_ITEM{}
