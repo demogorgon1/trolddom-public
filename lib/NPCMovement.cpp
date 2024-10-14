@@ -19,6 +19,7 @@ namespace tpublic
 		const Vec2&							aDestination,
 		int32_t								aCurrentTick,
 		int32_t								aLastMoveTick,
+		std::mt19937&						aRandom,
 		IEventQueue::EventQueueMoveRequest& aOut)
 	{
 		switch(m_mode)
@@ -54,17 +55,35 @@ namespace tpublic
 						if (d.m_y < 0 && vertical)
 							aOut.AddToPriorityList({ 0, -1 });
 						else if (d.m_y > 0 && vertical)
-							aOut.AddToPriorityList({ 0, 1 });
+							aOut.AddToPriorityList({ 0, 1 });						
 
-						if (d.m_x < 0 && !horizontal)
-							aOut.AddToPriorityList({ -1, 0 });
-						else if (d.m_x > 0 && !horizontal)
-							aOut.AddToPriorityList({ 1, 0 });
+						// If target is in a perfect diagonal direction we randomize whether we go horizontal or vertical
+						bool roll = aRandom() & 0x80000000;
+						if(roll)
+						{
+							if (d.m_x < 0 && !horizontal)
+								aOut.AddToPriorityList({ -1, 0 });
+							else if (d.m_x > 0 && !horizontal)
+								aOut.AddToPriorityList({ 1, 0 });
 
-						if (d.m_y < 0 && !vertical)
-							aOut.AddToPriorityList({ 0, -1 });
-						else if (d.m_y > 0 && !vertical)
-							aOut.AddToPriorityList({ 0, 1 });
+							if (d.m_y < 0 && !vertical)
+								aOut.AddToPriorityList({ 0, -1 });
+							else if (d.m_y > 0 && !vertical)
+								aOut.AddToPriorityList({ 0, 1 });
+						}
+						else
+						{
+							if (d.m_y < 0 && !vertical)
+								aOut.AddToPriorityList({ 0, -1 });
+							else if (d.m_y > 0 && !vertical)
+								aOut.AddToPriorityList({ 0, 1 });
+
+							if (d.m_x < 0 && !horizontal)
+								aOut.AddToPriorityList({ -1, 0 });
+							else if (d.m_x > 0 && !horizontal)
+								aOut.AddToPriorityList({ 1, 0 });
+						}
+
 
 						aOut.m_type = IEventQueue::EventQueueMoveRequest::TYPE_SIMPLE;
 

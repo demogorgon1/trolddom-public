@@ -339,4 +339,16 @@ namespace tpublic::Helpers
 		return true;
 	}
 
+	bool		
+	IsMinionOfPlayer(
+		const EntityInstance*		aEntityInstance,
+		uint32_t					aPlayerEntityInstanceId)
+	{
+		const Components::MinionPublic* minionPublic = aEntityInstance->GetComponent<Components::MinionPublic>();
+		if (minionPublic == NULL)
+			return false;
+
+		return minionPublic->m_ownerEntityInstanceId == aPlayerEntityInstanceId;
+	}
+
 }

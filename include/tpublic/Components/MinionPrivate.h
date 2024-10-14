@@ -21,6 +21,13 @@ namespace tpublic
 			static const Persistence::Id PERSISTENCE = Persistence::ID_NONE;
 			static const Replication REPLICATION = REPLICATION_NONE;
 
+			struct OwnerRequestAbility
+			{
+				uint32_t							m_targetEntityInstanceId = 0;
+				uint32_t							m_abilityId = 0;
+				std::optional<Vec2>					m_aoeTarget;
+			};
+
 			struct ResourceEntry
 			{
 				void
@@ -141,22 +148,26 @@ namespace tpublic
 				m_targetEntity = SourceEntityInstance();
 				m_ownerPositionAtLastMoveCommand = Vec2();
 				m_playerCombat = false;
+				m_ownerRequestAbility.reset();
+				m_lastAggroPingTick = 0;
 			}
 
 			// Public data
-			uint32_t						m_seed = 0;
-			uint32_t						m_nameTemplateId = 0;
-			Resources						m_resources;
-			std::vector<uint32_t>			m_abilityPrio;
+			uint32_t							m_seed = 0;
+			uint32_t							m_nameTemplateId = 0;
+			Resources							m_resources;
+			std::vector<uint32_t>				m_abilityPrio;
 
 			// Internal
-			NPCMovement						m_npcMovement;
-			int32_t							m_moveCooldownUntilTick = 0;
-			std::optional<CastInProgress>	m_castInProgress;
-			std::optional<CastInProgress>	m_channeling;
-			SourceEntityInstance			m_targetEntity;
-			Vec2							m_ownerPositionAtLastMoveCommand;
-			bool							m_playerCombat = false;
+			NPCMovement							m_npcMovement;
+			int32_t								m_moveCooldownUntilTick = 0;
+			std::optional<CastInProgress>		m_castInProgress;
+			std::optional<CastInProgress>		m_channeling;
+			SourceEntityInstance				m_targetEntity;
+			Vec2								m_ownerPositionAtLastMoveCommand;
+			bool								m_playerCombat = false;
+			std::optional<OwnerRequestAbility>	m_ownerRequestAbility;
+			uint32_t							m_lastAggroPingTick = 0;
 		};
 	}
 

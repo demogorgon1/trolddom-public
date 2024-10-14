@@ -34,6 +34,10 @@ namespace tpublic
 						{
 							m_weaponDamage = aChild->GetFloat();
 						}
+						else if (aChild->m_name == "armor")
+						{
+							m_armor = aChild->GetFloat();
+						}
 						else if(aChild->m_name == "resource")
 						{
 							TP_VERIFY(aChild->m_annotation, aChild->m_debugInfo, "Missing resource annotation.");
@@ -44,8 +48,9 @@ namespace tpublic
 					});
 				}
 
-				// Public data - not serialized
+				// Public data - not serialized (modifiers applied during data build process)
 				std::optional<float>					m_weaponDamage;
+				std::optional<float>					m_armor;
 
 				typedef std::unordered_map<Resource::Id, float> Resources;
 				Resources								m_resources;

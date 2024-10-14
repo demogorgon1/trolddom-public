@@ -100,6 +100,13 @@ namespace tpublic
 
 					// Set armor
 					combatPrivate->m_armor = npcMetricsLevel->m_baseArmor;
+
+					if(aEntity->m_modifiers.m_armor.has_value())
+					{
+						float factor = aEntity->m_modifiers.m_armor.value();
+
+						combatPrivate->m_armor = (uint32_t)(factor * (float)combatPrivate->m_armor);
+					}
 				}
 			}
 		}

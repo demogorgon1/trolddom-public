@@ -18,6 +18,7 @@ namespace tpublic
 					const Vec2&							aDestination,
 					int32_t								aCurrentTick,
 					int32_t								aLastMoveTick,
+					std::mt19937&						aRandom,
 					IEventQueue::EventQueueMoveRequest&	aOut);
 		void	Reset(
 					int32_t								aCurrentTick);

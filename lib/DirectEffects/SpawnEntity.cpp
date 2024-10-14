@@ -142,8 +142,8 @@ namespace tpublic::DirectEffects
 			{
 				const Components::PlayerPublic* playerPublic = aSource->GetComponent<Components::PlayerPublic>();
 
-				if(minionPrivate->m_seed == 0) // No minion seed, derive one from the spawner's character id
-					minionPrivate->m_seed = (uint32_t)Hash::Splitmix_2_32(playerPublic->m_characterId, 0);
+				if(minionPrivate->m_seed == 0) // No minion seed, derive one from the spawner's character id and minion entity id
+					minionPrivate->m_seed = (uint32_t)Hash::Splitmix_2_32(playerPublic->m_characterId, m_entityId);
 
 				minionPrivate->SetDirty();
 

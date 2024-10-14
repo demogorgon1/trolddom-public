@@ -74,6 +74,9 @@ namespace tpublic
 						uint32_t&					aOutCharacterId,
 						uint32_t&					aOutEntityInstanceId,
 						uint32_t&					aOutLevel);
+		bool		IsMinionOfPlayer(
+						const EntityInstance*		aEntityInstance,
+						uint32_t					aPlayerEntityInstanceId);
 
 		template <typename _T>
 		void	

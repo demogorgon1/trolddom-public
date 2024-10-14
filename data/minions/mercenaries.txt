@@ -39,13 +39,16 @@
 		_name_template: .mercenary_contract_barbarian		
 		_level: 5	
 		_has_rage: true
+		_weapon_damage: 0.9
+		_resource_health: 0.8
+		_armor: 0.7
 		_creature_type: humanoid
 		_sprite: goblin
 		_sprite_dead: goblin_dead
 		_minion_modes: [ .mercenary_contract_barbarian_aggressive .mercenary_contract_barbarian_defensive .mercenary_contract_barbarian_passive ]
 		_default_minion_mode: .mercenary_contract_barbarian_defensive
 		_commands: [ move attack ]
-		_abilities: [ .mercenary_contract_barbarian_attack .mercenary_contract_barbarian_whirlwind ]
+		_abilities: [ { id: .mercenary_contract_barbarian_attack flags: [ auto ] } { id: .mercenary_contract_barbarian_whirlwind flags: [ auto ] } ]
 		_ability_prio: [ .mercenary_contract_barbarian_whirlwind .mercenary_contract_barbarian_attack ]
 	}
 	
@@ -69,6 +72,7 @@
 		follow_distance: 3
 		aggro_range: 5
 		attack_owner_threat_target: true
+		attack_threat_target: true
 	}
 
 	minion_mode .mercenary_contract_barbarian_defensive:
@@ -77,6 +81,7 @@
 		icon: icon_defensive
 		follow_distance: 3
 		attack_owner_threat_target: true
+		attack_threat_target: true
 	}
 
 	minion_mode .mercenary_contract_barbarian_passive:

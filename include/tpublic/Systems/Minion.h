@@ -13,6 +13,7 @@ namespace tpublic::Systems
 
 		static const int32_t SPAWN_TICKS = 4;
 		static const int32_t DESPAWN_TICKS = 4;
+		static const int32_t AGGRO_PING_INTERVAL_TICKS = 10;
 
 						Minion(
 							const SystemData*	aData);

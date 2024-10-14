@@ -8,6 +8,7 @@
 #include <tpublic/Components/DisplayName.h>
 #include <tpublic/Components/MinionPrivate.h>
 #include <tpublic/Components/MinionPublic.h>
+#include <tpublic/Components/NPC.h>
 #include <tpublic/Components/Position.h>
 #include <tpublic/Components/ThreatSource.h>
 
@@ -109,10 +110,16 @@ namespace tpublic::Systems
 		Components::ThreatSource* threatSource = GetComponent<Components::ThreatSource>(aComponents);
 
 		const EntityInstance* ownerEntityInstance = minionPublic->m_ownerEntityInstanceId != 0 ? aContext->m_worldView->WorldViewSingleEntityInstance(minionPublic->m_ownerEntityInstanceId) : NULL;
-		if(ownerEntityInstance == NULL)
+		if(ownerEntityInstance == NULL || ownerEntityInstance->GetState() == EntityState::ID_DEAD)
 		{
 			// No owner, gotta despawn.
 			return EntityState::ID_DESPAWNING;
+		}
+
+		if (aEntityState != EntityState::ID_DEAD && combatPublic->GetResource(Resource::ID_HEALTH) == 0 && !auras->HasEffect(AuraEffect::ID_IMMORTALITY, NULL))
+		{
+			minionPrivate->m_castInProgress.reset();
+			return EntityState::ID_DEAD;
 		}
 
 		const Data::MinionMode* minionMode = minionPublic->m_currentMinionModeId != 0 ? GetManifest()->GetById<Data::MinionMode>(minionPublic->m_currentMinionModeId) : NULL;
@@ -196,6 +203,34 @@ namespace tpublic::Systems
 			const Data::Ability* useAbility = NULL;
 			uint32_t useAbilityOnEntityInstanceId = 0;
 
+			if(minionPrivate->m_ownerRequestAbility)
+			{
+				const Components::MinionPrivate::OwnerRequestAbility& ownerRequestAbility = minionPrivate->m_ownerRequestAbility.value();
+
+				if(minionPublic->HasAbility(ownerRequestAbility.m_abilityId) && !minionPrivate->m_castInProgress)
+				{
+					const Data::Ability* ability = GetManifest()->GetById<Data::Ability>(ownerRequestAbility.m_abilityId);
+					const EntityInstance* ownerRequestAbilityTargetEntityInstance = ownerRequestAbility.m_targetEntityInstanceId != 0 ? aContext->m_worldView->WorldViewSingleEntityInstance(ownerRequestAbility.m_targetEntityInstanceId) : NULL;
+
+					if(ownerRequestAbilityTargetEntityInstance != NULL && !minionPublic->m_cooldowns.IsAbilityOnCooldown(ability))
+					{
+						const Components::Position* ownerRequestAbilityTargetPosition = ownerRequestAbilityTargetEntityInstance->GetComponent<Components::Position>();
+						int32_t distanceSquared = Helpers::CalculateDistanceSquared(ownerRequestAbilityTargetPosition, position);
+
+						if (distanceSquared >= (int32_t)(ability->m_minRange * ability->m_minRange) && distanceSquared <= (int32_t)(ability->m_range * ability->m_range))
+						{
+							if (combatPublic->HasResourcesForAbility(ability, NULL, combatPublic->GetResourceMax(Resource::ID_MANA)))
+							{
+								useAbility = ability;
+								useAbilityOnEntityInstanceId = ownerRequestAbility.m_targetEntityInstanceId;
+							}
+						}
+					}
+				}
+
+				minionPrivate->m_ownerRequestAbility.reset();
+			}
+
 			if(activeCommand != NULL)
 			{			
 				const EntityInstance* targetEntityInstance = activeCommand->m_targetEntityInstanceId != 0 ? aContext->m_worldView->WorldViewSingleEntityInstance(activeCommand->m_targetEntityInstanceId) : NULL;
@@ -217,7 +252,7 @@ namespace tpublic::Systems
 						{
 							activeCommand->m_serverActive = false;
 						}
-						else
+						else if(useAbility == NULL)
 						{
 							minionPrivate->m_targetEntity = { targetEntityInstance->GetEntityInstanceId(), targetEntityInstance->GetSeq() };
 
@@ -228,6 +263,9 @@ namespace tpublic::Systems
 
 								for (uint32_t abilityId : minionPrivate->m_abilityPrio)
 								{
+									if(minionPublic->IsAbilityBlocked(abilityId))
+										continue;
+
 									const Data::Ability* ability = GetManifest()->GetById<Data::Ability>(abilityId);
 									if (distanceSquared > (int32_t)(ability->m_range * ability->m_range))
 										continue;
@@ -243,7 +281,6 @@ namespace tpublic::Systems
 
 									if (!combatPublic->HasResourcesForAbility(ability, NULL, combatPublic->GetResourceMax(Resource::ID_MANA)))
 										continue;
-
 
 									if(ability->TargetAOEHostile() && ability->TargetSelf())
 										useAbilityOnEntityInstanceId = aEntityInstanceId;
@@ -273,6 +310,7 @@ namespace tpublic::Systems
 											targetPosition->m_position,
 											aContext->m_tick,
 											position->m_lastMoveTick,
+											*aContext->m_random,
 											moveRequest))
 										{
 											moveRequest.m_entityInstanceId = aEntityInstanceId;
@@ -315,6 +353,7 @@ namespace tpublic::Systems
 									activeCommand->m_targetPosition,
 									aContext->m_tick,
 									position->m_lastMoveTick,
+									*aContext->m_random,
 									moveRequest))
 								{
 									moveRequest.m_entityInstanceId = aEntityInstanceId;
@@ -343,12 +382,67 @@ namespace tpublic::Systems
 				{					
 					if(minionMode->m_attackOwnerThreatTarget && minionPublic->m_ownerThreatTargetEntityInstanceId != 0)
 					{
+						// Something attacked owner - attack it
 						Components::MinionPublic::Command* attackCommand = minionPublic->GetCommand(MinionCommand::ID_ATTACK);
 						if(attackCommand != NULL)
 						{
 							attackCommand->m_targetEntityInstanceId = minionPublic->m_ownerThreatTargetEntityInstanceId;
 							attackCommand->m_serverActive = true;
 						}
+					}
+					else if(minionMode->m_attackThreatTarget && !threatSource->m_targets.empty())
+					{	
+						// Something sees us as a threat source - attack it
+						Components::MinionPublic::Command* attackCommand = minionPublic->GetCommand(MinionCommand::ID_ATTACK);
+						if (attackCommand != NULL)
+						{
+							attackCommand->m_targetEntityInstanceId = threatSource->GetFirstTarget();
+							attackCommand->m_serverActive = true;
+						}
+					}
+					else if (minionMode->m_aggroRange != 0 && aContext->m_tick - minionPrivate->m_lastAggroPingTick >= AGGRO_PING_INTERVAL_TICKS)
+					{
+						// Attack anything non-friendly within aggro range
+						uint32_t aggroEntityInstanceId = 0;
+
+						IWorldView::EntityQuery entityQuery;
+						entityQuery.m_position = position->m_position;
+						entityQuery.m_maxDistance = (int32_t)minionMode->m_aggroRange;
+						entityQuery.m_flags = IWorldView::EntityQuery::FLAG_LINE_OF_SIGHT;
+
+						aContext->m_worldView->WorldViewQueryEntityInstances(entityQuery, [&](
+							const EntityInstance* aEntity,
+							int32_t				  /*aDistanceSquared*/)
+						{
+							if (aEntity->GetState() != EntityState::ID_IN_COMBAT && aEntity->GetState() != EntityState::ID_DEFAULT)
+								return false;
+								
+							if(!aEntity->HasComponent<tpublic::Components::NPC>())
+								return false;
+
+							const Components::CombatPublic* combatPublic = aEntity->GetComponent<Components::CombatPublic>();
+							if(combatPublic == NULL || combatPublic->m_factionId == 0)
+								return false;
+
+							const Data::Faction* faction = GetManifest()->GetById<Data::Faction>(combatPublic->m_factionId);
+							if(faction->IsFriendly())
+								return false;
+
+							aggroEntityInstanceId = aEntity->GetEntityInstanceId();
+							return true;
+						});
+
+						if(aggroEntityInstanceId != 0)
+						{
+							Components::MinionPublic::Command* attackCommand = minionPublic->GetCommand(MinionCommand::ID_ATTACK);
+							if (attackCommand != NULL)
+							{
+								attackCommand->m_targetEntityInstanceId = aggroEntityInstanceId;
+								attackCommand->m_serverActive = true;
+							}
+						}
+
+						minionPrivate->m_lastAggroPingTick = aContext->m_tick + (int32_t)((*aContext->m_random)() % 2); // add some jitter
 					}
 
 					{
@@ -375,6 +469,7 @@ namespace tpublic::Systems
 									ownerPosition->m_position,
 									aContext->m_tick,
 									position->m_lastMoveTick,
+									*aContext->m_random,
 									moveRequest))
 								{
 									moveRequest.m_entityInstanceId = aEntityInstanceId;
@@ -430,9 +525,6 @@ namespace tpublic::Systems
 			{
 				position->m_lastMoveTick = aContext->m_tick;
 				minionPrivate->m_npcMovement.Reset(aContext->m_tick);
-
-				//if (useAbility->IsOffensive())
-				//	minionPrivate->m_lastAttackTick = aContext->m_tick;
 
 				float cooldownModifier = 0.0f;
 				if (useAbility->IsAttack() && useAbility->IsMelee())

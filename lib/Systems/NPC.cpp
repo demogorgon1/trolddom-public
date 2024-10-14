@@ -780,6 +780,7 @@ namespace tpublic::Systems
 											targetPosition->m_position,
 											aContext->m_tick,
 											position->m_lastMoveTick,
+											*aContext->m_random,
 											moveRequest))
 										{
 											moveRequest.m_entityInstanceId = aEntityInstanceId;
@@ -817,7 +818,7 @@ namespace tpublic::Systems
 			{
 				// FIXME: since (future me: what?)
 				IEventQueue::EventQueueMoveRequest moveRequest;
-				if (!npc->m_npcMovement.GetMoveRequest(aContext->m_worldView->WorldViewGetMapData()->m_mapPathData.get(), position->m_position, npc->m_anchorPosition, aContext->m_tick, position->m_lastMoveTick, moveRequest))
+				if (!npc->m_npcMovement.GetMoveRequest(aContext->m_worldView->WorldViewGetMapData()->m_mapPathData.get(), position->m_position, npc->m_anchorPosition, aContext->m_tick, position->m_lastMoveTick, *aContext->m_random, moveRequest))
 				{
 					// Can't seem to move, teleport all the way back to anchor
 					moveRequest.m_type = IEventQueue::EventQueueMoveRequest::TYPE_SIMPLE;

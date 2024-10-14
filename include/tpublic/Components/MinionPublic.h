@@ -20,6 +20,79 @@ namespace tpublic
 			static const Persistence::Id PERSISTENCE = Persistence::ID_NONE;
 			static const Replication REPLICATION = REPLICATION_PUBLIC;
 
+			struct Ability
+			{
+				enum Flag : uint8_t
+				{
+					FLAG_BLOCKED	= 0x01,
+					FLAG_AUTO		= 0x02
+				};
+
+				static uint8_t
+				SourceToFlags(
+					const SourceNode*	aSource)
+				{
+					uint8_t t = 0;
+
+					aSource->GetArray()->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if(aChild->IsIdentifier("blocked"))
+							t |= FLAG_BLOCKED;
+						else if (aChild->IsIdentifier("auto"))
+							t |= FLAG_AUTO;
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid flag.", aChild->GetIdentifier());
+					});
+
+					return t;
+				}
+
+				Ability()
+				{
+
+				}
+
+				void
+				FromSource(
+					const SourceNode*	aSource)
+				{
+					aSource->GetObject()->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if(aChild->m_name == "flags")
+							m_flags = SourceToFlags(aChild);
+						else if(aChild->m_name == "id")
+							m_id = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
+						else 
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					});
+				}
+
+				void
+				ToStream(
+					IWriter*			aWriter) const
+				{
+					aWriter->WriteUInt(m_id);
+					aWriter->WritePOD(m_flags);
+				}
+
+				bool
+				FromStream(
+					IReader*			aReader) 
+				{
+					if (!aReader->ReadUInt(m_id))
+						return false;
+					if(!aReader->ReadPOD(m_flags))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t			m_id = 0;
+				uint8_t				m_flags = 0;
+			};
+
 			struct Command
 			{
 				Command()
@@ -89,7 +162,7 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32_ARRAY, FIELD_MINION_MODES, "minion_modes", offsetof(MinionPublic, m_minionModeIds))->SetDataType(DataType::ID_MINION_MODE);
 				aSchema->DefineCustomObjects<Command>(FIELD_COMMANDS, "commands", offsetof(MinionPublic, m_commands));
 				aSchema->DefineCustomObjectNoSource<Cooldowns>(FIELD_COOLDOWNS, offsetof(MinionPublic, m_cooldowns));
-				aSchema->Define(ComponentSchema::TYPE_UINT32_ARRAY, FIELD_ABILITIES, "abilities", offsetof(MinionPublic, m_abilities))->SetDataType(DataType::ID_ABILITY);
+				aSchema->DefineCustomObjects<Ability>(FIELD_ABILITIES, "abilities", offsetof(MinionPublic, m_abilities));
 			}
 
 			void
@@ -101,6 +174,7 @@ namespace tpublic
 				m_commands.clear();
 				m_cooldowns.m_entries.clear();
 				m_abilities.clear();
+
 				m_ownerThreatTargetEntityInstanceId = 0;
 			}
 
@@ -152,13 +226,61 @@ namespace tpublic
 				return NULL;
 			}
 
+			bool
+			HasAbility(
+				uint32_t			aAbilityId) const
+			{
+				for(const Ability& ability : m_abilities)
+				{
+					if(ability.m_id == aAbilityId)
+						return true;
+				}
+				return false;
+			}
+
+			const Ability*
+			GetAbility(
+				uint32_t			aAbilityId) const
+			{
+				for(const Ability& ability : m_abilities)
+				{
+					if(ability.m_id == aAbilityId)
+						return &ability;
+				}
+				return NULL;
+			}
+
+			Ability*
+			GetAbility(
+				uint32_t			aAbilityId) 
+			{
+				for(Ability& ability : m_abilities)
+				{
+					if(ability.m_id == aAbilityId)
+						return &ability;
+				}
+				return NULL;
+			}
+
+			bool
+			IsAbilityBlocked(
+				uint32_t			aAbilityId) const
+			{
+				for(const Ability& ability : m_abilities)
+				{
+					if(ability.m_id == aAbilityId)
+						return ability.m_flags & Ability::FLAG_BLOCKED;
+				}
+				return false;
+			}
+
 			// Public data
 			uint32_t				m_ownerEntityInstanceId = 0;
 			uint32_t				m_currentMinionModeId = 0;
 			std::vector<uint32_t>	m_minionModeIds;
 			std::vector<Command>	m_commands;
 			Cooldowns				m_cooldowns;
-			std::vector<uint32_t>	m_abilities;
+			std::vector<Ability>	m_abilities;
 
 			// Internal
 			uint32_t				m_ownerThreatTargetEntityInstanceId = 0;

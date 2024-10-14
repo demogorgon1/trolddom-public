@@ -40,6 +40,8 @@ namespace tpublic
 							m_aggroRange = aChild->GetUInt32();
 						else if (aChild->m_name == "attack_owner_threat_target")
 							m_attackOwnerThreatTarget = aChild->GetBool();
+						else if (aChild->m_name == "attack_threat_target")
+							m_attackThreatTarget = aChild->GetBool();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -55,6 +57,7 @@ namespace tpublic
 				aStream->WriteUInt(m_followDistance);
 				aStream->WriteUInt(m_aggroRange);
 				aStream->WriteBool(m_attackOwnerThreatTarget);
+				aStream->WriteBool(m_attackThreatTarget);
 			}
 
 			bool
@@ -69,7 +72,9 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInt(m_aggroRange))
 					return false;
-				if(!aStream->ReadBool(m_attackOwnerThreatTarget))
+				if (!aStream->ReadBool(m_attackOwnerThreatTarget))
+					return false;
+				if (!aStream->ReadBool(m_attackThreatTarget))
 					return false;
 				return true;
 			}
@@ -80,6 +85,7 @@ namespace tpublic
 			uint32_t		m_followDistance = 0;
 			uint32_t		m_aggroRange = 0;
 			bool			m_attackOwnerThreatTarget = false;
+			bool			m_attackThreatTarget = false;
 		};
 
 	}

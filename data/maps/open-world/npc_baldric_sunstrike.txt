@@ -129,7 +129,7 @@ item .baldric_sunstrike_quest_item_1:
 	string: "Demon Blood" 
 	icon: icon_blood
 	stack: 6
-	item_level: 1
+	item_level: 6
 	flags: [ not_sellable ]
 }
 
