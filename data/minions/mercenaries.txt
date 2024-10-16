@@ -40,6 +40,7 @@
 		_entity: .mercenary_contract_barbarian
 		_name_template: .mercenary_contract_barbarian		
 		_ability_consume: { mercenary_contract_barbarian: 1 }
+		_reimburse_item: mercenary_contract_barbarian
 		_level: 6	
 		_cost: 1100
 		_has_rage: true
@@ -176,6 +177,7 @@
 		_entity: .mercenary_contract_shield_maiden
 		_name_template: .mercenary_contract_shield_maiden
 		_ability_consume: { mercenary_contract_shield_maiden: 1 }
+		_reimburse_item: mercenary_contract_shield_maiden
 		_level: 6	
 		_cost: 1100		
 		_has_rage: true
@@ -307,6 +309,7 @@
 		_entity: .mercenary_contract_cleric
 		_name_template: .mercenary_contract_cleric
 		_ability_consume: { mercenary_contract_cleric: 1 }
+		_reimburse_item: mercenary_contract_cleric
 		_level: 6	
 		_cost: 1100		
 		_weapon_damage: 0.5

@@ -61,6 +61,7 @@
 			<exists _name_template> name_template: @_name_template
 			<exists _has_rage> resources: { rage: 100 }
 			<exists _ability_prio> ability_prio: @_ability_prio
+			<exists _reimburse_item> reimburse_item: @_reimburse_item
 		}		
 		sprite<static>: 
 		{ 

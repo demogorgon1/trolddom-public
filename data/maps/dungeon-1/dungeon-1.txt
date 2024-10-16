@@ -110,7 +110,8 @@ map dungeon_1:
 	auto_doodads: true
 	level: 6
 	max_players: 5
-
+	max_minions: 1
+	
 	layers:
 	[
 		{

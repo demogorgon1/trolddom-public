@@ -120,7 +120,8 @@ namespace tpublic
 				FIELD_SEED,
 				FIELD_NAME_TEMPLATE,
 				FIELD_RESOURCES,
-				FIELD_ABILITY_PRIO
+				FIELD_ABILITY_PRIO,
+				FIELD_REIMBURSE_ITEM
 			};
 
 			static void
@@ -131,6 +132,7 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_NAME_TEMPLATE, "name_template", offsetof(MinionPrivate, m_nameTemplateId))->SetDataType(DataType::ID_NAME_TEMPLATE);
 				aSchema->DefineCustomObject<Resources>(FIELD_RESOURCES, "resources", offsetof(MinionPrivate, m_resources));
 				aSchema->Define(ComponentSchema::TYPE_UINT32_ARRAY, FIELD_ABILITY_PRIO, "ability_prio", offsetof(MinionPrivate, m_abilityPrio))->SetDataType(DataType::ID_ABILITY);
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_REIMBURSE_ITEM, "reimburse_item", offsetof(MinionPrivate, m_reimburseItemId))->SetDataType(DataType::ID_ITEM);
 			}
 
 			void
@@ -140,6 +142,7 @@ namespace tpublic
 				m_nameTemplateId = 0;
 				m_resources.m_entries.clear();
 				m_abilityPrio.clear();
+				m_reimburseItemId = 0;
 
 				m_npcMovement.Reset(0);
 				m_moveCooldownUntilTick = 0;
@@ -157,6 +160,7 @@ namespace tpublic
 			uint32_t							m_nameTemplateId = 0;
 			Resources							m_resources;
 			std::vector<uint32_t>				m_abilityPrio;
+			uint32_t							m_reimburseItemId = 0;
 
 			// Internal
 			NPCMovement							m_npcMovement;

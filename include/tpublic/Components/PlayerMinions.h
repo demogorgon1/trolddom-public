@@ -144,6 +144,9 @@ namespace tpublic
 			// Public data
 			std::vector<Minion>			m_minions;
 			std::vector<MinionControl>	m_minionControl;
+
+			// Internal
+			std::vector<uint32_t>		m_reimburseItemIds;
 		};
 	}
 

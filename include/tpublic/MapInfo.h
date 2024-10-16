@@ -60,6 +60,11 @@ namespace tpublic
 				m_maxPlayers = aItem->GetUInt32();
 				return true;
 			}
+			else if (aItem->m_name == "max_minions")
+			{
+				m_maxMinions = aItem->GetUInt32();
+				return true;
+			}
 			else if (aItem->m_name == "level")
 			{
 				m_level = aItem->GetUInt32();
@@ -112,6 +117,7 @@ namespace tpublic
 			aWriter->WriteBool(m_autoDoodads);
 			aWriter->WriteUInts(m_mapLootTableIds);
 			aWriter->WriteUInt(m_maxPlayers);
+			aWriter->WriteUInt(m_maxMinions);
 		}
 
 		bool
@@ -144,6 +150,8 @@ namespace tpublic
 				return false;
 			if (!aReader->ReadUInt(m_maxPlayers))
 				return false;
+			if (!aReader->ReadUInt(m_maxMinions))
+				return false;
 			return true;
 		}
 
@@ -161,6 +169,7 @@ namespace tpublic
 		bool										m_autoDoodads = false;
 		std::vector<uint32_t>						m_mapLootTableIds;
 		uint32_t									m_maxPlayers = 5;
+		uint32_t									m_maxMinions = 0;
 	};
 
 }
