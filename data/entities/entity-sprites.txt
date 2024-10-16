@@ -197,10 +197,16 @@ sprites:
 	cursor: { position: [ 0 160 ] }
 
 	sprite crab_caster_2: { dead: crab_caster_2_dead tags: [ crab_monster caster melee ] }
+	sprite barbarian_1: { dead: barbarian_1_dead }
+	sprite shield_maiden_1: { dead: shield_maiden_1_dead }
+	sprite cleric_1: { dead: cleric_1_dead }
 	
 	cursor: { position: [ 0 176 ] }
 
 	sprite crab_caster_2_dead: { }
+	sprite barbarian_1_dead: { }
+	sprite shield_maiden_1_dead: { }
+	sprite cleric_1_dead: { }
 	
 }
 

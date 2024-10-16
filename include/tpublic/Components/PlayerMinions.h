@@ -42,14 +42,49 @@ namespace tpublic
 				}
 
 				// Public data
-				uint32_t		m_entityId = 0;
-				uint32_t		m_entityInstanceId = 0;
-				bool			m_dead = false;
+				uint32_t				m_entityId = 0;
+				uint32_t				m_entityInstanceId = 0;
+				bool					m_dead = false;
+
+				// Internal
+				bool					m_applyControl = false;
 			};
+
+			struct MinionControl
+			{
+				void
+				ToStream(
+					IWriter*		aWriter) const 
+				{
+					aWriter->WriteUInt(m_entityId);
+					aWriter->WriteUInts(m_blockedAbilityIds);
+					aWriter->WriteUInt(m_currentMinionModeId);
+				}
+
+				bool
+				FromStream(
+					IReader*		aReader) 
+				{
+					if (!aReader->ReadUInt(m_entityId))
+						return false;
+					if (!aReader->ReadUInts(m_blockedAbilityIds))
+						return false;
+					if (!aReader->ReadUInt(m_currentMinionModeId))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t				m_entityId = 0;
+				std::vector<uint32_t>	m_blockedAbilityIds;
+				uint32_t				m_currentMinionModeId = 0;
+			};
+
 
 			enum Field
 			{
-				FIELD_MINIONS
+				FIELD_MINIONS,
+				FIELD_MINION_CONTROL
 			};
 
 			static void
@@ -57,12 +92,14 @@ namespace tpublic
 				ComponentSchema*	aSchema)
 			{
 				aSchema->DefineCustomObjectsNoSource<Minion>(FIELD_MINIONS, offsetof(PlayerMinions, m_minions));
+				aSchema->DefineCustomObjectsNoSource<MinionControl>(FIELD_MINION_CONTROL, offsetof(PlayerMinions, m_minionControl));
 			}
 
 			void
 			Reset()
 			{
 				m_minions.clear();
+				m_minionControl.clear();
 			}
 
 			bool
@@ -91,8 +128,22 @@ namespace tpublic
 				}
 			}
 
+			MinionControl*
+			GetMinionControl(
+				uint32_t			aEntityId)
+			{
+				for(MinionControl& minionControl : m_minionControl)
+				{
+					if(minionControl.m_entityId == aEntityId)
+						return &minionControl;
+				}
+				m_minionControl.push_back({ aEntityId });
+				return &m_minionControl[m_minionControl.size() - 1];
+			}
+
 			// Public data
-			std::vector<Minion>	m_minions;
+			std::vector<Minion>			m_minions;
+			std::vector<MinionControl>	m_minionControl;
 		};
 	}
 

@@ -47,6 +47,8 @@ namespace tpublic
 							const SourceEntityInstance&				aSourceEntityInstance);
 		void			Touch(
 							int32_t									aTick);
+		int32_t			GetThreat(
+							const SourceEntityInstance&				aSourceEntityInstance) const;
 		void			Clear();
 		void			DebugPrint() const;
 

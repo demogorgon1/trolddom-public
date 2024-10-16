@@ -399,6 +399,9 @@ sprites:
 	sprite icon_move_command : { tags: [ icon ] }
 	sprite icon_attack_command : { tags: [ icon ] }
 	sprite icon_heal_command : { tags: [ icon ] }
+	sprite icon_shield_bash : { tags: [ icon ] }
+	sprite icon_scroll_2 : { tags: [ icon ] }
+	sprite icon_scroll_3 : { tags: [ icon ] }
 	
 }
 

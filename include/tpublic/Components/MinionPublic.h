@@ -64,7 +64,9 @@ namespace tpublic
 							m_flags = SourceToFlags(aChild);
 						else if(aChild->m_name == "id")
 							m_id = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
-						else 
+						else if (aChild->m_name == "max_target_health")
+							m_maxTargetHealth = aChild->GetUInt32();
+						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					});
 				}
@@ -75,6 +77,7 @@ namespace tpublic
 				{
 					aWriter->WriteUInt(m_id);
 					aWriter->WritePOD(m_flags);
+					aWriter->WriteUInt(m_maxTargetHealth);
 				}
 
 				bool
@@ -85,12 +88,15 @@ namespace tpublic
 						return false;
 					if(!aReader->ReadPOD(m_flags))
 						return false;
+					if (!aReader->ReadUInt(m_maxTargetHealth))
+						return false;
 					return true;
 				}
 
 				// Public data
 				uint32_t			m_id = 0;
 				uint8_t				m_flags = 0;
+				uint32_t			m_maxTargetHealth = 0;
 			};
 
 			struct Command
@@ -272,6 +278,17 @@ namespace tpublic
 						return ability.m_flags & Ability::FLAG_BLOCKED;
 				}
 				return false;
+			}
+
+			void
+			GetBlockedAbilities(
+				std::vector<uint32_t>&	aOut) const
+			{
+				for (const Ability& ability : m_abilities)
+				{
+					if (ability.m_flags & Ability::FLAG_BLOCKED)
+						aOut.push_back(ability.m_id);
+				}
 			}
 
 			// Public data

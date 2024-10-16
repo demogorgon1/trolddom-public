@@ -14,6 +14,7 @@ namespace tpublic::Systems
 		static const int32_t SPAWN_TICKS = 4;
 		static const int32_t DESPAWN_TICKS = 4;
 		static const int32_t AGGRO_PING_INTERVAL_TICKS = 10;
+		static const int32_t OWNER_TELEPORT_DISTANCE = 22;
 
 						Minion(
 							const SystemData*	aData);
@@ -40,8 +41,6 @@ namespace tpublic::Systems
 							int32_t				aTicksInState,
 							ComponentBase**		aComponents,
 							Context*			aContext) override;
-
-	private:
 	};
 
 }

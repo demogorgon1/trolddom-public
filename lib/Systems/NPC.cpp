@@ -35,6 +35,24 @@
 namespace tpublic::Systems
 {
 
+	namespace
+	{
+		bool
+		_IsInMeleeRange(
+			const Vec2&				aPosition,
+			const EntityInstance*	aEntityInstance)
+		{
+			if(aEntityInstance == NULL)
+				return false;
+			const Components::Position* position = aEntityInstance->GetComponent<Components::Position>();
+			if(position == NULL)
+				return false;
+			return aPosition.DistanceSquared(position->m_position) <= 1;
+		}
+	}
+
+	//--------------------------------------------------------------------------------------------
+
 	NPC::NPC(
 		const SystemData*		aData)
 		: SystemBase(aData)
@@ -577,15 +595,29 @@ namespace tpublic::Systems
 
 					if (!isStunned)
 					{
-						SourceEntityInstance topThreatEntity;
-
-						if(!auras->HasEffect(AuraEffect::ID_TAUNT, &topThreatEntity))
+						if(!auras->HasEffect(AuraEffect::ID_TAUNT, &npc->m_targetEntity))
 						{
 							const ThreatTable::Entry* topThreatEntry = threat->m_table.GetTop();
-							topThreatEntity = topThreatEntry->m_key;
-						}					
 
-						npc->m_targetEntity = topThreatEntity;
+							if(topThreatEntry->m_key != npc->m_targetEntity)
+							{
+								int32_t existingTargetThreat = npc->m_targetEntity.IsSet() ? threat->m_table.GetThreat(npc->m_targetEntity) : 0;
+
+								if(existingTargetThreat != 0)
+								{
+									// To switch the new target must have 8% more threat if in melee range or 25% more threat if outside
+									bool newTargetInMeleeRange = _IsInMeleeRange(position->m_position, aContext->m_worldView->WorldViewSingleEntityInstance(topThreatEntry->m_key.m_entityInstanceId));
+									int32_t newTargetThreatPercentageIncrease = (100 * (topThreatEntry->m_threat - existingTargetThreat)) / existingTargetThreat;
+
+									if((newTargetInMeleeRange && newTargetThreatPercentageIncrease >= 8) || (!newTargetInMeleeRange && newTargetThreatPercentageIncrease >= 25))
+										npc->m_targetEntity = topThreatEntry->m_key;
+								}
+								else
+								{
+									npc->m_targetEntity = topThreatEntry->m_key;
+								}								
+							}
+						}					
 						
 						const EntityInstance* target = aContext->m_worldView->WorldViewSingleEntityInstance(npc->m_targetEntity.m_entityInstanceId);
 						if (target == NULL || target->GetState() == EntityState::ID_DEAD || target->GetSeq() != npc->m_targetEntity.m_entityInstanceSeq)

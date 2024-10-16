@@ -21,6 +21,7 @@ namespace tpublic
 		{
 			const char* m_name;
 			const char* m_displayName;
+			const char* m_description;
 			const char* m_iconSpriteName;
 			bool		m_targetPosition;
 			uint32_t	m_priority; // 0 = highest prio
@@ -29,11 +30,11 @@ namespace tpublic
 		// IMPORTANT: Must match Id enum
 		static constexpr const Info INFO[] =
 		{
-			{ NULL, NULL, NULL },
+			{ NULL, NULL, NULL, NULL, false, 0 },
 
-			{ "move",		"Move",		"icon_move_command",	true,	1 },
-			{ "attack",		"Attack",	"icon_attack_command",	false,	2 },
-			{ "heal",		"Heal",		"icon_heal_command",	false,	0 },
+			{ "move",		"Move",		"Move to specified location.",	"icon_move_command",	true,	1 },
+			{ "attack",		"Attack",	"Attack current target.",		"icon_attack_command",	false,	2 },
+			{ "heal",		"Heal",		"Heal friendly target.",		"icon_heal_command",	false,	0 },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

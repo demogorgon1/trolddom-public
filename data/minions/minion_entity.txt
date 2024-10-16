@@ -44,6 +44,7 @@
 			block_chance: 5
 			
 			<exists _resource_mana> mana_regen: 5
+			<exists _resource_mana> mana_regen_not_casting: 5
 			
 			<exists _health_regen_not_in_combat> health_regen_not_in_combat: @_health_regen_not_in_combat
 			<!exists _health_regen_not_in_combat> health_regen_not_in_combat: 100

@@ -1,25 +1,27 @@
 !define local MERCENARY_CONTRACT_ITEM
 {
-	flags: [ unique not_sellable ]
 	binds: when_picked_up
 	type: miscellaneous
 	item_level: @_level
 	required_level: @_level
 	rarity: uncommon
-	icon: icon_scroll_1
+	icon: @_icon
+	stack: 10
 	string: @_item_name
 	use_ability: @_ability
+	cost: @_cost
 }
 
 !define local MERCENARY_CONTRACT_ABILITY
 {
 	string: @_item_name
 	description: "Summons a mercenary."
-	flags: [ target_self item ]
+	flags: [ target_self item minion_summon ]
 	cast_time: 20
 	icon: icon_scroll_1
 	required_level: @_level
 	cooldowns: [ global ]	
+	consume_items: @_ability_consume
 
 	direct_effect spawn_entity:
 	{
@@ -37,19 +39,22 @@
 		_ability: .mercenary_contract_barbarian
 		_entity: .mercenary_contract_barbarian
 		_name_template: .mercenary_contract_barbarian		
-		_level: 5	
+		_ability_consume: { mercenary_contract_barbarian: 1 }
+		_level: 6	
+		_cost: 1100
 		_has_rage: true
-		_weapon_damage: 0.9
+		_weapon_damage: 1
 		_resource_health: 0.8
 		_armor: 0.7
 		_creature_type: humanoid
-		_sprite: goblin
-		_sprite_dead: goblin_dead
+		_sprite: barbarian_1
+		_sprite_dead: barbarian_1_dead
 		_minion_modes: [ .mercenary_contract_barbarian_aggressive .mercenary_contract_barbarian_defensive .mercenary_contract_barbarian_passive ]
 		_default_minion_mode: .mercenary_contract_barbarian_defensive
 		_commands: [ move attack ]
 		_abilities: [ { id: .mercenary_contract_barbarian_attack flags: [ auto ] } { id: .mercenary_contract_barbarian_whirlwind flags: [ auto ] } ]
 		_ability_prio: [ .mercenary_contract_barbarian_whirlwind .mercenary_contract_barbarian_attack ]
+		_icon: icon_scroll_1
 	}
 	
 	tag_context .mercenary_contract_barbarian:
@@ -93,7 +98,7 @@
 	
 	cooldown .mercenary_contract_barbarian_attack:
 	{
-		duration: 20
+		duration: 19
 	}
 	
 	ability .mercenary_contract_barbarian_attack:
@@ -138,7 +143,7 @@
 		string: "Whirlwind"
 		description: "Inflicts $damage$ damage on up to 3 adjacent enemies."
 		range: 1	
-		cooldowns: [ global whirlwind ]
+		cooldowns: [ global .mercenary_contract_barbarian_whirlwind ]
 		flags: [ melee target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
 		states: [ default in_combat ]
 		icon: icon_whirlwind
@@ -153,7 +158,7 @@
 		{
 			flags: [ can_be_critical ]
 			damage_type: physical
-			function: { expression: x x: weapon }		
+			function: { expression: a_mul_x a: 1.3 x: weapon }	
 		}
 	}
 
@@ -161,4 +166,278 @@
 	entity .mercenary_contract_barbarian: !MINION{}
 	item mercenary_contract_barbarian: !MERCENARY_CONTRACT_ITEM{}
 }
+
+##############################################################################
+# Mercenary Contract: Shieldmaiden
+{
+	${
+		_item_name: "Mercenary Contract: Shieldmaiden"
+		_ability: .mercenary_contract_shield_maiden
+		_entity: .mercenary_contract_shield_maiden
+		_name_template: .mercenary_contract_shield_maiden
+		_ability_consume: { mercenary_contract_shield_maiden: 1 }
+		_level: 6	
+		_cost: 1100		
+		_has_rage: true
+		_weapon_damage: 0.75
+		_resource_health: 1.2
+		_armor: 1.35
+		_creature_type: humanoid
+		_sprite: shield_maiden_1
+		_sprite_dead: shield_maiden_1_dead
+		_minion_modes: [ .mercenary_contract_shield_maiden_aggressive .mercenary_contract_shield_maiden_defensive .mercenary_contract_shield_maiden_passive ]
+		_default_minion_mode: .mercenary_contract_shield_maiden_defensive
+		_commands: [ move attack ]
+		_abilities: [ { id: .mercenary_contract_shield_maiden_attack flags: [ auto ] } { id: .mercenary_contract_shield_maiden_shield_bash flags: [ auto ] } ]
+		_ability_prio: [ .mercenary_contract_shield_maiden_shield_bash .mercenary_contract_shield_maiden_attack ]
+		_icon: icon_scroll_2
+	}
+	
+	tag_context .mercenary_contract_shield_maiden:
+	{
+		must_have_tags: [ american_forename_female ]
+	}
+	
+	name_template .mercenary_contract_shield_maiden:
+	{
+		possibility<1>:
+		{
+			word: [ .mercenary_contract_shield_maiden ]
+		}
+	}
+
+	minion_mode .mercenary_contract_shield_maiden_aggressive:
+	{
+		string: "Aggressive"
+		icon: icon_aggressive
+		follow_distance: 3
+		aggro_range: 5
+		attack_owner_threat_target: true
+		attack_threat_target: true
+	}
+
+	minion_mode .mercenary_contract_shield_maiden_defensive:
+	{
+		string: "Defensive"
+		icon: icon_defensive
+		follow_distance: 3
+		attack_owner_threat_target: true
+		attack_threat_target: true
+	}
+
+	minion_mode .mercenary_contract_shield_maiden_passive:
+	{
+		string: "Passive"
+		icon: icon_passive
+		follow_distance: 3
+	}
+	
+	cooldown .mercenary_contract_shield_maiden_attack:
+	{
+		duration: 21
+	}
+	
+	ability .mercenary_contract_shield_maiden_attack:
+	{
+		string: "Attack"
+		description: "Deals $damage$ damage to target."
+		flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+		states: [ default in_combat ]
+		delay: 3
+		icon: icon_sword_1
+		cooldowns: [ .mercenary_contract_shield_maiden_attack ]
+		
+		direct_effect damage:
+		{
+			flags: [ generate_rage can_be_critical ]
+			damage_type: physical			
+			function: { expression: x x: weapon }		
+		}
+		
+		direct_effect threat:
+		{
+			apply_to: source
+			add: 5
+		}			
+	}	
+
+	cooldown .mercenary_contract_shield_maiden_shield_bash:
+	{
+		duration: 50
+	}
+
+	ability .mercenary_contract_shield_maiden_shield_bash:
+	{
+		string: "Shield Bash"
+		description: "Deals $damage$ damage to target. Generates a lot of threat."
+		range: 1	
+		cooldowns: [ global .mercenary_contract_shield_maiden_shield_bash ]
+		flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+		states: [ default in_combat ]
+		delay: 3
+		icon: icon_shield_bash
+		cooldowns: [ .mercenary_contract_shield_maiden_shield_bash ]
+		resource_cost rage: 10
+
+		direct_effect damage:
+		{
+			flags: [ can_be_critical ]
+			damage_type: physical
+			function: { expression: a_mul_x a: 0.8 x: weapon }		
+		}
+		
+		direct_effect threat:
+		{
+			apply_to: source
+			add: 25
+		}	
+	}
+	
+	ability .mercenary_contract_shield_maiden: !MERCENARY_CONTRACT_ABILITY{}
+	entity .mercenary_contract_shield_maiden: !MINION{}
+	item mercenary_contract_shield_maiden: !MERCENARY_CONTRACT_ITEM{}
+}
+
+##############################################################################
+# Mercenary Contract: Cleric
+{
+	${
+		_item_name: "Mercenary Contract: Cleric"
+		_ability: .mercenary_contract_cleric
+		_entity: .mercenary_contract_cleric
+		_name_template: .mercenary_contract_cleric
+		_ability_consume: { mercenary_contract_cleric: 1 }
+		_level: 6	
+		_cost: 1100		
+		_weapon_damage: 0.5
+		_resource_health: 0.8
+		_armor: 0.7
+		_resource_mana: 1.4
+		_creature_type: humanoid
+		_sprite: cleric_1
+		_sprite_dead: cleric_1_dead
+		_minion_modes: [ .mercenary_contract_cleric_aggressive .mercenary_contract_cleric_defensive .mercenary_contract_cleric_passive ]
+		_default_minion_mode: .mercenary_contract_cleric_defensive
+		_commands: [ move attack heal ]
+		_ability_prio: [ .mercenary_contract_cleric_mend .mercenary_contract_cleric_sacred_flame .mercenary_contract_cleric_attack ]
+		_icon: icon_scroll_3
+		
+		_abilities: 
+		[ 
+			{ id: .mercenary_contract_cleric_attack flags: [ auto ] } 
+			{ id: .mercenary_contract_cleric_sacred_flame flags: [ auto ] } 
+			{ id: .mercenary_contract_cleric_mend flags: [ auto ] max_target_health: 80 } 
+		]
+	}
+	
+	tag_context .mercenary_contract_cleric:
+	{
+		must_have_tags: [ american_forename_male ]
+	}
+	
+	name_template .mercenary_contract_cleric:
+	{
+		possibility<1>:
+		{
+			word: [ .mercenary_contract_cleric ]
+		}
+	}
+
+	minion_mode .mercenary_contract_cleric_aggressive:
+	{
+		string: "Aggressive"
+		icon: icon_aggressive
+		follow_distance: 3
+		aggro_range: 5
+		attack_owner_threat_target: true
+		attack_threat_target: true
+	}
+
+	minion_mode .mercenary_contract_cleric_defensive:
+	{
+		string: "Defensive"
+		icon: icon_defensive
+		follow_distance: 3
+		attack_owner_threat_target: true
+		attack_threat_target: true
+	}
+
+	minion_mode .mercenary_contract_cleric_passive:
+	{
+		string: "Passive"
+		icon: icon_passive
+		follow_distance: 3
+	}
+	
+	cooldown .mercenary_contract_cleric_attack:
+	{
+		duration: 21
+	}
+	
+	ability .mercenary_contract_cleric_attack:
+	{
+		string: "Attack"
+		description: "Deals $damage$ damage to target."
+		flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+		states: [ default in_combat ]
+		delay: 3
+		icon: icon_staff_1
+		cooldowns: [ .mercenary_contract_cleric_attack ]
+		
+		direct_effect damage:
+		{
+			flags: [ generate_rage can_be_critical ]
+			damage_type: physical			
+			function: { expression: x x: weapon }		
+		}		
+	}	
+
+	ability .mercenary_contract_cleric_sacred_flame:
+	{
+		string: "Sacred Flame"
+		description: "Deals $damage$ damage to target."
+		range: 6
+		cooldowns: [ global ]
+		cast_time: 25
+		flags: [ spell offensive target_other target_hostile interruptable ]
+		states: [ default in_combat ]
+		icon: icon_fire
+		resource_cost mana: 8
+		target_particle_system: smite	
+		delay: 3
+			
+		direct_effect damage:
+		{
+			flags: [ can_be_critical ]
+			damage_type: fire
+			function: { expression: a a: [ [ 1 6 ] [ 10 11 ] ] }			
+		}					
+	}
+	
+	ability .mercenary_contract_cleric_mend:
+	{
+		string: "Mend"
+		description: "Heals target for $heal$."
+		range: 6
+		cooldowns: [ global spell_healing_lockout ]
+		cast_time: 20
+		flags: [ spell target_other target_self target_friendly interruptable ]
+		states: [ default in_combat ]
+		icon: icon_conduit
+		resource_cost mana: 10
+		target_particle_system: heal	
+		delay: 2
+		sound_effects: !SOUND_HEAL{}	
+
+		direct_effect heal:
+		{	
+			function: { expression: a a: [ [ 1 8 ] [ 10 19 ] ] }		
+		}		
+	}
+	
+	ability .mercenary_contract_cleric: !MERCENARY_CONTRACT_ABILITY{}
+	entity .mercenary_contract_cleric: !MINION{}
+	item mercenary_contract_cleric: !MERCENARY_CONTRACT_ITEM{}
+}
+
 

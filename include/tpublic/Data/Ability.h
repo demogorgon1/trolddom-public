@@ -59,6 +59,11 @@ namespace tpublic
 				FLAG_INTERRUPT_ON_DAMAGE			= 0x80000000
 			};
 
+			enum ExtendedFlag : uint32_t
+			{
+				EXTENDED_FLAG_MINION_SUMMON			= 0x00000001
+			};
+
 			static inline Resource::Id
 			GetResourceId(
 				const SourceNode*			aSource)
@@ -70,7 +75,8 @@ namespace tpublic
 
 			static inline uint32_t
 			GetFlags(
-				const SourceNode*			aSource)
+				const SourceNode*			aSource,
+				uint32_t*					aOutExtendedFlags = NULL)
 			{
 				uint32_t flags = 0;
 				aSource->GetArray()->ForEachChild([&](
@@ -141,6 +147,8 @@ namespace tpublic
 						flags |= FLAG_USE_RANGED_ICON;
 					else if (strcmp(identifier, "interrupt_on_damage") == 0)
 						flags |= FLAG_INTERRUPT_ON_DAMAGE;
+					else if (strcmp(identifier, "minion_summon") == 0 && aOutExtendedFlags != NULL)
+						*aOutExtendedFlags |= EXTENDED_FLAG_MINION_SUMMON;
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid ability flag.", identifier);
 				});
@@ -401,6 +409,7 @@ namespace tpublic
 			bool IsInterruptable() const { return m_flags & FLAG_INTERRUPTABLE; }
 			bool IsRangedCastTime() const { return m_flags & FLAG_RANGED_CAST_TIME; }
 			bool IsRanged() const { return m_flags & FLAG_RANGED; }
+			bool IsMinionSummon() const { return m_extendedFlags & EXTENDED_FLAG_MINION_SUMMON; }
 			
 			bool 
 			IsUsableInState(
@@ -472,7 +481,7 @@ namespace tpublic
 						else if (aMember->m_name == "must_have_nearby_entity")
 							m_mustHaveNearbyEntityId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENTITY, aMember->GetIdentifier());
 						else if (aMember->m_name == "flags")
-							m_flags = GetFlags(aMember);
+							m_flags = GetFlags(aMember, &m_extendedFlags);
 						else if (aMember->m_tag == "direct_effect")
 							m_directEffects.push_back(std::make_unique<DirectEffectEntry>(aMember));
 						else if (aMember->m_tag == "aoe_entity_spawn")
@@ -521,6 +530,7 @@ namespace tpublic
 				aWriter->WriteUInt(m_iconSpriteId);
 				aWriter->WriteObjectPointers(m_directEffects);
 				aWriter->WritePOD(m_flags);
+				aWriter->WritePOD(m_extendedFlags);
 				aWriter->WriteUInt(m_projectileParticleSystemId);
 				aWriter->WriteUInt(m_sourceParticleSystemId);
 				aWriter->WriteUInt(m_targetParticleSystemId);
@@ -574,7 +584,9 @@ namespace tpublic
 					return false;
 				if(!aReader->ReadObjectPointers(m_directEffects))
 					return false;
-				if(!aReader->ReadPOD(m_flags))
+				if (!aReader->ReadPOD(m_flags))
+					return false;
+				if (!aReader->ReadPOD(m_extendedFlags))
 					return false;
 				if (!aReader->ReadUInt(m_projectileParticleSystemId))
 					return false;
@@ -648,6 +660,7 @@ namespace tpublic
 			std::vector<uint32_t>								m_cooldowns;
 			int32_t												m_castTime = 0;
 			uint32_t											m_flags = 0;
+			uint32_t											m_extendedFlags = 0;
 			uint32_t											m_iconSpriteId = 0;
 			uint32_t											m_projectileParticleSystemId = 0;
 			uint32_t											m_sourceParticleSystemId = 0;

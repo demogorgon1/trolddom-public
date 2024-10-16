@@ -142,9 +142,9 @@ namespace tpublic
 
 	void	
 	ThreatTable::Remove(
-		const SourceEntityInstance& aSourceEntityInstanceq)
+		const SourceEntityInstance& aSourceEntityInstance)
 	{
-		Table::iterator i = m_table.find(aSourceEntityInstanceq);
+		Table::iterator i = m_table.find(aSourceEntityInstance);
 		if (i != m_table.end())
 		{
 			_Remove(i->second);
@@ -167,6 +167,16 @@ namespace tpublic
 			if(hasNonZeroSources)
 				m_tick = aTick;
 		}
+	}
+
+	int32_t			
+	ThreatTable::GetThreat(
+		const SourceEntityInstance&				aSourceEntityInstance) const
+	{
+		Table::const_iterator i = m_table.find(aSourceEntityInstance);
+		if(i == m_table.cend())
+			return 0;
+		return i->second->m_threat;
 	}
 
 	void	

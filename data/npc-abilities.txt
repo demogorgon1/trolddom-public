@@ -71,7 +71,7 @@ ability npc_firebolt:
 	direct_effect damage:
 	{
 		flags: [ can_be_critical ]
-		damage_type: physical		
+		damage_type: fire		
 		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] ] elite_multiplier: 1.7 }			
 	}
 }
