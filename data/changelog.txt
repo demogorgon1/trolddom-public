@@ -26,6 +26,7 @@ changelog_demo:
 
 	list:
 	[
+		{ text: "A band of mercenaries, available for hire, has set up camp outside town." }
 		{ text: "Cultists in the Umbracoth encounter are no longer elite." }
 		{ text: "Added option to toggle energy and rage gains from combat log." }
 	]
