@@ -326,7 +326,7 @@ ability lake_of_fire_tick:
 	icon: icon_fire
 	direct_effect damage:
 	{
-		flags: [ ]
+		flags: [ is_magical ]
 		damage_type: fire
 		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 3 ] [ 10 6 ] ] }											
 	}
@@ -393,7 +393,7 @@ ability firebolt:
 	
 	direct_effect damage:
 	{
-		flags: [ can_be_critical ]
+		flags: [ can_be_critical is_magical ]
 		damage_type: fire
 		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 24 ] [ 10 36 ] ] }											
 		
@@ -456,7 +456,7 @@ ability fireball:
 	
 	direct_effect damage:
 	{
-		flags: [ can_be_critical ]
+		flags: [ can_be_critical is_magical ]
 		damage_type: fire
 		function: { expression: a_mul_x_plus_b x: spell_damage a: 1 b: [ [ 1 36 ] [ 10 55 ] ] }											
 	}
@@ -518,7 +518,7 @@ ability ice_lance:
 	
 	direct_effect damage:
 	{
-		flags: [ can_be_critical ]
+		flags: [ can_be_critical is_magical ]
 		damage_type: frost
 		function: { expression: a_mul_x_plus_b x: spell_damage a: 1 b: [ [ 1 20 ] [ 10 32 ] ] }													
 	}
@@ -568,7 +568,7 @@ ability frost_explosion:
 
 	direct_effect damage:
 	{
-		flags: [ can_be_critical ]
+		flags: [ can_be_critical is_magical ]
 		damage_type: frost
 		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 15 ] [ 10 30 ] ] }													
 	}

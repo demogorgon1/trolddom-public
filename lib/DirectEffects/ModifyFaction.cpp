@@ -70,16 +70,19 @@ namespace tpublic::DirectEffects
 		IEventQueue*					/*aEventQueue*/,
 		const IWorldView*				/*aWorldView*/) 
 	{				
-		Components::CombatPublic* combatPublic = m_targetSelf ? 
-			aSource->GetComponent<Components::CombatPublic>() : aTarget->GetComponent<Components::CombatPublic>();
+		if(aSource != NULL)
+		{
+			Components::CombatPublic* combatPublic = m_targetSelf ?
+				aSource->GetComponent<Components::CombatPublic>() : aTarget->GetComponent<Components::CombatPublic>();
 
-		uint32_t factionId = m_factionId;
+			uint32_t factionId = m_factionId;
 
-		aCombatResultQueue->AddUpdateCallback([combatPublic, factionId]()
-		{	
-			combatPublic->m_factionId = factionId;
-			combatPublic->SetDirty();
-		});
+			aCombatResultQueue->AddUpdateCallback([combatPublic, factionId]()
+			{
+				combatPublic->m_factionId = factionId;
+				combatPublic->SetDirty();
+			});
+		}
 
 		return Result();
 	}

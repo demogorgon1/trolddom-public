@@ -87,6 +87,9 @@ namespace tpublic::DirectEffects
 		IEventQueue*					aEventQueue,
 		const IWorldView*				/*aWorldView*/) 
 	{
+		if(aSource == NULL)
+			return Result();
+
 		const Components::CombatPrivate* sourceCombatPrivate = aSource->GetComponent<Components::CombatPrivate>();
 		const Components::CombatPrivate* targetCombatPrivate = aTarget->GetComponent<Components::CombatPrivate>();
 		Components::CombatPublic* sourceCombatPublic = aSource->GetComponent<Components::CombatPublic>();

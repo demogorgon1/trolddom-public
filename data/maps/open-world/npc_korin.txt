@@ -1,0 +1,25 @@
+dialogue_screen .korin_vendor: 
+{
+	sell mercenary_contract_barbarian: { quantity: 1 }	
+	sell mercenary_contract_shield_maiden: { quantity: 1 }	
+	sell mercenary_contract_cleric: { quantity: 1 }	
+}
+
+dialogue_root .korin_dialogue:
+{
+	.korin_vendor: { }
+}
+
+entity .korin: !NPC
+{
+	_string: "Korin"
+	_dialogue_root: .korin_dialogue	
+	_sprite: man_23
+	_sprite_dead: man_23_dead	
+	_level: 10
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true
+}
+

@@ -312,7 +312,7 @@ namespace tpublic::Systems
 			{
 				const Components::MinionPrivate::OwnerRequestAbility& ownerRequestAbility = minionPrivate->m_ownerRequestAbility.value();
 
-				if(!isStunned && minionPublic->HasAbility(ownerRequestAbility.m_abilityId) && !minionPrivate->m_castInProgress)
+				if(!isStunned && minionPublic->HasAbility(ownerRequestAbility.m_abilityId) && !minionPrivate->m_castInProgress && !moveOnCooldown)
 				{
 					const Data::Ability* ability = GetManifest()->GetById<Data::Ability>(ownerRequestAbility.m_abilityId);
 					const EntityInstance* ownerRequestAbilityTargetEntityInstance = ownerRequestAbility.m_targetEntityInstanceId != 0 ? aContext->m_worldView->WorldViewSingleEntityInstance(ownerRequestAbility.m_targetEntityInstanceId) : NULL;
@@ -344,9 +344,12 @@ namespace tpublic::Systems
 
 				if (targetCombatPublic != NULL && (targetEntityInstance->GetState() == EntityState::ID_DEFAULT || targetEntityInstance->GetState() == EntityState::ID_IN_COMBAT))
 				{
-					const Data::Faction* faction = GetManifest()->GetById<Data::Faction>(targetCombatPublic->m_factionId);
-					if (!faction->IsFriendly())
-						targetCanBeAttacked = true;
+					if(targetCombatPublic->m_factionId != 0)
+					{
+						const Data::Faction* faction = GetManifest()->GetById<Data::Faction>(targetCombatPublic->m_factionId);
+						if (!faction->IsFriendly())
+							targetCanBeAttacked = true;
+					}
 				}
 
 				switch(activeCommand->m_id)
@@ -510,7 +513,10 @@ namespace tpublic::Systems
 								if (ability->ShouldTriggerMoveCooldown() && isImmobilized)
 									continue;
 
-								if (ability->m_castTime != 0 && moveOnCooldown)
+								if (minionPublic->m_cooldowns.IsAbilityOnCooldown(ability))
+									continue;
+
+								if (!combatPublic->HasResourcesForAbility(ability, NULL, combatPublic->GetResourceMax(Resource::ID_MANA)))
 									continue;
 
 								uint32_t friendlyEntityInstanceId = _PickFriendlyTarget(aContext, aEntityInstanceId, combatPublic, position->m_position, ownerEntityInstance, ability, &minionAbility, (int32_t)ability->m_range * 3);
@@ -565,11 +571,14 @@ namespace tpublic::Systems
 							}
 							else
 							{
-								// Heal
-								useAbility = healAbility;
-								useAbilityOnEntityInstanceId = healTargetEntityInstanceId;
+								if (healAbility->m_castTime == 0 || !moveOnCooldown)
+								{
+									// Heal
+									useAbility = healAbility;
+									useAbilityOnEntityInstanceId = healTargetEntityInstanceId;
 
-								activeCommand->m_serverActive = false;
+									activeCommand->m_serverActive = false;
+								}
 							}
 						}
 					}
@@ -662,6 +671,12 @@ namespace tpublic::Systems
 										continue;
 
 									if (ability->m_castTime != 0 && moveOnCooldown)
+										continue;
+
+									if (minionPublic->m_cooldowns.IsAbilityOnCooldown(ability))
+										continue;
+
+									if (!combatPublic->HasResourcesForAbility(ability, NULL, combatPublic->GetResourceMax(Resource::ID_MANA)))
 										continue;
 
 									uint32_t friendlyEntityInstanceId = _PickFriendlyTarget(aContext, aEntityInstanceId, combatPublic, position->m_position, ownerEntityInstance, ability, &minionAbility, (int32_t)ability->m_range);

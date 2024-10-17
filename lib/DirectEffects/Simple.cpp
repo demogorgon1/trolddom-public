@@ -106,14 +106,18 @@ namespace tpublic::DirectEffects
 			break;
 
 		case SimpleDirectEffect::ID_SET_OWN_STATE:
-			aCombatResultQueue->AddUpdateCallback([aSource, aTick, entityState = (EntityState::Id)m_param]()
+			if(aSource != NULL)
 			{
-				aSource->SetState(entityState, aTick);
-			});
+				aCombatResultQueue->AddUpdateCallback([aSource, aTick, entityState = (EntityState::Id)m_param]()
+				{
+					aSource->SetState(entityState, aTick);
+				});
+			}
 			break;
 
 		case SimpleDirectEffect::ID_MAKE_OFFERING:
-			aEventQueue->EventQueueMakeOffering(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), aItem);
+			if(aSource != NULL)
+				aEventQueue->EventQueueMakeOffering(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), aItem);
 			break;
 
 		default:

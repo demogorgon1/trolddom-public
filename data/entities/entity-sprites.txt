@@ -200,6 +200,9 @@ sprites:
 	sprite barbarian_1: { dead: barbarian_1_dead }
 	sprite shield_maiden_1: { dead: shield_maiden_1_dead }
 	sprite cleric_1: { dead: cleric_1_dead }
+	sprite man_23: { dead: man_23_dead }
+	sprite man_24: { dead: man_24_dead }
+	sprite horse_1: { dead: horse_1_dead }
 	
 	cursor: { position: [ 0 176 ] }
 
@@ -207,6 +210,9 @@ sprites:
 	sprite barbarian_1_dead: { }
 	sprite shield_maiden_1_dead: { }
 	sprite cleric_1_dead: { }
+	sprite man_23_dead: { }
+	sprite man_24_dead: { }
+	sprite horse_1_dead: { }
 	
 }
 

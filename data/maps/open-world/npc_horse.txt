@@ -1,0 +1,12 @@
+entity .horse: !NPC
+{
+	_string: "Horse"
+	_sprite: horse_1
+	_sprite_dead: horse_1_dead	
+	_level: 10
+	_faction: npcs		
+	_creature_type: beast
+	_loot_table: .npc
+	_not_pushable: true
+}
+

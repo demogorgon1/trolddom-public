@@ -78,7 +78,7 @@ ability void_lightning_tick:
 	
 	direct_effect damage:
 	{
-		flags: [ can_be_critical ]
+		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
 		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.25 b: [ [ 1 3 ] [ 10 9 ] ] }									
 	}	
@@ -136,7 +136,7 @@ ability void_lightning:
 	
 	direct_effect damage:
 	{
-		flags: [ can_be_critical ]
+		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
 		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.65 b: [ [ 1 4 ] [ 10 12 ] ] }									
 	}	
@@ -402,7 +402,7 @@ ability arcane_missile:
 		conditional_critical_chance_bonus<improved_arcane_missile_2>: 30
 		conditional_critical_chance_bonus<improved_arcane_missile_3>: 45
 	
-		flags: [ can_be_critical ]
+		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
 		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 10 ] [ 10 14 ] ] }											
 	}

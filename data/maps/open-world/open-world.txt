@@ -476,6 +476,21 @@ map_entity_spawn .zumhorn_1:
 	entity .zumhorn_1: { init_state: default }
 }
 
+map_entity_spawn .korin:
+{
+	entity .korin: { init_state: default }
+}
+
+map_entity_spawn .rogargh:
+{
+	entity .rogargh: { init_state: default }
+}
+
+map_entity_spawn .horse:
+{
+	entity .horse: { init_state: default }
+}
+
 map_player_spawn .player_spawn:
 {
 }
@@ -730,6 +745,9 @@ map_palette .stuff:
 	entity_spawn .zumhorn_2: [ 255 104 102 ]
 	entity_spawn .zumhorn_2_boss: [ 205 104 102 ]
 	entity_spawn .danger_spiders: [ 230 99 106 ]
+	entity_spawn .rogargh: [ 240 94 106 ]
+	entity_spawn .korin: [ 94 240 106 ]
+	entity_spawn .horse: [ 194 240 106 ]
 	
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn dungeon_1_exit: [ 0 0 200 ]	
@@ -801,6 +819,7 @@ map_palette .doodads:
 	doodad broken_pillar: [ 136 130 200 ]
 	doodad wall_banner_mining: [ 243 19 53 ]
 	doodad wall_banner_blacksmithing: [ 243 59 53 ]
+	doodad tent: [ 249 51 53 ]
 }
 
 map_palette .flags:

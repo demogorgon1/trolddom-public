@@ -82,50 +82,53 @@ namespace tpublic
 			IEventQueue*					aEventQueue,
 			const IWorldView*				/*aWorldView*/)
 		{
-			switch(m_destination)
+			if(aSource != NULL)
 			{
-			case DESTINATION_AOE_CENTER:				
+				switch(m_destination)
 				{
-					const Components::Position* sourcePosition = aSource->GetComponent<Components::Position>();
-					Vec2 d = { aAOETarget.m_x - sourcePosition->m_position.m_x, aAOETarget.m_y - sourcePosition->m_position.m_y };
+				case DESTINATION_AOE_CENTER:				
+					{
+						const Components::Position* sourcePosition = aSource->GetComponent<Components::Position>();
+						Vec2 d = { aAOETarget.m_x - sourcePosition->m_position.m_x, aAOETarget.m_y - sourcePosition->m_position.m_y };
 
-					IEventQueue::EventQueueMoveRequest t;
-					t.AddToPriorityList(d);
-					t.m_type = IEventQueue::EventQueueMoveRequest::TYPE_SIMPLE;
-					t.m_entityInstanceId = aSource->GetEntityInstanceId();
-					t.m_setUpdatedOnServerFlag = true;
+						IEventQueue::EventQueueMoveRequest t;
+						t.AddToPriorityList(d);
+						t.m_type = IEventQueue::EventQueueMoveRequest::TYPE_SIMPLE;
+						t.m_entityInstanceId = aSource->GetEntityInstanceId();
+						t.m_setUpdatedOnServerFlag = true;
 
-					if(m_moveFlags & MOVE_FLAG_SET_TELEPORTED)
-						t.m_setTeleportedFlag = true;
+						if(m_moveFlags & MOVE_FLAG_SET_TELEPORTED)
+							t.m_setTeleportedFlag = true;
 
-					aEventQueue->EventQueueMove(t);
+						aEventQueue->EventQueueMove(t);
 
-					// Effect doesn't have a target, but we still want a combat log event
-					Result result;
-					result.m_generateImmediateCombatLogEvent = true;
-					return result;
-				}
-				break;
+						// Effect doesn't have a target, but we still want a combat log event
+						Result result;
+						result.m_generateImmediateCombatLogEvent = true;
+						return result;
+					}
+					break;
 
-			case DESTINATION_TARGET_ADJACENT:
-				{
-					// We can't resolve this here in a good way because target could be moving. Needs to be done sequentially.
-					IEventQueue::EventQueueMoveAdjacentRequest t;
-					t.m_entityInstanceId = aSource->GetEntityInstanceId();
-					t.m_adjacentEntityInstanceId = aTarget->GetEntityInstanceId();
+				case DESTINATION_TARGET_ADJACENT:
+					{
+						// We can't resolve this here in a good way because target could be moving. Needs to be done sequentially.
+						IEventQueue::EventQueueMoveAdjacentRequest t;
+						t.m_entityInstanceId = aSource->GetEntityInstanceId();
+						t.m_adjacentEntityInstanceId = aTarget->GetEntityInstanceId();
 					
-					if(m_moveFlags & MOVE_FLAG_WALKABLE_PATH_REQUIRED)
-						t.m_maxSteps = m_maxSteps;
+						if(m_moveFlags & MOVE_FLAG_WALKABLE_PATH_REQUIRED)
+							t.m_maxSteps = m_maxSteps;
 
-					if(m_triggerAbilitiesOnResolve.has_value())
-						t.m_triggerAbilityOnResolve = &(m_triggerAbilitiesOnResolve.value());
+						if(m_triggerAbilitiesOnResolve.has_value())
+							t.m_triggerAbilityOnResolve = &(m_triggerAbilitiesOnResolve.value());
 
-					aEventQueue->EventQueueMoveAdjacent(t);
+						aEventQueue->EventQueueMoveAdjacent(t);
+					}
+					break;
+
+				default:
+					break;
 				}
-				break;
-
-			default:
-				break;
 			}
 
 			return Result();

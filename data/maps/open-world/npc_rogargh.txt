@@ -1,0 +1,26 @@
+dialogue_screen .rogargh_greetings:
+{
+	text: 
+	[	
+		"I like smashing things with my axe."
+	]			
+}
+
+dialogue_root .rogargh_dialogue:
+{
+	.rogargh_greetings: { }
+}
+
+entity .rogargh: !NPC
+{
+	_string: "Rogargh"
+	_dialogue_root: .rogargh_dialogue	
+	_sprite: man_24
+	_sprite_dead: man_24_dead	
+	_level: 10
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true
+}
+

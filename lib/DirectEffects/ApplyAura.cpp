@@ -91,6 +91,9 @@ namespace tpublic
 		{
 			EntityInstance* target = m_targetSelf ? aSource : aTarget;
 
+			if(target == NULL)
+				return Result();
+
 			std::vector<const EntityInstance*> targetEntities = { target };
 			const Data::Aura* aura = aManifest->GetById<tpublic::Data::Aura>(m_auraId);
 
@@ -115,7 +118,7 @@ namespace tpublic
 				}
 			}
 
-			const Components::PlayerPrivate* playerPrivate = aSource->GetComponent<Components::PlayerPrivate>();
+			const Components::PlayerPrivate* playerPrivate = aSource != NULL ? aSource->GetComponent<Components::PlayerPrivate>() : NULL;
 			const AbilityModifierList* abilityModifierList = playerPrivate != NULL ? playerPrivate->m_abilityModifierList : NULL;
 			int32_t modifyAuraUpdateCount = 0;
 			if (abilityModifierList != NULL)

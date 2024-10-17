@@ -36,6 +36,7 @@ changelog_demo:
 	[
 		{ text: "Improved Dwindle works like intended." }
 		{ text: "Fixed quest item drop from Demon Spawn." }
+		{ text: "Fixed client crash when equipping bind-on-equip item from stash." }
 		{ text: "Various UI fixes." }
 	]
 	

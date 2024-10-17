@@ -110,7 +110,7 @@ ability void_blade_storm:
 
 	direct_effect damage:
 	{
-		flags: [ can_be_critical ]
+		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
 		function: { expression: x x: weapon }										
 	}
@@ -229,7 +229,7 @@ ability wizard_strike:
 	
 	direct_effect damage:
 	{
-		flags: [ can_be_critical ]
+		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
 		function: { expression: x_plus_a x: weapon a: [ [ 1 4 ] [ 10 17 ] ] }											
 	}		

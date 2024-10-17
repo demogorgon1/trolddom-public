@@ -140,7 +140,7 @@ namespace tpublic::DirectEffects
 				}
 			}
 		}
-		else
+		else if(aSource != NULL)
 		{
 			aEventQueue->EventQueueInterrupt(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), 0, 0); 
 		}

@@ -117,6 +117,8 @@ namespace tpublic
 				m_stats.m_stats[Stat::ID_BLOCK_VALUE] += (float)blockValue;
 			}
 		}
+		
+		m_cost = m_itemData->m_cost;
 
 		if (m_cost == 0)
 		{

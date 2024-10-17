@@ -76,7 +76,8 @@ ability dragon_breath_tick:
 	direct_effect damage:
 	{	
 		damage_type: fire		
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.25 b: [ [ 1 4 ] [ 10 8 ] ] }					
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.25 b: [ [ 1 4 ] [ 10 8 ] ] }		
+		flags: [ is_magical ]
 	}		
 }
 

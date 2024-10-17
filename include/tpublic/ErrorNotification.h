@@ -42,6 +42,7 @@ namespace tpublic
 			ID_CANNOT_FIND_PATH,
 			ID_OUT_OF_STOCK,
 			ID_DISMISS_CURRENT_MINION,
+			ID_TOO_MANY_MINIONS,
 
 			NUM_IDS
 		};
@@ -93,7 +94,8 @@ namespace tpublic
 			{ "No other spirit stones discovered!" },
 			{ "Can't find path!" },
 			{ "Out of stock!" },
-			{ "Dismiss current minion!" }
+			{ "Dismiss current minion!" },
+			{ "Too many minions!" }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

@@ -84,7 +84,8 @@ namespace tpublic
 			enum Field
 			{
 				FIELD_MINIONS,
-				FIELD_MINION_CONTROL
+				FIELD_MINION_CONTROL,
+				FIELD_INSTANCE_MINION_LIMIT_REACHED
 			};
 
 			static void
@@ -93,6 +94,7 @@ namespace tpublic
 			{
 				aSchema->DefineCustomObjectsNoSource<Minion>(FIELD_MINIONS, offsetof(PlayerMinions, m_minions));
 				aSchema->DefineCustomObjectsNoSource<MinionControl>(FIELD_MINION_CONTROL, offsetof(PlayerMinions, m_minionControl));
+				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_INSTANCE_MINION_LIMIT_REACHED, NULL, offsetof(PlayerMinions, m_instanceMinionLimitReached))->SetFlags(ComponentSchema::FLAG_NO_STORAGE);
 			}
 
 			void
@@ -100,6 +102,7 @@ namespace tpublic
 			{
 				m_minions.clear();
 				m_minionControl.clear();
+				m_instanceMinionLimitReached = false;
 			}
 
 			bool
@@ -144,6 +147,7 @@ namespace tpublic
 			// Public data
 			std::vector<Minion>			m_minions;
 			std::vector<MinionControl>	m_minionControl;
+			bool						m_instanceMinionLimitReached = false;
 
 			// Internal
 			std::vector<uint32_t>		m_reimburseItemIds;

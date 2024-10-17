@@ -95,24 +95,28 @@ namespace tpublic::DirectEffects
 		const IWorldView*				/*aWorldView*/) 
 	{
 		EntityInstance* target = m_targetSelf ? aSource : aTarget;
-		Components::CombatPublic* combatPublic = target->GetComponent<Components::CombatPublic>();
 
-		size_t resourceIndex;
-		if(combatPublic->GetResourceIndex(m_resourceId, resourceIndex))
+		if(target != NULL && aSource != NULL)
 		{
-			aResourceChangeQueue->AddResourceChange(
-				aId,
-				DirectEffect::INVALID_DAMAGE_TYPE,
-				aAbilityId,
-				aSource->GetEntityId(),
-				aSource->GetEntityInstanceId(),
-				target->GetEntityInstanceId(),
-				combatPublic,
-				NULL,
-				resourceIndex,
-				(int32_t)m_function.EvaluateEntityInstance(aRandom, aSource),
-				0,
-				m_silent);
+			Components::CombatPublic* combatPublic = target->GetComponent<Components::CombatPublic>();
+
+			size_t resourceIndex;
+			if (combatPublic->GetResourceIndex(m_resourceId, resourceIndex))
+			{
+				aResourceChangeQueue->AddResourceChange(
+					aId,
+					DirectEffect::INVALID_DAMAGE_TYPE,
+					aAbilityId,
+					aSource->GetEntityId(),
+					aSource->GetEntityInstanceId(),
+					target->GetEntityInstanceId(),
+					combatPublic,
+					NULL,
+					resourceIndex,
+					(int32_t)m_function.EvaluateEntityInstance(aRandom, aSource),
+					0,
+					m_silent);
+			}
 		}
 
 		return Result();

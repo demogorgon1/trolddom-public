@@ -101,6 +101,9 @@ namespace tpublic::DirectEffects
 		IEventQueue*					aEventQueue,
 		const IWorldView*				/*aWorldView*/) 
 	{					
+		if(aSource == NULL)
+			return Result();
+
 		EntityInstance* spawnedEntity = aEventQueue->EventQueueSpawnEntity(m_entityId, m_initState, m_mapEntitySpawnId, false);
 
 		if(m_mapEntitySpawnId == 0)

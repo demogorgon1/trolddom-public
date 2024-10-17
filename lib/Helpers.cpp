@@ -273,6 +273,9 @@ namespace tpublic::Helpers
 	IsPlayerOrMinion(
 		const EntityInstance*		aEntityInstance)
 	{
+		if(aEntityInstance == NULL)
+			return false;
+
 		if (aEntityInstance->IsPlayer())
 			return true;
 

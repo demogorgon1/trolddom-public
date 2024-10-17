@@ -84,7 +84,7 @@ namespace tpublic
 		{
 			if(m_consumeSourceItemId != 0 || m_produceSourceItemId != 0)
 			{
-				Components::Inventory* inventory = aSource->GetComponent<Components::Inventory>();
+				Components::Inventory* inventory = aSource != NULL ? aSource->GetComponent<Components::Inventory>() : NULL;
 				if(inventory != NULL)
 				{		
 					ItemList itemList = inventory->m_itemList;

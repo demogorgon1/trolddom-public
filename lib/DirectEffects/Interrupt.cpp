@@ -73,7 +73,7 @@ namespace tpublic::DirectEffects
 				for (uint32_t cooldownId : ability->m_cooldowns)
 				{
 					const Data::Cooldown* cooldown = aManifest->GetById<Data::Cooldown>(cooldownId);
-					if (cooldown->m_trigger == Data::Cooldown::TRIGGER_INTERRUPT)
+					if (cooldown->m_trigger == Data::Cooldown::TRIGGER_INTERRUPT && aSource != NULL)
 						aEventQueue->EventQueueInterrupt(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), cooldownId, m_lockoutTicks);
 				}
 			}
