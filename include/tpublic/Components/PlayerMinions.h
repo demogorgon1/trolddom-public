@@ -140,7 +140,9 @@ namespace tpublic
 					if(minionControl.m_entityId == aEntityId)
 						return &minionControl;
 				}
-				m_minionControl.push_back({ aEntityId });
+				MinionControl t;
+				t.m_entityId = aEntityId;
+				m_minionControl.push_back(t);
 				return &m_minionControl[m_minionControl.size() - 1];
 			}
 
