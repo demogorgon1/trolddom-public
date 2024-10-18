@@ -447,6 +447,7 @@ namespace tpublic::Systems
 											moveRequest))
 										{
 											moveRequest.m_entityInstanceId = aEntityInstanceId;
+											moveRequest.m_emptySpacePrio = true;
 
 											aContext->m_eventQueue->EventQueueMove(moveRequest);
 
@@ -489,6 +490,7 @@ namespace tpublic::Systems
 									moveRequest))
 								{
 									moveRequest.m_entityInstanceId = aEntityInstanceId;
+									moveRequest.m_emptySpacePrio = true;
 
 									aContext->m_eventQueue->EventQueueMove(moveRequest);
 
@@ -562,6 +564,7 @@ namespace tpublic::Systems
 										moveRequest))
 									{
 										moveRequest.m_entityInstanceId = aEntityInstanceId;
+										moveRequest.m_emptySpacePrio = true;
 
 										aContext->m_eventQueue->EventQueueMove(moveRequest);
 
@@ -709,6 +712,7 @@ namespace tpublic::Systems
 							ownerDistanceSquared > (int32_t)(minionMode->m_followDistance * minionMode->m_followDistance) && ownerPosition->m_position != minionPrivate->m_ownerPositionAtLastMoveCommand)
 						{
 							wantsToMove = true;
+							moveOutOfTheWay = false;
 
 							minionPrivate->m_ownerPositionAtLastMoveCommand = Vec2();
 
@@ -731,6 +735,7 @@ namespace tpublic::Systems
 									moveRequest))
 								{
 									moveRequest.m_entityInstanceId = aEntityInstanceId;
+									moveRequest.m_emptySpacePrio = true;
 
 									aContext->m_eventQueue->EventQueueMove(moveRequest);
 
@@ -769,6 +774,7 @@ namespace tpublic::Systems
 					moveRequest.AddToPriorityList({ 0, 1 });
 					moveRequest.ShufflePriorityList(*aContext->m_random);
 					moveRequest.m_entityInstanceId = aEntityInstanceId;
+					moveRequest.m_emptySpacePrio = true;
 					aContext->m_eventQueue->EventQueueMove(moveRequest);
 
 					minionPrivate->m_moveCooldownUntilTick = aContext->m_tick + 2;

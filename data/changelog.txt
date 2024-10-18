@@ -39,6 +39,7 @@ changelog_demo:
 		{ text: "Fixed quest item drop from Demon Spawn." }
 		{ text: "Fixed client crash when equipping bind-on-equip item from stash." }
 		{ text: "Various UI fixes." }
+		{ text: "Heavy Linen Bandage now works like intended (Fixed by SirPrimrose)." }
 	]
 	
 	#######################################################################################

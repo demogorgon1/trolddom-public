@@ -94,7 +94,7 @@ namespace tpublic
 			break;
 
 		case MODE_COMPLEX:
-			// If position and destination are within same area we'll request explicit pathfinding. 
+			// If position and destination are within same area we'll request explicit pathfinding. Also if close to target.
 			// If not in the same area, we'll used the precomputed path data.
 			{
 				uint32_t currentAreaId = aMapPathData->GetAreaIdByPosition(aPosition);
@@ -111,15 +111,18 @@ namespace tpublic
 					destinationAreaId = m_destinationAreaId;
 				}
 
-				if(currentAreaId != UINT32_MAX && destinationAreaId != UINT32_MAX)
+				if(currentAreaId != UINT32_MAX && (destinationAreaId != UINT32_MAX || m_storedDestination.has_value()))
 				{
-					if(currentAreaId == destinationAreaId)
+					int32_t closeDistance = 4;
+					int32_t distanceSquared = aDestination.DistanceSquared(aPosition);
+
+					if(currentAreaId == destinationAreaId || distanceSquared <= closeDistance * closeDistance)
 					{
 						aOut.AddToPriorityList(aDestination - aPosition);
 						aOut.m_type = IEventQueue::EventQueueMoveRequest::TYPE_FIND_PATH;
 						return true;
 					}
-					else
+					else if(destinationAreaId != UINT32_MAX)
 					{
 						if(m_currentAreaId != currentAreaId)
 						{

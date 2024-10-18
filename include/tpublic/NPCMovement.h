@@ -9,7 +9,7 @@ namespace tpublic
 
 	class NPCMovement
 	{
-	public:	
+	public:			
 		void	SetDirectOnly(
 					bool								aDirectOnly);
 		bool	GetMoveRequest(						
