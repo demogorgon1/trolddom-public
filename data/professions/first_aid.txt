@@ -21,8 +21,8 @@ aura recently_bandaged:
 	string: @_string
 	icon: @_icon
 	states: [ default in_combat ]
-	flags: [ always_in_range always_in_line_of_sight ]	
-	direct_effect heal: { function: @_heal_tick }	
+	flags: [ always_in_range always_in_line_of_sight ]
+	direct_effect heal: { function: @_heal_tick }
 }
 
 !define local AURA_BANDAGE
@@ -32,23 +32,23 @@ aura recently_bandaged:
 	type: buff
 	flags: [ channeled ]
 	duration: 50
-	aura_effect repeat: 
-	{ 
+	aura_effect repeat:
+	{
 		update_interval: 10
 		update_count: 5
 		ability: @_ability_tick
 	}
 }
 
-!define local ABILITY_BANDAGE	
+!define local ABILITY_BANDAGE
 {
 	string: @_string
 	description: @_description
 	cooldowns: [ global ]
 	flags: [ target_other target_self target_friendly item ]
 	icon: @_icon
-	consume_items: { consumable_linen_bandage: 1 }
-	states: [ default in_combat ]	
+	consume_items: @_item
+	states: [ default in_combat ]
 	direct_effect apply_aura: { aura: @_aura }
 	direct_effect apply_aura: { aura: recently_bandaged }
 	requirement target<must_not_have_aura>: { id: recently_bandaged }
@@ -56,11 +56,11 @@ aura recently_bandaged:
 
 !define local ITEM_BANDAGE
 {
-	item_level: @_level 
+	item_level: @_level
 	required_level: @_level
 	icon: @_icon
 	string: @_string
-	stack: 20	
+	stack: 20
 	use_ability: @_ability
 }
 
@@ -70,28 +70,28 @@ aura recently_bandaged:
 	description: @_craft_description
 	icon: @_icon
 	cast_time: 20
-	flags: [ crafting ]	
+	flags: [ crafting ]
 	states: [ default in_combat ]
 	consume_items: @_materials
 	produce_items: @_item
-	required_profession<@_skill>: first_aid 
+	required_profession<@_skill>: first_aid
 }
 
 #####################################################
 # Linen Bandage
-${ 
-	_string: "Linen Bandage" 
+${
+	_string: "Linen Bandage"
 	_description: "Restores 50 health over 5 seconds."
 	_craft_description: "Craft a Linen Bandage."
 	_level: 1
-	_icon: icon_linen_bandage 
+	_icon: icon_linen_bandage
 	_heal_tick: 10
 	_ability_tick: consumable_linen_bandage_tick
 	_ability: consumable_linen_bandage
 	_aura: consumable_linen_bandage
-	_materials: { item_linen_cloth: 1 } 
-	_item: { consumable_linen_bandage: 1 } 
-	_skill: 0	
+	_materials: { item_linen_cloth: 1 }
+	_item: { consumable_linen_bandage: 1 }
+	_skill: 0
 }
 
 ability consumable_linen_bandage_tick: !ABILITY_BANDAGE_TICK {}
@@ -102,18 +102,18 @@ ability craft_linen_bandage: !ABILITY_CRAFT_BANDAGE {}
 
 #####################################################
 # Heavy Linen Bandage
-${ 
-	_string: "Heavy Linen Bandage" 
+${
+	_string: "Heavy Linen Bandage"
 	_description: "Restores 70 health over 5 seconds."
 	_craft_description: "Craft a Heavy Linen Bandage."
 	_level: 4
-	_icon: icon_heavy_linen_bandage 
+	_icon: icon_heavy_linen_bandage
 	_heal_tick: 14
 	_ability_tick: consumable_heavy_linen_bandage_tick
 	_ability: consumable_heavy_linen_bandage
 	_aura: consumable_heavy_linen_bandage
-	_materials: { item_linen_cloth: 2 } 
-	_item: { consumable_heavy_linen_bandage: 1 } 
+	_materials: { item_linen_cloth: 2 }
+	_item: { consumable_heavy_linen_bandage: 1 }
 	_skill: 20
 }
 
