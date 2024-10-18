@@ -326,8 +326,11 @@ namespace tpublic::Systems
 						{
 							if (combatPublic->HasResourcesForAbility(ability, NULL, combatPublic->GetResourceMax(Resource::ID_MANA)))
 							{
-								useAbility = ability;
-								useAbilityOnEntityInstanceId = ownerRequestAbility.m_targetEntityInstanceId;
+								if(aContext->m_worldView->WorldViewLineOfSight(ownerRequestAbilityTargetPosition->m_position, position->m_position))
+								{
+									useAbility = ability;
+									useAbilityOnEntityInstanceId = ownerRequestAbility.m_targetEntityInstanceId;
+								}
 							}
 						}
 					}
@@ -408,6 +411,9 @@ namespace tpublic::Systems
 											continue;
 
 										if (!combatPublic->HasResourcesForAbility(ability, NULL, combatPublic->GetResourceMax(Resource::ID_MANA)))
+											continue;
+
+										if (!aContext->m_worldView->WorldViewLineOfSight(targetPosition->m_position, position->m_position))
 											continue;
 
 										if (ability->TargetAOEHostile() || ability->IsOffensive())
