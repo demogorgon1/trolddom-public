@@ -2,6 +2,7 @@
 
 #include <tpublic/Components/Auras.h>
 #include <tpublic/Components/CombatPublic.h>
+#include <tpublic/Components/Position.h>
 #include <tpublic/Components/VisibleAuras.h>
 
 #include <tpublic/Systems/Combat.h>
@@ -21,6 +22,7 @@ namespace tpublic::Systems
 	{
 		RequireComponent<Components::Auras>();
 		RequireComponent<Components::CombatPublic>();
+		RequireComponent<Components::Position>();
 		RequireComponent<Components::VisibleAuras>();
 	}
 	
@@ -41,8 +43,33 @@ namespace tpublic::Systems
 		Context*			aContext) 
 	{
 		{
-			Components::Auras* auras = GetComponent<Components::Auras>(aComponents);
 			Components::CombatPublic* combatPublic = GetComponent<Components::CombatPublic>(aComponents);
+			if(combatPublic->m_castInProgress && combatPublic->m_castInProgress->m_targetEntityInstanceId != 0 && combatPublic->m_castInProgress->m_targetEntityInstanceId != aEntityInstanceId)
+			{
+				const Components::Position* position = GetComponent<Components::Position>(aComponents);
+				const EntityInstance* targetEntityInstance = aContext->m_worldView->WorldViewSingleEntityInstance(combatPublic->m_castInProgress->m_targetEntityInstanceId);
+				const Components::Position* targetPosition = targetEntityInstance != NULL ? targetEntityInstance->GetComponent<Components::Position>() : NULL;
+				const Data::Ability* ability = GetManifest()->GetById<Data::Ability>(combatPublic->m_castInProgress->m_abilityId);
+
+				if(targetPosition != NULL)
+				{
+					bool shouldStopCasting = false;
+
+					// Out of range?
+					int32_t distanceSquared = targetPosition->m_position.DistanceSquared(position->m_position);
+					if(distanceSquared > (int32_t)(ability->m_range * ability->m_range))
+						shouldStopCasting = true;
+
+					// No line of sight?
+					if(!shouldStopCasting && !aContext->m_worldView->WorldViewLineOfSight(position->m_position, targetPosition->m_position))
+						shouldStopCasting = true;
+
+					if(shouldStopCasting)
+						aContext->m_eventQueue->EventQueueInterrupt(aEntityInstanceId, aEntityInstanceId, 0, 0);
+				}
+			}
+
+			Components::Auras* auras = GetComponent<Components::Auras>(aComponents);
 
 			for(size_t i = 0; i < auras->m_entries.size(); i++)
 			{
