@@ -7,6 +7,7 @@ profession first_aid<secondary>:
 aura recently_bandaged:
 {
 	string: "Recently Bandaged"
+	description: "Cannot be bandaged."
 	icon: icon_recently_bandaged
 	type: debuff
 	flags: [ unique ]
