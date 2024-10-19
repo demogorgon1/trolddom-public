@@ -4,9 +4,9 @@
 sprites:
 {
 	source: "icons.png"
-	
+
 	make_alt_greyscale: true
-	
+
 	cursor: { position: [ 0 0 ] }
 	size: { width: 16 height: 16 }
 
@@ -26,7 +26,7 @@ sprites:
 	sprite icon_gold_multi : { }
 	sprite icon_throw_rock : { }
 	sprite icon_firebolt : { }
-	
+
 	cursor: { position: [ 0 16 ] }
 
 	sprite icon_impact_1 : { }
@@ -43,13 +43,13 @@ sprites:
 	sprite icon_star_2 : { }
 	sprite icon_small_red_potion : { tags: [ icon potion ] }
 	sprite icon_small_blue_potion : { tags: [ icon potion ] }
-	sprite icon_mail_shirt_1 : { tags: [ icon armor_mail armor_plate chest ] icon_meta_data: !ICON_ANY{} } 
+	sprite icon_mail_shirt_1 : { tags: [ icon armor_mail armor_plate chest ] icon_meta_data: !ICON_ANY{} }
 	sprite icon_mail_boots_1 : { tags: [ icon armor_mail armor_plate feet ] icon_meta_data: !ICON_ANY{} }
 
 	cursor: { position: [ 0 32 ] }
 
-	sprite icon_mail_gloves_1 : { tags: [ icon armor_mail hands ] icon_meta_data: !ICON_ANY{} } 
-	sprite icon_knife_1 : { tags: [ icon weapon_1h_sword weapon_1h_knife ] icon_meta_data: !ICON_ANY{} } 
+	sprite icon_mail_gloves_1 : { tags: [ icon armor_mail hands ] icon_meta_data: !ICON_ANY{} }
+	sprite icon_knife_1 : { tags: [ icon weapon_1h_sword weapon_1h_knife ] icon_meta_data: !ICON_ANY{} }
 	sprite icon_sword_2 : { tags: [ icon weapon_1h_sword weapon_1h_knife weapon_2h_sword ] icon_meta_data: !ICON_ANY{} }
 	sprite icon_sword_3 : { tags: [ icon weapon_1h_sword weapon_1h_knife weapon_2h_sword ] icon_meta_data: !ICON_ANY{} }
 	sprite icon_axe_1 : { tags: [ icon weapon_1h_axe weapon_2h_axe ] icon_meta_data: !ICON_ANY{} }
@@ -66,7 +66,7 @@ sprites:
 	sprite icon_necklace_2 : { tags: [ icon neck ] icon_meta_data: !ICON_ANY{} }
 
 	cursor: { position: [ 0 48 ] }
-	
+
 	sprite icon_pants_1 : { tags: [ icon armor_cloth legs ] icon_meta_data: !ICON_UNCOMMON_5{} }
 	sprite icon_pants_2 : { tags: [ icon armor_cloth legs ] icon_meta_data: !ICON_ANY{} }
 	sprite icon_wizard_hat_1 : { tags: [ icon armor_cloth head ] icon_meta_data: !ICON_UNCOMMON_5{} }
@@ -101,10 +101,10 @@ sprites:
 	sprite icon_green_bottle : { }
 	sprite icon_uncommon_item : { }
 	sprite icon_rare_item : { }
-	
-	cursor: { position: [ 0 80 ] }	
+
+	cursor: { position: [ 0 80 ] }
 	sprite icon_epic_item : { }
-	sprite icon_exclamation_mark : { }	
+	sprite icon_exclamation_mark : { }
 	sprite icon_gloves_1 : { tags: [ icon armor_cloth armor_mail hands ] icon_meta_data: !ICON_ANY{} }
 	sprite icon_belt_1 : { tags: [ icon armor_cloth armor_mail waist ] icon_meta_data: !ICON_ANY{} }
 	sprite icon_gloves_2 : { tags: [ icon armor_plate armor_mail hands ] icon_meta_data: !ICON_ANY{} }
@@ -119,8 +119,8 @@ sprites:
 	sprite icon_holy : { }
 	sprite icon_bracers_1 : { tags: [ icon armor_mail armor_plate armor_cloth wrists ] icon_meta_data: !ICON_UNCOMMON_5{} }
 	sprite icon_bracers_2 : { tags: [ icon armor_mail armor_plate armor_cloth wrists ] icon_meta_data: !ICON_ANY{} }
-	
-	cursor: { position: [ 0 96 ] }	
+
+	cursor: { position: [ 0 96 ] }
 	sprite icon_head_1 : { tags: [ icon armor_mail armor_plate head ] icon_meta_data: !ICON_ANY{} }
 	sprite icon_head_2 : { tags: [ icon armor_mail armor_plate head ] icon_meta_data: !ICON_ANY{} }
 	sprite icon_head_3 : { tags: [ icon armor_mail armor_plate head ] icon_meta_data: !ICON_ANY{} }
@@ -138,7 +138,7 @@ sprites:
 	sprite icon_blue_orb : { tags: [ icon ] }
 	sprite icon_red_orb : { tags: [ icon ] }
 
-	cursor: { position: [ 0 112 ] }	
+	cursor: { position: [ 0 112 ] }
 	sprite icon_blue_shard : { tags: [ icon ] }
 	sprite icon_red_shard : { tags: [ icon ] }
 	sprite icon_gold_totem : { tags: [ icon ] }
@@ -147,7 +147,7 @@ sprites:
 	sprite icon_parry : { tags: [ icon ] }
 	sprite icon_block : { tags: [ icon ] }
 	sprite icon_charge : { tags: [ icon ] }
-	sprite icon_rage : { tags: [ icon ] }	
+	sprite icon_rage : { tags: [ icon ] }
 	sprite icon_crit : { tags: [ icon ] }
 	sprite icon_hamstring : { tags: [ icon ] }
 	sprite icon_kick : { tags: [ icon ] }
@@ -155,8 +155,8 @@ sprites:
 	sprite icon_mortal_strike : { tags: [ icon ] }
 	sprite icon_bypass : { tags: [ icon ] }
 	sprite icon_agility : { tags: [ icon ] }
-	
-	cursor: { position: [ 0 128 ] }	
+
+	cursor: { position: [ 0 128 ] }
 	sprite icon_envenom : { tags: [ icon ] }
 	sprite icon_taunt : { tags: [ icon ] }
 	sprite icon_bash : { tags: [ icon ] }
@@ -172,9 +172,9 @@ sprites:
 	sprite icon_spirit : { tags: [ icon ] }
 	sprite icon_greater_heal : { tags: [ icon ] }
 	sprite icon_conduit : { tags: [ icon ] }
-	sprite icon_sanctuary : { tags: [ icon ] }		
-	
-	cursor: { position: [ 0 144 ] }	
+	sprite icon_sanctuary : { tags: [ icon ] }
+
+	cursor: { position: [ 0 144 ] }
 	sprite icon_shine : { tags: [ icon ] }
 	sprite icon_favor : { tags: [ icon ] }
 	sprite icon_resurrection : { tags: [ icon ] }
@@ -191,8 +191,8 @@ sprites:
 	sprite icon_dragon_punch : { tags: [ icon ] }
 	sprite icon_fury : { tags: [ icon ] }
 	sprite icon_dragon_breath : { tags: [ icon ] }
-	
-	cursor: { position: [ 0 160 ] }	
+
+	cursor: { position: [ 0 160 ] }
 	sprite icon_elemental : { tags: [ icon ] }
 	sprite icon_arcane : { tags: [ icon ] }
 	sprite icon_battle_mage : { tags: [ icon ] }
@@ -209,32 +209,32 @@ sprites:
 	sprite icon_mage_shield : { tags: [ icon ] }
 	sprite icon_wizard_strike : { tags: [ icon ] }
 	sprite icon_sunshine : { tags: [ icon ] }
-	
-	cursor: { position: [ 0 176 ] }		
+
+	cursor: { position: [ 0 176 ] }
 	sprite icon_insight : { tags: [ icon ] }
 	sprite icon_counterspell : { tags: [ icon ] }
 	sprite icon_improved_teleport : { tags: [ icon ] }
 	sprite icon_charging_combat : { tags: [ icon ] }
 	sprite icon_mage_swiftness : { tags: [ icon ] }
-	sprite icon_void_blade_storm : { tags: [ icon ] }	
+	sprite icon_void_blade_storm : { tags: [ icon ] }
 	sprite icon_sword_4 : { tags: [ icon weapon_1h_sword weapon_1h_knife weapon_2h_sword ] icon_meta_data: !ICON_UNCOMMON_5{} }
-	sprite icon_shirt_1 : { tags: [ icon armor_cloth armor_mail armor_plate chest ] icon_meta_data: !ICON_ANY{} } 
-	sprite icon_boots_1 : { tags: [ icon armor_cloth armor_mail armor_plate feet ] icon_meta_data: !ICON_ANY{} } 
+	sprite icon_shirt_1 : { tags: [ icon armor_cloth armor_mail armor_plate chest ] icon_meta_data: !ICON_ANY{} }
+	sprite icon_boots_1 : { tags: [ icon armor_cloth armor_mail armor_plate feet ] icon_meta_data: !ICON_ANY{} }
 	sprite icon_shield_2 : { tags: [ icon shield ] icon_meta_data: !ICON_ANY{} }
 	sprite icon_shield_3 : { tags: [ icon shield ] icon_meta_data: !ICON_UNCOMMON_5{} }
-	sprite icon_gloves_3 : { tags: [ icon armor_cloth armor_mail armor_plate hands ] icon_meta_data: !ICON_UNCOMMON_5{} } 
+	sprite icon_gloves_3 : { tags: [ icon armor_cloth armor_mail armor_plate hands ] icon_meta_data: !ICON_UNCOMMON_5{} }
 	sprite icon_axe_2 : { tags: [ icon weapon_1h_axe weapon_2h_axe ] icon_meta_data: !ICON_ANY{} }
 	sprite icon_brown_bag_2 : { tags: [ icon bag ] }
 	sprite icon_blue_bag_1 : { tags: [ icon bag ] }
 	sprite icon_sword_5 : { tags: [ icon weapon_1h_sword weapon_2h_sword ] icon_meta_data: !ICON_UNCOMMON_5{} }
 
-	cursor: { position: [ 0 192 ] }		
+	cursor: { position: [ 0 192 ] }
 	sprite icon_knife_2 : { tags: [ icon weapon_1h_knife ] icon_meta_data: !ICON_ANY{} }
 	sprite icon_mace_1 : { tags: [ icon weapon_1h_mace weapon_2h_mace ] icon_meta_data: !ICON_ANY{} }
 	sprite icon_mace_2 : { tags: [ icon weapon_1h_mace weapon_2h_mace ] icon_meta_data: !ICON_ANY{} }
 	sprite icon_mace_3 : { tags: [ icon weapon_1h_mace weapon_2h_mace ] icon_meta_data: !ICON_UNCOMMON_5{} }
-	sprite icon_plate_chest_1 : { tags: [ icon armor_plate chest ] icon_meta_data: !ICON_UNCOMMON_5{} } 
-	sprite icon_crown_1 : { tags: [ icon armor_plate armor_mail armor_cloth head ] icon_meta_data: !ICON_UNCOMMON_5{} } 
+	sprite icon_plate_chest_1 : { tags: [ icon armor_plate chest ] icon_meta_data: !ICON_UNCOMMON_5{} }
+	sprite icon_crown_1 : { tags: [ icon armor_plate armor_mail armor_cloth head ] icon_meta_data: !ICON_UNCOMMON_5{} }
 	sprite icon_herbs_1 : { tags: [ icon life ] }
 	sprite icon_flower_1 : { tags: [ icon life ] }
 	sprite icon_herbs_2 : { tags: [ icon life ] }
@@ -246,28 +246,28 @@ sprites:
 	sprite icon_cooking : { tags: [ icon ] }
 	sprite icon_alchemy : { tags: [ icon ] }
 
-	cursor: { position: [ 0 208 ] }		
+	cursor: { position: [ 0 208 ] }
 	sprite icon_white_powder : { tags: [ icon ] }
 	sprite icon_spice_container : { tags: [ icon ] }
 	sprite icon_anvil : { tags: [ icon ] }
 	sprite icon_mace_4 : { tags: [ icon weapon_1h_mace ] }
 	sprite icon_copper_ingot : { tags: [ icon ] }
 	sprite icon_iron_ingot : { tags: [ icon ] }
-	sprite icon_mail_shirt_2 : { tags: [ icon armor_mail armor_plate chest ] icon_meta_data: !ICON_ANY{} } 
-	sprite icon_mail_bracers_2 : { tags: [ icon armor_mail armor_plate wrists ] icon_meta_data: !ICON_ANY{} } 
-	sprite icon_mail_boots_2 : { tags: [ icon armor_mail armor_plate feet ] icon_meta_data: !ICON_ANY{} } 
-	sprite icon_mail_gloves_2 : { tags: [ icon armor_mail armor_plate hands ] icon_meta_data: !ICON_ANY{} } 
-	sprite icon_mail_belt_2 : { tags: [ icon armor_mail armor_plate waist ] icon_meta_data: !ICON_ANY{} } 
-	sprite icon_mail_pants_2 : { tags: [ icon armor_mail armor_plate legs ] icon_meta_data: !ICON_ANY{} } 
+	sprite icon_mail_shirt_2 : { tags: [ icon armor_mail armor_plate chest ] icon_meta_data: !ICON_ANY{} }
+	sprite icon_mail_bracers_2 : { tags: [ icon armor_mail armor_plate wrists ] icon_meta_data: !ICON_ANY{} }
+	sprite icon_mail_boots_2 : { tags: [ icon armor_mail armor_plate feet ] icon_meta_data: !ICON_ANY{} }
+	sprite icon_mail_gloves_2 : { tags: [ icon armor_mail armor_plate hands ] icon_meta_data: !ICON_ANY{} }
+	sprite icon_mail_belt_2 : { tags: [ icon armor_mail armor_plate waist ] icon_meta_data: !ICON_ANY{} }
+	sprite icon_mail_pants_2 : { tags: [ icon armor_mail armor_plate legs ] icon_meta_data: !ICON_ANY{} }
 	sprite icon_gemstone_1 : { tags: [ icon ] }
 	sprite icon_gemstone_2 : { tags: [ icon ] }
 	sprite icon_gemstone_3 : { tags: [ icon ] }
 	sprite icon_gemstone_4 : { tags: [ icon ] }
-	
-	cursor: { position: [ 0 224 ] }		
+
+	cursor: { position: [ 0 224 ] }
 	sprite icon_sword_6 : { tags: [ icon weapon_1h_sword weapon_1h_knife weapon_2h_sword ] icon_meta_data: !ICON_UNCOMMON_5{} }
 	sprite icon_jug : { tags: [ icon ] }
-	sprite icon_tag : { tags: [ icon ] }	
+	sprite icon_tag : { tags: [ icon ] }
 	sprite icon_claw_2 : { tags: [ icon ] }
 	sprite icon_potatoes : { tags: [ icon ] }
 	sprite icon_box : { tags: [ icon ] }
@@ -281,8 +281,8 @@ sprites:
 	sprite icon_ear_2 : { tags: [ icon ] }
 	sprite icon_key_1 : { tags: [ icon ] }
 	sprite icon_neck_garlic : { tags: [ icon ] }
-	
-	cursor: { position: [ 0 240 ] }		
+
+	cursor: { position: [ 0 240 ] }
 	sprite icon_recall : { tags: [ icon ] }
 	sprite icon_bow_1 : { tags: [ icon ranged_bow ] }
 	sprite icon_bow_2 : { tags: [ icon ranged_bow ] }
@@ -300,7 +300,7 @@ sprites:
 	sprite icon_sword_9 : { tags: [ icon ] }
 	sprite icon_shield_4 : { tags: [ icon ] }
 
-	cursor: { position: [ 0 256 ] }		
+	cursor: { position: [ 0 256 ] }
 	sprite icon_plate_helmet_1 : { tags: [ icon ] }
 	sprite icon_plate_chest_2 : { tags: [ icon ] }
 	sprite icon_plate_legs_1 : { tags: [ icon ] }
@@ -318,7 +318,7 @@ sprites:
 	sprite icon_cloth_belt_1 : { tags: [ icon ] }
 	sprite icon_cloth_hands_1 : { tags: [ icon ] }
 
-	cursor: { position: [ 0 272 ] }		
+	cursor: { position: [ 0 272 ] }
 	sprite icon_mail_head_1 : { tags: [ icon ] }
 	sprite icon_mail_shirt_3 : { tags: [ icon ] }
 	sprite icon_mail_legs_1 : { tags: [ icon ] }
@@ -335,8 +335,8 @@ sprites:
 	sprite icon_knife_3 : { tags: [ icon ]}
 	sprite icon_boiled_potato : { tags: [ icon ] }
 	sprite icon_small_purple_potion : { tags: [ icon potion ] }
-	
-	cursor: { position: [ 0 288 ] }		
+
+	cursor: { position: [ 0 288 ] }
 	sprite icon_small_cyan_potion : { tags: [ icon potion ] }
 	sprite icon_red_potion : { tags: [ icon potion ] }
 	sprite icon_blue_potion : { tags: [ icon potion ] }
@@ -353,8 +353,8 @@ sprites:
 	sprite icon_pants_3 : { tags: [ icon armor_cloth legs ] icon_meta_data: !ICON_UNCOMMON_5{} }
 	sprite icon_slippers_1 : { tags: [ icon armor_cloth feet ] icon_meta_data: !ICON_UNCOMMON_5{} }
 	sprite icon_slippers_2 : { tags: [ icon armor_cloth feet ] icon_meta_data: !ICON_UNCOMMON_5{} }
-	
-	cursor: { position: [ 0 304 ] }		
+
+	cursor: { position: [ 0 304 ] }
 	sprite icon_cloth_belt_2 : { tags: [ icon armor_cloth waist ] icon_meta_data: !ICON_UNCOMMON_5{} }
 	sprite icon_cloth_belt_3 : { tags: [ icon armor_cloth waist ] icon_meta_data: !ICON_UNCOMMON_5{} }
 	sprite icon_fish_1 : { tags: [ icon ] }
@@ -372,7 +372,7 @@ sprites:
 	sprite icon_boots_2 : { tags: [ icon armor_mail armor_plate feet ] icon_meta_data: !ICON_UNCOMMON_5{} }
 	sprite icon_shoulders_2 : { tags: [ icon armor_cloth armor_mail armor_plate shoulders ] icon_meta_data: !ICON_UNCOMMON_5{} }
 
-	cursor: { position: [ 0 320 ] }		
+	cursor: { position: [ 0 320 ] }
 	sprite icon_shoulders_3 : { tags: [ icon armor_cloth armor_mail armor_plate shoulders ] icon_meta_data: !ICON_UNCOMMON_5{} }
 	sprite icon_bracers_3 : { tags: [ icon armor_cloth armor_mail armor_plate wrists ] icon_meta_data: !ICON_UNCOMMON_5{} }
 	sprite icon_robe_1 : { tags: [ icon armor_cloth chest ] icon_meta_data: !ICON_UNCOMMON_5{} }
@@ -390,7 +390,7 @@ sprites:
 	sprite icon_star_3 : { tags: [ icon ] }
 	sprite icon_staff_6 : { tags: [ icon weapon_2h_staff ] icon_meta_data: !ICON_UNCOMMON_5{} }
 
-	cursor: { position: [ 0 336 ] }		
+	cursor: { position: [ 0 336 ] }
 	sprite icon_ring_8 : { tags: [ icon finger ] icon_meta_data: !ICON_UNCOMMON_5{} }
 	sprite icon_blood : { tags: [ icon ] }
 	sprite icon_defensive : { tags: [ icon ] }
@@ -402,7 +402,9 @@ sprites:
 	sprite icon_shield_bash : { tags: [ icon ] }
 	sprite icon_scroll_2 : { tags: [ icon ] }
 	sprite icon_scroll_3 : { tags: [ icon ] }
-	
+	sprite icon_small_blue_fish_cooked : { tags: [ icon ] }
+	sprite icon_fish_1_cooked : { tags: [ icon ] }
+	sprite icon_eel_1_cooked : { tags: [ icon ] }
+	sprite icon_fish_2_cooked : { tags: [ icon ] }
+
 }
-
-
