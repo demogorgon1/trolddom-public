@@ -6,18 +6,18 @@ cooldown npc_attack:
 ability npc_attack:
 {
 	string: "Attack"
-	range: 1	
+	range: 1
 	cooldowns: [ global npc_attack ]
 	flags: [ melee attack offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
 	states: [ in_combat ]
 	icon: icon_strike
 	delay: 3
-	
+
 	direct_effect damage:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: x x: weapon }													
+		function: { expression: x x: weapon }
 	}
 }
 
@@ -29,18 +29,18 @@ cooldown npc_strike:
 ability npc_strike:
 {
 	string: "Strike"
-	range: 1	
+	range: 1
 	cooldowns: [ global npc_strike ]
 	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
 	states: [ in_combat ]
 	icon: icon_strike
 	delay: 3
-	
+
 	direct_effect damage:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: x_plus_a x: weapon a: [ [ 1 5 ] [ 10 20 ] ] }													
+		function: { expression: x_plus_a x: weapon a: [ [ 1 5 ] [ 10 20 ] ] }
 	}
 }
 
@@ -51,7 +51,7 @@ particle_system npc_firebolt:
 		sprites: [ effect_firebolt_b ]
 		flags: [ attached no_rotation face_target ]
 		scale: 0.4
-		count: 1	
+		count: 1
 	}
 }
 
@@ -66,13 +66,13 @@ ability npc_firebolt:
 	icon: icon_firebolt
 	speed: 6
 	projectile: npc_firebolt
-	resource_cost mana: 8	
-	
+	resource_cost mana: 8
+
 	direct_effect damage:
 	{
 		flags: [ can_be_critical ]
-		damage_type: fire		
-		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] ] elite_multiplier: 1.7 }			
+		damage_type: fire
+		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] ] elite_multiplier: 1.7 }
 	}
 }
 
@@ -84,14 +84,14 @@ cooldown npc_curse:
 ability npc_curse_tick:
 {
 	string: "Curse of Suffering"
-	icon: icon_holy_condemnation	
+	icon: icon_holy_condemnation
 	states: [ default in_combat ]
 	flags: [ always_in_range always_in_line_of_sight ]
-	
+
 	direct_effect damage:
 	{
 		damage_type: unholy
-		function: { expression: a a: [ [ 1 4 ] [ 10 10 ] ] elite_multiplier: 1.7 }			
+		function: { expression: a a: [ [ 1 4 ] [ 10 10 ] ] elite_multiplier: 1.7 }
 	}
 }
 
@@ -104,8 +104,8 @@ aura npc_curse:
 	duration: based_on_effects
 	flags: [ unique magic ]
 
-	aura_effect repeat: 
-	{ 
+	aura_effect repeat:
+	{
 		update_interval: 20
 		update_count: 6
 		ability: npc_curse_tick
@@ -122,7 +122,7 @@ ability npc_curse:
 	states: [ in_combat ]
 	icon: icon_holy_condemnation
 	delay: 3
-	
+
 	direct_effect apply_aura:
 	{
 		aura: npc_curse
@@ -137,14 +137,14 @@ cooldown npc_poison_bite:
 ability npc_poison_bite_tick:
 {
 	string: "Poison Bite"
-	icon: icon_poison	
+	icon: icon_poison
 	states: [ default in_combat ]
 	flags: [ always_in_range always_in_line_of_sight ]
-	
+
 	direct_effect damage:
 	{
 		damage_type: poison
-		function: { expression: a a: [ [ 1 2 ] [ 10 7 ] ] elite_multiplier: 1.7 }			
+		function: { expression: a a: [ [ 1 2 ] [ 10 7 ] ] elite_multiplier: 1.7 }
 	}
 }
 
@@ -155,9 +155,10 @@ aura npc_poison_bite:
 	type: debuff
 	icon: icon_poison
 	duration: based_on_effects
+	flags: [ unique ]
 
-	aura_effect repeat: 
-	{ 
+	aura_effect repeat:
+	{
 		update_interval: 25
 		update_count: 8
 		ability: npc_poison_bite_tick
@@ -167,21 +168,21 @@ aura npc_poison_bite:
 ability npc_poison_bite:
 {
 	string: "Poison Bite"
-	range: 1	
+	range: 1
 	cast_time: 15
 	cooldowns: [ global npc_poison_bite ]
 	flags: [ melee offensive target_other target_hostile can_miss interruptable ]
 	states: [ in_combat ]
 	icon: icon_strike
 	delay: 3
-	
+
 	direct_effect damage:
 	{
 		flags: [ can_be_critical ]
-		damage_type: poison		
-		function: { expression: a a: [ [ 1 4 ] [ 10 15 ] ] elite_multiplier: 1.7 }		
+		damage_type: poison
+		function: { expression: a a: [ [ 1 4 ] [ 10 15 ] ] elite_multiplier: 1.7 }
 	}
-	
+
 	direct_effect apply_aura:
 	{
 		aura: npc_poison_bite
@@ -191,18 +192,18 @@ ability npc_poison_bite:
 particle_system npc_shoot:
 {
 	particle:
-	{	
+	{
 		sprites: [ effect_arrow ]
 		flags: [ attached no_rotation face_target ]
 		scale: 0.3
-		count: 1			
-	}	
+		count: 1
+	}
 }
 
 ability npc_shoot:
 {
 	string: "Shoot"
-	range: 8	
+	range: 8
 	min_range: 3
 	cast_time: 20
 	cooldowns: [ global ]
@@ -211,12 +212,12 @@ ability npc_shoot:
 	icon: icon_throw_rock
 	speed: 7
 	projectile: npc_shoot
-	
+
 	direct_effect damage:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: a_mul_x x: weapon a: 0.7 }													
+		function: { expression: a_mul_x x: weapon a: 0.7 }
 	}
 }
 
@@ -237,7 +238,7 @@ ability npc_heal:
 	delay: 3
 	resource_cost mana: 8
 	target_particle_system: heal
-	
+
 	direct_effect heal:
 	{
 		function: 20
