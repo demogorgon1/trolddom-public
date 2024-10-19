@@ -153,35 +153,39 @@ namespace tpublic
 
 		for (uint32_t i = 0; i < (uint32_t)m_entries.size() && i < aSize; i++)
 		{
+			if (remaining == 0)
+				break;
+
+			Entry& t = m_entries[i];
+
+			if (t.m_item.IsSet() && t.m_item.m_itemId == aItemId && t.m_item.m_quantity < aItemData->m_stackSize)
+			{
+				uint32_t t_amountToAdd = Base::Min(aItemData->m_stackSize - t.m_item.m_quantity, remaining);
+
+				remaining -= t_amountToAdd;
+				t.m_item.m_quantity += t_amountToAdd;
+			}
+		}
+
+		for (uint32_t i = 0; i < (uint32_t)m_entries.size() && i < aSize; i++)
+		{
+			if (remaining == 0)
+				break;
+
 			Entry& t = m_entries[i];
 
 			if (!t.m_item.IsSet())
 			{
-				uint32_t toAdd = remaining;
-				if (toAdd > aItemData->m_stackSize)
-					toAdd = aItemData->m_stackSize;
+				uint32_t t_amountToAdd = Base::Min(aItemData->m_stackSize, remaining);
 
-				remaining -= toAdd;
+				remaining -= t_amountToAdd;
 
 				ItemInstance itemInstance;
 				itemInstance.m_itemId = aItemId;
-				itemInstance.m_quantity = toAdd;
+				itemInstance.m_quantity = t_amountToAdd;
 
 				t.m_item = itemInstance;
 			}
-			else if (t.m_item.IsSet() && t.m_item.m_itemId == aItemId && t.m_item.m_quantity < aItemData->m_stackSize)
-			{
-				uint32_t toAdd = remaining;
-				if (toAdd > aItemData->m_stackSize - t.m_item.m_quantity)
-					toAdd = aItemData->m_stackSize - t.m_item.m_quantity;
-
-				remaining -= toAdd;
-
-				t.m_item.m_quantity += toAdd;
-			}
-
-			if (remaining == 0)
-				break;
 		}
 
 		m_version++;
