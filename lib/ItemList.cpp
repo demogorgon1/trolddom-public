@@ -53,10 +53,10 @@ namespace tpublic
                 	uint32_t t_amountToAdd = Base::Min(aItemData->m_stackSize - t.m_item.m_quantity, remaining);
 					t.m_item.m_quantity += t_amountToAdd;
 					remaining -= t_amountToAdd;
-					m_version++;
 
 					if (remaining <= 0)
 					{
+						m_version++;
 						return true;
 					}
 				}
