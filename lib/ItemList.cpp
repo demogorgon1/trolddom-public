@@ -5,15 +5,15 @@
 namespace tpublic
 {
 
-	void				
+	void
 	ItemList::ToStream(
 		IWriter*									aWriter) const
 	{
 		aWriter->WriteObjects(m_entries);
 		aWriter->WriteUInt(m_version);
 	}
-	
-	bool				
+
+	bool
 	ItemList::FromStream(
 		IReader*									aReader)
 	{
@@ -33,7 +33,37 @@ namespace tpublic
 	{
 		if(aItemData->IsUnique() && HasItems(aItemInstance.m_itemId, 1))
 			return false;
-		
+
+		// Check we can actually add all the items to the inventory
+		if(!CanAddMultipleToInventory(aItemInstance.m_itemId, aItemInstance.m_quantity, aItemData, aSize))
+			return false;
+
+		uint32_t remaining = aItemInstance.m_quantity;
+		// 1st inv pass, attempt to stack existing item stacks
+		for(uint32_t i = 0; i < (uint32_t)m_entries.size() && i < aSize; i++)
+        {
+        	Entry& t = m_entries[i];
+
+        	if(t.m_item.IsSet() && t.m_item.m_itemId == aItemInstance.m_itemId)
+			{
+				assert(t.m_item.m_itemId == aItemData->m_id);
+
+				if(t.m_item.m_quantity < aItemData->m_stackSize)
+				{
+                	uint32_t t_amountToAdd = Base::Min(aItemData->m_stackSize - t.m_item.m_quantity, remaining);
+					t.m_item.m_quantity += t_amountToAdd;
+					remaining -= t_amountToAdd;
+					m_version++;
+
+					if (remaining <= 0)
+					{
+						return true;
+					}
+				}
+			}
+        }
+
+		// 2nd inv pass, search for first empty slot
 		for(uint32_t i = 0; i < (uint32_t)m_entries.size() && i < aSize; i++)
 		{
 			Entry& t = m_entries[i];
@@ -41,23 +71,13 @@ namespace tpublic
 			if(!t.m_item.IsSet())
 			{
 				t.m_item = aItemInstance;
+				t.m_item.m_quantity = remaining;
 
 				if(aItemData->m_itemBinding == ItemBinding::ID_WHEN_PICKED_UP && !t.m_item.IsSoulbound())
 					t.m_item.SetSoulbound();
 
 				m_version++;
 				return true;
-			}
-			else if(t.m_item.IsSet() && t.m_item.m_itemId == aItemInstance.m_itemId)
-			{
-				assert(t.m_item.m_itemId == aItemData->m_id);
-
-				if(t.m_item.m_quantity + aItemInstance.m_quantity <= aItemData->m_stackSize)
-				{
-					t.m_item.m_quantity += aItemInstance.m_quantity;
-					m_version++;
-					return true;
-				}
 			}
 		}
 
@@ -87,7 +107,7 @@ namespace tpublic
 			return false;
 
 		uint32_t remaining = aQuantity;
-				
+
 		for (uint32_t i = 0; i < (uint32_t)m_entries.size() && i < aSize; i++)
 		{
 			const Entry& t = m_entries[i];
@@ -96,7 +116,7 @@ namespace tpublic
 			{
 				uint32_t toAdd = remaining;
 				if(toAdd > aItemData->m_stackSize)
-					toAdd = aItemData->m_stackSize;  
+					toAdd = aItemData->m_stackSize;
 
 				remaining -= toAdd;
 			}
@@ -121,7 +141,7 @@ namespace tpublic
 		uint32_t									aItemId,
 		uint32_t									aQuantity,
 		const Data::Item*							aItemData,
-		uint32_t									aSize) 
+		uint32_t									aSize)
 	{
 		if (aQuantity == 0)
 			return true;
@@ -131,7 +151,7 @@ namespace tpublic
 
 		uint32_t remaining = aQuantity;
 
-		for (uint32_t i = 0; i < (uint32_t)m_entries.size() && i < aSize; i++) 
+		for (uint32_t i = 0; i < (uint32_t)m_entries.size() && i < aSize; i++)
 		{
 			Entry& t = m_entries[i];
 
@@ -146,7 +166,7 @@ namespace tpublic
 				ItemInstance itemInstance;
 				itemInstance.m_itemId = aItemId;
 				itemInstance.m_quantity = toAdd;
-						
+
 				t.m_item = itemInstance;
 			}
 			else if (t.m_item.IsSet() && t.m_item.m_itemId == aItemId && t.m_item.m_quantity < aItemData->m_stackSize)
@@ -195,7 +215,7 @@ namespace tpublic
 
 		if(entry.m_item.m_quantity == 0)
 			entry.m_item.Clear();
-					
+
 		m_version++;
 
 		Shrink((size_t)aSize);
@@ -247,7 +267,7 @@ namespace tpublic
 				remaining -= toRemove;
 
 				if(t.m_item.m_quantity == 0)
-					t.m_item.Clear();						
+					t.m_item.Clear();
 			}
 		}
 
@@ -289,7 +309,7 @@ namespace tpublic
 		return true;
 	}
 
-	uint32_t			
+	uint32_t
 	ItemList::GetMaxConsumeCount(
 		const Data::Ability::Items*					aConsumeItems) const
 	{
@@ -369,7 +389,7 @@ namespace tpublic
 						}
 					}
 				}
-						
+
 				if(doSwap)
 				{
 					tpublic::ItemInstance temp = destination.m_item;
@@ -414,13 +434,13 @@ namespace tpublic
 
 	ItemInstance*
 	ItemList::GetItemAtIndex(
-		uint32_t									aIndex) 
+		uint32_t									aIndex)
 	{
 		if((size_t)aIndex < m_entries.size())
 			return &m_entries[aIndex].m_item;
 		return NULL;
 	}
-			
+
 	void
 	ItemList::ForEach(
 		std::function<void(const ItemInstance&)>	aCallback) const
@@ -442,9 +462,9 @@ namespace tpublic
 				count++;
 		}
 		return count;
-	}	
+	}
 
-	size_t				
+	size_t
 	ItemList::GetItemCount(
 		uint32_t									aItemId) const
 	{
@@ -458,7 +478,7 @@ namespace tpublic
 		return count;
 	}
 
-	void				
+	void
 	ItemList::Resize(
 		size_t										aTargetSize)
 	{
@@ -471,10 +491,10 @@ namespace tpublic
 		else if(m_entries.size() > aTargetSize)
 		{
 			Shrink(aTargetSize);
-		}		
+		}
 	}
 
-	void				
+	void
 	ItemList::Shrink(
 		size_t										aTargetSize)
 	{
@@ -488,10 +508,10 @@ namespace tpublic
 			m_entries.resize(m_entries.size() - removeCount);
 
 			m_version++;
-		}		
+		}
 	}
 
-	void				
+	void
 	ItemList::Reset()
 	{
 		m_entries.clear();
