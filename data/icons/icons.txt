@@ -406,5 +406,12 @@ sprites:
 	sprite icon_fish_1_cooked : { tags: [ icon ] }
 	sprite icon_eel_1_cooked : { tags: [ icon ] }
 	sprite icon_fish_2_cooked : { tags: [ icon ] }
+	sprite icon_purple_bag_1 : { tags: [ icon ] }
+	
+	cursor: { position: [ 0 352 ] }
+	sprite icon_red_bag_2 : { tags: [ icon ] }
+	sprite icon_blue_bag_2 : { tags: [ icon ] }
+	sprite icon_green_bag_2 : { tags: [ icon ] }
+	sprite icon_purple_bag_2 : { tags: [ icon ] }
 
 }

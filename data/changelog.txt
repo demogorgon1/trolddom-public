@@ -26,6 +26,7 @@ changelog_demo:
 	
 	list:
 	[
+		{ text: "More bags." }
 		{ text: "Some new cooked food icons (Made by Caleb)." }
 	]
 	
