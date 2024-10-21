@@ -359,7 +359,7 @@ ability strike:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: x_plus_a x: weapon a: [ [ 1 2 ] [ 10 9 ] ] }
+		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 2 ] [ 10 9 ] ] }
 	}
 }
 

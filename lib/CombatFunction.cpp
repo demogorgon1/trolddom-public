@@ -61,6 +61,15 @@ namespace tpublic
 			return value;
 		}
 
+		uint32_t
+		_NormalizeWeaponDamage(
+			int32_t								aCooldown,
+			uint32_t							aDamage)
+		{
+			// Normalize to speed 2.0
+			return (aDamage * (uint32_t)20) / (uint32_t)aCooldown;
+		}
+
 		float
 		_GetInput(
 			CombatFunction::RandomSource		aRandomSource,
@@ -128,6 +137,16 @@ namespace tpublic
 			case CombatFunction::INPUT_RANGED_AVERAGE:
 				if (aCombatPrivate != NULL)
 					return (float)(aCombatPrivate->m_rangedDamageRangeMin + aCombatPrivate->m_rangedDamageRangeMax) * 0.5f; 
+				break;
+
+			case CombatFunction::INPUT_WEAPON_NORMALIZED:
+				if(aCombatPrivate != NULL)
+					return (float)_NormalizeWeaponDamage(aCombatPrivate->m_weaponCooldown, _SampleUIntRange(aRandomSource, aCombatPrivate->m_weaponDamageRangeMin, aCombatPrivate->m_weaponDamageRangeMax));
+				break;
+
+			case CombatFunction::INPUT_WEAPON_AVERAGE_NORMALIZED:
+				if (aCombatPrivate != NULL)
+					return (float)_NormalizeWeaponDamage(aCombatPrivate->m_weaponCooldown, (aCombatPrivate->m_weaponDamageRangeMin + aCombatPrivate->m_weaponDamageRangeMax) / 2);
 				break;
 
 			default:

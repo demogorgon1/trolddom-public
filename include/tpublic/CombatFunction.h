@@ -75,7 +75,9 @@ namespace tpublic
 			INPUT_WEAPON,
 			INPUT_WEAPON_AVERAGE,
 			INPUT_RANGED,
-			INPUT_RANGED_AVERAGE
+			INPUT_RANGED_AVERAGE,
+			INPUT_WEAPON_NORMALIZED,
+			INPUT_WEAPON_AVERAGE_NORMALIZED
 		};
 
 		static Expression
@@ -128,6 +130,10 @@ namespace tpublic
 				return INPUT_RANGED;
 			else if (t == "ranged_average")
 				return INPUT_RANGED_AVERAGE;
+			else if (t == "weapon_normalized")
+				return INPUT_WEAPON_NORMALIZED;
+			else if (t == "weapon_average_normalized")
+				return INPUT_WEAPON_AVERAGE_NORMALIZED;
 			TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid input.", aSource->GetIdentifier());
 			return INVALID_INPUT;
 		}
