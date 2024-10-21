@@ -93,9 +93,7 @@ namespace tpublic::DirectEffects
 
 		if(m_flags & DirectEffect::FLAG_CAN_BE_CRITICAL && aId == CombatEvent::ID_HIT)
 		{
-			float chance = (float)sourceCombatPrivate->m_magicalCriticalStrikeChance / (float)UINT32_MAX;
-
-			if(Helpers::RandomFloat(aRandom) < chance)
+			if(Helpers::RandomFloat(aRandom) < sourceCombatPrivate->m_magicalCriticalStrikeChance / 100.0f)
 			{
 				heal = (heal * 3) / 2;
 				result = CombatEvent::ID_CRITICAL;

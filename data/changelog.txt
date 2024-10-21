@@ -20,6 +20,25 @@ changelog:
 changelog_demo:
 {
 	#######################################################################################
+	heading: "Demo v0.1.4"
+
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Some new cooked food icons (Made by Caleb)." }
+	]
+	
+	text: "Issues fixed:"
+
+	list:
+	[
+		{ text: "Items added to existing inventory stacks before creating new ones (Fixed by SirPrimrose)." }
+		{ text: "Heals can be critical like intended." }
+		{ text: "Fixed character stat discrepancy between different UIs." }
+	]
+
+	#######################################################################################
 	heading: "Demo v0.1.3"
 
 	text: "Changes:"

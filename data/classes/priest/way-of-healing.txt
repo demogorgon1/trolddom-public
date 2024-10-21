@@ -184,6 +184,7 @@ ability prayer_of_sanctuary:
 	
 	direct_effect heal:
 	{	
+		flags: [ can_be_critical ]
 		function: { expression: a_mul_x_plus_b x: healing a: 0.5 b: 22 }
 	}
 }
@@ -306,6 +307,7 @@ ability greater_heal:
 	
 	direct_effect heal:
 	{	
+		flags: [ can_be_critical ]
 		function: { expression: a_mul_x_plus_b x: healing a: 1 b: [ [ 1 25 ] [ 10 50 ] ] }
 	}
 	
@@ -338,6 +340,7 @@ ability minor_heal:
 
 	direct_effect heal:
 	{	
+		flags: [ can_be_critical ]
 		function: { expression: a_mul_x_plus_b x: healing a: 0.7 b: [ [ 1 10 ] [ 10 20 ] ] }
 	}
 	
