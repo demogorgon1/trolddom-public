@@ -34,11 +34,8 @@ namespace tpublic
 		if(aItemData->IsUnique() && HasItems(aItemInstance.m_itemId, 1))
 			return false;
 
-		// Check we can actually add all the items to the inventory
-		if(!CanAddMultipleToInventory(aItemInstance.m_itemId, aItemInstance.m_quantity, aItemData, aSize))
-			return false;
-
 		uint32_t remaining = aItemInstance.m_quantity;
+
 		// 1st inv pass, attempt to stack existing item stacks
 		for(uint32_t i = 0; i < (uint32_t)m_entries.size() && i < aSize; i++)
         {
@@ -54,7 +51,7 @@ namespace tpublic
 					t.m_item.m_quantity += t_amountToAdd;
 					remaining -= t_amountToAdd;
 
-					if (remaining <= 0)
+					if (remaining == 0)
 					{
 						m_version++;
 						return true;
@@ -151,11 +148,8 @@ namespace tpublic
 
 		uint32_t remaining = aQuantity;
 
-		for (uint32_t i = 0; i < (uint32_t)m_entries.size() && i < aSize; i++)
+		for (uint32_t i = 0; i < (uint32_t)m_entries.size() && i < aSize && remaining > 0; i++)
 		{
-			if (remaining == 0)
-				break;
-
 			Entry& t = m_entries[i];
 
 			if (t.m_item.IsSet() && t.m_item.m_itemId == aItemId && t.m_item.m_quantity < aItemData->m_stackSize)
@@ -167,11 +161,8 @@ namespace tpublic
 			}
 		}
 
-		for (uint32_t i = 0; i < (uint32_t)m_entries.size() && i < aSize; i++)
+		for (uint32_t i = 0; i < (uint32_t)m_entries.size() && i < aSize && remaining > 0; i++)
 		{
-			if (remaining == 0)
-				break;
-
 			Entry& t = m_entries[i];
 
 			if (!t.m_item.IsSet())
