@@ -35,7 +35,7 @@ changelog_demo:
 	[
 		{ text: "Items added to existing inventory stacks before creating new ones (Fixed by SirPrimrose)." }
 		{ text: "Heals can be critical like intended." }
-		{ text: "Fixed character stat discrepancy between different UIs." }
+		{ text: "Fixed a bunch of UI issues." }
 	]
 
 	#######################################################################################

@@ -120,7 +120,7 @@ ability .benny_quest_drop_start_quest:
 {
 	string: "Benny's Head"
 	description: "This item starts a quest."
-	flags: [ target_self ]
+	flags: [ target_self item ]
 	icon: icon_severed_head
 	direct_effect simple<start_quest>: .benny_1
 	states: [ default in_combat ]

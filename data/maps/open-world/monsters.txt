@@ -32,7 +32,7 @@ ability .spawn_of_umbracoth_quest_drop_start_quest:
 {
 	string: "Glowing Tentacle"
 	description: "This item starts a quest."
-	flags: [ target_self ]
+	flags: [ target_self item ]
 	icon: icon_tentacle
 	direct_effect simple<start_quest>: spawn_of_umbracoth
 	states: [ default in_combat ]
@@ -314,7 +314,7 @@ ability .crab_boss_5_quest_drop_start_quest:
 {
 	string: "Suspiciously Large Crab Claw"
 	description: "This item starts a quest."
-	flags: [ target_self ]
+	flags: [ target_self item ]
 	icon: icon_claw_2
 	direct_effect simple<start_quest>: .crab_boss_5_quest
 	states: [ default in_combat ]
@@ -578,7 +578,7 @@ ability .dark_cove_goblin_commander_guzbrorg_quest_drop_start_quest:
 {
 	string: "Secret Document"
 	description: "This item starts a quest."
-	flags: [ target_self ]
+	flags: [ target_self item ]
 	icon: icon_scroll_1
 	direct_effect simple<start_quest>: .dark_cove_goblin_commander_guzbrorg_quest
 	states: [ default in_combat ]
