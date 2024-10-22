@@ -55,6 +55,7 @@
 			<exists _default_minion_mode> current_minion_mode: @_default_minion_mode
 			<exists _commands> commands: @_commands
 			<exists _abilities> abilities: @_abilities
+			<exists _minion_duration> duration_seconds: @_minion_duration
 		}		
 		minion_private: 
 		{ 			

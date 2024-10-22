@@ -19,13 +19,22 @@ namespace tpublic
 
 			struct Minion
 			{
+				static const uint8_t VERSION = 1;
+
 				void
 				ToStream(
 					IWriter*		aWriter) const 
 				{
 					aWriter->WriteUInt(m_entityId);
 					aWriter->WriteUInt(m_entityInstanceId);
-					aWriter->WriteBool(m_dead);
+
+					// Hack to support new and old data. Should have thought about this before. :)
+					uint8_t header = 0x80 | (m_dead ? 0x01 : 0x00);
+					aWriter->WritePOD(header);
+					aWriter->WritePOD(VERSION);
+
+					aWriter->WriteUInt(m_spawnTimeStamp);
+					aWriter->WriteUInt(m_durationSeconds);
 				}
 
 				bool
@@ -36,8 +45,32 @@ namespace tpublic
 						return false;
 					if (!aReader->ReadUInt(m_entityInstanceId))
 						return false;
-					if(!aReader->ReadBool(m_dead))
+
+					uint8_t header;
+					if(!aReader->ReadPOD(header))
 						return false;
+					m_dead = (header & 0x01) != 0;
+
+					if(header & 0x80)
+					{
+						// We have extra minion info
+						uint8_t version;
+						if(!aReader->ReadPOD(version))
+							return false;
+
+						if(version != 0 && version != 1)
+							return false;
+
+						if (!aReader->ReadUInt(m_spawnTimeStamp))
+							return false;
+
+						if(version == 1)
+						{
+							if (!aReader->ReadUInt(m_durationSeconds))
+								return false;
+						}
+					}
+
 					return true;
 				}
 
@@ -45,6 +78,10 @@ namespace tpublic
 				uint32_t				m_entityId = 0;
 				uint32_t				m_entityInstanceId = 0;
 				bool					m_dead = false;
+				
+				// Extra minion info
+				uint64_t				m_spawnTimeStamp = 0;
+				uint32_t				m_durationSeconds = 0;
 
 				// Internal
 				bool					m_applyControl = false;
@@ -79,7 +116,6 @@ namespace tpublic
 				std::vector<uint32_t>	m_blockedAbilityIds;
 				uint32_t				m_currentMinionModeId = 0;
 			};
-
 
 			enum Field
 			{
@@ -144,6 +180,18 @@ namespace tpublic
 				t.m_entityId = aEntityId;
 				m_minionControl.push_back(t);
 				return &m_minionControl[m_minionControl.size() - 1];
+			}
+
+			const Minion*
+			GetMinion(
+				uint32_t			aEntityInstanceId) const
+			{
+				for (const Minion& t : m_minions)
+				{
+					if (t.m_entityInstanceId == aEntityInstanceId)
+						return &t;
+				}
+				return NULL;
 			}
 
 			// Public data

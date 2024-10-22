@@ -136,6 +136,9 @@ namespace tpublic::DirectEffects
 			Components::MinionPublic* minionPublic = spawnedEntity->GetComponent<Components::MinionPublic>();
 			if(minionPublic != NULL)
 			{
+				if(minionPublic->m_durationSeconds != 0)
+					minionPublic->m_spawnTimeStamp = (uint64_t)time(NULL);
+				
 				minionPublic->m_ownerEntityInstanceId = aSource->GetEntityInstanceId();
 				minionPublic->SetDirty();
 			}

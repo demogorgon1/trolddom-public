@@ -156,7 +156,10 @@ namespace tpublic
 				FIELD_MINION_MODES,
 				FIELD_COMMANDS,
 				FIELD_COOLDOWNS,
-				FIELD_ABILITIES
+				FIELD_ABILITIES,
+				FIELD_DURATION_SECONDS,
+				FIELD_SPAWN_TIMESTAMP
+
 			};
 
 			static void
@@ -169,6 +172,8 @@ namespace tpublic
 				aSchema->DefineCustomObjects<Command>(FIELD_COMMANDS, "commands", offsetof(MinionPublic, m_commands));
 				aSchema->DefineCustomObjectNoSource<Cooldowns>(FIELD_COOLDOWNS, offsetof(MinionPublic, m_cooldowns));
 				aSchema->DefineCustomObjects<Ability>(FIELD_ABILITIES, "abilities", offsetof(MinionPublic, m_abilities));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_DURATION_SECONDS, "duration_seconds", offsetof(MinionPublic, m_durationSeconds));
+				aSchema->Define(ComponentSchema::TYPE_UINT64, FIELD_SPAWN_TIMESTAMP, NULL, offsetof(MinionPublic, m_spawnTimeStamp));
 			}
 
 			void
@@ -180,6 +185,8 @@ namespace tpublic
 				m_commands.clear();
 				m_cooldowns.m_entries.clear();
 				m_abilities.clear();
+				m_durationSeconds = 0;
+				m_spawnTimeStamp = 0;
 
 				m_ownerThreatTargetEntityInstanceId = 0;
 			}
@@ -298,6 +305,8 @@ namespace tpublic
 			std::vector<Command>	m_commands;
 			Cooldowns				m_cooldowns;
 			std::vector<Ability>	m_abilities;
+			uint32_t				m_durationSeconds = 0;
+			uint64_t				m_spawnTimeStamp = 0;
 
 			// Internal
 			uint32_t				m_ownerThreatTargetEntityInstanceId = 0;

@@ -212,3 +212,13 @@ aura exhausted:
 	type: debuff
 	duration: 3000
 }
+
+aura minion:
+{
+	string: "Minion"
+	description: "You control this minion."
+	flags: [ private ]
+	icon: icon_exhausted	
+	type: buff
+	duration: 3000
+}
