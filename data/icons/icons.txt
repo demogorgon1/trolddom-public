@@ -413,5 +413,6 @@ sprites:
 	sprite icon_blue_bag_2 : { tags: [ icon ] }
 	sprite icon_green_bag_2 : { tags: [ icon ] }
 	sprite icon_purple_bag_2 : { tags: [ icon ] }
+	sprite icon_token_1 : { tags: [ icon ] }
 
 }

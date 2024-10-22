@@ -265,3 +265,30 @@ item consumable_spell_juice:
 	use_ability: consumable_spell_juice
 	level_range: [ 4 10 ]
 }
+
+#####################################################
+# Spirit Token
+
+ability consumable_spirit_token:
+{
+	string: "Spirit Token"
+	description: "Removes Exhausted, allowing you to Spirit Travel immediately."
+	flags: [ target_self item ]
+	icon: icon_token_1
+	cooldowns: [ global ]
+	consume_items: { consumable_spirit_token: 1 }
+	requirement self<must_have_aura>: exhausted
+	states: [ default in_combat ]
+	direct_effect remove_aura: { aura: exhausted }
+}
+
+item consumable_spirit_token:
+{
+	item_level: 4 
+	icon: icon_token_1
+	string: "Spirit Token"
+	stack: 20
+	required_level: 1
+	use_ability: consumable_spirit_token
+	cost: 500
+}

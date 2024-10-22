@@ -26,6 +26,8 @@ namespace tpublic
 						m_auraType = Data::Aura::SourceToType(aChild);
 					else if(aChild->m_name == "aura_flags")
 						m_auraFlags = Data::Aura::SourceToFlags(aChild);
+					else if (aChild->m_name == "aura")
+						m_auraId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_AURA, aChild->GetIdentifier());
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 				}
@@ -39,6 +41,7 @@ namespace tpublic
 			ToStreamBase(aStream);
 			aStream->WritePOD(m_auraFlags);
 			aStream->WritePOD(m_auraType);
+			aStream->WriteUInt(m_auraId);
 		}
 
 		bool
@@ -50,6 +53,8 @@ namespace tpublic
 			if (!aStream->ReadPOD(m_auraFlags))
 				return false;
 			if (!aStream->ReadPOD(m_auraType))
+				return false;
+			if (!aStream->ReadUInt(m_auraId))
 				return false;
 			return true;
 		}
@@ -73,22 +78,38 @@ namespace tpublic
 		{
 			Components::Auras* targetAuras = aTarget->GetComponent<Components::Auras>();
 			
-			std::vector<Components::Auras::Entry*> candidates;
-
-			for(std::unique_ptr<Components::Auras::Entry>& entry : targetAuras->m_entries)
+			if(m_auraId != 0)
 			{
-				const Data::Aura* aura = aManifest->GetById<Data::Aura>(entry->m_auraId);
-				if(aura->m_type == m_auraType && (aura->m_flags & m_auraFlags) == m_auraFlags)
-					candidates.push_back(entry.get());
+				// Removing a specific aura
+				for (std::unique_ptr<Components::Auras::Entry>& entry : targetAuras->m_entries)
+				{
+					if(entry->m_auraId == m_auraId)
+					{
+						// Hack, see comment below
+						entry->m_cancel = true;
+					}
+				}
 			}
-
-			if(candidates.size() > 0)
+			else
 			{
-				size_t i = Helpers::RandomInRange<size_t>(aRandom, 0, candidates.size() - 1);
+				// Remove an aura based on type and flags
+				std::vector<Components::Auras::Entry*> candidates;
 
-				// This is a bit of a hack as we're not supposed to update entities directly here. 
-				// We can, however, signal a bool safely - which is easier than having to post an update on an event queue.
-				candidates[i]->m_cancel = true;
+				for(std::unique_ptr<Components::Auras::Entry>& entry : targetAuras->m_entries)
+				{
+					const Data::Aura* aura = aManifest->GetById<Data::Aura>(entry->m_auraId);
+					if(aura->m_type == m_auraType && (aura->m_flags & m_auraFlags) == m_auraFlags)
+						candidates.push_back(entry.get());
+				}
+
+				if(candidates.size() > 0)
+				{
+					size_t i = Helpers::RandomInRange<size_t>(aRandom, 0, candidates.size() - 1);
+
+					// This is a bit of a hack as we're not supposed to update entities directly here. 
+					// We can, however, signal a bool safely - which is easier than having to post an update on an event queue.
+					candidates[i]->m_cancel = true;
+				}
 			}
 
 			return Result();

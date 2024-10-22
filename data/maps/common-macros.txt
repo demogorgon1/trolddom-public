@@ -7,4 +7,5 @@
 	sell weapon_pick_axe: { quantity: 1 }	
 	sell weapon_blacksmithing_hammer: { quantity: 1 }	
 	sell weapon_fishing_rod: { quantity: 1 }	
+	sell consumable_spirit_token: { quantity: 1 }
 }

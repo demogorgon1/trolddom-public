@@ -27,21 +27,22 @@ changelog_demo:
 	list:
 	[		
 		{ text: "More bags." }
+		{ text: "New consumable item that allows you to Spirit Travel immediately." }
 		{ text: "Mercenaries now only stay with you for 10 minutes." }
 		{ text: "Non-player entities now also face the direction they're moving." }
 		{ text: "Weapon-damage based instant abilities with short or no cooldown (for example Strike and Rend) has been normalized. In other words, fast weapons now deal more damage while slow ones deal less." }
 		{ text: "Some new cooked food icons (Made by Caleb)." }
 		{ text: "Longer chat messages are now allowed." }
+		{ text: "Items added to existing inventory stacks before creating new ones (Fixed by SirPrimrose)." }
+		{ text: "Lost Satchel quest item should be more visible." }
 	]
 	
 	text: "Issues fixed:"
 
 	list:
 	[
-		{ text: "Items added to existing inventory stacks before creating new ones (Fixed by SirPrimrose)." }
 		{ text: "Heals can be critical like intended." }
 		{ text: "Fixed a bunch of UI issues." }
-		{ text: "Lost Satchel quest item should be more visible." }
 		{ text: "Fixed a couple client crashes." }
 	]
 

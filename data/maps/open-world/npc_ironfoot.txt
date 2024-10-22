@@ -2,6 +2,7 @@ dialogue_screen .ironfoot_vendor:
 {
 	sell item_flour: { quantity: 1 }	
 	sell item_water: { quantity: 1 }	
+	sell consumable_spirit_token: { quantity: 1 }
 	
 	sell consumable_small_healing_potion: { quantity: 1 cost: 450 }	
 	sell consumable_small_mana_potion: { quantity: 1 cost: 450 }	
