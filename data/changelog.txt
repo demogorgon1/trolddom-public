@@ -28,7 +28,7 @@ changelog_demo:
 	[		
 		{ text: "More bags." }
 		{ text: "New consumable item that allows you to Spirit Travel immediately." }
-		{ text: "Mercenaries now only stay with you for 10 minutes." }
+		{ text: "Mercenaries now only stay with you for 15 minutes at most." }
 		{ text: "Non-player entities now also face the direction they're moving." }
 		{ text: "Weapon-damage based instant abilities with short or no cooldown (for example Strike and Rend) has been normalized. In other words, fast weapons now deal more damage while slow ones deal less." }
 		{ text: "Some new cooked food icons (Made by Caleb)." }

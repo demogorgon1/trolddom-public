@@ -14,7 +14,7 @@
 !define local MERCENARY_CONTRACT_ABILITY
 {
 	string: @_item_name
-	description: "Summons a mercenary. Lasts for 10 minutes."
+	description: "Summons a mercenary. Lasts for 15 minutes."
 	flags: [ target_self item minion_summon ]
 	cast_time: 20
 	icon: icon_scroll_1
@@ -55,7 +55,7 @@
 		_abilities: [ { id: .mercenary_contract_barbarian_attack flags: [ auto ] } { id: .mercenary_contract_barbarian_whirlwind flags: [ auto ] } ]
 		_ability_prio: [ .mercenary_contract_barbarian_whirlwind .mercenary_contract_barbarian_attack ]
 		_icon: icon_scroll_1
-		_minion_duration: 600
+		_minion_duration: 900
 	}
 	
 	tag_context .mercenary_contract_barbarian:
@@ -193,7 +193,7 @@
 		_abilities: [ { id: .mercenary_contract_shield_maiden_attack flags: [ auto ] } { id: .mercenary_contract_shield_maiden_shield_bash flags: [ auto ] } ]
 		_ability_prio: [ .mercenary_contract_shield_maiden_shield_bash .mercenary_contract_shield_maiden_attack ]
 		_icon: icon_scroll_2
-		_minion_duration: 600
+		_minion_duration: 900
 	}
 	
 	tag_context .mercenary_contract_shield_maiden:
@@ -325,7 +325,7 @@
 		_commands: [ move attack ]
 		_ability_prio: [ .mercenary_contract_cleric_mend .mercenary_contract_cleric_sacred_flame .mercenary_contract_cleric_attack ]
 		_icon: icon_scroll_3
-		_minion_duration: 600
+		_minion_duration: 900
 		
 		_abilities: 
 		[ 
