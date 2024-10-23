@@ -4,3 +4,5 @@ cooldown spell_healing_lockout: !SPELL_LOCKOUT {}
 cooldown spell_fire_lockout: !SPELL_LOCKOUT {}
 cooldown spell_frost_lockout: !SPELL_LOCKOUT {}
 cooldown spell_arcane_lockout: !SPELL_LOCKOUT {}
+cooldown spell_holy_lockout: !SPELL_LOCKOUT {}
+cooldown spell_unholy_lockout: !SPELL_LOCKOUT {}

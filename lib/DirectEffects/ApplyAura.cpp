@@ -38,6 +38,8 @@ namespace tpublic
 						m_applyToPartyMembersInRange = aChild->GetUInt32();
 					else if (aChild->m_name == "target_self")
 						m_targetSelf = aChild->GetBool();
+					else if(aChild->m_name == "source_redirect")
+						m_sourceRedirect = SourceToSourceRedirect(aChild);
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 				}
@@ -53,6 +55,7 @@ namespace tpublic
 			aStream->WriteInt(m_threat);
 			aStream->WriteUInt(m_applyToPartyMembersInRange);
 			aStream->WriteBool(m_targetSelf);
+			aStream->WritePOD(m_sourceRedirect);
 		}
 
 		bool
@@ -68,6 +71,8 @@ namespace tpublic
 			if (!aStream->ReadUInt(m_applyToPartyMembersInRange))
 				return false;
 			if(!aStream->ReadBool(m_targetSelf))
+				return false;
+			if (!aStream->ReadPOD(m_sourceRedirect))
 				return false;
 			return true;
 		}
@@ -124,10 +129,33 @@ namespace tpublic
 			if (abilityModifierList != NULL)
 				modifyAuraUpdateCount = abilityModifierList->GetAbilityModifyAuraUpdateCount(aAbilityId);
 
+			SourceEntityInstance sourceEntityInstance = aSourceEntityInstance;
+
+			switch(m_sourceRedirect)
+			{
+			case SOURCE_REDIRECT_TARGET_OF_TARGET:
+				{
+					// It will appear as the target of the target applied the aura
+					const Components::CombatPublic* combatPublic = target->GetComponent<Components::CombatPublic>();
+					if(combatPublic->m_targetEntityInstanceId == 0)
+						return Result(); // No target of target
+
+					const EntityInstance* targetOfTarget = aWorldView->WorldViewSingleEntityInstance(combatPublic->m_targetEntityInstanceId);
+					if(targetOfTarget == NULL)
+						return Result(); // Target of target not found
+
+					sourceEntityInstance = { targetOfTarget->GetEntityInstanceId(), targetOfTarget->GetSeq() };
+				}
+				break;
+				
+			default:
+				break;
+			}
+
 			for(const EntityInstance* targetEntity : targetEntities)
 			{
 				if (m_threat != 0 && targetEntity->GetEntityId() != 0)
-					aEventQueue->EventQueueThreat(aSourceEntityInstance, targetEntity->GetEntityInstanceId(), m_threat, aTick);
+					aEventQueue->EventQueueThreat(sourceEntityInstance, targetEntity->GetEntityInstanceId(), m_threat, aTick);
 
 				std::vector<std::unique_ptr<AuraEffectBase>> effects;
 				for (const std::unique_ptr<Data::Aura::AuraEffectEntry>& t : aura->m_auraEffects)
@@ -140,7 +168,7 @@ namespace tpublic
 					effects.push_back(std::move(effect));
 				}
 
-				aAuraEventQueue->ApplyAura(aAbilityId, m_auraId, aSourceEntityInstance, targetEntity->GetEntityInstanceId(), effects);
+				aAuraEventQueue->ApplyAura(aAbilityId, m_auraId, sourceEntityInstance, targetEntity->GetEntityInstanceId(), effects);
 			}
 
 			return Result();

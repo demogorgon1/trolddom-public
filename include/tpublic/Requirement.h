@@ -41,7 +41,8 @@ namespace tpublic
 			TYPE_MUST_NOT_HAVE_PROFESSION_ABILITY,
 			TYPE_MUST_NOT_HAVE_ITEM_EQUIPPED,
 			TYPE_MUST_HAVE_LESS_HEALTH_THAN,
-			TYPE_MUST_HAVE_NEGATIVE_REPUTATION
+			TYPE_MUST_HAVE_NEGATIVE_REPUTATION,
+			TYPE_MUST_HAVE_AURA_GROUP
 		};
 
 		static DataType::Id
@@ -83,6 +84,9 @@ namespace tpublic
 
 			case TYPE_MUST_HAVE_LESS_HEALTH_THAN:
 				return DataType::INVALID_ID;
+
+			case TYPE_MUST_HAVE_AURA_GROUP:
+				return DataType::ID_AURA_GROUP;
 
 			default:
 				break;
@@ -170,6 +174,8 @@ namespace tpublic
 				m_type = TYPE_MUST_HAVE_LESS_HEALTH_THAN;
 			else if (typeString == "must_have_negative_reputation")
 				m_type = TYPE_MUST_HAVE_NEGATIVE_REPUTATION;
+			else if (typeString == "must_have_aura_group")
+				m_type = TYPE_MUST_HAVE_AURA_GROUP;
 			else
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid type.", aSource->m_annotation->GetIdentifier());
 

@@ -6,11 +6,514 @@ talent_tree witch_malice:
 	
 	map_palette:
 	{
+		talent witch_malice_weakness: "A"
+		talent witch_improved_curse_of_corruption: "B"
+		talent witch_doom: "C"
+		talent witch_improved_doom: "D"
+		talent witch_swarm: "E"
+		talent witch_curse_of_inaction: "F"
+		talent witch_chain_lightning: "G"
+		
+		sprite talent_tree_down_arrow: "d"
+		sprite talent_tree_left_arrow: "l"
+		sprite talent_tree_down: "|"		
+		sprite talent_tree_horizontal: "-"		
+		sprite talent_tree_left_to_down: "x"		
 	}
 	
 	map:
 	[
+		"..A.B-x"
+		"..d...d"
+		"DlC.E.F"
+		"....d.."
+		"....G.."
 	]
 	
 }
 
+###############################################################################
+# Weakness
+
+talent witch_malice_weakness:
+{
+	string: "Weakness"
+	icon: icon_weakness
+	points:
+	[
+		{ ability_modifier: weakness_1 }
+		{ ability_modifier: weakness_2 }
+		{ ability_modifier: weakness_3 }
+	]
+}
+
+ability_modifier weakness_1:
+{	
+	description: "Witch Bolt causes Weakness to its target, increasing damage taken from all magical spells by 4%."
+}
+
+ability_modifier weakness_2:
+{	
+	description: "Witch Bolt causes Weakness to its target, increasing damage taken from all magical spells by 8%."
+}
+
+ability_modifier weakness_3:
+{	
+	description: "Witch Bolt causes Weakness to its target, increasing damage taken from all magical spells by 12%."
+}
+
+aura_group weakness:
+{
+}
+
+aura weakness_1:
+{
+	string: "Weakness"
+	description: "Damage taken from magical spells increased by 4%."
+	aura_group: weakness
+	icon: icon_weakness	
+	type: debuff
+	duration: 100
+	flags: [ unique magic ]	
+	aura_effect damage_input_modifier: 
+	{ 
+		type_mask: [ frost fire arcane unholy holy ]
+		multiplier: 1.04
+	}
+}
+
+aura weakness_2:
+{
+	string: "Weakness"
+	description: "Damage taken from magical spells increased by 8%."
+	aura_group: weakness
+	icon: icon_weakness	
+	type: debuff
+	duration: 100
+	flags: [ unique magic ]	
+	aura_effect damage_input_modifier: 
+	{ 
+		type_mask: [ frost fire arcane unholy holy ]
+		multiplier: 1.08
+	}
+}
+
+aura weakness_3:
+{
+	string: "Weakness"
+	description: "Damage taken from magical spells increased by 12%."
+	aura_group: weakness
+	icon: icon_weakness	
+	type: debuff
+	duration: 100
+	flags: [ unique magic ]	
+	aura_effect damage_input_modifier: 
+	{ 
+		type_mask: [ frost fire arcane unholy holy ]
+		multiplier: 1.12
+	}
+}
+
+###############################################################################
+# Witch Bolt
+
+ability witch_bolt:
+{
+	string: "Witch Bolt"
+	tags: [ ability_ranged ]
+	description: "Deals $damage$ damage to target."
+	range: 8
+	cast_time: 18
+	cooldowns: [ global spell_unholy_lockout ]
+	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
+	states: [ default in_combat ]
+	icon: icon_witch_bolt
+	talent_tree: witch_malice
+	speed: 8
+	projectile: witch_bolt
+	resource_cost mana: 14
+	target_particle_system: green_spell_hit
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical is_magical ]
+		damage_type: unholy
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 24 ] [ 10 36 ] ] }													
+	}	
+	
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: weakness_1
+		aura: weakness_1
+	}
+
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: weakness_2
+		aura: weakness_2
+	}
+
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: weakness_3
+		aura: weakness_3
+	}
+}
+
+particle_system witch_bolt:
+{
+	particle:
+	{
+		sprites: [ effect_witch_bolt ]
+		flags: [ attached no_rotation face_target ]
+		scale: 0.4
+		count: 1		
+	}
+}
+
+###############################################################################
+# Curse of Corruption
+
+ability curse_of_corruption_tick:
+{
+	string: "Curse of Corruption"
+	icon: icon_curse_of_corruption		
+	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]
+
+	direct_effect damage:
+	{	
+		ability_modifier_multipliers: { improved_curse_of_corruption_1: 1.25 improved_curse_of_corruption_2: 1.35 improved_curse_of_corruption_3: 1.45 }
+		damage_type: unholy
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.25 b: [ [ 1 4 ] [ 10 8 ] ] }					
+		flags: [ is_magical ]
+	}		
+	
+}
+
+aura curse_of_corruption:
+{
+	string: "Curse of Corruption"
+	icon: icon_curse_of_corruption		
+	type: debuff
+	duration: 100	
+	flags: [ unique magic ]
+	sound: spell_14
+	aura_effect repeat: 
+	{ 
+		update_interval: 12
+		update_count: 8
+		ability: curse_of_corruption_tick
+	}
+}
+
+ability curse_of_corruption:
+{
+	string: "Curse of Corruption"
+	description: "Inflicts unholy damage to the target over 10 seconds."
+	range: 6
+	cooldowns: [ global spell_unholy_lockout ]
+	flags: [ spell target_other target_hostile ]
+	states: [ default in_combat ]
+	icon: icon_curse_of_corruption
+	resource_cost mana: 10
+	talent_tree: witch_malice
+	speed: 7
+	projectile: curse_of_corruption
+	cast_time: 20
+	target_particle_system: purple_spell_hit
+
+	direct_effect apply_aura:
+	{	
+		aura: curse_of_corruption
+	}
+}
+
+particle_system curse_of_corruption:
+{
+	particle:
+	{
+		sprites: [ effect_curse_of_corruption ]
+		flags: [ attached no_rotation face_target ]
+		scale: 0.4
+		count: 1		
+	}
+}
+
+###############################################################################
+# Improved Curse of Corruption
+
+talent witch_improved_curse_of_corruption:
+{
+	string: "Improved Curse of Corruption"
+	icon: icon_curse_of_corruption
+	points:
+	[
+		{ ability_modifier: improved_curse_of_corruption_1 }
+		{ ability_modifier: improved_curse_of_corruption_2 }
+		{ ability_modifier: improved_curse_of_corruption_3 }
+	]
+}
+
+ability_modifier improved_curse_of_corruption_1:
+{	
+	description: "Increases damage done by Curse of Corruption by 25%."	
+}
+
+ability_modifier improved_curse_of_corruption_2:
+{	
+	description: "Increases damage done by Curse of Corruption by 35%."	
+}
+
+ability_modifier improved_curse_of_corruption_3:
+{	
+	description: "Increases damage done by Curse of Corruption by 45%."	
+}
+
+###############################################################################
+# Curse of Attraction
+
+aura curse_of_attraction:
+{
+	string: "Curse of Attraction"
+	description: "Compelled to attack current target."
+	icon: icon_curse_of_attraction		
+	type: debuff
+	duration: 100	
+	flags: [ unique magic ]
+	sound: spell_14
+	aura_effect taunt: {}	
+}
+
+cooldown curse_of_attraction:
+{
+	duration: 600
+}
+
+ability curse_of_attraction:
+{
+	string: "Curse of Attraction"
+	description: "Target is unable to change target."
+	range: 6
+	cooldowns: [ global spell_unholy_lockout curse_of_attraction ]
+	flags: [ spell target_other target_hostile ]
+	states: [ default in_combat ]
+	icon: icon_curse_of_attraction
+	resource_cost mana: 10
+	talent_tree: witch_malice
+
+	direct_effect apply_aura:
+	{	
+		aura: curse_of_attraction
+		source_redirect: target_of_target
+	}
+}
+
+###############################################################################
+# Doom
+
+talent witch_doom:
+{
+	string: "Doom"
+	icon: icon_doom
+	prerequisites: [ witch_malice_weakness ]
+	talent_tree_points_required: 3
+	points:
+	[
+		{ ability: doom }
+	]
+}
+
+cooldown doom:
+{
+	duration: 200
+}
+
+ability doom:
+{
+	string: "Doom"
+	description: "Consumes target Weakness and deals $damage$ damage."
+	range: 8
+	cooldowns: [ global spell_unholy_lockout doom ]
+	flags: [ spell target_other target_hostile ]
+	states: [ default in_combat ]
+	icon: icon_doom
+	resource_cost mana: 10
+	talent_tree: witch_malice
+	requirement target<must_have_aura_group>: weakness
+
+	direct_effect damage:
+	{
+		flags: [ can_be_critical is_magical ]
+		conditional_critical_chance_bonus<improved_doom>: 50
+		damage_type: unholy
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.95 b: [ [ 1 26 ] [ 10 40 ] ] }													
+	}	
+	
+	direct_effect remove_aura:
+	{	
+		aura_group: weakness
+	}
+}
+
+###############################################################################
+# Improved Doom
+
+talent witch_improved_doom:
+{
+	string: "Improved Doom"
+	icon: icon_improved_doom
+	points:
+	[
+		{ ability_modifier: improved_doom }
+	]
+}
+
+ability_modifier improved_doom:
+{	
+	description: "Increases critical chance of Doom by 50%."	
+}
+
+###############################################################################
+# Swarm
+
+talent witch_swarm:
+{
+	string: "Swarm"
+	icon: icon_swarm
+	talent_tree_points_required: 3
+	points:
+	[
+		{ ability: swarm }
+	]
+}
+
+cooldown swarm:
+{
+	duration: 50
+}
+
+ability swarm:
+{
+	string: "Swarm"
+	description: "Inflicts enemies in the targeted area with a swarm of locusts for 8 seconds."	
+	range: 8
+	cast_time: 20
+	flags: [ spell target_aoe interruptable ]
+	states: [ default in_combat ]
+	icon: icon_swarm
+	cooldowns: [ global lake_of_fire spell_unholy_lockout ]	
+	aoe_radius: 2
+	resource_cost mana: 20
+	talent_tree: witch_malice
+}
+
+###############################################################################
+# Curse of Inaction
+
+talent witch_curse_of_inaction:
+{
+	string: "Curse of Inaction"
+	icon: icon_curse_of_inaction
+	talent_tree_points_required: 3
+	prerequisites: [ witch_improved_curse_of_corruption ]
+	points:
+	[
+		{ ability: curse_of_inaction }
+	]
+}
+
+aura curse_of_inaction:
+{
+	string: "Curse of Inaction"
+	description: "Unable to do anything."
+	icon: icon_curse_of_inaction		
+	type: debuff
+	duration: 100	
+	flags: [ unique magic ]
+	sound: spell_14
+}
+
+ability curse_of_inaction:
+{
+	string: "Curse of Inaction"
+	description: "Causes target to be unable to do anything for 10 seconds."
+	range: 6
+	cooldowns: [ global spell_unholy_lockout ]
+	flags: [ spell target_other target_hostile ]
+	states: [ default in_combat ]
+	icon: icon_curse_of_inaction
+	resource_cost mana: 10
+	talent_tree: witch_malice
+	speed: 7
+	projectile: curse_of_inaction
+	cast_time: 20
+	target_particle_system: purple_spell_hit
+
+	direct_effect apply_aura:
+	{	
+		aura: curse_of_inaction
+	}
+}
+
+particle_system curse_of_inaction:
+{
+	particle:
+	{
+		sprites: [ effect_curse_of_corruption ] # Same sprite as Curse of Corruption
+		flags: [ attached no_rotation face_target ]
+		scale: 0.4
+		count: 1		
+	}
+}
+
+###############################################################################
+# Chain Lightning
+
+talent witch_chain_lightning:
+{
+	string: "Chain Lightning"
+	icon: icon_chain_lightning
+	prerequisites: [ witch_swarm ]
+	talent_tree_points_required: 6
+	points:
+	[
+		{ ability: chain_lightning }
+	]
+}
+
+ability chain_lightning:
+{
+	string: "Chain Lightning"
+	tags: [ ability_ranged ]
+	description: "Deals $damage$ damage to target."
+	range: 8
+	cast_time: 18
+	cooldowns: [ global spell_unholy_lockout ]
+	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
+	states: [ default in_combat ]
+	icon: icon_chain_lightning
+	talent_tree: witch_malice
+	speed: 8
+	projectile: witch_chain_lightning
+	resource_cost mana: 14
+	target_particle_system: green_spell_hit
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical is_magical ]
+		damage_type: unholy
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 24 ] [ 10 36 ] ] }													
+	}		
+}
+
+particle_system witch_chain_lightning:
+{
+	particle:
+	{
+		sprites: [ effect_witch_bolt ]
+		flags: [ attached no_rotation face_target ]
+		scale: 0.4
+		count: 1		
+	}
+}

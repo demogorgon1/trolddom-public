@@ -48,11 +48,43 @@ particle_system blue_spell_hit:
 	}
 }
 
+particle_system purple_spell_hit:
+{
+	particle:
+	{
+		sprites: [ effect_purple_spell_hit_0 effect_purple_spell_hit_1 effect_purple_spell_hit_2 effect_purple_spell_hit_3 ]
+		flags: [ attached blend_add no_loop ]
+		sprite_interval: 80
+		duration: 300
+		count: 1		
+		scale: 0.45
+		alpha: 0.4
+		fade_in: 50
+		fade_out: 150
+	}
+}
+
 particle_system orange_spell_hit:
 {
 	particle:
 	{
 		sprites: [ effect_orange_spell_hit_0 effect_orange_spell_hit_1 effect_orange_spell_hit_2 effect_orange_spell_hit_3 ]
+		flags: [ attached blend_add no_loop ]
+		sprite_interval: 80
+		duration: 300
+		count: 1		
+		scale: 0.45
+		alpha: 0.4
+		fade_in: 50
+		fade_out: 150
+	}
+}
+
+particle_system green_spell_hit:
+{
+	particle:
+	{
+		sprites: [ effect_green_spell_hit_0 effect_green_spell_hit_1 effect_green_spell_hit_2 effect_green_spell_hit_3 ]
 		flags: [ attached blend_add no_loop ]
 		sprite_interval: 80
 		duration: 300

@@ -416,5 +416,14 @@ sprites:
 	sprite icon_token_1 : { tags: [ icon ] }
 	sprite icon_paladin : { tags: [ icon ] }
 	sprite icon_witch : { tags: [ icon ] }
+	sprite icon_witch_bolt : { tags: [ icon ] }
+	sprite icon_weakness : { tags: [ icon ] }
+	sprite icon_curse_of_corruption : { tags: [ icon ] }
+	sprite icon_curse_of_attraction : { tags: [ icon ] }
+	sprite icon_doom : { tags: [ icon ] }
+	sprite icon_improved_doom : { tags: [ icon ] }
+	sprite icon_swarm : { tags: [ icon ] }
+	sprite icon_curse_of_inaction : { tags: [ icon ] }
+	sprite icon_chain_lightning : { tags: [ icon ] }
 
 }

@@ -101,12 +101,15 @@ namespace tpublic
 
 			CombatFunction								m_function;
 			std::vector<ConditionalCriticalChanceBonus>	m_conditionalCriticalChanceBonuses;
+			std::unordered_map<uint32_t, float>			m_abilityModifierMultipliers;
 
 			DirectEffect::DamageType	_GetDamageType(
 											const EntityInstance*				aEntityInstance,
 											const AbilityModifierList*			aAbilityModifierList,
 											uint32_t							aAbilityId) const;
 			float						_GetCriticalChanceBonus(
+											const Components::AbilityModifiers*	aAbilityModifiers) const;
+			float						_GetDamageModifier(
 											const Components::AbilityModifiers*	aAbilityModifiers) const;
 		};
 

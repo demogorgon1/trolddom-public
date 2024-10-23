@@ -28,6 +28,8 @@ namespace tpublic
 						m_auraFlags = Data::Aura::SourceToFlags(aChild);
 					else if (aChild->m_name == "aura")
 						m_auraId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_AURA, aChild->GetIdentifier());
+					else if (aChild->m_name == "aura_group")
+						m_auraGroupId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_AURA_GROUP, aChild->GetIdentifier());
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 				}
@@ -42,6 +44,7 @@ namespace tpublic
 			aStream->WritePOD(m_auraFlags);
 			aStream->WritePOD(m_auraType);
 			aStream->WriteUInt(m_auraId);
+			aStream->WriteUInt(m_auraGroupId);
 		}
 
 		bool
@@ -55,6 +58,8 @@ namespace tpublic
 			if (!aStream->ReadPOD(m_auraType))
 				return false;
 			if (!aStream->ReadUInt(m_auraId))
+				return false;
+			if (!aStream->ReadUInt(m_auraGroupId))
 				return false;
 			return true;
 		}
@@ -86,6 +91,20 @@ namespace tpublic
 					if(entry->m_auraId == m_auraId)
 					{
 						// Hack, see comment below
+						entry->m_cancel = true;
+					}
+				}
+			}
+			else if(m_auraGroupId != 0)
+			{
+				// Removing all auras within aura group
+				for (std::unique_ptr<Components::Auras::Entry>& entry : targetAuras->m_entries)
+				{
+					const Data::Aura* aura = aManifest->GetById<Data::Aura>(entry->m_auraId);
+
+					if(aura->m_auraGroupId == m_auraGroupId)
+					{
+						// Also hack, see comment below
 						entry->m_cancel = true;
 					}
 				}

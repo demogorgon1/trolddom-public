@@ -5,6 +5,7 @@
 #include <tpublic/Data/Achievement.h>
 #include <tpublic/Data/AchievementCategory.h>
 #include <tpublic/Data/Aura.h>
+#include <tpublic/Data/AuraGroup.h>
 #include <tpublic/Data/Terrain.h>
 #include <tpublic/Data/Class.h>
 #include <tpublic/Data/CliffStyle.h>
@@ -67,6 +68,7 @@ namespace tpublic
 		RegisterDataContainer<Data::Achievement>();
 		RegisterDataContainer<Data::AchievementCategory>();
 		RegisterDataContainer<Data::Aura>();
+		RegisterDataContainer<Data::AuraGroup>();
 		RegisterDataContainer<Data::Terrain>();
 		RegisterDataContainer<Data::Class>();
 		RegisterDataContainer<Data::CliffStyle>();

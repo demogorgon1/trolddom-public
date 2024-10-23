@@ -202,6 +202,8 @@ namespace tpublic
 							m_charges = CombatFunction(aChild);
 						else if (aChild->m_name == "sound")
 							m_soundId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SOUND, aChild->GetIdentifier());
+						else if (aChild->m_name == "aura_group")
+							m_auraGroupId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_AURA_GROUP, aChild->GetIdentifier());
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 					}
@@ -224,6 +226,7 @@ namespace tpublic
 				aStream->WriteUInt(m_encounterId);
 				aStream->WriteUInt(m_particleSystemId);
 				aStream->WriteUInt(m_soundId);
+				aStream->WriteUInt(m_auraGroupId);
 			}
 			 
 			bool
@@ -266,6 +269,12 @@ namespace tpublic
 					if(!aStream->ReadUInt(m_soundId))
 						return false;
 				}
+
+				if(!aStream->IsEnd())
+				{
+					if(!aStream->ReadUInt(m_auraGroupId))
+						return false;
+				}
 				return true;
 			}
 
@@ -282,6 +291,7 @@ namespace tpublic
 			uint32_t										m_encounterId = 0;
 			uint32_t										m_particleSystemId = 0;
 			uint32_t										m_soundId = 0;
+			uint32_t										m_auraGroupId = 0;
 		};
 
 	}

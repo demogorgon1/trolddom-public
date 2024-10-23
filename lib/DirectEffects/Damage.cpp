@@ -36,6 +36,15 @@ namespace tpublic::DirectEffects
 				{
 					m_function = CombatFunction(aChild);
 				}
+				else if(aChild->m_name == "ability_modifier_multipliers")
+				{
+					aChild->GetObject()->ForEachChild([&](
+						const SourceNode* aAbilityModifierMultiplier)
+					{
+						uint32_t abilityModifierId = aAbilityModifierMultiplier->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY_MODIFIER, aAbilityModifierMultiplier->m_name.c_str());
+						m_abilityModifierMultipliers[abilityModifierId] = aAbilityModifierMultiplier->GetFloat();
+					});
+				}
 				else
 				{
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
@@ -52,6 +61,13 @@ namespace tpublic::DirectEffects
 		aStream->WritePOD(m_damageType);
 		aStream->WriteObjects(m_conditionalCriticalChanceBonuses);
 		m_function.ToStream(aStream);
+
+		aStream->WriteUInt(m_abilityModifierMultipliers.size());
+		for(std::unordered_map<uint32_t, float>::const_iterator i = m_abilityModifierMultipliers.cbegin(); i != m_abilityModifierMultipliers.cend(); i++)
+		{
+			aStream->WriteUInt(i->first);
+			aStream->WriteFloat(i->second);
+		}
 	}
 			
 	bool	
@@ -66,6 +82,25 @@ namespace tpublic::DirectEffects
 			return false;
 		if(!m_function.FromStream(aStream))
 			return false;
+
+		{
+			size_t count = 0;
+			if(!aStream->ReadUInt(count))
+				return false;
+
+			for(size_t i = 0; i < count; i++)
+			{
+				uint32_t abilityModifierId = 0;
+				if(!aStream->ReadUInt(abilityModifierId))
+					return false;
+
+				float multiplier = 0.0f;
+				if(!aStream->ReadFloat(multiplier))
+					return false;
+
+				m_abilityModifierMultipliers[abilityModifierId] = multiplier;
+			}
+		}
 
 		return true;
 	}
@@ -101,7 +136,7 @@ namespace tpublic::DirectEffects
 		if(targetCombatPublic == NULL)
 			return Result();
 
-		uint32_t damage = (uint32_t)m_function.EvaluateEntityInstance(aRandom, aSource);
+		uint32_t damage = (uint32_t)m_function.EvaluateEntityInstance(aRandom, _GetDamageModifier(abilityModifiers), aSource);
 
 		CombatEvent::Id result = aId;
 
@@ -248,7 +283,23 @@ namespace tpublic::DirectEffects
 		UIntRange&							aOutDamage,
 		DirectEffect::DamageType&			aOutDamageType)	const
 	{
-		m_function.ToRange(aEntityInstance, aOutDamage);
+		float damageModifier = 1.0f;
+
+		if(aAbilityModifierList != NULL)
+		{
+			const std::vector<const Data::AbilityModifier*>* modifierList = aAbilityModifierList->GetAbility(aAbilityId);
+			if(modifierList != NULL)
+			{
+				for (const Data::AbilityModifier* abilityModifier : *modifierList)
+				{
+					std::unordered_map<uint32_t, float>::const_iterator i = m_abilityModifierMultipliers.find(abilityModifier->m_id);
+					if (i != m_abilityModifierMultipliers.cend())
+						damageModifier *= i->second;
+				}
+			}
+		}
+
+		m_function.ToRange(damageModifier, aEntityInstance, aOutDamage);
 		aOutDamageType = _GetDamageType(aEntityInstance, aAbilityModifierList, aAbilityId);
 		return true;
 	}
@@ -287,6 +338,25 @@ namespace tpublic::DirectEffects
 		}
 
 		return bonus;
+	}
+
+	float						
+	Damage::_GetDamageModifier(
+		const Components::AbilityModifiers* aAbilityModifiers) const
+	{
+		float modifier = 1.0f;
+
+		if(aAbilityModifiers != NULL)
+		{
+			for (uint32_t abilityModifierId : aAbilityModifiers->m_active)
+			{
+				std::unordered_map<uint32_t, float>::const_iterator i = m_abilityModifierMultipliers.find(abilityModifierId);
+				if (i != m_abilityModifierMultipliers.cend())
+					modifier *= i->second;
+			}
+		}
+
+		return modifier;
 	}
 
 }

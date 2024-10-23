@@ -162,6 +162,7 @@ namespace tpublic
 	float		
 	CombatFunction::Evaluate(
 		CombatFunction::RandomSource		aRandomSource,
+		float								aMultiplier,
 		const Components::CombatPublic*		aCombatPublic,
 		const Components::CombatPrivate*	aCombatPrivate) const
 	{
@@ -222,27 +223,30 @@ namespace tpublic
 			}
 		}
 
-		return output;
+		return output * aMultiplier;
 	}
 
 	float		
 	CombatFunction::EvaluateEntityInstance(
 		CombatFunction::RandomSource		aRandomSource,
+		float								aMultiplier,
 		const EntityInstance*				aEntityInstance) const
 	{
 		return Evaluate(
 			aRandomSource, 
+			aMultiplier,
 			aEntityInstance->GetComponent<Components::CombatPublic>(),
 			aEntityInstance->GetComponent<Components::CombatPrivate>());
 	}
 
 	void		
 	CombatFunction::ToRange(
+		float								aMultiplier,
 		const EntityInstance*				aEntityInstance,
 		UIntRange&							aOut) const
 	{
-		aOut.m_min = (uint32_t)EvaluateEntityInstance(RandomSource(RandomSource::TYPE_MIN), aEntityInstance);
-		aOut.m_max = (uint32_t)EvaluateEntityInstance(RandomSource(RandomSource::TYPE_MAX), aEntityInstance);
+		aOut.m_min = (uint32_t)EvaluateEntityInstance(RandomSource(RandomSource::TYPE_MIN), aMultiplier, aEntityInstance);
+		aOut.m_max = (uint32_t)EvaluateEntityInstance(RandomSource(RandomSource::TYPE_MAX), aMultiplier, aEntityInstance);
 	}
 
 }

@@ -113,7 +113,7 @@ namespace tpublic::DirectEffects
 					combatPublic,
 					NULL,
 					resourceIndex,
-					(int32_t)m_function.EvaluateEntityInstance(aRandom, aSource),
+					(int32_t)m_function.EvaluateEntityInstance(aRandom, 1.0f, aSource),
 					0,
 					m_silent);
 			}

@@ -80,7 +80,7 @@ namespace tpublic::DirectEffects
 		if(sourceCombatPrivate == NULL || targetCombatPublic == NULL)
 			return Result();
 
-		uint32_t heal = (uint32_t)m_function.EvaluateEntityInstance(aRandom, aSource);
+		uint32_t heal = (uint32_t)m_function.EvaluateEntityInstance(aRandom, 1.0f, aSource);
 
 		if(m_maxHealthPercentage)
 		{	
@@ -151,7 +151,7 @@ namespace tpublic::DirectEffects
 		uint32_t					/*aAbilityId*/,
 		UIntRange&					aOutHeal) const 
 	{
-		m_function.ToRange(aEntityInstance, aOutHeal);
+		m_function.ToRange(1.0f, aEntityInstance, aOutHeal);
 		return true;
 	}
 

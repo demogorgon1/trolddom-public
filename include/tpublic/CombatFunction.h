@@ -260,12 +260,15 @@ namespace tpublic
 
 		float		Evaluate(
 						RandomSource						aRandomSource,
+						float								aMultiplier,
 						const Components::CombatPublic*		aCombatPublic,
 						const Components::CombatPrivate*	aCombatPrivate) const;
 		float		EvaluateEntityInstance(
 						RandomSource						aRandomSource,
+						float								aMultiplier,
 						const EntityInstance*				aEntityInstance) const;
 		void		ToRange(
+						float								aMultiplier,
 						const EntityInstance*				aEntityInstance,
 						UIntRange&							aOut) const;
 	

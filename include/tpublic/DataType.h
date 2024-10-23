@@ -63,6 +63,7 @@ namespace tpublic
 			ID_MAP_CLIFF,
 			ID_CONTEXT_HELP,
 			ID_MINION_MODE,
+			ID_AURA_GROUP,
 
 			NUM_IDS
 		};
@@ -123,7 +124,8 @@ namespace tpublic
 			"cliff_style",
 			"map_cliff",
 			"context_help",
-			"minion_mode"
+			"minion_mode",
+			"aura_group"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

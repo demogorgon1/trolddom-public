@@ -12,6 +12,7 @@
 #include <tpublic/Components/VisibleAuras.h>
 #include <tpublic/Components/ZoneDiscovery.h>
 
+#include <tpublic/Data/Aura.h>
 #include <tpublic/Data/Entity.h>
 
 #include <tpublic/EntityInstance.h>
@@ -64,6 +65,25 @@ namespace tpublic
 					if (aRequirement->m_type == Requirement::TYPE_MUST_HAVE_AURA && !hasAura)
 						return false;
 					else if (aRequirement->m_type == Requirement::TYPE_MUST_NOT_HAVE_AURA && hasAura)
+						return false;
+				}
+				break;					
+
+			case Requirement::TYPE_MUST_HAVE_AURA_GROUP:
+				{
+					const Components::VisibleAuras* visibleAuras = entity->GetComponent<Components::VisibleAuras>();
+					bool hasAuraGroup = false;
+					for(const Components::VisibleAuras::Entry& entry : visibleAuras->m_entries)
+					{
+						const Data::Aura* auraData = aManifest->GetById<Data::Aura>(entry.m_auraId);
+						if(auraData->m_auraGroupId == aRequirement->m_id)
+						{
+							hasAuraGroup = true;
+							break;
+						}
+					}
+
+					if(!hasAuraGroup)
 						return false;
 				}
 				break;					

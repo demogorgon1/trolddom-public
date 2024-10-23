@@ -53,6 +53,7 @@ namespace tpublic
 			Data::Aura::Type		m_auraType = Data::Aura::INVALID_TYPE;
 			uint32_t				m_auraFlags = 0;
 			uint32_t				m_auraId = 0;
+			uint32_t				m_auraGroupId = 0;
 		};
 
 	}
