@@ -426,4 +426,7 @@ sprites:
 	sprite icon_curse_of_inaction : { tags: [ icon ] }
 	sprite icon_chain_lightning : { tags: [ icon ] }
 
+	cursor: { position: [ 0 368 ] }
+	sprite icon_malice : { tags: [ icon ] }
+
 }

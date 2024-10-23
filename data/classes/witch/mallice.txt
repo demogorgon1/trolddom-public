@@ -1,8 +1,8 @@
 talent_tree witch_malice:
 {
 	string: "Malice"
-	description: "."
-	icon: icon_defensive
+	description: "Inflict pain and misery on your enemies."
+	icon: icon_malice
 	
 	map_palette:
 	{
