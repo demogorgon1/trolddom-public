@@ -667,6 +667,10 @@ namespace tpublic
 						{
 							m_armorDecoration = SpriteCollection(aMember);
 						}
+						else if(aMember->m_name == "unlocked_by_achievement")
+						{
+							m_unlockedByAchievementId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ACHIEVEMENT, aMember->GetIdentifier());
+						}
 						else
 						{
 							TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
@@ -696,6 +700,7 @@ namespace tpublic
 				aStream->WriteUInts(m_remains);
 				aStream->WritePOD(m_defaultArmorStyleId);
 				m_armorDecoration.ToStream(aStream);
+				aStream->WriteUInt(m_unlockedByAchievementId);
 
 				for(uint32_t i = 1; i < (uint32_t)ArmorStyle::NUM_IDS; i++)
 					m_armorStyles[i].ToStream(aStream);
@@ -742,6 +747,8 @@ namespace tpublic
 					return false;
 				if(!m_armorDecoration.FromStream(aStream))
 					return false;
+				if(!aStream->ReadUInt(m_unlockedByAchievementId))
+					return false;
 
 				for (uint32_t i = 1; i < (uint32_t)ArmorStyle::NUM_IDS; i++)
 				{
@@ -778,6 +785,7 @@ namespace tpublic
 			SpriteCollection										m_armorStyles[ArmorStyle::NUM_IDS];
 			std::unique_ptr<SpriteCollection>						m_weaponSprites[ItemType::NUM_IDS];
 			SpriteCollection										m_armorDecoration;
+			uint32_t												m_unlockedByAchievementId = 0;
 		};
 
 	}

@@ -414,5 +414,7 @@ sprites:
 	sprite icon_green_bag_2 : { tags: [ icon ] }
 	sprite icon_purple_bag_2 : { tags: [ icon ] }
 	sprite icon_token_1 : { tags: [ icon ] }
+	sprite icon_paladin : { tags: [ icon ] }
+	sprite icon_witch : { tags: [ icon ] }
 
 }

@@ -1,0 +1,16 @@
+talent_tree paladin_warrior:
+{
+	string: "Warrior"
+	description: "."
+	icon: icon_defensive
+	
+	map_palette:
+	{
+	}
+	
+	map:
+	[
+	]
+	
+}
+

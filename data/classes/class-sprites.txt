@@ -193,6 +193,138 @@ sprites:
 	skip: { }
 	sprite sorcerer_walk_2_knife_1h: { }
 
+	size: { width: 16 height: 16 }
+
+	cursor: { position: [ 0 192 ] }
+	sprite paladin_naked: { }
+	sprite paladin: { }
+	sprite paladin_2: { }
+	sprite paladin_3: { }
+	sprite paladin_4: { }
+	sprite paladin_5: { }
+	sprite paladin_6: { }
+	sprite paladin_7: { }
+	sprite paladin_8: { }
+	sprite paladin_staff: { }
+	sprite paladin_sword_1h: { }
+	sprite paladin_axe_1h: { }
+	sprite paladin_mace_1h: { }
+	sprite paladin_knife_1h: { }
+	sprite paladin_sword_2h: { }
+	sprite paladin_axe_2h: { }
+	sprite paladin_mace_2h: { }
+	sprite paladin_shield: { }
+	
+	cursor: { position: [ 0 208 ] }
+	sprite paladin_naked_dead: { }
+	sprite paladin_dead: { }
+	sprite paladin_2_dead: { }
+	sprite paladin_3_dead: { }
+	sprite paladin_4_dead: { }
+	sprite paladin_5_dead: { }
+	sprite paladin_6_dead: { }
+	sprite paladin_7_dead: { }
+	sprite paladin_8_dead: { }
+	
+	cursor: { position: [ 0 224 ] }
+	sprite paladin_naked_walk_1: { }
+	sprite paladin_walk_1: { }
+	sprite paladin_2_walk_1: { }
+	sprite paladin_3_walk_1: { }
+	sprite paladin_4_walk_1: { }
+	sprite paladin_5_walk_1: { }
+	sprite paladin_6_walk_1: { }
+	sprite paladin_7_walk_1: { }
+	sprite paladin_8_walk_1: { }
+	sprite paladin_walk_1_staff: { }
+	sprite paladin_walk_1_sword_1h: { }
+	sprite paladin_walk_1_axe_1h: { }
+	sprite paladin_walk_1_mace_1h: { }
+	sprite paladin_walk_1_knife_1h: { }
+	sprite paladin_walk_1_sword_2h: { }
+	sprite paladin_walk_1_axe_2h: { }
+	sprite paladin_walk_1_mace_2h: { }
+	sprite paladin_walk_1_shield: { }
+	
+	cursor: { position: [ 0 240 ] }
+	sprite paladin_naked_walk_2: { }
+	sprite paladin_walk_2: { }
+	sprite paladin_2_walk_2: { }
+	sprite paladin_3_walk_2: { }
+	sprite paladin_4_walk_2: { }
+	sprite paladin_5_walk_2: { }
+	sprite paladin_6_walk_2: { }
+	sprite paladin_7_walk_2: { }
+	sprite paladin_8_walk_2: { }
+	sprite paladin_walk_2_staff: { }
+	sprite paladin_walk_2_sword_1h: { }
+	sprite paladin_walk_2_axe_1h: { }
+	sprite paladin_walk_2_mace_1h: { }
+	sprite paladin_walk_2_knife_1h: { }
+	sprite paladin_walk_2_sword_2h: { }
+	sprite paladin_walk_2_axe_2h: { }
+	sprite paladin_walk_2_mace_2h: { }
+	sprite paladin_walk_2_shield: { }
+
+	cursor: { position: [ 0 256 ] }
+	sprite witch_naked: { }
+	sprite witch: { }
+	sprite witch_2: { }
+	sprite witch_3: { }
+	sprite witch_4: { }
+	sprite witch_5: { }
+	sprite witch_6: { }
+	sprite witch_7: { }
+	sprite witch_8: { }
+	sprite witch_staff: { }
+	sprite witch_sword_1h: { }
+	skip: { }
+	skip: { }
+	sprite witch_knife_1h: { }
+	
+	cursor: { position: [ 0 272 ] }
+	sprite witch_naked_dead: { }
+	sprite witch_dead: { }
+	sprite witch_2_dead: { }
+	sprite witch_3_dead: { }
+	sprite witch_4_dead: { }
+	sprite witch_5_dead: { }
+	sprite witch_6_dead: { }
+	sprite witch_7_dead: { }
+	sprite witch_8_dead: { }
+	
+	cursor: { position: [ 0 288 ] }
+	sprite witch_naked_walk_1: { }	
+	sprite witch_walk_1: { }
+	sprite witch_2_walk_1: { }
+	sprite witch_3_walk_1: { }
+	sprite witch_4_walk_1: { }
+	sprite witch_5_walk_1: { }
+	sprite witch_6_walk_1: { }
+	sprite witch_7_walk_1: { }
+	sprite witch_8_walk_1: { }
+	sprite witch_walk_1_staff: { }
+	sprite witch_walk_1_sword_1h: { }
+	skip: { }
+	skip: { }
+	sprite witch_walk_1_knife_1h: { }
+	
+	cursor: { position: [ 0 304 ] }
+	sprite witch_naked_walk_2: { }
+	sprite witch_walk_2: { }
+	sprite witch_2_walk_2: { }
+	sprite witch_3_walk_2: { }
+	sprite witch_4_walk_2: { }
+	sprite witch_5_walk_2: { }
+	sprite witch_6_walk_2: { }
+	sprite witch_7_walk_2: { }
+	sprite witch_8_walk_2: { }
+	sprite witch_walk_2_staff: { }
+	sprite witch_walk_2_sword_1h: { }
+	skip: { }
+	skip: { }
+	sprite witch_walk_2_knife_1h: { }
+
 }
 
 sprites:
@@ -236,5 +368,30 @@ sprites:
 
 	cursor: { position: [ 0 176 ] }
 	sprite sorcerer_decoration_walk_2: { }
+
+	cursor: { position: [ 0 192 ] }
+	sprite paladin_decoration: { }
+	
+	cursor: { position: [ 0 208 ] }
+	sprite paladin_decoration_dead: { }
+	
+	cursor: { position: [ 0 224 ] }
+	sprite paladin_decoration_walk_1: { }
+
+	cursor: { position: [ 0 240 ] }
+	sprite paladin_decoration_walk_2: { }
+
+	cursor: { position: [ 0 256 ] }
+	sprite witch_decoration: { }
+	
+	cursor: { position: [ 0 272 ] }
+	sprite witch_decoration_dead: { }
+	
+	cursor: { position: [ 0 288 ] }
+	sprite witch_decoration_walk_1: { }
+
+	cursor: { position: [ 0 304 ] }
+	sprite witch_decoration_walk_2: { }
+
 
 }

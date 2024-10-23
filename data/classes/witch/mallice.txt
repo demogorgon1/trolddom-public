@@ -1,0 +1,16 @@
+talent_tree witch_malice:
+{
+	string: "Malice"
+	description: "."
+	icon: icon_defensive
+	
+	map_palette:
+	{
+	}
+	
+	map:
+	[
+	]
+	
+}
+

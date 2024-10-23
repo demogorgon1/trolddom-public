@@ -1,0 +1,259 @@
+class paladin:
+{
+	string: "Paladin"	
+	description: "."
+	
+	unlocked_by_achievement: light_follower
+	
+	systems: [ combat health_regen mana_regen ]
+	
+	armor_style none:   { sprite: paladin_naked sprite_dead: paladin_naked_dead sprites_walk: [ paladin_naked_walk_1 paladin_naked_walk_2 ] }	
+	armor_style brown:  { sprite: paladin       sprite_dead: paladin_dead       sprites_walk: [ paladin_walk_1       paladin_walk_2 ] }
+	armor_style green:  { sprite: paladin_2     sprite_dead: paladin_2_dead     sprites_walk: [ paladin_2_walk_1     paladin_2_walk_2 ] }
+	armor_style cyan:   { sprite: paladin_3     sprite_dead: paladin_3_dead     sprites_walk: [ paladin_3_walk_1     paladin_3_walk_2 ] }
+	armor_style red:    { sprite: paladin_4     sprite_dead: paladin_4_dead     sprites_walk: [ paladin_4_walk_1     paladin_4_walk_2 ] }
+	armor_style purple: { sprite: paladin_5     sprite_dead: paladin_5_dead     sprites_walk: [ paladin_5_walk_1     paladin_5_walk_2 ] }
+	armor_style black:  { sprite: paladin_6     sprite_dead: paladin_6_dead     sprites_walk: [ paladin_6_walk_1     paladin_6_walk_2 ] }
+	armor_style white:  { sprite: paladin_7     sprite_dead: paladin_7_dead     sprites_walk: [ paladin_7_walk_1     paladin_7_walk_2 ] }
+	armor_style yellow: { sprite: paladin_8     sprite_dead: paladin_8_dead     sprites_walk: [ paladin_8_walk_1     paladin_8_walk_2 ] }
+		
+	weapon_sprites weapon_1h_sword: { sprite: paladin_sword_1h sprites_walk: [ paladin_walk_1_sword_1h paladin_walk_2_sword_1h ] }
+	weapon_sprites weapon_1h_mace:  { sprite: paladin_mace_1h  sprites_walk: [ paladin_walk_1_mace_1h  paladin_walk_2_mace_1h ] }
+		
+	armor_decoration: { sprite: paladin_decoration sprite_dead: paladin_decoration_dead sprites_walk: [ paladin_decoration_walk_1 paladin_decoration_walk_2 ] }
+		
+	remains: [ player_remains_1 player_remains_2 player_remains_3 ]
+
+	color_1: [ 210 210 210 ] 
+	color_2: [ 100 100 64 ]
+	default_attack: attack
+	default_action_bar: [ attack !DEFAULT_ABILITIES{} ]
+	talent_trees: [ paladin_warrior paladin_guardian paladin_healer ]
+	
+	item_types: [ armor_cloth armor_mail armor_plate weapon_1h_mace weapon_1h_sword ]
+
+	start_map open_world: [ ]	
+	start_equipment main_hand: weapon_gnarly_staff
+	start_equipment chest: chest_tattered_robe
+	start_equipment feet: feet_tattered_slippers
+	start_equipment legs: legs_tattered_pants
+	start_inventory: [ consumable_dry_bread consumable_dry_bread consumable_dry_bread consumable_dry_bread consumable_dry_bread ]
+	
+	stats_conversion:
+	{
+		str_to_dps: [ 2 5 ]
+		str_weapon_damage_min: [ 2 3 ]
+		str_weapon_damage_max: [ 4 3 ]
+		dex_to_phys_crit: [ 1 20 ]
+		dex_to_dodge: [ 1 20 ]
+		dex_to_parry: [ 1 25 ]
+		str_to_parry: [ 1 40 ]
+		wis_to_mag_crit: [ 1 30 ]
+		con_to_health: [ 10 1 ]
+		wis_to_mana: [ 10 1 ]
+		spi_to_mana_regen_per_5_sec: [ 3 2 ]
+		spi_to_health_regen: [ 1 1 ]
+		str_to_block_value: [ 1 20 ]
+	}	
+
+	level_progression:
+	[
+		{
+			level: 1
+			
+			unlock_abilities:
+			[
+				attack				
+				
+				!DEFAULT_ABILITIES{}
+			]
+						
+			stats:
+			{
+				dexterity: 3
+				strength: 4
+				wisdom: 7
+				constitution: 4
+				spirit: 10
+			}
+			
+			resource health: { add_max: 60 }
+			resource mana: { add_max: 60 }
+			
+			add_unarmed_weapon_damage: [ 2 4 ]
+		}
+		
+		{
+			level: 2
+			
+			unlock_abilities:
+			[				
+			]
+			
+			stats:
+			{
+				wisdom: 1
+				constitution: 1
+			}
+			
+			resource health: { add_max: 6 }
+			resource mana: { add_max: 6 }
+		}
+		
+		{
+			level: 3
+			
+			unlock_abilities:
+			[			
+			]
+			
+			stats:
+			{
+				dexterity: 1
+				strength: 1
+				spirit: 1
+			}			
+			
+			resource health: { add_max: 6 }			
+			resource mana: { add_max: 6 }			
+		}		
+		
+		{
+			level: 4
+			
+			unlock_abilities:
+			[
+			]
+			
+			stats:
+			{
+				wisdom: 1
+				constitution: 1
+			}			
+			
+			resource health: { add_max: 6 }			
+			resource mana: { add_max: 6 }			
+		}				
+		
+		{
+			level: 5
+			
+			unlock_abilities:
+			[
+			]
+			
+			stats:
+			{
+				dexterity: 1
+				strength: 1
+				spirit: 1
+			}			
+			
+			resource health: { add_max: 6 }
+			resource mana: { add_max: 6 }			
+		}		
+		
+		{
+			level: 6
+			
+			unlock_abilities:
+			[
+			]
+			
+			stats:
+			{
+				wisdom: 1
+				constitution: 1
+			}			
+			
+			resource health: { add_max: 6 }		
+			resource mana: { add_max: 6 }
+		}				
+
+		{
+			level: 7
+			
+			unlock_abilities:
+			[			
+			]
+			
+			stats:
+			{
+				dexterity: 1
+				strength: 1
+				spirit: 1
+			}	
+
+			resource health: { add_max: 6 }
+			resource mana: { add_max: 6 }			
+		}		
+		
+		{
+			level: 8
+			
+			unlock_abilities:
+			[
+			]
+			
+			stats:
+			{
+				wisdom: 1
+				constitution: 1
+			}			
+			
+			resource health: { add_max: 6 }			
+			resource mana: { add_max: 6 }			
+		}				
+
+		{
+			level: 9
+			
+			unlock_abilities:
+			[
+			]
+			
+			stats:
+			{
+				dexterity: 1
+				strength: 1
+				spirit: 1
+			}			
+			
+			resource health: { add_max: 6 }			
+			resource mana: { add_max: 6 }			
+		}		
+		
+		{
+			level: 10
+			
+			unlock_abilities:
+			[			
+			]
+			
+			stats:
+			{
+				wisdom: 1
+				constitution: 1
+			}			
+			
+			resource health: { add_max: 6 }			
+			resource mana: { add_max: 6 }			
+			
+			achievement: paladin_level_10
+		}				
+		
+	]
+}
+
+###############################################################################
+# Achievements
+
+achievement paladin_level_10: 
+{ 
+	category: general 
+	string: "Paladin (Level 10)" 
+	description: "Reach level 10 as a Paladin." 
+	points: 10 
+	icon: icon_paladin
+	no_progress_values: true 
+}

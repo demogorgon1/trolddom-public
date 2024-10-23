@@ -1,0 +1,16 @@
+talent_tree witch_demonology:
+{
+	string: "Demonology"
+	description: "."
+	icon: icon_defensive
+	
+	map_palette:
+	{
+	}
+	
+	map:
+	[
+	]
+	
+}
+
