@@ -165,5 +165,17 @@ namespace tpublic
 		return t;
 	}
 
+	void		
+	Mail::DebugPrint(
+		const Manifest* aManifest) const
+	{
+		printf("to:%u;\n", m_toCharacterId);
+		printf("from:%u;\n", m_fromCharacterId);
+		printf("from_name:%s\n", m_fromName.c_str());
+		printf("subj:%s\n", m_subject.c_str());
+		printf("body:%s\n", m_body.c_str());
+		printf("cash:%zd\n", m_cash);
+		printf("items:%s\n", GetItemString(aManifest).c_str());
+	}
 
 }
