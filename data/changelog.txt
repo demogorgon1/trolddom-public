@@ -20,6 +20,17 @@ changelog:
 changelog_demo:
 {
 	#######################################################################################
+	heading: "Demo v0.1.5"
+	
+	text: "Issues fixed:"
+
+	list:
+	[
+		{ text: "Multiple bugs related to the auction house." }
+		{ text: "Mail UI wasn't refreshed correctly after using the Open All option." }
+	]	
+
+	#######################################################################################
 	heading: "Demo v0.1.4"
 
 	text: "Changes:"
