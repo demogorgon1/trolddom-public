@@ -48,6 +48,24 @@ namespace tpublic
 
 		template <typename _T>
 		const _T*
+		TryCast() const
+		{
+			if(m_componentId != _T::ID)
+				return NULL;
+			return (const _T*)this;
+		}
+
+		template <typename _T>
+		_T*
+		TryCast()
+		{
+			if(m_componentId != _T::ID)
+				return NULL;
+			return (_T*)this;
+		}
+
+		template <typename _T>
+		const _T*
 		Cast() const
 		{
 			TP_CHECK(m_componentId == _T::ID, "Component type mismatch.");
