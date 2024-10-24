@@ -64,7 +64,8 @@ namespace tpublic
 				FIELD_PROFESSIONS,
 				FIELD_WORSHIP,
 				FIELD_GATEWAYS,
-				DEPRECATED_FIELD_SELECTED_PLAYER_WORLD
+				DEPRECATED_FIELD_SELECTED_PLAYER_WORLD,
+				FIELD_LATEST_CHARACTER_FIX_ID
 			};
 
 			static void
@@ -80,6 +81,7 @@ namespace tpublic
 				aSchema->DefineCustomObjectNoSource<PlayerProfessions>(FIELD_PROFESSIONS, offsetof(PlayerPrivate, m_professions));
 				aSchema->DefineCustomObjectNoSource<PlayerWorship>(FIELD_WORSHIP, offsetof(PlayerPrivate, m_worship));
 				aSchema->DefineCustomObjectNoSource<PlayerGateways>(FIELD_GATEWAYS, offsetof(PlayerPrivate, m_gateways));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_LATEST_CHARACTER_FIX_ID, NULL, offsetof(PlayerPrivate, m_latestCharacterFixId));
 			}
 
 			void
@@ -95,6 +97,7 @@ namespace tpublic
 				m_worship.m_table.clear();
 				m_gateways.m_currentSeed = 0;
 				m_gateways.m_lockedSeeds.clear();
+				m_latestCharacterFixId = 0;
 
 				m_tryEditPlayerWorlds = false;
 				m_recall = false;
@@ -114,6 +117,7 @@ namespace tpublic
 			PlayerProfessions												m_professions;
 			PlayerWorship													m_worship;
 			PlayerGateways													m_gateways;
+			uint32_t														m_latestCharacterFixId = 0;
 
 			// Not serialized, internal
 			bool															m_tryEditPlayerWorlds = false;
