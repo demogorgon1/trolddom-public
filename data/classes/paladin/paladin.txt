@@ -4,6 +4,7 @@ class paladin:
 	description: "."
 	
 	unlocked_by_achievement: light_follower
+	restricted: true
 	
 	systems: [ combat health_regen mana_regen ]
 	

@@ -671,6 +671,10 @@ namespace tpublic
 						{
 							m_unlockedByAchievementId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ACHIEVEMENT, aMember->GetIdentifier());
 						}
+						else if(aMember->m_name == "restricted")
+						{
+							m_restricted = aMember->GetBool();
+						}
 						else
 						{
 							TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
@@ -701,6 +705,7 @@ namespace tpublic
 				aStream->WritePOD(m_defaultArmorStyleId);
 				m_armorDecoration.ToStream(aStream);
 				aStream->WriteUInt(m_unlockedByAchievementId);
+				aStream->WriteBool(m_restricted);
 
 				for(uint32_t i = 1; i < (uint32_t)ArmorStyle::NUM_IDS; i++)
 					m_armorStyles[i].ToStream(aStream);
@@ -749,6 +754,8 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadUInt(m_unlockedByAchievementId))
 					return false;
+				if(!aStream->ReadBool(m_restricted))
+					return false;
 
 				for (uint32_t i = 1; i < (uint32_t)ArmorStyle::NUM_IDS; i++)
 				{
@@ -786,6 +793,7 @@ namespace tpublic
 			std::unique_ptr<SpriteCollection>						m_weaponSprites[ItemType::NUM_IDS];
 			SpriteCollection										m_armorDecoration;
 			uint32_t												m_unlockedByAchievementId = 0;
+			bool													m_restricted = false;
 		};
 
 	}
