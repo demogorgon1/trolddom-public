@@ -2,8 +2,8 @@ changelog:
 {
 
 	#######################################################################################
-	heading: "v0.1.7"
-	
+	heading: "v0.1.6"
+
 	text: "Changes:"
 
 	list:
@@ -11,9 +11,6 @@ changelog:
 		{ text: "Added option to turn off sound effects." }
 	]	
 
-	#######################################################################################
-	heading: "v0.1.6"
-	
 	text: "Issues fixed:"
 
 	list:
