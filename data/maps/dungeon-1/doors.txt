@@ -29,7 +29,7 @@ entity .door_1: !DOOR { _map_trigger: .goblin_door_guard_1_killed }
 entity .door_2: !DOOR { _map_trigger: .goblin_door_guard_2_killed }
 entity .final_door: !DOOR { _map_trigger: .zarvok_killed }
 
-map_entity_spawn .biznorg_door: { entity .biznorg_door: { } }
-map_entity_spawn .door_1: { entity .door_1: { } }
-map_entity_spawn .door_2: { entity .door_2: { } }
-map_entity_spawn .final_door: { entity .final_door: { } }
+map_entity_spawn .biznorg_door: { entity .biznorg_door: { } spawn_timer: { despawn_required: true } }
+map_entity_spawn .door_1: { entity .door_1: { } spawn_timer: { despawn_required: true } }
+map_entity_spawn .door_2: { entity .door_2: { } spawn_timer: { despawn_required: true } }
+map_entity_spawn .final_door: { entity .final_door: { } spawn_timer: { despawn_required: true } }
