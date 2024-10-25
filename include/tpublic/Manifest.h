@@ -442,7 +442,6 @@ namespace tpublic
 		DefaultSoundEffects								m_defaultSoundEffects;
 		TileLayering									m_tileLayering;
 		std::unique_ptr<Document>						m_changelog;
-		std::unique_ptr<Document>						m_changelogDemo;
 		uint32_t										m_baseTileBorderPatternSpriteId = 0;
 
 		// Public data
