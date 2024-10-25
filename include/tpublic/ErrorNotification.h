@@ -43,6 +43,7 @@ namespace tpublic
 			ID_OUT_OF_STOCK,
 			ID_DISMISS_CURRENT_MINION,
 			ID_TOO_MANY_MINIONS,
+			ID_AMOUNT_TOO_LARGE,
 
 			NUM_IDS
 		};
@@ -95,7 +96,8 @@ namespace tpublic
 			{ "Can't find path!" },
 			{ "Out of stock!" },
 			{ "Dismiss current minion!" },
-			{ "Too many minions!" }
+			{ "Too many minions!" },
+			{ "Amount too large! "}
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

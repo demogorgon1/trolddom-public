@@ -20,6 +20,16 @@ changelog:
 changelog_demo:
 {
 	#######################################################################################
+	heading: "Demo v0.1.6"
+	
+	text: "Issues fixed:"
+
+	list:
+	[
+		{ text: "Fixed some bugs related to mail and trading." }
+	]	
+
+	#######################################################################################
 	heading: "Demo v0.1.5"
 	
 	text: "Issues fixed:"
