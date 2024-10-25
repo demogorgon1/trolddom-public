@@ -2,6 +2,17 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.1.7"
+
+	text: "Changes:"
+
+	list:
+	[
+		{ text: "Increased Barbarian damage slightly." }
+		{ text: "Damage of most spells increased to match melee damage scaling." }
+	]	
+
+	#######################################################################################
 	heading: "v0.1.6"
 
 	text: "Changes:"

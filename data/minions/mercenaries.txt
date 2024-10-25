@@ -43,7 +43,7 @@
 		_level: 6	
 		_cost: 1100
 		_has_rage: true
-		_weapon_damage: 1
+		_weapon_damage: 1.2
 		_resource_health: 0.8
 		_armor: 0.7
 		_creature_type: humanoid

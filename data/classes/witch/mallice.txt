@@ -138,7 +138,7 @@ ability witch_bolt:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: unholy
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 24 ] [ 10 36 ] ] }													
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 24 ] [ 10 48 ] ] }													
 	}	
 	
 	direct_effect apply_aura:
@@ -347,7 +347,7 @@ ability doom:
 		flags: [ can_be_critical is_magical ]
 		conditional_critical_chance_bonus<improved_doom>: 50
 		damage_type: unholy
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.95 b: [ [ 1 26 ] [ 10 40 ] ] }													
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.95 b: [ [ 1 26 ] [ 10 52 ] ] }													
 	}	
 	
 	direct_effect remove_aura:
@@ -503,7 +503,7 @@ ability chain_lightning:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: unholy
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 24 ] [ 10 36 ] ] }													
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 24 ] [ 10 48 ] ] }													
 	}		
 }
 

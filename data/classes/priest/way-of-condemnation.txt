@@ -183,7 +183,7 @@ ability spiritual_crisis:
 	{	
 		damage_type: fire
 		flags: [ can_be_critical is_magical ]
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 6 ] [ 10 12 ] ] }				
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 8 ] [ 10 16 ] ] }				
 	}	
 
 	direct_effect apply_aura:
