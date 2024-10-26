@@ -289,6 +289,9 @@ namespace tpublic::Helpers
 		LootRule::Id&				aOutLootRule,
 		Rarity::Id&					aOutLootThreshold)
 	{
+		if (aEntityInstance == NULL)
+			return 0;
+
 		const EntityInstance* entity = aEntityInstance;
 		const Components::MinionPublic* minionPublic = entity->GetComponent<Components::MinionPublic>();
 
@@ -317,6 +320,9 @@ namespace tpublic::Helpers
 		uint32_t&					aOutEntityInstanceId,
 		uint32_t&					aOutLevel)
 	{
+		if (aEntityInstance == NULL)
+			return false;
+
 		const EntityInstance* entity = aEntityInstance;
 		const Components::MinionPublic* minionPublic = entity->GetComponent<Components::MinionPublic>();
 
@@ -347,6 +353,9 @@ namespace tpublic::Helpers
 		const EntityInstance*		aEntityInstance,
 		uint32_t					aPlayerEntityInstanceId)
 	{
+		if(aEntityInstance == NULL)
+			return false;
+
 		const Components::MinionPublic* minionPublic = aEntityInstance->GetComponent<Components::MinionPublic>();
 		if (minionPublic == NULL)
 			return false;

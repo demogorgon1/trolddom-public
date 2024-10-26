@@ -4,12 +4,11 @@ changelog:
 	#######################################################################################
 	heading: "v0.1.7"
 
-	text: "Changes:"
+  text: "Issues fixed:"
 
 	list:
 	[
-		{ text: "Increased Barbarian damage slightly." }
-		{ text: "Damage of most spells increased to match melee damage scaling." }
+		{ text: "Fixed two client crashes." }
 	]	
 
 	#######################################################################################
