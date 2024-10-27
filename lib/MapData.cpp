@@ -563,7 +563,7 @@ namespace tpublic
 		int32_t					aX,
 		int32_t					aY) const
 	{
-		if (aX < 0 || aY < 0 || aX >= m_width || aY >= m_height)
+		if (m_elevationMap == NULL || aX < 0 || aY < 0 || aX >= m_width || aY >= m_height)
 			return 0;
 
 		return m_elevationMap[aX + aY * m_width];

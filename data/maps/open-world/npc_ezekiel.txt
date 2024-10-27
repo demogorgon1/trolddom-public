@@ -126,8 +126,8 @@ quest .ezekiel_1:
 	[
 		"What are you doing here, $class$?\n"
 		"\n"
-		"It's rare to see anyone on this part of the island. People usually venture past the wall and into Eastshore or beyond."
-		"Magic has permeated through these lands for generations, wizards and other practitioners of the foul arts of sorcery has been residing"
+		"It's rare to see anyone on this part of the island. People usually don't venture past the wall and into Eastshore or beyond."
+		"Magic has permeated through these lands for generations, wizards and other practitioners of the foul arts of sorcery have been residing"
 		"in the mountains, causing upheaval in the natural order.\n"
 		"\n"
 		"This town was abandoned long ago when spirits came out of the ground and the death came alive. It needs to be cleansed. If you're on"
@@ -208,7 +208,7 @@ quest .ezekiel_3:
 	[
 		"Ezekiel, the so-called vampire hunter, is a senile old fool.\n"
 		"\n"
-		"The magic flowing through these mountains are natural and all I do is tapping into it's power. I do not study necromancy, the most pedestrian of the arcane arts. No,"
+		"The magic flowing through these mountains are natural and all I do is tapping into its power. I do not study necromancy, the most pedestrian of the arcane arts. No,"
 		"I research the wondrous nature of portals."
 	]
 
