@@ -1,10 +1,28 @@
 changelog:
 {
 
+
+	#######################################################################################
+	heading: "v0.1.8"
+
+	text: "Changes:"
+
+	list:
+	[
+		{ text: "Damage scaling of Sorcerer spells increased to match melee and Priest spells." }
+	]	
+
+	text: "Issues fixed:"
+
+	list:
+	[
+		{ text: "When reconnecting after logging out or disconnecting, client will reattach to previous entity if possible." }
+	]	
+
 	#######################################################################################
 	heading: "v0.1.7"
 
-  text: "Issues fixed:"
+	text: "Issues fixed:"
 
 	list:
 	[

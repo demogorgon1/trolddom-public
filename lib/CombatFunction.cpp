@@ -64,8 +64,11 @@ namespace tpublic
 		uint32_t
 		_NormalizeWeaponDamage(
 			int32_t								aCooldown,
-			uint32_t							aDamage)
+			uint32_t							aDamage)		
 		{
+			if(aCooldown == 0)
+				return 0;
+
 			// Normalize to speed 2.0
 			return (aDamage * (uint32_t)20) / (uint32_t)aCooldown;
 		}

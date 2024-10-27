@@ -45,6 +45,7 @@ namespace tpublic
 									std::vector<const ComponentBase*>*	aOutUpdatedComponents);
 		bool					IsDirty() const;
 		void					ResetDirty();
+		void					SetDirty();
 		ComponentBase*			GetComponentBase(
 									uint32_t							aComponentId);
 		const ComponentBase*	GetComponentBase(

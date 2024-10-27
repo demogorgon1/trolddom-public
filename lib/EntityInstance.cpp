@@ -143,6 +143,18 @@ namespace tpublic
 		}
 	}
 
+	void					
+	EntityInstance::SetDirty()
+	{
+		m_dirty = true;
+
+		for (ComponentEntry& component : m_components)
+		{
+			if (component.m_allocated != NULL)
+				component.m_allocated->SetDirty();
+		}
+	}
+
 	ComponentBase*
 	EntityInstance::GetComponentBase(
 		uint32_t							aComponentId)
