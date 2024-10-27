@@ -17,6 +17,7 @@ changelog:
 	list:
 	[
 		{ text: "When reconnecting after logging out or disconnecting, client will reattach to previous entity if possible." }
+		{ text: "Fixed missing armor on Biznorg and Grunthar cloaks." }
 	]	
 
 	#######################################################################################

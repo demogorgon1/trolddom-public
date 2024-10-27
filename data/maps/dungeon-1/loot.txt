@@ -132,6 +132,7 @@ item dungeon_1_cape_2:
 	icon: icon_cape_4
 	rarity: rare
 	binds: when_picked_up
+	type: armor_cloth
 	
 	stat_weight dexterity: 1	
 	stat_weight constitution: 1			
@@ -419,6 +420,7 @@ item dungeon_1_cape_1:
 	icon: icon_cape_3
 	rarity: rare
 	binds: when_picked_up
+	type: armor_cloth
 	
 	stat_weight spirit: 1		
 	stat_weight wisdom: 1		
