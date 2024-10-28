@@ -558,6 +558,7 @@ entity dark_cove_goblin_warrior_6: !NPC
 	_sprite_dead: goblin_2_dead
 	_loot_table: .dark_cove_goblins_6
 	_creature_type: humanoid
+	_default_behavior_state: .passive
 }
 
 entity dark_cove_goblin_shaman_6: !NPC
@@ -572,6 +573,7 @@ entity dark_cove_goblin_shaman_6: !NPC
 	_loot_table: .dark_cove_goblins_6
 	_creature_type: humanoid
 	_abilities: [ { id: npc_firebolt } { id: npc_attack } ]
+	_default_behavior_state: .passive
 }
 
 ability .dark_cove_goblin_commander_guzbrorg_quest_drop_start_quest:	
@@ -823,6 +825,7 @@ entity goblin_ranger_9: !NPC
 	_sprite_dead: goblin_dead
 	_loot_table: .dirith_bay_goblins
 	_creature_type: humanoid
+	_default_behavior_state: .passive
 }
 
 entity goblin_pillager_9: !NPC
@@ -912,6 +915,7 @@ entity skeleton_9_a: !NPC
 	_sprite_dead: skeleton_warrior_1_dead
 	_loot_table: .abandoned_keep_undead
 	_creature_type: undead
+	_default_behavior_state: .passive
 }
 
 entity skeleton_9_b: !NPC
@@ -923,6 +927,7 @@ entity skeleton_9_b: !NPC
 	_sprite_dead: skeleton_warrior_2_dead
 	_loot_table: .abandoned_keep_undead
 	_creature_type: undead
+	_default_behavior_state: .passive
 }
 
 entity skeleton_9_c: !NPC
@@ -935,6 +940,7 @@ entity skeleton_9_c: !NPC
 	_loot_table: .abandoned_keep_undead
 	_creature_type: undead
 	_abilities: [ { id: npc_firebolt } { id: npc_attack } ]
+	_default_behavior_state: .passive
 }
 
 entity ghastly_entity_9: !NPC
@@ -1006,6 +1012,7 @@ entity wasteland_undead_10_a: !NPC
 	_sprite_dead: zombie_1_dead
 	_loot_table: .wasteland_undead
 	_creature_type: undead
+	_default_behavior_state: .passive
 }
 
 entity wasteland_undead_10_b: !NPC
@@ -1017,6 +1024,7 @@ entity wasteland_undead_10_b: !NPC
 	_sprite_dead: zombie_1_dead
 	_loot_table: .wasteland_undead
 	_creature_type: undead
+	_default_behavior_state: .passive
 }
 
 ##########################################################################################

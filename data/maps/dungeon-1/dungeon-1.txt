@@ -30,6 +30,8 @@ map_palette .tiles:
 	tile wood_solid_wall: [ 0 200 200 ]
 	tile wood_solid_wall_face: [ 100 200 200 ]	
 	tile forest_entrance: [ 123 255 123 ] 
+	tile wood_wall_window: [ 255 128 64 ] 
+	tile wood_solid_wall_face_window: [ 100 100 50 ]	
 }
 
 map_palette .stuff:
@@ -95,6 +97,20 @@ map_palette .flags:
 	flags<[ demo ]>: [ 237 45 132 ]
 }
 
+map_palette .doodads:
+{
+	doodad crates: [ 45 39 100 ]
+	doodad table: [ 35 130 200 ]
+	doodad chair_left: [ 45 100 200 ]
+	doodad bed: [ 35 130 240 ]
+	doodad bookshelf: [ 35 140 100 ]
+	doodad alchemy_bookshelf: [ 135 100 200 ]
+	doodad empty_bookshelf: [ 135 200 200 ]
+	doodad chair_right: [ 45 200 100 ]	
+	doodad chair_bottom: [ 56 201 195 ]
+	doodad wall_banner_dark_green: [ 143 59 13 ]
+}
+
 map dungeon_1:
 {
 	string: "Aetheris Stronghold"
@@ -144,6 +160,11 @@ map dungeon_1:
 			palettes: 	[ .flags ]
 			source:		"dungeon-1-demo.png"
 		}						
+		
+		{ 
+			palettes: 	[ .doodads ]
+			source:		"dungeon-1-doodads.png"
+		}								
 	]
 	
 	script:

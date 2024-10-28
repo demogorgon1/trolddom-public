@@ -29,8 +29,8 @@ entity dungeon_1_grunthar: !NPC
 	_faction: monsters 
 	_sprite: troll_1
 	_sprite_dead: troll_1_dead 
-	_weapon_damage: 2
-	_resource_health: 2 
+	_weapon_damage: 2.3
+	_resource_health: 4.5 
 	_loot_table: .grunthar
 	_creature_type: humanoid
 	_encounter: .grunthar

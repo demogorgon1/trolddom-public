@@ -56,7 +56,7 @@ namespace tpublic::Systems
 					bool shouldStopCasting = false;
 
 					// Out of range?
-					int32_t distanceSquared = targetPosition->m_position.DistanceSquared(position->m_position);
+					int32_t distanceSquared = Helpers::CalculateDistanceSquared(position, targetPosition);
 					if(distanceSquared > (int32_t)(ability->m_range * ability->m_range))
 						shouldStopCasting = true;
 

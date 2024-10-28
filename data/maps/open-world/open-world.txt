@@ -819,7 +819,8 @@ map_palette .doodads:
 	doodad broken_pillar: [ 136 130 200 ]
 	doodad wall_banner_mining: [ 243 19 53 ]
 	doodad wall_banner_blacksmithing: [ 243 59 53 ]
-	doodad tent: [ 249 51 53 ]
+	doodad tent: [ 249 51 53 ]	
+	doodad wall_banner_dark_green: [ 143 59 13 ]
 }
 
 map_palette .flags:

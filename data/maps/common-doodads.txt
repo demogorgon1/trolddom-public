@@ -50,6 +50,7 @@ sprites:
 	sprite doodad_wall_banner_mining_1: { flags: [ tile_walkable ] }
 	sprite doodad_wall_banner_blacksmithing_1: { flags: [ tile_walkable ] }
 	sprite doodad_tent: { flags: [ tile_walkable ] }
+	sprite doodad_wall_banner_dark_green_1: { flags: [ tile_walkable ] }
 
 }
 
@@ -131,6 +132,7 @@ doodad broken_pillar: { sprites: [ doodad_broken_pillar_1 doodad_broken_pillar_2
 doodad wall_banner_mining: { sprites: [ doodad_wall_banner_mining_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad wall_banner_blacksmithing: { sprites: [ doodad_wall_banner_blacksmithing_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad tent: { sprites: [ doodad_tent ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad wall_banner_dark_green: { sprites: [ doodad_wall_banner_dark_green_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 
 
 
