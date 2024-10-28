@@ -177,10 +177,10 @@ quest .hermit_2:
 	
 	description: 
 	[
-		"Since your so comfortable running around this place, maybe you can go check something else for me as well."
+		"Since you're so comfortable running around this place, maybe you can go check something else for me as well."
 		"A few nights ago some strange sounds started to come from the dungeon. Take this key to get down there and find out what is going on.\n"
 		"\n"
-		"You'll find the dungeon to the north."
+		"You'll find the dungeon entrance to the north."
 	]
 
 	progress:
@@ -192,7 +192,7 @@ quest .hermit_2:
 	[
 		"Crab men? Are you serious? You mean like men who are also crabs? That's just ridiculous. Anyway, let's keep that door locked.\n"
 		"\n"
-		"I don't think I need any more of your help for now, go back to Frinrir and tell me I'm fine."		
+		"I don't think I need any more of your help for now, go back to Frinrir and tell him I'm fine."		
 	]
 
 	objectives: [ .hermit_2 ]

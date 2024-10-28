@@ -145,7 +145,7 @@ quest .simheist_3:
 	description: 
 	[
 		"I don't know what is going on, but it's clear that the ancient woods are being corrupted by dark magic. You need to seek out"
-		"Zumhorn, the Lord of the Mist, deep in the woods. Offer you assistance to him."
+		"Zumhorn, the Lord of the Mist, deep in the woods. Offer your assistance to him."
 	]
 
 	progress:

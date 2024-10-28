@@ -146,7 +146,7 @@ quest .benny_1:
 
 	text:
 	[
-		"Bring Benny's head back to Ezekiel and see if he still don't believe he was a vampire."
+		"Bring Benny's head back to Ezekiel and see if he still doesn't believe he was a vampire."
 	]
 	
 	description: 

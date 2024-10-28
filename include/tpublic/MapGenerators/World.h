@@ -111,6 +111,45 @@ namespace tpublic::MapGenerators
 			UIntRange								m_influenceRange;
 		};
 
+		struct RandomObject
+		{
+			RandomObject()
+			{
+
+			}
+
+			RandomObject(
+				const SourceNode*							aSource)
+			{
+				TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing probability annotation.");
+				m_probability = aSource->m_annotation->GetUInt32();
+				m_mapEntitySpawnId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aSource->GetIdentifier());
+			}
+
+			void
+			ToStream(
+				IWriter*									aWriter) const
+			{
+				aWriter->WriteUInt(m_probability);
+				aWriter->WriteUInt(m_mapEntitySpawnId);
+			}
+
+			bool
+			FromStream(
+				IReader*									aReader) 
+			{
+				if(!aReader->ReadUInt(m_probability))
+					return false;
+				if(!aReader->ReadUInt(m_mapEntitySpawnId))
+					return false;
+				return true;
+			}
+
+			// Public data
+			uint32_t								m_probability = 0;
+			uint32_t								m_mapEntitySpawnId = 0;
+		};
+
 		struct Pack
 		{
 			Pack()
@@ -137,6 +176,8 @@ namespace tpublic::MapGenerators
 						aChild->GetIdArray(DataType::ID_TAG_CONTEXT, m_tagContextIds);
 					else if (aChild->m_name == "influence_range")
 						m_influenceRange = UIntRange(aChild);
+					else if(aChild->m_name == "random_object")	
+						m_randomObject = RandomObject(aChild);
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 				});
@@ -152,6 +193,7 @@ namespace tpublic::MapGenerators
 				aWriter->WriteBool(m_elite);
 				aWriter->WriteUInt(m_mapEntitySpawnId);
 				m_influenceRange.ToStream(aWriter);
+				aWriter->WriteOptionalObject(m_randomObject);
 			}
 
 			bool
@@ -170,6 +212,8 @@ namespace tpublic::MapGenerators
 					return false;
 				if (!m_influenceRange.FromStream(aReader))
 					return false;
+				if(!aReader->ReadOptionalObject(m_randomObject))
+					return false;
 				return true;
 			}
 
@@ -180,6 +224,7 @@ namespace tpublic::MapGenerators
 			uint32_t								m_mapEntitySpawnId = 0;
 			UIntRange								m_influenceRange;
 			uint32_t								m_probability = 0;
+			std::optional<RandomObject>				m_randomObject;
 		};
 
 		struct Builder

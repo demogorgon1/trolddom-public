@@ -753,9 +753,11 @@ namespace tpublic::MapGenerators
 								else
 								{
 									static const Vec2 NEIGHBORS[4] = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
+									size_t randomOffset = (size_t)m_random() % 4;
 									for (size_t i = 0; i < 4; i++)
 									{
-										Vec2 p = { x + NEIGHBORS[i].m_x, y + NEIGHBORS[i].m_y };
+										size_t j = (i + randomOffset) % 8;
+										Vec2 p = { x + NEIGHBORS[j].m_x, y + NEIGHBORS[j].m_y };
 										if (!m_entitySpawnPositions.contains(p) && m_walkable.contains(p))
 										{
 											position = p;
@@ -776,6 +778,36 @@ namespace tpublic::MapGenerators
 									m_entitySpawnPositions.insert(position.value());
 
 									enemyPositions.insert(position.value());
+								}
+							}
+
+							if(pickedPack->m_randomObject.has_value() && Roll(1, 1000) <= pickedPack->m_randomObject->m_probability)
+							{
+								static const Vec2 NEIGHBORS[8] = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 }, { -1, -1 }, { 1, -1 }, { 1, 1 }, { -1, 1 } };
+								size_t randomOffset = (size_t)m_random() % 8;
+								std::optional<Vec2> position;
+
+								for (size_t i = 0; i < 8; i++)
+								{
+									size_t j = (i + randomOffset) % 8;
+
+									Vec2 p = { x + NEIGHBORS[j].m_x, y + NEIGHBORS[j].m_y };
+									if (!m_entitySpawnPositions.contains(p) && m_walkable.contains(p))
+									{
+										position = p;
+										break;
+									}
+								}
+
+								if(position.has_value())
+								{
+									MapData::EntitySpawn entitySpawn;
+									entitySpawn.m_mapEntitySpawnId = pickedPack->m_randomObject->m_mapEntitySpawnId;
+									entitySpawn.m_x = position->m_x;
+									entitySpawn.m_y = position->m_y;
+									m_entitySpawns.push_back(entitySpawn);
+
+									m_entitySpawnPositions.insert(position.value());
 								}
 							}
 						}

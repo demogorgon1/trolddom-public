@@ -157,6 +157,7 @@ map_entity_spawn .object:
 		tag_contexts: [ .melee_enemy ]		
 		elite: false
 		map_entity_spawn: .pack
+		random_object<10>: default_chest		
 	}
 
 	pack<8>: 
@@ -165,6 +166,7 @@ map_entity_spawn .object:
 		tag_contexts: [ .caster_enemy ]		
 		elite: false
 		map_entity_spawn: .pack
+		random_object<10>: default_chest				
 	}
 
 	pack<64>: 
@@ -174,6 +176,7 @@ map_entity_spawn .object:
 		min_distance_to_nearby: 6
 		elite: false
 		map_entity_spawn: .pack
+		random_object<30>: default_chest				
 	}	
 
 	pack<32>: 
@@ -183,6 +186,7 @@ map_entity_spawn .object:
 		min_distance_to_nearby: 6
 		elite: false
 		map_entity_spawn: .pack
+		random_object<40>: default_chest				
 	}	
 
 	pack<64>: 
@@ -192,6 +196,7 @@ map_entity_spawn .object:
 		min_distance_to_nearby: 6
 		elite: true
 		map_entity_spawn: .pack
+		random_object<50>: default_chest				
 	}		
 
 	pack<64>: 
@@ -201,6 +206,7 @@ map_entity_spawn .object:
 		min_distance_to_nearby: 6
 		elite: true
 		map_entity_spawn: .pack
+		random_object<60>: default_chest				
 	}		
 
 	pack<64>: 
@@ -210,6 +216,7 @@ map_entity_spawn .object:
 		min_distance_to_nearby: 6
 		elite: true
 		map_entity_spawn: .pack
+		random_object<60>: default_chest
 	}			
 	
 	pack<64>: 
@@ -219,6 +226,7 @@ map_entity_spawn .object:
 		min_distance_to_nearby: 6
 		elite: true
 		map_entity_spawn: .pack
+		random_object<70>: default_chest						
 	}			
 	
 }
@@ -243,8 +251,25 @@ loot_table .gateway_world:
 				loot_group: gateway_world_quest_item_2 
 				requirement self<must_have_active_quest>: { id: gateway_world_quest_2 }
 				requirement target<must_have_tag>: { id: major_boss }
-			}			
+			}
 		}
+
+		{		
+			possibility: { weight: 200 loot_group: world_drops_uncommon requirement target<must_have_tag>: { id: minor_boss } }	
+			possibility: { weight: 10 loot_group: world_drops_rare requirement target<must_have_tag>: { id: minor_boss } }	
+			possibility: { weight: 1 loot_group: world_drops_epic requirement target<must_have_tag>: { id: minor_boss } }				
+		}
+		
+		{		
+			possibility: { weight: 200 loot_group: world_drops_uncommon requirement target<must_have_tag>: { id: major_boss } }	
+			possibility: { weight: 10 loot_group: world_drops_rare requirement target<must_have_tag>: { id: major_boss } }	
+			possibility: { weight: 1 loot_group: world_drops_epic requirement target<must_have_tag>: { id: major_boss } }				
+		}
+		
+		{		
+			possibility: { weight: 99 loot_group: world_drops_rare requirement target<must_have_tag>: { id: major_boss } }	
+			possibility: { weight: 1 loot_group: world_drops_epic requirement target<must_have_tag>: { id: major_boss } }				
+		}		
 	]	
 }
 
