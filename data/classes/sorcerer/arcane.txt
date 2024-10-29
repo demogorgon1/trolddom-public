@@ -269,6 +269,7 @@ talent sorcerer_arcane_insight:
 
 aura arcane_insight:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Your next spell cast after a critical is instant."
 	aura_effect combat_event_trigger: 
@@ -355,6 +356,7 @@ talent sorcerer_arcane_word_of_the_wise:
 
 aura sorcerer_arcane_word_of_the_wise_1:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Increases your Wisdom by 2%."
 	stat_modifiers: { wisdom: { add_percent: 2 } }
@@ -362,6 +364,7 @@ aura sorcerer_arcane_word_of_the_wise_1:
 
 aura sorcerer_arcane_word_of_the_wise_2:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Increases your Wisdom by 4%."
 	stat_modifiers: { wisdom: { add_percent: 4 } }
@@ -369,6 +372,7 @@ aura sorcerer_arcane_word_of_the_wise_2:
 
 aura sorcerer_arcane_word_of_the_wise_3:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Increases your Wisdom by 6%."
 	stat_modifiers: { wisdom: { add_percent: 6 } }

@@ -47,6 +47,7 @@ talent priest_wisdom:
 
 aura priest_wisdom_1:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Increases your Wisdom by 2%."
 	stat_modifiers: { wisdom: { add_percent: 2 } }
@@ -54,6 +55,7 @@ aura priest_wisdom_1:
 
 aura priest_wisdom_2:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Increases your Wisdom by 4%."
 	stat_modifiers: { wisdom: { add_percent: 4 } }
@@ -61,6 +63,7 @@ aura priest_wisdom_2:
 
 aura priest_wisdom_3:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Increases your Wisdom by 6%."
 	stat_modifiers: { wisdom: { add_percent: 6 } }

@@ -45,6 +45,7 @@ namespace tpublic::AuraEffects
 				IEventQueue::EventQueueMoveRequest moveRequest;
 				moveRequest.m_type = IEventQueue::EventQueueMoveRequest::TYPE_SIMPLE;
 				moveRequest.m_entityInstanceId = aTargetEntityInstanceId;
+				moveRequest.m_setUpdatedOnServerFlag = true;
 
 				if(distanceSquared < 7 * 7)
 				{

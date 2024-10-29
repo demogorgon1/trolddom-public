@@ -258,6 +258,24 @@ namespace tpublic::Components
 		}
 	}
 
+	void			
+	Auras::RemoveAuraByGroup(
+		const Manifest*								aManifest,
+		uint32_t									aAuraGroupId)
+	{
+		for (size_t i = 0; i < m_entries.size(); i++)
+		{
+			const std::unique_ptr<Entry>& entry = m_entries[i];
+			const Data::Aura* auraData = aManifest->GetById<tpublic::Data::Aura>(entry->m_auraId);
+
+			if (auraData->m_auraGroupId == aAuraGroupId)
+			{
+				Helpers::RemoveCyclicFromVector(m_entries, i);
+				i--;
+			}
+		}
+	}
+
 	void		
 	Auras::RemoveAurasByFlags(
 		const Manifest*								aManifest,

@@ -57,6 +57,7 @@
 	string: @_string
 	icon: @_icon
 	type: buff
+	aura_group: food
 	flags: [ unique ]
 	duration: 12000
 	<exists _stat_modifiers> stat_modifiers: @_stat_modifiers

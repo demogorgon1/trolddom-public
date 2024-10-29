@@ -189,6 +189,7 @@ talent fighter_protection_stoicism:
 
 aura fighter_protection_stoicism_1:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Increases your Constitution by 2%."
 	stat_modifiers: { constitution: { add_percent: 2 } }
@@ -196,6 +197,7 @@ aura fighter_protection_stoicism_1:
 
 aura fighter_protection_stoicism_2:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Increases your Constitution by 4%."
 	stat_modifiers: { constitution: { add_percent: 4 } }
@@ -203,6 +205,7 @@ aura fighter_protection_stoicism_2:
 
 aura fighter_protection_stoicism_3:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Increases your Constitution by 6%."
 	stat_modifiers: { constitution: { add_percent: 6 } }
@@ -226,6 +229,7 @@ talent fighter_protection_toughness:
 
 aura fighter_protection_toughness_1:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Increases your armor by 10%."
 	stat_modifiers: { armor: { add_percent: 10 } }
@@ -233,6 +237,7 @@ aura fighter_protection_toughness_1:
 
 aura fighter_protection_toughness_2:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Increases your armor by 20%."
 	stat_modifiers: { armor: { add_percent: 20 } }
@@ -257,6 +262,7 @@ talent fighter_protection_shield_block:
 
 aura fighter_protection_shield_block_1:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Increases your chance to block by 2%."
 	stat_modifiers: { block_chance: { add: 2 } }
@@ -264,6 +270,7 @@ aura fighter_protection_shield_block_1:
 
 aura fighter_protection_shield_block_2:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Increases your chance to block by 4%."
 	stat_modifiers: { block_chance: { add: 4 } }
@@ -271,6 +278,7 @@ aura fighter_protection_shield_block_2:
 
 aura fighter_protection_shield_block_3:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Increases your chance to block by 6%."
 	stat_modifiers: { block_chance: { add: 6 } }

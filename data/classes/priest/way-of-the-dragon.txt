@@ -212,6 +212,7 @@ talent priest_dragon_dodge:
 
 aura priest_dragon_dodge_1:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Increases your chance to dodge by 2%."
 	stat_modifiers: { dodge_chance: { add: 2 } }
@@ -219,6 +220,7 @@ aura priest_dragon_dodge_1:
 
 aura priest_dragon_dodge_2:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Increases your chance to dodge by 4%."
 	stat_modifiers: { dodge_chance: { add: 4 } }
@@ -226,6 +228,7 @@ aura priest_dragon_dodge_2:
 
 aura priest_dragon_dodge_3:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Increases your chance to dodge by 6%."
 	stat_modifiers: { dodge_chance: { add: 6 } }
@@ -249,6 +252,7 @@ talent priest_dragon_resistance_aura:
 
 aura priest_dragon_resistance_aura_1:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Decrease damage taken by magical spells and effects by 10%."
 	aura_effect damage_input_modifier: { type_mask: [ frost fire arcane unholy holy ] multiplier: 0.9 }
@@ -256,6 +260,7 @@ aura priest_dragon_resistance_aura_1:
 
 aura priest_dragon_resistance_aura_2:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Decrease damage taken by magical spells and effects by 20%."
 	aura_effect damage_input_modifier: { type_mask: [ frost fire arcane unholy holy ] multiplier: 0.8 }
@@ -280,6 +285,7 @@ talent priest_dragon_skin:
 
 aura priest_dragon_skin_1:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Increases your armor by 20%."
 	stat_modifiers: { armor: { add_percent: 20 } }
@@ -287,6 +293,7 @@ aura priest_dragon_skin_1:
 
 aura priest_dragon_skin_2:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Increases your armor by 40%."
 	stat_modifiers: { armor: { add_percent: 40 } }
@@ -294,6 +301,7 @@ aura priest_dragon_skin_2:
 
 aura priest_dragon_skin_3:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Increases your armor by 60%."
 	stat_modifiers: { armor: { add_percent: 60 } }

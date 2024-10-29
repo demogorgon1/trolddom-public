@@ -121,6 +121,7 @@ item consumable_mana_potion:
 aura consumable_elixir_of_the_giant:
 {
 	string: "Elixir of the Giant"
+	aura_group: elixir
 	type: buff
 	icon: icon_small_green_potion
 	duration: 12000
@@ -131,7 +132,7 @@ aura consumable_elixir_of_the_giant:
 ability consumable_elixir_of_the_giant:	
 {
 	string: "Elixir of the Giant"
-	description: "Increases your Constitution by 5 for 20 minutes."
+	description: "Increases your Constitution by 5 for 20 minutes. You can only have the effect of one elixir at a time."
 	flags: [ target_self item ]
 	icon: icon_small_green_potion
 	direct_effect apply_aura: { aura: consumable_elixir_of_the_giant }
@@ -158,6 +159,7 @@ item consumable_elixir_of_the_giant:
 
 aura consumable_elixir_of_the_owl:
 {
+	aura_group: elixir
 	string: "Elixir of the Owl"
 	type: buff
 	icon: icon_small_cyan_potion
@@ -169,7 +171,7 @@ aura consumable_elixir_of_the_owl:
 ability consumable_elixir_of_the_owl:	
 {
 	string: "Elixir of the Owl"
-	description: "Increases your Wisdom by 5 for 20 minutes."
+	description: "Increases your Wisdom by 5 for 20 minutes. You can only have the effect of one elixir at a time."
 	flags: [ target_self item ]
 	icon: icon_small_cyan_potion
 	direct_effect apply_aura: { aura: consumable_elixir_of_the_owl }
@@ -196,6 +198,7 @@ item consumable_elixir_of_the_owl:
 
 aura consumable_elixir_of_the_bear:
 {
+	aura_group: elixir
 	string: "Elixir of the Bear"
 	type: buff
 	icon: icon_small_purple_potion
@@ -207,7 +210,7 @@ aura consumable_elixir_of_the_bear:
 ability consumable_elixir_of_the_bear:	
 {
 	string: "Elixir of the Bear"
-	description: "Increases your Strength by 5 for 20 minutes."
+	description: "Increases your Strength by 5 for 20 minutes. You can only have the effect of one elixir at a time."
 	flags: [ target_self item ]
 	icon: icon_small_purple_potion
 	direct_effect apply_aura: { aura: consumable_elixir_of_the_bear }
@@ -234,6 +237,7 @@ item consumable_elixir_of_the_bear:
 
 aura consumable_spell_juice:
 {
+	aura_group: elixir
 	string: "Spell Juice"
 	type: buff
 	icon: icon_brown_potion
@@ -245,7 +249,7 @@ aura consumable_spell_juice:
 ability consumable_spell_juice:	
 {
 	string: "Spell Juice"
-	description: "Increases your Spell Damage and Healing by 6 for 20 minutes."
+	description: "Increases your Spell Damage and Healing by 6 for 20 minutes. You can only have the effect of one elixir at a time."
 	flags: [ target_self item ]
 	icon: icon_brown_potion
 	direct_effect apply_aura: { aura: consumable_spell_juice }

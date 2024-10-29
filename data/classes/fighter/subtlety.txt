@@ -211,6 +211,7 @@ talent fighter_subtlety_agility:
 
 aura fighter_subtlety_agility_1:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Increases your dexterity by 2%."
 	stat_modifiers: { dexterity: { add_percent: 2 } }
@@ -218,6 +219,7 @@ aura fighter_subtlety_agility_1:
 
 aura fighter_subtlety_agility_2:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Increases your dexterity by 4%."
 	stat_modifiers: { dexterity: { add_percent: 4 } }
@@ -225,6 +227,7 @@ aura fighter_subtlety_agility_2:
 
 aura fighter_subtlety_agility_3:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Increases your dexterity by 6%."
 	stat_modifiers: { dexterity: { add_percent: 6 } }
@@ -283,6 +286,7 @@ talent fighter_subtlety_hemorrhage:
 
 aura fighter_subtlety_hemorrhage:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Increases damage done by your bleed effects by 30%."
 	aura_effect damage_output_modifier:

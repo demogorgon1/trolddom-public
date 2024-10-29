@@ -208,6 +208,7 @@ talent priest_spiritual_guidance:
 
 aura priest_spiritual_guidance_1:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Increases your Spirit by 2%."
 	stat_modifiers: { spirit: { add_percent: 2 } }
@@ -215,6 +216,7 @@ aura priest_spiritual_guidance_1:
 
 aura priest_spiritual_guidance_2:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Increases your Spirit by 4%."
 	stat_modifiers: { spirit: { add_percent: 4 } }
@@ -222,6 +224,7 @@ aura priest_spiritual_guidance_2:
 
 aura priest_spiritual_guidance_3:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Increases your Spirit by 6%."
 	stat_modifiers: { spirit: { add_percent: 6 } }
@@ -245,6 +248,7 @@ talent priest_healing_conduit:
 
 aura priest_healing_conduit_1:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Increases your healing done by 10%."
 	aura_effect heal_output_modifier:
@@ -255,6 +259,7 @@ aura priest_healing_conduit_1:
 
 aura priest_healing_conduit_2:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Increases your healing done by 20%."
 	aura_effect heal_output_modifier:
@@ -265,6 +270,7 @@ aura priest_healing_conduit_2:
 
 aura priest_healing_conduit_3:
 {
+	flags: [ persist_in_death ]
 	type: hidden
 	description: "Increases your healing done by 30%."
 	aura_effect heal_output_modifier:

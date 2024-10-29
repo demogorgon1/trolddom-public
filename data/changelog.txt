@@ -10,6 +10,7 @@ changelog:
 	list:
 	[
 		{ text: "Damage scaling of Sorcerer spells increased to match melee and Priest spells." }
+		{ text: "You can only have one elixir effect and one food effect active at the same time." }
 	]	
 
 	text: "Issues fixed:"
@@ -18,6 +19,8 @@ changelog:
 	[
 		{ text: "When reconnecting after logging out or disconnecting, client will reattach to previous entity if possible." }
 		{ text: "Fixed missing armor on Biznorg and Grunthar cloaks." }
+		{ text: "Fixed bug where some UI sounds would still be played when sound effects were turned off." }
+		{ text: "Fixed bug where some talents would stop working after death." }
 	]	
 
 	#######################################################################################
