@@ -4,6 +4,7 @@ map_player_spawn .player_spawn:
 
 map_portal .exit:
 {
+	animation: !DEFAULT_PORTAL_ANIMATION{}
 	map: open_world
 	spawn: dungeon_2_exit
 }

@@ -45,6 +45,9 @@ sprites:
 	sprite effect_melee_swing_2: { flags: [ centered ] }
 	sprite effect_melee_swing_3: { flags: [ centered ] }
 	sprite effect_melee_swing_4: { flags: [ centered ] }
+	sprite effect_instance_portal_0: { flags: [ ] }
+	sprite effect_instance_portal_1: { flags: [ ] }
+	sprite effect_instance_portal_2: { flags: [ ] }
 	
 	cursor: { position: [ 0 20 ] }	
 	size: { width: 24 height: 24 }

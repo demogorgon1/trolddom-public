@@ -497,6 +497,7 @@ map_player_spawn .player_spawn:
 
 map_portal .dungeon_1_entrance:
 {
+	animation: !DEFAULT_PORTAL_ANIMATION{}
 	map: dungeon_1
 }
 
