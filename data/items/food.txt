@@ -37,13 +37,13 @@
 	states: [ default ]
 	direct_effect apply_aura: { aura: @_aura }
 	<exists _buff> direct_effect apply_aura: { aura: @_buff }
+	required_level: @_level
 	cooldowns: [ global ]
 }
 
 !define local ITEM_FOOD
 {
 	item_level: @_level
-	required_level: @_level
 	icon: @_icon
 	string: @_string
 	stack: 20

@@ -2,6 +2,16 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.1.9"
+
+	text: "Issues fixed:"
+
+	list:
+	[
+		{ text: "Fixed bug where consumables could be used at less than required level." }
+	]	
+	
+	#######################################################################################
 	heading: "v0.1.8"
 
 	text: "Changes:"

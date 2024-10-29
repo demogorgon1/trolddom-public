@@ -428,5 +428,7 @@ sprites:
 
 	cursor: { position: [ 0 368 ] }
 	sprite icon_malice : { tags: [ icon ] }
+	sprite icon_skull_2 : { tags: [ icon ] }
+	sprite icon_skull_3 : { tags: [ icon ] }
 
 }

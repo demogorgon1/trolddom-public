@@ -17,6 +17,7 @@ ability consumable_small_healing_potion:
 	sound_effects: !SOUND_DRINK_POTION{}
 	delay: 2
 	target_particle_system: small_heal	
+	required_level: 1	
 }
 
 item consumable_small_healing_potion:
@@ -26,7 +27,6 @@ item consumable_small_healing_potion:
 	icon: icon_small_red_potion
 	string: "Small Healing Potion"
 	stack: 10	
-	required_level: 1
 	use_ability: consumable_small_healing_potion
 	level_range: [ 1 5 ]
 }
@@ -45,6 +45,7 @@ ability consumable_small_mana_potion:
 	cooldowns: [ global potions ]
 	states: [ default in_combat ]
 	sound_effects: !SOUND_DRINK_POTION{}
+	required_level: 1
 }
 
 item consumable_small_mana_potion:
@@ -54,7 +55,6 @@ item consumable_small_mana_potion:
 	icon: icon_small_blue_potion
 	string: "Small Mana Potion"
 	stack: 10
-	required_level: 1
 	use_ability: consumable_small_mana_potion
 	level_range: [ 1 5 ]
 }
@@ -75,6 +75,7 @@ ability consumable_healing_potion:
 	sound_effects: !SOUND_DRINK_POTION{}
 	delay: 2
 	target_particle_system: small_heal
+	required_level: 4
 }
 
 item consumable_healing_potion:
@@ -83,7 +84,6 @@ item consumable_healing_potion:
 	icon: icon_red_potion
 	string: "Healing Potion"
 	stack: 10	
-	required_level: 4
 	use_ability: consumable_healing_potion
 	level_range: [ 5 10 ]
 }
@@ -102,6 +102,7 @@ ability consumable_mana_potion:
 	cooldowns: [ global potions ]
 	states: [ default in_combat ]
 	sound_effects: !SOUND_DRINK_POTION{}
+	required_level: 4
 }
 
 item consumable_mana_potion:
@@ -110,7 +111,6 @@ item consumable_mana_potion:
 	icon: icon_blue_potion
 	string: "Mana Potion"
 	stack: 10
-	required_level: 4
 	use_ability: consumable_mana_potion
 	level_range: [ 5 10 ]
 }
@@ -140,6 +140,7 @@ ability consumable_elixir_of_the_giant:
 	cooldowns: [ global ]
 	states: [ default in_combat ]
 	sound_effects: !SOUND_DRINK_POTION{}
+	required_level: 4
 }
 
 item consumable_elixir_of_the_giant:
@@ -149,7 +150,6 @@ item consumable_elixir_of_the_giant:
 	icon: icon_small_green_potion
 	string: "Elixir of the Giant"
 	stack: 10
-	required_level: 4
 	use_ability: consumable_elixir_of_the_giant
 	level_range: [ 4 10 ]
 }
@@ -179,6 +179,7 @@ ability consumable_elixir_of_the_owl:
 	cooldowns: [ global ]
 	states: [ default in_combat ]
 	sound_effects: !SOUND_DRINK_POTION{}
+	required_level: 4
 }
 
 item consumable_elixir_of_the_owl:
@@ -188,7 +189,6 @@ item consumable_elixir_of_the_owl:
 	icon: icon_small_cyan_potion
 	string: "Elixir of the Owl"
 	stack: 10
-	required_level: 4
 	use_ability: consumable_elixir_of_the_owl
 	level_range: [ 4 10 ]
 }
@@ -218,6 +218,7 @@ ability consumable_elixir_of_the_bear:
 	cooldowns: [ global ]
 	states: [ default in_combat ]
 	sound_effects: !SOUND_DRINK_POTION{}
+	required_level: 4
 }
 
 item consumable_elixir_of_the_bear:
@@ -227,7 +228,6 @@ item consumable_elixir_of_the_bear:
 	icon: icon_small_purple_potion
 	string: "Elixir of the Bear"
 	stack: 10
-	required_level: 4
 	use_ability: consumable_elixir_of_the_bear
 	level_range: [ 4 10 ]
 }
@@ -257,6 +257,7 @@ ability consumable_spell_juice:
 	cooldowns: [ global ]
 	states: [ default in_combat ]
 	sound_effects: !SOUND_DRINK_POTION{}
+	required_level: 4
 }
 
 item consumable_spell_juice:
@@ -265,7 +266,6 @@ item consumable_spell_juice:
 	icon: icon_brown_potion
 	string: "Spell Juice"
 	stack: 10
-	required_level: 4
 	use_ability: consumable_spell_juice
 	level_range: [ 4 10 ]
 }
@@ -284,6 +284,7 @@ ability consumable_spirit_token:
 	requirement self<must_have_aura>: exhausted
 	states: [ default in_combat ]
 	direct_effect remove_aura: { aura: exhausted }
+	required_level: 1
 }
 
 item consumable_spirit_token:
@@ -292,7 +293,6 @@ item consumable_spirit_token:
 	icon: icon_token_1
 	string: "Spirit Token"
 	stack: 20
-	required_level: 1
 	use_ability: consumable_spirit_token
 	cost: 500
 }

@@ -44,6 +44,7 @@ namespace tpublic
 			ID_DISMISS_CURRENT_MINION,
 			ID_TOO_MANY_MINIONS,
 			ID_AMOUNT_TOO_LARGE,
+			ID_TOO_LOW_LEVEL,
 
 			NUM_IDS
 		};
@@ -97,7 +98,8 @@ namespace tpublic
 			{ "Out of stock!" },
 			{ "Dismiss current minion!" },
 			{ "Too many minions!" },
-			{ "Amount too large! "}
+			{ "Amount too large! "},
+			{ "Too low level! "}
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

@@ -53,12 +53,12 @@ aura recently_bandaged:
 	direct_effect apply_aura: { aura: @_aura }
 	direct_effect apply_aura: { aura: recently_bandaged }
 	requirement target<must_not_have_aura>: { id: recently_bandaged }
+	required_level: @_level	
 }
 
 !define local ITEM_BANDAGE
 {
 	item_level: @_level
-	required_level: @_level
 	icon: @_icon
 	string: @_string
 	stack: 20

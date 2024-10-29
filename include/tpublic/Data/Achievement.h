@@ -134,6 +134,8 @@ namespace tpublic
 							m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
 						else if (aChild->m_name == "kill_trigger")
 							m_killTriggerEntityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENTITY, aChild->GetIdentifier());
+						else if (aChild->m_name == "kill_trigger_tag")
+							m_killTriggerEntityTagId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TAG, aChild->GetIdentifier());
 						else if (aChild->m_tag == "stat_trigger")
 							m_statTrigger = StatTrigger(aChild);
 						else if (aChild->m_tag == "reputation_trigger")
@@ -164,6 +166,7 @@ namespace tpublic
 				aStream->WriteUInts(m_needAchievementIds);
 				aStream->WriteBool(m_accountWide);
 				aStream->WriteUInt(m_killTriggerEntityId);
+				aStream->WriteUInt(m_killTriggerEntityTagId);
 				aStream->WriteBool(m_availableInFrontEnd);
 			}
 
@@ -199,6 +202,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInt(m_killTriggerEntityId))
 					return false;
+				if (!aStream->ReadUInt(m_killTriggerEntityTagId))
+					return false;
 				if (!aStream->ReadBool(m_availableInFrontEnd))
 					return false;
 				return true;
@@ -216,6 +221,7 @@ namespace tpublic
 			std::optional<ReputationTrigger>	m_reputationTrigger;
 			std::vector<uint32_t>				m_needAchievementIds;
 			uint32_t							m_killTriggerEntityId = 0;
+			uint32_t							m_killTriggerEntityTagId = 0;
 			uint64_t							m_sortKey = 0;
 			bool								m_noProgressValues = false;
 			bool								m_accountWide = false;
