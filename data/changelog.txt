@@ -4,6 +4,13 @@ changelog:
 	#######################################################################################
 	heading: "v0.1.9"
 
+	text: "Changes:"
+
+	list:
+	[
+		{ text: "Cooking can now also be done by campfires." }
+	]	
+
 	text: "Issues fixed:"
 
 	list:

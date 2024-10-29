@@ -12,7 +12,7 @@
 	consume_items: @_materials
 	produce_items: @_produce
 	required_profession<@_skill>: cooking
-	must_have_nearby_entity: fireplace
+	must_have_one_of_nearby_entities: [ fireplace bonfire ]
 }
 
 #####################################################

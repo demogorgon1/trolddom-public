@@ -480,6 +480,8 @@ namespace tpublic
 							m_meleeParticleSystemId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PARTICLE_SYSTEM, aMember->GetIdentifier());
 						else if (aMember->m_name == "must_have_nearby_entity")
 							m_mustHaveNearbyEntityId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENTITY, aMember->GetIdentifier());
+						else if (aMember->m_name == "must_have_one_of_nearby_entities")
+							aMember->GetIdArray(DataType::ID_ENTITY, m_mustHaveOneOfNearbyEntityIds);
 						else if (aMember->m_name == "flags")
 							m_flags = GetFlags(aMember, &m_extendedFlags);
 						else if (aMember->m_tag == "direct_effect")
@@ -557,6 +559,7 @@ namespace tpublic
 				m_descriptionFrom.ToStream(aWriter);
 				aWriter->WriteObjects(m_sourceVisuals);
 				aWriter->WriteUInt(m_minRange);
+				aWriter->WriteUInts(m_mustHaveOneOfNearbyEntityIds);
 
 				for(uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 					aWriter->WriteUInt(m_resourceCosts[i]);
@@ -640,6 +643,8 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadUInt(m_minRange))
 					return false;
+				if(!aReader->ReadUInts(m_mustHaveOneOfNearbyEntityIds))
+					return false;
 
 				for (uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 				{
@@ -688,6 +693,7 @@ namespace tpublic
 			DataReference										m_iconFrom;
 			DataReference										m_descriptionFrom;
 			uint32_t											m_mustHaveNearbyEntityId = 0;
+			std::vector<uint32_t>								m_mustHaveOneOfNearbyEntityIds;
 			std::vector<Visual>									m_sourceVisuals;
 		};
 
