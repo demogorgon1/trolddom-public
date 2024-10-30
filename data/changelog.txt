@@ -2,16 +2,26 @@ changelog:
 {
 
 	#######################################################################################
-	heading: "v0.1.10"
+	heading: "v0.1.11"
 
 	text: "Issues fixed:"
+
+	list:
+	[
+		{ text: "Drag-and-drop to sell items to vendor should now work like intended." }
+	]	
+	
+	#######################################################################################
+	heading: "v0.1.10"
+
+	text: "Changes:"
 
 	list:
 	[
 		{ text: "Added a couple more profession recipes." }
 	]	
 
-	text: "Changes:"
+	text: "Issues fixed:"
 
 	list:
 	[
