@@ -2,6 +2,24 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.1.10"
+
+	text: "Issues fixed:"
+
+	text: "Changes:"
+
+	list:
+	[
+		{ text: "Added a couple more profession recipes." }
+	]	
+
+	list:
+	[
+		{ text: "Party invites and other similar UI notifications now work again." }
+		{ text: "Fixed issue with threat generated from AOE abilities." }
+	]	
+	
+	#######################################################################################
 	heading: "v0.1.9"
 
 	text: "Changes:"

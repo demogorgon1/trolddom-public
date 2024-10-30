@@ -751,6 +751,7 @@ loot_table .living_dead_8:
 	
 		!WORLD_DROPS {}
 		!WORLD_DROPS_CLOTH{}
+		!WORLD_DROPS_ZOMBIES{}
 	]	
 }
 
@@ -887,6 +888,7 @@ loot_table .abandoned_keep_undead:
 	[
 		!WORLD_DROPS {}
 		!WORLD_DROPS_CLOTH{}
+		!WORLD_DROPS_SKELETONS{}
 	]		
 }
 
@@ -903,6 +905,7 @@ loot_table .skeleton_chef:
 
 		!WORLD_DROPS {}
 		!WORLD_DROPS_CLOTH{}
+		!WORLD_DROPS_SKELETONS{}
 	]		
 }
 
@@ -1000,6 +1003,7 @@ loot_table .wasteland_undead:
 	[
 		!WORLD_DROPS {}
 		!WORLD_DROPS_CLOTH{}
+		!WORLD_DROPS_ZOMBIES{}
 	]		
 }
 

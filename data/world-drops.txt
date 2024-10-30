@@ -5,6 +5,9 @@ loot_group world_drops_uncommon: {}
 loot_group world_drops_rare: {}
 loot_group world_drops_epic: {}
 
+loot_group skeletons: {}
+loot_group zombies: {}
+
 !define WORLD_DROPS
 {
 	possibility: { weight: 950 }
@@ -21,4 +24,16 @@ loot_group world_drops_epic: {}
 {
 	possibility: { weight: 1 }
 	possibility: { weight: 1 loot_group: world_drops_cloth creature_types: [ humanoid demon undead ] }
+}
+
+!define WORLD_DROPS_SKELETONS 
+{
+	possibility: { weight: 1 }
+	possibility: { weight: 1 loot_group: skeletons creature_types: [ undead ] }
+}
+
+!define WORLD_DROPS_ZOMBIES 
+{
+	possibility: { weight: 1 }
+	possibility: { weight: 1 loot_group: zombies creature_types: [ undead ] }
 }

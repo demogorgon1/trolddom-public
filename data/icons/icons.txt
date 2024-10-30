@@ -430,5 +430,9 @@ sprites:
 	sprite icon_malice : { tags: [ icon ] }
 	sprite icon_skull_2 : { tags: [ icon ] }
 	sprite icon_skull_3 : { tags: [ icon ] }
+	sprite icon_worm_1 : { tags: [ icon ] }
+	sprite icon_purple_potion : { tags: [ icon ] }
+	sprite icon_bone_fragments_1 : { tags: [ icon ] }
+	sprite icon_orange_potion : { tags: [ icon ] }
 
 }

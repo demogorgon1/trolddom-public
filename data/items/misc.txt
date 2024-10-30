@@ -62,3 +62,29 @@ item item_potatoes:
 	stack: 20
 	loot_groups: [ potatoes world_drops_junk ]
 }
+
+#####################################################
+# Bone Fragments
+
+item item_bone_fragments:
+{
+	type: miscellaneous
+	item_level: 8
+	icon: icon_bone_fragments_1
+	string: "Bone Fragments"
+	stack: 20
+	loot_groups: [ skeletons ]
+}
+
+#####################################################
+# Corpse Worm
+
+item item_corpse_worm:
+{
+	type: miscellaneous
+	item_level: 8
+	icon: icon_worm_1
+	string: "Corpse Worm"
+	stack: 20
+	loot_groups: [ zombies ]
+}

@@ -202,3 +202,88 @@ item recipe_spell_juice:
 	use_ability: .learn_spell_juice
 	level_range: [ 6 10 ]
 }
+
+#####################################################
+# Rejuvenation Potion
+
+ability craft_rejuvenation_potion: !ALCHEMY_CRAFT
+{
+	_string: "Rejuvenation Potion"
+	_item: consumable_rejuvenation_potion
+	_produce: { consumable_rejuvenation_potion: 1 } 
+	_materials: { item_mistflower: 4 item_corpse_worm: 2 }
+	_skill: 50
+}
+
+ability .learn_rejuvenation_potion:
+{
+	string: "Recipe: Rejuvenation Potion"
+	description: "Teaches you how to make Rejuvenation Potion."
+	flags: [ target_self item ]
+	cast_time: 20
+	icon: icon_scroll_1
+	cooldowns: [ global ]	
+	consume_items: { recipe_rejuvenation_potion: 1 }
+	required_profession<45>: alchemy
+	requirement self<must_not_have_profession_ability>: { id: craft_rejuvenation_potion }
+	direct_effect learn_profession_ability:
+	{
+		profession: alchemy
+		ability: craft_rejuvenation_potion
+	}
+}
+
+item recipe_rejuvenation_potion:
+{
+	type: miscellaneous
+	item_level: 7
+	rarity: uncommon
+	loot_groups: [ world_drops_uncommon ]
+	icon: icon_scroll_1
+	string: "Recipe: Rejuvenation Potion"
+	use_ability: .learn_rejuvenation_potion
+	level_range: [ 7 10 ]
+}
+
+#####################################################
+# Power Potion
+
+ability craft_power_potion: !ALCHEMY_CRAFT
+{
+	_string: "Power Potion"
+	_item: consumable_power_potion
+	_produce: { consumable_power_potion: 1 } 
+	_materials: { item_mistflower: 4 item_bone_fragments: 2 }
+	_skill: 50
+}
+
+ability .learn_power_potion:
+{
+	string: "Recipe: Power Potion"
+	description: "Teaches you how to make Power Potion."
+	flags: [ target_self item ]
+	cast_time: 20
+	icon: icon_scroll_1
+	cooldowns: [ global ]	
+	consume_items: { recipe_power_potion: 1 }
+	required_profession<45>: alchemy
+	requirement self<must_not_have_profession_ability>: { id: craft_power_potion }
+	direct_effect learn_profession_ability:
+	{
+		profession: alchemy
+		ability: craft_power_potion
+	}
+}
+
+item recipe_power_potion:
+{
+	type: miscellaneous
+	item_level: 7
+	rarity: uncommon
+	loot_groups: [ world_drops_uncommon ]
+	icon: icon_scroll_1
+	string: "Recipe: Power Potion"
+	use_ability: .learn_power_potion
+	level_range: [ 7 10 ]
+}
+

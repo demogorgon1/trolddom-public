@@ -271,6 +271,73 @@ item consumable_spell_juice:
 }
 
 #####################################################
+# Power Potion
+
+aura consumable_power_potion:
+{
+	string: "Power Potion"
+	type: buff
+	icon: icon_orange_potion
+	duration: 300
+	flags: [ unique ]
+	stat_modifiers: { spell_damage: { add: 20 } healing: { add: 20 } strength: { add: 20 } }
+}
+
+ability consumable_power_potion:
+{
+	string: "Power Potion"
+	description: "Increases your Spell Damage, Healing, and Strength by 20 for 30 seconds."
+	flags: [ target_self item ]
+	icon: icon_orange_potion
+	direct_effect apply_aura: { aura: consumable_power_potion }
+	consume_items: { consumable_power_potion: 1 }
+	cooldowns: [ global potions ]
+	states: [ default in_combat ]
+	sound_effects: !SOUND_DRINK_POTION{}
+	required_level: 7
+}
+
+item consumable_power_potion:
+{
+	item_level: 8
+	icon: icon_orange_potion
+	string: "Power Potion"
+	stack: 10
+	use_ability: consumable_power_potion
+	level_range: [ 7 10 ]
+}
+
+#####################################################
+# Rejuvenation Potion
+
+ability consumable_rejuvenation_potion:	
+{
+	string: "Rejuvenation Potion"
+	description: "Restores 70 health and mana."
+	flags: [ target_self item ]
+	icon: icon_purple_potion
+	direct_effect heal: { function: 70 }
+	direct_effect modify_resource: { resource: mana function: 70 }	
+	consume_items: { consumable_rejuvenation_potion: 1 }
+	cooldowns: [ global potions ]	
+	states: [ default in_combat ]
+	sound_effects: !SOUND_DRINK_POTION{}
+	delay: 2
+	target_particle_system: small_heal
+	required_level: 7
+}
+
+item consumable_rejuvenation_potion:
+{
+	loot_groups: [ world_drops_consumable ]
+	icon: icon_purple_potion
+	string: "Rejuvenation Potion"
+	stack: 10	
+	use_ability: consumable_rejuvenation_potion
+	level_range: [ 7 10 ]
+}
+
+#####################################################
 # Spirit Token
 
 ability consumable_spirit_token:
