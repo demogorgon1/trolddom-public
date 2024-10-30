@@ -6,12 +6,12 @@ changelog:
 
 	text: "Issues fixed:"
 
-	text: "Changes:"
-
 	list:
 	[
 		{ text: "Added a couple more profession recipes." }
 	]	
+
+	text: "Changes:"
 
 	list:
 	[
