@@ -163,7 +163,7 @@ namespace tpublic::DirectEffects
 
 		DirectEffect::DamageType damageType = _GetDamageType(aSource, playerPrivate != NULL ? playerPrivate->m_abilityModifierList : NULL, aAbilityId);
 
-		if(damageType == DirectEffect::DAMAGE_TYPE_PHYSICAL)
+		if(damageType == DirectEffect::DAMAGE_TYPE_PHYSICAL && targetCombatPrivate != NULL)
 		{
 			// Damage reduction from armor
 			float damageMultiplier = 1.0f - (float)targetCombatPrivate->m_armor / (float)(targetCombatPrivate->m_armor + 400 + 85 * sourceCombatPublic->m_level);
