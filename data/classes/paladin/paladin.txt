@@ -25,7 +25,7 @@ class paladin:
 		
 	remains: [ player_remains_1 player_remains_2 player_remains_3 ]
 
-	color_1: [ 180 210 0 ] 
+	color_1: [ 160 190 0 ] 
 	color_2: [ 85 100 0 ]
 	default_attack: attack
 	default_action_bar: [ attack !DEFAULT_ABILITIES{} ]

@@ -1,3 +1,14 @@
+# - Necromancy: Cheat Death (Talent)
+# - Necromancy: Improved Cheat Death (Talent)
+# - Necromancy: Shackle Undeath (Basic)
+# - Necromancy: Soul Leak (Basic)
+# - Necromancy: Improved Soul Leak (Talent)
+# - Necromancy: Raise Dead (Talent)
+# - Necromancy: Enfeeblement (Talent)
+# - Necromancy: Blind (Basic)
+# - Necromancy: Summon Spirit (Talent)
+# - Necromancy: Chill Touch (Talent)
+
 talent_tree witch_necromancy:
 {
 	string: "Necromancy"

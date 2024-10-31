@@ -434,5 +434,22 @@ sprites:
 	sprite icon_purple_potion : { tags: [ icon ] }
 	sprite icon_bone_fragments_1 : { tags: [ icon ] }
 	sprite icon_orange_potion : { tags: [ icon ] }
+	sprite icon_heal_demon : { tags: [ icon ] }
+	sprite icon_drain_life : { tags: [ icon ] }
+	sprite icon_blood_pact : { tags: [ icon ] }
+	sprite icon_summon_lesser_demon : { tags: [ icon ] }
+	sprite icon_demon_mastery : { tags: [ icon ] }
+	sprite icon_summon_black_beast : { tags: [ icon ] }
+	sprite icon_summon_fiendish_spellcaster : { tags: [ icon ] }
+	sprite icon_cheat_death : { tags: [ icon ] }
+	sprite icon_improved_cheat_death : { tags: [ icon ] }
+	
+	cursor: { position: [ 0 384 ] }
+	sprite icon_soul_drain : { tags: [ icon ] }
+	sprite icon_shackle_undeath : { tags: [ icon ] }
+	sprite icon_enfeeblement : { tags: [ icon ] }
+	sprite icon_blind : { tags: [ icon ] }
+	sprite icon_summon_spirit : { tags: [ icon ] }
+	sprite icon_icy_touch : { tags: [ icon ] }
 
 }

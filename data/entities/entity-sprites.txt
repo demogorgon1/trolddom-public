@@ -203,6 +203,11 @@ sprites:
 	sprite man_23: { dead: man_23_dead }
 	sprite man_24: { dead: man_24_dead }
 	sprite horse_1: { dead: horse_1_dead }
+	sprite black_beast: { dead: black_beast_dead }
+	sprite fiendish_spellcaster: { dead: fiendish_spellcaster_dead }
+	sprite minor_demon: { dead: minor_demon_dead }
+	sprite skeleton: { dead: skeleton_dead }
+	sprite spirit: { dead: spirit_dead }
 	
 	cursor: { position: [ 0 176 ] }
 
@@ -213,6 +218,11 @@ sprites:
 	sprite man_23_dead: { }
 	sprite man_24_dead: { }
 	sprite horse_1_dead: { }
+	sprite black_beast_dead: { }
+	sprite fiendish_spellcaster_dead: { }
+	sprite minor_demon_dead: { }
+	sprite skeleton_dead: { }
+	sprite spirit_dead: { }
 	
 }
 

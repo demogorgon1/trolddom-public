@@ -1,3 +1,16 @@
+# - Demonology: Drain Life (Basic)
+# - Demonology: Blood Pact (Basic) - Convert health to mana.
+# - Demonology: Summon Lesser Demon (Basic)
+
+
+# - Demonology: Heal Demon (Talent)
+# - Demonology: Improved Drain Life (Talent)
+# - Demonology: Improved Blood Pact (Talent)
+# - Demonology: Demon Mastery (Talent)
+# - Demonology: Summon Black Beast (Talent)
+# - Demonology: Summon Fiendish Spellcaster (Talent)
+# - Demonology: Forbidden Knowledge (Talent)
+
 talent_tree witch_demonology:
 {
 	string: "Demonology"
@@ -6,11 +19,276 @@ talent_tree witch_demonology:
 	
 	map_palette:
 	{
-	}
-	
+		talent witch_heal_demon: "A"
+		talent witch_improved_drain_life: "B"
+		talent witch_improved_blood_pact: "C"
+		talent witch_demon_mastery: "D"
+		talent witch_summon_black_beast: "E"
+		talent witch_summon_fiendish_spellcaster: "F"
+		talent witch_forbidden_knowledge: "G"
+		
+		sprite talent_tree_down_arrow: "d"
+		sprite talent_tree_left_arrow: "l"
+		sprite talent_tree_down: "|"		
+		sprite talent_tree_horizontal: "-"		
+		sprite talent_tree_left_to_down: "x"		
+	}		
+
 	map:
 	[
+		"A-x.G.B"
+		"d.d.d.."
+		"F.D.C.."
+		"d......"
+		"E......"
 	]
 	
+}
+
+###############################################################################
+# Summon Lesser Demon
+
+ability summon_lesser_demon:
+{
+	string: "Summon Lesser Demon"
+	description: "Summons a Lesser Demon."
+	flags: [ target_self minion_summon ]
+	cast_time: 20
+	icon: icon_summon_lesser_demon
+	resource_cost mana: 15
+	talent_tree: witch_demonology
+	cooldowns: [ global spell_unholy_lockout ]	
+
+	direct_effect spawn_entity:
+	{
+		spawn_flags: [ no_owner ]
+		entity: minor_demon
+		init_state: spawning
+	}
+}
+
+###############################################################################
+# Heal Demon
+
+talent witch_heal_demon:
+{
+	string: "Heal Demon"
+	icon: icon_heal_demon
+	
+	points:
+	[
+		{ ability: heal_demon }
+	]
+}
+
+ability heal_demon:
+{
+	string: "Heal Demon"
+	description: "Heals target for $heal$."
+	range: 7
+	cooldowns: [ global spell_unholy_lockout ]
+	cast_time: 20
+	flags: [ spell target_other target_self target_friendly interruptable ]
+	states: [ default in_combat ]
+	icon: icon_heal_demon
+	resource_cost mana: 15
+	talent_tree: witch_demonology
+	target_particle_system: heal	
+	delay: 2
+	sound_effects: !SOUND_HEAL{}
+	
+	direct_effect heal:
+	{	
+		flags: [ can_be_critical ]
+		function: { expression: a_mul_x_plus_b x: healing a: 1 b: [ [ 1 25 ] [ 10 50 ] ] }
+	}
+		
+}
+
+###############################################################################
+# Improved Drain Life
+
+talent witch_improved_drain_life:
+{
+	string: "Improved Drain Life"
+	icon: icon_drain_life
+	
+	points:
+	[
+		{ ability_modifier: improved_drain_life_1 }
+		{ ability_modifier: improved_drain_life_2 }
+		{ ability_modifier: improved_drain_life_3 }
+	]	
+}
+
+ability_modifier improved_drain_life_1:
+{	
+	description: "Increases damage done by Drain Life by 15%."	
+}
+
+ability_modifier improved_drain_life_2:
+{	
+	description: "Increases damage done by Drain Life by 30%."	
+}
+
+ability_modifier improved_drain_life_3:
+{	
+	description: "Increases damage done by Drain Life by 45%."	
+}
+
+###############################################################################
+# Improved Blood Pact
+
+talent witch_improved_blood_pact:
+{
+	string: "Improved Blood Pact"
+	icon: icon_blood_pact
+	
+	points:
+	[
+		{ ability_modifier: improved_blood_pact }
+	]		
+}
+
+ability_modifier improved_blood_pact:
+{	
+	description: "Increases health to mana conversion of Blood Pact by 100%."	
+}
+
+###############################################################################
+# Demon Mastery
+
+talent witch_demon_mastery:
+{
+	string: "Demon Mastery"
+	icon: icon_demon_mastery
+	
+	points:
+	[
+		{ ability_modifier: improved_demon_mastery_1 }
+		{ ability_modifier: improved_demon_mastery_2 }
+		{ ability_modifier: improved_demon_mastery_3 }
+	]	
+}
+
+ability_modifier improved_demon_mastery_1:
+{	
+	description: "Increases effectiveness of demon minions by 15%."	
+}
+
+ability_modifier improved_demon_mastery_2:
+{	
+	description: "Increases effectiveness of demon minions by 15%."	
+}
+
+ability_modifier improved_demon_mastery_3:
+{	
+	description: "Increases effectiveness of demon minions by 15%."	
+}
+
+###############################################################################
+# Summon Black Beast
+
+talent witch_summon_black_beast:
+{
+	string: "Summon Black Beast"
+	icon: icon_summon_black_beast
+	
+	points:
+	[
+		{ ability: summon_black_beast }
+	]	
+}
+
+ability summon_black_beast:
+{
+	string: "Summon Black Beast"
+	description: "Summons a Black Beast."
+	flags: [ target_self minion_summon ]
+	cast_time: 20
+	icon: icon_summon_black_beast
+	resource_cost mana: 15
+	talent_tree: witch_demonology
+	cooldowns: [ global spell_unholy_lockout ]	
+
+	direct_effect spawn_entity:
+	{
+		spawn_flags: [ no_owner ]
+		entity: black_beast
+		init_state: spawning
+	}
+}
+
+###############################################################################
+# Summon Fiendish Spellcaster
+
+talent witch_summon_fiendish_spellcaster:
+{
+	string: "Summon Fiendish Spellcaster"
+	icon: icon_summon_fiendish_spellcaster
+	
+	points:
+	[
+		{ ability: summon_fiendish_spellcaster }
+	]		
+}
+
+ability summon_fiendish_spellcaster:
+{
+	string: "Summon Fiendish Spellcaster"
+	description: "Summons a Fiendish Spellcaster."
+	flags: [ target_self minion_summon ]
+	cast_time: 20
+	icon: icon_summon_fiendish_spellcaster
+	resource_cost mana: 15
+	talent_tree: witch_demonology
+	cooldowns: [ global spell_unholy_lockout ]	
+
+	direct_effect spawn_entity:
+	{
+		spawn_flags: [ no_owner ]
+		entity: fiendish_spellcaster
+		init_state: spawning
+	}
+}
+
+###############################################################################
+# Forbidden Knowledge
+
+talent witch_forbidden_knowledge:
+{
+	string: "Forbidden Knowledge"
+	icon: icon_wisdom
+	
+	points:
+	[
+		{ aura: forbidden_knowledge_1 }
+		{ aura: forbidden_knowledge_2 }
+		{ aura: forbidden_knowledge_3 }
+	]	
+}
+
+aura forbidden_knowledge_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your Wisdom by 2%."
+	stat_modifiers: { wisdom: { add_percent: 2 } }
+}
+
+aura forbidden_knowledge_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your Wisdom by 4%."
+	stat_modifiers: { wisdom: { add_percent: 4 } }
+}
+
+aura forbidden_knowledge_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your Wisdom by 6%."
+	stat_modifiers: { wisdom: { add_percent: 6 } }
 }
 

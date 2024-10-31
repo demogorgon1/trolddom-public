@@ -25,8 +25,8 @@ class witch:
 		
 	remains: [ player_remains_1 player_remains_2 player_remains_3 ]
 
-	color_1: [ 210 0 210 ] 
-	color_2: [ 100 0 64 ]
+	color_1: [ 160 0 160 ] 
+	color_2: [ 90 0 64 ]
 	default_attack: attack
 	default_action_bar: [ attack witch_bolt !DEFAULT_ABILITIES{} ]
 	talent_trees: [ witch_malice witch_demonology witch_necromancy ]
@@ -108,7 +108,7 @@ class witch:
 			
 			unlock_abilities:
 			[			
-				curse_of_attraction
+				summon_lesser_demon
 			]
 			
 			stats:
@@ -127,6 +127,7 @@ class witch:
 			
 			unlock_abilities:
 			[
+				curse_of_attraction			
 			]
 			
 			stats:

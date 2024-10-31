@@ -1,0 +1,407 @@
+##############################################################################
+# Minor Demon
+{
+	${
+		_name_template: .minor_demon		
+		_weapon_damage: 1
+		_resource_health: 1
+		_armor: 1
+		_creature_type: demon
+		_sprite: minor_demon
+		_sprite_dead: minor_demon_dead
+		_minion_modes: [ .minor_demon_aggressive .minor_demon_defensive .minor_demon_passive ]
+		_default_minion_mode: .minor_demon_defensive
+		_commands: [ move attack ]
+		_abilities: [ { id: .minor_demon_attack flags: [ auto ] } ]
+		_ability_prio: [ .minor_demon_attack ]
+	}
+	
+	tag_context .minor_demon:
+	{
+		must_have_tags: [ american_forename_male ]
+	}
+	
+	name_template .minor_demon:
+	{
+		possibility<1>:
+		{
+			word: [ .minor_demon ]
+		}
+	}
+
+	minion_mode .minor_demon_aggressive:
+	{
+		string: "Aggressive"
+		icon: icon_aggressive
+		follow_distance: 3
+		aggro_range: 5
+		attack_owner_threat_target: true
+		attack_threat_target: true
+	}
+
+	minion_mode .minor_demon_defensive:
+	{
+		string: "Defensive"
+		icon: icon_defensive
+		follow_distance: 3
+		attack_owner_threat_target: true
+		attack_threat_target: true
+	}
+
+	minion_mode .minor_demon_passive:
+	{
+		string: "Passive"
+		icon: icon_passive
+		follow_distance: 3
+	}
+	
+	cooldown .minor_demon_attack:
+	{
+		duration: 19
+	}
+	
+	ability .minor_demon_attack:
+	{
+		string: "Attack"
+		description: "Deals $damage$ damage to target."
+		flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+		states: [ default in_combat ]
+		delay: 3
+		icon: icon_sword_1
+		cooldowns: [ .minor_demon_attack ]
+		
+		direct_effect damage:
+		{
+			flags: [ can_be_critical ]
+			damage_type: physical			
+			function: { expression: x x: weapon }		
+		}
+	}	
+	
+	entity minor_demon: !MINION{}
+}
+
+##############################################################################
+# Fiendish Spellcaster
+{
+
+	${
+		_name_template: .fiendish_spellcaster
+		_weapon_damage: 1
+		_resource_health: 1
+		_armor: 1
+		_creature_type: demon
+		_sprite: fiendish_spellcaster
+		_sprite_dead: fiendish_spellcaster_dead
+		_minion_modes: [ .fiendish_spellcaster_aggressive .fiendish_spellcaster_defensive .fiendish_spellcaster_passive ]
+		_default_minion_mode: .fiendish_spellcaster_defensive
+		_commands: [ move attack ]
+		_abilities: [ { id: .fiendish_spellcaster_attack flags: [ auto ] } ]
+		_ability_prio: [ .fiendish_spellcaster_attack ]		
+	}
+	
+	tag_context .fiendish_spellcaster:
+	{
+		must_have_tags: [ american_forename_female ]
+	}
+	
+	name_template .fiendish_spellcaster:
+	{
+		possibility<1>:
+		{
+			word: [ .fiendish_spellcaster ]
+		}
+	}
+
+	minion_mode .fiendish_spellcaster_aggressive:
+	{
+		string: "Aggressive"
+		icon: icon_aggressive
+		follow_distance: 3
+		aggro_range: 5
+		attack_owner_threat_target: true
+		attack_threat_target: true
+	}
+
+	minion_mode .fiendish_spellcaster_defensive:
+	{
+		string: "Defensive"
+		icon: icon_defensive
+		follow_distance: 3
+		attack_owner_threat_target: true
+		attack_threat_target: true
+	}
+
+	minion_mode .fiendish_spellcaster_passive:
+	{
+		string: "Passive"
+		icon: icon_passive
+		follow_distance: 3
+	}
+	
+	cooldown .fiendish_spellcaster_attack:
+	{
+		duration: 21
+	}
+	
+	ability .fiendish_spellcaster_attack:
+	{
+		string: "Attack"
+		description: "Deals $damage$ damage to target."
+		flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+		states: [ default in_combat ]
+		delay: 3
+		icon: icon_sword_1
+		cooldowns: [ .fiendish_spellcaster_attack ]
+		
+		direct_effect damage:
+		{
+			flags: [ can_be_critical ]
+			damage_type: physical			
+			function: { expression: x x: weapon }		
+		}
+	}	
+	
+	entity fiendish_spellcaster: !MINION{}
+}
+
+##############################################################################
+# Black Beast
+{
+
+	${
+		_name_template: .black_beast
+		_weapon_damage: 1
+		_resource_health: 1
+		_armor: 1
+		_has_rage: true
+		_creature_type: demon
+		_sprite: black_beast
+		_sprite_dead: black_beast_dead
+		_minion_modes: [ .black_beast_aggressive .black_beast_defensive .black_beast_passive ]
+		_default_minion_mode: .black_beast_defensive
+		_commands: [ move attack ]
+		_abilities: [ { id: .black_beast_attack flags: [ auto ] } ]
+		_ability_prio: [ .black_beast_attack ]		
+	}
+	
+	tag_context .black_beast:
+	{
+		must_have_tags: [ american_forename_female ]
+	}
+	
+	name_template .black_beast:
+	{
+		possibility<1>:
+		{
+			word: [ .black_beast ]
+		}
+	}
+
+	minion_mode .black_beast_aggressive:
+	{
+		string: "Aggressive"
+		icon: icon_aggressive
+		follow_distance: 3
+		aggro_range: 5
+		attack_owner_threat_target: true
+		attack_threat_target: true
+	}
+
+	minion_mode .black_beast_defensive:
+	{
+		string: "Defensive"
+		icon: icon_defensive
+		follow_distance: 3
+		attack_owner_threat_target: true
+		attack_threat_target: true
+	}
+
+	minion_mode .black_beast_passive:
+	{
+		string: "Passive"
+		icon: icon_passive
+		follow_distance: 3
+	}
+	
+	cooldown .black_beast_attack:
+	{
+		duration: 21
+	}
+	
+	ability .black_beast_attack:
+	{
+		string: "Attack"
+		description: "Deals $damage$ damage to target."
+		flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+		states: [ default in_combat ]
+		delay: 3
+		icon: icon_sword_1
+		cooldowns: [ .fiendish_spellcaster_attack ]
+		
+		direct_effect damage:
+		{
+			flags: [ can_be_critical generate_rage ]
+			damage_type: physical			
+			function: { expression: x x: weapon }		
+		}
+	}	
+	
+	entity black_beast: !MINION{}
+}
+
+##############################################################################
+# Skeleton
+{
+	${
+		_name_template: .skeleton
+		_weapon_damage: 1
+		_resource_health: 1
+		_armor: 1
+		_creature_type: undead
+		_sprite: skeleton
+		_sprite_dead: skeleton_dead
+		_minion_modes: [ .skeleton_aggressive .skeleton_defensive .skeleton_passive ]
+		_default_minion_mode: .skeleton_defensive
+		_commands: [ move attack ]
+		_abilities: [ { id: .skeleton_attack flags: [ auto ] } ]
+		_ability_prio: [ .skeleton_attack ]
+	}
+	
+	name_template .skeleton:
+	{
+		possibility<1>:
+		{
+			string: [ "Skeleton" ]
+		}
+	}
+
+	minion_mode .skeleton_aggressive:
+	{
+		string: "Aggressive"
+		icon: icon_aggressive
+		follow_distance: 3
+		aggro_range: 5
+		attack_owner_threat_target: true
+		attack_threat_target: true
+	}
+
+	minion_mode .skeleton_defensive:
+	{
+		string: "Defensive"
+		icon: icon_defensive
+		follow_distance: 3
+		attack_owner_threat_target: true
+		attack_threat_target: true
+	}
+
+	minion_mode .skeleton_passive:
+	{
+		string: "Passive"
+		icon: icon_passive
+		follow_distance: 3
+	}
+	
+	cooldown .skeleton_attack:
+	{
+		duration: 19
+	}
+	
+	ability .skeleton_attack:
+	{
+		string: "Attack"
+		description: "Deals $damage$ damage to target."
+		flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+		states: [ default in_combat ]
+		delay: 3
+		icon: icon_sword_1
+		cooldowns: [ .skeleton_attack ]
+		
+		direct_effect damage:
+		{
+			flags: [ can_be_critical ]
+			damage_type: physical			
+			function: { expression: x x: weapon }		
+		}
+	}	
+	
+	entity skeleton: !MINION{}
+}
+
+##############################################################################
+# Spirit
+{
+	${
+		_name_template: .spirit
+		_weapon_damage: 1
+		_resource_health: 1
+		_armor: 1
+		_creature_type: undead
+		_sprite: spirit
+		_sprite_dead: spirit_dead
+		_minion_modes: [ .spirit_aggressive .spirit_defensive .spirit_passive ]
+		_default_minion_mode: .spirit_defensive
+		_commands: [ move attack ]
+		_abilities: [ { id: .spirit_attack flags: [ auto ] } ]
+		_ability_prio: [ .spirit_attack ]
+	}
+	
+	name_template .spirit:
+	{
+		possibility<1>:
+		{
+			string: [ "Spirit" ]
+		}
+	}
+
+	minion_mode .spirit_aggressive:
+	{
+		string: "Aggressive"
+		icon: icon_aggressive
+		follow_distance: 3
+		aggro_range: 5
+		attack_owner_threat_target: true
+		attack_threat_target: true
+	}
+
+	minion_mode .spirit_defensive:
+	{
+		string: "Defensive"
+		icon: icon_defensive
+		follow_distance: 3
+		attack_owner_threat_target: true
+		attack_threat_target: true
+	}
+
+	minion_mode .spirit_passive:
+	{
+		string: "Passive"
+		icon: icon_passive
+		follow_distance: 3
+	}
+	
+	cooldown .spirit_attack:
+	{
+		duration: 19
+	}
+	
+	ability .spirit_attack:
+	{
+		string: "Attack"
+		description: "Deals $damage$ damage to target."
+		flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+		states: [ default in_combat ]
+		delay: 3
+		icon: icon_sword_1
+		cooldowns: [ .skeleton_attack ]
+		
+		direct_effect damage:
+		{
+			flags: [ can_be_critical ]
+			damage_type: physical			
+			function: { expression: x x: weapon }		
+		}
+	}	
+	
+	entity spirit: !MINION{}
+}
