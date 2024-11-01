@@ -21,7 +21,7 @@ namespace tpublic
 			size_t maxEncodedSize = BrotliEncoderMaxCompressedSize(aBufferSize);
 			aOut.resize(maxEncodedSize);
 
-			size_t encodedSize;
+			size_t encodedSize = maxEncodedSize;
 
 			int quality = 0;
 			int windowBits = 0;
