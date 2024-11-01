@@ -103,6 +103,8 @@
 			<exists _encounter> encounter: @_encounter
 			<exists _inactive_encounter_despawn> inactive_encounter_despawn: @_inactive_encounter_despawn
 			<exists _route> route: @_route
+			<exists _zone> zone: @_zone
+			<exists _out_of_zone_action> out_of_zone_action: @_out_of_zone_action
 		}		
 		sprite<static>: 
 		{ 

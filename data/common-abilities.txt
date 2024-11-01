@@ -222,3 +222,38 @@ aura minion:
 	type: buff
 	duration: 3000
 }
+
+cooldown enrage:
+{
+	duration: 300
+}
+
+ability enrage:
+{
+	string: "Enrage"
+	flags: [ target_self ]
+	states: [ default in_combat ]
+	icon: icon_blood_pact
+	cooldowns: [ enrage ]
+	
+	direct_effect apply_aura:
+	{	
+		aura: enraged
+	}
+}
+
+aura enraged:
+{
+	string: "Enraged"
+	description: "Deals increased damage."
+	type: buff
+	icon: icon_blood_pact
+	duration: 300
+	flags: [ unique ]
+
+	aura_effect damage_output_modifier:
+	{
+		multiplier: 3
+		type_mask: [ all ]
+	}
+}

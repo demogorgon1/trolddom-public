@@ -112,6 +112,16 @@ map_palette .doodads:
 	doodad wall_banner_dark_green: [ 143 59 13 ]
 }
 
+map_palette .subzones:
+{
+	sub_zone .ignorg: [ 64 44 213 ]
+	sub_zone .biznorg: [ 64 44 113 ]
+	sub_zone .final: [ 225 167 27 ]
+	sub_zone .grunthar: [ 27 225 123 ]
+	sub_zone .snarltooth: [ 27 116 225 ]
+	sub_zone .umbracoth: [ 225 27 193 ]
+}
+
 map dungeon_1:
 {
 	string: "Aetheris Stronghold"
@@ -166,6 +176,11 @@ map dungeon_1:
 			palettes: 	[ .doodads ]
 			source:		"dungeon-1-doodads.png"
 		}								
+		
+		{ 
+			palettes: 	[ .subzones ]
+			source:		"dungeon-1-subzones.png"
+		}										
 	]
 	
 	script:

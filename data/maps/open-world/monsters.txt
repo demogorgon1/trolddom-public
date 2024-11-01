@@ -1157,8 +1157,10 @@ entity zuthyg_the_golden: !NPC
 	_sprite_dead: dragon_1_dead
 	_loot_table: .zuthyg_the_golden
 	_creature_type: dragon
-	_resource_health: 4.1
-	_weapon_damage: 3.2
+	_resource_health: 6
+	_weapon_damage: 3.6
+	_zone: open_world_dragon_fight
+	_out_of_zone_action: { evade: true }
 	
 	_abilities: 
 	[

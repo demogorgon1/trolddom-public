@@ -16,6 +16,10 @@ loot_table .grunthar:
 
 loot_group .grunthar: {}
 
+zone .grunthar:
+{
+}
+
 encounter .grunthar:
 {
 	main_entities: [ dungeon_1_grunthar ]
@@ -34,6 +38,8 @@ entity dungeon_1_grunthar: !NPC
 	_loot_table: .grunthar
 	_creature_type: humanoid
 	_encounter: .grunthar
+	_zone: .grunthar
+	_out_of_zone_action: { evade: true }
 	
 	_abilities: 
 	[

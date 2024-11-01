@@ -588,6 +588,10 @@ zone .temple:
 	string: "Temple of Luminara"
 }
 
+zone open_world_dragon_fight:
+{
+}
+
 route .town_farm_patrol:
 {
 }
@@ -794,6 +798,8 @@ map_palette .sub_zones:
 	sub_zone .undead: [ 64 211 154 ]
 	sub_zone .junjun: [ 64 111 211 ]
 	sub_zone .temple: [ 88 211 64 ]
+	
+	sub_zone open_world_dragon_fight: [ 64 44 213 ]
 }
 
 map_palette .routes:

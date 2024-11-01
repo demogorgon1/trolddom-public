@@ -31,6 +31,7 @@
 #include <tpublic/MapData.h>
 #include <tpublic/MapRouteData.h>
 #include <tpublic/Requirements.h>
+#include <tpublic/WorldInfoMap.h>
 
 namespace tpublic::Systems
 {
@@ -620,6 +621,35 @@ namespace tpublic::Systems
 						}					
 						
 						const EntityInstance* target = aContext->m_worldView->WorldViewSingleEntityInstance(npc->m_targetEntity.m_entityInstanceId);
+
+						if(target != NULL)
+						{
+							if (npc->m_zoneId != 0 && (npc->m_outOfZoneAction.m_useAbilityId != 0 || npc->m_outOfZoneAction.m_evade))
+							{
+								const Components::Position* targetPosition = target->GetComponent<Components::Position>();
+								const WorldInfoMap::Entry& worldInfoMapEntry = aContext->m_worldView->WorldViewGetMapData()->m_worldInfoMap->Get(targetPosition->m_position);
+								bool inZone = worldInfoMapEntry.m_zoneId == npc->m_zoneId || worldInfoMapEntry.m_subZoneId == npc->m_zoneId;
+
+								if(!inZone)
+								{
+									if(npc->m_outOfZoneAction.m_evade)
+									{
+										target = NULL; // Pretend target doesn't exist anymore
+									}
+									else if(npc->m_outOfZoneAction.m_useAbilityId != 0)
+									{
+										const Data::Ability* ability = GetManifest()->GetById<tpublic::Data::Ability>(npc->m_outOfZoneAction.m_useAbilityId);
+										// FIXME: just ignoring everything except the cooldown and always target self
+										if (!npc->m_cooldowns.IsAbilityOnCooldown(ability))
+										{
+											npc->m_cooldowns.AddAbility(GetManifest(), ability, aContext->m_tick, 0.0f);
+											aContext->m_eventQueue->EventQueueAbility({ aEntityInstanceId, 0 }, aEntityInstanceId, Vec2(), ability, ItemInstanceReference(), NULL);
+										}
+									}
+								}
+							}
+						}
+
 						if (target == NULL || target->GetState() == EntityState::ID_DEAD || target->GetSeq() != npc->m_targetEntity.m_entityInstanceSeq)
 						{
 							aContext->m_eventQueue->EventQueueThreat(npc->m_targetEntity, aEntityInstanceId, INT32_MIN, aContext->m_tick);

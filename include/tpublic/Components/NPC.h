@@ -27,6 +27,48 @@ namespace tpublic
 			static const Persistence::Id PERSISTENCE = Persistence::ID_NONE;
 			static const Replication REPLICATION = REPLICATION_NONE;
 
+			struct OutOfZoneAction
+			{
+				void
+				FromSource(
+					const SourceNode*		aSource)
+				{
+					aSource->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if (aChild->m_name == "use")
+							m_useAbilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
+						else if (aChild->m_name == "evade")
+							m_evade = aChild->GetBool();
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					});
+				}
+
+				void
+				ToStream(
+					IWriter*				aStream) const
+				{
+					aStream->WriteUInt(m_useAbilityId);
+					aStream->WriteBool(m_evade);
+				}
+
+				bool
+				FromStream(
+					IReader*				aStream)
+				{
+					if(!aStream->ReadUInt(m_useAbilityId))
+						return false;
+					if (!aStream->ReadBool(m_evade))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t				m_useAbilityId = 0;
+				bool					m_evade = false;
+			};
+
 			struct AbilityEntry
 			{
 				enum TargetType : uint8_t
@@ -360,6 +402,8 @@ namespace tpublic
 				FIELD_INACTIVE_ENCOUNTER_DESPAWN,
 				FIELD_LARGE,
 				FIELD_ROUTE,
+				FIELD_ZONE,
+				FIELD_OUT_OF_ZONE_ACTION
 			};
 
 			static void
@@ -376,6 +420,8 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_INACTIVE_ENCOUNTER_DESPAWN, "inactive_encounter_despawn", offsetof(NPC, m_inactiveEncounterDespawn));
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_BLOCKING, "large", offsetof(NPC, m_large));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_ROUTE, "route", offsetof(NPC, m_routeId))->SetDataType(DataType::ID_ROUTE);
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_ZONE, "zone", offsetof(NPC, m_zoneId))->SetDataType(DataType::ID_ZONE);
+				aSchema->DefineCustomObject<OutOfZoneAction>(FIELD_OUT_OF_ZONE_ACTION, "out_of_zone_action", offsetof(NPC, m_outOfZoneAction));
 			}
 
 			const StateEntry*
@@ -403,6 +449,8 @@ namespace tpublic
 				m_inactiveEncounterDespawn = false;
 				m_encounterId = 0;
 				m_routeId = 0;
+				m_zoneId = 0;
+				m_outOfZoneAction = OutOfZoneAction();
 
 				m_cooldowns.m_entries.clear();
 				m_castInProgress.reset();
@@ -434,6 +482,8 @@ namespace tpublic
 			bool										m_inactiveEncounterDespawn = false;
 			uint32_t									m_encounterId = 0;
 			uint32_t									m_routeId = 0;
+			uint32_t									m_zoneId = 0;
+			OutOfZoneAction								m_outOfZoneAction;
 
 			// Not serialized
 			Cooldowns									m_cooldowns;

@@ -16,9 +16,13 @@ loot_table .ignorg:
 ############################################################
 # Boss
 
+zone .ignorg:
+{
+}
+
 encounter .ignorg:
 {
-	main_entities: [ dungeon_1_ignorg ]
+	main_entities: [ dungeon_1_ignorg ]	
 }
 
 entity dungeon_1_ignorg: !NPC 
@@ -34,6 +38,8 @@ entity dungeon_1_ignorg: !NPC
 	_loot_table: .ignorg
 	_creature_type: humanoid
 	_encounter: .ignorg
+	_zone: .ignorg
+	_out_of_zone_action: { evade: true }
 	
 	_abilities: 
 	[

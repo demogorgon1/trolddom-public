@@ -15,6 +15,10 @@ loot_table .snarltooth:
 ############################################################
 # Boss
 
+zone .snarltooth:
+{
+}
+
 encounter .snarltooth:
 {
 	main_entities: [ dungeon_1_snarltooth ]
@@ -47,6 +51,8 @@ entity dungeon_1_snarltooth: !NPC
 	_loot_table: .snarltooth
 	_creature_type: humanoid
 	_encounter: .snarltooth
+	_zone: .snarltooth
+	_out_of_zone_action: { evade: true }
 	
 	_abilities: 
 	[
@@ -122,6 +128,8 @@ entity .snarltooth_spawn: !NPC
 	_resource_health: 1
 	_creature_type: beast
 	_encounter: .snarltooth
+	_zone: .snarltooth	
+	_out_of_zone_action: { use: enrage }
 	_inactive_encounter_despawn: true
 }
 

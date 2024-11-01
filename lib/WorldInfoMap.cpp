@@ -185,7 +185,7 @@ namespace tpublic
 	WorldInfoMap::FromStream(
 		IReader*			aReader)
 	{
-		if (!aReader->ReadObjects(m_details))
+		if (!aReader->ReadObjects(m_details, 128 * 1024))
 			return false;
 		if (!aReader->ReadObjects(m_topLevelCells, 128 * 1024))
 			return false;

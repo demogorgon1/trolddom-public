@@ -18,9 +18,13 @@ loot_table .zarvok:
 ############################################################
 # Boss
 
+zone .final: 
+{
+}
+
 encounter .final:
 {
-	main_entities: [ dungeon_1_zarvok dungeon_1_gribble ]
+	main_entities: [ dungeon_1_zarvok dungeon_1_gribble ]	
 }
 
 entity dungeon_1_zarvok: !NPC 
@@ -31,11 +35,13 @@ entity dungeon_1_zarvok: !NPC
 	_faction: monsters 
 	_sprite: goblin_boss_4
 	_sprite_dead: goblin_boss_4_dead 
-	_weapon_damage: 1.3
-	_resource_health: 3
+	_weapon_damage: 2
+	_resource_health: 3.5
 	_loot_table: .zarvok
 	_creature_type: humanoid
 	_encounter: .final
+	_zone: .final
+	_out_of_zone_action: { evade: true }
 	
 	_abilities: 
 	[
@@ -61,6 +67,8 @@ entity dungeon_1_gribble: !NPC
 	_resource_health: 2 
 	_creature_type: humanoid
 	_encounter: .final
+	_zone: .final
+	_out_of_zone_action: { evade: true }
 	
 	_abilities: 
 	[

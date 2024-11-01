@@ -17,6 +17,10 @@ loot_table .biznorg:
 ############################################################
 # Boss
 
+zone .biznorg:
+{
+}
+
 encounter .biznorg:
 {
 	main_entities: [ dungeon_1_biznorg ]
@@ -35,6 +39,8 @@ entity dungeon_1_biznorg: !NPC
 	_loot_table: .biznorg
 	_creature_type: humanoid
 	_encounter: .biznorg
+	_zone: .biznorg
+	_out_of_zone_action: { evade: true }
 	
 	_abilities: 
 	[

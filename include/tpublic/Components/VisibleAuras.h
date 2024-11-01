@@ -20,7 +20,7 @@ namespace tpublic
 			enum AuraFlag : uint8_t
 			{
 				AURA_FLAG_STUNNED		= 0x01,
-				AURA_FLAG_IMMOBILIZED	= 0x02
+				AURA_FLAG_IMMOBILIZED	= 0x02,
 			};
 
 			struct Entry
