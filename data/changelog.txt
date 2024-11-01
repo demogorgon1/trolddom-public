@@ -14,6 +14,8 @@ changelog:
 		{ text: "Charge can now be used while in combat." }
 		{ text: "Reduced cooldown and increased duration of Fortify." }
 		{ text: "Banner of Command now only affects enemies already in combat." }
+		{ text: "Bosses will now evade or become enraged if they're moved away from their area." }
+		
 	]	
 	
 	text: "Issues fixed:"
@@ -24,6 +26,7 @@ changelog:
 		{ text: "Fixed bug where chat frame would stop showing messages." }
 		{ text: "Deity selector UI now wraps like intended." }
 		{ text: "Fixed bug where player worlds wouldn't be saved correctly." }
+		{ text: "Fixed bug when using Charge on a large entity." }
 	]	
 	
 	#######################################################################################
