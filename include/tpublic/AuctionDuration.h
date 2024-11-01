@@ -30,10 +30,10 @@ namespace tpublic
 		{
 			{ NULL, 0, 0 },
 
-			{ "6 Hours", 10, 6 * 60 * 60 },
-			{ "12 Hours", 20, 12 * 60 * 60 },
-			{ "24 Hours", 40, 24 * 60 * 60 },
-			{ "48 Hours", 80, 48 * 60 * 60 },
+			{ "6 Hours", 5, 6 * 60 * 60 },
+			{ "12 Hours", 10, 12 * 60 * 60 },
+			{ "24 Hours", 15, 24 * 60 * 60 },
+			{ "48 Hours", 20, 48 * 60 * 60 },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

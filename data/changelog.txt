@@ -2,6 +2,31 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.1.12"
+
+	text: "Changes:"
+
+	list:
+	[
+		{ text: "Auction house deposit requirements reduced significantly." }
+		{ text: "Auto-pushing of other players now off by default." }
+		{ text: "Increased damage of serveral Sorcerer abilities." }
+		{ text: "Charge can now be used while in combat." }
+		{ text: "Reduced cooldown and increased duration of Fortify." }
+		{ text: "Banner of Command now only affects enemies already in combat." }
+	]	
+	
+	text: "Issues fixed:"
+
+	list:
+	[
+		{ text: "Improved Blessing increases duration of Blessing like intended." }
+		{ text: "Fixed bug where chat frame would stop showing messages." }
+		{ text: "Deity selector UI now wraps like intended." }
+		{ text: "Fixed bug where player worlds wouldn't be saved correctly." }
+	]	
+	
+	#######################################################################################
 	heading: "v0.1.11"
 
 	text: "Issues fixed:"

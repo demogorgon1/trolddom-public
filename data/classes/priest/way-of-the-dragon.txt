@@ -86,7 +86,7 @@ aura dragon_breath:
 	string: "Dragon Breath"
 	icon: icon_dragon_breath		
 	type: debuff
-	duration: 40
+	duration: based_on_effects
 	flags: [ unique channeled ]
 	aura_effect repeat: 
 	{ 

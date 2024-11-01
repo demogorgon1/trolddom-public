@@ -46,6 +46,11 @@ namespace tpublic
 					m_totalPoints += aPoints;
 					return true;
 				}
+				else if(aTimeStamp < entry->m_completionTimeStamp)
+				{
+					entry->m_completionTimeStamp = aTimeStamp;
+					return true;
+				}
 				return false;
 			}
 

@@ -80,7 +80,7 @@ ability void_lightning_tick:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.25 b: [ [ 1 4 ] [ 10 8 ] ] }									
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.25 b: [ [ 1 6 ] [ 10 12 ] ] }									
 	}	
 }
 
@@ -138,7 +138,7 @@ ability void_lightning:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.65 b: [ [ 1 7 ] [ 10 14 ] ] }									
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.65 b: [ [ 1 25 ] [ 10 50 ] ] }									
 	}	
 }
 
@@ -408,7 +408,7 @@ ability arcane_missile:
 	
 		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 10 ] [ 10 20 ] ] }											
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 15 ] [ 10 30 ] ] }											
 	}
 }
 

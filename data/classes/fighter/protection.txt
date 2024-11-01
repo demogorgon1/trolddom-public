@@ -98,7 +98,8 @@ ability banner_of_command_tick:
 	direct_effect threat:
 	{
 		requirement target<must_be_hostile>: {}
-		add: 10
+		requirement target<must_be_in_state>: { id: in_combat }
+		add: 12
 		apply_to: source
 	}
 }
@@ -460,7 +461,7 @@ ability taunt:
 
 cooldown fortify:
 {
-	duration: 3000
+	duration: 2400
 }
 
 aura fortify:
@@ -489,7 +490,7 @@ aura improved_fortify:
 	type: buff
 	flags: [ unique ]
 	icon: icon_fortify
-	duration: 100
+	duration: 140
 	aura_effect damage_input_modifier: 
 	{ 
 		type_mask: [ all ]

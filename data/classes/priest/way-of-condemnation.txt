@@ -402,7 +402,7 @@ aura condemnation:
 	string: "Condemnation"
 	icon: icon_holy_condemnation		
 	type: debuff
-	duration: 100	
+	duration: based_on_effects
 	flags: [ unique magic ]
 	sound: spell_14
 	aura_effect repeat: 

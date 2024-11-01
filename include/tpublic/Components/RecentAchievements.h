@@ -64,20 +64,29 @@ namespace tpublic
 				uint32_t			aAchievementId,
 				uint64_t			aTimeStamp)
 			{
-				if(m_entries.size() < MAX_ENTRIES)
+				Entry* t = GetEntry(aAchievementId);
+				if(t != NULL)
 				{
-					m_entries.push_back({ aAchievementId, aTimeStamp });
+					if(aTimeStamp < t->m_timeStamp)
+						t->m_timeStamp = aTimeStamp;
 				}
 				else
 				{
-					Entry* oldest = &m_entries[0];
-					for(size_t i = 1; i < m_entries.size(); i++)
+					if(m_entries.size() < MAX_ENTRIES)
 					{
-						if(m_entries[i].m_timeStamp < oldest->m_timeStamp)
-							oldest = &m_entries[i];
+						m_entries.push_back({ aAchievementId, aTimeStamp });
 					}
-					oldest->m_achievementId = aAchievementId;
-					oldest->m_timeStamp = aTimeStamp;
+					else
+					{
+						Entry* oldest = &m_entries[0];
+						for(size_t i = 1; i < m_entries.size(); i++)
+						{
+							if(m_entries[i].m_timeStamp < oldest->m_timeStamp)
+								oldest = &m_entries[i];
+						}
+						oldest->m_achievementId = aAchievementId;
+						oldest->m_timeStamp = aTimeStamp;
+					}
 				}
 			}
 
@@ -86,6 +95,18 @@ namespace tpublic
 			{
 				m_entries.clear();
 				m_totalPoints = 0;
+			}
+
+			Entry*
+			GetEntry(
+				uint32_t			aAchievementId)
+			{
+				for(Entry& entry : m_entries)
+				{
+					if(entry.m_achievementId == aAchievementId)
+						return &entry;
+				}
+				return NULL;
 			}
 
 			// Public data

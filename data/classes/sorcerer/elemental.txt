@@ -334,7 +334,7 @@ ability lake_of_fire_tick:
 	{
 		flags: [ is_magical ]
 		damage_type: fire
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 4 ] [ 10 8 ] ] }											
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 10 ] [ 10 20 ] ] }											
 	}
 }
 
@@ -401,7 +401,7 @@ ability firebolt:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: fire
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 24 ] [ 10 48 ] ] }											
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 28 ] [ 10 56 ] ] }											
 		
 	}
 	
@@ -464,7 +464,7 @@ ability fireball:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: fire
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 1 b: [ [ 1 36 ] [ 10 72 ] ] }											
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 1 b: [ [ 1 40 ] [ 10 80 ] ] }											
 	}
 	
 	direct_effect apply_aura:

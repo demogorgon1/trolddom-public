@@ -465,7 +465,7 @@ ability charge:
 	range: 7
 	cooldowns: [ charge ]
 	flags: [ target_other target_hostile trigger_move_cooldown ]
-	states: [ default ]
+	states: [ default in_combat ]
 	icon: icon_charge
 	talent_tree: fighter_combat 
 	

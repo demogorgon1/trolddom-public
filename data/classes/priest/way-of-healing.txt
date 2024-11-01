@@ -382,7 +382,7 @@ aura blessing:
 	string: "Blessing"
 	icon: icon_holy_blessing		
 	type: buff	
-	duration: 100	
+	duration: based_on_effects	
 	flags: [ unique magic ]
 	aura_effect repeat: 
 	{ 
