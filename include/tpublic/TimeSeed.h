@@ -21,21 +21,24 @@ namespace tpublic
 			TYPE_YEARLY
 		};
 
-		static Type	StringToType(
-						const char*			aString);
+		static Type		StringToType(
+							const char*			aString);
+		static uint64_t	GetNextTimeStamp(
+							uint64_t			aCurrentTimeStamp,
+							Type				aType);
 
-		void		ToStream(
-						IWriter*			aWriter) const;
-		bool		FromStream(
-						IReader*			aReader);
-		void		Update(
-						Type				aType,
-						uint64_t			aCurrentTimeStamp);
-		bool		operator==(
-						const TimeSeed&		aOther) const;
-		bool		operator!=(
-						const TimeSeed&		aOther) const;
-		bool		IsSet() const;
+		void			ToStream(
+							IWriter*			aWriter) const;
+		bool			FromStream(
+							IReader*			aReader);
+		void			Update(
+							Type				aType,
+							uint64_t			aCurrentTimeStamp);
+		bool			operator==(
+							const TimeSeed&		aOther) const;
+		bool			operator!=(
+							const TimeSeed&		aOther) const;
+		bool			IsSet() const;
 
 		// Public data
 		Type				m_type = INVALID_TYPE;

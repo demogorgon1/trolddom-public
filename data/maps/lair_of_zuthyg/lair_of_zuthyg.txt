@@ -1,0 +1,86 @@
+map_player_spawn .player_spawn:
+{
+}
+
+map_portal .exit:
+{
+	animation: !DEFAULT_PORTAL_ANIMATION{}
+	map: open_world
+	spawn: lair_of_zuthyg_exit
+}
+
+map_palette .tiles:
+{
+	tile rocks: [ 143 131 120 ]
+	tile mud: [ 67 61 32 ]
+	tile dirt: [ 97 91 62 ]
+	tile rocks_dungeon_entrance: [ 200 200 200 ]
+}
+
+map_palette .spawners:
+{
+	entity_spawn .zuthyg: [ 200 255 0 ]
+	
+	player_spawn .player_spawn: [ 0 0 255 ]
+	
+	portal .exit: [ 0 253 0 ]	
+}
+
+map_palette .doodads:
+{
+}
+
+map_palette .subzones:
+{
+	sub_zone .zuthyg: [ 64 44 113 ]
+}
+
+map lair_of_zuthyg:
+{
+	string: "Lair of Zuthyg"
+	type: private
+	reset: daily
+	default_tile: rocks
+	default_player_spawn: .player_spawn
+	default_exit_portal: .exit
+	default_fishing_loot_table: fish
+	view_attenuation: 30
+	view_attenuation_bias: 50
+	view_hidden_visibility: 0
+	auto_doodads: true
+	level: 10
+	max_players: 5
+	max_minions: 1
+	
+	layers:
+	[
+		{
+			palettes:	[ .tiles ]
+			source:		"tiles.png"
+		}
+
+		{
+			palettes:	[ .spawners ]
+			source:		"spawners.png"
+		}
+				
+		{ 
+			palettes: 	[ .doodads ]
+			source:		"doodads.png"
+		}								
+		
+		{ 
+			palettes: 	[ .subzones ]
+			source:		"subzones.png"
+		}										
+	]
+	
+	script:
+	{
+		condition trigger_not_set: .zuthyg_killed
+		condition entity_state: { entity_spawn: .zuthyg state: dead }		
+		run: { set_trigger: .zuthyg_killed }
+	}
+	
+}
+ 

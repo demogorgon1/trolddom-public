@@ -7,6 +7,10 @@ map_player_spawn dungeon_1_exit:
 {
 }
 
+map_player_spawn lair_of_zuthyg_exit:
+{
+}
+
 map_entity_spawn .sylas:
 {
 	entity .sylas: { weight: 1 }
@@ -226,12 +230,6 @@ map_entity_spawn .player_world_gateway:
 map_entity_spawn .spawn_of_umbracoth:
 {
 	entity .spawn_of_umbracoth: { weight: 1 }
-}
-
-map_entity_spawn .zuthyg_the_golden:
-{
-	entity zuthyg_the_golden: { weight: 1 }
-	spawn_timer: !NPC_RESPAWN_WORLD_BOSS{}
 }
 
 map_entity_spawn .arcane_anomaly:
@@ -501,6 +499,12 @@ map_portal .dungeon_1_entrance:
 	map: dungeon_1
 }
 
+map_portal .lair_of_zuthyg_entrance:
+{
+	animation: !DEFAULT_PORTAL_ANIMATION{}
+	map: lair_of_zuthyg
+}
+
 zone .zone_1:
 {
 	string: "Cape Arrival"
@@ -586,10 +590,6 @@ zone .junjun:
 zone .temple:
 {
 	string: "Temple of Luminara"
-}
-
-zone open_world_dragon_fight:
-{
 }
 
 route .town_farm_patrol:
@@ -678,7 +678,6 @@ map_palette .stuff:
 	entity_spawn .gateway: [ 54 23 85 ]	
 	entity_spawn .player_world_gateway: [ 23 60 85 ]	
 	entity_spawn .spawn_of_umbracoth: [ 32 0 0 ]		
-	entity_spawn .zuthyg_the_golden: [ 32 2 102 ]		
 	entity_spawn .arcane_anomaly: [ 33 0 0 ]		
 	entity_spawn .junjun_door: [ 0 43 0 ]		
 	entity_spawn .hermit_door: [ 0 46 0 ]		
@@ -756,7 +755,10 @@ map_palette .stuff:
 	
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn dungeon_1_exit: [ 0 0 200 ]	
+	player_spawn lair_of_zuthyg_exit: [ 10 20 200 ]	
+	
 	portal .dungeon_1_entrance: [ 0 234 0 ]	
+	portal .lair_of_zuthyg_entrance: [ 10 234 20 ]	
 	
 	wall stone_wall: [ 128 128 128 ]
 }
@@ -798,8 +800,6 @@ map_palette .sub_zones:
 	sub_zone .undead: [ 64 211 154 ]
 	sub_zone .junjun: [ 64 111 211 ]
 	sub_zone .temple: [ 88 211 64 ]
-	
-	sub_zone open_world_dragon_fight: [ 64 44 213 ]
 }
 
 map_palette .routes:

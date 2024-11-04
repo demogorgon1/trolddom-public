@@ -44,7 +44,7 @@ ability push:
 	string: "Push"	
 	description: "Shoves target out of the way."
 	cooldowns: [ global push ]
-	flags: [ target_other target_hostile ]	
+	flags: [ target_other target_hostile target_friendly ]	
 	states: [ default in_combat ]
 	icon: icon_push
 	

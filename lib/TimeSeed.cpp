@@ -164,6 +164,16 @@ namespace tpublic
 		return INVALID_TYPE;
 	}
 
+	uint64_t	
+	TimeSeed::GetNextTimeStamp(
+		uint64_t			aCurrentTimeStamp,
+		Type				aType)
+	{
+		TimeAndDate currentTimeAndDate;
+		currentTimeAndDate.FromTimeStamp(aCurrentTimeStamp);
+		return currentTimeAndDate.GetNextPeriodTimeStamp(aType);
+	}
+
 	//----------------------------------------------------------------------------------------------
 
 	void		
