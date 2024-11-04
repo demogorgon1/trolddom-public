@@ -145,6 +145,7 @@ class witch:
 			
 			unlock_abilities:
 			[
+				drain_life
 			]
 			
 			stats:

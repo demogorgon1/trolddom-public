@@ -44,6 +44,14 @@ namespace tpublic
 
 			switch(aRequirement->m_type)
 			{
+			case Requirement::TYPE_MUST_BE_CREATURE_TYPE:
+				{
+					const Components::CombatPublic* combatPublic = entity->GetComponent<Components::CombatPublic>();
+					if(combatPublic->m_creatureTypeId != aRequirement->m_id)
+						return false;
+				}
+				break;
+
 			case Requirement::TYPE_MUST_HAVE_LESS_HEALTH_THAN:
 				{
 					const Components::CombatPublic* combatPublic = entity->GetComponent<Components::CombatPublic>();

@@ -10,7 +10,8 @@ namespace tpublic
 		{
 			FLAG_IS_MAGICAL				= 0x00000001,
 			FLAG_GENERATE_RAGE			= 0x00000002,
-			FLAG_CAN_BE_CRITICAL		= 0x00000004
+			FLAG_CAN_BE_CRITICAL		= 0x00000004,
+			FLAG_LEECH					= 0x00000008
 		};
 
 		enum DamageType : uint8_t
@@ -57,6 +58,8 @@ namespace tpublic
 				return FLAG_GENERATE_RAGE;
 			if (strcmp(aString, "can_be_critical") == 0)
 				return FLAG_CAN_BE_CRITICAL;
+			if (strcmp(aString, "leech") == 0)
+				return FLAG_LEECH;
 			return 0;
 		}
 

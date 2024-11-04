@@ -260,6 +260,27 @@ namespace tpublic::DirectEffects
 				-(int32_t)damage,
 				blocked,
 				false);
+
+			if(m_flags & DirectEffect::FLAG_LEECH)
+			{
+				size_t sourceHealthResourceIndex;
+				if (sourceCombatPublic->GetResourceIndex(Resource::ID_HEALTH, sourceHealthResourceIndex))
+				{
+					aResourceChangeQueue->AddResourceChange(
+						result,
+						DirectEffect::INVALID_DAMAGE_TYPE,
+						aAbilityId,
+						aTarget->GetEntityId(),
+						aTarget->GetEntityInstanceId(),
+						aSource->GetEntityInstanceId(),
+						sourceCombatPublic,
+						NULL,
+						healthResourceIndex,
+						(int32_t)damage,
+						0,
+						false);
+				}
+			}
 		}
 
 		// Threat

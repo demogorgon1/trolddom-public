@@ -359,7 +359,7 @@ ability smite:
 	{	
 		must_have_ability_modifier: improved_smite_3 
 		damage_type: fire
-		flags: [ can_be_critical ]
+		flags: [ can_be_critical is_magical ]
 		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.8 b: [ [ 1 32 ] [ 10 65 ] ] }					
 	}			
 }
