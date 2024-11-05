@@ -40,6 +40,9 @@ entity dungeon_1_grunthar: !NPC
 	_encounter: .grunthar
 	_zone: .grunthar
 	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
 	
 	_abilities: 
 	[

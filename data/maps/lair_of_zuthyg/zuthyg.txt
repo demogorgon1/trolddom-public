@@ -63,6 +63,9 @@ entity zuthyg_the_golden: !NPC
 	_zone: .zuthyg
 	_out_of_zone_action: { evade: true }
 	_encounter: .zuthyg
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
 	
 	_abilities: 
 	[

@@ -42,7 +42,10 @@ entity dungeon_1_zarvok: !NPC
 	_encounter: .final
 	_zone: .final
 	_out_of_zone_action: { evade: true }
-	
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+
 	_abilities: 
 	[
 		{
@@ -69,7 +72,10 @@ entity dungeon_1_gribble: !NPC
 	_encounter: .final
 	_zone: .final
 	_out_of_zone_action: { evade: true }
-	
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+
 	_abilities: 
 	[
 		{

@@ -2,6 +2,25 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.1.13"
+
+	text: "Changes:"
+
+	list:
+	[
+		{ text: "Zuthyg the Golden has retreated into his lair." }
+		{ text: "Bosses are now generally immune to slows, fears, stuns and similar effects." }
+		
+	]	
+	
+	text: "Issues fixed:"
+
+	list:
+	[
+		{ text: "Manually pushing other players works like intended again." }
+	]	
+
+	#######################################################################################
 	heading: "v0.1.12"
 
 	text: "Changes:"
@@ -14,8 +33,7 @@ changelog:
 		{ text: "Charge can now be used while in combat." }
 		{ text: "Reduced cooldown and increased duration of Fortify." }
 		{ text: "Banner of Command now only affects enemies already in combat." }
-		{ text: "Bosses will now evade or become enraged if they're moved away from their area." }
-		
+		{ text: "Bosses will now evade or become enraged if they're moved away from their area." }		
 	]	
 	
 	text: "Issues fixed:"

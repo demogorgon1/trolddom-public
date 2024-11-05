@@ -71,6 +71,10 @@
 			block_chance: 5
 			
 			<exists _resource_mana> mana_regen: 5
+			<exists _immune_to_taunt and _immune_to_taunt> modifier immune_to_taunt: {}			
+			<exists _immune_to_immobilize and _immune_to_immobilize> modifier immune_to_immobilize: {}			
+			<exists _immune_to_stun and _immune_to_stun> modifier immune_to_stun: {}			
+			<exists _immune_to_slow and _immune_to_slow> modifier immune_to_slow: {}			
 		}
 		npc: 
 		{ 			

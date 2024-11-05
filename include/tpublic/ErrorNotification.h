@@ -46,6 +46,7 @@ namespace tpublic
 			ID_AMOUNT_TOO_LARGE,
 			ID_TOO_LOW_LEVEL,
 			ID_CANNOT_DO_THAT_HERE,
+			ID_MUST_BE_IN_A_PARTY_TO_ENTER,
 
 			NUM_IDS
 		};
@@ -101,7 +102,8 @@ namespace tpublic
 			{ "Too many minions!" },
 			{ "Amount too large! "},
 			{ "Too low level! "},
-			{ "Cannot do that here!" }
+			{ "Cannot do that here!" },
+			{ "Must be in a party to enter!" },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

@@ -17,6 +17,14 @@ namespace tpublic
 			static const Persistence::Id PERSISTENCE = Persistence::ID_NONE;
 			static const Replication REPLICATION = REPLICATION_PRIVATE;
 
+			enum PrivateFlag : uint8_t
+			{
+				PRIVATE_FLAG_IMMUNE_TO_STUN			= 0x01,
+				PRIVATE_FLAG_IMMUNE_TO_IMMOBILIZE	= 0x02,
+				PRIVATE_FLAG_IMMUNE_TO_TAUNT		= 0x04,
+				PRIVATE_FLAG_IMMUNE_TO_SLOW			= 0x08
+			};
+
 			enum Field
 			{
 				FIELD_WEAPON_DAMAGE_RANGE_MIN,
@@ -41,7 +49,8 @@ namespace tpublic
 				FIELD_RAGE_GENERATION_IN_COMBAT,
 				FIELD_BASE_MANA,
 				FIELD_SPELL_DAMAGE,
-				FIELD_HEALING
+				FIELD_HEALING,
+				FIELD_PRIVATE_FLAGS
 			};
 
 			static void
@@ -71,6 +80,35 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_RAGE_GENERATION_IN_COMBAT, "rage_generation_in_combat", offsetof(CombatPrivate, m_rageGenerationInCombatPer5Sec));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_SPELL_DAMAGE, "spell_damage", offsetof(CombatPrivate, m_spellDamage));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_HEALING, "healing", offsetof(CombatPrivate, m_healing));
+				aSchema->DefineCustomPODNoSource<uint8_t>(FIELD_PRIVATE_FLAGS, offsetof(CombatPrivate, m_privateFlags));
+
+				aSchema->AddSourceModifier<CombatPrivate>("immune_to_stun", [](
+					CombatPrivate*		aCombatPrivate,
+					const SourceNode*	/*aSource*/)
+				{
+					aCombatPrivate->m_privateFlags |= PRIVATE_FLAG_IMMUNE_TO_STUN;
+				});
+
+				aSchema->AddSourceModifier<CombatPrivate>("immune_to_immobilize", [](
+					CombatPrivate*		aCombatPrivate,
+					const SourceNode*	/*aSource*/)
+				{
+					aCombatPrivate->m_privateFlags |= PRIVATE_FLAG_IMMUNE_TO_IMMOBILIZE;
+				});
+
+				aSchema->AddSourceModifier<CombatPrivate>("immune_to_taunt", [](
+					CombatPrivate*		aCombatPrivate,
+					const SourceNode*	/*aSource*/)
+				{
+					aCombatPrivate->m_privateFlags |= PRIVATE_FLAG_IMMUNE_TO_TAUNT;
+				});
+
+				aSchema->AddSourceModifier<CombatPrivate>("immune_to_slow", [](
+					CombatPrivate*		aCombatPrivate,
+					const SourceNode*	/*aSource*/)
+				{
+					aCombatPrivate->m_privateFlags |= PRIVATE_FLAG_IMMUNE_TO_SLOW;
+				});
 			}
 
 			void
@@ -99,6 +137,14 @@ namespace tpublic
 				m_baseMana = 0;
 				m_spellDamage = 0;
 				m_healing = 0;
+				m_privateFlags = 0;
+			}
+
+			bool
+			IsImmuneToSomething() const
+			{
+				uint8_t allImmuneFlags = PRIVATE_FLAG_IMMUNE_TO_STUN | PRIVATE_FLAG_IMMUNE_TO_IMMOBILIZE | PRIVATE_FLAG_IMMUNE_TO_SLOW | PRIVATE_FLAG_IMMUNE_TO_TAUNT;
+				return (m_privateFlags & allImmuneFlags) != 0;
 			}
 
 			// Public data
@@ -125,6 +171,7 @@ namespace tpublic
 			uint32_t							m_baseMana = 0;
 			uint32_t							m_spellDamage = 0;
 			uint32_t							m_healing = 0;
+			uint8_t								m_privateFlags = 0;
 		};
 
 	}
