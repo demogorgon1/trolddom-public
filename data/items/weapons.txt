@@ -148,3 +148,36 @@ item weapon_zuthyg_2:
 	weapon_cooldown: 20
 }
 
+item weapon_zuthyg_3:
+{
+	string: "Dragon Tooth Slicer"
+	type: weapon_1h_knife
+	equipment_slots: [ main_hand off_hand ]
+	required_level: 10
+	icon: icon_knife_2
+	rarity: rare
+	binds: when_picked_up
+	loot_groups: [ zuthyg_the_golden ]
+	budget_bias: 10
+	stat_weight dexterity: 1
+	stat_weight strength: 1
+	level_range: 12 
+	weapon_cooldown: 30
+}
+
+item weapon_zuthyg_4:
+{
+	string: "Ironwood Walking Staff"
+	type: weapon_2h_staff
+	equipment_slots: [ main_hand ]
+	required_level: 10
+	icon: icon_staff_7
+	rarity: rare
+	binds: when_picked_up
+	loot_groups: [ zuthyg_the_golden ]
+	budget_bias: 10
+	stat_weight constitution: 1
+	stat_weight spell_damage: 1
+	level_range: 12 
+	weapon_cooldown: 20
+}

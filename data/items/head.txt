@@ -28,3 +28,18 @@ item head_baldric_suntrike_1:
 	stat_weight constitution: 1
 }
 
+item head_zuthyg_2:
+{
+	string: "Shroud of the Undertaker"
+	type: armor_cloth
+	equipment_slots: [ head ]
+	required_level: 10
+	icon: icon_wizard_hat_5
+	rarity: rare
+	binds: when_picked_up
+	loot_groups: [ zuthyg_the_golden ]
+	level_range: 12 
+	budget_bias: 10
+	stat_weight spell_damage: 1
+	stat_weight constitution: 1
+}

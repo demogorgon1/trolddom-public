@@ -447,9 +447,14 @@ sprites:
 	cursor: { position: [ 0 384 ] }
 	sprite icon_soul_drain : { tags: [ icon ] }
 	sprite icon_shackle_undeath : { tags: [ icon ] }
+	sprite icon_raise_dead : { tags: [ icon ] }
 	sprite icon_enfeeblement : { tags: [ icon ] }
 	sprite icon_blind : { tags: [ icon ] }
 	sprite icon_summon_spirit : { tags: [ icon ] }
 	sprite icon_icy_touch : { tags: [ icon ] }
+	sprite icon_robe_4 : { tags: [ icon armor_cloth chest ] icon_meta_data: !ICON_UNCOMMON_5{} }
+	sprite icon_chest_4 : { tags: [ icon armor_plate chest ] icon_meta_data: !ICON_UNCOMMON_5{} }
+	sprite icon_wizard_hat_5 : { tags: [ icon armor_cloth head ] icon_meta_data: !ICON_UNCOMMON_5{} }
+	sprite icon_staff_7 : { tags: [ icon weapon_2h_staff ] icon_meta_data: !ICON_UNCOMMON_5{} }
 
 }

@@ -103,3 +103,36 @@ item chest_elara_nightshade_1:
 	stat_weight wisdom: 1 
 	armor_style_visual: { armor_style: green decoration_color: [ 32 32 32 255 ] }
 }
+
+item chest_zuthyg_1:
+{
+	string: "Dragon-Scale Robe"
+	type: armor_cloth
+	equipment_slots: [ chest ]
+	required_level: 10
+	icon: icon_robe_4
+	rarity: rare
+	binds: when_picked_up
+	loot_groups: [ zuthyg_the_golden ]
+	level_range: 12 
+	budget_bias: 10
+	stat_weight spell_damage: 1
+	stat_weight wisdom: 2
+}
+
+item chest_zuthyg_2:
+{
+	string: "Golden Drake Chestguard"
+	type: armor_plate
+	equipment_slots: [ chest ]
+	required_level: 10
+	icon: icon_chest_4
+	rarity: rare
+	binds: when_picked_up
+	loot_groups: [ zuthyg_the_golden ]
+	level_range: 12 
+	budget_bias: 10
+	stat_weight constitution: 1
+	stat_weight dexterity: 1
+	stat_weight strength: 1
+}
