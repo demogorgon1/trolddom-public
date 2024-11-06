@@ -10,6 +10,7 @@ changelog:
 	[
 		{ text: "Added click-to-move with an option to disable it." }
 		{ text: "You can now follow other players." }
+		{ text: "UI scaling option." }
 	]	
 	
 	text: "Issues fixed:"
