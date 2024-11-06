@@ -2,6 +2,20 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.1.14"
+
+	text: "Issues fixed:"
+
+	list:
+	[
+		{ text: "Healing Conduit now works like intended." }
+		{ text: "Number of action bars is now remembered." }
+		{ text: "Banner of Command now also affects caster when not in a party." }
+		{ text: "Fixed a couple of client crashes." }
+		{ text: "Turned a couple of client crashes into error messages." }
+	]	
+
+	#######################################################################################
 	heading: "v0.1.13"
 
 	text: "Changes:"

@@ -63,7 +63,7 @@ namespace tpublic
 			AuraEffectBase* 
 			Copy() const override
 			{
-				HealInputModifier* t = new HealInputModifier();
+				HealOutputModifier* t = new HealOutputModifier();
 				t->CopyBase(this);
 
 				t->m_multiplier = m_multiplier;
