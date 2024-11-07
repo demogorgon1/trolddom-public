@@ -13,6 +13,7 @@ changelog:
 		{ text: "UI scaling option." }
 		{ text: "Wisdom now adds bonus spell damage and healing." }
 		{ text: "Lair of Zuthyg now resets every 12 hours." }
+		{ text: "Updated /who and guild UIs." }
 	]	
 	
 	text: "Issues fixed:"
