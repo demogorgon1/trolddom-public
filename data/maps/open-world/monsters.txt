@@ -1099,15 +1099,6 @@ entity demon_melee_6: !NPC
 	_default_behavior_state: .wandering_short
 }
 
-loot_table .demon_caster_6: 
-{
-	slots:
-	[
-		!WORLD_DROPS {}
-		!WORLD_DROPS_CLOTH{}
-	]	
-}
-
 entity demon_caster_6: !NPC
 {
 	_string: "Demonic Minion"

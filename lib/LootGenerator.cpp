@@ -1,12 +1,16 @@
 #include "Pcheader.h"
 
+#include <tpublic/Components/ActiveQuests.h>
+#include <tpublic/Components/CombatPublic.h>
 #include <tpublic/Components/Lootable.h>
+#include <tpublic/Components/PlayerPublic.h>
 
 #include <tpublic/Data/CreatureType.h>
 #include <tpublic/Data/Item.h>
 #include <tpublic/Data/LootGroup.h>
 #include <tpublic/Data/LootTable.h>
 
+#include <tpublic/EntityInstance.h>
 #include <tpublic/LootGenerator.h>
 #include <tpublic/Manifest.h>
 #include <tpublic/Requirements.h>
@@ -115,13 +119,37 @@ namespace tpublic
 		uint32_t									aPlayerWorldCharacterId,
 		Components::Lootable*						aLootable) const
 	{
-		GenerateItems(aRandom, aPlayerEntityInstances, aLootableEntityInstance, aLevel, aCreatureTypeId, aLootTable, [aLootable, aPlayerWorldCharacterId](
-			const tpublic::ItemInstance& aItemInstance)
+		GenerateItems(aRandom, aPlayerEntityInstances, aLootableEntityInstance, aLevel, aCreatureTypeId, aLootTable, [&](
+			const tpublic::ItemInstance& aItemInstance)			
 		{
-			Components::Lootable::AvailableLoot loot;
-			loot.m_itemInstance = aItemInstance;
-			loot.m_itemInstance.m_worldboundCharacterId = aPlayerWorldCharacterId;			
-			aLootable->m_availableLoot.push_back(loot);
+			const Data::Item* item = m_manifest->GetById<Data::Item>(aItemInstance.m_itemId);
+			if(item->m_questId != 0)
+			{
+				// This is a quest item. Generate a copy for everyone with the quest.
+				for(const EntityInstance* playerEntityInstance : aPlayerEntityInstances)
+				{
+					const Components::ActiveQuests* activeQuests = playerEntityInstance->GetComponent<Components::ActiveQuests>();
+					if(activeQuests->HasQuest(item->m_questId))
+					{
+						const Components::PlayerPublic* playerPublic = playerEntityInstance->GetComponent<Components::PlayerPublic>();
+						const Components::CombatPublic* combatPublic = playerEntityInstance->GetComponent<Components::CombatPublic>();
+
+						Components::Lootable::AvailableLoot loot;
+						loot.m_itemInstance = aItemInstance;
+						loot.m_itemInstance.m_worldboundCharacterId = aPlayerWorldCharacterId;
+						loot.m_playerTag.SetCharacter(playerPublic->m_characterId, combatPublic->m_level);
+						loot.m_questId = item->m_questId;
+						aLootable->m_availableLoot.push_back(loot);
+					}
+				}
+			}
+			else
+			{
+				Components::Lootable::AvailableLoot loot;
+				loot.m_itemInstance = aItemInstance;
+				loot.m_itemInstance.m_worldboundCharacterId = aPlayerWorldCharacterId;			
+				aLootable->m_availableLoot.push_back(loot);
+			}
 		});
 	}
 

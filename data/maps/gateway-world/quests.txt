@@ -10,6 +10,7 @@ item gateway_world_quest_item_1:
 	icon: icon_blue_shard
 	stack: 10
 	item_level: 8
+	quest: gateway_world_quest_1
 	flags: [ not_sellable ]
 }
 
@@ -97,6 +98,7 @@ item gateway_world_quest_item_2:
 	icon: icon_gold_totem
 	stack: 1
 	item_level: 10
+	quest: gateway_world_quest_2
 	flags: [ not_sellable ]
 }
 

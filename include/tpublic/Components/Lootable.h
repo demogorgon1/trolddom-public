@@ -28,6 +28,7 @@ namespace tpublic
 				{
 					m_playerTag.ToStream(aWriter);
 					m_itemInstance.ToStream(aWriter);
+					aWriter->WriteUInt(m_questId);
 				}
 
 				bool
@@ -38,12 +39,15 @@ namespace tpublic
 						return false;
 					if (!m_itemInstance.FromStream(aReader))
 						return false;
+					if(!aReader->ReadUInt(m_questId))
+						return false;
 					return true;
 				}
 
 				// Public data
 				PlayerTag				m_playerTag;
 				ItemInstance			m_itemInstance;
+				uint32_t				m_questId = 0;
 			};
 
 			enum Field
@@ -84,7 +88,10 @@ namespace tpublic
 				const PlayerTag&		aPlayerTag)
 			{
 				for(AvailableLoot& t : m_availableLoot)
-					t.m_playerTag = aPlayerTag;
+				{
+					if(!t.m_playerTag.IsSet())
+						t.m_playerTag = aPlayerTag;
+				}
 			}
 
 			bool

@@ -44,6 +44,7 @@ item .simheist_quest_item:
 	icon: icon_ear_2
 	stack: 12
 	item_level: 9
+	quest: .simheist_1
 	flags: [ not_sellable ]
 }
 

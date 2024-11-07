@@ -42,6 +42,7 @@ item .elara_nightshade_quest_item:
 	icon: icon_poison
 	stack: 6
 	item_level: 1
+	quest: .elara_nightshade_1
 	flags: [ not_sellable ]
 }
 

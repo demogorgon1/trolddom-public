@@ -178,6 +178,10 @@ namespace tpublic
 						{
 							m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
 						}
+						else if (aChild->m_name == "quest")
+						{
+							m_questId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_QUEST, aChild->GetIdentifier());
+						}
 						else if (aChild->m_name == "rarity")
 						{
 							m_rarity = Rarity::StringToId(aChild->GetIdentifier());
@@ -287,6 +291,7 @@ namespace tpublic
 				aStream->WritePOD(m_flags);
 				aStream->WriteFloat(m_valueMultiplier);
 				aStream->WriteOptionalObject(m_armorStyleVisual);
+				aStream->WriteUInt(m_questId);
 			}
 
 			bool
@@ -338,6 +343,8 @@ namespace tpublic
 				if (!aStream->ReadFloat(m_valueMultiplier))
 					return false;
 				if(!aStream->ReadOptionalObject(m_armorStyleVisual))
+					return false;
+				if (!aStream->ReadUInt(m_questId))
 					return false;
 
 				m_lcString = m_string;
@@ -398,9 +405,10 @@ namespace tpublic
 			uint32_t							m_bagSlots = 0;
 			float								m_valueMultiplier = 1.0f;
 			std::optional<ArmorStyle::Visual>	m_armorStyleVisual;
+			uint32_t							m_questId = 0;
 
 			// Not serialized
-			std::string					m_lcString;
+			std::string							m_lcString;
 		};
 
 	}

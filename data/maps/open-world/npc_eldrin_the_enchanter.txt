@@ -41,6 +41,7 @@ item .eldrin_the_enchanter_quest_item:
 	loot_groups: [ .eldrin_the_enchanter_quest_item ]		
 	string: "Cursing Rod" 
 	icon: icon_staff_6
+	quest: .eldrin_the_enchanter_1
 	item_level: 6
 	flags: [ not_sellable unique ]
 }
@@ -95,6 +96,7 @@ item .eldrin_the_enchanter_quest_item_2:
 	string: "Glowing Rocks" 
 	icon: icon_stuff
 	item_level: 7	
+	quest: eldrin_the_enchanter_2
 	flags: [ not_sellable unique ]
 }
 

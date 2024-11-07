@@ -44,6 +44,7 @@ item .orgh_quest_item:
 	loot_groups: [ .orgh_quest_item ]		
 	string: "Rotting Brain" 
 	icon: icon_brain_1
+	quest: .orgh_1
 	stack: 6
 	item_level: 8
 	flags: [ not_sellable ]
@@ -98,6 +99,7 @@ item .orgh_quest_item_2:
 	string: "Schreecher Essence" 
 	icon: icon_residue_1
 	stack: 6
+	quest: .orgh_2
 	item_level: 8
 	flags: [ not_sellable ]
 }
