@@ -276,7 +276,7 @@ namespace tpublic::DirectEffects
 						sourceCombatPublic,
 						NULL,
 						healthResourceIndex,
-						(int32_t)damage,
+						(int32_t)damage / 2, // FIXME: might want this to not always be 50%
 						0,
 						false);
 				}

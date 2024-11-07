@@ -39,7 +39,7 @@ map lair_of_zuthyg:
 {
 	string: "Lair of Zuthyg"
 	type: private
-	reset: daily
+	reset: bidaily
 	default_tile: rocks
 	default_player_spawn: .player_spawn
 	default_exit_portal: .exit

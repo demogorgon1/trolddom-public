@@ -15,6 +15,7 @@ namespace tpublic
 
 			TYPE_MINUTELY,
 			TYPE_HOURLY,
+			TYPE_BIDAILY,
 			TYPE_DAILY,
 			TYPE_WEEKLY,
 			TYPE_MONTHLY,

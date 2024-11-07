@@ -41,6 +41,7 @@ item dungeon_1_mail_feet_1:
 	required_level: 6
 	icon: icon_mail_feet_1
 	rarity: rare
+	binds: when_picked_up
 	
 	stat_weight strength: 1
 	stat_weight dexterity: 1				
@@ -55,6 +56,7 @@ item dungeon_1_plate_feet_1:
 	required_level: 6
 	icon: icon_plate_feet_1
 	rarity: rare
+	binds: when_picked_up
 	
 	stat_weight strength: 1
 	stat_weight constitution: 1				

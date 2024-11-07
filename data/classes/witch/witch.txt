@@ -54,7 +54,7 @@ class witch:
 		wis_to_mana: [ 10 1 ]
 		spi_to_mana_regen_per_5_sec: [ 3 2 ]
 		spi_to_health_regen: [ 1 1 ]
-		str_to_block_value: [ 1 20 ]
+		wis_to_spell_damage: [ 1 8 ]
 	}	
 
 	level_progression:
@@ -164,6 +164,7 @@ class witch:
 			
 			unlock_abilities:
 			[
+				blood_pact
 			]
 			
 			stats:

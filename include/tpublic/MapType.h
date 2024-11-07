@@ -21,6 +21,7 @@ namespace tpublic
 			INVALID_RESET_MODE,
 
 			RESET_MODE_MANUAL,
+			RESET_MODE_BIDAILY,
 			RESET_MODE_DAILY,
 			RESET_MODE_WEEKLY,
 
@@ -40,6 +41,7 @@ namespace tpublic
 		{
 			NULL,
 			"manual",
+			"bidaily",
 			"daily",
 			"weekly"
 		};

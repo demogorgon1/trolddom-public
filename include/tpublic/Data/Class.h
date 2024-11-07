@@ -428,6 +428,10 @@ namespace tpublic
 							m_spiToManaRegenPer5Sec.FromSource(aItem);
 						else if (aItem->m_name == "str_to_block_value")
 							m_strToBlockValue.FromSource(aItem);
+						else if (aItem->m_name == "wis_to_spell_damage")
+							m_wisToSpellDamage.FromSource(aItem);
+						else if (aItem->m_name == "wis_to_healing")
+							m_wisToHealing.FromSource(aItem);
 						else
 							TP_VERIFY(false, aItem->m_debugInfo, "'%s' not a valid item.", aItem->m_name.c_str());
 					});
@@ -453,6 +457,8 @@ namespace tpublic
 					m_spiToHealthRegen.ToStream(aStream);
 					m_spiToManaRegenPer5Sec.ToStream(aStream);
 					m_strToBlockValue.ToStream(aStream);
+					m_wisToSpellDamage.ToStream(aStream);
+					m_wisToHealing.ToStream(aStream);
 				}
 			
 				bool	
@@ -491,6 +497,10 @@ namespace tpublic
 						return false;
 					if (!m_strToBlockValue.FromStream(aStream))
 						return false;
+					if (!m_wisToSpellDamage.FromStream(aStream))
+						return false;
+					if (!m_wisToHealing.FromStream(aStream))
+						return false;
 					return true;
 				}
 
@@ -511,6 +521,8 @@ namespace tpublic
 				StatsConversionEntry								m_spiToHealthRegen;
 				StatsConversionEntry								m_spiToManaRegenPer5Sec;
 				StatsConversionEntry								m_strToBlockValue;
+				StatsConversionEntry								m_wisToSpellDamage;
+				StatsConversionEntry								m_wisToHealing;
 			};
 
 			void

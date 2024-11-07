@@ -438,6 +438,7 @@ namespace tpublic
 			bool IsElite() const { return (m_combatFlags & COMBAT_FLAG_ELITE) != 0; }
 			bool ShouldHideLevel() const { return (m_combatFlags & COMBAT_FLAG_HIDE_LEVEL) != 0; }
 			bool IsNotTargetable() const { return (m_combatFlags & COMBAT_FLAG_NOT_TARGETABLE) != 0; }
+			bool IsPVPFlagged() const { return (m_combatFlags & COMBAT_FLAG_PVP) != 0; }
 
 			// Public data
 			uint32_t						m_targetEntityInstanceId = 0;

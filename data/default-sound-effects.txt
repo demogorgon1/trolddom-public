@@ -1,3 +1,4 @@
+!define SOUND_PAIN 			{ hit: [ spell_15 ] }		
 !define SOUND_HEAL 			{ hit: [ spell_4 ] }		
 !define SOUND_HEAL_SMALL 	{ hit: [ spell_9 ] }				
 !define SOUND_EAT 			{ hit: [ eat_1 ] }		

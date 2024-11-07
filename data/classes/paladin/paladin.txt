@@ -55,6 +55,8 @@ class paladin:
 		spi_to_mana_regen_per_5_sec: [ 3 2 ]
 		spi_to_health_regen: [ 1 1 ]
 		str_to_block_value: [ 1 20 ]
+		wis_to_spell_damage: [ 1 8 ]
+		wis_to_healing: [ 1 8 ]		
 	}	
 
 	level_progression:

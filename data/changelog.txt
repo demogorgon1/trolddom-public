@@ -11,6 +11,8 @@ changelog:
 		{ text: "Added click-to-move with an option to disable it." }
 		{ text: "You can now follow other players." }
 		{ text: "UI scaling option." }
+		{ text: "Wisdom now adds bonus spell damage and healing." }
+		{ text: "Lair of Zuthyg now resets every 12 hours." }
 	]	
 	
 	text: "Issues fixed:"
@@ -23,6 +25,8 @@ changelog:
 		{ text: "Fixed a couple of client crashes." }
 		{ text: "Turned a couple of client crashes into error messages." }
 		{ text: "Ties on the achievement point scoreboard goes to the player who got it first." }
+		{ text: "All dungeon boss loot now binds on pickup like intended." }
+		{ text: "Lake of Fire only damages other players if both caster and target have PVP enabled." }
 	]	
 
 	#######################################################################################

@@ -153,6 +153,8 @@ namespace tpublic
 			return TYPE_MINUTELY;
 		if (t == "hourly")
 			return TYPE_HOURLY;
+		if (t == "bidaily")
+			return TYPE_BIDAILY;
 		if (t == "daily")
 			return TYPE_DAILY;
 		if (t == "weekly")
@@ -169,6 +171,12 @@ namespace tpublic
 		uint64_t			aCurrentTimeStamp,
 		Type				aType)
 	{
+		if (aType == TYPE_BIDAILY)
+		{
+			uint64_t periodDuration = 12 * 60 * 60;
+			return (aCurrentTimeStamp / periodDuration) * periodDuration + periodDuration;
+		}
+
 		TimeAndDate currentTimeAndDate;
 		currentTimeAndDate.FromTimeStamp(aCurrentTimeStamp);
 		return currentTimeAndDate.GetNextPeriodTimeStamp(aType);
@@ -208,11 +216,21 @@ namespace tpublic
 	{
 		m_type = aType;
 
-		TimeAndDate currentTimeAndDate;
-		currentTimeAndDate.FromTimeStamp(aCurrentTimeStamp);
+		if(m_type == TYPE_BIDAILY)
+		{
+			uint64_t periodDuration = 12 * 60 * 60;
+			
+			m_fromTimeStamp = (aCurrentTimeStamp / periodDuration) * periodDuration;
+			m_toTimeStamp = m_fromTimeStamp + periodDuration;
+		}
+		else
+		{
+			TimeAndDate currentTimeAndDate;
+			currentTimeAndDate.FromTimeStamp(aCurrentTimeStamp);
 
-		m_fromTimeStamp = currentTimeAndDate.GetPeriodTimeStamp(m_type);
-		m_toTimeStamp = currentTimeAndDate.GetNextPeriodTimeStamp(m_type);
+			m_fromTimeStamp = currentTimeAndDate.GetPeriodTimeStamp(m_type);
+			m_toTimeStamp = currentTimeAndDate.GetNextPeriodTimeStamp(m_type);
+		}
 
 		uint64_t hash = Hash::Splitmix_64(m_fromTimeStamp) ^ Hash::Splitmix_64(m_toTimeStamp);
 		m_seed = (uint32_t)((0xFFFFFFFFULL & hash) ^ (hash > 32ULL));
