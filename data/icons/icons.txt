@@ -456,5 +456,9 @@ sprites:
 	sprite icon_chest_4 : { tags: [ icon armor_plate chest ] icon_meta_data: !ICON_UNCOMMON_5{} }
 	sprite icon_wizard_hat_5 : { tags: [ icon armor_cloth head ] icon_meta_data: !ICON_UNCOMMON_5{} }
 	sprite icon_staff_7 : { tags: [ icon weapon_2h_staff ] icon_meta_data: !ICON_UNCOMMON_5{} }
+	sprite icon_unholy_empowerment : { tags: [ icon ] }
+	sprite icon_demon_attack : { tags: [ icon ] }
+	sprite icon_demonic_fury : { tags: [ icon ] }
+	sprite icon_howl_from_beyond : { tags: [ icon ] }
 
 }

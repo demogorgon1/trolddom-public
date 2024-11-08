@@ -60,6 +60,10 @@ namespace tpublic::Systems
 					if(distanceSquared > (int32_t)(ability->m_range * ability->m_range))
 						shouldStopCasting = true;
 
+					// Dead?
+					if(!shouldStopCasting && targetEntityInstance->GetState() == tpublic::EntityState::ID_DEAD)
+						shouldStopCasting = true;
+
 					// No line of sight?
 					if(!shouldStopCasting && !aContext->m_worldView->WorldViewLineOfSight(position->m_position, targetPosition->m_position))
 						shouldStopCasting = true;

@@ -15,6 +15,7 @@ changelog:
 		{ text: "Lair of Zuthyg now resets every 12 hours." }
 		{ text: "Updated /who and guild UIs." }
 		{ text: "Quest items can now be picked up by all party members with quest." }
+		{ text: "Option to show floating aura events." }
 	]	
 	
 	text: "Issues fixed:"

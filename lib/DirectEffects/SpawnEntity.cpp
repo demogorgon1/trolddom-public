@@ -1,5 +1,7 @@
 #include "../Pcheader.h"
 
+#include <tpublic/Components/CombatPrivate.h>
+#include <tpublic/Components/CombatPublic.h>
 #include <tpublic/Components/DisplayName.h>
 #include <tpublic/Components/GuildName.h>
 #include <tpublic/Components/MinionPrivate.h>
@@ -9,8 +11,11 @@
 #include <tpublic/Components/PlayerPublic.h>
 #include <tpublic/Components/Position.h>
 
+#include <tpublic/Data/Entity.h>
+
 #include <tpublic/DirectEffects/SpawnEntity.h>
 
+#include <tpublic/ApplyNPCMetrics.h>
 #include <tpublic/EntityInstance.h>
 #include <tpublic/IEventQueue.h>
 #include <tpublic/Manifest.h>
@@ -25,30 +30,37 @@ namespace tpublic::DirectEffects
 		aSource->ForEachChild([&](
 			const SourceNode* aChild)
 		{
-			if(aChild->m_name == "entity")
+			if(!FromSourceBase(aChild))
 			{
-				m_entityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENTITY, aChild->GetIdentifier());
-			}
-			else if (aChild->m_name == "map_entity_spawn")
-			{
-				m_mapEntitySpawnId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aChild->GetIdentifier());
-			}
-			else if(aChild->m_name == "spawn_flags")
-			{
-				m_spawnFlags = SourceToSpawnFlags(aChild);
-			}
-			else if(aChild->m_name == "npc_target_threat")
-			{
-				m_npcTargetThreat = aChild->GetInt32();
-			}
-			else if(aChild->m_name == "init_state")
-			{
-				m_initState = EntityState::StringToId(aChild->GetIdentifier());
-				TP_VERIFY(m_initState != EntityState::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid entity state.", aChild->GetIdentifier());
-			}
-			else
-			{
-				TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->GetIdentifier());
+				if (aChild->m_name == "entity")
+				{
+					m_entityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENTITY, aChild->GetIdentifier());
+				}
+				else if (aChild->m_name == "map_entity_spawn")
+				{
+					m_mapEntitySpawnId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aChild->GetIdentifier());
+				}
+				else if (aChild->m_name == "spawn_flags")
+				{
+					m_spawnFlags = SourceToSpawnFlags(aChild);
+				}
+				else if (aChild->m_name == "refresh_npc_metrics")
+				{
+					m_refreshNPCMetrics = RefreshNPCMetrics(aChild);
+				}
+				else if (aChild->m_name == "npc_target_threat")
+				{
+					m_npcTargetThreat = aChild->GetInt32();
+				}
+				else if (aChild->m_name == "init_state")
+				{
+					m_initState = EntityState::StringToId(aChild->GetIdentifier());
+					TP_VERIFY(m_initState != EntityState::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid entity state.", aChild->GetIdentifier());
+				}
+				else
+				{
+					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->GetIdentifier());
+				}
 			}
 		});
 	}
@@ -63,6 +75,7 @@ namespace tpublic::DirectEffects
 		aStream->WritePOD(m_spawnFlags);
 		aStream->WriteInt(m_npcTargetThreat);
 		aStream->WritePOD(m_initState);
+		aStream->WriteOptionalObject(m_refreshNPCMetrics);
 	}
 
 	bool
@@ -81,6 +94,8 @@ namespace tpublic::DirectEffects
 			return false;
 		if (!aStream->ReadPOD(m_initState))
 			return false;
+		if(!aStream->ReadOptionalObject(m_refreshNPCMetrics))
+			return false;
 		return true;
 	}
 
@@ -88,7 +103,7 @@ namespace tpublic::DirectEffects
 	SpawnEntity::Resolve(
 		int32_t							/*aTick*/,
 		std::mt19937&					/*aRandom*/,
-		const Manifest*					/*aManifest*/,
+		const Manifest*					aManifest,
 		CombatEvent::Id					/*aId*/,
 		uint32_t						/*aAbilityId*/,
 		const SourceEntityInstance&		/*aSourceEntityInstance*/,
@@ -136,6 +151,14 @@ namespace tpublic::DirectEffects
 			Components::MinionPublic* minionPublic = spawnedEntity->GetComponent<Components::MinionPublic>();
 			if(minionPublic != NULL)
 			{
+				if(m_spawnFlags & SPAWN_FLAG_SOURCE_LEVEL)				
+				{
+					Components::CombatPublic* sourceCombatPublic = aSource->GetComponent<Components::CombatPublic>();
+					Components::CombatPublic* spawnedCombatPublic = spawnedEntity->GetComponent<Components::CombatPublic>();
+					if (sourceCombatPublic != NULL && spawnedCombatPublic != NULL)
+						spawnedCombatPublic->m_level = sourceCombatPublic->m_level;
+				}
+
 				if(minionPublic->m_durationSeconds != 0)
 					minionPublic->m_spawnTimeStamp = (uint64_t)time(NULL);
 				
@@ -159,6 +182,28 @@ namespace tpublic::DirectEffects
 				guildName->m_string = displayName->m_string + "'s Minion";
 				guildName->SetDirty();
 			}
+		}
+
+		// Refresh NPC metrics?
+		if(m_refreshNPCMetrics.has_value())
+		{
+			Data::Entity::Modifiers modifiers;
+			modifiers.m_weaponDamage = m_refreshNPCMetrics->m_weaponDamage;
+			modifiers.m_armor = m_refreshNPCMetrics->m_armor;
+			modifiers.m_resources[Resource::ID_HEALTH] = m_refreshNPCMetrics->m_health;
+
+			Components::CombatPublic* combatPublic = spawnedEntity->GetComponent<Components::CombatPublic>();
+			Components::CombatPrivate* combatPrivate = spawnedEntity->GetComponent<Components::CombatPrivate>();
+			Components::MinionPrivate* minionPrivate = spawnedEntity->GetComponent<Components::MinionPrivate>();
+			Components::NPC* npc = spawnedEntity->GetComponent<Components::NPC>();
+
+			ApplyNPCMetrics::Process(
+				&aManifest->m_npcMetrics,
+				modifiers,
+				combatPublic,
+				combatPrivate,
+				minionPrivate,
+				npc);
 		}
 
 		return Result();

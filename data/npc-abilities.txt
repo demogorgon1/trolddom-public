@@ -70,7 +70,7 @@ ability npc_firebolt:
 
 	direct_effect damage:
 	{
-		flags: [ can_be_critical ]
+		flags: [ can_be_critical is_magical ]
 		damage_type: fire
 		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] ] elite_multiplier: 1.7 }
 	}

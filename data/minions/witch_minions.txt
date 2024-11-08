@@ -1,12 +1,13 @@
+${
+	_level: 1 
+}
+
 ##############################################################################
 # Minor Demon
 {
 	${
+		_creature_type: demon	
 		_name_template: .minor_demon		
-		_weapon_damage: 1
-		_resource_health: 1
-		_armor: 1
-		_creature_type: demon
 		_sprite: minor_demon
 		_sprite_dead: minor_demon_dead
 		_minion_modes: [ .minor_demon_aggressive .minor_demon_defensive .minor_demon_passive ]
@@ -16,16 +17,11 @@
 		_ability_prio: [ .minor_demon_attack ]
 	}
 	
-	tag_context .minor_demon:
-	{
-		must_have_tags: [ american_forename_male ]
-	}
-	
 	name_template .minor_demon:
 	{
 		possibility<1>:
 		{
-			word: [ .minor_demon ]
+			generated_name: [ demon_name ]
 		}
 	}
 
@@ -67,7 +63,7 @@
 		flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
 		states: [ default in_combat ]
 		delay: 3
-		icon: icon_sword_1
+		icon: icon_demon_attack
 		cooldowns: [ .minor_demon_attack ]
 		
 		direct_effect damage:
@@ -87,29 +83,31 @@
 
 	${
 		_name_template: .fiendish_spellcaster
-		_weapon_damage: 1
-		_resource_health: 1
-		_armor: 1
 		_creature_type: demon
 		_sprite: fiendish_spellcaster
 		_sprite_dead: fiendish_spellcaster_dead
 		_minion_modes: [ .fiendish_spellcaster_aggressive .fiendish_spellcaster_defensive .fiendish_spellcaster_passive ]
 		_default_minion_mode: .fiendish_spellcaster_defensive
 		_commands: [ move attack ]
-		_abilities: [ { id: .fiendish_spellcaster_attack flags: [ auto ] } ]
-		_ability_prio: [ .fiendish_spellcaster_attack ]		
-	}
-	
-	tag_context .fiendish_spellcaster:
-	{
-		must_have_tags: [ american_forename_female ]
+		
+		_abilities: 
+		[ 
+			{ id: .fiendish_spellcaster_attack flags: [ auto ] } 
+			{ id: .fiendish_spellcaster_fireball flags: [ auto ] } 
+			{ id: .fiendish_spellcaster_unholy_empowerment flags: [ auto ] target_must_not_have_aura: .fiendish_spellcaster_unholy_empowerment } 
+			
+			# FIXME: currently no way of having long cooldown minion abilities as cooldowns aren't persisted (also seems like +crit chance stat modifiers aren't working)
+			# { id: .fiendish_spellcaster_demonic_fury } 			
+		]
+		
+		_ability_prio: [ .fiendish_spellcaster_unholy_empowerment .fiendish_spellcaster_fireball .fiendish_spellcaster_attack ]		
 	}
 	
 	name_template .fiendish_spellcaster:
 	{
 		possibility<1>:
 		{
-			word: [ .fiendish_spellcaster ]
+			generated_name: [ demon_name ]
 		}
 	}
 
@@ -151,7 +149,7 @@
 		flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
 		states: [ default in_combat ]
 		delay: 3
-		icon: icon_sword_1
+		icon: icon_demon_attack
 		cooldowns: [ .fiendish_spellcaster_attack ]
 		
 		direct_effect damage:
@@ -162,7 +160,136 @@
 		}
 	}	
 	
-	entity fiendish_spellcaster: !MINION{}
+	particle_system .fiendish_spellcaster_fireball:
+	{
+		particle:
+		{
+			sprites: [ effect_fireball ]
+			flags: [ attached no_rotation face_target ]
+			count: 1		
+			scale: 0.5
+		}
+	}
+
+	ability .fiendish_spellcaster_fireball:
+	{
+		string: "Fireball"
+		description: "Deals $damage$ damage to target."
+		range: 8
+		cast_time: 25
+		cooldowns: [ global spell_fire_lockout ]
+		flags: [ spell offensive target_other target_hostile can_miss interruptable ]
+		states: [ in_combat default ]
+		icon: icon_fireball
+		speed: 6
+		projectile: .fiendish_spellcaster_fireball
+	
+		direct_effect damage:
+		{
+			must_not_have_ability_modifiers: [ demon_mastery_1 demon_mastery_2 demon_mastery_3 ]
+			flags: [ can_be_critical is_magical ]
+			damage_type: fire
+			function: { expression: a a: [ [ 1 18 ] [ 10 36 ] ] }
+		}
+		
+		direct_effect damage:
+		{
+			must_have_ability_modifier: demon_mastery_1
+			flags: [ can_be_critical is_magical ]
+			damage_type: fire
+			function: { expression: a a: [ [ 1 20 ] [ 10 20 ] ] }
+		}
+
+		direct_effect damage:
+		{
+			must_have_ability_modifier: demon_mastery_2
+			flags: [ can_be_critical is_magical ]
+			damage_type: fire
+			function: { expression: a a: [ [ 1 22 ] [ 10 44 ] ] }
+		}
+
+		direct_effect damage:
+		{
+			must_have_ability_modifier: demon_mastery_3
+			flags: [ can_be_critical is_magical ]
+			damage_type: fire
+			function: { expression: a a: [ [ 1 24 ] [ 10 48 ] ] }
+		}		
+	}	
+		
+	aura .fiendish_spellcaster_unholy_empowerment:
+	{
+		string: "Unholy Empowerment"
+		icon: icon_unholy_empowerment
+		type: buff	
+		duration: 6000
+		flags: [ unique magic ]
+		stat_modifiers: 
+		{ 
+			constitution: { add_percent: 10 } 
+		}		
+	}
+	
+	cooldown .fiendish_spellcaster_unholy_empowerment:
+	{
+		duration: 40
+	}
+
+	ability .fiendish_spellcaster_unholy_empowerment:
+	{
+		string: "Unholy Empowerment"
+		description: "Increases target Constitution by 10% for 10 minutes."
+		range: 8
+		cooldowns: [ global .fiendish_spellcaster_unholy_empowerment ]
+		flags: [ spell target_other target_friendly ]
+		states: [ default in_combat ]
+		icon: icon_unholy_empowerment		
+		cast_time: 20
+		sound_effects: !SOUND_HEAL{}
+
+		direct_effect apply_aura:
+		{	
+			aura: .fiendish_spellcaster_unholy_empowerment
+		}
+	}
+
+	aura .fiendish_spellcaster_demonic_fury:
+	{
+		string: "Demonic Fury"
+		icon: icon_demonic_fury
+		type: buff	
+		duration: 200
+		flags: [ unique magic ]
+		stat_modifiers: 
+		{ 
+			phys_crit_chance: { add: 30 } 
+			spell_crit_chance: { add: 30 } 
+		}
+	}
+	
+	cooldown .fiendish_spellcaster_demonic_fury:
+	{
+		duration: 6000
+	}
+
+	ability .fiendish_spellcaster_demonic_fury:
+	{
+		string: "Demonic Fury"
+		description: "Increases target critical strike chance by 30% for 20 seconds."
+		range: 8
+		cooldowns: [ global .fiendish_spellcaster_demonic_fury ]
+		flags: [ spell target_other target_self target_friendly ]
+		states: [ default in_combat ]
+		icon: icon_demonic_fury
+		cast_time: 20
+
+		direct_effect apply_aura:
+		{	
+			aura: .fiendish_spellcaster_demonic_fury
+		}
+	}	
+	
+	entity fiendish_spellcaster: !MINION{}	
 }
 
 ##############################################################################
@@ -171,9 +298,6 @@
 
 	${
 		_name_template: .black_beast
-		_weapon_damage: 1
-		_resource_health: 1
-		_armor: 1
 		_has_rage: true
 		_creature_type: demon
 		_sprite: black_beast
@@ -181,20 +305,27 @@
 		_minion_modes: [ .black_beast_aggressive .black_beast_defensive .black_beast_passive ]
 		_default_minion_mode: .black_beast_defensive
 		_commands: [ move attack ]
-		_abilities: [ { id: .black_beast_attack flags: [ auto ] } ]
-		_ability_prio: [ .black_beast_attack ]		
-	}
-	
-	tag_context .black_beast:
-	{
-		must_have_tags: [ american_forename_female ]
+		
+		_abilities: 
+		[ 
+			{ id: .black_beast_attack flags: [ auto ] } 
+			{ id: .black_beast_growl flags: [ auto ] self_must_not_have_aura: .black_beast_growl } 
+			{ id: .black_beast_howl_from_beyond flags: [ auto ] min_neighbor_hostiles: 2 } 			
+		]
+		
+		_ability_prio: 
+		[ 
+			.black_beast_howl_from_beyond
+			.black_beast_growl
+			.black_beast_attack 
+		]		
 	}
 	
 	name_template .black_beast:
 	{
 		possibility<1>:
 		{
-			word: [ .black_beast ]
+			generated_name: [ demon_name ]
 		}
 	}
 
@@ -236,7 +367,7 @@
 		flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
 		states: [ default in_combat ]
 		delay: 3
-		icon: icon_sword_1
+		icon: icon_demon_attack
 		cooldowns: [ .fiendish_spellcaster_attack ]
 		
 		direct_effect damage:
@@ -247,6 +378,101 @@
 		}
 	}	
 	
+	ability .black_beast_howl_from_beyond_tick:
+	{
+		string: "Howl From Beyond"
+		flags: [ target_self target_aoe target_aoe_hostile ]
+		icon: icon_howl_from_beyond
+		delay: 3
+		aoe_radius: 2
+		aoe_cap: 5
+		aoe_requirement target<must_not_be_in_state>: { id: dead }	
+
+		direct_effect damage:
+		{
+			damage_type: physical
+			function: { expression: a a: [ [ 1 12 ] [ 1 24 ] ] }
+		}
+		
+		source_visual<tile_shake>:
+		{
+			radius: 2
+			flags: [ line_of_sight ]
+			duration: 17
+			amount: 1
+		}		
+	}
+
+	aura .black_beast_howl_from_beyond:
+	{
+		string: "Howl From Beyond"
+		icon: icon_howl_from_beyond
+		type: buff
+		duration: based_on_effects
+		flags: [ unique channeled ]
+
+		aura_effect repeat:
+		{
+			update_interval: 15
+			update_count: 4
+			ability: .black_beast_howl_from_beyond_tick
+		}
+	}
+	
+	ability .black_beast_howl_from_beyond:
+	{
+		string: "Howl From Beyond"
+		cooldowns: [ global ]
+		flags: [ target_self ]
+		icon: icon_howl_from_beyond 
+		resource_cost rage: 30
+
+		direct_effect apply_aura:
+		{	
+			aura: .black_beast_howl_from_beyond
+		}
+	}
+
+	aura .black_beast_growl:
+	{
+		string: "Threatening"
+		description: "Threat generated increased by 50%."
+		type: buff
+		flags: [ unique ]
+		icon: icon_demonic_fury
+		duration: 200
+		aura_effect threat_modifier: 
+		{ 
+			multiplier: 1.5
+		}
+	}
+		
+	ability .black_beast_growl:
+	{
+		string: "Growl"
+		description: "Deals $damage$ damage to target. All threat increased by 50% for 20 seconds."
+		range: 1	
+		cooldowns: [ global ]
+		flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+		states: [ default in_combat ]
+		delay: 3
+		icon: icon_demonic_fury
+		resource_cost rage: 10
+
+		direct_effect damage:
+		{
+			flags: [ can_be_critical ]
+			damage_type: physical
+			function: { expression: a_mul_x a: 0.8 x: weapon }		
+		}
+		
+		direct_effect apply_aura:
+		{
+			aura: .black_beast_growl
+			target_self: true
+		}		
+	}
+
 	entity black_beast: !MINION{}
 }
 
@@ -255,9 +481,6 @@
 {
 	${
 		_name_template: .skeleton
-		_weapon_damage: 1
-		_resource_health: 1
-		_armor: 1
 		_creature_type: undead
 		_sprite: skeleton
 		_sprite_dead: skeleton_dead
@@ -333,9 +556,6 @@
 {
 	${
 		_name_template: .spirit
-		_weapon_damage: 1
-		_resource_health: 1
-		_armor: 1
 		_creature_type: undead
 		_sprite: spirit
 		_sprite_dead: spirit_dead
@@ -392,7 +612,7 @@
 		flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
 		states: [ default in_combat ]
 		delay: 3
-		icon: icon_sword_1
+		icon: icon_demon_attack
 		cooldowns: [ .skeleton_attack ]
 		
 		direct_effect damage:

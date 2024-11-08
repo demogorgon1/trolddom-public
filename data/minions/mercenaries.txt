@@ -279,7 +279,6 @@
 		states: [ default in_combat ]
 		delay: 3
 		icon: icon_shield_bash
-		cooldowns: [ .mercenary_contract_shield_maiden_shield_bash ]
 		resource_cost rage: 10
 
 		direct_effect damage:
@@ -413,7 +412,7 @@
 			
 		direct_effect damage:
 		{
-			flags: [ can_be_critical ]
+			flags: [ can_be_critical is_magical ]
 			damage_type: fire
 			function: { expression: a a: [ [ 1 6 ] [ 10 11 ] ] }			
 		}					

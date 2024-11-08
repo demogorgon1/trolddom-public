@@ -12,13 +12,8 @@
 	modifiers: 
 	{ 
 		<exists _weapon_damage> weapon_damage: @_weapon_damage 
-		<!exists _weapon_damage> weapon_damage: 1
-				
 		<exists _resource_health> resource<health>: @_resource_health
-		<!exists _resource_health> resource<health>: 1
-		
-		<exists _resource_mana> resource<mana>: @_resource_mana
-		
+		<exists _resource_mana> resource<mana>: @_resource_mana		
 		<exists _armor> armor: @_armor		
 	}
 			

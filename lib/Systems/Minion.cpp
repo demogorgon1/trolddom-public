@@ -11,6 +11,7 @@
 #include <tpublic/Components/NPC.h>
 #include <tpublic/Components/Position.h>
 #include <tpublic/Components/ThreatSource.h>
+#include <tpublic/Components/VisibleAuras.h>
 
 #include <tpublic/Data/NameTemplate.h>
 
@@ -35,6 +36,7 @@ namespace tpublic::Systems
 			const Vec2&									aMinionPosition,
 			const Vec2&									aPosition,
 			const Components::CombatPublic*				aCombatPublic,
+			const Components::VisibleAuras*				aVisibleAuras,
 			const Data::Ability*						aAbility,
 			const Components::MinionPublic::Ability*	aMinionAbilityInfo,
 			int32_t										aMaxRange)
@@ -56,6 +58,12 @@ namespace tpublic::Systems
 					return false;
 			}
 
+			if(aMinionAbilityInfo->m_targetMustNotHaveAuraId != 0)
+			{
+				if(aVisibleAuras->HasAura(aMinionAbilityInfo->m_targetMustNotHaveAuraId))
+					return false;
+			}
+
 			if(!aContext->m_worldView->WorldViewLineOfSight(aMinionPosition, aPosition))
 				return false;
 
@@ -67,6 +75,7 @@ namespace tpublic::Systems
 			SystemBase::Context*						aContext,
 			uint32_t									aEntityInstanceId,
 			const Components::CombatPublic*				aCombatPublic,
+			const Components::VisibleAuras*				aVisibleAuras,
 			const Vec2&									aPosition,
 			const EntityInstance*						aOwnerEntityInstance,
 			const Data::Ability*						aAbility,
@@ -77,16 +86,18 @@ namespace tpublic::Systems
 
 			uint32_t targetEntityInstanceId = 0;
 
-			if(aAbility->TargetSelf() && _EvalutateFriendlyTarget(aContext, aPosition, aPosition, aCombatPublic, aAbility, aMinionAbilityInfo, aMaxRange))
+			if(aAbility->TargetSelf() && _EvalutateFriendlyTarget(aContext, aPosition, aPosition, aCombatPublic, aVisibleAuras, aAbility, aMinionAbilityInfo, aMaxRange))
 				targetEntityInstanceId = aEntityInstanceId;
 
 			const Components::CombatPublic* ownerCombatPublic = aOwnerEntityInstance->GetComponent<Components::CombatPublic>();
+			const Components::VisibleAuras* ownerVisibleAuras = aOwnerEntityInstance->GetComponent<Components::VisibleAuras>();
 
 			if(targetEntityInstanceId == 0 && _EvalutateFriendlyTarget(
 				aContext,
 				aPosition, 
 				aOwnerEntityInstance->GetComponent<Components::Position>()->m_position, 
 				ownerCombatPublic,
+				ownerVisibleAuras,
 				aAbility,
 				aMinionAbilityInfo,
 				aMaxRange))
@@ -106,6 +117,7 @@ namespace tpublic::Systems
 							aPosition,
 							aEntityInstance->GetComponent<Components::Position>()->m_position,
 							aEntityInstance->GetComponent<Components::CombatPublic>(),
+							aEntityInstance->GetComponent<Components::VisibleAuras>(),
 							aAbility,
 							aMinionAbilityInfo,
 							aMaxRange))
@@ -137,6 +149,7 @@ namespace tpublic::Systems
 		RequireComponent<Components::MinionPublic>();
 		RequireComponent<Components::Position>();
 		RequireComponent<Components::ThreatSource>();
+		RequireComponent<Components::VisibleAuras>();
 	}
 	
 	Minion::~Minion()
@@ -204,6 +217,7 @@ namespace tpublic::Systems
 		Components::MinionPrivate* minionPrivate = GetComponent<Components::MinionPrivate>(aComponents);
 		Components::MinionPublic* minionPublic = GetComponent<Components::MinionPublic>(aComponents);
 		Components::CombatPublic* combatPublic = GetComponent<Components::CombatPublic>(aComponents);
+		Components::VisibleAuras* visibleAuras = GetComponent<Components::VisibleAuras>(aComponents);
 		Components::Position* position = GetComponent<Components::Position>(aComponents);
 		const Components::Auras* auras = GetComponent<Components::Auras>(aComponents);
 		Components::ThreatSource* threatSource = GetComponent<Components::ThreatSource>(aComponents);
@@ -393,11 +407,59 @@ namespace tpublic::Systems
 										if (!combatPublic->HasResourcesForAbility(ability, NULL, combatPublic->GetResourceMax(Resource::ID_MANA)))
 											continue;
 
-										useAbilityOnEntityInstanceId = _PickFriendlyTarget(aContext, aEntityInstanceId, combatPublic, position->m_position, ownerEntityInstance, ability, minionPublic->GetAbility(abilityId), (int32_t)ability->m_range);
+										useAbilityOnEntityInstanceId = _PickFriendlyTarget(aContext, aEntityInstanceId, combatPublic, visibleAuras, position->m_position, ownerEntityInstance, ability, minionPublic->GetAbility(abilityId), (int32_t)ability->m_range);
 										if(useAbilityOnEntityInstanceId == 0)
 											continue;
 
 										useAbility = ability;
+									}
+									else if (ability->TargetSelf())
+									{
+										if (minionPublic->m_cooldowns.IsAbilityOnCooldown(ability))
+											continue;
+
+										if (!combatPublic->HasResourcesForAbility(ability, NULL, combatPublic->GetResourceMax(Resource::ID_MANA)))
+											continue;
+
+										const Components::MinionPublic::Ability* minionAbility = minionPublic->GetAbility(abilityId);
+										if(minionAbility != NULL)
+										{
+											if (minionAbility->m_minNeighborHostiles != 0)
+											{
+												uint32_t hostileCount = 0;
+
+												IWorldView::EntityQuery entityQuery;
+												entityQuery.m_position = position->m_position;
+												entityQuery.m_maxDistance = 1; // FIXME: might want to parameterize this
+												aContext->m_worldView->WorldViewQueryEntityInstances(entityQuery, [&](
+													const EntityInstance* aEntity,
+													int32_t				  /*aDistanceSquared*/)
+													{
+														if (aEntity->GetState() != EntityState::ID_IN_COMBAT && aEntity->GetState() != EntityState::ID_DEFAULT)
+															return false;
+
+														if (!aEntity->HasComponent<tpublic::Components::NPC>())
+															return false;
+
+														const Components::CombatPublic* combatPublic = aEntity->GetComponent<Components::CombatPublic>();
+														if (combatPublic == NULL || combatPublic->m_factionId == 0)
+															return false;
+
+														const Data::Faction* faction = GetManifest()->GetById<Data::Faction>(combatPublic->m_factionId);
+														if (faction->IsFriendly())
+															return false;
+
+														hostileCount++;
+														return hostileCount >= minionAbility->m_minNeighborHostiles;
+													});
+
+												if (hostileCount < minionAbility->m_minNeighborHostiles)
+													continue;
+											}
+
+											useAbility = ability;
+											useAbilityOnEntityInstanceId = aEntityInstanceId;
+										}
 									}
 									else
 									{
@@ -406,6 +468,13 @@ namespace tpublic::Systems
 
 										if (distanceSquared < (int32_t)(ability->m_minRange * ability->m_minRange))
 											continue;
+
+										const Components::MinionPublic::Ability* minionAbility = minionPublic->GetAbility(abilityId);
+										if(minionAbility != NULL)
+										{
+											if(minionAbility->m_selfMustNotHaveAuraId != 0 && visibleAuras->HasAura(minionAbility->m_selfMustNotHaveAuraId))
+												continue;
+										}
 
 										if (minionPublic->m_cooldowns.IsAbilityOnCooldown(ability))
 											continue;
@@ -527,7 +596,7 @@ namespace tpublic::Systems
 								if (!combatPublic->HasResourcesForAbility(ability, NULL, combatPublic->GetResourceMax(Resource::ID_MANA)))
 									continue;
 
-								uint32_t friendlyEntityInstanceId = _PickFriendlyTarget(aContext, aEntityInstanceId, combatPublic, position->m_position, ownerEntityInstance, ability, &minionAbility, (int32_t)ability->m_range * 3);
+								uint32_t friendlyEntityInstanceId = _PickFriendlyTarget(aContext, aEntityInstanceId, combatPublic, visibleAuras, position->m_position, ownerEntityInstance, ability, &minionAbility, (int32_t)ability->m_range * 3);
 								if (friendlyEntityInstanceId != 0)
 								{
 									healAbility = ability;
@@ -688,7 +757,7 @@ namespace tpublic::Systems
 									if (!combatPublic->HasResourcesForAbility(ability, NULL, combatPublic->GetResourceMax(Resource::ID_MANA)))
 										continue;
 
-									uint32_t friendlyEntityInstanceId = _PickFriendlyTarget(aContext, aEntityInstanceId, combatPublic, position->m_position, ownerEntityInstance, ability, &minionAbility, (int32_t)ability->m_range);
+									uint32_t friendlyEntityInstanceId = _PickFriendlyTarget(aContext, aEntityInstanceId, combatPublic, visibleAuras, position->m_position, ownerEntityInstance, ability, &minionAbility, (int32_t)ability->m_range);
 									if (friendlyEntityInstanceId != 0)
 									{
 										useAbility = ability;

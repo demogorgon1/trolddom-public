@@ -1,16 +1,3 @@
-# - Demonology: Drain Life (Basic)
-# - Demonology: Blood Pact (Basic) - Convert health to mana.
-# - Demonology: Summon Lesser Demon (Basic)
-
-
-# - Demonology: Heal Demon (Talent)
-# - Demonology: Improved Drain Life (Talent)
-# - Demonology: Improved Blood Pact (Talent)
-# - Demonology: Demon Mastery (Talent)
-# - Demonology: Summon Black Beast (Talent)
-# - Demonology: Summon Fiendish Spellcaster (Talent)
-# - Demonology: Forbidden Knowledge (Talent)
-
 talent_tree witch_demonology:
 {
 	string: "Demonology"
@@ -55,16 +42,70 @@ ability summon_lesser_demon:
 	flags: [ target_self minion_summon ]
 	cast_time: 20
 	icon: icon_summon_lesser_demon
-	resource_cost mana: 15
+	resource_cost mana: 30
 	talent_tree: witch_demonology
 	cooldowns: [ global spell_unholy_lockout ]	
 
 	direct_effect spawn_entity:
 	{
-		spawn_flags: [ no_owner ]
+		must_not_have_ability_modifiers: [ demon_mastery_1 demon_mastery_2 demon_mastery_3 ]
+		spawn_flags: [ no_owner source_level ]
+		entity: minor_demon
+		init_state: spawning	
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.65
+			health: 0.65
+			armor: 1
+		}
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: demon_mastery_1
+		spawn_flags: [ no_owner source_level ]
 		entity: minor_demon
 		init_state: spawning
+
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.728
+			health: 0.728
+			armor: 1
+		}
 	}
+
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: demon_mastery_2
+		spawn_flags: [ no_owner source_level ]
+		entity: minor_demon
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.806
+			health: 0.806
+			armor: 1
+		}		
+	}
+
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: demon_mastery_3
+		spawn_flags: [ no_owner source_level ]
+		entity: minor_demon
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.858
+			health: 0.858
+			armor: 1
+		}		
+	}
+	
 }
 
 ###############################################################################
@@ -165,25 +206,25 @@ talent witch_demon_mastery:
 	
 	points:
 	[
-		{ ability_modifier: improved_demon_mastery_1 }
-		{ ability_modifier: improved_demon_mastery_2 }
-		{ ability_modifier: improved_demon_mastery_3 }
+		{ ability_modifier: demon_mastery_1 }
+		{ ability_modifier: demon_mastery_2 }
+		{ ability_modifier: demon_mastery_3 }
 	]	
 }
 
-ability_modifier improved_demon_mastery_1:
+ability_modifier demon_mastery_1:
 {	
-	description: "Increases effectiveness of demon minions by 15%."	
+	description: "Increases effectiveness of demon minions by 12%."	
 }
 
-ability_modifier improved_demon_mastery_2:
+ability_modifier demon_mastery_2:
 {	
-	description: "Increases effectiveness of demon minions by 15%."	
+	description: "Increases effectiveness of demon minions by 24%."	
 }
 
-ability_modifier improved_demon_mastery_3:
+ability_modifier demon_mastery_3:
 {	
-	description: "Increases effectiveness of demon minions by 15%."	
+	description: "Increases effectiveness of demon minions by 36%."	
 }
 
 ###############################################################################
@@ -207,15 +248,68 @@ ability summon_black_beast:
 	flags: [ target_self minion_summon ]
 	cast_time: 20
 	icon: icon_summon_black_beast
-	resource_cost mana: 15
+	resource_cost mana: 30
 	talent_tree: witch_demonology
 	cooldowns: [ global spell_unholy_lockout ]	
 
 	direct_effect spawn_entity:
 	{
-		spawn_flags: [ no_owner ]
+		must_not_have_ability_modifiers: [ demon_mastery_1 demon_mastery_2 demon_mastery_3 ]
+		spawn_flags: [ no_owner source_level ]
 		entity: black_beast
 		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 1.3
+			health: 1.3
+			armor: 1
+		}			
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: demon_mastery_1
+		spawn_flags: [ no_owner source_level ]
+		entity: black_beast
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 1.456
+			health: 1.456
+			armor: 1
+		}			
+	}
+
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: demon_mastery_2
+		spawn_flags: [ no_owner source_level ]
+		entity: black_beast
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 1.612
+			health: 1.612
+			armor: 1
+		}			
+	}
+
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: demon_mastery_3
+		spawn_flags: [ no_owner source_level ]
+		entity: black_beast
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 1.768
+			health: 1.768
+			armor: 1
+		}			
 	}
 }
 
@@ -240,15 +334,68 @@ ability summon_fiendish_spellcaster:
 	flags: [ target_self minion_summon ]
 	cast_time: 20
 	icon: icon_summon_fiendish_spellcaster
-	resource_cost mana: 15
+	resource_cost mana: 30
 	talent_tree: witch_demonology
 	cooldowns: [ global spell_unholy_lockout ]	
 
 	direct_effect spawn_entity:
 	{
-		spawn_flags: [ no_owner ]
+		must_not_have_ability_modifiers: [ demon_mastery_1 demon_mastery_2 demon_mastery_3 ]
+		spawn_flags: [ no_owner source_level ]
 		entity: fiendish_spellcaster
 		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.65
+			health: 1
+			armor: 1
+		}			
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: demon_mastery_1
+		spawn_flags: [ no_owner source_level ]
+		entity: fiendish_spellcaster
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.728
+			health: 1.12
+			armor: 1
+		}		
+	}
+
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: demon_mastery_2
+		spawn_flags: [ no_owner source_level ]
+		entity: fiendish_spellcaster
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.806
+			health: 1.24
+			armor: 1
+		}	
+	}
+
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: demon_mastery_3
+		spawn_flags: [ no_owner source_level ]
+		entity: fiendish_spellcaster
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.858
+			health: 1.36
+			armor: 1
+		}	
 	}
 }
 

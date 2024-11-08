@@ -66,6 +66,12 @@ namespace tpublic
 							m_id = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
 						else if (aChild->m_name == "max_target_health")
 							m_maxTargetHealth = aChild->GetUInt32();
+						else if (aChild->m_name == "min_neighbor_hostiles")
+							m_minNeighborHostiles = aChild->GetUInt32();
+						else if (aChild->m_name == "target_must_not_have_aura")
+							m_targetMustNotHaveAuraId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_AURA, aChild->GetIdentifier());
+						else if (aChild->m_name == "self_must_not_have_aura")
+							m_selfMustNotHaveAuraId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_AURA, aChild->GetIdentifier());
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					});
@@ -78,6 +84,9 @@ namespace tpublic
 					aWriter->WriteUInt(m_id);
 					aWriter->WritePOD(m_flags);
 					aWriter->WriteUInt(m_maxTargetHealth);
+					aWriter->WriteUInt(m_targetMustNotHaveAuraId);
+					aWriter->WriteUInt(m_selfMustNotHaveAuraId);
+					aWriter->WriteUInt(m_minNeighborHostiles);
 				}
 
 				bool
@@ -90,6 +99,12 @@ namespace tpublic
 						return false;
 					if (!aReader->ReadUInt(m_maxTargetHealth))
 						return false;
+					if (!aReader->ReadUInt(m_targetMustNotHaveAuraId))
+						return false;
+					if (!aReader->ReadUInt(m_selfMustNotHaveAuraId))
+						return false;
+					if (!aReader->ReadUInt(m_minNeighborHostiles))
+						return false;
 					return true;
 				}
 
@@ -97,6 +112,9 @@ namespace tpublic
 				uint32_t			m_id = 0;
 				uint8_t				m_flags = 0;
 				uint32_t			m_maxTargetHealth = 0;
+				uint32_t			m_targetMustNotHaveAuraId = 0;
+				uint32_t			m_selfMustNotHaveAuraId = 0;
+				uint32_t			m_minNeighborHostiles = 0;
 			};
 
 			struct Command
@@ -282,7 +300,7 @@ namespace tpublic
 				for(const Ability& ability : m_abilities)
 				{
 					if(ability.m_id == aAbilityId)
-						return ability.m_flags & Ability::FLAG_BLOCKED;
+						return (ability.m_flags & Ability::FLAG_BLOCKED) != 0 || (ability.m_flags & Ability::FLAG_AUTO) == 0;
 				}
 				return false;
 			}
