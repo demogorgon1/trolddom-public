@@ -206,6 +206,26 @@ namespace tpublic
 
 			struct AOEEntitySpawnEntry
 			{
+				enum Type : uint8_t
+				{
+					INVALID_TYPE,
+
+					TYPE_EVERYWHERE,
+					TYPE_CENTER
+				};
+
+				static Type
+				SourceToType(
+					const SourceNode*		aSource)
+				{
+					if(aSource->IsIdentifier("everywhere"))
+						return TYPE_EVERYWHERE;
+					else if (aSource->IsIdentifier("center"))
+						return TYPE_CENTER;
+					TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid type.", aSource->GetIdentifier());
+					return INVALID_TYPE;
+				}
+
 				AOEEntitySpawnEntry()
 				{
 
@@ -230,6 +250,10 @@ namespace tpublic
 							m_initState = EntityState::StringToId(aChild->GetIdentifier());
 							TP_VERIFY(m_initState != EntityState::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid entity state.", aChild->GetIdentifier());
 						}
+						else if(aChild->m_name == "type")
+						{
+							m_type = SourceToType(aChild);
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -244,6 +268,7 @@ namespace tpublic
 					aStream->WriteUInt(m_entityId);
 					aStream->WriteUInt(m_probability);
 					aStream->WritePOD(m_initState);
+					aStream->WritePOD(m_type);
 				}
 			
 				bool	
@@ -256,6 +281,8 @@ namespace tpublic
 						return false;
 					if(!aStream->ReadPOD(m_initState))
 						return false;
+					if(!aStream->ReadPOD(m_type))
+						return false;
 					return true;
 				}
 
@@ -263,6 +290,7 @@ namespace tpublic
 				uint32_t							m_entityId = 0;
 				uint32_t							m_probability = 0;
 				EntityState::Id						m_initState = EntityState::ID_DEFAULT;
+				Type								m_type = INVALID_TYPE;
 			};
 
 			struct Item

@@ -402,10 +402,76 @@ ability swarm:
 	flags: [ spell target_aoe interruptable ]
 	states: [ default in_combat ]
 	icon: icon_swarm
-	cooldowns: [ global lake_of_fire spell_unholy_lockout ]	
+	cooldowns: [ global swarm spell_unholy_lockout ]	
 	aoe_radius: 2
 	resource_cost mana: 20
 	talent_tree: witch_malice
+	
+	aoe_entity_spawn swarm:
+	{
+		probability: 100
+		init_state: spawning
+		type: center
+	}	
+}
+
+ability swarm_tick:
+{
+	string: "Swarm"
+	range: 8	
+	flags: [ target_self target_aoe target_aoe_hostile ]
+	states: [ default in_combat ]
+	icon: icon_swarm
+	delay: 3
+	aoe_radius: 2
+	aoe_requirement target<must_not_be_in_state>: { id: dead }
+	
+	direct_effect damage:
+	{
+		requirement target<must_be_hostile>: {}
+		flags: [ can_be_critical is_magical ]
+		damage_type: unholy
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 9 ] [ 10 18 ] ] }			
+	}
+}
+
+entity swarm:
+{
+	systems: [ environment ]
+	
+	components:
+	{
+		position: { }		
+		owner: { }
+		environment: 
+		{
+			tick_interval: 10
+			duration: 60 
+			ability: swarm_tick
+		}		
+		sprite: 
+		{ 
+			animations: 
+			[
+				{ 
+					states: [ default ] 
+					frames: [ effect_fire_0 effect_fire_1 effect_fire_2 ] 
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -1
+				}
+				
+				{ 
+					states: [ spawning despawning ] 
+					frames: [ effect_fire_fade_0 effect_fire_fade_1 effect_fire_fade_2 ] 
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -1
+				}				
+			]			
+		}
+		
+	}
 }
 
 ###############################################################################

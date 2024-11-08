@@ -322,6 +322,7 @@ ability lake_of_fire:
 	{
 		probability: 100
 		init_state: spawning
+		type: everywhere
 	}
 }
 
