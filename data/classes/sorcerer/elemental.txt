@@ -329,7 +329,7 @@ ability lake_of_fire:
 ability lake_of_fire_tick:
 {
 	string: "Lake of Fire"
-	flags: [ offensive always_in_range always_in_line_of_sight ]
+	flags: [ offensive always_in_range always_in_line_of_sight target_hostile ]
 	icon: icon_fire
 	direct_effect damage:
 	{
