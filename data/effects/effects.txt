@@ -124,6 +124,8 @@ sprites:
 	sprite effect_purple_spell_hit_2: { flags: [ centered ] }	
 	sprite effect_purple_spell_hit_3: { flags: [ centered ] }	
 	sprite effect_curse_of_corruption: { flags: [ centered ] }
+	sprite effect_swarm: { flags: [ centered ] }
+	sprite effect_pink_lightning: { flags: [ ] }
 	
 	cursor: { position: [ 0 67 ] }
 	size: { width: 14 height: 14 }
