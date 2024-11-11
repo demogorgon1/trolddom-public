@@ -2,6 +2,25 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.1.15"
+
+	#text: "Changes:"
+	#
+	#list:
+	#[
+	#	{ text: "" }
+	#]	
+	
+	text: "Issues fixed:"
+
+	list:
+	[
+		{ text: "It's no longer possible to select a UI scaling option that makes the game unusable." }		
+		{ text: "Fixed some server stability issues." }
+		{ text: "Dead minions that are too far away will be dismissed automatically." }
+	]	
+
+	#######################################################################################
 	heading: "v0.1.14"
 
 	text: "Changes:"
