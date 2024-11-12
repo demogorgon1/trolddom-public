@@ -566,11 +566,55 @@ talent witch_chain_lightning:
 	]
 }
 
+ability chain_lightning_tertiary:
+{
+	string: "Chain Lightning"
+	range: 4
+	flags: [ spell offensive target_other target_hostile can_miss ]
+	states: [ default in_combat ]
+	icon: icon_chain_lightning
+	speed: 9
+	projectile: witch_chain_lightning
+	target_particle_system: purple_spell_hit
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical is_magical ]
+		damage_type: unholy
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 15 ] [ 10 30 ] ] }													
+	}			
+}
+
+ability chain_lightning_secondary:
+{
+	string: "Chain Lightning"
+	range: 4
+	flags: [ spell offensive target_other target_hostile can_miss ]
+	states: [ default in_combat ]
+	icon: icon_chain_lightning
+	speed: 9
+	projectile: witch_chain_lightning
+	target_particle_system: purple_spell_hit
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical is_magical ]
+		damage_type: unholy
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 18 ] [ 10 36 ] ] }													
+	}			
+	
+	direct_effect trigger_ability:
+	{
+		ability: chain_lightning_tertiary
+		target: random_nearby
+	}	
+}
+
 ability chain_lightning:
 {
 	string: "Chain Lightning"
 	tags: [ ability_ranged ]
-	description: "Deals $damage$ damage to target."
+	description: "Deals $damage$ damage to target and up to 2 nearby other targets."
 	range: 8
 	cast_time: 18
 	cooldowns: [ global spell_unholy_lockout ]
@@ -578,25 +622,32 @@ ability chain_lightning:
 	states: [ default in_combat ]
 	icon: icon_chain_lightning
 	talent_tree: witch_malice
-	speed: 8
+	speed: 9
 	projectile: witch_chain_lightning
-	resource_cost mana: 14
-	target_particle_system: green_spell_hit
+	resource_cost mana: 20
+	target_particle_system: purple_spell_hit
 	
 	direct_effect damage:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: unholy
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 24 ] [ 10 48 ] ] }													
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 20 ] [ 10 40 ] ] }													
 	}		
+	
+	direct_effect trigger_ability:
+	{
+		ability: chain_lightning_secondary
+		target: random_nearby
+	}
 }
 
 particle_system witch_chain_lightning:
 {
 	particle:
 	{
-		sprites: [ effect_witch_bolt ]
-		flags: [ attached no_rotation face_target ]
+		sprites: [ effect_pink_lightning_0 effect_pink_lightning_1 effect_pink_lightning_2 ]
+		sprite_interval: 100
+		flags: [ attached no_rotation ]
 		scale: 0.4
 		count: 1		
 	}

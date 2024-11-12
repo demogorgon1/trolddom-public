@@ -106,8 +106,9 @@ namespace tpublic
 												uint32_t													aTargetEntityInstanceId,
 												const Vec2&													aAOETarget,
 												const Data::Ability*										aAbility,
-												const ItemInstanceReference&								aItem,
-												const AbilityModifierList*									aAbilityModifierList) = 0;
+												const ItemInstanceReference&								aItem = ItemInstanceReference(),
+												const AbilityModifierList*									aAbilityModifierList = NULL,
+												const std::optional<tpublic::Vec2>&							aOrigin = std::optional<tpublic::Vec2>()) = 0;
 		virtual void						EventQueueMove(
 												const EventQueueMoveRequest&								aMoveRequest) = 0;
 		virtual void						EventQueueMoveAdjacent(

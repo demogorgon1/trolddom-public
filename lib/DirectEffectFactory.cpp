@@ -14,6 +14,7 @@
 #include <tpublic/DirectEffects/Simple.h>
 #include <tpublic/DirectEffects/SpawnEntity.h>
 #include <tpublic/DirectEffects/Threat.h>
+#include <tpublic/DirectEffects/TriggerAbility.h>
 
 #include <tpublic/DirectEffectFactory.h>
 
@@ -36,6 +37,7 @@ namespace tpublic
 		_Register<DirectEffects::Simple>();
 		_Register<DirectEffects::SpawnEntity>();
 		_Register<DirectEffects::Threat>();
+		_Register<DirectEffects::TriggerAbility>();
 	}
 
 	DirectEffectFactory::~DirectEffectFactory()
