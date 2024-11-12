@@ -15,6 +15,46 @@ namespace tpublic
 			static const DataType::Id DATA_TYPE = DataType::ID_PARTICLE_SYSTEM;
 			static const bool TAGGED = false;
 
+			struct Swarm
+			{
+				Swarm()
+				{
+
+				}
+
+				Swarm(
+					const SourceNode*	aSource)
+				{
+					aSource->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if(aChild->m_name == "radius")
+							m_radius = aChild->GetInt32();
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					});
+				}
+
+				void
+				ToStream(
+					IWriter*			aWriter) const
+				{
+					aWriter->WriteInt(m_radius);
+				}
+
+				bool
+				FromStream(
+					IReader*			aReader) 
+				{
+					if(!aReader->ReadInt(m_radius))
+						return false;
+					return true;
+				}
+
+				// Public data
+				int32_t				m_radius = 1;
+			};
+
 			struct Entry
 			{
 				Entry()
@@ -94,6 +134,10 @@ namespace tpublic
 							m_colorModG = aChild->GetArrayIndex(1)->GetUInt8();
 							m_colorModB = aChild->GetArrayIndex(2)->GetUInt8();
 						}
+						else if(aChild->m_name == "swarm")
+						{
+							m_swarm = Swarm(aChild);
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -123,6 +167,7 @@ namespace tpublic
 					aWriter->WriteFloat(m_offsetY);
 					aWriter->WriteFloat(m_moveX);
 					aWriter->WriteFloat(m_moveY);
+					aWriter->WriteOptionalObject(m_swarm);
 				}
 
 				bool
@@ -165,6 +210,8 @@ namespace tpublic
 						return false;
 					if (!aReader->ReadFloat(m_moveY))
 						return false;
+					if(!aReader->ReadOptionalObject(m_swarm))
+						return false;
 					return true;
 				}
 
@@ -187,6 +234,7 @@ namespace tpublic
 				float								m_offsetY = 0.0f;
 				float								m_moveX = 0.0f;
 				float								m_moveY = 0.0f;
+				std::optional<Swarm>				m_swarm;
 			};
 
 			void

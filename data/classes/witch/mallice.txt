@@ -390,13 +390,52 @@ talent witch_swarm:
 
 cooldown swarm:
 {
-	duration: 50
+	duration: 80
+}
+
+particle_system swarm:
+{
+	particle:
+	{
+		sprites: [ effect_swarm ] 
+		flags: [ no_rotation face_target ]
+		scale: 0.4
+		count: 4
+		fade_in: 200
+		fade_out: 200
+		duration: 8000
+		swarm: { radius: 1 }
+	}
+	
+	particle:
+	{
+		sprites: [ effect_swarm ] 
+		flags: [ no_rotation face_target ]
+		scale: 0.2
+		count: 6
+		fade_in: 200
+		fade_out: 200
+		duration: 8000
+		swarm: { radius: 1 }
+	}	
+	
+	particle:
+	{
+		sprites: [ effect_swarm ] 
+		flags: [ no_rotation face_target ]
+		scale: 0.12
+		count: 6
+		fade_in: 200
+		fade_out: 200
+		duration: 8000
+		swarm: { radius: 1 }
+	}	
 }
 
 ability swarm:
 {
 	string: "Swarm"
-	description: "Inflicts enemies in the targeted area with a swarm of locusts for 8 seconds."	
+	description: "Inflicts enemies in the targeted area with a swarm of insects for 8 seconds."	
 	range: 8
 	cast_time: 20
 	flags: [ spell target_aoe interruptable ]
@@ -406,6 +445,7 @@ ability swarm:
 	aoe_radius: 2
 	resource_cost mana: 20
 	talent_tree: witch_malice
+	target_particle_system: swarm
 	
 	aoe_entity_spawn swarm:
 	{
@@ -446,31 +486,9 @@ entity swarm:
 		environment: 
 		{
 			tick_interval: 10
-			duration: 60 
+			duration: 80 
 			ability: swarm_tick
-		}		
-		sprite: 
-		{ 
-			animations: 
-			[
-				{ 
-					states: [ default ] 
-					frames: [ effect_fire_0 effect_fire_1 effect_fire_2 ] 
-					frame_delay: 120 
-					random_start_frame: true 
-					z_offset: -1
-				}
-				
-				{ 
-					states: [ spawning despawning ] 
-					frames: [ effect_fire_fade_0 effect_fire_fade_1 effect_fire_fade_2 ] 
-					frame_delay: 120 
-					random_start_frame: true 
-					z_offset: -1
-				}				
-			]			
-		}
-		
+		}						
 	}
 }
 
