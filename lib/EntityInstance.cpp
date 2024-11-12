@@ -194,4 +194,28 @@ namespace tpublic
 		m_seq++;		
 	}
 
+	bool					
+	EntityInstance::IsInState(
+		const std::vector<EntityState::Id>&		aEntityStateIds) const
+	{
+		for(EntityState::Id t : aEntityStateIds)
+		{
+			if(m_state == t)
+				return true;
+		}
+		return false;
+	}
+
+	bool					
+	EntityInstance::IsEntity(
+		const std::vector<uint32_t>&			aEntityIds) const
+	{
+		for(uint32_t t : aEntityIds)
+		{
+			if(m_entityId == t)
+				return true;
+		}
+		return false;
+	}
+
 }

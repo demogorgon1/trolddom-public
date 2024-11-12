@@ -1,13 +1,13 @@
-# - Necromancy: Cheat Death (Talent)
-# - Necromancy: Improved Cheat Death (Talent)
-# - Necromancy: Shackle Undeath (Basic)
-# - Necromancy: Soul Leak (Basic)
-# - Necromancy: Improved Soul Leak (Talent)
-# - Necromancy: Raise Dead (Talent)
-# - Necromancy: Enfeeblement (Talent)
-# - Necromancy: Blind (Basic)
-# - Necromancy: Summon Spirit (Talent)
-# - Necromancy: Chill Touch (Talent)
+# Necromancy: Cheat Death (Basic) - cast on friendly.
+# Necromancy: Improved Cheat Death (Talent) - survives with X% health.
+# Necromancy: Shackle Undeath (Basic) - stun effect on undead.
+# Necromancy: Soul Leak (Talent) - gain health and mana on kill.
+# Necromancy: Improved Soul Leak (Talent) - also get a bonus buff.
+# Necromancy: Raise Dead (Talent) - turn player remains or dead humanoid or undead into skeleton minion.
+# Necromancy: Enfeeblement (Talent) - melee attacks weaker, slower casts.
+# Necromancy: Blind (Basic) - hostile NPC won't aggro for X seconds.
+# Necromancy: Summon Spirit (Talent) - summon spirit minion.
+# Necromancy: Chill Touch (Talent) - self buff that cause frost damagea and slows to attackers.
 
 talent_tree witch_necromancy:
 {
@@ -17,11 +17,347 @@ talent_tree witch_necromancy:
 	
 	map_palette:
 	{
+		talent witch_improved_cheat_death: "A"
+		talent witch_soul_leak: "B"
+		talent witch_improved_soul_leak: "C"
+		talent witch_raise_dead: "D"
+		talent witch_enfeeblement: "E"
+		talent witch_summon_spirit: "F"
+		talent witch_chill_touch: "G"
+		
+		sprite talent_tree_down_arrow: "d"
+		sprite talent_tree_left_arrow: "l"
+		sprite talent_tree_right_arrow: "r"
+		sprite talent_tree_down: "|"		
+		sprite talent_tree_horizontal: "-"		
+		sprite talent_tree_left_to_down: "x"		
 	}
-	
+
 	map:
 	[
-	]
-	
+		"A...G.."
+		"......."
+		"E.D.BrC"
+		"..d...."
+		"..F...."
+	]	
 }
 
+###############################################################################
+# Improved Cheat Death
+
+talent witch_improved_cheat_death:
+{
+	string: "Improved Cheat Death"
+	icon: icon_cheat_death
+	points:
+	[
+		{ ability_modifier: improved_cheat_death_1 }
+		{ ability_modifier: improved_cheat_death_2 }
+		{ ability_modifier: improved_cheat_death_3 }
+	]
+}
+
+ability_modifier improved_cheat_death_1:
+{	
+	description: "Cheat Death causes target to survive with 12% health."
+}
+
+ability_modifier improved_cheat_death_2:
+{	
+	description: "Cheat Death causes target to survive with 24% health."
+}
+
+ability_modifier improved_cheat_death_3:
+{	
+	description: "Cheat Death causes target to survive with 36% health."
+}
+
+###############################################################################
+# Chill Touch
+
+talent witch_chill_touch:
+{
+	string: "Chill Touch"
+	icon: icon_chill_touch
+	points:
+	[
+		{ ability_modifier: chill_touch_1 }
+		{ ability_modifier: chill_touch_2 }
+		{ ability_modifier: chill_touch_3 }
+	]
+}
+
+ability_modifier chill_touch_1:
+{	
+	description: "Melee attacks slow target movement speed for 2 seconds."
+}
+
+ability_modifier chill_touch_2:
+{	
+	description: "Melee attacks slow target movement speed for 4 seconds."
+}
+
+ability_modifier chill_touch_3:
+{	
+	description: "Melee attacks slow target movement speed for 6 seconds."
+}
+
+###############################################################################
+# Enfeeblement
+
+talent witch_enfeeblement:
+{
+	string: "Enfeeblement"
+	icon: icon_enfeeblement
+	talent_tree_points_required: 3
+	points:
+	[
+		{ ability: enfeeblement }
+	]
+}
+
+aura enfeeblement:
+{
+	string: "Enfeeblement"
+	description: "Casts and melee attacks slowed."
+	icon: icon_enfeeblement
+	type: debuff
+	duration: 300	
+	flags: [ unique magic ]
+	sound: spell_14
+	
+	stat_modifiers:
+	{
+		attack_haste: { add: -15 } 
+		spell_haste: { add: -15 } 
+	}	
+}
+
+cooldown enfeeblement:
+{
+	duration: 60
+}
+
+ability enfeeblement:
+{
+	string: "Enfeeblement"
+	description: "Slows target casts and melee attacks for 30 seconds."
+	range: 7
+	cooldowns: [ global spell_unholy_lockout enfeeblement ]
+	flags: [ spell target_other target_hostile ]
+	states: [ default in_combat ]
+	icon: icon_enfeeblement
+	resource_cost mana: 12
+	talent_tree: witch_necromancy
+
+	direct_effect apply_aura:
+	{	
+		aura: enfeeblement
+	}
+}
+
+###############################################################################
+# Raise Dead
+
+talent witch_raise_dead:
+{
+	string: "Raise Dead"
+	icon: icon_raise_dead
+	talent_tree_points_required: 3
+	points:
+	[
+		{ ability: raise_dead }
+	]
+}
+
+ability raise_dead:
+{
+	string: "Raise Dead"
+	description: "Raises a dead humanoid or undead to fight for you."
+	range: 7
+	cooldowns: [ global spell_unholy_lockout ]
+	flags: [ spell target_aoe target_aoe_always_self interruptable minion_summon ]
+	aoe_radius: 0
+	states: [ default in_combat ]
+	icon: icon_raise_dead
+	resource_cost mana: 12
+	talent_tree: witch_necromancy
+	cast_time: 20
+	
+	direct_effect spawn_entity:
+	{
+		spawn_flags: [ no_owner source_level at_aoe_target ]
+		entity: skeleton
+		init_state: spawning	
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 1
+			health: 1
+			armor: 1
+		}
+		
+		must_have_one_at_target:
+		[
+			{
+				creature_types: [ undead humanoid ]
+				entity_states: [ dead ]
+			}
+			
+			{
+				entities: [ player_remains_1 player_remains_2 player_remains_3 ]
+			}
+		]
+	}
+}
+
+###############################################################################
+# Soul Leak
+
+talent witch_soul_leak:
+{
+	string: "Soul Leak"
+	icon: icon_soul_drain
+	talent_tree_points_required: 3
+	points:
+	[
+		{ ability: soul_leak }
+	]
+}
+
+aura soul_leak:
+{
+	string: "Soul Leak"
+	description: "Restores health and mana to the caster."
+	icon: icon_soul_drain
+	type: debuff
+	duration: 150	
+	flags: [ unique magic ]
+	sound: spell_14
+
+}
+
+ability soul_leak:
+{
+	string: "Soul Leak"
+	description: "Causes damage you do to target to restore health and mana for 15 seconds."
+	range: 7
+	cooldowns: [ global spell_unholy_lockout ]
+	flags: [ spell target_other target_hostile ]
+	states: [ default in_combat ]
+	icon: icon_soul_drain
+	resource_cost mana: 12
+	talent_tree: witch_necromancy
+}
+
+###############################################################################
+# Improved Soul Leak
+
+talent witch_improved_soul_leak:
+{
+	string: "Improved Soul Leak"
+	icon: icon_improved_soul_drain
+	talent_tree_points_required: 3
+	prerequisites: [ witch_soul_leak ]
+	
+	points:
+	[
+		{ ability_modifier: improved_soul_leak_1 }
+		{ ability_modifier: improved_soul_leak_2 }
+		{ ability_modifier: improved_soul_leak_3 }
+	]
+}
+
+ability_modifier improved_soul_leak_1:
+{	
+	description: "Soul Leak also restores health and mana of nearby allies for 15% of its effect."
+}
+
+ability_modifier improved_soul_leak_2:
+{	
+	description: "Soul Leak also restores health and mana of nearby allies for 30% of its effect."
+}
+
+ability_modifier improved_soul_leak_3:
+{	
+	description: "Soul Leak also restores health and mana of nearby allies for 45% of its effect."
+}
+
+###############################################################################
+# Summon Spirit
+
+talent witch_summon_spirit:
+{
+	string: "Summon Spirit"
+	icon: icon_summon_spirit
+	talent_tree_points_required: 3
+	prerequisites: [ witch_raise_dead ]
+	
+	points:
+	[
+		{ ability: summon_spirit }
+	]
+}
+
+ability summon_spirit:
+{
+	string: "Summon Spirit"
+	description: "Summons a powerful spirit to fight for you."
+	cooldowns: [ global spell_unholy_lockout ]
+	flags: [ spell target_other target_hostile ]
+	states: [ default in_combat ]
+	icon: icon_summon_spirit
+	resource_cost mana: 20
+	talent_tree: witch_necromancy
+}
+
+###############################################################################
+# Cheat Death
+
+ability cheat_death:
+{
+	string: "Cheat Death"
+	description: "Causes target to miraculously survive the first time it otherwise would have died for the next 10 seconds."
+	cooldowns: [ global spell_unholy_lockout ]
+	flags: [ spell target_other target_hostile ]
+	states: [ default in_combat ]
+	icon: icon_cheat_death
+	resource_cost mana: 10
+	range: 8
+	talent_tree: witch_necromancy
+}
+
+###############################################################################
+# Shackle Undeath
+
+ability shackle_undeath:
+{
+	string: "Shackle Undeath"
+	description: "Target undead become unable to do anything for 20 seconds. Any damage cancels the effect."
+	cooldowns: [ global spell_unholy_lockout ]
+	flags: [ spell target_other target_hostile ]
+	states: [ default in_combat ]
+	icon: icon_shackle_undeath
+	resource_cost mana: 10
+	cast_time: 20
+	range: 8
+	talent_tree: witch_necromancy
+}
+
+###############################################################################
+# Blind
+
+ability blind:
+{
+	string: "Blind"
+	description: "Target won't notice anyone for 20 seconds."
+	cooldowns: [ global spell_unholy_lockout ]
+	flags: [ spell target_other target_hostile ]
+	states: [ default in_combat ]
+	icon: icon_blind
+	resource_cost mana: 10
+	cast_time: 15
+	range: 8
+	talent_tree: witch_necromancy
+}

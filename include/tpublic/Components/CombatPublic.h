@@ -404,6 +404,18 @@ namespace tpublic
 				return changed;
 			}
 
+			bool
+			IsOneOfCreatureTypes(
+				const std::vector<uint32_t>&	aCreatureTypeIds) const
+			{
+				for(uint32_t id : aCreatureTypeIds)
+				{
+					if(m_creatureTypeId == id)
+						return true;
+				}
+				return false;
+			}
+
 			void
 			Reset()
 			{

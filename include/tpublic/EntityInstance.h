@@ -51,6 +51,10 @@ namespace tpublic
 		const ComponentBase*	GetComponentBase(
 									uint32_t							aComponentId) const;
 		void					IncrementSeq();
+		bool					IsInState(
+									const std::vector<EntityState::Id>&	aEntityStateIds) const;
+		bool					IsEntity(
+									const std::vector<uint32_t>&		aEntityIds) const;
 
 		template <typename _T>
 		_T*

@@ -15,9 +15,10 @@ namespace tpublic
 
 			enum SpawnFlag : uint8_t
 			{
-				SPAWN_FLAG_AT_TARGET	= 0x01,
-				SPAWN_FLAG_NO_OWNER		= 0x02,
-				SPAWN_FLAG_SOURCE_LEVEL	= 0x04
+				SPAWN_FLAG_AT_TARGET		= 0x01,
+				SPAWN_FLAG_NO_OWNER			= 0x02,
+				SPAWN_FLAG_SOURCE_LEVEL		= 0x04,
+				SPAWN_FLAG_AT_AOE_TARGET	= 0x08
 			};
 
 			static uint8_t
@@ -35,11 +36,65 @@ namespace tpublic
 						flags |= SPAWN_FLAG_NO_OWNER;
 					else if (strcmp(string, "source_level") == 0)
 						flags |= SPAWN_FLAG_SOURCE_LEVEL;
+					else if (strcmp(string, "at_aoe_target") == 0)
+						flags |= SPAWN_FLAG_AT_AOE_TARGET;
 					else
 						TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid spawn flag.", string);
 				});
 				return flags;
 			}
+
+			struct MustHaveOneAtTarget
+			{
+				MustHaveOneAtTarget()
+				{
+
+				}
+
+				MustHaveOneAtTarget(
+					const SourceNode*							aSource)
+				{
+					aSource->GetObject()->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if(aChild->m_name == "creature_types")
+							aChild->GetIdArray(DataType::ID_CREATURE_TYPE, m_creatureTypeIds);
+						else if (aChild->m_name == "entities")
+							aChild->GetIdArray(DataType::ID_ENTITY, m_entityIds);
+						else if (aChild->m_name == "entity_states")
+							aChild->GetIdArrayWithLookup<EntityState::Id, EntityState::INVALID_ID>(m_entityStateIds, [](const char* aString) { return EntityState::StringToId(aString); });
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					});
+				}
+
+				void 
+				ToStream(
+					IWriter*									aWriter) const
+				{
+					aWriter->WriteUInts(m_creatureTypeIds);
+					aWriter->WritePODs(m_entityStateIds);
+					aWriter->WriteUInts(m_entityIds);
+				}
+
+				bool
+				FromStream(
+					IReader*									aReader) 
+				{
+					if(!aReader->ReadUInts(m_creatureTypeIds))
+						return false;
+					if(!aReader->ReadPODs(m_entityStateIds))
+						return false;
+					if (!aReader->ReadUInts(m_entityIds))
+						return false;
+					return true;
+				}
+
+				// Public data
+				std::vector<uint32_t>			m_creatureTypeIds;
+				std::vector<EntityState::Id>	m_entityStateIds;
+				std::vector<uint32_t>			m_entityIds;
+			};
 
 			struct RefreshNPCMetrics
 			{
@@ -134,6 +189,7 @@ namespace tpublic
 			uint8_t								m_spawnFlags = 0;
 			int32_t								m_npcTargetThreat = 0;
 			std::optional<RefreshNPCMetrics>	m_refreshNPCMetrics;
+			std::vector<MustHaveOneAtTarget>	m_mustHaveOneAtTarget;
 		};
 
 	}

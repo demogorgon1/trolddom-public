@@ -451,7 +451,7 @@ sprites:
 	sprite icon_enfeeblement : { tags: [ icon ] }
 	sprite icon_blind : { tags: [ icon ] }
 	sprite icon_summon_spirit : { tags: [ icon ] }
-	sprite icon_icy_touch : { tags: [ icon ] }
+	sprite icon_chill_touch : { tags: [ icon ] }
 	sprite icon_robe_4 : { tags: [ icon armor_cloth chest ] icon_meta_data: !ICON_UNCOMMON_5{} }
 	sprite icon_chest_4 : { tags: [ icon armor_plate chest ] icon_meta_data: !ICON_UNCOMMON_5{} }
 	sprite icon_wizard_hat_5 : { tags: [ icon armor_cloth head ] icon_meta_data: !ICON_UNCOMMON_5{} }
@@ -460,5 +460,8 @@ sprites:
 	sprite icon_demon_attack : { tags: [ icon ] }
 	sprite icon_demonic_fury : { tags: [ icon ] }
 	sprite icon_howl_from_beyond : { tags: [ icon ] }
+	sprite icon_gravestone : { tags: [ icon ] }
 
+	cursor: { position: [ 0 400 ] }
+	sprite icon_improved_soul_drain : { tags: [ icon ] }
 }

@@ -90,7 +90,7 @@ class witch:
 			
 			unlock_abilities:
 			[				
-				curse_of_corruption
+				curse_of_corruption				
 			]
 			
 			stats:
@@ -127,7 +127,7 @@ class witch:
 			
 			unlock_abilities:
 			[
-				curse_of_attraction			
+				cheat_death				
 			]
 			
 			stats:
@@ -182,6 +182,7 @@ class witch:
 			
 			unlock_abilities:
 			[			
+				blind
 			]
 			
 			stats:
@@ -200,6 +201,7 @@ class witch:
 			
 			unlock_abilities:
 			[
+				curse_of_attraction			
 			]
 			
 			stats:
@@ -217,6 +219,7 @@ class witch:
 			
 			unlock_abilities:
 			[
+				shackle_undeath
 			]
 			
 			stats:

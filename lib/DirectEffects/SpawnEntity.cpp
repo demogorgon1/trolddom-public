@@ -18,6 +18,7 @@
 #include <tpublic/ApplyNPCMetrics.h>
 #include <tpublic/EntityInstance.h>
 #include <tpublic/IEventQueue.h>
+#include <tpublic/IWorldView.h>
 #include <tpublic/Manifest.h>
 
 namespace tpublic::DirectEffects
@@ -57,6 +58,14 @@ namespace tpublic::DirectEffects
 					m_initState = EntityState::StringToId(aChild->GetIdentifier());
 					TP_VERIFY(m_initState != EntityState::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid entity state.", aChild->GetIdentifier());
 				}
+				else if(aChild->m_name == "must_have_one_at_target")
+				{
+					aChild->GetArray()->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						m_mustHaveOneAtTarget.push_back(MustHaveOneAtTarget(aChild));
+					});
+				}
 				else
 				{
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->GetIdentifier());
@@ -76,6 +85,7 @@ namespace tpublic::DirectEffects
 		aStream->WriteInt(m_npcTargetThreat);
 		aStream->WritePOD(m_initState);
 		aStream->WriteOptionalObject(m_refreshNPCMetrics);
+		aStream->WriteObjects(m_mustHaveOneAtTarget);
 	}
 
 	bool
@@ -96,6 +106,8 @@ namespace tpublic::DirectEffects
 			return false;
 		if(!aStream->ReadOptionalObject(m_refreshNPCMetrics))
 			return false;
+		if(!aStream->ReadObjects(m_mustHaveOneAtTarget))
+			return false;
 		return true;
 	}
 
@@ -109,15 +121,56 @@ namespace tpublic::DirectEffects
 		const SourceEntityInstance&		/*aSourceEntityInstance*/,
 		EntityInstance*					aSource,
 		EntityInstance*					aTarget,
-		const Vec2&						/*aAOETarget*/,
+		const Vec2&						aAOETarget,
 		const ItemInstanceReference&	/*aItem*/,
 		IResourceChangeQueue*			/*aCombatResultQueue*/,
 		IAuraEventQueue*				/*aAuraEventQueue*/,
 		IEventQueue*					aEventQueue,
-		const IWorldView*				/*aWorldView*/) 
+		const IWorldView*				aWorldView) 
 	{					
 		if(aSource == NULL)
 			return Result();
+
+		if(m_mustHaveOneAtTarget.size() > 0)
+		{
+			std::vector<const EntityInstance*> entitiesAtTarget;
+
+			aWorldView->WorldViewEntityInstancesAtPosition(aAOETarget, [&](
+				const EntityInstance* aEntityInstance)
+			{	
+				entitiesAtTarget.push_back(aEntityInstance);
+				return false;
+			});
+
+			bool hasOne = false;
+
+			for(const MustHaveOneAtTarget& mustHaveOneAtTarget : m_mustHaveOneAtTarget)
+			{
+				bool ok = false;
+
+				for(const EntityInstance* entityAtTarget : entitiesAtTarget)
+				{
+					const Components::CombatPublic* combatPublic = entityAtTarget->GetComponent<Components::CombatPublic>();
+
+					ok = 
+						(mustHaveOneAtTarget.m_creatureTypeIds.size() == 0 || (combatPublic != NULL && combatPublic->IsOneOfCreatureTypes(mustHaveOneAtTarget.m_creatureTypeIds))) &&
+						(mustHaveOneAtTarget.m_entityIds.size() == 0 || entityAtTarget->IsEntity(mustHaveOneAtTarget.m_entityIds)) &&
+						(mustHaveOneAtTarget.m_entityStateIds.size() == 0 || entityAtTarget->IsInState(mustHaveOneAtTarget.m_entityStateIds));
+
+					if(ok)
+						break;
+				}
+
+				if(ok)
+				{
+					hasOne = true;
+					break;
+				}
+			}
+
+			if(!hasOne)
+				return Result();
+		}
 
 		EntityInstance* spawnedEntity = aEventQueue->EventQueueSpawnEntity(m_entityId, m_initState, m_mapEntitySpawnId, false);
 
@@ -128,6 +181,8 @@ namespace tpublic::DirectEffects
 
 			if (m_spawnFlags & SPAWN_FLAG_AT_TARGET)
 				spawnedEntityPosition->m_position = aTarget->GetComponent<Components::Position>()->m_position;
+			else if (m_spawnFlags & SPAWN_FLAG_AT_AOE_TARGET)
+				spawnedEntityPosition->m_position = aAOETarget;
 			else
 				spawnedEntityPosition->m_position = aSource->GetComponent<Components::Position>()->m_position;
 		}
