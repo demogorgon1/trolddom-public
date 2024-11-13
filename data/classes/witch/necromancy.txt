@@ -90,17 +90,62 @@ talent witch_chill_touch:
 
 ability_modifier chill_touch_1:
 {	
-	description: "Melee attacks slow target movement speed for 2 seconds."
+	description: "Melee attacks slow target movement speed for 3 seconds."
 }
 
 ability_modifier chill_touch_2:
 {	
-	description: "Melee attacks slow target movement speed for 4 seconds."
+	description: "Melee attacks slow target movement speed for 6 seconds."
 }
 
 ability_modifier chill_touch_3:
 {	
-	description: "Melee attacks slow target movement speed for 6 seconds."
+	description: "Melee attacks slow target movement speed for 9 seconds."
+}
+
+aura chill_touch_1:
+{
+	string: "Chill Touch"
+	description: "Reduced movement speed."
+	icon: icon_chill_touch
+	type: debuff
+	duration: 30
+	flags: [ unique magic ]
+	
+	aura_effect move_speed_modifier:
+	{
+		move_speed: slow
+	}
+}
+
+aura chill_touch_2:
+{
+	string: "Chill Touch"
+	description: "Reduced movement speed."
+	icon: icon_chill_touch
+	type: debuff
+	duration: 60
+	flags: [ unique magic ]
+	
+	aura_effect move_speed_modifier:
+	{
+		move_speed: slow
+	}
+}
+
+aura chill_touch_3:
+{
+	string: "Chill Touch"
+	description: "Reduced movement speed."
+	icon: icon_chill_touch
+	type: debuff
+	duration: 90
+	flags: [ unique magic ]
+	
+	aura_effect move_speed_modifier:
+	{
+		move_speed: slow
+	}
 }
 
 ###############################################################################

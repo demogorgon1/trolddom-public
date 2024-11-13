@@ -1,3 +1,38 @@
+ability witch_attack:
+{
+	string: "Attack"
+	description: "Deals $damage$ damage to target."
+	flags: [ melee offensive attack target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss use_weapon_icon ]	
+	states: [ default in_combat ]
+	delay: 3
+	icon: icon_fist
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical			
+		function: { expression: x x: weapon }															
+	}
+	
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: chill_touch_1
+		aura: chill_touch_1
+	}
+
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: chill_touch_2
+		aura: chill_touch_2
+	}
+
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: chill_touch_3
+		aura: chill_touch_3
+	}	
+}
+
 class witch:
 {
 	string: "Witch"	
@@ -27,8 +62,8 @@ class witch:
 
 	color_1: [ 160 0 160 ] 
 	color_2: [ 90 0 64 ]
-	default_attack: attack
-	default_action_bar: [ attack witch_bolt !DEFAULT_ABILITIES{} ]
+	default_attack: witch_attack
+	default_action_bar: [ witch_attack witch_bolt !DEFAULT_ABILITIES{} ]
 	talent_trees: [ witch_malice witch_demonology witch_necromancy ]
 	
 	item_types: [ armor_cloth weapon_1h_knife weapon_2h_staff ]
@@ -64,7 +99,7 @@ class witch:
 			
 			unlock_abilities:
 			[
-				attack				
+				witch_attack				
 				witch_bolt
 				
 				!DEFAULT_ABILITIES{}
