@@ -1,6 +1,6 @@
 talent_tree paladin_warrior:
 {
-	string: "Warrior"
+	string: "Avenger"
 	description: "."
 	icon: icon_defensive
 	
