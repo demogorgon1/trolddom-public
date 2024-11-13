@@ -2,6 +2,7 @@
 
 #include <tpublic/AuraEffects/AbilityOnFade.h>
 #include <tpublic/AuraEffects/Absorb.h>
+#include <tpublic/AuraEffects/Blind.h>
 #include <tpublic/AuraEffects/CastModifier.h>
 #include <tpublic/AuraEffects/CombatEventTrigger.h>
 #include <tpublic/AuraEffects/DamageInputEffect.h>
@@ -26,6 +27,7 @@ namespace tpublic
 	{
 		_Register<AuraEffects::AbilityOnFade>();
 		_Register<AuraEffects::Absorb>();
+		_Register<AuraEffects::Blind>();
 		_Register<AuraEffects::CastModifier>();
 		_Register<AuraEffects::CombatEventTrigger>();
 		_Register<AuraEffects::DamageInputEffect>();

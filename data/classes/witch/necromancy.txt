@@ -605,7 +605,7 @@ particle_system shackle_undeath:
 ability blind:
 {
 	string: "Blind"
-	description: "Target won't notice anyone for 20 seconds."
+	description: "Reduces target aggro range for 20 seconds."
 	cooldowns: [ global spell_unholy_lockout ]
 	flags: [ spell target_other target_hostile ]
 	states: [ default in_combat ]
@@ -614,4 +614,20 @@ ability blind:
 	cast_time: 15
 	range: 8
 	talent_tree: witch_necromancy
+	
+	direct_effect apply_aura:
+	{
+		aura: blind
+	}
+}
+
+aura blind:
+{
+	string: "Blind"
+	description: "Reduced aggro range."
+	icon: icon_blind
+	type: debuff
+	duration: 200
+	flags: [ unique magic cancel_on_damage ]
+	aura_effect blind: { }
 }

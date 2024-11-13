@@ -260,7 +260,9 @@ namespace tpublic::Systems
 			bool passive = (aEntityState == EntityState::ID_DEFAULT) && aTicksInState < 15;
 
 			if(aContext->m_tick - threat->m_lastPingTick >= Components::ThreatTarget::PING_INTERVAL_TICKS && !passive)
-			{
+			{				
+				bool blind = auras->HasEffect(AuraEffect::ID_BLIND, NULL);
+
 				IWorldView::EntityQuery entityQuery;
 				entityQuery.m_position = position->m_position;
 				entityQuery.m_maxDistance = GetManifest()->m_npcMetrics.GetMaxAggroRange();
@@ -277,7 +279,13 @@ namespace tpublic::Systems
 						if (aEntityState == EntityState::ID_DEFAULT && isThreatSource && (!faction->IsNeutralOrFriendly() || combat->m_targetEntityInstanceId == aEntity->GetEntityInstanceId()))
 						{
 							const tpublic::Components::CombatPublic* playerCombatPublic = aEntity->GetComponent<tpublic::Components::CombatPublic>();
-							int32_t aggroRange = GetManifest()->m_npcMetrics.GetAggroRangeForLevelDifference((int32_t)combat->m_level, (int32_t)playerCombatPublic->m_level);
+							int32_t aggroRange = 0;
+
+							if(blind)
+								aggroRange = 1;
+							else
+								aggroRange = GetManifest()->m_npcMetrics.GetAggroRangeForLevelDifference((int32_t)combat->m_level, (int32_t)playerCombatPublic->m_level);
+
 							if(aDistanceSquared <= aggroRange * aggroRange)
 								aContext->m_eventQueue->EventQueueThreat({ aEntity->GetEntityInstanceId(), aEntity->GetSeq() }, aEntityInstanceId, 1, aContext->m_tick);
 						}
