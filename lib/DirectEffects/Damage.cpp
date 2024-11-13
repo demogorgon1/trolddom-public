@@ -120,7 +120,7 @@ namespace tpublic::DirectEffects
 		IResourceChangeQueue*			aResourceChangeQueue,
 		IAuraEventQueue*				/*aAuraEventQueue*/,
 		IEventQueue*					aEventQueue,
-		const IWorldView*				/*aWorldView*/) 
+		const IWorldView*				aWorldView) 
 	{
 		if(aSource == NULL)
 			return Result();
@@ -136,7 +136,7 @@ namespace tpublic::DirectEffects
 		if(targetCombatPublic == NULL)
 			return Result();
 
-		uint32_t damage = (uint32_t)m_function.EvaluateEntityInstance(aRandom, _GetDamageModifier(abilityModifiers), aSource);
+		uint32_t damage = (uint32_t)m_function.EvaluateSourceAndTargetEntityInstances(aRandom, _GetDamageModifier(abilityModifiers), aSource, aTarget);
 
 		CombatEvent::Id result = aId;
 
@@ -209,8 +209,6 @@ namespace tpublic::DirectEffects
 					aSource->GetEntityId(),
 					aSource->GetEntityInstanceId(),
 					aSource->GetEntityInstanceId(),
-					sourceCombatPublic,
-					NULL,
 					rageResourceIndex,
 					rage,
 					0,
@@ -234,8 +232,6 @@ namespace tpublic::DirectEffects
 					aSource->GetEntityId(),
 					aSource->GetEntityInstanceId(),
 					aTarget->GetEntityInstanceId(),
-					targetCombatPublic,
-					targetAuras,
 					rageResourceIndex,
 					rage,
 					0,
@@ -247,6 +243,9 @@ namespace tpublic::DirectEffects
 		size_t healthResourceIndex;
 		if(targetCombatPublic->GetResourceIndex(Resource::ID_HEALTH, healthResourceIndex))
 		{
+			if(targetAuras != NULL)
+				targetAuras->OnDamageInput(aSource, aTarget, m_damageType, (int32_t)damage, result, aEventQueue, aWorldView, aResourceChangeQueue);
+
 			aResourceChangeQueue->AddResourceChange(
 				result,
 				damageType,
@@ -254,8 +253,6 @@ namespace tpublic::DirectEffects
 				aSource->GetEntityId(),
 				aSource->GetEntityInstanceId(),
 				aTarget->GetEntityInstanceId(),
-				targetCombatPublic,
-				targetAuras,
 				healthResourceIndex,
 				-(int32_t)damage,
 				blocked,
@@ -273,8 +270,6 @@ namespace tpublic::DirectEffects
 						aTarget->GetEntityId(),
 						aTarget->GetEntityInstanceId(),
 						aSource->GetEntityInstanceId(),
-						sourceCombatPublic,
-						NULL,
 						healthResourceIndex,
 						(int32_t)damage / 2, // FIXME: might want this to not always be 50%
 						0,

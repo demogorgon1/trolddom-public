@@ -6,12 +6,6 @@
 namespace tpublic
 {
 
-	namespace Components
-	{
-		struct Auras;
-		struct CombatPublic;
-	}
-
 	class SourceEntityInstance;
 
 	class IResourceChangeQueue
@@ -29,8 +23,6 @@ namespace tpublic
 								uint32_t								aSourceEntityId,
 								uint32_t								aSourceEntityInstanceId,
 								uint32_t								aTargetEntityInstanceId,
-								Components::CombatPublic*				aCombat,
-								Components::Auras*						aAuras,
 								size_t									aResourceIndex,
 								int32_t									aChange,
 								uint32_t								aBlocked,

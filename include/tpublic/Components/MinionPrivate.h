@@ -153,6 +153,7 @@ namespace tpublic
 				m_playerCombat = false;
 				m_ownerRequestAbility.reset();
 				m_lastAggroPingTick = 0;
+				m_shouldDie = false;
 			}
 
 			// Public data
@@ -172,6 +173,7 @@ namespace tpublic
 			bool								m_playerCombat = false;
 			std::optional<OwnerRequestAbility>	m_ownerRequestAbility;
 			uint32_t							m_lastAggroPingTick = 0;
+			bool								m_shouldDie = false;
 		};
 	}
 

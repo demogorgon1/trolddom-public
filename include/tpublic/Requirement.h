@@ -43,7 +43,8 @@ namespace tpublic
 			TYPE_MUST_HAVE_LESS_HEALTH_THAN,
 			TYPE_MUST_HAVE_NEGATIVE_REPUTATION,
 			TYPE_MUST_HAVE_AURA_GROUP,
-			TYPE_MUST_BE_CREATURE_TYPE
+			TYPE_MUST_BE_CREATURE_TYPE,
+			TYPE_MUST_HAVE_ZERO_HEALTH
 		};
 
 		static DataType::Id
@@ -182,6 +183,8 @@ namespace tpublic
 				m_type = TYPE_MUST_HAVE_AURA_GROUP;
 			else if (typeString == "must_be_creature_type")
 				m_type = TYPE_MUST_BE_CREATURE_TYPE;
+			else if(typeString == "must_have_zero_health")
+				m_type = TYPE_MUST_HAVE_ZERO_HEALTH;
 			else
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid type.", aSource->m_annotation->GetIdentifier());
 

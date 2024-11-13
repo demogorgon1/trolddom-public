@@ -229,11 +229,16 @@ namespace tpublic::Systems
 			return EntityState::ID_DESPAWNING;
 		}
 
-		if (aEntityState != EntityState::ID_DEAD && combatPublic->GetResource(Resource::ID_HEALTH) == 0 && !auras->HasEffect(AuraEffect::ID_IMMORTALITY, NULL))
+		bool shouldDie = aEntityState != EntityState::ID_DEAD && combatPublic->GetResource(Resource::ID_HEALTH) == 0 && !auras->HasEffect(AuraEffect::ID_IMMORTALITY, NULL);
+
+		// Killing minion is delayed one tick after reaching 0 health
+		if (shouldDie && minionPrivate->m_shouldDie)
 		{
 			minionPrivate->m_castInProgress.reset();
 			return EntityState::ID_DEAD;
 		}
+
+		minionPrivate->m_shouldDie = shouldDie;
 
 		const Data::MinionMode* minionMode = minionPublic->m_currentMinionModeId != 0 ? GetManifest()->GetById<Data::MinionMode>(minionPublic->m_currentMinionModeId) : NULL;
 		const Components::Position* ownerPosition = ownerEntityInstance->GetComponent<Components::Position>();

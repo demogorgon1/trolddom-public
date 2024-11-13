@@ -4,6 +4,7 @@
 #include "../AuraEffectFactory.h"
 #include "../CombatFunction.h"
 #include "../DataBase.h"
+#include "../Requirement.h"
 #include "../StatModifiers.h"
 
 namespace tpublic
@@ -204,6 +205,8 @@ namespace tpublic
 							m_soundId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SOUND, aChild->GetIdentifier());
 						else if (aChild->m_name == "aura_group")
 							m_auraGroupId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_AURA_GROUP, aChild->GetIdentifier());
+						else if(aChild->m_tag == "cancel_requirement")
+							m_cancelRequirements.push_back(Requirement(aChild));
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 					}
@@ -227,6 +230,7 @@ namespace tpublic
 				aStream->WriteUInt(m_particleSystemId);
 				aStream->WriteUInt(m_soundId);
 				aStream->WriteUInt(m_auraGroupId);
+				aStream->WriteObjects(m_cancelRequirements);
 			}
 			 
 			bool
@@ -275,6 +279,12 @@ namespace tpublic
 					if(!aStream->ReadUInt(m_auraGroupId))
 						return false;
 				}
+
+				if(!aStream->IsEnd())
+				{
+					if(!aStream->ReadObjects(m_cancelRequirements))
+						return false;
+				}
 				return true;
 			}
 
@@ -292,6 +302,7 @@ namespace tpublic
 			uint32_t										m_particleSystemId = 0;
 			uint32_t										m_soundId = 0;
 			uint32_t										m_auraGroupId = 0;
+			std::vector<Requirement>						m_cancelRequirements;
 		};
 
 	}

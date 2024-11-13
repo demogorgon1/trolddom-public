@@ -232,16 +232,106 @@ aura soul_leak:
 	description: "Restores health and mana to the caster."
 	icon: icon_soul_drain
 	type: debuff
-	duration: 150	
+	duration: 200	
 	flags: [ unique magic ]
 	sound: spell_14
 
+	aura_effect damage_input_effect:
+	{
+		type_mask: [ unholy ]
+		aura_source_only: true
+		combat_log_ability: soul_leak
+		
+		effects: 
+		[
+			{ type: restore_health targets: [ source ] factor: 0.2 }
+			{ type: restore_mana targets: [ source ] factor: 0.1 }
+		]
+	}
+}
+
+aura soul_leak_1:
+{
+	string: "Soul Leak"
+	description: "Restores health and mana to the caster and their allies."
+	icon: icon_soul_drain
+	type: debuff
+	duration: 200	
+	flags: [ unique magic ]
+	sound: spell_14
+
+	aura_effect damage_input_effect:
+	{
+		type_mask: [ unholy ]
+		aura_source_only: true
+		combat_log_ability: soul_leak
+		
+		effects: 
+		[
+			{ type: restore_health targets: [ source ] factor: 0.2 }
+			{ type: restore_mana targets: [ source ] factor: 0.1 }
+			{ type: restore_health targets: [ source_minions source_combat_group ] factor: 0.03 range: 12 }
+			{ type: restore_mana targets: [ source_minions source_combat_group ] factor: 0.015 range: 12 }
+		]
+	}
+}
+
+aura soul_leak_2:
+{
+	string: "Soul Leak"
+	description: "Restores health and mana to the caster and their allies."
+	icon: icon_soul_drain
+	type: debuff
+	duration: 200	
+	flags: [ unique magic ]
+	sound: spell_14
+
+	aura_effect damage_input_effect:
+	{
+		type_mask: [ unholy ]
+		aura_source_only: true
+		combat_log_ability: soul_leak
+		
+		effects: 
+		[
+			{ type: restore_health targets: [ source ] factor: 0.2 }
+			{ type: restore_mana targets: [ source ] factor: 0.1 }		
+			{ type: restore_health targets: [ source_minions source_combat_group ] factor: 0.06 range: 12 }
+			{ type: restore_mana targets: [ source_minions source_combat_group ] factor: 0.03 range: 12 }
+		]
+	}
+}
+
+aura soul_leak_3:
+{
+	string: "Soul Leak"
+	description: "Restores health and mana to the caster and their allies."
+	icon: icon_soul_drain
+	type: debuff
+	duration: 200	
+	flags: [ unique magic ]
+	sound: spell_14
+
+	aura_effect damage_input_effect:
+	{
+		type_mask: [ unholy ]
+		aura_source_only: true
+		combat_log_ability: soul_leak
+		
+		effects: 
+		[
+			{ type: restore_health targets: [ source ] factor: 0.2 }
+			{ type: restore_mana targets: [ source ] factor: 0.1 }		
+			{ type: restore_health targets: [ source_minions source_combat_group ] factor: 0.12 range: 12 }
+			{ type: restore_mana targets: [ source_minions source_combat_group ] factor: 0.06 range: 12 }
+		]
+	}
 }
 
 ability soul_leak:
 {
 	string: "Soul Leak"
-	description: "Causes damage you do to target to restore health and mana for 15 seconds."
+	description: "Unholy damage you do to target restores health and mana for 20 seconds."
 	range: 7
 	cooldowns: [ global spell_unholy_lockout ]
 	flags: [ spell target_other target_hostile ]
@@ -249,6 +339,36 @@ ability soul_leak:
 	icon: icon_soul_drain
 	resource_cost mana: 12
 	talent_tree: witch_necromancy
+	
+	direct_effect apply_aura:
+	{
+		must_not_have_ability_modifiers: [ improved_soul_leak_1 improved_soul_leak_2 improved_soul_leak_3 ]
+		aura: soul_leak
+	}
+	
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: improved_soul_leak_1
+		aura: soul_leak_1
+	}
+
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: improved_soul_leak_2
+		aura: soul_leak_2
+	}
+
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: improved_soul_leak_3
+		aura: soul_leak_3
+	}
+	
+	direct_effect threat:
+	{
+		apply_to: source
+		add: 10
+	}		
 }
 
 ###############################################################################
@@ -315,17 +435,115 @@ ability summon_spirit:
 ###############################################################################
 # Cheat Death
 
+aura cheat_death_on_fade:
+{
+	string: "Cheat Death"
+	description: "Immune to all damage."
+	icon: icon_cheat_death
+	type: buff
+	duration: 10	
+	flags: [ unique magic ]
+	sound: spell_14
+
+	aura_effect damage_input_modifier:
+	{
+		type_mask: [ all ] 
+		multiplier_num: 0
+	}
+}
+
+ability cheat_death_on_fade:
+{
+	string: "Cheat Death"
+	states: [ default in_combat ]
+	icon: icon_cheat_death
+	flags: [ always_in_range always_in_line_of_sight no_delay ]
+	
+	direct_effect modify_resource:
+	{	
+		must_not_have_ability_modifiers: [ improved_cheat_death_1 improved_cheat_death_2 improved_cheat_death_3 ]
+		requirement target<must_have_zero_health>: {}
+		resource: health
+		function: 1
+		silent: true
+	}
+	
+	direct_effect modify_resource:
+	{	
+		must_have_ability_modifier: improved_cheat_death_1
+		requirement target<must_have_zero_health>: {}
+		resource: health
+		function: { expression: a_mul_x a: 0.12 x: health_max entity: target }
+		silent: true
+	}
+	
+	direct_effect modify_resource:
+	{	
+		must_have_ability_modifier: improved_cheat_death_2
+		requirement target<must_have_zero_health>: {}
+		resource: health
+		function: { expression: a_mul_x a: 0.24 x: health_max entity: target }
+		silent: true
+	}
+
+	direct_effect modify_resource:
+	{	
+		must_have_ability_modifier: improved_cheat_death_3
+		requirement target<must_have_zero_health>: {}
+		resource: health
+		function: { expression: a_mul_x a: 0.32 x: health_max entity: target }
+		silent: true
+	}	
+	
+	direct_effect apply_aura:
+	{
+		aura: cheat_death_on_fade
+	}
+}
+
+aura cheat_death:
+{
+	string: "Cheat Death"
+	description: "Trying to cheat death."
+	icon: icon_cheat_death
+	type: buff
+	duration: 100	
+	flags: [ unique magic ]
+	sound: spell_14
+
+	cancel_requirement self<must_have_zero_health>: {}
+
+	aura_effect immortality:
+	{
+	}
+	
+	aura_effect ability_on_fade:
+	{
+		ability: cheat_death_on_fade
+	}
+}
+
+cooldown cheat_death:
+{
+	duration: 1800
+}
+
 ability cheat_death:
 {
 	string: "Cheat Death"
 	description: "Causes target to miraculously survive the first time it otherwise would have died for the next 10 seconds."
-	cooldowns: [ global spell_unholy_lockout ]
-	flags: [ spell target_other target_hostile ]
+	range: 7
+	cooldowns: [ global spell_unholy_lockout cheat_death ]
+	flags: [ spell target_self target_other target_friendly ]
 	states: [ default in_combat ]
 	icon: icon_cheat_death
-	resource_cost mana: 10
-	range: 8
+	resource_cost mana: 12
 	talent_tree: witch_necromancy
+	
+	direct_effect apply_aura:
+	{
+		aura: cheat_death
+	}
 }
 
 ###############################################################################

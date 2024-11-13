@@ -14,6 +14,7 @@
 namespace tpublic
 {
 
+	class IResourceChangeQueue;
 	class SecondaryAbility;
 
 	class AuraEffectBase
@@ -176,6 +177,16 @@ namespace tpublic
 									int32_t							aHeal) const { return aHeal; }
 		virtual int32_t			FilterThreat(
 									int32_t							aThreat) const { return aThreat; }
+		virtual void			OnDamageInput(
+									const EntityInstance*			/*aSource*/,
+									const EntityInstance*			/*aTarget*/,
+									const SourceEntityInstance&		/*aAuraSource*/,
+									DirectEffect::DamageType		/*aDamageType*/,
+									int32_t							/*aDamage*/,
+									CombatEvent::Id					/*aCombatEventId*/,
+									IEventQueue*					/*aEventQueue*/,
+									const IWorldView*				/*aWorldView*/,
+									IResourceChangeQueue*			/*aResourceChangeQueue*/) const { }
 		virtual MoveSpeed::Id	GetMoveSpeedModifier() const { return MoveSpeed::INVALID_ID; }
 		virtual void			OnCombatEvent(
 									CombatEventType					/*aType*/,

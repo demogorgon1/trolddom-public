@@ -80,6 +80,14 @@ namespace tpublic
 			INPUT_WEAPON_AVERAGE_NORMALIZED
 		};
 
+		enum Entity : uint8_t
+		{
+			INVALID_ENTITY,
+
+			ENTITY_SOURCE,
+			ENTITY_TARGET
+		};
+
 		static Expression
 		SourceToExpression(
 			const SourceNode*					aSource)
@@ -138,6 +146,18 @@ namespace tpublic
 			return INVALID_INPUT;
 		}
 
+		static Entity
+		SourceToEntity(
+			const SourceNode*					aSource)
+		{
+			std::string_view t(aSource->GetIdentifier());
+			if (t == "source")
+				return ENTITY_SOURCE;
+			else if (t == "target")
+				return ENTITY_TARGET;
+			TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid entity.", aSource->GetIdentifier());
+			return INVALID_ENTITY;
+		}
 		CombatFunction()
 		{
 
@@ -195,6 +215,10 @@ namespace tpublic
 					{
 						m_eliteMultiplier = aChild->GetFloat();
 					}
+					else if(aChild->m_name == "entity")
+					{
+						m_entity = SourceToEntity(aChild);
+					}
 					else
 					{
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -216,6 +240,7 @@ namespace tpublic
 			m_bLevelCurve.ToStream(aWriter);
 			aWriter->WriteFloat(m_eliteMultiplier);
 			aWriter->WritePOD(m_y);
+			aWriter->WritePOD(m_entity);
 		}
 
 		bool
@@ -249,6 +274,12 @@ namespace tpublic
 					return false;
 			}
 
+			if(!aReader->IsEnd())
+			{
+				if(!aReader->ReadPOD(m_entity))
+					return false;
+			}
+
 			return true;
 		}
 
@@ -267,6 +298,11 @@ namespace tpublic
 						RandomSource						aRandomSource,
 						float								aMultiplier,
 						const EntityInstance*				aEntityInstance) const;
+		float		EvaluateSourceAndTargetEntityInstances(
+						RandomSource						aRandomSource,
+						float								aMultiplier,
+						const EntityInstance*				aSourceEntityInstance,
+						const EntityInstance*				aTargetEntityInstance) const;
 		void		ToRange(
 						float								aMultiplier,
 						const EntityInstance*				aEntityInstance,
@@ -280,6 +316,7 @@ namespace tpublic
 		float					m_b = 0.0f;
 		float					m_spread = 0.0f;
 		float					m_eliteMultiplier = 1.0f;
+		Entity					m_entity = ENTITY_SOURCE;
 
 		UIntCurve<uint32_t>		m_aLevelCurve;
 		UIntCurve<uint32_t>		m_bLevelCurve;

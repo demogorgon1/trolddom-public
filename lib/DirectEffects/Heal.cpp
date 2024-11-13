@@ -75,12 +75,12 @@ namespace tpublic::DirectEffects
 		const IWorldView*				/*aWorldView*/) 
 	{
 		const Components::CombatPrivate* sourceCombatPrivate = aSource != NULL ? aSource->GetComponent<Components::CombatPrivate>() : NULL;
-		Components::CombatPublic* targetCombatPublic = aTarget->GetComponent<Components::CombatPublic>();
+		const Components::CombatPublic* targetCombatPublic = aTarget->GetComponent<Components::CombatPublic>();
 
 		if(sourceCombatPrivate == NULL || targetCombatPublic == NULL)
 			return Result();
 
-		uint32_t heal = (uint32_t)m_function.EvaluateEntityInstance(aRandom, 1.0f, aSource);
+		uint32_t heal = (uint32_t)m_function.EvaluateSourceAndTargetEntityInstances(aRandom, 1.0f, aSource, aTarget);
 
 		if(m_maxHealthPercentage)
 		{	
@@ -118,8 +118,6 @@ namespace tpublic::DirectEffects
 				aSource->GetEntityId(),
 				aSource->GetEntityInstanceId(),
 				aTarget->GetEntityInstanceId(),
-				targetCombatPublic,
-				NULL,
 				healthResourceIndex,
 				(int32_t)heal,
 				0,

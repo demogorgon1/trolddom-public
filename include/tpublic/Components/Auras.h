@@ -158,9 +158,18 @@ namespace tpublic
 			int32_t			FilterThreat(
 								int32_t										aThreat) const;
 			void			OnCombatEvent(
-								tpublic::AuraEffectBase::CombatEventType	aType,
+								AuraEffectBase::CombatEventType				aType,
 								CombatEvent::Id								aCombatEventId,
 								AuraEffectBase::SecondaryAbilityCallback	aCallback) const;
+			void			OnDamageInput(
+								const EntityInstance*						aSource,
+								const EntityInstance*						aTarget,
+								DirectEffect::DamageType					aDamageType,
+								int32_t										aDamage,
+								CombatEvent::Id								aCombatEventId,
+								IEventQueue*								aEventQueue,
+								const IWorldView*							aWorldView,
+								IResourceChangeQueue*						aResourceChangeQueue) const;
 			int32_t			FilterDamageInputOnUpdate(		
 								DirectEffect::DamageType					aDamageType,
 								int32_t										aDamage,

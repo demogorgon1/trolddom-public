@@ -4,6 +4,7 @@
 #include <tpublic/AuraEffects/Absorb.h>
 #include <tpublic/AuraEffects/CastModifier.h>
 #include <tpublic/AuraEffects/CombatEventTrigger.h>
+#include <tpublic/AuraEffects/DamageInputEffect.h>
 #include <tpublic/AuraEffects/DamageInputModifier.h>
 #include <tpublic/AuraEffects/DamageOutputModifier.h>
 #include <tpublic/AuraEffects/HealInputModifier.h>
@@ -27,6 +28,7 @@ namespace tpublic
 		_Register<AuraEffects::Absorb>();
 		_Register<AuraEffects::CastModifier>();
 		_Register<AuraEffects::CombatEventTrigger>();
+		_Register<AuraEffects::DamageInputEffect>();
 		_Register<AuraEffects::DamageInputModifier>();
 		_Register<AuraEffects::DamageOutputModifier>();
 		_Register<AuraEffects::HealInputModifier>();

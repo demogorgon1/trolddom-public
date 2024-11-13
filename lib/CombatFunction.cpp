@@ -242,6 +242,23 @@ namespace tpublic
 			aEntityInstance->GetComponent<Components::CombatPrivate>());
 	}
 
+	float		
+	CombatFunction::EvaluateSourceAndTargetEntityInstances(
+		RandomSource						aRandomSource,
+		float								aMultiplier,
+		const EntityInstance*				aSourceEntityInstance,
+		const EntityInstance*				aTargetEntityInstance) const
+	{
+		const EntityInstance* entityInstance = NULL;
+		switch(m_entity)
+		{
+		case ENTITY_SOURCE: entityInstance = aSourceEntityInstance; break;
+		case ENTITY_TARGET: entityInstance = aTargetEntityInstance; break;
+		default:			return 0.0f;
+		}
+		return EvaluateEntityInstance(aRandomSource, aMultiplier, entityInstance);
+	}
+
 	void		
 	CombatFunction::ToRange(
 		float								aMultiplier,

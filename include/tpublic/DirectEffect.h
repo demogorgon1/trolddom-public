@@ -94,6 +94,14 @@ namespace tpublic
 			return DAMAGE_TYPE_NAMES[aDamageType];
 		}
 
+		inline bool
+		CheckDamageTypeMask(
+			DamageType	aDamageType,
+			uint32_t	aTypeMask)
+		{
+			return ((1 << (uint32_t)aDamageType) & aTypeMask) != 0;
+		}
+
 		enum Id : uint32_t
 		{
 			INVALID_ID,

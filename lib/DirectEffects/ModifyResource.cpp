@@ -98,7 +98,7 @@ namespace tpublic::DirectEffects
 
 		if(target != NULL && aSource != NULL)
 		{
-			Components::CombatPublic* combatPublic = target->GetComponent<Components::CombatPublic>();
+			const Components::CombatPublic* combatPublic = target->GetComponent<Components::CombatPublic>();
 
 			size_t resourceIndex;
 			if (combatPublic->GetResourceIndex(m_resourceId, resourceIndex))
@@ -110,10 +110,8 @@ namespace tpublic::DirectEffects
 					aSource->GetEntityId(),
 					aSource->GetEntityInstanceId(),
 					target->GetEntityInstanceId(),
-					combatPublic,
-					NULL,
 					resourceIndex,
-					(int32_t)m_function.EvaluateEntityInstance(aRandom, 1.0f, aSource),
+					(int32_t)m_function.EvaluateSourceAndTargetEntityInstances(aRandom, 1.0f, aSource, aTarget),
 					0,
 					m_silent);
 			}

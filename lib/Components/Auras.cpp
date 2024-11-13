@@ -202,6 +202,24 @@ namespace tpublic::Components
 		}
 	}
 
+	void			
+	Auras::OnDamageInput(
+		const EntityInstance*						aSource,
+		const EntityInstance*						aTarget,
+		DirectEffect::DamageType					aDamageType,
+		int32_t										aDamage,
+		CombatEvent::Id								aCombatEventId,
+		IEventQueue*								aEventQueue,
+		const IWorldView*							aWorldView,
+		IResourceChangeQueue*						aResourceChangeQueue) const
+	{
+		for (const std::unique_ptr<Entry>& entry : m_entries)
+		{
+			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
+				effect->OnDamageInput(aSource, aTarget, entry->m_sourceEntityInstance, aDamageType, aDamage, aCombatEventId, aEventQueue, aWorldView, aResourceChangeQueue);
+		}
+	}
+
 	int32_t			
 	Auras::FilterDamageInputOnUpdate(
 		DirectEffect::DamageType					aDamageType,

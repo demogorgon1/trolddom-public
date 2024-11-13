@@ -53,14 +53,23 @@ namespace tpublic
 				break;
 
 			case Requirement::TYPE_MUST_HAVE_LESS_HEALTH_THAN:
-				{
+			case Requirement::TYPE_MUST_HAVE_ZERO_HEALTH:
+			{
 					const Components::CombatPublic* combatPublic = entity->GetComponent<Components::CombatPublic>();
 					const Components::CombatPublic::ResourceEntry* health = combatPublic->GetResourceEntry(Resource::ID_HEALTH);
 					if(health != NULL && health->m_max > 0)
 					{
-						uint32_t percent = (health->m_current * 100) / health->m_max;
-						if(percent >= aRequirement->m_id)
-							return false;
+						if(aRequirement->m_type == Requirement::TYPE_MUST_HAVE_LESS_HEALTH_THAN)
+						{
+							uint32_t percent = (health->m_current * 100) / health->m_max;
+							if (percent >= aRequirement->m_id)
+								return false;
+						}
+						else if(aRequirement->m_type == Requirement::TYPE_MUST_HAVE_ZERO_HEALTH)
+						{
+							if(health->m_current != 0)
+								return false;
+						}
 					}
 				}
 				break;
