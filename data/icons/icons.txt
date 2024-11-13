@@ -464,4 +464,5 @@ sprites:
 
 	cursor: { position: [ 0 400 ] }
 	sprite icon_improved_soul_drain : { tags: [ icon ] }
+	sprite icon_skeletal_terror : { tags: [ icon ] }
 }

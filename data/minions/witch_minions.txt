@@ -53,7 +53,7 @@ ${
 	
 	cooldown .minor_demon_attack:
 	{
-		duration: 19
+		duration: 18
 	}
 	
 	ability .minor_demon_attack:
@@ -552,29 +552,43 @@ ${
 }
 
 ##############################################################################
-# Spirit
+# Skeletal Terror
 {
 	${
-		_name_template: .spirit
+		_name_template: .skeletal_terror
 		_creature_type: undead
-		_sprite: spirit
-		_sprite_dead: spirit_dead
-		_minion_modes: [ .spirit_aggressive .spirit_defensive .spirit_passive ]
-		_default_minion_mode: .spirit_defensive
+		_sprite: skeleton_2
+		_sprite_dead: skeleton_2_dead
+		_minion_modes: [ .skeletal_terror_aggressive .skeletal_terror_defensive .skeletal_terror_passive ]
+		_default_minion_mode: .skeletal_terror_defensive
 		_commands: [ move attack ]
-		_abilities: [ { id: .spirit_attack flags: [ auto ] } ]
-		_ability_prio: [ .spirit_attack ]
+		_has_rage: true
+
+		_abilities: 
+		[ 
+			{ id: .skeletal_terror_attack flags: [ auto ] } 
+			{ id: .skeletal_terror_claw flags: [ auto ] } 
+			{ id: .skeletal_terror_whirlwind flags: [ auto ] min_neighbor_hostiles: 2 } 			
+		]
+		
+		_ability_prio: 
+		[ 
+			.skeletal_terror_whirlwind
+			.skeletal_terror_claw
+			.skeletal_terror_attack 
+		]		
+		
 	}
 	
-	name_template .spirit:
+	name_template .skeletal_terror:
 	{
 		possibility<1>:
 		{
-			string: [ "Spirit" ]
+			string: [ "Skeletal Terror" ]
 		}
 	}
 
-	minion_mode .spirit_aggressive:
+	minion_mode .skeletal_terror_aggressive:
 	{
 		string: "Aggressive"
 		icon: icon_aggressive
@@ -584,7 +598,7 @@ ${
 		attack_threat_target: true
 	}
 
-	minion_mode .spirit_defensive:
+	minion_mode .skeletal_terror_defensive:
 	{
 		string: "Defensive"
 		icon: icon_defensive
@@ -593,35 +607,110 @@ ${
 		attack_threat_target: true
 	}
 
-	minion_mode .spirit_passive:
+	minion_mode .skeletal_terror_passive:
 	{
 		string: "Passive"
 		icon: icon_passive
 		follow_distance: 3
 	}
 	
-	cooldown .spirit_attack:
+	cooldown .skeletal_terror_attack:
 	{
-		duration: 19
+		duration: 22
 	}
 	
-	ability .spirit_attack:
+	ability .skeletal_terror_attack:
 	{
 		string: "Attack"
 		description: "Deals $damage$ damage to target."
 		flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
 		states: [ default in_combat ]
 		delay: 3
-		icon: icon_demon_attack
-		cooldowns: [ .skeleton_attack ]
+		icon: icon_sword_1
+		cooldowns: [ .skeletal_terror_attack ]
 		
 		direct_effect damage:
 		{
-			flags: [ can_be_critical ]
+			flags: [ can_be_critical generate_rage ]
 			damage_type: physical			
 			function: { expression: x x: weapon }		
 		}
 	}	
 	
-	entity spirit: !MINION{}
+	cooldown .skeletal_terror_claw:
+	{
+		duration: 50
+	}
+
+	ability .skeletal_terror_claw:
+	{
+		string: "Claw"
+		description: "Deals $damage$ damage to target. Generates a lot of threat."
+		range: 1	
+		cooldowns: [ global .skeletal_terror_claw ]
+		flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+		states: [ default in_combat ]
+		delay: 3
+		icon: icon_demon_attack
+		resource_cost rage: 10
+
+		direct_effect damage:
+		{
+			flags: [ can_be_critical ]
+			damage_type: physical
+			function: { expression: a_mul_x a: 0.8 x: weapon }		
+		}
+		
+		direct_effect threat:
+		{
+			apply_to: source
+			add: 25
+		}	
+	}
+	
+	cooldown .skeletal_terror_whirlwind:
+	{
+		duration: 50
+	}
+
+	particle_system .skeletal_terror_whirlwind:
+	{
+		particle:
+		{
+			sprites: [ effect_whirlwind ]
+			flags: [ attached blend_add ]
+			duration: 500
+			count: 1		
+			scale: 1.5
+			alpha: 0.6
+			rotation_rate: 1440
+		}
+	}
+
+	ability .skeletal_terror_whirlwind:
+	{
+		string: "Whirlwind"
+		description: "Inflicts $damage$ damage on up to 3 adjacent enemies."
+		range: 1	
+		cooldowns: [ global .skeletal_terror_whirlwind ]
+		flags: [ melee target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+		states: [ default in_combat ]
+		icon: icon_whirlwind
+		delay: 3
+		aoe_radius: 1
+		aoe_cap: 3
+		aoe_requirement target<must_not_be_in_state>: { id: dead }
+		resource_cost rage: 10
+		source_particle_system: .skeletal_terror_whirlwind	
+
+		direct_effect damage:
+		{
+			flags: [ can_be_critical ]
+			damage_type: physical
+			function: { expression: a_mul_x a: 1.3 x: weapon }	
+		}
+	}
+	
+		
+	entity skeletal_terror: !MINION{}
 }
