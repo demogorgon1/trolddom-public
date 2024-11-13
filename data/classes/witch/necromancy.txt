@@ -553,14 +553,50 @@ ability shackle_undeath:
 {
 	string: "Shackle Undeath"
 	description: "Target undead become unable to do anything for 20 seconds. Any damage cancels the effect."
+	range: 8
 	cooldowns: [ global spell_unholy_lockout ]
-	flags: [ spell target_other target_hostile ]
+	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
 	states: [ default in_combat ]
 	icon: icon_shackle_undeath
-	resource_cost mana: 10
-	cast_time: 20
-	range: 8
 	talent_tree: witch_necromancy
+	resource_cost mana: 20
+	cast_time: 20
+	requirement target<must_be_creature_type>: undead
+	
+	direct_effect apply_aura:
+	{
+		aura: shackle_undeath
+		threat: 5
+	}
+}
+
+aura shackle_undeath:
+{
+	string: "Shackle Undeath"
+	description: "Shackled."
+	particle_system: shackle_undeath
+	icon: icon_shackle_undeath
+	type: debuff
+	duration: 200
+	flags: [ unique magic cancel_on_damage single_target ]
+	aura_effect stun: { }
+}
+
+particle_system shackle_undeath:
+{
+	particle:
+	{
+		sprites: [ effect_frozen ]
+		flags: [ attached blend_add ]
+		count: 1
+		scale: 1
+		alpha: 0.45
+		fade_in: 250	
+		fade_out: 250
+		offset_x: 0.5
+		offset_y: 0.5	
+		color_mod: [ 255 255 0 ]
+	}
 }
 
 ###############################################################################

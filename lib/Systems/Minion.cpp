@@ -231,7 +231,7 @@ namespace tpublic::Systems
 
 		bool shouldDie = aEntityState != EntityState::ID_DEAD && combatPublic->GetResource(Resource::ID_HEALTH) == 0 && !auras->HasEffect(AuraEffect::ID_IMMORTALITY, NULL);
 
-		// Killing minion is delayed one tick after reaching 0 health
+		// Killing minion is delayed one tick after reaching 0 health (so we get a chance to resolve effects such as Cheat Death)
 		if (shouldDie && minionPrivate->m_shouldDie)
 		{
 			minionPrivate->m_castInProgress.reset();
