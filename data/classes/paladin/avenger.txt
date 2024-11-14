@@ -1,12 +1,6 @@
 # - Vengeance: Exorcism (Basic) - deals damage to undeads and demons.
 # - Vengeance: Reckoning (Basic) - melee attack that consumes mana and gives damage buff
 # - Vengeance: Divine Smite (Basic) - ranged attack
-# - Vengeance: Parry (Talent) - increase parry chance
-# - Vengeance: Blessing of War (Talent) - buff when dealing damage.
-# - Vengeance: Oath of Retribution (Talent) - increases damage done and reduces threat.
-# - Vengeance: Divine Grib (Talent) - bonus for 2H weapons.
-# - Vengeance: Relentless Assault (Talent) - critical strikes have a chance to cause the next divine smite or judgement to be instant
-# - Vengeance: Holy Storm (Talent) - whirlwind effect.
 
 talent_tree paladin_avenger:
 {
@@ -19,9 +13,9 @@ talent_tree paladin_avenger:
 		talent paladin_parry: "A"
 		talent paladin_blessing_of_war: "B"
 		talent paladin_oath_of_retribution: "C"
-		#talent paladin_divine_grip: "D"
-		#talent paladin_relentless_assault: "E"
-		#talent paladin_holy_storm: "F"
+		talent paladin_divine_grip: "D"
+		talent paladin_relentless_assault: "E"
+		talent paladin_holy_storm: "F"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_down: "|"
 	}
@@ -30,12 +24,98 @@ talent_tree paladin_avenger:
 	[
 		"A...B"
 		"....d"
-		"....C"
-		#"D.E.C"
-		#"..d.."
-		#"..F.."
+		"D.E.C"
+		"..d.."
+		"..F.."
 	]
 
+}
+
+###############################################################################
+# Exorcism
+
+particle_system exorcism:
+{
+	particle:
+	{
+		sprites: [ effect_lightning ]
+		flags: [ attached blend_add ]
+		duration: 500
+		count: 1		
+		scale: 0.8
+		alpha: 0.5
+		fade_in: 250
+		fade_out: 250
+		color_mod: [ 255 0 0 ]
+	}
+}
+
+ability exorcism:
+{
+	string: "Exorcism"
+	tags: [ ability_ranged ]
+	description: "Does $damage$ damage to target undead."
+	range: 6
+	cooldowns: [ global spell_holy_lockout ]
+	cast_time: 20
+	flags: [ spell offensive target_other target_hostile interruptable ]
+	states: [ default in_combat ]
+	icon: icon_exorcism
+	resource_cost mana: 12
+	target_particle_system: exorcism
+	delay: 3
+	talent_tree: paladin_avenger
+	requirement target<must_be_creature_type>: undead
+	
+	direct_effect damage:
+	{	
+		damage_type: holy
+		flags: [ can_be_critical is_magical ]
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.8 b: [ [ 1 25 ] [ 10 50 ] ] }			
+	}	
+}
+
+###############################################################################
+# Divine Smite
+
+particle_system divine_smite:
+{
+	particle:
+	{
+		sprites: [ effect_lightning ]
+		flags: [ attached blend_add ]
+		duration: 500
+		count: 1		
+		scale: 0.8
+		alpha: 0.5
+		fade_in: 250
+		fade_out: 250
+		color_mod: [ 255 255 0 ]
+	}
+}
+
+ability divine_smite:
+{
+	string: "Divine Smite"
+	tags: [ ability_ranged ]
+	description: "Does $damage$ damage to target."
+	range: 6
+	cooldowns: [ global spell_holy_lockout ]
+	cast_time: 20
+	flags: [ spell offensive target_other target_hostile interruptable ]
+	states: [ default in_combat ]
+	icon: icon_divine_smite
+	resource_cost mana: 12
+	target_particle_system: divine_smite
+	delay: 3
+	talent_tree: paladin_avenger
+	
+	direct_effect damage:
+	{	
+		damage_type: holy
+		flags: [ can_be_critical is_magical ]
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.7 b: [ [ 1 18 ] [ 10 36 ] ] }			
+	}	
 }
 
 ###############################################################################
@@ -219,6 +299,221 @@ ability oath_of_retribution:
 	direct_effect apply_aura:
 	{
 		aura: oath_of_retribution
+	}
+}
+
+###############################################################################
+# Divine Grip
+
+talent paladin_divine_grip:
+{
+	string: "Divine Grip"
+	icon: icon_divine_grip
+	prerequisites: [ ]	
+	talent_tree_points_required: 3
+	points:
+	[
+		{ aura: paladin_divine_grip_1 }
+		{ aura: paladin_divine_grip_2 }
+		{ aura: paladin_divine_grip_3 }
+	]
+}
+
+aura paladin_divine_grip_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases damage done with two-handed weapons by 3%."
+	aura_effect damage_output_modifier: 
+	{ 
+		type_mask: [ physical ]
+		requirement self<must_have_equipped_item_type_flags>: { id: [ two_handed ] }
+		multiplier: 1.03
+	}
+}
+
+aura paladin_divine_grip_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases damage done with two-handed weapons by 6%."
+	aura_effect damage_output_modifier: 
+	{ 
+		type_mask: [ physical ]
+		requirement self<must_have_equipped_item_type_flags>: { id: [ two_handed ] }
+		multiplier: 1.06
+	}
+}
+
+aura paladin_divine_grip_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases damage done with two-handed weapons by 9%."
+	aura_effect damage_output_modifier: 
+	{ 
+		type_mask: [ physical ]
+		requirement self<must_have_equipped_item_type_flags>: { id: [ two_handed ] }
+		multiplier: 1.09
+	}
+}
+
+###############################################################################
+# Relentless Assault
+
+talent paladin_relentless_assault:
+{
+	string: "Relentless Assault"
+	icon: icon_relentless_assault
+	prerequisites: [ ]	
+	talent_tree_points_required: 3
+	points:
+	[
+		{ aura: paladin_relentless_assault }
+	]
+}
+
+aura paladin_relentless_assault:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Your critical strikes cause your next Divine Smite or Judgement in the next 10 seconds to be instant cast."
+	aura_effect combat_event_trigger: 
+	{ 
+		combat_event<source>: critical
+		ability<self>: paladin_relentless_assault_trigger
+	}
+}
+
+ability paladin_relentless_assault_trigger:
+{
+	string: "Relentless Assault"
+	states: [ default in_combat ]
+	icon: icon_relentless_assault
+	
+	direct_effect apply_aura:
+	{
+		aura: paladin_relentless_assault_buff		
+	}
+}
+
+aura paladin_relentless_assault_buff:
+{
+	string: "Relentless Assault"
+	type: buff
+	icon: icon_relentless_assault
+	duration: 100
+	flags: [ unique charged magic ]
+	charges: 1
+	aura_effect cast_modifier: 
+	{ 
+		ability_flags: [ spell ]
+		cast_time_multiplier: 0
+		use_charge: true
+		abilities: [ judgement divine_smite ]
+	}
+}
+
+###############################################################################
+# Holy Storm
+
+talent paladin_holy_storm:
+{
+	string: "Holy Storm"
+	icon: icon_holy_storm
+	prerequisites: [ paladin_relentless_assault ]	
+	talent_tree_points_required: 6
+	points:
+	[
+		{ ability: holy_storm }
+	]
+}
+
+cooldown holy_storm:
+{
+	duration: 50
+}
+
+particle_system holy_storm:
+{
+	particle:
+	{
+		sprites: [ effect_whirlwind ]
+		flags: [ attached blend_add ]
+		duration: 500
+		count: 1		
+		scale: 1.5
+		alpha: 0.6
+		rotation_rate: 1440
+	}
+}
+
+ability holy_storm:
+{
+	string: "Holy Storm"
+	description: "Inflicts $damage$ damage on up to 3 adjacent enemies."
+	range: 1	
+	cooldowns: [ global holy_storm ]
+	flags: [ melee target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+	states: [ default in_combat ]
+	icon: icon_holy_storm
+	delay: 3
+	aoe_radius: 1
+	aoe_cap: 3
+	aoe_requirement target<must_not_be_in_state>: { id: dead }
+	resource_cost mana: 12
+	talent_tree: paladin_avenger
+	source_particle_system: holy_storm
+
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: holy
+		function: { expression: x x: weapon }		
+	}
+}
+
+###############################################################################
+# Reckoning
+
+cooldown reckoning:
+{
+	duration: 50
+}
+
+particle_system reckoning:
+{
+	particle:
+	{
+		sprites: [ effect_melee_swing_0 effect_melee_swing_1 effect_melee_swing_2 effect_melee_swing_3 effect_melee_swing_4 ]
+		flags: [ attached face_target no_loop blend_add ]
+		sprite_interval: 33
+		duration: 165
+		count: 1	
+		alpha: 0.4
+		color_mod: [ 255 255 0 ]
+	}
+}
+
+ability reckoning:
+{
+	string: "Reckoning"
+	description: "Deals $damage$ damage to target."
+	range: 1	
+	cooldowns: [ global reckoning ]
+	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+	states: [ default in_combat ]
+	icon: icon_reckoning
+	delay: 3
+	resource_cost mana: 10
+	talent_tree: paladin_avenger
+	melee_particle_system: reckoning
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 8 ] [ 10 16 ] ] }
 	}
 }
 

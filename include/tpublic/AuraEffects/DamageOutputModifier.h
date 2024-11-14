@@ -2,6 +2,7 @@
 
 #include "../AuraEffectBase.h"
 #include "../DirectEffect.h"
+#include "../Requirement.h"
 
 namespace tpublic
 {
@@ -27,6 +28,13 @@ namespace tpublic
 			}
 
 			// AuraEffectBase implementation
+			int32_t			FilterDamageOutput(
+								const Manifest*				aManifest,
+								const EntityInstance*		aSource,
+								const EntityInstance*		aTarget,
+								DirectEffect::DamageType	aDamageType,
+								int32_t						aDamage) const override;
+
 			void
 			FromSource(
 				const SourceNode*		aSource) override
@@ -65,6 +73,10 @@ namespace tpublic
 						m_multiplierDenominator = aChild->GetInt32();
 						TP_VERIFY(m_multiplierDenominator != 0, aChild->m_debugInfo, "Multiplier denominator can't be zero.");
 					}
+					else if(aChild->m_tag == "requirement")
+					{
+						m_requirements.push_back(Requirement(aChild));
+					}
 					else
 					{
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -80,6 +92,7 @@ namespace tpublic
 				aStream->WriteUInt(m_typeMask);
 				aStream->WriteInt(m_multiplierNumerator);
 				aStream->WriteInt(m_multiplierDenominator);
+				aStream->WriteObjects(m_requirements);
 			}
 
 			bool
@@ -94,6 +107,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadInt(m_multiplierDenominator))
 					return false;
+				if (!aStream->ReadObjects(m_requirements))
+					return false;
 				return true;
 			}
 
@@ -106,30 +121,16 @@ namespace tpublic
 				t->m_typeMask = m_typeMask;
 				t->m_multiplierNumerator = m_multiplierNumerator;
 				t->m_multiplierDenominator = m_multiplierDenominator;
+				t->m_requirements = m_requirements;
 
 				return t;
 			}
 
-			int32_t
-			FilterDamageOutput(
-				DirectEffect::DamageType	aDamageType,
-				int32_t						aDamage) const override
-			{
-				int32_t damage = aDamage;
-				
-				if(m_typeMask & (1 << (uint32_t)aDamageType))
-				{
-					damage *= m_multiplierNumerator;
-					damage /= m_multiplierDenominator;
-				}
-
-				return damage;
-			}
-
 			// Public data
-			uint32_t				m_typeMask = 0;
-			int32_t					m_multiplierNumerator = 1;
-			int32_t					m_multiplierDenominator = 1;
+			uint32_t					m_typeMask = 0;
+			int32_t						m_multiplierNumerator = 1;
+			int32_t						m_multiplierDenominator = 1;
+			std::vector<Requirement>	m_requirements;
 		};
 
 	}

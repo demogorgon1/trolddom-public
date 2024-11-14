@@ -44,6 +44,8 @@ namespace tpublic
 						m_abilityFlags = Data::Ability::GetFlags(aChild);
 					else if (aChild->m_name == "use_charge")
 						m_useCharge = aChild->GetBool();
+					else if(aChild->m_name == "abilities")
+						aChild->GetIdArray(DataType::ID_ABILITY, m_abilityIds);
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 				});
@@ -57,6 +59,7 @@ namespace tpublic
 				aStream->WritePOD(m_abilityFlags);
 				aStream->WriteFloat(m_castTimeModifier);
 				aStream->WriteBool(m_useCharge);
+				aStream->WriteUInts(m_abilityIds);
 			}
 
 			bool
@@ -71,6 +74,8 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadBool(m_useCharge))
 					return false;
+				if(!aStream->ReadUInts(m_abilityIds))
+					return false;
 				return true;
 			}
 
@@ -83,6 +88,7 @@ namespace tpublic
 				t->m_abilityFlags = m_abilityFlags;
 				t->m_castTimeModifier = m_castTimeModifier;
 				t->m_useCharge = m_useCharge;
+				t->m_abilityIds = m_abilityIds;
 
 				return t;
 			}
@@ -94,9 +100,10 @@ namespace tpublic
 									int32_t&						aCastTime) override;
 
 			// Public data
-			uint32_t	m_abilityFlags = 0;
-			float		m_castTimeModifier = 1.0f;
-			bool		m_useCharge = false;
+			uint32_t				m_abilityFlags = 0;
+			float					m_castTimeModifier = 1.0f;
+			bool					m_useCharge = false;
+			std::vector<uint32_t>	m_abilityIds;
 		};
 
 	}

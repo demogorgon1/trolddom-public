@@ -51,6 +51,12 @@ sprites:
 	sprite effect_drain_life_0: { flags: [ centered ] }
 	sprite effect_drain_life_1: { flags: [ centered ] }
 	sprite effect_drain_life_2: { flags: [ centered ] }
+	sprite effect_consecrate_0: { }
+	sprite effect_consecrate_1: { }
+	sprite effect_consecrate_2: { }
+	sprite effect_consecrate_fade_0: { }
+	sprite effect_consecrate_fade_1: { }
+	sprite effect_consecrate_fade_2: { }
 	
 	cursor: { position: [ 0 20 ] }	
 	size: { width: 24 height: 24 }

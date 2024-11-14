@@ -44,6 +44,44 @@ namespace tpublic
 
 			switch(aRequirement->m_type)
 			{
+			case Requirement::TYPE_MUST_HAVE_ITEM_TYPE_EQUIPPED:
+				{
+					if (!entity->IsPlayer())
+						return false;
+
+					const Components::EquippedItems* equippedItems = entity->GetComponent<Components::EquippedItems>();
+					bool isEquipped = false;
+
+					for(uint32_t i = 1; i < (uint32_t)EquipmentSlot::NUM_IDS; i++)
+					{
+						const ItemInstance& item = equippedItems->m_slots.m_items[i];
+						if(item.IsSet())
+						{
+							const Data::Item* itemData = aManifest->GetById<Data::Item>(item.m_itemId);
+							if(itemData->m_itemType == aRequirement->m_id)
+							{
+								isEquipped = true;
+								break;
+							}
+						}
+					}
+
+					if(!isEquipped)
+						return false;
+				}
+				break;
+
+			case Requirement::TYPE_MUST_HAVE_EQUIPPED_ITEM_TYPE_FLAGS:
+				{
+					if (!entity->IsPlayer())
+						return false;
+
+					const Components::PlayerPrivate* playerPrivate = entity->GetComponent<Components::PlayerPrivate>();
+					if((playerPrivate->m_equippedItemTypeFlags & (uint16_t)aRequirement->m_id) != (uint16_t)aRequirement->m_id)
+						return false;
+				}
+				break;
+
 			case Requirement::TYPE_MUST_BE_CREATURE_TYPE:
 				{
 					const Components::CombatPublic* combatPublic = entity->GetComponent<Components::CombatPublic>();

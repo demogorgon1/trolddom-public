@@ -74,7 +74,8 @@ class paladin:
 			
 			unlock_abilities:
 			[
-				attack				
+				attack		
+				reckoning
 				
 				!DEFAULT_ABILITIES{}
 			]
@@ -134,6 +135,7 @@ class paladin:
 			
 			unlock_abilities:
 			[
+				divine_smite
 			]
 			
 			stats:
@@ -169,6 +171,7 @@ class paladin:
 			
 			unlock_abilities:
 			[
+				exorcism
 			]
 			
 			stats:

@@ -2,6 +2,7 @@
 
 #include "EntityState.h"
 #include "IReader.h"
+#include "ItemType.h"
 #include "IWriter.h"
 
 namespace tpublic
@@ -44,7 +45,9 @@ namespace tpublic
 			TYPE_MUST_HAVE_NEGATIVE_REPUTATION,
 			TYPE_MUST_HAVE_AURA_GROUP,
 			TYPE_MUST_BE_CREATURE_TYPE,
-			TYPE_MUST_HAVE_ZERO_HEALTH
+			TYPE_MUST_HAVE_ZERO_HEALTH,
+			TYPE_MUST_HAVE_ITEM_TYPE_EQUIPPED,
+			TYPE_MUST_HAVE_EQUIPPED_ITEM_TYPE_FLAGS
 		};
 
 		static DataType::Id
@@ -110,6 +113,24 @@ namespace tpublic
 				EntityState::Id entityState = EntityState::StringToId(aSource->GetIdentifier());
 				TP_VERIFY(entityState != EntityState::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid entity state.", aSource->GetIdentifier());
 				return (uint32_t)entityState;
+			}
+			else if(aType == TYPE_MUST_HAVE_ITEM_TYPE_EQUIPPED)
+			{
+				ItemType::Id itemType = ItemType::StringToId(aSource->GetIdentifier());
+				TP_VERIFY(itemType != ItemType::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid item type.", aSource->GetIdentifier());
+				return (uint32_t)itemType;
+			}
+			else if(aType == TYPE_MUST_HAVE_EQUIPPED_ITEM_TYPE_FLAGS)
+			{
+				uint16_t flags = 0;
+				aSource->GetArray()->ForEachChild([&](
+					const SourceNode* aChild)
+				{
+					uint16_t flag = ItemType::StringToFlag(aChild->GetIdentifier());
+					TP_VERIFY(flag != 0, aChild->m_debugInfo, "'%s' is not a valid item type flag.", aChild->GetIdentifier());
+					flags |= flag;
+				});				
+				return (uint32_t)flags;
 			}
 
 			return aSource->m_sourceContext->m_persistentIdTable->GetId(GetDataType(aType), aSource->GetIdentifier());
@@ -185,6 +206,10 @@ namespace tpublic
 				m_type = TYPE_MUST_BE_CREATURE_TYPE;
 			else if(typeString == "must_have_zero_health")
 				m_type = TYPE_MUST_HAVE_ZERO_HEALTH;
+			else if (typeString == "must_have_item_type_equipped")
+				m_type = TYPE_MUST_HAVE_ITEM_TYPE_EQUIPPED;
+			else if (typeString == "must_have_equipped_item_type_flags")
+				m_type = TYPE_MUST_HAVE_EQUIPPED_ITEM_TYPE_FLAGS;
 			else
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid type.", aSource->m_annotation->GetIdentifier());
 

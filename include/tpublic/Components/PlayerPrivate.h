@@ -105,6 +105,7 @@ namespace tpublic
 				m_professionSkillUseEvents.clear();
 				m_errorNotification = ErrorNotification::INVALID_ID;
 				m_abilityModifierList = NULL;
+				m_equippedItemTypeFlags = 0;
 			}
 
 			// Public data
@@ -135,6 +136,8 @@ namespace tpublic
 			ErrorNotification::Id											m_errorNotification = ErrorNotification::INVALID_ID;
 
 			const tpublic::AbilityModifierList*								m_abilityModifierList = NULL;
+
+			uint16_t														m_equippedItemTypeFlags = 0;
 		};
 	}
 

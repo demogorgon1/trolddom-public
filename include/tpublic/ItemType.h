@@ -117,6 +117,34 @@ namespace tpublic
 			return INVALID_ID;
 		}
 
+		inline constexpr uint16_t
+		StringToFlag(
+			const char*		aString)
+		{
+			std::string_view s(aString);
+			if (s == "sword")
+				return FLAG_SWORD;
+			if (s == "mace")
+				return FLAG_MACE;
+			if (s == "axe")
+				return FLAG_AXE;
+			if (s == "knife")
+				return FLAG_KNIFE;
+			if (s == "two_handed")
+				return FLAG_TWO_HANDED;
+			if (s == "shield")
+				return FLAG_SHIELD;
+			if (s == "weapon")
+				return FLAG_WEAPON;
+			if (s == "ranged")
+				return FLAG_RANGED;
+			if (s == "no_restrictions")
+				return FLAG_NO_RESTRICTIONS;
+			if (s == "no_tool_tip")
+				return FLAG_NO_TOOLTIP;
+			return 0;
+		}
+
 	}
 
 }

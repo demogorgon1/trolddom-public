@@ -477,7 +477,7 @@ sprites:
 	sprite icon_oath_of_healing : { tags: [ icon ] }
 	sprite icon_divine_grip : { tags: [ icon ] }
 	sprite icon_relentless_assault : { tags: [ icon ] }
-	sprite icon_divine_storm : { tags: [ icon ] }	
+	sprite icon_holy_storm : { tags: [ icon ] }	
 	sprite icon_flash_heal : { tags: [ icon ] }
 	
 	cursor: { position: [ 0 416 ] }
@@ -494,6 +494,7 @@ sprites:
 	sprite icon_blessing_of_protection : { tags: [ icon ] }
 	sprite icon_aura_of_protection : { tags: [ icon ] }
 	sprite icon_consecrate : { tags: [ icon ] }
+	sprite icon_divine_protection : { tags: [ icon ] }
 }
 
 

@@ -169,6 +169,9 @@ namespace tpublic
 									DirectEffect::DamageType		/*aDamageType*/,
 									int32_t							aDamage) const { return aDamage; }
 		virtual int32_t			FilterDamageOutput(
+									const Manifest*					/*aManifest*/,
+									const EntityInstance*			/*aSource*/,
+									const EntityInstance*			/*aTarget*/,
 									DirectEffect::DamageType		/*aDamageType*/,
 									int32_t							aDamage) const { return aDamage; }
 		virtual int32_t			FilterHealInput(

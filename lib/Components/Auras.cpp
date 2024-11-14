@@ -129,6 +129,9 @@ namespace tpublic::Components
 
 	int32_t
 	Auras::FilterDamageOutput(
+		const Manifest*								aManifest,
+		const EntityInstance*						aSource,
+		const EntityInstance*						aTarget,
 		DirectEffect::DamageType					aDamageType,
 		int32_t										aDamage) const
 	{
@@ -137,7 +140,7 @@ namespace tpublic::Components
 		for (const std::unique_ptr<Entry>& entry : m_entries)
 		{
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
-				damage = effect->FilterDamageOutput(aDamageType, damage);
+				damage = effect->FilterDamageOutput(aManifest, aSource, aTarget, aDamageType, damage);
 		}
 						
 		return damage;

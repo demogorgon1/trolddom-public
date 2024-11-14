@@ -1,3 +1,7 @@
+# - Tank: Taunt (Basic)
+# - Tank: Defend (Basic) - redirect damage done to target to you.
+# - Tank: Judgement (Basic) - ranged stun.
+
 talent_tree paladin_guardian:
 {
 	string: "Guardian"
@@ -6,11 +10,395 @@ talent_tree paladin_guardian:
 	
 	map_palette:
 	{
+		talent paladin_blessing_of_protection: "A"
+		talent paladin_oath_of_protection: "B"
+		talent paladin_divine_protection: "C"
+		talent paladin_aura_of_protection: "D"
+		talent paladin_shield_specialization: "E"
+		talent paladin_consecrate: "F"
+		sprite talent_tree_down_arrow: "d"
+		sprite talent_tree_down: "|"		
 	}
 	
 	map:
 	[
+		"A.C.E"
+		"d...d"
+		"B...D"
+		"d...."
+		"F...."
 	]
-	
 }
 
+###############################################################################
+# Divine Protection
+
+talent paladin_divine_protection:
+{
+	string: "Divine Protection"
+	icon: icon_divine_protection
+	prerequisites: [ ]	
+	talent_tree_points_required: 0
+	points:
+	[
+		{ aura: paladin_divine_protection_1 }
+		{ aura: paladin_divine_protection_2 }
+	]
+}
+
+aura paladin_divine_protection_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your armor by 7%."
+	stat_modifiers: { armor: { add_percent: 7 } }
+}
+
+aura paladin_divine_protection_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your armor by 14%."
+	stat_modifiers: { armor: { add_percent: 14 } }
+}
+
+###############################################################################
+# Shield Specialization
+
+talent paladin_shield_specialization:
+{
+	string: "Shield Specialization"
+	icon: icon_block
+	prerequisites: [ ]	
+	talent_tree_points_required: 0
+	points:
+	[
+		{ aura: paladin_shield_specialization_1 }
+		{ aura: paladin_shield_specialization_2 }
+		{ aura: paladin_shield_specialization_3 }
+	]
+}
+
+aura paladin_shield_specialization_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your chance to block by 3%. Increases amount blocked by 20%."
+	stat_modifiers: { block_chance: { add: 3 } block_value: { add_percent: 20 } }
+}
+
+aura paladin_shield_specialization_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your chance to block by 6%. Increases amount blocked by 40%."
+	stat_modifiers: { block_chance: { add: 6 } block_value: { add_percent: 40 } }
+}
+
+aura paladin_shield_specialization_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your chance to block by 9%. Increases amount blocked by 60%."
+	stat_modifiers: { block_chance: { add: 9 } block_value: { add_percent: 60 } }
+}
+
+###############################################################################
+# Blessing of the Defender
+
+talent paladin_blessing_of_protection:
+{
+	string: "Blessing of the Defender"
+	icon: icon_blessing_of_protection
+	prerequisites: [ ]	
+	talent_tree_points_required: 0
+	points:
+	[
+		{ aura: paladin_blessing_of_protection_1 }
+		{ aura: paladin_blessing_of_protection_2 }
+	]
+}
+
+aura paladin_blessing_of_protection_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Your Strength is increased by 30% for 10 seconds after you dodge an attack."
+	aura_effect combat_event_trigger: 
+	{ 
+		combat_event<target>: dodge
+		ability<self>: paladin_blessing_of_protection_trigger_1		
+	}
+}
+
+ability paladin_blessing_of_protection_trigger_1:
+{
+	string: "Blessing of the Defender"
+	states: [ default in_combat ]
+	icon: icon_blessing_of_protection
+	
+	direct_effect apply_aura:
+	{
+		aura: paladin_blessing_of_protection_buff_1		
+	}
+}
+
+aura paladin_blessing_of_protection_buff_1:
+{
+	string: "Blessing of Protection"
+	type: buff
+	icon: icon_blessing_of_protection
+	duration: 100
+	stat_modifiers:
+	{
+		strength: { add_percent: 30 }
+	}
+}
+
+aura paladin_blessing_of_protection_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Your Strength is increased by 60% for 10 seconds after you dodge an attack."
+	aura_effect combat_event_trigger: 
+	{ 
+		combat_event<target>: dodge
+		ability<self>: paladin_blessing_of_protection_trigger_2	
+	}
+}
+
+ability paladin_blessing_of_protection_trigger_2:
+{
+	string: "Blessing of the Defender"
+	states: [ default in_combat ]
+	icon: icon_blessing_of_protection
+	
+	direct_effect apply_aura:
+	{
+		aura: paladin_blessing_of_protection_buff_2	
+	}
+}
+
+aura paladin_blessing_of_protection_buff_2:
+{
+	string: "Blessing of Protection"
+	type: buff
+	icon: icon_blessing_of_protection
+	duration: 100
+	stat_modifiers:
+	{
+		strength: { add_percent: 60 }
+	}
+}
+
+###############################################################################
+# Oath of Protection
+
+talent paladin_oath_of_protection:
+{
+	string: "Oath of Protection"
+	icon: icon_oath_of_protection
+	prerequisites: [ paladin_blessing_of_protection ]	
+	talent_tree_points_required: 3
+	points:
+	[
+		{ ability: paladin_oath_of_protection }
+	]
+}
+
+aura paladin_oath_of_protection:
+{
+	string: "Oath of Protection"
+	flags: [ persist_in_death indefinite unique ]
+	aura_group: paladin_oaths
+	type: buff
+	description: "+50% Threat"
+	stat_modifiers: { block_chance: { add: 10 } }
+	icon: icon_oath_of_protection
+	aura_effect threat_modifier: { multiplier: 1.5 }
+}
+
+ability paladin_oath_of_protection:
+{
+	string: "Oath of Protection"
+	description: "Increases your chance to block by 10%. Increases threat generated by 50%. You can only have one oath active at a time."
+	cooldowns: [ global spell_holy_lockout ]
+	flags: [ spell target_self ]
+	states: [ default in_combat ]
+	icon: icon_oath_of_protection
+	delay: 3
+	resource_cost mana: 10
+	talent_tree: paladin_guardian
+	
+	direct_effect apply_aura:
+	{
+		aura: paladin_oath_of_protection
+	}
+}
+
+###############################################################################
+# Divine Restoration
+
+talent paladin_aura_of_protection:
+{
+	string: "Divine Restoration"
+	icon: icon_aura_of_protection
+	prerequisites: [ paladin_shield_specialization ]	
+	talent_tree_points_required: 3
+	points:
+	[
+		{ aura: paladin_aura_of_protection_1 }
+		{ aura: paladin_aura_of_protection_2 }
+	]
+}
+
+aura paladin_aura_of_protection_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "You restore 5% of your mana after blocking an attack."
+	aura_effect combat_event_trigger: 
+	{ 
+		combat_event<target>: block
+		ability<target>: paladin_aura_of_protection_trigger_1		
+	}
+}
+
+ability paladin_aura_of_protection_trigger_1:
+{
+	string: "Divine Restoration"
+	states: [ default in_combat ]
+	icon: icon_aura_of_protection
+	
+	direct_effect modify_resource:
+	{
+		resource: mana
+		function: { expression: a_mul_x a: 0.05 x: mana_max }		
+	}
+}
+
+aura paladin_aura_of_protection_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "You restore 10% of your mana after blocking an attack."
+	aura_effect combat_event_trigger: 
+	{ 
+		combat_event<target>: block
+		ability<target>: paladin_aura_of_protection_trigger_2
+	}
+}
+
+ability paladin_aura_of_protection_trigger_2:
+{
+	string: "Divine Restoration"
+	states: [ default in_combat ]
+	icon: icon_aura_of_protection
+	
+	direct_effect modify_resource:
+	{
+		resource: mana
+		function: { expression: a_mul_x a: 0.1 x: mana_max }		
+	}
+}
+
+###############################################################################
+# Consecrate
+
+talent paladin_consecrate:
+{
+	string: "Consecrate"
+	icon: icon_consecrate
+	talent_tree_points_required: 6
+	prerequisites: [ paladin_oath_of_protection ]
+	points:
+	[
+		{ ability: consecrate }
+	]
+}
+
+cooldown consecrate:
+{
+	duration: 300
+}
+
+ability consecrate:
+{
+	string: "Consecrate"
+	description: "Consecrates the ground for 12 seconds. This does damage and extra threat to affected enemies."	
+	range: 7
+	cast_time: 15
+	flags: [ spell target_aoe interruptable ]
+	states: [ default in_combat ]
+	icon: icon_consecrate
+	cooldowns: [ global consecrate spell_holy_lockout ]	
+	aoe_radius: 2
+	resource_cost mana: 25
+	talent_tree: paladin_guardian
+	
+	aoe_entity_spawn consecrate:
+	{
+		probability: 100
+		init_state: spawning
+		type: everywhere
+	}
+}
+
+ability consecrate_tick:
+{
+	string: "Consecrate"
+	flags: [ offensive always_in_range always_in_line_of_sight target_hostile ]
+	icon: icon_consecrate
+	direct_effect damage:
+	{
+		flags: [ is_magical ]
+		damage_type: holy
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 7 ] [ 10 14 ] ] }													
+	}
+	direct_effect threat:
+	{
+		add: 20
+		apply_to: source
+	}	
+}
+
+entity consecrate:
+{
+	systems: [ environment ]
+	
+	components:
+	{
+		position: { }		
+		owner: { }
+		environment: 
+		{
+			tick_interval: 15
+			duration: 120 
+			ability: consecrate_tick
+		}		
+		sprite<static>: 
+		{ 
+			animations: 
+			[
+				{ 
+					states: [ default ] 
+					frames: [ effect_consecrate_0 effect_consecrate_1 effect_consecrate_2 ] 
+					frame_delay: 180
+					ping_pong: true
+					random_start_frame: false 
+					z_offset: -1
+				}
+				
+				{ 
+					states: [ spawning despawning ] 
+					frames: [ effect_consecrate_fade_0 effect_consecrate_fade_1 effect_consecrate_fade_2 ] 
+					frame_delay: 180
+					ping_pong: true
+					random_start_frame: false
+					z_offset: -1
+				}				
+			]			
+		}
+		
+	}
+}

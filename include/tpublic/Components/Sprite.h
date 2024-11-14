@@ -52,6 +52,10 @@ namespace tpublic
 						{
 							m_repeat = aChild->GetBool();
 						}
+						else if (aChild->m_name == "ping_pong")
+						{
+							m_pingPong = aChild->GetBool();
+						}
 						else if (aChild->m_name == "z_offset")
 						{
 							m_zOffset = aChild->GetInt32();
@@ -73,6 +77,7 @@ namespace tpublic
 					aWriter->WritePOD(m_randomStartFrame);
 					aWriter->WritePOD(m_repeat);
 					aWriter->WriteInt(m_zOffset);
+					aWriter->WritePOD(m_pingPong);
 				}
 
 				bool
@@ -91,6 +96,8 @@ namespace tpublic
 						return false;
 					if (!aReader->ReadInt(m_zOffset))
 						return false;
+					if (!aReader->ReadPOD(m_pingPong))
+						return false;
 					return true;
 				}
 
@@ -101,6 +108,7 @@ namespace tpublic
 				bool							m_randomStartFrame = false;
 				bool							m_repeat = true;
 				int32_t							m_zOffset = 0;
+				bool							m_pingPong = false;
 			};
 
 			enum Field

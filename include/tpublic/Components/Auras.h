@@ -149,6 +149,9 @@ namespace tpublic
 								DirectEffect::DamageType					aDamageType,
 								int32_t										aDamage) const;
 			int32_t			FilterDamageOutput(
+								const Manifest*								aManifest,
+								const EntityInstance*						aSource,
+								const EntityInstance*						aTarget,				
 								DirectEffect::DamageType					aDamageType,
 								int32_t										aDamage) const;
 			int32_t			FilterHealInput(

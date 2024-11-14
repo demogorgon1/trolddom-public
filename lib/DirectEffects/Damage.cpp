@@ -171,7 +171,7 @@ namespace tpublic::DirectEffects
 		}
 
 		if (sourceAuras != NULL)
-			damage = sourceAuras->FilterDamageOutput(damageType, damage);
+			damage = sourceAuras->FilterDamageOutput(aManifest, aSource, aTarget, damageType, damage);
 
 		if (targetAuras != NULL)
 			damage = targetAuras->FilterDamageInput(damageType, damage);
