@@ -1,0 +1,224 @@
+# - Vengeance: Exorcism (Basic) - deals damage to undeads and demons.
+# - Vengeance: Reckoning (Basic) - melee attack that consumes mana and gives damage buff
+# - Vengeance: Divine Smite (Basic) - ranged attack
+# - Vengeance: Parry (Talent) - increase parry chance
+# - Vengeance: Blessing of War (Talent) - buff when dealing damage.
+# - Vengeance: Oath of Retribution (Talent) - increases damage done and reduces threat.
+# - Vengeance: Divine Grib (Talent) - bonus for 2H weapons.
+# - Vengeance: Relentless Assault (Talent) - critical strikes have a chance to cause the next divine smite or judgement to be instant
+# - Vengeance: Holy Storm (Talent) - whirlwind effect.
+
+talent_tree paladin_avenger:
+{
+	string: "Avenger"
+	description: "."
+	icon: icon_avenger
+	
+	map_palette:
+	{
+		talent paladin_parry: "A"
+		talent paladin_blessing_of_war: "B"
+		talent paladin_oath_of_retribution: "C"
+		#talent paladin_divine_grip: "D"
+		#talent paladin_relentless_assault: "E"
+		#talent paladin_holy_storm: "F"
+		sprite talent_tree_down_arrow: "d"
+		sprite talent_tree_down: "|"
+	}
+	
+	map:
+	[
+		"A...B"
+		"....d"
+		"....C"
+		#"D.E.C"
+		#"..d.."
+		#"..F.."
+	]
+
+}
+
+###############################################################################
+# Parry
+
+talent paladin_parry:
+{
+	string: "Parry"
+	icon: icon_parry
+	prerequisites: [ ]	
+	talent_tree_points_required: 0
+	points:
+	[
+		{ aura: paladin_parry_1 }
+		{ aura: paladin_parry_2 }
+		{ aura: paladin_parry_3 }
+	]
+}
+
+aura paladin_parry_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your chance to parry by 2%."
+	stat_modifiers: { parry_chance: { add: 2 } }
+}
+
+aura paladin_parry_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your chance to parry by 4%."
+	stat_modifiers: { parry_chance: { add: 4 } }
+}
+
+aura paladin_parry_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your chance to parry by 6%."
+	stat_modifiers: { parry_chance: { add: 6 } }
+}
+
+###############################################################################
+# Blessing of War
+
+talent paladin_blessing_of_war:
+{
+	string: "Blessing of War"
+	icon: icon_blessing_of_war
+	prerequisites: [ ]	
+	talent_tree_points_required: 0
+	points:
+	[
+		{ aura: paladin_blessing_of_war_1 }
+		{ aura: paladin_blessing_of_war_2 }
+	]
+}
+
+aura paladin_blessing_of_war_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Your chance to get a critical strike is increased by 15% for 10 seconds after target dodges or parries your attack."
+	aura_effect combat_event_trigger: 
+	{ 
+		combat_event<source>: dodge
+		ability<self>: paladin_blessing_of_war_trigger_1		
+	}
+	aura_effect combat_event_trigger: 
+	{ 
+		combat_event<source>: parry
+		ability<self>: paladin_blessing_of_war_trigger_1		
+	}
+}
+
+ability paladin_blessing_of_war_trigger_1:
+{
+	string: "Blessing of War"
+	states: [ default in_combat ]
+	icon: icon_blessing_of_war
+	
+	direct_effect apply_aura:
+	{
+		aura: paladin_blessing_of_war_buff_1		
+	}
+}
+
+aura paladin_blessing_of_war_buff_1:
+{
+	string: "Blessing of War"
+	type: buff
+	icon: icon_blessing_of_war
+	duration: 100
+	stat_modifiers:
+	{
+		phys_crit_chance: { add: 15 }
+	}
+}
+
+aura paladin_blessing_of_war_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Your chance to get a critical strike is increased by 30% for 10 seconds after target dodges or parries your attack."
+	aura_effect combat_event_trigger: 
+	{ 
+		combat_event<source>: parry
+		ability<self>: paladin_blessing_of_war_trigger_2		
+	}
+	aura_effect combat_event_trigger: 
+	{ 
+		combat_event<source>: dodge
+		ability<self>: paladin_blessing_of_war_trigger_2		
+	}
+}
+
+ability paladin_blessing_of_war_trigger_2:
+{
+	string: "Blessing of War"
+	states: [ default in_combat ]
+	icon: icon_blessing_of_war
+	
+	direct_effect apply_aura:
+	{
+		aura: paladin_blessing_of_war_buff_2		
+	}
+}
+
+aura paladin_blessing_of_war_buff_2:
+{
+	string: "Blessing of War"
+	type: buff
+	icon: icon_blessing_of_war
+	duration: 100
+	stat_modifiers:
+	{
+		phys_crit_chance: { add: 30 }
+	}
+}
+
+###############################################################################
+# Oath of Retribution
+
+talent paladin_oath_of_retribution:
+{
+	string: "Oath of Retribution"
+	icon: icon_oath_of_retribution
+	prerequisites: [ paladin_blessing_of_war ]	
+	talent_tree_points_required: 3
+	points:
+	[
+		{ ability: oath_of_retribution }
+	]
+}
+
+aura oath_of_retribution:
+{
+	string: "Oath of Retribution"
+	flags: [ persist_in_death indefinite unique ]
+	aura_group: paladin_oaths
+	type: buff
+	description: "-20% Threat"
+	stat_modifiers: { phys_crit_chance: { add: 5 } }
+	icon: icon_oath_of_retribution
+	aura_effect threat_modifier: { multiplier: 0.8 }
+}
+
+ability oath_of_retribution:
+{
+	string: "Oath of Retribution"
+	description: "Increases your chance to get a critical strike by 5%. Reduces threat generated by 20%. You can only have one oath active at a time."
+	cooldowns: [ global spell_holy_lockout ]
+	flags: [ spell target_self ]
+	states: [ default in_combat ]
+	icon: icon_oath_of_retribution
+	delay: 3
+	resource_cost mana: 10
+	talent_tree: paladin_avenger
+	
+	direct_effect apply_aura:
+	{
+		aura: oath_of_retribution
+	}
+}
+

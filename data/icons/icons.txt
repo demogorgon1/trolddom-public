@@ -465,4 +465,36 @@ sprites:
 	cursor: { position: [ 0 400 ] }
 	sprite icon_improved_soul_drain : { tags: [ icon ] }
 	sprite icon_skeletal_terror : { tags: [ icon ] }
+	sprite icon_avenger : { tags: [ icon ] }
+	sprite icon_healer : { tags: [ icon ] }
+	sprite icon_guardian : { tags: [ icon ] }
+	sprite icon_exorcism : { tags: [ icon ] }
+	sprite icon_reckoning : { tags: [ icon ] }
+	sprite icon_divine_smite : { tags: [ icon ] }
+	sprite icon_blessing_of_war : { tags: [ icon ] }
+	sprite icon_oath_of_retribution : { tags: [ icon ] }
+	sprite icon_oath_of_protection : { tags: [ icon ] }
+	sprite icon_oath_of_healing : { tags: [ icon ] }
+	sprite icon_divine_grip : { tags: [ icon ] }
+	sprite icon_relentless_assault : { tags: [ icon ] }
+	sprite icon_divine_storm : { tags: [ icon ] }	
+	sprite icon_flash_heal : { tags: [ icon ] }
+	
+	cursor: { position: [ 0 416 ] }
+	sprite icon_cleanse : { tags: [ icon ] }
+	sprite icon_divine_flux : { tags: [ icon ] }
+	sprite icon_resurrection_2 : { tags: [ icon ] }
+	sprite icon_flash_of_light : { tags: [ icon ] }
+	sprite icon_holy_light : { tags: [ icon ] }
+	sprite icon_praise_the_light : { tags: [ icon ] }
+	sprite icon_divine_shield : { tags: [ icon ] }
+	sprite icon_taunt_2 : { tags: [ icon ] }
+	sprite icon_defend : { tags: [ icon ] }
+	sprite icon_judge : { tags: [ icon ] }
+	sprite icon_blessing_of_protection : { tags: [ icon ] }
+	sprite icon_aura_of_protection : { tags: [ icon ] }
+	sprite icon_consecrate : { tags: [ icon ] }
 }
+
+
+

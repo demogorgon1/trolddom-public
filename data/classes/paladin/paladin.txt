@@ -1,3 +1,5 @@
+aura_group paladin_oaths: { }
+
 class paladin:
 {
 	string: "Paladin"	
@@ -20,7 +22,12 @@ class paladin:
 		
 	weapon_sprites weapon_1h_sword: { sprite: paladin_sword_1h sprites_walk: [ paladin_walk_1_sword_1h paladin_walk_2_sword_1h ] }
 	weapon_sprites weapon_1h_mace:  { sprite: paladin_mace_1h  sprites_walk: [ paladin_walk_1_mace_1h  paladin_walk_2_mace_1h ] }
-		
+	weapon_sprites weapon_1h_axe:   { sprite: paladin_axe_1h   sprites_walk: [ paladin_walk_1_axe_1h   paladin_walk_2_axe_1h ] }
+	weapon_sprites weapon_2h_sword: { sprite: paladin_sword_2h sprites_walk: [ paladin_walk_1_sword_2h paladin_walk_2_sword_2h ] }
+	weapon_sprites weapon_2h_mace:  { sprite: paladin_mace_2h  sprites_walk: [ paladin_walk_1_mace_2h  paladin_walk_2_mace_2h ] }
+	weapon_sprites weapon_2h_axe:   { sprite: paladin_axe_2h   sprites_walk: [ paladin_walk_1_axe_2h   paladin_walk_2_axe_2h ] }
+	weapon_sprites shield: 			{ sprite: paladin_shield   sprites_walk: [ paladin_walk_1_shield   paladin_walk_2_shield ] }
+			
 	armor_decoration: { sprite: paladin_decoration sprite_dead: paladin_decoration_dead sprites_walk: [ paladin_decoration_walk_1 paladin_decoration_walk_2 ] }
 		
 	remains: [ player_remains_1 player_remains_2 player_remains_3 ]
@@ -29,15 +36,16 @@ class paladin:
 	color_2: [ 85 100 0 ]
 	default_attack: attack
 	default_action_bar: [ attack !DEFAULT_ABILITIES{} ]
-	talent_trees: [ paladin_warrior paladin_guardian paladin_healer ]
+	talent_trees: [ paladin_avenger paladin_guardian paladin_healer ]
 	
-	item_types: [ armor_cloth armor_mail armor_plate weapon_1h_mace weapon_1h_sword ]
+	item_types: [ armor_cloth armor_mail armor_plate weapon_1h_sword weapon_1h_mace weapon_1h_axe weapon_2h_sword weapon_2h_mace weapon_2h_axe shield ]
 
 	start_map open_world: [ ]	
-	start_equipment main_hand: weapon_gnarly_staff
-	start_equipment chest: chest_tattered_robe
-	start_equipment feet: feet_tattered_slippers
-	start_equipment legs: legs_tattered_pants
+	start_equipment main_hand: weapon_wooden_mace
+	start_equipment off_hand: shield_wooden_buckler
+	start_equipment chest: chest_flimsy_mail_shirt
+	start_equipment feet: feet_flimsy_mail_boots
+	start_equipment legs: legs_flimsy_mail_pants
 	start_inventory: [ consumable_dry_bread consumable_dry_bread consumable_dry_bread consumable_dry_bread consumable_dry_bread ]
 	
 	stats_conversion:

@@ -11,6 +11,32 @@ item weapon_rusty_sword:
 	weapon_cooldown: 20		
 }
 
+item weapon_wooden_mace:
+{
+	type: weapon_1h_mace
+	equipment_slots: [ main_hand off_hand ]
+	loot_groups: [ world_drops_junk ]
+	required_level: 1
+	item_level: 1
+	icon: icon_mace_1
+	rarity: common
+	string: "Wooden Mace"
+	weapon_cooldown: 20		
+}
+
+item weapon_rusty_mace:
+{
+	type: weapon_1h_mace
+	equipment_slots: [ main_hand off_hand ]
+	loot_groups: [ world_drops_junk ]
+	required_level: 1
+	item_level: 1
+	icon: icon_mace_2
+	rarity: common
+	string: "Rusty Mace"
+	weapon_cooldown: 20		
+}
+
 item weapon_rusty_knife:
 {
 	type: weapon_1h_knife

@@ -2,7 +2,7 @@ talent_tree paladin_healer:
 {
 	string: "Healer"
 	description: "."
-	icon: icon_defensive
+	icon: icon_healer
 	
 	map_palette:
 	{
