@@ -194,6 +194,7 @@ namespace tpublic
 		virtual void			OnCombatEvent(
 									CombatEventType					/*aType*/,
 									CombatEvent::Id					/*aCombatEventId*/,
+									uint32_t						/*aAbilityId*/,
 									SecondaryAbilityCallback		/*aCallback*/) const { }
 		virtual bool			GetStatModifier(
 									Stat::Id						/*aStat*/,

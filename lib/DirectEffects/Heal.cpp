@@ -29,6 +29,8 @@ namespace tpublic::DirectEffects
 					m_function = CombatFunction(aChild);
 				else if(aChild->m_name == "max_health_percentage")
 					m_maxHealthPercentage = aChild->GetBool();
+				else if (aChild->m_name == "conditional_critical_chance_bonus")
+					m_conditionalCriticalChanceBonuses.push_back(ConditionalCriticalChanceBonus(aChild));
 				else
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 			}
@@ -42,6 +44,7 @@ namespace tpublic::DirectEffects
 		ToStreamBase(aStream);
 		m_function.ToStream(aStream);
 		aStream->WriteBool(m_maxHealthPercentage);
+		aStream->WriteObjects(m_conditionalCriticalChanceBonuses);
 	}
 			
 	bool	
@@ -53,6 +56,8 @@ namespace tpublic::DirectEffects
 		if(!m_function.FromStream(aStream))
 			return false;
 		if (!aStream->ReadBool(m_maxHealthPercentage))
+			return false;
+		if(!aStream->ReadObjects(m_conditionalCriticalChanceBonuses))
 			return false;
 		return true;
 	}
@@ -88,12 +93,17 @@ namespace tpublic::DirectEffects
 			
 			heal = (targetHealth->m_max * heal) / 100;
 		}
+
+		if(heal == 0)
+			heal = 1;
 				
 		CombatEvent::Id result = aId;
 
 		if(m_flags & DirectEffect::FLAG_CAN_BE_CRITICAL && aId == CombatEvent::ID_HIT)
 		{
-			if(Helpers::RandomFloat(aRandom) < sourceCombatPrivate->m_magicalCriticalStrikeChance / 100.0f)
+			float critChance = sourceCombatPrivate->m_magicalCriticalStrikeChance + _GetCriticalChanceBonus(aSource->GetComponent<Components::AbilityModifiers>());
+
+			if(Helpers::RandomFloat(aRandom) < critChance / 100.0f)
 			{
 				heal = (heal * 3) / 2;
 				result = CombatEvent::ID_CRITICAL;
@@ -151,6 +161,24 @@ namespace tpublic::DirectEffects
 	{
 		m_function.ToRange(1.0f, aEntityInstance, aOutHeal);
 		return true;
+	}
+
+	float			
+	Heal::_GetCriticalChanceBonus(
+		const Components::AbilityModifiers*	aAbilityModifiers) const
+	{
+		if(m_conditionalCriticalChanceBonuses.empty() || aAbilityModifiers == NULL)
+			return 0.0f;
+
+		float bonus = 0.0f;
+
+		for(const ConditionalCriticalChanceBonus& t : m_conditionalCriticalChanceBonuses)
+		{
+			if(aAbilityModifiers->HasActive(t.m_abilityModifierId))
+				bonus += t.m_percent;
+		}
+
+		return bonus;
 	}
 
 }

@@ -36,7 +36,7 @@ ability witch_attack:
 class witch:
 {
 	string: "Witch"	
-	description: "."
+	description: "Harness the unholy powers of the underworld."
 	
 	unlocked_by_achievement: underworld_follower
 	restricted: true

@@ -57,6 +57,9 @@ sprites:
 	sprite effect_consecrate_fade_0: { }
 	sprite effect_consecrate_fade_1: { }
 	sprite effect_consecrate_fade_2: { }
+	sprite effect_divine_shield_0: { flags: [ centered ] }
+	sprite effect_divine_shield_1: { flags: [ centered ] }
+	sprite effect_divine_shield_2: { flags: [ centered ] }
 	
 	cursor: { position: [ 0 20 ] }	
 	size: { width: 24 height: 24 }

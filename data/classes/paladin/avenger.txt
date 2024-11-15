@@ -1,11 +1,7 @@
-# - Vengeance: Exorcism (Basic) - deals damage to undeads and demons.
-# - Vengeance: Reckoning (Basic) - melee attack that consumes mana and gives damage buff
-# - Vengeance: Divine Smite (Basic) - ranged attack
-
 talent_tree paladin_avenger:
 {
 	string: "Avenger"
-	description: "."
+	description: "Take upon you the holy oath of retribution."
 	icon: icon_avenger
 	
 	map_palette:
@@ -208,6 +204,7 @@ aura paladin_blessing_of_war_buff_1:
 {
 	string: "Blessing of War"
 	type: buff
+	flags: [ unique ]
 	icon: icon_blessing_of_war
 	duration: 100
 	stat_modifiers:
@@ -249,6 +246,7 @@ aura paladin_blessing_of_war_buff_2:
 {
 	string: "Blessing of War"
 	type: buff
+	flags: [ unique ]
 	icon: icon_blessing_of_war
 	duration: 100
 	stat_modifiers:
@@ -377,7 +375,7 @@ aura paladin_relentless_assault:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Your critical strikes cause your next Divine Smite or Judgement in the next 10 seconds to be instant cast."
+	description: "Your critical strikes cause your next Divine Smite, Flash Heal or Judgement in the next 10 seconds to be instant cast."
 	aura_effect combat_event_trigger: 
 	{ 
 		combat_event<source>: critical
@@ -410,7 +408,7 @@ aura paladin_relentless_assault_buff:
 		ability_flags: [ spell ]
 		cast_time_multiplier: 0
 		use_charge: true
-		abilities: [ judgement divine_smite ]
+		abilities: [ judgement divine_smite flash_heal ]
 	}
 }
 

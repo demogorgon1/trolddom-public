@@ -1,11 +1,7 @@
-# - Tank: Taunt (Basic)
-# - Tank: Defend (Basic) - redirect damage done to target to you.
-# - Tank: Judgement (Basic) - ranged stun.
-
 talent_tree paladin_guardian:
 {
 	string: "Guardian"
-	description: "."
+	description: "Take upon you the holy oath of protection."
 	icon: icon_guardian
 	
 	map_palette:
@@ -22,13 +18,154 @@ talent_tree paladin_guardian:
 	
 	map:
 	[
-		"A.C.E"
-		"d...d"
-		"B...D"
-		"d...."
-		"F...."
+		"C.A.E"
+		"..d.d"
+		"..B.D"
+		"..d.."
+		"..F.."
 	]
 }
+
+###############################################################################
+# Block
+
+cooldown paladin_block:
+{
+	duration: 300
+}
+
+aura paladin_block:
+{
+	string: "Block"
+	flags: [ unique ]
+	duration: 50
+	type: buff
+	stat_modifiers: { block_chance: { add: 60 } }
+	icon: icon_defend
+}
+
+ability paladin_block:
+{
+	string: "Block"
+	description: "Increases your chance to block by 60% for 5 seconds."
+	cooldowns: [ global paladin_block ]
+	flags: [ spell target_self ]
+	states: [ default in_combat ]
+	icon: icon_defend
+	delay: 3
+	resource_cost mana: 10
+	talent_tree: paladin_guardian
+	
+	direct_effect apply_aura:
+	{
+		aura: paladin_block
+	}
+}
+
+###############################################################################
+# Judgement
+
+aura judgement:
+{
+	string: "Judgement"
+	description: "Stunned."
+	icon: icon_stun		
+	type: debuff
+	duration: 50	
+	flags: [ unique ]
+	aura_effect stun: { }
+	particle_system: judgement
+}
+
+cooldown judgement:
+{
+	duration: 200
+}
+
+ability judgement:
+{
+	string: "Judgement"
+	description: "Stuns target for 5 seconds."
+	range: 6
+	cooldowns: [ global judgement spell_holy_lockout ]
+	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_miss ]
+	states: [ default in_combat ]
+	icon: icon_judge
+	delay: 3
+	cast_time: 15
+	resource_cost mana: 20
+	talent_tree: paladin_guardian
+
+	direct_effect apply_aura:
+	{	
+		aura: judgement
+		threat: 20
+	}
+}
+
+
+particle_system judgement:
+{
+	particle:
+	{
+		sprites: [ effect_stun_0 effect_stun_1 effect_stun_2 effect_stun_3 ]
+		flags: [ attached ]
+		sprite_interval: 125
+		count: 1
+		scale: 1
+		alpha: 0.45
+		fade_in: 250	
+		fade_out: 250
+		offset_x: 0.5
+		offset_y: 0.5	
+	}
+}
+
+###############################################################################
+# Taunt
+
+cooldown taunt_2:
+{
+	duration: 100
+}
+
+aura taunt_2:
+{
+	string: "Taunted"
+	icon: icon_taunt_2
+	type: debuff
+	duration: 50	
+	flags: [ unique ]
+	
+	aura_effect taunt: 
+	{
+	}
+}
+
+ability taunt_2:
+{
+	string: "Taunt"
+	description: "Forces target to attack you for 5 seconds."
+	range: 4
+	cooldowns: [ global taunt_2 spell_holy_lockout ]
+	flags: [ offensive target_other target_hostile ]
+	states: [ default in_combat ]
+	icon: icon_taunt
+	delay: 3
+	talent_tree: paladin_guardian
+
+	direct_effect threat:
+	{	
+		apply_to: source
+		add: top
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: taunt
+	}
+}
+
 
 ###############################################################################
 # Divine Protection
@@ -147,6 +284,7 @@ aura paladin_blessing_of_protection_buff_1:
 {
 	string: "Blessing of Protection"
 	type: buff
+	flags: [ unique ]
 	icon: icon_blessing_of_protection
 	duration: 100
 	stat_modifiers:
@@ -183,6 +321,7 @@ aura paladin_blessing_of_protection_buff_2:
 {
 	string: "Blessing of Protection"
 	type: buff
+	flags: [ unique ]
 	icon: icon_blessing_of_protection
 	duration: 100
 	stat_modifiers:

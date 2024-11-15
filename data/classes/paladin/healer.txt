@@ -1,16 +1,630 @@
 talent_tree paladin_healer:
 {
 	string: "Healer"
-	description: "."
+	description: "Take upon you the holy oath of healing."
 	icon: icon_healer
 	
 	map_palette:
 	{
+		talent paladin_flash_of_light: "A"		
+		talent paladin_oath_of_healing: "B"
+		talent paladin_blessing_of_binding: "C"		
+		talent paladin_holy_light: "D"
+		talent paladin_improved_cleanse: "E"		
+		talent paladin_praise_the_light: "F"
+		talent paladin_divine_shield: "G"		
+		sprite talent_tree_down_arrow: "d"
+		sprite talent_tree_down: "|"				
 	}
 	
 	map:
 	[
+		"C.E.F"
+		"d...d"
+		"B.D.A"
+		"..d.."
+		"..G.."
 	]
 	
 }
 
+###############################################################################
+# Flash Heal
+
+ability flash_heal:
+{
+	string: "Flash Heal"
+	tags: [ ability_large_heal_single_target ]
+	description: "Heals target for $heal$."
+	range: 7
+	cooldowns: [ global spell_holy_lockout ]
+	cast_time: 15
+	flags: [ spell target_other target_self target_friendly interruptable ]
+	states: [ default in_combat ]
+	icon: icon_flash_heal
+	resource_cost mana: 10
+	talent_tree: paladin_healer
+	target_particle_system: heal	
+	delay: 2
+	sound_effects: !SOUND_HEAL{}
+	
+	direct_effect heal:
+	{	
+		flags: [ can_be_critical ]
+		function: { expression: a_mul_x_plus_b x: healing a: 1 b: [ [ 1 10 ] [ 10 20 ] ] }
+		conditional_critical_chance_bonus<praise_the_light_1>: 2
+		conditional_critical_chance_bonus<praise_the_light_2>: 4
+		conditional_critical_chance_bonus<praise_the_light_3>: 6
+	}
+}
+
+###############################################################################
+# Holy Light
+
+talent paladin_holy_light:
+{
+	string: "Holy Light"
+	icon: icon_holy_light
+	talent_tree_points_required: 3
+	prerequisites: [ ]
+	points:
+	[
+		{ ability: holy_light }
+	]
+}
+
+ability holy_light:
+{
+	string: "Holy Light"
+	tags: [ ability_large_heal_single_target ]
+	description: "Heals target for $heal$."
+	range: 7
+	cooldowns: [ global spell_holy_lockout ]
+	cast_time: 20
+	flags: [ spell target_other target_self target_friendly interruptable ]
+	states: [ default in_combat ]
+	icon: icon_holy_light
+	resource_cost mana: 15
+	talent_tree: paladin_healer
+	target_particle_system: heal	
+	delay: 2
+	sound_effects: !SOUND_HEAL{}
+	
+	direct_effect heal:
+	{	
+		flags: [ can_be_critical ]
+		function: { expression: a_mul_x_plus_b x: healing a: 0.86 b: [ [ 1 22 ] [ 10 44 ] ] }
+		conditional_critical_chance_bonus<praise_the_light_1>: 2
+		conditional_critical_chance_bonus<praise_the_light_2>: 4
+		conditional_critical_chance_bonus<praise_the_light_3>: 6
+	}
+}
+
+###############################################################################
+# Oath of Healing
+
+talent paladin_oath_of_healing:
+{
+	string: "Oath of Healing"
+	icon: icon_oath_of_healing
+	prerequisites: [ paladin_blessing_of_binding ]	
+	talent_tree_points_required: 3
+	points:
+	[
+		{ ability: paladin_oath_of_healing }
+	]
+}
+
+aura paladin_oath_of_healing:
+{
+	string: "Oath of Healing"
+	flags: [ persist_in_death indefinite unique ]
+	aura_group: paladin_oaths
+	type: buff
+	description: "+20% Healing"
+	icon: icon_oath_of_healing
+	aura_effect heal_output_modifier: { multiplier: 1.2 }
+}
+
+ability paladin_oath_of_healing:
+{
+	string: "Oath of Healing"
+	description: "Increases your healing done by 20%. You can only have one oath active at a time."
+	cooldowns: [ global spell_holy_lockout ]
+	flags: [ spell target_self ]
+	states: [ default in_combat ]
+	icon: icon_oath_of_healing
+	delay: 3
+	resource_cost mana: 10
+	talent_tree: paladin_healer
+	
+	direct_effect apply_aura:
+	{
+		aura: paladin_oath_of_healing
+	}
+}
+
+###############################################################################
+# Praise the Light
+
+talent paladin_praise_the_light:
+{
+	string: "Praise the Light"
+	icon: icon_praise_the_light
+	points:
+	[
+		{ ability_modifier: praise_the_light_1 }
+		{ ability_modifier: praise_the_light_2 }
+		{ ability_modifier: praise_the_light_3 }
+	]
+}
+
+ability_modifier praise_the_light_1:
+{	
+	description: "Increase the critical chance of your heals by 2%."
+}
+
+ability_modifier praise_the_light_2:
+{	
+	description: "Increase the critical chance of your heals by 4%."
+}
+
+ability_modifier praise_the_light_3:
+{	
+	description: "Increase the critical chance of your heals by 6%."
+}
+
+###############################################################################
+# Improved Cleanse
+
+talent paladin_improved_cleanse:
+{
+	string: "Improved Cleanse"
+	icon: icon_cleanse
+	points:
+	[
+		{ ability_modifier: improved_cleanse_1 }
+		{ ability_modifier: improved_cleanse_2 }
+	]
+}
+
+ability_modifier improved_cleanse_1:
+{	
+	description: "Cleanse also heals target by 5% of its health over 10 seconds."
+}
+
+ability_modifier improved_cleanse_2:
+{	
+	description: "Cleanse also heals target by 10% of its health over 10 seconds."
+}
+
+aura_group improved_cleanse:
+{
+}
+
+ability improved_cleanse_tick_1:
+{
+	string: "Cleanse"
+	icon: icon_cleanse		
+	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]
+	target_particle_system: small_heal	
+	delay: 2
+	sound_effects: !SOUND_HEAL_SMALL{}
+	
+	direct_effect heal:
+	{	
+		function: { expression: a_mul_x x: health_max a: 0.01 entity: target}
+	}	
+}
+
+aura improved_cleanse_1:
+{
+	string: "Cleanse"
+	icon: icon_cleanse
+	type: buff	
+	aura_group: improved_cleanse
+	duration: based_on_effects	
+	flags: [ unique magic ]
+	aura_effect repeat: 
+	{ 
+		update_interval: 10
+		update_count: 10
+		ability: improved_cleanse_tick_1
+	}
+}
+
+ability improved_cleanse_tick_2:
+{
+	string: "Cleanse"
+	icon: icon_cleanse		
+	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]
+	target_particle_system: small_heal	
+	delay: 2
+	sound_effects: !SOUND_HEAL_SMALL{}
+	
+	direct_effect heal:
+	{	
+		function: { expression: a_mul_x x: health_max a: 0.02 entity: target}
+	}	
+}
+
+aura improved_cleanse_2:
+{
+	string: "Cleanse"
+	icon: icon_cleanse
+	type: buff	
+	aura_group: improved_cleanse
+	duration: based_on_effects	
+	flags: [ unique magic ]
+	aura_effect repeat: 
+	{ 
+		update_interval: 20
+		update_count: 5
+		ability: improved_cleanse_tick_2
+	}
+}
+
+###############################################################################
+# Blessing of Binding
+
+talent paladin_blessing_of_binding:
+{
+	string: "Blessing of Binding"
+	icon: icon_blessing_of_binding
+	prerequisites: [ ]	
+	talent_tree_points_required: 0
+	points:
+	[
+		{ aura: paladin_blessing_of_binding_1 }
+		{ aura: paladin_blessing_of_binding_2 }
+	]
+}
+
+aura paladin_blessing_of_binding_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Your critical heals increases your armor by 10% for 10 seconds."
+	aura_effect combat_event_trigger: 
+	{ 
+		combat_event<source>: critical
+		ability<self>: paladin_blessing_of_binding_trigger_1		
+		trigger_abilities: [ flash_heal holy_light ]
+	}
+}
+
+ability paladin_blessing_of_binding_trigger_1:
+{
+	string: "Blessing of Binding"
+	states: [ default in_combat ]
+	icon: icon_blessing_of_binding
+	
+	direct_effect apply_aura:
+	{
+		aura: paladin_blessing_of_binding_buff_1		
+	}
+}
+
+aura paladin_blessing_of_binding_buff_1:
+{
+	string: "Blessing of Binding"
+	type: buff
+	flags: [ unique ]
+	icon: icon_blessing_of_binding
+	duration: 100
+	stat_modifiers:
+	{
+		armor: { add_percent: 10 } 
+	}
+}
+
+aura paladin_blessing_of_binding_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Your critical heals increases your armor by 20% for 10 seconds."
+	aura_effect combat_event_trigger: 
+	{ 
+		combat_event<source>: critical
+		ability<self>: paladin_blessing_of_binding_trigger_2
+		trigger_abilities: [ flash_heal holy_light ]
+	}
+}
+
+ability paladin_blessing_of_binding_trigger_2:
+{
+	string: "Blessing of Binding"
+	states: [ default in_combat ]
+	icon: icon_blessing_of_binding
+	
+	direct_effect apply_aura:
+	{
+		aura: paladin_blessing_of_binding_buff_2
+	}
+}
+
+aura paladin_blessing_of_binding_buff_2:
+{
+	string: "Blessing of Binding"
+	flags: [ unique ]
+	type: buff
+	icon: icon_blessing_of_binding
+	duration: 100
+	stat_modifiers:
+	{
+		armor: { add_percent: 20 } 
+	}
+}
+
+###############################################################################
+# Flash of Light
+
+talent paladin_flash_of_light:
+{
+	string: "Flash of Light"
+	icon: icon_flash_of_light
+	prerequisites: [ paladin_praise_the_light ]	
+	talent_tree_points_required: 3
+	points:
+	[
+		{ aura: paladin_flash_of_light }
+	]
+}
+
+aura paladin_flash_of_light:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Your next Flash Heal after a critical heal is instant."
+	aura_effect combat_event_trigger: 
+	{ 
+		combat_event<source>: critical
+		ability<self>: paladin_flash_of_light_trigger
+		trigger_abilities: [ flash_heal holy_light ]
+	}
+}
+
+ability paladin_flash_of_light_trigger:
+{
+	string: "Flash of Light"
+	states: [ default in_combat ]
+	icon: icon_flash_of_light
+	
+	direct_effect apply_aura:
+	{
+		aura: paladin_flash_of_light_buff		
+	}
+}
+
+aura paladin_flash_of_light_buff:
+{
+	string: "Flash of Light"
+	type: buff
+	icon: icon_flash_of_light
+	duration: 100
+	flags: [ unique charged magic ]
+	charges: 1
+	aura_effect cast_modifier: 
+	{ 
+		ability_flags: [ spell ]
+		cast_time_multiplier: 0
+		use_charge: true
+		abilities: [ flash_heal ]
+	}
+}
+
+###############################################################################
+# Divine Shield
+
+talent paladin_divine_shield:
+{
+	string: "Divine Shield"
+	icon: icon_divine_shield
+	prerequisites: [ paladin_holy_light ]	
+	talent_tree_points_required: 6
+	points:
+	[
+		{ ability: divine_shield }
+	]
+}
+
+cooldown divine_shield:
+{
+	duration: 40
+}
+
+ability divine_shield:
+{
+	string: "Divine Shield"
+	description: "Absorbs damage for up to 20 seconds."
+	cooldowns: [ global divine_shield spell_holy_lockout ]
+	resource_cost mana: 20
+	flags: [ target_self target_other target_friendly ]
+	states: [ default in_combat ]	
+	range: 7
+	icon: icon_divine_shield
+	talent_tree: paladin_healer
+	
+	direct_effect apply_aura:
+	{
+		aura: divine_shield
+	}	
+	
+	direct_effect apply_aura:
+	{
+		aura: divine_shield_debuff
+	}	
+	
+}
+
+aura divine_shield:
+{	
+	string: "Divine Shield"
+	description: "Absorbs damage."
+	type: buff
+	duration: 200
+	flags: [ unique charged magic ]	
+	icon: icon_divine_shield
+	charges: { expression: a_mul_x_plus_b a: 3.5 b: 18.5 x: level }	
+	particle_system: divine_shield
+	
+	aura_effect absorb:
+	{
+	}
+}
+
+particle_system divine_shield:
+{
+	particle:
+	{
+		sprites: [ effect_divine_shield_0 effect_divine_shield_1 effect_divine_shield_2 ]
+		flags: [ attached ]
+		sprite_interval: 150
+		count: 1
+		scale: 1
+		alpha: 0.45
+		fade_in: 500
+		fade_out: 500
+		offset_x: 0.5
+		offset_y: 0.5	
+	}
+}
+
+aura divine_shield_debuff:
+{
+	string: "Holy Exhaustion"
+	description: "Cannot be targeted by Divine Shield."
+	icon: icon_holy_exhaustion
+	type: debuff
+	flags: [ unique ]
+	duration: 200
+}
+
+###############################################################################
+# Resurrection
+
+ability resurrection_2:
+{
+	string: "Resurrection"
+	description: "Resurrects dead party member. Only possible outside of combat."
+	range: 7
+	cast_time: 50
+	cooldowns: [ global spell_healing_lockout ]
+	flags: [ spell target_aoe target_aoe_friendly interruptable ]
+	states: [ default ]
+	icon: icon_resurrection_2
+	resource_cost mana: 25
+	talent_tree: paladin_healer
+	aoe_cap: 1
+	aoe_radius: 0
+	aoe_requirement target<must_be_in_state>: { id: dead }
+	aoe_requirement target<must_be_group_member>: { }
+
+	direct_effect simple<resurrect>:
+	{			
+	}
+}
+
+
+###############################################################################
+# Cleanse
+
+cooldown cleanse:
+{
+	duration: 100
+}
+
+ability cleanse:
+{
+	string: "Cleanse"
+	description: "Removes a non-beneficial magical effect from friendly target."
+	range: 8
+	cooldowns: [ global counterspell spell_arcane_lockout ]
+	flags: [ spell target_friendly target_other target_self ]
+	states: [ default in_combat ]
+	icon: icon_cleanse
+	delay: 3
+	resource_cost mana: 18
+	talent_tree: paladin_healer
+	target_particle_system: heal	
+	
+	direct_effect remove_aura:
+	{
+		aura_type: debuff
+		aura_flags: [ magic ]
+	}
+	
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: improved_cleanse_1
+		aura: improved_cleanse_1
+	}
+	
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: improved_cleanse_2
+		aura: improved_cleanse_2
+	}
+
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: improved_cleanse_3
+		aura: improved_cleanse_3
+	}
+	
+}
+
+###############################################################################
+# Divine Flux
+
+cooldown divine_flux:
+{
+	duration: 1200
+}
+
+aura divine_flux:
+{
+	string: "Divine Flux"
+	flags: [ unique magic ]
+	duration: 120
+	type: buff
+	icon: icon_divine_flux
+	aura_effect combat_event_trigger:
+	{
+		combat_event<source>: hit
+		ability<self>: divine_flux_trigger
+		trigger_abilities: [ attack holy_storm reckoning ]		
+	}
+}
+
+ability divine_flux:
+{
+	string: "Divine Flux"
+	description: "Your melee attacks will restore your mana for the next 12 seconds."
+	cooldowns: [ global divine_flux ]
+	flags: [ spell target_self ]
+	states: [ default in_combat ]
+	icon: icon_divine_flux
+	delay: 3
+	talent_tree: paladin_healer
+	
+	direct_effect apply_aura:
+	{
+		aura: divine_flux
+	}
+}
+
+ability divine_flux_trigger:
+{
+	string: "Divine Flux"
+	states: [ default in_combat ]
+	icon: icon_divine_flux
+	
+	direct_effect modify_resource:
+	{
+		resource: mana
+		function: { expression: a_mul_x a: 0.10 x: mana_max }				
+	}
+}

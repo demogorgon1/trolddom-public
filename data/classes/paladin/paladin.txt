@@ -3,7 +3,7 @@ aura_group paladin_oaths: { }
 class paladin:
 {
 	string: "Paladin"	
-	description: "."
+	description: "Warrior of the Light."
 	
 	unlocked_by_achievement: light_follower
 	restricted: true
@@ -100,6 +100,7 @@ class paladin:
 			
 			unlock_abilities:
 			[				
+				flash_heal
 			]
 			
 			stats:
@@ -117,6 +118,7 @@ class paladin:
 			
 			unlock_abilities:
 			[			
+				judgement
 			]
 			
 			stats:
@@ -153,6 +155,7 @@ class paladin:
 			
 			unlock_abilities:
 			[
+				taunt_2
 			]
 			
 			stats:
@@ -171,7 +174,7 @@ class paladin:
 			
 			unlock_abilities:
 			[
-				exorcism
+				resurrection_2				
 			]
 			
 			stats:
@@ -188,7 +191,8 @@ class paladin:
 			level: 7
 			
 			unlock_abilities:
-			[			
+			[
+				divine_flux
 			]
 			
 			stats:
@@ -207,6 +211,7 @@ class paladin:
 			
 			unlock_abilities:
 			[
+				paladin_block
 			]
 			
 			stats:
@@ -224,6 +229,7 @@ class paladin:
 			
 			unlock_abilities:
 			[
+				exorcism
 			]
 			
 			stats:
@@ -242,6 +248,7 @@ class paladin:
 			
 			unlock_abilities:
 			[			
+				cleanse
 			]
 			
 			stats:

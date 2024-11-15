@@ -1,7 +1,7 @@
 talent_tree witch_demonology:
 {
 	string: "Demonology"
-	description: "Connect with the underworld."
+	description: "Bend the demons of the underworld to your will."
 	icon: icon_fear
 	
 	map_palette:

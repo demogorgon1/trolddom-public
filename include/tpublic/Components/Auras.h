@@ -163,6 +163,7 @@ namespace tpublic
 			void			OnCombatEvent(
 								AuraEffectBase::CombatEventType				aType,
 								CombatEvent::Id								aCombatEventId,
+								uint32_t									aAbilityId,
 								AuraEffectBase::SecondaryAbilityCallback	aCallback) const;
 			void			OnDamageInput(
 								const EntityInstance*						aSource,

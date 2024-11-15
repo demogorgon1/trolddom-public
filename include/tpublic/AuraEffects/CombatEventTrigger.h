@@ -47,6 +47,10 @@ namespace tpublic
 						{
 							m_ability = SecondaryAbility(aChild);
 						}
+						else if(aChild->m_name == "trigger_abilities")
+						{
+							aChild->GetIdArray(DataType::ID_ABILITY, m_triggerAbilityIds);
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -64,6 +68,7 @@ namespace tpublic
 				aStream->WritePOD(m_combatEventId);
 				aStream->WritePOD(m_combatEventType);
 				m_ability.ToStream(aStream);
+				aStream->WriteUInts(m_triggerAbilityIds);
 			}
 
 			bool
@@ -79,6 +84,8 @@ namespace tpublic
 					return false;
 				if (!m_ability.FromStream(aStream))
 					return false;
+				if(!aStream->ReadUInts(m_triggerAbilityIds))
+					return false;
 				return true;
 			}
 
@@ -90,18 +97,21 @@ namespace tpublic
 				t->m_combatEventId = m_combatEventId;
 				t->m_combatEventType = m_combatEventType;
 				t->m_ability = m_ability;
+				t->m_triggerAbilityIds = m_triggerAbilityIds;
 				return t;
 			}
 
 			void	OnCombatEvent(						
 						CombatEventType					aType,
 						CombatEvent::Id					aCombatEventId,
+						uint32_t						aAbilityId,
 						SecondaryAbilityCallback		aCallback) const override;
 
 			// Public data
 			AuraEffectBase::CombatEventType	m_combatEventType = AuraEffectBase::INVALID_COMBAT_EVENT_TYPE;
 			CombatEvent::Id					m_combatEventId = CombatEvent::ID_HIT;
 			SecondaryAbility				m_ability;
+			std::vector<uint32_t>			m_triggerAbilityIds;
 		};
 
 	}
