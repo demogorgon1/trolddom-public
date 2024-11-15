@@ -18,6 +18,8 @@ pantheon light:
 	deity_specifier: "a holy"
 	shrine_display_name_prefix: "Holy Altar of "
 	
+	hostile_classes: [ witch ]
+	
 	player_levels:
 	[
 		"Heathen"

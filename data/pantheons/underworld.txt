@@ -18,6 +18,8 @@ pantheon underworld:
 	deity_specifier: "an unholy"
 	shrine_display_name_prefix: "Unholy Shrine of "
 	
+	hostile_classes: [ paladin ]
+	
 	player_levels:
 	[
 		"Hated"

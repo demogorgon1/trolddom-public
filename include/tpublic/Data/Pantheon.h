@@ -134,6 +134,18 @@ namespace tpublic
 				return m_deityLevels[index].c_str();
 			}
 
+			bool
+			IsClassHostile(
+				uint32_t				aClassId) const
+			{
+				for(uint32_t hostileClassId : m_hostileClassIds)
+				{
+					if(hostileClassId == aClassId)
+						return true;
+				}
+				return false;
+			}
+
 			// Base implementation
 			void
 			FromSource(
@@ -166,6 +178,8 @@ namespace tpublic
 							aChild->GetStringArray(m_deityLevels);
 						else if(aChild->m_tag == "class_modifier")
 							m_classModifiers.push_back(ClassModifier(aChild));
+						else if(aChild->m_name == "hostile_classes")
+							aChild->GetIdArray(DataType::ID_CLASS, m_hostileClassIds);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -186,6 +200,7 @@ namespace tpublic
 				aWriter->WriteStrings(m_deityLevels);
 				aWriter->WriteString(m_shrineDisplayNamePrefix);
 				aWriter->WriteObjects(m_classModifiers);
+				aWriter->WriteUInts(m_hostileClassIds);
 
 				for (uint32_t i = 0; i < (uint32_t)NUM_NOTIFICATION_STRINGS; i++)
 					aWriter->WriteString(m_notificationStrings[i]);
@@ -215,6 +230,8 @@ namespace tpublic
 					return false;
 				if(!aReader->ReadObjects(m_classModifiers))
 					return false;
+				if(!aReader->ReadUInts(m_hostileClassIds))
+					return false;
 
 				for(uint32_t i = 0; i < (uint32_t)NUM_NOTIFICATION_STRINGS; i++)
 				{
@@ -236,6 +253,7 @@ namespace tpublic
 			std::string							m_shrineDisplayNamePrefix;
 			std::vector<std::string>			m_deityLevels;
 			std::vector<ClassModifier>			m_classModifiers;
+			std::vector<uint32_t>				m_hostileClassIds;
 		};
 
 	}

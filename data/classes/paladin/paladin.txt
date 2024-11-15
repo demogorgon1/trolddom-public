@@ -35,18 +35,21 @@ class paladin:
 	color_1: [ 160 190 0 ] 
 	color_2: [ 85 100 0 ]
 	default_attack: attack
-	default_action_bar: [ attack !DEFAULT_ABILITIES{} ]
+	default_action_bar: [ attack reckoning !DEFAULT_ABILITIES{} ]
 	talent_trees: [ paladin_avenger paladin_guardian paladin_healer ]
 	
 	item_types: [ armor_cloth armor_mail armor_plate weapon_1h_sword weapon_1h_mace weapon_1h_axe weapon_2h_sword weapon_2h_mace weapon_2h_axe shield ]
 
-	start_map open_world: [ ]	
+	start_map open_world: [ open_world_player_spawn_paladin ]	
 	start_equipment main_hand: weapon_wooden_mace
 	start_equipment off_hand: shield_wooden_buckler
 	start_equipment chest: chest_flimsy_mail_shirt
 	start_equipment feet: feet_flimsy_mail_boots
 	start_equipment legs: legs_flimsy_mail_pants
 	start_inventory: [ consumable_dry_bread consumable_dry_bread consumable_dry_bread consumable_dry_bread consumable_dry_bread ]
+	
+	start_reputation light: 1000
+	start_reputation underworld: -2000
 	
 	stats_conversion:
 	{

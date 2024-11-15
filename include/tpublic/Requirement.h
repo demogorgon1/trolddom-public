@@ -47,7 +47,8 @@ namespace tpublic
 			TYPE_MUST_BE_CREATURE_TYPE,
 			TYPE_MUST_HAVE_ZERO_HEALTH,
 			TYPE_MUST_HAVE_ITEM_TYPE_EQUIPPED,
-			TYPE_MUST_HAVE_EQUIPPED_ITEM_TYPE_FLAGS
+			TYPE_MUST_HAVE_EQUIPPED_ITEM_TYPE_FLAGS,
+			TYPE_MUST_BE_AT_LEAST_LEVEL,
 		};
 
 		static DataType::Id
@@ -210,6 +211,8 @@ namespace tpublic
 				m_type = TYPE_MUST_HAVE_ITEM_TYPE_EQUIPPED;
 			else if (typeString == "must_have_equipped_item_type_flags")
 				m_type = TYPE_MUST_HAVE_EQUIPPED_ITEM_TYPE_FLAGS;
+			else if (typeString == "must_be_at_least_level")
+				m_type = TYPE_MUST_BE_AT_LEAST_LEVEL;
 			else
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid type.", aSource->m_annotation->GetIdentifier());
 

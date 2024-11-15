@@ -493,6 +493,14 @@ map_player_spawn .player_spawn:
 {
 }
 
+map_player_spawn open_world_player_spawn_paladin:
+{
+}
+
+map_player_spawn open_world_player_spawn_witch:
+{
+}
+
 map_portal .dungeon_1_entrance:
 {
 	animation: !DEFAULT_PORTAL_ANIMATION{}
@@ -754,6 +762,8 @@ map_palette .stuff:
 	entity_spawn .horse: [ 194 240 106 ]
 	
 	player_spawn .player_spawn: [ 0 0 255 ]
+	player_spawn open_world_player_spawn_paladin: [ 0 0 254 ]
+	player_spawn open_world_player_spawn_witch: [ 0 0 253 ]
 	player_spawn dungeon_1_exit: [ 0 0 200 ]	
 	player_spawn lair_of_zuthyg_exit: [ 10 20 200 ]	
 	

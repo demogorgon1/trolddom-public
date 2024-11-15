@@ -11,9 +11,23 @@ dialogue_screen .elara_nightshade_greetings:
 	]
 }
 
+dialogue_screen .elara_nightshade_greetings_witch:
+{
+	text: 
+	[	
+		"May your cauldron bubble and your spells never falter."
+	]
+	
+	options:
+	[
+		{ quest: .elara_nightshade_1 }
+	]
+}
+
 dialogue_root .elara_nightshade_dialogue:
 {
-	.elara_nightshade_greetings: { }
+	.elara_nightshade_greetings: { is_not_class: [ witch ] }
+	.elara_nightshade_greetings_witch: { is_class: [ witch ] }
 }
 
 entity .elara_nightshade: !NPC

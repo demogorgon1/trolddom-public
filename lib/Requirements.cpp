@@ -44,6 +44,13 @@ namespace tpublic
 
 			switch(aRequirement->m_type)
 			{
+			case Requirement::TYPE_MUST_BE_AT_LEAST_LEVEL:
+				{
+					const Components::CombatPublic* combatPublic = entity->GetComponent<Components::CombatPublic>();
+					if(combatPublic == NULL || combatPublic->m_level < aRequirement->m_id)
+						return false;
+				}
+				break;
 			case Requirement::TYPE_MUST_HAVE_ITEM_TYPE_EQUIPPED:
 				{
 					if (!entity->IsPlayer())

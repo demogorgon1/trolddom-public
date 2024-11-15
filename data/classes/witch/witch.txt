@@ -68,12 +68,15 @@ class witch:
 	
 	item_types: [ armor_cloth weapon_1h_knife weapon_2h_staff ]
 
-	start_map open_world: [ ]	
+	start_map open_world: [ open_world_player_spawn_witch ]	
 	start_equipment main_hand: weapon_gnarly_staff
 	start_equipment chest: chest_tattered_robe
 	start_equipment feet: feet_tattered_slippers
 	start_equipment legs: legs_tattered_pants
 	start_inventory: [ consumable_dry_bread consumable_dry_bread consumable_dry_bread consumable_dry_bread consumable_dry_bread ]
+	
+	start_reputation underworld: 1000
+	start_reputation light: -2000
 	
 	stats_conversion:
 	{

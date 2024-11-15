@@ -20,7 +20,7 @@ dialogue_screen .baldric_sunstrike_greetings:
 
 	options:
 	[
-		{ quest: .baldric_sunstrike_1 }
+		{ quest: .baldric_sunstrike_1 requirement self<must_be_at_least_level>: 4 }
 	]
 }
 
@@ -32,12 +32,25 @@ dialogue_screen .baldric_sunstrike_greetings_2:
 	]
 }
 
-dialogue_root .baldric_sunstrike_dialogue:
+dialogue_screen .baldric_sunstrike_greetings_3:
 {
-	.baldric_sunstrike_greetings: { conditions: [ .baldric_sunstrike_follower ] }
-	.baldric_sunstrike_greetings_2: { inv_conditions: [ .baldric_sunstrike_follower ] }
+	text:
+	[
+		"Let the Light guide your path, esteemed holy warrior. Together, we shield the weak and heal the wounded."
+	]
+	
+	options:
+	[
+		{ quest: .baldric_sunstrike_1 requirement self<must_be_at_least_level>: 4 }
+	]	
 }
 
+dialogue_root .baldric_sunstrike_dialogue:
+{
+	.baldric_sunstrike_greetings: { conditions: [ .baldric_sunstrike_follower ] is_not_class: [ paladin ] }
+	.baldric_sunstrike_greetings_2: { inv_conditions: [ .baldric_sunstrike_follower ] is_not_class: [ paladin ] }
+	.baldric_sunstrike_greetings_3: { is_class: [ paladin ] }
+}
 
 npc_behavior_state .baldric_sunstrike:
 {

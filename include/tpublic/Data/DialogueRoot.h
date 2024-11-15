@@ -97,6 +97,14 @@ namespace tpublic
 							m_dialogueScript = DialogueScript::StringToId(aChild->GetIdentifier());
 							TP_VERIFY(m_dialogueScript != DialogueScript::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid dialogue script.", aChild->GetIdentifier());
 						}
+						else if(aChild->m_name == "is_class")
+						{
+							aChild->GetIdArray(DataType::ID_CLASS, m_isClassId);
+						}
+						else if (aChild->m_name == "is_not_class")
+						{
+							aChild->GetIdArray(DataType::ID_CLASS, m_isNotClassId);
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -112,6 +120,8 @@ namespace tpublic
 					aWriter->WriteUInts(m_conditionExpressionIds);
 					aWriter->WriteUInts(m_invConditionExpressionIds);
 					aWriter->WritePOD(m_dialogueScript);
+					aWriter->WriteUInts(m_isClassId);
+					aWriter->WriteUInts(m_isNotClassId);
 				}
 
 				bool
@@ -126,6 +136,10 @@ namespace tpublic
 						return false;
 					if(!aReader->ReadPOD(m_dialogueScript))
 						return false;
+					if(!aReader->ReadUInts(m_isClassId))
+						return false;
+					if (!aReader->ReadUInts(m_isNotClassId))
+						return false;
 					return true;
 				}
 
@@ -134,6 +148,8 @@ namespace tpublic
 				std::vector<uint32_t>	m_conditionExpressionIds;
 				std::vector<uint32_t>	m_invConditionExpressionIds;
 				DialogueScript::Id		m_dialogueScript = DialogueScript::ID_NONE;
+				std::vector<uint32_t>	m_isClassId;
+				std::vector<uint32_t>	m_isNotClassId;
 			};
 
 			void

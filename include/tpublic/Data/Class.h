@@ -120,6 +120,44 @@ namespace tpublic
 				uint32_t				m_itemId = 0;				
 			};
 
+			struct StartReputation
+			{
+				StartReputation()
+				{
+
+				}
+
+				StartReputation(
+					const SourceNode*		aSource)
+				{
+					m_factionId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_FACTION, aSource->m_name.c_str());
+					m_reputation = aSource->GetInt32();
+				}
+
+				void	
+				ToStream(
+					IWriter*				aStream) const 
+				{
+					aStream->WriteUInt(m_factionId);
+					aStream->WriteInt(m_reputation);
+				}
+			
+				bool	
+				FromStream(
+					IReader*				aStream) 
+				{
+					if (!aStream->ReadUInt(m_factionId))
+						return false;
+					if (!aStream->ReadInt(m_reputation))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t				m_factionId = 0;
+				int32_t					m_reputation = 0;
+			};
+
 			struct StartMap
 			{
 				StartMap()
@@ -562,6 +600,18 @@ namespace tpublic
 				return 0;
 			}
 
+			const StartMap*
+			GetStartMap(
+				uint32_t				aMapId) const
+			{
+				for(const std::unique_ptr<StartMap>& t : m_startMaps)
+				{
+					if(t->m_mapId == aMapId)
+						return t.get();
+				}
+				return NULL;
+			}
+
 			// Base implementation
 			void
 			FromSource(
@@ -687,6 +737,10 @@ namespace tpublic
 						{
 							m_restricted = aMember->GetBool();
 						}
+						else if(aMember->m_tag == "start_reputation")
+						{
+							m_startReputations.push_back(StartReputation(aMember));
+						}
 						else
 						{
 							TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
@@ -718,6 +772,7 @@ namespace tpublic
 				m_armorDecoration.ToStream(aStream);
 				aStream->WriteUInt(m_unlockedByAchievementId);
 				aStream->WriteBool(m_restricted);
+				aStream->WriteObjects(m_startReputations);
 
 				for(uint32_t i = 1; i < (uint32_t)ArmorStyle::NUM_IDS; i++)
 					m_armorStyles[i].ToStream(aStream);
@@ -768,6 +823,8 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadBool(m_restricted))
 					return false;
+				if(!aStream->ReadObjects(m_startReputations))
+					return false;
 
 				for (uint32_t i = 1; i < (uint32_t)ArmorStyle::NUM_IDS; i++)
 				{
@@ -805,7 +862,8 @@ namespace tpublic
 			std::unique_ptr<SpriteCollection>						m_weaponSprites[ItemType::NUM_IDS];
 			SpriteCollection										m_armorDecoration;
 			uint32_t												m_unlockedByAchievementId = 0;
-			bool													m_restricted = false;
+			bool													m_restricted = false;			
+			std::vector<StartReputation>							m_startReputations;
 		};
 
 	}
