@@ -10,6 +10,7 @@ changelog:
 	[
 		{ text: "Two new unlockable classes: witch and paladin." }
 		{ text: "A new type of shrine that is bound to the most popular deity of the previous day." }
+		{ text: "You can now create up to 8 characters per account." }
 	]	
 	
 	#######################################################################################
