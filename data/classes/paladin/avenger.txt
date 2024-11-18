@@ -452,14 +452,14 @@ ability holy_storm:
 	description: "Inflicts $damage$ damage on up to 3 adjacent enemies."
 	range: 1	
 	cooldowns: [ global holy_storm ]
-	flags: [ melee target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+	flags: [ spell melee target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
 	states: [ default in_combat ]
 	icon: icon_holy_storm
 	delay: 3
 	aoe_radius: 1
 	aoe_cap: 3
 	aoe_requirement target<must_not_be_in_state>: { id: dead }
-	resource_cost mana: 12
+	resource_cost mana: 20
 	talent_tree: paladin_avenger
 	source_particle_system: holy_storm
 
@@ -499,11 +499,11 @@ ability reckoning:
 	description: "Deals $damage$ damage to target."
 	range: 1	
 	cooldowns: [ global reckoning ]
-	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+	flags: [ spell melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
 	states: [ default in_combat ]
 	icon: icon_reckoning
 	delay: 3
-	resource_cost mana: 10
+	resource_cost mana: 15
 	talent_tree: paladin_avenger
 	melee_particle_system: reckoning
 	
