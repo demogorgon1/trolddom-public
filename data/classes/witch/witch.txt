@@ -39,7 +39,6 @@ class witch:
 	description: "Harness the unholy powers of the underworld."
 	
 	unlocked_by_achievement: underworld_follower
-	restricted: true
 	
 	systems: [ combat health_regen mana_regen ]
 	
