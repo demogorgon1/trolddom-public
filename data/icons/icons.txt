@@ -497,6 +497,10 @@ sprites:
 	sprite icon_divine_protection : { tags: [ icon ] }
 	sprite icon_blessing_of_binding : { tags: [ icon ] }
 	sprite icon_holy_exhaustion : { tags: [ icon ] }	
+	
+	cursor: { position: [ 0 432 ] }
+	sprite icon_fish_3 : { tags: [ icon ] }
+	
 }
 
 

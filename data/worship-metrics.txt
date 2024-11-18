@@ -13,6 +13,8 @@ worship_metrics:
 	favor_loss_multiplier: 2
 	item_cost_to_favor_conversion: 0.43
 	
+	disciple_level: !WORSHIP_LEVEL_3{}
+	
 	levels:
 	[
 		0

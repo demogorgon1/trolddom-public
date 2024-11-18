@@ -11,9 +11,9 @@ pantheon underworld:
 	faction: underworld
 	opposition: light
 	pray_ability: underworld_pray
-	
 	notification_string<gained_favor>: "You've gained favor with the underworld."
 	notification_string<lost_favor>: "You've lost favor with the underworld."
+	notification_string<disciple>: "An unholy portal has opened."
 	
 	deity_specifier: "an unholy"
 	shrine_display_name_prefix: "Unholy Shrine of "

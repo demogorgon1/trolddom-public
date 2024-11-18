@@ -1,0 +1,26 @@
+dialogue_screen .azrakkar_greetings:
+{
+	text: 
+	[	
+		"The shrines of this realm writhe with the flux of unholy energies, drawn from the veils between worlds. Their form and power twist and shift, shaped by the whims of the wretched deities that mortals dare to worship."
+	]			
+}
+
+dialogue_root .azrakkar_dialogue:
+{
+	.azrakkar_greetings: { }
+}
+
+entity .azrakkar: !NPC
+{
+	_string: "Azrakkar"
+	_dialogue_root: .azrakkar_dialogue
+	_loot_table: .npc
+	_level: 10
+	_faction: npcs
+	_creature_type: demon
+	_not_pushable: true
+	_sprite: demon_2
+	_sprite_dead: demon_2_dead
+}
+	

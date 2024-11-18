@@ -1,0 +1,34 @@
+!define local DOOR
+{
+	string: "Gate"
+	
+	systems: [ door ]
+	
+	components:
+	{
+		position: { }		
+		sound_source: { }
+		openable: 
+		{
+			sound: inventory_1
+			
+			# Blocked off for now
+			requirements: 
+			{
+				self<must_be_at_least_level>: 11
+			}
+		}
+		sprite: 
+		{ 
+			animations:
+			[
+				{ states: [ default spawning ] frames: [ door_closed_2 ] z_offset: -3 }
+				{ states: [ dead ] frames: [ door_open_2 ] z_offset: -3 }
+			]		
+		}		
+	}
+}
+
+entity .spawn_door: !DOOR { }
+
+map_entity_spawn .spawn_door: { entity .spawn_door: { } spawn_timer: { despawn_required: true } }

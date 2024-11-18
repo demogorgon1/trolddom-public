@@ -1,0 +1,184 @@
+map_player_spawn .player_spawn:
+{
+}
+
+map_player_spawn the_shrouded_lands_underworld:
+{
+}
+
+map_player_spawn the_shrouded_lands_light:
+{
+}
+
+map_entity_spawn .the_shrouded_lands_light_return:
+{
+	entity the_shrouded_lands_light_return: { weight: 1 }
+}
+
+map_entity_spawn .the_shrouded_lands_underworld_return:
+{
+	entity the_shrouded_lands_underworld_return: { weight: 1 }
+}
+
+map_entity_spawn .the_dawnbringer:
+{
+	entity .the_dawnbringer: { weight: 1 }
+}
+
+map_entity_spawn .malzeth:
+{
+	entity .malzeth: { weight: 1 }
+}
+
+map_entity_spawn .azrakkar:
+{
+	entity .azrakkar: { weight: 1 }
+}
+
+map_entity_spawn .kaelion:
+{
+	entity .kaelion: { weight: 1 }
+}
+
+zone .underworld_zone:
+{
+	string: "Altar of the Unseen"
+}
+
+zone .light_zone:
+{
+	string: "Landing of the Dawnbringer"
+}
+
+map_palette .tiles:
+{
+	tile fs_water: [ 9 86 104 ]
+	tile fs_ground_1: [ 97 91 62 ]
+	tile fs_ground_2: [ 67 61 32 ]
+	tile fs_rocks_1: [ 143 131 120 ]
+}
+
+map_palette .stuff:
+{	
+	entity_spawn underworld_shrine_top_deity: [ 160 135 60 ]	
+	entity_spawn holy_altar_top_deity: [ 35 160 60 ]	
+
+	entity_spawn .the_shrouded_lands_light_return: [ 54 26 217 ]	
+	entity_spawn .the_shrouded_lands_underworld_return: [ 54 54 217 ]	
+	entity_spawn .spawn_door: [ 135 60 60 ]	
+	entity_spawn .malzeth: [ 135 60 160 ]	
+	entity_spawn .the_dawnbringer: [ 135 160 60 ]	
+	entity_spawn .kaelion: [ 235 60 160 ]	
+	entity_spawn .azrakkar: [ 235 130 60 ]	
+
+	player_spawn .player_spawn: [ 0 0 255 ]
+	player_spawn the_shrouded_lands_underworld: [ 255 0 0 ]
+	player_spawn the_shrouded_lands_light: [ 0 255 0 ]	
+}
+
+map_palette .zones:
+{
+	zone .underworld_zone: [ 0 255 255 ]
+	zone .light_zone: [ 255 0 0 ]
+}
+
+map_palette .routes:
+{
+}
+
+map_palette .doodads:
+{
+}
+
+map_palette .cliffs:
+{
+}
+
+map_palette .levels:
+{
+	level<10>: [ 255 255 0 ]
+}
+
+loot_group the_shrouded_lands_fish: { } 
+
+loot_table .fish:
+{
+	slots:
+	[
+		{
+			possibility: { weight: 1 loot_group: the_shrouded_lands_fish }
+		}		
+	]		
+}
+
+map the_shrouded_lands:
+{
+	string: "The Shrouded Lands"
+	type: open_world
+	default_tile: fs_rocks_1
+	default_player_spawn: .player_spawn
+	default_fishing_loot_table: .fish
+	view_attenuation: 0
+	view_attenuation_bias: 0
+	view_hidden_visibility: 35	
+	has_overview_map: true
+	auto_doodads: true
+	max_players: 80
+	level: 10
+
+	layers:
+	[
+		{
+			palettes:	[ .tiles ]
+			source:		"the-shrouded-lands-tiles.png"
+		}
+
+		{
+			palettes:	[ .stuff ]
+			source:		"the-shrouded-lands-stuff.png"
+		}
+		
+		{
+			palettes:	[ .levels ]
+			source:		"the-shrouded-lands-levels.png"
+		}		
+		
+		{
+			palettes:	[ .zones ]
+			source:		"the-shrouded-lands-zones.png"
+		}				
+		
+		#{ 
+		#	palettes: 	[ .tiles ]
+		#	source:		"the-shrouded-lands-cover.png"
+		#	cover: 		true
+		#}
+		#
+		#{
+		#	palettes:	[ .sub_zones ]
+		#	source:		"the-shrouded-lands-subzones.png"
+		#}						
+		#
+		#{
+		#	palettes:	[ .routes ]
+		#	source:		"the-shrouded-lands-routes.png"
+		#}								
+		#
+		#{
+		#	palettes:	[ .doodads ]
+		#	source:		"the-shrouded-lands-doodads.png"
+		#}								
+		#
+		#{
+		#	palettes:	[ .flags ]
+		#	source:		"the-shrouded-lands-flags.png"
+		#}								
+		#
+		#{
+		#	palettes:	[ .cliffs ]
+		#	source:		"the-shrouded-lands-cliffs.png"
+		#}								
+		
+	]
+}
+ 

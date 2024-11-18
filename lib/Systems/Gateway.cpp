@@ -36,33 +36,37 @@ namespace tpublic::Systems
 		Context*			/*aContext*/) 
 	{
 		Components::Gateway* gateway = GetComponent<Components::Gateway>(aComponents);
-		const Components::Position* position = GetComponent<Components::Position>(aComponents);
 
-		TimeSeed timeSeed;
-		timeSeed.Update(gateway->m_schedule.m_timeSeedType, (uint64_t)time(NULL));
-
-		if(gateway->m_usePositionForRandomization)
-			timeSeed.m_seed ^= position->m_position.GetHash32();
-
-		if(gateway->m_activeGatewayInstance.m_timeSeed != timeSeed)
+		if(!gateway->m_schedule.m_noSchedule)
 		{
-			// Pick map 
-			if(gateway->m_maps.size() > 1)
-			{
-				std::mt19937 random(timeSeed.m_seed);
-				UniformDistribution<size_t> distribution(0, gateway->m_maps.size() - 1);
-				gateway->m_activeGatewayInstance.m_mapId = gateway->m_maps[distribution(random)];
-			}
-			else
-			{
-				TP_CHECK(gateway->m_maps.size() == 1, "No maps defined for gateway.");
-				gateway->m_activeGatewayInstance.m_mapId = gateway->m_maps[0];
-			}
+			const Components::Position* position = GetComponent<Components::Position>(aComponents);
 
-			// Update seed
-			gateway->m_activeGatewayInstance.m_timeSeed = timeSeed;
+			TimeSeed timeSeed;
+			timeSeed.Update(gateway->m_schedule.m_timeSeedType, (uint64_t)time(NULL));
 
-			gateway->SetDirty();
+			if (gateway->m_usePositionForRandomization)
+				timeSeed.m_seed ^= position->m_position.GetHash32();
+
+			if (gateway->m_activeGatewayInstance.m_timeSeed != timeSeed)
+			{
+				// Pick map 
+				if (gateway->m_maps.size() > 1)
+				{
+					std::mt19937 random(timeSeed.m_seed);
+					UniformDistribution<size_t> distribution(0, gateway->m_maps.size() - 1);
+					gateway->m_activeGatewayInstance.m_mapId = gateway->m_maps[distribution(random)].m_mapId;
+				}
+				else
+				{
+					TP_CHECK(gateway->m_maps.size() == 1, "No maps defined for gateway.");
+					gateway->m_activeGatewayInstance.m_mapId = gateway->m_maps[0].m_mapId;
+				}
+
+				// Update seed
+				gateway->m_activeGatewayInstance.m_timeSeed = timeSeed;
+
+				gateway->SetDirty();
+			}
 		}
 
 		return EntityState::CONTINUE;

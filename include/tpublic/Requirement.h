@@ -49,6 +49,7 @@ namespace tpublic
 			TYPE_MUST_HAVE_ITEM_TYPE_EQUIPPED,
 			TYPE_MUST_HAVE_EQUIPPED_ITEM_TYPE_FLAGS,
 			TYPE_MUST_BE_AT_LEAST_LEVEL,
+			TYPE_MUST_BE_DISCIPLE,
 		};
 
 		static DataType::Id
@@ -80,6 +81,7 @@ namespace tpublic
 
 			case TYPE_MUST_BE_FACTION:
 			case TYPE_MUST_HAVE_NEGATIVE_REPUTATION:
+			case TYPE_MUST_BE_DISCIPLE:
 				return DataType::ID_FACTION;
 
 			case TYPE_MUST_HAVE_DISCOVERED_ZONE:
@@ -213,6 +215,8 @@ namespace tpublic
 				m_type = TYPE_MUST_HAVE_EQUIPPED_ITEM_TYPE_FLAGS;
 			else if (typeString == "must_be_at_least_level")
 				m_type = TYPE_MUST_BE_AT_LEAST_LEVEL;
+			else if(typeString == "must_be_disciple")
+				m_type = TYPE_MUST_BE_DISCIPLE;
 			else
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid type.", aSource->m_annotation->GetIdentifier());
 

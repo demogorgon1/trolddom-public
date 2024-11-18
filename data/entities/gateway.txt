@@ -8,7 +8,7 @@ entity gateway:
 		position: { }		
 		gateway: 
 		{ 
-			maps: [ gateway_world ]
+			maps: [ { map: gateway_world } ]
 			schedule: daily
 			use_position_for_randomization: true
 		}
@@ -37,7 +37,7 @@ entity player_world_gateway:
 		position: { }		
 		gateway: 
 		{ 
-			maps: [ player_world ]
+			maps: [ { map: player_world } ]
 			player_worlds: true
 		}
 		sprite<static>: 
@@ -47,6 +47,126 @@ entity player_world_gateway:
 				{ 
 					states: [ default in_combat spawning ] 
 					frames: [ green_gateway_1 green_gateway_2 green_gateway_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+	}
+}
+
+entity the_shrouded_lands_light:
+{
+	string: "The Shrouded Lands"
+	
+	components:
+	{
+		position: { }		
+		gateway: 
+		{ 
+			maps: [ { map: the_shrouded_lands map_player_spawn: the_shrouded_lands_light } ]
+			schedule: none
+		}
+		visibility:
+		{
+			requirements: { requirement self<must_be_disciple>: light }
+		}
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ purple_gateway_1 purple_gateway_2 purple_gateway_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+	}
+}
+
+entity the_shrouded_lands_underworld:
+{
+	string: "The Shrouded Lands"
+	
+	components:
+	{
+		position: { }		
+		gateway: 
+		{ 
+			maps: [ { map: the_shrouded_lands map_player_spawn: the_shrouded_lands_underworld } ]
+			schedule: none
+		}
+		visibility:
+		{
+			requirements: { requirement self<must_be_disciple>: underworld }
+		}		
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ purple_gateway_1 purple_gateway_2 purple_gateway_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+	}
+}
+
+entity the_shrouded_lands_light_return:
+{
+	string: "Aetheris Isle"
+	
+	components:
+	{
+		position: { }		
+		gateway: 
+		{ 
+			maps: [ { map: open_world map_player_spawn: open_world_player_spawn_paladin } ]
+			schedule: none
+		}
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ purple_gateway_1 purple_gateway_2 purple_gateway_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+	}
+}
+
+entity the_shrouded_lands_underworld_return:
+{
+	string: "Aetheris Isle"
+	
+	components:
+	{
+		position: { }		
+		gateway: 
+		{ 
+			maps: [ { map: open_world map_player_spawn: open_world_player_spawn_witch } ]
+			schedule: none
+		}
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ purple_gateway_1 purple_gateway_2 purple_gateway_3 ] 		
 					frame_delay: 120 
 					random_start_frame: true 
 					z_offset: -3

@@ -44,6 +44,19 @@ namespace tpublic
 
 			switch(aRequirement->m_type)
 			{
+			case Requirement::TYPE_MUST_BE_DISCIPLE:
+				{
+					if (!entity->IsPlayer())
+						return false;
+
+					const Components::Reputation* reputation = entity->GetComponent<Components::Reputation>();
+					if (reputation == NULL)
+						return false;
+
+					if(reputation->GetReputation(aRequirement->m_id) < aManifest->m_worshipMetrics.m_discipleLevel)
+						return false;
+				}
+				break;
 			case Requirement::TYPE_MUST_BE_AT_LEAST_LEVEL:
 				{
 					const Components::CombatPublic* combatPublic = entity->GetComponent<Components::CombatPublic>();

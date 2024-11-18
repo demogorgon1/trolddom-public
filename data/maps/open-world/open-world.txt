@@ -207,6 +207,16 @@ map_entity_spawn .gateway:
 	entity gateway: { weight: 1 }
 }
 
+map_entity_spawn .the_shrouded_lands_light:
+{
+	entity the_shrouded_lands_light: { weight: 1 }
+}
+
+map_entity_spawn .the_shrouded_lands_underworld:
+{
+	entity the_shrouded_lands_underworld: { weight: 1 }
+}
+
 map_entity_spawn .zumhorn_2:
 {
 	entity .zumhorn_2: { weight: 1 init_state: default }
@@ -684,6 +694,8 @@ map_palette .stuff:
 	entity_spawn .fisherman: [ 0 2 255 ]
 	entity_spawn .junjun: [ 6 55 255 ]
 	entity_spawn .gateway: [ 54 23 85 ]	
+	entity_spawn .the_shrouded_lands_light: [ 54 26 217 ]	
+	entity_spawn .the_shrouded_lands_underworld: [ 54 54 217 ]	
 	entity_spawn .player_world_gateway: [ 23 60 85 ]	
 	entity_spawn .spawn_of_umbracoth: [ 32 0 0 ]		
 	entity_spawn .arcane_anomaly: [ 33 0 0 ]		

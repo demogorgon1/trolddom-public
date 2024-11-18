@@ -20,6 +20,18 @@ map_entity_spawn underworld_shrine:
 	entity underworld_shrine: { init_state: default } 
 }
 
+map_entity_spawn holy_altar_top_deity:
+{	
+	spawn_timer: { despawn_required: true }
+	entity holy_altar_top_deity: { init_state: default } 
+}
+
+map_entity_spawn underworld_shrine_top_deity:
+{	
+	spawn_timer: { despawn_required: true }
+	entity underworld_shrine_top_deity: { init_state: default } 
+}
+
 map_entity_spawn mining:
 {	
 	spawn_timer: { despawn_required: true }

@@ -209,6 +209,9 @@ sprites:
 	sprite skeleton: { dead: skeleton_dead }
 	sprite spirit: { dead: spirit_dead }
 	sprite skeleton_2: { dead: skeleton_2_dead }
+	sprite angel_1: { dead: angel_1_dead }
+	sprite demon_3: { dead: demon_3_dead }
+	sprite man_25: { dead: man_25_dead }
 	
 	cursor: { position: [ 0 176 ] }
 
@@ -225,6 +228,9 @@ sprites:
 	sprite skeleton_dead: { }
 	sprite spirit_dead: { }
 	sprite skeleton_2_dead: { }
+	sprite angel_1_dead: { }
+	sprite demon_3_dead: { }
+	sprite man_25_dead: { }
 	
 }
 
@@ -315,6 +321,11 @@ sprites:
 	sprite skeletal_remains_1: { }
 	sprite skeletal_remains_2: { }
 	sprite skeletal_remains_3: { }
+	sprite purple_gateway_1: { }
+	sprite purple_gateway_2: { }
+	sprite purple_gateway_3: { }
+	sprite door_closed_2: { }
+	sprite door_open_2: { }
 	
 }
 

@@ -1,0 +1,27 @@
+dialogue_screen .malzeth_greetings:
+{
+	text: 
+	[	
+		"Welcome to the shroud, mortal."
+	]			
+}
+
+dialogue_root .malzeth_dialogue:
+{
+	.malzeth_greetings: { }
+}
+
+entity .malzeth: !NPC
+{
+	_string: "Malzeth"
+	_dialogue_root: .malzeth_dialogue
+	_loot_table: .npc
+	_level: 12
+	_elite: true
+	_faction: npcs
+	_creature_type: demon
+	_not_pushable: true
+	_sprite: demon_3
+	_sprite_dead: demon_3_dead
+}
+	

@@ -19,6 +19,7 @@ namespace tpublic
 			{
 				NOTIFICATION_STRING_GAINED_FAVOR,
 				NOTIFICATION_STRING_LOST_FAVOR,
+				NOTIFICATION_STRING_DISCIPLE,
 
 				NUM_NOTIFICATION_STRINGS
 			};
@@ -33,6 +34,8 @@ namespace tpublic
 					return NOTIFICATION_STRING_GAINED_FAVOR;
 				else if(t == "lost_favor")
 					return NOTIFICATION_STRING_LOST_FAVOR;				
+				else if (t == "disciple")
+					return NOTIFICATION_STRING_DISCIPLE;
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid notification string.", aSource->m_annotation->GetIdentifier());
 				return NotificationString(0);
 			}

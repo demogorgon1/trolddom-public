@@ -54,7 +54,8 @@ namespace tpublic
 		virtual bool					WorldViewGetChanneling(
 											uint32_t				aSourceEntityInstanceId,
 											CastInProgress&			aOut) const = 0;
-
+		virtual uint32_t				WorldViewGetTopDeityId(
+											uint32_t				aPantheonId) const = 0;
 	};
 
 }

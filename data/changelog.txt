@@ -2,6 +2,17 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.1.17"
+
+	text: "Changes:"
+
+	list:
+	[
+		{ text: "Two new unlockable classes: witch and paladin." }
+		{ text: "A new type of shrine that is bound to the most popular deity of the previous day." }
+	]	
+	
+	#######################################################################################
 	heading: "v0.1.16"
 	
 	text: "Issues fixed:"

@@ -57,3 +57,63 @@ entity holy_altar:
 		}		
 	}
 }
+
+entity underworld_shrine_top_deity:
+{
+	debug_color: [ 200 0 0 ]
+	systems: [ shrine ]
+	components:
+	{
+		shrine: { pantheon: underworld top_deity: true }
+		display_name: { }
+		position: { }				
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ underworld_shrine_1 underworld_shrine_2 underworld_shrine_3 underworld_shrine_4 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+				
+				{ 
+					states: [ despawning ] 
+					frames: [ underworld_shrine_used ] 		
+					z_offset: -3
+				}					
+			]		
+		}		
+	}
+}
+
+entity holy_altar_top_deity:
+{
+	debug_color: [ 200 200 0 ]
+	systems: [ shrine ]
+	components:
+	{
+		shrine: { pantheon: light top_deity: true }
+		display_name: { }
+		position: { }		
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ holy_altar ] 		
+					z_offset: -3
+				}
+				
+				{ 
+					states: [ despawning ] 
+					frames: [ holy_altar_used ] 		
+					z_offset: -3
+				}				
+			]		
+		}		
+	}
+}

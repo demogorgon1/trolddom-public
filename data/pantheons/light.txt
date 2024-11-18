@@ -11,9 +11,9 @@ pantheon light:
 	faction: light
 	opposition: underworld
 	pray_ability: light_pray
-	
 	notification_string<gained_favor>: "You've gained favor with the light."
 	notification_string<lost_favor>: "You've lost favor with the light."
+	notification_string<disciple>: "A holy portal has opened."
 	
 	deity_specifier: "a holy"
 	shrine_display_name_prefix: "Holy Altar of "

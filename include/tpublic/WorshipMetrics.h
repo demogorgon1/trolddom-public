@@ -70,6 +70,8 @@ namespace tpublic
 					m_maxFavor = aChild->GetInt32();
 				else if (aChild->m_name == "min_favor")
 					m_minFavor = aChild->GetInt32();
+				else if (aChild->m_name == "disciple_level")
+					m_discipleLevel = aChild->GetInt32();
 				else if (aChild->m_name == "base_favor_update")
 					m_baseFavorUpdate = aChild->GetInt32();
 				else if (aChild->m_name == "favor_loss_multiplier")
@@ -93,6 +95,7 @@ namespace tpublic
 		{
 			aStream->WriteInt(m_maxFavor);
 			aStream->WriteInt(m_minFavor);
+			aStream->WriteInt(m_discipleLevel);
 			aStream->WriteInt(m_baseFavorUpdate);
 			aStream->WriteInt(m_favorLossMultiplier);
 			aStream->WriteUInts(m_levels);
@@ -108,6 +111,8 @@ namespace tpublic
 			if (!aStream->ReadInt(m_maxFavor))
 				return false;
 			if (!aStream->ReadInt(m_minFavor))
+				return false;
+			if (!aStream->ReadInt(m_discipleLevel))
 				return false;
 			if (!aStream->ReadInt(m_baseFavorUpdate))
 				return false;
@@ -198,6 +203,7 @@ namespace tpublic
 		int32_t								m_minFavor = 0;
 		int32_t								m_baseFavorUpdate = 0;
 		int32_t								m_favorLossMultiplier = 0;
+		int32_t								m_discipleLevel = 0;
 		float								m_itemCostToFavorConversion = 1.0f;
 		std::vector<uint32_t>				m_levels;
 		std::vector<LevelColors>			m_levelColors;

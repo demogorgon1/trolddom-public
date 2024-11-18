@@ -1,0 +1,29 @@
+dialogue_screen .seraphael_greetings:
+{
+	text: 
+	[	
+		"Behold! I am Seraphael, the Dawnbringer!\n"
+		"\n"
+		"Together we will cleanse these lands!"
+	]			
+}
+
+dialogue_root .seraphael_dialogue:
+{
+	.seraphael_greetings: { }
+}
+
+entity .the_dawnbringer: !NPC
+{
+	_string: "Seraphael the Dawnbringer"
+	_dialogue_root: .seraphael_dialogue
+	_loot_table: .npc
+	_level: 12
+	_elite: true
+	_faction: npcs
+	_creature_type: humanoid
+	_not_pushable: true
+	_sprite: angel_1
+	_sprite_dead: angel_1_dead
+}
+	

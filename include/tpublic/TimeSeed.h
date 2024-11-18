@@ -27,6 +27,9 @@ namespace tpublic
 		static uint64_t	GetNextTimeStamp(
 							uint64_t			aCurrentTimeStamp,
 							Type				aType);
+		static uint64_t	GetCurrentTimeStamp(
+							uint64_t			aCurrentTimeStamp,
+							Type				aType);
 
 		void			ToStream(
 							IWriter*			aWriter) const;

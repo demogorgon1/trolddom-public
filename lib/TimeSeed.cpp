@@ -182,6 +182,22 @@ namespace tpublic
 		return currentTimeAndDate.GetNextPeriodTimeStamp(aType);
 	}
 
+	uint64_t	
+	TimeSeed::GetCurrentTimeStamp(
+		uint64_t			aCurrentTimeStamp,
+		Type				aType)
+	{
+		if (aType == TYPE_BIDAILY)
+		{
+			uint64_t periodDuration = 12 * 60 * 60;
+			return (aCurrentTimeStamp / periodDuration) * periodDuration;
+		}
+
+		TimeAndDate currentTimeAndDate;
+		currentTimeAndDate.FromTimeStamp(aCurrentTimeStamp);
+		return currentTimeAndDate.GetPeriodTimeStamp(aType);
+	}
+
 	//----------------------------------------------------------------------------------------------
 
 	void		

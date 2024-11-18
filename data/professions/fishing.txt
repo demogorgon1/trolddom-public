@@ -142,3 +142,16 @@ item item_blue_moonfish:
 	item_level: 7
 	level_range: [ 8 10 ]
 }
+
+################################################################################
+# Bony Toesnapper
+
+item item_bony_toesnapper:
+{
+	loot_groups: [ the_shrouded_lands_fish ]		
+	string: "Bony Toesnapper"
+	icon: icon_fish_3
+	stack: 20
+	item_level: 10
+	level_range: [ 10 10 ]
+}

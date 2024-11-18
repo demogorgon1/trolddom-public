@@ -77,7 +77,9 @@ namespace tpublic
 				int32_t				aReputation,
 				int32_t				aMinReputation,
 				int32_t				aMaxReputation,
-				bool&				aOutReputationWasPositive)
+				int32_t				aTriggerLevel,
+				bool&				aOutReputationWasPositive,
+				bool&				aOutTriggered)
 			{
 				assert(aFactionId != 0);
 				Table::Map::iterator i = m_table.m_map.find(aFactionId);
@@ -90,6 +92,9 @@ namespace tpublic
 					if (newValue > aMaxReputation)
 						newValue = aMaxReputation;
 					i->second = newValue;
+
+					aOutTriggered = oldValue < aTriggerLevel && newValue >= aTriggerLevel;
+
 					aOutReputationWasPositive = oldValue > 0;
 					m_wasUpdated = true;
 					return newValue - oldValue;
@@ -103,6 +108,9 @@ namespace tpublic
 				aOutReputationWasPositive = false;
 				m_table.m_map[aFactionId] = newValue;
 				m_wasUpdated = true;
+
+				aOutTriggered = newValue >= aTriggerLevel;
+
 				return newValue;
 			}
 
