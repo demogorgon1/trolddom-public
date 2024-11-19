@@ -2,6 +2,17 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.1.19"
+
+	text: "Changes:"
+
+	list:
+	[
+		{ text: "Right-click on dead enemy to automatically loot everything." }		
+		{ text: "New key binds: select party members, select minions, select target of target, and loot all." }		
+	]	
+	
+	#######################################################################################
 	heading: "v0.1.18"
 
 	text: "Changes:"
