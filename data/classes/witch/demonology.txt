@@ -39,7 +39,7 @@ ability summon_lesser_demon:
 {
 	string: "Summon Lesser Demon"
 	description: "Summons a Lesser Demon."
-	flags: [ target_self minion_summon ]
+	flags: [ target_self minion_summon class_minion_summon ]
 	cast_time: 20
 	icon: icon_summon_lesser_demon
 	resource_cost mana: 30
@@ -55,7 +55,7 @@ ability summon_lesser_demon:
 		
 		refresh_npc_metrics:
 		{
-			weapon_damage: 0.65
+			weapon_damage: 0.85
 			health: 0.65
 			armor: 1
 		}
@@ -70,7 +70,7 @@ ability summon_lesser_demon:
 
 		refresh_npc_metrics:
 		{
-			weapon_damage: 0.728
+			weapon_damage: 0.952
 			health: 0.728
 			armor: 1
 		}
@@ -85,7 +85,7 @@ ability summon_lesser_demon:
 		
 		refresh_npc_metrics:
 		{
-			weapon_damage: 0.806
+			weapon_damage: 1.054
 			health: 0.806
 			armor: 1
 		}		
@@ -100,7 +100,7 @@ ability summon_lesser_demon:
 		
 		refresh_npc_metrics:
 		{
-			weapon_damage: 0.858
+			weapon_damage: 1.156
 			health: 0.858
 			armor: 1
 		}		
@@ -251,7 +251,7 @@ ability summon_black_beast:
 {
 	string: "Summon Black Beast"
 	description: "Summons a Black Beast."
-	flags: [ target_self minion_summon ]
+	flags: [ target_self minion_summon class_minion_summon ]
 	cast_time: 20
 	icon: icon_summon_black_beast
 	resource_cost mana: 30
@@ -339,7 +339,7 @@ ability summon_fiendish_spellcaster:
 {
 	string: "Summon Fiendish Spellcaster"
 	description: "Summons a Fiendish Spellcaster."
-	flags: [ target_self minion_summon ]
+	flags: [ target_self minion_summon class_minion_summon ]
 	cast_time: 20
 	icon: icon_summon_fiendish_spellcaster
 	resource_cost mana: 30

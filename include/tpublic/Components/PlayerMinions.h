@@ -17,9 +17,51 @@ namespace tpublic
 			static const Persistence::Id PERSISTENCE = Persistence::ID_MAIN;
 			static const Replication REPLICATION = REPLICATION_PRIVATE;
 
+			struct MinionData
+			{
+				void
+				ToStream(
+					IWriter*		aWriter) const
+				{
+					aWriter->WriteUInt(m_armor);
+					aWriter->WriteUInt(m_health);
+					aWriter->WriteUInt(m_mana);
+					aWriter->WriteUInt(m_weaponDamageMin);
+					aWriter->WriteUInt(m_weaponDamageMax);
+					aWriter->WriteUInt(m_level);
+				}
+
+				bool
+				FromStream(
+					IReader*		aReader) 
+				{
+					if (!aReader->ReadUInt(m_armor))
+						return false;
+					if (!aReader->ReadUInt(m_health))
+						return false;
+					if (!aReader->ReadUInt(m_mana))
+						return false;
+					if (!aReader->ReadUInt(m_weaponDamageMin))
+						return false;
+					if (!aReader->ReadUInt(m_weaponDamageMax))
+						return false;
+					if (!aReader->ReadUInt(m_level))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t		m_armor = 0;
+				uint32_t		m_health = 0;
+				uint32_t		m_mana = 0;
+				uint32_t		m_weaponDamageMin = 0;
+				uint32_t		m_weaponDamageMax = 0;
+				uint32_t		m_level = 0;
+			};
+
 			struct Minion
 			{
-				static const uint8_t VERSION = 1;
+				static const uint8_t VERSION = 2;
 
 				void
 				ToStream(
@@ -35,6 +77,7 @@ namespace tpublic
 
 					aWriter->WriteUInt(m_spawnTimeStamp);
 					aWriter->WriteUInt(m_durationSeconds);
+					aWriter->WriteOptionalObject(m_data);
 				}
 
 				bool
@@ -58,15 +101,21 @@ namespace tpublic
 						if(!aReader->ReadPOD(version))
 							return false;
 
-						if(version != 0 && version != 1)
+						if(version > VERSION)
 							return false;
 
 						if (!aReader->ReadUInt(m_spawnTimeStamp))
 							return false;
 
-						if(version == 1)
+						if(version >= 1)
 						{
 							if (!aReader->ReadUInt(m_durationSeconds))
+								return false;
+						}
+
+						if(version >= 2)
+						{
+							if(!aReader->ReadOptionalObject(m_data))
 								return false;
 						}
 					}
@@ -75,16 +124,17 @@ namespace tpublic
 				}
 
 				// Public data
-				uint32_t				m_entityId = 0;
-				uint32_t				m_entityInstanceId = 0;
-				bool					m_dead = false;
+				uint32_t					m_entityId = 0;
+				uint32_t					m_entityInstanceId = 0;
+				bool						m_dead = false;
 				
 				// Extra minion info
-				uint64_t				m_spawnTimeStamp = 0;
-				uint32_t				m_durationSeconds = 0;
+				uint64_t					m_spawnTimeStamp = 0;
+				uint32_t					m_durationSeconds = 0;
+				std::optional<MinionData>	m_data;
 
 				// Internal
-				bool					m_applyControl = false;
+				bool						m_applyControl = false;
 			};
 
 			struct MinionControl

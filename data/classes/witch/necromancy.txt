@@ -211,7 +211,7 @@ ability raise_dead:
 	description: "Raises a dead humanoid or undead to fight for you."
 	range: 7
 	cooldowns: [ global spell_unholy_lockout ]
-	flags: [ spell target_aoe target_aoe_always_self interruptable minion_summon ]
+	flags: [ spell target_aoe target_aoe_always_self interruptable minion_summon class_minion_summon ]
 	aoe_radius: 0
 	states: [ default in_combat ]
 	icon: icon_raise_dead

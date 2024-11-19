@@ -2,6 +2,36 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.1.18"
+
+	text: "Changes:"
+
+	list:
+	[
+		{ text: "Reduced cast time of Curse of Corruption." }
+		{ text: "Increased critical strike chance bonus from Blessing of War." }
+		{ text: "Paladins can now use staves (including fishing rods)." }
+		{ text: "XP from group kills is now calculated based on maximum character level instead of average." }
+		{ text: "You now only get XP from group kills if you contributed to it." }
+		{ text: "Witch minions don't count towards the instance minion limit." }
+		{ text: "Lesser demons have slightly larger teeth." }
+		{ text: "Experimental controller input support (needs to be enabled in options)." }
+	]	
+	
+	text: "Issues fixed:"
+
+	list:
+	[
+		{ text: "Blessing of the Defender and Curse of Inaction now work like intended." }
+		{ text: "Fixed bug where Judgement casting time wasn't affected by Relentless Assault." }
+		{ text: "Minion tool tips based on weapon damage now show correct values." }
+		{ text: "Fixed bug where tool tips would show the wrong mana costs." }
+		{ text: "Witch minions no longer die when you change instance or log in." }
+		{ text: "Fixed bug where you'd spawn outside of instance when reconnecting." }
+		{ text: "Fixed some typos and other small bugs." }		
+	]	
+
+	#######################################################################################
 	heading: "v0.1.17"
 
 	text: "Changes:"

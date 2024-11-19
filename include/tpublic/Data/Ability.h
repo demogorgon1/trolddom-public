@@ -62,7 +62,8 @@ namespace tpublic
 			enum ExtendedFlag : uint32_t
 			{
 				EXTENDED_FLAG_MINION_SUMMON			= 0x00000001,
-				EXTENDED_FLAG_NO_DELAY				= 0x00000002
+				EXTENDED_FLAG_NO_DELAY				= 0x00000002,
+				EXTENDED_FLAG_CLASS_MINION_SUMMON	= 0x00000004
 			};
 
 			static inline Resource::Id
@@ -152,6 +153,8 @@ namespace tpublic
 						*aOutExtendedFlags |= EXTENDED_FLAG_MINION_SUMMON;
 					else if (strcmp(identifier, "no_delay") == 0 && aOutExtendedFlags != NULL)
 						*aOutExtendedFlags |= EXTENDED_FLAG_NO_DELAY;
+					else if (strcmp(identifier, "class_minion_summon") == 0 && aOutExtendedFlags != NULL)
+						*aOutExtendedFlags |= EXTENDED_FLAG_CLASS_MINION_SUMMON;
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid ability flag.", identifier);
 				});
@@ -442,7 +445,8 @@ namespace tpublic
 			bool IsRanged() const { return m_flags & FLAG_RANGED; }
 			bool IsMinionSummon() const { return m_extendedFlags & EXTENDED_FLAG_MINION_SUMMON; }
 			bool IsNoDelay() const { return m_extendedFlags & EXTENDED_FLAG_NO_DELAY; }
-			
+			bool IsClassMinionSummon() const { return m_extendedFlags & EXTENDED_FLAG_CLASS_MINION_SUMMON; }
+
 			bool 
 			IsUsableInState(
 				EntityState::Id			aEntityState) const

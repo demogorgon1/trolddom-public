@@ -15,6 +15,8 @@ ${
 		_commands: [ move attack ]
 		_abilities: [ { id: .minor_demon_attack flags: [ auto ] } ]
 		_ability_prio: [ .minor_demon_attack ]
+		_class_minion: true
+		_store_combat_data: true
 	}
 	
 	name_template .minor_demon:
@@ -101,6 +103,8 @@ ${
 		]
 		
 		_ability_prio: [ .fiendish_spellcaster_unholy_empowerment .fiendish_spellcaster_fireball .fiendish_spellcaster_attack ]		
+		_class_minion: true
+		_store_combat_data: true
 	}
 	
 	name_template .fiendish_spellcaster:
@@ -319,6 +323,9 @@ ${
 			.black_beast_growl
 			.black_beast_attack 
 		]		
+		
+		_class_minion: true
+		_store_combat_data: true
 	}
 	
 	name_template .black_beast:
@@ -489,6 +496,8 @@ ${
 		_commands: [ move attack ]
 		_abilities: [ { id: .skeleton_attack flags: [ auto ] } ]
 		_ability_prio: [ .skeleton_attack ]
+		_class_minion: true
+		_store_combat_data: true
 	}
 	
 	name_template .skeleton:
@@ -578,6 +587,8 @@ ${
 			.skeletal_terror_attack 
 		]		
 		
+		_class_minion: true
+		_store_combat_data: true
 	}
 	
 	name_template .skeletal_terror:

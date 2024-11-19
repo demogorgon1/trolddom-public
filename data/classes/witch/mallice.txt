@@ -220,7 +220,7 @@ ability curse_of_corruption:
 	talent_tree: witch_malice
 	speed: 7
 	projectile: curse_of_corruption
-	cast_time: 20
+	cast_time: 15
 	target_particle_system: purple_spell_hit
 
 	direct_effect apply_aura:
@@ -509,27 +509,34 @@ talent witch_curse_of_inaction:
 	]
 }
 
+cooldown curse_of_inaction:
+{
+	duration: 300
+}
+
 aura curse_of_inaction:
 {
 	string: "Curse of Inaction"
 	description: "Unable to do anything."
 	icon: icon_curse_of_inaction		
 	type: debuff
-	duration: 100	
+	duration: 60	
 	flags: [ unique magic ]
 	sound: spell_14
+	aura_effect stun: { }
+	particle_system: judgement	
 }
 
 ability curse_of_inaction:
 {
 	string: "Curse of Inaction"
-	description: "Causes target to be unable to do anything for 10 seconds."
+	description: "Causes target to be unable to do anything for 6 seconds."
 	range: 6
-	cooldowns: [ global spell_unholy_lockout ]
+	cooldowns: [ global spell_unholy_lockout curse_of_inaction ]
 	flags: [ spell target_other target_hostile ]
 	states: [ default in_combat ]
 	icon: icon_curse_of_inaction
-	resource_cost mana: 10
+	resource_cost mana: 13
 	talent_tree: witch_malice
 	speed: 7
 	projectile: curse_of_inaction
@@ -550,6 +557,23 @@ particle_system curse_of_inaction:
 		flags: [ attached no_rotation face_target ]
 		scale: 0.4
 		count: 1		
+	}
+}
+
+particle_system curse_of_inaction_aura:
+{
+	particle:
+	{
+		sprites: [ effect_stun_0 effect_stun_1 effect_stun_2 effect_stun_3 ]
+		flags: [ attached ]
+		sprite_interval: 125
+		count: 1
+		scale: 1
+		alpha: 0.45
+		fade_in: 250	
+		fade_out: 250
+		offset_x: 0.5
+		offset_y: 0.5	
 	}
 }
 

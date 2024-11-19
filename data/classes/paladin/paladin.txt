@@ -25,6 +25,7 @@ class paladin:
 	weapon_sprites weapon_2h_sword: { sprite: paladin_sword_2h sprites_walk: [ paladin_walk_1_sword_2h paladin_walk_2_sword_2h ] }
 	weapon_sprites weapon_2h_mace:  { sprite: paladin_mace_2h  sprites_walk: [ paladin_walk_1_mace_2h  paladin_walk_2_mace_2h ] }
 	weapon_sprites weapon_2h_axe:   { sprite: paladin_axe_2h   sprites_walk: [ paladin_walk_1_axe_2h   paladin_walk_2_axe_2h ] }
+	weapon_sprites weapon_2h_staff: { sprite: paladin_staff    sprites_walk: [ paladin_walk_1_staff    paladin_walk_2_staff ] }
 	weapon_sprites shield: 			{ sprite: paladin_shield   sprites_walk: [ paladin_walk_1_shield   paladin_walk_2_shield ] }
 			
 	armor_decoration: { sprite: paladin_decoration sprite_dead: paladin_decoration_dead sprites_walk: [ paladin_decoration_walk_1 paladin_decoration_walk_2 ] }
@@ -37,7 +38,7 @@ class paladin:
 	default_action_bar: [ attack reckoning !DEFAULT_ABILITIES{} ]
 	talent_trees: [ paladin_avenger paladin_guardian paladin_healer ]
 	
-	item_types: [ armor_cloth armor_mail armor_plate weapon_1h_sword weapon_1h_mace weapon_1h_axe weapon_2h_sword weapon_2h_mace weapon_2h_axe shield ]
+	item_types: [ armor_cloth armor_mail armor_plate weapon_1h_sword weapon_1h_mace weapon_1h_axe weapon_2h_sword weapon_2h_mace weapon_2h_axe shield weapon_2h_staff ]
 
 	start_map open_world: [ open_world_player_spawn_paladin ]	
 	start_equipment main_hand: weapon_wooden_mace

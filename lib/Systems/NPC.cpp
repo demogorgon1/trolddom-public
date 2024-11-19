@@ -157,9 +157,15 @@ namespace tpublic::Systems
 			if(tag->m_playerTag.IsSet())
 			{
 				if(tag->m_playerTag.IsGroup())
-					aContext->m_eventQueue->EventQueueGroupKillXP(tag->m_playerTag.GetGroupId(), combat->m_level, aEntityId);
+				{
+					std::vector<uint32_t> threatEntityInstanceIds;
+					threat->m_table.GetEntityInstanceIds(threatEntityInstanceIds);
+					aContext->m_eventQueue->EventQueueGroupKillXP(tag->m_playerTag.GetGroupId(), combat->m_level, aEntityId, threatEntityInstanceIds);
+				}
 				else if(tag->m_playerTag.IsCharacter())
+				{
 					aContext->m_eventQueue->EventQueueIndividualKillXP(tag->m_playerTag.GetCharacterId(), tag->m_playerTag.GetCharacterLevel(), combat->m_level, aEntityId);
+				}
 
 				Components::Lootable* lootable = GetComponent<Components::Lootable>(aComponents);
 				lootable->m_playerTag = tag->m_playerTag;

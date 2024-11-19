@@ -175,7 +175,7 @@ aura paladin_blessing_of_war_1:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Your chance to get a critical strike is increased by 15% for 10 seconds after target dodges or parries your attack."
+	description: "Your chance to get a critical strike is increased by 25% for 10 seconds after target dodges or parries your attack."
 	aura_effect combat_event_trigger: 
 	{ 
 		combat_event<source>: dodge
@@ -209,7 +209,7 @@ aura paladin_blessing_of_war_buff_1:
 	duration: 100
 	stat_modifiers:
 	{
-		phys_crit_chance: { add: 15 }
+		phys_crit_chance: { add: 25 }
 	}
 }
 
@@ -217,7 +217,7 @@ aura paladin_blessing_of_war_2:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Your chance to get a critical strike is increased by 30% for 10 seconds after target dodges or parries your attack."
+	description: "Your chance to get a critical strike is increased by 50% for 10 seconds after target dodges or parries your attack."
 	aura_effect combat_event_trigger: 
 	{ 
 		combat_event<source>: parry
@@ -251,7 +251,7 @@ aura paladin_blessing_of_war_buff_2:
 	duration: 100
 	stat_modifiers:
 	{
-		phys_crit_chance: { add: 30 }
+		phys_crit_chance: { add: 50 }
 	}
 }
 
@@ -375,7 +375,7 @@ aura paladin_relentless_assault:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Your critical strikes cause your next Divine Smite, Flash Heal or Judgement in the next 10 seconds to be instant cast."
+	description: "Your critical strikes cause your next Divine Smite, Flash Heal or Judgement within the next 10 seconds to be instant cast."
 	aura_effect combat_event_trigger: 
 	{ 
 		combat_event<source>: critical

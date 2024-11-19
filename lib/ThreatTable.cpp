@@ -203,6 +203,14 @@ namespace tpublic
 			printf("%u[%u]: %d threat\n", t->m_key.m_entityInstanceId, t->m_key.m_entityInstanceSeq, t->m_threat);
 	}
 
+	void			
+	ThreatTable::GetEntityInstanceIds(
+		std::vector<uint32_t>& aOutEntityInstanceIds) const
+	{
+		for (const Entry* t = GetTop(); t != NULL; t = t->m_next)
+			aOutEntityInstanceIds.push_back(t->m_key.m_entityInstanceId);
+	}
+
 	//------------------------------------------------------------------------------
 
 	ThreatTable::Entry* 

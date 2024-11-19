@@ -51,6 +51,8 @@ namespace tpublic
 							const SourceEntityInstance&				aSourceEntityInstance) const;
 		void			Clear();
 		void			DebugPrint() const;
+		void			GetEntityInstanceIds(
+							std::vector<uint32_t>&					aOutEntityInstanceIds) const;
 
 		// Data access
 		bool			IsEmpty() const { return m_head == NULL; }

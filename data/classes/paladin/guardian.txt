@@ -79,7 +79,7 @@ aura judgement:
 
 cooldown judgement:
 {
-	duration: 200
+	duration: 300
 }
 
 ability judgement:
@@ -88,7 +88,7 @@ ability judgement:
 	description: "Stuns target for 5 seconds."
 	range: 6
 	cooldowns: [ global judgement spell_holy_lockout ]
-	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_miss ]
+	flags: [ spell offensive target_other target_hostile can_be_dodged can_be_parried can_miss ]
 	states: [ default in_combat ]
 	icon: icon_judge
 	delay: 3
@@ -264,7 +264,7 @@ aura paladin_blessing_of_protection_1:
 	aura_effect combat_event_trigger: 
 	{ 
 		combat_event<target>: dodge
-		ability<self>: paladin_blessing_of_protection_trigger_1		
+		ability<target>: paladin_blessing_of_protection_trigger_1		
 	}
 }
 
@@ -282,7 +282,7 @@ ability paladin_blessing_of_protection_trigger_1:
 
 aura paladin_blessing_of_protection_buff_1:
 {
-	string: "Blessing of Protection"
+	string: "Blessing of the Defender"
 	type: buff
 	flags: [ unique ]
 	icon: icon_blessing_of_protection
@@ -301,7 +301,7 @@ aura paladin_blessing_of_protection_2:
 	aura_effect combat_event_trigger: 
 	{ 
 		combat_event<target>: dodge
-		ability<self>: paladin_blessing_of_protection_trigger_2	
+		ability<target>: paladin_blessing_of_protection_trigger_2	
 	}
 }
 
@@ -319,7 +319,7 @@ ability paladin_blessing_of_protection_trigger_2:
 
 aura paladin_blessing_of_protection_buff_2:
 {
-	string: "Blessing of Protection"
+	string: "Blessing of the Defender"
 	type: buff
 	flags: [ unique ]
 	icon: icon_blessing_of_protection

@@ -58,6 +58,8 @@
 			<exists _has_rage> resources: { rage: 100 }
 			<exists _ability_prio> ability_prio: @_ability_prio
 			<exists _reimburse_item> reimburse_item: @_reimburse_item
+			<exists _class_minion and _class_minion> class_minion: true
+			<exists _store_combat_data and _store_combat_data> store_combat_data: true
 		}		
 		sprite<static>: 
 		{ 
