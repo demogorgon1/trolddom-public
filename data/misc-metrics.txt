@@ -1,0 +1,10 @@
+misc_metrics:
+{
+	##################################################################
+	# Stash expansion
+	
+	first_extra_stash_slot_price: 2000
+	additional_extra_stash_slot_price_multiplier: 1.3
+	max_extra_stash_slot_price: 100000
+	max_extra_stash_slots: 48
+}

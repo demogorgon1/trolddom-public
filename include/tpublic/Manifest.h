@@ -6,6 +6,7 @@
 #include "IReader.h"
 #include "ItemMetrics.h"
 #include "IWriter.h"
+#include "MiscMetrics.h"
 #include "NPCMetrics.h"
 #include "PersistentIdTable.h"
 #include "PlayerComponents.h"
@@ -438,6 +439,7 @@ namespace tpublic
 		ProfessionMetrics								m_professionMetrics;
 		AbilityMetrics									m_abilityMetrics;
 		WorshipMetrics									m_worshipMetrics;
+		MiscMetrics										m_miscMetrics;
 		WordList::Data									m_wordList;
 		DefaultSoundEffects								m_defaultSoundEffects;
 		TileLayering									m_tileLayering;
