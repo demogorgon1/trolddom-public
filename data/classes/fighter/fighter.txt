@@ -114,191 +114,26 @@ class fighter:
 
 	level_progression:
 	[
-		{
-			level: 1
-			
-			unlock_abilities:
-			[
-				fighter_attack
-				fighter_shoot
-				strike
-				
-				!DEFAULT_ABILITIES{}
-			]
-						
-			stats:
-			{
-				dexterity: 4
-				strength: 6
-				wisdom: 2
-				constitution: 4
-				spirit: 5
-			}
-			
-			resource health: { add_max: 80 }
-			resource rage: { add_max: 100 }
-			
-			add_unarmed_weapon_damage: [ 2 4 ]
-		}
-		
-		{
-			level: 2
-			
-			unlock_abilities:
-			[				
-				rend
-			]
-			
-			stats:
-			{
-				strength: 1
-				constitution: 1
-			}
-			
-			resource health: { add_max: 8 }
-		}
-		
-		{
-			level: 3
-			
-			unlock_abilities:
-			[				
-				charge				
-			]
-			
-			stats:
-			{
-				dexterity: 1
-				constitution: 1
-				spirit: 1
-			}			
-			
-			resource health: { add_max: 8 }
-		}		
-		
-		{
-			level: 4
-			
-			unlock_abilities:
-			[
-				kick
-			]
-			
-			stats:
-			{
-				strength: 1
-				constitution: 1
-			}			
-			
-			resource health: { add_max: 8 }			
-		}				
-		
-		{
-			level: 5
-			
-			unlock_abilities:
-			[
-				taunt				
-			]
-			
-			stats:
-			{
-				dexterity: 1
-				constitution: 1
-				spirit: 1
-			}			
-			
-			resource health: { add_max: 8 }
-		}		
-		
-		{
-			level: 6
-			
-			unlock_abilities:
-			[
-				bash				
-			]
-			
-			stats:
-			{
-				strength: 1
-				constitution: 1
-			}			
-			
-			resource health: { add_max: 8 }			
-		}				
-
-		{
-			level: 7
-			
-			unlock_abilities:
-			[			
-				whirlwind			
-			]
-			
-			stats:
-			{
-				dexterity: 1
-				constitution: 1
-				spirit: 1
-			}	
-
-			resource health: { add_max: 8 }
-		}		
-		
-		{
-			level: 8
-			
-			unlock_abilities:
-			[
-				throw_rock			
-			]
-			
-			stats:
-			{
-				strength: 1
-				constitution: 1
-			}			
-			
-			resource health: { add_max: 8 }			
-		}				
-
-		{
-			level: 9
-			
-			unlock_abilities:
-			[
-				hamstring
-			]
-			
-			stats:
-			{
-				dexterity: 1
-				constitution: 1
-				spirit: 1
-			}			
-			
-			resource health: { add_max: 8 }			
-		}		
-		
-		{
-			level: 10
-			
-			unlock_abilities:
-			[			
-				fortify
-			]
-			
-			stats:
-			{
-				strength: 1
-				constitution: 1
-			}			
-			
-			resource health: { add_max: 8 }			
-			achievement: fighter_level_10
-		}				
-		
+		{ level: 1 unlock_abilities: [ fighter_attack fighter_shoot strike !DEFAULT_ABILITIES{} ] stats: { dexterity: 4 strength: 6 wisdom: 2 constitution: 4 spirit: 5 } resource health: { add_max: 80 } resource rage: { add_max: 100 } add_unarmed_weapon_damage: [ 2 4 ] }
+		{ level: 2 unlock_abilities: [ rend ] stats: { strength: 1 constitution: 1 } resource health: { add_max: 8 } }		
+		{ level: 3 unlock_abilities: [ charge ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: 8 } }				
+		{ level: 4 unlock_abilities: [ kick ] stats: { strength: 1 constitution: 1 } resource health: { add_max: 8 } }						
+		{ level: 5 unlock_abilities: [ taunt ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: 8 } }				
+		{ level: 6 unlock_abilities: [ bash ] stats: { strength: 1 constitution: 1 } resource health: { add_max: 8 } }				
+		{ level: 7 unlock_abilities: [ whirlwind ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: 8 } }				
+		{ level: 8 unlock_abilities: [ throw_rock ] stats: { strength: 1 constitution: 1 } resource health: { add_max: 8 } }				
+		{ level: 9 unlock_abilities: [ hamstring ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: 8 } }				
+		{ level: 10 unlock_abilities: [ fortify ] stats: { strength: 1 constitution: 1 } resource health: { add_max: 8 } achievement: fighter_level_10 }				
+		{ level: 11 unlock_abilities: [ ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: 8 } }				
+		{ level: 12 unlock_abilities: [ ] stats: { strength: 1 constitution: 1 } resource health: { add_max: 8 } }				
+		{ level: 13 unlock_abilities: [ ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: 8 } }				
+		{ level: 14 unlock_abilities: [ ] stats: { strength: 1 constitution: 1 } resource health: { add_max: 8 } }				
+		{ level: 15 unlock_abilities: [ ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: 8 } }				
+		{ level: 16 unlock_abilities: [ ] stats: { strength: 1 constitution: 1 } resource health: { add_max: 8 } }				
+		{ level: 17 unlock_abilities: [ ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: 8 } }				
+		{ level: 18 unlock_abilities: [ ] stats: { strength: 1 constitution: 1 } resource health: { add_max: 8 } }				
+		{ level: 19 unlock_abilities: [ ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: 8 } }				
+		{ level: 20 unlock_abilities: [ ] stats: { strength: 1 constitution: 1 } resource health: { add_max: 8 } }									
 	]
 }
 

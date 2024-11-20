@@ -67,7 +67,7 @@ ability exorcism:
 	{	
 		damage_type: holy
 		flags: [ can_be_critical is_magical ]
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.8 b: [ [ 1 25 ] [ 10 50 ] ] }			
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.8 b: [ [ 1 25 ] [ 10 50 ] [ 20 100 ] ] }			
 	}	
 }
 
@@ -110,7 +110,7 @@ ability divine_smite:
 	{	
 		damage_type: holy
 		flags: [ can_be_critical is_magical ]
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.7 b: [ [ 1 18 ] [ 10 36 ] ] }			
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.7 b: [ [ 1 18 ] [ 10 36 ] [ 20 72 ] ] }			
 	}	
 }
 
@@ -511,7 +511,7 @@ ability reckoning:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 8 ] [ 10 16 ] ] }
+		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 8 ] [ 10 16 ] [ 20 32 ] ] }
 	}
 }
 

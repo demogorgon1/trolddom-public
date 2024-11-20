@@ -492,7 +492,7 @@ ability consecrate_tick:
 	{
 		flags: [ is_magical ]
 		damage_type: holy
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 7 ] [ 10 14 ] ] }													
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 7 ] [ 10 14 ] [ 20 28 ] ] }													
 	}
 	direct_effect threat:
 	{

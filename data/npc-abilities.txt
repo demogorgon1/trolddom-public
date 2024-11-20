@@ -40,7 +40,7 @@ ability npc_strike:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: x_plus_a x: weapon a: [ [ 1 5 ] [ 10 20 ] ] }
+		function: { expression: x_plus_a x: weapon a: [ [ 1 5 ] [ 10 20 ] [ 20 40 ] ] }
 	}
 }
 
@@ -72,7 +72,7 @@ ability npc_firebolt:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: fire
-		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] ] elite_multiplier: 1.7 }
+		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] [ 20 70 ] ] elite_multiplier: 1.7 }
 	}
 }
 
@@ -91,7 +91,7 @@ ability npc_curse_tick:
 	direct_effect damage:
 	{
 		damage_type: unholy
-		function: { expression: a a: [ [ 1 4 ] [ 10 10 ] ] elite_multiplier: 1.7 }
+		function: { expression: a a: [ [ 1 4 ] [ 10 10 ] [ 20 20 ] ] elite_multiplier: 1.7 }
 	}
 }
 
@@ -144,7 +144,7 @@ ability npc_poison_bite_tick:
 	direct_effect damage:
 	{
 		damage_type: poison
-		function: { expression: a a: [ [ 1 2 ] [ 10 7 ] ] elite_multiplier: 1.7 }
+		function: { expression: a a: [ [ 1 2 ] [ 10 7 ] [ 20 14 ] ] elite_multiplier: 1.7 }
 	}
 }
 
@@ -180,7 +180,7 @@ ability npc_poison_bite:
 	{
 		flags: [ can_be_critical ]
 		damage_type: poison
-		function: { expression: a a: [ [ 1 4 ] [ 10 15 ] ] elite_multiplier: 1.7 }
+		function: { expression: a a: [ [ 1 4 ] [ 10 15 ] [ 20 30 ] ] elite_multiplier: 1.7 }
 	}
 
 	direct_effect apply_aura:
