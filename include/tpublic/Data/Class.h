@@ -434,13 +434,7 @@ namespace tpublic
 					aNode->ForEachChild([&](
 						const SourceNode* aItem)
 					{				
-						if (aItem->m_name == "str_to_dps")
-							m_strToDps.FromSource(aItem);
-						else if (aItem->m_name == "str_weapon_damage_min")
-							m_strWeaponDamageMin.FromSource(aItem);
-						else if (aItem->m_name == "str_weapon_damage_max")
-							m_strWeaponDamageMax.FromSource(aItem);
-						else if (aItem->m_name == "dex_to_ranged_dps")
+						if (aItem->m_name == "dex_to_ranged_dps")
 							m_dexToRangedDps.FromSource(aItem);
 						else if (aItem->m_name == "dex_ranged_damage_min")
 							m_dexRangedDamageMin.FromSource(aItem);
@@ -470,6 +464,12 @@ namespace tpublic
 							m_wisToSpellDamage.FromSource(aItem);
 						else if (aItem->m_name == "wis_to_healing")
 							m_wisToHealing.FromSource(aItem);
+						else if (aItem->m_name == "attack_power_to_dps")
+							m_attackPowerToDps.FromSource(aItem);
+						else if (aItem->m_name == "str_to_attack_power")
+							m_strToAttackPower.FromSource(aItem);
+						else if (aItem->m_name == "dex_to_attack_power")
+							m_dexToAttackPower.FromSource(aItem);
 						else
 							TP_VERIFY(false, aItem->m_debugInfo, "'%s' not a valid item.", aItem->m_name.c_str());
 					});
@@ -479,10 +479,7 @@ namespace tpublic
 				ToStream(
 					IWriter*				aStream) const 
 				{
-					m_strToDps.ToStream(aStream);
 					m_dexToRangedDps.ToStream(aStream);
-					m_strWeaponDamageMin.ToStream(aStream);
-					m_strWeaponDamageMax.ToStream(aStream);
 					m_dexRangedDamageMin.ToStream(aStream);
 					m_dexRangedDamageMax.ToStream(aStream);
 					m_dexToPhysCrit.ToStream(aStream);
@@ -497,19 +494,16 @@ namespace tpublic
 					m_strToBlockValue.ToStream(aStream);
 					m_wisToSpellDamage.ToStream(aStream);
 					m_wisToHealing.ToStream(aStream);
+					m_attackPowerToDps.ToStream(aStream);
+					m_strToAttackPower.ToStream(aStream);
+					m_dexToAttackPower.ToStream(aStream);
 				}
 			
 				bool	
 				FromStream(
 					IReader*				aStream) 
 				{
-					if (!m_strToDps.FromStream(aStream))
-						return false;
 					if (!m_dexToRangedDps.FromStream(aStream))
-						return false;
-					if (!m_strWeaponDamageMin.FromStream(aStream))
-						return false;
-					if (!m_strWeaponDamageMax.FromStream(aStream))
 						return false;
 					if (!m_dexRangedDamageMin.FromStream(aStream))
 						return false;
@@ -539,13 +533,16 @@ namespace tpublic
 						return false;
 					if (!m_wisToHealing.FromStream(aStream))
 						return false;
+					if (!m_attackPowerToDps.FromStream(aStream))
+						return false;
+					if (!m_strToAttackPower.FromStream(aStream))
+						return false;
+					if (!m_dexToAttackPower.FromStream(aStream))
+						return false;
 					return true;
 				}
 
 				// Public data
-				StatsConversionEntry								m_strToDps;
-				StatsConversionEntry								m_strWeaponDamageMin;
-				StatsConversionEntry								m_strWeaponDamageMax;
 				StatsConversionEntry								m_dexToRangedDps;
 				StatsConversionEntry								m_dexRangedDamageMin;
 				StatsConversionEntry								m_dexRangedDamageMax;
@@ -561,6 +558,9 @@ namespace tpublic
 				StatsConversionEntry								m_strToBlockValue;
 				StatsConversionEntry								m_wisToSpellDamage;
 				StatsConversionEntry								m_wisToHealing;
+				StatsConversionEntry								m_attackPowerToDps;
+				StatsConversionEntry								m_strToAttackPower;
+				StatsConversionEntry								m_dexToAttackPower;
 			};
 
 			void

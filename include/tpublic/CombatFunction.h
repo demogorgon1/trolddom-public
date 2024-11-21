@@ -77,7 +77,8 @@ namespace tpublic
 			INPUT_RANGED,
 			INPUT_RANGED_AVERAGE,
 			INPUT_WEAPON_NORMALIZED,
-			INPUT_WEAPON_AVERAGE_NORMALIZED
+			INPUT_WEAPON_AVERAGE_NORMALIZED,
+			INPUT_ATTACK_POWER
 		};
 
 		enum Entity : uint8_t
@@ -142,6 +143,8 @@ namespace tpublic
 				return INPUT_WEAPON_NORMALIZED;
 			else if (t == "weapon_average_normalized")
 				return INPUT_WEAPON_AVERAGE_NORMALIZED;
+			else if (t == "attack_power")
+				return INPUT_ATTACK_POWER;
 			TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid input.", aSource->GetIdentifier());
 			return INVALID_INPUT;
 		}

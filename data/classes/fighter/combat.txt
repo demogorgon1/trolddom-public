@@ -406,7 +406,7 @@ ability whirlwind:
 	aoe_radius: 1
 	aoe_cap: 3
 	aoe_requirement target<must_not_be_in_state>: { id: dead }
-	resource_cost rage: 10
+	resource_cost rage: 20
 	talent_tree: fighter_combat
 	source_particle_system: whirlwind	
 

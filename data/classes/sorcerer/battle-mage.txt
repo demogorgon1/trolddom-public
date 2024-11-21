@@ -235,7 +235,7 @@ ability wizard_strike:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
-		function: { expression: x_plus_a x: weapon a: [ [ 1 8 ] [ 10 16 ] [ 20 32 ] ] }											
+		function: { expression: x_plus_a x: attack_power a: [ [ 1 10 ] [ 10 20 ] [ 20 40 ] ] }											
 	}		
 }
 

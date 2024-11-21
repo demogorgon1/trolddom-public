@@ -79,9 +79,6 @@ class witch:
 	
 	stats_conversion:
 	{
-		str_to_dps: [ 2 5 ]
-		str_weapon_damage_min: [ 2 3 ]
-		str_weapon_damage_max: [ 4 3 ]
 		dex_to_phys_crit: [ 1 20 ]
 		dex_to_dodge: [ 1 20 ]
 		dex_to_parry: [ 1 25 ]
@@ -92,6 +89,9 @@ class witch:
 		spi_to_mana_regen_per_5_sec: [ 3 2 ]
 		spi_to_health_regen: [ 1 1 ]
 		wis_to_spell_damage: [ 1 8 ]
+		str_to_attack_power: [ 1 1 ]
+		dex_to_attack_power: [ 1 1 ]
+		attack_power_to_dps: [ 1 10 ]
 	}	
 
 	level_progression:

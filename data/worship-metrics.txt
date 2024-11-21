@@ -11,7 +11,11 @@ worship_metrics:
 	max_favor: 27000
 	base_favor_update: 10
 	favor_loss_multiplier: 2
-	item_cost_to_favor_conversion: 0.43
+	
+	# favor = (1 - 1 / ((cost / item_cost_to_favor_constant_a) + 1)) * (item_cost_to_favor_constant_b - 1) + 1
+	item_cost_to_favor_constant_a: 6000
+	item_cost_to_favor_constant_b: 800
+	stackable_vendor_item_favor_multiplier: 0.09
 	
 	disciple_level: !WORSHIP_LEVEL_3{}
 	

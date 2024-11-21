@@ -23,7 +23,6 @@ ability consumable_small_healing_potion:
 item consumable_small_healing_potion:
 {
 	loot_groups: [ world_drops_consumable ]
-	item_level: 2 
 	icon: icon_small_red_potion
 	string: "Small Healing Potion"
 	stack: 10	
@@ -51,7 +50,6 @@ ability consumable_small_mana_potion:
 item consumable_small_mana_potion:
 {
 	loot_groups: [ world_drops_consumable ]
-	item_level: 2 
 	icon: icon_small_blue_potion
 	string: "Small Mana Potion"
 	stack: 10
@@ -146,7 +144,6 @@ ability consumable_elixir_of_the_giant:
 item consumable_elixir_of_the_giant:
 {
 	loot_groups: [ world_drops_uncommon ]
-	item_level: 4 
 	icon: icon_small_green_potion
 	string: "Elixir of the Giant"
 	stack: 10
@@ -185,7 +182,6 @@ ability consumable_elixir_of_the_owl:
 item consumable_elixir_of_the_owl:
 {
 	loot_groups: [ world_drops_uncommon ]
-	item_level: 4 
 	icon: icon_small_cyan_potion
 	string: "Elixir of the Owl"
 	stack: 10
@@ -224,7 +220,6 @@ ability consumable_elixir_of_the_bear:
 item consumable_elixir_of_the_bear:
 {
 	loot_groups: [ world_drops_uncommon ]
-	item_level: 4 
 	icon: icon_small_purple_potion
 	string: "Elixir of the Bear"
 	stack: 10
@@ -262,7 +257,6 @@ ability consumable_spell_juice:
 
 item consumable_spell_juice:
 {
-	item_level: 4 
 	icon: icon_brown_potion
 	string: "Spell Juice"
 	stack: 10
@@ -299,7 +293,6 @@ ability consumable_power_potion:
 
 item consumable_power_potion:
 {
-	item_level: 8
 	icon: icon_orange_potion
 	string: "Power Potion"
 	stack: 10

@@ -467,7 +467,7 @@ ability holy_storm:
 	{
 		flags: [ can_be_critical ]
 		damage_type: holy
-		function: { expression: x x: weapon }		
+		function: { expression: x x: weapon_normalized }		
 	}
 }
 
