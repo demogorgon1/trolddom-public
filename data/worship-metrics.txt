@@ -9,7 +9,7 @@ worship_metrics:
 
 	min_favor: -2000
 	max_favor: 27000
-	base_favor_update: 10
+	base_favor_update: 24
 	favor_loss_multiplier: 2
 	
 	# favor = (1 - 1 / ((cost / item_cost_to_favor_constant_a) + 1)) * (item_cost_to_favor_constant_b - 1) + 1
