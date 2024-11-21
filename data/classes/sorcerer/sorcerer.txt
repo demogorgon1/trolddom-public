@@ -119,6 +119,13 @@ class sorcerer:
 		{ level: 19 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }		
 		{ level: 20 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } achievement: sorcerer_level_10 }		
 	]
+	
+	gear_optimization default<{ weapon_dps_weight: 0.0 }>:
+	{	
+		spell_damage: 1.0
+		wisdom: 0.8
+		constitution: 0.25
+	}	
 }
 
 ###############################################################################

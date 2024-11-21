@@ -92,6 +92,13 @@ class paladin:
 		{ level: 19 unlock_abilities: [	] stats: { dexterity: 1 strength: 1 spirit: 1 }	resource health: { add_max: 6 }	resource mana: { add_max: 6 } }				
 		{ level: 20 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 }	resource mana: { add_max: 6 } }						
 	]
+	
+	gear_optimization default<{ weapon_dps_weight: 1.0 }>:
+	{	
+		strength: 1.0
+		dexterity: 0.5
+		constitution: 0.25
+	}
 }
 
 ###############################################################################

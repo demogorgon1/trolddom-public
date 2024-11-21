@@ -393,7 +393,7 @@ ability bash:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: a_mul_x x: attack_power a: 1.2 }				
+		function: { expression: a_mul_x x: attack_power a: 0.7 }				
 	}
 	
 	direct_effect apply_aura:

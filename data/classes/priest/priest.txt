@@ -55,7 +55,6 @@ class priest:
 		str_to_attack_power: [ 1 1 ]
 		dex_to_attack_power: [ 1 1 ]
 		attack_power_to_dps: [ 1 10 ]
-
 	}	
 
 	level_progression:
@@ -82,6 +81,13 @@ class priest:
 		{ level: 19 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: 6 }	resource mana: { add_max: 6 } }		
 		{ level: 20 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } achievement: priest_level_10 } 		
 	]
+	
+	gear_optimization default<{ weapon_dps_weight: 0.0 }>:
+	{	
+		spell_damage: 1.0
+		wisdom: 0.8
+		constitution: 0.25
+	}	
 }
 
 ###############################################################################
