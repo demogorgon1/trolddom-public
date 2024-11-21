@@ -502,6 +502,8 @@ namespace tpublic
 							m_delay = aMember->GetInt32();
 						else if (aMember->m_name == "cooldowns")
 							aMember->GetIdArray(DataType::ID_COOLDOWN, m_cooldowns);
+						else if(aMember->m_name == "trigger_only_cooldown")
+							m_triggerOnlyCooldownId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_COOLDOWN, aMember->GetIdentifier());
 						else if (aMember->m_name == "cast_time")
 							m_castTime = aMember->GetInt32();
 						else if (aMember->m_name == "icon")
@@ -591,6 +593,7 @@ namespace tpublic
 				m_soundEffects.ToStream(aWriter);
 				aWriter->WriteOptionalObject(m_npcLevelRange);
 				aWriter->WriteUInt(m_requiredLevel);
+				aWriter->WriteUInt(m_triggerOnlyCooldownId);
 				m_iconFrom.ToStream(aWriter);
 				m_descriptionFrom.ToStream(aWriter);
 				aWriter->WriteObjects(m_sourceVisuals);
@@ -671,6 +674,8 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadUInt(m_requiredLevel))
 					return false;
+				if (!aReader->ReadUInt(m_triggerOnlyCooldownId))
+					return false;
 				if (!m_iconFrom.FromStream(aReader))
 					return false;
 				if (!m_descriptionFrom.FromStream(aReader))
@@ -731,6 +736,7 @@ namespace tpublic
 			uint32_t											m_mustHaveNearbyEntityId = 0;
 			std::vector<uint32_t>								m_mustHaveOneOfNearbyEntityIds;
 			std::vector<Visual>									m_sourceVisuals;
+			uint32_t											m_triggerOnlyCooldownId = 0;
 		};
 
 	}

@@ -386,6 +386,7 @@ ability kick:
 	description: "Interrupts target spell casting."
 	range: 1
 	cooldowns: [ global kick ]
+	trigger_only_cooldown: global
 	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
 	states: [ default in_combat ]
 	icon: icon_kick
