@@ -57,7 +57,8 @@ namespace tpublic
 				FIELD_CASH,
 				FIELD_AVAILABLE_CASH,
 				FIELD_AVAILABLE_LOOT,
-				FIELD_VERSION
+				FIELD_VERSION,
+				FIELD_TIME_STAMP,
 			};
 
 			static void
@@ -70,6 +71,7 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_INT64, FIELD_AVAILABLE_CASH, NULL, offsetof(Lootable, m_availableCash));
 				aSchema->DefineCustomObjectsNoSource<AvailableLoot>(FIELD_AVAILABLE_LOOT, offsetof(Lootable, m_availableLoot));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_VERSION, NULL, offsetof(Lootable, m_version));
+				aSchema->Define(ComponentSchema::TYPE_UINT64, FIELD_TIME_STAMP, NULL, offsetof(Lootable, m_timeStamp));
 			}
 
 			bool
@@ -117,6 +119,7 @@ namespace tpublic
 				m_cash = false;
 				m_availableCash = 0;
 				m_availableLoot.clear();
+				m_timeStamp = 0;
 				m_version = 0;
 			}
 
@@ -126,6 +129,7 @@ namespace tpublic
 			bool						m_cash = false;
 			int64_t						m_availableCash = 0;
 			std::vector<AvailableLoot>	m_availableLoot;
+			uint64_t					m_timeStamp = 0;
 			uint32_t					m_version = 0;			
 		};
 	}

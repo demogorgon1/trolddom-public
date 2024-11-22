@@ -21,6 +21,103 @@ namespace tpublic
 			static const DataType::Id DATA_TYPE = DataType::ID_CLASS;
 			static const bool TAGGED = true;
 
+			struct GearOptimization
+			{
+				struct Entry
+				{
+					Entry()
+					{
+					}
+
+					Entry(
+						const SourceNode*	aSource)
+					{
+						m_statId = Stat::StringToId(aSource->m_name.c_str());
+						TP_VERIFY(m_statId != Stat::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid stat.", aSource->m_name.c_str());
+						m_weight = aSource->GetFloat();
+					}
+
+					void
+					ToStream(
+						IWriter*			aWriter) const
+					{
+						aWriter->WritePOD(m_statId);
+						aWriter->WriteFloat(m_weight);
+					}
+
+					bool
+					FromStream(
+						IReader*			aReader)
+					{
+						if(!aReader->ReadPOD(m_statId))
+							return false;
+						else if(!aReader->ReadFloat(m_weight))
+							return false;
+						return true;
+					}
+
+					// Public data
+					Stat::Id			m_statId = Stat::INVALID_ID;
+					float				m_weight = 0.0f;
+				};
+
+				GearOptimization()
+				{
+					
+				}
+
+				GearOptimization(
+					const SourceNode*		aSource)
+				{
+					m_name = aSource->m_name;
+
+					if(aSource->m_annotation)
+					{
+						aSource->m_annotation->GetObject()->ForEachChild([&](
+							const SourceNode* aChild)
+						{
+							if(aChild->m_name == "weapon_dps_weight")
+								m_weaponDPSWeight = aChild->GetFloat();
+							else
+								TP_VERIFY(false, aChild->m_debugInfo, "'%s' not a valid item.", aChild->m_name.c_str());
+						});
+					}
+
+					aSource->GetObject()->ForEachChild([&](
+						const SourceNode*	aChild)
+					{
+						m_entries.push_back(Entry(aChild));
+					});
+				}
+
+				void
+				ToStream(
+					IWriter*				aWriter) const
+				{
+					aWriter->WriteString(m_name);
+					aWriter->WriteObjects(m_entries);
+					aWriter->WriteFloat(m_weaponDPSWeight);
+				}
+
+				bool
+				FromStream(
+					IReader*				aReader)
+				{
+					if(!aReader->ReadString(m_name))
+						return false;
+					else if(!aReader->ReadObjects(m_entries))
+						return false;
+					else if(!aReader->ReadFloat(m_weaponDPSWeight))
+						return false;
+					return true;
+				}
+
+				// Public data
+				std::string				m_name;
+				std::vector<Entry>		m_entries;
+				float					m_weaponDPSWeight = 0.0f;
+			};
+
 			struct Color
 			{
 				uint8_t					m_r = 0;
@@ -434,13 +531,7 @@ namespace tpublic
 					aNode->ForEachChild([&](
 						const SourceNode* aItem)
 					{				
-						if (aItem->m_name == "str_to_dps")
-							m_strToDps.FromSource(aItem);
-						else if (aItem->m_name == "str_weapon_damage_min")
-							m_strWeaponDamageMin.FromSource(aItem);
-						else if (aItem->m_name == "str_weapon_damage_max")
-							m_strWeaponDamageMax.FromSource(aItem);
-						else if (aItem->m_name == "dex_to_ranged_dps")
+						if (aItem->m_name == "dex_to_ranged_dps")
 							m_dexToRangedDps.FromSource(aItem);
 						else if (aItem->m_name == "dex_ranged_damage_min")
 							m_dexRangedDamageMin.FromSource(aItem);
@@ -470,6 +561,12 @@ namespace tpublic
 							m_wisToSpellDamage.FromSource(aItem);
 						else if (aItem->m_name == "wis_to_healing")
 							m_wisToHealing.FromSource(aItem);
+						else if (aItem->m_name == "attack_power_to_dps")
+							m_attackPowerToDps.FromSource(aItem);
+						else if (aItem->m_name == "str_to_attack_power")
+							m_strToAttackPower.FromSource(aItem);
+						else if (aItem->m_name == "dex_to_attack_power")
+							m_dexToAttackPower.FromSource(aItem);
 						else
 							TP_VERIFY(false, aItem->m_debugInfo, "'%s' not a valid item.", aItem->m_name.c_str());
 					});
@@ -479,10 +576,7 @@ namespace tpublic
 				ToStream(
 					IWriter*				aStream) const 
 				{
-					m_strToDps.ToStream(aStream);
 					m_dexToRangedDps.ToStream(aStream);
-					m_strWeaponDamageMin.ToStream(aStream);
-					m_strWeaponDamageMax.ToStream(aStream);
 					m_dexRangedDamageMin.ToStream(aStream);
 					m_dexRangedDamageMax.ToStream(aStream);
 					m_dexToPhysCrit.ToStream(aStream);
@@ -497,19 +591,16 @@ namespace tpublic
 					m_strToBlockValue.ToStream(aStream);
 					m_wisToSpellDamage.ToStream(aStream);
 					m_wisToHealing.ToStream(aStream);
+					m_attackPowerToDps.ToStream(aStream);
+					m_strToAttackPower.ToStream(aStream);
+					m_dexToAttackPower.ToStream(aStream);
 				}
 			
 				bool	
 				FromStream(
 					IReader*				aStream) 
 				{
-					if (!m_strToDps.FromStream(aStream))
-						return false;
 					if (!m_dexToRangedDps.FromStream(aStream))
-						return false;
-					if (!m_strWeaponDamageMin.FromStream(aStream))
-						return false;
-					if (!m_strWeaponDamageMax.FromStream(aStream))
 						return false;
 					if (!m_dexRangedDamageMin.FromStream(aStream))
 						return false;
@@ -539,13 +630,16 @@ namespace tpublic
 						return false;
 					if (!m_wisToHealing.FromStream(aStream))
 						return false;
+					if (!m_attackPowerToDps.FromStream(aStream))
+						return false;
+					if (!m_strToAttackPower.FromStream(aStream))
+						return false;
+					if (!m_dexToAttackPower.FromStream(aStream))
+						return false;
 					return true;
 				}
 
 				// Public data
-				StatsConversionEntry								m_strToDps;
-				StatsConversionEntry								m_strWeaponDamageMin;
-				StatsConversionEntry								m_strWeaponDamageMax;
 				StatsConversionEntry								m_dexToRangedDps;
 				StatsConversionEntry								m_dexRangedDamageMin;
 				StatsConversionEntry								m_dexRangedDamageMax;
@@ -561,6 +655,9 @@ namespace tpublic
 				StatsConversionEntry								m_strToBlockValue;
 				StatsConversionEntry								m_wisToSpellDamage;
 				StatsConversionEntry								m_wisToHealing;
+				StatsConversionEntry								m_attackPowerToDps;
+				StatsConversionEntry								m_strToAttackPower;
+				StatsConversionEntry								m_dexToAttackPower;
 			};
 
 			void
@@ -607,6 +704,18 @@ namespace tpublic
 				for(const std::unique_ptr<StartMap>& t : m_startMaps)
 				{
 					if(t->m_mapId == aMapId)
+						return t.get();
+				}
+				return NULL;
+			}
+
+			const GearOptimization*
+			GetGearOptimization(
+				const char*				aName) const
+			{
+				for(const std::unique_ptr<GearOptimization>& t : m_gearOptimizations)
+				{
+					if(t->m_name == aName)
 						return t.get();
 				}
 				return NULL;
@@ -741,6 +850,10 @@ namespace tpublic
 						{
 							m_startReputations.push_back(StartReputation(aMember));
 						}
+						else if(aMember->m_tag == "gear_optimization")
+						{
+							m_gearOptimizations.push_back(std::make_unique<GearOptimization>(aMember));
+						}
 						else
 						{
 							TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
@@ -773,6 +886,7 @@ namespace tpublic
 				aStream->WriteUInt(m_unlockedByAchievementId);
 				aStream->WriteBool(m_restricted);
 				aStream->WriteObjects(m_startReputations);
+				aStream->WriteObjectPointers(m_gearOptimizations);
 
 				for(uint32_t i = 1; i < (uint32_t)ArmorStyle::NUM_IDS; i++)
 					m_armorStyles[i].ToStream(aStream);
@@ -825,6 +939,8 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadObjects(m_startReputations))
 					return false;
+				if(!aStream->ReadObjectPointers(m_gearOptimizations))
+					return false;
 
 				for (uint32_t i = 1; i < (uint32_t)ArmorStyle::NUM_IDS; i++)
 				{
@@ -864,6 +980,7 @@ namespace tpublic
 			uint32_t												m_unlockedByAchievementId = 0;
 			bool													m_restricted = false;			
 			std::vector<StartReputation>							m_startReputations;
+			std::vector<std::unique_ptr<GearOptimization>>			m_gearOptimizations;
 		};
 
 	}

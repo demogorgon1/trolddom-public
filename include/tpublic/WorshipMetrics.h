@@ -2,6 +2,7 @@
 
 #include "Image.h"
 #include "IReader.h"
+#include "ItemInstanceData.h"
 #include "IWriter.h"
 #include "Parser.h"
 
@@ -82,8 +83,12 @@ namespace tpublic
 					aChild->GetUIntArray(m_deityPowerRankPercentiles);
 				else if (aChild->m_name == "level_colors")
 					aChild->GetObjectArray(m_levelColors);
-				else if (aChild->m_name == "item_cost_to_favor_conversion")
-					m_itemCostToFavorConversion = aChild->GetFloat();
+				else if (aChild->m_name == "item_cost_to_favor_constant_a")
+					m_itemCostToFavorConstantA = aChild->GetFloat();
+				else if (aChild->m_name == "item_cost_to_favor_constant_b")
+					m_itemCostToFavorConstantB = aChild->GetFloat();
+				else if (aChild->m_name == "stackable_vendor_item_favor_multiplier")
+					m_stackableVendorItemFavorMultiplier = aChild->GetFloat();
 				else
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 			});
@@ -101,7 +106,9 @@ namespace tpublic
 			aStream->WriteUInts(m_levels);
 			aStream->WriteUInts(m_deityPowerRankPercentiles);
 			aStream->WriteObjects(m_levelColors);
-			aStream->WriteFloat(m_itemCostToFavorConversion);
+			aStream->WriteFloat(m_itemCostToFavorConstantA);
+			aStream->WriteFloat(m_itemCostToFavorConstantB);
+			aStream->WriteFloat(m_stackableVendorItemFavorMultiplier);
 		}
 
 		bool
@@ -124,7 +131,11 @@ namespace tpublic
 				return false;
 			if(!aStream->ReadObjects(m_levelColors))
 				return false;
-			if(!aStream->ReadFloat(m_itemCostToFavorConversion))
+			if(!aStream->ReadFloat(m_itemCostToFavorConstantA))
+				return false;
+			if (!aStream->ReadFloat(m_itemCostToFavorConstantB))
+				return false;
+			if (!aStream->ReadFloat(m_stackableVendorItemFavorMultiplier))
 				return false;
 			return true;
 		}
@@ -197,6 +208,20 @@ namespace tpublic
 			TP_CHECK(m_levels.size() > 0, "No levels defined.");
 			return (uint32_t)m_levels.size() - 1;
 		}
+
+		int32_t 
+		CalculateOfferingFavor(
+			const ItemInstanceData&			aItemInstanceData,
+			uint32_t						aStackSize) const
+		{	
+			float x = (float)aItemInstanceData.m_cost;
+			if (aItemInstanceData.m_itemData->m_stackSize > 1 && aItemInstanceData.m_itemData->IsVendor())
+				x *= m_stackableVendorItemFavorMultiplier;
+
+			float y = (1.0f - 1.0f / ((x / m_itemCostToFavorConstantA) + 1.0f)) * (m_itemCostToFavorConstantB - 1.0f) + 1.0f;
+			float favor = y * (float)aStackSize;
+			return (int32_t)favor;
+		}
 				
 		// Public data
 		int32_t								m_maxFavor = 0;
@@ -204,7 +229,9 @@ namespace tpublic
 		int32_t								m_baseFavorUpdate = 0;
 		int32_t								m_favorLossMultiplier = 0;
 		int32_t								m_discipleLevel = 0;
-		float								m_itemCostToFavorConversion = 1.0f;
+		float								m_itemCostToFavorConstantA = 1.0f;
+		float								m_itemCostToFavorConstantB = 1.0f;
+		float								m_stackableVendorItemFavorMultiplier = 1.0f;
 		std::vector<uint32_t>				m_levels;
 		std::vector<LevelColors>			m_levelColors;
 		std::vector<uint32_t>				m_deityPowerRankPercentiles;

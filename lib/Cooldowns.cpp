@@ -103,7 +103,7 @@ namespace tpublic
 		{
 			for(uint32_t cooldownId : aAbility->m_cooldowns)
 			{
-				if(cooldownId == t.m_cooldownId)
+				if(cooldownId == t.m_cooldownId && cooldownId != aAbility->m_triggerOnlyCooldownId)
 					return true;
 			}
 		}

@@ -80,7 +80,7 @@ ability void_lightning_tick:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.25 b: [ [ 1 6 ] [ 10 12 ] ] }									
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.25 b: [ [ 1 6 ] [ 10 12 ] [ 20 24 ] ] }									
 	}	
 }
 
@@ -138,7 +138,7 @@ ability void_lightning:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.65 b: [ [ 1 25 ] [ 10 50 ] ] }									
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.65 b: [ [ 1 25 ] [ 10 50 ] [ 20 100 ] ] }									
 	}	
 }
 
@@ -408,7 +408,7 @@ ability arcane_missile:
 	
 		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 15 ] [ 10 30 ] ] }											
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 15 ] [ 10 30 ] [ 20 60 ] ] }											
 	}
 }
 
@@ -473,7 +473,7 @@ aura sleep:
 	particle_system: sleep
 	icon: icon_sleep
 	type: debuff
-	duration: 120
+	duration: based_on_effects
 	flags: [ unique magic cancel_on_damage single_target ]
 	aura_effect stun: { }
 	aura_effect repeat: 
@@ -517,6 +517,7 @@ ability counterspell:
 	description: "Interrupts target spell casting."
 	range: 8
 	cooldowns: [ global counterspell spell_arcane_lockout ]
+	trigger_only_cooldown: global
 	flags: [ spell offensive target_other target_hostile can_miss ]
 	states: [ default in_combat ]
 	icon: icon_counterspell

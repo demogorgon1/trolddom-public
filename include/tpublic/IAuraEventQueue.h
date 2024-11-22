@@ -15,6 +15,7 @@ namespace tpublic
 								uint32_t										aAbilityId,
 								uint32_t										aAuraId,
 								const SourceEntityInstance&						aSourceEntityInstance,
+								bool											aSourceIsPlayerOrMinion,
 								uint32_t										aTargetEntityInstanceId,
 								std::vector<std::unique_ptr<AuraEffectBase>>&	aAuraEffects) = 0;
 	};

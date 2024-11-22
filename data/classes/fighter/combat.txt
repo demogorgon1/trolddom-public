@@ -323,7 +323,7 @@ ability mortal_strike:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: x_plus_a x: weapon a: [ [ 1 9 ] [ 10 18 ] ] }
+		function: { expression: x_plus_a x: weapon a: [ [ 1 9 ] [ 10 18 ] [ 20 36 ] ] }
 	}
 	
 	direct_effect apply_aura:
@@ -367,7 +367,7 @@ ability strike:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 4 ] [ 10 8 ] ] }
+		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 4 ] [ 10 8 ] [ 20 16 ] ] }
 	}
 }
 
@@ -406,7 +406,7 @@ ability whirlwind:
 	aoe_radius: 1
 	aoe_cap: 3
 	aoe_requirement target<must_not_be_in_state>: { id: dead }
-	resource_cost rage: 10
+	resource_cost rage: 20
 	talent_tree: fighter_combat
 	source_particle_system: whirlwind	
 

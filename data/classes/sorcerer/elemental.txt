@@ -335,7 +335,7 @@ ability lake_of_fire_tick:
 	{
 		flags: [ is_magical ]
 		damage_type: fire
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 10 ] [ 10 20 ] ] }											
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 10 ] [ 10 20 ] [ 20 40 ] ] }											
 	}
 }
 
@@ -402,7 +402,7 @@ ability firebolt:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: fire
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 28 ] [ 10 56 ] ] }											
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 32 ] [ 10 64 ] [ 20 128 ] ] }											
 		
 	}
 	
@@ -465,7 +465,7 @@ ability fireball:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: fire
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 1 b: [ [ 1 40 ] [ 10 80 ] ] }											
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 1 b: [ [ 1 50 ] [ 10 100 ] [ 20 200 ] ] }											
 	}
 	
 	direct_effect apply_aura:
@@ -527,7 +527,7 @@ ability ice_lance:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: frost
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 1 b: [ [ 1 20 ] [ 10 40 ] ] }													
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 1 b: [ [ 1 30 ] [ 10 60 ] [ 20 120 ] ] }													
 	}
 	
 	direct_effect apply_aura:
@@ -577,7 +577,7 @@ ability frost_explosion:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: frost
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 15 ] [ 10 30 ] ] }													
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 15 ] [ 10 30 ] [ 20 60 ] ] }													
 	}
 	
 	direct_effect apply_aura:

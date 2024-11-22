@@ -153,6 +153,7 @@ namespace tpublic
 		m_abilityMetrics.ToStream(aStream);
 		m_wordList.ToStream(aStream);
 		m_worshipMetrics.ToStream(aStream);
+		m_miscMetrics.ToStream(aStream);
 		m_defaultSoundEffects.ToStream(aStream);
 		m_tileLayering.ToStream(aStream);
 		aStream->WriteOptionalObjectPointer(m_changelog);
@@ -187,6 +188,8 @@ namespace tpublic
 		if (!m_wordList.FromStream(aStream))
 			return false;
 		if (!m_worshipMetrics.FromStream(aStream))
+			return false;
+		if (!m_miscMetrics.FromStream(aStream))
 			return false;
 		if (!m_defaultSoundEffects.FromStream(aStream))
 			return false;

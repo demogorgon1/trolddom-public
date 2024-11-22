@@ -138,6 +138,9 @@ namespace tpublic::DirectEffects
 
 		uint32_t damage = (uint32_t)m_function.EvaluateSourceAndTargetEntityInstances(aRandom, _GetDamageModifier(abilityModifiers), aSource, aTarget);
 
+		if(damage == 0)
+			damage = 1;
+
 		CombatEvent::Id result = aId;
 
 		if(m_flags & DirectEffect::FLAG_CAN_BE_CRITICAL && aId == CombatEvent::ID_HIT && sourceCombatPrivate != NULL)

@@ -21,7 +21,8 @@ namespace tpublic
 
 			enum Field : uint32_t
 			{
-				FIELD_ITEMS
+				FIELD_ITEMS,
+				FIELD_EXTRA_SLOTS
 			};
 
 			static void
@@ -29,16 +30,25 @@ namespace tpublic
 				ComponentSchema*					aSchema)
 			{
 				aSchema->DefineCustomObjectNoSource<ItemList>(FIELD_ITEMS, offsetof(Stash, m_items));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_EXTRA_SLOTS, NULL, offsetof(Stash, m_extraSlots));
 			}
 
 			void
 			Reset()
 			{
 				m_items.Reset();
+				m_extraSlots = 0;
+			}
+
+			uint32_t 
+			GetSoftSizeLimit() const
+			{
+				return m_extraSlots + SOFT_SIZE_LIMIT;
 			}
 
 			// Public data
 			ItemList		m_items;
+			uint32_t		m_extraSlots = 0;
 		};
 	}
 

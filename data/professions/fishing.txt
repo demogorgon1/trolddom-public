@@ -19,7 +19,7 @@ aura fishing:
 	icon: icon_fishing_rod
 	type: buff
 	flags: [ channeled ]
-	duration: 100
+	duration: based_on_effects
 	aura_effect repeat: 
 	{ 
 		update_interval: 10

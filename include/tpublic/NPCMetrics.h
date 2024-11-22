@@ -5,6 +5,7 @@
 #include "IWriter.h"
 #include "Parser.h"
 #include "Resource.h"
+#include "UIntCurve.h"
 #include "UIntRange.h"
 
 namespace tpublic
@@ -124,6 +125,10 @@ namespace tpublic
 		FromSource(
 			const SourceNode*			aSource)
 		{
+			typedef std::unordered_map<uint32_t, UIntCurve<uint32_t>> BaseResourceCurveTable;
+			BaseResourceCurveTable baseResourceCurveTable;
+			std::unique_ptr<UIntCurve<uint32_t>> baseWeaponDamageCurve;
+
 			aSource->ForEachChild([&](
 				const SourceNode* aChild)
 			{
@@ -133,6 +138,17 @@ namespace tpublic
 					uint32_t level = aChild->m_annotation->GetUInt32();
 					TP_VERIFY(level > 0 && level < 100, aChild->m_debugInfo, "Invalid level annotation.");
 					AddLevel(level)->FromSource(aChild);
+				}
+				else if(aChild->m_name == "base_resource_curve")
+				{
+					TP_VERIFY(aChild->m_annotation, aChild->m_debugInfo, "Missing resource annotation.");
+					Resource::Id resourceId = Resource::StringToId(aChild->m_annotation->GetIdentifier());
+					TP_VERIFY(resourceId != Resource::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid resource.", aChild->m_annotation->GetIdentifier());
+					baseResourceCurveTable[resourceId] = UIntCurve<uint32_t>(aChild);
+				}
+				else if(aChild->m_name == "base_weapon_damage_curve")
+				{
+					baseWeaponDamageCurve = std::make_unique<UIntCurve<uint32_t>>(aChild);
 				}
 				else if(aChild->m_name == "aggro_ranges")
 				{
@@ -162,6 +178,34 @@ namespace tpublic
 
 			// Also we need to have at least one aggro range
 			TP_VERIFY(m_aggroRanges.size() > 0, aSource->m_debugInfo, "No aggro ranges defined.");
+
+			// Apply base resource curves
+			for (BaseResourceCurveTable::const_iterator i = baseResourceCurveTable.cbegin(); i != baseResourceCurveTable.cend(); i++)
+			{
+				uint32_t resourceId = i->first;
+				const UIntCurve<uint32_t>& curve = i->second;
+
+				for(size_t j = 0; j < m_levels.size(); j++)
+				{
+					const std::unique_ptr<Level>& level = m_levels[j];
+					level->m_baseResource[resourceId] = curve.Sample((uint32_t)j + 1);
+				}
+			}
+
+			if (baseWeaponDamageCurve)
+			{
+				// Apply base weapon damage curve
+				for (size_t i = 0; i < m_levels.size(); i++)
+				{
+					const std::unique_ptr<Level>& level = m_levels[i];
+					uint32_t baseWeaponDamageAverage = baseWeaponDamageCurve->Sample((uint32_t)i + 1);
+
+					level->m_baseWeaponDamage.m_min = (baseWeaponDamageAverage * 85) / 100;
+					level->m_baseWeaponDamage.m_max = (baseWeaponDamageAverage * 115) / 100;
+
+					printf("%zu: %u - %u\n", i + 1, level->m_baseWeaponDamage.m_min, level->m_baseWeaponDamage.m_max);
+				}
+			}
 		}
 
 		void

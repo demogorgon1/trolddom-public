@@ -129,6 +129,8 @@ namespace tpublic
 			if (abilityModifierList != NULL)
 				modifyAuraUpdateCount = abilityModifierList->GetAbilityModifyAuraUpdateCount(aAbilityId);
 
+			bool sourceIsPlayerOrMinion = aSource != NULL && Helpers::IsPlayerOrMinion(aSource);
+
 			SourceEntityInstance sourceEntityInstance = aSourceEntityInstance;
 
 			switch(m_sourceRedirect)
@@ -168,7 +170,7 @@ namespace tpublic
 					effects.push_back(std::move(effect));
 				}
 
-				aAuraEventQueue->ApplyAura(aAbilityId, m_auraId, sourceEntityInstance, targetEntity->GetEntityInstanceId(), effects);
+				aAuraEventQueue->ApplyAura(aAbilityId, m_auraId, sourceEntityInstance, sourceIsPlayerOrMinion, targetEntity->GetEntityInstanceId(), effects);
 			}
 
 			return Result();

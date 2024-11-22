@@ -18,7 +18,7 @@
 	icon: @_icon
 	type: buff
 	flags: [ channeled cancel_in_combat ]
-	duration: 100
+	duration: based_on_effects
 	aura_effect repeat:
 	{
 		update_interval: 10

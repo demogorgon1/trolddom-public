@@ -2,6 +2,33 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.1.19"
+
+	text: "Changes:"
+
+	list:
+	[
+		{ text: "Ctrl-right-click on dead enemy to automatically loot everything." }		
+		{ text: "New key binds: select party members, select minions, select target of target, and loot all." }		
+		{ text: "Tab-selection of target can be rebound to other keys." }		
+		{ text: "Bonus weapon damage is now derived from Attack Power instead of Strength." }
+		{ text: "Many melee abilities now base their damage on Attack Power instead of weapon damage." }
+		{ text: "Revised the formula used to calculate favor gained from sacrificing items. UI now shows how much favor will be gained." }
+		{ text: "Kick and Counterspell don't need to wait for the global cooldown to finish, but will trigger it." }
+		{ text: "Increased damage of most offensive spells with a cast time." }
+		{ text: "Ticks from buffs and debuffs don't happen immediately." }
+	]	
+
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Fixed issue with experimental controller support." }
+		{ text: "Healing Potions and Mana Potions now have vendor values." }
+		{ text: "Players are only eligible for group loot if they were in the group at the time of the kill." }
+	]
+	
+	#######################################################################################
 	heading: "v0.1.18"
 
 	text: "Changes:"

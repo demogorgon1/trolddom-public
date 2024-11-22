@@ -32,6 +32,7 @@ namespace tpublic
 			ID_HEALING,
 			ID_HEALTH_PER_5_SECONDS,
 			ID_MANA_PER_5_SECONDS,
+			ID_ATTACK_POWER,
 
 			NUM_IDS
 		};
@@ -70,6 +71,7 @@ namespace tpublic
 			{ "healing",				"HEALING",		"Healing",									NULL,																	1.0f,	false,	false },
 			{ "health_per_5",			"HP5",			"Health Per 5 Seconds",						NULL,																	1.0f,	false,	false },
 			{ "mana_per_5",				"MP5",			"Mana Per 5 Seconds",						NULL,																	1.0f,	false,	false },
+			{ "attack_power",			"AP",			"Attack Power",								NULL,																	2.0f,	false,	false },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

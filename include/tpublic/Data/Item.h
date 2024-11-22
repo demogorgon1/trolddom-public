@@ -26,7 +26,8 @@ namespace tpublic
 			enum Flag : uint32_t
 			{
 				FLAG_UNIQUE							= 0x00000001,
-				FLAG_NOT_SELLABLE					= 0x00000002
+				FLAG_NOT_SELLABLE					= 0x00000002,
+				FLAG_VENDOR							= 0x00000004
 			};
 
 			static inline uint32_t
@@ -42,6 +43,8 @@ namespace tpublic
 						flags |= FLAG_UNIQUE;
 					else if (strcmp(identifier, "not_sellable") == 0)
 						flags |= FLAG_NOT_SELLABLE;
+					else if (strcmp(identifier, "vendor") == 0)
+						flags |= FLAG_VENDOR;
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item flag.", identifier);
 				});
@@ -125,6 +128,7 @@ namespace tpublic
 			// Helpers
 			bool	IsUnique() const { return m_flags & FLAG_UNIQUE; }
 			bool	IsNotSellable() const { return m_flags & FLAG_NOT_SELLABLE; }
+			bool	IsVendor() const { return m_flags & FLAG_VENDOR; }
 
 			// Base implementation
 			void

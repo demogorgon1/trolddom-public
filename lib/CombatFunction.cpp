@@ -107,6 +107,11 @@ namespace tpublic
 					return (float)aCombatPublic->m_level;
 				break;
 
+			case CombatFunction::INPUT_ATTACK_POWER:
+				if (aCombatPrivate != NULL)
+					return (float)aCombatPrivate->m_attackPower;
+				break;
+
 			case CombatFunction::INPUT_MANA_BASE:
 				if (aCombatPrivate != NULL)
 					return (float)aCombatPrivate->m_baseMana;
