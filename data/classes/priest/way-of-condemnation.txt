@@ -93,6 +93,7 @@ aura fear:
 	flags: [ unique magic single_target ]
 	aura_effect stun:
 	{
+		flags: [ immediate ]
 		fear: true
 		update_interval: 5
 		update_count: 24

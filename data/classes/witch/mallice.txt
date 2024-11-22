@@ -196,7 +196,7 @@ aura curse_of_corruption:
 	string: "Curse of Corruption"
 	icon: icon_curse_of_corruption		
 	type: debuff
-	duration: 100	
+	duration: based_on_effects	
 	flags: [ unique magic ]
 	sound: spell_14
 	aura_effect repeat: 

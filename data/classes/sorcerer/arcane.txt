@@ -473,7 +473,7 @@ aura sleep:
 	particle_system: sleep
 	icon: icon_sleep
 	type: debuff
-	duration: 120
+	duration: based_on_effects
 	flags: [ unique magic cancel_on_damage single_target ]
 	aura_effect stun: { }
 	aura_effect repeat: 

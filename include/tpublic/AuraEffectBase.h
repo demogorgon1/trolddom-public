@@ -30,6 +30,11 @@ namespace tpublic
 			COMBAT_EVENT_TYPE_TARGET
 		};
 
+		enum Flag : uint8_t
+		{
+			FLAG_IMMEDIATE = 0x01
+		};
+
 		static CombatEventType
 		SourceToCombatEventType(
 			const SourceNode*							aSource)
@@ -41,6 +46,22 @@ namespace tpublic
 				return COMBAT_EVENT_TYPE_TARGET;
 			TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid combat event type.", aSource->GetIdentifier());
 			return INVALID_COMBAT_EVENT_TYPE;
+		}
+
+		static uint8_t
+		SourceToFlags(
+			const SourceNode*							aSource)
+		{
+			uint8_t flags = 0;
+			aSource->GetArray()->ForEachChild([&](
+				const SourceNode* aChild)
+			{
+				if(aChild->IsIdentifier("immediate"))
+					flags |= FLAG_IMMEDIATE;
+				else
+					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid flag.", aChild->GetIdentifier());
+			});
+			return flags;
 		}
 
 		AuraEffectBase(
@@ -68,6 +89,11 @@ namespace tpublic
 			else if (aSource->m_name == "update_count")
 			{
 				m_updateCount = aSource->GetUInt32();
+				return true;
+			}
+			else if(aSource->m_name == "flags")
+			{
+				m_flags = SourceToFlags(aSource);
 				return true;
 			}
 			return false;
@@ -113,6 +139,9 @@ namespace tpublic
 					return false;
 
 				m_applied = true;
+
+				if(!IsImmediate())
+					m_lastUpdate = aContext->m_tick; // This will delay first update
 			}
 
 			if(m_updateCount == 0)
@@ -206,9 +235,13 @@ namespace tpublic
 									uint32_t&						/*aCharges*/,
 									int32_t&						/*aCastTime*/) { return false; }
 
+		// Helpers
+		bool					IsImmediate() const { return m_flags & FLAG_IMMEDIATE; }
+
 		// Public data
 		int32_t			m_updateInterval = 0;
 		uint32_t		m_updateCount = 0;
+		uint8_t			m_flags = 0;
 
 		// Internal
 		int32_t			m_lastUpdate = 0;
