@@ -24,6 +24,7 @@ changelog:
 	[
 		{ text: "Fixed issue with experimental controller support." }
 		{ text: "Healing Potions and Mana Potions now have vendor values." }
+		{ text: "Players are only eligible for group loot if they were in the group at the time of the kill." }
 	]
 	
 	#######################################################################################

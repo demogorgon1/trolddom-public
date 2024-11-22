@@ -32,6 +32,6 @@ npc_metrics:
 		6 5 4 4 4 4 4 4 3 3 3 3 3 3 3 3 2 
 	]
 	aggro_assist_range: 3
-	min_leash_range: 12
+	min_leash_range: 12	
 
 }

@@ -64,8 +64,8 @@ namespace tpublic
 
 						m_xpToLevel[level] = xp;
 
-						if(level > m_maxLevel)
-							m_maxLevel = level;
+						if(level > m_maxLevelUnrestricted)
+							m_maxLevelUnrestricted = level;
 					});
 				}
 				else if(aChild->m_name == "kills")
@@ -148,6 +148,10 @@ namespace tpublic
 				{
 					m_maxLevelDemo = aChild->GetUInt32();
 				}
+				else if (aChild->m_name == "max_level")
+				{
+					m_maxLevel = aChild->GetUInt32();
+				}
 				else
 				{
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -168,6 +172,7 @@ namespace tpublic
 			aStream->WriteUInt(m_maxAdjustment);
 			aStream->WriteUInt(m_maxLevel);
 			aStream->WriteUInt(m_maxLevelDemo);
+			aStream->WriteUInt(m_maxLevelUnrestricted);
 			aStream->WriteUInt(m_eliteKillAdjustment);
 			aStream->WriteUInt(m_eliteQuestAdjustment);
 			m_minLevelDiffColor.ToStream(aStream);
@@ -209,6 +214,8 @@ namespace tpublic
 			if (!aStream->ReadUInt(m_maxLevel))
 				return false;
 			if (!aStream->ReadUInt(m_maxLevelDemo))
+				return false;
+			if (!aStream->ReadUInt(m_maxLevelUnrestricted))
 				return false;
 			if (!aStream->ReadUInt(m_eliteKillAdjustment))
 				return false;
@@ -369,6 +376,7 @@ namespace tpublic
 		// Public data
 		uint32_t									m_maxLevel = 0;
 		uint32_t									m_maxLevelDemo = 0;
+		uint32_t									m_maxLevelUnrestricted = 0;
 		std::vector<uint32_t>						m_xpToLevel;
 		std::vector<uint32_t>						m_xpFromKill;
 		std::vector<uint32_t>						m_xpFromQuest;
