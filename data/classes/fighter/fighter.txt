@@ -107,7 +107,7 @@ class fighter:
 		con_to_health: [ 10 1 ]		
 		spi_to_health_regen: [ 1 1 ]
 		str_to_block_value: [ 1 20 ]
-		str_to_attack_power: [ 2 1 ]
+		str_to_attack_power: [ 4 1 ]
 		attack_power_to_dps: [ 1 10 ]
 	}
 

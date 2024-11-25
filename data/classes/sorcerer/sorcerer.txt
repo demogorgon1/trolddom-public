@@ -91,8 +91,8 @@ class sorcerer:
 		spi_to_mana_regen_per_5_sec: [ 4 3 ]
 		spi_to_health_regen: [ 1 1 ]		
 		wis_to_spell_damage: [ 1 8 ]
-		str_to_attack_power: [ 1 1 ]
-		dex_to_attack_power: [ 1 1 ]
+		str_to_attack_power: [ 2 1 ]
+		dex_to_attack_power: [ 2 1 ]
 		attack_power_to_dps: [ 1 10 ]
 	}
 
@@ -126,6 +126,13 @@ class sorcerer:
 		wisdom: 0.8
 		constitution: 0.25
 	}	
+	
+	gear_optimization melee<{ weapon_dps_weight: 1.0 }>:
+	{	
+		strength: 1.0
+		dexterity: 1.0
+		constitution: 0.25
+	}		
 }
 
 ###############################################################################
