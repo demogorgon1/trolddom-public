@@ -1,0 +1,227 @@
+npc_behavior_state .default_patrol:
+{
+	behavior: patrolling
+}
+
+map_player_spawn .player_spawn:
+{
+}
+
+zone .valoris:
+{
+	string: "Valoris"
+}
+
+route .default_patrol:
+{
+}
+
+map_cliff .rocky_cliff:
+{
+	cliff_style: rocks
+	elevation: 1
+}
+
+map_cliff .rocky_cliff_ramp:
+{
+	cliff_style: rocks
+	elevation: 1
+	ramp: true
+}
+
+map_cliff .wall_cliff:
+{
+	cliff_style: wall
+	elevation: 1
+}
+
+map_cliff .wall_cliff_ramp:
+{
+	cliff_style: wall
+	elevation: 1
+	ramp: true
+}
+
+map_palette .tiles:
+{
+	tile water: [ 9 86 104 ]
+	tile shallow_water: [ 100 140 116 ]
+	tile pavement: [ 32 32 32 ]
+	tile mud: [ 67 61 32 ]
+	tile sand: [ 200 200 128 ]
+	tile dirt: [ 97 91 62 ]
+	tile grass: [ 64 105 0 ]
+	tile grass_2: [ 164 105 40 ]
+	tile dark_grass: [ 48 90 14 ]
+	tile forest: [ 51 75 6 ]
+	tile forest_2: [ 100 75 6 ]
+	tile farmland: [ 128 128 0 ]
+	tile rocks: [ 143 131 120 ]
+	tile rocks_dungeon_entrance: [ 200 200 200 ]
+	tile wood_wall: [ 255 255 0 ] 
+	tile wood_open_door: [ 255 200 0 ] 
+	tile wood_floor: [ 200 200 0 ] 
+	tile wood_solid_wall: [ 0 200 200 ]
+	tile wood_solid_wall_face: [ 100 200 200 ]
+	tile roof: [ 255 0 0 ]
+	tile roof_2: [ 200 0 34 ]
+	tile roof_3: [ 100 0 134 ]
+	tile forest_entrance: [ 123 255 123 ] 
+	tile forest_2_entrance: [ 123 215 123 ] 
+	tile ext_dungeon_wall: [ 0 0 32 ]
+	tile ext_dungeon_entrance: [ 0 0 64 ]
+	tile ext_cave_entrance: [ 0 0 128 ]
+	tile wood_wall_window: [ 255 128 64 ] 
+	tile wood_solid_wall_face_window: [ 100 100 50 ]
+}
+
+map_palette .stuff:
+{
+	entity_spawn mining: [ 200 200 200 ]
+	entity_spawn herbalism: [ 0 255 0 ]
+	entity_spawn spirit_stone: [ 0 0 0 ]	
+	entity_spawn mailbox: [ 0 20 60 ]	
+	entity_spawn holy_altar: [ 0 0 40 ]	
+	entity_spawn underworld_shrine: [ 0 0 80 ]	
+	entity_spawn potatoes: [ 212 255 42 ]
+	entity_spawn stash: [ 0 43 66 ]		
+	entity_spawn furnace: [ 100 43 66 ]		
+	entity_spawn anvil: [ 150 43 66 ]		
+	entity_spawn fireplace: [ 250 43 66 ]		
+	entity_spawn fireplace_unlit: [ 250 243 66 ]		
+	entity_spawn bonfire: [ 251 43 66 ]		
+	entity_spawn default_chest: [ 40 143 66 ]		
+	entity_spawn cauldron: [ 43 113 166 ]		
+	
+	player_spawn .player_spawn: [ 0 0 255 ]
+	
+	wall stone_wall: [ 128 128 128 ]
+}
+
+map_palette .levels:
+{
+	level<10>: [ 0 255 0 ]
+	level<11>: [ 255 0 0 ]
+	level<12>: [ 0 0 255 ]
+	level<13>: [ 0 255 255 ]
+	level<14>: [ 127 127 0 ]
+	level<15>: [ 0 127 127 ]
+	level<16>: [ 127 0 127 ]
+	level<17>: [ 127 0 255 ]
+	level<18>: [ 255 0 255 ]
+	level<19>: [ 255 255 0 ]
+	level<20>: [ 255 127 0 ]
+}
+
+map_palette .zones:
+{
+	zone .valoris: [ 0 255 255 ]
+}
+
+map_palette .sub_zones:
+{
+	sub_zone .valoris_docks: [ 191 20 180 ]
+}
+
+map_palette .routes:
+{
+	route .default_patrol: [ 192 16 186 ]
+}
+
+map_palette .doodads:
+{
+	doodad crates: [ 45 39 100 ]
+	doodad sack: [ 35 100 200 ]
+	doodad table: [ 35 130 200 ]
+	doodad chair_left: [ 45 100 200 ]
+	doodad bed: [ 35 130 240 ]
+	doodad bookshelf: [ 35 140 100 ]
+	doodad alchemy_bookshelf: [ 135 100 200 ]
+	doodad empty_bookshelf: [ 135 200 200 ]
+	doodad chair_right: [ 45 200 100 ]	
+	doodad chair_bottom: [ 56 201 195 ]
+	doodad bench: [ 58 221 113 ]
+	doodad altar: [ 54 29 64 ]
+	doodad wall_banner_red: [ 243 29 53 ]
+	doodad broken_pillar: [ 136 130 200 ]
+	doodad wall_banner_mining: [ 243 19 53 ]
+	doodad wall_banner_blacksmithing: [ 243 59 53 ]
+	doodad tent: [ 249 51 53 ]	
+	doodad wall_banner_dark_green: [ 143 59 13 ]
+}
+
+map_palette .cliffs:
+{
+	cliff .rocky_cliff: [ 197 169 34 ]
+	cliff .rocky_cliff_ramp: [ 36 152 174 ]
+		
+	cliff .wall_cliff: [ 197 169 134 ]
+	cliff .wall_cliff_ramp: [ 136 152 174 ]
+	
+}
+
+map thalvaron:
+{
+	string: "Thalvaron"
+	type: open_world
+	default_tile: water
+	default_player_spawn: .player_spawn
+	default_fishing_loot_table: fish
+	view_attenuation: 0
+	view_attenuation_bias: 0
+	view_hidden_visibility: 35	
+	has_overview_map: true
+	auto_doodads: true
+	max_players: 80
+
+	layers:
+	[
+		{
+			palettes:	[ .tiles ]
+			source:		"thalvaron-tiles.png"
+		}
+
+		{
+			palettes:	[ .stuff ]
+			source:		"thalvaron-stuff.png"
+		}
+		
+		{
+			palettes:	[ .levels ]
+			source:		"thalvaron-levels.png"
+		}		
+		
+		{
+			palettes:	[ .zones ]
+			source:		"thalvaron-zones.png"
+		}				
+		
+		{ 
+			palettes: 	[ .tiles ]
+			source:		"thalvaron-cover.png"
+			cover: 		true
+		}
+		
+		{
+			palettes:	[ .sub_zones ]
+			source:		"thalvaron-subzones.png"
+		}						
+		
+		{
+			palettes:	[ .routes ]
+			source:		"thalvaron-routes.png"
+		}								
+		
+		{
+			palettes:	[ .doodads ]
+			source:		"thalvaron-doodads.png"
+		}								
+
+		{
+			palettes:	[ .cliffs ]
+			source:		"thalvaron-cliffs.png"
+		}								
+		
+	]
+}
+ 

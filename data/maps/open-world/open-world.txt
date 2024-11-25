@@ -511,6 +511,10 @@ map_player_spawn open_world_player_spawn_witch:
 {
 }
 
+map_player_spawn open_world_thalvaron_from:
+{
+}
+
 map_portal .dungeon_1_entrance:
 {
 	animation: !DEFAULT_PORTAL_ANIMATION{}
@@ -521,6 +525,12 @@ map_portal .lair_of_zuthyg_entrance:
 {
 	animation: !DEFAULT_PORTAL_ANIMATION{}
 	map: lair_of_zuthyg
+}
+
+map_portal .thalvaron_to:
+{
+	animation: !DEFAULT_PORTAL_ANIMATION{}
+	map: thalvaron
 }
 
 zone .zone_1:
@@ -778,9 +788,11 @@ map_palette .stuff:
 	player_spawn open_world_player_spawn_witch: [ 0 0 253 ]
 	player_spawn dungeon_1_exit: [ 0 0 200 ]	
 	player_spawn lair_of_zuthyg_exit: [ 10 20 200 ]	
+	player_spawn open_world_thalvaron_from: [ 100 20 200 ]	
 	
 	portal .dungeon_1_entrance: [ 0 234 0 ]	
 	portal .lair_of_zuthyg_entrance: [ 10 234 20 ]	
+	portal .thalvaron_to: [ 10 234 70 ]	
 	
 	wall stone_wall: [ 128 128 128 ]
 }

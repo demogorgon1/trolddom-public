@@ -202,8 +202,6 @@ namespace tpublic
 
 					level->m_baseWeaponDamage.m_min = (baseWeaponDamageAverage * 85) / 100;
 					level->m_baseWeaponDamage.m_max = (baseWeaponDamageAverage * 115) / 100;
-
-					printf("%zu: %u - %u\n", i + 1, level->m_baseWeaponDamage.m_min, level->m_baseWeaponDamage.m_max);
 				}
 			}
 		}
