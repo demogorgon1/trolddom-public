@@ -70,13 +70,13 @@ ability dragon_breath_tick:
 	icon: icon_dragon_breath		
 	states: [ default in_combat ]
 	flags: [ always_in_range always_in_line_of_sight target_aoe target_aoe_hostile ]
-	aoe_cap: 5
-	aoe_radius: 1
+	aoe_cap: 4
+	aoe_radius: 2
 	
 	direct_effect damage:
 	{	
 		damage_type: fire		
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.25 b: [ [ 1 4 ] [ 10 8 ] [ 20 16 ] ] }		
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.2 b: [ [ 1 10 ] [ 10 20 ] [ 20 40 ] ] }		
 		flags: [ is_magical ]
 	}		
 }
@@ -148,7 +148,7 @@ ability dragon_punch:
 	{
 		flags: [ can_be_critical ]
 		damage_type: fire
-		function: { expression: a_mul_x_plus_b x: attack_power a: 0.5 b: [ [ 1 4 ] [ 10 8 ] [ 20 16 ] ] }							
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.45 b: [ [ 1 9 ] [ 10 10 ] [ 20 21 ] ] }							
 	}	
 	
 	direct_effect apply_aura:

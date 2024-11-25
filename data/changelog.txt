@@ -2,6 +2,25 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.1.20"
+
+	text: "Changes:"
+
+	list:
+	[
+		{ text: "Damage from Dragon Breath increased. Now scales with Attack Power instead of Spell Damage." }		
+		{ text: "Damage from Poison Bomb reduced." }	
+		{ text: "The attack damage of level 1 to 12 enemies reduced to roughly what it was before previous patch." }
+	]	
+
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Fixed bug where player armor and weapon damage were much lower than intended." }
+	]
+
+	#######################################################################################
 	heading: "v0.1.19"
 
 	text: "Changes:"

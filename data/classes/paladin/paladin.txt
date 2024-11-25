@@ -65,7 +65,7 @@ class paladin:
 		str_to_block_value: [ 1 20 ]
 		wis_to_spell_damage: [ 1 8 ]
 		wis_to_healing: [ 1 8 ]		
-		str_to_attack_power: [ 2 1 ]
+		str_to_attack_power: [ 4 1 ]
 		attack_power_to_dps: [ 1 10 ]
 	}	
 

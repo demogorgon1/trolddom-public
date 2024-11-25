@@ -13,10 +13,10 @@ npc_metrics:
 	level<6>:  { elite_weapon_damage: 2.5 elite_resource<health>: 3   elite_resource<mana>: 1 cash: [ 48 86 ]   elite_cash: 5 base_armor: 355 }
 	level<7>:  { elite_weapon_damage: 2.7 elite_resource<health>: 3.4 elite_resource<mana>: 1 cash: [ 53 106 ]  elite_cash: 5 base_armor: 390 }
 	level<8>:  { elite_weapon_damage: 2.9 elite_resource<health>: 3.6 elite_resource<mana>: 1 cash: [ 58 116 ]  elite_cash: 5 base_armor: 422 }
-	level<9>:  { elite_weapon_damage: 3.0 elite_resource<health>: 3.8 elite_resource<mana>: 1 cash: [ 64 128 ]  elite_cash: 5 base_armor: 460 }
-	level<10>: { elite_weapon_damage: 3.0 elite_resource<health>: 4.0 elite_resource<mana>: 1 cash: [ 80 140 ]  elite_cash: 5 base_armor: 500 }
-	level<11>: { elite_weapon_damage: 3.1 elite_resource<health>: 4.2 elite_resource<mana>: 1 cash: [ 90 152 ]  elite_cash: 5 base_armor: 542 }
-	level<12>: { elite_weapon_damage: 3.1 elite_resource<health>: 4.4 elite_resource<mana>: 1 cash: [ 100 164 ] elite_cash: 5 base_armor: 590 }
+	level<9>:  { elite_weapon_damage: 3.0 elite_resource<health>: 3.8 elite_resource<mana>: 1 cash: [ 64 128 ]  elite_cash: 5 base_armor: 450 }
+	level<10>: { elite_weapon_damage: 3.0 elite_resource<health>: 4.0 elite_resource<mana>: 1 cash: [ 80 140 ]  elite_cash: 5 base_armor: 480 }
+	level<11>: { elite_weapon_damage: 3.1 elite_resource<health>: 4.2 elite_resource<mana>: 1 cash: [ 90 152 ]  elite_cash: 5 base_armor: 522 }
+	level<12>: { elite_weapon_damage: 3.1 elite_resource<health>: 4.4 elite_resource<mana>: 1 cash: [ 100 164 ] elite_cash: 5 base_armor: 570 }
 	level<13>: { elite_weapon_damage: 3.2 elite_resource<health>: 4.6 elite_resource<mana>: 1 cash: [ 110 176 ] elite_cash: 5 base_armor: 615 }
 	level<14>: { elite_weapon_damage: 3.2 elite_resource<health>: 4.8 elite_resource<mana>: 1 cash: [ 120 192 ] elite_cash: 5 base_armor: 650 }
 	level<15>: { elite_weapon_damage: 3.3 elite_resource<health>: 5   elite_resource<mana>: 1 cash: [ 135 216 ] elite_cash: 5 base_armor: 685 }
@@ -28,7 +28,7 @@ npc_metrics:
 	
 	base_resource_curve<health>: [ [ 1 115 ] [ 10 340 ] [ 20 1020 ] ]
 	base_resource_curve<mana>:   [ [ 1 80 ] [ 10 160 ] [ 20 320 ] ]
-	base_weapon_damage_curve:	 [ [ 1 8 ] [ 10 34 ] [ 20 102 ] ]
+	base_weapon_damage_curve:	 [ [ 1 8 ] [ 10 26 ] [ 12 30 ] [ 20 102 ] ]
 	
 	aggro_range_base_level_difference: -3
 	aggro_ranges:
