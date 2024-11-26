@@ -21,3 +21,8 @@ faction npcs:
 {
 	flags: [ friendly ]
 }
+
+faction neutral:
+{
+	flags: [ neutral ]
+}

@@ -202,7 +202,7 @@ namespace tpublic::Systems
 		int32_t leashDistanceSquared = aEntityState == EntityState::ID_IN_COMBAT ? npc->m_anchorPosition.DistanceSquared(leashPosition) : 0;
 		int32_t minLeashRangeSquared = GetManifest()->m_npcMetrics.m_minLeashRange * GetManifest()->m_npcMetrics.m_minLeashRange;
 
-		if(npc->m_encounterId == 0 && leashDistanceSquared >= minLeashRangeSquared)
+		if(npc->m_encounterId == 0 && (leashDistanceSquared >= minLeashRangeSquared || !npc->m_canMove))
 		{
 			std::vector<SourceEntityInstance> threatRemovedEntities;
 			threat->m_table.Update(aContext->m_tick, threatRemovedEntities);
@@ -679,6 +679,8 @@ namespace tpublic::Systems
 							int32_t distanceSquared = Helpers::CalculateDistanceSquared(targetPosition, position);
 
 							const Data::Ability* useAbility = NULL;
+							SourceEntityInstance useAbilityTarget = npc->m_targetEntity;
+							const Components::NPC::AbilityEntry* useAbilityEntry = NULL;
 
 							for (const Components::NPC::AbilityEntry& abilityEntry : state->m_abilities)
 							{
@@ -711,6 +713,7 @@ namespace tpublic::Systems
 									if (abilityEntry.m_useProbability == UINT32_MAX || (*aContext->m_random)() < abilityEntry.m_useProbability)
 									{
 										useAbility = ability;
+										useAbilityEntry = &abilityEntry;
 										break;
 									}
 								}
@@ -749,7 +752,8 @@ namespace tpublic::Systems
 										const EntityInstance* selectedTarget = possibleTargets[Helpers::RandomInRange<size_t>(*aContext->m_random, 0, possibleTargets.size() - 1)];
 
 										useAbility = ability;
-										npc->m_targetEntity = { selectedTarget->GetEntityInstanceId(), selectedTarget->GetSeq() };
+										useAbilityEntry = &abilityEntry;
+										useAbilityTarget = { selectedTarget->GetEntityInstanceId(), selectedTarget->GetSeq() };
 										break;
 									}
 								}
@@ -781,7 +785,8 @@ namespace tpublic::Systems
 										const EntityInstance* selectedTarget = possibleTargets[Helpers::RandomInRange<size_t>(*aContext->m_random, 0, possibleTargets.size() - 1)];
 
 										useAbility = ability;
-										npc->m_targetEntity = { selectedTarget->GetEntityInstanceId(), selectedTarget->GetSeq() };
+										useAbilityEntry = &abilityEntry;
+										useAbilityTarget = { selectedTarget->GetEntityInstanceId(), selectedTarget->GetSeq() };
 										break;
 									}
 								}
@@ -794,13 +799,17 @@ namespace tpublic::Systems
 										continue;
 
 									useAbility = ability;
-									npc->m_targetEntity = { aEntityInstanceId, 0 }; // We're assuming that NPC seq is always zero
+									useAbilityEntry = &abilityEntry;
+									useAbilityTarget = { aEntityInstanceId, 0 }; // We're assuming that NPC seq is always zero
 									break;
 								}
 							}
 
 							if (useAbility != NULL)
 							{
+								if(useAbilityEntry != NULL && useAbilityEntry->m_updateTarget && useAbilityTarget.IsSet())
+									npc->m_targetEntity = useAbilityTarget;
+
 								position->m_lastMoveTick = aContext->m_tick;
 								npc->m_npcMovement.Reset(aContext->m_tick);
 
@@ -821,14 +830,14 @@ namespace tpublic::Systems
 
 									CastInProgress cast;
 									cast.m_abilityId = useAbility->m_id;
-									cast.m_targetEntityInstanceId = npc->m_targetEntity.m_entityInstanceId;
+									cast.m_targetEntityInstanceId = useAbilityTarget.m_entityInstanceId;
 									cast.m_start = aContext->m_tick;
 									cast.m_end = cast.m_start + castTime;
 									npc->m_castInProgress = cast;
 								}
 								else
 								{
-									aContext->m_eventQueue->EventQueueAbility({ aEntityInstanceId, 0 }, npc->m_targetEntity.m_entityInstanceId, Vec2(), useAbility, ItemInstanceReference(), NULL);
+									aContext->m_eventQueue->EventQueueAbility({ aEntityInstanceId, 0 }, useAbilityTarget.m_entityInstanceId, Vec2(), useAbility, ItemInstanceReference(), NULL);
 								}
 							}
 							else if(distanceSquared > 1 && !auras->HasEffect(AuraEffect::ID_IMMOBILIZE, NULL))
@@ -839,7 +848,7 @@ namespace tpublic::Systems
 									// We're a large NPC and we haven't been able to hurt anyone for some time. We're probably getting cheesed. Evade!
 									aContext->m_eventQueue->EventQueueThreatClear(aEntityInstanceId);
 								}
-								else
+								else if(npc->m_canMove)
 								{
 									const MoveSpeed::Info* moveSpeedInfo = MoveSpeed::GetInfo(combat->m_moveSpeed);
 									if (npc->m_moveCooldownUntilTick + moveSpeedInfo->m_tickBias < aContext->m_tick)
@@ -876,6 +885,12 @@ namespace tpublic::Systems
 											aContext->m_eventQueue->EventQueueThreat(npc->m_targetEntity, aEntityInstanceId, -1, 0, 0.5f);
 										}
 									}
+								}
+								else
+								{
+									position->m_lastMoveTick = aContext->m_tick;
+
+									aContext->m_eventQueue->EventQueueThreat(npc->m_targetEntity, aEntityInstanceId, -1, 0, 0.5f);
 								}
 							}
 						}

@@ -104,6 +104,8 @@ namespace tpublic
 							m_targetType = TARGET_TYPE_LOW_HEALTH_FRIEND_OR_SELF;
 						else if(aChild->m_tag == "requirement")
 							m_requirements.push_back(Requirement(aChild));
+						else if(aChild->m_name == "update_target")
+							m_updateTarget = aChild->GetBool();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 					});
@@ -118,6 +120,7 @@ namespace tpublic
 					aStream->WriteUInts(m_targetEntityIds);
 					aStream->WritePOD(m_targetType);
 					aStream->WriteObjects(m_requirements);
+					aStream->WriteBool(m_updateTarget);
 				}
 
 				bool
@@ -134,6 +137,8 @@ namespace tpublic
 						return false;
 					if(!aStream->ReadObjects(m_requirements))
 						return false;
+					if(!aStream->ReadBool(m_updateTarget))
+						return false;
 					return true;
 				}	
 
@@ -143,7 +148,7 @@ namespace tpublic
 				std::vector<uint32_t>				m_targetEntityIds;
 				TargetType							m_targetType = TARGET_TYPE_DEFAULT;
 				std::vector<Requirement>			m_requirements;
-				
+				bool								m_updateTarget = true;				
 			};
 
 			struct StateEntry
@@ -403,7 +408,8 @@ namespace tpublic
 				FIELD_LARGE,
 				FIELD_ROUTE,
 				FIELD_ZONE,
-				FIELD_OUT_OF_ZONE_ACTION
+				FIELD_OUT_OF_ZONE_ACTION,
+				FIELD_CAN_MOVE
 			};
 
 			static void
@@ -419,6 +425,7 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_ENCOUNTER, "encounter", offsetof(NPC, m_encounterId))->SetDataType(DataType::ID_ENCOUNTER);
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_INACTIVE_ENCOUNTER_DESPAWN, "inactive_encounter_despawn", offsetof(NPC, m_inactiveEncounterDespawn));
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_BLOCKING, "large", offsetof(NPC, m_large));
+				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_CAN_MOVE, "can_move", offsetof(NPC, m_canMove));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_ROUTE, "route", offsetof(NPC, m_routeId))->SetDataType(DataType::ID_ROUTE);
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_ZONE, "zone", offsetof(NPC, m_zoneId))->SetDataType(DataType::ID_ZONE);
 				aSchema->DefineCustomObject<OutOfZoneAction>(FIELD_OUT_OF_ZONE_ACTION, "out_of_zone_action", offsetof(NPC, m_outOfZoneAction));
@@ -446,6 +453,7 @@ namespace tpublic
 				m_canMoveOnAllNonViewBlockingTiles = false;
 				m_blocking = true;
 				m_large = false;
+				m_canMove = true;
 				m_inactiveEncounterDespawn = false;
 				m_encounterId = 0;
 				m_routeId = 0;
@@ -480,6 +488,7 @@ namespace tpublic
 			bool										m_blocking = true;
 			bool										m_large = false;
 			bool										m_inactiveEncounterDespawn = false;
+			bool										m_canMove = true;
 			uint32_t									m_encounterId = 0;
 			uint32_t									m_routeId = 0;
 			uint32_t									m_zoneId = 0;

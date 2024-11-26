@@ -231,6 +231,14 @@ sprites:
 	sprite angel_1_dead: { }
 	sprite demon_3_dead: { }
 	sprite man_25_dead: { }
+
+	cursor: { position: [ 0 192 ] }
+
+	sprite target_dummy: { dead: target_dummy_dead }
+	
+	cursor: { position: [ 0 208 ] }
+
+	sprite target_dummy_dead: { }
 	
 }
 

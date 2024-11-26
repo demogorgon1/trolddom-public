@@ -245,3 +245,48 @@ ability npc_heal:
 		max_health_percentage: true
 	}
 }
+
+cooldown npc_full_health:
+{
+	duration: 10
+}
+
+ability npc_full_health:
+{
+	string: "Heal"
+	range: 0
+	cooldowns: [ npc_full_health ]
+	flags: [ target_self ]
+	states: [ in_combat ]
+	icon: icon_throw_rock
+
+	direct_effect modify_resource:
+	{
+		resource: health
+		function: { expression: x x: health_max }
+		silent: true
+	}
+}
+
+aura npc_immortality:
+{
+	string: "Immortality"
+	flags: [ unique indefinite ]
+	icon: icon_skull_1	
+	type: hidden
+	aura_effect immortality: { }
+}
+
+ability npc_immortality:
+{
+	string: "Immortality"
+	range: 0
+	flags: [ target_self ]
+	states: [ spawning default in_combat ]
+	icon: icon_throw_rock
+
+	direct_effect apply_aura:
+	{
+		aura: npc_immortality
+	}
+}
