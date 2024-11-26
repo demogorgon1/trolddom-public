@@ -50,6 +50,7 @@ namespace tpublic
 			TYPE_MUST_HAVE_EQUIPPED_ITEM_TYPE_FLAGS,
 			TYPE_MUST_BE_AT_LEAST_LEVEL,
 			TYPE_MUST_BE_DISCIPLE,
+			TYPE_MUST_HAVE_MORE_RAGE_THAN,
 		};
 
 		static DataType::Id
@@ -90,14 +91,15 @@ namespace tpublic
 			case TYPE_MUST_NOT_HAVE_PROFESSION_ABILITY:
 				return DataType::ID_ABILITY;
 
-			case TYPE_MUST_HAVE_LESS_HEALTH_THAN:
-				return DataType::INVALID_ID;
-
 			case TYPE_MUST_HAVE_AURA_GROUP:
 				return DataType::ID_AURA_GROUP;
 
 			case TYPE_MUST_BE_CREATURE_TYPE:
 				return DataType::ID_CREATURE_TYPE;
+
+			case TYPE_MUST_HAVE_LESS_HEALTH_THAN:
+			case TYPE_MUST_HAVE_MORE_RAGE_THAN:
+				return DataType::INVALID_ID;
 
 			default:
 				break;
@@ -201,6 +203,8 @@ namespace tpublic
 				m_type = TYPE_MUST_NOT_HAVE_PROFESSION_ABILITY;
 			else if (typeString == "must_have_less_health_than")
 				m_type = TYPE_MUST_HAVE_LESS_HEALTH_THAN;
+			else if (typeString == "must_have_more_rage_than")
+				m_type = TYPE_MUST_HAVE_MORE_RAGE_THAN;
 			else if (typeString == "must_have_negative_reputation")
 				m_type = TYPE_MUST_HAVE_NEGATIVE_REPUTATION;
 			else if (typeString == "must_have_aura_group")

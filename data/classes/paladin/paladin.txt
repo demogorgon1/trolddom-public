@@ -113,3 +113,22 @@ achievement paladin_level_10:
 	icon: icon_paladin
 	no_progress_values: true 
 }
+
+###############################################################################
+# Rotations
+
+ability_list paladin_avenger:
+{
+	ability divine_smite: 
+	{
+		requirement self<must_have_aura>: paladin_relentless_assault
+	}
+
+	ability reckoning: 
+	{
+	}
+	
+	ability attack:
+	{
+	}
+}

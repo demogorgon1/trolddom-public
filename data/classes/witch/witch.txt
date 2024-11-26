@@ -138,3 +138,22 @@ achievement witch_level_10:
 	icon: icon_witch
 	no_progress_values: true 
 }
+
+###############################################################################
+# Rotations
+
+ability_list witch_ranged:
+{
+	ability curse_of_corruption:
+	{
+		requirement target<must_not_have_aura>: curse_of_corruption
+	}
+
+	ability witch_bolt:
+	{
+	}
+
+	ability witch_attack:
+	{
+	}
+}

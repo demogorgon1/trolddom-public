@@ -147,3 +147,37 @@ achievement sorcerer_level_10:
 	icon: icon_sorcerer 
 	no_progress_values: true 
 }
+
+
+###############################################################################
+# Rotations
+
+ability_list sorcerer_ranged:
+{
+	ability arcane_missile:
+	{
+	}
+
+	ability firebolt:
+	{
+	}
+
+	ability sorcerer_attack:
+	{
+	}
+}
+
+ability_list sorcerer_melee:
+{
+	ability arcane_missile:
+	{
+	}
+
+	ability wizard_strike:
+	{
+	}
+
+	ability sorcerer_attack:
+	{
+	}
+}

@@ -112,7 +112,7 @@ namespace tpublic
 
 			case Requirement::TYPE_MUST_HAVE_LESS_HEALTH_THAN:
 			case Requirement::TYPE_MUST_HAVE_ZERO_HEALTH:
-			{
+				{
 					const Components::CombatPublic* combatPublic = entity->GetComponent<Components::CombatPublic>();
 					const Components::CombatPublic::ResourceEntry* health = combatPublic->GetResourceEntry(Resource::ID_HEALTH);
 					if(health != NULL && health->m_max > 0)
@@ -128,6 +128,18 @@ namespace tpublic
 							if(health->m_current != 0)
 								return false;
 						}
+					}
+				}
+				break;
+
+			case Requirement::TYPE_MUST_HAVE_MORE_RAGE_THAN:
+				{
+					const Components::CombatPublic* combatPublic = entity->GetComponent<Components::CombatPublic>();
+					const Components::CombatPublic::ResourceEntry* rage = combatPublic->GetResourceEntry(Resource::ID_RAGE);
+					if(rage != NULL && rage->m_max > 0)
+					{
+						if (rage->m_current < aRequirement->m_id)
+							return false;
 					}
 				}
 				break;

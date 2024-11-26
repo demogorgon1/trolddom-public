@@ -1,6 +1,7 @@
 #include "Pcheader.h"
 
 #include <tpublic/Data/Ability.h>
+#include <tpublic/Data/AbilityList.h>
 #include <tpublic/Data/AbilityModifier.h>
 #include <tpublic/Data/Achievement.h>
 #include <tpublic/Data/AchievementCategory.h>
@@ -64,6 +65,7 @@ namespace tpublic
 	Manifest::Manifest()
 	{
 		RegisterDataContainer<Data::Ability>();
+		RegisterDataContainer<Data::AbilityList>();
 		RegisterDataContainer<Data::AbilityModifier>();
 		RegisterDataContainer<Data::Achievement>();
 		RegisterDataContainer<Data::AchievementCategory>();

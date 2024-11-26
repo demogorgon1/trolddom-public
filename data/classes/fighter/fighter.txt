@@ -156,3 +156,26 @@ achievement fighter_level_10:
 	no_progress_values: true 
 }
 
+###############################################################################
+# Rotations
+
+ability_list fighter_envenom:
+{
+	ability envenom: 
+	{
+	}
+
+	ability rend: 
+	{
+		requirement target<must_not_have_aura>: rend
+	}
+
+	ability strike: 
+	{
+		requirement self<must_have_more_rage_than>: 30
+	}
+	
+	ability fighter_attack:
+	{
+	}
+}

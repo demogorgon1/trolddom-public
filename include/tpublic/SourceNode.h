@@ -256,6 +256,13 @@ namespace tpublic
 			return m_children[aIndex].get();
 		}
 
+		uint32_t
+		GetId(
+			DataType::Id				aDataType) const
+		{
+			return m_sourceContext->m_persistentIdTable->GetId(aDataType, GetIdentifier());
+		}
+
 		void
 		GetIdArray(
 			DataType::Id				aDataType,

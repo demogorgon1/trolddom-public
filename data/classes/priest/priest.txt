@@ -109,3 +109,38 @@ achievement priest_level_10:
 	icon: icon_priest
 	no_progress_values: true 
 }
+
+###############################################################################
+# Rotations
+
+ability_list priest_ranged:
+{
+	ability condemnation:
+	{
+		requirement target<must_not_have_aura>: condemnation
+	}
+
+	ability smite:
+	{
+	}
+
+	ability attack:
+	{
+	}
+}
+
+ability_list priest_melee:
+{
+	ability condemnation:
+	{
+		requirement target<must_not_have_aura>: condemnation
+	}
+
+	ability dragon_punch:
+	{
+	}
+
+	ability attack:
+	{
+	}
+}
