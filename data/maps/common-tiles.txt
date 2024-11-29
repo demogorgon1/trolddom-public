@@ -77,6 +77,10 @@ sprites:
 	sprite ext_dungeon_wall_end: { flags: [ tile_block_line_of_sight tile_top ] }
 	sprite wood_wall_window_grass_1: { flags: [ tile_block_line_of_sight tile_top ] }
 	sprite wood_wall_window_grass_2: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite road_1: { flags: [ tile_walkable ] alt_tiles: [ road_1_alt_1 road_1_alt_2 ] }
+	sprite road_1_alt_1: { flags: [ tile_walkable ] }
+	sprite road_1_alt_2: { flags: [ tile_walkable ] }
+	sprite pavement_1_alt_1: { flags: [ tile_walkable ] }
 
 	cursor: { position: [ 0 32 ] }
 
@@ -474,6 +478,22 @@ sprites:
 	sprite fs_ground_1_border_16: { }
 	sprite fs_ground_1_border_17: { }
 	
+	sprite brick_wall: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite brick_open_door: { flags: [ tile_walkable tile_top ] }
+	sprite brick_wall_start: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite brick_wall_end: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite brick_wall_window: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite brick_solid_wall_face: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite brick_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top ] }	
+
+	sprite brick_2_wall: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite brick_2_open_door: { flags: [ tile_walkable tile_top ] }
+	sprite brick_2_wall_start: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite brick_2_wall_end: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite brick_2_wall_window: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite brick_2_solid_wall_face: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite brick_2_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top ] }	
+
 	cursor: { position: [ 0 272 ] }
 
 	sprite fs_ground_2: { flags: [ tile_walkable ] borders: 
@@ -497,6 +517,21 @@ sprites:
 	sprite fs_ground_2_border_15: { }
 	sprite fs_ground_2_border_16: { }
 	sprite fs_ground_2_border_17: { }
+	
+	sprite inside_1_solid_wall_face: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite inside_1_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top ] }	
+	sprite inside_2_solid_wall_face: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite inside_2_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top ] }	
+	sprite inside_3_solid_wall_face: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite inside_3_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top ] }	
+	sprite inside_4_solid_wall_face: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite inside_4_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top ] }	
+	sprite inside_5_solid_wall_face: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite inside_5_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top ] }	
+	sprite outside_wood_floor_1: { flags: [ tile_walkable tile_top ] alt_tiles: [ outside_wood_floor_1_alt_1 outside_wood_floor_1_alt_2 ] }
+	sprite outside_wood_floor_1_alt_1: { flags: [ tile_walkable ] }
+	sprite outside_wood_floor_1_alt_2: { flags: [ tile_walkable ] }
+	sprite ext_dungeon_entrance_closed: { flags: [ tile_block_line_of_sight tile_top ] }
 
 	cursor: { position: [ 0 288 ] }
 
@@ -531,5 +566,53 @@ sprites:
 	sprite fs_rocks_1_border_15: { }
 	sprite fs_rocks_1_border_16: { }
 	sprite fs_rocks_1_border_17: { }
+
+	cursor: { position: [ 0 320 ] }
+	
+	sprite pavement_1: { flags: [ tile_walkable ] borders:
+		[ pavement_1_border_1 pavement_1_border_2 pavement_1_border_3 pavement_1_border_4 pavement_1_border_5 pavement_1_border_6 pavement_1_border_7
+		  pavement_1_border_8 pavement_1_border_9 pavement_1_border_10 pavement_1_border_11 pavement_1_border_12 pavement_1_border_13 pavement_1_border_14
+		  pavement_1_border_15 pavement_1_border_16 pavement_1_border_17 ] alt_tiles: [ pavement_1_alt_1 ] }		
+	sprite pavement_1_border_1: { }
+	sprite pavement_1_border_2: { }
+	sprite pavement_1_border_3: { }
+	sprite pavement_1_border_4: { }
+	sprite pavement_1_border_5: { }
+	sprite pavement_1_border_6: { }
+	sprite pavement_1_border_7: { }
+	sprite pavement_1_border_8: { }
+	sprite pavement_1_border_9: { }
+	sprite pavement_1_border_10: { }
+	sprite pavement_1_border_11: { }
+	sprite pavement_1_border_12: { }
+	sprite pavement_1_border_13: { }
+	sprite pavement_1_border_14: { }
+	sprite pavement_1_border_15: { }
+	sprite pavement_1_border_16: { }
+	sprite pavement_1_border_17: { }
+
+	cursor: { position: [ 0 336 ] }
+	
+	sprite red_carpet: { flags: [ tile_walkable ] borders:
+		[ red_carpet_border_1 red_carpet_border_2 red_carpet_border_3 red_carpet_border_4 red_carpet_border_5 red_carpet_border_6 red_carpet_border_7
+		  red_carpet_border_8 red_carpet_border_9 red_carpet_border_10 red_carpet_border_11 red_carpet_border_12 red_carpet_border_13 red_carpet_border_14
+		  red_carpet_border_15 red_carpet_border_16 red_carpet_border_17 ] alt_tiles: [ ] }		
+	sprite red_carpet_border_1: { }
+	sprite red_carpet_border_2: { }
+	sprite red_carpet_border_3: { }
+	sprite red_carpet_border_4: { }
+	sprite red_carpet_border_5: { }
+	sprite red_carpet_border_6: { }
+	sprite red_carpet_border_7: { }
+	sprite red_carpet_border_8: { }
+	sprite red_carpet_border_9: { }
+	sprite red_carpet_border_10: { }
+	sprite red_carpet_border_11: { }
+	sprite red_carpet_border_12: { }
+	sprite red_carpet_border_13: { }
+	sprite red_carpet_border_14: { }
+	sprite red_carpet_border_15: { }
+	sprite red_carpet_border_16: { }
+	sprite red_carpet_border_17: { }
 	
 }

@@ -4,6 +4,9 @@
 #include <tpublic/IWriter.h>
 #include <tpublic/MapCovers.h>
 
+// DEBUG
+#include <tpublic/Image.h>
+
 namespace tpublic
 {
 
@@ -144,13 +147,18 @@ namespace tpublic
 			assert(t->m_position.m_x + t->m_size.m_x <= aSize.m_x);
 			assert(t->m_position.m_y + t->m_size.m_y <= aSize.m_y);
 
-			size_t rowBytes = (size_t)t->m_size.m_x * sizeof(uint32_t);
 			uint32_t* out = &aOutTileMap[t->m_position.m_x + t->m_position.m_y * aSize.m_x];
 			const uint32_t* in = t->m_tileMap;
 
 			for(int32_t y = 0; y < t->m_size.m_y; y++)
 			{
-				memcpy(out, in, rowBytes);
+				for(int32_t x = 0; x < t->m_size.m_x; x++)
+				{
+					uint32_t tileSpriteId = in[x];
+					if(tileSpriteId != 0)
+						out[x] = tileSpriteId;
+				}
+
 				out += aSize.m_x;
 				in += t->m_size.m_x;
 			}

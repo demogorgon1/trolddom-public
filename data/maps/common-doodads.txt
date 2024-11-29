@@ -51,6 +51,10 @@ sprites:
 	sprite doodad_wall_banner_blacksmithing_1: { flags: [ tile_walkable ] }
 	sprite doodad_tent: { flags: [ tile_walkable ] }
 	sprite doodad_wall_banner_dark_green_1: { flags: [ tile_walkable ] }
+	sprite doodad_pier_edge_2: { flags: [ tile_walkable ] }
+	sprite dungeon_open_door: { flags: [ tile_walkable ] }
+	sprite statue_face_right: { flags: [ tile_walkable ] }
+	sprite statue_face_left: { flags: [ tile_walkable ] }
 
 }
 
@@ -115,6 +119,30 @@ doodad pier_edge:
 	auto_probability: 100
 }
 
+doodad pier_edge_2:
+{
+	sprites: [ doodad_pier_edge_2 ]
+	map_palette<"x">: { must_be_one_of: [ water ] }
+	map_palette<"y">: { must_be_one_of: [ road_1 ] } 
+	map: [ "y"
+	       "x" ]
+	map_offset: [ 0 -1 ]
+	
+	auto_probability: 100
+}
+
+doodad pier_edge_3:
+{
+	sprites: [ doodad_pier_edge_1 ]
+	map_palette<"x">: { must_be_one_of: [ water ] }
+	map_palette<"y">: { must_be_one_of: [ outside_wood_floor_1 ] } 
+	map: [ "y"
+	       "x" ]
+	map_offset: [ 0 -1 ]
+	
+	auto_probability: 100
+}
+
 doodad crates: { sprites: [ doodad_crates_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad sack: { sprites: [ doodad_sack_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad table: { sprites: [ doodad_table_1 doodad_table_2 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
@@ -133,7 +161,9 @@ doodad wall_banner_mining: { sprites: [ doodad_wall_banner_mining_1 ] map_palett
 doodad wall_banner_blacksmithing: { sprites: [ doodad_wall_banner_blacksmithing_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad tent: { sprites: [ doodad_tent ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad wall_banner_dark_green: { sprites: [ doodad_wall_banner_dark_green_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
-
+doodad dungeon_open_door: { sprites: [ dungeon_open_door ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad statue_face_left: { sprites: [ statue_face_left ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad statue_face_right: { sprites: [ statue_face_right ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 
 
 

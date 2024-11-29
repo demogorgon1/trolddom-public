@@ -69,10 +69,26 @@ map_palette .tiles:
 	tile forest_entrance: [ 123 255 123 ] 
 	tile forest_2_entrance: [ 123 215 123 ] 
 	tile ext_dungeon_wall: [ 0 0 32 ]
-	tile ext_dungeon_entrance: [ 0 0 64 ]
+	tile ext_dungeon_entrance: [ 0 0 164 ]
 	tile ext_cave_entrance: [ 0 0 128 ]
 	tile wood_wall_window: [ 255 128 64 ] 
 	tile wood_solid_wall_face_window: [ 100 100 50 ]
+	tile road_1: [ 121 125 66 ]
+	tile pavement_1: [ 121 175 56 ]
+	tile brick_wall_window: [ 125 161 164 ] 
+	tile brick_solid_wall_face_window: [ 202 56 58 ]
+	tile brick_solid_wall_face: [ 16 26 210 ]			
+	tile brick_wall: [ 116 26 210 ]			
+	tile brick_open_door: [ 16 226 210 ]			
+	tile brick_2_wall_window: [ 161 90 164 ] 
+	tile brick_2_solid_wall_face_window: [ 56 202 58 ]
+	tile brick_2_solid_wall_face: [ 26 160 210 ]			
+	tile brick_2_wall: [ 26 116 210 ]			
+	tile brick_2_open_door: [ 226 16 210 ]			
+	tile outside_wood_floor_1: [ 221 16 170 ]				
+	tile dungeon_floor: [ 200 200 155 ] 
+	tile ext_dungeon_entrance_closed: [ 128 0 64 ]
+	tile red_carpet: [ 200 90 159 ] 
 }
 
 map_palette .stuff:
@@ -148,6 +164,9 @@ map_palette .doodads:
 	doodad wall_banner_blacksmithing: [ 243 59 53 ]
 	doodad tent: [ 249 51 53 ]	
 	doodad wall_banner_dark_green: [ 143 59 13 ]
+	doodad dungeon_open_door: [ 193 13 59 ]	
+	doodad statue_face_left: [ 193 63 59 ]	
+	doodad statue_face_right: [ 193 73 19 ]	
 }
 
 map_palette .cliffs:

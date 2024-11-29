@@ -87,6 +87,8 @@ namespace tpublic
 			m_manifest->GetContainer<tpublic::Data::Map>()->ForEach([&](
 				Data::Map* aMap)
 			{
+				printf("Building map '%s'...\n", aMap->m_name.c_str());
+
 				aMap->m_data->Build(m_manifest, &autoDoodads);
 
 				aMap->m_data->ConstructMapPathData(m_manifest);
