@@ -33,7 +33,7 @@ namespace tpublic
 			{ "create_guild" },
 			{ "untrain_talents" },
 			{ "trigger" },
-			{ "npc_trigger" },
+			{ "npc_trigger" }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

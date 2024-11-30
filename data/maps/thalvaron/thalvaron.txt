@@ -12,6 +12,53 @@ zone .valoris:
 	string: "Valoris"
 }
 
+zone .valoris_docks:
+{
+	string: "Docks"
+	town: true
+}
+
+zone .valoris_trade_district:
+{
+	string: "Trade District"
+	town: true
+}
+
+zone .valoris_royal_gardens:
+{
+	string: "Royal Gardens"
+	town: true
+}
+
+zone .valoris_royal_castle:
+{
+	string: "Royal Castle"
+	town: true
+}
+
+zone .valoris_the_garrison:
+{
+	string: "The Garrison"
+	town: true
+}
+
+zone .valoris_southgate:
+{
+	string: "Southgate"
+	town: true
+}
+
+zone .valoris_royal_district:
+{
+	string: "Royal District"
+	town: true
+}
+
+zone .valoris_eastgate:
+{
+	string: "Eastgate"
+}
+
 route .default_patrol:
 {
 }
@@ -40,6 +87,24 @@ map_cliff .wall_cliff_ramp:
 	cliff_style: wall
 	elevation: 1
 	ramp: true
+}
+
+map_cliff .dummy_cliff_2:
+{
+	cliff_style: dummy
+	elevation: 2
+}
+
+map_cliff .dummy_cliff_2_ramp:
+{
+	cliff_style: dummy
+	elevation: 2
+	ramp: true
+}
+
+map_entity_spawn thalvaron_marlowe:
+{
+	entity thalvaron_marlowe: { init_state: default }
 }
 
 map_palette .tiles:
@@ -109,6 +174,8 @@ map_palette .stuff:
 	entity_spawn default_chest: [ 40 143 66 ]		
 	entity_spawn cauldron: [ 43 113 166 ]		
 	
+	entity_spawn thalvaron_marlowe: [ 44 56 139 ]
+	
 	player_spawn .player_spawn: [ 0 0 255 ]
 	
 	wall stone_wall: [ 128 128 128 ]
@@ -116,6 +183,7 @@ map_palette .stuff:
 
 map_palette .levels:
 {
+	level<1>: [ 64 196 128 ]
 	level<10>: [ 0 255 0 ]
 	level<11>: [ 255 0 0 ]
 	level<12>: [ 0 0 255 ]
@@ -137,6 +205,13 @@ map_palette .zones:
 map_palette .sub_zones:
 {
 	sub_zone .valoris_docks: [ 191 20 180 ]
+	sub_zone .valoris_trade_district: [ 20 192 180 ]
+	sub_zone .valoris_royal_gardens: [ 192 20 180 ]
+	sub_zone .valoris_royal_castle: [ 180 192 20 ]
+	sub_zone .valoris_the_garrison: [ 80 92 220 ]
+	sub_zone .valoris_southgate: [ 100 192 27 ]
+	sub_zone .valoris_royal_district: [ 192 255 44 ]
+	sub_zone .valoris_eastgate: [ 30 255 140 ]
 }
 
 map_palette .routes:
@@ -167,6 +242,10 @@ map_palette .doodads:
 	doodad dungeon_open_door: [ 193 13 59 ]	
 	doodad statue_face_left: [ 193 63 59 ]	
 	doodad statue_face_right: [ 193 73 19 ]	
+	doodad ship: [ 193 173 119 ]	
+	doodad stone_stairs: [ 192 173 19 ]	
+	doodad wood_stairs: [ 192 19 173 ]	
+	
 }
 
 map_palette .cliffs:
@@ -176,7 +255,9 @@ map_palette .cliffs:
 		
 	cliff .wall_cliff: [ 197 169 134 ]
 	cliff .wall_cliff_ramp: [ 136 152 174 ]
-	
+
+	cliff .dummy_cliff_2: [ 197 169 234 ]
+	cliff .dummy_cliff_2_ramp: [ 136 252 174 ]	
 }
 
 map thalvaron:

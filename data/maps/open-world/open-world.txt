@@ -862,6 +862,7 @@ map_palette .doodads:
 	doodad wall_banner_blacksmithing: [ 243 59 53 ]
 	doodad tent: [ 249 51 53 ]	
 	doodad wall_banner_dark_green: [ 143 59 13 ]
+	doodad ship: [ 193 173 119 ]	
 }
 
 map_palette .flags:

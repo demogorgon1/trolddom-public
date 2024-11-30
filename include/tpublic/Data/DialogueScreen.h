@@ -16,6 +16,58 @@ namespace tpublic
 			static const DataType::Id DATA_TYPE = DataType::ID_DIALOGUE_SCREEN;
 			static const bool TAGGED = false;
 
+			struct MapTransfer		
+			{
+				MapTransfer()
+				{
+
+				}
+
+				MapTransfer(
+					const SourceNode*	aSource)
+				{
+					aSource->GetObject()->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if (aChild->m_name == "cost")
+							m_cost = aChild->GetUInt32();
+						else if (aChild->m_name == "map")
+							m_mapId = aChild->GetId(DataType::ID_MAP);
+						else if (aChild->m_name == "map_player_spawn")
+							m_mapPlayerSpawnId = aChild->GetId(DataType::ID_MAP_PLAYER_SPAWN);
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					});
+				}
+
+				void
+				ToStream(
+					IWriter*			aWriter) const
+				{
+					aWriter->WriteUInt(m_cost);
+					aWriter->WriteUInt(m_mapId);
+					aWriter->WriteUInt(m_mapPlayerSpawnId);
+				}
+
+				bool
+				FromStream(
+					IReader*			aReader) 
+				{
+					if (!aReader->ReadUInt(m_cost))
+						return false;
+					if (!aReader->ReadUInt(m_mapId))
+						return false;
+					if (!aReader->ReadUInt(m_mapPlayerSpawnId))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t				m_cost = 0;
+				uint32_t				m_mapId = 0;
+				uint32_t				m_mapPlayerSpawnId = 0;
+			};
+
 			struct Option
 			{
 				Option()
@@ -63,6 +115,10 @@ namespace tpublic
 						{
 							m_requirements.push_back(Requirement(aChild));
 						}
+						else if (aChild->m_name == "map_transfer")
+						{
+							m_mapTransfer = MapTransfer(aChild);
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
@@ -83,6 +139,7 @@ namespace tpublic
 					aWriter->WriteBool(m_questOffer);
 					aWriter->WriteBool(m_questCompletion);
 					aWriter->WriteObjects(m_requirements);
+					aWriter->WriteOptionalObject(m_mapTransfer);
 				}
 
 				bool
@@ -107,6 +164,8 @@ namespace tpublic
 						return false;
 					if(!aReader->ReadObjects(m_requirements))
 						return false;
+					if(!aReader->ReadOptionalObject(m_mapTransfer))
+						return false;
 					return true;
 				}
 
@@ -120,6 +179,7 @@ namespace tpublic
 				DialogueScript::Id			m_dialogueScript = DialogueScript::ID_NONE;
 				uint32_t					m_conditionExpressionId = 0;
 				std::vector<Requirement>	m_requirements;
+				std::optional<MapTransfer>	m_mapTransfer;
 			};
 
 			struct Sell

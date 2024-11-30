@@ -149,6 +149,7 @@ namespace tpublic
 				m_mapOffset.ToStream(aWriter);
 				aWriter->WriteUInts(m_map);
 				aWriter->WriteOptionalObject(m_autoProbability);
+				m_sizeInTiles.ToStream(aWriter);
 			}
 			
 			bool
@@ -169,6 +170,8 @@ namespace tpublic
 					return false;
 				if(!aReader->ReadOptionalObject(m_autoProbability))
 					return false;
+				if(!m_sizeInTiles.FromStream(aReader))
+					return false;
 				return true;
 			}
 
@@ -179,6 +182,7 @@ namespace tpublic
 			std::vector<uint32_t>								m_map;
 			Vec2												m_mapOffset;
 			std::optional<UIntRange>							m_autoProbability;
+			Vec2												m_sizeInTiles;
 		};
 
 	}

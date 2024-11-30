@@ -21,6 +21,7 @@
 #include "JSONManifest.h"
 #include "MapImageOutput.h"
 #include "PostProcessAbilities.h"
+#include "PostProcessDoodads.h"
 #include "PostProcessEntities.h"
 #include "PostProcessItems.h"
 #include "PostProcessSprites.h"
@@ -147,6 +148,7 @@ namespace tpublic
 		PostProcessAbilities::Run(m_manifest);
 		PostProcessSprites::Run(m_manifest);
 		PostProcessItems::Run(m_manifest);
+		PostProcessDoodads::Run(m_manifest);
 
 		// Run generation jobs
 		for(std::unique_ptr<GenerationJob>& generationJob : generationJobs)

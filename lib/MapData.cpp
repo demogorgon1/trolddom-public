@@ -336,17 +336,23 @@ namespace tpublic
 				}
 			}
 
+			printf("loaded layers\n");
+
 			if(hasLevelMap || hasZoneMap || hasSubZoneMap || hasFlagsMap)
 			{
 				m_worldInfoMap = std::make_unique<WorldInfoMap>();
 				m_worldInfoMap->Build(m_width, m_height, &levelMap[0], &zoneMap[0], &subZoneMap[0], &flagsMap[0]);
 			}
 
+			printf("built world info map\n");
+
 			if(hasCoverMap)
 			{
 				m_mapCovers = std::make_unique<MapCovers>();
 				m_mapCovers->Build(m_width, m_height, &coverMap[0]);
 			}
+
+			printf("built cover map\n");
 
 			if(m_mapInfo.m_autoDoodads)
 			{
@@ -359,6 +365,8 @@ namespace tpublic
 				});
 			}
 
+			printf("generated doodads\n");
+
 			if(cliffBuilder)
 			{
 				cliffBuilder->Generate([&](
@@ -367,6 +375,9 @@ namespace tpublic
 					m_doodads[aTile.m_position] = aTile.m_spriteId;
 				});
 			}
+
+			printf("generated cliffs\n");
+
 		}
 	}
 
@@ -380,6 +391,8 @@ namespace tpublic
 		builder.Build(aManifest, m_tileMap, (uint32_t)m_width, (uint32_t)m_height, 6);
 
 		builder.Export(m_mapPathData.get());
+		
+		printf("constructed map path data\n");
 	}
 
 	void
@@ -388,6 +401,8 @@ namespace tpublic
 	{
 		if(m_mapRouteData)
 			m_mapRouteData->Build(aManifest, m_tileMap, m_width, m_height);
+
+		printf("constructed map route data\n");
 	}
 
 	void	

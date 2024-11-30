@@ -235,10 +235,12 @@ sprites:
 	cursor: { position: [ 0 192 ] }
 
 	sprite target_dummy: { dead: target_dummy_dead }
+	sprite man_26: { dead: man_26_dead }
 	
 	cursor: { position: [ 0 208 ] }
 
 	sprite target_dummy_dead: { }
+	sprite man_26_dead: { }
 	
 }
 
