@@ -12,6 +12,21 @@ zone .valoris:
 	string: "Valoris"
 }
 
+zone .valoris_south:
+{
+	string: "Fernwick Hills"
+}
+
+zone .valoris_south_mountains:
+{
+	string: "Clearview Slopes"
+}
+
+zone .valoris_south_sea:
+{
+	string: "Clearview Reach"
+}
+
 zone .valoris_docks:
 {
 	string: "Docks"
@@ -57,6 +72,11 @@ zone .valoris_royal_district:
 zone .valoris_eastgate:
 {
 	string: "Eastgate"
+}
+
+zone .valoris_south_town:
+{
+	string: "Fernwick"
 }
 
 route .default_patrol:
@@ -200,6 +220,9 @@ map_palette .levels:
 map_palette .zones:
 {
 	zone .valoris: [ 0 255 255 ]
+	zone .valoris_south: [ 53 53 112 ]
+	zone .valoris_south_mountains: [ 177 12 195 ]
+	zone .valoris_south_sea: [ 107 53 112 ]
 }
 
 map_palette .sub_zones:
@@ -212,6 +235,8 @@ map_palette .sub_zones:
 	sub_zone .valoris_southgate: [ 100 192 27 ]
 	sub_zone .valoris_royal_district: [ 192 255 44 ]
 	sub_zone .valoris_eastgate: [ 30 255 140 ]
+	sub_zone .valoris_south_town: [ 174 174 49 ]
+
 }
 
 map_palette .routes:
