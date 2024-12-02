@@ -62,7 +62,7 @@ namespace tpublic
 		const char*				aGeneratedSourceOutputPath,
 		Compression::Level		aCompressionLevel)
 	{
-		SpriteSheetBuilder spriteSheetBuilder(512);
+		SpriteSheetBuilder spriteSheetBuilder(256);
 		std::vector<std::unique_ptr<GenerationJob>> generationJobs;
 
 		m_sourceContext.m_persistentIdTable->Load(aPersistentIdTablePath);
