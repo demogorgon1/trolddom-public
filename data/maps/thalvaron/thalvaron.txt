@@ -7,78 +7,40 @@ map_player_spawn .player_spawn:
 {
 }
 
-zone .valoris:
-{
-	string: "Valoris"
-}
-
-zone .valoris_south:
-{
-	string: "Fernwick Hills"
-}
-
-zone .valoris_south_mountains:
-{
-	string: "Clearview Slopes"
-}
-
-zone .valoris_south_sea:
-{
-	string: "Clearview Reach"
-}
-
-zone .valoris_docks:
-{
-	string: "Docks"
-	town: true
-}
-
-zone .valoris_trade_district:
-{
-	string: "Trade District"
-	town: true
-}
-
-zone .valoris_royal_gardens:
-{
-	string: "Royal Gardens"
-	town: true
-}
-
-zone .valoris_royal_castle:
-{
-	string: "Royal Castle"
-	town: true
-}
-
-zone .valoris_the_garrison:
-{
-	string: "The Garrison"
-	town: true
-}
-
-zone .valoris_southgate:
-{
-	string: "Southgate"
-	town: true
-}
-
-zone .valoris_royal_district:
-{
-	string: "Royal District"
-	town: true
-}
-
-zone .valoris_eastgate:
-{
-	string: "Eastgate"
-}
-
-zone .valoris_south_town:
-{
-	string: "Fernwick"
-}
-
+zone .valoris: { string: "Valoris" }
+zone .valoris_south: { string: "Fernwick Hills" }
+zone .valoris_south_mountains: { string: "Clearview Slopes" }
+zone .valoris_south_sea: { string: "Clearview" }
+zone .valoris_docks: { string: "Docks" town: true }
+zone .valoris_trade_district: { string: "Trade District" town: true }
+zone .valoris_royal_gardens: { string: "Royal Gardens" town: true }
+zone .valoris_royal_castle: { string: "Royal Castle" town: true }  
+zone .valoris_the_garrison: { string: "The Garrison" town: true }
+zone .valoris_southgate: { string: "Southgate" town: true }
+zone .valoris_royal_district: { string: "Royal District" town: true }
+zone .valoris_eastgate: { string: "Eastgate" }
+zone .valoris_south_town: { string: "Fernwick" }
+zone .north_wetlands: { string: "North Marshlands" }
+zone .middle_wetlands: { string: "Middle Marshlands" }
+zone .south_wetlands: { string: "South Marshlands" }
+zone .wetlands_town: { string: "Mirehaven" }
+zone .south_badlands: { string: "South Badlands" }
+zone .north_badlands: { string: "North Badlands" }
+zone .center_pass: { string: "Ravenreach Pass" }
+zone .valoris_east: { string: "Eastview" }
+zone .valoris_north_woods: { string: "Eastview Woods" }
+zone .north_pass: { string: "Iceveil Pass" }
+zone .mountains: { string: "Iceveil Highlands" }
+zone .myst_woodlands_town: { string: "Edmund's Haunt" }
+zone .myst_woodlands: { string: "Duskwhisper Vale" }
+zone .haunted_woods_main: { string: "Shadowthorn Forest" }
+zone .haunted_woods_west: { string: "Shadowthorn Thicket" }
+zone .haunted_woods_town: { string: "Ravenreach" }
+zone .haunted_woods_clearing: { string: "Shadowthorn Abbey" }
+zone .haunted_woods_east: { string: "Faerandor" }
+zone .jungle: { string: "Xandralis" }
+zone .lich_woods: { string: "Hollows of the Undying" }
+	
 route .default_patrol:
 {
 }
@@ -174,6 +136,9 @@ map_palette .tiles:
 	tile dungeon_floor: [ 200 200 155 ] 
 	tile ext_dungeon_entrance_closed: [ 128 0 64 ]
 	tile red_carpet: [ 200 90 159 ] 
+	tile snow_rocks: [ 191 180 170 ] 	
+	tile snow: [ 220 230 216 ] 	
+	tile ice: [ 176 230 222 ] 	
 }
 
 map_palette .stuff:
@@ -223,6 +188,27 @@ map_palette .zones:
 	zone .valoris_south: [ 53 53 112 ]
 	zone .valoris_south_mountains: [ 177 12 195 ]
 	zone .valoris_south_sea: [ 107 53 112 ]
+	zone .north_wetlands: [ 222 172 112 ]
+	zone .middle_wetlands: [ 119 222 112 ]
+	zone .south_wetlands: [ 112 222 208 ]
+	zone .wetlands_town: [ 204 222 112 ]
+	zone .south_badlands: [ 255 165 0 ]
+	zone .north_badlands: [ 82 255 0 ]
+	zone .center_pass: [ 222 112 187 ]
+	zone .valoris_east: [ 112 130 222 ]
+	zone .valoris_north_woods: [ 172 112 222 ]
+	zone .north_pass: [ 239 0 255 ]
+	zone .mountains: [ 99 0 255 ]
+	zone .myst_woodlands_town: [ 156 255 0 ]
+	zone .myst_woodlands: [ 255 82 0 ]
+	zone .haunted_woods_main: [ 255 0 165 ]
+	zone .haunted_woods_west: [ 66 0 255 ]
+	zone .haunted_woods_town: [ 230 255 0 ]
+	zone .haunted_woods_clearing: [ 165 0 255 ]
+	zone .haunted_woods_east: [ 255 16 0 ]
+	zone .jungle: [ 0 25 255 ]
+	zone .lich_woods: [ 222 255 0 ]
+	
 }
 
 map_palette .sub_zones:
