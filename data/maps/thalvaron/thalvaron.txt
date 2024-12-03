@@ -139,6 +139,10 @@ map_palette .tiles:
 	tile snow_rocks: [ 191 180 170 ] 	
 	tile snow: [ 220 230 216 ] 	
 	tile ice: [ 176 230 222 ] 	
+	tile pine_forest_2: [ 99 95 129 ] 		
+	tile pine_forest_1: [ 37 152 78 ] 		
+	tile dark_grass_2: [ 6 74 26 ]
+	tile wet_grass: [ 99 152 16 ]
 }
 
 map_palette .stuff:

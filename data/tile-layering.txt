@@ -9,6 +9,8 @@ tile_layering:
 	dirt
 	grass_2
 	grass
+	dark_grass_2
+	wet_grass
 	dark_grass
 	farmland
 	snow
@@ -16,6 +18,8 @@ tile_layering:
 	pavement_1
 	forest
 	forest_2
+	pine_forest_1
+	pine_forest_2
 	rocks
 	snow_rocks	
 	fs_rocks_1
