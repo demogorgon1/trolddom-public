@@ -143,6 +143,9 @@ map_palette .tiles:
 	tile pine_forest_1: [ 37 152 78 ] 		
 	tile dark_grass_2: [ 6 74 26 ]
 	tile wet_grass: [ 99 152 16 ]
+	tile badlands_1: [ 138 100 69 ]
+	tile badlands_2: [ 159 121 90 ]
+	tile badlands_rocks: [ 171 147 87 ]
 }
 
 map_palette .stuff:

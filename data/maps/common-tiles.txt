@@ -734,5 +734,91 @@ sprites:
 	sprite wet_grass_border_17: { }
 	sprite wet_grass_alt_1: { flags: [ tile_walkable ] }
 	sprite wet_grass_alt_2: { flags: [ tile_walkable ] }
-	
+
+	cursor: { position: [ 0 416 ] }
+
+	sprite badlands_1: 
+	{ 
+		flags: [ tile_walkable ] 
+		borders: [ badlands_1_border_1 badlands_1_border_2 badlands_1_border_3 badlands_1_border_4 badlands_1_border_5 badlands_1_border_6 badlands_1_border_7
+		           badlands_1_border_8 badlands_1_border_9 badlands_1_border_10 badlands_1_border_11 badlands_1_border_12 badlands_1_border_13 badlands_1_border_14
+		           badlands_1_border_15 badlands_1_border_16 badlands_1_border_17 ] 				  						   
+		alt_tiles: [ badlands_1_alt_1 badlands_1_alt_2 ]
+	}	
+	sprite badlands_1_border_1: { }
+	sprite badlands_1_border_2: { }
+	sprite badlands_1_border_3: { }
+	sprite badlands_1_border_4: { }
+	sprite badlands_1_border_5: { }
+	sprite badlands_1_border_6: { }
+	sprite badlands_1_border_7: { }
+	sprite badlands_1_border_8: { }
+	sprite badlands_1_border_9: { }
+	sprite badlands_1_border_10: { }
+	sprite badlands_1_border_11: { }
+	sprite badlands_1_border_12: { }
+	sprite badlands_1_border_13: { }
+	sprite badlands_1_border_14: { }
+	sprite badlands_1_border_15: { }
+	sprite badlands_1_border_16: { }
+	sprite badlands_1_border_17: { }
+	sprite badlands_1_alt_1: { flags: [ tile_walkable ] }
+	sprite badlands_1_alt_2: { flags: [ tile_walkable ] }
+
+	cursor: { position: [ 0 432 ] }
+
+	sprite badlands_2: 
+	{ 
+		flags: [ tile_walkable ] 
+		borders: [ badlands_2_border_1 badlands_2_border_2 badlands_2_border_3 badlands_2_border_4 badlands_2_border_5 badlands_2_border_6 badlands_2_border_7
+		           badlands_2_border_8 badlands_2_border_9 badlands_2_border_10 badlands_2_border_11 badlands_2_border_12 badlands_2_border_13 badlands_2_border_14
+		           badlands_2_border_15 badlands_2_border_16 badlands_2_border_17 ] 				  						   
+		alt_tiles: [ badlands_2_alt_1 badlands_2_alt_2 ]
+	}	
+	sprite badlands_2_border_1: { }
+	sprite badlands_2_border_2: { }
+	sprite badlands_2_border_3: { }
+	sprite badlands_2_border_4: { }
+	sprite badlands_2_border_5: { }
+	sprite badlands_2_border_6: { }
+	sprite badlands_2_border_7: { }
+	sprite badlands_2_border_8: { }
+	sprite badlands_2_border_9: { }
+	sprite badlands_2_border_10: { }
+	sprite badlands_2_border_11: { }
+	sprite badlands_2_border_12: { }
+	sprite badlands_2_border_13: { }
+	sprite badlands_2_border_14: { }
+	sprite badlands_2_border_15: { }
+	sprite badlands_2_border_16: { }
+	sprite badlands_2_border_17: { }
+	sprite badlands_2_alt_1: { flags: [ tile_walkable ] }
+	sprite badlands_2_alt_2: { flags: [ tile_walkable ] }
+
+	cursor: { position: [ 0 448 ] }
+
+	sprite badlands_rocks: { flags: [ tile_block_line_of_sight ] borders:
+		[ badlands_rocks_border_1 badlands_rocks_border_2 badlands_rocks_border_3 badlands_rocks_border_4 badlands_rocks_border_5 badlands_rocks_border_6 badlands_rocks_border_7
+		  badlands_rocks_border_8 badlands_rocks_border_9 badlands_rocks_border_10 badlands_rocks_border_11 badlands_rocks_border_12 badlands_rocks_border_13 badlands_rocks_border_14
+		  badlands_rocks_border_15 badlands_rocks_border_16 badlands_rocks_border_17 ] alt_tiles: [ badlands_rocks_alt_1 badlands_rocks_alt_2 ] }		
+	sprite badlands_rocks_border_1: { }
+	sprite badlands_rocks_border_2: { }
+	sprite badlands_rocks_border_3: { }
+	sprite badlands_rocks_border_4: { }
+	sprite badlands_rocks_border_5: { }
+	sprite badlands_rocks_border_6: { }
+	sprite badlands_rocks_border_7: { }
+	sprite badlands_rocks_border_8: { }
+	sprite badlands_rocks_border_9: { }
+	sprite badlands_rocks_border_10: { }
+	sprite badlands_rocks_border_11: { }
+	sprite badlands_rocks_border_12: { }
+	sprite badlands_rocks_border_13: { }
+	sprite badlands_rocks_border_14: { }
+	sprite badlands_rocks_border_15: { }
+	sprite badlands_rocks_border_16: { }
+	sprite badlands_rocks_border_17: { }
+	sprite badlands_rocks_alt_1: { flags: [ tile_walkable ] }
+	sprite badlands_rocks_alt_2: { flags: [ tile_walkable ] }
+
 }
