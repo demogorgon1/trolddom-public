@@ -229,7 +229,6 @@ map_palette .sub_zones:
 	sub_zone .valoris_royal_district: [ 192 255 44 ]
 	sub_zone .valoris_eastgate: [ 30 255 140 ]
 	sub_zone .valoris_south_town: [ 174 174 49 ]
-
 }
 
 map_palette .routes:
@@ -263,7 +262,7 @@ map_palette .doodads:
 	doodad ship: [ 193 173 119 ]	
 	doodad stone_stairs: [ 192 173 19 ]	
 	doodad wood_stairs: [ 192 19 173 ]	
-	
+	doodad large_statue: [ 193 73 20 ]	
 }
 
 map_palette .cliffs:

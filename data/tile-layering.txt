@@ -7,6 +7,8 @@ tile_layering:
 	fs_ground_1
 	sand
 	dirt
+	badlands_1
+	badlands_2
 	grass_2
 	grass
 	dark_grass_2
@@ -23,6 +25,7 @@ tile_layering:
 	rocks
 	snow_rocks	
 	fs_rocks_1
+	badlands_rocks
 ]
 
 base_tile_border_pattern_sprite: grass
