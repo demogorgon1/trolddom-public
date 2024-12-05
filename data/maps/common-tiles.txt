@@ -197,6 +197,16 @@ sprites:
 	sprite mud_border_15: { }
 	sprite mud_border_16: { }	
 	sprite mud_border_17: { }
+	
+	sprite roof_4_nw: { }
+	sprite roof_4_n: { }
+	sprite roof_4_ne: { }
+	sprite roof_4_w: { }
+	sprite roof_4: { }
+	sprite roof_4_e: { }
+	sprite roof_4_sw: { }
+	sprite roof_4_s: { }
+	sprite roof_4_se: { }	
 
 	cursor: { position: [ 0 96 ] }
 	
@@ -542,6 +552,22 @@ sprites:
 	sprite fs_rocks_1_alt_2: { flags: [ tile_block_line_of_sight ] }
 	sprite fs_water: { flags: [ tile_fishable tile_water ] water_floor: fs_water_floor water_animation: [ fs_water_1 fs_water_2 fs_water_3 ] }
 	sprite fs_water_floor: { flags: [ tile_walkable ] }
+	sprite badlands_dungeon_wall_start: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite badlands_dungeon_wall_end: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite badlands_dungeon_wall: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite badlands_dungeon_entrance: { flags: [ tile_walkable tile_top ] }
+	sprite badlands_cave_entrance: { flags: [ tile_walkable tile_top ] }
+	sprite wood_wall_2: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_2_entrance: { flags: [ tile_walkable tile_top ] }
+	sprite wood_wall_2_inside: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_2_start: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_2_end: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_2_window: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_2_window_inside: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_2_grass_1: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_2_grass_2: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_2_window_grass_1: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_2_window_grass_2: { flags: [ tile_block_line_of_sight tile_top ] }
 
 	cursor: { position: [ 0 304 ] }
 	
@@ -820,5 +846,35 @@ sprites:
 	sprite badlands_rocks_border_17: { }
 	sprite badlands_rocks_alt_1: { flags: [ tile_walkable ] }
 	sprite badlands_rocks_alt_2: { flags: [ tile_walkable ] }
+
+	cursor: { position: [ 0 464 ] }
+
+	sprite pine_forest_3: 
+	{ 
+		flags: [ tile_block_line_of_sight ] 
+		borders: [ pine_forest_3_border_1 pine_forest_3_border_2 pine_forest_3_border_3 pine_forest_3_border_4 pine_forest_3_border_5 pine_forest_3_border_6 pine_forest_3_border_7
+		           pine_forest_3_border_8 pine_forest_3_border_9 pine_forest_3_border_10 pine_forest_3_border_11 pine_forest_3_border_12 pine_forest_3_border_13 pine_forest_3_border_14
+		           pine_forest_3_border_15 pine_forest_3_border_16 pine_forest_3_border_17 ] 				  						   
+		alt_tiles: [ pine_forest_3_alt_1 pine_forest_3_alt_2 ]
+	}	
+	sprite pine_forest_3_border_1: { }
+	sprite pine_forest_3_border_2: { }
+	sprite pine_forest_3_border_3: { }
+	sprite pine_forest_3_border_4: { }
+	sprite pine_forest_3_border_5: { }
+	sprite pine_forest_3_border_6: { }
+	sprite pine_forest_3_border_7: { }
+	sprite pine_forest_3_border_8: { }
+	sprite pine_forest_3_border_9: { }
+	sprite pine_forest_3_border_10: { }
+	sprite pine_forest_3_border_11: { }
+	sprite pine_forest_3_border_12: { }
+	sprite pine_forest_3_border_13: { }
+	sprite pine_forest_3_border_14: { }
+	sprite pine_forest_3_border_15: { }
+	sprite pine_forest_3_border_16: { }
+	sprite pine_forest_3_border_17: { }
+	sprite pine_forest_3_alt_1: { flags: [ tile_block_line_of_sight ] }
+	sprite pine_forest_3_alt_2: { flags: [ tile_block_line_of_sight ] }
 
 }

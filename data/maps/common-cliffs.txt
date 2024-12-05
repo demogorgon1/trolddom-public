@@ -72,6 +72,40 @@ sprites:
 	sprite wall_cliff_19: { }
 	sprite wall_cliff_20: { }
 	
+	cursor: { position: [ 0 64 ] }
+
+	sprite badlands_cliff_1_a: { }
+	sprite badlands_cliff_1_b: { }
+	sprite badlands_cliff_1_c: { }
+	sprite badlands_cliff_2_a: { }
+	sprite badlands_cliff_2_b: { }
+	sprite badlands_cliff_2_c: { }
+	sprite badlands_cliff_3_a: { }
+	sprite badlands_cliff_3_b: { }
+	sprite badlands_cliff_3_c: { }
+	sprite badlands_cliff_4_a: { }
+	sprite badlands_cliff_4_b: { }
+	sprite badlands_cliff_4_c: { }
+	sprite badlands_cliff_5: { }
+	sprite badlands_cliff_6: { }
+	sprite badlands_cliff_7: { }
+	sprite badlands_cliff_8: { }
+	
+	cursor: { position: [ 0 80 ] }
+	
+	sprite badlands_cliff_9: { }
+	sprite badlands_cliff_10: { }
+	sprite badlands_cliff_11: { }
+	sprite badlands_cliff_12: { }
+	sprite badlands_cliff_13: { }
+	sprite badlands_cliff_14: { }
+	sprite badlands_cliff_15: { }
+	sprite badlands_cliff_16: { }
+	sprite badlands_cliff_17: { }
+	sprite badlands_cliff_18: { }
+	sprite badlands_cliff_19: { }
+	sprite badlands_cliff_20: { }	
+	
 }
 
 !define local CLIFF_STYLE
@@ -321,5 +355,29 @@ cliff_style wall: !CLIFF_STYLE
 	_cliff_18: [ wall_cliff_18 ]
 	_cliff_19: [ wall_cliff_19 ]
 	_cliff_20: [ wall_cliff_20 ]
+}
+
+cliff_style badlands: !CLIFF_STYLE
+{
+	_cliff_1: [ badlands_cliff_1_a badlands_cliff_1_b badlands_cliff_1_c ]
+	_cliff_2: [ badlands_cliff_2_a badlands_cliff_2_b badlands_cliff_2_c ]
+	_cliff_3: [ badlands_cliff_3_a badlands_cliff_3_b badlands_cliff_3_c ]
+	_cliff_4: [ badlands_cliff_4_a badlands_cliff_4_b badlands_cliff_4_c ]
+	_cliff_5: [ badlands_cliff_5 ]
+	_cliff_6: [ badlands_cliff_6 ]
+	_cliff_7: [ badlands_cliff_7 ]
+	_cliff_8: [ badlands_cliff_8 ]
+	_cliff_9: [ badlands_cliff_9 ]
+	_cliff_10: [ badlands_cliff_10 ]
+	_cliff_11: [ badlands_cliff_11 ]
+	_cliff_12: [ badlands_cliff_12 ]
+	_cliff_13: [ badlands_cliff_13 ]
+	_cliff_14: [ badlands_cliff_14 ]
+	_cliff_15: [ badlands_cliff_15 ]
+	_cliff_16: [ badlands_cliff_16 ]
+	_cliff_17: [ badlands_cliff_17 ]
+	_cliff_18: [ badlands_cliff_18 ]
+	_cliff_19: [ badlands_cliff_19 ]
+	_cliff_20: [ badlands_cliff_20 ]
 }
 

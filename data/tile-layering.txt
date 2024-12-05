@@ -22,6 +22,7 @@ tile_layering:
 	forest_2
 	pine_forest_1
 	pine_forest_2
+	pine_forest_3
 	rocks
 	snow_rocks	
 	fs_rocks_1

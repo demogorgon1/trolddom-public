@@ -72,8 +72,8 @@ sprites:
 doodad small_rocks:
 {
 	sprites: [ doodad_rocks_1 doodad_rocks_2 doodad_rocks_3 doodad_rocks_4 doodad_rocks_10 doodad_rocks_13 doodad_rocks_14 ]
-	map_palette<"x">: { must_be_one_of: [ grass grass_2 dirt mud snow dark_grass sand ] occupy: true  }
-	map_palette<"y">: { must_not_be_one_of: [ forest forest_2 pine_forest_1 pine_forest_2 ] } 
+	map_palette<"x">: { must_be_one_of: [ grass grass_2 dirt mud snow dark_grass sand badlands_1 badlands_2 ] occupy: true  }
+	map_palette<"y">: { must_not_be_one_of: [ forest forest_2 pine_forest_1 pine_forest_2 pine_forest_3 ] } 
 	map: [ "y"
 	       "x" ]
 	map_offset: [ 0 -1 ]
@@ -85,7 +85,7 @@ doodad flowers:
 {
 	sprites: [ doodad_flowers_1 doodad_flowers_2 doodad_flowers_3 ]
 	map_palette<"x">: { must_be_one_of: [ grass ] occupy: true  }
-	map_palette<"y">: { must_not_be_one_of: [ forest forest_2 pine_forest_1 pine_forest_2 ] } 
+	map_palette<"y">: { must_not_be_one_of: [ forest forest_2 pine_forest_1 pine_forest_2 pine_forest_3 ] } 
 	map: [ "y"
 	       "x" ]
 	map_offset: [ 0 -1 ]
@@ -96,8 +96,8 @@ doodad flowers:
 doodad small_rocks_brown:
 {
 	sprites: [ doodad_rocks_5 doodad_rocks_6 doodad_rocks_7 doodad_rocks_8 doodad_rocks_9 doodad_rocks_11 doodad_rocks_12 ]
-	map_palette<"x">: { must_be_one_of: [ grass grass_2 dirt mud snow dark_grass sand ] occupy: true }
-	map_palette<"y">: { must_not_be_one_of: [ forest forest_2 pine_forest_1 pine_forest_2 ] } 
+	map_palette<"x">: { must_be_one_of: [ grass grass_2 dirt mud snow dark_grass sand badlands_1 badlands_2 ] occupy: true }
+	map_palette<"y">: { must_not_be_one_of: [ forest forest_2 pine_forest_1 pine_forest_2 pine_forest_3 ] } 
 	map: [ "y"
 	       "x" ]
 	map_offset: [ 0 -1 ]
@@ -109,7 +109,7 @@ doodad grass_patch:
 {
 	sprites: [ doodad_grass_1 doodad_grass_2 ]
 	map_palette<"x">: { must_be_one_of: [ grass grass_2 dirt mud dark_grass ] }
-	map_palette<"y">: { must_not_be_one_of: [ forest forest_2 rocks pine_forest_1 pine_forest_2 ] } 
+	map_palette<"y">: { must_not_be_one_of: [ forest forest_2 rocks pine_forest_1 pine_forest_2 pine_forest_3 ] } 
 	map: [ "yyy"
 	       "yxy" 
 		   "yyy" ]
@@ -122,7 +122,7 @@ doodad grass_patch:
 {
 	sprites: @_sprites
 	map_palette<"x">: { must_be_one_of: @_tiles }
-	map_palette<"y">: { must_not_be_one_of: [ forest forest_2 rocks pine_forest_1 pine_forest_2 snow_rocks badlands_rocks ] } 
+	map_palette<"y">: { must_not_be_one_of: [ forest forest_2 rocks pine_forest_1 pine_forest_2 snow_rocks badlands_rocks pine_forest_3 ] } 
 	map: [ "yyy"
 	       "yxy" 
 		   "yyy" ]

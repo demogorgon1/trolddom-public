@@ -1,3 +1,45 @@
+tile_modifier wood_wall_2_grass:
+{
+	sprites: [ wood_wall_2_grass_1 wood_wall_2_grass_2 ]
+	
+	requirement<center_must_be>: [ wood_wall_2 ]
+	requirement<south_must_be>: [ dark_grass dark_grass_alt_1 dark_grass_alt_2 ]
+	
+	probability: 90
+}
+
+tile_modifier wood_wall_2_window_grass:
+{
+	sprites: [ wood_wall_2_window_grass_1 wood_wall_2_window_grass_2 ]
+	
+	requirement<center_must_be>: [ wood_wall_2_window ]
+	requirement<south_must_be>: [ dark_grass dark_grass_alt_1 dark_grass_alt_2 ]
+	
+	probability: 90
+}
+
+tile_modifier wood_wall_2_start:
+{
+	sprites: [ wood_wall_2_start ]
+	
+	requirement<center_must_be>: [ wood_wall_2 ]
+	requirement<west_must_not_be>: [ wood_wall_2 wood_wall_2_grass_1 wood_wall_2_grass_2 wood_wall_2_window wood_wall_window_2_grass_1 wood_wall_2_window_grass_2 pavement dungeon_floor wood_floor ]
+	
+	probability: 100
+	priority: true
+}
+
+tile_modifier wood_wall_2_end:
+{
+	sprites: [ wood_wall_2_end ]
+	
+	requirement<center_must_be>: [ wood_wall_2 ]
+	requirement<east_must_not_be>: [ wood_wall_2 wood_wall_2_grass_1 wood_wall_2_grass_2 wood_wall_2_window wood_wall_2_window_grass_1 wood_wall_2_window_grass_2 pavement dungeon_floor wood_floor ]
+	
+	probability: 100
+	priority: true
+}
+
 tile_modifier wood_wall_grass:
 {
 	sprites: [ wood_wall_grass_1 wood_wall_grass_2 ]
@@ -50,6 +92,17 @@ tile_modifier ext_dungeon_wall_start:
 	priority: true
 }
 
+tile_modifier badlands_dungeon_wall_start:
+{
+	sprites: [ badlands_dungeon_wall_start ]
+	
+	requirement<center_must_be>: [ badlands_dungeon_wall ]
+	requirement<west_must_not_be>: [ badlands_dungeon_wall badlands_dungeon_entrance pavement dungeon_floor wood_floor ]
+	
+	probability: 100
+	priority: true
+}
+
 tile_modifier wood_wall_end:
 {
 	sprites: [ wood_wall_end ]
@@ -67,6 +120,17 @@ tile_modifier ext_dungeon_wall_end:
 	
 	requirement<center_must_be>: [ ext_dungeon_wall ]
 	requirement<east_must_not_be>: [ ext_dungeon_wall ext_dungeon_wall_grass_1 ext_dungeon_wall_grass_2 ext_dungeon_wall_window ext_dungeon_wall_window_grass_1 ext_dungeon_wall_window_grass_2 ext_dungeon_entrance pavement dungeon_floor wood_floor ]
+	
+	probability: 100
+	priority: true
+}
+
+tile_modifier badlands_dungeon_wall_end:
+{
+	sprites: [ badlands_dungeon_wall_end ]
+	
+	requirement<center_must_be>: [ badlands_dungeon_wall ]
+	requirement<east_must_not_be>: [ badlands_dungeon_wall badlands_dungeon_entrance pavement dungeon_floor wood_floor ]
 	
 	probability: 100
 	priority: true
@@ -142,6 +206,16 @@ tile_modifier roof_3_n: { sprites: [ roof_3_n ] requirement<center_must_be>: [ r
 tile_modifier roof_3_e: { sprites: [ roof_3_e ] requirement<center_must_be>: [ roof_3 ] requirement<east_must_not_be>: [ roof_3 ] probability: 100 }
 tile_modifier roof_3_s: { sprites: [ roof_3_s ] requirement<center_must_be>: [ roof_3 ] requirement<south_must_not_be>: [ roof_3 ] probability: 100 }
 tile_modifier roof_3_w: { sprites: [ roof_3_w ]	requirement<center_must_be>: [ roof_3 ] requirement<west_must_not_be>: [ roof_3 ] probability: 100 }
+
+tile_modifier roof_4_nw: { sprites: [ roof_4_nw ] requirement<center_must_be>: [ roof_4 ] requirement<north_must_not_be>: [ roof_4 ] requirement<west_must_not_be>: [ roof_4 ] probability: 100 priority: true }
+tile_modifier roof_4_ne: { sprites: [ roof_4_ne ] requirement<center_must_be>: [ roof_4 ] requirement<north_must_not_be>: [ roof_4 ] requirement<east_must_not_be>: [ roof_4 ] probability: 100 priority: true }
+tile_modifier roof_4_sw: { sprites: [ roof_4_sw ] requirement<center_must_be>: [ roof_4 ] requirement<south_must_not_be>: [ roof_4 ] requirement<west_must_not_be>: [ roof_4 ] probability: 100 priority: true }
+tile_modifier roof_4_se: { sprites: [ roof_4_se ] requirement<center_must_be>: [ roof_4 ] requirement<south_must_not_be>: [ roof_4 ] requirement<east_must_not_be>: [ roof_4 ] probability: 100 priority: true }
+tile_modifier roof_4_n: { sprites: [ roof_4_n ] requirement<center_must_be>: [ roof_4 ] requirement<north_must_not_be>: [ roof_4 ] probability: 100 }
+tile_modifier roof_4_e: { sprites: [ roof_4_e ] requirement<center_must_be>: [ roof_4 ] requirement<east_must_not_be>: [ roof_4 ] probability: 100 }
+tile_modifier roof_4_s: { sprites: [ roof_4_s ] requirement<center_must_be>: [ roof_4 ] requirement<south_must_not_be>: [ roof_4 ] probability: 100 }
+tile_modifier roof_4_w: { sprites: [ roof_4_w ]	requirement<center_must_be>: [ roof_4 ] requirement<west_must_not_be>: [ roof_4 ] probability: 100 }
+
 
 
 
