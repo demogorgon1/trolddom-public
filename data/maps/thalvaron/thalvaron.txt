@@ -1,8 +1,3 @@
-npc_behavior_state .default_patrol:
-{
-	behavior: patrolling
-}
-
 map_player_spawn .player_spawn:
 {
 }
@@ -43,8 +38,19 @@ zone .lich_woods: { string: "Hollows of the Undying" }
 zone .way_north_pass: { string: "The Northern Pass" }
 zone .duskwhisper_caves: { string: "Duskwhisper Caves" }
 	
-route .default_patrol:
+route thalvaron_default_patrol:
 {
+}
+
+npc_behavior_state thalvaron_default_patrol_friendly:
+{
+	behavior: patrolling
+	pause_when_targeted_by_nearby_player: true
+}
+
+npc_behavior_state thalvaron_default_patrol:
+{
+	behavior: patrolling
 }
 
 map_cliff .rocky_cliff:
@@ -112,10 +118,12 @@ map_cliff .dummy_cliff_2_ramp:
 	ramp: true
 }
 
-map_entity_spawn thalvaron_marlowe:
-{
-	entity thalvaron_marlowe: { init_state: default }
-}
+map_entity_spawn thalvaron_marlowe: { entity thalvaron_marlowe: { init_state: default } }
+map_entity_spawn thalvaron_city_guard: { entity thalvaron_city_guard: { init_state: default } }
+map_entity_spawn thalvaron_city_guard_special: { entity thalvaron_city_guard_special: { init_state: default } }
+map_entity_spawn thalvaron_city_guard_special_2: { entity thalvaron_city_guard_special_2: { init_state: default } }
+map_entity_spawn thalvaron_captain_jerrington: { entity thalvaron_captain_jerrington: { init_state: default } }
+map_entity_spawn thalvaron_lieutenant_tinley: { entity thalvaron_lieutenant_tinley: { init_state: default } }
 
 map_palette .tiles:
 {
@@ -205,6 +213,13 @@ map_palette .stuff:
 	entity_spawn cauldron: [ 43 113 166 ]		
 	
 	entity_spawn thalvaron_marlowe: [ 44 56 139 ]
+	entity_spawn thalvaron_city_guard: [ 144 56 139 ]
+	entity_spawn thalvaron_city_guard_special: [ 44 156 139 ]
+	entity_spawn thalvaron_city_guard_special_2: [ 44 156 140 ]
+	entity_spawn thalvaron_captain_jerrington: [ 44 56 239 ]
+	entity_spawn thalvaron_rebel: [ 144 10 239 ]
+	entity_spawn thalvaron_rebel_leader: [ 144 10 39 ]
+	entity_spawn thalvaron_lieutenant_tinley: [ 41 56 239 ]
 	
 	player_spawn .player_spawn: [ 0 0 255 ]
 	
@@ -273,7 +288,7 @@ map_palette .sub_zones:
 
 map_palette .routes:
 {
-	route .default_patrol: [ 192 16 186 ]
+	route thalvaron_default_patrol: [ 192 16 186 ]
 }
 
 map_palette .doodads:

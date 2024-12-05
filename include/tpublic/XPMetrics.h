@@ -361,7 +361,8 @@ namespace tpublic
 		GetAdjustedXPFromQuest(
 			uint32_t			aPlayerLevel,
 			uint32_t			aQuestLevel,
-			bool				aElite) const
+			bool				aElite,
+			float				aMultiplier) const
 		{
 			int32_t diff = (int32_t)aQuestLevel - (int32_t)aPlayerLevel;
 			uint32_t adjustment = GetAdjustment(diff);
@@ -369,6 +370,9 @@ namespace tpublic
 
 			if(aElite)
 				xp = (xp * m_eliteQuestAdjustment) / 100;
+
+			if(aMultiplier != 1.0f)
+				return (uint32_t)((float)xp * aMultiplier);
 
 			return xp;
 		}

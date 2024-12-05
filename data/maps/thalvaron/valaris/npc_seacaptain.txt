@@ -19,7 +19,7 @@ dialogue_root .marlowe_dialogue:
 entity thalvaron_marlowe: !NPC
 {
 	_string: "Marlowe"
-	_guild_name: "Sea Captain"
+	_guild_name: "Skipper"
 	_dialogue_root: .marlowe_dialogue	
 	_sprite: man_26
 	_sprite_dead: man_26_dead	

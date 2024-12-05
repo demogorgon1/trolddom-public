@@ -1,0 +1,131 @@
+dialogue_screen .captain_jerrington_dialogue:
+{
+	text: 
+	[	
+		"We need to bring back order to the city."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .city_guard_special_1 }
+		{ quest: .captain_jerrington_1 }
+	]
+}
+
+dialogue_root .captain_jerrington_dialogue:
+{
+	.captain_jerrington_dialogue: { }
+}
+
+entity thalvaron_captain_jerrington: !NPC
+{
+	_string: "Captain Jerrington"
+	_dialogue_root: .captain_jerrington_dialogue	
+	_sprite: city_guard_2
+	_sprite_dead: city_guard_2_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .captain_jerrington_1:
+{
+	string: "Secret Document"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .captain_jerrington_1_quest_item count: 1 }
+}
+
+loot_group .captain_jerrington_1_quest_item: {}
+
+item .captain_jerrington_1_quest_item:
+{
+	icon: icon_scroll_1
+	item_level: 10
+	loot_groups: [ .captain_jerrington_1_quest_item ]
+	flags: [ unique not_sellable ]
+	string: "Secret Document"
+	flavor: "Seems to be encrypted."
+}
+
+loot_table .captain_jerrington_1_quest_item_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .captain_jerrington_1_quest_item }			
+		}		
+	]
+}
+
+quest .captain_jerrington_1:
+{
+	string: "What are they up to?"
+
+	text:
+	[
+		"Look for rebels and see if you can find out what their plans are."
+	]
+	
+	description: 
+	[
+		"As you very well might be aware, rebel scum has occupied the entire eastern district of Valaris. They took us by surprise and we've had issues getting rid of them. The main army is currently on a campaign to the south and can't help us."
+		"Follow the street north into Eastgate and look for rebels. We need to find out what their plans are. Some might carry documents that could be of interest to us."	
+	]
+
+	progress:
+	[
+		"What are you still doing here?"
+	]
+	
+	completion:
+	[
+		"What is this? This looks interesting."
+	]
+
+	objectives: [ .captain_jerrington_1 ]
+	level: 10
+	
+	prerequisites: [ .city_guard_special_1 ]
+	# FIXME: rewards
+}
+
+############################################################
+# Quest 3
+
+quest .captain_jerrington_2:
+{
+	string: "Fernwick"
+
+	text:
+	[
+		"Find Lieutenant Tinley in the town of Fernwick to the south east."
+	]
+	
+	description: 
+	[
+		"I've seen similar encryption used before. In order to break it we need to find the secret key they're using. Without it we'll never find out what their plans are.\n\n"
+		"It seems like the rebels have sealed off most of the district and at this point all we can do is hold our ground.\n\n"
+		"My scouts are telling me that there is a large rebel presence outside of the city to the east as well. I need you to go investigate that. Talk to Lieutenant Tinley of the city guard. She has been charged with setting up a defensive position around the town of Fernwick. Leave the city through the south gate, go east, and you'll find her."
+	]
+
+	progress:
+	[
+		"Chop, chop."
+	]
+	
+	completion:
+	[
+		"The Captain sent you? Good, we need all the help we can get here."
+	]
+
+	level: 10
+	next_quest: .lieutenant_tinley_1
+	reward_xp_multiplier: 0.1
+}

@@ -1,0 +1,103 @@
+npc_behavior_state .wandering_short:
+{
+	on_route<.default_patrol>: .default_patrol
+	behavior: wandering
+	max_range: 1
+}
+
+npc_behavior_state .passive:
+{
+	on_route<.default_patrol>: .default_patrol
+	behavior: do_nothing
+}
+
+##########################################################################################
+# Rebels 
+
+map_entity_spawn thalvaron_rebel: 
+{ 
+	entity thalvaron_rebel_10_a: { init_state: default } 
+	entity thalvaron_rebel_10_b: { init_state: default } 
+	entity thalvaron_rebel_10_c: { init_state: default } 
+	entity thalvaron_rebel_10_d: { init_state: default } 
+}
+
+map_entity_spawn thalvaron_rebel_leader: 
+{ 
+	entity thalvaron_rebel_10_leader: { init_state: default } 
+}
+
+loot_table thalvaron_rebel_10: 
+{
+	slots:
+	[	
+		{ 
+			possibility: { weight: 9 }
+			possibility: { weight: 1 loot_group: .captain_jerrington_1_quest_item requirement self<must_have_active_quest>: { id: .captain_jerrington_1 } } 
+		}
+		
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+entity thalvaron_rebel_10_a: !NPC
+{
+	_string: "Rebel Fighter"
+	_level: 10
+	_faction: monsters
+	_sprite: rebel_1
+	_sprite_dead: rebel_1_dead
+	_loot_table: .rebel_10
+	_creature_type: humanoid
+	_default_behavior_state: .wandering_short
+}
+
+entity thalvaron_rebel_10_b: !NPC
+{
+	_string: "Rebel Fighter"
+	_level: 10
+	_faction: monsters
+	_sprite: rebel_2
+	_sprite_dead: rebel_2_dead
+	_loot_table: .rebel_10
+	_creature_type: humanoid
+	_default_behavior_state: .wandering_short
+}
+
+entity thalvaron_rebel_10_c: !NPC
+{
+	_string: "Rebel Fighter"
+	_level: 10
+	_faction: monsters
+	_sprite: rebel_3
+	_sprite_dead: rebel_3_dead
+	_loot_table: .rebel_10
+	_creature_type: humanoid
+	_default_behavior_state: .wandering_short	
+}
+
+entity thalvaron_rebel_10_d: !NPC
+{
+	_string: "Rebel Scout"
+	_level: 10
+	_faction: monsters
+	_sprite: rebel_4
+	_sprite_dead: rebel_4_dead
+	_loot_table: .rebel_10
+	_creature_type: humanoid
+	_default_behavior_state: .wandering_short	
+	_abilities: [ { id: npc_shoot }{ id: npc_attack } ]
+}
+
+entity thalvaron_rebel_10_leader: !NPC
+{
+	_string: "Rebel Leader"
+	_level: 10
+	_faction: monsters
+	_sprite: rebel_5
+	_sprite_dead: rebel_5_dead
+	_loot_table: .rebel_10
+	_creature_type: humanoid
+	_default_behavior_state: .wandering_short	
+}

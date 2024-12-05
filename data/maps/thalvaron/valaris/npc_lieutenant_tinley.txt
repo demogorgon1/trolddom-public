@@ -1,0 +1,75 @@
+dialogue_screen .lieutenant_tinley_dialogue:
+{
+	text: 
+	[	
+		"The rebels are everywhere. We must show vigilance."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .captain_jerrington_2 }
+		{ quest: .lieutenant_tinley_1 }
+	]
+}
+
+dialogue_root .lieutenant_tinley_dialogue:
+{
+	.lieutenant_tinley_dialogue: { }
+}
+
+entity thalvaron_lieutenant_tinley: !NPC
+{
+	_string: "Lieutenant Tinley"
+	_dialogue_root: .lieutenant_tinley_dialogue	
+	_sprite: city_guard_2
+	_sprite_dead: city_guard_2_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .lieutenant_tinley_1:
+{
+	string: "Rebels Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_rebel_10 ]
+		count: 6
+	}
+}
+
+quest .lieutenant_tinley_1:
+{
+	string: "Rebel Hunt"
+
+	text:
+	[
+		"Hunt rebels in the area south of the city."
+	]
+	
+	description: 
+	[
+		"FIXME"
+	]
+
+	progress:
+	[
+		"What are you still doing here?"
+	]
+	
+	completion:
+	[
+		"FIXME"
+	]
+
+	level: 10
+	# FIXME rewards
+}
