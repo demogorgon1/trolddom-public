@@ -1,0 +1,119 @@
+dialogue_screen .inn_keeper_dialogue:
+{
+	text: 
+	[	
+		"Greetings traveller."
+	]		
+	
+	options:
+	[
+		{ quest<offer_only>: .inn_keeper_1 }
+	]
+}
+
+dialogue_root .inn_keeper_dialogue:
+{
+	.inn_keeper_dialogue: { }
+}
+
+entity thalvaron_inn_keeper: !NPC
+{
+	_string: "Edward"
+	_guild_name: "Innkeeper"
+	_dialogue_root: .inn_keeper_dialogue	
+	_sprite: man_27
+	_sprite_dead: man_27_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .inn_keeper_1_quest_item: {}
+
+item .inn_keeper_1_quest_item:
+{
+	icon: icon_barrel_1
+	item_level: 1
+	loot_groups: [ .inn_keeper_1_quest_item ]
+	flags: [ unique not_sellable ]
+	string: "Ale Shipment"
+}
+
+loot_table .inn_keeper_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .inn_keeper_1_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_inn_keeper_1_quest_item:
+{
+	string: "Ale Shipment"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ barrel_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .inn_keeper_1_quest_item
+			verb: open
+			range: 1 
+			level: 1
+			despawn: true 		
+			required_quest: .inn_keeper_1
+		}		
+	}
+}
+
+objective .inn_keeper_1:
+{
+	string: "Ale Shipment"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .inn_keeper_1_quest_item count: 1 }
+}
+
+quest .inn_keeper_1:
+{
+	string: "Ale Delivery"
+
+	text:
+	[
+		"Pick up the ale at the general store in the trade district and deliver it to Innkeeper Bram in Fernwick."
+	]
+	
+	description: 
+	[
+		"It seems like all this talk about rebels have increased the consumption of ale. I hear from my friend Bram who runs an inn down in Fernwick that they're about to run dry. I need you to go to the general store and pick up a shipment"
+		"of ale and deliver it to him. You'll find the general store in the trade district. Just follow the street east and take a left. They probably keep the ale in the basement."
+	]
+
+	progress:
+	[
+		"What are you still doing here?"
+	]
+	
+	completion:
+	[
+		"Amazing! My barrels just ran dry and my patrons were getting a bit upset. This will calm them down for a while."
+	]
+
+	reward_cash_multiplier: 1.4
+	reward_xp_multiplier: 0.7
+	objectives: [ .inn_keeper_1 ]
+	level: 10
+	
+	# FIXME: rewards
+}
+

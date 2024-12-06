@@ -11,6 +11,15 @@ npc_behavior_state .passive:
 	behavior: do_nothing
 }
 
+loot_table .default_humanoid: 
+{
+	slots:
+	[	
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
 ##########################################################################################
 # Rebels 
 
@@ -27,77 +36,129 @@ map_entity_spawn thalvaron_rebel_leader:
 	entity thalvaron_rebel_10_leader: { init_state: default } 
 }
 
-loot_table thalvaron_rebel_10: 
-{
-	slots:
-	[	
-		{ 
-			possibility: { weight: 9 }
-			possibility: { weight: 1 loot_group: .captain_jerrington_1_quest_item requirement self<must_have_active_quest>: { id: .captain_jerrington_1 } } 
-		}
-		
-		!WORLD_DROPS {}
-		!WORLD_DROPS_CLOTH{}
-	]	
+map_entity_spawn thalvaron_rebel_outside: 
+{ 
+	entity thalvaron_rebel_skirmisher_10_a: { init_state: default } 
+	entity thalvaron_rebel_skirmisher_10_b: { init_state: default } 
+	entity thalvaron_rebel_skirmisher_10_c: { init_state: default } 
+	entity thalvaron_rebel_skirmisher_10_d: { init_state: default } 
 }
 
-entity thalvaron_rebel_10_a: !NPC
+# Rebels inside the city
 {
-	_string: "Rebel Fighter"
-	_level: 10
-	_faction: monsters
-	_sprite: rebel_1
-	_sprite_dead: rebel_1_dead
-	_loot_table: .rebel_10
-	_creature_type: humanoid
-	_default_behavior_state: .wandering_short
+	loot_table .rebel_10: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { weight: 9 }
+				possibility: { weight: 1 loot_group: .captain_jerrington_1_quest_item requirement self<must_have_active_quest>: { id: .captain_jerrington_1 } } 
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_CLOTH{}
+		]	
+	}
+	
+	${
+		_level: 10
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: .rebel_10
+	}
+
+	entity thalvaron_rebel_10_a: !NPC { _string: "Rebel Fighter" _sprite: rebel_1 _sprite_dead: rebel_1_dead }
+	entity thalvaron_rebel_10_b: !NPC { _string: "Rebel Fighter" _sprite: rebel_2 _sprite_dead: rebel_2_dead }
+	entity thalvaron_rebel_10_c: !NPC { _string: "Rebel Fighter" _sprite: rebel_3 _sprite_dead: rebel_3_dead }
+	entity thalvaron_rebel_10_d: !NPC { _string: "Rebel Scout" _sprite: rebel_4 _sprite_dead: rebel_4_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
+	entity thalvaron_rebel_10_leader: !NPC { _string: "Rebel Leader" _sprite: rebel_5 _sprite_dead: rebel_5_dead }
 }
 
-entity thalvaron_rebel_10_b: !NPC
+# Rebels in the area just south of the city
 {
-	_string: "Rebel Fighter"
-	_level: 10
-	_faction: monsters
-	_sprite: rebel_2
-	_sprite_dead: rebel_2_dead
-	_loot_table: .rebel_10
-	_creature_type: humanoid
-	_default_behavior_state: .wandering_short
+
+	${
+		_level: 10
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: .default_humanoid
+	}
+
+	entity thalvaron_rebel_skirmisher_10_a: !NPC { _string: "Rebel Skirmisher" _sprite: rebel_1 _sprite_dead: rebel_1_dead }
+	entity thalvaron_rebel_skirmisher_10_b: !NPC { _string: "Rebel Skirmisher" _sprite: rebel_2 _sprite_dead: rebel_2_dead }
+	entity thalvaron_rebel_skirmisher_10_c: !NPC { _string: "Rebel Skirmisher" _sprite: rebel_3 _sprite_dead: rebel_3_dead }
+	entity thalvaron_rebel_skirmisher_10_d: !NPC { _string: "Rebel Scout" _sprite: rebel_4 _sprite_dead: rebel_4_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
 }
 
-entity thalvaron_rebel_10_c: !NPC
-{
-	_string: "Rebel Fighter"
-	_level: 10
-	_faction: monsters
-	_sprite: rebel_3
-	_sprite_dead: rebel_3_dead
-	_loot_table: .rebel_10
-	_creature_type: humanoid
-	_default_behavior_state: .wandering_short	
+##########################################################################################
+# Crabs
+
+map_entity_spawn thalvaron_crab: 
+{ 
+	entity thalvaron_crab_10: { init_state: default } 
 }
 
-entity thalvaron_rebel_10_d: !NPC
+# Crabs in the area just south of the city
 {
-	_string: "Rebel Scout"
-	_level: 10
-	_faction: monsters
-	_sprite: rebel_4
-	_sprite_dead: rebel_4_dead
-	_loot_table: .rebel_10
-	_creature_type: humanoid
-	_default_behavior_state: .wandering_short	
-	_abilities: [ { id: npc_shoot }{ id: npc_attack } ]
+
+	loot_table .crabs_10: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { weight: 1 }
+				possibility: { weight: 1 loot_group: .general_store_john_quest_item requirement self<must_have_active_quest>: { id: .general_store_john_1 } } 
+			}
+			
+			!WORLD_DROPS {}				
+		]	
+	}
+
+
+	${
+		_level: 10
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: .crabs_10
+	}
+
+	entity thalvaron_crab_10: !NPC { _string: "Mud Crawler" _sprite: crab_1 _sprite_dead: crab_1_dead }
 }
 
-entity thalvaron_rebel_10_leader: !NPC
+##########################################################################################
+# Bear that stole Roger's lunch
+
+map_entity_spawn thalvaron_roger_bear: 
+{ 
+	entity thalvaron_roger_bear: { init_state: default } 
+}
+
 {
-	_string: "Rebel Leader"
-	_level: 10
-	_faction: monsters
-	_sprite: rebel_5
-	_sprite_dead: rebel_5_dead
-	_loot_table: .rebel_10
-	_creature_type: humanoid
-	_default_behavior_state: .wandering_short	
+
+	loot_table .roger_bear: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { loot_group: .fernwick_bar_patron_quest_item requirement self<must_have_active_quest>: { id: .fernwick_bar_patron_1 } } 
+			}
+			
+			!WORLD_DROPS {}				
+		]	
+	}
+
+	${
+		_level: 10
+		_faction: monsters
+		_creature_type: beast
+		_weapon_damage: 2
+		_resource_health: 2
+		_default_behavior_state: .wandering_short
+		_loot_table: .roger_bear
+	}
+
+	entity thalvaron_roger_bear: !NPC { _string: "Large Bear" _sprite: bear _sprite_dead: bear_dead }
 }

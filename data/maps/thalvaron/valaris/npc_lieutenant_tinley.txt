@@ -9,6 +9,7 @@ dialogue_screen .lieutenant_tinley_dialogue:
 	[
 		{ quest<completion_only>: .captain_jerrington_2 }
 		{ quest: .lieutenant_tinley_1 }
+		{ quest<offer_only>: .lieutenant_tinley_2 }
 	]
 }
 
@@ -71,5 +72,38 @@ quest .lieutenant_tinley_1:
 	]
 
 	level: 10
+	objectives: [ .lieutenant_tinley_1 ]
 	# FIXME rewards
+}
+
+############################################################
+# Quest 2
+
+quest .lieutenant_tinley_2:
+{
+	string: "The crossroad guard tower"
+
+	text:
+	[
+		"Check up on the city guard detachment situated at the guard tower by the crossroads."
+	]
+	
+	description: 
+	[
+		"FIXME"
+	]
+
+	progress:
+	[
+		"What are you still doing here?"
+	]
+	
+	completion:
+	[
+		"FIXME"
+	]
+
+	prerequisites: [ .lieutenant_tinley_1 ]
+	level: 10
+	reward_xp_multiplier: 0.1
 }

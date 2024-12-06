@@ -63,6 +63,9 @@ sprites:
 	sprite doodad_cactus_2: { flags: [ tile_walkable ] }
 	sprite doodad_animal_skull_1: { flags: [ tile_walkable ] }
 	sprite doodad_long_grass_1: { flags: [ tile_walkable ] }
+	sprite doodad_counter_1: { flags: [ ] }
+	sprite doodad_wood_stairs_reversed: { flags: [ tile_walkable ] }
+	sprite doodad_stone_stairs_reversed: { flags: [ tile_walkable ] }
 
 	cursor: { position: [ 0 32 ] }
 	size: { width: 80 height: 64 } sprite ship: { flags: [ tile_walkable ] }
@@ -206,6 +209,9 @@ doodad statue_face_left: { sprites: [ statue_face_left ] map_palette<"x">: { occ
 doodad statue_face_right: { sprites: [ statue_face_right ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad wood_stairs: { sprites: [ doodad_wood_stairs ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad stone_stairs: { sprites: [ doodad_stone_stairs ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad counter: { sprites: [ doodad_counter_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad wood_stairs_reversed: { sprites: [ doodad_wood_stairs_reversed ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad stone_stairs_reversed: { sprites: [ doodad_stone_stairs_reversed ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 
 
 

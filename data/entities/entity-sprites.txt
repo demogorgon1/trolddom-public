@@ -246,6 +246,8 @@ sprites:
 	sprite rebel_3: { dead: rebel_3_dead }
 	sprite rebel_4: { dead: rebel_4_dead }
 	sprite rebel_5: { dead: rebel_5_dead }
+	sprite crab_1: { dead: crab_1_dead }
+	sprite man_29: { dead: man_29_dead }
 	
 	cursor: { position: [ 0 208 ] }
 
@@ -261,6 +263,8 @@ sprites:
 	sprite rebel_3_dead: { }
 	sprite rebel_4_dead: { }
 	sprite rebel_5_dead: { }
+	sprite crab_1_dead: { }
+	sprite man_29_dead: { }
 	
 }
 
@@ -356,6 +360,7 @@ sprites:
 	sprite purple_gateway_3: { }
 	sprite door_closed_2: { }
 	sprite door_open_2: { }
+	sprite barrel_1: { }
 	
 }
 

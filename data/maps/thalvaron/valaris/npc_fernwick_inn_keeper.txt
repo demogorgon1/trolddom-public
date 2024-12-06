@@ -1,0 +1,32 @@
+dialogue_screen .fernwick_inn_keeper_dialogue:
+{
+	text: 
+	[	
+		"Greetings."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .inn_keeper_1 } 
+	]
+}
+
+dialogue_root .fernwick_inn_keeper_dialogue:
+{
+	.fernwick_inn_keeper_dialogue: { }
+}
+
+entity thalvaron_fernwick_inn_keeper: !NPC
+{
+	_string: "Bram"
+	_guild_name: "Innkeeper"
+	_dialogue_root: .fernwick_inn_keeper_dialogue	
+	_sprite: man_8
+	_sprite_dead: man_8_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

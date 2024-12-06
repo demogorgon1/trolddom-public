@@ -1,0 +1,84 @@
+dialogue_screen .general_store_john_dialogue:
+{
+	text: 
+	[	
+		"Greetings."
+	]		
+	
+	options:
+	[
+		{ quest: .general_store_john_1 }
+	]
+}
+
+dialogue_root .general_store_john_dialogue:
+{
+	.general_store_mary_dialogue: { }
+}
+
+entity thalvaron_general_store_john: !NPC
+{
+	_string: "John"
+	_dialogue_root: .general_store_john_dialogue	
+	_sprite: man_28
+	_sprite_dead: man_28_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .general_store_john_quest_item: { }
+
+item .general_store_john_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .general_store_john_quest_item ]		
+	string: "Mud Crawler Meat" 
+	icon: icon_crab_meat_1
+	stack: 6
+	item_level: 10
+	quest: .general_store_john_1
+	flags: [ not_sellable ]
+}
+
+objective .general_store_john_1:
+{
+	string: "Mud Crawler Meat"
+	collect_items: { item: .general_store_john_quest_item count: 6 }
+}
+
+quest .general_store_john_1:
+{
+	string: "Strange Delicacy"
+
+	text:
+	[
+		"Collect meat from crabs around the city moat and return to John in the general store."
+	]
+	
+	description: 
+	[
+		"I've heard you've dealt with a lot of crabs, eh? I think I have a job for you! There has been an uptick in demand for crab meat lately and our stock is getting low.\n\n"
+		"How about you go and get us some? You'll find a bunch of mud crawlers around the moat just outside the city. Should be easy enough, right?"
+	]
+
+	progress:
+	[
+		"I'm still open for business."
+	]
+	
+	completion:
+	[
+		"Excellent. That will do nicely."
+	]
+
+	objectives: [ .general_store_john_1 ]
+	level: 10	
+	
+	# FIXME: rewards
+}

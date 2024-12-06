@@ -1,0 +1,99 @@
+dialogue_screen .sergeant_jensen_dialogue:
+{
+	text: 
+	[	
+		"We were just attacked by a bunch of rebels. They appeared out of nowhere!"
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .lieutenant_tinley_2 }
+		{ quest: .sergeant_jensen_1 }
+	]
+}
+
+dialogue_root .sergeant_jensen_dialogue:
+{
+	.sergeant_jensen_dialogue: { }
+}
+
+entity thalvaron_sergeant_jensen: !NPC
+{
+	_string: "Sergeant Jensen"
+	_dialogue_root: .sergeant_jensen_dialogue	
+	_sprite: city_guard_1
+	_sprite_dead: city_guard_1_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .sergeant_jensen_1_1:
+{
+	string: "The Johansson Farm"
+	
+	maps: [ thalvaron ]
+	
+	dialogue_trigger:
+	{
+		entities: [ thalvaron_maude_johansson ]
+	}
+}
+
+objective .sergeant_jensen_1_2:
+{
+	string: "The Robertson Farm"
+	
+	maps: [ thalvaron ]
+	
+	dialogue_trigger:
+	{
+		entities: [ thalvaron_borg_robertson ]
+	}
+}
+
+objective .sergeant_jensen_1_3:
+{
+	string: "The Howton Farm"
+	
+	maps: [ thalvaron ]
+	
+	dialogue_trigger:
+	{
+		entities: [ thalvaron_ola_howton ]
+	}
+}
+
+quest .sergeant_jensen_1:
+{
+	string: "The Bread Basket of Valaris"
+
+	text:
+	[
+		"Check up on the farms south of the city."
+	]
+	
+	description: 
+	[
+		"The city relies on a steady supply of food from the farms in the area. With all the commotion going on, we need to make sure the rebels aren't interfering. I need you to check up on them."
+	]
+
+	progress:
+	[
+		"Yes? Did you finish what I asked you to do?"
+	]
+	
+	completion:
+	[
+		"FIXME."
+	]
+
+	level: 11
+	objectives: [ .sergeant_jensen_1_1 .sergeant_jensen_1_2 .sergeant_jensen_1_3 ]
+	# FIXME rewards
+}

@@ -54,16 +54,6 @@ item .captain_jerrington_1_quest_item:
 	flavor: "Seems to be encrypted."
 }
 
-loot_table .captain_jerrington_1_quest_item_quest_item:
-{
-	slots:
-	[
-		{
-			possibility: { loot_group: .captain_jerrington_1_quest_item }			
-		}		
-	]
-}
-
 quest .captain_jerrington_1:
 {
 	string: "What are they up to?"

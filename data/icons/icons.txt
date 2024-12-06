@@ -500,6 +500,8 @@ sprites:
 	
 	cursor: { position: [ 0 432 ] }
 	sprite icon_fish_3 : { tags: [ icon ] }
+	sprite icon_barrel_1 : { tags: [ icon ] }
+	sprite icon_crab_meat_1 : { tags: [ icon ] }
 	
 }
 

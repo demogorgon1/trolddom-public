@@ -1,0 +1,84 @@
+dialogue_screen .fernwick_bar_patron_dialogue:
+{
+	text: 
+	[	
+		"Greetings."
+	]		
+	
+	options:
+	[
+		{ quest: .fernwick_bar_patron_1 }
+	]
+}
+
+dialogue_root .fernwick_bar_patron_dialogue:
+{
+	.fernwick_bar_patron_dialogue: { }
+}
+
+entity thalvaron_fernwick_bar_patron: !NPC
+{
+	_string: "Roger"
+	_dialogue_root: .fernwick_bar_patron_dialogue	
+	_sprite: man_29
+	_sprite_dead: man_29_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .fernwick_bar_patron_quest_item: { }
+
+item .fernwick_bar_patron_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .fernwick_bar_patron_quest_item ]		
+	string: "Roger's Lunch" 
+	icon: icon_box
+	stack: 1
+	item_level: 10
+	quest: .fernwick_bar_patron_1
+	flags: [ not_sellable ]
+}
+
+objective .fernwick_bar_patron_1:
+{
+	string: "Roger's Lunch"
+	collect_items: { item: .fernwick_bar_patron_quest_item count: 1 }
+}
+
+quest .fernwick_bar_patron_1:
+{
+	string: "Where is my lunch?"
+
+	text:
+	[
+		"Collect meat from crabs around the city moat and return to John in the general store."
+	]
+	
+	description: 
+	[
+		"Every day my lovely wife packs me a lunch before I go to work. Unfortunately I seem to have misplaced it somewhere today. Losing the food is not a problem, really, but she is going to kill me if I get home without the box.\n\n"
+		"She takes food containers very seriously. Please be on the lookout for it if you travel the surrounding countryside."
+	]
+
+	progress:
+	[
+		"Did you find it?"
+	]
+	
+	completion:
+	[
+		"Oh no, what happened to the box? What kind of foul beast would do souch a thing? It's all covered in slime! And it's cracked?! Oh well, I guess I'll need to come up with some kind of excuse before I go home."
+	]
+
+	objectives: [ .fernwick_bar_patron_1 ]
+	level: 10	
+	
+	# FIXME: rewards
+}

@@ -53,70 +53,18 @@ npc_behavior_state thalvaron_default_patrol:
 	behavior: patrolling
 }
 
-map_cliff .rocky_cliff:
-{
-	cliff_style: rocks
-	elevation: 1
-}
-
-map_cliff .rocky_cliff_ramp:
-{
-	cliff_style: rocks
-	elevation: 1
-	ramp: true
-}
-
-map_cliff .badlands_cliff:
-{
-	cliff_style: badlands
-	elevation: 1
-}
-
-map_cliff .badlands_cliff_ramp:
-{
-	cliff_style: badlands
-	elevation: 1
-	ramp: true
-}
-
-map_cliff .wall_cliff:
-{
-	cliff_style: wall
-	elevation: 1
-}
-
-map_cliff .wall_cliff_ramp:
-{
-	cliff_style: wall
-	elevation: 1
-	ramp: true
-}
-
-map_cliff .dummy_cliff_1:
-{
-	cliff_style: dummy
-	elevation: 1
-}
-
-map_cliff .dummy_cliff_1_ramp:
-{
-	cliff_style: dummy
-	elevation: 1
-	ramp: true
-}
-
-map_cliff .dummy_cliff_2:
-{
-	cliff_style: dummy
-	elevation: 2
-}
-
-map_cliff .dummy_cliff_2_ramp:
-{
-	cliff_style: dummy
-	elevation: 2
-	ramp: true
-}
+map_cliff .rocky_cliff: { cliff_style: rocks elevation: 1 }
+map_cliff .rocky_cliff_ramp: { cliff_style: rocks elevation: 1 ramp: true }
+map_cliff .badlands_cliff: { cliff_style: badlands elevation: 1 }
+map_cliff .badlands_cliff_ramp: { cliff_style: badlands elevation: 1 ramp: true }
+map_cliff .wall_cliff: { cliff_style: wall elevation: 1 }
+map_cliff .wall_cliff_ramp: { cliff_style: wall elevation: 1 ramp: true }
+map_cliff .dummy_cliff_0: { cliff_style: dummy elevation: 0 }
+map_cliff .dummy_cliff_0_ramp: { cliff_style: dummy elevation: 0 ramp: true }
+map_cliff .dummy_cliff_1: { cliff_style: dummy elevation: 1 } 
+map_cliff .dummy_cliff_1_ramp: { cliff_style: dummy elevation: 1 ramp: true }
+map_cliff .dummy_cliff_2: { cliff_style: dummy elevation: 2 }
+map_cliff .dummy_cliff_2_ramp: { cliff_style: dummy elevation: 2 ramp: true }
 
 map_entity_spawn thalvaron_marlowe: { entity thalvaron_marlowe: { init_state: default } }
 map_entity_spawn thalvaron_city_guard: { entity thalvaron_city_guard: { init_state: default } }
@@ -124,6 +72,16 @@ map_entity_spawn thalvaron_city_guard_special: { entity thalvaron_city_guard_spe
 map_entity_spawn thalvaron_city_guard_special_2: { entity thalvaron_city_guard_special_2: { init_state: default } }
 map_entity_spawn thalvaron_captain_jerrington: { entity thalvaron_captain_jerrington: { init_state: default } }
 map_entity_spawn thalvaron_lieutenant_tinley: { entity thalvaron_lieutenant_tinley: { init_state: default } }
+map_entity_spawn thalvaron_inn_keeper_1_quest_item: { entity thalvaron_inn_keeper_1_quest_item: { init_state: default } }
+map_entity_spawn thalvaron_inn_keeper: { entity thalvaron_inn_keeper: { init_state: default } }
+map_entity_spawn thalvaron_general_store_john: { entity thalvaron_general_store_john: { init_state: default } }
+map_entity_spawn thalvaron_general_store_mary: { entity thalvaron_general_store_mary: { init_state: default } }
+map_entity_spawn thalvaron_fernwick_inn_keeper: { entity thalvaron_fernwick_inn_keeper: { init_state: default } }
+map_entity_spawn thalvaron_fernwick_bar_patron: { entity thalvaron_fernwick_bar_patron: { init_state: default } }
+map_entity_spawn thalvaron_sergeant_jensen: { entity thalvaron_sergeant_jensen: { init_state: default } }
+map_entity_spawn thalvaron_wounded_city_guard: { entity thalvaron_wounded_city_guard: { init_state: default } }
+map_entity_spawn thalvaron_samantha_plington: { entity thalvaron_samantha_plington: { init_state: default } }
+map_entity_spawn thalvaron_samantha_plington_1_quest_item: { entity thalvaron_samantha_plington_1_quest_item: { init_state: default } }
 
 map_palette .tiles:
 {
@@ -220,7 +178,20 @@ map_palette .stuff:
 	entity_spawn thalvaron_rebel: [ 144 10 239 ]
 	entity_spawn thalvaron_rebel_leader: [ 144 10 39 ]
 	entity_spawn thalvaron_lieutenant_tinley: [ 41 56 239 ]
-	
+	entity_spawn thalvaron_rebel_outside: [ 164 10 239 ]
+	entity_spawn thalvaron_inn_keeper_1_quest_item: [ 114 100 139 ]
+	entity_spawn thalvaron_inn_keeper: [ 64 16 239 ]
+	entity_spawn thalvaron_general_store_john: [ 43 98 195 ]
+	entity_spawn thalvaron_general_store_mary: [ 43 195 98 ]
+	entity_spawn thalvaron_fernwick_inn_keeper: [ 143 125 98 ]	
+	entity_spawn thalvaron_crab: [ 243 225 98 ]		
+	entity_spawn thalvaron_fernwick_bar_patron: [ 213 25 198 ]	
+	entity_spawn thalvaron_roger_bear: [ 213 25 202 ]		
+	entity_spawn thalvaron_sergeant_jensen: [ 95 221 162 ]			
+	entity_spawn thalvaron_wounded_city_guard: [ 95 121 162 ]			
+	entity_spawn thalvaron_samantha_plington: [ 184 101 132 ]			
+	entity_spawn thalvaron_samantha_plington_1_quest_item: [ 39 220 93 ]
+
 	player_spawn .player_spawn: [ 0 0 255 ]
 	
 	wall stone_wall: [ 128 128 128 ]
@@ -318,6 +289,10 @@ map_palette .doodads:
 	doodad stone_stairs: [ 192 173 19 ]	
 	doodad wood_stairs: [ 192 19 173 ]	
 	doodad large_statue: [ 193 73 20 ]	
+	doodad counter: [ 197 73 20 ]	
+	doodad stone_stairs_reversed: [ 19 173 192 ]	
+	doodad wood_stairs_reversed: [ 173 19 192 ]	
+	doodad animal_skull: [ 197 173 210 ]	
 }
 
 map_palette .cliffs:
@@ -330,6 +305,9 @@ map_palette .cliffs:
 
 	cliff .wall_cliff: [ 197 169 134 ]
 	cliff .wall_cliff_ramp: [ 136 152 174 ]
+
+	cliff .dummy_cliff_0: [ 137 18 124 ]
+	cliff .dummy_cliff_0_ramp: [ 116 56 134 ]	
 
 	cliff .dummy_cliff_1: [ 197 16 134 ]
 	cliff .dummy_cliff_1_ramp: [ 136 52 174 ]	
