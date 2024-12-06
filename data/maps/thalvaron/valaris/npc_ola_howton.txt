@@ -1,0 +1,32 @@
+dialogue_screen .ola_howton_dialogue:
+{
+	text: 
+	[	
+		"FIXME"
+	]		
+	
+	options:
+	[
+		{ text: "Is everything all right around here?" script: trigger }
+	]
+}
+
+dialogue_root .ola_howton_dialogue:
+{
+	.ola_howton_dialogue: { }
+}
+
+entity thalvaron_ola_howton: !NPC
+{
+	_string: "Ola Howton"
+	_dialogue_root: .ola_howton_dialogue	
+	_dialogue_scripts: [ trigger ]	
+	_sprite: man_31
+	_sprite_dead: man_31_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

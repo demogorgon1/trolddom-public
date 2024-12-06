@@ -7,6 +7,7 @@ dialogue_screen .general_store_mary_dialogue:
 	
 	options:
 	[
+		{ quest<completion_only>: .gnome_2 }
 	]
 }
 

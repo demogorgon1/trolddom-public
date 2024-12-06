@@ -1,0 +1,50 @@
+dialogue_screen .mysterious_stranger_dialogue_2:
+{
+	text: 
+	[	
+		"The short handsome guy who lives in the barn? Oh, yes, definitely. I'd do business with him any time! Our last venture was hugely profitable."
+	]		
+	
+	options:
+	[
+		{ text: "I see." }
+	]
+}
+
+dialogue_screen .mysterious_stranger_dialogue:
+{
+	text: 
+	[	
+		"Hello."
+	]		
+	
+	options:
+	[
+		{ text: "Have you ever done business with the gnome that hangs out at the Robertson farm?" goto: .mysterious_stranger_dialogue_2 script: trigger }
+	]
+}
+
+dialogue_root .mysterious_stranger_dialogue:
+{
+	.mysterious_stranger_dialogue: { }
+}
+
+entity thalvaron_mysterious_stranger: !NPC
+{
+	_string: "Mysterious Stranger"
+	_dialogue_root: .mysterious_stranger_dialogue	
+	_dialogue_scripts: [ trigger ]	
+	_sprite: man_32
+	_sprite_dead: man_32_dead	
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_blocking: false
+	_visibility_requirements: 			
+	{
+		requirement self<must_not_have_active_quest>: { id: .gnome_1 }
+	}
+}
+

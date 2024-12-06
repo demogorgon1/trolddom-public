@@ -1,0 +1,32 @@
+dialogue_screen .borg_robertson_dialogue:
+{
+	text: 
+	[	
+		"FIXME"
+	]		
+	
+	options:
+	[
+		{ text: "Is everything all right around here?" script: trigger }
+	]
+}
+
+dialogue_root .borg_robertson_dialogue:
+{
+	.borg_robertson_dialogue: { }
+}
+
+entity thalvaron_borg_robertson: !NPC
+{
+	_string: "Borg Robertson"
+	_dialogue_root: .borg_robertson_dialogue	
+	_dialogue_scripts: [ trigger ]	
+	_sprite: man_30
+	_sprite_dead: man_30_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

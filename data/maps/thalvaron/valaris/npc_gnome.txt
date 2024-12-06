@@ -1,0 +1,169 @@
+dialogue_screen .gnome_dialogue_3:
+{
+	text: 
+	[	
+		"Impossible. I've never cheated anyone in my life.\n\n"
+		"Look, let's not waste each others time. Do you want to do business or not?"
+	]		
+	
+	options:
+	[
+		{ quest: .gnome_1 }
+		{ text: "You can't fool me again." }
+	]
+}
+
+dialogue_screen .gnome_dialogue_2:
+{
+	text: 
+	[	
+		"What? Nonsense, I've never seen you before."
+	]		
+	
+	options:
+	[
+		{ text: "I got you your dirty socks and you never paid me." goto: .gnome_dialogue_3 }
+	]
+}
+
+dialogue_screen .gnome_dialogue:
+{
+	text: 
+	[	
+		"I'm busy."
+	]		
+	
+	options:
+	[
+		{ 
+			text: "Hey! You owe me money!" 
+			goto: .gnome_dialogue_2 
+			requirement self<must_not_have_active_quest>: .gnome_1
+			requirement self<must_not_have_completed_quest>: .gnome_1
+		}
+		
+		{
+			quest: .gnome_1
+			requirement self<must_have_active_quest>: .gnome_1
+		}
+		
+		{
+			quest<offer_only>: .gnome_2
+		}		
+	]
+}
+
+dialogue_root .gnome_dialogue:
+{
+	.gnome_dialogue: { }
+}
+
+entity thalvaron_gnome: !NPC
+{
+	_string: "Gnome"
+	_dialogue_root: .gnome_dialogue	
+	_dialogue_scripts: [ trigger ]	
+	_sprite: gnome_1
+	_sprite_dead: gnome_1_dead	
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_blocking: false
+	_visibility_requirements: 			
+	{
+		requirement self<must_have_completed_quest>: { id: open_world_gnome_1 }
+		requirement self<must_not_have_completed_quest>: { id: .gnome_2 }
+	}
+}
+
+############################################################
+# Quest 1
+
+objective .gnome_1:
+{
+	string: "Find someone who can vouch for the gnome"
+	
+	maps: [ thalvaron ]
+	
+	dialogue_trigger:
+	{
+		entities: [ thalvaron_mysterious_stranger ]
+	}
+}
+
+quest .gnome_1:
+{
+	string: "Very Trustworthy"
+
+	text:
+	[
+		"Go to Valaris and see if you can find someone who can vouch for the Gnome."
+	]
+	
+	description: 
+	[
+		"So you don't want to do business with me because you feel I'm not trustworthy? Well, I don't know what to say.\n\n"
+		"How about you go back to the city and ask around. I'm sure you'll find someone who can vouch for me. The inn might be a good place to start."
+	]
+
+	progress:
+	[
+		"If you don't want to do business with me, just leave me alone. Your loss."
+	]
+	
+	completion:
+	[
+		"I told you so. So do you want to work with me or what?"
+	]
+
+	level: 11
+	reward_xp_multiplier: 0.75
+	reward_cash_multiplier: 0
+	objectives: [ .gnome_1 ]
+}
+
+############################################################
+# Quest 2
+
+item .gnome_2_quest_item:
+{
+	icon: icon_gold_coin
+	item_level: 11
+	flags: [ unique not_sellable ]
+	string: "Extremely Rare Coin"
+}
+
+quest .gnome_2:
+{
+	string: "The best deal ever"
+
+	text:
+	[
+		"Make a huge profit by selling the extremely rare coin to Mary at the general store in the Valaris trade district."
+	]
+	
+	description: 
+	[
+		"I like you so I'll cut you in on a deal I wouldn't offer to just anyone. See this coin? It's extremely rare. It's worth at least {100000} on the free market, but I'll give it to a much lower price just to get it off my hands."
+		"I'd go sell it myself, but I don't have time to go to the city right now. Mary, the woman who runs the general store with her husband, will definitely pay a good price for it. She's been investing in this kind of stuff, you know."
+	]
+
+	progress:
+	[
+		"I see you still have the coin."
+	]
+	
+	completion:
+	[
+		"Are you kidding me? I'm sorry to tell you, but this coin is absolutely worthless. Can't you see how crude it is? Don't be guillible."
+	]
+
+	level: 11
+	reward_xp_multiplier: 0.75
+	reward_cash_multiplier: 0
+	quest_items: [ .gnome_2_quest_item ]
+	prerequisites: [ .gnome_1 ]
+	cost: 10000
+}

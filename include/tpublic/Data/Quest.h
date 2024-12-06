@@ -76,6 +76,8 @@ namespace tpublic
 							aChild->GetArray()->ForEachChild([&](const SourceNode* aLine) { appendString(m_completion, aLine->GetString()); });
 						else if (aChild->m_name == "level")
 							m_level = aChild->GetUInt32();
+						else if (aChild->m_name == "cost")
+							m_cost = aChild->GetUInt32();
 						else if (aChild->m_name == "reward_cash_multiplier")
 							m_rewardCashMultiplier = aChild->GetFloat();
 						else if (aChild->m_name == "reward_xp_multiplier")
@@ -119,6 +121,7 @@ namespace tpublic
 				aStream->WriteUInt(m_nextQuestId);
 				aStream->WriteFloat(m_rewardCashMultiplier);
 				aStream->WriteFloat(m_rewardXPMultiplier);
+				aStream->WriteUInt(m_cost);
 			}
 
 			bool
@@ -155,6 +158,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadFloat(m_rewardXPMultiplier))
 					return false;
+				if (!aStream->ReadUInt(m_cost))
+					return false;
 				return true;
 			}
 
@@ -183,6 +188,7 @@ namespace tpublic
 			uint32_t				m_nextQuestId = 0;
 			float					m_rewardCashMultiplier = 1.0f;
 			float					m_rewardXPMultiplier = 1.0f;
+			uint32_t				m_cost = 0;
 		};
 
 	}

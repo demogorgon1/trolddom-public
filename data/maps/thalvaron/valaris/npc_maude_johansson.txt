@@ -1,0 +1,32 @@
+dialogue_screen .maude_johansson_dialogue:
+{
+	text: 
+	[	
+		"FIXME"
+	]		
+	
+	options:
+	[
+		{ text: "Is everything all right around here?" script: trigger }
+	]
+}
+
+dialogue_root .maude_johansson_dialogue:
+{
+	.maude_johansson_dialogue: { }
+}
+
+entity thalvaron_maude_johansson: !NPC
+{
+	_string: "Maude Johansson"
+	_dialogue_root: .maude_johansson_dialogue	
+	_dialogue_scripts: [ trigger ]	
+	_sprite: woman_9
+	_sprite_dead: woman_9_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

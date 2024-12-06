@@ -82,6 +82,11 @@ map_entity_spawn thalvaron_sergeant_jensen: { entity thalvaron_sergeant_jensen: 
 map_entity_spawn thalvaron_wounded_city_guard: { entity thalvaron_wounded_city_guard: { init_state: default } }
 map_entity_spawn thalvaron_samantha_plington: { entity thalvaron_samantha_plington: { init_state: default } }
 map_entity_spawn thalvaron_samantha_plington_1_quest_item: { entity thalvaron_samantha_plington_1_quest_item: { init_state: default } }
+map_entity_spawn thalvaron_maude_johansson: { entity thalvaron_maude_johansson: { init_state: default } }
+map_entity_spawn thalvaron_ola_howton: { entity thalvaron_ola_howton: { init_state: default } }
+map_entity_spawn thalvaron_borg_robertson: { entity thalvaron_borg_robertson: { init_state: default } }
+map_entity_spawn thalvaron_gnome: { entity thalvaron_gnome: { init_state: default } }
+map_entity_spawn thalvaron_mysterious_stranger: { entity thalvaron_mysterious_stranger: { init_state: default } }
 
 map_palette .tiles:
 {
@@ -191,6 +196,13 @@ map_palette .stuff:
 	entity_spawn thalvaron_wounded_city_guard: [ 95 121 162 ]			
 	entity_spawn thalvaron_samantha_plington: [ 184 101 132 ]			
 	entity_spawn thalvaron_samantha_plington_1_quest_item: [ 39 220 93 ]
+	entity_spawn thalvaron_maude_johansson: [ 139 220 93 ]
+	entity_spawn thalvaron_ola_howton: [ 39 220 193 ]
+	entity_spawn thalvaron_borg_robertson: [ 39 20 93 ]
+	entity_spawn thalvaron_gnome: [ 39 240 93 ]		
+	entity_spawn thalvaron_mysterious_stranger: [ 49 240 93 ]		
+	entity_spawn thalvaron_bar_patron_sarah: [ 194 240 93 ]		
+	entity_spawn thalvaron_bar_patron_bill: [ 149 240 98 ]				
 
 	player_spawn .player_spawn: [ 0 0 255 ]
 	

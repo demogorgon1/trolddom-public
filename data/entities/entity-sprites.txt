@@ -248,6 +248,8 @@ sprites:
 	sprite rebel_5: { dead: rebel_5_dead }
 	sprite crab_1: { dead: crab_1_dead }
 	sprite man_29: { dead: man_29_dead }
+	sprite woman_9: { dead: woman_9_dead }
+	sprite man_30: { dead: man_30_dead }
 	
 	cursor: { position: [ 0 208 ] }
 
@@ -265,6 +267,20 @@ sprites:
 	sprite rebel_5_dead: { }
 	sprite crab_1_dead: { }
 	sprite man_29_dead: { }
+	sprite woman_9_dead: { }
+	sprite man_30_dead: { }
+	
+	cursor: { position: [ 0 224 ] }
+
+	sprite man_31: { dead: man_31_dead }
+	sprite man_32: { dead: man_32_dead }
+	sprite woman_10: { dead: woman_10_dead }
+	
+	cursor: { position: [ 0 240 ] }
+
+	sprite man_31_dead: { }
+	sprite man_32_dead: { }
+	sprite woman_10_dead: { }
 	
 }
 
