@@ -81,7 +81,7 @@ quest .lieutenant_tinley_1:
 
 quest .lieutenant_tinley_2:
 {
-	string: "The crossroad guard tower"
+	string: "The Crossroad Guard Tower"
 
 	text:
 	[

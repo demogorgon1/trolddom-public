@@ -9,6 +9,7 @@ dialogue_screen .sergeant_jensen_dialogue:
 	[
 		{ quest<completion_only>: .lieutenant_tinley_2 }
 		{ quest: .sergeant_jensen_1 }
+		{ quest<offer_only>: .sergeant_jensen_2 }
 	]
 }
 
@@ -90,10 +91,42 @@ quest .sergeant_jensen_1:
 	
 	completion:
 	[
-		"FIXME."
+		"Good. The insurgency must not interfere with the economy."
 	]
 
 	level: 11
 	objectives: [ .sergeant_jensen_1_1 .sergeant_jensen_1_2 .sergeant_jensen_1_3 ]
+	# FIXME rewards
+}
+
+############################################################
+# Quest 2
+
+quest .sergeant_jensen_2:
+{
+	string: "The Southern Choke"
+
+	text:
+	[
+		"Offer your services at The Southern Choke fortifications."
+	]
+	
+	description: 
+	[
+		"If you follow the main road to the south you'll find a larger fortication called The Southern Choke. Maybe they need some help down there as well."
+	]
+
+	progress:
+	[
+		"Go south."
+	]
+	
+	completion:
+	[
+		"Did Jensen send you? We haven't had much rebel activity down here, but we need to keep the fortifications manned. We don't want any hostile intrusions from the south."
+	]
+
+	level: 11
+	prerequisites: [ .sergeant_jensen_1 ]
 	# FIXME rewards
 }

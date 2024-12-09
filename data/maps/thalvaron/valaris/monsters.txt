@@ -1,13 +1,13 @@
 npc_behavior_state .wandering_short:
 {
-	on_route<.default_patrol>: .default_patrol
+	on_route<thalvaron_default_patrol>: thalvaron_default_patrol
 	behavior: wandering
 	max_range: 1
 }
 
 npc_behavior_state .passive:
 {
-	on_route<.default_patrol>: .default_patrol
+	on_route<thalvaron_default_patrol>: thalvaron_default_patrol
 	behavior: do_nothing
 }
 
@@ -93,11 +93,49 @@ map_entity_spawn thalvaron_rebel_outside:
 }
 
 ##########################################################################################
+# Deer
+
+map_entity_spawn thalvaron_deer: 
+{ 
+	entity thalvaron_deer_10: { init_state: default } 
+	entity thalvaron_deer_11: { init_state: default } 
+	entity thalvaron_deer_12: { init_state: default } 
+}
+
+# Wildlife around Valaris
+{
+
+	loot_table .deer: 
+	{
+		slots:
+		[	
+			!WORLD_DROPS {}				
+		]	
+	}
+
+	${
+		_faction: wildlife
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: .deer
+	}
+	
+	entity thalvaron_deer_10: !NPC { _string: "Deer" _sprite: deer _sprite_dead: deer_dead _level: 10 }
+	entity thalvaron_deer_11: !NPC { _string: "Deer" _sprite: deer _sprite_dead: deer_dead _level: 11 }
+	entity thalvaron_deer_12: !NPC { _string: "Deer" _sprite: deer _sprite_dead: deer_dead _level: 12 }
+}
+
+##########################################################################################
 # Crabs
 
 map_entity_spawn thalvaron_crab: 
 { 
 	entity thalvaron_crab_10: { init_state: default } 
+}
+
+map_entity_spawn thalvaron_crab_2: 
+{ 
+	entity thalvaron_crab_11: { init_state: default } 
 }
 
 # Crabs in the area just south of the city
@@ -116,7 +154,6 @@ map_entity_spawn thalvaron_crab:
 		]	
 	}
 
-
 	${
 		_level: 10
 		_faction: wildlife
@@ -126,6 +163,33 @@ map_entity_spawn thalvaron_crab:
 	}
 
 	entity thalvaron_crab_10: !NPC { _string: "Mud Crawler" _sprite: crab_1 _sprite_dead: crab_1_dead }
+}
+
+# Hostile crabs along the western coast
+{
+
+	loot_table .crabs_11: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { weight: 1 }
+			}
+			
+			!WORLD_DROPS {}				
+		]	
+	}
+
+	${
+		_level: 11
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: .crabs_11
+		_abilities: [ { id: npc_rend } { id: npc_attack } ]
+	}
+
+	entity thalvaron_crab_11: !NPC { _string: "Sand Crawler" _sprite: crab_2 _sprite_dead: crab_2_dead }	
 }
 
 ##########################################################################################
@@ -162,3 +226,34 @@ map_entity_spawn thalvaron_roger_bear:
 
 	entity thalvaron_roger_bear: !NPC { _string: "Large Bear" _sprite: bear _sprite_dead: bear_dead }
 }
+
+##########################################################################################
+# Wolves
+
+map_entity_spawn thalvaron_robertson_farm_wolf: 
+{ 
+	entity thalvaron_wolf_11: { init_state: default } 
+}
+
+# Wolves around Robertson farm
+{
+
+	loot_table .wolf_11: 
+	{
+		slots:
+		[				
+			!WORLD_DROPS {}				
+		]	
+	}
+
+	${
+		_level: 11
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: .wolf_11
+	}
+
+	entity thalvaron_wolf_11: !NPC { _string: "Grey Wolf" _sprite: wolf_3 _sprite_dead: wolf_3_dead }
+}
+

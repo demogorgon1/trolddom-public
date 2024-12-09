@@ -1,0 +1,84 @@
+dialogue_screen .fisherman_trainer:
+{
+	train_profession<0>: fishing
+	train_profession<1>: fishing
+}
+
+dialogue_screen .fisherman_dialogue:
+{
+	text: 
+	[	
+		"Can you smell that? No, it's not me, it's the sea!"
+	]		
+	
+	options:
+	[
+		{ goto: .fisherman_trainer text: "Please teach me how to drag fish out of the water." }
+		{ quest: .fisherman_1 }
+	]
+}
+
+dialogue_root .fisherman_dialogue:
+{
+	.fisherman_dialogue: { }
+}
+
+entity thalvaron_fisherman: !NPC
+{
+	_string: "Jolly"
+	_guild_name: "Fisherman"
+	_dialogue_root: .fisherman_dialogue	
+	_sprite: fisherman_1
+	_sprite_dead: fisherman_1_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .fisherman_1:
+{
+	string: "Sand Crawlers Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_crab_11 ]
+		count: 6
+	}
+}
+
+quest .fisherman_1:
+{
+	string: "Terrors In The Sand"
+
+	text:
+	[
+		"Kill crabs along the coast."
+	]
+	
+	description: 
+	[
+		"Look around. Isn't it just a wonderful place? It looks nice right? Well, unfortunately it's not as idyllic as it looks. This beach is haunted by horrible crabs that just won't leave you alone. Do something about it, thank you."
+	]
+
+	progress:
+	[
+		"They're everywhere!"
+	]
+	
+	completion:
+	[
+		"I still see them all over the place."
+	]
+
+	level: 11
+	objectives: [ .fisherman_1 ]
+	# FIXME rewards
+}
+

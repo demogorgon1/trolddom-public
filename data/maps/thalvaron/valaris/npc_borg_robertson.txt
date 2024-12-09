@@ -1,13 +1,29 @@
+dialogue_screen .borg_robertson_dialogue_2:
+{
+	text: 
+	[	
+		"Fine. Although, the wolves are getting a bit nosy. They seem particularly interested in my barn for some reason."
+	]		
+	
+	options:
+	[	
+		{ quest: .borg_robertson_1 }
+		{ quest: .borg_robertson_2 }		
+	]
+}
+
 dialogue_screen .borg_robertson_dialogue:
 {
 	text: 
 	[	
-		"FIXME"
+		"What are you doing here?"
 	]		
 	
 	options:
 	[
-		{ text: "Is everything all right around here?" script: trigger }
+		{ text: "Is everything all right around here?" script: trigger goto: .borg_robertson_dialogue_2 }
+		{ quest: .borg_robertson_1 }
+		{ quest: .borg_robertson_2 }
 	]
 }
 
@@ -30,3 +46,90 @@ entity thalvaron_borg_robertson: !NPC
 	_not_pushable: true	
 }
 
+############################################################
+# Quest 1
+
+objective .borg_robertson_1:
+{
+	string: "Gray Wolves Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_wolf_11 ]
+		count: 6
+	}
+}
+
+quest .borg_robertson_1:
+{
+	string: "Hunting Wolves"
+
+	text:
+	[
+		"Hunt wolves around the Robertson farm."
+	]
+	
+	description: 
+	[
+		"Wolves have been entering my property at night, sniffing around. I can't have it! Can you thin out their numbers, maybe?"
+	]
+
+	progress:
+	[
+		"Did you get 'em?"
+	]
+	
+	completion:
+	[
+		"Thanks. I'll be able to sleep better at night."
+	]
+
+	level: 11
+	objectives: [ .borg_robertson_1 ]
+	# FIXME rewards
+}
+
+############################################################
+# Quest 2
+
+objective .borg_robertson_2:
+{
+	string: "Buttercup located."
+	
+	maps: [ thalvaron ]
+	
+	dialogue_trigger:
+	{
+		entities: [ thalvaron_buttercup ]
+	}
+}
+
+quest .borg_robertson_2:
+{
+	string: "Buttercup"
+
+	text:
+	[
+		"Find Buttercup, Borg's lost pet pig."
+	]
+	
+	description: 
+	[
+		"My pet pig Buttercup has disappeared. I'm feared the worst, with all the wolves around. I'd appreciate if can find her. I'm very worried."
+	]
+
+	progress:
+	[
+		"Did you find her? Is she all right?"
+	]
+	
+	completion:
+	[
+		"Oh. I really miss her, but if you say she's happy with her new life, I guess that's more important. I'll try to go visit her at first chance!"
+	]
+
+	level: 11
+	objectives: [ .borg_robertson_2 ]
+}

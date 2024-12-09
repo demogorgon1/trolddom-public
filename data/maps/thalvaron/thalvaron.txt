@@ -94,7 +94,11 @@ map_entity_spawn thalvaron_mathew_larsen: { entity thalvaron_mathew_larsen: { in
 map_entity_spawn thalvaron_ola_howton_1_quest_item_1: { entity thalvaron_ola_howton_1_quest_item_1: { init_state: default } }
 map_entity_spawn thalvaron_ola_howton_1_quest_item_2: { entity thalvaron_ola_howton_1_quest_item_2: { init_state: default } }
 map_entity_spawn thalvaron_ola_howton_1_quest_item_3: { entity thalvaron_ola_howton_1_quest_item_3: { init_state: default } }
-
+map_entity_spawn thalvaron_buttercup: { entity thalvaron_buttercup: { init_state: default } }
+map_entity_spawn thalvaron_wild_boar: { entity thalvaron_wild_boar: { init_state: default } }
+map_entity_spawn thalvaron_piglet: { entity thalvaron_piglet: { init_state: default } }
+map_entity_spawn thalvaron_fisherman: { entity thalvaron_fisherman: { init_state: default } }
+map_entity_spawn thalvaron_lieutenant_tusleholm: { entity thalvaron_lieutenant_tusleholm: { init_state: default } }
 
 map_palette .tiles:
 {
@@ -216,6 +220,14 @@ map_palette .stuff:
 	entity_spawn thalvaron_ola_howton_1_quest_item_1: [ 94 31 81 ]
 	entity_spawn thalvaron_ola_howton_1_quest_item_2: [ 94 31 82 ]
 	entity_spawn thalvaron_ola_howton_1_quest_item_3: [ 94 31 83 ]
+	entity_spawn thalvaron_robertson_farm_wolf: [ 94 31 184 ]
+	entity_spawn thalvaron_buttercup: [ 94 231 184 ]
+	entity_spawn thalvaron_wild_boar: [ 94 81 184 ]
+	entity_spawn thalvaron_piglet: [ 94 131 184 ]
+	entity_spawn thalvaron_fisherman: [ 44 131 184 ]
+	entity_spawn thalvaron_crab_2: [ 14 131 184 ]		
+	entity_spawn thalvaron_deer: [ 250 240 12 ]
+	entity_spawn thalvaron_lieutenant_tusleholm: [ 252 210 112 ]	
 
 	player_spawn .player_spawn: [ 0 0 255 ]
 	

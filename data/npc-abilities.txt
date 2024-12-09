@@ -189,6 +189,66 @@ ability npc_poison_bite:
 	}
 }
 
+cooldown npc_rend:
+{
+	duration: 60
+}
+
+ability npc_rend_tick:
+{
+	string: "Rend"
+	icon: icon_blood
+	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]
+
+	direct_effect damage:
+	{
+		damage_type: physical
+		function: { expression: a a: [ [ 1 2 ] [ 10 7 ] [ 20 14 ] ] elite_multiplier: 1.7 }
+	}
+}
+
+aura npc_rend:
+{
+	string: "Rend"
+	description: "Poisoned."
+	type: debuff
+	icon: icon_blood
+	duration: based_on_effects
+	flags: [ unique ]
+
+	aura_effect repeat:
+	{
+		update_interval: 25
+		update_count: 8
+		ability: npc_rend_tick
+	}
+}
+
+ability npc_rend:
+{
+	string: "Rend"
+	range: 1
+	cast_time: 10
+	cooldowns: [ global npc_rend ]
+	flags: [ melee offensive target_other target_hostile can_miss interruptable ]
+	states: [ in_combat ]
+	icon: icon_blood
+	delay: 3
+
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: bleed
+		function: { expression: a a: [ [ 1 4 ] [ 10 15 ] [ 20 30 ] ] elite_multiplier: 1.7 }
+	}
+
+	direct_effect apply_aura:
+	{
+		aura: npc_rend
+	}
+}
+
 particle_system npc_shoot:
 {
 	particle:
