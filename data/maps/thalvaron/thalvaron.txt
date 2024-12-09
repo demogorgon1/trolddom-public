@@ -87,6 +87,10 @@ map_entity_spawn thalvaron_ola_howton: { entity thalvaron_ola_howton: { init_sta
 map_entity_spawn thalvaron_borg_robertson: { entity thalvaron_borg_robertson: { init_state: default } }
 map_entity_spawn thalvaron_gnome: { entity thalvaron_gnome: { init_state: default } }
 map_entity_spawn thalvaron_mysterious_stranger: { entity thalvaron_mysterious_stranger: { init_state: default } }
+map_entity_spawn thalvaron_bar_patron_sarah: { entity thalvaron_bar_patron_sarah: { init_state: default } }
+map_entity_spawn thalvaron_bar_patron_bill: { entity thalvaron_bar_patron_bill: { init_state: default } }
+map_entity_spawn thalvaron_bar_chef: { entity thalvaron_bar_chef: { init_state: default } }
+map_entity_spawn thalvaron_mathew_larsen: { entity thalvaron_mathew_larsen: { init_state: default } }
 
 map_palette .tiles:
 {
@@ -202,7 +206,9 @@ map_palette .stuff:
 	entity_spawn thalvaron_gnome: [ 39 240 93 ]		
 	entity_spawn thalvaron_mysterious_stranger: [ 49 240 93 ]		
 	entity_spawn thalvaron_bar_patron_sarah: [ 194 240 93 ]		
-	entity_spawn thalvaron_bar_patron_bill: [ 149 240 98 ]				
+	entity_spawn thalvaron_bar_patron_bill: [ 149 240 98 ]		
+	entity_spawn thalvaron_bar_chef: [ 34 92 141 ]
+	entity_spawn thalvaron_mathew_larsen: [ 48 18 184 ]
 
 	player_spawn .player_spawn: [ 0 0 255 ]
 	
@@ -305,6 +311,10 @@ map_palette .doodads:
 	doodad stone_stairs_reversed: [ 19 173 192 ]	
 	doodad wood_stairs_reversed: [ 173 19 192 ]	
 	doodad animal_skull: [ 197 173 210 ]	
+	
+	doodad wall_sign_generic<"Mathew's Emporium">: [ 197 173 111 ]	
+	doodad wall_sign_generic<"John & Mary's">: [ 97 173 111 ]	
+	doodad wall_sign_generic<"Royal Garden Tavern">: [ 97 73 111 ]	
 }
 
 map_palette .cliffs:

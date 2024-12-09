@@ -78,6 +78,8 @@ namespace tpublic
 							m_level = aChild->GetUInt32();
 						else if (aChild->m_name == "cost")
 							m_cost = aChild->GetUInt32();
+						else if (aChild->m_name == "reward_cash")
+							m_rewardCash = aChild->GetUInt32();
 						else if (aChild->m_name == "reward_cash_multiplier")
 							m_rewardCashMultiplier = aChild->GetFloat();
 						else if (aChild->m_name == "reward_xp_multiplier")
@@ -122,6 +124,7 @@ namespace tpublic
 				aStream->WriteFloat(m_rewardCashMultiplier);
 				aStream->WriteFloat(m_rewardXPMultiplier);
 				aStream->WriteUInt(m_cost);
+				aStream->WriteUInt(m_rewardCash);
 			}
 
 			bool
@@ -160,6 +163,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInt(m_cost))
 					return false;
+				if (!aStream->ReadUInt(m_rewardCash))
+					return false;
 				return true;
 			}
 
@@ -183,6 +188,7 @@ namespace tpublic
 			uint32_t				m_level = 1;
 			Type					m_type = TYPE_NORMAL;
 			std::vector<uint32_t>	m_questItems;
+			uint32_t				m_rewardCash = 0;
 			std::vector<uint32_t>	m_rewardOneItem;
 			std::vector<uint32_t>	m_rewardAllItems;
 			uint32_t				m_nextQuestId = 0;

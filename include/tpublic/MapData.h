@@ -499,6 +499,8 @@ namespace tpublic
 						const Vec2&				aPosition) const;
 		uint32_t	GetWall(
 						const Vec2&				aPosition) const;
+		const char*	GetStaticPositionToolTip(
+						const Vec2&				aPosition) const;
 
 		// Public data
 		MapType::Id									m_type;
@@ -525,6 +527,10 @@ namespace tpublic
 		std::unique_ptr<MapCovers>					m_mapCovers;
 		std::unique_ptr<MapRouteData>				m_mapRouteData;
 		
+		typedef std::unordered_map<Vec2, std::string, Vec2::Hasher> StaticPositionToolTipTable;
+		
+		StaticPositionToolTipTable					m_staticPositionToolTips;
+
 		typedef std::unordered_map<Vec2, uint32_t, Vec2::Hasher> ObjectTable;
 
 		ObjectTable									m_doodads;

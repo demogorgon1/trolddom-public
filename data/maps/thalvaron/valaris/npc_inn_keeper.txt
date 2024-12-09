@@ -2,7 +2,7 @@ dialogue_screen .inn_keeper_dialogue_gnome:
 {
 	text: 
 	[
-		"Gnome? What have you been smoking?"
+		"Gnome? What have you been smoking? No funny tobacco allowed at my establishment!"
 	]
 }
 
@@ -15,7 +15,7 @@ dialogue_screen .inn_keeper_dialogue:
 	
 	options:
 	[
-		{ text: "Have you ever done business with the gnome that hangs out at the Robertson farm?" goto: .inn_keeper_dialogue_gnome requirement self<must_have_active_quest>: { id: .gnome_1 } }
+		{ text: "Have you ever done business with a gnome that hangs out at the Robertson farm?" goto: .inn_keeper_dialogue_gnome requirement self<must_have_active_quest>: { id: .gnome_1 } }
 		{ quest<offer_only>: .inn_keeper_1 }
 	]
 }

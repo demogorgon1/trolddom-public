@@ -1,0 +1,59 @@
+dialogue_screen .bar_chef_vendor:
+{
+	sell item_flour: { quantity: 1 }	
+	sell item_water: { quantity: 1 }	
+}
+
+dialogue_screen .bar_chef_trainer:
+{
+	train_profession<0>: cooking
+	train_profession<1>: cooking
+	train_ability: craft_dry_bread
+	train_ability: craft_pickled_herring
+	train_ability: craft_pickled_sucker
+	train_ability: craft_pickled_eel_pie
+	train_ability: craft_pickled_moonfish
+}
+
+dialogue_screen .bar_chef_dialogue_gnome:
+{
+	text:
+	[
+		"What's a gnome?"
+	]
+}
+
+dialogue_screen .bar_chef_greetings:
+{
+	text: 
+	[	
+		"How did I end up in a place like this? I should be cooking at the castle, not that amateur they have there now!"
+	]
+	
+	options:
+	[
+		{ text: "Have you ever done business with a gnome that hangs out at the Robertson farm?" goto: .bar_chef_dialogue_gnome requirement self<must_have_active_quest>: { id: .gnome_1 } }
+		{ goto: .bar_chef_vendor text: "Let me browse your goods." }
+		{ goto: .bar_chef_trainer text: "Please teach me about cooking." }
+	]
+}
+
+dialogue_root .bar_chef_dialogue:
+{
+	.bar_chef_greetings: { }
+}
+
+entity thalvaron_bar_chef: !NPC
+{
+	_string: "Monsieur Armand"
+	_guild_name: "Short-Order Cook"
+	_dialogue_root: .bar_chef_dialogue	
+	_sprite: cook_1
+	_sprite_dead: cook_1_dead	
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

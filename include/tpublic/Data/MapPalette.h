@@ -47,6 +47,7 @@ namespace tpublic
 					aStream->WritePOD(m_type);
 					aStream->Write(&m_color, sizeof(m_color));
 					aStream->WriteUInt(m_value);
+					aStream->WriteString(m_string);
 				}
 
 				bool
@@ -59,6 +60,8 @@ namespace tpublic
 						return false;
 					if (!aStream->ReadUInt(m_value))
 						return false;
+					if(!aStream->ReadString(m_string))
+						return false;
 					return true;
 				}
 
@@ -66,6 +69,7 @@ namespace tpublic
 				EntryType		m_type = EntryType(0);
 				Color			m_color;
 				uint32_t		m_value = 0;
+				std::string		m_string;
 			};
 
 			void
@@ -85,6 +89,15 @@ namespace tpublic
 					if(!FromSourceBase(aChild))
 					{
 						Entry entry;
+
+						if(aChild->m_annotation && !aChild->m_tag.empty())
+						{
+							if(aChild->m_annotation->m_type == SourceNode::TYPE_STRING)
+								entry.m_string = aChild->m_annotation->GetString();
+							else
+								TP_VERIFY(false, aChild->m_debugInfo, "Invalid annotation.");
+						}
+
 						if (aChild->m_tag == "tile")
 						{
 							entry.m_type = ENTRY_TYPE_TILE;

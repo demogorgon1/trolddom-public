@@ -27,17 +27,30 @@ namespace tpublic
 
 		uint32_t
 		_MakeColorKey(
-			uint8_t						aR,
-			uint8_t						aG, 
-			uint8_t						aB)
+			uint8_t										aR,
+			uint8_t										aG, 
+			uint8_t										aB)
 		{
 			return (((uint32_t)aR) << 16) | (((uint32_t)aG) << 8) | ((uint32_t)aB);
 		}
 
 		void
+		_WriteStaticPositionToolTipTable(
+			IWriter*									aStream,
+			const MapData::StaticPositionToolTipTable&	aStaticPositionToolTipTable)
+		{
+			aStream->WriteUInt(aStaticPositionToolTipTable.size());
+			for (MapData::StaticPositionToolTipTable::const_iterator i = aStaticPositionToolTipTable.cbegin(); i != aStaticPositionToolTipTable.cend(); i++)
+			{
+				i->first.ToStream(aStream);
+				aStream->WriteString(i->second);
+			}
+		}
+
+		void
 		_WriteObjectTable(
-			IWriter*					aStream,
-			const MapData::ObjectTable&	aObjectTable)
+			IWriter*									aStream,
+			const MapData::ObjectTable&					aObjectTable)
 		{
 			aStream->WriteUInt(aObjectTable.size());
 			for (MapData::ObjectTable::const_iterator i = aObjectTable.cbegin(); i != aObjectTable.cend(); i++)
@@ -49,8 +62,8 @@ namespace tpublic
 
 		bool
 		_ReadObjectTable(
-			IReader*					aStream,
-			MapData::ObjectTable&		aObjectTable)
+			IReader*									aStream,
+			MapData::ObjectTable&						aObjectTable)
 		{
 			size_t count;
 			if (!aStream->ReadUInt(count))
@@ -68,10 +81,31 @@ namespace tpublic
 			return true;
 		}
 
+		bool
+		_ReadStaticPositionToolTipTable(
+			IReader*									aStream,
+			MapData::StaticPositionToolTipTable&		aStaticPositionToolTipTable)
+		{
+			size_t count;
+			if (!aStream->ReadUInt(count))
+				return false;
+			for (size_t i = 0; i < count; i++)
+			{
+				Vec2 position;
+				if (!position.FromStream(aStream))
+					return false;
+				std::string t;
+				if (!aStream->ReadString(t))
+					return false;
+				aStaticPositionToolTipTable[position] = std::move(t);
+			}
+			return true;
+		}
+
 		uint32_t
 		_GetObject(
-			const MapData::ObjectTable&	aObjectTable,
-			const Vec2&					aPosition)
+			const MapData::ObjectTable&					aObjectTable,
+			const Vec2&									aPosition)
 		{
 			MapData::ObjectTable::const_iterator i = aObjectTable.find(aPosition);
 			if(i != aObjectTable.cend())
@@ -248,6 +282,9 @@ namespace tpublic
 								}
 								else
 								{
+									if(!entry->m_string.empty())
+										m_staticPositionToolTips[{ mapX, mapY }] = entry->m_string;
+
 									switch(entry->m_type)
 									{
 									case Data::MapPalette::ENTRY_TYPE_TILE:
@@ -377,7 +414,6 @@ namespace tpublic
 			}
 
 			printf("generated cliffs\n");
-
 		}
 	}
 
@@ -433,6 +469,7 @@ namespace tpublic
 		_WriteObjectTable(aStream, m_walls);
 		aStream->WriteOptionalObjectPointer(m_mapRouteData);
 		aStream->Write(m_elevationMap, m_width * m_height);
+		_WriteStaticPositionToolTipTable(aStream, m_staticPositionToolTips);
 	}
 
 	bool	
@@ -500,6 +537,9 @@ namespace tpublic
 			if(aStream->Read(m_elevationMap, (size_t)m_width * m_height) != (size_t)(m_width * m_height))
 				return false;
 		}
+
+		if (!_ReadStaticPositionToolTipTable(aStream, m_staticPositionToolTips))
+			return false;
 
 		return true;
 	}
@@ -693,6 +733,7 @@ namespace tpublic
 
 		m_doodads = aMapData->m_doodads;
 		m_walls = aMapData->m_walls;
+		m_staticPositionToolTips = aMapData->m_staticPositionToolTips;
 	}
 
 	uint32_t	
@@ -738,6 +779,16 @@ namespace tpublic
 		const Vec2&				aPosition) const
 	{
 		return _GetObject(m_walls, aPosition);
+	}
+
+	const char* 
+	MapData::GetStaticPositionToolTip(
+		const Vec2&				aPosition) const
+	{
+		StaticPositionToolTipTable::const_iterator i = m_staticPositionToolTips.find(aPosition);
+		if(i == m_staticPositionToolTips.cend())
+			return NULL;
+		return i->second.c_str();
 	}
 
 	//--------------------------------------------------------------------

@@ -2,7 +2,7 @@ dialogue_screen .mysterious_stranger_dialogue_2:
 {
 	text: 
 	[	
-		"The short handsome guy who lives in the barn? Oh, yes, definitely. I'd do business with him any time! Our last venture was hugely profitable."
+		"The handsome guy who lives in the barn? Oh, yes, definitely. I'd do business with him any time! Our last venture was hugely profitable. Two thumbs up!"
 	]		
 	
 	options:
@@ -15,12 +15,12 @@ dialogue_screen .mysterious_stranger_dialogue:
 {
 	text: 
 	[	
-		"Hello."
+		"How do you do?"
 	]		
 	
 	options:
 	[
-		{ text: "Have you ever done business with the gnome that hangs out at the Robertson farm?" goto: .mysterious_stranger_dialogue_2 script: trigger }
+		{ text: "Have you ever done business with a gnome that hangs out at the Robertson farm?" goto: .mysterious_stranger_dialogue_2 script: trigger }
 	]
 }
 
@@ -44,7 +44,7 @@ entity thalvaron_mysterious_stranger: !NPC
 	_blocking: false
 	_visibility_requirements: 			
 	{
-		requirement self<must_not_have_active_quest>: { id: .gnome_1 }
+		requirement self<must_have_active_quest>: { id: .gnome_1 }
 	}
 }
 

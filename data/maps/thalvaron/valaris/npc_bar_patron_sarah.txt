@@ -1,12 +1,22 @@
+dialogue_screen .bar_patron_sarah_dialogue_2:
+{
+	text: 
+	[
+		"Uhm, no. Leave me alone."
+	]
+}
+
+
 dialogue_screen .bar_patron_sarah_dialogue:
 {
 	text: 
 	[	
-		"Greetings."
+		"Hello, what a nice day it is!"
 	]		
 	
 	options:
 	[
+		{ text: "Have you ever done business with a gnome that hangs out at the Robertson farm?" goto: .bar_patron_sarah_dialogue_2 requirement self<must_have_active_quest>: .gnome_1 }	
 	]
 }
 

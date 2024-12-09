@@ -66,6 +66,8 @@ sprites:
 	sprite doodad_counter_1: { flags: [ ] }
 	sprite doodad_wood_stairs_reversed: { flags: [ tile_walkable ] }
 	sprite doodad_stone_stairs_reversed: { flags: [ tile_walkable ] }
+	sprite doodad_wall_banner_generic_1: { flags: [ tile_walkable ] }
+	sprite doodad_wall_sign_generic_1: { flags: [ tile_walkable ] }
 
 	cursor: { position: [ 0 32 ] }
 	size: { width: 80 height: 64 } sprite ship: { flags: [ tile_walkable ] }
@@ -212,6 +214,8 @@ doodad stone_stairs: { sprites: [ doodad_stone_stairs ] map_palette<"x">: { occu
 doodad counter: { sprites: [ doodad_counter_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad wood_stairs_reversed: { sprites: [ doodad_wood_stairs_reversed ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad stone_stairs_reversed: { sprites: [ doodad_stone_stairs_reversed ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad wall_banner_generic: { sprites: [ doodad_wall_banner_generic_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad wall_sign_generic: { sprites: [ doodad_wall_sign_generic_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 
 
 

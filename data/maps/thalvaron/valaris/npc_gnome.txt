@@ -48,7 +48,7 @@ dialogue_screen .gnome_dialogue:
 		}
 		
 		{
-			quest<offer_only>: .gnome_2
+			quest<offer_only>: thalvaron_gnome
 		}		
 	]
 }
@@ -73,8 +73,9 @@ entity thalvaron_gnome: !NPC
 	_blocking: false
 	_visibility_requirements: 			
 	{
-		requirement self<must_have_completed_quest>: { id: open_world_gnome_1 }
-		requirement self<must_not_have_completed_quest>: { id: .gnome_2 }
+		requirement self<must_have_completed_quest>: open_world_gnome_1 
+		requirement self<must_not_have_completed_quest>: thalvaron_gnome
+		requirement self<must_not_be_ready_to_turn_in_quest>: thalvaron_gnome
 	}
 }
 
@@ -135,7 +136,19 @@ item .gnome_2_quest_item:
 	string: "Extremely Rare Coin"
 }
 
-quest .gnome_2:
+objective .gnome_2:
+{
+	string: "Extremely Rare Coin Appraisal"
+	
+	maps: [ thalvaron ]
+	
+	dialogue_trigger:
+	{
+		entities: [ thalvaron_mathew_larsen ]
+	}
+}
+
+quest thalvaron_gnome:
 {
 	string: "The best deal ever"
 
@@ -157,13 +170,14 @@ quest .gnome_2:
 	
 	completion:
 	[
-		"Are you kidding me? I'm sorry to tell you, but this coin is absolutely worthless. Can't you see how crude it is? Don't be guillible."
+		"As I told you, this coin isn't worth much. Sorry."
 	]
 
 	level: 11
 	reward_xp_multiplier: 0.75
-	reward_cash_multiplier: 0
+	reward_cash: 1000
 	quest_items: [ .gnome_2_quest_item ]
 	prerequisites: [ .gnome_1 ]
+	objectives: [ .gnome_2 ]
 	cost: 10000
 }

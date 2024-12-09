@@ -117,6 +117,18 @@ namespace tpublic
 				return false;
 			}
 
+			const Quest*
+			GetQuest(
+				uint32_t															aQuestId) const
+			{
+				for(const std::unique_ptr<Quest>& quest : m_quests)
+				{
+					if(quest->m_questId == aQuestId)
+						return quest.get();
+				}
+				return NULL;
+			}
+
 			void
 			RemoveQuest(
 				uint32_t															aQuestId)

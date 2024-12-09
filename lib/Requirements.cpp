@@ -14,6 +14,8 @@
 
 #include <tpublic/Data/Aura.h>
 #include <tpublic/Data/Entity.h>
+#include <tpublic/Data/Objective.h>
+#include <tpublic/Data/Quest.h>
 
 #include <tpublic/EntityInstance.h>
 #include <tpublic/Manifest.h>
@@ -203,6 +205,44 @@ namespace tpublic
 					else if (aRequirement->m_type == Requirement::TYPE_MUST_NOT_HAVE_ACTIVE_QUEST && hasActiveQuest)
 						return false;
 				}
+				break;
+
+			case Requirement::TYPE_MUST_NOT_BE_READY_TO_TURN_IN_QUEST:
+				{
+					if (!entity->IsPlayer())
+						return false;
+
+					const Components::ActiveQuests* activeQuests = entity->GetComponent<Components::ActiveQuests>();
+					const Components::ActiveQuests::Quest* quest = activeQuests->GetQuest(aRequirement->m_id);
+					if(quest != NULL)
+					{
+						if(quest->m_objectiveInstanceData.empty())	
+							return false;
+
+						const Data::Quest* questData = aManifest->GetById<Data::Quest>(quest->m_questId);
+						MemoryReader reader(&quest->m_objectiveInstanceData[0], quest->m_objectiveInstanceData.size());
+
+						bool readyToTurnIn = true;
+
+						for(uint32_t objectiveId : questData->m_objectives)
+						{
+							const Data::Objective* objectiveData = aManifest->GetById<Data::Objective>(objectiveId);
+							std::unique_ptr<ObjectiveInstanceBase> objectiveInstanceBase(objectiveData->m_objectiveTypeBase->CreateInstance());
+							if(!objectiveInstanceBase->FromStream(&reader))
+								return false;
+
+							if(!objectiveInstanceBase->IsCompleted())
+							{
+								readyToTurnIn = false;
+								break;
+							}
+						}
+
+						if(readyToTurnIn)
+							return false;
+					}
+				}
+
 				break;
 
 			case Requirement::TYPE_MUST_HAVE_TAG:

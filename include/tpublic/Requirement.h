@@ -51,6 +51,7 @@ namespace tpublic
 			TYPE_MUST_BE_AT_LEAST_LEVEL,
 			TYPE_MUST_BE_DISCIPLE,
 			TYPE_MUST_HAVE_MORE_RAGE_THAN,
+			TYPE_MUST_NOT_BE_READY_TO_TURN_IN_QUEST
 		};
 
 		static DataType::Id
@@ -67,6 +68,7 @@ namespace tpublic
 			case TYPE_MUST_NOT_HAVE_COMPLETED_QUEST:
 			case TYPE_MUST_HAVE_ACTIVE_QUEST:
 			case TYPE_MUST_NOT_HAVE_ACTIVE_QUEST:
+			case TYPE_MUST_NOT_BE_READY_TO_TURN_IN_QUEST:
 				return DataType::ID_QUEST;
 
 			case TYPE_MUST_HAVE_TAG:
@@ -221,6 +223,8 @@ namespace tpublic
 				m_type = TYPE_MUST_BE_AT_LEAST_LEVEL;
 			else if(typeString == "must_be_disciple")
 				m_type = TYPE_MUST_BE_DISCIPLE;
+			else if(typeString == "must_not_be_ready_to_turn_in_quest")
+				m_type = TYPE_MUST_NOT_BE_READY_TO_TURN_IN_QUEST;
 			else
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid type.", aSource->m_annotation->GetIdentifier());
 
