@@ -3,12 +3,7 @@ dialogue_screen .general_store_mary_dialogue:
 	text: 
 	[	
 		"Greetings."
-	]		
-	
-	options:
-	[
-		{ quest<completion_only>: thalvaron_gnome }
-	]
+	]			
 }
 
 dialogue_root .general_store_mary_dialogue:

@@ -44,7 +44,7 @@ dialogue_root .mathew_larsen_dialogue:
 
 entity thalvaron_mathew_larsen: !NPC
 {
-	_string: "Mary"
+	_string: "Mathew Larsen"
 	_dialogue_root: .mathew_larsen_dialogue	
 	_dialogue_scripts: [ trigger ]	
 	_sprite: man_33

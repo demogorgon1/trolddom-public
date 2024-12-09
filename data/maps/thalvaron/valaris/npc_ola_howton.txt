@@ -1,13 +1,28 @@
-dialogue_screen .ola_howton_dialogue:
+dialogue_screen .ola_howton_dialogue_2:
 {
 	text: 
 	[	
-		"FIXME"
+		"Thanks for checking up on us! I could really need some help, actually."
 	]		
 	
 	options:
 	[
-		{ text: "Is everything all right around here?" script: trigger }
+		{ quest: .ola_howton_1 }
+	]
+}
+
+
+dialogue_screen .ola_howton_dialogue:
+{
+	text: 
+	[	
+		"Welcome to the country side."
+	]		
+	
+	options:
+	[
+		{ text: "Is everything all right around here?" script: trigger goto: .ola_howton_dialogue_2 }
+		{ quest: .ola_howton_1 }
 	]
 }
 
@@ -30,3 +45,190 @@ entity thalvaron_ola_howton: !NPC
 	_not_pushable: true	
 }
 
+############################################################
+# Quest 1
+
+objective .ola_howton_1_a:
+{
+	string: "Bag of Grains"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .ola_howton_1_quest_item_1 count: 1 }
+}
+
+objective .ola_howton_1_b:
+{
+	string: "Bag of Silverware"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .ola_howton_1_quest_item_2 count: 1 }
+}
+
+objective .ola_howton_1_c:
+{
+	string: "Bag of Tools"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .ola_howton_1_quest_item_3 count: 1 }
+}
+
+loot_group .ola_howton_1_quest_item_1: {}
+loot_group .ola_howton_1_quest_item_2: {}
+loot_group .ola_howton_1_quest_item_3: {}
+
+item .ola_howton_1_quest_item_1:
+{
+	icon: icon_brown_bag
+	item_level: 10
+	loot_groups: [ .ola_howton_1_quest_item_1 ]
+	flags: [ not_sellable unique ]
+	string: "Bag of Grains"
+	stack: 1
+}
+
+item .ola_howton_1_quest_item_2:
+{
+	icon: icon_brown_bag
+	item_level: 10
+	loot_groups: [ .ola_howton_1_quest_item_2 ]
+	flags: [ not_sellable unique ]
+	string: "Bag of Silverware"
+	stack: 1
+}
+
+item .ola_howton_1_quest_item_3:
+{
+	icon: icon_brown_bag
+	item_level: 10
+	loot_groups: [ .ola_howton_1_quest_item_3 ]
+	flags: [ not_sellable unique ]
+	string: "Bag of Tools"
+	stack: 1
+}
+
+loot_table .ola_howton_1_quest_item_1:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .ola_howton_1_quest_item_1 }			
+		}		
+	]
+}
+
+loot_table .ola_howton_1_quest_item_2:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .ola_howton_1_quest_item_2 }			
+		}		
+	]
+}
+
+
+loot_table .ola_howton_1_quest_item_3:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .ola_howton_1_quest_item_3 }			
+		}		
+	]
+}
+
+entity thalvaron_ola_howton_1_quest_item_1:
+{
+	string: "Bag of Grains"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ satchel ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .ola_howton_1_quest_item_1
+			verb: pick
+			range: 1 
+			despawn: true 			
+			level: 10
+			required_quest: .ola_howton_1
+		}		
+	}
+}
+
+entity thalvaron_ola_howton_1_quest_item_2:
+{
+	string: "Bag of Silverware"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ satchel ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .ola_howton_1_quest_item_2
+			verb: pick
+			range: 1 
+			despawn: true 			
+			level: 10
+			required_quest: .ola_howton_1
+		}		
+	}
+}
+
+entity thalvaron_ola_howton_1_quest_item_3:
+{
+	string: "Bag of Tools"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ satchel ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .ola_howton_1_quest_item_3
+			verb: pick
+			range: 1 
+			despawn: true 			
+			level: 10
+			required_quest: .ola_howton_1
+		}		
+	}
+}
+
+quest .ola_howton_1:
+{
+	string: "Get My Stuff Back"
+
+	text:
+	[
+		"Find Ola's lost stuff."
+	]
+	
+	description: 
+	[
+		"Bandits recently raided my farm and stole a bunch of my stuff. Luckily the soldiers managed to hunt them down and deal with them, but unfortunately they couldn't find the things that they stole. I'm guessing that they're"
+		"lying on the ground somewhere around here. Can you go look for them for me?"
+	]
+
+	progress:
+	[
+		"Have you found anything? No?"
+	]
+	
+	completion:
+	[
+		"Thanks! I hope those bastards will leave me alone."
+	]
+
+	level: 10
+	objectives: [ .ola_howton_1_a .ola_howton_1_b .ola_howton_1_c ]
+	# FIXME rewards
+}

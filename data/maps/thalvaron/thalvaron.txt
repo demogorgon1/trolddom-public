@@ -91,6 +91,10 @@ map_entity_spawn thalvaron_bar_patron_sarah: { entity thalvaron_bar_patron_sarah
 map_entity_spawn thalvaron_bar_patron_bill: { entity thalvaron_bar_patron_bill: { init_state: default } }
 map_entity_spawn thalvaron_bar_chef: { entity thalvaron_bar_chef: { init_state: default } }
 map_entity_spawn thalvaron_mathew_larsen: { entity thalvaron_mathew_larsen: { init_state: default } }
+map_entity_spawn thalvaron_ola_howton_1_quest_item_1: { entity thalvaron_ola_howton_1_quest_item_1: { init_state: default } }
+map_entity_spawn thalvaron_ola_howton_1_quest_item_2: { entity thalvaron_ola_howton_1_quest_item_2: { init_state: default } }
+map_entity_spawn thalvaron_ola_howton_1_quest_item_3: { entity thalvaron_ola_howton_1_quest_item_3: { init_state: default } }
+
 
 map_palette .tiles:
 {
@@ -209,6 +213,9 @@ map_palette .stuff:
 	entity_spawn thalvaron_bar_patron_bill: [ 149 240 98 ]		
 	entity_spawn thalvaron_bar_chef: [ 34 92 141 ]
 	entity_spawn thalvaron_mathew_larsen: [ 48 18 184 ]
+	entity_spawn thalvaron_ola_howton_1_quest_item_1: [ 94 31 81 ]
+	entity_spawn thalvaron_ola_howton_1_quest_item_2: [ 94 31 82 ]
+	entity_spawn thalvaron_ola_howton_1_quest_item_3: [ 94 31 83 ]
 
 	player_spawn .player_spawn: [ 0 0 255 ]
 	

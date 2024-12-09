@@ -154,13 +154,13 @@ quest thalvaron_gnome:
 
 	text:
 	[
-		"Make a huge profit by selling the extremely rare coin to Mary at the general store in the Valaris trade district."
+		"Make a huge profit by selling the extremely rare coin at Mathew's Emporium in the Valaris trade district."
 	]
 	
 	description: 
 	[
 		"I like you so I'll cut you in on a deal I wouldn't offer to just anyone. See this coin? It's extremely rare. It's worth at least {100000} on the free market, but I'll give it to a much lower price just to get it off my hands."
-		"I'd go sell it myself, but I don't have time to go to the city right now. Mary, the woman who runs the general store with her husband, will definitely pay a good price for it. She's been investing in this kind of stuff, you know."
+		"I'd go sell it myself, but I don't have time to go to the city right now. Show this to Mathew, the owner of Mathew's Emporium, and he'll lose his mind!"
 	]
 
 	progress:

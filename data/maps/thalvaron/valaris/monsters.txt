@@ -119,7 +119,7 @@ map_entity_spawn thalvaron_crab:
 
 	${
 		_level: 10
-		_faction: monsters
+		_faction: wildlife
 		_creature_type: beast
 		_default_behavior_state: .wandering_short
 		_loot_table: .crabs_10
