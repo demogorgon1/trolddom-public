@@ -350,3 +350,56 @@ ability npc_immortality:
 		aura: npc_immortality
 	}
 }
+
+cooldown npc_acid_spit:
+{
+	duration: 80
+}
+
+aura npc_acid_spit:
+{
+	string: "Acid Spit"
+	type: debuff
+	icon: icon_poison
+	duration: 150
+	flags: [ unique ]
+	stat_modifiers: { armor: { add_percent: -50 } }
+}
+
+particle_system npc_acid_spit:
+{
+	particle:
+	{
+		sprites: [ effect_witch_bolt ]
+		flags: [ attached no_rotation face_target ]
+		scale: 0.4
+		count: 1		
+	}
+}
+
+ability npc_acid_spit:
+{
+	string: "Acid Spit"
+	range: 7
+	min_range: 3
+	cast_time: 10
+	cooldowns: [ global npc_acid_spit ]
+	flags: [ offensive target_other target_hostile can_miss interruptable ]
+	states: [ in_combat ]
+	icon: icon_poison
+	delay: 3
+	target_particle_system: green_spell_hit
+	projectile: npc_acid_spit
+
+	direct_effect apply_aura:
+	{
+		aura: npc_acid_spit
+	}
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		function: { expression: a_mul_x x: weapon a: 0.6 }
+	}	
+}

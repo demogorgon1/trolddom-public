@@ -409,7 +409,8 @@ namespace tpublic
 				FIELD_ROUTE,
 				FIELD_ZONE,
 				FIELD_OUT_OF_ZONE_ACTION,
-				FIELD_CAN_MOVE
+				FIELD_CAN_MOVE,
+				FIELD_EVADE_DESPAWN
 			};
 
 			static void
@@ -429,6 +430,7 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_ROUTE, "route", offsetof(NPC, m_routeId))->SetDataType(DataType::ID_ROUTE);
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_ZONE, "zone", offsetof(NPC, m_zoneId))->SetDataType(DataType::ID_ZONE);
 				aSchema->DefineCustomObject<OutOfZoneAction>(FIELD_OUT_OF_ZONE_ACTION, "out_of_zone_action", offsetof(NPC, m_outOfZoneAction));
+				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_EVADE_DESPAWN, "evade_despawn", offsetof(NPC, m_evadeDespawn));
 			}
 
 			const StateEntry*
@@ -459,6 +461,7 @@ namespace tpublic
 				m_routeId = 0;
 				m_zoneId = 0;
 				m_outOfZoneAction = OutOfZoneAction();
+				m_evadeDespawn = false;
 
 				m_cooldowns.m_entries.clear();
 				m_castInProgress.reset();
@@ -493,6 +496,7 @@ namespace tpublic
 			uint32_t									m_routeId = 0;
 			uint32_t									m_zoneId = 0;
 			OutOfZoneAction								m_outOfZoneAction;
+			bool										m_evadeDespawn = false;
 
 			// Not serialized
 			Cooldowns									m_cooldowns;

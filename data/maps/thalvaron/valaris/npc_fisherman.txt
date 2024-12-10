@@ -15,6 +15,10 @@ dialogue_screen .fisherman_dialogue:
 	[
 		{ goto: .fisherman_trainer text: "Please teach me how to drag fish out of the water." }
 		{ quest: .fisherman_1 }
+		{ quest: .fisherman_2 }
+		{ quest<completion_only>: .fisherman_3 }		
+		{ quest: .fisherman_4 }
+		{ quest: .fisherman_5 }
 	]
 }
 
@@ -55,7 +59,7 @@ objective .fisherman_1:
 
 quest .fisherman_1:
 {
-	string: "Terrors In The Sand"
+	string: "Terrors in the Sand"
 
 	text:
 	[
@@ -64,7 +68,8 @@ quest .fisherman_1:
 	
 	description: 
 	[
-		"Look around. Isn't it just a wonderful place? It looks nice right? Well, unfortunately it's not as idyllic as it looks. This beach is haunted by horrible crabs that just won't leave you alone. Do something about it, thank you."
+		"The crabs of this beach have until recently been quite peaceful creatures. They might look mean and scary, but they'd never attack anyone unprovoked. But something has happened... now they've become very aggressive and you can't"
+		"take a walk on the beach without getting attacked! I need you to get rid of them!"
 	]
 
 	progress:
@@ -74,7 +79,7 @@ quest .fisherman_1:
 	
 	completion:
 	[
-		"I still see them all over the place."
+		"That should help, thanks."
 	]
 
 	level: 11
@@ -82,3 +87,189 @@ quest .fisherman_1:
 	# FIXME rewards
 }
 
+############################################################
+# Quest 2
+
+objective .fisherman_2:
+{
+	string: "Sand Spitters Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_crab_12 ]
+		count: 6
+	}
+}
+
+quest .fisherman_2:
+{
+	string: "Old Man's Cave"
+
+	text:
+	[
+		"Kill crabs in Old Man's cave."
+	]
+	
+	description: 
+	[
+		"Unfortunately the crabs of the beach are just the tip of the iceberg. Further down south you'll find Old Man's Cave. I wouldn't go near that place, but rumor has it that it's full of even more vicious crabs."
+		"Since you've already shown how adept you are at dealing with this crawling creatures, maybe you can go check that out as well?"
+	]
+
+	progress:
+	[
+		"Crabs don't kill themselves."
+	]
+	
+	completion:
+	[
+		"Good work!"
+	]
+
+	level: 12
+	objectives: [ .fisherman_2 ]
+	prerequisites: [ .fisherman_1 ]
+	# FIXME rewards
+}
+
+############################################################
+# Quest 3
+
+quest .fisherman_3:
+{
+	string: "Mysterious Pearl"
+
+	text:
+	[
+		"Bring the mysterious pearl back to the fisherman. Maybe he has seen something like this before?"
+	]
+	
+	description: 
+	[
+		"The pearl feels unnaturally cold to the touch. What was the dark elf in the cave and what was he doing?"
+	]
+	
+	completion:
+	[
+		"Some kind of shady elf with a magical pearl in Old Man's Cave? I don't like the sound of that. Let me see..."
+	]
+
+	level: 12
+	reward_xp_multiplier: 0.2
+	next_quest: .fisherman_4
+	quest_items: [ .crab_dark_elf_quest_drop ]
+}
+
+############################################################
+# Quest 4
+
+objective .fisherman_4:
+{
+	string: "Lurker of the Deep Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_crab_giant ]
+		count: 1
+	}
+}
+
+quest .fisherman_4:
+{
+	string: "Lurker of the Deep"
+
+	text:
+	[
+		"Summon the Lurker of the Deep and slay it."
+	]
+	
+	description: 
+	[
+		"I've heard rumors of cultists worshipping ancient, evil deities of the sea, causing the otherwise gentle crabs to lose their minds. With the elf dealt with, maybe the problem will subside, but I'm afraid"
+		"this beach still has the attention of whatever dark deity involved. My guessing that the pearl is a conduit for communicating with it. Take it back to the cave and see if you can use it to summon the deity and destroy it."
+		"There is probably a body of water inside the cave where it can be summoned. It might get intense so you should bring some friends."
+	]
+
+	progress:
+	[
+		"Are you still alive? I suppose it's because you haven't done your job yet."
+	]
+	
+	completion:
+	[
+		"Amazing, an enormous crab you say? Well. Anyway, I think you should go back to the city and tell Captain Jerrington about the elf. It sounds like a security issue to me."
+	]
+
+	level: 12
+	objectives: [ .fisherman_4 ]
+	prerequisites: [ .fisherman_3 ]
+	type: elite
+	reward_xp_multiplier: 0.5
+	quest_items: [ .fisherman_4_item ]
+	# FIXME rewards
+}
+
+ability .fisherman_4_summon:	
+{
+	string: "Mysterious Pearl"
+	description: "Summon Lurker of the Deep."
+	flags: [ target_self item ]
+	icon: icon_pearl
+	states: [ default in_combat ]
+	zone: thalvaron_crab_giant
+	requirement self<must_not_have_completed_quest>: .fisherman_4
+	
+	direct_effect spawn_entity:
+	{
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: thalvaron_crab_giant
+		map_entity_spawn: thalvaron_crab_giant
+	}	
+}
+
+item .fisherman_4_item:
+{
+	string: "Mysterious Pearl" 
+	icon: icon_pearl
+	item_level: 12
+	flags: [ unique not_sellable ]
+	use_ability: .fisherman_4_summon
+	binds: when_picked_up
+}
+
+############################################################
+# Quest 5
+
+quest .fisherman_5:
+{
+	string: "Shady Dark Elf Activities"
+
+	text:
+	[
+		"Tell Captain Jerrington at Eastgate about the dark elf."
+	]
+	
+	description: 
+	[
+		"As I said, you should go back to the city and report the elf activity. I know they'd be very interested in hearing about that."
+	]
+
+	progress:
+	[
+		"Go back to the city."
+	]
+	
+	completion:
+	[
+		"A dark elf sorceror? A giant crab monster? In a cave? Just south of the city? That's no good. This is important information. You deserve a reward!"	
+	]
+
+	level: 12
+	prerequisites: [ .fisherman_4 ]
+	# FIXME rewards
+}

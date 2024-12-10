@@ -550,6 +550,8 @@ namespace tpublic
 							m_descriptionFrom = DataReference(aMember);
 						else if(aMember->m_name == "source_visual")
 							m_sourceVisuals.push_back(Visual(aMember));
+						else if(aMember->m_name == "zone")
+							m_zoneId = aMember->GetId(DataType::ID_ZONE);
 						else
 							TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
 					}
@@ -599,6 +601,7 @@ namespace tpublic
 				aWriter->WriteObjects(m_sourceVisuals);
 				aWriter->WriteUInt(m_minRange);
 				aWriter->WriteUInts(m_mustHaveOneOfNearbyEntityIds);
+				aWriter->WriteUInt(m_zoneId);
 
 				for(uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 					aWriter->WriteUInt(m_resourceCosts[i]);
@@ -686,6 +689,8 @@ namespace tpublic
 					return false;
 				if(!aReader->ReadUInts(m_mustHaveOneOfNearbyEntityIds))
 					return false;
+				if (!aReader->ReadUInt(m_zoneId))
+					return false;
 
 				for (uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 				{
@@ -737,6 +742,7 @@ namespace tpublic
 			std::vector<uint32_t>								m_mustHaveOneOfNearbyEntityIds;
 			std::vector<Visual>									m_sourceVisuals;
 			uint32_t											m_triggerOnlyCooldownId = 0;
+			uint32_t											m_zoneId = 0;
 		};
 
 	}

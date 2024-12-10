@@ -45,7 +45,7 @@ map_entity_spawn .zuthyg:
 			if_not: .zuthyg_killed
 		}
 	}
-}
+}	
 
 entity zuthyg_the_golden: !NPC
 {

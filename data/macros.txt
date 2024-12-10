@@ -110,6 +110,7 @@
 			<exists _route> route: @_route
 			<exists _zone> zone: @_zone
 			<exists _out_of_zone_action> out_of_zone_action: @_out_of_zone_action
+			<exists _evade_despawn> evade_despawn: @_evade_despawn
 		}		
 		sprite<static>: 
 		{ 
@@ -118,6 +119,8 @@
 				{ states: [ default in_combat spawning evading ] frames: [ @_sprite ] }			
 				{ states: [ dead ] frames: [ @_sprite_dead ] z_offset: -2 }			
 			]		
+			
+			<exists _in_water_sprite> in_water_sprite: @_in_water_sprite
 		}				
 		<exists _auctioneer and _auctioneer> auctioneer<static>: { }
 		<exists _vendor_stock> vendor_stock: 

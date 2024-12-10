@@ -503,6 +503,7 @@ sprites:
 	sprite icon_barrel_1 : { tags: [ icon ] }
 	sprite icon_crab_meat_1 : { tags: [ icon ] }
 	sprite icon_gold_coin : { tags: [ icon ] }
+	sprite icon_pearl : { tags: [ icon ] }
 	
 }
 

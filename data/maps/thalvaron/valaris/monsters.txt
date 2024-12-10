@@ -138,6 +138,21 @@ map_entity_spawn thalvaron_crab_2:
 	entity thalvaron_crab_11: { init_state: default } 
 }
 
+map_entity_spawn thalvaron_crab_3: 
+{ 
+	entity thalvaron_crab_12: { init_state: default } 
+}
+
+map_entity_spawn thalvaron_crab_dark_elf: 
+{ 
+	entity thalvaron_crab_dark_elf: { init_state: default } 
+}
+
+map_entity_spawn thalvaron_crab_giant: 
+{ 
+	spawn_timer: { only_when_triggered: true }
+}
+
 # Crabs in the area just south of the city
 {
 
@@ -172,10 +187,6 @@ map_entity_spawn thalvaron_crab_2:
 	{
 		slots:
 		[	
-			{ 
-				possibility: { weight: 1 }
-			}
-			
 			!WORLD_DROPS {}				
 		]	
 	}
@@ -190,6 +201,123 @@ map_entity_spawn thalvaron_crab_2:
 	}
 
 	entity thalvaron_crab_11: !NPC { _string: "Sand Crawler" _sprite: crab_2 _sprite_dead: crab_2_dead }	
+}
+
+# Old man's cave crabs
+{
+
+	loot_table .crabs_12: 
+	{
+		slots:
+		[	
+			!WORLD_DROPS {}				
+		]	
+	}
+
+	${
+		_level: 12
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: .crabs_12
+		_abilities: [ { id: npc_acid_spit } { id: npc_attack } ]
+	}
+
+	entity thalvaron_crab_12: !NPC { _string: "Sand Spitter" _sprite: crab_3 _sprite_dead: crab_3_dead }	
+}
+
+# Dark elf crab master
+{
+	
+	loot_group .crab_dark_elf: {}
+
+	loot_table .crab_dark_elf: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: 
+				{ 
+					loot_group: .crab_dark_elf 
+					requirement self<must_not_have_active_quest>: .fisherman_3  
+					requirement self<must_not_have_completed_quest>: .fisherman_3  
+				} 
+			}
+			
+			!WORLD_DROPS {}			
+			!WORLD_DROPS_CLOTH {}
+		]	
+	}
+	
+	ability .crab_dark_elf_quest_drop_start_quest:	
+	{
+		string: "Mysterious Pearl"
+		description: "This item starts a quest."
+		flags: [ target_self item ]
+		icon: icon_pearl
+		direct_effect simple<start_quest>: .fisherman_3
+		states: [ default in_combat ]
+		requirement self<must_not_have_completed_quest>: .fisherman_3
+		requirement self<must_not_have_active_quest>: .fisherman_3
+	}
+
+	item .crab_dark_elf_quest_drop:
+	{
+		loot_groups: [ .crab_dark_elf ]		
+		string: "Mysterious Pearl" 
+		icon: icon_pearl
+		item_level: 12
+		flags: [ unique not_sellable ]
+		use_ability: .crab_dark_elf_quest_drop_start_quest
+		binds: when_picked_up
+	}
+
+	${
+		_level: 12
+		_faction: monsters
+		_creature_type: humanoid
+		_loot_table: .crab_dark_elf
+		_resource_mana: 1
+		_abilities: [ { id: npc_firebolt } { id: npc_attack } ]
+	}
+
+	entity thalvaron_crab_dark_elf: !NPC { _string: "Dark Elf" _sprite: dark_elf_1 _sprite_dead: dark_elf_1_dead }
+}
+
+# Giant crab boss
+{
+	loot_table .crab_giant: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { weight: 1 }
+			}
+			
+			!WORLD_DROPS {}			
+		]	
+	}
+
+	${
+		_level: 12
+		_elite: true
+		_faction: monsters
+		_creature_type: beast
+		_loot_table: .crab_giant
+		_abilities: [ { id: npc_rend } { id: npc_attack } ]
+		_large: true
+		_out_of_zone_action: { evade: true }
+		_immune_to_stun: true
+		_immune_to_immobilize: true
+		_immune_to_slow: true
+		_zone: thalvaron_crab_giant
+		_resource_health: 7
+		_weapon_damage: 2.5	
+		_can_move_on_all_non_view_blocking_tiles: true
+		_evade_despawn: true
+	}
+
+	entity thalvaron_crab_giant: !NPC { _string: "Lurker of the Deep" _sprite: giga_grab_1 _sprite_dead: giga_grab_1_dead _in_water_sprite: giga_grab_1_submerged }
 }
 
 ##########################################################################################

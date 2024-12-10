@@ -278,6 +278,8 @@ sprites:
 	sprite man_33: { dead: man_33_dead }
 	sprite piglet: { dead: piglet_dead }
 	sprite crab_2: { dead: crab_2_dead }
+	sprite crab_3: { dead: crab_3_dead }
+	sprite dark_elf_1: { dead: dark_elf_1_dead }
 	
 	cursor: { position: [ 0 240 ] }
 
@@ -287,6 +289,8 @@ sprites:
 	sprite man_33_dead: { }
 	sprite piglet_dead: { }
 	sprite crab_2_dead: { }
+	sprite crab_3_dead: { }
+	sprite dark_elf_1_dead: { }
 	
 }
 
@@ -299,10 +303,13 @@ sprites:
 	cursor: { position: [ 0 0 ] }
 
 	sprite dragon_1: { dead: dragon_1_dead tags: [ dragon ] }
+	sprite giga_grab_1: { dead: giga_grab_1_dead }
+	sprite giga_grab_1_submerged: { dead: giga_grab_1_dead }
 	
 	cursor: { position: [ 0 32 ] }
 	
 	sprite dragon_1_dead: { }	
+	sprite giga_grab_1_dead: { }
 }
 
 sprites:

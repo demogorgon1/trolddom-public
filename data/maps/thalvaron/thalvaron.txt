@@ -37,6 +37,9 @@ zone .jungle: { string: "Xandralis" }
 zone .lich_woods: { string: "Hollows of the Undying" }
 zone .way_north_pass: { string: "The Northern Pass" }
 zone .duskwhisper_caves: { string: "Duskwhisper Caves" }
+zone .old_mans_cave: { string: "Old Man's Cave" }
+
+zone thalvaron_crab_giant: { } #string: "Old Man's Pool" }
 	
 route thalvaron_default_patrol:
 {
@@ -228,6 +231,9 @@ map_palette .stuff:
 	entity_spawn thalvaron_crab_2: [ 14 131 184 ]		
 	entity_spawn thalvaron_deer: [ 250 240 12 ]
 	entity_spawn thalvaron_lieutenant_tusleholm: [ 252 210 112 ]	
+	entity_spawn thalvaron_crab_3: [ 212 210 112 ]	
+	entity_spawn thalvaron_crab_dark_elf: [ 252 140 112 ]	
+	entity_spawn thalvaron_crab_giant: [ 252 10 12 ]	
 
 	player_spawn .player_spawn: [ 0 0 255 ]
 	
@@ -278,7 +284,7 @@ map_palette .zones:
 	zone .lich_woods: [ 222 255 0 ]
 	zone .way_north_pass: [ 0 140 255 ]
 	zone .duskwhisper_caves: [ 133 141 55 ]
-	
+	zone .old_mans_cave: [ 130 112 222 ]
 }
 
 map_palette .sub_zones:
@@ -292,6 +298,8 @@ map_palette .sub_zones:
 	sub_zone .valoris_royal_district: [ 192 255 44 ]
 	sub_zone .valoris_eastgate: [ 30 255 140 ]
 	sub_zone .valoris_south_town: [ 174 174 49 ]
+	
+	sub_zone thalvaron_crab_giant: [ 39 192 83 ]
 }
 
 map_palette .routes:

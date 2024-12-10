@@ -900,7 +900,11 @@ namespace tpublic::Systems
 			break;
 
 		case EntityState::ID_EVADING:
-			if(position->m_position == npc->m_anchorPosition)
+			if(npc->m_evadeDespawn)
+			{
+				returnValue = EntityState::ID_DESPAWNING;;
+			}
+			else if(position->m_position == npc->m_anchorPosition)
 			{
 				npc->m_restoreResources = true;
 
