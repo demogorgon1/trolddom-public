@@ -45,6 +45,30 @@ namespace tpublic
 				NUM_SPRITE_INDICES
 			};
 
+			enum Flag : uint8_t
+			{
+				FLAG_WALKABLE = 0x01,
+				FLAG_BLOCK_LINE_OF_SIGHT = 0x02
+			};
+
+			static uint8_t
+			SourceToFlags(
+				const SourceNode*		aSource) 
+			{
+				uint8_t flags = 0;
+				aSource->GetArray()->ForEachChild([&](
+					const SourceNode* aChild)
+				{	
+					if(aChild->IsIdentifier("walkable"))
+						flags |= FLAG_WALKABLE;
+					else if (aChild->IsIdentifier("block_line_of_sight"))
+						flags |= FLAG_BLOCK_LINE_OF_SIGHT;
+					else
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid flag.", aChild->GetIdentifier());
+				});
+				return flags;
+			}
+
 			void
 			Verify() const
 			{
@@ -74,6 +98,10 @@ namespace tpublic
 							aChild->GetIdArray(DataType::ID_SPRITE, m_sprites);
 							TP_VERIFY(m_sprites.size() == NUM_SPRITE_INDICES, aChild->m_debugInfo, "Invalid number of sprites.");
 						}
+						else if(aChild->m_name == "flags")
+						{
+							m_flags = SourceToFlags(aChild);
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -87,6 +115,7 @@ namespace tpublic
 				IWriter*				aStream) const override
 			{
 				aStream->WriteUInts(m_sprites);
+				aStream->WritePOD(m_flags);
 			}
 
 			bool
@@ -95,11 +124,14 @@ namespace tpublic
 			{
 				if(!aStream->ReadUInts(m_sprites))
 					return false;
+				if (!aStream->ReadPOD(m_flags))
+					return false;
 				return true;
 			}
 
 			// Public data
 			std::vector<uint32_t>		m_sprites;
+			uint8_t						m_flags = FLAG_BLOCK_LINE_OF_SIGHT;
 		};
 
 	}

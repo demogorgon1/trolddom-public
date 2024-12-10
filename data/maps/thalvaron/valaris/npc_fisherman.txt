@@ -18,7 +18,7 @@ dialogue_screen .fisherman_dialogue:
 		{ quest: .fisherman_2 }
 		{ quest<completion_only>: .fisherman_3 }		
 		{ quest: .fisherman_4 }
-		{ quest: .fisherman_5 }
+		{ quest<offer_only>: .fisherman_5 }
 	]
 }
 

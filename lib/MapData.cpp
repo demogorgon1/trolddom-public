@@ -5,6 +5,7 @@
 #include <tpublic/Data/MapCliff.h>
 #include <tpublic/Data/MapPalette.h>
 #include <tpublic/Data/Sprite.h>
+#include <tpublic/Data/Wall.h>
 
 #include <tpublic/AutoDoodads.h>
 #include <tpublic/CliffBuilder.h>
@@ -929,17 +930,29 @@ namespace tpublic
 						{
 							const Data::Sprite* doodadSprite = aManifest->GetById<tpublic::Data::Sprite>(doodadSpriteId);
 							nonWalkableDoodad = (doodadSprite->m_info.m_flags & SpriteInfo::FLAG_TILE_WALKABLE) == 0;
+
+							// FIXME: support larger non-walkable doodads
 						}
 					}
 
-					bool hasWall = GetWall({ x, y }) != 0;
+					uint32_t wallId = GetWall({ x, y });
+					bool wallNotWalkable = false;
+					bool wallBlockLineOfSight = false;
+					if(wallId != 0)
+					{
+						const Data::Wall* wall = aManifest->GetById<Data::Wall>(wallId);
+						if(wall->m_flags & Data::Wall::FLAG_BLOCK_LINE_OF_SIGHT)
+							wallBlockLineOfSight = true;
+						if ((wall->m_flags & Data::Wall::FLAG_WALKABLE) == 0)
+							wallNotWalkable = true;
+					}
 
 					const Data::Sprite* sprite = aManifest->GetById<tpublic::Data::Sprite>(*in);
 
-					if (!hasWall && !nonWalkableDoodad && (sprite->m_info.m_flags & SpriteInfo::FLAG_TILE_WALKABLE))
+					if (!wallNotWalkable && !nonWalkableDoodad && (sprite->m_info.m_flags & SpriteInfo::FLAG_TILE_WALKABLE))
 						*outWalkable |= 1 << bit;
 
-					if (hasWall || (sprite->m_info.m_flags & SpriteInfo::FLAG_TILE_BLOCK_LINE_OF_SIGHT))
+					if (wallBlockLineOfSight || (sprite->m_info.m_flags & SpriteInfo::FLAG_TILE_BLOCK_LINE_OF_SIGHT))
 						*outBlockLineOfSight |= 1 << bit;
 
 					// Next tile

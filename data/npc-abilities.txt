@@ -403,3 +403,36 @@ ability npc_acid_spit:
 		function: { expression: a_mul_x x: weapon a: 0.6 }
 	}	
 }
+
+cooldown npc_trap:
+{
+	duration: 100
+}
+
+aura npc_trap:
+{
+	string: "Trapped"
+	type: debuff
+	icon: icon_net
+	duration: 40
+	flags: [ unique ]
+	aura_effect immobilize: {}
+	particle_system: net_trap
+}
+
+ability npc_trap:
+{
+	string: "Trap"
+	range: 2
+	cast_time: 10
+	cooldowns: [ global npc_trap ]
+	flags: [ offensive target_other target_hostile can_miss interruptable ]
+	states: [ in_combat ]
+	icon: icon_net
+	delay: 3
+
+	direct_effect apply_aura:
+	{
+		aura: npc_trap
+	}	
+}

@@ -1,13 +1,29 @@
-dialogue_screen .maude_johansson_dialogue:
+dialogue_screen .maude_johansson_dialogue_2:
 {
 	text: 
 	[	
-		"FIXME"
+		"Well, no, I could certainly use some help."
 	]		
 	
 	options:
 	[
-		{ text: "Is everything all right around here?" script: trigger }
+		{ quest: .maude_johansson_1 }
+		{ quest: .maude_johansson_2 }
+	]
+}
+
+dialogue_screen .maude_johansson_dialogue:
+{
+	text: 
+	[	
+		"Bandits and poachers in my woods! Can't have it!"
+	]		
+	
+	options:
+	[
+		{ text: "Is everything all right around here?" script: trigger goto: .maude_johansson_dialogue_2 }
+		{ quest: .maude_johansson_1 }
+		{ quest: .maude_johansson_2 }
 	]
 }
 
@@ -28,5 +44,97 @@ entity thalvaron_maude_johansson: !NPC
 	_creature_type: humanoid
 	_loot_table: .npc
 	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .maude_johansson_1:
+{
+	string: "Poachers Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_rebel_poacher ]
+		count: 5
+	}
+}
+
+quest .maude_johansson_1:
+{
+	string: "Hunters Hunted"
+
+	text:
+	[
+		"Hunt down poachers east of the Johansson farm."
+	]
+	
+	description: 
+	[
+		"We're struggling with poachers hunting down the deer in the area. I need you to make them stop."
+	]
+
+	progress:
+	[
+		"Did you get them?"
+	]
+	
+	completion:
+	[
+		"Good job."
+	]
+
+	level: 11
+	objectives: [ .maude_johansson_1 ]
+	# FIXME rewards
+}
+
+############################################################
+# Quest 2
+
+objective .maude_johansson_2:
+{
+	string: "Jimbo Haggins"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_rebel_poacher_leader ]
+		count: 1
+	}
+}
+
+quest .maude_johansson_2:
+{
+	string: "A Real Piece Of Work"
+
+	text:
+	[
+		"Find the leader of the poachers and kill him."
+	]
+	
+	description: 
+	[
+		"The leader of the poachers is a guy called Jimbo Haggins and he's a real piece of work. To solve the poaching problem once and for all I need you to hunt him down and make him regret ever setting foot on my property."
+		"You'll find his camp somewhere to the east of here."
+	]
+
+	progress:
+	[
+		"Giving up?"
+	]
+	
+	completion:
+	[
+		"Excellent."
+	]
+
+	level: 11
+	objectives: [ .maude_johansson_2 ]
+	prerequisites: [ .maude_johansson_1 ]
+	# FIXME rewards
 }
 

@@ -115,3 +115,19 @@ particle_system level_up:
 	}
 }
 
+particle_system net_trap:
+{
+	particle:
+	{
+		sprites: [ effect_net_trap ]
+		flags: [ attached ]
+		count: 1
+		scale: 1
+		alpha: 1
+		fade_in: 150	
+		fade_out: 150
+		offset_x: 0.5
+		offset_y: 0.5	
+	}
+}
+

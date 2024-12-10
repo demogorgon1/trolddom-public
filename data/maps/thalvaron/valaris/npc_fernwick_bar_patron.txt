@@ -58,7 +58,7 @@ quest .fernwick_bar_patron_1:
 
 	text:
 	[
-		"Collect meat from crabs around the city moat and return to John in the general store."
+		"Find Roger's lost lunch."
 	]
 	
 	description: 

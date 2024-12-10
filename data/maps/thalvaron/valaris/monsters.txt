@@ -44,6 +44,29 @@ map_entity_spawn thalvaron_rebel_outside:
 	entity thalvaron_rebel_skirmisher_10_d: { init_state: default } 
 }
 
+map_entity_spawn thalvaron_rebel_poacher: 
+{ 
+	entity thalvaron_rebel_poacher: { init_state: default } 
+}
+
+map_entity_spawn thalvaron_rebel_poacher_dog: 
+{ 
+	entity thalvaron_rebel_poacher_dog: { init_state: default } 
+}
+
+map_entity_spawn thalvaron_rebel_poacher_leader: 
+{ 
+	entity thalvaron_rebel_poacher_leader: { init_state: default } 
+}
+
+map_entity_spawn thalvaron_rebel_fernwick:
+{ 
+	entity thalvaron_rebel_bandit_a: { init_state: default } 
+	entity thalvaron_rebel_bandit_b: { init_state: default } 
+	entity thalvaron_rebel_bandit_c: { init_state: default } 
+	entity thalvaron_rebel_bandit_d: { init_state: default } 
+}
+
 # Rebels inside the city
 {
 	loot_table .rebel_10: 
@@ -90,6 +113,68 @@ map_entity_spawn thalvaron_rebel_outside:
 	entity thalvaron_rebel_skirmisher_10_b: !NPC { _string: "Rebel Skirmisher" _sprite: rebel_2 _sprite_dead: rebel_2_dead }
 	entity thalvaron_rebel_skirmisher_10_c: !NPC { _string: "Rebel Skirmisher" _sprite: rebel_3 _sprite_dead: rebel_3_dead }
 	entity thalvaron_rebel_skirmisher_10_d: !NPC { _string: "Rebel Scout" _sprite: rebel_4 _sprite_dead: rebel_4_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
+}
+
+# Poachers
+{
+
+	${
+		_level: 11
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: .default_humanoid
+	}
+
+	entity thalvaron_rebel_poacher: !NPC { _string: "Poacher" _sprite: rebel_4 _sprite_dead: rebel_4_dead _abilities: [ { id: npc_shoot }{ id: npc_trap }{ id: npc_attack } ] }
+}
+
+# Hunting dog
+{
+
+	${
+		_level: 11
+		_faction: monsters
+		_creature_type: beast
+		_weapon_damage: 1.1
+		_default_behavior_state: .wandering_short
+		_loot_table: .default_humanoid
+	}
+
+	entity thalvaron_rebel_poacher_dog: !NPC { _string: "Hunting Hound" _sprite: wolf_2 _sprite_dead: wolf_2_dead _abilities: [ { id: npc_attack } ] }
+}
+
+# Poacher leader
+{
+
+	${
+		_level: 11
+		_faction: monsters
+		_creature_type: humanoid
+		_resource_health: 2
+		_weapon_damage: 1.3
+		_default_behavior_state: .wandering_short
+		_loot_table: .default_humanoid
+	}
+
+	entity thalvaron_rebel_poacher_leader: !NPC { _string: "Jimbo Haggins" _sprite: rebel_3 _sprite_dead: rebel_3_dead _abilities: [ { id: npc_rend }{ id: npc_attack } ] }
+}
+
+# Rebels around Fernwick
+{
+
+	${
+		_level: 11
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: .default_humanoid
+	}
+
+	entity thalvaron_rebel_bandit_a: !NPC { _string: "Rebel Bandit" _sprite: rebel_1 _sprite_dead: rebel_1_dead }
+	entity thalvaron_rebel_bandit_b: !NPC { _string: "Rebel Bandit" _sprite: rebel_2 _sprite_dead: rebel_2_dead }
+	entity thalvaron_rebel_bandit_c: !NPC { _string: "Rebel Bandit" _sprite: rebel_3 _sprite_dead: rebel_3_dead }
+	entity thalvaron_rebel_bandit_d: !NPC { _string: "Rebel Pathfinder" _sprite: rebel_4 _sprite_dead: rebel_4_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
 }
 
 ##########################################################################################

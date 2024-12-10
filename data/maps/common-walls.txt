@@ -22,10 +22,32 @@ sprites:
 	sprite stone_wall_w: { }
 	sprite stone_wall_e: { }
 	sprite stone_wall_s: { }	
+	
+	cursor: { position: [ 0 16 ] }
+
+	sprite fence_w_e: { }
+	sprite fence_n_s: { }
+	sprite fence_w_s: { }
+	sprite fence_e_s: { }
+	sprite fence_n_e: { }
+	sprite fence_w_n: { }
+	sprite fence_w_e_s: { }
+	sprite fence_w_e_n: { }
+	sprite fence_w_n_s: { }
+	sprite fence_e_n_s: { }
+	sprite fence_w_e_n_s: { }
+	sprite fence: { }
+	sprite fence_n: { }
+	sprite fence_w: { }
+	sprite fence_e: { }
+	sprite fence_s: { }	
+	
 }
 
 wall stone_wall:
 {
+	flags: [ block_line_of_sight ]
+
 	sprites: 
 	[ 
         stone_wall
@@ -44,5 +66,30 @@ wall stone_wall:
         stone_wall_e_n_s		
         stone_wall_w_n_s
         stone_wall_w_e_n_s
+	]
+}
+
+wall fence:
+{
+	flags: [ walkable ]
+
+	sprites: 
+	[ 
+        fence
+		fence_e
+		fence_w	
+		fence_w_e
+		fence_n
+        fence_n_e
+        fence_w_n
+        fence_w_e_n
+		fence_s
+        fence_e_s
+	    fence_w_s
+        fence_w_e_s		
+		fence_n_s
+        fence_e_n_s		
+        fence_w_n_s
+        fence_w_e_n_s
 	]
 }

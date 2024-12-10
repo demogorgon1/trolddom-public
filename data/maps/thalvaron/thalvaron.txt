@@ -102,6 +102,8 @@ map_entity_spawn thalvaron_wild_boar: { entity thalvaron_wild_boar: { init_state
 map_entity_spawn thalvaron_piglet: { entity thalvaron_piglet: { init_state: default } }
 map_entity_spawn thalvaron_fisherman: { entity thalvaron_fisherman: { init_state: default } }
 map_entity_spawn thalvaron_lieutenant_tusleholm: { entity thalvaron_lieutenant_tusleholm: { init_state: default } }
+map_entity_spawn thalvaron_fernwick_bar_patron_2_quest_item: { entity thalvaron_fernwick_bar_patron_2_quest_item: { init_state: default } }
+map_entity_spawn thalvaron_fernwick_bar_patron_2: { entity thalvaron_fernwick_bar_patron_2: { init_state: default } }
 
 map_palette .tiles:
 {
@@ -234,10 +236,16 @@ map_palette .stuff:
 	entity_spawn thalvaron_crab_3: [ 212 210 112 ]	
 	entity_spawn thalvaron_crab_dark_elf: [ 252 140 112 ]	
 	entity_spawn thalvaron_crab_giant: [ 252 10 12 ]	
+	entity_spawn thalvaron_rebel_poacher: [ 152 1 212 ]	
+	entity_spawn thalvaron_rebel_poacher_dog: [ 200 200 15 ]		
+	entity_spawn thalvaron_rebel_poacher_leader: [ 250 200 15 ]			
+	entity_spawn thalvaron_fernwick_bar_patron_2_quest_item: [ 150 123 15 ]				
+	entity_spawn thalvaron_rebel_fernwick: [ 150 123 115 ]					
 
 	player_spawn .player_spawn: [ 0 0 255 ]
 	
 	wall stone_wall: [ 128 128 128 ]
+	wall fence: [ 64 128 140 ]
 }
 
 map_palette .levels:
