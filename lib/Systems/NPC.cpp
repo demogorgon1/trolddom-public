@@ -14,6 +14,7 @@
 #include <tpublic/Data/Faction.h>
 #include <tpublic/Data/LootTable.h>
 #include <tpublic/Data/NPCBehaviorState.h>
+#include <tpublic/Data/Route.h>
 
 #include <tpublic/Systems/NPC.h>
 
@@ -285,13 +286,13 @@ namespace tpublic::Systems
 
 						if (aEntityState == EntityState::ID_DEFAULT && isThreatSource && (!faction->IsNeutralOrFriendly() || combat->m_targetEntityInstanceId == aEntity->GetEntityInstanceId()))
 						{
-							const tpublic::Components::CombatPublic* playerCombatPublic = aEntity->GetComponent<tpublic::Components::CombatPublic>();
+							const tpublic::Components::CombatPublic* targetCombatPublic = aEntity->GetComponent<tpublic::Components::CombatPublic>();
 							int32_t aggroRange = 0;
 
 							if(blind)
 								aggroRange = 1;
 							else
-								aggroRange = GetManifest()->m_npcMetrics.GetAggroRangeForLevelDifference((int32_t)combat->m_level, (int32_t)playerCombatPublic->m_level);
+								aggroRange = GetManifest()->m_npcMetrics.GetAggroRangeForLevelDifference((int32_t)combat->m_level, (int32_t)targetCombatPublic->m_level);
 
 							if(aDistanceSquared <= aggroRange * aggroRange)
 								aContext->m_eventQueue->EventQueueThreat({ aEntity->GetEntityInstanceId(), aEntity->GetSeq() }, aEntityInstanceId, 1, aContext->m_tick);
@@ -397,11 +398,34 @@ namespace tpublic::Systems
 					switch(npc->m_npcBehaviorState->m_behavior)
 					{
 					case NPCBehavior::ID_PATROLLING:
+						if(npc->m_npcBehaviorState->m_despawnIfLostPlayer && npc->m_effectiveRouteId != 0)
+						{
+							const Components::Tag* tag = GetComponent<Components::Tag>(aComponents);
+
+							bool despawn = false;
+
+							if(tag->m_playerEntityInstanceId == 0)
+								despawn = true;
+
+							if(!despawn)
+							{
+								const EntityInstance* taggedByEntityInstance = aContext->m_worldView->WorldViewSingleEntityInstance(tag->m_playerEntityInstanceId);
+								const Components::Position* taggedByEntityPosition = taggedByEntityInstance != NULL ? taggedByEntityInstance->GetComponent<Components::Position>() : NULL;
+								despawn = taggedByEntityPosition == NULL || taggedByEntityInstance->GetState() == EntityState::ID_DEAD || !Helpers::IsWithinDistance(position, taggedByEntityPosition, 10);
+							}
+
+							if(despawn)
+								returnValue = EntityState::ID_DESPAWNING;
+						}
+
 						if (npc->m_moveCooldownUntilTick < aContext->m_tick && npc->m_effectiveRouteId != 0)
 						{							
 							bool paused = false;
 
-							if(npc->m_npcBehaviorState->m_pauseWhenTargetedByNearbyPlayer)
+							if (npc->m_npcBehaviorState->m_combatEventPauseTicks != 0)
+								paused = aContext->m_tick - combat->m_lastCombatEventTick <= npc->m_npcBehaviorState->m_combatEventPauseTicks;
+
+							if(!paused && npc->m_npcBehaviorState->m_pauseWhenTargetedByNearbyPlayer)
 							{
 								std::vector<uint32_t> entityIds = { 0 }; // Players
 
@@ -432,7 +456,9 @@ namespace tpublic::Systems
 
 									Vec2 direction;
 									bool shouldChangeDirection = false;
-									if (mapRouteData->GetDirection(npc->m_effectiveRouteId, npc->m_subRouteIndex, position->m_position, npc->m_routeIsReversing, direction, shouldChangeDirection))
+									uint32_t index = UINT32_MAX;
+
+									if (mapRouteData->GetDirection(npc->m_effectiveRouteId, npc->m_subRouteIndex, position->m_position, npc->m_routeIsReversing, direction, shouldChangeDirection, index))
 									{
 										IEventQueue::EventQueueMoveRequest moveRequest;
 										moveRequest.AddToPriorityList(direction);
@@ -443,6 +469,22 @@ namespace tpublic::Systems
 
 										if (shouldChangeDirection)
 											npc->m_routeIsReversing = !npc->m_routeIsReversing;
+
+										if(index != UINT32_MAX)
+										{
+											const Data::Route* routeData = GetManifest()->GetById<Data::Route>(npc->m_effectiveRouteId);
+											for(size_t triggerIndex = 0; triggerIndex < routeData->m_triggers.size(); triggerIndex++)
+											{
+												const std::unique_ptr<Data::Route::Trigger>& trigger = routeData->m_triggers[triggerIndex];
+												if(trigger->m_index == (uint32_t)triggerIndex && !npc->m_handledRouteTriggerIndices.contains(trigger->m_index))
+												{
+													if(trigger->m_chat)
+														aContext->m_eventQueue->EventQueueChat(aEntityInstanceId, trigger->m_chat.value());
+
+													npc->m_handledRouteTriggerIndices.insert(trigger->m_index);
+												}
+											}
+										}
 									}
 								}
 							}

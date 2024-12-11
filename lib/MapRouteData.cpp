@@ -208,7 +208,8 @@ namespace tpublic
 		const Vec2&				aPosition,
 		bool					aIsReversing,
 		Vec2&					aOutDirection,
-		bool&					aOutChangeDirection) const
+		bool&					aOutChangeDirection,
+		uint32_t&				aOutIndex) const
 	{
 		const Route* route = NULL;
 
@@ -232,6 +233,8 @@ namespace tpublic
 			{
 				size_t index = i->second;
 				size_t nextIndex = 0;
+
+				aOutIndex = (uint32_t)index;
 
 				if(aIsReversing)
 				{
@@ -289,6 +292,8 @@ namespace tpublic
 				case DirectionField::DIRECTION_EAST:	aOutDirection = { 1, 0 }; break;
 				default:								assert(false);
 				}
+
+				aOutIndex = UINT32_MAX;
 			}
 		}
 

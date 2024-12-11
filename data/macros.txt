@@ -139,6 +139,7 @@
 		{
 			registration_price_tiers: @_guild_registrar_price_tiers
 		}
+		<exists _is_threat_source and _is_threat_source> threat_source: { }
 	}
 	
 	<exists _tags> tags: @_tags

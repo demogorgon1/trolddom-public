@@ -81,6 +81,10 @@ namespace tpublic
 						{
 							m_maxRange = aChild->GetUInt32();
 						}
+						else if (aChild->m_name == "combat_event_pause_ticks")
+						{
+							m_combatEventPauseTicks = aChild->GetInt32();
+						}
 						else if (aChild->m_name == "max_ticks")
 						{
 							m_maxTicks = aChild->GetUInt32();
@@ -92,6 +96,10 @@ namespace tpublic
 						else if(aChild->m_name == "on_route")
 						{
 							m_onRoute = OnRoute(aChild);
+						}
+						else if(aChild->m_name == "despawn_if_lost_player")
+						{
+							m_despawnIfLostPlayer = aChild->GetBool();
 						}
 						else
 						{
@@ -111,6 +119,8 @@ namespace tpublic
 				aStream->WriteUInt(m_maxTicks);
 				aStream->WriteBool(m_pauseWhenTargetedByNearbyPlayer);
 				aStream->WriteOptionalObject(m_onRoute);
+				aStream->WriteInt(m_combatEventPauseTicks);
+				aStream->WriteBool(m_despawnIfLostPlayer);
 			}
 
 			bool
@@ -127,6 +137,10 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadOptionalObject(m_onRoute))
 					return false;
+				if (!aStream->ReadInt(m_combatEventPauseTicks))
+					return false;
+				if (!aStream->ReadBool(m_despawnIfLostPlayer))
+					return false;
 				return true;
 			}
 
@@ -135,8 +149,9 @@ namespace tpublic
 			uint32_t				m_maxRange = 0;
 			uint32_t				m_maxTicks = 0;
 			bool					m_pauseWhenTargetedByNearbyPlayer = false;
+			int32_t					m_combatEventPauseTicks = 0;
 			std::optional<OnRoute>	m_onRoute;
-
+			bool					m_despawnIfLostPlayer = false;
 		};
 
 	}

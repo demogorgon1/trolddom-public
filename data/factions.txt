@@ -26,3 +26,8 @@ faction neutral:
 {
 	flags: [ neutral ]
 }
+
+faction combat_npcs:
+{
+	flags: [ friendly ]
+}

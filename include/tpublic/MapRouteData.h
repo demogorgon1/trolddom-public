@@ -120,7 +120,8 @@ namespace tpublic
 					const Vec2&				aPosition,
 					bool					aIsReversing,
 					Vec2&					aOutDirection,
-					bool&					aOutChangeDirection) const;
+					bool&					aOutChangeDirection,
+					uint32_t&				aOutIndex) const;
 
 		// Public data
 		std::vector<std::unique_ptr<Route>>			m_routes;

@@ -480,6 +480,7 @@ namespace tpublic
 				m_routeIsReversing = false;
 				m_subRouteIndex = SIZE_MAX;
 				m_lastTargetPosition = Vec2();
+				m_handledRouteTriggerIndices.clear();
 			}
 
 			// Public data			
@@ -524,6 +525,7 @@ namespace tpublic
 			};
 
 			std::optional<SpawnWithTarget>				m_spawnWithTarget;
+			std::unordered_set<uint32_t>				m_handledRouteTriggerIndices;
 		};
 	}
 

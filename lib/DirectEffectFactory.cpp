@@ -13,6 +13,7 @@
 #include <tpublic/DirectEffects/RemoveAura.h>
 #include <tpublic/DirectEffects/Simple.h>
 #include <tpublic/DirectEffects/SpawnEntity.h>
+#include <tpublic/DirectEffects/StartRoute.h>
 #include <tpublic/DirectEffects/Threat.h>
 #include <tpublic/DirectEffects/TriggerAbility.h>
 
@@ -36,6 +37,7 @@ namespace tpublic
 		_Register<DirectEffects::RemoveAura>();
 		_Register<DirectEffects::Simple>();
 		_Register<DirectEffects::SpawnEntity>();
+		_Register<DirectEffects::StartRoute>();
 		_Register<DirectEffects::Threat>();
 		_Register<DirectEffects::TriggerAbility>();
 	}

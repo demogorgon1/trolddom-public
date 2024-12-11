@@ -1,0 +1,55 @@
+dialogue_screen .cubert_galston_dialogue:
+{
+	text: 
+	[	
+		"How did you get here? Please help get me out of here!"
+	]		
+	
+	options:
+	[
+		{ text: "Yes, let's go." requirement self<must_have_active_quest>: .lieutenant_tinley_3 script: npc_trigger }	
+	]
+}
+
+
+dialogue_root .cubert_galston_dialogue:
+{
+	.cubert_galston_dialogue: { }
+}
+
+entity thalvaron_cubert_galston: !NPC
+{
+	_string: "Cubert Galston"
+	_dialogue_root: .cubert_galston_dialogue	
+	_dialogue_scripts: [ npc_trigger ]
+	_sprite: man_9
+	_sprite_dead: man_9_dead
+	_level: 11
+	_faction: combat_npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_default_trigger_ability: .cubert_galston_start_escort
+	_default_behavior_state: .cubert_galston
+	_is_threat_source: true
+}
+
+route thalvaron_cubert_galston_escort: 
+{ 
+	trigger<30>: { chat: { type: say text: "Ahh, the fresh mountain air! Finally!" } }
+}
+
+npc_behavior_state .cubert_galston:
+{
+	behavior: patrolling
+	pause_when_targeted_by_nearby_player: true
+	combat_event_pause_ticks: 20
+	despawn_if_lost_player: true
+}
+
+ability .cubert_galston_start_escort:
+{
+	flags: [ always_in_range always_in_line_of_sight ]
+	
+	direct_effect start_route: { route: thalvaron_cubert_galston_escort }	
+}

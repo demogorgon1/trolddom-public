@@ -10,6 +10,7 @@ dialogue_screen .lieutenant_tinley_dialogue:
 		{ quest<completion_only>: .captain_jerrington_2 }
 		{ quest: .lieutenant_tinley_1 }
 		{ quest<offer_only>: .lieutenant_tinley_2 }
+		{ quest: .lieutenant_tinley_3 }
 	]
 }
 
@@ -42,7 +43,7 @@ objective .lieutenant_tinley_1:
 	
 	kill_npc:
 	{
-		entities: [ thalvaron_rebel_10 ]
+		entities: [ thalvaron_rebel_skirmisher_10_a thalvaron_rebel_skirmisher_10_b thalvaron_rebel_skirmisher_10_c thalvaron_rebel_skirmisher_10_d ]
 		count: 6
 	}
 }
@@ -106,4 +107,35 @@ quest .lieutenant_tinley_2:
 	prerequisites: [ .lieutenant_tinley_1 ]
 	level: 10
 	reward_xp_multiplier: 0.1
+}
+
+############################################################
+# Quest 3
+
+quest .lieutenant_tinley_3:
+{
+	string: "Hostage Situation"
+
+	text:
+	[
+		"Locate Cubert Galston in the Mountain Hotel and escort him to safety."
+	]
+	
+	description: 
+	[
+		"FIXME"
+	]
+
+	progress:
+	[
+		"What are you still doing here?"
+	]
+	
+	completion:
+	[
+		"FIXME"
+	]
+
+	prerequisites: [ .lieutenant_tinley_1 ]
+	level: 11
 }

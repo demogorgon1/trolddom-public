@@ -41,9 +41,7 @@ zone .old_mans_cave: { string: "Old Man's Cave" }
 
 zone thalvaron_crab_giant: { } #string: "Old Man's Pool" }
 	
-route thalvaron_default_patrol:
-{
-}
+route thalvaron_default_patrol: { }
 
 npc_behavior_state thalvaron_default_patrol_friendly:
 {
@@ -104,6 +102,7 @@ map_entity_spawn thalvaron_fisherman: { entity thalvaron_fisherman: { init_state
 map_entity_spawn thalvaron_lieutenant_tusleholm: { entity thalvaron_lieutenant_tusleholm: { init_state: default } }
 map_entity_spawn thalvaron_fernwick_bar_patron_2_quest_item: { entity thalvaron_fernwick_bar_patron_2_quest_item: { init_state: default } }
 map_entity_spawn thalvaron_fernwick_bar_patron_2: { entity thalvaron_fernwick_bar_patron_2: { init_state: default } }
+map_entity_spawn thalvaron_cubert_galston: { entity thalvaron_cubert_galston: { init_state: default } spawn_timer: !ESCORT_RESPAWN{} }
 
 map_palette .tiles:
 {
@@ -240,7 +239,8 @@ map_palette .stuff:
 	entity_spawn thalvaron_rebel_poacher_dog: [ 200 200 15 ]		
 	entity_spawn thalvaron_rebel_poacher_leader: [ 250 200 15 ]			
 	entity_spawn thalvaron_fernwick_bar_patron_2_quest_item: [ 150 123 15 ]				
-	entity_spawn thalvaron_rebel_fernwick: [ 150 123 115 ]					
+	entity_spawn thalvaron_rebel_fernwick: [ 150 123 115 ]			
+	entity_spawn thalvaron_cubert_galston: [ 134 123 119 ]			
 
 	player_spawn .player_spawn: [ 0 0 255 ]
 	
@@ -312,7 +312,8 @@ map_palette .sub_zones:
 
 map_palette .routes:
 {
-	route thalvaron_default_patrol: [ 192 16 186 ]
+	route thalvaron_default_patrol: [ 192 16 186 ]	
+	route thalvaron_cubert_galston_escort: [ 198 132 221 ]
 }
 
 map_palette .doodads:

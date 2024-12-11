@@ -124,6 +124,7 @@ namespace tpublic
 			ID_MODIFY_FACTION,
 			ID_SPAWN_MINION,
 			ID_TRIGGER_ABILITY,
+			ID_START_ROUTE,
 
 			NUM_IDS
 		};
@@ -149,7 +150,8 @@ namespace tpublic
 			"learn_profession_ability",
 			"modify_faction",
 			"spawn_minion",
-			"trigger_ability"
+			"trigger_ability",
+			"start_route"
 		};
 
 		static_assert(sizeof(EFFECT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);
