@@ -9,7 +9,7 @@ dialogue_screen .ranger_seymore_dialogue:
 	[
 		{ quest: .ranger_seymore_1 }
 		{ quest: .ranger_seymore_2 }
-		{ quest: .ranger_seymore_3 }
+		{ quest<offer_only>: .ranger_seymore_3 }
 	]
 }
 
@@ -173,20 +173,29 @@ quest .ranger_seymore_2:
 ############################################################
 # Quest 3
 
+objective .ranger_seymore_3:
+{
+	string: "Destroy Evil Orb"
+	
+	maps: [ thalvaron ]
+	
+	manual_boolean: { }
+}
+
 quest .ranger_seymore_3:
 {
 	string: "The Evil Orb"
 
 	text:
 	[
-		"Find and destroy the evil orb hidden in the woods close to the city wall to the west."
+		"Find and destroy the evil orb hidden in the woods close to the city wall to the west. Then report to Orwla near the bridge to the north."
 	]
 	
 	description: 
 	[
 		"The document you found on Jim contained some very valuable information. It seems that the rebels have acquired some kind of evil artifact from the dark elves. The exact nature of I'm not so sure about,"
 		"but according to this they have placed it close to the city wall, in the woods to the west of here. Those woods are supposed to be impossible to get through, so that's very alarming. I don't dare thinking about"
-		"what the purpose of the device is. You must find it and destroy it."
+		"what the purpose of the device is. You must find it and destroy it. After you've completed your mission, report to Ranger Orwla. You'll find him near the bridge across the river to the north."
 	]
 
 	progress:
@@ -201,6 +210,7 @@ quest .ranger_seymore_3:
 
 	level: 12
 	prerequisites: [ .ranger_seymore_2 ]
+	objectives: [ .ranger_seymore_3 ]
 	# FIXME rewards
 }
 
@@ -220,6 +230,39 @@ entity thalvaron_ranger_seymore_3_quest_item:
 			despawn: true 			
 			level: 12
 			required_quest: .ranger_seymore_3
+			trigger_ability: .ranger_seymore_3_quest_item
+			complete_manual_objective: .ranger_seymore_3
 		}		
 	}
+}
+
+map_entity_spawn thalvaron_ranger_seymore_3_quest_spawn_a: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn thalvaron_ranger_seymore_3_quest_spawn_b: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn thalvaron_ranger_seymore_3_quest_spawn_c: { spawn_timer: { only_when_triggered: true } }
+
+ability .ranger_seymore_3_quest_item:
+{
+	direct_effect spawn_entity:
+	{
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: thalvaron_rebel_thug_a
+		map_entity_spawn: thalvaron_ranger_seymore_3_quest_spawn_a
+	}
+	
+	direct_effect spawn_entity:
+	{
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: thalvaron_rebel_thug_b
+		map_entity_spawn: thalvaron_ranger_seymore_3_quest_spawn_b
+	}
+
+	direct_effect spawn_entity:
+	{
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: thalvaron_rebel_thug_d
+		map_entity_spawn: thalvaron_ranger_seymore_3_quest_spawn_c
+	}	
 }

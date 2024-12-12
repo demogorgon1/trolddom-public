@@ -108,6 +108,7 @@ map_entity_spawn thalvaron_westor_1_quest_item: { entity thalvaron_westor_1_ques
 map_entity_spawn thalvaron_westor_3_quest_item: { entity thalvaron_westor_3_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_ranger_seymore: { entity thalvaron_ranger_seymore: { init_state: default } }
 map_entity_spawn thalvaron_ranger_seymore_3_quest_item: { entity thalvaron_ranger_seymore_3_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_ranger_orwla: { entity thalvaron_ranger_orwla: { init_state: default } }
 
 map_palette .tiles:
 {
@@ -266,6 +267,10 @@ map_palette .stuff:
 	entity_spawn thalvaron_rebel_dark_elf_leader: [ 43 214 61 ]		
 	entity_spawn thalvaron_rebel_dark_elf_human: [ 84 199 61 ]		
 	entity_spawn thalvaron_ranger_seymore_3_quest_item: [ 81 19 131 ]		
+	entity_spawn thalvaron_ranger_seymore_3_quest_spawn_a: [ 10 19 131 ]			
+	entity_spawn thalvaron_ranger_seymore_3_quest_spawn_b: [ 100 19 131 ]			
+	entity_spawn thalvaron_ranger_seymore_3_quest_spawn_c: [ 20 19 131 ]			
+	entity_spawn thalvaron_ranger_orwla: [ 120 19 131 ]			
 
 	player_spawn .player_spawn: [ 0 0 255 ]
 	

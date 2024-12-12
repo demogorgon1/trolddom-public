@@ -1,0 +1,31 @@
+dialogue_screen .ranger_orwla_dialogue:
+{
+	text: 
+	[	
+		"Be careful."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .ranger_seymore_3 }
+	]
+}
+
+dialogue_root .ranger_orwla_dialogue:
+{
+	.ranger_orwla_dialogue: { }
+}
+
+entity thalvaron_ranger_orwla: !NPC
+{
+	_string: "Ranger Orwla"
+	_dialogue_root: .ranger_orwla_dialogue	
+	_sprite: man_18
+	_sprite_dead: man_18_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
