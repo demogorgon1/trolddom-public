@@ -202,6 +202,36 @@ map_entity_spawn thalvaron_rebel_hotel:
 }
 
 ##########################################################################################
+# Lion
+
+map_entity_spawn thalvaron_cave_lion: 
+{ 
+	entity thalvaron_cave_lion: { init_state: default } 
+}
+
+# Lion in cave mushroom quest
+{
+
+	loot_table .lion: 
+	{
+		slots:
+		[	
+			!WORLD_DROPS {}				
+		]	
+	}
+
+	${
+		_faction: monsters
+		_creature_type: beast
+		_loot_table: .lion
+		_weapon_damage: 2
+		_resource_health: 2.3
+	}
+	
+	entity thalvaron_cave_lion: !NPC { _string: "Cave Lion" _sprite: lion_1 _sprite_dead: lion_1_dead _level: 11 }
+}
+
+##########################################################################################
 # Deer
 
 map_entity_spawn thalvaron_deer: 
@@ -493,4 +523,124 @@ map_entity_spawn thalvaron_robertson_farm_wolf:
 
 	entity thalvaron_wolf_11: !NPC { _string: "Grey Wolf" _sprite: wolf_3 _sprite_dead: wolf_3_dead }
 }
+
+##########################################################################################
+# Dark elves
+
+map_entity_spawn thalvaron_rebel_dark_elf: 
+{ 
+	entity thalvaron_rebel_dark_elf: { init_state: default } 
+}
+
+map_entity_spawn thalvaron_rebel_dark_elf_demon: 
+{ 
+	entity thalvaron_rebel_dark_elf_demon_a: { init_state: default } 
+	entity thalvaron_rebel_dark_elf_demon_b: { init_state: default } 
+}
+
+map_entity_spawn thalvaron_rebel_dark_elf_leader: 
+{ 
+	entity thalvaron_rebel_dark_elf_leader: { init_state: default } 
+}
+
+map_entity_spawn thalvaron_rebel_dark_elf_human: 
+{ 
+	entity thalvaron_rebel_dark_elf_human: { init_state: default } 
+}
+
+# Demon
+{
+	
+	loot_group .rebel_dark_elf_demon: {}
+
+	loot_table .rebel_dark_elf_demon: 
+	{
+		slots:
+		[	
+			!WORLD_DROPS {}			
+			!WORLD_DROPS_CLOTH {}
+		]	
+	}
+	
+	${
+		_level: 12
+		_faction: monsters
+		_creature_type: demon
+		_loot_table: .rebel_dark_elf_demon
+		_default_behavior_state: .wandering_short
+		_resource_mana: 1		
+	}
+
+	entity thalvaron_rebel_dark_elf_demon_a: !NPC { _string: "Voidflamer" _sprite: demon_2 _sprite_dead: demon_2_dead _abilities: [ { id: npc_firebolt } { id: npc_attack } ] }
+	entity thalvaron_rebel_dark_elf_demon_b: !NPC { _string: "Furry Fiend" _sprite: demon_1 _sprite_dead: demon_1_dead _abilities: [ { id: npc_rend } { id: npc_attack } ] }
+}
+
+# Dark elves behind the hotel
+{
+	
+	loot_group .rebel_dark_elf: {}
+
+	loot_table .rebel_dark_elf: 
+	{
+		slots:
+		[	
+			!WORLD_DROPS {}			
+			!WORLD_DROPS_CLOTH {}
+		]	
+	}
+	
+	${
+		_level: 12
+		_faction: monsters
+		_creature_type: humanoid
+		_loot_table: .rebel_dark_elf		
+	}
+
+	entity thalvaron_rebel_dark_elf: !NPC { _string: "Dark Elf" _sprite: dark_elf_2 _sprite_dead: dark_elf_2_dead _abilities: [ { id: npc_curse } { id: npc_attack } ] _resource_mana: 1 }
+	entity thalvaron_rebel_dark_elf_leader: !NPC { _string: "Gyosa the Bloodletter" _sprite: dark_elf_1 _sprite_dead: dark_elf_1_dead _abilities: [ { id: npc_rend } { id: npc_attack } ] _resource_health: 2 }
+}
+
+# Dark elves rebel human guy
+{
+	
+	loot_group .rebel_dark_elf_human: {}
+
+	item thalvaron_rebel_dark_elf_human_quest_item:
+	{
+		binds: when_picked_up
+		loot_groups: [ .rebel_dark_elf_human ]		
+		string: "Secret Document" 
+		flavor: "Half of it is written in a strange language."
+		icon: icon_scroll_1
+		item_level: 12
+		quest: .ranger_seymore_2
+		flags: [ not_sellable unique ]
+	}
+
+	loot_table .rebel_dark_elf_human: 
+	{
+		slots:
+		[	
+			{
+				possibility: { weight: 1 loot_group: .rebel_dark_elf_human requirement self<must_have_active_quest>: { id: .ranger_seymore_2 } } 
+			}
+		
+			!WORLD_DROPS {}			
+			!WORLD_DROPS_CLOTH {}
+		]	
+	}
+	
+	${
+		_level: 12
+		_faction: monsters
+		_creature_type: humanoid
+		_weapon_damage: 1.3
+		_resource_health: 2
+		_loot_table: .rebel_dark_elf_human		
+	}
+
+	entity thalvaron_rebel_dark_elf_human: !NPC { _string: "Jim" _sprite: rebel_5 _sprite_dead: rebel_5_dead _abilities: [ { id: npc_attack } ] }
+}
+
+
 

@@ -54,7 +54,7 @@ objective .fernwick_bar_patron_1:
 
 quest .fernwick_bar_patron_1:
 {
-	string: "Where is my lunch?"
+	string: "Where is My Lunch?"
 
 	text:
 	[

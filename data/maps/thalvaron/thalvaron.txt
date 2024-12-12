@@ -82,7 +82,7 @@ map_entity_spawn thalvaron_fernwick_bar_patron: { entity thalvaron_fernwick_bar_
 map_entity_spawn thalvaron_sergeant_jensen: { entity thalvaron_sergeant_jensen: { init_state: default } }
 map_entity_spawn thalvaron_wounded_city_guard: { entity thalvaron_wounded_city_guard: { init_state: default } }
 map_entity_spawn thalvaron_samantha_plington: { entity thalvaron_samantha_plington: { init_state: default } }
-map_entity_spawn thalvaron_samantha_plington_1_quest_item: { entity thalvaron_samantha_plington_1_quest_item: { init_state: default } }
+map_entity_spawn thalvaron_samantha_plington_1_quest_item: { entity thalvaron_samantha_plington_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_maude_johansson: { entity thalvaron_maude_johansson: { init_state: default } }
 map_entity_spawn thalvaron_ola_howton: { entity thalvaron_ola_howton: { init_state: default } }
 map_entity_spawn thalvaron_borg_robertson: { entity thalvaron_borg_robertson: { init_state: default } }
@@ -92,17 +92,22 @@ map_entity_spawn thalvaron_bar_patron_sarah: { entity thalvaron_bar_patron_sarah
 map_entity_spawn thalvaron_bar_patron_bill: { entity thalvaron_bar_patron_bill: { init_state: default } }
 map_entity_spawn thalvaron_bar_chef: { entity thalvaron_bar_chef: { init_state: default } }
 map_entity_spawn thalvaron_mathew_larsen: { entity thalvaron_mathew_larsen: { init_state: default } }
-map_entity_spawn thalvaron_ola_howton_1_quest_item_1: { entity thalvaron_ola_howton_1_quest_item_1: { init_state: default } }
-map_entity_spawn thalvaron_ola_howton_1_quest_item_2: { entity thalvaron_ola_howton_1_quest_item_2: { init_state: default } }
-map_entity_spawn thalvaron_ola_howton_1_quest_item_3: { entity thalvaron_ola_howton_1_quest_item_3: { init_state: default } }
+map_entity_spawn thalvaron_ola_howton_1_quest_item_1: { entity thalvaron_ola_howton_1_quest_item_1: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_ola_howton_1_quest_item_2: { entity thalvaron_ola_howton_1_quest_item_2: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_ola_howton_1_quest_item_3: { entity thalvaron_ola_howton_1_quest_item_3: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_buttercup: { entity thalvaron_buttercup: { init_state: default } }
 map_entity_spawn thalvaron_wild_boar: { entity thalvaron_wild_boar: { init_state: default } }
 map_entity_spawn thalvaron_piglet: { entity thalvaron_piglet: { init_state: default } }
 map_entity_spawn thalvaron_fisherman: { entity thalvaron_fisherman: { init_state: default } }
 map_entity_spawn thalvaron_lieutenant_tusleholm: { entity thalvaron_lieutenant_tusleholm: { init_state: default } }
-map_entity_spawn thalvaron_fernwick_bar_patron_2_quest_item: { entity thalvaron_fernwick_bar_patron_2_quest_item: { init_state: default } }
+map_entity_spawn thalvaron_fernwick_bar_patron_2_quest_item: { entity thalvaron_fernwick_bar_patron_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_fernwick_bar_patron_2: { entity thalvaron_fernwick_bar_patron_2: { init_state: default } }
 map_entity_spawn thalvaron_cubert_galston: { entity thalvaron_cubert_galston: { init_state: default } spawn_timer: !ESCORT_RESPAWN{} }
+map_entity_spawn thalvaron_westor: { entity thalvaron_westor: { init_state: default } }
+map_entity_spawn thalvaron_westor_1_quest_item: { entity thalvaron_westor_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_westor_3_quest_item: { entity thalvaron_westor_3_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_ranger_seymore: { entity thalvaron_ranger_seymore: { init_state: default } }
+map_entity_spawn thalvaron_ranger_seymore_3_quest_item: { entity thalvaron_ranger_seymore_3_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 
 map_palette .tiles:
 {
@@ -250,6 +255,17 @@ map_palette .stuff:
 	entity_spawn thalvaron_cubert_galston_ambush_3_b: [ 129 84 99 ]
 	entity_spawn thalvaron_cubert_galston_ambush_3_c: [ 139 84 79 ]
 	entity_spawn thalvaron_rebel_hotel: [ 179 84 79 ]	
+	entity_spawn thalvaron_westor: [ 79 84 79 ]		
+	entity_spawn thalvaron_westor_1_quest_item: [ 179 84 179 ]		
+	entity_spawn thalvaron_cave_lion: [ 179 34 179 ]			
+	entity_spawn thalvaron_fernwick_bar_patron_2: [ 213 21 199 ]	
+	entity_spawn thalvaron_westor_3_quest_item: [ 179 84 1 ]		
+	entity_spawn thalvaron_ranger_seymore: [ 84 14 61 ]		
+	entity_spawn thalvaron_rebel_dark_elf: [ 84 114 61 ]		
+	entity_spawn thalvaron_rebel_dark_elf_demon: [ 84 214 61 ]		
+	entity_spawn thalvaron_rebel_dark_elf_leader: [ 43 214 61 ]		
+	entity_spawn thalvaron_rebel_dark_elf_human: [ 84 199 61 ]		
+	entity_spawn thalvaron_ranger_seymore_3_quest_item: [ 81 19 131 ]		
 
 	player_spawn .player_spawn: [ 0 0 255 ]
 	

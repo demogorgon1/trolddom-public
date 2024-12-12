@@ -211,7 +211,7 @@ ability npc_rend_tick:
 aura npc_rend:
 {
 	string: "Rend"
-	description: "Poisoned."
+	description: "Bleeding."
 	type: debuff
 	icon: icon_blood
 	duration: based_on_effects
@@ -229,7 +229,7 @@ ability npc_rend:
 {
 	string: "Rend"
 	range: 1
-	cast_time: 10
+	cast_time: 5
 	cooldowns: [ global npc_rend ]
 	flags: [ melee offensive target_other target_hostile can_miss interruptable ]
 	states: [ in_combat ]

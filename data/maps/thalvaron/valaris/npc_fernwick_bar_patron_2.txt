@@ -13,7 +13,7 @@ dialogue_screen .fernwick_bar_patron_2_dialogue:
 
 dialogue_root .fernwick_bar_patron_2_dialogue:
 {
-	.fernwick_bar_patron_dialogue: { }
+	.fernwick_bar_patron_2_dialogue: { }
 }
 
 entity thalvaron_fernwick_bar_patron_2: !NPC
@@ -43,7 +43,7 @@ item .fernwick_bar_patron_2_quest_item:
 	stack: 1
 	item_level: 11
 	quest: .fernwick_bar_patron_2
-	flags: [ not_sellable ]
+	flags: [ not_sellable unique ]
 }
 
 loot_table .fernwick_bar_patron_2_quest_item:

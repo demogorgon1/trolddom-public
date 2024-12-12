@@ -1,0 +1,225 @@
+dialogue_screen .ranger_seymore_dialogue:
+{
+	text: 
+	[	
+		"Dark elves! This is very alarming! They're not supposed to be on this side of the mountain."
+	]		
+	
+	options:
+	[
+		{ quest: .ranger_seymore_1 }
+		{ quest: .ranger_seymore_2 }
+		{ quest: .ranger_seymore_3 }
+	]
+}
+
+dialogue_root .ranger_seymore_dialogue:
+{
+	.ranger_seymore_dialogue: { }
+}
+
+entity thalvaron_ranger_seymore: !NPC
+{
+	_string: "Ranger Seymore"
+	_dialogue_root: .ranger_seymore_dialogue	
+	_sprite: woman_6
+	_sprite_dead: woman_6_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .ranger_seymore_1_a:
+{
+	string: "Dark Elves Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_rebel_dark_elf ]
+		count: 2
+	}
+}
+
+objective .ranger_seymore_1_b:
+{
+	string: "Furry Fiends Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_rebel_dark_elf_demon_a ]
+		count: 3
+	}
+}
+
+objective .ranger_seymore_1_c:
+{
+	string: "Voidflamers Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_rebel_dark_elf_demon_b ]
+		count: 3
+	}
+}
+
+quest .ranger_seymore_1:
+{
+	string: "Dark Times Ahead"
+
+	text:
+	[
+		"Hunt rebels in the area south of the city."
+	]
+	
+	description: 
+	[
+		"While we've had fairly good relations with the wood elves for a long time, the same can't be said about their more sinister cousins, the dark elves. All kinds of elves are supposed to be very far from here,"
+		"especially these.\n\n"
+		"What are they doing here? Seems like they're summoning foul demonic creatures. You must drive them back where they came from!"
+	]
+
+	progress:
+	[
+		"Don't waste your time."
+	]
+	
+	completion:
+	[
+		"FIXME"
+	]
+
+	level: 12
+	objectives: [ .ranger_seymore_1_a .ranger_seymore_1_b .ranger_seymore_1_c ]
+	# FIXME rewards
+}
+
+############################################################
+# Quest 2
+
+objective .ranger_seymore_2_a:
+{
+	string: "Gyosa the Bloodletter Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_rebel_dark_elf_leader ]
+		count: 1
+	}
+}
+
+objective .ranger_seymore_2_b:
+{
+	string: "Jim Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_rebel_dark_elf_human ]
+		count: 1
+	}
+}
+
+objective .ranger_seymore_2_c:
+{
+	string: "Secret Document"
+	collect_items: { item: thalvaron_rebel_dark_elf_human_quest_item count: 1 }
+}
+
+quest .ranger_seymore_2:
+{
+	string: "Are They Working Together?"
+
+	text:
+	[
+		"Kill the rebel and dark elf schemers."
+	]
+	
+	description: 
+	[
+		"I fear that the dark elves have some kind of connection to the rebellion. I know that a rebel leader who goes by the name \"Jim\" has set up a small camp behind the hotel. I've heard he's been seen talking with"
+		"some kind of important looking dark elf. Kill both of them. Return to me any documents you find on their dead bodies."
+	]
+
+	progress:
+	[
+		"Are they dead yet?"
+	]
+	
+	completion:
+	[
+		"FIXME"
+	]
+
+	level: 12
+	objectives: [ .ranger_seymore_2_a .ranger_seymore_2_b .ranger_seymore_2_c ]
+	prerequisites: [ .ranger_seymore_1 ]
+	# FIXME rewards
+}
+
+############################################################
+# Quest 3
+
+quest .ranger_seymore_3:
+{
+	string: "The Evil Orb"
+
+	text:
+	[
+		"Find and destroy the evil orb hidden in the woods close to the city wall to the west."
+	]
+	
+	description: 
+	[
+		"The document you found on Jim contained some very valuable information. It seems that the rebels have acquired some kind of evil artifact from the dark elves. The exact nature of I'm not so sure about,"
+		"but according to this they have placed it close to the city wall, in the woods to the west of here. Those woods are supposed to be impossible to get through, so that's very alarming. I don't dare thinking about"
+		"what the purpose of the device is. You must find it and destroy it."
+	]
+
+	progress:
+	[
+		"You need to hurry. Why are you still talking to me?"
+	]
+	
+	completion:
+	[
+		"FIXME"
+	]
+
+	level: 12
+	prerequisites: [ .ranger_seymore_2 ]
+	# FIXME rewards
+}
+
+entity thalvaron_ranger_seymore_3_quest_item:
+{
+	string: "Evil Orb"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ glowing_orb_1_a glowing_orb_1_b ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			verb: destroy
+			range: 1 
+			despawn: true 			
+			level: 12
+			required_quest: .ranger_seymore_3
+		}		
+	}
+}

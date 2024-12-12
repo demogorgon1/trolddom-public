@@ -280,6 +280,8 @@ sprites:
 	sprite crab_2: { dead: crab_2_dead }
 	sprite crab_3: { dead: crab_3_dead }
 	sprite dark_elf_1: { dead: dark_elf_1_dead }
+	sprite lion_1 : { dead: lion_1_dead }
+	sprite dark_elf_2: { dead: dark_elf_2_dead }
 	
 	cursor: { position: [ 0 240 ] }
 
@@ -291,6 +293,8 @@ sprites:
 	sprite crab_2_dead: { }
 	sprite crab_3_dead: { }
 	sprite dark_elf_1_dead: { }
+	sprite lion_1_dead: { }
+	sprite dark_elf_2_dead: { }
 	
 }
 
@@ -390,6 +394,10 @@ sprites:
 	sprite door_closed_2: { }
 	sprite door_open_2: { }
 	sprite barrel_1: { }
+	sprite glowing_orb_1_a: { }
+
+	cursor: { position: [ 0 64 ] }
+	sprite glowing_orb_1_b: { }
 	
 }
 
