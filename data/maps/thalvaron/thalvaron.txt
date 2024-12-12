@@ -241,6 +241,15 @@ map_palette .stuff:
 	entity_spawn thalvaron_fernwick_bar_patron_2_quest_item: [ 150 123 15 ]				
 	entity_spawn thalvaron_rebel_fernwick: [ 150 123 115 ]			
 	entity_spawn thalvaron_cubert_galston: [ 134 123 119 ]			
+	entity_spawn thalvaron_cubert_galston_ambush_1_a: [ 149 84 77 ]
+	entity_spawn thalvaron_cubert_galston_ambush_1_b: [ 149 84 97 ]
+	entity_spawn thalvaron_cubert_galston_ambush_2_a: [ 119 84 77 ]
+	entity_spawn thalvaron_cubert_galston_ambush_2_b: [ 129 84 97 ]
+	entity_spawn thalvaron_cubert_galston_ambush_2_c: [ 139 84 77 ]
+	entity_spawn thalvaron_cubert_galston_ambush_3_a: [ 119 84 79 ]
+	entity_spawn thalvaron_cubert_galston_ambush_3_b: [ 129 84 99 ]
+	entity_spawn thalvaron_cubert_galston_ambush_3_c: [ 139 84 79 ]
+	entity_spawn thalvaron_rebel_hotel: [ 179 84 79 ]	
 
 	player_spawn .player_spawn: [ 0 0 255 ]
 	

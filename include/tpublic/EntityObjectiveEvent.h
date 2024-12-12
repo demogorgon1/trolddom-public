@@ -11,7 +11,8 @@ namespace tpublic
 			INVALID_TYPE,
 
 			TYPE_KILL_NPC,
-			TYPE_USE_ABILITY
+			TYPE_USE_ABILITY,
+			TYPE_ROUTE_NPC
 		};
 
 		// Public data

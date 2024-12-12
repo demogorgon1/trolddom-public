@@ -481,6 +481,7 @@ namespace tpublic
 				m_subRouteIndex = SIZE_MAX;
 				m_lastTargetPosition = Vec2();
 				m_handledRouteTriggerIndices.clear();
+				m_effectiveRouteId = 0;
 			}
 
 			// Public data			

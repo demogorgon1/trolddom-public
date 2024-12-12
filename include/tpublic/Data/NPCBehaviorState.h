@@ -85,6 +85,10 @@ namespace tpublic
 						{
 							m_combatEventPauseTicks = aChild->GetInt32();
 						}
+						else if (aChild->m_name == "patrol_move_interval_ticks")
+						{
+							m_patrolMoveIntervalTicks = aChild->GetInt32();
+						}
 						else if (aChild->m_name == "max_ticks")
 						{
 							m_maxTicks = aChild->GetUInt32();
@@ -121,6 +125,7 @@ namespace tpublic
 				aStream->WriteOptionalObject(m_onRoute);
 				aStream->WriteInt(m_combatEventPauseTicks);
 				aStream->WriteBool(m_despawnIfLostPlayer);
+				aStream->WriteInt(m_patrolMoveIntervalTicks);
 			}
 
 			bool
@@ -141,6 +146,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadBool(m_despawnIfLostPlayer))
 					return false;
+				if (!aStream->ReadInt(m_patrolMoveIntervalTicks))
+					return false;
 				return true;
 			}
 
@@ -152,6 +159,7 @@ namespace tpublic
 			int32_t					m_combatEventPauseTicks = 0;
 			std::optional<OnRoute>	m_onRoute;
 			bool					m_despawnIfLostPlayer = false;
+			int32_t					m_patrolMoveIntervalTicks = 12;
 		};
 
 	}

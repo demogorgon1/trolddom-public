@@ -2,6 +2,7 @@
 
 #include <tpublic/Components/Lootable.h>
 
+#include "EntityObjectiveEvent.h"
 #include "EntityState.h"
 #include "ItemInstanceReference.h"
 #include "UniformDistribution.h"
@@ -180,6 +181,13 @@ namespace tpublic
 												uint32_t													aItemId,
 												uint32_t													aQuantity,
 												int64_t														aCost) = 0;
+		virtual void						EventQueueEntityObjective(
+												const PlayerTag&											aPlayerTag,
+												uint32_t													aEntityId,
+												EntityObjectiveEvent::Type									aType,
+												int32_t														aMaxDistance,
+												const Vec2&													aPosition,
+												uint32_t													aPlayerEntityInstanceId) = 0;
 	};
 
 }

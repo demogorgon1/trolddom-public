@@ -6,6 +6,7 @@
 #include "ObjectiveTypes/ManualBoolean.h"
 #include "ObjectiveTypes/ManualCounter.h"
 #include "ObjectiveTypes/UseAbility.h"
+#include "ObjectiveTypes/RouteNPC.h"
 
 #include "ObjectiveTypeBase.h"
 
@@ -23,6 +24,7 @@ namespace tpublic
 			_Register<ObjectiveTypes::ManualBoolean>();
 			_Register<ObjectiveTypes::ManualCounter>();
 			_Register<ObjectiveTypes::UseAbility>();
+			_Register<ObjectiveTypes::RouteNPC>();
 		}
 
 		~ObjectiveTypeFactory()

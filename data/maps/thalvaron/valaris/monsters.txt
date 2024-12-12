@@ -67,6 +67,14 @@ map_entity_spawn thalvaron_rebel_fernwick:
 	entity thalvaron_rebel_bandit_d: { init_state: default } 
 }
 
+map_entity_spawn thalvaron_rebel_hotel:
+{ 
+	entity thalvaron_rebel_thug_a: { init_state: default } 
+	entity thalvaron_rebel_thug_b: { init_state: default } 
+	entity thalvaron_rebel_thug_c: { init_state: default } 
+	entity thalvaron_rebel_thug_d: { init_state: default } 
+}
+
 # Rebels inside the city
 {
 	loot_table .rebel_10: 
@@ -175,6 +183,22 @@ map_entity_spawn thalvaron_rebel_fernwick:
 	entity thalvaron_rebel_bandit_b: !NPC { _string: "Rebel Bandit" _sprite: rebel_2 _sprite_dead: rebel_2_dead }
 	entity thalvaron_rebel_bandit_c: !NPC { _string: "Rebel Bandit" _sprite: rebel_3 _sprite_dead: rebel_3_dead }
 	entity thalvaron_rebel_bandit_d: !NPC { _string: "Rebel Pathfinder" _sprite: rebel_4 _sprite_dead: rebel_4_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
+}
+
+# Rebels around the mountain hotel
+{
+
+	${
+		_level: 12
+		_faction: monsters
+		_creature_type: humanoid
+		_loot_table: .default_humanoid
+	}
+
+	entity thalvaron_rebel_thug_a: !NPC { _string: "Rebel Thug" _sprite: rebel_1 _sprite_dead: rebel_1_dead }
+	entity thalvaron_rebel_thug_b: !NPC { _string: "Rebel Thug" _sprite: rebel_2 _sprite_dead: rebel_2_dead }
+	entity thalvaron_rebel_thug_c: !NPC { _string: "Rebel Thug" _sprite: rebel_3 _sprite_dead: rebel_3_dead }
+	entity thalvaron_rebel_thug_d: !NPC { _string: "Rebel Ranger" _sprite: rebel_4 _sprite_dead: rebel_4_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
 }
 
 ##########################################################################################

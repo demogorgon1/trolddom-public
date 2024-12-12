@@ -411,7 +411,7 @@ namespace tpublic::Systems
 							{
 								const EntityInstance* taggedByEntityInstance = aContext->m_worldView->WorldViewSingleEntityInstance(tag->m_playerEntityInstanceId);
 								const Components::Position* taggedByEntityPosition = taggedByEntityInstance != NULL ? taggedByEntityInstance->GetComponent<Components::Position>() : NULL;
-								despawn = taggedByEntityPosition == NULL || taggedByEntityInstance->GetState() == EntityState::ID_DEAD || !Helpers::IsWithinDistance(position, taggedByEntityPosition, 10);
+								despawn = taggedByEntityPosition == NULL || taggedByEntityInstance->GetState() == EntityState::ID_DEAD || !Helpers::IsWithinDistance(position, taggedByEntityPosition, 24);
 							}
 
 							if(despawn)
@@ -456,7 +456,7 @@ namespace tpublic::Systems
 
 									Vec2 direction;
 									bool shouldChangeDirection = false;
-									uint32_t index = UINT32_MAX;
+									std::optional<uint32_t> index;
 
 									if (mapRouteData->GetDirection(npc->m_effectiveRouteId, npc->m_subRouteIndex, position->m_position, npc->m_routeIsReversing, direction, shouldChangeDirection, index))
 									{
@@ -470,16 +470,37 @@ namespace tpublic::Systems
 										if (shouldChangeDirection)
 											npc->m_routeIsReversing = !npc->m_routeIsReversing;
 
-										if(index != UINT32_MAX)
+										if(index.has_value())
 										{
 											const Data::Route* routeData = GetManifest()->GetById<Data::Route>(npc->m_effectiveRouteId);
 											for(size_t triggerIndex = 0; triggerIndex < routeData->m_triggers.size(); triggerIndex++)
 											{
 												const std::unique_ptr<Data::Route::Trigger>& trigger = routeData->m_triggers[triggerIndex];
-												if(trigger->m_index == (uint32_t)triggerIndex && !npc->m_handledRouteTriggerIndices.contains(trigger->m_index))
+												if(trigger->m_index == index.value() && !npc->m_handledRouteTriggerIndices.contains(trigger->m_index))
 												{
 													if(trigger->m_chat)
 														aContext->m_eventQueue->EventQueueChat(aEntityInstanceId, trigger->m_chat.value());
+
+													if(trigger->m_event)
+													{
+														const Components::Tag* tag = GetComponent<Components::Tag>(aComponents);
+														if(tag->m_playerTag.IsSet())
+															aContext->m_eventQueue->EventQueueEntityObjective(tag->m_playerTag, aEntityId, EntityObjectiveEvent::TYPE_ROUTE_NPC, 24, position->m_position, tag->m_playerEntityInstanceId);
+													}
+
+													if(trigger->m_abilityId != 0)
+													{
+														const Data::Ability* ability = GetManifest()->GetById<Data::Ability>(trigger->m_abilityId);
+
+														aContext->m_eventQueue->EventQueueAbility(
+															SourceEntityInstance(aEntityInstanceId, 0),
+															aEntityInstanceId,
+															Vec2(),
+															ability);
+													}
+
+													if(trigger->m_despawn)
+														returnValue = EntityState::ID_DESPAWNING;
 
 													npc->m_handledRouteTriggerIndices.insert(trigger->m_index);
 												}
@@ -489,7 +510,7 @@ namespace tpublic::Systems
 								}
 							}
 
-							npc->m_moveCooldownUntilTick = aContext->m_tick + 12;
+							npc->m_moveCooldownUntilTick = aContext->m_tick + npc->m_npcBehaviorState->m_patrolMoveIntervalTicks;
 						}
 						break;
 

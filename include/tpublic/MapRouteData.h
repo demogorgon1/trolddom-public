@@ -92,36 +92,36 @@ namespace tpublic
 		};
 
 		void	ToStream(
-					IWriter*				aWriter) const;
+					IWriter*					aWriter) const;
 		bool	FromStream(
-					IReader*				aReader);
+					IReader*					aReader);
 		void	CopyFrom(
-					const MapRouteData*		aOther);
+					const MapRouteData*			aOther);
 		void	Prepare();
 		Route*	GetOrCreateRoute(
-					uint32_t				aRouteId);
+					uint32_t					aRouteId);
 		void	Build(
-					const Manifest*			aManifest,
-					const uint32_t*			aMapTiles,
-					int32_t					aMapWidth,
-					int32_t					aMapHeight);
+					const Manifest*				aManifest,
+					const uint32_t*				aMapTiles,
+					int32_t						aMapWidth,
+					int32_t						aMapHeight);
 		void	BuildRoute(
-					const Manifest*			aManifest,
-					const std::set<Vec2>&	aWalkable,
-					int32_t					aMapWidth,
-					int32_t					aMapHeight,
-					Route*					aRoute);		
+					const Manifest*				aManifest,
+					const std::set<Vec2>&		aWalkable,
+					int32_t						aMapWidth,
+					int32_t						aMapHeight,
+					Route*						aRoute);		
 		size_t	GetSubRouteIndexByPosition(
-					uint32_t				aRouteId,
-					const Vec2&				aPosition) const;
+					uint32_t					aRouteId,
+					const Vec2&					aPosition) const;
 		bool	GetDirection(
-					uint32_t				aRouteId,
-					size_t					aSubRouteIndex,
-					const Vec2&				aPosition,
-					bool					aIsReversing,
-					Vec2&					aOutDirection,
-					bool&					aOutChangeDirection,
-					uint32_t&				aOutIndex) const;
+					uint32_t					aRouteId,
+					size_t						aSubRouteIndex,
+					const Vec2&					aPosition,
+					bool						aIsReversing,
+					Vec2&						aOutDirection,
+					bool&						aOutChangeDirection,
+					std::optional<uint32_t>&	aOutIndex) const;
 
 		// Public data
 		std::vector<std::unique_ptr<Route>>			m_routes;

@@ -203,13 +203,13 @@ namespace tpublic
 
 	bool	
 	MapRouteData::GetDirection(
-		uint32_t				aRouteId,
-		size_t					aSubRouteIndex,
-		const Vec2&				aPosition,
-		bool					aIsReversing,
-		Vec2&					aOutDirection,
-		bool&					aOutChangeDirection,
-		uint32_t&				aOutIndex) const
+		uint32_t					aRouteId,
+		size_t						aSubRouteIndex,
+		const Vec2&					aPosition,
+		bool						aIsReversing,
+		Vec2&						aOutDirection,
+		bool&						aOutChangeDirection,
+		std::optional<uint32_t>&	aOutIndex) const
 	{
 		const Route* route = NULL;
 
@@ -234,7 +234,10 @@ namespace tpublic
 				size_t index = i->second;
 				size_t nextIndex = 0;
 
-				aOutIndex = (uint32_t)index;
+				if(index == subRoute->m_waypoints.size() - 1)
+					aOutIndex = UINT32_MAX;
+				else
+					aOutIndex = (uint32_t)index;
 
 				if(aIsReversing)
 				{
@@ -292,8 +295,6 @@ namespace tpublic
 				case DirectionField::DIRECTION_EAST:	aOutDirection = { 1, 0 }; break;
 				default:								assert(false);
 				}
-
-				aOutIndex = UINT32_MAX;
 			}
 		}
 

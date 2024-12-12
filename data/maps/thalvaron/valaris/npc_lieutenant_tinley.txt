@@ -112,6 +112,18 @@ quest .lieutenant_tinley_2:
 ############################################################
 # Quest 3
 
+objective .lieutenant_tinley_3:
+{
+	string: "Escort Cubert Galston To Safety"
+	
+	maps: [ thalvaron ]
+	
+	route_npc:
+	{
+		entities: [ thalvaron_cubert_galston ]
+	}
+}
+
 quest .lieutenant_tinley_3:
 {
 	string: "Hostage Situation"
@@ -137,5 +149,6 @@ quest .lieutenant_tinley_3:
 	]
 
 	prerequisites: [ .lieutenant_tinley_1 ]
-	level: 11
+	level: 12
+	objectives: [ .lieutenant_tinley_3 ]
 }
