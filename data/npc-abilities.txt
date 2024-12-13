@@ -435,3 +435,46 @@ ability npc_trap:
 		aura: npc_trap
 	}	
 }
+
+cooldown npc_froststrike:
+{
+	duration: 60
+}
+
+aura npc_froststrike:
+{
+	string: "Froststrike"
+	description: "Reduced movement speed."
+	icon: icon_chill_touch
+	type: debuff
+	duration: 60
+	flags: [ unique magic ]
+	
+	aura_effect move_speed_modifier:
+	{
+		move_speed: slow
+	}
+}
+
+ability npc_froststrike:
+{
+	string: "Frost Strike"
+	range: 1
+	cooldowns: [ global npc_froststrike ]
+	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+	states: [ in_combat ]
+	icon: icon_strike
+	delay: 3
+
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		function: { expression: x_plus_a x: weapon a: [ [ 1 5 ] [ 10 20 ] [ 20 40 ] ] }
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: npc_froststrike
+	}
+}

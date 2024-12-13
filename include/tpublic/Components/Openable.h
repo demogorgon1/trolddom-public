@@ -31,7 +31,8 @@ namespace tpublic
 					TYPE_TOUCH,
 					TYPE_DESTROY,
 					TYPE_BURN,
-					TYPE_WATER
+					TYPE_WATER,
+					TYPE_USE
 				};
 
 				void
@@ -59,6 +60,8 @@ namespace tpublic
 						m_type = TYPE_BURN;
 					else if (t == "water")
 						m_type = TYPE_WATER;
+					else if (t == "use")
+						m_type = TYPE_USE;
 					else
 						TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid verb.", aSource->GetIdentifier());
 				}
@@ -94,6 +97,7 @@ namespace tpublic
 					case TYPE_DESTROY:	return "Destroy";
 					case TYPE_BURN:		return "Burn";
 					case TYPE_WATER:	return "Water";
+					case TYPE_USE:		return "Use";
 					default:			break;
 					}
 					assert(false);

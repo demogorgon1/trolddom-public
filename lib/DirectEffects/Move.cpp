@@ -6,7 +6,9 @@
 
 #include <tpublic/EntityInstance.h>
 #include <tpublic/IEventQueue.h>
+#include <tpublic/IWorldView.h>
 #include <tpublic/Manifest.h>
+#include <tpublic/MapData.h>
 
 namespace tpublic
 {
@@ -31,6 +33,8 @@ namespace tpublic
 						m_maxSteps = aChild->GetUInt32();
 					else if(aChild->m_name == "trigger_ability_on_resolve")
 						m_triggerAbilitiesOnResolve = SecondaryAbility(aChild);
+					else if(aChild->m_name == "map_player_spawn")
+						m_mapPlayerSpawnId = aChild->GetId(DataType::ID_MAP_PLAYER_SPAWN);
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 				}
@@ -46,6 +50,7 @@ namespace tpublic
 			aStream->WritePOD(m_moveFlags);
 			aStream->WriteUInt(m_maxSteps);
 			aStream->WriteOptionalObject(m_triggerAbilitiesOnResolve);
+			aStream->WriteUInt(m_mapPlayerSpawnId);
 		}
 
 		bool
@@ -61,6 +66,8 @@ namespace tpublic
 			if(!aStream->ReadUInt(m_maxSteps))
 				return false;
 			if(!aStream->ReadOptionalObject(m_triggerAbilitiesOnResolve))
+				return false;
+			if (!aStream->ReadUInt(m_mapPlayerSpawnId))
 				return false;
 			return true;
 		}
@@ -80,16 +87,30 @@ namespace tpublic
 			IResourceChangeQueue*			/*aCombatResultQueue*/,
 			IAuraEventQueue*				/*aAuraEventQueue*/,
 			IEventQueue*					aEventQueue,
-			const IWorldView*				/*aWorldView*/)
+			const IWorldView*				aWorldView)
 		{
+			if(m_moveFlags & MOVE_FLAG_AFFECT_TARGET)
+				aSource = aTarget;
+
 			if(aSource != NULL)
 			{
-				switch(m_destination)
+				if(m_mapPlayerSpawnId != 0)
 				{
-				case DESTINATION_AOE_CENTER:				
+					std::optional<Vec2> destinationPosition;
+
+					for(const MapData::PlayerSpawn& playerSpawn : aWorldView->WorldViewGetMapData()->m_playerSpawns)
+					{
+						if(playerSpawn.m_id == m_mapPlayerSpawnId)
+						{	
+							destinationPosition = { playerSpawn.m_x, playerSpawn.m_y };
+							break;
+						}
+					}
+
+					if(destinationPosition.has_value())
 					{
 						const Components::Position* sourcePosition = aSource->GetComponent<Components::Position>();
-						Vec2 d = { aAOETarget.m_x - sourcePosition->m_position.m_x, aAOETarget.m_y - sourcePosition->m_position.m_y };
+						Vec2 d = { destinationPosition->m_x - sourcePosition->m_position.m_x, destinationPosition->m_y - sourcePosition->m_position.m_y };
 
 						IEventQueue::EventQueueMoveRequest t;
 						t.AddToPriorityList(d);
@@ -97,37 +118,59 @@ namespace tpublic
 						t.m_entityInstanceId = aSource->GetEntityInstanceId();
 						t.m_setUpdatedOnServerFlag = true;
 
-						if(m_moveFlags & MOVE_FLAG_SET_TELEPORTED)
+						if (m_moveFlags & MOVE_FLAG_SET_TELEPORTED)
 							t.m_setTeleportedFlag = true;
 
 						aEventQueue->EventQueueMove(t);
-
-						// Effect doesn't have a target, but we still want a combat log event
-						Result result;
-						result.m_generateImmediateCombatLogEvent = true;
-						return result;
 					}
-					break;
-
-				case DESTINATION_TARGET_ADJACENT:
+				}
+				else
+				{
+					switch(m_destination)
 					{
-						// We can't resolve this here in a good way because target could be moving. Needs to be done sequentially.
-						IEventQueue::EventQueueMoveAdjacentRequest t;
-						t.m_entityInstanceId = aSource->GetEntityInstanceId();
-						t.m_adjacentEntityInstanceId = aTarget->GetEntityInstanceId();
+					case DESTINATION_AOE_CENTER:				
+						{
+							const Components::Position* sourcePosition = aSource->GetComponent<Components::Position>();
+							Vec2 d = { aAOETarget.m_x - sourcePosition->m_position.m_x, aAOETarget.m_y - sourcePosition->m_position.m_y };
+
+							IEventQueue::EventQueueMoveRequest t;
+							t.AddToPriorityList(d);
+							t.m_type = IEventQueue::EventQueueMoveRequest::TYPE_SIMPLE;
+							t.m_entityInstanceId = aSource->GetEntityInstanceId();
+							t.m_setUpdatedOnServerFlag = true;
+
+							if(m_moveFlags & MOVE_FLAG_SET_TELEPORTED)
+								t.m_setTeleportedFlag = true;
+
+							aEventQueue->EventQueueMove(t);
+
+							// Effect doesn't have a target, but we still want a combat log event
+							Result result;
+							result.m_generateImmediateCombatLogEvent = true;
+							return result;
+						}
+						break;
+
+					case DESTINATION_TARGET_ADJACENT:
+						{
+							// We can't resolve this here in a good way because target could be moving. Needs to be done sequentially.
+							IEventQueue::EventQueueMoveAdjacentRequest t;
+							t.m_entityInstanceId = aSource->GetEntityInstanceId();
+							t.m_adjacentEntityInstanceId = aTarget->GetEntityInstanceId();
 					
-						if(m_moveFlags & MOVE_FLAG_WALKABLE_PATH_REQUIRED)
-							t.m_maxSteps = m_maxSteps;
+							if(m_moveFlags & MOVE_FLAG_WALKABLE_PATH_REQUIRED)
+								t.m_maxSteps = m_maxSteps;
 
-						if(m_triggerAbilitiesOnResolve.has_value())
-							t.m_triggerAbilityOnResolve = &(m_triggerAbilitiesOnResolve.value());
+							if(m_triggerAbilitiesOnResolve.has_value())
+								t.m_triggerAbilityOnResolve = &(m_triggerAbilitiesOnResolve.value());
 
-						aEventQueue->EventQueueMoveAdjacent(t);
+							aEventQueue->EventQueueMoveAdjacent(t);
+						}
+						break;
+
+					default:
+						break;
 					}
-					break;
-
-				default:
-					break;
 				}
 			}
 

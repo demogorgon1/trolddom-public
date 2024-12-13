@@ -91,6 +91,16 @@ map_entity_spawn thalvaron_rebel_leader_camp:
 	entity thalvaron_rebel_leader_camp: { init_state: default } 
 }
 
+map_entity_spawn thalvaron_rebel_dead:
+{ 
+	entity thalvaron_rebel_dead_a: { init_state: dead }
+	entity thalvaron_rebel_dead_b: { init_state: dead } 
+	entity thalvaron_rebel_dead_c: { init_state: dead } 
+	entity thalvaron_rebel_dead_d: { init_state: dead } 
+	
+	spawn_timer: { despawn_required: true }
+}
+
 # Rebels inside the city
 {
 	loot_table .rebel_10: 
@@ -325,6 +335,20 @@ map_entity_spawn thalvaron_rebel_leader_camp:
 
 	entity thalvaron_rebel_leader_camp: !NPC { _string: "John Buffkun" _sprite: rebel_5 _sprite_dead: rebel_5_dead }
 	
+}
+
+# Dead rebels around forest
+{
+	${
+		_level: 12
+		_faction: monsters
+		_creature_type: humanoid
+	}
+
+	entity thalvaron_rebel_dead_a: !NPC { _string: "Rebel" _sprite: rebel_1 _sprite_dead: rebel_1_dead }	
+	entity thalvaron_rebel_dead_b: !NPC { _string: "Rebel" _sprite: rebel_2 _sprite_dead: rebel_2_dead }	
+	entity thalvaron_rebel_dead_c: !NPC { _string: "Rebel" _sprite: rebel_3 _sprite_dead: rebel_3_dead }	
+	entity thalvaron_rebel_dead_d: !NPC { _string: "Rebel" _sprite: rebel_4 _sprite_dead: rebel_4_dead }	
 }
 
 ##########################################################################################
@@ -768,5 +792,90 @@ map_entity_spawn thalvaron_rebel_dark_elf_human:
 	entity thalvaron_rebel_dark_elf_human: !NPC { _string: "Jim" _sprite: rebel_5 _sprite_dead: rebel_5_dead _abilities: [ { id: npc_attack } ] }
 }
 
+##########################################################################################
+# The woods
 
+map_entity_spawn thalvaron_the_beast: 
+{ 
+	entity thalvaron_the_beast: { init_state: default } 
+}
 
+map_entity_spawn thalvaron_elemental: 
+{ 
+	entity thalvaron_elemental: { init_state: default } 
+}
+
+# The beast
+{
+	loot_group .the_beast: {}
+
+	item thalvaron_the_beast_quest_item:
+	{
+		binds: when_picked_up
+		loot_groups: [ .the_beast ]		
+		string: "Secret Document" 
+		flavor: "Half of it is written in a strange language."
+		icon: icon_scroll_1
+		item_level: 12
+		quest: .ranger_seymore_2
+		flags: [ not_sellable unique ]
+	}
+
+	loot_table .the_beast: 
+	{
+		slots:
+		[	
+			{
+				possibility: { weight: 1 loot_group: .the_beast } 
+			}
+		
+			!WORLD_DROPS {}			
+			!WORLD_DROPS_CLOTH {}
+		]	
+	}
+	
+	${
+		_level: 13
+		_faction: monsters
+		_creature_type: humanoid
+		_weapon_damage: 10
+		_resource_health: 20
+		_elite: true
+		_loot_table: .the_beast
+		_immune_to_stun: true
+		_immune_to_immobilize: true
+		_immune_to_slow: true
+		_default_behavior_state: .wandering_short
+	}
+
+	entity thalvaron_the_beast: !NPC { _string: "The Beast" _sprite: monster_1 _sprite_dead: monster_1_dead _abilities: [ { id: npc_attack } ] }
+}
+
+# Elementals
+{
+
+	loot_table .elemental: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { weight: 1 }
+				possibility: { weight: 1 loot_group: .thora_1_quest_item requirement self<must_have_active_quest>: { id: .thora_1 } } 
+			}
+			
+			!WORLD_DROPS {}				
+		]	
+	}
+
+	${
+		_level: 13
+		_faction: monsters
+		_creature_type: elemental
+		_weapon_damage: 1.3
+		_resource_health: 1.3
+		_default_behavior_state: .wandering_short
+		_loot_table: .elemental
+	}
+
+	entity thalvaron_elemental: !NPC { _string: "Icy Apparition" _sprite: spirit _sprite_dead: spirit_dead _abilities: [ { id: npc_froststrike } { id: npc_attack } ] }
+}

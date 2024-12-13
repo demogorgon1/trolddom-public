@@ -1,0 +1,196 @@
+dialogue_screen .thora_dialogue:
+{
+	text: 
+	[	
+		"What brings you to these parts of the woods?"
+	]		
+	
+	options:
+	[
+		{ quest: .thora_1 }
+		{ quest<offer_only>: .thora_2 }
+	]
+}
+
+dialogue_root .thora_dialogue:
+{
+	.thora_dialogue: { }
+}
+
+entity thalvaron_thora: !NPC
+{
+	_string: "Thora Joghun"
+	_dialogue_root: .thora_dialogue	
+	_sprite: woman_11
+	_sprite_dead: woman_11_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .thora_1:
+{
+	string: "Elemental Dust"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .thora_1_quest_item count: 5 }
+}
+
+loot_group .thora_1_quest_item: {}
+
+item .thora_1_quest_item:
+{
+	icon: icon_residue_1
+	item_level: 13
+	loot_groups: [ .thora_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Elemental Dust"
+	stack: 5 
+}
+
+quest .thora_1:
+{
+	string: "Bloody Wizards"
+
+	text:
+	[
+		"Kill elementals, gather their residue, and return to Thora."
+	]
+	
+	description: 
+	[
+		"Wizards are a bit like hermit crabs, you know. For a long while one lived in these woods, but he left some years ago. He was all right, didn't cause too many problems while he lived here."
+		"Not long after he had left, however, another one moved in. This guy has been caused all kinds of havoc! For one, he released this giant monster in the woods, presumably to keep intruders out."
+		"What about my litle Tyler? He's playing in the woods while having to avoid being swallowed alive by this beast!\n\n"
+		"I'm a bit of a dabbler in the arcane arts myself and I've come to the conclusion that the wizard has hidden his home behind some strange portal. In the western parts of these woods are now crawling"
+		"with weird elemental creatures, no doubt conjured by him to protect his portal. If you can bring me some of their residue, maybe I can find a way to get to him."
+	]
+
+	progress:
+	[
+		"How is it going?"
+	]
+	
+	completion:
+	[
+		"That should do the trick!"
+	]
+
+	objectives: [ .thora_1 ]
+	level: 13
+	next_quest: .thora_2 
+
+	# FIXME: rewards
+}
+
+############################################################
+# Quest 2
+
+item .thora_2_quest_item:
+{
+	icon: icon_necklace_1
+	item_level: 13
+	flags: [ not_sellable unique ]
+	string: "Icy Elemental Amulet"
+	use_ability: .thora_2_quest_item
+}
+
+ability .thora_2_quest_item:
+{
+	string: "Icy Elemental Amulet"
+	description: "Teleport to the realm of the wizard."
+	flags: [ target_self item ]
+	icon: icon_necklace_1
+	states: [ default ]
+	must_have_one_of_nearby_entities: [ thalvaron_thora_2_quest_item ]
+	cast_time: 20	
+	direct_effect move: { map_player_spawn: thalvaron_wizard_realm_spawn move_flags: [ set_teleported ] }
+}
+
+entity thalvaron_thora_2_quest_item:
+{
+	components:
+	{
+		position: { }		
+		visibility: { }		
+		combat_public: { faction: monsters }
+	}
+}
+
+quest .thora_2:
+{
+	string: "Confronting the Wizard"
+
+	text:
+	[
+		"Use amulet to enter the realm of the wizard and confront him about the beast."
+	]
+	
+	description: 
+	[
+		"I've managed to make this amulet using the elemental residue you brought me. Remember the lake by the elementals? In the middle of it is an ancient altar. Take the amulet there and use it to open a portal"
+		"to where the wizard is. Find him and talk some sense into him."
+	]
+
+	progress:
+	[
+		"The amulet doesn't work?"
+	]
+	
+	completion:
+	[
+		"FIXME"
+	]
+
+	quest_items: [ .thora_2_quest_item ]
+	prerequisites: [ .thora_1 ]
+	level: 13
+	# FIXME: rewards
+}
+
+entity thalvaron_thora_2_return_portal:
+{
+	string: "Portal"
+	
+	systems: [ openable ]
+	
+	components:
+	{
+		position: { }		
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ gateway_1 gateway_2 gateway_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+				
+		openable: 
+		{ 
+			verb: use
+			range: 1 
+			level: 13
+			trigger_ability: .thora_2_return_portal
+			instant: true
+		}	
+	}
+}
+
+ability .thora_2_return_portal:
+{
+	states: [ default ]
+	direct_effect move: { map_player_spawn: thalvaron_wizard_realm_return_spawn move_flags: [ set_teleported affect_target ] }
+}
+
