@@ -281,6 +281,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_rebel_leader_farmer_rabbit: [ 49 39 13 ]
 	entity_spawn thalvaron_rebel_elite_guard: [ 49 39 131 ]
 	entity_spawn thalvaron_ranger_orwla_2_quest_item: [ 94 88 183 ]
+	entity_spawn thalvaron_rebel_leader_camp: [ 194 188 183 ]	
 	
 	player_spawn .player_spawn: [ 0 0 255 ]
 	

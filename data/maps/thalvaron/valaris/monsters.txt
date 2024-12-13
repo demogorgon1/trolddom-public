@@ -86,6 +86,11 @@ map_entity_spawn thalvaron_rebel_elite_guard:
 	entity thalvaron_rebel_elite_guard_b: { init_state: default } 
 }
 
+map_entity_spawn thalvaron_rebel_leader_camp:
+{ 
+	entity thalvaron_rebel_leader_camp: { init_state: default } 
+}
+
 # Rebels inside the city
 {
 	loot_table .rebel_10: 
@@ -243,6 +248,83 @@ map_entity_spawn thalvaron_rebel_elite_guard:
 
 	entity thalvaron_rebel_elite_guard_a: !NPC { _string: "Rebel Guard" _sprite: rebel_1 _sprite_dead: rebel_1_dead }
 	entity thalvaron_rebel_elite_guard_b: !NPC { _string: "Rebel Guard" _sprite: rebel_2 _sprite_dead: rebel_2_dead }
+}
+
+# Leader at camp
+{
+
+	loot_group .rebel_leader_camp_quest_item: { }
+
+	ability .rebel_leader_camp_quest_item:	
+	{
+		string: "Encryption Key"
+		description: "This item starts a quest."
+		flags: [ target_self item ]
+		icon: icon_scroll_1
+		direct_effect simple<start_quest>: .rebel_leader_camp_quest_item
+		states: [ default in_combat ]
+		requirement self<must_not_have_completed_quest>: { id: .rebel_leader_camp_quest_item }
+		requirement self<must_not_have_active_quest>: { id: .rebel_leader_camp_quest_item }
+	}
+
+	item .rebel_leader_camp_quest_item:
+	{
+		loot_groups: [ .rebel_leader_camp_quest_item ]		
+		string: "Encryption Key" 
+		flavor: "Top Secret."
+		icon: icon_scroll_1
+		item_level: 12
+		flags: [ unique not_sellable ]
+		use_ability: .rebel_leader_camp_quest_item
+		binds: when_picked_up
+	}
+	
+	quest .rebel_leader_camp_quest_item:
+	{
+		string: "Encryption Key"
+
+		text:
+		[
+			"Bring the encryption key to Captain Jerrington outside the Eastgate district in Valaris."
+		]
+		
+		description: 
+		[
+			"Captain Jerrington will be very interested in this. Seems like just what he was looking for."
+		]
+		
+		completion:
+		[
+			"Where did you find this? This is great, now we'll be able to decrypt their communications."
+		]
+
+		level: 12
+	}
+
+	loot_table .rebel_leader_camp: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { weight: 1 loot_group: .rebel_leader_camp_quest_item requirement self<must_have_completed_quest>: .captain_jerrington_1 } 
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_CLOTH{}
+		]	
+	}
+	
+	${
+		_level: 12
+		_faction: monsters
+		_creature_type: humanoid
+		_loot_table: .rebel_leader_camp
+		_weapon_damage: 1.7
+		_resource_health: 2
+	}
+
+	entity thalvaron_rebel_leader_camp: !NPC { _string: "John Buffkun" _sprite: rebel_5 _sprite_dead: rebel_5_dead }
+	
 }
 
 ##########################################################################################

@@ -10,6 +10,7 @@ dialogue_screen .captain_jerrington_dialogue:
 		{ quest<completion_only>: .city_guard_special_1 }
 		{ quest: .captain_jerrington_1 }
 		{ quest<completion_only>: .fisherman_5 }
+		{ quest<completion_only>: .rebel_leader_camp_quest_item }
 	]
 }
 
