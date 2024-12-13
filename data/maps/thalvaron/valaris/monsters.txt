@@ -75,6 +75,17 @@ map_entity_spawn thalvaron_rebel_hotel:
 	entity thalvaron_rebel_thug_d: { init_state: default } 
 }
 
+map_entity_spawn thalvaron_rebel_leader_farmer_rabbit:
+{ 
+	entity thalvaron_rebel_leader_farmer_rabbit: { init_state: default } 
+}
+
+map_entity_spawn thalvaron_rebel_elite_guard:
+{ 
+	entity thalvaron_rebel_elite_guard_a: { init_state: default } 
+	entity thalvaron_rebel_elite_guard_b: { init_state: default } 
+}
+
 # Rebels inside the city
 {
 	loot_table .rebel_10: 
@@ -185,7 +196,7 @@ map_entity_spawn thalvaron_rebel_hotel:
 	entity thalvaron_rebel_bandit_d: !NPC { _string: "Rebel Pathfinder" _sprite: rebel_4 _sprite_dead: rebel_4_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
 }
 
-# Rebels around the mountain hotel
+# Rebels around the mountain hotel (and camp)
 {
 
 	${
@@ -193,12 +204,45 @@ map_entity_spawn thalvaron_rebel_hotel:
 		_faction: monsters
 		_creature_type: humanoid
 		_loot_table: .default_humanoid
+		_default_behavior_state: .passive
 	}
 
 	entity thalvaron_rebel_thug_a: !NPC { _string: "Rebel Thug" _sprite: rebel_1 _sprite_dead: rebel_1_dead }
 	entity thalvaron_rebel_thug_b: !NPC { _string: "Rebel Thug" _sprite: rebel_2 _sprite_dead: rebel_2_dead }
 	entity thalvaron_rebel_thug_c: !NPC { _string: "Rebel Thug" _sprite: rebel_3 _sprite_dead: rebel_3_dead }
 	entity thalvaron_rebel_thug_d: !NPC { _string: "Rebel Ranger" _sprite: rebel_4 _sprite_dead: rebel_4_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
+}
+
+# Leader at farmer rabbit's farm 
+{
+
+	${
+		_level: 12
+		_faction: monsters
+		_creature_type: humanoid
+		_loot_table: .default_humanoid
+		_weapon_damage: 1.7
+		_resource_health: 2
+	}
+
+	entity thalvaron_rebel_leader_farmer_rabbit: !NPC { _string: "Robert Freiling" _sprite: rebel_5 _sprite_dead: rebel_5_dead }
+}
+
+# Elite guards outside instance
+{
+
+	${
+		_level: 20
+		_faction: monsters
+		_creature_type: humanoid
+		_loot_table: .default_humanoid
+		_elite: true		
+		_weapon_damage: 1.7
+		_resource_health: 2
+	}
+
+	entity thalvaron_rebel_elite_guard_a: !NPC { _string: "Rebel Guard" _sprite: rebel_1 _sprite_dead: rebel_1_dead }
+	entity thalvaron_rebel_elite_guard_b: !NPC { _string: "Rebel Guard" _sprite: rebel_2 _sprite_dead: rebel_2_dead }
 }
 
 ##########################################################################################

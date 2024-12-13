@@ -506,6 +506,8 @@ sprites:
 	sprite icon_pearl : { tags: [ icon ] }
 	sprite icon_net : { tags: [ icon ] }
 	sprite icon_book : { tags: [ icon ] }
+	sprite icon_watering_can : { tags: [ icon ] }
+	sprite icon_torch : { tags: [ icon ] }
 	
 }
 

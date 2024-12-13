@@ -41,7 +41,26 @@ sprites:
 	sprite fence_w: { }
 	sprite fence_e: { }
 	sprite fence_s: { }	
-	
+
+	cursor: { position: [ 0 32 ] }
+
+	sprite wooden_wall_w_e: { }
+	sprite wooden_wall_n_s: { }
+	sprite wooden_wall_w_s: { }
+	sprite wooden_wall_e_s: { }
+	sprite wooden_wall_n_e: { }
+	sprite wooden_wall_w_n: { }
+	sprite wooden_wall_w_e_s: { }
+	sprite wooden_wall_w_e_n: { }
+	sprite wooden_wall_w_n_s: { }
+	sprite wooden_wall_e_n_s: { }
+	sprite wooden_wall_w_e_n_s: { }
+	sprite wooden_wall: { }
+	sprite wooden_wall_n: { }
+	sprite wooden_wall_w: { }
+	sprite wooden_wall_e: { }
+	sprite wooden_wall_s: { }	
+
 }
 
 wall stone_wall:
@@ -91,5 +110,30 @@ wall fence:
         fence_e_n_s		
         fence_w_n_s
         fence_w_e_n_s
+	]
+}
+
+wall wood_wall:
+{
+	flags: [ block_line_of_sight ]
+
+	sprites: 
+	[ 
+        wooden_wall
+		wooden_wall_e
+		wooden_wall_w	
+		wooden_wall_w_e
+		wooden_wall_n
+        wooden_wall_n_e
+        wooden_wall_w_n
+        wooden_wall_w_e_n
+		wooden_wall_s
+        wooden_wall_e_s
+	    wooden_wall_w_s
+        wooden_wall_w_e_s		
+		wooden_wall_n_s
+        wooden_wall_e_n_s		
+        wooden_wall_w_n_s
+        wooden_wall_w_e_n_s
 	]
 }

@@ -191,7 +191,7 @@ ability npc_poison_bite:
 
 cooldown npc_rend:
 {
-	duration: 60
+	duration: 80
 }
 
 ability npc_rend_tick:
@@ -229,9 +229,8 @@ ability npc_rend:
 {
 	string: "Rend"
 	range: 1
-	cast_time: 5
 	cooldowns: [ global npc_rend ]
-	flags: [ melee offensive target_other target_hostile can_miss interruptable ]
+	flags: [ melee offensive target_other target_hostile can_miss ]
 	states: [ in_combat ]
 	icon: icon_blood
 	delay: 3

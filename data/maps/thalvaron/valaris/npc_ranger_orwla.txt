@@ -8,6 +8,7 @@ dialogue_screen .ranger_orwla_dialogue:
 	options:
 	[
 		{ quest<completion_only>: .ranger_seymore_3 }
+		{ quest: .ranger_orwla_1 }
 	]
 }
 
@@ -29,3 +30,137 @@ entity thalvaron_ranger_orwla: !NPC
 	_not_pushable: true	
 }
 
+############################################################
+# Quest 1
+
+objective .ranger_orwla_1:
+{
+	string: "Robert Freiling Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_rebel_leader_farmer_rabbit ]
+		count: 1
+	}
+}
+
+quest .ranger_orwla_1:
+{
+	string: "Assassination"
+
+	text:
+	[
+		"Locate and kill the rebel lieutenant at the farm located in the north."
+	]
+	
+	description: 
+	[
+		"So you're just traveling around doing odd jobs for the man? I might have a suitable job for you. I have a target that needs to be taken out. If you follow the road north and then go east, you'll find a farm."
+		"A rebel lieutenant named Robert Freiling has set up residence on there. Infiltrate the compound, eliminate him, and report back to me."
+	]
+
+	progress:
+	[
+		"What are you still doing here?"
+	]
+	
+	completion:
+	[
+		"Good job. I have another job for you."
+	]
+
+	level: 12
+	objectives: [ .ranger_orwla_1 ]
+	next_quest: .ranger_orwla_2
+	# FIXME rewards
+}
+
+############################################################
+# Quest 2
+
+item .ranger_orwla_2_quest_item:
+{
+	binds: when_picked_up
+	string: "Torch" 
+	icon: icon_torch
+	stack: 1
+	item_level: 12
+	quest: .ranger_orwla_2
+	flags: [ not_sellable unique ]
+}
+
+entity thalvaron_ranger_orwla_2_quest_item:
+{
+	string: "Tent"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		
+		sprite: 
+		{ 
+			animations: 
+			[ 
+				{ states: [ default ] frames: [ doodad_tent ] z_offset: -3 } 
+				{ states: [ dead ] frames: [ effect_fire_0 effect_fire_1 effect_fire_2 ] z_offset: -3 frame_delay: 120 random_start_frame: true } 
+			] 
+		}		
+
+		openable: 
+		{ 
+			verb: burn
+			range: 1 
+			kill: true 			
+			level: 12
+			required_quest: .ranger_orwla_2
+			complete_manual_objective: .ranger_orwla_2
+			requirements: { requirement self<must_have_item>: .ranger_orwla_2_quest_item }
+			dead_despawn_ticks: 50
+		}		
+	}
+}
+
+objective .ranger_orwla_2:
+{
+	string: "Tents Burned"
+	
+	maps: [ thalvaron ]
+	
+	manual_counter:
+	{
+		count: 4
+	}
+}
+
+quest .ranger_orwla_2:
+{
+	string: "By Fire Be Purged"
+
+	text:
+	[
+		"Burn down tents in the rebel camp."
+	]
+	
+	description: 
+	[
+		"You might have noticed the rebel camp when you went to the farm earlier. Inside it you'll find a number of tents. Here's a torch. Do I need to say more?"
+	]
+
+	progress:
+	[
+		"You don't like fire?"
+	]
+	
+	completion:
+	[
+		"This will hinder them quite a lot, good job."
+	]
+
+	level: 12
+	prerequisites: [ .ranger_orwla_1 ]
+	quest_items: [ .ranger_orwla_2_quest_item ]
+	objectives: [ .ranger_orwla_2 ]
+	# FIXME rewards
+}

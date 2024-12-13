@@ -109,6 +109,10 @@ map_entity_spawn thalvaron_westor_3_quest_item: { entity thalvaron_westor_3_ques
 map_entity_spawn thalvaron_ranger_seymore: { entity thalvaron_ranger_seymore: { init_state: default } }
 map_entity_spawn thalvaron_ranger_seymore_3_quest_item: { entity thalvaron_ranger_seymore_3_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_ranger_orwla: { entity thalvaron_ranger_orwla: { init_state: default } }
+map_entity_spawn thalvaron_farmer_rabbit: { entity thalvaron_farmer_rabbit: { init_state: default } }
+map_entity_spawn thalvaron_farmer_rabbit_1_quest_item: { entity thalvaron_farmer_rabbit_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_farmer_rabbit_1_quest_item_2: { entity thalvaron_farmer_rabbit_1_quest_item_2: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_ranger_orwla_2_quest_item: { entity thalvaron_ranger_orwla_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 
 map_palette .tiles:
 {
@@ -271,11 +275,18 @@ map_palette .stuff:
 	entity_spawn thalvaron_ranger_seymore_3_quest_spawn_b: [ 100 19 131 ]			
 	entity_spawn thalvaron_ranger_seymore_3_quest_spawn_c: [ 20 19 131 ]			
 	entity_spawn thalvaron_ranger_orwla: [ 120 19 131 ]			
-
+	entity_spawn thalvaron_farmer_rabbit: [ 116 39 62 ]
+	entity_spawn thalvaron_farmer_rabbit_1_quest_item: [ 166 39 62 ]
+	entity_spawn thalvaron_farmer_rabbit_1_quest_item_2: [ 215 39 62 ]
+	entity_spawn thalvaron_rebel_leader_farmer_rabbit: [ 49 39 13 ]
+	entity_spawn thalvaron_rebel_elite_guard: [ 49 39 131 ]
+	entity_spawn thalvaron_ranger_orwla_2_quest_item: [ 94 88 183 ]
+	
 	player_spawn .player_spawn: [ 0 0 255 ]
 	
 	wall stone_wall: [ 128 128 128 ]
 	wall fence: [ 64 128 140 ]
+	wall wood_wall: [ 164 128 140 ]
 }
 
 map_palette .levels:
@@ -377,6 +388,7 @@ map_palette .doodads:
 	doodad stone_stairs_reversed: [ 19 173 192 ]	
 	doodad wood_stairs_reversed: [ 173 19 192 ]	
 	doodad animal_skull: [ 197 173 210 ]	
+	doodad barrel: [ 111 38 84 ]
 	
 	doodad wall_sign_generic<"Mathew's Emporium">: [ 197 173 111 ]	
 	doodad wall_sign_generic<"John & Mary's">: [ 97 173 111 ]	
