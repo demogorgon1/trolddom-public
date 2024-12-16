@@ -295,7 +295,10 @@ namespace tpublic::Systems
 								aggroRange = GetManifest()->m_npcMetrics.GetAggroRangeForLevelDifference((int32_t)combat->m_level, (int32_t)targetCombatPublic->m_level);
 
 							if(aDistanceSquared <= aggroRange * aggroRange)
-								aContext->m_eventQueue->EventQueueThreat({ aEntity->GetEntityInstanceId(), aEntity->GetSeq() }, aEntityInstanceId, 1, aContext->m_tick);
+							{
+								if(npc->m_aggroRequirements.m_requirements.empty() || Requirements::CheckList(GetManifest(), npc->m_aggroRequirements.m_requirements, NULL, aEntity))
+									aContext->m_eventQueue->EventQueueThreat({ aEntity->GetEntityInstanceId(), aEntity->GetSeq() }, aEntityInstanceId, 1, aContext->m_tick);
+							}
 						}
 						else if(topThreatEntity != NULL && aEntity->GetState() != EntityState::ID_IN_COMBAT && !faction->IsNeutralOrFriendly())
 						{
@@ -758,7 +761,7 @@ namespace tpublic::Systems
 
 								if (abilityEntry.m_targetType == Components::NPC::AbilityEntry::TARGET_TYPE_DEFAULT)
 								{
-									if (distanceSquared > (int32_t)(ability->m_range * ability->m_range))
+									if (!ability->AlwaysInRange() && distanceSquared > (int32_t)(ability->m_range * ability->m_range))
 										continue;
 
 									if (distanceSquared < (int32_t)(ability->m_minRange * ability->m_minRange))
@@ -770,7 +773,7 @@ namespace tpublic::Systems
 									if (!combat->HasResourcesForAbility(ability, NULL, combat->GetResourceMax(Resource::ID_MANA)))
 										continue;
 
-									if(!aContext->m_worldView->WorldViewLineOfSight(targetPosition->m_position, position->m_position))
+									if(!ability->AlwaysInLineOfSight() && !aContext->m_worldView->WorldViewLineOfSight(targetPosition->m_position, position->m_position))
 										continue;
 
 									if (abilityEntry.m_useProbability == UINT32_MAX || (*aContext->m_random)() < abilityEntry.m_useProbability)

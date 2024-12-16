@@ -119,6 +119,8 @@ map_entity_spawn thalvaron_thora_2_quest_item: { entity thalvaron_thora_2_quest_
 map_entity_spawn thalvaron_thora: { entity thalvaron_thora: { init_state: default } }
 map_entity_spawn thalvaron_tyler: { entity thalvaron_tyler: { init_state: default } }
 map_entity_spawn thalvaron_thora_2_return_portal: { entity thalvaron_thora_2_return_portal: { init_state: default } }
+map_entity_spawn thalvaron_wizard: { entity thalvaron_wizard: { init_state: default } }
+map_entity_spawn thalvaron_wizard_door: { entity thalvaron_wizard_door: { init_state: default } }
 
 map_palette .tiles:
 {
@@ -295,6 +297,10 @@ map_palette .stuff:
 	entity_spawn thalvaron_thora_2_quest_item: [ 218 48 63 ]
 	entity_spawn thalvaron_thora: [ 97 138 223 ]		
 	entity_spawn thalvaron_thora_2_return_portal: [ 197 138 223 ]		
+	entity_spawn thalvaron_arcane_worm: [ 197 138 201 ]		
+	entity_spawn thalvaron_arcane_monster: [ 97 138 201 ]			
+	entity_spawn thalvaron_wizard: [ 97 138 1 ]				
+	entity_spawn thalvaron_wizard_door: [ 97 138 101 ]				
 	
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn thalvaron_wizard_realm_spawn: [ 42 157 85 ]

@@ -9,6 +9,7 @@ dialogue_screen .thora_dialogue:
 	[
 		{ quest: .thora_1 }
 		{ quest<offer_only>: .thora_2 }
+		{ quest<completion_only>: .wizard_1 }
 	]
 }
 
@@ -95,7 +96,7 @@ quest .thora_1:
 item .thora_2_quest_item:
 {
 	icon: icon_necklace_1
-	item_level: 13
+	item_level: 14
 	flags: [ not_sellable unique ]
 	string: "Icy Elemental Amulet"
 	use_ability: .thora_2_quest_item
@@ -145,12 +146,13 @@ quest .thora_2:
 	
 	completion:
 	[
-		"FIXME"
+		"You're having problems with my guard dog? I guess he can be a bit bad with strangers sometimes. It's kinda the purpose of a guard dog you know. You seem like a nice person, so I'll tell him not to bite you."
 	]
 
 	quest_items: [ .thora_2_quest_item ]
+	reward_all_items: [ .thora_2_quest_item ]
 	prerequisites: [ .thora_1 ]
-	level: 13
+	level: 14
 	# FIXME: rewards
 }
 

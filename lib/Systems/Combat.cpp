@@ -57,17 +57,23 @@ namespace tpublic::Systems
 					bool shouldStopCasting = false;
 
 					// Out of range?
-					int32_t distanceSquared = Helpers::CalculateDistanceSquared(position, targetPosition);
-					if(distanceSquared > (int32_t)(ability->m_range * ability->m_range))
-						shouldStopCasting = true;
+					if(!ability->AlwaysInRange())
+					{
+						int32_t distanceSquared = Helpers::CalculateDistanceSquared(position, targetPosition);
+						if (distanceSquared > (int32_t)(ability->m_range * ability->m_range))
+							shouldStopCasting = true;
+					}
 
 					// Dead?
 					if(!shouldStopCasting && targetEntityInstance->GetState() == tpublic::EntityState::ID_DEAD)
 						shouldStopCasting = true;
 
 					// No line of sight?
-					if(!shouldStopCasting && !aContext->m_worldView->WorldViewLineOfSight(position->m_position, targetPosition->m_position))
-						shouldStopCasting = true;
+					if(!ability->AlwaysInLineOfSight())
+					{
+						if (!shouldStopCasting && !aContext->m_worldView->WorldViewLineOfSight(position->m_position, targetPosition->m_position))
+							shouldStopCasting = true;
+					}
 
 					if(shouldStopCasting)
 						aContext->m_eventQueue->EventQueueInterrupt(aEntityInstanceId, aEntityInstanceId, 0, 0);

@@ -282,9 +282,12 @@ sprites:
 	sprite dark_elf_1: { dead: dark_elf_1_dead }
 	sprite lion_1 : { dead: lion_1_dead }
 	sprite dark_elf_2: { dead: dark_elf_2_dead }
-	sprite man_34: { dead: man_33_dead }
+	sprite man_34: { dead: man_34_dead }
 	sprite monster_1: { dead: monster_1_dead }
 	sprite woman_11: { dead: woman_11_dead }
+	sprite arcane_worm_1: { dead: arcane_worm_1_dead }
+	sprite arcane_melee_1: { dead: arcane_melee_1_dead }
+	sprite arcane_caster_1: { dead: arcane_caster_1_dead }
 	
 	cursor: { position: [ 0 240 ] }
 
@@ -301,7 +304,16 @@ sprites:
 	sprite man_34_dead: { }
 	sprite monster_1_dead: { }
 	sprite woman_11_dead: { }
+	sprite arcane_worm_1_dead: { }
+	sprite arcane_melee_1_dead: { }
+	sprite arcane_caster_1_dead: { }
+
+	cursor: { position: [ 0 256 ] }
+	sprite man_35: { dead: man_35_dead }
 	
+	cursor: { position: [ 0 272 ] }
+	sprite man_35_dead: { }
+
 }
 
 sprites:

@@ -1,0 +1,94 @@
+dialogue_screen .wizard_dialogue:
+{
+	text: 
+	[	
+		"Huh?"
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .thora_2 }
+		{ quest<offer_only>: .wizard_1 }
+	]
+}
+
+dialogue_root .wizard_dialogue:
+{
+	.wizard_dialogue: { }
+}
+
+entity thalvaron_wizard: !NPC
+{
+	_string: "Merador the Blue"
+	_dialogue_root: .wizard_dialogue	
+	_sprite: man_35
+	_sprite_dead: man_35_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+entity thalvaron_wizard_door: 
+{
+	string: "Locked Door"
+	
+	systems: [ door ]
+	
+	components:
+	{
+		position: { }		
+		sound_source: { }
+		openable: 
+		{
+			sound: inventory_1
+			requirements:
+			{
+				requirement self<must_have_completed_quest>: .thora_2
+			}
+		}
+		sprite: 
+		{ 
+			animations:
+			[
+				{ states: [ default spawning ] frames: [ door_closed_1 ] z_offset: -3 }
+				{ states: [ dead ] frames: [ door_open_1 ] z_offset: -3 }
+			]		
+		}		
+	}
+}
+
+############################################################
+# Quest 1
+
+quest .wizard_1:
+{
+	string: "Reporting Back to Thora"
+
+	text:
+	[
+		"Go back to Thora and tell her the problem has been dealt with."
+	]
+	
+	description: 
+	[
+		"You can go back to the woman who lives in the woods and tell her that my guard dog won't bother her or her kid anymore."
+	]
+
+	progress:
+	[
+		"Who are you again?"
+	]
+	
+	completion:
+	[
+		"Thank you so much! I'm still a bit uneasy about it, though, but I guess this is fine."
+	]
+
+	level: 14
+	prerequisites: [ .thora_2 ]
+	reward_xp_multiplier: 0.2
+	
+	# FIXME: rewards
+}

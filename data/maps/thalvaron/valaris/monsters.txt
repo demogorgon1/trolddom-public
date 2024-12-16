@@ -805,32 +805,24 @@ map_entity_spawn thalvaron_elemental:
 	entity thalvaron_elemental: { init_state: default } 
 }
 
+map_entity_spawn thalvaron_arcane_worm: 
+{ 
+	entity thalvaron_arcane_worm: { init_state: default } 
+}
+
+map_entity_spawn thalvaron_arcane_monster: 
+{ 
+	entity thalvaron_arcane_warrior: { init_state: default } 
+	entity thalvaron_arcane_apparition: { init_state: default } 
+}
+
 # The beast
 {
-	loot_group .the_beast: {}
-
-	item thalvaron_the_beast_quest_item:
-	{
-		binds: when_picked_up
-		loot_groups: [ .the_beast ]		
-		string: "Secret Document" 
-		flavor: "Half of it is written in a strange language."
-		icon: icon_scroll_1
-		item_level: 12
-		quest: .ranger_seymore_2
-		flags: [ not_sellable unique ]
-	}
-
 	loot_table .the_beast: 
 	{
 		slots:
 		[	
-			{
-				possibility: { weight: 1 loot_group: .the_beast } 
-			}
-		
 			!WORLD_DROPS {}			
-			!WORLD_DROPS_CLOTH {}
 		]	
 	}
 	
@@ -846,6 +838,10 @@ map_entity_spawn thalvaron_elemental:
 		_immune_to_immobilize: true
 		_immune_to_slow: true
 		_default_behavior_state: .wandering_short
+		_aggro_requirements:
+		{
+			requirement target<must_not_have_completed_quest>: .thora_2
+		}
 	}
 
 	entity thalvaron_the_beast: !NPC { _string: "The Beast" _sprite: monster_1 _sprite_dead: monster_1_dead _abilities: [ { id: npc_attack } ] }
@@ -878,4 +874,62 @@ map_entity_spawn thalvaron_elemental:
 	}
 
 	entity thalvaron_elemental: !NPC { _string: "Icy Apparition" _sprite: spirit _sprite_dead: spirit_dead _abilities: [ { id: npc_froststrike } { id: npc_attack } ] }
+}
+
+loot_table .arcane_monster: 
+{
+	slots:
+	[	
+		!WORLD_DROPS {}				
+	]	
+}
+
+# Arcane worms
+{
+	${
+		_level: 14
+		_faction: monsters
+		_creature_type: elemental
+		_weapon_damage: 0.8
+		_resource_health: 0.8
+		_default_behavior_state: .wandering_short
+		_loot_table: .arcane_monster
+		_abilities: 
+		[ 
+			{ id: npc_arcane_detonation requirement self<must_have_less_health_than>: 20 } 
+			{ id: npc_attack } 
+		]
+	}
+
+	entity thalvaron_arcane_worm: !NPC { _string: "Arcane Worm" _sprite: arcane_worm_1 _sprite_dead: arcane_worm_1_dead }
+}
+
+# Arcane melee
+{
+	${
+		_level: 14
+		_faction: monsters
+		_creature_type: elemental
+		_weapon_damage: 1.1	
+		_resource_health: 1.2
+		_default_behavior_state: .passive
+		_loot_table: .arcane_monster
+	}
+
+	entity thalvaron_arcane_warrior: !NPC { _string: "Arcane Warrior" _sprite: arcane_melee_1 _sprite_dead: arcane_melee_1_dead _abilities: [ { id: npc_attack } ] }
+}
+
+# Arcane caster
+{
+	${
+		_level: 14
+		_faction: monsters
+		_creature_type: elemental
+		_weapon_damage: 0.8	
+		_resource_health: 1
+		_default_behavior_state: .passive
+		_loot_table: .arcane_monster
+	}
+
+	entity thalvaron_arcane_apparition: !NPC { _string: "Arcane Apparition" _sprite: arcane_caster_1 _sprite_dead: arcane_caster_1_dead _abilities: [ { id: npc_attack } { id: npc_chain_lightning } ] }
 }

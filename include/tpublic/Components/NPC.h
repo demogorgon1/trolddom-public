@@ -27,6 +27,42 @@ namespace tpublic
 			static const Persistence::Id PERSISTENCE = Persistence::ID_NONE;
 			static const Replication REPLICATION = REPLICATION_NONE;
 
+			struct AggroRequirements
+			{
+				void
+				FromSource(
+					const SourceNode*		aSource)
+				{
+					aSource->GetObject()->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if (aChild->m_tag == "requirement")
+							m_requirements.push_back(Requirement(aChild));
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
+					});
+				}
+
+				void
+				ToStream(
+					IWriter*				aStream) const
+				{
+					aStream->WriteObjects(m_requirements);
+				}
+
+				bool
+				FromStream(
+					IReader*				aStream)
+				{
+					if(!aStream->ReadObjects(m_requirements))
+						return false;
+					return true;
+				}	
+
+				// Public data
+				std::vector<Requirement>			m_requirements;
+			};
+
 			struct OutOfZoneAction
 			{
 				void
@@ -410,7 +446,8 @@ namespace tpublic
 				FIELD_ZONE,
 				FIELD_OUT_OF_ZONE_ACTION,
 				FIELD_CAN_MOVE,
-				FIELD_EVADE_DESPAWN
+				FIELD_EVADE_DESPAWN,
+				FIELD_AGGRO_REQUIREMENTS
 			};
 
 			static void
@@ -431,6 +468,7 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_ZONE, "zone", offsetof(NPC, m_zoneId))->SetDataType(DataType::ID_ZONE);
 				aSchema->DefineCustomObject<OutOfZoneAction>(FIELD_OUT_OF_ZONE_ACTION, "out_of_zone_action", offsetof(NPC, m_outOfZoneAction));
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_EVADE_DESPAWN, "evade_despawn", offsetof(NPC, m_evadeDespawn));
+				aSchema->DefineCustomObject<AggroRequirements>(FIELD_AGGRO_REQUIREMENTS, "aggro_requirements", offsetof(NPC, m_aggroRequirements));
 			}
 
 			const StateEntry*
@@ -462,6 +500,7 @@ namespace tpublic
 				m_zoneId = 0;
 				m_outOfZoneAction = OutOfZoneAction();
 				m_evadeDespawn = false;
+				m_aggroRequirements = AggroRequirements();
 
 				m_cooldowns.m_entries.clear();
 				m_castInProgress.reset();
@@ -499,6 +538,7 @@ namespace tpublic
 			uint32_t									m_zoneId = 0;
 			OutOfZoneAction								m_outOfZoneAction;
 			bool										m_evadeDespawn = false;
+			AggroRequirements							m_aggroRequirements;
 
 			// Not serialized
 			Cooldowns									m_cooldowns;

@@ -469,12 +469,140 @@ ability npc_froststrike:
 	direct_effect damage:
 	{
 		flags: [ can_be_critical ]
-		damage_type: physical
+		damage_type: frost
 		function: { expression: x_plus_a x: weapon a: [ [ 1 5 ] [ 10 20 ] [ 20 40 ] ] }
 	}
 	
 	direct_effect apply_aura:
 	{
 		aura: npc_froststrike
+	}
+}
+
+ability npc_chain_lightning_tertiary:
+{
+	string: "Chain Lightning"
+	range: 4
+	flags: [ spell offensive target_other target_hostile can_miss ]
+	states: [ default in_combat ]
+	icon: icon_chain_lightning
+	speed: 9
+	projectile: npc_chain_lightning
+	target_particle_system: purple_spell_hit
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical is_magical ]
+		damage_type: nature
+		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] [ 20 70 ] ] elite_multiplier: 1.7 }		
+	}			
+}
+
+ability npc_chain_lightning_secondary:
+{
+	string: "Chain Lightning"
+	range: 4
+	flags: [ spell offensive target_other target_hostile can_miss ]
+	states: [ default in_combat ]
+	icon: icon_chain_lightning
+	speed: 9
+	projectile: npc_chain_lightning
+	target_particle_system: purple_spell_hit
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical is_magical ]
+		damage_type: nature
+		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] [ 20 70 ] ] elite_multiplier: 1.7 }		
+	}			
+	
+	direct_effect trigger_ability:
+	{
+		ability: npc_chain_lightning_tertiary
+		target: random_nearby
+	}	
+}
+
+ability npc_chain_lightning:
+{
+	string: "Chain Lightning"
+	range: 8
+	cast_time: 25
+	cooldowns: [ global spell_arcane_lockout ]
+	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
+	states: [ default in_combat ]
+	icon: icon_chain_lightning
+	speed: 9
+	projectile: npc_chain_lightning
+	resource_cost mana: 20
+	target_particle_system: purple_spell_hit
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical is_magical ]
+		damage_type: nature
+		function: { expression: a a: [ [ 1 15 ] [ 10 45 ] [ 20 90 ] ] elite_multiplier: 1.7 }		
+	}		
+	
+	direct_effect trigger_ability:
+	{
+		ability: npc_chain_lightning_secondary
+		target: random_nearby
+	}
+}
+
+particle_system npc_chain_lightning:
+{
+	particle:
+	{
+		sprites: [ effect_pink_lightning_0 effect_pink_lightning_1 effect_pink_lightning_2 ]
+		sprite_interval: 100
+		flags: [ attached no_rotation ]
+		scale: 0.4
+		count: 1		
+	}
+}
+
+ability npc_arcane_detonation:
+{
+	string: "Arcane Detonation"
+	cooldowns: [ spell_arcane_lockout ]
+	flags: [ spell target_self target_aoe target_aoe_hostile always_in_line_of_sight always_in_range ]
+	states: [ default in_combat ]
+	icon: icon_frost_explosion
+	cast_time: 20
+	delay: 3
+	aoe_radius: 2
+	aoe_cap: 8
+	aoe_requirement target<must_not_be_in_state>: { id: dead }
+	source_particle_system: npc_arcane_detonation
+
+	direct_effect damage:
+	{
+		flags: [ can_be_critical is_magical ]
+		damage_type: arcane
+		function: { expression: a a: [ [ 1 25 ] [ 10 75 ] [ 20 150 ] ] elite_multiplier: 1.7 }				
+	}
+
+	direct_effect damage:
+	{
+		flags: [ is_magical self ]
+		damage_type: arcane
+		function: { expression: a_mul_x x: health_max a: 0.2 }				
+	}	
+}
+
+particle_system npc_arcane_detonation:
+{
+	particle:
+	{
+		sprites: [ effect_expl_0 effect_expl_1 effect_expl_2 effect_expl_3 ]
+		sprite_interval: 125
+		flags: [ attached blend_add no_loop ]
+		duration: 400
+		count: 1		
+		scale: 3
+		alpha: 0.6
+		fade_out: 200
 	}
 }
