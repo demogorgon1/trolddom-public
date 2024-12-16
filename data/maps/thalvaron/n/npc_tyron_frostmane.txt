@@ -1,0 +1,86 @@
+dialogue_screen .tyron_frostmane_dialogue:
+{
+	text: 
+	[	
+		"Be careful."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .ranger_fremalt_1 }
+		{ quest: .tyron_frostmane_1 }
+	]
+}
+
+dialogue_root .tyron_frostmane_dialogue:
+{
+	.tyron_frostmane_dialogue: { }
+}
+
+entity thalvaron_tyron_frostmane: !NPC
+{
+	_string: "Tyron Frostmane"
+	_dialogue_root: .tyron_frostmane_dialogue	
+	_sprite: man_36
+	_sprite_dead: man_36_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .tyron_frostmane_1:
+{
+	string: "Rebel Ears"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .tyron_frostmane_1_quest_item count: 10 }
+}
+
+loot_group .tyron_frostmane_1_quest_item: {}
+
+item .tyron_frostmane_1_quest_item:
+{
+	icon: icon_ear_1
+	item_level: 12
+	loot_groups: [ .tyron_frostmane_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Rebel Ear"
+	stack: 10
+}
+
+quest .tyron_frostmane_1:
+{
+	string: "Ears for the Jar"
+
+	text:
+	[
+		"Get rid of the remaining rebels in the northern highlands."
+	]
+	
+	description: 
+	[
+		"The rebel army passed through here and didn't leave much of a presence. As far as I know they just left a little camp up north. I'll give you a reward if you go and get rid of them."
+	]
+
+	progress:
+	[
+		"How is it going?"
+	]
+	
+	completion:
+	[
+		"Nice, more ears for my, uhm, collection."
+	]
+
+	objectives: [ .tyron_frostmane_1 ]
+	level: 12
+	next_quest: .tyron_frostmane_1 
+
+	# FIXME: rewards
+}

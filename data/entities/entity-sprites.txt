@@ -309,10 +309,24 @@ sprites:
 	sprite arcane_caster_1_dead: { }
 
 	cursor: { position: [ 0 256 ] }
+	
 	sprite man_35: { dead: man_35_dead }
+	sprite kobold_1: { dead: kobold_1_dead }
+	sprite kobold_2: { dead: kobold_2_dead }
+	sprite man_36: { dead: man_36_dead }
+	sprite man_37: { dead: man_36_dead }
+	sprite yeti_1: { dead: yeti_1_dead }
+	sprite woman_12: { dead: woman_11_dead }
 	
 	cursor: { position: [ 0 272 ] }
+	
 	sprite man_35_dead: { }
+	sprite kobold_1_dead: { }
+	sprite kobold_2_dead: { }
+	sprite man_36_dead: { }
+	sprite man_37_dead: { }
+	sprite yeti_1_dead: { }
+	sprite woman_12_dead: { }
 
 }
 

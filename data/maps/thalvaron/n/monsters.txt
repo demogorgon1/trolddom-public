@@ -1,0 +1,124 @@
+npc_behavior_state .wandering_short:
+{
+	on_route<thalvaron_default_patrol>: thalvaron_default_patrol
+	behavior: wandering
+	max_range: 1
+}
+
+npc_behavior_state .passive:
+{
+	on_route<thalvaron_default_patrol>: thalvaron_default_patrol
+	behavior: do_nothing
+}
+
+loot_table .default_humanoid: 
+{
+	slots:
+	[	
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+##########################################################################################
+# North kobolds 
+
+map_entity_spawn thalvaron_north_kobold: 
+{ 
+	entity thalvaron_north_kobold_a: { init_state: default } 
+	entity thalvaron_north_kobold_b: { init_state: default } 
+}
+
+# Kobolds in the iceveil pass mine
+{
+	${
+		_level: 12
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: .default_humanoid
+	}
+
+	entity thalvaron_north_kobold_a: !NPC { _string: "Iceveil Kobold" _sprite: kobold_1 _sprite_dead: kobold_1_dead }
+	entity thalvaron_north_kobold_b: !NPC { _string: "Iceveil Kobold" _sprite: kobold_2 _sprite_dead: kobold_2_dead }
+}
+
+##########################################################################################
+# Rebels
+
+map_entity_spawn thalvaron_north_rebel: 
+{ 
+	entity thalvaron_north_rebel_a: { init_state: default } 
+	entity thalvaron_north_rebel_b: { init_state: default } 
+	entity thalvaron_north_rebel_c: { init_state: default } 
+	entity thalvaron_north_rebel_d: { init_state: default } 
+}
+
+# Rebels around the north
+{
+	loot_table .north_rebel: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { loot_group: .tyron_frostmane_1_quest_item requirement self<must_have_active_quest>: { id: .tyron_frostmane_1 } } 
+			}
+
+			{ 
+				possibility: { loot_group: .tyron_frostmane_1_quest_item requirement self<must_have_active_quest>: { id: .tyron_frostmane_1 } } 
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_CLOTH{}
+		]	
+	}
+	
+	${
+		_level: 12
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .passive
+		_loot_table: .north_rebel
+	}
+
+	entity thalvaron_north_rebel_a: !NPC { _string: "Highland Rebel" _sprite: rebel_1 _sprite_dead: rebel_1_dead }
+	entity thalvaron_north_rebel_b: !NPC { _string: "Highland Rebel" _sprite: rebel_2 _sprite_dead: rebel_2_dead }
+	entity thalvaron_north_rebel_c: !NPC { _string: "Highland Rebel" _sprite: rebel_3 _sprite_dead: rebel_3_dead }
+	entity thalvaron_north_rebel_d: !NPC { _string: "Highland Scout" _sprite: rebel_4 _sprite_dead: rebel_4_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
+}
+
+##########################################################################################
+# Iceveil monsters
+
+map_entity_spawn thalvaron_north_yeti: 
+{ 
+	entity thalvaron_north_yeti: { init_state: default } 
+}
+
+# Northern part of the highlands
+{
+	loot_table .north_yeti: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { }
+				possibility: { loot_group: .ronja_frostmane_1_quest_item requirement self<must_have_active_quest>: { id: .ronja_frostmane_1 } } 
+			}
+			
+			!WORLD_DROPS {}
+		]	
+	}
+	
+	${
+		_level: 13
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: .north_yeti
+		_weapon_damage: 1.3
+		_resource_health: 1.3
+	}
+
+	entity thalvaron_north_yeti: !NPC { _string: "Iceveil Yeti" _sprite: yeti_1 _sprite_dead: yeti_1_dead }
+}

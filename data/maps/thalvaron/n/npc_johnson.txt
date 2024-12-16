@@ -1,0 +1,78 @@
+dialogue_screen .johnson_dialogue:
+{
+	text: 
+	[	
+		"Be careful."
+	]		
+	
+	options:
+	[
+		{ quest: .johnson_1 }
+	]
+}
+
+dialogue_root .johnson_dialogue:
+{
+	.johnson_dialogue: { }
+}
+
+entity thalvaron_johnson: !NPC
+{
+	_string: "Mountainman Johnson"
+	_dialogue_root: .johnson_dialogue	
+	_sprite: man_37
+	_sprite_dead: man_37_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .johnson_1:
+{
+	string: "Kobolds Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_north_kobold_a thalvaron_north_kobold_b ]
+		count: 6
+	}
+}
+
+quest .johnson_1:
+{
+	string: "Infested Mine"
+
+	text:
+	[
+		"Reduce the kobold infestation."
+	]
+	
+	description: 
+	[
+		"Have you heard about Kobolds? No? Until recently me neither. I had noticed some strange activities in my little mine, like weird poop in the corners, tools missing, and some of the ore being picked at. I had an"
+		"exterminator come look at it and he immediately told me that I had kobolds! He told me he could help me get rid of them, but the price he quoted me was outrageous.\n\n"
+		"Maybe you can go clear them out for a more reasonable price?"
+	]
+
+	progress:
+	[
+		"Watch out what you step on."
+	]
+	
+	completion:
+	[
+		"Excellent."
+	]
+
+	level: 12
+	objectives: [ .johnson_1 ]
+	# FIXME rewards
+}
+

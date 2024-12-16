@@ -1,0 +1,86 @@
+dialogue_screen .ronja_frostmane_dialogue:
+{
+	text: 
+	[	
+		"Be careful."
+	]		
+	
+	options:
+	[
+		{ quest: .ronja_frostmane_1 }
+	]
+}
+
+dialogue_root .ronja_frostmane_dialogue:
+{
+	.ronja_frostmane_dialogue: { }
+}
+
+entity thalvaron_ronja_frostmane: !NPC
+{
+	_string: "Ronja Frostmane"
+	_dialogue_root: .ronja_frostmane_dialogue	
+	_sprite: woman_12
+	_sprite_dead: woman_12_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .ronja_frostmane_1:
+{
+	string: "Yeti Pelts"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .ronja_frostmane_1_quest_item count: 5 }
+}
+
+loot_group .ronja_frostmane_1_quest_item: {}
+
+item .ronja_frostmane_1_quest_item:
+{
+	icon: icon_fur
+	item_level: 13
+	loot_groups: [ .ronja_frostmane_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Yeti Pelt"
+	stack: 5
+}
+
+quest .ronja_frostmane_1:
+{
+	string: "Getting Colder"
+
+	text:
+	[
+		"Kill yetis and return their pelts to Ronja."
+	]
+	
+	description: 
+	[
+		"I don't know if you've noticed, but it's kinda cold up here. With winter just around the corner I'm thinking it's time to innovate a bit."
+		"Have you seen the yetis in the frozen fields to the east? They don't look like they're freezing. Maybe you can bring me some of their pelts and I'll see if I can turn them into something useful?"
+	]
+
+	progress:
+	[
+		"How is it going?"
+	]
+	
+	completion:
+	[
+		"Hmm, they're more itchy than expected."
+	]
+
+	objectives: [ .ronja_frostmane_1 ]
+	level: 13
+	next_quest: .ronja_frostmane_1 
+
+	# FIXME: rewards
+}
