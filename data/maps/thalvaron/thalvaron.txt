@@ -136,6 +136,7 @@ map_palette .tiles:
 	tile wood_wall_2_window: [ 160 164 125 ]
 	tile wood_wall_2_window_inside: [ 143 125 164 ]
 	tile roof_4: [ 200 161 0 ]	
+	tile ice_cave_entrance: [ 39 243 94 ]
 }
 
 # NW
@@ -197,6 +198,7 @@ map_entity_spawn thalvaron_ranger_fremalt: { entity thalvaron_ranger_fremalt: { 
 map_entity_spawn thalvaron_johnson: { entity thalvaron_johnson: { init_state: default } }
 map_entity_spawn thalvaron_tyron_frostmane: { entity thalvaron_tyron_frostmane: { init_state: default } }
 map_entity_spawn thalvaron_ronja_frostmane: { entity thalvaron_ronja_frostmane: { init_state: default } }
+map_entity_spawn thalvaron_nook_morrow: { entity thalvaron_nook_morrow: { init_state: default } }
 
 map_palette .stuff:
 {
@@ -326,6 +328,9 @@ map_palette .stuff:
 	entity_spawn thalvaron_north_rebel: [ 49 13 141 ]			
 	entity_spawn thalvaron_north_yeti: [ 49 13 241 ]			
 	entity_spawn thalvaron_ronja_frostmane: [ 49 213 241 ]				
+	entity_spawn thalvaron_north_yeti_cave: [ 97 122 222 ]
+	entity_spawn thalvaron_north_yeti_boss: [ 97 255 255 ]
+	entity_spawn thalvaron_nook_morrow: [ 138 183 49 ]
 }
 
 map_palette .levels:

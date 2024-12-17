@@ -20,6 +20,14 @@ loot_table .default_humanoid:
 	]	
 }
 
+loot_table .default_beast: 
+{
+	slots:
+	[	
+		!WORLD_DROPS {}
+	]	
+}
+
 ##########################################################################################
 # North kobolds 
 
@@ -95,7 +103,17 @@ map_entity_spawn thalvaron_north_yeti:
 	entity thalvaron_north_yeti: { init_state: default } 
 }
 
-# Northern part of the highlands
+map_entity_spawn thalvaron_north_yeti_cave: 
+{ 
+	entity thalvaron_north_yeti_cave: { init_state: default } 
+}
+
+map_entity_spawn thalvaron_north_yeti_boss: 
+{ 
+	entity thalvaron_north_yeti_boss: { init_state: default } 
+}
+
+# Yetis in northern part of the highlands
 {
 	loot_table .north_yeti: 
 	{
@@ -110,15 +128,106 @@ map_entity_spawn thalvaron_north_yeti:
 		]	
 	}
 	
+	loot_table .north_yeti_2: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { }
+				possibility: { loot_group: .ronja_frostmane_2_quest_item requirement self<must_have_active_quest>: { id: .ronja_frostmane_2 } } 
+			}
+			
+			!WORLD_DROPS {}
+		]	
+	}
+		
 	${
 		_level: 13
 		_faction: monsters
 		_creature_type: humanoid
-		_default_behavior_state: .wandering_short
-		_loot_table: .north_yeti
-		_weapon_damage: 1.3
-		_resource_health: 1.3
+		_default_behavior_state: .wandering_short						
 	}
 
-	entity thalvaron_north_yeti: !NPC { _string: "Iceveil Yeti" _sprite: yeti_1 _sprite_dead: yeti_1_dead }
+	entity thalvaron_north_yeti: !NPC { _string: "Iceveil Yeti" _sprite: yeti_1 _sprite_dead: yeti_1_dead _loot_table: .north_yeti _weapon_damage: 1.3 _resource_health: 1.3 }
+	entity thalvaron_north_yeti_cave: !NPC { _string: "Cave Yeti" _sprite: yeti_2 _sprite_dead: yeti_2_dead _loot_table: .north_yeti_2 _weapon_damage: 1.4 _resource_health: 1.4 _abilities: [ { id: npc_rend } { id: npc_attack } ] }
 }
+
+# Northern yeti patriarch
+{
+	loot_table .north_yeti_boss: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { loot_group: .north_yeti_boss } 
+			}
+			
+			!WORLD_DROPS {}
+		]	
+	}
+	
+	loot_group .north_yeti_boss: { }
+	
+	ability .north_yeti_boss:	
+	{
+		string: "Strange Yeti Effigy"
+		description: "This item starts a quest."
+		flags: [ target_self item ]
+		icon: icon_effigy
+		direct_effect simple<start_quest>: .north_yeti_boss
+		states: [ default in_combat ]
+		requirement self<must_not_have_completed_quest>: { id: .north_yeti_boss }
+		requirement self<must_not_have_active_quest>: { id: .north_yeti_boss }
+	}
+
+	item .north_yeti_boss:
+	{
+		loot_groups: [ .north_yeti_boss ]		
+		string: "Strange Yeti Effigy" 
+		icon: icon_effigy
+		item_level: 13
+		flags: [ unique not_sellable ]
+		use_ability: .north_yeti_boss
+	}	
+			
+	quest .north_yeti_boss:
+	{
+		string: "Strange Yeti Effigy"
+
+		text:
+		[
+			"Bring the strange yeti effigy back to Ronja Frostmane."
+		]
+		
+		description: 
+		[
+			"The yeti patriarch carried a strange effigy. Take it back to Ronja Frostmane, maybe she will find it interesting."
+		]
+		
+		completion:
+		[
+			"Hmm, why would a stupid beast carried that ugly thing around? I don't know, maybe it found it somewhere and picked it up?"
+		]
+
+		level: 13
+		quest_items: [ .north_yeti_boss ]
+		next_quest: .ronja_frostmane_3
+		reward_xp_multiplier: 0.2
+	}
+
+	${
+		_level: 13
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .passive
+		_loot_table: .north_yeti_boss 
+		_weapon_damage: 1.5
+		_resource_health: 1.5
+		_abilities: [ { id: npc_rend } { id: npc_attack } ] 
+	}
+
+	entity thalvaron_north_yeti_boss: !NPC { _string: "Yeti Patriarch" _sprite: yeti_3 _sprite_dead: yeti_3_dead }
+}
+
+
+

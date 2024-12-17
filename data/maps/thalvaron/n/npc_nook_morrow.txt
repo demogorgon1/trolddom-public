@@ -1,0 +1,31 @@
+dialogue_screen .nook_morrow_dialogue:
+{
+	text: 
+	[	
+		"Be careful."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .ronja_frostmane_3 }
+	]
+}
+
+dialogue_root .nook_morrow_dialogue:
+{
+	.nook_morrow_dialogue: { }
+}
+
+entity thalvaron_nook_morrow: !NPC
+{
+	_string: "Nook Morrow"
+	_dialogue_root: .nook_morrow_dialogue	
+	_sprite: woman_13
+	_sprite_dead: woman_13_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

@@ -509,6 +509,8 @@ sprites:
 	sprite icon_watering_can : { tags: [ icon ] }
 	sprite icon_torch : { tags: [ icon ] }
 	sprite icon_fur : { tags: [ icon ] }
+	sprite icon_effigy : { tags: [ icon ] }
+	sprite icon_fur_2 : { tags: [ icon ] }
 	
 }
 

@@ -316,7 +316,10 @@ sprites:
 	sprite man_36: { dead: man_36_dead }
 	sprite man_37: { dead: man_36_dead }
 	sprite yeti_1: { dead: yeti_1_dead }
-	sprite woman_12: { dead: woman_11_dead }
+	sprite woman_12: { dead: woman_12_dead }
+	sprite yeti_2: { dead: yeti_2_dead }
+	sprite yeti_3: { dead: yeti_3_dead }
+	sprite woman_13: { dead: woman_13_dead }
 	
 	cursor: { position: [ 0 272 ] }
 	
@@ -327,6 +330,9 @@ sprites:
 	sprite man_37_dead: { }
 	sprite yeti_1_dead: { }
 	sprite woman_12_dead: { }
+	sprite yeti_2_dead: { }
+	sprite yeti_3_dead: { }
+	sprite woman_13_dead: { }
 
 }
 

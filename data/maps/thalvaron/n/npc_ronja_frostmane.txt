@@ -8,6 +8,10 @@ dialogue_screen .ronja_frostmane_dialogue:
 	options:
 	[
 		{ quest: .ronja_frostmane_1 }
+		{ quest: .ronja_frostmane_2 }
+		{ quest<offer_only>: .ronja_frostmane_3 }
+		{ quest<completion_only>: .north_yeti_boss }
+		
 	]
 }
 
@@ -59,7 +63,7 @@ quest .ronja_frostmane_1:
 
 	text:
 	[
-		"Kill yetis and return their pelts to Ronja."
+		"Kill Iceveil yetis and return their pelts to Ronja."
 	]
 	
 	description: 
@@ -80,7 +84,107 @@ quest .ronja_frostmane_1:
 
 	objectives: [ .ronja_frostmane_1 ]
 	level: 13
-	next_quest: .ronja_frostmane_1 
+	next_quest: .ronja_frostmane_2 
+
+	# FIXME: rewards
+}
+
+############################################################
+# Quest 2
+
+objective .ronja_frostmane_2:
+{
+	string: "Pristine Yeti Pelts"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .ronja_frostmane_2_quest_item count: 5 }
+}
+
+loot_group .ronja_frostmane_2_quest_item: {}
+
+item .ronja_frostmane_2_quest_item:
+{
+	icon: icon_fur_2
+	item_level: 13
+	loot_groups: [ .ronja_frostmane_2_quest_item ]
+	flags: [ not_sellable ]
+	string: "Pristine Yeti Pelt"
+	stack: 5
+}
+
+quest .ronja_frostmane_2:
+{
+	string: "Not Soft Enough"
+
+	text:
+	[
+		"Kill cave yetis and return their pelts to Ronja."
+	]
+	
+	description: 
+	[
+		"To be honest, the pelts you bought mere were a bit disappointing. That fur was just way too itchy to be comfortable! But you know what, I've seen some softer looking white yetis living in the"
+		"caves beyond the frozen lake to the east. Can you go get me some samples?"
+	]
+
+	progress:
+	[
+		"How's it going?"
+	]
+	
+	completion:
+	[
+		"This is much better! These are going to make fine hats I think."
+	]
+
+	prerequisites: [ .ronja_frostmane_1 ]
+	objectives: [ .ronja_frostmane_2 ]
+	level: 13
+
+	# FIXME: rewards
+}
+
+############################################################
+# Quest 3
+
+item .ronja_frostmane_3_quest_item:
+{
+	string: "Strange Yeti Effigy" 
+	icon: icon_effigy
+	item_level: 13
+	flags: [ unique not_sellable ]
+}	
+
+quest .ronja_frostmane_3:
+{
+	string: "Strange Yeti Effigy"
+
+	text:
+	[
+		"Take the strange yeti effigy to Nook."
+	]
+	
+	description: 
+	[
+		"Take the strange object to Nook, she might make some sense of it. She has a weird interest in yetis.\n\n"
+		"She lives in the house next to us."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"What? That evil woman made you kill poor defenseless yetis just to turn them into hats?"
+	]
+
+	prerequisites: [ .north_yeti_boss ]
+	quest_items: [ .ronja_frostmane_3_quest_item ]
+	level: 13
+	reward_xp_multiplier: 0.2
 
 	# FIXME: rewards
 }

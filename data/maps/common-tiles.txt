@@ -568,6 +568,7 @@ sprites:
 	sprite wood_wall_2_grass_2: { flags: [ tile_block_line_of_sight tile_top ] }
 	sprite wood_wall_2_window_grass_1: { flags: [ tile_block_line_of_sight tile_top ] }
 	sprite wood_wall_2_window_grass_2: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite ice_cave_entrance: { flags: [ tile_walkable tile_top ] }
 
 	cursor: { position: [ 0 304 ] }
 	
