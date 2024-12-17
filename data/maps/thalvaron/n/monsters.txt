@@ -113,6 +113,21 @@ map_entity_spawn thalvaron_north_yeti_boss:
 	entity thalvaron_north_yeti_boss: { init_state: default } 
 }
 
+map_entity_spawn thalvaron_wandering_owlbear: 
+{ 
+	entity thalvaron_wandering_owlbear: { init_state: default } 
+}
+
+map_entity_spawn thalvaron_iceveil_wolf: 
+{ 
+	entity thalvaron_iceveil_wolf: { init_state: default } 
+}
+
+map_entity_spawn thalvaron_frost_troll:
+{ 
+	entity thalvaron_frost_troll: { init_state: default } 
+}
+
 # Yetis in northern part of the highlands
 {
 	loot_table .north_yeti: 
@@ -145,7 +160,8 @@ map_entity_spawn thalvaron_north_yeti_boss:
 		_level: 13
 		_faction: monsters
 		_creature_type: humanoid
-		_default_behavior_state: .wandering_short						
+		_default_behavior_state: .wandering_short				
+		_aggro_requirements: { requirement target<must_not_have_aura>: .nook_morrow_1_quest_item }
 	}
 
 	entity thalvaron_north_yeti: !NPC { _string: "Iceveil Yeti" _sprite: yeti_1 _sprite_dead: yeti_1_dead _loot_table: .north_yeti _weapon_damage: 1.3 _resource_health: 1.3 }
@@ -224,10 +240,63 @@ map_entity_spawn thalvaron_north_yeti_boss:
 		_weapon_damage: 1.5
 		_resource_health: 1.5
 		_abilities: [ { id: npc_rend } { id: npc_attack } ] 
+		_aggro_requirements: { requirement target<must_not_have_aura>: .nook_morrow_1_quest_item }
 	}
 
 	entity thalvaron_north_yeti_boss: !NPC { _string: "Yeti Patriarch" _sprite: yeti_3 _sprite_dead: yeti_3_dead }
 }
 
+# Wandering owlbear
+{
+	loot_table .wandering_owlbear: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { loot_group: .nook_morrow_2_quest_item_2 requirement self<must_have_active_quest>: { id: .nook_morrow_2 } } 
+			}
+			
+			!WORLD_DROPS {}
+		]	
+	}
+		
+	${
+		_level: 13
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short				
+	}
 
+	entity thalvaron_wandering_owlbear: !NPC { _string: "Wandering Owlbear" _sprite: owlbear_1 _sprite_dead: owlbear_1_dead _loot_table: .wandering_owlbear _weapon_damage: 2.5 _resource_health: 1.5 }
+}
+
+# Wolves
+{
+	${
+		_level: 14
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short				
+		_loot_table: .default_beast
+		_resource_health: 0.7
+		_weapon_damage: 0.8
+	}
+
+	entity thalvaron_iceveil_wolf: !NPC { _string: "Iceveil Wolf" _sprite: wolf_1 _sprite_dead: wolf_1_dead }
+}
+
+# Frost Troll
+{
+	${
+		_level: 14
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .passive				
+		_loot_table: .default_humanoid 
+		_weapon_damage: 1.5
+		_resource_health: 1.8
+	}
+
+	entity thalvaron_frost_troll: !NPC { _string: "Frost Troll" _sprite: troll_2 _sprite_dead: troll_2_dead }
+}
 

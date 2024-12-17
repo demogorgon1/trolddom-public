@@ -511,6 +511,9 @@ sprites:
 	sprite icon_fur : { tags: [ icon ] }
 	sprite icon_effigy : { tags: [ icon ] }
 	sprite icon_fur_2 : { tags: [ icon ] }
+	sprite icon_potion_1 : { tags: [ icon ] }
+	sprite icon_tube_1 : { tags: [ icon ] }
+	sprite icon_feather_1 : { tags: [ icon ] }
 	
 }
 

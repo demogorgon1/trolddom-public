@@ -199,6 +199,9 @@ map_entity_spawn thalvaron_johnson: { entity thalvaron_johnson: { init_state: de
 map_entity_spawn thalvaron_tyron_frostmane: { entity thalvaron_tyron_frostmane: { init_state: default } }
 map_entity_spawn thalvaron_ronja_frostmane: { entity thalvaron_ronja_frostmane: { init_state: default } }
 map_entity_spawn thalvaron_nook_morrow: { entity thalvaron_nook_morrow: { init_state: default } }
+map_entity_spawn thalvaron_nook_morrow_1_object: { entity thalvaron_nook_morrow_1_object: { init_state: default } }
+map_entity_spawn thalvaron_doctor_hulius_camp: { entity thalvaron_doctor_hulius_camp: { init_state: default } }
+map_entity_spawn thalvaron_doctor_hulius: { entity thalvaron_doctor_hulius: { init_state: default } }
 
 map_palette .stuff:
 {
@@ -217,6 +220,7 @@ map_palette .stuff:
 	entity_spawn bonfire: [ 251 43 66 ]		
 	entity_spawn default_chest: [ 40 143 66 ]		
 	entity_spawn cauldron: [ 43 113 166 ]		
+	entity_spawn bonfire_unlit: [ 144 59 20 ]
 		
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn thalvaron_wizard_realm_spawn: [ 42 157 85 ]
@@ -331,6 +335,13 @@ map_palette .stuff:
 	entity_spawn thalvaron_north_yeti_cave: [ 97 122 222 ]
 	entity_spawn thalvaron_north_yeti_boss: [ 97 255 255 ]
 	entity_spawn thalvaron_nook_morrow: [ 138 183 49 ]
+	entity_spawn thalvaron_nook_morrow_1_object: [ 214 29 84 ]
+	entity_spawn thalvaron_wandering_owlbear: [ 217 29 190 ]
+	entity_spawn thalvaron_iceveil_wolf: [ 217 129 190 ]	
+	entity_spawn thalvaron_doctor_hulius_camp: [ 218 121 190 ]	
+	entity_spawn thalvaron_doctor_hulius: [ 218 221 190 ]	
+	entity_spawn thalvaron_frost_troll: [ 218 221 201 ]	
+	
 }
 
 map_palette .levels:
@@ -434,6 +445,7 @@ map_palette .doodads:
 	doodad wood_stairs_reversed: [ 173 19 192 ]	
 	doodad animal_skull: [ 197 173 210 ]	
 	doodad barrel: [ 111 38 84 ]
+	doodad cage: [ 45 41 145 ]
 	
 	doodad wall_sign_generic<"Mathew's Emporium">: [ 197 173 111 ]	
 	doodad wall_sign_generic<"John & Mary's">: [ 97 173 111 ]	

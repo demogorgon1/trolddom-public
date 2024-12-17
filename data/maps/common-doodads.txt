@@ -217,6 +217,7 @@ doodad stone_stairs_reversed: { sprites: [ doodad_stone_stairs_reversed ] map_pa
 doodad wall_banner_generic: { sprites: [ doodad_wall_banner_generic_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad wall_sign_generic: { sprites: [ doodad_wall_sign_generic_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad barrel: { sprites: [ barrel_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad cage: { sprites: [ cage_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 
 
 

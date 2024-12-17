@@ -20,7 +20,8 @@ namespace tpublic
 				enum Type : uint8_t
 				{
 					TYPE_TALK,
-					TYPE_READ
+					TYPE_READ,
+					TYPE_OPEN
 				};
 
 				void
@@ -32,6 +33,8 @@ namespace tpublic
 						m_type = TYPE_TALK;
 					else if (t == "read")
 						m_type = TYPE_READ;
+					else if (t == "open")
+						m_type = TYPE_OPEN;
 					else
 						TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid verb.", aSource->GetIdentifier());
 				}
@@ -59,6 +62,7 @@ namespace tpublic
 					{
 					case TYPE_TALK:		return "Talk";
 					case TYPE_READ:		return "Read";
+					case TYPE_OPEN:		return "Open";
 					default:			break;
 					}
 					assert(false);

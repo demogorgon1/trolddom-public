@@ -27,4 +27,5 @@ entity fireplace: !MISC_OBJECT { _string: "Fireplace" _frames: [ fireplace_1 fir
 entity fireplace_unlit: !MISC_OBJECT { _string: "Fireplace" _frames: [ fireplace_unlit ] }
 entity bonfire: !MISC_OBJECT { _string: "Bonfire" _frames: [ bonfire_1 bonfire_2 bonfire_3 ] }
 entity cauldron: !MISC_OBJECT { _string: "Cauldron" _frames: [ cauldron_1 ] }
+entity bonfire_unlit: !MISC_OBJECT { _string: "Extinguished Bonfire" _frames: [ bonfire_unlit ] }
 

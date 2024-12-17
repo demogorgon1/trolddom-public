@@ -1,0 +1,31 @@
+dialogue_screen .doctor_hulius_dialogue:
+{
+	text: 
+	[	
+		"Be careful."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .doctor_hulius_camp_1 }
+	]
+}
+
+dialogue_root .doctor_hulius_dialogue:
+{
+	.doctor_hulius_dialogue: { }
+}
+
+entity thalvaron_doctor_hulius: !NPC
+{
+	_string: "Doctor Hulius"
+	_dialogue_root: .doctor_hulius_dialogue	
+	_sprite: man_38
+	_sprite_dead: man_38_dead
+	_level: 14
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

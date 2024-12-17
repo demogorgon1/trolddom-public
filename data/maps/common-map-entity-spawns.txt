@@ -71,6 +71,11 @@ map_entity_spawn bonfire:
 	entity bonfire: { weight: 1 }
 }
 
+map_entity_spawn bonfire_unlit:
+{
+	entity bonfire_unlit: { weight: 1 }
+}
+
 map_entity_spawn fireplace:
 {
 	entity fireplace: { weight: 1 }

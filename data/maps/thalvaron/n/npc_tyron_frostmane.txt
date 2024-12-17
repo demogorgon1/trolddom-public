@@ -9,6 +9,8 @@ dialogue_screen .tyron_frostmane_dialogue:
 	[
 		{ quest<completion_only>: .ranger_fremalt_1 }
 		{ quest: .tyron_frostmane_1 }
+		{ quest: .tyron_frostmane_2 }
+		{ quest<offer_only>: .tyron_frostmane_3 }
 	]
 }
 
@@ -83,4 +85,86 @@ quest .tyron_frostmane_1:
 	next_quest: .tyron_frostmane_1 
 
 	# FIXME: rewards
+}
+
+############################################################
+# Quest 2
+
+objective .tyron_frostmane_2:
+{
+	string: "Iceveil Wolves Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_iceveil_wolf ]
+		count: 6
+	}
+}
+
+quest .tyron_frostmane_2:
+{
+	string: "Eliminating the Pack"
+
+	text:
+	[
+		"Head south, find the pack of wolves and eliminate it."
+	]
+	
+	description: 
+	[
+		"You seem like you know how to deal with vicious beasts. I got another job for you.\n\n"
+		"A pack of wolves is threatening our little peaceful settlement. Last time I saw it, it was lurking around south of the road. If you can get rid of them it would bring us great peace of mind."
+	]
+
+	progress:
+	[
+		"Have you killed them yet? Why not?"
+	]
+	
+	completion:
+	[
+		"Great!"
+	]
+
+	objectives: [ .tyron_frostmane_2 ]
+	level: 14
+	prerequisites: [ .tyron_frostmane_1 .ronja_frostmane_2 ]
+
+	# FIXME: rewards
+}
+
+############################################################
+# Quest 3
+
+quest .tyron_frostmane_3:
+{
+	string: "The Whereabouts of Doctor Hulius?"
+
+	text:
+	[
+		"Head south, find the pack of wolves and eliminate it."
+	]
+	
+	description: 
+	[
+		"A few days ago a man passed through here, going by the name of Doctor Hulius. I'm not sure if he was a real doctor. Anyway, he said he came for the city and wanted to go camping in the highlands."
+		"I tried to explain to him that it wasn't a good idea, but he insisted. Maybe you can see if you can find him? Try to figure out where he is? He's likely somewhere to the south east."
+	]
+
+	progress:
+	[
+		"Well, he's not here."
+	]
+	
+	completion:
+	[
+		"This is definitely the belongings of Doctor Hulius."
+	]
+
+	level: 14
+	prerequisites: [ .tyron_frostmane_2 ]
+	reward_xp_multiplier: 0.5
+	reward_cash_multiplier: 0
 }

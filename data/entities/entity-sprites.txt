@@ -314,12 +314,15 @@ sprites:
 	sprite kobold_1: { dead: kobold_1_dead }
 	sprite kobold_2: { dead: kobold_2_dead }
 	sprite man_36: { dead: man_36_dead }
-	sprite man_37: { dead: man_36_dead }
+	sprite man_37: { dead: man_37_dead }
 	sprite yeti_1: { dead: yeti_1_dead }
 	sprite woman_12: { dead: woman_12_dead }
 	sprite yeti_2: { dead: yeti_2_dead }
 	sprite yeti_3: { dead: yeti_3_dead }
 	sprite woman_13: { dead: woman_13_dead }
+	sprite owlbear_1: { dead: owlbear_1_dead }
+	sprite man_38: { dead: man_37_dead }
+	sprite troll_2: { dead: troll_2_dead }
 	
 	cursor: { position: [ 0 272 ] }
 	
@@ -333,7 +336,10 @@ sprites:
 	sprite yeti_2_dead: { }
 	sprite yeti_3_dead: { }
 	sprite woman_13_dead: { }
-
+	sprite owlbear_1_dead: { }
+	sprite man_38_dead: { }
+	sprite troll_2_dead: { }
+	
 }
 
 sprites:
@@ -437,6 +443,10 @@ sprites:
 	cursor: { position: [ 0 64 ] }
 	sprite glowing_orb_1_b: { }
 	sprite cabbage_1: { }
+	sprite effigy_1: { }
+	sprite feather_1: { }
+	sprite bonfire_unlit: { }
+	sprite cage_1: { }
 	
 }
 
