@@ -51,7 +51,8 @@ namespace tpublic
 			TYPE_MUST_BE_AT_LEAST_LEVEL,
 			TYPE_MUST_BE_DISCIPLE,
 			TYPE_MUST_HAVE_MORE_RAGE_THAN,
-			TYPE_MUST_NOT_BE_READY_TO_TURN_IN_QUEST
+			TYPE_MUST_NOT_BE_READY_TO_TURN_IN_QUEST,
+			TYPE_MUST_NOT_BE_TYPE
 		};
 
 		static DataType::Id
@@ -75,6 +76,7 @@ namespace tpublic
 				return DataType::ID_TAG;
 
 			case TYPE_MUST_BE_TYPE:
+			case TYPE_MUST_NOT_BE_TYPE:
 				return DataType::ID_ENTITY;
 
 			case TYPE_MUST_NOT_HAVE_ITEM_EQUIPPED:
@@ -183,6 +185,8 @@ namespace tpublic
 				m_type = TYPE_MUST_HAVE_TAG;
 			else if (typeString == "must_be_type")
 				m_type = TYPE_MUST_BE_TYPE;
+			else if (typeString == "must_not_be_type")
+				m_type = TYPE_MUST_NOT_BE_TYPE;
 			else if (typeString == "must_be_in_state")
 				m_type = TYPE_MUST_BE_IN_STATE;
 			else if (typeString == "must_not_be_in_state")

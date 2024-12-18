@@ -133,6 +133,11 @@ map_entity_spawn thalvaron_rock_elemental:
 	entity thalvaron_rock_elemental: { init_state: default } 
 }
 
+map_entity_spawn thalvaron_owlbear:
+{ 
+	entity thalvaron_owlbear: { init_state: default } 
+}
+
 # Yetis in northern part of the highlands
 {
 	loot_table .north_yeti: 
@@ -334,4 +339,199 @@ map_entity_spawn thalvaron_rock_elemental:
 	}
 
 	entity thalvaron_owlbear: !NPC { _string: "Owlbear" _sprite: owlbear_2 _sprite_dead: owlbear_2_dead  }
+}
+
+##########################################################################################
+# Deer
+
+map_entity_spawn thalvaron_deer_north: 
+{ 
+	entity thalvaron_deer_13: { init_state: default } 
+	entity thalvaron_deer_14: { init_state: default } 
+}
+
+# Wildlife
+{
+
+	loot_table .deer: 
+	{
+		slots:
+		[	
+			!WORLD_DROPS {}				
+		]	
+	}
+
+	${
+		_faction: wildlife
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: .deer
+	}
+	
+	entity thalvaron_deer_13: !NPC { _string: "Iceveil Deer" _sprite: deer_2 _sprite_dead: deer_2_dead _level: 13 }
+	entity thalvaron_deer_14: !NPC { _string: "Iceveil Deer" _sprite: deer_2 _sprite_dead: deer_2_dead _level: 14 }
+}
+
+##########################################################################################
+# Duskwhisper Vale kobolds
+
+map_entity_spawn thalvaron_duskwhisper_kobold: 
+{ 
+	entity thalvaron_duskwhisper_kobold_a: { init_state: default } 
+	entity thalvaron_duskwhisper_kobold_b: { init_state: default } 
+	entity thalvaron_duskwhisper_kobold_c: { init_state: default } 
+}
+
+# Caves
+{
+
+	${
+		_level: 14
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: .default_humanoid
+		_weapon_damage: 0.9
+		_resource_health: 0.8
+	}
+
+	entity thalvaron_duskwhisper_kobold_a: !NPC { _string: "Duskwhisper Kobold" _sprite: kobold_3 _sprite_dead: kobold_3_dead }
+	entity thalvaron_duskwhisper_kobold_b: !NPC { _string: "Duskwhisper Kobold" _sprite: kobold_4 _sprite_dead: kobold_4_dead }
+}
+
+# Caves healer
+{
+
+	${
+		_level: 14
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: .default_humanoid
+		_weapon_damage: 0.9
+		_resource_health: 0.8
+		_resource_mana: 1
+		_abilities: 
+		[ 
+			{ id: npc_heal target: low_health_friend_or_self }
+			{ id: npc_firebolt }
+			{ id: npc_attack } 
+		]		
+	}
+
+	entity thalvaron_duskwhisper_kobold_c: !NPC { _string: "Duskwhisper Soothsayer" _sprite: kobold_5 _sprite_dead: kobold_5_dead }
+}
+
+##########################################################################################
+# Duskwhisper Vale monsters
+
+map_entity_spawn thalvaron_wood_elemental: 
+{ 
+	entity thalvaron_wood_elemental: { init_state: default } 
+}
+
+# Wood Elemental
+{
+	loot_table .wood_elemental: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { loot_group: .gash_hewitt_1_quest_item requirement self<must_have_active_quest>: { id: .gash_hewitt_1 } } 
+			}
+			
+			!WORLD_DROPS {}
+		]	
+	}
+		
+	${
+		_level: 14
+		_faction: monsters
+		_creature_type: elemental
+		_default_behavior_state: .wandering_short
+		_loot_table: .wood_elemental
+		_weapon_damage: 0.9
+		_resource_health: 1.3
+	}
+
+	entity thalvaron_wood_elemental: !NPC { _string: "Wood Elemental" _sprite: wood_elemental_1 _sprite_dead: wood_elemental_1_dead }
+}
+
+# Tentacle monster
+{
+	loot_group .tentacle_monster: { }
+	loot_table .tentacle_monster: 
+	{
+		slots:
+		[
+			{
+				possibility: { loot_group: .tentacle_monster requirement self<must_not_have_completed_quest>: { id: .tentacle_monster } }			
+			}				
+			
+			!WORLD_DROPS {}
+		]	
+	}
+
+	ability .tentacle_monster_start_quest:	
+	{
+		string: "Severed Tentacle"
+		description: "This item starts a quest."
+		flags: [ target_self item ]
+		icon: icon_tentacle
+		direct_effect simple<start_quest>: .tentacle_monster
+		states: [ default in_combat ]
+		requirement self<must_not_have_completed_quest>: { id: .tentacle_monster }
+		requirement self<must_not_have_active_quest>: { id: .tentacle_monster }
+	}
+
+	item .tentacle_monster:
+	{
+		loot_groups: [ .tentacle_monster ]		
+		string: "Severed Tentacle" 
+		icon: icon_tentacle
+		item_level: 14
+		flags: [ unique not_sellable ]
+		use_ability: .tentacle_monster_start_quest
+		binds: when_picked_up
+	}
+	
+	quest .tentacle_monster:
+	{
+		string: "Spawn of Zyxtharion"
+
+		text:
+		[
+			"FIXME"
+		]
+		
+		description: 
+		[
+			"FIXME"
+		]
+
+		progress:
+		[
+			"FIXME"
+		]
+		
+		completion:
+		[
+			"FIXME"
+		]
+
+		level: 14
+	}
+
+	${
+		_level: 14
+		_faction: monsters
+		_creature_type: demon
+		_default_behavior_state: .passive
+		_loot_table: .tentacle_monster
+		_weapon_damage: 1.5
+		_resource_health: 1.5
+		_elite: true
+	}
+
+	entity thalvaron_tentacle_monster: !NPC { _string: "Spawn of Zyxtharion" _sprite: tentacle_monster_2 _sprite_dead: tentacle_monster_2_dead }
 }

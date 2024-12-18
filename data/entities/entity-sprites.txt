@@ -349,10 +349,24 @@ sprites:
 	cursor: { position: [ 0 288 ] }
 
 	sprite man_40: { dead: man_40_dead }
+	sprite elf_1: { dead: elf_1_dead }
+	sprite wood_elemental_1 : { dead: wood_elemental_1_dead }
+	sprite owlbear_3: { dead: owlbear_3_dead }
+	sprite kobold_3: { dead: kobold_3_dead }
+	sprite kobold_4: { dead: kobold_4_dead }
+	sprite kobold_5: { dead: kobold_5_dead }
+	sprite tentacle_monster_2: { dead: tentacle_monster_2_dead }
 
 	cursor: { position: [ 0 304 ] }
 	
 	sprite man_40_dead: { }
+	sprite elf_1_dead: { }
+	sprite wood_elemental_1_dead: { }
+	sprite owlbear_3_dead: { }
+	sprite kobold_3_dead: { }
+	sprite kobold_4_dead: { }
+	sprite kobold_5_dead: { }
+	sprite tentacle_monster_2_dead: { }
 
 }
 

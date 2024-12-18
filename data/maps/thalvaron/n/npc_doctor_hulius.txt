@@ -77,7 +77,7 @@ objective .doctor_hulius_1:
 
 quest .doctor_hulius_1:
 {
-	string: "Camping in nos as fun as imagined"
+	string: "Camping in not as fun as imagined"
 
 	text:
 	[

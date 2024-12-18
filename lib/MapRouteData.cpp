@@ -159,10 +159,14 @@ namespace tpublic
 				position = nextPosition.value();
 			}
 
-			DistanceField distanceField(aMapWidth, aMapHeight);
-			distanceField.Generate(subRoute->m_waypoints, aWalkable, UINT32_MAX);
+			if(routeData->m_maxDirectionFieldDistance != 0)
+			{
+				DistanceField distanceField(aMapWidth, aMapHeight);
+				distanceField.Generate(subRoute->m_waypoints, aWalkable, routeData->m_maxDirectionFieldDistance);
 
-			subRoute->m_directionField.GenerateFromDistanceField(distanceField);
+				subRoute->m_directionField = std::make_unique<DirectionField>();
+				subRoute->m_directionField->GenerateFromDistanceField(distanceField);
+			}
 
 			if(subRoute->m_waypoints.size() >= 8)
 			{
@@ -285,7 +289,10 @@ namespace tpublic
 			}
 			else
 			{
-				DirectionField::Direction direction = subRoute->m_directionField.GetDirection(aPosition);
+				if(!subRoute->m_directionField)
+					return false;
+
+				DirectionField::Direction direction = subRoute->m_directionField->GetDirection(aPosition);
 
 				switch(direction)
 				{

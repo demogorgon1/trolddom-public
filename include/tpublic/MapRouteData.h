@@ -20,7 +20,7 @@ namespace tpublic
 				IWriter*					aWriter) const
 			{
 				aWriter->WriteObjects(m_waypoints);
-				m_directionField.ToStream(aWriter);
+				aWriter->WriteOptionalObjectPointer(m_directionField);
 				aWriter->WriteBool(m_isLoop);
 			}
 
@@ -30,16 +30,30 @@ namespace tpublic
 			{
 				if(!aReader->ReadObjects(m_waypoints))
 					return false;
-				if(!m_directionField.FromStream(aReader))
+				if(!aReader->ReadOptionalObjectPointer(m_directionField))
 					return false;
 				if(!aReader->ReadBool(m_isLoop))
 					return false;
 				return true;
 			}
 
+			void
+			CopyFrom(
+				const SubRoute&				aOther)
+			{
+				m_waypoints = aOther.m_waypoints;
+				m_isLoop = aOther.m_isLoop;
+
+				if(aOther.m_directionField)
+				{
+					m_directionField = std::make_unique<DirectionField>();
+					*m_directionField = *aOther.m_directionField;
+				}
+			}
+
 			// Public data
 			std::vector<Vec2>						m_waypoints;
-			DirectionField							m_directionField;
+			std::unique_ptr<DirectionField>			m_directionField;
 			bool									m_isLoop = false;
 
 			// Runtime (need prepare), not serialized
@@ -76,7 +90,7 @@ namespace tpublic
 				for(const std::unique_ptr<SubRoute>& subRoute : aOther->m_subRoutes)
 				{
 					std::unique_ptr<SubRoute> t = std::make_unique<SubRoute>();
-					*t = *subRoute;
+					t->CopyFrom(*subRoute);
 					m_subRoutes.push_back(std::move(t));
 				}
 				m_positions = aOther->m_positions;

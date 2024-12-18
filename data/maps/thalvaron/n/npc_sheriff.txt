@@ -1,0 +1,78 @@
+dialogue_screen .sheriff_cunningham_dialogue:
+{
+	text: 
+	[	
+		"What brings you to this side of the mountains?"
+	]		
+	
+	options:
+	[
+		{ quest: .sheriff_cunningham_1 }
+	]
+}
+
+dialogue_root .sheriff_cunningham_dialogue:
+{
+	.sheriff_cunningham_dialogue: { }
+}
+
+entity thalvaron_sheriff_cunningham: !NPC
+{
+	_string: "Sheriff Cunningham"
+	_dialogue_root: .sheriff_cunningham_dialogue	
+	_sprite: man_10
+	_sprite_dead: man_10_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .sheriff_cunningham_1:
+{
+	string: "Duskwhisper Kobolds Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_duskwhisper_kobold_a thalvaron_duskwhisper_kobold_b thalvaron_duskwhisper_kobold_c ]
+		count: 8
+	}
+}
+
+quest .sheriff_cunningham_1:
+{
+	string: "If You'd Be So Ko-Bold"
+
+	text:
+	[
+		"Find kobolds near the blocked off pass to the west and kill them."
+	]
+	
+	description: 
+	[
+		"You're probably well aware that the main pass to the Iceveil Highlands has been blocked for a while due to fallen rocks. I'm fairly certain it's related to the increased kobold activity"
+		"we've experienced around the pass lately. Those little guys just can't stop digging tunnels everywhere. Before we can even think about reopening the pass, we need to get rid of the infestation.\n\n"
+		"Up for the task? Just follow the road west and you'll find the blocked off pass. I'm sure there will be kobolds."
+	]
+
+	progress:
+	[
+		"Back already?"
+	]
+	
+	completion:
+	[
+		"How many where there? Too many? I'm sure it wasn't too difficult to get rid of them."
+	]
+
+	objectives: [ .sheriff_cunningham_1 ]
+	level: 14
+
+	# FIXME: rewards
+}

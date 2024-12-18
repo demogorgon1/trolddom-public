@@ -102,6 +102,8 @@ namespace tpublic
 					{
 						if(aChild->m_name == "trigger")
 							m_triggers.push_back(std::make_unique<Trigger>(aChild));
+						else if(aChild->m_name == "max_direction_field_distance")
+							m_maxDirectionFieldDistance = aChild->GetUInt32();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -113,6 +115,7 @@ namespace tpublic
 				IWriter*				aStream) const override
 			{
 				aStream->WriteObjectPointers(m_triggers);
+				aStream->WriteUInt(m_maxDirectionFieldDistance);
 			}
 
 			bool
@@ -121,11 +124,14 @@ namespace tpublic
 			{
 				if(!aStream->ReadObjectPointers(m_triggers))
 					return false;
+				if(!aStream->ReadUInt(m_maxDirectionFieldDistance))
+					return false;
 				return true;
 			}
 
 			// Public data
 			std::vector<std::unique_ptr<Trigger>>	m_triggers;
+			uint32_t								m_maxDirectionFieldDistance = 0;
 		};
 
 	}

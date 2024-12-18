@@ -1,0 +1,35 @@
+dialogue_screen .fennian_starleaf_dialogue:
+{
+	text: 
+	[	
+		"Listen to the trees."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .nook_morrow_3 }
+		{ quest<completion_only>: .tentacle_monster }
+	]
+}
+
+dialogue_root .fennian_starleaf_dialogue:
+{
+	.fennian_starleaf_dialogue: { }
+}
+
+entity thalvaron_fennian_starleaf: !NPC
+{
+	_string: "Fennian Starleaf"
+	_dialogue_root: .fennian_starleaf_dialogue	
+	_sprite: elf_1
+	_sprite_dead: elf_1_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+

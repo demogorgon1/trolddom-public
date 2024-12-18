@@ -10,6 +10,7 @@ dialogue_screen .nook_morrow_dialogue:
 		{ quest<completion_only>: .ronja_frostmane_3 }
 		{ quest: .nook_morrow_1 }
 		{ quest: .nook_morrow_2 }
+		{ quest<offer_only>: .nook_morrow_3 }
 	]
 }
 
@@ -246,7 +247,7 @@ quest .nook_morrow_2:
 	
 	completion:
 	[
-		"FIXME."
+		"Hmm, let me see."
 	]
 
 	level: 13
@@ -254,4 +255,47 @@ quest .nook_morrow_2:
 	objectives: [ .nook_morrow_2 ]
 	prerequisites: [ .nook_morrow_1 ]
 	
+}
+
+############################################################
+# Quest 3
+       
+item .nook_morrow_3_quest_item:
+{
+	icon: icon_feather_1
+	item_level: 14
+	flags: [ not_sellable unique ]
+	string: "Wandering Owlbear Feather"
+}
+	   
+quest .nook_morrow_3:
+{
+	string: "Owlbear Research"
+	
+	text:
+	[
+		"Locate the wandering owlbear, tranqualize it, and return one of its feathers to Nook Morrow."
+	]
+	
+	description: 
+	[
+		"In the eastern shadow of the mountains, in the town of Edmund's Haunt, an elf named Fennian lives. He's very knowledgable about owlbears and nature in general. I think you should take this feather to him"
+		"and see what he thinks about it. Something seems a bit off to me. The main pass to the east is blocked, but you'll find another smaller one a bit further to the south."
+	]
+
+	progress:
+	[
+		"How is it going?"
+	]
+	
+	completion:
+	[
+		"What is that? The feather of an owlbear in distress? Nook sent you?"
+	]
+
+	level: 14
+	quest_items: [ .nook_morrow_3_quest_item ]
+	prerequisites: [ .nook_morrow_2 ]
+	reward_xp_multiplier: 0.15
+	reward_cash_multiplier: 0.5
 }

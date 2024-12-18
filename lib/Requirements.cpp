@@ -263,6 +263,13 @@ namespace tpublic
 				}
 				break;
 
+			case Requirement::TYPE_MUST_NOT_BE_TYPE:
+				{
+					if(entity->GetEntityId() == aRequirement->m_id)
+						return false;
+				}
+				break;
+
 			case Requirement::TYPE_MUST_BE_IN_STATE:
 				{
 					if(entity->GetState() != (EntityState::Id)aRequirement->m_id)

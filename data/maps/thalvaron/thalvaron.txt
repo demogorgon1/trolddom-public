@@ -204,6 +204,11 @@ map_entity_spawn thalvaron_nook_morrow: { entity thalvaron_nook_morrow: { init_s
 map_entity_spawn thalvaron_nook_morrow_1_object: { entity thalvaron_nook_morrow_1_object: { init_state: default } }
 map_entity_spawn thalvaron_doctor_hulius_camp: { entity thalvaron_doctor_hulius_camp: { init_state: default } }
 map_entity_spawn thalvaron_doctor_hulius: { entity thalvaron_doctor_hulius: { init_state: default } }
+map_entity_spawn thalvaron_fennian_starleaf: { entity thalvaron_fennian_starleaf: { init_state: default } }
+map_entity_spawn thalvaron_sheriff_cunningham: { entity thalvaron_sheriff_cunningham: { init_state: default } }
+map_entity_spawn thalvaron_joanna_hewitt: { entity thalvaron_joanna_hewitt: { init_state: default } }
+map_entity_spawn thalvaron_gash_hewitt: { entity thalvaron_gash_hewitt: { init_state: default } }
+
 
 map_palette .stuff:
 {
@@ -354,6 +359,15 @@ map_palette .stuff:
 	entity_spawn thalvaron_royal_chef_assistant_1_quest_spawn_b: [ 150 150 39 ]
 	entity_spawn thalvaron_royal_chef_assistant_1_quest_spawn_c: [ 200 233 39 ]
 	entity_spawn thalvaron_royal_chef_assistant_1_quest_spawn_d: [ 250 250 39 ]
+	entity_spawn thalvaron_owlbear: [ 57 94 58 ]
+	entity_spawn thalvaron_deer_north: [ 156 49 82 ]
+	entity_spawn thalvaron_fennian_starleaf: [ 34 86 99 ]
+	entity_spawn thalvaron_sheriff_cunningham: [ 43 88 91 ]
+	entity_spawn thalvaron_gash_hewitt: [ 39 33 87 ]
+	entity_spawn thalvaron_joanna_hewitt: [ 139 33 87 ]
+	entity_spawn thalvaron_wood_elemental: [ 239 33 87 ]
+	entity_spawn thalvaron_duskwhisper_kobold: [ 156 83 71 ]
+	entity_spawn thalvaron_tentacle_monster: [ 33 85 185 ]
 	
 }
 
