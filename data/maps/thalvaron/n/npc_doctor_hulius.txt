@@ -8,6 +8,8 @@ dialogue_screen .doctor_hulius_dialogue:
 	options:
 	[
 		{ quest<completion_only>: .doctor_hulius_camp_1 }
+		{ quest<offer_only>: .doctor_hulius_1 }
+		{ text: "Let's go." requirement self<must_have_active_quest>: .doctor_hulius script: npc_trigger }	
 	]
 }
 
@@ -20,12 +22,83 @@ entity thalvaron_doctor_hulius: !NPC
 {
 	_string: "Doctor Hulius"
 	_dialogue_root: .doctor_hulius_dialogue	
+	_dialogue_scripts: [ npc_trigger ]
 	_sprite: man_38
 	_sprite_dead: man_38_dead
 	_level: 14
-	_faction: npcs		
+	_faction: combat_npcs		
 	_creature_type: humanoid
 	_loot_table: .npc
 	_not_pushable: true	
+	_default_trigger_ability: .doctor_hulius_start_escort
+	_default_behavior_state: .doctor_hulius
+	_is_threat_source: true
+	_blocking: false
+	_visibility_requirements: { requirement self<must_have_completed_quest>: .doctor_hulius_camp_1 } 
+
 }
 
+route thalvaron_doctor_hulius_escort: 
+{ 
+	trigger<2>: { chat: { type: say text: "Do you really think it was going to eat me?" } }
+	trigger<193>: { chat: { type: say text: "Safe! At last! Time for a drink!" } event: true }
+	trigger<max>: { despawn: true }
+}
+
+npc_behavior_state .doctor_hulius:
+{
+	behavior: patrolling
+	combat_event_pause_ticks: 20
+	despawn_if_lost_player: true
+	patrol_move_interval_ticks: 9
+}
+
+ability .cubert_galston_start_escort:
+{
+	flags: [ always_in_range always_in_line_of_sight ]
+	
+	direct_effect start_route: { route: thalvaron_cubert_galston_escort }	
+}
+
+############################################################
+# Quest 1
+
+objective .doctor_hulius_1:
+{
+	string: "Escort Doctor Hulius To Safety"
+	
+	maps: [ thalvaron ]
+	
+	route_npc:
+	{
+		entities: [ thalvaron_doctor_hulius ]
+	}
+}
+
+quest .doctor_hulius_1:
+{
+	string: "Camping in nos as fun as imagined"
+
+	text:
+	[
+		"Tell Doctor Hulius when you're ready to go."
+	]
+	
+	description: 
+	[
+		"FIXME"
+	]
+
+	progress:
+	[
+		"I'm afraid it will come back!"
+	]
+	
+	completion:
+	[
+		"FIXME"
+	]
+
+	level: 14
+	objectives: [ .doctor_hulius_1 ]
+}

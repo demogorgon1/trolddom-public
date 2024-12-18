@@ -192,6 +192,8 @@ map_entity_spawn thalvaron_tyler: { entity thalvaron_tyler: { init_state: defaul
 map_entity_spawn thalvaron_thora_2_return_portal: { entity thalvaron_thora_2_return_portal: { init_state: default } }
 map_entity_spawn thalvaron_wizard: { entity thalvaron_wizard: { init_state: default } }
 map_entity_spawn thalvaron_wizard_door: { entity thalvaron_wizard_door: { init_state: default } }
+map_entity_spawn thalvaron_royal_chef: { entity thalvaron_royal_chef: { init_state: default } }
+map_entity_spawn thalvaron_royal_chef_assistant: { entity thalvaron_royal_chef_assistant: { init_state: default } }
 
 # N
 map_entity_spawn thalvaron_ranger_fremalt: { entity thalvaron_ranger_fremalt: { init_state: default } }
@@ -322,7 +324,9 @@ map_palette .stuff:
 	entity_spawn thalvaron_arcane_worm: [ 197 138 201 ]		
 	entity_spawn thalvaron_arcane_monster: [ 97 138 201 ]			
 	entity_spawn thalvaron_wizard: [ 97 138 1 ]				
-	entity_spawn thalvaron_wizard_door: [ 97 138 101 ]				
+	entity_spawn thalvaron_wizard_door: [ 97 138 101 ]		
+	entity_spawn thalvaron_royal_chef: [ 191 158 151 ]		
+	entity_spawn thalvaron_royal_chef_assistant: [ 131 118 151 ]		
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				
@@ -341,6 +345,15 @@ map_palette .stuff:
 	entity_spawn thalvaron_doctor_hulius_camp: [ 218 121 190 ]	
 	entity_spawn thalvaron_doctor_hulius: [ 218 221 190 ]	
 	entity_spawn thalvaron_frost_troll: [ 218 221 201 ]	
+	entity_spawn thalvaron_rock_elemental: [ 23 29 119 ] 
+	entity_spawn thalvaron_royal_chef_assistant_1_quest_item_a: [ 100 200 39 ]
+	entity_spawn thalvaron_royal_chef_assistant_1_quest_item_b: [ 150 200 39 ]
+	entity_spawn thalvaron_royal_chef_assistant_1_quest_item_c: [ 200 200 39 ]
+	entity_spawn thalvaron_royal_chef_assistant_1_quest_item_d: [ 250 200 39 ]
+	entity_spawn thalvaron_royal_chef_assistant_1_quest_spawn_a: [ 100 100 39 ]
+	entity_spawn thalvaron_royal_chef_assistant_1_quest_spawn_b: [ 150 150 39 ]
+	entity_spawn thalvaron_royal_chef_assistant_1_quest_spawn_c: [ 200 233 39 ]
+	entity_spawn thalvaron_royal_chef_assistant_1_quest_spawn_d: [ 250 250 39 ]
 	
 }
 
@@ -411,6 +424,7 @@ map_palette .routes:
 {
 	route thalvaron_default_patrol: [ 192 16 186 ]	
 	route thalvaron_cubert_galston_escort: [ 198 132 221 ]
+	route thalvaron_doctor_hulius_escort: [ 39 48 168 ]
 }
 
 map_palette .doodads:

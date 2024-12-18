@@ -514,6 +514,7 @@ sprites:
 	sprite icon_potion_1 : { tags: [ icon ] }
 	sprite icon_tube_1 : { tags: [ icon ] }
 	sprite icon_feather_1 : { tags: [ icon ] }
+	sprite icon_egg_1 : { tags: [ icon ] }
 	
 }
 

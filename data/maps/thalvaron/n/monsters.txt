@@ -128,6 +128,11 @@ map_entity_spawn thalvaron_frost_troll:
 	entity thalvaron_frost_troll: { init_state: default } 
 }
 
+map_entity_spawn thalvaron_rock_elemental:
+{ 
+	entity thalvaron_rock_elemental: { init_state: default } 
+}
+
 # Yetis in northern part of the highlands
 {
 	loot_table .north_yeti: 
@@ -295,8 +300,38 @@ map_entity_spawn thalvaron_frost_troll:
 		_loot_table: .default_humanoid 
 		_weapon_damage: 1.5
 		_resource_health: 1.8
+		_aggro_requirements: { requirement target<must_not_be_type>: thalvaron_doctor_hulius }
 	}
 
 	entity thalvaron_frost_troll: !NPC { _string: "Frost Troll" _sprite: troll_2 _sprite_dead: troll_2_dead }
 }
 
+# Rock Elemental
+{
+	${
+		_level: 14
+		_faction: monsters
+		_creature_type: elemental
+		_default_behavior_state: .wandering_short
+		_loot_table: .default_beast
+		_weapon_damage: 1.1
+		_resource_health: 1.1
+	}
+
+	entity thalvaron_rock_elemental: !NPC { _string: "Rock Elemental" _sprite: rock_elemental_1 _sprite_dead: rock_elemental_1_dead }
+}
+
+# Owlbear
+{
+	${
+		_level: 14
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short				
+		_loot_table: .default_beast 
+		_weapon_damage: 1.2 
+		_resource_health: 1.3
+	}
+
+	entity thalvaron_owlbear: !NPC { _string: "Owlbear" _sprite: owlbear_2 _sprite_dead: owlbear_2_dead  }
+}
