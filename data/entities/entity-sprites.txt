@@ -358,6 +358,7 @@ sprites:
 	sprite tentacle_monster_3: { dead: tentacle_monster_3_dead }
 	sprite man_41: { dead: man_41_dead }
 	sprite woman_14: { dead: woman_14_dead }
+	sprite man_42: { dead: man_42_dead }
 
 	cursor: { position: [ 0 304 ] }
 	
@@ -371,7 +372,8 @@ sprites:
 	sprite tentacle_monster_3_dead: { }
 	sprite man_41_dead: { }
 	sprite woman_14_dead: { }
-
+	sprite man_42_dead: { }
+	
 }
 
 sprites:
@@ -480,6 +482,7 @@ sprites:
 	sprite bonfire_unlit: { }
 	sprite cage_1: { }
 	sprite egg_1: { }
+	sprite junk_1: { }
 	
 }
 

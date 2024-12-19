@@ -9,6 +9,8 @@ dialogue_screen .fennian_starleaf_dialogue:
 	[
 		{ quest<completion_only>: .nook_morrow_3 }
 		{ quest<completion_only>: .tentacle_monster }
+		{ quest: .fennian_starleaf_1 }
+		{ quest: .fennian_starleaf_2 }
 	]
 }
 
@@ -33,3 +35,136 @@ entity thalvaron_fennian_starleaf: !NPC
 ############################################################
 # Quest 1
 
+loot_group .fennian_starleaf_1_quest_item: {}
+
+item .fennian_starleaf_1_quest_item:
+{
+	icon: icon_herbs_2
+	item_level: 14
+	loot_groups: [ .fennian_starleaf_1_quest_item ]
+	flags: [ unique not_sellable ]
+	string: "Duskweed"
+}
+
+loot_table .fennian_starleaf_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .fennian_starleaf_1_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_fennian_starleaf_1_quest_item:
+{
+	string: "Duskweed"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ wild_herbs ] z_offset: -2 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .fennian_starleaf_1_quest_item
+			verb: open
+			range: 1 
+			level: 14
+			despawn: true 		
+			required_quest: .fennian_starleaf_1
+		}		
+	}
+}
+
+objective .fennian_starleaf_1:
+{
+	string: "Duskweed"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .fennian_starleaf_1_quest_item count: 1 }
+}
+
+quest .fennian_starleaf_1:
+{
+	string: "Corrupted Waters"
+
+	text:
+	[
+		"Investigate smugglers north of Edmund's Haunt."
+	]
+	
+	description: 
+	[
+		"I fear that there is something in the water and it's caused wild creatures to go mad. Maybe you can help me figure out what is going on.\n\n"
+		"By the mountains, just to the west of this settlement along the road, there is a small pond of water. This water is supposed to be very pure as it comes directly from under the mountains. Just by the water"
+		"you'll find some small plants, called duskweed, that only grow in that particular area. Will you go there, pick one with the roots, and bring it back to me?"
+	]
+
+	progress:
+	[
+		"You'll find the duskweed to the west by the mountain, just by the little pond."
+	]
+	
+	completion:
+	[
+		"I see.\n\n"
+		"I've always kept track of duskweed because it's a good indicator of the pureness of the water. Something is definitely wrong here, but I don't know what."
+	]
+
+	objectives: [ .fennian_starleaf_1 ]
+	level: 14
+
+	# FIXME: rewards
+}
+
+############################################################
+# Quest 2
+
+objective .fennian_starleaf_2:
+{
+	string: "Duskwhisper Owlbears Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_duskwhisper_owlbear ]
+		count: 5
+	}
+}
+
+quest .fennian_starleaf_2:
+{
+	string: "Owlbears Gone Mad"
+
+	text:
+	[
+		"Locate the owlbear colony south of Edmund's Haunt and thin out their numbers."
+	]
+	
+	description: 
+	[
+		"It pains me, but it really seems like some creatures of the woods have lost their minds and gone mad. It's probably something in the waters.\n\n"
+		"The owlbears in particular are causing a lot of problems. I want you to go and clear out their numbers so the madness doesn't spread. You'll find a colony of these"
+		"creatures if you follow the road south.\n\n"
+		"I wouldn't be able to do it myself."
+	]
+
+	progress:
+	[
+		"Back already?"
+	]
+	
+	completion:
+	[
+		"The idea of putting down these beautiful creatures... it's horrible."
+	]
+
+	objectives: [ .fennian_starleaf_2 ]
+	prerequisites: [ .fennian_starleaf_1 ]
+	level: 15
+
+	# FIXME: rewards
+}
