@@ -201,14 +201,15 @@ map_entity_spawn thalvaron_johnson: { entity thalvaron_johnson: { init_state: de
 map_entity_spawn thalvaron_tyron_frostmane: { entity thalvaron_tyron_frostmane: { init_state: default } }
 map_entity_spawn thalvaron_ronja_frostmane: { entity thalvaron_ronja_frostmane: { init_state: default } }
 map_entity_spawn thalvaron_nook_morrow: { entity thalvaron_nook_morrow: { init_state: default } }
-map_entity_spawn thalvaron_nook_morrow_1_object: { entity thalvaron_nook_morrow_1_object: { init_state: default } }
-map_entity_spawn thalvaron_doctor_hulius_camp: { entity thalvaron_doctor_hulius_camp: { init_state: default } }
+map_entity_spawn thalvaron_nook_morrow_1_object: { entity thalvaron_nook_morrow_1_object: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_doctor_hulius_camp: { entity thalvaron_doctor_hulius_camp: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_doctor_hulius: { entity thalvaron_doctor_hulius: { init_state: default } }
 map_entity_spawn thalvaron_fennian_starleaf: { entity thalvaron_fennian_starleaf: { init_state: default } }
 map_entity_spawn thalvaron_sheriff_cunningham: { entity thalvaron_sheriff_cunningham: { init_state: default } }
 map_entity_spawn thalvaron_joanna_hewitt: { entity thalvaron_joanna_hewitt: { init_state: default } }
 map_entity_spawn thalvaron_gash_hewitt: { entity thalvaron_gash_hewitt: { init_state: default } }
-
+map_entity_spawn thalvaron_sheriff_cunningham_2_quest_item: { entity thalvaron_sheriff_cunningham_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_sheriff_cunningham_3_quest_item: { entity thalvaron_sheriff_cunningham_3_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 
 map_palette .stuff:
 {
@@ -368,6 +369,9 @@ map_palette .stuff:
 	entity_spawn thalvaron_wood_elemental: [ 239 33 87 ]
 	entity_spawn thalvaron_duskwhisper_kobold: [ 156 83 71 ]
 	entity_spawn thalvaron_tentacle_monster: [ 33 85 185 ]
+	entity_spawn thalvaron_duskwhisper_smuggler: [ 44 59 22 ]
+	entity_spawn thalvaron_sheriff_cunningham_2_quest_item: [ 244 58 34 ]
+	entity_spawn thalvaron_sheriff_cunningham_3_quest_item: [ 244 58 134 ]
 	
 }
 
@@ -474,6 +478,7 @@ map_palette .doodads:
 	doodad animal_skull: [ 197 173 210 ]	
 	doodad barrel: [ 111 38 84 ]
 	doodad cage: [ 45 41 145 ]
+	doodad rowboat: [ 145 46 145 ]
 	
 	doodad wall_sign_generic<"Mathew's Emporium">: [ 197 173 111 ]	
 	doodad wall_sign_generic<"John & Mary's">: [ 97 173 111 ]	

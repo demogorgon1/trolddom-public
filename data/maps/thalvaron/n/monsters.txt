@@ -423,11 +423,41 @@ map_entity_spawn thalvaron_duskwhisper_kobold:
 }
 
 ##########################################################################################
+# Duskwhisper Vale smugglers
+
+map_entity_spawn thalvaron_duskwhisper_smuggler: 
+{ 
+	entity thalvaron_duskwhisper_smuggler_a: { init_state: default } 
+	entity thalvaron_duskwhisper_smuggler_b: { init_state: default } 
+}
+
+# Smugglers
+{
+	${
+		_level: 14
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .passive
+		_loot_table: .default_humanoid
+		_weapon_damage: 1.1
+		_resource_health: 1.1
+	}
+
+	entity thalvaron_duskwhisper_smuggler_a: !NPC { _string: "Smuggler" _sprite: man_41 _sprite_dead: man_41_dead }
+	entity thalvaron_duskwhisper_smuggler_b: !NPC { _string: "Smuggler" _sprite: woman_14 _sprite_dead: woman_14_dead }
+}
+
+##########################################################################################
 # Duskwhisper Vale monsters
 
 map_entity_spawn thalvaron_wood_elemental: 
 { 
 	entity thalvaron_wood_elemental: { init_state: default } 
+}
+
+map_entity_spawn thalvaron_tentacle_monster: 
+{ 
+	entity thalvaron_tentacle_monster: { init_state: default } 
 }
 
 # Wood Elemental
@@ -533,5 +563,5 @@ map_entity_spawn thalvaron_wood_elemental:
 		_elite: true
 	}
 
-	entity thalvaron_tentacle_monster: !NPC { _string: "Spawn of Zyxtharion" _sprite: tentacle_monster_2 _sprite_dead: tentacle_monster_2_dead }
+	entity thalvaron_tentacle_monster: !NPC { _string: "Spawn of Zyxtharion" _sprite: tentacle_monster_3 _sprite_dead: tentacle_monster_3_dead }
 }

@@ -355,7 +355,9 @@ sprites:
 	sprite kobold_3: { dead: kobold_3_dead }
 	sprite kobold_4: { dead: kobold_4_dead }
 	sprite kobold_5: { dead: kobold_5_dead }
-	sprite tentacle_monster_2: { dead: tentacle_monster_2_dead }
+	sprite tentacle_monster_3: { dead: tentacle_monster_3_dead }
+	sprite man_41: { dead: man_41_dead }
+	sprite woman_14: { dead: woman_14_dead }
 
 	cursor: { position: [ 0 304 ] }
 	
@@ -366,7 +368,9 @@ sprites:
 	sprite kobold_3_dead: { }
 	sprite kobold_4_dead: { }
 	sprite kobold_5_dead: { }
-	sprite tentacle_monster_2_dead: { }
+	sprite tentacle_monster_3_dead: { }
+	sprite man_41_dead: { }
+	sprite woman_14_dead: { }
 
 }
 

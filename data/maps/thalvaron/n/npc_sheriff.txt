@@ -8,6 +8,8 @@ dialogue_screen .sheriff_cunningham_dialogue:
 	options:
 	[
 		{ quest: .sheriff_cunningham_1 }
+		{ quest: .sheriff_cunningham_2 }
+		{ quest: .sheriff_cunningham_3 }
 	]
 }
 
@@ -72,6 +74,179 @@ quest .sheriff_cunningham_1:
 	]
 
 	objectives: [ .sheriff_cunningham_1 ]
+	level: 14
+
+	# FIXME: rewards
+}
+
+############################################################
+# Quest 2
+
+loot_group .sheriff_cunningham_2_quest_item: {}
+
+item .sheriff_cunningham_2_quest_item:
+{
+	icon: icon_barrel_1
+	item_level: 14
+	loot_groups: [ .sheriff_cunningham_2_quest_item ]
+	flags: [ unique not_sellable ]
+	string: "Smuggled Booze"
+}
+
+loot_table .sheriff_cunningham_2_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .sheriff_cunningham_2_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_sheriff_cunningham_2_quest_item:
+{
+	string: "Smuggled Goods"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ barrel_1 ] z_offset: -2 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .sheriff_cunningham_2_quest_item
+			verb: open
+			range: 1 
+			level: 14
+			despawn: true 		
+			required_quest: .sheriff_cunningham_2
+		}		
+	}
+}
+
+objective .sheriff_cunningham_2:
+{
+	string: "Smuggled Goods"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .sheriff_cunningham_2_quest_item count: 1 }
+}
+
+quest .sheriff_cunningham_2:
+{
+	string: "Basic Law Enforcement"
+
+	text:
+	[
+		"Investigate smugglers north of Edmund's Haunt."
+	]
+	
+	description: 
+	[
+		"We're currently severely understaffed and can use all the help we can get around here. I like how you dealt with those kobolds, so I got another task for you, if you're up for it.\n\n"
+		"I've been informed that a gang of smugglers is operating in the caves north of town. Can you go find out what it is they're smuggling?"
+	]
+
+	progress:
+	[
+		"Wet socks?"
+	]
+	
+	completion:
+	[
+		"Huh, that's not particularily surprising."
+	]
+
+	objectives: [ .sheriff_cunningham_2 ]
+	prerequisites: [ .sheriff_cunningham_1 ]
+	level: 14
+
+	# FIXME: rewards
+}
+
+############################################################
+# Quest 3
+
+loot_group .sheriff_cunningham_3_quest_item: {}
+
+item .sheriff_cunningham_3_quest_item:
+{
+	icon: icon_barrel_1
+	item_level: 14
+	loot_groups: [ .sheriff_cunningham_3_quest_item ]
+	flags: [ not_sellable ]
+	string: "Booze"
+	stack: 5
+}
+
+loot_table .sheriff_cunningham_3_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .sheriff_cunningham_3_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_sheriff_cunningham_3_quest_item:
+{
+	string: "Booze"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ barrel_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .sheriff_cunningham_3_quest_item
+			verb: open
+			range: 1 
+			level: 14
+			despawn: true 		
+			required_quest: .sheriff_cunningham_3
+		}		
+	}
+}
+
+objective .sheriff_cunningham_3:
+{
+	string: "Booze"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .sheriff_cunningham_3_quest_item count: 5 }
+}
+
+quest .sheriff_cunningham_3:
+{
+	string: "Not on my Watch"
+
+	text:
+	[
+		"Find kobolds near the blocked off pass to the west and kill them."
+	]
+	
+	description: 
+	[
+		"It seems like they're smuggling illegal booze in from overseas, storing it in the caves until they can be transported further. I need you to go in there and mess up their operation. Make some heads roll and bring back"
+		"as much contraband as you can carry. Go!"
+	]
+
+	progress:
+	[
+		"This is very important, why are you still here?"
+	]
+	
+	completion:
+	[
+		"Excellent. Put the illegal contraband inside the building and collect your reward."
+	]
+
+	objectives: [ .sheriff_cunningham_3 ]
+	prerequisites: [ .sheriff_cunningham_2 ]
 	level: 14
 
 	# FIXME: rewards
