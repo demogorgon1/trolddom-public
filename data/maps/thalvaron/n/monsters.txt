@@ -465,6 +465,11 @@ map_entity_spawn thalvaron_duskwhisper_owlbear:
 	entity thalvaron_duskwhisper_owlbear: { init_state: default } 
 }
 
+map_entity_spawn thalvaron_duskwhisper_crab: 
+{ 
+	entity thalvaron_duskwhisper_crab: { init_state: default } 
+}
+
 # Wood Elemental
 {
 	loot_table .wood_elemental: 
@@ -585,4 +590,33 @@ map_entity_spawn thalvaron_duskwhisper_owlbear:
 	}
 
 	entity thalvaron_duskwhisper_owlbear: !NPC { _string: "Duskwhisper Owlbear" _sprite: owlbear_3 _sprite_dead: owlbear_3_dead  }
+}
+
+# Beach Crabs
+{
+	loot_table .beach_crab: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { weight: 9 }
+				possibility: { weight: 1 loot_group: .jonas_white_2_quest_item requirement self<must_have_active_quest>: { id: .jonas_white_2 } } 
+			}
+			
+			!WORLD_DROPS {}
+		]	
+	}
+	
+	${
+		_level: 15
+		_faction: wildlife
+		_creature_type: beast
+		_default_behavior_state: .wandering_short				
+		_loot_table: .beach_crab 
+		_weapon_damage: 1.1
+		_resource_health: 1.3
+		_abilities: [ { id: npc_rend } { id: npc_attack } ]
+	}
+
+	entity thalvaron_duskwhisper_crab: !NPC { _string: "Beach Crab" _sprite: crab_1 _sprite_dead: crab_1_dead  }
 }

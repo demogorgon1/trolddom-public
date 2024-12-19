@@ -8,6 +8,7 @@ dialogue_screen .jonas_white_dialogue:
 	options:
 	[
 		{ quest: .jonas_white_1 }
+		{ quest: .jonas_white_2 }
 	]
 }
 
@@ -116,3 +117,60 @@ quest .jonas_white_1:
 
 	# FIXME: rewards
 }
+
+############################################################
+# Quest 2
+
+objective .jonas_white_2:
+{
+	string: "Elusive Tablet"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .jonas_white_2_quest_item count: 1 }
+}
+
+loot_group .jonas_white_2_quest_item: {}
+
+item .jonas_white_2_quest_item:
+{
+	icon: icon_tablet_1
+	item_level: 15
+	loot_groups: [ .jonas_white_2_quest_item ]
+	flags: [ not_sellable unique ]
+	string: "Elusive Table"
+}
+
+quest .jonas_white_2:
+{
+	string: "One More Thing"
+
+	text:
+	[
+		"Try to find a crab on the beach that carries the elusive tablet."
+	]
+	
+	description: 
+	[
+		"Those tablets you found were really interesting! Now... I might have a more complex request for you. Some time ago I was walking the beach and I saw one of the crabs carrying something in"
+		"its claws that piqued my curiosity. It looked like an ancient tablet, but not like anything I've seen before. I tried to chase down the crab, but it ran off. I'm not as fast as I used to be."
+		"Maybe you can go look for it?"
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Really? You found it? Let me take a look..."
+	]
+
+	prerequisites: [ .jonas_white_1 ]
+	objectives: [ .jonas_white_2 ]
+	level: 15
+
+	# FIXME: rewards
+}
+

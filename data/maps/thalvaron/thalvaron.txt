@@ -379,6 +379,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_fennian_starleaf_1_quest_item: [ 67 93 115 ]
 	entity_spawn thalvaron_jonas_white_1_quest_item: [ 34 118 184 ]
 	entity_spawn thalvaron_jonas_white: [ 134 118 184 ]
+	entity_spawn thalvaron_duskwhisper_crab: [ 77 78 175 ]
 	
 }
 
