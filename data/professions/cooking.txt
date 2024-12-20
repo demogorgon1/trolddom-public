@@ -63,3 +63,15 @@ ability craft_pickled_moonfish: !COOKING_CRAFT
 	_materials: { item_blue_moonfish: 1 }	
 	_skill: 45
 }
+
+#####################################################
+# Spiced Rice
+
+ability craft_spiced_rice: !COOKING_CRAFT
+{
+	_string: "Spiced Rice"
+	_item: consumable_spiced_rice
+	_produce: { consumable_spiced_rice: 1 } 
+	_materials: { item_rice: 1 item_water: 1 item_wild_herbs: 1 }	
+	_skill: 55
+}

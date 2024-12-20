@@ -518,6 +518,9 @@ sprites:
 
 	cursor: { position: [ 0 448 ] }
 	sprite icon_tablet_1 : { tags: [ icon ] }
+	sprite icon_seashell_1 : { tags: [ icon ] }
+	sprite icon_rice : { tags: [ icon ] }
+	sprite icon_cooked_rice : { tags: [ icon ] }
 	
 }
 

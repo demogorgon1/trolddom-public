@@ -1,0 +1,31 @@
+dialogue_screen .clara_hawthorne_dialogue:
+{
+	text: 
+	[	
+		"Greetings."
+	]			
+	
+	options:
+	[
+		{ quest<completion_only>: thalvaron_jonas_white_3 }
+	]
+}
+
+dialogue_root .clara_hawthorne_dialogue:
+{
+	.clara_hawthorne_dialogue: { }
+}
+
+entity thalvaron_clara_hawthorne: !NPC
+{
+	_string: "Clara Hawthorne"
+	_dialogue_root: .clara_hawthorne_dialogue	
+	_sprite: woman_3
+	_sprite_dead: woman_3_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

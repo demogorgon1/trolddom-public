@@ -9,6 +9,7 @@ dialogue_screen .jonas_white_dialogue:
 	[
 		{ quest: .jonas_white_1 }
 		{ quest: .jonas_white_2 }
+		{ quest<offer_only>: thalvaron_jonas_white_3 }
 	]
 }
 
@@ -174,3 +175,39 @@ quest .jonas_white_2:
 	# FIXME: rewards
 }
 
+############################################################
+# Quest 3
+
+quest thalvaron_jonas_white_3:
+{
+	string: "This Complicates Matters"
+
+	text:
+	[
+		"Try to find a crab on the beach that carries the elusive tablet."
+	]
+	
+	description: 
+	[
+		"Alright, I had a few minutes to look at the tablet you wrenched out of the claws of that crab. This is really unlike the other ones. I still haven't learnt to read these ancient glyphs,"
+		"but it's clear to me that there is something special about this.\n\n"
+		"My friend in Valaris is much more knowledgeable about these things. Maybe you can bring it to her and have her take a look? Her name is Clara Hawthorne and lives in the royal district, just by the central square."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Old Mr. White sent you all the way from Duskwhisper Vale? Did he finally discover something interesting?"
+	]
+
+	prerequisites: [ .jonas_white_2 ]
+	level: 15
+	reward_cash_multiplier: 0.2
+	reward_xp_multiplier: 0.2
+
+	# FIXME: rewards
+}

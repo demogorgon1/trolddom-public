@@ -359,6 +359,7 @@ sprites:
 	sprite man_41: { dead: man_41_dead }
 	sprite woman_14: { dead: woman_14_dead }
 	sprite man_42: { dead: man_42_dead }
+	sprite pearly : { dead: pearly }
 
 	cursor: { position: [ 0 304 ] }
 	
@@ -373,6 +374,7 @@ sprites:
 	sprite man_41_dead: { }
 	sprite woman_14_dead: { }
 	sprite man_42_dead: { }
+	skip: {}
 	
 }
 
@@ -483,6 +485,7 @@ sprites:
 	sprite cage_1: { }
 	sprite egg_1: { }
 	sprite junk_1: { }
+	sprite seashell_1: { }
 	
 }
 

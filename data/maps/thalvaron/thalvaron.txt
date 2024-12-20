@@ -194,6 +194,7 @@ map_entity_spawn thalvaron_wizard: { entity thalvaron_wizard: { init_state: defa
 map_entity_spawn thalvaron_wizard_door: { entity thalvaron_wizard_door: { init_state: default } }
 map_entity_spawn thalvaron_royal_chef: { entity thalvaron_royal_chef: { init_state: default } }
 map_entity_spawn thalvaron_royal_chef_assistant: { entity thalvaron_royal_chef_assistant: { init_state: default } }
+map_entity_spawn thalvaron_clara_hawthorne: { entity thalvaron_clara_hawthorne: { init_state: default } }
 
 # N
 map_entity_spawn thalvaron_ranger_fremalt: { entity thalvaron_ranger_fremalt: { init_state: default } }
@@ -213,6 +214,12 @@ map_entity_spawn thalvaron_sheriff_cunningham_3_quest_item: { entity thalvaron_s
 map_entity_spawn thalvaron_fennian_starleaf_1_quest_item: { entity thalvaron_fennian_starleaf_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_jonas_white_1_quest_item: { entity thalvaron_jonas_white_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_jonas_white: { entity thalvaron_jonas_white: { init_state: default } }
+map_entity_spawn thalvaron_fennian_starleaf_3_quest_item: { entity thalvaron_fennian_starleaf_3_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_pearly_a: { entity thalvaron_pearly_a: { init_state: default } }
+map_entity_spawn thalvaron_sheila_urkins: { entity thalvaron_sheila_urkins: { init_state: default } }
+map_entity_spawn thalvaron_deputy_simmons: { entity thalvaron_deputy_simmons: { init_state: default } }
+
+
 
 map_palette .stuff:
 {
@@ -336,6 +343,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_wizard_door: [ 97 138 101 ]		
 	entity_spawn thalvaron_royal_chef: [ 191 158 151 ]		
 	entity_spawn thalvaron_royal_chef_assistant: [ 131 118 151 ]		
+	entity_spawn thalvaron_clara_hawthorne: [ 78 94 128 ]
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				
@@ -380,6 +388,10 @@ map_palette .stuff:
 	entity_spawn thalvaron_jonas_white_1_quest_item: [ 34 118 184 ]
 	entity_spawn thalvaron_jonas_white: [ 134 118 184 ]
 	entity_spawn thalvaron_duskwhisper_crab: [ 77 78 175 ]
+	entity_spawn thalvaron_fennian_starleaf_3_quest_item: [ 67 93 111 ]
+	entity_spawn thalvaron_pearly_a: [ 49 246 222 ]
+	entity_spawn thalvaron_deputy_simmons: [ 49 246 242 ]
+	entity_spawn thalvaron_sheila_urkins: [ 149 246 222 ]
 	
 }
 

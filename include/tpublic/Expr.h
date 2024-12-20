@@ -31,6 +31,7 @@ namespace tpublic
 			OP_CLIENT_GUILD_REGISTRATION_PRICE,
 			OP_CLIENT_UNTRAIN_TALENTS_PRICE,
 			OP_CLIENT_REPUTATION,
+			OP_CLIENT_HAS_ITEM,
 
 			NUM_OPS
 		};
@@ -56,7 +57,8 @@ namespace tpublic
 			"client_wallet_cash",
 			"client_guild_registration_price",
 			"client_untrain_talents_price",
-			"client_reputation"
+			"client_reputation",
+			"client_has_item"
 		};
 
 		static_assert(sizeof(OPS) / sizeof(const char*) == (size_t)NUM_OPS);

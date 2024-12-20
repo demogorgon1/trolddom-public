@@ -1,0 +1,30 @@
+dialogue_screen .sheila_urkins_dialogue:
+{
+	text: 
+	[	
+		"Hello."
+	]		
+	
+	options:
+	[
+	]
+}
+
+dialogue_root .sheila_urkins_dialogue:
+{
+	.sheila_urkins_dialogue: { }
+}
+
+entity thalvaron_sheila_urkins: !NPC
+{
+	_string: "Sheila Urkins"
+	_dialogue_root: .sheila_urkins_dialogue	
+	_sprite: woman_7
+	_sprite_dead: woman_7_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

@@ -273,3 +273,21 @@ aura consumable_banana: !AURA_FOOD {}
 ability consumable_banana: !ABILITY_FOOD {}
 item consumable_banana: !ITEM_FOOD {}
 
+#####################################################
+# Spiced Rice
+${
+	_string: "Spiced Rice"
+	_description: "Restores 320 health and mana over 10 seconds. Can't be used in combat."
+	_level: 10
+	_icon: icon_cooked_rice
+	_heal_tick: 32
+	_ability_tick: consumable_spiced_rice_tick
+	_ability: consumable_spiced_rice
+	_aura: consumable_spiced_rice
+	_item: { consumable_spiced_rice: 1 }
+}
+
+ability consumable_spiced_rice_tick: !ABILITY_FOOD_TICK {}
+aura consumable_spiced_rice: !AURA_FOOD {}
+ability consumable_spiced_rice: !ABILITY_FOOD {}
+item consumable_spiced_rice: !ITEM_FOOD {}

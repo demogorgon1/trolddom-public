@@ -11,6 +11,7 @@ dialogue_screen .fennian_starleaf_dialogue:
 		{ quest<completion_only>: .tentacle_monster }
 		{ quest: .fennian_starleaf_1 }
 		{ quest: .fennian_starleaf_2 }
+		{ quest<offer_only>: .fennian_starleaf_3 }
 	]
 }
 
@@ -68,7 +69,7 @@ entity thalvaron_fennian_starleaf_1_quest_item:
 		openable: 
 		{ 
 			loot_table: .fennian_starleaf_1_quest_item
-			verb: open
+			verb: pick
 			range: 1 
 			level: 14
 			despawn: true 		
@@ -167,4 +168,91 @@ quest .fennian_starleaf_2:
 	level: 15
 
 	# FIXME: rewards
+}
+
+############################################################
+# Quest 3
+
+loot_group .fennian_starleaf_3_quest_item: {}
+
+item .fennian_starleaf_3_quest_item:
+{
+	icon: icon_seashell_1
+	item_level: 15
+	loot_groups: [ .fennian_starleaf_3_quest_item ]
+	flags: [ unique not_sellable ]
+	string: "Duskwhisper Seashell"
+	rarity: uncommon
+}
+
+loot_table .fennian_starleaf_3_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .fennian_starleaf_3_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_fennian_starleaf_3_quest_item:
+{
+	string: "Duskwhisper Seashell"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ seashell_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .fennian_starleaf_3_quest_item
+			verb: pick_up
+			range: 1 
+			level: 15
+			despawn: true 		
+			required_quest: .fennian_starleaf_3
+		}		
+	}
+}
+
+objective .fennian_starleaf_3:
+{
+	string: "Duskwhisper Seashell"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .fennian_starleaf_3_quest_item count: 1 keep_items: true }	
+}
+
+quest .fennian_starleaf_3:
+{
+	string: "The Lady of the Lake"
+
+	text:
+	[
+		"Travel south and consult the Lady of the Lake."
+	]
+	
+	description: 
+	[
+		"Sometimes when you're at a loss about what to do, it's good to consult the higher powers. At times of pain and doubt I always seek out the Lady of the Lake. You'll find her at the ancient temple ruins down south.\n\n"
+		"Oh, forgot to mention, in order to talk to her you need a Duskwhisper Seashell. I'm sure you can find a good one on the beach somewhere around here."
+	]
+
+	progress:
+	[
+		"*Blob blob* *blob blob blob*?"
+	]
+	
+	completion:
+	[
+		"What brings you to my domain, young $class$?"
+	]
+
+	prerequisites: [ .fennian_starleaf_2 ]
+	objectives: [ .fennian_starleaf_3 ]
+	level: 16
+	reward_xp_multiplier: 0.2
+	reward_cash_multiplier: 0
 }

@@ -32,6 +32,7 @@ namespace tpublic::ObjectiveTypes
 
 		uint32_t				m_itemId = 0;
 		uint32_t				m_count = 1;
+		bool					m_keepItems = false;
 	};
 
 }

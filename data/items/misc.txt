@@ -51,6 +51,18 @@ item item_water:
 }
 
 #####################################################
+# Rice
+
+item item_rice:
+{
+	type: miscellaneous
+	item_level: 1
+	icon: icon_rice
+	string: "Rice"
+	stack: 20
+}
+
+#####################################################
 # Potatoes
 
 item item_potatoes:
