@@ -32,6 +32,13 @@ FetchContent_MakeAvailable(brotli)
 
 set(BROTLI_LIBRARIES_STATIC brotlidec-static brotlienc-static)
 
+# ------ nwork ------
+
+FetchContent_Declare(nwork
+  GIT_REPOSITORY https://github.com/demogorgon1/nwork.git
+)
+FetchContent_MakeAvailable(nwork)
+
 # -------------------
 
 if(MSVC)

@@ -33,6 +33,7 @@ add_library(tpublic::tpublic ALIAS tpublic)
 target_compile_features(tpublic PRIVATE cxx_std_20)
 
 target_link_libraries(tpublic PUBLIC ${BROTLI_LIBRARIES_STATIC})
+target_link_libraries(tpublic PUBLIC nwork::nwork)
 
 if(TROLDDOM_PUBLIC_PRECOMPILED_HEADERS)
 	target_precompile_headers(tpublic PRIVATE "Pcheader.h")
