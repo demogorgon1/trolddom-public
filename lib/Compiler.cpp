@@ -62,6 +62,9 @@ namespace tpublic
 		const char*				aGeneratedSourceOutputPath,
 		Compression::Level		aCompressionLevel)
 	{
+		nwork::Queue workQueue;
+		nwork::ThreadPool threadPool(&workQueue, 4);
+
 		SpriteSheetBuilder spriteSheetBuilder(256);
 		std::vector<std::unique_ptr<GenerationJob>> generationJobs;
 
@@ -90,10 +93,10 @@ namespace tpublic
 			{
 				printf("Building map '%s'...\n", aMap->m_name.c_str());
 
-				aMap->m_data->Build(m_manifest, &autoDoodads);
+				aMap->m_data->Build(m_manifest, &autoDoodads, &workQueue);
 
-				aMap->m_data->ConstructMapPathData(m_manifest);
-				aMap->m_data->ConstructMapRouteData(m_manifest);
+				aMap->m_data->ConstructMapPathData(m_manifest, &workQueue);
+				aMap->m_data->ConstructMapRouteData(m_manifest, &workQueue);
 				return true;
 			});			
 		}

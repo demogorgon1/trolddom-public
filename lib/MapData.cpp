@@ -194,7 +194,8 @@ namespace tpublic
 	void	
 	MapData::Build(
 		const Manifest*			aManifest,
-		const AutoDoodads*		aAutoDoodads)
+		const AutoDoodads*		aAutoDoodads,
+		nwork::Queue*			/*aWorkQueue*/)
 	{
 		std::mt19937 random;
 
@@ -421,7 +422,8 @@ namespace tpublic
 
 	void	
 	MapData::ConstructMapPathData(
-		const Manifest*			aManifest)
+		const Manifest*			aManifest,
+		nwork::Queue*			aWorkQueue)
 	{		
 		m_mapPathData = std::make_unique<MapPathData>();
 
@@ -430,7 +432,7 @@ namespace tpublic
 		{
 			DebugPrintTimer debugPrintTimer("build map path data");
 
-			builder.Build(aManifest, m_tileMap, (uint32_t)m_width, (uint32_t)m_height, 6);
+			builder.Build(aManifest, m_tileMap, (uint32_t)m_width, (uint32_t)m_height, 6, aWorkQueue);
 		}
 
 		{
@@ -442,13 +444,14 @@ namespace tpublic
 
 	void
 	MapData::ConstructMapRouteData(
-		const Manifest*			aManifest)
+		const Manifest*			aManifest,
+		nwork::Queue*			aWorkQueue)
 	{
 		if(m_mapRouteData)
 		{
 			DebugPrintTimer debugPrintTimer("build map route data");
 
-			m_mapRouteData->Build(aManifest, m_tileMap, m_width, m_height);
+			m_mapRouteData->Build(aManifest, m_tileMap, m_width, m_height, aWorkQueue);
 		}
 	}
 
@@ -856,10 +859,10 @@ namespace tpublic
 			layer->m_width = (int32_t)sourceImage.GetWidth();
 			layer->m_height = (int32_t)sourceImage.GetHeight();
 
-			minX = std::min(minX, layer->m_x);
-			minY = std::min(minY, layer->m_y);
-			maxX = std::max(maxX, layer->m_x + layer->m_width);
-			maxY = std::max(maxY, layer->m_y + layer->m_height);
+			minX = Base::Min(minX, layer->m_x);
+			minY = Base::Min(minY, layer->m_y);
+			maxX = Base::Max(maxX, layer->m_x + layer->m_width);
+			maxY = Base::Max(maxY, layer->m_y + layer->m_height);
 
 			layer->m_rgb = new SourceLayer::RGB[sourceImage.GetWidth() * sourceImage.GetHeight()];
 

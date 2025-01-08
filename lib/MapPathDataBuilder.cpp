@@ -2,6 +2,7 @@
 
 #include <tpublic/Data/Sprite.h>
 
+#include <tpublic/DebugPrintTimer.h>
 #include <tpublic/Image.h>
 #include <tpublic/Manifest.h>
 #include <tpublic/MapPathData.h>
@@ -26,7 +27,8 @@ namespace tpublic
 		const uint32_t*		aTileMap,
 		uint32_t			aWidth,
 		uint32_t			aHeight,
-		size_t				aMaxAreaToAreaRouteLength)
+		size_t				aMaxAreaToAreaRouteLength,
+		nwork::Queue*		aWorkQueue)
 	{
 		m_waypoints = std::make_unique<Waypoints>((int32_t)aWidth, (int32_t)aHeight);
 
@@ -103,25 +105,59 @@ namespace tpublic
 			}
 		}
 
-		for (Waypoints::Areas::iterator i = m_waypoints->m_areas.begin(); i != m_waypoints->m_areas.end(); i++)
+		// Area to area pathfinding
 		{
-			Area* area = i->second.get();
-			assert(area->m_flood.empty());
+			nwork::Group workGroup;
 
-			area->m_size = area->m_max - area->m_min;
-			assert(area->m_size.m_x > 0 && area->m_size.m_y > 0);
+			std::mutex areaToAreaTablesLock;
+			std::vector<std::unique_ptr<AreaToAreaTable>> areaToAreaTables;
 
-			// Create distance fields to neighbors
-			for(Area::Neighbors::iterator j = area->m_neighbors.begin(); j != area->m_neighbors.end(); j++)
+			for (Waypoints::Areas::iterator i = m_waypoints->m_areas.begin(); i != m_waypoints->m_areas.end(); i++)
 			{
-				Neighbor* neighbor = j->second.get();
-				assert(neighbor->m_id != area->m_id);
+				Area* area = i->second.get();
+				assert(area->m_flood.empty());
 
-				_CreateAreaNeighborDistanceField(area, neighbor);
+				aWorkQueue->PostFunctionWithGroup(&workGroup, [&, area]()
+				{
+					area->m_size = area->m_max - area->m_min;
+					assert(area->m_size.m_x > 0 && area->m_size.m_y > 0);
+
+					std::unique_ptr<AreaToAreaTable> areaToAreaTable = std::make_unique<AreaToAreaTable>();
+
+					{
+						// Create distance fields to neighbors
+						for (Area::Neighbors::iterator j = area->m_neighbors.begin(); j != area->m_neighbors.end(); j++)
+						{
+							Neighbor* neighbor = j->second.get();
+							assert(neighbor->m_id != area->m_id);
+
+							_CreateAreaNeighborDistanceField(area, neighbor);
+						}
+
+						// Create routes to other areas
+						_CreateAreaToAreaRoutes(area, aMaxAreaToAreaRouteLength, *areaToAreaTable);
+					}
+
+					std::lock_guard lock(areaToAreaTablesLock);
+					areaToAreaTables.push_back(std::move(areaToAreaTable));
+				});
 			}
 
-			// Create routes to other areas
-			_CreateAreaToAreaRoutes(area, aMaxAreaToAreaRouteLength);
+			workGroup.Wait();
+
+			// Merge area to area tables
+			for(const std::unique_ptr<AreaToAreaTable>& areaToAreaTable : areaToAreaTables)
+			{
+				for(AreaToAreaTable::const_iterator i = areaToAreaTable->cbegin(); i != areaToAreaTable->cend(); i++)
+				{
+					AreaToAreaTable::iterator j = m_areaToAreaTable.find(i->first);
+
+					if(j == m_areaToAreaTable.cend())
+						m_areaToAreaTable[i->first] = i->second;
+					else if (i->second.m_length < j->second.m_length)
+						j->second = i->second;
+				}
+			}
 		}
 	}
 
@@ -322,7 +358,8 @@ namespace tpublic
 	void	
 	MapPathDataBuilder::_CreateAreaToAreaRoutes(
 		Area*					aArea,
-		size_t					aMaxDepth)
+		size_t					aMaxDepth,
+		AreaToAreaTable&		aAreaToAreaTable)
 	{
 		struct QueueItem
 		{
@@ -359,7 +396,7 @@ namespace tpublic
 			visited.insert(t.m_area->m_id);
 
 			if (t.m_route.m_length > 1)
-				_AddAreaToAreaRoute(t.m_route);
+				_AddAreaToAreaRoute(aAreaToAreaTable, t.m_route);
 			
 			if(t.m_route.m_length < aMaxDepth)
 			{
@@ -401,14 +438,15 @@ namespace tpublic
 
 	void	
 	MapPathDataBuilder::_AddAreaToAreaRoute(
+		AreaToAreaTable&		aAreaToAreaTable,
 		const AreaToAreaRoute&	aRoute)
 	{
 		assert(aRoute.m_length > 1);
 
 		uint32_t areaToAreaKey = MapPathData::MakeAreaToAreaKey(aRoute.GetStart(), aRoute.GetEnd());
 		
-		AreaToAreaTable::iterator i = m_areaToAreaTable.find(areaToAreaKey);
-		if(i != m_areaToAreaTable.end())
+		AreaToAreaTable::iterator i = aAreaToAreaTable.find(areaToAreaKey);
+		if(i != aAreaToAreaTable.end())
 		{
 			AreaToAreaRouteStart& t = i->second;
 			if((uint32_t)aRoute.m_length < t.m_length)
@@ -422,7 +460,7 @@ namespace tpublic
 			AreaToAreaRouteStart t;
 			t.m_length = (uint32_t)aRoute.m_length;
 			t.m_id = aRoute.GetFirstStep();
-			m_areaToAreaTable[areaToAreaKey] = t;
+			aAreaToAreaTable[areaToAreaKey] = t;
 		}
 	}
 

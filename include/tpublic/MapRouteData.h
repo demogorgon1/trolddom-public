@@ -118,7 +118,8 @@ namespace tpublic
 					const Manifest*				aManifest,
 					const uint32_t*				aMapTiles,
 					int32_t						aMapWidth,
-					int32_t						aMapHeight);
+					int32_t						aMapHeight,
+					nwork::Queue*				aWorkQueue);
 		void	BuildRoute(
 					const Manifest*				aManifest,
 					const std::set<Vec2>&		aWalkable,

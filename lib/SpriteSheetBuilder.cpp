@@ -535,8 +535,8 @@ namespace tpublic
 			{
 				uint32_t nearestPowerOfTwoWidth = _GetNearestPowerOfTwo(width);
 				uint32_t nearestPowerOfTwoHeight = _GetNearestPowerOfTwo(height);
-				uint32_t sheetSize = std::max(nearestPowerOfTwoWidth, nearestPowerOfTwoHeight);
-				sheetSize = std::max(sheetSize, m_minSheetSize);
+				uint32_t sheetSize = Base::Max(nearestPowerOfTwoWidth, nearestPowerOfTwoHeight);
+				sheetSize = Base::Max(sheetSize, m_minSheetSize);
 				insertSheet = _CreateSheet(sheetSize, sheetSize);
 			}
 			else

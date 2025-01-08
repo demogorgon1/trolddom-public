@@ -20,7 +20,8 @@ namespace tpublic
 					const uint32_t*		aTileMap,
 					uint32_t			aWidth,
 					uint32_t			aHeight,
-					size_t				aMaxAreaToAreaRouteLength);
+					size_t				aMaxAreaToAreaRouteLength,
+					nwork::Queue*		aWorkQueue);
 		void	Export(
 					MapPathData*		aOut) const;
 
@@ -283,9 +284,11 @@ namespace tpublic
 					Neighbor*						aNeighbor);
 		void	_CreateAreaToAreaRoutes(
 					Area*							aArea,
-					size_t							aMaxDepth);
+					size_t							aMaxDepth,
+					AreaToAreaTable&				aAreaToAreaTable);
 		void	_AddAreaToAreaRoute(
-					const AreaToAreaRoute&	aRoute);
+					AreaToAreaTable&				aAreaToAreaTable,
+					const AreaToAreaRoute&			aRoute);
 	};
 
 }

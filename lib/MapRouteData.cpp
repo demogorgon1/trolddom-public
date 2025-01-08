@@ -77,7 +77,8 @@ namespace tpublic
 		const Manifest*		aManifest,
 		const uint32_t*		aMapTiles,
 		int32_t				aMapWidth,
-		int32_t				aMapHeight)
+		int32_t				aMapHeight,
+		nwork::Queue*		aWorkQueue)
 	{
 		std::set<Vec2> walkable;
 
@@ -94,8 +95,11 @@ namespace tpublic
 			}
 		}
 
-		for(std::unique_ptr<Route>& route : m_routes)
-			BuildRoute(aManifest, walkable, aMapWidth, aMapHeight, route.get());
+		aWorkQueue->ForEachVector<std::unique_ptr<Route>>(m_routes, [&](
+			std::unique_ptr<Route>& aRoute)
+		{
+			BuildRoute(aManifest, walkable, aMapWidth, aMapHeight, aRoute.get());
+		});
 	}
 
 	void	

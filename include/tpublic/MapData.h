@@ -460,11 +460,14 @@ namespace tpublic
 
 		void		Build(
 						const Manifest*			aManifest,
-						const AutoDoodads*		aAutoDoodads);
+						const AutoDoodads*		aAutoDoodads,
+						nwork::Queue*			aWorkQueue);
 		void		ConstructMapPathData(
-						const Manifest*			aManifest);
+						const Manifest*			aManifest,
+						nwork::Queue*			aWorkQueue);
 		void		ConstructMapRouteData(
-						const Manifest*			aManifest);
+						const Manifest*			aManifest,
+						nwork::Queue*			aWorkQueue);
 		void		ToStream(
 						IWriter*				aStream) const;
 		bool		FromStream(
