@@ -9,6 +9,7 @@
 #include <tpublic/ComponentManager.h>
 #include <tpublic/Compression.h>
 #include <tpublic/DataErrorHandling.h>
+#include <tpublic/DebugPrintTimer.h>
 #include <tpublic/DirectEffectFactory.h>
 #include <tpublic/Document.h>
 #include <tpublic/MemoryWriter.h>
@@ -103,6 +104,8 @@ namespace tpublic
 
 		// Build sprite sheets
 		{
+			DebugPrintTimer timer("build sprite sheets");
+
 			spriteSheetBuilder.Build();
 			spriteSheetBuilder.UpdateManifestData();
 
@@ -113,6 +116,8 @@ namespace tpublic
 
 		// Build sound data
 		{
+			DebugPrintTimer timer("build sound data");
+
 			std::string soundsPath = aDataOutputPath;
 			soundsPath += "/sounds.bin";
 
@@ -146,12 +151,16 @@ namespace tpublic
 		}
 
 		// Post process stuff
-		PostProcessEntities::Run(m_manifest);
-		PostProcessWordGenerators::Run(m_manifest);
-		PostProcessAbilities::Run(m_manifest);
-		PostProcessSprites::Run(m_manifest);
-		PostProcessItems::Run(m_manifest);
-		PostProcessDoodads::Run(m_manifest);
+		{
+			DebugPrintTimer timer("data post process");
+
+			PostProcessEntities::Run(m_manifest);
+			PostProcessWordGenerators::Run(m_manifest);
+			PostProcessAbilities::Run(m_manifest);
+			PostProcessSprites::Run(m_manifest);
+			PostProcessItems::Run(m_manifest);
+			PostProcessDoodads::Run(m_manifest);
+		}
 
 		// Run generation jobs
 		for(std::unique_ptr<GenerationJob>& generationJob : generationJobs)
@@ -159,6 +168,8 @@ namespace tpublic
 
 		// Export JSON manifest
 		{
+			DebugPrintTimer timer("export json manifest");
+
 			std::string spriteDataPath = aDataOutputPath;
 			spriteDataPath += "/sprites.bin";
 			JSONManifest jsonManifest(m_manifest, spriteDataPath.c_str());
@@ -170,6 +181,8 @@ namespace tpublic
 
 		// Export manifest 
 		{
+			DebugPrintTimer timer("manifest export");
+
 			std::vector<uint8_t> uncompressed;
 			MemoryWriter writer(uncompressed);
 			m_manifest->ToStream(&writer);
