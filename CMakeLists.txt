@@ -43,6 +43,7 @@ FetchContent_MakeAvailable(nwork)
 
 if(MSVC)
 	add_compile_options(/bigobj /MP)
+	add_compile_definitions(_ITERATOR_DEBUG_LEVEL=0)	
 endif()
 
 include_directories(extra)
