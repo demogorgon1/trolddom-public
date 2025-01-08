@@ -63,7 +63,7 @@ namespace tpublic
 		Compression::Level		aCompressionLevel)
 	{
 		nwork::Queue workQueue;
-		nwork::ThreadPool threadPool(&workQueue, 4);
+		nwork::ThreadPool threadPool(&workQueue, 8);
 
 		SpriteSheetBuilder spriteSheetBuilder(256);
 		std::vector<std::unique_ptr<GenerationJob>> generationJobs;

@@ -79,6 +79,15 @@ namespace tpublic
 						uint32_t					aPlayerEntityInstanceId);
 
 		template <typename _T>
+		void
+		AppendVector(
+			std::vector<_T>&						aVector,
+			const std::vector<_T>&					aAppend)
+		{
+			aVector.insert(aVector.end(), aAppend.begin(), aAppend.end());
+		}
+
+		template <typename _T>
 		void	
 		RemoveCyclicFromVector(
 			std::vector<_T>&						aVector, 
