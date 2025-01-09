@@ -384,6 +384,14 @@ sprites:
 	sprite dark_elf_4_dead: { }
 	sprite dark_elf_5_dead: { }
 	
+	cursor: { position: [ 0 320 ] }
+
+	sprite deer_3: { dead: deer_3_dead }
+
+	cursor: { position: [ 0 336 ] }
+
+	sprite deer_3_dead: { }
+
 }
 
 sprites:

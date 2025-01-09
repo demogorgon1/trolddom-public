@@ -2,11 +2,12 @@ dialogue_screen .sheila_urkins_dialogue:
 {
 	text: 
 	[	
-		"Hello."
+		"How are you doing?"
 	]		
 	
 	options:
 	[
+		{ quest: .sheila_urkins_1 }
 	]
 }
 
@@ -28,3 +29,66 @@ entity thalvaron_sheila_urkins: !NPC
 	_not_pushable: true	
 }
 
+############################################################
+# Quest 1
+
+loot_group .sheila_urkins_1_quest_item: {}
+
+item .sheila_urkins_1_quest_item:
+{
+	icon: icon_spider_web_1
+	item_level: 15
+	loot_groups: [ .sheila_urkins_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Spider Silk"
+}
+
+loot_table .sheila_urkins_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .sheila_urkins_1_quest_item }			
+		}		
+	]
+}
+
+objective .sheila_urkins_1:
+{
+	string: "Spider Silk"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .sheila_urkins_1_quest_item count: 3 }
+}
+
+quest .sheila_urkins_1:
+{
+	string: "Silk Collection"
+
+	text:
+	[
+		"Go south, across the river by the mountains, and collect spider silk."
+	]
+	
+	description: 
+	[
+		"To the south, on the other side of the river, you can encounter a special species of spider that produces the most wonderful silk. I need some for a special project of mine. Can you go collect some for me?\n\n"
+		"Be careful, those spiders are venomonous. You'll find them close to the mountains."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Amazing! Hmm, it's quite sticky, but I suppose that the idea of spider webs."
+	]
+
+	objectives: [ .sheila_urkins_1 ]
+	level: 15
+
+	# FIXME: rewards
+}

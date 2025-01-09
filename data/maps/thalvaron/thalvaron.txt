@@ -395,6 +395,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_gyo_starleaf: [ 149 249 136 ]
 	entity_spawn thalvaron_gyo_starleaf_1_quest_item: [ 149 249 226 ]
 	entity_spawn thalvaron_north_dark_elf: [ 249 246 136 ]
+	entity_spawn thalvaron_silk_spider: [ 34 156 85 ]
 	
 }
 

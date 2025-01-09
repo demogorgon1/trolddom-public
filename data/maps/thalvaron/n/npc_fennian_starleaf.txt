@@ -93,7 +93,7 @@ quest .fennian_starleaf_1:
 
 	text:
 	[
-		"Investigate smugglers north of Edmund's Haunt."
+		"Collect duskweed to the west, by the mountain, and bring a sample back to Fennian Starleaf."
 	]
 	
 	description: 

@@ -138,6 +138,11 @@ map_entity_spawn thalvaron_owlbear:
 	entity thalvaron_owlbear: { init_state: default } 
 }
 
+map_entity_spawn thalvaron_silk_spider:
+{ 
+	entity thalvaron_silk_spider: { init_state: default } 
+}
+
 # Yetis in northern part of the highlands
 {
 	loot_table .north_yeti: 
@@ -341,6 +346,35 @@ map_entity_spawn thalvaron_owlbear:
 	entity thalvaron_owlbear: !NPC { _string: "Owlbear" _sprite: owlbear_2 _sprite_dead: owlbear_2_dead  }
 }
 
+# Spiders (for silk quest)
+{
+	loot_table .silk_spider: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { }
+				possibility: { loot_group: .sheila_urkins_1_quest_item requirement self<must_have_active_quest>: { id: .sheila_urkins_1 } } 
+			}
+			
+			!WORLD_DROPS {}
+		]	
+	}
+	
+	${
+		_level: 15
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short				
+		_loot_table: .silk_spider 
+		_weapon_damage: 1.1
+		_resource_health: 1.1
+		_abilities: [ { id: npc_poison_bite } { id: npc_attack } ]
+	}
+
+	entity thalvaron_silk_spider: !NPC { _string: "Silk Spider" _sprite: spider_1 _sprite_dead: spider_1_dead  }
+}
+
 ##########################################################################################
 # Deer
 
@@ -348,6 +382,7 @@ map_entity_spawn thalvaron_deer_north:
 { 
 	entity thalvaron_deer_13: { init_state: default } 
 	entity thalvaron_deer_14: { init_state: default } 
+	entity thalvaron_deer_15: { init_state: default } 
 }
 
 # Wildlife
@@ -370,6 +405,7 @@ map_entity_spawn thalvaron_deer_north:
 	
 	entity thalvaron_deer_13: !NPC { _string: "Iceveil Deer" _sprite: deer_2 _sprite_dead: deer_2_dead _level: 13 }
 	entity thalvaron_deer_14: !NPC { _string: "Iceveil Deer" _sprite: deer_2 _sprite_dead: deer_2_dead _level: 14 }
+	entity thalvaron_deer_15: !NPC { _string: "Ghost Tailed Deer" _sprite: deer_3 _sprite_dead: deer_3_dead _level: 15 }
 }
 
 ##########################################################################################
