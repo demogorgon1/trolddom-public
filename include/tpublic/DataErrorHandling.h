@@ -14,10 +14,11 @@ namespace tpublic
 
 		typedef std::function<void(const char*)> ErrorCallback;
 
-		extern ErrorCallback g_errorCallback;
+		extern std::vector<ErrorCallback> g_errorCallbackStack;
 
-		void		SetErrorCallback(
+		void		PushErrorCallback(
 						ErrorCallback					aErrorCallback);
+		void		PopErrorCallback();
 		void		VerificationError(
 						const std::optional<DebugInfo>&	aDebugInfo,
 						const char*						aFormat,
@@ -27,6 +28,20 @@ namespace tpublic
 		void		FatalError(
 						const char*						aFormat,
 						...);
+
+		struct ScopedErrorCallback
+		{
+			ScopedErrorCallback(
+				ErrorCallback							aErrorCallback)
+			{
+				PushErrorCallback(aErrorCallback);
+			}
+
+			~ScopedErrorCallback()
+			{
+				PopErrorCallback();	
+			}
+		};
 
 	}
 

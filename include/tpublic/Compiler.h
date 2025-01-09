@@ -28,10 +28,19 @@ namespace tpublic
 
 	private:
 
+		struct BuildError
+		{
+			std::string						m_string;
+		};
+
 		Manifest*							m_manifest;
 		Parser								m_parser;
 		SourceContext						m_sourceContext;		
 
+		size_t								m_buildErrorCount;
+
+		void	_OnBuildError(
+					const BuildError&								aBuildError);
 		void	_ParseDirectory(
 					const char*										aRootPath,
 					const char*										aPath);

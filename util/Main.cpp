@@ -5,7 +5,7 @@ main(
 	int		aNumArgs,
 	char**	aArgs)
 {
-	tpublic::DataErrorHandling::SetErrorCallback([](
+	tpublic::DataErrorHandling::PushErrorCallback([](
 		const char* aErrorMessage)
 	{
 		fprintf(stderr, "Error: %s\n", aErrorMessage);

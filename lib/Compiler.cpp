@@ -37,6 +37,7 @@ namespace tpublic
 		Manifest*				aManifest)
 		: m_manifest(aManifest)
 		, m_parser(&m_sourceContext)
+		, m_buildErrorCount(0)
 	{
 
 	}
@@ -64,7 +65,7 @@ namespace tpublic
 		Compression::Level		aCompressionLevel)
 	{
 		nwork::Queue workQueue;
-		nwork::ThreadPool threadPool(&workQueue, 8);
+		nwork::ThreadPool threadPool(&workQueue);
 
 		SpriteSheetBuilder spriteSheetBuilder(256);
 		std::vector<std::unique_ptr<GenerationJob>> generationJobs;
@@ -75,8 +76,23 @@ namespace tpublic
 		m_parser.GetRoot()->ForEachChild([&](
 			const SourceNode* aNode)
 		{
-			_ProcessNode(&spriteSheetBuilder, &generationJobs, aNode);
+			DataErrorHandling::ScopedErrorCallback scopedErrorCallback([&](
+				const char* aString)
+			{
+				throw BuildError{ aString };
+			});
+
+			try
+			{
+				_ProcessNode(&spriteSheetBuilder, &generationJobs, aNode);
+			}
+			catch(BuildError& e)
+			{
+				_OnBuildError(e);
+			}
 		});		
+
+		TP_CHECK(m_buildErrorCount == 0, "%u build errors.", m_buildErrorCount);
 
 		// Prepare word list manifest
 		{
@@ -152,7 +168,7 @@ namespace tpublic
 
 		// Post process stuff
 		{
-			DebugPrintTimer timer("data post process");
+			DebugPrintTimer timer("post process data");
 
 			PostProcessEntities::Run(m_manifest);
 			PostProcessWordGenerators::Run(m_manifest);
@@ -202,6 +218,15 @@ namespace tpublic
 	//-----------------------------------------------------------------------------------
 
 	void	
+	Compiler::_OnBuildError(
+		const BuildError&		aBuildError)
+	{
+		printf("\x1B[31mERROR: %s\x1B[37m\n", aBuildError.m_string.c_str());
+		
+		m_buildErrorCount++;
+	}
+
+	void	
 	Compiler::_ParseDirectory(
 		const char*				aRootPath,
 		const char*				aPath)
@@ -221,8 +246,21 @@ namespace tpublic
 			{
 				if(entry.path().filename().string().c_str()[0] != '_')
 				{
-					Tokenizer tokenizer(aRootPath, entry.path().string().c_str());
-					m_parser.Parse(tokenizer);
+					DataErrorHandling::ScopedErrorCallback scopedErrorCallback([&](
+						const char* aString)
+					{
+						throw BuildError{ aString };
+					});
+
+					try
+					{
+						Tokenizer tokenizer(aRootPath, entry.path().string().c_str());
+						m_parser.Parse(tokenizer);
+					}
+					catch(BuildError& e)
+					{
+						_OnBuildError(e);
+					}
 				}
 			}
 			else if(entry.is_directory() && entry.path().filename().string().c_str()[0] != '_')
