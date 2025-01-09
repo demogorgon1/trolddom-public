@@ -522,6 +522,8 @@ sprites:
 	sprite icon_rice : { tags: [ icon ] }
 	sprite icon_cooked_rice : { tags: [ icon ] }
 	sprite icon_spider_web_1 : { tags: [ icon ] }
+	sprite icon_spider_eggs_1 : { tags: [ icon ] }
+	sprite icon_flower_4 : { tags: [ icon ] }
 	
 }
 

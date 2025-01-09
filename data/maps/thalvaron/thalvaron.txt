@@ -220,6 +220,9 @@ map_entity_spawn thalvaron_sheila_urkins: { entity thalvaron_sheila_urkins: { in
 map_entity_spawn thalvaron_deputy_simmons: { entity thalvaron_deputy_simmons: { init_state: default } }
 map_entity_spawn thalvaron_gyo_starleaf: { entity thalvaron_gyo_starleaf: { init_state: default } }
 map_entity_spawn thalvaron_gyo_starleaf_1_quest_item: { entity thalvaron_gyo_starleaf_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_sheila_urkins_1_quest_item: { entity thalvaron_sheila_urkins_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_sheila_urkins_2_quest_item: { entity thalvaron_sheila_urkins_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_hoi_ghourian: { entity thalvaron_hoi_ghourian: { init_state: default } }
 
 map_palette .stuff:
 {
@@ -396,7 +399,11 @@ map_palette .stuff:
 	entity_spawn thalvaron_gyo_starleaf_1_quest_item: [ 149 249 226 ]
 	entity_spawn thalvaron_north_dark_elf: [ 249 246 136 ]
 	entity_spawn thalvaron_silk_spider: [ 34 156 85 ]
-	
+	entity_spawn thalvaron_silk_spider_large: [ 34 156 185 ]
+	entity_spawn thalvaron_sheila_urkins_1_quest_item: [ 149 44 89 ]
+	entity_spawn thalvaron_sheila_urkins_2_quest_item: [ 149 144 89 ]
+	entity_spawn thalvaron_hoi_ghourian: [ 134 126 185 ]
+	entity_spawn thalvaron_wood_elemental_2: [ 66 88 11 ]
 }
 
 map_palette .levels:

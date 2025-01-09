@@ -7,9 +7,8 @@ dialogue_screen .mathew_larsen_dialogue_2:
 	
 	options:
 	[
-		{ 
-			quest<completion_only>: thalvaron_gnome 
-		}	
+		{ quest<completion_only>: thalvaron_gnome }	
+		{ quest<completion_only>: open_world_randy_2 }
 	]
 }
 

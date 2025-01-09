@@ -387,10 +387,16 @@ sprites:
 	cursor: { position: [ 0 320 ] }
 
 	sprite deer_3: { dead: deer_3_dead }
+	sprite spider_3: { dead: spider_3_dead }
+	sprite elf_3: { dead: elf_3_dead }
+	sprite wood_elemental_2: { dead: wood_elemental_2_dead }
 
 	cursor: { position: [ 0 336 ] }
 
 	sprite deer_3_dead: { }
+	sprite spider_3_dead: { }
+	sprite elf_3_dead: { }
+	sprite wood_elemental_2_dead: { }
 
 }
 
@@ -502,6 +508,8 @@ sprites:
 	sprite egg_1: { }
 	sprite junk_1: { }
 	sprite seashell_1: { }
+	sprite spider_eggs_1: { }
+	sprite flower_1: { }
 	
 }
 

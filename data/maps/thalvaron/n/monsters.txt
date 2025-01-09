@@ -143,6 +143,16 @@ map_entity_spawn thalvaron_silk_spider:
 	entity thalvaron_silk_spider: { init_state: default } 
 }
 
+map_entity_spawn thalvaron_silk_spider_large:
+{ 
+	entity thalvaron_silk_spider_large: { init_state: default } 
+}
+
+map_entity_spawn thalvaron_wood_elemental_2:
+{ 
+	entity thalvaron_wood_elemental_2: { init_state: default } 
+}
+
 # Yetis in northern part of the highlands
 {
 	loot_table .north_yeti: 
@@ -364,15 +374,28 @@ map_entity_spawn thalvaron_silk_spider:
 	${
 		_level: 15
 		_faction: monsters
-		_creature_type: beast
-		_default_behavior_state: .wandering_short				
-		_loot_table: .silk_spider 
-		_weapon_damage: 1.1
-		_resource_health: 1.1
+		_creature_type: beast		
+		_loot_table: .silk_spider 			
 		_abilities: [ { id: npc_poison_bite } { id: npc_attack } ]
 	}
 
-	entity thalvaron_silk_spider: !NPC { _string: "Silk Spider" _sprite: spider_1 _sprite_dead: spider_1_dead  }
+	entity thalvaron_silk_spider: !NPC { _string: "Silk Spider" _sprite: spider_1 _sprite_dead: spider_1_dead _weapon_damage: 1.1 _resource_health: 1.1 _default_behavior_state: .wandering_short }
+	entity thalvaron_silk_spider_large: !NPC { _string: "Brood Mother" _sprite: spider_3 _sprite_dead: spider_3_dead _weapon_damage: 1.3 _resource_health: 1.8 _default_behavior_state: .passive }
+}
+
+# Wood elemental for kill quest
+{
+	${
+		_level: 15
+		_faction: monsters
+		_creature_type: elemental
+		_default_behavior_state: .wandering_short
+		_loot_table: .default_beast
+		_weapon_damage: 1.2
+		_resource_health: 1.8
+	}
+
+	entity thalvaron_wood_elemental_2: !NPC { _string: "Yrk" _sprite: wood_elemental_2 _sprite_dead: wood_elemental_2_dead }
 }
 
 ##########################################################################################

@@ -1,0 +1,77 @@
+dialogue_screen .hoi_ghourian_dialogue:
+{
+	text: 
+	[	
+		"Hello."
+	]		
+	
+	options:
+	[
+		{ quest: .hoi_ghourian_1 }
+	]
+}
+
+dialogue_root .hoi_ghourian_dialogue:
+{
+	.hoi_ghourian_dialogue: { }
+}
+
+entity thalvaron_hoi_ghourian: !NPC
+{
+	_string: "Hoi Ghourian"
+	_dialogue_root: .hoi_ghourian_dialogue	
+	_sprite: elf_3
+	_sprite_dead: elf_3_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .hoi_ghourian_1:
+{
+	string: "Yrk Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_wood_elemental_2 ]
+		count: 1
+	}
+}
+
+quest .hoi_ghourian_1:
+{
+	string: "Putting Down the Tree"
+
+	text:
+	[
+		"Locate the owlbear colony south of Edmund's Haunt and thin out their numbers."
+	]
+	
+	description: 
+	[
+		"In the dark woods behind me, there lives a wood elemental who goes by the name of Yrk. For many years we've been good friends, but these creatures tend to go mad when they get older. For his own sake,"
+		"he needs to be put down. It's the circle of life, you know."
+	]
+
+	progress:
+	[
+		"Back already?"
+	]
+	
+	completion:
+	[
+		"Good. His ashes will be absorbed back into the earth."
+	]
+
+	objectives: [ .hoi_ghourian_1 ]
+	level: 15
+
+	# FIXME: rewards
+}
