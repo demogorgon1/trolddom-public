@@ -48,22 +48,26 @@ namespace tpublic
 	}
 
 	void	
-	Compiler::Parse(
-		const char*				aRootPath)
-	{
-		// Recursively parse all .txt files in root path
-		_ParseDirectory(aRootPath, aRootPath);
-
-		m_parser.ResolveMacrosAndReferences();
-	}
-
-	void	
 	Compiler::Build(
-		const char*				aPersistentIdTablePath,
-		const char*				aDataOutputPath,
-		const char*				aGeneratedSourceOutputPath,
-		Compression::Level		aCompressionLevel)
+		const std::vector<std::string>&		aParseRootPaths,
+		const char*							aPersistentIdTablePath,
+		const char*							aDataOutputPath,
+		const char*							aGeneratedSourceOutputPath,
+		Compression::Level					aCompressionLevel)
 	{
+		uint32_t buildFingerprint = _GetInputFingerprint(aParseRootPaths);
+		uint32_t currentBuildFingerprint = _GetCurrentBuildFingerprint(aDataOutputPath);
+		if(buildFingerprint == currentBuildFingerprint)
+			return; // No changes, no need to do anything
+
+		for(const std::string& parseRootPath : aParseRootPaths)
+		{
+			// Recursively parse all .txt files in root path
+			_ParseDirectory(parseRootPath.c_str(), parseRootPath.c_str());
+
+			m_parser.ResolveMacrosAndReferences();
+		}
+
 		nwork::Queue workQueue;
 		nwork::ThreadPool threadPool(&workQueue);
 
@@ -213,9 +217,77 @@ namespace tpublic
 		}
 
 		m_sourceContext.m_persistentIdTable->Save();
+
+		_SaveBuildFingerprint(aDataOutputPath, buildFingerprint);
 	}
 
 	//-----------------------------------------------------------------------------------
+
+	uint32_t	
+	Compiler::_GetInputFingerprint(
+		const std::vector<std::string>& aParseRootPaths)
+	{
+		Hash::CheckSum checkSum;
+
+		std::vector<std::string> directories = aParseRootPaths;
+
+		while(directories.size() > 0)
+		{
+			std::string directory = std::move(directories[directories.size() - 1]);
+			directories.pop_back();
+
+			std::error_code errorCode;
+			std::filesystem::directory_iterator it(directory.c_str(), errorCode);
+			TP_CHECK(!errorCode, "Failed to search directory: %s (%s)", directory.c_str(), errorCode.message().c_str());
+
+			for (const std::filesystem::directory_entry& entry : it)
+			{
+				std::string path = entry.path().string().c_str();
+
+				if (entry.is_regular_file())
+				{
+					uint64_t timeStamp = (uint64_t)std::chrono::duration_cast<std::chrono::milliseconds>(entry.last_write_time().time_since_epoch()).count();
+					size_t fileSize = (size_t)entry.file_size();
+
+					checkSum.AddString(path.c_str());
+					checkSum.AddPOD(fileSize);
+					checkSum.AddPOD(timeStamp);
+				}
+				else if(entry.is_directory())
+				{
+					directories.push_back(path);
+				}
+			}
+		}
+
+		return checkSum.m_hash;
+	}
+
+	uint32_t	
+	Compiler::_GetCurrentBuildFingerprint(
+		const char*				aDataOutputPath)
+	{
+		std::string buildFingerprintFilePath = std::string(aDataOutputPath) + "/build-fingerprint.txt";
+		std::vector<std::string> lines;
+		if(!Helpers::LoadTextFile(buildFingerprintFilePath.c_str(), lines) || lines.size() == 0)
+			return 0;
+
+		uint32_t value = 0;
+		if(sscanf(lines[0].c_str(), "%u", &value) != 1)
+			return 0;
+
+		return value;
+	}
+
+	void		
+	Compiler::_SaveBuildFingerprint(
+		const char*				aDataOutputPath,
+		uint32_t				aBuildFingerprint)
+	{
+		std::string buildFingerprintFilePath = std::string(aDataOutputPath) + "/build-fingerprint.txt";
+		FileWriter fileWriter(buildFingerprintFilePath.c_str());
+		fileWriter.PrintF("%u\r\n", aBuildFingerprint);
+	}
 
 	void	
 	Compiler::_OnBuildError(

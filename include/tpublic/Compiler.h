@@ -15,16 +15,15 @@ namespace tpublic
 	{
 	public:
 				Compiler(
-					Manifest*										aManifest);
+					Manifest*											aManifest);
 				~Compiler();
 
-		void	Parse(
-					const char*										aRootPath);
 		void	Build(
-					const char*										aPersistentIdTablePath,
-					const char*										aDataOutputPath,
-					const char*										aGeneratedSourceOutputPath,
-					Compression::Level								aCompressionLevel);
+					const std::vector<std::string>&						aParseRootPaths,
+					const char*											aPersistentIdTablePath,
+					const char*											aDataOutputPath,
+					const char*											aGeneratedSourceOutputPath,
+					Compression::Level									aCompressionLevel);
 
 	private:
 
@@ -39,15 +38,22 @@ namespace tpublic
 
 		size_t								m_buildErrorCount;
 
-		void	_OnBuildError(
-					const BuildError&								aBuildError);
-		void	_ParseDirectory(
-					const char*										aRootPath,
-					const char*										aPath);
-		void	_ProcessNode(
-					SpriteSheetBuilder*								aSpriteSheetBuilder,
-					std::vector<std::unique_ptr<GenerationJob>>*	aGenerationJobs,
-					const SourceNode*								aNode);
+		uint32_t	_GetInputFingerprint(
+						const std::vector<std::string>&					aParseRootPaths);
+		uint32_t	_GetCurrentBuildFingerprint(
+						const char*										aDataOutputPath);
+		void		_SaveBuildFingerprint(
+						const char*										aDataOutputPath,
+						uint32_t										aBuildFingerprint);
+		void		_OnBuildError(
+						const BuildError&								aBuildError);
+		void		_ParseDirectory(
+						const char*										aRootPath,
+						const char*										aPath);
+		void		_ProcessNode(
+						SpriteSheetBuilder*								aSpriteSheetBuilder,
+						std::vector<std::unique_ptr<GenerationJob>>*	aGenerationJobs,
+						const SourceNode*								aNode);
 	};
 
 }
