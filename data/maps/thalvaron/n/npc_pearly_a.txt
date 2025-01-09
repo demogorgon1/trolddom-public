@@ -14,6 +14,7 @@ dialogue_screen .pearly_a_dialogue_1:
 	[
 		{ quest<completion_only>: .fennian_starleaf_3 }
 		{ quest: .pearly_a_1 }
+		{ quest: .pearly_a_2 }
 	]
 }
 
@@ -88,4 +89,39 @@ quest .pearly_a_1:
 	level: 16
 	prerequisites: [ .fennian_starleaf_3 ]
 	objectives: [ .pearly_a_1 ]
+}
+
+############################################################
+# Quest 2
+
+quest .pearly_a_2:
+{
+	string: "The Waters Are Stirred"
+	
+	text:
+	[
+		"FIXME."
+	]	
+	
+	description: 
+	[
+		"These are uneasy times in this part of the world. I can feel it in my scales. There is something in the water that effects many of the lesser creatures that drink from them, including owlbears. I'm talking about some"
+		"kind of dark magic.\n\n"
+		"It's nothing new. For a long time these forests have had a vile aura, brought by the dark elves from the east that have slowly increased their pressence. I'm afraid we're close to a tipping point and I'm delighted that"
+		"a brave soul like you is interested in doing something about it.\n\n"
+	]
+
+	progress:
+	[
+		"FIXME."
+	]
+	
+	completion:
+	[
+		"FIXME."
+	]
+
+	level: 16
+	prerequisites: [ .pearly_a_1 ]
+	#objectives: [ .pearly_a_2 ]
 }

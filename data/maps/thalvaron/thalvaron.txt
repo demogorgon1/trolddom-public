@@ -218,8 +218,8 @@ map_entity_spawn thalvaron_fennian_starleaf_3_quest_item: { entity thalvaron_fen
 map_entity_spawn thalvaron_pearly_a: { entity thalvaron_pearly_a: { init_state: default } }
 map_entity_spawn thalvaron_sheila_urkins: { entity thalvaron_sheila_urkins: { init_state: default } }
 map_entity_spawn thalvaron_deputy_simmons: { entity thalvaron_deputy_simmons: { init_state: default } }
-
-
+map_entity_spawn thalvaron_gyo_starleaf: { entity thalvaron_gyo_starleaf: { init_state: default } }
+map_entity_spawn thalvaron_gyo_starleaf_1_quest_item: { entity thalvaron_gyo_starleaf_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 
 map_palette .stuff:
 {
@@ -392,6 +392,9 @@ map_palette .stuff:
 	entity_spawn thalvaron_pearly_a: [ 49 246 222 ]
 	entity_spawn thalvaron_deputy_simmons: [ 49 246 242 ]
 	entity_spawn thalvaron_sheila_urkins: [ 149 246 222 ]
+	entity_spawn thalvaron_gyo_starleaf: [ 149 249 136 ]
+	entity_spawn thalvaron_gyo_starleaf_1_quest_item: [ 149 249 226 ]
+	entity_spawn thalvaron_north_dark_elf: [ 249 246 136 ]
 	
 }
 

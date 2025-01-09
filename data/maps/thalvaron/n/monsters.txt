@@ -620,3 +620,28 @@ map_entity_spawn thalvaron_duskwhisper_crab:
 
 	entity thalvaron_duskwhisper_crab: !NPC { _string: "Beach Crab" _sprite: crab_1 _sprite_dead: crab_1_dead  }
 }
+
+##########################################################################################
+# Dark elves
+
+map_entity_spawn thalvaron_north_dark_elf: 
+{ 
+	entity thalvaron_north_dark_elf_a: { init_state: default } 
+	entity thalvaron_north_dark_elf_b: { init_state: default } 
+	entity thalvaron_north_dark_elf_c: { init_state: default } 
+}
+
+# Around the single house
+{	
+	${
+		_level: 15
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .passive
+		_loot_table: .default_humanoid
+	}
+
+	entity thalvaron_north_dark_elf_a: !NPC { _string: "Dark Elf Invader" _sprite: dark_elf_4 _sprite_dead: dark_elf_4_dead }
+	entity thalvaron_north_dark_elf_b: !NPC { _string: "Dark Elf Invader" _sprite: dark_elf_5 _sprite_dead: dark_elf_5_dead }
+	entity thalvaron_north_dark_elf_c: !NPC { _string: "Dark Elf Hunter" _sprite: dark_elf_3 _sprite_dead: dark_elf_3_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
+}

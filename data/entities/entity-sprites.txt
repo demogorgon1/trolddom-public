@@ -360,6 +360,10 @@ sprites:
 	sprite woman_14: { dead: woman_14_dead }
 	sprite man_42: { dead: man_42_dead }
 	sprite pearly : { dead: pearly }
+	sprite elf_2: { dead: elf_2_dead }
+	sprite dark_elf_3: { dead: dark_elf_3_dead }
+	sprite dark_elf_4: { dead: dark_elf_4_dead }
+	sprite dark_elf_5: { dead: dark_elf_5_dead }
 
 	cursor: { position: [ 0 304 ] }
 	
@@ -375,6 +379,10 @@ sprites:
 	sprite woman_14_dead: { }
 	sprite man_42_dead: { }
 	skip: {}
+	sprite elf_2_dead: { }
+	sprite dark_elf_3_dead: { }
+	sprite dark_elf_4_dead: { }
+	sprite dark_elf_5_dead: { }
 	
 }
 
