@@ -131,6 +131,12 @@ namespace tpublic
 			GetExistingByName(
 				const char*														aName)
 			{
+				if(aName[0] == '$')
+				{
+					uint32_t id = (uint32_t)strtoul(aName + 1, NULL, 10);
+					return TryGetById(id);
+				}
+
 				typename std::unordered_map<std::string, _T*>::iterator it = m_nameTable.find(aName);
 				if(it == m_nameTable.end())
 					return NULL;
@@ -141,6 +147,12 @@ namespace tpublic
 			GetExistingByName(
 				const char*														aName) const
 			{
+				if (aName[0] == '$')
+				{
+					uint32_t id = (uint32_t)strtoul(aName + 1, NULL, 10);
+					return TryGetById(id);
+				}
+
 				typename std::unordered_map<std::string, _T*>::const_iterator it = m_nameTable.find(aName);
 				if(it == m_nameTable.cend())
 					return NULL;

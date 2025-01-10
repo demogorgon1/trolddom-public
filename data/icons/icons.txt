@@ -524,6 +524,9 @@ sprites:
 	sprite icon_spider_web_1 : { tags: [ icon ] }
 	sprite icon_spider_eggs_1 : { tags: [ icon ] }
 	sprite icon_flower_4 : { tags: [ icon ] }
+	sprite icon_organ_1 : { tags: [ icon ] }
+	sprite icon_flower_5 : { tags: [ icon ] }
+	sprite icon_sharp_tooth : { tags: [ icon ] }
 	
 }
 

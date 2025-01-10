@@ -606,3 +606,123 @@ particle_system npc_arcane_detonation:
 		fade_out: 200
 	}
 }
+
+cooldown npc_fire_attack:
+{
+	duration: 100
+}
+
+ability npc_fire_attack:
+{
+	string: "Fire Attack"
+	range: 1
+	cooldowns: [ npc_fire_attack global ]
+	flags: [ melee offensive target_other target_hostile ]
+	states: [ default in_combat ]
+	icon: icon_firebolt
+	
+	direct_effect damage:
+	{
+		damage_type: fire
+		function: { expression: a_mul_x x: weapon a: 0.5 }													
+	}
+	
+	direct_effect spawn_entity:
+	{
+		spawn_flags: [ at_target ]
+		entity: npc_fire_attack_fire		
+	}
+}
+
+ability npc_fire_attack_fire_tick:
+{
+	string: "Fire"
+	flags: [ offensive always_in_range always_in_line_of_sight ]
+	icon: icon_fire
+	direct_effect damage:
+	{
+		damage_type: fire
+		function: { expression: a a: [ [ 1 15 ] [ 10 45 ] [ 20 90 ] ] elite_multiplier: 1.7 }				
+	}
+}
+
+entity npc_fire_attack_fire:
+{
+	systems: [ environment ]
+	
+	components:
+	{
+		position: { }		
+		owner: { }
+		environment: 
+		{
+			tick_interval: 15
+			duration: 100 
+			ability: npc_fire_attack_fire_tick
+		}		
+		sprite: 
+		{ 
+			animations: 
+			[
+				{ 
+					states: [ default ] 
+					frames: [ effect_fire_0 effect_fire_1 effect_fire_2 ] 
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -1
+				}
+				
+				{ 
+					states: [ spawning despawning ] 
+					frames: [ effect_fire_fade_0 effect_fire_fade_1 effect_fire_fade_2 ] 
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -1
+				}				
+			]			
+		}		
+	}
+}
+
+cooldown npc_arcane_explosion:
+{
+	duration: 100
+} 
+
+ability npc_arcane_explosion:
+{
+	string: "Arcane Explosion"
+	cooldowns: [ spell_arcane_lockout npc_arcane_explosion global ]
+	flags: [ spell target_self target_aoe target_aoe_hostile always_in_line_of_sight always_in_range interruptable ]
+	states: [ default in_combat ]
+	icon: icon_frost_explosion
+	cast_time: 20
+	delay: 3
+	aoe_radius: 3
+	aoe_cap: 8
+	aoe_requirement target<must_not_be_in_state>: { id: dead }
+	source_particle_system: npc_arcane_explosion
+
+	direct_effect damage:
+	{
+		flags: [ can_be_critical is_magical ]
+		damage_type: arcane
+		function: { expression: a a: [ [ 1 25 ] [ 10 75 ] [ 20 150 ] ] elite_multiplier: 1.7 }				
+	}
+
+}
+
+particle_system npc_arcane_explosion:
+{
+	particle:
+	{
+		sprites: [ effect_expl_0 effect_expl_1 effect_expl_2 effect_expl_3 ]
+		sprite_interval: 125
+		flags: [ attached blend_add no_loop ]
+		duration: 400
+		count: 1		
+		scale: 4
+		alpha: 0.6
+		fade_out: 200
+	}
+}

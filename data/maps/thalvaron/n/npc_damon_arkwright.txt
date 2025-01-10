@@ -1,0 +1,31 @@
+dialogue_screen .damon_arkwright_dialogue:
+{
+	text: 
+	[	
+		"Hello."
+	]		
+	
+	options:
+	[
+	]
+}
+
+dialogue_root .damon_arkwright_dialogue:
+{
+	.damon_arkwright_dialogue: { }
+}
+
+entity thalvaron_damon_arkwright: !NPC
+{
+	_string: "Damon Arkwright"
+	_guild_name: "Vampire Hunter"
+	_dialogue_root: .damon_arkwright_dialogue	
+	_sprite: man_46
+	_sprite_dead: man_46_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

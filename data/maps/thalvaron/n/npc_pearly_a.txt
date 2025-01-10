@@ -14,7 +14,7 @@ dialogue_screen .pearly_a_dialogue_1:
 	[
 		{ quest<completion_only>: .fennian_starleaf_3 }
 		{ quest: .pearly_a_1 }
-		{ quest: .pearly_a_2 }
+		{ quest<offer_only>: .pearly_a_2 }
 	]
 }
 
@@ -44,10 +44,10 @@ entity thalvaron_pearly_a: !NPC
 	_creature_type: humanoid
 	_loot_table: .npc
 	_not_pushable: true	
-	#_visibility_requirements:
-	#{
-	#	requirement self<must_have_active_quest>: .fennian_starleaf_3
-	#}
+	_visibility_requirements:
+	{
+		requirement self<must_not_have_completed_quest>: .pearly_a_2
+	}
 }
 
 ############################################################
@@ -100,7 +100,7 @@ quest .pearly_a_2:
 	
 	text:
 	[
-		"FIXME."
+		"Travel west, find the caves and the sacred pond within."
 	]	
 	
 	description: 
@@ -109,19 +109,21 @@ quest .pearly_a_2:
 		"kind of dark magic.\n\n"
 		"It's nothing new. For a long time these forests have had a vile aura, brought by the dark elves from the east that have slowly increased their pressence. I'm afraid we're close to a tipping point and I'm delighted that"
 		"a brave soul like you is interested in doing something about it.\n\n"
+		"Deep in the caves to the west there exists a sacred pond that is directly connected to the arteries of the mountains. You need to find it and see if anything is corrupting it."
 	]
 
 	progress:
 	[
-		"FIXME."
+		"What's up?"
 	]
 	
 	completion:
 	[
-		"FIXME."
+		"You dare to disturb me? State your business!"
 	]
 
 	level: 16
 	prerequisites: [ .pearly_a_1 ]
-	#objectives: [ .pearly_a_2 ]
+	reward_cash_multiplier: 0
+	reward_xp_multiplier: 0.33
 }

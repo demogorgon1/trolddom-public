@@ -1,0 +1,78 @@
+dialogue_screen .sheriff_ravenreach_dialogue:
+{
+	text: 
+	[	
+		"Why are you this relaxed? There is something in the woods!"
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .john_thompoure_1 }
+		{ quest: .sheriff_ravenreach_1 }
+		{ quest<completion_only>: .deputy_ravenreach_1 }
+	]
+}
+
+dialogue_root .sheriff_ravenreach_dialogue:
+{
+	.sheriff_ravenreach_dialogue: { }
+}
+
+entity thalvaron_sheriff_ravenreach: !NPC
+{
+	_string: "Sheriff Horton"
+	_dialogue_root: .sheriff_ravenreach_dialogue	
+	_sprite: man_10
+	_sprite_dead: man_10_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .sheriff_ravenreach_1:
+{
+	string: "Night Hounds Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_night_hound ]
+		count: 5
+	}
+}
+
+quest .sheriff_ravenreach_1:
+{
+	string: "Town Under Siege"
+
+	text:
+	[
+		"Find and kill hounds east of Ravenreach."
+	]
+	
+	description: 
+	[
+		"Vicious hounds are haunting the woods just to the east of the town! Nobody dares going out at night in fear of their lives. Please, hunt them down!"
+	]
+
+	progress:
+	[
+		"Back already?"
+	]
+	
+	completion:
+	[
+		"There are so many of them... and they're the least of our worries!"
+	]
+
+	objectives: [ .sheriff_ravenreach_1 ]
+	level: 16
+
+	# FIXME: rewards
+}

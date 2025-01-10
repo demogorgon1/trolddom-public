@@ -9,6 +9,7 @@ dialogue_screen .sheila_urkins_dialogue:
 	[
 		{ quest: .sheila_urkins_1 }
 		{ quest: .sheila_urkins_2 }
+		{ quest<completion_only>: .ghyuik }		
 	]
 }
 

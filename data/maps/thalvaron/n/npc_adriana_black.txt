@@ -1,0 +1,30 @@
+dialogue_screen .adriana_black_dialogue:
+{
+	text: 
+	[	
+		"Hello."
+	]		
+	
+	options:
+	[
+	]
+}
+
+dialogue_root .adriana_black_dialogue:
+{
+	.adriana_black_dialogue: { }
+}
+
+entity thalvaron_adriana_black: !NPC
+{
+	_string: "Adriana Black"
+	_dialogue_root: .adriana_black_dialogue	
+	_sprite: woman_16
+	_sprite_dead: woman_16_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

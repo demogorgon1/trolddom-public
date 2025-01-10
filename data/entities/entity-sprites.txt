@@ -390,6 +390,16 @@ sprites:
 	sprite spider_3: { dead: spider_3_dead }
 	sprite elf_3: { dead: elf_3_dead }
 	sprite wood_elemental_2: { dead: wood_elemental_2_dead }
+	sprite lizard_1: { dead: lizard_1_dead }
+	sprite lizard_2: { dead: lizard_2_dead }
+	sprite lizard_3: { dead: lizard_3_dead }
+	sprite man_43: { dead: man_43_dead }
+	sprite wolf_5: { dead: wolf_5_dead }
+	sprite woman_15: { dead: woman_15_dead }
+	sprite man_44: { dead: man_44_dead }
+	sprite man_45: { dead: man_45_dead }
+	sprite woman_16: { dead: woman_16_dead }
+	sprite man_46: { dead: man_46_dead }
 
 	cursor: { position: [ 0 336 ] }
 
@@ -397,6 +407,16 @@ sprites:
 	sprite spider_3_dead: { }
 	sprite elf_3_dead: { }
 	sprite wood_elemental_2_dead: { }
+	sprite lizard_1_dead: { }
+	sprite lizard_2_dead: { }
+	sprite lizard_3_dead: { }
+	sprite man_43_dead: { }
+	sprite wolf_5_dead: { }
+	sprite woman_15_dead: { }
+	sprite man_44_dead: { }
+	sprite man_45_dead: { }
+	sprite woman_16_dead: { }
+	sprite man_46_dead: { }
 
 }
 

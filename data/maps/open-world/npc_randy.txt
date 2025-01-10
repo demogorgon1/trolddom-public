@@ -112,7 +112,7 @@ quest .randy_1:
 item .randy_2_quest_item:
 {
 	icon: icon_box
-	item_level: 10
+	item_level: 7
 	flags: [ unique not_sellable ]
 	string: "Crab Parts"
 	flavor: "Smells a bit wonky."
@@ -144,7 +144,7 @@ quest open_world_randy_2:
 		"Oh, that weirdo Randy sent you? With a package of junk? Let me see..."
 	]
 
-	level: 10
+	level: 7
 	quest_items: [ randy_2_quest_item ]
 	
 }

@@ -1,0 +1,30 @@
+dialogue_screen .laura_tokins_dialogue:
+{
+	text: 
+	[	
+		"Hello."
+	]		
+	
+	options:
+	[
+	]
+}
+
+dialogue_root .laura_tokins_dialogue:
+{
+	.laura_tokins_dialogue: { }
+}
+
+entity thalvaron_laura_tokins: !NPC
+{
+	_string: "Laura Tokins"
+	_dialogue_root: .laura_tokins_dialogue	
+	_sprite: woman_15
+	_sprite_dead: woman_15_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

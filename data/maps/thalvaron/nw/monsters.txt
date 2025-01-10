@@ -386,9 +386,9 @@ map_entity_spawn thalvaron_cave_lion:
 
 map_entity_spawn thalvaron_deer: 
 { 
-	entity thalvaron_deer_10: { init_state: default } 
-	entity thalvaron_deer_11: { init_state: default } 
-	entity thalvaron_deer_12: { init_state: default } 
+	entity thalvaron_deer_10: { init_state: default level: 10 } 
+	entity thalvaron_deer_11: { init_state: default level: 11 } 
+	entity thalvaron_deer_12: { init_state: default level: 12 } 
 }
 
 # Wildlife around Valaris

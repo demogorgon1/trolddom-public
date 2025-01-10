@@ -223,6 +223,16 @@ map_entity_spawn thalvaron_gyo_starleaf_1_quest_item: { entity thalvaron_gyo_sta
 map_entity_spawn thalvaron_sheila_urkins_1_quest_item: { entity thalvaron_sheila_urkins_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_sheila_urkins_2_quest_item: { entity thalvaron_sheila_urkins_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_hoi_ghourian: { entity thalvaron_hoi_ghourian: { init_state: default } }
+map_entity_spawn thalvaron_hoi_ghourian_2_quest_item: { entity thalvaron_hoi_ghourian_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_durk: { entity thalvaron_durk: { init_state: default } }
+map_entity_spawn thalvaron_sheriff_ravenreach: { entity thalvaron_sheriff_ravenreach: { init_state: default } }
+map_entity_spawn thalvaron_john_thompoure: { entity thalvaron_john_thompoure: { init_state: default } }
+map_entity_spawn thalvaron_deputy_ravenreach: { entity thalvaron_deputy_ravenreach: { init_state: default } }
+map_entity_spawn thalvaron_adriana_black: { entity thalvaron_adriana_black: { init_state: default } }
+map_entity_spawn thalvaron_damon_arkwright: { entity thalvaron_damon_arkwright: { init_state: default } }
+map_entity_spawn thalvaron_erhart_hulius: { entity thalvaron_erhart_hulius: { init_state: default } }
+map_entity_spawn thalvaron_jimbo_tokins: { entity thalvaron_jimbo_tokins: { init_state: default } }
+map_entity_spawn thalvaron_laura_tokins: { entity thalvaron_laura_tokins: { init_state: default } }
 
 map_palette .stuff:
 {
@@ -245,7 +255,7 @@ map_palette .stuff:
 		
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn thalvaron_wizard_realm_spawn: [ 42 157 85 ]
-	player_spawn thalvaron_wizard_realm_return_spawn: [ 142 157 85 ]
+	player_spawn thalvaron_wizard_realm_return_spawn: [ 142 157 85 ]	
 	
 	wall stone_wall: [ 128 128 128 ]
 	wall fence: [ 64 128 140 ]
@@ -404,6 +414,23 @@ map_palette .stuff:
 	entity_spawn thalvaron_sheila_urkins_2_quest_item: [ 149 144 89 ]
 	entity_spawn thalvaron_hoi_ghourian: [ 134 126 185 ]
 	entity_spawn thalvaron_wood_elemental_2: [ 66 88 11 ]
+	entity_spawn thalvaron_hoi_ghourian_2_quest_item: [ 55 68 111 ]
+	entity_spawn thalvaron_cave_lizard: [ 77 68 222 ]
+	entity_spawn thalvaron_cave_lizard_2: [ 177 68 222 ]
+	entity_spawn thalvaron_korgast: [ 66 99 183 ]
+	entity_spawn thalvaron_durk: [ 66 99 203 ]
+	entity_spawn thalvaron_wood_elemental_3: [ 166 99 203 ]
+	entity_spawn thalvaron_ghyuik: [ 45 89 111 ]
+	entity_spawn thalvaron_john_thompoure: [ 39 23 99 ]
+	entity_spawn thalvaron_sheriff_ravenreach: [ 139 123 199 ]
+	entity_spawn thalvaron_night_hound: [ 87 38 177 ]
+	entity_spawn thalvaron_mountain_troll: [ 187 138 177 ]
+	entity_spawn thalvaron_deputy_ravenreach: [ 139 123 154 ]
+	entity_spawn thalvaron_adriana_black: [ 110 123 54 ]
+	entity_spawn thalvaron_damon_arkwright: [ 110 123 84 ]
+	entity_spawn thalvaron_erhart_hulius: [ 110 123 130 ]
+	entity_spawn thalvaron_jimbo_tokins: [ 110 123 160 ]
+	entity_spawn thalvaron_laura_tokins: [ 110 23 210 ]
 }
 
 map_palette .levels:
