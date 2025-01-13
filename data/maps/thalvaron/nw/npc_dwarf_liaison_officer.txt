@@ -1,0 +1,67 @@
+dialogue_screen .dwarf_liaison_officer_dialogue:
+{
+	text: 
+	[	
+		"Why are you wasting my time? Can't you see I'm busy?"
+	]
+	
+	options:
+	[
+		{ quest<offer_only>: thalvaron_dwarf_liaison_officer_1 }
+	]
+}
+
+dialogue_root .dwarf_liaison_officer_dialogue:
+{
+	.dwarf_liaison_officer_dialogue: { }
+}
+
+entity thalvaron_dwarf_liaison_officer: !NPC
+{
+	_string: "Tharbek Stonebrew"
+	_guild_name: "Liaison Officer"
+	_dialogue_root: .dwarf_liaison_officer_dialogue	
+	_sprite: dwarf_1
+	_sprite_dead: dwarf_1_dead	
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+quest thalvaron_dwarf_liaison_officer_1:
+{
+	string: "Underground Activity"
+
+	text:
+	[
+		"Locate the family heirloom in the dark elf house and return it to Gyo Starleaf."
+	]
+	
+	description: 
+	[
+		"I overheard what you told the Lieutenant. It sounds like the kobolds might have infested an old dwarven underground fortification. The mountains are full of them and we no longer have a complete overview.\n\n"
+		"Can you bring this new information to Dunrik Ironmantle in Mirehaven? It will be of great interest to him."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Mr. Stonebrew sent you?\n\n"
+		"Thanks, I see. Information about unmapped ancient underground fortifications are of great interest to dwarfkind."
+	]
+
+	level: 13
+	reward_cash_multiplier: 0.3
+	reward_xp_multiplier: 0.3
+	
+}
+

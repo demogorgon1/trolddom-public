@@ -427,12 +427,43 @@ sprites:
 	sprite man_49: { dead: man_49_dead }
 	sprite woman_18: { dead: woman_18_dead }
 	sprite man_50: { dead: man_50_dead }
+	sprite swamp_monster_1: { dead: swamp_monster_1_dead }
+	sprite swamp_monster_2: { dead: swamp_monster_2_dead }
+	sprite swamp_monster_3: { dead: swamp_monster_3_dead }
+	sprite swamp_monster_4: { dead: swamp_monster_4_dead }
+	sprite swamp_monster_5: { dead: swamp_monster_5_dead }
+	sprite swamp_monster_6: { dead: swamp_monster_6_dead }
+	sprite ooze_1: { dead: ooze_1_dead }
+	sprite ooze_2: { dead: ooze_2_dead }
+	sprite crocodile_1: { dead: crocodile_1_dead }
+	sprite crocodile_2: { dead: crocodile_2_dead }
+	sprite kobold_6: { dead: kobold_6_dead }
+	sprite dwarf_1: { dead: dwarf_1_dead }
 
 	cursor: { position: [ 0 368 ] }
 	sprite man_48_dead: { }
 	sprite man_49_dead: { }
 	sprite woman_18_dead: { }
 	sprite man_50_dead: { }
+	sprite swamp_monster_1_dead: { }
+	sprite swamp_monster_2_dead: { }
+	sprite swamp_monster_3_dead: { }
+	sprite swamp_monster_4_dead: { }
+	sprite swamp_monster_5_dead: { }
+	sprite swamp_monster_6_dead: { }
+	sprite ooze_1_dead: { }
+	sprite ooze_2_dead: { }
+	sprite crocodile_1_dead: { }
+	sprite crocodile_2_dead: { }
+	sprite kobold_6_dead: { }
+	sprite dwarf_1_dead: { }
+
+	cursor: { position: [ 0 384 ] }
+	sprite dwarf_2: { dead: dwarf_2_dead }
+
+	cursor: { position: [ 0 400 ] }
+	sprite dwarf_2_dead: { }
+
 
 }
 

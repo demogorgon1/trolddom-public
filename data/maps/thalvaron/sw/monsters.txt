@@ -29,5 +29,172 @@ loot_table .default_beast:
 }
 
 ##########################################################################################
-# x
+# North Marshlands monsters
 
+map_entity_spawn thalvaron_mud_slinger: 
+{ 
+	entity thalvaron_mud_slinger: { init_state: default } 
+}
+
+map_entity_spawn thalvaron_mud_slinger_2: 
+{ 
+	entity thalvaron_mud_slinger_2: { init_state: default } 
+}
+
+# Mud slingers
+{
+	loot_table .mud_slinger: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { weight: 1 }
+				possibility: { weight: 1 loot_group: thalvaron_alchemy_trainer_1_quest_item requirement self<must_have_active_quest>: { id: thalvaron_alchemy_trainer_1 } } 
+			}
+			
+			!WORLD_DROPS {}
+		]	
+	}
+	
+	${
+		_level: 12
+		_faction: monsters
+		_creature_type: elemental		
+		_loot_table: .mud_slinger
+	}
+
+	entity thalvaron_mud_slinger: !NPC { _string: "Mud Slinger" _sprite: swamp_monster_5 _sprite_dead: swamp_monster_5_dead _default_behavior_state: .wandering_short }
+	entity thalvaron_mud_slinger_2: !NPC { _string: "Mudlord" _sprite: swamp_monster_4 _sprite_dead: swamp_monster_4_dead _default_behavior_state: .passive }
+}
+
+##########################################################################################
+# North Marshlands kobolds
+
+map_entity_spawn thalvaron_north_marshlands_kobold: 
+{ 
+	entity thalvaron_north_marshlands_kobold_a: { init_state: default } 
+	entity thalvaron_north_marshlands_kobold_b: { init_state: default } 
+	entity thalvaron_north_marshlands_kobold_c: { init_state: default } 
+}
+
+map_entity_spawn thalvaron_north_marshlands_kobold_boss: 
+{ 
+	entity thalvaron_north_marshlands_kobold_boss: { init_state: default } 
+}
+
+# Melee
+{
+
+	${
+		_level: 12
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: .default_humanoid
+		_weapon_damage: 0.9
+		_resource_health: 0.8
+	}
+
+	entity thalvaron_north_marshlands_kobold_a: !NPC { _string: "Mountain Kobold" _sprite: kobold_3 _sprite_dead: kobold_3_dead }
+	entity thalvaron_north_marshlands_kobold_b: !NPC { _string: "Mountain Kobold" _sprite: kobold_4 _sprite_dead: kobold_4_dead }
+}
+
+# Healer
+{
+
+	${
+		_level: 12
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: .default_humanoid
+		_weapon_damage: 0.9
+		_resource_health: 0.8
+		_resource_mana: 1
+		_abilities: 
+		[ 
+			{ id: npc_heal target: low_health_friend_or_self }
+			{ id: npc_firebolt }
+			{ id: npc_attack } 
+		]		
+	}
+
+	entity thalvaron_north_marshlands_kobold_c: !NPC { _string: "Kobold Soothsayer" _sprite: kobold_5 _sprite_dead: kobold_5_dead }
+}
+
+# Boss
+{
+
+	loot_table .north_marshlands_kobold_boss: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { loot_group: .north_marshlands_kobold_boss } 
+			}
+			
+			!WORLD_DROPS {}
+		]	
+	}
+	
+	loot_group .north_marshlands_kobold_boss: { }
+	
+	ability .north_marshlands_kobold_boss:	
+	{
+		string: "City Guard Helmet"
+		description: "This item starts a quest."
+		flags: [ target_self item ]
+		icon: icon_head_4
+		direct_effect simple<start_quest>: thalvaron_north_marshlands_kobold_boss
+		states: [ default in_combat ]
+		requirement self<must_not_have_completed_quest>: { id: thalvaron_north_marshlands_kobold_boss }
+		requirement self<must_not_have_active_quest>: { id: thalvaron_north_marshlands_kobold_boss }
+	}
+
+	item .north_marshlands_kobold_boss:
+	{
+		loot_groups: [ .north_marshlands_kobold_boss ]		
+		string: "City Guard Helmet" 
+		flavor: "Smells like kobold."
+		icon: icon_head_4
+		item_level: 12
+		flags: [ unique not_sellable ]
+		use_ability: .north_marshlands_kobold_boss
+	}	
+			
+	quest thalvaron_north_marshlands_kobold_boss:
+	{
+		string: "City Guard Helmet"
+
+		text:
+		[
+			"Bring the city guard helmet back to Lieutenant Tusleholm."
+		]
+		
+		description: 
+		[
+			"This, slightly bigger than usual, kobold wore a helmet apparently stolen from the city guard. Might be of interest to Lieutenant Tusleholm."
+		]
+		
+		completion:
+		[
+			"Nothing unusual about kobolds stealing shiny things. What's more interesting, is how the cave led into something that sounds like an old abandoned underground fortress."
+		]
+
+		level: 12
+		quest_items: [ .north_marshlands_kobold_boss ]
+		reward_xp_multiplier: 0.2
+	}
+
+	${
+		_level: 12
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: .north_marshlands_kobold_boss
+		_weapon_damage: 1.1
+		_resource_health: 1.7
+	}
+
+	entity thalvaron_north_marshlands_kobold_boss: !NPC { _string: "Kobold Shift Boss" _sprite: kobold_6 _sprite_dead: kobold_6_dead }
+}

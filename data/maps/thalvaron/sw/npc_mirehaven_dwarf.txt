@@ -1,0 +1,31 @@
+dialogue_screen .mirehaven_dwarf_dialogue:
+{
+	text: 
+	[	
+		"I can't wait to leave this place and go back underground where I belong."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: thalvaron_dwarf_liaison_officer_1 }
+	]
+}
+
+dialogue_root .mirehaven_dwarf_dialogue:
+{
+	.mirehaven_dwarf_dialogue: { }
+}
+
+entity thalvaron_mirehaven_dwarf: !NPC
+{
+	_string: "Dunrik Ironmantle"
+	_dialogue_root: .mirehaven_dwarf_dialogue	
+	_sprite: dwarf_2
+	_sprite_dead: dwarf_2_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

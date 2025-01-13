@@ -1,0 +1,101 @@
+dialogue_screen .alchemy_trainer_trainer:
+{
+	train_profession<0>: alchemy
+	train_profession<1>: alchemy
+	train_ability: craft_small_healing_potion
+	train_ability: craft_small_mana_potion
+	train_ability: craft_elixir_of_the_bear
+	train_ability: craft_elixir_of_the_owl
+	train_ability: craft_elixir_of_the_giant
+}
+
+dialogue_screen .alchemy_trainer_greetings:
+{
+	text: 
+	[	
+		"Welcome. Are you interested in alchemy?"
+	]
+	
+	options:
+	[
+		{ quest: thalvaron_alchemy_trainer_1 }
+		{ goto: .alchemy_trainer_trainer text: "Please teach me about alchemy." }
+	]
+}
+
+dialogue_root .alchemy_trainer_dialogue:
+{
+	.alchemy_trainer_greetings: { }
+}
+
+entity thalvaron_alchemy_trainer: !NPC
+{
+	_string: "Brick Johnson"
+	_guild_name: "Alchemy Trainer"
+	_dialogue_root: .alchemy_trainer_dialogue	
+	_sprite: man_7
+	_sprite_dead: man_7_dead	
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group thalvaron_alchemy_trainer_1_quest_item: {}
+
+item .alchemy_trainer_1_quest_item:
+{
+	icon: icon_mud_essence_1
+	item_level: 12
+	loot_groups: [ thalvaron_alchemy_trainer_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Mud Slinger Essence"
+	stack: 6
+}
+
+objective .alchemy_trainer_1:
+{
+	string: "Mud Slinger Essences"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .alchemy_trainer_1_quest_item count: 6 }
+}
+
+quest thalvaron_alchemy_trainer_1:
+{
+	string: "A Muddy Situation"
+
+	text:
+	[
+		"Collect the essences of mud slingers found in the North Marshlands."
+	]
+	
+	description: 
+	[
+		"Look at these hands. They're clean, right? Yes. They need to be squeeky clean to do the kind of alchemy that needs to be done to better the world. Can't have any kind of contamination.\n\n"
+		"Unfortunately, sometimes I need some, hmm, dirty reagents for my studies. Like, for example, right now I need mud slinger essences for my research. As you're probably aware, a mud slinger is an"
+		"exceptionally filthy elemental found south in the Marshlands. Maybe you can get me some? The kind I'm interested in can be found in the northernmost parts of the marshlands."
+	]
+
+	progress:
+	[
+		"Too dirty for you?"
+	]
+	
+	completion:
+	[
+		"Ahh... Just put them over there on the table, thank you."
+	]
+	
+	objectives: [ .alchemy_trainer_1 ]
+	level: 12
+	
+	# FIXME: rewards
+}
+
+

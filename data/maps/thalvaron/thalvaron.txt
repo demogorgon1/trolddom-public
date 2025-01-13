@@ -197,6 +197,8 @@ map_entity_spawn thalvaron_wizard_door: { entity thalvaron_wizard_door: { init_s
 map_entity_spawn thalvaron_royal_chef: { entity thalvaron_royal_chef: { init_state: default } }
 map_entity_spawn thalvaron_royal_chef_assistant: { entity thalvaron_royal_chef_assistant: { init_state: default } }
 map_entity_spawn thalvaron_clara_hawthorne: { entity thalvaron_clara_hawthorne: { init_state: default } }
+map_entity_spawn thalvaron_alchemy_trainer: { entity thalvaron_alchemy_trainer: { init_state: default } }
+map_entity_spawn thalvaron_dwarf_liaison_officer: { entity thalvaron_dwarf_liaison_officer: { init_state: default } }
 
 # N
 map_entity_spawn thalvaron_ranger_fremalt: { entity thalvaron_ranger_fremalt: { init_state: default } }
@@ -245,6 +247,7 @@ map_entity_spawn thalvaron_melinda_riddle: { entity thalvaron_melinda_riddle: { 
 map_entity_spawn thalvaron_mirehaven_mayor: { entity thalvaron_mirehaven_mayor: { init_state: default } }
 map_entity_spawn thalvaron_mirehaven_sheriff: { entity thalvaron_mirehaven_sheriff: { init_state: default } }
 map_entity_spawn thalvaron_mirehaven_bar_keeper: { entity thalvaron_mirehaven_bar_keeper: { init_state: default } }
+map_entity_spawn thalvaron_mirehaven_dwarf: { entity thalvaron_mirehaven_dwarf: { init_state: default } }
 
 map_palette .stuff:
 {
@@ -369,6 +372,8 @@ map_palette .stuff:
 	entity_spawn thalvaron_royal_chef: [ 191 158 151 ]		
 	entity_spawn thalvaron_royal_chef_assistant: [ 131 118 151 ]		
 	entity_spawn thalvaron_clara_hawthorne: [ 78 94 128 ]
+	entity_spawn thalvaron_alchemy_trainer: [ 159 99 84 ]
+	entity_spawn thalvaron_dwarf_liaison_officer: [ 11 58 148 ]
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				
@@ -453,6 +458,11 @@ map_palette .stuff:
 	entity_spawn thalvaron_mirehaven_mayor: [ 166 188 99 ]
 	entity_spawn thalvaron_mirehaven_sheriff: [ 4 77 199 ]
 	entity_spawn thalvaron_mirehaven_bar_keeper: [ 5 77 199 ]
+	entity_spawn thalvaron_mud_slinger: [ 77 11 88 ]
+	entity_spawn thalvaron_mud_slinger_2: [ 77 11 188 ]
+	entity_spawn thalvaron_north_marshlands_kobold: [ 99 22 148 ]
+	entity_spawn thalvaron_north_marshlands_kobold_boss: [ 99 122 148 ]
+	entity_spawn thalvaron_mirehaven_dwarf: [ 122 88 48 ]
 }
 
 map_palette .levels:
