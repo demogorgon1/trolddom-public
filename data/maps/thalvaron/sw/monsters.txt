@@ -1,0 +1,33 @@
+npc_behavior_state .wandering_short:
+{
+	on_route<thalvaron_default_patrol>: thalvaron_default_patrol
+	behavior: wandering
+	max_range: 1
+}
+
+npc_behavior_state .passive:
+{
+	on_route<thalvaron_default_patrol>: thalvaron_default_patrol
+	behavior: do_nothing
+}
+
+loot_table .default_humanoid: 
+{
+	slots:
+	[	
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+loot_table .default_beast: 
+{
+	slots:
+	[	
+		!WORLD_DROPS {}
+	]	
+}
+
+##########################################################################################
+# x
+

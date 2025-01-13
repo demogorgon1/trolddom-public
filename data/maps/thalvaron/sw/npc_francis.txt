@@ -1,0 +1,30 @@
+dialogue_screen .francis_dialogue:
+{
+	text: 
+	[	
+		"Hello."
+	]		
+	
+	options:
+	[
+	]
+}
+
+dialogue_root .francis_dialogue:
+{
+	.francis_dialogue: { }
+}
+
+entity thalvaron_francis: !NPC
+{
+	_string: "Francis \"Binge\" Thomgard"
+	_dialogue_root: .francis_dialogue	
+	_sprite: man_47
+	_sprite_dead: man_47_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

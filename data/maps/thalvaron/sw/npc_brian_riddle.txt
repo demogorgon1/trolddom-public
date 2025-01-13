@@ -1,0 +1,30 @@
+dialogue_screen .brian_riddle_dialogue:
+{
+	text: 
+	[	
+		"Hello."
+	]		
+	
+	options:
+	[
+	]
+}
+
+dialogue_root .brian_riddle_dialogue:
+{
+	.brian_riddle_dialogue: { }
+}
+
+entity thalvaron_brian_riddle: !NPC
+{
+	_string: "Brian Riddle"
+	_dialogue_root: .brian_riddle_dialogue	
+	_sprite: man_48
+	_sprite_dead: man_48_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

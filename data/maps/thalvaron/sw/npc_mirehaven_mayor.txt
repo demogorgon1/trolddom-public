@@ -1,0 +1,31 @@
+dialogue_screen .mirehaven_mayor_dialogue:
+{
+	text: 
+	[	
+		"Hello."
+	]		
+	
+	options:
+	[
+	]
+}
+
+dialogue_root .mirehaven_mayor_dialogue:
+{
+	.mirehaven_mayor_dialogue: { }
+}
+
+entity thalvaron_mirehaven_mayor: !NPC
+{
+	_string: "Bill Riddle"
+	_guild_name: "Mayor"
+	_dialogue_root: .mirehaven_mayor_dialogue	
+	_sprite: man_50
+	_sprite_dead: man_50_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

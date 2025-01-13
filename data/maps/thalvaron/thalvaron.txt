@@ -40,6 +40,8 @@ zone .way_north_pass: { string: "The Northern Pass" }
 zone .duskwhisper_caves: { string: "Duskwhisper Caves" }
 zone .old_mans_cave: { string: "Old Man's Cave" }
 zone .realm_of_the_wizard: { string: "Realm of the Wizard" no_map: true }
+zone .eastern_faerandor: { string: "Eastern Faerandor" }
+zone .myst_woodlands_coast: { string: "The Lonely Coast" }
 
 zone thalvaron_crab_giant: { } #string: "Old Man's Pool" }
 	
@@ -233,6 +235,16 @@ map_entity_spawn thalvaron_damon_arkwright: { entity thalvaron_damon_arkwright: 
 map_entity_spawn thalvaron_erhart_hulius: { entity thalvaron_erhart_hulius: { init_state: default } }
 map_entity_spawn thalvaron_jimbo_tokins: { entity thalvaron_jimbo_tokins: { init_state: default } }
 map_entity_spawn thalvaron_laura_tokins: { entity thalvaron_laura_tokins: { init_state: default } }
+
+# SW
+map_entity_spawn thalvaron_brian_riddle: { entity thalvaron_brian_riddle: { init_state: default } }
+map_entity_spawn thalvaron_francis: { entity thalvaron_francis: { init_state: default } }
+map_entity_spawn thalvaron_gob_fulbro: { entity thalvaron_gob_fulbro: { init_state: default } }
+map_entity_spawn thalvaron_kirk_gibson: { entity thalvaron_kirk_gibson: { init_state: default } }
+map_entity_spawn thalvaron_melinda_riddle: { entity thalvaron_melinda_riddle: { init_state: default } }
+map_entity_spawn thalvaron_mirehaven_mayor: { entity thalvaron_mirehaven_mayor: { init_state: default } }
+map_entity_spawn thalvaron_mirehaven_sheriff: { entity thalvaron_mirehaven_sheriff: { init_state: default } }
+map_entity_spawn thalvaron_mirehaven_bar_keeper: { entity thalvaron_mirehaven_bar_keeper: { init_state: default } }
 
 map_palette .stuff:
 {
@@ -431,6 +443,16 @@ map_palette .stuff:
 	entity_spawn thalvaron_erhart_hulius: [ 110 123 130 ]
 	entity_spawn thalvaron_jimbo_tokins: [ 110 123 160 ]
 	entity_spawn thalvaron_laura_tokins: [ 110 23 210 ]
+	
+	# SW
+	entity_spawn thalvaron_brian_riddle: [ 66 88 99 ]
+	entity_spawn thalvaron_francis: [ 166 88 99 ]
+	entity_spawn thalvaron_gob_fulbro: [ 66 188 99 ]
+	entity_spawn thalvaron_kirk_gibson: [ 66 88 199 ]
+	entity_spawn thalvaron_melinda_riddle: [ 255 88 99 ]
+	entity_spawn thalvaron_mirehaven_mayor: [ 166 188 99 ]
+	entity_spawn thalvaron_mirehaven_sheriff: [ 4 77 199 ]
+	entity_spawn thalvaron_mirehaven_bar_keeper: [ 5 77 199 ]
 }
 
 map_palette .levels:
@@ -478,6 +500,8 @@ map_palette .zones:
 	zone .way_north_pass: [ 0 140 255 ]
 	zone .duskwhisper_caves: [ 133 141 55 ]
 	zone .old_mans_cave: [ 130 112 222 ]
+	zone .eastern_faerandor: [ 0 41 255 ]
+	zone .myst_woodlands_coast: [ 255 0 230 ]
 }
 
 map_palette .sub_zones:
