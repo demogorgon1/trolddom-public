@@ -460,10 +460,15 @@ sprites:
 
 	cursor: { position: [ 0 384 ] }
 	sprite dwarf_2: { dead: dwarf_2_dead }
+	sprite man_51: { dead: man_51_dead }
+	sprite crocodile_1_submerged: { }
+	sprite crocodile_2_submerged: { }
 
 	cursor: { position: [ 0 400 ] }
 	sprite dwarf_2_dead: { }
-
+	sprite man_51_dead: { }
+	skip: { }
+	skip: { }
 
 }
 
@@ -577,6 +582,7 @@ sprites:
 	sprite seashell_1: { }
 	sprite spider_eggs_1: { }
 	sprite flower_1: { }
+	sprite seaweed_1: { }
 	
 }
 

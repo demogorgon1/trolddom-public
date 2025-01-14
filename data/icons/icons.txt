@@ -528,6 +528,7 @@ sprites:
 	sprite icon_flower_5 : { tags: [ icon ] }
 	sprite icon_sharp_tooth : { tags: [ icon ] }
 	sprite icon_mud_essence_1 : { tags: [ icon ] }	
+	sprite icon_seaweed : { tags: [ icon ] }	
 	
 }
 

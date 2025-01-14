@@ -248,6 +248,10 @@ map_entity_spawn thalvaron_mirehaven_mayor: { entity thalvaron_mirehaven_mayor: 
 map_entity_spawn thalvaron_mirehaven_sheriff: { entity thalvaron_mirehaven_sheriff: { init_state: default } }
 map_entity_spawn thalvaron_mirehaven_bar_keeper: { entity thalvaron_mirehaven_bar_keeper: { init_state: default } }
 map_entity_spawn thalvaron_mirehaven_dwarf: { entity thalvaron_mirehaven_dwarf: { init_state: default } }
+map_entity_spawn thalvaron_swampman: { entity thalvaron_swampman: { init_state: default } }
+map_entity_spawn thalvaron_buck_1_quest_item: { entity thalvaron_buck_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_buck: { entity thalvaron_buck: { init_state: default } }
+map_entity_spawn thalvaron_buck_2_quest_item: { entity thalvaron_buck_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 
 map_palette .stuff:
 {
@@ -463,6 +467,13 @@ map_palette .stuff:
 	entity_spawn thalvaron_north_marshlands_kobold: [ 99 22 148 ]
 	entity_spawn thalvaron_north_marshlands_kobold_boss: [ 99 122 148 ]
 	entity_spawn thalvaron_mirehaven_dwarf: [ 122 88 48 ]
+	entity_spawn thalvaron_swampman: [ 222 28 48 ]
+	entity_spawn thalvaron_crocodile: [ 34 49 112 ]
+	entity_spawn thalvaron_swamp_monster: [ 134 149 12 ]
+	entity_spawn thalvaron_neutral_crab: [ 39 188 55 ]
+	entity_spawn thalvaron_buck_1_quest_item: [ 139 188 66 ]
+	entity_spawn thalvaron_buck: [ 39 188 166 ]
+	entity_spawn thalvaron_buck_2_quest_item: [ 239 188 166 ]	
 }
 
 map_palette .levels:

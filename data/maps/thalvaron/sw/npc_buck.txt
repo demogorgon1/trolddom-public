@@ -1,0 +1,204 @@
+dialogue_screen .buck_dialogue:
+{
+	text: 
+	[	
+		"Ah, yes. I pressume you're a fellow swamp enjoyer?"
+	]		
+	
+	options:
+	[
+		{ quest: .buck_1 }
+		{ quest: .buck_2 }
+	]
+}
+
+dialogue_root .buck_dialogue:
+{
+	.buck_dialogue: { }
+}
+
+entity thalvaron_buck: !NPC
+{
+	_string: "Buck"
+	_dialogue_root: .buck_dialogue	
+	_sprite: man_22
+	_sprite_dead: man_22_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .buck_1_quest_item: {}
+
+item .buck_1_quest_item:
+{
+	icon: icon_flower_1
+	item_level: 13
+	loot_groups: [ .buck_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Buzzing Delight"
+	stack: 5
+}
+
+loot_table .buck_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .buck_1_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_buck_1_quest_item:
+{
+	string: "Buzzing Delight"
+	systems: [ openable ]
+
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ flower_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .buck_1_quest_item
+			verb: pick
+			range: 1 
+			despawn: true 			
+			level: 13
+			required_quest: .buck_1
+		}		
+	}
+}
+
+objective .buck_1:
+{
+	string: "Buzzing Delight"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .buck_1_quest_item count: 5 }
+}
+
+quest .buck_1:
+{
+	string: "Only Problem With Swamps"
+
+	text:
+	[
+		"Collect swamp flowers for Buck's anti-mosquito tonic."
+	]
+	
+	description: 
+	[
+		"Those damn mosquitoes! Absolutely only problem with living in a swamp. Good thing I've developed a special tonic that repells those little devils. Bad thing is that I'm out of"
+		"one of the main ingredients. Collect local flowers of the Buzzing Delight variety and I'll give you a reward."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Thanks."
+	]
+
+	objectives: [ .buck_1 ]
+	level: 13
+	
+	# FIXME: rewards
+}
+
+############################################################
+# Quest 2
+
+loot_group .buck_2_quest_item: {}
+
+item .buck_2_quest_item:
+{
+	icon: icon_seaweed
+	item_level: 13
+	loot_groups: [ .buck_2_quest_item ]
+	flags: [ not_sellable ]
+	string: "Seaweed"
+	stack: 6
+}
+
+loot_table .buck_2_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .buck_2_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_buck_2_quest_item:
+{
+	string: "Seaweed"
+	systems: [ openable ]
+
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ seaweed_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .buck_2_quest_item
+			verb: pick_up
+			range: 1 
+			despawn: true 			
+			level: 13
+			required_quest: .buck_2
+		}		
+	}
+}
+
+objective .buck_2:
+{
+	string: "Seaweed"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .buck_2_quest_item count: 6 }
+}
+
+quest .buck_2:
+{
+	string: "Seaweed For Our Clawed Friends"
+
+	text:
+	[
+		"Collect seaweed along the coast of the Marshlands and return to Buck."
+	]
+	
+	description: 
+	[
+		"I like to make seaweed cakes for the local beach crabs. They get so happy when I feed them. Can you help by collecting some seaweed for me? You'll find it along the coast around here."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Thanks."
+	]
+
+	objectives: [ .buck_2 ]
+	level: 13
+	
+	# FIXME: rewards
+}

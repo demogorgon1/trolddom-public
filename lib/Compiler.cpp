@@ -115,6 +115,8 @@ namespace tpublic
 				_OnBuildError({ Helpers::Format("[%s:%u] Undefined %s '%s' referenced.", aDebugInfo.m_file.c_str(), aDebugInfo.m_line, aDataTypeString, aName) });
 			});
 
+			TP_CHECK(m_buildErrorCount == 0, "%u validation errors.", m_buildErrorCount);
+
 			AutoDoodads autoDoodads(m_manifest);
 
 			m_manifest->GetContainer<tpublic::Data::Map>()->ForEach([&](

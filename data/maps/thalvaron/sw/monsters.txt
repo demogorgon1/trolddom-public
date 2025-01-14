@@ -41,6 +41,37 @@ map_entity_spawn thalvaron_mud_slinger_2:
 	entity thalvaron_mud_slinger_2: { init_state: default } 
 }
 
+map_entity_spawn thalvaron_crocodile: 
+{ 
+	entity thalvaron_crocodile: { init_state: default } 
+}
+
+map_entity_spawn thalvaron_swamp_monster: 
+{ 
+	entity thalvaron_swamp_lurker: { init_state: default } 
+	entity thalvaron_swamp_dweller: { init_state: default } 
+}
+
+map_entity_spawn thalvaron_neutral_crab:
+{
+	entity thalvaron_neutral_crab: { init_state: default level: 13 } 
+	entity thalvaron_neutral_crab_2: { init_state: default level: 14 } 
+}
+
+# Neutral crabs
+{
+
+	${		
+		_faction: wildlife
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: .default_beast
+	}
+
+	entity thalvaron_neutral_crab: !NPC { _string: "Marshlands Crab" _sprite: crab_1 _sprite_dead: crab_1_dead _level: 13 }
+	entity thalvaron_neutral_crab_2: !NPC { _string: "Southern Mud Crawler" _sprite: crab_2 _sprite_dead: crab_2_dead _level: 14 }
+}
+
 # Mud slingers
 {
 	loot_table .mud_slinger: 
@@ -65,6 +96,46 @@ map_entity_spawn thalvaron_mud_slinger_2:
 
 	entity thalvaron_mud_slinger: !NPC { _string: "Mud Slinger" _sprite: swamp_monster_5 _sprite_dead: swamp_monster_5_dead _default_behavior_state: .wandering_short }
 	entity thalvaron_mud_slinger_2: !NPC { _string: "Mudlord" _sprite: swamp_monster_4 _sprite_dead: swamp_monster_4_dead _default_behavior_state: .passive }
+}
+
+# Crocodiles
+{
+	loot_table .crocodile: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { weight: 1 }
+				possibility: { weight: 1 loot_group: .swampman_1_quest_item requirement self<must_have_active_quest>: { id: .swampman_1 } } 
+			}
+			
+			!WORLD_DROPS {}
+		]	
+	}
+	
+	${
+		_level: 12
+		_faction: monsters
+		_creature_type: beast		
+		_loot_table: .crocodile
+		_can_move_on_all_non_view_blocking_tiles: true
+	}
+
+	entity thalvaron_crocodile: !NPC { _string: "Marshlands Crocodile" _sprite: crocodile_2 _sprite_dead: crocodile_2_dead _in_water_sprite: crocodile_2_submerged _default_behavior_state: .passive }
+}
+
+# Swamp monsters
+{
+	${
+		_level: 12
+		_faction: monsters
+		_creature_type: elemental
+		_loot_table: .default_beast
+		_default_behavior_state: .wandering_short
+	}
+
+	entity thalvaron_swamp_lurker: !NPC { _string: "Swamp Lurker" _sprite: swamp_monster_2 _sprite_dead: swamp_monster_2_dead }
+	entity thalvaron_swamp_dweller: !NPC { _string: "Swamp Dweller" _sprite: swamp_monster_3 _sprite_dead: swamp_monster_3_dead }
 }
 
 ##########################################################################################

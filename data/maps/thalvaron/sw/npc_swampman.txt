@@ -1,0 +1,146 @@
+dialogue_screen .swampman_dialogue:
+{
+	text: 
+	[	
+		"Hello."
+	]		
+	
+	options:
+	[
+		{ quest: .swampman_1 }
+	]
+}
+
+dialogue_root .swampman_dialogue:
+{
+	.swampman_dialogue: { }
+}
+
+entity thalvaron_swampman: !NPC
+{
+	_string: "\"Swampman\" Ruberts"
+	_dialogue_root: .swampman_dialogue	
+	_sprite: man_51
+	_sprite_dead: man_51_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .swampman_1_quest_item: {}
+
+item .swampman_1_quest_item:
+{
+	icon: icon_teeth
+	item_level: 12
+	loot_groups: [ .swampman_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Marshlands Crocodile Teeth"
+	stack: 4
+}
+
+objective .swampman_1:
+{
+	string: "Marshlands Crocodile Teeth"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .swampman_1_quest_item count: 4 }
+}
+
+quest .swampman_1:
+{
+	string: "Pristine Pointy Teeth"
+
+	text:
+	[
+		"Gather teeth from crocodiles encountered in the North Marshlands."
+	]
+	
+	description: 
+	[
+		"I got a guy in the city who helps me sell various swamp stuff. I supply him with crocodile teeth that may or may not be sold as genuine dragon teeth. I don't know. Anyway, it's a pretty good business."
+		"Unfortunately the teeth needs to be quite pristine so it can't be from just any old crocodile. Maybe you can help collecting a few and I'll give you a good deal."
+	]
+
+	progress:
+	[
+		"Got teeth?"
+	]
+	
+	completion:
+	[
+		"Looking good. I'll just add them to the box."
+	]
+	
+	objectives: [ .swampman_1 ]
+	level: 12
+	
+	# FIXME: rewards
+}
+
+############################################################
+# Quest 2
+
+objective .swampman_2_a:
+{
+	string: "Swamp Dwellers Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_swamp_dweller ]
+		count: 4
+	}
+}
+
+objective .swampman_2_b:
+{
+	string: "Swamp Lurkers Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_swamp_lurker ]
+		count: 4
+	}
+}
+
+quest .swampman_2:
+{
+	string: "They Came From The Swamp"
+
+	text:
+	[
+		"Hunt swamp monsters in the Northern Marshlands and return to \"Swampman\" Ruberts."
+	]
+	
+	description: 
+	[
+		"Most people are scared of swamp monsters, but to me they're mostly just a nuisance. I'm just trying to live a relaxed life here, but those bastards shuffle around at night and look into my windows. I just want to be left alone."
+		"Considering how aptly you could deal with the crocodile, maybe you can kill a bunch of annoying swamp monsters for me? In particular those roaming around here in the Northern Marshlands."
+	]
+
+	progress:
+	[
+		"Yes."
+	]
+	
+	completion:
+	[
+		"Great! Here's a little something for you."
+	]
+
+	level: 12
+	objectives: [ .swampman_2_a .swampman_2_b ]
+	prerequisites: [ .swampman_1 ]
+	# FIXME rewards
+}
+
