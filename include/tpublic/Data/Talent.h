@@ -28,11 +28,11 @@ namespace tpublic
 						const SourceNode*	aChild)
 					{
 						if (aChild->m_name == "ability")
-							m_abilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
+							m_abilityId = aChild->GetId(DataType::ID_ABILITY);
 						else if (aChild->m_name == "aura")
-							m_auraId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_AURA, aChild->GetIdentifier());
+							m_auraId = aChild->GetId(DataType::ID_AURA);
 						else if (aChild->m_name == "ability_modifier")
-							m_abilityModifierId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY_MODIFIER, aChild->GetIdentifier());
+							m_abilityModifierId = aChild->GetId(DataType::ID_ABILITY_MODIFIER);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					});
@@ -85,7 +85,7 @@ namespace tpublic
 						if (aChild->m_name == "string")
 							m_string = aChild->GetString();
 						else if (aChild->m_name == "icon")
-							m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
+							m_iconSpriteId = aChild->GetId(DataType::ID_SPRITE);
 						else if (aChild->m_name == "prerequisites")
 							aChild->GetIdArray(DataType::ID_TALENT, m_prerequisites);
 						else if (aChild->m_name == "talent_tree_points_required")

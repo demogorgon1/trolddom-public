@@ -1,5 +1,6 @@
 #pragma once
 
+#include "DataErrorHandling.h"
 #include "DataType.h"
 
 namespace tpublic
@@ -8,21 +9,41 @@ namespace tpublic
 	class PersistentIdTable
 	{
 	public:
+		typedef std::function<void(const char*, const char*, const DataErrorHandling::DebugInfo&)> UndefinedCallback;
+
 						PersistentIdTable();
 						~PersistentIdTable();
 
 		uint32_t		GetId(
-							DataType::Id		aDataType,
-							const char*			aName);
+							const DataErrorHandling::DebugInfo&								aDebugInfo,
+							DataType::Id													aDataType,
+							const char*														aName,
+							bool															aIsDefinition = false);
 		void			Load(
-							const char*			aPath);
+							const char*														aPath);
 		void			Save();
+		void			ValidateAndPrune(
+							UndefinedCallback												aUndefinedCallback);
 
 	private:
 
-		std::string									m_path;
-		std::unordered_map<std::string, uint32_t>	m_tables[DataType::NUM_IDS];
-		uint32_t									m_nextId[DataType::NUM_IDS];
+		struct ReferenceDebugInfo
+		{
+			DataErrorHandling::DebugInfo									m_debugInfo;
+			bool															m_isDefinition = false;
+		};
+
+		struct Type
+		{
+			std::unordered_map<std::string, uint32_t>						m_table;
+			uint32_t														m_nextId = 1;
+
+			// Build-time debug information, not serialized
+			std::unordered_map<uint32_t, std::vector<ReferenceDebugInfo>>	m_debugInfoReferences;
+		};
+
+		std::string															m_path;
+		Type																m_types[DataType::NUM_IDS];
 	};
 
 }

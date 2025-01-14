@@ -9,7 +9,7 @@ dialogue_screen .doctor_hulius_dialogue:
 	[
 		{ quest<completion_only>: .doctor_hulius_camp_1 }
 		{ quest<offer_only>: .doctor_hulius_1 }
-		{ text: "Let's go." requirement self<must_have_active_quest>: .doctor_hulius script: npc_trigger }	
+		{ text: "Let's go." requirement self<must_have_active_quest>: .doctor_hulius_1 script: npc_trigger }	
 	]
 }
 
@@ -53,11 +53,11 @@ npc_behavior_state .doctor_hulius:
 	patrol_move_interval_ticks: 9
 }
 
-ability .cubert_galston_start_escort:
+ability .doctor_hulius_start_escort:
 {
 	flags: [ always_in_range always_in_line_of_sight ]
 	
-	direct_effect start_route: { route: thalvaron_cubert_galston_escort }	
+	direct_effect start_route: { route: thalvaron_doctor_hulius_escort }	
 }
 
 ############################################################
@@ -77,7 +77,7 @@ objective .doctor_hulius_1:
 
 quest .doctor_hulius_1:
 {
-	string: "Camping in not as fun as imagined"
+	string: "Camping: Not As Fun As Imagined"
 
 	text:
 	[

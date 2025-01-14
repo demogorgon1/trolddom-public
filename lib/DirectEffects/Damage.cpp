@@ -41,7 +41,7 @@ namespace tpublic::DirectEffects
 					aChild->GetObject()->ForEachChild([&](
 						const SourceNode* aAbilityModifierMultiplier)
 					{
-						uint32_t abilityModifierId = aAbilityModifierMultiplier->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY_MODIFIER, aAbilityModifierMultiplier->m_name.c_str());
+						uint32_t abilityModifierId = aAbilityModifierMultiplier->m_sourceContext->m_persistentIdTable->GetId(aAbilityModifierMultiplier->m_debugInfo, DataType::ID_ABILITY_MODIFIER, aAbilityModifierMultiplier->m_name.c_str());
 						m_abilityModifierMultipliers[abilityModifierId] = aAbilityModifierMultiplier->GetFloat();
 					});
 				}

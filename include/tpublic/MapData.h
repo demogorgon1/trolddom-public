@@ -236,7 +236,7 @@ namespace tpublic
 
 				if(m_type == TYPE_TRIGGER_NOT_SET || m_type == TYPE_TRIGGER_SET)
 				{
-					m_mapTriggerId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_TRIGGER, aSource->GetIdentifier());
+					m_mapTriggerId = aSource->GetId(DataType::ID_MAP_TRIGGER);
 				}
 				else if(m_type == TYPE_ENTITY_STATE)
 				{
@@ -245,7 +245,7 @@ namespace tpublic
 					{
 						if(aChild->m_name == "entity_spawn")
 						{
-							m_mapEntitySpawnId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aChild->GetIdentifier());
+							m_mapEntitySpawnId = aChild->GetId(DataType::ID_MAP_ENTITY_SPAWN);
 						}
 						else if(aChild->m_name == "state")
 						{
@@ -321,7 +321,7 @@ namespace tpublic
 					TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid script command.", aSource->m_name.c_str());
 
 				if(m_type == TYPE_SET_TRIGGER || m_type == TYPE_CLEAR_TRIGGER)
-					m_mapTriggerId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_TRIGGER, aSource->GetIdentifier());
+					m_mapTriggerId = aSource->GetId(DataType::ID_MAP_TRIGGER);
 			}
 
 			void	

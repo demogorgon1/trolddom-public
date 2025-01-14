@@ -184,7 +184,7 @@ namespace tpublic
 							uint32_t* t = (uint32_t*)&(((const uint8_t*)aObject)[field->m_offset]);
 				
 							if (field->m_dataType != DataType::INVALID_ID)
-								*t = aSource->m_sourceContext->m_persistentIdTable->GetId(field->m_dataType, aChild->GetIdentifier());
+								*t = aChild->GetId(field->m_dataType);
 							else
 								*t = aChild->GetUInt32();
 						}
@@ -214,7 +214,7 @@ namespace tpublic
 								uint32_t value;
 
 								if (field->m_dataType != DataType::INVALID_ID)
-									value = aElement->m_sourceContext->m_persistentIdTable->GetId(field->m_dataType, aElement->GetIdentifier());
+									value = aElement->GetId(field->m_dataType);
 								else
 									value = aElement->GetUInt32();
 

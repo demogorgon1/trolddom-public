@@ -103,10 +103,18 @@ namespace tpublic
 			m_manifest->m_wordList.Prepare(m_manifest);
 		}
 
-		// Build map data
+		// Validate/prune persistent ids and build map data
 		{
-			spriteSheetBuilder.ExportPreliminaryManifestData(m_sourceContext.m_persistentIdTable.get(), m_manifest);
-			
+			spriteSheetBuilder.ExportPreliminaryManifestData(m_sourceContext.m_persistentIdTable.get(), m_manifest);			
+
+			m_sourceContext.m_persistentIdTable->ValidateAndPrune([&](
+				const char*							aDataTypeString,
+				const char*							aName, 
+				const DataErrorHandling::DebugInfo& aDebugInfo)
+			{
+				_OnBuildError({ Helpers::Format("[%s:%u] Undefined %s '%s' referenced.", aDebugInfo.m_file.c_str(), aDebugInfo.m_line, aDataTypeString, aName) });
+			});
+
 			AutoDoodads autoDoodads(m_manifest);
 
 			m_manifest->GetContainer<tpublic::Data::Map>()->ForEach([&](
@@ -413,7 +421,7 @@ namespace tpublic
 		}
 		else if(aNode->m_name == "base_tile_border_pattern_sprite")
 		{
-			m_manifest->m_baseTileBorderPatternSpriteId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aNode->GetIdentifier());
+			m_manifest->m_baseTileBorderPatternSpriteId = aNode->GetId(DataType::ID_SPRITE);
 		}
 		else if(aNode->IsAnonymousObject())
 		{

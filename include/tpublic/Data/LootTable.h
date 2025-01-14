@@ -70,7 +70,7 @@ namespace tpublic
 						if(aChild->m_name == "weight")
 							m_weight = aChild->GetUInt32();
 						else if(aChild->m_name == "loot_group")
-							m_lootGroupId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_LOOT_GROUP, aChild->GetIdentifier());
+							m_lootGroupId = aChild->GetId(DataType::ID_LOOT_GROUP);
 						else if (aChild->m_name == "creature_types")
 							aChild->GetIdArray(DataType::ID_CREATURE_TYPE, m_creatureTypes);
 						else if(aChild->m_tag == "requirement")

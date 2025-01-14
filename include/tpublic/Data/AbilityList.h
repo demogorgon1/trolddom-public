@@ -25,7 +25,7 @@ namespace tpublic
 				Entry(
 					const SourceNode*	aSource)
 				{
-					m_abilityId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aSource->m_name.c_str());
+					m_abilityId = aSource->m_sourceContext->m_persistentIdTable->GetId(aSource->m_debugInfo, DataType::ID_ABILITY, aSource->m_name.c_str());
 
 					aSource->GetObject()->ForEachChild([&](
 						const SourceNode* aChild)

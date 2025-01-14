@@ -567,12 +567,6 @@ ability cleanse:
 		must_have_ability_modifier: improved_cleanse_2
 		aura: improved_cleanse_2
 	}
-
-	direct_effect apply_aura:
-	{
-		must_have_ability_modifier: improved_cleanse_3
-		aura: improved_cleanse_3
-	}
 	
 }
 

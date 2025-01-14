@@ -260,7 +260,7 @@ namespace tpublic
 		GetId(
 			DataType::Id				aDataType) const
 		{
-			return m_sourceContext->m_persistentIdTable->GetId(aDataType, GetIdentifier());
+			return m_sourceContext->m_persistentIdTable->GetId(m_debugInfo, aDataType, GetIdentifier());
 		}
 
 		void
@@ -270,7 +270,7 @@ namespace tpublic
 		{
 			TP_VERIFY(m_type == TYPE_ARRAY, m_debugInfo, "Not an array.");
 			for (const std::unique_ptr<SourceNode>& child : m_children)
-				aOut.push_back(m_sourceContext->m_persistentIdTable->GetId(aDataType, child->GetIdentifier()));
+				aOut.push_back(m_sourceContext->m_persistentIdTable->GetId(child->m_debugInfo, aDataType, child->GetIdentifier()));
 		}
 
 		void
@@ -284,7 +284,7 @@ namespace tpublic
 				if(child->m_type == TYPE_NUMBER && child->m_value == "0")
 					aOut.push_back(0);
 				else
-					aOut.push_back(m_sourceContext->m_persistentIdTable->GetId(aDataType, child->GetIdentifier()));
+					aOut.push_back(m_sourceContext->m_persistentIdTable->GetId(child->m_debugInfo, aDataType, child->GetIdentifier()));
 			}
 		}
 

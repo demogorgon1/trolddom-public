@@ -10,8 +10,6 @@ namespace tpublic
 
 	PersistentIdTable::PersistentIdTable()
 	{
-		for (uint8_t i = 1; i < (uint8_t)DataType::NUM_IDS; i++)
-			m_nextId[i] = 1;
 	}
 	
 	PersistentIdTable::~PersistentIdTable()
@@ -21,19 +19,40 @@ namespace tpublic
 
 	uint32_t		
 	PersistentIdTable::GetId(
-		DataType::Id		aDataType,
-		const char*			aName)
+		const DataErrorHandling::DebugInfo&	aDebugInfo,
+		DataType::Id						aDataType,
+		const char*							aName,
+		bool								aIsDefinition)
 	{
-		TP_CHECK(aDataType != DataType::INVALID_ID, "Invalid data type.");
-		std::unordered_map<std::string, uint32_t>::iterator it = m_tables[aDataType].find(aName);
-		if(it == m_tables[aDataType].end())
+		TP_CHECK(DataType::ValidateId(aDataType), "Invalid data type.");
+		Type& t = m_types[aDataType];
+
+		uint32_t id = 0;
+
 		{
-			uint32_t id = m_nextId[aDataType]++;
-			m_tables[aDataType].insert(std::pair<std::string, uint32_t>(aName, id));
-			return id;
+			std::unordered_map<std::string, uint32_t>::iterator i = t.m_table.find(aName);
+			if (i == t.m_table.end())
+			{
+				id = t.m_nextId++;
+				t.m_table.insert(std::pair<std::string, uint32_t>(aName, id));
+			}
+			else
+			{
+				id = i->second;
+			}
 		}
-		
-		return it->second;
+
+		{
+			ReferenceDebugInfo referenceDebugInfo = { aDebugInfo, aIsDefinition };
+
+			std::unordered_map<uint32_t, std::vector<ReferenceDebugInfo>>::iterator i = t.m_debugInfoReferences.find(id);
+			if(i == t.m_debugInfoReferences.cend())
+				t.m_debugInfoReferences[id] = { referenceDebugInfo };
+			else
+				i->second.push_back(referenceDebugInfo);				
+		}
+
+		return id;
 	}
 
 	void			
@@ -62,13 +81,17 @@ namespace tpublic
 						TP_CHECK(tokens.size() == 3, "Syntax error in persistent id table file at line %u.", lineNum);
 
 						DataType::Id dataType = DataType::StringToId(tokens[0].c_str());
+						TP_CHECK(DataType::ValidateId(dataType), "Invalid data type.");
+
+						Type& t = m_types[dataType];
+
 						const char* name = tokens[1].c_str();
 						uint32_t id = strtoul(tokens[2].c_str(), NULL, 10);
 
-						if(id + 1 > m_nextId[dataType])
-							m_nextId[dataType] = id + 1;
+						if(id + 1 > t.m_nextId)
+							t.m_nextId = id + 1;
 
-						m_tables[dataType][name] = id;
+						t.m_table[name] = id;
 					}
 
 					lineNum++;
@@ -100,12 +123,13 @@ namespace tpublic
 			for(uint8_t i = 1; i < (uint8_t)DataType::NUM_IDS; i++)
 			{
 				const char* dataTypeString = DataType::IdToString((DataType::Id)i);
+				Type& t = m_types[i];
 
 				// Sort by id
 				typedef std::map<uint32_t, std::pair<std::string, std::string>> SortedMap;
 				SortedMap sortedMap;
 
-				for(std::pair<std::string, uint32_t> it : m_tables[i])
+				for(std::pair<std::string, uint32_t> it : t.m_table)
 					sortedMap[it.second] = std::make_pair<std::string, std::string>(dataTypeString, it.first.c_str());
 
 				for(SortedMap::const_iterator j = sortedMap.cbegin(); j != sortedMap.cend(); j++)
@@ -129,6 +153,57 @@ namespace tpublic
 		{
 			fclose(f);
 			TP_CHECK(false, "Failed to save persistent id table: %s (%s)", tmpPath, e.what());
+		}
+	}
+
+	void			
+	PersistentIdTable::ValidateAndPrune(
+		UndefinedCallback												aUndefinedCallback)
+	{
+		for (uint8_t i = 1; i < (uint8_t)DataType::NUM_IDS; i++)
+		{
+			const char* dataTypeString = DataType::IdToString((DataType::Id)i);
+			Type& t = m_types[i];
+
+			uint32_t numPruned = 0;
+
+			for(std::unordered_map<std::string, uint32_t>::const_iterator j = t.m_table.cbegin(); j != t.m_table.cend();)
+			{
+				const char* name = j->first.c_str();
+				uint32_t id = j->second;
+
+				std::unordered_map<uint32_t, std::vector<ReferenceDebugInfo>>::const_iterator k = t.m_debugInfoReferences.find(id);
+				if (k != t.m_debugInfoReferences.cend())
+				{
+					bool isDefined = false;
+
+					for(const ReferenceDebugInfo& reference : k->second)
+					{
+						if(reference.m_isDefinition)
+						{
+							isDefined = true;
+							break;
+						}
+					}
+
+					if(!isDefined)
+					{
+						for (const ReferenceDebugInfo& reference : k->second)
+							aUndefinedCallback(dataTypeString, name, reference.m_debugInfo);
+					}
+
+					j++;
+				}
+				else
+				{
+					// No longer defined or referenced - can be pruned
+					numPruned++;
+					t.m_table.erase(j++);
+				}
+			}
+
+			if(numPruned > 0)
+				printf("Pruned %u unused %s identifier%s.\n", numPruned, dataTypeString, numPruned == 1 ? "" : "s");
 		}
 	}
 

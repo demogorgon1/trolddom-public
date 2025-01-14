@@ -83,7 +83,7 @@ namespace tpublic
 				Entry(
 					const SourceNode*	aSource)
 				{
-					m_dialogueScreenId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_DIALOGUE_SCREEN, aSource->m_name.c_str());
+					m_dialogueScreenId = aSource->m_sourceContext->m_persistentIdTable->GetId(aSource->m_debugInfo, DataType::ID_DIALOGUE_SCREEN, aSource->m_name.c_str());
 
 					aSource->ForEachChild([&](
 						const SourceNode* aChild)

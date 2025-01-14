@@ -240,7 +240,7 @@ namespace tpublic
 				AOEEntitySpawnEntry(
 					const SourceNode*		aSource)
 				{
-					m_entityId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENTITY, aSource->m_name.c_str());
+					m_entityId = aSource->m_sourceContext->m_persistentIdTable->GetId(aSource->m_debugInfo, DataType::ID_ENTITY, aSource->m_name.c_str());
 					
 					aSource->ForEachChild([&](
 						const SourceNode* aChild)
@@ -339,7 +339,7 @@ namespace tpublic
 						const SourceNode* aChild)
 					{
 						Item t;
-						t.m_itemId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ITEM, aChild->m_name.c_str());
+						t.m_itemId = aChild->m_sourceContext->m_persistentIdTable->GetId(aChild->m_debugInfo, DataType::ID_ITEM, aChild->m_name.c_str());
 						t.m_quantity = aChild->GetUInt32();
 						m_items.push_back(t);
 					});
@@ -377,7 +377,7 @@ namespace tpublic
 				{
 					TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing skill annotation.");
 					m_skill = aSource->m_annotation->GetUInt32();
-					m_professionId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PROFESSION, aSource->GetIdentifier());
+					m_professionId = aSource->GetId(DataType::ID_PROFESSION);
 				}
 
 				void	
@@ -477,7 +477,7 @@ namespace tpublic
 						else if (aMember->m_name == "description")
 							m_description = aMember->GetString();
 						else if (aMember->m_name == "talent_tree")
-							m_talentTreeId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TALENT_TREE, aMember->GetIdentifier());
+							m_talentTreeId = aMember->GetId(DataType::ID_TALENT_TREE);
 						else if (aMember->m_name == "range")
 							m_range = aMember->GetUInt32();
 						else if (aMember->m_name == "level")
@@ -487,7 +487,7 @@ namespace tpublic
 						else if (aMember->m_name == "channel_interval")
 							m_channelInterval = aMember->GetInt32();
 						else if (aMember->m_name == "channel_tick_ability")
-							m_channelTickAbilityId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aMember->GetIdentifier());
+							m_channelTickAbilityId = aMember->GetId(DataType::ID_ABILITY);
 						else if (aMember->m_name == "aoe_radius")
 							m_aoeRadius = aMember->GetUInt32();
 						else if (aMember->m_name == "aoe_cap")
@@ -503,21 +503,21 @@ namespace tpublic
 						else if (aMember->m_name == "cooldowns")
 							aMember->GetIdArray(DataType::ID_COOLDOWN, m_cooldowns);
 						else if(aMember->m_name == "trigger_only_cooldown")
-							m_triggerOnlyCooldownId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_COOLDOWN, aMember->GetIdentifier());
+							m_triggerOnlyCooldownId = aMember->GetId(DataType::ID_COOLDOWN);
 						else if (aMember->m_name == "cast_time")
 							m_castTime = aMember->GetInt32();
 						else if (aMember->m_name == "icon")
-							m_iconSpriteId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aMember->GetIdentifier());
+							m_iconSpriteId = aMember->GetId(DataType::ID_SPRITE);
 						else if (aMember->m_name == "projectile")
-							m_projectileParticleSystemId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PARTICLE_SYSTEM, aMember->GetIdentifier());
+							m_projectileParticleSystemId = aMember->GetId(DataType::ID_PARTICLE_SYSTEM);
 						else if (aMember->m_name == "source_particle_system")
-							m_sourceParticleSystemId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PARTICLE_SYSTEM, aMember->GetIdentifier());
+							m_sourceParticleSystemId = aMember->GetId(DataType::ID_PARTICLE_SYSTEM);
 						else if (aMember->m_name == "target_particle_system")
-							m_targetParticleSystemId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PARTICLE_SYSTEM, aMember->GetIdentifier());
+							m_targetParticleSystemId = aMember->GetId(DataType::ID_PARTICLE_SYSTEM);
 						else if (aMember->m_name == "melee_particle_system")
-							m_meleeParticleSystemId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PARTICLE_SYSTEM, aMember->GetIdentifier());
+							m_meleeParticleSystemId = aMember->GetId(DataType::ID_PARTICLE_SYSTEM);
 						else if (aMember->m_name == "must_have_nearby_entity")
-							m_mustHaveNearbyEntityId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENTITY, aMember->GetIdentifier());
+							m_mustHaveNearbyEntityId = aMember->GetId(DataType::ID_ENTITY);
 						else if (aMember->m_name == "must_have_one_of_nearby_entities")
 							aMember->GetIdArray(DataType::ID_ENTITY, m_mustHaveOneOfNearbyEntityIds);
 						else if (aMember->m_name == "flags")

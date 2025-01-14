@@ -145,6 +145,6 @@ quest open_world_randy_2:
 	]
 
 	level: 7
-	quest_items: [ randy_2_quest_item ]
+	quest_items: [ .randy_2_quest_item ]
 	
 }

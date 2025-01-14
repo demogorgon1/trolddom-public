@@ -81,7 +81,7 @@ namespace tpublic
 						}
 						else if (aChild->m_name == "ability")
 						{
-							m_abilityIds.push_back(aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier()));
+							m_abilityIds.push_back(aChild->GetId(DataType::ID_ABILITY));
 						}
 						else if (aChild->m_name == "abilities")
 						{

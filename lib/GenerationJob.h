@@ -109,14 +109,14 @@ namespace tpublic
 								const SourceNode* aChild)
 							{
 								if(aChild->m_name == "name_template")
-									m_nameTemplateId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_NAME_TEMPLATE, aChild->GetIdentifier());
+									m_nameTemplateId = aChild->GetId(DataType::ID_NAME_TEMPLATE);
 								else 
 									TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 							});
 						}
 						else if(aSource->m_type == SourceNode::TYPE_IDENTIFIER)
 						{
-							m_tagId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TAG, aSource->GetIdentifier());
+							m_tagId = aSource->GetId(DataType::ID_TAG);
 						}
 						else
 						{

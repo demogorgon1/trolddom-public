@@ -23,7 +23,7 @@ tile_modifier wood_wall_2_start:
 	sprites: [ wood_wall_2_start ]
 	
 	requirement<center_must_be>: [ wood_wall_2 ]
-	requirement<west_must_not_be>: [ wood_wall_2 wood_wall_2_grass_1 wood_wall_2_grass_2 wood_wall_2_window wood_wall_window_2_grass_1 wood_wall_2_window_grass_2 pavement dungeon_floor wood_floor ]
+	requirement<west_must_not_be>: [ wood_wall_2 wood_wall_2_grass_1 wood_wall_2_grass_2 wood_wall_2_window wood_wall_2_window_grass_1 wood_wall_2_window_grass_2 pavement dungeon_floor wood_floor ]
 	
 	probability: 100
 	priority: true
@@ -86,7 +86,7 @@ tile_modifier ext_dungeon_wall_start:
 	sprites: [ ext_dungeon_wall_start ]
 	
 	requirement<center_must_be>: [ ext_dungeon_wall ]
-	requirement<west_must_not_be>: [ ext_dungeon_wall ext_dungeon_wall_grass_1 ext_dungeon_wall_grass_2 ext_dungeon_wall_window ext_dungeon_wall_window_grass_1 ext_dungeon_wall_window_grass_2 ext_dungeon_entrance pavement dungeon_floor wood_floor ]
+	requirement<west_must_not_be>: [ ext_dungeon_wall ext_dungeon_wall_grass_1 ext_dungeon_wall_grass_2 ext_dungeon_entrance pavement dungeon_floor wood_floor ]
 	
 	probability: 100
 	priority: true
@@ -119,7 +119,7 @@ tile_modifier ext_dungeon_wall_end:
 	sprites: [ ext_dungeon_wall_end ]
 	
 	requirement<center_must_be>: [ ext_dungeon_wall ]
-	requirement<east_must_not_be>: [ ext_dungeon_wall ext_dungeon_wall_grass_1 ext_dungeon_wall_grass_2 ext_dungeon_wall_window ext_dungeon_wall_window_grass_1 ext_dungeon_wall_window_grass_2 ext_dungeon_entrance pavement dungeon_floor wood_floor ]
+	requirement<east_must_not_be>: [ ext_dungeon_wall ext_dungeon_wall_grass_1 ext_dungeon_wall_grass_2 ext_dungeon_entrance pavement dungeon_floor wood_floor ]
 	
 	probability: 100
 	priority: true

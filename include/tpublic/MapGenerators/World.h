@@ -69,9 +69,9 @@ namespace tpublic::MapGenerators
 					if(aChild->m_name == "count")
 						m_count = UIntRange(aChild);
 					else if (aChild->m_name == "map_entity_spawn")
-						m_mapEntitySpawnId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aChild->GetIdentifier());
+						m_mapEntitySpawnId = aChild->GetId(DataType::ID_MAP_ENTITY_SPAWN);
 					else if (aChild->m_name == "tag_context")
-						m_tagContextId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TAG_CONTEXT, aChild->GetIdentifier());
+						m_tagContextId = aChild->GetId(DataType::ID_TAG_CONTEXT);
 					else if (aChild->m_name == "influence_range")
 						m_influenceRange = UIntRange(aChild);
 					else
@@ -123,7 +123,7 @@ namespace tpublic::MapGenerators
 			{
 				TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing probability annotation.");
 				m_probability = aSource->m_annotation->GetUInt32();
-				m_mapEntitySpawnId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aSource->GetIdentifier());
+				m_mapEntitySpawnId = aSource->GetId(DataType::ID_MAP_ENTITY_SPAWN);
 			}
 
 			void
@@ -171,7 +171,7 @@ namespace tpublic::MapGenerators
 					else if (aChild->m_name == "elite")
 						m_elite = aChild->GetBool();
 					else if (aChild->m_name == "map_entity_spawn")
-						m_mapEntitySpawnId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aChild->GetIdentifier());
+						m_mapEntitySpawnId = aChild->GetId(DataType::ID_MAP_ENTITY_SPAWN);
 					else if (aChild->m_name == "tag_contexts")
 						aChild->GetIdArray(DataType::ID_TAG_CONTEXT, m_tagContextIds);
 					else if (aChild->m_name == "influence_range")
@@ -809,7 +809,7 @@ namespace tpublic::MapGenerators
 				const IExecuteFactory*				/*aFactory*/,
 				const SourceNode*					aSource) override
 			{
-				m_terrainId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TERRAIN, aSource->GetIdentifier());
+				m_terrainId = aSource->GetId(DataType::ID_TERRAIN);
 			}
 
 			void
@@ -884,7 +884,7 @@ namespace tpublic::MapGenerators
 				const IExecuteFactory*				/*aFactory*/,
 				const SourceNode*					aSource) override
 			{
-				m_terrainId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TERRAIN, aSource->GetIdentifier());
+				m_terrainId = aSource->GetId(DataType::ID_TERRAIN);
 			}
 
 			void
@@ -1042,7 +1042,7 @@ namespace tpublic::MapGenerators
 					const SourceNode*					aSource)
 				{
 					TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing terrain annotation.");
-					m_terrainId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TERRAIN, aSource->m_annotation->GetIdentifier());
+					m_terrainId = aSource->m_annotation->GetId(DataType::ID_TERRAIN);
 
 					aSource->ForEachChild([&](
 						const SourceNode* aChild)
@@ -1111,7 +1111,7 @@ namespace tpublic::MapGenerators
 					const SourceNode*					aSource)
 				{
 					TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing doodad annotation.");
-					m_doodadId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_DOODAD, aSource->m_annotation->GetIdentifier());
+					m_doodadId = aSource->m_annotation->GetId(DataType::ID_DOODAD);
 
 					aSource->ForEachChild([&](
 						const SourceNode* aChild)
@@ -1181,7 +1181,7 @@ namespace tpublic::MapGenerators
 					const SourceNode* aChild)
 				{
 					if (aChild->m_name == "noise")
-						m_noiseId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_NOISE, aChild->GetIdentifier());
+						m_noiseId = aChild->GetId(DataType::ID_NOISE);
 					else if (aChild->m_name == "terrain")
 						m_terrains.push_back(std::make_unique<Terrain>(aChild));
 					else if (aChild->m_name == "doodad")
@@ -1242,7 +1242,7 @@ namespace tpublic::MapGenerators
 				{
 					if(aChild->m_name == "noise")
 					{
-						m_noiseId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_NOISE, aChild->GetIdentifier());
+						m_noiseId = aChild->GetId(DataType::ID_NOISE);
 					}
 					else if(aChild->m_name == "debug")
 					{
@@ -1309,12 +1309,12 @@ namespace tpublic::MapGenerators
 					if(aSource->m_name == "neighbor_terrain_probability_bonus")
 					{
 						TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing terrain annotation.");
-						m_terrainId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TERRAIN, aSource->m_annotation->GetIdentifier());
+						m_terrainId = aSource->m_annotation->GetId(DataType::ID_TERRAIN);
 						m_probabilityBonus = aSource->GetUInt32();
 					}
 					else if(aSource->m_name == "neighbor_terrain_required")
 					{
-						m_terrainId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TERRAIN, aSource->GetIdentifier());
+						m_terrainId = aSource->GetId(DataType::ID_TERRAIN);
 						m_required = true;
 					}
 					else
@@ -1448,9 +1448,9 @@ namespace tpublic::MapGenerators
 					const SourceNode* aChild)
 				{
 					if (aChild->m_name == "tag_context")
-						m_tagContextId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TAG_CONTEXT, aChild->GetIdentifier());
+						m_tagContextId = aChild->GetId(DataType::ID_TAG_CONTEXT);
 					else if (aChild->m_name == "map_entity_spawn")
-						m_mapEntitySpawnId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aChild->GetIdentifier());
+						m_mapEntitySpawnId = aChild->GetId(DataType::ID_MAP_ENTITY_SPAWN);
 					else if (aChild->m_name == "influence")
 						m_influence = aChild->GetUInt32();
 					else if (aChild->m_name == "influence_tile_transform_threshold")

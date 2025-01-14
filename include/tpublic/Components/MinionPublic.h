@@ -63,15 +63,15 @@ namespace tpublic
 						if(aChild->m_name == "flags")
 							m_flags = SourceToFlags(aChild);
 						else if(aChild->m_name == "id")
-							m_id = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
+							m_id = aChild->GetId(DataType::ID_ABILITY);
 						else if (aChild->m_name == "max_target_health")
 							m_maxTargetHealth = aChild->GetUInt32();
 						else if (aChild->m_name == "min_neighbor_hostiles")
 							m_minNeighborHostiles = aChild->GetUInt32();
 						else if (aChild->m_name == "target_must_not_have_aura")
-							m_targetMustNotHaveAuraId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_AURA, aChild->GetIdentifier());
+							m_targetMustNotHaveAuraId = aChild->GetId(DataType::ID_AURA);
 						else if (aChild->m_name == "self_must_not_have_aura")
-							m_selfMustNotHaveAuraId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_AURA, aChild->GetIdentifier());
+							m_selfMustNotHaveAuraId = aChild->GetId(DataType::ID_AURA);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					});

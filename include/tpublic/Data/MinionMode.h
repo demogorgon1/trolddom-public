@@ -33,7 +33,7 @@ namespace tpublic
 						if (aChild->m_name == "string")
 							m_string = aChild->GetString();
 						else if (aChild->m_name == "icon")
-							m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
+							m_iconSpriteId = aChild->GetId(DataType::ID_SPRITE);
 						else if (aChild->m_name == "follow_distance")
 							m_followDistance = aChild->GetUInt32();
 						else if (aChild->m_name == "aggro_range")

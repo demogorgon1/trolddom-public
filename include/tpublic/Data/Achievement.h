@@ -64,7 +64,7 @@ namespace tpublic
 				ReputationTrigger(
 					const SourceNode*	aSource)
 				{					
-					m_factionId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_FACTION, aSource->m_name.c_str());
+					m_factionId = aSource->m_sourceContext->m_persistentIdTable->GetId(aSource->m_debugInfo, DataType::ID_FACTION, aSource->m_name.c_str());
 					m_threshold = aSource->GetUInt32();
 				}
 
@@ -127,15 +127,15 @@ namespace tpublic
 						else if (aChild->m_name == "available_in_front_end")
 							m_availableInFrontEnd = aChild->GetBool();
 						else if (aChild->m_name == "category")
-							m_categoryId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ACHIEVEMENT_CATEGORY, aChild->GetIdentifier());
+							m_categoryId = aChild->GetId(DataType::ID_ACHIEVEMENT_CATEGORY);
 						else if (aChild->m_name == "root")
-							m_rootId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ACHIEVEMENT, aChild->GetIdentifier());
+							m_rootId = aChild->GetId(DataType::ID_ACHIEVEMENT);
 						else if (aChild->m_name == "icon")
-							m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
+							m_iconSpriteId = aChild->GetId(DataType::ID_SPRITE);
 						else if (aChild->m_name == "kill_trigger")
-							m_killTriggerEntityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENTITY, aChild->GetIdentifier());
+							m_killTriggerEntityId = aChild->GetId(DataType::ID_ENTITY);
 						else if (aChild->m_name == "kill_trigger_tag")
-							m_killTriggerEntityTagId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TAG, aChild->GetIdentifier());
+							m_killTriggerEntityTagId = aChild->GetId(DataType::ID_TAG);
 						else if (aChild->m_tag == "stat_trigger")
 							m_statTrigger = StatTrigger(aChild);
 						else if (aChild->m_tag == "reputation_trigger")

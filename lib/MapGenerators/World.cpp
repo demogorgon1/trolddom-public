@@ -1560,11 +1560,11 @@ namespace tpublic::MapGenerators
 				}
 				else if(aChild->m_name == "player_spawn_entity")
 				{
-					m_params.m_playerSpawnEntityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENTITY, aChild->GetIdentifier());
+					m_params.m_playerSpawnEntityId = aChild->GetId(DataType::ID_ENTITY);
 				}
 				else if (aChild->m_name == "object_map_entity_spawn")
 				{
-					m_params.m_objectMapEntitySpawnId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aChild->GetIdentifier());
+					m_params.m_objectMapEntitySpawnId = aChild->GetId(DataType::ID_MAP_ENTITY_SPAWN);
 				}
 				else
 				{
@@ -1670,7 +1670,7 @@ namespace tpublic::MapGenerators
 		const SourceNode*				aSource)
 	{
 		TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing terrain annotation.");
-		uint32_t terrainId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TERRAIN, aSource->m_annotation->GetIdentifier());
+		uint32_t terrainId = aSource->m_annotation->GetId(DataType::ID_TERRAIN);
 		char symbol = aSource->GetCharacter();
 		TP_VERIFY(!m_terrainPalette.contains(symbol), aSource->m_debugInfo, "'%c' is already defined in terrain palette.");
 		m_terrainPalette[symbol] = terrainId;

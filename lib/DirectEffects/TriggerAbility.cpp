@@ -25,7 +25,7 @@ namespace tpublic::DirectEffects
 			if(!FromSourceBase(aChild))
 			{
 				if (aChild->m_name == "ability")
-					m_abilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
+					m_abilityId = aChild->GetId(DataType::ID_ABILITY);
 				else if(aChild->m_name == "target")
 					m_target = SourceToTarget(aChild);
 				else

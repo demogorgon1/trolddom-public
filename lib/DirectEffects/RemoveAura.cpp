@@ -27,9 +27,9 @@ namespace tpublic
 					else if(aChild->m_name == "aura_flags")
 						m_auraFlags = Data::Aura::SourceToFlags(aChild);
 					else if (aChild->m_name == "aura")
-						m_auraId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_AURA, aChild->GetIdentifier());
+						m_auraId = aChild->GetId(DataType::ID_AURA);
 					else if (aChild->m_name == "aura_group")
-						m_auraGroupId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_AURA_GROUP, aChild->GetIdentifier());
+						m_auraGroupId = aChild->GetId(DataType::ID_AURA_GROUP);
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 				}

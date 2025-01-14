@@ -181,15 +181,15 @@ namespace tpublic
 					}
 					else if (aSpriteComponent->m_name == "dead")
 					{
-						sprite->m_info.m_deadSpriteId = aSpriteComponent->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aSpriteComponent->GetIdentifier());
+						sprite->m_info.m_deadSpriteId = aSpriteComponent->GetId(DataType::ID_SPRITE);
 					}
 					else if (aSpriteComponent->m_name == "water_floor")
 					{
-						sprite->m_info.m_waterFloorSpriteId = aSpriteComponent->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aSpriteComponent->GetIdentifier());
+						sprite->m_info.m_waterFloorSpriteId = aSpriteComponent->GetId(DataType::ID_SPRITE);
 					}
 					else if (aSpriteComponent->m_name == "overview_map_override")
 					{
-						sprite->m_info.m_overviewMapOverrideSpriteId = aSpriteComponent->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aSpriteComponent->GetIdentifier());
+						sprite->m_info.m_overviewMapOverrideSpriteId = aSpriteComponent->GetId(DataType::ID_SPRITE);
 					}					
 					else if (aSpriteComponent->m_name == "tags")
 					{
@@ -201,7 +201,7 @@ namespace tpublic
 
 						if(aSpriteComponent->m_annotation)
 						{
-							uint32_t spriteId = aSpriteComponent->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aSpriteComponent->m_annotation->GetIdentifier());
+							uint32_t spriteId = aSpriteComponent->m_annotation->GetId(DataType::ID_SPRITE);
 							borders = sprite->m_info.GetOrCreateBorderArray(spriteId);
 						}
 

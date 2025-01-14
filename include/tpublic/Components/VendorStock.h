@@ -27,7 +27,7 @@ namespace tpublic
 						const SourceNode* aChild)
 					{
 						if(aChild->m_name == "item")
-							m_itemId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ITEM, aChild->GetIdentifier());
+							m_itemId = aChild->GetId(DataType::ID_ITEM);
 						else if (aChild->m_name == "count")
 							m_max = aChild->GetUInt32();
 						else if(aChild->m_name == "restock_ticks")

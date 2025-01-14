@@ -83,7 +83,7 @@ namespace tpublic
 					{
 						if(aChild->m_name == "goto")
 						{
-							m_dialogueScreenId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_DIALOGUE_SCREEN, aChild->GetIdentifier());
+							m_dialogueScreenId = aChild->GetId(DataType::ID_DIALOGUE_SCREEN);
 						}
 						else if (aChild->m_name == "quest")
 						{
@@ -92,7 +92,7 @@ namespace tpublic
 							else if (aChild->m_annotation && aChild->m_annotation->IsIdentifier("offer_only"))
 								m_questCompletion = false;
 
-							m_questId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_QUEST, aChild->GetIdentifier());
+							m_questId = aChild->GetId(DataType::ID_QUEST);
 						}
 						else if (aChild->m_name == "text")
 						{
@@ -109,7 +109,7 @@ namespace tpublic
 						}
 						else if (aChild->m_name == "condition")
 						{
-							m_conditionExpressionId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_EXPRESSION, aChild->GetIdentifier());
+							m_conditionExpressionId = aChild->GetId(DataType::ID_EXPRESSION);
 						}
 						else if(aChild->m_tag == "requirement")
 						{
@@ -192,7 +192,7 @@ namespace tpublic
 				Sell(
 					const SourceNode* aSource)
 				{
-					m_itemId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ITEM, aSource->m_name.c_str());
+					m_itemId = aSource->m_sourceContext->m_persistentIdTable->GetId(aSource->m_debugInfo, DataType::ID_ITEM, aSource->m_name.c_str());
 					aSource->ForEachChild([&](
 						const SourceNode* aChild)
 					{
@@ -243,7 +243,7 @@ namespace tpublic
 				TrainProfession(
 					const SourceNode* aSource)
 				{
-					m_professionId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PROFESSION, aSource->GetIdentifier());
+					m_professionId = aSource->GetId(DataType::ID_PROFESSION);
 					TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing profession level annotation.");
 					m_professionLevel = aSource->m_annotation->GetUInt32();
 				}
@@ -307,7 +307,7 @@ namespace tpublic
 						else if (aChild->m_name == "train_profession")
 							m_trainProfessions.push_back(TrainProfession(aChild));
 						else if (aChild->m_name == "train_ability")
-							m_trainAbilities.push_back(aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier()));
+							m_trainAbilities.push_back(aChild->GetId(DataType::ID_ABILITY));
 						else if (aChild->m_name == "train_abilities")
 							aChild->GetIdArray(DataType::ID_ABILITY, m_trainAbilities);
 						else

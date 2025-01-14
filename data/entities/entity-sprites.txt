@@ -456,7 +456,7 @@ sprites:
 	sprite crocodile_1_dead: { }
 	sprite crocodile_2_dead: { }
 	sprite kobold_6_dead: { }
-	sprite dwarf_1_dead: { }
+	sprite dwarf_1_dead: { } 
 
 	cursor: { position: [ 0 384 ] }
 	sprite dwarf_2: { dead: dwarf_2_dead }

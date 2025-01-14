@@ -38,7 +38,7 @@ namespace tpublic
 						if (aChild->m_name == "string")
 							m_string = aChild->GetString();
 						else if (aChild->m_name == "icon")
-							m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
+							m_iconSpriteId = aChild->GetId(DataType::ID_SPRITE);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}

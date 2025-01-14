@@ -180,11 +180,11 @@ namespace tpublic
 					if(!FromSourceBase(aChild))
 					{
 						if (aChild->m_name == "icon")
-							m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
+							m_iconSpriteId = aChild->GetId(DataType::ID_SPRITE);
 						else if (aChild->m_name == "encounter")
-							m_encounterId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENCOUNTER, aChild->GetIdentifier());
+							m_encounterId = aChild->GetId(DataType::ID_ENCOUNTER);
 						else if (aChild->m_name == "particle_system")
-							m_particleSystemId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PARTICLE_SYSTEM, aChild->GetIdentifier());
+							m_particleSystemId = aChild->GetId(DataType::ID_PARTICLE_SYSTEM);
 						else if (aChild->m_name == "duration")
 							m_duration = SourceToDuration(aChild);
 						else if (aChild->m_name == "type")
@@ -202,9 +202,9 @@ namespace tpublic
 						else if(aChild->m_name == "charges")
 							m_charges = CombatFunction(aChild);
 						else if (aChild->m_name == "sound")
-							m_soundId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SOUND, aChild->GetIdentifier());
+							m_soundId = aChild->GetId(DataType::ID_SOUND);
 						else if (aChild->m_name == "aura_group")
-							m_auraGroupId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_AURA_GROUP, aChild->GetIdentifier());
+							m_auraGroupId = aChild->GetId(DataType::ID_AURA_GROUP);
 						else if(aChild->m_tag == "cancel_requirement")
 							m_cancelRequirements.push_back(Requirement(aChild));
 						else

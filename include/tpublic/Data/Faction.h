@@ -65,9 +65,9 @@ namespace tpublic
 								const SourceNode* aChild2)
 							{
 								if (aChild2->m_name == "from")
-									fromSpriteId = aChild2->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild2->GetIdentifier());
+									fromSpriteId = aChild2->GetId(DataType::ID_SPRITE);
 								else if (aChild2->m_name == "to")
-									toSpriteId = aChild2->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild2->GetIdentifier());
+									toSpriteId = aChild2->GetId(DataType::ID_SPRITE);
 								else
 									TP_VERIFY(false, aChild2->m_debugInfo, "'%s' is not a valid item.", aChild2->m_name.c_str());
 							});		

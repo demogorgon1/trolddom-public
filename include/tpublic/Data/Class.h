@@ -139,9 +139,9 @@ namespace tpublic
 						const SourceNode* aChild)
 					{
 						if (aChild->m_name == "sprite")
-							m_spriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
+							m_spriteId = aChild->GetId(DataType::ID_SPRITE);
 						else if (aChild->m_name == "sprite_dead")
-							m_deadSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
+							m_deadSpriteId = aChild->GetId(DataType::ID_SPRITE);
 						else if (aChild->m_name == "sprites_walk")
 							aChild->GetIdArray(DataType::ID_SPRITE, m_walkSpriteIds);
 						else
@@ -190,7 +190,7 @@ namespace tpublic
 				{
 					m_equipmentSlotId = EquipmentSlot::StringToId(aSource->m_name.c_str());
 					TP_VERIFY(m_equipmentSlotId != 0, aSource->m_debugInfo, "'%s' not a valid equipment slot.", aSource->m_name.c_str());
-					m_itemId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ITEM, aSource->GetIdentifier());
+					m_itemId = aSource->GetId(DataType::ID_ITEM);
 				}
 
 				void	
@@ -227,7 +227,7 @@ namespace tpublic
 				StartReputation(
 					const SourceNode*		aSource)
 				{
-					m_factionId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_FACTION, aSource->m_name.c_str());
+					m_factionId = aSource->m_sourceContext->m_persistentIdTable->GetId(aSource->m_debugInfo, DataType::ID_FACTION, aSource->m_name.c_str());
 					m_reputation = aSource->GetInt32();
 				}
 
@@ -265,7 +265,7 @@ namespace tpublic
 				StartMap(
 					const SourceNode*		aSource)
 				{
-					m_mapId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP, aSource->m_name.c_str());
+					m_mapId = aSource->m_sourceContext->m_persistentIdTable->GetId(aSource->m_debugInfo, DataType::ID_MAP, aSource->m_name.c_str());
 					aSource->GetIdArray(DataType::ID_MAP_PLAYER_SPAWN, m_mapPlayerSpawnIds);					
 				}
 
@@ -359,7 +359,7 @@ namespace tpublic
 						}
 						else if (aMember->m_name == "achievement")
 						{
-							m_achievementId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ACHIEVEMENT, aMember->GetIdentifier());
+							m_achievementId = aMember->GetId(DataType::ID_ACHIEVEMENT);
 						}
 						else if (aMember->m_name == "unlock_abilities")
 						{
@@ -757,7 +757,7 @@ namespace tpublic
 						}
 						else if (aMember->m_name == "default_attack")
 						{
-							m_defaultAttackAbilityId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aMember->GetIdentifier());
+							m_defaultAttackAbilityId = aMember->GetId(DataType::ID_ABILITY);
 						}
 						else if (aMember->m_name == "default_action_bar")
 						{
@@ -840,7 +840,7 @@ namespace tpublic
 						}
 						else if(aMember->m_name == "unlocked_by_achievement")
 						{
-							m_unlockedByAchievementId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ACHIEVEMENT, aMember->GetIdentifier());
+							m_unlockedByAchievementId = aMember->GetId(DataType::ID_ACHIEVEMENT);
 						}
 						else if(aMember->m_name == "restricted")
 						{

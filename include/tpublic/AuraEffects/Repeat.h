@@ -38,7 +38,7 @@ namespace tpublic
 					if (!FromSourceBase(aChild))
 					{
 						if (aChild->m_name == "ability")
-							m_abilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
+							m_abilityId = aChild->GetId(DataType::ID_ABILITY);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}

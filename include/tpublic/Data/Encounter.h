@@ -69,7 +69,7 @@ namespace tpublic
 						const SourceNode* aChild)
 					{
 						if(aChild->m_name == "id")
-							m_id = aChild->m_sourceContext->m_persistentIdTable->GetId(ConditionTypeToDataType(m_type), aChild->GetIdentifier());
+							m_id = aChild->GetId(ConditionTypeToDataType(m_type));
 						else if(aChild->m_name == "value")
 							m_value = aChild->GetUInt32();
 						else 
@@ -119,7 +119,7 @@ namespace tpublic
 						const SourceNode* aChild)
 					{
 						if (aChild->m_name == "map_entity_spawn")
-							m_mapEntitySpawnId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aChild->GetIdentifier());
+							m_mapEntitySpawnId = aChild->GetId(DataType::ID_MAP_ENTITY_SPAWN);
 						else if(aChild->m_name == "possible_entities")
 							aChild->GetIdArray(DataType::ID_ENTITY, m_possibleEntityIds);
 						else if (aChild->m_name == "entity_count")

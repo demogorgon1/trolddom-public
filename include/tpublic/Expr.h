@@ -110,7 +110,7 @@ namespace tpublic
 						TP_VERIFY(aChild->m_annotation, aChild->m_debugInfo, "Missing data type annotation.");
 						DataType::Id dataTypeId = DataType::StringToId(aChild->m_annotation->GetIdentifier());
 						TP_VERIFY(dataTypeId != DataType::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid data type.", aChild->m_annotation->GetIdentifier());
-						uint32_t id = aChild->m_sourceContext->m_persistentIdTable->GetId(dataTypeId, aChild->GetIdentifier());
+						uint32_t id = aChild->GetId(dataTypeId);
 						m_children.push_back(std::make_unique<Node>((int64_t)id));
 					}
 					else

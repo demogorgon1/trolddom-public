@@ -215,7 +215,7 @@ namespace tpublic
 
 		case StackObject::TYPE_ABILITY:
 			{
-				stackObject->m_abilityId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aSource->GetIdentifier());
+				stackObject->m_abilityId = aSource->GetId(DataType::ID_ABILITY);
 			}
 			break;
 
@@ -573,9 +573,9 @@ namespace tpublic
 			if(aChild->m_name == "count")
 				count = aChild->GetUInt32();
 			else if(aChild->m_name == "name_generator")
-				nameWordGeneratorId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_WORD_GENERATOR, aChild->GetIdentifier());
+				nameWordGeneratorId = aChild->GetId(DataType::ID_WORD_GENERATOR);
 			else if (aChild->m_name == "pantheon")
-				pantheonId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PANTHEON, aChild->GetIdentifier());
+				pantheonId = aChild->GetId(DataType::ID_PANTHEON);
 			else if(aChild->m_name == "must_have_tags")
 				aChild->GetIdArray(DataType::ID_TAG, mustHaveTags);
 			else if (aChild->m_name == "must_not_have_tags")
@@ -841,15 +841,15 @@ namespace tpublic
 			else if (aChild->m_name == "health_multiplier_range")
 				healthMultiplierRange = FloatRange(aChild);
 			else if (aChild->m_name == "name_template")
-				nameTemplateId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_NAME_TEMPLATE, aChild->GetIdentifier());
+				nameTemplateId = aChild->GetId(DataType::ID_NAME_TEMPLATE);
 			else if (aChild->m_name == "faction")
-				factionId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_FACTION, aChild->GetIdentifier());
+				factionId = aChild->GetId(DataType::ID_FACTION);
 			else if (aChild->m_name == "sprite")
-				spriteTagContextId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TAG_CONTEXT, aChild->GetIdentifier());
+				spriteTagContextId = aChild->GetId(DataType::ID_TAG_CONTEXT);
 			else if (aChild->m_name == "creature_type")
-				creatureTypeId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_CREATURE_TYPE, aChild->GetIdentifier());
+				creatureTypeId = aChild->GetId(DataType::ID_CREATURE_TYPE);
 			else if (aChild->m_name == "loot_table")
-				lootTableId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_LOOT_TABLE, aChild->GetIdentifier());
+				lootTableId = aChild->GetId(DataType::ID_LOOT_TABLE);
 			else if (aChild->m_name == "extra_tags")
 				aChild->GetIdArray(DataType::ID_TAG, extraTags);
 			else if(aChild->m_name == "abilities")

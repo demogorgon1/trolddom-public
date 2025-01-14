@@ -31,7 +31,7 @@ namespace tpublic
 				if (!FromSourceBase(aChild))
 				{
 					if (aChild->m_name == "aura")
-						m_auraId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_AURA, aChild->GetIdentifier());
+						m_auraId = aChild->GetId(DataType::ID_AURA);
 					else if (aChild->m_name == "threat")
 						m_threat = aChild->GetInt32();
 					else if(aChild->m_name == "apply_to_party_members_in_range")

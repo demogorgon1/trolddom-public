@@ -35,11 +35,11 @@ namespace tpublic::DirectEffects
 			{
 				if (aChild->m_name == "entity")
 				{
-					m_entityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENTITY, aChild->GetIdentifier());
+					m_entityId = aChild->GetId(DataType::ID_ENTITY);
 				}
 				else if (aChild->m_name == "map_entity_spawn")
 				{
-					m_mapEntitySpawnId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aChild->GetIdentifier());
+					m_mapEntitySpawnId = aChild->GetId(DataType::ID_MAP_ENTITY_SPAWN);
 				}
 				else if (aChild->m_name == "spawn_flags")
 				{

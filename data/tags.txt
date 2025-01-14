@@ -28,6 +28,8 @@ tag human: { }
 tag demon: { }
 tag goblin: { }
 tag undead: { }
+tag crab_monster: { }
+tag dragon: { }
 tag boss: { }
 tag minor_boss: { }
 tag major_boss: { }
@@ -53,6 +55,8 @@ tag weapon_2h_sword: {}
 tag weapon_2h_mace: {}
 tag weapon_2h_axe: {}
 tag weapon_2h_staff: {}
+tag ranged_crossbow: {}
+tag ranged_bow: {}
 tag shield: {}
 tag armor_cloth: {}
 tag armor_mail: {}

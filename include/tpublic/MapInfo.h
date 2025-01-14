@@ -27,17 +27,17 @@ namespace tpublic
 			}
 			else if (aItem->m_name == "default_tile")
 			{
-				m_defaultTileSpriteId = aItem->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aItem->GetIdentifier());
+				m_defaultTileSpriteId = aItem->GetId(DataType::ID_SPRITE);
 				return true;
 			}
 			else if (aItem->m_name == "default_player_spawn")
 			{
-				m_defaultPlayerSpawnId = aItem->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_PLAYER_SPAWN, aItem->GetIdentifier());
+				m_defaultPlayerSpawnId = aItem->GetId(DataType::ID_MAP_PLAYER_SPAWN);
 				return true;
 			}
 			else if (aItem->m_name == "default_exit_portal")
 			{
-				m_defaultExitPortalId = aItem->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_PORTAL, aItem->GetIdentifier());
+				m_defaultExitPortalId = aItem->GetId(DataType::ID_MAP_PORTAL);
 				return true;
 			}
 			else if (aItem->m_name == "view_attenuation")
@@ -72,7 +72,7 @@ namespace tpublic
 			}
 			else if (aItem->m_name == "default_fishing_loot_table")
 			{
-				m_defaultFishingLootTableId = aItem->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_LOOT_TABLE, aItem->GetIdentifier());
+				m_defaultFishingLootTableId = aItem->GetId(DataType::ID_LOOT_TABLE);
 				return true;
 			}
 			else if (aItem->m_name == "has_overview_map")

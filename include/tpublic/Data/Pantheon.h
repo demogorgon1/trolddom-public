@@ -50,7 +50,7 @@ namespace tpublic
 				ClassModifier(
 					const SourceNode*	aSource)
 				{
-					m_classId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_CLASS, aSource->m_name.c_str());
+					m_classId = aSource->m_sourceContext->m_persistentIdTable->GetId(aSource->m_debugInfo, DataType::ID_CLASS, aSource->m_name.c_str());
 
 					aSource->GetObject()->ForEachChild([&](
 						const SourceNode* aChild)
@@ -58,7 +58,7 @@ namespace tpublic
 						if(aChild->m_name == "reputation_trigger")
 							m_reputationTrigger = aChild->GetUInt32();
 						else if (aChild->m_name == "ability_modifier")
-							m_abilityModifierId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY_MODIFIER, aChild->GetIdentifier());
+							m_abilityModifierId = aChild->GetId(DataType::ID_ABILITY_MODIFIER);
 						else if (aChild->m_name == "string")
 							m_string = aChild->GetString();
 						else
@@ -166,13 +166,13 @@ namespace tpublic
 						else if (aChild->m_name == "shrine_display_name_prefix")
 							m_shrineDisplayNamePrefix = aChild->GetString();
 						else if(aChild->m_name == "faction")
-							m_factionId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_FACTION, aChild->GetIdentifier());
+							m_factionId = aChild->GetId(DataType::ID_FACTION);
 						else if (aChild->m_name == "icon")
-							m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
+							m_iconSpriteId = aChild->GetId(DataType::ID_SPRITE);
 						else if (aChild->m_name == "pray_ability")
-							m_prayAbilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
+							m_prayAbilityId = aChild->GetId(DataType::ID_ABILITY);
 						else if (aChild->m_name == "opposition")
-							m_oppositionPantheonId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PANTHEON, aChild->GetIdentifier());
+							m_oppositionPantheonId = aChild->GetId(DataType::ID_PANTHEON);
 						else if(aChild->m_name == "notification_string")
 							m_notificationStrings[SourceToNotificationString(aChild)] = aChild->GetString();
 						else if (aChild->m_name == "player_levels")

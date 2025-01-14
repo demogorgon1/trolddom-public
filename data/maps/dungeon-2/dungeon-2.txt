@@ -6,7 +6,7 @@ map_portal .exit:
 {
 	animation: !DEFAULT_PORTAL_ANIMATION{}
 	map: open_world
-	spawn: dungeon_2_exit
+	# spawn: dungeon_2_exit
 }
 
 map_entity_spawn .goblin_melee:

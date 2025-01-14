@@ -28,3 +28,4 @@ entity thalvaron_melinda_riddle: !NPC
 	_not_pushable: true	
 }
 
+ 

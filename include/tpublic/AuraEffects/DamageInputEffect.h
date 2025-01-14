@@ -179,7 +179,7 @@ namespace tpublic
 					}
 					else if(aChild->m_name == "combat_log_ability")
 					{
-						m_combatLogAbilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
+						m_combatLogAbilityId = aChild->GetId(DataType::ID_ABILITY);
 					}
 					else
 					{

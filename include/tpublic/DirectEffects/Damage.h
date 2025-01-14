@@ -28,7 +28,7 @@ namespace tpublic
 					const SourceNode*								aSource)
 				{
 					TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing ability modifier annotation.");
-					m_abilityModifierId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY_MODIFIER, aSource->m_annotation->GetIdentifier());
+					m_abilityModifierId = aSource->m_annotation->GetId(DataType::ID_ABILITY_MODIFIER);
 					m_percent = aSource->GetFloat();
 				}
 

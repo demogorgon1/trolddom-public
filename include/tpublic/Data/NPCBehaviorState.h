@@ -26,8 +26,8 @@ namespace tpublic
 					const SourceNode*	aSource)
 				{
 					TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing route annotation.");
-					m_routeId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ROUTE, aSource->m_annotation->GetIdentifier());
-					m_npcBehaviorStateId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_NPC_BEHAVIOR_STATE, aSource->GetIdentifier());
+					m_routeId = aSource->m_annotation->GetId(DataType::ID_ROUTE);
+					m_npcBehaviorStateId = aSource->GetId(DataType::ID_NPC_BEHAVIOR_STATE);
 				}
 
 				void

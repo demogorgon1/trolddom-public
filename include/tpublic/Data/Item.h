@@ -176,15 +176,15 @@ namespace tpublic
 						}
 						else if (aChild->m_name == "use_ability")
 						{
-							m_useAbilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
+							m_useAbilityId = aChild->GetId(DataType::ID_ABILITY);
 						}
 						else if (aChild->m_name == "icon")
 						{
-							m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
+							m_iconSpriteId = aChild->GetId(DataType::ID_SPRITE);
 						}
 						else if (aChild->m_name == "quest")
 						{
-							m_questId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_QUEST, aChild->GetIdentifier());
+							m_questId = aChild->GetId(DataType::ID_QUEST);
 						}
 						else if (aChild->m_name == "rarity")
 						{

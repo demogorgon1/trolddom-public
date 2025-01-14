@@ -112,7 +112,7 @@ namespace tpublic
 
 					std::unique_ptr<_T> t = std::make_unique<_T>();
 					t->m_name = aName;
-					t->m_id = aPersistentIdTable->GetId(_T::DATA_TYPE, aName);
+					t->m_id = aPersistentIdTable->GetId({}, _T::DATA_TYPE, aName, true);
 
 					if (t->m_id > m_maxId)
 						m_maxId = t->m_id;

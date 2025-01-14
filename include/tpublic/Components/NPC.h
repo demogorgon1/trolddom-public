@@ -73,7 +73,7 @@ namespace tpublic
 						const SourceNode* aChild)
 					{
 						if (aChild->m_name == "use")
-							m_useAbilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
+							m_useAbilityId = aChild->GetId(DataType::ID_ABILITY);
 						else if (aChild->m_name == "evade")
 							m_evade = aChild->GetBool();
 						else
@@ -127,7 +127,7 @@ namespace tpublic
 						const SourceNode* aChild)
 					{
 						if(aChild->m_name == "id")
-							m_abilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
+							m_abilityId = aChild->GetId(DataType::ID_ABILITY);
 						else if(aChild->m_name == "use_probability")
 							m_useProbability = aChild->GetProbability();
 						else if (aChild->m_name == "target" && aChild->m_type == SourceNode::TYPE_ARRAY)
@@ -225,11 +225,11 @@ namespace tpublic
 						}
 						else if(aChild->m_name == "trigger_ability")
 						{
-							m_triggerAbilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
+							m_triggerAbilityId = aChild->GetId(DataType::ID_ABILITY);
 						}
 						else if (aChild->m_name == "on_enter_ability")
 						{
-							m_onEnterAbilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
+							m_onEnterAbilityId = aChild->GetId(DataType::ID_ABILITY);
 						}
 						else
 						{

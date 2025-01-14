@@ -40,7 +40,7 @@ namespace tpublic
 						else if (aChild->m_name == "title")
 							m_title = aChild->GetString();
 						else if (aChild->m_name == "pantheon")
-							m_pantheonId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PANTHEON, aChild->GetIdentifier());
+							m_pantheonId = aChild->GetId(DataType::ID_PANTHEON);
 						else if(aChild->m_name == "blessing_auras")
 							aChild->GetIdArray(DataType::ID_AURA, m_blessingAuraIds);
 						else

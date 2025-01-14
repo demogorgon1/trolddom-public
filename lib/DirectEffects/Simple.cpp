@@ -31,7 +31,7 @@ namespace tpublic::DirectEffects
 			else
 			{
 				TP_VERIFY(info->m_paramType != DataType::INVALID_ID, aSource->m_debugInfo, "Invalid value.");
-				m_param = aSource->m_sourceContext->m_persistentIdTable->GetId(info->m_paramType, aSource->GetIdentifier());
+				m_param = aSource->GetId(info->m_paramType);
 			}
 			break;
 

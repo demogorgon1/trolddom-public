@@ -25,9 +25,9 @@ namespace tpublic
 				else if (aChild->m_name == "misc")
 					m_misc.FromSource(aChild);
 				else if (aChild->m_name == "consumable")
-					m_consumableSoundId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SOUND, aChild->GetIdentifier());
+					m_consumableSoundId = aChild->GetId(DataType::ID_SOUND);
 				else if (aChild->m_name == "level_up")
-					m_levelUpSoundId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SOUND, aChild->GetIdentifier());
+					m_levelUpSoundId = aChild->GetId(DataType::ID_SOUND);
 				else
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 			});

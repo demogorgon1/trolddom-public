@@ -97,7 +97,7 @@ namespace tpublic
 						else if (aChild->m_name == "reward_all_items")
 							aChild->GetIdArray(DataType::ID_ITEM, m_rewardAllItems);
 						else if (aChild->m_name == "next_quest")
-							m_nextQuestId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_QUEST, aChild->GetIdentifier());
+							m_nextQuestId = aChild->GetId(DataType::ID_QUEST);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}

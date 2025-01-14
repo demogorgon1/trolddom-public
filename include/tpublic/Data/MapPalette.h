@@ -101,22 +101,22 @@ namespace tpublic
 						if (aChild->m_tag == "tile")
 						{
 							entry.m_type = ENTRY_TYPE_TILE;
-							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->m_name.c_str());
+							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(aChild->m_debugInfo, DataType::ID_SPRITE, aChild->m_name.c_str());
 						}
 						else if (aChild->m_tag == "entity_spawn")
 						{
 							entry.m_type = ENTRY_TYPE_ENTITY_SPAWN;
-							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aChild->m_name.c_str());
+							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(aChild->m_debugInfo, DataType::ID_MAP_ENTITY_SPAWN, aChild->m_name.c_str());
 						}
 						else if (aChild->m_tag == "player_spawn")
 						{
 							entry.m_type = ENTRY_TYPE_PLAYER_SPAWN;
-							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_PLAYER_SPAWN, aChild->m_name.c_str());
+							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(aChild->m_debugInfo, DataType::ID_MAP_PLAYER_SPAWN, aChild->m_name.c_str());
 						}
 						else if (aChild->m_tag == "portal")
 						{
 							entry.m_type = ENTRY_TYPE_PORTAL;
-							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_PORTAL, aChild->m_name.c_str());
+							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(aChild->m_debugInfo, DataType::ID_MAP_PORTAL, aChild->m_name.c_str());
 						}
 						else if (aChild->m_name == "level" && aChild->m_annotation)
 						{
@@ -126,27 +126,27 @@ namespace tpublic
 						else if (aChild->m_tag == "zone")
 						{
 							entry.m_type = ENTRY_TYPE_ZONE;
-							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ZONE, aChild->m_name.c_str());
+							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(aChild->m_debugInfo, DataType::ID_ZONE, aChild->m_name.c_str());
 						}
 						else if (aChild->m_tag == "sub_zone")
 						{
 							entry.m_type = ENTRY_TYPE_SUB_ZONE;
-							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ZONE, aChild->m_name.c_str());
+							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(aChild->m_debugInfo, DataType::ID_ZONE, aChild->m_name.c_str());
 						}
 						else if (aChild->m_tag == "wall")
 						{
 							entry.m_type = ENTRY_TYPE_WALL;
-							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_WALL, aChild->m_name.c_str());
+							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(aChild->m_debugInfo, DataType::ID_WALL, aChild->m_name.c_str());
 						}
 						else if (aChild->m_tag == "route")
 						{
 							entry.m_type = ENTRY_TYPE_ROUTE;
-							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ROUTE, aChild->m_name.c_str());
+							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(aChild->m_debugInfo, DataType::ID_ROUTE, aChild->m_name.c_str());
 						}
 						else if (aChild->m_tag == "doodad")
 						{
 							entry.m_type = ENTRY_TYPE_DOODAD;
-							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_DOODAD, aChild->m_name.c_str());
+							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(aChild->m_debugInfo, DataType::ID_DOODAD, aChild->m_name.c_str());
 						}
 						else if (aChild->m_name == "flags")
 						{
@@ -157,7 +157,7 @@ namespace tpublic
 						else if (aChild->m_tag == "cliff")
 						{
 							entry.m_type = ENTRY_TYPE_CLIFF;
-							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_CLIFF, aChild->m_name.c_str());
+							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(aChild->m_debugInfo, DataType::ID_MAP_CLIFF, aChild->m_name.c_str());
 						}
 						else
 						{

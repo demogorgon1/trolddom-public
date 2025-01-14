@@ -142,7 +142,7 @@ namespace tpublic
 				return (uint32_t)flags;
 			}
 
-			return aSource->m_sourceContext->m_persistentIdTable->GetId(GetDataType(aType), aSource->GetIdentifier());
+			return aSource->GetId(GetDataType(aType));
 		}
 
 		Requirement()

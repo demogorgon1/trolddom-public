@@ -41,7 +41,7 @@ namespace tpublic
 		{
 			TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing target annotation.");
 			m_target = SourceToTarget(aSource->m_annotation.get());
-			m_abilityId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aSource->GetIdentifier());
+			m_abilityId = aSource->GetId(DataType::ID_ABILITY);
 		}
 
 		void

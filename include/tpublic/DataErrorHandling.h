@@ -9,7 +9,7 @@ namespace tpublic
 		struct DebugInfo
 		{
 			std::string					m_file;
-			uint32_t					m_line;
+			uint32_t					m_line = 0;
 		};
 
 		typedef std::function<void(const char*)> ErrorCallback;

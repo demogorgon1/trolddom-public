@@ -56,7 +56,7 @@ namespace tpublic
 							TP_VERIFY(false, aNode->m_debugInfo, "'%s' is not a valid item.", aNode->m_name.c_str());
 						}
 
-						m_id = aNode->m_sourceContext->m_persistentIdTable->GetId(m_dataType, aNode->GetIdentifier());
+						m_id = aNode->GetId(m_dataType);
 					}
 
 					void
@@ -128,7 +128,7 @@ namespace tpublic
 				FromSource(
 					const SourceNode*	aNode)
 				{
-					m_entityId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENTITY, aNode->m_name.c_str());
+					m_entityId = aNode->m_sourceContext->m_persistentIdTable->GetId(aNode->m_debugInfo, DataType::ID_ENTITY, aNode->m_name.c_str());
 
 					aNode->GetObject()->ForEachChild([&](
 						const SourceNode* aChild)
