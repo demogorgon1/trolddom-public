@@ -1,0 +1,60 @@
+dialogue_screen .ria_tyson_dialogue_2:
+{
+	text: 
+	[	
+		"Mayor Riddle? I didn't vote for him! I don't even know anyone who voted for him. What has he ever done for anyone? That whole Riddle family is a bunch of corrupt bastards. Lining their pockets with cash while the poor go to bed hungry.\n\n"
+		"Look, I don't want any trouble. Here, take this, it's all I have. Please leave me alone."
+	]		
+	
+	options:
+	[
+		{ text: "It's okay, just keep it." } 
+		{ script: npc_trigger text: "Hand it over." } 
+	]
+}
+
+dialogue_screen .ria_tyson_dialogue:
+{
+	text: 
+	[	
+		"Hello."
+	]		
+	
+	options:
+	[
+		{ 
+			goto: .ria_tyson_dialogue_2 
+			text: "I'm here on behalf of Mayor Riddle. You need to pay your taxes." 
+			requirement self<must_have_active_quest>: .mirehaven_mayor_0 
+			requirement self<must_not_have_completed_quest>: .mirehaven_mayor_0 
+			requirement self<must_not_have_item>: .mirehaven_mayor_0_quest_item 
+		} 
+	]
+}
+
+dialogue_root .ria_tyson_dialogue:
+{
+	.ria_tyson_dialogue: { }
+}
+
+entity thalvaron_ria_tyson: !NPC
+{
+	_string: "Ria Tyson"
+	_dialogue_root: .ria_tyson_dialogue	
+	_sprite: woman_10
+	_sprite_dead: woman_10_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_scripts: [ npc_trigger ]
+	_default_trigger_ability: .ria_tyson
+}
+
+ability .ria_tyson:
+{
+	flags: [ always_in_range always_in_line_of_sight produce_items_target ]	
+	produce_items: { .mirehaven_mayor_0_quest_item: 1 }
+}
+

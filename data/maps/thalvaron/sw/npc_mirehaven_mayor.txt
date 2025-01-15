@@ -7,6 +7,9 @@ dialogue_screen .mirehaven_mayor_dialogue:
 	
 	options:
 	[
+		{ quest: .mirehaven_mayor_0 }
+		{ quest<offer_only>: .mirehaven_mayor_1 }
+		{ quest: .mirehaven_mayor_2 }
 	]
 }
 
@@ -29,3 +32,172 @@ entity thalvaron_mirehaven_mayor: !NPC
 	_not_pushable: true	
 }
 
+############################################################
+# Quest 1
+
+item .mirehaven_mayor_0_quest_item:
+{
+	icon: icon_brown_bag
+	item_level: 13
+	flags: [ unique not_sellable ]
+	string: "Ria Tyson's Taxes"
+	flavor: "Not much."
+}
+
+objective .mirehaven_mayor_0:
+{
+	string: "Ria Tyson's Taxes"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .mirehaven_mayor_0_quest_item count: 1 }
+}
+
+quest .mirehaven_mayor_0:
+{
+	string: "Collecting the Taxes"
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"Hmm. You look like you've always wanted to become a government bureaucrat? Well, you're in luck! We need some help around here.\n\n"
+		"Certain members of the local community have been dragging their in regards to paying their taxes on time. A woman named Ria Tyson lives in a shack just north of this town. Go persuade her to pay up."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"."
+	]
+
+	level: 13
+	reward_cash_multiplier: 0.4
+	reward_xp_multiplier: 0.4
+	objectives: [ .mirehaven_mayor_0 ]
+}
+
+############################################################
+# Quest 2
+
+quest .mirehaven_mayor_1:
+{
+	string: "Farmers Can Be Difficult"
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"."
+	]
+
+	level: 14
+	reward_cash_multiplier: 0.2
+	reward_xp_multiplier: 0.2
+	prerequisites: [ .mirehaven_mayor_0 ]
+}
+
+############################################################
+# Quest 3
+
+loot_group .mirehaven_mayor_2_quest_item: {}
+
+item .mirehaven_mayor_2_quest_item:
+{
+	icon: icon_green_bag
+	item_level: 14
+	loot_groups: [ .mirehaven_mayor_2_quest_item ]
+	flags: [ unique not_sellable ]
+	string: "Mongo's Treasure"
+	flavor: "It's full of gold teeth."
+}
+
+loot_table .mirehaven_mayor_2_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .mirehaven_mayor_2_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_mirehaven_mayor_2_quest_item:
+{
+	systems: [ openable ]
+
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ chest_2 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .mirehaven_mayor_2_quest_item
+			verb: open
+			range: 1 
+			despawn: true 			
+			level: 14
+			required_quest: .mirehaven_mayor_2
+		}		
+	}
+}
+
+objective .mirehaven_mayor_2:
+{
+	string: "Mongo's Treasure"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .mirehaven_mayor_2_quest_item count: 1 }
+}
+
+quest .mirehaven_mayor_2:
+{
+	string: "Ogre Due Taxes"
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"."
+	]
+
+	objectives: [ .mirehaven_mayor_2 ]
+	level: 14
+	prerequisites: [ .mirehaven_mayor_1 ]
+	
+	# FIXME: rewards
+}

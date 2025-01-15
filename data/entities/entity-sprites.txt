@@ -463,12 +463,18 @@ sprites:
 	sprite man_51: { dead: man_51_dead }
 	sprite crocodile_1_submerged: { }
 	sprite crocodile_2_submerged: { }
+	sprite ogre_1: { dead: ogre_1_dead }
+	sprite woman_19: { dead: woman_19_dead }
+	sprite man_52: { dead: man_52_dead }
 
 	cursor: { position: [ 0 400 ] }
 	sprite dwarf_2_dead: { }
 	sprite man_51_dead: { }
 	skip: { }
 	skip: { }
+	sprite ogre_1_dead: { }
+	sprite woman_19_dead: { }
+	sprite man_52_dead: { }
 
 }
 

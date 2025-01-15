@@ -1,0 +1,30 @@
+dialogue_screen .frederik_tyson_dialogue:
+{
+	text: 
+	[	
+		"Hello."
+	]		
+	
+	options:
+	[
+	]
+}
+
+dialogue_root .frederik_tyson_dialogue:
+{
+	.frederik_tyson_dialogue: { }
+}
+
+entity thalvaron_frederik_tyson: !NPC
+{
+	_string: "Frederik Tyson"
+	_dialogue_root: .frederik_tyson_dialogue	
+	_sprite: man_52
+	_sprite_dead: man_52_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

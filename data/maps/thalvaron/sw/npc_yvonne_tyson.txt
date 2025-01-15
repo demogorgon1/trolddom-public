@@ -1,0 +1,30 @@
+dialogue_screen .yvonne_tyson_dialogue:
+{
+	text: 
+	[	
+		"Hello."
+	]		
+	
+	options:
+	[
+	]
+}
+
+dialogue_root .yvonne_tyson_dialogue:
+{
+	.yvonne_tyson_dialogue: { }
+}
+
+entity thalvaron_yvonne_tyson: !NPC
+{
+	_string: "Yvonne Tyson"
+	_dialogue_root: .yvonne_tyson_dialogue	
+	_sprite: woman_19
+	_sprite_dead: woman_19_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

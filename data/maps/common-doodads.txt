@@ -220,6 +220,7 @@ doodad wall_sign_generic: { sprites: [ doodad_wall_sign_generic_1 ] map_palette<
 doodad barrel: { sprites: [ barrel_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad cage: { sprites: [ cage_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad rowboat: { sprites: [ doodad_rowboat_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad sign_generic: { sprites: [ sign_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] } 
 
 
 

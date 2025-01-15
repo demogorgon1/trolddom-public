@@ -52,7 +52,8 @@ namespace tpublic
 			TYPE_MUST_BE_DISCIPLE,
 			TYPE_MUST_HAVE_MORE_RAGE_THAN,
 			TYPE_MUST_NOT_BE_READY_TO_TURN_IN_QUEST,
-			TYPE_MUST_NOT_BE_TYPE
+			TYPE_MUST_NOT_BE_TYPE,
+			TYPE_MUST_NOT_HAVE_ITEM
 		};
 
 		static DataType::Id
@@ -81,6 +82,7 @@ namespace tpublic
 
 			case TYPE_MUST_NOT_HAVE_ITEM_EQUIPPED:
 			case TYPE_MUST_HAVE_ITEM_EQUIPPED:
+			case TYPE_MUST_NOT_HAVE_ITEM:
 			case TYPE_MUST_HAVE_ITEM:
 				return DataType::ID_ITEM;
 
@@ -229,6 +231,8 @@ namespace tpublic
 				m_type = TYPE_MUST_BE_DISCIPLE;
 			else if(typeString == "must_not_be_ready_to_turn_in_quest")
 				m_type = TYPE_MUST_NOT_BE_READY_TO_TURN_IN_QUEST;
+			else if(typeString == "must_not_have_item")
+				m_type = TYPE_MUST_NOT_HAVE_ITEM;
 			else
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid type.", aSource->m_annotation->GetIdentifier());
 

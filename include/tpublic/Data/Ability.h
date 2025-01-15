@@ -63,7 +63,8 @@ namespace tpublic
 			{
 				EXTENDED_FLAG_MINION_SUMMON			= 0x00000001,
 				EXTENDED_FLAG_NO_DELAY				= 0x00000002,
-				EXTENDED_FLAG_CLASS_MINION_SUMMON	= 0x00000004
+				EXTENDED_FLAG_CLASS_MINION_SUMMON	= 0x00000004,
+				EXTENDED_FLAG_PRODUCE_ITEMS_TARGET	= 0x00000008
 			};
 
 			static inline Resource::Id
@@ -155,6 +156,8 @@ namespace tpublic
 						*aOutExtendedFlags |= EXTENDED_FLAG_NO_DELAY;
 					else if (strcmp(identifier, "class_minion_summon") == 0 && aOutExtendedFlags != NULL)
 						*aOutExtendedFlags |= EXTENDED_FLAG_CLASS_MINION_SUMMON;
+					else if (strcmp(identifier, "produce_items_target") == 0 && aOutExtendedFlags != NULL)
+						*aOutExtendedFlags |= EXTENDED_FLAG_PRODUCE_ITEMS_TARGET;
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid ability flag.", identifier);
 				});
@@ -446,6 +449,7 @@ namespace tpublic
 			bool IsMinionSummon() const { return m_extendedFlags & EXTENDED_FLAG_MINION_SUMMON; }
 			bool IsNoDelay() const { return m_extendedFlags & EXTENDED_FLAG_NO_DELAY; }
 			bool IsClassMinionSummon() const { return m_extendedFlags & EXTENDED_FLAG_CLASS_MINION_SUMMON; }
+			bool IsProduceItemsTarget() const { return m_extendedFlags & EXTENDED_FLAG_PRODUCE_ITEMS_TARGET; }
 
 			bool 
 			IsUsableInState(

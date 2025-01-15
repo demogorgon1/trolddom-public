@@ -343,6 +343,7 @@ namespace tpublic
 				break;
 
 			case Requirement::TYPE_MUST_HAVE_ITEM:
+			case Requirement::TYPE_MUST_NOT_HAVE_ITEM:
 				{
 					if (!entity->IsPlayer())
 						return false;
@@ -366,7 +367,9 @@ namespace tpublic
 						hasItem = inventory->m_itemList.HasItems(aRequirement->m_id, 1);
 					}
 
-					if(!hasItem)
+					bool shouldHaveItem = aRequirement->m_type == Requirement::TYPE_MUST_HAVE_ITEM;
+
+					if(hasItem != shouldHaveItem)
 						return false;
 				}
 				break;
