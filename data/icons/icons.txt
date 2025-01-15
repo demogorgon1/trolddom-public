@@ -529,6 +529,9 @@ sprites:
 	sprite icon_sharp_tooth : { tags: [ icon ] }
 	sprite icon_mud_essence_1 : { tags: [ icon ] }	
 	sprite icon_seaweed : { tags: [ icon ] }	
+	sprite icon_severed_leg : { tags: [ icon ] }	
+	sprite icon_flower_6 : { tags: [ icon ] }
+	sprite icon_cat : { tags: [ icon ] }
 	
 }
 

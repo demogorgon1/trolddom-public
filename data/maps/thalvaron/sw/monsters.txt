@@ -29,7 +29,7 @@ loot_table .default_beast:
 }
 
 ##########################################################################################
-# North Marshlands monsters
+# Marshlands monsters
 
 map_entity_spawn thalvaron_mud_slinger: 
 { 
@@ -43,7 +43,14 @@ map_entity_spawn thalvaron_mud_slinger_2:
 
 map_entity_spawn thalvaron_crocodile: 
 { 
-	entity thalvaron_crocodile: { init_state: default } 
+	entity thalvaron_crocodile: { init_state: default level: 12 } 
+	entity thalvaron_crocodile_2: { init_state: default level: 13 } 
+	entity thalvaron_crocodile_3: { init_state: default level: 14 } 
+}
+
+map_entity_spawn thalvaron_crocodile_salt: 
+{ 
+	entity thalvaron_crocodile_salt: { init_state: default } 
 }
 
 map_entity_spawn thalvaron_swamp_monster: 
@@ -56,6 +63,29 @@ map_entity_spawn thalvaron_neutral_crab:
 {
 	entity thalvaron_neutral_crab: { init_state: default level: 13 } 
 	entity thalvaron_neutral_crab_2: { init_state: default level: 14 } 
+}
+
+map_entity_spawn thalvaron_lizard_ambusher_1:
+{
+	spawn_timer: { only_when_triggered: true }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_lizard_ambusher_2:
+{
+	spawn_timer: { only_when_triggered: true }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_lizard_ambusher_3:
+{
+	spawn_timer: { only_when_triggered: true }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_swamp_ooze:
+{
+	entity thalvaron_swamp_ooze: { init_state: default } 
 }
 
 # Neutral crabs
@@ -113,15 +143,33 @@ map_entity_spawn thalvaron_neutral_crab:
 		]	
 	}
 	
-	${
-		_level: 12
+	loot_table .crocodile_salt: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { weight: 1 }
+				possibility: { weight: 1 loot_group: .swampman_1_quest_item requirement self<must_have_active_quest>: { id: .swampman_1 } } 
+			}
+
+			{ 
+				possibility: { loot_group: .gob_fulbro_1_quest_item requirement self<must_have_active_quest>: { id: .gob_fulbro_1 } } 
+			}
+
+			!WORLD_DROPS {}
+		]	
+	}	
+	
+	${		
 		_faction: monsters
-		_creature_type: beast		
-		_loot_table: .crocodile
+		_creature_type: beast				
 		_can_move_on_all_non_view_blocking_tiles: true
 	}
 
-	entity thalvaron_crocodile: !NPC { _string: "Marshlands Crocodile" _sprite: crocodile_2 _sprite_dead: crocodile_2_dead _in_water_sprite: crocodile_2_submerged _default_behavior_state: .passive }
+	entity thalvaron_crocodile: !NPC { _level: 12 _string: "Marshlands Crocodile" _sprite: crocodile_2 _sprite_dead: crocodile_2_dead _in_water_sprite: crocodile_2_submerged _default_behavior_state: .passive _loot_table: .crocodile }
+	entity thalvaron_crocodile_2: !NPC { _level: 13 _string: "Swamp Crocodile" _sprite: crocodile_2 _sprite_dead: crocodile_2_dead _in_water_sprite: crocodile_2_submerged _default_behavior_state: .passive _loot_table: .crocodile }
+	entity thalvaron_crocodile_3: !NPC { _level: 14 _string: "Ravenous Crocodile" _sprite: crocodile_2 _sprite_dead: crocodile_2_dead _in_water_sprite: crocodile_2_submerged _default_behavior_state: .passive _loot_table: .crocodile }
+	entity thalvaron_crocodile_salt: !NPC { _level: 13 _string: "Salty" _sprite: crocodile_1 _sprite_dead: crocodile_1_dead _in_water_sprite: crocodile_1_submerged _default_behavior_state: .passive _loot_table: .crocodile_salt }
 }
 
 # Swamp monsters
@@ -136,6 +184,31 @@ map_entity_spawn thalvaron_neutral_crab:
 
 	entity thalvaron_swamp_lurker: !NPC { _string: "Swamp Lurker" _sprite: swamp_monster_2 _sprite_dead: swamp_monster_2_dead }
 	entity thalvaron_swamp_dweller: !NPC { _string: "Swamp Dweller" _sprite: swamp_monster_3 _sprite_dead: swamp_monster_3_dead }
+}
+
+# Lizard ambushers in mine
+{
+	${
+		_level: 13
+		_faction: monsters
+		_creature_type: beast
+		_loot_table: .default_beast
+	}
+
+	entity thalvaron_lizard_ambusher: !NPC { _string: "Cave Lizard" _sprite: lizard_1 _sprite_dead: lizard_1_dead }
+}
+
+# Oozes for farm quest
+{
+	${
+		_level: 14
+		_faction: monsters
+		_creature_type: elemental
+		_loot_table: .default_beast
+		_default_behavior_state: .passive
+	}
+
+	entity thalvaron_swamp_ooze: !NPC { _string: "Putrid Ooze" _sprite: ooze_1 _sprite_dead: ooze_2_dead }
 }
 
 ##########################################################################################
@@ -293,4 +366,31 @@ map_entity_spawn thalvaron_mongo:
 	}
 
 	entity thalvaron_mongo: !NPC { _string: "Mongo" _sprite: ogre_1 _sprite_dead: ogre_1_dead }
+}
+
+##########################################################################################
+# Bandits
+
+map_entity_spawn thalvaron_marsh_bandit: 
+{ 
+	entity thalvaron_marsh_bandit_a: { init_state: default } 
+	entity thalvaron_marsh_bandit_b: { init_state: default } 
+	entity thalvaron_marsh_bandit_c: { init_state: default } 
+	entity thalvaron_marsh_bandit_d: { init_state: default } 
+}
+
+# Bandits
+{
+	${
+		_level: 13
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .passive
+		_loot_table: .default_humanoid
+	}
+
+	entity thalvaron_marsh_bandit_a: !NPC { _string: "Marsh Bandit" _sprite: rebel_1 _sprite_dead: rebel_1_dead }
+	entity thalvaron_marsh_bandit_b: !NPC { _string: "Marsh Bandit" _sprite: rebel_2 _sprite_dead: rebel_2_dead }
+	entity thalvaron_marsh_bandit_c: !NPC { _string: "Marsh Bandit" _sprite: rebel_3 _sprite_dead: rebel_3_dead }
+	entity thalvaron_marsh_bandit_d: !NPC { _string: "Marsh Bandit" _sprite: rebel_4 _sprite_dead: rebel_4_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
 }

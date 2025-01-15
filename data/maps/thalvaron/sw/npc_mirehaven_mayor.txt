@@ -59,7 +59,7 @@ quest .mirehaven_mayor_0:
 
 	text:
 	[
-		"."
+		"Collect tax from the woman who lives just north of Mirehaven and return to the mayor."
 	]
 	
 	description: 
@@ -75,7 +75,7 @@ quest .mirehaven_mayor_0:
 	
 	completion:
 	[
-		"."
+		"Was that all? Did you shake her down good?"
 	]
 
 	level: 13
@@ -93,11 +93,13 @@ quest .mirehaven_mayor_1:
 
 	text:
 	[
-		"."
+		"Collect tax from the farm to the south of Mirehaven."
 	]
 	
 	description: 
 	[
+		"Those Tysons are all trouble. Ria Tyson's brother Frederik owns a farm to the south, and like her, he's not very good at paying his taxes. It might be a bit more difficult to get him to cough up, but I trust you can do it.\n\n"
+		"What are you waiting for? Taxes don't collect themselves."
 	]
 
 	progress:
@@ -107,13 +109,14 @@ quest .mirehaven_mayor_1:
 	
 	completion:
 	[
-		"."
+		"Taxes? I'm not so sure about that..."
 	]
 
 	level: 14
 	reward_cash_multiplier: 0.2
 	reward_xp_multiplier: 0.2
 	prerequisites: [ .mirehaven_mayor_0 ]
+	next_quest: .frederik_tyson_1
 }
 
 ############################################################

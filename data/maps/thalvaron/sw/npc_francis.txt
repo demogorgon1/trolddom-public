@@ -7,6 +7,9 @@ dialogue_screen .francis_dialogue:
 	
 	options:
 	[
+		{ quest: .francis_1 }
+		{ quest<offer_only>: .francis_2 }
+		{ quest<completion_only>: .buck_4 }
 	]
 }
 
@@ -17,7 +20,7 @@ dialogue_root .francis_dialogue:
 
 entity thalvaron_francis: !NPC
 {
-	_string: "Francis \"Binge\" Thomgard"
+	_string: "Francis \"Binge\" Riddle"
 	_dialogue_root: .francis_dialogue	
 	_sprite: man_47
 	_sprite_dead: man_47_dead
@@ -28,3 +31,126 @@ entity thalvaron_francis: !NPC
 	_not_pushable: true	
 }
 
+############################################################
+# Quest 1
+
+objective .francis_1:
+{
+	string: "Find Prospector"
+	
+	maps: [ thalvaron ]
+
+	manual_boolean: { }	
+}
+
+entity thalvaron_francis_1_quest_item:
+{
+	string: "Dead Prospector"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ man_22_dead ] z_offset: -3 } ] }		
+		openable: 
+		{ 
+			verb: inspect
+			range: 1 
+			required_quest: .francis_1			
+			complete_manual_objective: .francis_1
+			trigger_ability: .francis_1
+		}		
+	}
+}
+
+ability .francis_1:
+{
+	direct_effect spawn_entity:
+	{
+		map_entity_spawn: thalvaron_lizard_ambusher_1
+		entity: thalvaron_lizard_ambusher
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+	}
+
+	direct_effect spawn_entity:
+	{
+		map_entity_spawn: thalvaron_lizard_ambusher_2
+		entity: thalvaron_lizard_ambusher
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+	}
+
+	direct_effect spawn_entity:
+	{
+		map_entity_spawn: thalvaron_lizard_ambusher_3
+		entity: thalvaron_lizard_ambusher
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+	}
+}
+
+quest .francis_1:
+{
+	string: "Missing Prospector"
+
+	text:
+	[
+		"Go east towards the mountains and look for Francis's prospector in the mines."
+	]
+	
+	description: 
+	[
+		"I recently bought the rights to and old mine out east. My master prospector went there to check it out, but he never returned. Can you go look for him?\n\n"
+		"Be careful, it's close to where the ogre lives. You should stay clear of that guy."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"That's no good. Cave lizards?"
+	]
+
+	level: 13
+	objectives: [ .francis_1 ]
+	next_quest: .francis_2
+}
+
+############################################################
+# Quest 2
+
+quest .francis_2:
+{
+	string: "Lizard Repellent"
+
+	text:
+	[
+		"Find Buck in his camp north of Mirehaven."
+	]
+	
+	description: 
+	[
+		"Bloody lizards... Now I need to hire a new prospector!\n\n"
+		"How do I deal with these lizards? Could be there is an alchemical solution to the conundrum. Can you go ask Buck if he know of some kind of lizard repellent? He lives in his little camp up north in the swamp and is good"
+		"with these kinds of things. But, uhm, please don't say that you're asking for me."
+	]
+
+	progress:
+	[
+		"Anything?"
+	]
+	
+	completion:
+	[
+		"Well, well, well. Lizard repellent? I have something that might work..."
+	]
+
+	level: 13
+	reward_cash_multiplier: 0.2
+	reward_xp_multiplier: 0.2
+	prerequisites: [ .francis_1 ]
+	next_quest: .buck_3
+}

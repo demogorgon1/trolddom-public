@@ -467,6 +467,7 @@ namespace tpublic::Systems
 										moveRequest.AddToPriorityList(direction);
 										moveRequest.m_type = IEventQueue::EventQueueMoveRequest::TYPE_SIMPLE;
 										moveRequest.m_entityInstanceId = aEntityInstanceId;
+										moveRequest.m_canMoveOnAllNonViewBlockingTiles = npc->m_canMoveOnAllNonViewBlockingTiles;
 
 										aContext->m_eventQueue->EventQueueMove(moveRequest);
 
@@ -540,6 +541,7 @@ namespace tpublic::Systems
 								moveRequest.AddToPriorityList(direction);
 								moveRequest.m_type = IEventQueue::EventQueueMoveRequest::TYPE_SIMPLE;
 								moveRequest.m_entityInstanceId = aEntityInstanceId;
+								moveRequest.m_canMoveOnAllNonViewBlockingTiles = npc->m_canMoveOnAllNonViewBlockingTiles;
 
 								aContext->m_eventQueue->EventQueueMove(moveRequest);
 							}

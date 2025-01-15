@@ -9,6 +9,9 @@ dialogue_screen .buck_dialogue:
 	[
 		{ quest: .buck_1 }
 		{ quest: .buck_2 }
+		{ quest<completion_only>: .francis_2 }
+		{ quest: .buck_3 }
+		{ quest<offer_only>: .buck_4 }
 	]
 }
 
@@ -199,6 +202,132 @@ quest .buck_2:
 
 	objectives: [ .buck_2 ]
 	level: 13
+	
+	# FIXME: rewards
+}
+
+############################################################
+# Quest 3
+
+loot_group .buck_3_quest_item: {}
+
+item .buck_3_quest_item:
+{
+	icon: icon_flower_6
+	item_level: 13
+	loot_groups: [ .buck_3_quest_item ]
+	flags: [ not_sellable unique ]
+	string: "Swamp Rose"
+}
+
+loot_table .buck_3_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .buck_3_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_buck_3_quest_item:
+{
+	string: "Swamp Rose"
+	systems: [ openable ]
+
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ flower_2 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .buck_3_quest_item
+			verb: pick_up
+			range: 1 
+			despawn: true 			
+			level: 13
+			required_quest: .buck_3
+		}		
+	}
+}
+
+objective .buck_3:
+{
+	string: "Swamp Rose"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .buck_3_quest_item count: 1 }
+}
+
+quest .buck_3:
+{
+	string: "Lizard Repellent"
+
+	text:
+	[
+		"Find a swamp rose and return it to buck."
+	]
+	
+	description: 
+	[
+		"There is a rare kind of flower that only grows here in the marshes. If you want to know its scientific name you'll have to ask some academic in the city, I just call it the swamp rose. It's blue and kinda hard to miss"
+		"if you're looking for it. For some reason lizards really hate the smell of that particular flower. If you can bring me just one of them I'll be able to make a small concoction."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"That will do just fine. Give it to me and I'll brew something for you."
+	]
+
+	objectives: [ .buck_3 ]
+	level: 13
+	reward_cash_multiplier: 0.2
+	reward_xp_multiplier: 0.2	
+	prerequisites: [ .francis_2 ]
+	next_quest: .buck_4
+}
+
+############################################################
+# Quest 4
+
+item .buck_4_quest_item:
+{
+	icon: icon_small_cyan_potion
+	item_level: 13
+	flags: [ not_sellable unique ]
+	string: "Concentrated Lizard Repellent"
+	flavor: "If you were a lizard you'd hate this."
+}
+
+quest .buck_4:
+{
+	string: "Lizard Repellent"
+
+	text:
+	[
+		"Return to Francis Riddle in Mirehaven with the lizard repellent."
+	]
+	
+	description: 
+	[
+		"I managed to make a whole bottle out of that one flower. Just put a drop or two in your hair and any lizard will stay clear of you."
+	]
+	
+	completion:
+	[
+		"Great. You say this will work against lizards? Okay, good job."
+	]
+
+	level: 13
+	prerequisites: [ .buck_3 ]
+	quest_items: [ .buck_4_quest_item ]
 	
 	# FIXME: rewards
 }

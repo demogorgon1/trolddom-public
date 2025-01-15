@@ -7,6 +7,8 @@ dialogue_screen .frederik_tyson_dialogue:
 	
 	options:
 	[
+		{ quest<completion_only>: .mirehaven_mayor_1 }
+		{ quest: .frederik_tyson_1 }
 	]
 }
 
@@ -28,3 +30,56 @@ entity thalvaron_frederik_tyson: !NPC
 	_not_pushable: true	
 }
 
+############################################################
+# Quest 1
+
+loot_group .frederik_tyson_1_quest_item: {}
+
+item .frederik_tyson_1_quest_item:
+{
+	icon: icon_cat
+	item_level: 14
+	loot_groups: [ .frederik_tyson_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Tyson's Lost Cat"
+	flavor: "*Purr*"
+}
+
+objective .frederik_tyson_1:
+{
+	string: "Tyson's Lost Cat"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .frederik_tyson_1_quest_item count: 1 }
+}
+
+quest .frederik_tyson_1:
+{
+	string: "Something For Something"
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"."
+	]
+
+	level: 14
+	prerequisites: [ .mirehaven_mayor_1 ]
+
+	# FIXME: rewards
+}

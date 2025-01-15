@@ -589,6 +589,7 @@ sprites:
 	sprite spider_eggs_1: { }
 	sprite flower_1: { }
 	sprite seaweed_1: { }
+	sprite flower_2: { }
 	
 }
 

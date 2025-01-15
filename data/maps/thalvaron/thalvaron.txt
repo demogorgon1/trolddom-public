@@ -257,6 +257,8 @@ map_entity_spawn thalvaron_frederik_tyson: { entity thalvaron_frederik_tyson: { 
 map_entity_spawn thalvaron_yvonne_tyson: { entity thalvaron_yvonne_tyson: { init_state: default } }
 map_entity_spawn thalvaron_mirehaven_mayor_2_quest_item: { entity thalvaron_mirehaven_mayor_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_ria_tyson: { entity thalvaron_ria_tyson: { init_state: default } }
+map_entity_spawn thalvaron_francis_1_quest_item: { entity thalvaron_francis_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_buck_3_quest_item: { entity thalvaron_buck_3_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 
 map_palette .stuff:
 {
@@ -484,7 +486,14 @@ map_palette .stuff:
 	entity_spawn thalvaron_frederik_tyson: [ 154 55 158 ]
 	entity_spawn thalvaron_mirehaven_mayor_2_quest_item: [ 38 169 88 ]
 	entity_spawn thalvaron_ria_tyson: [ 154 15 158 ]
-		
+	entity_spawn thalvaron_crocodile_salt: [ 154 155 158 ]	
+	entity_spawn thalvaron_marsh_bandit: [ 199 38 67 ]
+	entity_spawn thalvaron_lizard_ambusher_1: [ 193 38 67 ]
+	entity_spawn thalvaron_lizard_ambusher_2: [ 199 138 67 ]
+	entity_spawn thalvaron_lizard_ambusher_3: [ 199 39 167 ]
+	entity_spawn thalvaron_francis_1_quest_item: [ 29 134 222 ]
+	entity_spawn thalvaron_buck_3_quest_item: [ 123 44 145 ]
+	entity_spawn thalvaron_swamp_ooze: [ 12 45 133 ]
 }
 
 map_palette .levels:
@@ -600,6 +609,7 @@ map_palette .doodads:
 	doodad wall_sign_generic<"Royal Garden Tavern">: [ 97 73 111 ]	
 	doodad sign_generic<"Mongo's Swamp: Stay Out!">: [ 77 173 111 ]	
 	doodad sign_generic<"Danger!">: [ 177 173 111 ]	
+	doodad sign_generic<"Riddle Mining Co.">: [ 177 173 211 ]	
 }
 
 map_palette .cliffs:

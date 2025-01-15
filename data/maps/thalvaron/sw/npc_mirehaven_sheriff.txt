@@ -7,6 +7,7 @@ dialogue_screen .mirehaven_sheriff_dialogue:
 	
 	options:
 	[
+		{ quest: .mirehaven_sheriff_1 }
 	]
 }
 
@@ -26,5 +27,50 @@ entity thalvaron_mirehaven_sheriff: !NPC
 	_creature_type: humanoid
 	_loot_table: .npc
 	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .mirehaven_sheriff_1:
+{
+	string: "Marsh Bandits Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_marsh_bandit_a thalvaron_marsh_bandit_b thalvaron_marsh_bandit_c thalvaron_marsh_bandit_d ]
+		count: 6
+	}
+}
+
+quest .mirehaven_sheriff_1:
+{
+	string: "Bandits of the Marshes"
+
+	text:
+	[
+		"Find the bandit camp and kill the bandits."
+	]
+	
+	description: 
+	[
+		"It's not only weird swamp critters we have to deal with down here, no, we also have had some problems with bandits attacking people. They have a camp somewhere to the east of here. Can you go and teach them about law and order?"
+	]
+
+	progress:
+	[
+		"Any bandits left?"
+	]
+	
+	completion:
+	[
+		"Great! Here's a little something for you."
+	]
+
+	level: 13
+	objectives: [ .mirehaven_sheriff_1 ]
+	# FIXME rewards
 }
 
