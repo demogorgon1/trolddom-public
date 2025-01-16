@@ -349,6 +349,8 @@ namespace tpublic::Systems
 				npc->m_anchorPosition = position->m_position; // Remember this position, this is where we'll go back to if we evade
 
 				npc->m_targetEntity = threat->m_table.GetTop()->m_key;
+
+				npc->m_patrolResetAfterLeavingCombat = npc->m_npcBehaviorState != NULL && npc->m_npcBehaviorState->m_patrolResetAfterLeavingCombat;
 				npc->m_npcBehaviorState = NULL;
 				npc->m_moveCooldownUntilTick = 0;
 				npc->m_lastAttackTick = aContext->m_tick;
@@ -503,10 +505,22 @@ namespace tpublic::Systems
 															ability);
 													}
 
-													if(trigger->m_despawn)
-														returnValue = EntityState::ID_DESPAWNING;
-
 													npc->m_handledRouteTriggerIndices.insert(trigger->m_index);
+
+													if(trigger->m_despawn)
+													{
+														returnValue = EntityState::ID_DESPAWNING;
+													}
+													else if(trigger->m_reset)
+													{
+														npc->m_anchorPosition = npc->m_spawnPosition;
+														npc->m_npcBehaviorState = NULL;
+														npc->m_subRouteIndex = SIZE_MAX;
+														npc->m_effectiveRouteId = 0;
+														npc->m_handledRouteTriggerIndices.clear();
+
+														returnValue = EntityState::ID_EVADING;
+													}
 												}
 											}
 										}
@@ -514,7 +528,8 @@ namespace tpublic::Systems
 								}
 							}
 
-							npc->m_moveCooldownUntilTick = aContext->m_tick + npc->m_npcBehaviorState->m_patrolMoveIntervalTicks;
+							if(npc->m_npcBehaviorState != NULL)
+								npc->m_moveCooldownUntilTick = aContext->m_tick + npc->m_npcBehaviorState->m_patrolMoveIntervalTicks;
 						}
 						break;
 
@@ -663,6 +678,15 @@ namespace tpublic::Systems
 					tag->SetDirty();
 
 					position->m_lastMoveTick = aContext->m_tick;
+
+					if(npc->m_patrolResetAfterLeavingCombat)
+					{
+						npc->m_anchorPosition = npc->m_spawnPosition;
+						npc->m_npcBehaviorState = NULL;
+						npc->m_subRouteIndex = SIZE_MAX;
+						npc->m_effectiveRouteId = 0;
+						npc->m_handledRouteTriggerIndices.clear();
+					}
 
 					returnValue = EntityState::ID_EVADING;
 				}

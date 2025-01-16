@@ -200,11 +200,24 @@ map_entity_spawn thalvaron_swamp_ooze:
 
 # Oozes for farm quest
 {
+	loot_table .swamp_ooze: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { weight: 5 }
+				possibility: { weight: 1 loot_group: .frederik_tyson_1_quest_item requirement self<must_have_active_quest>: { id: .frederik_tyson_1 } } 
+			}
+			
+			!WORLD_DROPS {}
+		]	
+	}	
+
 	${
 		_level: 14
 		_faction: monsters
 		_creature_type: elemental
-		_loot_table: .default_beast
+		_loot_table: .swamp_ooze
 		_default_behavior_state: .passive
 	}
 
@@ -351,18 +364,31 @@ map_entity_spawn thalvaron_mongo:
 	entity thalvaron_mongo: { init_state: default } 
 }
 
-# Melee
+npc_behavior_state .mongo:
 {
+	behavior: patrolling
+	patrol_move_interval_ticks: 9
+	patrol_reset_after_leaving_combat: true
+}
 
+route thalvaron_mongo_patrol: 
+{ 
+	trigger<7>: { chat: { type: yell text: "Who's disturbing Mongo?" } }
+	trigger<20>: { chat: { type: yell text: "Just leave Mongo alone!" } }
+	trigger<max>: { reset: true }
+}
+
+{
 	${
 		_level: 18
 		_faction: monsters
 		_creature_type: humanoid
-		_default_behavior_state: .passive
+		_default_behavior_state: .mongo
 		_loot_table: .default_humanoid
-		_weapon_damage: 1.1
+		_weapon_damage: 1.2
 		_resource_health: 6
 		_elite: true
+		_in_combat_barks: [ { type: say text: "Leave Mongo alone in his swamp!" } ]
 	}
 
 	entity thalvaron_mongo: !NPC { _string: "Mongo" _sprite: ogre_1 _sprite_dead: ogre_1_dead }

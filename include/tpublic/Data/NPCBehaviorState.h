@@ -105,6 +105,10 @@ namespace tpublic
 						{
 							m_despawnIfLostPlayer = aChild->GetBool();
 						}
+						else if(aChild->m_name == "patrol_reset_after_leaving_combat")
+						{
+							m_patrolResetAfterLeavingCombat = aChild->GetBool();
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -126,6 +130,7 @@ namespace tpublic
 				aStream->WriteInt(m_combatEventPauseTicks);
 				aStream->WriteBool(m_despawnIfLostPlayer);
 				aStream->WriteInt(m_patrolMoveIntervalTicks);
+				aStream->WriteBool(m_patrolResetAfterLeavingCombat);
 			}
 
 			bool
@@ -148,6 +153,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadInt(m_patrolMoveIntervalTicks))
 					return false;
+				if(!aStream->ReadBool(m_patrolResetAfterLeavingCombat))
+					return false;
 				return true;
 			}
 
@@ -160,6 +167,7 @@ namespace tpublic
 			std::optional<OnRoute>	m_onRoute;
 			bool					m_despawnIfLostPlayer = false;
 			int32_t					m_patrolMoveIntervalTicks = 12;
+			bool					m_patrolResetAfterLeavingCombat = false;
 		};
 
 	}

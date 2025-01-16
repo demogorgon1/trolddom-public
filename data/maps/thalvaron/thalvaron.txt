@@ -259,6 +259,7 @@ map_entity_spawn thalvaron_mirehaven_mayor_2_quest_item: { entity thalvaron_mire
 map_entity_spawn thalvaron_ria_tyson: { entity thalvaron_ria_tyson: { init_state: default } }
 map_entity_spawn thalvaron_francis_1_quest_item: { entity thalvaron_francis_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_buck_3_quest_item: { entity thalvaron_buck_3_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_mirehaven_mayor_2_quest_item_2: { entity thalvaron_mirehaven_mayor_2_quest_item_2: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 
 map_palette .stuff:
 {
@@ -494,6 +495,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_francis_1_quest_item: [ 29 134 222 ]
 	entity_spawn thalvaron_buck_3_quest_item: [ 123 44 145 ]
 	entity_spawn thalvaron_swamp_ooze: [ 12 45 133 ]
+	entity_spawn thalvaron_mirehaven_mayor_2_quest_item_2: [ 88 77 144 ]
 }
 
 map_palette .levels:
@@ -567,6 +569,7 @@ map_palette .routes:
 	route thalvaron_default_patrol: [ 192 16 186 ]	
 	route thalvaron_cubert_galston_escort: [ 198 132 221 ]
 	route thalvaron_doctor_hulius_escort: [ 39 48 168 ]
+	route thalvaron_mongo_patrol: [ 39 148 168 ]
 }
 
 map_palette .doodads:

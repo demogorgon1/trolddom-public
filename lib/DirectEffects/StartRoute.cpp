@@ -68,44 +68,66 @@ namespace tpublic::DirectEffects
 		IEventQueue*					/*aEventQueue*/,
 		const IWorldView*				/*aWorldView*/) 
 	{				
-		if(aSource != NULL && aTarget != NULL && aTarget->IsPlayer())
+		if(aSource != NULL && aTarget != NULL)
 		{
-			Components::NPC* npc = aSource->GetComponent<Components::NPC>();
-			Components::Tag* tag = aSource->GetComponent<Components::Tag>();
-
-			if(npc != NULL && tag != NULL)
+			if(aTarget->IsPlayer())
 			{
-				if(!tag->m_playerTag.IsSet() && npc->m_routeId == 0)
+				// Escort quest
+				Components::NPC* npc = aSource->GetComponent<Components::NPC>();
+				Components::Tag* tag = aSource->GetComponent<Components::Tag>();
+
+				if (npc != NULL && tag != NULL)
 				{
-					Components::CombatPublic* targetCombatPublic = aTarget->GetComponent<Components::CombatPublic>();
-					Components::PlayerPublic* targetPlayerPublic = aTarget->GetComponent<Components::PlayerPublic>();
-					assert(targetCombatPublic != NULL && targetPlayerPublic != NULL);
+					if (!tag->m_playerTag.IsSet() && npc->m_routeId == 0)
+					{
+						Components::CombatPublic* targetCombatPublic = aTarget->GetComponent<Components::CombatPublic>();
+						Components::PlayerPublic* targetPlayerPublic = aTarget->GetComponent<Components::PlayerPublic>();
+						assert(targetCombatPublic != NULL && targetPlayerPublic != NULL);
 
-					// Need to tag the NPC so the player/group can get credit if required
-					PlayerTag playerTag;
-					if (targetCombatPublic->m_combatGroupId != 0)
-						playerTag.SetGroupId(targetCombatPublic->m_combatGroupId);
-					else
-						playerTag.SetCharacter(targetPlayerPublic->m_characterId, targetCombatPublic->m_level);
+						// Need to tag the NPC so the player/group can get credit if required
+						PlayerTag playerTag;
+						if (targetCombatPublic->m_combatGroupId != 0)
+							playerTag.SetGroupId(targetCombatPublic->m_combatGroupId);
+						else
+							playerTag.SetCharacter(targetPlayerPublic->m_characterId, targetCombatPublic->m_level);
 
+						uint32_t routeId = m_routeId;
+						uint32_t playerEntityInstanceId = aTarget->GetEntityInstanceId();
+
+						aCombatResultQueue->AddUpdateCallback([npc, tag, routeId, playerTag, playerEntityInstanceId]()
+						{
+							npc->m_routeId = routeId;
+							npc->m_routeIsReversing = false;
+							npc->m_subRouteIndex = 0;
+							npc->m_effectiveRouteId = routeId;
+
+							if (playerTag.IsSet())
+							{
+								tag->m_playerEntityInstanceId = playerEntityInstanceId;
+								tag->m_playerTag = playerTag;
+								tag->m_lootRule = tpublic::LootRule::INVALID_ID;
+								tag->m_lootThreshold = tpublic::Rarity::INVALID_ID;
+								tag->SetDirty();
+							}
+						});
+					}
+				}
+			}
+			else
+			{
+				Components::NPC* npc = aTarget->GetComponent<Components::NPC>();
+
+				if(npc != NULL)
+				{
+					// Not escort, just plain routing
 					uint32_t routeId = m_routeId;
-					uint32_t playerEntityInstanceId = aTarget->GetEntityInstanceId();
 
-					aCombatResultQueue->AddUpdateCallback([npc, tag, routeId, playerTag, playerEntityInstanceId]()
-					{						
+					aCombatResultQueue->AddUpdateCallback([npc, routeId]()
+					{
 						npc->m_routeId = routeId;
 						npc->m_routeIsReversing = false;
 						npc->m_subRouteIndex = 0;
 						npc->m_effectiveRouteId = routeId;
-
-						if(playerTag.IsSet())
-						{	
-							tag->m_playerEntityInstanceId = playerEntityInstanceId;
-							tag->m_playerTag = playerTag;
-							tag->m_lootRule = tpublic::LootRule::INVALID_ID;
-							tag->m_lootThreshold = tpublic::Rarity::INVALID_ID;
-							tag->SetDirty();
-						}
 					});
 				}
 			}

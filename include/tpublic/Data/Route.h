@@ -42,6 +42,8 @@ namespace tpublic
 							m_despawn = aChild->GetBool();
 						else if (aChild->m_name == "ability")
 							m_abilityId = aChild->GetId(DataType::ID_ABILITY);
+						else if(aChild->m_name == "reset")
+							m_reset = aChild->GetBool();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					});
@@ -56,6 +58,7 @@ namespace tpublic
 					aWriter->WriteBool(m_event);
 					aWriter->WriteBool(m_despawn);
 					aWriter->WriteUInt(m_abilityId);
+					aWriter->WriteBool(m_reset);
 				}
 
 				bool
@@ -72,6 +75,8 @@ namespace tpublic
 						return false;
 					if (!aReader->ReadUInt(m_abilityId))
 						return false;
+					if (!aReader->ReadBool(m_reset))
+						return false;
 					return true;
 				}
 
@@ -81,6 +86,7 @@ namespace tpublic
 				std::optional<Chat>	m_chat;
 				bool				m_event = false;
 				bool				m_despawn = false;
+				bool				m_reset = false;
 				uint32_t			m_abilityId = 0;
 			};
 

@@ -8,7 +8,7 @@ dialogue_screen .mirehaven_mayor_dialogue:
 	options:
 	[
 		{ quest: .mirehaven_mayor_0 }
-		{ quest<offer_only>: .mirehaven_mayor_1 }
+		{ quest: .mirehaven_mayor_1 }
 		{ quest: .mirehaven_mayor_2 }
 	]
 }
@@ -82,10 +82,28 @@ quest .mirehaven_mayor_0:
 	reward_cash_multiplier: 0.4
 	reward_xp_multiplier: 0.4
 	objectives: [ .mirehaven_mayor_0 ]
+	next_quest: .mirehaven_mayor_1
 }
 
 ############################################################
 # Quest 2
+
+item .mirehaven_mayor_1_quest_item:
+{
+	icon: icon_brown_bag
+	item_level: 14
+	flags: [ unique not_sellable ]
+	string: "Frederik Tyson's Taxes"
+}
+
+objective .mirehaven_mayor_1:
+{
+	string: "Frederik Tyson's Taxes"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .mirehaven_mayor_1_quest_item count: 1 }
+}
 
 quest .mirehaven_mayor_1:
 {
@@ -113,10 +131,10 @@ quest .mirehaven_mayor_1:
 	]
 
 	level: 14
-	reward_cash_multiplier: 0.2
-	reward_xp_multiplier: 0.2
 	prerequisites: [ .mirehaven_mayor_0 ]
-	next_quest: .frederik_tyson_1
+	objectives: [ .mirehaven_mayor_1 ]
+	
+	# FIXME: rewards
 }
 
 ############################################################
@@ -146,6 +164,7 @@ loot_table .mirehaven_mayor_2_quest_item:
 
 entity thalvaron_mirehaven_mayor_2_quest_item:
 {
+	string: "Mongo's Treasure"
 	systems: [ openable ]
 
 	components:
@@ -165,6 +184,33 @@ entity thalvaron_mirehaven_mayor_2_quest_item:
 	}
 }
 
+ability .mirehaven_mayor_2_door_bell:
+{
+	flags: [ always_in_line_of_sight ]
+	range: 10
+	direct_effect start_route: { route: thalvaron_mongo_patrol }
+	always_target_nearby_entity: thalvaron_mongo
+}
+
+entity thalvaron_mirehaven_mayor_2_quest_item_2:
+{
+	string: "Door Bell"
+	systems: [ openable ]
+
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ bell_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			verb: ring
+			range: 1 
+			trigger_ability: .mirehaven_mayor_2_door_bell
+		}		
+	}
+}
+
 objective .mirehaven_mayor_2:
 {
 	string: "Mongo's Treasure"
@@ -180,12 +226,15 @@ quest .mirehaven_mayor_2:
 
 	text:
 	[
-		"."
+		"Collect taxes from the ogre who lives to the east."
 	]
 	
 	description: 
 	[
-		"."
+		"I got one final government task for you, for now.\n\n"
+		"To the east of here, in the part of the swamp near the mountains, there lives a member of our community, \"Mongo\", who has never shown any interest in fitting in. But you still need to contribute, just like any other"
+		"citizen of the kingdom. Making him pay his taxes will be your hardest job yet. He has already eaten several bureaucrats. Oh, yeah, he's an ogre.\n\n"
+		"I know he keeps some kind of gold treasure in his shack. Return those treasures to me."
 	]
 
 	progress:
@@ -195,7 +244,7 @@ quest .mirehaven_mayor_2:
 	
 	completion:
 	[
-		"."
+		"Good job. You can be proud of yourself."
 	]
 
 	objectives: [ .mirehaven_mayor_2 ]

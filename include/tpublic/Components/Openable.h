@@ -32,7 +32,8 @@ namespace tpublic
 					TYPE_DESTROY,
 					TYPE_BURN,
 					TYPE_WATER,
-					TYPE_USE
+					TYPE_USE,
+					TYPE_RING
 				};
 
 				void
@@ -62,6 +63,8 @@ namespace tpublic
 						m_type = TYPE_WATER;
 					else if (t == "use")
 						m_type = TYPE_USE;
+					else if (t == "ring")
+						m_type = TYPE_RING;
 					else
 						TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid verb.", aSource->GetIdentifier());
 				}
@@ -98,6 +101,7 @@ namespace tpublic
 					case TYPE_BURN:		return "Burn";
 					case TYPE_WATER:	return "Water";
 					case TYPE_USE:		return "Use";
+					case TYPE_RING:		return "Ring";
 					default:			break;
 					}
 					assert(false);
@@ -184,7 +188,6 @@ namespace tpublic
 				m_triggerAbilityId = 0;
 				m_unlockMapTriggerId = 0;
 				m_contextHelpId = 0;
-
 			}
 
 			// Public data

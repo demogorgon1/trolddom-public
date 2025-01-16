@@ -556,6 +556,8 @@ namespace tpublic
 							m_sourceVisuals.push_back(Visual(aMember));
 						else if(aMember->m_name == "zone")
 							m_zoneId = aMember->GetId(DataType::ID_ZONE);
+						else if(aMember->m_name == "always_target_nearby_entity")
+							m_alwaysTargetNearbyEntityId = aMember->GetId(DataType::ID_ENTITY);
 						else
 							TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
 					}
@@ -606,6 +608,7 @@ namespace tpublic
 				aWriter->WriteUInt(m_minRange);
 				aWriter->WriteUInts(m_mustHaveOneOfNearbyEntityIds);
 				aWriter->WriteUInt(m_zoneId);
+				aWriter->WriteUInt(m_alwaysTargetNearbyEntityId);
 
 				for(uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 					aWriter->WriteUInt(m_resourceCosts[i]);
@@ -695,6 +698,8 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadUInt(m_zoneId))
 					return false;
+				if(!aReader->ReadUInt(m_alwaysTargetNearbyEntityId))
+					return false;
 
 				for (uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 				{
@@ -747,6 +752,7 @@ namespace tpublic
 			std::vector<Visual>									m_sourceVisuals;
 			uint32_t											m_triggerOnlyCooldownId = 0;
 			uint32_t											m_zoneId = 0;
+			uint32_t											m_alwaysTargetNearbyEntityId = 0;
 		};
 
 	}
