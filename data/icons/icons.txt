@@ -532,6 +532,7 @@ sprites:
 	sprite icon_severed_leg : { tags: [ icon ] }	
 	sprite icon_flower_6 : { tags: [ icon ] }
 	sprite icon_cat : { tags: [ icon ] }
+	sprite icon_elemental_stone : { tags: [ icon ] }
 	
 }
 

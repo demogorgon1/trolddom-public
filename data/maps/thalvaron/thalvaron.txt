@@ -43,6 +43,7 @@ zone .realm_of_the_wizard: { string: "Realm of the Wizard" no_map: true }
 zone .eastern_faerandor: { string: "Eastern Faerandor" }
 zone .myst_woodlands_coast: { string: "The Lonely Coast" }
 zone .mongos_swamp: { string: "Mongo's Swamp" }
+zone .dwarf_city: { string: "Durgan Tharok" town: true }
 
 zone thalvaron_crab_giant: { } #string: "Old Man's Pool" }
 	
@@ -260,6 +261,9 @@ map_entity_spawn thalvaron_ria_tyson: { entity thalvaron_ria_tyson: { init_state
 map_entity_spawn thalvaron_francis_1_quest_item: { entity thalvaron_francis_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_buck_3_quest_item: { entity thalvaron_buck_3_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_mirehaven_mayor_2_quest_item_2: { entity thalvaron_mirehaven_mayor_2_quest_item_2: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_hort_ironmantle: { entity thalvaron_hort_ironmantle: { init_state: default } }
+map_entity_spawn thalvaron_rurik_ironmantle: { entity thalvaron_rurik_ironmantle: { init_state: default } }
+map_entity_spawn thalvaron_grumli_stouthammer: { entity thalvaron_grumli_stouthammer: { init_state: default } }
 
 map_palette .stuff:
 {
@@ -496,6 +500,11 @@ map_palette .stuff:
 	entity_spawn thalvaron_buck_3_quest_item: [ 123 44 145 ]
 	entity_spawn thalvaron_swamp_ooze: [ 12 45 133 ]
 	entity_spawn thalvaron_mirehaven_mayor_2_quest_item_2: [ 88 77 144 ]
+	entity_spawn thalvaron_rock_crumbler: [ 111 88 222 ]
+	entity_spawn thalvaron_rock_crumbler_boss: [ 211 88 222 ]
+	entity_spawn thalvaron_hort_ironmantle: [ 77 123 148 ]
+	entity_spawn thalvaron_rurik_ironmantle: [ 21 255 94 ]
+	entity_spawn thalvaron_grumli_stouthammer: [ 121 255 194 ]
 }
 
 map_palette .levels:
@@ -560,6 +569,7 @@ map_palette .sub_zones:
 	sub_zone .valoris_south_town: [ 174 174 49 ]
 	sub_zone .realm_of_the_wizard: [ 144 27 192 ]
 	sub_zone .mongos_swamp: [ 49 174 65 ] 
+	sub_zone .dwarf_city: [ 250 101 255 ]
 	
 	sub_zone thalvaron_crab_giant: [ 39 192 83 ]
 }
@@ -613,6 +623,7 @@ map_palette .doodads:
 	doodad sign_generic<"Mongo's Swamp: Stay Out!">: [ 77 173 111 ]	
 	doodad sign_generic<"Danger!">: [ 177 173 111 ]	
 	doodad sign_generic<"Riddle Mining Co.">: [ 177 173 211 ]	
+	doodad wall_sign_generic<"The Pick and Pint">: [ 97 123 131 ]	
 }
 
 map_palette .cliffs:

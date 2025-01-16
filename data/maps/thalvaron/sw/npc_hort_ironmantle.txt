@@ -1,0 +1,123 @@
+dialogue_screen .hort_ironmantle_dialogue:
+{
+	text: 
+	[	
+		"Hello."
+	]		
+	
+	options:
+	[
+		{ quest: .hort_ironmantle_1 }
+		{ quest<offer_only>: .hort_ironmantle_2 }
+	]
+}
+
+dialogue_root .hort_ironmantle_dialogue:
+{
+	.hort_ironmantle_dialogue: { }
+}
+
+entity thalvaron_hort_ironmantle: !NPC
+{
+	_string: "Hort Ironmantle"
+	_dialogue_root: .hort_ironmantle_dialogue	
+	_sprite: dwarf_3
+	_sprite_dead: dwarf_3_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .hort_ironmantle_1_quest_item: {}
+
+item .hort_ironmantle_1_quest_item:
+{
+	icon: icon_elemental_stone
+	item_level: 14
+	loot_groups: [ .hort_ironmantle_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Infused Elemental Stone"
+}
+
+objective .hort_ironmantle_1:
+{
+	string: "Infused Elemental Stone"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .hort_ironmantle_1_quest_item count: 1 }
+}
+
+quest .hort_ironmantle_1:
+{
+	string: "Rock Crusher Research"
+
+	text:
+	[
+		"Kill the larger than usual earth elemental in the cave south of Tyson's farm and return its infused elemental stone to Hort Ironmantle."
+	]
+	
+	description: 
+	[
+		"The rock elementals found down here are fascinating creatures. It has long been known that parts of them can be used for all kinds of crafting, but I think we can do more.\n\n"
+		"I'm aware of a larger than usual elemental that resides deep in a cave to the south. I need you to find it, kill it, and return one of its infused elemental stones to me."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Looking good!"
+	]
+
+	level: 14
+	objectives: [ .hort_ironmantle_1 ]
+	next_quest: .hort_ironmantle_2
+	
+	# FIXME: rewards
+}
+
+############################################################
+# Quest 2
+
+quest .hort_ironmantle_2:
+{
+	string: "Delivery to Durgan Tharok"
+
+	text:
+	[
+		"Kill the larger than usual earth elemental in the cave south of Tyson's farm and return its infused elemental stone to Hort Ironmantle."
+	]
+	
+	description: 
+	[
+		"That infused elemental stone is very interesting. If you don't mind a bit of a travel, maybe I can convince you to bring it to my brother Rurik in Durgan Tharok? He most likely hangs out at the \"Pick and Pint\" tavern.\n\n"
+		"You'll find the magnificent dwarven stronghold of Durgan Tharok if you follow the road to the east, through the badlands."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"That's one beautiful stone you've got there! Hort sent you?"
+	]
+
+	level: 14
+	quest_items: [ .hort_ironmantle_1_quest_item ]
+	
+	reward_xp_multiplier: 0.3
+	reward_cash_multiplier: 0.3
+	
+	prerequisites: [ .hort_ironmantle_1 ]
+}

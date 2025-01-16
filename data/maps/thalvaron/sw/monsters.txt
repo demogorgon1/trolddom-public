@@ -88,6 +88,16 @@ map_entity_spawn thalvaron_swamp_ooze:
 	entity thalvaron_swamp_ooze: { init_state: default } 
 }
 
+map_entity_spawn thalvaron_rock_crumbler:
+{
+	entity thalvaron_rock_crumbler: { init_state: default } 
+}
+
+map_entity_spawn thalvaron_rock_crumbler_boss:
+{
+	entity thalvaron_rock_crumbler_boss: { init_state: default } 
+}
+
 # Neutral crabs
 {
 
@@ -222,6 +232,44 @@ map_entity_spawn thalvaron_swamp_ooze:
 	}
 
 	entity thalvaron_swamp_ooze: !NPC { _string: "Putrid Ooze" _sprite: ooze_1 _sprite_dead: ooze_2_dead }
+}
+
+# Rock elementals
+{
+	${
+		_level: 14
+		_faction: monsters
+		_creature_type: elemental
+		_loot_table: .default_beast
+		_default_behavior_state: .wandering_short
+	}
+
+	entity thalvaron_rock_crumbler: !NPC { _string: "Rock Crumbler" _sprite: rock_elemental_2 _sprite_dead: rock_elemental_2_dead }
+}
+
+# Rock elemental boss
+{
+	loot_table .rock_elemental_boss: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { loot_group: .hort_ironmantle_1_quest_item requirement self<must_have_active_quest>: { id: .hort_ironmantle_1 } } 
+			}
+			
+			!WORLD_DROPS {}
+		]	
+	}	
+
+	${
+		_level: 14
+		_faction: monsters
+		_creature_type: elemental
+		_loot_table: .rock_elemental_boss
+		_default_behavior_state: .wandering_short
+	}
+
+	entity thalvaron_rock_crumbler_boss: !NPC { _string: "Giant Rock Crumbler" _sprite: rock_elemental_3 _sprite_dead: rock_elemental_3_dead }
 }
 
 ##########################################################################################
