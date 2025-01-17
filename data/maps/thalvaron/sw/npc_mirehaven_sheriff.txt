@@ -8,6 +8,7 @@ dialogue_screen .mirehaven_sheriff_dialogue:
 	options:
 	[
 		{ quest: .mirehaven_sheriff_1 }
+		{ quest<completion_only>: .swamp_giant }
 	]
 }
 

@@ -142,6 +142,7 @@ map_palette .tiles:
 	tile wood_wall_2_window_inside: [ 143 125 164 ]
 	tile roof_4: [ 200 161 0 ]	
 	tile ice_cave_entrance: [ 39 243 94 ]
+	tile rock_floor: [ 64 20 32 ]
 }
 
 # NW
@@ -267,6 +268,13 @@ map_entity_spawn thalvaron_rurik_ironmantle: { entity thalvaron_rurik_ironmantle
 map_entity_spawn thalvaron_grumli_stouthammer: { entity thalvaron_grumli_stouthammer: { init_state: default } }
 map_entity_spawn thalvaron_border_guard: { entity thalvaron_border_guard: { init_state: default } }
 map_entity_spawn thalvaron_lieutenant_gordon: { entity thalvaron_lieutenant_gordon: { init_state: default } }
+map_entity_spawn thalvaron_dwarf_guard_1: { entity thalvaron_dwarf_guard_1: { init_state: default } }
+map_entity_spawn thalvaron_dwarf_guard_2: { entity thalvaron_dwarf_guard_2: { init_state: default } }
+map_entity_spawn thalvaron_dwarf_miner: { entity thalvaron_dwarf_miner: { init_state: default } }
+map_entity_spawn thalvaron_dwarf_blacksmith: { entity thalvaron_dwarf_blacksmith: { init_state: default } }
+map_entity_spawn thalvaron_ulrik_copperquill: { entity thalvaron_ulrik_copperquill: { init_state: default } }
+map_entity_spawn thalvaron_eldriv_copperquill: { entity thalvaron_eldriv_copperquill: { init_state: default } }
+map_entity_spawn thalvaron_borg_ironmantle: { entity thalvaron_borg_ironmantle: { init_state: default } }
 
 map_palette .stuff:
 {
@@ -514,6 +522,16 @@ map_palette .stuff:
 	entity_spawn thalvaron_lieutenant_gordon: [ 166 48 14 ]
 	entity_spawn thalvaron_south_marshlands_kobold: [ 88 93 123 ]
 	entity_spawn thalvaron_south_marshlands_kobold_special: [ 88 193 123 ]
+	entity_spawn thalvaron_swamp_giant: [ 211 38 89 ]
+	entity_spawn thalvaron_dwarf_guard_1: [ 33 44 104 ]
+	entity_spawn thalvaron_dwarf_guard_2: [ 33 44 204 ]
+	entity_spawn thalvaron_dwarf_miner: [ 34 88 184 ]
+	entity_spawn thalvaron_dwarf_blacksmith: [ 34 188 84 ]
+	entity_spawn thalvaron_ulrik_copperquill: [ 77 88 22 ]
+	entity_spawn thalvaron_eldriv_copperquill: [ 177 88 122 ]
+	entity_spawn thalvaron_borg_ironmantle: [ 153 28 249 ]
+	entity_spawn thalvaron_dust_lizard: [ 84 88 129 ]
+	entity_spawn thalvaron_dread_scorpion: [ 184 88 150 ]
 }
 
 map_palette .levels:

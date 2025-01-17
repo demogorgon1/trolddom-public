@@ -1,0 +1,144 @@
+dialogue_screen .ulrik_copperquill_dialogue:
+{
+	text: 
+	[	
+		"Hello."
+	]		
+	
+	options:
+	[
+		{ quest: .ulrik_copperquill_1 }
+		{ quest: .ulrik_copperquill_2 }
+	]
+}
+
+dialogue_root .ulrik_copperquill_dialogue:
+{
+	.ulrik_copperquill_dialogue: { }
+}
+
+entity thalvaron_ulrik_copperquill: !NPC
+{
+	_string: "Ulrik Copperquill"
+	_dialogue_root: .ulrik_copperquill_dialogue	
+	_sprite: dwarf_11
+	_sprite_dead: dwarf_11_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .ulrik_copperquill_1_quest_item: {}
+
+item .ulrik_copperquill_1_quest_item:
+{
+	icon: icon_scales_1
+	item_level: 14
+	loot_groups: [ .ulrik_copperquill_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Dust Lizard Scales"
+	stack: 6
+}
+
+objective .ulrik_copperquill_1:
+{
+	string: "Dust Lizard Scales"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .ulrik_copperquill_1_quest_item count: 6 }
+}
+
+quest .ulrik_copperquill_1:
+{
+	string: "Dust Lizards"
+
+	text:
+	[
+		"Kill Dust Lizards outside Durgan Tharok to the west and collect their scales."
+	]
+	
+	description: 
+	[
+		"Maybe you can assist an old alchemist in his work? Maybe you noticed the lizards roaming the badlands to the west of Durgan Tharok? Yes? No? Anyway, I need some of their scales for one of my potions. Can you fetch me some?"
+	]
+
+	progress:
+	[
+		"Hello."
+	]
+	
+	completion:
+	[
+		"That's some fine scales, thanks a lot."
+	]
+	
+	objectives: [ .ulrik_copperquill_1 ]
+	level: 14
+	next_quest: .ulrik_copperquill_2
+	
+	# FIXME: rewards
+}
+
+############################################################
+# Quest 2
+
+loot_group .ulrik_copperquill_2_quest_item: {}
+
+item .ulrik_copperquill_2_quest_item:
+{
+	icon: icon_poison
+	item_level: 14
+	loot_groups: [ .ulrik_copperquill_2_quest_item ]
+	flags: [ not_sellable ]
+	string: "Dread Scorpion Blood"
+	stack: 6
+}
+
+objective .ulrik_copperquill_2:
+{
+	string: "Dread Scorpion Blood"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .ulrik_copperquill_2_quest_item count: 6 }
+}
+
+quest .ulrik_copperquill_2:
+{
+	string: "Dread Scorpions"
+
+	text:
+	[
+		"Hunt down Dread Scorpions in the western parts of the badlands and collect their blood."
+	]
+	
+	description: 
+	[
+		"Good job with the lizards. Can you help me with something else as well? I also need a bunch of blood from some of the giant scorpions roaming outside. I promise, this is the last thing you need to pick up for me."
+	]
+
+	progress:
+	[
+		"Hello."
+	]
+	
+	completion:
+	[
+		"Nice."
+	]
+	
+	objectives: [ .ulrik_copperquill_2 ]
+	prerequisites: [ .ulrik_copperquill_1 ]
+	level: 14
+	
+	# FIXME: rewards
+}
+
+
+

@@ -98,6 +98,11 @@ map_entity_spawn thalvaron_rock_crumbler_boss:
 	entity thalvaron_rock_crumbler_boss: { init_state: default } 
 }
 
+map_entity_spawn thalvaron_swamp_giant:
+{
+	entity thalvaron_swamp_giant: { init_state: default } 
+}
+
 # Neutral crabs
 {
 
@@ -272,6 +277,88 @@ map_entity_spawn thalvaron_rock_crumbler_boss:
 	entity thalvaron_rock_crumbler_boss: !NPC { _string: "Giant Rock Crumbler" _sprite: rock_elemental_3 _sprite_dead: rock_elemental_3_dead }
 }
 
+# Wandering giant swamp monster
+{
+	loot_table .swamp_giant: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: 
+				{ 				
+					loot_group: .swamp_giant 
+					requirement self<must_not_have_completed_quest>: .swamp_giant 
+					requirement self<must_not_have_active_quest>: .swamp_giant 
+					requirement self<must_not_have_item>: .swamp_giant 
+				} 
+			}
+			
+			!WORLD_DROPS {}
+		]	
+	}
+	
+	loot_group .swamp_giant: { }
+	
+	ability .swamp_giant:	
+	{
+		string: "Bogmaw's Claw"
+		description: "This item starts a quest."
+		flags: [ target_self item ]
+		icon: icon_claw_3
+		direct_effect simple<start_quest>: .swamp_giant
+		states: [ default in_combat ]
+		requirement self<must_not_have_completed_quest>: { id: .swamp_giant }
+		requirement self<must_not_have_active_quest>: { id: .swamp_giant }
+	}
+
+	item .swamp_giant:
+	{
+		loot_groups: [ .swamp_giant ]		
+		string: "Bogmaw's Claw" 
+		icon: icon_claw_3
+		item_level: 14
+		flags: [ unique not_sellable ]
+		use_ability: .swamp_giant
+	}	
+			
+	quest .swamp_giant:
+	{
+		string: "Bogmaw's Claw"
+
+		text:
+		[
+			"Bring Bogmaw's Claw to Sheriff Foster outside Mirehaven."
+		]
+		
+		description: 
+		[
+			"The giant swamp monsters claw is slimy to the touch. You should return it to Sheriff Foster outside Mirehaven. Maybe you'll get a reward for slaying this vile creature."
+		]
+		
+		completion:
+		[
+			"You managed to kill Bogmaw? That creature has been terrorizing the swamp for a long time. Good job!"
+		]
+
+		level: 14
+		quest_items: [ .swamp_giant ]		
+		type: elite
+		
+		# FIXME: rewards
+	}
+	
+	${
+		_level: 14
+		_faction: monsters
+		_creature_type: elemental
+		_loot_table: .swamp_giant
+		_default_behavior_state: .wandering_short
+		_elite: true
+	}
+
+	entity thalvaron_swamp_giant: !NPC { _string: "Bogmaw" _sprite: swamp_monster_1 _sprite_dead: swamp_monster_2_dead }
+}
+
 ##########################################################################################
 # North Marshlands kobolds
 
@@ -335,7 +422,13 @@ map_entity_spawn thalvaron_north_marshlands_kobold_boss:
 		slots:
 		[	
 			{ 
-				possibility: { loot_group: .north_marshlands_kobold_boss } 
+				possibility: 
+				{ 
+					loot_group: .north_marshlands_kobold_boss 
+					requirement self<must_not_have_completed_quest>: thalvaron_north_marshlands_kobold_boss 
+					requirement self<must_not_have_active_quest>: thalvaron_north_marshlands_kobold_boss 
+					requirement self<must_not_have_item>: .north_marshlands_kobold_boss 					
+				} 
 			}
 			
 			!WORLD_DROPS {}
@@ -681,3 +774,85 @@ loot_table .south_marshlands_kobold_special:
 	entity thalvaron_south_marshlands_kobold_special: !NPC { _string: "Rugged Kobold" _sprite: kobold_7 _sprite_dead: kobold_7_dead }
 }
 
+##########################################################################################
+# Badlands monsters
+
+map_entity_spawn thalvaron_dust_lizard: 
+{ 
+	entity thalvaron_dust_lizard: { init_state: default } 
+}
+
+map_entity_spawn thalvaron_dread_scorpion: 
+{ 
+	entity thalvaron_dread_scorpion: { init_state: default } 
+}
+
+# Lizards
+{
+	loot_table .dust_lizard: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: 
+				{
+					weight: 1
+				}
+			
+				possibility: 
+				{ 
+					weight: 1
+					loot_group: .ulrik_copperquill_1_quest_item 
+					requirement self<must_have_active_quest>: .ulrik_copperquill_1 
+				} 
+			}
+			
+			!WORLD_DROPS {}
+		]	
+	}
+
+	${
+		_level: 14
+		_faction: monsters
+		_creature_type: beast
+		_loot_table: .dust_lizard
+		_default_behavior_state: .wandering_short
+	}
+
+	entity thalvaron_dust_lizard: !NPC { _string: "Dust Lizard" _sprite: lizard_3 _sprite_dead: lizard_3_dead }
+}
+
+# Scorpions
+{
+	loot_table .dread_scorpion: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: 
+				{
+					weight: 1
+				}
+			
+				possibility: 
+				{ 
+					weight: 1
+					loot_group: .ulrik_copperquill_2_quest_item 
+					requirement self<must_have_active_quest>: .ulrik_copperquill_2 
+				} 
+			}
+			
+			!WORLD_DROPS {}
+		]	
+	}
+
+	${
+		_level: 14
+		_faction: monsters
+		_creature_type: beast
+		_loot_table: .dread_scorpion
+		_default_behavior_state: .wandering_short
+	}
+
+	entity thalvaron_dread_scorpion: !NPC { _string: "Dread Scorpion" _sprite: scorpion_1 _sprite_dead: scorpion_1_dead }
+}
