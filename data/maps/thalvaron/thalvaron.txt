@@ -44,6 +44,7 @@ zone .eastern_faerandor: { string: "Eastern Faerandor" }
 zone .myst_woodlands_coast: { string: "The Lonely Coast" }
 zone .mongos_swamp: { string: "Mongo's Swamp" }
 zone .dwarf_city: { string: "Durgan Tharok" town: true }
+zone .lake_dourgol: { string: "Lake Dourgol" }
 
 zone thalvaron_crab_giant: { } #string: "Old Man's Pool" }
 	
@@ -562,6 +563,7 @@ map_palette .zones:
 	zone .old_mans_cave: [ 130 112 222 ]
 	zone .eastern_faerandor: [ 0 41 255 ]
 	zone .myst_woodlands_coast: [ 255 0 230 ]
+	zone .lake_dourgol: [ 156 0 255 ]
 }
 
 map_palette .sub_zones:
