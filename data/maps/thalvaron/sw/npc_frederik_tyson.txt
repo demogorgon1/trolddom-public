@@ -29,6 +29,8 @@ dialogue_screen .frederik_tyson_dialogue:
 			requirement self<must_not_have_completed_quest>: .mirehaven_mayor_1
 			requirement self<must_not_have_item>: .mirehaven_mayor_1_quest_item 
 		} 		
+		
+		{ quest<completion_only>: .yvonne_tyson_1 }
 	]
 }
 

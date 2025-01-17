@@ -453,18 +453,231 @@ map_entity_spawn thalvaron_marsh_bandit:
 	entity thalvaron_marsh_bandit_d: { init_state: default } 
 }
 
+map_entity_spawn thalvaron_marsh_bandit_2: 
+{ 
+	entity thalvaron_marsh_bandit_2_a: { init_state: default } 
+	entity thalvaron_marsh_bandit_2_b: { init_state: default } 
+	entity thalvaron_marsh_bandit_2_c: { init_state: default } 
+}
+
+map_entity_spawn thalvaron_marsh_bandit_leader: 
+{ 
+	entity thalvaron_marsh_bandit_leader: { init_state: default } 
+}
+
 # Bandits
 {
-	${
-		_level: 13
+	${		
 		_faction: monsters
 		_creature_type: humanoid
 		_default_behavior_state: .passive
 		_loot_table: .default_humanoid
 	}
 
-	entity thalvaron_marsh_bandit_a: !NPC { _string: "Marsh Bandit" _sprite: rebel_1 _sprite_dead: rebel_1_dead }
-	entity thalvaron_marsh_bandit_b: !NPC { _string: "Marsh Bandit" _sprite: rebel_2 _sprite_dead: rebel_2_dead }
-	entity thalvaron_marsh_bandit_c: !NPC { _string: "Marsh Bandit" _sprite: rebel_3 _sprite_dead: rebel_3_dead }
-	entity thalvaron_marsh_bandit_d: !NPC { _string: "Marsh Bandit" _sprite: rebel_4 _sprite_dead: rebel_4_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
+	entity thalvaron_marsh_bandit_a: !NPC { _level: 13 _string: "Marsh Bandit" _sprite: rebel_1 _sprite_dead: rebel_1_dead }
+	entity thalvaron_marsh_bandit_b: !NPC { _level: 13 _string: "Marsh Bandit" _sprite: rebel_2 _sprite_dead: rebel_2_dead }
+	entity thalvaron_marsh_bandit_c: !NPC { _level: 13 _string: "Marsh Bandit" _sprite: rebel_3 _sprite_dead: rebel_3_dead }
+	entity thalvaron_marsh_bandit_d: !NPC { _level: 13 _string: "Marsh Bandit" _sprite: rebel_4 _sprite_dead: rebel_4_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
+
+	entity thalvaron_marsh_bandit_2_a: !NPC { _level: 14 _string: "Brigand" _sprite: rebel_2 _sprite_dead: rebel_2_dead }
+	entity thalvaron_marsh_bandit_2_b: !NPC { _level: 14 _string: "Brigand" _sprite: rebel_3 _sprite_dead: rebel_3_dead }
+	entity thalvaron_marsh_bandit_2_c: !NPC { _level: 14 _string: "Brigand" _sprite: rebel_4 _sprite_dead: rebel_4_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
 }
+
+# Brigand leader
+{
+	loot_group .brigand_leader_quest_item: { }
+
+	ability .brigand_leader_quest_item:	
+	{
+		string: "Wedding Ring"
+		description: "This item starts a quest."
+		flags: [ target_self item ]
+		icon: icon_ring_1
+		direct_effect simple<start_quest>: .brigand_leader_quest_item
+		states: [ default in_combat ]
+		requirement self<must_not_have_completed_quest>: { id: .brigand_leader_quest_item }
+		requirement self<must_not_have_active_quest>: { id: .brigand_leader_quest_item }
+	}
+
+	item .brigand_leader_quest_item:
+	{
+		loot_groups: [ .brigand_leader_quest_item ]		
+		string: "Wedding Ring" 
+		flavor: "Yvonne."
+		icon: icon_ring_1
+		item_level: 14
+		flags: [ unique ]
+		use_ability: .brigand_leader_quest_item
+		binds: when_picked_up
+		cost: 10000
+	}
+	
+	quest .brigand_leader_quest_item:
+	{
+		string: "Wedding Ring"
+
+		text:
+		[
+			"Return the ring to its rightful owner."
+		]
+		
+		description: 
+		[
+			"The thief seems to have stolen this ring from a woman named Yvonne. You should find her and return it to her, unless of course you just want to sell it for a quick buck."
+		]
+		
+		completion:
+		[
+			"Wow, never thought I was going to see that ugly old thing again."
+		]
+
+		level: 14
+		reward_xp_multiplier: 0.3
+		reward_cash_multiplier: 0
+		quest_items: [ .brigand_leader_quest_item ]
+		next_quest: .yvonne_tyson_1
+	}
+
+	loot_table .brigand_leader: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: 
+				{ 
+					loot_group: .brigand_leader_quest_item 
+					requirement self<must_not_have_completed_quest>: .brigand_leader_quest_item 
+					requirement self<must_not_have_active_quest>: .brigand_leader_quest_item 
+					requirement self<must_not_have_item>: .brigand_leader_quest_item 
+				} 
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_CLOTH{}
+		]	
+	}
+	
+	${		
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .passive
+		_loot_table: .brigand_leader
+	}
+	
+	entity thalvaron_marsh_bandit_leader: !NPC { _level: 14 _string: "Jack Rhorn" _sprite: rebel_1 _sprite_dead: rebel_1_dead }	
+}
+
+##########################################################################################
+# South Marshlands kobolds
+
+map_entity_spawn thalvaron_south_marshlands_kobold: 
+{ 
+	entity thalvaron_south_marshlands_kobold_a: { init_state: default } 
+	entity thalvaron_south_marshlands_kobold_b: { init_state: default } 
+	entity thalvaron_south_marshlands_kobold_c: { init_state: default } 
+}
+
+map_entity_spawn thalvaron_south_marshlands_kobold_special: 
+{ 
+	entity thalvaron_south_marshlands_kobold_special: { init_state: default } 
+}
+
+loot_table .south_marshlands_kobold: 
+{
+	slots:
+	[	
+		{ 
+			possibility: 
+			{ 
+				loot_group: .lieutenant_gordon_1_quest_item 
+				requirement self<must_have_active_quest>: .lieutenant_gordon_1 
+			} 
+		}
+		
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+	
+loot_table .south_marshlands_kobold_special: 
+{
+	slots:
+	[	
+		{ 
+			possibility: 
+			{ 
+				loot_group: .mirehaven_dwarf_1_quest_item 
+				requirement self<must_have_active_quest>: .mirehaven_dwarf_1
+			} 
+		}
+		
+		{ 
+			possibility: 
+			{ 
+				loot_group: .lieutenant_gordon_1_quest_item 
+				requirement self<must_have_active_quest>: .lieutenant_gordon_1 
+			} 
+		}
+		
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+		
+# Melee
+{
+
+	${
+		_level: 14
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: .south_marshlands_kobold
+		_weapon_damage: 0.9
+		_resource_health: 0.8
+	}
+
+	entity thalvaron_south_marshlands_kobold_a: !NPC { _string: "Rugged Kobold" _sprite: kobold_3 _sprite_dead: kobold_3_dead }
+	entity thalvaron_south_marshlands_kobold_b: !NPC { _string: "Rugged Kobold" _sprite: kobold_4 _sprite_dead: kobold_4_dead }
+}
+
+# Healer
+{
+
+	${
+		_level: 14
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: .south_marshlands_kobold
+		_weapon_damage: 0.9
+		_resource_health: 0.8
+		_resource_mana: 1
+		_abilities: 
+		[ 
+			{ id: npc_heal target: low_health_friend_or_self }
+			{ id: npc_firebolt }
+			{ id: npc_attack } 
+		]		
+	}
+
+	entity thalvaron_south_marshlands_kobold_c: !NPC { _string: "Rugged Soothsayer" _sprite: kobold_5 _sprite_dead: kobold_5_dead }
+}
+
+# Kobold with ancient dwarven artifcat
+{
+
+	${
+		_level: 14
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: .south_marshlands_kobold_special
+		_weapon_damage: 0.9
+		_resource_health: 0.8
+	}
+
+	entity thalvaron_south_marshlands_kobold_special: !NPC { _string: "Rugged Kobold" _sprite: kobold_7 _sprite_dead: kobold_7_dead }
+}
+

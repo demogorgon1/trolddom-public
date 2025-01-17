@@ -534,6 +534,10 @@ sprites:
 	sprite icon_cat : { tags: [ icon ] }
 	sprite icon_elemental_stone : { tags: [ icon ] }
 	
+	cursor: { position: [ 0 464 ] }	
+	sprite icon_kobold_tail : { tags: [ icon ] }
+	sprite icon_rod_1 : { tags: [ icon ] }
+	
 }
 
 

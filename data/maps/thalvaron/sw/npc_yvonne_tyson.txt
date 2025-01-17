@@ -7,6 +7,8 @@ dialogue_screen .yvonne_tyson_dialogue:
 	
 	options:
 	[
+		{ quest<completion_only>: .brigand_leader_quest_item }
+		{ quest<offer_only>: .yvonne_tyson_1 }
 	]
 }
 
@@ -28,3 +30,32 @@ entity thalvaron_yvonne_tyson: !NPC
 	_not_pushable: true	
 }
 
+############################################################
+# Quest 1
+
+quest .yvonne_tyson_1:
+{
+	string: "Collect Your Reward"
+
+	text:
+	[
+		"Ask Frederik Tyson for a reward."
+	]
+	
+	description: 
+	[
+		"The ring is an old family relic of my husband, who probably is more pleased of you finding it than I am. You should go tell him that you found it and he'll probably give you a little something for your trouble."
+	]
+	
+	completion:
+	[
+		"You found Granny's old ring?! Those bastards stole it quite some time ago. This is amazing. I hope they're dead.\n\n"
+		"Here, take this, I don't know how I can ever repay you."
+	]
+
+	level: 14
+	prerequisites: [ .brigand_leader_quest_item ]
+	reward_xp_multiplier: 0.3
+	
+	# FIXME rewards
+}

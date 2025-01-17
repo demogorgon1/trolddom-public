@@ -8,6 +8,7 @@ dialogue_screen .mirehaven_dwarf_dialogue:
 	options:
 	[
 		{ quest<completion_only>: thalvaron_dwarf_liaison_officer_1 }
+		{ quest: .mirehaven_dwarf_1 }
 	]
 }
 
@@ -27,5 +28,62 @@ entity thalvaron_mirehaven_dwarf: !NPC
 	_creature_type: humanoid
 	_loot_table: .npc
 	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .mirehaven_dwarf_1_quest_item: {}
+
+item .mirehaven_dwarf_1_quest_item:
+{
+	icon: icon_rod_1
+	item_level: 14
+	loot_groups: [ .mirehaven_dwarf_1_quest_item ]
+	flags: [ not_sellable unique ]
+	string: "Ancient Dwarven Artifact"
+}
+
+objective .mirehaven_dwarf_1:
+{
+	string: "Ancient Dwarven Artifact"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .mirehaven_dwarf_1_quest_item count: 1 }
+}
+
+quest .mirehaven_dwarf_1:
+{
+	string: "Into the Depths"
+
+	text:
+	[
+		"Enter the underground dwarven ruins in the south eastern Marshlands and look for a dwarven artifact."
+	]
+	
+	description: 
+	[
+		"The ruins you're talking about are well known to us dwarves. They're part of a larger, mostly collapsed complex under the mountains, that in the past was connected to the great mountain fortress of Durgan Tharok.\n\n"
+		"Further to the south in those mountains, just north of the pass that leads to the badlands, you'll find another entrance to the fortress that is actually of more interest to me currently. It has been excavated completely"
+		"not that long ago, but recently kobolds have taken over. Some kobolds have been observed carrying what looks like ancient dwarven artifacts that I very much would like to get a closer look on. I want you to go there and"
+		"look for one of those and return it to me."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"That's interesting, thanks."
+	]
+	
+	objectives: [ .mirehaven_dwarf_1 ]
+	prerequisites: [ thalvaron_dwarf_liaison_officer_1 ]
+	level: 14
+	
+	# FIXME: rewards
 }
 

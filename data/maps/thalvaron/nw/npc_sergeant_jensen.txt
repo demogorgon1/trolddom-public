@@ -72,7 +72,7 @@ objective .sergeant_jensen_1_3:
 
 quest .sergeant_jensen_1:
 {
-	string: "The Bread Basket of Valaris"
+	string: "The Bread Basket of Valoris"
 
 	text:
 	[

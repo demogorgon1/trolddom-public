@@ -100,7 +100,7 @@ quest .gnome_1:
 
 	text:
 	[
-		"Go to Valaris and see if you can find someone who can vouch for the Gnome."
+		"Go to Valoris and see if you can find someone who can vouch for the Gnome."
 	]
 	
 	description: 
@@ -150,11 +150,11 @@ objective .gnome_2:
 
 quest thalvaron_gnome:
 {
-	string: "The best deal ever"
+	string: "The Best Deal Ever"
 
 	text:
 	[
-		"Make a huge profit by selling the extremely rare coin at Mathew's Emporium in the Valaris trade district."
+		"Make a huge profit by selling the extremely rare coin at Mathew's Emporium in the Valoris trade district."
 	]
 	
 	description: 

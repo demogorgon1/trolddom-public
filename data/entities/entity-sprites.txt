@@ -471,6 +471,7 @@ sprites:
 	sprite dwarf_3: { dead: dwarf_3_dead }
 	sprite dwarf_4: { dead: dwarf_4_dead }
 	sprite dwarf_5: { dead: dwarf_5_dead }
+	sprite kobold_7: { dead: kobold_7_dead }
 	
 	cursor: { position: [ 0 400 ] }
 	sprite dwarf_2_dead: { }
@@ -485,6 +486,7 @@ sprites:
 	sprite dwarf_3_dead: { }
 	sprite dwarf_4_dead: { }
 	sprite dwarf_5_dead: { }
+	sprite kobold_7_dead: { }
 
 }
 

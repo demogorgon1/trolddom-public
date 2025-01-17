@@ -191,7 +191,7 @@ quest thalvaron_jonas_white_3:
 	[
 		"Alright, I had a few minutes to look at the tablet you wrenched out of the claws of that crab. This is really unlike the other ones. I still haven't learnt to read these ancient glyphs,"
 		"but it's clear to me that there is something special about this.\n\n"
-		"My friend in Valaris is much more knowledgeable about these things. Maybe you can bring it to her and have her take a look? Her name is Clara Hawthorne and lives in the royal district, just by the central square."
+		"My friend in Valoris is much more knowledgeable about these things. Maybe you can bring it to her and have her take a look? Her name is Clara Hawthorne and lives in the royal district, just by the central square."
 	]
 
 	progress:

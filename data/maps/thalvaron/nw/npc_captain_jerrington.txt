@@ -67,7 +67,7 @@ quest .captain_jerrington_1:
 	
 	description: 
 	[
-		"As you very well might be aware, rebel scum has occupied the entire eastern district of Valaris. They took us by surprise and we've had issues getting rid of them. The main army is currently on a campaign to the south and can't help us."
+		"As you very well might be aware, rebel scum has occupied the entire eastern district of Valoris. They took us by surprise and we've had issues getting rid of them. The main army is currently on a campaign to the south and can't help us."
 		"Follow the street north into Eastgate and look for rebels. We need to find out what their plans are. Some might carry documents that could be of interest to us."	
 	]
 

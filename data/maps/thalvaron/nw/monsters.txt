@@ -295,7 +295,7 @@ map_entity_spawn thalvaron_rebel_dead:
 
 		text:
 		[
-			"Bring the encryption key to Captain Jerrington outside the Eastgate district in Valaris."
+			"Bring the encryption key to Captain Jerrington outside the Eastgate district in Valoris."
 		]
 		
 		description: 
@@ -391,7 +391,7 @@ map_entity_spawn thalvaron_deer:
 	entity thalvaron_deer_12: { init_state: default level: 12 } 
 }
 
-# Wildlife around Valaris
+# Wildlife around Valoris
 {
 
 	loot_table .deer: 

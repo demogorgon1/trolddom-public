@@ -2,7 +2,7 @@ dialogue_screen .city_guard_special_dialogue:
 {
 	text: 
 	[	
-		"Welcome to Valaris."
+		"Welcome to Valoris."
 	]		
 	
 	options:
@@ -56,7 +56,7 @@ quest .city_guard_special_1:
 	
 	completion:
 	[
-		"Welcome to Valaris, $class$. You thought you'd have a leisurely stay in the city, enjoying the sights, and some good food? Wrong! Your majesty the queen needs your services.\n\n"
+		"Welcome to Valoris, $class$. You thought you'd have a leisurely stay in the city, enjoying the sights, and some good food? Wrong! Your majesty the queen needs your services.\n\n"
 	]
 
 	level: 10

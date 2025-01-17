@@ -264,6 +264,8 @@ map_entity_spawn thalvaron_mirehaven_mayor_2_quest_item_2: { entity thalvaron_mi
 map_entity_spawn thalvaron_hort_ironmantle: { entity thalvaron_hort_ironmantle: { init_state: default } }
 map_entity_spawn thalvaron_rurik_ironmantle: { entity thalvaron_rurik_ironmantle: { init_state: default } }
 map_entity_spawn thalvaron_grumli_stouthammer: { entity thalvaron_grumli_stouthammer: { init_state: default } }
+map_entity_spawn thalvaron_border_guard: { entity thalvaron_border_guard: { init_state: default } }
+map_entity_spawn thalvaron_lieutenant_gordon: { entity thalvaron_lieutenant_gordon: { init_state: default } }
 
 map_palette .stuff:
 {
@@ -505,6 +507,12 @@ map_palette .stuff:
 	entity_spawn thalvaron_hort_ironmantle: [ 77 123 148 ]
 	entity_spawn thalvaron_rurik_ironmantle: [ 21 255 94 ]
 	entity_spawn thalvaron_grumli_stouthammer: [ 121 255 194 ]
+	entity_spawn thalvaron_marsh_bandit_2: [ 227 255 194 ]	
+	entity_spawn thalvaron_marsh_bandit_leader: [ 227 0 194 ]		
+	entity_spawn thalvaron_border_guard: [ 66 1 184 ]
+	entity_spawn thalvaron_lieutenant_gordon: [ 166 48 14 ]
+	entity_spawn thalvaron_south_marshlands_kobold: [ 88 93 123 ]
+	entity_spawn thalvaron_south_marshlands_kobold_special: [ 88 193 123 ]
 }
 
 map_palette .levels:
