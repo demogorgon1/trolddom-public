@@ -472,6 +472,9 @@ sprites:
 	sprite dwarf_4: { dead: dwarf_4_dead }
 	sprite dwarf_5: { dead: dwarf_5_dead }
 	sprite kobold_7: { dead: kobold_7_dead }
+	sprite dwarf_6: { dead: dwarf_6_dead }
+	sprite dwarf_7: { dead: dwarf_7_dead }
+	sprite dwarf_8: { dead: dwarf_8_dead }
 	
 	cursor: { position: [ 0 400 ] }
 	sprite dwarf_2_dead: { }
@@ -487,6 +490,25 @@ sprites:
 	sprite dwarf_4_dead: { }
 	sprite dwarf_5_dead: { }
 	sprite kobold_7_dead: { }
+	sprite dwarf_6_dead: { }
+	sprite dwarf_7_dead: { }
+	sprite dwarf_8_dead: { }
+
+	cursor: { position: [ 0 416 ] }
+	sprite dwarf_9: { dead: dwarf_9_dead }
+	sprite dwarf_10: { dead: dwarf_10_dead }
+	sprite dwarf_11: { dead: dwarf_11_dead }
+	sprite dwarf_12: { dead: dwarf_12_dead }
+	sprite scorpion_1: { dead: scorpion_1_dead }
+	sprite scorpion_2: { dead: scorpion_2_dead }
+	
+	cursor: { position: [ 0 432 ] }
+	sprite dwarf_9_dead: { }
+	sprite dwarf_10_dead: { }
+	sprite dwarf_11_dead: { }
+	sprite dwarf_12_dead: { }
+	sprite scorpion_1_dead: { }
+	sprite scorpion_2_dead: { }
 
 }
 

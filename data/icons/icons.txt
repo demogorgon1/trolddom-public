@@ -537,6 +537,8 @@ sprites:
 	cursor: { position: [ 0 464 ] }	
 	sprite icon_kobold_tail : { tags: [ icon ] }
 	sprite icon_rod_1 : { tags: [ icon ] }
+	sprite icon_claw_3 : { tags: [ icon ] }
+	sprite icon_scales_1 : { tags: [ icon ] }
 	
 }
 
