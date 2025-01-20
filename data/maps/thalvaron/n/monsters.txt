@@ -33,8 +33,9 @@ loot_table .default_beast:
 
 map_entity_spawn thalvaron_north_kobold: 
 { 
-	entity thalvaron_north_kobold_a: { init_state: default } 
-	entity thalvaron_north_kobold_b: { init_state: default } 
+	entity thalvaron_north_kobold_a: { } 
+	entity thalvaron_north_kobold_b: { } 	
+	spawn_timer: !NPC_RESPAWN_NORMAL{} 
 }
 
 # Kobolds in the iceveil pass mine
@@ -56,10 +57,11 @@ map_entity_spawn thalvaron_north_kobold:
 
 map_entity_spawn thalvaron_north_rebel: 
 { 
-	entity thalvaron_north_rebel_a: { init_state: default } 
-	entity thalvaron_north_rebel_b: { init_state: default } 
-	entity thalvaron_north_rebel_c: { init_state: default } 
-	entity thalvaron_north_rebel_d: { init_state: default } 
+	entity thalvaron_north_rebel_a: { } 
+	entity thalvaron_north_rebel_b: { } 
+	entity thalvaron_north_rebel_c: { } 
+	entity thalvaron_north_rebel_d: { } 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 # Rebels around the north
@@ -100,42 +102,50 @@ map_entity_spawn thalvaron_north_rebel:
 
 map_entity_spawn thalvaron_north_yeti: 
 { 
-	entity thalvaron_north_yeti: { init_state: default } 
+	entity thalvaron_north_yeti: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_north_yeti_cave: 
 { 
-	entity thalvaron_north_yeti_cave: { init_state: default } 
+	entity thalvaron_north_yeti_cave: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_north_yeti_boss: 
 { 
-	entity thalvaron_north_yeti_boss: { init_state: default } 
+	entity thalvaron_north_yeti_boss: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_wandering_owlbear: 
 { 
-	entity thalvaron_wandering_owlbear: { init_state: default } 
+	entity thalvaron_wandering_owlbear: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_iceveil_wolf: 
 { 
-	entity thalvaron_iceveil_wolf: { init_state: default } 
+	entity thalvaron_iceveil_wolf: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_frost_troll:
 { 
-	entity thalvaron_frost_troll: { init_state: default } 
+	entity thalvaron_frost_troll: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_rock_elemental:
 { 
-	entity thalvaron_rock_elemental: { init_state: default } 
+	entity thalvaron_rock_elemental: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_owlbear:
 { 
-	entity thalvaron_owlbear: { init_state: default } 
+	entity thalvaron_owlbear: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 # Yetis in northern part of the highlands
@@ -346,10 +356,11 @@ map_entity_spawn thalvaron_owlbear:
 
 map_entity_spawn thalvaron_deer_north: 
 { 
-	entity thalvaron_deer_13: { init_state: default level: 13 } 
-	entity thalvaron_deer_14: { init_state: default level: 14 } 
-	entity thalvaron_deer_15: { init_state: default level: 15 } 
-	entity thalvaron_deer_16: { init_state: default level: 16 } 
+	entity thalvaron_deer_13: { level: 13 } 
+	entity thalvaron_deer_14: { level: 14 } 
+	entity thalvaron_deer_15: { level: 15 } 
+	entity thalvaron_deer_16: { level: 16 } 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 # Wildlife
@@ -381,9 +392,10 @@ map_entity_spawn thalvaron_deer_north:
 
 map_entity_spawn thalvaron_duskwhisper_kobold: 
 { 
-	entity thalvaron_duskwhisper_kobold_a: { init_state: default } 
-	entity thalvaron_duskwhisper_kobold_b: { init_state: default } 
-	entity thalvaron_duskwhisper_kobold_c: { init_state: default } 
+	entity thalvaron_duskwhisper_kobold_a: {} 
+	entity thalvaron_duskwhisper_kobold_b: {} 
+	entity thalvaron_duskwhisper_kobold_c: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 # Caves
@@ -431,8 +443,9 @@ map_entity_spawn thalvaron_duskwhisper_kobold:
 
 map_entity_spawn thalvaron_duskwhisper_smuggler: 
 { 
-	entity thalvaron_duskwhisper_smuggler_a: { init_state: default } 
-	entity thalvaron_duskwhisper_smuggler_b: { init_state: default } 
+	entity thalvaron_duskwhisper_smuggler_a: {} 
+	entity thalvaron_duskwhisper_smuggler_b: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 # Smugglers
@@ -456,62 +469,74 @@ map_entity_spawn thalvaron_duskwhisper_smuggler:
 
 map_entity_spawn thalvaron_wood_elemental: 
 { 
-	entity thalvaron_wood_elemental: { init_state: default } 
+	entity thalvaron_wood_elemental: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_tentacle_monster: 
 { 
-	entity thalvaron_tentacle_monster: { init_state: default } 
+	entity thalvaron_tentacle_monster: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_duskwhisper_owlbear: 
 { 
-	entity thalvaron_duskwhisper_owlbear: { init_state: default } 
+	entity thalvaron_duskwhisper_owlbear: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_duskwhisper_crab: 
 { 
-	entity thalvaron_duskwhisper_crab: { init_state: default } 
+	entity thalvaron_duskwhisper_crab: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_silk_spider:
 { 
-	entity thalvaron_silk_spider: { init_state: default } 
+	entity thalvaron_silk_spider: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_silk_spider_large:
 { 
-	entity thalvaron_silk_spider_large: { init_state: default } 
+	entity thalvaron_silk_spider_large: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_wood_elemental_2:
 { 
-	entity thalvaron_wood_elemental_2: { init_state: default } 
+	entity thalvaron_wood_elemental_2: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_cave_lizard:
 { 
-	entity thalvaron_cave_lizard: { init_state: default } 
+	entity thalvaron_cave_lizard: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_cave_lizard_2:
 { 
-	entity thalvaron_cave_lizard_2: { init_state: default } 
+	entity thalvaron_cave_lizard_2: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_korgast:
 { 
-	entity thalvaron_korgast: { init_state: default } 
+	entity thalvaron_korgast: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_wood_elemental_3:
 { 
-	entity thalvaron_wood_elemental_3: { init_state: default } 
+	entity thalvaron_wood_elemental_3: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_ghyuik:
 {
-	entity thalvaron_ghyuik: { init_state: default } 
+	entity thalvaron_ghyuik: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 # Wood Elemental
@@ -935,9 +960,10 @@ map_entity_spawn thalvaron_ghyuik:
 
 map_entity_spawn thalvaron_north_dark_elf: 
 { 
-	entity thalvaron_north_dark_elf_a: { init_state: default } 
-	entity thalvaron_north_dark_elf_b: { init_state: default } 
-	entity thalvaron_north_dark_elf_c: { init_state: default } 
+	entity thalvaron_north_dark_elf_a: {} 
+	entity thalvaron_north_dark_elf_b: {} 
+	entity thalvaron_north_dark_elf_c: {}
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 # Around the single house
@@ -960,12 +986,14 @@ map_entity_spawn thalvaron_north_dark_elf:
 
 map_entity_spawn thalvaron_night_hound:
 { 
-	entity thalvaron_night_hound: { init_state: default } 
+	entity thalvaron_night_hound: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_mountain_troll:
 { 
-	entity thalvaron_mountain_troll: { init_state: default } 
+	entity thalvaron_mountain_troll: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 # Night hounds

@@ -9,6 +9,7 @@ dialogue_screen .ulrik_copperquill_dialogue:
 	[
 		{ quest: .ulrik_copperquill_1 }
 		{ quest: .ulrik_copperquill_2 }
+		{ quest<offer_only>: .ulrik_copperquill_3 }
 	]
 }
 
@@ -140,5 +141,47 @@ quest .ulrik_copperquill_2:
 	# FIXME: rewards
 }
 
+############################################################
+# Quest 3
 
+item .ulrik_copperquill_3_quest_item:
+{
+	icon: icon_orange_potion
+	item_level: 15
+	flags: [ not_sellable unique ]
+	string: "Desert Remedy"
+}
+
+quest .ulrik_copperquill_3:
+{
+	string: "Desert Remedy"
+
+	text:
+	[
+		"Bring the Desert Remedy to Rumin Whiterock at the northern camp in the Badlands."
+	]
+	
+	description: 
+	[
+		"A friend of mine recently went to the camp up north to study the local wildlife and I know he suffers a bit from the climate. Thanks to you I've been able to brew a potion that will help him get through the nights. Maybe you"
+		"can bring it to him? I'm sure he'll give you something for your trouble.\n\n"
+		"You'll find the camp if you head north in the Badlands. My friend's name is Rumin Whiterock."
+	]
+
+	progress:
+	[
+		"Don't drink it yourself."
+	]
+	
+	completion:
+	[
+		"Uh, whatever Ulrik is brewing it's usually good. Thanks!"
+	]
+	
+	prerequisites: [ .ulrik_copperquill_2 ]
+	level: 15
+	quest_items: [ .ulrik_copperquill_3_quest_item ]
+	
+	# FIXME: rewards
+}
 

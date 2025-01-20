@@ -572,6 +572,7 @@ sprites:
 	sprite rock_floor: { flags: [ tile_walkable ] alt_tiles: [ rock_floor_alt_1 rock_floor_alt_2 ] }
 	sprite rock_floor_alt_1: { flags: [ tile_walkable ] }
 	sprite rock_floor_alt_2: { flags: [ tile_walkable ] }
+	sprite badlands_dungeon_entrance_closed: { flags: [ tile_block_line_of_sight tile_top ] }
 
 	cursor: { position: [ 0 304 ] }
 	

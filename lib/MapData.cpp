@@ -519,7 +519,7 @@ namespace tpublic
 			}
 		}
 
-		if (!aStream->ReadObjects(m_entitySpawns))
+		if (!aStream->ReadObjects(m_entitySpawns, 32768))
 			return false;
 		if (!aStream->ReadObjects(m_playerSpawns))
 			return false;

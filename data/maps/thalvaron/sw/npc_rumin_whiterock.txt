@@ -1,0 +1,87 @@
+dialogue_screen .rumin_whiterock_dialogue:
+{
+	text: 
+	[	
+		"Hello."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .ulrik_copperquill_3 }		
+		{ quest: .rumin_whiterock_1 }
+	]
+}
+
+dialogue_root .rumin_whiterock_dialogue:
+{
+	.rumin_whiterock_dialogue: { }
+}
+
+entity thalvaron_rumin_whiterock: !NPC
+{
+	_string: "Rumin Whiterock"
+	_dialogue_root: .rumin_whiterock_dialogue	
+	_sprite: dwarf_3
+	_sprite_dead: dwarf_3_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .rumin_whiterock_1_quest_item: {}
+
+item .rumin_whiterock_1_quest_item:
+{
+	icon: icon_severed_paw
+	item_level: 15
+	loot_groups: [ .rumin_whiterock_1_quest_item ]
+	flags: [ not_sellable unique ]
+	string: "Paw of One-Eyed Moe"
+}
+
+objective .rumin_whiterock_1:
+{
+	string: "Paw of One-Eyed Moe"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .rumin_whiterock_1_quest_item count: 1 }
+}
+
+quest .rumin_whiterock_1:
+{
+	string: "It's Just A Big Kitty"
+
+	text:
+	[
+		"Bring back the paw of One-Eyed Moe to Rumin Whiterock at the Badlands camp."
+	]
+	
+	description: 
+	[
+		"I've had some trouble sleeping up here. Every night I'm occasionally woken by a deep growling that chill me to the bones. They say it's an old mountain lion that patrols the outside the walls of the camp, looking for an"
+		"easy snack. It goes by the name One-Eyed Moe and, for same reason, it has developed a taste for dwarf flesh. Several times it has snuck into the camp and dragged a poor dwarf out into the darkness to be devoured. No wonder"
+		"I'm so worried, right?\n\n"
+		"So, uhm, maybe you can hunt it down and kill it? That would be swell."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Looking good!"
+	]
+
+	level: 15
+	objectives: [ .rumin_whiterock_1 ]
+	
+	# FIXME: rewards
+}

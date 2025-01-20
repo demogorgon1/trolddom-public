@@ -1,0 +1,142 @@
+dialogue_screen .warmaster_jounheim_dialogue:
+{
+	text: 
+	[	
+		"Hello."
+	]		
+	
+	options:
+	[
+		{ quest: .warmaster_jounheim_1 }
+		{ quest<completion_only>: .badlands_orc }
+		{ quest: .warmaster_jounheim_2 }
+	]
+}
+
+dialogue_root .warmaster_jounheim_dialogue:
+{
+	.warmaster_jounheim_dialogue: { }
+}
+
+entity thalvaron_warmaster_jounheim: !NPC
+{
+	_string: "Werfil Jounheim"
+	_guild_name: "Warmaster"
+	_dialogue_root: .warmaster_jounheim_dialogue	
+	_sprite: dwarf_1
+	_sprite_dead: dwarf_1_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .warmaster_jounheim_1_a:
+{
+	string: "Skullforge Scouts Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_badlands_orc_a thalvaron_badlands_orc_b ]
+		count: 4
+	}
+}
+
+objective .warmaster_jounheim_1_b:
+{
+	string: "Skullforge Rangers Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_badlands_orc_c ]
+		count: 2
+	}
+}
+
+quest .warmaster_jounheim_1:
+{
+	string: "Skullforge Intruders"
+
+	text:
+	[
+		"Hunt down Skullforge orcs in the Badlands south of Durgan Tharok."
+	]
+	
+	description: 
+	[
+		"I've heard you've dealt with the goblins of Aetheris island. Have you ever before encountered their bigger cousins, the orcs? They've been the enemy of all dwarves since the beginning of time. Luckily these lands have"
+		"long been spared their presence, but untortunately some from the Skullforge clan have been spotted in the south. This is a dangerous situation. Where are they coming from and is this a sign of darker times ahead?\n\n"
+		"For now only a few patrols have been spotted, but we can't let them roam freely. I need you to venture south and hunt down these vile creatures."
+	]
+
+	progress:
+	[
+		"Why are you still here?"
+	]
+	
+	completion:
+	[
+		"You wear the stench of orc blood on you. Good."
+	]
+	
+	objectives: [ .warmaster_jounheim_1_a .warmaster_jounheim_1_b ]
+	level: 15
+	
+	# FIXME: rewards
+}
+
+############################################################
+# Quest 2
+
+objective .warmaster_jounheim_2:
+{
+	string: "Gorvak Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_badlands_orc_gorvak ]
+		count: 1
+	}
+}
+
+quest .warmaster_jounheim_2:
+{
+	string: "Commander Gorvak"
+
+	text:
+	[
+		"Locate the orc commander Gorvak in south eastern Badlands and kill him."
+	]
+	
+	description: 
+	[
+		"I'm no expert in orcish, but it seems clear to me that the Skullforge orcs we've seen are only the tip of the iceberg. It looks like they've entered the Badlands through the old mines of Durgan Thurgrok to the south east.\n\n"
+		"It mentions some kind of orc commander named Gorvak. Locate this orc and kill him."
+	]
+
+	progress:
+	[
+		"Why are you still here?"
+	]
+	
+	completion:
+	[
+		"This will set them back a good while, but I suspect this is only the beginning."
+	]
+	
+	objectives: [ .warmaster_jounheim_2 ]
+	level: 15
+	prerequisites: [ .badlands_orc ]
+	
+	# FIXME: rewards
+}

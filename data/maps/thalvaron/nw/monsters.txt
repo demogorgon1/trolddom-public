@@ -25,70 +25,81 @@ loot_table .default_humanoid:
 
 map_entity_spawn thalvaron_rebel: 
 { 
-	entity thalvaron_rebel_10_a: { init_state: default } 
-	entity thalvaron_rebel_10_b: { init_state: default } 
-	entity thalvaron_rebel_10_c: { init_state: default } 
-	entity thalvaron_rebel_10_d: { init_state: default } 
+	entity thalvaron_rebel_10_a: {} 
+	entity thalvaron_rebel_10_b: {} 
+	entity thalvaron_rebel_10_c: {} 
+	entity thalvaron_rebel_10_d: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_rebel_leader: 
 { 
-	entity thalvaron_rebel_10_leader: { init_state: default } 
+	entity thalvaron_rebel_10_leader: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_rebel_outside: 
 { 
-	entity thalvaron_rebel_skirmisher_10_a: { init_state: default } 
-	entity thalvaron_rebel_skirmisher_10_b: { init_state: default } 
-	entity thalvaron_rebel_skirmisher_10_c: { init_state: default } 
-	entity thalvaron_rebel_skirmisher_10_d: { init_state: default } 
+	entity thalvaron_rebel_skirmisher_10_a: {} 
+	entity thalvaron_rebel_skirmisher_10_b: {} 
+	entity thalvaron_rebel_skirmisher_10_c: {} 
+	entity thalvaron_rebel_skirmisher_10_d: {}
+	spawn_timer: !NPC_RESPAWN_NORMAL{} 
 }
 
 map_entity_spawn thalvaron_rebel_poacher: 
 { 
-	entity thalvaron_rebel_poacher: { init_state: default } 
+	entity thalvaron_rebel_poacher: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_rebel_poacher_dog: 
 { 
-	entity thalvaron_rebel_poacher_dog: { init_state: default } 
+	entity thalvaron_rebel_poacher_dog: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_rebel_poacher_leader: 
 { 
-	entity thalvaron_rebel_poacher_leader: { init_state: default } 
+	entity thalvaron_rebel_poacher_leader: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_rebel_fernwick:
 { 
-	entity thalvaron_rebel_bandit_a: { init_state: default } 
-	entity thalvaron_rebel_bandit_b: { init_state: default } 
-	entity thalvaron_rebel_bandit_c: { init_state: default } 
-	entity thalvaron_rebel_bandit_d: { init_state: default } 
+	entity thalvaron_rebel_bandit_a: {} 
+	entity thalvaron_rebel_bandit_b: {} 
+	entity thalvaron_rebel_bandit_c: {} 
+	entity thalvaron_rebel_bandit_d: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_rebel_hotel:
 { 
-	entity thalvaron_rebel_thug_a: { init_state: default } 
-	entity thalvaron_rebel_thug_b: { init_state: default } 
-	entity thalvaron_rebel_thug_c: { init_state: default } 
-	entity thalvaron_rebel_thug_d: { init_state: default } 
+	entity thalvaron_rebel_thug_a: {} 
+	entity thalvaron_rebel_thug_b: {} 
+	entity thalvaron_rebel_thug_c: {} 
+	entity thalvaron_rebel_thug_d: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_rebel_leader_farmer_rabbit:
 { 
-	entity thalvaron_rebel_leader_farmer_rabbit: { init_state: default } 
+	entity thalvaron_rebel_leader_farmer_rabbit: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_rebel_elite_guard:
 { 
-	entity thalvaron_rebel_elite_guard_a: { init_state: default } 
-	entity thalvaron_rebel_elite_guard_b: { init_state: default } 
+	entity thalvaron_rebel_elite_guard_a: {} 
+	entity thalvaron_rebel_elite_guard_b: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_rebel_leader_camp:
 { 
-	entity thalvaron_rebel_leader_camp: { init_state: default } 
+	entity thalvaron_rebel_leader_camp: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_rebel_dead:
@@ -96,8 +107,7 @@ map_entity_spawn thalvaron_rebel_dead:
 	entity thalvaron_rebel_dead_a: { init_state: dead }
 	entity thalvaron_rebel_dead_b: { init_state: dead } 
 	entity thalvaron_rebel_dead_c: { init_state: dead } 
-	entity thalvaron_rebel_dead_d: { init_state: dead } 
-	
+	entity thalvaron_rebel_dead_d: { init_state: dead } 	
 	spawn_timer: { despawn_required: true }
 }
 
@@ -356,7 +366,8 @@ map_entity_spawn thalvaron_rebel_dead:
 
 map_entity_spawn thalvaron_cave_lion: 
 { 
-	entity thalvaron_cave_lion: { init_state: default } 
+	entity thalvaron_cave_lion: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 # Lion in cave mushroom quest
@@ -386,9 +397,10 @@ map_entity_spawn thalvaron_cave_lion:
 
 map_entity_spawn thalvaron_deer: 
 { 
-	entity thalvaron_deer_10: { init_state: default level: 10 } 
-	entity thalvaron_deer_11: { init_state: default level: 11 } 
-	entity thalvaron_deer_12: { init_state: default level: 12 } 
+	entity thalvaron_deer_10: {} 
+	entity thalvaron_deer_11: {} 
+	entity thalvaron_deer_12: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 # Wildlife around Valoris
@@ -419,22 +431,26 @@ map_entity_spawn thalvaron_deer:
 
 map_entity_spawn thalvaron_crab: 
 { 
-	entity thalvaron_crab_10: { init_state: default } 
+	entity thalvaron_crab_10: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_crab_2: 
 { 
-	entity thalvaron_crab_11: { init_state: default } 
+	entity thalvaron_crab_11: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_crab_3: 
 { 
-	entity thalvaron_crab_12: { init_state: default } 
+	entity thalvaron_crab_12: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_crab_dark_elf: 
 { 
-	entity thalvaron_crab_dark_elf: { init_state: default } 
+	entity thalvaron_crab_dark_elf: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_crab_giant: 
@@ -614,7 +630,8 @@ map_entity_spawn thalvaron_crab_giant:
 
 map_entity_spawn thalvaron_roger_bear: 
 { 
-	entity thalvaron_roger_bear: { init_state: default } 
+	entity thalvaron_roger_bear: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 {
@@ -649,7 +666,8 @@ map_entity_spawn thalvaron_roger_bear:
 
 map_entity_spawn thalvaron_robertson_farm_wolf: 
 { 
-	entity thalvaron_wolf_11: { init_state: default } 
+	entity thalvaron_wolf_11: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 # Wolves around Robertson farm
@@ -679,23 +697,27 @@ map_entity_spawn thalvaron_robertson_farm_wolf:
 
 map_entity_spawn thalvaron_rebel_dark_elf: 
 { 
-	entity thalvaron_rebel_dark_elf: { init_state: default } 
+	entity thalvaron_rebel_dark_elf: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_rebel_dark_elf_demon: 
 { 
-	entity thalvaron_rebel_dark_elf_demon_a: { init_state: default } 
-	entity thalvaron_rebel_dark_elf_demon_b: { init_state: default } 
+	entity thalvaron_rebel_dark_elf_demon_a: {} 
+	entity thalvaron_rebel_dark_elf_demon_b: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_rebel_dark_elf_leader: 
 { 
-	entity thalvaron_rebel_dark_elf_leader: { init_state: default } 
+	entity thalvaron_rebel_dark_elf_leader: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_rebel_dark_elf_human: 
 { 
-	entity thalvaron_rebel_dark_elf_human: { init_state: default } 
+	entity thalvaron_rebel_dark_elf_human: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 # Demon
@@ -797,23 +819,27 @@ map_entity_spawn thalvaron_rebel_dark_elf_human:
 
 map_entity_spawn thalvaron_the_beast: 
 { 
-	entity thalvaron_the_beast: { init_state: default } 
+	entity thalvaron_the_beast: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_elemental: 
 { 
-	entity thalvaron_elemental: { init_state: default } 
+	entity thalvaron_elemental: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_arcane_worm: 
 { 
-	entity thalvaron_arcane_worm: { init_state: default } 
+	entity thalvaron_arcane_worm: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_arcane_monster: 
 { 
-	entity thalvaron_arcane_warrior: { init_state: default } 
-	entity thalvaron_arcane_apparition: { init_state: default } 
+	entity thalvaron_arcane_warrior: {} 
+	entity thalvaron_arcane_apparition: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 # The beast

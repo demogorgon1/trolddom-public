@@ -33,74 +33,81 @@ loot_table .default_beast:
 
 map_entity_spawn thalvaron_mud_slinger: 
 { 
-	entity thalvaron_mud_slinger: { init_state: default } 
+	entity thalvaron_mud_slinger: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_mud_slinger_2: 
 { 
-	entity thalvaron_mud_slinger_2: { init_state: default } 
+	entity thalvaron_mud_slinger_2: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_crocodile: 
 { 
-	entity thalvaron_crocodile: { init_state: default level: 12 } 
-	entity thalvaron_crocodile_2: { init_state: default level: 13 } 
-	entity thalvaron_crocodile_3: { init_state: default level: 14 } 
+	entity thalvaron_crocodile: { level: 12 } 
+	entity thalvaron_crocodile_2: { level: 13 } 
+	entity thalvaron_crocodile_3: { level: 14 } 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_crocodile_salt: 
 { 
-	entity thalvaron_crocodile_salt: { init_state: default } 
+	entity thalvaron_crocodile_salt: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_swamp_monster: 
 { 
-	entity thalvaron_swamp_lurker: { init_state: default } 
-	entity thalvaron_swamp_dweller: { init_state: default } 
+	entity thalvaron_swamp_lurker: {} 
+	entity thalvaron_swamp_dweller: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_neutral_crab:
 {
-	entity thalvaron_neutral_crab: { init_state: default level: 13 } 
-	entity thalvaron_neutral_crab_2: { init_state: default level: 14 } 
+	entity thalvaron_neutral_crab: {} 
+	entity thalvaron_neutral_crab_2: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_lizard_ambusher_1:
 {
 	spawn_timer: { only_when_triggered: true }
-	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_lizard_ambusher_2:
 {
 	spawn_timer: { only_when_triggered: true }
-	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_lizard_ambusher_3:
 {
 	spawn_timer: { only_when_triggered: true }
-	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_swamp_ooze:
 {
-	entity thalvaron_swamp_ooze: { init_state: default } 
+	entity thalvaron_swamp_ooze: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_rock_crumbler:
 {
-	entity thalvaron_rock_crumbler: { init_state: default } 
+	entity thalvaron_rock_crumbler: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_rock_crumbler_boss:
 {
-	entity thalvaron_rock_crumbler_boss: { init_state: default } 
+	entity thalvaron_rock_crumbler_boss: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_swamp_giant:
 {
-	entity thalvaron_swamp_giant: { init_state: default } 
+	entity thalvaron_swamp_giant: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 # Neutral crabs
@@ -364,14 +371,16 @@ map_entity_spawn thalvaron_swamp_giant:
 
 map_entity_spawn thalvaron_north_marshlands_kobold: 
 { 
-	entity thalvaron_north_marshlands_kobold_a: { init_state: default } 
-	entity thalvaron_north_marshlands_kobold_b: { init_state: default } 
-	entity thalvaron_north_marshlands_kobold_c: { init_state: default } 
+	entity thalvaron_north_marshlands_kobold_a: {} 
+	entity thalvaron_north_marshlands_kobold_b: {} 
+	entity thalvaron_north_marshlands_kobold_c: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_north_marshlands_kobold_boss: 
 { 
-	entity thalvaron_north_marshlands_kobold_boss: { init_state: default } 
+	entity thalvaron_north_marshlands_kobold_boss: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 # Melee
@@ -502,7 +511,8 @@ map_entity_spawn thalvaron_north_marshlands_kobold_boss:
 
 map_entity_spawn thalvaron_mongo: 
 { 
-	entity thalvaron_mongo: { init_state: default } 
+	entity thalvaron_mongo: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 npc_behavior_state .mongo:
@@ -540,22 +550,25 @@ route thalvaron_mongo_patrol:
 
 map_entity_spawn thalvaron_marsh_bandit: 
 { 
-	entity thalvaron_marsh_bandit_a: { init_state: default } 
-	entity thalvaron_marsh_bandit_b: { init_state: default } 
-	entity thalvaron_marsh_bandit_c: { init_state: default } 
-	entity thalvaron_marsh_bandit_d: { init_state: default } 
+	entity thalvaron_marsh_bandit_a: {} 
+	entity thalvaron_marsh_bandit_b: {} 
+	entity thalvaron_marsh_bandit_c: {} 
+	entity thalvaron_marsh_bandit_d: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_marsh_bandit_2: 
 { 
-	entity thalvaron_marsh_bandit_2_a: { init_state: default } 
-	entity thalvaron_marsh_bandit_2_b: { init_state: default } 
-	entity thalvaron_marsh_bandit_2_c: { init_state: default } 
+	entity thalvaron_marsh_bandit_2_a: {} 
+	entity thalvaron_marsh_bandit_2_b: {} 
+	entity thalvaron_marsh_bandit_2_c: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_marsh_bandit_leader: 
 { 
-	entity thalvaron_marsh_bandit_leader: { init_state: default } 
+	entity thalvaron_marsh_bandit_leader: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 # Bandits
@@ -666,14 +679,16 @@ map_entity_spawn thalvaron_marsh_bandit_leader:
 
 map_entity_spawn thalvaron_south_marshlands_kobold: 
 { 
-	entity thalvaron_south_marshlands_kobold_a: { init_state: default } 
-	entity thalvaron_south_marshlands_kobold_b: { init_state: default } 
-	entity thalvaron_south_marshlands_kobold_c: { init_state: default } 
+	entity thalvaron_south_marshlands_kobold_a: {} 
+	entity thalvaron_south_marshlands_kobold_b: {} 
+	entity thalvaron_south_marshlands_kobold_c: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_south_marshlands_kobold_special: 
 { 
-	entity thalvaron_south_marshlands_kobold_special: { init_state: default } 
+	entity thalvaron_south_marshlands_kobold_special: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 loot_table .south_marshlands_kobold: 
@@ -779,12 +794,27 @@ loot_table .south_marshlands_kobold_special:
 
 map_entity_spawn thalvaron_dust_lizard: 
 { 
-	entity thalvaron_dust_lizard: { init_state: default } 
+	entity thalvaron_dust_lizard: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_dread_scorpion: 
 { 
-	entity thalvaron_dread_scorpion: { init_state: default } 
+	entity thalvaron_dread_scorpion: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_mountain_lion:
+{
+	entity thalvaron_mountain_lion: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_dread_stinger: 
+{ 
+	entity thalvaron_dread_stinger: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_mountain_lion_boss:
+{
+	entity thalvaron_mountain_lion_boss: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 # Lizards
@@ -846,13 +876,188 @@ map_entity_spawn thalvaron_dread_scorpion:
 		]	
 	}
 
-	${
-		_level: 14
+	${		
 		_faction: monsters
 		_creature_type: beast
 		_loot_table: .dread_scorpion
 		_default_behavior_state: .wandering_short
 	}
 
-	entity thalvaron_dread_scorpion: !NPC { _string: "Dread Scorpion" _sprite: scorpion_1 _sprite_dead: scorpion_1_dead }
+	entity thalvaron_dread_scorpion: !NPC { _level: 14 _string: "Dread Scorpion" _sprite: scorpion_1 _sprite_dead: scorpion_1_dead }
+	entity thalvaron_dread_stinger: !NPC { _level: 15 _string: "Dread Stinger" _sprite: scorpion_2 _sprite_dead: scorpion_2_dead }
+	
+
 }
+
+# Mountain lions
+{
+	loot_table .mountain_lion_boss: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: 
+				{ 
+					weight: 1
+					loot_group: .rumin_whiterock_1_quest_item 
+					requirement self<must_have_active_quest>: .rumin_whiterock_1 
+				} 
+			}
+			
+			!WORLD_DROPS {}
+		]	
+	}
+
+	${		
+		_faction: monsters
+		_creature_type: beast		
+		_default_behavior_state: .wandering_short
+	}
+
+	entity thalvaron_mountain_lion: !NPC { _level: 14 _string: "Mountain Lion" _sprite: lion_1 _sprite_dead: lion_1_dead _loot_table: .default_beast }
+	entity thalvaron_mountain_lion_boss: !NPC { _level: 15 _string: "One-Eyed Moe" _sprite: lion_1 _sprite_dead: lion_1_dead _loot_table: .mountain_lion_boss }
+}
+
+##########################################################################################
+# Badlands orcs
+
+map_entity_spawn thalvaron_badlands_orc: 
+{ 
+	entity thalvaron_badlands_orc_a: {} 
+	entity thalvaron_badlands_orc_b: {} 
+	entity thalvaron_badlands_orc_c: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_badlands_orc_2: 
+{ 
+	entity thalvaron_badlands_orc_2_a: {} 
+	entity thalvaron_badlands_orc_2_b: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_badlands_orc_gorvak: 
+{ 
+	entity thalvaron_badlands_orc_gorvak: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Outer camps and patrols
+{
+	loot_table .badlands_orc: 
+	{
+		slots:
+		[	
+			{ 
+				possibility:
+				{
+					weight: 1
+				}
+			
+				possibility: 
+				{ 				
+					weight: 1
+					loot_group: .badlands_orc 
+					requirement self<must_not_have_completed_quest>: .badlands_orc 
+					requirement self<must_not_have_active_quest>: .badlands_orc 
+					requirement self<must_not_have_item>: .badlands_orc 
+					requirement self<must_have_active_quest>: .warmaster_jounheim_1 
+				} 
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_CLOTH {}
+		]	
+	}
+	
+	loot_group .badlands_orc: { }
+	
+	ability .badlands_orc:	
+	{
+		string: "Crude Map"
+		description: "This item starts a quest."
+		flags: [ target_self item ]
+		icon: icon_scroll_2
+		direct_effect simple<start_quest>: .badlands_orc
+		states: [ default in_combat ]
+		requirement self<must_not_have_completed_quest>: { id: .badlands_orc }
+		requirement self<must_not_have_active_quest>: { id: .badlands_orc }
+	}
+
+	item .badlands_orc:
+	{
+		loot_groups: [ .badlands_orc ]		
+		string: "Crude Map" 
+		icon: icon_scroll_2
+		item_level: 15
+		flags: [ unique not_sellable ]
+		use_ability: .badlands_orc
+	}	
+			
+	quest .badlands_orc:
+	{
+		string: "Crude Map"
+
+		text:
+		[
+			"Bring the crude map to Warmaster Jounheim in Durgan Tharok."
+		]
+		
+		description: 
+		[
+			"This looks like a crude map of the badlands with lots of arrows and crosses on it. It might be of the interest to the Warmaster."
+		]
+		
+		completion:
+		[
+			"Hmm. Interesting, let me see."
+		]
+
+		level: 15
+		quest_items: [ .badlands_orc ]		
+		reward_cash_multiplier: 0.3
+		reward_xp_multiplier: 0.3
+		next_quest: .warmaster_jounheim_2
+	}
+
+	${
+		_level: 15
+		_faction: monsters
+		_creature_type: humanoid
+		_loot_table: .badlands_orc
+		_default_behavior_state: .passive
+	}
+
+	entity thalvaron_badlands_orc_a: !NPC { _string: "Skullforge Scout" _sprite: orc_1 _sprite_dead: orc_1_dead }
+	entity thalvaron_badlands_orc_b: !NPC { _string: "Skullforge Scout" _sprite: orc_2 _sprite_dead: orc_2_dead }
+	entity thalvaron_badlands_orc_c: !NPC { _string: "Skullforge Ranger" _sprite: orc_5 _sprite_dead: orc_5_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
+}
+
+# Orc soldiers
+{
+	${
+		_level: 15
+		_faction: monsters
+		_creature_type: humanoid
+		_loot_table: .badlands_orc
+		_default_behavior_state: .passive
+	}
+
+	entity thalvaron_badlands_orc_2_a: !NPC { _string: "Skullforge Legionaire" _sprite: orc_3 _sprite_dead: orc_3_dead }
+	entity thalvaron_badlands_orc_2_b: !NPC { _string: "Skullforge Legionaire" _sprite: orc_4 _sprite_dead: orc_4_dead }	
+}
+
+# Orc commander
+{
+	${
+		_level: 15
+		_faction: monsters
+		_creature_type: humanoid
+		_loot_table: .badlands_orc
+		_default_behavior_state: .passive
+	}
+
+	entity thalvaron_badlands_orc_gorvak: !NPC { _string: "Commander Gorvak" _sprite: orc_6 _sprite_dead: orc_6_dead }	
+}
+
+

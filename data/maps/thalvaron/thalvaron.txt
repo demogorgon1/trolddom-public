@@ -143,6 +143,7 @@ map_palette .tiles:
 	tile roof_4: [ 200 161 0 ]	
 	tile ice_cave_entrance: [ 39 243 94 ]
 	tile rock_floor: [ 64 20 32 ]
+	tile badlands_dungeon_entrance_closed: [ 88 122 222 ]
 }
 
 # NW
@@ -275,6 +276,8 @@ map_entity_spawn thalvaron_dwarf_blacksmith: { entity thalvaron_dwarf_blacksmith
 map_entity_spawn thalvaron_ulrik_copperquill: { entity thalvaron_ulrik_copperquill: { init_state: default } }
 map_entity_spawn thalvaron_eldriv_copperquill: { entity thalvaron_eldriv_copperquill: { init_state: default } }
 map_entity_spawn thalvaron_borg_ironmantle: { entity thalvaron_borg_ironmantle: { init_state: default } }
+map_entity_spawn thalvaron_warmaster_jounheim: { entity thalvaron_warmaster_jounheim: { init_state: default } }
+map_entity_spawn thalvaron_rumin_whiterock: { entity thalvaron_rumin_whiterock: { init_state: default } }
 
 map_palette .stuff:
 {
@@ -532,6 +535,15 @@ map_palette .stuff:
 	entity_spawn thalvaron_borg_ironmantle: [ 153 28 249 ]
 	entity_spawn thalvaron_dust_lizard: [ 84 88 129 ]
 	entity_spawn thalvaron_dread_scorpion: [ 184 88 150 ]
+	entity_spawn thalvaron_mountain_lion: [ 77 22 111 ]
+	entity_spawn thalvaron_badlands_orc: [ 99 123 44 ]
+	entity_spawn thalvaron_warmaster_jounheim: [ 139 79 222 ]
+	entity_spawn thalvaron_badlands_orc_2: [ 199 123 44 ]
+	entity_spawn thalvaron_badlands_orc_gorvak: [ 99 123 144 ]
+	entity_spawn thalvaron_dread_stinger: [ 74 91 58 ]
+	entity_spawn thalvaron_rumin_whiterock: [ 114 85 77 ]
+	entity_spawn thalvaron_mountain_lion_boss: [ 114 185 88 ]
+	
 }
 
 map_palette .levels:

@@ -539,6 +539,7 @@ sprites:
 	sprite icon_rod_1 : { tags: [ icon ] }
 	sprite icon_claw_3 : { tags: [ icon ] }
 	sprite icon_scales_1 : { tags: [ icon ] }
+	sprite icon_severed_paw : { tags: [ icon ] }
 	
 }
 
