@@ -541,6 +541,7 @@ sprites:
 	sprite icon_scales_1 : { tags: [ icon ] }
 	sprite icon_severed_paw : { tags: [ icon ] }
 	sprite icon_stinger_1 : { tags: [ icon ] }
+	sprite icon_stone_1 : { tags: [ icon ] }
 	
 }
 

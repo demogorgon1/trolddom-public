@@ -7,9 +7,10 @@ dialogue_screen .sheriff_ravenreach_dialogue:
 	
 	options:
 	[
+		{ quest: .ranger_thorksen_1 }
 		{ quest<completion_only>: .john_thompoure_1 }
 		{ quest: .sheriff_ravenreach_1 }
-		{ quest<completion_only>: .deputy_ravenreach_1 }
+		{ quest<completion_only>: .deputy_ravenreach_1 }		
 	]
 }
 

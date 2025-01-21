@@ -8,6 +8,7 @@ dialogue_screen .rurik_ironmantle_dialogue:
 	options:
 	[
 		{ quest<completion_only>: .hort_ironmantle_2 }
+		{ quest<completion_only>: .mumle_whiterock_2 }
 	]
 }
 

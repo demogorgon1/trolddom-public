@@ -242,6 +242,7 @@ map_entity_spawn thalvaron_damon_arkwright: { entity thalvaron_damon_arkwright: 
 map_entity_spawn thalvaron_erhart_hulius: { entity thalvaron_erhart_hulius: { init_state: default } }
 map_entity_spawn thalvaron_jimbo_tokins: { entity thalvaron_jimbo_tokins: { init_state: default } }
 map_entity_spawn thalvaron_laura_tokins: { entity thalvaron_laura_tokins: { init_state: default } }
+map_entity_spawn thalvaron_ranger_thorksen: { entity thalvaron_ranger_thorksen: { init_state: default } }
 
 # SW
 map_entity_spawn thalvaron_brian_riddle: { entity thalvaron_brian_riddle: { init_state: default } }
@@ -281,6 +282,7 @@ map_entity_spawn thalvaron_rumin_whiterock: { entity thalvaron_rumin_whiterock: 
 map_entity_spawn thalvaron_rumin_whiterock_3_quest_item: { entity thalvaron_rumin_whiterock_3_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_bramli_stonestride: { entity thalvaron_bramli_stonestride: { init_state: default } }
 map_entity_spawn thalvaron_borli_stouthammer: { entity thalvaron_borli_stouthammer: { init_state: default } spawn_timer: !ESCORT_RESPAWN{} }
+map_entity_spawn thalvaron_mumle_whiterock: { entity thalvaron_mumle_whiterock: { init_state: default } }
 
 map_palette .stuff:
 {
@@ -481,6 +483,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_erhart_hulius: [ 110 123 130 ]
 	entity_spawn thalvaron_jimbo_tokins: [ 110 123 160 ]
 	entity_spawn thalvaron_laura_tokins: [ 110 23 210 ]
+	entity_spawn thalvaron_ranger_thorksen: [ 33 85 155 ]
 	
 	# SW
 	entity_spawn thalvaron_brian_riddle: [ 66 88 99 ]
@@ -553,6 +556,10 @@ map_palette .stuff:
 	entity_spawn thalvaron_badlands_spider_boss: [ 94 11 156 ]
 	entity_spawn thalvaron_bramli_stonestride: [ 39 176 216 ]
 	entity_spawn thalvaron_borli_stouthammer: [ 159 93 34 ]
+	entity_spawn thalvaron_badlands_rock_elemental: [ 2 48 158 ]
+	entity_spawn thalvaron_mumle_whiterock: [ 49 148 255 ]
+	entity_spawn thalvaron_badlands_mud_elemental: [ 222 48 158 ]
+	entity_spawn thalvaron_dirt_slitherer: [ 65 44 119 ]
 }
 
 map_palette .levels:

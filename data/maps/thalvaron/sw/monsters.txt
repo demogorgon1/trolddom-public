@@ -837,6 +837,21 @@ map_entity_spawn thalvaron_badlands_spider_boss:
 	entity thalvaron_badlands_spider_boss: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
+map_entity_spawn thalvaron_badlands_rock_elemental:
+{
+	entity thalvaron_badlands_rock_elemental: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_badlands_mud_elemental:
+{
+	entity thalvaron_badlands_mud_elemental: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_dirt_slitherer:
+{
+	entity thalvaron_dirt_slitherer: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
 # Lizards
 {
 	loot_table .dust_lizard: 
@@ -861,15 +876,15 @@ map_entity_spawn thalvaron_badlands_spider_boss:
 		]	
 	}
 
-	${
-		_level: 14
+	${		
 		_faction: monsters
 		_creature_type: beast
 		_loot_table: .dust_lizard
 		_default_behavior_state: .wandering_short
 	}
 
-	entity thalvaron_dust_lizard: !NPC { _string: "Dust Lizard" _sprite: lizard_3 _sprite_dead: lizard_3_dead }
+	entity thalvaron_dust_lizard: !NPC { _level: 14 _string: "Dust Lizard" _sprite: lizard_3 _sprite_dead: lizard_3_dead }
+	entity thalvaron_dirt_slitherer: !NPC { _level: 16 _string: "Dirt Slitherer" _sprite: lizard_2 _sprite_dead: lizard_2_dead }
 }
 
 # Scorpions
@@ -1004,6 +1019,57 @@ map_entity_spawn thalvaron_badlands_spider_boss:
 	entity thalvaron_badlands_spider_boss: !NPC { _level: 15 _string: "Giant Cave Lurker" _sprite: spider_4 _sprite_dead: spider_4_dead _loot_table: .spider_boss }
 }
 
+# Rock Elementals
+{
+	loot_table .badlands_rock_elemental: 
+	{
+		slots:
+		[	
+			{ 
+				possibility:
+				{
+					weight: 1
+				}
+			
+				possibility: 
+				{ 
+					weight: 1
+					loot_group: .mumle_whiterock_2_quest_item 
+					requirement self<must_have_active_quest>: .mumle_whiterock_2 
+				} 
+			}
+			
+			!WORLD_DROPS {}
+		]	
+	}
+
+	${
+		_level: 16
+		_faction: monsters
+		_creature_type: elemental
+		_default_behavior_state: .wandering_short
+		_loot_table: .badlands_rock_elemental
+		_weapon_damage: 1.1
+		_resource_health: 1.1
+	}
+
+	entity thalvaron_badlands_rock_elemental: !NPC { _string: "Dirt Rumbler" _sprite: rock_elemental_1 _sprite_dead: rock_elemental_1_dead }
+}
+
+# Mud Elementals
+{
+	${
+		_level: 16
+		_faction: monsters
+		_creature_type: elemental
+		_default_behavior_state: .wandering_short
+		_loot_table: .default_beast
+		_weapon_damage: 1.1
+		_resource_health: 1.1
+	}
+
+	entity thalvaron_badlands_mud_elemental: !NPC { _string: "Mud Elemental" _sprite: ooze_3 _sprite_dead: ooze_3_dead }
+}
 
 ##########################################################################################
 # Badlands orcs
