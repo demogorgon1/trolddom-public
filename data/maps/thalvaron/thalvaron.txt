@@ -243,6 +243,8 @@ map_entity_spawn thalvaron_erhart_hulius: { entity thalvaron_erhart_hulius: { in
 map_entity_spawn thalvaron_jimbo_tokins: { entity thalvaron_jimbo_tokins: { init_state: default } }
 map_entity_spawn thalvaron_laura_tokins: { entity thalvaron_laura_tokins: { init_state: default } }
 map_entity_spawn thalvaron_ranger_thorksen: { entity thalvaron_ranger_thorksen: { init_state: default } }
+map_entity_spawn thalvaron_laura_tokins_1_quest_item: { entity thalvaron_laura_tokins_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_laura_tokins_1b_quest_item: { entity thalvaron_laura_tokins_1b_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 
 # SW
 map_entity_spawn thalvaron_brian_riddle: { entity thalvaron_brian_riddle: { init_state: default } }
@@ -484,6 +486,9 @@ map_palette .stuff:
 	entity_spawn thalvaron_jimbo_tokins: [ 110 123 160 ]
 	entity_spawn thalvaron_laura_tokins: [ 110 23 210 ]
 	entity_spawn thalvaron_ranger_thorksen: [ 33 85 155 ]
+	entity_spawn thalvaron_shadowthorn_wolf: [ 133 185 255 ]	
+	entity_spawn thalvaron_laura_tokins_1_quest_item: [ 77 188 92 ]
+	entity_spawn thalvaron_laura_tokins_1b_quest_item: [ 177 188 192 ]
 	
 	# SW
 	entity_spawn thalvaron_brian_riddle: [ 66 88 99 ]

@@ -653,6 +653,7 @@ sprites:
 	sprite seaweed_1: { }
 	sprite flower_2: { }
 	sprite bell_1: { }
+	sprite flower_3: { }
 		
 }
 

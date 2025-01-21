@@ -986,14 +986,40 @@ map_entity_spawn thalvaron_north_dark_elf:
 
 map_entity_spawn thalvaron_night_hound:
 { 
-	entity thalvaron_night_hound: {} 
-	spawn_timer: !NPC_RESPAWN_NORMAL{}
+	entity thalvaron_night_hound: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn thalvaron_mountain_troll:
 { 
-	entity thalvaron_mountain_troll: {} 
-	spawn_timer: !NPC_RESPAWN_NORMAL{}
+	entity thalvaron_mountain_troll: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_shadowthorn_wolf:
+{ 
+	entity thalvaron_shadowthorn_wolf: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+loot_table .hounds_and_wolves: 
+{
+	slots:
+	[	
+		{ 
+			possibility: 
+			{
+				weight: 6
+			}
+		
+			possibility: 
+			{ 
+				weight: 1
+				loot_group: .damon_arkwright_1_quest_item 
+				requirement self<must_have_active_quest>: .damon_arkwright_1 
+				requirement self<must_not_have_item>: .damon_arkwright_1_quest_item 
+			} 
+		}
+		
+		!WORLD_DROPS {}
+	]	
 }
 
 # Night hounds
@@ -1003,7 +1029,7 @@ map_entity_spawn thalvaron_mountain_troll:
 		_faction: monsters
 		_creature_type: beast
 		_default_behavior_state: .wandering_short				
-		_loot_table: .default_beast 
+		_loot_table: .hounds_and_wolves 
 		_weapon_damage: 1.2 
 		_resource_health: 1.3
 		_abilities: [ { id: npc_rend } { id: npc_attack } ]
@@ -1039,3 +1065,15 @@ map_entity_spawn thalvaron_mountain_troll:
 	entity thalvaron_mountain_troll: !NPC { _string: "Mountain Troll" _sprite: troll_1 _sprite_dead: troll_1_dead }
 }
 
+# Wolves
+{
+	${
+		_level: 16
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short				
+		_loot_table: .hounds_and_wolves 		
+	}
+
+	entity thalvaron_shadowthorn_wolf: !NPC { _string: "Shadowthorn Wolf" _sprite: wolf_3 _sprite_dead: wolf_3_dead  }
+}

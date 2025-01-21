@@ -7,6 +7,7 @@ dialogue_screen .damon_arkwright_dialogue:
 	
 	options:
 	[
+		{ quest: .damon_arkwright_1 }
 	]
 }
 
@@ -29,3 +30,52 @@ entity thalvaron_damon_arkwright: !NPC
 	_not_pushable: true	
 }
 
+############################################################
+# Quest 1
+
+loot_group .damon_arkwright_1_quest_item: {}
+
+item .damon_arkwright_1_quest_item:
+{
+	icon: icon_mark_1
+	item_level: 16
+	loot_groups: [ .damon_arkwright_1_quest_item ]
+	flags: [ not_sellable unique ]
+	string: "Mark of the Vampire"
+}
+
+objective .damon_arkwright_1:
+{
+	string: "Mark of the Vampire"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .damon_arkwright_1_quest_item count: 1 }
+}
+
+quest .damon_arkwright_1:
+{
+	string: "Vampiric Influence"
+
+	text:
+	[
+		"Kill wolves and hounds around Ravenreach until you find a sign of the vampire."
+	]
+	
+	description: 
+	[
+		"I came to Ravenreach as soon as I heard of black hounds that have been haunting the town at night. I've seen something like this before and it smells like vampiric influence. Those blood sucking bastards often use"
+		"wolves and black hounds to terrorize vulnerable towns like this. These woods are probably hiding a vampire, but where?\n\n"
+		"I have a plan. They often attach evil runes or effigies to these animals they use for their bidding. I want you to kill hounds and wolves in the area and see if you can find one of these marks."
+	]
+	
+	completion:
+	[
+		"Let me see."
+	]
+
+	level: 16	
+	objectives: [ .damon_arkwright_1 ]
+	
+	# FIXME rewards
+}

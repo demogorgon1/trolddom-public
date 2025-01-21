@@ -7,6 +7,7 @@ dialogue_screen .laura_tokins_dialogue:
 	
 	options:
 	[
+		{ quest: .laura_tokins_1 }
 	]
 }
 
@@ -26,5 +27,144 @@ entity thalvaron_laura_tokins: !NPC
 	_creature_type: humanoid
 	_loot_table: .npc
 	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .laura_tokins_1_quest_item: {}
+
+item .laura_tokins_1_quest_item:
+{
+	icon: icon_flower_7
+	item_level: 16
+	loot_groups: [ .laura_tokins_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Shadowthorn Rose"
+	stack: 4
+}
+
+loot_table .laura_tokins_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .laura_tokins_1_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_laura_tokins_1_quest_item:
+{
+	string: "Shadowthorn Rose"
+	systems: [ openable ]
+
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ flower_3 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .laura_tokins_1_quest_item
+			verb: pick_up
+			range: 1 
+			despawn: true 			
+			level: 16
+			required_quest: .laura_tokins_1
+		}		
+	}
+}
+
+objective .laura_tokins_1:
+{
+	string: "Shadowthorn Roses"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .laura_tokins_1_quest_item count: 4 }
+}
+
+loot_group .laura_tokins_1b_quest_item: {}
+
+item .laura_tokins_1b_quest_item:
+{
+	icon: icon_flower_6
+	item_level: 16
+	loot_groups: [ .laura_tokins_1b_quest_item ]
+	flags: [ not_sellable ]
+	string: "Nightsong Flower"
+	stack: 4
+}
+
+loot_table .laura_tokins_1b_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .laura_tokins_1b_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_laura_tokins_1b_quest_item:
+{
+	string: "Nightsong Flower"
+	systems: [ openable ]
+
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ flower_2 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .laura_tokins_1b_quest_item
+			verb: pick_up
+			range: 1 
+			despawn: true 			
+			level: 16
+			required_quest: .laura_tokins_1
+		}		
+	}
+}
+
+objective .laura_tokins_1b:
+{
+	string: "Nightsong Flowers"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .laura_tokins_1b_quest_item count: 4 }
+}
+
+quest .laura_tokins_1:
+{
+	string: "The Woods Are Too Dangerous"
+
+	text:
+	[
+		"Collect flowers in the woods around Ravenreach."
+	]
+	
+	description: 
+	[
+		"With those nasty creatures outside I don't want to leave the house, but I still need something from the woods! In my cooking and my potions I use petals from the wild roses that grow around here. Can you go grab me a bunch?"
+		"I also need some Nightsong flowers. They also grow in the area.\n\n"
+		"I'm guessing you're not too scared. You look like you've seen worse."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Thanks!"
+	]
+
+	objectives: [ .laura_tokins_1 .laura_tokins_1b ]
+	level: 16
 }
 
