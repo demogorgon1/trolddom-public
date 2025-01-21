@@ -13,6 +13,8 @@ namespace tpublic
 	class MapRouteData
 	{
 	public:		
+		typedef std::function<Vec2(uint32_t)> GetMapEntitySpawnPositionFunction;
+
 		struct SubRoute
 		{
 			void
@@ -106,37 +108,39 @@ namespace tpublic
 		};
 
 		void	ToStream(
-					IWriter*					aWriter) const;
+					IWriter*							aWriter) const;
 		bool	FromStream(
-					IReader*					aReader);
+					IReader*							aReader);
 		void	CopyFrom(
-					const MapRouteData*			aOther);
+					const MapRouteData*					aOther);
 		void	Prepare();
 		Route*	GetOrCreateRoute(
-					uint32_t					aRouteId);
+					uint32_t							aRouteId);
 		void	Build(
-					const Manifest*				aManifest,
-					const uint32_t*				aMapTiles,
-					int32_t						aMapWidth,
-					int32_t						aMapHeight,
-					nwork::Queue*				aWorkQueue);
+					const Manifest*						aManifest,
+					const uint32_t*						aMapTiles,
+					int32_t								aMapWidth,
+					int32_t								aMapHeight,
+					nwork::Queue*						aWorkQueue,
+					GetMapEntitySpawnPositionFunction	aGetMapEntitySpawnPositionFunction);
 		void	BuildRoute(
-					const Manifest*				aManifest,
-					const std::set<Vec2>&		aWalkable,
-					int32_t						aMapWidth,
-					int32_t						aMapHeight,
-					Route*						aRoute);		
+					const Manifest*						aManifest,
+					const std::set<Vec2>&				aWalkable,
+					int32_t								aMapWidth,
+					int32_t								aMapHeight,
+					Route*								aRoute,
+					GetMapEntitySpawnPositionFunction	aGetMapEntitySpawnPositionFunction);		
 		size_t	GetSubRouteIndexByPosition(
-					uint32_t					aRouteId,
-					const Vec2&					aPosition) const;
+					uint32_t							aRouteId,
+					const Vec2&							aPosition) const;
 		bool	GetDirection(
-					uint32_t					aRouteId,
-					size_t						aSubRouteIndex,
-					const Vec2&					aPosition,
-					bool						aIsReversing,
-					Vec2&						aOutDirection,
-					bool&						aOutChangeDirection,
-					std::optional<uint32_t>&	aOutIndex) const;
+					uint32_t							aRouteId,
+					size_t								aSubRouteIndex,
+					const Vec2&							aPosition,
+					bool								aIsReversing,
+					Vec2&								aOutDirection,
+					bool&								aOutChangeDirection,
+					std::optional<uint32_t>&			aOutIndex) const;
 
 		// Public data
 		std::vector<std::unique_ptr<Route>>			m_routes;

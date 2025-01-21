@@ -110,6 +110,8 @@ namespace tpublic
 							m_triggers.push_back(std::make_unique<Trigger>(aChild));
 						else if(aChild->m_name == "max_direction_field_distance")
 							m_maxDirectionFieldDistance = aChild->GetUInt32();
+						else if (aChild->m_name == "origin_map_entity_spawn")
+							m_originMapEntitySpawnId = aChild->GetId(DataType::ID_MAP_ENTITY_SPAWN);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -122,6 +124,7 @@ namespace tpublic
 			{
 				aStream->WriteObjectPointers(m_triggers);
 				aStream->WriteUInt(m_maxDirectionFieldDistance);
+				aStream->WriteUInt(m_originMapEntitySpawnId);
 			}
 
 			bool
@@ -130,7 +133,9 @@ namespace tpublic
 			{
 				if(!aStream->ReadObjectPointers(m_triggers))
 					return false;
-				if(!aStream->ReadUInt(m_maxDirectionFieldDistance))
+				if (!aStream->ReadUInt(m_maxDirectionFieldDistance))
+					return false;
+				if (!aStream->ReadUInt(m_originMapEntitySpawnId))
 					return false;
 				return true;
 			}
@@ -138,6 +143,7 @@ namespace tpublic
 			// Public data
 			std::vector<std::unique_ptr<Trigger>>	m_triggers;
 			uint32_t								m_maxDirectionFieldDistance = 0;
+			uint32_t								m_originMapEntitySpawnId = 0;
 		};
 
 	}

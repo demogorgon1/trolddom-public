@@ -451,7 +451,21 @@ namespace tpublic
 		{
 			DebugPrintTimer debugPrintTimer("build map route data");
 
-			m_mapRouteData->Build(aManifest, m_tileMap, m_width, m_height, aWorkQueue);
+			m_mapRouteData->Build(aManifest, m_tileMap, m_width, m_height, aWorkQueue, [&](
+				uint32_t aMapEntitySpawnId) -> Vec2
+			{
+				std::optional<Vec2> result;
+				for(const EntitySpawn& entitySpawn : m_entitySpawns)
+				{
+					if(entitySpawn.m_mapEntitySpawnId == aMapEntitySpawnId)
+					{
+						result = Vec2{ entitySpawn.m_x, entitySpawn.m_y };
+						break;
+					}						
+				}
+				TP_CHECK(result.has_value(), "Map entity spawn id not found in map: %u", aMapEntitySpawnId);
+				return result.value();
+			});
 		}
 	}
 

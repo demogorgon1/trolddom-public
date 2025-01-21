@@ -69,6 +69,7 @@ sprites:
 	sprite doodad_wall_banner_generic_1: { flags: [ tile_walkable ] }
 	sprite doodad_wall_sign_generic_1: { flags: [ tile_walkable ] }
 	sprite doodad_rowboat_1: { flags: [ tile_walkable ] }
+	sprite doodad_cobweb_1: { flags: [ tile_walkable ] }
 
 	cursor: { position: [ 0 32 ] }
 	size: { width: 80 height: 64 } sprite ship: { flags: [ tile_walkable ] }
@@ -221,6 +222,7 @@ doodad barrel: { sprites: [ barrel_1 ] map_palette<"x">: { occupy: true } map: [
 doodad cage: { sprites: [ cage_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad rowboat: { sprites: [ doodad_rowboat_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad sign_generic: { sprites: [ sign_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] } 
+doodad cobweb: { sprites: [ doodad_cobweb_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 
 
 

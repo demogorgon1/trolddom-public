@@ -507,6 +507,10 @@ sprites:
 	sprite orc_4: { dead: orc_4_dead }
 	sprite orc_5: { dead: orc_5_dead }
 	sprite orc_6: { dead: orc_6_dead }
+	sprite harpy_1: { dead: harpy_1_dead }
+	sprite harpy_2: { dead: harpy_2_dead }
+	sprite dwarf_13: { dead: dwarf_13_dead }
+	sprite spider_4: { dead: spider_4_dead }
 	
 	cursor: { position: [ 0 432 ] }
 	sprite dwarf_9_dead: { }
@@ -521,6 +525,16 @@ sprites:
 	sprite orc_4_dead: { }
 	sprite orc_5_dead: { }
 	sprite orc_6_dead: { }
+	sprite harpy_1_dead: { }
+	sprite harpy_2_dead: { }
+	sprite dwarf_13_dead: { }
+	sprite spider_4_dead: { }
+	
+	cursor: { position: [ 0 448 ] }
+	sprite dwarf_14: { dead: dwarf_14_dead }
+	
+	cursor: { position: [ 0 464 ] }
+	sprite dwarf_14_dead: { }
 
 }
 

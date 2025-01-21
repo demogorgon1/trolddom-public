@@ -74,11 +74,12 @@ namespace tpublic
 
 	void	
 	MapRouteData::Build(
-		const Manifest*		aManifest,
-		const uint32_t*		aMapTiles,
-		int32_t				aMapWidth,
-		int32_t				aMapHeight,
-		nwork::Queue*		aWorkQueue)
+		const Manifest*						aManifest,
+		const uint32_t*						aMapTiles,
+		int32_t								aMapWidth,
+		int32_t								aMapHeight,
+		nwork::Queue*						aWorkQueue,
+		GetMapEntitySpawnPositionFunction	aGetMapEntitySpawnPositionFunction)
 	{
 		std::set<Vec2> walkable;
 
@@ -98,20 +99,25 @@ namespace tpublic
 		aWorkQueue->ForEachVector<std::unique_ptr<Route>>(m_routes, [&](
 			std::unique_ptr<Route>& aRoute)
 		{
-			BuildRoute(aManifest, walkable, aMapWidth, aMapHeight, aRoute.get());
+			BuildRoute(aManifest, walkable, aMapWidth, aMapHeight, aRoute.get(), aGetMapEntitySpawnPositionFunction);
 		});
 	}
 
 	void	
 	MapRouteData::BuildRoute(
-		const Manifest*			aManifest,
-		const std::set<Vec2>&	aWalkable,
-		int32_t					aMapWidth,
-		int32_t					aMapHeight,
-		Route*					aRoute)
+		const Manifest*						aManifest,
+		const std::set<Vec2>&				aWalkable,
+		int32_t								aMapWidth,
+		int32_t								aMapHeight,
+		Route*								aRoute,
+		GetMapEntitySpawnPositionFunction	aGetMapEntitySpawnPositionFunction)
 	{
 		const Data::Route* routeData = aManifest->GetById<Data::Route>(aRoute->m_routeId);
 		TP_UNUSED(routeData);
+
+		std::optional<Vec2> originPosition;
+		if(routeData->m_originMapEntitySpawnId != 0)
+			originPosition = aGetMapEntitySpawnPositionFunction(routeData->m_originMapEntitySpawnId);
 
 		static const Vec2 NEIGHBORS[4] = { { 1, 0 }, { -1, 0 }, { 0, 1}, { 0, -1 } };
 
@@ -121,20 +127,31 @@ namespace tpublic
 
 			Vec2 startPosition = *aRoute->m_positions.cbegin();
 
-			for (const Vec2& position : aRoute->m_positions)
+			if(originPosition.has_value())
 			{
-				size_t neighborCount = 0;
-				for (size_t i = 0; i < 4 && neighborCount < 2; i++)
-				{
-					Vec2 p = position + NEIGHBORS[i];
-					if (aRoute->m_positions.contains(p))
-						neighborCount++;
-				}
+				// Override first start position with the specified origin (only makes sense if the route is unique and doesn't have sub-routes, for example for escort quests)
+				startPosition = originPosition.value();
+				originPosition.reset();
 
-				if (neighborCount == 1)
+				TP_VERIFY(aRoute->m_positions.contains(startPosition), routeData->m_debugInfo, "Invalid route origin.");
+			}
+			else
+			{
+				for (const Vec2& position : aRoute->m_positions)
 				{
-					startPosition = position;
-					break;
+					size_t neighborCount = 0;
+					for (size_t i = 0; i < 4 && neighborCount < 2; i++)
+					{
+						Vec2 p = position + NEIGHBORS[i];
+						if (aRoute->m_positions.contains(p))
+							neighborCount++;
+					}
+
+					if (neighborCount == 1)
+					{
+						startPosition = position;
+						break;
+					}
 				}
 			}
 

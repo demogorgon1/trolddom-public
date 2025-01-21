@@ -6,7 +6,8 @@ dialogue_screen .grumli_stouthammer_dialogue:
 	]		
 	
 	options:
-	[
+	[	
+		{ quest<completion_only>: .borli_stouthammer_1 }
 	]
 }
 

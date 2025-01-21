@@ -34,8 +34,11 @@ entity thalvaron_doctor_hulius: !NPC
 	_default_behavior_state: .doctor_hulius
 	_is_threat_source: true
 	_blocking: false
-	_visibility_requirements: { requirement self<must_have_completed_quest>: .doctor_hulius_camp_1 } 
-
+	_visibility_requirements: 
+	{ 
+		requirement self<must_have_completed_quest>: .doctor_hulius_camp_1 
+		requirement self<must_not_have_completed_quest>: .doctor_hulius_1
+	} 
 }
 
 route thalvaron_doctor_hulius_escort: 
