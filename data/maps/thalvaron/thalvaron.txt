@@ -489,6 +489,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_shadowthorn_wolf: [ 133 185 255 ]	
 	entity_spawn thalvaron_laura_tokins_1_quest_item: [ 77 188 92 ]
 	entity_spawn thalvaron_laura_tokins_1b_quest_item: [ 177 188 192 ]
+	entity_spawn thalvaron_shadowthorn_ghoul: [ 44 99 111 ]
 	
 	# SW
 	entity_spawn thalvaron_brian_riddle: [ 66 88 99 ]

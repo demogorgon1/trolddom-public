@@ -999,6 +999,13 @@ map_entity_spawn thalvaron_shadowthorn_wolf:
 	entity thalvaron_shadowthorn_wolf: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
+map_entity_spawn thalvaron_shadowthorn_ghoul:
+{ 
+	entity thalvaron_shadowthorn_ghoul_a: {} 
+	entity thalvaron_shadowthorn_ghoul_b: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
 loot_table .hounds_and_wolves: 
 {
 	slots:
@@ -1076,4 +1083,18 @@ loot_table .hounds_and_wolves:
 	}
 
 	entity thalvaron_shadowthorn_wolf: !NPC { _string: "Shadowthorn Wolf" _sprite: wolf_3 _sprite_dead: wolf_3_dead  }
+}
+
+# Ghouls
+{
+	${
+		_level: 17
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .wandering_short				
+		_loot_table: .default_humanoid
+	}
+
+	entity thalvaron_shadowthorn_ghoul_a: !NPC { _string: "Wandering Ghoul" _sprite: ghoul_1 _sprite_dead: ghoul_1_dead  }
+	entity thalvaron_shadowthorn_ghoul_b: !NPC { _string: "Wandering Ghoul" _sprite: ghoul_2 _sprite_dead: ghoul_2_dead  }
 }

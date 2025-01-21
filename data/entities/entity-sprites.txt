@@ -533,10 +533,14 @@ sprites:
 	cursor: { position: [ 0 448 ] }
 	sprite dwarf_14: { dead: dwarf_14_dead }
 	sprite ooze_3: { dead: ooze_3_dead }
+	sprite ghoul_1: { dead: ghoul_1_dead }
+	sprite ghoul_2: { dead: ghoul_2_dead }
 	
 	cursor: { position: [ 0 464 ] }
 	sprite dwarf_14_dead: { }
 	sprite ooze_3_dead: { }
+	sprite ghoul_1_dead: { }
+	sprite ghoul_2_dead: { }
 
 }
 
