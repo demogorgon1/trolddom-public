@@ -1,19 +1,33 @@
-dialogue_screen .jimbo_tokins_dialogue:
+expression .jimbo_tokins_has_completed_quest:
+{
+	client_has_completed_quest: { id<quest>: .vampire_quest_item }
+}
+
+dialogue_screen .jimbo_tokins_dialogue_1:
 {
 	text: 
 	[	
-		"Hello."
+		"Have you seen my sister Elsa? She has been missing for quite a while now. I fear the worst. If you find her, will you let me know?"
 	]		
 	
 	options:
 	[
-		{ quest: .jimbo_tokins_1 }
+		{ quest<completion_only>: .vampire_quest_item }
 	]
 }
 
-dialogue_root .jimbo_tokins_dialogue:
+dialogue_screen .jimbo_tokins_dialogue_2:
 {
-	.jimbo_tokins_dialogue: { }
+	text: 
+	[	
+		"Leave me alone."
+	]		
+}
+
+dialogue_root .jimbo_tokins_dialogue:
+{	
+	.jimbo_tokins_dialogue_1: { inv_conditions: [ .jimbo_tokins_has_completed_quest ] }
+	.jimbo_tokins_dialogue_2: { conditions: [ .jimbo_tokins_has_completed_quest ] }
 }
 
 entity thalvaron_jimbo_tokins: !NPC
@@ -27,57 +41,4 @@ entity thalvaron_jimbo_tokins: !NPC
 	_creature_type: humanoid
 	_loot_table: .npc
 	_not_pushable: true	
-}
-
-############################################################
-# Quest 1
-
-loot_group .jimbo_tokins_1_quest_item: {}
-
-item .jimbo_tokins_1_quest_item:
-{
-	icon: icon_necklace_2
-	item_level: 17
-	loot_groups: [ .jimbo_tokins_1_quest_item ]
-	flags: [ not_sellable unique ]
-	string: "Elsa's Necklace"
-}
-
-objective .jimbo_tokins_1:
-{
-	string: "Elsa's Necklace"
-	
-	maps: [ thalvaron ]
-	
-	collect_items: { item: .jimbo_tokins_1_quest_item count: 1 }
-}
-
-quest .jimbo_tokins_1:
-{
-	string: "What Happened To Elsa?"
-
-	text:
-	[
-		"Figure out what happened to Elsa Tokins."
-	]
-	
-	description: 
-	[
-		"My sister Elsa has been missing for quite a while now. I fear the worst. If you find her, will you let me know?"
-	]
-
-	progress:
-	[
-		"Any signs of her?"
-	]
-	
-	completion:
-	[
-		"Oh..."
-	]
-
-	objectives: [ .jimbo_tokins_1 ]
-	level: 17
-
-	reward_cash_multiplier: 0
 }

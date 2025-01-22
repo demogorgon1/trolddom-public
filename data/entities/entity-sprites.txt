@@ -669,6 +669,7 @@ sprites:
 	sprite flower_2: { }
 	sprite bell_1: { }
 	sprite flower_3: { }
+	sprite flower_4: { }
 		
 }
 

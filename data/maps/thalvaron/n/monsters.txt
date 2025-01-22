@@ -1149,6 +1149,56 @@ loot_table .hounds_and_wolves:
 
 # Vampires
 {
+	loot_group .vampire_quest_item: {}
+	
+	ability .vampire_quest_item:	
+	{
+		string: "Bejeweled Necklace"
+		description: "This item starts a quest."
+		flags: [ target_self item ]
+		icon: icon_effigy
+		direct_effect simple<start_quest>: .vampire_quest_item
+		states: [ default in_combat ]
+		requirement self<must_not_have_completed_quest>: { id: .vampire_quest_item }
+		requirement self<must_not_have_active_quest>: { id: .vampire_quest_item }
+	}
+	
+	quest .vampire_quest_item:
+	{
+		string: "Bejeweled Necklace"
+
+		text:
+		[
+			"Bring the bejeweled necklace to Jimbo Tokins in Ravenreach."
+		]
+		
+		description: 
+		[
+			"The necklace is inscribed with the name Tokins. Probably related to the Tokins family who resides in Ravenreach? You should bring it there and see if it means anything to them."
+		]
+		
+		completion:
+		[
+			"Oh, no. This is my sister's. You had to kill her? Couldn't you have saved her?"
+		]
+
+		level: 17
+		quest_items: [ .vampire_quest_item ]
+		reward_xp_multiplier: 0.75
+		reward_cash_multiplier: 0
+	}
+	
+	item .vampire_quest_item:
+	{
+		icon: icon_necklace_2
+		item_level: 17
+		loot_groups: [ .vampire_quest_item ]
+		flags: [ not_sellable unique ]
+		string: "Bejeweled Necklace"
+		flavor: "Elsa Tokins."
+		use_ability: .vampire_quest_item
+	}
+
 	loot_table .vampire: 
 	{
 		slots:
@@ -1157,7 +1207,7 @@ loot_table .hounds_and_wolves:
 				possibility: 
 				{ 
 					loot_group: thalvaron_emma_brown_1_quest_item 
-					requirement self<must_have_active_quest>: thalvaron_emma_brown_1 
+					requirement self<must_have_active_quest>: thalvaron_emma_brown_1
 					requirement self<must_not_have_item>: thalvaron_emma_brown_1_quest_item 
 				} 
 			}
@@ -1165,9 +1215,10 @@ loot_table .hounds_and_wolves:
 			{ 
 				possibility: 
 				{ 
-					loot_group: .jimbo_tokins_1_quest_item 
-					requirement self<must_have_active_quest>: .jimbo_tokins_1
-					requirement self<must_not_have_item>: .jimbo_tokins_1_quest_item 
+					loot_group: .vampire_quest_item
+					requirement self<must_not_have_active_quest>: .vampire_quest_item
+					requirement self<must_not_have_completed_quest>: .vampire_quest_item
+					requirement self<must_not_have_item>: .vampire_quest_item
 				} 			
 			}
 			

@@ -8,6 +8,7 @@ dialogue_screen .laura_tokins_dialogue:
 	options:
 	[
 		{ quest: .laura_tokins_1 }
+		{ quest: .laura_tokins_2 }
 	]
 }
 
@@ -165,6 +166,94 @@ quest .laura_tokins_1:
 	]
 
 	objectives: [ .laura_tokins_1 .laura_tokins_1b ]
+	next_quest: .laura_tokins_2 
 	level: 16
 }
 
+############################################################
+# Quest 2
+
+loot_group .laura_tokins_2_quest_item: {}
+
+item .laura_tokins_2_quest_item:
+{
+	icon: icon_flower_8
+	item_level: 17
+	loot_groups: [ .laura_tokins_2_quest_item ]
+	flags: [ not_sellable ]
+	string: "Dead Man's Blume"
+	stack: 4
+}
+
+loot_table .laura_tokins_2_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .laura_tokins_2_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_laura_tokins_2_quest_item:
+{
+	string: "Dead Man's Blume"
+	systems: [ openable ]
+
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ flower_4 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .laura_tokins_2_quest_item
+			verb: pick_up
+			range: 1 
+			despawn: true 			
+			level: 17
+			required_quest: .laura_tokins_2
+		}		
+	}
+}
+
+objective .laura_tokins_2:
+{
+	string: "Dead Man's Blume"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .laura_tokins_2_quest_item count: 2 }
+}
+
+quest .laura_tokins_2:
+{
+	string: "Ravenreach Abbey"
+
+	text:
+	[
+		"Venture through the dark woods in the east to Ravenreach Abbery, pick flowers, and return them to Laura Tokins in Ravenreach."
+	]
+	
+	description: 
+	[
+		"I have one final ask of you, since you don't seem to have a problem with these creatures that roam the woods. Do you know of the old abandoned abbey? It's located deep in the woods to the east. It has been empty"
+		"for a long time, but I sometimes go there to pick some herbs that only grow in its vicinity. Can you go there and pick some for me? Just need a couple. The herb I'm talking about is called Dead Man's Blume. It's"
+		"an orange flower which is hard to miss."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Thanks!"
+	]
+
+	objectives: [ .laura_tokins_2 ]
+	prerequisites: [ .laura_tokins_1 ]
+	level: 17
+	# FIXME: rewards
+}

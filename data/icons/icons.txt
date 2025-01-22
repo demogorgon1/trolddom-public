@@ -545,6 +545,7 @@ sprites:
 	sprite icon_mark_1 : { tags: [ icon ] }
 	sprite icon_flower_7 : { tags: [ icon ] }
 	sprite icon_mark_2 : { tags: [ icon ] }
+	sprite icon_flower_8 : { tags: [ icon ] }
 	
 }
 
