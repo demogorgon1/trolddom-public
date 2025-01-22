@@ -150,6 +150,8 @@ namespace tpublic::Systems
 			aContext->m_eventQueue->EventQueueAbility({ aEntityInstanceId, 0 }, aEntityInstanceId, Vec2(), onEnterAbility, ItemInstanceReference(), NULL);
 		}
 
+		bool despawnOnLeaveState = state != NULL && state->m_despawnOnLeave;	
+
 		const Data::Faction* faction = GetManifest()->GetById<Data::Faction>(combat->m_factionId);
 
 		if (aEntityState != EntityState::ID_DEAD && combat->GetResource(Resource::ID_HEALTH) == 0 && !auras->HasEffect(AuraEffect::ID_IMMORTALITY, NULL))
@@ -1025,6 +1027,9 @@ namespace tpublic::Systems
 		default:
 			break;
 		}
+
+		if(despawnOnLeaveState && returnValue != EntityState::CONTINUE && returnValue != EntityState::DESTROY)
+			return EntityState::ID_DESPAWNING;
 
 		return returnValue;
 	}

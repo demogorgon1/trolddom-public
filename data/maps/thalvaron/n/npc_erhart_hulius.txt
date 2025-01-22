@@ -1,3 +1,8 @@
+dialogue_screen .erhart_hulius_vendor: 
+{
+	sell .damon_arkwright_3_quest_item: { quantity: 1 cost: 1800 }	
+}
+
 dialogue_screen .erhart_hulius_dialogue:
 {
 	text: 
@@ -7,6 +12,7 @@ dialogue_screen .erhart_hulius_dialogue:
 	
 	options:
 	[
+		{ goto: .erhart_hulius_vendor text: "Let me browse your goods." }
 	]
 }
 

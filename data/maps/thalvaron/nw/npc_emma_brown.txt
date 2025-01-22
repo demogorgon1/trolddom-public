@@ -1,0 +1,123 @@
+dialogue_screen .emma_brown_dialogue:
+{
+	text: 
+	[	
+		"What is going to happen to my price winning cabbage? Those brutes will trample it!"
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: thalvaron_damon_arkwright_2 }
+		{ quest<offer_only>: thalvaron_emma_brown_1 }
+	]
+}
+
+dialogue_root .emma_brown_dialogue:
+{
+	.emma_brown_dialogue: { }
+}
+
+entity thalvaron_emma_brown: !NPC
+{
+	_string: "Emma Brown"
+	_dialogue_root: .emma_brown_dialogue	
+	_sprite: woman_21
+	_sprite_dead: woman_21_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group thalvaron_emma_brown_1_quest_item: {}
+
+item thalvaron_emma_brown_1_quest_item:
+{
+	icon: icon_blood
+	item_level: 17
+	loot_groups: [ thalvaron_emma_brown_1_quest_item ]
+	flags: [ not_sellable unique ]
+	string: "The Child's Blood"
+}
+
+objective .emma_brown_1:
+{
+	string: "The Child's Blood"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: thalvaron_emma_brown_1_quest_item count: 1 }
+}
+
+ability .emma_brown_1_quest_item_2:
+{	
+	flags: [ target_self always_in_range always_in_line_of_sight ]
+	must_have_nearby_entity: thalvaron_emma_brown_1_quest_item_2
+	string: "Summon the Vampire"
+	description: "Summon the Vampire"
+	
+	direct_effect spawn_entity:
+	{
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: thalvaron_vampire_boss
+		map_entity_spawn: thalvaron_vampire_boss
+	}		
+}
+
+entity thalvaron_emma_brown_1_quest_item_2:
+{
+	components:
+	{
+		position: { }		
+		visibility: { }		
+	}
+}
+
+item thalvaron_emma_brown_1_quest_item_2:
+{
+	icon: icon_mark_2
+	item_level: 17
+	flags: [ not_sellable unique ]
+	string: "Infused Mark of Kaelithor"
+	use_ability: .emma_brown_1_quest_item_2
+}
+
+quest thalvaron_emma_brown_1:
+{
+	string: "Kaelithor the Relentless"
+
+	text:
+	[
+		"Find the blood of a child of Kaelithor and bring it Damon Arkwright in Ravenreach."
+	]
+	
+	description: 
+	[
+		"This is the mark of Kaelithor the Relentless, a horrible vampire from the south. He was banished a long time ago. You say that you just found this in the forests of Shadowthorn? That's not good.\n\n"
+		"It's hard to get truly rid of a powerful vampire like Kaelithor, so it's not surprising that he is no back. If you want to end his menace once and for all you need magic to make him vulnerable to your weapons. But that's not" 
+		"enough. First you need to make him come up of his hiding hole and face you. That can be hard as vampires are very sneaky creatures - they will only pick fights they know they will win.\n\n"
+		"Luckily the object you've brought me will be useful in this regard. You need to infuse it with the blood of one of his children and you'll be able to draw him out. Find such blood and bring it to Damon Arkwright and he'll"
+		"know what to do."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"FIXME"
+	]
+	
+	level: 17
+	prerequisites: [ thalvaron_damon_arkwright_2 ]	
+	quest_items: [ thalvaron_damon_arkwright_1_quest_item ]
+	reward_all_items: [ thalvaron_emma_brown_1_quest_item_2 ]
+	objectives: [ .emma_brown_1 ]
+}

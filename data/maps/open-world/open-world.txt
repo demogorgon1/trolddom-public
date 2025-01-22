@@ -302,7 +302,6 @@ map_entity_spawn .crab_brute_5:
 map_entity_spawn .crab_ambusher_6:
 {
 	spawn_timer: { only_when_triggered: true }
-	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn .crab_boss_4:

@@ -46,7 +46,8 @@ zone .mongos_swamp: { string: "Mongo's Swamp" }
 zone .dwarf_city: { string: "Durgan Tharok" town: true }
 zone .lake_dourgol: { string: "Lake Dourgol" }
 
-zone thalvaron_crab_giant: { } #string: "Old Man's Pool" }
+zone thalvaron_crab_giant: { } 
+zone thalvaron_vampire_boss: { } 
 	
 route thalvaron_default_patrol: { }
 
@@ -204,6 +205,7 @@ map_entity_spawn thalvaron_royal_chef_assistant: { entity thalvaron_royal_chef_a
 map_entity_spawn thalvaron_clara_hawthorne: { entity thalvaron_clara_hawthorne: { init_state: default } }
 map_entity_spawn thalvaron_alchemy_trainer: { entity thalvaron_alchemy_trainer: { init_state: default } }
 map_entity_spawn thalvaron_dwarf_liaison_officer: { entity thalvaron_dwarf_liaison_officer: { init_state: default } }
+map_entity_spawn thalvaron_emma_brown: { entity thalvaron_emma_brown: { init_state: default } }
 
 # N
 map_entity_spawn thalvaron_ranger_fremalt: { entity thalvaron_ranger_fremalt: { init_state: default } }
@@ -245,6 +247,7 @@ map_entity_spawn thalvaron_laura_tokins: { entity thalvaron_laura_tokins: { init
 map_entity_spawn thalvaron_ranger_thorksen: { entity thalvaron_ranger_thorksen: { init_state: default } }
 map_entity_spawn thalvaron_laura_tokins_1_quest_item: { entity thalvaron_laura_tokins_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_laura_tokins_1b_quest_item: { entity thalvaron_laura_tokins_1b_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_emma_brown_1_quest_item_2: { entity thalvaron_emma_brown_1_quest_item_2: { init_state: default } }
 
 # SW
 map_entity_spawn thalvaron_brian_riddle: { entity thalvaron_brian_riddle: { init_state: default } }
@@ -411,6 +414,8 @@ map_palette .stuff:
 	entity_spawn thalvaron_clara_hawthorne: [ 78 94 128 ]
 	entity_spawn thalvaron_alchemy_trainer: [ 159 99 84 ]
 	entity_spawn thalvaron_dwarf_liaison_officer: [ 11 58 148 ]
+	entity_spawn thalvaron_emma_brown: [ 1 59 75 ]
+	entity_spawn thalvaron_emma_brown_1_quest_item_2: [ 94 159 51 ]
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				
@@ -490,6 +495,12 @@ map_palette .stuff:
 	entity_spawn thalvaron_laura_tokins_1_quest_item: [ 77 188 92 ]
 	entity_spawn thalvaron_laura_tokins_1b_quest_item: [ 177 188 192 ]
 	entity_spawn thalvaron_shadowthorn_ghoul: [ 44 99 111 ]
+	entity_spawn thalvaron_blood_slave: [ 139 222 222 ]
+	entity_spawn thalvaron_vampire: [ 139 22 222 ]
+	entity_spawn thalvaron_vampire_boss: [ 139 222 22 ]
+	entity_spawn thalvaron_shadowthorn_ghoul_boss: [ 239 222 25 ]
+	entity_spawn thalvaron_vampire_boss_minion_1: [ 39 14 92 ]
+	entity_spawn thalvaron_vampire_boss_minion_2: [ 39 94 92 ]
 	
 	# SW
 	entity_spawn thalvaron_brian_riddle: [ 66 88 99 ]
@@ -634,6 +645,7 @@ map_palette .sub_zones:
 	sub_zone .dwarf_city: [ 250 101 255 ]
 	
 	sub_zone thalvaron_crab_giant: [ 39 192 83 ]
+	sub_zone thalvaron_vampire_boss: [ 139 93 48 ]
 }
 
 map_palette .routes:
@@ -680,6 +692,9 @@ map_palette .doodads:
 	doodad cage: [ 45 41 145 ]
 	doodad rowboat: [ 145 46 145 ]
 	doodad cobweb: [ 84 111 83 ]
+	doodad dead_tree: [ 33 123 81 ]
+	doodad tombstone: [ 99 99 119 ]
+	doodad statue_angel: [ 199 199 119 ]
 	
 	doodad wall_sign_generic<"Mathew's Emporium">: [ 197 173 111 ]	
 	doodad wall_sign_generic<"John & Mary's">: [ 97 173 111 ]	

@@ -70,8 +70,13 @@ sprites:
 	sprite doodad_wall_sign_generic_1: { flags: [ tile_walkable ] }
 	sprite doodad_rowboat_1: { flags: [ tile_walkable ] }
 	sprite doodad_cobweb_1: { flags: [ tile_walkable ] }
-
+	sprite doodad_tombstone_1: { flags: [ tile_walkable ] }
+	sprite doodad_angel_statue: { flags: [ tile_walkable ] }
+	
 	cursor: { position: [ 0 32 ] }
+	sprite doodad_tombstone_2: { flags: [ tile_walkable ] }
+
+	cursor: { position: [ 0 48 ] }
 	size: { width: 80 height: 64 } sprite ship: { flags: [ tile_walkable ] }
 	size: { width: 32 height: 32 } sprite large_statue: { }
 }
@@ -223,6 +228,7 @@ doodad cage: { sprites: [ cage_1 ] map_palette<"x">: { occupy: true } map: [ "x"
 doodad rowboat: { sprites: [ doodad_rowboat_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad sign_generic: { sprites: [ sign_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] } 
 doodad cobweb: { sprites: [ doodad_cobweb_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
-
+doodad tombstone: { sprites: [ doodad_tombstone_1 doodad_tombstone_2 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad statue_angel: { sprites: [ doodad_angel_statue ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 
 

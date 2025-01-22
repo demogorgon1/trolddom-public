@@ -231,6 +231,10 @@ namespace tpublic
 						{
 							m_onEnterAbilityId = aChild->GetId(DataType::ID_ABILITY);
 						}
+						else if(aChild->m_name == "despawn_on_leave")
+						{
+							m_despawnOnLeave = aChild->GetBool();
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
@@ -248,6 +252,7 @@ namespace tpublic
 					aStream->WriteObjects(m_barks);
 					aStream->WriteUInt(m_triggerAbilityId);
 					aStream->WriteUInt(m_onEnterAbilityId);
+					aStream->WriteBool(m_despawnOnLeave);
 				}
 
 				bool
@@ -265,6 +270,8 @@ namespace tpublic
 					if(!aStream->ReadUInt(m_triggerAbilityId))
 						return false;
 					if (!aStream->ReadUInt(m_onEnterAbilityId))
+						return false;
+					if(!aStream->ReadBool(m_despawnOnLeave))
 						return false;
 					return true;
 				}
@@ -288,6 +295,7 @@ namespace tpublic
 				std::vector<Chat>					m_barks;
 				uint32_t							m_triggerAbilityId = 0;
 				uint32_t							m_onEnterAbilityId = 0;
+				bool								m_despawnOnLeave = false;
 			};
 
 			struct ResourceEntry

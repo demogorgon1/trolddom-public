@@ -7,6 +7,7 @@ dialogue_screen .jimbo_tokins_dialogue:
 	
 	options:
 	[
+		{ quest: .jimbo_tokins_1 }
 	]
 }
 
@@ -28,3 +29,55 @@ entity thalvaron_jimbo_tokins: !NPC
 	_not_pushable: true	
 }
 
+############################################################
+# Quest 1
+
+loot_group .jimbo_tokins_1_quest_item: {}
+
+item .jimbo_tokins_1_quest_item:
+{
+	icon: icon_necklace_2
+	item_level: 17
+	loot_groups: [ .jimbo_tokins_1_quest_item ]
+	flags: [ not_sellable unique ]
+	string: "Elsa's Necklace"
+}
+
+objective .jimbo_tokins_1:
+{
+	string: "Elsa's Necklace"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .jimbo_tokins_1_quest_item count: 1 }
+}
+
+quest .jimbo_tokins_1:
+{
+	string: "What Happened To Elsa?"
+
+	text:
+	[
+		"Figure out what happened to Elsa Tokins."
+	]
+	
+	description: 
+	[
+		"My sister Elsa has been missing for quite a while now. I fear the worst. If you find her, will you let me know?"
+	]
+
+	progress:
+	[
+		"Any signs of her?"
+	]
+	
+	completion:
+	[
+		"Oh..."
+	]
+
+	objectives: [ .jimbo_tokins_1 ]
+	level: 17
+
+	reward_cash_multiplier: 0
+}

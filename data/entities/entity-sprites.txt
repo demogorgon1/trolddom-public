@@ -535,13 +535,24 @@ sprites:
 	sprite ooze_3: { dead: ooze_3_dead }
 	sprite ghoul_1: { dead: ghoul_1_dead }
 	sprite ghoul_2: { dead: ghoul_2_dead }
+	sprite ghoul_3: { dead: ghoul_3_dead }
+	sprite man_53: { dead: man_53_dead }
+	sprite woman_20: { dead: woman_20_dead }
+	sprite vampire_1: { dead: vampire_1_dead }
+	sprite vampire_2: { dead: vampire_2_dead }
+	sprite woman_21: { dead: woman_21_dead }
 	
 	cursor: { position: [ 0 464 ] }
 	sprite dwarf_14_dead: { }
 	sprite ooze_3_dead: { }
 	sprite ghoul_1_dead: { }
 	sprite ghoul_2_dead: { }
-
+	sprite ghoul_3_dead: { }
+	sprite man_53_dead: { }
+	sprite woman_20_dead: { }
+	sprite vampire_1_dead: { }
+	sprite vampire_2_dead: { }
+	sprite woman_21_dead: { }
 }
 
 sprites:

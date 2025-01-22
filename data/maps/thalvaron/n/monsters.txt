@@ -1006,6 +1006,38 @@ map_entity_spawn thalvaron_shadowthorn_ghoul:
 	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
+map_entity_spawn thalvaron_shadowthorn_ghoul_boss:
+{ 
+	entity thalvaron_shadowthorn_ghoul_boss: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_blood_slave:
+{ 
+	entity thalvaron_blood_slave_a: {} 
+	entity thalvaron_blood_slave_b: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_vampire:
+{ 
+	entity thalvaron_vampire: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_vampire_boss:
+{ 
+	spawn_timer: { only_when_triggered: true }	
+}
+
+map_entity_spawn thalvaron_vampire_boss_minion_1:
+{ 
+	spawn_timer: { only_when_triggered: true }	
+}
+
+map_entity_spawn thalvaron_vampire_boss_minion_2:
+{ 
+	spawn_timer: { only_when_triggered: true }	
+}
+
 loot_table .hounds_and_wolves: 
 {
 	slots:
@@ -1021,7 +1053,7 @@ loot_table .hounds_and_wolves:
 				weight: 1
 				loot_group: .damon_arkwright_1_quest_item 
 				requirement self<must_have_active_quest>: .damon_arkwright_1 
-				requirement self<must_not_have_item>: .damon_arkwright_1_quest_item 
+				requirement self<must_not_have_item>: thalvaron_damon_arkwright_1_quest_item 
 			} 
 		}
 		
@@ -1043,6 +1075,7 @@ loot_table .hounds_and_wolves:
 	}
 
 	entity thalvaron_night_hound: !NPC { _string: "Night Hound" _sprite: wolf_5 _sprite_dead: wolf_5_dead  }
+	entity thalvaron_night_hound_minion: !NPC { _string: "Night Hound" _sprite: wolf_5 _sprite_dead: wolf_5_dead _despawn_on_leave_combat: true }
 }
 
 # Mountain Troll
@@ -1097,4 +1130,174 @@ loot_table .hounds_and_wolves:
 
 	entity thalvaron_shadowthorn_ghoul_a: !NPC { _string: "Wandering Ghoul" _sprite: ghoul_1 _sprite_dead: ghoul_1_dead  }
 	entity thalvaron_shadowthorn_ghoul_b: !NPC { _string: "Wandering Ghoul" _sprite: ghoul_2 _sprite_dead: ghoul_2_dead  }
+	entity thalvaron_shadowthorn_ghoul_boss: !NPC { _string: "The Caretaker" _sprite: ghoul_3 _sprite_dead: ghoul_3_dead  }
+}
+
+# Blood slaves
+{
+	${
+		_level: 17
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .passive				
+		_loot_table: .default_humanoid
+	}
+
+	entity thalvaron_blood_slave_a: !NPC { _string: "Blood Slave" _sprite: man_53 _sprite_dead: man_53_dead  }
+	entity thalvaron_blood_slave_b: !NPC { _string: "Blood Slave" _sprite: woman_20 _sprite_dead: woman_20_dead  }
+}
+
+# Vampires
+{
+	loot_table .vampire: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: 
+				{ 
+					loot_group: thalvaron_emma_brown_1_quest_item 
+					requirement self<must_have_active_quest>: thalvaron_emma_brown_1 
+					requirement self<must_not_have_item>: thalvaron_emma_brown_1_quest_item 
+				} 
+			}
+			
+			{ 
+				possibility: 
+				{ 
+					loot_group: .jimbo_tokins_1_quest_item 
+					requirement self<must_have_active_quest>: .jimbo_tokins_1
+					requirement self<must_not_have_item>: .jimbo_tokins_1_quest_item 
+				} 			
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_CLOTH {}
+		]	
+	}
+	
+	cooldown .vampire_boss_spawn:
+	{
+		duration: 400
+	}
+
+	ability .vampire_boss_spawn:
+	{
+		flags: [ always_in_range always_in_line_of_sight ]
+		cooldowns: [ .vampire_boss_spawn ]
+
+		direct_effect spawn_entity:
+		{
+			map_entity_spawn: thalvaron_vampire_boss_minion_1
+			entity: thalvaron_night_hound_minion
+			spawn_flags: [ no_owner ]
+			npc_target_threat: 20
+		}
+		
+		direct_effect spawn_entity:
+		{
+			map_entity_spawn: thalvaron_vampire_boss_minion_2
+			entity: thalvaron_night_hound_minion
+			spawn_flags: [ no_owner ]
+			npc_target_threat: 20
+		}		
+	}
+	
+	cooldown .vampire_boss_bite:
+	{
+		duration: 100
+	}
+
+	ability .vampire_boss_bite_tick:
+	{
+		string: "Blood Poison"
+		icon: icon_poison
+		states: [ default in_combat ]
+		flags: [ always_in_range always_in_line_of_sight ]
+
+		direct_effect damage:
+		{
+			damage_type: poison
+			function: 48
+			requirement target<must_not_have_aura>: .damon_arkwright_3_quest_item
+		}
+
+		direct_effect damage:
+		{
+			damage_type: poison
+			function: 9
+			requirement target<must_have_aura>: .damon_arkwright_3_quest_item
+		}
+	}
+
+	aura .vampire_boss_bite:
+	{
+		string: "Blood Poison"
+		description: "Bitten by the vampire."
+		type: debuff
+		icon: icon_poison
+		duration: based_on_effects
+		flags: [ unique ]
+
+		aura_effect repeat:
+		{
+			update_interval: 20
+			update_count: 5
+			ability: npc_poison_bite_tick
+		}
+	}
+
+	ability .vampire_boss_bite:
+	{
+		string: "Bite"
+		range: 1
+		cooldowns: [ global .vampire_boss_bite ]
+		flags: [ melee offensive target_other target_hostile can_miss interruptable ]
+		states: [ in_combat ]
+		icon: icon_poison
+		delay: 3
+
+		direct_effect damage:
+		{
+			damage_type: poison
+			function: 55
+			requirement target<must_not_have_aura>: .damon_arkwright_3_quest_item
+		}
+
+		direct_effect damage:
+		{
+			damage_type: poison
+			function: 15
+			requirement target<must_have_aura>: .damon_arkwright_3_quest_item
+		}
+
+		direct_effect apply_aura:
+		{
+			aura: .vampire_boss_bite
+		}
+	}	
+
+	${
+		_level: 17
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .passive						
+	}
+
+	entity thalvaron_vampire: !NPC 
+	{ 
+		_string: "Elsa Tokins" _guild_name: "Child of Kaelothor" _sprite: vampire_1 _sprite_dead: vampire_1_dead _loot_table: .vampire 		
+	}
+	
+	entity thalvaron_vampire_boss: !NPC 
+	{ 
+		_string: "Kaelithor the Relentless" _sprite: vampire_2 _sprite_dead: vampire_2_dead _loot_table: .default_humanoid 
+		_out_of_zone_action: { evade: true }
+		_immune_to_stun: true
+		_immune_to_immobilize: true
+		_immune_to_slow: true
+		_zone: thalvaron_vampire_boss
+		_evade_despawn: true	
+		_abilities: [ { id: .vampire_boss_spawn use_probability: 5 } { id: .vampire_boss_bite } { id: npc_attack } ]
+	}
 }
