@@ -256,6 +256,8 @@ map_entity_spawn thalvaron_jor_starleaf: { entity thalvaron_jor_starleaf: { init
 map_entity_spawn thalvaron_pearly_b: { entity thalvaron_pearly_b: { init_state: default } }
 map_entity_spawn thalvaron_brimiar: { entity thalvaron_brimiar: { init_state: default } }
 map_entity_spawn thalvaron_warden_moonwatcher: { entity thalvaron_warden_moonwatcher: { init_state: default } }
+map_entity_spawn thalvaron_pearly_b_1_quest_item: { entity thalvaron_pearly_b_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+
 
 # SW
 map_entity_spawn thalvaron_brian_riddle: { entity thalvaron_brian_riddle: { init_state: default } }
@@ -518,6 +520,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_brimiar: [ 39 48 248 ]
 	entity_spawn thalvaron_shadowthorn_rotting_corpse: [ 244 88 166 ]
 	entity_spawn thalvaron_warden_moonwatcher: [ 55 255 138 ]
+	entity_spawn thalvaron_pearly_b_1_quest_item: [ 155 55 125 ]
 	
 	# SW
 	entity_spawn thalvaron_brian_riddle: [ 66 88 99 ]

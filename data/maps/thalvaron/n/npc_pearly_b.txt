@@ -13,6 +13,7 @@ dialogue_screen .pearly_b_dialogue_1:
 	options:
 	[
 		{ quest<completion_only>: .foramil_2 }
+		{ quest<offer_only>: .pearly_b_1 }
 	]
 }
 
@@ -48,3 +49,84 @@ entity thalvaron_pearly_b: !NPC
 	}
 }
 
+############################################################
+# Quest 1
+
+loot_group .pearly_b_1_quest_item: {}
+
+item .pearly_b_1_quest_item:
+{
+	icon: icon_flower_3
+	item_level: 17
+	loot_groups: [ .pearly_b_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Lunebloom"
+	stack: 4
+}
+
+loot_table .pearly_b_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .pearly_b_1_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_pearly_b_1_quest_item:
+{
+	string: "Lunebloom"
+	systems: [ openable ]
+
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ wild_herbs_2 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .pearly_b_1_quest_item
+			verb: pick
+			range: 1 
+			despawn: true 			
+			level: 17
+			required_quest: .pearly_b_1
+		}		
+	}
+}
+
+objective .pearly_b_1:
+{
+	string: "Lunebloom"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .pearly_b_1_quest_item count: 2 }
+}
+
+quest .pearly_b_1:
+{
+	string: "Herbalicious"
+
+	text:
+	[
+		"Venture through the dark woods in the east to Ravenreach Abbery, pick flowers, and return them to Laura Tokins in Ravenreach."
+	]
+	
+	description: 
+	[
+		"My good friend, an old elf named Brimiar, who lives in the mountains to the east, needs some special herbs. Unfortunately, due to my lack of legs I can't help him, but maybe you can? The herbs grow along the water to the"
+		"north east of here. The herb is called lunebloom. He just needs a handful. Can you help?\n\n"
+		"He lives in a cave in Faerandor Gorge. To find it you can travel the road east and when the road splits go south."
+	]
+	
+	completion:
+	[
+		"Oh, this is exactly what I needed. How did you know?"
+	]
+
+	objectives: [ .pearly_b_1 ]
+	level: 17
+	# FIXME: rewards
+}
