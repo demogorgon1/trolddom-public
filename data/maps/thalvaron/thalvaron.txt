@@ -249,6 +249,9 @@ map_entity_spawn thalvaron_laura_tokins_1_quest_item: { entity thalvaron_laura_t
 map_entity_spawn thalvaron_laura_tokins_1b_quest_item: { entity thalvaron_laura_tokins_1b_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_emma_brown_1_quest_item_2: { entity thalvaron_emma_brown_1_quest_item_2: { init_state: default } }
 map_entity_spawn thalvaron_laura_tokins_2_quest_item: { entity thalvaron_laura_tokins_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_lia_frostmane: { entity thalvaron_lia_frostmane: { init_state: default } }
+map_entity_spawn thalvaron_foramil: { entity thalvaron_foramil: { init_state: default } }
+map_entity_spawn thalvaron_jor_starleaf: { entity thalvaron_jor_starleaf: { init_state: default } }
 
 # SW
 map_entity_spawn thalvaron_brian_riddle: { entity thalvaron_brian_riddle: { init_state: default } }
@@ -503,6 +506,10 @@ map_palette .stuff:
 	entity_spawn thalvaron_vampire_boss_minion_1: [ 39 14 92 ]
 	entity_spawn thalvaron_vampire_boss_minion_2: [ 39 94 92 ]
 	entity_spawn thalvaron_laura_tokins_2_quest_item: [ 255 93 88 ]
+	entity_spawn thalvaron_lia_frostmane: [ 93 255 85 ]
+	entity_spawn thalvaron_foramil: [ 193 255 85 ]	
+	entity_spawn thalvaron_bewildered_wood_elemental: [ 31 78 194 ]
+	entity_spawn thalvaron_jor_starleaf: [ 131 178 84 ]
 	
 	# SW
 	entity_spawn thalvaron_brian_riddle: [ 66 88 99 ]

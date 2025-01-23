@@ -1,0 +1,30 @@
+dialogue_screen .lia_frostmane_dialogue:
+{
+	text: 
+	[	
+		"Hello."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .adriana_black_1 }
+	]
+}
+
+dialogue_root .lia_frostmane_dialogue:
+{
+	.lia_frostmane_dialogue: { }
+}
+
+entity thalvaron_lia_frostmane: !NPC
+{
+	_string: "Lia Frostmane"
+	_dialogue_root: .lia_frostmane_dialogue	
+	_sprite: woman_22
+	_sprite_dead: woman_22_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}

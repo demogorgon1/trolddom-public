@@ -541,6 +541,9 @@ sprites:
 	sprite vampire_1: { dead: vampire_1_dead }
 	sprite vampire_2: { dead: vampire_2_dead }
 	sprite woman_21: { dead: woman_21_dead }
+	sprite woman_22: { dead: woman_22_dead }
+	sprite elf_4: { dead: elf_4_dead }
+	sprite elf_5: { dead: elf_5_dead }
 	
 	cursor: { position: [ 0 464 ] }
 	sprite dwarf_14_dead: { }
@@ -553,6 +556,9 @@ sprites:
 	sprite vampire_1_dead: { }
 	sprite vampire_2_dead: { }
 	sprite woman_21_dead: { }
+	sprite woman_22_dead: { }
+	sprite elf_4_dead: { }
+	sprite elf_5_dead: { }
 }
 
 sprites:

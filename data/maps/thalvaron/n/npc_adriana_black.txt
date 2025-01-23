@@ -7,6 +7,7 @@ dialogue_screen .adriana_black_dialogue:
 	
 	options:
 	[
+		{ quest<offer_only>: .adriana_black_1 }
 	]
 }
 
@@ -28,3 +29,45 @@ entity thalvaron_adriana_black: !NPC
 	_not_pushable: true	
 }
 
+############################################################
+# Quest 1
+
+item .adriana_black_1_quest_item:
+{
+	icon: icon_brown_bag
+	item_level: 17
+	flags: [ not_sellable unique ]
+	string: "Supplies for Lia"
+}
+
+quest .adriana_black_1:
+{
+	string: "Supply Run"
+
+	text:
+	[
+		"Follow the road east out of town, turn right, find the hunter Lia, and deliver the supplies."
+	]
+	
+	description: 
+	[
+		"A hunter named Lia passed through here last week. She was coming from the north and needed a place to stay for a bit while preparing to go further south east towards Faerandor. I tried to convince her"
+		"that it's too dangerous these days, but she insisted on leaving. Can I convince you to see if you can find her and see if she's fine? I prepared a bag of supplies that I'd like for you to bring to her if possible.\n\n"
+		"I don't know where exactly she is now, but if you leave the town east and then follow the road south you might run into her."
+	]
+
+	progress:
+	[
+		"How is it going?"
+	]
+	
+	completion:
+	[
+		"Aw, that's sweet. She shouldn't worry about me. I can take care of myself."		
+	]
+
+	level: 17
+	quest_items: [ .adriana_black_1_quest_item ]
+	reward_xp_multiplier: 0.3
+	reward_cash_multiplier: 0.2	
+}

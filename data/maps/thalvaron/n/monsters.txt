@@ -1038,6 +1038,11 @@ map_entity_spawn thalvaron_vampire_boss_minion_2:
 	spawn_timer: { only_when_triggered: true }	
 }
 
+map_entity_spawn thalvaron_bewildered_wood_elemental:
+{ 
+	entity thalvaron_bewildered_wood_elemental: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
 loot_table .hounds_and_wolves: 
 {
 	slots:
@@ -1131,6 +1136,31 @@ loot_table .hounds_and_wolves:
 	entity thalvaron_shadowthorn_ghoul_a: !NPC { _string: "Wandering Ghoul" _sprite: ghoul_1 _sprite_dead: ghoul_1_dead  }
 	entity thalvaron_shadowthorn_ghoul_b: !NPC { _string: "Wandering Ghoul" _sprite: ghoul_2 _sprite_dead: ghoul_2_dead  }
 	entity thalvaron_shadowthorn_ghoul_boss: !NPC { _string: "The Caretaker" _sprite: ghoul_3 _sprite_dead: ghoul_3_dead  }
+}
+
+# Wood elementals
+{
+	loot_table .bewildered_wood_elemental: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { loot_group: .foramil_1_quest_item requirement self<must_have_active_quest>: { id: .foramil_1 } } 
+			}
+			
+			!WORLD_DROPS {}
+		]	
+	}
+
+	${
+		_level: 17
+		_faction: monsters
+		_creature_type: elemental
+		_default_behavior_state: .wandering_short				
+		_loot_table: .bewildered_wood_elemental
+	}
+
+	entity thalvaron_bewildered_wood_elemental: !NPC { _string: "Bewildered Wood Elemental" _sprite: wood_elemental_1 _sprite_dead: wood_elemental_1_dead  }
 }
 
 # Blood slaves

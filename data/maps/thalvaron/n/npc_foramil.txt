@@ -1,0 +1,87 @@
+dialogue_screen .foramil_dialogue:
+{
+	text: 
+	[	
+		"Be careful."
+	]		
+	
+	options:
+	[
+		{ quest: .foramil_1 }
+	]
+}
+
+dialogue_root .foramil_dialogue:
+{
+	.foramil_dialogue: { }
+}
+
+entity thalvaron_foramil: !NPC
+{
+	_string: "Foramil"
+	_dialogue_root: .foramil_dialogue	
+	_sprite: elf_4
+	_sprite_dead: elf_4_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .foramil_1:
+{
+	string: "Corrupted Splinters"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .foramil_1_quest_item count: 8 }
+}
+
+loot_group .foramil_1_quest_item: {}
+
+item .foramil_1_quest_item:
+{
+	icon: icon_splinter_1
+	item_level: 17
+	loot_groups: [ .foramil_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Corrupted Splinter"
+	stack: 8
+}
+
+quest .foramil_1:
+{
+	string: "Chopping Wood"
+
+	text:
+	[
+		"Kill bewildered tree elementals, collect their splinters, and return them to Foramil."
+	]
+	
+	description: 
+	[
+		"Someone entrusted me with the quest of dealing with some bewildered tree elementals that seems to run amok in these woods. I don't really feel like doing it right now though, so maybe I can delegate the work to you?"
+		"Basically, the problem is that these forsaken tree creatures have lost their minds and are no longer peaceful. The attack people left and right. We can't have that, apparently. You'll find them to the east of here on both"
+		"sides of the river. Bring me back some of their splinters."
+	]
+
+	progress:
+	[
+		"How is it going?"
+	]
+	
+	completion:
+	[
+		"Excellent. Here, have something for your trouble."
+	]
+
+	objectives: [ .foramil_1 ]
+	level: 17
+
+	# FIXME: rewards
+}
+

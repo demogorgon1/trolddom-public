@@ -1,0 +1,30 @@
+dialogue_screen .jor_starleaf_dialogue:
+{
+	text: 
+	[	
+		"Watch out. The dead roams in these woods."
+	]		
+	
+	options:
+	[
+	]
+}
+
+dialogue_root .jor_starleaf_dialogue:
+{
+	.jor_starleaf_dialogue: { }
+}
+
+entity thalvaron_jor_starleaf: !NPC
+{
+	_string: "Jor Starleaf"
+	_dialogue_root: .jor_starleaf_dialogue	
+	_sprite: elf_5
+	_sprite_dead: elf_2_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
