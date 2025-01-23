@@ -16,6 +16,7 @@ endmacro()
 
 trolddom_public_option(TROLDDOM_PUBLIC_PRECOMPILED_HEADERS "Enable precompiled headers." ON)
 trolddom_public_option(TROLDDOM_PUBLIC_DISABLE_WARNING_CLASS_MEMACCESS "-Wno-class-memaccess" ON)
+trolddom_public_option(TROLDDOM_PUBLIC_DISABLE_MSVC_ITERATOR_DEBUG "_ITERATOR_DEBUG_LEVEL=0" ON)
 
 include(FetchContent)
 include(GNUInstallDirs)
@@ -43,7 +44,10 @@ FetchContent_MakeAvailable(nwork)
 
 if(MSVC)
 	add_compile_options(/bigobj /MP)
-	add_compile_definitions(_ITERATOR_DEBUG_LEVEL=0)	
+	
+	if(TROLDDOM_PUBLIC_DISABLE_MSVC_ITERATOR_DEBUG)
+		add_compile_definitions(_ITERATOR_DEBUG_LEVEL=0)	
+	endif()
 endif()
 
 include_directories(extra)
