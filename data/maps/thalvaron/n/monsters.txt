@@ -1043,6 +1043,13 @@ map_entity_spawn thalvaron_bewildered_wood_elemental:
 	entity thalvaron_bewildered_wood_elemental: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
+map_entity_spawn thalvaron_shadowthorn_rotting_corpse:
+{ 
+	entity thalvaron_shadowthorn_ghoul_c: {} 
+	entity thalvaron_shadowthorn_ghoul_d: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
 loot_table .hounds_and_wolves: 
 {
 	slots:
@@ -1124,18 +1131,32 @@ loot_table .hounds_and_wolves:
 }
 
 # Ghouls
-{
+{	
+	loot_table .rotting_corpse: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { weight: 1 }
+				possibility: { weight: 1 loot_group: .warden_moonwatcher_1_quest_item requirement self<must_have_active_quest>: { id: .warden_moonwatcher_1 } } 
+			}
+			
+			!WORLD_DROPS {}
+		]	
+	}
+
 	${
 		_level: 17
 		_faction: monsters
 		_creature_type: undead
-		_default_behavior_state: .wandering_short				
-		_loot_table: .default_humanoid
+		_default_behavior_state: .wandering_short						
 	}
 
-	entity thalvaron_shadowthorn_ghoul_a: !NPC { _string: "Wandering Ghoul" _sprite: ghoul_1 _sprite_dead: ghoul_1_dead  }
-	entity thalvaron_shadowthorn_ghoul_b: !NPC { _string: "Wandering Ghoul" _sprite: ghoul_2 _sprite_dead: ghoul_2_dead  }
-	entity thalvaron_shadowthorn_ghoul_boss: !NPC { _string: "The Caretaker" _sprite: ghoul_3 _sprite_dead: ghoul_3_dead  }
+	entity thalvaron_shadowthorn_ghoul_a: !NPC { _string: "Wandering Ghoul" _sprite: ghoul_1 _sprite_dead: ghoul_1_dead _loot_table: .default_humanoid }
+	entity thalvaron_shadowthorn_ghoul_b: !NPC { _string: "Wandering Ghoul" _sprite: ghoul_2 _sprite_dead: ghoul_2_dead _loot_table: .default_humanoid }
+	entity thalvaron_shadowthorn_ghoul_boss: !NPC { _string: "The Caretaker" _sprite: ghoul_3 _sprite_dead: ghoul_3_dead _loot_table: .default_humanoid }
+	entity thalvaron_shadowthorn_ghoul_c: !NPC { _string: "Rotting Corpse" _sprite: swamp_monster_7 _sprite_dead: swamp_monster_7_dead _loot_table: .rotting_corpse }
+	entity thalvaron_shadowthorn_ghoul_d: !NPC { _string: "Rotting Corpse" _sprite: swamp_monster_3 _sprite_dead: swamp_monster_3_dead _loot_table: .rotting_corpse }
 }
 
 # Wood elementals

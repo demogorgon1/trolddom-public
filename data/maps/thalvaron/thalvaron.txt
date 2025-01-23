@@ -45,6 +45,7 @@ zone .myst_woodlands_coast: { string: "The Lonely Coast" }
 zone .mongos_swamp: { string: "Mongo's Swamp" }
 zone .dwarf_city: { string: "Durgan Tharok" town: true }
 zone .lake_dourgol: { string: "Lake Dourgol" }
+zone .faerandor_gorge: { string: "Faerandor Gorge" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -252,6 +253,9 @@ map_entity_spawn thalvaron_laura_tokins_2_quest_item: { entity thalvaron_laura_t
 map_entity_spawn thalvaron_lia_frostmane: { entity thalvaron_lia_frostmane: { init_state: default } }
 map_entity_spawn thalvaron_foramil: { entity thalvaron_foramil: { init_state: default } }
 map_entity_spawn thalvaron_jor_starleaf: { entity thalvaron_jor_starleaf: { init_state: default } }
+map_entity_spawn thalvaron_pearly_b: { entity thalvaron_pearly_b: { init_state: default } }
+map_entity_spawn thalvaron_brimiar: { entity thalvaron_brimiar: { init_state: default } }
+map_entity_spawn thalvaron_warden_moonwatcher: { entity thalvaron_warden_moonwatcher: { init_state: default } }
 
 # SW
 map_entity_spawn thalvaron_brian_riddle: { entity thalvaron_brian_riddle: { init_state: default } }
@@ -510,6 +514,10 @@ map_palette .stuff:
 	entity_spawn thalvaron_foramil: [ 193 255 85 ]	
 	entity_spawn thalvaron_bewildered_wood_elemental: [ 31 78 194 ]
 	entity_spawn thalvaron_jor_starleaf: [ 131 178 84 ]
+	entity_spawn thalvaron_pearly_b: [ 49 157 175 ]
+	entity_spawn thalvaron_brimiar: [ 39 48 248 ]
+	entity_spawn thalvaron_shadowthorn_rotting_corpse: [ 244 88 166 ]
+	entity_spawn thalvaron_warden_moonwatcher: [ 55 255 138 ]
 	
 	# SW
 	entity_spawn thalvaron_brian_riddle: [ 66 88 99 ]
@@ -636,6 +644,7 @@ map_palette .zones:
 	zone .eastern_faerandor: [ 0 41 255 ]
 	zone .myst_woodlands_coast: [ 255 0 230 ]
 	zone .lake_dourgol: [ 156 0 255 ]
+	zone .faerandor_gorge: [ 255 222 0 ]
 }
 
 map_palette .sub_zones:

@@ -8,6 +8,7 @@ dialogue_screen .foramil_dialogue:
 	options:
 	[
 		{ quest: .foramil_1 }
+		{ quest<offer_only>: .foramil_2 }
 	]
 }
 
@@ -81,6 +82,50 @@ quest .foramil_1:
 
 	objectives: [ .foramil_1 ]
 	level: 17
+	next_quest: .foramil_2
+
+	# FIXME: rewards
+}
+
+############################################################
+# Quest 2
+
+item .foramil_2_quest_item:
+{
+	icon: icon_bundle_1
+	item_level: 17
+	flags: [ not_sellable unique ]
+	string: "Bundle of Splinters"
+}
+
+quest .foramil_2:
+{
+	string: "Splinter Delivery"
+
+	text:
+	[
+		"Deliver the bundle of splinters to the small elven town down the road to the east."
+	]
+	
+	description: 
+	[
+		"So, uhm, maybe you can deliver the splinters to the one who requested them? Stays by the lake in the small elven town down the road to the east."
+	]
+
+	progress:
+	[
+		"How is it going?"
+	]
+	
+	completion:
+	[
+		"Oh, didn't expect to see you here? Great! Just throw those splinters in the water and let me have look."
+	]
+
+	level: 17
+	prerequisites: [ .foramil_1 ]
+	reward_xp_multiplier: 0.3
+	reward_cash_multiplier: 0.3
 
 	# FIXME: rewards
 }

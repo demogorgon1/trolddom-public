@@ -1,0 +1,50 @@
+expression .pearly_b_has_item:
+{
+	client_has_item: { id<item>: .fennian_starleaf_3_quest_item }
+}
+
+dialogue_screen .pearly_b_dialogue_1:
+{
+	text: 
+	[	
+		"How are you doing?"
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .foramil_2 }
+	]
+}
+
+dialogue_screen .pearly_b_dialogue_2:
+{
+	text: 
+	[	
+		"*Blob*"
+	]		
+}
+
+dialogue_root .pearly_b_dialogue:
+{
+	.pearly_b_dialogue_1: { conditions: [ .pearly_b_has_item ] }
+	.pearly_b_dialogue_2: { inv_conditions: [ .pearly_b_has_item ] }
+}
+
+entity thalvaron_pearly_b: !NPC
+{
+	_string: "Pearly"
+	_guild_name: "Lady of the Lake"
+	_dialogue_root: .pearly_b_dialogue
+	_sprite: pearly
+	_sprite_dead: pearly
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_visibility_requirements:
+	{
+		requirement self<must_have_completed_quest>: .pearly_a_2
+	}
+}
+

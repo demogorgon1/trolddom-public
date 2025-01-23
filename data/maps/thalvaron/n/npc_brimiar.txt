@@ -1,0 +1,30 @@
+dialogue_screen .brimiar_dialogue:
+{
+	text: 
+	[	
+		"Greetings, dear $class$."
+	]		
+	
+	options:
+	[
+	]
+}
+
+dialogue_root .brimiar_dialogue:
+{
+	.brimiar_dialogue: { }
+}
+
+entity thalvaron_brimiar: !NPC
+{
+	_string: "Brimiar"
+	_dialogue_root: .brimiar_dialogue	
+	_sprite: elf_6
+	_sprite_dead: elf_6_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

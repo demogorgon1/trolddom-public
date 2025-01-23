@@ -7,6 +7,7 @@ dialogue_screen .jor_starleaf_dialogue:
 	
 	options:
 	[
+		{ quest: .jor_starleaf_1 }
 	]
 }
 
@@ -28,3 +29,48 @@ entity thalvaron_jor_starleaf: !NPC
 	_not_pushable: true	
 }
 
+############################################################
+# Quest 1
+
+objective .jor_starleaf_1:
+{
+	string: "Wandering Ghouls Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_shadowthorn_ghoul_a thalvaron_shadowthorn_ghoul_b ]
+		count: 6
+	}
+}
+
+quest .jor_starleaf_1:
+{
+	string: "Risen Dead"
+
+	text:
+	[
+		"Get rid of ghouls in the woods."
+	]
+	
+	description: 
+	[
+		"These used to be peaceful woods, but after an evil presence manifested itself in Shadowthorn Abbey, the dead have been crawling out of their graves. These ghouls must be destroyed before they spill into these lands!"
+		"Can you help?"
+	]
+
+	progress:
+	[
+		"Be careful."
+	]
+	
+	completion:
+	[
+		"Excellent."
+	]
+
+	level: 17
+	objectives: [ .jor_starleaf_1 ]
+	# FIXME rewards
+}
