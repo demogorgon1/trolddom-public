@@ -8,6 +8,7 @@ dialogue_screen .brimiar_dialogue:
 	options:
 	[
 		{ quest<completion_only>: .pearly_b_1 }
+		{ quest: .brimiar_1 }
 	]
 }
 
@@ -29,3 +30,88 @@ entity thalvaron_brimiar: !NPC
 	_not_pushable: true	
 }
 
+############################################################
+# Quest 1
+
+loot_group .brimiar_1_quest_item: { }
+
+item .brimiar_1_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .brimiar_1_quest_item ]		
+	string: "Brimiar's Book" 
+	icon: icon_book
+	item_level: 17
+	quest: .brimiar_1
+	flags: [ not_sellable unique ]
+}
+
+loot_table .brimiar_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .brimiar_1_quest_item }			
+		}		
+	]
+}
+       
+entity thalvaron_brimiar_1_quest_item:
+{
+	string: "Kobold Chest"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ chest_2 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .brimiar_1_quest_item
+			verb: open
+			range: 1 
+			despawn: true 			
+			level: 17
+			required_quest: .brimiar_1
+		}		
+	}
+}
+
+objective .brimiar_1:
+{
+	string: "Brimiar's Book"
+
+	collect_items: { item: .brimiar_1_quest_item count: 1 }
+}
+
+quest .brimiar_1:
+{
+	string: "Cave Burglary"
+
+	text:
+	[
+		"Retrieve Brimiar's stolen book and return it to him."
+	]
+	
+	description: 
+	[
+		"Last night someone broke into my home and stole one of my books off my table. I have no idea why anyone would steal it, but it's really annoying because I was in the middle of reading it.\n\n"
+		"Maybe you can help me retrieve it? I can't offer you much clues about who could have done it, even though I woke up when it the burglars ran away. I heard a skitter-scatter of little feet as"
+		"I turned on the light. Seemed like the ran off into the gorge to the east."
+	]
+
+	progress:
+	[
+		"Oh, also I think one of the burglars peed on my carpet. Had to throw it out."
+	]
+	
+	completion:
+	[
+		"Excellent! Kobolds? Oh no, I don't want to deal with that again. I hope you got rid of a few of them."
+	]
+
+	objectives: [ .brimiar_1 ]
+	level: 17
+	
+	# FIXME: rewards
+}

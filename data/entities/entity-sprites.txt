@@ -566,6 +566,16 @@ sprites:
 	sprite swamp_monster_7_dead: { }
 	sprite elf_7_dead: { }
 
+	cursor: { position: [ 0 480 ] }
+	sprite kobold_8: { dead: kobold_8_dead }
+	sprite kobold_9: { dead: kobold_9_dead }
+	sprite kobold_10: { dead: kobold_10_dead }
+
+	cursor: { position: [ 0 496 ] }
+	sprite kobold_8_dead: { }
+	sprite kobold_9_dead: { }
+	sprite kobold_10_dead: { }
+
 }
 
 sprites:

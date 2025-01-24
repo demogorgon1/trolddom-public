@@ -1403,3 +1403,78 @@ loot_table .hounds_and_wolves:
 		_abilities: [ { id: .vampire_boss_spawn use_probability: 5 } { id: .vampire_boss_bite } { id: npc_attack } ]
 	}
 }
+
+##########################################################################################
+# Faerandor monsters
+
+map_entity_spawn thalvaron_gorge_lizard: 
+{ 
+	entity thalvaron_gorge_lizard: {} spawn_timer: !NPC_RESPAWN_NORMAL{}	
+}
+
+# Gorge lizards
+{
+	${
+		_level: 17
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short				
+		_loot_table: .default_beast 
+		_weapon_damage: 1.1
+		_resource_health: 1.0
+	}
+
+	entity thalvaron_gorge_lizard: !NPC { _string: "Gorge Lizard" _sprite: lizard_1 _sprite_dead: lizard_1_dead  }
+}
+
+##########################################################################################
+# Faerandor Gorge kobolds
+
+map_entity_spawn thalvaron_gorge_kobold: 
+{ 
+	entity thalvaron_gorge_kobold_a: {} 
+	entity thalvaron_gorge_kobold_b: {} 
+	entity thalvaron_gorge_kobold_c: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Melee
+{
+
+	${
+		_level: 17
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: .default_humanoid
+		_weapon_damage: 0.9
+		_resource_health: 0.8
+	}
+
+	entity thalvaron_gorge_kobold_a: !NPC { _string: "Gorge Kobold" _sprite: kobold_8 _sprite_dead: kobold_8_dead }
+	entity thalvaron_gorge_kobold_b: !NPC { _string: "Gorge Kobold" _sprite: kobold_9 _sprite_dead: kobold_9_dead }
+}
+
+# Healer
+{
+
+	${
+		_level: 17
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: .default_humanoid
+		_weapon_damage: 0.9
+		_resource_health: 0.8
+		_resource_mana: 1
+		_abilities: 
+		[ 
+			{ id: npc_heal target: low_health_friend_or_self }
+			{ id: npc_firebolt }
+			{ id: npc_attack } 
+		]		
+	}
+
+	entity thalvaron_gorge_kobold_c: !NPC { _string: "Gorge Soothsayer" _sprite: kobold_10 _sprite_dead: kobold_10_dead }
+}
+
