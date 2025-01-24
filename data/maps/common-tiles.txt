@@ -598,6 +598,19 @@ sprites:
 	sprite fs_rocks_1_border_15: { }
 	sprite fs_rocks_1_border_16: { }
 	sprite fs_rocks_1_border_17: { }
+	
+	sprite wood_wall_3_alt_1: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_3_alt_2: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_3_window_alt_1: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_3_window_inside_alt_1: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_3_inside_alt_1: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_3_start: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_3_end: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_3_window: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_3_window_inside: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_3: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_3_entrance: { flags: [ tile_walkable tile_top ] }
+	sprite wood_wall_3_inside: { flags: [ tile_block_line_of_sight tile_top ] }
 
 	cursor: { position: [ 0 320 ] }
 	
@@ -622,6 +635,16 @@ sprites:
 	sprite pavement_1_border_15: { }
 	sprite pavement_1_border_16: { }
 	sprite pavement_1_border_17: { }
+	
+	sprite roof_5_nw: { }
+	sprite roof_5_n: { }
+	sprite roof_5_ne: { }
+	sprite roof_5_w: { }
+	sprite roof_5: { }
+	sprite roof_5_e: { }
+	sprite roof_5_sw: { }
+	sprite roof_5_s: { }
+	sprite roof_5_se: { }		
 
 	cursor: { position: [ 0 336 ] }
 	

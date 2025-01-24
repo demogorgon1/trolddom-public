@@ -148,6 +148,12 @@ map_palette .tiles:
 	tile rock_floor: [ 64 20 32 ]
 	tile badlands_dungeon_entrance_closed: [ 88 122 222 ]
 	tile dungeon_wall_face_exit: [ 200 200 255 ]
+	tile wood_wall_3: [ 174 126 210 ]
+	tile wood_wall_3_entrance: [ 200 145 0 ] 
+	tile wood_wall_3_inside: [ 210 116 129 ]
+	tile wood_wall_3_window: [ 160 164 225 ]
+	tile wood_wall_3_window_inside: [ 143 225 164 ]	
+	tile roof_5: [ 0 161 255 ]	
 }
 
 # NW

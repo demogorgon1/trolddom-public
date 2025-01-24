@@ -46,6 +46,7 @@ entity thalvaron_pearly_b: !NPC
 	_visibility_requirements:
 	{
 		requirement self<must_have_completed_quest>: .pearly_a_2
+		requirement self<must_not_have_completed_quest>: .pearly_b_1
 	}
 }
 
