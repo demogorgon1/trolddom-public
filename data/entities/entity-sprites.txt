@@ -570,11 +570,29 @@ sprites:
 	sprite kobold_8: { dead: kobold_8_dead }
 	sprite kobold_9: { dead: kobold_9_dead }
 	sprite kobold_10: { dead: kobold_10_dead }
+	sprite swamp_monster_8: { dead: swamp_monster_8_dead }
+	sprite swamp_monster_9: { dead: swamp_monster_9_dead }
+	sprite elf_8: { dead: elf_8_dead }
+	sprite elf_9: { dead: elf_9_dead }
+	sprite infected_bear_1: { dead: infected_bear_1_dead }
+	sprite skeletal_bear_1: { dead: skeletal_bear_1_dead }
+	sprite ooze_4: { dead: ooze_4_dead }
+	sprite infected_deer_1: { dead: infected_deer_1_dead }
+	sprite infected_boar_1: { dead: infected_boar_1_dead }
 
 	cursor: { position: [ 0 496 ] }
 	sprite kobold_8_dead: { }
 	sprite kobold_9_dead: { }
 	sprite kobold_10_dead: { }
+	sprite swamp_monster_8_dead: { }
+	sprite swamp_monster_9_dead: { }
+	sprite elf_8_dead: { }
+	sprite elf_9_dead: { }
+	sprite infected_bear_1_dead: { }
+	sprite skeletal_bear_1_dead: { }
+	sprite ooze_4_dead: { }
+	sprite infected_deer_1_dead: { }
+	sprite infected_boar_1_dead: { }
 
 }
 

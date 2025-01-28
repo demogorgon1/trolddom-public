@@ -1,0 +1,137 @@
+dialogue_screen .thalorion_dialogue:
+{
+	text: 
+	[	
+		"Be careful."
+	]		
+	
+	options:
+	[
+		{ quest: .thalorion_1 }
+		{ quest<offer_only>: .thalorion_2 }
+	]
+}
+
+dialogue_root .thalorion_dialogue:
+{
+	.thalorion_dialogue: { }
+}
+
+entity thalvaron_thalorion: !NPC
+{
+	_string: "Thalorion"
+	_dialogue_root: .thalorion_dialogue	
+	_sprite: elf_9
+	_sprite_dead: elf_9_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .thalorion_1_a:
+{
+	string: "Hair of Mona Uptork"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .thalorion_1_quest_item count: 1 }
+}
+
+loot_group .thalorion_1_quest_item: {}
+
+item .thalorion_1_quest_item:
+{
+	icon: icon_flower_3
+	item_level: 18
+	loot_groups: [ .thalorion_1_quest_item ]
+	flags: [ not_sellable unique ]
+	string: "Hair of Mona Uptork"
+}
+
+objective .thalorion_1_b:
+{
+	string: "Hair of Jack Uptork"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .thalorion_1_quest_item_2 count: 1 }
+}
+
+loot_group .thalorion_1_quest_item_2: {}
+
+item .thalorion_1_quest_item_2:
+{
+	icon: icon_flower_3
+	item_level: 18
+	loot_groups: [ .thalorion_1_quest_item_2 ]
+	flags: [ not_sellable unique ]
+	string: "Hair of Jack Uptork"
+}
+
+quest .thalorion_1:
+{
+	string: "The Uptorks"
+
+	text:
+	[
+		"Collect hair samples from Mona and Jack Uptork."
+	]
+	
+	description: 
+	[
+		"It was a bit of a tragedy when the Mona Uptork and Jack Uptork, a young married couple living in Ravenreach, drowned in the lake to the east. They went for a swim in its clear water, but they were never seen"
+		"again - at least until recently. When the wave of dark magic rolled over the hills from the north, their remains must have been stirred at the bottom of the lake, because their reanimated bodies have been observed "
+		"walking the land!\n\n"
+		"Sure, it's horribly, but I'm curious about the nature of these so-called ghouls. I'm wantering if you can help me satisfy my curiousity? I want you to locate these two reanimated corpses and bring me some hair samples?\n\n" 
+		"They've been spotted wandering the area north of Lake Ylynor to the east."
+	]
+
+	progress:
+	[
+		"What are you still doing here?"
+	]
+	
+	completion:
+	[
+		"FIXME"
+	]
+
+	level: 18
+	objectives: [ .thalorion_1_a .thalorion_1_b ]
+	next_quest: .thalorion_2
+}
+
+############################################################
+# Quest 2
+
+quest .thalorion_2:
+{
+	string: "Infected Wildlife"
+
+	text:
+	[
+		"Seek out Urgon Starleaf in eastern Faerandor."
+	]
+	
+	description: 
+	[
+		"My friend Urgon Starleaf lives in an isolated house in eastern Faerandor. You should seek him out. Follow the road to the east.\n\n"
+		"Last I saw him, he was talking about wildlife that was getting infected with some strange plague. Undoubtedly this is related to the other horrible things we're experiencing."
+	]
+	
+	completion:
+	[
+		"Well, yes, the dark magics have a wide variety of effects."
+	]
+
+	level: 18
+	prerequisites: [ .thalorion_1 ]
+	reward_xp_multiplier: 0.3
+	reward_cash_multiplier: 0.3
+}
+

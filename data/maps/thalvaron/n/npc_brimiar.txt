@@ -9,6 +9,7 @@ dialogue_screen .brimiar_dialogue:
 	[
 		{ quest<completion_only>: .pearly_b_1 }
 		{ quest: .brimiar_1 }
+		{ quest: .brimiar_2 }
 	]
 }
 
@@ -111,7 +112,54 @@ quest .brimiar_1:
 	]
 
 	objectives: [ .brimiar_1 ]
-	level: 17
+	level: 17	
+	next_quest: .brimiar_2
+	
+	# FIXME: rewards
+}
+
+############################################################
+# Quest 2
+
+objective .brimiar_2:
+{
+	string: "Gorge Harpies Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc: { entities: [ thalvaron_gorge_harpy ] count: 8 }	
+}
+
+quest .brimiar_2:
+{
+	string: "Winged Terrors"
+
+	text:
+	[
+		"Locate the harpy colony in the eastern gorge and thin out their numbers."
+	]
+	
+	description: 
+	[
+		"I have other problems than thieving Kobolds that keep me up at night. Have you heard about harpies? A bunch of them are living in a colony a bit further to the east. I don't really care that much about them,"
+		"but the problem is that they make an awful amount of noise after dark. I've lived by the sea before and I can tell you that they're worse than seagulls during breeding season! You might think that my home"
+		"is deep enough underground to dampen most of the noise, but no, their constant screeching pierces right through the rocks. I don't know what's going on over there, but since you seem to be good at dealing with"
+		"Kobolds, maybe you can deal with harpies too? Seek out their colony and thin out their numbers, please!"
+	]
+
+	progress:
+	[
+		"How is it going?"
+	]
+	
+	completion:
+	[
+		"Ah yes, maybe I can finally sleep again. Thank you!"
+	]
+
+	objectives: [ .brimiar_2 ]
+	level: 18
+	prerequisites: [ .brimiar_1 ]
 	
 	# FIXME: rewards
 }

@@ -1,0 +1,30 @@
+dialogue_screen .aelithra_dialogue:
+{
+	text: 
+	[	
+		"Be careful."
+	]		
+	
+	options:
+	[
+	]
+}
+
+dialogue_root .aelithra_dialogue:
+{
+	.aelithra_dialogue: { }
+}
+
+entity thalvaron_aelithra: !NPC
+{
+	_string: "Aelithra"
+	_dialogue_root: .aelithra_dialogue	
+	_sprite: elf_8
+	_sprite_dead: elf_8_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

@@ -22,11 +22,11 @@ tile_modifier wood_wall_3_end:
 
 tile_modifier wood_wall_3_broken:
 {
-	sprites: [ wood_wall_3_alt_1 wood_wall_3_alt_2 ]
+	sprites: [ wood_wall_3_alt_1 wood_wall_3_alt_2 wood_wall_3_alt_2 ]
 	
 	requirement<center_must_be>: [ wood_wall_3 ]
 	
-	probability: 50
+	probability: 40
 }
 
 tile_modifier wood_wall_3_inside_broken:
@@ -35,7 +35,7 @@ tile_modifier wood_wall_3_inside_broken:
 	
 	requirement<center_must_be>: [ wood_wall_3_inside ]
 	
-	probability: 50
+	probability: 25
 }
 
 tile_modifier wood_wall_3_window_broken:

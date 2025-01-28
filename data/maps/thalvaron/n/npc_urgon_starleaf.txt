@@ -1,0 +1,145 @@
+dialogue_screen .urgon_starleaf_dialogue:
+{
+	text: 
+	[	
+		"Be careful."
+	]		
+	
+	options:
+	[	
+		{ quest<completion_only>: .thalorion_2 }
+		{ quest: .urgon_starleaf_1 }
+		{ quest<offer_only>: .urgon_starleaf_2 }
+	]
+}
+
+dialogue_root .urgon_starleaf_dialogue:
+{
+	.urgon_starleaf_dialogue: { }
+}
+
+entity thalvaron_urgon_starleaf: !NPC
+{
+	_string: "Urgon Starleaf"
+	_dialogue_root: .urgon_starleaf_dialogue	
+	_sprite: elf_1
+	_sprite_dead: elf_1_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .urgon_starleaf_1_a:
+{
+	string: "Plague Bear Butts"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .urgon_starleaf_1_quest_item count: 4 }
+}
+
+loot_group .urgon_starleaf_1_quest_item: {}
+
+item .urgon_starleaf_1_quest_item:
+{
+	icon: icon_fur
+	item_level: 18
+	loot_groups: [ .urgon_starleaf_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Plague Bear Butt"
+	stack: 4
+}
+
+objective .urgon_starleaf_1_b:
+{
+	string: "Skeletal Bear Claw"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .urgon_starleaf_1_quest_item_2 count: 1 }
+}
+
+loot_group .urgon_starleaf_1_quest_item_2: {}
+
+item .urgon_starleaf_1_quest_item_2:
+{
+	icon: icon_claw
+	item_level: 18
+	loot_groups: [ .urgon_starleaf_1_quest_item_2 ]
+	flags: [ not_sellable unique ]
+	string: "Skeletal Bear Claw"
+}
+
+quest .urgon_starleaf_1:
+{
+	string: "Infected Wildlife"
+
+	text:
+	[
+		"Hunt undead bears in eastern Faerandor and bring some of their parts to Urgon Starleaf."
+	]
+	
+	description: 
+	[
+		"The dead energies from the north are infecting the wildlife. Will it spread to live elves or humans? I don't know, but it's definitely not looking good. The woods behind me to the east have long had a large"
+		"population of bears. Now it seems like they've all been infected by a mysterious disease. They look like they're falling apart! I've even spotted one bear that is completely skeletal! I want to know more about what is going on."
+		"Can you hunt down some of these undead animals and return to me some of their parts?"
+	]
+
+	progress:
+	[
+		"What are you still doing here?"
+	]
+	
+	completion:
+	[
+		"FIXME"
+	]
+
+	level: 18
+	objectives: [ .urgon_starleaf_1_a .urgon_starleaf_1_b ]
+}
+
+############################################################
+# Quest 2
+
+item .urgon_starleaf_2_quest_item:
+{
+	icon: icon_brown_bag
+	item_level: 19
+	flags: [ not_sellable unique ]
+	string: "Bundle of Bear Butts"
+}
+
+quest .urgon_starleaf_2:
+{
+	string: "Find the Dwarf"
+
+	text:
+	[
+		"Bring the infected animal parts to the dwarf who set up camp north of Lake Joonor."
+	]
+	
+	description: 
+	[
+		"A dwarf passed through here a few days ago. He went north, saying he would set up camp in the mountains near Lake Joonor. He showed a particular interest in the infected wildlife. I'm not really sure what to do with"
+		"these infected animal parts, but I think you should bring them to him. Maybe he can gather some insights from them."
+	]
+	
+	completion:
+	[
+		"Uh. What's the smell?"
+	]
+
+	level: 19
+	prerequisites: [ .urgon_starleaf_1 ]
+	reward_xp_multiplier: 0.3
+	reward_cash_multiplier: 0.3
+	quest_items: [ .urgon_starleaf_2_quest_item ]
+}
+

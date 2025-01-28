@@ -1412,6 +1412,50 @@ map_entity_spawn thalvaron_gorge_lizard:
 	entity thalvaron_gorge_lizard: {} spawn_timer: !NPC_RESPAWN_NORMAL{}	
 }
 
+map_entity_spawn thalvaron_gorge_harpy: 
+{ 
+	entity thalvaron_gorge_harpy: {} spawn_timer: !NPC_RESPAWN_NORMAL{}	
+}
+
+map_entity_spawn thalvaron_wandering_ghoul_husband: 
+{ 
+	entity thalvaron_wandering_ghoul_husband: {} spawn_timer: !NPC_RESPAWN_NORMAL{}	
+}
+
+map_entity_spawn thalvaron_wandering_ghoul_wife: 
+{ 
+	entity thalvaron_wandering_ghoul_wife: {} spawn_timer: !NPC_RESPAWN_NORMAL{}	
+}
+
+map_entity_spawn thalvaron_plague_bear: 
+{ 
+	entity thalvaron_plague_bear: {} spawn_timer: !NPC_RESPAWN_NORMAL{}	
+}
+
+map_entity_spawn thalvaron_plague_bear_boss: 
+{ 
+	entity thalvaron_plague_bear_boss: {} spawn_timer: !NPC_RESPAWN_NORMAL{}	
+}
+
+map_entity_spawn thalvaron_faerandor_ooze: 
+{ 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}	
+	entity thalvaron_sneaking_ooze: { level: 18 } 
+	entity thalvaron_grim_ooze: { level: 19 } 
+}
+
+map_entity_spawn thalvaron_ooze_boss: 
+{ 
+	entity thalvaron_ooze_boss: {} spawn_timer: !NPC_RESPAWN_NORMAL{}	
+}
+
+map_entity_spawn thalvaron_infected_wildlife: 
+{ 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}	
+	entity thalvaron_infected_boar: {} 
+	entity thalvaron_infected_deer: {} 
+}
+
 # Gorge lizards
 {
 	${
@@ -1425,6 +1469,140 @@ map_entity_spawn thalvaron_gorge_lizard:
 	}
 
 	entity thalvaron_gorge_lizard: !NPC { _string: "Gorge Lizard" _sprite: lizard_1 _sprite_dead: lizard_1_dead  }
+}
+
+# Gorge harpies
+{
+	${		
+		_faction: monsters
+		_creature_type: humanoid		
+		_default_behavior_state: .wandering_short		
+		_loot_table: .default_humanoid
+		_level: 18
+	}
+
+	entity thalvaron_gorge_harpy: !NPC { _string: "Gorge Harpy" _sprite: harpy_1 _sprite_dead: harpy_1_dead }
+}
+
+# Wandering ghoul
+{
+	loot_table .wandering_ghoul_husband: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { loot_group: .thalorion_1_quest_item_2 requirement self<must_have_active_quest>: { id: .thalorion_1 } } 
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_CLOTH {}
+		]	
+	}
+	
+	loot_table .wandering_ghoul_wife: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { loot_group: .thalorion_1_quest_item requirement self<must_have_active_quest>: { id: .thalorion_1 } } 
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_CLOTH {}
+		]	
+	}
+
+	${		
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .wandering_short				
+		_level: 18
+	}
+
+	entity thalvaron_wandering_ghoul_husband: !NPC { _string: "Jack Uptork" _sprite: swamp_monster_9 _sprite_dead: swamp_monster_9_dead _loot_table: .wandering_ghoul_husband }
+	entity thalvaron_wandering_ghoul_wife: !NPC { _string: "Mona Uptork" _sprite: swamp_monster_8 _sprite_dead: swamp_monster_8_dead _loot_table: .wandering_ghoul_wife }
+}
+
+# Plague Bears
+{
+	loot_table .plague_bear: 
+	{
+		slots:
+		[	
+			{
+				possibility: { weight: 1 }
+			}
+		
+			{ 
+				possibility: { weight: 1 loot_group: .urgon_starleaf_1_quest_item requirement self<must_have_active_quest>: { id: .urgon_starleaf_1 } } 
+			}
+			
+			!WORLD_DROPS {}			
+		]	
+	}
+
+	loot_table .plague_bear_boss: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { loot_group: .urgon_starleaf_1_quest_item_2 requirement self<must_have_active_quest>: { id: .urgon_starleaf_1 } } 
+			}
+			
+			!WORLD_DROPS {}			
+		]	
+	}
+	
+	${		
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .passive
+		_level: 18
+	}
+
+	entity thalvaron_plague_bear: !NPC { _string: "Plague Bear" _sprite: infected_bear_1 _sprite_dead: infected_bear_1_dead _loot_table: .plague_bear }
+	entity thalvaron_plague_bear_boss: !NPC { _string: "Skeletal Bear" _sprite: skeletal_bear_1 _sprite_dead: skeletal_bear_1_dead _loot_table: .plague_bear_boss }
+}
+
+# Infected wildlife
+{
+	loot_table .infected_wildlife: 
+	{
+		slots:
+		[	
+#			{
+#				possibility: { weight: 1 }
+#			}
+#		
+#			{ 
+#				possibility: { weight: 1 loot_group: .urgon_starleaf_1_quest_item requirement self<must_have_active_quest>: { id: .urgon_starleaf_1 } } 
+#			}
+#			
+			!WORLD_DROPS {}			
+		]	
+	}
+	
+	${		
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .wandering_short
+		_level: 19
+	}
+
+	entity thalvaron_infected_deer: !NPC { _string: "Infected Deer" _sprite: infected_deer_1 _sprite_dead: infected_deer_1_dead _loot_table: .infected_wildlife }
+	entity thalvaron_infected_boar: !NPC { _string: "Infected Boar" _sprite: infected_boar_1 _sprite_dead: infected_boar_1_dead _loot_table: .infected_wildlife }
+}
+# Oozes
+{
+	${		
+		_faction: monsters
+		_creature_type: elemental
+		_default_behavior_state: .wandering_short		
+	}
+
+	entity thalvaron_grim_ooze: !NPC { _level: 19 _string: "Grim Ooze" _sprite: ooze_2 _sprite_dead: ooze_2_dead _loot_table: .default_beast }
+	entity thalvaron_sneaking_ooze: !NPC { _level: 18 _string: "Sneaking Ooze" _sprite: ooze_1 _sprite_dead: ooze_1_dead _loot_table: .default_beast }
+	entity thalvaron_ooze_boss: !NPC { _level: 19 _string: "Gloamithrex" _sprite: ooze_4 _sprite_dead: ooze_4_dead _loot_table: .default_beast }
 }
 
 ##########################################################################################

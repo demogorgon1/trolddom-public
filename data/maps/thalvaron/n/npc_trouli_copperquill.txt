@@ -1,0 +1,31 @@
+dialogue_screen .trouli_copperquill_dialogue:
+{
+	text: 
+	[	
+		"Be careful."
+	]		
+	
+	options:
+	[	
+		{ quest<completion_only>: .urgon_starleaf_2 }
+	]
+}
+
+dialogue_root .trouli_copperquill_dialogue:
+{
+	.trouli_copperquill_dialogue: { }
+}
+
+entity thalvaron_trouli_copperquill: !NPC
+{
+	_string: "Trouli Copperquill"
+	_dialogue_root: .trouli_copperquill_dialogue	
+	_sprite: dwarf_10
+	_sprite_dead: dwarf_10_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

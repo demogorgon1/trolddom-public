@@ -24,7 +24,3 @@ entity thalvaron_joanna_hewitt: !NPC
 	_loot_table: .npc
 	_not_pushable: true	
 }
-
-############################################################
-# Quest 1
-
