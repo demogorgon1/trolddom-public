@@ -8,6 +8,8 @@ dialogue_screen .warden_moonwatcher_dialogue:
 	options:
 	[
 		{ quest: .warden_moonwatcher_1 }
+		{ quest<completion_only>: .evil_orb }
+		{ quest<offer_only>: .warden_moonwatcher_2 }
 	]
 }
 
@@ -82,4 +84,50 @@ quest .warden_moonwatcher_1:
 
 	# FIXME: rewards
 }
+
+############################################################
+# Quest 2
+
+item .warden_moonwatcher_2_quest_item:
+{
+	icon: icon_orb_1
+	item_level: 18
+	flags: [ not_sellable unique ]
+	string: "Evil Orb"
+}
+
+quest .warden_moonwatcher_2:
+{
+	string: "Divine Consultation"
+
+	text:
+	[
+		"Take the Evil Orb to the island in Lake Joonor."
+	]
+	
+	description: 
+	[
+		"Good thing you didn't destroy the dark elf orb you found in the woods. Since it's still intact we might be able to figure out where it's coming from.\n\n"
+		"To the east you'll find the great Lake Joonor. On a small island there is a temple of significant divine elvish importance. Take the orb there and consult the spirits who inhabit the place."
+	]
+
+	progress:
+	[
+		"Yes."
+	]
+	
+	completion:
+	[
+		"Ah, yes..."
+	]
+
+	level: 18
+	prerequisites: [ .evil_orb ]
+	reward_xp_multiplier: 0.5
+	reward_cash_multiplier: 0
+	quest_items: [ .warden_moonwatcher_2_quest_item ]
+
+	# FIXME: rewards
+}
+
 

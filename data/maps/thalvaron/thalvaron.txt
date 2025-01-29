@@ -49,6 +49,7 @@ zone .faerandor_gorge: { string: "Faerandor Gorge" }
 zone .dark_strand: { string: "Dark Strand" }
 zone .lake_ylynor: { string: "Lake Ylynor" }
 zone .lake_joonor: { string: "Lake Joonor" }
+zone .highborne_tower: { string: "Highborne Tower" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -272,6 +273,13 @@ map_entity_spawn thalvaron_thalorion: { entity thalvaron_thalorion: { init_state
 map_entity_spawn thalvaron_aelithra: { entity thalvaron_aelithra: { init_state: default } }
 map_entity_spawn thalvaron_urgon_starleaf: { entity thalvaron_urgon_starleaf: { init_state: default } }
 map_entity_spawn thalvaron_trouli_copperquill: { entity thalvaron_trouli_copperquill: { init_state: default } }
+map_entity_spawn thalvaron_pearly_c: { entity thalvaron_pearly_c: { init_state: default } }
+map_entity_spawn thalvaron_warden_tylior: { entity thalvaron_warden_tylior: { init_state: default } }
+map_entity_spawn thalvaron_warden_nekelian: { entity thalvaron_warden_nekelian: { init_state: default } }
+map_entity_spawn thalvaron_blimcraft_highborne: { entity thalvaron_blimcraft_highborne: { init_state: default } }
+map_entity_spawn thalvaron_blimcraft_highborne_1_quest_item: { entity thalvaron_blimcraft_highborne_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_evil_orb: { entity thalvaron_evil_orb: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_spirit_of_joonor: { entity thalvaron_spirit_of_joonor: { init_state: default } }
 
 # SW
 map_entity_spawn thalvaron_brian_riddle: { entity thalvaron_brian_riddle: { init_state: default } }
@@ -550,6 +558,15 @@ map_palette .stuff:
 	entity_spawn thalvaron_ooze_boss: [ 174 129 244 ]
 	entity_spawn thalvaron_infected_wildlife: [ 155 95 177 ]
 	entity_spawn thalvaron_trouli_copperquill: [ 255 139 28 ]
+	entity_spawn thalvaron_faerandor_dark_elf: [ 67 39 115 ]
+	entity_spawn thalvaron_faerandor_ghoul: [ 123 123 49 ]
+	entity_spawn thalvaron_pearly_c: [ 213 94 88 ]
+	entity_spawn thalvaron_warden_nekelian: [ 39 49 125 ]
+	entity_spawn thalvaron_warden_tylior: [ 139 149 25 ]
+	entity_spawn thalvaron_blimcraft_highborne_1_quest_item: [ 239 249 1 ]
+	entity_spawn thalvaron_blimcraft_highborne: [ 39 149 111 ]
+	entity_spawn thalvaron_evil_orb: [ 149 99 112 ]
+	entity_spawn thalvaron_spirit_of_joonor: [ 24 200 140 ]
 
 	# SW
 	entity_spawn thalvaron_brian_riddle: [ 66 88 99 ]
@@ -696,6 +713,7 @@ map_palette .sub_zones:
 	sub_zone .dwarf_city: [ 250 101 255 ]
 	sub_zone .lake_ylynor: [ 101 180 255 ]
 	sub_zone .lake_joonor: [ 225 101 255 ]
+	sub_zone .highborne_tower: [ 101 136 255 ]
 	
 	sub_zone thalvaron_crab_giant: [ 39 192 83 ]
 	sub_zone thalvaron_vampire_boss: [ 139 93 48 ]
@@ -748,6 +766,7 @@ map_palette .doodads:
 	doodad dead_tree: [ 33 123 81 ]
 	doodad tombstone: [ 99 99 119 ]
 	doodad statue_angel: [ 199 199 119 ]
+	doodad skull_stick: [ 39 81 167 ]
 	
 	doodad wall_sign_generic<"Mathew's Emporium">: [ 197 173 111 ]	
 	doodad wall_sign_generic<"John & Mary's">: [ 97 173 111 ]	

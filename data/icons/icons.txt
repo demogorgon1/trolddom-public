@@ -548,6 +548,8 @@ sprites:
 	sprite icon_flower_8 : { tags: [ icon ] }
 	sprite icon_splinter_1 : { tags: [ icon ] }
 	sprite icon_bundle_1 : { tags: [ icon ] }
+	sprite icon_orb_1 : { tags: [ icon ] }
+	
 	
 }
 

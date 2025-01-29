@@ -579,6 +579,9 @@ sprites:
 	sprite ooze_4: { dead: ooze_4_dead }
 	sprite infected_deer_1: { dead: infected_deer_1_dead }
 	sprite infected_boar_1: { dead: infected_boar_1_dead }
+	sprite elf_10: { dead: elf_10_dead }
+	sprite elf_11: { dead: elf_11_dead }
+	sprite spirit_1: { dead: spirit_1_dead }
 
 	cursor: { position: [ 0 496 ] }
 	sprite kobold_8_dead: { }
@@ -593,6 +596,9 @@ sprites:
 	sprite ooze_4_dead: { }
 	sprite infected_deer_1_dead: { }
 	sprite infected_boar_1_dead: { }
+	sprite elf_10_dead: { }
+	sprite elf_11_dead: { }
+	sprite spirit_1_dead: { }
 
 }
 

@@ -1,0 +1,173 @@
+dialogue_screen .blimcraft_highborne_dialogue:
+{
+	text: 
+	[	
+		"Huh? What I'm doing here? Where?"
+	]		
+	
+	options:
+	[
+		{ quest: .blimcraft_highborne_1 }
+		{ quest: .blimcraft_highborne_2 }
+	]
+}
+
+dialogue_root .blimcraft_highborne_dialogue:
+{
+	.blimcraft_highborne_dialogue: { }
+}
+
+entity thalvaron_blimcraft_highborne: !NPC
+{
+	_string: "Blimcraft Highborne"
+	_dialogue_root: .blimcraft_highborne_dialogue	
+	_sprite: man_21
+	_sprite_dead: man_21_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .blimcraft_highborne_1_quest_item: {}
+
+item .blimcraft_highborne_1_quest_item:
+{
+	icon: icon_mushroom_1
+	item_level: 18
+	loot_groups: [ .blimcraft_highborne_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Cloudveil Mushroom"
+	stack: 6
+}
+
+loot_table .blimcraft_highborne_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .blimcraft_highborne_1_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_blimcraft_highborne_1_quest_item:
+{
+	string: "Cloudveil Mushroom"
+	systems: [ openable ]
+
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ mushroom_2 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .blimcraft_highborne_1_quest_item
+			verb: pick_up
+			range: 1 
+			despawn: true 			
+			level: 18
+			required_quest: .blimcraft_highborne_1
+		}		
+	}
+}
+
+objective .blimcraft_highborne_1:
+{
+	string: "Cloudveil Mushrooms"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .blimcraft_highborne_1_quest_item count: 6 }
+}
+
+quest .blimcraft_highborne_1:
+{
+	string: "Too Oozy For My Tastes"
+
+	text:
+	[
+		"Collect mushrooms and return them to Blimcraft Highborne."
+	]
+	
+	description: 
+	[
+		"I think I was going for a walk in the woods looking for mushrooms. Ah, yes, that makes sense. Then I remembered how the best mushrooms are usually in dark caves, so I went in here. So far so good, yes. But, suddenly, there"
+		"were way too many of those slimy oozes everywhere! I can't take those. So, here we are. Can you bring me the mushrooms? They're all over these caves."
+	]
+
+	progress:
+	[
+		"Who?"
+	]
+	
+	completion:
+	[
+		"Uh, what's that? Ah, mushrooms, thanks! Just what I needed."
+	]
+
+	objectives: [ .blimcraft_highborne_1 ]
+	level: 18
+	next_quest: .blimcraft_highborne_2
+
+}
+
+############################################################
+# Quest 2
+
+loot_group .blimcraft_highborne_2_quest_item: {}
+
+item .blimcraft_highborne_2_quest_item:
+{
+	icon: icon_staff_1
+	item_level: 19
+	loot_groups: [ .blimcraft_highborne_2_quest_item ]
+	flags: [ unique not_sellable ]
+	string: "Highborne Wand"
+}
+
+objective .blimcraft_highborne_2:
+{
+	string: "Highborne Wand"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .blimcraft_highborne_2_quest_item count: 1 }
+}
+
+quest .blimcraft_highborne_2:
+{
+	string: "Reclaiming the Tower"
+
+	text:
+	[
+		"Find Blimcraft's wizard tower and defeat the giant ooze that ate his wand."
+	]
+	
+	description: 
+	[
+		"Did you see any oozes? I really don't like them. I used to live in the wizard tower just to the north of here, but suddenly there were oozes all over the place and I had to leave. Huh? You think I'm the one"
+		"who conjured those oozes? No! Oh, I don't think so. Pretty sure I didn't do that. Maybe, I don't know. Anyway, a really big ooze has taken over my home. Quite big, definitely larger than a normal ooze. I think it"
+		"swallowed my wand. Can you go and get it back? I don't really want to live there anymore, but I really need my wand."
+	]
+
+	progress:
+	[
+		"Yes!"
+	]
+	
+	completion:
+	[
+		"Ah, my wand. I wonder if it still works."
+	]
+
+	objectives: [ .blimcraft_highborne_2 ]
+	level: 19
+	prerequisites: [ .blimcraft_highborne_1 ]
+}
+

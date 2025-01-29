@@ -1,0 +1,34 @@
+dialogue_screen .spirit_of_joonor_dialogue:
+{
+	text: 
+	[	
+		"Welcome."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .warden_moonwatcher_2 }
+	]
+}
+
+dialogue_root .spirit_of_joonor_dialogue:
+{
+	.spirit_of_joonor_dialogue: { }
+}
+
+entity thalvaron_spirit_of_joonor: !NPC
+{
+	_string: "Spirit of Joonor"
+	_dialogue_root: .spirit_of_joonor_dialogue	
+	_sprite: spirit_1
+	_sprite_dead: spirit_1_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: elemental
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+

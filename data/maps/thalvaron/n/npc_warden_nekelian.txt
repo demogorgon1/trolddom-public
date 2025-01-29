@@ -1,0 +1,34 @@
+dialogue_screen .warden_nekelian_dialogue:
+{
+	text: 
+	[	
+		"Be careful."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .aelithra_2 }
+	]
+}
+
+dialogue_root .warden_nekelian_dialogue:
+{
+	.warden_nekelian_dialogue: { }
+}
+
+entity thalvaron_warden_nekelian: !NPC
+{
+	_string: "Warden Nekelian"
+	_dialogue_root: .warden_nekelian_dialogue	
+	_sprite: elf_10
+	_sprite_dead: elf_10_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+

@@ -1,0 +1,34 @@
+dialogue_screen .warden_tylior_dialogue:
+{
+	text: 
+	[	
+		"Be careful."
+	]		
+	
+	options:
+	[
+		#{ quest: .warden_nekelian_1 }
+	]
+}
+
+dialogue_root .warden_tylior_dialogue:
+{
+	.warden_tylior_dialogue: { }
+}
+
+entity thalvaron_warden_tylior: !NPC
+{
+	_string: "Warden Tylior"
+	_dialogue_root: .warden_tylior_dialogue	
+	_sprite: elf_11
+	_sprite_dead: elf_11_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+

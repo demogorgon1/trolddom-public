@@ -966,6 +966,11 @@ map_entity_spawn thalvaron_north_dark_elf:
 	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
+map_entity_spawn thalvaron_faerandor_dark_elf:
+{
+	entity thalvaron_faerandor_dark_elf: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
 # Around the single house
 {	
 	${
@@ -979,6 +984,22 @@ map_entity_spawn thalvaron_north_dark_elf:
 	entity thalvaron_north_dark_elf_a: !NPC { _string: "Dark Elf Invader" _sprite: dark_elf_4 _sprite_dead: dark_elf_4_dead }
 	entity thalvaron_north_dark_elf_b: !NPC { _string: "Dark Elf Invader" _sprite: dark_elf_5 _sprite_dead: dark_elf_5_dead }
 	entity thalvaron_north_dark_elf_c: !NPC { _string: "Dark Elf Hunter" _sprite: dark_elf_3 _sprite_dead: dark_elf_3_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
+}
+
+# Faerandor dark elf named
+{
+		
+	${
+		_level: 18
+		_faction: monsters
+		_creature_type: humanoid
+		_resource_health: 2
+		_resource_mana: 1
+		_loot_table: .default_humanoid
+		_abilities: [ { id: npc_curse } { id: npc_firebolt } { id: npc_attack } ]
+	}
+
+	entity thalvaron_faerandor_dark_elf: !NPC { _string: "Jular the Bone-Eater" _sprite: dark_elf_2 _sprite_dead: dark_elf_2_dead }
 }
 
 ##########################################################################################
@@ -1456,6 +1477,13 @@ map_entity_spawn thalvaron_infected_wildlife:
 	entity thalvaron_infected_deer: {} 
 }
 
+map_entity_spawn thalvaron_faerandor_ghoul: 
+{ 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}	
+	entity thalvaron_faerandor_ghoul_a: {} 
+	entity thalvaron_faerandor_ghoul_b: {} 
+}
+
 # Gorge lizards
 {
 	${
@@ -1592,8 +1620,22 @@ map_entity_spawn thalvaron_infected_wildlife:
 	entity thalvaron_infected_deer: !NPC { _string: "Infected Deer" _sprite: infected_deer_1 _sprite_dead: infected_deer_1_dead _loot_table: .infected_wildlife }
 	entity thalvaron_infected_boar: !NPC { _string: "Infected Boar" _sprite: infected_boar_1 _sprite_dead: infected_boar_1_dead _loot_table: .infected_wildlife }
 }
+
 # Oozes
 {
+
+	loot_table .ooze_boss: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { loot_group: .blimcraft_highborne_2_quest_item requirement self<must_have_active_quest>: { id: .blimcraft_highborne_2 } } 
+			}
+			
+			!WORLD_DROPS {}			
+		]	
+	}
+
 	${		
 		_faction: monsters
 		_creature_type: elemental
@@ -1601,8 +1643,21 @@ map_entity_spawn thalvaron_infected_wildlife:
 	}
 
 	entity thalvaron_grim_ooze: !NPC { _level: 19 _string: "Grim Ooze" _sprite: ooze_2 _sprite_dead: ooze_2_dead _loot_table: .default_beast }
-	entity thalvaron_sneaking_ooze: !NPC { _level: 18 _string: "Sneaking Ooze" _sprite: ooze_1 _sprite_dead: ooze_1_dead _loot_table: .default_beast }
-	entity thalvaron_ooze_boss: !NPC { _level: 19 _string: "Gloamithrex" _sprite: ooze_4 _sprite_dead: ooze_4_dead _loot_table: .default_beast }
+	entity thalvaron_sneaking_ooze: !NPC { _level: 18 _string: "Sneaking Ooze" _sprite: ooze_1 _sprite_dead: ooze_1_dead _loot_table: .default_beast }	
+	entity thalvaron_ooze_boss: !NPC { _level: 19 _string: "Gloamithrex" _sprite: ooze_4 _sprite_dead: ooze_4_dead _loot_table: .ooze_boss }
+}
+
+# Ghouls
+{	
+	${
+		_level: 18
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .wandering_short						
+	}
+
+	entity thalvaron_faerandor_ghoul_a: !NPC { _string: "Ghoul Raider" _sprite: ghoul_1 _sprite_dead: ghoul_1_dead _loot_table: .default_humanoid }
+	entity thalvaron_faerandor_ghoul_b: !NPC { _string: "Ghoul Raider" _sprite: ghoul_2 _sprite_dead: ghoul_2_dead _loot_table: .default_humanoid }
 }
 
 ##########################################################################################
