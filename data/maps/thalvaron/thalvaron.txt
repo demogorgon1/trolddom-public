@@ -570,6 +570,10 @@ map_palette .stuff:
 	entity_spawn thalvaron_evil_orb: [ 149 99 112 ]
 	entity_spawn thalvaron_spirit_of_joonor: [ 24 200 140 ]
 	entity_spawn thalvaron_halfeye_lanior: [ 124 100 240 ]
+	entity_spawn thalvaron_hollows_skeleton: [ 140 40 203 ]
+	entity_spawn thalvaron_hollows_skeleton_boss_a: [ 240 40 203 ]	
+	entity_spawn thalvaron_hollows_skeleton_boss_b: [ 140 240 203 ]	
+	entity_spawn thalvaron_hollows_skeleton_boss_c: [ 141 20 103 ]	
 
 	# SW
 	entity_spawn thalvaron_brian_riddle: [ 66 88 99 ]

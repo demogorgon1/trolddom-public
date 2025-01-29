@@ -1711,3 +1711,80 @@ map_entity_spawn thalvaron_gorge_kobold:
 	entity thalvaron_gorge_kobold_c: !NPC { _string: "Gorge Soothsayer" _sprite: kobold_10 _sprite_dead: kobold_10_dead }
 }
 
+##########################################################################################
+# Undying hollows monsters
+
+map_entity_spawn thalvaron_hollows_skeleton: 
+{ 
+	entity thalvaron_hollows_skeleton_a: {} 
+	entity thalvaron_hollows_skeleton_b: {} 
+	entity thalvaron_hollows_skeleton_c: {} 
+	entity thalvaron_hollows_skeleton_d: {} 
+	entity thalvaron_hollows_skeleton_e: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_hollows_skeleton_boss_a: 
+{ 
+	entity thalvaron_hollows_skeleton_boss_a: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_hollows_skeleton_boss_b: 
+{ 
+	entity thalvaron_hollows_skeleton_boss_b: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_hollows_skeleton_boss_c: 
+{ 
+	entity thalvaron_hollows_skeleton_boss_c: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Melee skeleton
+{
+	${
+		_level: 19
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .wandering_short
+		_loot_table: .default_humanoid
+	}
+
+	entity thalvaron_hollows_skeleton_a: !NPC { _string: "Skeletal Warrior" _sprite: skeleton_warrior_1 _sprite_dead: skeleton_warrior_1_dead }
+	entity thalvaron_hollows_skeleton_b: !NPC { _string: "Skeletal Warrior" _sprite: skeleton_warrior_2 _sprite_dead: skeleton_warrior_2_dead }
+	entity thalvaron_hollows_skeleton_c: !NPC { _string: "Skeletal Warrior" _sprite: skeleton_3 _sprite_dead: skeleton_3_dead }
+	entity thalvaron_hollows_skeleton_d: !NPC { _string: "Skeletal Warrior" _sprite: skeleton_4 _sprite_dead: skeleton_4_dead }
+}
+
+# Caster skeleton
+{
+
+	${
+		_level: 19
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .wandering_short
+		_loot_table: .default_humanoid
+		_resource_mana: 1
+		_abilities: 
+		[ 
+			{ id: npc_firebolt }
+			{ id: npc_attack } 
+		]		
+	}
+
+	entity thalvaron_hollows_skeleton_e: !NPC { _string: "Skeletal Mage" _sprite: skeleton_caster_1 _sprite_dead: skeleton_caster_1_dead }
+}
+
+# Skeleton captains
+{
+	${
+		_level: 19
+		_faction: monsters
+		_creature_type: undead		
+		_loot_table: .default_humanoid
+	}
+
+	entity thalvaron_hollows_skeleton_boss_a: !NPC { _string: "Captain Grimgore" _sprite: skeleton_boss_1 _sprite_dead: skeleton_boss_1_dead _default_behavior_state: .passive }
+	entity thalvaron_hollows_skeleton_boss_b: !NPC { _string: "Captain Abrique" _sprite: skeleton_boss_1 _sprite_dead: skeleton_boss_1_dead _default_behavior_state: .wandering_short }
+	entity thalvaron_hollows_skeleton_boss_c: !NPC { _string: "Captain Ugulath" _sprite: skeleton_boss_1 _sprite_dead: skeleton_boss_1_dead _default_behavior_state: .wandering_short }
+}

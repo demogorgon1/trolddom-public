@@ -582,6 +582,7 @@ sprites:
 	sprite elf_10: { dead: elf_10_dead }
 	sprite elf_11: { dead: elf_11_dead }
 	sprite spirit_1: { dead: spirit_1_dead }
+	sprite skeleton_3: { dead: skeleton_3_dead }
 
 	cursor: { position: [ 0 496 ] }
 	sprite kobold_8_dead: { }
@@ -599,6 +600,15 @@ sprites:
 	sprite elf_10_dead: { }
 	sprite elf_11_dead: { }
 	sprite spirit_1_dead: { }
+	sprite skeleton_3_dead: { }
+
+	cursor: { position: [ 0 512 ] }
+	sprite skeleton_4: { dead: skeleton_4_dead }
+	sprite skeleton_boss_1: { dead: skeleton_boss_1_dead }
+
+	cursor: { position: [ 0 528 ] }
+	sprite skeleton_4_dead: { }
+	sprite skeleton_boss_1_dead: { }
 
 }
 

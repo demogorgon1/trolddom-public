@@ -8,6 +8,7 @@ dialogue_screen .warden_nekelian_dialogue:
 	options:
 	[
 		{ quest<completion_only>: .aelithra_2 }
+		{ quest: .warden_nekelian_1 }
 	]
 }
 
@@ -32,3 +33,58 @@ entity thalvaron_warden_nekelian: !NPC
 ############################################################
 # Quest 1
 
+objective .warden_nekelian_1_a:
+{
+	string: "Skeletal Warriors Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_hollows_skeleton_a thalvaron_hollows_skeleton_b thalvaron_hollows_skeleton_c thalvaron_hollows_skeleton_d ]
+		count: 10
+	}
+}
+
+objective .warden_nekelian_1_b:
+{
+	string: "Skeletal Mages Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_hollows_skeleton_e ]
+		count: 2
+	}
+}
+
+quest .warden_nekelian_1:
+{
+	string: "Hordes of Undead"
+
+	text:
+	[
+		"Hunt down the undead of the north."
+	]
+	
+	description: 
+	[
+		"Living skeletons are hiding behind every tree up here. Slay them all!"
+	]
+
+	progress:
+	[
+		"Back already?"
+	]
+	
+	completion:
+	[
+		"Good!"
+	]
+
+	objectives: [ .warden_nekelian_1_a .warden_nekelian_1_b ]
+	level: 19
+
+	# FIXME: rewards
+}
