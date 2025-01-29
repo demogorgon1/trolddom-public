@@ -35,11 +35,11 @@ entity thalvaron_spirit_of_joonor: !NPC
 
 quest .spirit_of_joonor_1:
 {
-	string: "The Undying Lands"
+	string: "The Hollows of the Undying"
 
 	text:
 	[
-		"Travel to the undying lands in the north and find the ally that the Spirit of Joonor was refering to."
+		"Travel to the Hollows of the Undying in the north and find the ally that the Spirit of Joonor was refering to."
 	]
 	
 	description: 
@@ -47,7 +47,7 @@ quest .spirit_of_joonor_1:
 		"Two ancient towers were long ago constructed in these lands and were imbued with powerful magic from the crossing of the ley lines. In this age they have been occupied by various wizards and sorcerers who have"
 		"drawn energies out of them for their own purposes. The first tower, the Tower of Xalizant is home of an excentric human wizard who is of harm to no one but himself. The second tower, the Tower of Indulath is home"
 		"to a dark elf going by the name of Morlithar. Dark magic is flowing out of Indulath, destroying life and animating death. This orb you have brought to me is a product of Indulath.\n\n"
-		"If you want to end the chaos, you will need to go the undying lands to the north. Travel there and an ally will be waiting for you."
+		"If you want to end the chaos, you will need to go the Hollows of the Undying in the north. Travel there and an ally will be waiting for you."
 	]
 	
 	completion:
