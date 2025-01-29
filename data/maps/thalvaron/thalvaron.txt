@@ -49,7 +49,8 @@ zone .faerandor_gorge: { string: "Faerandor Gorge" }
 zone .dark_strand: { string: "Dark Strand" }
 zone .lake_ylynor: { string: "Lake Ylynor" }
 zone .lake_joonor: { string: "Lake Joonor" }
-zone .highborne_tower: { string: "Highborne Tower" }
+zone .highborne_tower: { string: "Tower of Xalizant" }
+zone .lich_tower: { string: "Tower of Indulath" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -280,6 +281,7 @@ map_entity_spawn thalvaron_blimcraft_highborne: { entity thalvaron_blimcraft_hig
 map_entity_spawn thalvaron_blimcraft_highborne_1_quest_item: { entity thalvaron_blimcraft_highborne_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_evil_orb: { entity thalvaron_evil_orb: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_spirit_of_joonor: { entity thalvaron_spirit_of_joonor: { init_state: default } }
+map_entity_spawn thalvaron_halfeye_lanior: { entity thalvaron_halfeye_lanior: { init_state: default } }
 
 # SW
 map_entity_spawn thalvaron_brian_riddle: { entity thalvaron_brian_riddle: { init_state: default } }
@@ -567,6 +569,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_blimcraft_highborne: [ 39 149 111 ]
 	entity_spawn thalvaron_evil_orb: [ 149 99 112 ]
 	entity_spawn thalvaron_spirit_of_joonor: [ 24 200 140 ]
+	entity_spawn thalvaron_halfeye_lanior: [ 124 100 240 ]
 
 	# SW
 	entity_spawn thalvaron_brian_riddle: [ 66 88 99 ]
@@ -714,6 +717,7 @@ map_palette .sub_zones:
 	sub_zone .lake_ylynor: [ 101 180 255 ]
 	sub_zone .lake_joonor: [ 225 101 255 ]
 	sub_zone .highborne_tower: [ 101 136 255 ]
+	sub_zone .lich_tower: [ 159 5 119 ]
 	
 	sub_zone thalvaron_crab_giant: [ 39 192 83 ]
 	sub_zone thalvaron_vampire_boss: [ 139 93 48 ]

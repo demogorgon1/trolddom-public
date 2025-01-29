@@ -1,0 +1,34 @@
+dialogue_screen .halfeye_lanior_dialogue:
+{
+	text: 
+	[	
+		"Be careful."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .spirit_of_joonor_1 }
+	]
+}
+
+dialogue_root .halfeye_lanior_dialogue:
+{
+	.halfeye_lanior_dialogue: { }
+}
+
+entity thalvaron_halfeye_lanior: !NPC
+{
+	_string: "Half-Eye Lanior"
+	_dialogue_root: .halfeye_lanior_dialogue	
+	_sprite: elf_2
+	_sprite_dead: elf_2_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
