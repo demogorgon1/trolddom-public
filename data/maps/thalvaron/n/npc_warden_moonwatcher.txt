@@ -10,6 +10,7 @@ dialogue_screen .warden_moonwatcher_dialogue:
 		{ quest: .warden_moonwatcher_1 }
 		{ quest<completion_only>: .evil_orb }
 		{ quest<offer_only>: .warden_moonwatcher_2 }
+		{ quest<completion_only>: .warden_ghourian_2 }
 	]
 }
 

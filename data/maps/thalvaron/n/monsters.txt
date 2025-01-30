@@ -1484,6 +1484,41 @@ map_entity_spawn thalvaron_faerandor_ghoul:
 	entity thalvaron_faerandor_ghoul_b: {} 
 }
 
+map_entity_spawn thalvaron_poison_lizard:
+{
+	entity thalvaron_poison_lizard: {} spawn_timer: !NPC_RESPAWN_NORMAL{}	
+
+}
+
+# Gorge lizards (poison variety)
+{
+	loot_table .poison_lizard: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { }
+				possibility: { loot_group: .brimiar_3_quest_item requirement self<must_have_active_quest>: { id: .brimiar_3 } } 
+			}
+			
+			!WORLD_DROPS {}
+		]	
+	}
+	
+	${
+		_level: 18
+		_faction: wildlife
+		_creature_type: beast
+		_default_behavior_state: .wandering_short				
+		_loot_table: .poison_lizard 
+		_weapon_damage: 1.1
+		_resource_health: 1.0
+		_abilities: [ { id: npc_poison_bite } { id: npc_attack } ]
+	}
+
+	entity thalvaron_poison_lizard: !NPC { _string: "Venommaw Lizard" _sprite: lizard_2 _sprite_dead: lizard_2_dead  }
+}
+
 # Gorge lizards
 {
 	${
@@ -1883,3 +1918,34 @@ map_entity_spawn thalvaron_dark_strand_crab:
 
 	entity thalvaron_dark_strand_crab: !NPC { _string: "Sand Snapper" _sprite: crab_2 _sprite_dead: crab_2_dead  }
 }
+
+##########################################################################################
+# Gorge orcs
+
+map_entity_spawn thalvaron_gorge_orc: 
+{ 
+	entity thalvaron_gorge_orc_a: {} 
+	entity thalvaron_gorge_orc_b: {} 
+	entity thalvaron_gorge_orc_c: {} 
+	entity thalvaron_gorge_orc_d: {} 
+	entity thalvaron_gorge_orc_e: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Orcs
+{
+	${
+		_level: 18
+		_faction: monsters
+		_creature_type: humanoid
+		_loot_table: .default_humanoid
+		_default_behavior_state: .wandering_short
+	}
+
+	entity thalvaron_gorge_orc_a: !NPC { _string: "Skullforge Brute" _sprite: orc_1 _sprite_dead: orc_1_dead }
+	entity thalvaron_gorge_orc_b: !NPC { _string: "Skullforge Brute" _sprite: orc_2 _sprite_dead: orc_2_dead }
+	entity thalvaron_gorge_orc_c: !NPC { _string: "Skullforge Hunter" _sprite: orc_5 _sprite_dead: orc_5_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
+	entity thalvaron_gorge_orc_d: !NPC { _string: "Skullforge Enforcer" _sprite: orc_3 _sprite_dead: orc_3_dead }
+	entity thalvaron_gorge_orc_e: !NPC { _string: "Skullforge Enforcer" _sprite: orc_4 _sprite_dead: orc_4_dead }	
+}	
+
