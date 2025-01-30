@@ -1,0 +1,35 @@
+dialogue_screen .spirit_of_joonor_b_dialogue:
+{
+	text: 
+	[	
+		"I am the spirit of Joonor."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .pearly_c_1 }
+	]
+}
+
+dialogue_root .spirit_of_joonor_b_dialogue:
+{
+	.spirit_of_joonor_b_dialogue: { }
+}
+
+entity thalvaron_spirit_of_joonor_b: !NPC
+{
+	_string: "Spirit of Joonor"
+	_dialogue_root: .spirit_of_joonor_b_dialogue	
+	_sprite: spirit_1
+	_sprite_dead: spirit_1_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: elemental
+	_loot_table: .npc
+	_not_pushable: true	
+	_blocking: false	
+	_visibility_requirements:
+	{
+		requirement self<must_have_item>: .pearly_c_1_quest_item_2
+	}	
+}

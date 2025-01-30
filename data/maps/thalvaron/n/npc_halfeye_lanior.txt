@@ -8,6 +8,7 @@ dialogue_screen .halfeye_lanior_dialogue:
 	options:
 	[
 		{ quest<completion_only>: .spirit_of_joonor_1 }
+		{ quest: .halfeye_lanior_1 }
 	]
 }
 
@@ -32,3 +33,46 @@ entity thalvaron_halfeye_lanior: !NPC
 ############################################################
 # Quest 1
 
+objective .halfeye_lanior_1:
+{
+	string: "Droogor Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_hollows_dark_elf_a ]
+		count: 1
+	}
+}
+
+quest .halfeye_lanior_1:
+{
+	string: "Rare Warmblooded Enemy"
+
+	text:
+	[
+		"Enter the woods in the north, find Droogor, and kill him."
+	]
+	
+	description: 
+	[
+		"The tower is full of the dark elf henchmen of the wizard. Eventually I want you to enter that place and get rid of them once and for all, but for now we have to start with something easier. I know that the wizard has"
+		"sent out a small detachment into the woods north of us. Why I don't know. It is led by a dark elf named Droogor. I need you to kill him."
+	]
+
+	progress:
+	[
+		"Back already?"
+	]
+	
+	completion:
+	[
+		"Good."
+	]
+
+	objectives: [ .halfeye_lanior_1 ]
+	level: 19
+
+	# FIXME: rewards
+}

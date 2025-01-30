@@ -8,6 +8,8 @@ dialogue_screen .trouli_copperquill_dialogue:
 	options:
 	[	
 		{ quest<completion_only>: .urgon_starleaf_2 }
+		{ quest: .trouli_copperquill_1 }
+		{ quest: .trouli_copperquill_2 }
 	]
 }
 
@@ -27,5 +29,131 @@ entity thalvaron_trouli_copperquill: !NPC
 	_creature_type: humanoid
 	_loot_table: .npc
 	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .trouli_copperquill_1_quest_item_1: {}
+
+item .trouli_copperquill_1_quest_item_1:
+{
+	icon: icon_severed_hoof
+	item_level: 19
+	loot_groups: [ .trouli_copperquill_1_quest_item_1 ]
+	flags: [ not_sellable ]
+	string: "Infected Hoof"
+	stack: 3
+}
+
+objective .trouli_copperquill_1_a:
+{
+	string: "Infected Hooves"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .trouli_copperquill_1_quest_item_1 count: 3 }
+}
+
+loot_group .trouli_copperquill_1_quest_item_2: {}
+
+item .trouli_copperquill_1_quest_item_2:
+{
+	icon: icon_teeth
+	item_level: 19
+	loot_groups: [ .trouli_copperquill_1_quest_item_2 ]
+	flags: [ not_sellable ]
+	string: "Infected Tusks"
+	stack: 3
+}
+
+objective .trouli_copperquill_1_b:
+{
+	string: "Infected Tusks"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .trouli_copperquill_1_quest_item_2 count: 3 }
+}
+
+quest .trouli_copperquill_1:
+{
+	string: "Gathering Results"
+
+	text:
+	[
+		"Collect samples from infected animals in the area around Trouli Copperquill and return them to him."
+	]
+	
+	description: 
+	[
+		"Thank you for bringing those plagued bear butts to me, they will be helpful in my research.\n\n"
+		"I have studied the effects that the corruption has on the wildlife and it's all quite concerning. I've noticed that even some of the herbivores have started to crave the flesh of other creatures,"
+		"after they've been infected. Around the nearby woods I have placed some meaty snacks laced with a special potion of mine. It should have had an effect on these animals, but I haven't been able to"
+		"study it yet. Can you help? Gather samples from infected herbivorous animals in the area and return them to me."
+	]
+	
+	completion:
+	[
+		"Great!"
+	]
+
+	level: 19
+	prerequisites: [ .urgon_starleaf_2 ]
+	objectives: [ .trouli_copperquill_1_a .trouli_copperquill_1_b ]
+	next_quest: .trouli_copperquill_2
+	
+	# FIXME: rewards
+}
+
+############################################################
+# Quest 2
+
+loot_group .trouli_copperquill_2_quest_item: {}
+
+item .trouli_copperquill_2_quest_item:
+{
+	icon: icon_claw
+	item_level: 20
+	loot_groups: [ .trouli_copperquill_2_quest_item ]
+	flags: [ not_sellable unique ]
+	string: "Enormous Infected Claws"
+}
+
+objective .trouli_copperquill_2:
+{
+	string: "Enormous Infected Claws"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .trouli_copperquill_2_quest_item count: 1 }
+}
+
+quest .trouli_copperquill_2:
+{
+	string: "Something Larger"
+
+	text:
+	[
+		"Venture into the Tower of Indulath, find a large infected creature, slay it, and return a sample to Trouli Copperquill."
+	]
+	
+	description: 
+	[
+		"That's great, but... Maybe you can find some really large infected creature? I'm not sure. Would love a sample from a creature like that.\n\n"
+		"I've heard that the evil wizard in the tower up north might keep some really large critters as pets. Might be infected as well?"
+	]
+	
+	completion:
+	[
+		"Great! That sounds like quite an adventure."
+	]
+
+	level: 20
+	prerequisites: [ .trouli_copperquill_1 ]
+	objectives: [ .trouli_copperquill_2 ]
+	type: dungeon
+	
+	# FIXME: rewards
 }
 

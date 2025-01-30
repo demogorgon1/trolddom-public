@@ -727,6 +727,9 @@ sprites:
 	sprite bell_1: { }
 	sprite flower_3: { }
 	sprite flower_4: { }
+
+	cursor: { position: [ 0 80 ] }
+	sprite flower_5: { }
 		
 }
 

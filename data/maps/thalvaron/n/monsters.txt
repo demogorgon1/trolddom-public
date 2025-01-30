@@ -1594,18 +1594,34 @@ map_entity_spawn thalvaron_faerandor_ghoul:
 
 # Infected wildlife
 {
-	loot_table .infected_wildlife: 
+	loot_table .infected_wildlife_1: 
 	{
 		slots:
 		[	
-#			{
-#				possibility: { weight: 1 }
-#			}
-#		
-#			{ 
-#				possibility: { weight: 1 loot_group: .urgon_starleaf_1_quest_item requirement self<must_have_active_quest>: { id: .urgon_starleaf_1 } } 
-#			}
-#			
+			{
+				possibility: { weight: 1 }
+			}
+		
+			{ 
+				possibility: { weight: 1 loot_group: .trouli_copperquill_1_quest_item_1 requirement self<must_have_active_quest>: { id: .trouli_copperquill_1 } } 
+			}
+			
+			!WORLD_DROPS {}			
+		]	
+	}
+
+	loot_table .infected_wildlife_2: 
+	{
+		slots:
+		[	
+			{
+				possibility: { weight: 1 }
+			}
+		
+			{ 
+				possibility: { weight: 1 loot_group: .trouli_copperquill_1_quest_item_2 requirement self<must_have_active_quest>: { id: .trouli_copperquill_1 } } 
+			}
+			
 			!WORLD_DROPS {}			
 		]	
 	}
@@ -1617,8 +1633,8 @@ map_entity_spawn thalvaron_faerandor_ghoul:
 		_level: 19
 	}
 
-	entity thalvaron_infected_deer: !NPC { _string: "Infected Deer" _sprite: infected_deer_1 _sprite_dead: infected_deer_1_dead _loot_table: .infected_wildlife }
-	entity thalvaron_infected_boar: !NPC { _string: "Infected Boar" _sprite: infected_boar_1 _sprite_dead: infected_boar_1_dead _loot_table: .infected_wildlife }
+	entity thalvaron_infected_deer: !NPC { _string: "Infected Deer" _sprite: infected_deer_1 _sprite_dead: infected_deer_1_dead _loot_table: .infected_wildlife_1 }
+	entity thalvaron_infected_boar: !NPC { _string: "Infected Boar" _sprite: infected_boar_1 _sprite_dead: infected_boar_1_dead _loot_table: .infected_wildlife_2 }
 }
 
 # Oozes
@@ -1739,6 +1755,21 @@ map_entity_spawn thalvaron_hollows_skeleton_boss_c:
 	entity thalvaron_hollows_skeleton_boss_c: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
+map_entity_spawn thalvaron_hollows_dark_elf_a: 
+{ 
+	entity thalvaron_hollows_dark_elf_a: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_hollows_dark_elf_b: 
+{ 
+	entity thalvaron_hollows_dark_elf_b: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_hollows_dark_elf_c: 
+{ 
+	entity thalvaron_hollows_dark_elf_c: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
 # Melee skeleton
 {
 	${
@@ -1787,4 +1818,68 @@ map_entity_spawn thalvaron_hollows_skeleton_boss_c:
 	entity thalvaron_hollows_skeleton_boss_a: !NPC { _string: "Captain Grimgore" _sprite: skeleton_boss_1 _sprite_dead: skeleton_boss_1_dead _default_behavior_state: .passive }
 	entity thalvaron_hollows_skeleton_boss_b: !NPC { _string: "Captain Abrique" _sprite: skeleton_boss_1 _sprite_dead: skeleton_boss_1_dead _default_behavior_state: .wandering_short }
 	entity thalvaron_hollows_skeleton_boss_c: !NPC { _string: "Captain Ugulath" _sprite: skeleton_boss_1 _sprite_dead: skeleton_boss_1_dead _default_behavior_state: .wandering_short }
+}
+
+# Demons spawned for pearly quest
+{
+	loot_table .demon_boss: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { loot_group: .pearly_c_1_quest_item_2 requirement self<must_have_active_quest>: { id: .pearly_c_1 } } 
+			}
+			
+			!WORLD_DROPS {}			
+		]	
+	}
+
+	${
+		_level: 19
+		_faction: monsters
+		_creature_type: demon		
+		_default_behavior_state: .passive
+	}
+
+	entity thalvaron_pearly_demon: !NPC { _string: "Demonic Entity" _sprite: demon_2 _sprite_dead: demon_2_dead _loot_table: .default_beast }
+	entity thalvaron_pearly_demon_boss: !NPC { _string: "Shrakolyx" _sprite: demon_1 _sprite_dead: demon_1_dead _loot_table: .demon_boss }
+}
+
+# Dark elf camp
+{	
+	${
+		_level: 19
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .passive
+		_loot_table: .default_humanoid
+	}
+
+	entity thalvaron_hollows_dark_elf_a: !NPC { _string: "Droogor" _sprite: dark_elf_4 _sprite_dead: dark_elf_4_dead }
+	entity thalvaron_hollows_dark_elf_b: !NPC { _string: "Dark Elf Warrior" _sprite: dark_elf_5 _sprite_dead: dark_elf_5_dead }
+	entity thalvaron_hollows_dark_elf_c: !NPC { _string: "Dark Elf Ranger" _sprite: dark_elf_3 _sprite_dead: dark_elf_3_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
+}
+
+##########################################################################################
+# Dark strand
+
+map_entity_spawn thalvaron_dark_strand_crab: 
+{ 
+	entity thalvaron_dark_strand_crab: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Crabs
+{
+	${
+		_level: 20
+		_faction: wildlife
+		_creature_type: beast
+		_default_behavior_state: .wandering_short				
+		_loot_table: .beach_crab 
+		_weapon_damage: 1.1
+		_resource_health: 1.3
+		_abilities: [ { id: npc_rend } { id: npc_attack } ]
+	}
+
+	entity thalvaron_dark_strand_crab: !NPC { _string: "Sand Snapper" _sprite: crab_2 _sprite_dead: crab_2_dead  }
 }
