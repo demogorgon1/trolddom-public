@@ -1,0 +1,81 @@
+############################################################
+# Loot
+
+loot_group .houndmaster_crane: {}
+
+loot_table .houndmaster_crane:
+{
+	slots:
+	[
+		{ possibility: { loot_group: .houndmaster_crane  } }			
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+############################################################
+# Boss
+
+zone .houndmaster_crane:
+{
+}
+
+encounter .houndmaster_crane:
+{
+	main_entities: [ valoris_insurgency_houndmaster_crane ]	
+}
+
+entity valoris_insurgency_houndmaster_crane: !NPC 
+{ 
+	_string: "Houndmaster Crane" 
+	_level: 19
+	_elite: true
+	_faction: monsters 
+	_sprite: rebel_7
+	_sprite_dead: rebel_7_dead 
+	_weapon_damage: 1
+	_resource_health: 1
+	_loot_table: .houndmaster_crane
+	_creature_type: humanoid
+	_encounter: .houndmaster_crane
+	_zone: .houndmaster_crane
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+
+	_abilities: 
+	[
+		{
+			id: npc_attack
+		}
+	]	
+	
+	_in_combat_barks:
+	[
+		{ type: say text: "Dogs! Kill!" flags: [ no_chat_bubble ] }
+	]			
+	
+	#_dead_barks:
+	#[
+	#	{ type: say text: "" flags: [ no_chat_bubble ] }
+	#]	
+}
+
+map_trigger .houndmaster_crane_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .houndmaster_crane:
+{
+	entity valoris_insurgency_houndmaster_crane: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .houndmaster_crane_killed
+		}
+	}
+}
+

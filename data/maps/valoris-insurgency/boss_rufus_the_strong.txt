@@ -1,0 +1,81 @@
+############################################################
+# Loot
+
+loot_group .rufus_the_strong: {}
+
+loot_table .rufus_the_strong:
+{
+	slots:
+	[
+		{ possibility: { loot_group: .rufus_the_strong  } }			
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+############################################################
+# Boss
+
+zone .rufus_the_strong:
+{
+}
+
+encounter .rufus_the_strong:
+{
+	main_entities: [ valoris_insurgency_rufus_the_strong ]	
+}
+
+entity valoris_insurgency_rufus_the_strong: !NPC 
+{ 
+	_string: "Rufus the Strong" 
+	_level: 19
+	_elite: true
+	_faction: monsters 
+	_sprite: rebel_9
+	_sprite_dead: rebel_9_dead 
+	_weapon_damage: 1
+	_resource_health: 1
+	_loot_table: .rufus_the_strong
+	_creature_type: humanoid
+	_encounter: .rufus_the_strong
+	_zone: .rufus_the_strong
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+
+	_abilities: 
+	[
+		{
+			id: npc_attack
+		}
+	]	
+	
+	_in_combat_barks:
+	[
+		{ type: say text: "Haha! I'll crush your little skulls!" flags: [ no_chat_bubble ] }
+	]			
+	
+	#_dead_barks:
+	#[
+	#	{ type: say text: "" flags: [ no_chat_bubble ] }
+	#]	
+}
+
+map_trigger .rufus_the_strong_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .rufus_the_strong:
+{
+	entity valoris_insurgency_rufus_the_strong: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .rufus_the_strong_killed
+		}
+	}
+}
+

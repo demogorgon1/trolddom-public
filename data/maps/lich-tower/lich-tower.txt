@@ -1,0 +1,96 @@
+map_player_spawn .player_spawn:
+{
+}
+
+map_portal .exit:
+{
+	animation: !DEFAULT_PORTAL_ANIMATION{}
+	map: thalvaron
+	spawn: thalvaron_lich_tower_exit
+}
+
+map_palette .tiles: !DEFAULT_TILE_PALETTE{}
+
+map_palette .stuff:
+{
+	player_spawn .player_spawn: [ 0 0 255 ]
+	
+	portal .exit: [ 0 253 0 ]	
+}
+
+map_palette .levels:
+{
+	level<18>: [ 255 255 0 ]
+	level<19>: [ 0 255 255 ]
+	level<20>: [ 255 0 255 ]
+}
+
+map_palette .routes:
+{
+}
+
+map_palette .doodads:
+{
+}
+
+map_palette .subzones:
+{
+}
+
+map lich_tower:
+{
+	string: "Tower of Indulath"
+	type: private
+	reset: manual
+	default_tile: dungeon_wall
+	default_player_spawn: .player_spawn
+	default_exit_portal: .exit
+	default_fishing_loot_table: fish
+	view_attenuation: 0
+	view_attenuation_bias: 0
+	view_hidden_visibility: 35	
+	auto_doodads: true
+	level: 18
+	max_players: 5
+	max_minions: 1
+	
+	layers:
+	[
+		{
+			palettes:	[ .tiles ]
+			source:		"lich-tower-tiles.png"
+		}
+
+		{
+			palettes:	[ .stuff ]
+			source:		"lich-tower-stuff.png"
+		}
+		
+		{
+			palettes:	[ .levels ]
+			source:		"lich-tower-levels.png"
+		}
+
+		{ 
+			palettes: 	[ .tiles ]
+			source:		"lich-tower-cover.png"
+			cover: 		true
+		}		
+		
+		{ 
+			palettes: 	[ .routes ]
+			source:		"lich-tower-routes.png"
+		}				
+
+		{ 
+			palettes: 	[ .doodads ]
+			source:		"lich-tower-doodads.png"
+		}								
+		
+		{ 
+			palettes: 	[ .subzones ]
+			source:		"lich-tower-subzones.png"
+		}										
+	]
+}
+ 

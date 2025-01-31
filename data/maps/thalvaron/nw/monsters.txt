@@ -257,13 +257,13 @@ map_entity_spawn thalvaron_rebel_dead:
 {
 
 	${
-		_level: 20
+		_level: 18
 		_faction: monsters
 		_creature_type: humanoid
 		_loot_table: .default_humanoid
 		_elite: true		
-		_weapon_damage: 1.7
-		_resource_health: 2
+		_weapon_damage: 1.2
+		_resource_health: 1.7
 	}
 
 	entity thalvaron_rebel_elite_guard_a: !NPC { _string: "Rebel Guard" _sprite: rebel_1 _sprite_dead: rebel_1_dead }

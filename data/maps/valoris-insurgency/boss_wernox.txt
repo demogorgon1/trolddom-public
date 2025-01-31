@@ -1,0 +1,81 @@
+############################################################
+# Loot
+
+loot_group .wernox: {}
+
+loot_table .wernox:
+{
+	slots:
+	[
+		{ possibility: { loot_group: .wernox  } }			
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+############################################################
+# Boss
+
+zone .wernox:
+{
+}
+
+encounter .wernox:
+{
+	main_entities: [ valoris_insurgency_wernox ]	
+}
+
+entity valoris_insurgency_wernox: !NPC 
+{ 
+	_string: "Wernox" 
+	_level: 19
+	_elite: true
+	_faction: monsters 
+	_sprite: rebel_8
+	_sprite_dead: rebel_8_dead 
+	_weapon_damage: 1
+	_resource_health: 1
+	_loot_table: .wernox
+	_creature_type: humanoid
+	_encounter: .wernox
+	_zone: .wernox
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+
+	_abilities: 
+	[
+		{
+			id: npc_attack
+		}
+	]	
+	
+	_in_combat_barks:
+	[
+		{ type: say text: "You really think you can challenge me? Wernox the Great?!" flags: [ no_chat_bubble ] }
+	]			
+	
+	#_dead_barks:
+	#[
+	#	{ type: say text: "" flags: [ no_chat_bubble ] }
+	#]	
+}
+
+map_trigger .wernox_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .wernox:
+{
+	entity valoris_insurgency_wernox: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .wernox_killed
+		}
+	}
+}
+

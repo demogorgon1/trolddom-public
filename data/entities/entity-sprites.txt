@@ -605,10 +605,20 @@ sprites:
 	cursor: { position: [ 0 512 ] }
 	sprite skeleton_4: { dead: skeleton_4_dead }
 	sprite skeleton_boss_1: { dead: skeleton_boss_1_dead }
+	sprite rebel_6: { dead: rebel_6_dead }
+	sprite rebel_7: { dead: rebel_7_dead }
+	sprite rebel_8: { dead: rebel_8_dead }
+	sprite rebel_9: { dead: rebel_9_dead }
+	sprite dark_elf_6: { dead: dark_elf_6_dead }
 
 	cursor: { position: [ 0 528 ] }
 	sprite skeleton_4_dead: { }
 	sprite skeleton_boss_1_dead: { }
+	sprite rebel_6_dead: { }
+	sprite rebel_7_dead: { }
+	sprite rebel_8_dead: { }
+	sprite rebel_9_dead: { }
+	sprite dark_elf_6_dead: { }
 
 }
 
