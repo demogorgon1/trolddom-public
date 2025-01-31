@@ -9,6 +9,23 @@ map_portal .exit:
 	spawn: thalvaron_lich_tower_exit
 }
 
+map_cliff .dummy_cliff_0: { cliff_style: dummy elevation: 0 }
+map_cliff .dummy_cliff_0_ramp: { cliff_style: dummy elevation: 0 ramp: true }
+map_cliff .dummy_cliff_1: { cliff_style: dummy elevation: 1 } 
+map_cliff .dummy_cliff_1_ramp: { cliff_style: dummy elevation: 1 ramp: true }
+map_cliff .dummy_cliff_2: { cliff_style: dummy elevation: 2 }
+map_cliff .dummy_cliff_2_ramp: { cliff_style: dummy elevation: 2 ramp: true }
+map_cliff .dummy_cliff_3: { cliff_style: dummy elevation: 3 }
+map_cliff .dummy_cliff_3_ramp: { cliff_style: dummy elevation: 3 ramp: true }
+map_cliff .dummy_cliff_4: { cliff_style: dummy elevation: 4 }
+map_cliff .dummy_cliff_4_ramp: { cliff_style: dummy elevation: 4 ramp: true }
+map_cliff .dummy_cliff_5: { cliff_style: dummy elevation: 5 }
+map_cliff .dummy_cliff_5_ramp: { cliff_style: dummy elevation: 5 ramp: true }
+map_cliff .dummy_cliff_6: { cliff_style: dummy elevation: 6 }
+map_cliff .dummy_cliff_6_ramp: { cliff_style: dummy elevation: 6 ramp: true }
+map_cliff .dummy_cliff_7: { cliff_style: dummy elevation: 7 }
+map_cliff .dummy_cliff_7_ramp: { cliff_style: dummy elevation: 7 ramp: true }
+
 map_palette .tiles: !DEFAULT_TILE_PALETTE{}
 
 map_palette .stuff:
@@ -16,6 +33,12 @@ map_palette .stuff:
 	player_spawn .player_spawn: [ 0 0 255 ]
 	
 	portal .exit: [ 0 253 0 ]	
+	
+	entity_spawn .anatar: [ 255 0 0 ]
+	entity_spawn .bone_tyrant: [ 255 43 0 ]
+	entity_spawn .library: [ 255 3 53 ]
+	entity_spawn .malrik_the_undying: [ 255 40 100 ]
+	entity_spawn .rotfang: [ 255 50 254 ]
 }
 
 map_palette .levels:
@@ -31,10 +54,73 @@ map_palette .routes:
 
 map_palette .doodads:
 {
+	doodad crates: [ 45 39 100 ]
+	doodad sack: [ 35 100 200 ]
+	doodad table: [ 35 130 200 ]
+	doodad chair_left: [ 45 100 200 ]
+	doodad bed: [ 35 130 240 ]
+	doodad bookshelf: [ 35 140 100 ]
+	doodad alchemy_bookshelf: [ 135 100 200 ]
+	doodad empty_bookshelf: [ 135 200 200 ]
+	doodad chair_right: [ 45 200 100 ]	
+	doodad chair_bottom: [ 56 201 195 ]
+	doodad bench: [ 58 221 113 ]
+	doodad altar: [ 54 29 64 ]
+	doodad wall_banner_red: [ 243 29 53 ]
+	doodad broken_pillar: [ 136 130 200 ]
+	doodad wall_banner_mining: [ 243 19 53 ]
+	doodad wall_banner_blacksmithing: [ 243 59 53 ]
+	doodad tent: [ 249 51 53 ]	
+	doodad wall_banner_dark_green: [ 143 59 13 ]
+	doodad dungeon_open_door: [ 193 13 59 ]	
+	doodad statue_face_left: [ 193 63 59 ]	
+	doodad statue_face_right: [ 193 73 19 ]	
+	doodad ship: [ 193 173 119 ]	
+	doodad stone_stairs: [ 192 173 19 ]	
+	doodad wood_stairs: [ 192 19 173 ]	
+	doodad large_statue: [ 193 73 20 ]	
+	doodad counter: [ 197 73 20 ]	
+	doodad stone_stairs_reversed: [ 19 173 192 ]	
+	doodad wood_stairs_reversed: [ 173 19 192 ]	
+	doodad animal_skull: [ 197 173 210 ]	
+	doodad barrel: [ 111 38 84 ]
+	doodad cage: [ 45 41 145 ]
+	doodad rowboat: [ 145 46 145 ]
+	doodad cobweb: [ 84 111 83 ]
+	doodad dead_tree: [ 33 123 81 ]
+	doodad tombstone: [ 99 99 119 ]
+	doodad statue_angel: [ 199 199 119 ]
+	doodad skull_stick: [ 39 81 167 ]
 }
 
 map_palette .subzones:
 {
+	sub_zone .rotfang: [ 175 177 255 ]
+	sub_zone .malrik_the_undying: [ 255 206 175 ]
+	sub_zone .bone_tyrant: [ 251 64 94 ]
+	sub_zone .library: [ 255 175 250 ]
+	sub_zone .anatar: [ 175 255 219 ]
+}
+
+map_palette .cliffs:
+{
+	cliff .dummy_cliff_1: [ 197 169 134 ]
+	cliff .dummy_cliff_1_ramp: [ 197 142 8 ]	
+
+	cliff .dummy_cliff_2: [ 197 169 234 ]
+	cliff .dummy_cliff_2_ramp: [ 51 197 8 ]	
+
+	cliff .dummy_cliff_3: [ 184 234 169 ]
+	cliff .dummy_cliff_3_ramp: [ 8 197 142 ]	
+	
+	cliff .dummy_cliff_4: [ 169 192 234 ]
+	cliff .dummy_cliff_4_ramp: [ 8 51 197 ]	
+
+	cliff .dummy_cliff_5: [ 234 169 179 ]
+	cliff .dummy_cliff_5_ramp: [ 155 8 197 ]	
+
+	cliff .dummy_cliff_6: [ 255 62 93 ]
+	cliff .dummy_cliff_6_ramp: [ 197 8 39 ]		
 }
 
 map lich_tower:
@@ -91,6 +177,46 @@ map lich_tower:
 			palettes: 	[ .subzones ]
 			source:		"lich-tower-subzones.png"
 		}										
+		
+		{ 
+			palettes: 	[ .cliffs ]
+			source:		"lich-tower-cliffs.png"
+		}										
 	]
+	
+	script:
+	{
+		condition trigger_not_set: .anatar_killed
+		condition entity_state: { entity_spawn: .anatar state: dead }		
+		run: { set_trigger: .anatar_killed }
+	}	
+	
+	script:
+	{
+		condition trigger_not_set: .bone_tyrant_killed
+		condition entity_state: { entity_spawn: .bone_tyrant state: dead }		
+		run: { set_trigger: .bone_tyrant_killed }
+	}	
+
+	script:
+	{
+		condition trigger_not_set: .library_killed
+		condition entity_state: { entity_spawn: .library state: dead }		
+		run: { set_trigger: .library_killed }
+	}	
+
+	script:
+	{
+		condition trigger_not_set: .malrik_the_undying_killed
+		condition entity_state: { entity_spawn: .malrik_the_undying state: dead }		
+		run: { set_trigger: .malrik_the_undying_killed }
+	}	
+
+	script:
+	{
+		condition trigger_not_set: .rotfang_killed
+		condition entity_state: { entity_spawn: .rotfang state: dead }		
+		run: { set_trigger: .rotfang_killed }
+	}	
 }
  

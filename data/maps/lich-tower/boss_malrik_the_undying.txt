@@ -1,0 +1,81 @@
+############################################################
+# Loot
+
+loot_group .malrik_the_undying: {}
+
+loot_table .malrik_the_undying:
+{
+	slots:
+	[
+		{ possibility: { loot_group: .malrik_the_undying  } }			
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+############################################################
+# Boss
+
+zone .malrik_the_undying:
+{
+}
+
+encounter .malrik_the_undying:
+{
+	main_entities: [ lich_tower_malrik_the_undying ]	
+}
+
+entity lich_tower_malrik_the_undying: !NPC 
+{ 
+	_string: "Malrik the Undying" 
+	_level: 20
+	_elite: true
+	_faction: monsters 
+	_sprite: rebel_6 
+	_sprite_dead: rebel_6_dead 
+	_weapon_damage: 1
+	_resource_health: 1
+	_loot_table: .malrik_the_undying
+	_creature_type: humanoid
+	_encounter: .malrik_the_undying
+	_zone: .malrik_the_undying
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+
+	_abilities: 
+	[
+		{
+			id: npc_attack
+		}
+	]	
+	
+	_in_combat_barks:
+	[
+		{ type: say text: "Die to my sword!" flags: [ no_chat_bubble ] }
+	]			
+	
+	_dead_barks:
+	[
+		{ type: say text: "This... wasn't part of the plan..." flags: [ no_chat_bubble ] }
+	]	
+}
+
+map_trigger .malrik_the_undying_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .malrik_the_undying:
+{
+	entity lich_tower_malrik_the_undying: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .malrik_the_undying_killed
+		}
+	}
+}
+

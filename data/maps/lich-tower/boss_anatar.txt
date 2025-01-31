@@ -1,0 +1,81 @@
+############################################################
+# Loot
+
+loot_group .anatar: {}
+
+loot_table .anatar:
+{
+	slots:
+	[
+		{ possibility: { loot_group: .anatar  } }			
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+############################################################
+# Boss
+
+zone .anatar:
+{
+}
+
+encounter .anatar:
+{
+	main_entities: [ lich_tower_anatar ]	
+}
+
+entity lich_tower_anatar: !NPC 
+{ 
+	_string: "Anatar" 
+	_level: 19
+	_elite: true
+	_faction: monsters 
+	_sprite: rebel_6 
+	_sprite_dead: rebel_6_dead 
+	_weapon_damage: 1
+	_resource_health: 1
+	_loot_table: .anatar
+	_creature_type: humanoid
+	_encounter: .anatar
+	_zone: .anatar
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+
+	_abilities: 
+	[
+		{
+			id: npc_attack
+		}
+	]	
+	
+	_in_combat_barks:
+	[
+		{ type: say text: "Die to my sword!" flags: [ no_chat_bubble ] }
+	]			
+	
+	_dead_barks:
+	[
+		{ type: say text: "This... wasn't part of the plan..." flags: [ no_chat_bubble ] }
+	]	
+}
+
+map_trigger .anatar_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .anatar:
+{
+	entity lich_tower_anatar: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .anatar_killed
+		}
+	}
+}
+
