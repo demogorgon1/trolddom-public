@@ -610,6 +610,12 @@ sprites:
 	sprite rebel_8: { dead: rebel_8_dead }
 	sprite rebel_9: { dead: rebel_9_dead }
 	sprite dark_elf_6: { dead: dark_elf_6_dead }
+	sprite dark_elf_7: { dead: dark_elf_7_dead }
+	sprite lich_1: { dead: lich_1_dead }
+	sprite skeleton_caster_2: { dead: skeleton_caster_2_dead }
+	sprite skeleton_caster_3: { dead: skeleton_caster_3_dead }
+	sprite skeleton_5: { dead: skeleton_5_dead }
+	sprite skeleton_6: { dead: skeleton_6_dead }
 
 	cursor: { position: [ 0 528 ] }
 	sprite skeleton_4_dead: { }
@@ -619,6 +625,12 @@ sprites:
 	sprite rebel_8_dead: { }
 	sprite rebel_9_dead: { }
 	sprite dark_elf_6_dead: { }
+	sprite dark_elf_7_dead: { }
+	sprite lich_1_dead: { }
+	sprite skeleton_caster_2_dead: { }
+	sprite skeleton_caster_3_dead: { }
+	sprite skeleton_5_dead: { }
+	sprite skeleton_6_dead: { }
 
 }
 
@@ -633,11 +645,16 @@ sprites:
 	sprite dragon_1: { dead: dragon_1_dead tags: [ dragon ] }
 	sprite giga_grab_1: { dead: giga_grab_1_dead }
 	sprite giga_grab_1_submerged: { dead: giga_grab_1_dead }
+	sprite giant_skeleton_1: { dead: giant_skeleton_1_dead }
+	sprite giant_beast_1: { dead: giant_beast_1_dead }
 	
 	cursor: { position: [ 0 32 ] }
 	
 	sprite dragon_1_dead: { }	
 	sprite giga_grab_1_dead: { }
+	skip: {}
+	sprite giant_skeleton_1_dead: { }
+	sprite giant_beast_1_dead: { }
 }
 
 sprites:
