@@ -36,7 +36,7 @@ entity lich_tower_library: !NPC
 	_weapon_damage: 1
 	_resource_health: 1
 	_loot_table: .library
-	_creature_type: humanoid
+	_creature_type: undead
 	_encounter: .library
 	_zone: .library
 	_out_of_zone_action: { evade: true }

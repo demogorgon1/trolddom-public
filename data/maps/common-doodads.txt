@@ -76,6 +76,7 @@ sprites:
 	cursor: { position: [ 0 32 ] }
 	sprite doodad_tombstone_2: { flags: [ tile_walkable ] }
 	sprite doodad_skull_stick: { flags: [ tile_walkable ] }
+	sprite doodad_hole_1: { flags: [ tile_walkable ] }
 
 	cursor: { position: [ 0 48 ] }
 	size: { width: 80 height: 64 } sprite ship: { flags: [ tile_walkable ] }
@@ -232,5 +233,6 @@ doodad cobweb: { sprites: [ doodad_cobweb_1 ] map_palette<"x">: { occupy: true }
 doodad tombstone: { sprites: [ doodad_tombstone_1 doodad_tombstone_2 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad statue_angel: { sprites: [ doodad_angel_statue ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad skull_stick: { sprites: [ doodad_skull_stick ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad hole: { sprites: [ doodad_hole_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 
 

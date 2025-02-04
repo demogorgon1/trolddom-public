@@ -36,7 +36,7 @@ entity lich_tower_malrik_the_undying: !NPC
 	_weapon_damage: 1
 	_resource_health: 1
 	_loot_table: .malrik_the_undying
-	_creature_type: humanoid
+	_creature_type: undead
 	_encounter: .malrik_the_undying
 	_zone: .malrik_the_undying
 	_out_of_zone_action: { evade: true }

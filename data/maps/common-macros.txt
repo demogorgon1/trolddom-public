@@ -17,3 +17,10 @@
 	frame_interval: 200 
 	color: [ 200 0 100 200 ] 
 }
+
+!define HOLE_PORTAL_ANIMATION
+{
+	frames: [ effect_instance_portal_hole_0 effect_instance_portal_hole_1 effect_instance_portal_hole_2 ] 
+	frame_interval: 200 
+	color: [ 200 0 100 200 ] 
+}

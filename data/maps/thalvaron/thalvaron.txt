@@ -2,6 +2,7 @@ map_player_spawn .player_spawn: { }
 
 map_player_spawn thalvaron_lich_tower_exit: { }
 map_player_spawn thalvaron_valoris_insurgency_exit: { }
+map_player_spawn thalvaron_tirnwood_thicket_exit: { }
 
 map_player_spawn thalvaron_wizard_realm_spawn: { }
 map_player_spawn thalvaron_wizard_realm_return_spawn: { }
@@ -55,6 +56,7 @@ zone .lake_joonor: { string: "Lake Joonor" }
 zone .highborne_tower: { string: "Tower of Xalizant" }
 zone .lich_tower: { string: "Tower of Indulath" }
 zone .temple_of_the_undying: { string: "Temple of the Undying" }
+zone .tirnwood: { string: "Tirnwood Vale" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -74,6 +76,7 @@ npc_behavior_state thalvaron_default_patrol:
 
 map_portal thalvaron_lich_tower_entrance: {	animation: !DEFAULT_PORTAL_ANIMATION{} map: lich_tower }
 map_portal thalvaron_valoris_insurgency_entrance: { animation: !DEFAULT_PORTAL_ANIMATION{} map: valoris_insurgency }
+map_portal thalvaron_tirnwood_thicket_entrance: {	animation: !HOLE_PORTAL_ANIMATION{} map: tirnwood_thicket }
 
 map_cliff .rocky_cliff: { cliff_style: rocks elevation: 1 }
 map_cliff .rocky_cliff_ramp: { cliff_style: rocks elevation: 1 ramp: true }
@@ -281,9 +284,11 @@ map_palette .stuff:
 	player_spawn thalvaron_wizard_realm_return_spawn: [ 142 157 85 ]	
 	player_spawn thalvaron_lich_tower_exit: [ 44 88 194 ]
 	player_spawn thalvaron_valoris_insurgency_exit: [ 44 38 194 ]
+	player_spawn thalvaron_tirnwood_thicket_exit: [ 144 188 194 ]
 	
 	portal thalvaron_lich_tower_entrance: [ 144 188 94 ]
 	portal thalvaron_valoris_insurgency_entrance: [ 144 88 92 ]
+	portal thalvaron_tirnwood_thicket_entrance: [ 144 228 92 ]
 	
 	wall stone_wall: [ 128 128 128 ]
 	wall fence: [ 64 128 140 ]
@@ -654,6 +659,7 @@ map_palette .zones:
 	zone .lake_dourgol: [ 156 0 255 ]
 	zone .faerandor_gorge: [ 255 222 0 ]
 	zone .dark_strand: [ 0 255 33 ]
+	zone .tirnwood: [ 200 107 210 ]
 }
 
 map_palette .sub_zones:
@@ -728,6 +734,7 @@ map_palette .doodads:
 	doodad tombstone: [ 99 99 119 ]
 	doodad statue_angel: [ 199 199 119 ]
 	doodad skull_stick: [ 39 81 167 ]
+	doodad hole: [ 104 49 146 ]
 	
 	doodad wall_sign_generic<"Mathew's Emporium">: [ 197 173 111 ]	
 	doodad wall_sign_generic<"John & Mary's">: [ 97 173 111 ]	

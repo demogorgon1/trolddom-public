@@ -1,0 +1,77 @@
+############################################################
+# Loot
+
+loot_group .owlbear: {}
+
+loot_table .owlbear:
+{
+	slots:
+	[
+		{ possibility: { loot_group: .owlbear  } }			
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+############################################################
+# Boss
+
+zone .owlbear:
+{
+}
+
+encounter .owlbear:
+{
+	main_entities: [ tirnwood_thicket_owlbear ]	
+}
+
+entity tirnwood_thicket_owlbear: !NPC 
+{ 
+	_string: "Grimfeather" 
+	_level: 20
+	_elite: true
+	_faction: monsters 
+	_sprite: owlbear_4
+	_sprite_dead: owlbear_4_dead 
+	_weapon_damage: 1
+	_resource_health: 1
+	_loot_table: .owlbear
+	_creature_type: beast
+	_encounter: .owlbear
+	_zone: .owlbear
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+
+	_abilities: 
+	[
+		{
+			id: npc_attack
+		}
+	]	
+	
+	_in_combat_barks:
+	[
+		{ type: say text: "Oohhh-ohh! Grr! Ohhh! " flags: [ no_chat_bubble ] }
+	]			
+	
+}
+
+map_trigger .owlbear_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .owlbear:
+{
+	entity tirnwood_thicket_owlbear: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .owlbear_killed
+		}
+	}
+}
+

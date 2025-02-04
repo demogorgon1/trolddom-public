@@ -61,6 +61,9 @@ sprites:
 	sprite effect_divine_shield_1: { flags: [ centered ] }
 	sprite effect_divine_shield_2: { flags: [ centered ] }
 	sprite effect_net_trap: { flags: [ centered ] }	
+	sprite effect_instance_portal_hole_0: { flags: [ ] }
+	sprite effect_instance_portal_hole_1: { flags: [ ] }
+	sprite effect_instance_portal_hole_2: { flags: [ ] }	
 	
 	cursor: { position: [ 0 20 ] }	
 	size: { width: 24 height: 24 }

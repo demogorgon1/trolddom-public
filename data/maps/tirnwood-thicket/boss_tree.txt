@@ -1,0 +1,77 @@
+############################################################
+# Loot
+
+loot_group .tree: {}
+
+loot_table .tree:
+{
+	slots:
+	[
+		{ possibility: { loot_group: .tree  } }			
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+############################################################
+# Boss
+
+zone .tree:
+{
+}
+
+encounter .tree:
+{
+	main_entities: [ tirnwood_thicket_tree ]	
+}
+
+entity tirnwood_thicket_tree: !NPC 
+{ 
+	_string: "Eldros the Evergrowing" 
+	_level: 21
+	_elite: true
+	_faction: monsters 
+	_sprite: giant_wood_elemental_1 
+	_sprite_dead: giant_wood_elemental_1_dead 
+	_weapon_damage: 1
+	_resource_health: 1
+	_loot_table: .tree
+	_creature_type: elemental
+	_encounter: .tree
+	_zone: .tree
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+	_large: true
+
+	_abilities: 
+	[
+		{
+			id: npc_attack
+		}
+	]	
+	
+	_in_combat_barks:
+	[
+		{ type: yell text: "Leave these woods and never come back!" flags: [ no_chat_bubble ] }
+	]					
+}
+
+map_trigger .tree_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .tree:
+{
+	entity tirnwood_thicket_tree: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .tree_killed
+		}
+	}
+}
+
