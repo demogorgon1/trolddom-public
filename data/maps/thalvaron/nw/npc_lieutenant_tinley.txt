@@ -48,6 +48,13 @@ objective .lieutenant_tinley_1:
 	}
 }
 
+{
+	${ _level: 10 }
+	item .lieutenant_tinley_1_a: !QUEST_REWARD_NECK{ _string: "Mark of the Valoris" _icon: icon_necklace_1 _health_per_5: 1 }
+	item .lieutenant_tinley_1_b: !QUEST_REWARD_CHEST{ _string: "Redeemer's Chestguard" _icon: icon_chest_3 _constitution: 1 _strength: 1 type: armor_plate }
+	item .lieutenant_tinley_1_c: !QUEST_REWARD_FINGER{ _string: "Blessed Ring" _icon: icon_ring_6 _healing: 1 _wisdom: 1 }
+}
+
 quest .lieutenant_tinley_1:
 {
 	string: "Rebel Hunt"
@@ -59,7 +66,7 @@ quest .lieutenant_tinley_1:
 	
 	description: 
 	[
-		"FIXME"
+		"The woods around the city are crawling with insurgents! Would be very helpful if you can hunt some of them down. They're just too many!"
 	]
 
 	progress:
@@ -69,12 +76,12 @@ quest .lieutenant_tinley_1:
 	
 	completion:
 	[
-		"FIXME"
+		"Good job."
 	]
 
 	level: 10
 	objectives: [ .lieutenant_tinley_1 ]
-	# FIXME rewards
+	reward_one_item: [ .lieutenant_tinley_1_a .lieutenant_tinley_1_b .lieutenant_tinley_1_c ]
 }
 
 ############################################################
@@ -91,17 +98,13 @@ quest .lieutenant_tinley_2:
 	
 	description: 
 	[
-		"FIXME"
+		"With your help, the situation around here has calmed down a bit.\n\n"
+		"We have a detachment of the city guard stationed down by the crossroads. You know, by the old tower. Can you go down there and check up on them?"
 	]
 
-	progress:
-	[
-		"What are you still doing here?"
-	]
-	
 	completion:
 	[
-		"FIXME"
+		"Thank the gods you've arrived, it doesn't look good down here!"
 	]
 
 	prerequisites: [ .lieutenant_tinley_1 ]
@@ -124,6 +127,13 @@ objective .lieutenant_tinley_3:
 	}
 }
 
+{
+	${ _level: 12 }
+	item .lieutenant_tinley_3_a: !QUEST_REWARD_WAIST{ _string: "Rescuer's Belt" _icon: icon_cloth_belt_1 _dexterity: 2 _constitution: 1 item_type: armor_mail }
+	item .lieutenant_tinley_3_b: !QUEST_REWARD_CHEST{ _string: "Mountain Hotel Bathrobe" _icon: icon_cloth_shirt_4 _constitution: 1 _spell_damage: 1 item_type: armor_cloth }
+	item .lieutenant_tinley_3_c: !QUEST_REWARD_2H_AXE{ _string: "Wood Chopping Axe" _icon: icon_axe_2 _strength: 1 _dexterity: 2 }
+}
+
 quest .lieutenant_tinley_3:
 {
 	string: "Hostage Situation"
@@ -135,7 +145,8 @@ quest .lieutenant_tinley_3:
 	
 	description: 
 	[
-		"FIXME"
+		"There is a fancy hotel located up in the mountains to the north east. I was recently informed that rebels have occupied it and taken the manager of the hotel, Cubert Galston, hostage."
+		"We don't want to negotiate with these people, so can you go and bring him back? He's a true pillar of the local community and we owe him that much."
 	]
 
 	progress:
@@ -145,10 +156,11 @@ quest .lieutenant_tinley_3:
 	
 	completion:
 	[
-		"FIXME"
+		"Yes, he'll probably go get drunk now. That's his thing."
 	]
 
 	prerequisites: [ .lieutenant_tinley_1 ]
 	level: 12
 	objectives: [ .lieutenant_tinley_3 ]
+	reward_one_item: [ .lieutenant_tinley_3_a .lieutenant_tinley_3_b .lieutenant_tinley_3_c ]
 }

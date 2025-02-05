@@ -608,6 +608,7 @@ sprites:
 	sprite icon_boots_6 : { tags: [ icon armor_plate armor_mail armor_plate feet ] icon_meta_data: !ICON_UNCOMMON_11{} }
 
 	cursor: { position: [ 0 528 ] }		
+	sprite icon_mug_1 : { tags: [ icon ] }
 	
 }
 

@@ -56,6 +56,12 @@ item .captain_jerrington_1_quest_item:
 	flavor: "Seems to be encrypted."
 }
 
+{
+	${ _level: 10 }
+	item .captain_jerrington_1_a: !QUEST_REWARD_CHEST{ _string: "Guard's Chestplate" _icon: icon_plate_chest_1 _strength: 2 _constitution: 1 type: armor_plate }
+	item .captain_jerrington_1_b: !QUEST_REWARD_CHEST{ _string: "Enchanter's Robe" _icon: icon_robe_4 _wisdom: 2 _constitution: 1 type: armor_cloth }
+}
+
 quest .captain_jerrington_1:
 {
 	string: "What are they up to?"
@@ -85,11 +91,11 @@ quest .captain_jerrington_1:
 	level: 10
 	
 	prerequisites: [ .city_guard_special_1 ]
-	# FIXME: rewards
+	reward_one_item: [ .captain_jerrington_1_a .captain_jerrington_1_b ]
 }
 
 ############################################################
-# Quest 3
+# Quest 2
 
 quest .captain_jerrington_2:
 {

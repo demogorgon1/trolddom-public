@@ -68,8 +68,8 @@ objective .alchemy_trainer_1:
 
 {
 	${ _level: 12 _rarity: uncommon }
-	item .alchemy_trainer_1_a: !QUEST_REWARD_FEET{ _string: "Grimy Mudwalkers" item_type: armor_mail _icon: icon_boots_1 _spirit: 1 _constitution: 1 }
-	item .alchemy_trainer_1_b: !QUEST_REWARD_WAIST{ _string: "Stringy Cord" item_type: armor_cloth _icon: icon_belt_1 _wisdom: 1 _constitution: 1 }
+	item .alchemy_trainer_1_a: !QUEST_REWARD_FEET{ _string: "Grimy Mudwalkers" type: armor_mail _icon: icon_boots_1 _spirit: 1 _constitution: 1 }
+	item .alchemy_trainer_1_b: !QUEST_REWARD_WAIST{ _string: "Stringy Cord" type: armor_cloth _icon: icon_belt_1 _wisdom: 1 _constitution: 1 }
 }
 
 quest thalvaron_alchemy_trainer_1:

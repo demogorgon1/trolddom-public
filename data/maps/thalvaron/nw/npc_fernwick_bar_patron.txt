@@ -52,6 +52,12 @@ objective .fernwick_bar_patron_1:
 	collect_items: { item: .fernwick_bar_patron_quest_item count: 1 }
 }
 
+{
+	${ _level: 10 }
+	item .fernwick_bar_patron_1_a: !QUEST_REWARD_1H_SWORD{ _string: "Roger's Sticker" _icon: icon_sword_3 _dexterity: 2 _constitution: 1 }
+	item .fernwick_bar_patron_1_b: !QUEST_REWARD_WAIST{ _string: "Delicate Rope Sash" _icon: icon_antenna _wisdom: 2 _dexterity: 1 type: armor_cloth }
+}
+
 quest .fernwick_bar_patron_1:
 {
 	string: "Where is My Lunch?"
@@ -79,6 +85,6 @@ quest .fernwick_bar_patron_1:
 
 	objectives: [ .fernwick_bar_patron_1 ]
 	level: 10	
-	
-	# FIXME: rewards
+	reward_one_item: [ .fernwick_bar_patron_1_a .fernwick_bar_patron_1_b ]
+	reward_all_items: [ consumable_ironbrew_stout ]
 }

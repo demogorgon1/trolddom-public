@@ -62,6 +62,12 @@ objective .borg_robertson_1:
 	}
 }
 
+{
+	${ _level: 11 }
+	item .borg_robertson_1_a: !QUEST_REWARD_WRISTS{ _string: "Farmer's Bracers" type: armor_cloth _icon: icon_mail_bracers_2 _wisdom: 1 _constitution: 1 }
+	item .borg_robertson_1_b: !QUEST_REWARD_HANDS{ _string: "Wolf Handling Gloves" type: armor_plate _icon: icon_mail_hands_1 _strength: 1 _constitution: 1 }
+}
+
 quest .borg_robertson_1:
 {
 	string: "Hunting Wolves"
@@ -88,7 +94,7 @@ quest .borg_robertson_1:
 
 	level: 11
 	objectives: [ .borg_robertson_1 ]
-	# FIXME rewards
+	reward_one_item: [ .borg_robertson_1_a .borg_robertson_1_b ]
 }
 
 ############################################################
@@ -104,6 +110,11 @@ objective .borg_robertson_2:
 	{
 		entities: [ thalvaron_buttercup ]
 	}
+}
+
+{
+	${ _level: 11 }
+	item .borg_robertson_2: !QUEST_REWARD_NECK{ _string: "Buttercup's Medallion" flavor: "#1 Pig" _icon: icon_tag _spirit: 1 _constitution: 2 }
 }
 
 quest .borg_robertson_2:
@@ -132,4 +143,5 @@ quest .borg_robertson_2:
 
 	level: 11
 	objectives: [ .borg_robertson_2 ]
+	reward_all_items: [ .borg_robertson_2 ]
 }

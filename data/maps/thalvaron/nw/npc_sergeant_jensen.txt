@@ -128,5 +128,6 @@ quest .sergeant_jensen_2:
 
 	level: 11
 	prerequisites: [ .sergeant_jensen_1 ]
-	# FIXME rewards
+	reward_xp_multiplier: 0.3
+	reward_cash_multiplier: 0.3
 }

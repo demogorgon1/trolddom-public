@@ -356,3 +356,40 @@ item consumable_spirit_token:
 	use_ability: consumable_spirit_token
 	cost: 500
 }
+
+#####################################################
+# Ironbrew Stout
+
+aura consumable_ironbrew_stout:
+{
+	string: "Ironbrew Stout"
+	aura_group: elixir
+	type: buff
+	icon: icon_mug_1
+	duration: 12000
+	flags: [ unique ]
+	stat_modifiers: { constitution: { add: 4 } dexterity: { add: -4 } }
+}
+
+ability consumable_ironbrew_stout:	
+{
+	string: "Ironbrew Stout"
+	description: "Increases your Constitution by 4 and decreases your Dexterity by 4 for 20 minutes. You can only have the effect of one elixir at a time."
+	flags: [ target_self item ]
+	icon: icon_mug_1
+	direct_effect apply_aura: { aura: consumable_ironbrew_stout }
+	consume_items: { consumable_ironbrew_stout: 1 }
+	cooldowns: [ global ]
+	states: [ default in_combat ]
+	sound_effects: !SOUND_DRINK_POTION{}
+	required_level: 10
+}
+
+item consumable_ironbrew_stout:
+{
+	binds: when_picked_up
+	icon: icon_mug_1
+	string: "Ironbrew Stout"
+	stack: 10
+	use_ability: consumable_ironbrew_stout
+}

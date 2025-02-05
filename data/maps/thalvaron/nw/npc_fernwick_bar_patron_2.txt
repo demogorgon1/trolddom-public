@@ -83,6 +83,12 @@ objective .fernwick_bar_patron_2:
 	collect_items: { item: .fernwick_bar_patron_2_quest_item count: 1 }
 }
 
+{
+	${ _level: 11 }
+	item .fernwick_bar_patron_2_a: !QUEST_REWARD_2H_STAFF{ _string: "Elizabeth's Walking Stick" _icon: icon_staff_4 _spirit: 1 _wisdom: 1 }
+	item .fernwick_bar_patron_2_b: !QUEST_REWARD_FEET{ _string: "Quick Slippers" _icon: icon_slippers_2 _dexterity: 1 _constitution: 2 type: armor_cloth }
+}
+
 quest .fernwick_bar_patron_2:
 {
 	string: "Something To Read"
@@ -110,6 +116,5 @@ quest .fernwick_bar_patron_2:
 
 	objectives: [ .fernwick_bar_patron_2 ]
 	level: 11
-	
-	# FIXME: rewards
+	reward_one_item: [ .fernwick_bar_patron_2_a .fernwick_bar_patron_2_b ]
 }

@@ -114,6 +114,12 @@ objective .farmer_rabbit_1_b:
 	manual_boolean: { }
 }
 
+{
+	${ _level: 12 }
+	item .farmer_rabbit_1_a: !QUEST_REWARD_2H_MACE{ _string: "Farmer's Skull Whacker" _icon: icon_mace_2 _strength: 2 _constitution: 1 }
+	item .farmer_rabbit_1_b: !QUEST_REWARD_LEGS{ _string: "Leggings of the Wise" _icon: icon_pants_1 _wisdom: 1 type: armor_cloth }
+}
+
 quest .farmer_rabbit_1:
 {
 	string: "We Must Secure The Cabbages"
@@ -142,6 +148,5 @@ quest .farmer_rabbit_1:
 
 	objectives: [ .farmer_rabbit_1_a .farmer_rabbit_1_b ]
 	level: 12
-	
-	# FIXME: rewards
+	reward_one_item: [ .farmer_rabbit_1_a .farmer_rabbit_1_b ]
 }

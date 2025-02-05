@@ -74,7 +74,6 @@ quest .ranger_orwla_1:
 	level: 12
 	objectives: [ .ranger_orwla_1 ]
 	next_quest: .ranger_orwla_2
-	# FIXME rewards
 }
 
 ############################################################
@@ -134,6 +133,13 @@ objective .ranger_orwla_2:
 	}
 }
 
+{
+	${ _level: 12 }
+	item .ranger_orwla_2_a: !QUEST_REWARD_HANDS{ _string: "Steel Grips" _icon: icon_gloves_2 _attack_haste: 1 _strength: 1 type: armor_plate }
+	item .ranger_orwla_2_b: !QUEST_REWARD_BACK{ _string: "Ranger's Cloak" _icon: icon_cape_1 _constitution: 1 _dexterity: 2 type: armor_cloth }
+	item .ranger_orwla_2_c: !QUEST_REWARD_NECK{ _string: "Lifegiving Talisman" _icon: icon_necklace_5 _constitution: 1 _healing: 2 }
+}
+
 quest .ranger_orwla_2:
 {
 	string: "By Fire Be Purged"
@@ -162,5 +168,5 @@ quest .ranger_orwla_2:
 	prerequisites: [ .ranger_orwla_1 ]
 	quest_items: [ .ranger_orwla_2_quest_item ]
 	objectives: [ .ranger_orwla_2 ]
-	# FIXME rewards
+	reward_one_item: [ .ranger_orwla_2_a .ranger_orwla_2_b .ranger_orwla_2_c ]
 }

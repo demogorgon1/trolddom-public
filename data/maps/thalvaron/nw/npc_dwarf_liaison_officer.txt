@@ -61,7 +61,6 @@ quest thalvaron_dwarf_liaison_officer_1:
 
 	level: 13
 	reward_cash_multiplier: 0.3
-	reward_xp_multiplier: 0.3
-	
+	reward_xp_multiplier: 0.3	
 }
 

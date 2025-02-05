@@ -88,7 +88,7 @@ quest .maude_johansson_1:
 
 	level: 11
 	objectives: [ .maude_johansson_1 ]
-	# FIXME rewards
+	next_quest: .maude_johansson_2
 }
 
 ############################################################
@@ -105,6 +105,12 @@ objective .maude_johansson_2:
 		entities: [ thalvaron_rebel_poacher_leader ]
 		count: 1
 	}
+}
+
+{
+	${ _level: 11 }
+	item .maude_johansson_2_a: !QUEST_REWARD_HANDS{ _string: "Heirloom Gauntlets" _icon: icon_plate_hands_1 _constitution: 1 _strength: 1 type: armor_plate }
+	item .maude_johansson_2_b: !QUEST_REWARD_LEGS{ _string: "Colorful Woven Leggings" _icon: icon_pants_3 _constitution: 1 _wisdom: 1 _spell_damage: 1 type: armor_cloth }
 }
 
 quest .maude_johansson_2:
@@ -135,6 +141,6 @@ quest .maude_johansson_2:
 	level: 11
 	objectives: [ .maude_johansson_2 ]
 	prerequisites: [ .maude_johansson_1 ]
-	# FIXME rewards
+	reward_one_item: [ .maude_johansson_2_a .maude_johansson_2_b ]
 }
 

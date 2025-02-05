@@ -65,7 +65,23 @@ namespace tpublic
 			// Recursively parse all .txt files in root path
 			_ParseDirectory(parseRootPath.c_str(), parseRootPath.c_str());
 
-			m_parser.ResolveMacrosAndReferences();
+			{
+				DataErrorHandling::ScopedErrorCallback scopedErrorCallback([&](
+					const char* aString)
+				{
+					throw BuildError{ aString };
+				});
+
+				try
+				{
+					m_parser.ResolveMacrosAndReferences();
+				}
+				catch (BuildError& e)
+				{
+					_OnBuildError(e);
+					break;
+				}
+			}
 		}
 
 		nwork::Queue workQueue;

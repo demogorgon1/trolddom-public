@@ -166,6 +166,13 @@
 	<exists _constitution> stat_weight constitution: @_constitution
 	<exists _spirit> stat_weight spirit: @_spirit
 	<exists _wisdom> stat_weight wisdom: @_wisdom
+	<exists _spell_damage> stat_weight spell_damage: @_spell_damage
+	<exists _healing> stat_weight healing: @_healing
+	<exists _attack_haste> stat_weight attack_haste: @_attack_haste
+	<exists _spell_haste> stat_weight spell_haste: @_spell_haste
+	<exists _health_per_5> stat_weight health_per_5: @_health_per_5
+	<exists _mana_per_5> stat_weight mana_per_5: @_mana_per_5
+	<exists _attack_power> stat_weight attack_power: @_attack_power
 }
 
 !define QUEST_REWARD_HEAD { !QUEST_REWARD equipment_slots: [ head ] }
@@ -180,14 +187,15 @@
 !define QUEST_REWARD_NECK { !QUEST_REWARD equipment_slots: [ neck ] }
 !define QUEST_REWARD_FINGER { !QUEST_REWARD equipment_slots: [ finger_1 finger_2 ] }
 !define QUEST_REWARD_BAG { !QUEST_REWARD equipment_slots: [ bag_1 bag_2 bag_3 ] }
-!define QUEST_REWARD_1H_SWORD { !QUEST_REWARD equipment_slots: [ main_hand off_hand ] item_type: weapon_1h_sword }
-!define QUEST_REWARD_1H_MACE { !QUEST_REWARD equipment_slots: [ main_hand off_hand ] item_type: weapon_1h_mace }
-!define QUEST_REWARD_1H_AXE { !QUEST_REWARD equipment_slots: [ main_hand off_hand ] item_type: weapon_1h_axe }
-!define QUEST_REWARD_1H_KNIFE { !QUEST_REWARD equipment_slots: [ main_hand off_hand ] item_type: weapon_1h_knife }
-!define QUEST_REWARD_2H_SWORD { !QUEST_REWARD equipment_slots: [ main_hand ] item_type: weapon_2h_sword }
-!define QUEST_REWARD_2H_MACE { !QUEST_REWARD equipment_slots: [ main_hand ] item_type: weapon_2h_mace }
-!define QUEST_REWARD_2H_AXE { !QUEST_REWARD equipment_slots: [ main_hand ] item_type: weapon_2h_axe }
-!define QUEST_REWARD_2H_STAFF { !QUEST_REWARD equipment_slots: [ main_hand ] item_type: weapon_2h_staff }
-!define QUEST_REWARD_SHIELD { !QUEST_REWARD equipment_slots: [ off_hand ] item_type: shield }
-!define QUEST_REWARD_BOW { !QUEST_REWARD equipment_slots: [ ranged ] item_type: ranged_bow }
-!define QUEST_REWARD_CROSSBOW { !QUEST_REWARD equipment_slots: [ ranged ] item_type: ranged_crossbow }
+!define QUEST_REWARD_1H_SWORD { !QUEST_REWARD equipment_slots: [ main_hand off_hand ] type: weapon_1h_sword }
+!define QUEST_REWARD_1H_MACE { !QUEST_REWARD equipment_slots: [ main_hand off_hand ] type: weapon_1h_mace }
+!define QUEST_REWARD_1H_AXE { !QUEST_REWARD equipment_slots: [ main_hand off_hand ] type: weapon_1h_axe }
+!define QUEST_REWARD_1H_KNIFE { !QUEST_REWARD equipment_slots: [ main_hand off_hand ] type: weapon_1h_knife }
+!define QUEST_REWARD_2H_SWORD { !QUEST_REWARD equipment_slots: [ main_hand ] type: weapon_2h_sword }
+!define QUEST_REWARD_2H_MACE { !QUEST_REWARD equipment_slots: [ main_hand ] type: weapon_2h_mace }
+!define QUEST_REWARD_2H_AXE { !QUEST_REWARD equipment_slots: [ main_hand ] type: weapon_2h_axe }
+!define QUEST_REWARD_2H_STAFF { !QUEST_REWARD equipment_slots: [ main_hand ] type: weapon_2h_staff }
+!define QUEST_REWARD_SHIELD { !QUEST_REWARD equipment_slots: [ off_hand ] type: shield }
+!define QUEST_REWARD_BOW { !QUEST_REWARD equipment_slots: [ ranged ] type: ranged_bow }
+!define QUEST_REWARD_CROSSBOW { !QUEST_REWARD equipment_slots: [ ranged ] type: ranged_crossbow }
+!define QUEST_REWARD_OFFHAND { !QUEST_REWARD equipment_slots: [ off_hand ] }

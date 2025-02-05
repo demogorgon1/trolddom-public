@@ -486,12 +486,13 @@ namespace tpublic
 			{
 				const Macro* macro = _FindMacro(child->m_path.c_str(), child->m_name.c_str());
 				TP_VERIFY(macro != NULL, child->m_debugInfo, "'%s' is not a valid macro.", child->m_name.c_str());
+				DataErrorHandling::DebugInfo debugInfo = child->m_debugInfo;
 				aNode->m_children.erase(aNode->m_children.begin() + i);
 				
 				size_t j = i;
 				for(const std::unique_ptr<SourceNode>& t : macro->m_body->m_children)
 				{
-					std::unique_ptr<SourceNode> node = std::make_unique<SourceNode>(m_root.m_sourceContext, t->m_debugInfo, t->m_realPath.c_str(), t->m_path.c_str(), t->m_pathWithFileName.c_str());
+					std::unique_ptr<SourceNode> node = std::make_unique<SourceNode>(m_root.m_sourceContext, debugInfo, t->m_realPath.c_str(), t->m_path.c_str(), t->m_pathWithFileName.c_str());
 					node->m_tag = t->m_tag;
 					node->m_name = t->m_name;
 					node->Copy(t.get());

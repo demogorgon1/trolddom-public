@@ -203,6 +203,18 @@ entity thalvaron_ola_howton_1_quest_item_3:
 	}
 }
 
+item .ola_howton_1_a:
+{
+	equipment_slots: [ bag_1 bag_2 bag_3 ]
+	binds: when_picked_up
+	type: miscellaneous
+	required_level: 10
+	icon: icon_brown_bag_2
+	rarity: uncommon
+	string: "Farmer's Bag" 
+	bag_slots: 8
+}
+
 quest .ola_howton_1:
 {
 	string: "Get My Stuff Back"
@@ -230,5 +242,5 @@ quest .ola_howton_1:
 
 	level: 10
 	objectives: [ .ola_howton_1_a .ola_howton_1_b .ola_howton_1_c ]
-	# FIXME rewards
+	reward_all_items: [ .ola_howton_1_a ]
 }

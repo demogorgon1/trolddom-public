@@ -79,7 +79,7 @@ quest .ranger_seymore_1:
 
 	text:
 	[
-		"Hunt rebels in the area south of the city."
+		"Hunt dark elves and their minions behind the hotel."
 	]
 	
 	description: 
@@ -96,12 +96,12 @@ quest .ranger_seymore_1:
 	
 	completion:
 	[
-		"FIXME"
+		"Good."
 	]
 
 	level: 12
 	objectives: [ .ranger_seymore_1_a .ranger_seymore_1_b .ranger_seymore_1_c ]
-	# FIXME rewards
+	next_quest: .ranger_seymore_2	
 }
 
 ############################################################
@@ -161,13 +161,12 @@ quest .ranger_seymore_2:
 	
 	completion:
 	[
-		"FIXME"
+		"Great."
 	]
 
 	level: 12
 	objectives: [ .ranger_seymore_2_a .ranger_seymore_2_b .ranger_seymore_2_c ]
 	prerequisites: [ .ranger_seymore_1 ]
-	# FIXME rewards
 }
 
 ############################################################
@@ -180,6 +179,13 @@ objective .ranger_seymore_3:
 	maps: [ thalvaron ]
 	
 	manual_boolean: { }
+}
+
+{
+	${ _level: 12 }
+	item .ranger_seymore_3_a: !QUEST_REWARD_1H_AXE{ _string: "Smooth Field Axe" _icon: icon_axe_1 _strength: 2 _spirit: 1 }
+	item .ranger_seymore_3_b: !QUEST_REWARD_OFFHAND{ _string: "Blackened Totem" _icon: icon_antlers _wisdom: 1 _spirit: 1 }
+	item .ranger_seymore_3_c: !QUEST_REWARD_FINGER{ _string: "Ranger's Mark" _icon: icon_ring_1 _strength: 1 _dexterity: 1 }
 }
 
 quest .ranger_seymore_3:
@@ -205,13 +211,13 @@ quest .ranger_seymore_3:
 	
 	completion:
 	[
-		"FIXME"
+		"I heard of your deeds."
 	]
 
 	level: 12
 	prerequisites: [ .ranger_seymore_2 ]
 	objectives: [ .ranger_seymore_3 ]
-	# FIXME rewards
+	reward_one_item: [ .ranger_seymore_3_a .ranger_seymore_3_b .ranger_seymore_3_c ]
 }
 
 entity thalvaron_ranger_seymore_3_quest_item:
