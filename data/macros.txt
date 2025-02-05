@@ -147,3 +147,47 @@
 	
 	<exists _tags> tags: @_tags
 }
+
+#####################################################
+# Quest reward macros
+
+!define QUEST_REWARD
+{
+	string: @_string
+	binds: when_picked_up
+	required_level: @_level
+	icon: @_icon
+	
+	<exists _rarity> rarity: @_rarity
+	<!exists _rarity> rarity: uncommon	
+	
+	<exists _dexterity> stat_weight dexterity: @_dexterity
+	<exists _strength> stat_weight strength: @_strength
+	<exists _constitution> stat_weight constitution: @_constitution
+	<exists _spirit> stat_weight spirit: @_spirit
+	<exists _wisdom> stat_weight wisdom: @_wisdom
+}
+
+!define QUEST_REWARD_HEAD { !QUEST_REWARD equipment_slots: [ head ] }
+!define QUEST_REWARD_CHEST { !QUEST_REWARD equipment_slots: [ chest ] }
+!define QUEST_REWARD_LEGS { !QUEST_REWARD equipment_slots: [ legs ] }
+!define QUEST_REWARD_FEET { !QUEST_REWARD equipment_slots: [ feet ] }
+!define QUEST_REWARD_SHOULDERS { !QUEST_REWARD equipment_slots: [ shoulders ] }
+!define QUEST_REWARD_WRISTS { !QUEST_REWARD equipment_slots: [ wrists ] }
+!define QUEST_REWARD_WAIST { !QUEST_REWARD equipment_slots: [ waist ] }
+!define QUEST_REWARD_HANDS { !QUEST_REWARD equipment_slots: [ hands ] }
+!define QUEST_REWARD_BACK { !QUEST_REWARD equipment_slots: [ back ] }
+!define QUEST_REWARD_NECK { !QUEST_REWARD equipment_slots: [ neck ] }
+!define QUEST_REWARD_FINGER { !QUEST_REWARD equipment_slots: [ finger_1 finger_2 ] }
+!define QUEST_REWARD_BAG { !QUEST_REWARD equipment_slots: [ bag_1 bag_2 bag_3 ] }
+!define QUEST_REWARD_1H_SWORD { !QUEST_REWARD equipment_slots: [ main_hand off_hand ] item_type: weapon_1h_sword }
+!define QUEST_REWARD_1H_MACE { !QUEST_REWARD equipment_slots: [ main_hand off_hand ] item_type: weapon_1h_mace }
+!define QUEST_REWARD_1H_AXE { !QUEST_REWARD equipment_slots: [ main_hand off_hand ] item_type: weapon_1h_axe }
+!define QUEST_REWARD_1H_KNIFE { !QUEST_REWARD equipment_slots: [ main_hand off_hand ] item_type: weapon_1h_knife }
+!define QUEST_REWARD_2H_SWORD { !QUEST_REWARD equipment_slots: [ main_hand ] item_type: weapon_2h_sword }
+!define QUEST_REWARD_2H_MACE { !QUEST_REWARD equipment_slots: [ main_hand ] item_type: weapon_2h_mace }
+!define QUEST_REWARD_2H_AXE { !QUEST_REWARD equipment_slots: [ main_hand ] item_type: weapon_2h_axe }
+!define QUEST_REWARD_2H_STAFF { !QUEST_REWARD equipment_slots: [ main_hand ] item_type: weapon_2h_staff }
+!define QUEST_REWARD_SHIELD { !QUEST_REWARD equipment_slots: [ off_hand ] item_type: shield }
+!define QUEST_REWARD_BOW { !QUEST_REWARD equipment_slots: [ ranged ] item_type: ranged_bow }
+!define QUEST_REWARD_CROSSBOW { !QUEST_REWARD equipment_slots: [ ranged ] item_type: ranged_crossbow }

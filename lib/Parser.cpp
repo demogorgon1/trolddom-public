@@ -124,6 +124,8 @@ namespace tpublic
 	void				
 	Parser::ResolveMacrosAndReferences()
 	{
+		
+
 		_ResolveMacrosAndReferences(&m_root);
 	}
 
@@ -166,21 +168,39 @@ namespace tpublic
 			else if(aTokenizer.IsToken("!"))
 			{
 				aTokenizer.Proceed();
-				aTokenizer.ConsumeToken("define");
 
-				bool isLocal = aTokenizer.TryConsumeToken("local");
+				if(aTokenizer.IsToken("define"))
+				{
+					aTokenizer.Proceed();
 
-				// Macro definition
-				const std::string& identifier = aTokenizer.ConsumeAnyIdentifier();
-					
-				std::unique_ptr<SourceNode> body = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
-				_ParseValue(aTokenizer, body.get());
+					bool isLocal = aTokenizer.TryConsumeToken("local");
 
-				std::unique_ptr<Macro> macro = std::make_unique<Macro>(identifier.c_str(), body->m_debugInfo);
-				macro->m_body = std::move(body);
+					// Macro definition
+					const std::string& identifier = aTokenizer.ConsumeAnyIdentifier();
 
-				// Insert macro in namespace
-				_GetOrCreateMacroNamespace(isLocal ? aTokenizer.GetPathWithFileName() : aTokenizer.GetPath())->InsertMacro(macro);
+					std::unique_ptr<SourceNode> body = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
+					_ParseValue(aTokenizer, body.get());
+
+					std::unique_ptr<Macro> macro = std::make_unique<Macro>(identifier.c_str(), body->m_debugInfo);
+					macro->m_body = std::move(body);
+
+					// Insert macro in namespace
+					_GetOrCreateMacroNamespace(isLocal ? aTokenizer.GetPathWithFileName() : aTokenizer.GetPath())->InsertMacro(macro);
+				}
+				else 
+				{
+					std::unique_ptr<SourceNode> node = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
+					node->m_type = SourceNode::TYPE_MACRO_OBJECT_IMPORT;
+					node->m_name = aTokenizer.ConsumeAnyIdentifier();
+					aObject->m_children.push_back(std::move(node));
+
+					if(aTokenizer.IsToken("{"))
+					{
+						aTokenizer.Proceed();
+						TP_VERIFY(aTokenizer.IsToken("}"), node->m_debugInfo, "Arguments not allowed for macro object imports.");
+						aTokenizer.Proceed();
+					}
+				}
 			}
 			else
 			{
@@ -458,6 +478,27 @@ namespace tpublic
 				m_referenceObjects.push_back(std::move(child));
 
 				aNode->m_children.erase(aNode->m_children.begin() + i);
+				i--;
+				continue;
+			}
+
+			if(child->m_type == SourceNode::TYPE_MACRO_OBJECT_IMPORT)
+			{
+				const Macro* macro = _FindMacro(child->m_path.c_str(), child->m_name.c_str());
+				TP_VERIFY(macro != NULL, child->m_debugInfo, "'%s' is not a valid macro.", child->m_name.c_str());
+				aNode->m_children.erase(aNode->m_children.begin() + i);
+				
+				size_t j = i;
+				for(const std::unique_ptr<SourceNode>& t : macro->m_body->m_children)
+				{
+					std::unique_ptr<SourceNode> node = std::make_unique<SourceNode>(m_root.m_sourceContext, t->m_debugInfo, t->m_realPath.c_str(), t->m_path.c_str(), t->m_pathWithFileName.c_str());
+					node->m_tag = t->m_tag;
+					node->m_name = t->m_name;
+					node->Copy(t.get());
+					aNode->m_children.insert(aNode->m_children.begin() + j, std::move(node));
+					j++;
+				}
+
 				i--;
 				continue;
 			}
