@@ -52,6 +52,13 @@ objective .gob_fulbro_1:
 	collect_items: { item: .gob_fulbro_1_quest_item count: 1 }
 }
 
+{
+	${ _level: 13 }
+	item .gob_fulbro_1_a: !QUEST_REWARD_SHIELD{ _string: "Gray Tortoise Shell" _icon: icon_shield_3 _dexterity: 1 _constitution: 2 }
+	item .gob_fulbro_1_b: !QUEST_REWARD_HEAD{ _string: "Moist Piece of Cloth" _icon: icon_wizard_hat_5 _wisdom: 1 _spirit: 1 _constitution: 2 type: armor_cloth }
+	item .gob_fulbro_1_c: !QUEST_REWARD_CHEST{ _string: "Shirt of Crocodile Handling" _icon: icon_mail_shirt_1 _constitution: 1 _wisdom: 2 type: armor_mail }
+}
+
 quest .gob_fulbro_1:
 {
 	string: "Watch Your Legs"
@@ -79,7 +86,6 @@ quest .gob_fulbro_1:
 	]
 	
 	objectives: [ .gob_fulbro_1 ]
-	level: 13
-	
-	# FIXME: rewards
+	level: 13	
+	reward_one_item: [ .gob_fulbro_1_a .gob_fulbro_1_b .gob_fulbro_1_c ]
 }

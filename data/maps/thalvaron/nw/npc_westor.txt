@@ -112,9 +112,7 @@ quest .westor_1:
 	]
 
 	objectives: [ .westor_1 ]
-	level: 11
-	
-	# FIXME: rewards
+	level: 11	
 }
 
 ############################################################
@@ -205,6 +203,13 @@ objective .westor_3:
 	collect_items: { item: .westor_3_quest_item count: 6 }
 }
 
+{
+	${ _level: 12 }
+	item .westor_3_a: !QUEST_REWARD_BACK{ _string: "Cape of the Mountain" _icon: icon_cape_4 _spirit: 1 _strength: 2 type: armor_cloth }
+	item .westor_3_b: !QUEST_REWARD_FEET{ _string: "Iron-Plated Boots" _icon: icon_boots_1 _wisdom: 1 _constitution: 1 type: armor_plate }
+	item .westor_3_c: !QUEST_REWARD_WRISTS{ _string: "Swiftcast Bracers" _icon: icon_bracers_1 _spell_haste: 1 type: armor_cloth }
+}
+
 quest .westor_3:
 {
 	string: "More Mushrooms"
@@ -234,6 +239,5 @@ quest .westor_3:
 	level: 12
 	prerequisites: [ .westor_1 ]
 	objectives: [ .westor_3 ]
-	
-	# FIXME: rewards
+	reward_one_item: [ .westor_3_a .westor_3_b .westor_3_c ]
 }

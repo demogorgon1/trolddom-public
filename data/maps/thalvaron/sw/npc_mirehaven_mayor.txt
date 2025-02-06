@@ -127,14 +127,12 @@ quest .mirehaven_mayor_1:
 	
 	completion:
 	[
-		"Taxes? I'm not so sure about that..."
+		"Not sure it's enough. He'll need to be squeezed harder next time."
 	]
 
 	level: 14
 	prerequisites: [ .mirehaven_mayor_0 ]
 	objectives: [ .mirehaven_mayor_1 ]
-	
-	# FIXME: rewards
 }
 
 ############################################################
@@ -220,6 +218,13 @@ objective .mirehaven_mayor_2:
 	collect_items: { item: .mirehaven_mayor_2_quest_item count: 1 }
 }
 
+{
+	${ _level: 14 }
+	item .mirehaven_mayor_2_a: !QUEST_REWARD_BOW{ _string: "Mirehaven Bow" _icon: icon_bow_1 _dexterity: 1 _spirit: 1 }
+	item .mirehaven_mayor_2_b: !QUEST_REWARD_HEAD{ _string: "Helm of the Tax Collector" _icon: icon_head_2 _dexterity: 1 _strength: 1 type: armor_plate }
+	item .mirehaven_mayor_2_c: !QUEST_REWARD_HEAD{ _string: "Wizard Hat of Mirehaven" _icon: icon_wizard_hat_1 _wisdom: 2 _spell_damage: 1 type: armor_cloth }
+}
+
 quest .mirehaven_mayor_2:
 {
 	string: "Ogre Due Taxes"
@@ -250,6 +255,5 @@ quest .mirehaven_mayor_2:
 	objectives: [ .mirehaven_mayor_2 ]
 	level: 14
 	prerequisites: [ .mirehaven_mayor_1 ]
-	
-	# FIXME: rewards
+	reward_one_item: [ .mirehaven_mayor_2_a .mirehaven_mayor_2_b .mirehaven_mayor_2_c ]
 }

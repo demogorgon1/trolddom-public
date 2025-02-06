@@ -61,6 +61,13 @@ objective .warmaster_jounheim_1_b:
 	}
 }
 
+{
+	${ _level: 15 }
+	item .warmaster_jounheim_1_a: !QUEST_REWARD_1H_MACE{ _string: "Skullsmasher" _icon: icon_mace_3 _strength: 3 _constitution: 1 }
+	item .warmaster_jounheim_1_b: !QUEST_REWARD_1H_KNIFE{ _string: "Dagger of Spell Slicing" _icon: icon_knife_1 _constitution: 1 _spell_damage: 1 }
+	item .warmaster_jounheim_1_c: !QUEST_REWARD_2H_STAFF{ _string: "Staff of Healing" _icon: icon_staff_1 _constitution: 1 _spirit: 1 _healing: 1 }
+}
+
 quest .warmaster_jounheim_1:
 {
 	string: "Skullforge Intruders"
@@ -89,8 +96,7 @@ quest .warmaster_jounheim_1:
 	
 	objectives: [ .warmaster_jounheim_1_a .warmaster_jounheim_1_b ]
 	level: 15
-	
-	# FIXME: rewards
+	reward_one_item: [ .warmaster_jounheim_1_a .warmaster_jounheim_1_b .warmaster_jounheim_1_c ]
 }
 
 ############################################################
@@ -107,6 +113,13 @@ objective .warmaster_jounheim_2:
 		entities: [ thalvaron_badlands_orc_gorvak ]
 		count: 1
 	}
+}
+
+{
+	${ _level: 15 }
+	item .warmaster_jounheim_2_a: !QUEST_REWARD_2H_AXE{ _string: "Gorvak's Waraxe" _icon: icon_axe_3 _strength: 2 _constitution: 1 }
+	item .warmaster_jounheim_2_b: !QUEST_REWARD_FINGER{ _string: "Stone of the Oracle" _icon: icon_ring_2 _spell_power: 2 _constitution: 1 }
+	item .warmaster_jounheim_2_c: !QUEST_REWARD_FINGER{ _string: "Ring of Soothing" _icon: icon_ring_4 _healing: 1 _wisdom: 2 }
 }
 
 quest .warmaster_jounheim_2:
@@ -137,6 +150,5 @@ quest .warmaster_jounheim_2:
 	objectives: [ .warmaster_jounheim_2 ]
 	level: 15
 	prerequisites: [ .badlands_orc ]
-	
-	# FIXME: rewards
+	reward_one_item: [ .warmaster_jounheim_2_a .warmaster_jounheim_2_b .warmaster_jounheim_2_c ]
 }

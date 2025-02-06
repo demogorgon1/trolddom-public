@@ -85,8 +85,6 @@ quest .rumin_whiterock_1:
 	level: 15
 	objectives: [ .rumin_whiterock_1 ]
 	next_quest: .rumin_whiterock_2
-	
-	# FIXME: rewards
 }
 
 ############################################################
@@ -199,6 +197,13 @@ objective .rumin_whiterock_3:
 	collect_items: { item: .rumin_whiterock_3_quest_item count: 1 }
 }
 
+{
+	${ _level: 16 }
+	item .rumin_whiterock_3_a: !QUEST_REWARD_LEGS{ _string: "Desert Explorer's Chain Leggings" _icon: icon_mail_pants_2 _constitution: 2 _strength: 1 type: armor_mail }
+	item .rumin_whiterock_3_b: !QUEST_REWARD_LEGS{ _string: "Vanguard Legplates" _icon: icon_mail_pants_1 _constitution: 1 _strength: 2 type: armor_plate }
+	item .rumin_whiterock_3_c: !QUEST_REWARD_WRISTS{ _string: "Harpyslayer Cuffs" _icon: icon_bracers_1 _constitution: 1 _spell_damage: 2 type: armor_cloth }
+}
+
 quest .rumin_whiterock_3:
 {
 	string: "They Probably Lay Eggs"
@@ -227,6 +232,5 @@ quest .rumin_whiterock_3:
 	objectives: [ .rumin_whiterock_3 ]
 	level: 16
 	prerequisites: [ .rumin_whiterock_2 ]
-
-	# FIXME: rewards
+	reward_one_item: [ .rumin_whiterock_3_a .rumin_whiterock_3_b .rumin_whiterock_3_c ]
 }

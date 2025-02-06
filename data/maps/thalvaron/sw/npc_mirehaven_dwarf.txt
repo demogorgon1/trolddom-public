@@ -53,6 +53,13 @@ objective .mirehaven_dwarf_1:
 	collect_items: { item: .mirehaven_dwarf_1_quest_item count: 1 }
 }
 
+{
+	${ _level: 14 }
+	item .mirehaven_dwarf_1_a: !QUEST_REWARD_BACK{ _string: "Conjuror's Cloak" _icon: icon_cape_3 _mana_per_5: 1 _wisdom: 2 type: armor_cloth }
+	item .mirehaven_dwarf_1_b: !QUEST_REWARD_NECK{ _string: "Swiftstrike Amulet" _icon: icon_necklace_1 _attack_haste: 1 }
+	item .mirehaven_dwarf_1_c: !QUEST_REWARD_1H_SWORD{ _string: "Dwarven Blade of Slaying" _icon: icon_sword_6 _constitution: 1 _dexterity: 2 }
+}
+
 quest .mirehaven_dwarf_1:
 {
 	string: "Into the Depths"
@@ -83,7 +90,6 @@ quest .mirehaven_dwarf_1:
 	objectives: [ .mirehaven_dwarf_1 ]
 	prerequisites: [ thalvaron_dwarf_liaison_officer_1 ]
 	level: 14
-	
-	# FIXME: rewards
+	reward_one_item: [ .mirehaven_dwarf_1_a .mirehaven_dwarf_1_b .mirehaven_dwarf_1_c ]
 }
 

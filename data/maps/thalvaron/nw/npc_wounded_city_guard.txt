@@ -67,5 +67,4 @@ quest .wounded_city_guard_1:
 	level: 10
 	reward_xp_multiplier: 0.2
 	quest_items: [ .wounded_city_guard_1_quest_item ]
-	# FIXME rewards
 }

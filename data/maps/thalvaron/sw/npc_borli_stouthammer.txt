@@ -78,6 +78,13 @@ objective .borli_stouthammer_1:
 	}
 }
 
+{
+	${ _level: 15 }
+	item .borli_stouthammer_1_a: !QUEST_REWARD_HEAD{ _string: "Borli's Walking Hat" _icon: icon_head_1 _dexterity: 1 _constitution: 1 type: armor_mail }
+	item .borli_stouthammer_1_b: !QUEST_REWARD_CHEST{ _string: "Sand-Stained Ironplate" _icon: icon_mail_shirt_2 _dexterity: 1 _constitution: 1 type: armor_plate }
+	item .borli_stouthammer_1_c: !QUEST_REWARD_LEGS{ _string: "Loose Desert Pants" _icon: icon_pants_2 _wisdom: 1 _constitution: 1 type: armor_cloth }
+}
+
 quest .borli_stouthammer_1:
 {
 	string: "Why Did It Have To Be Spiders?"
@@ -105,6 +112,5 @@ quest .borli_stouthammer_1:
 
 	level: 15
 	objectives: [ .borli_stouthammer_1 ]
-	
-	# FIXME: rewards
+	reward_one_item: [ .borli_stouthammer_1_a .borli_stouthammer_1_b .borli_stouthammer_1_c ]
 }

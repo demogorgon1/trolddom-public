@@ -53,6 +53,13 @@ objective .lieutenant_gordon_1:
 	collect_items: { item: .lieutenant_gordon_1_quest_item count: 10 }
 }
 
+{
+	${ _level: 14 }
+	item .lieutenant_gordon_1_a: !QUEST_REWARD_WRISTS{ _string: "Crude Kobold Armguards" _icon: icon_mail_bracers_2 _strength: 2 _constitution: 3 type: armor_plate }
+	item .lieutenant_gordon_1_b: !QUEST_REWARD_WAIST{ _string: "Soothsayer's Belt" _icon: icon_plate_belt_1 _wisdom: 3 _constitution: 2 type: armor_cloth }
+	item .lieutenant_gordon_1_c: !QUEST_REWARD_HANDS{ _string: "Dwarven Chain Gauntlets" _icon: icon_mail_gloves_1 _dexterity: 1 _constitution: 2 type: armor_mail }
+}
+
 quest .lieutenant_gordon_1:
 {
 	string: "Tired of Kobolds Yet?"
@@ -81,7 +88,6 @@ quest .lieutenant_gordon_1:
 	
 	objectives: [ .lieutenant_gordon_1 ]
 	level: 14
-	
-	# FIXME: rewards
+	reward_one_item: [ .lieutenant_gordon_1_a .lieutenant_gordon_1_b .lieutenant_gordon_1_c ]
 }
 

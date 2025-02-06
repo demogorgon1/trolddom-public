@@ -33,6 +33,12 @@ entity thalvaron_yvonne_tyson: !NPC
 ############################################################
 # Quest 1
 
+{
+	${ _level: 14 }
+	item .yvonne_tyson_1_a: !QUEST_REWARD_NECK{ _string: "Effigy of Wisdom" _icon: icon_necklace_2 _wisdom: 1 }
+	item .yvonne_tyson_1_b: !QUEST_REWARD_NECK{ _string: "Effigy of Constitution" _icon: icon_necklace_1 _constitution: 1 }
+}
+
 quest .yvonne_tyson_1:
 {
 	string: "Collect Your Reward"
@@ -56,6 +62,5 @@ quest .yvonne_tyson_1:
 	level: 14
 	prerequisites: [ .brigand_leader_quest_item ]
 	reward_xp_multiplier: 0.3
-	
-	# FIXME rewards
+	reward_one_item: [ .yvonne_tyson_1_a .yvonne_tyson_1_b ]
 }

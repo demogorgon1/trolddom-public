@@ -89,6 +89,12 @@ objective .buck_1:
 	collect_items: { item: .buck_1_quest_item count: 5 }
 }
 
+{
+	${ _level: 13 }
+	item .buck_1_a: !QUEST_REWARD_BACK{ _string: "Mosquito Cover" _icon: icon_cape_1 _spirit: 1 _constitution: 2 type: armor_cloth }
+	item .buck_1_b: !QUEST_REWARD_NECK{ _string: "Swamp Explorer's Amulet" _icon: icon_necklace_6 _spirit: 2 _constitution: 1 }
+}
+
 quest .buck_1:
 {
 	string: "Only Problem With Swamps"
@@ -116,8 +122,7 @@ quest .buck_1:
 
 	objectives: [ .buck_1 ]
 	level: 13
-	
-	# FIXME: rewards
+	reward_one_item: [ .buck_1_a .buck_1_b ]
 }
 
 ############################################################
@@ -176,6 +181,12 @@ objective .buck_2:
 	collect_items: { item: .buck_2_quest_item count: 6 }
 }
 
+{
+	${ _level: 13 }
+	item .buck_2_a: !QUEST_REWARD_WAIST{ _string: "Musky Belt" _icon: icon_cape_1 _wisdom: 1 _constitution: 2 type: armor_plate }
+	item .buck_2_b: !QUEST_REWARD_HANDS{ _string: "Gardener's Gloves" _icon: icon_gloves_3 _wisdom: 2 _constitution: 1 type: armor_cloth }
+}
+
 quest .buck_2:
 {
 	string: "Seaweed For Our Clawed Friends"
@@ -202,8 +213,7 @@ quest .buck_2:
 
 	objectives: [ .buck_2 ]
 	level: 13
-	
-	# FIXME: rewards
+	reward_one_item: [ .buck_2_a .buck_2_b ]	
 }
 
 ############################################################
@@ -306,6 +316,13 @@ item .buck_4_quest_item:
 	flavor: "If you were a lizard you'd hate this."
 }
 
+{
+	${ _level: 13 }
+	item .buck_4_a: !QUEST_REWARD_FINGER{ _string: "Ring of Restoration" _icon: icon_ring_1 _wisdom: 1 _healing: 2 }
+	item .buck_4_b: !QUEST_REWARD_FINGER{ _string: "Ring of Destruction" _icon: icon_ring_2 _wisdom: 1 _spell_damage: 2 }
+	item .buck_4_c: !QUEST_REWARD_FINGER{ _string: "Ring of the Warrior" _icon: icon_ring_3 _constitution: 1 _strength: 2 }
+}
+
 quest .buck_4:
 {
 	string: "Lizard Repellent"
@@ -328,6 +345,5 @@ quest .buck_4:
 	level: 13
 	prerequisites: [ .buck_3 ]
 	quest_items: [ .buck_4_quest_item ]
-	
-	# FIXME: rewards
+	reward_one_item: [ .buck_4_a .buck_4_b .buck_4_c ]
 }

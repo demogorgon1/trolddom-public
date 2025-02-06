@@ -53,6 +53,13 @@ objective .hort_ironmantle_1:
 	collect_items: { item: .hort_ironmantle_1_quest_item count: 1 }
 }
 
+{
+	${ _level: 14 }
+	item .hort_ironmantle_1_a: !QUEST_REWARD_LEGS{ _string: "Dwarven Plate Legs" _icon: icon_mail_pants_1 _strength: 2 _constitution: 3 type: armor_plate }
+	item .hort_ironmantle_1_b: !QUEST_REWARD_FEET{ _string: "Elemental Walking Shoes" _icon: icon_shoe_1 _wisdom: 2 _constitution: 1 type: armor_cloth }
+	item .hort_ironmantle_1_c: !QUEST_REWARD_SHOULDERS{ _string: "Dusty Shoulder Protectors" _icon: icon_shoulders_1 _spirit: 1 _constitution: 2 type: armor_mail }
+}
+
 quest .hort_ironmantle_1:
 {
 	string: "Rock Crusher Research"
@@ -81,8 +88,7 @@ quest .hort_ironmantle_1:
 	level: 14
 	objectives: [ .hort_ironmantle_1 ]
 	next_quest: .hort_ironmantle_2
-	
-	# FIXME: rewards
+	reward_one_item: [ .hort_ironmantle_1_a .hort_ironmantle_1_b .hort_ironmantle_1_c ]
 }
 
 ############################################################

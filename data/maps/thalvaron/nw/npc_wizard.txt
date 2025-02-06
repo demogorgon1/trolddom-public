@@ -62,6 +62,13 @@ entity thalvaron_wizard_door:
 ############################################################
 # Quest 1
 
+{
+	${ _level: 14 }
+	item .wizard_1_a: !QUEST_REWARD_2H_STAFF{ _string: "Cane of Eastview" _icon: icon_staff_4 _wisdom: 1 _constitution: 1 _spell_damage: 1 }
+	item .wizard_1_b: !QUEST_REWARD_2H_SWORD{ _string: "Smooth Longblade" _icon: icon_sword_5 _strength: 3 _constitution: 1 }
+	item .wizard_1_c: !QUEST_REWARD_1H_AXE{ _string: "Woodman's Axe" _icon: icon_axe_3 _strength: 1 _constitution: 3 }
+}
+
 quest .wizard_1:
 {
 	string: "Reporting Back to Thora"
@@ -89,6 +96,5 @@ quest .wizard_1:
 	level: 14
 	prerequisites: [ .thora_2 ]
 	reward_xp_multiplier: 0.2
-	
-	# FIXME: rewards
+	reward_one_item: [ .wizard_1_a .wizard_1_b .wizard_1_c ]
 }

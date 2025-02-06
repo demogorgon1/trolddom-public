@@ -88,6 +88,13 @@ item .mumle_whiterock_1:
 	use_ability: .mumle_whiterock_1
 }
 
+{
+	${ _level: 16 }
+	item .mumle_whiterock_1_a: !QUEST_REWARD_WRISTS{ _string: "Muddy Bracers" _icon: icon_bracers_2 _constitution: 1 _wisdom: 1 type: armor_mail }
+	item .mumle_whiterock_1_b: !QUEST_REWARD_WAIST{ _string: "Elemental Girdle" _icon: icon_cloth_belt_1 _constitution: 1 _strength: 1 _spirit: 1 type: armor_plate }
+	item .mumle_whiterock_1_c: !QUEST_REWARD_WAIST{ _string: "Iron Rope of Wrath" _icon: icon_cloth_belt_2 _spirit: 2 _spell_damage: 1 type: armor_cloth }
+}
+
 quest .mumle_whiterock_1:
 {
 	string: "Magical Mud Creatures"
@@ -113,8 +120,7 @@ quest .mumle_whiterock_1:
 	quest_items: [ .mumle_whiterock_1 ]
 	objectives: [ .mumle_whiterock_1 ]
 	next_quest: .mumle_whiterock_2
-	
-	# FIXME rewards
+	reward_one_item: [ .mumle_whiterock_1_a .mumle_whiterock_1_b .mumle_whiterock_1_c ]
 }
 
 ############################################################
@@ -141,6 +147,13 @@ objective .mumle_whiterock_2:
 	collect_items: { item: .mumle_whiterock_2_quest_item count: 6 }
 }
 
+{
+	${ _level: 16 }
+	item .mumle_whiterock_2_a: !QUEST_REWARD_HANDS{ _string: "Mumle's Work Gloves" _icon: icon_gloves_1 _constitution: 1 _strength: 2 _spirit: 1 type: armor_mail }
+	item .mumle_whiterock_2_b: !QUEST_REWARD_BACK{ _string: "Nomad's Backcover" _icon: icon_cape_1 _constitution: 2 _strength: 1 _wisdom: 1 type: armor_cloth }
+	item .mumle_whiterock_2_c: !QUEST_REWARD_2H_STAFF{ _string: "Badlands Walking Stick" _icon: icon_staff_1 _wisdom: 1 }
+}
+
 quest .mumle_whiterock_2:
 {
 	string: "Further Research"
@@ -164,6 +177,5 @@ quest .mumle_whiterock_2:
 
 	level: 16	
 	objectives: [ .mumle_whiterock_2 ]
-	
-	# FIXME rewards
+	reward_one_item: [ .mumle_whiterock_2_a .mumle_whiterock_2_b .mumle_whiterock_2_c ]
 }

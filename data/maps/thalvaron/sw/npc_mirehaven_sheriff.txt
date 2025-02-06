@@ -46,6 +46,13 @@ objective .mirehaven_sheriff_1:
 	}
 }
 
+{
+	${ _level: 13 }
+	item .mirehaven_sheriff_1_a: !QUEST_REWARD_HEAD{ _string: "Chain Scarf of the Law" _icon: icon_head_9 _constitution: 1 _dexterity: 1 type: armor_mail }
+	item .mirehaven_sheriff_1_b: !QUEST_REWARD_CHEST{ _string: "Dirty Robe of the Marsh" _icon: icon_cloth_shirt_6 _constitution: 1 _spell_power: 1 type: armor_cloth }
+	item .mirehaven_sheriff_1_c: !QUEST_REWARD_SHOULDERS{ _string: "Swampguard's Pauldrons" _icon: icon_shoulders_3 _constitution: 1 _strength: 2 type: armor_plate }
+}
+
 quest .mirehaven_sheriff_1:
 {
 	string: "Bandits of the Marshes"
@@ -72,6 +79,6 @@ quest .mirehaven_sheriff_1:
 
 	level: 13
 	objectives: [ .mirehaven_sheriff_1 ]
-	# FIXME rewards
+	reward_one_item: [ .mirehaven_sheriff_1_a .mirehaven_sheriff_1_b .mirehaven_sheriff_1_c ]
 }
 

@@ -70,6 +70,13 @@ objective .sergeant_jensen_1_3:
 	}
 }
 
+{
+	${ _level: 11 }
+	item .sergeant_jensen_1_a: !QUEST_REWARD_SHIELD{ _string: "Crest of the City Guard" _icon: icon_shield_3 _dexterity: 2 _constitution: 1 }
+	item .sergeant_jensen_1_b: !QUEST_REWARD_SHIELD{ _string: "City Guard Defender" _icon: icon_shield_2 _healing: 2 _wisdom: 1 }
+	item .sergeant_jensen_1_c: !QUEST_REWARD_WAIST{ _string: "Strong Iron Belt" _icon: icon_belt_2 _dexterity: 1 _strength: 1 type: armor_plate }
+}
+
 quest .sergeant_jensen_1:
 {
 	string: "The Bread Basket of Valoris"
@@ -96,7 +103,7 @@ quest .sergeant_jensen_1:
 
 	level: 11
 	objectives: [ .sergeant_jensen_1_1 .sergeant_jensen_1_2 .sergeant_jensen_1_3 ]
-	# FIXME rewards
+	reward_one_item: [ .sergeant_jensen_1_a .sergeant_jensen_1_b .sergeant_jensen_1_c ]
 }
 
 ############################################################

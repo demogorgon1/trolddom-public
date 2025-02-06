@@ -8,6 +8,7 @@ dialogue_screen .swampman_dialogue:
 	options:
 	[
 		{ quest: .swampman_1 }
+		{ quest: .swampman_2 }		
 	]
 }
 
@@ -80,8 +81,7 @@ quest .swampman_1:
 	
 	objectives: [ .swampman_1 ]
 	level: 12
-	
-	# FIXME: rewards
+	next_quest: .swampman_2
 }
 
 ############################################################
@@ -113,6 +113,13 @@ objective .swampman_2_b:
 	}
 }
 
+{
+	${ _level: 12 }
+	item .swampman_2_a: !QUEST_REWARD_LEGS{ _string: "Swamp Lurker Leggings" _icon: icon_mail_pants_2 _constitution: 2 _healing: 1 type: armor_cloth }
+	item .swampman_2_b: !QUEST_REWARD_2H_AXE{ _string: "Monstrous Axe" _icon: icon_axe_2 _constitution: 1 _spirit: 1 _strength: 2 }
+	item .swampman_2_c: !QUEST_REWARD_HANDS{ _string: "Gauntlets of the Saint" _icon: icon_gloves_2 _constitution: 1 _strength: 1 _wisdom: 2 }
+}
+
 quest .swampman_2:
 {
 	string: "They Came From The Swamp"
@@ -141,6 +148,6 @@ quest .swampman_2:
 	level: 12
 	objectives: [ .swampman_2_a .swampman_2_b ]
 	prerequisites: [ .swampman_1 ]
-	# FIXME rewards
+	reward_one_item: [ .swampman_2_a .swampman_2_b .swampman_2_c ]
 }
 

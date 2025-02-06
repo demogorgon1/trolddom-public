@@ -86,8 +86,6 @@ quest .thora_1:
 	objectives: [ .thora_1 ]
 	level: 13
 	next_quest: .thora_2 
-
-	# FIXME: rewards
 }
 
 ############################################################
@@ -152,8 +150,7 @@ quest .thora_2:
 	quest_items: [ .thora_2_quest_item ]
 	reward_all_items: [ .thora_2_quest_item ]
 	prerequisites: [ .thora_1 ]
-	level: 14
-	# FIXME: rewards
+	level: 14	
 }
 
 entity thalvaron_thora_2_return_portal:

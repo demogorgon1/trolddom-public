@@ -52,6 +52,13 @@ objective .bramli_stonestride_1:
 	collect_items: { item: .bramli_stonestride_1_quest_item count: 1 }
 }
 
+{
+	${ _level: 15 }
+	item .bramli_stonestride_1_a: !QUEST_REWARD_FEET{ _string: "Stomping Boots" _icon: icon_boots_1 _dexterity: 2 _constitution: 1 type: armor_cloth }
+	item .bramli_stonestride_1_b: !QUEST_REWARD_SHOULDERS{ _string: "Chainmail Shoulders" _icon: icon_shoulders_1 _spirit: 1 _wisdom: 2 type: armor_mail }
+	item .bramli_stonestride_1_c: !QUEST_REWARD_WRISTS{ _string: "Steel Armguards" _icon: icon_plate_bracers_1 _strength: 3 _constitution: 1 type: armor_plate }
+}
+
 quest .bramli_stonestride_1:
 {
 	string: "Giant Furry Spiders"
@@ -80,7 +87,6 @@ quest .bramli_stonestride_1:
 
 	level: 15
 	objectives: [ .bramli_stonestride_1 ]
-	
-	# FIXME: rewards
+	reward_one_item: [ .bramli_stonestride_1_a .bramli_stonestride_1_b .bramli_stonestride_1_c ]
 }
 

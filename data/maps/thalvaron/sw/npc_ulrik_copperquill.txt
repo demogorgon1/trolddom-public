@@ -82,8 +82,6 @@ quest .ulrik_copperquill_1:
 	objectives: [ .ulrik_copperquill_1 ]
 	level: 14
 	next_quest: .ulrik_copperquill_2
-	
-	# FIXME: rewards
 }
 
 ############################################################
@@ -108,6 +106,12 @@ objective .ulrik_copperquill_2:
 	maps: [ thalvaron ]
 	
 	collect_items: { item: .ulrik_copperquill_2_quest_item count: 6 }
+}
+
+{
+	${ _level: 14 }
+	item .ulrik_copperquill_2_a: !QUEST_REWARD_NECK{ _string: "Amulet of Dwarven Magic" _icon: icon_necklace_2 _wisdom: 2 _spell_damage: 1 }
+	item .ulrik_copperquill_2_b: !QUEST_REWARD_NECK{ _string: "Amulet of the Fighter" _icon: icon_necklace_1 _strength: 1 _constitution: 1 _dexterity: 1 }
 }
 
 quest .ulrik_copperquill_2:
@@ -137,8 +141,7 @@ quest .ulrik_copperquill_2:
 	objectives: [ .ulrik_copperquill_2 ]
 	prerequisites: [ .ulrik_copperquill_1 ]
 	level: 14
-	
-	# FIXME: rewards
+	reward_one_item: [ .ulrik_copperquill_2_a .ulrik_copperquill_2_b ]
 }
 
 ############################################################
@@ -181,7 +184,7 @@ quest .ulrik_copperquill_3:
 	prerequisites: [ .ulrik_copperquill_2 ]
 	level: 15
 	quest_items: [ .ulrik_copperquill_3_quest_item ]
-	
-	# FIXME: rewards
+	reward_xp_multiplier: 0.4
+	reward_cash_multiplier: 0.4
 }
 
