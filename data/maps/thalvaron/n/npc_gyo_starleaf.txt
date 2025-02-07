@@ -83,6 +83,13 @@ objective .gyo_starleaf_1:
 	collect_items: { item: .gyo_starleaf_1_quest_item count: 1 }
 }
 
+{
+	${ _level: 15 }
+	item .gyo_starleaf_1_a: !QUEST_REWARD_FEET{ _string: "Chain Striders" _icon: icon_mail_feet_1 _constitution: 1 _strength: 2 type: armor_mail }
+	item .gyo_starleaf_1_b: !QUEST_REWARD_WAIST{ _string: "Elf-Steel Belt" _icon: icon_mail_belt_1 _constitution: 2 _strength: 1 type: armor_plate }
+	item .gyo_starleaf_1_c: !QUEST_REWARD_SHOULDERS{ _string: "Scarf of Elven Wisdom" _icon: icon_shoulders_2 _wisdom: 1 _constitution: 1 type: armor_cloth }
+}
+
 quest .gyo_starleaf_1:
 {
 	string: "Den of Thieves"
@@ -111,7 +118,6 @@ quest .gyo_starleaf_1:
 
 	objectives: [ .gyo_starleaf_1 ]
 	level: 15
-	
-	# FIXME: rewards
+	reward_one_item: [ .gyo_starleaf_1_a .gyo_starleaf_1_b .gyo_starleaf_1_c ]
 }
 

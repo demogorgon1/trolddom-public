@@ -78,7 +78,7 @@ quest .doctor_hulius_camp_1:
 	
 	completion:
 	[
-		"FIXME"
+		"Please help!"
 	]
 
 	level: 14

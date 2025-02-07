@@ -52,6 +52,13 @@ objective .deputy_ravenreach_1:
 	collect_items: { item: .deputy_ravenreach_1_quest_item count: 1 }
 }
 
+{
+	${ _level: 16 }
+	item .deputy_ravenreach_1_a: !QUEST_REWARD_HANDS{ _string: "Gauntlet of Slaying Trolls" _icon: icon_gloves_1 _strength: 1 _dexterity: 2 type: armor_plate }
+	item .deputy_ravenreach_1_b: !QUEST_REWARD_HEAD{ _string: "Dark Vision Headwrap" _icon: icon_wizard_hat_3 _constitution: 1 _wisdom: 2 type: armor_cloth }
+	item .deputy_ravenreach_1_c: !QUEST_REWARD_WAIST{ _string: "Steelbound Girdle" _icon: icon_belt_2 _constitution: 1 _healing: 1 type: armor_mail }
+}
+
 quest .deputy_ravenreach_1:
 {
 	string: "It Came Out of the Rocks!"
@@ -79,6 +86,5 @@ quest .deputy_ravenreach_1:
 
 	objectives: [ .deputy_ravenreach_1 ]
 	level: 16
-
-	# FIXME: rewards
+	reward_one_item: [ .deputy_ravenreach_1_a .deputy_ravenreach_1_b .deputy_ravenreach_1_c ]
 }

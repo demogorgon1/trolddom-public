@@ -145,8 +145,6 @@ quest .sheila_urkins_1:
 
 	objectives: [ .sheila_urkins_1_a .sheila_urkins_1_b ]
 	level: 15
-
-	# FIXME: rewards
 }
 
 ############################################################
@@ -205,6 +203,13 @@ objective .sheila_urkins_2:
 	collect_items: { item: .sheila_urkins_2_quest_item count: 5 }
 }
 
+{
+	${ _level: 15 }
+  	item .sheila_urkins_2_a: !QUEST_REWARD_1H_KNIFE{ _string: "Creepy Demonblade" _icon: icon_knife_2 _constitution: 1 _spell_damage: 2 }
+  	item .sheila_urkins_2_b: !QUEST_REWARD_WAIST{ _string: "Dark Steel Belt" _icon: icon_mail_belt_3 _constitution: 1 _strength: 1 _dexterity: 1 }
+  	item .sheila_urkins_2_c: !QUEST_REWARD_HEAD{ _string: "Scowl of the Witch" _icon: icon_wizard_hat_2 _constitution: 1 _wisdom: 1 }
+}	   
+
 quest .sheila_urkins_2:
 {
 	string: "Flowers for Something Dead"
@@ -233,6 +238,5 @@ quest .sheila_urkins_2:
 	objectives: [ .sheila_urkins_2 ]
 	level: 15
 	prerequisites: [ .sheila_urkins_1 ]
-
-	# FIXME: rewards
+	reward_one_item: [ .sheila_urkins_2_a .sheila_urkins_2_b .sheila_urkins_2_c ]
 }

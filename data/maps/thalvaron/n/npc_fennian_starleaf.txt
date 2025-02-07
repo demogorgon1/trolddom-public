@@ -116,8 +116,6 @@ quest .fennian_starleaf_1:
 
 	objectives: [ .fennian_starleaf_1 ]
 	level: 14
-
-	# FIXME: rewards
 }
 
 ############################################################
@@ -134,6 +132,13 @@ objective .fennian_starleaf_2:
 		entities: [ thalvaron_duskwhisper_owlbear ]
 		count: 5
 	}
+}
+
+{
+	${ _level: 15 }
+	item .fennian_starleaf_2_a: !QUEST_REWARD_WRISTS{ _string: "Lost Elven Cuffs" _icon: icon_bracers_3 _wisdom: 2 _spirit: 1 type: armor_cloth }
+	item .fennian_starleaf_2_b: !QUEST_REWARD_WRISTS{ _string: "Guards of the Elf Lord" _icon: icon_bracers_1 _constitution: 2 _wisdom: 1 type: armor_mail }	
+	item .fennian_starleaf_2_c: !QUEST_REWARD_WAIST{ _string: "Belt of the Dusk" _icon: icon_cloth_belt_1 _constitution: 1 _strength: 1 _spirit: 1 type: armor_plate }	
 }
 
 quest .fennian_starleaf_2:
@@ -166,8 +171,7 @@ quest .fennian_starleaf_2:
 	objectives: [ .fennian_starleaf_2 ]
 	prerequisites: [ .fennian_starleaf_1 ]
 	level: 15
-
-	# FIXME: rewards
+	reward_one_item: [ .fennian_starleaf_2_a .fennian_starleaf_2_b .fennian_starleaf_2_c ]
 }
 
 ############################################################

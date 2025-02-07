@@ -53,6 +53,12 @@ item .gash_hewitt_1_quest_item:
 	stack: 5 
 }
 
+{
+	${ _level: 14 }
+	item .gash_hewitt_1_a: !QUEST_REWARD_1H_KNIFE{ _string: "Rusty Old Dagger" _icon: icon_knife_2 _constitution: 1 }
+	item .gash_hewitt_1_b: !QUEST_REWARD_BACK{ _string: "Gash Hewitt's Cloak" _icon: icon_cape_1 _constitution: 1 _dexterity: 2 }
+}
+
 quest .gash_hewitt_1:
 {
 	string: "Gone Shopping"
@@ -81,7 +87,6 @@ quest .gash_hewitt_1:
 
 	objectives: [ .gash_hewitt_1 ]
 	level: 14
-
-	# FIXME: rewards
+	reward_one_item: [ .gash_hewitt_1_a .gash_hewitt_1_b ]
 }
 

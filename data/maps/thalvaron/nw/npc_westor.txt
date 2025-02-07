@@ -145,8 +145,7 @@ quest .westor_2:
 	level: 11
 	prerequisites: [ .westor_1 .fernwick_inn_keeper_1 ]
 	reward_xp_multiplier: 0.2
-	
-	# FIXME: rewards
+	reward_all_items: [ consumable_ironbrew_stout ]
 }
 
 ############################################################

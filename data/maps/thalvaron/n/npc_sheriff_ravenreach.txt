@@ -48,6 +48,12 @@ objective .sheriff_ravenreach_1:
 	}
 }
 
+{
+	${ _level: 16 }
+  	item .sheriff_ravenreach_1_a: !QUEST_REWARD_LEGS{ _string: "Bite-Proof Legguards" _icon: icon_head_8 _constitution: 1 _strength: 1 type: armor_plate }
+  	item .sheriff_ravenreach_1_b: !QUEST_REWARD_FEET{ _string: "Light Fabric Shoes" _icon: icon_shoe_1 _constitution: 2 _wisdom: 1 type: armor_cloth }
+}	 
+
 quest .sheriff_ravenreach_1:
 {
 	string: "Town Under Siege"
@@ -74,6 +80,5 @@ quest .sheriff_ravenreach_1:
 
 	objectives: [ .sheriff_ravenreach_1 ]
 	level: 16
-
-	# FIXME: rewards
+	reward_one_item: [ .sheriff_ravenreach_1_a .sheriff_ravenreach_1_b ]
 }

@@ -53,11 +53,11 @@ quest .ranger_fremalt_1:
 	
 	completion:
 	[
-		"FIXME"
+		"Welcome to the Iceveil Highlands. Hope you brought warm socks."
 	]
 
 	level: 12
-	reward_xp_multiplier: 0.15
-	# FIXME rewards
+	reward_xp_multiplier: 0.3
+	reward_cash_multiplier: 0.3
 }
 

@@ -126,7 +126,6 @@ quest .nook_morrow_1:
 	objectives: [ .nook_morrow_1 ]
 	next_quest: .nook_morrow_2
 	prerequisites: [ .ronja_frostmane_3 ]
-	# FIXME rewards
 }
 
 ############################################################
@@ -254,7 +253,7 @@ quest .nook_morrow_2:
 	quest_items: [ .nook_morrow_2_quest_item ]
 	objectives: [ .nook_morrow_2 ]
 	prerequisites: [ .nook_morrow_1 ]
-	
+	next_quest: .nook_morrow_3
 }
 
 ############################################################
@@ -268,13 +267,20 @@ item .nook_morrow_3_quest_item:
 	string: "Wandering Owlbear Feather"
 }
 	   
+{
+	${ _level: 14 }
+	item .nook_morrow_3_a: !QUEST_REWARD_WRISTS{ _string: "Wristguards of the Owlbear" _icon: icon_bracers_2 _wisdom: 1 _healing: 1 type: armor_plate }
+	item .nook_morrow_3_b: !QUEST_REWARD_WAIST{ _string: "Silk Wrap" _icon: icon_cloth_belt_3 _wisdom: 2 _spirit: 1 type: armor_cloth }
+	item .nook_morrow_3_c: !QUEST_REWARD_FEET{ _string: "Armored Trudgers" _icon: icon_mail_boots_1 _strength: 2 _constitution: 3 _dexterity: 1 type: armor_plate }
+}
+	   
 quest .nook_morrow_3:
 {
 	string: "Owlbear Research"
 	
 	text:
 	[
-		"Locate the wandering owlbear, tranqualize it, and return one of its feathers to Nook Morrow."
+		"Locate the wandering owlbear, tranqualize it, and return one of its feathers to Fennian in Edmund's Haunt."
 	]
 	
 	description: 
@@ -297,5 +303,6 @@ quest .nook_morrow_3:
 	quest_items: [ .nook_morrow_3_quest_item ]
 	prerequisites: [ .nook_morrow_2 ]
 	reward_xp_multiplier: 0.15
-	reward_cash_multiplier: 0.5
+	reward_cash_multiplier: 0.5	
+	reward_one_item: [ .nook_morrow_3_a .nook_morrow_3_b .nook_morrow_3_c ]
 }

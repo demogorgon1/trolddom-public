@@ -83,7 +83,7 @@ quest .pearly_a_1:
 	
 	completion:
 	[
-		"FIXME."
+		"That looks delicious! Feed me!"
 	]
 
 	level: 16

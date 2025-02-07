@@ -56,6 +56,11 @@ item .warden_moonwatcher_1_quest_item:
 	stack: 6
 }
 
+{
+	${ _level: 17 }
+  	item .warden_moonwatcher_1_a: !QUEST_REWARD_NECK{ _string: "Necklace of the Warden" _icon: icon_necklace_3 _constitution: 2 _spirit: 1 }
+}	 
+
 quest .warden_moonwatcher_1:
 {
 	string: "Clearing the Woods"
@@ -82,8 +87,7 @@ quest .warden_moonwatcher_1:
 
 	objectives: [ .warden_moonwatcher_1 ]
 	level: 17
-
-	# FIXME: rewards
+	reward_all_items: [ .warden_moonwatcher_1_a ]
 }
 
 ############################################################
@@ -127,8 +131,6 @@ quest .warden_moonwatcher_2:
 	reward_xp_multiplier: 0.5
 	reward_cash_multiplier: 0
 	quest_items: [ .warden_moonwatcher_2_quest_item ]
-
-	# FIXME: rewards
 }
 
 

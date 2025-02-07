@@ -83,8 +83,6 @@ quest .foramil_1:
 	objectives: [ .foramil_1 ]
 	level: 17
 	next_quest: .foramil_2
-
-	# FIXME: rewards
 }
 
 ############################################################
@@ -96,6 +94,12 @@ item .foramil_2_quest_item:
 	item_level: 17
 	flags: [ not_sellable unique ]
 	string: "Bundle of Splinters"
+}
+
+{
+	${ _level: 17 }
+	item .foramil_2_a: !QUEST_REWARD_HANDS{ _string: "Elven Handwraps" _icon: icon_cloth_hands_1 _wisdom: 2 _spirit: 1 _constitution: 1 type: armor_cloth }
+	item .foramil_2_b: !QUEST_REWARD_HANDS{ _string: "Grasps of the Forest" _icon: icon_gloves_1 _strength: 2 _constitution: 1 type: armor_plate }
 }
 
 quest .foramil_2:
@@ -126,7 +130,6 @@ quest .foramil_2:
 	prerequisites: [ .foramil_1 ]
 	reward_xp_multiplier: 0.3
 	reward_cash_multiplier: 0.3
-
-	# FIXME: rewards
+	reward_one_item: [ .foramil_2_a .foramil_2_b ]
 }
 

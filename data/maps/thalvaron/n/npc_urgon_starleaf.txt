@@ -98,7 +98,7 @@ quest .urgon_starleaf_1:
 	
 	completion:
 	[
-		"FIXME"
+		"Hmm, interesting."
 	]
 
 	level: 18

@@ -71,6 +71,11 @@ objective .warden_tylior_1_c:
 	}
 }
 
+{
+	${ _level: 19 }
+  	item .warden_tylior_1_a: !QUEST_REWARD_BACK{ _string: "Cape of Undeath" _icon: icon_cape_1 _constitution: 2 _spirit: 1 type: armor_cloth }
+}	 
+
 quest .warden_tylior_1:
 {
 	string: "Skeletal Captains"
@@ -98,6 +103,5 @@ quest .warden_tylior_1:
 
 	objectives: [ .warden_tylior_1_a .warden_tylior_1_b .warden_tylior_1_c ]
 	level: 19
-
-	# FIXME: rewards
+	reward_one_item: [ .warden_tylior_1_a ]
 }

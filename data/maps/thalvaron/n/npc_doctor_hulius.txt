@@ -78,6 +78,13 @@ objective .doctor_hulius_1:
 	}
 }
 
+{
+	${ _level: 14 }
+	item .doctor_hulius_1_a: !QUEST_REWARD_NECK{ _string: "Shiny Rock Necklace" _icon: icon_necklace_2 _strength: 1 _spirit: 1 _constitution: 1 }
+	item .doctor_hulius_1_b: !QUEST_REWARD_HEAD{ _string: "Troll Skullcap" _icon: icon_head_3 _strength: 2 _constitution: 1 type: armor_mail }
+	item .doctor_hulius_1_c: !QUEST_REWARD_LEGS{ _string: "Swift Pantaloons" _icon: icon_pants_2 _wisdom: 1 _constitution: 1 _spirit: 1 type: armor_cloth }
+}
+
 quest .doctor_hulius_1:
 {
 	string: "Camping: Not As Fun As Imagined"
@@ -89,7 +96,7 @@ quest .doctor_hulius_1:
 	
 	description: 
 	[
-		"FIXME"
+		"Help! The foul creature has put me in this cage! I don't know why! Can you please get me back to the town? It might come back soon, hurry!"
 	]
 
 	progress:
@@ -99,9 +106,10 @@ quest .doctor_hulius_1:
 	
 	completion:
 	[
-		"FIXME"
+		"Good job, here take one of these as your reward."
 	]
 
 	level: 14
 	objectives: [ .doctor_hulius_1 ]
+	reward_one_item: [ .doctor_hulius_1_a .doctor_hulius_1_b .doctor_hulius_1_c ]
 }

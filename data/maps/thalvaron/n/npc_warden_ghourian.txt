@@ -79,6 +79,12 @@ quest .warden_ghourian_1:
 ############################################################
 # Quest 2
 
+{
+	${ _level: 18 }
+  	item .warden_ghourian_2_a: !QUEST_REWARD_HANDS{ _string: "Orcbane Grips" _icon: icon_mail_gloves_1 _strength: 1 _dexterity: 1 type: armor_mail }
+  	item .warden_ghourian_2_b: !QUEST_REWARD_HANDS{ _string: "Soothsayer's Gloves" _icon: icon_gloves_3 _wisdom: 1 _healing: 2 type: armor_cloth }
+}	 
+
 quest .warden_ghourian_2:
 {
 	string: "Reporting the Orcs"
@@ -107,6 +113,5 @@ quest .warden_ghourian_2:
 	prerequisites: [ .warden_ghourian_1 ]
 	reward_xp_multiplier: 0.2
 	reward_cash_multiplier: 0.2
-	
-	# FIXME: rewards
+	reward_one_item: [ .warden_ghourian_2_a .warden_ghourian_2_b ]
 }

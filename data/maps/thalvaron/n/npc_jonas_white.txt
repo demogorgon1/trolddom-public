@@ -115,8 +115,6 @@ quest .jonas_white_1:
 
 	objectives: [ .jonas_white_1 ]
 	level: 15
-
-	# FIXME: rewards
 }
 
 ############################################################
@@ -171,12 +169,17 @@ quest .jonas_white_2:
 	prerequisites: [ .jonas_white_1 ]
 	objectives: [ .jonas_white_2 ]
 	level: 15
-
-	# FIXME: rewards
 }
 
 ############################################################
 # Quest 3
+
+{
+	${ _level: 15 }
+	item .jonas_white_3_a: !QUEST_REWARD_LEGS{ _string: "Digger's Chain Pantaloons" _icon: icon_mail_pants_2 _dexterity: 2 _constitution: 1 type: armor_mail }
+	item .jonas_white_3_b: !QUEST_REWARD_LEGS{ _string: "Ancient Dwarven Legguards" _icon: icon_mail_pants_1 _strength: 1 _dexterity: 1 _constitution: 1 type: armor_plate }
+	item .jonas_white_3_c: !QUEST_REWARD_LEGS{ _string: "Silk Trousers of Pain" _icon: icon_pants_1 _spell_damage: 1 _constitution: 1 type: armor_cloth }
+}
 
 quest thalvaron_jonas_white_3:
 {
@@ -208,6 +211,5 @@ quest thalvaron_jonas_white_3:
 	level: 15
 	reward_cash_multiplier: 0.2
 	reward_xp_multiplier: 0.2
-
-	# FIXME: rewards
+	reward_one_item: [ .jonas_white_3_a .jonas_white_3_b .jonas_white_3_c ]
 }

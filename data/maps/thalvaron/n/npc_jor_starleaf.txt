@@ -2,7 +2,7 @@ dialogue_screen .jor_starleaf_dialogue:
 {
 	text: 
 	[	
-		"Watch out. The dead roams in these woods."
+		"Watch out. The dead roam in these woods."
 	]		
 	
 	options:
@@ -45,6 +45,13 @@ objective .jor_starleaf_1:
 	}
 }
 
+{
+	${ _level: 17 }
+	item .jor_starleaf_1_a: !QUEST_REWARD_BACK{ _string: "Zombie-Skin Cloak" _icon: icon_cape_1 _dexterity: 1 _strength: 2 type: armor_cloth }
+	item .jor_starleaf_1_b: !QUEST_REWARD_WRISTS{ _string: "Bone-Link Bracers" _icon: icon_mail_bracers_1 _dexterity: 2 _strength: 1 type: armor_mail }
+	item .jor_starleaf_1_c: !QUEST_REWARD_WAIST{ _string: "Belt of the Forsaken" _icon: icon_mail_belt_1 _wisdom: 2 _spell_damage: 1 type: armor_cloth }
+}
+
 quest .jor_starleaf_1:
 {
 	string: "Risen Dead"
@@ -72,5 +79,5 @@ quest .jor_starleaf_1:
 
 	level: 17
 	objectives: [ .jor_starleaf_1 ]
-	# FIXME rewards
+	reward_one_item: [ .jor_starleaf_1_a .jor_starleaf_1_b .jor_starleaf_1_c ]
 }

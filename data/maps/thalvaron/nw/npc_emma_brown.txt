@@ -112,7 +112,7 @@ quest thalvaron_emma_brown_1:
 	
 	completion:
 	[
-		"FIXME"
+		"May the souls of his victims rest in peace."
 	]
 	
 	level: 17

@@ -53,7 +53,7 @@ quest .ranger_thorksen_1:
 	
 	completion:
 	[
-		"FIXME"
+		"Are you alive? Are you sure you're not undead?"
 	]
 
 	level: 16

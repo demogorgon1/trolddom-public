@@ -75,6 +75,13 @@ objective .durk_1_b:
 	collect_items: { item: .durk_1_quest_item count: 1 }
 }
 
+{
+	${ _level: 16 }
+	item .durk_1_a: !QUEST_REWARD_2H_STAFF{ _string: "Durk's Wandering Stick" _icon: icon_staff_4 _wisdom: 1 _constitution: 2 _spell_damage: 1 }
+	item .durk_1_b: !QUEST_REWARD_SHIELD{ _string: "Ancient Wood Shield" _icon: icon_shield_1 _constitution: 1 _block_value: 2 }
+	item .durk_1_c: !QUEST_REWARD_NECK{ _string: "Blessed Flower of Salvation" _icon: icon_flower_8 _wisdom: 1 _healing: 2 }
+}
+
 quest .durk_1:
 {
 	string: "The Opposite of a Tree Hugger"
@@ -102,7 +109,6 @@ quest .durk_1:
 
 	objectives: [ .durk_1_a .durk_1_b ]
 	level: 16
-
-	# FIXME: rewards
+	reward_one_item: [ .durk_1_a .durk_1_b .durk_1_c ]
 }
 

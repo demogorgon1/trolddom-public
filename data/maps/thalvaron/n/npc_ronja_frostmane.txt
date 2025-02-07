@@ -85,8 +85,6 @@ quest .ronja_frostmane_1:
 	objectives: [ .ronja_frostmane_1 ]
 	level: 13
 	next_quest: .ronja_frostmane_2 
-
-	# FIXME: rewards
 }
 
 ############################################################
@@ -112,6 +110,12 @@ item .ronja_frostmane_2_quest_item:
 	string: "Pristine Yeti Pelt"
 	stack: 5
 }
+
+{
+	${ _level: 13 }
+  	item .ronja_frostmane_2_a: !QUEST_REWARD_2H_SWORD{ _string: "Sword of the Mountain" _icon: icon_sword_3 _constitution: 1 _dexterity: 1 _strength: 2 }
+  	item .ronja_frostmane_2_b: !QUEST_REWARD_CHEST{ _string: "Frosty Wizard's Robe" _icon: icon_cloth_shirt_7 _constitution: 3 _spell_damage: 1 }	
+}	   
 
 quest .ronja_frostmane_2:
 {
@@ -141,8 +145,7 @@ quest .ronja_frostmane_2:
 	prerequisites: [ .ronja_frostmane_1 ]
 	objectives: [ .ronja_frostmane_2 ]
 	level: 13
-
-	# FIXME: rewards
+	reward_one_item: [ .ronja_frostmane_2_a .ronja_frostmane_2_b ]
 }
 
 ############################################################
@@ -185,6 +188,4 @@ quest .ronja_frostmane_3:
 	quest_items: [ .ronja_frostmane_3_quest_item ]
 	level: 13
 	reward_xp_multiplier: 0.2
-
-	# FIXME: rewards
 }

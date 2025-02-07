@@ -98,7 +98,7 @@ quest .thalorion_1:
 	
 	completion:
 	[
-		"FIXME"
+		"Hmm, that will do."
 	]
 
 	level: 18

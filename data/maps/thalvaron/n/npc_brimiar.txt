@@ -114,8 +114,6 @@ quest .brimiar_1:
 
 	objectives: [ .brimiar_1 ]
 	level: 17	
-	
-	# FIXME: rewards
 }
 
 ############################################################
@@ -128,6 +126,13 @@ objective .brimiar_2:
 	maps: [ thalvaron ]
 	
 	kill_npc: { entities: [ thalvaron_gorge_harpy ] count: 8 }	
+}
+
+{
+	${ _level: 18 }
+	item .brimiar_2_a: !QUEST_REWARD_HANDS{ _string: "Magician Mittens" _icon: icon_cloth_hands_1 _wisdom: 2 _mana_per_5: 1 type: armor_cloth }
+	item .brimiar_2_b: !QUEST_REWARD_WAIST{ _string: "Rusty Chain Girdle" _icon: icon_mail_belt_2 _strength: 1 type: armor_mail } 
+	item .brimiar_2_c: !QUEST_REWARD_SHOULDERS{ _string: "Steel Pauldrons" _icon: icon_shoulders_1 _constitution: 1 type: armor_plate }
 }
 
 quest .brimiar_2:
@@ -160,8 +165,7 @@ quest .brimiar_2:
 	objectives: [ .brimiar_2 ]
 	level: 18
 	prerequisites: [ .brimiar_1 ]
-	
-	# FIXME: rewards
+	reward_one_item: [ .brimiar_2_a .brimiar_2_b .brimiar_2_c ]
 }
 
 ############################################################
@@ -185,6 +189,12 @@ objective .brimiar_3:
 {
 	string: "Non-Poisonous Mystery Meat"
 	collect_items: { item: .brimiar_3_quest_item count: 6 }
+}
+
+{
+	${ _level: 18 }
+	item .brimiar_3_a: !QUEST_REWARD_FEET{ _string: "Magician Slippers" _icon: icon_slippers_1 _wisdom: 1 _spell_damage: 2 type: armor_cloth }
+	item .brimiar_3_b: !QUEST_REWARD_FINGER{ _string: "Bullseye Loop" _icon: icon_ring_5 _dexterity: 1 }
 }
 
 quest .brimiar_3:
@@ -215,6 +225,5 @@ quest .brimiar_3:
 	objectives: [ .brimiar_3 ]
 	level: 18
 	prerequisites: [ .brimiar_1 ]
-	
-	# FIXME: rewards
+	reward_one_item: [ .brimiar_3_a .brimiar_3_b ]
 }

@@ -83,8 +83,6 @@ quest .tyron_frostmane_1:
 	objectives: [ .tyron_frostmane_1 ]
 	level: 12
 	next_quest: .tyron_frostmane_1 
-
-	# FIXME: rewards
 }
 
 ############################################################
@@ -102,6 +100,13 @@ objective .tyron_frostmane_2:
 		count: 6
 	}
 }
+
+{
+	${ _level: 14 }
+  	item .tyron_frostmane_2_a: !QUEST_REWARD_WRISTS{ _string: "Hunter's Remorse" _icon: icon_mail_bracers_1 _constitution: 1 _dexterity: 2 type: armor_mail }
+  	item .tyron_frostmane_2_b: !QUEST_REWARD_WAIST{ _string: "Belt of Grace" _icon: icon_cloth_belt_1 _constitution: 1 _wisdom: 2 type: armor_cloth }
+  	item .tyron_frostmane_2_c: !QUEST_REWARD_SHIELD{ _string: "Shield of the Mountain Guard" _icon: icon_shield_2 _constitution: 1 }
+}	 
 
 quest .tyron_frostmane_2:
 {
@@ -131,8 +136,7 @@ quest .tyron_frostmane_2:
 	objectives: [ .tyron_frostmane_2 ]
 	level: 14
 	prerequisites: [ .tyron_frostmane_1 .ronja_frostmane_2 ]
-
-	# FIXME: rewards
+	reward_one_item: [ .tyron_frostmane_2_a .tyron_frostmane_2_b .tyron_frostmane_2_c ]
 }
 
 ############################################################
@@ -144,7 +148,7 @@ quest .tyron_frostmane_3:
 
 	text:
 	[
-		"Head south, find the pack of wolves and eliminate it."
+		"Locate Doctor Hulius in the Iceveil Highlands."
 	]
 	
 	description: 

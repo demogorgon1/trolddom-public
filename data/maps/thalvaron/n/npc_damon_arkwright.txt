@@ -79,9 +79,7 @@ quest .damon_arkwright_1:
 
 	level: 16	
 	objectives: [ .damon_arkwright_1 ]
-	next_quest: thalvaron_damon_arkwright_2
-	
-	# FIXME rewards
+	next_quest: thalvaron_damon_arkwright_2	
 }
 
 ############################################################
@@ -159,6 +157,13 @@ objective .damon_arkwright_3:
 	kill_npc: { entities: [ thalvaron_vampire_boss ] count: 1 }	
 }
 
+{
+	${ _level: 17 }
+	item .damon_arkwright_3_a: !QUEST_REWARD_CHEST{ _string: "Vestments of Magical Ability" _icon: icon_robe_4 _wisdom: 1 _constitution: 1 _spell_damage: 1 type: armor_cloth }
+	item .damon_arkwright_3_b: !QUEST_REWARD_CHEST{ _string: "Warplate of the Vampire" _icon: icon_chest_1 _strength: 1 _constitution: 1 _dexterity: 1 type: armor_plate }
+	item .damon_arkwright_3_c: !QUEST_REWARD_CHEST{ _string: "Chain Link Harness" _icon: icon_chest_3 _strength: 1 _dexterity: 1 type: armor_mail }
+}
+
 quest .damon_arkwright_3:
 {
 	string: "Slaying Kaelithor the Relentless"
@@ -184,6 +189,5 @@ quest .damon_arkwright_3:
 	prerequisites: [ thalvaron_emma_brown_1 ]
 	objectives: [ .damon_arkwright_3 ]
 	quest_items: [ thalvaron_emma_brown_1_quest_item_2 ]
-	
-	# FIXME rewards
+	reward_one_item: [ .damon_arkwright_3_a .damon_arkwright_3_b .damon_arkwright_3_c ]
 }
