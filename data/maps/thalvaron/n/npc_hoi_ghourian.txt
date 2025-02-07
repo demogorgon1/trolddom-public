@@ -189,9 +189,9 @@ objective .hoi_ghourian_3:
 
 {
 	${ _level: 16 }
-	item .hoi_ghourian_3_a: !QUEST_REWARD_SHOULDERS{ _string: "Pauldrons of the Lizard Slayer" _icon: icon_shoulders_2 _constitution: 1 _strength: 1 type: armor_plate }
-	item .hoi_ghourian_3_b: !QUEST_REWARD_CHEST{ _string: "Cave Explorer Robe" _icon: icon_robe_1 _constitution: 1 _wisdom: 1 type: armor_cloth }
-	item .hoi_ghourian_3_c: !QUEST_REWARD_WAIST{ _string: "Girdle of the Attack Dog" _icon: icon_mail_belt_3 _strength: 1 type: armor_mail }
+	item .hoi_ghourian_3_a: !QUEST_REWARD_SHOULDERS{ _string: "Pauldrons of the Lizard Slayer" _icon: icon_shoulders_2 _constitution: 1 _strength: 1 _type: armor_plate }
+	item .hoi_ghourian_3_b: !QUEST_REWARD_CHEST{ _string: "Cave Explorer Robe" _icon: icon_robe_1 _constitution: 1 _wisdom: 1 _type: armor_cloth }
+	item .hoi_ghourian_3_c: !QUEST_REWARD_WAIST{ _string: "Girdle of the Attack Dog" _icon: icon_mail_belt_3 _strength: 1 _type: armor_mail }
 }
 
 quest .hoi_ghourian_3:

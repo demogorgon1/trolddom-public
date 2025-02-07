@@ -34,8 +34,8 @@ entity thalvaron_johnson: !NPC
 
 {
 	${ _level: 12 }
-	item .johnson_1_a: !QUEST_REWARD_SHOULDERS{ _string: "Kobold-Killer Pauldrons" _icon: icon_shoulders_1 _dexterity: 1 _strength: 1 type: armor_mail }
-	item .johnson_1_b: !QUEST_REWARD_BACK{ _string: "Miner's Back-Protector" _icon: icon_cape_1 _dexterity: 1 _constitution: 1 type: armor_cloth }
+	item .johnson_1_a: !QUEST_REWARD_SHOULDERS{ _string: "Kobold-Killer Pauldrons" _icon: icon_shoulders_1 _dexterity: 1 _strength: 1 _type: armor_mail }
+	item .johnson_1_b: !QUEST_REWARD_BACK{ _string: "Miner's Back-Protector" _icon: icon_cape_1 _dexterity: 1 _constitution: 1 _type: armor_cloth }
 }
 
 objective .johnson_1:

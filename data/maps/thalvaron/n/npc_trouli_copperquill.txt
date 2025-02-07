@@ -129,9 +129,9 @@ objective .trouli_copperquill_2:
 
 {
 	${ _level: 20 _rarity: rare }
-  	item .trouli_copperquill_2_a: !QUEST_REWARD_LEGS{ _string: "Scales of Zombified Skin" _icon: icon_pants_2 _constitution: 1 _strength: 3 _dexterity: 2 type: armor_mail }
-  	item .trouli_copperquill_2_b: !QUEST_REWARD_LEGS{ _string: "Greaves of the Crypt Guardian" _icon: icon_head_7 _constitution: 3 _strength: 2 _dexterity: 1 type: armor_plate }
-  	item .trouli_copperquill_2_c: !QUEST_REWARD_SHOULDERS{ _string: "Mantle of the Dead" _icon: icon_shoulders_4 _constitution: 1 _wisdom: 1 _spell_damage: 1 type: armor_cloth }
+  	item .trouli_copperquill_2_a: !QUEST_REWARD_LEGS{ _string: "Scales of Zombified Skin" _icon: icon_pants_2 _constitution: 1 _strength: 3 _dexterity: 2 _type: armor_mail }
+  	item .trouli_copperquill_2_b: !QUEST_REWARD_LEGS{ _string: "Greaves of the Crypt Guardian" _icon: icon_head_7 _constitution: 3 _strength: 2 _dexterity: 1 _type: armor_plate }
+  	item .trouli_copperquill_2_c: !QUEST_REWARD_SHOULDERS{ _string: "Mantle of the Dead" _icon: icon_shoulders_4 _constitution: 1 _wisdom: 1 _spell_damage: 1 _type: armor_cloth }
 }	 
 
 quest .trouli_copperquill_2:

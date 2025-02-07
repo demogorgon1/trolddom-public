@@ -81,7 +81,7 @@ namespace tpublic
 
 			DataType::Id								m_dataType = DataType::INVALID_ID;
 
-			uint32_t									m_initFromDeprecatedId = 0;
+			uint32_t									m_initFromDeprecatedId = UINT32_MAX;
 			InitFromDeprecatedCallback					m_initFromDeprecatedCallback;
 			std::vector<uint32_t>						m_upgradeChain;
 

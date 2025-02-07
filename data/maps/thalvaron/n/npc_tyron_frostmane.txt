@@ -103,8 +103,8 @@ objective .tyron_frostmane_2:
 
 {
 	${ _level: 14 }
-  	item .tyron_frostmane_2_a: !QUEST_REWARD_WRISTS{ _string: "Hunter's Remorse" _icon: icon_mail_bracers_1 _constitution: 1 _dexterity: 2 type: armor_mail }
-  	item .tyron_frostmane_2_b: !QUEST_REWARD_WAIST{ _string: "Belt of Grace" _icon: icon_cloth_belt_1 _constitution: 1 _wisdom: 2 type: armor_cloth }
+  	item .tyron_frostmane_2_a: !QUEST_REWARD_WRISTS{ _string: "Hunter's Remorse" _icon: icon_mail_bracers_1 _constitution: 1 _dexterity: 2 _type: armor_mail }
+  	item .tyron_frostmane_2_b: !QUEST_REWARD_WAIST{ _string: "Belt of Grace" _icon: icon_cloth_belt_1 _constitution: 1 _wisdom: 2 _type: armor_cloth }
   	item .tyron_frostmane_2_c: !QUEST_REWARD_SHIELD{ _string: "Shield of the Mountain Guard" _icon: icon_shield_2 _constitution: 1 }
 }	 
 

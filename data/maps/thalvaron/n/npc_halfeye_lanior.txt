@@ -48,8 +48,8 @@ objective .halfeye_lanior_1:
 
 {
 	${ _level: 19 }
-	item .halfeye_lanior_1_a: !QUEST_REWARD_CHEST{ _string: "Hauberk of Dark Cleansing" _icon: icon_mail_shirt_1 _constitution: 1 _strength: 2 type: armor_mail }
-	item .halfeye_lanior_1_b: !QUEST_REWARD_LEGS{ _string: "Elven Spell-Caster Leggings" _icon: icon_pants_3 _constitution: 1 _spell_power: 2 type: armor_cloth }
+	item .halfeye_lanior_1_a: !QUEST_REWARD_CHEST{ _string: "Hauberk of Dark Cleansing" _icon: icon_mail_shirt_1 _constitution: 1 _strength: 2 _type: armor_mail }
+	item .halfeye_lanior_1_b: !QUEST_REWARD_LEGS{ _string: "Elven Spell-Caster Leggings" _icon: icon_pants_3 _constitution: 1 _spell_power: 2 _type: armor_cloth }
 	item .halfeye_lanior_1_c: !QUEST_REWARD_FINGER{ _string: "Heirloom Ring" _icon: icon_ring_6  _constitution: 1 _mana_per_5: 1 }
 }
 

@@ -228,9 +228,9 @@ objective .laura_tokins_2:
 
 {
 	${ _level: 17 }
-	item .laura_tokins_2_a: !QUEST_REWARD_HEAD{ _string: "Purple Hood" _icon: icon_wizard_hat_1 _constitution: 1 _wisdom: 2 _spell_damage: 1 type: armor_cloth }
-	item .laura_tokins_2_b: !QUEST_REWARD_FEET{ _string: "Woodland Boots" _icon: icon_mail_boots_2 _constitution: 1 _strength: 2 _spirit: 1 type: armor_plate }
-	item .laura_tokins_2_c: !QUEST_REWARD_WRISTS{ _string: "Armguards of the Healer" _icon: icon_mail_bracers_3 _constitution: 1 _wisdom: 1 _healing: 2 type: armor_plate }
+	item .laura_tokins_2_a: !QUEST_REWARD_HEAD{ _string: "Purple Hood" _icon: icon_wizard_hat_1 _constitution: 1 _wisdom: 2 _spell_damage: 1 _type: armor_cloth }
+	item .laura_tokins_2_b: !QUEST_REWARD_FEET{ _string: "Woodland Boots" _icon: icon_mail_boots_2 _constitution: 1 _strength: 2 _spirit: 1 _type: armor_plate }
+	item .laura_tokins_2_c: !QUEST_REWARD_WRISTS{ _string: "Armguards of the Healer" _icon: icon_mail_bracers_3 _constitution: 1 _wisdom: 1 _healing: 2 _type: armor_plate }
 }
 
 quest .laura_tokins_2:

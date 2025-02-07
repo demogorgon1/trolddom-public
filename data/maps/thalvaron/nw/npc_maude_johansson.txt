@@ -109,8 +109,8 @@ objective .maude_johansson_2:
 
 {
 	${ _level: 11 }
-	item .maude_johansson_2_a: !QUEST_REWARD_HANDS{ _string: "Heirloom Gauntlets" _icon: icon_plate_hands_1 _constitution: 1 _strength: 1 type: armor_plate }
-	item .maude_johansson_2_b: !QUEST_REWARD_LEGS{ _string: "Colorful Woven Leggings" _icon: icon_pants_3 _constitution: 1 _wisdom: 1 _spell_damage: 1 type: armor_cloth }
+	item .maude_johansson_2_a: !QUEST_REWARD_HANDS{ _string: "Heirloom Gauntlets" _icon: icon_plate_hands_1 _constitution: 1 _strength: 1 _type: armor_plate }
+	item .maude_johansson_2_b: !QUEST_REWARD_LEGS{ _string: "Colorful Woven Leggings" _icon: icon_pants_3 _constitution: 1 _wisdom: 1 _spell_damage: 1 _type: armor_cloth }
 }
 
 quest .maude_johansson_2:

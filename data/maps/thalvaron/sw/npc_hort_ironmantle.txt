@@ -55,9 +55,9 @@ objective .hort_ironmantle_1:
 
 {
 	${ _level: 14 }
-	item .hort_ironmantle_1_a: !QUEST_REWARD_LEGS{ _string: "Dwarven Plate Legs" _icon: icon_mail_pants_1 _strength: 2 _constitution: 3 type: armor_plate }
-	item .hort_ironmantle_1_b: !QUEST_REWARD_FEET{ _string: "Elemental Walking Shoes" _icon: icon_shoe_1 _wisdom: 2 _constitution: 1 type: armor_cloth }
-	item .hort_ironmantle_1_c: !QUEST_REWARD_SHOULDERS{ _string: "Dusty Shoulder Protectors" _icon: icon_shoulders_1 _spirit: 1 _constitution: 2 type: armor_mail }
+	item .hort_ironmantle_1_a: !QUEST_REWARD_LEGS{ _string: "Dwarven Plate Legs" _icon: icon_mail_pants_1 _strength: 2 _constitution: 3 _type: armor_plate }
+	item .hort_ironmantle_1_b: !QUEST_REWARD_FEET{ _string: "Elemental Walking Shoes" _icon: icon_shoe_1 _wisdom: 2 _constitution: 1 _type: armor_cloth }
+	item .hort_ironmantle_1_c: !QUEST_REWARD_SHOULDERS{ _string: "Dusty Shoulder Protectors" _icon: icon_shoulders_1 _spirit: 1 _constitution: 2 _type: armor_mail }
 }
 
 quest .hort_ironmantle_1:

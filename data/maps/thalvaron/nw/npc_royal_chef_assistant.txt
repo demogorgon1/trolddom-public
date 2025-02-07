@@ -55,9 +55,9 @@ objective .royal_chef_assistant_1:
 
 {
 	${ _level: 14 }
-	item .royal_chef_assistant_1_a: !QUEST_REWARD_WAIST{ _string: "Chef's Belt" _icon: icon_mail_belt_2 _spirit: 1 _constitution: 1 type: armor_cloth }
+	item .royal_chef_assistant_1_a: !QUEST_REWARD_WAIST{ _string: "Chef's Belt" _icon: icon_mail_belt_2 _spirit: 1 _constitution: 1 _type: armor_cloth }
 	item .royal_chef_assistant_1_b: !QUEST_REWARD_1H_MACE{ _string: "Worn Tenderizer" _icon: icon_mace_1 _strength: 1 }
-	item .royal_chef_assistant_1_c: !QUEST_REWARD_BACK{ _string: "Royal Employee's Cloak" _icon: icon_cape_3 _wisdom: 1 _constitution: 1 type: armor_cloth }
+	item .royal_chef_assistant_1_c: !QUEST_REWARD_BACK{ _string: "Royal Employee's Cloak" _icon: icon_cape_3 _wisdom: 1 _constitution: 1 _type: armor_cloth }
 }
 
 quest .royal_chef_assistant_1:

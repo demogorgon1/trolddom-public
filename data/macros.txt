@@ -158,6 +158,8 @@
 	required_level: @_level
 	icon: @_icon
 	
+	<exists _type> type: @_type
+
 	<exists _rarity> rarity: @_rarity
 	<!exists _rarity> rarity: uncommon	
 	

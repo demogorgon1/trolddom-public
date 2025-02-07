@@ -64,8 +64,8 @@ objective .borg_robertson_1:
 
 {
 	${ _level: 11 }
-	item .borg_robertson_1_a: !QUEST_REWARD_WRISTS{ _string: "Farmer's Bracers" type: armor_cloth _icon: icon_mail_bracers_2 _wisdom: 1 _constitution: 1 }
-	item .borg_robertson_1_b: !QUEST_REWARD_HANDS{ _string: "Wolf Handling Gloves" type: armor_plate _icon: icon_mail_hands_1 _strength: 1 _constitution: 1 }
+	item .borg_robertson_1_a: !QUEST_REWARD_WRISTS{ _string: "Farmer's Bracers" _type: armor_cloth _icon: icon_mail_bracers_2 _wisdom: 1 _constitution: 1 }
+	item .borg_robertson_1_b: !QUEST_REWARD_HANDS{ _string: "Wolf Handling Gloves" _type: armor_plate _icon: icon_mail_hands_1 _strength: 1 _constitution: 1 }
 }
 
 quest .borg_robertson_1:

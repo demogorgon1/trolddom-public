@@ -130,9 +130,9 @@ objective .brimiar_2:
 
 {
 	${ _level: 18 }
-	item .brimiar_2_a: !QUEST_REWARD_HANDS{ _string: "Magician Mittens" _icon: icon_cloth_hands_1 _wisdom: 2 _mana_per_5: 1 type: armor_cloth }
-	item .brimiar_2_b: !QUEST_REWARD_WAIST{ _string: "Rusty Chain Girdle" _icon: icon_mail_belt_2 _strength: 1 type: armor_mail } 
-	item .brimiar_2_c: !QUEST_REWARD_SHOULDERS{ _string: "Steel Pauldrons" _icon: icon_shoulders_1 _constitution: 1 type: armor_plate }
+	item .brimiar_2_a: !QUEST_REWARD_HANDS{ _string: "Magician Mittens" _icon: icon_cloth_hands_1 _wisdom: 2 _mana_per_5: 1 _type: armor_cloth }
+	item .brimiar_2_b: !QUEST_REWARD_WAIST{ _string: "Rusty Chain Girdle" _icon: icon_mail_belt_2 _strength: 1 _type: armor_mail } 
+	item .brimiar_2_c: !QUEST_REWARD_SHOULDERS{ _string: "Steel Pauldrons" _icon: icon_shoulders_1 _constitution: 1 _type: armor_plate }
 }
 
 quest .brimiar_2:
@@ -193,7 +193,7 @@ objective .brimiar_3:
 
 {
 	${ _level: 18 }
-	item .brimiar_3_a: !QUEST_REWARD_FEET{ _string: "Magician Slippers" _icon: icon_slippers_1 _wisdom: 1 _spell_damage: 2 type: armor_cloth }
+	item .brimiar_3_a: !QUEST_REWARD_FEET{ _string: "Magician Slippers" _icon: icon_slippers_1 _wisdom: 1 _spell_damage: 2 _type: armor_cloth }
 	item .brimiar_3_b: !QUEST_REWARD_FINGER{ _string: "Bullseye Loop" _icon: icon_ring_5 _dexterity: 1 }
 }
 

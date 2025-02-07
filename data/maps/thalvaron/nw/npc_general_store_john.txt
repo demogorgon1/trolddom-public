@@ -54,9 +54,9 @@ objective .general_store_john_1:
 
 {
 	${ _level: 10 }
-	item .general_store_john_1_a: !QUEST_REWARD_LEGS{ _string: "Valorisan Pants" _icon: icon_pants_2 _constitution: 1 _spell_damage: 1 type: armor_cloth }
-	item .general_store_john_1_b: !QUEST_REWARD_LEGS{ _string: "Valorisan Legguards" _icon: icon_mail_pants_2 _constitution: 1 _strength: 1 type: armor_plate }
-	item .general_store_john_1_c: !QUEST_REWARD_LEGS{ _string: "Valorisan Chain Leggings" _icon: icon_mail_pants_1 _dexterity: 1 _strength: 1 type: armor_mail }
+	item .general_store_john_1_a: !QUEST_REWARD_LEGS{ _string: "Valorisan Pants" _icon: icon_pants_2 _constitution: 1 _spell_damage: 1 _type: armor_cloth }
+	item .general_store_john_1_b: !QUEST_REWARD_LEGS{ _string: "Valorisan Legguards" _icon: icon_mail_pants_2 _constitution: 1 _strength: 1 _type: armor_plate }
+	item .general_store_john_1_c: !QUEST_REWARD_LEGS{ _string: "Valorisan Chain Leggings" _icon: icon_mail_pants_1 _dexterity: 1 _strength: 1 _type: armor_mail }
 }
 
 quest .general_store_john_1:

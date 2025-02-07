@@ -220,9 +220,9 @@ objective .sheriff_cunningham_3:
 
 {
 	${ _level: 14 }
-  	item .sheriff_cunningham_3_a: !QUEST_REWARD_BACK{ _string: "Mysterious Cloak" _icon: icon_cape_2 _constitution: 1 _spirit: 1 _wisdom: 1 type: armor_cloth }
-  	item .sheriff_cunningham_3_b: !QUEST_REWARD_HANDS{ _string: "Bronze Chain Gauntlets" _icon: icon_mail_gloves_2 _dexterity: 1 _strength: 1 type: armor_mail }
-  	item .sheriff_cunningham_3_c: !QUEST_REWARD_WRISTS{ _string: "Defender's Bracers" _icon: icon_mail_bracers_1 _dexterity: 1 _constitution: 1 type: armor_plate }
+  	item .sheriff_cunningham_3_a: !QUEST_REWARD_BACK{ _string: "Mysterious Cloak" _icon: icon_cape_2 _constitution: 1 _spirit: 1 _wisdom: 1 _type: armor_cloth }
+  	item .sheriff_cunningham_3_b: !QUEST_REWARD_HANDS{ _string: "Bronze Chain Gauntlets" _icon: icon_mail_gloves_2 _dexterity: 1 _strength: 1 _type: armor_mail }
+  	item .sheriff_cunningham_3_c: !QUEST_REWARD_WRISTS{ _string: "Defender's Bracers" _icon: icon_mail_bracers_1 _dexterity: 1 _constitution: 1 _type: armor_plate }
 }	   
 
 quest .sheriff_cunningham_3:

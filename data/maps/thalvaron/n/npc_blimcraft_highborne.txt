@@ -142,8 +142,8 @@ objective .blimcraft_highborne_2:
 {
 	${ _level: 19 }
 	item .blimcraft_highborne_2_a: !QUEST_REWARD_OFFHAND{ _string: "Orb of the Tower" _icon: icon_grey_orb _wisdom: 1 _mana_per_5: 2 }
-	item .blimcraft_highborne_2_b: !QUEST_REWARD_CHEST{ _string: "Ancient Chest Plate" _icon: icon_plate_chest_1 _dexterity: 1 _constitution: 1 _strength: 1 type: armor_plate }
-	item .blimcraft_highborne_2_c: !QUEST_REWARD_BACK{ _string: "Highborne Cloak" _icon: icon_cape_4 _spell_damage: 1 _wisdom: 2 type: armor_cloth }
+	item .blimcraft_highborne_2_b: !QUEST_REWARD_CHEST{ _string: "Ancient Chest Plate" _icon: icon_plate_chest_1 _dexterity: 1 _constitution: 1 _strength: 1 _type: armor_plate }
+	item .blimcraft_highborne_2_c: !QUEST_REWARD_BACK{ _string: "Highborne Cloak" _icon: icon_cape_4 _spell_damage: 1 _wisdom: 2 _type: armor_cloth }
 }
 
 quest .blimcraft_highborne_2:

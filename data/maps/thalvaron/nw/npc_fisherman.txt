@@ -106,7 +106,7 @@ objective .fisherman_2:
 {
 	${ _level: 12 }
 	item .fisherman_2_a: !QUEST_REWARD_1H_KNIFE{ _string: "Crab Tickler" _icon: icon_knife_2 _dexterity: 1 }
-	item .fisherman_2_b: !QUEST_REWARD_WAIST{ _string: "Chain-Link Waistband" _icon: icon_mail_belt_3 _spirit: 1 _constitution: 2 type: armor_mail }
+	item .fisherman_2_b: !QUEST_REWARD_WAIST{ _string: "Chain-Link Waistband" _icon: icon_mail_belt_3 _spirit: 1 _constitution: 2 _type: armor_mail }
 }
 
 quest .fisherman_2:
@@ -186,7 +186,7 @@ objective .fisherman_4:
 
 {
 	${ _level: 12 _rarity: rare }
-	item .fisherman_4_a: !QUEST_REWARD_HEAD{ _string: "Carapace Skullguard" _icon: icon_head_3 _strength: 1 _constitution: 1 type: armor_plate }
+	item .fisherman_4_a: !QUEST_REWARD_HEAD{ _string: "Carapace Skullguard" _icon: icon_head_3 _strength: 1 _constitution: 1 _type: armor_plate }
 	item .fisherman_4_b: !QUEST_REWARD_HEAD{ _string: "Scowl of the Sea" _icon: icon_wizard_hat_4 _mana_per_5: 1 _spell_damage: 1 itype: armor_cloth }
 	item .fisherman_4_c: !QUEST_REWARD_FINGER{ _string: "Salty Hoop" _icon: icon_ring_5 _wisdom: 1 _healing: 1 }
 }
@@ -260,9 +260,9 @@ item .fisherman_4_item:
 
 {
 	${ _level: 12 }
-	item .fisherman_5_a: !QUEST_REWARD_SHOULDERS{ _string: "Shoulderguards of Valoris" _icon: icon_shoulders_3 _strength: 1 _constitution: 1 type: armor_plate }
-	item .fisherman_5_b: !QUEST_REWARD_HANDS{ _string: "City Guard Gauntlets" _icon: icon_gloves_2 _strength: 1 _dexterity: 1 type: armor_mail }
-	item .fisherman_5_c: !QUEST_REWARD_HANDS{ _string: "Valorisan Gloves" _icon: icon_gloves_3 _wisdom: 1 _spirit: 1 type: armor_cloth }
+	item .fisherman_5_a: !QUEST_REWARD_SHOULDERS{ _string: "Shoulderguards of Valoris" _icon: icon_shoulders_3 _strength: 1 _constitution: 1 _type: armor_plate }
+	item .fisherman_5_b: !QUEST_REWARD_HANDS{ _string: "City Guard Gauntlets" _icon: icon_gloves_2 _strength: 1 _dexterity: 1 _type: armor_mail }
+	item .fisherman_5_c: !QUEST_REWARD_HANDS{ _string: "Valorisan Gloves" _icon: icon_gloves_3 _wisdom: 1 _spirit: 1 _type: armor_cloth }
 }
 
 quest .fisherman_5:

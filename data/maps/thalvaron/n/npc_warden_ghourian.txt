@@ -81,8 +81,8 @@ quest .warden_ghourian_1:
 
 {
 	${ _level: 18 }
-  	item .warden_ghourian_2_a: !QUEST_REWARD_HANDS{ _string: "Orcbane Grips" _icon: icon_mail_gloves_1 _strength: 1 _dexterity: 1 type: armor_mail }
-  	item .warden_ghourian_2_b: !QUEST_REWARD_HANDS{ _string: "Soothsayer's Gloves" _icon: icon_gloves_3 _wisdom: 1 _healing: 2 type: armor_cloth }
+  	item .warden_ghourian_2_a: !QUEST_REWARD_HANDS{ _string: "Orcbane Grips" _icon: icon_mail_gloves_1 _strength: 1 _dexterity: 1 _type: armor_mail }
+  	item .warden_ghourian_2_b: !QUEST_REWARD_HANDS{ _string: "Soothsayer's Gloves" _icon: icon_gloves_3 _wisdom: 1 _healing: 2 _type: armor_cloth }
 }	 
 
 quest .warden_ghourian_2:

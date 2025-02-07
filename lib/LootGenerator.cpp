@@ -136,7 +136,7 @@ namespace tpublic
 
 						Components::Lootable::AvailableLoot loot;
 						loot.m_itemInstance = aItemInstance;
-						loot.m_itemInstance.m_worldboundCharacterId = aPlayerWorldCharacterId;
+						loot.m_itemInstance.SetWorldbound(aPlayerWorldCharacterId);
 						loot.m_playerTag.SetCharacter(playerPublic->m_characterId, combatPublic->m_level);
 						loot.m_questId = item->m_questId;
 						aLootable->m_availableLoot.push_back(loot);
@@ -147,7 +147,7 @@ namespace tpublic
 			{
 				Components::Lootable::AvailableLoot loot;
 				loot.m_itemInstance = aItemInstance;
-				loot.m_itemInstance.m_worldboundCharacterId = aPlayerWorldCharacterId;			
+				loot.m_itemInstance.SetWorldbound(aPlayerWorldCharacterId);
 				aLootable->m_availableLoot.push_back(loot);
 			}
 		});

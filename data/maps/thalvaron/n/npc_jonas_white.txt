@@ -176,9 +176,9 @@ quest .jonas_white_2:
 
 {
 	${ _level: 15 }
-	item .jonas_white_3_a: !QUEST_REWARD_LEGS{ _string: "Digger's Chain Pantaloons" _icon: icon_mail_pants_2 _dexterity: 2 _constitution: 1 type: armor_mail }
-	item .jonas_white_3_b: !QUEST_REWARD_LEGS{ _string: "Ancient Dwarven Legguards" _icon: icon_mail_pants_1 _strength: 1 _dexterity: 1 _constitution: 1 type: armor_plate }
-	item .jonas_white_3_c: !QUEST_REWARD_LEGS{ _string: "Silk Trousers of Pain" _icon: icon_pants_1 _spell_damage: 1 _constitution: 1 type: armor_cloth }
+	item .jonas_white_3_a: !QUEST_REWARD_LEGS{ _string: "Digger's Chain Pantaloons" _icon: icon_mail_pants_2 _dexterity: 2 _constitution: 1 _type: armor_mail }
+	item .jonas_white_3_b: !QUEST_REWARD_LEGS{ _string: "Ancient Dwarven Legguards" _icon: icon_mail_pants_1 _strength: 1 _dexterity: 1 _constitution: 1 _type: armor_plate }
+	item .jonas_white_3_c: !QUEST_REWARD_LEGS{ _string: "Silk Trousers of Pain" _icon: icon_pants_1 _spell_damage: 1 _constitution: 1 _type: armor_cloth }
 }
 
 quest thalvaron_jonas_white_3:

@@ -199,9 +199,9 @@ objective .rumin_whiterock_3:
 
 {
 	${ _level: 16 }
-	item .rumin_whiterock_3_a: !QUEST_REWARD_LEGS{ _string: "Desert Explorer's Chain Leggings" _icon: icon_mail_pants_2 _constitution: 2 _strength: 1 type: armor_mail }
-	item .rumin_whiterock_3_b: !QUEST_REWARD_LEGS{ _string: "Vanguard Legplates" _icon: icon_mail_pants_1 _constitution: 1 _strength: 2 type: armor_plate }
-	item .rumin_whiterock_3_c: !QUEST_REWARD_WRISTS{ _string: "Harpyslayer Cuffs" _icon: icon_bracers_1 _constitution: 1 _spell_damage: 2 type: armor_cloth }
+	item .rumin_whiterock_3_a: !QUEST_REWARD_LEGS{ _string: "Desert Explorer's Chain Leggings" _icon: icon_mail_pants_2 _constitution: 2 _strength: 1 _type: armor_mail }
+	item .rumin_whiterock_3_b: !QUEST_REWARD_LEGS{ _string: "Vanguard Legplates" _icon: icon_mail_pants_1 _constitution: 1 _strength: 2 _type: armor_plate }
+	item .rumin_whiterock_3_c: !QUEST_REWARD_WRISTS{ _string: "Harpyslayer Cuffs" _icon: icon_bracers_1 _constitution: 1 _spell_damage: 2 _type: armor_cloth }
 }
 
 quest .rumin_whiterock_3:

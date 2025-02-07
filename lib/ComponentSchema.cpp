@@ -98,7 +98,7 @@ namespace tpublic
 
 			uint32_t initFromDeprecatedId = field.m_initFromDeprecatedId;
 
-			while(initFromDeprecatedId != 0)
+			while(initFromDeprecatedId != UINT32_MAX)
 			{
 				field.m_upgradeChain.push_back(initFromDeprecatedId);
 				const Field* nextField = _GetFieldById(initFromDeprecatedId);
@@ -785,7 +785,7 @@ namespace tpublic
 		{
 		case TYPE_VEC2:
 			{				
-				Vec2* t = (Vec2*)&(((const uint8_t*)aObject)[aField->m_offset]);
+				Vec2* t = (Vec2*)&(((const uint8_t*)aObject)[offset]);
 				if(!t->FromStream(aReader))
 					return false;
 			}
@@ -793,7 +793,7 @@ namespace tpublic
 
 		case TYPE_STRING:
 			{				
-				std::string* t = (std::string*)&(((const uint8_t*)aObject)[aField->m_offset]);
+				std::string* t = (std::string*)&(((const uint8_t*)aObject)[offset]);
 				if(!aReader->ReadString(*t))
 					return false;
 			}
@@ -801,7 +801,7 @@ namespace tpublic
 
 		case TYPE_BOOL:
 			{
-				bool* t = (bool*)&(((const uint8_t*)aObject)[aField->m_offset]);
+				bool* t = (bool*)&(((const uint8_t*)aObject)[offset]);
 				if(!aReader->ReadBool(*t))
 					return false;
 			}
@@ -809,7 +809,7 @@ namespace tpublic
 
 		case TYPE_INT32:
 			{
-				int32_t* t = (int32_t*)&(((const uint8_t*)aObject)[aField->m_offset]);
+				int32_t* t = (int32_t*)&(((const uint8_t*)aObject)[offset]);
 				if(!aReader->ReadInt(*t))
 					return false;
 			}
@@ -817,7 +817,7 @@ namespace tpublic
 
 		case TYPE_INT64:
 			{
-				int64_t* t = (int64_t*)&(((const uint8_t*)aObject)[aField->m_offset]);
+				int64_t* t = (int64_t*)&(((const uint8_t*)aObject)[offset]);
 				if(!aReader->ReadInt(*t))
 					return false;
 			}
@@ -825,7 +825,7 @@ namespace tpublic
 
 		case TYPE_UINT32:
 			{
-				uint32_t* t = (uint32_t*)&(((const uint8_t*)aObject)[aField->m_offset]);
+				uint32_t* t = (uint32_t*)&(((const uint8_t*)aObject)[offset]);
 				if(!aReader->ReadUInt(*t))
 					return false;
 			}
@@ -833,7 +833,7 @@ namespace tpublic
 
 		case TYPE_UINT64:
 			{
-				uint64_t* t = (uint64_t*)&(((const uint8_t*)aObject)[aField->m_offset]);
+				uint64_t* t = (uint64_t*)&(((const uint8_t*)aObject)[offset]);
 				if(!aReader->ReadUInt(*t))
 					return false;
 			}
@@ -841,7 +841,7 @@ namespace tpublic
 
 		case TYPE_FLOAT:
 			{
-				float* t = (float*)&(((const uint8_t*)aObject)[aField->m_offset]);
+				float* t = (float*)&(((const uint8_t*)aObject)[offset]);
 				if(!aReader->ReadFloat(*t))
 					return false;
 			}
@@ -849,7 +849,7 @@ namespace tpublic
 
 		case TYPE_UINT32_ARRAY:
 			{
-				std::vector<uint32_t>* t = (std::vector<uint32_t>*)&(((const uint8_t*)aObject)[aField->m_offset]);
+				std::vector<uint32_t>* t = (std::vector<uint32_t>*)&(((const uint8_t*)aObject)[offset]);
 				if(!aReader->ReadUInts(*t))
 					return false;
 			}
@@ -857,7 +857,7 @@ namespace tpublic
 
 		case TYPE_CUSTOM:
 			{
-				void* t = (void*)&(((const uint8_t*)aObject)[aField->m_offset]);
+				void* t = (void*)&(((const uint8_t*)aObject)[offset]);
 				assert(aField->m_customRead);
 				if(!aField->m_customRead(aReader, t))
 					return false;

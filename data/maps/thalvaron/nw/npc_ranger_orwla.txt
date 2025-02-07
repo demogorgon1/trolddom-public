@@ -135,8 +135,8 @@ objective .ranger_orwla_2:
 
 {
 	${ _level: 12 }
-	item .ranger_orwla_2_a: !QUEST_REWARD_HANDS{ _string: "Steel Grips" _icon: icon_gloves_2 _attack_haste: 1 _strength: 1 type: armor_plate }
-	item .ranger_orwla_2_b: !QUEST_REWARD_BACK{ _string: "Ranger's Cloak" _icon: icon_cape_1 _constitution: 1 _dexterity: 2 type: armor_cloth }
+	item .ranger_orwla_2_a: !QUEST_REWARD_HANDS{ _string: "Steel Grips" _icon: icon_gloves_2 _attack_haste: 1 _strength: 1 _type: armor_plate }
+	item .ranger_orwla_2_b: !QUEST_REWARD_BACK{ _string: "Ranger's Cloak" _icon: icon_cape_1 _constitution: 1 _dexterity: 2 _type: armor_cloth }
 	item .ranger_orwla_2_c: !QUEST_REWARD_NECK{ _string: "Lifegiving Talisman" _icon: icon_necklace_5 _constitution: 1 _healing: 2 }
 }
 

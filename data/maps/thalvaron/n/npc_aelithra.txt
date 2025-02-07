@@ -44,9 +44,9 @@ objective .aelithra_1:
 
 {
 	${ _level: 18 }
-	item .aelithra_1_a: !QUEST_REWARD_WRISTS{ _string: "Mutiny Wrists" _icon: icon_mail_bracers_3 _wisdom: 1 _constitution: 2 type: armor_cloth }
-	item .aelithra_1_b: !QUEST_REWARD_LEGS{ _string: "Scales of Gore" _icon: icon_head_7 _dexterity: 1 _constitution: 2 type: armor_plate }
-	item .aelithra_1_c: !QUEST_REWARD_WRISTS{ _string: "Healing Guards" _icon: icon_mail_bracers_2 _healing: 1 _wisdom: 2 type: armor_plate }
+	item .aelithra_1_a: !QUEST_REWARD_WRISTS{ _string: "Mutiny Wrists" _icon: icon_mail_bracers_3 _wisdom: 1 _constitution: 2 _type: armor_cloth }
+	item .aelithra_1_b: !QUEST_REWARD_LEGS{ _string: "Scales of Gore" _icon: icon_head_7 _dexterity: 1 _constitution: 2 _type: armor_plate }
+	item .aelithra_1_c: !QUEST_REWARD_WRISTS{ _string: "Healing Guards" _icon: icon_mail_bracers_2 _healing: 1 _wisdom: 2 _type: armor_plate }
 }
 
 quest .aelithra_1:

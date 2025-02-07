@@ -23,6 +23,32 @@ namespace tpublic
 			static const Persistence::Id PERSISTENCE = Persistence::ID_MAIN;
 			static const Replication REPLICATION = REPLICATION_PUBLIC;
 
+			struct SlotsV0
+			{
+				void
+				ToStream(
+					IWriter*			aWriter) const
+				{
+					for (uint32_t i = 0; i < (uint32_t)EquipmentSlot::NUM_IDS_V0; i++)
+						m_items[i].ToStream(aWriter);
+				}
+
+				bool
+				FromStream(
+					IReader*			aReader)
+				{
+					for (uint32_t i = 0; i < (uint32_t)EquipmentSlot::NUM_IDS_V0; i++)
+					{
+						if (!m_items[i].FromStream(aReader))
+							return false;
+					}
+					return true;
+				}
+
+				// Public data
+				ItemInstance	m_items[EquipmentSlot::NUM_IDS_V0];
+			};
+
 			struct Slots
 			{
 				void
@@ -116,23 +142,34 @@ namespace tpublic
 					return ItemType::ID_NONE;
 				}
 
-
 				// Public data
 				ItemInstance	m_items[EquipmentSlot::NUM_IDS];
 			};
 
 			enum Field
 			{
-				FIELD_SLOTS,
-				FIELD_VERSION
+				FIELD_SLOTS_V0,
+				FIELD_VERSION,
+				FIELD_SLOTS
 			};
 
 			static void
 			CreateSchema(
 				ComponentSchema*		aSchema)
 			{
-				aSchema->DefineCustomObjectNoSource<Slots>(FIELD_SLOTS, offsetof(EquippedItems, m_slots));
+				aSchema->DefineCustomObjectNoSource<SlotsV0>(FIELD_SLOTS_V0, UINT32_MAX);
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_VERSION, NULL, offsetof(EquippedItems, m_version));
+				aSchema->DefineCustomObjectNoSource<Slots>(FIELD_SLOTS, offsetof(EquippedItems, m_slots));
+
+				aSchema->Upgrade<SlotsV0, Slots>(FIELD_SLOTS_V0, FIELD_SLOTS, [](
+					const SlotsV0*	aFrom,
+					Slots*			aTo)
+				{
+					for (uint32_t i = 0; i < (uint32_t)EquipmentSlot::NUM_IDS_V0; i++)
+						aTo->m_items[i] = aFrom->m_items[i];
+				});
+
+				aSchema->InitUpgradeChains();
 			}
 
 			void

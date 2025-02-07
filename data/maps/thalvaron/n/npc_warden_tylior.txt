@@ -73,7 +73,7 @@ objective .warden_tylior_1_c:
 
 {
 	${ _level: 19 }
-  	item .warden_tylior_1_a: !QUEST_REWARD_BACK{ _string: "Cape of Undeath" _icon: icon_cape_1 _constitution: 2 _spirit: 1 type: armor_cloth }
+  	item .warden_tylior_1_a: !QUEST_REWARD_BACK{ _string: "Cape of Undeath" _icon: icon_cape_1 _constitution: 2 _spirit: 1 _type: armor_cloth }
 }	 
 
 quest .warden_tylior_1:

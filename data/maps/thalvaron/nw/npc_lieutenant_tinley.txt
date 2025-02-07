@@ -51,7 +51,7 @@ objective .lieutenant_tinley_1:
 {
 	${ _level: 10 }
 	item .lieutenant_tinley_1_a: !QUEST_REWARD_NECK{ _string: "Mark of the Valoris" _icon: icon_necklace_1 _health_per_5: 1 }
-	item .lieutenant_tinley_1_b: !QUEST_REWARD_CHEST{ _string: "Redeemer's Chestguard" _icon: icon_chest_3 _constitution: 1 _strength: 1 type: armor_plate }
+	item .lieutenant_tinley_1_b: !QUEST_REWARD_CHEST{ _string: "Redeemer's Chestguard" _icon: icon_chest_3 _constitution: 1 _strength: 1 _type: armor_plate }
 	item .lieutenant_tinley_1_c: !QUEST_REWARD_FINGER{ _string: "Blessed Ring" _icon: icon_ring_6 _healing: 1 _wisdom: 1 }
 }
 
@@ -129,8 +129,8 @@ objective .lieutenant_tinley_3:
 
 {
 	${ _level: 12 }
-	item .lieutenant_tinley_3_a: !QUEST_REWARD_WAIST{ _string: "Rescuer's Belt" _icon: icon_cloth_belt_1 _dexterity: 2 _constitution: 1 item_type: armor_mail }
-	item .lieutenant_tinley_3_b: !QUEST_REWARD_CHEST{ _string: "Mountain Hotel Bathrobe" _icon: icon_cloth_shirt_4 _constitution: 1 _spell_damage: 1 item_type: armor_cloth }
+	item .lieutenant_tinley_3_a: !QUEST_REWARD_WAIST{ _string: "Rescuer's Belt" _icon: icon_cloth_belt_1 _dexterity: 2 _constitution: 1 _type: armor_mail }
+	item .lieutenant_tinley_3_b: !QUEST_REWARD_CHEST{ _string: "Mountain Hotel Bathrobe" _icon: icon_cloth_shirt_4 _constitution: 1 _spell_damage: 1 _type: armor_cloth }
 	item .lieutenant_tinley_3_c: !QUEST_REWARD_2H_AXE{ _string: "Wood Chopping Axe" _icon: icon_axe_2 _strength: 1 _dexterity: 2 }
 }
 

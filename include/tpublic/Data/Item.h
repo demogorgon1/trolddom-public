@@ -186,6 +186,10 @@ namespace tpublic
 						{
 							m_questId = aChild->GetId(DataType::ID_QUEST);
 						}
+						else if (aChild->m_name == "aura")
+						{
+							m_auraId = aChild->GetId(DataType::ID_AURA);
+						}
 						else if (aChild->m_name == "rarity")
 						{
 							m_rarity = Rarity::StringToId(aChild->GetIdentifier());
@@ -296,6 +300,7 @@ namespace tpublic
 				aStream->WriteFloat(m_valueMultiplier);
 				aStream->WriteOptionalObject(m_armorStyleVisual);
 				aStream->WriteUInt(m_questId);
+				aStream->WriteUInt(m_auraId);
 			}
 
 			bool
@@ -349,6 +354,8 @@ namespace tpublic
 				if(!aStream->ReadOptionalObject(m_armorStyleVisual))
 					return false;
 				if (!aStream->ReadUInt(m_questId))
+					return false;
+				if (!aStream->ReadUInt(m_auraId))
 					return false;
 
 				m_lcString = m_string;
@@ -410,6 +417,7 @@ namespace tpublic
 			float								m_valueMultiplier = 1.0f;
 			std::optional<ArmorStyle::Visual>	m_armorStyleVisual;
 			uint32_t							m_questId = 0;
+			uint32_t							m_auraId = 0;
 
 			// Not serialized
 			std::string							m_lcString;

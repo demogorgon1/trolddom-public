@@ -91,7 +91,7 @@ objective .buck_1:
 
 {
 	${ _level: 13 }
-	item .buck_1_a: !QUEST_REWARD_BACK{ _string: "Mosquito Cover" _icon: icon_cape_1 _spirit: 1 _constitution: 2 type: armor_cloth }
+	item .buck_1_a: !QUEST_REWARD_BACK{ _string: "Mosquito Cover" _icon: icon_cape_1 _spirit: 1 _constitution: 2 _type: armor_cloth }
 	item .buck_1_b: !QUEST_REWARD_NECK{ _string: "Swamp Explorer's Amulet" _icon: icon_necklace_6 _spirit: 2 _constitution: 1 }
 }
 
@@ -183,8 +183,8 @@ objective .buck_2:
 
 {
 	${ _level: 13 }
-	item .buck_2_a: !QUEST_REWARD_WAIST{ _string: "Musky Belt" _icon: icon_cape_1 _wisdom: 1 _constitution: 2 type: armor_plate }
-	item .buck_2_b: !QUEST_REWARD_HANDS{ _string: "Gardener's Gloves" _icon: icon_gloves_3 _wisdom: 2 _constitution: 1 type: armor_cloth }
+	item .buck_2_a: !QUEST_REWARD_WAIST{ _string: "Musky Belt" _icon: icon_cape_1 _wisdom: 1 _constitution: 2 _type: armor_plate }
+	item .buck_2_b: !QUEST_REWARD_HANDS{ _string: "Gardener's Gloves" _icon: icon_gloves_3 _wisdom: 2 _constitution: 1 _type: armor_cloth }
 }
 
 quest .buck_2:

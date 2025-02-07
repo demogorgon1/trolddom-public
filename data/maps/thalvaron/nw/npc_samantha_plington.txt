@@ -87,8 +87,8 @@ entity thalvaron_samantha_plington_1_quest_item:
 
 {
 	${ _level: 10 }
-	item .samantha_plington_1_a: !QUEST_REWARD_WAIST{ _string: "Bloody Guard's Belt" _icon: icon_belt_1 _dexterity: 2 _constitution: 1 type: armor_mail }
-	item .samantha_plington_1_b: !QUEST_REWARD_WAIST{ _string: "Flimsy Wristband" _icon: icon_cloth_belt_3 _dexterity: 2 _wisdom: 1 type: armor_cloth }
+	item .samantha_plington_1_a: !QUEST_REWARD_WAIST{ _string: "Bloody Guard's Belt" _icon: icon_belt_1 _dexterity: 2 _constitution: 1 _type: armor_mail }
+	item .samantha_plington_1_b: !QUEST_REWARD_WAIST{ _string: "Flimsy Wristband" _icon: icon_cloth_belt_3 _dexterity: 2 _wisdom: 1 _type: armor_cloth }
 	item .samantha_plington_1_c: !QUEST_REWARD_CROSSBOW{ _string: "Guard's Crossbow" _icon: icon_crossbow_1 _dexterity: 1 _constitution: 1 }
 }
 

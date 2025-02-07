@@ -106,7 +106,7 @@ namespace tpublic
 					{
 						TP_CHECK(!entry.m_trading, "Item in player world stash flagged for trading.");
 
-						ItemList* destinationItemList = m_items.GetOrCreateItemList(entry.m_item.m_worldboundCharacterId);
+						ItemList* destinationItemList = m_items.GetOrCreateItemList(entry.m_item.GetWorldboundCharacterId());
 
 						if(destinationItemList->AddToInventory(entry.m_item, aManifest->GetById<Data::Item>(entry.m_item.m_itemId), true))
 							count += entry.m_item.m_quantity;
@@ -120,7 +120,7 @@ namespace tpublic
 					ItemInstance& item = aSourceEquippedItems[i];
 					if(item.IsSet() && item.IsWorldbound())
 					{
-						ItemList* destinationItemList = m_items.GetOrCreateItemList(item.m_worldboundCharacterId);
+						ItemList* destinationItemList = m_items.GetOrCreateItemList(item.GetWorldboundCharacterId());
 
 						if (destinationItemList->AddToInventory(item, aManifest->GetById<Data::Item>(item.m_itemId), true))
 							count += item.m_quantity;
