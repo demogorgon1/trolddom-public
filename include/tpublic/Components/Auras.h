@@ -161,6 +161,7 @@ namespace tpublic
 			int32_t			FilterThreat(
 								int32_t										aThreat) const;
 			void			OnCombatEvent(
+								const Manifest*								aManifest,
 								AuraEffectBase::CombatEventType				aType,
 								CombatEvent::Id								aCombatEventId,
 								uint32_t									aAbilityId,

@@ -99,8 +99,36 @@ item .foramil_2_quest_item:
 {
 	${ _level: 17 }
 	item .foramil_2_a: !QUEST_REWARD_HANDS{ _string: "Elven Handwraps" _icon: icon_cloth_hands_1 _wisdom: 2 _spirit: 1 _constitution: 1 _type: armor_cloth }
-	item .foramil_2_b: !QUEST_REWARD_HANDS{ _string: "Grasps of the Forest" _icon: icon_gloves_1 _strength: 2 _constitution: 1 _type: armor_plate }
+	item .foramil_2_b: !QUEST_REWARD_HANDS{ _string: "Grasps of the Forest" _icon: icon_gloves_1 _strength: 2 _constitution: 1 _type: armor_plate }	
+	
+	ability .foramil_2_c:
+	{
+		string: "Leaves of Faerandor"
+		states: [ default in_combat ]
+		icon: icon_seaweed
+		direct_effect heal: { function: 20 }
+	}
+	
+	aura .foramil_2_c:
+	{
+		string: "Leaves of Faerandor"
+		description: "Has a 5% chance when struck in combat of restoring 20 health."
+		type: buff
+		flags: [ item silent ]
+		icon: icon_seaweed
+		
+		aura_effect combat_event_trigger: 
+		{ 
+			combat_event<target>: hit
+			combat_event_ability_mask: [ offensive melee ]
+			ability<target>: .foramil_2_c
+			probability: 5
+		}
+	}	
+	
+	item .foramil_2_c: !QUEST_REWARD_TRINKET{ _string: "Leaves of Faerandor" _icon: icon_seaweed _aura: .foramil_2_c }
 }
+
 
 quest .foramil_2:
 {
@@ -131,5 +159,6 @@ quest .foramil_2:
 	reward_xp_multiplier: 0.3
 	reward_cash_multiplier: 0.3
 	reward_one_item: [ .foramil_2_a .foramil_2_b ]
+	reward_all_items: [ .foramil_2_c ]
 }
 

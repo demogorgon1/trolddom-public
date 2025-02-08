@@ -159,6 +159,7 @@
 	icon: @_icon
 	
 	<exists _type> type: @_type
+	<exists _aura> aura: @_aura
 
 	<exists _rarity> rarity: @_rarity
 	<!exists _rarity> rarity: uncommon	
@@ -201,3 +202,4 @@
 !define QUEST_REWARD_BOW { !QUEST_REWARD equipment_slots: [ ranged ] type: ranged_bow }
 !define QUEST_REWARD_CROSSBOW { !QUEST_REWARD equipment_slots: [ ranged ] type: ranged_crossbow }
 !define QUEST_REWARD_OFFHAND { !QUEST_REWARD equipment_slots: [ off_hand ] }
+!define QUEST_REWARD_TRINKET { !QUEST_REWARD equipment_slots: [ trinket_1 trinket_2 ] }

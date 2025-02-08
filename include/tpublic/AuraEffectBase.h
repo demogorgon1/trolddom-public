@@ -20,7 +20,7 @@ namespace tpublic
 	class AuraEffectBase
 	{
 	public:
-		typedef std::function<void(const SecondaryAbility&)> SecondaryAbilityCallback;
+		typedef std::function<void(const SecondaryAbility&, uint32_t)> SecondaryAbilityCallback;
 		
 		enum CombatEventType : uint8_t
 		{
@@ -221,6 +221,7 @@ namespace tpublic
 									IResourceChangeQueue*			/*aResourceChangeQueue*/) const { }
 		virtual MoveSpeed::Id	GetMoveSpeedModifier() const { return MoveSpeed::INVALID_ID; }
 		virtual void			OnCombatEvent(
+									const Manifest*					/*aManifest*/,
 									CombatEventType					/*aType*/,
 									CombatEvent::Id					/*aCombatEventId*/,
 									uint32_t						/*aAbilityId*/,

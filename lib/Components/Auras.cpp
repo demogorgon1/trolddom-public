@@ -194,6 +194,7 @@ namespace tpublic::Components
 
 	void		
 	Auras::OnCombatEvent(
+		const Manifest*								aManifest,
 		tpublic::AuraEffectBase::CombatEventType	aType,
 		CombatEvent::Id								aCombatEventId,
 		uint32_t									aAbilityId,
@@ -202,7 +203,7 @@ namespace tpublic::Components
 		for (const std::unique_ptr<Entry>& entry : m_entries)
 		{
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
-				effect->OnCombatEvent(aType, aCombatEventId, aAbilityId, aCallback);
+				effect->OnCombatEvent(aManifest, aType, aCombatEventId, aAbilityId, aCallback);
 		}
 	}
 
