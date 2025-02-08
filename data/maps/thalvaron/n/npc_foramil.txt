@@ -113,7 +113,7 @@ item .foramil_2_quest_item:
 	{
 		string: "Leaves of Faerandor"
 		description: "Has a 5% chance when struck in combat of restoring 20 health."
-		type: buff
+		type: hidden
 		flags: [ item silent ]
 		icon: icon_seaweed
 		
