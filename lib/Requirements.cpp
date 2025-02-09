@@ -549,6 +549,71 @@ namespace tpublic
 			return true;
 		}
 
+		bool	
+		CheckTargetItemRequirements(
+			const Manifest*									aManifest,
+			const Data::Ability::TargetItemRequirements*	aTargetItemRequirements,
+			uint32_t										aItemId)
+		{
+			if(aTargetItemRequirements == NULL)
+				return true;
+
+			const Data::Item* item = aManifest->GetById<Data::Item>(aItemId);
+			
+			if(!aTargetItemRequirements->m_equipmentSlots.empty())
+			{
+				bool ok = false;
+
+				for(EquipmentSlot::Id equipmentSlot : aTargetItemRequirements->m_equipmentSlots)
+				{
+					if(item->IsEquippableInSlot(equipmentSlot))
+					{
+						ok = true;
+						break;
+					}
+				}
+
+				if(!ok)
+					return false;
+			}
+
+			if (!aTargetItemRequirements->m_rarities.empty())
+			{
+				bool ok = false;
+
+				for (Rarity::Id rarity : aTargetItemRequirements->m_rarities)
+				{
+					if(item->m_rarity == rarity)
+					{
+						ok = true;
+						break;
+					}
+				}
+
+				if (!ok)
+					return false;
+			}
+
+			if (!aTargetItemRequirements->m_itemTypes.empty())
+			{
+				bool ok = false;
+
+				for (ItemType::Id itemType : aTargetItemRequirements->m_itemTypes)
+				{
+					if (item->m_itemType == itemType)
+					{
+						ok = true;
+						break;
+					}
+				}
+
+				if (!ok)
+					return false;
+			}
+
+			return true;
+		}
+
 	}
 
 }

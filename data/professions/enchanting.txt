@@ -1,0 +1,66 @@
+profession enchanting<primary>:
+{
+	string: "Enchanting"
+	icon: icon_enchanting
+}
+
+#!define local ENCHANTING_CRAFT
+#{
+#	string: @_string
+#	icon_from<item>: @_item
+#	description_from<item>: @_item
+#	cast_time: 20
+#	flags: [ crafting ]	
+#	states: [ default in_combat ]
+#	consume_items: @_materials
+#	produce_items: @_produce
+#	required_profession<@_skill>: enchanting
+#}
+#
+#!define local ENCHANTING_ITEM
+#{
+#	string: @_string_item
+#	icon_from<item>: @_item
+#	description_from<item>: @_item
+#	cast_time: 20
+#	flags: [ crafting ]	
+#	states: [ default in_combat ]
+#	consume_items: @_materials
+#	produce_items: @_produce
+#	required_profession<@_skill>: enchanting
+#}
+
+#####################################################
+# Disenchant
+
+ability disenchant: 
+{
+	string: "Disenchant"
+	description: "Turns target armor or weapon into useful magical reagents. Item must be uncommon or better. This will destroy the item."
+	icon: icon_disenchant
+	cast_time: 15
+	flags: [ target_item ]
+	states: [ default in_combat ]
+	required_profession<0>: enchanting
+	target_item_requirements: 
+	{
+		rarities: [ uncommon rare epic mythic ]
+		equipment_slots: [ main_hand off_hand ranged head chest legs feet shoulders wrists waist hands back neck finger_1 finger_2 trinket_1 trinket_2 ]
+	}
+	target_item_verb: "disenchant"
+	target_item_confirmation: "The item will be destroyed."
+}
+
+#####################################################
+# Enchant Shield - Minor Constitution
+
+#${
+#	_string: "Enchant Shield - Minor Constitution"
+#	_string_item: "Enchant Shield: Minor Constitution"
+#	_item: enchant_shield_minor_constitution
+#	_produce: { enchant_shield_minor_constitution: 1 } 
+#	_materials: { item_dewleaf: 2 }
+#	_skill: 0
+#}
+#
+#ability craft_enchant_shield_minor_constitution: !ENCHANTING_CRAFT{}

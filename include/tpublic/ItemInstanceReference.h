@@ -9,6 +9,8 @@ namespace tpublic
 
 	struct ItemInstanceReference
 	{
+		// IMPORTANT: assumed to be POD
+
 		enum Type : uint8_t
 		{
 			TYPE_NONE,

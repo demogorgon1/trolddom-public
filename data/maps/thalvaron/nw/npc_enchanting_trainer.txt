@@ -1,0 +1,39 @@
+dialogue_screen .enchanting_trainer_trainer:
+{
+	train_profession<0>: enchanting
+	train_profession<1>: enchanting
+	train_ability: disenchant
+}
+
+dialogue_screen .enchanting_trainer_greetings:
+{
+	text: 
+	[	
+		"Enchanted to meet you. What do you need?"
+	]
+	
+	options:
+	[
+		{ goto: .enchanting_trainer_trainer text: "Please teach me about enchanting." }
+	]
+}
+
+dialogue_root .enchanting_trainer_dialogue:
+{
+	.enchanting_trainer_greetings: { }
+}
+
+entity thalvaron_enchanting_trainer: !NPC
+{
+	_string: "Lemur Junson"
+	_guild_name: "Enchanting Trainer"
+	_dialogue_root: .enchanting_trainer_dialogue	
+	_sprite: man_54
+	_sprite_dead: man_54_dead	
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

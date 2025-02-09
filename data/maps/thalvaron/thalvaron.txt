@@ -152,6 +152,7 @@ map_entity_spawn thalvaron_clara_hawthorne: { entity thalvaron_clara_hawthorne: 
 map_entity_spawn thalvaron_alchemy_trainer: { entity thalvaron_alchemy_trainer: { init_state: default } }
 map_entity_spawn thalvaron_dwarf_liaison_officer: { entity thalvaron_dwarf_liaison_officer: { init_state: default } }
 map_entity_spawn thalvaron_emma_brown: { entity thalvaron_emma_brown: { init_state: default } }
+map_entity_spawn thalvaron_enchanting_trainer: { entity thalvaron_enchanting_trainer: { init_state: default } }
 
 # N
 map_entity_spawn thalvaron_ranger_fremalt: { entity thalvaron_ranger_fremalt: { init_state: default } }
@@ -394,6 +395,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_dwarf_liaison_officer: [ 11 58 148 ]
 	entity_spawn thalvaron_emma_brown: [ 1 59 75 ]
 	entity_spawn thalvaron_emma_brown_1_quest_item_2: [ 94 159 51 ]
+	entity_spawn thalvaron_enchanting_trainer: [ 39 115 133 ]
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				

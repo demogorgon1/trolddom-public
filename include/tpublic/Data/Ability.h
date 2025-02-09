@@ -5,6 +5,7 @@
 #include "../DirectEffectFactory.h"
 #include "../DirectEffectBase.h"
 #include "../EntityState.h"
+#include "../EquipmentSlot.h"
 #include "../Requirement.h"
 #include "../Resource.h"
 #include "../SoundEffect.h"
@@ -64,7 +65,8 @@ namespace tpublic
 				EXTENDED_FLAG_MINION_SUMMON			= 0x00000001,
 				EXTENDED_FLAG_NO_DELAY				= 0x00000002,
 				EXTENDED_FLAG_CLASS_MINION_SUMMON	= 0x00000004,
-				EXTENDED_FLAG_PRODUCE_ITEMS_TARGET	= 0x00000008
+				EXTENDED_FLAG_PRODUCE_ITEMS_TARGET	= 0x00000008,
+				EXTENDED_FLAG_TARGET_ITEM			= 0x00000010
 			};
 
 			static inline Resource::Id
@@ -158,6 +160,8 @@ namespace tpublic
 						*aOutExtendedFlags |= EXTENDED_FLAG_CLASS_MINION_SUMMON;
 					else if (strcmp(identifier, "produce_items_target") == 0 && aOutExtendedFlags != NULL)
 						*aOutExtendedFlags |= EXTENDED_FLAG_PRODUCE_ITEMS_TARGET;
+					else if (strcmp(identifier, "target_item") == 0 && aOutExtendedFlags != NULL)
+						*aOutExtendedFlags |= EXTENDED_FLAG_TARGET_ITEM;
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid ability flag.", identifier);
 				});
@@ -407,6 +411,58 @@ namespace tpublic
 				uint32_t							m_skill = 0;
 			};
 
+			struct TargetItemRequirements
+			{
+				TargetItemRequirements()
+				{
+
+				}
+
+				TargetItemRequirements(
+					const SourceNode*		aSource)
+				{
+					aSource->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if(aChild->m_name == "equipment_slots")
+							aChild->GetIdArrayWithLookup<EquipmentSlot::Id, EquipmentSlot::INVALID_ID>(m_equipmentSlots, [](const char* aString) { return EquipmentSlot::StringToId(aString); });
+						else if (aChild->m_name == "rarities")
+							aChild->GetIdArrayWithLookup<Rarity::Id, Rarity::INVALID_ID>(m_rarities, [](const char* aString) { return Rarity::StringToId(aString); });
+						else if (aChild->m_name == "item_types")
+							aChild->GetIdArrayWithLookup<ItemType::Id, ItemType::INVALID_ID>(m_itemTypes, [](const char* aString) { return ItemType::StringToId(aString); });
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					});
+				}
+
+				void	
+				ToStream(
+					IWriter*				aStream) const 
+				{
+					aStream->WritePODs(m_equipmentSlots);
+					aStream->WritePODs(m_rarities);
+					aStream->WritePODs(m_itemTypes);
+				}
+			
+				bool	
+				FromStream(
+					IReader*				aStream) 
+				{
+					if (!aStream->ReadPODs(m_equipmentSlots))
+						return false;
+					if (!aStream->ReadPODs(m_rarities))
+						return false;
+					if (!aStream->ReadPODs(m_itemTypes))
+						return false;
+					return true;
+				}
+
+				// Public data
+				std::vector<EquipmentSlot::Id>		m_equipmentSlots;
+				std::vector<Rarity::Id>				m_rarities;
+				std::vector<ItemType::Id>			m_itemTypes;
+			};
+
 			void
 			Verify() const
 			{
@@ -450,6 +506,7 @@ namespace tpublic
 			bool IsNoDelay() const { return m_extendedFlags & EXTENDED_FLAG_NO_DELAY; }
 			bool IsClassMinionSummon() const { return m_extendedFlags & EXTENDED_FLAG_CLASS_MINION_SUMMON; }
 			bool IsProduceItemsTarget() const { return m_extendedFlags & EXTENDED_FLAG_PRODUCE_ITEMS_TARGET; }
+			bool TargetItem() const { return m_extendedFlags & EXTENDED_FLAG_TARGET_ITEM; }
 
 			bool 
 			IsUsableInState(
@@ -558,6 +615,12 @@ namespace tpublic
 							m_zoneId = aMember->GetId(DataType::ID_ZONE);
 						else if(aMember->m_name == "always_target_nearby_entity")
 							m_alwaysTargetNearbyEntityId = aMember->GetId(DataType::ID_ENTITY);
+						else if(aMember->m_name == "target_item_requirements")
+							m_targetItemRequirements = std::make_unique<TargetItemRequirements>(aMember);
+						else if (aMember->m_name == "target_item_confirmation")
+							m_targetItemConfirmation = aMember->GetString();
+						else if(aMember->m_name == "target_item_verb")
+							m_targetItemVerb = aMember->GetString();
 						else
 							TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
 					}
@@ -609,6 +672,9 @@ namespace tpublic
 				aWriter->WriteUInts(m_mustHaveOneOfNearbyEntityIds);
 				aWriter->WriteUInt(m_zoneId);
 				aWriter->WriteUInt(m_alwaysTargetNearbyEntityId);
+				aWriter->WriteOptionalObjectPointer(m_targetItemRequirements);
+				aWriter->WriteString(m_targetItemVerb);
+				aWriter->WriteString(m_targetItemConfirmation);
 
 				for(uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 					aWriter->WriteUInt(m_resourceCosts[i]);
@@ -700,6 +766,12 @@ namespace tpublic
 					return false;
 				if(!aReader->ReadUInt(m_alwaysTargetNearbyEntityId))
 					return false;
+				if(!aReader->ReadOptionalObjectPointer(m_targetItemRequirements))
+					return false;
+				if(!aReader->ReadString(m_targetItemVerb))
+					return false;
+				if (!aReader->ReadString(m_targetItemConfirmation))
+					return false;
 
 				for (uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 				{
@@ -753,6 +825,9 @@ namespace tpublic
 			uint32_t											m_triggerOnlyCooldownId = 0;
 			uint32_t											m_zoneId = 0;
 			uint32_t											m_alwaysTargetNearbyEntityId = 0;
+			std::unique_ptr<TargetItemRequirements>				m_targetItemRequirements;
+			std::string											m_targetItemVerb;
+			std::string											m_targetItemConfirmation;
 		};
 
 	}

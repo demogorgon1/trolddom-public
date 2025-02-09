@@ -1,5 +1,7 @@
 #pragma once
 
+#include <tpublic/Data/Ability.h>
+
 #include "Requirement.h"
 
 namespace tpublic
@@ -33,6 +35,10 @@ namespace tpublic
 					const EntityInstance*								aTarget,
 					bool*												aOutInstant,
 					bool*												aOutOutOfRange);
+		bool	CheckTargetItemRequirements(
+					const Manifest*										aManifest,
+					const Data::Ability::TargetItemRequirements*		aTargetItemRequirements,
+					uint32_t											aItemId);
 	}
 
 }

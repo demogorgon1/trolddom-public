@@ -618,6 +618,7 @@ sprites:
 	sprite skeleton_6: { dead: skeleton_6_dead }
 	sprite wolf_6: { dead: wolf_6_dead }
 	sprite owlbear_4: { dead: owlbear_4_dead }
+	sprite man_54: { dead: man_54_dead }
 
 	cursor: { position: [ 0 528 ] }
 	sprite skeleton_4_dead: { }
@@ -635,6 +636,7 @@ sprites:
 	sprite skeleton_6_dead: { }
 	sprite wolf_6_dead: { }
 	sprite owlbear_4_dead: { }
+	sprite man_54_dead: { }
 
 }
 

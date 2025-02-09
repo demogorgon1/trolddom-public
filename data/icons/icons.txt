@@ -609,6 +609,12 @@ sprites:
 
 	cursor: { position: [ 0 528 ] }		
 	sprite icon_mug_1 : { tags: [ icon ] }
+	sprite icon_enchanting : { tags: [ icon ] }
+	sprite icon_empty_paper : { tags: [ icon ] }
+	sprite icon_enchanted_paper : { tags: [ icon ] }
+	sprite icon_magic_dust_1 : { tags: [ icon ] }
+	sprite icon_disenchant : { tags: [ icon ] }
+	
 	
 }
 
