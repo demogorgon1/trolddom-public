@@ -614,6 +614,7 @@ sprites:
 	sprite icon_enchanted_paper : { tags: [ icon ] }
 	sprite icon_magic_dust_1 : { tags: [ icon ] }
 	sprite icon_disenchant : { tags: [ icon ] }
+	sprite icon_magic_crystal_1 : { tags: [ icon ] }
 	
 	
 }

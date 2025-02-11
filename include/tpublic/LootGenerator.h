@@ -21,37 +21,40 @@ namespace tpublic
 	public:
 		typedef std::function<void(const tpublic::ItemInstance&)> ItemCallback;
 
-					LootGenerator(
-						const Manifest*								aManifest);			
-					~LootGenerator();
+						LootGenerator(
+							const Manifest*								aManifest);			
+						~LootGenerator();
 
-		void		GenerateLootable(
-						std::mt19937&								aRandom,
-						const std::vector<const EntityInstance*>&	aPlayerEntityInstances,
-						const EntityInstance*						aLootableEntityInstance,
-						uint32_t									aLevel,
-						uint32_t									aCreatureTypeId,
-						bool										aIsElite,
-						uint32_t									aPlayerWorldCharacterId,
-						Components::Lootable*						aLootable) const;
-		void		GenerateLootableItems(
-						std::mt19937&								aRandom,
-						const std::vector<const EntityInstance*>&	aPlayerEntityInstances,
-						const EntityInstance*						aLootableEntityInstance,
-						uint32_t									aLevel,
-						uint32_t									aCreatureTypeId,
-						const Data::LootTable*						aLootTable,
-						uint32_t									aPlayerWorldCharacterId,
-						Components::Lootable*						aLootable) const;
-		void		GenerateItems(
-						std::mt19937&								aRandom,
-						const std::vector<const EntityInstance*>&	aPlayerEntityInstances,
-						const EntityInstance*						aLootableEntityInstance,
-						uint32_t									aLevel,
-						uint32_t									aCreatureTypeId,
-						const Data::LootTable*						aLootTable,
-						ItemCallback								aItemCallback) const;						
+		void			GenerateLootable(
+							std::mt19937&								aRandom,
+							const std::vector<const EntityInstance*>&	aPlayerEntityInstances,
+							const EntityInstance*						aLootableEntityInstance,
+							uint32_t									aLevel,
+							uint32_t									aCreatureTypeId,
+							bool										aIsElite,
+							uint32_t									aPlayerWorldCharacterId,
+							Components::Lootable*						aLootable) const;
+		void			GenerateLootableItems(
+							std::mt19937&								aRandom,
+							const std::vector<const EntityInstance*>&	aPlayerEntityInstances,
+							const EntityInstance*						aLootableEntityInstance,
+							uint32_t									aLevel,
+							uint32_t									aCreatureTypeId,
+							const Data::LootTable*						aLootTable,
+							uint32_t									aPlayerWorldCharacterId,
+							Components::Lootable*						aLootable) const;
+		void			GenerateItems(
+							std::mt19937&								aRandom,
+							const std::vector<const EntityInstance*>&	aPlayerEntityInstances,
+							const EntityInstance*						aLootableEntityInstance,
+							uint32_t									aLevel,
+							uint32_t									aCreatureTypeId,
+							const Data::LootTable*						aLootTable,
+							ItemCallback								aItemCallback) const;						
 
+		// Data access
+		const Manifest*	GetManifest() const { return m_manifest; }
+		
 	private:
 
 		const Manifest*					m_manifest;

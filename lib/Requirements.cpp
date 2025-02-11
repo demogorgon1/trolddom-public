@@ -18,6 +18,7 @@
 #include <tpublic/Data/Quest.h>
 
 #include <tpublic/EntityInstance.h>
+#include <tpublic/ItemProspect.h>
 #include <tpublic/Manifest.h>
 
 namespace tpublic
@@ -553,12 +554,19 @@ namespace tpublic
 		CheckTargetItemRequirements(
 			const Manifest*									aManifest,
 			const Data::Ability::TargetItemRequirements*	aTargetItemRequirements,
+			const ItemProspect*								aTargetItemProspect,
 			uint32_t										aItemId)
 		{
 			if(aTargetItemRequirements == NULL)
 				return true;
 
 			const Data::Item* item = aManifest->GetById<Data::Item>(aItemId);
+
+			if(aTargetItemRequirements->m_mustBeSellable && item->IsNotSellable())
+				return false;
+
+			if(aTargetItemProspect != NULL && !aTargetItemProspect->CanResolve(item))
+				return false;
 			
 			if(!aTargetItemRequirements->m_equipmentSlots.empty())
 			{

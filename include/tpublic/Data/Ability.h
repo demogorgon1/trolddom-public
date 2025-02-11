@@ -6,6 +6,7 @@
 #include "../DirectEffectBase.h"
 #include "../EntityState.h"
 #include "../EquipmentSlot.h"
+#include "../ItemProspect.h"
 #include "../Requirement.h"
 #include "../Resource.h"
 #include "../SoundEffect.h"
@@ -430,6 +431,8 @@ namespace tpublic
 							aChild->GetIdArrayWithLookup<Rarity::Id, Rarity::INVALID_ID>(m_rarities, [](const char* aString) { return Rarity::StringToId(aString); });
 						else if (aChild->m_name == "item_types")
 							aChild->GetIdArrayWithLookup<ItemType::Id, ItemType::INVALID_ID>(m_itemTypes, [](const char* aString) { return ItemType::StringToId(aString); });
+						else if(aChild->m_name == "must_be_sellable")
+							m_mustBeSellable = aChild->GetBool();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					});
@@ -442,6 +445,7 @@ namespace tpublic
 					aStream->WritePODs(m_equipmentSlots);
 					aStream->WritePODs(m_rarities);
 					aStream->WritePODs(m_itemTypes);
+					aStream->WriteBool(m_mustBeSellable);
 				}
 			
 				bool	
@@ -454,6 +458,8 @@ namespace tpublic
 						return false;
 					if (!aStream->ReadPODs(m_itemTypes))
 						return false;
+					if(!aStream->ReadBool(m_mustBeSellable))
+						return false;
 					return true;
 				}
 
@@ -461,6 +467,7 @@ namespace tpublic
 				std::vector<EquipmentSlot::Id>		m_equipmentSlots;
 				std::vector<Rarity::Id>				m_rarities;
 				std::vector<ItemType::Id>			m_itemTypes;
+				bool								m_mustBeSellable = false;
 			};
 
 			void
@@ -621,6 +628,8 @@ namespace tpublic
 							m_targetItemConfirmation = aMember->GetString();
 						else if(aMember->m_name == "target_item_verb")
 							m_targetItemVerb = aMember->GetString();
+						else if(aMember->m_name == "target_item_prospect")
+							m_targetItemProspect = std::make_unique<ItemProspect>(aMember);
 						else
 							TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
 					}
@@ -675,6 +684,7 @@ namespace tpublic
 				aWriter->WriteOptionalObjectPointer(m_targetItemRequirements);
 				aWriter->WriteString(m_targetItemVerb);
 				aWriter->WriteString(m_targetItemConfirmation);
+				aWriter->WriteOptionalObjectPointer(m_targetItemProspect);
 
 				for(uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 					aWriter->WriteUInt(m_resourceCosts[i]);
@@ -772,6 +782,8 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadString(m_targetItemConfirmation))
 					return false;
+				if(!aReader->ReadOptionalObjectPointer(m_targetItemProspect))
+					return false;
 
 				for (uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 				{
@@ -828,6 +840,7 @@ namespace tpublic
 			std::unique_ptr<TargetItemRequirements>				m_targetItemRequirements;
 			std::string											m_targetItemVerb;
 			std::string											m_targetItemConfirmation;
+			std::unique_ptr<ItemProspect>						m_targetItemProspect;
 		};
 
 	}

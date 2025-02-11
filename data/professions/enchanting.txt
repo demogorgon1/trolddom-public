@@ -4,6 +4,16 @@ profession enchanting<primary>:
 	icon: icon_enchanting
 }
 
+!define local ENCHANTING_REAGENT_ITEM
+{
+	string: @_string
+	item_level: @_level
+	icon: @_icon
+	loot_groups: [ @_loot_group ]
+	level_range: @_level_range
+	stack: 20
+}
+
 #!define local ENCHANTING_CRAFT
 #{
 #	string: @_string
@@ -31,7 +41,53 @@ profession enchanting<primary>:
 #}
 
 #####################################################
+# Reagents
+
+loot_group .reagent_essence: { }
+loot_group .reagent_crystal: { }
+
+item reagent_mystery_essence: !ENCHANTING_REAGENT_ITEM{ _string: "Mystery Essence" _level: 1 _level_range: [ 1 5 ] _icon: icon_magic_dust_1 _loot_group: .reagent_essence }
+item reagent_mystery_crystal: !ENCHANTING_REAGENT_ITEM{ _string: "Mystery Crystal" _level: 1 _level_range: [ 1 5 ] _icon: icon_magic_crystal_1 _loot_group: .reagent_crystal }
+
+#####################################################
 # Disenchant
+
+!define local DISENCHANT 
+{
+	slots:
+	[
+		# Always at least one of these
+		{ 
+			possibility: { weight: @_essence_weight loot_group: .reagent_essence } 
+			possibility: { weight: @_crystal_weight loot_group: .reagent_crystal }	
+		}			
+		
+		# Sometimes a second
+		{ 
+			possibility: { weight: 100 }
+						
+			<exists _essence_2_weight> possibility : { weight: @_essence_2_weight loot_group: .reagent_essence } 
+			<exists _crystal_2_weight> possibility : { weight: @_crystal_2_weight loot_group: .reagent_crystal } 
+		}					
+		
+		# Rarely a third
+		{ 
+			possibility: { weight: 100 }
+						
+			<exists _essence_3_weight> possibility : { weight: @_essence_3_weight loot_group: .reagent_essence } 
+			<exists _crystal_3_weight> possibility : { weight: @_crystal_3_weight loot_group: .reagent_crystal } 
+		}							
+	]	
+}
+
+loot_table .disenchant_uncommon_armor: !DISENCHANT{ _essence_weight: 10 _crystal_weight: 1 _essence_2_weight: 10 }
+loot_table .disenchant_uncommon_weapon: !DISENCHANT{ _essence_weight: 3 _crystal_weight: 1 _essence_2_weight: 10 }
+
+loot_table .disenchant_rare_armor: !DISENCHANT{ _essence_weight: 1 _crystal_weight: 1 _essence_2_weight: 50 }
+loot_table .disenchant_rare_weapon: !DISENCHANT{ _essence_weight: 1 _crystal_weight: 3 _essence_2_weight: 50 }
+
+loot_table .disenchant_epic_armor: !DISENCHANT{ _essence_weight: 0 _crystal_weight: 1 _crystal_2_weight: 50 }
+loot_table .disenchant_epic_weapon: !DISENCHANT{ _essence_weight: 0 _crystal_weight: 1 _crystal_2_weight: 50 }
 
 ability disenchant: 
 {
@@ -46,9 +102,27 @@ ability disenchant:
 	{
 		rarities: [ uncommon rare epic mythic ]
 		equipment_slots: [ main_hand off_hand ranged head chest legs feet shoulders wrists waist hands back neck finger_1 finger_2 trinket_1 trinket_2 ]
+		must_be_sellable: true
 	}
 	target_item_verb: "disenchant"
 	target_item_confirmation: "The item will be destroyed."
+	
+	target_item_prospect:
+	{
+		item_type_flags<[ armor ]>:
+		{
+			rarity<[ uncommon ]>: { loot_table: .disenchant_uncommon_armor }
+			rarity<[ rare ]>: { loot_table: .disenchant_rare_armor }
+			rarity<[ epic mythic ]>: { loot_table: .disenchant_epic_armor }
+		}
+
+		item_type_flags<[ weapon ranged ]>:
+		{
+			rarity<[ uncommon ]>: { loot_table: .disenchant_uncommon_weapon }
+			rarity<[ rare ]>: { loot_table: .disenchant_rare_weapon }
+			rarity<[ epic mythic ]>: { loot_table: .disenchant_epic_weapon }
+		}
+	}
 }
 
 #####################################################
