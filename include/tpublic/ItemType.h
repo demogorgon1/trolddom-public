@@ -34,6 +34,7 @@ namespace tpublic
 			ID_CONSUMABLE,
 			ID_TRADE_GOOD,
 			ID_MISCELLANEOUS,
+			ID_TRINKET,
 
 			NUM_IDS
 		};
@@ -49,6 +50,7 @@ namespace tpublic
 			FLAG_WEAPON				= 0x0040,
 			FLAG_ARMOR				= 0x0080,
 			FLAG_RANGED				= 0x0100,
+			FLAG_TRINKET			= 0x0200,
 
 			FLAG_NO_RESTRICTIONS	= 0x4000,
 			FLAG_NO_TOOLTIP			= 0x8000
@@ -90,7 +92,8 @@ namespace tpublic
 
 			{ "consumable",			"Consumable",			"Consumables",			FLAG_NO_TOOLTIP | FLAG_NO_RESTRICTIONS },
 			{ "trade_good",			"Trade Good",			"Trade Goods",			FLAG_NO_TOOLTIP | FLAG_NO_RESTRICTIONS },
-			{ "miscellaneous",		"Miscellaneous",		"Miscellaneous",		FLAG_NO_TOOLTIP | FLAG_NO_RESTRICTIONS }
+			{ "miscellaneous",		"Miscellaneous",		"Miscellaneous",		FLAG_NO_TOOLTIP | FLAG_NO_RESTRICTIONS },
+			{ "trinket",			"Trinket",				"Trinkets",				FLAG_TRINKET }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);
@@ -142,6 +145,8 @@ namespace tpublic
 				return FLAG_NO_RESTRICTIONS;
 			if (s == "no_tool_tip")
 				return FLAG_NO_TOOLTIP;
+			if (s == "trinket")
+				return FLAG_TRINKET;
 			return 0;
 		}
 

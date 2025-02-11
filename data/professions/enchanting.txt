@@ -109,7 +109,7 @@ ability disenchant:
 	
 	target_item_prospect:
 	{
-		item_type_flags<[ armor ]>:
+		item_type_flags<[ armor trinket ]>:
 		{
 			rarity<[ uncommon ]>: { loot_table: .disenchant_uncommon_armor }
 			rarity<[ rare ]>: { loot_table: .disenchant_rare_armor }

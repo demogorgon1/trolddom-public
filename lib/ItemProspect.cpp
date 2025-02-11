@@ -109,7 +109,7 @@ namespace tpublic
 	ItemProspect::Node::ResolveItem(
 		const Data::Item*				aItem) const
 	{		
-		if(IsCompoundType(m_type))
+		if(!IsCompoundType(m_type))
 			return this;
 
 		bool match = false;
