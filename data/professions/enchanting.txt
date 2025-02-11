@@ -12,42 +12,71 @@ profession enchanting<primary>:
 	loot_groups: [ @_loot_group ]
 	level_range: @_level_range
 	stack: 20
+	rarity: @_rarity
 }
 
-#!define local ENCHANTING_CRAFT
-#{
-#	string: @_string
-#	icon_from<item>: @_item
-#	description_from<item>: @_item
-#	cast_time: 20
-#	flags: [ crafting ]	
-#	states: [ default in_combat ]
-#	consume_items: @_materials
-#	produce_items: @_produce
-#	required_profession<@_skill>: enchanting
-#}
-#
-#!define local ENCHANTING_ITEM
-#{
-#	string: @_string_item
-#	icon_from<item>: @_item
-#	description_from<item>: @_item
-#	cast_time: 20
-#	flags: [ crafting ]	
-#	states: [ default in_combat ]
-#	consume_items: @_materials
-#	produce_items: @_produce
-#	required_profession<@_skill>: enchanting
-#}
+!define local ENCHANTING_CRAFT
+{
+	string: @_string
+	icon: icon_enchanted_paper
+	description: @_description
+	cast_time: 20
+	flags: [ crafting ]	
+	states: [ default in_combat ]
+	consume_items: @_materials
+	produce_items: @_produce
+	required_profession<@_skill>: enchanting
+}
+
+!define local ENCHANTING_APPLY
+{
+	string: @_string
+	description: @_description
+	icon: icon_enchanted_paper
+	cast_time: 20
+	flags: [ target_item item ]
+	states: [ default in_combat ]
+	target_item_requirements: @_target_item_requirements
+	target_item_verb: "enchant"
+	target_item_confirmation: "Any existing enchantment will be overwritten."
+	target_item_aura: @_id
+	consume_items: @_consume_items
+}
+
+!define local ENCHANTING_ITEM
+{
+	string: @_string_item
+	rarity: uncommon
+	item_level: @_level
+	icon: icon_enchanted_paper
+	stack: 20
+	use_ability: @_id
+}
 
 #####################################################
 # Reagents
 
+item reagent_paper: 
+{
+	string: "Blank Paper"
+	flavor: "Can be used for making enchantments."
+	item_level: 1
+	icon: icon_empty_paper
+	stack: 20
+	cost: 350
+}
+
 loot_group .reagent_essence: { }
 loot_group .reagent_crystal: { }
 
-item reagent_mystery_essence: !ENCHANTING_REAGENT_ITEM{ _string: "Mystery Essence" _level: 1 _level_range: [ 1 5 ] _icon: icon_magic_dust_1 _loot_group: .reagent_essence }
-item reagent_mystery_crystal: !ENCHANTING_REAGENT_ITEM{ _string: "Mystery Crystal" _level: 1 _level_range: [ 1 5 ] _icon: icon_magic_crystal_1 _loot_group: .reagent_crystal }
+item reagent_mystery_essence: !ENCHANTING_REAGENT_ITEM{ _rarity: common _string: "Mystery Essence" _level: 1 _level_range: [ 1 7 ] _icon: icon_magic_dust_1 _loot_group: .reagent_essence }
+item reagent_mystery_crystal: !ENCHANTING_REAGENT_ITEM{ _rarity: uncommon _string: "Mystery Crystal" _level: 1 _level_range: [ 1 7 ] _icon: icon_magic_crystal_1 _loot_group: .reagent_crystal }
+
+item reagent_arcane_essence: !ENCHANTING_REAGENT_ITEM{ _rarity: common _string: "Arcane Essence" _level: 8 _level_range: [ 8 14 ] _icon: icon_magic_dust_2 _loot_group: .reagent_essence }
+item reagent_arcane_crystal: !ENCHANTING_REAGENT_ITEM{ _rarity: uncommon _string: "Arcane Crystal" _level: 8 _level_range: [ 8 14 ] _icon: icon_magic_crystal_2 _loot_group: .reagent_crystal }
+
+item reagent_dream_essence: !ENCHANTING_REAGENT_ITEM{ _rarity: common _string: "Dream Essence" _level: 15 _level_range: [ 15 21 ] _icon: icon_magic_dust_3 _loot_group: .reagent_essence }
+item reagent_dream_crystal: !ENCHANTING_REAGENT_ITEM{ _rarity: uncommon _string: "Dream Crystal" _level: 15 _level_range: [ 15 21 ] _icon: icon_magic_crystal_3 _loot_group: .reagent_crystal }
 
 #####################################################
 # Disenchant
@@ -94,7 +123,7 @@ ability disenchant:
 	string: "Disenchant"
 	description: "Turns target armor or weapon into useful magical reagents. Item must be uncommon or better. This will destroy the item."
 	icon: icon_disenchant
-	cast_time: 15
+	cast_time: 15 
 	flags: [ target_item ]
 	states: [ default in_combat ]
 	required_profession<0>: enchanting
@@ -128,13 +157,89 @@ ability disenchant:
 #####################################################
 # Enchant Shield - Minor Constitution
 
-#${
-#	_string: "Enchant Shield - Minor Constitution"
-#	_string_item: "Enchant Shield: Minor Constitution"
-#	_item: enchant_shield_minor_constitution
-#	_produce: { enchant_shield_minor_constitution: 1 } 
-#	_materials: { item_dewleaf: 2 }
-#	_skill: 0
-#}
-#
-#ability craft_enchant_shield_minor_constitution: !ENCHANTING_CRAFT{}
+${
+	_string: "Enchant Shield - Minor Constitution"
+	_string_item: "Enchant Shield: Minor Constitution"
+	_description: "Enchants item to increase Constitution by 1."
+	_item: enchant_shield_minor_constitution
+	_produce: { enchant_shield_minor_constitution: 1 } 
+	_materials: { reagent_mystery_essence: 2 reagent_paper: 1 }
+	_skill: 0
+	_target_item_requirements: { item_types: [ shield ] }
+	_id: enchant_shield_minor_constitution	
+	_consume_items: { enchant_shield_minor_constitution: 1 }	
+}
+
+aura enchant_shield_minor_constitution:
+{
+	type: hidden
+	flags: [ item silent ]
+	icon: icon_enchanted_paper	
+
+	string: "Constitution +1"
+	stat_modifiers: { constitution: { add: 1 } }
+}
+
+ability enchant_shield_minor_constitution: !ENCHANTING_APPLY{}
+item enchant_shield_minor_constitution: !ENCHANTING_ITEM{}
+ability craft_enchant_shield_minor_constitution: !ENCHANTING_CRAFT{}
+
+#####################################################
+# Enchant Shield - Major Constitution
+
+${
+	_string: "Enchant Shield - Major Constitution"
+	_string_item: "Enchant Shield: Major Constitution"
+	_description: "Enchants item to increase Constitution by 2."
+	_item: enchant_shield_major_constitution
+	_produce: { enchant_shield_major_constitution: 1 } 
+	_materials: { reagent_mystery_essence: 4 reagent_mystery_crystal: 1 reagent_paper: 1 }
+	_skill: 55
+	_target_item_requirements: { item_types: [ shield ] }
+	_id: enchant_shield_major_constitution	
+	_consume_items: { enchant_shield_major_constitution: 1 }	
+}
+
+aura enchant_shield_major_constitution:
+{
+	type: hidden
+	flags: [ item silent ]
+	icon: icon_enchanted_paper	
+
+	string: "Constitution +2"
+	stat_modifiers: { constitution: { add: 2 } }
+}
+
+ability enchant_shield_major_constitution: !ENCHANTING_APPLY{}
+item enchant_shield_major_constitution: !ENCHANTING_ITEM{}
+ability craft_enchant_shield_major_constitution: !ENCHANTING_CRAFT{}
+
+#####################################################
+# Enchant Shield - Wisdom
+
+${
+	_string: "Enchant Shield - Wisdom"
+	_string_item: "Enchant Shield: Wisdom"
+	_description: "Enchants item to increase Wisdom by 2."
+	_item: enchant_shield_wisdom
+	_produce: { enchant_shield_wisdom: 1 } 
+	_materials: { reagent_mystery_essence: 3 reagent_paper: 1 }
+	_skill: 40
+	_target_item_requirements: { item_types: [ shield ] }
+	_id: enchant_shield_wisdom	
+	_consume_items: { enchant_shield_wisdom: 1 }	
+}
+
+aura enchant_shield_wisdom:
+{
+	type: hidden
+	flags: [ item silent ]
+	icon: icon_enchanted_paper	
+
+	string: "Wisdom +2"
+	stat_modifiers: { wisdom: { add: 2 } }
+}
+
+ability enchant_shield_wisdom: !ENCHANTING_APPLY{}
+item enchant_shield_wisdom: !ENCHANTING_ITEM{}
+ability craft_enchant_shield_wisdom: !ENCHANTING_CRAFT{}

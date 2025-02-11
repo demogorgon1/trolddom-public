@@ -1,9 +1,4 @@
-dialogue_screen .enchanting_trainer_trainer:
-{
-	train_profession<0>: enchanting
-	train_profession<1>: enchanting
-	train_ability: disenchant
-}
+dialogue_screen .enchanting_trainer_trainer: !DEFAULT_ENCHANTING_TRAINER{}
 
 dialogue_screen .enchanting_trainer_greetings:
 {

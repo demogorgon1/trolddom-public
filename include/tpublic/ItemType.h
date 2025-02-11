@@ -147,6 +147,8 @@ namespace tpublic
 				return FLAG_NO_TOOLTIP;
 			if (s == "trinket")
 				return FLAG_TRINKET;
+			if (s == "armor")
+				return FLAG_ARMOR;
 			return 0;
 		}
 

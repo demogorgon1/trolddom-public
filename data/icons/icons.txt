@@ -615,6 +615,10 @@ sprites:
 	sprite icon_magic_dust_1 : { tags: [ icon ] }
 	sprite icon_disenchant : { tags: [ icon ] }
 	sprite icon_magic_crystal_1 : { tags: [ icon ] }
+	sprite icon_magic_dust_2 : { tags: [ icon ] }
+	sprite icon_magic_dust_3 : { tags: [ icon ] }
+	sprite icon_magic_crystal_2 : { tags: [ icon ] }
+	sprite icon_magic_crystal_3 : { tags: [ icon ] }
 	
 	
 }

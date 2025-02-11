@@ -121,7 +121,7 @@ namespace tpublic
 				assert(m_params.size() == 1);
 				const ItemType::Info* info = ItemType::GetInfo(aItem->m_itemType);
 				uint32_t f = (uint32_t)info->m_flags;
-				if ((f & m_params[0]) == m_params[0])
+				if ((f & m_params[0]) != 0)
 					match = true;
 			}
 			break;

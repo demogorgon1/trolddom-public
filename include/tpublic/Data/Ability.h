@@ -630,6 +630,8 @@ namespace tpublic
 							m_targetItemVerb = aMember->GetString();
 						else if(aMember->m_name == "target_item_prospect")
 							m_targetItemProspect = std::make_unique<ItemProspect>(aMember);
+						else if(aMember->m_name == "target_item_aura")
+							m_targetItemAuraId = aMember->GetId(DataType::ID_AURA);
 						else
 							TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
 					}
@@ -685,6 +687,7 @@ namespace tpublic
 				aWriter->WriteString(m_targetItemVerb);
 				aWriter->WriteString(m_targetItemConfirmation);
 				aWriter->WriteOptionalObjectPointer(m_targetItemProspect);
+				aWriter->WriteUInt(m_targetItemAuraId);
 
 				for(uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 					aWriter->WriteUInt(m_resourceCosts[i]);
@@ -784,6 +787,8 @@ namespace tpublic
 					return false;
 				if(!aReader->ReadOptionalObjectPointer(m_targetItemProspect))
 					return false;
+				if (!aReader->ReadUInt(m_targetItemAuraId))
+					return false;
 
 				for (uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 				{
@@ -841,6 +846,7 @@ namespace tpublic
 			std::string											m_targetItemVerb;
 			std::string											m_targetItemConfirmation;
 			std::unique_ptr<ItemProspect>						m_targetItemProspect;
+			uint32_t											m_targetItemAuraId = 0;
 		};
 
 	}
