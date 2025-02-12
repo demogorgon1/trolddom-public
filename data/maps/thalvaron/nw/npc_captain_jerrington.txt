@@ -93,7 +93,8 @@ quest .captain_jerrington_1:
 	level: 10
 	
 	prerequisites: [ .city_guard_special_1 ]
-	reward_one_item: [ .captain_jerrington_1_a .captain_jerrington_1_b ]
+	reward_one_item: [ .captain_jerrington_1_a .captain_jerrington_1_b ]	
+	reward_reputation_multiplier: 1.5
 }
 
 ############################################################

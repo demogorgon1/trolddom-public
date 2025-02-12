@@ -71,4 +71,5 @@ quest .city_guard_special_2_1:
 
 	level: 10
 	objectives: [ .city_guard_special_2_1 ]
+	reward_reputation_multiplier: 1.5
 }

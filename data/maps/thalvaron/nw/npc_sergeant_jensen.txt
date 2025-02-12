@@ -104,6 +104,7 @@ quest .sergeant_jensen_1:
 	level: 11
 	objectives: [ .sergeant_jensen_1_1 .sergeant_jensen_1_2 .sergeant_jensen_1_3 ]
 	reward_one_item: [ .sergeant_jensen_1_a .sergeant_jensen_1_b .sergeant_jensen_1_c ]
+	reward_reputation_multiplier: 1.5
 }
 
 ############################################################

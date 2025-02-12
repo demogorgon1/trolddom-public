@@ -89,5 +89,6 @@ quest .lieutenant_gordon_1:
 	objectives: [ .lieutenant_gordon_1 ]
 	level: 14
 	reward_one_item: [ .lieutenant_gordon_1_a .lieutenant_gordon_1_b .lieutenant_gordon_1_c ]
+	reward_reputation_multiplier: 1.5
 }
 

@@ -82,6 +82,7 @@ quest .lieutenant_tinley_1:
 	level: 10
 	objectives: [ .lieutenant_tinley_1 ]
 	reward_one_item: [ .lieutenant_tinley_1_a .lieutenant_tinley_1_b .lieutenant_tinley_1_c ]
+	reward_reputation_multiplier: 1.5
 }
 
 ############################################################
@@ -163,4 +164,5 @@ quest .lieutenant_tinley_3:
 	level: 12
 	objectives: [ .lieutenant_tinley_3 ]
 	reward_one_item: [ .lieutenant_tinley_3_a .lieutenant_tinley_3_b .lieutenant_tinley_3_c ]
+	reward_reputation_multiplier: 1.5
 }

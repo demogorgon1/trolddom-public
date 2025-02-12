@@ -84,6 +84,7 @@ quest .lieutenant_tusleholm_1:
 	level: 12
 	objectives: [ .lieutenant_tusleholm_1 ]
 	reward_one_item: [ .lieutenant_tusleholm_1_a .lieutenant_tusleholm_1_b .lieutenant_tusleholm_1_c ]
+	reward_reputation_multiplier: 1.5
 }
 
 ############################################################
@@ -140,4 +141,5 @@ quest .lieutenant_tusleholm_2:
 	objectives: [ .lieutenant_tusleholm_2 ]
 	prerequisites: [ .lieutenant_tusleholm_1 ]
 	reward_one_item: [ .lieutenant_tusleholm_2_a .lieutenant_tusleholm_2_b .lieutenant_tusleholm_2_c ]
+	reward_reputation_multiplier: 1.5
 }
