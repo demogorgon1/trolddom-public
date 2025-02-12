@@ -1,7 +1,7 @@
 faction underworld:
 {
 	string: "The Underworld"
-	flags: [ reputation ]
+	flags: [ reputation pantheon ]
 }
 
 pantheon underworld:

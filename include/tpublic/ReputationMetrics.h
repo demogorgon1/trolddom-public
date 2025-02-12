@@ -110,6 +110,8 @@ namespace tpublic
 		{
 			aStream->WriteInt(m_baseQuestReputation);
 			aStream->WriteObjects(m_levels);
+			aStream->WriteInt(m_minReputation);
+			aStream->WriteInt(m_maxReputation);
 		}
 
 		bool
@@ -120,6 +122,10 @@ namespace tpublic
 				return false;
 			if(!aStream->ReadObjects(m_levels))
 				return false;
+			if (!aStream->ReadInt(m_minReputation))
+				return false;
+			if (!aStream->ReadInt(m_maxReputation))
+				return false;
 			return true;
 		}
 
@@ -127,12 +133,12 @@ namespace tpublic
 		GetLevelIndexFromReputation(
 			int32_t							aReputation) const
 		{
-			uint32_t i = 0;
-			for(const Level& level : m_levels)
+			for(size_t i = 0; i < m_levels.size(); i++)
 			{
-				if(aReputation >= level.m_reputation)
-					return i;
-				i++;
+				size_t j = m_levels.size() - i - 1;
+				const Level& level = m_levels[j];
+				if (aReputation >= level.m_reputation)
+					return (uint32_t)j;
 			}
 			return 0;
 		}

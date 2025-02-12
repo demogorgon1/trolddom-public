@@ -84,6 +84,8 @@ namespace tpublic
 							m_rewardCashMultiplier = aChild->GetFloat();
 						else if (aChild->m_name == "reward_xp_multiplier")
 							m_rewardXPMultiplier = aChild->GetFloat();
+						else if (aChild->m_name == "reward_reputation_multiplier")
+							m_rewardReputationMultiplier = aChild->GetFloat();
 						else if (aChild->m_name == "type")
 							m_type = SourceToType(aChild);
 						else if (aChild->m_name == "objectives")
@@ -125,6 +127,7 @@ namespace tpublic
 				aStream->WriteFloat(m_rewardXPMultiplier);
 				aStream->WriteUInt(m_cost);
 				aStream->WriteUInt(m_rewardCash);
+				aStream->WriteFloat(m_rewardReputationMultiplier);
 			}
 
 			bool
@@ -165,6 +168,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInt(m_rewardCash))
 					return false;
+				if (!aStream->ReadFloat(m_rewardReputationMultiplier))
+					return false;
 				return true;
 			}
 
@@ -194,6 +199,7 @@ namespace tpublic
 			uint32_t				m_nextQuestId = 0;
 			float					m_rewardCashMultiplier = 1.0f;
 			float					m_rewardXPMultiplier = 1.0f;
+			float					m_rewardReputationMultiplier = 1.0f;
 			uint32_t				m_cost = 0;
 		};
 

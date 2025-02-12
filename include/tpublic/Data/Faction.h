@@ -19,7 +19,8 @@ namespace tpublic
 				FLAG_NEUTRAL = 0x01,
 				FLAG_FRIENDLY = 0x02,
 				FLAG_REPUTATION = 0x04,
-				FLAG_SHOW = 0x08
+				FLAG_SHOW = 0x08,
+				FLAG_PANTHEON = 0x10
 			};
 
 			void
@@ -51,6 +52,8 @@ namespace tpublic
 									m_flags |= FLAG_REPUTATION;
 								else if (aFlag->IsIdentifier("show"))
 									m_flags |= FLAG_SHOW;
+								else if (aFlag->IsIdentifier("pantheon"))
+									m_flags |= FLAG_PANTHEON;
 								else
 									TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid faction flag.", aFlag->m_value.c_str());
 							});
@@ -150,6 +153,7 @@ namespace tpublic
 			bool IsFriendly() const { return (m_flags & FLAG_FRIENDLY) != 0; }
 			bool IsReputation() const { return (m_flags & FLAG_REPUTATION) != 0; }
 			bool ShouldShow() const { return (m_flags & FLAG_SHOW) != 0; }
+			bool IsPantheon() const { return (m_flags & FLAG_PANTHEON) != 0; }
 
 			// Public data
 			uint8_t						m_flags = 0;
