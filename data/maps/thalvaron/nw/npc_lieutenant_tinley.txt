@@ -26,7 +26,7 @@ entity thalvaron_lieutenant_tinley: !NPC
 	_sprite: city_guard_2
 	_sprite_dead: city_guard_2_dead
 	_level: 20
-	_faction: npcs		
+	_faction: valoris		
 	_creature_type: humanoid
 	_loot_table: .npc
 	_not_pushable: true	

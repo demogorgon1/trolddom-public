@@ -18,7 +18,8 @@ namespace tpublic
 			{
 				FLAG_NEUTRAL = 0x01,
 				FLAG_FRIENDLY = 0x02,
-				FLAG_REPUTATION = 0x04
+				FLAG_REPUTATION = 0x04,
+				FLAG_SHOW = 0x08
 			};
 
 			void
@@ -48,6 +49,8 @@ namespace tpublic
 									m_flags |= FLAG_FRIENDLY;
 								else if (aFlag->IsIdentifier("reputation"))
 									m_flags |= FLAG_REPUTATION;
+								else if (aFlag->IsIdentifier("show"))
+									m_flags |= FLAG_SHOW;
 								else
 									TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid faction flag.", aFlag->m_value.c_str());
 							});
@@ -55,6 +58,10 @@ namespace tpublic
 						else if(aChild->m_name == "string")
 						{
 							m_string = aChild->GetString();
+						}
+						else if (aChild->m_name == "default_reputation")
+						{
+							m_defaultReputation = aChild->GetInt32();
 						}
 						else if (aChild->m_name == "influence_tile_transform")
 						{
@@ -90,6 +97,7 @@ namespace tpublic
 			{
 				aStream->WritePOD(m_flags);
 				aStream->WriteString(m_string);
+				aStream->WriteInt(m_defaultReputation);
 				aStream->WriteUInt(m_influenceTileTransformTable.size());
 				for(InfluenceTileTransformTable::const_iterator i = m_influenceTileTransformTable.cbegin(); i != m_influenceTileTransformTable.cend(); i++)
 				{
@@ -105,6 +113,8 @@ namespace tpublic
 				if(!aStream->ReadPOD(m_flags))
 					return false;
 				if(!aStream->ReadString(m_string))
+					return false;
+				if(!aStream->ReadInt(m_defaultReputation))
 					return false;
 				
 				{
@@ -138,10 +148,13 @@ namespace tpublic
 			// Helpers
 			bool IsNeutralOrFriendly() const { return (m_flags & FLAG_NEUTRAL) != 0 || (m_flags & FLAG_FRIENDLY) != 0; }
 			bool IsFriendly() const { return (m_flags & FLAG_FRIENDLY) != 0; }
+			bool IsReputation() const { return (m_flags & FLAG_REPUTATION) != 0; }
+			bool ShouldShow() const { return (m_flags & FLAG_SHOW) != 0; }
 
 			// Public data
-			uint8_t						m_flags;
+			uint8_t						m_flags = 0;
 			std::string					m_string;
+			int32_t						m_defaultReputation = 0;
 			
 			typedef std::unordered_map<uint32_t, uint32_t> InfluenceTileTransformTable;
 			InfluenceTileTransformTable	m_influenceTileTransformTable;

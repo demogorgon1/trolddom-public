@@ -23,7 +23,7 @@ entity thalvaron_grumli_stouthammer: !NPC
 	_sprite: dwarf_4
 	_sprite_dead: dwarf_4_dead
 	_level: 20
-	_faction: npcs		
+	_faction: kingdom_of_thuldarim		
 	_creature_type: humanoid
 	_loot_table: .npc
 	_not_pushable: true	

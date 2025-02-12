@@ -1,0 +1,17 @@
+!define NEUTRAL_REPUTATION 0
+!define FRIENDLY_REPUTATION 1000
+
+reputation_metrics:
+{
+	levels:
+	[
+		[ -2000						"Hated" 	[ [ 128 0 0 ] [ 48 0 0 ] [ 64 32 32 ] ] ]
+		[ !NEUTRAL_REPUTATION{}		"Neutral" 	[ [ 96 96 0 ] [ 32 32 0 ] [ 48 48 32 ] ] ]
+		[ !FRIENDLY_REPUTATION{}	"Friendly"  [ [ 0 128 0 ] [ 0 48 0 ] [ 32 64 32 ] ] ]
+		[ 3000						"Honored"   [ [ 0 0 128 ] [ 0 0 48 ] [ 32 32 64 ] ] ]
+		[ 9000						"Revered"   [ [ 0 96 96 ] [ 0 32 32 ] [ 32 48 48 ] ] ]
+		[ 27000						"Exalted"   [ [ 0 128 128 ] [ 0 48 48 ] [ 32 64 64 ] ] ]
+	]
+	
+	base_quest_reputation: 100
+} 

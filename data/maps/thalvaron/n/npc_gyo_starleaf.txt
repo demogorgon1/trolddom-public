@@ -23,7 +23,7 @@ entity thalvaron_gyo_starleaf: !NPC
 	_sprite: elf_2
 	_sprite_dead: elf_2_dead
 	_level: 20
-	_faction: npcs		
+	_faction: children_of_the_moon		
 	_creature_type: humanoid
 	_loot_table: .npc
 	_not_pushable: true	

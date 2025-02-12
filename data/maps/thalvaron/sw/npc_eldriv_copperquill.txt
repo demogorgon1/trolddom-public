@@ -22,7 +22,7 @@ entity thalvaron_eldriv_copperquill: !NPC
 	_sprite: dwarf_10
 	_sprite_dead: dwarf_10_dead
 	_level: 20
-	_faction: npcs		
+	_faction: kingdom_of_thuldarim		
 	_creature_type: humanoid
 	_loot_table: .npc
 	_not_pushable: true	

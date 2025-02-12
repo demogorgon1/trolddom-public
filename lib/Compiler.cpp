@@ -397,6 +397,10 @@ namespace tpublic
 		{
 			m_manifest->m_miscMetrics.FromSource(aNode);
 		}
+		else if (aNode->m_name == "reputation_metrics")
+		{
+			m_manifest->m_reputationMetrics.FromSource(aNode);
+		}
 		else if (aNode->m_name == "quest_metrics")
 		{
 			m_manifest->m_questMetrics.FromSource(aNode);

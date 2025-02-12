@@ -1,0 +1,6 @@
+faction valoris:
+{
+	string: "Valoris"
+	flags: [ friendly reputation show ]
+	default_reputation: !FRIENDLY_REPUTATION{}
+}

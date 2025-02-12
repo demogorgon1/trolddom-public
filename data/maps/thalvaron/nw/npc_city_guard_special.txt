@@ -23,7 +23,7 @@ entity thalvaron_city_guard_special: !NPC
 	_sprite: city_guard_1
 	_sprite_dead: city_guard_1_dead
 	_level: 20
-	_faction: npcs		
+	_faction: valoris		
 	_creature_type: humanoid
 	_loot_table: .npc
 	_not_pushable: true	

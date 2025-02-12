@@ -1,0 +1,6 @@
+faction children_of_the_moon:
+{
+	string: "Children of the Moon"
+	flags: [ friendly reputation show ]
+	default_reputation: !NEUTRAL_REPUTATION{}
+}

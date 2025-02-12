@@ -125,6 +125,13 @@ namespace tpublic
 				return i->second;
 			}
 
+			bool
+			HasReputation(
+				uint32_t			aFactionId) const
+			{
+				return m_table.m_map.contains(aFactionId);
+			}
+
 			void
 			Reset()
 			{

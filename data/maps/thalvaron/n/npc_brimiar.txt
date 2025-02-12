@@ -26,7 +26,7 @@ entity thalvaron_brimiar: !NPC
 	_sprite: elf_6
 	_sprite_dead: elf_6_dead
 	_level: 20
-	_faction: npcs		
+	_faction: children_of_the_moon		
 	_creature_type: humanoid
 	_loot_table: .npc
 	_not_pushable: true	

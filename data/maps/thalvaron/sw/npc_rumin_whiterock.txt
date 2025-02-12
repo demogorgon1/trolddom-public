@@ -26,7 +26,7 @@ entity thalvaron_rumin_whiterock: !NPC
 	_sprite: dwarf_3
 	_sprite_dead: dwarf_3_dead
 	_level: 20
-	_faction: npcs		
+	_faction: kingdom_of_thuldarim		
 	_creature_type: humanoid
 	_loot_table: .npc
 	_not_pushable: true	

@@ -23,7 +23,7 @@ entity thalvaron_dwarf_guard_1: !NPC
 	_sprite: dwarf_6
 	_sprite_dead: dwarf_6_dead
 	_level: 20
-	_faction: npcs		
+	_faction: kingdom_of_thuldarim		
 	_creature_type: humanoid
 	_loot_table: .npc
 	_not_pushable: true	

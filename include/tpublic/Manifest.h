@@ -12,6 +12,7 @@
 #include "PlayerComponents.h"
 #include "ProfessionMetrics.h"
 #include "QuestMetrics.h"
+#include "ReputationMetrics.h"
 #include "TileLayering.h"
 #include "WordList.h"
 #include "WorshipMetrics.h"
@@ -452,6 +453,7 @@ namespace tpublic
 		AbilityMetrics									m_abilityMetrics;
 		WorshipMetrics									m_worshipMetrics;
 		MiscMetrics										m_miscMetrics;
+		ReputationMetrics								m_reputationMetrics;
 		WordList::Data									m_wordList;
 		DefaultSoundEffects								m_defaultSoundEffects;
 		TileLayering									m_tileLayering;

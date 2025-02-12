@@ -25,7 +25,7 @@ entity thalvaron_ulrik_copperquill: !NPC
 	_sprite: dwarf_11
 	_sprite_dead: dwarf_11_dead
 	_level: 20
-	_faction: npcs		
+	_faction: kingdom_of_thuldarim		
 	_creature_type: humanoid
 	_loot_table: .npc
 	_not_pushable: true	

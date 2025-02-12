@@ -26,7 +26,7 @@ entity thalvaron_warmaster_jounheim: !NPC
 	_sprite: dwarf_1
 	_sprite_dead: dwarf_1_dead
 	_level: 20
-	_faction: npcs		
+	_faction: kingdom_of_thuldarim		
 	_creature_type: humanoid
 	_loot_table: .npc
 	_not_pushable: true	

@@ -1,3 +1,6 @@
+##########################################################################################
+# Generic factions
+
 faction monsters:
 {
 }
@@ -31,3 +34,4 @@ faction combat_npcs:
 {
 	flags: [ friendly ]
 }
+

@@ -24,7 +24,7 @@ entity thalvaron_foramil: !NPC
 	_sprite: elf_4
 	_sprite_dead: elf_4_dead
 	_level: 20
-	_faction: npcs		
+	_faction: children_of_the_moon		
 	_creature_type: humanoid
 	_loot_table: .npc
 	_not_pushable: true	
