@@ -14,6 +14,44 @@ namespace tpublic
 			static const DataType::Id DATA_TYPE = DataType::ID_FACTION;
 			static const bool TAGGED = true;
 
+			struct ReputationFromKill
+			{
+				ReputationFromKill()
+				{
+
+				}
+
+				ReputationFromKill(
+					const SourceNode*	aSource)
+				{
+					m_factionId = aSource->m_sourceContext->m_persistentIdTable->GetId(aSource->m_debugInfo, DataType::ID_FACTION, aSource->m_name.c_str());
+					m_reputation = aSource->GetInt32();
+				}
+
+				void
+				ToStream(
+					IWriter*			aWriter) const
+				{
+					aWriter->WriteUInt(m_factionId);
+					aWriter->WriteInt(m_reputation);
+				}
+
+				bool
+				FromStream(
+					IReader*			aReader)
+				{
+					if(!aReader->ReadUInt(m_factionId))
+						return false;
+					if(!aReader->ReadInt(m_reputation))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t		m_factionId = 0;
+				int32_t			m_reputation = 0;
+			};
+
 			enum Flag : uint8_t
 			{
 				FLAG_NEUTRAL = 0x01,
@@ -66,6 +104,10 @@ namespace tpublic
 						{
 							m_defaultReputation = aChild->GetInt32();
 						}
+						else if(aChild->m_tag == "reputation_from_kill")
+						{
+							m_reputationFromKill.push_back(ReputationFromKill(aChild));
+						}
 						else if (aChild->m_name == "influence_tile_transform")
 						{
 							uint32_t fromSpriteId = 0;
@@ -101,6 +143,7 @@ namespace tpublic
 				aStream->WritePOD(m_flags);
 				aStream->WriteString(m_string);
 				aStream->WriteInt(m_defaultReputation);
+				aStream->WriteObjects(m_reputationFromKill);
 				aStream->WriteUInt(m_influenceTileTransformTable.size());
 				for(InfluenceTileTransformTable::const_iterator i = m_influenceTileTransformTable.cbegin(); i != m_influenceTileTransformTable.cend(); i++)
 				{
@@ -118,6 +161,8 @@ namespace tpublic
 				if(!aStream->ReadString(m_string))
 					return false;
 				if(!aStream->ReadInt(m_defaultReputation))
+					return false;
+				if(!aStream->ReadObjects(m_reputationFromKill))
 					return false;
 				
 				{
@@ -156,12 +201,13 @@ namespace tpublic
 			bool IsPantheon() const { return (m_flags & FLAG_PANTHEON) != 0; }
 
 			// Public data
-			uint8_t						m_flags = 0;
-			std::string					m_string;
-			int32_t						m_defaultReputation = 0;
+			uint8_t							m_flags = 0;
+			std::string						m_string;
+			int32_t							m_defaultReputation = 0;
+			std::vector<ReputationFromKill>	m_reputationFromKill;
 			
 			typedef std::unordered_map<uint32_t, uint32_t> InfluenceTileTransformTable;
-			InfluenceTileTransformTable	m_influenceTileTransformTable;
+			InfluenceTileTransformTable		m_influenceTileTransformTable;
 		};
 
 	}

@@ -30,7 +30,7 @@ entity valoris_insurgency_erdox_the_soulsplitter: !NPC
 	_string: "Erdox the Soulsplitter" 
 	_level: 20
 	_elite: true
-	_faction: monsters 
+	_faction: dark_elves 
 	_sprite: dark_elf_6
 	_sprite_dead: dark_elf_6_dead 
 	_weapon_damage: 1

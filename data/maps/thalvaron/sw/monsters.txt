@@ -1175,7 +1175,7 @@ map_entity_spawn thalvaron_badlands_orc_gorvak:
 
 	${
 		_level: 15
-		_faction: monsters
+		_faction: skullforge_orcs
 		_creature_type: humanoid
 		_loot_table: .badlands_orc
 		_default_behavior_state: .passive
@@ -1190,7 +1190,7 @@ map_entity_spawn thalvaron_badlands_orc_gorvak:
 {
 	${
 		_level: 15
-		_faction: monsters
+		_faction: skullforge_orcs
 		_creature_type: humanoid
 		_loot_table: .badlands_orc
 		_default_behavior_state: .passive
@@ -1204,7 +1204,7 @@ map_entity_spawn thalvaron_badlands_orc_gorvak:
 {
 	${
 		_level: 15
-		_faction: monsters
+		_faction: skullforge_orcs
 		_creature_type: humanoid
 		_loot_table: .badlands_orc
 		_default_behavior_state: .passive

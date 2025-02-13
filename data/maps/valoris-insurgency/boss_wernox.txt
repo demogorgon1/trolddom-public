@@ -30,7 +30,7 @@ entity valoris_insurgency_wernox: !NPC
 	_string: "Wernox" 
 	_level: 19
 	_elite: true
-	_faction: monsters 
+	_faction: rebels 
 	_sprite: rebel_8
 	_sprite_dead: rebel_8_dead 
 	_weapon_damage: 1

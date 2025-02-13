@@ -163,11 +163,11 @@ namespace tpublic::Systems
 				{
 					std::vector<uint32_t> threatEntityInstanceIds;
 					threat->m_table.GetEntityInstanceIds(threatEntityInstanceIds);
-					aContext->m_eventQueue->EventQueueGroupKillXP(tag->m_playerTag.GetGroupId(), combat->m_level, aEntityId, threatEntityInstanceIds);
+					aContext->m_eventQueue->EventQueueGroupKillXP(tag->m_playerTag.GetGroupId(), combat->m_level, aEntityId, combat->m_factionId, threatEntityInstanceIds);
 				}
 				else if(tag->m_playerTag.IsCharacter())
 				{
-					aContext->m_eventQueue->EventQueueIndividualKillXP(tag->m_playerTag.GetCharacterId(), tag->m_playerTag.GetCharacterLevel(), combat->m_level, aEntityId);
+					aContext->m_eventQueue->EventQueueIndividualKillXP(tag->m_playerTag.GetCharacterId(), tag->m_playerTag.GetCharacterLevel(), combat->m_level, aEntityId, combat->m_factionId);
 				}
 
 				Components::Lootable* lootable = GetComponent<Components::Lootable>(aComponents);

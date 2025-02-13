@@ -30,7 +30,7 @@ entity valoris_insurgency_rufus_the_strong: !NPC
 	_string: "Rufus the Strong" 
 	_level: 19
 	_elite: true
-	_faction: monsters 
+	_faction: rebels 
 	_sprite: rebel_9
 	_sprite_dead: rebel_9_dead 
 	_weapon_damage: 1

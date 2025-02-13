@@ -85,7 +85,7 @@ map_entity_spawn thalvaron_north_rebel:
 	
 	${
 		_level: 12
-		_faction: monsters
+		_faction: rebels
 		_creature_type: humanoid
 		_default_behavior_state: .passive
 		_loot_table: .north_rebel
@@ -938,7 +938,7 @@ map_entity_spawn thalvaron_ghyuik:
 	
 	${
 		_level: 16
-		_faction: npcs
+		_faction: dark_elves
 		_dialogue_root: .ghyuik
 		_creature_type: humanoid
 		_default_behavior_state: .passive
@@ -975,7 +975,7 @@ map_entity_spawn thalvaron_faerandor_dark_elf:
 {	
 	${
 		_level: 15
-		_faction: monsters
+		_faction: dark_elves
 		_creature_type: humanoid
 		_default_behavior_state: .passive
 		_loot_table: .default_humanoid
@@ -991,7 +991,7 @@ map_entity_spawn thalvaron_faerandor_dark_elf:
 		
 	${
 		_level: 18
-		_faction: monsters
+		_faction: dark_elves
 		_creature_type: humanoid
 		_resource_health: 2
 		_resource_mana: 1
@@ -1884,7 +1884,7 @@ map_entity_spawn thalvaron_hollows_dark_elf_c:
 {	
 	${
 		_level: 19
-		_faction: monsters
+		_faction: dark_elves
 		_creature_type: humanoid
 		_default_behavior_state: .passive
 		_loot_table: .default_humanoid
@@ -1936,7 +1936,7 @@ map_entity_spawn thalvaron_gorge_orc:
 {
 	${
 		_level: 18
-		_faction: monsters
+		_faction: skullforge_orcs
 		_creature_type: humanoid
 		_loot_table: .default_humanoid
 		_default_behavior_state: .wandering_short

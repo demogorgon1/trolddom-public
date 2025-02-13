@@ -118,11 +118,13 @@ namespace tpublic
 												uint32_t													aCharacterId,
 												uint32_t													aCharacterLevel,
 												uint32_t													aKillLevel,
-												uint32_t													aKillEntityId) = 0;
+												uint32_t													aKillEntityId,
+												uint32_t													aKillFactionId) = 0;
 		virtual void						EventQueueGroupKillXP(
 												uint64_t													aGroupId,
 												uint32_t													aKillLevel,
 												uint32_t													aKillEntityId,
+												uint32_t													aKillFactionId,
 												std::vector<uint32_t>&										aThreatEntityInstanceIds) = 0;
 		virtual void						EventQueueGroupLoot(
 												uint32_t													aEntityInstanceId,

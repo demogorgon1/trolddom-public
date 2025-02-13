@@ -35,3 +35,23 @@ faction combat_npcs:
 	flags: [ friendly ]
 }
 
+
+##########################################################################################
+# Thalvaron enemy factions
+
+faction rebels:
+{
+	string: "The Ember Veil"
+	flags: [ show ]
+}
+
+faction skullforge_orcs:
+{
+	string: "Skullforge Clan"
+	flags: [ show ]
+}
+
+faction dark_elves:
+{
+	# Not shown in game
+}

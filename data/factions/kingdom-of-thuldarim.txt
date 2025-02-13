@@ -3,4 +3,6 @@ faction kingdom_of_thuldarim:
 	string: "Kingdom of Thuldarim"
 	flags: [ friendly reputation show ]
 	default_reputation: !NEUTRAL_REPUTATION{}
+	
+	reputation_from_kill skullforge_orcs: 20
 }

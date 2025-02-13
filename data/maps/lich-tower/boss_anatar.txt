@@ -30,7 +30,7 @@ entity lich_tower_anatar: !NPC
 	_string: "Anatar" 
 	_level: 19
 	_elite: true
-	_faction: monsters 
+	_faction: dark_elves 
 	_sprite: dark_elf_1 
 	_sprite_dead: dark_elf_1_dead 
 	_weapon_damage: 1
