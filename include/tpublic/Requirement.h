@@ -53,7 +53,8 @@ namespace tpublic
 			TYPE_MUST_HAVE_MORE_RAGE_THAN,
 			TYPE_MUST_NOT_BE_READY_TO_TURN_IN_QUEST,
 			TYPE_MUST_NOT_BE_TYPE,
-			TYPE_MUST_NOT_HAVE_ITEM
+			TYPE_MUST_NOT_HAVE_ITEM,
+			TYPE_MUST_HAVE_REPUTATION_LEVEL,
 		};
 
 		static DataType::Id
@@ -89,6 +90,7 @@ namespace tpublic
 			case TYPE_MUST_BE_FACTION:
 			case TYPE_MUST_HAVE_NEGATIVE_REPUTATION:
 			case TYPE_MUST_BE_DISCIPLE:
+			case TYPE_MUST_HAVE_REPUTATION_LEVEL:
 				return DataType::ID_FACTION;
 
 			case TYPE_MUST_HAVE_DISCOVERED_ZONE:
@@ -233,6 +235,8 @@ namespace tpublic
 				m_type = TYPE_MUST_NOT_BE_READY_TO_TURN_IN_QUEST;
 			else if(typeString == "must_not_have_item")
 				m_type = TYPE_MUST_NOT_HAVE_ITEM;
+			else if(typeString == "must_have_reputation_level")
+				m_type = TYPE_MUST_HAVE_REPUTATION_LEVEL;
 			else
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid type.", aSource->m_annotation->GetIdentifier());
 
@@ -251,6 +255,8 @@ namespace tpublic
 				{
 					if (aChild->m_name == "id")
 						m_id = TypeAndSourceToId(m_type, aChild);
+					else if(aChild->m_name == "value")
+						m_value = aChild->GetUInt32();
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 				});
@@ -264,6 +270,7 @@ namespace tpublic
 			aWriter->WritePOD(m_target);
 			aWriter->WritePOD(m_type);
 			aWriter->WriteUInt(m_id);
+			aWriter->WriteUInt(m_value);
 		}
 
 		bool
@@ -276,6 +283,8 @@ namespace tpublic
 				return false;
 			if (!aReader->ReadUInt(m_id))
 				return false;
+			if (!aReader->ReadUInt(m_value))
+				return false;
 			return true;
 		}
 
@@ -283,6 +292,7 @@ namespace tpublic
 		Target								m_target = INVALID_TARGET;
 		Type								m_type = INVALID_TYPE;
 		uint32_t							m_id = 0;
+		uint32_t							m_value = 0;
 	};
 
 }

@@ -406,14 +406,25 @@ namespace tpublic
 				break;
 
 			case Requirement::TYPE_MUST_HAVE_NEGATIVE_REPUTATION:
+			case Requirement::TYPE_MUST_HAVE_REPUTATION_LEVEL:
 				{
 					if (!entity->IsPlayer())
 						return false;
 
 					const Components::Reputation* reputation = entity->GetComponent<Components::Reputation>();
 					int32_t factionReputation = reputation->GetReputation(aRequirement->m_id);
-					if(factionReputation >= 0)
-						return false;
+
+					if(aRequirement->m_type == Requirement::TYPE_MUST_HAVE_REPUTATION_LEVEL)
+					{
+						uint32_t levelIndex = aManifest->m_reputationMetrics.GetLevelIndexFromReputation(factionReputation);
+						if(levelIndex < aRequirement->m_value)
+							return false;							
+					}
+					else
+					{
+						if (factionReputation >= 0)
+							return false;
+					}
 				}
 				break;
 

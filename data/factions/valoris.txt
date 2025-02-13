@@ -6,3 +6,33 @@ faction valoris:
 	
 	reputation_from_kill rebels: 20
 }
+
+################################################################################
+# Quartermaster items
+
+item valoris_ring_1:
+{
+	equipment_slots: [ finger_1 finger_2 ]
+	binds: when_picked_up
+	required_level: 18
+	icon: icon_ring_1
+	rarity: rare
+	string: "Ring of Valoris"
+	budget_bias: -10
+	stat_weight constitution: 1
+	stat_weight strength: 1
+	stat phys_crit_chance: 1
+}
+
+
+item valoris_ring_2:
+{
+	equipment_slots: [ finger_1 finger_2 ]
+	binds: when_picked_up
+	required_level: 18
+	icon: icon_ring_2
+	rarity: rare
+	string: "Royal Mark of Wisdom"
+	stat_weight constitution: 1
+	stat_weight wisdom: 2
+}

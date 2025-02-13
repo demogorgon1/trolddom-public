@@ -182,6 +182,44 @@ namespace tpublic
 				std::optional<MapTransfer>	m_mapTransfer;
 			};
 
+			struct SellReputationLevelRequirement
+			{
+				SellReputationLevelRequirement()
+				{
+
+				}
+
+				SellReputationLevelRequirement(
+					const SourceNode*	aSource)
+				{
+					m_factionId = aSource->m_sourceContext->m_persistentIdTable->GetId(aSource->m_debugInfo, DataType::ID_FACTION, aSource->m_name.c_str());
+					m_level = aSource->GetUInt32();
+				}
+
+				void
+				ToStream(
+					IWriter*			aWriter) const
+				{
+					aWriter->WriteUInt(m_factionId);
+					aWriter->WriteUInt(m_level);
+				}
+
+				bool
+				FromStream(
+					IReader*			aReader)
+				{
+					if(!aReader->ReadUInt(m_factionId))
+						return false;
+					if (!aReader->ReadUInt(m_level))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t					m_factionId = 0;
+				uint32_t					m_level = 0;
+			};
+
 			struct Sell
 			{
 				Sell()
@@ -200,6 +238,8 @@ namespace tpublic
 							m_cost = aChild->GetUInt32();
 						else if(aChild->m_name == "quantity")
 							m_quantity = aChild->GetUInt32();
+						else if(aChild->m_tag == "reputation_level_requirement")
+							m_reputationLevelRequirement = SellReputationLevelRequirement(aChild);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 					});
@@ -212,6 +252,7 @@ namespace tpublic
 					aWriter->WriteUInt(m_itemId);
 					aWriter->WriteUInt(m_cost);
 					aWriter->WriteUInt(m_quantity);
+					aWriter->WriteOptionalObject(m_reputationLevelRequirement);
 				}
 
 				bool
@@ -224,13 +265,16 @@ namespace tpublic
 						return false;
 					if (!aReader->ReadUInt(m_quantity))
 						return false;
+					if(!aReader->ReadOptionalObject(m_reputationLevelRequirement))
+						return false;
 					return true;
 				}
 
 				// Public data
-				uint32_t			m_itemId = 0;
-				uint32_t			m_cost = 0;
-				uint32_t			m_quantity = 1;
+				uint32_t										m_itemId = 0;
+				uint32_t										m_cost = 0;
+				uint32_t										m_quantity = 1;
+				std::optional<SellReputationLevelRequirement>	m_reputationLevelRequirement;
 			};
 
 			struct TrainProfession
