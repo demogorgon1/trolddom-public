@@ -23,6 +23,15 @@ namespace tpublic
 				TYPE_DUNGEON
 			};
 
+			enum RepeatMode : uint8_t
+			{
+				INVALID_REPEAT_MODE,
+
+				REPEAT_MODE_NONE,
+				REPEAT_MODE_ALWAYS,
+				REPEAT_MODE_DAILY
+			};
+
 			static Type
 			SourceToType(
 				const SourceNode*		aSource)
@@ -36,6 +45,21 @@ namespace tpublic
 					return TYPE_DUNGEON;
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid type.", aSource->GetIdentifier());
 				return INVALID_TYPE;
+			}
+
+			static RepeatMode
+			SourceToRepeatMode(
+				const SourceNode*		aSource)
+			{
+				std::string_view t(aSource->GetIdentifier());
+				if(t == "none")
+					return REPEAT_MODE_NONE;
+				else if(t == "always")
+					return REPEAT_MODE_ALWAYS;
+				else if(t == "daily")
+					return REPEAT_MODE_DAILY;
+				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid repeat mode.", aSource->GetIdentifier());
+				return INVALID_REPEAT_MODE;
 			}
 
 			void
@@ -88,6 +112,8 @@ namespace tpublic
 							m_rewardReputationMultiplier = aChild->GetFloat();
 						else if (aChild->m_name == "type")
 							m_type = SourceToType(aChild);
+						else if (aChild->m_name == "repeat_mode")
+							m_repeatMode = SourceToRepeatMode(aChild);
 						else if (aChild->m_name == "objectives")
 							aChild->GetIdArray(DataType::ID_OBJECTIVE, m_objectives);
 						else if (aChild->m_name == "prerequisites")
@@ -128,6 +154,7 @@ namespace tpublic
 				aStream->WriteUInt(m_cost);
 				aStream->WriteUInt(m_rewardCash);
 				aStream->WriteFloat(m_rewardReputationMultiplier);
+				aStream->WritePOD(m_repeatMode);
 			}
 
 			bool
@@ -170,6 +197,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadFloat(m_rewardReputationMultiplier))
 					return false;
+				if (!aStream->ReadPOD(m_repeatMode))
+					return false;
 				return true;
 			}
 
@@ -201,6 +230,7 @@ namespace tpublic
 			float					m_rewardXPMultiplier = 1.0f;
 			float					m_rewardReputationMultiplier = 1.0f;
 			uint32_t				m_cost = 0;
+			RepeatMode				m_repeatMode = REPEAT_MODE_NONE;
 		};
 
 	}

@@ -185,7 +185,7 @@ namespace tpublic
 						return false;
 
 					const Components::CompletedQuests* completedQuests = entity->GetComponent<Components::CompletedQuests>();
-					bool hasCompletedQuest = completedQuests->m_questIds.HasValue(aRequirement->m_id);
+					bool hasCompletedQuest = completedQuests->HasQuest(aRequirement->m_id);
 					if(aRequirement->m_type == Requirement::TYPE_MUST_HAVE_COMPLETED_QUEST && !hasCompletedQuest)
 						return false;
 					else if (aRequirement->m_type == Requirement::TYPE_MUST_NOT_HAVE_COMPLETED_QUEST && hasCompletedQuest)

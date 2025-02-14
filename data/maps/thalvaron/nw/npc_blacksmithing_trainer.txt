@@ -1,0 +1,88 @@
+dialogue_screen .blacksmithing_trainer_trainer: !DEFAULT_BLACKSMITING_TRAINER{}
+
+dialogue_screen .blacksmithing_trainer_dialogue:
+{
+	text: 
+	[	
+		"Do you have anything for me? Or do you want something?"
+	]
+	
+	options:
+	[
+		{ quest: .blacksmithing_trainer_1 }
+		{ goto: .blacksmithing_trainer_trainer text: "Please teach me about blacksmithing." }
+	]
+}
+
+dialogue_root .blacksmithing_trainer_dialogue:
+{
+	.blacksmithing_trainer_dialogue: { }
+}
+
+entity thalvaron_blacksmithing_trainer: !NPC
+{
+	_string: "Brutus Longbottom"
+	_guild_name: "Blacksmithing Trainer"
+	_dialogue_root: .blacksmithing_trainer_dialogue	
+	_sprite: man_55
+	_sprite_dead: man_55_dead	
+	_level: 20
+	_faction: valoris		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .blacksmithing_trainer_1_a:
+{
+	string: "Copper Ore"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: item_copper_ore count: 5 }
+}
+
+objective .blacksmithing_trainer_1_b:
+{
+	string: "Iron Ore"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: item_iron_ore count: 5 }
+}
+
+
+quest .blacksmithing_trainer_1:
+{
+	string: "Helping the War Effort"
+
+	text:
+	[
+		"Deliver ores to Brutus Longbottom in Valoris."
+	]
+	
+	description: 
+	[
+		"We're quite busy producing equipment for the royal army and we're running low on ore! If you can deliver ore to us, you'll gain the favor of Valoris!"
+	]
+
+	progress:
+	[
+		"Glory to the kingdom!"
+	]
+	
+	completion:
+	[
+		"Great, your support will not be forgotton."
+	]
+	
+	objectives: [ .blacksmithing_trainer_1_a .blacksmithing_trainer_1_b ]
+	repeat_mode: always
+	level: 20
+	reward_xp_multiplier: 0
+	reward_cash_multiplier: 0
+	reward_reputation_multiplier: 1.8
+}

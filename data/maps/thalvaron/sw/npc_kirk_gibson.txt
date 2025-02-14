@@ -1,31 +1,4 @@
-dialogue_screen .kirk_gibson_blacksmithing:
-{
-	text: 
-	[	
-		"It's about forging destiny with hammer and flame. From mighty swords to sturdy armor, every strike crafts greatness."
-	]
-	
-	options:
-	[
-		{ goto: .kirk_gibson_greetings text: "Alright." }
-	]
-}
-
-dialogue_screen .kirk_gibson_trainer:
-{
-	train_profession<0>: blacksmithing
-	train_profession<1>: blacksmithing
-	train_ability: craft_copper_ingot
-	train_ability: craft_iron_ingot
-	train_ability: craft_copper_bracers
-	train_ability: craft_copper_belt
-	train_ability: craft_copper_gauntlets
-	train_ability: craft_copper_boots
-	train_ability: craft_copper_breeches
-	train_ability: craft_copper_blade
-	train_ability: craft_copper_armor
-	train_ability: craft_shiny_armguards
-}
+dialogue_screen .kirk_gibson_trainer: !DEFAULT_BLACKSMITING_TRAINER{}
 
 dialogue_screen .kirk_gibson_greetings:
 {
@@ -36,7 +9,6 @@ dialogue_screen .kirk_gibson_greetings:
 	
 	options:
 	[
-		{ goto: .kirk_gibson_blacksmithing text: "What can I use blacksmithing for?" }
 		{ goto: .kirk_gibson_trainer text: "Please teach me about blacksmithing." }
 	]
 }

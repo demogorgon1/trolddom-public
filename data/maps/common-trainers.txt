@@ -7,3 +7,19 @@
 	train_ability: craft_enchant_shield_wisdom
 	train_ability: craft_enchant_shield_major_constitution
 }
+
+!define DEFAULT_BLACKSMITING_TRAINER
+{
+	train_profession<0>: blacksmithing
+	train_profession<1>: blacksmithing
+	train_ability: craft_copper_ingot
+	train_ability: craft_iron_ingot
+	train_ability: craft_copper_bracers
+	train_ability: craft_copper_belt
+	train_ability: craft_copper_gauntlets
+	train_ability: craft_copper_boots
+	train_ability: craft_copper_breeches
+	train_ability: craft_copper_blade
+	train_ability: craft_copper_armor
+	train_ability: craft_shiny_armguards
+}
