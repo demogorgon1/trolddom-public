@@ -27,3 +27,15 @@
 	train_ability: craft_copper_armor
 	train_ability: craft_shiny_armguards
 }
+
+!define DEFAULT_FIRST_AID_TRAINER
+{
+	train_profession<0>: first_aid
+	train_profession<1>: first_aid
+	train_ability: craft_linen_bandage
+	train_ability: craft_heavy_linen_bandage
+	train_ability: craft_cottonweave_bandage
+	train_ability: craft_heavy_cottonweave_bandage
+	train_ability: craft_emberfelt_bandage
+	train_ability: craft_heavy_emberfelt_bandage
+}

@@ -635,6 +635,10 @@ sprites:
 	sprite icon_frostbloom : { tags: [ icon ] }
 	sprite icon_cottonweave_cloth : { tags: [ icon ] }
 	sprite icon_emberfelt_cloth : { tags: [ icon ] }
+	sprite icon_cottonweave_bandage : { tags: [ icon ] }
+	sprite icon_heavy_cottonweave_bandage : { tags: [ icon ] }
+	sprite icon_emberfelt_bandage : { tags: [ icon ] }
+	sprite icon_heavy_emberfelt_bandage : { tags: [ icon ] }
 }
 
 

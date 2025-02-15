@@ -11,13 +11,7 @@ dialogue_screen .caelum_first_aid:
 	]
 }
 
-dialogue_screen .caelum_trainer:
-{
-	train_profession<0>: first_aid
-	train_profession<1>: first_aid
-	train_ability: craft_linen_bandage
-	train_ability: craft_heavy_linen_bandage
-}
+dialogue_screen .caelum_trainer: !DEFAULT_FIRST_AID_TRAINER{}
 
 dialogue_screen .caelum_greetings:
 {
