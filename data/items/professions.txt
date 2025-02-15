@@ -45,8 +45,40 @@ item item_copper_ingot:
 
 item item_iron_ingot:
 {
-	item_level: 1
+	item_level: 4
 	icon: icon_iron_ingot
 	string: "Iron Ingot"
+	stack: 20	
+}
+
+item item_azuryte_ingot:
+{
+	item_level: 11
+	icon: icon_azuryte_ingot
+	string: "Azuryte Ingot"
+	stack: 20	
+}
+
+item item_gold_ingot:
+{
+	item_level: 4
+	icon: icon_gold_ingot
+	string: "Gold Ingot"
+	stack: 20	
+}
+
+item item_mithril_ingot:
+{
+	item_level: 14
+	icon: icon_mithril_ingot
+	string: "Mithril Ingot"
+	stack: 20	
+}
+
+item item_brontium_ingot:
+{
+	item_level: 17
+	icon: icon_brontium_ingot
+	string: "Brontium Ingot"
 	stack: 20	
 }

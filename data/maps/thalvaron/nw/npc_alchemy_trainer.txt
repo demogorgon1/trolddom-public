@@ -19,6 +19,7 @@ dialogue_screen .alchemy_trainer_greetings:
 	options:
 	[
 		{ quest: thalvaron_alchemy_trainer_1 }
+		{ quest: .alchemy_trainer_2 }
 		{ goto: .alchemy_trainer_trainer text: "Please teach me about alchemy." }
 	]
 }
@@ -36,7 +37,7 @@ entity thalvaron_alchemy_trainer: !NPC
 	_sprite: man_7
 	_sprite_dead: man_7_dead	
 	_level: 20
-	_faction: npcs		
+	_faction: valoris		
 	_creature_type: humanoid
 	_loot_table: .npc
 	_not_pushable: true	
@@ -103,3 +104,59 @@ quest thalvaron_alchemy_trainer_1:
 	
 	reward_one_item: [ .alchemy_trainer_1_a .alchemy_trainer_1_b ]
 }
+
+############################################################
+# Quest 2
+
+objective .alchemy_trainer_2_a:
+{
+	string: "Dewleaf"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: item_dewleaf count: 5 }
+}
+
+objective .alchemy_trainer_2_b:
+{
+	string: "Mistflower"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: item_mistflower count: 5 }
+}
+
+
+quest .alchemy_trainer_2:
+{
+	string: "Give Me All Your Herbs"
+
+	text:
+	[
+		"Deliver herbs to Brick Johnson in Valors."
+	]
+	
+	description: 
+	[
+		"I have a lot of alchemy to do and what do I need for that? Herbs! And a lot of them! Bring me all your can and I'll make sure to tell the higher ups."
+	]
+
+	progress:
+	[
+		"How is it going?"
+	]
+	
+	completion:
+	[
+		"Excellent, thanks!"
+	]
+	
+	objectives: [ .alchemy_trainer_2_a .alchemy_trainer_2_b ]
+	repeat_mode: always
+	level: 20
+	reward_xp_multiplier: 0
+	reward_cash_multiplier: 0
+	reward_reputation_multiplier: 1.8
+}
+
+

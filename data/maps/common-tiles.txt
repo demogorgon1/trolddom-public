@@ -258,7 +258,7 @@ sprites:
 	
 	cursor: { position: [ 0 128 ] }
 	
-	sprite snow: { flags: [ tile_walkable ] borders:
+	sprite snow: { flags: [ tile_walkable tile_snow ] borders:
 		[ snow_border_1 snow_border_2 snow_border_3 snow_border_4 snow_border_5 snow_border_6 snow_border_7
 		  snow_border_8 snow_border_9 snow_border_10 snow_border_11 snow_border_12 snow_border_13 snow_border_14
 		  snow_border_15 snow_border_16 snow_border_17 ] alt_tiles: [ snow_alt_1 snow_alt_2 ] }		
@@ -447,8 +447,8 @@ sprites:
 	sprite sand_alt_2: { flags: [ tile_walkable ] }
 	sprite dark_grass_alt_1: { flags: [ tile_walkable ] }
 	sprite dark_grass_alt_2: { flags: [ tile_walkable ] }
-	sprite snow_alt_1: { flags: [ tile_walkable ] }
-	sprite snow_alt_2: { flags: [ tile_walkable ] }
+	sprite snow_alt_1: { flags: [ tile_walkable tile_snow ] }
+	sprite snow_alt_2: { flags: [ tile_walkable tile_snow ] }
 	sprite ice_alt_1: { flags: [ tile_walkable ] }
 	sprite ice_alt_2: { flags: [ tile_walkable ] }
 	sprite snow_rocks_alt_1: { flags: [ tile_block_line_of_sight ] }

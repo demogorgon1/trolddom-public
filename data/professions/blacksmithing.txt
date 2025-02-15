@@ -48,6 +48,58 @@ ability craft_iron_ingot: !BLACKSMITHING_CRAFT
 }
 
 #####################################################
+# Azuryte Ingot
+
+ability craft_azuryte_ingot: !BLACKSMITHING_CRAFT
+{
+	_string: "Smelt Azuryte"
+	_item: item_azuryte_ingot
+	_produce: { item_azuryte_ingot: 1 } 
+	_materials: { item_azuryte_ore: 1 }
+	_skill: 25
+	_requires_furnace: true
+}
+
+#####################################################
+# Gold Ingot
+
+ability craft_gold_ingot: !BLACKSMITHING_CRAFT
+{
+	_string: "Smelt Gold"
+	_item: item_gold_ingot
+	_produce: { item_gold_ingot: 1 } 
+	_materials: { item_gold_ore: 1 }
+	_skill: 35
+	_requires_furnace: true
+}
+
+#####################################################
+# Mithril Ingot
+
+ability craft_mithril_ingot: !BLACKSMITHING_CRAFT
+{
+	_string: "Smelt Mithril"
+	_item: item_mithril_ingot
+	_produce: { item_mithril_ingot: 1 } 
+	_materials: { item_mithril_ore: 1 }
+	_skill: 45
+	_requires_furnace: true
+}
+
+#####################################################
+# Brontium Ingot
+
+ability craft_brontium_ingot: !BLACKSMITHING_CRAFT
+{
+	_string: "Smelt Brontium"
+	_item: item_brontium_ingot
+	_produce: { item_brontium_ingot: 1 } 
+	_materials: { item_brontium_ore: 1 }
+	_skill: 55
+	_requires_furnace: true
+}
+
+#####################################################
 # Copper Bracers
 
 item wrists_copper_bracers:

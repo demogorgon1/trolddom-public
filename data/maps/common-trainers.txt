@@ -14,6 +14,10 @@
 	train_profession<1>: blacksmithing
 	train_ability: craft_copper_ingot
 	train_ability: craft_iron_ingot
+	train_ability: craft_gold_ingot
+	train_ability: craft_azuryte_ingot
+	train_ability: craft_mithril_ingot
+	train_ability: craft_brontium_ingot
 	train_ability: craft_copper_bracers
 	train_ability: craft_copper_belt
 	train_ability: craft_copper_gauntlets

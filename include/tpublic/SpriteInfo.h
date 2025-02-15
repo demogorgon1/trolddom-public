@@ -19,9 +19,10 @@ namespace tpublic
 			FLAG_TILE_TOP					= 0x0008,
 			FLAG_TILE_WATER					= 0x0010,
 			FLAG_TILE_NO_WAVES				= 0x0020,
-			FLAG_STANDALONE					= 0x0040,
-			FLAG_CENTERED					= 0x0080,
-			FLAG_DOUBLED					= 0x0100
+			FLAG_TILE_SNOW					= 0x0040,
+			FLAG_STANDALONE					= 0x0080,
+			FLAG_CENTERED					= 0x0100,
+			FLAG_DOUBLED					= 0x0200
 		};
 
 		struct NamedAnchor
@@ -104,6 +105,8 @@ namespace tpublic
 				return FLAG_TILE_WATER;
 			if (strcmp(aString, "tile_no_waves") == 0)
 				return FLAG_TILE_NO_WAVES;
+			if (strcmp(aString, "tile_snow") == 0)
+				return FLAG_TILE_SNOW;
 			if (strcmp(aString, "standalone") == 0)
 				return FLAG_STANDALONE;
 			if (strcmp(aString, "centered") == 0)
@@ -111,6 +114,21 @@ namespace tpublic
 			if (strcmp(aString, "doubled") == 0)
 				return FLAG_DOUBLED;
 			return 0;
+		}
+
+		static inline uint16_t
+		SourceToFlags(
+			const SourceNode*	aSource)
+		{
+			uint16_t flags = 0;
+			aSource->GetArray()->ForEachChild([&flags](
+				const SourceNode* aChild)
+			{
+				uint16_t flag = StringToFlag(aChild->GetIdentifier());
+				TP_VERIFY(flag != 0, aChild->m_debugInfo, "'%s' is not a valid sprite flag.", aChild->GetIdentifier());
+				flags |= flag;
+			});
+			return flags;
 		}
 
 		void

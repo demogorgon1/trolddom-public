@@ -31,4 +31,3 @@ entity thalvaron_dwarf_blacksmith: !NPC
 	_loot_table: .npc
 	_not_pushable: true	
 }
-

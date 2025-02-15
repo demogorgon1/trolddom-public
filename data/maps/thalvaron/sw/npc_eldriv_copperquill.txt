@@ -7,6 +7,7 @@ dialogue_screen .eldriv_copperquill_dialogue:
 	
 	options:
 	[
+		{ quest: .eldriv_copperquill_1 }
 	]
 }
 
@@ -26,5 +27,60 @@ entity thalvaron_eldriv_copperquill: !NPC
 	_creature_type: humanoid
 	_loot_table: .npc
 	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .eldriv_copperquill_1_a:
+{
+	string: "Dewleaf"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: item_dewleaf count: 5 }
+}
+
+objective .eldriv_copperquill_1_b:
+{
+	string: "Mistflower"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: item_mistflower count: 5 }
+}
+
+
+quest .eldriv_copperquill_1:
+{
+	string: "We'll Need Some Herbs"
+
+	text:
+	[
+		"Deliver herbs to Eldriv Copperquill in Durgan Tharokt."
+	]
+	
+	description: 
+	[
+		"I don't know if you've noticed, but we don't actually have a great variety of herbs growing here in the badlands. If you can bring me some for my alchemy experiments, that would be great. I need as many as I can get my"
+		"hands on!"
+	]
+
+	progress:
+	[
+		"How is it going?"
+	]
+	
+	completion:
+	[
+		"Excellent, thanks!"
+	]
+	
+	objectives: [ .eldriv_copperquill_1_a .eldriv_copperquill_1_b ]
+	repeat_mode: always
+	level: 20
+	reward_xp_multiplier: 0
+	reward_cash_multiplier: 0
+	reward_reputation_multiplier: 1.8
 }
 

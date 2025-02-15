@@ -3,6 +3,7 @@
 #include "../DataBase.h"
 #include "../EntityState.h"
 #include "../IntRange.h"
+#include "../SpriteInfo.h"
 
 namespace tpublic
 {
@@ -145,6 +146,14 @@ namespace tpublic
 						{
 							aChild->GetIdArray(DataType::ID_ZONE, m_zones);
 						}
+						else if (aChild->m_name == "must_have_tile_flags")
+						{
+							m_mustHaveTileFlags = SpriteInfo::SourceToFlags(aChild);
+						}
+						else if (aChild->m_name == "must_not_have_tile_flags")
+						{
+							m_mustNotHaveTileFlags = SpriteInfo::SourceToFlags(aChild);
+						}
 						else if (aChild->m_name == "init_state")
 						{
 							m_initState = EntityState::StringToId(aChild->GetIdentifier());
@@ -171,6 +180,8 @@ namespace tpublic
 					aStream->WriteObjectPointers(m_spawnConditions);
 					m_level.ToStream(aStream);
 					aStream->WriteUInts(m_zones);
+					aStream->WritePOD(m_mustHaveTileFlags);
+					aStream->WritePOD(m_mustNotHaveTileFlags);
 				}
 
 				bool
@@ -188,6 +199,10 @@ namespace tpublic
 					if(!m_level.FromStream(aStream))
 						return false;
 					if(!aStream->ReadUInts(m_zones))
+						return false;
+					if(!aStream->ReadPOD(m_mustHaveTileFlags))
+						return false;
+					if (!aStream->ReadPOD(m_mustNotHaveTileFlags))
 						return false;
 					return true;
 				}
@@ -215,6 +230,15 @@ namespace tpublic
 					return aLevel >= m_level.m_min && aLevel <= m_level.m_max;
 				}
 
+				bool
+				CheckTileFlags(
+					uint16_t		aTileFlags) const
+				{
+					if((aTileFlags & m_mustNotHaveTileFlags) != 0)
+						return false;
+					return (aTileFlags & m_mustHaveTileFlags) == m_mustHaveTileFlags;
+				}
+
 				// Public data
 				uint32_t										m_entityId = 0;
 				uint32_t										m_weight = 1;
@@ -222,6 +246,8 @@ namespace tpublic
 				std::vector<std::unique_ptr<SpawnCondition>>	m_spawnConditions;
 				UIntRange										m_level;
 				std::vector<uint32_t>							m_zones;
+				uint16_t										m_mustHaveTileFlags = 0;
+				uint16_t										m_mustNotHaveTileFlags = 0;
 			};
 
 			struct SpawnTimer

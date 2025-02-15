@@ -619,8 +619,22 @@ sprites:
 	sprite icon_magic_dust_3 : { tags: [ icon ] }
 	sprite icon_magic_crystal_2 : { tags: [ icon ] }
 	sprite icon_magic_crystal_3 : { tags: [ icon ] }
+	sprite icon_emberbloom : { tags: [ icon ] }
+	sprite icon_sunweave : { tags: [ icon ] }
+	sprite icon_sylmarel : { tags: [ icon ] }
+	sprite icon_azuryte_ore : { tags: [ icon ] }
+	sprite icon_gold_ore : { tags: [ icon ] }
 	
-	
+	cursor: { position: [ 0 544 ] }		
+	sprite icon_mithril_ore : { tags: [ icon ] }
+	sprite icon_brontium_ore : { tags: [ icon ] }
+	sprite icon_azuryte_ingot : { tags: [ icon ] }
+	sprite icon_gold_ingot : { tags: [ icon ] }
+	sprite icon_mithril_ingot : { tags: [ icon ] }
+	sprite icon_brontium_ingot : { tags: [ icon ] }
+	sprite icon_frostbloom : { tags: [ icon ] }
+	sprite icon_cottonweave_cloth : { tags: [ icon ] }
+	sprite icon_emberfelt_cloth : { tags: [ icon ] }
 }
 
 

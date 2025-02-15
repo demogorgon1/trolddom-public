@@ -4,6 +4,27 @@ item item_linen_cloth:
 	loot_groups: [ world_drops_cloth ]
 	icon: icon_linen_cloth
 	stack: 20
-	level_range: [ 1 7 ]
+	level_range: [ 1 10 ]
 	item_level: 1
+}
+
+item item_cottonweave_cloth:
+{
+	string: "Cottonweave Cloth"
+	loot_groups: [ world_drops_cloth ]
+	icon: icon_cottonweave_cloth
+	stack: 20
+	level_range: [ 11 18 ]
+	item_level: 11
+}
+
+
+item item_emberfelt_cloth:
+{
+	string: "Emberfelt Cloth"
+	loot_groups: [ world_drops_cloth ]
+	icon: icon_emberfelt_cloth
+	stack: 20
+	level_range: [ 17 24 ]
+	item_level: 17
 }

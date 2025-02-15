@@ -19,6 +19,7 @@ ${
 	_loot_table: .herbalism_wild_herbs
 	_profession_skill: 0
 	_sprite: wild_herbs
+	_item_level: 1
 }
 
 loot_group .herbalism_wild_herbs: { }
@@ -36,6 +37,7 @@ ${
 	_loot_table: .herbalism_dewleaf
 	_profession_skill: 0
 	_sprite: dewleaf
+	_item_level: 1
 }
 
 loot_group .herbalism_dewleaf: { }
@@ -60,6 +62,7 @@ ${
 	_loot_table: .herbalism_mistflower
 	_profession_skill: 20
 	_sprite: mistflower
+	_item_level: 4
 }
 
 loot_group .herbalism_mistflower: { }
@@ -73,3 +76,103 @@ loot_table .herbalism_mistflower:
 }
 item item_mistflower: !GATHER_ITEM { }
 entity herbalism_mistflower: !GATHER_ENTITY { }
+
+#############################################################################
+# Emberbloom
+${
+	_icon: icon_emberbloom
+	_item_string: "Emberbloom"
+	_entity_string: "Emberbloom"
+	_loot_groups: [ .herbalism_emberbloom ]
+	_loot_table: .herbalism_emberbloom
+	_profession_skill: 40
+	_sprite: emberbloom
+	_item_level: 11
+}
+
+loot_group .herbalism_emberbloom: { }
+loot_table .herbalism_emberbloom: 
+{ 
+	slots: 
+	[ 
+		{ possibility: { loot_group: .herbalism_emberbloom } } 
+		{ possibility: { weight: 4 } possibility: { loot_group: .herbalism_wild_herbs } }
+	] 
+}
+item item_emberbloom: !GATHER_ITEM { }
+entity herbalism_emberbloom: !GATHER_ENTITY { }
+
+#############################################################################
+# Sunweave
+${
+	_icon: icon_sunweave
+	_item_string: "Sunweave"
+	_entity_string: "Sunweave"
+	_loot_groups: [ .herbalism_sunweave ]
+	_loot_table: .herbalism_sunweave
+	_profession_skill: 60
+	_sprite: sunweave
+	_item_level: 14
+}
+
+loot_group .herbalism_sunweave: { }
+loot_table .herbalism_sunweave: 
+{ 
+	slots: 
+	[ 
+		{ possibility: { loot_group: .herbalism_sunweave } } 
+		{ possibility: { weight: 4 } possibility: { loot_group: .herbalism_wild_herbs } }
+	] 
+}
+item item_sunweave: !GATHER_ITEM { }
+entity herbalism_sunweave: !GATHER_ENTITY { }
+
+#############################################################################
+# Frostbloom
+${
+	_icon: icon_frostbloom
+	_item_string: "Frostbloom"
+	_entity_string: "Frostbloom"
+	_loot_groups: [ .herbalism_frostbloom ]
+	_loot_table: .herbalism_frostbloom
+	_profession_skill: 70
+	_sprite: frostbloom
+	_item_level: 11
+}
+
+loot_group .herbalism_frostbloom: { }
+loot_table .herbalism_frostbloom: 
+{ 
+	slots: 
+	[ 
+		{ possibility: { loot_group: .herbalism_frostbloom } } 
+		{ possibility: { weight: 4 } possibility: { loot_group: .herbalism_wild_herbs } }
+	] 
+}
+item item_frostbloom: !GATHER_ITEM { }
+entity herbalism_frostbloom: !GATHER_ENTITY { }
+
+#############################################################################
+# Sylmarel
+${
+	_icon: icon_sylmarel
+	_item_string: "Sylmarel"
+	_entity_string: "Sylmarel"
+	_loot_groups: [ .herbalism_sylmarel ]
+	_loot_table: .herbalism_sylmarel
+	_profession_skill: 80
+	_sprite: sylmarel
+	_item_level: 17
+}
+
+loot_group .herbalism_sylmarel: { }
+loot_table .herbalism_sylmarel: 
+{ 
+	slots: 
+	[ 
+		{ possibility: { loot_group: .herbalism_sylmarel } } 
+		{ possibility: { weight: 4 } possibility: { loot_group: .herbalism_wild_herbs } }
+	] 
+}
+item item_sylmarel: !GATHER_ITEM { }
+entity herbalism_sylmarel: !GATHER_ENTITY { }

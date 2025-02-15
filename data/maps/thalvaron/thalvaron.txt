@@ -222,6 +222,7 @@ map_entity_spawn thalvaron_pearly_c_1_quest_item: { entity thalvaron_pearly_c_1_
 map_entity_spawn thalvaron_pearly_c_1_quest_item_2: { entity thalvaron_pearly_c_1_quest_item_2: { init_state: default } }
 map_entity_spawn thalvaron_spirit_of_joonor_b: { entity thalvaron_spirit_of_joonor_b: { init_state: default } }
 map_entity_spawn thalvaron_warden_ghourian: { entity thalvaron_warden_ghourian: { init_state: default } }
+map_entity_spawn thalvaron_elf_collector: { entity thalvaron_elf_collector: { init_state: default } }
 
 # SW
 map_entity_spawn thalvaron_brian_riddle: { entity thalvaron_brian_riddle: { init_state: default } }
@@ -537,7 +538,8 @@ map_palette .stuff:
 	entity_spawn thalvaron_gorge_orc: [ 67 88 184 ]
 	entity_spawn thalvaron_poison_lizard: [ 156 94 114 ]
 	entity_spawn thalvaron_warden_ghourian: [ 255 92 1 ]
-
+	entity_spawn thalvaron_elf_collector: [ 49 194 46 ]
+	
 	# SW
 	entity_spawn thalvaron_brian_riddle: [ 66 88 99 ]
 	entity_spawn thalvaron_francis: [ 166 88 99 ]
@@ -751,6 +753,8 @@ map_palette .doodads:
 	doodad wall_sign_generic<"The Pick and Pint">: [ 97 123 131 ]	
 	doodad sign_generic<"Brimiar">: [ 177 171 221 ]	
 	doodad sign_generic<"Please wipe your feet">: [ 177 171 121 ]	
+	doodad wall_sign_generic<"Enchanted">: [ 197 123 131 ]	
+	doodad wall_sign_generic<"Alchemy 'R Us">: [ 197 223 131 ]	
 }
 
 map_palette .cliffs:
