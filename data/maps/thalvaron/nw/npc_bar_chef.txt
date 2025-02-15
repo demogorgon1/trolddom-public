@@ -5,17 +5,7 @@ dialogue_screen .bar_chef_vendor:
 	sell item_rice: { quantity: 1 }	
 }
 
-dialogue_screen .bar_chef_trainer:
-{
-	train_profession<0>: cooking
-	train_profession<1>: cooking
-	train_ability: craft_dry_bread
-	train_ability: craft_pickled_herring
-	train_ability: craft_pickled_sucker
-	train_ability: craft_pickled_eel_pie
-	train_ability: craft_pickled_moonfish
-	train_ability: craft_spiced_rice
-}
+dialogue_screen .bar_chef_trainer: !DEFAULT_COOKING_TRAINER{}
 
 dialogue_screen .bar_chef_dialogue_gnome:
 {

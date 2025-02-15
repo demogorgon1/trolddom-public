@@ -11,11 +11,7 @@ dialogue_screen .elysia_herbalism:
 	]	
 }
 
-dialogue_screen .elysia_trainer:
-{
-	train_profession<0>: herbalism
-	train_profession<1>: herbalism
-}
+dialogue_screen .elysia_trainer: !DEFAULT_HERBALISM_TRAINER{}
 
 dialogue_screen .elysia_greetings:
 {

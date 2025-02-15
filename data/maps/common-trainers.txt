@@ -28,6 +28,24 @@
 	train_ability: craft_shiny_armguards
 }
 
+!define DEFAULT_HERBALISM_TRAINER
+{
+	train_profession<0>: herbalism
+	train_profession<1>: herbalism
+}
+
+!define DEFAULT_MINING_TRAINER
+{
+	train_profession<0>: mining
+	train_profession<1>: mining
+}
+
+!define DEFAULT_FISHING_TRAINER
+{
+	train_profession<0>: fishing
+	train_profession<1>: fishing
+}
+
 !define DEFAULT_FIRST_AID_TRAINER
 {
 	train_profession<0>: first_aid
@@ -38,4 +56,32 @@
 	train_ability: craft_heavy_cottonweave_bandage
 	train_ability: craft_emberfelt_bandage
 	train_ability: craft_heavy_emberfelt_bandage
+}
+
+!define DEFAULT_COOKING_TRAINER
+{
+	train_profession<0>: cooking
+	train_profession<1>: cooking
+	train_ability: craft_dry_bread
+	train_ability: craft_pickled_herring
+	train_ability: craft_pickled_sucker
+	train_ability: craft_pickled_eel_pie
+	train_ability: craft_pickled_moonfish
+	train_ability: craft_spiced_rice
+	train_ability: craft_pickled_toesnapper
+	train_ability: craft_steamed_trout
+	train_ability: craft_seared_bass
+	train_ability: craft_spicy_perch_fillet
+	train_ability: craft_mistveil_balls	
+}
+
+!define DEFAULT_ALCHEMY_TRAINER
+{
+	train_profession<0>: alchemy
+	train_profession<1>: alchemy
+	train_ability: craft_small_healing_potion
+	train_ability: craft_small_mana_potion
+	train_ability: craft_elixir_of_the_bear
+	train_ability: craft_elixir_of_the_owl
+	train_ability: craft_elixir_of_the_giant
 }

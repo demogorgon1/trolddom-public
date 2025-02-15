@@ -639,6 +639,17 @@ sprites:
 	sprite icon_heavy_cottonweave_bandage : { tags: [ icon ] }
 	sprite icon_emberfelt_bandage : { tags: [ icon ] }
 	sprite icon_heavy_emberfelt_bandage : { tags: [ icon ] }
+	sprite icon_fish_4 : { tags: [ icon ] }
+	sprite icon_fish_5 : { tags: [ icon ] }
+	sprite icon_fish_6 : { tags: [ icon ] }
+	
+	cursor: { position: [ 0 560 ] }		
+	sprite icon_fish_7 : { tags: [ icon ] }
+	sprite icon_fish_3_cooked : { tags: [ icon ] }
+	sprite icon_fish_6_cooked : { tags: [ icon ] }
+	sprite icon_fish_4_cooked : { tags: [ icon ] }
+	sprite icon_fish_5_cooked : { tags: [ icon ] }
+	sprite icon_fish_7_cooked : { tags: [ icon ] }
 }
 
 

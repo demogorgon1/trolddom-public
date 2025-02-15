@@ -1,0 +1,34 @@
+dialogue_screen .herbalism_trainer_trainer: !DEFAULT_HERBALISM_TRAINER{}
+
+dialogue_screen .herbalism_trainer_dialogue:
+{
+	text: 
+	[	
+		"Yes?"
+	]
+	
+	options:
+	[
+		{ goto: .herbalism_trainer_trainer text: "Please teach me about herbalism." }
+	]
+}
+
+dialogue_root .herbalism_trainer_dialogue:
+{
+	.herbalism_trainer_dialogue: { }
+}
+
+entity thalvaron_herbalism_trainer: !NPC
+{
+	_string: "Rinetta Tyson"
+	_guild_name: "Herbalism Trainer"
+	_dialogue_root: .herbalism_trainer_dialogue	
+	_sprite: woman_24
+	_sprite_dead: woman_24_dead	
+	_level: 20
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

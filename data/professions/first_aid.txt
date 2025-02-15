@@ -128,17 +128,17 @@ ability craft_heavy_linen_bandage: !ABILITY_CRAFT_BANDAGE {}
 # Cottonweave Bandage
 ${
 	_string: "Cottonweave Bandage"
-	_description: "Restores 50 health over 5 seconds."
+	_description: "Restores 90 health over 5 seconds."
 	_craft_description: "Craft a Cottonweave Bandage."
-	_level: 1
+	_level: 7
 	_icon: icon_cottonweave_bandage
-	_heal_tick: 10
+	_heal_tick: 18
 	_ability_tick: consumable_cottonweave_bandage_tick
 	_ability: consumable_cottonweave_bandage
 	_aura: consumable_cottonweave_bandage
 	_materials: { item_cottonweave_cloth: 1 }
 	_item: { consumable_cottonweave_bandage: 1 }
-	_skill: 0
+	_skill: 35
 }
 
 ability consumable_cottonweave_bandage_tick: !ABILITY_BANDAGE_TICK {}
@@ -151,17 +151,17 @@ ability craft_cottonweave_bandage: !ABILITY_CRAFT_BANDAGE {}
 # Heavy Cottonweave Bandage
 ${
 	_string: "Heavy Cottonweave Bandage"
-	_description: "Restores 70 health over 5 seconds."
+	_description: "Restores 110 health over 5 seconds."
 	_craft_description: "Craft a Heavy Cottonweave Bandage."
-	_level: 4
+	_level: 10
 	_icon: icon_heavy_cottonweave_bandage
-	_heal_tick: 14
+	_heal_tick: 22
 	_ability_tick: consumable_heavy_cottonweave_bandage_tick
 	_ability: consumable_heavy_cottonweave_bandage
 	_aura: consumable_heavy_cottonweave_bandage
 	_materials: { item_cottonweave_cloth: 2 }
 	_item: { consumable_heavy_cottonweave_bandage: 1 }
-	_skill: 20
+	_skill: 50
 }
 
 ability consumable_heavy_cottonweave_bandage_tick: !ABILITY_BANDAGE_TICK {}
@@ -174,17 +174,17 @@ ability craft_heavy_cottonweave_bandage: !ABILITY_CRAFT_BANDAGE {}
 # Emberfelt Bandage
 ${
 	_string: "Emberfelt Bandage"
-	_description: "Restores 50 health over 5 seconds."
+	_description: "Restores 130 health over 5 seconds."
 	_craft_description: "Craft a Emberfelt Bandage."
-	_level: 1
+	_level: 13
 	_icon: icon_emberfelt_bandage
-	_heal_tick: 10
+	_heal_tick: 26
 	_ability_tick: consumable_emberfelt_bandage_tick
 	_ability: consumable_emberfelt_bandage
 	_aura: consumable_emberfelt_bandage
 	_materials: { item_emberfelt_cloth: 1 }
 	_item: { consumable_emberfelt_bandage: 1 }
-	_skill: 0
+	_skill: 65
 }
 
 ability consumable_emberfelt_bandage_tick: !ABILITY_BANDAGE_TICK {}
@@ -197,17 +197,17 @@ ability craft_emberfelt_bandage: !ABILITY_CRAFT_BANDAGE {}
 # Heavy Emberfelt Bandage
 ${
 	_string: "Heavy Emberfelt Bandage"
-	_description: "Restores 70 health over 5 seconds."
+	_description: "Restores 150 health over 5 seconds."
 	_craft_description: "Craft a Heavy Emberfelt Bandage."
-	_level: 4
+	_level: 16
 	_icon: icon_heavy_emberfelt_bandage
-	_heal_tick: 14
+	_heal_tick: 30
 	_ability_tick: consumable_heavy_emberfelt_bandage_tick
 	_ability: consumable_heavy_emberfelt_bandage
 	_aura: consumable_heavy_emberfelt_bandage
 	_materials: { item_emberfelt_cloth: 2 }
 	_item: { consumable_heavy_emberfelt_bandage: 1 }
-	_skill: 20
+	_skill: 80
 }
 
 ability consumable_heavy_emberfelt_bandage_tick: !ABILITY_BANDAGE_TICK {}

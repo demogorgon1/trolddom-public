@@ -75,3 +75,64 @@ ability craft_spiced_rice: !COOKING_CRAFT
 	_materials: { item_rice: 1 item_water: 1 item_wild_herbs: 1 }	
 	_skill: 55
 }
+
+#####################################################
+# Pickled Toesnapper
+
+ability craft_pickled_toesnapper: !COOKING_CRAFT
+{
+	_string: "Pickled Toesnapper"
+	_item: consumable_pickled_toesnapper
+	_produce: { consumable_pickled_toesnapper: 1 } 
+	_materials: { item_bony_toesnapper: 1 }	
+	_skill: 50
+}
+
+#####################################################
+# Steamed Trout
+
+ability craft_steamed_trout: !COOKING_CRAFT
+{
+	_string: "Steamed Trout"
+	_item: consumable_steamed_trout
+	_produce: { consumable_steamed_trout: 1 } 
+	_materials: { item_blueback_trout: 1 }	
+	_skill: 60
+}
+
+#####################################################
+# Seared Bass
+
+ability craft_seared_bass: !COOKING_CRAFT
+{
+	_string: "Seared Bass"
+	_item: consumable_seared_bass
+	_produce: { consumable_seared_bass: 1 } 
+	_materials: { item_stormscale_bass: 1 }	
+	_skill: 70
+}
+
+#####################################################
+# Spicy Perch Fillet
+
+ability craft_spicy_perch_fillet: !COOKING_CRAFT
+{
+	_string: "Spicy Perch Fillet"
+	_item: consumable_spicy_perch_fillet
+	_produce: { consumable_spicy_perch_fillet: 1 } 
+	_materials: { item_perch: 1 }	
+	_skill: 80
+}
+
+#####################################################
+# Mistveil Balls
+
+ability craft_mistveil_balls: !COOKING_CRAFT
+{
+	_string: "Mistveil Balls"
+	_item: consumable_mistveil_balls
+	_produce: { consumable_mistveil_balls: 1 } 
+	_materials: { item_mistveil: 1 }	
+	_skill: 90
+}
+

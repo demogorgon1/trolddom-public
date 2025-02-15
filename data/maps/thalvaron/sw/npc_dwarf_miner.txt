@@ -11,11 +11,7 @@ dialogue_screen .dwarf_miner_mining:
 	]
 }
 
-dialogue_screen .dwarf_miner_trainer:
-{
-	train_profession<0>: mining
-	train_profession<1>: mining
-}
+dialogue_screen .dwarf_miner_trainer: !DEFAULT_MINING_TRAINER{}
 
 dialogue_screen .dwarf_miner_greetings:
 {

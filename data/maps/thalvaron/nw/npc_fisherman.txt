@@ -1,8 +1,4 @@
-dialogue_screen .fisherman_trainer:
-{
-	train_profession<0>: fishing
-	train_profession<1>: fishing
-}
+dialogue_screen .fisherman_trainer: !DEFAULT_FISHING_TRAINER{}
 
 dialogue_screen .fisherman_dialogue:
 {

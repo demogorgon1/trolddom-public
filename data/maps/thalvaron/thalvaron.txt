@@ -155,6 +155,8 @@ map_entity_spawn thalvaron_emma_brown: { entity thalvaron_emma_brown: { init_sta
 map_entity_spawn thalvaron_enchanting_trainer: { entity thalvaron_enchanting_trainer: { init_state: default } }
 map_entity_spawn thalvaron_valoris_quartermaster: { entity thalvaron_valoris_quartermaster: { init_state: default } }
 map_entity_spawn thalvaron_blacksmithing_trainer: { entity thalvaron_blacksmithing_trainer: { init_state: default } }
+map_entity_spawn thalvaron_firstaid_trainer: { entity thalvaron_firstaid_trainer: { init_state: default } }
+map_entity_spawn thalvaron_herbalism_trainer: { entity thalvaron_herbalism_trainer: { init_state: default } }
 
 # N
 map_entity_spawn thalvaron_ranger_fremalt: { entity thalvaron_ranger_fremalt: { init_state: default } }
@@ -401,6 +403,8 @@ map_palette .stuff:
 	entity_spawn thalvaron_enchanting_trainer: [ 39 115 133 ]
 	entity_spawn thalvaron_valoris_quartermaster: [ 103 84 126 ]
 	entity_spawn thalvaron_blacksmithing_trainer: [ 203 84 58 ]
+	entity_spawn thalvaron_firstaid_trainer: [ 103 81 58 ]
+	entity_spawn thalvaron_herbalism_trainer: [ 103 81 158 ]
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				
@@ -755,6 +759,7 @@ map_palette .doodads:
 	doodad sign_generic<"Please wipe your feet">: [ 177 171 121 ]	
 	doodad wall_sign_generic<"Enchanted">: [ 197 123 131 ]	
 	doodad wall_sign_generic<"Alchemy 'R Us">: [ 197 223 131 ]	
+	doodad wall_sign_generic<"Healing Herbs">: [ 117 126 11 ]	
 }
 
 map_palette .cliffs:

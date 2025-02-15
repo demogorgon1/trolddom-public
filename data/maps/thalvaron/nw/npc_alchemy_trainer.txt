@@ -1,13 +1,4 @@
-dialogue_screen .alchemy_trainer_trainer:
-{
-	train_profession<0>: alchemy
-	train_profession<1>: alchemy
-	train_ability: craft_small_healing_potion
-	train_ability: craft_small_mana_potion
-	train_ability: craft_elixir_of_the_bear
-	train_ability: craft_elixir_of_the_owl
-	train_ability: craft_elixir_of_the_giant
-}
+dialogue_screen .alchemy_trainer_trainer: !DEFAULT_ALCHEMY_TRAINER{}
 
 dialogue_screen .alchemy_trainer_greetings:
 {

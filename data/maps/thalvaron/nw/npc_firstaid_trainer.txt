@@ -1,0 +1,34 @@
+dialogue_screen .firstaid_trainer_trainer: !DEFAULT_FIRST_AID_TRAINER{}
+
+dialogue_screen .firstaid_trainer_dialogue:
+{
+	text: 
+	[	
+		"Where does it hurt?"
+	]
+	
+	options:
+	[
+		{ goto: .firstaid_trainer_trainer text: "Please teach me about first aid." }
+	]
+}
+
+dialogue_root .firstaid_trainer_dialogue:
+{
+	.firstaid_trainer_dialogue: { }
+}
+
+entity thalvaron_firstaid_trainer: !NPC
+{
+	_string: "Cleva Tyson"
+	_guild_name: "First Aid Trainer"
+	_dialogue_root: .firstaid_trainer_dialogue	
+	_sprite: woman_23
+	_sprite_dead: woman_23_dead	
+	_level: 20
+	_faction: npcs	
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
