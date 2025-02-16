@@ -6,3 +6,61 @@ faction children_of_the_moon:
 	
 	reputation_from_kill dark_elves: 20
 }
+
+################################################################################
+# Quartermaster items
+
+item children_of_the_moon_back_1:
+{
+	equipment_slots: [ back ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 18
+	icon: icon_cape_3
+	rarity: rare
+	string: "Elven Soothsayer's Cape"
+	stat_weight constitution: 1
+	stat_weight wisdom: 2
+}
+
+item children_of_the_moon_waist_1:
+{
+	equipment_slots: [ waist ]
+	binds: when_picked_up
+	type: armor_mail
+	required_level: 18
+	icon: icon_plate_belt_1
+	rarity: rare
+	string: "Belt of the Elven Assassin"
+	stat_weight constitution: 1
+	stat_weight strength: 2
+	stat_weight dexterity: 1
+}
+
+item children_of_the_moon_hands_1:
+{
+	equipment_slots: [ hands ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 20
+	icon: icon_mail_gloves_2
+	rarity: rare
+	string: "Gloves of the Elven Healer"
+	stat_weight constitution: 1
+	stat_weight healing: 2
+	stat_weight mana_per_5: 1
+}
+
+item children_of_the_moon_neck_1:
+{
+	equipment_slots: [ neck ]
+	binds: when_picked_up
+	required_level: 20
+	icon: icon_necklace_2
+	rarity: rare
+	string: "Warden's Medal"
+	budget_bias: -10
+	stat_weight constitution: 2
+	stat_weight strength: 1
+	stat dodge_chance: 1
+}

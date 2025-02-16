@@ -6,3 +6,61 @@ faction kingdom_of_thuldarim:
 	
 	reputation_from_kill skullforge_orcs: 20
 }
+
+################################################################################
+# Quartermaster items
+
+item kingdom_of_thuldarim_back_1:
+{
+	equipment_slots: [ back ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 18
+	icon: icon_cape_4
+	rarity: rare
+	string: "Dwarven Mountaineer's Cape"
+	stat_weight constitution: 2
+	stat_weight strength: 1
+}
+
+item kingdom_of_thuldarim_waist_1:
+{
+	equipment_slots: [ waist ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 18
+	icon: icon_plate_belt_1
+	rarity: rare
+	string: "Dwarven Sage Belt"
+	stat_weight constitution: 1
+	stat_weight wisdom: 1
+	stat_weight healing: 2
+}
+
+item kingdom_of_thuldarim_hands_1:
+{
+	equipment_slots: [ hands ]
+	binds: when_picked_up
+	type: armor_mail
+	required_level: 20
+	icon: icon_gloves_4
+	rarity: rare
+	string: "Dwarven Brawler's Gauntlets"
+	budget_bias: -10
+	stat_weight constitution: 1
+	stat_weight strength: 2
+	stat phys_crit_chance: 1
+}
+
+item kingdom_of_thuldarim_neck_1:
+{
+	equipment_slots: [ neck ]
+	binds: when_picked_up
+	required_level: 20
+	icon: icon_necklace_1
+	rarity: rare
+	string: "Dwarven Chain of Power"
+	stat_weight constitution: 1
+	stat_weight wisdom: 1
+	stat_weight spell_damage: 2
+}

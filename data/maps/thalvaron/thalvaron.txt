@@ -225,6 +225,7 @@ map_entity_spawn thalvaron_pearly_c_1_quest_item_2: { entity thalvaron_pearly_c_
 map_entity_spawn thalvaron_spirit_of_joonor_b: { entity thalvaron_spirit_of_joonor_b: { init_state: default } }
 map_entity_spawn thalvaron_warden_ghourian: { entity thalvaron_warden_ghourian: { init_state: default } }
 map_entity_spawn thalvaron_elf_collector: { entity thalvaron_elf_collector: { init_state: default } }
+map_entity_spawn thalvaron_elf_quartermaster: { entity thalvaron_elf_quartermaster: { init_state: default } }
 
 # SW
 map_entity_spawn thalvaron_brian_riddle: { entity thalvaron_brian_riddle: { init_state: default } }
@@ -265,6 +266,7 @@ map_entity_spawn thalvaron_rumin_whiterock_3_quest_item: { entity thalvaron_rumi
 map_entity_spawn thalvaron_bramli_stonestride: { entity thalvaron_bramli_stonestride: { init_state: default } }
 map_entity_spawn thalvaron_borli_stouthammer: { entity thalvaron_borli_stouthammer: { init_state: default } spawn_timer: !ESCORT_RESPAWN{} }
 map_entity_spawn thalvaron_mumle_whiterock: { entity thalvaron_mumle_whiterock: { init_state: default } }
+map_entity_spawn thalvaron_dwarf_quartermaster: { entity thalvaron_dwarf_quartermaster: { init_state: default } }
 
 map_palette .stuff:
 {
@@ -543,6 +545,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_poison_lizard: [ 156 94 114 ]
 	entity_spawn thalvaron_warden_ghourian: [ 255 92 1 ]
 	entity_spawn thalvaron_elf_collector: [ 49 194 46 ]
+	entity_spawn thalvaron_elf_quartermaster: [ 155 22 148 ]
 	
 	# SW
 	entity_spawn thalvaron_brian_riddle: [ 66 88 99 ]
@@ -619,6 +622,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_mumle_whiterock: [ 49 148 255 ]
 	entity_spawn thalvaron_badlands_mud_elemental: [ 222 48 158 ]
 	entity_spawn thalvaron_dirt_slitherer: [ 65 44 119 ]
+	entity_spawn thalvaron_dwarf_quartermaster: [ 155 22 248 ]
 }
 
 map_palette .levels:

@@ -1,7 +1,9 @@
 dialogue_screen .valoris_quartermaster_vendor:
 {
-	sell valoris_ring_1: { quantity: 1 reputation_level_requirement valoris: !HONORED_REPUTATION_LEVEL{} }	
-	sell valoris_ring_2: { quantity: 1 reputation_level_requirement valoris: !HONORED_REPUTATION_LEVEL{} }	
+	sell valoris_wrists_1: { quantity: 1 reputation_level_requirement valoris: !HONORED_REPUTATION_LEVEL{} }	
+	sell valoris_wrists_2: { quantity: 1 reputation_level_requirement valoris: !HONORED_REPUTATION_LEVEL{} }	
+	sell valoris_ring_1: { quantity: 1 reputation_level_requirement valoris: !REVERED_REPUTATION_LEVEL{} }	
+	sell valoris_ring_2: { quantity: 1 reputation_level_requirement valoris: !REVERED_REPUTATION_LEVEL{} }	
 }
 
 dialogue_screen .valoris_quartermaster_dialogue:

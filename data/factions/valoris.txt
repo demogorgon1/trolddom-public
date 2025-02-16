@@ -10,12 +10,40 @@ faction valoris:
 ################################################################################
 # Quartermaster items
 
+item valoris_wrists_1:
+{
+	equipment_slots: [ wrists ]
+	binds: when_picked_up
+	type: armor_plate
+	required_level: 18
+	icon: icon_bracers_4
+	rarity: rare
+	string: "Bracers of the City Guard"
+	stat_weight constitution: 1
+	stat_weight strength: 1
+	stat_weight dexterity: 1
+}
+
+item valoris_wrists_2:
+{
+	equipment_slots: [ wrists ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 18
+	icon: icon_bracers_3
+	rarity: rare
+	string: "Bracers of the Wise"
+	stat_weight constitution: 1
+	stat_weight wisdom: 1
+	stat_weight spirit: 1
+}
+
 item valoris_ring_1:
 {
 	equipment_slots: [ finger_1 finger_2 ]
 	flags: [ unique ]
 	binds: when_picked_up
-	required_level: 18
+	required_level: 20
 	icon: icon_ring_1
 	rarity: rare
 	string: "Ring of Valoris"
@@ -25,13 +53,12 @@ item valoris_ring_1:
 	stat phys_crit_chance: 1
 }
 
-
 item valoris_ring_2:
 {
 	equipment_slots: [ finger_1 finger_2 ]
 	flags: [ unique ]
 	binds: when_picked_up
-	required_level: 18
+	required_level: 20
 	icon: icon_ring_2
 	rarity: rare
 	string: "Royal Mark of Wisdom"
