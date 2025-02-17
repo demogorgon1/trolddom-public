@@ -632,7 +632,7 @@ namespace tpublic::Systems
 
 									if (targetEntityInstanceId != 0)
 									{
-										npc->m_cooldowns.AddAbility(GetManifest(), ability, aContext->m_tick, 0.0f); // FIXME: cooldown modifier from haste?
+										npc->m_cooldowns.AddAbility(GetManifest(), ability, aContext->m_tick, 0.0f, NULL); // FIXME: cooldown modifier from haste?
 
 										if (ability->m_castTime > 0)
 										{
@@ -751,7 +751,7 @@ namespace tpublic::Systems
 										// FIXME: just ignoring everything except the cooldown and always target self
 										if (!npc->m_cooldowns.IsAbilityOnCooldown(ability))
 										{
-											npc->m_cooldowns.AddAbility(GetManifest(), ability, aContext->m_tick, 0.0f);
+											npc->m_cooldowns.AddAbility(GetManifest(), ability, aContext->m_tick, 0.0f, NULL);
 											aContext->m_eventQueue->EventQueueAbility({ aEntityInstanceId, 0 }, aEntityInstanceId, Vec2(), ability, ItemInstanceReference(), NULL);
 										}
 									}
@@ -914,7 +914,7 @@ namespace tpublic::Systems
 								if(useAbility->IsAttack() && useAbility->IsMelee())
 									cooldownModifier = auras->GetAttackHaste(GetManifest());
 
-								npc->m_cooldowns.AddAbility(GetManifest(), useAbility, aContext->m_tick, cooldownModifier);
+								npc->m_cooldowns.AddAbility(GetManifest(), useAbility, aContext->m_tick, cooldownModifier, NULL);
 
 								if(useAbility->m_castTime > 0)
 								{	

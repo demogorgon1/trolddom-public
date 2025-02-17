@@ -3,6 +3,7 @@
 #include <tpublic/Data/Ability.h>
 #include <tpublic/Data/Cooldown.h>
 
+#include <tpublic/AbilityModifierList.h>
 #include <tpublic/Cooldowns.h>
 #include <tpublic/Helpers.h>
 #include <tpublic/IReader.h>
@@ -46,11 +47,14 @@ namespace tpublic
 	
 	void			
 	Cooldowns::AddAbility(
-		const Manifest*			aManifest,
-		const Data::Ability*	aAbility,
-		int32_t					aTick,
-		float					aCooldownModifier)
+		const Manifest*				aManifest,
+		const Data::Ability*		aAbility,
+		int32_t						aTick,
+		float						aCooldownModifier,
+		const AbilityModifierList*	aAbilityModifierList)
 	{
+		int32_t modifyCooldownTicks = aAbilityModifierList != NULL ? aAbilityModifierList->GetAbilityModifyCooldown(aAbility->m_id) : 0;
+
 		for(uint32_t cooldownId : aAbility->m_cooldowns)
 		{
 			const Data::Cooldown* cooldown = aManifest->GetById<Data::Cooldown>(cooldownId);
@@ -59,12 +63,12 @@ namespace tpublic
 			{
 				if(aCooldownModifier == 0.0f)
 				{
-					AddCooldown(cooldownId, cooldown->m_duration, aTick);
+					AddCooldown(cooldownId, cooldown->m_duration + modifyCooldownTicks, aTick);
 				}
 				else
 				{
 					int32_t duration = (int32_t)((1.0f - (aCooldownModifier / 100.0f)) * (float)cooldown->m_duration);
-					AddCooldown(cooldownId, duration, aTick);
+					AddCooldown(cooldownId, duration + modifyCooldownTicks, aTick);
 				}
 			}
 		}

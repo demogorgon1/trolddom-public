@@ -55,6 +55,8 @@ ability flash_heal:
 		conditional_critical_chance_bonus<praise_the_light_1>: 2
 		conditional_critical_chance_bonus<praise_the_light_2>: 4
 		conditional_critical_chance_bonus<praise_the_light_3>: 6
+		conditional_critical_chance_bonus<praise_the_light_4>: 8
+		conditional_critical_chance_bonus<praise_the_light_5>: 10
 	}
 }
 
@@ -65,7 +67,7 @@ talent paladin_holy_light:
 {
 	string: "Holy Light"
 	icon: icon_holy_light
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	prerequisites: [ ]
 	points:
 	[
@@ -97,6 +99,8 @@ ability holy_light:
 		conditional_critical_chance_bonus<praise_the_light_1>: 2
 		conditional_critical_chance_bonus<praise_the_light_2>: 4
 		conditional_critical_chance_bonus<praise_the_light_3>: 6
+		conditional_critical_chance_bonus<praise_the_light_3>: 8
+		conditional_critical_chance_bonus<praise_the_light_3>: 10
 	}
 }
 
@@ -108,7 +112,7 @@ talent paladin_oath_of_healing:
 	string: "Oath of Healing"
 	icon: icon_oath_of_healing
 	prerequisites: [ paladin_blessing_of_binding ]	
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability: paladin_oath_of_healing }
@@ -156,6 +160,8 @@ talent paladin_praise_the_light:
 		{ ability_modifier: praise_the_light_1 }
 		{ ability_modifier: praise_the_light_2 }
 		{ ability_modifier: praise_the_light_3 }
+		{ ability_modifier: praise_the_light_4 }
+		{ ability_modifier: praise_the_light_5 }
 	]
 }
 
@@ -174,6 +180,16 @@ ability_modifier praise_the_light_3:
 	description: "Increase the critical chance of your heals by 6%."
 }
 
+ability_modifier praise_the_light_4:
+{	
+	description: "Increase the critical chance of your heals by 8%."
+}
+
+ability_modifier praise_the_light_5:
+{	
+	description: "Increase the critical chance of your heals by 10%."
+}
+
 ###############################################################################
 # Improved Cleanse
 
@@ -185,17 +201,23 @@ talent paladin_improved_cleanse:
 	[
 		{ ability_modifier: improved_cleanse_1 }
 		{ ability_modifier: improved_cleanse_2 }
+		{ ability_modifier: improved_cleanse_3 }
 	]
 }
 
 ability_modifier improved_cleanse_1:
 {	
-	description: "Cleanse also heals target by 5% of its health over 10 seconds."
+	description: "Cleanse also heals target by 3% of its health over 10 seconds."
 }
 
 ability_modifier improved_cleanse_2:
 {	
-	description: "Cleanse also heals target by 10% of its health over 10 seconds."
+	description: "Cleanse also heals target by 6% of its health over 10 seconds."
+}
+
+ability_modifier improved_cleanse_3:
+{	
+	description: "Cleanse also heals target by 9% of its health over 10 seconds."
 }
 
 aura_group improved_cleanse:
@@ -214,7 +236,7 @@ ability improved_cleanse_tick_1:
 	
 	direct_effect heal:
 	{	
-		function: { expression: a_mul_x x: health_max a: 0.01 entity: target}
+		function: { expression: a_mul_x x: health_max a: 0.006 entity: target}
 	}	
 }
 
@@ -228,8 +250,8 @@ aura improved_cleanse_1:
 	flags: [ unique magic ]
 	aura_effect repeat: 
 	{ 
-		update_interval: 10
-		update_count: 10
+		update_interval: 20
+		update_count: 5
 		ability: improved_cleanse_tick_1
 	}
 }
@@ -246,7 +268,7 @@ ability improved_cleanse_tick_2:
 	
 	direct_effect heal:
 	{	
-		function: { expression: a_mul_x x: health_max a: 0.02 entity: target}
+		function: { expression: a_mul_x x: health_max a: 0.012 entity: target}
 	}	
 }
 
@@ -265,6 +287,39 @@ aura improved_cleanse_2:
 		ability: improved_cleanse_tick_2
 	}
 }
+
+ability improved_cleanse_tick_3:
+{
+	string: "Cleanse"
+	icon: icon_cleanse		
+	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]
+	target_particle_system: small_heal	
+	delay: 2
+	sound_effects: !SOUND_HEAL_SMALL{}
+	
+	direct_effect heal:
+	{	
+		function: { expression: a_mul_x x: health_max a: 0.018 entity: target}
+	}	
+}
+
+aura improved_cleanse_3:
+{
+	string: "Cleanse"
+	icon: icon_cleanse
+	type: buff	
+	aura_group: improved_cleanse
+	duration: based_on_effects	
+	flags: [ unique magic ]
+	aura_effect repeat: 
+	{ 
+		update_interval: 20
+		update_count: 5
+		ability: improved_cleanse_tick_3
+	}
+}
+
 
 ###############################################################################
 # Blessing of Binding
@@ -366,7 +421,7 @@ talent paladin_flash_of_light:
 	string: "Flash of Light"
 	icon: icon_flash_of_light
 	prerequisites: [ paladin_praise_the_light ]	
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ aura: paladin_flash_of_light }
@@ -423,7 +478,7 @@ talent paladin_divine_shield:
 	string: "Divine Shield"
 	icon: icon_divine_shield
 	prerequisites: [ paladin_holy_light ]	
-	talent_tree_points_required: 6
+	talent_tree_points_required: 10
 	points:
 	[
 		{ ability: divine_shield }
@@ -567,7 +622,12 @@ ability cleanse:
 		must_have_ability_modifier: improved_cleanse_2
 		aura: improved_cleanse_2
 	}
-	
+
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: improved_cleanse_3
+		aura: improved_cleanse_3
+	}
 }
 
 ###############################################################################

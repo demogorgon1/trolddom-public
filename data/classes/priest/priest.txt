@@ -1,5 +1,7 @@
 class priest:
 {
+	version: 1
+	
 	string: "Priest"	
 	description: "Become a follower of the faith."
 	

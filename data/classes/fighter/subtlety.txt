@@ -1,7 +1,7 @@
 talent_tree fighter_subtlety:
 {
 	string: "Subtlety"
-	description: "Provide sustained damage over time capabilities."	
+	description: "Attack from the shadows."	
 	icon: icon_fighter_subtlety
 	
 	map_palette:
@@ -13,6 +13,7 @@ talent_tree fighter_subtlety:
 		talent fighter_subtlety_hemorrhage: "E"
 		talent fighter_subtlety_envenom: "F"
 		talent fighter_subtlety_poison_bomb: "G"
+		talent fighter_subtlety_stealth: "G"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_left_arrow: "l"
 		sprite talent_tree_down: "|"
@@ -23,9 +24,36 @@ talent_tree fighter_subtlety:
 		"..A.B.."
 		"....d.."
 		"DlC.E.F"
-		"......d"
-		"......G"
+		"d.....d"
+		"H.....G"
 	]	
+}
+
+###############################################################################
+# Stealth
+
+talent fighter_subtlety_stealth:
+{
+	string: "Stealth"
+	icon: icon_poison_bomb
+	prerequisites: [ fighter_subtlety_smoke_bomb ]	
+	talent_tree_points_required: 10
+	points:
+	[
+		{ ability: stealth }
+	]
+}
+
+ability stealth:
+{
+	string: "Stealth"
+	description: "Toggles stealth. When stealthed non-allies are unlikely to notice you."
+	cooldowns: [ global ]
+	flags: [ target_self ]
+	states: [ default in_combat ]
+	icon: icon_poison_bomb
+	delay: 3
+	talent_tree: fighter_subtlety
 }
 
 ###############################################################################
@@ -36,7 +64,7 @@ talent fighter_subtlety_poison_bomb:
 	string: "Poison Bomb"
 	icon: icon_poison_bomb
 	prerequisites: [ fighter_subtlety_envenom ]	
-	talent_tree_points_required: 6
+	talent_tree_points_required: 10
 	points:
 	[
 		{ ability: poison_bomb }
@@ -45,7 +73,7 @@ talent fighter_subtlety_poison_bomb:
 
 cooldown poison_bomb:
 {
-	duration: 100
+	duration: 200
 }
 
 ability poison_bomb_tick:
@@ -128,7 +156,7 @@ talent fighter_subtlety_smoke_bomb:
 	string: "Smoke Bomb"
 	icon: icon_smoke
 	prerequisites: [ fighter_subtlety_bypass ]	
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability: smoke_bomb }
@@ -165,7 +193,7 @@ talent fighter_subtlety_bypass:
 	string: "Bypass"
 	icon: icon_bypass
 	prerequisites: [ ]	
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability: bypass }
@@ -206,6 +234,8 @@ talent fighter_subtlety_agility:
 		{ aura: fighter_subtlety_agility_1 }
 		{ aura: fighter_subtlety_agility_2 }
 		{ aura: fighter_subtlety_agility_3 }
+		{ aura: fighter_subtlety_agility_4 }
+		{ aura: fighter_subtlety_agility_5 }
 	]
 }
 
@@ -231,6 +261,22 @@ aura fighter_subtlety_agility_3:
 	type: hidden
 	description: "Increases your dexterity by 6%."
 	stat_modifiers: { dexterity: { add_percent: 6 } }
+}
+
+aura fighter_subtlety_agility_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your dexterity by 8%."
+	stat_modifiers: { dexterity: { add_percent: 8 } }
+}
+
+aura fighter_subtlety_agility_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your dexterity by 10%."
+	stat_modifiers: { dexterity: { add_percent: 10 } }
 }
 
 ###############################################################################
@@ -277,7 +323,7 @@ talent fighter_subtlety_hemorrhage:
 	string: "Hemorrhage"
 	icon: icon_stuff
 	prerequisites: [ fighter_subtlety_improved_rend ]
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ aura: fighter_subtlety_hemorrhage }
@@ -303,7 +349,7 @@ talent fighter_subtlety_envenom:
 {
 	string: "Envenom"
 	icon: icon_envenom
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability: envenom }

@@ -74,22 +74,34 @@ talent witch_chill_touch:
 		{ ability_modifier: chill_touch_1 }
 		{ ability_modifier: chill_touch_2 }
 		{ ability_modifier: chill_touch_3 }
+		{ ability_modifier: chill_touch_4 }
+		{ ability_modifier: chill_touch_5 }
 	]
 }
 
 ability_modifier chill_touch_1:
 {	
-	description: "Melee attacks slow target movement speed for 3 seconds."
+	description: "Melee attacks slow target movement speed for 2 seconds."
 }
 
 ability_modifier chill_touch_2:
 {	
-	description: "Melee attacks slow target movement speed for 6 seconds."
+	description: "Melee attacks slow target movement speed for 4 seconds."
 }
 
 ability_modifier chill_touch_3:
 {	
-	description: "Melee attacks slow target movement speed for 9 seconds."
+	description: "Melee attacks slow target movement speed for 6 seconds."
+}
+
+ability_modifier chill_touch_4:
+{	
+	description: "Melee attacks slow target movement speed for 8 seconds."
+}
+
+ability_modifier chill_touch_5:
+{	
+	description: "Melee attacks slow target movement speed for 10 seconds."
 }
 
 aura chill_touch_1:
@@ -98,7 +110,7 @@ aura chill_touch_1:
 	description: "Reduced movement speed."
 	icon: icon_chill_touch
 	type: debuff
-	duration: 30
+	duration: 20
 	flags: [ unique magic ]
 	
 	aura_effect move_speed_modifier:
@@ -113,7 +125,7 @@ aura chill_touch_2:
 	description: "Reduced movement speed."
 	icon: icon_chill_touch
 	type: debuff
-	duration: 60
+	duration: 40
 	flags: [ unique magic ]
 	
 	aura_effect move_speed_modifier:
@@ -128,7 +140,37 @@ aura chill_touch_3:
 	description: "Reduced movement speed."
 	icon: icon_chill_touch
 	type: debuff
-	duration: 90
+	duration: 60
+	flags: [ unique magic ]
+	
+	aura_effect move_speed_modifier:
+	{
+		move_speed: slow
+	}
+}
+
+aura chill_touch_4:
+{
+	string: "Chill Touch"
+	description: "Reduced movement speed."
+	icon: icon_chill_touch
+	type: debuff
+	duration: 80
+	flags: [ unique magic ]
+	
+	aura_effect move_speed_modifier:
+	{
+		move_speed: slow
+	}
+}
+
+aura chill_touch_5:
+{
+	string: "Chill Touch"
+	description: "Reduced movement speed."
+	icon: icon_chill_touch
+	type: debuff
+	duration: 100
 	flags: [ unique magic ]
 	
 	aura_effect move_speed_modifier:
@@ -144,7 +186,7 @@ talent witch_enfeeblement:
 {
 	string: "Enfeeblement"
 	icon: icon_enfeeblement
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability: enfeeblement }
@@ -198,7 +240,7 @@ talent witch_raise_dead:
 {
 	string: "Raise Dead"
 	icon: icon_raise_dead
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability: raise_dead }
@@ -281,7 +323,7 @@ talent witch_soul_leak:
 {
 	string: "Soul Leak"
 	icon: icon_soul_drain
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability: soul_leak }
@@ -332,13 +374,39 @@ aura soul_leak_1:
 		[
 			{ type: restore_health targets: [ source ] factor: 0.2 }
 			{ type: restore_mana targets: [ source ] factor: 0.1 }
-			{ type: restore_health targets: [ source_minions source_combat_group ] factor: 0.03 range: 12 }
-			{ type: restore_mana targets: [ source_minions source_combat_group ] factor: 0.015 range: 12 }
+			{ type: restore_health targets: [ source_minions source_combat_group ] factor: 0.02 range: 12 }
+			{ type: restore_mana targets: [ source_minions source_combat_group ] factor: 0.01 range: 12 }
 		]
 	}
 }
 
 aura soul_leak_2:
+{
+	string: "Soul Leak"
+	description: "Restores health and mana to the caster and their allies."
+	icon: icon_soul_drain
+	type: debuff
+	duration: 200	
+	flags: [ unique magic ]
+	sound: spell_14
+
+	aura_effect damage_input_effect:
+	{
+		type_mask: [ unholy ]
+		aura_source_only: true
+		combat_log_ability: soul_leak
+		
+		effects: 
+		[
+			{ type: restore_health targets: [ source ] factor: 0.2 }
+			{ type: restore_mana targets: [ source ] factor: 0.1 }		
+			{ type: restore_health targets: [ source_minions source_combat_group ] factor: 0.04 range: 12 }
+			{ type: restore_mana targets: [ source_minions source_combat_group ] factor: 0.02 range: 12 }
+		]
+	}
+}
+
+aura soul_leak_3:
 {
 	string: "Soul Leak"
 	description: "Restores health and mana to the caster and their allies."
@@ -364,7 +432,33 @@ aura soul_leak_2:
 	}
 }
 
-aura soul_leak_3:
+aura soul_leak_4:
+{
+	string: "Soul Leak"
+	description: "Restores health and mana to the caster and their allies."
+	icon: icon_soul_drain
+	type: debuff
+	duration: 200	
+	flags: [ unique magic ]
+	sound: spell_14
+
+	aura_effect damage_input_effect:
+	{
+		type_mask: [ unholy ]
+		aura_source_only: true
+		combat_log_ability: soul_leak
+		
+		effects: 
+		[
+			{ type: restore_health targets: [ source ] factor: 0.2 }
+			{ type: restore_mana targets: [ source ] factor: 0.1 }		
+			{ type: restore_health targets: [ source_minions source_combat_group ] factor: 0.09 range: 12 }
+			{ type: restore_mana targets: [ source_minions source_combat_group ] factor: 0.045 range: 12 }
+		]
+	}
+}
+
+aura soul_leak_5:
 {
 	string: "Soul Leak"
 	description: "Restores health and mana to the caster and their allies."
@@ -425,6 +519,18 @@ ability soul_leak:
 		must_have_ability_modifier: improved_soul_leak_3
 		aura: soul_leak_3
 	}
+
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: improved_soul_leak_4
+		aura: soul_leak_4
+	}
+
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: improved_soul_leak_5
+		aura: soul_leak_5
+	}
 	
 	direct_effect threat:
 	{
@@ -440,7 +546,7 @@ talent witch_improved_soul_leak:
 {
 	string: "Improved Soul Leak"
 	icon: icon_improved_soul_drain
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	prerequisites: [ witch_soul_leak ]
 	
 	points:
@@ -448,22 +554,34 @@ talent witch_improved_soul_leak:
 		{ ability_modifier: improved_soul_leak_1 }
 		{ ability_modifier: improved_soul_leak_2 }
 		{ ability_modifier: improved_soul_leak_3 }
+		{ ability_modifier: improved_soul_leak_4 }
+		{ ability_modifier: improved_soul_leak_5 }
 	]
 }
 
 ability_modifier improved_soul_leak_1:
 {	
-	description: "Soul Leak also restores health and mana of nearby allies for 15% of its effect."
+	description: "Soul Leak also restores health and mana of nearby allies for 10% of its effect."
 }
 
 ability_modifier improved_soul_leak_2:
 {	
-	description: "Soul Leak also restores health and mana of nearby allies for 30% of its effect."
+	description: "Soul Leak also restores health and mana of nearby allies for 20% of its effect."
 }
 
 ability_modifier improved_soul_leak_3:
 {	
-	description: "Soul Leak also restores health and mana of nearby allies for 45% of its effect."
+	description: "Soul Leak also restores health and mana of nearby allies for 30% of its effect."
+}
+
+ability_modifier improved_soul_leak_4:
+{	
+	description: "Soul Leak also restores health and mana of nearby allies for 40% of its effect."
+}
+
+ability_modifier improved_soul_leak_5:
+{	
+	description: "Soul Leak also restores health and mana of nearby allies for 50% of its effect."
 }
 
 ###############################################################################
@@ -473,7 +591,7 @@ talent witch_skeletal_terror:
 {
 	string: "Skeletal Terror"
 	icon: icon_skeletal_terror
-	talent_tree_points_required: 6
+	talent_tree_points_required: 10
 	prerequisites: [ witch_raise_dead ]
 	
 	points:

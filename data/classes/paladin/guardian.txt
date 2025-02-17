@@ -180,6 +180,7 @@ talent paladin_divine_protection:
 	[
 		{ aura: paladin_divine_protection_1 }
 		{ aura: paladin_divine_protection_2 }
+		{ aura: paladin_divine_protection_3 }
 	]
 }
 
@@ -187,16 +188,24 @@ aura paladin_divine_protection_1:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases your armor by 7%."
-	stat_modifiers: { armor: { add_percent: 7 } }
+	description: "Increases your armor by 5%."
+	stat_modifiers: { armor: { add_percent: 5 } }
 }
 
 aura paladin_divine_protection_2:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases your armor by 14%."
-	stat_modifiers: { armor: { add_percent: 14 } }
+	description: "Increases your armor by 10%."
+	stat_modifiers: { armor: { add_percent: 10 } }
+}
+
+aura paladin_divine_protection_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your armor by 15%."
+	stat_modifiers: { armor: { add_percent: 15 } }
 }
 
 ###############################################################################
@@ -213,6 +222,8 @@ talent paladin_shield_specialization:
 		{ aura: paladin_shield_specialization_1 }
 		{ aura: paladin_shield_specialization_2 }
 		{ aura: paladin_shield_specialization_3 }
+		{ aura: paladin_shield_specialization_4 }
+		{ aura: paladin_shield_specialization_5 }
 	]
 }
 
@@ -220,24 +231,40 @@ aura paladin_shield_specialization_1:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases your chance to block by 3%. Increases amount blocked by 20%."
-	stat_modifiers: { block_chance: { add: 3 } block_value: { add_percent: 20 } }
+	description: "Increases your chance to block by 2%. Increases amount blocked by 12%."
+	stat_modifiers: { block_chance: { add: 2 } block_value: { add_percent: 12 } }
 }
 
 aura paladin_shield_specialization_2:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases your chance to block by 6%. Increases amount blocked by 40%."
-	stat_modifiers: { block_chance: { add: 6 } block_value: { add_percent: 40 } }
+	description: "Increases your chance to block by 4%. Increases amount blocked by 24%."
+	stat_modifiers: { block_chance: { add: 4 } block_value: { add_percent: 24 } }
 }
 
 aura paladin_shield_specialization_3:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases your chance to block by 9%. Increases amount blocked by 60%."
-	stat_modifiers: { block_chance: { add: 9 } block_value: { add_percent: 60 } }
+	description: "Increases your chance to block by 6%. Increases amount blocked by 36%."
+	stat_modifiers: { block_chance: { add: 6 } block_value: { add_percent: 36 } }
+}
+
+aura paladin_shield_specialization_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your chance to block by 8%. Increases amount blocked by 48%."
+	stat_modifiers: { block_chance: { add: 8 } block_value: { add_percent: 48 } }
+}
+
+aura paladin_shield_specialization_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your chance to block by 10%. Increases amount blocked by 60%."
+	stat_modifiers: { block_chance: { add: 10 } block_value: { add_percent: 60 } }
 }
 
 ###############################################################################
@@ -338,7 +365,7 @@ talent paladin_oath_of_protection:
 	string: "Oath of Protection"
 	icon: icon_oath_of_protection
 	prerequisites: [ paladin_blessing_of_protection ]	
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability: paladin_oath_of_protection }
@@ -383,11 +410,12 @@ talent paladin_aura_of_protection:
 	string: "Divine Restoration"
 	icon: icon_aura_of_protection
 	prerequisites: [ paladin_shield_specialization ]	
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ aura: paladin_aura_of_protection_1 }
 		{ aura: paladin_aura_of_protection_2 }
+		{ aura: paladin_aura_of_protection_3 }
 	]
 }
 
@@ -395,7 +423,7 @@ aura paladin_aura_of_protection_1:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "You restore 5% of your mana after blocking an attack."
+	description: "You restore 3% of your mana after blocking an attack."
 	aura_effect combat_event_trigger: 
 	{ 
 		combat_event<target>: block
@@ -412,7 +440,7 @@ ability paladin_aura_of_protection_trigger_1:
 	direct_effect modify_resource:
 	{
 		resource: mana
-		function: { expression: a_mul_x a: 0.05 x: mana_max }		
+		function: { expression: a_mul_x a: 0.03 x: mana_max }		
 	}
 }
 
@@ -420,7 +448,7 @@ aura paladin_aura_of_protection_2:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "You restore 10% of your mana after blocking an attack."
+	description: "You restore 6% of your mana after blocking an attack."
 	aura_effect combat_event_trigger: 
 	{ 
 		combat_event<target>: block
@@ -437,7 +465,32 @@ ability paladin_aura_of_protection_trigger_2:
 	direct_effect modify_resource:
 	{
 		resource: mana
-		function: { expression: a_mul_x a: 0.1 x: mana_max }		
+		function: { expression: a_mul_x a: 0.06 x: mana_max }		
+	}
+}
+
+aura paladin_aura_of_protection_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "You restore 9% of your mana after blocking an attack."
+	aura_effect combat_event_trigger: 
+	{ 
+		combat_event<target>: block
+		ability<target>: paladin_aura_of_protection_trigger_3
+	}
+}
+
+ability paladin_aura_of_protection_trigger_3:
+{
+	string: "Divine Restoration"
+	states: [ default in_combat ]
+	icon: icon_aura_of_protection
+	
+	direct_effect modify_resource:
+	{
+		resource: mana
+		function: { expression: a_mul_x a: 0.09 x: mana_max }		
 	}
 }
 
@@ -448,7 +501,7 @@ talent paladin_consecrate:
 {
 	string: "Consecrate"
 	icon: icon_consecrate
-	talent_tree_points_required: 6
+	talent_tree_points_required: 10
 	prerequisites: [ paladin_oath_of_protection ]
 	points:
 	[

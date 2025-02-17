@@ -37,7 +37,7 @@ talent priest_dragon_breath:
 	string: "Dragon Breath"
 	icon: icon_dragon_breath
 	prerequisites: [ priest_dragon_punch ]	
-	talent_tree_points_required: 6
+	talent_tree_points_required: 10
 	points:
 	[
 		{ ability: dragon_breath }
@@ -104,7 +104,7 @@ talent priest_dragon_punch:
 	string: "Dragon Punch"
 	icon: icon_dragon_punch
 	prerequisites: [ ]	
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability: dragon_punch }
@@ -168,7 +168,7 @@ talent priest_dragon_fury:
 	string: "Fury"
 	icon: icon_fury
 	prerequisites: [ priest_dragon_punch ]	
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability_modifier: improved_dragon_punch }
@@ -207,6 +207,8 @@ talent priest_dragon_dodge:
 		{ aura: priest_dragon_dodge_1 }
 		{ aura: priest_dragon_dodge_2 }
 		{ aura: priest_dragon_dodge_3 }
+		{ aura: priest_dragon_dodge_4 }
+		{ aura: priest_dragon_dodge_5 }
 	]
 }
 
@@ -234,6 +236,22 @@ aura priest_dragon_dodge_3:
 	stat_modifiers: { dodge_chance: { add: 6 } }
 }
 
+aura priest_dragon_dodge_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your chance to dodge by 8%."
+	stat_modifiers: { dodge_chance: { add: 8 } }
+}
+
+aura priest_dragon_dodge_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your chance to dodge by 10%."
+	stat_modifiers: { dodge_chance: { add: 10 } }
+}
+
 ###############################################################################
 # Resistance Aura
 
@@ -242,11 +260,12 @@ talent priest_dragon_resistance_aura:
 	string: "Resistance Aura"
 	icon: icon_resistance_aura
 	prerequisites: [ ]	
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ aura: priest_dragon_resistance_aura_1 }
 		{ aura: priest_dragon_resistance_aura_2 }
+		{ aura: priest_dragon_resistance_aura_3 }
 	]
 }
 
@@ -254,16 +273,24 @@ aura priest_dragon_resistance_aura_1:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Decrease damage taken by magical spells and effects by 10%."
-	aura_effect damage_input_modifier: { type_mask: [ frost fire arcane unholy holy ] multiplier: 0.9 }
+	description: "Decrease damage taken by magical spells and effects by 8%."
+	aura_effect damage_input_modifier: { type_mask: [ frost fire arcane unholy holy ] multiplier: 0.92 }
 }
 
 aura priest_dragon_resistance_aura_2:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Decrease damage taken by magical spells and effects by 20%."
-	aura_effect damage_input_modifier: { type_mask: [ frost fire arcane unholy holy ] multiplier: 0.8 }
+	description: "Decrease damage taken by magical spells and effects by 16%."
+	aura_effect damage_input_modifier: { type_mask: [ frost fire arcane unholy holy ] multiplier: 0.84 }
+}
+
+aura priest_dragon_resistance_aura_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Decrease damage taken by magical spells and effects by 24%."
+	aura_effect damage_input_modifier: { type_mask: [ frost fire arcane unholy holy ] multiplier: 0.76 }
 }
 
 ###############################################################################
@@ -280,6 +307,8 @@ talent priest_dragon_skin:
 		{ aura: priest_dragon_skin_1 }
 		{ aura: priest_dragon_skin_2 }
 		{ aura: priest_dragon_skin_3 }
+		{ aura: priest_dragon_skin_4 }
+		{ aura: priest_dragon_skin_5 }
 	]
 }
 
@@ -287,7 +316,7 @@ aura priest_dragon_skin_1:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases your armor by 20%."
+	description: "Increases your armor by 12%."
 	stat_modifiers: { armor: { add_percent: 20 } }
 }
 
@@ -295,11 +324,27 @@ aura priest_dragon_skin_2:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases your armor by 40%."
-	stat_modifiers: { armor: { add_percent: 40 } }
+	description: "Increases your armor by 24%."
+	stat_modifiers: { armor: { add_percent: 24 } }
 }
 
 aura priest_dragon_skin_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your armor by 36%."
+	stat_modifiers: { armor: { add_percent: 36 } }
+}
+
+aura priest_dragon_skin_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your armor by 48%."
+	stat_modifiers: { armor: { add_percent: 48 } }
+}
+
+aura priest_dragon_skin_5:
 {
 	flags: [ persist_in_death ]
 	type: hidden
@@ -315,7 +360,7 @@ talent priest_dragon_improved_dwindle:
 	string: "Improved Dwindle"
 	icon: icon_dwindle
 	prerequisites: [ priest_dragon_dodge ]	
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability_modifier: improved_dwindle }

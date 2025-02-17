@@ -2,7 +2,6 @@
 
 #include "../AuraEffectBase.h"
 #include "../DirectEffect.h"
-#include "../Requirement.h"
 
 namespace tpublic
 {
@@ -42,44 +41,43 @@ namespace tpublic
 				aSource->ForEachChild([&](
 					const SourceNode* aChild)
 				{
-					if(aChild->m_name == "type_mask")
+					if(!FromSourceBase(aChild))
 					{
-						aChild->GetArray()->ForEachChild([&](
-							const SourceNode* aFlag)
+						if (aChild->m_name == "type_mask")
 						{
-							if(aFlag->IsIdentifier("all"))
-							{
-								m_typeMask = UINT32_MAX;
-							}
-							else
-							{
-								DirectEffect::DamageType damageType = DirectEffect::StringToDamageType(aFlag->GetIdentifier());
-								m_typeMask |= 1 << (uint32_t)damageType;
-							}
-						});
-					}
-					else if (aChild->m_name == "multiplier")
-					{
-						float f = aChild->GetFloat();
-						m_multiplierNumerator = (uint32_t)(f * 1000.0f);
-						m_multiplierDenominator = 1000;
-					}
-					else if (aChild->m_name == "multiplier_num")
-					{
-						m_multiplierNumerator = aChild->GetInt32();
-					}
-					else if (aChild->m_name == "multiplier_denom")
-					{
-						m_multiplierDenominator = aChild->GetInt32();
-						TP_VERIFY(m_multiplierDenominator != 0, aChild->m_debugInfo, "Multiplier denominator can't be zero.");
-					}
-					else if(aChild->m_tag == "requirement")
-					{
-						m_requirements.push_back(Requirement(aChild));
-					}
-					else
-					{
-						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+							aChild->GetArray()->ForEachChild([&](
+								const SourceNode* aFlag)
+								{
+									if (aFlag->IsIdentifier("all"))
+									{
+										m_typeMask = UINT32_MAX;
+									}
+									else
+									{
+										DirectEffect::DamageType damageType = DirectEffect::StringToDamageType(aFlag->GetIdentifier());
+										m_typeMask |= 1 << (uint32_t)damageType;
+									}
+								});
+						}
+						else if (aChild->m_name == "multiplier")
+						{
+							float f = aChild->GetFloat();
+							m_multiplierNumerator = (uint32_t)(f * 1000.0f);
+							m_multiplierDenominator = 1000;
+						}
+						else if (aChild->m_name == "multiplier_num")
+						{
+							m_multiplierNumerator = aChild->GetInt32();
+						}
+						else if (aChild->m_name == "multiplier_denom")
+						{
+							m_multiplierDenominator = aChild->GetInt32();
+							TP_VERIFY(m_multiplierDenominator != 0, aChild->m_debugInfo, "Multiplier denominator can't be zero.");
+						}
+						else
+						{
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+						}
 					}
 				});
 			}
@@ -92,7 +90,6 @@ namespace tpublic
 				aStream->WriteUInt(m_typeMask);
 				aStream->WriteInt(m_multiplierNumerator);
 				aStream->WriteInt(m_multiplierDenominator);
-				aStream->WriteObjects(m_requirements);
 			}
 
 			bool
@@ -107,8 +104,6 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadInt(m_multiplierDenominator))
 					return false;
-				if (!aStream->ReadObjects(m_requirements))
-					return false;
 				return true;
 			}
 
@@ -121,7 +116,6 @@ namespace tpublic
 				t->m_typeMask = m_typeMask;
 				t->m_multiplierNumerator = m_multiplierNumerator;
 				t->m_multiplierDenominator = m_multiplierDenominator;
-				t->m_requirements = m_requirements;
 
 				return t;
 			}
@@ -130,7 +124,6 @@ namespace tpublic
 			uint32_t					m_typeMask = 0;
 			int32_t						m_multiplierNumerator = 1;
 			int32_t						m_multiplierDenominator = 1;
-			std::vector<Requirement>	m_requirements;
 		};
 
 	}

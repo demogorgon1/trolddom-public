@@ -846,6 +846,10 @@ namespace tpublic
 						{
 							m_restricted = aMember->GetBool();
 						}
+						else if(aMember->m_name == "version")
+						{
+							m_version = aMember->GetUInt32();
+						}
 						else if(aMember->m_tag == "start_reputation")
 						{
 							m_startReputations.push_back(StartReputation(aMember));
@@ -884,6 +888,7 @@ namespace tpublic
 				aStream->WritePOD(m_defaultArmorStyleId);
 				m_armorDecoration.ToStream(aStream);
 				aStream->WriteUInt(m_unlockedByAchievementId);
+				aStream->WriteUInt(m_version);
 				aStream->WriteBool(m_restricted);
 				aStream->WriteObjects(m_startReputations);
 				aStream->WriteObjectPointers(m_gearOptimizations);
@@ -933,7 +938,9 @@ namespace tpublic
 					return false;
 				if(!m_armorDecoration.FromStream(aStream))
 					return false;
-				if(!aStream->ReadUInt(m_unlockedByAchievementId))
+				if (!aStream->ReadUInt(m_unlockedByAchievementId))
+					return false;
+				if (!aStream->ReadUInt(m_version))
 					return false;
 				if(!aStream->ReadBool(m_restricted))
 					return false;
@@ -958,6 +965,7 @@ namespace tpublic
 			}
 
 			// Public data
+			uint32_t												m_version = 0;
 			std::string												m_displayName;
 			std::string												m_description;
 			Color													m_color1;

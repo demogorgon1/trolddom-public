@@ -128,6 +128,8 @@ talent paladin_parry:
 		{ aura: paladin_parry_1 }
 		{ aura: paladin_parry_2 }
 		{ aura: paladin_parry_3 }
+		{ aura: paladin_parry_4 }
+		{ aura: paladin_parry_5 }
 	]
 }
 
@@ -153,6 +155,22 @@ aura paladin_parry_3:
 	type: hidden
 	description: "Increases your chance to parry by 6%."
 	stat_modifiers: { parry_chance: { add: 6 } }
+}
+
+aura paladin_parry_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your chance to parry by 8%."
+	stat_modifiers: { parry_chance: { add: 8 } }
+}
+
+aura paladin_parry_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your chance to parry by 10%."
+	stat_modifiers: { parry_chance: { add: 10 } }
 }
 
 ###############################################################################
@@ -263,7 +281,7 @@ talent paladin_oath_of_retribution:
 	string: "Oath of Retribution"
 	icon: icon_oath_of_retribution
 	prerequisites: [ paladin_blessing_of_war ]	
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability: oath_of_retribution }
@@ -308,12 +326,14 @@ talent paladin_divine_grip:
 	string: "Divine Grip"
 	icon: icon_divine_grip
 	prerequisites: [ ]	
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ aura: paladin_divine_grip_1 }
 		{ aura: paladin_divine_grip_2 }
 		{ aura: paladin_divine_grip_3 }
+		{ aura: paladin_divine_grip_4 }
+		{ aura: paladin_divine_grip_5 }
 	]
 }
 
@@ -321,16 +341,29 @@ aura paladin_divine_grip_1:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases damage done with two-handed weapons by 3%."
+	description: "Increases damage done with two-handed weapons by 2%."
 	aura_effect damage_output_modifier: 
 	{ 
 		type_mask: [ physical ]
 		requirement self<must_have_equipped_item_type_flags>: { id: [ two_handed ] }
-		multiplier: 1.03
+		multiplier: 1.02
 	}
 }
 
 aura paladin_divine_grip_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases damage done with two-handed weapons by 4%."
+	aura_effect damage_output_modifier: 
+	{ 
+		type_mask: [ physical ]
+		requirement self<must_have_equipped_item_type_flags>: { id: [ two_handed ] }
+		multiplier: 1.04
+	}
+}
+
+aura paladin_divine_grip_3:
 {
 	flags: [ persist_in_death ]
 	type: hidden
@@ -343,16 +376,29 @@ aura paladin_divine_grip_2:
 	}
 }
 
-aura paladin_divine_grip_3:
+aura paladin_divine_grip_4:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases damage done with two-handed weapons by 9%."
+	description: "Increases damage done with two-handed weapons by 8%."
 	aura_effect damage_output_modifier: 
 	{ 
 		type_mask: [ physical ]
 		requirement self<must_have_equipped_item_type_flags>: { id: [ two_handed ] }
-		multiplier: 1.09
+		multiplier: 1.08
+	}
+}
+
+aura paladin_divine_grip_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases damage done with two-handed weapons by 10%."
+	aura_effect damage_output_modifier: 
+	{ 
+		type_mask: [ physical ]
+		requirement self<must_have_equipped_item_type_flags>: { id: [ two_handed ] }
+		multiplier: 1.10
 	}
 }
 
@@ -364,7 +410,7 @@ talent paladin_relentless_assault:
 	string: "Relentless Assault"
 	icon: icon_relentless_assault
 	prerequisites: [ ]	
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ aura: paladin_relentless_assault }
@@ -420,7 +466,7 @@ talent paladin_holy_storm:
 	string: "Holy Storm"
 	icon: icon_holy_storm
 	prerequisites: [ paladin_relentless_assault ]	
-	talent_tree_points_required: 6
+	talent_tree_points_required: 10
 	points:
 	[
 		{ ability: holy_storm }

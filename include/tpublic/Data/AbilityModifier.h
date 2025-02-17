@@ -103,6 +103,10 @@ namespace tpublic
 						{
 							m_modifyCastTime = aChild->GetInt32();
 						}
+						else if (aChild->m_name == "modify_cooldown")
+						{
+							m_modifyCooldown = aChild->GetInt32();
+						}
 						else if(aChild->m_name == "modify_damage_type")
 						{
 							m_modifyDamageType = DirectEffect::StringToDamageType(aChild->GetIdentifier());
@@ -127,6 +131,7 @@ namespace tpublic
 				aWriter->WriteInt(m_modifyAuraUpdateCount);
 				aWriter->WriteInt(m_modifyRange);
 				aWriter->WriteInt(m_modifyCastTime);
+				aWriter->WriteInt(m_modifyCooldown);
 				aWriter->WritePOD(m_modifyDamageType);
 			}
 			
@@ -148,6 +153,8 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadInt(m_modifyCastTime))
 					return false;
+				if (!aReader->ReadInt(m_modifyCooldown))
+					return false;
 				if(!aReader->ReadPOD(m_modifyDamageType))
 					return false;
 				return true;
@@ -161,6 +168,7 @@ namespace tpublic
 			int32_t										m_modifyRange = 0;
 			int32_t										m_modifyAuraUpdateCount = 0;
 			int32_t										m_modifyCastTime = 0;
+			int32_t										m_modifyCooldown = 0;
 			DirectEffect::DamageType					m_modifyDamageType = DirectEffect::INVALID_DAMAGE_TYPE;
 		};
 

@@ -42,6 +42,8 @@ talent priest_wisdom:
 		{ aura: priest_wisdom_1 }
 		{ aura: priest_wisdom_2 }
 		{ aura: priest_wisdom_3 }
+		{ aura: priest_wisdom_4 }
+		{ aura: priest_wisdom_5 }
 	]
 }
 
@@ -69,6 +71,22 @@ aura priest_wisdom_3:
 	stat_modifiers: { wisdom: { add_percent: 6 } }
 }
 
+aura priest_wisdom_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your Wisdom by 8%."
+	stat_modifiers: { wisdom: { add_percent: 8 } }
+}
+
+aura priest_wisdom_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your Wisdom by 10%."
+	stat_modifiers: { wisdom: { add_percent: 10 } }
+}
+
 ###############################################################################
 # Fear
 
@@ -77,7 +95,7 @@ talent priest_fear:
 	string: "Fear"
 	icon: icon_fear
 	prerequisites: [ priest_spiritual_crisis ]
-	talent_tree_points_required: 6
+	talent_tree_points_required: 10
 	points:
 	[
 		{ ability: fear }
@@ -128,7 +146,7 @@ talent priest_spiritual_crisis:
 {
 	string: "Spiritual Crisis"
 	icon: icon_tree
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability: spiritual_crisis }
@@ -210,20 +228,32 @@ talent priest_improved_condemnation:
 		{ ability_modifier: improved_condemnation_1 }
 		{ ability_modifier: improved_condemnation_2 }
 		{ ability_modifier: improved_condemnation_3 }
+		{ ability_modifier: improved_condemnation_4 }
+		{ ability_modifier: improved_condemnation_5 }
 	]
 }
 
 ability_modifier improved_condemnation_1:
 {	
-	description: "Increases critical strike chance of Condemnation by 10%."	
+	description: "Increases critical strike chance of Condemnation by 6%."	
 }
 
 ability_modifier improved_condemnation_2:
 {	
-	description: "Increases critical strike chance of Condemnation by 20%."	
+	description: "Increases critical strike chance of Condemnation by 12%."	
 }
 
 ability_modifier improved_condemnation_3:
+{	
+	description: "Increases critical strike chance of Condemnation by 18%."	
+}
+
+ability_modifier improved_condemnation_4:
+{	
+	description: "Increases critical strike chance of Condemnation by 24%."	
+}
+
+ability_modifier improved_condemnation_5:
 {	
 	description: "Increases critical strike chance of Condemnation by 30%."	
 }
@@ -258,20 +288,32 @@ talent priest_improved_smite:
 		{ ability_modifier: improved_smite_1 }
 		{ ability_modifier: improved_smite_2 }
 		{ ability_modifier: improved_smite_3 }
+		{ ability_modifier: improved_smite_4 }
+		{ ability_modifier: improved_smite_5 }
 	]
 }
 
 ability_modifier improved_smite_1:
 {	
-	description: "Increases damage done by Smite by 10%."	
+	description: "Increases damage done by Smite by 6%."	
 }
 
 ability_modifier improved_smite_2:
 {	
-	description: "Increases damage done by Smite by 20%."	
+	description: "Increases damage done by Smite by 12%."	
 }
 
 ability_modifier improved_smite_3:
+{	
+	description: "Increases damage done by Smite by 18%."	
+}
+
+ability_modifier improved_smite_4:
+{	
+	description: "Increases damage done by Smite by 24%."	
+}
+
+ability_modifier improved_smite_5:
 {	
 	description: "Increases damage done by Smite by 30%."	
 }
@@ -283,7 +325,7 @@ talent priest_swift_justice:
 {
 	string: "Swift Justice"
 	icon: icon_swift_justice
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	prerequisites: [ priest_improved_smite ]
 	points:
 	[
@@ -345,7 +387,7 @@ ability smite:
 		must_have_ability_modifier: improved_smite_1 
 		damage_type: fire
 		flags: [ can_be_critical is_magical ]
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.8 b: [ [ 1 27 ] [ 10 55 ] [ 20 110 ] ] }			
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.8 b: [ [ 1 26 ] [ 10 52 ] [ 20 106 ] ] }			
 	}		
 	
 	direct_effect damage:
@@ -353,7 +395,7 @@ ability smite:
 		must_have_ability_modifier: improved_smite_2
 		damage_type: fire
 		flags: [ can_be_critical is_magical ]
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.8 b: [ [ 1 30 ] [ 10 60 ] [ 20 120 ] ] }			
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.8 b: [ [ 1 27 ] [ 10 54 ] [ 20 112 ] ] }			
 	}		
 
 	direct_effect damage:
@@ -361,8 +403,25 @@ ability smite:
 		must_have_ability_modifier: improved_smite_3 
 		damage_type: fire
 		flags: [ can_be_critical is_magical ]
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.8 b: [ [ 1 32 ] [ 10 65 ] [ 20 130 ] ] }					
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.8 b: [ [ 1 28 ] [ 10 56 ] [ 20 118 ] ] }					
 	}			
+	
+	direct_effect damage:
+	{	
+		must_have_ability_modifier: improved_smite_4 
+		damage_type: fire
+		flags: [ can_be_critical is_magical ]
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.8 b: [ [ 1 30 ] [ 10 58 ] [ 20 126 ] ] }					
+	}			
+
+	direct_effect damage:
+	{	
+		must_have_ability_modifier: improved_smite_5 
+		damage_type: fire
+		flags: [ can_be_critical is_magical ]
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.8 b: [ [ 1 32 ] [ 10 60 ] [ 20 130 ] ] }					
+	}			
+	
 }
 
 ###############################################################################
@@ -381,6 +440,8 @@ ability condemnation_tick:
 		conditional_critical_chance_bonus<improved_condemnation_1>: 10
 		conditional_critical_chance_bonus<improved_condemnation_2>: 20
 		conditional_critical_chance_bonus<improved_condemnation_3>: 30
+		conditional_critical_chance_bonus<improved_condemnation_4>: 40
+		conditional_critical_chance_bonus<improved_condemnation_5>: 50
 		damage_type: fire		
 		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.25 b: [ [ 1 4 ] [ 10 8 ] [ 20 16 ] ] }					
 		flags: [ is_magical ]
@@ -392,6 +453,8 @@ ability condemnation_tick:
 		conditional_critical_chance_bonus<improved_condemnation_1>: 10
 		conditional_critical_chance_bonus<improved_condemnation_2>: 20
 		conditional_critical_chance_bonus<improved_condemnation_3>: 30
+		conditional_critical_chance_bonus<improved_condemnation_4>: 40
+		conditional_critical_chance_bonus<improved_condemnation_5>: 50
 		damage_type: fire
 		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.25 b: [ [ 1 4 ] [ 10 8 ] [ 20 16 ] ] }					
 		flags: [ can_be_critical is_magical ]

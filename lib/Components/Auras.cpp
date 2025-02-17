@@ -113,6 +113,9 @@ namespace tpublic::Components
 
 	int32_t
 	Auras::FilterDamageInput(
+		const Manifest*								aManifest,
+		const EntityInstance*						aSource,
+		const EntityInstance*						aTarget,
 		DirectEffect::DamageType					aDamageType,
 		int32_t										aDamage) const
 	{
@@ -121,7 +124,10 @@ namespace tpublic::Components
 		for (const std::unique_ptr<Entry>& entry : m_entries)
 		{
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
-				damage = effect->FilterDamageInput(aDamageType, damage);
+			{
+				if (effect->CheckRequirements(aManifest, aSource, aTarget))
+					damage = effect->FilterDamageInput(aDamageType, damage);
+			}
 		}
 						
 		return damage;
@@ -140,7 +146,10 @@ namespace tpublic::Components
 		for (const std::unique_ptr<Entry>& entry : m_entries)
 		{
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
-				damage = effect->FilterDamageOutput(aManifest, aSource, aTarget, aDamageType, damage);
+			{
+				if (effect->CheckRequirements(aManifest, aSource, aTarget))
+					damage = effect->FilterDamageOutput(aManifest, aSource, aTarget, aDamageType, damage);
+			}
 		}
 						
 		return damage;
@@ -148,6 +157,9 @@ namespace tpublic::Components
 
 	int32_t		
 	Auras::FilterHealInput(
+		const Manifest*								aManifest,
+		const EntityInstance*						aSource,
+		const EntityInstance*						aTarget,
 		int32_t										aHeal) const
 	{
 		int32_t heal = aHeal;
@@ -155,7 +167,10 @@ namespace tpublic::Components
 		for (const std::unique_ptr<Entry>& entry : m_entries)
 		{
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
-				heal = effect->FilterHealInput(heal);
+			{
+				if (effect->CheckRequirements(aManifest, aSource, aTarget))
+					heal = effect->FilterHealInput(heal);
+			}
 		}
 
 		return heal;
@@ -164,6 +179,9 @@ namespace tpublic::Components
 
 	int32_t		
 	Auras::FilterHealOutput(
+		const Manifest*								aManifest,
+		const EntityInstance*						aSource,
+		const EntityInstance*						aTarget,
 		int32_t										aHeal) const
 	{
 		int32_t heal = aHeal;
@@ -171,7 +189,10 @@ namespace tpublic::Components
 		for (const std::unique_ptr<Entry>& entry : m_entries)
 		{
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
-				heal = effect->FilterHealOutput(heal);
+			{
+				if (effect->CheckRequirements(aManifest, aSource, aTarget))
+					heal = effect->FilterHealOutput(heal);
+			}
 		}
 
 		return heal;
@@ -179,6 +200,9 @@ namespace tpublic::Components
 
 	int32_t		
 	Auras::FilterThreat(
+		const Manifest*								aManifest,
+		const EntityInstance*						aSource,
+		const EntityInstance*						aTarget,
 		int32_t										aThreat) const
 	{
 		int32_t threat = aThreat;
@@ -186,7 +210,10 @@ namespace tpublic::Components
 		for (const std::unique_ptr<Entry>& entry : m_entries)
 		{
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
-				threat = effect->FilterThreat(threat);
+			{
+				if (effect->CheckRequirements(aManifest, aSource, aTarget))
+					threat = effect->FilterThreat(threat);
+			}
 		}
 
 		return threat;
@@ -195,6 +222,8 @@ namespace tpublic::Components
 	void		
 	Auras::OnCombatEvent(
 		const Manifest*								aManifest,
+		const EntityInstance*						aSource,
+		const EntityInstance*						aTarget,
 		tpublic::AuraEffectBase::CombatEventType	aType,
 		CombatEvent::Id								aCombatEventId,
 		uint32_t									aAbilityId,
@@ -203,12 +232,16 @@ namespace tpublic::Components
 		for (const std::unique_ptr<Entry>& entry : m_entries)
 		{
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
-				effect->OnCombatEvent(aManifest, aType, aCombatEventId, aAbilityId, aCallback);
+			{
+				if (effect->CheckRequirements(aManifest, aSource, aTarget))
+					effect->OnCombatEvent(aManifest, aType, aCombatEventId, aAbilityId, aCallback);
+			}
 		}
 	}
 
 	void			
 	Auras::OnDamageInput(
+		const Manifest*								aManifest,
 		const EntityInstance*						aSource,
 		const EntityInstance*						aTarget,
 		DirectEffect::DamageType					aDamageType,
@@ -221,7 +254,10 @@ namespace tpublic::Components
 		for (const std::unique_ptr<Entry>& entry : m_entries)
 		{
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
-				effect->OnDamageInput(aSource, aTarget, entry->m_sourceEntityInstance, aDamageType, aDamage, aCombatEventId, aEventQueue, aWorldView, aResourceChangeQueue);
+			{
+				if(effect->CheckRequirements(aManifest, aSource, aTarget))
+					effect->OnDamageInput(aSource, aTarget, entry->m_sourceEntityInstance, aDamageType, aDamage, aCombatEventId, aEventQueue, aWorldView, aResourceChangeQueue);
+			}
 		}
 	}
 
@@ -256,7 +292,7 @@ namespace tpublic::Components
 		{
 			for (std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
 			{
-				if(effect->UpdateCastTime(aManifest, aAbilityId, entry->m_charges, aCastTime))
+				if (effect->UpdateCastTime(aManifest, aAbilityId, entry->m_charges, aCastTime))
 					modified = true;
 			}
 		}

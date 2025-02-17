@@ -13,6 +13,8 @@ talent_tree fighter_combat:
 		talent fighter_combat_mortal_strike: "E"
 		talent fighter_combat_improved_charge: "F"
 		talent fighter_combat_improved_strength: "G"
+		talent fighter_combat_fast_recovery: "H"
+		talent fighter_combat_blade_guard: "I"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_down: "|"
 	}
@@ -22,8 +24,8 @@ talent_tree fighter_combat:
 		"D.A...G"
 		"|.d...d"
 		"|.B.C.F"
-		"d......"
-		"E......"
+		"d...d.d"
+		"E...I.H"
 	]
 	
 }
@@ -34,7 +36,7 @@ talent_tree fighter_combat:
 talent fighter_combat_improved_charge:
 {
 	string: "Improved Charge"
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	prerequisites: [ fighter_combat_improved_strength ]		
 	icon: icon_charge
 	points:
@@ -51,6 +53,28 @@ ability_modifier improved_charge:
 }
 
 ###############################################################################
+# Fast Recovery
+
+talent fighter_combat_fast_recovery:
+{
+	string: "Fast Recovery"
+	talent_tree_points_required: 10
+	prerequisites: [ fighter_combat_improved_charge ]		
+	icon: icon_fast_recovery
+	points:
+	[
+		{ ability_modifier: fast_recovery }
+	]
+}
+
+ability_modifier fast_recovery:
+{	
+	description: "Reduces cooldown of charge of Charge by 2 seconds."
+	ability: charge
+	modify_cooldown: -20
+}
+
+###############################################################################
 # Improved Strength
 
 talent fighter_combat_improved_strength:
@@ -62,6 +86,8 @@ talent fighter_combat_improved_strength:
 		{ aura: fighter_combat_improved_strength_1 }
 		{ aura: fighter_combat_improved_strength_2 }
 		{ aura: fighter_combat_improved_strength_3 }
+		{ aura: fighter_combat_improved_strength_4 }
+		{ aura: fighter_combat_improved_strength_5 }
 	]
 }
 
@@ -89,6 +115,22 @@ aura fighter_combat_improved_strength_3:
 	stat_modifiers: { strength: { add_percent: 6 } }
 }
 
+aura fighter_combat_improved_strength_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your strength by 8%."
+	stat_modifiers: { strength: { add_percent: 8 } }
+}
+
+aura fighter_combat_improved_strength_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your strength by 10%."
+	stat_modifiers: { strength: { add_percent: 10 } }
+}
+
 ###############################################################################
 # Deflection
 
@@ -103,6 +145,8 @@ talent fighter_combat_deflection:
 		{ aura: fighter_combat_deflection_1 }
 		{ aura: fighter_combat_deflection_2 }
 		{ aura: fighter_combat_deflection_3 }
+		{ aura: fighter_combat_deflection_4 }
+		{ aura: fighter_combat_deflection_5 }
 	]
 }
 
@@ -130,6 +174,22 @@ aura fighter_combat_deflection_3:
 	stat_modifiers: { parry_chance: { add: 6 } }
 }
 
+aura fighter_combat_deflection_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your chance to parry by 8%."
+	stat_modifiers: { parry_chance: { add: 8 } }
+}
+
+aura fighter_combat_deflection_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your chance to parry by 10%."
+	stat_modifiers: { parry_chance: { add: 10 } }
+}
+
 ###############################################################################
 # Riposte
 
@@ -138,7 +198,7 @@ talent fighter_combat_riposte:
 	string: "Riposte"
 	icon: icon_rage
 	prerequisites: [ fighter_combat_deflection ]	
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ aura: fighter_combat_riposte }
@@ -177,14 +237,15 @@ talent fighter_combat_ferocity:
 {
 	string: "Ferocity"
 	icon: icon_crit
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
-		{ aura: fighter_combat_ferocity }
+		{ aura: fighter_combat_ferocity_1 }
+		{ aura: fighter_combat_ferocity_2 }
 	]
 }
 
-ability fighter_combat_ferocity_trigger:
+ability fighter_combat_ferocity_trigger_1:
 {
 	string: "Ferocity"
 	states: [ default in_combat ]
@@ -192,12 +253,12 @@ ability fighter_combat_ferocity_trigger:
 	
 	direct_effect apply_aura:
 	{
-		aura: fighter_combat_ferocity_buff
+		aura: fighter_combat_ferocity_buff_1
 		apply_to_party_members_in_range: 8
 	}
 }
 
-aura fighter_combat_ferocity:
+aura fighter_combat_ferocity_1:
 {
 	flags: [ persist_in_death ]	
 	type: hidden
@@ -205,11 +266,11 @@ aura fighter_combat_ferocity:
 	aura_effect combat_event_trigger: 
 	{ 
 		combat_event<source>: critical
-		ability<self>: fighter_combat_ferocity_trigger
+		ability<self>: fighter_combat_ferocity_trigger_1
 	}
 }
 
-aura fighter_combat_ferocity_buff:
+aura fighter_combat_ferocity_buff_1:
 {
 	string: "Ferocity"
 	type: buff
@@ -218,6 +279,43 @@ aura fighter_combat_ferocity_buff:
 	stat_modifiers:
 	{
 		phys_crit_chance: { add: 5 }
+	}
+}
+
+ability fighter_combat_ferocity_trigger_2:
+{
+	string: "Ferocity"
+	states: [ default in_combat ]
+	icon: icon_crit
+	
+	direct_effect apply_aura:
+	{
+		aura: fighter_combat_ferocity_buff_2
+		apply_to_party_members_in_range: 8
+	}
+}
+
+aura fighter_combat_ferocity_2:
+{
+	flags: [ persist_in_death ]	
+	type: hidden
+	description: "Your critical strikes increase your critical strike chance by 10% for 10 seconds. Also affects nearby party members."
+	aura_effect combat_event_trigger: 
+	{ 
+		combat_event<source>: critical
+		ability<self>: fighter_combat_ferocity_trigger_2
+	}
+}
+
+aura fighter_combat_ferocity_buff_2:
+{
+	string: "Ferocity"
+	type: buff
+	icon: icon_crit
+	duration: 100
+	stat_modifiers:
+	{
+		phys_crit_chance: { add: 10 }
 	}
 }
 
@@ -265,7 +363,7 @@ talent fighter_combat_mortal_strike:
 	string: "Mortal Strike"
 	icon: icon_mortal_strike
 	prerequisites: [ fighter_combat_improved_strike ]
-	talent_tree_points_required: 6	
+	talent_tree_points_required: 10
 	points:
 	[
 		{ ability: mortal_strike }
@@ -329,6 +427,54 @@ ability mortal_strike:
 	direct_effect apply_aura:
 	{
 		aura: mortal_strike
+	}
+}
+
+###############################################################################
+# Blade Guard
+
+talent fighter_combat_blade_guard:
+{
+	string: "Blade Guard"
+	icon: icon_blade_guard
+	prerequisites: [ fighter_combat_riposte ]
+	talent_tree_points_required: 10
+	points:
+	[
+		{ ability: blade_guard }
+	]
+}
+
+cooldown blade_guard:
+{
+	duration: 1200
+}
+
+aura blade_guard:
+{
+	string: "Blade Guard"
+	type: buff
+	icon: icon_blade_guard
+	duration: 120
+	flags: [ unique ]
+	stat_modifiers: { parry_chance: { add: 50 } }
+}
+
+ability blade_guard:
+{
+	string: "Blade Guard"
+	description: "Increases you chance to parry by 50% for 12 seconds."
+	range: 1	
+	cooldowns: [ global blade_guard ]
+	flags: [ target_self ]
+	states: [ default in_combat ]
+	icon: icon_blade_guard
+	delay: 3
+	talent_tree: fighter_combat
+		
+	direct_effect apply_aura:
+	{
+		aura: blade_guard
 	}
 }
 

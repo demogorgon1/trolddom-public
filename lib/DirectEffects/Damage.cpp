@@ -180,7 +180,7 @@ namespace tpublic::DirectEffects
 			damage = sourceAuras->FilterDamageOutput(aManifest, aSource, aTarget, damageType, damage);
 
 		if (targetAuras != NULL)
-			damage = targetAuras->FilterDamageInput(damageType, damage);
+			damage = targetAuras->FilterDamageInput(aManifest, aSource, aTarget, damageType, damage);
 
 		uint32_t blocked = 0;
 
@@ -250,7 +250,7 @@ namespace tpublic::DirectEffects
 		if(targetCombatPublic->GetResourceIndex(Resource::ID_HEALTH, healthResourceIndex))
 		{
 			if(targetAuras != NULL)
-				targetAuras->OnDamageInput(aSource, aTarget, m_damageType, (int32_t)damage, result, aEventQueue, aWorldView, aResourceChangeQueue);
+				targetAuras->OnDamageInput(aManifest, aSource, aTarget, m_damageType, (int32_t)damage, result, aEventQueue, aWorldView, aResourceChangeQueue);
 
 			aResourceChangeQueue->AddResourceChange(
 				result,

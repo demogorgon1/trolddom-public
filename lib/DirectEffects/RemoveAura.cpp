@@ -30,6 +30,8 @@ namespace tpublic
 						m_auraId = aChild->GetId(DataType::ID_AURA);
 					else if (aChild->m_name == "aura_group")
 						m_auraGroupId = aChild->GetId(DataType::ID_AURA_GROUP);
+					else if(aChild->m_name == "target_self")
+						m_targetSelf = aChild->GetBool();
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 				}
@@ -45,6 +47,7 @@ namespace tpublic
 			aStream->WritePOD(m_auraType);
 			aStream->WriteUInt(m_auraId);
 			aStream->WriteUInt(m_auraGroupId);
+			aStream->WriteBool(m_targetSelf);
 		}
 
 		bool
@@ -61,6 +64,8 @@ namespace tpublic
 				return false;
 			if (!aStream->ReadUInt(m_auraGroupId))
 				return false;
+			if (!aStream->ReadBool(m_targetSelf))
+				return false;
 			return true;
 		}
 
@@ -72,7 +77,7 @@ namespace tpublic
 			CombatEvent::Id					/*aId*/,
 			uint32_t						/*aAbilityId*/,
 			const SourceEntityInstance&		/*aSourceEntityInstance*/,
-			EntityInstance*					/*aSource*/,
+			EntityInstance*					aSource,
 			EntityInstance*					aTarget,
 			const Vec2&						/*aAOETarget*/,
 			const ItemInstanceReference&	/*aItem*/,
@@ -81,7 +86,12 @@ namespace tpublic
 			IEventQueue*					/*aEventQueue*/,
 			const IWorldView*				/*aWorldView*/)
 		{
-			Components::Auras* targetAuras = aTarget->GetComponent<Components::Auras>();
+			EntityInstance* target = m_targetSelf ? aSource : aTarget;
+
+			if (target == NULL)
+				return Result();
+
+			Components::Auras* targetAuras = target->GetComponent<Components::Auras>();
 			
 			if(m_auraId != 0)
 			{

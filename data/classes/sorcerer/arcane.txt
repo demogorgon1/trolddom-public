@@ -53,7 +53,7 @@ talent sorcerer_arcane_void_lightning:
 {
 	string: "Void Lightning"
 	icon: icon_void_lightning
-	talent_tree_points_required: 6
+	talent_tree_points_required: 10
 	points:
 	[
 		{ ability: void_lightning }
@@ -161,7 +161,7 @@ talent sorcerer_arcane_improved_teleport:
 {
 	string: "Improved Teleport"
 	icon: icon_improved_teleport
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	prerequisites: [ sorcerer_arcane_teleport ]
 	points:
 	[
@@ -194,7 +194,7 @@ talent sorcerer_arcane_teleport:
 {
 	string: "Teleport"
 	icon: icon_teleport
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability: teleport }
@@ -259,7 +259,7 @@ talent sorcerer_arcane_insight:
 {
 	string: "Insight"
 	icon: icon_insight
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	prerequisites: [ sorcerer_arcane_improved_arcane_missile ]
 	points:
 	[
@@ -320,22 +320,34 @@ talent sorcerer_arcane_improved_arcane_missile:
 		{ ability_modifier: improved_arcane_missile_1 }
 		{ ability_modifier: improved_arcane_missile_2 }
 		{ ability_modifier: improved_arcane_missile_3 }
+		{ ability_modifier: improved_arcane_missile_4 }
+		{ ability_modifier: improved_arcane_missile_5 }
 	]
 }
 
 ability_modifier improved_arcane_missile_1:
 {
-	description: "Increases critical chance of Arcane Missile by 15%."	
+	description: "Increases critical chance of Arcane Missile by 12%."	
 }
 
 ability_modifier improved_arcane_missile_2:
 {
-	description: "Increases critical chance of Arcane Missile by 30%."	
+	description: "Increases critical chance of Arcane Missile by 24%."	
 }
 
 ability_modifier improved_arcane_missile_3:
 {
-	description: "Increases critical chance of Arcane Missile by 45%."	
+	description: "Increases critical chance of Arcane Missile by 36%."	
+}
+
+ability_modifier improved_arcane_missile_4:
+{
+	description: "Increases critical chance of Arcane Missile by 48%."	
+}
+
+ability_modifier improved_arcane_missile_5:
+{
+	description: "Increases critical chance of Arcane Missile by 60%."	
 }
 
 ###############################################################################
@@ -351,6 +363,8 @@ talent sorcerer_arcane_word_of_the_wise:
 		{ aura: sorcerer_arcane_word_of_the_wise_1 }
 		{ aura: sorcerer_arcane_word_of_the_wise_2 }
 		{ aura: sorcerer_arcane_word_of_the_wise_3 }
+		{ aura: sorcerer_arcane_word_of_the_wise_4 }
+		{ aura: sorcerer_arcane_word_of_the_wise_5 }
 	]
 }
 
@@ -378,6 +392,22 @@ aura sorcerer_arcane_word_of_the_wise_3:
 	stat_modifiers: { wisdom: { add_percent: 6 } }
 }
 
+aura sorcerer_arcane_word_of_the_wise_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your Wisdom by 8%."
+	stat_modifiers: { wisdom: { add_percent: 8 } }
+}
+
+aura sorcerer_arcane_word_of_the_wise_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your Wisdom by 10%."
+	stat_modifiers: { wisdom: { add_percent: 10 } }
+}
+
 ###############################################################################
 # Arcane Missile
 
@@ -402,9 +432,11 @@ ability arcane_missile:
 	
 	direct_effect damage:
 	{
-		conditional_critical_chance_bonus<improved_arcane_missile_1>: 15
-		conditional_critical_chance_bonus<improved_arcane_missile_2>: 30
-		conditional_critical_chance_bonus<improved_arcane_missile_3>: 45
+		conditional_critical_chance_bonus<improved_arcane_missile_1>: 12
+		conditional_critical_chance_bonus<improved_arcane_missile_2>: 24
+		conditional_critical_chance_bonus<improved_arcane_missile_3>: 36
+		conditional_critical_chance_bonus<improved_arcane_missile_4>: 48
+		conditional_critical_chance_bonus<improved_arcane_missile_5>: 60
 	
 		flags: [ can_be_critical is_magical ]
 		damage_type: arcane

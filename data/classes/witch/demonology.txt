@@ -159,22 +159,34 @@ talent witch_improved_drain_life:
 		{ ability_modifier: improved_drain_life_1 }
 		{ ability_modifier: improved_drain_life_2 }
 		{ ability_modifier: improved_drain_life_3 }
+		{ ability_modifier: improved_drain_life_4 }
+		{ ability_modifier: improved_drain_life_5 }
 	]	
 }
 
 ability_modifier improved_drain_life_1:
 {	
-	description: "Increases damage done by Drain Life by 15%."	
+	description: "Increases damage done by Drain Life by 10%."	
 }
 
 ability_modifier improved_drain_life_2:
 {	
-	description: "Increases damage done by Drain Life by 30%."	
+	description: "Increases damage done by Drain Life by 20%."	
 }
 
 ability_modifier improved_drain_life_3:
 {	
-	description: "Increases damage done by Drain Life by 45%."	
+	description: "Increases damage done by Drain Life by 30%."	
+}
+
+ability_modifier improved_drain_life_4:
+{	
+	description: "Increases damage done by Drain Life by 40%."	
+}
+
+ability_modifier improved_drain_life_5:
+{	
+	description: "Increases damage done by Drain Life by 50%."	
 }
 
 ###############################################################################
@@ -420,6 +432,8 @@ talent witch_forbidden_knowledge:
 		{ aura: forbidden_knowledge_1 }
 		{ aura: forbidden_knowledge_2 }
 		{ aura: forbidden_knowledge_3 }
+		{ aura: forbidden_knowledge_4 }
+		{ aura: forbidden_knowledge_5 }
 	]	
 }
 
@@ -445,6 +459,22 @@ aura forbidden_knowledge_3:
 	type: hidden
 	description: "Increases your Wisdom by 6%."
 	stat_modifiers: { wisdom: { add_percent: 6 } }
+}
+
+aura forbidden_knowledge_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your Wisdom by 8%."
+	stat_modifiers: { wisdom: { add_percent: 8 } }
+}
+
+aura forbidden_knowledge_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your Wisdom by 10%."
+	stat_modifiers: { wisdom: { add_percent: 10 } }
 }
 
 ###############################################################################

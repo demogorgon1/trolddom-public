@@ -252,22 +252,34 @@ talent witch_improved_curse_of_corruption:
 		{ ability_modifier: improved_curse_of_corruption_1 }
 		{ ability_modifier: improved_curse_of_corruption_2 }
 		{ ability_modifier: improved_curse_of_corruption_3 }
+		{ ability_modifier: improved_curse_of_corruption_4 }
+		{ ability_modifier: improved_curse_of_corruption_5 }
 	]
 }
 
 ability_modifier improved_curse_of_corruption_1:
 {	
-	description: "Increases damage done by Curse of Corruption by 25%."	
+	description: "Increases damage done by Curse of Corruption by 16%."	
 }
 
 ability_modifier improved_curse_of_corruption_2:
 {	
-	description: "Increases damage done by Curse of Corruption by 35%."	
+	description: "Increases damage done by Curse of Corruption by 32%."	
 }
 
 ability_modifier improved_curse_of_corruption_3:
 {	
-	description: "Increases damage done by Curse of Corruption by 45%."	
+	description: "Increases damage done by Curse of Corruption by 48%."	
+}
+
+ability_modifier improved_curse_of_corruption_4:
+{	
+	description: "Increases damage done by Curse of Corruption by 64%."	
+}
+
+ability_modifier improved_curse_of_corruption_5:
+{	
+	description: "Increases damage done by Curse of Corruption by 80%."	
 }
 
 ###############################################################################
@@ -317,7 +329,7 @@ talent witch_doom:
 	string: "Doom"
 	icon: icon_doom
 	prerequisites: [ witch_malice_weakness ]
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability: doom }
@@ -383,7 +395,7 @@ talent witch_swarm:
 {
 	string: "Swarm"
 	icon: icon_swarm
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability: swarm }
@@ -501,7 +513,7 @@ talent witch_curse_of_inaction:
 {
 	string: "Curse of Inaction"
 	icon: icon_curse_of_inaction
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	prerequisites: [ witch_improved_curse_of_corruption ]
 	points:
 	[
@@ -585,7 +597,7 @@ talent witch_chain_lightning:
 	string: "Chain Lightning"
 	icon: icon_chain_lightning
 	prerequisites: [ witch_swarm ]
-	talent_tree_points_required: 6
+	talent_tree_points_required: 10
 	points:
 	[
 		{ ability: chain_lightning }

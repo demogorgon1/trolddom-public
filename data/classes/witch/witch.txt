@@ -35,6 +35,8 @@ ability witch_attack:
 
 class witch:
 {
+	version: 1
+
 	string: "Witch"	
 	description: "Harness the unholy powers of the underworld."
 	

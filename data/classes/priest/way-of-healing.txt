@@ -103,7 +103,7 @@ talent priest_eternal_shine:
 {
 	string: "Eternal Shine"
 	icon: icon_shine
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	prerequisites: [ priest_spiritual_guidance ]
 	points:
 	[
@@ -154,7 +154,7 @@ talent priest_prayer_of_sanctuary:
 {
 	string: "Prayer of Sanctuary"
 	icon: icon_sanctuary
-	talent_tree_points_required: 6
+	talent_tree_points_required: 10
 	prerequisites: [ priest_greater_heal ]
 	points:
 	[
@@ -203,6 +203,8 @@ talent priest_spiritual_guidance:
 		{ aura: priest_spiritual_guidance_1 }
 		{ aura: priest_spiritual_guidance_2 }
 		{ aura: priest_spiritual_guidance_3 }
+		{ aura: priest_spiritual_guidance_4 }
+		{ aura: priest_spiritual_guidance_5 }
 	]
 }
 
@@ -230,6 +232,22 @@ aura priest_spiritual_guidance_3:
 	stat_modifiers: { spirit: { add_percent: 6 } }
 }
 
+aura priest_spiritual_guidance_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your Spirit by 8%."
+	stat_modifiers: { spirit: { add_percent: 8 } }
+}
+
+aura priest_spiritual_guidance_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your Spirit by 10%."
+	stat_modifiers: { spirit: { add_percent: 10 } }
+}
+
 ###############################################################################
 # Healing Conduit
 
@@ -243,6 +261,8 @@ talent priest_healing_conduit:
 		{ aura: priest_healing_conduit_1 }
 		{ aura: priest_healing_conduit_2 }
 		{ aura: priest_healing_conduit_3 }
+		{ aura: priest_healing_conduit_4 }
+		{ aura: priest_healing_conduit_5 }
 	]
 }
 
@@ -250,10 +270,10 @@ aura priest_healing_conduit_1:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases your healing done by 10%."
+	description: "Increases your healing done by 6%."
 	aura_effect heal_output_modifier:
 	{
-		multiplier: 1.1
+		multiplier: 1.06
 	}
 }
 
@@ -261,14 +281,36 @@ aura priest_healing_conduit_2:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases your healing done by 20%."
+	description: "Increases your healing done by 12%."
 	aura_effect heal_output_modifier:
 	{
-		multiplier: 1.2
+		multiplier: 1.12
 	}
 }
 
 aura priest_healing_conduit_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your healing done by 18%."
+	aura_effect heal_output_modifier:
+	{
+		multiplier: 1.18
+	}
+}
+
+aura priest_healing_conduit_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your healing done by 24%."
+	aura_effect heal_output_modifier:
+	{
+		multiplier: 1.24
+	}
+}
+
+aura priest_healing_conduit_5:
 {
 	flags: [ persist_in_death ]
 	type: hidden
@@ -286,7 +328,7 @@ talent priest_greater_heal:
 {
 	string: "Greater Heal"
 	icon: icon_greater_heal
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	prerequisites: [ priest_healing_conduit ]
 	points:
 	[

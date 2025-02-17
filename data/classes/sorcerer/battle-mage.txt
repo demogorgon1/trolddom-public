@@ -35,11 +35,12 @@ talent sorcerer_battle_mage_armor:
 {
 	string: "Mage Armor"
 	icon: icon_chest_1	
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ aura: sorcerer_battle_mage_armor_1 }
 		{ aura: sorcerer_battle_mage_armor_2 }
+		{ aura: sorcerer_battle_mage_armor_3 }
 	]
 }
 
@@ -59,6 +60,14 @@ aura sorcerer_battle_mage_armor_2:
 	stat_modifiers: { constitution: { add_percent: 6 } }
 }
 
+aura sorcerer_battle_mage_armor_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your constitution by 9%."
+	stat_modifiers: { constitution: { add_percent: 9 } }
+}
+
 ###############################################################################
 # Void Blade Storm
 
@@ -66,7 +75,7 @@ talent sorcerer_battle_mage_void_blade_storm:
 {
 	string: "Void Blade Storm"
 	icon: icon_void_blade_storm
-	talent_tree_points_required: 6
+	talent_tree_points_required: 10
 	prerequisites: [ sorcerer_battle_mage_wizard_strike ]
 	points:
 	[
@@ -125,12 +134,13 @@ talent sorcerer_battle_mage_critical_thinking:
 {
 	string: "Critical Thinking"
 	icon: icon_sunshine
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	prerequisites: [ sorcerer_battle_mage_wizard_strike ]
 	points:
 	[
 		{ aura: sorcerer_battle_critical_thinking_1 }
 		{ aura: sorcerer_battle_critical_thinking_2 }
+		{ aura: sorcerer_battle_critical_thinking_3 }
 	]
 }
 
@@ -150,6 +160,14 @@ aura sorcerer_battle_critical_thinking_2:
 	stat_modifiers: { phys_crit_chance: { add: 6 } spell_crit_chance: { add: 6 } }
 }
 
+aura sorcerer_battle_critical_thinking_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your critical strike chance by 9%."
+	stat_modifiers: { phys_crit_chance: { add: 9 } spell_crit_chance: { add: 9 } }
+}
+
 ###############################################################################
 # Swiftness
 
@@ -157,7 +175,7 @@ talent sorcerer_battle_mage_swiftness:
 {
 	string: "Swiftness"
 	icon: icon_mage_swiftness
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	prerequisites: [ sorcerer_battle_mage_improved_power_shield ]
 	points:
 	[
@@ -191,7 +209,7 @@ talent sorcerer_battle_mage_wizard_strike:
 {
 	string: "Wizard Strike"
 	icon: icon_wizard_strike
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability: wizard_strike }
@@ -251,22 +269,34 @@ talent sorcerer_battle_mage_improved_power_shield:
 		{ ability_modifier: improved_power_shield_1 }
 		{ ability_modifier: improved_power_shield_2 }
 		{ ability_modifier: improved_power_shield_3 }
+		{ ability_modifier: improved_power_shield_4 }
+		{ ability_modifier: improved_power_shield_5 }
 	]
 }
 
 ability_modifier improved_power_shield_1:
 {
-	description: "Power Shield reduces all damage taken by 10%."
+	description: "Power Shield reduces all damage taken by 8%."
 }
 
 ability_modifier improved_power_shield_2:
 {
-	description: "Power Shield reduces all damage taken by 20%."
+	description: "Power Shield reduces all damage taken by 16%."
 }
 
 ability_modifier improved_power_shield_3:
 {
-	description: "Power Shield reduces all damage taken by 30%."
+	description: "Power Shield reduces all damage taken by 24%."
+}
+
+ability_modifier improved_power_shield_4:
+{
+	description: "Power Shield reduces all damage taken by 32%."
+}
+
+ability_modifier improved_power_shield_5:
+{
+	description: "Power Shield reduces all damage taken by 40%."
 }
 
 !define local IMPROVED_POWER_SHIELD
@@ -286,9 +316,12 @@ ability_modifier improved_power_shield_3:
 	}
 }
 
-aura improved_power_shield_1: !IMPROVED_POWER_SHIELD { _multiplier: 0.9 }
-aura improved_power_shield_2: !IMPROVED_POWER_SHIELD { _multiplier: 0.8 }
-aura improved_power_shield_3: !IMPROVED_POWER_SHIELD { _multiplier: 0.7 }
+aura improved_power_shield_1: !IMPROVED_POWER_SHIELD { _multiplier: 0.92 }
+aura improved_power_shield_2: !IMPROVED_POWER_SHIELD { _multiplier: 0.84 }
+aura improved_power_shield_3: !IMPROVED_POWER_SHIELD { _multiplier: 0.76 }
+aura improved_power_shield_4: !IMPROVED_POWER_SHIELD { _multiplier: 0.68 }
+aura improved_power_shield_5: !IMPROVED_POWER_SHIELD { _multiplier: 0.60 }
+
 
 ###############################################################################
 # Charging Combat
@@ -361,6 +394,18 @@ ability power_shield:
 	{
 		must_have_ability_modifier: improved_power_shield_3
 		aura: improved_power_shield_3
+	}
+
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: improved_power_shield_4
+		aura: improved_power_shield_4
+	}
+
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: improved_power_shield_5
+		aura: improved_power_shield_5
 	}
 	
 	direct_effect apply_aura:

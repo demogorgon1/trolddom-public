@@ -13,6 +13,8 @@ talent_tree fighter_protection:
 		talent fighter_protection_banner_of_command: "E"
 		talent fighter_protection_improved_fortify: "F"
 		talent fighter_protection_toughness: "G"
+		talent fighter_protection_revenge: "H"
+		talent fighter_protection_last_stand: "I"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_right_arrow: "r"
 	}
@@ -22,9 +24,103 @@ talent_tree fighter_protection:
 		"..A...C"
 		"..d...."
 		"D.GrB.F"
-		"d......"
-		"E......"
+		"d.d...."
+		"E.I.H.."
 	]
+}
+
+###############################################################################
+# Last Stand
+
+talent fighter_protection_last_stand:
+{
+	string: "Last Stand"
+	talent_tree_points_required: 10
+	prerequisites: [ fighter_protection_toughness ]		
+	icon: icon_last_stand
+	points:
+	[
+		{ aura: last_stand }
+	]
+}
+
+aura last_stand:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Reduces all damage you take by 30% and increases all healing you receive by 15% when you're at less than 20% health."
+
+	aura_effect damage_input_modifier: 
+	{
+		type_mask: [ all ]
+		requirement target<must_have_less_health_than>: 20
+		multiplier: 0.7
+	}
+	
+	aura_effect heal_input_modifier: 
+	{
+		requirement target<must_have_less_health_than>: 20
+		multiplier: 1.15
+	}	
+}
+
+###############################################################################
+# Revenge
+
+talent fighter_protection_revenge:
+{
+	string: "Revenge"
+	talent_tree_points_required: 10
+	prerequisites: [ ]		
+	icon: icon_revenge
+	points:
+	[
+		{ aura: revenge }
+	]
+}
+
+aura revenge_buff:
+{
+	string: "Revenge"
+	description: "Damage of Bash increased by 200%."
+	type: buff
+	icon: icon_revenge
+	flags: [ unique ]
+	duration: 60
+}
+
+ability revenge:
+{
+	states: [ default in_combat ]
+	direct_effect apply_aura: { aura: revenge_buff }
+}
+
+aura revenge:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases the damage of next Bash by 200% after you parry, dodge, or block an attack. Lasts up to 6 seconds."
+
+	aura_effect combat_event_trigger: 
+	{ 
+		combat_event<target>: parry
+		combat_event_ability_mask: [ offensive melee ]
+		ability<target>: revenge
+	}
+	
+	aura_effect combat_event_trigger: 
+	{ 
+		combat_event<target>: dodge
+		combat_event_ability_mask: [ offensive melee ]
+		ability<target>: revenge
+	}
+
+	aura_effect combat_event_trigger: 
+	{ 
+		combat_event<target>: block
+		combat_event_ability_mask: [ offensive melee ]
+		ability<target>: revenge
+	}	
 }
 
 ###############################################################################
@@ -33,7 +129,7 @@ talent_tree fighter_protection:
 talent fighter_protection_improved_fortify:
 {
 	string: "Improved Fortify"
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	prerequisites: [ ]		
 	icon: icon_fortify
 	points:
@@ -56,7 +152,7 @@ talent fighter_protection_banner_of_command:
 	string: "Banner of Command"
 	icon: icon_banner
 	prerequisites: [ fighter_protection_improved_bash ]
-	talent_tree_points_required: 6
+	talent_tree_points_required: 10
 	points:
 	[
 		{ ability: banner_of_command }		
@@ -156,7 +252,7 @@ ability banner_of_command:
 talent fighter_protection_improved_bash:
 {
 	string: "Improved Bash"
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	prerequisites: [ ]		
 	icon: icon_bash
 	points:
@@ -185,6 +281,8 @@ talent fighter_protection_stoicism:
 		{ aura: fighter_protection_stoicism_1 }
 		{ aura: fighter_protection_stoicism_2 }
 		{ aura: fighter_protection_stoicism_3 }
+		{ aura: fighter_protection_stoicism_4 }
+		{ aura: fighter_protection_stoicism_5 }
 	]
 }
 
@@ -212,6 +310,22 @@ aura fighter_protection_stoicism_3:
 	stat_modifiers: { constitution: { add_percent: 6 } }
 }
 
+aura fighter_protection_stoicism_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your Constitution by 8%."
+	stat_modifiers: { constitution: { add_percent: 8 } }
+}
+
+aura fighter_protection_stoicism_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your Constitution by 10%."
+	stat_modifiers: { constitution: { add_percent: 10 } }
+}
+
 ###############################################################################
 # Toughness
 
@@ -220,7 +334,7 @@ talent fighter_protection_toughness:
 	string: "Toughness"
 	icon: icon_toughness
 	prerequisites: [ fighter_protection_stoicism ]	
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ aura: fighter_protection_toughness_1 }
@@ -258,6 +372,8 @@ talent fighter_protection_shield_block:
 		{ aura: fighter_protection_shield_block_1 }
 		{ aura: fighter_protection_shield_block_2 }
 		{ aura: fighter_protection_shield_block_3 }
+		{ aura: fighter_protection_shield_block_4 }
+		{ aura: fighter_protection_shield_block_5 }
 	]
 }
 
@@ -285,6 +401,22 @@ aura fighter_protection_shield_block_3:
 	stat_modifiers: { block_chance: { add: 6 } }
 }
 
+aura fighter_protection_shield_block_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your chance to block by 8%."
+	stat_modifiers: { block_chance: { add: 8 } }
+}
+
+aura fighter_protection_shield_block_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your chance to block by 10%."
+	stat_modifiers: { block_chance: { add: 10 } }
+}
+
 ###############################################################################
 # Knock
 
@@ -293,7 +425,7 @@ talent fighter_protection_knock:
 	string: "Knock"
 	icon: icon_knock
 	prerequisites: [ fighter_protection_toughness ]
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability: knock }		
@@ -388,14 +520,29 @@ ability bash:
 	icon: icon_bash
 	delay: 3
 	talent_tree: fighter_protection
-	
+
 	direct_effect damage:
-	{
+	{	
+		requirement self<must_not_have_aura>: revenge_buff
 		flags: [ can_be_critical ]
 		damage_type: physical
 		function: { expression: a_mul_x x: attack_power a: 0.35 }				
 	}
+		
+	direct_effect damage:
+	{		
+		requirement self<must_have_aura>: revenge_buff
+		flags: [ can_be_critical ]
+		damage_type: physical
+		function: { expression: a_mul_x x: attack_power a: 1.05 }				
+	}
 	
+	direct_effect remove_aura:
+	{
+		aura: revenge_buff
+		target_self: true
+	}
+
 	direct_effect apply_aura:
 	{
 		aura: bash

@@ -19,6 +19,7 @@
 
 #include <tpublic/EntityInstance.h>
 #include <tpublic/ItemProspect.h>
+#include <tpublic/IWorldView.h>
 #include <tpublic/Manifest.h>
 
 namespace tpublic
@@ -455,6 +456,20 @@ namespace tpublic
 			}
 
 			return true;
+		}
+
+		bool	
+		CheckListUnresolved(
+			const Manifest*										aManifest,
+			const std::vector<Requirement>&						aRequirements,
+			const IWorldView*									aWorldView,
+			uint32_t											aSelfEntityInstanceId,
+			uint32_t											aTargetEntityInstanceId)
+		{
+			const EntityInstance* self = aWorldView->WorldViewSingleEntityInstance(aSelfEntityInstanceId);
+			const EntityInstance* target = aWorldView->WorldViewSingleEntityInstance(aTargetEntityInstanceId);
+
+			return CheckList(aManifest, aRequirements, self, target, NULL);
 		}
 
 		bool	

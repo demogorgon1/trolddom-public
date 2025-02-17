@@ -7,6 +7,7 @@
 #include "IWriter.h"
 #include "MoveSpeed.h"
 #include "Parser.h"
+#include "Requirements.h"
 #include "Stat.h"
 #include "SourceEntityInstance.h"
 #include "SystemBase.h"
@@ -96,6 +97,11 @@ namespace tpublic
 				m_flags = SourceToFlags(aSource);
 				return true;
 			}
+			else if(aSource->m_tag == "requirement")
+			{
+				m_requirements.push_back(Requirement(aSource));
+				return true;
+			}
 			return false;
 		}
 
@@ -105,6 +111,8 @@ namespace tpublic
 		{
 			aStream->WriteInt(m_updateInterval);
 			aStream->WriteUInt(m_updateCount);
+			aStream->WritePOD(m_flags);
+			aStream->WriteObjects(m_requirements);
 		}
 		
 		bool	
@@ -115,6 +123,10 @@ namespace tpublic
 				return false;
 			if (!aStream->ReadUInt(m_updateCount))
 				return false;
+			if(!aStream->ReadPOD(m_flags))
+				return false;
+			if(!aStream->ReadObjects(m_requirements))
+				return false;
 			return true;
 		}
 
@@ -124,6 +136,8 @@ namespace tpublic
 		{
 			m_updateInterval = aOther->m_updateInterval;
 			m_updateCount = aOther->m_updateCount;
+			m_flags = aOther->m_flags;
+			m_requirements = aOther->m_requirements;
 		}
 
 		bool
@@ -135,8 +149,11 @@ namespace tpublic
 		{
 			if(!m_applied)
 			{
-				if (!OnApplication(aSourceEntityInstance, aTargetEntityInstanceId, aContext, aManifest))
-					return false;
+				if(m_requirements.empty() || Requirements::CheckListUnresolved(aManifest, m_requirements, aContext->m_worldView, aSourceEntityInstance.m_entityInstanceId, aTargetEntityInstanceId))
+				{
+					if (!OnApplication(aSourceEntityInstance, aTargetEntityInstanceId, aContext, aManifest))
+						return false;
+				}
 
 				m_applied = true;
 
@@ -153,8 +170,11 @@ namespace tpublic
 			int32_t ticksSinceLastUpdate = aContext->m_tick - m_lastUpdate;
 			if(ticksSinceLastUpdate >= m_updateInterval)
 			{
-				if(!OnUpdate(aSourceEntityInstance, aTargetEntityInstanceId, aContext, aManifest))
-					return false;
+				if (m_requirements.empty() || Requirements::CheckListUnresolved(aManifest, m_requirements, aContext->m_worldView, aSourceEntityInstance.m_entityInstanceId, aTargetEntityInstanceId))
+				{
+					if (!OnUpdate(aSourceEntityInstance, aTargetEntityInstanceId, aContext, aManifest))
+						return false;
+				}
 
 				m_lastUpdate = aContext->m_tick;
 				m_updateCount--;
@@ -164,6 +184,15 @@ namespace tpublic
 			}
 
 			return true;
+		}
+
+		bool
+		CheckRequirements(
+			const Manifest*					aManifest,
+			const EntityInstance*			aSource,
+			const EntityInstance*			aTarget) const
+		{
+			return m_requirements.empty() || Requirements::CheckList(aManifest, m_requirements, aSource, aTarget, NULL);
 		}
 		
 		// Virtual methods
@@ -240,14 +269,15 @@ namespace tpublic
 		bool					IsImmediate() const { return m_flags & FLAG_IMMEDIATE; }
 
 		// Public data
-		int32_t			m_updateInterval = 0;
-		uint32_t		m_updateCount = 0;
-		uint8_t			m_flags = 0;
+		int32_t						m_updateInterval = 0;
+		uint32_t					m_updateCount = 0;
+		uint8_t						m_flags = 0;
+		std::vector<Requirement>	m_requirements;
 
 		// Internal
-		int32_t			m_lastUpdate = 0;
-		AuraEffect::Id	m_id = AuraEffect::INVALID_ID;
-		bool			m_applied = false;
+		int32_t						m_lastUpdate = 0;
+		AuraEffect::Id				m_id = AuraEffect::INVALID_ID;
+		bool						m_applied = false;
 	};
 
 }

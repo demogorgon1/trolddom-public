@@ -146,6 +146,9 @@ namespace tpublic
 			float			GetSpellHaste(
 								const Manifest*								aManifest) const;
 			int32_t			FilterDamageInput(
+								const Manifest*								aManifest,
+								const EntityInstance*						aSource,
+								const EntityInstance*						aTarget,
 								DirectEffect::DamageType					aDamageType,
 								int32_t										aDamage) const;
 			int32_t			FilterDamageOutput(
@@ -155,18 +158,30 @@ namespace tpublic
 								DirectEffect::DamageType					aDamageType,
 								int32_t										aDamage) const;
 			int32_t			FilterHealInput(
+								const Manifest*								aManifest,
+								const EntityInstance*						aSource,
+								const EntityInstance*						aTarget,
 								int32_t										aHeal) const;
 			int32_t			FilterHealOutput(
+								const Manifest*								aManifest,
+								const EntityInstance*						aSource,
+								const EntityInstance*						aTarget,
 								int32_t										aHeal) const;
 			int32_t			FilterThreat(
+								const Manifest*								aManifest,
+								const EntityInstance*						aSource,
+								const EntityInstance*						aTarget,
 								int32_t										aThreat) const;
 			void			OnCombatEvent(
 								const Manifest*								aManifest,
+								const EntityInstance*						aSource,
+								const EntityInstance*						aTarget,
 								AuraEffectBase::CombatEventType				aType,
 								CombatEvent::Id								aCombatEventId,
 								uint32_t									aAbilityId,
 								AuraEffectBase::SecondaryAbilityCallback	aCallback) const;
 			void			OnDamageInput(
+								const Manifest*								aManifest,
 								const EntityInstance*						aSource,
 								const EntityInstance*						aTarget,
 								DirectEffect::DamageType					aDamageType,

@@ -9,6 +9,7 @@ namespace tpublic
 
 	class EntityInstance;
 	class ItemProspect;
+	class IWorldView;
 	class Manifest;
 
 	namespace Requirements
@@ -25,6 +26,12 @@ namespace tpublic
 					const EntityInstance*								aSelf,
 					const EntityInstance*								aTarget,
 					const Requirement**									aOutFailedRequirement = NULL);
+		bool	CheckListUnresolved(
+					const Manifest*										aManifest,
+					const std::vector<Requirement>&						aRequirements,
+					const IWorldView*									aWorldView,
+					uint32_t											aSelfEntityInstanceId,
+					uint32_t											aTargetEntityInstanceId);
 		bool	CheckAnyList(
 					const Manifest*										aManifest,
 					const std::vector<Requirement>&						aRequirements,

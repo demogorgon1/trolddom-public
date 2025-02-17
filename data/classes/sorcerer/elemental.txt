@@ -42,17 +42,25 @@ talent sorcerer_elemental_storm:
 	[
 		{ ability_modifier: storm_1 }
 		{ ability_modifier: storm_2 }
+		{ ability_modifier: storm_3 }
 	]
 }
 
 ability_modifier storm_1:
 {
-	description: "Decreases casting time of Ice Lance and Firebolt by 0.5 seconds."
+	description: "Decreases casting time of Ice Lance and Firebolt by 0.3 seconds."
 	abilities: [ firebolt ice_lance ]
-	modify_cast_time: -5
+	modify_cast_time: -3
 }
 
 ability_modifier storm_2:
+{
+	description: "Decreases casting time of Ice Lance and Firebolt by 0.6 second."
+	abilities: [ firebolt ice_lance ]
+	modify_cast_time: -6
+}
+
+ability_modifier storm_3:
 {
 	description: "Decreases casting time of Ice Lance and Firebolt by 1 second."
 	abilities: [ firebolt ice_lance ]
@@ -67,7 +75,7 @@ talent sorcerer_elemental_smolder:
 	string: "Smolder"
 	icon: icon_fire
 	prerequisites: [ sorcerer_elemental_heat ]
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability_modifier: smolder_1 }
@@ -129,7 +137,7 @@ talent sorcerer_elemental_freeze_for_all:
 	string: "Freeze For All"
 	icon: icon_freeze_for_all
 	prerequisites: [ sorcerer_elemental_cold ]
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability_modifier: freeze_for_all }
@@ -164,7 +172,7 @@ talent sorcerer_elemental_improved_frost_explosion:
 	string: "Improved Frost Explosion"
 	icon: icon_frost_explosion
 	prerequisites: [ sorcerer_elemental_freeze_for_all ]
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability_modifier: improved_frost_explosion }
@@ -217,6 +225,8 @@ talent sorcerer_elemental_heat:
 		{ aura: sorcerer_elemental_heat_1 }
 		{ aura: sorcerer_elemental_heat_2 }
 		{ aura: sorcerer_elemental_heat_3 }
+		{ aura: sorcerer_elemental_heat_4 }
+		{ aura: sorcerer_elemental_heat_5 }
 	]
 }
 
@@ -224,19 +234,35 @@ aura sorcerer_elemental_heat_1:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases damage of your fire spells by 10%."
-	aura_effect damage_output_modifier: { type_mask: [ fire ] multiplier: 1.1 }
+	description: "Increases damage of your fire spells by 6%."
+	aura_effect damage_output_modifier: { type_mask: [ fire ] multiplier: 1.06 }
 }
 
 aura sorcerer_elemental_heat_2:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases damage of your fire spells by 20%."
-	aura_effect damage_output_modifier: { type_mask: [ fire ] multiplier: 1.2 }
+	description: "Increases damage of your fire spells by 12%."
+	aura_effect damage_output_modifier: { type_mask: [ fire ] multiplier: 1.12 }
 }
 
 aura sorcerer_elemental_heat_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases damage of your fire spells by 18%."
+	aura_effect damage_output_modifier: { type_mask: [ fire ] multiplier: 1.18 }
+}
+
+aura sorcerer_elemental_heat_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases damage of your fire spells by 24%."
+	aura_effect damage_output_modifier: { type_mask: [ fire ] multiplier: 1.24 }
+}
+
+aura sorcerer_elemental_heat_5:
 {
 	flags: [ persist_in_death ]
 	type: hidden
@@ -257,6 +283,8 @@ talent sorcerer_elemental_cold:
 		{ aura: sorcerer_elemental_cold_1 }
 		{ aura: sorcerer_elemental_cold_2 }
 		{ aura: sorcerer_elemental_cold_3 }
+		{ aura: sorcerer_elemental_cold_4 }
+		{ aura: sorcerer_elemental_cold_5 }
 	]
 }
 
@@ -264,19 +292,35 @@ aura sorcerer_elemental_cold_1:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases damage of your frost spells by 10%."
-	aura_effect damage_output_modifier: { type_mask: [ frost ] multiplier: 1.1 }
+	description: "Increases damage of your frost spells by 6%."
+	aura_effect damage_output_modifier: { type_mask: [ frost ] multiplier: 1.06 }
 }
 
 aura sorcerer_elemental_cold_2:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases damage of your frost spells by 20%."
-	aura_effect damage_output_modifier: { type_mask: [ frost ] multiplier: 1.2 }
+	description: "Increases damage of your frost spells by 12%."
+	aura_effect damage_output_modifier: { type_mask: [ frost ] multiplier: 1.12 }
 }
 
 aura sorcerer_elemental_cold_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases damage of your frost spells by 18%."
+	aura_effect damage_output_modifier: { type_mask: [ frost ] multiplier: 1.18 }
+}
+
+aura sorcerer_elemental_cold_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases damage of your frost spells by 24%."
+	aura_effect damage_output_modifier: { type_mask: [ frost ] multiplier: 1.24 }
+}
+
+aura sorcerer_elemental_cold_5:
 {
 	flags: [ persist_in_death ]
 	type: hidden
@@ -291,7 +335,7 @@ talent sorcerer_elemental_lake_of_fire:
 {
 	string: "Lake of Fire"
 	icon: icon_lake_of_fire
-	talent_tree_points_required: 6
+	talent_tree_points_required: 10
 	prerequisites: [ sorcerer_elemental_heat ]
 	points:
 	[

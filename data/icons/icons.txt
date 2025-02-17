@@ -650,6 +650,10 @@ sprites:
 	sprite icon_fish_4_cooked : { tags: [ icon ] }
 	sprite icon_fish_5_cooked : { tags: [ icon ] }
 	sprite icon_fish_7_cooked : { tags: [ icon ] }
+	sprite icon_fast_recovery : { tags: [ icon ] }
+	sprite icon_blade_guard : { tags: [ icon ] }
+	sprite icon_revenge : { tags: [ icon ] }
+	sprite icon_last_stand : { tags: [ icon ] }
 }
 
 

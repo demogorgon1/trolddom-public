@@ -34,10 +34,13 @@ namespace tpublic
 				aSource->ForEachChild([&](
 					const SourceNode* aChild)
 				{					
-					if (aChild->m_name == "multiplier")
-						m_multiplier = aChild->GetFloat();
-					else
-						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					if (!FromSourceBase(aChild))
+					{
+						if (aChild->m_name == "multiplier")
+							m_multiplier = aChild->GetFloat();
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					}
 				});
 			}
 

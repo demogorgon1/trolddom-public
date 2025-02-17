@@ -66,7 +66,7 @@ namespace tpublic::DirectEffects
 	Heal::Resolve(
 		int32_t							aTick,
 		std::mt19937&					aRandom,
-		const Manifest*					/*aManifest*/,
+		const Manifest*					aManifest,
 		CombatEvent::Id					aId,
 		uint32_t						aAbilityId,
 		const SourceEntityInstance&		aSourceEntityInstance,
@@ -112,11 +112,11 @@ namespace tpublic::DirectEffects
 
 		Components::Auras* sourceAuras = aSource->GetComponent<Components::Auras>();
 		if (sourceAuras != NULL)
-			heal = sourceAuras->FilterHealOutput(heal);
+			heal = sourceAuras->FilterHealOutput(aManifest, aSource, aTarget, heal);
 
 		Components::Auras* targetAuras = aTarget->GetComponent<Components::Auras>();
 		if(targetAuras != NULL)
-			heal = targetAuras->FilterHealInput(heal);
+			heal = targetAuras->FilterHealInput(aManifest, aSource, aTarget, heal);
 
 		size_t healthResourceIndex;
 		if(targetCombatPublic->GetResourceIndex(Resource::ID_HEALTH, healthResourceIndex))

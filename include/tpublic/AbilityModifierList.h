@@ -27,6 +27,8 @@ namespace tpublic
 																		uint32_t							aAbilityId) const;
 		int32_t														GetAbilityModifyCastTime(
 																		uint32_t							aAbilityId) const;
+		int32_t														GetAbilityModifyCooldown(
+																		uint32_t							aAbilityId) const;
 		DirectEffect::DamageType									GetAbilityModifyDamageType(
 																		uint32_t							aAbilityId) const;
 

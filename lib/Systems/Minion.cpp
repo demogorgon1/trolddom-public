@@ -870,7 +870,7 @@ namespace tpublic::Systems
 				if (useAbility->IsAttack() && useAbility->IsMelee())
 					cooldownModifier = auras->GetAttackHaste(GetManifest());
 
-				minionPublic->m_cooldowns.AddAbility(GetManifest(), useAbility, aContext->m_tick, cooldownModifier);
+				minionPublic->m_cooldowns.AddAbility(GetManifest(), useAbility, aContext->m_tick, cooldownModifier, NULL);
 				minionPublic->SetDirty();
 
 				if (useAbility->m_castTime > 0)
