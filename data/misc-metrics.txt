@@ -1,6 +1,11 @@
 misc_metrics:
 {
 	##################################################################
+	# Stealth detection
+	
+	#stealth_detection: [ [ 1
+
+	##################################################################
 	# Stash expansion
 	
 	first_extra_stash_slot_price: 2000

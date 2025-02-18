@@ -203,6 +203,9 @@ namespace tpublic::Systems
 
 				if (entry->HasEffect(AuraEffect::ID_IMMOBILIZE))
 					visibleAuras->m_auraFlags |= Components::VisibleAuras::AURA_FLAG_IMMOBILIZED;
+
+				if(entry->HasEffect(AuraEffect::ID_STEALTH))
+					visibleAuras->m_auraFlags |= Components::VisibleAuras::AURA_FLAG_STEALTHED;
 			}
 
 			visibleAuras->SetDirty();

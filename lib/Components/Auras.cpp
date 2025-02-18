@@ -366,19 +366,28 @@ namespace tpublic::Components
 	Auras::OnLoadedFromPersistence(
 		const Manifest*								aManifest) 
 	{
-		for(std::unique_ptr<Entry>& entry : m_entries)
+		for(size_t i = 0; i < m_entries.size(); i++)
 		{
-			const Data::Aura* auraData = aManifest->GetById<tpublic::Data::Aura>(entry->m_auraId);
+			std::unique_ptr<Entry>& entry = m_entries[i];
+			const Data::Aura* auraData = aManifest->TryGetById<tpublic::Data::Aura>(entry->m_auraId);
 
-			if(auraData->m_auraEffects.size() == 0)
+			if(auraData == NULL)
 			{
-				entry->m_noEffects = true;
-			}				
+				m_entries.erase(m_entries.begin() + i);
+				i--;
+			}
 			else
 			{
-				for (const std::unique_ptr<Data::Aura::AuraEffectEntry>& effect : auraData->m_auraEffects)
-					entry->m_effects.push_back(std::unique_ptr<AuraEffectBase>(effect->m_auraEffectBase->Copy()));
-			}
+				if (auraData->m_auraEffects.size() == 0)
+				{
+					entry->m_noEffects = true;
+				}
+				else
+				{
+					for (const std::unique_ptr<Data::Aura::AuraEffectEntry>& effect : auraData->m_auraEffects)
+						entry->m_effects.push_back(std::unique_ptr<AuraEffectBase>(effect->m_auraEffectBase->Copy()));
+				}
+			}			
 		}
 
 		m_seq++;

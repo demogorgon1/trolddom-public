@@ -96,12 +96,15 @@ namespace tpublic
 				break;
 
 			case Requirement::TYPE_MUST_HAVE_EQUIPPED_ITEM_TYPE_FLAGS:
-				{
+			case Requirement::TYPE_MUST_NOT_HAVE_EQUIPPED_ITEM_TYPE_FLAGS:
+			{
 					if (!entity->IsPlayer())
 						return false;
 
 					const Components::PlayerPrivate* playerPrivate = entity->GetComponent<Components::PlayerPrivate>();
-					if((playerPrivate->m_equippedItemTypeFlags & (uint16_t)aRequirement->m_id) != (uint16_t)aRequirement->m_id)
+					bool isEquipped = (playerPrivate->m_equippedItemTypeFlags & (uint16_t)aRequirement->m_id) == (uint16_t)aRequirement->m_id;
+					bool shouldBeEquipped = aRequirement->m_type == Requirement::TYPE_MUST_HAVE_EQUIPPED_ITEM_TYPE_FLAGS;
+					if(isEquipped != shouldBeEquipped)
 						return false;
 				}
 				break;

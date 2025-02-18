@@ -32,6 +32,7 @@
 #include <tpublic/MapData.h>
 #include <tpublic/MapRouteData.h>
 #include <tpublic/Requirements.h>
+#include <tpublic/Stealth.h>
 #include <tpublic/WorldInfoMap.h>
 
 namespace tpublic::Systems
@@ -296,9 +297,24 @@ namespace tpublic::Systems
 							else
 								aggroRange = GetManifest()->m_npcMetrics.GetAggroRangeForLevelDifference((int32_t)combat->m_level, (int32_t)targetCombatPublic->m_level);
 
+							if(targetCombatPublic->m_stealthLevel > 0)
+							{
+								if(aggroRange > 1)
+									aggroRange--;
+							}
+
 							if(aDistanceSquared <= aggroRange * aggroRange)
 							{
-								if(npc->m_aggroRequirements.m_requirements.empty() || Requirements::CheckList(GetManifest(), npc->m_aggroRequirements.m_requirements, NULL, aEntity))
+								bool detected = true;
+
+								if (targetCombatPublic->m_stealthLevel > 0)
+								{
+									uint32_t detectionChance = Stealth::GetOneSecondDetectionChance(aDistanceSquared, targetCombatPublic->m_stealthLevel, combat->m_level, targetCombatPublic->m_level);
+									uint32_t roll = (*aContext->m_random)();
+									detected = roll < detectionChance;
+								}
+
+								if(detected && (npc->m_aggroRequirements.m_requirements.empty() || Requirements::CheckList(GetManifest(), npc->m_aggroRequirements.m_requirements, NULL, aEntity)))
 									aContext->m_eventQueue->EventQueueThreat({ aEntity->GetEntityInstanceId(), aEntity->GetSeq() }, aEntityInstanceId, 1, aContext->m_tick);
 							}
 						}

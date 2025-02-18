@@ -55,6 +55,7 @@ namespace tpublic
 			TYPE_MUST_NOT_BE_TYPE,
 			TYPE_MUST_NOT_HAVE_ITEM,
 			TYPE_MUST_HAVE_REPUTATION_LEVEL,
+			TYPE_MUST_NOT_HAVE_EQUIPPED_ITEM_TYPE_FLAGS
 		};
 
 		static DataType::Id
@@ -133,7 +134,7 @@ namespace tpublic
 				TP_VERIFY(itemType != ItemType::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid item type.", aSource->GetIdentifier());
 				return (uint32_t)itemType;
 			}
-			else if(aType == TYPE_MUST_HAVE_EQUIPPED_ITEM_TYPE_FLAGS)
+			else if(aType == TYPE_MUST_HAVE_EQUIPPED_ITEM_TYPE_FLAGS || aType == TYPE_MUST_NOT_HAVE_EQUIPPED_ITEM_TYPE_FLAGS)
 			{
 				uint16_t flags = 0;
 				aSource->GetArray()->ForEachChild([&](
@@ -227,6 +228,8 @@ namespace tpublic
 				m_type = TYPE_MUST_HAVE_ITEM_TYPE_EQUIPPED;
 			else if (typeString == "must_have_equipped_item_type_flags")
 				m_type = TYPE_MUST_HAVE_EQUIPPED_ITEM_TYPE_FLAGS;
+			else if (typeString == "must_not_have_equipped_item_type_flags")
+				m_type = TYPE_MUST_NOT_HAVE_EQUIPPED_ITEM_TYPE_FLAGS;
 			else if (typeString == "must_be_at_least_level")
 				m_type = TYPE_MUST_BE_AT_LEAST_LEVEL;
 			else if(typeString == "must_be_disciple")

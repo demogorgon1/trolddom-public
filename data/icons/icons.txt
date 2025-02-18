@@ -654,6 +654,9 @@ sprites:
 	sprite icon_blade_guard : { tags: [ icon ] }
 	sprite icon_revenge : { tags: [ icon ] }
 	sprite icon_last_stand : { tags: [ icon ] }
+	sprite icon_stealth : { tags: [ icon ] }
+	sprite icon_improved_poison_bomb : { tags: [ icon ] }
+	sprite icon_one_handed_weapon_mastery : { tags: [ icon ] }
 }
 
 

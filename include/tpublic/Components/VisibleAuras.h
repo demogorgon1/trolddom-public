@@ -21,6 +21,7 @@ namespace tpublic
 			{
 				AURA_FLAG_STUNNED		= 0x01,
 				AURA_FLAG_IMMOBILIZED	= 0x02,
+				AURA_FLAG_STEALTHED		= 0x04
 			};
 
 			struct Entry
@@ -99,6 +100,7 @@ namespace tpublic
 			// Helpers
 			bool		IsStunned() const { return m_auraFlags & AURA_FLAG_STUNNED; }
 			bool		IsImmobilized() const { return m_auraFlags & AURA_FLAG_IMMOBILIZED; }
+			bool		IsStealthed() const { return m_auraFlags & AURA_FLAG_STEALTHED; }
 
 			// Public data
 			std::vector<Entry>	m_entries;			
