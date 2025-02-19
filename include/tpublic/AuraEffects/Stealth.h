@@ -63,6 +63,22 @@ namespace tpublic
 				t->CopyBase(this);
 				return t;
 			}
+
+			bool		OnUpdate(
+							const SourceEntityInstance&	aSourceEntityInstance,
+							uint32_t					aTargetEntityInstanceId,
+							SystemBase::Context*		aContext,
+							const Manifest*				aManifest) override;
+			void		OnCombatEvent(
+							const Manifest*				aManifest,
+							uint32_t					aAuraId,
+							CombatEventType				aType,
+							CombatEvent::Id				aCombatEventId,
+							uint32_t					aAbilityId,
+							const EntityInstance*		aSourceEntityInstance,
+							const EntityInstance*		aTargetEntityInstance,
+							std::mt19937*				aRandom,
+							IEventQueue*				aEventQueue) const override;
 		};
 
 	}

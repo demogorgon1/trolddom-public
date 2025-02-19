@@ -129,6 +129,17 @@ namespace tpublic::Helpers
 	}
 
 	bool
+	RandomRoll(
+		std::mt19937&				aRandom,
+		uint32_t					aProbability)
+	{
+		if (aProbability == 100)
+			return true;
+		UniformDistribution<uint32_t> distribution(0, 99);
+		return distribution(aRandom) < aProbability;
+	}
+
+	bool
 	LoadTextFile(
 		const char*					aPath,
 		std::vector<std::string>&	aOut)

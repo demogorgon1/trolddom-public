@@ -32,7 +32,7 @@
 #include <tpublic/MapData.h>
 #include <tpublic/MapRouteData.h>
 #include <tpublic/Requirements.h>
-#include <tpublic/Stealth.h>
+#include <tpublic/StealthUtils.h>
 #include <tpublic/WorldInfoMap.h>
 
 namespace tpublic::Systems
@@ -309,7 +309,7 @@ namespace tpublic::Systems
 
 								if (targetCombatPublic->m_stealthLevel > 0)
 								{
-									uint32_t detectionChance = Stealth::GetOneSecondDetectionChance(aDistanceSquared, targetCombatPublic->m_stealthLevel, combat->m_level, targetCombatPublic->m_level);
+									uint32_t detectionChance = StealthUtils::GetOneSecondDetectionChance(aDistanceSquared, targetCombatPublic->m_stealthLevel, combat->m_level, targetCombatPublic->m_level);
 									uint32_t roll = (*aContext->m_random)();
 									detected = roll < detectionChance;
 								}

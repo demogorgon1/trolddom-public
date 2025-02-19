@@ -5,7 +5,7 @@
 namespace tpublic
 {
 
-	namespace Stealth
+	namespace StealthUtils
 	{
 
 		uint32_t

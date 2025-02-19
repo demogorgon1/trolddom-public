@@ -491,6 +491,9 @@ namespace tpublic
 		bool		IsTileAlwaysObscured(
 						int32_t					aX,
 						int32_t					aY) const;
+		bool		DoesNeighborTileBlockLineOfSight(
+						int32_t					aX,
+						int32_t					aY) const;
 		void		CopyFrom(
 						const MapData*			aMapData);
 		uint32_t	GetTile(

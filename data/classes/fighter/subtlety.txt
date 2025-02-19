@@ -165,7 +165,15 @@ aura stealth:
 	icon: icon_stealth
 	flags: [ unique indefinite cancel_on_damage ]
 	
-	aura_effect stealth: {}
+	aura_effect stealth: 
+	{
+		update_count: indefinite
+	}
+	
+	aura_effect move_speed_modifier:
+	{
+		move_speed: slow
+	}
 }
 
 ability stealth:

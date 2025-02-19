@@ -21,7 +21,7 @@ namespace tpublic
 	class AuraEffectBase
 	{
 	public:
-		typedef std::function<void(const SecondaryAbility&, uint32_t)> SecondaryAbilityCallback;
+		//typedef std::function<void(const SecondaryAbility&, uint32_t)> SecondaryAbilityCallback;
 		
 		enum CombatEventType : uint8_t
 		{
@@ -89,7 +89,10 @@ namespace tpublic
 			}
 			else if (aSource->m_name == "update_count")
 			{
-				m_updateCount = aSource->GetUInt32();
+				if(aSource->IsIdentifier("indefinite"))
+					m_updateCount = UINT32_MAX;
+				else
+					m_updateCount = aSource->GetUInt32();
 				return true;
 			}
 			else if(aSource->m_name == "flags")
@@ -177,7 +180,9 @@ namespace tpublic
 				}
 
 				m_lastUpdate = aContext->m_tick;
-				m_updateCount--;
+
+				if(m_updateCount != UINT32_MAX)
+					m_updateCount--;
 
 				if(m_updateCount == 0)
 					return false;
@@ -251,10 +256,14 @@ namespace tpublic
 		virtual MoveSpeed::Id	GetMoveSpeedModifier() const { return MoveSpeed::INVALID_ID; }
 		virtual void			OnCombatEvent(
 									const Manifest*					/*aManifest*/,
+									uint32_t						/*aAuraId*/,
 									CombatEventType					/*aType*/,
 									CombatEvent::Id					/*aCombatEventId*/,
 									uint32_t						/*aAbilityId*/,
-									SecondaryAbilityCallback		/*aCallback*/) const { }
+									const EntityInstance*			/*aSourceEntityInstance*/,
+									const EntityInstance*			/*aTargetEntityInstance*/,
+									std::mt19937*					/*aRandom*/,
+									IEventQueue*					/*aEventQueue*/) const { }
 		virtual bool			GetStatModifier(
 									Stat::Id						/*aStat*/,
 									uint32_t&						/*aOutNum*/,

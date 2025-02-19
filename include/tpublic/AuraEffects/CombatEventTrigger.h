@@ -121,10 +121,14 @@ namespace tpublic
 
 			void	OnCombatEvent(						
 						const Manifest*					aManifest,
+						uint32_t						aAuraId,
 						CombatEventType					aType,
 						CombatEvent::Id					aCombatEventId,
 						uint32_t						aAbilityId,
-						SecondaryAbilityCallback		aCallback) const override;
+						const EntityInstance*			aSourceEntityInstance,
+						const EntityInstance*			aTargetEntityInstance,
+						std::mt19937*					aRandom,
+						IEventQueue*					aEventQueue) const override;
 
 			// Public data
 			AuraEffectBase::CombatEventType	m_combatEventType = AuraEffectBase::INVALID_COMBAT_EVENT_TYPE;

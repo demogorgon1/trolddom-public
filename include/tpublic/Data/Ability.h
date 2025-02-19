@@ -58,7 +58,7 @@ namespace tpublic
 				FLAG_INTERRUPTABLE					= 0x10000000,
 				FLAG_RANGED_CAST_TIME				= 0x20000000,
 				FLAG_USE_RANGED_ICON				= 0x40000000,
-				FLAG_INTERRUPT_ON_DAMAGE			= 0x80000000
+				FLAG_INTERRUPT_ON_DAMAGE			= 0x80000000,
 			};
 
 			enum ExtendedFlag : uint32_t
@@ -67,7 +67,8 @@ namespace tpublic
 				EXTENDED_FLAG_NO_DELAY				= 0x00000002,
 				EXTENDED_FLAG_CLASS_MINION_SUMMON	= 0x00000004,
 				EXTENDED_FLAG_PRODUCE_ITEMS_TARGET	= 0x00000008,
-				EXTENDED_FLAG_TARGET_ITEM			= 0x00000010
+				EXTENDED_FLAG_TARGET_ITEM			= 0x00000010,
+				EXTENDED_FLAG_NO_STEALTH_BREAK		= 0x00000020
 			};
 
 			static inline Resource::Id
@@ -163,6 +164,8 @@ namespace tpublic
 						*aOutExtendedFlags |= EXTENDED_FLAG_PRODUCE_ITEMS_TARGET;
 					else if (strcmp(identifier, "target_item") == 0 && aOutExtendedFlags != NULL)
 						*aOutExtendedFlags |= EXTENDED_FLAG_TARGET_ITEM;
+					else if (strcmp(identifier, "no_stealth_break") == 0 && aOutExtendedFlags != NULL)
+						*aOutExtendedFlags |= EXTENDED_FLAG_NO_STEALTH_BREAK;
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid ability flag.", identifier);
 				});

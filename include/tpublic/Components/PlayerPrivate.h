@@ -1,5 +1,7 @@
 #pragma once
 
+#include <tpublic/Data/Ability.h>
+
 #include "../AbilityModifierList.h"
 #include "../Component.h"
 #include "../ComponentBase.h"
@@ -109,6 +111,14 @@ namespace tpublic
 				m_errorNotification = ErrorNotification::INVALID_ID;
 				m_abilityModifierList = NULL;
 				m_equippedItemTypeFlags = 0;
+				m_useAbilityFlags = 0;
+				m_useAbilityExtendedFlags = 0;
+			}
+
+			bool
+			HasUseAbility() const
+			{
+				return m_useAbilityExtendedFlags != 0 || m_useAbilityFlags != 0;
 			}
 
 			// Public data
@@ -142,6 +152,8 @@ namespace tpublic
 			const tpublic::AbilityModifierList*								m_abilityModifierList = NULL;
 
 			uint16_t														m_equippedItemTypeFlags = 0;
+			uint32_t														m_useAbilityFlags = 0;
+			uint32_t														m_useAbilityExtendedFlags = 0;
 		};
 	}
 

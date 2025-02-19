@@ -689,6 +689,17 @@ namespace tpublic
 		return (m_alwaysObscuredBits[j] & (1 << k)) != 0;
 	}
 
+	bool	
+	MapData::DoesNeighborTileBlockLineOfSight(
+		int32_t					aX,
+		int32_t					aY) const
+	{
+		return DoesTileBlockLineOfSight(aX - 1, aY)
+			|| DoesTileBlockLineOfSight(aX + 1, aY)
+			|| DoesTileBlockLineOfSight(aX, aY - 1)
+			|| DoesTileBlockLineOfSight(aX, aY + 1);
+	}
+
 	void	
 	MapData::CopyFrom(
 		const MapData*			aMapData)

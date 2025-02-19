@@ -45,6 +45,9 @@ namespace tpublic
 						const Vec2&					aB);
 		float		RandomFloat(
 						std::mt19937&				aRandom);
+		bool		RandomRoll(
+						std::mt19937&				aRandom,
+						uint32_t					aProbability);
 		bool		LoadTextFile(
 						const char*					aPath,
 						std::vector<std::string>&	aOut);

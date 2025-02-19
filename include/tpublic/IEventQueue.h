@@ -190,6 +190,9 @@ namespace tpublic
 												int32_t														aMaxDistance,
 												const Vec2&													aPosition,
 												uint32_t													aPlayerEntityInstanceId) = 0;
+		virtual void						EventQueueRemoveAura(
+												uint32_t													aEntityInstanceId,
+												uint32_t													aAuraId) = 0;
 	};
 
 }

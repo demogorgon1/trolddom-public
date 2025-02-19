@@ -227,18 +227,21 @@ namespace tpublic::Components
 		tpublic::AuraEffectBase::CombatEventType	aType,
 		CombatEvent::Id								aCombatEventId,
 		uint32_t									aAbilityId,
-		AuraEffectBase::SecondaryAbilityCallback	aCallback) const
+		std::mt19937*								aRandom,
+		IEventQueue*								aEventQueue) const
 	{
 		for (const std::unique_ptr<Entry>& entry : m_entries)
 		{
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
 			{
 				if (effect->CheckRequirements(aManifest, aSource, aTarget))
-					effect->OnCombatEvent(aManifest, aType, aCombatEventId, aAbilityId, aCallback);
+				{
+					effect->OnCombatEvent(aManifest, entry->m_auraId, aType, aCombatEventId, aAbilityId, aSource, aTarget, aRandom, aEventQueue);
+				}
 			}
 		}
 	}
-
+	 
 	void			
 	Auras::OnDamageInput(
 		const Manifest*								aManifest,

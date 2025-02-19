@@ -63,10 +63,10 @@ namespace tpublic
 			return true;
 		}
 
-		EntityInstance*
+		const EntityInstance*
 		ResolveTarget(
-			EntityInstance*			aSelf,
-			EntityInstance*			aTarget) const
+			const EntityInstance*	aSelf,
+			const EntityInstance*	aTarget) const
 		{
 			switch(m_target)
 			{
