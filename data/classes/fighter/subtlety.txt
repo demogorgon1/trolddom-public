@@ -163,10 +163,11 @@ aura stealth:
 	description: "Non-allies are unlikely to notice you. Stay out of open areas to reduce likelihood of detection."
 	type: buff
 	icon: icon_stealth
-	flags: [ unique indefinite cancel_on_damage ]
+	flags: [ unique indefinite cancel_on_damage no_source_needed ]
 	
 	aura_effect stealth: 
 	{
+		flags: [ cancel_aura_on_fade ] 
 		update_count: indefinite
 	}
 	

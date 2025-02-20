@@ -93,7 +93,8 @@ namespace tpublic
 				FLAG_CANCEL_ON_DAMAGE		= 0x00000800,
 				FLAG_SINGLE_TARGET			= 0x00001000,
 				FLAG_PRIVATE				= 0x00002000,
-				FLAG_ITEM					= 0x00004000
+				FLAG_ITEM					= 0x00004000,
+				FLAG_NO_SOURCE_NEEDED		= 0x00008000,
 			};
 
 			static Type
@@ -150,6 +151,8 @@ namespace tpublic
 						flags |= FLAG_PRIVATE;
 					else if (strcmp(string, "item") == 0)
 						flags |= FLAG_ITEM;
+					else if (strcmp(string, "no_source_needed") == 0)
+						flags |= FLAG_NO_SOURCE_NEEDED;
 					else
 						TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid aura flag.", string);
 				});

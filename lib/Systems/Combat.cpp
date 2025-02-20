@@ -124,9 +124,20 @@ namespace tpublic::Systems
 					{
 						std::unique_ptr<AuraEffectBase>& effect = entry->m_effects[j];
 
-						if(!effect->Update(entry->m_sourceEntityInstance, aEntityInstanceId, aContext, GetManifest()))
+						bool cancelEffect = false;
+
+						if((aura->m_flags & Data::Aura::FLAG_NO_SOURCE_NEEDED) == 0 && !entry->m_sourceEntityInstance.IsSet())
+							cancelEffect = true;
+
+						if(!cancelEffect && !effect->Update(entry->m_sourceEntityInstance, aEntityInstanceId, aContext, GetManifest()))
+							cancelEffect = true;
+
+						if(cancelEffect)
 						{
 							effect->OnFade(entry->m_sourceEntityInstance, aEntityInstanceId, aContext, GetManifest());
+
+							if(effect->ShouldCancelAuraOnFade())
+								entry->m_cancel = true;
 
 							effect.reset();
 							Helpers::RemoveCyclicFromVector(entry->m_effects, j);

@@ -21,8 +21,6 @@ namespace tpublic
 	class AuraEffectBase
 	{
 	public:
-		//typedef std::function<void(const SecondaryAbility&, uint32_t)> SecondaryAbilityCallback;
-		
 		enum CombatEventType : uint8_t
 		{
 			INVALID_COMBAT_EVENT_TYPE,
@@ -33,7 +31,8 @@ namespace tpublic
 
 		enum Flag : uint8_t
 		{
-			FLAG_IMMEDIATE = 0x01
+			FLAG_IMMEDIATE				= 0x01,
+			FLAG_CANCEL_AURA_ON_FADE	= 0x02
 		};
 
 		static CombatEventType
@@ -59,6 +58,8 @@ namespace tpublic
 			{
 				if(aChild->IsIdentifier("immediate"))
 					flags |= FLAG_IMMEDIATE;
+				else if (aChild->IsIdentifier("cancel_aura_on_fade"))
+					flags |= FLAG_CANCEL_AURA_ON_FADE;
 				else
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid flag.", aChild->GetIdentifier());
 			});
@@ -167,9 +168,6 @@ namespace tpublic
 			if(m_updateCount == 0)
 				return true; // Effects that don't require updates will have this initialized to zero
 
-			if(!aSourceEntityInstance.IsSet())
-				return false;
-
 			int32_t ticksSinceLastUpdate = aContext->m_tick - m_lastUpdate;
 			if(ticksSinceLastUpdate >= m_updateInterval)
 			{
@@ -276,6 +274,7 @@ namespace tpublic
 
 		// Helpers
 		bool					IsImmediate() const { return m_flags & FLAG_IMMEDIATE; }
+		bool					ShouldCancelAuraOnFade() const { return m_flags & FLAG_CANCEL_AURA_ON_FADE; }
 
 		// Public data
 		int32_t						m_updateInterval = 0;
