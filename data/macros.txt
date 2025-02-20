@@ -159,7 +159,7 @@
 	icon: @_icon
 	
 	<exists _type> type: @_type
-	<exists _aura> aura: @_aura
+	<exists _item_aura> aura: @_item_aura
 
 	<exists _rarity> rarity: @_rarity
 	<!exists _rarity> rarity: uncommon	

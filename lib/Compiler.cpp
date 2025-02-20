@@ -87,7 +87,7 @@ namespace tpublic
 		nwork::Queue workQueue;
 		nwork::ThreadPool threadPool(&workQueue);
 
-		SpriteSheetBuilder spriteSheetBuilder(256);
+		SpriteSheetBuilder spriteSheetBuilder(1024);
 		std::vector<std::unique_ptr<GenerationJob>> generationJobs;
 
 		m_sourceContext.m_persistentIdTable->Load(aPersistentIdTablePath);

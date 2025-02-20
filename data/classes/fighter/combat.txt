@@ -15,6 +15,7 @@ talent_tree fighter_combat:
 		talent fighter_combat_improved_strength: "G"
 		talent fighter_combat_fast_recovery: "H"
 		talent fighter_combat_blade_guard: "I"
+		talent fighter_combat_two_handed_weapon_mastery: "J"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_down: "|"
 	}
@@ -22,12 +23,93 @@ talent_tree fighter_combat:
 	map:
 	[
 		"D.A...G"
-		"|.d...d"
-		"|.B.C.F"
-		"d...d.d"
-		"E...I.H"
+		"d.d...d"
+		"J.B.C.F"
+		"d...|.d"
+		"E...|.H"
+		"....d.."
+		"....I.."
 	]
 	
+}
+
+###############################################################################
+# Two-Handed Weapon Mastery
+
+talent fighter_combat_two_handed_weapon_mastery:
+{
+	string: "Two-Handed Weapon Mastery"
+	icon: icon_two_handed_weapon_mastery
+	prerequisites: [ fighter_combat_improved_strike ]	
+	talent_tree_points_required: 5
+	points:
+	[
+		{ aura: fighter_combat_two_handed_weapon_mastery_1 }
+		{ aura: fighter_combat_two_handed_weapon_mastery_2 }
+		{ aura: fighter_combat_two_handed_weapon_mastery_3 }
+		{ aura: fighter_combat_two_handed_weapon_mastery_4 }
+		{ aura: fighter_combat_two_handed_weapon_mastery_5 }
+	]
+}
+
+aura fighter_combat_two_handed_weapon_mastery_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your damage done with two-handed weapons by 2%."
+	aura_effect damage_output_modifier:
+	{
+		requirement self<must_have_equipped_item_type_flags>: { id: [ two_handed ] }
+		multiplier: 1.02
+	}
+}
+
+aura fighter_combat_two_handed_weapon_mastery_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your damage done with two-handed weapons by 4%."
+	aura_effect damage_output_modifier:
+	{
+		requirement self<must_have_equipped_item_type_flags>: { id: [ two_handed ] }
+		multiplier: 1.04
+	}
+}
+
+aura fighter_combat_two_handed_weapon_mastery_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your damage done with two-handed weapons by 6%."
+	aura_effect damage_output_modifier:
+	{
+		requirement self<must_have_equipped_item_type_flags>: { id: [ two_handed ] }
+		multiplier: 1.06
+	}
+}
+
+aura fighter_combat_two_handed_weapon_mastery_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your damage done with two-handed weapons by 8%."
+	aura_effect damage_output_modifier:
+	{
+		requirement self<must_have_equipped_item_type_flags>: { id: [ two_handed ] }
+		multiplier: 1.08
+	}
+}
+
+aura fighter_combat_two_handed_weapon_mastery_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your damage done with two-handed weapons by 10%."
+	aura_effect damage_output_modifier:
+	{
+		requirement self<must_have_equipped_item_type_flags>: { id: [ two_handed ] }
+		multiplier: 1.10
+	}
 }
 
 ###############################################################################
@@ -362,7 +444,7 @@ talent fighter_combat_mortal_strike:
 {
 	string: "Mortal Strike"
 	icon: icon_mortal_strike
-	prerequisites: [ fighter_combat_improved_strike ]
+	prerequisites: [ fighter_combat_two_handed_weapon_mastery ]
 	talent_tree_points_required: 10
 	points:
 	[
@@ -438,7 +520,7 @@ talent fighter_combat_blade_guard:
 	string: "Blade Guard"
 	icon: icon_blade_guard
 	prerequisites: [ fighter_combat_riposte ]
-	talent_tree_points_required: 10
+	talent_tree_points_required: 15
 	points:
 	[
 		{ ability: blade_guard }

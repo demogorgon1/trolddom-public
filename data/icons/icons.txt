@@ -657,6 +657,19 @@ sprites:
 	sprite icon_stealth : { tags: [ icon ] }
 	sprite icon_improved_poison_bomb : { tags: [ icon ] }
 	sprite icon_one_handed_weapon_mastery : { tags: [ icon ] }
+	sprite icon_special_1 : { tags: [ icon ] }
+	sprite icon_special_2 : { tags: [ icon ] }
+	sprite icon_special_3 : { tags: [ icon ] }
+	
+	cursor: { position: [ 0 576 ] }		
+	sprite icon_special_4 : { tags: [ icon ] }
+	sprite icon_special_5 : { tags: [ icon ] }
+	sprite icon_special_6 : { tags: [ icon ] }
+	sprite icon_special_7 : { tags: [ icon ] }
+	sprite icon_special_8 : { tags: [ icon ] }
+	sprite icon_special_9 : { tags: [ icon ] }
+	sprite icon_two_handed_weapon_mastery : { tags: [ icon ] }
+
 }
 
 

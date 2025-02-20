@@ -35,6 +35,12 @@ set(BROTLI_LIBRARIES_STATIC brotlidec-static brotlienc-static)
 
 # ------ nwork ------
 
+if(TROLDDOM_PUBLIC_DISABLE_MSVC_ITERATOR_DEBUG)
+	set(NWORK_DISABLE_MSVC_ITERATOR_DEBUG ON CACHE INTERNAL "" FORCE)
+else()
+	set(NWORK_DISABLE_MSVC_ITERATOR_DEBUG OFF CACHE INTERNAL "" FORCE)
+endif()
+
 FetchContent_Declare(nwork
   GIT_REPOSITORY https://github.com/demogorgon1/nwork.git
 )

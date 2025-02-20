@@ -126,7 +126,7 @@ item .foramil_2_quest_item:
 		}
 	}	
 	
-	item .foramil_2_c: !QUEST_REWARD_TRINKET{ _string: "Leaves of Faerandor" _icon: icon_seaweed _aura: .foramil_2_c }
+	item .foramil_2_c: !QUEST_REWARD_TRINKET{ _string: "Leaves of Faerandor" _icon: icon_seaweed _item_aura: .foramil_2_c }
 }
 
 

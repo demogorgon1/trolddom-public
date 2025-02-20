@@ -8,9 +8,9 @@ sprites:
 
 	sprite dungeon_floor: { flags: [ tile_walkable ] alt_tiles: [ dungeon_floor_alt_1 dungeon_floor_alt_2 ] }
 	sprite dungeon_wall: { flags: [ tile_block_line_of_sight ] }
-	sprite water_1: { flags: [ tile_fishable tile_water ] water_floor: sand }
-	sprite water_2: { flags: [ tile_fishable tile_water ] water_floor: sand }
-	sprite water_3: { flags: [ tile_fishable tile_water ] water_floor: sand }
+	sprite water_1: { flags: [ tile_fishable tile_water standalone ] water_floor: sand }
+	sprite water_2: { flags: [ tile_fishable tile_water standalone ] water_floor: sand }
+	sprite water_3: { flags: [ tile_fishable tile_water standalone ] water_floor: sand }
 	sprite rocks_dungeon_entrance: { flags: [ tile_walkable tile_top ] borders:
 		[ rocks_border_1 rocks_border_2 rocks_border_3 rocks_border_4 rocks_border_5 rocks_border_6 rocks_border_7
 		  rocks_border_8 rocks_border_9 rocks_border_10 rocks_border_11 rocks_border_12 rocks_border_13 rocks_border_14

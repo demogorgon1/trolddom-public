@@ -15,6 +15,7 @@ talent_tree fighter_protection:
 		talent fighter_protection_toughness: "G"
 		talent fighter_protection_revenge: "H"
 		talent fighter_protection_last_stand: "I"
+		talent fighter_protection_shield_crush: "J"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_right_arrow: "r"
 	}
@@ -26,7 +27,70 @@ talent_tree fighter_protection:
 		"D.GrB.F"
 		"d.d...."
 		"E.I.H.."
+		"....d.."
+		"....J.."
 	]
+}
+
+###############################################################################
+# Shield Crush
+
+talent fighter_protection_shield_crush:
+{
+	string: "Shield Crush"
+	talent_tree_points_required: 15
+	prerequisites: [ fighter_protection_revenge ]		
+	icon: icon_shield_bash
+	points:
+	[
+		{ ability: shield_crush }
+	]
+}
+
+cooldown shield_crush:
+{
+	duration: 60
+}
+
+aura shield_crush:
+{
+	string: "Shield Crush"
+	icon: icon_shield_bash
+	type: debuff
+	duration: 100
+	flags: [ unique ]
+	aura_effect damage_input_modifier: 
+	{
+		type_mask: [ physical ]
+		multiplier: 1.1
+	}
+}
+
+ability shield_crush:
+{
+	string: "Shield Crush"
+	description: "Does $damage$ damage to target and causes it to take 10% more physical damage for 10 seconds. Requires shield."
+	range: 1	
+	cooldowns: [ global shield_crush ]
+	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+	states: [ default in_combat ]
+	icon: icon_shield_bash
+	delay: 3
+	talent_tree: fighter_protection
+	resource_cost rage: 15
+	requirement self<must_have_item_type_equipped>: shield
+
+	direct_effect damage:
+	{	
+		flags: [ can_be_critical ]
+		damage_type: physical
+		function: { expression: a_mul_x x: attack_power a: 0.50 }				
+	}
+		
+	direct_effect apply_aura:
+	{
+		aura: shield_crush
+	}
 }
 
 ###############################################################################
@@ -512,7 +576,7 @@ aura bash:
 ability bash:
 {
 	string: "Bash"
-	description: "Does $damage$ damage to target increases your threat by 50% for 30 seconds."
+	description: "Does $damage$ damage to target and increases your threat by 50% for 30 seconds."
 	range: 1	
 	cooldowns: [ global bash ]
 	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
