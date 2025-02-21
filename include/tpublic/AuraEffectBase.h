@@ -160,6 +160,7 @@ namespace tpublic
 				}
 
 				m_applied = true;
+				m_update = 0;
 
 				if(!IsImmediate())
 					m_lastUpdate = aContext->m_tick; // This will delay first update
@@ -173,11 +174,12 @@ namespace tpublic
 			{
 				if (m_requirements.empty() || Requirements::CheckListUnresolved(aManifest, m_requirements, aContext->m_worldView, aSourceEntityInstance.m_entityInstanceId, aTargetEntityInstanceId))
 				{
-					if (!OnUpdate(aSourceEntityInstance, aTargetEntityInstanceId, aContext, aManifest))
+					if (!OnUpdate(aSourceEntityInstance, aTargetEntityInstanceId, m_update, aContext, aManifest))
 						return false;
 				}
 
 				m_lastUpdate = aContext->m_tick;
+				m_update++;
 
 				if(m_updateCount != UINT32_MAX)
 					m_updateCount--;
@@ -213,6 +215,7 @@ namespace tpublic
 		virtual bool			OnUpdate(
 									const SourceEntityInstance&		/*aSourceEntityInstance*/,
 									uint32_t						/*aTargetEntityInstanceId*/,
+									uint32_t						/*aUpdate*/,
 									SystemBase::Context*			/*aContext*/,
 									const Manifest*					/*aManifest*/) { return false; }
 		virtual void			OnFade(
@@ -279,6 +282,7 @@ namespace tpublic
 		// Public data
 		int32_t						m_updateInterval = 0;
 		uint32_t					m_updateCount = 0;
+		uint32_t					m_update = 0;
 		uint8_t						m_flags = 0;
 		std::vector<Requirement>	m_requirements;
 

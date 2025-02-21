@@ -197,7 +197,7 @@ talent witch_improved_blood_pact:
 	string: "Improved Blood Pact"
 	icon: icon_blood_pact
 	prerequisites: [ witch_forbidden_knowledge ]
-	talent_tree_points_required: 3	
+	talent_tree_points_required: 5
 	
 	points:
 	[
@@ -218,7 +218,7 @@ talent witch_demon_mastery:
 	string: "Demon Mastery"
 	icon: icon_demon_mastery
 	prerequisites: [ witch_heal_demon ]
-	talent_tree_points_required: 3	
+	talent_tree_points_required: 5
 	
 	points:
 	[
@@ -251,7 +251,7 @@ talent witch_summon_black_beast:
 	string: "Summon Black Beast"
 	icon: icon_summon_black_beast
 	prerequisites: [ witch_summon_fiendish_spellcaster ]
-	talent_tree_points_required: 6
+	talent_tree_points_required: 10
 	
 	points:
 	[
@@ -339,7 +339,7 @@ talent witch_summon_fiendish_spellcaster:
 	string: "Summon Fiendish Spellcaster"
 	icon: icon_summon_fiendish_spellcaster
 	prerequisites: [ witch_heal_demon ]
-	talent_tree_points_required: 3	
+	talent_tree_points_required: 5
 	
 	points:
 	[

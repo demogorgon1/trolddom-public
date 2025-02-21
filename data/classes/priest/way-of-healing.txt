@@ -13,6 +13,8 @@ talent_tree priest_healing:
 		talent priest_eternal_shine: "E"
 		talent priest_healing_favor: "F"
 		talent priest_improved_blessing: "G"
+		talent priest_swift_mending: "H"
+		talent priest_spiritual_surge: "I"
 		sprite talent_tree_down_arrow: "d"				
 	}
 	
@@ -22,9 +24,96 @@ talent_tree priest_healing:
 		"..d.d.."
 		"G.B.E.F"
 		"..d...."
-		"..D...."
+		"..D.H.."
+		"....d.."
+		"....I.."
 	]
 	
+}
+
+###############################################################################
+# Spiritual Surge
+
+talent priest_spiritual_surge:
+{
+	string: "Spiritual Surge"
+	icon: icon_special_4
+	prerequisites: [ priest_swift_mending ]
+	talent_tree_points_required: 15
+	points:
+	[
+		{ ability: spiritual_surge }
+	]
+}
+
+cooldown spiritual_surge:
+{
+	duration: 1200
+}
+
+aura spiritual_surge:
+{
+	string: "Spiritual Surge"
+	icon: icon_special_4		
+	type: buff
+	duration: 100
+	flags: [ unique magic ]	
+	stat_modifiers: { spell_haste: { add: 30 } }
+}
+
+ability spiritual_surge:
+{
+	string: "Spiritual Surge"
+	description: "Increases spell haste of friendly target by 30% for 10 seconds."
+	range: 1	
+	cooldowns: [ global spiritual_surge ]
+	flags: [ spell target_other target_self target_friendly ]
+	states: [ default in_combat ]
+	icon: icon_special_4
+	delay: 3
+	talent_tree: priest_healing
+		
+	direct_effect apply_aura:
+	{
+		aura: spiritual_surge
+	}
+}
+
+###############################################################################
+# Swift Mending
+
+talent priest_swift_mending:
+{
+	string: "Swift Mending"
+	icon: icon_flash_of_light
+	talent_tree_points_required: 10
+	points:
+	[
+		{ ability_modifier: priest_swift_mending_1 }
+		{ ability_modifier: priest_swift_mending_2 }
+		{ ability_modifier: priest_swift_mending_3 }
+	]
+}
+
+ability_modifier priest_swift_mending_1:
+{	
+	description: "Reduces casting time of Heal and Greater Heal by 0.2 seconds"
+	abilities: [ minor_heal greater_heal ]
+	modify_cast_time: -2
+}
+
+ability_modifier priest_swift_mending_2:
+{	
+	description: "Reduces casting time of Heal and Greater Heal by 0.4 seconds"
+	abilities: [ minor_heal greater_heal ]
+	modify_cast_time: -4
+}
+
+ability_modifier priest_swift_mending_3:
+{	
+	description: "Reduces casting time of Heal and Greater Heal by 0.6 seconds"
+	abilities: [ minor_heal greater_heal ]
+	modify_cast_time: -6
 }
 
 ###############################################################################
@@ -34,7 +123,7 @@ talent priest_improved_blessing:
 {
 	string: "Improved Blessing"
 	icon: icon_holy_blessing
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability_modifier: improved_blessing_1 }
@@ -71,7 +160,7 @@ talent priest_healing_favor:
 {
 	string: "Healing Favor"
 	icon: icon_favor
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability_modifier: healing_favor }

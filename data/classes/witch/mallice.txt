@@ -376,7 +376,7 @@ talent witch_improved_doom:
 	string: "Improved Doom"
 	icon: icon_improved_doom
 	prerequisites: [ witch_doom ]
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability_modifier: improved_doom }
