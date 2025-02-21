@@ -1,5 +1,8 @@
 #pragma once
 
+#include "IReader.h"
+#include "IWriter.h"
+
 namespace tpublic
 {
 
@@ -9,8 +12,6 @@ namespace tpublic
 	}
 
 	class AbilityModifierList;
-	class IReader;
-	class IWriter;
 	class Manifest;
 
 	class Cooldowns

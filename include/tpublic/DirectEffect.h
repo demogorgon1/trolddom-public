@@ -132,6 +132,7 @@ namespace tpublic
 			ID_SPAWN_MINION,
 			ID_TRIGGER_ABILITY,
 			ID_START_ROUTE,
+			ID_RESET_COOLDOWNS,
 
 			NUM_IDS
 		};
@@ -158,7 +159,8 @@ namespace tpublic
 			"modify_faction",
 			"spawn_minion",
 			"trigger_ability",
-			"start_route"
+			"start_route",
+			"reset_cooldowns"
 		};
 
 		static_assert(sizeof(EFFECT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

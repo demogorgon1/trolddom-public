@@ -671,6 +671,8 @@ sprites:
 	sprite icon_two_handed_weapon_mastery : { tags: [ icon ] }
 	sprite icon_holy_reflection : { tags: [ icon ] }
 	sprite icon_tree_2 : { tags: [ icon ] }
+	sprite icon_double_attack : { tags: [ icon ] }
+	sprite icon_crush : { tags: [ icon ] }
 
 }
 

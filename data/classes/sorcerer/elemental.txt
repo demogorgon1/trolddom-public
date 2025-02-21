@@ -346,6 +346,7 @@ talent sorcerer_elemental_lake_of_fire:
 cooldown lake_of_fire:
 {
 	duration: 200
+	talent_tree: sorcerer_elemental
 }
 
 ability lake_of_fire:
@@ -598,6 +599,7 @@ particle_system ice_lance:
 cooldown frost_explosion:
 {
 	duration: 200
+	talent_tree: sorcerer_elemental
 }
 
 ability frost_explosion:

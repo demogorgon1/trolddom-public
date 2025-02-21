@@ -33,7 +33,7 @@ talent_tree paladin_avenger:
 }
 
 ###############################################################################
-# Piercing Strike
+# Holy Strength
 
 talent paladin_holy_strength:
 {

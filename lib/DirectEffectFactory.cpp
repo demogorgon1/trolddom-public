@@ -11,6 +11,7 @@
 #include <tpublic/DirectEffects/ModifyResource.h>
 #include <tpublic/DirectEffects/Move.h>
 #include <tpublic/DirectEffects/RemoveAura.h>
+#include <tpublic/DirectEffects/ResetCooldowns.h>
 #include <tpublic/DirectEffects/Simple.h>
 #include <tpublic/DirectEffects/SpawnEntity.h>
 #include <tpublic/DirectEffects/StartRoute.h>
@@ -35,6 +36,7 @@ namespace tpublic
 		_Register<DirectEffects::ModifyResource>();
 		_Register<DirectEffects::Move>();
 		_Register<DirectEffects::RemoveAura>();
+		_Register<DirectEffects::ResetCooldowns>();
 		_Register<DirectEffects::Simple>();
 		_Register<DirectEffects::SpawnEntity>();
 		_Register<DirectEffects::StartRoute>();
