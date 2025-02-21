@@ -12,6 +12,9 @@ talent_tree paladin_guardian:
 		talent paladin_aura_of_protection: "D"
 		talent paladin_shield_specialization: "E"
 		talent paladin_consecrate: "F"
+		talent paladin_endurance: "G"
+		talent paladin_holy_reflection: "H"
+		talent paladin_one_handed_weapon_mastery: "I"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_down: "|"		
 	}
@@ -22,8 +25,194 @@ talent_tree paladin_guardian:
 		"..d.d"
 		"..B.D"
 		"..d.."
-		"..F.."
+		"I.F.G"
+		"....d"
+		"....H"
 	]
+}
+
+###############################################################################
+# One-Handed Weapon Mastery
+
+talent paladin_one_handed_weapon_mastery:
+{
+	string: "One-Handed Weapon Mastery"
+	icon: icon_one_handed_weapon_mastery
+	prerequisites: [ ]	
+	talent_tree_points_required: 10
+	points:
+	[
+		{ aura: paladin_one_handed_weapon_mastery_1 }
+		{ aura: paladin_one_handed_weapon_mastery_2 }
+		{ aura: paladin_one_handed_weapon_mastery_3 }
+		{ aura: paladin_one_handed_weapon_mastery_4 }
+		{ aura: paladin_one_handed_weapon_mastery_5 }
+	]
+}
+
+aura paladin_one_handed_weapon_mastery_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your damage done with one-handed weapons by 2%."
+	aura_effect damage_output_modifier:
+	{
+		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
+		multiplier: 1.02
+	}
+}
+
+aura paladin_one_handed_weapon_mastery_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your damage done with one-handed weapons by 4%."
+	aura_effect damage_output_modifier:
+	{
+		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
+		multiplier: 1.04
+	}
+}
+
+aura paladin_one_handed_weapon_mastery_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your damage done with one-handed weapons by 6%."
+	aura_effect damage_output_modifier:
+	{
+		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
+		multiplier: 1.06
+	}
+}
+
+aura paladin_one_handed_weapon_mastery_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your damage done with one-handed weapons by 8%."
+	aura_effect damage_output_modifier:
+	{
+		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
+		multiplier: 1.08
+	}
+}
+
+aura paladin_one_handed_weapon_mastery_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your damage done with one-handed weapons by 10%."
+	aura_effect damage_output_modifier:
+	{
+		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
+		multiplier: 1.10
+	}
+}
+
+###############################################################################
+# Holy Reflection
+
+talent paladin_holy_reflection:
+{
+	string: "Holy Reflection"
+	icon: icon_holy_reflection
+	prerequisites: [ paladin_endurance ]	
+	talent_tree_points_required: 15
+	points:
+	[
+		{ aura: paladin_holy_reflection }
+	]
+}
+
+aura paladin_holy_reflection:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Causes holy damage to attackers when taking melee damage."
+	
+	aura_effect combat_event_trigger: 
+	{ 
+		combat_event<target>: hit
+		combat_event_ability_mask: [ melee ]
+		ability<self>: paladin_holy_reflection		
+	}	
+}
+
+ability paladin_holy_reflection:
+{
+	string: "Holy Reflection"
+	range: 1
+	flags: [ spell offensive target_other target_hostile ]
+	states: [ default in_combat ]
+	icon: icon_holy_reflection
+	delay: 3
+
+	direct_effect damage:
+	{	
+		flags: [ is_magical ]
+		damage_type: holy
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 3 ] [ 10 10 ] [ 20 20 ] ] }													
+	}
+}
+
+###############################################################################
+# Endurance
+
+talent paladin_endurance:
+{
+	string: "Endurance"
+	icon: icon_star_1
+	prerequisites: [ ]	
+	talent_tree_points_required: 10
+	points:
+	[
+		{ aura: paladin_endurance_1 }
+		{ aura: paladin_endurance_2 }
+		{ aura: paladin_endurance_3 }
+		{ aura: paladin_endurance_4 }
+		{ aura: paladin_endurance_5 }
+	]
+}
+
+aura paladin_endurance_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your Constitution by 2%."
+	stat_modifiers: { constitution: { add_percent: 2 } }
+}
+
+aura paladin_endurance_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your Constitution by 4%."
+	stat_modifiers: { constitution: { add_percent: 4 } }
+}
+
+aura paladin_endurance_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your Constitution by 6%."
+	stat_modifiers: { constitution: { add_percent: 6 } }
+}
+
+aura paladin_endurance_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your Constitution by 8%."
+	stat_modifiers: { constitution: { add_percent: 8 } }
+}
+
+aura paladin_endurance_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your Constitution by 10%."
+	stat_modifiers: { constitution: { add_percent: 10 } }
 }
 
 ###############################################################################
@@ -103,7 +292,6 @@ ability judgement:
 	}
 }
 
-
 particle_system judgement:
 {
 	particle:
@@ -165,7 +353,6 @@ ability taunt_2:
 		aura: taunt
 	}
 }
-
 
 ###############################################################################
 # Divine Protection

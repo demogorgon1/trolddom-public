@@ -1,3 +1,22 @@
+ability paladin_attack:
+{
+	string: "Attack"
+	description: "Deals $damage$ damage to target."
+	flags: [ melee offensive attack target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss use_weapon_icon ]	
+	states: [ default in_combat ]
+	delay: 3
+	icon: icon_fist
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical			
+		function: { expression: x x: weapon }		
+	}
+	
+	direct_effect apply_aura: !PALADIN_AVENGER_APPLY_INTERVENTION_OF_WRATH_DEBUFF{}	
+}
+
 aura_group paladin_oaths: { }
 
 class paladin:
@@ -36,8 +55,8 @@ class paladin:
 
 	color_1: [ 160 190 0 ] 
 	color_2: [ 85 100 0 ]
-	default_attack: attack
-	default_action_bar: [ attack reckoning !DEFAULT_ABILITIES{} ]
+	default_attack: paladin_attack
+	default_action_bar: [ paladin_attack reckoning !DEFAULT_ABILITIES{} ]
 	talent_trees: [ paladin_avenger paladin_guardian paladin_healer ]
 	
 	item_types: [ armor_cloth armor_mail armor_plate weapon_1h_sword weapon_1h_mace weapon_1h_axe weapon_2h_sword weapon_2h_mace weapon_2h_axe shield weapon_2h_staff ]
@@ -73,7 +92,7 @@ class paladin:
 
 	level_progression:
 	[
-		{ level: 1 unlock_abilities: [ attack reckoning !DEFAULT_ABILITIES{} ] stats: { dexterity: 3 strength: 4 wisdom: 7 constitution: 4 spirit: 10 } resource health: { add_max: 60 } resource mana: { add_max: 60 } add_unarmed_weapon_damage: [ 2 4 ] }		
+		{ level: 1 unlock_abilities: [ paladin_attack reckoning !DEFAULT_ABILITIES{} ] stats: { dexterity: 3 strength: 4 wisdom: 7 constitution: 4 spirit: 10 } resource health: { add_max: 60 } resource mana: { add_max: 60 } add_unarmed_weapon_damage: [ 2 4 ] }		
 		{ level: 2 unlock_abilities: [ flash_heal ]	stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }		
 		{ level: 3 unlock_abilities: [ judgement ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } } 
 		{ level: 4 unlock_abilities: [ divine_smite ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }						
@@ -101,6 +120,8 @@ class paladin:
 		dexterity: 0.5
 		constitution: 0.25
 	}
+	
+	replace_ability attack: paladin_attack
 }
 
 ###############################################################################
@@ -130,7 +151,7 @@ ability_list paladin_avenger:
 	{
 	}
 	
-	ability attack:
+	ability paladin_attack:
 	{
 	}
 }

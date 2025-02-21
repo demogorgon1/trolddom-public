@@ -1,5 +1,7 @@
 #pragma once
 
+#include <tpublic/Data/Class.h>
+
 #include "../ActionBar.h"
 #include "../Component.h"
 #include "../ComponentBase.h"
@@ -49,6 +51,17 @@ namespace tpublic
 			Reset()
 			{
 				m_actionBars.clear();
+			}
+
+			void
+			ApplyAbilityReplacements(
+				const Data::Class*	aClass)
+			{
+				for(std::unique_ptr<ActionBar>& actionBar : m_actionBars)
+				{
+					for(uint32_t& abilityId : actionBar->m_slots)
+						abilityId = aClass->GetAbilityReplacement(abilityId);
+				}
 			}
 		
 			// Public data

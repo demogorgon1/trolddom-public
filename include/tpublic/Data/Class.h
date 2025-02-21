@@ -721,6 +721,16 @@ namespace tpublic
 				return NULL;
 			}
 
+			uint32_t
+			GetAbilityReplacement(
+				uint32_t				aAbilityId) const
+			{
+				std::unordered_map<uint32_t, uint32_t>::const_iterator i = m_replaceAbilityTable.find(aAbilityId);
+				if(i == m_replaceAbilityTable.cend())
+					return aAbilityId;
+				return i->second;
+			}
+
 			// Base implementation
 			void
 			FromSource(
@@ -858,6 +868,10 @@ namespace tpublic
 						{
 							m_gearOptimizations.push_back(std::make_unique<GearOptimization>(aMember));
 						}
+						else if(aMember->m_tag == "replace_ability")
+						{
+							m_replaceAbilityTable[aMember->m_sourceContext->m_persistentIdTable->GetId(aMember->m_debugInfo, DataType::ID_ABILITY, aMember->m_name.c_str())] = aMember->GetId(DataType::ID_ABILITY);
+						}
 						else
 						{
 							TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
@@ -892,6 +906,7 @@ namespace tpublic
 				aStream->WriteBool(m_restricted);
 				aStream->WriteObjects(m_startReputations);
 				aStream->WriteObjectPointers(m_gearOptimizations);
+				aStream->WriteUIntToUIntTable<uint32_t, uint32_t>(m_replaceAbilityTable);
 
 				for(uint32_t i = 1; i < (uint32_t)ArmorStyle::NUM_IDS; i++)
 					m_armorStyles[i].ToStream(aStream);
@@ -948,6 +963,8 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadObjectPointers(m_gearOptimizations))
 					return false;
+				if(!aStream->ReadUIntToUIntTable(m_replaceAbilityTable))
+					return false;
 
 				for (uint32_t i = 1; i < (uint32_t)ArmorStyle::NUM_IDS; i++)
 				{
@@ -989,6 +1006,7 @@ namespace tpublic
 			bool													m_restricted = false;			
 			std::vector<StartReputation>							m_startReputations;
 			std::vector<std::unique_ptr<GearOptimization>>			m_gearOptimizations;
+			std::unordered_map<uint32_t, uint32_t>					m_replaceAbilityTable;
 		};
 
 	}

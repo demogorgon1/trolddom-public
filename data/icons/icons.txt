@@ -669,6 +669,7 @@ sprites:
 	sprite icon_special_8 : { tags: [ icon ] }
 	sprite icon_special_9 : { tags: [ icon ] }
 	sprite icon_two_handed_weapon_mastery : { tags: [ icon ] }
+	sprite icon_holy_reflection : { tags: [ icon ] }
 
 }
 

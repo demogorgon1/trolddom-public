@@ -10,6 +10,19 @@ namespace tpublic
 	public:
 		virtual				~IWriter() {}
 
+		template <typename _T1, typename _T2, typename _TTable = std::unordered_map<_T1, _T2>>
+		void
+		WriteUIntToUIntTable(
+			const _TTable&							aTable)
+		{
+			WriteUInt(aTable.size());
+			for(typename _TTable::const_iterator i = aTable.cbegin(); i != aTable.cend(); i++)
+			{
+				WriteUInt(i->first);
+				WriteUInt(i->second);
+			}
+		}
+
 		template <typename _T>
 		void
 		WritePOD(

@@ -13,6 +13,8 @@ talent_tree paladin_healer:
 		talent paladin_improved_cleanse: "E"		
 		talent paladin_praise_the_light: "F"
 		talent paladin_divine_shield: "G"		
+		talent paladin_powerful_faith: "H"		
+		talent paladin_holy_injection: "I"		
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_down: "|"				
 	}
@@ -23,9 +25,116 @@ talent_tree paladin_healer:
 		"d...d"
 		"B.D.A"
 		"..d.."
-		"..G.."
+		"H.G.."
+		"d...."
+		"I...."
 	]
 	
+}
+
+###############################################################################
+# Holy Injection
+
+talent paladin_holy_injection:
+{
+	string: "Holy Injection"
+	icon: icon_special_8
+	talent_tree_points_required: 15
+	prerequisites: [ paladin_powerful_faith ]
+	points:
+	[
+		{ ability: holy_injection }
+	]
+}
+
+cooldown holy_injection:
+{
+	duration: 600
+}
+
+ability holy_injection:
+{
+	string: "Holy Injection"
+	description: "Instantly heals target for $heal$."
+	range: 7
+	cooldowns: [ global spell_holy_lockout ]
+	flags: [ spell target_other target_self target_friendly interruptable ]
+	states: [ default in_combat ]
+	icon: icon_special_8
+	resource_cost mana: 20
+	talent_tree: paladin_healer
+	target_particle_system: heal	
+	delay: 2
+	sound_effects: !SOUND_HEAL{}
+	
+	direct_effect heal:
+	{	
+		flags: [ can_be_critical ]
+		function: { expression: a_mul_x_plus_b x: healing a: 2 b: [ [ 1 30 ] [ 10 60 ] [ 20 120 ] ] }
+		conditional_critical_chance_bonus<praise_the_light_1>: 2
+		conditional_critical_chance_bonus<praise_the_light_2>: 4
+		conditional_critical_chance_bonus<praise_the_light_3>: 6
+		conditional_critical_chance_bonus<praise_the_light_4>: 8
+		conditional_critical_chance_bonus<praise_the_light_5>: 10
+	}
+}
+
+###############################################################################
+# Powerful Faith
+
+talent paladin_powerful_faith:
+{
+	string: "Powerful Faith"
+	icon: icon_wisdom
+	talent_tree_points_required: 10
+	points:
+	[
+		{ aura: paladin_powerful_faith_1 }
+		{ aura: paladin_powerful_faith_2 }
+		{ aura: paladin_powerful_faith_3 }
+		{ aura: paladin_powerful_faith_4 }
+		{ aura: paladin_powerful_faith_5 }
+	]
+}
+
+aura paladin_powerful_faith_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your Wisdom by 2%."
+	stat_modifiers: { wisdom: { add_percent: 2 } }
+}
+
+aura paladin_powerful_faith_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your Wisdom by 4%."
+	stat_modifiers: { wisdom: { add_percent: 4 } }
+}
+
+aura paladin_powerful_faith_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your Wisdom by 6%."
+	stat_modifiers: { wisdom: { add_percent: 6 } }
+}
+
+aura paladin_powerful_faith_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your Wisdom by 8%."
+	stat_modifiers: { wisdom: { add_percent: 8 } }
+}
+
+aura paladin_powerful_faith_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your Wisdom by 10%."
+	stat_modifiers: { wisdom: { add_percent: 10 } }
 }
 
 ###############################################################################
@@ -649,7 +758,7 @@ aura divine_flux:
 	{
 		combat_event<source>: hit
 		ability<self>: divine_flux_trigger
-		trigger_abilities: [ attack holy_storm reckoning ]		
+		trigger_abilities: [ paladin_attack holy_storm reckoning ]		
 	}
 }
 
