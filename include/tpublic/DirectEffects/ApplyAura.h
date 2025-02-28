@@ -69,7 +69,6 @@ namespace tpublic
 			uint32_t				m_auraId = 0;
 			int32_t					m_threat = 0;			
 			uint32_t				m_applyToPartyMembersInRange = 0;
-			bool					m_targetSelf = false;
 			SourceRedirect			m_sourceRedirect = SOURCE_REDIRECT_NONE;		
 		};
 

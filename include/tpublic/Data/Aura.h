@@ -4,6 +4,7 @@
 #include "../AuraEffectFactory.h"
 #include "../CombatFunction.h"
 #include "../DataBase.h"
+#include "../Image.h"
 #include "../Requirement.h"
 #include "../StatModifiers.h"
 
@@ -213,6 +214,8 @@ namespace tpublic
 							m_auraGroupId = aChild->GetId(DataType::ID_AURA_GROUP);
 						else if(aChild->m_tag == "cancel_requirement")
 							m_cancelRequirements.push_back(Requirement(aChild));
+						else if(aChild->m_name == "color_effect")
+							m_colorEffect = Image::RGBA(aChild);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 					}
@@ -237,6 +240,7 @@ namespace tpublic
 				aStream->WriteUInt(m_soundId);
 				aStream->WriteUInt(m_auraGroupId);
 				aStream->WriteObjects(m_cancelRequirements);
+				aStream->WriteOptionalPOD(m_colorEffect);
 			}
 			 
 			bool
@@ -291,6 +295,12 @@ namespace tpublic
 					if(!aStream->ReadObjects(m_cancelRequirements))
 						return false;
 				}
+
+				if(!aStream->IsEnd())
+				{
+					if(!aStream->ReadOptionalPOD(m_colorEffect))
+						return false;
+				}
 				return true;
 			}
 
@@ -308,7 +318,8 @@ namespace tpublic
 			uint32_t										m_particleSystemId = 0;
 			uint32_t										m_soundId = 0;
 			uint32_t										m_auraGroupId = 0;
-			std::vector<Requirement>						m_cancelRequirements;
+			std::vector<Requirement>						m_cancelRequirements;			
+			std::optional<Image::RGBA>						m_colorEffect;
 		};
 
 	}

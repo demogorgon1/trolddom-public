@@ -55,7 +55,8 @@ namespace tpublic
 			TYPE_MUST_NOT_BE_TYPE,
 			TYPE_MUST_NOT_HAVE_ITEM,
 			TYPE_MUST_HAVE_REPUTATION_LEVEL,
-			TYPE_MUST_NOT_HAVE_EQUIPPED_ITEM_TYPE_FLAGS
+			TYPE_MUST_NOT_HAVE_EQUIPPED_ITEM_TYPE_FLAGS,
+			TYPE_MUST_NOT_BE_CREATURE_TYPE
 		};
 
 		static DataType::Id
@@ -104,6 +105,7 @@ namespace tpublic
 				return DataType::ID_AURA_GROUP;
 
 			case TYPE_MUST_BE_CREATURE_TYPE:
+			case TYPE_MUST_NOT_BE_CREATURE_TYPE:
 				return DataType::ID_CREATURE_TYPE;
 
 			case TYPE_MUST_HAVE_LESS_HEALTH_THAN:
@@ -222,6 +224,8 @@ namespace tpublic
 				m_type = TYPE_MUST_HAVE_AURA_GROUP;
 			else if (typeString == "must_be_creature_type")
 				m_type = TYPE_MUST_BE_CREATURE_TYPE;
+			else if (typeString == "must_not_be_creature_type")
+				m_type = TYPE_MUST_NOT_BE_CREATURE_TYPE;
 			else if(typeString == "must_have_zero_health")
 				m_type = TYPE_MUST_HAVE_ZERO_HEALTH;
 			else if (typeString == "must_have_item_type_equipped")

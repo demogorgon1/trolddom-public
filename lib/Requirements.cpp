@@ -110,9 +110,12 @@ namespace tpublic
 				break;
 
 			case Requirement::TYPE_MUST_BE_CREATURE_TYPE:
+			case Requirement::TYPE_MUST_NOT_BE_CREATURE_TYPE:
 				{
 					const Components::CombatPublic* combatPublic = entity->GetComponent<Components::CombatPublic>();
-					if(combatPublic->m_creatureTypeId != aRequirement->m_id)
+					bool isCreatureType = combatPublic->m_creatureTypeId == aRequirement->m_id;
+					bool shouldBeCreatureType = aRequirement->m_type == Requirement::TYPE_MUST_BE_CREATURE_TYPE;
+					if(isCreatureType != shouldBeCreatureType)
 						return false;
 				}
 				break;

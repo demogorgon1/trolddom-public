@@ -65,7 +65,8 @@ namespace tpublic
 			enum Field
 			{
 				FIELD_ENTRIES,
-				FIELD_AURA_FLAGS
+				FIELD_AURA_FLAGS,
+				FIELD_COLOR_EFFECT
 			};
 			
 			static void
@@ -74,6 +75,7 @@ namespace tpublic
 			{
 				aSchema->DefineCustomObjectsNoSource<Entry>(FIELD_ENTRIES, offsetof(VisibleAuras, m_entries));
 				aSchema->DefineCustomPODNoSource<uint8_t>(FIELD_AURA_FLAGS, offsetof(VisibleAuras, m_auraFlags));
+				aSchema->DefineCustomOptionalPODNoSource<Image::RGBA>(FIELD_COLOR_EFFECT, offsetof(VisibleAuras, m_colorEffect));
 			}
 
 			bool 
@@ -93,6 +95,7 @@ namespace tpublic
 			{
 				m_entries.clear();
 				m_auraFlags = 0;
+				m_colorEffect.reset();
 
 				m_seq = 0;
 			}
@@ -103,8 +106,9 @@ namespace tpublic
 			bool		IsStealthed() const { return m_auraFlags & AURA_FLAG_STEALTHED; }
 
 			// Public data
-			std::vector<Entry>	m_entries;			
-			uint8_t				m_auraFlags = 0;
+			std::vector<Entry>			m_entries;			
+			uint8_t						m_auraFlags = 0;
+			std::optional<Image::RGBA>	m_colorEffect;
 
 			// Internal
 			uint32_t			m_seq = 0;

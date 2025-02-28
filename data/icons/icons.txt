@@ -673,6 +673,9 @@ sprites:
 	sprite icon_tree_2 : { tags: [ icon ] }
 	sprite icon_double_attack : { tags: [ icon ] }
 	sprite icon_crush : { tags: [ icon ] }
+	sprite icon_combustion : { tags: [ icon ] }
+	sprite icon_empowerment : { tags: [ icon ] }
+	sprite icon_scales_2 : { tags: [ icon ] }
 
 }
 

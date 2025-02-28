@@ -257,10 +257,10 @@ ability dragon_punch:
 	
 	direct_effect apply_aura:
 	{
+		flags: [ self ]
 		must_have_ability_modifier: improved_dragon_punch
 		probability: 20
 		aura: improved_dragon_punch
-		target_self: true
 	}
 }
 

@@ -13,6 +13,8 @@ talent_tree witch_necromancy:
 		talent witch_enfeeblement: "E"
 		talent witch_skeletal_terror: "F"
 		talent witch_chill_touch: "G"
+		talent witch_bone_armor: "H"
+		talent witch_corpse_explosion: "I"
 		
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_left_arrow: "l"
@@ -28,8 +30,182 @@ talent_tree witch_necromancy:
 		"......."
 		"E.D.BrC"
 		"..d...."
-		"..F...."
+		"..F.H.."
+		"....d.."
+		"....I.."
 	]	
+}
+
+###############################################################################
+# Corpse Explosion
+
+talent witch_corpse_explosion:
+{
+	string: "Corpse Explosion"
+	icon: icon_raise_dead
+	prerequisites: [ witch_bone_armor ]
+	talent_tree_points_required: 15
+	points:
+	[
+		{ ability: corpse_explosion }
+	]
+}
+
+particle_system corpse_explosion:
+{
+	particle:
+	{
+		sprites: [ effect_expl_0 effect_expl_1 effect_expl_2 effect_expl_3 ]
+		sprite_interval: 125
+		flags: [ attached blend_add no_loop ]
+		duration: 400
+		count: 1		
+		scale: 1.5
+		alpha: 0.6
+		fade_out: 200
+		color_mod: [ 88 57 39 ]
+	}
+}
+
+ability corpse_explosion_tick:
+{
+	string: "Corpse Explosion"
+	flags: [ target_self target_aoe target_aoe_hostile ]
+	delay: 3
+	aoe_radius: 2
+	target_particle_system: corpse_explosion
+	direct_effect damage:
+	{
+		flags: [ can_be_critical is_magical ]
+		requirement target<must_not_be_in_state>: dead
+		damage_type: unholy
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.65 b: [ [ 1 20 ] [ 10 40 ] [ 20 80 ] ] }													
+	}
+}
+
+entity corpse_explosion:
+{
+	systems: [ environment ]
+	
+	components:
+	{
+		owner: { }
+		position: { }		
+		visibility: { }
+		combat_public: { }
+		environment: 
+		{
+			tick_interval: 15
+			duration: 40
+			ability: corpse_explosion_tick
+		}
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ effect_brown_glow_0 effect_brown_glow_1 effect_brown_glow_2 effect_brown_glow_3 ]
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+	}
+}
+
+ability corpse_explosion:
+{
+	string: "Corpse Explosion"
+	description: "Causes targeted corpse to explode and cause damage to surrounding enemies."
+	range: 7
+	cooldowns: [ global spell_unholy_lockout ]
+	flags: [ spell target_aoe target_aoe_always_self interruptable ]
+	aoe_radius: 0
+	states: [ default in_combat ]
+	icon: icon_raise_dead
+	resource_cost mana: 20
+	talent_tree: witch_necromancy
+	cast_time: 20
+	
+	direct_effect spawn_entity:
+	{
+		spawn_flags: [ at_aoe_target ]
+		entity: corpse_explosion
+		init_state: spawning	
+		
+		must_have_one_at_target:
+		[
+			{
+				creature_types: [ undead humanoid beast ]
+				entity_states: [ dead ]
+			}
+			
+			{
+				entities: [ player_remains_1 player_remains_2 player_remains_3 ]
+			}
+		]
+	}
+}
+
+###############################################################################
+# Bone Armor
+
+talent witch_bone_armor:
+{
+	string: "Bone Armor"
+	icon: icon_scales_2
+	prerequisites: [ ]	
+	talent_tree_points_required: 10
+	points:
+	[
+		{ aura: witch_bone_armor_1 }
+		{ aura: witch_bone_armor_2 }
+		{ aura: witch_bone_armor_3 }
+		{ aura: witch_bone_armor_4 }
+		{ aura: witch_bone_armor_5 }
+	]
+}
+
+aura witch_bone_armor_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your armor by 12%."
+	stat_modifiers: { armor: { add_percent: 20 } }
+}
+
+aura witch_bone_armor_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your armor by 24%."
+	stat_modifiers: { armor: { add_percent: 24 } }
+}
+
+aura witch_bone_armor_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your armor by 36%."
+	stat_modifiers: { armor: { add_percent: 36 } }
+}
+
+aura witch_bone_armor_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your armor by 48%."
+	stat_modifiers: { armor: { add_percent: 48 } }
+}
+
+aura witch_bone_armor_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your armor by 60%."
+	stat_modifiers: { armor: { add_percent: 60 } }
 }
 
 ###############################################################################

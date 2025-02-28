@@ -287,7 +287,8 @@ namespace tpublic
 			HasResourcesForAbility(
 				const Data::Ability*								aAbility,
 				const std::vector<const Data::AbilityModifier*>*	aModifiers,
-				uint32_t											aBaseMana) const
+				uint32_t											aBaseMana,
+				float												aCostMultiplier = 1.0f) const
 			{
 				for(uint32_t resourceId = 1; resourceId < (uint32_t)Resource::NUM_IDS; resourceId++)
 				{
@@ -308,6 +309,9 @@ namespace tpublic
 						cost = ((int32_t)aBaseMana * cost) / 100;
 					}
 
+					if(cost > 0 && aCostMultiplier != 1.0f)
+						cost = (int32_t)((float)cost * aCostMultiplier);
+
 					if(cost > 0 && (uint32_t)cost > GetResource(resourceId))
 						return false;
 				}
@@ -318,7 +322,8 @@ namespace tpublic
 			SubtractResourcesForAbility(
 				const Data::Ability*								aAbility,
 				const std::vector<const Data::AbilityModifier*>*	aModifiers,
-				uint32_t											aBaseMana)
+				uint32_t											aBaseMana,
+				float												aCostMultiplier = 1.0f)
 			{
 				for (uint32_t resourceId = 1; resourceId < (uint32_t)Resource::NUM_IDS; resourceId++)
 				{
@@ -338,6 +343,9 @@ namespace tpublic
 						// Mana cost is always as percentage of base mana
 						cost = ((int32_t)aBaseMana * cost) / 100;
 					}
+
+					if (cost > 0 && aCostMultiplier != 1.0f)
+						cost = (int32_t)((float)cost * aCostMultiplier);
 
 					if(cost > 0)
 					{

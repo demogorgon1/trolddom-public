@@ -336,6 +336,18 @@ namespace tpublic::Systems
 					const Data::Ability* ability = GetManifest()->GetById<Data::Ability>(ownerRequestAbility.m_abilityId);
 					const EntityInstance* ownerRequestAbilityTargetEntityInstance = ownerRequestAbility.m_targetEntityInstanceId != 0 ? aContext->m_worldView->WorldViewSingleEntityInstance(ownerRequestAbility.m_targetEntityInstanceId) : NULL;
 
+					if(ownerRequestAbilityTargetEntityInstance != NULL)
+					{
+						const Components::MinionPublic::Ability* minionAbility = minionPublic->GetAbility(ownerRequestAbility.m_abilityId);
+						assert(minionAbility != NULL);
+						if(minionAbility->m_selfMustHaveAuraId != 0)
+						{
+							const Components::VisibleAuras* ownerRequestAbilityTargetVisibleAuras = ownerRequestAbilityTargetEntityInstance->GetComponent<Components::VisibleAuras>();
+							if (ownerRequestAbilityTargetVisibleAuras == NULL || !ownerRequestAbilityTargetVisibleAuras->HasAura(minionAbility->m_selfMustHaveAuraId))
+								ownerRequestAbilityTargetEntityInstance = NULL;
+						}
+					}
+
 					if(ownerRequestAbilityTargetEntityInstance != NULL && !minionPublic->m_cooldowns.IsAbilityOnCooldown(ability))
 					{
 						const Components::Position* ownerRequestAbilityTargetPosition = ownerRequestAbilityTargetEntityInstance->GetComponent<Components::Position>();
@@ -479,6 +491,22 @@ namespace tpublic::Systems
 										{
 											if(minionAbility->m_selfMustNotHaveAuraId != 0 && visibleAuras->HasAura(minionAbility->m_selfMustNotHaveAuraId))
 												continue;
+
+											if (minionAbility->m_selfMustHaveAuraId != 0 && !visibleAuras->HasAura(minionAbility->m_selfMustHaveAuraId))
+												continue;
+
+											if(minionAbility->m_flags & Components::MinionPublic::Ability::FLAG_INTERRUPT)
+											{
+												bool targetInterruptible = targetCombatPublic != NULL && targetCombatPublic->m_castInProgress.has_value();
+												if(targetInterruptible)
+												{
+													const Data::Ability* targetCastAbility = GetManifest()->GetById<Data::Ability>(targetCombatPublic->m_castInProgress->m_abilityId);
+													targetInterruptible = targetCastAbility->IsInterruptable();
+												}
+
+												if(!targetInterruptible)
+													continue;
+											}
 										}
 
 										if (minionPublic->m_cooldowns.IsAbilityOnCooldown(ability))

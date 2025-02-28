@@ -1,6 +1,7 @@
 #include "../Pcheader.h"
 
 #include <tpublic/Components/CombatPublic.h>
+#include <tpublic/Components/PlayerMinions.h>
 #include <tpublic/Components/PlayerPrivate.h>
 #include <tpublic/Components/Position.h>
 
@@ -36,8 +37,6 @@ namespace tpublic
 						m_threat = aChild->GetInt32();
 					else if(aChild->m_name == "apply_to_party_members_in_range")
 						m_applyToPartyMembersInRange = aChild->GetUInt32();
-					else if (aChild->m_name == "target_self")
-						m_targetSelf = aChild->GetBool();
 					else if(aChild->m_name == "source_redirect")
 						m_sourceRedirect = SourceToSourceRedirect(aChild);
 					else
@@ -54,7 +53,6 @@ namespace tpublic
 			aStream->WriteUInt(m_auraId);
 			aStream->WriteInt(m_threat);
 			aStream->WriteUInt(m_applyToPartyMembersInRange);
-			aStream->WriteBool(m_targetSelf);
 			aStream->WritePOD(m_sourceRedirect);
 		}
 
@@ -69,8 +67,6 @@ namespace tpublic
 			if (!aStream->ReadInt(m_threat))
 				return false;
 			if (!aStream->ReadUInt(m_applyToPartyMembersInRange))
-				return false;
-			if(!aStream->ReadBool(m_targetSelf))
 				return false;
 			if (!aStream->ReadPOD(m_sourceRedirect))
 				return false;
@@ -94,7 +90,29 @@ namespace tpublic
 			IEventQueue*					aEventQueue,
 			const IWorldView*				aWorldView)
 		{
-			EntityInstance* target = m_targetSelf ? aSource : aTarget;
+			const EntityInstance* target = NULL;
+			
+			if(m_flags & DirectEffect::FLAG_SELF)
+			{
+				target = aSource;
+			}
+			else if (m_flags & DirectEffect::FLAG_MINION)
+			{
+				const Components::PlayerMinions* playerMinions = aSource->GetComponent<Components::PlayerMinions>();
+				if(playerMinions != NULL)
+				{
+					for(const Components::PlayerMinions::Minion& minion : playerMinions->m_minions)
+					{
+						target = aWorldView->WorldViewSingleEntityInstance(minion.m_entityInstanceId);
+						if(target != NULL)
+							break;
+					}
+				}
+			}
+			else
+			{
+				target = aTarget;
+			}
 
 			if(target == NULL)
 				return Result();
@@ -156,6 +174,13 @@ namespace tpublic
 
 			for(const EntityInstance* targetEntity : targetEntities)
 			{
+				if(aura->m_cancelRequirements.size() > 0)
+				{
+					bool preemptiveCancel = !Requirements::CheckList(aManifest, aura->m_cancelRequirements, aTarget, NULL);
+					if(preemptiveCancel)
+						continue;
+				}
+
 				if (m_threat != 0 && targetEntity->GetEntityId() != 0)
 					aEventQueue->EventQueueThreat(sourceEntityInstance, targetEntity->GetEntityInstanceId(), m_threat, aTick);
 

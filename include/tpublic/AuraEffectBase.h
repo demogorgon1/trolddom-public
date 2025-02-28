@@ -244,6 +244,7 @@ namespace tpublic
 									int32_t							aHeal) const { return aHeal; }
 		virtual int32_t			FilterThreat(
 									int32_t							aThreat) const { return aThreat; }
+		virtual float			GetResourceCostMultiplier() const { return 1.0f; }
 		virtual void			OnDamageInput(
 									const EntityInstance*			/*aSource*/,
 									const EntityInstance*			/*aTarget*/,

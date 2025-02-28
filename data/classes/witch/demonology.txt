@@ -13,6 +13,8 @@ talent_tree witch_demonology:
 		talent witch_summon_black_beast: "E"
 		talent witch_summon_fiendish_spellcaster: "F"
 		talent witch_forbidden_knowledge: "G"
+		talent witch_demonic_frenzy: "H"
+		talent witch_demonic_infusion: "I"
 		
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_left_arrow: "l"
@@ -27,9 +29,131 @@ talent_tree witch_demonology:
 		"d.d.d.."
 		"F.D.C.."
 		"d......"
-		"E......"
+		"E.H...."
+		"..d...."
+		"..I...."
 	]
 	
+}
+
+###############################################################################
+# Demonic Infusion
+
+talent witch_demonic_infusion:
+{
+	string: "Demonic Infusion"
+	icon: icon_empowerment
+	prerequisites: [ witch_demonic_frenzy ]
+	talent_tree_points_required: 15
+	points:
+	[
+		{ ability: demonic_infusion }
+	]
+}
+
+cooldown demonic_infusion:
+{
+	duration: 1800
+}
+
+aura demonic_infusion:
+{
+	string: "Demonic Infusion"
+	type: buff
+	icon: icon_empowerment
+	duration: 300
+	flags: [ unique ]
+	cancel_requirement self<must_not_be_creature_type>: demon
+	color_effect: [ 255 0 0 255 ]
+	
+	aura_effect damage_output_modifier: 
+	{ 
+		requirement self<must_be_type>: fiendish_spellcaster
+		type_mask: [ fire ] multiplier: 1.5 
+	}
+	
+	aura_effect damage_output_modifier: 
+	{ 
+		requirement self<must_be_type>: black_beast
+		type_mask: [ physical ] multiplier: 1.5 
+	}	
+}
+
+ability demonic_infusion:
+{
+	string: "Demonic Infusion"
+	description: "Infuses your demon minion with more power for 30 seconds."
+	range: 10	
+	cooldowns: [ global demonic_infusion ]
+	flags: [ target_self ]
+	states: [ default in_combat ]
+	icon: icon_empowerment
+	delay: 3
+	talent_tree: witch_demonology
+		
+	direct_effect apply_aura:
+	{
+		flags: [ minion ]
+		aura: demonic_infusion
+	}
+}
+
+###############################################################################
+# Demonic Frenzy
+
+talent witch_demonic_frenzy:
+{
+	string: "Demonic Frenzy"
+	icon: icon_special_3
+	talent_tree_points_required: 10
+	points:
+	[
+		{ aura: demonic_frenzy_1 }
+		{ aura: demonic_frenzy_2 }
+		{ aura: demonic_frenzy_3 }
+		{ aura: demonic_frenzy_4 }
+		{ aura: demonic_frenzy_5 }
+	]	
+}
+
+aura demonic_frenzy_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your chance to get a critical strike with spells by 2%."
+	stat_modifiers: { spell_crit_chance: { add: 2 } }
+}
+
+aura demonic_frenzy_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your chance to get a critical strike with spells by 4%."
+	stat_modifiers: { spell_crit_chance: { add: 4 } }
+}
+
+aura demonic_frenzy_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your chance to get a critical strike with spells by 6%."
+	stat_modifiers: { spell_crit_chance: { add: 6 } }
+}
+
+aura demonic_frenzy_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your chance to get a critical strike with spells by 8%."
+	stat_modifiers: { spell_crit_chance: { add: 8 } }
+}
+
+aura demonic_frenzy_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your chance to get a critical strike with spells by 10%."
+	stat_modifiers: { spell_crit_chance: { add: 10 } }
 }
 
 ###############################################################################
@@ -48,7 +172,7 @@ ability summon_lesser_demon:
 
 	direct_effect spawn_entity:
 	{
-		must_not_have_ability_modifiers: [ demon_mastery_1 demon_mastery_2 demon_mastery_3 ]
+		must_not_have_ability_modifiers: [ demon_mastery_1 demon_mastery_2 demon_mastery_3 demon_mastery_4 demon_mastery_5 ]
 		spawn_flags: [ no_owner source_level ]
 		entity: minor_demon
 		init_state: spawning	
@@ -70,8 +194,8 @@ ability summon_lesser_demon:
 
 		refresh_npc_metrics:
 		{
-			weapon_damage: 0.952
-			health: 0.728
+			weapon_damage: 0.918
+			health: 0.702
 			armor: 1
 		}
 	}
@@ -79,6 +203,21 @@ ability summon_lesser_demon:
 	direct_effect spawn_entity:
 	{
 		must_have_ability_modifier: demon_mastery_2
+		spawn_flags: [ no_owner source_level ]
+		entity: minor_demon
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.986
+			health: 0.754
+			armor: 1
+		}		
+	}
+
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: demon_mastery_3
 		spawn_flags: [ no_owner source_level ]
 		entity: minor_demon
 		init_state: spawning
@@ -93,15 +232,30 @@ ability summon_lesser_demon:
 
 	direct_effect spawn_entity:
 	{
-		must_have_ability_modifier: demon_mastery_3
+		must_have_ability_modifier: demon_mastery_4
 		spawn_flags: [ no_owner source_level ]
 		entity: minor_demon
 		init_state: spawning
 		
 		refresh_npc_metrics:
 		{
-			weapon_damage: 1.156
+			weapon_damage: 1.122
 			health: 0.858
+			armor: 1
+		}		
+	}
+
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: demon_mastery_5
+		spawn_flags: [ no_owner source_level ]
+		entity: minor_demon
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 1.19
+			health: 0.91
 			armor: 1
 		}		
 	}
@@ -225,22 +379,34 @@ talent witch_demon_mastery:
 		{ ability_modifier: demon_mastery_1 }
 		{ ability_modifier: demon_mastery_2 }
 		{ ability_modifier: demon_mastery_3 }
+		{ ability_modifier: demon_mastery_4 }
+		{ ability_modifier: demon_mastery_5 }
 	]	
 }
 
 ability_modifier demon_mastery_1:
 {	
-	description: "Increases effectiveness of demon minions by 12%."	
+	description: "Increases effectiveness of demon minions by 8%."	
 }
 
 ability_modifier demon_mastery_2:
 {	
-	description: "Increases effectiveness of demon minions by 24%."	
+	description: "Increases effectiveness of demon minions by 16%."	
 }
 
 ability_modifier demon_mastery_3:
 {	
-	description: "Increases effectiveness of demon minions by 36%."	
+	description: "Increases effectiveness of demon minions by 24%."	
+}
+
+ability_modifier demon_mastery_4:
+{	
+	description: "Increases effectiveness of demon minions by 32%."	
+}
+
+ability_modifier demon_mastery_5:
+{	
+	description: "Increases effectiveness of demon minions by 40%."	
 }
 
 ###############################################################################
@@ -272,7 +438,7 @@ ability summon_black_beast:
 
 	direct_effect spawn_entity:
 	{
-		must_not_have_ability_modifiers: [ demon_mastery_1 demon_mastery_2 demon_mastery_3 ]
+		must_not_have_ability_modifiers: [ demon_mastery_1 demon_mastery_2 demon_mastery_3 demon_mastery_4 demon_mastery_5 ]
 		spawn_flags: [ no_owner source_level ]
 		entity: black_beast
 		init_state: spawning
@@ -281,7 +447,7 @@ ability summon_black_beast:
 		{
 			weapon_damage: 1.3
 			health: 1.3
-			armor: 1
+			armor: 1.3
 		}			
 	}
 	
@@ -294,9 +460,9 @@ ability summon_black_beast:
 		
 		refresh_npc_metrics:
 		{
-			weapon_damage: 1.456
-			health: 1.456
-			armor: 1
+			weapon_damage: 1.404
+			health: 1.404
+			armor: 1.3
 		}			
 	}
 
@@ -309,9 +475,9 @@ ability summon_black_beast:
 		
 		refresh_npc_metrics:
 		{
-			weapon_damage: 1.612
-			health: 1.612
-			armor: 1
+			weapon_damage: 1.508
+			health: 1.508
+			armor: 1.3
 		}			
 	}
 
@@ -324,11 +490,41 @@ ability summon_black_beast:
 		
 		refresh_npc_metrics:
 		{
-			weapon_damage: 1.768
-			health: 1.768
-			armor: 1
+			weapon_damage: 1.612
+			health: 1.612
+			armor: 1.3
 		}			
 	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: demon_mastery_4
+		spawn_flags: [ no_owner source_level ]
+		entity: black_beast
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 1.716
+			health: 1.716
+			armor: 1.3
+		}			
+	}
+
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: demon_mastery_5
+		spawn_flags: [ no_owner source_level ]
+		entity: black_beast
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 1.82
+			health: 1.82
+			armor: 1.3
+		}			
+	}	
 }
 
 ###############################################################################
@@ -360,7 +556,7 @@ ability summon_fiendish_spellcaster:
 
 	direct_effect spawn_entity:
 	{
-		must_not_have_ability_modifiers: [ demon_mastery_1 demon_mastery_2 demon_mastery_3 ]
+		must_not_have_ability_modifiers: [ demon_mastery_1 demon_mastery_2 demon_mastery_3 demon_mastery_4 demon_mastery_5 ]
 		spawn_flags: [ no_owner source_level ]
 		entity: fiendish_spellcaster
 		init_state: spawning
@@ -382,8 +578,8 @@ ability summon_fiendish_spellcaster:
 		
 		refresh_npc_metrics:
 		{
-			weapon_damage: 0.728
-			health: 1.12
+			weapon_damage: 0.702
+			health: 1.08
 			armor: 1
 		}		
 	}
@@ -391,6 +587,21 @@ ability summon_fiendish_spellcaster:
 	direct_effect spawn_entity:
 	{
 		must_have_ability_modifier: demon_mastery_2
+		spawn_flags: [ no_owner source_level ]
+		entity: fiendish_spellcaster
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.754
+			health: 1.16
+			armor: 1
+		}	
+	}
+
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: demon_mastery_3
 		spawn_flags: [ no_owner source_level ]
 		entity: fiendish_spellcaster
 		init_state: spawning
@@ -405,7 +616,7 @@ ability summon_fiendish_spellcaster:
 
 	direct_effect spawn_entity:
 	{
-		must_have_ability_modifier: demon_mastery_3
+		must_have_ability_modifier: demon_mastery_4
 		spawn_flags: [ no_owner source_level ]
 		entity: fiendish_spellcaster
 		init_state: spawning
@@ -413,10 +624,26 @@ ability summon_fiendish_spellcaster:
 		refresh_npc_metrics:
 		{
 			weapon_damage: 0.858
-			health: 1.36
+			health: 1.32
 			armor: 1
 		}	
 	}
+
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: demon_mastery_5
+		spawn_flags: [ no_owner source_level ]
+		entity: fiendish_spellcaster
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.91
+			health: 1.40
+			armor: 1
+		}	
+	}
+
 }
 
 ###############################################################################

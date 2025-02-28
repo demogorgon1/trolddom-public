@@ -12,7 +12,8 @@ namespace tpublic
 			FLAG_GENERATE_RAGE			= 0x00000002,
 			FLAG_CAN_BE_CRITICAL		= 0x00000004,
 			FLAG_LEECH					= 0x00000008,
-			FLAG_SELF					= 0x00000010
+			FLAG_SELF					= 0x00000010,
+			FLAG_MINION					= 0x00000020
 		};
 
 		enum DamageType : uint8_t
@@ -65,6 +66,8 @@ namespace tpublic
 				return FLAG_LEECH;
 			if (strcmp(aString, "self") == 0)
 				return FLAG_SELF;
+			if (strcmp(aString, "minion") == 0)
+				return FLAG_MINION;
 			return 0;
 		}
 

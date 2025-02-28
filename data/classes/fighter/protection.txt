@@ -603,14 +603,14 @@ ability bash:
 	
 	direct_effect remove_aura:
 	{
+		flags: [ self ]
 		aura: revenge_buff
-		target_self: true
 	}
 
 	direct_effect apply_aura:
 	{
+		flags: [ self ]	
 		aura: bash
-		target_self: true
 	}
 	
 	direct_effect modify_resource:

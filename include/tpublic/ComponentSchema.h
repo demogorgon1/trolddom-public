@@ -450,6 +450,30 @@ namespace tpublic
 			return t;
 		}
 
+		template <typename _T>
+		Field*
+		DefineCustomOptionalPODNoSource(
+			uint32_t							aId,
+			uint32_t							aOffset)
+		{
+			Field* t = DefineCustom<std::optional<_T>>(aId, NULL, aOffset);
+			t->m_customRead = [](
+				IReader*	aReader,
+				void*		aObject) -> bool
+			{
+				std::optional<_T>* p = (std::optional<_T>*)aObject;
+				return aReader->ReadOptionalPOD(*p);
+			};
+			t->m_customWrite = [](
+				IWriter*	aWriter,
+				const void* aObject)
+			{
+				const std::optional<_T>* p = (const std::optional<_T>*)aObject;
+				aWriter->WriteOptionalPOD(*p);
+			};
+			return t;
+		}
+
 	private:
 
 		std::vector<Field>										m_fields;

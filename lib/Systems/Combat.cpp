@@ -1,6 +1,7 @@
 #include "../Pcheader.h"
 
 #include <tpublic/Components/Auras.h>
+#include <tpublic/Components/CombatPrivate.h>
 #include <tpublic/Components/CombatPublic.h>
 #include <tpublic/Components/Position.h>
 #include <tpublic/Components/VisibleAuras.h>
@@ -22,6 +23,7 @@ namespace tpublic::Systems
 		: SystemBase(aData)
 	{
 		RequireComponent<Components::Auras>();
+		RequireComponent<Components::CombatPrivate>();
 		RequireComponent<Components::CombatPublic>();
 		RequireComponent<Components::Position>();
 		RequireComponent<Components::VisibleAuras>();
@@ -172,6 +174,16 @@ namespace tpublic::Systems
 					auras->SetPendingPersistenceUpdate(tpublic::ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY);
 				}
 			}
+
+			{
+				Components::CombatPrivate* combatPrivate = GetComponent<Components::CombatPrivate>(aComponents);
+				float resourceCostMultiplier = auras->GetResourceCostMultiplier();
+				if (resourceCostMultiplier != combatPrivate->m_resourceCostMultiplier)
+				{
+					combatPrivate->m_resourceCostMultiplier = resourceCostMultiplier;
+					combatPrivate->SetDirty();
+				}
+			}
 		}
 
 		return EntityState::CONTINUE;
@@ -194,10 +206,26 @@ namespace tpublic::Systems
 			visibleAuras->m_seq = auras->m_seq;
 			visibleAuras->m_entries.clear();
 			visibleAuras->m_auraFlags = 0;
+			visibleAuras->m_colorEffect.reset();
+			
+			uint32_t colorEffectR = 0;
+			uint32_t colorEffectG = 0;
+			uint32_t colorEffectB = 0;
+			uint32_t colorEffectA = 0;
+			uint32_t colorEffectCount = 0;
 
 			for (const std::unique_ptr<Components::Auras::Entry>& entry : auras->m_entries)
 			{
 				const Data::Aura* aura = GetManifest()->GetById<Data::Aura>(entry->m_auraId);
+
+				if(aura->m_colorEffect.has_value())
+				{
+					colorEffectR += (uint32_t)aura->m_colorEffect->m_r;
+					colorEffectG += (uint32_t)aura->m_colorEffect->m_g;
+					colorEffectB += (uint32_t)aura->m_colorEffect->m_b;
+					colorEffectA += (uint32_t)aura->m_colorEffect->m_a;
+					colorEffectCount++;
+				}
 
 				if(aura->m_type != Data::Aura::TYPE_HIDDEN)
 				{
@@ -217,6 +245,16 @@ namespace tpublic::Systems
 
 				if(entry->HasEffect(AuraEffect::ID_STEALTH))
 					visibleAuras->m_auraFlags |= Components::VisibleAuras::AURA_FLAG_STEALTHED;
+			}
+
+			if(colorEffectCount > 0)
+			{
+				visibleAuras->m_colorEffect = Image::RGBA(
+					(uint8_t)(colorEffectR / colorEffectCount),
+					(uint8_t)(colorEffectG / colorEffectCount),
+					(uint8_t)(colorEffectB / colorEffectCount),
+					(uint8_t)(colorEffectA / colorEffectCount)
+				);
 			}
 
 			visibleAuras->SetDirty();

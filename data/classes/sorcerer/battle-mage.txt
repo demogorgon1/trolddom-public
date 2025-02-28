@@ -123,7 +123,7 @@ aura overpower:
 ability overpower:
 {
 	string: "Overpower"
-	description: "Increases your strength by 100% for 20 seconds."
+	description: "Increases your Strength by 100% for 20 seconds."
 	range: 1	
 	cooldowns: [ global overpower ]
 	flags: [ target_self ]

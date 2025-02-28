@@ -172,6 +172,7 @@ namespace tpublic
 								const EntityInstance*						aSource,
 								const EntityInstance*						aTarget,
 								int32_t										aThreat) const;
+			float			GetResourceCostMultiplier() const;
 			void			OnCombatEvent(
 								const Manifest*								aManifest,
 								const EntityInstance*						aSource,

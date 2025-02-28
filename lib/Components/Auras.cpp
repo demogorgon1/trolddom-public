@@ -219,6 +219,20 @@ namespace tpublic::Components
 		return threat;
 	}
 
+	float			
+	Auras::GetResourceCostMultiplier() const
+	{
+		float t = 1.0f;
+
+		for (const std::unique_ptr<Entry>& entry : m_entries)
+		{
+			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
+				t *= effect->GetResourceCostMultiplier();
+		}
+
+		return t;
+	}
+
 	void		
 	Auras::OnCombatEvent(
 		const Manifest*								aManifest,

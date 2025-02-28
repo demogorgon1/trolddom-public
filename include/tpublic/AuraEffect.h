@@ -28,6 +28,7 @@ namespace tpublic
 			ID_DAMAGE_INPUT_EFFECT,
 			ID_BLIND,	
 			ID_STEALTH,
+			ID_RESOURCE_COST_MODIFIER,
 
 			NUM_IDS
 		};
@@ -53,7 +54,8 @@ namespace tpublic
 			"ability_on_fade",
 			"damage_input_effect",
 			"blind",
-			"stealth"
+			"stealth",
+			"resource_cost_modifier"
 		};
 
 		static_assert(sizeof(EFFECT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);
