@@ -393,3 +393,197 @@ item consumable_ironbrew_stout:
 	stack: 10
 	use_ability: consumable_ironbrew_stout
 }
+
+#####################################################
+# Strong Healing Potion
+
+ability consumable_strong_healing_potion:	
+{
+	string: "Strong Healing Potion"
+	description: "Restores $heal$ health."
+	flags: [ target_self item ]
+	icon: icon_red_potion_2
+	direct_effect heal: { function: 200 }
+	consume_items: { consumable_strong_healing_potion: 1 }
+	cooldowns: [ global potions ]	
+	states: [ default in_combat ]
+	sound_effects: !SOUND_DRINK_POTION{}
+	delay: 2
+	target_particle_system: small_heal
+	required_level: 10
+}
+
+item consumable_strong_healing_potion:
+{
+	loot_groups: [ world_drops_consumable ]
+	icon: icon_red_potion_2
+	string: "Strong Healing Potion"
+	stack: 10	
+	use_ability: consumable_strong_healing_potion
+	level_range: [ 11 20 ]
+}
+
+#####################################################
+# Strong Mana Potion
+
+ability consumable_strong_mana_potion:	
+{
+	string: "Strong Mana Potion"
+	description: "Restores 200 mana."
+	flags: [ target_self item ]
+	icon: icon_blue_potion_2
+	direct_effect modify_resource: { resource: mana function: 200 }
+	consume_items: { consumable_strong_mana_potion: 1 }
+	cooldowns: [ global potions ]
+	states: [ default in_combat ]
+	sound_effects: !SOUND_DRINK_POTION{}
+	required_level: 10
+}
+
+item consumable_strong_mana_potion:
+{
+	loot_groups: [ world_drops_consumable ]
+	icon: icon_blue_potion_2
+	string: "Strong Mana Potion"
+	stack: 10
+	use_ability: consumable_strong_mana_potion
+	level_range: [ 11 20 ]
+}
+
+#####################################################
+# Strong Rejuvenation Potion
+
+ability consumable_strong_rejuvenation_potion:	
+{
+	string: "Strong Rejuvenation Potion"
+	description: "Restores 160 health and mana."
+	flags: [ target_self item ]
+	icon: icon_purple_potion
+	direct_effect heal: { function: 160 }
+	direct_effect modify_resource: { resource: mana function: 160 }	
+	consume_items: { consumable_strong_rejuvenation_potion: 1 }
+	cooldowns: [ global potions ]	
+	states: [ default in_combat ]
+	sound_effects: !SOUND_DRINK_POTION{}
+	delay: 2
+	target_particle_system: small_heal
+	required_level: 12
+}
+
+item consumable_strong_rejuvenation_potion:
+{
+	loot_groups: [ world_drops_consumable ]
+	icon: icon_purple_potion_2
+	string: "Strong Rejuvenation Potion"
+	stack: 10	
+	use_ability: consumable_strong_rejuvenation_potion
+	level_range: [ 13 20 ]
+}
+
+#####################################################
+# Strong Elixir of the Giant
+
+aura consumable_strong_elixir_of_the_giant:
+{
+	string: "Strong Elixir of the Giant"
+	aura_group: elixir
+	type: buff
+	icon: icon_green_potion_2
+	duration: 12000
+	flags: [ unique ]
+	stat_modifiers: { constitution: { add: 10 } }
+}
+
+ability consumable_strong_elixir_of_the_giant:	
+{
+	string: "Strong Elixir of the Giant"
+	description: "Increases your Constitution by 10 for 20 minutes. You can only have the effect of one elixir at a time."
+	flags: [ target_self item ]
+	icon: icon_green_potion_2
+	direct_effect apply_aura: { aura: consumable_strong_elixir_of_the_giant }
+	consume_items: { consumable_strong_elixir_of_the_giant: 1 }
+	cooldowns: [ global ]
+	states: [ default in_combat ]
+	sound_effects: !SOUND_DRINK_POTION{}
+	required_level: 12
+}
+
+item consumable_strong_elixir_of_the_giant:
+{
+	icon: icon_green_potion_2
+	string: "Strong Elixir of the Giant"
+	stack: 10
+	use_ability: consumable_strong_elixir_of_the_giant
+}
+
+#####################################################
+# Strong Elixir of the Owl
+
+aura consumable_strong_elixir_of_the_owl:
+{
+	aura_group: elixir
+	string: "Strong Elixir of the Owl"
+	type: buff
+	icon: icon_cyan_potion_2
+	duration: 12000
+	flags: [ unique ]
+	stat_modifiers: { wisdom: { add: 10 } }
+}
+
+ability consumable_strong_elixir_of_the_owl:	
+{
+	string: "Strong Elixir of the Owl"
+	description: "Increases your Wisdom by 10 for 20 minutes. You can only have the effect of one elixir at a time."
+	flags: [ target_self item ]
+	icon: icon_cyan_potion_2
+	direct_effect apply_aura: { aura: consumable_strong_elixir_of_the_owl }
+	consume_items: { consumable_strong_elixir_of_the_owl: 1 }
+	cooldowns: [ global ]
+	states: [ default in_combat ]
+	sound_effects: !SOUND_DRINK_POTION{}
+	required_level: 12
+}
+
+item consumable_strong_elixir_of_the_owl:
+{
+	icon: icon_cyan_potion_2
+	string: "Strong Elixir of the Owl"
+	stack: 10
+	use_ability: consumable_strong_elixir_of_the_owl
+}
+
+#####################################################
+# Strong Elixir of the Bear
+
+aura consumable_strong_elixir_of_the_bear:
+{
+	aura_group: elixir
+	string: "Strong Elixir of the Bear"
+	type: buff
+	icon: icon_brown_potion_2
+	duration: 12000
+	flags: [ unique ]
+	stat_modifiers: { strength: { add: 10 } }
+}
+
+ability consumable_strong_elixir_of_the_bear:	
+{
+	string: "Strong Elixir of the Bear"
+	description: "Increases your Strength by 10 for 20 minutes. You can only have the effect of one elixir at a time."
+	flags: [ target_self item ]
+	icon: icon_brown_potion_2
+	direct_effect apply_aura: { aura: consumable_strong_elixir_of_the_bear }
+	consume_items: { consumable_strong_elixir_of_the_bear: 1 }
+	cooldowns: [ global ]
+	states: [ default in_combat ]
+	sound_effects: !SOUND_DRINK_POTION{}
+	required_level: 12
+}
+
+item consumable_strong_elixir_of_the_bear:
+{
+	icon: icon_brown_potion_2
+	string: "Strong Elixir of the Bear"
+	stack: 10
+	use_ability: consumable_strong_elixir_of_the_bear
+}

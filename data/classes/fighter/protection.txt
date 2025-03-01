@@ -55,6 +55,7 @@ cooldown shield_crush:
 aura shield_crush:
 {
 	string: "Shield Crush"
+	description: "Taking increased physical damage."
 	icon: icon_shield_bash
 	type: debuff
 	duration: 100

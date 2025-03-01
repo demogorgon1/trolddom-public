@@ -347,6 +347,7 @@ aura fighter_combat_ferocity_1:
 	description: "Your critical strikes increase your critical strike chance by 5% for 10 seconds. Also affects nearby party members."
 	aura_effect combat_event_trigger: 
 	{ 
+		combat_event_ability_mask: [ offensive melee ]
 		combat_event<source>: critical
 		ability<self>: fighter_combat_ferocity_trigger_1
 	}
@@ -384,6 +385,7 @@ aura fighter_combat_ferocity_2:
 	description: "Your critical strikes increase your critical strike chance by 10% for 10 seconds. Also affects nearby party members."
 	aura_effect combat_event_trigger: 
 	{ 
+		combat_event_ability_mask: [ offensive melee ]
 		combat_event<source>: critical
 		ability<self>: fighter_combat_ferocity_trigger_2
 	}

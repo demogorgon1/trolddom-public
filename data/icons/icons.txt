@@ -676,7 +676,15 @@ sprites:
 	sprite icon_combustion : { tags: [ icon ] }
 	sprite icon_empowerment : { tags: [ icon ] }
 	sprite icon_scales_2 : { tags: [ icon ] }
+	sprite icon_blue_potion_2 : { tags: [ icon ] }
+	sprite icon_red_potion_2 : { tags: [ icon ] }
 
+	cursor: { position: [ 0 592 ] }		
+	sprite icon_green_potion_2 : { tags: [ icon ] }
+	sprite icon_brown_potion_2 : { tags: [ icon ] }
+	sprite icon_purple_potion_2 : { tags: [ icon ] }
+	sprite icon_cyan_potion_2 : { tags: [ icon ] }
+	
 }
 
 

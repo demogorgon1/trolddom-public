@@ -4,8 +4,14 @@
 	train_profession<1>: enchanting
 	train_ability: disenchant
 	train_ability: craft_enchant_shield_minor_constitution
+	train_ability: craft_enchant_boots_spirit
 	train_ability: craft_enchant_shield_wisdom
 	train_ability: craft_enchant_shield_major_constitution
+	train_ability: craft_enchant_bracers_strength
+	train_ability: craft_enchant_bracers_spirit
+	train_ability: craft_enchant_gloves_dexterity
+	train_ability: craft_enchant_gloves_wisdom
+	train_ability: craft_enchant_boots_constitution
 }
 
 !define DEFAULT_BLACKSMITING_TRAINER
@@ -84,4 +90,7 @@
 	train_ability: craft_elixir_of_the_bear
 	train_ability: craft_elixir_of_the_owl
 	train_ability: craft_elixir_of_the_giant
+	train_ability: craft_strong_elixir_of_the_bear
+	train_ability: craft_strong_elixir_of_the_owl
+	train_ability: craft_strong_elixir_of_the_giant
 }
