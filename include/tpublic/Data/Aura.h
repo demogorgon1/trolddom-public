@@ -216,6 +216,8 @@ namespace tpublic
 							m_cancelRequirements.push_back(Requirement(aChild));
 						else if(aChild->m_name == "color_effect")
 							m_colorEffect = Image::RGBA(aChild);
+						else if (aChild->m_name == "color_weapon_glow")
+							m_colorWeaponGlow = Image::RGBA(aChild);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 					}
@@ -241,6 +243,7 @@ namespace tpublic
 				aStream->WriteUInt(m_auraGroupId);
 				aStream->WriteObjects(m_cancelRequirements);
 				aStream->WriteOptionalPOD(m_colorEffect);
+				aStream->WriteOptionalPOD(m_colorWeaponGlow);
 			}
 			 
 			bool
@@ -301,6 +304,13 @@ namespace tpublic
 					if(!aStream->ReadOptionalPOD(m_colorEffect))
 						return false;
 				}
+
+				if (!aStream->IsEnd())
+				{
+					if (!aStream->ReadOptionalPOD(m_colorWeaponGlow))
+						return false;
+				}
+
 				return true;
 			}
 
@@ -320,6 +330,7 @@ namespace tpublic
 			uint32_t										m_auraGroupId = 0;
 			std::vector<Requirement>						m_cancelRequirements;			
 			std::optional<Image::RGBA>						m_colorEffect;
+			std::optional<Image::RGBA>						m_colorWeaponGlow;
 		};
 
 	}

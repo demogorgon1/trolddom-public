@@ -707,6 +707,7 @@ aura enchant_weapon_fire:
 	icon: icon_enchanted_paper	
 
 	string: "Flaming Weapon"
+	color_weapon_glow: [ 255 128 0 255 ]
 	
 	aura_effect combat_event_trigger: 
 	{ 

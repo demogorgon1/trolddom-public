@@ -66,7 +66,8 @@ namespace tpublic
 			{
 				FIELD_ENTRIES,
 				FIELD_AURA_FLAGS,
-				FIELD_COLOR_EFFECT
+				FIELD_COLOR_EFFECT,
+				FIELD_COLOR_WEAPON_GLOW
 			};
 			
 			static void
@@ -76,6 +77,7 @@ namespace tpublic
 				aSchema->DefineCustomObjectsNoSource<Entry>(FIELD_ENTRIES, offsetof(VisibleAuras, m_entries));
 				aSchema->DefineCustomPODNoSource<uint8_t>(FIELD_AURA_FLAGS, offsetof(VisibleAuras, m_auraFlags));
 				aSchema->DefineCustomOptionalPODNoSource<Image::RGBA>(FIELD_COLOR_EFFECT, offsetof(VisibleAuras, m_colorEffect));
+				aSchema->DefineCustomOptionalPODNoSource<Image::RGBA>(FIELD_COLOR_WEAPON_GLOW, offsetof(VisibleAuras, m_colorWeaponGlow));
 			}
 
 			bool 
@@ -96,6 +98,7 @@ namespace tpublic
 				m_entries.clear();
 				m_auraFlags = 0;
 				m_colorEffect.reset();
+				m_colorWeaponGlow.reset();
 
 				m_seq = 0;
 			}
@@ -109,6 +112,7 @@ namespace tpublic
 			std::vector<Entry>			m_entries;			
 			uint8_t						m_auraFlags = 0;
 			std::optional<Image::RGBA>	m_colorEffect;
+			std::optional<Image::RGBA>	m_colorWeaponGlow;
 
 			// Internal
 			uint32_t			m_seq = 0;

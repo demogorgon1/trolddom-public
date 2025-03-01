@@ -214,6 +214,12 @@ namespace tpublic::Systems
 			uint32_t colorEffectA = 0;
 			uint32_t colorEffectCount = 0;
 
+			uint32_t colorWeaponGlowR = 0;
+			uint32_t colorWeaponGlowG = 0;
+			uint32_t colorWeaponGlowB = 0;
+			uint32_t colorWeaponGlowA = 0;
+			uint32_t colorWeaponGlowCount = 0;
+
 			for (const std::unique_ptr<Components::Auras::Entry>& entry : auras->m_entries)
 			{
 				const Data::Aura* aura = GetManifest()->GetById<Data::Aura>(entry->m_auraId);
@@ -225,6 +231,15 @@ namespace tpublic::Systems
 					colorEffectB += (uint32_t)aura->m_colorEffect->m_b;
 					colorEffectA += (uint32_t)aura->m_colorEffect->m_a;
 					colorEffectCount++;
+				}
+
+				if (aura->m_colorWeaponGlow.has_value())
+				{
+					colorWeaponGlowR += (uint32_t)aura->m_colorWeaponGlow->m_r;
+					colorWeaponGlowG += (uint32_t)aura->m_colorWeaponGlow->m_g;
+					colorWeaponGlowB += (uint32_t)aura->m_colorWeaponGlow->m_b;
+					colorWeaponGlowA += (uint32_t)aura->m_colorWeaponGlow->m_a;
+					colorWeaponGlowCount++;
 				}
 
 				if(aura->m_type != Data::Aura::TYPE_HIDDEN)
@@ -254,6 +269,16 @@ namespace tpublic::Systems
 					(uint8_t)(colorEffectG / colorEffectCount),
 					(uint8_t)(colorEffectB / colorEffectCount),
 					(uint8_t)(colorEffectA / colorEffectCount)
+				);
+			}
+
+			if(colorWeaponGlowCount > 0)
+			{
+				visibleAuras->m_colorWeaponGlow = Image::RGBA(
+					(uint8_t)(colorWeaponGlowR / colorWeaponGlowCount),
+					(uint8_t)(colorWeaponGlowG / colorWeaponGlowCount),
+					(uint8_t)(colorWeaponGlowB / colorWeaponGlowCount),
+					(uint8_t)(colorWeaponGlowA / colorWeaponGlowCount)
 				);
 			}
 
