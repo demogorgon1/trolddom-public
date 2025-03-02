@@ -31,7 +31,7 @@ namespace tpublic
 				FIELD_CLASS_ID,
 				FIELD_CHARACTER_ID,
 				FIELD_STATS,
-				FIELD_STATUS
+				FIELD_STATUS,
 			};
 
 			static void

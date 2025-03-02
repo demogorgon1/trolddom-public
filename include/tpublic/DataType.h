@@ -65,6 +65,7 @@ namespace tpublic
 			ID_MINION_MODE,
 			ID_AURA_GROUP,
 			ID_ABILITY_LIST,
+			ID_MOUNT,
 
 			NUM_IDS
 		};
@@ -127,7 +128,8 @@ namespace tpublic
 			"context_help",
 			"minion_mode",
 			"aura_group",
-			"ability_list"
+			"ability_list",
+			"mount"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

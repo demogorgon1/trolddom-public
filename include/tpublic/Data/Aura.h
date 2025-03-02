@@ -212,6 +212,8 @@ namespace tpublic
 							m_soundId = aChild->GetId(DataType::ID_SOUND);
 						else if (aChild->m_name == "aura_group")
 							m_auraGroupId = aChild->GetId(DataType::ID_AURA_GROUP);
+						else if (aChild->m_name == "mount")
+							m_mountId = aChild->GetId(DataType::ID_MOUNT);
 						else if(aChild->m_tag == "cancel_requirement")
 							m_cancelRequirements.push_back(Requirement(aChild));
 						else if(aChild->m_name == "color_effect")
@@ -244,6 +246,7 @@ namespace tpublic
 				aStream->WriteObjects(m_cancelRequirements);
 				aStream->WriteOptionalPOD(m_colorEffect);
 				aStream->WriteOptionalPOD(m_colorWeaponGlow);
+				aStream->WriteUInt(m_mountId);
 			}
 			 
 			bool
@@ -311,6 +314,12 @@ namespace tpublic
 						return false;
 				}
 
+				if (!aStream->IsEnd())
+				{
+					if (!aStream->ReadUInt(m_mountId))
+						return false;
+				}
+
 				return true;
 			}
 
@@ -328,6 +337,7 @@ namespace tpublic
 			uint32_t										m_particleSystemId = 0;
 			uint32_t										m_soundId = 0;
 			uint32_t										m_auraGroupId = 0;
+			uint32_t										m_mountId = 0;
 			std::vector<Requirement>						m_cancelRequirements;			
 			std::optional<Image::RGBA>						m_colorEffect;
 			std::optional<Image::RGBA>						m_colorWeaponGlow;

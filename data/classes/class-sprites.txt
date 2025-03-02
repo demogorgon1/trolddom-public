@@ -23,6 +23,15 @@ sprites:
 	sprite fighter_axe_2h: { flags: [ autoglow ] }
 	sprite fighter_mace_2h: { flags: [ autoglow ] }
 	sprite fighter_shield: { flags: [ autoglow ] }
+	sprite fighter_naked_mounted: { }
+	sprite fighter_mounted: { }	
+	sprite fighter_2_mounted: { }
+	sprite fighter_3_mounted: { }
+	sprite fighter_4_mounted: { }
+	sprite fighter_5_mounted: { }
+	sprite fighter_6_mounted: { }
+	sprite fighter_7_mounted: { }
+	sprite fighter_8_mounted: { }
 	
 	cursor: { position: [ 0 16 ] }
 	sprite fighter_naked_dead: { }
@@ -90,6 +99,19 @@ sprites:
 	skip: { }
 	sprite priest_mace_1h: { flags: [ autoglow ] }
 	sprite priest_knife_1h: { flags: [ autoglow ] }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	sprite priest_naked_mounted: { }
+	sprite priest_mounted: { }
+	sprite priest_2_mounted: { }
+	sprite priest_3_mounted: { }
+	sprite priest_4_mounted: { }
+	sprite priest_5_mounted: { }
+	sprite priest_6_mounted: { }
+	sprite priest_7_mounted: { }
+	sprite priest_8_mounted: { }
 	
 	cursor: { position: [ 0 80 ] }
 	sprite priest_naked_dead: { }
@@ -149,6 +171,19 @@ sprites:
 	skip: { }
 	skip: { }
 	sprite sorcerer_knife_1h: { flags: [ autoglow ] }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	sprite sorcerer_naked_mounted: { }
+	sprite sorcerer_mounted: { }
+	sprite sorcerer_2_mounted: { }
+	sprite sorcerer_3_mounted: { }
+	sprite sorcerer_4_mounted: { }
+	sprite sorcerer_5_mounted: { }
+	sprite sorcerer_6_mounted: { }
+	sprite sorcerer_7_mounted: { }
+	sprite sorcerer_8_mounted: { }
 	
 	cursor: { position: [ 0 144 ] }
 	sprite sorcerer_naked_dead: { }
@@ -214,6 +249,15 @@ sprites:
 	sprite paladin_axe_2h: { flags: [ autoglow ] }
 	sprite paladin_mace_2h: { flags: [ autoglow ] }
 	sprite paladin_shield: { flags: [ autoglow ] }
+	sprite paladin_naked_mounted: { }
+	sprite paladin_mounted: { }
+	sprite paladin_2_mounted: { }
+	sprite paladin_3_mounted: { }
+	sprite paladin_4_mounted: { }
+	sprite paladin_5_mounted: { }
+	sprite paladin_6_mounted: { }
+	sprite paladin_7_mounted: { }
+	sprite paladin_8_mounted: { }
 	
 	cursor: { position: [ 0 208 ] }
 	sprite paladin_naked_dead: { }
@@ -281,6 +325,19 @@ sprites:
 	skip: { }
 	skip: { }
 	sprite witch_knife_1h: { flags: [ autoglow ] }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	sprite witch_naked_mounted: { }
+	sprite witch_mounted: { }
+	sprite witch_2_mounted: { }
+	sprite witch_3_mounted: { }
+	sprite witch_4_mounted: { }
+	sprite witch_5_mounted: { }
+	sprite witch_6_mounted: { }
+	sprite witch_7_mounted: { }
+	sprite witch_8_mounted: { }	
 	
 	cursor: { position: [ 0 272 ] }
 	sprite witch_naked_dead: { }

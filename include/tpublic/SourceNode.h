@@ -6,6 +6,7 @@
 #include "PersistentIdTable.h"
 #include "SourceContext.h"
 #include "Tokenizer.h"
+#include "Vec2.h"
 
 namespace tpublic
 {
@@ -207,6 +208,13 @@ namespace tpublic
 			uint32_t v = GetUInt32();
 			TP_VERIFY(v <= UINT8_MAX, m_debugInfo, "Number out of bounds.");
 			return (uint8_t)v;
+		}
+
+		Vec2
+		GetVec2() const
+		{
+			TP_VERIFY(m_type == TYPE_ARRAY && m_children.size() == 2, m_debugInfo, "Not an two-component vector.");
+			return Vec2(m_children[0]->GetInt32(), m_children[1]->GetInt32());
 		}
 
 		float

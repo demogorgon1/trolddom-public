@@ -1,0 +1,65 @@
+!define local MOUNT
+{
+	sprite: @_sprite
+	walk_sprites: @_walk_sprites
+}
+
+!define local MOUNT_AURA
+{
+	string: @_string
+	description: "Mounted."
+	type: buff
+	icon: @_icon
+	flags: [ unique indefinite ]		
+	aura_effect move_speed_modifier: { move_speed: fast }
+	mount: @_id
+}
+
+!define local MOUNT_ABILITY
+{
+	string: @_string
+	description: @_description
+	range: 0
+	cooldowns: [ global ]
+	cast_time: 20
+	flags: [ target_self ]
+	states: [ default ]
+	icon: @_icon
+	delay: 2
+	toggle_aura: @_id
+	required_level: @_level
+	direct_effect apply_aura: {	aura: @_id }	
+}
+
+!define local MOUNT_ITEM
+{
+	type: miscellaneous
+	item_level: @_level
+	required_level: @_level
+	rarity: rare
+	icon: @_icon
+	flags: [ unique ]
+	binds: when_picked_up
+	string: @_string
+	use_ability: @_id
+	cost: @_cost	
+}
+
+###############################################################################
+# Brown Horse
+
+${
+	_string: "Brown Horse"
+	_description: "Summons or dismisses a rideable horse."
+	_icon: icon_brown_horse
+	_id: brown_horse
+	_sprite: brown_horse_0
+	_walk_sprites: [ brown_horse_1 brown_horse_0 brown_horse_2 brown_horse_0 ]
+	_cost: 700000
+	_level: 20	
+}
+
+mount brown_horse: !MOUNT{}
+aura brown_horse: !MOUNT_AURA{}
+ability brown_horse: !MOUNT_ABILITY{}
+item mount_brown_horse: !MOUNT_ITEM{}

@@ -142,8 +142,12 @@ namespace tpublic
 							m_spriteId = aChild->GetId(DataType::ID_SPRITE);
 						else if (aChild->m_name == "sprite_dead")
 							m_deadSpriteId = aChild->GetId(DataType::ID_SPRITE);
+						else if (aChild->m_name == "sprite_mounted")
+							m_mountedSpriteId = aChild->GetId(DataType::ID_SPRITE);
 						else if (aChild->m_name == "sprites_walk")
 							aChild->GetIdArray(DataType::ID_SPRITE, m_walkSpriteIds);
+						else if(aChild->m_name == "mounted_offset")
+							m_mountedOffset = aChild->GetVec2();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' not a valid item.", aChild->m_name.c_str());
 					});
@@ -155,7 +159,9 @@ namespace tpublic
 				{
 					aStream->WriteUInt(m_spriteId);
 					aStream->WriteUInt(m_deadSpriteId);
+					aStream->WriteUInt(m_mountedSpriteId);
 					aStream->WriteUInts(m_walkSpriteIds);
+					m_mountedOffset.ToStream(aStream);
 				}
 			
 				bool	
@@ -166,7 +172,11 @@ namespace tpublic
 						return false;
 					if (!aStream->ReadUInt(m_deadSpriteId))
 						return false;
+					if (!aStream->ReadUInt(m_mountedSpriteId))
+						return false;
 					if (!aStream->ReadUInts(m_walkSpriteIds))
+						return false;
+					if(!m_mountedOffset.FromStream(aStream))
 						return false;
 					return true;
 				}
@@ -175,7 +185,9 @@ namespace tpublic
 				// Public data
 				uint32_t				m_spriteId = 0;
 				uint32_t				m_deadSpriteId = 0;
+				uint32_t				m_mountedSpriteId = 0;
 				std::vector<uint32_t>	m_walkSpriteIds;
+				Vec2					m_mountedOffset;
 			};
 
 			struct StartEquipment

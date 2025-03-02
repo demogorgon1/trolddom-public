@@ -1,0 +1,12 @@
+sprites: 
+{
+	source: "mounts.png"
+	
+	size: { width: 16 height: 16 }
+	
+	cursor: { position: [ 0 0 ] }
+	sprite brown_horse_0: { }
+	sprite brown_horse_1: { }
+	sprite brown_horse_2: { }
+
+}

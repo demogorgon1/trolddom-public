@@ -30,24 +30,24 @@ class paladin:
 	
 	systems: [ combat health_regen mana_regen ]
 	
-	armor_style none:   { sprite: paladin_naked sprite_dead: paladin_naked_dead sprites_walk: [ paladin_naked_walk_1 paladin_naked_walk_2 ] }	
-	armor_style brown:  { sprite: paladin       sprite_dead: paladin_dead       sprites_walk: [ paladin_walk_1       paladin_walk_2 ] }
-	armor_style green:  { sprite: paladin_2     sprite_dead: paladin_2_dead     sprites_walk: [ paladin_2_walk_1     paladin_2_walk_2 ] }
-	armor_style cyan:   { sprite: paladin_3     sprite_dead: paladin_3_dead     sprites_walk: [ paladin_3_walk_1     paladin_3_walk_2 ] }
-	armor_style red:    { sprite: paladin_4     sprite_dead: paladin_4_dead     sprites_walk: [ paladin_4_walk_1     paladin_4_walk_2 ] }
-	armor_style purple: { sprite: paladin_5     sprite_dead: paladin_5_dead     sprites_walk: [ paladin_5_walk_1     paladin_5_walk_2 ] }
-	armor_style black:  { sprite: paladin_6     sprite_dead: paladin_6_dead     sprites_walk: [ paladin_6_walk_1     paladin_6_walk_2 ] }
-	armor_style white:  { sprite: paladin_7     sprite_dead: paladin_7_dead     sprites_walk: [ paladin_7_walk_1     paladin_7_walk_2 ] }
-	armor_style yellow: { sprite: paladin_8     sprite_dead: paladin_8_dead     sprites_walk: [ paladin_8_walk_1     paladin_8_walk_2 ] }
+	armor_style none:   { sprite: paladin_naked sprite_dead: paladin_naked_dead sprite_mounted: paladin_naked_mounted sprites_walk: [ paladin_naked_walk_1 paladin_naked_walk_2 ] }	
+	armor_style brown:  { sprite: paladin       sprite_dead: paladin_dead       sprite_mounted: paladin_mounted       sprites_walk: [ paladin_walk_1       paladin_walk_2 ] }
+	armor_style green:  { sprite: paladin_2     sprite_dead: paladin_2_dead     sprite_mounted: paladin_2_mounted     sprites_walk: [ paladin_2_walk_1     paladin_2_walk_2 ] }
+	armor_style cyan:   { sprite: paladin_3     sprite_dead: paladin_3_dead     sprite_mounted: paladin_3_mounted     sprites_walk: [ paladin_3_walk_1     paladin_3_walk_2 ] }
+	armor_style red:    { sprite: paladin_4     sprite_dead: paladin_4_dead     sprite_mounted: paladin_4_mounted     sprites_walk: [ paladin_4_walk_1     paladin_4_walk_2 ] }
+	armor_style purple: { sprite: paladin_5     sprite_dead: paladin_5_dead     sprite_mounted: paladin_5_mounted     sprites_walk: [ paladin_5_walk_1     paladin_5_walk_2 ] }
+	armor_style black:  { sprite: paladin_6     sprite_dead: paladin_6_dead     sprite_mounted: paladin_6_mounted     sprites_walk: [ paladin_6_walk_1     paladin_6_walk_2 ] }
+	armor_style white:  { sprite: paladin_7     sprite_dead: paladin_7_dead     sprite_mounted: paladin_7_mounted     sprites_walk: [ paladin_7_walk_1     paladin_7_walk_2 ] }
+	armor_style yellow: { sprite: paladin_8     sprite_dead: paladin_8_dead     sprite_mounted: paladin_8_mounted     sprites_walk: [ paladin_8_walk_1     paladin_8_walk_2 ] }
 		
-	weapon_sprites weapon_1h_sword: { sprite: paladin_sword_1h sprites_walk: [ paladin_walk_1_sword_1h paladin_walk_2_sword_1h ] }
-	weapon_sprites weapon_1h_mace:  { sprite: paladin_mace_1h  sprites_walk: [ paladin_walk_1_mace_1h  paladin_walk_2_mace_1h ] }
-	weapon_sprites weapon_1h_axe:   { sprite: paladin_axe_1h   sprites_walk: [ paladin_walk_1_axe_1h   paladin_walk_2_axe_1h ] }
-	weapon_sprites weapon_2h_sword: { sprite: paladin_sword_2h sprites_walk: [ paladin_walk_1_sword_2h paladin_walk_2_sword_2h ] }
-	weapon_sprites weapon_2h_mace:  { sprite: paladin_mace_2h  sprites_walk: [ paladin_walk_1_mace_2h  paladin_walk_2_mace_2h ] }
-	weapon_sprites weapon_2h_axe:   { sprite: paladin_axe_2h   sprites_walk: [ paladin_walk_1_axe_2h   paladin_walk_2_axe_2h ] }
-	weapon_sprites weapon_2h_staff: { sprite: paladin_staff    sprites_walk: [ paladin_walk_1_staff    paladin_walk_2_staff ] }
-	weapon_sprites shield: 			{ sprite: paladin_shield   sprites_walk: [ paladin_walk_1_shield   paladin_walk_2_shield ] }
+	weapon_sprites weapon_1h_sword: { sprite: paladin_sword_1h mounted_offset: [ -1 -2 ] sprites_walk: [ paladin_walk_1_sword_1h paladin_walk_2_sword_1h ] }
+	weapon_sprites weapon_1h_mace:  { sprite: paladin_mace_1h  mounted_offset: [ -1 -2 ] sprites_walk: [ paladin_walk_1_mace_1h  paladin_walk_2_mace_1h ] }
+	weapon_sprites weapon_1h_axe:   { sprite: paladin_axe_1h   mounted_offset: [ -1 -2 ] sprites_walk: [ paladin_walk_1_axe_1h   paladin_walk_2_axe_1h ] }
+	weapon_sprites weapon_2h_sword: { sprite: paladin_sword_2h mounted_offset: [ -1 -2 ] sprites_walk: [ paladin_walk_1_sword_2h paladin_walk_2_sword_2h ] }
+	weapon_sprites weapon_2h_mace:  { sprite: paladin_mace_2h  mounted_offset: [ -1 -2 ] sprites_walk: [ paladin_walk_1_mace_2h  paladin_walk_2_mace_2h ] }
+	weapon_sprites weapon_2h_axe:   { sprite: paladin_axe_2h   mounted_offset: [ -1 -2 ] sprites_walk: [ paladin_walk_1_axe_2h   paladin_walk_2_axe_2h ] }
+	weapon_sprites weapon_2h_staff: { sprite: paladin_staff    mounted_offset: [ -1 -2 ] sprites_walk: [ paladin_walk_1_staff    paladin_walk_2_staff ] }
+	weapon_sprites shield: 			{ sprite: paladin_shield   mounted_offset: [ -1 -2 ] sprites_walk: [ paladin_walk_1_shield   paladin_walk_2_shield ] }
 			
 	armor_decoration: { sprite: paladin_decoration sprite_dead: paladin_decoration_dead sprites_walk: [ paladin_decoration_walk_1 paladin_decoration_walk_2 ] }
 		

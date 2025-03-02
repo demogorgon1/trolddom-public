@@ -35,6 +35,7 @@
 #include <tpublic/Data/MapSegmentConnector.h>
 #include <tpublic/Data/MapTrigger.h>
 #include <tpublic/Data/MinionMode.h>
+#include <tpublic/Data/Mount.h>
 #include <tpublic/Data/NameTemplate.h>
 #include <tpublic/Data/Noise.h>
 #include <tpublic/Data/NPCBehaviorState.h>
@@ -99,6 +100,7 @@ namespace tpublic
 		RegisterDataContainer<Data::MapSegmentConnector>();
 		RegisterDataContainer<Data::MapTrigger>();		
 		RegisterDataContainer<Data::MinionMode>();
+		RegisterDataContainer<Data::Mount>();
 		RegisterDataContainer<Data::NameTemplate>();
 		RegisterDataContainer<Data::Noise>();
 		RegisterDataContainer<Data::NPCBehaviorState>();

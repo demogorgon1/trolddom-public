@@ -207,6 +207,7 @@ namespace tpublic::Systems
 			visibleAuras->m_entries.clear();
 			visibleAuras->m_auraFlags = 0;
 			visibleAuras->m_colorEffect.reset();
+			visibleAuras->m_mountId = 0;
 			
 			uint32_t colorEffectR = 0;
 			uint32_t colorEffectG = 0;
@@ -252,6 +253,9 @@ namespace tpublic::Systems
 					visibleAuras->m_entries.push_back(t);
 				}
 
+				if(aura->m_mountId != 0)
+					visibleAuras->m_mountId = aura->m_mountId;
+
 				if(entry->HasEffect(AuraEffect::ID_STUN))
 					visibleAuras->m_auraFlags |= Components::VisibleAuras::AURA_FLAG_STUNNED;
 
@@ -260,7 +264,7 @@ namespace tpublic::Systems
 
 				if(entry->HasEffect(AuraEffect::ID_STEALTH))
 					visibleAuras->m_auraFlags |= Components::VisibleAuras::AURA_FLAG_STEALTHED;
-			}
+			}			
 
 			if(colorEffectCount > 0)
 			{
