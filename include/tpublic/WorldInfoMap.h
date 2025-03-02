@@ -8,13 +8,23 @@
 namespace tpublic
 {
 
+	class Manifest;
+
 	class WorldInfoMap
 	{
 	public:		
 		enum Flag : uint8_t 
 		{
-			FLAG_DEMO = 0x01
+			FLAG_DEMO	= 0x01,
+			FLAG_INDOOR = 0x02
 		};
+
+		static void AutoIndoor(
+						const Manifest*				aManifest,
+						int32_t						aMapWidth,
+						int32_t						aMapHeight,
+						const uint32_t*				aCoverMap,
+						uint8_t*					aFlags);
 
 		static uint8_t
 		SourceToFlags(
@@ -26,6 +36,8 @@ namespace tpublic
 			{
 				if(aChild->IsIdentifier("demo"))
 					flags |= FLAG_DEMO;
+				else if (aChild->IsIdentifier("indoor"))
+					flags |= FLAG_INDOOR;
 				else
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid flag.", aChild->GetIdentifier());					
 			});

@@ -1,9 +1,39 @@
 #include "Pcheader.h"
 
+#include <tpublic/Data/Sprite.h>
+
+#include <tpublic/Manifest.h>
+#include <tpublic/SpriteInfo.h>
 #include <tpublic/WorldInfoMap.h>
 
 namespace tpublic
 {
+	
+	void 
+	WorldInfoMap::AutoIndoor(
+		const Manifest*		aManifest,
+		int32_t				aMapWidth,
+		int32_t				aMapHeight,
+		const uint32_t*		aCoverMap,
+		uint8_t*			aFlags)
+	{		
+		const uint32_t* coverMap = aCoverMap;
+		uint8_t* flags = aFlags;
+
+		for(int32_t i = 0, count = aMapWidth * aMapHeight; i < count; i++)
+		{
+			uint32_t tileSpriteId = *coverMap;
+			if(tileSpriteId != 0)
+			{
+				const Data::Sprite* tileSprite = aManifest->GetById<Data::Sprite>(tileSpriteId);
+				if(tileSprite->m_info.m_flags & SpriteInfo::FLAG_TILE_INDOOR)
+					*flags |= FLAG_INDOOR;
+			}
+
+			coverMap++;
+			flags++;
+		}
+	}
 
 	void			
 	WorldInfoMap::CopyFrom(

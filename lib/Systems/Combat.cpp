@@ -12,6 +12,7 @@
 #include <tpublic/Helpers.h>
 #include <tpublic/IEventQueue.h>
 #include <tpublic/IWorldView.h>
+#include <tpublic/MapData.h>
 #include <tpublic/Requirements.h>
 #include <tpublic/Resource.h>
 
@@ -100,6 +101,13 @@ namespace tpublic::Systems
 
 				if ((aura->m_flags & Data::Aura::FLAG_CANCEL_ON_DAMAGE) != 0 && combatPublic->m_damageAccum > 0)
 					entry->m_cancel = true;
+
+				if((aura->m_flags & Data::Aura::FLAG_CANCEL_INDOOR) != 0)
+				{
+					const Components::Position* position = GetComponent<Components::Position>(aComponents);
+					if(aContext->m_worldView->WorldViewGetMapData()->IsTileIndoor(position->m_position.m_x, position->m_position.m_y))
+						entry->m_cancel = true;
+				}
 
 				if (aura->m_flags & Data::Aura::FLAG_SINGLE_TARGET)
 				{

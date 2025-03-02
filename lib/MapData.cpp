@@ -379,6 +379,13 @@ namespace tpublic
 			{
 				DebugPrintTimer debugPrintTimer("build world info map");
 
+				if(m_mapInfo.m_autoIndoor && hasCoverMap)
+				{
+					WorldInfoMap::AutoIndoor(aManifest, m_width, m_height, &coverMap[0], &flagsMap[0]);
+
+					hasFlagsMap = true;
+				}
+
 				if (hasLevelMap || hasZoneMap || hasSubZoneMap || hasFlagsMap)
 				{
 					m_worldInfoMap = std::make_unique<WorldInfoMap>();
@@ -621,6 +628,17 @@ namespace tpublic
 		uint32_t j = i / 32;
 		uint32_t k = i % 32;
 		return (m_walkableBits[j] & (1 << k)) != 0;
+	}
+
+	bool		
+	MapData::IsTileIndoor(
+		int32_t					aX,
+		int32_t					aY) const
+	{
+		if(m_worldInfoMap)
+			return (m_worldInfoMap->Get({ aX, aY }).m_flags & WorldInfoMap::FLAG_INDOOR) != 0;
+
+		return m_mapInfo.m_defaultIndoor;
 	}
 
 	int32_t

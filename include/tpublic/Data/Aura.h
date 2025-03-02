@@ -96,6 +96,7 @@ namespace tpublic
 				FLAG_PRIVATE				= 0x00002000,
 				FLAG_ITEM					= 0x00004000,
 				FLAG_NO_SOURCE_NEEDED		= 0x00008000,
+				FLAG_CANCEL_INDOOR			= 0x00010000
 			};
 
 			static Type
@@ -130,6 +131,8 @@ namespace tpublic
 						flags |= FLAG_HIDE_DESCRIPTION;
 					else if (strcmp(string, "cancel_in_combat") == 0)
 						flags |= FLAG_CANCEL_IN_COMBAT;
+					else if (strcmp(string, "cancel_indoor") == 0)
+						flags |= FLAG_CANCEL_INDOOR;
 					else if (strcmp(string, "persist_in_death") == 0)
 						flags |= FLAG_PERSIST_IN_DEATH;
 					else if (strcmp(string, "silent") == 0)

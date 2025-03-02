@@ -92,6 +92,16 @@ namespace tpublic
 				m_autoDoodads = aItem->GetBool();
 				return true;
 			}
+			else if (aItem->m_name == "auto_indoor")
+			{
+				m_autoIndoor = aItem->GetBool();
+				return true;
+			}
+			else if (aItem->m_name == "default_indoor")
+			{
+				m_defaultIndoor = aItem->GetBool();
+				return true;
+			}
 			else if(aItem->m_name == "map_loot_tables")
 			{
 				aItem->GetIdArray(DataType::ID_LOOT_TABLE, m_mapLootTableIds);
@@ -118,6 +128,8 @@ namespace tpublic
 			aWriter->WriteUInts(m_mapLootTableIds);
 			aWriter->WriteUInt(m_maxPlayers);
 			aWriter->WriteUInt(m_maxMinions);
+			aWriter->WriteBool(m_autoIndoor);
+			aWriter->WriteBool(m_defaultIndoor);
 		}
 
 		bool
@@ -152,6 +164,10 @@ namespace tpublic
 				return false;
 			if (!aReader->ReadUInt(m_maxMinions))
 				return false;
+			if (!aReader->ReadBool(m_autoIndoor))
+				return false;
+			if (!aReader->ReadBool(m_defaultIndoor))
+				return false;
 			return true;
 		}
 
@@ -167,6 +183,8 @@ namespace tpublic
 		uint32_t									m_defaultFishingLootTableId = 0;
 		OverviewMapType								m_overviewMapType = OVERVIEW_MAP_TYPE_NONE;
 		bool										m_autoDoodads = false;
+		bool										m_autoIndoor = true;
+		bool										m_defaultIndoor = false;
 		std::vector<uint32_t>						m_mapLootTableIds;
 		uint32_t									m_maxPlayers = 5;
 		uint32_t									m_maxMinions = 0;

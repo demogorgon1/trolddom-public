@@ -20,10 +20,11 @@ namespace tpublic
 			FLAG_TILE_WATER					= 0x0010,
 			FLAG_TILE_NO_WAVES				= 0x0020,
 			FLAG_TILE_SNOW					= 0x0040,
-			FLAG_STANDALONE					= 0x0080,
-			FLAG_CENTERED					= 0x0100,
-			FLAG_DOUBLED					= 0x0200,
-			FLAG_AUTOGLOW					= 0x0400
+			FLAG_TILE_INDOOR				= 0x0080,
+			FLAG_STANDALONE					= 0x0100,
+			FLAG_CENTERED					= 0x0200,
+			FLAG_DOUBLED					= 0x0400,
+			FLAG_AUTOGLOW					= 0x0800
 		};
 
 		struct NamedAnchor
@@ -108,6 +109,8 @@ namespace tpublic
 				return FLAG_TILE_NO_WAVES;
 			if (strcmp(aString, "tile_snow") == 0)
 				return FLAG_TILE_SNOW;
+			if (strcmp(aString, "tile_indoor") == 0)
+				return FLAG_TILE_INDOOR;
 			if (strcmp(aString, "standalone") == 0)
 				return FLAG_STANDALONE;
 			if (strcmp(aString, "centered") == 0)

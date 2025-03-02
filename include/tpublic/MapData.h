@@ -478,6 +478,9 @@ namespace tpublic
 		bool		IsTileWalkable(
 						int32_t					aX,
 						int32_t					aY) const;
+		bool		IsTileIndoor(
+						int32_t					aX,
+						int32_t					aY) const;
 		int32_t		TraceWalkableTiles(
 						const Vec2&				aPosition,
 						const Vec2&				aDirection,
