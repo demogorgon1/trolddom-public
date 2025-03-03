@@ -1,3 +1,5 @@
+aura_group mounts: { }
+
 !define local MOUNT
 {
 	sprite: @_sprite
@@ -10,9 +12,10 @@
 	description: "Mounted."
 	type: buff
 	icon: @_icon
-	flags: [ unique indefinite ]		
-	aura_effect move_speed_modifier: { move_speed: fast }
+	flags: [ unique indefinite cancel_indoor ]		
+	aura_effect move_speed_modifier: { move_speed: very_fast }
 	mount: @_id
+	aura_group: mounts
 }
 
 !define local MOUNT_ABILITY
@@ -22,13 +25,14 @@
 	range: 0
 	cooldowns: [ global ]
 	cast_time: 20
-	flags: [ target_self ]
+	flags: [ target_self no_indoor can_use_mounted ]
 	states: [ default ]
 	icon: @_icon
 	delay: 2
 	toggle_aura: @_id
 	required_level: @_level
 	direct_effect apply_aura: {	aura: @_id }	
+	requirement self<must_know_riding>: {}
 }
 
 !define local MOUNT_ITEM
@@ -45,6 +49,44 @@
 	cost: @_cost	
 }
 
+!define local MOUNT_ENTITY
+{
+	string: @_string
+	systems: [ combat npc ]
+	modifiers: 
+	{ 
+		weapon_damage: 1				
+		resource<health>: 1
+	}	
+	components:
+	{
+		position: { }		
+		threat_target: { }
+		visible_auras: { }
+		auras: { }
+		tag: { }
+		lootable: { }
+		combat_public: 
+		{  
+			level: @_level
+			faction: npcs
+			creature_type: @_creature_type
+			modifier not_pushable: {}
+		}			
+		combat_private<static>:{ }
+		npc: { }		
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ states: [ default in_combat spawning evading ] frames: [ @_sprite ] }			
+				{ states: [ dead ] frames: [ @_sprite ] z_offset: -2 }			
+			]		
+		}				
+	}
+}
+
+
 ###############################################################################
 # Brown Horse
 
@@ -55,11 +97,34 @@ ${
 	_id: brown_horse
 	_sprite: brown_horse_0
 	_walk_sprites: [ brown_horse_1 brown_horse_0 brown_horse_2 brown_horse_0 ]
-	_cost: 700000
+	_creature_type: beast
+	_cost: 20000
 	_level: 20	
 }
 
 mount brown_horse: !MOUNT{}
 aura brown_horse: !MOUNT_AURA{}
 ability brown_horse: !MOUNT_ABILITY{}
+entity brown_horse: !MOUNT_ENTITY{}
 item mount_brown_horse: !MOUNT_ITEM{}
+
+###############################################################################
+# Dark Brown Horse
+
+${
+	_string: "Dark Brown Horse"
+	_description: "Summons or dismisses a rideable horse."
+	_icon: icon_dark_brown_horse
+	_id: dark_brown_horse
+	_sprite: dark_brown_horse_0
+	_walk_sprites: [ dark_brown_horse_1 dark_brown_horse_0 dark_brown_horse_2 dark_brown_horse_0 ]
+	_creature_type: beast
+	_cost: 300000
+	_level: 20	
+}
+
+mount dark_brown_horse: !MOUNT{}
+aura dark_brown_horse: !MOUNT_AURA{}
+ability dark_brown_horse: !MOUNT_ABILITY{}
+entity dark_brown_horse: !MOUNT_ENTITY{}
+item mount_dark_brown_horse: !MOUNT_ITEM{}

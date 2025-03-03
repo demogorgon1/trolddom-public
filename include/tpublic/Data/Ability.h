@@ -68,7 +68,9 @@ namespace tpublic
 				EXTENDED_FLAG_CLASS_MINION_SUMMON	= 0x00000004,
 				EXTENDED_FLAG_PRODUCE_ITEMS_TARGET	= 0x00000008,
 				EXTENDED_FLAG_TARGET_ITEM			= 0x00000010,
-				EXTENDED_FLAG_NO_STEALTH_BREAK		= 0x00000020
+				EXTENDED_FLAG_NO_STEALTH_BREAK		= 0x00000020,
+				EXTENDED_FLAG_NO_INDOOR				= 0x00000040,
+				EXTENDED_FLAG_CAN_USE_MOUNTED		= 0x00000080
 			};
 
 			static inline Resource::Id
@@ -166,6 +168,10 @@ namespace tpublic
 						*aOutExtendedFlags |= EXTENDED_FLAG_TARGET_ITEM;
 					else if (strcmp(identifier, "no_stealth_break") == 0 && aOutExtendedFlags != NULL)
 						*aOutExtendedFlags |= EXTENDED_FLAG_NO_STEALTH_BREAK;
+					else if (strcmp(identifier, "no_indoor") == 0 && aOutExtendedFlags != NULL)
+						*aOutExtendedFlags |= EXTENDED_FLAG_NO_INDOOR;
+					else if (strcmp(identifier, "can_use_mounted") == 0 && aOutExtendedFlags != NULL)
+						*aOutExtendedFlags |= EXTENDED_FLAG_CAN_USE_MOUNTED;
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid ability flag.", identifier);
 				});
@@ -517,6 +523,7 @@ namespace tpublic
 			bool IsClassMinionSummon() const { return m_extendedFlags & EXTENDED_FLAG_CLASS_MINION_SUMMON; }
 			bool IsProduceItemsTarget() const { return m_extendedFlags & EXTENDED_FLAG_PRODUCE_ITEMS_TARGET; }
 			bool TargetItem() const { return m_extendedFlags & EXTENDED_FLAG_TARGET_ITEM; }
+			bool CanUseMounted() const { return m_extendedFlags & EXTENDED_FLAG_CAN_USE_MOUNTED; }
 
 			bool 
 			IsUsableInState(

@@ -50,6 +50,8 @@ namespace tpublic
 			ID_CANNOT_LOOT_THAT,
 			ID_CANNOT_AFFORD_THAT,
 			ID_CANNOT_BUY_THAT,
+			ID_CANNOT_DO_THAT_INDOOR,
+			ID_CANNOT_DO_THAT_MOUNTED,
 
 			NUM_IDS
 		};
@@ -109,7 +111,9 @@ namespace tpublic
 			{ "Must be in a party to enter!" },
 			{ "Can't loot that!" },
 			{ "Can't afford that!" },
-			{ "Can't buy that!" }			 			
+			{ "Can't buy that!" },
+			{ "Can't do that while indoor!" },
+			{ "Can't do that while mounted!" }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

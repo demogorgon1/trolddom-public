@@ -8,5 +8,8 @@ sprites:
 	sprite brown_horse_0: { }
 	sprite brown_horse_1: { }
 	sprite brown_horse_2: { }
+	sprite dark_brown_horse_0: { }
+	sprite dark_brown_horse_1: { }
+	sprite dark_brown_horse_2: { }
 
 }

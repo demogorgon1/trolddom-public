@@ -56,7 +56,9 @@ namespace tpublic
 			TYPE_MUST_NOT_HAVE_ITEM,
 			TYPE_MUST_HAVE_REPUTATION_LEVEL,
 			TYPE_MUST_NOT_HAVE_EQUIPPED_ITEM_TYPE_FLAGS,
-			TYPE_MUST_NOT_BE_CREATURE_TYPE
+			TYPE_MUST_NOT_BE_CREATURE_TYPE,
+			TYPE_MUST_KNOW_RIDING,
+			TYPE_MUST_NOT_KNOW_RIDING
 		};
 
 		static DataType::Id
@@ -244,6 +246,10 @@ namespace tpublic
 				m_type = TYPE_MUST_NOT_HAVE_ITEM;
 			else if(typeString == "must_have_reputation_level")
 				m_type = TYPE_MUST_HAVE_REPUTATION_LEVEL;
+			else if (typeString == "must_know_riding")
+				m_type = TYPE_MUST_KNOW_RIDING;
+			else if (typeString == "must_not_know_riding")
+				m_type = TYPE_MUST_NOT_KNOW_RIDING;
 			else
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid type.", aSource->m_annotation->GetIdentifier());
 

@@ -35,8 +35,8 @@ namespace tpublic
 			{ "very_slow",	6,	440, 520 },
 			{ "slow",		4,  350, 420 },
 			{ "normal",		0,	260, 320 },
-			{ "fast",		-1, 180, 220 },
-			{ "very_fast",	-2, 100, 120 }
+			{ "fast",		-1, 180, 210 },
+			{ "very_fast",	-2, 160, 170 }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

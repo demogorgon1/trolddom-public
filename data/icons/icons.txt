@@ -685,6 +685,7 @@ sprites:
 	sprite icon_purple_potion_2 : { tags: [ icon ] }
 	sprite icon_cyan_potion_2 : { tags: [ icon ] }
 	sprite icon_brown_horse : { tags: [ icon ] }
+	sprite icon_dark_brown_horse : { tags: [ icon ] }
 	
 }
 

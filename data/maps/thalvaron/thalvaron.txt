@@ -157,6 +157,9 @@ map_entity_spawn thalvaron_valoris_quartermaster: { entity thalvaron_valoris_qua
 map_entity_spawn thalvaron_blacksmithing_trainer: { entity thalvaron_blacksmithing_trainer: { init_state: default } }
 map_entity_spawn thalvaron_firstaid_trainer: { entity thalvaron_firstaid_trainer: { init_state: default } }
 map_entity_spawn thalvaron_herbalism_trainer: { entity thalvaron_herbalism_trainer: { init_state: default } }
+map_entity_spawn thalvaron_lara_ottingson: { entity thalvaron_lara_ottingson: { init_state: default } }
+map_entity_spawn thalvaron_brown_horse: { entity brown_horse: { init_state: default } }
+map_entity_spawn thalvaron_dark_brown_horse: { entity dark_brown_horse: { init_state: default } }
 
 # N
 map_entity_spawn thalvaron_ranger_fremalt: { entity thalvaron_ranger_fremalt: { init_state: default } }
@@ -407,6 +410,9 @@ map_palette .stuff:
 	entity_spawn thalvaron_blacksmithing_trainer: [ 203 84 58 ]
 	entity_spawn thalvaron_firstaid_trainer: [ 103 81 58 ]
 	entity_spawn thalvaron_herbalism_trainer: [ 103 81 158 ]
+	entity_spawn thalvaron_lara_ottingson: [ 49 83 150 ]
+	entity_spawn thalvaron_brown_horse: [ 149 83 150 ]
+	entity_spawn thalvaron_dark_brown_horse: [ 149 83 250 ]
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				

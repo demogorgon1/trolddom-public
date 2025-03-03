@@ -435,6 +435,20 @@ namespace tpublic
 				}
 				break;
 
+			case Requirement::TYPE_MUST_KNOW_RIDING:
+			case Requirement::TYPE_MUST_NOT_KNOW_RIDING:
+				{
+					if (!entity->IsPlayer())
+						return false;
+
+					const Components::PlayerPrivate* playerPrivate = entity->GetComponent<Components::PlayerPrivate>();
+					bool mustKnowRiding = aRequirement->m_type == Requirement::TYPE_MUST_KNOW_RIDING;
+
+					if(playerPrivate->m_knowsRiding != mustKnowRiding)
+						return false;
+				}
+				break;
+
 			default:
 				assert(false);
 				break;
