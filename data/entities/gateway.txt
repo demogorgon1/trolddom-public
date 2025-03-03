@@ -122,14 +122,14 @@ entity the_shrouded_lands_underworld:
 
 entity the_shrouded_lands_light_return:
 {
-	string: "Aetheris Isle"
+	string: "Thalvaron"
 	
 	components:
 	{
 		position: { }		
 		gateway: 
 		{ 
-			maps: [ { map: open_world map_player_spawn: open_world_player_spawn_paladin } ]
+			maps: [ { map: thalvaron map_player_spawn: thalvaron_the_shrouded_lands_light_return } ]
 			schedule: none
 		}
 		sprite<static>: 
@@ -150,14 +150,14 @@ entity the_shrouded_lands_light_return:
 
 entity the_shrouded_lands_underworld_return:
 {
-	string: "Aetheris Isle"
+	string: "Thalvaron"
 	
 	components:
 	{
 		position: { }		
 		gateway: 
 		{ 
-			maps: [ { map: open_world map_player_spawn: open_world_player_spawn_witch } ]
+			maps: [ { map: thalvaron map_player_spawn: thalvaron_the_shrouded_lands_underworld_return } ]
 			schedule: none
 		}
 		sprite<static>: 

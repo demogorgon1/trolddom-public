@@ -118,4 +118,12 @@ map_entity_spawn demo_limit:
 	entity demo_limit: { init_state: default }
 }
 
+map_entity_spawn the_shrouded_lands_light:
+{
+	entity the_shrouded_lands_light: { weight: 1 }
+}
 
+map_entity_spawn the_shrouded_lands_underworld:
+{
+	entity the_shrouded_lands_underworld: { weight: 1 }
+}

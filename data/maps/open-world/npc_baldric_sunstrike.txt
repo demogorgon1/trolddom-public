@@ -11,6 +11,21 @@ expression .baldric_sunstrike_follower:
 	}
 }
 
+dialogue_screen .baldric_sunstrike_the_shrouded_lands:
+{
+	text:
+	[
+		"If you want to go to the shrouded lands and fight the forces of evil, you must go to Valoris and seek out the holy temple."
+	]
+}
+
+!define local THE_SHROUDED_LANDS_OPTION
+{
+	requirement self<must_be_disciple>: light
+	goto: .baldric_sunstrike_the_shrouded_lands
+	text: "How do I get to the shrouded lands?"
+}
+
 dialogue_screen .baldric_sunstrike_greetings:
 {
 	text:
@@ -20,7 +35,11 @@ dialogue_screen .baldric_sunstrike_greetings:
 
 	options:
 	[
-		{ quest: .baldric_sunstrike_1 requirement self<must_be_at_least_level>: 4 }
+		{ 
+			quest: .baldric_sunstrike_1 requirement self<must_be_at_least_level>: 4 		
+		}		
+		
+		!THE_SHROUDED_LANDS_OPTION{}		
 	]
 }
 
@@ -30,6 +49,11 @@ dialogue_screen .baldric_sunstrike_greetings_2:
 	[
 		"Serve The Light or die trying."
 	]
+	
+	options:
+	[
+		!THE_SHROUDED_LANDS_OPTION{}
+	]		
 }
 
 dialogue_screen .baldric_sunstrike_greetings_3:
@@ -41,7 +65,11 @@ dialogue_screen .baldric_sunstrike_greetings_3:
 	
 	options:
 	[
-		{ quest: .baldric_sunstrike_1 requirement self<must_be_at_least_level>: 4 }
+		{ 
+			quest: .baldric_sunstrike_1 requirement self<must_be_at_least_level>: 4 
+		}
+		
+		!THE_SHROUDED_LANDS_OPTION{}
 	]	
 }
 

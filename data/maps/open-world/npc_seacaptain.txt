@@ -1,0 +1,45 @@
+expression .seacaptain_demo:
+{
+	client_is_demo: {}
+}
+
+dialogue_screen .seacaptain_demo:
+{
+	text: 
+	[	
+		"You'll need to get the full version of Trolddom if you want me to take you off this island."
+	]		
+}
+
+dialogue_screen .seacaptain_dialogue:
+{
+	text: 
+	[	
+		"Where do you want to go?"
+	]		
+	
+	options:
+	[
+		{ text: "Thalvaron" map_transfer: { cost: 500 map: thalvaron } }	
+	]
+}
+
+dialogue_root .seacaptain_dialogue:
+{
+	.seacaptain_dialogue: { }
+	.seacaptain_demo: { conditions: [ .seacaptain_demo ] }
+}
+
+entity .seacaptain: !NPC
+{
+	_string: "Roger Bates"
+	_guild_name: "Skipper"
+	_dialogue_root: .seacaptain_dialogue	
+	_sprite: man_56
+	_sprite_dead: man_56_dead	
+	_level: 10
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}

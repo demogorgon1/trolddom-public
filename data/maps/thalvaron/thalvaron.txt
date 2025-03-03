@@ -7,6 +7,9 @@ map_player_spawn thalvaron_tirnwood_thicket_exit: { }
 map_player_spawn thalvaron_wizard_realm_spawn: { }
 map_player_spawn thalvaron_wizard_realm_return_spawn: { }
 
+map_player_spawn thalvaron_the_shrouded_lands_light_return: { }
+map_player_spawn thalvaron_the_shrouded_lands_underworld_return: { }
+
 zone .valoris: { string: "Valoris" }
 zone .valoris_south: { string: "Fernwick Hills" }
 zone .valoris_south_mountains: { string: "Clearview Slopes" }
@@ -57,6 +60,8 @@ zone .highborne_tower: { string: "Tower of Xalizant" }
 zone .lich_tower: { string: "Tower of Indulath" }
 zone .temple_of_the_undying: { string: "Temple of the Undying" }
 zone .tirnwood: { string: "Tirnwood Vale" }
+zone .holy_temple: { string: "Holy Temple of Valoris" }
+zone .underworld_society: { string: "Society of the Underworld" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -296,6 +301,8 @@ map_palette .stuff:
 	player_spawn thalvaron_lich_tower_exit: [ 44 88 194 ]
 	player_spawn thalvaron_valoris_insurgency_exit: [ 44 38 194 ]
 	player_spawn thalvaron_tirnwood_thicket_exit: [ 144 188 194 ]
+	player_spawn thalvaron_the_shrouded_lands_light_return: [ 205 206 209 ]
+	player_spawn thalvaron_the_shrouded_lands_underworld_return: [ 205 106 209 ]
 	
 	portal thalvaron_lich_tower_entrance: [ 144 188 94 ]
 	portal thalvaron_valoris_insurgency_entrance: [ 144 88 92 ]
@@ -413,6 +420,8 @@ map_palette .stuff:
 	entity_spawn thalvaron_lara_ottingson: [ 49 83 150 ]
 	entity_spawn thalvaron_brown_horse: [ 149 83 150 ]
 	entity_spawn thalvaron_dark_brown_horse: [ 149 83 250 ]
+	entity_spawn the_shrouded_lands_light: [ 108 101 106 ]
+	entity_spawn the_shrouded_lands_underworld: [ 208 141 106 ]
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				
@@ -703,6 +712,8 @@ map_palette .sub_zones:
 	sub_zone .highborne_tower: [ 101 136 255 ]
 	sub_zone .lich_tower: [ 159 5 119 ]
 	sub_zone .temple_of_the_undying: [ 159 124 5 ]
+	sub_zone .holy_temple: [ 174 26 217 ]
+	sub_zone .underworld_society: [ 26 217 155 ]
 	
 	sub_zone thalvaron_crab_giant: [ 39 192 83 ]
 	sub_zone thalvaron_vampire_boss: [ 139 93 48 ]

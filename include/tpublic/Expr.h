@@ -33,6 +33,7 @@ namespace tpublic
 			OP_CLIENT_REPUTATION,
 			OP_CLIENT_HAS_ITEM,
 			OP_CLIENT_HAS_COMPLETED_QUEST,
+			OP_CLIENT_IS_DEMO,
 
 			NUM_OPS
 		};
@@ -60,7 +61,8 @@ namespace tpublic
 			"client_untrain_talents_price",
 			"client_reputation",
 			"client_has_item",
-			"client_has_completed_quest"
+			"client_has_completed_quest",
+			"client_is_demo"
 		};
 
 		static_assert(sizeof(OPS) / sizeof(const char*) == (size_t)NUM_OPS);

@@ -10,13 +10,7 @@
 		sound_source: { }
 		openable: 
 		{
-			sound: inventory_1
-			
-			# Blocked off for now
-			requirements: 
-			{
-				self<must_be_at_least_level>: 11
-			}
+			sound: inventory_1			
 		}
 		sprite: 
 		{ 
