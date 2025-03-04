@@ -61,6 +61,25 @@ sprites:
 	sprite wooden_wall_e: { }
 	sprite wooden_wall_s: { }	
 
+	cursor: { position: [ 0 48 ] }
+
+	sprite gs_stone_wall_w_e: { }
+	sprite gs_stone_wall_n_s: { }
+	sprite gs_stone_wall_w_s: { }
+	sprite gs_stone_wall_e_s: { }
+	sprite gs_stone_wall_n_e: { }
+	sprite gs_stone_wall_w_n: { }
+	sprite gs_stone_wall_w_e_s: { }
+	sprite gs_stone_wall_w_e_n: { }
+	sprite gs_stone_wall_w_n_s: { }
+	sprite gs_stone_wall_e_n_s: { }
+	sprite gs_stone_wall_w_e_n_s: { }
+	sprite gs_stone_wall: { }
+	sprite gs_stone_wall_n: { }
+	sprite gs_stone_wall_w: { }
+	sprite gs_stone_wall_e: { }
+	sprite gs_stone_wall_s: { }	
+	
 }
 
 wall stone_wall:
@@ -135,5 +154,30 @@ wall wood_wall:
         wooden_wall_e_n_s		
         wooden_wall_w_n_s
         wooden_wall_w_e_n_s
+	]
+}
+
+wall gs_stone_wall:
+{
+	flags: [ block_line_of_sight ]
+
+	sprites: 
+	[ 
+        gs_stone_wall
+		gs_stone_wall_e
+		gs_stone_wall_w	
+		gs_stone_wall_w_e
+		gs_stone_wall_n
+        gs_stone_wall_n_e
+        gs_stone_wall_w_n
+        gs_stone_wall_w_e_n
+		gs_stone_wall_s
+        gs_stone_wall_e_s
+	    gs_stone_wall_w_s
+        gs_stone_wall_w_e_s		
+		gs_stone_wall_n_s
+        gs_stone_wall_e_n_s		
+        gs_stone_wall_w_n_s
+        gs_stone_wall_w_e_n_s
 	]
 }

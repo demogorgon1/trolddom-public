@@ -10,8 +10,26 @@ map_entity_spawn .malzeth: { entity .malzeth: { weight: 1 } }
 map_entity_spawn .azrakkar: { entity .azrakkar: { weight: 1 } }
 map_entity_spawn .kaelion: { entity .kaelion: { weight: 1 } }
 
+map_entity_spawn .shroud_crystal:
+{
+	spawn_timer: { despawn_required: true }		
+	entity shroud_crystal_1: { weight: 1 init_state: default }
+	entity shroud_crystal_2: { weight: 1 init_state: default }
+}
+
 zone .underworld_zone: { string: "Altar of the Unseen" }
 zone .light_zone: { string: "Landing of the Dawnbringer" }
+zone .the_fringe: { string: "The Fringe" }
+zone .blasted_wastes: { string: "Blasted Wastes" }
+zone .fortress_of_light: { string: "Fortress of Light" }
+zone .the_sinister_bastion: { string: "The Sinister Bastern" }
+
+zone .rylions_cave: { string: "Rylion's Cave" }
+zone .the_graveyard: { string: "The Graveyard" }
+zone .drowned_temple: { string: "Drowned Temple" }
+zone .the_black_watch: { string: "The Black Watch" }
+zone .dawnbringer_keep: { string: "Dawnbringer Keep" }
+zone .the_foul_breach: { string: "The Foul Breach" }
 
 map_palette .tiles:
 {
@@ -19,13 +37,15 @@ map_palette .tiles:
 	tile fs_ground_1: [ 97 91 62 ]
 	tile fs_ground_2: [ 67 61 32 ]
 	tile fs_rocks_1: [ 143 131 120 ]
+	tile fs_shallow_water: [ 100 140 116 ]
 }
 
 map_palette .stuff:
 {	
 	entity_spawn underworld_shrine_top_deity: [ 160 135 60 ]	
 	entity_spawn holy_altar_top_deity: [ 35 160 60 ]	
-
+	
+	entity_spawn .shroud_crystal: [ 124 55 170 ]
 	entity_spawn .the_shrouded_lands_light_return: [ 54 26 217 ]	
 	entity_spawn .the_shrouded_lands_underworld_return: [ 54 54 217 ]	
 	entity_spawn .spawn_door: [ 135 60 60 ]	
@@ -33,16 +53,35 @@ map_palette .stuff:
 	entity_spawn .the_dawnbringer: [ 135 160 60 ]	
 	entity_spawn .kaelion: [ 235 60 160 ]	
 	entity_spawn .azrakkar: [ 235 130 60 ]	
+	entity_spawn .flag_underworld: [ 43 104 40 ]
+	entity_spawn .flag_light: [ 143 104 40 ]
+	entity_spawn .flag_neutral: [ 143 104 140 ]
 
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn the_shrouded_lands_underworld: [ 255 0 0 ]
 	player_spawn the_shrouded_lands_light: [ 0 255 0 ]	
+	
+	wall gs_stone_wall: [ 128 128 128 ]
 }
 
 map_palette .zones:
 {
 	zone .underworld_zone: [ 0 255 255 ]
 	zone .light_zone: [ 255 0 0 ]
+	zone .the_fringe: [ 41 255 0 ]
+	zone .blasted_wastes: [ 161 100 226 ]
+	zone .fortress_of_light: [ 100 121 226 ]
+	zone .the_sinister_bastion: [ 226 198 100 ]
+}
+
+map_palette .sub_zones:
+{
+	sub_zone .rylions_cave: [ 206 0 255 ]
+	sub_zone .the_graveyard: [ 107 0 255 ]
+	sub_zone .drowned_temple: [ 0 148 255 ]
+	sub_zone .the_black_watch: [ 0 255 140 ]
+	sub_zone .dawnbringer_keep: [ 0 255 115 ]
+	sub_zone .the_foul_breach: [ 189 255 0 ]	
 }
 
 map_palette .routes:
@@ -60,6 +99,7 @@ map_palette .cliffs:
 map_palette .levels:
 {
 	level<10>: [ 255 255 0 ]
+	level<20>: [ 73 191 168 ]
 }
 
 loot_group the_shrouded_lands_fish: { } 
@@ -131,12 +171,12 @@ map the_shrouded_lands:
 		#	source:		"the-shrouded-lands-cover.png"
 		#	cover: 		true
 		#}
-		#
-		#{
-		#	palettes:	[ .sub_zones ]
-		#	source:		"the-shrouded-lands-subzones.png"
-		#}						
-		#
+		
+		{
+			palettes:	[ .sub_zones ]
+			source:		"the-shrouded-lands-subzones.png"
+		}						
+		
 		#{
 		#	palettes:	[ .routes ]
 		#	source:		"the-shrouded-lands-routes.png"

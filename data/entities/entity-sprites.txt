@@ -792,6 +792,11 @@ sprites:
 	sprite mithril_vein: { }
 	sprite brontium_vein: { }
 	sprite frostbloom: { }
+	sprite crystal_1: { }
+	sprite crystal_2: { }
+	sprite gs_flag_underworld: { }
+	sprite gs_flag_light: { }
+	sprite gs_flag_none: { }
 		
 }
 

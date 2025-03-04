@@ -23,3 +23,12 @@
 loot_group potatoes: {}
 loot_table .potatoes: { slots: [ { possibility: { loot_group: potatoes } } ] }
 entity potatoes: !OPENABLE_OBJECT { _string: "Potatoes" _sprite: wild_herbs _loot_table: .potatoes _verb: pick } 
+
+#####################################################
+# Shroud Crystals
+
+loot_group shroud_crystal: {}
+loot_table .shroud_crystal: { slots: [ { possibility: { loot_group: shroud_crystal } } ] }
+entity shroud_crystal_1: !OPENABLE_OBJECT { _string: "Shroud Crystal" _sprite: crystal_1 _loot_table: .shroud_crystal _verb: pick } 
+entity shroud_crystal_2: !OPENABLE_OBJECT { _string: "Shroud Crystal" _sprite: crystal_2 _loot_table: .shroud_crystal _verb: pick } 
+

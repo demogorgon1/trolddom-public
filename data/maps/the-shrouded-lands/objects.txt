@@ -1,0 +1,57 @@
+map_entity_spawn .flag_underworld: { entity .flag_underworld: { init_state: default } }
+map_entity_spawn .flag_light: { entity .flag_light: { init_state: default } }
+map_entity_spawn .flag_neutral: { entity .flag_neutral: { init_state: default } }
+
+entity .flag_underworld:
+{
+	string: "Control Point"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite<static>: { animations: [ { states: [ default ] frames: [ gs_flag_none gs_flag_underworld gs_flag_light ] z_offset: -3 use_openable_sprite_index: true } ] }		
+
+		openable: 
+		{ 
+			verb: capture
+			range: 1 
+			sprite_index: 1
+		}		
+	}
+}
+
+entity .flag_light:
+{
+	string: "Control Point"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite<static>: { animations: [ { states: [ default ] frames: [ gs_flag_none gs_flag_underworld gs_flag_light ] z_offset: -3 use_openable_sprite_index: true } ] }		
+
+		openable: 
+		{ 
+			verb: capture
+			range: 1 
+			sprite_index: 2
+		}		
+	}
+}
+
+entity .flag_neutral:
+{
+	string: "Control Point"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite<static>: { animations: [ { states: [ default ] frames: [ gs_flag_none gs_flag_underworld gs_flag_light ] z_offset: -3 use_openable_sprite_index: true } ] }		
+
+		openable: 
+		{ 
+			verb: capture
+			range: 1 
+			sprite_index: 0
+		}		
+	}
+}

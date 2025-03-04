@@ -148,6 +148,11 @@ namespace tpublic
 			{
 				offsetX += width; 
 			}
+			else if (aNode->m_name == "reverse")
+			{
+				if(offsetX >= width)
+					offsetX -= width;
+			}
 			else if(aNode->m_tag == "sprite")
 			{
 				TP_VERIFY(!aNode->m_name.empty(), aNode->m_debugInfo, "Sprite must be named.");

@@ -7,3 +7,15 @@ loot_table .npc:
 	]	
 }
 
+item shroud_crystal:
+{
+	item_level: 20
+	icon: icon_crystal_1
+	string: "Shroud Crystal"
+	stack: 40
+	flags: [ not_sellable ]
+	binds: when_picked_up
+	loot_groups: [ shroud_crystal ]
+	level_range: [ 1 20 ]
+}
+
