@@ -647,6 +647,10 @@ sprites:
 	sprite dwarf_15: { dead: dwarf_15_dead }
 	sprite woman_25: { dead: woman_25_dead }
 	sprite man_56: { dead: man_56_dead }
+	sprite angel_2: { dead: angel_2_dead }
+	sprite angel_3: { dead: angel_3_dead }
+	sprite demon_4: { dead: demon_4_dead }
+	sprite demon_5: { dead: demon_5_dead }
 
 	cursor: { position: [ 0 560 ] }
 	sprite man_55_dead: { }
@@ -657,6 +661,10 @@ sprites:
 	sprite dwarf_15_dead: { }
 	sprite woman_25_dead: { }
 	sprite man_56_dead: { }
+	sprite angel_2_dead: { }
+	sprite angel_3_dead: { }
+	sprite demon_4_dead: { }
+	sprite demon_5_dead: { }
 }
 
 sprites:
@@ -799,5 +807,6 @@ sprites:
 	sprite gs_flag_none: { }
 		
 }
+
 
 

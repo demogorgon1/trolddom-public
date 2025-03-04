@@ -1,0 +1,45 @@
+npc_behavior_state .wandering_short:
+{
+	on_route<the_shrouded_lands_default_patrol>: the_shrouded_lands_default_patrol
+	behavior: wandering
+	max_range: 1
+}
+
+npc_behavior_state .passive:
+{
+	on_route<the_shrouded_lands_default_patrol>: the_shrouded_lands_default_patrol
+	behavior: do_nothing
+}
+
+loot_table .default_humanoid: 
+{
+	slots:
+	[	
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+##########################################################################################
+# The Light
+
+map_entity_spawn .the_light_guard: 
+{ 
+	entity .the_light_guard: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Guards
+{
+	${
+		_faction: npcs
+		_creature_type: humanoid
+		_loot_table: .default_humanoid
+		_weapon_damage: 1
+		_resource_health: 1
+		_elite: true
+		_default_behavior_state: .passive
+	}
+	
+	entity .the_light_guard: !NPC { _string: "Guardian" _sprite: angel_2 _sprite_dead: angel_2_dead _level: 20 }
+}
