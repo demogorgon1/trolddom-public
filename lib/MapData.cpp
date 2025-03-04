@@ -167,6 +167,8 @@ namespace tpublic
 					m_generator = std::make_unique<Generator>(aNode);
 				else if(aNode->m_name == "seed")
 					m_seed.FromSource(aNode);
+				else if(aNode->m_name == "pvp")
+					m_pvp = std::make_unique<PVP>(aNode);
 				else
 					TP_VERIFY(false, aNode->m_debugInfo, "'%s' is not a valid item.", aNode->m_name.c_str());
 			}
@@ -505,6 +507,7 @@ namespace tpublic
 		aStream->WriteOptionalObjectPointer(m_mapRouteData);
 		aStream->Write(m_elevationMap, m_width * m_height);
 		_WriteStaticPositionToolTipTable(aStream, m_staticPositionToolTips);
+		aStream->WriteOptionalObjectPointer(m_pvp);
 	}
 
 	bool	
@@ -574,6 +577,9 @@ namespace tpublic
 		}
 
 		if (!_ReadStaticPositionToolTipTable(aStream, m_staticPositionToolTips))
+			return false;
+
+		if(!aStream->ReadOptionalObjectPointer(m_pvp))
 			return false;
 
 		return true;

@@ -35,7 +35,6 @@ faction combat_npcs:
 	flags: [ friendly ]
 }
 
-
 ##########################################################################################
 # Thalvaron enemy factions
 

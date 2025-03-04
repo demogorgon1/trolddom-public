@@ -1,54 +1,17 @@
-map_player_spawn .player_spawn:
-{
-}
+map_player_spawn .player_spawn:{}
 
-map_player_spawn the_shrouded_lands_underworld:
-{
-}
+map_player_spawn the_shrouded_lands_underworld: {}
+map_player_spawn the_shrouded_lands_light: {}
 
-map_player_spawn the_shrouded_lands_light:
-{
-}
+map_entity_spawn .the_shrouded_lands_light_return: { entity the_shrouded_lands_light_return: { weight: 1 } }
+map_entity_spawn .the_shrouded_lands_underworld_return: { entity the_shrouded_lands_underworld_return: { weight: 1 } }
+map_entity_spawn .the_dawnbringer: { entity .the_dawnbringer: { weight: 1 } } 
+map_entity_spawn .malzeth: { entity .malzeth: { weight: 1 } }
+map_entity_spawn .azrakkar: { entity .azrakkar: { weight: 1 } }
+map_entity_spawn .kaelion: { entity .kaelion: { weight: 1 } }
 
-map_entity_spawn .the_shrouded_lands_light_return:
-{
-	entity the_shrouded_lands_light_return: { weight: 1 }
-}
-
-map_entity_spawn .the_shrouded_lands_underworld_return:
-{
-	entity the_shrouded_lands_underworld_return: { weight: 1 }
-}
-
-map_entity_spawn .the_dawnbringer:
-{
-	entity .the_dawnbringer: { weight: 1 }
-}
-
-map_entity_spawn .malzeth:
-{
-	entity .malzeth: { weight: 1 }
-}
-
-map_entity_spawn .azrakkar:
-{
-	entity .azrakkar: { weight: 1 }
-}
-
-map_entity_spawn .kaelion:
-{
-	entity .kaelion: { weight: 1 }
-}
-
-zone .underworld_zone:
-{
-	string: "Altar of the Unseen"
-}
-
-zone .light_zone:
-{
-	string: "Landing of the Dawnbringer"
-}
+zone .underworld_zone: { string: "Altar of the Unseen" }
+zone .light_zone: { string: "Landing of the Dawnbringer" }
 
 map_palette .tiles:
 {
@@ -125,6 +88,21 @@ map the_shrouded_lands:
 	auto_doodads: true
 	max_players: 80
 	level: 10
+	
+	pvp<reputation>:
+	{
+		faction light:
+		{
+			reputation: light
+			player_spawn: the_shrouded_lands_light
+		}
+		
+		faction underworld:
+		{
+			reputation: underworld
+			player_spawn: the_shrouded_lands_underworld
+		}		
+	}
 
 	layers:
 	[

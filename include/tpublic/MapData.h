@@ -22,6 +22,128 @@ namespace tpublic
 	class MapData
 	{
 	public:
+		struct PVPFaction
+		{
+			PVPFaction()
+			{
+
+			}
+
+			PVPFaction(
+				const SourceNode*			aSource)
+			{
+				m_factionId = aSource->m_sourceContext->m_persistentIdTable->GetId(aSource->m_debugInfo, DataType::ID_FACTION, aSource->m_name.c_str());
+
+				aSource->GetObject()->ForEachChild([&](
+					const SourceNode* aChild)
+				{
+					if(aChild->m_name == "reputation")
+						m_reputationFactionId = aChild->GetId(DataType::ID_FACTION);
+					else if(aChild->m_name == "player_spawn")
+						m_playerSpawnId = aChild->GetId(DataType::ID_MAP_PLAYER_SPAWN);
+					else
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+				});
+			}
+
+			void
+			ToStream(
+				IWriter*					aWriter) const
+			{
+				aWriter->WriteUInt(m_factionId);
+				aWriter->WriteUInt(m_reputationFactionId);
+				aWriter->WriteUInt(m_playerSpawnId);
+			}
+
+			bool
+			FromStream(
+				IReader*					aReader)
+			{
+				if (!aReader->ReadUInt(m_factionId))
+					return false;
+				if (!aReader->ReadUInt(m_reputationFactionId))
+					return false;
+				if (!aReader->ReadUInt(m_playerSpawnId))
+					return false;
+				return true;
+			}
+
+			// Public data
+			uint32_t									m_factionId = 0;
+			uint32_t									m_reputationFactionId = 0;
+			uint32_t									m_playerSpawnId = 0;
+		};
+
+		enum PVPType : uint8_t
+		{
+			INVALID_PVP_TYPE,
+
+			PVP_TYPE_REPUTATION
+		};
+
+		struct PVP
+		{
+			PVP()
+			{
+
+			}
+
+			PVP(
+				const SourceNode*			aSource)
+			{
+				TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing PVP type annotation.");
+				std::string_view t(aSource->m_annotation->GetIdentifier());
+				if(t == "reputation")
+					m_type = PVP_TYPE_REPUTATION;
+				else
+					TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid PVP type.", aSource->m_annotation->GetIdentifier());
+
+				aSource->GetObject()->ForEachChild([&](
+					const SourceNode* aChild)
+				{
+					if (aChild->m_tag == "faction")
+						m_factions.push_back(std::make_unique<PVPFaction>(aChild));
+					else
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+				});
+			}
+
+			void
+			ToStream(
+				IWriter*					aWriter) const
+			{
+				aWriter->WritePOD(m_type);
+				aWriter->WriteObjectPointers(m_factions);
+			}
+
+			bool
+			FromStream(
+				IReader*					aReader)
+			{
+				if(!aReader->ReadPOD(m_type))
+					return false;
+				if(!aReader->ReadObjectPointers(m_factions))
+					return false;
+				return true;
+			}
+
+			const PVPFaction*
+			GetFaction(
+				uint32_t					aFactionId) const
+			{
+				for(const std::unique_ptr<PVPFaction>& faction : m_factions)
+				{
+					if(faction->m_factionId == aFactionId)
+						return faction.get();
+				}
+				return NULL;
+			}
+
+			// Public data
+			PVPType										m_type = INVALID_PVP_TYPE;
+			std::vector<std::unique_ptr<PVPFaction>>	m_factions;
+		};
+
 		enum SeedType : uint8_t
 		{
 			INVALID_SEED_TYPE,
@@ -535,6 +657,7 @@ namespace tpublic
 		std::unique_ptr<WorldInfoMap>				m_worldInfoMap;
 		std::unique_ptr<MapCovers>					m_mapCovers;
 		std::unique_ptr<MapRouteData>				m_mapRouteData;
+		std::unique_ptr<PVP>						m_pvp;
 		
 		typedef std::unordered_map<Vec2, std::string, Vec2::Hasher> StaticPositionToolTipTable;
 		
