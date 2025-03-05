@@ -84,6 +84,8 @@ namespace tpublic
 							m_maxValue = aChild->GetFloat();
 						else if(aChild->m_name == "periodic_reduction")
 							m_periodicReduction = PeriodicReduction(aChild);
+						else if(aChild->m_name == "color")
+							m_color = Image::RGBA(aChild);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -98,6 +100,7 @@ namespace tpublic
 				aStream->WriteFloat(m_defaultValue);
 				aStream->WriteFloat(m_maxValue);
 				aStream->WriteOptionalObject(m_periodicReduction);
+				aStream->WritePOD(m_color);
 			}
 
 			bool
@@ -112,6 +115,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadOptionalObject(m_periodicReduction))
 					return false;
+				if(!aStream->ReadPOD(m_color))
+					return false;
 				return true;
 			}
 
@@ -120,6 +125,7 @@ namespace tpublic
 			float								m_defaultValue = 0.0f;
 			float								m_maxValue = 0.0f;
 			std::optional<PeriodicReduction>	m_periodicReduction;
+			Image::RGBA							m_color;
 		};
 
 	}
