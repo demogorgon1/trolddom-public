@@ -4,6 +4,11 @@ dialogue_screen .kaelion_greetings:
 	[	
 		"The altars of this realm are tied to the ebb and flow of divine energies, channeled from beyond the mortal planes. Their nature reflects the deities they honor, transforming as faith and devotion shape their sacred purpose."
 	]			
+	
+	options:
+	[
+		{ quest: .kaelion_1 }
+	]
 }
 
 dialogue_root .kaelion_dialogue:
@@ -16,11 +21,58 @@ entity .kaelion: !NPC
 	_string: "Kaelion"
 	_dialogue_root: .kaelion_dialogue
 	_loot_table: .npc
-	_level: 10
-	_faction: npcs
+	_level: 20
+	_faction: light
 	_creature_type: humanoid
 	_not_pushable: true
 	_sprite: man_25
 	_sprite_dead: man_25_dead
+	_elite: true
 }
 	
+############################################################
+# Quest 1
+
+objective .kaelion_1:
+{
+	string: "Shroud Crystals"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: shroud_crystal count: 5 }
+}
+
+
+quest .kaelion_1:
+{
+	string: "Shroud Crystals For The War Effort"
+
+	text:
+	[
+		"Deliver shroud crystals to Kaelion at the Landing of the Dawnbringer."
+	]
+	
+	description: 
+	[
+		"The power of this realm materialize itself in crystals growing out of the ground. They can be used by us to summon more allies to fight against the evil that has managed to get hold on parts of the land."
+		"Please, if you gather those crystals, it would be a great help. The more you can bring to me the better."
+	]
+
+	progress:
+	[
+		"Make haste!"
+	]
+	
+	completion:
+	[
+		"This will help immensely, thanks!"
+	]
+	
+	objectives: [ .kaelion_1 ]
+	repeat_mode: always
+	level: 20
+	reward_xp_multiplier: 0
+	reward_cash_multiplier: 0
+	reward_reputation_multiplier: 1
+	reward_realm_balance<the_shrouded_lands_light>: 10
+}

@@ -62,6 +62,45 @@ namespace tpublic
 				return INVALID_REPEAT_MODE;
 			}
 
+			struct RewardRealmBalance
+			{
+				RewardRealmBalance()
+				{
+
+				}
+
+				RewardRealmBalance(
+					const SourceNode*	aSource)
+				{
+					TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing realm balance annotation.");
+					m_realmBalanceId = aSource->m_annotation->GetId(DataType::ID_REALM_BALANCE);
+					m_value = aSource->GetFloat();
+				}
+
+				void
+				ToStream(
+					IWriter*			aWriter) const
+				{
+					aWriter->WriteUInt(m_realmBalanceId);
+					aWriter->WriteFloat(m_value);
+				}
+
+				bool
+				FromStream(
+					IReader*			aReader)
+				{
+					if(!aReader->ReadUInt(m_realmBalanceId))
+						return false;
+					if(!aReader->ReadFloat(m_value))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t			m_realmBalanceId = 0;
+				float				m_value = 0.0f;
+			};
+
 			void
 			Verify() const
 			{
@@ -126,6 +165,8 @@ namespace tpublic
 							aChild->GetIdArray(DataType::ID_ITEM, m_rewardAllItems);
 						else if (aChild->m_name == "next_quest")
 							m_nextQuestId = aChild->GetId(DataType::ID_QUEST);
+						else if(aChild->m_name == "reward_realm_balance")
+							m_rewardRealmBalance = RewardRealmBalance(aChild);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -155,6 +196,7 @@ namespace tpublic
 				aStream->WriteUInt(m_rewardCash);
 				aStream->WriteFloat(m_rewardReputationMultiplier);
 				aStream->WritePOD(m_repeatMode);
+				aStream->WriteOptionalObject(m_rewardRealmBalance);
 			}
 
 			bool
@@ -199,6 +241,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadPOD(m_repeatMode))
 					return false;
+				if(!aStream->ReadOptionalObject(m_rewardRealmBalance))
+					return false;
 				return true;
 			}
 
@@ -212,25 +256,26 @@ namespace tpublic
 			}
 
 			// Public data
-			std::string				m_string;
-			std::string				m_text;
-			std::string				m_description;
-			std::string				m_progress;
-			std::string				m_completion;
-			std::vector<uint32_t>	m_objectives;
-			std::vector<uint32_t>	m_prerequisites;			
-			uint32_t				m_level = 1;
-			Type					m_type = TYPE_NORMAL;
-			std::vector<uint32_t>	m_questItems;
-			uint32_t				m_rewardCash = 0;
-			std::vector<uint32_t>	m_rewardOneItem;
-			std::vector<uint32_t>	m_rewardAllItems;
-			uint32_t				m_nextQuestId = 0;
-			float					m_rewardCashMultiplier = 1.0f;
-			float					m_rewardXPMultiplier = 1.0f;
-			float					m_rewardReputationMultiplier = 1.0f;
-			uint32_t				m_cost = 0;
-			RepeatMode				m_repeatMode = REPEAT_MODE_NONE;
+			std::string							m_string;
+			std::string							m_text;
+			std::string							m_description;
+			std::string							m_progress;
+			std::string							m_completion;
+			std::vector<uint32_t>				m_objectives;
+			std::vector<uint32_t>				m_prerequisites;			
+			uint32_t							m_level = 1;
+			Type								m_type = TYPE_NORMAL;
+			std::vector<uint32_t>				m_questItems;
+			uint32_t							m_rewardCash = 0;
+			std::vector<uint32_t>				m_rewardOneItem;
+			std::vector<uint32_t>				m_rewardAllItems;
+			uint32_t							m_nextQuestId = 0;
+			float								m_rewardCashMultiplier = 1.0f;
+			float								m_rewardXPMultiplier = 1.0f;
+			float								m_rewardReputationMultiplier = 1.0f;
+			uint32_t							m_cost = 0;
+			RepeatMode							m_repeatMode = REPEAT_MODE_NONE;
+			std::optional<RewardRealmBalance>	m_rewardRealmBalance;
 		};
 
 	}

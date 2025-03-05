@@ -145,6 +145,8 @@ map the_shrouded_lands:
 	max_players: 80
 	level: 10
 	
+	realm_balance: [ the_shrouded_lands_light the_shrouded_lands_underworld ]
+	
 	pvp<reputation>:
 	{
 		faction light:

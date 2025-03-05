@@ -45,6 +45,7 @@
 #include <tpublic/Data/PlayerWorldType.h>
 #include <tpublic/Data/Profession.h>
 #include <tpublic/Data/Quest.h>
+#include <tpublic/Data/RealmBalance.h>
 #include <tpublic/Data/Route.h>
 #include <tpublic/Data/Sound.h>
 #include <tpublic/Data/Sprite.h>
@@ -110,6 +111,7 @@ namespace tpublic
 		RegisterDataContainer<Data::PlayerWorldType>();
 		RegisterDataContainer<Data::Profession>();
 		RegisterDataContainer<Data::Quest>();
+		RegisterDataContainer<Data::RealmBalance>();
 		RegisterDataContainer<Data::Route>();
 		RegisterDataContainer<Data::Sound>();
 		RegisterDataContainer<Data::Sprite>();

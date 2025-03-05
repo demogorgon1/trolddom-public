@@ -169,6 +169,8 @@ namespace tpublic
 					m_seed.FromSource(aNode);
 				else if(aNode->m_name == "pvp")
 					m_pvp = std::make_unique<PVP>(aNode);
+				else if(aNode->m_name == "realm_balance")
+					aNode->GetIdArray(DataType::ID_REALM_BALANCE, m_realmBalanceIds);
 				else
 					TP_VERIFY(false, aNode->m_debugInfo, "'%s' is not a valid item.", aNode->m_name.c_str());
 			}
@@ -508,6 +510,7 @@ namespace tpublic
 		aStream->Write(m_elevationMap, m_width * m_height);
 		_WriteStaticPositionToolTipTable(aStream, m_staticPositionToolTips);
 		aStream->WriteOptionalObjectPointer(m_pvp);
+		aStream->WriteUInts(m_realmBalanceIds);
 	}
 
 	bool	
@@ -580,6 +583,8 @@ namespace tpublic
 			return false;
 
 		if(!aStream->ReadOptionalObjectPointer(m_pvp))
+			return false;
+		if(!aStream->ReadUInts(m_realmBalanceIds))
 			return false;
 
 		return true;

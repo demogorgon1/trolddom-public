@@ -16,7 +16,7 @@ entity .malzeth: !NPC
 	_string: "Malzeth"
 	_dialogue_root: .malzeth_dialogue
 	_loot_table: .npc
-	_level: 12
+	_level: 22
 	_elite: true
 	_faction: npcs
 	_creature_type: demon

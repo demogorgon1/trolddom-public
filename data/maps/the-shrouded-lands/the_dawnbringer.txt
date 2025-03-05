@@ -18,7 +18,7 @@ entity .the_dawnbringer: !NPC
 	_string: "Seraphael the Dawnbringer"
 	_dialogue_root: .seraphael_dialogue
 	_loot_table: .npc
-	_level: 12
+	_level: 22
 	_elite: true
 	_faction: npcs
 	_creature_type: humanoid

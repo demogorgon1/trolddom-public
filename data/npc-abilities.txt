@@ -40,7 +40,7 @@ ability npc_strike:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: x_plus_a x: weapon a: [ [ 1 5 ] [ 10 20 ] [ 20 40 ] ] }
+		function: { expression: x_plus_a x: weapon a: [ [ 1 5 ] [ 10 20 ] [ 20 40 ] [ 30 80 ] ] }
 	}
 }
 
@@ -72,7 +72,7 @@ ability npc_firebolt:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: fire
-		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] [ 20 70 ] ] elite_multiplier: 1.7 }
+		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] [ 20 70 ] [ 30 140 ] ] elite_multiplier: 1.7 }
 	}
 }
 
@@ -91,7 +91,7 @@ ability npc_curse_tick:
 	direct_effect damage:
 	{
 		damage_type: unholy
-		function: { expression: a a: [ [ 1 4 ] [ 10 10 ] [ 20 20 ] ] elite_multiplier: 1.7 }
+		function: { expression: a a: [ [ 1 4 ] [ 10 10 ] [ 20 20 ] [ 30 40 ] ] elite_multiplier: 1.7 }
 	}
 }
 
@@ -144,7 +144,7 @@ ability npc_poison_bite_tick:
 	direct_effect damage:
 	{
 		damage_type: poison
-		function: { expression: a a: [ [ 1 2 ] [ 10 7 ] [ 20 14 ] ] elite_multiplier: 1.7 }
+		function: { expression: a a: [ [ 1 2 ] [ 10 7 ] [ 20 14 ] [ 30 28 ] ] elite_multiplier: 1.7 }
 	}
 }
 
@@ -180,7 +180,7 @@ ability npc_poison_bite:
 	{
 		flags: [ can_be_critical ]
 		damage_type: poison
-		function: { expression: a a: [ [ 1 4 ] [ 10 15 ] [ 20 30 ] ] elite_multiplier: 1.7 }
+		function: { expression: a a: [ [ 1 4 ] [ 10 15 ] [ 20 30 ] [ 30 60 ] ] elite_multiplier: 1.7 }
 	}
 
 	direct_effect apply_aura:
@@ -204,7 +204,7 @@ ability npc_rend_tick:
 	direct_effect damage:
 	{
 		damage_type: physical
-		function: { expression: a a: [ [ 1 2 ] [ 10 7 ] [ 20 14 ] ] elite_multiplier: 1.7 }
+		function: { expression: a a: [ [ 1 2 ] [ 10 7 ] [ 20 14 ] [ 30 28 ] ] elite_multiplier: 1.7 }
 	}
 }
 
@@ -239,7 +239,7 @@ ability npc_rend:
 	{
 		flags: [ can_be_critical ]
 		damage_type: bleed
-		function: { expression: a a: [ [ 1 4 ] [ 10 15 ] [ 20 30 ] ] elite_multiplier: 1.7 }
+		function: { expression: a a: [ [ 1 4 ] [ 10 15 ] [ 20 30 ] [ 30 60 ] ] elite_multiplier: 1.7 }
 	}
 
 	direct_effect apply_aura:
@@ -470,7 +470,7 @@ ability npc_froststrike:
 	{
 		flags: [ can_be_critical ]
 		damage_type: frost
-		function: { expression: x_plus_a x: weapon a: [ [ 1 5 ] [ 10 20 ] [ 20 40 ] ] }
+		function: { expression: x_plus_a x: weapon a: [ [ 1 5 ] [ 10 20 ] [ 20 40 ] [ 30 80 ] ] }
 	}
 	
 	direct_effect apply_aura:
@@ -494,7 +494,7 @@ ability npc_chain_lightning_tertiary:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: nature
-		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] [ 20 70 ] ] elite_multiplier: 1.7 }		
+		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] [ 20 70 ] [ 30 140 ] ] elite_multiplier: 1.7 }		
 	}			
 }
 
@@ -513,7 +513,7 @@ ability npc_chain_lightning_secondary:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: nature
-		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] [ 20 70 ] ] elite_multiplier: 1.7 }		
+		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] [ 20 70 ] [ 30 140 ] ] elite_multiplier: 1.7 }		
 	}			
 	
 	direct_effect trigger_ability:
@@ -541,7 +541,7 @@ ability npc_chain_lightning:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: nature
-		function: { expression: a a: [ [ 1 15 ] [ 10 45 ] [ 20 90 ] ] elite_multiplier: 1.7 }		
+		function: { expression: a a: [ [ 1 15 ] [ 10 45 ] [ 20 90 ] [ 30 180 ] ] elite_multiplier: 1.7 }		
 	}		
 	
 	direct_effect trigger_ability:
@@ -581,7 +581,7 @@ ability npc_arcane_detonation:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
-		function: { expression: a a: [ [ 1 25 ] [ 10 75 ] [ 20 150 ] ] elite_multiplier: 1.7 }				
+		function: { expression: a a: [ [ 1 25 ] [ 10 75 ] [ 20 150 ] [ 30 300 ] ] elite_multiplier: 1.7 }				
 	}
 
 	direct_effect damage:
@@ -642,7 +642,7 @@ ability npc_fire_attack_fire_tick:
 	direct_effect damage:
 	{
 		damage_type: fire
-		function: { expression: a a: [ [ 1 15 ] [ 10 45 ] [ 20 90 ] ] elite_multiplier: 1.7 }				
+		function: { expression: a a: [ [ 1 15 ] [ 10 45 ] [ 20 90 ] [ 30 180 ] ] elite_multiplier: 1.7 }				
 	}
 }
 
@@ -707,7 +707,7 @@ ability npc_arcane_explosion:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
-		function: { expression: a a: [ [ 1 25 ] [ 10 75 ] [ 20 150 ] ] elite_multiplier: 1.7 }				
+		function: { expression: a a: [ [ 1 25 ] [ 10 75 ] [ 20 150 ] [ 30 300 ] ] elite_multiplier: 1.7 }				
 	}
 
 }

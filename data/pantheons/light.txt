@@ -1,7 +1,7 @@
 faction light:
 {
 	string: "The Light"
-	flags: [ reputation pantheon ]
+	flags: [ friendly reputation pantheon ]
 }
 
 pantheon light:

@@ -1,0 +1,15 @@
+realm_balance the_shrouded_lands_light:
+{
+	string: "Power of the Light"
+	default_value: 0
+	max_value: 1000
+	periodic_reduction: { interval: 60 value: 1 }
+}
+
+realm_balance the_shrouded_lands_underworld:
+{
+	string: "Power of the Underworld"
+	default_value: 0
+	max_value: 1000
+	periodic_reduction: { interval: 60 value: 1 }
+}
