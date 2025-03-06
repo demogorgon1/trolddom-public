@@ -19,8 +19,10 @@ entity .the_dawnbringer: !NPC
 	_dialogue_root: .seraphael_dialogue
 	_loot_table: .npc
 	_level: 22
+	_weapon_damage: 2
+	_resource_health: 3
 	_elite: true
-	_faction: npcs
+	_faction: light
 	_creature_type: humanoid
 	_not_pushable: true
 	_sprite: angel_1

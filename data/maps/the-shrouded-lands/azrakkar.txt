@@ -17,7 +17,7 @@ entity .azrakkar: !NPC
 	_dialogue_root: .azrakkar_dialogue
 	_loot_table: .npc
 	_level: 20
-	_faction: npcs
+	_faction: underworld
 	_creature_type: demon
 	_not_pushable: true
 	_sprite: demon_2

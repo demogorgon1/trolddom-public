@@ -23,23 +23,54 @@ loot_table .default_humanoid:
 ##########################################################################################
 # The Light
 
-map_entity_spawn .the_light_guard: 
-{ 
-	entity .the_light_guard: {} 
+map_entity_spawn .the_light_guard: { entity .the_light_guard: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+
+!define local THE_LIGHT_DEFENDER
+{
+	entity .the_light_defender: 
+	{
+		spawn_condition:
+		{
+			realm_balance_above<@_spawn_power>: the_shrouded_lands_light
+		}	
+	} 
 	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
-# Guards
+map_entity_spawn .the_light_defender_1: !THE_LIGHT_DEFENDER{ _spawn_power: 200 }
+map_entity_spawn .the_light_defender_2: !THE_LIGHT_DEFENDER{ _spawn_power: 400 }
+map_entity_spawn .the_light_defender_3: !THE_LIGHT_DEFENDER{ _spawn_power: 600 }
+map_entity_spawn .the_light_defender_4: !THE_LIGHT_DEFENDER{ _spawn_power: 800 }
+map_entity_spawn .the_light_defender_5: !THE_LIGHT_DEFENDER{ _spawn_power: 900 }
+
+# Elite Guards
 {
 	${
-		_faction: npcs
+		_faction: light
 		_creature_type: humanoid
 		_loot_table: .default_humanoid
-		_weapon_damage: 1
-		_resource_health: 1
-		_elite: true
+		_weapon_damage: 0.8
+		_resource_health: 1.2
 		_default_behavior_state: .passive
+		_level: 20 
+		_elite: true
 	}
 	
-	entity .the_light_guard: !NPC { _string: "Guardian" _sprite: angel_2 _sprite_dead: angel_2_dead _level: 20 }
+	entity .the_light_guard: !NPC { _string: "Guardian" _sprite: angel_2 _sprite_dead: angel_2_dead }
+	entity .the_light_defender: !NPC { _string: "Defender" _sprite: angel_3 _sprite_dead: angel_3_dead }
+}
+
+# Control point guards
+{
+	${
+		_faction: light
+		_creature_type: humanoid
+		_loot_table: .default_humanoid
+		_weapon_damage: 1.1
+		_resource_health: 1.3
+		_default_behavior_state: .passive
+		_level: 20 
+	}
+	
+	entity .the_light_guard_control_point: !NPC { _string: "Guardian" _sprite: angel_2 _sprite_dead: angel_2_dead }
 }

@@ -4,6 +4,15 @@ realm_balance the_shrouded_lands_light:
 	default_value: 0
 	max_value: 1000
 	color: [ 226 212 118 ]
+	
+	threshold_tool_tip<200>: "Increased holy guard spawns."
+	threshold_tool_tip<400>: "Increased holy guard spawns."
+	threshold_tool_tip<600>: "Increased holy guard spawns."
+	threshold_tool_tip<800>: "Increased holy guard spawns."
+	threshold_tool_tip<900>: "Increased holy guard spawns."
+	threshold_tool_tip<1000>: "The defensive aura of Draethor is dissolved for 30 minutes."
+	
+	tool_tip: "Increases as more quests are completed and control points are captured for the light."
 }
 
 realm_balance the_shrouded_lands_underworld:
@@ -12,4 +21,12 @@ realm_balance the_shrouded_lands_underworld:
 	default_value: 0
 	max_value: 1000
 	color: [ 149 111 176 ]
-}
+	
+	threshold_tool_tip<200>: "Increased unholy guard spawns."
+	threshold_tool_tip<400>: "Increased unholy guard spawns."
+	threshold_tool_tip<600>: "Increased unholy guard spawns."
+	threshold_tool_tip<800>: "Increased unholy guard spawns."
+	threshold_tool_tip<900>: "Increased unholy guard spawns."
+	threshold_tool_tip<1000>: "The defensive aura of Irza is dissolved for 30 minutes."	
+	
+	tool_tip: "Increases as more quests are completed and control points are captured for the underworld."

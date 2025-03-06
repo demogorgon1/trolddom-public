@@ -56,6 +56,8 @@ namespace tpublic
 											CastInProgress&			aOut) const = 0;
 		virtual uint32_t				WorldViewGetTopDeityId(
 											uint32_t				aPantheonId) const = 0;
+		virtual int32_t					WorldViewGetRealmBalance(
+											uint32_t				aRealmBalanceId) const = 0;
 	};
 
 }

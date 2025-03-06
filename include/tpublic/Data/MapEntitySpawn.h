@@ -24,7 +24,8 @@ namespace tpublic
 					TYPE_NONE,
 					TYPE_IF,
 					TYPE_IF_NOT,
-					TYPE_ENCOUNTER_NOT_ACTIVE
+					TYPE_ENCOUNTER_NOT_ACTIVE,
+					TYPE_REALM_BALANCE_ABOVE
 				};
 
 				struct SubCondition
@@ -37,6 +38,8 @@ namespace tpublic
 					SubCondition(
 						const SourceNode*	aNode)
 					{
+						bool hasValue = false;
+
 						if (aNode->m_name == "if")
 						{
 							m_type = TYPE_IF;
@@ -52,12 +55,24 @@ namespace tpublic
 							m_type = TYPE_ENCOUNTER_NOT_ACTIVE;
 							m_dataType = DataType::ID_ENCOUNTER;
 						}
+						else if (aNode->m_name == "realm_balance_above")
+						{
+							m_type = TYPE_REALM_BALANCE_ABOVE;
+							m_dataType = DataType::ID_REALM_BALANCE;
+							hasValue = true;
+						}
 						else
 						{
 							TP_VERIFY(false, aNode->m_debugInfo, "'%s' is not a valid item.", aNode->m_name.c_str());
 						}
 
 						m_id = aNode->GetId(m_dataType);
+
+						if(hasValue)
+						{
+							TP_VERIFY(aNode->m_annotation, aNode->m_debugInfo, "Missing annotation value.");
+							m_value = aNode->m_annotation->GetInt32();
+						}
 					}
 
 					void
@@ -67,6 +82,7 @@ namespace tpublic
 						aStream->WritePOD(m_type);
 						aStream->WriteUInt(m_id);
 						aStream->WritePOD(m_dataType);
+						aStream->WriteInt(m_value);
 					}
 
 					bool
@@ -79,6 +95,8 @@ namespace tpublic
 							return false;
 						if (!aStream->ReadPOD(m_dataType))
 							return false;
+						if(!aStream->ReadInt(m_value))
+							return false;
 						return true;
 					}
 
@@ -86,6 +104,7 @@ namespace tpublic
 					Type										m_type = TYPE_NONE;
 					DataType::Id								m_dataType = DataType::INVALID_ID;
 					uint32_t									m_id = 0;
+					int32_t										m_value = 0;
 				};
 
 				SpawnCondition()

@@ -14,6 +14,45 @@ namespace tpublic
 			static const DataType::Id DATA_TYPE = DataType::ID_REALM_BALANCE;
 			static const bool TAGGED = false;
 
+			struct ThresholdToolTip
+			{
+				ThresholdToolTip()
+				{
+
+				}
+
+				ThresholdToolTip(
+					const SourceNode*	aSource)
+				{
+					TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing threshold annotation.");
+					m_threshold = aSource->m_annotation->GetInt32();
+					m_string = aSource->GetString();
+				}
+
+				void
+				ToStream(
+					IWriter*			aWriter) const
+				{
+					aWriter->WriteInt(m_threshold);
+					aWriter->WriteString(m_string);
+				}
+
+				bool
+				FromStream(
+					IReader*			aReader)
+				{
+					if(!aReader->ReadInt(m_threshold))
+						return false;
+					if(!aReader->ReadString(m_string))
+						return false;
+					return true;
+				}
+
+				// Public data
+				int32_t							m_threshold = 0;
+				std::string						m_string;
+			};
+
 			struct PeriodicReduction
 			{
 				PeriodicReduction()
@@ -78,6 +117,8 @@ namespace tpublic
 					{
 						if (aChild->m_name == "string")
 							m_string = aChild->GetString();
+						else if (aChild->m_name == "tool_tip")
+							m_toolTip = aChild->GetString();
 						else if (aChild->m_name == "default_value")
 							m_defaultValue = aChild->GetFloat();
 						else if (aChild->m_name == "max_value")
@@ -86,6 +127,8 @@ namespace tpublic
 							m_periodicReduction = PeriodicReduction(aChild);
 						else if(aChild->m_name == "color")
 							m_color = Image::RGBA(aChild);
+						else if(aChild->m_name == "threshold_tool_tip")
+							m_thresholdToolTips.push_back(ThresholdToolTip(aChild));
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -101,6 +144,8 @@ namespace tpublic
 				aStream->WriteFloat(m_maxValue);
 				aStream->WriteOptionalObject(m_periodicReduction);
 				aStream->WritePOD(m_color);
+				aStream->WriteString(m_toolTip);
+				aStream->WriteObjects(m_thresholdToolTips);
 			}
 
 			bool
@@ -117,6 +162,10 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadPOD(m_color))
 					return false;
+				if (!aStream->ReadString(m_toolTip))
+					return false;
+				if(!aStream->ReadObjects(m_thresholdToolTips))
+					return false;
 				return true;
 			}
 
@@ -126,6 +175,8 @@ namespace tpublic
 			float								m_maxValue = 0.0f;
 			std::optional<PeriodicReduction>	m_periodicReduction;
 			Image::RGBA							m_color;
+			std::string							m_toolTip;
+			std::vector<ThresholdToolTip>		m_thresholdToolTips;
 		};
 
 	}
