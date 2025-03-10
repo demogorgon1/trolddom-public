@@ -69,13 +69,14 @@ map_palette .stuff:
 	entity_spawn .flag_underworld: [ 43 104 40 ]
 	entity_spawn .flag_light: [ 143 104 40 ]
 	entity_spawn .flag_neutral: [ 143 104 140 ]
-	
+		
 	entity_spawn .the_light_guard: [ 40 160 39 ]
 	entity_spawn .the_light_defender_1: [ 140 160 39 ]
 	entity_spawn .the_light_defender_2: [ 140 100 39 ]
 	entity_spawn .the_light_defender_3: [ 10 160 139 ]
 	entity_spawn .the_light_defender_4: [ 54 160 39 ]
 	entity_spawn .the_light_defender_5: [ 110 10 239 ]
+	entity_spawn .the_light_irza: [ 210 40 102 ]
 
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn the_shrouded_lands_underworld: [ 255 0 0 ]
@@ -102,6 +103,8 @@ map_palette .sub_zones:
 	sub_zone .the_black_watch: [ 0 255 140 ]
 	sub_zone .dawnbringer_keep: [ 0 255 115 ]
 	sub_zone .the_foul_breach: [ 189 255 0 ]	
+	
+	sub_zone .the_light_irza: [ 64 44 113 ]
 }
 
 map_palette .routes:

@@ -24,6 +24,7 @@ loot_table .default_humanoid:
 # The Light
 
 map_entity_spawn .the_light_guard: { entity .the_light_guard: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn .the_light_irza: { entity .the_light_irza: {} spawn_timer: !NPC_RESPAWN_RARE{} }
 
 !define local THE_LIGHT_DEFENDER
 {
@@ -74,3 +75,108 @@ map_entity_spawn .the_light_defender_5: !THE_LIGHT_DEFENDER{ _spawn_power: 900 }
 	
 	entity .the_light_guard_control_point: !NPC { _string: "Guardian" _sprite: angel_2 _sprite_dead: angel_2_dead }
 }
+
+# Irza
+zone .the_light_irza: 
+{
+}
+
+aura .the_light_irza_shield:
+{
+	string: "Shielded"
+	description: "Invulnerable to all damage."
+	icon: icon_stuff		
+	type: buff
+	flags: [ unique indefinite ]
+	particle_system: .the_light_irza_shield
+	aura_effect damage_input_modifier: { type_mask: [ all ] multiplier: 0 } 
+}
+
+particle_system .the_light_irza_shield:
+{
+	particle:
+	{
+		sprites: [ effect_divine_shield_0 effect_divine_shield_1 effect_divine_shield_2 ]
+		flags: [ attached ]
+		sprite_interval: 150
+		count: 1
+		scale: 2
+		alpha: 0.45
+		fade_in: 500
+		fade_out: 500
+		offset_x: 1
+		offset_y: 1	
+	}
+}
+
+cooldown .the_light_irza_shield:
+{
+	duration: 30
+} 
+
+ability .the_light_irza_shield:
+{
+	flags: [ target_self ]
+	string: "Shield"
+	cast_time: 20
+	cooldowns: [ .the_light_irza_shield ]
+	icon: icon_stuff
+	must_not_have_world_aura: the_shrouded_lands_light_enemy_shield_down	
+	direct_effect apply_aura:
+	{
+		aura: .the_light_irza_shield
+	}
+}
+
+npc_behavior_state .the_light_irza:
+{
+	behavior: use_ability
+}
+
+entity .the_light_irza: !NPC
+{
+	_string: "Irza"
+	_level: 22
+	_elite: true
+	_large: true
+	_faction: light
+	_sprite: dragon_2
+	_sprite_dead: dragon_2_dead
+	#_loot_table: .the_light_irza
+	_creature_type: dragon
+	_resource_health: 4
+	_weapon_damage: 3
+	_default_behavior_state: .the_light_irza
+	_zone: .the_light_irza
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+	
+	_default_abilities:
+	[
+		{
+			target: self
+			id: .the_light_irza_shield
+			requirement self<must_not_have_aura>: .the_light_irza_shield
+		}
+	]
+	
+	_abilities: 
+	[	
+		{
+			id: npc_attack
+		}
+	]		
+	
+	_in_combat_barks:
+	[
+		{ type: yell text: "Bow before me!" flags: [ no_chat_bubble ] }
+	]	
+
+	_dead_barks:
+	[
+		{ type: say text: "The light is waning..." flags: [ no_chat_bubble ] }
+	]
+}
+

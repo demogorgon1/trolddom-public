@@ -117,6 +117,9 @@ namespace tpublic::Systems
 						entry->m_cancel = true;
 				}
 
+				if(aura->m_mustNotHaveWorldAuraId != 0 && aContext->m_worldView->WorldViewHasWorldAura(aura->m_mustNotHaveWorldAuraId))
+					entry->m_cancel = true;
+
 				if(!entry->m_cancel)
 				{
 					if(entry->m_channeledAbilityId != 0)

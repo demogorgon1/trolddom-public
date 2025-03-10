@@ -217,6 +217,8 @@ namespace tpublic
 							m_auraGroupId = aChild->GetId(DataType::ID_AURA_GROUP);
 						else if (aChild->m_name == "mount")
 							m_mountId = aChild->GetId(DataType::ID_MOUNT);
+						else if (aChild->m_name == "must_not_have_world_aura")
+							m_mustNotHaveWorldAuraId = aChild->GetId(DataType::ID_WORLD_AURA);
 						else if(aChild->m_tag == "cancel_requirement")
 							m_cancelRequirements.push_back(Requirement(aChild));
 						else if(aChild->m_name == "color_effect")
@@ -250,6 +252,7 @@ namespace tpublic
 				aStream->WriteOptionalPOD(m_colorEffect);
 				aStream->WriteOptionalPOD(m_colorWeaponGlow);
 				aStream->WriteUInt(m_mountId);
+				aStream->WriteUInt(m_mustNotHaveWorldAuraId);
 			}
 			 
 			bool
@@ -323,6 +326,12 @@ namespace tpublic
 						return false;
 				}
 
+				if (!aStream->IsEnd())
+				{
+					if (!aStream->ReadUInt(m_mustNotHaveWorldAuraId))
+						return false;
+				}
+
 				return true;
 			}
 
@@ -344,6 +353,7 @@ namespace tpublic
 			std::vector<Requirement>						m_cancelRequirements;			
 			std::optional<Image::RGBA>						m_colorEffect;
 			std::optional<Image::RGBA>						m_colorWeaponGlow;
+			uint32_t										m_mustNotHaveWorldAuraId = 0;
 		};
 
 	}

@@ -68,6 +68,7 @@ namespace tpublic
 			ID_MOUNT,
 			ID_REALM_BALANCE,
 			ID_CONTROL_POINT_STATE,
+			ID_WORLD_AURA,
 
 			NUM_IDS
 		};
@@ -133,7 +134,8 @@ namespace tpublic
 			"ability_list",
 			"mount",
 			"realm_balance",
-			"control_point_state"
+			"control_point_state",
+			"world_aura"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

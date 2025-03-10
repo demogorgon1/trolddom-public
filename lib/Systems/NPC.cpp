@@ -595,6 +595,9 @@ namespace tpublic::Systems
 								if (!combat->HasResourcesForAbility(ability, NULL, combat->GetResourceMax(Resource::ID_MANA)))
 									continue;
 
+								if(ability->m_mustNotHaveWorldAuraId != 0 && aContext->m_worldView->WorldViewHasWorldAura(ability->m_mustNotHaveWorldAuraId))
+									continue;				
+								
 								if (abilityEntry.m_useProbability == UINT32_MAX || (*aContext->m_random)() < abilityEntry.m_useProbability)
 								{
 									uint32_t targetEntityInstanceId = 0;
@@ -645,9 +648,21 @@ namespace tpublic::Systems
 											targetEntityInstanceId = selectedTarget->GetEntityInstanceId();
 										}
 									}
+									else if(abilityEntry.m_targetType == Components::NPC::AbilityEntry::TARGET_TYPE_SELF)
+									{
+										targetEntityInstanceId = aEntityInstanceId;
+									}
 
 									if (targetEntityInstanceId != 0)
 									{
+										if (abilityEntry.m_requirements.size() > 0)
+										{
+											const EntityInstance* self = aContext->m_worldView->WorldViewSingleEntityInstance(aEntityInstanceId);
+											const EntityInstance* target = aContext->m_worldView->WorldViewSingleEntityInstance(targetEntityInstanceId);
+											if (self != NULL && target != NULL && !Requirements::CheckList(GetManifest(), abilityEntry.m_requirements, self, target))
+												continue;
+										}
+
 										npc->m_cooldowns.AddAbility(GetManifest(), ability, aContext->m_tick, 0.0f, NULL); // FIXME: cooldown modifier from haste?
 
 										if (ability->m_castTime > 0)
@@ -795,6 +810,9 @@ namespace tpublic::Systems
 							for (const Components::NPC::AbilityEntry& abilityEntry : state->m_abilities)
 							{
 								const Data::Ability* ability = GetManifest()->GetById<tpublic::Data::Ability>(abilityEntry.m_abilityId);
+
+								if (ability->m_mustNotHaveWorldAuraId != 0 && aContext->m_worldView->WorldViewHasWorldAura(ability->m_mustNotHaveWorldAuraId))
+									continue;
 
 								if(abilityEntry.m_requirements.size() > 0)
 								{

@@ -105,8 +105,7 @@ namespace tpublic::Helpers
 			return _CalculateDistanceSquaredToLargeEntity(aA->m_position, aB);
 
 		// Large/large
-		// FIXME: we don't need this for now
-		assert(false);
+		// FIXME: we don't need this for now. Only used for large->large self casts.
 		return 0;
 	}
 	

@@ -681,6 +681,8 @@ sprites:
 	sprite giant_skeleton_1: { dead: giant_skeleton_1_dead }
 	sprite giant_beast_1: { dead: giant_beast_1_dead }
 	sprite giant_wood_elemental_1: { dead: giant_wood_elemental_1_dead }
+	sprite giant_demon_1: { dead: giant_demon_1_dead }
+	sprite dragon_2: { dead: dragon_2_dead tags: [ dragon ] }
 	
 	cursor: { position: [ 0 32 ] }
 	
@@ -690,6 +692,8 @@ sprites:
 	sprite giant_skeleton_1_dead: { }
 	sprite giant_beast_1_dead: { }
 	sprite giant_wood_elemental_1_dead: { }
+	sprite giant_demon_1_dead: { }
+	sprite dragon_2_dead: { }
 }
 
 sprites:

@@ -60,6 +60,8 @@ namespace tpublic
 											uint32_t				aRealmBalanceId) const = 0;
 		virtual size_t					WorldViewGetPVPFactionControlPointCount(
 											uint32_t				aFactionId) const = 0;
+		virtual bool					WorldViewHasWorldAura(
+											uint32_t				aWorldAuraId) const = 0;
 	};
 
 }

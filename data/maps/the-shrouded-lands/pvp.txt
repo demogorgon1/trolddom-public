@@ -12,7 +12,13 @@ realm_balance the_shrouded_lands_light:
 	threshold_tool_tip<900>: "Increased holy guard spawns."
 	threshold_tool_tip<1000>: "The defensive aura of Draethor is dissolved for 30 minutes."
 	
-	tool_tip: "Increased by completing quests for the light.\n\nCompleting quests create more power when more control points have been captured.\n\nResets at 1000."	
+	tool_tip: "Increased by completing quests for the light.\n\nCompleting quests generate more power when more control points have been captured.\n\nResets at 1000."	
+	
+	max_value_event:
+	{
+		reset: true		
+		apply_world_aura: the_shrouded_lands_light_enemy_shield_down
+	}
 }
 
 realm_balance the_shrouded_lands_underworld:
@@ -29,7 +35,13 @@ realm_balance the_shrouded_lands_underworld:
 	threshold_tool_tip<900>: "Increased unholy guard spawns."
 	threshold_tool_tip<1000>: "The defensive aura of Irza is dissolved for 30 minutes."	
 	
-	tool_tip: "Increased by completing quests for the underworld.\n\nCompleting quests create more power when more control points have been captured.\n\nResets at 1000."	
+	tool_tip: "Increased by completing quests for the underworld.\n\nCompleting quests generate more power when more control points have been captured.\n\nResets at 1000."	
+	
+	max_value_event:
+	{
+		reset: true		
+		apply_world_aura: the_shrouded_lands_underworld_enemy_shield_down
+	}	
 }
 
 map_entity_spawn .flag_underworld: { entity .flag_underworld: { init_state: default } }
@@ -95,4 +107,14 @@ control_point_state the_shrouded_lands_neutral:
 {
 	sprite: the_shrouded_lands_neutral_flag
 	tool_tip: "Control Point: Unclaimed"	
+}
+
+world_aura the_shrouded_lands_light_enemy_shield_down:
+{
+	duration_minutes: 30
+}
+
+world_aura the_shrouded_lands_underworld_enemy_shield_down:
+{
+	duration_minutes: 30
 }

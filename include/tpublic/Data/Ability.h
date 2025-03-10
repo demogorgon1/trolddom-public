@@ -644,6 +644,8 @@ namespace tpublic
 							m_targetItemAuraId = aMember->GetId(DataType::ID_AURA);
 						else if (aMember->m_name == "toggle_aura")
 							m_toggleAuraId = aMember->GetId(DataType::ID_AURA);
+						else if (aMember->m_name == "must_not_have_world_aura")
+							m_mustNotHaveWorldAuraId = aMember->GetId(DataType::ID_WORLD_AURA);
 						else
 							TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
 					}
@@ -700,6 +702,7 @@ namespace tpublic
 				aWriter->WriteString(m_targetItemConfirmation);
 				aWriter->WriteOptionalObjectPointer(m_targetItemProspect);
 				aWriter->WriteUInt(m_targetItemAuraId);
+				aWriter->WriteUInt(m_mustNotHaveWorldAuraId);
 				aWriter->WriteUInt(m_toggleAuraId);
 
 				for(uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
@@ -802,6 +805,8 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadUInt(m_targetItemAuraId))
 					return false;
+				if (!aReader->ReadUInt(m_mustNotHaveWorldAuraId))
+					return false;
 				if(!aReader->ReadUInt(m_toggleAuraId))
 					return false;
 
@@ -853,6 +858,7 @@ namespace tpublic
 			DataReference										m_descriptionFrom;
 			uint32_t											m_mustHaveNearbyEntityId = 0;
 			std::vector<uint32_t>								m_mustHaveOneOfNearbyEntityIds;
+			uint32_t											m_mustNotHaveWorldAuraId = 0;
 			std::vector<Visual>									m_sourceVisuals;
 			uint32_t											m_triggerOnlyCooldownId = 0;
 			uint32_t											m_zoneId = 0;
