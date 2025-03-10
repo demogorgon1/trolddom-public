@@ -36,6 +36,11 @@ map_entity_spawn .flag_underworld: { entity .flag_underworld: { init_state: defa
 map_entity_spawn .flag_light: { entity .flag_light: { init_state: default } }
 map_entity_spawn .flag_neutral: { entity .flag_neutral: { init_state: default } }
 
+ability .capture_flag:
+{
+	direct_effect simple<capture>: { flags: [ reverse ] }
+}
+
 !define local THE_SHROUDED_LANDS_FLAG
 {
 	string: "Control Point"
@@ -56,10 +61,11 @@ map_entity_spawn .flag_neutral: { entity .flag_neutral: { init_state: default } 
 		{ 
 			verb: capture
 			range: 1 
+			trigger_ability: .capture_flag
 		}		
 	}
 }
-
+ 
 entity .flag_underworld: !THE_SHROUDED_LANDS_FLAG{ _default_index: 1 }
 entity .flag_light: !THE_SHROUDED_LANDS_FLAG{ _default_index: 2 }
 entity .flag_neutral: !THE_SHROUDED_LANDS_FLAG{ _default_index: 0 }

@@ -25,7 +25,7 @@ namespace tpublic
 
 			static void
 			CreateSchema(
-				ComponentSchema* aSchema)
+				ComponentSchema*		aSchema)
 			{
 				aSchema->Define(ComponentSchema::TYPE_UINT32_ARRAY, FIELD_CONTROL_POINT_STATE_IDS, "states", offsetof(ControlPoint, m_controlPointStateIds))->SetDataType(DataType::ID_CONTROL_POINT_STATE);
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_INDEX, "index", offsetof(ControlPoint, m_index));
@@ -36,6 +36,20 @@ namespace tpublic
 			{
 				m_index = 0;
 				m_controlPointStateIds.clear();
+			}
+
+			void
+			SetControlPointStateId(
+				uint32_t				aControlPointStateId)
+			{
+				for(size_t i = 0; i < m_controlPointStateIds.size(); i++)
+				{
+					if(m_controlPointStateIds[i] == aControlPointStateId)
+					{
+						m_index = (uint32_t)i;
+						return;
+					}
+				}
 			}
 
 			// Public data

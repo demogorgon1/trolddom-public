@@ -26,6 +26,7 @@ namespace tpublic
 			ID_SET_OWN_STATE,
 			ID_RECALL,
 			ID_LEARN_RIDING,
+			ID_CAPTURE,
 
 			NUM_IDS
 		};
@@ -56,6 +57,7 @@ namespace tpublic
 			{ "set_own_state",		DataType::INVALID_ID,	true },
 			{ "recall",				DataType::INVALID_ID,	false },
 			{ "learn_riding",		DataType::INVALID_ID,	false },
+			{ "capture",			DataType::INVALID_ID,	false },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

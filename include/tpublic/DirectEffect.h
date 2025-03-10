@@ -13,7 +13,8 @@ namespace tpublic
 			FLAG_CAN_BE_CRITICAL		= 0x00000004,
 			FLAG_LEECH					= 0x00000008,
 			FLAG_SELF					= 0x00000010,
-			FLAG_MINION					= 0x00000020
+			FLAG_MINION					= 0x00000020,
+			FLAG_REVERSE				= 0x00000040
 		};
 
 		enum DamageType : uint8_t
@@ -68,6 +69,8 @@ namespace tpublic
 				return FLAG_SELF;
 			if (strcmp(aString, "minion") == 0)
 				return FLAG_MINION;
+			if (strcmp(aString, "reverse") == 0)
+				return FLAG_REVERSE;
 			return 0;
 		}
 
