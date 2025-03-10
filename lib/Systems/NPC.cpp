@@ -273,6 +273,7 @@ namespace tpublic::Systems
 			if(aContext->m_tick - threat->m_lastPingTick >= Components::ThreatTarget::PING_INTERVAL_TICKS && !passive)
 			{				
 				bool blind = auras->HasEffect(AuraEffect::ID_BLIND, NULL);
+				//bool canAggro = !faction->IsNeutralOrFriendly() || faction->IsPantheon();
 
 				IWorldView::EntityQuery entityQuery;
 				entityQuery.m_position = position->m_position;
@@ -285,42 +286,46 @@ namespace tpublic::Systems
 				{
 					if(aEntity->GetState() != EntityState::ID_DEAD)
 					{
-						bool isThreatSource = aEntity->HasComponent<tpublic::Components::ThreatSource>();
+						if (aEntityState == EntityState::ID_DEFAULT && aEntity->HasComponent<Components::ThreatSource>())
+						{							
+							const Components::CombatPublic* targetCombatPublic = aEntity->GetComponent<tpublic::Components::CombatPublic>();
+							bool canAggro = !faction->IsNeutralOrFriendly() ||
+								(faction->IsPVP() && faction->m_id != targetCombatPublic->m_factionId);
 
-						if (aEntityState == EntityState::ID_DEFAULT && isThreatSource && (!faction->IsNeutralOrFriendly() || combat->m_targetEntityInstanceId == aEntity->GetEntityInstanceId()))
-						{
-							const tpublic::Components::CombatPublic* targetCombatPublic = aEntity->GetComponent<tpublic::Components::CombatPublic>();
-							int32_t aggroRange = 0;
-
-							if(blind)
-								aggroRange = 1;
-							else
-								aggroRange = GetManifest()->m_npcMetrics.GetAggroRangeForLevelDifference((int32_t)combat->m_level, (int32_t)targetCombatPublic->m_level);
-
-							if(targetCombatPublic->m_stealthLevel > 0)
+							if(canAggro || combat->m_targetEntityInstanceId == aEntity->GetEntityInstanceId())
 							{
-								if(aggroRange > 1)
-									aggroRange--;
-							}
+								int32_t aggroRange = 0;
 
-							if(aDistanceSquared <= aggroRange * aggroRange)
-							{
-								bool detected = true;
+								if (blind)
+									aggroRange = 1;
+								else
+									aggroRange = GetManifest()->m_npcMetrics.GetAggroRangeForLevelDifference((int32_t)combat->m_level, (int32_t)targetCombatPublic->m_level);
 
 								if (targetCombatPublic->m_stealthLevel > 0)
 								{
-									uint32_t detectionChance = StealthUtils::GetOneSecondDetectionChance(aDistanceSquared, targetCombatPublic->m_stealthLevel, combat->m_level, targetCombatPublic->m_level);
-									uint32_t roll = (*aContext->m_random)();
-									detected = roll < detectionChance;
+									if (aggroRange > 1)
+										aggroRange--;
 								}
 
-								if(detected && (npc->m_aggroRequirements.m_requirements.empty() || Requirements::CheckList(GetManifest(), npc->m_aggroRequirements.m_requirements, NULL, aEntity)))
-									aContext->m_eventQueue->EventQueueThreat({ aEntity->GetEntityInstanceId(), aEntity->GetSeq() }, aEntityInstanceId, 1, aContext->m_tick);
+								if (aDistanceSquared <= aggroRange * aggroRange)
+								{
+									bool detected = true;
+
+									if (targetCombatPublic->m_stealthLevel > 0)
+									{
+										uint32_t detectionChance = StealthUtils::GetOneSecondDetectionChance(aDistanceSquared, targetCombatPublic->m_stealthLevel, combat->m_level, targetCombatPublic->m_level);
+										uint32_t roll = (*aContext->m_random)();
+										detected = roll < detectionChance;
+									}
+
+									if (detected && (npc->m_aggroRequirements.m_requirements.empty() || Requirements::CheckList(GetManifest(), npc->m_aggroRequirements.m_requirements, NULL, aEntity)))
+										aContext->m_eventQueue->EventQueueThreat({ aEntity->GetEntityInstanceId(), aEntity->GetSeq() }, aEntityInstanceId, 1, aContext->m_tick);
+								}
 							}
 						}
-						else if(topThreatEntity != NULL && aEntity->GetState() != EntityState::ID_IN_COMBAT && !faction->IsNeutralOrFriendly())
+						else if (topThreatEntity != NULL && aEntity->GetState() != EntityState::ID_IN_COMBAT && (!faction->IsNeutralOrFriendly() || faction->IsPVP()))
 						{
-							const tpublic::Components::CombatPublic* nearbyNonPlayerCombatPublic = aEntity->GetComponent<tpublic::Components::CombatPublic>();
+							const Components::CombatPublic* nearbyNonPlayerCombatPublic = aEntity->GetComponent<Components::CombatPublic>();
 							int32_t aggroAssistRange = GetManifest()->m_npcMetrics.m_aggroAssistRange;
 							if(nearbyNonPlayerCombatPublic != NULL && nearbyNonPlayerCombatPublic->m_factionId == combat->m_factionId && aDistanceSquared <= aggroAssistRange * aggroAssistRange)
 								aContext->m_eventQueue->EventQueueThreat({ topThreatEntity->GetEntityInstanceId(), topThreatEntity->GetSeq() }, aEntity->GetEntityInstanceId(), 1, threat->m_table.GetTick());

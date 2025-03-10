@@ -77,6 +77,13 @@ map_palette .stuff:
 	entity_spawn .the_light_defender_4: [ 54 160 39 ]
 	entity_spawn .the_light_defender_5: [ 110 10 239 ]
 	entity_spawn .the_light_irza: [ 210 40 102 ]
+	entity_spawn .the_underworld_guard: [ 40 76 39 ]
+	entity_spawn .the_underworld_defender_1: [ 140 76 139 ]
+	entity_spawn .the_underworld_defender_2: [ 140 76 39 ]
+	entity_spawn .the_underworld_defender_3: [ 110 76 139 ]
+	entity_spawn .the_underworld_defender_4: [ 154 76 34 ]
+	entity_spawn .the_underworld_defender_5: [ 110 76 233 ]
+	entity_spawn .the_underworld_draethor: [ 150 76 100 ]
 
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn the_shrouded_lands_underworld: [ 255 0 0 ]
@@ -105,6 +112,7 @@ map_palette .sub_zones:
 	sub_zone .the_foul_breach: [ 189 255 0 ]	
 	
 	sub_zone .the_light_irza: [ 64 44 113 ]
+	sub_zone .the_underworld_draethor: [ 164 44 113 ]
 }
 
 map_palette .routes:
