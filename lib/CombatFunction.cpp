@@ -6,6 +6,7 @@
 #include <tpublic/CombatFunction.h>
 #include <tpublic/EntityInstance.h>
 #include <tpublic/Helpers.h>
+#include <tpublic/IWorldView.h>
 
 namespace tpublic
 {
@@ -34,7 +35,7 @@ namespace tpublic
 		}
 
 		uint32_t
-		_SampleUIntRange(
+		_SampleUIntRange(	
 			CombatFunction::RandomSource		aRandomSource,
 			uint32_t							aMin,
 			uint32_t							aMax)
@@ -75,6 +76,8 @@ namespace tpublic
 
 		float
 		_GetInput(
+			const Manifest*						/*aManifest*/,
+			const IWorldView*					aWorldView,
 			CombatFunction::RandomSource		aRandomSource,
 			const Components::CombatPublic*		aCombatPublic,
 			const Components::CombatPrivate*	aCombatPrivate,
@@ -82,6 +85,15 @@ namespace tpublic
 		{
 			switch(aInput)
 			{
+			case CombatFunction::INPUT_PVP_CONTROL_POINTS:				
+				{
+					if (aWorldView == NULL || aCombatPublic == NULL || aCombatPublic->m_factionId == 0)
+						return 0.0f;
+
+					return (float)aWorldView->WorldViewGetPVPFactionControlPointCount(aCombatPublic->m_factionId);
+				}
+				break;
+
 			case CombatFunction::INPUT_HEALTH_CURRENT:	
 				if(aCombatPublic != NULL)
 					return (float)aCombatPublic->GetResource(Resource::ID_HEALTH);
@@ -169,6 +181,8 @@ namespace tpublic
 
 	float		
 	CombatFunction::Evaluate(
+		const Manifest*						aManifest,
+		const IWorldView*					aWorldView,
 		CombatFunction::RandomSource		aRandomSource,
 		float								aMultiplier,
 		const Components::CombatPublic*		aCombatPublic,
@@ -183,23 +197,23 @@ namespace tpublic
 			break;
 
 		case EXPRESSION_A_MUL_X:
-			output = _GetA(aCombatPublic, this) * _GetInput(aRandomSource, aCombatPublic, aCombatPrivate, m_x);
+			output = _GetA(aCombatPublic, this) * _GetInput(aManifest, aWorldView, aRandomSource, aCombatPublic, aCombatPrivate, m_x);
 			break;
 
 		case EXPRESSION_A_MUL_X_PLUS_B:
-			output = _GetA(aCombatPublic, this) * _GetInput(aRandomSource, aCombatPublic, aCombatPrivate, m_x) + _GetB(aCombatPublic, this);
+			output = _GetA(aCombatPublic, this) * _GetInput(aManifest, aWorldView, aRandomSource, aCombatPublic, aCombatPrivate, m_x) + _GetB(aCombatPublic, this);
 			break;
 
 		case EXPRESSION_A_MUL_X_PLUS_B_MUL_Y:
-			output = _GetA(aCombatPublic, this) * _GetInput(aRandomSource, aCombatPublic, aCombatPrivate, m_x) + _GetB(aCombatPublic, this) * _GetInput(aRandomSource, aCombatPublic, aCombatPrivate, m_y);
+			output = _GetA(aCombatPublic, this) * _GetInput(aManifest, aWorldView, aRandomSource, aCombatPublic, aCombatPrivate, m_x) + _GetB(aCombatPublic, this) * _GetInput(aManifest, aWorldView, aRandomSource, aCombatPublic, aCombatPrivate, m_y);
 			break;
 
 		case EXPRESSION_X_PLUS_A:
-			output = _GetInput(aRandomSource, aCombatPublic, aCombatPrivate, m_x) + _GetA(aCombatPublic, this);
+			output = _GetInput(aManifest, aWorldView, aRandomSource, aCombatPublic, aCombatPrivate, m_x) + _GetA(aCombatPublic, this);
 			break;
 
 		case EXPRESSION_X:
-			output = _GetInput(aRandomSource, aCombatPublic, aCombatPrivate, m_x);
+			output = _GetInput(aManifest, aWorldView, aRandomSource, aCombatPublic, aCombatPrivate, m_x);
 			break;
 
 		default:
@@ -236,11 +250,15 @@ namespace tpublic
 
 	float		
 	CombatFunction::EvaluateEntityInstance(
+		const Manifest*						aManifest,
+		const IWorldView*					aWorldView,
 		CombatFunction::RandomSource		aRandomSource,
 		float								aMultiplier,
 		const EntityInstance*				aEntityInstance) const
 	{
 		return Evaluate(
+			aManifest,
+			aWorldView,
 			aRandomSource, 
 			aMultiplier,
 			aEntityInstance->GetComponent<Components::CombatPublic>(),
@@ -249,6 +267,8 @@ namespace tpublic
 
 	float		
 	CombatFunction::EvaluateSourceAndTargetEntityInstances(
+		const Manifest*						aManifest,
+		const IWorldView*					aWorldView,
 		RandomSource						aRandomSource,
 		float								aMultiplier,
 		const EntityInstance*				aSourceEntityInstance,
@@ -261,17 +281,19 @@ namespace tpublic
 		case ENTITY_TARGET: entityInstance = aTargetEntityInstance; break;
 		default:			return 0.0f;
 		}
-		return EvaluateEntityInstance(aRandomSource, aMultiplier, entityInstance);
+		return EvaluateEntityInstance(aManifest, aWorldView, aRandomSource, aMultiplier, entityInstance);
 	}
 
 	void		
 	CombatFunction::ToRange(
+		const Manifest*						aManifest,
+		const IWorldView*					aWorldView,
 		float								aMultiplier,
 		const EntityInstance*				aEntityInstance,
 		UIntRange&							aOut) const
 	{
-		aOut.m_min = (uint32_t)EvaluateEntityInstance(RandomSource(RandomSource::TYPE_MIN), aMultiplier, aEntityInstance);
-		aOut.m_max = (uint32_t)EvaluateEntityInstance(RandomSource(RandomSource::TYPE_MAX), aMultiplier, aEntityInstance);
+		aOut.m_min = (uint32_t)EvaluateEntityInstance(aManifest, aWorldView, RandomSource(RandomSource::TYPE_MIN), aMultiplier, aEntityInstance);
+		aOut.m_max = (uint32_t)EvaluateEntityInstance(aManifest, aWorldView, RandomSource(RandomSource::TYPE_MAX), aMultiplier, aEntityInstance);
 	}
 
 }

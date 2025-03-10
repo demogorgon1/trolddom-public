@@ -74,5 +74,5 @@ quest .kaelion_1:
 	reward_xp_multiplier: 0
 	reward_cash_multiplier: 0
 	reward_reputation_multiplier: 1
-	reward_realm_balance<the_shrouded_lands_light>: 10
+	reward_realm_balance<the_shrouded_lands_light>: { expression: a_mul_x_plus_b x: pvp_control_points a: 2 b: 9 }
 }

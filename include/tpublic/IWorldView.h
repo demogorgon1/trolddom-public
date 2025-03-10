@@ -58,6 +58,8 @@ namespace tpublic
 											uint32_t				aPantheonId) const = 0;
 		virtual int32_t					WorldViewGetRealmBalance(
 											uint32_t				aRealmBalanceId) const = 0;
+		virtual size_t					WorldViewGetPVPFactionControlPointCount(
+											uint32_t				aFactionId) const = 0;
 	};
 
 }

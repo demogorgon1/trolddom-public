@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../CombatFunction.h"
 #include "../DataBase.h"
 
 namespace tpublic
@@ -74,7 +75,7 @@ namespace tpublic
 				{
 					TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing realm balance annotation.");
 					m_realmBalanceId = aSource->m_annotation->GetId(DataType::ID_REALM_BALANCE);
-					m_value = aSource->GetFloat();
+					m_function = CombatFunction(aSource);
 				}
 
 				void
@@ -82,7 +83,7 @@ namespace tpublic
 					IWriter*			aWriter) const
 				{
 					aWriter->WriteUInt(m_realmBalanceId);
-					aWriter->WriteFloat(m_value);
+					m_function.ToStream(aWriter);
 				}
 
 				bool
@@ -91,14 +92,14 @@ namespace tpublic
 				{
 					if(!aReader->ReadUInt(m_realmBalanceId))
 						return false;
-					if(!aReader->ReadFloat(m_value))
+					if(!m_function.FromStream(aReader))
 						return false;
 					return true;
 				}
 
 				// Public data
 				uint32_t			m_realmBalanceId = 0;
-				float				m_value = 0.0f;
+				CombatFunction		m_function;
 			};
 
 			void

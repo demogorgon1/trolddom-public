@@ -12,6 +12,7 @@
 #include <tpublic/Components/CombatPrivate.h>
 #include <tpublic/Components/CombatPublic.h>
 #include <tpublic/Components/CompletedQuests.h>
+#include <tpublic/Components/ControlPoint.h>
 #include <tpublic/Components/DeityDiscovery.h>
 #include <tpublic/Components/DeityRelations.h>
 #include <tpublic/Components/DisplayName.h>
@@ -79,6 +80,7 @@ namespace tpublic
 		_Register<Components::CombatPrivate>();
 		_Register<Components::CombatPublic>();
 		_Register<Components::CompletedQuests>();
+		_Register<Components::ControlPoint>();
 		_Register<Components::DeityDiscovery>();
 		_Register<Components::DeityRelations>();
 		_Register<Components::DisplayName>();

@@ -77,7 +77,7 @@ namespace tpublic::DirectEffects
 		IResourceChangeQueue*			aResourceChangeQueue,
 		IAuraEventQueue*				/*aAuraEventQueue*/,
 		IEventQueue*					aEventQueue,
-		const IWorldView*				/*aWorldView*/) 
+		const IWorldView*				aWorldView) 
 	{
 		const Components::CombatPrivate* sourceCombatPrivate = aSource != NULL ? aSource->GetComponent<Components::CombatPrivate>() : NULL;
 		const Components::CombatPublic* targetCombatPublic = aTarget->GetComponent<Components::CombatPublic>();
@@ -85,7 +85,7 @@ namespace tpublic::DirectEffects
 		if(sourceCombatPrivate == NULL || targetCombatPublic == NULL)
 			return Result();
 
-		uint32_t heal = (uint32_t)m_function.EvaluateSourceAndTargetEntityInstances(aRandom, 1.0f, aSource, aTarget);
+		uint32_t heal = (uint32_t)m_function.EvaluateSourceAndTargetEntityInstances(aManifest, aWorldView, aRandom, 1.0f, aSource, aTarget);
 
 		if(m_maxHealthPercentage)
 		{	
@@ -159,7 +159,7 @@ namespace tpublic::DirectEffects
 		uint32_t					/*aAbilityId*/,
 		UIntRange&					aOutHeal) const 
 	{
-		m_function.ToRange(1.0f, aEntityInstance, aOutHeal);
+		m_function.ToRange(NULL, NULL, 1.0f, aEntityInstance, aOutHeal);
 		return true;
 	}
 

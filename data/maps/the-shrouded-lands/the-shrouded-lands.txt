@@ -158,15 +158,19 @@ map the_shrouded_lands:
 		{
 			reputation: light
 			player_spawn: the_shrouded_lands_light
+			control_point_entities: [ .flag_underworld .flag_light .flag_neutral ]
+			captured_control_point_state: the_shrouded_lands_light
 		}
 		
 		faction underworld:
 		{
 			reputation: underworld
-			player_spawn: the_shrouded_lands_underworld
+			player_spawn: the_shrouded_lands_underworld				
+			control_point_entities: [ .flag_underworld .flag_light .flag_neutral ]
+			captured_control_point_state: the_shrouded_lands_underworld
 		}		
 	}
-
+	
 	layers:
 	[
 		{

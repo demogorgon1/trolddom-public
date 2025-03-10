@@ -419,6 +419,13 @@ namespace tpublic
 			return m_type == TYPE_OBJECT && m_name.empty();
 		}
 
+		const SourceNode*
+		GetAnnotation() const 
+		{
+			TP_VERIFY(m_annotation, m_debugInfo, "Missing annotation.");
+			return m_annotation.get();
+		}
+
 		// Public data
 		Type										m_type;
 		SourceContext*								m_sourceContext;

@@ -12,7 +12,7 @@ realm_balance the_shrouded_lands_light:
 	threshold_tool_tip<900>: "Increased holy guard spawns."
 	threshold_tool_tip<1000>: "The defensive aura of Draethor is dissolved for 30 minutes."
 	
-	tool_tip: "Increases as more quests are completed and control points are captured for the light."
+	tool_tip: "Increased by completing quests for the light.\n\nCompleting quests create more power when more control points have been captured.\n\nResets at 1000."	
 }
 
 realm_balance the_shrouded_lands_underworld:
@@ -29,4 +29,64 @@ realm_balance the_shrouded_lands_underworld:
 	threshold_tool_tip<900>: "Increased unholy guard spawns."
 	threshold_tool_tip<1000>: "The defensive aura of Irza is dissolved for 30 minutes."	
 	
-	tool_tip: "Increases as more quests are completed and control points are captured for the underworld."
+	tool_tip: "Increased by completing quests for the underworld.\n\nCompleting quests create more power when more control points have been captured.\n\nResets at 1000."	
+}
+
+map_entity_spawn .flag_underworld: { entity .flag_underworld: { init_state: default } }
+map_entity_spawn .flag_light: { entity .flag_light: { init_state: default } }
+map_entity_spawn .flag_neutral: { entity .flag_neutral: { init_state: default } }
+
+!define local THE_SHROUDED_LANDS_FLAG
+{
+	string: "Control Point"
+	flags: [ always_replicate ]
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite<static>: { animations: [ { states: [ default ] frames: [ gs_flag_none gs_flag_underworld gs_flag_light ] z_offset: -3 use_control_point_index: true } ] }		
+
+		control_point: 
+		{ 
+			index: @_default_index
+			states: [ the_shrouded_lands_neutral the_shrouded_lands_underworld the_shrouded_lands_light ]
+		}
+
+		openable: 
+		{ 
+			verb: capture
+			range: 1 
+		}		
+	}
+}
+
+entity .flag_underworld: !THE_SHROUDED_LANDS_FLAG{ _default_index: 1 }
+entity .flag_light: !THE_SHROUDED_LANDS_FLAG{ _default_index: 2 }
+entity .flag_neutral: !THE_SHROUDED_LANDS_FLAG{ _default_index: 0 }
+
+sprites:
+{
+	source: "map-flags.png"
+	size: { width: 9 height: 8 }
+	sprite the_shrouded_lands_underworld_flag: { }
+	sprite the_shrouded_lands_light_flag: { }
+	sprite the_shrouded_lands_neutral_flag: { }
+}
+
+control_point_state the_shrouded_lands_light:
+{
+	sprite: the_shrouded_lands_light_flag
+	tool_tip: "Control Point: Claimed by the Light"
+}
+
+control_point_state the_shrouded_lands_underworld:
+{
+	sprite: the_shrouded_lands_underworld_flag
+	tool_tip: "Control Point: Claimed by the Underworld"
+}
+
+control_point_state the_shrouded_lands_neutral:
+{
+	sprite: the_shrouded_lands_neutral_flag
+	tool_tip: "Control Point: Unclaimed"	
+}

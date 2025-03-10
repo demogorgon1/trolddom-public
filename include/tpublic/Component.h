@@ -68,6 +68,7 @@ namespace tpublic
 			ID_PLAYER_MINIONS,
 			ID_MINION_PUBLIC,
 			ID_MINION_PRIVATE,
+			ID_CONTROL_POINT,
 
 			NUM_IDS
 		};
@@ -133,7 +134,8 @@ namespace tpublic
 			"vendor_stock",
 			"player_minions",
 			"minion_public",
-			"minion_private"
+			"minion_private",
+			"control_point"
 		};
 
 		static_assert(sizeof(COMPONENT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

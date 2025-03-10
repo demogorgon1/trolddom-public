@@ -81,7 +81,7 @@ namespace tpublic::DirectEffects
 	ModifyResource::Resolve(
 		int32_t							/*aTick*/,
 		std::mt19937&					aRandom,
-		const Manifest*					/*aManifest*/,
+		const Manifest*					aManifest,
 		CombatEvent::Id					aId,
 		uint32_t						aAbilityId,
 		const SourceEntityInstance&		/*aSourceEntityInstance*/,
@@ -92,7 +92,7 @@ namespace tpublic::DirectEffects
 		IResourceChangeQueue*			aResourceChangeQueue,
 		IAuraEventQueue*				/*aAuraEventQueue*/,
 		IEventQueue*					/*aEventQueue*/,
-		const IWorldView*				/*aWorldView*/) 
+		const IWorldView*				aWorldView) 
 	{
 		EntityInstance* target = m_targetSelf ? aSource : aTarget;
 
@@ -111,7 +111,7 @@ namespace tpublic::DirectEffects
 					aSource->GetEntityInstanceId(),
 					target->GetEntityInstanceId(),
 					resourceIndex,
-					(int32_t)m_function.EvaluateSourceAndTargetEntityInstances(aRandom, 1.0f, aSource, aTarget),
+					(int32_t)m_function.EvaluateSourceAndTargetEntityInstances(aManifest, aWorldView, aRandom, 1.0f, aSource, aTarget),
 					0,
 					m_silent);
 			}

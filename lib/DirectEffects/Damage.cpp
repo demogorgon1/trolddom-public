@@ -139,7 +139,7 @@ namespace tpublic::DirectEffects
 		if(targetCombatPublic == NULL)
 			return Result();
 
-		uint32_t damage = (uint32_t)m_function.EvaluateSourceAndTargetEntityInstances(aRandom, _GetDamageModifier(abilityModifiers), aSource, aTarget);
+		uint32_t damage = (uint32_t)m_function.EvaluateSourceAndTargetEntityInstances(aManifest, aWorldView, aRandom, _GetDamageModifier(abilityModifiers), aSource, aTarget);
 
 		if(damage == 0)
 			damage = 1;
@@ -321,7 +321,7 @@ namespace tpublic::DirectEffects
 			}
 		}
 
-		m_function.ToRange(damageModifier, aEntityInstance, aOutDamage);
+		m_function.ToRange(NULL, NULL, damageModifier, aEntityInstance, aOutDamage);
 		aOutDamageType = _GetDamageType(aEntityInstance, aAbilityModifierList, aAbilityId);
 		return true;
 	}

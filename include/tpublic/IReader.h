@@ -37,6 +37,27 @@ namespace tpublic
 			return true;
 		}
 
+		template <typename _T1, typename _T2>
+		bool
+		ReadUIntToIntTable(
+			std::unordered_map<_T1, _T2>&			aOut)
+		{
+			size_t count;
+			if(!ReadUInt(count))
+				return false;
+
+			for(size_t i = 0; i < count; i++)
+			{
+				std::pair<_T1, _T2> t;
+				if (!ReadUInt(t.first))
+					return false;
+				if (!ReadInt(t.second))
+					return false;
+				aOut.insert(t);
+			}
+			return true;
+		}
+
 		template <typename _T>
 		bool	
 		ReadPOD(

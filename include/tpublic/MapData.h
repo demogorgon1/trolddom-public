@@ -22,6 +22,74 @@ namespace tpublic
 	class MapData
 	{
 	public:
+		struct PVPControlPointRealmBalanceUpdate
+		{
+			PVPControlPointRealmBalanceUpdate()
+			{
+
+			}
+
+			PVPControlPointRealmBalanceUpdate(
+				const SourceNode*			aSource)
+			{
+				m_realmBalanceId = aSource->GetAnnotation()->GetId(DataType::ID_REALM_BALANCE);
+				
+				aSource->GetObject()->ForEachChild([&](
+					const SourceNode* aChild)
+				{
+					if(aChild->m_name == "entities")
+						aChild->GetIdArray(DataType::ID_ENTITY, m_entityIds);
+					else if(aChild->m_name == "interval")
+						m_interval = aChild->GetUInt32();
+					else if(aChild->m_tag == "control_point_state")
+						m_controlPointStates[aChild->GetAnnotation()->GetId(DataType::ID_CONTROL_POINT_STATE)] = aChild->GetInt32();
+					else 
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+				});
+			}
+
+			void
+			ToStream(
+				IWriter*					aWriter) const
+			{
+				aWriter->WriteUInt(m_realmBalanceId);
+				aWriter->WriteUInts(m_entityIds);
+				aWriter->WriteUIntToIntTable<uint32_t, int32_t>(m_controlPointStates);
+				aWriter->WriteUInt(m_interval);
+			}
+
+			bool
+			FromStream(
+				IReader*					aReader)
+			{
+				if (!aReader->ReadUInt(m_realmBalanceId))
+					return false;
+				if (!aReader->ReadUInts(m_entityIds))
+					return false;
+				if (!aReader->ReadUIntToIntTable<uint32_t, int32_t>(m_controlPointStates))
+					return false;
+				if (!aReader->ReadUInt(m_interval))
+					return false;
+				return true;
+			}
+
+			int32_t
+			Get(
+				uint32_t					aControlPointStateId) const
+			{
+				std::unordered_map<uint32_t, int32_t>::const_iterator i = m_controlPointStates.find(aControlPointStateId);
+				if(i == m_controlPointStates.cend())
+					return 0;
+				return i->second;
+			}
+
+			// Public data
+			uint32_t									m_realmBalanceId = 0;
+			std::vector<uint32_t>						m_entityIds;
+			std::unordered_map<uint32_t, int32_t>		m_controlPointStates;
+			uint32_t									m_interval = 0;
+		};
+
 		struct PVPFaction
 		{
 			PVPFaction()
@@ -41,7 +109,11 @@ namespace tpublic
 						m_reputationFactionId = aChild->GetId(DataType::ID_FACTION);
 					else if(aChild->m_name == "player_spawn")
 						m_playerSpawnId = aChild->GetId(DataType::ID_MAP_PLAYER_SPAWN);
-					else
+					else if(aChild->m_name == "control_point_entities")
+						aChild->GetIdArray(DataType::ID_ENTITY, m_controlPointEntityIds);
+					else if (aChild->m_name == "captured_control_point_state")
+						m_capturedControlPointStateId = aChild->GetId(DataType::ID_CONTROL_POINT_STATE);
+					else					
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 				});
 			}
@@ -53,6 +125,8 @@ namespace tpublic
 				aWriter->WriteUInt(m_factionId);
 				aWriter->WriteUInt(m_reputationFactionId);
 				aWriter->WriteUInt(m_playerSpawnId);
+				aWriter->WriteUInts(m_controlPointEntityIds);
+				aWriter->WriteUInt(m_capturedControlPointStateId);
 			}
 
 			bool
@@ -65,6 +139,10 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadUInt(m_playerSpawnId))
 					return false;
+				if (!aReader->ReadUInts(m_controlPointEntityIds))
+					return false;
+				if (!aReader->ReadUInt(m_capturedControlPointStateId))
+					return false;
 				return true;
 			}
 
@@ -72,6 +150,8 @@ namespace tpublic
 			uint32_t									m_factionId = 0;
 			uint32_t									m_reputationFactionId = 0;
 			uint32_t									m_playerSpawnId = 0;
+			std::vector<uint32_t>						m_controlPointEntityIds;
+			uint32_t									m_capturedControlPointStateId = 0;
 		};
 
 		enum PVPType : uint8_t
@@ -103,6 +183,8 @@ namespace tpublic
 				{
 					if (aChild->m_tag == "faction")
 						m_factions.push_back(std::make_unique<PVPFaction>(aChild));
+					else if (aChild->m_tag == "control_point_realm_balance_update")
+						m_controlPointRealmBalanceUpdates.push_back(std::make_unique<PVPControlPointRealmBalanceUpdate>(aChild));
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 				});
@@ -114,6 +196,7 @@ namespace tpublic
 			{
 				aWriter->WritePOD(m_type);
 				aWriter->WriteObjectPointers(m_factions);
+				aWriter->WriteObjectPointers(m_controlPointRealmBalanceUpdates);
 			}
 
 			bool
@@ -122,7 +205,9 @@ namespace tpublic
 			{
 				if(!aReader->ReadPOD(m_type))
 					return false;
-				if(!aReader->ReadObjectPointers(m_factions))
+				if (!aReader->ReadObjectPointers(m_factions))
+					return false;
+				if (!aReader->ReadObjectPointers(m_controlPointRealmBalanceUpdates))
 					return false;
 				return true;
 			}
@@ -140,8 +225,9 @@ namespace tpublic
 			}
 
 			// Public data
-			PVPType										m_type = INVALID_PVP_TYPE;
-			std::vector<std::unique_ptr<PVPFaction>>	m_factions;
+			PVPType															m_type = INVALID_PVP_TYPE;
+			std::vector<std::unique_ptr<PVPFaction>>						m_factions;
+			std::vector<std::unique_ptr<PVPControlPointRealmBalanceUpdate>>	m_controlPointRealmBalanceUpdates;
 		};
 
 		enum SeedType : uint8_t

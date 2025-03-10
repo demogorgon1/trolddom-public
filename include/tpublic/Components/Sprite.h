@@ -56,9 +56,9 @@ namespace tpublic
 						{
 							m_pingPong = aChild->GetBool();
 						}
-						else if (aChild->m_name == "use_openable_sprite_index")
+						else if (aChild->m_name == "use_control_point_index")
 						{
-							m_useOpenableSpriteIndex = aChild->GetBool();
+							m_useControlPointIndex = aChild->GetBool();
 						}
 						else if (aChild->m_name == "z_offset")
 						{
@@ -82,7 +82,7 @@ namespace tpublic
 					aWriter->WritePOD(m_repeat);
 					aWriter->WriteInt(m_zOffset);
 					aWriter->WritePOD(m_pingPong);
-					aWriter->WritePOD(m_useOpenableSpriteIndex);
+					aWriter->WritePOD(m_useControlPointIndex);
 				}
 
 				bool
@@ -103,7 +103,7 @@ namespace tpublic
 						return false;
 					if (!aReader->ReadPOD(m_pingPong))
 						return false;
-					if (!aReader->ReadPOD(m_useOpenableSpriteIndex))
+					if (!aReader->ReadPOD(m_useControlPointIndex))
 						return false;
 					return true;
 				}
@@ -116,7 +116,7 @@ namespace tpublic
 				bool							m_repeat = true;
 				int32_t							m_zOffset = 0;
 				bool							m_pingPong = false;
-				bool							m_useOpenableSpriteIndex = false;
+				bool							m_useControlPointIndex = false;
 			};
 
 			enum Field
