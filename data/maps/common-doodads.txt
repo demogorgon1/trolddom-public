@@ -77,6 +77,14 @@ sprites:
 	sprite doodad_tombstone_2: { flags: [ tile_walkable ] }
 	sprite doodad_skull_stick: { flags: [ tile_walkable ] }
 	sprite doodad_hole_1: { flags: [ tile_walkable ] }
+	sprite doodad_fs_rock_purple_1: { flags: [ tile_walkable ] }
+	sprite doodad_fs_rock_purple_2: { flags: [ tile_walkable ] }
+	sprite doodad_fs_rock_purple_3: { flags: [ tile_walkable ] }
+	sprite doodad_fs_rock_purple_4: { flags: [ tile_walkable ] }
+	sprite doodad_fs_rock_1: { flags: [ tile_walkable ] }
+	sprite doodad_fs_rock_2: { flags: [ tile_walkable ] }
+	sprite doodad_fs_rock_3: { flags: [ tile_walkable ] }
+	sprite doodad_fs_rock_4: { flags: [ tile_walkable ] }
 
 	cursor: { position: [ 0 48 ] }
 	size: { width: 80 height: 64 } sprite ship: { flags: [ tile_walkable ] }
@@ -86,7 +94,7 @@ sprites:
 doodad small_rocks:
 {
 	sprites: [ doodad_rocks_1 doodad_rocks_2 doodad_rocks_3 doodad_rocks_4 doodad_rocks_10 doodad_rocks_13 doodad_rocks_14 ]
-	map_palette<"x">: { must_be_one_of: [ grass grass_2 dirt mud snow dark_grass sand badlands_1 badlands_2 ] occupy: true  }
+	map_palette<"x">: { must_be_one_of: [ grass grass_2 dirt mud snow dark_grass sand badlands_1 badlands_2 fs_ground_1 fs_ground_2 ] occupy: true  }
 	map_palette<"y">: { must_not_be_one_of: [ forest forest_2 pine_forest_1 pine_forest_2 pine_forest_3 ] } 
 	map: [ "y"
 	       "x" ]
@@ -234,5 +242,7 @@ doodad tombstone: { sprites: [ doodad_tombstone_1 doodad_tombstone_2 ] map_palet
 doodad statue_angel: { sprites: [ doodad_angel_statue ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad skull_stick: { sprites: [ doodad_skull_stick ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad hole: { sprites: [ doodad_hole_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad fs_rock: { sprites: [ doodad_fs_rock_1 doodad_fs_rock_2 doodad_fs_rock_3 doodad_fs_rock_4 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad fs_rock_purple: { sprites: [ doodad_fs_rock_purple_1 doodad_fs_rock_purple_2 doodad_fs_rock_purple_3 doodad_fs_rock_purple_4 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 
 

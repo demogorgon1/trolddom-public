@@ -22,6 +22,8 @@ map_entity_spawn .the_dawnbringer: { entity .the_dawnbringer: { weight: 1 } }
 map_entity_spawn .malzeth: { entity .malzeth: { weight: 1 } }
 map_entity_spawn .azrakkar: { entity .azrakkar: { weight: 1 } }
 map_entity_spawn .kaelion: { entity .kaelion: { weight: 1 } }
+map_entity_spawn .brail_howser: { entity .brail_howser: { weight: 1 } }
+map_entity_spawn .robert_dulish: { entity .robert_dulish: { weight: 1 } }
 
 map_entity_spawn .shroud_crystal:
 {
@@ -36,6 +38,7 @@ zone .the_fringe: { string: "The Fringe" }
 zone .blasted_wastes: { string: "Blasted Wastes" }
 zone .fortress_of_light: { string: "Fortress of Light" }
 zone .the_sinister_bastion: { string: "The Sinister Bastern" }
+zone .crystal_fields: { string: "Crystal Fields" }
 
 zone .rylions_cave: { string: "Rylion's Cave" }
 zone .the_graveyard: { string: "The Graveyard" }
@@ -50,13 +53,18 @@ map_palette .tiles:
 	tile fs_ground_1: [ 97 91 62 ]
 	tile fs_ground_2: [ 67 61 32 ]
 	tile fs_rocks_1: [ 143 131 120 ]
+	tile fs_rocks_2: [ 143 131 220 ]
 	tile fs_shallow_water: [ 100 140 116 ]
+	tile fs_cave_entrance: [ 200 40 59 ]
 }
 
 map_palette .stuff:
 {	
 	entity_spawn underworld_shrine_top_deity: [ 160 135 60 ]	
 	entity_spawn holy_altar_top_deity: [ 35 160 60 ]	
+	entity_spawn bonfire: [ 251 43 66 ]		
+	entity_spawn holy_altar: [ 0 0 40 ]	
+	entity_spawn underworld_shrine: [ 0 0 80 ]	
 	
 	entity_spawn .shroud_crystal: [ 124 55 170 ]
 	entity_spawn .the_shrouded_lands_light_return: [ 54 26 217 ]	
@@ -94,6 +102,9 @@ map_palette .stuff:
 	entity_spawn .the_underworld_guard_control_point_3: [ 70 150 100 ]
 	entity_spawn .the_underworld_guard_control_point_4: [ 70 90 200 ]
 	entity_spawn .the_underworld_guard_control_point_5: [ 70 150 255 ]
+	entity_spawn .lizard_1: [ 124 66 39 ]
+	entity_spawn .brail_howser: [ 124 66 139 ]
+	entity_spawn .robert_dulish: [ 124 166 139 ]
 
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn the_shrouded_lands_underworld: [ 255 0 0 ]
@@ -110,6 +121,7 @@ map_palette .zones:
 	zone .blasted_wastes: [ 161 100 226 ]
 	zone .fortress_of_light: [ 100 121 226 ]
 	zone .the_sinister_bastion: [ 226 198 100 ]
+	zone .crystal_fields: [ 33 0 255 ]
 }
 
 map_palette .sub_zones:
@@ -132,6 +144,8 @@ map_palette .routes:
 
 map_palette .doodads:
 {
+	doodad fs_rock: [ 120 30 50 ]
+	doodad fs_rock_purple: [ 220 30 50 ]
 }
 
 map_palette .cliffs:
@@ -214,11 +228,11 @@ map the_shrouded_lands:
 			source:		"the-shrouded-lands-zones.png"
 		}				
 		
-		#{ 
-		#	palettes: 	[ .tiles ]
-		#	source:		"the-shrouded-lands-cover.png"
-		#	cover: 		true
-		#}
+		{ 
+			palettes: 	[ .tiles ]
+			source:		"the-shrouded-lands-cover.png"
+			cover: 		true
+		}
 		
 		{
 			palettes:	[ .sub_zones ]
@@ -230,11 +244,11 @@ map the_shrouded_lands:
 			source:		"the-shrouded-lands-routes.png"
 		}								
 		
-		#{
-		#	palettes:	[ .doodads ]
-		#	source:		"the-shrouded-lands-doodads.png"
-		#}								
-		#
+		{
+			palettes:	[ .doodads ]
+			source:		"the-shrouded-lands-doodads.png"
+		}								
+		
 		#{
 		#	palettes:	[ .flags ]
 		#	source:		"the-shrouded-lands-flags.png"

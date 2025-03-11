@@ -44,3 +44,15 @@ item unholy_token:
 	level_range: [ 1 20 ]
 	rarity: uncommon
 }
+
+loot_group .the_shrouded_lands_lizard_tail: {}
+
+item the_shrouded_lands_lizard_tail:
+{
+	icon: icon_worm_1
+	item_level: 20
+	loot_groups: [ .the_shrouded_lands_lizard_tail ]
+	flags: [ not_sellable ]
+	stack: 5
+	string: "Shroud Lizard Tail"
+}

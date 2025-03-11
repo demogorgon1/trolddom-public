@@ -577,7 +577,8 @@ sprites:
 	sprite rock_floor_alt_2: { flags: [ tile_walkable ] }
 	sprite badlands_dungeon_entrance_closed: { flags: [ tile_block_line_of_sight tile_top ] }
 	sprite ext_dungeon_entrance_open: { flags: [ tile_walkable tile_top ] }
-
+	sprite fs_cave_entrance: { flags: [ tile_walkable tile_top ] }
+	
 	cursor: { position: [ 0 304 ] }
 	
 	sprite fs_rocks_1: { flags: [ tile_block_line_of_sight tile_indoor ] borders:
@@ -876,8 +877,8 @@ sprites:
 	sprite badlands_rocks_border_15: { }
 	sprite badlands_rocks_border_16: { }
 	sprite badlands_rocks_border_17: { }
-	sprite badlands_rocks_alt_1: { flags: [ tile_walkable ] }
-	sprite badlands_rocks_alt_2: { flags: [ tile_walkable ] }
+	sprite badlands_rocks_alt_1: { flags: [ tile_block_line_of_sight ] }
+	sprite badlands_rocks_alt_2: { flags: [ tile_block_line_of_sight ] }
 
 	cursor: { position: [ 0 464 ] }
 
@@ -909,4 +910,30 @@ sprites:
 	sprite pine_forest_3_alt_1: { flags: [ tile_block_line_of_sight ] }
 	sprite pine_forest_3_alt_2: { flags: [ tile_block_line_of_sight ] }
 
+	cursor: { position: [ 0 480 ] }
+
+	sprite fs_rocks_2: { flags: [ tile_block_line_of_sight tile_indoor ] borders:
+		[ fs_rocks_2_border_1 fs_rocks_2_border_2 fs_rocks_2_border_3 fs_rocks_2_border_4 fs_rocks_2_border_5 fs_rocks_2_border_6 fs_rocks_2_border_7
+		  fs_rocks_2_border_8 fs_rocks_2_border_9 fs_rocks_2_border_10 fs_rocks_2_border_11 fs_rocks_2_border_12 fs_rocks_2_border_13 fs_rocks_2_border_14
+		  fs_rocks_2_border_15 fs_rocks_2_border_16 fs_rocks_2_border_17 ] alt_tiles: [ fs_rocks_2_alt_1 fs_rocks_2_alt_2 ] }		
+	sprite fs_rocks_2_border_1: { }
+	sprite fs_rocks_2_border_2: { }
+	sprite fs_rocks_2_border_3: { }
+	sprite fs_rocks_2_border_4: { }
+	sprite fs_rocks_2_border_5: { }
+	sprite fs_rocks_2_border_6: { }
+	sprite fs_rocks_2_border_7: { }
+	sprite fs_rocks_2_border_8: { }
+	sprite fs_rocks_2_border_9: { }
+	sprite fs_rocks_2_border_10: { }
+	sprite fs_rocks_2_border_11: { }
+	sprite fs_rocks_2_border_12: { }
+	sprite fs_rocks_2_border_13: { }
+	sprite fs_rocks_2_border_14: { }
+	sprite fs_rocks_2_border_15: { }
+	sprite fs_rocks_2_border_16: { }
+	sprite fs_rocks_2_border_17: { }
+	sprite fs_rocks_2_alt_1: { flags: [ tile_block_line_of_sight ] }
+	sprite fs_rocks_2_alt_2: { flags: [ tile_block_line_of_sight ] }
+	
 }

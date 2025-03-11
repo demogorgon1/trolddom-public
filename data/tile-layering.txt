@@ -36,6 +36,7 @@ tile_layering:
 	rocks
 	snow_rocks	
 	fs_rocks_1
+	fs_rocks_2
 	badlands_rocks
 ]
 

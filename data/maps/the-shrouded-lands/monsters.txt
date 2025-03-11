@@ -21,6 +21,42 @@ loot_table .default_humanoid:
 }
 
 ##########################################################################################
+# Beasts
+
+map_entity_spawn .lizard_1: { entity .lizard_1: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+
+# Lizards
+{
+	loot_table .lizard: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { loot_group: .the_shrouded_lands_lizard_tail requirement self<must_have_active_quest>: { id: .brail_howser_1 } } 
+			}
+
+			{ 
+				possibility: { loot_group: .the_shrouded_lands_lizard_tail requirement self<must_have_active_quest>: { id: .robert_dulish_1 } } 
+			}
+			
+			!WORLD_DROPS {}
+		]	
+	}
+
+	${
+		_faction: monsters
+		_creature_type: beast
+		_loot_table: .lizard
+		_weapon_damage: 1.2
+		_resource_health: 1.4
+		_default_behavior_state: .wandering_short
+		_level: 20 
+	}
+	
+	entity .lizard_1: !NPC { _string: "Shroud Lizard" _sprite: lizard_1 _sprite_dead: lizard_1_dead }
+}
+
+##########################################################################################
 # The Light
 
 map_entity_spawn .the_light_guard: { entity .the_light_guard: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }

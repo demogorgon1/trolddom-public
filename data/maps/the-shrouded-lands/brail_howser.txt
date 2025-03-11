@@ -1,0 +1,77 @@
+dialogue_screen .brail_howser_greetings:
+{
+	text: 
+	[	
+		"Got any more of that lizard stuff?"
+	]			
+	
+	options:
+	[
+		{ quest: .brail_howser_1 }
+	]
+}
+
+dialogue_root .brail_howser_dialogue:
+{
+	.brail_howser_greetings: { }
+}
+
+entity .brail_howser: !NPC
+{
+	_string: "Brail Howser"
+	_dialogue_root: .brail_howser_dialogue
+	_loot_table: .npc
+	_level: 20
+	_faction: light
+	_creature_type: humanoid
+	_not_pushable: true
+	_sprite: man_3
+	_sprite_dead: man_3_dead
+	_elite: true
+}
+	
+############################################################
+# Quest 1
+
+objective .brail_howser_1:
+{
+	string: "Shroud Lizard Tails"
+	
+	maps: [ the_shrouded_lands ]
+	
+	collect_items: { item: the_shrouded_lands_lizard_tail count: 5 }
+}
+
+quest .brail_howser_1:
+{
+	string: "Exotic Tails"
+
+	text:
+	[
+		"Venture east to the Crystal Fields and collect tails from the lizards."
+	]
+	
+	description: 
+	[
+		"You might wonder what an old man like me is doing in a place like this. Well, I'm working for a whole sale supplier of exotic ingredients and reagents.\n\n"
+		"There isn't much wildlife around here, but to the east in the crystal fields, you'll find a strange species of lizard. No idea where it's coming from or if it's even native to these lands,"
+		"but apparently their tails are very useful to some people. Bring me some and I'll reward you."
+	]
+
+	progress:
+	[
+		"You still here?"
+	]
+	
+	completion:
+	[
+		"Great. Here you go."
+	]
+	
+	objectives: [ .brail_howser_1 ]
+	repeat_mode: daily
+	level: 20
+	reward_reputation_multiplier: 0
+	reward_realm_balance<the_shrouded_lands_light>: { expression: a_mul_x_plus_b x: pvp_control_points a: 2 b: 2 }
+	reward_all_items: [ holy_token ]
+}
