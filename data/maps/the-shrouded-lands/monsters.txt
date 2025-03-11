@@ -116,6 +116,7 @@ aura .the_light_irza_shield:
 	flags: [ unique indefinite ]
 	particle_system: .the_light_irza_shield
 	aura_effect damage_input_modifier: { type_mask: [ all ] multiplier: 0 } 
+	must_not_have_world_aura: the_shrouded_lands_light_enemy_shield_down	
 }
 
 particle_system .the_light_irza_shield:
@@ -190,6 +191,12 @@ entity .the_light_irza: !NPC
 	
 	_abilities: 
 	[	
+		{
+			target: self
+			id: .the_light_irza_shield
+			requirement self<must_not_have_aura>: .the_light_irza_shield
+		}
+	
 		{
 			id: npc_attack
 		}
@@ -302,6 +309,7 @@ aura .the_underworld_draethor_shield:
 	flags: [ unique indefinite ]
 	particle_system: .the_underworld_draethor_shield
 	aura_effect damage_input_modifier: { type_mask: [ all ] multiplier: 0 } 
+	must_not_have_world_aura: the_shrouded_lands_underworld_enemy_shield_down	
 }
 
 particle_system .the_underworld_draethor_shield:
@@ -376,6 +384,12 @@ entity .the_underworld_draethor: !NPC
 	
 	_abilities: 
 	[	
+		{
+			target: self
+			id: .the_underworld_draethor_shield
+			requirement self<must_not_have_aura>: .the_underworld_draethor_shield
+		}
+	
 		{
 			id: npc_attack
 		}

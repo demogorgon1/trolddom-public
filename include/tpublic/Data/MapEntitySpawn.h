@@ -17,6 +17,58 @@ namespace tpublic
 			static const DataType::Id DATA_TYPE = DataType::ID_MAP_ENTITY_SPAWN;
 			static const bool TAGGED = true;
 
+			struct ControlPointRequirement
+			{
+				ControlPointRequirement()
+				{
+
+				}
+
+				ControlPointRequirement(
+					const SourceNode*		aSource)
+				{
+					aSource->GetObject()->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if(aChild->m_name == "entities")
+							aChild->GetIdArray(DataType::ID_ENTITY, m_entityIds);
+						else if(aChild->m_name == "control_point_state")
+							m_controlPointStateId = aChild->GetId(DataType::ID_CONTROL_POINT_STATE);
+						else if(aChild->m_name == "max_distance")
+							m_maxDistance = aChild->GetInt32();
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					});
+				}
+
+				void
+				ToStream(
+					IWriter*				aStream) const
+				{
+					aStream->WriteUInts(m_entityIds);
+					aStream->WriteUInt(m_controlPointStateId);
+					aStream->WriteInt(m_maxDistance);
+				}
+
+				bool
+				FromStream(
+					IReader*				aStream)
+				{
+					if (!aStream->ReadUInts(m_entityIds))
+						return false;
+					if (!aStream->ReadUInt(m_controlPointStateId))
+						return false;
+					if (!aStream->ReadInt(m_maxDistance))
+						return false;
+					return true;
+				}
+
+				// Public data
+				std::vector<uint32_t>	m_entityIds;
+				uint32_t				m_controlPointStateId = 0;
+				int32_t					m_maxDistance = 0;
+			};
+
 			struct SpawnCondition
 			{
 				enum Type : uint8_t
@@ -25,7 +77,8 @@ namespace tpublic
 					TYPE_IF,
 					TYPE_IF_NOT,
 					TYPE_ENCOUNTER_NOT_ACTIVE,
-					TYPE_REALM_BALANCE_ABOVE
+					TYPE_REALM_BALANCE_ABOVE,
+					TYPE_NO_NEARBY_ENTITY
 				};
 
 				struct SubCondition
@@ -59,6 +112,12 @@ namespace tpublic
 						{
 							m_type = TYPE_REALM_BALANCE_ABOVE;
 							m_dataType = DataType::ID_REALM_BALANCE;
+							hasValue = true;
+						}
+						else if(aNode->m_name == "no_nearby_entity")
+						{
+							m_type = TYPE_NO_NEARBY_ENTITY;
+							m_dataType = DataType::ID_ENTITY;
 							hasValue = true;
 						}
 						else
@@ -182,6 +241,10 @@ namespace tpublic
 						{
 							m_spawnConditions.push_back(std::make_unique<SpawnCondition>(aChild));
 						}
+						else if(aChild->m_name == "control_point_requirement")
+						{
+							m_controlPointRequirement = ControlPointRequirement(aChild);
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "Invalid 'entity' item.");
@@ -201,6 +264,7 @@ namespace tpublic
 					aStream->WriteUInts(m_zones);
 					aStream->WritePOD(m_mustHaveTileFlags);
 					aStream->WritePOD(m_mustNotHaveTileFlags);
+					aStream->WriteOptionalObject(m_controlPointRequirement);
 				}
 
 				bool
@@ -222,6 +286,8 @@ namespace tpublic
 					if(!aStream->ReadPOD(m_mustHaveTileFlags))
 						return false;
 					if (!aStream->ReadPOD(m_mustNotHaveTileFlags))
+						return false;
+					if(!aStream->ReadOptionalObject(m_controlPointRequirement))
 						return false;
 					return true;
 				}
@@ -267,6 +333,7 @@ namespace tpublic
 				std::vector<uint32_t>							m_zones;
 				uint16_t										m_mustHaveTileFlags = 0;
 				uint16_t										m_mustNotHaveTileFlags = 0;
+				std::optional<ControlPointRequirement>			m_controlPointRequirement;
 			};
 
 			struct SpawnTimer

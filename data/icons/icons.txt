@@ -687,6 +687,8 @@ sprites:
 	sprite icon_brown_horse : { tags: [ icon ] }
 	sprite icon_dark_brown_horse : { tags: [ icon ] }
 	sprite icon_crystal_1 : { tags: [ icon ] }
+	sprite icon_unholy_token_1 : { tags: [ icon ] }
+	sprite icon_holy_token_1 : { tags: [ icon ] }
 	
 }
 

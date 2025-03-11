@@ -6,6 +6,11 @@ dialogue_screen .seraphael_greetings:
 		"\n"
 		"Together we will cleanse these lands!"
 	]			
+	
+	options:
+	[
+		{ quest: .the_dawnbringer_1 }
+	]
 }
 
 dialogue_root .seraphael_dialogue:
@@ -29,3 +34,45 @@ entity .the_dawnbringer: !NPC
 	_sprite_dead: angel_1_dead
 }
 	
+############################################################
+# Quest 1
+
+objective .the_dawnbringer_1:
+{
+	string: "Unholy Shrine Desecrated"
+	
+	use_ability: { entities: [ underworld_shrine ] count: 1 ability: desecrate }
+}
+
+quest .the_dawnbringer_1:
+{
+	string: "Cleansing the Unholy"
+
+	text:
+	[
+		"Desecrate an unholy shrine and return to Seraphael in The Shrouded Lands."
+	]
+	
+	description: 
+	[
+		"We're at war with the forces of evil and they gain their power from weak mortal souls worshipping them. Unholy shrines litter the lands and the must be ruined! Go and desecrate one of their vile shrines,"
+		"come back to me, and I'll reward you."
+	]
+
+	progress:
+	[
+		"Make haste!"
+	]
+	
+	completion:
+	[
+		"May the light bless you!"
+	]
+	
+	objectives: [ .the_dawnbringer_1 ]
+	repeat_mode: daily
+	level: 20
+	reward_reputation_multiplier: 0.6
+	reward_realm_balance<the_shrouded_lands_light>: { expression: a_mul_x_plus_b x: pvp_control_points a: 2 b: 6 }
+	reward_all_items: [ holy_token ]
+}

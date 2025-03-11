@@ -52,6 +52,14 @@ namespace tpublic
 				}
 			}
 
+			uint32_t
+			GetControlPointStateId() const
+			{
+				if((size_t)m_index > m_controlPointStateIds.size())
+					return 0;
+				return m_controlPointStateIds[m_index];
+			}
+
 			// Public data
 			uint32_t				m_index = 0;
 			std::vector<uint32_t>	m_controlPointStateIds;

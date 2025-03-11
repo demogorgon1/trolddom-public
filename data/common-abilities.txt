@@ -169,7 +169,7 @@ ability desecrate:
 	string: "Desecrate"
 	description: "Desecrates a shrine."
 	cast_time: 20
-	flags: [ late_cooldown_trigger target_other always_in_range ]
+	flags: [ late_cooldown_trigger target_other always_in_range quest_trigger ]
 	states: [ default ]
 	icon: icon_stuff
 	
