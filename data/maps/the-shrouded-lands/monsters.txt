@@ -38,11 +38,37 @@ map_entity_spawn .the_light_irza: { entity .the_light_irza: {} spawn_timer: !NPC
 	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
+!define local THE_LIGHT_FLAG_GUARD
+{
+	entity .the_light_guard_control_point: 
+	{
+		spawn_condition:
+		{
+			realm_balance_above<@_spawn_power>: the_shrouded_lands_light
+			no_nearby_entity<10>: .the_underworld_guard_control_point
+		}	
+		
+		control_point_requirement:
+		{
+			max_distance: 10
+			entities: [ .flag_underworld .flag_light .flag_neutral ]
+			control_point_state: the_shrouded_lands_light
+		}
+	} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
 map_entity_spawn .the_light_defender_1: !THE_LIGHT_DEFENDER{ _spawn_power: 200 }
 map_entity_spawn .the_light_defender_2: !THE_LIGHT_DEFENDER{ _spawn_power: 400 }
 map_entity_spawn .the_light_defender_3: !THE_LIGHT_DEFENDER{ _spawn_power: 600 }
 map_entity_spawn .the_light_defender_4: !THE_LIGHT_DEFENDER{ _spawn_power: 800 }
 map_entity_spawn .the_light_defender_5: !THE_LIGHT_DEFENDER{ _spawn_power: 900 }
+
+map_entity_spawn .the_light_guard_control_point_1: !THE_LIGHT_FLAG_GUARD{ _spawn_power: 200 }
+map_entity_spawn .the_light_guard_control_point_2: !THE_LIGHT_FLAG_GUARD{ _spawn_power: 400 }
+map_entity_spawn .the_light_guard_control_point_3: !THE_LIGHT_FLAG_GUARD{ _spawn_power: 600 }
+map_entity_spawn .the_light_guard_control_point_4: !THE_LIGHT_FLAG_GUARD{ _spawn_power: 800 }
+map_entity_spawn .the_light_guard_control_point_5: !THE_LIGHT_FLAG_GUARD{ _spawn_power: 900 }
 
 # Elite Guards
 {
@@ -73,7 +99,7 @@ map_entity_spawn .the_light_defender_5: !THE_LIGHT_DEFENDER{ _spawn_power: 900 }
 		_level: 20 
 	}
 	
-	entity .the_light_guard_control_point: !NPC { _string: "Guardian" _sprite: angel_2 _sprite_dead: angel_2_dead }
+	entity .the_light_guard_control_point: !NPC { _string: "Guardian" _sprite: angel_4 _sprite_dead: angel_4_dead }
 }
 
 # Irza
@@ -198,11 +224,37 @@ map_entity_spawn .the_underworld_draethor: { entity .the_underworld_draethor: {}
 	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
+!define local THE_UNDERWORLD_FLAG_GUARD
+{
+	entity .the_underworld_guard_control_point: 
+	{
+		spawn_condition:
+		{
+			realm_balance_above<@_spawn_power>: the_shrouded_lands_underworld
+			no_nearby_entity<10>: .the_light_guard_control_point			
+		}	
+		
+		control_point_requirement:
+		{
+			max_distance: 10
+			entities: [ .flag_underworld .flag_light .flag_neutral ]
+			control_point_state: the_shrouded_lands_underworld
+		}
+	} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
 map_entity_spawn .the_underworld_defender_1: !THE_UNDERWORLD_DEFENDER{ _spawn_power: 200 }
 map_entity_spawn .the_underworld_defender_2: !THE_UNDERWORLD_DEFENDER{ _spawn_power: 400 }
 map_entity_spawn .the_underworld_defender_3: !THE_UNDERWORLD_DEFENDER{ _spawn_power: 600 }
 map_entity_spawn .the_underworld_defender_4: !THE_UNDERWORLD_DEFENDER{ _spawn_power: 800 }
 map_entity_spawn .the_underworld_defender_5: !THE_UNDERWORLD_DEFENDER{ _spawn_power: 900 }
+
+map_entity_spawn .the_underworld_guard_control_point_1: !THE_UNDERWORLD_FLAG_GUARD{ _spawn_power: 200 }
+map_entity_spawn .the_underworld_guard_control_point_2: !THE_UNDERWORLD_FLAG_GUARD{ _spawn_power: 400 }
+map_entity_spawn .the_underworld_guard_control_point_3: !THE_UNDERWORLD_FLAG_GUARD{ _spawn_power: 600 }
+map_entity_spawn .the_underworld_guard_control_point_4: !THE_UNDERWORLD_FLAG_GUARD{ _spawn_power: 800 }
+map_entity_spawn .the_underworld_guard_control_point_5: !THE_UNDERWORLD_FLAG_GUARD{ _spawn_power: 900 }
 
 # Elite Guards
 {
@@ -233,7 +285,7 @@ map_entity_spawn .the_underworld_defender_5: !THE_UNDERWORLD_DEFENDER{ _spawn_po
 		_level: 20 
 	}
 	
-	entity .the_underworld_guard_control_point: !NPC { _string: "Guardian" _sprite: demon_4 _sprite_dead: demon_4_dead }
+	entity .the_underworld_guard_control_point: !NPC { _string: "Guardian" _sprite: demon_6 _sprite_dead: demon_6_dead }
 }
 
 # Draethor
