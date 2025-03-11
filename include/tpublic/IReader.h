@@ -16,6 +16,25 @@ namespace tpublic
 	public:
 		virtual				~IReader() {}
 
+		template <typename _T>
+		bool
+		ReadUIntSet(
+			std::unordered_set<_T>&					aOut)
+		{
+			size_t count;
+			if (!ReadUInt(count))
+				return false;
+
+			for (size_t i = 0; i < count; i++)
+			{
+				_T value;
+				if (!ReadUInt(value))
+					return false;
+				aOut.insert(value);
+			}
+			return true;
+		}
+
 		template <typename _T1, typename _T2>
 		bool
 		ReadUIntToUIntTable(

@@ -10,6 +10,16 @@ namespace tpublic
 	public:
 		virtual				~IWriter() {}
 
+		template <typename _T>
+		void
+		WriteUIntSet(
+			const std::unordered_set<_T>&			aSet)
+		{
+			WriteUInt(aSet.size());
+			for(_T value : aSet)
+				WriteUInt(value);
+		}
+
 		template <typename _T1, typename _T2, typename _TTable = std::unordered_map<_T1, _T2>>
 		void
 		WriteUIntToUIntTable(

@@ -20,6 +20,30 @@ loot_table .default_humanoid:
 	]	
 }
 
+loot_table .unholy_tokens: 
+{
+	slots:
+	[	
+		{ 
+			possibility: { loot_group: .unholy_token } 
+		}
+
+		!WORLD_DROPS {}
+	]	
+}
+
+loot_table .holy_tokens: 
+{
+	slots:
+	[	
+		{ 
+			possibility: { loot_group: .holy_token } 
+		}
+
+		!WORLD_DROPS {}
+	]	
+}
+
 ##########################################################################################
 # Beasts
 
@@ -205,13 +229,14 @@ entity .the_light_irza: !NPC
 	_faction: light
 	_sprite: dragon_2
 	_sprite_dead: dragon_2_dead
-	#_loot_table: .the_light_irza
+	_loot_table: .unholy_tokens
 	_creature_type: dragon
 	_resource_health: 4
 	_weapon_damage: 3
 	_default_behavior_state: .the_light_irza
 	_zone: .the_light_irza
 	_out_of_zone_action: { evade: true }
+	_kill_contribution: true
 	_immune_to_stun: true
 	_immune_to_immobilize: true
 	_immune_to_slow: true
@@ -398,7 +423,7 @@ entity .the_underworld_draethor: !NPC
 	_faction: underworld
 	_sprite: giant_demon_1
 	_sprite_dead: giant_demon_1_dead
-	#_loot_table: .the_underworld_draethor
+	_loot_table: .holy_tokens
 	_creature_type: demon
 	_resource_health: 4
 	_weapon_damage: 3
@@ -408,6 +433,7 @@ entity .the_underworld_draethor: !NPC
 	_immune_to_stun: true
 	_immune_to_immobilize: true
 	_immune_to_slow: true
+	_kill_contribution: true
 	
 	_default_abilities:
 	[

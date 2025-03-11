@@ -172,8 +172,8 @@ namespace tpublic::Systems
 				}
 
 				Components::Lootable* lootable = GetComponent<Components::Lootable>(aComponents);
-				lootable->m_playerTag = tag->m_playerTag;
 				lootable->m_timeStamp = (uint64_t)time(NULL);
+				lootable->m_playerTag = tag->m_playerTag;
 				lootable->SetDirty();
 
 				if(lootable->m_playerTag.IsSet())
@@ -273,7 +273,6 @@ namespace tpublic::Systems
 			if(aContext->m_tick - threat->m_lastPingTick >= Components::ThreatTarget::PING_INTERVAL_TICKS && !passive)
 			{				
 				bool blind = auras->HasEffect(AuraEffect::ID_BLIND, NULL);
-				//bool canAggro = !faction->IsNeutralOrFriendly() || faction->IsPantheon();
 
 				IWorldView::EntityQuery entityQuery;
 				entityQuery.m_position = position->m_position;

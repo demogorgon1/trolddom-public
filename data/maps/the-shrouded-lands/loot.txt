@@ -19,6 +19,8 @@ item shroud_crystal:
 	level_range: [ 1 20 ]
 }
 
+loot_group .holy_token: {}
+
 item holy_token:
 {
 	item_level: 20
@@ -27,10 +29,12 @@ item holy_token:
 	stack: 40
 	flags: [ not_sellable ]
 	binds: when_picked_up
-	#loot_groups: [ shroud_crystal ]
-	level_range: [ 1 20 ]
+	loot_groups: [ .holy_token ]
+	level_range: [ 1 22 ]
 	rarity: uncommon
 }
+
+loot_group .unholy_token: {}
 
 item unholy_token:
 {
@@ -40,8 +44,8 @@ item unholy_token:
 	stack: 40
 	flags: [ not_sellable ]
 	binds: when_picked_up
-	#loot_groups: [ shroud_crystal ]
-	level_range: [ 1 20 ]
+	#loot_groups: [ .unholy_token ]
+	level_range: [ 1 22 ]
 	rarity: uncommon
 }
 

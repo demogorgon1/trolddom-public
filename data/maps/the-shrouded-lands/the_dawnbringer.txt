@@ -32,6 +32,9 @@ entity .the_dawnbringer: !NPC
 	_not_pushable: true
 	_sprite: angel_1
 	_sprite_dead: angel_1_dead
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
 }
 	
 ############################################################

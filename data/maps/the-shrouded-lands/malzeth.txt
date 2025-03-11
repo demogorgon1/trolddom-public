@@ -30,6 +30,9 @@ entity .malzeth: !NPC
 	_not_pushable: true
 	_sprite: demon_3
 	_sprite_dead: demon_3_dead
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
 }
 	
 ############################################################

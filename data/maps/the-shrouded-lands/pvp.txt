@@ -17,7 +17,7 @@ realm_balance the_shrouded_lands_light:
 	max_value_event:
 	{
 		reset: true		
-		apply_world_aura: the_shrouded_lands_light_enemy_shield_down
+		apply_world_aura: the_shrouded_lands_underworld_enemy_shield_down
 	}
 }
 
@@ -40,7 +40,7 @@ realm_balance the_shrouded_lands_underworld:
 	max_value_event:
 	{
 		reset: true		
-		apply_world_aura: the_shrouded_lands_underworld_enemy_shield_down
+		apply_world_aura: the_shrouded_lands_light_enemy_shield_down
 	}	
 }
 
