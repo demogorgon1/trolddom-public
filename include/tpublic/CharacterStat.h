@@ -21,6 +21,7 @@ namespace tpublic
 			ID_MAX_UNCOMMON_EQUIP,
 			ID_MAX_RARE_EQUIP,
 			ID_MAX_EPIC_EQUIP,
+			ID_TOTAL_PVP_KILLS,
 
 			NUM_IDS
 		};
@@ -42,7 +43,8 @@ namespace tpublic
 			{ "time_played", "Time played: {@%zu}" },
 			{ "max_uncommon_equip", "Maximum number of uncommon items equipped: %zu" },
 			{ "max_rare_equip", "Maximum number of rare items equipped: %zu" },
-			{ "max_epic_equip", "Maximum number of epic items equipped: %zu" }
+			{ "max_epic_equip", "Maximum number of epic items equipped: %zu" },
+			{ "total_pvp_kills", "Total player kills: %zu" },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

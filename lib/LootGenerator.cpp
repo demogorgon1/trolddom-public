@@ -126,6 +126,20 @@ namespace tpublic
 			const ItemInstance& aItemInstance)			
 		{			
 			const Data::Item* item = m_manifest->GetById<Data::Item>(aItemInstance.m_itemId);
+
+			Components::Lootable::AvailableLoot loot;
+			loot.m_itemInstance = aItemInstance;
+			loot.m_itemInstance.SetWorldbound(aPlayerWorldCharacterId);
+
+			if(loot.m_itemInstance.m_quantity > 1)
+			{
+				if(loot.m_itemInstance.m_quantity > item->m_stackSize)
+					loot.m_itemInstance.m_quantity = item->m_stackSize;
+
+				if(item->IsUnique())
+					loot.m_itemInstance.m_quantity = 1;
+			}
+
 			if(item->m_questId != 0)
 			{
 				// This is a quest item. Generate a copy for everyone with the quest.
@@ -137,11 +151,8 @@ namespace tpublic
 						const Components::PlayerPublic* playerPublic = playerEntityInstance->GetComponent<Components::PlayerPublic>();
 						const Components::CombatPublic* combatPublic = playerEntityInstance->GetComponent<Components::CombatPublic>();
 
-						Components::Lootable::AvailableLoot loot;
-						loot.m_itemInstance = aItemInstance;
 						loot.m_playerTag.SetCharacter(playerPublic->m_characterId, combatPublic->m_level);
 						loot.m_questId = item->m_questId;
-						loot.m_itemInstance.SetWorldbound(aPlayerWorldCharacterId);
 						aLootable->m_availableLoot.push_back(loot);
 					}
 				}
@@ -149,20 +160,14 @@ namespace tpublic
 			else if(killContribution != NULL && item->IsKillContributionLoot())
 			{
 				// This can be looted by anyone with kill contribution. Generate a copy for everyone on the list.
-				for(uint32_t characterId : killContribution->m_set.m_characterIds)
+				for(uint32_t characterId : killContribution->m_characterIds.m_ids)
 				{
-					Components::Lootable::AvailableLoot loot;
-					loot.m_itemInstance = aItemInstance;
 					loot.m_playerTag.SetCharacter(characterId, 0); // Player tag character level isn't relevant here
-					loot.m_itemInstance.SetWorldbound(aPlayerWorldCharacterId);
 					aLootable->m_availableLoot.push_back(loot);
 				}
 			}
 			else
 			{
-				Components::Lootable::AvailableLoot loot;
-				loot.m_itemInstance = aItemInstance;
-				loot.m_itemInstance.SetWorldbound(aPlayerWorldCharacterId);
 				aLootable->m_availableLoot.push_back(loot);
 			}
 		});
@@ -184,6 +189,7 @@ namespace tpublic
 			{
 				uint32_t	m_accumWeight = 0;
 				uint32_t	m_lootGroupId = 0;
+				uint32_t	m_quantity = 0;
 			};
 
 			Entry entries[Data::LootTable::Slot::MAX_POSSIBILTY_COUNT];
@@ -207,6 +213,7 @@ namespace tpublic
 				accumWeight += possibility.m_weight;
 				Entry& t = entries[entryCount++];
 				t.m_accumWeight = accumWeight;
+				t.m_quantity = possibility.m_quantity;
 				t.m_lootGroupId = possibility.m_lootGroupId;
 			}
 
@@ -215,6 +222,7 @@ namespace tpublic
 				tpublic::UniformDistribution<uint32_t> distribution(1, accumWeight);
 				uint32_t possibilityRoll = distribution(aRandom);
 				uint32_t lootGroupId = 0;
+				uint32_t quantity = 0;
 
 				for (size_t i = 0; i < entryCount; i++)
 				{
@@ -222,6 +230,7 @@ namespace tpublic
 					if (possibilityRoll <= t.m_accumWeight)
 					{
 						lootGroupId = t.m_lootGroupId;
+						quantity = t.m_quantity;
 						break;
 					}
 				}
@@ -258,6 +267,7 @@ namespace tpublic
 						{
 							tpublic::ItemInstance itemInstance;
 							itemInstance.m_itemId = itemId;
+							itemInstance.m_quantity = quantity;
 							aItemCallback(itemInstance);
 						}
 					}

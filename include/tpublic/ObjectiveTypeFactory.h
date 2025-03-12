@@ -3,10 +3,11 @@
 #include "ObjectiveTypes/CollectItems.h"
 #include "ObjectiveTypes/DialogueTrigger.h"
 #include "ObjectiveTypes/KillNPC.h"
+#include "ObjectiveTypes/KillPlayer.h"
 #include "ObjectiveTypes/ManualBoolean.h"
 #include "ObjectiveTypes/ManualCounter.h"
-#include "ObjectiveTypes/UseAbility.h"
 #include "ObjectiveTypes/RouteNPC.h"
+#include "ObjectiveTypes/UseAbility.h"
 
 #include "ObjectiveTypeBase.h"
 
@@ -21,10 +22,11 @@ namespace tpublic
 			_Register<ObjectiveTypes::CollectItems>();
 			_Register<ObjectiveTypes::DialogueTrigger>();
 			_Register<ObjectiveTypes::KillNPC>();
+			_Register<ObjectiveTypes::KillPlayer>();
 			_Register<ObjectiveTypes::ManualBoolean>();
 			_Register<ObjectiveTypes::ManualCounter>();
-			_Register<ObjectiveTypes::UseAbility>();
 			_Register<ObjectiveTypes::RouteNPC>();
+			_Register<ObjectiveTypes::UseAbility>();
 		}
 
 		~ObjectiveTypeFactory()

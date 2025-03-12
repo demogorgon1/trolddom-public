@@ -12,7 +12,8 @@ namespace tpublic
 
 			TYPE_KILL_NPC,
 			TYPE_USE_ABILITY,
-			TYPE_ROUTE_NPC
+			TYPE_ROUTE_NPC,
+			TYPE_KILL_PLAYER
 		};
 
 		// Public data

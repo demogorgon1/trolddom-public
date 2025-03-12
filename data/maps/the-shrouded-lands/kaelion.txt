@@ -37,7 +37,7 @@ objective .kaelion_1:
 {
 	string: "Shroud Crystals"
 	
-	maps: [ thalvaron ]
+	maps: [ the_shrouded_lands ]
 	
 	collect_items: { item: shroud_crystal count: 5 }
 }

@@ -8,6 +8,7 @@ dialogue_screen .malzeth_greetings:
 	options:
 	[
 		{ quest: .malzeth_1 }
+		{ quest: .malzeth_2 }
 	]
 }
 
@@ -71,6 +72,50 @@ quest .malzeth_1:
 	]
 	
 	objectives: [ .malzeth_1 ]
+	repeat_mode: daily
+	level: 20
+	reward_reputation_multiplier: 0.6
+	reward_realm_balance<the_shrouded_lands_underworld>: { expression: a_mul_x_plus_b x: pvp_control_points a: 2 b: 6 }
+	reward_all_items: [ unholy_token ]
+}
+
+############################################################
+# Quest 2
+
+objective .malzeth_2:
+{
+	string: "Follower of the Light Killed"
+	
+	maps: [ the_shrouded_lands ]
+	
+	kill_player: { count: 1 }
+}
+
+quest .malzeth_2:
+{
+	string: "Unholy War"
+
+	text:
+	[
+		"Find and kill a player in the Shrouded Lands who is a follower of the Light."
+	]
+	
+	description: 
+	[
+		"What's more fun than desecrating holy shrines? That's easy! Kill their whiny little followers! Find and kill one."
+	]
+
+	progress:
+	[
+		"What are we waiting for?"
+	]
+	
+	completion:
+	[
+		"That's funny."
+	]
+	
+	objectives: [ .malzeth_2 ]
 	repeat_mode: daily
 	level: 20
 	reward_reputation_multiplier: 0.6

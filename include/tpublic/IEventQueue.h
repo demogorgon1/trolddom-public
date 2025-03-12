@@ -193,6 +193,11 @@ namespace tpublic
 		virtual void						EventQueueRemoveAura(
 												uint32_t													aEntityInstanceId,
 												uint32_t													aAuraId) = 0;
+		virtual void						EventQueuePVPKill(
+												uint32_t													aEntityInstanceId,
+												uint32_t													aKilledCharacterId,
+												uint32_t													aKilledCharacterLevel,
+												uint32_t													aContributionDenum) = 0;
 	};
 
 }

@@ -10,6 +10,7 @@ dialogue_screen .seraphael_greetings:
 	options:
 	[
 		{ quest: .the_dawnbringer_1 }
+		{ quest: .the_dawnbringer_2 }
 	]
 }
 
@@ -73,6 +74,50 @@ quest .the_dawnbringer_1:
 	]
 	
 	objectives: [ .the_dawnbringer_1 ]
+	repeat_mode: daily
+	level: 20
+	reward_reputation_multiplier: 0.6
+	reward_realm_balance<the_shrouded_lands_light>: { expression: a_mul_x_plus_b x: pvp_control_points a: 2 b: 6 }
+	reward_all_items: [ holy_token ]
+}
+
+############################################################
+# Quest 2
+
+objective .the_dawnbringer_2:
+{
+	string: "Follower of the Underworld Killed"
+	
+	maps: [ the_shrouded_lands ]
+	
+	kill_player: { count: 1 }
+}
+
+quest .the_dawnbringer_2:
+{
+	string: "Holy War"
+
+	text:
+	[
+		"Find and kill a player in the Shrouded Lands who is a follower of the Underworld."
+	]
+	
+	description: 
+	[
+		"Why would anyone side with evil? Especially a mortal. It doesn't make sense. Find one and put them out of their misery."
+	]
+
+	progress:
+	[
+		"May your retribution must be swift and deadly."
+	]
+	
+	completion:
+	[
+		"May the light bless you!"
+	]
+	
+	objectives: [ .the_dawnbringer_2 ]
 	repeat_mode: daily
 	level: 20
 	reward_reputation_multiplier: 0.6

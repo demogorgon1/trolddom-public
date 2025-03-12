@@ -71,6 +71,7 @@ quest .brail_howser_1:
 	objectives: [ .brail_howser_1 ]
 	repeat_mode: daily
 	level: 20
+	reward_cash_multiplier: 3
 	reward_reputation_multiplier: 0
 	reward_realm_balance<the_shrouded_lands_light>: { expression: a_mul_x_plus_b x: pvp_control_points a: 2 b: 2 }
 	reward_all_items: [ holy_token ]

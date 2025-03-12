@@ -65,6 +65,7 @@ map_palette .stuff:
 	entity_spawn bonfire: [ 251 43 66 ]		
 	entity_spawn holy_altar: [ 0 0 40 ]	
 	entity_spawn underworld_shrine: [ 0 0 80 ]	
+	entity_spawn spirit_stone: [ 0 0 0 ]	
 	
 	entity_spawn .shroud_crystal: [ 124 55 170 ]
 	entity_spawn .the_shrouded_lands_light_return: [ 54 26 217 ]	
@@ -184,6 +185,7 @@ map the_shrouded_lands:
 	auto_doodads: true
 	max_players: 80
 	level: 10
+	allow_spirit_travel: false
 	
 	realm_balance: [ the_shrouded_lands_light the_shrouded_lands_underworld ]
 	

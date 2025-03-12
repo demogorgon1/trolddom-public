@@ -102,6 +102,11 @@ namespace tpublic
 				m_defaultIndoor = aItem->GetBool();
 				return true;
 			}
+			else if (aItem->m_name == "allow_spirit_travel")
+			{
+				m_allowSpiritTravel = aItem->GetBool();
+				return true;
+			}
 			else if(aItem->m_name == "map_loot_tables")
 			{
 				aItem->GetIdArray(DataType::ID_LOOT_TABLE, m_mapLootTableIds);
@@ -130,6 +135,7 @@ namespace tpublic
 			aWriter->WriteUInt(m_maxMinions);
 			aWriter->WriteBool(m_autoIndoor);
 			aWriter->WriteBool(m_defaultIndoor);
+			aWriter->WriteBool(m_allowSpiritTravel);
 		}
 
 		bool
@@ -168,6 +174,8 @@ namespace tpublic
 				return false;
 			if (!aReader->ReadBool(m_defaultIndoor))
 				return false;
+			if (!aReader->ReadBool(m_allowSpiritTravel))
+				return false;
 			return true;
 		}
 
@@ -188,6 +196,7 @@ namespace tpublic
 		std::vector<uint32_t>						m_mapLootTableIds;
 		uint32_t									m_maxPlayers = 5;
 		uint32_t									m_maxMinions = 0;
+		bool										m_allowSpiritTravel = true;
 	};
 
 }

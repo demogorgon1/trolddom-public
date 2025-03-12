@@ -22,7 +22,7 @@ entity .robert_dulish: !NPC
 	_dialogue_root: .robert_dulish_dialogue
 	_loot_table: .npc
 	_level: 20
-	_faction: light
+	_faction: underworld
 	_creature_type: humanoid
 	_not_pushable: true
 	_sprite: man_1
@@ -71,6 +71,7 @@ quest .robert_dulish_1:
 	objectives: [ .robert_dulish_1 ] 
 	repeat_mode: daily
 	level: 20
+	reward_cash_multiplier: 3
 	reward_reputation_multiplier: 0
 	reward_realm_balance<the_shrouded_lands_underworld>: { expression: a_mul_x_plus_b x: pvp_control_points a: 2 b: 2 }
 	reward_all_items: [ unholy_token ]

@@ -4,6 +4,11 @@ dialogue_screen .azrakkar_greetings:
 	[	
 		"The shrines of this realm writhe with the flux of unholy energies, drawn from the veils between worlds. Their form and power twist and shift, shaped by the whims of the wretched deities that mortals dare to worship."
 	]			
+	
+	options:
+	[
+		{ quest: .azrakkar_1 }
+	]
 }
 
 dialogue_root .azrakkar_dialogue:
@@ -22,5 +27,52 @@ entity .azrakkar: !NPC
 	_not_pushable: true
 	_sprite: demon_2
 	_sprite_dead: demon_2_dead
+	_elite: true
 }
 	
+############################################################
+# Quest 1
+
+objective .azrakkar_1:
+{
+	string: "Shroud Crystals"
+	
+	maps: [ the_shrouded_lands ]
+	
+	collect_items: { item: shroud_crystal count: 5 }
+}
+
+
+quest .azrakkar_1:
+{
+	string: "Shroud Crystals For The War Effort"
+
+	text:
+	[
+		"Deliver shroud crystals to Azrakkar at the Altar of the Unseen."
+	]
+	
+	description: 
+	[
+		"The power of this realm materialize itself in crystals growing out of the ground. They can be used by us to summon more allies to fight against the light that has managed to get hold on parts of the land."
+		"Please, if you gather those crystals, it would be a great help. The more you can bring to me the better."
+	]
+
+	progress:
+	[
+		"Make haste!"
+	]
+	
+	completion:
+	[
+		"This will help immensely, thanks!"
+	]
+	
+	objectives: [ .azrakkar_1 ]
+	repeat_mode: always
+	level: 20
+	reward_xp_multiplier: 0
+	reward_cash_multiplier: 0
+	reward_reputation_multiplier: 1
+	reward_realm_balance<the_shrouded_lands_underworld>: { expression: a_mul_x_plus_b x: pvp_control_points a: 2 b: 9 }
+}

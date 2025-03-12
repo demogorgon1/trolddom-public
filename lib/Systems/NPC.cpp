@@ -3,6 +3,7 @@
 #include <tpublic/Components/Auras.h>
 #include <tpublic/Components/CombatPrivate.h>
 #include <tpublic/Components/CombatPublic.h>
+#include <tpublic/Components/KillContribution.h>
 #include <tpublic/Components/Lootable.h>
 #include <tpublic/Components/NPC.h>
 #include <tpublic/Components/Position.h>
@@ -728,6 +729,14 @@ namespace tpublic::Systems
 						npc->m_subRouteIndex = SIZE_MAX;
 						npc->m_effectiveRouteId = 0;
 						npc->m_handledRouteTriggerIndices.clear();
+					}
+
+					// Reset kill contribution (if any). FIXME: this is ugly - entities should support optional components
+					{
+						EntityInstance* entityInstance = (EntityInstance*)aContext->m_worldView->WorldViewSingleEntityInstance(aEntityInstanceId);
+						Components::KillContribution* killContribution = entityInstance != NULL ? entityInstance->GetComponent<Components::KillContribution>() : NULL;
+						if(killContribution != NULL)
+							killContribution->Reset();
 					}
 
 					returnValue = EntityState::ID_EVADING;

@@ -23,42 +23,46 @@ namespace tpublic
 				ToStream(
 					IWriter*		aWriter) const
 				{
-					aWriter->WriteUIntSet(m_characterIds);
+					aWriter->WriteUIntSet(m_ids);
 				}
 
 				bool
 				FromStream(
 					IReader*		aReader)
 				{
-					if(!aReader->ReadUIntSet(m_characterIds))
+					if(!aReader->ReadUIntSet(m_ids))
 						return false;
 					return true;
 				}
 
 				// Public data
-				std::unordered_set<uint32_t>	m_characterIds;
+				std::unordered_set<uint32_t>	m_ids;
 			};
 
 			enum Field
 			{
-				FIELD_SET
+				FIELD_CHARACTER_IDS,
+				FIELD_ENTITY_INSTANCE_IDS
 			};
 
 			static void
 			CreateSchema(
 				ComponentSchema*	aSchema)
 			{
-				aSchema->DefineCustomObjectNoSource<Set>(FIELD_SET, offsetof(KillContribution, m_set));
+				aSchema->DefineCustomObjectNoSource<Set>(FIELD_CHARACTER_IDS, offsetof(KillContribution, m_characterIds));
+				aSchema->DefineCustomObjectNoSource<Set>(FIELD_ENTITY_INSTANCE_IDS, offsetof(KillContribution, m_entityInstanceIds));
 			}
 
 			void
 			Reset()
 			{
-				m_set.m_characterIds.clear();
+				m_characterIds.m_ids.clear();
+				m_entityInstanceIds.m_ids.clear();
 			}
 
 			// Public data			
-			Set			m_set;
+			Set			m_characterIds;
+			Set			m_entityInstanceIds;
 		};
 	}
 
