@@ -1,3 +1,21 @@
+!define local HOLY_TOKEN_PRICE { quantity: 1 item_cost<[ holy_token holy_token_currency ]>: @_count }	
+
+dialogue_screen .kaelion_vendor:
+{
+	sell holy_back_1: !HOLY_TOKEN_PRICE{ _count: 6 }
+	sell holy_back_2: !HOLY_TOKEN_PRICE{ _count: 6 }
+	sell holy_ring_1: !HOLY_TOKEN_PRICE{ _count: 8 }
+	sell holy_ring_2: !HOLY_TOKEN_PRICE{ _count: 8 }
+	sell holy_chest_1: !HOLY_TOKEN_PRICE{ _count: 10 }
+	sell holy_chest_2: !HOLY_TOKEN_PRICE{ _count: 10 }
+	sell holy_legs_1: !HOLY_TOKEN_PRICE{ _count: 10 }
+	sell holy_legs_2: !HOLY_TOKEN_PRICE{ _count: 10 }
+	sell holy_shoulders_1: !HOLY_TOKEN_PRICE{ _count: 12 }
+	sell holy_shoulders_2: !HOLY_TOKEN_PRICE{ _count: 12 }
+	sell holy_head_1: !HOLY_TOKEN_PRICE{ _count: 12 }
+	sell holy_head_2: !HOLY_TOKEN_PRICE{ _count: 12 }
+}
+
 dialogue_screen .kaelion_greetings:
 {
 	text: 
@@ -8,6 +26,7 @@ dialogue_screen .kaelion_greetings:
 	options:
 	[
 		{ quest: .kaelion_1 }
+		{ goto: .kaelion_vendor text: "Let me browse your goods." }
 	]
 }
 

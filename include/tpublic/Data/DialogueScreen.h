@@ -220,6 +220,49 @@ namespace tpublic
 				uint32_t					m_level = 0;
 			};
 
+			struct SellItemCost
+			{
+				SellItemCost()
+				{
+
+				}
+
+				SellItemCost(
+					const SourceNode*	aSource)
+				{
+					m_itemId = aSource->GetAnnotation()->GetArrayIndex(0)->GetId(DataType::ID_ITEM);
+					m_currencySpriteId = aSource->GetAnnotation()->GetArrayIndex(1)->GetId(DataType::ID_SPRITE);
+					m_quantity = aSource->GetUInt32();
+				}
+
+				void
+				ToStream(
+					IWriter*			aWriter) const
+				{
+					aWriter->WriteUInt(m_itemId);
+					aWriter->WriteUInt(m_quantity);
+					aWriter->WriteUInt(m_currencySpriteId);
+				}
+
+				bool
+				FromStream(
+					IReader*			aReader)
+				{
+					if(!aReader->ReadUInt(m_itemId))
+						return false;
+					if (!aReader->ReadUInt(m_quantity))
+						return false;
+					if (!aReader->ReadUInt(m_currencySpriteId))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t					m_itemId = 0;
+				uint32_t					m_quantity = 0;
+				uint32_t					m_currencySpriteId = 0;
+			};
+
 			struct Sell
 			{
 				Sell()
@@ -240,6 +283,8 @@ namespace tpublic
 							m_quantity = aChild->GetUInt32();
 						else if(aChild->m_tag == "reputation_level_requirement")
 							m_reputationLevelRequirement = SellReputationLevelRequirement(aChild);
+						else if (aChild->m_name == "item_cost")
+							m_itemCost = SellItemCost(aChild);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 					});
@@ -253,6 +298,7 @@ namespace tpublic
 					aWriter->WriteUInt(m_cost);
 					aWriter->WriteUInt(m_quantity);
 					aWriter->WriteOptionalObject(m_reputationLevelRequirement);
+					aWriter->WriteOptionalObject(m_itemCost);
 				}
 
 				bool
@@ -267,6 +313,8 @@ namespace tpublic
 						return false;
 					if(!aReader->ReadOptionalObject(m_reputationLevelRequirement))
 						return false;
+					if (!aReader->ReadOptionalObject(m_itemCost))
+						return false;
 					return true;
 				}
 
@@ -274,7 +322,8 @@ namespace tpublic
 				uint32_t										m_itemId = 0;
 				uint32_t										m_cost = 0;
 				uint32_t										m_quantity = 1;
-				std::optional<SellReputationLevelRequirement>	m_reputationLevelRequirement;
+				std::optional<SellReputationLevelRequirement>	m_reputationLevelRequirement;				
+				std::optional<SellItemCost>						m_itemCost;
 			};
 
 			struct TrainProfession

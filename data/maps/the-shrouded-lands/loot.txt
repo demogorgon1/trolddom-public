@@ -60,3 +60,177 @@ item the_shrouded_lands_lizard_tail:
 	stack: 5
 	string: "Shroud Lizard Tail"
 }
+
+############################################################
+# Holy token items
+
+item holy_back_1:
+{
+	equipment_slots: [ back ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 20
+	icon: icon_cape_1
+	rarity: rare
+	string: "Cloak of the Holy Defender"
+	stat_weight constitution: 2
+	stat_weight strength: 1
+}
+
+item holy_back_2:
+{
+	equipment_slots: [ back ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 20
+	icon: icon_cape_3
+	rarity: rare
+	string: "Cape of the Light"
+	stat_weight constitution: 2
+	stat_weight wisdom: 1
+}
+
+item holy_ring_1:
+{
+	equipment_slots: [ finger_1 finger_2 ]
+	flags: [ unique ]
+	binds: when_picked_up
+	required_level: 20
+	icon: icon_ring_7
+	rarity: rare
+	string: "Ring of the Holy Defender"
+	stat_weight constitution: 3
+	stat_weight strength: 2
+	stat_weight dexterity: 1
+}
+
+item holy_ring_2:
+{
+	equipment_slots: [ finger_1 finger_2 ]
+	flags: [ unique ]
+	binds: when_picked_up
+	required_level: 20
+	icon: icon_ring_2
+	rarity: rare
+	string: "Ring of the Light"
+	stat_weight constitution: 2
+	stat_weight wisdom: 1
+	stat_weight spell_damage: 1
+}
+
+item holy_chest_1:
+{
+	equipment_slots: [ chest ]
+	binds: when_picked_up
+	type: armor_plate
+	required_level: 20
+	icon: icon_plate_chest_3
+	rarity: rare
+	string: "Armor of the Holy Defender"
+	budget_bias: -10
+	stat_weight constitution: 2
+	stat_weight strength: 1
+	stat phys_crit_chance: 1
+}
+
+item holy_chest_2:
+{
+	equipment_slots: [ chest ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 20
+	icon: icon_robe_4
+	rarity: rare
+	string: "Robe of the Light"
+	budget_bias: -10
+	stat_weight constitution: 2
+	stat_weight wisdom: 1
+	stat spell_crit_chance: 1
+}
+
+item holy_legs_1:
+{
+	equipment_slots: [ legs ]
+	binds: when_picked_up
+	type: armor_plate
+	required_level: 20
+	icon: icon_head_7
+	rarity: rare
+	string: "Legplates of the Holy Defender"
+	budget_bias: -10
+	stat_weight constitution: 3
+	stat_weight strength: 2
+	stat_weight dexterity: 1
+	stat phys_crit_chance: 1
+}
+
+item holy_legs_2:
+{
+	equipment_slots: [ legs ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 20
+	icon: icon_pants_2
+	rarity: rare
+	string: "Pants of the Light"
+	stat_weight constitution: 3
+	stat_weight wisdom: 1
+	stat_weight spell_damage: 2
+}
+
+item holy_shoulders_1:
+{
+	equipment_slots: [ shoulders ]
+	binds: when_picked_up
+	type: armor_plate
+	required_level: 20
+	icon: icon_shoulders_2
+	rarity: rare
+	string: "Shoulderguards of the Holy Defender"
+	stat_weight constitution: 3
+	stat_weight strength: 2
+	stat_weight dexterity: 1
+}
+
+item holy_shoulders_2:
+{
+	equipment_slots: [ shoulders ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 20
+	icon: icon_shoulders_1
+	rarity: rare
+	string: "Pauldrons of the Light"
+	stat_weight constitution: 3
+	stat_weight wisdom: 2
+	stat_weight spell_damage: 1
+}
+
+item holy_head_1:
+{
+	equipment_slots: [ head ]
+	binds: when_picked_up
+	type: armor_plate
+	required_level: 20
+	icon: icon_helmet_4
+	rarity: rare
+	string: "Visor of the Holy Defender"
+	stat_weight constitution: 1
+	stat_weight strength: 3
+	stat_weight dexterity: 2
+}
+
+item holy_head_2:
+{
+	equipment_slots: [ head ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 20
+	icon: icon_head_11
+	rarity: rare
+	string: "Cowl of the Light"
+	budget_bias: -10
+	stat_weight constitution: 1
+	stat_weight wisdom: 2
+	stat spell_crit_chance: 1
+}

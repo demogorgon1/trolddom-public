@@ -182,7 +182,9 @@ namespace tpublic
 												uint32_t													aVendorEntityInstanceId,
 												uint32_t													aItemId,
 												uint32_t													aQuantity,
-												int64_t														aCost) = 0;
+												int64_t														aCost,
+												uint32_t													aCurrencyItemId,
+												uint32_t													aCurrencyQuantity) = 0;
 		virtual void						EventQueueEntityObjective(
 												const PlayerTag&											aPlayerTag,
 												uint32_t													aEntityId,

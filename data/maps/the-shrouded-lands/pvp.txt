@@ -82,15 +82,6 @@ entity .flag_underworld: !THE_SHROUDED_LANDS_FLAG{ _default_index: 1 }
 entity .flag_light: !THE_SHROUDED_LANDS_FLAG{ _default_index: 2 }
 entity .flag_neutral: !THE_SHROUDED_LANDS_FLAG{ _default_index: 0 }
 
-sprites:
-{
-	source: "map-flags.png"
-	size: { width: 9 height: 8 }
-	sprite the_shrouded_lands_underworld_flag: { }
-	sprite the_shrouded_lands_light_flag: { }
-	sprite the_shrouded_lands_neutral_flag: { }
-}
-
 control_point_state the_shrouded_lands_light:
 {
 	sprite: the_shrouded_lands_light_flag

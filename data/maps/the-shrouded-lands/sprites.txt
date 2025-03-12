@@ -1,0 +1,14 @@
+sprites:
+{
+	source: "sprites.png"
+	
+	size: { width: 9 height: 8 }
+	sprite the_shrouded_lands_underworld_flag: { }
+	sprite the_shrouded_lands_light_flag: { }
+	sprite the_shrouded_lands_neutral_flag: { }
+	
+	cursor: { position: [ 0 8 ] }
+	size: { width: 8 height: 8 }
+	sprite unholy_token_currency: { }
+	sprite holy_token_currency: { }
+}
