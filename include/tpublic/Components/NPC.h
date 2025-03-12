@@ -455,8 +455,7 @@ namespace tpublic
 				FIELD_OUT_OF_ZONE_ACTION,
 				FIELD_CAN_MOVE,
 				FIELD_EVADE_DESPAWN,
-				FIELD_AGGRO_REQUIREMENTS,
-				FIELD_KILL_CONTRIBUTON
+				FIELD_AGGRO_REQUIREMENTS
 			};
 
 			static void
@@ -478,7 +477,6 @@ namespace tpublic
 				aSchema->DefineCustomObject<OutOfZoneAction>(FIELD_OUT_OF_ZONE_ACTION, "out_of_zone_action", offsetof(NPC, m_outOfZoneAction));
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_EVADE_DESPAWN, "evade_despawn", offsetof(NPC, m_evadeDespawn));
 				aSchema->DefineCustomObject<AggroRequirements>(FIELD_AGGRO_REQUIREMENTS, "aggro_requirements", offsetof(NPC, m_aggroRequirements));
-				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_KILL_CONTRIBUTON, "kill_contribution", offsetof(NPC, m_killContribution));
 			}
 
 			const StateEntry*
@@ -511,7 +509,6 @@ namespace tpublic
 				m_outOfZoneAction = OutOfZoneAction();
 				m_evadeDespawn = false;
 				m_aggroRequirements = AggroRequirements();
-				m_killContribution = false;
 
 				m_cooldowns.m_entries.clear();
 				m_castInProgress.reset();
@@ -545,7 +542,6 @@ namespace tpublic
 			bool										m_large = false;
 			bool										m_inactiveEncounterDespawn = false;
 			bool										m_canMove = true;
-			bool										m_killContribution = false;
 			uint32_t									m_encounterId = 0;
 			uint32_t									m_routeId = 0;
 			uint32_t									m_zoneId = 0;

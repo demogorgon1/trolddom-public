@@ -2,6 +2,7 @@
 
 #include <tpublic/Components/ActiveQuests.h>
 #include <tpublic/Components/CombatPublic.h>
+#include <tpublic/Components/KillContribution.h>
 #include <tpublic/Components/Lootable.h>
 #include <tpublic/Components/PlayerPublic.h>
 
@@ -119,9 +120,11 @@ namespace tpublic
 		uint32_t									aPlayerWorldCharacterId,
 		Components::Lootable*						aLootable) const
 	{
+		const Components::KillContribution* killContribution = aLootableEntityInstance->GetComponent<Components::KillContribution>();
+
 		GenerateItems(aRandom, aPlayerEntityInstances, aLootableEntityInstance, aLevel, aCreatureTypeId, aLootTable, [&](
-			const tpublic::ItemInstance& aItemInstance)			
-		{
+			const ItemInstance& aItemInstance)			
+		{			
 			const Data::Item* item = m_manifest->GetById<Data::Item>(aItemInstance.m_itemId);
 			if(item->m_questId != 0)
 			{
@@ -136,11 +139,23 @@ namespace tpublic
 
 						Components::Lootable::AvailableLoot loot;
 						loot.m_itemInstance = aItemInstance;
-						loot.m_itemInstance.SetWorldbound(aPlayerWorldCharacterId);
 						loot.m_playerTag.SetCharacter(playerPublic->m_characterId, combatPublic->m_level);
 						loot.m_questId = item->m_questId;
+						loot.m_itemInstance.SetWorldbound(aPlayerWorldCharacterId);
 						aLootable->m_availableLoot.push_back(loot);
 					}
+				}
+			}
+			else if(killContribution != NULL && item->IsKillContributionLoot())
+			{
+				// This can be looted by anyone with kill contribution. Generate a copy for everyone on the list.
+				for(uint32_t characterId : killContribution->m_set.m_characterIds)
+				{
+					Components::Lootable::AvailableLoot loot;
+					loot.m_itemInstance = aItemInstance;
+					loot.m_playerTag.SetCharacter(characterId, 0); // Player tag character level isn't relevant here
+					loot.m_itemInstance.SetWorldbound(aPlayerWorldCharacterId);
+					aLootable->m_availableLoot.push_back(loot);
 				}
 			}
 			else

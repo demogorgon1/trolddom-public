@@ -51,6 +51,7 @@
 		lootable : 
 		{ 
 			<exists _loot_table> loot_table: @_loot_table
+			<exists _kill_contribution and _kill_contribution> anyone_can_loot: true
 		}
 		combat_public: 
 		{  

@@ -173,7 +173,12 @@ namespace tpublic::Systems
 
 				Components::Lootable* lootable = GetComponent<Components::Lootable>(aComponents);
 				lootable->m_timeStamp = (uint64_t)time(NULL);
-				lootable->m_playerTag = tag->m_playerTag;
+
+				if(lootable->m_anyoneCanLoot)
+					lootable->m_playerTag = PlayerTag(PlayerTag::TYPE_ANYONE);
+				else
+					lootable->m_playerTag = tag->m_playerTag;
+
 				lootable->SetDirty();
 
 				if(lootable->m_playerTag.IsSet())

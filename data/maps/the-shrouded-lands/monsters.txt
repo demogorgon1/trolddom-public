@@ -403,10 +403,7 @@ ability .the_underworld_draethor_shield:
 	cooldowns: [ .the_underworld_draethor_shield ]
 	icon: icon_stuff
 	must_not_have_world_aura: the_shrouded_lands_underworld_enemy_shield_down	
-	direct_effect apply_aura:
-	{
-		aura: .the_underworld_draethor_shield
-	}
+	#direct_effect apply_aura: {	aura: .the_underworld_draethor_shield }
 }
 
 npc_behavior_state .the_underworld_draethor:

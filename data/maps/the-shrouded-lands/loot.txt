@@ -27,7 +27,7 @@ item holy_token:
 	icon: icon_holy_token_1
 	string: "Holy Token"
 	stack: 40
-	flags: [ not_sellable ]
+	flags: [ not_sellable kill_contribution_loot ]
 	binds: when_picked_up
 	loot_groups: [ .holy_token ]
 	level_range: [ 1 22 ]
@@ -42,9 +42,9 @@ item unholy_token:
 	icon: icon_unholy_token_1
 	string: "Unholy Token"
 	stack: 40
-	flags: [ not_sellable ]
+	flags: [ not_sellable kill_contribution_loot ]
 	binds: when_picked_up
-	#loot_groups: [ .unholy_token ]
+	loot_groups: [ .unholy_token ]
 	level_range: [ 1 22 ]
 	rarity: uncommon
 }

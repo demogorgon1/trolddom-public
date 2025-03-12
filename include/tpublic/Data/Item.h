@@ -27,7 +27,8 @@ namespace tpublic
 			{
 				FLAG_UNIQUE							= 0x00000001,
 				FLAG_NOT_SELLABLE					= 0x00000002,
-				FLAG_VENDOR							= 0x00000004
+				FLAG_VENDOR							= 0x00000004,
+				FLAG_KILL_CONTRIBUTION_LOOT			= 0x00000008
 			};
 
 			static inline uint32_t
@@ -45,6 +46,8 @@ namespace tpublic
 						flags |= FLAG_NOT_SELLABLE;
 					else if (strcmp(identifier, "vendor") == 0)
 						flags |= FLAG_VENDOR;
+					else if (strcmp(identifier, "kill_contribution_loot") == 0)
+						flags |= FLAG_KILL_CONTRIBUTION_LOOT;
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item flag.", identifier);
 				});
@@ -129,6 +132,7 @@ namespace tpublic
 			bool	IsUnique() const { return m_flags & FLAG_UNIQUE; }
 			bool	IsNotSellable() const { return m_flags & FLAG_NOT_SELLABLE; }
 			bool	IsVendor() const { return m_flags & FLAG_VENDOR; }
+			bool	IsKillContributionLoot() const { return m_flags & FLAG_KILL_CONTRIBUTION_LOOT; }
 
 			// Base implementation
 			void
