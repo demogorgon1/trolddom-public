@@ -14,6 +14,7 @@ dialogue_screen .kaelion_vendor:
 	sell holy_shoulders_2: !HOLY_TOKEN_PRICE{ _count: 12 }
 	sell holy_head_1: !HOLY_TOKEN_PRICE{ _count: 12 }
 	sell holy_head_2: !HOLY_TOKEN_PRICE{ _count: 12 }
+	sell holy_trinket_1: !HOLY_TOKEN_PRICE{ _count: 20 }
 }
 
 dialogue_screen .kaelion_greetings:

@@ -68,6 +68,12 @@ sprites:
 	sprite effect_brown_glow_1: { flags: [ ] }
 	sprite effect_brown_glow_2: { flags: [ ] }
 	sprite effect_brown_glow_3: { flags: [ ] }
+	sprite effect_holy_wings_0: { flags: [ centered ] }
+	sprite effect_holy_wings_1: { flags: [ centered ] }
+	sprite effect_holy_wings_2: { flags: [ centered ] }
+	sprite effect_unholy_wings_0: { flags: [ centered ] }
+	sprite effect_unholy_wings_1: { flags: [ centered ] }
+	sprite effect_unholy_wings_2: { flags: [ centered ] }
 	
 	cursor: { position: [ 0 20 ] }	
 	size: { width: 24 height: 24 }

@@ -408,3 +408,92 @@ item unholy_head_2:
 	stat_weight wisdom: 2
 	stat spell_crit_chance: 1
 }
+
+############################################################
+# Epic trinkets
+
+!define local EPIC_TRINKET_AURA
+{
+	string: @_string
+	icon: @_icon
+	type: buff
+	duration: 150
+	flags: [ unique magic ]
+	particle_system: @_id
+	stat_modifiers:
+	{
+		attack_haste: { add: 30 } 
+		spell_haste: { add: 30 } 
+	}
+}
+
+!define local EPIC_TRINKET_ABILITY
+{
+	string: @_string
+	description: "Restores 220 health and increases your haste for 15 seconds."
+	cooldowns: [ global @_id ]
+	icon: @_id
+	flags: [ target_self item ]
+	requirement self<must_have_item_equipped>: @_id
+	direct_effect apply_aura: { aura: @_id }
+	direct_effect heal: { function: 220 }
+}
+
+!define local EPIC_TRINKET_ITEM
+{
+	equipment_slots: [ trinket_1 trinket_2 ]
+	binds: when_picked_up
+	flags: [ unique ]
+	required_level: 20
+	icon: @_icon
+	rarity: epic
+	string: @_string
+	use_ability: @_id		
+}
+
+!define local EPIC_TRINKET_PARTICLE_SYSTEM
+{
+	particle:
+	{
+		sprites: @_frames
+		flags: [ attached ]
+		sprite_interval: 150
+		count: 1
+		scale: 1
+		alpha: 0.85
+		fade_in: 500
+		fade_out: 500
+		offset_x: 0.5
+		offset_y: 0.5	
+	}
+}
+
+{
+	${
+		_string: "Claw of the Putrid Beast"
+		_id: unholy_trinket_1	
+		_icon: icon_claw
+		_frames: [ effect_unholy_wings_0 effect_unholy_wings_1 effect_unholy_wings_2 effect_unholy_wings_1 ]
+	}
+	
+	cooldown unholy_trinket_1: { duration: 2400 }
+	aura unholy_trinket_1: !EPIC_TRINKET_AURA {}
+	ability unholy_trinket_1: !EPIC_TRINKET_ABILITY {}
+	item unholy_trinket_1: !EPIC_TRINKET_ITEM {}
+	particle_system unholy_trinket_1: !EPIC_TRINKET_PARTICLE_SYSTEM{}	
+}
+
+{
+	${
+		_string: "Vial of Light"
+		_id: holy_trinket_1	
+		_icon: icon_vial_1
+		_frames: [ effect_holy_wings_0 effect_holy_wings_1 effect_holy_wings_2 effect_holy_wings_1 ]
+	}
+	
+	cooldown holy_trinket_1: { duration: 2400 }
+	aura holy_trinket_1: !EPIC_TRINKET_AURA {}
+	ability holy_trinket_1: !EPIC_TRINKET_ABILITY {}
+	item holy_trinket_1: !EPIC_TRINKET_ITEM {}	
+	particle_system holy_trinket_1: !EPIC_TRINKET_PARTICLE_SYSTEM{}	
+}

@@ -689,6 +689,7 @@ sprites:
 	sprite icon_crystal_1 : { tags: [ icon ] }
 	sprite icon_unholy_token_1 : { tags: [ icon ] }
 	sprite icon_holy_token_1 : { tags: [ icon ] }
+	sprite icon_vial_1 : { tags: [ icon ] }
 	
 }
 

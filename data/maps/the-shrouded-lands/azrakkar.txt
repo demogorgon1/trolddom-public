@@ -14,6 +14,7 @@ dialogue_screen .azrakkar_vendor:
 	sell unholy_shoulders_2: !UNHOLY_TOKEN_PRICE{ _count: 12 }
 	sell unholy_head_1: !UNHOLY_TOKEN_PRICE{ _count: 12 }
 	sell unholy_head_2: !UNHOLY_TOKEN_PRICE{ _count: 12 }
+	sell unholy_trinket_1: !UNHOLY_TOKEN_PRICE{ _count: 20 }
 }
 
 dialogue_screen .azrakkar_greetings:
