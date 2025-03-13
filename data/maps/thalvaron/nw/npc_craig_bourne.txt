@@ -1,0 +1,30 @@
+dialogue_screen .craig_borne_dialogue:
+{
+	text: 
+	[	
+		"Greetings."
+	]			
+	
+	options:
+	[
+	]
+}
+
+dialogue_root .craig_borne_dialogue:
+{
+	.craig_borne_dialogue: { }
+}
+
+entity thalvaron_craig_borne: !NPC
+{
+	_string: "Craig Borne"
+	_dialogue_root: .craig_borne_dialogue	
+	_sprite: man_58
+	_sprite_dead: man_58_dead
+	_level: 20
+	_faction: league_of_assassins		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

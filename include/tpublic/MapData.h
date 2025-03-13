@@ -22,6 +22,49 @@ namespace tpublic
 	class MapData
 	{
 	public:
+		struct PVPSwapReputationsWithAura
+		{
+			PVPSwapReputationsWithAura()
+			{
+
+			}
+
+			PVPSwapReputationsWithAura(
+				const SourceNode*			aSource)
+			{
+				m_firstFactionId = aSource->GetAnnotation()->GetArrayIndex(0)->GetId(DataType::ID_FACTION);
+				m_secondFactionId = aSource->GetAnnotation()->GetArrayIndex(1)->GetId(DataType::ID_FACTION);
+				m_auraId = aSource->GetId(DataType::ID_AURA);
+			}
+
+			void
+			ToStream(
+				IWriter*					aWriter) const
+			{
+				aWriter->WriteUInt(m_firstFactionId);
+				aWriter->WriteUInt(m_secondFactionId);
+				aWriter->WriteUInt(m_auraId);
+			}
+
+			bool
+			FromStream(
+				IReader*					aReader)
+			{
+				if (!aReader->ReadUInt(m_firstFactionId))
+					return false;
+				if (!aReader->ReadUInt(m_secondFactionId))
+					return false;
+				if (!aReader->ReadUInt(m_auraId))
+					return false;
+				return true;
+			}
+
+			// Public data
+			uint32_t		m_firstFactionId = 0;
+			uint32_t		m_secondFactionId = 0;
+			uint32_t		m_auraId = 0;
+		};
+
 		struct PVPControlPointRealmBalanceUpdate
 		{
 			PVPControlPointRealmBalanceUpdate()
@@ -181,7 +224,9 @@ namespace tpublic
 				aSource->GetObject()->ForEachChild([&](
 					const SourceNode* aChild)
 				{
-					if (aChild->m_tag == "faction")
+					if(aChild->m_name == "swap_reputations_with_aura")
+						m_swapReputationsWithAura = PVPSwapReputationsWithAura(aChild);
+					else if (aChild->m_tag == "faction")
 						m_factions.push_back(std::make_unique<PVPFaction>(aChild));
 					else if (aChild->m_tag == "control_point_realm_balance_update")
 						m_controlPointRealmBalanceUpdates.push_back(std::make_unique<PVPControlPointRealmBalanceUpdate>(aChild));
@@ -228,6 +273,7 @@ namespace tpublic
 			PVPType															m_type = INVALID_PVP_TYPE;
 			std::vector<std::unique_ptr<PVPFaction>>						m_factions;
 			std::vector<std::unique_ptr<PVPControlPointRealmBalanceUpdate>>	m_controlPointRealmBalanceUpdates;
+			std::optional<PVPSwapReputationsWithAura>						m_swapReputationsWithAura;
 		};
 
 		enum SeedType : uint8_t

@@ -223,8 +223,10 @@ map the_shrouded_lands:
 	
 	pvp<reputation>:
 	{
+		swap_reputations_with_aura<[ light underworld ]>: thalvaron_sylvia_swift_quest_item
+	
 		faction light:
-		{
+		{			
 			reputation: light
 			player_spawn: the_shrouded_lands_light
 			control_point_entities: [ .flag_underworld .flag_light .flag_neutral ]

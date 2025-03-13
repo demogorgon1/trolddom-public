@@ -432,7 +432,7 @@ item unholy_head_2:
 	string: @_string
 	description: "Restores 220 health and increases your haste for 15 seconds."
 	cooldowns: [ global @_id ]
-	icon: @_id
+	icon: @_icon
 	flags: [ target_self item ]
 	requirement self<must_have_item_equipped>: @_id
 	direct_effect apply_aura: { aura: @_id }

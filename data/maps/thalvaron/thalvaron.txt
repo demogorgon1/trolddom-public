@@ -165,6 +165,9 @@ map_entity_spawn thalvaron_herbalism_trainer: { entity thalvaron_herbalism_train
 map_entity_spawn thalvaron_lara_ottingson: { entity thalvaron_lara_ottingson: { init_state: default } }
 map_entity_spawn thalvaron_brown_horse: { entity brown_horse: { init_state: default } }
 map_entity_spawn thalvaron_dark_brown_horse: { entity dark_brown_horse: { init_state: default } }
+map_entity_spawn thalvaron_craig_borne: { entity thalvaron_craig_borne: { init_state: default } }
+map_entity_spawn thalvaron_sylvia_swift: { entity thalvaron_sylvia_swift: { init_state: default } }
+map_entity_spawn thalvaron_assassin_bar_keeper: { entity thalvaron_assassin_bar_keeper: { init_state: default } }
 
 # N
 map_entity_spawn thalvaron_ranger_fremalt: { entity thalvaron_ranger_fremalt: { init_state: default } }
@@ -422,6 +425,9 @@ map_palette .stuff:
 	entity_spawn thalvaron_dark_brown_horse: [ 149 83 250 ]
 	entity_spawn the_shrouded_lands_light: [ 108 101 106 ]
 	entity_spawn the_shrouded_lands_underworld: [ 208 141 106 ]
+	entity_spawn thalvaron_sylvia_swift: [ 39 102 120 ]
+	entity_spawn thalvaron_craig_borne: [ 39 102 220 ]
+	entity_spawn thalvaron_assassin_bar_keeper: [ 139 102 220 ]	
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				
@@ -768,6 +774,7 @@ map_palette .doodads:
 	doodad statue_angel: [ 199 199 119 ]
 	doodad skull_stick: [ 39 81 167 ]
 	doodad hole: [ 104 49 146 ]
+	doodad weapon_rack: [ 31 49 49 ]
 	
 	doodad wall_sign_generic<"Mathew's Emporium">: [ 197 173 111 ]	
 	doodad wall_sign_generic<"John & Mary's">: [ 97 173 111 ]	
@@ -781,6 +788,7 @@ map_palette .doodads:
 	doodad wall_sign_generic<"Enchanted">: [ 197 123 131 ]	
 	doodad wall_sign_generic<"Alchemy 'R Us">: [ 197 223 131 ]	
 	doodad wall_sign_generic<"Healing Herbs">: [ 117 126 11 ]	
+	doodad wall_sign_generic<"The Black Veil Tavern">: [ 111 121 11 ]	
 }
 
 map_palette .cliffs:
