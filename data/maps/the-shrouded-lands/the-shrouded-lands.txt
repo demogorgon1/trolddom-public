@@ -1,4 +1,5 @@
 route the_shrouded_lands_default_patrol: { }
+route .wanderer: { }
 
 npc_behavior_state the_shrouded_lands_default_patrol_friendly:
 {
@@ -24,6 +25,7 @@ map_entity_spawn .azrakkar: { entity .azrakkar: { weight: 1 } }
 map_entity_spawn .kaelion: { entity .kaelion: { weight: 1 } }
 map_entity_spawn .brail_howser: { entity .brail_howser: { weight: 1 } }
 map_entity_spawn .robert_dulish: { entity .robert_dulish: { weight: 1 } }
+map_entity_spawn .wanderer: { entity .wanderer: { weight: 1 } }
 
 map_entity_spawn .shroud_crystal:
 {
@@ -39,6 +41,7 @@ zone .blasted_wastes: { string: "Blasted Wastes" }
 zone .fortress_of_light: { string: "Fortress of Light" }
 zone .the_sinister_bastion: { string: "The Sinister Bastern" }
 zone .crystal_fields: { string: "Crystal Fields" }
+zone .ghorynth: { string: "Ghorynth" }
 
 zone .rylions_cave: { string: "Rylion's Cave" }
 zone .the_graveyard: { string: "The Graveyard" }
@@ -47,15 +50,32 @@ zone .the_black_watch: { string: "The Black Watch" }
 zone .dawnbringer_keep: { string: "Dawnbringer Keep" }
 zone .the_foul_breach: { string: "The Foul Breach" }
 
+map_cliff .dummy_cliff_0: { cliff_style: dummy elevation: 0 }
+map_cliff .dummy_cliff_0_ramp: { cliff_style: dummy elevation: 0 ramp: true }
+map_cliff .dummy_cliff_1: { cliff_style: dummy elevation: 1 } 
+map_cliff .dummy_cliff_1_ramp: { cliff_style: dummy elevation: 1 ramp: true }
+map_cliff .dummy_cliff_2: { cliff_style: dummy elevation: 2 }
+map_cliff .dummy_cliff_2_ramp: { cliff_style: dummy elevation: 2 ramp: true }
+
 map_palette .tiles:
 {
 	tile fs_water: [ 9 86 104 ]
 	tile fs_ground_1: [ 97 91 62 ]
 	tile fs_ground_2: [ 67 61 32 ]
+	tile fs_ground_3: [ 40 32 29 ]
 	tile fs_rocks_1: [ 143 131 120 ]
 	tile fs_rocks_2: [ 143 131 220 ]
 	tile fs_shallow_water: [ 100 140 116 ]
 	tile fs_cave_entrance: [ 200 40 59 ]
+	tile fs_building_wall: [ 29 200 129 ]
+	tile fs_building_d_wall: [ 129 200 129 ]
+	tile fs_building_entrance: [ 129 100 129 ]
+	tile fs_building_d_entrance: [ 129 100 29 ]
+	tile fs_building_entrance_closed: [ 229 100 129 ]
+	tile fs_building_d_entrance_closed: [ 229 100 29 ]
+	tile rock_floor: [ 200 200 155 ] 
+	tile roof_3: [ 100 0 134 ]
+	tile wood_solid_wall: [ 0 200 200 ]	
 }
 
 map_palette .stuff:
@@ -77,8 +97,7 @@ map_palette .stuff:
 	entity_spawn .azrakkar: [ 235 130 60 ]	
 	entity_spawn .flag_underworld: [ 43 104 40 ]
 	entity_spawn .flag_light: [ 143 104 40 ]
-	entity_spawn .flag_neutral: [ 143 104 140 ]
-		
+	entity_spawn .flag_neutral: [ 143 104 140 ]		
 	entity_spawn .the_light_guard: [ 40 160 39 ]
 	entity_spawn .the_light_defender_1: [ 140 160 39 ]
 	entity_spawn .the_light_defender_2: [ 140 100 39 ]
@@ -106,6 +125,7 @@ map_palette .stuff:
 	entity_spawn .lizard_1: [ 124 66 39 ]
 	entity_spawn .brail_howser: [ 124 66 139 ]
 	entity_spawn .robert_dulish: [ 124 166 139 ]
+	entity_spawn .wanderer: [ 39 88 164 ]
 
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn the_shrouded_lands_underworld: [ 255 0 0 ]
@@ -123,6 +143,7 @@ map_palette .zones:
 	zone .fortress_of_light: [ 100 121 226 ]
 	zone .the_sinister_bastion: [ 226 198 100 ]
 	zone .crystal_fields: [ 33 0 255 ]
+	zone .ghorynth: [ 115 181 102 ]
 }
 
 map_palette .sub_zones:
@@ -141,16 +162,27 @@ map_palette .sub_zones:
 map_palette .routes:
 {
 	route the_shrouded_lands_default_patrol: [ 192 16 186 ]	
+	route .wanderer: [ 192 100 200 ]
 }
 
 map_palette .doodads:
 {
 	doodad fs_rock: [ 120 30 50 ]
 	doodad fs_rock_purple: [ 220 30 50 ]
+	doodad fs_ground_mark: [ 255 93 91 ]
+	doodad stone_stairs: [ 192 173 19 ]	
 }
 
 map_palette .cliffs:
 {
+	cliff .dummy_cliff_0: [ 137 18 124 ]
+	cliff .dummy_cliff_0_ramp: [ 116 56 134 ]	
+
+	cliff .dummy_cliff_1: [ 197 16 134 ]
+	cliff .dummy_cliff_1_ramp: [ 136 52 174 ]	
+
+	cliff .dummy_cliff_2: [ 197 169 234 ]
+	cliff .dummy_cliff_2_ramp: [ 136 252 174 ]	
 }
 
 map_palette .levels:
@@ -255,11 +287,11 @@ map the_shrouded_lands:
 		#	palettes:	[ .flags ]
 		#	source:		"the-shrouded-lands-flags.png"
 		#}								
-		#
-		#{
-		#	palettes:	[ .cliffs ]
-		#	source:		"the-shrouded-lands-cliffs.png"
-		#}								
+		
+		{
+			palettes:	[ .cliffs ]
+			source:		"the-shrouded-lands-cliffs.png"
+		}								
 		
 	]
 }

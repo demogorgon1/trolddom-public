@@ -62,7 +62,7 @@ item the_shrouded_lands_lizard_tail:
 }
 
 ############################################################
-# Holy token items
+# Basic holy token items
 
 item holy_back_1:
 {
@@ -229,6 +229,180 @@ item holy_head_2:
 	icon: icon_head_11
 	rarity: rare
 	string: "Cowl of the Light"
+	budget_bias: -10
+	stat_weight constitution: 1
+	stat_weight wisdom: 2
+	stat spell_crit_chance: 1
+}
+
+############################################################
+# Basic unholy token items
+
+item unholy_back_1:
+{
+	equipment_slots: [ back ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 20
+	icon: icon_cape_1
+	rarity: rare
+	string: "Cloak of the Underworld"
+	stat_weight constitution: 2
+	stat_weight strength: 1
+}
+
+item unholy_back_2:
+{
+	equipment_slots: [ back ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 20
+	icon: icon_cape_3
+	rarity: rare
+	string: "Cape of the Wise Slayer"
+	stat_weight constitution: 2
+	stat_weight wisdom: 1
+}
+
+item unholy_ring_1:
+{
+	equipment_slots: [ finger_1 finger_2 ]
+	flags: [ unique ]
+	binds: when_picked_up
+	required_level: 20
+	icon: icon_ring_7
+	rarity: rare
+	string: "Underworld Loop"
+	stat_weight constitution: 3
+	stat_weight strength: 2
+	stat_weight dexterity: 1
+}
+
+item unholy_ring_2:
+{
+	equipment_slots: [ finger_1 finger_2 ]
+	flags: [ unique ]
+	binds: when_picked_up
+	required_level: 20
+	icon: icon_ring_2
+	rarity: rare
+	string: "Ring of the Dark Wizard"
+	stat_weight constitution: 2
+	stat_weight wisdom: 1
+	stat_weight spell_damage: 1
+}
+
+item unholy_chest_1:
+{
+	equipment_slots: [ chest ]
+	binds: when_picked_up
+	type: armor_plate
+	required_level: 20
+	icon: icon_plate_chest_3
+	rarity: rare
+	string: "Unholy Chestplate"
+	budget_bias: -10
+	stat_weight constitution: 2
+	stat_weight strength: 1
+	stat phys_crit_chance: 1
+}
+
+item unholy_chest_2:
+{
+	equipment_slots: [ chest ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 20
+	icon: icon_robe_4
+	rarity: rare
+	string: "Spellcleaver's Robe"
+	budget_bias: -10
+	stat_weight constitution: 2
+	stat_weight wisdom: 1
+	stat spell_crit_chance: 1
+}
+
+item unholy_legs_1:
+{
+	equipment_slots: [ legs ]
+	binds: when_picked_up
+	type: armor_plate
+	required_level: 20
+	icon: icon_head_7
+	rarity: rare
+	string: "Dark Grieves"
+	budget_bias: -10
+	stat_weight constitution: 3
+	stat_weight strength: 2
+	stat_weight dexterity: 1
+	stat phys_crit_chance: 1
+}
+
+item unholy_legs_2:
+{
+	equipment_slots: [ legs ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 20
+	icon: icon_pants_2
+	rarity: rare
+	string: "Pants of Darkness"
+	stat_weight constitution: 3
+	stat_weight wisdom: 1
+	stat_weight spell_damage: 2
+}
+
+item unholy_shoulders_1:
+{
+	equipment_slots: [ shoulders ]
+	binds: when_picked_up
+	type: armor_plate
+	required_level: 20
+	icon: icon_shoulders_2
+	rarity: rare
+	string: "Pauldrons of Unholy Power"
+	stat_weight constitution: 3
+	stat_weight strength: 2
+	stat_weight dexterity: 1
+}
+
+item unholy_shoulders_2:
+{
+	equipment_slots: [ shoulders ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 20
+	icon: icon_shoulders_1
+	rarity: rare
+	string: "Shoulders of Dark Whispers"
+	stat_weight constitution: 3
+	stat_weight wisdom: 2
+	stat_weight spell_damage: 1
+}
+
+item unholy_head_1:
+{
+	equipment_slots: [ head ]
+	binds: when_picked_up
+	type: armor_plate
+	required_level: 20
+	icon: icon_helmet_4
+	rarity: rare
+	string: "Visor of the Unholy Defender"
+	stat_weight constitution: 1
+	stat_weight strength: 3
+	stat_weight dexterity: 2
+}
+
+item unholy_head_2:
+{
+	equipment_slots: [ head ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 20
+	icon: icon_head_11
+	rarity: rare
+	string: "Mask of Dark Wisdom"
 	budget_bias: -10
 	stat_weight constitution: 1
 	stat_weight wisdom: 2
