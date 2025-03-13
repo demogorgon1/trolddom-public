@@ -161,6 +161,50 @@ tile_modifier badlands_dungeon_wall_start:
 	priority: true
 }
 
+tile_modifier fs_building_wall_start:
+{
+	sprites: [ fs_building_wall_start ]
+	
+	requirement<center_must_be>: [ fs_building_wall ]
+	requirement<west_must_not_be>: [ fs_building_wall rock_floor ]
+	
+	probability: 100
+	priority: true
+}
+
+tile_modifier fs_building_wall_end:
+{
+	sprites: [ fs_building_wall_end ]
+	
+	requirement<center_must_be>: [ fs_building_wall ]
+	requirement<east_must_not_be>: [ fs_building_wall rock_floor ]
+	
+	probability: 100
+	priority: true
+}
+
+tile_modifier fs_building_d_wall_start:
+{
+	sprites: [ fs_building_d_wall_start ]
+	
+	requirement<center_must_be>: [ fs_building_d_wall ]
+	requirement<west_must_not_be>: [ fs_building_d_wall rock_floor ]
+	
+	probability: 100
+	priority: true
+}
+
+tile_modifier fs_building_d_wall_end:
+{
+	sprites: [ fs_building_d_wall_end ]
+	
+	requirement<center_must_be>: [ fs_building_d_wall ]
+	requirement<east_must_not_be>: [ fs_building_d_wall rock_floor ]
+	
+	probability: 100
+	priority: true
+}
+
 tile_modifier wood_wall_end:
 {
 	sprites: [ wood_wall_end ]

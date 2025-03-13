@@ -653,6 +653,7 @@ sprites:
 	sprite demon_5: { dead: demon_5_dead }
 	sprite angel_4: { dead: angel_4_dead }
 	sprite demon_6: { dead: demon_6_dead }
+	sprite man_57: { dead: man_57_dead }
 
 	cursor: { position: [ 0 560 ] }
 	sprite man_55_dead: { }
@@ -669,6 +670,7 @@ sprites:
 	sprite demon_5_dead: { }
 	sprite angel_4_dead: { }
 	sprite demon_6_dead: { }
+	sprite man_57_dead: { }
 }
 
 sprites:

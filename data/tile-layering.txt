@@ -9,6 +9,7 @@ tile_layering:
 	fs_ground_2
 	mud
 	fs_ground_1
+	fs_ground_3
 	sand
 	dirt
 	badlands_1

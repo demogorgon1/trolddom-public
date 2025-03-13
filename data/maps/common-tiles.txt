@@ -704,6 +704,17 @@ sprites:
 	sprite pine_forest_2_alt_1: { flags: [ tile_block_line_of_sight ] }
 	sprite pine_forest_2_alt_2: { flags: [ tile_block_line_of_sight ] }
 	
+	sprite fs_building_wall: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite fs_building_entrance: { flags: [ tile_walkable tile_top ] }
+	sprite fs_building_wall_start: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite fs_building_wall_end: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite fs_building_d_wall: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite fs_building_d_entrance: { flags: [ tile_walkable tile_top ] }
+	sprite fs_building_d_wall_start: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite fs_building_d_wall_end: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite fs_building_d_entrance_closed: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite fs_building_entrance_closed: { flags: [ tile_block_line_of_sight tile_top ] }
+
 	cursor: { position: [ 0 368 ] }
 
 	sprite dark_grass_2: 
@@ -935,5 +946,31 @@ sprites:
 	sprite fs_rocks_2_border_17: { }
 	sprite fs_rocks_2_alt_1: { flags: [ tile_block_line_of_sight ] }
 	sprite fs_rocks_2_alt_2: { flags: [ tile_block_line_of_sight ] }
-	
+
+	cursor: { position: [ 0 496 ] }
+
+	sprite fs_ground_3: { flags: [ tile_walkable ] borders: 
+		[ fs_ground_3_border_1 fs_ground_3_border_2 fs_ground_3_border_3 fs_ground_3_border_4 fs_ground_3_border_5 fs_ground_3_border_6 fs_ground_3_border_7
+		  fs_ground_3_border_8 fs_ground_3_border_9 fs_ground_3_border_10 fs_ground_3_border_11 fs_ground_3_border_12 fs_ground_3_border_13 fs_ground_3_border_14
+		  fs_ground_3_border_15 fs_ground_3_border_16 fs_ground_3_border_17 ] alt_tiles: [ fs_ground_3_alt_1 fs_ground_3_alt_2 ] }	
+	sprite fs_ground_3_border_1: { }
+	sprite fs_ground_3_border_2: { }
+	sprite fs_ground_3_border_3: { }
+	sprite fs_ground_3_border_4: { }
+	sprite fs_ground_3_border_5: { }
+	sprite fs_ground_3_border_6: { }
+	sprite fs_ground_3_border_7: { }
+	sprite fs_ground_3_border_8: { }
+	sprite fs_ground_3_border_9: { }
+	sprite fs_ground_3_border_10: { }
+	sprite fs_ground_3_border_11: { }
+	sprite fs_ground_3_border_12: { }
+	sprite fs_ground_3_border_13: { }
+	sprite fs_ground_3_border_14: { }
+	sprite fs_ground_3_border_15: { }
+	sprite fs_ground_3_border_16: { }
+	sprite fs_ground_3_border_17: { }
+	sprite fs_ground_3_alt_1: { flags: [ tile_walkable ] }
+	sprite fs_ground_3_alt_2: { flags: [ tile_walkable ] }
+
 }

@@ -91,6 +91,7 @@ sprites:
 	cursor: { position: [ 0 48 ] }
 	size: { width: 80 height: 64 } sprite ship: { flags: [ tile_walkable ] }
 	size: { width: 32 height: 32 } sprite large_statue: { }
+	size: { width: 48 height: 48 } sprite fs_ground_mark: { flags: [ tile_walkable ] }
 }
 
 doodad small_rocks:
@@ -204,6 +205,12 @@ doodad ship:
 doodad large_statue:
 {
 	sprites: [ large_statue ]
+	map_palette<"x">: { occupy: true } map: [ "x" ]
+}
+
+doodad fs_ground_mark:
+{
+	sprites: [ fs_ground_mark ]
 	map_palette<"x">: { occupy: true } map: [ "x" ]
 }
 
