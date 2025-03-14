@@ -27,9 +27,9 @@ namespace tpublic::ObjectiveTypes
 		// ObjectiveInstanceBase implementation
 		void
 		OnEntityObjectiveEvent(
-			EntityObjectiveEvent::Type		aEntityObjectiveEvent) override
+			const EntityObjectiveEvent&		aEntityObjectiveEvent) override
 		{
-			if(aEntityObjectiveEvent == EntityObjectiveEvent::TYPE_KILL_NPC && m_killed < m_objective->m_count)
+			if(aEntityObjectiveEvent.m_type == EntityObjectiveEvent::TYPE_KILL_NPC && m_killed < m_objective->m_count)
 			{
 				m_killed++;
 				OnUpdate();

@@ -27,9 +27,9 @@ namespace tpublic::ObjectiveTypes
 		// ObjectiveInstanceBase implementation
 		void
 		OnEntityObjectiveEvent(
-			EntityObjectiveEvent::Type		aEntityObjectiveEvent) override
+			const EntityObjectiveEvent&		aEntityObjectiveEvent) override
 		{
-			if(aEntityObjectiveEvent == EntityObjectiveEvent::TYPE_ROUTE_NPC && !m_triggered)
+			if(aEntityObjectiveEvent.m_type == EntityObjectiveEvent::TYPE_ROUTE_NPC && !m_triggered)
 			{
 				m_triggered = true;
 				OnUpdate();

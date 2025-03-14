@@ -67,7 +67,7 @@ objective .sylvia_swift_1:
 	
 	maps: [ the_shrouded_lands ]
 	
-	kill_player: { count: 1 }
+	kill_player: { count: 1 faction: light }
 }
 
 quest .sylvia_swift_1:
@@ -115,7 +115,7 @@ objective .sylvia_swift_2:
 	
 	maps: [ the_shrouded_lands ]
 	
-	kill_player: { count: 1 }
+	kill_player: { count: 1 faction: underworld }
 }
 
 quest .sylvia_swift_2:

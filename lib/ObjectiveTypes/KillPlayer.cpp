@@ -27,9 +27,11 @@ namespace tpublic::ObjectiveTypes
 		// ObjectiveInstanceBase implementation
 		void
 		OnEntityObjectiveEvent(
-			EntityObjectiveEvent::Type		aEntityObjectiveEvent) override
+			const EntityObjectiveEvent&		aEntityObjectiveEvent) override
 		{
-			if(aEntityObjectiveEvent == EntityObjectiveEvent::TYPE_KILL_PLAYER && m_killed < m_objective->m_count)
+			if(aEntityObjectiveEvent.m_type == EntityObjectiveEvent::TYPE_KILL_PLAYER && 
+				(m_objective->m_factionId == 0 || aEntityObjectiveEvent.m_factionId == m_objective->m_factionId) &&
+				m_killed < m_objective->m_count)
 			{
 				m_killed++;
 				OnUpdate();
@@ -102,6 +104,8 @@ namespace tpublic::ObjectiveTypes
 		{
 			if(aChild->m_name == "count")  
 				m_count = aChild->GetUInt32();
+			else if (aChild->m_name == "faction")
+				m_factionId = aChild->GetId(DataType::ID_FACTION);
 			else
 				TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());							
 		});
@@ -112,6 +116,7 @@ namespace tpublic::ObjectiveTypes
 		IWriter*							aWriter) 
 	{
 		aWriter->WriteUInt(m_count);
+		aWriter->WriteUInt(m_factionId);
 	}
 	
 	bool		
@@ -119,6 +124,8 @@ namespace tpublic::ObjectiveTypes
 		IReader*							aReader) 
 	{
 		if (!aReader->ReadUInt(m_count))
+			return false;
+		if (!aReader->ReadUInt(m_factionId))
 			return false;
 		return true;
 	}

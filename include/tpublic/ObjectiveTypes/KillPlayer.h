@@ -31,6 +31,7 @@ namespace tpublic::ObjectiveTypes
 		class Instance;
 
 		uint32_t				m_count = 1;
+		uint32_t				m_factionId = 0;
 	};
 
 }

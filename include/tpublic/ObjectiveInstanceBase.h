@@ -50,7 +50,7 @@ namespace tpublic
 
 		// Virtual methods
 		virtual void				OnEntityObjectiveEvent(
-										EntityObjectiveEvent::Type		/*aEntityObjectiveEvent*/) {}
+										const EntityObjectiveEvent&		/*aEvent*/) {}
 		virtual void				OnInventoryUpdate(
 										const Components::Inventory*	/*aInventory*/) {}
 		virtual bool				GetProgress(
