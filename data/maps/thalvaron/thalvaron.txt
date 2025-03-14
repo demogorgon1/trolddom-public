@@ -175,6 +175,9 @@ map_entity_spawn thalvaron_auctioneer: { entity thalvaron_auctioneer: { init_sta
 map_entity_spawn thalvaron_lance_rottler: { entity thalvaron_lance_rottler: { init_state: default } }
 map_entity_spawn thalvaron_lucinda_frostvale: { entity thalvaron_lucinda_frostvale: { init_state: default } }
 map_entity_spawn thalvaron_father_tobias: { entity thalvaron_father_tobias: { init_state: default } }
+map_entity_spawn thalvaron_consort: { entity thalvaron_consort: { init_state: default } }
+map_entity_spawn thalvaron_queen: { entity thalvaron_queen: { init_state: default } }
+
 
 # N
 map_entity_spawn thalvaron_ranger_fremalt: { entity thalvaron_ranger_fremalt: { init_state: default } }
@@ -445,6 +448,8 @@ map_palette .stuff:
 	entity_spawn thalvaron_father_tobias: [ 20 24 208 ]
 	entity_spawn the_shrouded_lands_light_closed: [ 108 101 206 ]
 	entity_spawn the_shrouded_lands_underworld_closed: [ 208 141 206 ]
+	entity_spawn thalvaron_queen: [ 102 104 106 ]
+	entity_spawn thalvaron_consort: [ 102 104 206 ]
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				
@@ -794,6 +799,7 @@ map_palette .doodads:
 	doodad skull_stick: [ 39 81 167 ]
 	doodad hole: [ 104 49 146 ]
 	doodad weapon_rack: [ 31 49 49 ]
+	doodad white_throne: [ 13 30 100 ]
 	
 	doodad wall_sign_generic<"Mathew's Emporium">: [ 197 173 111 ]	
 	doodad wall_sign_generic<"John & Mary's">: [ 97 173 111 ]	

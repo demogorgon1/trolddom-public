@@ -1,0 +1,11 @@
+entity thalvaron_queen: !NPC
+{
+	_string: "Queen Roberta"
+	_sprite: woman_28
+	_sprite_dead: woman_28_dead
+	_level: 20
+	_faction: valoris
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}

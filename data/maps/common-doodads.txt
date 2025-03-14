@@ -90,6 +90,7 @@ sprites:
 	sprite doodad_weapon_rack_1: { flags: [ tile_walkable ] }
 	sprite doodad_weapon_rack_2: { flags: [ tile_walkable ] }
 	sprite doodad_weapon_rack_3: { flags: [ tile_walkable ] }
+	sprite doodad_white_throne: { flags: [ tile_walkable ] }
 
 	cursor: { position: [ 0 48 ] }
 	size: { width: 80 height: 64 } sprite ship: { flags: [ tile_walkable ] }
@@ -257,4 +258,5 @@ doodad hole: { sprites: [ doodad_hole_1 ] map_palette<"x">: { occupy: true } map
 doodad fs_rock: { sprites: [ doodad_fs_rock_1 doodad_fs_rock_2 doodad_fs_rock_3 doodad_fs_rock_4 doodad_fs_rock_5 doodad_fs_rock_6 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad fs_rock_purple: { sprites: [ doodad_fs_rock_purple_1 doodad_fs_rock_purple_2 doodad_fs_rock_purple_3 doodad_fs_rock_purple_4 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad weapon_rack: { sprites: [ doodad_weapon_rack_1 doodad_weapon_rack_2 doodad_weapon_rack_3 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad white_throne: { sprites: [ doodad_white_throne ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 

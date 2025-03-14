@@ -1,0 +1,12 @@
+entity thalvaron_consort: !NPC
+{
+	_string: "Prince Ulrik"
+	_guild_name: "Consort to the Queen"
+	_sprite: man_63
+	_sprite_dead: man_63_dead
+	_level: 20
+	_faction: valoris
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
