@@ -46,6 +46,7 @@ ability thalvaron_sylvia_swift_quest_item:
 	direct_effect apply_aura: { aura: thalvaron_sylvia_swift_quest_item }
 	cooldowns: [ global ]
 	flags: [ target_self item ]
+	toggle_aura: thalvaron_sylvia_swift_quest_item
 }
 
 item thalvaron_sylvia_swift_quest_item:

@@ -26,8 +26,8 @@ dialogue_screen .azrakkar_greetings:
 	
 	options:
 	[
-		{ quest: .azrakkar_1 }
-		{ goto: .azrakkar_vendor text: "Let me browse your goods." }
+		{ quest: .azrakkar_1 !MUST_BE_REAL_DISCIPLE{} }
+		{ goto: .azrakkar_vendor text: "Let me browse your goods." !MUST_BE_REAL_DISCIPLE{} }
 	]
 }
 

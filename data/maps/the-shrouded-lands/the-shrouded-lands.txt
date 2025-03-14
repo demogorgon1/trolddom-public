@@ -1,3 +1,8 @@
+!define MUST_BE_REAL_DISCIPLE
+{
+	requirement self<must_not_have_aura>: thalvaron_sylvia_swift_quest_item
+}
+
 route the_shrouded_lands_default_patrol: { }
 route .wanderer: { }
 

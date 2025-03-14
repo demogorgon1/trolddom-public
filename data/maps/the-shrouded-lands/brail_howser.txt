@@ -7,7 +7,7 @@ dialogue_screen .brail_howser_greetings:
 	
 	options:
 	[
-		{ quest: .brail_howser_1 }
+		{ quest: .brail_howser_1 !MUST_BE_REAL_DISCIPLE{} }
 	]
 }
 

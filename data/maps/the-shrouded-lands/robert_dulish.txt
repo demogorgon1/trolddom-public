@@ -7,7 +7,7 @@ dialogue_screen .robert_dulish_greetings:
 	
 	options:
 	[
-		{ quest: .robert_dulish_1 }
+		{ quest: .robert_dulish_1 !MUST_BE_REAL_DISCIPLE{} }
 	]
 }
 

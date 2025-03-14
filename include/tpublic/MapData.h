@@ -242,6 +242,7 @@ namespace tpublic
 				aWriter->WritePOD(m_type);
 				aWriter->WriteObjectPointers(m_factions);
 				aWriter->WriteObjectPointers(m_controlPointRealmBalanceUpdates);
+				aWriter->WriteOptionalObject(m_swapReputationsWithAura);
 			}
 
 			bool
@@ -253,6 +254,8 @@ namespace tpublic
 				if (!aReader->ReadObjectPointers(m_factions))
 					return false;
 				if (!aReader->ReadObjectPointers(m_controlPointRealmBalanceUpdates))
+					return false;
+				if (!aReader->ReadOptionalObject(m_swapReputationsWithAura))
 					return false;
 				return true;
 			}
@@ -707,64 +710,66 @@ namespace tpublic
 			std::unique_ptr<MapGeneratorBase>	m_base;
 		};
 
-					MapData();
-					MapData(
-						const SourceNode*		aSource);
-					~MapData();
+							MapData();
+							MapData(
+								const SourceNode*		aSource);
+							~MapData();
 
-		void		Build(
-						const Manifest*			aManifest,
-						const AutoDoodads*		aAutoDoodads,
-						nwork::Queue*			aWorkQueue);
-		void		ConstructMapPathData(
-						const Manifest*			aManifest,
-						nwork::Queue*			aWorkQueue);
-		void		ConstructMapRouteData(
-						const Manifest*			aManifest,
-						nwork::Queue*			aWorkQueue);
-		void		ToStream(
-						IWriter*				aStream) const;
-		bool		FromStream(
-						IReader*				aStream);
-		void		PrepareRuntime(
-						uint8_t					aRuntime,
-						const Manifest*			aManifest);
-		bool		IsTileWalkable(
-						int32_t					aX,
-						int32_t					aY) const;
-		bool		IsTileIndoor(
-						int32_t					aX,
-						int32_t					aY) const;
-		int32_t		TraceWalkableTiles(
-						const Vec2&				aPosition,
-						const Vec2&				aDirection,
-						int32_t					aMaxDistance) const;
-		uint8_t		GetElevation(
-						int32_t					aX,
-						int32_t					aY) const;
-		bool		DoesTileBlockLineOfSight(
-						int32_t					aX,
-						int32_t					aY) const;
-		bool		IsTileAlwaysObscured(
-						int32_t					aX,
-						int32_t					aY) const;
-		bool		DoesNeighborTileBlockLineOfSight(
-						int32_t					aX,
-						int32_t					aY) const;
-		void		CopyFrom(
-						const MapData*			aMapData);
-		uint32_t	GetTile(
-						const Vec2&				aPosition) const;
-		void		WriteDebugTileMapPNG(
-						const Manifest*			aManifest,
-						const char*				aPath) const;
-		uint32_t	GetDoodad(
-						const Vec2&				aPosition) const;
-		uint32_t	GetWall(
-						const Vec2&				aPosition) const;
-		const char*	GetStaticPositionToolTip(
-						const Vec2&				aPosition) const;
-
+		void				Build(
+								const Manifest*			aManifest,
+								const AutoDoodads*		aAutoDoodads,
+								nwork::Queue*			aWorkQueue);
+		void				ConstructMapPathData(
+								const Manifest*			aManifest,
+								nwork::Queue*			aWorkQueue);
+		void				ConstructMapRouteData(
+								const Manifest*			aManifest,
+								nwork::Queue*			aWorkQueue);
+		void				ToStream(
+								IWriter*				aStream) const;
+		bool				FromStream(
+								IReader*				aStream);
+		void				PrepareRuntime(
+								uint8_t					aRuntime,
+								const Manifest*			aManifest);
+		bool				IsTileWalkable(
+								int32_t					aX,
+								int32_t					aY) const;
+		bool				IsTileIndoor(
+								int32_t					aX,
+								int32_t					aY) const;
+		int32_t				TraceWalkableTiles(
+								const Vec2&				aPosition,
+								const Vec2&				aDirection,
+								int32_t					aMaxDistance) const;
+		uint8_t				GetElevation(
+								int32_t					aX,
+								int32_t					aY) const;
+		bool				DoesTileBlockLineOfSight(
+								int32_t					aX,
+								int32_t					aY) const;
+		bool				IsTileAlwaysObscured(
+								int32_t					aX,
+								int32_t					aY) const;
+		bool				DoesNeighborTileBlockLineOfSight(
+								int32_t					aX,
+								int32_t					aY) const;
+		void				CopyFrom(
+								const MapData*			aMapData);
+		uint32_t			GetTile(
+								const Vec2&				aPosition) const;
+		void				WriteDebugTileMapPNG(
+								const Manifest*			aManifest,
+								const char*				aPath) const;
+		uint32_t			GetDoodad(
+								const Vec2&				aPosition) const;
+		uint32_t			GetWall(
+								const Vec2&				aPosition) const;
+		const char*			GetStaticPositionToolTip(
+								const Vec2&				aPosition) const;
+		const PlayerSpawn*	GetPlayerSpawn(
+								uint32_t				aMapPlayerSpawnId) const;
+		
 		// Public data
 		MapType::Id									m_type;
 		MapType::ResetMode							m_resetMode;

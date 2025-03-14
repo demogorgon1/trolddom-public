@@ -7,8 +7,8 @@ dialogue_screen .malzeth_greetings:
 	
 	options:
 	[
-		{ quest: .malzeth_1 }
-		{ quest: .malzeth_2 }
+		{ quest: .malzeth_1 !MUST_BE_REAL_DISCIPLE{} }
+		{ quest: .malzeth_2 !MUST_BE_REAL_DISCIPLE{} }
 	]
 }
 

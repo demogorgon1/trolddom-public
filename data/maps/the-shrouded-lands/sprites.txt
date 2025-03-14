@@ -12,3 +12,4 @@ sprites:
 	sprite unholy_token_currency: { }
 	sprite holy_token_currency: { }
 }
+ 

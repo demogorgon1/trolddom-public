@@ -859,6 +859,18 @@ namespace tpublic
 		return i->second.c_str();
 	}
 
+	const MapData::PlayerSpawn* 
+	MapData::GetPlayerSpawn(
+		uint32_t				aMapPlayerSpawnId) const
+	{
+		for(const PlayerSpawn& t : m_playerSpawns)
+		{
+			if(t.m_id == aMapPlayerSpawnId)
+				return &t;
+		}
+		return NULL;
+	}
+
 	//--------------------------------------------------------------------
 
 	void	

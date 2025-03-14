@@ -9,8 +9,8 @@ dialogue_screen .seraphael_greetings:
 	
 	options:
 	[
-		{ quest: .the_dawnbringer_1 }
-		{ quest: .the_dawnbringer_2 }
+		{ quest: .the_dawnbringer_1 !MUST_BE_REAL_DISCIPLE{} }
+		{ quest: .the_dawnbringer_2 !MUST_BE_REAL_DISCIPLE{} }
 	]
 }
 

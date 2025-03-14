@@ -26,8 +26,8 @@ dialogue_screen .kaelion_greetings:
 	
 	options:
 	[
-		{ quest: .kaelion_1 }
-		{ goto: .kaelion_vendor text: "Let me browse your goods." }
+		{ quest: .kaelion_1 !MUST_BE_REAL_DISCIPLE{} }
+		{ goto: .kaelion_vendor text: "Let me browse your goods." !MUST_BE_REAL_DISCIPLE{} }
 	]
 }
 
