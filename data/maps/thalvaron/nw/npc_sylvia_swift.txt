@@ -107,7 +107,7 @@ quest .sylvia_swift_1:
 }
 
 ############################################################
-# Quest 1
+# Quest 2
 
 objective .sylvia_swift_2:
 {

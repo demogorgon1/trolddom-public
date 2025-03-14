@@ -62,6 +62,7 @@ zone .temple_of_the_undying: { string: "Temple of the Undying" }
 zone .tirnwood: { string: "Tirnwood Vale" }
 zone .holy_temple: { string: "Holy Temple of Valoris" }
 zone .underworld_society: { string: "Society of the Underworld" }
+zone .echosrest: { string: "Echo's Rest" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -237,6 +238,7 @@ map_entity_spawn thalvaron_spirit_of_joonor_b: { entity thalvaron_spirit_of_joon
 map_entity_spawn thalvaron_warden_ghourian: { entity thalvaron_warden_ghourian: { init_state: default } }
 map_entity_spawn thalvaron_elf_collector: { entity thalvaron_elf_collector: { init_state: default } }
 map_entity_spawn thalvaron_elf_quartermaster: { entity thalvaron_elf_quartermaster: { init_state: default } }
+map_entity_spawn thalvaron_bob_gordon: { entity thalvaron_bob_gordon: { init_state: default } }
 
 # SW
 map_entity_spawn thalvaron_brian_riddle: { entity thalvaron_brian_riddle: { init_state: default } }
@@ -567,6 +569,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_warden_ghourian: [ 255 92 1 ]
 	entity_spawn thalvaron_elf_collector: [ 49 194 46 ]
 	entity_spawn thalvaron_elf_quartermaster: [ 155 22 148 ]
+	entity_spawn thalvaron_bob_gordon: [ 166 23 50 ]
 	
 	# SW
 	entity_spawn thalvaron_brian_riddle: [ 66 88 99 ]
@@ -697,6 +700,7 @@ map_palette .zones:
 	zone .faerandor_gorge: [ 255 222 0 ]
 	zone .dark_strand: [ 0 255 33 ]
 	zone .tirnwood: [ 200 107 210 ]
+	zone .echosrest: [ 171 18 171 ]
 }
 
 map_palette .sub_zones:

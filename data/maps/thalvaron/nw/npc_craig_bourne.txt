@@ -7,6 +7,7 @@ dialogue_screen .craig_borne_dialogue:
 	
 	options:
 	[
+		{ quest: thalvaron_craig_borne_1 }
 	]
 }
 
@@ -28,3 +29,47 @@ entity thalvaron_craig_borne: !NPC
 	_not_pushable: true	
 }
 
+############################################################
+# Quest 1
+
+objective .craig_borne_1:
+{
+	string: "Bob Gordon Assassinated"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc: { count: 1 entity: thalvaron_bob_gordon }
+}
+
+quest thalvaron_craig_borne_1:
+{
+	string: "You Want To Be An Assassin?"
+
+	text:
+	[
+		"Figure out the location of Bob Gordon in Duskwhisper Vale, assassinate him, and return to Craig Borne in Valoris."
+	]
+	
+	description: 
+	[
+		"If you don't mind blood on your hands, I might have a job for you. I have a client who got cheated by a man named Bob Gordon and he wants him taken out. Exactly why I don't know, but we don't"
+		"really care about that do we?\n\n"
+		"Mr. Gordon lives out east somewhere in Duskwhisper Vale, his exact whereabouts unknown. You should travel to Edmund's Haunt and ask around. Try asking Joanna Hewitt. She knows everyone around those parts.\n\n"
+		"When you've completed the job, come back to me for a reward."
+	]
+
+	progress:
+	[
+		"He's not here, I can tell you that much."
+	]
+	
+	completion:
+	[
+		"Good job. You seem like a really blood thirsty bastard!"
+	]
+
+	objectives: [ .craig_borne_1 ]
+	level: 16	
+	reward_reputation_multiplier: 10
+	reward_cash_multiplier: 2
+}

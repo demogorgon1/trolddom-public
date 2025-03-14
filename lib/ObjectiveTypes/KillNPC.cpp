@@ -102,7 +102,9 @@ namespace tpublic::ObjectiveTypes
 		{
 			if(aChild->m_name == "entities")
 				aChild->GetIdArray(DataType::ID_ENTITY, m_entityIds);
-			else if(aChild->m_name == "count")  
+			else if (aChild->m_name == "entity")
+				m_entityIds = { aChild->GetId(DataType::ID_ENTITY) };
+			else if(aChild->m_name == "count")
 				m_count = aChild->GetUInt32();
 			else
 				TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());							
