@@ -243,7 +243,7 @@ tile_modifier brick_wall_start:
 	sprites: [ brick_wall_start ]
 	
 	requirement<center_must_be>: [ brick_wall ]
-	requirement<west_must_not_be>: [ brick_wall brick_wall_window pavement dungeon_floor wood_floor ]
+	requirement<west_must_not_be>: [ brick_wall brick_wall_window brick_closed_door_outside pavement dungeon_floor wood_floor ]
 	
 	probability: 100
 	priority: true
@@ -254,7 +254,7 @@ tile_modifier brick_wall_end:
 	sprites: [ brick_wall_end ]
 	
 	requirement<center_must_be>: [ brick_wall ]
-	requirement<east_must_not_be>: [ brick_wall brick_wall_window pavement dungeon_floor wood_floor ]
+	requirement<east_must_not_be>: [ brick_wall brick_wall_window brick_closed_door_outside pavement dungeon_floor wood_floor ]
 	
 	probability: 100
 	priority: true
@@ -265,7 +265,7 @@ tile_modifier brick_2_wall_start:
 	sprites: [ brick_2_wall_start ]
 	
 	requirement<center_must_be>: [ brick_2_wall ]
-	requirement<west_must_not_be>: [ brick_2_wall brick_2_wall_window pavement dungeon_floor wood_floor ]
+	requirement<west_must_not_be>: [ brick_2_wall brick_2_wall_window brick_2_closed_door_outside pavement dungeon_floor wood_floor ]
 	
 	probability: 100
 	priority: true
@@ -276,7 +276,7 @@ tile_modifier brick_2_wall_end:
 	sprites: [ brick_2_wall_end ]
 	
 	requirement<center_must_be>: [ brick_2_wall ]
-	requirement<east_must_not_be>: [ brick_2_wall brick_2_wall_window pavement dungeon_floor wood_floor ]
+	requirement<east_must_not_be>: [ brick_2_wall brick_2_wall_window brick_2_closed_door_outside pavement dungeon_floor wood_floor ]
 	
 	probability: 100
 	priority: true

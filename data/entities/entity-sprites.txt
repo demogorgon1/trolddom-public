@@ -676,9 +676,19 @@ sprites:
 
 	cursor: { position: [ 0 576 ] }
 	sprite woman_26: { dead: woman_26_dead }
-	
+	sprite man_59: { dead: man_59_dead }
+	sprite man_60: { dead: man_60_dead }
+	sprite man_61: { dead: man_61_dead }
+	sprite woman_27: { dead: woman_27_dead }
+	sprite man_62: { dead: man_62_dead }
+
 	cursor: { position: [ 0 592 ] }
 	sprite woman_26_dead: { }
+	sprite man_59_dead: { }
+	sprite man_60_dead: { }
+	sprite man_61_dead: { }
+	sprite woman_27_dead: { }
+	sprite man_62_dead: { }
 }
 
 sprites:

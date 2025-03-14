@@ -1,0 +1,11 @@
+entity thalvaron_lance_rottler: !NPC
+{
+	_string: "Lance Rottler"
+	_sprite: man_1
+	_sprite_dead: man_1_dead
+	_level: 20
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}

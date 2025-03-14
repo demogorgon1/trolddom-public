@@ -1,0 +1,11 @@
+entity thalvaron_father_tobias: !NPC
+{
+	_string: "Father Tobias"
+	_sprite: man_62
+	_sprite_dead: man_62_dead
+	_level: 20
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}

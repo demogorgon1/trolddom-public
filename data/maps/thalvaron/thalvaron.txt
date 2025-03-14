@@ -169,6 +169,12 @@ map_entity_spawn thalvaron_dark_brown_horse: { entity dark_brown_horse: { init_s
 map_entity_spawn thalvaron_craig_borne: { entity thalvaron_craig_borne: { init_state: default } }
 map_entity_spawn thalvaron_sylvia_swift: { entity thalvaron_sylvia_swift: { init_state: default } }
 map_entity_spawn thalvaron_assassin_bar_keeper: { entity thalvaron_assassin_bar_keeper: { init_state: default } }
+map_entity_spawn thalvaron_city_guard_unarmed: { entity thalvaron_city_guard_unarmed: { init_state: default } }
+map_entity_spawn thalvaron_city_guard_boss: { entity thalvaron_city_guard_boss: { init_state: default } }
+map_entity_spawn thalvaron_auctioneer: { entity thalvaron_auctioneer: { init_state: default } }
+map_entity_spawn thalvaron_lance_rottler: { entity thalvaron_lance_rottler: { init_state: default } }
+map_entity_spawn thalvaron_lucinda_frostvale: { entity thalvaron_lucinda_frostvale: { init_state: default } }
+map_entity_spawn thalvaron_father_tobias: { entity thalvaron_father_tobias: { init_state: default } }
 
 # N
 map_entity_spawn thalvaron_ranger_fremalt: { entity thalvaron_ranger_fremalt: { init_state: default } }
@@ -299,6 +305,7 @@ map_palette .stuff:
 	entity_spawn default_chest: [ 40 143 66 ]		
 	entity_spawn cauldron: [ 43 113 166 ]		
 	entity_spawn bonfire_unlit: [ 144 59 20 ]
+	entity_spawn target_dummy: [ 139 201 21 ]	
 		
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn thalvaron_wizard_realm_spawn: [ 42 157 85 ]
@@ -430,6 +437,12 @@ map_palette .stuff:
 	entity_spawn thalvaron_sylvia_swift: [ 39 102 120 ]
 	entity_spawn thalvaron_craig_borne: [ 39 102 220 ]
 	entity_spawn thalvaron_assassin_bar_keeper: [ 139 102 220 ]	
+	entity_spawn thalvaron_city_guard_unarmed: [ 124 40 47 ]
+	entity_spawn thalvaron_city_guard_boss: [ 224 40 47 ]
+	entity_spawn thalvaron_auctioneer: [ 30 100 206 ]
+	entity_spawn thalvaron_lance_rottler: [ 120 24 208 ]
+	entity_spawn thalvaron_lucinda_frostvale: [ 220 24 208 ]
+	entity_spawn thalvaron_father_tobias: [ 20 24 208 ]
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				
@@ -793,6 +806,7 @@ map_palette .doodads:
 	doodad wall_sign_generic<"Alchemy 'R Us">: [ 197 223 131 ]	
 	doodad wall_sign_generic<"Healing Herbs">: [ 117 126 11 ]	
 	doodad wall_sign_generic<"The Black Veil Tavern">: [ 111 121 11 ]	
+	doodad wall_sign_generic<"Auction House">: [ 101 21 11 ]	
 }
 
 map_palette .cliffs:

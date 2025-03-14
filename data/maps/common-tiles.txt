@@ -578,6 +578,8 @@ sprites:
 	sprite badlands_dungeon_entrance_closed: { flags: [ tile_block_line_of_sight tile_top ] }
 	sprite ext_dungeon_entrance_open: { flags: [ tile_walkable tile_top ] }
 	sprite fs_cave_entrance: { flags: [ tile_walkable tile_top ] }
+	sprite brick_closed_door_inside: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite brick_2_closed_door_inside: { flags: [ tile_block_line_of_sight tile_top ] }
 	
 	cursor: { position: [ 0 304 ] }
 	
@@ -615,6 +617,8 @@ sprites:
 	sprite wood_wall_3: { flags: [ tile_block_line_of_sight tile_top ] }
 	sprite wood_wall_3_entrance: { flags: [ tile_walkable tile_top ] }
 	sprite wood_wall_3_inside: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite brick_closed_door_outside: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite brick_2_closed_door_outside: { flags: [ tile_block_line_of_sight tile_top ] }
 
 	cursor: { position: [ 0 320 ] }
 	
