@@ -128,6 +128,16 @@ map_entity_spawn the_shrouded_lands_underworld:
 	entity the_shrouded_lands_underworld: { weight: 1 }
 }
 
+map_entity_spawn the_shrouded_lands_light_closed:
+{
+	entity the_shrouded_lands_light_closed: { weight: 1 }
+}
+
+map_entity_spawn the_shrouded_lands_underworld_closed:
+{
+	entity the_shrouded_lands_underworld_closed: { weight: 1 }
+}
+
 map_entity_spawn target_dummy:
 {
 	entity target_dummy: { weight: 1 }

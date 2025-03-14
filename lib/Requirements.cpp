@@ -49,6 +49,7 @@ namespace tpublic
 			switch(aRequirement->m_type)
 			{
 			case Requirement::TYPE_MUST_BE_DISCIPLE:
+			case Requirement::TYPE_MUST_NOT_BE_DISCIPLE:
 				{
 					if (!entity->IsPlayer())
 						return false;
@@ -57,7 +58,10 @@ namespace tpublic
 					if (reputation == NULL)
 						return false;
 
-					if(reputation->GetReputation(aRequirement->m_id) < aManifest->m_worshipMetrics.m_discipleLevel)
+					bool shouldBeDisciple = aRequirement->m_type == Requirement::TYPE_MUST_BE_DISCIPLE;
+					bool isDisciple = reputation->GetReputation(aRequirement->m_id) >= aManifest->m_worshipMetrics.m_discipleLevel;
+
+					if(shouldBeDisciple != isDisciple)
 						return false;
 				}
 				break;

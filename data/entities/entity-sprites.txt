@@ -833,6 +833,11 @@ sprites:
 	sprite gs_flag_underworld: { }
 	sprite gs_flag_light: { }
 	sprite gs_flag_none: { }
+
+	cursor: { position: [ 0 96 ] }
+	sprite purple_gateway_closed_1: { }
+	sprite purple_gateway_closed_2: { }
+	sprite purple_gateway_closed_3: { }
 		
 }
 

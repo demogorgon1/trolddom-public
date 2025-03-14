@@ -443,6 +443,8 @@ map_palette .stuff:
 	entity_spawn thalvaron_lance_rottler: [ 120 24 208 ]
 	entity_spawn thalvaron_lucinda_frostvale: [ 220 24 208 ]
 	entity_spawn thalvaron_father_tobias: [ 20 24 208 ]
+	entity_spawn the_shrouded_lands_light_closed: [ 108 101 206 ]
+	entity_spawn the_shrouded_lands_underworld_closed: [ 208 141 206 ]
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				
@@ -855,6 +857,11 @@ map thalvaron:
 			palettes:	[ .stuff ]
 			source:		"thalvaron-stuff.png"
 		}
+		
+		{
+			palettes:	[ .stuff ]
+			source:		"thalvaron-stuff-2.png"
+		}		
 		
 		{
 			palettes:	[ .levels ]

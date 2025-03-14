@@ -21,6 +21,7 @@
 #include <tpublic/Components/Gateway.h>
 #include <tpublic/Components/GuildName.h>
 #include <tpublic/Components/GuildRegistrar.h>
+#include <tpublic/Components/HoverText.h>
 #include <tpublic/Components/InteractableObject.h>
 #include <tpublic/Components/Inventory.h>
 #include <tpublic/Components/KillContribution.h>
@@ -90,6 +91,7 @@ namespace tpublic
 		_Register<Components::Gateway>();
 		_Register<Components::GuildName>();
 		_Register<Components::GuildRegistrar>();
+		_Register<Components::HoverText>();
 		_Register<Components::InteractableObject>();
 		_Register<Components::Inventory>();
 		_Register<Components::KillContribution>();

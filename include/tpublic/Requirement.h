@@ -58,7 +58,9 @@ namespace tpublic
 			TYPE_MUST_NOT_HAVE_EQUIPPED_ITEM_TYPE_FLAGS,
 			TYPE_MUST_NOT_BE_CREATURE_TYPE,
 			TYPE_MUST_KNOW_RIDING,
-			TYPE_MUST_NOT_KNOW_RIDING
+			TYPE_MUST_NOT_KNOW_RIDING,
+			TYPE_MUST_NOT_BE_DISCIPLE
+
 		};
 
 		static DataType::Id
@@ -94,6 +96,7 @@ namespace tpublic
 			case TYPE_MUST_BE_FACTION:
 			case TYPE_MUST_HAVE_NEGATIVE_REPUTATION:
 			case TYPE_MUST_BE_DISCIPLE:
+			case TYPE_MUST_NOT_BE_DISCIPLE:
 			case TYPE_MUST_HAVE_REPUTATION_LEVEL:
 				return DataType::ID_FACTION;
 
@@ -238,8 +241,10 @@ namespace tpublic
 				m_type = TYPE_MUST_NOT_HAVE_EQUIPPED_ITEM_TYPE_FLAGS;
 			else if (typeString == "must_be_at_least_level")
 				m_type = TYPE_MUST_BE_AT_LEAST_LEVEL;
-			else if(typeString == "must_be_disciple")
+			else if (typeString == "must_be_disciple")
 				m_type = TYPE_MUST_BE_DISCIPLE;
+			else if (typeString == "must_not_be_disciple")
+				m_type = TYPE_MUST_NOT_BE_DISCIPLE;
 			else if(typeString == "must_not_be_ready_to_turn_in_quest")
 				m_type = TYPE_MUST_NOT_BE_READY_TO_TURN_IN_QUEST;
 			else if(typeString == "must_not_have_item")
