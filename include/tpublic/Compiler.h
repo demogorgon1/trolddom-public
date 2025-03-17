@@ -29,14 +29,26 @@ namespace tpublic
 
 		struct BuildError
 		{
-			std::string						m_string;
+			std::string											m_string;
 		};
 
-		Manifest*							m_manifest;
-		Parser								m_parser;
-		SourceContext						m_sourceContext;		
+		Manifest*												m_manifest;
+		Parser													m_parser;
+		SourceContext											m_sourceContext;		
 
-		size_t								m_buildErrorCount;
+		size_t													m_buildErrorCount;
+
+		struct DataQueueItem
+		{
+			DataBase*											m_base = NULL;
+			const SourceNode*									m_source = NULL;
+			std::vector<const DataBase*>						m_extends;
+		};
+
+		std::vector<std::unique_ptr<DataQueueItem>>				m_dataQueue;
+
+		typedef std::unordered_map<const DataBase*, const SourceNode*> DataSourceTable;
+		DataSourceTable											m_dataSourceTable;
 
 		uint32_t	_GetInputFingerprint(
 						const std::vector<std::string>&					aParseRootPaths);
@@ -54,6 +66,7 @@ namespace tpublic
 						SpriteSheetBuilder*								aSpriteSheetBuilder,
 						std::vector<std::unique_ptr<GenerationJob>>*	aGenerationJobs,
 						const SourceNode*								aNode);
+		size_t		_ProcessDataQueue();
 	};
 
 }

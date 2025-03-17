@@ -112,6 +112,26 @@ namespace tpublic
 			}
 		});		
 
+		// Process data source
+		while(m_dataQueue.size() > 0)
+		{
+			size_t processed = _ProcessDataQueue();
+
+			if(processed == 0)
+			{
+				// Queue is unresolvable - probably circular dependencies
+				for(const std::unique_ptr<DataQueueItem>& dataQueueItem : m_dataQueue)
+				{
+					_OnBuildError({ Helpers::Format("%s:%u: '%s' can't be resolved.", 
+						dataQueueItem->m_source->m_debugInfo.m_file.c_str(), 
+						dataQueueItem->m_source->m_debugInfo.m_line,
+						dataQueueItem->m_source->m_name.c_str()) });
+				}
+
+				break;
+			}			
+		}
+
 		TP_CHECK(m_buildErrorCount == 0, "%u build errors.", m_buildErrorCount);
 
 		// Prepare word list manifest
@@ -456,21 +476,106 @@ namespace tpublic
 		else
 		{
 			DataType::Id dataType = DataType::StringToId(aNode->m_tag.c_str());
-			TP_VERIFY(dataType != DataType::INVALID_ID, aNode->m_debugInfo, "'%s' is not a valid data type.", aNode->m_tag.c_str());
+			TP_VERIFY(dataType != DataType::INVALID_ID, aNode->m_debugInfo, "'%s' is not a valid data type.", aNode->m_tag.c_str());			
 
 			assert(m_manifest->m_containers[dataType]);
 
-			DataBase* base = m_manifest->m_containers[dataType]->GetBaseByName(m_sourceContext.m_persistentIdTable.get(), aNode->m_name.c_str());
+			std::unique_ptr<DataQueueItem> t = std::make_unique<DataQueueItem>();
+			t->m_base = m_manifest->m_containers[dataType]->GetBaseByName(m_sourceContext.m_persistentIdTable.get(), aNode->m_name.c_str());
+			t->m_base->m_debugInfo = aNode->m_debugInfo;
+			t->m_source = aNode;
 
-			TP_VERIFY(!base->m_defined, aNode->m_debugInfo, "'%s' has already been defined.", aNode->m_name.c_str());
+			TP_VERIFY(!m_dataSourceTable.contains(t->m_base), aNode->m_debugInfo, "'%s' already defined.", aNode->m_name.c_str());
+			m_dataSourceTable[t->m_base] = aNode;
 
-			base->m_debugInfo = aNode->m_debugInfo;
+			if(aNode->m_extraAnnotation)
+			{
+				if(aNode->m_extraAnnotation->m_type == SourceNode::TYPE_ARRAY)
+				{
+					aNode->m_extraAnnotation->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						t->m_extends.push_back(m_manifest->m_containers[dataType]->GetBaseByName(m_sourceContext.m_persistentIdTable.get(), aChild->m_name.c_str()));
+					});
+				}
+				else
+				{
+					t->m_extends.push_back(m_manifest->m_containers[dataType]->GetBaseByName(m_sourceContext.m_persistentIdTable.get(), aNode->m_extraAnnotation->GetIdentifier()));
+				}
+			}
 
-			base->FromSource(aNode);
-
-			base->m_defined = true;
-			base->m_componentManager = m_sourceContext.m_componentManager.get();
+			m_dataQueue.push_back(std::move(t));
 		}
+	}
+
+	size_t
+	Compiler::_ProcessDataQueue()
+	{
+		size_t startCount = m_dataQueue.size();
+
+		for(size_t i = 0; i < m_dataQueue.size(); i++)
+		{			
+			std::unique_ptr<DataQueueItem>& t = m_dataQueue[i];
+
+			bool removeItem = false;
+
+			DataErrorHandling::ScopedErrorCallback scopedErrorCallback([&](
+				const char* aString)
+			{
+				throw BuildError{ aString };
+			});
+
+			try
+			{
+				TP_VERIFY(!t->m_base->m_defined, t->m_base->m_debugInfo, "'%s' has already been defined.", t->m_base->m_name.c_str());
+
+				std::vector<const SourceNode*> sources;
+				bool ready = true;
+
+				for(const DataBase* extends : t->m_extends)
+				{
+					if(extends->m_defined)
+					{
+						DataSourceTable::const_iterator j = m_dataSourceTable.find(extends);
+						assert(j != m_dataSourceTable.cend());
+						sources.push_back(j->second);
+					}
+					else
+					{
+						ready = false;
+						break;
+					}
+				}
+
+				if(ready)
+				{
+					for(const SourceNode* source : sources)
+						t->m_base->FromSource(source);
+
+					t->m_base->FromSource(t->m_source);
+
+					t->m_base->m_defined = true;
+					t->m_base->m_componentManager = m_sourceContext.m_componentManager.get();
+
+					removeItem = true;
+				}
+			}
+			catch (BuildError& e)
+			{
+				_OnBuildError(e);
+				removeItem = true;
+			}
+
+			if(removeItem)
+			{
+				Helpers::RemoveCyclicFromVector(m_dataQueue, i);
+				i--;
+			}
+		}
+
+		size_t endCount = m_dataQueue.size();
+
+		return startCount - endCount;
 	}
 
 }

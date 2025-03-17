@@ -440,6 +440,7 @@ namespace tpublic
 
 		std::vector<std::unique_ptr<SourceNode>>	m_children;
 		std::unique_ptr<SourceNode>					m_annotation;
+		std::unique_ptr<SourceNode>					m_extraAnnotation;
 		std::unique_ptr<SourceNode>					m_condition;
 	};
 

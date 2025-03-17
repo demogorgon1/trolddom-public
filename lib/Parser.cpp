@@ -244,6 +244,18 @@ namespace tpublic
 						aTokenizer.ConsumeToken(">");
 					}
 
+					if (aTokenizer.IsToken("("))
+					{
+						aTokenizer.Proceed();
+
+						std::unique_ptr<SourceNode> annotation = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
+						_ParseValue(aTokenizer, annotation.get());
+
+						node->m_extraAnnotation = std::move(annotation);
+
+						aTokenizer.ConsumeToken(")");
+					}
+
 					aTokenizer.ConsumeToken(":");
 				}
 
