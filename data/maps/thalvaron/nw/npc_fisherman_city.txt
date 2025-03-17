@@ -1,0 +1,34 @@
+dialogue_screen .fisherman_city_trainer: !DEFAULT_FISHING_TRAINER{}
+
+dialogue_screen .fisherman_city_dialogue:
+{
+	text: 
+	[	
+		"Sssh!"
+	]		
+	
+	options:
+	[
+		{ goto: .fisherman_trainer text: "Please teach me how to drag fish out of the water." }
+	]
+}
+
+dialogue_root .fisherman_city_dialogue:
+{
+	.fisherman_city_dialogue: { }
+}
+
+entity thalvaron_fisherman_city: !NPC
+{
+	_string: "Egon"
+	_guild_name: "Fisherman"
+	_dialogue_root: .fisherman_city_dialogue	
+	_sprite: fisherman_1
+	_sprite_dead: fisherman_1_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

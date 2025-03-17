@@ -179,6 +179,10 @@ map_entity_spawn thalvaron_consort: { entity thalvaron_consort: { init_state: de
 map_entity_spawn thalvaron_queen: { entity thalvaron_queen: { init_state: default } }
 map_entity_spawn thalvaron_royal_guard_big: { entity thalvaron_royal_guard_big: { init_state: default } }
 map_entity_spawn thalvaron_royal_guard: { entity thalvaron_royal_guard: { init_state: default } }
+map_entity_spawn thalvaron_fisherman_city: { entity thalvaron_fisherman_city: { init_state: default } }
+map_entity_spawn thalvaron_lisa_storkhouse: { entity thalvaron_lisa_storkhouse: { init_state: default } }
+map_entity_spawn thalvaron_igor_skrald: { entity thalvaron_igor_skrald: { init_state: default } }
+map_entity_spawn thalvaron_harbor_vendor: { entity thalvaron_harbor_vendor: { init_state: default } }
 
 # N
 map_entity_spawn thalvaron_ranger_fremalt: { entity thalvaron_ranger_fremalt: { init_state: default } }
@@ -453,6 +457,10 @@ map_palette .stuff:
 	entity_spawn thalvaron_consort: [ 102 104 206 ]
 	entity_spawn thalvaron_royal_guard_big: [ 204 94 122 ]
 	entity_spawn thalvaron_royal_guard: [ 204 94 222 ]
+	entity_spawn thalvaron_fisherman_city: [ 30 104 99 ]
+	entity_spawn thalvaron_lisa_storkhouse: [ 130 204 99 ]
+	entity_spawn thalvaron_igor_skrald: [ 230 204 99 ]
+	entity_spawn thalvaron_harbor_vendor: [ 126 39 81 ]
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				
@@ -818,6 +826,8 @@ map_palette .doodads:
 	doodad wall_sign_generic<"Healing Herbs">: [ 117 126 11 ]	
 	doodad wall_sign_generic<"The Black Veil Tavern">: [ 111 121 11 ]	
 	doodad wall_sign_generic<"Auction House">: [ 101 21 11 ]	
+	doodad wall_sign_generic<"Harbor Manager">: [ 123 21 11 ]	
+	doodad wall_sign_generic<"Skrald & Co.">: [ 223 21 11 ]	
 }
 
 map_palette .cliffs:

@@ -1,0 +1,40 @@
+dialogue_screen .harbor_vendor_vendor: 
+{
+	sell item_flour: { quantity: 1 }	
+	sell item_water: { quantity: 1 }	
+	sell consumable_spirit_token: { quantity: 1 }	
+	sell consumable_banana: { quantity: 1 cost: 550 }
+}
+
+dialogue_screen .harbor_vendor_dialogue:
+{
+	text: 
+	[	
+		"Want to buy something?"
+	]		
+	
+	options:
+	[
+		{ goto: .harbor_vendor_vendor text: "Let me browse your goods." }
+	]
+}
+
+dialogue_root .harbor_vendor_dialogue:
+{
+	.harbor_vendor_dialogue: { }
+}
+
+entity thalvaron_harbor_vendor: !NPC
+{
+	_string: "Dingo Altair"
+	_sprite: man_1
+	_sprite_dead: man_1_dead
+	_level: 20
+	_faction: npcs
+	_dialogue_root: .harbor_vendor_dialogue
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_route: thalvaron_default_patrol
+	_default_behavior_state: thalvaron_default_patrol_friendly
+}
