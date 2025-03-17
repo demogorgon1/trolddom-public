@@ -177,7 +177,8 @@ map_entity_spawn thalvaron_lucinda_frostvale: { entity thalvaron_lucinda_frostva
 map_entity_spawn thalvaron_father_tobias: { entity thalvaron_father_tobias: { init_state: default } }
 map_entity_spawn thalvaron_consort: { entity thalvaron_consort: { init_state: default } }
 map_entity_spawn thalvaron_queen: { entity thalvaron_queen: { init_state: default } }
-
+map_entity_spawn thalvaron_royal_guard_big: { entity thalvaron_royal_guard_big: { init_state: default } }
+map_entity_spawn thalvaron_royal_guard: { entity thalvaron_royal_guard: { init_state: default } }
 
 # N
 map_entity_spawn thalvaron_ranger_fremalt: { entity thalvaron_ranger_fremalt: { init_state: default } }
@@ -450,6 +451,8 @@ map_palette .stuff:
 	entity_spawn the_shrouded_lands_underworld_closed: [ 208 141 206 ]
 	entity_spawn thalvaron_queen: [ 102 104 106 ]
 	entity_spawn thalvaron_consort: [ 102 104 206 ]
+	entity_spawn thalvaron_royal_guard_big: [ 204 94 122 ]
+	entity_spawn thalvaron_royal_guard: [ 204 94 222 ]
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				

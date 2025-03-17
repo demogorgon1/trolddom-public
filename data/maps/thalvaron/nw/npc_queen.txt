@@ -1,3 +1,20 @@
+dialogue_screen .queen_dialogue:
+{
+	text: 
+	[	
+		"Yes?"
+	]		
+	
+	options:
+	[
+	]
+}
+
+dialogue_root .queen_dialogue:
+{
+	.queen_dialogue: { }
+}
+
 entity thalvaron_queen: !NPC
 {
 	_string: "Queen Roberta"
@@ -6,6 +23,7 @@ entity thalvaron_queen: !NPC
 	_level: 20
 	_faction: valoris
 	_creature_type: humanoid
+	_dialogue_root: .queen_dialogue
 	_loot_table: .npc
 	_not_pushable: true	
 }
