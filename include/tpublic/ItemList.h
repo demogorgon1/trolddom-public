@@ -97,6 +97,9 @@ namespace tpublic
 		void				Shrink(
 								size_t										aTargetSize);
 		void				Reset();
+		void				OnLoadedFromPersistence(
+								const Manifest*								aManifest,
+								size_t										aSize);
 
 		// Public data
 		std::vector<Entry>		m_entries;

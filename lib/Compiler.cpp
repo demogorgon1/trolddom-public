@@ -113,24 +113,7 @@ namespace tpublic
 		});		
 
 		// Process data source
-		while(m_dataQueue.size() > 0)
-		{
-			size_t processed = _ProcessDataQueue();
-
-			if(processed == 0)
-			{
-				// Queue is unresolvable - probably circular dependencies
-				for(const std::unique_ptr<DataQueueItem>& dataQueueItem : m_dataQueue)
-				{
-					_OnBuildError({ Helpers::Format("%s:%u: '%s' can't be resolved.", 
-						dataQueueItem->m_source->m_debugInfo.m_file.c_str(), 
-						dataQueueItem->m_source->m_debugInfo.m_line,
-						dataQueueItem->m_source->m_name.c_str()) });
-				}
-
-				break;
-			}			
-		}
+		_ProcessDataQueue();
 
 		TP_CHECK(m_buildErrorCount == 0, "%u build errors.", m_buildErrorCount);
 
@@ -490,17 +473,19 @@ namespace tpublic
 
 			if(aNode->m_extraAnnotation)
 			{
+				std::vector<const DataBase*>& dataExtends = m_dataExtendsTable[t->m_base];
+
 				if(aNode->m_extraAnnotation->m_type == SourceNode::TYPE_ARRAY)
 				{
 					aNode->m_extraAnnotation->ForEachChild([&](
 						const SourceNode* aChild)
 					{
-						t->m_extends.push_back(m_manifest->m_containers[dataType]->GetBaseByName(m_sourceContext.m_persistentIdTable.get(), aChild->m_name.c_str()));
+						dataExtends.push_back(m_manifest->m_containers[dataType]->GetBaseByName(m_sourceContext.m_persistentIdTable.get(), aChild->m_name.c_str()));
 					});
 				}
 				else
 				{
-					t->m_extends.push_back(m_manifest->m_containers[dataType]->GetBaseByName(m_sourceContext.m_persistentIdTable.get(), aNode->m_extraAnnotation->GetIdentifier()));
+					dataExtends.push_back(m_manifest->m_containers[dataType]->GetBaseByName(m_sourceContext.m_persistentIdTable.get(), aNode->m_extraAnnotation->GetIdentifier()));
 				}
 			}
 
@@ -508,17 +493,11 @@ namespace tpublic
 		}
 	}
 
-	size_t
+	void
 	Compiler::_ProcessDataQueue()
 	{
-		size_t startCount = m_dataQueue.size();
-
-		for(size_t i = 0; i < m_dataQueue.size(); i++)
+		for(std::unique_ptr<DataQueueItem>& t : m_dataQueue)
 		{			
-			std::unique_ptr<DataQueueItem>& t = m_dataQueue[i];
-
-			bool removeItem = false;
-
 			DataErrorHandling::ScopedErrorCallback scopedErrorCallback([&](
 				const char* aString)
 			{
@@ -530,52 +509,43 @@ namespace tpublic
 				TP_VERIFY(!t->m_base->m_defined, t->m_base->m_debugInfo, "'%s' has already been defined.", t->m_base->m_name.c_str());
 
 				std::vector<const SourceNode*> sources;
-				bool ready = true;
+				_GetDataExtends(t->m_base, sources);
+				assert(sources.size() > 0);
 
-				for(const DataBase* extends : t->m_extends)
-				{
-					if(extends->m_defined)
-					{
-						DataSourceTable::const_iterator j = m_dataSourceTable.find(extends);
-						assert(j != m_dataSourceTable.cend());
-						sources.push_back(j->second);
-					}
-					else
-					{
-						ready = false;
-						break;
-					}
-				}
+				for(const SourceNode* source : sources)
+					t->m_base->FromSource(source);
 
-				if(ready)
-				{
-					for(const SourceNode* source : sources)
-						t->m_base->FromSource(source);
-
-					t->m_base->FromSource(t->m_source);
-
-					t->m_base->m_defined = true;
-					t->m_base->m_componentManager = m_sourceContext.m_componentManager.get();
-
-					removeItem = true;
-				}
+				t->m_base->m_defined = true;
+				t->m_base->m_componentManager = m_sourceContext.m_componentManager.get();
 			}
 			catch (BuildError& e)
 			{
 				_OnBuildError(e);
-				removeItem = true;
-			}
-
-			if(removeItem)
-			{
-				Helpers::RemoveCyclicFromVector(m_dataQueue, i);
-				i--;
 			}
 		}
+	}
 
-		size_t endCount = m_dataQueue.size();
+	void		
+	Compiler::_GetDataExtends(
+		const DataBase*							aDataBase,
+		std::vector<const SourceNode*>&			aOut)
+	{	
+		const SourceNode* source = NULL;
 
-		return startCount - endCount;
+		{
+			DataSourceTable::const_iterator i = m_dataSourceTable.find(aDataBase);
+			assert(i != m_dataSourceTable.cend());
+			source = i->second;
+			TP_VERIFY(Helpers::FindItem(aOut, source) == SIZE_MAX, source->m_debugInfo, "Circular polymorphism.");
+		}
+
+		{
+			DataExtendsTable::const_iterator i = m_dataExtendsTable.find(aDataBase);
+			for (const DataBase* extends : i->second)
+				_GetDataExtends(extends, aOut);
+		}
+
+		aOut.push_back(source);
 	}
 
 }

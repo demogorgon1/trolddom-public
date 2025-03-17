@@ -193,6 +193,20 @@ namespace tpublic
 			return v;
 		}
 
+		template <typename _T>
+		size_t
+		FindItem(
+			const std::vector<_T>&					aVector,
+			const _T&								aItem) 
+		{
+			for(size_t i = 0, count = aVector.size(); i < count; i++)
+			{
+				if(aVector[i] == aItem)
+					return i;
+			}
+			return SIZE_MAX;
+		}
+
 	}
 
 }

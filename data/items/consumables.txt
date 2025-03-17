@@ -6,7 +6,7 @@ ability potion:
 	states: [ default in_combat ]
 	sound_effects: !SOUND_DRINK_POTION{}
 	delay: 2
-}
+} 
 
 item potion:
 {
@@ -20,7 +20,7 @@ ability healing_potion (potion):
 }
 
 item healing_potion (potion):
-{
+{	
 	loot_groups: [ world_drops_consumable ]
 }
 
@@ -28,7 +28,7 @@ ability mana_potion (potion):
 {
 	target_particle_system: small_heal	
 }
-
+ 
 item mana_potion:
 {
 	loot_groups: [ world_drops_consumable ]

@@ -1,6 +1,7 @@
 #include "Pcheader.h"
 
 #include <tpublic/ItemList.h>
+#include <tpublic/Manifest.h>
 
 namespace tpublic
 {
@@ -511,6 +512,27 @@ namespace tpublic
 	{
 		m_entries.clear();
 		m_version = 0;
+	}
+
+	void				
+	ItemList::OnLoadedFromPersistence(
+		const Manifest*								aManifest,
+		size_t										aSize)
+	{
+		// Make sure we only have valid items
+		for(Entry& entry : m_entries)
+		{
+			entry.m_trading = false; // FIXME: shouldn't be persisted in the first place
+
+			if(entry.m_item.IsSet())
+			{
+				const Data::Item* item = aManifest->TryGetById<Data::Item>(entry.m_item.m_itemId);
+				if(item == NULL || item->m_string.empty() || item->m_iconSpriteId == 0)
+					entry.m_item.Clear();
+			}
+		}
+
+		Shrink(aSize);
 	}
 
 }

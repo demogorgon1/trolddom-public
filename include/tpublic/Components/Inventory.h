@@ -31,6 +31,15 @@ namespace tpublic
 			{
 				aSchema->DefineCustomObjectNoSource<ItemList>(FIELD_ITEM_LIST, offsetof(Inventory, m_itemList));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_SIZE, NULL, offsetof(Inventory, m_size));
+
+				aSchema->OnRead<Inventory>([](
+					Inventory*					aInventory,
+					ComponentSchema::ReadType	aReadType,
+					const Manifest*				aManifest)
+				{
+					if(aReadType == ComponentSchema::READ_TYPE_STORAGE)
+						aInventory->m_itemList.OnLoadedFromPersistence(aManifest, aInventory->m_size);
+				});
 			}
 
 			void

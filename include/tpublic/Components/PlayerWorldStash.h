@@ -90,6 +90,18 @@ namespace tpublic
 				ComponentSchema*					aSchema)
 			{
 				aSchema->DefineCustomObjectNoSource<Items>(FIELD_ITEMS, offsetof(PlayerWorldStash, m_items));
+
+				aSchema->OnRead<PlayerWorldStash>([](
+					PlayerWorldStash*				aPlayerWorldStash,
+					ComponentSchema::ReadType		aReadType,
+					const Manifest*					aManifest)
+				{
+					if(aReadType == ComponentSchema::READ_TYPE_STORAGE)
+					{
+						for(Items::Table::iterator i = aPlayerWorldStash->m_items.m_table.begin(); i != aPlayerWorldStash->m_items.m_table.end(); i++)
+							i->second->OnLoadedFromPersistence(aManifest, SOFT_SIZE_LIMIT);
+					}
+				});
 			}
 
 			uint32_t

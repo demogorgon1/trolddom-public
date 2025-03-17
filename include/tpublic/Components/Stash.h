@@ -31,6 +31,15 @@ namespace tpublic
 			{
 				aSchema->DefineCustomObjectNoSource<ItemList>(FIELD_ITEMS, offsetof(Stash, m_items));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_EXTRA_SLOTS, NULL, offsetof(Stash, m_extraSlots));
+
+				aSchema->OnRead<Stash>([](
+					Stash*							aStash,
+					ComponentSchema::ReadType		aReadType,
+					const Manifest*					aManifest)
+				{
+					if(aReadType == ComponentSchema::READ_TYPE_STORAGE)
+						aStash->m_items.OnLoadedFromPersistence(aManifest, aStash->GetSoftSizeLimit());
+				});
 			}
 
 			void
