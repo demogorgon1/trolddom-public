@@ -22,6 +22,7 @@ namespace tpublic
 		void				Parse(
 								Tokenizer&			aTokenizer);
 		void				ResolveMacrosAndReferences();
+		void				ResolveEmbeddedDataObjects();
 		void				DebugPrint() const;
 
 		// Data access
@@ -62,16 +63,20 @@ namespace tpublic
 		std::vector<std::unique_ptr<SourceNode>>	m_referenceObjects;
 		
 		void					_ParseObject(
+									SourceNode*						aNamespace,
 									Tokenizer&						aTokenizer,
 									const char*						aEndToken,
 									SourceNode*						aObject);
 		void					_ParseArray(
+									SourceNode*						aNamespace,
 									Tokenizer&						aTokenizer,
 									SourceNode*						aArray);
 		void					_ParseValue(
+									SourceNode*						aNamespace,
 									Tokenizer&						aTokenizer,
 									SourceNode*						aParent);
 		void					_ParseExpression(
+									SourceNode*						aNamespace,
 									Tokenizer&						aTokenizer,
 									SourceNode*						aParent);
 		void					_DebugPrint(
@@ -84,6 +89,10 @@ namespace tpublic
 		void					_ResolveMacrosAndReferences(
 									SourceNode*						aNode);
 		void					_InnerResolveMacrosAndReferences(
+									SourceNode*						aNode);
+		void					_ResolveEmbeddedDataObjects(
+									std::vector<std::string>&		aObjectNameStack,
+									SourceNode*						aNamespace,
 									SourceNode*						aNode);
 		const Macro*			_FindMacro(
 									const char*						aPath,

@@ -75,6 +75,7 @@ namespace tpublic
 				try
 				{
 					m_parser.ResolveMacrosAndReferences();
+					m_parser.ResolveEmbeddedDataObjects();
 				}
 				catch (BuildError& e)
 				{

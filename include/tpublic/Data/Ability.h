@@ -356,8 +356,26 @@ namespace tpublic
 						const SourceNode* aChild)
 					{
 						Item t;
-						t.m_itemId = aChild->m_sourceContext->m_persistentIdTable->GetId(aChild->m_debugInfo, DataType::ID_ITEM, aChild->m_name.c_str());
-						t.m_quantity = aChild->GetUInt32();
+							
+						if (aChild->m_name == "entry")
+						{
+							aChild->GetObject()->ForEachChild([&](
+								const SourceNode* aEntryChild)
+							{
+								if(aEntryChild->m_name == "item")
+									t.m_itemId = aEntryChild->GetId(DataType::ID_ITEM);
+								else if(aEntryChild->m_name == "quantity")
+									t.m_quantity = aEntryChild->GetUInt32();
+								else
+									TP_VERIFY(false, aEntryChild->m_debugInfo, "'%s' is not a valid item.", aEntryChild->m_name.c_str());
+							});
+						}
+						else
+						{
+							t.m_itemId = aChild->m_sourceContext->m_persistentIdTable->GetId(aChild->m_debugInfo, DataType::ID_ITEM, aChild->m_name.c_str());
+							t.m_quantity = aChild->GetUInt32();
+						}
+
 						m_items.push_back(t);
 					});
 				}

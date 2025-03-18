@@ -26,6 +26,7 @@ namespace tpublic
 			TYPE_MACRO_OBJECT_IMPORT,
 			TYPE_REFERENCE,
 			TYPE_REFERENCE_OBJECT,
+			TYPE_EMBEDDED_DATA_OBJECT,
 			TYPE_EXPRESSION,
 			TYPE_EXPRESSION_OR,
 			TYPE_EXPRESSION_AND,
@@ -82,6 +83,7 @@ namespace tpublic
 		{
 			m_children.clear();
 			m_annotation.reset();
+			m_extraAnnotation.reset();
 			m_condition.reset();
 
 			m_type = aOther->m_type;
@@ -109,6 +111,18 @@ namespace tpublic
 				annotation->Copy(aOther->m_annotation.get());
 
 				m_annotation = std::move(annotation);
+			}
+
+			if (aOther->m_extraAnnotation)
+			{
+				std::unique_ptr<SourceNode> annotation = std::make_unique<SourceNode>(m_sourceContext, m_debugInfo, m_realPath.c_str(), m_path.c_str(), m_pathWithFileName.c_str());
+
+				annotation->m_name = aOther->m_extraAnnotation->m_name;
+				annotation->m_tag = aOther->m_extraAnnotation->m_tag;
+
+				annotation->Copy(aOther->m_extraAnnotation.get());
+
+				m_extraAnnotation = std::move(annotation);
 			}
 
 			if(aOther->m_condition)

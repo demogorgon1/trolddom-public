@@ -116,17 +116,23 @@ namespace tpublic
 
 	void
 	Parser::Parse(
-		Tokenizer&	aTokenizer)
+		Tokenizer&		aTokenizer)
 	{
-		_ParseObject(aTokenizer, NULL, &m_root);
+		_ParseObject(&m_root, aTokenizer, NULL, &m_root);
 	}
 
 	void				
 	Parser::ResolveMacrosAndReferences()
-	{
-		
-
+	{	
 		_ResolveMacrosAndReferences(&m_root);
+	}
+
+	void				
+	Parser::ResolveEmbeddedDataObjects()
+	{
+		std::vector<std::string> objectNameStack;
+
+		_ResolveEmbeddedDataObjects(objectNameStack, &m_root, &m_root);
 	}
 
 	void	
@@ -139,9 +145,10 @@ namespace tpublic
 
 	void
 	Parser::_ParseObject(
-		Tokenizer&	aTokenizer,
-		const char* aEndToken,
-		SourceNode*	aObject)
+		SourceNode*		aNamespace,
+		Tokenizer&		aTokenizer,
+		const char*		aEndToken,
+		SourceNode*		aObject)
 	{
 		aObject->m_type = SourceNode::TYPE_OBJECT;
 
@@ -159,7 +166,7 @@ namespace tpublic
 				aTokenizer.ConsumeToken("{");
 
 				std::unique_ptr<SourceNode> node = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
-				_ParseObject(aTokenizer, "}", node.get());
+				_ParseObject(aNamespace, aTokenizer, "}", node.get());
 				
 				node->m_type = SourceNode::TYPE_REFERENCE_OBJECT;
 
@@ -179,7 +186,7 @@ namespace tpublic
 					const std::string& identifier = aTokenizer.ConsumeAnyIdentifier();
 
 					std::unique_ptr<SourceNode> body = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
-					_ParseValue(aTokenizer, body.get());
+					_ParseValue(aNamespace, aTokenizer, body.get());
 
 					std::unique_ptr<Macro> macro = std::make_unique<Macro>(identifier.c_str(), body->m_debugInfo);
 					macro->m_body = std::move(body);
@@ -211,7 +218,7 @@ namespace tpublic
 					aTokenizer.Proceed();
 				
 					std::unique_ptr<SourceNode> expression = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
-					_ParseExpression(aTokenizer, expression.get());
+					_ParseExpression(aNamespace, aTokenizer, expression.get());
 
 					node->m_condition = std::move(expression);
 
@@ -237,7 +244,7 @@ namespace tpublic
 						aTokenizer.Proceed();
 
 						std::unique_ptr<SourceNode> annotation = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
-						_ParseValue(aTokenizer, annotation.get());
+						_ParseValue(aNamespace, aTokenizer, annotation.get());
 
 						node->m_annotation = std::move(annotation);
 
@@ -249,7 +256,7 @@ namespace tpublic
 						aTokenizer.Proceed();
 
 						std::unique_ptr<SourceNode> annotation = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
-						_ParseValue(aTokenizer, annotation.get());
+						_ParseValue(aNamespace, aTokenizer, annotation.get());
 
 						node->m_extraAnnotation = std::move(annotation);
 
@@ -257,9 +264,60 @@ namespace tpublic
 					}
 
 					aTokenizer.ConsumeToken(":");
-				}
 
-				_ParseValue(aTokenizer, node.get());
+					if(aTokenizer.IsToken("$"))
+					{
+						aTokenizer.Proceed();
+
+						std::unique_ptr<SourceNode> embeddedObject = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
+
+						embeddedObject->m_tag = aTokenizer.ConsumeAnyIdentifier();
+
+						if (aTokenizer.IsToken("<"))
+						{
+							aTokenizer.Proceed();
+
+							std::unique_ptr<SourceNode> annotation = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
+							_ParseValue(aNamespace, aTokenizer, annotation.get());
+
+							embeddedObject->m_annotation = std::move(annotation);
+
+							aTokenizer.ConsumeToken(">");
+						}
+
+						if (aTokenizer.IsToken("("))
+						{
+							aTokenizer.Proceed();
+
+							std::unique_ptr<SourceNode> annotation = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
+							_ParseValue(aNamespace, aTokenizer, annotation.get());
+
+							embeddedObject->m_extraAnnotation = std::move(annotation);
+
+							aTokenizer.ConsumeToken(")");
+						}
+
+						std::unique_ptr<SourceNode> importArray;
+
+						if(aTokenizer.IsToken("["))
+						{
+							aTokenizer.Proceed();
+							importArray = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
+							_ParseArray(aNamespace, aTokenizer, importArray.get());
+						}
+
+						_ParseValue(aNamespace, aTokenizer, embeddedObject.get());
+
+						node->m_type = SourceNode::TYPE_EMBEDDED_DATA_OBJECT;
+						node->m_children.push_back(std::move(embeddedObject));
+
+						if(importArray)
+							node->m_children.push_back(std::move(importArray));
+					}
+				}			
+
+				if(node->m_type != SourceNode::TYPE_EMBEDDED_DATA_OBJECT)
+					_ParseValue(aNamespace, aTokenizer, node.get());
 
 				aObject->m_children.push_back(std::move(node));
 			}
@@ -268,6 +326,7 @@ namespace tpublic
 
 	void	
 	Parser::_ParseArray(
+		SourceNode*		aNamespace,
 		Tokenizer&		aTokenizer,
 		SourceNode*		aArray)
 	{
@@ -288,14 +347,14 @@ namespace tpublic
 				aTokenizer.Proceed();
 
 				std::unique_ptr<SourceNode> expression = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
-				_ParseExpression(aTokenizer, expression.get());
+				_ParseExpression(aNamespace, aTokenizer, expression.get());
 
 				node->m_condition = std::move(expression);
 
 				aTokenizer.ConsumeToken(">");
 			}
 
-			_ParseValue(aTokenizer, node.get());
+			_ParseValue(aNamespace, aTokenizer, node.get());
 
 			aArray->m_children.push_back(std::move(node));
 		}
@@ -303,6 +362,7 @@ namespace tpublic
 
 	void	
 	Parser::_ParseValue(
+		SourceNode*		aNamespace,
 		Tokenizer&		aTokenizer,
 		SourceNode*		aParent)
 	{
@@ -325,7 +385,7 @@ namespace tpublic
 			{
 				std::unique_ptr<SourceNode> node = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
 
-				_ParseValue(aTokenizer, node.get());
+				_ParseValue(aNamespace, aTokenizer, node.get());
 
 				aParent->m_children.push_back(std::move(node));
 			}
@@ -348,12 +408,18 @@ namespace tpublic
 		else if (aTokenizer.IsToken("{"))
 		{	
 			aTokenizer.Proceed();
-			_ParseObject(aTokenizer, "}", aParent);	
+
+			// New namespace?
+			SourceNode* nextNamespace = aNamespace;
+			if((aParent->m_type == SourceNode::TYPE_NONE && aParent->m_name.empty()) || aNamespace == &m_root)
+				nextNamespace = aParent;
+
+			_ParseObject(nextNamespace, aTokenizer, "}", aParent);
 		}
 		else if (aTokenizer.IsToken("["))
 		{
 			aTokenizer.Proceed();
-			_ParseArray(aTokenizer, aParent);
+			_ParseArray(aNamespace, aTokenizer, aParent);
 		}
 		else
 		{
@@ -375,6 +441,7 @@ namespace tpublic
 
 	void
 	Parser::_ParseExpression(
+		SourceNode*			/*aNamespace*/,
 		Tokenizer&			aTokenizer,
 		SourceNode*			aParent)
 	{
@@ -399,6 +466,7 @@ namespace tpublic
 		case SourceNode::TYPE_IDENTIFIER:			printf("identifier "); break;
 		case SourceNode::TYPE_MACRO_INVOCATION:		printf("macro_invocation "); break;
 		case SourceNode::TYPE_REFERENCE:			printf("reference "); break;
+		case SourceNode::TYPE_EMBEDDED_DATA_OBJECT:	printf("embedded_data_object "); break;
 		case SourceNode::TYPE_EXPRESSION:			printf("expression "); break;
 		case SourceNode::TYPE_EXPRESSION_OR:		printf("expression_or "); break;
 		case SourceNode::TYPE_EXPRESSION_AND:		printf("expression_and "); break;
@@ -542,8 +610,6 @@ namespace tpublic
 				i = j + 1;
 			}
 		}
-
-
 	}
 
 	void
@@ -599,6 +665,98 @@ namespace tpublic
 			assert(originalReferenceObjectCount < m_referenceObjects.size());
 			m_referenceObjects.resize(originalReferenceObjectCount);
 		}
+	}
+
+	void					
+	Parser::_ResolveEmbeddedDataObjects(
+		std::vector<std::string>&		aObjectNameStack,
+		SourceNode*						aNamespace,
+		SourceNode*						aNode)
+	{
+		bool needObjectNameStackPop = false;
+
+		std::string t;
+
+		if (!aNode->m_tag.empty())
+		{
+			t += "_";
+			t += aNode->m_tag;
+		}
+
+		if(!aNode->m_name.empty())
+		{
+			t += "_";
+			t += aNode->m_name;
+		}
+
+		if(!t.empty())
+		{
+			aObjectNameStack.push_back(t);
+			needObjectNameStackPop = true;
+		}
+
+		for (size_t i = 0; i < aNode->m_children.size(); i++)
+		{
+			std::unique_ptr<SourceNode>& child = aNode->m_children[i];
+
+			if(child->m_type == SourceNode::TYPE_EMBEDDED_DATA_OBJECT)
+			{
+				assert(child->m_children.size() == 1 || child->m_children.size() == 2);
+
+				std::string embeddedObjectName;
+				for(const std::string& objectName : aObjectNameStack)
+					embeddedObjectName += objectName;
+
+				if (!child->m_tag.empty())
+				{
+					embeddedObjectName += "_";
+					embeddedObjectName += child->m_tag;
+				}
+
+				if (!child->m_name.empty())
+				{
+					embeddedObjectName += "_";
+					embeddedObjectName += child->m_name;
+				}
+
+				child->m_value = embeddedObjectName;
+				child->m_type = SourceNode::TYPE_IDENTIFIER;
+
+				std::unique_ptr<SourceNode> dataObject = std::move(child->m_children[0]);
+
+				if(child->m_children.size() == 2)
+				{
+					assert(child->m_children[1]->m_type == SourceNode::TYPE_ARRAY);
+					for(const std::unique_ptr<SourceNode>& importIdentifier : child->m_children[1]->m_children)
+					{
+						const char* identifier = importIdentifier->GetIdentifier();
+						const SourceNode* toCopy = aNode->TryGetChildByName(identifier);
+						TP_VERIFY(toCopy != NULL, importIdentifier->m_debugInfo, "'%s' is not a valid parent child.", identifier);
+
+						std::unique_ptr<SourceNode> copyObject = std::make_unique<SourceNode>(m_root.m_sourceContext, toCopy->m_debugInfo, toCopy->m_realPath.c_str(), toCopy->m_path.c_str(), toCopy->m_pathWithFileName.c_str());
+						copyObject->Copy(toCopy);
+						copyObject->m_name = toCopy->m_name;
+
+						dataObject->m_children.push_back(std::move(copyObject));
+					}
+				}						
+
+				child->m_children.clear();
+
+				dataObject->m_name = embeddedObjectName;
+				aNamespace->m_children.push_back(std::move(dataObject));
+			}
+		}
+
+		for (std::unique_ptr<SourceNode>& child : aNode->m_children)
+		{
+			SourceNode* nextNamespace = child->IsAnonymousObject() ? child.get() : aNamespace;
+				
+			_ResolveEmbeddedDataObjects(aObjectNameStack, nextNamespace, child.get());
+		}
+
+		if(needObjectNameStackPop)
+			aObjectNameStack.pop_back();
 	}
 
 	const Macro* 
