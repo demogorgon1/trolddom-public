@@ -128,6 +128,14 @@ namespace tpublic
 	}
 
 	void				
+	Parser::ResolveContextTags()
+	{
+		std::vector<const SourceNode*> stack;
+
+		_ResolveContextTags(stack, &m_root);
+	}
+
+	void				
 	Parser::ResolveEmbeddedDataObjects()
 	{
 		std::vector<std::string> objectNameStack;
@@ -389,6 +397,15 @@ namespace tpublic
 
 				aParent->m_children.push_back(std::move(node));
 			}
+		}
+		else if(aTokenizer.IsToken("<"))
+		{
+			aTokenizer.Proceed();
+			const std::string& identifier = aTokenizer.ConsumeAnyIdentifier();
+			aTokenizer.ConsumeToken(">");
+
+			aParent->m_type = SourceNode::TYPE_CONTEXT_TAG;
+			aParent->m_value = identifier;
 		}
 		else if (aTokenizer.IsToken("@"))
 		{
@@ -757,6 +774,38 @@ namespace tpublic
 
 		if(needObjectNameStackPop)
 			aObjectNameStack.pop_back();
+	}
+
+	void					
+	Parser::_ResolveContextTags(
+		std::vector<const SourceNode*>& aStack,
+		SourceNode*						aNode)
+	{
+		aStack.push_back(aNode);
+
+		for (std::unique_ptr<SourceNode>& child : aNode->m_children)
+		{			
+			if(child->m_type == SourceNode::TYPE_CONTEXT_TAG)
+			{
+				const char* tagName = NULL;
+
+				for(size_t i = 0; i < aStack.size() && tagName == NULL; i++)
+				{
+					const SourceNode* t = aStack[aStack.size() - i - 1];
+					if(t->m_tag == child->m_value)
+						tagName = t->m_name.c_str();
+				}
+
+				TP_VERIFY(tagName != NULL, child->m_debugInfo, "Unable to resolve tag '%s'.", child->m_value.c_str());
+
+				child->m_type = SourceNode::TYPE_IDENTIFIER;
+				child->m_value = tagName;
+			}
+
+			_ResolveContextTags(aStack, child.get());
+		}
+
+		aStack.pop_back();
 	}
 
 	const Macro* 

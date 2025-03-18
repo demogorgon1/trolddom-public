@@ -22,6 +22,7 @@ namespace tpublic
 		void				Parse(
 								Tokenizer&			aTokenizer);
 		void				ResolveMacrosAndReferences();
+		void				ResolveContextTags();
 		void				ResolveEmbeddedDataObjects();
 		void				DebugPrint() const;
 
@@ -93,6 +94,9 @@ namespace tpublic
 		void					_ResolveEmbeddedDataObjects(
 									std::vector<std::string>&		aObjectNameStack,
 									SourceNode*						aNamespace,
+									SourceNode*						aNode);
+		void					_ResolveContextTags(
+									std::vector<const SourceNode*>&	aStack,
 									SourceNode*						aNode);
 		const Macro*			_FindMacro(
 									const char*						aPath,

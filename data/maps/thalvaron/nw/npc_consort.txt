@@ -10,18 +10,13 @@ dialogue_screen .consort_dialogue:
 	]
 }
 
-dialogue_root .consort_dialogue:
-{
-	.consort_dialogue: { }
-}
-
 entity thalvaron_consort: !NPC
 {
 	_string: "Prince Ulrik"
 	_guild_name: "Consort to the Queen"
 	_sprite: man_63
 	_sprite_dead: man_63_dead
-	_dialogue_root: .consort_dialogue
+	_dialogue_root: $dialogue_root { .consort_dialogue: { } }
 	_level: 20
 	_faction: valoris
 	_creature_type: humanoid
