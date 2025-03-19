@@ -85,7 +85,7 @@ ability craft_strong_elixir_of_the_bear: !ALCHEMY_CRAFT
 	_string: "Strong Elixir of the Bear"
 	_item: consumable_strong_elixir_of_the_bear
 	_produce: { consumable_strong_elixir_of_the_bear: 1 } 
-	_materials: { item_emberbloom: 3 item_sunweave: 1 }
+	_materials: { item_emberbloom: 3 item_sunweave: 1 item_beast_jaw: 1 }
 	_skill: 45
 }
 
@@ -97,7 +97,7 @@ ability craft_strong_elixir_of_the_owl: !ALCHEMY_CRAFT
 	_string: "Strong Elixir of the Owl"
 	_item: consumable_strong_elixir_of_the_owl
 	_produce: { consumable_strong_elixir_of_the_owl: 1 } 
-	_materials: { item_sunweave: 1 item_emberbloom: 3 }
+	_materials: { item_sunweave: 1 item_emberbloom: 3 item_blue_feather: 1 }
 	_skill: 45
 }
 
@@ -109,9 +109,10 @@ ability craft_strong_elixir_of_the_giant: !ALCHEMY_CRAFT
 	_string: "Strong Elixir of the Giant"
 	_item: consumable_strong_elixir_of_the_giant
 	_produce: { consumable_strong_elixir_of_the_giant: 1 } 
-	_materials: { item_sunweave: 3 item_emberbloom: 3 }
+	_materials: { item_sunweave: 3 item_emberbloom: 3 item_giant_tusk: 1 }
 	_skill: 55
 }
+
 #####################################################
 # Healing Potion
 
@@ -330,7 +331,7 @@ ability craft_strong_healing_potion: !ALCHEMY_CRAFT
 	_string: "Strong Healing Potion"
 	_item: consumable_strong_healing_potion
 	_produce: { consumable_strong_healing_potion: 1 } 
-	_materials: { item_sylmarel: 4 }
+	_materials: { item_sylmarel: 3 item_roots: 1  }
 	_skill: 65
 }
 
@@ -372,7 +373,7 @@ ability craft_strong_mana_potion: !ALCHEMY_CRAFT
 	_string: "Storng Mana Potion"
 	_item: consumable_strong_mana_potion
 	_produce: { consumable_strong_mana_potion: 1 } 
-	_materials: { item_frostbloom: 4 }
+	_materials: { item_frostbloom: 3 item_bubbling_slime: 1 }
 	_skill: 55
 }
 
