@@ -77,17 +77,6 @@ ability npc_firebolt:
 	}
 }
 
-particle_system npc_fireball:
-{
-	particle:
-	{
-		sprites: [ effect_fireball ]
-		flags: [ attached no_rotation face_target ]
-		count: 1		
-		scale: 0.5
-	}
-}
-
 cooldown npc_fireball:
 {
 	duration: 120
@@ -103,9 +92,19 @@ ability npc_fireball:
 	states: [ in_combat ]
 	icon: icon_firebolt
 	speed: 6
-	projectile: npc_fireball
 	resource_cost mana: 8
 	target_particle_system: orange_spell_hit	
+
+	projectile: $particle_system
+	{
+		particle:
+		{
+			sprites: [ effect_fireball ]
+			flags: [ attached no_rotation face_target ]
+			count: 1		
+			scale: 0.5
+		}
+	}
 
 	direct_effect damage:
 	{
@@ -116,71 +115,41 @@ ability npc_fireball:
 	
 	direct_effect apply_aura:
 	{
-		aura: npc_fireball
-	}
-}
+		aura: $aura 
+		{
+			string: "Fireball"
+			icon: icon_firebolt
+			description: "Burning."
+			type: debuff
+			duration: based_on_effects
+			flags: [ unique magic ]
 
-ability npc_fireball_tick:
-{
-	string: "Fireball"
-	icon: icon_firebolt
-	states: [ default in_combat ]
-	flags: [ always_in_range always_in_line_of_sight ]
+			aura_effect repeat:
+			{
+				update_interval: 20
+				update_count: 6
+					
+				ability: $ability
+				{
+					string: "Fireball" 
+					icon: icon_firebolt
+					states: [ default in_combat ]
+					flags: [ always_in_range always_in_line_of_sight ]
 
-	direct_effect damage:
-	{
-		damage_type: fire
-		function: { expression: a a: [ [ 1 4 ] [ 10 10 ] [ 20 20 ] [ 30 40 ] ] elite_multiplier: 1.7 }
-	}
-}
-
-aura npc_fireball:
-{
-	string: "Fireball"
-	description: "Burning."
-	type: debuff
-	icon: icon_firebolt
-	duration: based_on_effects
-	flags: [ unique magic ]
-
-	aura_effect repeat:
-	{
-		update_interval: 20
-		update_count: 6
-		ability: npc_fireball_tick
-	}
-}
-
-
-particle_system npc_frostbolt:
-{
-	particle:
-	{
-		sprites: [ effect_frostbolt ]
-		flags: [ attached no_rotation face_target ]
-		scale: 0.4
-		count: 1
+					direct_effect damage:
+					{
+						damage_type: fire
+						function: { expression: a a: [ [ 1 4 ] [ 10 10 ] [ 20 20 ] [ 30 40 ] ] elite_multiplier: 1.7 }
+					}
+				}
+			}
+		}
 	}
 }
 
 cooldown npc_frostbolt:
 {
 	duration: 70
-}
-
-aura npc_frostbolt:
-{
-	string: "Frostbolt"
-	description: "Reduced movement speed."
-	icon: icon_freeze_for_all		
-	type: debuff
-	duration: 80
-	flags: [ unique magic ]
-	
-	aura_effect move_speed_modifier:
-	{
-		move_speed: very_slow
-	}
 }
 
 ability npc_frostbolt:
@@ -193,9 +162,19 @@ ability npc_frostbolt:
 	states: [ in_combat ]
 	icon: icon_ice_lance
 	speed: 6
-	projectile: npc_frostbolt
 	resource_cost mana: 8
 
+	projectile: $particle_system 
+	{
+		particle:
+		{
+			sprites: [ effect_frostbolt ]
+			flags: [ attached no_rotation face_target ]
+			scale: 0.4
+			count: 1
+		}
+	}
+	
 	direct_effect damage:
 	{
 		flags: [ can_be_critical is_magical ]
@@ -205,7 +184,16 @@ ability npc_frostbolt:
 	
 	direct_effect apply_aura:
 	{
-		aura: npc_frostbolt
+		aura: $aura
+		{
+			string: "Frostbolt"
+			icon: icon_ice_lance
+			description: "Reduced movement speed."
+			type: debuff
+			duration: 80
+			flags: [ unique magic ]			
+			aura_effect move_speed_modifier: { move_speed: very_slow }
+		}
 	}
 }
 
