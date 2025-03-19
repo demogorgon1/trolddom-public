@@ -9,6 +9,8 @@ map_portal .exit:
 	spawn: thalvaron_valoris_insurgency_exit
 }
 
+route valoris_insurgency_default_patrol: { }
+
 map_cliff .rocky_cliff: { cliff_style: rocks elevation: 1 }
 map_cliff .rocky_cliff_ramp: { cliff_style: rocks elevation: 1 ramp: true }
 map_cliff .badlands_cliff: { cliff_style: badlands elevation: 1 }
@@ -31,12 +33,30 @@ map_palette .stuff:
 	player_spawn .player_spawn: [ 0 0 255 ]
 	
 	portal .exit: [ 0 253 0 ]	
+
+	entity_spawn herbalism: [ 0 255 0 ]
+	entity_spawn holy_altar: [ 0 0 40 ]	
+	entity_spawn underworld_shrine: [ 0 0 80 ]	
+	entity_spawn furnace: [ 100 43 66 ]		
+	entity_spawn anvil: [ 150 43 66 ]		
+	entity_spawn fireplace: [ 250 43 66 ]		
+	entity_spawn fireplace_unlit: [ 250 243 66 ]		
+	entity_spawn bonfire: [ 251 43 66 ]		
+	entity_spawn default_chest: [ 40 143 66 ]		
+	entity_spawn cauldron: [ 43 113 166 ]		
+	entity_spawn bonfire_unlit: [ 144 59 20 ]
+	entity_spawn target_dummy: [ 139 201 21 ]	
 	
 	entity_spawn .captain_jorgenson: [ 255 0 0 ]
 	entity_spawn .erdox_the_soulsplitter: [ 255 43 0 ]
 	entity_spawn .houndmaster_crane: [ 255 3 53 ]
+	entity_spawn .houndmaster_crane_spawn: [ 249 50 104 ]	
 	entity_spawn .rufus_the_strong: [ 255 40 100 ]
 	entity_spawn .wernox: [ 255 50 254 ]
+	
+	entity_spawn .rebel_melee: [ 39 48 103 ]
+	entity_spawn .rebel_tank: [ 39 48 203 ]
+	entity_spawn .rebel_healer: [ 139 48 203 ]
 }
 
 map_palette .levels:
@@ -48,6 +68,7 @@ map_palette .levels:
 
 map_palette .routes:
 {
+	route valoris_insurgency_default_patrol: [ 39 103 53 ]
 }
 
 map_palette .doodads:
@@ -89,6 +110,10 @@ map_palette .doodads:
 	doodad tombstone: [ 99 99 119 ]
 	doodad statue_angel: [ 199 199 119 ]
 	doodad skull_stick: [ 39 81 167 ]
+	doodad hole: [ 104 49 146 ]
+	doodad weapon_rack: [ 31 49 49 ]
+	doodad white_throne: [ 13 30 100 ]
+	
 	
 	doodad wall_sign_generic<"Mathew's Emporium">: [ 197 173 111 ]	
 	doodad wall_sign_generic<"John & Mary's">: [ 97 173 111 ]	

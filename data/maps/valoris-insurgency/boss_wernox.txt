@@ -47,19 +47,31 @@ entity valoris_insurgency_wernox: !NPC
 	_abilities: 
 	[
 		{
+			id: npc_fireball
+			target: random_player
+			requirement self<must_have_less_health_than>: 90
+		}
+	
+		{
+			id: npc_frostbolt
+			target: random_player
+			requirement self<must_have_less_health_than>: 95
+		}
+	
+		{
 			id: npc_attack
 		}
 	]	
 	
 	_in_combat_barks:
 	[
-		{ type: say text: "You really think you can challenge me? Wernox the Great?!" flags: [ no_chat_bubble ] }
+		{ type: yell text: "You really think you can challenge me? Wernox the Great?!" flags: [ no_chat_bubble ] }
 	]			
 	
-	#_dead_barks:
-	#[
-	#	{ type: say text: "" flags: [ no_chat_bubble ] }
-	#]	
+	_dead_barks:
+	[
+		{ type: say text: "You haven't seen the last of me!" flags: [ no_chat_bubble ] }
+	]	
 }
 
 map_trigger .wernox_killed:

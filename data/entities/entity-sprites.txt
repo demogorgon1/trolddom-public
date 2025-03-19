@@ -688,7 +688,9 @@ sprites:
 	sprite woman_29: { dead: woman_29_dead }
 	sprite woman_30: { dead: woman_30_dead }
 	sprite woman_31: { dead: woman_31_dead }
-
+	sprite rebel_10: { dead: rebel_10_dead }
+	sprite rebel_11: { dead: rebel_11_dead }
+	sprite rebel_12: { dead: rebel_12_dead }
 
 	cursor: { position: [ 0 592 ] }
 	sprite woman_26_dead: { }
@@ -704,6 +706,9 @@ sprites:
 	sprite woman_29_dead: { }
 	sprite woman_30_dead: { }
 	sprite woman_31_dead: { }
+	sprite rebel_10_dead: { }
+	sprite rebel_11_dead: { }
+	sprite rebel_12_dead: { }
 }
 
 sprites:

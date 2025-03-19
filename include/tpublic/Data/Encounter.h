@@ -132,6 +132,8 @@ namespace tpublic
 							m_delayTicks = aChild->GetInt32();
 						else if(aChild->m_name == "detached_from_spawn")
 							m_detachedFromSpawn = aChild->GetBool();
+						else if (aChild->m_name == "trigger_count")
+							m_triggerCount = aChild->GetUInt32();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					});
@@ -148,6 +150,7 @@ namespace tpublic
 					aWriter->WriteInt(m_delayTicks);
 					aWriter->WriteObjects(m_conditions);
 					aWriter->WriteBool(m_detachedFromSpawn);
+					aWriter->WriteUInt(m_triggerCount);
 				}
 
 				bool
@@ -168,6 +171,8 @@ namespace tpublic
 						return false;
 					if(!aReader->ReadBool(m_detachedFromSpawn))
 						return false;
+					if(!aReader->ReadUInt(m_triggerCount))
+						return false;
 					return true;
 				}
 
@@ -179,6 +184,7 @@ namespace tpublic
 				int32_t					m_delayTicks = 0;
 				std::vector<Condition>	m_conditions;
 				bool					m_detachedFromSpawn = false;
+				uint32_t				m_triggerCount = UINT32_MAX;
 			};
 
 			void

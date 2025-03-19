@@ -67,12 +67,145 @@ ability npc_firebolt:
 	speed: 6
 	projectile: npc_firebolt
 	resource_cost mana: 8
+	target_particle_system: orange_spell_hit
 
 	direct_effect damage:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: fire
 		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] [ 20 70 ] [ 30 140 ] ] elite_multiplier: 1.7 }
+	}
+}
+
+particle_system npc_fireball:
+{
+	particle:
+	{
+		sprites: [ effect_fireball ]
+		flags: [ attached no_rotation face_target ]
+		count: 1		
+		scale: 0.5
+	}
+}
+
+cooldown npc_fireball:
+{
+	duration: 120
+}
+
+ability npc_fireball:
+{
+	string: "Fireball"
+	range: 8
+	cast_time: 20
+	cooldowns: [ global spell_fire_lockout npc_fireball ]
+	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
+	states: [ in_combat ]
+	icon: icon_firebolt
+	speed: 6
+	projectile: npc_fireball
+	resource_cost mana: 8
+	target_particle_system: orange_spell_hit	
+
+	direct_effect damage:
+	{
+		flags: [ can_be_critical is_magical ]
+		damage_type: fire
+		function: { expression: a a: [ [ 1 24 ] [ 10 70 ] [ 20 140 ] [ 30 280 ] ] elite_multiplier: 1.7 }
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: npc_fireball
+	}
+}
+
+ability npc_fireball_tick:
+{
+	string: "Fireball"
+	icon: icon_firebolt
+	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]
+
+	direct_effect damage:
+	{
+		damage_type: fire
+		function: { expression: a a: [ [ 1 4 ] [ 10 10 ] [ 20 20 ] [ 30 40 ] ] elite_multiplier: 1.7 }
+	}
+}
+
+aura npc_fireball:
+{
+	string: "Fireball"
+	description: "Burning."
+	type: debuff
+	icon: icon_firebolt
+	duration: based_on_effects
+	flags: [ unique magic ]
+
+	aura_effect repeat:
+	{
+		update_interval: 20
+		update_count: 6
+		ability: npc_fireball_tick
+	}
+}
+
+
+particle_system npc_frostbolt:
+{
+	particle:
+	{
+		sprites: [ effect_frostbolt ]
+		flags: [ attached no_rotation face_target ]
+		scale: 0.4
+		count: 1
+	}
+}
+
+cooldown npc_frostbolt:
+{
+	duration: 70
+}
+
+aura npc_frostbolt:
+{
+	string: "Frostbolt"
+	description: "Reduced movement speed."
+	icon: icon_freeze_for_all		
+	type: debuff
+	duration: 80
+	flags: [ unique magic ]
+	
+	aura_effect move_speed_modifier:
+	{
+		move_speed: very_slow
+	}
+}
+
+ability npc_frostbolt:
+{
+	string: "Frostbolt"
+	range: 8
+	cast_time: 20
+	cooldowns: [ global spell_frost_lockout npc_frostbolt ]
+	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
+	states: [ in_combat ]
+	icon: icon_ice_lance
+	speed: 6
+	projectile: npc_frostbolt
+	resource_cost mana: 8
+
+	direct_effect damage:
+	{
+		flags: [ can_be_critical is_magical ]
+		damage_type: frost
+		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] [ 20 70 ] [ 30 140 ] ] elite_multiplier: 1.7 }
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: npc_frostbolt
 	}
 }
 
@@ -203,8 +336,8 @@ ability npc_rend_tick:
 
 	direct_effect damage:
 	{
-		damage_type: physical
-		function: { expression: a a: [ [ 1 2 ] [ 10 7 ] [ 20 14 ] [ 30 28 ] ] elite_multiplier: 1.7 }
+		damage_type: bleed
+		function: { expression: a a: [ [ 1 2 ] [ 10 7 ] [ 20 14 ] [ 30 28 ] ] elite_multiplier: 2.5 }
 	}
 }
 
@@ -725,4 +858,85 @@ particle_system npc_arcane_explosion:
 		alpha: 0.6
 		fade_out: 200
 	}
+}
+
+cooldown npc_sunder:
+{
+	duration: 80
+}
+
+aura npc_sunder:
+{
+	string: "Sunder"
+	description: "Reduced armor."
+	type: debuff
+	icon: icon_coarse_hair
+	duration: 150
+	flags: [ unique ]
+	stat_modifiers: { armor: { add_percent: -30 } }
+}
+
+ability npc_sunder:
+{
+	string: "Sunder"
+	range: 1
+	cast_time: 15
+	cooldowns: [ global npc_sunder ]
+	flags: [ offensive target_other target_hostile can_miss ]
+	states: [ in_combat ]
+	icon: icon_coarse_hair
+	delay: 3
+
+	direct_effect apply_aura:
+	{
+		aura: npc_sunder
+	}
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		function: { expression: a_mul_x x: weapon a: 0.3 }
+	}	
+}
+
+cooldown npc_mortal_strike_non_instant:
+{
+	duration: 100
+}
+
+aura npc_mortal_strike_non_instant:
+{
+	string: "Mortal Strike"
+	description: "Healing received reduced by 50%."
+	type: debuff
+	icon: icon_mortal_strike
+	duration: 150
+	flags: [ unique ]
+	aura_effect heal_input_modifier: { multiplier: 0.5 }
+}
+
+ability npc_mortal_strike_non_instant:
+{
+	string: "Mortal Strike"
+	range: 1
+	cast_time: 15
+	cooldowns: [ global npc_mortal_strike_non_instant ]
+	flags: [ offensive target_other target_hostile can_miss ]
+	states: [ in_combat ]
+	icon: icon_mortal_strike
+	delay: 3
+	cast_time: 15
+
+	direct_effect apply_aura:
+	{
+		aura: npc_mortal_strike_non_instant
+	}
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		function: { expression: a_mul_x x: weapon a: 1.2 }
+	}	
 }
