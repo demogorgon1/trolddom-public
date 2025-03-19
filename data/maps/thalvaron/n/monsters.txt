@@ -11,23 +11,6 @@ npc_behavior_state .passive:
 	behavior: do_nothing
 }
 
-loot_table .default_humanoid: 
-{
-	slots:
-	[	
-		!WORLD_DROPS {}
-		!WORLD_DROPS_CLOTH{}
-	]	
-}
-
-loot_table .default_beast: 
-{
-	slots:
-	[	
-		!WORLD_DROPS {}
-	]	
-}
-
 ##########################################################################################
 # North kobolds 
 
@@ -45,7 +28,7 @@ map_entity_spawn thalvaron_north_kobold:
 		_faction: monsters
 		_creature_type: humanoid
 		_default_behavior_state: .wandering_short
-		_loot_table: .default_humanoid
+		_loot_table: default_humanoid
 	}
 
 	entity thalvaron_north_kobold_a: !NPC { _string: "Iceveil Kobold" _sprite: kobold_1 _sprite_dead: kobold_1_dead }
@@ -277,6 +260,7 @@ map_entity_spawn thalvaron_owlbear:
 			}
 			
 			!WORLD_DROPS {}
+			!WORLD_DROPS_OWLBEARS{}
 		]	
 	}
 		
@@ -297,7 +281,7 @@ map_entity_spawn thalvaron_owlbear:
 		_faction: monsters
 		_creature_type: beast
 		_default_behavior_state: .wandering_short				
-		_loot_table: .default_beast
+		_loot_table: default_wolf
 		_resource_health: 0.7
 		_weapon_damage: 0.8
 	}
@@ -312,7 +296,7 @@ map_entity_spawn thalvaron_owlbear:
 		_faction: monsters
 		_creature_type: humanoid
 		_default_behavior_state: .passive				
-		_loot_table: .default_humanoid 
+		_loot_table: default_humanoid 
 		_weapon_damage: 1.5
 		_resource_health: 1.8
 		_aggro_requirements: { requirement target<must_not_be_type>: thalvaron_doctor_hulius }
@@ -328,7 +312,7 @@ map_entity_spawn thalvaron_owlbear:
 		_faction: monsters
 		_creature_type: elemental
 		_default_behavior_state: .wandering_short
-		_loot_table: .default_beast
+		_loot_table: default_earth_elemental
 		_weapon_damage: 1.1
 		_resource_health: 1.1
 	}
@@ -343,7 +327,7 @@ map_entity_spawn thalvaron_owlbear:
 		_faction: monsters
 		_creature_type: beast
 		_default_behavior_state: .wandering_short				
-		_loot_table: .default_beast 
+		_loot_table: default_owlbear
 		_weapon_damage: 1.2 
 		_resource_health: 1.3
 	}
@@ -366,19 +350,11 @@ map_entity_spawn thalvaron_deer_north:
 # Wildlife
 {
 
-	loot_table .deer: 
-	{
-		slots:
-		[	
-			!WORLD_DROPS {}				
-		]	
-	}
-
 	${
 		_faction: wildlife
 		_creature_type: beast
 		_default_behavior_state: .wandering_short
-		_loot_table: .deer
+		_loot_table: default_deer
 	}
 	
 	entity thalvaron_deer_13: !NPC { _string: "Iceveil Deer" _sprite: deer_2 _sprite_dead: deer_2_dead _level: 13 }
@@ -406,7 +382,7 @@ map_entity_spawn thalvaron_duskwhisper_kobold:
 		_faction: monsters
 		_creature_type: humanoid
 		_default_behavior_state: .wandering_short
-		_loot_table: .default_humanoid
+		_loot_table: default_humanoid
 		_weapon_damage: 0.9
 		_resource_health: 0.8
 	}
@@ -423,7 +399,7 @@ map_entity_spawn thalvaron_duskwhisper_kobold:
 		_faction: monsters
 		_creature_type: humanoid
 		_default_behavior_state: .wandering_short
-		_loot_table: .default_humanoid
+		_loot_table: default_humanoid
 		_weapon_damage: 0.9
 		_resource_health: 0.8
 		_resource_mana: 1
@@ -455,7 +431,7 @@ map_entity_spawn thalvaron_duskwhisper_smuggler:
 		_faction: monsters
 		_creature_type: humanoid
 		_default_behavior_state: .passive
-		_loot_table: .default_humanoid
+		_loot_table: default_humanoid
 		_weapon_damage: 1.1
 		_resource_health: 1.1
 	}
@@ -550,6 +526,7 @@ map_entity_spawn thalvaron_ghyuik:
 			}
 			
 			!WORLD_DROPS {}
+			!WORLD_DROPS_WOOD_ELEMENTALS {}
 		]	
 	}
 		
@@ -652,7 +629,7 @@ map_entity_spawn thalvaron_ghyuik:
 		_faction: monsters
 		_creature_type: beast
 		_default_behavior_state: .wandering_short				
-		_loot_table: .default_beast 
+		_loot_table: default_owlbear 
 		_weapon_damage: 1.2 
 		_resource_health: 1.3
 		_abilities: [ { id: npc_rend } { id: npc_attack } ]
@@ -673,6 +650,7 @@ map_entity_spawn thalvaron_ghyuik:
 			}
 			
 			!WORLD_DROPS {}
+			!WORLD_DROPS_CRABS {}
 		]	
 	}
 	
@@ -702,6 +680,7 @@ map_entity_spawn thalvaron_ghyuik:
 			}
 			
 			!WORLD_DROPS {}
+			!WORLD_DROPS_SPIDERS {}			
 		]	
 	}
 	
@@ -724,7 +703,7 @@ map_entity_spawn thalvaron_ghyuik:
 		_faction: monsters
 		_creature_type: elemental
 		_default_behavior_state: .wandering_short
-		_loot_table: .default_beast
+		_loot_table: default_wood_elemental
 		_weapon_damage: 1.2
 		_resource_health: 1.8
 	}
@@ -739,7 +718,7 @@ map_entity_spawn thalvaron_ghyuik:
 		_faction: monsters
 		_creature_type: beast
 		_default_behavior_state: .wandering_short				
-		_loot_table: .default_beast 
+		_loot_table: default_lizard
 		_weapon_damage: 1.1
 		_resource_health: 1.0
 	}
@@ -759,6 +738,7 @@ map_entity_spawn thalvaron_ghyuik:
 			}
 			
 			!WORLD_DROPS {}
+			!WORLD_DROPS_LIZARDS {}						
 		]	
 	}
 	
@@ -814,7 +794,7 @@ map_entity_spawn thalvaron_ghyuik:
 		_faction: monsters
 		_creature_type: elemental
 		_default_behavior_state: .wandering_short
-		_loot_table: .default_beast
+		_loot_table: default_wood_elemental
 		_weapon_damage: 1.2
 		_resource_health: 1.3
 	}
@@ -978,7 +958,7 @@ map_entity_spawn thalvaron_faerandor_dark_elf:
 		_faction: dark_elves
 		_creature_type: humanoid
 		_default_behavior_state: .passive
-		_loot_table: .default_humanoid
+		_loot_table: default_humanoid
 	}
 
 	entity thalvaron_north_dark_elf_a: !NPC { _string: "Dark Elf Invader" _sprite: dark_elf_4 _sprite_dead: dark_elf_4_dead }
@@ -995,7 +975,7 @@ map_entity_spawn thalvaron_faerandor_dark_elf:
 		_creature_type: humanoid
 		_resource_health: 2
 		_resource_mana: 1
-		_loot_table: .default_humanoid
+		_loot_table: default_humanoid
 		_abilities: [ { id: npc_curse } { id: npc_firebolt } { id: npc_attack } ]
 	}
 
@@ -1091,6 +1071,7 @@ loot_table .hounds_and_wolves:
 		}
 		
 		!WORLD_DROPS {}
+		!WORLD_DROPS_WOLVES {}						
 	]	
 }
 
@@ -1122,6 +1103,7 @@ loot_table .hounds_and_wolves:
 			}
 			
 			!WORLD_DROPS {}
+			!WORLD_DROPS_CLOTH {}
 		]	
 	}
 
@@ -1163,6 +1145,7 @@ loot_table .hounds_and_wolves:
 			}
 			
 			!WORLD_DROPS {}
+			!WORLD_DROPS_ZOMBIES {}
 		]	
 	}
 
@@ -1173,9 +1156,9 @@ loot_table .hounds_and_wolves:
 		_default_behavior_state: .wandering_short						
 	}
 
-	entity thalvaron_shadowthorn_ghoul_a: !NPC { _string: "Wandering Ghoul" _sprite: ghoul_1 _sprite_dead: ghoul_1_dead _loot_table: .default_humanoid }
-	entity thalvaron_shadowthorn_ghoul_b: !NPC { _string: "Wandering Ghoul" _sprite: ghoul_2 _sprite_dead: ghoul_2_dead _loot_table: .default_humanoid }
-	entity thalvaron_shadowthorn_ghoul_boss: !NPC { _string: "The Caretaker" _sprite: ghoul_3 _sprite_dead: ghoul_3_dead _loot_table: .default_humanoid }
+	entity thalvaron_shadowthorn_ghoul_a: !NPC { _string: "Wandering Ghoul" _sprite: ghoul_1 _sprite_dead: ghoul_1_dead _loot_table: default_zombie }
+	entity thalvaron_shadowthorn_ghoul_b: !NPC { _string: "Wandering Ghoul" _sprite: ghoul_2 _sprite_dead: ghoul_2_dead _loot_table: default_zombie }
+	entity thalvaron_shadowthorn_ghoul_boss: !NPC { _string: "The Caretaker" _sprite: ghoul_3 _sprite_dead: ghoul_3_dead _loot_table: default_zombie }
 	entity thalvaron_shadowthorn_ghoul_c: !NPC { _string: "Rotting Corpse" _sprite: swamp_monster_7 _sprite_dead: swamp_monster_7_dead _loot_table: .rotting_corpse }
 	entity thalvaron_shadowthorn_ghoul_d: !NPC { _string: "Rotting Corpse" _sprite: swamp_monster_3 _sprite_dead: swamp_monster_3_dead _loot_table: .rotting_corpse }
 }
@@ -1191,6 +1174,7 @@ loot_table .hounds_and_wolves:
 			}
 			
 			!WORLD_DROPS {}
+			!WORLD_DROPS_WOOD_ELEMENTALS {}
 		]	
 	}
 
@@ -1212,7 +1196,7 @@ loot_table .hounds_and_wolves:
 		_faction: monsters
 		_creature_type: humanoid
 		_default_behavior_state: .passive				
-		_loot_table: .default_humanoid
+		_loot_table: default_humanoid
 	}
 
 	entity thalvaron_blood_slave_a: !NPC { _string: "Blood Slave" _sprite: man_53 _sprite_dead: man_53_dead  }
@@ -1414,7 +1398,7 @@ loot_table .hounds_and_wolves:
 	
 	entity thalvaron_vampire_boss: !NPC 
 	{ 
-		_string: "Kaelithor the Relentless" _sprite: vampire_2 _sprite_dead: vampire_2_dead _loot_table: .default_humanoid 
+		_string: "Kaelithor the Relentless" _sprite: vampire_2 _sprite_dead: vampire_2_dead _loot_table: default_humanoid 
 		_out_of_zone_action: { evade: true }
 		_immune_to_stun: true
 		_immune_to_immobilize: true
@@ -1502,6 +1486,7 @@ map_entity_spawn thalvaron_poison_lizard:
 			}
 			
 			!WORLD_DROPS {}
+			!WORLD_DROPS_LIZARDS {}
 		]	
 	}
 	
@@ -1526,7 +1511,7 @@ map_entity_spawn thalvaron_poison_lizard:
 		_faction: monsters
 		_creature_type: beast
 		_default_behavior_state: .wandering_short				
-		_loot_table: .default_beast 
+		_loot_table: default_lizard
 		_weapon_damage: 1.1
 		_resource_health: 1.0
 	}
@@ -1540,7 +1525,7 @@ map_entity_spawn thalvaron_poison_lizard:
 		_faction: monsters
 		_creature_type: humanoid		
 		_default_behavior_state: .wandering_short		
-		_loot_table: .default_humanoid
+		_loot_table: default_bird
 		_level: 18
 	}
 
@@ -1559,6 +1544,7 @@ map_entity_spawn thalvaron_poison_lizard:
 			
 			!WORLD_DROPS {}
 			!WORLD_DROPS_CLOTH {}
+			!WORLD_DROPS_ZOMBIES {}
 		]	
 	}
 	
@@ -1572,6 +1558,7 @@ map_entity_spawn thalvaron_poison_lizard:
 			
 			!WORLD_DROPS {}
 			!WORLD_DROPS_CLOTH {}
+			!WORLD_DROPS_ZOMBIES {}
 		]	
 	}
 
@@ -1601,6 +1588,8 @@ map_entity_spawn thalvaron_poison_lizard:
 			}
 			
 			!WORLD_DROPS {}			
+			!WORLD_DROPS_ZOMBIES {}
+			!WORLD_DROPS_BEARS {}
 		]	
 	}
 
@@ -1613,6 +1602,8 @@ map_entity_spawn thalvaron_poison_lizard:
 			}
 			
 			!WORLD_DROPS {}			
+			!WORLD_DROPS_ZOMBIES {}
+			!WORLD_DROPS_BEARS {}			
 		]	
 	}
 	
@@ -1642,6 +1633,7 @@ map_entity_spawn thalvaron_poison_lizard:
 			}
 			
 			!WORLD_DROPS {}			
+			!WORLD_DROPS_ZOMBIES {}
 		]	
 	}
 
@@ -1657,7 +1649,8 @@ map_entity_spawn thalvaron_poison_lizard:
 				possibility: { weight: 1 loot_group: .trouli_copperquill_1_quest_item_2 requirement self<must_have_active_quest>: { id: .trouli_copperquill_1 } } 
 			}
 			
-			!WORLD_DROPS {}			
+			!WORLD_DROPS {}		
+			!WORLD_DROPS_ZOMBIES {}
 		]	
 	}
 	
@@ -1684,6 +1677,7 @@ map_entity_spawn thalvaron_poison_lizard:
 			}
 			
 			!WORLD_DROPS {}			
+			!WORLD_DROPS_OOZES {}			
 		]	
 	}
 
@@ -1693,8 +1687,8 @@ map_entity_spawn thalvaron_poison_lizard:
 		_default_behavior_state: .wandering_short		
 	}
 
-	entity thalvaron_grim_ooze: !NPC { _level: 19 _string: "Grim Ooze" _sprite: ooze_2 _sprite_dead: ooze_2_dead _loot_table: .default_beast }
-	entity thalvaron_sneaking_ooze: !NPC { _level: 18 _string: "Sneaking Ooze" _sprite: ooze_1 _sprite_dead: ooze_1_dead _loot_table: .default_beast }	
+	entity thalvaron_grim_ooze: !NPC { _level: 19 _string: "Grim Ooze" _sprite: ooze_2 _sprite_dead: ooze_2_dead _loot_table: default_ooze }
+	entity thalvaron_sneaking_ooze: !NPC { _level: 18 _string: "Sneaking Ooze" _sprite: ooze_1 _sprite_dead: ooze_1_dead _loot_table: default_ooze }	
 	entity thalvaron_ooze_boss: !NPC { _level: 19 _string: "Gloamithrex" _sprite: ooze_4 _sprite_dead: ooze_4_dead _loot_table: .ooze_boss }
 }
 
@@ -1707,8 +1701,8 @@ map_entity_spawn thalvaron_poison_lizard:
 		_default_behavior_state: .wandering_short						
 	}
 
-	entity thalvaron_faerandor_ghoul_a: !NPC { _string: "Ghoul Raider" _sprite: ghoul_1 _sprite_dead: ghoul_1_dead _loot_table: .default_humanoid }
-	entity thalvaron_faerandor_ghoul_b: !NPC { _string: "Ghoul Raider" _sprite: ghoul_2 _sprite_dead: ghoul_2_dead _loot_table: .default_humanoid }
+	entity thalvaron_faerandor_ghoul_a: !NPC { _string: "Ghoul Raider" _sprite: ghoul_1 _sprite_dead: ghoul_1_dead _loot_table: default_zombie }
+	entity thalvaron_faerandor_ghoul_b: !NPC { _string: "Ghoul Raider" _sprite: ghoul_2 _sprite_dead: ghoul_2_dead _loot_table: default_zombie }
 }
 
 ##########################################################################################
@@ -1730,7 +1724,7 @@ map_entity_spawn thalvaron_gorge_kobold:
 		_faction: monsters
 		_creature_type: humanoid
 		_default_behavior_state: .wandering_short
-		_loot_table: .default_humanoid
+		_loot_table: default_humanoid
 		_weapon_damage: 0.9
 		_resource_health: 0.8
 	}
@@ -1747,7 +1741,7 @@ map_entity_spawn thalvaron_gorge_kobold:
 		_faction: monsters
 		_creature_type: humanoid
 		_default_behavior_state: .wandering_short
-		_loot_table: .default_humanoid
+		_loot_table: default_humanoid
 		_weapon_damage: 0.9
 		_resource_health: 0.8
 		_resource_mana: 1
@@ -1812,7 +1806,7 @@ map_entity_spawn thalvaron_hollows_dark_elf_c:
 		_faction: monsters
 		_creature_type: undead
 		_default_behavior_state: .wandering_short
-		_loot_table: .default_humanoid
+		_loot_table: default_skeleton
 	}
 
 	entity thalvaron_hollows_skeleton_a: !NPC { _string: "Skeletal Warrior" _sprite: skeleton_warrior_1 _sprite_dead: skeleton_warrior_1_dead }
@@ -1829,7 +1823,7 @@ map_entity_spawn thalvaron_hollows_dark_elf_c:
 		_faction: monsters
 		_creature_type: undead
 		_default_behavior_state: .wandering_short
-		_loot_table: .default_humanoid
+		_loot_table: default_skeleton
 		_resource_mana: 1
 		_abilities: 
 		[ 
@@ -1847,7 +1841,7 @@ map_entity_spawn thalvaron_hollows_dark_elf_c:
 		_level: 19
 		_faction: monsters
 		_creature_type: undead		
-		_loot_table: .default_humanoid
+		_loot_table: default_skeleton
 	}
 
 	entity thalvaron_hollows_skeleton_boss_a: !NPC { _string: "Captain Grimgore" _sprite: skeleton_boss_1 _sprite_dead: skeleton_boss_1_dead _default_behavior_state: .passive }
@@ -1865,7 +1859,8 @@ map_entity_spawn thalvaron_hollows_dark_elf_c:
 				possibility: { loot_group: .pearly_c_1_quest_item_2 requirement self<must_have_active_quest>: { id: .pearly_c_1 } } 
 			}
 			
-			!WORLD_DROPS {}			
+			!WORLD_DROPS {}	
+			!WORLD_DROPS_DEMONS {}						
 		]	
 	}
 
@@ -1876,7 +1871,7 @@ map_entity_spawn thalvaron_hollows_dark_elf_c:
 		_default_behavior_state: .passive
 	}
 
-	entity thalvaron_pearly_demon: !NPC { _string: "Demonic Entity" _sprite: demon_2 _sprite_dead: demon_2_dead _loot_table: .default_beast }
+	entity thalvaron_pearly_demon: !NPC { _string: "Demonic Entity" _sprite: demon_2 _sprite_dead: demon_2_dead _loot_table: default_demon }
 	entity thalvaron_pearly_demon_boss: !NPC { _string: "Shrakolyx" _sprite: demon_1 _sprite_dead: demon_1_dead _loot_table: .demon_boss }
 }
 
@@ -1887,7 +1882,7 @@ map_entity_spawn thalvaron_hollows_dark_elf_c:
 		_faction: dark_elves
 		_creature_type: humanoid
 		_default_behavior_state: .passive
-		_loot_table: .default_humanoid
+		_loot_table: default_humanoid
 	}
 
 	entity thalvaron_hollows_dark_elf_a: !NPC { _string: "Droogor" _sprite: dark_elf_4 _sprite_dead: dark_elf_4_dead }
@@ -1938,7 +1933,7 @@ map_entity_spawn thalvaron_gorge_orc:
 		_level: 18
 		_faction: skullforge_orcs
 		_creature_type: humanoid
-		_loot_table: .default_humanoid
+		_loot_table: default_humanoid
 		_default_behavior_state: .wandering_short
 	}
 

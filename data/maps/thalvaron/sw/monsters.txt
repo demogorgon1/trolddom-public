@@ -11,23 +11,6 @@ npc_behavior_state .passive:
 	behavior: do_nothing
 }
 
-loot_table .default_humanoid: 
-{
-	slots:
-	[	
-		!WORLD_DROPS {}
-		!WORLD_DROPS_CLOTH{}
-	]	
-}
-
-loot_table .default_beast: 
-{
-	slots:
-	[	
-		!WORLD_DROPS {}
-	]	
-}
-
 ##########################################################################################
 # Marshlands monsters
 
@@ -117,7 +100,7 @@ map_entity_spawn thalvaron_swamp_giant:
 		_faction: wildlife
 		_creature_type: beast
 		_default_behavior_state: .wandering_short
-		_loot_table: .default_beast
+		_loot_table: default_crab
 	}
 
 	entity thalvaron_neutral_crab: !NPC { _string: "Marshlands Crab" _sprite: crab_1 _sprite_dead: crab_1_dead _level: 13 }
@@ -136,6 +119,7 @@ map_entity_spawn thalvaron_swamp_giant:
 			}
 			
 			!WORLD_DROPS {}
+			!WORLD_DROPS_NATURE_ELEMENTALS {}
 		]	
 	}
 	
@@ -200,7 +184,7 @@ map_entity_spawn thalvaron_swamp_giant:
 		_level: 12
 		_faction: monsters
 		_creature_type: elemental
-		_loot_table: .default_beast
+		_loot_table: default_nature_elemental
 		_default_behavior_state: .wandering_short
 	}
 
@@ -214,7 +198,7 @@ map_entity_spawn thalvaron_swamp_giant:
 		_level: 13
 		_faction: monsters
 		_creature_type: beast
-		_loot_table: .default_beast
+		_loot_table: default_lizard
 	}
 
 	entity thalvaron_lizard_ambusher: !NPC { _string: "Cave Lizard" _sprite: lizard_1 _sprite_dead: lizard_1_dead }
@@ -232,6 +216,7 @@ map_entity_spawn thalvaron_swamp_giant:
 			}
 			
 			!WORLD_DROPS {}
+			!WORLD_DROPS_OOZES {}
 		]	
 	}	
 
@@ -252,7 +237,7 @@ map_entity_spawn thalvaron_swamp_giant:
 		_level: 14
 		_faction: monsters
 		_creature_type: elemental
-		_loot_table: .default_beast
+		_loot_table: default_earth_elemental
 		_default_behavior_state: .wandering_short
 	}
 
@@ -270,6 +255,7 @@ map_entity_spawn thalvaron_swamp_giant:
 			}
 			
 			!WORLD_DROPS {}
+			!WORLD_DROPS_EARTH_ELEMENTALS {}
 		]	
 	}	
 
@@ -301,6 +287,7 @@ map_entity_spawn thalvaron_swamp_giant:
 			}
 			
 			!WORLD_DROPS {}
+			!WORLD_DROPS_NATURE_ELEMENTALS {}
 		]	
 	}
 	
@@ -391,7 +378,7 @@ map_entity_spawn thalvaron_north_marshlands_kobold_boss:
 		_faction: monsters
 		_creature_type: humanoid
 		_default_behavior_state: .wandering_short
-		_loot_table: .default_humanoid
+		_loot_table: default_humanoid
 		_weapon_damage: 0.9
 		_resource_health: 0.8
 	}
@@ -408,7 +395,7 @@ map_entity_spawn thalvaron_north_marshlands_kobold_boss:
 		_faction: monsters
 		_creature_type: humanoid
 		_default_behavior_state: .wandering_short
-		_loot_table: .default_humanoid
+		_loot_table: default_humanoid
 		_weapon_damage: 0.9
 		_resource_health: 0.8
 		_resource_mana: 1
@@ -535,7 +522,7 @@ route thalvaron_mongo_patrol:
 		_faction: monsters
 		_creature_type: humanoid
 		_default_behavior_state: .mongo
-		_loot_table: .default_humanoid
+		_loot_table: default_humanoid
 		_weapon_damage: 1.2
 		_resource_health: 6
 		_elite: true
@@ -577,7 +564,7 @@ map_entity_spawn thalvaron_marsh_bandit_leader:
 		_faction: monsters
 		_creature_type: humanoid
 		_default_behavior_state: .passive
-		_loot_table: .default_humanoid
+		_loot_table: default_humanoid
 	}
 
 	entity thalvaron_marsh_bandit_a: !NPC { _level: 13 _string: "Marsh Bandit" _sprite: rebel_1 _sprite_dead: rebel_1_dead }
@@ -873,6 +860,7 @@ map_entity_spawn thalvaron_dirt_slitherer:
 			}
 			
 			!WORLD_DROPS {}
+			!WORLD_DROPS_LIZARDS {}
 		]	
 	}
 
@@ -941,6 +929,7 @@ map_entity_spawn thalvaron_dirt_slitherer:
 			}
 			
 			!WORLD_DROPS {}
+			!WORLD_DROPS_LIONS {}
 		]	
 	}
 
@@ -950,7 +939,7 @@ map_entity_spawn thalvaron_dirt_slitherer:
 		_default_behavior_state: .wandering_short
 	}
 
-	entity thalvaron_mountain_lion: !NPC { _level: 14 _string: "Mountain Lion" _sprite: lion_1 _sprite_dead: lion_1_dead _loot_table: .default_beast }
+	entity thalvaron_mountain_lion: !NPC { _level: 14 _string: "Mountain Lion" _sprite: lion_1 _sprite_dead: lion_1_dead _loot_table: default_lion }
 	entity thalvaron_mountain_lion_boss: !NPC { _level: 15 _string: "One-Eyed Moe" _sprite: lion_1 _sprite_dead: lion_1_dead _loot_table: .mountain_lion_boss }
 }
 
@@ -976,6 +965,7 @@ map_entity_spawn thalvaron_dirt_slitherer:
 			
 			!WORLD_DROPS {}
 			!WORLD_DROPS_CLOTH {}
+			!WORLD_DROPS_BIRDS {}			
 		]	
 	}
 
@@ -1006,6 +996,7 @@ map_entity_spawn thalvaron_dirt_slitherer:
 			}
 			
 			!WORLD_DROPS {}
+			!WORLD_DROPS_SPIDERS {}						
 		]	
 	}
 
@@ -1015,7 +1006,7 @@ map_entity_spawn thalvaron_dirt_slitherer:
 		_default_behavior_state: .passive				
 	}
 
-	entity thalvaron_badlands_spider: !NPC { _level: 15 _string: "Cave Lurker" _sprite: spider_2 _sprite_dead: spider_2_dead _loot_table: .default_beast }
+	entity thalvaron_badlands_spider: !NPC { _level: 15 _string: "Cave Lurker" _sprite: spider_2 _sprite_dead: spider_2_dead _loot_table: default_spider }
 	entity thalvaron_badlands_spider_boss: !NPC { _level: 15 _string: "Giant Cave Lurker" _sprite: spider_4 _sprite_dead: spider_4_dead _loot_table: .spider_boss }
 }
 
@@ -1040,6 +1031,7 @@ map_entity_spawn thalvaron_dirt_slitherer:
 			}
 			
 			!WORLD_DROPS {}
+			!WORLD_DROPS_EARTH_ELEMENTALS {}									
 		]	
 	}
 
@@ -1063,7 +1055,7 @@ map_entity_spawn thalvaron_dirt_slitherer:
 		_faction: monsters
 		_creature_type: elemental
 		_default_behavior_state: .wandering_short
-		_loot_table: .default_beast
+		_loot_table: default_nature_elemental
 		_weapon_damage: 1.1
 		_resource_health: 1.1
 	}

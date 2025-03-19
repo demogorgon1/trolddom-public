@@ -1,0 +1,21 @@
+dialogue_screen .anne_joghun:
+{
+	text: 
+	[	
+		"Howdy."
+	]			
+}
+
+entity thalvaron_anne_joghun: !NPC
+{
+	_string: "Anne Joghun"
+	_dialogue_root: $dialogue_root { .anne_joghun: { } }
+	_sprite: woman_30
+	_sprite_dead: woman_30_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

@@ -690,6 +690,45 @@ sprites:
 	sprite icon_unholy_token_1 : { tags: [ icon ] }
 	sprite icon_holy_token_1 : { tags: [ icon ] }
 	sprite icon_vial_1 : { tags: [ icon ] }
+	sprite icon_bone_1 : { tags: [ icon ] }
+	sprite icon_hair_1 : { tags: [ icon ] }
+	sprite icon_hair_2 : { tags: [ icon ] }
+	sprite icon_jaw_1 : { tags: [ icon ] }
+	sprite icon_claw_4 : { tags: [ icon ] }
+	sprite icon_tusk_1 : { tags: [ icon ] }
+
+	cursor: { position: [ 0 608 ] }		
+	sprite icon_crab_claw_1 : { tags: [ icon ] }
+	sprite icon_earth_1 : { tags: [ icon ] }
+	sprite icon_earth_2 : { tags: [ icon ] }
+	sprite icon_insect_leg_1 : { tags: [ icon ] }
+	sprite icon_egg_2 : { tags: [ icon ] }
+	sprite icon_egg_shells_1 : { tags: [ icon ] }
+	sprite icon_brown_leaf_1 : { tags: [ icon ] }
+	sprite icon_feather_2 : { tags: [ icon ] }
+	sprite icon_feather_3 : { tags: [ icon ] }
+	sprite icon_essence_1 : { tags: [ icon ] }
+	sprite icon_root_1 : { tags: [ icon ] }
+	sprite icon_tooth_1 : { tags: [ icon ] }
+	sprite icon_tail_1 : { tags: [ icon ] }
+	sprite icon_slime_1 : { tags: [ icon ] }
+	sprite icon_slimy_skull_1 : { tags: [ icon ] }
+	sprite icon_claw_5 : { tags: [ icon ] }
+
+	cursor: { position: [ 0 624 ] }		
+	sprite icon_hair_3 : { tags: [ icon ] }
+	sprite icon_teeth_2 : { tags: [ icon ] }
+	sprite icon_demon_heart_1 : { tags: [ icon ] }
+	sprite icon_nature_heart_1 : { tags: [ icon ] }
+	sprite icon_rock_1 : { tags: [ icon ] }
+	sprite icon_root_2 : { tags: [ icon ] }
+	sprite icon_insect_leg_2 : { tags: [ icon ] }
+	sprite icon_fangs_1 : { tags: [ icon ] }
+	sprite icon_poison_sack_1 : { tags: [ icon ] }
+	sprite icon_talons_1 : { tags: [ icon ] }
+	sprite icon_beak_1 : { tags: [ icon ] }
+	sprite icon_shield_6 : { tags: [ icon shield ] icon_meta_data: !ICON_ANY{} }
+	sprite icon_hair_4 : { tags: [ icon ] }
 	
 }
 

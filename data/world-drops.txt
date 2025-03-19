@@ -6,7 +6,39 @@ loot_group world_drops_rare: {}
 loot_group world_drops_epic: {}
 
 loot_group skeletons: {}
+loot_group skeletons_uncommon: {}
 loot_group zombies: {}
+loot_group zombies_uncommon: {}
+loot_group wolves: {}
+loot_group wolves_uncommon: {}
+loot_group deer: {}
+loot_group deer_uncommon: {}
+loot_group bears: {}
+loot_group bears_uncommon: {}
+loot_group boars: {}
+loot_group boars_uncommon: {}
+loot_group crabs: {}
+loot_group crabs_uncommon: {}
+loot_group earth_elementals: {}
+loot_group earth_elementals_uncommon: {}
+loot_group owlbears: {}
+loot_group owlbears_uncommon: {}
+loot_group wood_elementals: {}
+loot_group wood_elementals_uncommon: {}
+loot_group lizards: {}
+loot_group lizards_uncommon: {}
+loot_group oozes: {}
+loot_group oozes_uncommon: {}
+loot_group lions: {}
+loot_group lions_uncommon: {}
+loot_group demons: {}
+loot_group demons_uncommon: {}
+loot_group nature_elementals: {}
+loot_group nature_elementals_uncommon: {}
+loot_group spiders: {}
+loot_group spiders_uncommon: {}
+loot_group birds: {}
+loot_group birds_uncommon: {}
 
 !define WORLD_DROPS
 {
@@ -28,12 +60,292 @@ loot_group zombies: {}
 
 !define WORLD_DROPS_SKELETONS 
 {
-	possibility: { weight: 1 }
-	possibility: { weight: 1 loot_group: skeletons creature_types: [ undead ] }
+	possibility: { weight: 10 }
+	possibility: { weight: 10 loot_group: skeletons creature_types: [ undead ] }
+	possibility: { weight: 1 loot_group: skeletons_uncommon creature_types: [ undead ] }
 }
 
 !define WORLD_DROPS_ZOMBIES 
 {
-	possibility: { weight: 1 }
-	possibility: { weight: 1 loot_group: zombies creature_types: [ undead ] }
+	possibility: { weight: 10 }
+	possibility: { weight: 10 loot_group: zombies creature_types: [ undead ] }
+	possibility: { weight: 1 loot_group: zombies_uncommon creature_types: [ undead ] }
+}
+
+!define WORLD_DROPS_WOLVES 
+{
+	possibility: { weight: 10 }
+	possibility: { weight: 10 loot_group: wolves creature_types: [ beast ] }
+	possibility: { weight: 1 loot_group: wolves_uncommon creature_types: [ beast ] }
+}
+
+!define WORLD_DROPS_DEER 
+{
+	possibility: { weight: 10 }
+	possibility: { weight: 10 loot_group: deer creature_types: [ beast ] }
+	possibility: { weight: 1 loot_group: deer_uncommon creature_types: [ beast ] }
+}
+
+
+!define WORLD_DROPS_BEARS 
+{
+	possibility: { weight: 10 }
+	possibility: { weight: 10 loot_group: bears creature_types: [ beast ] }
+	possibility: { weight: 1 loot_group: bears_uncommon creature_types: [ beast ] }
+}
+
+!define WORLD_DROPS_BOARS
+{
+	possibility: { weight: 10 }
+	possibility: { weight: 10 loot_group: boars creature_types: [ beast ] }
+	possibility: { weight: 1 loot_group: boars_uncommon creature_types: [ beast ] }
+}
+
+!define WORLD_DROPS_CRABS
+{
+	possibility: { weight: 10 }
+	possibility: { weight: 10 loot_group: crabs creature_types: [ beast ] }
+	possibility: { weight: 1 loot_group: crabs_uncommon creature_types: [ beast ] }
+}
+
+!define WORLD_DROPS_EARTH_ELEMENTALS
+{
+	possibility: { weight: 10 }
+	possibility: { weight: 10 loot_group: earth_elementals creature_types: [ elemental ] }
+	possibility: { weight: 1 loot_group: earth_elementals_uncommon creature_types: [ elemental ] }
+}
+
+!define WORLD_DROPS_OWLBEARS
+{
+	possibility: { weight: 10 }
+	possibility: { weight: 10 loot_group: owlbears creature_types: [ beast humanoid ] }
+	possibility: { weight: 1 loot_group: owlbears_uncommon creature_types: [ beast humanoid ] }
+}
+
+!define WORLD_DROPS_WOOD_ELEMENTALS
+{
+	possibility: { weight: 10 }
+	possibility: { weight: 10 loot_group: wood_elementals creature_types: [ elemental ] }
+	possibility: { weight: 1 loot_group: wood_elementals_uncommon creature_types: [ elemental ] }
+}
+
+!define WORLD_DROPS_LIZARDS
+{
+	possibility: { weight: 10 }
+	possibility: { weight: 10 loot_group: lizards creature_types: [ beast ] }
+	possibility: { weight: 1 loot_group: lizards_uncommon creature_types: [ beast ] }
+}
+
+!define WORLD_DROPS_OOZES
+{
+	possibility: { weight: 10 }
+	possibility: { weight: 10 loot_group: oozes creature_types: [ elemental ] }
+	possibility: { weight: 1 loot_group: oozes_uncommon creature_types: [ elemental ] }
+}
+
+!define WORLD_DROPS_LIONS
+{
+	possibility: { weight: 10 }
+	possibility: { weight: 10 loot_group: lions creature_types: [ beast ] }
+	possibility: { weight: 1 loot_group: lions_uncommon creature_types: [ beast ] }
+}
+
+!define WORLD_DROPS_DEMONS
+{
+	possibility: { weight: 10 }
+	possibility: { weight: 10 loot_group: demons creature_types: [ demon ] }
+	possibility: { weight: 1 loot_group: demons_uncommon creature_types: [ demon ] }
+}
+
+!define WORLD_DROPS_NATURE_ELEMENTALS
+{
+	possibility: { weight: 10 }
+	possibility: { weight: 10 loot_group: nature_elementals creature_types: [ elemental ] }
+	possibility: { weight: 1 loot_group: nature_elementals_uncommon creature_types: [ elemental ] }
+}
+
+!define WORLD_DROPS_SPIDERS
+{
+	possibility: { weight: 10 }
+	possibility: { weight: 10 loot_group: spiders creature_types: [ beast ] }
+	possibility: { weight: 1 loot_group: spiders_uncommon creature_types: [ beast ] }
+}
+
+!define WORLD_DROPS_BIRDS
+{
+	possibility: { weight: 10 }
+	possibility: { weight: 10 loot_group: birds creature_types: [ beast humanoid ] }
+	possibility: { weight: 1 loot_group: birds_uncommon creature_types: [ beast humanoid ] }
+}
+
+loot_table default_humanoid: 
+{
+	slots:
+	[	
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+loot_table default_skeleton:
+{
+	slots:
+	[	
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+		!WORLD_DROPS_SKELETONS{}
+	]		
+}
+
+loot_table default_zombie:
+{
+	slots:
+	[	
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+		!WORLD_DROPS_ZOMBIES{}
+	]		
+}
+
+loot_table default_beast: 
+{
+	slots:
+	[	
+		!WORLD_DROPS {}
+	]	
+}
+
+loot_table default_wolf: 
+{
+	slots:
+	[	
+		!WORLD_DROPS {}
+		!WORLD_DROPS_WOLVES{}
+	]	
+}
+
+loot_table default_deer: 
+{
+	slots:
+	[	
+		!WORLD_DROPS {}
+		!WORLD_DROPS_DEER{}
+	]	
+}
+
+loot_table default_bear: 
+{
+	slots:
+	[	
+		!WORLD_DROPS {}
+		!WORLD_DROPS_BEARS{}
+	]	
+}
+
+loot_table default_boar: 
+{
+	slots:
+	[	
+		!WORLD_DROPS {}
+		!WORLD_DROPS_BOARS{}
+	]	
+}
+
+loot_table default_crab: 
+{
+	slots:
+	[	
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CRABS{}
+	]	
+}
+
+loot_table default_earth_elemental:
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+		!WORLD_DROPS_EARTH_ELEMENTALS{}
+	]
+}
+
+loot_table default_owlbear:
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+		!WORLD_DROPS_OWLBEARS{}
+	]
+}
+
+loot_table default_wood_elemental:
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+		!WORLD_DROPS_WOOD_ELEMENTALS{}
+	]
+}
+
+loot_table default_lizard:
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+		!WORLD_DROPS_LIZARDS{}
+	]
+}
+
+loot_table default_ooze:
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+		!WORLD_DROPS_OOZES{}
+	]
+}
+
+loot_table default_lion:
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+		!WORLD_DROPS_LIONS{}
+	]
+}
+
+loot_table default_demon:
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+		!WORLD_DROPS_DEMONS{}
+	]
+}
+
+loot_table default_nature_elemental:
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+		!WORLD_DROPS_NATURE_ELEMENTALS{}
+	]
+}
+
+loot_table default_spider:
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+		!WORLD_DROPS_SPIDERS{}
+	]
+}
+
+loot_table default_bird:
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+		!WORLD_DROPS_BIRDS{}
+	]
 }

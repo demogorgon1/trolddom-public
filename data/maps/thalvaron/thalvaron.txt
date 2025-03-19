@@ -183,6 +183,8 @@ map_entity_spawn thalvaron_fisherman_city: { entity thalvaron_fisherman_city: { 
 map_entity_spawn thalvaron_lisa_storkhouse: { entity thalvaron_lisa_storkhouse: { init_state: default } }
 map_entity_spawn thalvaron_igor_skrald: { entity thalvaron_igor_skrald: { init_state: default } }
 map_entity_spawn thalvaron_harbor_vendor: { entity thalvaron_harbor_vendor: { init_state: default } }
+map_entity_spawn thalvaron_kristina_newman: { entity thalvaron_kristina_newman: { init_state: default } }
+map_entity_spawn thalvaron_anne_joghun: { entity thalvaron_anne_joghun: { init_state: default } }
 
 # N
 map_entity_spawn thalvaron_ranger_fremalt: { entity thalvaron_ranger_fremalt: { init_state: default } }
@@ -461,6 +463,8 @@ map_palette .stuff:
 	entity_spawn thalvaron_lisa_storkhouse: [ 130 204 99 ]
 	entity_spawn thalvaron_igor_skrald: [ 230 204 99 ]
 	entity_spawn thalvaron_harbor_vendor: [ 126 39 81 ]
+	entity_spawn thalvaron_kristina_newman: [ 234 99 48 ]
+	entity_spawn thalvaron_anne_joghun: [ 234 99 148 ]
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				
