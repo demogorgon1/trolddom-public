@@ -33,7 +33,7 @@ entity valoris_insurgency_captain_jorgenson: !NPC
 	_faction: rebels 
 	_sprite: rebel_6 
 	_sprite_dead: rebel_6_dead 
-	_weapon_damage: 2.5
+	_weapon_damage: 2.2
 	_resource_health: 5
 	_loot_table: .captain_jorgenson
 	_creature_type: humanoid

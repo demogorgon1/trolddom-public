@@ -33,8 +33,8 @@ entity valoris_insurgency_erdox_the_soulsplitter: !NPC
 	_faction: dark_elves 
 	_sprite: dark_elf_6
 	_sprite_dead: dark_elf_6_dead 
-	_weapon_damage: 1
-	_resource_health: 1
+	_weapon_damage: 1.7
+	_resource_health: 5.8
 	_loot_table: .erdox_the_soulsplitter
 	_creature_type: humanoid
 	_encounter: .erdox_the_soulsplitter
@@ -47,19 +47,48 @@ entity valoris_insurgency_erdox_the_soulsplitter: !NPC
 	_abilities: 
 	[
 		{
+			id: npc_curse
+			target: random_player
+		}	
+		
+		{
+			id: $ability
+			{
+				string: "Frenzy"
+				cast_time: 10
+				cooldowns: [ global ]
+				cooldown: $cooldown { duration: 200	}
+				flags: [ target_self ]
+				icon: icon_stuff 
+				direct_effect apply_aura:
+				{	
+					aura: $aura [ string icon ]
+					{
+						type: buff
+						duration: 60
+						flags: [ unique magic ]
+						stat_modifiers: { attack_haste: { add: 50 } }
+						color_effect: [ 255 0 0 255 ]
+					}
+				}			
+			}			
+			target: self			
+		}
+	
+		{
 			id: npc_attack
 		}
 	]	
 	
 	_in_combat_barks:
 	[
-		{ type: say text: "Puny low-lifes, don't interfere with our plans!" flags: [ no_chat_bubble ] }
+		{ type: yell text: "Puny low-lifes, don't interfere with our plans!" flags: [ no_chat_bubble ] }
 	]			
 	
-	#_dead_barks:
-	#[
-	#	{ type: say text: "" flags: [ no_chat_bubble ] }
-	#]	
+	_dead_barks:
+	[
+		{ type: say text: "That isn't supposed to be happening..." flags: [ no_chat_bubble ] }
+	]	
 }
 
 map_trigger .erdox_the_soulsplitter_killed:

@@ -115,10 +115,10 @@ ability npc_fireball:
 	
 	direct_effect apply_aura:
 	{
-		aura: $aura 
+		aura: $aura [ string icon ]
 		{
-			string: "Fireball"
-			icon: icon_firebolt
+			#string: "Fireball"
+			#icon: icon_firebolt
 			description: "Burning."
 			type: debuff
 			duration: based_on_effects
@@ -129,10 +129,10 @@ ability npc_fireball:
 				update_interval: 20
 				update_count: 6
 					
-				ability: $ability
+				ability: $ability [ string icon ]
 				{
-					string: "Fireball" 
-					icon: icon_firebolt
+					# string: "Fireball" 
+					# icon: icon_firebolt
 					states: [ default in_combat ]
 					flags: [ always_in_range always_in_line_of_sight ]
 
@@ -848,28 +848,13 @@ particle_system npc_arcane_explosion:
 	}
 }
 
-cooldown npc_sunder:
-{
-	duration: 80
-}
-
-aura npc_sunder:
-{
-	string: "Sunder"
-	description: "Reduced armor."
-	type: debuff
-	icon: icon_coarse_hair
-	duration: 150
-	flags: [ unique ]
-	stat_modifiers: { armor: { add_percent: -30 } }
-}
-
 ability npc_sunder:
 {
 	string: "Sunder"
 	range: 1
 	cast_time: 15
-	cooldowns: [ global npc_sunder ]
+	cooldowns: [ global ]
+	cooldown: $cooldown { duration: 80 }
 	flags: [ offensive target_other target_hostile can_miss ]
 	states: [ in_combat ]
 	icon: icon_coarse_hair
@@ -877,7 +862,14 @@ ability npc_sunder:
 
 	direct_effect apply_aura:
 	{
-		aura: npc_sunder
+		aura: $aura @<ability> [ string icon ] 
+		{
+			description: "Reduced armor."
+			type: debuff
+			duration: 150
+			flags: [ unique ]
+			stat_modifiers: { armor: { add_percent: -30 } }
+		}		
 	}
 	
 	direct_effect damage:
@@ -888,28 +880,13 @@ ability npc_sunder:
 	}	
 }
 
-cooldown npc_mortal_strike_non_instant:
-{
-	duration: 100
-}
-
-aura npc_mortal_strike_non_instant:
-{
-	string: "Mortal Strike"
-	description: "Healing received reduced by 50%."
-	type: debuff
-	icon: icon_mortal_strike
-	duration: 150
-	flags: [ unique ]
-	aura_effect heal_input_modifier: { multiplier: 0.5 }
-}
-
 ability npc_mortal_strike_non_instant:
 {
 	string: "Mortal Strike"
 	range: 1
 	cast_time: 15
-	cooldowns: [ global npc_mortal_strike_non_instant ]
+	cooldowns: [ global ]
+	cooldown: $cooldown { duration: 100 }
 	flags: [ offensive target_other target_hostile can_miss ]
 	states: [ in_combat ]
 	icon: icon_mortal_strike
@@ -918,7 +895,14 @@ ability npc_mortal_strike_non_instant:
 
 	direct_effect apply_aura:
 	{
-		aura: npc_mortal_strike_non_instant
+		aura: $aura @<ability> [ string icon ]
+		{
+			description: "Healing received reduced by 50%."
+			type: debuff
+			duration: 150
+			flags: [ unique ]
+			aura_effect heal_input_modifier: { multiplier: 0.5 }
+		}		
 	}
 	
 	direct_effect damage:
@@ -927,4 +911,59 @@ ability npc_mortal_strike_non_instant:
 		damage_type: physical
 		function: { expression: a_mul_x x: weapon a: 1.2 }
 	}	
+}
+
+ability npc_charge:
+{
+	string: "Charge"
+	min_range: 3
+	range: 8
+	cooldowns: [ global ]
+	cooldown: $cooldown { duration: 120 }		
+	flags: [ target_other target_hostile trigger_move_cooldown ]
+	states: [ default in_combat ]
+	icon: icon_charge
+	direct_effect move:
+	{
+		destination: target_adjacent
+		move_flags: [ walkable_path_required ]
+		max_steps: 12
+		trigger_ability_on_resolve<target>: $ability [ string icon ]
+		{
+			flags: [ target_hostile ]
+			states: [ default in_combat ]
+			direct_effect apply_aura:
+			{	
+				threat: 10			
+				aura: $aura [ string icon ]
+				{
+					description: "Stunned."
+					type: debuff
+					duration: 30	
+					aura_effect stun: { }
+				}				
+			}
+		}
+	}
+}
+
+ability npc_whirlwind:
+{
+	string: "Whirlwind"
+	cooldowns: [ global ]
+	cooldown: $cooldown { duration: 80 }	
+	flags: [ target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+	states: [ default in_combat ]
+	icon: icon_whirlwind
+	delay: 3
+	aoe_radius: 1
+	aoe_cap: 3
+	aoe_requirement target<must_not_be_in_state>: { id: dead }
+	source_particle_system: whirlwind	
+	
+	direct_effect damage:
+	{
+		damage_type: physical
+		function: { expression: x x: weapon }													
+	}
 }

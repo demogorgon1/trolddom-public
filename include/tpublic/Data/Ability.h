@@ -598,6 +598,8 @@ namespace tpublic
 							m_delay = aMember->GetInt32();
 						else if (aMember->m_name == "cooldowns")
 							aMember->GetIdArray(DataType::ID_COOLDOWN, m_cooldowns);
+						else if(aMember->m_name == "cooldown")
+							m_cooldowns.push_back(aMember->GetId(DataType::ID_COOLDOWN));
 						else if(aMember->m_name == "trigger_only_cooldown")
 							m_triggerOnlyCooldownId = aMember->GetId(DataType::ID_COOLDOWN);
 						else if (aMember->m_name == "cast_time")

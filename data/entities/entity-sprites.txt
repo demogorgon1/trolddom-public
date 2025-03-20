@@ -709,6 +709,13 @@ sprites:
 	sprite rebel_10_dead: { }
 	sprite rebel_11_dead: { }
 	sprite rebel_12_dead: { }
+	
+	cursor: { position: [ 0 608 ] }
+	sprite rebel_13: { dead: rebel_13_dead }
+	
+	cursor: { position: [ 0 624 ] }
+	sprite rebel_13_dead: { }
+	
 }
 
 sprites:

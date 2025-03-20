@@ -27,24 +27,36 @@ map_entity_spawn .rebel_melee:
 	entity .rebel_melee_19_b: { level: 19 spawn_condition: { if_not: .rufus_the_strong_killed } } 
 	entity .rebel_melee_19_c: { level: 19 spawn_condition: { if_not: .rufus_the_strong_killed } } 
 	entity .rebel_melee_19_d: { level: 19 spawn_condition: { if_not: .rufus_the_strong_killed } } 
-	
+
+	entity .rebel_melee_20_a: { level: 20 spawn_condition: { if_not: .erdox_the_soulsplitter_killed } } 
+	entity .rebel_melee_20_b: { level: 20 spawn_condition: { if_not: .erdox_the_soulsplitter_killed } } 
+	entity .rebel_melee_20_c: { level: 20 spawn_condition: { if_not: .erdox_the_soulsplitter_killed } } 
+	entity .rebel_melee_20_d: { level: 20 spawn_condition: { if_not: .erdox_the_soulsplitter_killed } } 
+
 	spawn_timer: !TRASH_RESPAWN_TIMER{}
 }
 
 map_entity_spawn .rebel_tank: 
 { 
-	entity .rebel_tank_18: { level: 18 spawn_condition: { if_not: .captain_jorgenson_killed } } 
-	
+	entity .rebel_tank_18: { level: 18 spawn_condition: { if_not: .captain_jorgenson_killed } } 	
 	entity .rebel_tank_19: { level: 19 spawn_condition: { if_not: .rufus_the_strong_killed } } 
+	entity .rebel_tank_20: { level: 20 spawn_condition: { if_not: .erdox_the_soulsplitter_killed } } 
 	
 	spawn_timer: !TRASH_RESPAWN_TIMER{}
 }
 
 map_entity_spawn .rebel_healer: 
 { 
-	entity .rebel_healer_18: { level: 18 spawn_condition: { if_not: .captain_jorgenson_killed } } 
-	
+	entity .rebel_healer_18: { level: 18 spawn_condition: { if_not: .captain_jorgenson_killed } } 	
 	entity .rebel_healer_19: { level: 19 spawn_condition: { if_not: .rufus_the_strong_killed } } 
+	entity .rebel_healer_20: { level: 20 spawn_condition: { if_not: .erdox_the_soulsplitter_killed } } 
+	
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+map_entity_spawn .rebel_brute: 
+{ 
+	entity .rebel_brute_20: { level: 20 spawn_condition: { if_not: .erdox_the_soulsplitter_killed } } 
 	
 	spawn_timer: !TRASH_RESPAWN_TIMER{}
 }
@@ -75,15 +87,20 @@ loot_table .humanoid:
 		]
 	}
 
-	entity .rebel_melee_18_a: !NPC { _string: "Rebel Fighter" _sprite: rebel_11 _sprite_dead: rebel_11_dead _level: 18  }
-	entity .rebel_melee_18_b: !NPC { _string: "Rebel Fighter" _sprite: rebel_1 _sprite_dead: rebel_1_dead _level: 18  }
-	entity .rebel_melee_18_c: !NPC { _string: "Rebel Fighter" _sprite: rebel_2 _sprite_dead: rebel_2_dead _level: 18  }
-	entity .rebel_melee_18_d: !NPC { _string: "Rebel Fighter" _sprite: rebel_3 _sprite_dead: rebel_3_dead _level: 18  }
+	entity .rebel_melee_18_a: !NPC { _string: "Rebel Fighter" _sprite: rebel_11 _sprite_dead: rebel_11_dead _level: 18 }
+	entity .rebel_melee_18_b: !NPC { _string: "Rebel Fighter" _sprite: rebel_1 _sprite_dead: rebel_1_dead _level: 18 }
+	entity .rebel_melee_18_c: !NPC { _string: "Rebel Fighter" _sprite: rebel_2 _sprite_dead: rebel_2_dead _level: 18 }
+	entity .rebel_melee_18_d: !NPC { _string: "Rebel Fighter" _sprite: rebel_3 _sprite_dead: rebel_3_dead _level: 18 }
 	
-	entity .rebel_melee_19_a: !NPC { _string: "Rebel Fighter" _sprite: rebel_11 _sprite_dead: rebel_11_dead _level: 19  }
-	entity .rebel_melee_19_b: !NPC { _string: "Rebel Fighter" _sprite: rebel_1 _sprite_dead: rebel_1_dead _level: 19  }
-	entity .rebel_melee_19_c: !NPC { _string: "Rebel Fighter" _sprite: rebel_2 _sprite_dead: rebel_2_dead _level: 19  }
+	entity .rebel_melee_19_a: !NPC { _string: "Rebel Fighter" _sprite: rebel_11 _sprite_dead: rebel_11_dead _level: 19 }
+	entity .rebel_melee_19_b: !NPC { _string: "Rebel Fighter" _sprite: rebel_1 _sprite_dead: rebel_1_dead _level: 19 }
+	entity .rebel_melee_19_c: !NPC { _string: "Rebel Fighter" _sprite: rebel_2 _sprite_dead: rebel_2_dead _level: 19 }
 	entity .rebel_melee_19_d: !NPC { _string: "Rebel Fighter" _sprite: rebel_3 _sprite_dead: rebel_3_dead _level: 19 }	
+	
+	entity .rebel_melee_20_a: !NPC { _string: "Rebel Fighter" _sprite: rebel_11 _sprite_dead: rebel_11_dead _level: 20 }
+	entity .rebel_melee_20_b: !NPC { _string: "Rebel Fighter" _sprite: rebel_1 _sprite_dead: rebel_1_dead _level: 20 }
+	entity .rebel_melee_20_c: !NPC { _string: "Rebel Fighter" _sprite: rebel_2 _sprite_dead: rebel_2_dead _level: 20 }
+	entity .rebel_melee_20_d: !NPC { _string: "Rebel Fighter" _sprite: rebel_3 _sprite_dead: rebel_3_dead _level: 20 }		
 }
 
 # Tank rebels
@@ -103,9 +120,9 @@ loot_table .humanoid:
 		]
 	}
 
-	entity .rebel_tank_18: !NPC { _string: "Rebel Enforcer" _sprite: rebel_10 _sprite_dead: rebel_10_dead _level: 18  }
-	
+	entity .rebel_tank_18: !NPC { _string: "Rebel Enforcer" _sprite: rebel_10 _sprite_dead: rebel_10_dead _level: 18  }	
 	entity .rebel_tank_19: !NPC { _string: "Rebel Enforcer" _sprite: rebel_10 _sprite_dead: rebel_10_dead _level: 19  }
+	entity .rebel_tank_20: !NPC { _string: "Rebel Enforcer" _sprite: rebel_10 _sprite_dead: rebel_10_dead _level: 20  }
 }
 
 # Healer rebels
@@ -127,7 +144,25 @@ loot_table .humanoid:
 	}
 
 	entity .rebel_healer_18: !NPC { _string: "Rebel Medic" _sprite: rebel_12 _sprite_dead: rebel_12_dead _level: 18  }
-	
 	entity .rebel_healer_19: !NPC { _string: "Rebel Medic" _sprite: rebel_12 _sprite_dead: rebel_12_dead _level: 19  }
-	
+	entity .rebel_healer_20: !NPC { _string: "Rebel Medic" _sprite: rebel_12 _sprite_dead: rebel_12_dead _level: 20  }
+}
+
+# Brute rebel
+{
+	${
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .passive
+		_loot_table: .humanoid 
+		_weapon_damage: 2.1
+		_resource_health: 3.1
+		_elite: true
+		_abilities: 
+		[ 
+			{ id: npc_attack } 
+		]
+	}
+
+	entity .rebel_brute_20: !NPC { _string: "Rebel Brute" _sprite: rebel_13 _sprite_dead: rebel_13_dead _level: 20  }	
 }

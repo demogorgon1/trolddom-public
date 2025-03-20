@@ -98,6 +98,50 @@ namespace tpublic
 			}
 		}
 
+		const SourceNode*
+		_GetStackSourceNodeByName(
+			const std::vector<const SourceNode*>&	aStack,
+			const char*								aName)
+		{
+			for(size_t i = 0; i < aStack.size(); i++)
+			{
+				const SourceNode* child = aStack[aStack.size() - i - 1]->TryGetChildByName(aName);
+				if(child != NULL)
+					return child;
+			}
+			return NULL;
+		}
+
+		bool
+		_IsInsideObject(
+			const SourceNode*						aRoot,
+			const std::vector<const SourceNode*>&	aStack)
+		{
+			for(const SourceNode* t : aStack)
+			{
+				if(t != aRoot && !t->IsAnonymousObject())
+					return true;;
+			}
+			return false;
+		}
+
+		const char*
+		_ResolveTag(
+			const std::vector<const SourceNode*>&	aStack,
+			const char*								aTag)
+		{
+			const char* tagName = NULL;
+
+			for (size_t i = 0; i < aStack.size() && tagName == NULL; i++)
+			{
+				const SourceNode* t = aStack[aStack.size() - i - 1];
+				if (t->m_tag == aTag)
+					tagName = t->m_name.c_str();
+			}
+
+			return tagName;
+		}
+
 	}
 
 	//------------------------------------------------------------------------------
@@ -122,25 +166,27 @@ namespace tpublic
 	}
 
 	void				
-	Parser::ResolveMacrosAndReferences()
+	Parser::Resolve()
 	{	
-		_ResolveMacrosAndReferences(&m_root);
-	}
+		// Substitute/insert macros and resolve references
+		{
+			_ResolveMacrosAndReferences(&m_root);
+		}
 
-	void				
-	Parser::ResolveContextTags()
-	{
-		std::vector<const SourceNode*> stack;
+		// Resolve <name-of-item-on-stack> identifiers 
+		{
+			std::vector<const SourceNode*> stack;
 
-		_ResolveContextTags(stack, &m_root);
-	}
+			_ResolveContextTags(stack, &m_root);
+		}
 
-	void				
-	Parser::ResolveEmbeddedDataObjects()
-	{
-		std::vector<std::string> objectNameStack;
+		// Resolve inline/embedded data objects
+		{
+			std::vector<std::string> objectNameStack;
+			std::vector<const SourceNode*> stack;
 
-		_ResolveEmbeddedDataObjects(objectNameStack, &m_root, &m_root);
+			_ResolveEmbeddedDataObjects(stack, objectNameStack, &m_root, &m_root);
+		}
 	}
 
 	void	
@@ -305,6 +351,25 @@ namespace tpublic
 							aTokenizer.ConsumeToken(")");
 						}
 
+						std::string name;
+
+						if (aTokenizer.IsToken("@"))
+						{
+							aTokenizer.Proceed();
+
+							if (aTokenizer.IsToken("<"))
+							{
+								aTokenizer.Proceed();
+								name = "!"; // Indicate it's a tag that needs to be resolved
+								name += aTokenizer.ConsumeAnyIdentifier();
+								aTokenizer.ConsumeToken(">");
+							}
+							else
+							{
+								name = aTokenizer.ConsumeAnyIdentifier();
+							}
+						}
+
 						std::unique_ptr<SourceNode> importArray;
 
 						if(aTokenizer.IsToken("["))
@@ -315,6 +380,8 @@ namespace tpublic
 						}
 
 						_ParseValue(aNamespace, aTokenizer, embeddedObject.get());
+
+						embeddedObject->m_name = std::move(name);
 
 						node->m_type = SourceNode::TYPE_EMBEDDED_DATA_OBJECT;
 						node->m_children.push_back(std::move(embeddedObject));
@@ -686,10 +753,13 @@ namespace tpublic
 
 	void					
 	Parser::_ResolveEmbeddedDataObjects(
+		std::vector<const SourceNode*>& aSourceNodeStack,
 		std::vector<std::string>&		aObjectNameStack,
 		SourceNode*						aNamespace,
 		SourceNode*						aNode)
 	{
+		aSourceNodeStack.push_back(aNode);
+
 		bool needObjectNameStackPop = false;
 
 		std::string t;
@@ -720,25 +790,6 @@ namespace tpublic
 			{
 				assert(child->m_children.size() == 1 || child->m_children.size() == 2);
 
-				std::string embeddedObjectName;
-				for(const std::string& objectName : aObjectNameStack)
-					embeddedObjectName += objectName;
-
-				if (!child->m_tag.empty())
-				{
-					embeddedObjectName += "_";
-					embeddedObjectName += child->m_tag;
-				}
-
-				if (!child->m_name.empty())
-				{
-					embeddedObjectName += "_";
-					embeddedObjectName += child->m_name;
-				}
-
-				child->m_value = embeddedObjectName;
-				child->m_type = SourceNode::TYPE_IDENTIFIER;
-
 				std::unique_ptr<SourceNode> dataObject = std::move(child->m_children[0]);
 
 				if(child->m_children.size() == 2)
@@ -747,7 +798,7 @@ namespace tpublic
 					for(const std::unique_ptr<SourceNode>& importIdentifier : child->m_children[1]->m_children)
 					{
 						const char* identifier = importIdentifier->GetIdentifier();
-						const SourceNode* toCopy = aNode->TryGetChildByName(identifier);
+						const SourceNode* toCopy = _GetStackSourceNodeByName(aSourceNodeStack, identifier);
 						TP_VERIFY(toCopy != NULL, importIdentifier->m_debugInfo, "'%s' is not a valid parent child.", identifier);
 
 						std::unique_ptr<SourceNode> copyObject = std::make_unique<SourceNode>(m_root.m_sourceContext, toCopy->m_debugInfo, toCopy->m_realPath.c_str(), toCopy->m_path.c_str(), toCopy->m_pathWithFileName.c_str());
@@ -760,20 +811,56 @@ namespace tpublic
 
 				child->m_children.clear();
 
-				dataObject->m_name = embeddedObjectName;
+				if(dataObject->m_name.empty())
+				{
+					std::string embeddedObjectName;
+					for (const std::string& objectName : aObjectNameStack)
+						embeddedObjectName += objectName;
+
+					if (!child->m_tag.empty())
+					{
+						embeddedObjectName += "_";
+						embeddedObjectName += child->m_tag;
+					}
+
+					if (!child->m_name.empty())
+					{
+						embeddedObjectName += "_";
+						embeddedObjectName += child->m_name;
+					}
+					dataObject->m_name = std::move(embeddedObjectName);
+				}
+				else if(dataObject->m_name[0] == '!')
+				{
+					const char* tag = dataObject->m_name.c_str() + 1;
+					const char* tagName = _ResolveTag(aSourceNodeStack, tag);
+					TP_VERIFY(tagName != NULL, child->m_debugInfo, "Unable to resolve tag '%s'.", tag);
+					dataObject->m_name = tagName;
+				}
+
+				child->m_value = dataObject->m_name;
+				child->m_type = SourceNode::TYPE_IDENTIFIER;
+
 				aNamespace->m_children.push_back(std::move(dataObject));
 			}
 		}
 
+		bool isInsideObject = _IsInsideObject(&m_root, aSourceNodeStack);
+
 		for (std::unique_ptr<SourceNode>& child : aNode->m_children)
 		{
-			SourceNode* nextNamespace = child->IsAnonymousObject() ? child.get() : aNamespace;
+			SourceNode* nextNamespace = aNamespace; 
+			
+			if(child->IsAnonymousObject() && !isInsideObject)
+				nextNamespace = child.get();
 				
-			_ResolveEmbeddedDataObjects(aObjectNameStack, nextNamespace, child.get());
+			_ResolveEmbeddedDataObjects(aSourceNodeStack, aObjectNameStack, nextNamespace, child.get());
 		}
 
 		if(needObjectNameStackPop)
 			aObjectNameStack.pop_back();
+
+		aSourceNodeStack.pop_back();
 	}
 
 	void					
@@ -787,15 +874,7 @@ namespace tpublic
 		{			
 			if(child->m_type == SourceNode::TYPE_CONTEXT_TAG)
 			{
-				const char* tagName = NULL;
-
-				for(size_t i = 0; i < aStack.size() && tagName == NULL; i++)
-				{
-					const SourceNode* t = aStack[aStack.size() - i - 1];
-					if(t->m_tag == child->m_value)
-						tagName = t->m_name.c_str();
-				}
-
+				const char* tagName = _ResolveTag(aStack, child->m_value.c_str());
 				TP_VERIFY(tagName != NULL, child->m_debugInfo, "Unable to resolve tag '%s'.", child->m_value.c_str());
 
 				child->m_type = SourceNode::TYPE_IDENTIFIER;

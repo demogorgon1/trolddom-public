@@ -21,9 +21,7 @@ namespace tpublic
 
 		void				Parse(
 								Tokenizer&			aTokenizer);
-		void				ResolveMacrosAndReferences();
-		void				ResolveContextTags();
-		void				ResolveEmbeddedDataObjects();
+		void				Resolve();
 		void				DebugPrint() const;
 
 		// Data access
@@ -92,6 +90,7 @@ namespace tpublic
 		void					_InnerResolveMacrosAndReferences(
 									SourceNode*						aNode);
 		void					_ResolveEmbeddedDataObjects(
+									std::vector<const SourceNode*>& aSourceNodeStack,
 									std::vector<std::string>&		aObjectNameStack,
 									SourceNode*						aNamespace,
 									SourceNode*						aNode);

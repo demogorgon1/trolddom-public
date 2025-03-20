@@ -57,6 +57,7 @@ map_palette .stuff:
 	entity_spawn .rebel_melee: [ 39 48 103 ]
 	entity_spawn .rebel_tank: [ 39 48 203 ]
 	entity_spawn .rebel_healer: [ 139 48 203 ]
+	entity_spawn .rebel_brute: [ 49 88 124 ]
 }
 
 map_palette .levels:

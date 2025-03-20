@@ -74,9 +74,7 @@ namespace tpublic
 
 				try
 				{
-					m_parser.ResolveMacrosAndReferences();
-					m_parser.ResolveContextTags();
-					m_parser.ResolveEmbeddedDataObjects();
+					m_parser.Resolve();
 				}
 				catch (BuildError& e)
 				{

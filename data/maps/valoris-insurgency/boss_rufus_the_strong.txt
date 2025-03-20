@@ -33,8 +33,8 @@ entity valoris_insurgency_rufus_the_strong: !NPC
 	_faction: rebels 
 	_sprite: rebel_9
 	_sprite_dead: rebel_9_dead 
-	_weapon_damage: 1
-	_resource_health: 1
+	_weapon_damage: 1.5
+	_resource_health: 5
 	_loot_table: .rufus_the_strong
 	_creature_type: humanoid
 	_encounter: .rufus_the_strong
@@ -47,6 +47,17 @@ entity valoris_insurgency_rufus_the_strong: !NPC
 	_abilities: 
 	[
 		{
+			id: npc_charge
+			requirement self<must_have_less_health_than>: 90
+			target: random_player
+		}
+	
+		{
+			id: npc_whirlwind
+			requirement self<must_have_less_health_than>: 80
+		}
+	
+		{
 			id: npc_attack
 		}
 	]	
@@ -56,10 +67,10 @@ entity valoris_insurgency_rufus_the_strong: !NPC
 		{ type: say text: "Haha! I'll crush your little skulls!" flags: [ no_chat_bubble ] }
 	]			
 	
-	#_dead_barks:
-	#[
-	#	{ type: say text: "" flags: [ no_chat_bubble ] }
-	#]	
+	_dead_barks:
+	[
+		{ type: say text: "Ouch!" flags: [ no_chat_bubble ] }
+	]	
 }
 
 map_trigger .rufus_the_strong_killed:

@@ -33,8 +33,8 @@ entity valoris_insurgency_wernox: !NPC
 	_faction: rebels 
 	_sprite: rebel_8
 	_sprite_dead: rebel_8_dead 
-	_weapon_damage: 1
-	_resource_health: 1
+	_weapon_damage: 1.3
+	_resource_health: 5
 	_loot_table: .wernox
 	_creature_type: humanoid
 	_encounter: .wernox
