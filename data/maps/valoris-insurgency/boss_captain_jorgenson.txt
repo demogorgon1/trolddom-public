@@ -13,6 +13,75 @@ loot_table .captain_jorgenson:
 	]	
 }
 
+{
+	${
+		_rarity: rare
+		_level: 18
+		_loot_group: .captain_jorgenson
+	}
+	
+	item valoris_insurgency_1: !BOSS_DROP_WRISTS
+	{
+		_string: "Ember Veil Armguards"
+		_type: armor_mail
+		_icon: icon_bracers_1
+		_strength: 2
+		_dexterity: 3
+		_constitution: 1
+	}
+	
+	item valoris_insurgency_2: !BOSS_DROP_HANDS
+	{
+		_string: "Lost Gloves of Wernox"
+		_type: armor_cloth
+		_icon: icon_gloves_5
+		_spell_damage: 3
+		_wisdom: 2
+		_constitution: 1
+	}
+	
+	item valoris_insurgency_3: !BOSS_DROP_LEGS
+	{
+		_string: "Armored Greaves"
+		_type: armor_plate
+		_icon: icon_mail_legs_1
+		_constitution: 3
+		_strength: 1
+		_budget_bias: -10
+		_dodge: 1
+	}
+	
+	item valoris_insurgency_4: !BOSS_DROP_1H_SWORD
+	{
+		_string: "Fierce Scimitar"
+		_icon: icon_knife_4
+		_constitution: 1
+		_strength: 2
+		_budget_bias: -10
+		_phys_crit: 1
+	}
+	
+	item valoris_insurgency_5: !BOSS_DROP_1H_SWORD
+	{
+		_string: "Conjurer's Short Sword"
+		_icon: icon_sword_10
+		_constitution: 1
+		_budget_bias: -10
+		_spell_crit: 1
+		_spell_damage: 2
+	}
+	
+	item valoris_insurgency_6: !BOSS_DROP_SHIELD
+	{
+		_string: "Captain's Bulwark"
+		_icon: icon_shield_2
+		_strength: 1
+		_constitution: 2
+		_budget_bias: -5		
+		_block: 1
+	}
+}
+
 ############################################################
 # Boss
 

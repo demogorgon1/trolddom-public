@@ -205,3 +205,68 @@
 !define QUEST_REWARD_CROSSBOW { !QUEST_REWARD equipment_slots: [ ranged ] type: ranged_crossbow }
 !define QUEST_REWARD_OFFHAND { !QUEST_REWARD equipment_slots: [ off_hand ] }
 !define QUEST_REWARD_TRINKET { !QUEST_REWARD equipment_slots: [ trinket_1 trinket_2 ] }
+
+#####################################################
+# Boss drop item macros
+
+!define BOSS_DROP
+{
+	string: @_string
+	binds: when_picked_up
+	required_level: @_level
+	icon: @_icon
+	
+	<exists _type> type: @_type
+	<exists _item_aura> aura: @_item_aura
+	<exists _loot_group> loot_groups: [ @_loot_group ]
+	<exists _budget_bias> budget_bias: @_budget_bias
+
+	<exists _rarity> rarity: @_rarity
+	<!exists _rarity> rarity: uncommon		
+	
+	<exists _dexterity> stat_weight dexterity: @_dexterity
+	<exists _strength> stat_weight strength: @_strength
+	<exists _constitution> stat_weight constitution: @_constitution
+	<exists _spirit> stat_weight spirit: @_spirit
+	<exists _wisdom> stat_weight wisdom: @_wisdom
+	<exists _spell_damage> stat_weight spell_damage: @_spell_damage
+	<exists _healing> stat_weight healing: @_healing
+	<exists _attack_haste> stat_weight attack_haste: @_attack_haste
+	<exists _spell_haste> stat_weight spell_haste: @_spell_haste
+	<exists _health_per_5> stat_weight health_per_5: @_health_per_5
+	<exists _mana_per_5> stat_weight mana_per_5: @_mana_per_5
+	<exists _attack_power> stat_weight attack_power: @_attack_power
+	
+	<exists _parry> stat parry_chance: @_parry
+	<exists _dodge> stat dodge_chance: @_dodge
+	<exists _block> stat block_chance: @_block
+	<exists _phys_crit> stat phys_crit_chance: @_phys_crit
+	<exists _spell_crit> stat spell_crit_chance: @_spell_crit
+}
+
+!define BOSS_DROP_HEAD { !BOSS_DROP equipment_slots: [ head ] }
+!define BOSS_DROP_CHEST { !BOSS_DROP equipment_slots: [ chest ] }
+!define BOSS_DROP_LEGS { !BOSS_DROP equipment_slots: [ legs ] }
+!define BOSS_DROP_FEET { !BOSS_DROP equipment_slots: [ feet ] }
+!define BOSS_DROP_SHOULDERS { !BOSS_DROP equipment_slots: [ shoulders ] }
+!define BOSS_DROP_WRISTS { !BOSS_DROP equipment_slots: [ wrists ] }
+!define BOSS_DROP_WAIST { !BOSS_DROP equipment_slots: [ waist ] }
+!define BOSS_DROP_HANDS { !BOSS_DROP equipment_slots: [ hands ] }
+!define BOSS_DROP_BACK { !BOSS_DROP equipment_slots: [ back ] }
+!define BOSS_DROP_NECK { !BOSS_DROP equipment_slots: [ neck ] }
+!define BOSS_DROP_FINGER { !BOSS_DROP equipment_slots: [ finger_1 finger_2 ] }
+!define BOSS_DROP_BAG { !BOSS_DROP equipment_slots: [ bag_1 bag_2 bag_3 ] }
+!define BOSS_DROP_1H_SWORD { !BOSS_DROP equipment_slots: [ main_hand off_hand ] type: weapon_1h_sword }
+!define BOSS_DROP_1H_MACE { !BOSS_DROP equipment_slots: [ main_hand off_hand ] type: weapon_1h_mace }
+!define BOSS_DROP_1H_AXE { !BOSS_DROP equipment_slots: [ main_hand off_hand ] type: weapon_1h_axe }
+!define BOSS_DROP_1H_KNIFE { !BOSS_DROP equipment_slots: [ main_hand off_hand ] type: weapon_1h_knife }
+!define BOSS_DROP_2H_SWORD { !BOSS_DROP equipment_slots: [ main_hand ] type: weapon_2h_sword }
+!define BOSS_DROP_2H_MACE { !BOSS_DROP equipment_slots: [ main_hand ] type: weapon_2h_mace }
+!define BOSS_DROP_2H_AXE { !BOSS_DROP equipment_slots: [ main_hand ] type: weapon_2h_axe }
+!define BOSS_DROP_2H_STAFF { !BOSS_DROP equipment_slots: [ main_hand ] type: weapon_2h_staff }
+!define BOSS_DROP_SHIELD { !BOSS_DROP equipment_slots: [ off_hand ] type: shield }
+!define BOSS_DROP_BOW { !BOSS_DROP equipment_slots: [ ranged ] type: ranged_bow }
+!define BOSS_DROP_CROSSBOW { !BOSS_DROP equipment_slots: [ ranged ] type: ranged_crossbow }
+!define BOSS_DROP_OFFHAND { !BOSS_DROP equipment_slots: [ off_hand ] }
+!define BOSS_DROP_TRINKET { !BOSS_DROP equipment_slots: [ trinket_1 trinket_2 ] }
+

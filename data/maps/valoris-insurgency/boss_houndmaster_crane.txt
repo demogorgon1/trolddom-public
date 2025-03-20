@@ -13,6 +13,72 @@ loot_table .houndmaster_crane:
 	]	
 }
 
+{
+	${
+		_rarity: rare
+		_level: 19
+		_loot_group: .houndmaster_crane
+	}
+	
+	item valoris_insurgency_7: !BOSS_DROP_BOW
+	{
+		_string: "Bow of the Houndmaster"
+		_icon: icon_bow_2
+		_dexterity: 3
+		_constitution: 1
+	}
+	
+	item valoris_insurgency_8: !BOSS_DROP_HEAD
+	{
+		_string: "Revenant Skullguard"
+		_type: armor_plate
+		_icon: icon_head_4
+		_strength: 2
+		_constitution: 1
+	}
+	
+	item valoris_insurgency_9: !BOSS_DROP_HEAD
+	{
+		_string: "Hood of the Disciple"
+		_type: armor_cloth
+		_icon: icon_head_11
+		_constitution: 1
+		_dexterity: 3
+		_strength: 2
+	}
+	
+	item valoris_insurgency_10: !BOSS_DROP_WAIST
+	{
+		_string: "Gracious Girdle"
+		_type: armor_cloth
+		_icon: icon_cloth_belt_2
+		_wisdom: 2		
+		_spirit: 1		
+		_healing: 3
+	}
+	
+	item valoris_insurgency_11: !BOSS_DROP_CHEST
+	{
+		_string: "Rebel's Chestguard"
+		_icon: icon_chest_2
+		_type: armor_plate
+		_constitution: 2
+		_strength: 1
+		_budget_bias: -10
+		_parry: 1
+	}
+	
+	item valoris_insurgency_12: !BOSS_DROP_BACK
+	{
+		_string: "Spellpiercing Cloak"
+		_icon: icon_cape_1
+		_spirit: 1
+		_wisdom: 2
+		_budget_bias: -10
+		_spell_crit: 1
+	}
+}
+
 ############################################################
 # Boss
 

@@ -58,6 +58,16 @@ map_palette .stuff:
 	entity_spawn .rebel_tank: [ 39 48 203 ]
 	entity_spawn .rebel_healer: [ 139 48 203 ]
 	entity_spawn .rebel_brute: [ 49 88 124 ]
+	
+	entity_spawn .escort: [ 149 22 124 ]
+	entity_spawn .escort_ambush_1_a: [ 30 140 200 ]
+	entity_spawn .escort_ambush_1_b: [ 130 140 200 ]
+	entity_spawn .escort_ambush_2_a: [ 100 140 200 ]
+	entity_spawn .escort_ambush_2_b: [ 200 140 200 ]
+	entity_spawn .escort_ambush_2_c: [ 30 240 200 ]
+	entity_spawn .escort_ambush_3_a: [ 100 140 100 ]
+	entity_spawn .escort_ambush_3_b: [ 200 140 100 ]
+	entity_spawn .escort_ambush_3_c: [ 30 240 100 ]
 }
 
 map_palette .levels:
@@ -70,6 +80,7 @@ map_palette .levels:
 map_palette .routes:
 {
 	route valoris_insurgency_default_patrol: [ 39 103 53 ]
+	route valoris_insurgency_escort: [ 139 40 100 ]
 }
 
 map_palette .doodads:
@@ -194,6 +205,11 @@ map valoris_insurgency:
 		{ 
 			palettes: 	[ .routes ]
 			source:		"valoris-insurgency-routes.png"
+		}				
+
+		{ 
+			palettes: 	[ .routes ]
+			source:		"valoris-insurgency-routes-2.png"
 		}				
 
 		{ 

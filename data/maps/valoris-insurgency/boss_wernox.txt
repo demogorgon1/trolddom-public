@@ -13,6 +13,72 @@ loot_table .wernox:
 	]	
 }
 
+{
+	${
+		_rarity: rare
+		_level: 19
+		_loot_group: .wernox
+	}
+	
+	item valoris_insurgency_13: !BOSS_DROP_2H_STAFF
+	{
+		_string: "Cane of Wernox"
+		_icon: icon_staff_8
+		_constitution: 1
+		_wisdom: 2
+		_spell_damage: 3
+	}
+	
+	item valoris_insurgency_14: !BOSS_DROP_FINGER
+	{
+		_string: "Malignant Band of Magic"
+		_icon: icon_ring_7
+		_constitution: 1
+		_wisdom: 3
+		_spell_damage: 2
+	}
+	
+	item valoris_insurgency_15: !BOSS_DROP_FEET
+	{
+		_string: "Swiftstrike Striders"
+		_type: armor_cloth
+		_icon: icon_slippers_2
+		_constitution: 2
+		_dexterity: 3
+		_strength: 1
+	}
+	
+	item valoris_insurgency_16: !BOSS_DROP_CHEST
+	{
+		_string: "Soothsayer's Garment"
+		_type: armor_cloth
+		_icon: icon_robe_4
+		_wisdom: 3		
+		_spirit: 2	
+		_healing: 1
+	}
+	
+	item valoris_insurgency_17: !BOSS_DROP_FINGER
+	{
+		_string: "Circle of Pain"
+		_icon: icon_ring_8
+		_strength: 1
+		_dexterity: 1
+		_budget_bias: -10
+		_phys_crit: 1
+	}
+	
+	item valoris_insurgency_18: !BOSS_DROP_SHOULDERS
+	{
+		_string: "Rebel Guard Pauldrons"
+		_type: armor_plate
+		_icon: icon_shoulders_5
+		_constitution: 1
+		_budget_bias: -10
+		_dodge: 1
+	}
+}
+
 ############################################################
 # Boss
 

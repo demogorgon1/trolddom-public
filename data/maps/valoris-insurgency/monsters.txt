@@ -69,11 +69,11 @@ loot_table .humanoid:
 		!WORLD_DROPS_CLOTH {}
 	]	
 }
-	
+
 # Melee rebels
 {
 	${
-		_faction: monsters
+		_faction: rebels
 		_creature_type: humanoid
 		_default_behavior_state: .passive
 		_loot_table: .humanoid 
@@ -106,7 +106,7 @@ loot_table .humanoid:
 # Tank rebels
 {
 	${
-		_faction: monsters
+		_faction: rebels
 		_creature_type: humanoid
 		_default_behavior_state: .passive
 		_loot_table: .humanoid 
@@ -128,7 +128,7 @@ loot_table .humanoid:
 # Healer rebels
 {
 	${
-		_faction: monsters
+		_faction: rebels
 		_creature_type: humanoid
 		_default_behavior_state: .passive
 		_loot_table: .humanoid 
@@ -151,7 +151,7 @@ loot_table .humanoid:
 # Brute rebel
 {
 	${
-		_faction: monsters
+		_faction: rebels
 		_creature_type: humanoid
 		_default_behavior_state: .passive
 		_loot_table: .humanoid 

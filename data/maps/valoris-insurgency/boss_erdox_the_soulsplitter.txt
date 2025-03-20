@@ -13,6 +13,70 @@ loot_table .erdox_the_soulsplitter:
 	]	
 }
 
+
+
+{
+	${
+		_rarity: rare
+		_level: 20
+		_loot_group: .erdox_the_soulsplitter
+	}
+	
+	item valoris_insurgency_25: !BOSS_DROP_CHEST
+	{
+		_string: "Robe of the Soulsplitter"
+		_type: armor_mail
+		_icon: icon_robe_2
+		_constitution: 1
+		_spell_damage: 3
+		_wisdom: 2
+	}
+	
+	item valoris_insurgency_26: !BOSS_DROP_NECK
+	{
+		_string: "Pendant of Evil"
+		_icon: icon_necklace_1
+		_constitution: 1
+		_spell_damage: 2
+	}
+	
+	item valoris_insurgency_27: !BOSS_DROP_FEET
+	{
+		_string: "Dark Elven Slippers"
+		_type: armor_cloth
+		_icon: icon_boots_1
+		_constitution: 2
+		_wisdom: 3
+		_spell_damage: 1
+	}
+	
+	item valoris_insurgency_28: !BOSS_DROP_1H_KNIFE
+	{
+		_string: "Dark Blade of Wrath"
+		_icon: icon_knife_1
+		_constitution: 1
+		_dexterity: 2
+	}
+	
+	item valoris_insurgency_29: !BOSS_DROP_LEGS
+	{
+		_string: "Worn Pants of the Wizard"
+		_type: armor_cloth
+		_icon: icon_pants_2
+		_wisdom: 1
+		_constitution: 1
+		_spell_damage: 2
+	}
+	
+	item valoris_insurgency_30: !BOSS_DROP_NECK
+	{
+		_string: "Pendant of Strength"
+		_icon: icon_necklace_2
+		_constitution: 1
+		_strength: 2
+	}
+}
+
 ############################################################
 # Boss
 

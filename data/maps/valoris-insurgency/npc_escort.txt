@@ -1,0 +1,143 @@
+map_entity_spawn .escort: { entity valoris_insurgency_escort: { init_state: default } spawn_timer: !ESCORT_RESPAWN{} }
+
+dialogue_screen .escort_dialogue:
+{
+	text: 
+	[	
+		"Please help me get out of here! I'm afraid they'll cut me into small pieces and mail me back to Mirehaven!"
+	]		
+	
+	options:
+	[
+		{ text: "Let's go." requirement self<must_have_active_quest>: thalvaron_melinda_riddle_1 script: npc_trigger }	
+	]
+}
+
+entity valoris_insurgency_escort: !NPC
+{
+	_string: "Jim Riddle"
+	_dialogue_root: $dialogue_root { .escort_dialogue: { } }
+	_dialogue_scripts: [ npc_trigger ]
+	_sprite: man_9
+	_sprite_dead: man_9_dead
+	_level: 20
+	_elite: true
+	_resource_health: 2.5
+	_faction: combat_npcs		
+	_creature_type: humanoid
+	_loot_table: default_humanoid
+	_not_pushable: true	
+	_default_trigger_ability: .escort
+	_default_behavior_state: .escort
+	_is_threat_source: true
+	_blocking: false
+}
+
+route valoris_insurgency_escort: 
+{ 
+	trigger<18>: { chat: { type: say text: "Look out! They're coming!" } }
+	trigger<17>: { ability: .ambush_1 }
+	trigger<40>: { ability: .ambush_2 }
+	trigger<60>: { ability: .ambush_3 }
+	trigger<87>: { chat: { type: say text: "See ya!" } event: true }
+	trigger<max>: { despawn: true }
+}
+
+npc_behavior_state .escort:
+{
+	behavior: patrolling
+	combat_event_pause_ticks: 20
+	despawn_if_lost_player: true
+	patrol_move_interval_ticks: 9
+}
+
+ability .escort:
+{
+	flags: [ always_in_range always_in_line_of_sight ]
+	
+	direct_effect start_route: { route: valoris_insurgency_escort }	
+}
+
+map_entity_spawn .escort_ambush_1_a: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn .escort_ambush_1_b: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn .escort_ambush_2_a: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn .escort_ambush_2_b: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn .escort_ambush_2_c: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn .escort_ambush_3_a: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn .escort_ambush_3_b: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn .escort_ambush_3_c: { spawn_timer: { only_when_triggered: true } }
+
+ability .ambush_1:
+{
+	direct_effect spawn_entity: 
+	{ 
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: .rebel_melee_20_a
+		map_entity_spawn: .escort_ambush_1_a	
+	}	
+	
+	direct_effect spawn_entity: 
+	{ 
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: .rebel_melee_20_b
+		map_entity_spawn: .escort_ambush_1_b	
+	}		
+}
+
+ability .ambush_2:
+{
+	direct_effect spawn_entity: 
+	{ 
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: .rebel_melee_20_c
+		map_entity_spawn: .escort_ambush_2_a	
+	}	
+	
+	direct_effect spawn_entity: 
+	{ 
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: .rebel_tank_20
+		map_entity_spawn: .escort_ambush_2_b	
+	}		
+		
+	direct_effect spawn_entity: 
+	{ 
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: .rebel_healer_20
+		map_entity_spawn: .escort_ambush_2_c	
+	}	
+}
+
+ability .ambush_3:
+{
+	direct_effect spawn_entity: 
+	{ 
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: .rebel_melee_20_a
+		map_entity_spawn: .escort_ambush_3_a	
+	}	
+	
+	direct_effect spawn_entity: 
+	{ 
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: .rebel_healer_20
+		map_entity_spawn: .escort_ambush_3_b	
+	}		
+		
+	direct_effect spawn_entity: 
+	{ 
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: .rebel_brute_20
+		map_entity_spawn: .escort_ambush_3_c	
+	}	
+}
+
+

@@ -13,6 +13,74 @@ loot_table .rufus_the_strong:
 	]	
 }
 
+{
+	${
+		_rarity: rare
+		_level: 19
+		_loot_group: .rufus_the_strong
+	}
+	
+	item valoris_insurgency_19: !BOSS_DROP_2H_AXE
+	{
+		_string: "Beastly Cleaver"
+		_icon: icon_axe_7
+		_constitution: 2
+		_strength: 3
+		_dexterity: 1
+	}
+	
+	item valoris_insurgency_20: !BOSS_DROP_CHEST
+	{
+		_string: "Chain Jerkin"
+		_type: armor_mail
+		_icon: icon_chest_3
+		_constitution: 1
+		_strength: 2
+	}
+	
+	item valoris_insurgency_21: !BOSS_DROP_FEET
+	{
+		_string: "Sabatons of War"
+		_type: armor_plate
+		_icon: icon_boots_2
+		_constitution: 3
+		_strength: 1
+		_dexterity: 2
+	}
+	
+	item valoris_insurgency_22: !BOSS_DROP_WRISTS
+	{
+		_string: "Soothsayer's Cuffs"
+		_type: armor_cloth
+		_icon: icon_bracers_1
+		_wisdom: 2
+		_spirit: 1	
+		_healing: 3
+	}
+	
+	item valoris_insurgency_23: !BOSS_DROP_HEAD
+	{
+		_string: "Lost Headscarf of Wernox"
+		_type: armor_cloth
+		_icon: icon_head_10
+		_wisdom: 2
+		_spell_damage: 1
+		_budget_bias: -10
+		_spell_crit: 1
+	}
+	
+	item valoris_insurgency_24: !BOSS_DROP_SHOULDERS
+	{
+		_string: "Epaulettes of the Dragon"
+		_type: armor_cloth
+		_icon: icon_shoulders_4
+		_constitution: 1
+		_dexterity: 2
+		_budget_bias: -10
+		_phys_crit: 1
+	}
+}
+
 ############################################################
 # Boss
 
