@@ -162,6 +162,7 @@
 	
 	<exists _type> type: @_type
 	<exists _item_aura> aura: @_item_aura
+	<exists _budget_bias> budget_bias: @_budget_bias
 
 	<exists _rarity> rarity: @_rarity
 	<!exists _rarity> rarity: uncommon	
@@ -178,6 +179,12 @@
 	<exists _health_per_5> stat_weight health_per_5: @_health_per_5
 	<exists _mana_per_5> stat_weight mana_per_5: @_mana_per_5
 	<exists _attack_power> stat_weight attack_power: @_attack_power
+	
+	<exists _parry> stat parry_chance: @_parry
+	<exists _dodge> stat dodge_chance: @_dodge
+	<exists _block> stat block_chance: @_block
+	<exists _phys_crit> stat phys_crit_chance: @_phys_crit
+	<exists _spell_crit> stat spell_crit_chance: @_spell_crit	
 }
 
 !define QUEST_REWARD_HEAD { !QUEST_REWARD equipment_slots: [ head ] }

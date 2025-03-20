@@ -12,6 +12,7 @@ dialogue_screen .captain_jerrington_dialogue:
 		{ quest<offer_only>: .captain_jerrington_2 }
 		{ quest<completion_only>: .fisherman_5 }
 		{ quest<completion_only>: .rebel_leader_camp_quest_item }
+		{ quest: .captain_jerrington_3 }
 	]
 }
 
@@ -129,4 +130,57 @@ quest .captain_jerrington_2:
 	level: 10
 	next_quest: .lieutenant_tinley_1
 	reward_xp_multiplier: 0.1
+}
+
+############################################################
+# Quest 3
+
+objective .captain_jerrington_3:
+{
+	string: "Captain Jorgenson Killed"
+	
+	maps: [ valoris_insurgency ]
+	
+	kill_npc:
+	{
+		entities: [ valoris_insurgency_captain_jorgenson ]
+		count: 1
+	}
+}
+
+{
+	${ _level: 20 _rarity: rare }
+	item .captain_jerrington_3_a: !QUEST_REWARD_TRINKET{ _string: "Badge of Honor" _icon: icon_sanctuary _phys_crit: 1 }
+	item .captain_jerrington_3_b: !QUEST_REWARD_TRINKET{ _string: "Badge of Justice" _icon: icon_heal_command _spell_crit: 1 }
+}
+
+quest .captain_jerrington_3:
+{
+	string: "Insurgency Commander"
+
+	text:
+	[
+		"FIXME"
+	]
+	
+	description: 
+	[
+		"FIXME"
+	]
+
+	progress:
+	[
+		"FIXME"
+	]
+	
+	completion:
+	[
+		"FIXME"
+	]
+
+	type: dungeon
+	level: 20
+	prerequisites: [ .rebel_leader_camp_quest_item ]
+	objectives: [ .captain_jerrington_3 ]
+	reward_one_item: [ .captain_jerrington_3_a .captain_jerrington_3_b ]
 }
