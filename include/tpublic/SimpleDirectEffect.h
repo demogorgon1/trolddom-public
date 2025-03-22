@@ -27,6 +27,9 @@ namespace tpublic
 			ID_RECALL,
 			ID_LEARN_RIDING,
 			ID_CAPTURE,
+			ID_THREAT_TABLE_SHUFFLE,
+			ID_THREAT_TABLE_EQUALIZE,
+			ID_ZONE_TELEPORT,
 
 			NUM_IDS
 		};
@@ -41,23 +44,26 @@ namespace tpublic
 		// IMPORTANT: Must match Id enum
 		static constexpr const Info INFO[] =
 		{
-			{ NULL,					DataType::INVALID_ID,	false },
+			{ NULL,						DataType::INVALID_ID,	false },
 
-			{ "open",				DataType::INVALID_ID,	false },
-			{ "pray",				DataType::ID_PANTHEON,	false },
-			{ "make_offering",		DataType::INVALID_ID,	false },
-			{ "kill",				DataType::INVALID_ID,	false },
-			{ "push",				DataType::INVALID_ID,	false },
-			{ "desecrate",			DataType::INVALID_ID,	false },
-			{ "start_quest",		DataType::ID_QUEST,		false },
-			{ "edit_player_worlds",	DataType::INVALID_ID,	false },
-			{ "pass",				DataType::INVALID_ID,	false },
-			{ "resurrect",			DataType::INVALID_ID,	false },
-			{ "activate_trigger",	DataType::INVALID_ID,	false },
-			{ "set_own_state",		DataType::INVALID_ID,	true },
-			{ "recall",				DataType::INVALID_ID,	false },
-			{ "learn_riding",		DataType::INVALID_ID,	false },
-			{ "capture",			DataType::INVALID_ID,	false },
+			{ "open",					DataType::INVALID_ID,	false },
+			{ "pray",					DataType::ID_PANTHEON,	false },
+			{ "make_offering",			DataType::INVALID_ID,	false },
+			{ "kill",					DataType::INVALID_ID,	false },
+			{ "push",					DataType::INVALID_ID,	false },
+			{ "desecrate",				DataType::INVALID_ID,	false },
+			{ "start_quest",			DataType::ID_QUEST,		false },
+			{ "edit_player_worlds",		DataType::INVALID_ID,	false },
+			{ "pass",					DataType::INVALID_ID,	false },
+			{ "resurrect",				DataType::INVALID_ID,	false },
+			{ "activate_trigger",		DataType::INVALID_ID,	false },
+			{ "set_own_state",			DataType::INVALID_ID,	true },
+			{ "recall",					DataType::INVALID_ID,	false },
+			{ "learn_riding",			DataType::INVALID_ID,	false },
+			{ "capture",				DataType::INVALID_ID,	false },
+			{ "threat_table_shuffle",	DataType::INVALID_ID,	false },
+			{ "threat_table_equalize",	DataType::INVALID_ID,	false },
+			{ "zone_teleport",			DataType::ID_ZONE,		false },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

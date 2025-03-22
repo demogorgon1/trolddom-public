@@ -18,6 +18,7 @@ loot_table .library:
 
 zone .library:
 {
+	can_query_position: true 
 }
 
 encounter .library:
@@ -43,9 +44,20 @@ entity lich_tower_library: !NPC
 	_immune_to_stun: true
 	_immune_to_immobilize: true
 	_immune_to_slow: true
+	_default_behavior_state: .passive
 
 	_abilities: 
 	[
+		{
+			id: .teleport
+			target: self
+			requirement self<must_have_less_health_than>: 80
+		}	
+		
+		{
+			id: npc_frostbolt_no_cooldown
+		}
+	
 		{
 			id: npc_attack
 		}
@@ -74,3 +86,16 @@ map_entity_spawn .library:
 	}
 }
 
+ability .teleport:
+{
+	string: "Teleport"
+	icon: icon_stuff
+	flags: [ target_self ]
+	states: [ in_combat ]
+	cast_time: 15
+	cooldown: $cooldown { duration: 90 }
+	
+	direct_effect simple<zone_teleport>: .library
+	direct_effect simple<threat_table_shuffle>: { }
+	direct_effect simple<threat_table_equalize>: { }
+}

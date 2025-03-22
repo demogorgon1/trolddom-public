@@ -712,9 +712,19 @@ sprites:
 	
 	cursor: { position: [ 0 608 ] }
 	sprite rebel_13: { dead: rebel_13_dead }
+	sprite man_66: { dead: man_66_dead }
+	sprite infected_wolf_1: { dead: infected_wolf_1_dead }
+	sprite zombie_2: { dead: zombie_2_dead }
+	sprite zombie_3: { dead: zombie_3_dead }
+	sprite zombie_4: { dead: zombie_4_dead }
 	
 	cursor: { position: [ 0 624 ] }
 	sprite rebel_13_dead: { }
+	sprite man_66_dead: { }
+	sprite infected_wolf_1_dead: { }
+	sprite zombie_2_dead: { }
+	sprite zombie_3_dead: { }
+	sprite zombie_4_dead: { }
 	
 }
 

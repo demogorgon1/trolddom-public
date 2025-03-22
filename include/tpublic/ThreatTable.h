@@ -50,6 +50,9 @@ namespace tpublic
 		int32_t			GetThreat(
 							const SourceEntityInstance&				aSourceEntityInstance) const;
 		void			Clear();
+		void			Equalize();
+		void			Shuffle(
+							uint32_t								aSeed);
 		void			DebugPrint() const;
 		void			GetEntityInstanceIds(
 							std::vector<uint32_t>&					aOutEntityInstanceIds) const;

@@ -9,6 +9,8 @@ map_portal .exit:
 	spawn: thalvaron_tirnwood_thicket_exit
 }
 
+route tirnwood_thicket_default_patrol: { }
+
 map_cliff .dummy_cliff_0: { cliff_style: dummy elevation: 0 }
 map_cliff .dummy_cliff_0_ramp: { cliff_style: dummy elevation: 0 ramp: true }
 map_cliff .dummy_cliff_1: { cliff_style: dummy elevation: 1 } 
@@ -34,6 +36,20 @@ map_palette .stuff:
 	
 	portal .exit: [ 0 253 0 ]	
 	
+	entity_spawn mining: [ 200 200 200 ]
+	entity_spawn herbalism: [ 0 255 0 ]
+	entity_spawn holy_altar: [ 0 0 40 ]	
+	entity_spawn underworld_shrine: [ 0 0 80 ]	
+	entity_spawn furnace: [ 100 43 66 ]		
+	entity_spawn anvil: [ 150 43 66 ]		
+	entity_spawn fireplace: [ 250 43 66 ]		
+	entity_spawn fireplace_unlit: [ 250 243 66 ]		
+	entity_spawn bonfire: [ 251 43 66 ]		
+	entity_spawn default_chest: [ 40 143 66 ]		
+	entity_spawn cauldron: [ 43 113 166 ]		
+	entity_spawn bonfire_unlit: [ 144 59 20 ]
+	entity_spawn target_dummy: [ 139 201 21 ]	
+		
 	entity_spawn .owlbear: [ 255 0 0 ]
 	entity_spawn .tree: [ 255 43 0 ]
 	entity_spawn .wolf: [ 255 3 53 ]
@@ -47,6 +63,7 @@ map_palette .levels:
 
 map_palette .routes:
 {
+	route tirnwood_thicket_default_patrol: [ 39 103 53 ]
 }
 
 map_palette .doodads:

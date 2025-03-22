@@ -147,17 +147,58 @@ ability npc_fireball:
 	}
 }
 
-cooldown npc_frostbolt:
-{
-	duration: 70
-}
-
 ability npc_frostbolt:
 {
 	string: "Frostbolt"
 	range: 8
 	cast_time: 20
-	cooldowns: [ global spell_frost_lockout npc_frostbolt ]
+	cooldowns: [ global spell_frost_lockout ]
+	cooldown: $cooldown { duration: 70 }
+	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
+	states: [ in_combat ]
+	icon: icon_ice_lance
+	speed: 6
+	resource_cost mana: 8
+
+	projectile: $particle_system 
+	{
+		particle:
+		{
+			sprites: [ effect_frostbolt ]
+			flags: [ attached no_rotation face_target ]
+			scale: 0.4
+			count: 1
+		}
+	}
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical is_magical ]
+		damage_type: frost
+		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] [ 20 70 ] [ 30 140 ] ] elite_multiplier: 1.7 }
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: $aura
+		{
+			string: "Frostbolt"
+			icon: icon_ice_lance
+			description: "Reduced movement speed."
+			type: debuff
+			duration: 80
+			flags: [ unique magic ]			
+			aura_effect move_speed_modifier: { move_speed: very_slow }
+		}
+	}
+}
+
+ability npc_frostbolt_no_cooldown:
+{
+	string: "Frostbolt"
+	range: 8
+	cast_time: 20
+	cooldowns: [ global spell_frost_lockout ]
 	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
 	states: [ in_combat ]
 	icon: icon_ice_lance
@@ -944,7 +985,9 @@ ability npc_charge:
 				}				
 			}
 		}
-	}
+	}	
+	direct_effect simple<threat_table_shuffle>: { flags: [ self ] }
+	direct_effect simple<threat_table_equalize>: { flags: [ self ]  }
 }
 
 ability npc_whirlwind:
@@ -965,5 +1008,47 @@ ability npc_whirlwind:
 	{
 		damage_type: physical
 		function: { expression: x x: weapon }													
+	}
+}
+
+ability npc_infection_aura:
+{
+	string: "Infection"
+	flags: [ target_self target_aoe target_aoe_hostile ]
+	icon: icon_stuff
+	cooldown: $cooldown { duration: 20 }
+	delay: 3
+	aoe_radius: 8
+	aoe_cap: 8
+	aoe_requirement target<must_not_be_in_state>: { id: dead }	
+
+	direct_effect apply_aura:
+	{	
+		aura: $aura 
+		{
+			string: "Infected"
+			description: "Feeling sick."
+			icon: icon_poison
+			type: debuff
+			duration: based_on_effects
+			flags: [ unique no_refresh ]
+
+			aura_effect repeat:
+			{
+				update_interval: 15
+				update_count: 4
+				ability: $ability
+				{
+					string: "Infection"
+					flags: [ always_in_line_of_sight always_in_range ]
+					direct_effect damage:
+					{
+						damage_type: poison
+						function: { expression: a a: [ [ 1 5 ] [ 10 10 ] [ 20 20 ] [ 30 40 ] ] elite_multiplier: 1.7 }			
+					}
+				}
+			}
+		
+		}
 	}
 }

@@ -1,0 +1,53 @@
+npc_behavior_state .wandering_short:
+{
+	on_route<tirnwood_thicket_default_patrol>: .patrol
+	behavior: wandering
+	max_range: 1
+}
+
+npc_behavior_state .passive:
+{
+	on_route<tirnwood_thicket_default_patrol>: .patrol
+	behavior: do_nothing
+}
+
+npc_behavior_state .patrol:
+{
+	behavior: patrolling
+}
+
+map_entity_spawn .skeleton_healer: 
+{ 
+	#entity .skeleton_healer_18: { level: 18 spawn_condition: { if_not: .xxx_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+loot_table .humanoid_undead: 
+{
+	slots:
+	[	
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH {}
+	]	
+}
+
+# XXX
+{
+	#${
+	#	_faction: rebels
+	#	_creature_type: humanoid
+	#	_default_behavior_state: .passive
+	#	_loot_table: .humanoid 
+	#	_weapon_damage: 1.7
+	#	_resource_health: 1.3
+	#	_elite: true
+	#	_abilities: 
+	#	[ 
+	#		{ id: npc_rend } 
+	#		{ id: npc_attack } 
+	#	]
+	#}
+
+	#entity .rebel_melee_18_a: !NPC { _string: "Rebel Fighter" _sprite: rebel_11 _sprite_dead: rebel_11_dead _level: 18 }
+}

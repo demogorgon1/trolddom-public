@@ -106,7 +106,7 @@ map_entity_spawn thalvaron_city_guard_special: { entity thalvaron_city_guard_spe
 map_entity_spawn thalvaron_city_guard_special_2: { entity thalvaron_city_guard_special_2: { init_state: default } }
 map_entity_spawn thalvaron_captain_jerrington: { entity thalvaron_captain_jerrington: { init_state: default } }
 map_entity_spawn thalvaron_lieutenant_tinley: { entity thalvaron_lieutenant_tinley: { init_state: default } }
-map_entity_spawn thalvaron_inn_keeper_1_quest_item: { entity thalvaron_inn_keeper_1_quest_item: { init_state: default } }
+map_entity_spawn thalvaron_inn_keeper_1_quest_item: { entity thalvaron_inn_keeper_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_inn_keeper: { entity thalvaron_inn_keeper: { init_state: default } }
 map_entity_spawn thalvaron_general_store_john: { entity thalvaron_general_store_john: { init_state: default } }
 map_entity_spawn thalvaron_general_store_mary: { entity thalvaron_general_store_mary: { init_state: default } }
@@ -185,6 +185,7 @@ map_entity_spawn thalvaron_igor_skrald: { entity thalvaron_igor_skrald: { init_s
 map_entity_spawn thalvaron_harbor_vendor: { entity thalvaron_harbor_vendor: { init_state: default } }
 map_entity_spawn thalvaron_kristina_newman: { entity thalvaron_kristina_newman: { init_state: default } }
 map_entity_spawn thalvaron_anne_joghun: { entity thalvaron_anne_joghun: { init_state: default } }
+map_entity_spawn thalvaron_blunt_ronson: { entity thalvaron_blunt_ronson: { init_state: default } }
 
 # N
 map_entity_spawn thalvaron_ranger_fremalt: { entity thalvaron_ranger_fremalt: { init_state: default } }
@@ -465,6 +466,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_harbor_vendor: [ 126 39 81 ]
 	entity_spawn thalvaron_kristina_newman: [ 234 99 48 ]
 	entity_spawn thalvaron_anne_joghun: [ 234 99 148 ]
+	entity_spawn thalvaron_blunt_ronson: [ 30 183 88 ]
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				

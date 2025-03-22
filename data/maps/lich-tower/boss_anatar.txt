@@ -47,6 +47,14 @@ entity lich_tower_anatar: !NPC
 	_abilities: 
 	[
 		{
+			target: random_player
+			id: $ability (npc_chain_lightning)
+			{
+				cooldown: $cooldown { duration: 90 }
+			}
+		}
+		
+		{
 			id: npc_attack
 		}
 	]	
@@ -78,4 +86,3 @@ map_entity_spawn .anatar:
 		}
 	}
 }
-

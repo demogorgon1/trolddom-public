@@ -1,5 +1,6 @@
 #include "Pcheader.h"
 
+#include <tpublic/Helpers.h>
 #include <tpublic/ThreatTable.h>
 
 namespace tpublic
@@ -193,6 +194,40 @@ namespace tpublic
 		m_tail = NULL;
 		m_table.clear();
 		m_tick = 0;
+	}
+
+	void			
+	ThreatTable::Equalize()
+	{
+		for (Entry* t = m_head; t != NULL; t = t->m_next)
+			t->m_threat = 0;
+	}
+	
+	void			
+	ThreatTable::Shuffle(
+		uint32_t								aSeed)
+	{
+		std::vector<Entry*> tmp;
+		for (Entry* t = m_head; t != NULL; t = t->m_next)
+		{
+			t->m_next = NULL;
+			t->m_prev = NULL;
+			tmp.push_back(t);
+		}
+		m_head = NULL;
+		m_tail = NULL;
+		uint32_t r = aSeed;
+
+		while(tmp.size() > 0)
+		{
+			UniformDistribution<uint32_t> distribution(0, (uint32_t)tmp.size() - 1);
+			uint32_t i = distribution.Generate(r);
+			_InsertAtEnd(tmp[i]);
+			Helpers::RemoveCyclicFromVector(tmp, i);
+
+			// This is a bit hackish, but we don't have (easy) access to a std::mt19937 here
+			r = (uint32_t)Hash::Splitmix_2_32(r, r);
+		}
 	}
 
 	void			

@@ -1,0 +1,9 @@
+achievement_category .valoris_insurgency: { string: "Dungeon: Valoris Insurgency" order_key: 3 }
+
+achievement valoris_insurgency_captain_jorgenson: { sort_key: 1 category: .valoris_insurgency string: "Captain Jorgenson" description: "Slay Captain Jorgenson." points: 10 priority: 0 kill_trigger: valoris_insurgency_captain_jorgenson icon: icon_skull_1 no_progress_values: true }
+achievement valoris_insurgency_houndmaster_crane: { sort_key: 2 category: .valoris_insurgency string: "Houndmaster Crane" description: "Slay Houndmaster Crane." points: 10 priority: 0 kill_trigger: valoris_insurgency_houndmaster_crane icon: icon_skull_1 no_progress_values: true }
+achievement valoris_insurgency_wernox: { sort_key: 3 category: .valoris_insurgency string: "Wernox" description: "Slay Wernox." points: 10 priority: 0 kill_trigger: valoris_insurgency_wernox icon: icon_skull_1 no_progress_values: true }
+achievement valoris_insurgency_rufus_the_strong: { sort_key: 4 category: .valoris_insurgency string: "Rufus the Strong" description: "Slay Rufus the Strong." points: 10 priority: 0 kill_trigger: valoris_insurgency_rufus_the_strong icon: icon_skull_1 no_progress_values: true }
+achievement valoris_insurgency_erdox_the_soulsplitter: { sort_key: 5 category: .valoris_insurgency string: "Erdox the Soulsplitter" description: "Slay Erdox the Soulsplitter." points: 10 priority: 0 kill_trigger: valoris_insurgency_erdox_the_soulsplitter icon: icon_skull_1 no_progress_values: true }
+
+achievement valoris_insurgency: { category: .valoris_insurgency string: "Valoris Insurgency" description: "Finish Valoris Insurgency." points: 20 need_achievements: [ valoris_insurgency_captain_jorgenson valoris_insurgency_houndmaster_crane valoris_insurgency_wernox valoris_insurgency_rufus_the_strong valoris_insurgency_erdox_the_soulsplitter ] icon: icon_valoris_insurgency }

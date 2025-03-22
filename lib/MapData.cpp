@@ -393,7 +393,7 @@ namespace tpublic
 				if (hasLevelMap || hasZoneMap || hasSubZoneMap || hasFlagsMap)
 				{
 					m_worldInfoMap = std::make_unique<WorldInfoMap>();
-					m_worldInfoMap->Build(m_width, m_height, &levelMap[0], &zoneMap[0], &subZoneMap[0], &flagsMap[0]);
+					m_worldInfoMap->Build(aManifest, m_width, m_height, &levelMap[0], &zoneMap[0], &subZoneMap[0], &flagsMap[0]);
 				}
 			}
 

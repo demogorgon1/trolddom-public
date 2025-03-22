@@ -855,6 +855,8 @@ namespace tpublic
 						const SourceNode*		aLayersArray);
 		void		_InitBits(
 						const Manifest*			aManifest);
+		void		_InitZonePositionQueryTable(
+						const Manifest*			aManifest);
 		uint32_t	_GetTile(
 						int32_t					aX,
 						int32_t					aY);

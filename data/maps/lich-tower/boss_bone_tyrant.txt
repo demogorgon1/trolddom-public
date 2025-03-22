@@ -23,6 +23,20 @@ zone .bone_tyrant:
 encounter .bone_tyrant:
 {
 	main_entities: [ lich_tower_bone_tyrant ]	
+	
+	spawn:
+	{
+		map_entity_spawn: .bone_tyrant_spawn
+		possible_entities: [ .bone_tyrant_spawn_a .bone_tyrant_spawn_b .bone_tyrant_spawn_c ]
+		entity_count: 1
+		interval: [ 70 100 ]
+		
+		condition<entity_health_less_than>:
+		{
+			id: lich_tower_bone_tyrant
+			value: 90			
+		}
+	}			
 }
 
 entity lich_tower_bone_tyrant: !NPC 
@@ -48,10 +62,13 @@ entity lich_tower_bone_tyrant: !NPC
 	_abilities: 
 	[
 		{
+			id: npc_rend
+		}
+	
+		{
 			id: npc_attack
 		}
-	]	
-	
+	]		
 }
 
 map_trigger .bone_tyrant_killed:
@@ -69,5 +86,64 @@ map_entity_spawn .bone_tyrant:
 			if_not: .bone_tyrant_killed
 		}
 	}
+}
+
+{
+	${
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .passive		
+		_elite: true
+		_encounter: .bone_tyrant
+		_zone: .bone_tyrant	
+		_out_of_zone_action: { use: enrage }
+		_inactive_encounter_despawn: true		
+	}
+
+	{
+		${
+			_weapon_damage: 1.6 
+			_resource_health: 2.2
+			_abilities: 
+			[ 
+				{ id: npc_attack } 
+			]		
+		}
+		
+		entity .bone_tyrant_spawn_a: !NPC { _string: "Skeletal Warrior" _sprite: skeleton_warrior_1 _sprite_dead: skeleton_warrior_1_dead _level: 18 }
+	}
+	
+	{
+		${
+			_weapon_damage: 1.2
+			_resource_health: 1.6
+			_abilities: 
+			[ 
+				{ id: npc_frostbolt_no_cooldown } 
+				{ id: npc_attack } 
+			]		
+		}
+		
+		entity .bone_tyrant_spawn_b: !NPC { _string: "Skeletal Mage" _sprite: skeleton_caster_1 _sprite_dead: skeleton_caster_1_dead _level: 18 }
+	}
+
+	{
+		${
+			_weapon_damage: 1.2
+			_resource_health: 1.6
+			_abilities: 
+			[ 
+				{ id: npc_heal target: low_health_friend_or_self } 
+				{ id: npc_attack } 
+			]		
+		}
+		
+		entity .bone_tyrant_spawn_c: !NPC { _string: "Skeletal Priest" _sprite: skeleton_caster_3 _sprite_dead: skeleton_caster_3_dead _level: 18 }
+	}
+
+}
+
+map_entity_spawn .bone_tyrant_spawn:
+{
 }
 

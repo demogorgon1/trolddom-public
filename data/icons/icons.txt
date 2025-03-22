@@ -729,6 +729,9 @@ sprites:
 	sprite icon_beak_1 : { tags: [ icon ] }
 	sprite icon_shield_6 : { tags: [ icon shield ] icon_meta_data: !ICON_ANY{} }
 	sprite icon_hair_4 : { tags: [ icon ] }
+	sprite icon_valoris_insurgency : { tags: [ icon ] }
+	sprite icon_lich_tower : { tags: [ icon ] }
+	sprite icon_tirnwood_thicket : { tags: [ icon ] }
 	
 }
 

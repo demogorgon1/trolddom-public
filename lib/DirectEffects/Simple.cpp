@@ -2,6 +2,8 @@
 
 #include <tpublic/Components/CombatPublic.h>
 #include <tpublic/Components/ControlPoint.h>
+#include <tpublic/Components/Position.h>
+#include <tpublic/Components/ThreatTarget.h>
 
 #include <tpublic/DirectEffects/Simple.h>
 
@@ -107,7 +109,7 @@ namespace tpublic::DirectEffects
 	DirectEffectBase::Result
 	Simple::Resolve(
 		int32_t							aTick,
-		std::mt19937&					/*aRandom*/,
+		std::mt19937&					aRandom,
 		const Manifest*					/*aManifest*/,
 		CombatEvent::Id					/*aId*/,
 		uint32_t						/*aAbilityId*/,
@@ -181,6 +183,59 @@ namespace tpublic::DirectEffects
 							}
 						});
 					}
+				}
+			}
+			break;
+
+		case SimpleDirectEffect::ID_THREAT_TABLE_EQUALIZE:
+		case SimpleDirectEffect::ID_THREAT_TABLE_SHUFFLE:
+			if(target != NULL)
+			{
+				Components::ThreatTarget* threatTarget = target->GetComponent<Components::ThreatTarget>();
+				if(threatTarget != NULL)
+				{
+					ThreatTable* threatTable = &threatTarget->m_table;
+					uint32_t seed = aRandom();
+
+					aCombatResultQueue->AddUpdateCallback([threatTable, id = m_id, seed]()
+					{
+						// We don't add or remove any entries from the table so this is easy. No need to create a threat event as we don't involve other entities.
+						switch(id)
+						{
+						case SimpleDirectEffect::ID_THREAT_TABLE_EQUALIZE:	threatTable->Equalize(); break;
+						case SimpleDirectEffect::ID_THREAT_TABLE_SHUFFLE:	threatTable->Shuffle(seed); break;
+
+						default:
+							break;
+						}
+					});
+				}
+			}
+			break;
+
+		case SimpleDirectEffect::ID_ZONE_TELEPORT:
+			if(target != NULL)
+			{
+				const Components::Position* position = target->GetComponent<Components::Position>();
+
+				const std::vector<Vec2>* zonePositions = aWorldView->WorldViewQueryZonePositions(m_param);
+				if(zonePositions != NULL)
+				{
+					IEventQueue::EventQueueMoveRequest move;
+					move.m_type = IEventQueue::EventQueueMoveRequest::TYPE_SIMPLE;
+					move.m_entityInstanceId = target->GetEntityInstanceId();
+					move.m_setTeleportedFlag = true;
+					move.m_setUpdatedOnServerFlag = true;
+					move.m_emptySpacePrio = true;
+					move.m_priorityListLength = IEventQueue::EventQueueMoveRequest::MAX_PRIORITY_LIST_LENGTH;
+					for(uint32_t i = 0; i < IEventQueue::EventQueueMoveRequest::MAX_PRIORITY_LIST_LENGTH; i++)
+					{
+						Vec2& p = move.m_priorityList[i];
+						p = Helpers::RandomItem(aRandom, *zonePositions);
+						p.m_x -= position->m_position.m_x;
+						p.m_y -= position->m_position.m_y;
+					}
+					aEventQueue->EventQueueMove(move);
 				}
 			}
 			break;
