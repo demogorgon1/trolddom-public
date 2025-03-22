@@ -10,6 +10,7 @@
 #include <tpublic/Components/Owner.h>
 #include <tpublic/Components/PlayerPublic.h>
 #include <tpublic/Components/Position.h>
+#include <tpublic/Components/ThreatTarget.h>
 
 #include <tpublic/Data/Entity.h>
 
@@ -172,7 +173,9 @@ namespace tpublic::DirectEffects
 				return Result();
 		}
 
-		EntityInstance* spawnedEntity = aEventQueue->EventQueueSpawnEntity(m_entityId, m_initState, m_mapEntitySpawnId, false);
+		bool detached = (m_spawnFlags & SPAWN_FLAG_DETACHED) != 0;
+
+		EntityInstance* spawnedEntity = aEventQueue->EventQueueSpawnEntity(m_entityId, m_initState, m_mapEntitySpawnId, detached);
 
 		if(m_mapEntitySpawnId == 0)
 		{
@@ -198,7 +201,22 @@ namespace tpublic::DirectEffects
 		{
 			// Initial NPC threat on target
 			Components::NPC* npc = spawnedEntity->GetComponent<Components::NPC>();
-			npc->m_spawnWithTarget = { { aTarget->GetEntityInstanceId(), aTarget->GetSeq() }, m_npcTargetThreat };
+
+			if ((m_spawnFlags & SPAWN_FLAG_SOURCE_THREAT_TARGET) != 0)
+			{
+				const Components::ThreatTarget* sourceThreatTarget = aSource->GetComponent<Components::ThreatTarget>();
+
+				if (sourceThreatTarget != NULL)
+				{
+					const ThreatTable::Entry* topThreat = sourceThreatTarget->m_table.GetTop();
+					if (topThreat != NULL)
+						npc->m_spawnWithTarget = { topThreat->m_key, m_npcTargetThreat };
+				}
+			}
+			else
+			{
+				npc->m_spawnWithTarget = { { aTarget->GetEntityInstanceId(), aTarget->GetSeq() }, m_npcTargetThreat };
+			}
 		}
 
 		// Minion?

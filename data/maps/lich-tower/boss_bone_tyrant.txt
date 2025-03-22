@@ -13,6 +13,65 @@ loot_table .bone_tyrant:
 	]	
 }
 
+{
+	${
+		_rarity: rare
+		_level: 18
+		_loot_group: .rotfang
+	}
+	
+	item lich_tower_7: !BOSS_DROP_HEAD
+	{
+		_string: "Boneguard"
+		_type: armor_plate
+		_icon: icon_mail_head_1
+		_strength: 1
+		_constitution: 1
+	}
+	
+	item lich_tower_8: !BOSS_DROP_WAIST
+	{
+		_string: "Belt of a Thousand Screams"
+		_type: armor_cloth
+		_icon: icon_belt_5
+		_dexterity: 2
+		_constitution: 1
+		_budget_bias: -10
+		_phys_crit: 1
+	}
+	
+	item lich_tower_9: !BOSS_DROP_SHIELD
+	{
+		_string: "Ancient Shield of the Dead"
+		_type: armor_cloth
+		_icon: icon_shield_3
+		_constitution: 1
+		_budget_bias: -15		
+		_dodge: 1
+		_block: 1
+	}
+	
+	item lich_tower_10: !BOSS_DROP_FEET
+	{
+		_string: "Dread King Warboots"
+		_icon: icon_mail_boots_1
+		_type: armor_mail
+		_constitution: 1
+		_strength: 2
+		_dexterity: 2
+	}
+	
+	item lich_tower_11: !BOSS_DROP_CHEST
+	{
+		_string: "Veil of the Grave"
+		_icon: icon_robe_3
+		_constitution: 1
+		_wisdom: 2
+		_spell_damage: 1
+	}
+	
+}
+
 ############################################################
 # Boss
 

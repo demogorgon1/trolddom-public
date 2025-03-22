@@ -13,6 +13,65 @@ loot_table .rotfang:
 	]	
 }
 
+{
+	${
+		_rarity: rare
+		_level: 18
+		_loot_group: .rotfang
+	}
+	
+	item lich_tower_1: !BOSS_DROP_WRISTS
+	{
+		_string: "Smelly Wrist Rags"
+		_type: armor_cloth
+		_icon: icon_bracers_2
+		_wisdom: 3
+		_spirit: 2
+		_constitution: 1
+	}
+	
+	item lich_tower_2: !BOSS_DROP_HANDS
+	{
+		_string: "Pestilence Grips"
+		_type: armor_mail
+		_icon: icon_gloves_4
+		_strength: 3
+		_dexterity: 2
+		_constitution: 1
+	}
+	
+	item lich_tower_3: !BOSS_DROP_LEGS
+	{
+		_string: "Trousers of the Plague"
+		_type: armor_cloth
+		_icon: icon_pants_2
+		_constitution: 1
+		_wisdom: 5
+		_healing: 2
+	}
+	
+	item lich_tower_4: !BOSS_DROP_NECK
+	{
+		_string: "Bone Fragment Amulet"
+		_icon: icon_necklace_5
+		_constitution: 1
+		_strength: 1
+		_budget_bias: -10
+		_dodge: 1
+	}
+	
+	item lich_tower_5: !BOSS_DROP_CROSSBOW
+	{
+		_string: "Rotpiercer"
+		_icon: icon_crossbow_1
+		_constitution: 1
+		_dexterity: 2
+		_budget_bias: -10
+		_phys_crit: 1
+	}
+	
+}
+
 ############################################################
 # Boss
 

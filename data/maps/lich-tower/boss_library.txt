@@ -13,6 +13,66 @@ loot_table .library:
 	]	
 }
 
+{
+	${
+		_rarity: rare
+		_level: 20
+		_loot_group: .rotfang
+	}
+	
+	item lich_tower_17: !BOSS_DROP_SHOULDERS
+	{
+		_string: "Pauldrons of the Lost Mage"
+		_icon: icon_shoulders_10
+		_type: armor_cloth
+		_spell_damage: 1
+		_wisdom: 2
+		_constitution: 1
+	}
+	
+	item lich_tower_18: !BOSS_DROP_CHEST
+	{
+		_string: "Battleplate of the Tower"
+		_type: armor_plate
+		_icon: icon_plate_chest_4
+		_constitution: 3
+		_strength: 2
+		_budget_bias: -10
+		_parry: 1
+	}
+	
+	item lich_tower_19: !BOSS_DROP_BACK
+	{
+		_string: "Elven Warlord's Cape"
+		_type: armor_cloth
+		_icon: icon_cape_4
+		_constitution: 1
+		_dexterity: 1
+		_strength: 1
+	}
+
+	item lich_tower_20: !BOSS_DROP_BACK
+	{
+		_string: "Spellcloak"
+		_type: armor_cloth
+		_icon: icon_cape_4
+		_constitution: 1
+		_wisdom: 1
+		_spirit: 1
+	}
+	
+	item lich_tower_21: !BOSS_DROP_WRISTS
+	{
+		_string: "Dark Elf Cuffs"
+		_icon: icon_bracers_3
+		_type: armor_cloth
+		_wisdom: 2
+		_spirit: 1
+		_healing: 3
+	}
+	
+}
+
 ############################################################
 # Boss
 
@@ -93,7 +153,7 @@ ability .teleport:
 	flags: [ target_self ]
 	states: [ in_combat ]
 	cast_time: 15
-	cooldown: $cooldown { duration: 90 }
+	cooldown: $cooldown { duration: 120 }
 	
 	direct_effect simple<zone_teleport>: .library
 	direct_effect simple<threat_table_shuffle>: { }

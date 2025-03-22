@@ -55,6 +55,9 @@ map_palette .stuff:
 	entity_spawn .bone_tyrant_spawn: [ 254 100 49 ]
 	entity_spawn .library: [ 255 3 53 ]
 	entity_spawn .malrik_the_undying: [ 255 40 100 ]
+	entity_spawn .malrik_the_undying_spawn_left: [ 40 59 128 ]
+	entity_spawn .malrik_the_undying_spawn_center: [ 140 59 128 ]
+	entity_spawn .malrik_the_undying_spawn_right: [ 40 159 128 ]
 	entity_spawn .rotfang: [ 255 50 254 ]
 	
 	entity_spawn .zombie: [ 94 28 199 ]

@@ -13,6 +13,65 @@ loot_table .anatar:
 	]	
 }
 
+{
+	${
+		_rarity: rare
+		_level: 19
+		_loot_group: .rotfang
+	}
+	
+	item lich_tower_12: !BOSS_DROP_1H_KNIFE
+	{
+		_string: "Soulslicer"
+		_icon: icon_sword_9
+		_spell_damage: 3
+		_wisdom: 2
+		_constitution: 1
+	}
+	
+	item lich_tower_13: !BOSS_DROP_FEET
+	{
+		_string: "Dark Magic Slippers"
+		_type: armor_cloth
+		_icon: icon_slippers_1
+		_constitution: 1
+		_wisdom: 2
+		_spell_damage: 1
+		_budget_bias: -10
+		_spell_crit: 1
+	}
+	
+	item lich_tower_14: !BOSS_DROP_SHOULDERS
+	{
+		_string: "Dark Mithril Pauldrons"
+		_type: armor_plate
+		_icon: icon_shoulders_8
+		_constitution: 1
+		_strength: 1
+		_budget_bias: -10
+		_phys_crit: 1
+	}
+	
+	item lich_tower_15: !BOSS_DROP_FINGER
+	{
+		_string: "Dread Ring"
+		_icon: icon_ring_8
+		_constitution: 1
+		_strength: 1
+		_dexterity: 1
+	}
+	
+	item lich_tower_16: !BOSS_DROP_FINGER
+	{
+		_string: "Corrupted Soothsayer's Ring"
+		_icon: icon_ring_1
+		_wisdom: 3
+		_healing: 2
+		_mana_per_5: 1
+	}
+	
+}
+
 ############################################################
 # Boss
 
