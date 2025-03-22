@@ -16,38 +16,40 @@ npc_behavior_state .patrol:
 	behavior: patrolling
 }
 
-map_entity_spawn .skeleton_healer: 
+map_entity_spawn .wolf_trash: 
 { 
-	#entity .skeleton_healer_18: { level: 18 spawn_condition: { if_not: .xxx_killed } } 	
+	entity .wolf_20_a: { level: 20 spawn_condition: { if_not: .wolf_killed } } 	
+	entity .wolf_20_b: { level: 20 spawn_condition: { if_not: .wolf_killed } } 	
 
 	spawn_timer: !TRASH_RESPAWN_TIMER{}
 }
 
-loot_table .humanoid_undead: 
+loot_table .wolves: 
 {
 	slots:
 	[	
 		!WORLD_DROPS {}
-		!WORLD_DROPS_CLOTH {}
+		!WORLD_DROPS_WOLVES {}
 	]	
 }
 
-# XXX
+# Wolves
 {
-	#${
-	#	_faction: rebels
-	#	_creature_type: humanoid
-	#	_default_behavior_state: .passive
-	#	_loot_table: .humanoid 
-	#	_weapon_damage: 1.7
-	#	_resource_health: 1.3
-	#	_elite: true
-	#	_abilities: 
-	#	[ 
-	#		{ id: npc_rend } 
-	#		{ id: npc_attack } 
-	#	]
-	#}
+	${
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: .wolves
+		_weapon_damage: 1.8
+		_resource_health: 2.3
+		_elite: true
+		_abilities: 
+		[ 
+			{ id: npc_rend } 
+			{ id: npc_attack } 
+		]
+	}
 
-	#entity .rebel_melee_18_a: !NPC { _string: "Rebel Fighter" _sprite: rebel_11 _sprite_dead: rebel_11_dead _level: 18 }
+	entity .wolf_20_a: !NPC { _string: "Tirnwood Wolf" _sprite: wolf_2 _sprite_dead: wolf_2_dead _level: 20 }
+	entity .wolf_20_b: !NPC { _string: "Tirnwood Wolf" _sprite: wolf_3 _sprite_dead: wolf_3_dead _level: 20 }
 }

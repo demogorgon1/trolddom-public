@@ -53,6 +53,8 @@ map_palette .stuff:
 	entity_spawn .owlbear: [ 255 0 0 ]
 	entity_spawn .tree: [ 255 43 0 ]
 	entity_spawn .wolf: [ 255 3 53 ]
+	
+	entity_spawn .wolf_trash: [ 251 93 194 ]
 }
 
 map_palette .levels:
