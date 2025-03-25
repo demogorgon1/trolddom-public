@@ -736,6 +736,8 @@ sprites:
 	cursor: { position: [ 0 640 ] }	
 	sprite icon_special_10 : { tags: [ icon ] }
 	sprite icon_token_2 : { tags: [ icon ] }
+	sprite icon_potion_2 : { tags: [ icon ] }
+	sprite icon_potion_3 : { tags: [ icon ] }
 	
 }
 

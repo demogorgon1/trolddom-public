@@ -1,0 +1,8 @@
+sprites:
+{
+	source: "currency.png"
+	
+	size: { width: 8 height: 8 }
+	sprite token_of_victory_currency: { }
+}
+ 

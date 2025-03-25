@@ -4,6 +4,8 @@ dialogue_screen .elf_quartermaster_vendor:
 	sell children_of_the_moon_waist_1: { quantity: 1 reputation_level_requirement children_of_the_moon: !HONORED_REPUTATION_LEVEL{} }	
 	sell children_of_the_moon_hands_1: { quantity: 1 reputation_level_requirement children_of_the_moon: !REVERED_REPUTATION_LEVEL{} }	
 	sell children_of_the_moon_neck_1: { quantity: 1 reputation_level_requirement children_of_the_moon: !REVERED_REPUTATION_LEVEL{} }	
+	
+	sell token_of_victory_mana_potion: !TOKEN_OF_VICTORY_PRICE{ _count: 1 }
 }
 
 dialogue_screen .elf_quartermaster_dialogue:

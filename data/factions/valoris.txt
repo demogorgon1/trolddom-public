@@ -8,7 +8,7 @@ faction valoris:
 }
 
 ################################################################################
-# Quartermaster items
+# Reputation items
 
 item valoris_wrists_1:
 {
@@ -64,4 +64,21 @@ item valoris_ring_2:
 	string: "Royal Mark of Wisdom"
 	stat_weight constitution: 1
 	stat_weight wisdom: 2
+}
+
+################################################################################
+# Token of Victory items
+
+item token_of_victory_healing_potion (potion):
+{	
+	icon: icon_potion_2
+	string: "Victorious Healing Potion"
+	binds: when_picked_up
+	flags: [ not_sellable ]
+	use_ability: $ability (healing_potion) [ string icon ]	
+	{
+		direct_effect heal: { function: 250 }
+		consume_items: { entry: { item: <item> quantity: 1 } }
+		required_level: 12
+	}
 }

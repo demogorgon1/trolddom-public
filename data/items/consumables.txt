@@ -376,7 +376,7 @@ ability consumable_strong_healing_potion (healing_potion):
 {
 	string: "Strong Healing Potion"
 	icon: icon_red_potion_2
-	direct_effect heal: { function: 200 }
+	direct_effect heal: { function: 250 }
 	consume_items: { consumable_strong_healing_potion: 1 }
 	required_level: 10
 }
@@ -395,9 +395,9 @@ item consumable_strong_healing_potion (healing_potion):
 ability consumable_strong_mana_potion (mana_potion):	
 {
 	string: "Strong Mana Potion"
-	description: "Restores 200 mana."
+	description: "Restores 250 mana."
 	icon: icon_blue_potion_2
-	direct_effect modify_resource: { resource: mana function: 200 }
+	direct_effect modify_resource: { resource: mana function: 250 }
 	consume_items: { consumable_strong_mana_potion: 1 }
 	required_level: 10
 }

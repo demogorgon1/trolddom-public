@@ -8,7 +8,7 @@ faction children_of_the_moon:
 }
 
 ################################################################################
-# Quartermaster items
+# Reputation items
 
 item children_of_the_moon_back_1:
 {
@@ -63,4 +63,22 @@ item children_of_the_moon_neck_1:
 	stat_weight constitution: 2
 	stat_weight strength: 1
 	stat dodge_chance: 1
+}
+
+################################################################################
+# Token of Victory items
+
+item token_of_victory_mana_potion (potion):
+{	
+	icon: icon_potion_3
+	string: "Victorious Mana Potion"
+	binds: when_picked_up
+	flags: [ not_sellable ]
+	use_ability: $ability (mana_potion) [ string icon ]	
+	{
+		description: "Restores 250 mana."
+		direct_effect modify_resource: { resource: mana function: 250 }
+		consume_items: { entry: { item: <item> quantity: 1 } }
+		required_level: 12
+	}
 }
