@@ -7,7 +7,9 @@ loot_table .captain_jorgenson:
 {
 	slots:
 	[
-		{ possibility: { loot_group: .captain_jorgenson  } }			
+		{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
+		  map_message valoris_insurgency: "Captain Jorgenson will not drop Token of Victory for {}." } } }
+		{ possibility: { loot_group: .captain_jorgenson  } }					
 		!WORLD_DROPS{}
 		!WORLD_DROPS_CLOTH{}
 	]	

@@ -7,7 +7,9 @@ loot_table .wernox:
 {
 	slots:
 	[
-		{ possibility: { loot_group: .wernox  } }			
+		{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
+		  map_message valoris_insurgency: "Wernox will not drop Token of Victory for {}." } } }		
+		{ possibility: { loot_group: .wernox  } }				
 		!WORLD_DROPS{}
 		!WORLD_DROPS_CLOTH{}
 	]	

@@ -19,7 +19,7 @@ namespace tpublic
 	class LootGenerator
 	{
 	public:
-		typedef std::function<void(const tpublic::ItemInstance&)> ItemCallback;
+		typedef std::function<void(const tpublic::ItemInstance&, uint32_t)> ItemCallback;
 
 						LootGenerator(
 							const Manifest*								aManifest);			

@@ -502,3 +502,19 @@ item item_razor_beak:
 	stack: 10
 	loot_groups: [ birds owlbears ]
 }
+
+loot_group token_of_victory: {}
+
+item item_token_of_victory:
+{
+	string: "Token of Victory"
+	loot_groups: [ token_of_victory ]
+	type: miscellaneous
+	item_level: 20
+	flags: [ not_sellable ]
+	stack: 100
+	icon: icon_token_2
+	rarity: uncommon
+	level_range: [ 10 22 ]
+	binds: when_picked_up
+}

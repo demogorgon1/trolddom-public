@@ -209,7 +209,8 @@ namespace tpublic
 
 				std::vector<const EntityInstance*> playerInstances = { aPlayerEntityInstance };
 				aLootGenerator->GenerateItems(aRandom, playerInstances, NULL, aItem->m_itemLevel, 0, lootTable, [&](
-					const ItemInstance& aItemInstance)
+					const ItemInstance& aItemInstance,
+					uint32_t			/*aLootCooldownId*/)
 				{
 					// FIXME: add to existing quantity if found
 					aOut.push_back(aItemInstance);

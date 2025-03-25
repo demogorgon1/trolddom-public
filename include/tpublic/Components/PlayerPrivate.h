@@ -7,6 +7,7 @@
 #include "../ComponentBase.h"
 #include "../ErrorNotification.h"
 #include "../EventHistory.h"
+#include "../LootCooldowns.h"
 #include "../PlayerGateways.h"
 #include "../PlayerProfessions.h"
 #include "../PlayerWorld.h"
@@ -69,7 +70,8 @@ namespace tpublic
 				DEPRECATED_FIELD_SELECTED_PLAYER_WORLD,
 				FIELD_LATEST_CHARACTER_FIX_ID,
 				FIELD_CLASS_VERSION,
-				FIELD_KNOWS_RIDING
+				FIELD_KNOWS_RIDING,
+				FIELD_LOOT_COOLDOWNS
 			};
 
 			static void
@@ -88,6 +90,7 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_LATEST_CHARACTER_FIX_ID, NULL, offsetof(PlayerPrivate, m_latestCharacterFixId));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_CLASS_VERSION, NULL, offsetof(PlayerPrivate, m_classVersion));
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_KNOWS_RIDING, NULL, offsetof(PlayerPrivate, m_knowsRiding));
+				aSchema->DefineCustomObjectNoSource<LootCooldowns>(FIELD_LOOT_COOLDOWNS, offsetof(PlayerPrivate, m_lootCooldowns));
 			}
 
 			void
@@ -106,6 +109,7 @@ namespace tpublic
 				m_latestCharacterFixId = 0;
 				m_classVersion = 0;
 				m_knowsRiding = false;
+				m_lootCooldowns.Reset();
 
 				m_tryEditPlayerWorlds = false;
 				m_recall = false;
@@ -138,6 +142,7 @@ namespace tpublic
 			uint32_t														m_latestCharacterFixId = 0;
 			uint32_t														m_classVersion = 0;
 			bool															m_knowsRiding = false;
+			LootCooldowns													m_lootCooldowns;
 
 			// Not serialized, internal
 			bool															m_tryEditPlayerWorlds = false;

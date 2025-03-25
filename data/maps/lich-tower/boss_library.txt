@@ -7,6 +7,8 @@ loot_table .library:
 {
 	slots:
 	[
+		{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
+		  map_message lich_tower: "Arch-Mage Farrux will not drop Token of Victory for {}." } } }
 		{ possibility: { loot_group: .library  } }			
 		!WORLD_DROPS{}
 		!WORLD_DROPS_CLOTH{}

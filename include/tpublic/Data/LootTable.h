@@ -73,6 +73,8 @@ namespace tpublic
 							m_quantity = aChild->GetUInt32();
 						else if(aChild->m_name == "loot_group")
 							m_lootGroupId = aChild->GetId(DataType::ID_LOOT_GROUP);
+						else if (aChild->m_name == "loot_cooldown")
+							m_lootCooldownId = aChild->GetId(DataType::ID_LOOT_COOLDOWN);
 						else if (aChild->m_name == "creature_types")
 							aChild->GetIdArray(DataType::ID_CREATURE_TYPE, m_creatureTypes);
 						else if(aChild->m_tag == "requirement")
@@ -91,6 +93,7 @@ namespace tpublic
 					aStream->WriteUInt(m_quantity);
 					aStream->WriteUInts(m_creatureTypes);
 					aStream->WriteObjects(m_requirements);
+					aStream->WriteUInt(m_lootCooldownId);
 				}
 
 				bool
@@ -106,6 +109,8 @@ namespace tpublic
 					if (!aStream->ReadUInts(m_creatureTypes))
 						return false;
 					if(!aStream->ReadObjects(m_requirements))
+						return false;
+					if (!aStream->ReadUInt(m_lootCooldownId))
 						return false;
 					return true;
 				}
@@ -134,6 +139,7 @@ namespace tpublic
 				uint32_t						m_quantity = 1;
 				std::vector<uint32_t>			m_creatureTypes;
 				std::vector<Requirement>		m_requirements;
+				uint32_t						m_lootCooldownId = 0;
 			};
 
 			struct Slot

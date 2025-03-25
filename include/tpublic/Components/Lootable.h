@@ -29,6 +29,7 @@ namespace tpublic
 					m_playerTag.ToStream(aWriter);
 					m_itemInstance.ToStream(aWriter);
 					aWriter->WriteUInt(m_questId);
+					aWriter->WriteUInt(m_lootCooldownId);
 				}
 
 				bool
@@ -41,6 +42,8 @@ namespace tpublic
 						return false;
 					if(!aReader->ReadUInt(m_questId))
 						return false;
+					if (!aReader->ReadUInt(m_lootCooldownId))
+						return false;
 					return true;
 				}
 
@@ -48,6 +51,7 @@ namespace tpublic
 				PlayerTag				m_playerTag;
 				ItemInstance			m_itemInstance;
 				uint32_t				m_questId = 0;
+				uint32_t				m_lootCooldownId = 0;
 			};
 
 			enum Field

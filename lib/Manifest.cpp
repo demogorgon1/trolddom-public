@@ -24,6 +24,7 @@
 #include <tpublic/Data/Expression.h>
 #include <tpublic/Data/Faction.h>
 #include <tpublic/Data/Item.h>
+#include <tpublic/Data/LootCooldown.h>
 #include <tpublic/Data/LootGroup.h>
 #include <tpublic/Data/LootTable.h>
 #include <tpublic/Data/Map.h>
@@ -92,6 +93,7 @@ namespace tpublic
 		RegisterDataContainer<Data::Expression>();
 		RegisterDataContainer<Data::Faction>();
 		RegisterDataContainer<Data::Item>();
+		RegisterDataContainer<Data::LootCooldown>();
 		RegisterDataContainer<Data::LootGroup>();
 		RegisterDataContainer<Data::LootTable>();
 		RegisterDataContainer<Data::Map>();

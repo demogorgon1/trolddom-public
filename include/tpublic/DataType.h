@@ -69,6 +69,7 @@ namespace tpublic
 			ID_REALM_BALANCE,
 			ID_CONTROL_POINT_STATE,
 			ID_WORLD_AURA,
+			ID_LOOT_COOLDOWN,
 
 			NUM_IDS
 		};
@@ -135,7 +136,8 @@ namespace tpublic
 			"mount",
 			"realm_balance",
 			"control_point_state",
-			"world_aura"
+			"world_aura",
+			"loot_cooldown"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

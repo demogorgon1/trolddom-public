@@ -7,6 +7,8 @@ loot_table .erdox_the_soulsplitter:
 {
 	slots:
 	[
+		{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
+		  map_message valoris_insurgency: "Erdox the Soulsplitter will not drop Token of Victory for {}." } } }
 		{ possibility: { loot_group: .erdox_the_soulsplitter  } }			
 		!WORLD_DROPS{}
 		!WORLD_DROPS_CLOTH{}

@@ -182,7 +182,7 @@ map valoris_insurgency:
 	level: 18
 	max_players: 5
 	max_minions: 1
-	
+		
 	layers:
 	[
 		{

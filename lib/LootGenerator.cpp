@@ -123,7 +123,8 @@ namespace tpublic
 		const Components::KillContribution* killContribution = aLootableEntityInstance->GetComponent<Components::KillContribution>();
 
 		GenerateItems(aRandom, aPlayerEntityInstances, aLootableEntityInstance, aLevel, aCreatureTypeId, aLootTable, [&](
-			const ItemInstance& aItemInstance)			
+			const ItemInstance& aItemInstance,
+			uint32_t			aLootCooldownId)			
 		{			
 			const Data::Item* item = m_manifest->GetById<Data::Item>(aItemInstance.m_itemId);
 
@@ -140,7 +141,20 @@ namespace tpublic
 					loot.m_itemInstance.m_quantity = 1;
 			}
 
-			if(item->m_questId != 0)
+			if(aLootCooldownId != 0)
+			{
+				// Items with loot cooldown goes to all players. Note that this doesn't work with quest items.
+				for (const EntityInstance* playerEntityInstance : aPlayerEntityInstances)
+				{
+					const Components::PlayerPublic* playerPublic = playerEntityInstance->GetComponent<Components::PlayerPublic>();
+					const Components::CombatPublic* combatPublic = playerEntityInstance->GetComponent<Components::CombatPublic>();
+
+					loot.m_playerTag.SetCharacter(playerPublic->m_characterId, combatPublic->m_level);
+					loot.m_lootCooldownId = aLootCooldownId;
+					aLootable->m_availableLoot.push_back(loot);
+				}
+			}
+			else if(item->m_questId != 0)
 			{
 				// This is a quest item. Generate a copy for everyone with the quest.
 				for(const EntityInstance* playerEntityInstance : aPlayerEntityInstances)
@@ -190,6 +204,7 @@ namespace tpublic
 				uint32_t	m_accumWeight = 0;
 				uint32_t	m_lootGroupId = 0;
 				uint32_t	m_quantity = 0;
+				uint32_t	m_lootCooldownId = 0;
 			};
 
 			Entry entries[Data::LootTable::Slot::MAX_POSSIBILTY_COUNT];
@@ -215,6 +230,7 @@ namespace tpublic
 				t.m_accumWeight = accumWeight;
 				t.m_quantity = possibility.m_quantity;
 				t.m_lootGroupId = possibility.m_lootGroupId;
+				t.m_lootCooldownId = possibility.m_lootCooldownId;
 			}
 
 			if(entryCount > 0)
@@ -223,6 +239,7 @@ namespace tpublic
 				uint32_t possibilityRoll = distribution(aRandom);
 				uint32_t lootGroupId = 0;
 				uint32_t quantity = 0;
+				uint32_t lootCooldownId = 0;
 
 				for (size_t i = 0; i < entryCount; i++)
 				{
@@ -231,6 +248,7 @@ namespace tpublic
 					{
 						lootGroupId = t.m_lootGroupId;
 						quantity = t.m_quantity;
+						lootCooldownId = t.m_lootCooldownId;
 						break;
 					}
 				}
@@ -268,7 +286,7 @@ namespace tpublic
 							tpublic::ItemInstance itemInstance;
 							itemInstance.m_itemId = itemId;
 							itemInstance.m_quantity = quantity;
-							aItemCallback(itemInstance);
+							aItemCallback(itemInstance, lootCooldownId);
 						}
 					}
 				}
