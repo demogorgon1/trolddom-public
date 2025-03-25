@@ -9,7 +9,7 @@ loot_table .bone_tyrant:
 	[
 		{ possibility: { loot_group: .bone_tyrant  } }			
 		!WORLD_DROPS{}
-		!WORLD_DROPS_CLOTH{}
+		!WORLD_DROPS_SKELETONS{}
 	]	
 }
 
@@ -17,7 +17,7 @@ loot_table .bone_tyrant:
 	${
 		_rarity: rare
 		_level: 18
-		_loot_group: .rotfang
+		_loot_group: .bone_tyrant
 	}
 	
 	item lich_tower_7: !BOSS_DROP_HEAD
@@ -65,6 +65,7 @@ loot_table .bone_tyrant:
 	{
 		_string: "Veil of the Grave"
 		_icon: icon_robe_3
+		_type: armor_cloth
 		_constitution: 1
 		_wisdom: 2
 		_spell_damage: 1

@@ -55,6 +55,8 @@ map_palette .stuff:
 	entity_spawn .wolf: [ 255 3 53 ]
 	
 	entity_spawn .wolf_trash: [ 251 93 194 ]
+	entity_spawn .giant_spider_trash: [ 30 99 125 ]
+	entity_spawn .tree_trash: [ 31 39 188 ]
 }
 
 map_palette .levels:
@@ -143,7 +145,7 @@ map tirnwood_thicket:
 	string: "Tirnwood Thicket"
 	type: private
 	reset: manual
-	default_tile: dungeon_wall
+	default_tile: pine_forest_1
 	default_player_spawn: .player_spawn
 	default_exit_portal: .exit
 	default_fishing_loot_table: fish

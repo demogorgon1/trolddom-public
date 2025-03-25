@@ -10,6 +10,7 @@ loot_table .malrik_the_undying:
 		{ possibility: { loot_group: .malrik_the_undying  } }			
 		!WORLD_DROPS{}
 		!WORLD_DROPS_CLOTH{}
+		!WORLD_DROPS_SKELETONS{}
 	]	
 }
 
@@ -17,7 +18,7 @@ loot_table .malrik_the_undying:
 	${
 		_rarity: rare
 		_level: 20
-		_loot_group: .rotfang
+		_loot_group: .malrik_the_undying
 	}
 	
 	item lich_tower_22: !BOSS_DROP_2H_SWORD

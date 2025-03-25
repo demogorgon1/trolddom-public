@@ -74,6 +74,7 @@ sprites:
 	sprite effect_unholy_wings_0: { flags: [ centered ] }
 	sprite effect_unholy_wings_1: { flags: [ centered ] }
 	sprite effect_unholy_wings_2: { flags: [ centered ] }
+	sprite effect_web_trap: { flags: [ centered ] }	
 	
 	cursor: { position: [ 0 20 ] }	
 	size: { width: 24 height: 24 }
@@ -152,6 +153,7 @@ sprites:
 	sprite effect_pink_lightning_0: { flags: [ centered ] }
 	sprite effect_pink_lightning_1: { flags: [ centered ] }
 	sprite effect_pink_lightning_2: { flags: [ centered ] }
+	sprite effect_web_projectile: { flags: [ centered ] }
 	
 	cursor: { position: [ 0 67 ] }
 	size: { width: 14 height: 14 }

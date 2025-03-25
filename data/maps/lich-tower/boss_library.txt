@@ -10,6 +10,7 @@ loot_table .library:
 		{ possibility: { loot_group: .library  } }			
 		!WORLD_DROPS{}
 		!WORLD_DROPS_CLOTH{}
+		!WORLD_DROPS_SKELETONS{}
 	]	
 }
 
@@ -17,7 +18,7 @@ loot_table .library:
 	${
 		_rarity: rare
 		_level: 20
-		_loot_group: .rotfang
+		_loot_group: .library
 	}
 	
 	item lich_tower_17: !BOSS_DROP_SHOULDERS

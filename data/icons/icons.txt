@@ -733,6 +733,9 @@ sprites:
 	sprite icon_lich_tower : { tags: [ icon ] }
 	sprite icon_tirnwood_thicket : { tags: [ icon ] }
 	
+	cursor: { position: [ 0 640 ] }	
+	sprite icon_special_10 : { tags: [ icon ] }
+	
 }
 
 

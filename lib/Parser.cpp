@@ -1,5 +1,6 @@
 #include "Pcheader.h"
 
+#include <tpublic/Helpers.h>
 #include <tpublic/Parser.h>
 #include <tpublic/Tokenizer.h>
 
@@ -360,8 +361,17 @@ namespace tpublic
 							if (aTokenizer.IsToken("<"))
 							{
 								aTokenizer.Proceed();
-								name = "!"; // Indicate it's a tag that needs to be resolved
-								name += aTokenizer.ConsumeAnyIdentifier();
+
+								if(aTokenizer.IsToken(">"))
+								{
+									name = "?";
+								}
+								else
+								{
+									name = "!"; // Indicate it's a tag that needs to be resolved
+									name += aTokenizer.ConsumeAnyIdentifier();
+								}
+
 								aTokenizer.ConsumeToken(">");
 							}
 							else
@@ -782,6 +792,8 @@ namespace tpublic
 			needObjectNameStackPop = true;
 		}
 
+		uint32_t multiSeqNum = 0;
+
 		for (size_t i = 0; i < aNode->m_children.size(); i++)
 		{
 			std::unique_ptr<SourceNode>& child = aNode->m_children[i];
@@ -811,7 +823,7 @@ namespace tpublic
 
 				child->m_children.clear();
 
-				if(dataObject->m_name.empty())
+				if(dataObject->m_name.empty() || dataObject->m_name == "?")
 				{
 					std::string embeddedObjectName;
 					for (const std::string& objectName : aObjectNameStack)
@@ -828,6 +840,10 @@ namespace tpublic
 						embeddedObjectName += "_";
 						embeddedObjectName += child->m_name;
 					}
+
+					if(dataObject->m_name == "?")
+						embeddedObjectName += Helpers::Format("_%u", multiSeqNum++);
+
 					dataObject->m_name = std::move(embeddedObjectName);
 				}
 				else if(dataObject->m_name[0] == '!')

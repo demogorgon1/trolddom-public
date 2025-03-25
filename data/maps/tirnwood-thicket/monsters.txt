@@ -24,6 +24,21 @@ map_entity_spawn .wolf_trash:
 	spawn_timer: !TRASH_RESPAWN_TIMER{}
 }
 
+map_entity_spawn .giant_spider_trash: 
+{ 
+	entity .giant_spider: { level: 20 spawn_condition: { if_not: .owlbear_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+map_entity_spawn .tree_trash: 
+{ 
+	entity .tree_a: { level: 20 spawn_condition: { if_not: .tree_killed } } 	
+	entity .tree_b: { level: 20 spawn_condition: { if_not: .tree_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
 loot_table .wolves: 
 {
 	slots:
@@ -33,15 +48,33 @@ loot_table .wolves:
 	]	
 }
 
+loot_table .spiders: 
+{
+	slots:
+	[	
+		!WORLD_DROPS {}
+		!WORLD_DROPS_SPIDERS {}
+	]	
+}
+
+loot_table .trees: 
+{
+	slots:
+	[	
+		!WORLD_DROPS {}
+		!WORLD_DROPS_WOOD_ELEMENTALS {}
+	]	
+}
+
 # Wolves
 {
 	${
 		_faction: monsters
-		_creature_type: humanoid
+		_creature_type: beast
 		_default_behavior_state: .wandering_short
 		_loot_table: .wolves
-		_weapon_damage: 1.8
-		_resource_health: 2.3
+		_weapon_damage: 1.7
+		_resource_health: 2.1
 		_elite: true
 		_abilities: 
 		[ 
@@ -53,3 +86,47 @@ loot_table .wolves:
 	entity .wolf_20_a: !NPC { _string: "Tirnwood Wolf" _sprite: wolf_2 _sprite_dead: wolf_2_dead _level: 20 }
 	entity .wolf_20_b: !NPC { _string: "Tirnwood Wolf" _sprite: wolf_3 _sprite_dead: wolf_3_dead _level: 20 }
 }
+
+# Spiders
+{
+	${
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .passive
+		_loot_table: .spiders
+		_weapon_damage: 1.9
+		_resource_health: 2.4
+		_elite: true
+		_abilities: 
+		[ 
+			{ id: npc_web target: random_player } 
+			{ id: npc_poison_bite }
+			{ id: npc_attack } 
+		]
+	}
+
+	entity .giant_spider: !NPC { _string: "Giant Spider" _sprite: spider_1 _sprite_dead: spider_1_dead _level: 20 }
+}
+
+# Trees
+{
+	${
+		_faction: monsters
+		_creature_type: elemental
+		_default_behavior_state: .passive
+		_loot_table: .trees
+		_weapon_damage: 1.6
+		_resource_health: 2.6
+		_elite: true
+		_abilities: 
+		[ 
+			{ id: npc_sunder } 
+			{ id: npc_attack } 
+		]
+	}
+
+	entity .tree_a: !NPC { _string: "Wood Elemental" _sprite: wood_elemental_1 _sprite_dead: wood_elemental_1_dead _level: 20 }
+	entity .tree_b: !NPC { _string: "Wood Elemental" _sprite: wood_elemental_2 _sprite_dead: wood_elemental_2_dead _level: 20 }
+}
+
+

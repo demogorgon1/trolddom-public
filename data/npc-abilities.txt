@@ -565,28 +565,13 @@ ability npc_acid_spit:
 	}	
 }
 
-cooldown npc_trap:
-{
-	duration: 100
-}
-
-aura npc_trap:
-{
-	string: "Trapped"
-	type: debuff
-	icon: icon_net
-	duration: 40
-	flags: [ unique ]
-	aura_effect immobilize: {}
-	particle_system: net_trap
-}
-
 ability npc_trap:
 {
 	string: "Trap"
 	range: 2
 	cast_time: 10
-	cooldowns: [ global npc_trap ]
+	cooldowns: [ global ]
+	cooldown: $cooldown { duration: 100 } 
 	flags: [ offensive target_other target_hostile can_miss interruptable ]
 	states: [ in_combat ]
 	icon: icon_net
@@ -594,7 +579,16 @@ ability npc_trap:
 
 	direct_effect apply_aura:
 	{
-		aura: npc_trap
+		aura: $aura
+		{
+			string: "Trapped"
+			type: debuff
+			icon: icon_net
+			duration: 40
+			flags: [ unique ]
+			aura_effect immobilize: {}
+			particle_system: net_trap
+		}
 	}	
 }
 
@@ -990,6 +984,57 @@ ability npc_charge:
 	direct_effect simple<threat_table_equalize>: { flags: [ self ]  }
 }
 
+ability npc_charge_rend:
+{
+	string: "Rending Charge"
+	min_range: 3
+	range: 7
+	cooldowns: [ global ]
+	cooldown: $cooldown { duration: 120 }		
+	flags: [ target_other target_hostile trigger_move_cooldown ]
+	states: [ default in_combat ]
+	icon: icon_charge
+	direct_effect move:
+	{
+		destination: target_adjacent
+		move_flags: [ walkable_path_required ]
+		max_steps: 12
+		trigger_ability_on_resolve<target>: $ability [ string icon ]
+		{
+			flags: [ target_hostile ]
+			states: [ default in_combat ]
+			direct_effect apply_aura:
+			{	
+				threat: 10			
+				aura: $aura [ string ]
+				{
+					description: "Bleeding."
+					type: debuff
+					icon: icon_blood
+					duration: based_on_effects
+					flags: [ unique ]
+
+					aura_effect repeat:
+					{
+						update_interval: 20
+						update_count: 7
+						ability: $ability [ string icon ]
+						{
+							states: [ default in_combat ]
+							flags: [ always_in_range always_in_line_of_sight ]
+							direct_effect damage:
+							{
+								damage_type: bleed
+								function: { expression: a a: [ [ 1 4 ] [ 10 14 ] [ 20 28 ] [ 30 56 ] ] elite_multiplier: 2.5 }
+							}
+						}
+					}
+				}
+			}
+		}
+	}	
+}
+
 ability npc_whirlwind:
 {
 	string: "Whirlwind"
@@ -1051,4 +1096,33 @@ ability npc_infection_aura:
 		
 		}
 	}
+}
+
+ability npc_web:
+{
+	string: "Web"
+	range: 6
+	cast_time: 10
+	cooldowns: [ global ]
+	cooldown: $cooldown { duration: 100 } 
+	flags: [ offensive target_other target_hostile can_miss interruptable ]
+	states: [ in_combat ]
+	icon: icon_spider_web_1
+	delay: 3
+	projectile: web_projectile
+	speed: 6
+
+	direct_effect apply_aura:
+	{
+		aura: $aura
+		{
+			string: "Trapped"
+			type: debuff
+			icon: icon_spider_web_1
+			duration: 40
+			flags: [ unique ]
+			aura_effect immobilize: {}
+			particle_system: web_trap
+		}
+	}	
 }

@@ -9,8 +9,75 @@ loot_table .wolf:
 	[
 		{ possibility: { loot_group: .wolf  } }			
 		!WORLD_DROPS{}
-		!WORLD_DROPS_CLOTH{}
+		!WORLD_DROPS_WOLVES{}
 	]	
+}
+
+{
+	${
+		_rarity: rare
+		_level: 20
+		_loot_group: .wolf
+	}
+	
+	item tirnwood_thicket_1: !BOSS_DROP_FEET
+	{
+		_string: "Wolf Hunter's Boots"
+		_type: armor_mail
+		_icon: icon_shoe_1
+		_strength: 3
+		_dexterity: 2
+		_constitution: 1
+	}
+	
+	item tirnwood_thicket_2: !BOSS_DROP_FEET
+	{
+		_string: "Ancient Slippers of the Druid"
+		_type: armor_cloth
+		_icon: icon_slippers_2
+		_healing: 3
+		_wisdom: 2
+		_spirit: 1
+	}
+	
+	item tirnwood_thicket_3: !BOSS_DROP_HEAD
+	{
+		_string: "Grim Faceguard"
+		_type: armor_plate
+		_icon: icon_helmet_3
+		_constitution: 3
+		_strength: 1
+		_budget_bias: -10
+		_parry: 1
+	}
+	
+	item tirnwood_thicket_4: !BOSS_DROP_1H_MACE
+	{
+		_string: "Mace of the Six Trees"
+		_icon: icon_mace_3
+		_constitution: 2
+		_wisdom: 1
+		_healing: 3
+	}
+	
+	item tirnwood_thicket_5: !BOSS_DROP_BOW
+	{
+		_string: "Wolf Hunter's Bow"
+		_icon: icon_bow_1
+		_strength: 3
+		_dexterity: 2
+		_constitution: 1
+	}
+	
+	item tirnwood_thicket_6: !BOSS_DROP_WAIST
+	{
+		_string: "Bloodied Rope"
+		_icon: icon_cloth_belt_2
+		_constitution: 1
+		_dexterity: 2
+		_budget_bias: -10
+		_phys_crit: 1
+	}
 }
 
 ############################################################
@@ -33,8 +100,8 @@ entity tirnwood_thicket_wolf: !NPC
 	_faction: monsters 
 	_sprite: wolf_6
 	_sprite_dead: wolf_6_dead 
-	_weapon_damage: 1
-	_resource_health: 1
+	_weapon_damage: 1.8
+	_resource_health: 6
 	_loot_table: .wolf
 	_creature_type: beast
 	_encounter: .wolf
@@ -46,6 +113,12 @@ entity tirnwood_thicket_wolf: !NPC
 
 	_abilities: 
 	[
+		{
+			id: npc_charge_rend
+			requirement self<must_have_less_health_than>: 90
+			target: random_player
+		}
+	
 		{
 			id: npc_attack
 		}

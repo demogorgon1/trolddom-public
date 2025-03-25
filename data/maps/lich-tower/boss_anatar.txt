@@ -17,7 +17,7 @@ loot_table .anatar:
 	${
 		_rarity: rare
 		_level: 19
-		_loot_group: .rotfang
+		_loot_group: .anatar
 	}
 	
 	item lich_tower_12: !BOSS_DROP_1H_KNIFE

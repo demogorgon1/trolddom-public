@@ -9,7 +9,7 @@ loot_table .rotfang:
 	[
 		{ possibility: { loot_group: .rotfang  } }			
 		!WORLD_DROPS{}
-		!WORLD_DROPS_CLOTH{}
+		!WORLD_DROPS_ZOMBIES{}
 	]	
 }
 

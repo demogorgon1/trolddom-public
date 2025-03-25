@@ -66,7 +66,7 @@ namespace tpublic
 								const IWorldView*				aWorldView) override;
 
 			// Public data
-			uint32_t				m_auraId = 0;
+			std::vector<uint32_t>	m_auraIds;
 			int32_t					m_threat = 0;			
 			uint32_t				m_applyToPartyMembersInRange = 0;
 			SourceRedirect			m_sourceRedirect = SOURCE_REDIRECT_NONE;		

@@ -32,7 +32,7 @@ namespace tpublic
 				if (!FromSourceBase(aChild))
 				{
 					if (aChild->m_name == "aura")
-						m_auraId = aChild->GetId(DataType::ID_AURA);
+						m_auraIds.push_back(aChild->GetId(DataType::ID_AURA));
 					else if (aChild->m_name == "threat")
 						m_threat = aChild->GetInt32();
 					else if(aChild->m_name == "apply_to_party_members_in_range")
@@ -50,7 +50,7 @@ namespace tpublic
 			IWriter*						aStream) const 
 		{
 			ToStreamBase(aStream);
-			aStream->WriteUInt(m_auraId);
+			aStream->WriteUInts(m_auraIds);
 			aStream->WriteInt(m_threat);
 			aStream->WriteUInt(m_applyToPartyMembersInRange);
 			aStream->WritePOD(m_sourceRedirect);
@@ -62,7 +62,7 @@ namespace tpublic
 		{
 			if (!FromStreamBase(aStream))
 				return false;
-			if (!aStream->ReadUInt(m_auraId))
+			if (!aStream->ReadUInts(m_auraIds))
 				return false;
 			if (!aStream->ReadInt(m_threat))
 				return false;
@@ -76,7 +76,7 @@ namespace tpublic
 		DirectEffectBase::Result
 		ApplyAura::Resolve(
 			int32_t							aTick,
-			std::mt19937&					/*aRandom*/,
+			std::mt19937&					aRandom,
 			const Manifest*					aManifest,
 			CombatEvent::Id					/*aId*/,
 			uint32_t						aAbilityId,
@@ -117,8 +117,11 @@ namespace tpublic
 			if(target == NULL)
 				return Result();
 
+			TP_CHECK(m_auraIds.size() > 0, "No possible auras defined.");
+			uint32_t auraId = Helpers::RandomItem(aRandom, m_auraIds);
+
 			std::vector<const EntityInstance*> targetEntities = { target };
-			const Data::Aura* aura = aManifest->GetById<tpublic::Data::Aura>(m_auraId);
+			const Data::Aura* aura = aManifest->GetById<tpublic::Data::Aura>(auraId);
 
 			if(m_applyToPartyMembersInRange != 0)
 			{
@@ -195,7 +198,7 @@ namespace tpublic
 					effects.push_back(std::move(effect));
 				}
 
-				aAuraEventQueue->ApplyAura(aAbilityId, m_auraId, sourceEntityInstance, sourceIsPlayerOrMinion, targetEntity->GetEntityInstanceId(), effects);
+				aAuraEventQueue->ApplyAura(aAbilityId, auraId, sourceEntityInstance, sourceIsPlayerOrMinion, targetEntity->GetEntityInstanceId(), effects);
 			}
 
 			return Result();
