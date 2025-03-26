@@ -24,10 +24,10 @@ entity thalvaron_random_vendor: !NPC
 	_not_pushable: true	
 	_random_item_vendor: 
 	{ 
-		item_count: 4 
+		item_count: 6
 		refresh_ticks: 50 
 		replacement_ticks: 36000 # 1 hour
-		level: 10
+		level: 20
 		token_cost: !RANDOM_ITEM_VENDOR_TOKEN_OF_VICTORY_COST{}
 		
 		loot_table: $loot_table

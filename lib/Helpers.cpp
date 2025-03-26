@@ -210,11 +210,36 @@ namespace tpublic::Helpers
 	{
 		std::vector<Stat::Id> possibleStatIds =
 		{
+			// Appears 3 times each
 			Stat::ID_CONSTITUTION,
 			Stat::ID_DEXTERITY,
 			Stat::ID_STRENGTH,
 			Stat::ID_SPIRIT,
-			Stat::ID_WISDOM
+			Stat::ID_WISDOM,
+			Stat::ID_CONSTITUTION,
+			Stat::ID_DEXTERITY,
+			Stat::ID_STRENGTH,
+			Stat::ID_SPIRIT,
+			Stat::ID_WISDOM,
+			Stat::ID_CONSTITUTION,
+			Stat::ID_DEXTERITY,
+			Stat::ID_STRENGTH,
+			Stat::ID_SPIRIT,
+			Stat::ID_WISDOM,
+
+			// Appears twice each
+			Stat::ID_SPELL_DAMAGE,
+			Stat::ID_HEALING,
+			Stat::ID_MANA_PER_5_SECONDS,
+			Stat::ID_BLOCK_VALUE,
+			Stat::ID_SPELL_DAMAGE,
+			Stat::ID_HEALING,
+			Stat::ID_MANA_PER_5_SECONDS,
+			Stat::ID_BLOCK_VALUE,
+
+			// Appears only once (rarest)
+			Stat::ID_SPELL_HASTE,
+			Stat::ID_ATTACK_HASTE
 		};
 
 		std::mt19937 wordRandom(aSeed);

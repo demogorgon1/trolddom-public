@@ -89,6 +89,7 @@ namespace tpublic
 			{
 				Stat::Collection						m_rawStats;
 				uint32_t								m_weight = 1;
+				std::vector<ItemType::Id>				m_excludeItemTypes;
 			};
 
 			struct Designation
@@ -233,7 +234,8 @@ namespace tpublic
 											std::vector<uint32_t>&				aTags,
 											Stat::Collection&					aStatWeights,
 											std::string&						aOut);
-		const StackObject::ItemSpecial*	_PickItemSpecial();
+		const StackObject::ItemSpecial*	_PickItemSpecial(
+											ItemType::Id						aItemType);
 	};
 
 }

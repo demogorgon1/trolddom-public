@@ -1,7 +1,3 @@
-dialogue_screen .random_vendor_2_vendor:
-{
-}
-
 dialogue_screen .random_vendor_2_dialogue:
 {
 	text: 
@@ -11,25 +7,41 @@ dialogue_screen .random_vendor_2_dialogue:
 	
 	options:
 	[
-		{ goto: .random_vendor_2_vendor text: "Let me browse your goods." }
+		{ goto: $dialogue_screen { random_item_vendor: true } text: "Let me browse your goods." }
 	]
-}
-
-dialogue_root .random_vendor_2_dialogue:
-{
-	.random_vendor_2_dialogue: { }
 }
 
 entity thalvaron_random_vendor_2: !NPC
 {
 	_string: "Roger Rudwik"
-	_dialogue_root: .random_vendor_2_dialogue	
+	_dialogue_root: $dialogue_root { .random_vendor_2_dialogue: { } }
 	_sprite: man_67
 	_sprite_dead: man_67_dead	
 	_level: 20
 	_creature_type: humanoid
 	_loot_table: .npc
-	_not_pushable: true	
 	_faction: npcs
+	_not_pushable: true	
+	_random_item_vendor: 
+	{ 
+		item_count: 6
+		refresh_ticks: 50 
+		replacement_ticks: 36000 # 1 hour
+		level: 20
+		token_cost: !RANDOM_ITEM_VENDOR_TOKEN_OF_VICTORY_COST{}
+		
+		loot_table: $loot_table
+		{
+			slots:
+			[	
+				{ 
+					possibility: 
+					{ 
+						weight: 1 
+						loot_group: world_drops_epic
+					} 
+				}
+			]	
+		}
+	}
 }
-

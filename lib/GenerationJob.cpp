@@ -284,6 +284,10 @@ namespace tpublic
 				{
 					stackObject->m_itemSpecial.m_weight = aChild->GetUInt32();
 				}
+				else if(aChild->m_name == "exclude_item_types")
+				{
+					aChild->GetIdArrayWithLookup<ItemType::Id, ItemType::INVALID_ID>(stackObject->m_itemSpecial.m_excludeItemTypes, [](const char* aString) { return ItemType::StringToId(aString); });
+				}
 				else
 				{
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -362,6 +366,8 @@ namespace tpublic
 		TP_VERIFY(rarity != Rarity::INVALID_ID, aSource->m_debugInfo, "Invalid rarity.");
 		TP_VERIFY(lootGroups.size() > 0, aSource->m_debugInfo, "No loot groups.");
 		TP_VERIFY(type != INVALID_TYPE, aSource->m_debugInfo, "No type.");
+
+		std::unordered_set<std::string> createdItemNames;
 
 		for(uint32_t i = 0; i < count; i++)
 		{
@@ -457,7 +463,18 @@ namespace tpublic
 
 					allTags = baseNameWord->m_allTags;
 
-					_CreateDesignation(baseNameWord->m_word.c_str(), designation, contextTags, allTags, statWeights, itemString);
+					for(;;)
+					{
+						_CreateDesignation(baseNameWord->m_word.c_str(), designation, contextTags, allTags, statWeights, itemString);
+
+						// Check we didn't already create an item with this name
+						uint32_t existingIdWithName = m_manifest->TryGetExistingIdByName<Data::Item>(itemString.c_str());
+						if(existingIdWithName == 0 && !createdItemNames.contains(itemString))
+						{
+							createdItemNames.insert(itemString);
+							break;
+						}
+					}
 
 					if(statWeights.IsEmpty())
 						Helpers::GetRandomStatWeights(_GetRandom()(), statWeights);
@@ -479,7 +496,7 @@ namespace tpublic
 						{
 							if(_GetRandomIntInRange<uint32_t>(1, 100) < propability)
 							{
-								const StackObject::ItemSpecial* itemSpecial = _PickItemSpecial();
+								const StackObject::ItemSpecial* itemSpecial = _PickItemSpecial(itemType);
 								if(itemSpecial == NULL)
 									break;
 								
@@ -1188,14 +1205,31 @@ namespace tpublic
 	}
 
 	const GenerationJob::StackObject::ItemSpecial*
-	GenerationJob::_PickItemSpecial()
+	GenerationJob::_PickItemSpecial(
+		ItemType::Id		aItemType)
 	{
 		WeightedRandom<const StackObject::ItemSpecial*> possibilities;
 
 		for (const std::unique_ptr<StackObject>& stackObject : m_stack)
 		{
 			if (stackObject->m_type == StackObject::TYPE_ITEM_SPECIAL)
-				possibilities.AddPossibility(stackObject->m_itemSpecial.m_weight, &stackObject->m_itemSpecial);
+			{
+				bool possible = true;
+				if(stackObject->m_itemSpecial.m_excludeItemTypes.size() > 0)
+				{
+					for(ItemType::Id excludedItemType : stackObject->m_itemSpecial.m_excludeItemTypes)
+					{
+						if(excludedItemType == aItemType)
+						{
+							possible = false;
+							break;
+						}
+					}
+				}
+
+				if(possible)
+					possibilities.AddPossibility(stackObject->m_itemSpecial.m_weight, &stackObject->m_itemSpecial);
+			}
 		}
 
 		const StackObject::ItemSpecial* picked;
