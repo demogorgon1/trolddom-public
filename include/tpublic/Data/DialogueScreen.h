@@ -403,6 +403,8 @@ namespace tpublic
 							m_trainAbilities.push_back(aChild->GetId(DataType::ID_ABILITY));
 						else if (aChild->m_name == "train_abilities")
 							aChild->GetIdArray(DataType::ID_ABILITY, m_trainAbilities);
+						else if(aChild->m_name == "random_item_vendor")
+							m_randomItemVendor = aChild->GetBool();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 					}
@@ -418,6 +420,7 @@ namespace tpublic
 				aStream->WriteObjects(m_sell);
 				aStream->WriteObjects(m_trainProfessions);
 				aStream->WriteUInts(m_trainAbilities);
+				aStream->WriteBool(m_randomItemVendor);
 			}
 
 			bool
@@ -434,6 +437,8 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadUInts(m_trainAbilities))
 					return false;
+				if(!aStream->ReadBool(m_randomItemVendor))
+					return false;
 				return true;
 			}
 
@@ -443,6 +448,7 @@ namespace tpublic
 			std::vector<Sell>					m_sell;
 			std::vector<TrainProfession>		m_trainProfessions;
 			std::vector<uint32_t>				m_trainAbilities;
+			bool								m_randomItemVendor = false;
 		};
 
 	}

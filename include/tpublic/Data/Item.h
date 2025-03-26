@@ -217,6 +217,10 @@ namespace tpublic
 						{
 							m_bagSlots = aChild->GetUInt32();
 						}
+						else if (aChild->m_name == "token_cost")
+						{
+							m_tokenCost = aChild->GetUInt32();
+						}
 						else if (aChild->m_name == "weapon_damage")
 						{
 							m_weaponDamage = UIntRange(aChild);
@@ -305,6 +309,7 @@ namespace tpublic
 				aStream->WriteOptionalObject(m_armorStyleVisual);
 				aStream->WriteUInt(m_questId);
 				aStream->WriteUInt(m_auraId);
+				aStream->WriteUInt(m_tokenCost);
 			}
 
 			bool
@@ -360,6 +365,8 @@ namespace tpublic
 				if (!aStream->ReadUInt(m_questId))
 					return false;
 				if (!aStream->ReadUInt(m_auraId))
+					return false;
+				if (!aStream->ReadUInt(m_tokenCost))
 					return false;
 
 				m_lcString = m_string;
@@ -422,6 +429,7 @@ namespace tpublic
 			std::optional<ArmorStyle::Visual>	m_armorStyleVisual;
 			uint32_t							m_questId = 0;
 			uint32_t							m_auraId = 0;
+			uint32_t							m_tokenCost = 0;
 
 			// Not serialized
 			std::string							m_lcString;

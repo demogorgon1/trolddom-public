@@ -14,6 +14,7 @@ namespace tpublic
 	}
 
 	class EntityInstance;
+	struct ItemInstance;
 	class Manifest;
 
 	class LootGenerator

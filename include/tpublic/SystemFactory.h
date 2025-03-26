@@ -10,6 +10,7 @@
 #include "Systems/NPC.h"
 #include "Systems/Openable.h"
 #include "Systems/Rage.h"
+#include "Systems/RandomItemVendor.h"
 #include "Systems/Shrine.h"
 #include "Systems/Trigger.h"
 #include "Systems/VendorRestock.h"
@@ -38,6 +39,7 @@ namespace tpublic
 			_Register<Systems::NPC>();
 			_Register<Systems::Openable>();
 			_Register<Systems::Rage>();
+			_Register<Systems::RandomItemVendor>();
 			_Register<Systems::Shrine>();
 			_Register<Systems::Trigger>();
 			_Register<Systems::VendorRestock>();

@@ -71,6 +71,7 @@ namespace tpublic
 			ID_CONTROL_POINT,
 			ID_KILL_CONTRIBUTION,
 			ID_HOVER_TEXT,
+			ID_RANDOM_ITEM_VENDOR,
 
 			NUM_IDS
 		};
@@ -139,7 +140,8 @@ namespace tpublic
 			"minion_private",
 			"control_point",
 			"kill_contribution",
-			"hover_text"
+			"hover_text",
+			"random_item_vendor"
 		};
 
 		static_assert(sizeof(COMPONENT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

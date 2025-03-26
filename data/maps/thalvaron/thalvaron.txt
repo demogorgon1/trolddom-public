@@ -186,6 +186,9 @@ map_entity_spawn thalvaron_harbor_vendor: { entity thalvaron_harbor_vendor: { in
 map_entity_spawn thalvaron_kristina_newman: { entity thalvaron_kristina_newman: { init_state: default } }
 map_entity_spawn thalvaron_anne_joghun: { entity thalvaron_anne_joghun: { init_state: default } }
 map_entity_spawn thalvaron_blunt_ronson: { entity thalvaron_blunt_ronson: { init_state: default } }
+map_entity_spawn thalvaron_valoris_quartermaster_2: { entity thalvaron_valoris_quartermaster_2: { init_state: default } }
+map_entity_spawn thalvaron_random_vendor: { entity thalvaron_random_vendor: { init_state: default } }
+map_entity_spawn thalvaron_random_vendor_2: { entity thalvaron_random_vendor_2: { init_state: default } }
 
 # N
 map_entity_spawn thalvaron_ranger_fremalt: { entity thalvaron_ranger_fremalt: { init_state: default } }
@@ -256,6 +259,7 @@ map_entity_spawn thalvaron_warden_ghourian: { entity thalvaron_warden_ghourian: 
 map_entity_spawn thalvaron_elf_collector: { entity thalvaron_elf_collector: { init_state: default } }
 map_entity_spawn thalvaron_elf_quartermaster: { entity thalvaron_elf_quartermaster: { init_state: default } }
 map_entity_spawn thalvaron_bob_gordon: { entity thalvaron_bob_gordon: { init_state: default } }
+map_entity_spawn thalvaron_elf_quartermaster_2: { entity thalvaron_elf_quartermaster_2: { init_state: default } }
 
 # SW
 map_entity_spawn thalvaron_brian_riddle: { entity thalvaron_brian_riddle: { init_state: default } }
@@ -297,6 +301,7 @@ map_entity_spawn thalvaron_bramli_stonestride: { entity thalvaron_bramli_stonest
 map_entity_spawn thalvaron_borli_stouthammer: { entity thalvaron_borli_stouthammer: { init_state: default } spawn_timer: !ESCORT_RESPAWN{} }
 map_entity_spawn thalvaron_mumle_whiterock: { entity thalvaron_mumle_whiterock: { init_state: default } }
 map_entity_spawn thalvaron_dwarf_quartermaster: { entity thalvaron_dwarf_quartermaster: { init_state: default } }
+map_entity_spawn thalvaron_dwarf_quartermaster_2: { entity thalvaron_dwarf_quartermaster_2: { init_state: default } }
 
 map_palette .stuff:
 {
@@ -467,6 +472,9 @@ map_palette .stuff:
 	entity_spawn thalvaron_kristina_newman: [ 234 99 48 ]
 	entity_spawn thalvaron_anne_joghun: [ 234 99 148 ]
 	entity_spawn thalvaron_blunt_ronson: [ 30 183 88 ]
+	entity_spawn thalvaron_valoris_quartermaster_2: [ 115 81 126 ]
+	entity_spawn thalvaron_random_vendor: [ 39 49 127 ]
+	entity_spawn thalvaron_random_vendor_2: [ 39 149 125 ]
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				
@@ -607,6 +615,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_elf_collector: [ 49 194 46 ]
 	entity_spawn thalvaron_elf_quartermaster: [ 155 22 148 ]
 	entity_spawn thalvaron_bob_gordon: [ 166 23 50 ]
+	entity_spawn thalvaron_elf_quartermaster_2: [ 155 212 148 ]
 	
 	# SW
 	entity_spawn thalvaron_brian_riddle: [ 66 88 99 ]
@@ -684,6 +693,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_badlands_mud_elemental: [ 222 48 158 ]
 	entity_spawn thalvaron_dirt_slitherer: [ 65 44 119 ]
 	entity_spawn thalvaron_dwarf_quartermaster: [ 155 22 248 ]
+	entity_spawn thalvaron_dwarf_quartermaster_2: [ 115 242 248 ]
 }
 
 map_palette .levels:
@@ -834,6 +844,7 @@ map_palette .doodads:
 	doodad wall_sign_generic<"Auction House">: [ 101 21 11 ]	
 	doodad wall_sign_generic<"Harbor Manager">: [ 123 21 11 ]	
 	doodad wall_sign_generic<"Skrald & Co.">: [ 223 21 11 ]	
+	doodad wall_sign_generic<"Rare Imports">: [ 231 121 11 ]	
 }
 
 map_palette .cliffs:

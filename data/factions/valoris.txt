@@ -82,3 +82,16 @@ item token_of_victory_healing_potion (potion):
 		required_level: 12
 	}
 }
+
+item token_of_victory_bag:
+{
+	string: "Hefty Bag" 
+	equipment_slots: [ bag_1 bag_2 bag_3 ]
+	binds: when_picked_up
+	type: miscellaneous
+	required_level: 1
+	icon: icon_bag_2
+	rarity: uncommon
+	bag_slots: 8
+}
+

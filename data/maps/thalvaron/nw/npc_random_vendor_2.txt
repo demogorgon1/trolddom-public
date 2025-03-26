@@ -1,0 +1,35 @@
+dialogue_screen .random_vendor_2_vendor:
+{
+}
+
+dialogue_screen .random_vendor_2_dialogue:
+{
+	text: 
+	[	
+		"Well, well, well. You got any tokens of victory? If you do I might be interested in a deal."
+	]
+	
+	options:
+	[
+		{ goto: .random_vendor_2_vendor text: "Let me browse your goods." }
+	]
+}
+
+dialogue_root .random_vendor_2_dialogue:
+{
+	.random_vendor_2_dialogue: { }
+}
+
+entity thalvaron_random_vendor_2: !NPC
+{
+	_string: "Roger Rudwik"
+	_dialogue_root: .random_vendor_2_dialogue	
+	_sprite: man_67
+	_sprite_dead: man_67_dead	
+	_level: 20
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_faction: npcs
+}
+

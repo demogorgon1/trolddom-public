@@ -1,5 +1,6 @@
 !define TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS 86400 # 24 hours
 !define TOKEN_OF_VICTORY_PRICE { quantity: 1 item_cost<[ item_token_of_victory token_of_victory_currency ]>: @_count }	
+!define RANDOM_ITEM_VENDOR_TOKEN_OF_VICTORY_COST { token_item: item_token_of_victory token_sprite: token_of_victory_currency }
 
 !define TRASH_RESPAWN_TIMER { normal: 36000 fast_trigger: 0 } 
 !define QUEST_ITEM_RESPAWN_TIMER { despawn_required: true normal: [ 1000 1400 ] fast: [ 600 1000 ] fast_trigger: 600 }

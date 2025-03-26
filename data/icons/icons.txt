@@ -738,6 +738,8 @@ sprites:
 	sprite icon_token_2 : { tags: [ icon ] }
 	sprite icon_potion_2 : { tags: [ icon ] }
 	sprite icon_potion_3 : { tags: [ icon ] }
+	sprite icon_bag_1 : { tags: [ icon ] }
+	sprite icon_bag_2 : { tags: [ icon ] }
 	
 }
 

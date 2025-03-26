@@ -28,6 +28,7 @@
 		npc 		
 		<exists _resource_mana> mana_regen
 		<exists _vendor_stock> vendor_restock
+		<exists _random_item_vendor> random_item_vendor
 	]
 	
 	modifiers: 
@@ -145,6 +146,7 @@
 		}
 		<exists _is_threat_source and _is_threat_source> threat_source: { }
 		<exists _kill_contribution and _kill_contribution> kill_contribution: { }
+		<exists _random_item_vendor> random_item_vendor: @_random_item_vendor
 	}
 	
 	<exists _tags> tags: @_tags
