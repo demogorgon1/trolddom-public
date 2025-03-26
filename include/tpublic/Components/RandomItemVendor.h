@@ -144,6 +144,7 @@ namespace tpublic
 
 			bool
 			RemoveItem(
+				int32_t					aCurrentTick,
 				uint32_t				aItemId)
 			{
 				for (Item& t : m_items)
@@ -151,7 +152,7 @@ namespace tpublic
 					if (t.m_itemId == aItemId)
 					{
 						t.m_itemId = 0;
-						t.m_tick = 0;
+						t.m_tick = aCurrentTick + m_refreshTicks;
 						m_version++;
 						return true;
 					}

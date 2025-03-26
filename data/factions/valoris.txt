@@ -88,6 +88,7 @@ item token_of_victory_bag:
 	string: "Hefty Bag" 
 	equipment_slots: [ bag_1 bag_2 bag_3 ]
 	binds: when_picked_up
+	flags: [ unique ]
 	type: miscellaneous
 	required_level: 1
 	icon: icon_bag_2

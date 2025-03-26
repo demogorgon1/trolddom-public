@@ -126,6 +126,9 @@ namespace tpublic
 			uint32_t baseCost = aManifest->m_itemMetrics.GetLevelBaseCost(m_itemData->m_itemLevel);
 			baseCost = (uint32_t)((float)baseCost * multipliers.m_cost * rarityMultipliers.m_cost * m_itemData->m_valueMultiplier);
 			m_cost = baseCost;
+
+			if(m_cost == 0)
+				m_cost = 1;
 		}
 
 		m_tokenCost = m_itemData->m_tokenCost;
@@ -135,6 +138,9 @@ namespace tpublic
 			uint32_t baseCost = aManifest->m_itemMetrics.GetLevelBaseCost(m_itemData->m_itemLevel);
 			baseCost = (uint32_t)((float)baseCost * multipliers.m_tokenCost * aManifest->m_itemMetrics.m_tokenCostBaseMultiplier);
 			m_tokenCost = baseCost;
+
+			if (m_tokenCost == 0)
+				m_tokenCost = 1;
 		}
 
 		m_vendorValue = (uint32_t)((float)m_cost * aManifest->m_itemMetrics.m_vendorCostMultiplier);
