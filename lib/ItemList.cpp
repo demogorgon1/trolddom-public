@@ -139,6 +139,7 @@ namespace tpublic
 		uint32_t									aItemId,
 		uint32_t									aQuantity,
 		const Data::Item*							aItemData,
+		bool										aBind,
 		uint32_t									aSize)
 	{
 		if (aQuantity == 0)
@@ -175,6 +176,9 @@ namespace tpublic
 				ItemInstance itemInstance;
 				itemInstance.m_itemId = aItemId;
 				itemInstance.m_quantity = t_amountToAdd;
+				
+				if(aBind || aItemData->m_itemBinding == ItemBinding::ID_WHEN_PICKED_UP)
+					itemInstance.SetSoulbound();
 
 				t.m_item = itemInstance;
 			}

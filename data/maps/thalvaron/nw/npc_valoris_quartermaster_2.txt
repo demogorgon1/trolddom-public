@@ -26,7 +26,7 @@ entity thalvaron_valoris_quartermaster_2: !NPC
 {
 	_string: "Maria Wearlton"
 	_guild_name: "Valoris Quartermaster"
-	_dialogue_root: .valoris_quartermaster_dialogue	
+	_dialogue_root: .valoris_quartermaster_2_dialogue	
 	_sprite: woman_32
 	_sprite_dead: woman_32_dead	
 	_level: 20

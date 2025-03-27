@@ -57,6 +57,7 @@ namespace tpublic
 								uint32_t									aItemId,
 								uint32_t									aQuantity,
 								const Data::Item*							aItemData,
+								bool										aBind,
 								uint32_t									aSize);
 		bool				Destroy(
 								uint32_t									aIndex,

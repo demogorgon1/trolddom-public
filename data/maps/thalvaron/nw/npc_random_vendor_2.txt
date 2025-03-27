@@ -29,6 +29,7 @@ entity thalvaron_random_vendor_2: !NPC
 		replacement_ticks: 36000 # 1 hour
 		level: 20
 		token_cost: !RANDOM_ITEM_VENDOR_TOKEN_OF_VICTORY_COST{}
+		force_bind_when_picked_up: true
 		
 		loot_table: $loot_table
 		{

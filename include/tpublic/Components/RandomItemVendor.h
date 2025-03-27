@@ -101,6 +101,7 @@ namespace tpublic
 				FIELD_TOKEN_COST,
 				FIELD_ITEMS,
 				FIELD_VERSION,
+				FIELD_FORCE_BIND_WHEN_PICKED_UP
 			};
 
 			static void
@@ -115,6 +116,7 @@ namespace tpublic
 				aSchema->DefineCustomOptionalObject<TokenCost>(FIELD_TOKEN_COST, "token_cost", offsetof(RandomItemVendor, m_tokenCost));
 				aSchema->DefineCustomObjectsNoSource<Item>(FIELD_ITEMS, offsetof(RandomItemVendor, m_items));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_VERSION, NULL, offsetof(RandomItemVendor, m_version));
+				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_FORCE_BIND_WHEN_PICKED_UP, "force_bind_when_picked_up", offsetof(RandomItemVendor, m_forceBindWhenPickedUp));
 			}
 
 			void
@@ -128,6 +130,7 @@ namespace tpublic
 				m_tokenCost.reset();
 				m_items.clear();
 				m_version = 0;
+				m_forceBindWhenPickedUp = false;
 			}
 
 			bool
@@ -170,6 +173,7 @@ namespace tpublic
 			std::optional<TokenCost>	m_tokenCost;
 			std::vector<Item>			m_items;
 			uint32_t					m_version = 0;
+			bool						m_forceBindWhenPickedUp = false;
 		};
 	}
 

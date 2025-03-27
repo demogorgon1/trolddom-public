@@ -79,6 +79,8 @@ namespace tpublic
 							aChild->GetIdArray(DataType::ID_CREATURE_TYPE, m_creatureTypes);
 						else if(aChild->m_tag == "requirement")
 							m_requirements.push_back(Requirement(aChild));
+						else if(aChild->m_name == "use_special_loot_cooldown")
+							m_useSpecialLootCooldown = aChild->GetBool();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					});
@@ -94,6 +96,7 @@ namespace tpublic
 					aStream->WriteUInts(m_creatureTypes);
 					aStream->WriteObjects(m_requirements);
 					aStream->WriteUInt(m_lootCooldownId);
+					aStream->WriteBool(m_useSpecialLootCooldown);
 				}
 
 				bool
@@ -111,6 +114,8 @@ namespace tpublic
 					if(!aStream->ReadObjects(m_requirements))
 						return false;
 					if (!aStream->ReadUInt(m_lootCooldownId))
+						return false;
+					if(!aStream->ReadBool(m_useSpecialLootCooldown))
 						return false;
 					return true;
 				}
@@ -140,6 +145,7 @@ namespace tpublic
 				std::vector<uint32_t>			m_creatureTypes;
 				std::vector<Requirement>		m_requirements;
 				uint32_t						m_lootCooldownId = 0;
+				bool							m_useSpecialLootCooldown = false;
 			};
 
 			struct Slot

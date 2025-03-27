@@ -231,27 +231,24 @@ map_entity_spawn .object:
 	
 }
 
-loot_table .gateway_world:
+loot_table .gateway_world_2:
 {
 	slots:
 	[
 		{
-			possibility: { weight: 1 }
-			
 			possibility: 
 			{ 
-				weight: 1 
-				loot_group: gateway_world_quest_item_1 
-				requirement self<must_have_active_quest>: { id: gateway_world_quest_1 }
-			}
-			
+				loot_group: token_of_victory				
+				requirement target<must_have_tag>: { id: minor_boss }				
+				use_special_loot_cooldown: true
+			}			
+		
 			possibility: 
 			{ 
-				weight: 2
-				loot_group: gateway_world_quest_item_2 
-				requirement self<must_have_active_quest>: { id: gateway_world_quest_2 }
-				requirement target<must_have_tag>: { id: major_boss }
-			}
+				loot_group: token_of_victory				
+				requirement target<must_have_tag>: { id: major_boss }				
+				use_special_loot_cooldown: true
+			}			
 		}
 
 		{		
@@ -288,7 +285,7 @@ map gateway_world_2:
 	view_attenuation_bias: 0
 	view_hidden_visibility: 35			
 	
-	#map_loot_tables: [ .gateway_world ]
+	map_loot_tables: [ .gateway_world_2 ]
 
 	generator world:
 	{

@@ -230,7 +230,17 @@ namespace tpublic
 				t.m_accumWeight = accumWeight;
 				t.m_quantity = possibility.m_quantity;
 				t.m_lootGroupId = possibility.m_lootGroupId;
-				t.m_lootCooldownId = possibility.m_lootCooldownId;
+
+				if(possibility.m_useSpecialLootCooldown && aLootableEntityInstance != NULL)
+				{
+					const Components::Lootable* lootable = aLootableEntityInstance->GetComponent<Components::Lootable>();
+					if(lootable != NULL)
+						t.m_lootCooldownId = lootable->m_specialLootCooldownId;
+				}
+				else
+				{
+					t.m_lootCooldownId = possibility.m_lootCooldownId;
+				}
 			}
 
 			if(entryCount > 0)

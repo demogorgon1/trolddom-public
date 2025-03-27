@@ -118,3 +118,93 @@ tag_context .caster_goblin_boss_sprite:
 	must_have_tags: [ goblin boss caster ]
 }
 
+############################################################################
+# Crabmen
+
+name_template .melee_crabman:
+{
+	possibility<5>:
+	{
+		string: [ "Crabman " ]
+		word: [ .noun_melee ]
+	}
+
+	possibility<4>:
+	{
+		word: [ .adjective_evil ]
+		string: [ " Crabman " ]
+		word: [ .noun_melee ]
+	}
+
+	possibility<1>:
+	{
+		word: [ .adjective_evil ]
+		string: [ " " ]
+		word: [ .noun_melee ]
+	}
+}
+
+name_template .caster_crabman:
+{
+	possibility<5>:
+	{
+		string: [ "Crabman " ]
+		word: [ .noun_caster ]
+	}
+
+	possibility<4>:
+	{
+		word: [ .adjective_evil ]
+		string: [ " Crabman " ]
+		word: [ .noun_caster ]
+	}
+
+	possibility<1>:
+	{
+		word: [ .adjective_evil ]
+		string: [ " " ]
+		word: [ .noun_caster ]
+	}
+}
+
+name_template .crabman_minor_boss:
+{
+	possibility<1>:
+	{
+		generated_name: [ demon_name ]
+	}
+}
+
+name_template .crabman_major_boss:
+{
+	possibility<1>:
+	{
+		generated_name: [ demon_name ]
+		string: [ " the " ]
+		word: [ .adjective_evil ]
+	}
+}
+
+tag_context .melee_crabman_sprite:
+{
+	must_have_tags: [ crab_monster melee ]
+	must_not_have_tags: [ boss ]
+}
+
+tag_context .melee_crabman_boss_sprite:
+{
+	must_have_tags: [ crab_monster boss melee ]
+}
+
+tag_context .caster_crabman_sprite:
+{
+	must_have_tags: [ crab_monster caster ]
+	must_not_have_tags: [ boss ]
+}
+
+tag_context .caster_crabman_boss_sprite:
+{
+	must_have_tags: [ crab_monster boss caster ]
+}
+
+

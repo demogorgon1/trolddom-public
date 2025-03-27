@@ -852,6 +852,7 @@ namespace tpublic
 		std::vector<uint32_t> extraTags;
 		UIntRange abilityCount;
 		bool hasMana = false;
+		uint32_t specialLootCooldownSeconds = 0; 
 
 		aSource->ForEachChild([&](
 			const SourceNode* aChild)
@@ -880,6 +881,8 @@ namespace tpublic
 				aChild->GetIdArray(DataType::ID_TAG, extraTags);
 			else if(aChild->m_name == "abilities")
 				abilityCount = UIntRange(aChild);
+			else if(aChild->m_name == "special_loot_cooldown_seconds")	
+				specialLootCooldownSeconds = aChild->GetUInt32();				
 			else
 				TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 		});
@@ -968,6 +971,10 @@ namespace tpublic
 
 				output->PrintF(1, "_creature_type: %s", creatureType->m_name.c_str());
 				output->PrintF(1, "_loot_table: %s", lootTable->m_name.c_str());
+
+				if(specialLootCooldownSeconds != 0)
+					output->PrintF(1, "_special_loot_cooldown: $loot_cooldown { seconds: %u }", specialLootCooldownSeconds);
+
 				output->PrintF(1, "_abilities:");
 				output->PrintF(1, "[");
 				for(const Data::Ability* ability : abilities)
