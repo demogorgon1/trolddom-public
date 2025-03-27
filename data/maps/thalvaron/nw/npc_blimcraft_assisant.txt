@@ -1,0 +1,25 @@
+dialogue_screen .blimcraft_assistant:
+{
+	text: 
+	[	
+		"What are you looking at? Haven't you seen a dwarf swallowed by an ooze before?"
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: thalvaron_blimcraft_highborne_3 }
+	]
+}
+
+entity thalvaron_blimcraft_assistant: !NPC
+{
+	_string: "Thurold"
+	_sprite: dwarf_17
+	_sprite_dead: dwarf_17_dead
+	_level: 20
+	_faction: npcs
+	_creature_type: humanoid
+	_dialogue_root: $dialogue_root { .blimcraft_assistant: { } }
+	_loot_table: .npc
+	_not_pushable: true	
+}

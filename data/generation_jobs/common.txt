@@ -1,0 +1,120 @@
+tag_context .adjective_evil:
+{
+	must_have_tags: [ adjective evil ]
+}
+
+tag_context .noun_melee:
+{
+	must_have_tags: [ noun melee ]
+}
+
+tag_context .noun_caster:
+{
+	must_have_tags: [ noun caster ]
+}
+
+############################################################################
+# Goblins
+
+name_template .melee_goblin:
+{
+	possibility<5>:
+	{
+		string: [ "Goblin " ]
+		word: [ .noun_melee ]
+	}
+
+	possibility<4>:
+	{
+		word: [ .adjective_evil ]
+		string: [ " Goblin " ]
+		word: [ .noun_melee ]
+	}
+
+	possibility<1>:
+	{
+		word: [ .adjective_evil ]
+		string: [ " " ]
+		word: [ .noun_melee ]
+	}
+}
+
+name_template .caster_goblin:
+{
+	possibility<5>:
+	{
+		string: [ "Goblin " ]
+		word: [ .noun_caster ]
+	}
+
+	possibility<4>:
+	{
+		word: [ .adjective_evil ]
+		string: [ " Goblin " ]
+		word: [ .noun_caster ]
+	}
+
+	possibility<1>:
+	{
+		word: [ .adjective_evil ]
+		string: [ " " ]
+		word: [ .noun_caster ]
+	}
+}
+
+!define local GOBLIN_NAME_ENDINGS [ "bork" "org" "dorg" "drugh" "yrg" "gorg" "jaw" "ol" "claw" ] 
+
+name_template .goblin_minor_boss:
+{
+	possibility<2>:
+	{
+		generated_name: [ demon_name ]
+	}
+
+	possibility<1>:
+	{
+		generated_name: [ demon_name ]
+		string: !GOBLIN_NAME_ENDINGS{}
+	}
+}
+
+name_template .goblin_major_boss:
+{
+	possibility<2>:
+	{
+		generated_name: [ demon_name ]
+		string: [ " the " ]
+		word: [ .adjective_evil ]
+	}
+
+	possibility<1>:
+	{
+		generated_name: [ demon_name ]
+		string: !GOBLIN_NAME_ENDINGS{}
+		string: [ " the " ]
+		word: [ .adjective_evil ]
+	}	
+}
+
+tag_context .melee_goblin_sprite:
+{
+	must_have_tags: [ goblin melee ]
+	must_not_have_tags: [ boss ]
+}
+
+tag_context .melee_goblin_boss_sprite:
+{
+	must_have_tags: [ goblin boss melee ]
+}
+
+tag_context .caster_goblin_sprite:
+{
+	must_have_tags: [ goblin caster ]
+	must_not_have_tags: [ boss ]
+}
+
+tag_context .caster_goblin_boss_sprite:
+{
+	must_have_tags: [ goblin boss caster ]
+}
+

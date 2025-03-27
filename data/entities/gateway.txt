@@ -237,3 +237,33 @@ entity the_shrouded_lands_underworld_return:
 		}		
 	}
 }
+
+entity gateway_2:
+{
+	string: "Gateway"
+	
+	systems: [ gateway ]
+	components:
+	{
+		position: { }		
+		gateway: 
+		{ 
+			maps: [ { map: gateway_world_2 } ]
+			schedule: daily
+			use_position_for_randomization: true
+		}
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ gateway_1 gateway_2 gateway_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+	}
+}

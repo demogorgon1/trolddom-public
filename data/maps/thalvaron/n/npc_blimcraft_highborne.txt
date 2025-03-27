@@ -9,6 +9,7 @@ dialogue_screen .blimcraft_highborne_dialogue:
 	[
 		{ quest: .blimcraft_highborne_1 }
 		{ quest: .blimcraft_highborne_2 }
+		{ quest<offer_only>: thalvaron_blimcraft_highborne_3 }
 	]
 }
 
@@ -176,5 +177,120 @@ quest .blimcraft_highborne_2:
 	level: 19
 	prerequisites: [ .blimcraft_highborne_1 ]
 	reward_one_item: [ .blimcraft_highborne_2_a .blimcraft_highborne_2_b .blimcraft_highborne_2_c ]
+	next_quest: thalvaron_blimcraft_highborne_3
 }
+
+############################################################
+# Quest 3
+
+quest thalvaron_blimcraft_highborne_3:
+{
+	string: "Exploring the Planes"
+	
+	text: 
+	[
+		"Use the orb in the building besides Blimcraft Highborne's tower to find his assistant."
+	]
+	
+	description: 
+	[
+		"There is a fellow wizard who lives on the island of Aetheris. These days she goes by the name of Junjun. Maybe you've met her? Huh, she's really into creating portals to other planes of"
+		"existence, something I've played around with as well. I've tasked my assistant with setting up a base of operation for exploring these other planes. You can help him if you want to. If you touch"
+		"the orb you'll be transported to him.\n\n"
+		"What? My orb? Yes, it's in the building besides my tower. When the ooze took over my home I moved it there."
+	]
+		
+	completion:
+	[
+		"Ah, he sent you here? Sure, I might have a job for you."
+	]
+
+	level: 20
+	prerequisites: [ .blimcraft_highborne_2 ]
+}
+
+entity thalvaron_blimcraft_highborne_3_portal:
+{
+	string: "Mysterious Orb"
+	
+	systems: [ openable ]
+	
+	components:
+	{
+		position: { }		
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ glowing_orb_1_a glowing_orb_1_b ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+				
+		openable: 
+		{ 
+			verb: use
+			range: 1 
+			level: 13
+			trigger_ability: .blimcraft_highborne_3_portal
+			instant: true
+			requirements: 
+			{
+				requirement self<must_have_completed_quest>: .blimcraft_highborne_2
+			}
+		}	
+	}
+}
+
+ability .blimcraft_highborne_3_portal:
+{
+	states: [ default ]                     
+	direct_effect move: { map_player_spawn: thalvaron_blimcraft_highborne_3_portal_spawn move_flags: [ set_teleported affect_target ] }
+}
+
+entity thalvaron_blimcraft_highborne_3_portal_return:
+{
+	string: "Mysterious Orb"
+	
+	systems: [ openable ]
+	
+	components:
+	{
+		position: { }		
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ glowing_orb_1_a glowing_orb_1_b ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+				
+		openable: 
+		{ 
+			verb: use
+			range: 1 
+			level: 13
+			trigger_ability: .blimcraft_highborne_3_portal_return
+			instant: true
+		}	
+	}
+}
+
+ability .blimcraft_highborne_3_portal_return:
+{
+	states: [ default ]                     
+	direct_effect move: { map_player_spawn: thalvaron_blimcraft_highborne_3_portal_return_spawn move_flags: [ set_teleported affect_target ] }
+}
+
 

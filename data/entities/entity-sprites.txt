@@ -722,6 +722,7 @@ sprites:
 	sprite elf_14: { dead: elf_14_dead }
 	sprite woman_33: { dead: woman_33_dead }
 	sprite man_67: { dead: man_67_dead }
+	sprite dwarf_17: { dead: dwarf_17_dead }
 	
 	cursor: { position: [ 0 624 ] }
 	sprite rebel_13_dead: { }
@@ -735,6 +736,7 @@ sprites:
 	sprite elf_14_dead: { }
 	sprite woman_33_dead: { }
 	sprite man_67_dead: { }
+	sprite dwarf_17_dead: { }
 }
 
 sprites:

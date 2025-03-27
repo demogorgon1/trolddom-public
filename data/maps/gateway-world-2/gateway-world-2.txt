@@ -1,0 +1,388 @@
+map_player_spawn .player_spawn:
+{
+}
+
+noise .rocks_overlay:
+{
+	divide<[0 255]>:
+	{
+		add:
+		{
+			divide<[0 10000]>:
+			{
+				perlin: { scale: 8000 }
+				constant: 4
+			}
+		
+			divide:
+			{
+				perlin: { scale: 4000 }
+				constant: 4
+			}
+			
+			perlin: { scale: 2000 }
+			perlin: { scale: 1000 }
+			perlin: { scale: 500 }
+			
+			constant: 5000			
+		}
+		
+		constant: 256
+	}
+}
+
+noise .humidity:
+{
+	divide<[0 255]>:
+	{
+		add:
+		{
+			perlin: { scale: 6000 }
+			perlin: { scale: 2000 }
+			perlin: { scale: 500 }
+			constant: 32000			
+		}
+		
+		constant: 256
+	}	
+}
+
+noise .temperature:
+{
+	divide<[0 255]>:
+	{
+		add:
+		{
+			perlin: { scale: 100 }
+			perlin: { scale: 50 }
+			
+			constant: 32000	
+		}
+		
+		constant: 256
+	}	
+}
+
+noise .doodad_brown_rocks_overlay:
+{
+	divide<[0 255]>:
+	{
+		add:
+		{
+			perlin: { scale: 9000 }
+			perlin: { scale: 5000 }
+			perlin: { scale: 1200 }
+			constant: 32000			
+		}
+		
+		constant: 256
+	}	
+}
+
+noise .doodad_grass_overlay:
+{
+	divide<[0 255]>:
+	{
+		add:
+		{
+			perlin: { scale: 9000 }
+			constant: 32000			
+		}
+		
+		constant: 256
+	}	
+}
+
+tag_context .major_boss:
+{
+	must_have_tags: [ boss major_boss ]
+	must_not_have_tags: [ minor_boss ]
+}
+
+tag_context .minor_boss:
+{
+	must_have_tags: [ boss minor_boss ]
+	must_not_have_tags: [ major_boss ]
+}
+
+tag_context .melee_enemy:
+{
+	must_have_tags: [ melee ]
+	must_not_have_tags: [ boss ]
+}
+
+tag_context .caster_enemy:
+{
+	must_have_tags: [ caster ]
+	must_not_have_tags: [ boss ]
+}
+
+map_entity_spawn .major_boss:
+{	
+	spawn_timer: { normal: 36000 fast_trigger: 0 } 
+}
+
+map_entity_spawn .minor_boss:
+{	
+	spawn_timer: { normal: 18000 fast_trigger: 0 } 
+}
+
+map_entity_spawn .pack:
+{	
+	spawn_timer: !NPC_RESPAWN_NORMAL{}	
+}
+
+map_entity_spawn .object:
+{	
+}
+
+!define local BOSS
+{
+	tag_context: .major_boss 
+	influence: 128 
+	influence_tile_transform_threshold: [ 32 96 ]
+	map_entity_spawn: .major_boss 
+	
+	minor_bosses:
+	{
+		tag_context: .minor_boss
+		map_entity_spawn: .minor_boss 
+		count: [ 2 4 ]
+		influence_range: [ 32 112 ]
+	}
+	
+	pack<24>: 
+	{ 
+		influence_range: [ 10 55 ]		
+		tag_contexts: [ .melee_enemy ]		
+		elite: false
+		map_entity_spawn: .pack
+		random_object<10>: default_chest		
+	}
+
+	pack<8>: 
+	{ 
+		influence_range: [ 10 55 ]		
+		tag_contexts: [ .caster_enemy ]		
+		elite: false
+		map_entity_spawn: .pack
+		random_object<10>: default_chest				
+	}
+
+	pack<64>: 
+	{ 
+		influence_range: [ 55 80 ] 		
+		tag_contexts: [ .melee_enemy .melee_enemy ]		
+		min_distance_to_nearby: 6
+		elite: false
+		map_entity_spawn: .pack
+		random_object<30>: default_chest				
+	}	
+
+	pack<32>: 
+	{ 
+		influence_range: [ 55 80 ] 		
+		tag_contexts: [ .melee_enemy .caster_enemy ]		
+		min_distance_to_nearby: 6
+		elite: false
+		map_entity_spawn: .pack
+		random_object<40>: default_chest				
+	}	
+
+	pack<64>: 
+	{ 
+		influence_range: [ 85 100 ] 		
+		tag_contexts: [ .melee_enemy .melee_enemy ]		
+		min_distance_to_nearby: 6
+		elite: true
+		map_entity_spawn: .pack
+		random_object<50>: default_chest				
+	}		
+
+	pack<64>: 
+	{ 
+		influence_range: [ 85 100 ] 		
+		tag_contexts: [ .melee_enemy .caster_enemy ]		
+		min_distance_to_nearby: 6
+		elite: true
+		map_entity_spawn: .pack
+		random_object<60>: default_chest				
+	}		
+
+	pack<64>: 
+	{ 
+		influence_range: [ 100 120 ] 		
+		tag_contexts: [ .melee_enemy .melee_enemy ]		
+		min_distance_to_nearby: 6
+		elite: true
+		map_entity_spawn: .pack
+		random_object<60>: default_chest
+	}			
+	
+	pack<64>: 
+	{ 
+		influence_range: [ 100 120 ] 		
+		tag_contexts: [ .melee_enemy .caster_enemy ]		
+		min_distance_to_nearby: 6
+		elite: true
+		map_entity_spawn: .pack
+		random_object<70>: default_chest						
+	}			
+	
+}
+
+loot_table .gateway_world:
+{
+	slots:
+	[
+		{
+			possibility: { weight: 1 }
+			
+			possibility: 
+			{ 
+				weight: 1 
+				loot_group: gateway_world_quest_item_1 
+				requirement self<must_have_active_quest>: { id: gateway_world_quest_1 }
+			}
+			
+			possibility: 
+			{ 
+				weight: 2
+				loot_group: gateway_world_quest_item_2 
+				requirement self<must_have_active_quest>: { id: gateway_world_quest_2 }
+				requirement target<must_have_tag>: { id: major_boss }
+			}
+		}
+
+		{		
+			possibility: { weight: 200 loot_group: world_drops_uncommon requirement target<must_have_tag>: { id: minor_boss } }	
+			possibility: { weight: 10 loot_group: world_drops_rare requirement target<must_have_tag>: { id: minor_boss } }	
+			possibility: { weight: 1 loot_group: world_drops_epic requirement target<must_have_tag>: { id: minor_boss } }				
+		}
+		
+		{		
+			possibility: { weight: 200 loot_group: world_drops_uncommon requirement target<must_have_tag>: { id: major_boss } }	
+			possibility: { weight: 10 loot_group: world_drops_rare requirement target<must_have_tag>: { id: major_boss } }	
+			possibility: { weight: 1 loot_group: world_drops_epic requirement target<must_have_tag>: { id: major_boss } }				
+		}
+		
+		{		
+			possibility: { weight: 99 loot_group: world_drops_rare requirement target<must_have_tag>: { id: major_boss } }	
+			possibility: { weight: 1 loot_group: world_drops_epic requirement target<must_have_tag>: { id: major_boss } }				
+		}		
+	]	
+}
+
+map gateway_world_2:
+{
+	string: "Highborne World"
+	type: open_world
+	default_player_spawn: .player_spawn
+	has_dynamic_overview_map: true
+	seed: time_seed
+	max_players: 80
+
+	default_tile: water
+	default_fishing_loot_table: fish
+	view_attenuation: 0
+	view_attenuation_bias: 0
+	view_hidden_visibility: 35			
+	
+	#map_loot_tables: [ .gateway_world ]
+
+	generator world:
+	{
+		terrain_palette_entry<ocean>: "."
+		terrain_palette_entry<flat>: "X"
+		player_spawn_entity: standing_stone
+		object_map_entity_spawn: .object
+	
+		execute all:
+		{
+			execute one_of:
+			{
+				execute paletted_map:
+				[
+					"...."
+					".XX."
+					".XX."
+					"...."
+				]
+			}
+			
+			execute double: { passes: 5 }
+			execute median_filter: 1
+			execute grow: trees
+			execute despeckle: {}
+			execute double: { passes: 1 no_mutations: true }
+			execute add_borders: ocean
+			execute add_borders: ocean
+			
+			execute overlay: 
+			{
+				noise: .rocks_overlay
+				terrain<rocks>: { above: 128 exclude: [ ocean ] }				
+				doodad<small_rocks>: { range: [ 0 128 ] probability: [ 0 16 ] terrain: [ flat ] }
+			}
+			
+			execute overlay: 
+			{
+				noise: .doodad_brown_rocks_overlay
+				doodad<small_rocks_brown>: { range: [ 192 256 ] probability: [ 0 10 ] terrain: [ flat ] }
+			}
+
+			execute overlay: 
+			{
+				noise: .doodad_grass_overlay
+				doodad<grass_patch>: { range: [ 129 256 ] probability: [ 0 32 ] terrain: [ flat ] }
+			}
+
+			execute terrain_modifier_map:
+			{
+				terrain_modifier: humidity
+				noise: .humidity
+			}		
+
+			execute terrain_modifier_map:
+			{
+				terrain_modifier: temperature
+				noise: .temperature
+			}		
+			
+			execute add_entity_spawns:
+			{
+				entity_spawn: [ herbalism ]
+				probability: 6
+				terrain: [ flat ]
+				neighbor_terrain_probability_bonus<trees>: 12
+				neighbor_terrain_probability_bonus<rocks>: 2
+				min_distance_to_nearby: 2
+			}
+			
+			execute add_entity_spawns:
+			{
+				entity_spawn: [ mining ]
+				probability: 70
+				terrain: [ rocks ]
+				neighbor_terrain_required: flat
+				neighbor_terrain_required: rocks
+				min_distance_to_nearby: 2
+			}			
+
+			execute add_entity_spawns:
+			{
+				entity_spawn: [ underworld_shrine holy_altar ]
+				probability: 1
+				terrain: [ flat ]
+				min_distance_to_nearby: 1
+			}		
+			
+			execute add_boss: !BOSS{}
+			execute add_boss: !BOSS{}
+			
+			execute level_range: [ 18 20 ]
+			execute player_spawns: 4								
+		}		
+	}
+}
+ 
