@@ -477,7 +477,16 @@ namespace tpublic
 					}
 
 					if(statWeights.IsEmpty())
-						Helpers::GetRandomStatWeights(_GetRandom()(), statWeights);
+					{
+						std::unordered_set<Stat::Id> excludedStats;
+
+						// FIXME: would be nicer to define this rule in data instead (cloth armor (besides capes) shouldn't have block value
+						bool isBackSlot = (itemClass->m_slots.size() == 1 && itemClass->m_slots[0] == EquipmentSlot::ID_BACK);
+						if(itemType == ItemType::ID_ARMOR_CLOTH && !isBackSlot)
+							excludedStats.insert(Stat::ID_BLOCK_VALUE);
+
+						Helpers::GetRandomStatWeights(excludedStats, _GetRandom()(), statWeights);
+					}
 
 					statWeights.RemoveLowStats(maxDifferentStats);
 					statWeights.Add(baseStatWeights);

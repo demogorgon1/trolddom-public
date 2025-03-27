@@ -354,7 +354,7 @@ namespace tpublic::WordList
 					if(!word->m_associatedStatWeights)
 						word->m_associatedStatWeights = std::make_unique<Stat::Collection>();
 
-					Helpers::GetRandomStatWeights(wordHash, *word->m_associatedStatWeights);
+					Helpers::GetRandomStatWeights({}, wordHash, *word->m_associatedStatWeights);
 				}
 			}
 

@@ -205,8 +205,9 @@ namespace tpublic::Helpers
 
 	void		
 	GetRandomStatWeights(
-		uint32_t					aSeed,
-		Stat::Collection&			aOut)
+		const std::unordered_set<Stat::Id>&	aExcluded,
+		uint32_t							aSeed,
+		Stat::Collection&					aOut)
 	{
 		std::vector<Stat::Id> possibleStatIds =
 		{
@@ -248,8 +249,15 @@ namespace tpublic::Helpers
 		for (uint32_t j = 0; j < differentStatWeightsCount; j++)
 		{
 			size_t possibleStatIdIndex = RandomInRange<size_t>(wordRandom, 0, possibleStatIds.size() - 1);
+			Stat::Id statId = possibleStatIds[possibleStatIdIndex];
 
-			aOut.m_stats[possibleStatIds[possibleStatIdIndex]] += 1.0f;
+			if(aExcluded.contains(statId))
+			{
+				j--;
+				continue; // Try again
+			}
+
+			aOut.m_stats[statId] += 1.0f;
 		}
 	}
 

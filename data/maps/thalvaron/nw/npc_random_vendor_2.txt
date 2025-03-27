@@ -34,13 +34,8 @@ entity thalvaron_random_vendor_2: !NPC
 		{
 			slots:
 			[	
-				{ 
-					possibility: 
-					{ 
-						weight: 1 
-						loot_group: world_drops_epic
-					} 
-				}
+				{ possibility: { weight: 1 loot_group: world_drops_epic_weapons_and_shields } }
+				{ possibility: { weight: 1 loot_group: world_drops_epic_armor_and_jewelry } }
 			]	
 		}
 	}

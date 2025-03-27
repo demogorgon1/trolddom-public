@@ -68,7 +68,7 @@ generation_job world_drops_2:
 					rarity: uncommon
 					binds: when_equipped
 					max_different_stats: 3
-					loot_groups: [ world_drops_uncommon ]
+					loot_groups: [ world_drops_uncommon world_drops_uncommon_weapons_and_shields ]
 					count: 200
 				}
 			}
@@ -78,8 +78,8 @@ generation_job world_drops_2:
 				{ raw_stat phys_crit_chance: 1 }
 				{ raw_stat spell_crit_chance: 1 }
 				{ raw_stat dodge_chance: 1 }
-				{ raw_stat block_chance: 1 exclude_item_types: [ weapon_2h_sword weapon_2h_mace weapon_2h_axe weapon_2h_staff ] }
-				{ raw_stat parry_chance: 1 }
+				{ raw_stat block_chance: 1 exclude_item_types: [ weapon_2h_sword weapon_2h_mace weapon_2h_axe weapon_2h_staff armor_cloth ] }
+				{ raw_stat parry_chance: 1 } 
 			]
 
 			designations:
@@ -112,7 +112,7 @@ generation_job world_drops_2:
 					max_different_stats: 2
 					special_propabilities: [ 16 ]
 					stat_weights: { constitution: 1 }
-					loot_groups: [ world_drops_rare ]		
+					loot_groups: [ world_drops_rare world_drops_rare_weapons_and_shields]		
 					count: 200				
 				}
 			}
@@ -128,7 +128,7 @@ generation_job world_drops_2:
 					max_different_stats: 2
 					special_propabilities: [ 16 ]
 					stat_weights: { constitution: 1 }
-					loot_groups: [ world_drops_rare ]		
+					loot_groups: [ world_drops_rare world_drops_rare_weapons_and_shields ]		
 					count: 200				
 				}
 			}
@@ -152,7 +152,7 @@ generation_job world_drops_2:
 					max_different_stats: 2
 					special_propabilities: [ 40 5 ]
 					stat_weights: { constitution: 1 }
-					loot_groups: [ world_drops_epic ]		
+					loot_groups: [ world_drops_epic world_drops_epic_weapons_and_shields ]		
 					count: 300
 				}
 			}
@@ -168,7 +168,7 @@ generation_job world_drops_2:
 					max_different_stats: 2
 					special_propabilities: [ 40 5 ]
 					stat_weights: { constitution: 1 }
-					loot_groups: [ world_drops_epic ]		
+					loot_groups: [ world_drops_epic world_drops_epic_weapons_and_shields ]		
 					count: 300
 				}
 			}			
@@ -239,7 +239,7 @@ generation_job world_drops_2:
 					rarity: uncommon
 					binds: when_equipped
 					max_different_stats: 3
-					loot_groups: [ world_drops_uncommon ]
+					loot_groups: [ world_drops_uncommon world_drops_uncommon_armor_and_jewelry ]
 					count: 400	
 				}
 			}
@@ -283,7 +283,7 @@ generation_job world_drops_2:
 					max_different_stats: 2
 					special_propabilities: [ 16 ]
 					stat_weights: { constitution: 1 }
-					loot_groups: [ world_drops_rare ]		
+					loot_groups: [ world_drops_rare world_drops_rare_armor_and_jewelry ]		
 					count: 400				
 				}
 			}
@@ -299,7 +299,7 @@ generation_job world_drops_2:
 					max_different_stats: 2
 					special_propabilities: [ 16 ]
 					stat_weights: { constitution: 1 }
-					loot_groups: [ world_drops_rare ]		
+					loot_groups: [ world_drops_rare world_drops_rare_armor_and_jewelry ]		
 					count: 400				
 				}
 			}
@@ -323,7 +323,7 @@ generation_job world_drops_2:
 					max_different_stats: 2
 					special_propabilities: [ 40 5 ]
 					stat_weights: { constitution: 1 }
-					loot_groups: [ world_drops_epic ]		
+					loot_groups: [ world_drops_epic world_drops_epic_armor_and_jewelry ]		
 					count: 400				
 				}
 			}
@@ -339,7 +339,7 @@ generation_job world_drops_2:
 					max_different_stats: 2
 					special_propabilities: [ 40 5 ]
 					stat_weights: { constitution: 1 }
-					loot_groups: [ world_drops_epic ]		
+					loot_groups: [ world_drops_epic world_drops_epic_armor_and_jewelry ]		
 					count: 400				
 				}
 			}		

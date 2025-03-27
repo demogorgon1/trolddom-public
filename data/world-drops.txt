@@ -5,6 +5,13 @@ loot_group world_drops_uncommon: {}
 loot_group world_drops_rare: {}
 loot_group world_drops_epic: {}
 
+loot_group world_drops_uncommon_weapons_and_shields: {}
+loot_group world_drops_rare_weapons_and_shields: {}
+loot_group world_drops_epic_weapons_and_shields: {}
+loot_group world_drops_uncommon_armor_and_jewelry: {}
+loot_group world_drops_rare_armor_and_jewelry: {}
+loot_group world_drops_epic_armor_and_jewelry: {}
+
 loot_group skeletons: {}
 loot_group skeletons_uncommon: {}
 loot_group zombies: {}

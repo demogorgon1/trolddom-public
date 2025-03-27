@@ -2,6 +2,7 @@
 
 #include "LootRule.h"
 #include "Rarity.h"
+#include "Stat.h"
 #include "UniformDistribution.h"
 
 namespace tpublic
@@ -10,11 +11,6 @@ namespace tpublic
 	namespace Components
 	{
 		struct Position;
-	}
-
-	namespace Stat
-	{
-		struct Collection;
 	}
 
 	class EntityInstance;
@@ -26,75 +22,76 @@ namespace tpublic
 	{
 
 		void		StringAppend(
-						char*						aBuffer,
-						size_t						aBufferSize,
-						const char*					aAppend);
+						char*								aBuffer,
+						size_t								aBufferSize,
+						const char*							aAppend);
 		bool		IsWithinDistance(
-						const Vec2&					aA,
-						const Vec2&					aB,
-						int32_t						aDistance);
+						const Vec2&							aA,
+						const Vec2&							aB,
+						int32_t								aDistance);
 		bool		IsWithinDistance(
-						const Components::Position*	aA,
-						const Components::Position*	aB,
-						int32_t						aDistance);
+						const Components::Position*			aA,
+						const Components::Position*			aB,
+						int32_t								aDistance);
 		int32_t		CalculateDistanceSquared(
-						const Components::Position* aA,
-						const Components::Position*	aB);
+						const Components::Position*			aA,
+						const Components::Position*			aB);
 		int32_t		CalculateDistanceSquared(
-						const Components::Position* aA,
-						const Vec2&					aB);
+						const Components::Position*			aA,
+						const Vec2&							aB);
 		float		RandomFloat(
-						std::mt19937&				aRandom);
+						std::mt19937&						aRandom);
 		bool		RandomRoll(
-						std::mt19937&				aRandom,
-						uint32_t					aProbability);
+						std::mt19937&						aRandom,
+						uint32_t							aProbability);
 		bool		LoadTextFile(
-						const char*					aPath,
-						std::vector<std::string>&	aOut);
+						const char*							aPath,
+						std::vector<std::string>&			aOut);
 		void		TrimString(
-						std::string&				aString);
+						std::string&						aString);
 		void		GetRandomStatWeights(
-						uint32_t					aSeed,
-						Stat::Collection&			aOut);
+						const std::unordered_set<Stat::Id>&	aExcluded,
+						uint32_t							aSeed,
+						Stat::Collection&					aOut);
 		std::string	Format(
-						const char*					aFormat,
+						const char*							aFormat,
 						...);
 		void		MakeLowerCase(
-						std::string&				aString);
+						std::string&						aString);
 		bool		StringContains(
-						const std::string&			aString,
-						const std::string&			aContains);
+						const std::string&					aString,
+						const std::string&					aContains);
 		bool		IsPlayerOrMinion(
-						const EntityInstance*		aEntityInstance);
+						const EntityInstance*				aEntityInstance);
 		uint64_t	GetCombatGroupInfo(
-						const EntityInstance*		aEntityInstance,
-						const IWorldView*			aWorldView,
-						LootRule::Id&				aOutLootRule,
-						Rarity::Id&					aOutLootThreshold);
+						const EntityInstance*				aEntityInstance,
+						const IWorldView*					aWorldView,
+						LootRule::Id&						aOutLootRule,
+						Rarity::Id&							aOutLootThreshold);
 		bool		GetControllingPlayerInfo(
-						const EntityInstance*		aEntityInstance,
-						const IWorldView*			aWorldView,
-						uint32_t&					aOutCharacterId,
-						uint32_t&					aOutEntityInstanceId,
-						uint32_t&					aOutLevel);
+						const EntityInstance*				aEntityInstance,
+						const IWorldView*					aWorldView,
+						uint32_t&							aOutCharacterId,
+						uint32_t&							aOutEntityInstanceId,
+						uint32_t&							aOutLevel);
 		bool		IsMinionOfPlayer(
-						const EntityInstance*		aEntityInstance,
-						uint32_t					aPlayerEntityInstanceId);
+						const EntityInstance*				aEntityInstance,
+						uint32_t							aPlayerEntityInstanceId);
 
 		template <typename _T>
 		void
 		AppendVector(
-			std::vector<_T>&						aVector,
-			const std::vector<_T>&					aAppend)
+			std::vector<_T>&								aVector,
+			const std::vector<_T>&							aAppend)
 		{
 			aVector.insert(aVector.end(), aAppend.begin(), aAppend.end());
 		}
 
 		template <typename _T>
 		void	
-		RemoveCyclicFromVector(
-			std::vector<_T>&						aVector, 
-			size_t									aIndex)
+		RemoveCyclicFromVector(		
+			std::vector<_T>&								aVector, 
+			size_t											aIndex)
 		{
 			assert(aIndex < aVector.size());
 			size_t newSize = aVector.size() - 1;
@@ -108,9 +105,9 @@ namespace tpublic
 		template <typename _T>
 		bool
 		GetAndRemoveCyclicFromVector(
-			std::mt19937&							aRandom,
-			std::vector<_T>&						aVector,
-			_T&										aOut)
+			std::mt19937&									aRandom,
+			std::vector<_T>&								aVector,
+			_T&												aOut)
 		{
 			if(aVector.size() == 0)
 				return false;
@@ -131,9 +128,9 @@ namespace tpublic
 		template <typename _T>
 		_T
 		RandomInRange(
-			std::mt19937&							aRandom,
-			_T										aMin,
-			_T										aMax)
+			std::mt19937&									aRandom,
+			_T												aMin,
+			_T												aMax)
 		{
 			if(aMin == aMax)
 				return aMin;
@@ -145,8 +142,8 @@ namespace tpublic
 		template <typename _T>
 		const _T* 
 		RandomItemPointer(
-			std::mt19937&							aRandom,
-			const std::vector<_T>&					aVector)
+			std::mt19937&									aRandom,
+			const std::vector<_T>&							aVector)
 		{
 			if(aVector.empty())
 				return NULL;
@@ -159,8 +156,8 @@ namespace tpublic
 		template <typename _T>
 		const _T& 
 		RandomItem(
-			std::mt19937&							aRandom,
-			const std::vector<_T>&					aVector)
+			std::mt19937&									aRandom,
+			const std::vector<_T>&							aVector)
 		{
 			assert(aVector.size() != 0);
 			if(aVector.size() == 1)
@@ -172,9 +169,9 @@ namespace tpublic
 		template <typename _T>
 		_T
 		Clamp(
-			_T										aValue,
-			_T										aMin,
-			_T										aMax)
+			_T												aValue,
+			_T												aMin,
+			_T												aMax)
 		{
 			_T v = aValue < aMin ? aMin : aValue;
 			return v > aMax ? aMax : v;
@@ -183,7 +180,7 @@ namespace tpublic
 		template <typename _T>
 		_T
 		NearestGreaterOrEqualPowerOfTwo(
-			_T										aValue)
+			_T												aValue)
 		{
 			// This isn't exactly performant, but it's portable and works with any type.
 			// Don't do this for in high performance inner loops.
@@ -196,8 +193,8 @@ namespace tpublic
 		template <typename _T>
 		size_t
 		FindItem(
-			const std::vector<_T>&					aVector,
-			const _T&								aItem) 
+			const std::vector<_T>&							aVector,
+			const _T&										aItem) 
 		{
 			for(size_t i = 0, count = aVector.size(); i < count; i++)
 			{

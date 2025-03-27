@@ -135,9 +135,7 @@ namespace tpublic
 		
 		if(m_tokenCost == 0)
 		{
-			uint32_t baseCost = aManifest->m_itemMetrics.GetLevelBaseCost(m_itemData->m_itemLevel);
-			baseCost = (uint32_t)((float)baseCost * multipliers.m_tokenCost * aManifest->m_itemMetrics.m_tokenCostBaseMultiplier);
-			m_tokenCost = baseCost;
+			m_tokenCost = (uint32_t)(multipliers.m_tokenCost * aManifest->m_itemMetrics.m_tokenCostBaseMultiplier);
 
 			if (m_tokenCost == 0)
 				m_tokenCost = 1;
