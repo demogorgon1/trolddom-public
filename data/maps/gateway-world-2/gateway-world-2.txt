@@ -270,9 +270,9 @@ loot_table .gateway_world_2:
 	]	
 }
 
-map gateway_world_2:
+!define local MAP
 {
-	string: "Highborne World"
+	string: "Gateway World"
 	type: open_world
 	default_player_spawn: .player_spawn
 	has_dynamic_overview_map: true
@@ -290,7 +290,7 @@ map gateway_world_2:
 	generator world:
 	{
 		terrain_palette_entry<ocean>: "."
-		terrain_palette_entry<flat>: "X"
+		terrain_palette_entry<@_flat>: "X"
 		player_spawn_entity: standing_stone
 		object_map_entity_spawn: .object
 	
@@ -309,7 +309,7 @@ map gateway_world_2:
 			
 			execute double: { passes: 5 }
 			execute median_filter: 1
-			execute grow: trees
+			execute grow: @_trees
 			execute despeckle: {}
 			execute double: { passes: 1 no_mutations: true }
 			execute add_borders: ocean
@@ -318,20 +318,20 @@ map gateway_world_2:
 			execute overlay: 
 			{
 				noise: .rocks_overlay
-				terrain<rocks>: { above: 128 exclude: [ ocean ] }				
-				doodad<small_rocks>: { range: [ 0 128 ] probability: [ 0 16 ] terrain: [ flat ] }
+				terrain<@_rocks>: { above: 128 exclude: [ ocean ] }				
+				doodad<small_rocks>: { range: [ 0 128 ] probability: [ 0 16 ] terrain: [ @_flat ] }
 			}
 			
 			execute overlay: 
 			{
 				noise: .doodad_brown_rocks_overlay
-				doodad<small_rocks_brown>: { range: [ 192 256 ] probability: [ 0 10 ] terrain: [ flat ] }
+				doodad<small_rocks_brown>: { range: [ 192 256 ] probability: [ 0 10 ] terrain: [ @_flat ] }
 			}
 
 			execute overlay: 
 			{
 				noise: .doodad_grass_overlay
-				doodad<grass_patch>: { range: [ 129 256 ] probability: [ 0 32 ] terrain: [ flat ] }
+				doodad<grass_patch>: { range: [ 129 256 ] probability: [ 0 32 ] terrain: [ @_flat ] }
 			}
 
 			execute terrain_modifier_map:
@@ -350,9 +350,9 @@ map gateway_world_2:
 			{
 				entity_spawn: [ herbalism ]
 				probability: 6
-				terrain: [ flat ]
-				neighbor_terrain_probability_bonus<trees>: 12
-				neighbor_terrain_probability_bonus<rocks>: 2
+				terrain: [ @_flat ]
+				neighbor_terrain_probability_bonus<@_trees>: 12
+				neighbor_terrain_probability_bonus<@_rocks>: 2
 				min_distance_to_nearby: 2
 			}
 			
@@ -360,9 +360,9 @@ map gateway_world_2:
 			{
 				entity_spawn: [ mining ]
 				probability: 70
-				terrain: [ rocks ]
-				neighbor_terrain_required: flat
-				neighbor_terrain_required: rocks
+				terrain: [ @_rocks ]
+				neighbor_terrain_required: @_flat
+				neighbor_terrain_required: @_rocks
 				min_distance_to_nearby: 2
 			}			
 
@@ -370,7 +370,7 @@ map gateway_world_2:
 			{
 				entity_spawn: [ underworld_shrine holy_altar ]
 				probability: 1
-				terrain: [ flat ]
+				terrain: [ @_flat ]
 				min_distance_to_nearby: 1
 			}		
 			
@@ -383,3 +383,5 @@ map gateway_world_2:
 	}
 }
  
+map gateway_world_2_a: !MAP { _trees: trees _flat: flat _rocks: rocks }
+map gateway_world_2_b: !MAP { _trees: pine_trees _flat: pine_trees_flat _rocks: pine_trees_rocks }

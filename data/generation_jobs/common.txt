@@ -207,4 +207,100 @@ tag_context .caster_crabman_boss_sprite:
 	must_have_tags: [ crab_monster boss caster ]
 }
 
+############################################################################
+# Skeletons
+
+name_template .melee_skeleton:
+{
+	possibility<5>:
+	{
+		string: [ "Skeletal " ]
+		word: [ .noun_melee ]
+	}
+
+	possibility<4>:
+	{
+		word: [ .adjective_evil ]
+		string: [ " Skeletal " ]
+		word: [ .noun_melee ]
+	}
+
+	possibility<1>:
+	{
+		word: [ .adjective_evil ]
+		string: [ " " ]
+		word: [ .noun_melee ]
+	}
+	
+	possibility<1>:
+	{
+		word: [ .adjective_evil ]
+		string: [ " Skeleton" ]
+	}	
+}
+
+name_template .caster_skeleton:
+{
+	possibility<5>:
+	{
+		string: [ "Skeletal " ]
+		word: [ .noun_caster ]
+	}
+
+	possibility<4>:
+	{
+		word: [ .adjective_evil ]
+		string: [ " Skeletal " ]
+		word: [ .noun_caster ]
+	}
+
+	possibility<1>:
+	{
+		word: [ .adjective_evil ]
+		string: [ " " ]
+		word: [ .noun_caster ]
+	}	
+}
+
+name_template .skeleton_minor_boss:
+{
+	possibility<1>:
+	{
+		generated_name: [ demon_name ]
+	}
+}
+
+name_template .skeleton_major_boss:
+{
+	possibility<1>:
+	{
+		generated_name: [ demon_name ]
+		string: [ " the " ]
+		word: [ .adjective_evil ]
+	}
+}
+
+tag_context .melee_skeleton_sprite:
+{
+	must_have_tags: [ skeleton melee ]
+	must_not_have_tags: [ boss ]
+}
+
+tag_context .melee_skeleton_boss_sprite:
+{
+	must_have_tags: [ skeleton boss melee ]
+}
+
+tag_context .caster_skeleton_sprite:
+{
+	must_have_tags: [ skeleton caster ]
+	must_not_have_tags: [ boss ]
+}
+
+tag_context .caster_skeleton_boss_sprite:
+{
+	must_have_tags: [ skeleton boss caster ]
+}
+
+
 

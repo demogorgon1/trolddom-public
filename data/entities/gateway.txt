@@ -248,7 +248,7 @@ entity gateway_2:
 		position: { }		
 		gateway: 
 		{ 
-			maps: [ { map: gateway_world_2 } ]
+			maps: [ { map: gateway_world_2_a } { map: gateway_world_2_b } ]
 			schedule: daily
 			use_position_for_randomization: true
 		}

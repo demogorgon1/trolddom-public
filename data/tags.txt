@@ -28,6 +28,7 @@ tag human: { }
 tag demon: { }
 tag goblin: { }
 tag undead: { }
+tag skeleton: { }
 tag crab_monster: { }
 tag dragon: { }
 tag boss: { }

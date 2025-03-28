@@ -215,7 +215,29 @@ namespace tpublic
 
 		case StackObject::TYPE_ABILITY:
 			{
-				stackObject->m_abilityId = aSource->GetId(DataType::ID_ABILITY);
+				if(aSource->m_type == SourceNode::TYPE_OBJECT)
+				{
+					aSource->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if (aChild->m_name == "target" && aChild->IsIdentifier("random_player"))
+							stackObject->m_ability.m_targetType = Components::NPC::AbilityEntry::TARGET_TYPE_RANDOM_PLAYER;
+						else if (aChild->m_name == "target" && aChild->IsIdentifier("self"))
+							stackObject->m_ability.m_targetType = Components::NPC::AbilityEntry::TARGET_TYPE_SELF;
+						else if (aChild->m_name == "target" && aChild->IsIdentifier("low_health_friend_or_self"))
+							stackObject->m_ability.m_targetType = Components::NPC::AbilityEntry::TARGET_TYPE_LOW_HEALTH_FRIEND_OR_SELF;
+						else if(aChild->m_name == "id")
+							stackObject->m_ability.m_abilityId = aChild->GetId(DataType::ID_ABILITY);
+						else if(aChild->m_name == "target_must_not_have_aura")
+							stackObject->m_ability.m_targetMustNotHaveAuraId = aChild->GetId(DataType::ID_AURA);
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					});
+				}
+				else
+				{
+					stackObject->m_ability.m_abilityId = aSource->GetId(DataType::ID_ABILITY);
+				}				
 			}
 			break;
 
@@ -925,15 +947,16 @@ namespace tpublic
 			float weaponDamageMultiplier = weaponDamageMultiplierRange.GetRandom(_GetRandom());
 			float healthMultiplier = healthMultiplierRange.GetRandom(_GetRandom());
 
+			std::vector<const StackObject::Ability*> abilities;
 			uint32_t numAbilities = abilityCount.GetRandom(_GetRandom());
-			std::unordered_set<const Data::Ability*> abilities;
 			if(numAbilities > 0)
 			{
-				std::vector<const Data::Ability*> availableAbilities;
+				std::vector<const StackObject::Ability*> availableAbilities;
 				_GetAbilities(availableAbilities);
 				for(size_t j = 0; j < availableAbilities.size(); j++)
 				{
-					const Data::Ability* abilityData = availableAbilities[j];
+					const Data::Ability* abilityData = m_manifest->GetById<Data::Ability>(availableAbilities[j]->m_abilityId);
+				
 					if(abilityData->m_npcLevelRange.has_value())
 					{
 						if (level < abilityData->m_npcLevelRange->m_min || level > abilityData->m_npcLevelRange->m_max)
@@ -944,12 +967,22 @@ namespace tpublic
 					}
 				}
 
+				std::unordered_set<const StackObject::Ability*> abilitySet;
+				std::vector<const StackObject::Ability*> tmp = availableAbilities;
+
 				for (uint32_t j = 0; j < numAbilities; j++)
 				{
-					const Data::Ability* pickedAbility;
-					if(Helpers::GetAndRemoveCyclicFromVector(_GetRandom(), availableAbilities, pickedAbility))
-						abilities.insert(pickedAbility);
+					const StackObject::Ability* pickedAbility;
+					if(Helpers::GetAndRemoveCyclicFromVector(_GetRandom(), tmp, pickedAbility))
+						abilitySet.insert(pickedAbility);
 				}
+
+				for (size_t j = 0; j < availableAbilities.size(); j++)
+				{
+					const StackObject::Ability* availableAbility = availableAbilities[j];
+					if(abilitySet.contains(availableAbility))
+						abilities.push_back(availableAbility);
+				}				
 			}
 
 			{
@@ -977,9 +1010,28 @@ namespace tpublic
 
 				output->PrintF(1, "_abilities:");
 				output->PrintF(1, "[");
-				for(const Data::Ability* ability : abilities)
-					output->PrintF(2, "{ id: %s }", ability->m_name.c_str());
-				output->PrintF(2, "{ id: npc_attack }");
+				for(const StackObject::Ability* ability : abilities)
+				{
+					const Data::Ability* abilityData = m_manifest->GetById<Data::Ability>(ability->m_abilityId);
+
+					output->PrintF(2, "{");
+					
+					output->PrintF(3, "id: %s", abilityData->m_name.c_str());
+					if(ability->m_targetType == Components::NPC::AbilityEntry::TARGET_TYPE_LOW_HEALTH_FRIEND_OR_SELF)
+						output->PrintF(3, "target: low_health_friend_or_self");
+					else if (ability->m_targetType == Components::NPC::AbilityEntry::TARGET_TYPE_RANDOM_PLAYER)
+						output->PrintF(3, "target: random_player");
+					else if (ability->m_targetType == Components::NPC::AbilityEntry::TARGET_TYPE_SELF)
+						output->PrintF(3, "target: self");
+					
+					if(ability->m_targetMustNotHaveAuraId != 0)
+						output->PrintF(3, "requirement target<must_not_have_aura>: %s", m_manifest->GetById<Data::Aura>(ability->m_targetMustNotHaveAuraId)->m_name.c_str());
+
+					output->PrintF(2, "}");
+				}
+				output->PrintF(2, "{");
+				output->PrintF(3, "id: npc_attack");
+				output->PrintF(2, "}");
 				output->PrintF(1, "]");
 
 				if (tags.size() > 0)
@@ -1055,12 +1107,12 @@ namespace tpublic
 
 	void							
 	GenerationJob::_GetAbilities(
-		std::vector<const Data::Ability*>&	aOut) const
+		std::vector<const StackObject::Ability*>&	aOut) const
 	{
 		for (const std::unique_ptr<StackObject>& stackObject : m_stack)
 		{
 			if (stackObject->m_type == StackObject::TYPE_ABILITY)
-				aOut.push_back(m_manifest->GetById<Data::Ability>(stackObject->m_abilityId));
+				aOut.push_back(&stackObject->m_ability);
 		}
 	}
 
