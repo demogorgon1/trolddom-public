@@ -755,7 +755,8 @@ sprites:
 	sprite crab_monster_boss_5: { dead: crab_monster_boss_5_dead tags: [ crab_monster melee boss ] }
 	sprite crab_caster_5: { dead: crab_caster_5_dead tags: [ crab_monster caster ] }
 	sprite crab_caster_boss_3: { dead: crab_caster_boss_3_dead tags: [ crab_monster caster boss ] }
-
+	sprite man_68: { dead: man_68_dead }
+	
 	cursor: { position: [ 0 656 ] }
 	sprite crab_monster_4_dead: { }
 	sprite crab_monster_boss_4_dead: { }
@@ -765,6 +766,7 @@ sprites:
 	sprite crab_monster_boss_5_dead: { }
 	sprite crab_caster_5_dead: { }
 	sprite crab_caster_boss_3_dead: { }	
+	sprite man_68_dead: { }	
 }
 
 sprites:

@@ -8,6 +8,8 @@ namespace tpublic
 	struct DistanceField
 	{
 					DistanceField(
+						const DistanceField&							aOther);
+					DistanceField(
 						int32_t											aWidth,
 						int32_t											aHeight);
 					~DistanceField();

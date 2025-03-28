@@ -796,7 +796,7 @@ namespace tpublic
 		std::unique_ptr<MapRouteData>				m_mapRouteData;
 		std::unique_ptr<PVP>						m_pvp;
 		std::vector<uint32_t>						m_realmBalanceIds;
-		
+	
 		typedef std::unordered_map<Vec2, std::string, Vec2::Hasher> StaticPositionToolTipTable;
 		
 		StaticPositionToolTipTable					m_staticPositionToolTips;

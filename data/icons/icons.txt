@@ -740,6 +740,7 @@ sprites:
 	sprite icon_potion_3 : { tags: [ icon ] }
 	sprite icon_bag_1 : { tags: [ icon ] }
 	sprite icon_bag_2 : { tags: [ icon ] }
+	sprite icon_crystal_2 : { tags: [ icon ] }
 	
 }
 

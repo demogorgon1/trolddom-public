@@ -138,6 +138,7 @@ namespace tpublic::DirectEffects
 		case SimpleDirectEffect::ID_ACTIVATE_TRIGGER:
 		case SimpleDirectEffect::ID_RECALL:
 		case SimpleDirectEffect::ID_LEARN_RIDING:
+		case SimpleDirectEffect::ID_ENTITY_COMPASS:
 			aCombatResultQueue->AddSimpleDirectEffect(aSourceEntityInstance, target->GetEntityInstanceId(), m_id, m_param);
 			break;
 

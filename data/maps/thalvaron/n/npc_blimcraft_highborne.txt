@@ -202,11 +202,12 @@ quest thalvaron_blimcraft_highborne_3:
 		
 	completion:
 	[
-		"Ah, he sent you here? Sure, I might have a job for you."
+		"Ah, he sent you here? Sure, we might have a job for you."
 	]
 
 	level: 20
 	prerequisites: [ .blimcraft_highborne_2 ]
+	next_quest: thalvaron_blimcraft_assistant_1
 }
 
 entity thalvaron_blimcraft_highborne_3_portal:

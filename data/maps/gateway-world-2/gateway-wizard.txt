@@ -1,0 +1,54 @@
+map_entity_spawn .gateway_wizard: 
+{ 
+	entity gateway_wizard: { level: [ 18 20 ] } 	
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+npc_behavior_state .gateway_wizard:
+{
+	behavior: patrolling
+	no_blocking: true
+}
+
+route .gateway_wizard:
+{
+	max_direction_field_distance: max
+}
+
+entity gateway_wizard: !NPC
+{
+	_string: "Willowgast the Red"
+	_faction: monsters
+	_creature_type: humanoid
+	_default_behavior_state: .gateway_wizard
+	_weapon_damage: 1.8
+	_resource_health: 3.5
+	_elite: true
+	_sprite: man_68
+	_sprite_dead: man_68_dead
+	_level: 20
+	_route: .gateway_wizard
+	_despawn_time: { immediately_when_dead: true }
+	_in_combat_barks:
+	[
+		{ type: yell text: "That old fool sent you? How ridiculous!" flags: [ no_chat_bubble ] }
+	]	
+	_dead_barks:
+	[
+		{ type: yell text: "I have to go! See you later!" flags: [ no_chat_bubble ] }
+	]	
+	_abilities: 
+	[ 	
+		{
+			id: npc_teleport
+			target: random_player
+		}
+		{ 
+			id: npc_frostbolt
+			target: random_player
+		} 
+		{ 
+			id: npc_frostbolt_no_cooldown 
+		} 
+	]
+}

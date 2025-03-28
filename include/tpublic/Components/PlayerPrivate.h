@@ -121,6 +121,7 @@ namespace tpublic
 				m_useAbilityFlags = 0;
 				m_useAbilityExtendedFlags = 0;
 				m_notifyLearnedRiding = false;
+				m_entityCompassEvent.reset();
 			}
 
 			bool
@@ -159,6 +160,7 @@ namespace tpublic
 
 			std::vector<ProfessionSkillUseEvent>							m_professionSkillUseEvents;			
 			ErrorNotification::Id											m_errorNotification = ErrorNotification::INVALID_ID;
+			std::optional<Vec2>												m_entityCompassEvent;
 
 			const tpublic::AbilityModifierList*								m_abilityModifierList = NULL;
 

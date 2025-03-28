@@ -352,12 +352,19 @@ namespace tpublic::Systems
 		{
 		case EntityState::ID_DEAD:
 			{
-				const Components::Lootable* lootable = GetComponent<Components::Lootable>(aComponents);
-				bool hasLoot = lootable->HasLoot();
-				if((hasLoot && aTicksInState >= npc->m_despawnTime.m_ticksWithLoot) || 
-					(!hasLoot && aTicksInState >= npc->m_despawnTime.m_ticksWithoutLoot))
+				if(npc->m_despawnTime.m_immediatelyWhenDead)
 				{
-					returnValue = EntityState::ID_DESPAWNING;
+					returnValue = EntityState::ID_DESPAWNED;
+				}
+				else
+				{
+					const Components::Lootable* lootable = GetComponent<Components::Lootable>(aComponents);
+					bool hasLoot = lootable->HasLoot();
+					if((hasLoot && aTicksInState >= npc->m_despawnTime.m_ticksWithLoot) || 
+						(!hasLoot && aTicksInState >= npc->m_despawnTime.m_ticksWithoutLoot))
+					{
+						returnValue = EntityState::ID_DESPAWNING;
+					}
 				}
 
 				npc->m_targetEntity = SourceEntityInstance();
@@ -1134,7 +1141,8 @@ namespace tpublic::Systems
 			(aEntityState != EntityState::ID_DEAD && 
 			 aEntityState != EntityState::ID_EVADING && 
 			 aEntityState != EntityState::ID_DESPAWNING && 
-			 aEntityState != EntityState::ID_DESPAWNED);
+			 aEntityState != EntityState::ID_DESPAWNED) &&
+			(npc->m_npcBehaviorState == NULL || !npc->m_npcBehaviorState->m_noBlocking);
 
 		if(position->IsBlocking() != block)
 		{

@@ -248,7 +248,7 @@ loot_table .gateway_world_2:
 				loot_group: token_of_victory				
 				requirement target<must_have_tag>: { id: major_boss }				
 				use_special_loot_cooldown: true
-			}			
+			}	
 		}
 
 		{		
@@ -289,7 +289,7 @@ loot_table .gateway_world_2:
 
 	generator world:
 	{
-		terrain_palette_entry<ocean>: "."
+		terrain_palette_entry<@_ocean>: "."
 		terrain_palette_entry<@_flat>: "X"
 		player_spawn_entity: standing_stone
 		object_map_entity_spawn: .object
@@ -312,13 +312,13 @@ loot_table .gateway_world_2:
 			execute grow: @_trees
 			execute despeckle: {}
 			execute double: { passes: 1 no_mutations: true }
-			execute add_borders: ocean
-			execute add_borders: ocean
+			execute add_borders: @_ocean
+			execute add_borders: @_ocean
 			
 			execute overlay: 
 			{
 				noise: .rocks_overlay
-				terrain<@_rocks>: { above: 128 exclude: [ ocean ] }				
+				terrain<@_rocks>: { above: 128 exclude: [ @_ocean ] }				
 				doodad<small_rocks>: { range: [ 0 128 ] probability: [ 0 16 ] terrain: [ @_flat ] }
 			}
 			
@@ -349,9 +349,9 @@ loot_table .gateway_world_2:
 			execute add_entity_spawns:
 			{
 				entity_spawn: [ herbalism ]
-				probability: 6
+				probability: 5
 				terrain: [ @_flat ]
-				neighbor_terrain_probability_bonus<@_trees>: 12
+				neighbor_terrain_probability_bonus<@_trees>: 9
 				neighbor_terrain_probability_bonus<@_rocks>: 2
 				min_distance_to_nearby: 2
 			}
@@ -374,14 +374,21 @@ loot_table .gateway_world_2:
 				min_distance_to_nearby: 1
 			}		
 			
+			execute add_special_entity_spawn:
+			{
+				placement: far_away_from_player_spawns
+				entity_spawn: [ .gateway_wizard ]
+			}
+						
 			execute add_boss: !BOSS{}
 			execute add_boss: !BOSS{}
-			
+						
 			execute level_range: [ 18 20 ]
 			execute player_spawns: 4								
+			execute add_random_route: .gateway_wizard			
 		}		
 	}
 }
  
-map gateway_world_2_a: !MAP { _trees: trees _flat: flat _rocks: rocks }
-map gateway_world_2_b: !MAP { _trees: pine_trees _flat: pine_trees_flat _rocks: pine_trees_rocks }
+map gateway_world_2_a: !MAP { _trees: trees _flat: flat _rocks: rocks _ocean: ocean }
+map gateway_world_2_b: !MAP { _trees: pine_trees _flat: pine_trees_flat _rocks: pine_trees_rocks _ocean: pine_trees_ocean }

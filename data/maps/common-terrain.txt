@@ -69,6 +69,21 @@ terrain trees:
 	debug_color: [ 0 128 0 ]	
 }
 
+terrain pine_trees_ocean:
+{
+	tile<water>: { }
+
+	mutation_chance: 5
+	mutation<1>: pine_trees_flat
+	
+	border<coast>: [ pine_trees_flat coast ]
+	
+	connect_cost: 32
+	connect_conversion: coast
+	
+	debug_color: [ 0 0 255 ]
+}
+
 terrain pine_trees_flat:
 {
 	tile<snow>: { threshold<temperature>: { less_than: 32 } }

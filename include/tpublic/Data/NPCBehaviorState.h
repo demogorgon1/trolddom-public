@@ -109,6 +109,10 @@ namespace tpublic
 						{
 							m_patrolResetAfterLeavingCombat = aChild->GetBool();
 						}
+						else if (aChild->m_name == "no_blocking")
+						{
+							m_noBlocking = aChild->GetBool();
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -131,6 +135,7 @@ namespace tpublic
 				aStream->WriteBool(m_despawnIfLostPlayer);
 				aStream->WriteInt(m_patrolMoveIntervalTicks);
 				aStream->WriteBool(m_patrolResetAfterLeavingCombat);
+				aStream->WriteBool(m_noBlocking);
 			}
 
 			bool
@@ -153,7 +158,9 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadInt(m_patrolMoveIntervalTicks))
 					return false;
-				if(!aStream->ReadBool(m_patrolResetAfterLeavingCombat))
+				if (!aStream->ReadBool(m_patrolResetAfterLeavingCombat))
+					return false;
+				if (!aStream->ReadBool(m_noBlocking))
 					return false;
 				return true;
 			}
@@ -168,6 +175,7 @@ namespace tpublic
 			bool					m_despawnIfLostPlayer = false;
 			int32_t					m_patrolMoveIntervalTicks = 12;
 			bool					m_patrolResetAfterLeavingCombat = false;
+			bool					m_noBlocking = false;
 		};
 
 	}

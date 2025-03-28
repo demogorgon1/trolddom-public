@@ -865,7 +865,6 @@ ability npc_arcane_explosion:
 		damage_type: arcane
 		function: { expression: a a: [ [ 1 25 ] [ 10 75 ] [ 20 150 ] [ 30 300 ] ] elite_multiplier: 1.7 }				
 	}
-
 }
 
 particle_system npc_arcane_explosion:
@@ -1123,6 +1122,46 @@ ability npc_web:
 			flags: [ unique ]
 			aura_effect immobilize: {}
 			particle_system: web_trap
+		}
+	}	
+}
+
+ability npc_teleport:
+{
+	string: "Teleport"
+	min_range: 3
+	cast_time: 18
+	range: 8
+	cooldowns: [ global ]
+	cooldown: $cooldown { duration: 120 }		
+	flags: [ target_other target_hostile trigger_move_cooldown ]
+	states: [ default in_combat ]
+	icon: icon_teleport
+	direct_effect move:
+	{
+		destination: target_adjacent
+		move_flags: [ walkable_path_required ]
+		max_steps: 12
+		trigger_ability_on_resolve<self>: $ability
+		{
+			string: "Arcane Explosion"
+			cooldowns: [ spell_arcane_lockout npc_arcane_explosion global ]
+			flags: [ spell target_self target_aoe target_aoe_hostile always_in_line_of_sight always_in_range interruptable ]
+			states: [ default in_combat ]
+			icon: icon_frost_explosion
+			cast_time: 20
+			delay: 3
+			aoe_radius: 3
+			aoe_cap: 8
+			aoe_requirement target<must_not_be_in_state>: { id: dead }
+			source_particle_system: npc_arcane_explosion
+
+			direct_effect damage:
+			{
+				flags: [ can_be_critical is_magical ]
+				damage_type: arcane
+				function: { expression: a a: [ [ 1 25 ] [ 10 75 ] [ 20 150 ] [ 30 300 ] ] elite_multiplier: 1.7 }				
+			}
 		}
 	}	
 }

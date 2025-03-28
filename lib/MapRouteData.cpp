@@ -212,6 +212,9 @@ namespace tpublic
 		if (i == m_routeTable.cend())
 			return SIZE_MAX;
 
+		if(i->second->m_subRoutes.size() == 1)
+			return 0; // Only one subroute - use that one, even if position is off
+
 		size_t index = 0;
 
 		for(const std::unique_ptr<SubRoute>& subRoute : i->second->m_subRoutes)

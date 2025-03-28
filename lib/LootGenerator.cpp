@@ -74,7 +74,10 @@ namespace tpublic
 		bool										aIsElite,
 		uint32_t									aPlayerWorldCharacterId,
 		Components::Lootable*						aLootable) const
-	{
+	{		
+		if(aLootable->m_lootTableId == 0)
+			return;
+
 		const Data::LootTable* lootTable = m_manifest->GetById<tpublic::Data::LootTable>(aLootable->m_lootTableId);
 
 		// Cash

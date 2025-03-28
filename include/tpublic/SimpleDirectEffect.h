@@ -30,6 +30,7 @@ namespace tpublic
 			ID_THREAT_TABLE_SHUFFLE,
 			ID_THREAT_TABLE_EQUALIZE,
 			ID_ZONE_TELEPORT,
+			ID_ENTITY_COMPASS,
 
 			NUM_IDS
 		};
@@ -64,6 +65,7 @@ namespace tpublic
 			{ "threat_table_shuffle",	DataType::INVALID_ID,	false },
 			{ "threat_table_equalize",	DataType::INVALID_ID,	false },
 			{ "zone_teleport",			DataType::ID_ZONE,		false },
+			{ "entity_compass",			DataType::ID_ENTITY,	false },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

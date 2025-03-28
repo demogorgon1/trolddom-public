@@ -16,6 +16,7 @@
 #include <tpublic/Image.h>
 #include <tpublic/Manifest.h>
 #include <tpublic/MapGeneratorRuntime.h>
+#include <tpublic/MapRouteData.h>
 #include <tpublic/NoiseInstance.h>
 #include <tpublic/TaggedData.h>
 #include <tpublic/WorldInfoMap.h>
@@ -214,6 +215,29 @@ namespace tpublic::MapGenerators
 
 					DoodadPlacement::AddToCoverageMap(doodadData, doodad.m_position, coverageMap);
 				}
+			}
+		}
+
+		// Routes 
+		{
+			for(const std::unique_ptr<Route>& route : m_routes)
+			{
+				if(!aOutMapData->m_mapRouteData)
+					aOutMapData->m_mapRouteData = std::make_unique<MapRouteData>();
+
+				MapRouteData::Route* routeData = aOutMapData->m_mapRouteData->GetOrCreateRoute(route->m_routeId);
+				for(const Vec2& position : route->m_positions)
+					routeData->m_positions.insert(position);
+			}
+
+			if(aOutMapData->m_mapRouteData)
+			{
+				//aOutMapData->m_mapRouteData->Build(
+				//	m_manifest,
+				//	aOutMapData->m_tileMap, 
+				//	(int32_t)aOutMapData->m_width,
+				//	(int32_t)aOutMapData->m_height,
+				//	aW
 			}
 		}
 	}
@@ -828,6 +852,12 @@ namespace tpublic::MapGenerators
 
 			if (m_playerSpawns.size() == 1)
 				m_playerSpawns[0]->m_position = *m_walkable.cbegin();
+
+			if(m_playerSpawns.size() > 0)
+			{
+				m_playerSpawnDistanceCombined = std::make_unique<DistanceField>((int32_t)m_width, (int32_t)m_height);
+				m_playerSpawnDistanceCombined->Generate({ m_playerSpawns[0]->m_position }, m_walkable, UINT32_MAX);
+			}
 		}
 		else
 		{
@@ -906,6 +936,84 @@ namespace tpublic::MapGenerators
 		}
 	}
 
+	void			
+	World::Builder::InitSpecialEntities()
+	{
+		assert(m_playerSpawns.size() > 0);
+
+		for(const SpecialEntity& specialEntity : m_specialEntities)
+		{
+			TP_CHECK(specialEntity.m_mapEntitySpawns.size() > 0, "No map entity spawns defined.");
+			uint32_t mapEntitySpawnId = specialEntity.m_mapEntitySpawns[Roll(0, (uint32_t)specialEntity.m_mapEntitySpawns.size() - 1)];
+			Vec2 position = *m_walkable.cbegin();
+
+			switch(specialEntity.m_placement)
+			{
+			case SpecialEntity::PLACEMENT_FAR_AWAY_FROM_PLAYER_SPAWNS:
+				{
+					TP_CHECK(m_playerSpawnDistanceCombined, "No player spawn distance field.");
+					std::vector<Vec2> positions;
+					m_playerSpawnDistanceCombined->GetPositionsMoreThanValue(m_playerSpawnDistanceCombined->GetMax() - 8, positions);
+					if (positions.size() > 0)
+						position = positions[Roll(0, (uint32_t)positions.size() - 1)];
+				}
+				break;
+
+			default:
+				break;
+			}
+
+			MapData::EntitySpawn t;
+			t.m_mapEntitySpawnId = mapEntitySpawnId;
+			t.m_x = position.m_x;
+			t.m_y = position.m_y;
+			m_entitySpawns.push_back(t);
+			m_entitySpawnPositions.insert({ t.m_x, t.m_y });
+		}
+	}
+
+	void			
+	World::Builder::InitRoutes()
+	{
+		for(std::unique_ptr<Route>& route : m_routes)
+		{
+			switch(route->m_type)
+			{
+			case Route::TYPE_RANDOM:
+				{
+					TP_CHECK(m_playerSpawnDistanceCombined, "No player spawn distance field.");
+
+					// Set from position to be somewhat away from player spawns
+					{
+						std::vector<Vec2> positions;
+						m_playerSpawnDistanceCombined->GetPositionsMoreThanValue(m_playerSpawnDistanceCombined->GetMax() / 2, positions);
+						route->m_from = positions[Roll(0, (uint32_t)positions.size() - 1)];
+					}
+
+					// Create distance map for from position 
+					DistanceField distanceField((int32_t)m_width, (int32_t)m_height);
+					distanceField.Generate({ route->m_from }, m_walkable, UINT32_MAX);
+
+					// Find a destination that's both far away from play spawns and the origin
+					{
+						DistanceField combinedDistanceField(distanceField);
+						combinedDistanceField.CombineMin(m_playerSpawnDistanceCombined.get());
+						std::vector<Vec2> positions;
+						m_playerSpawnDistanceCombined->GetPositionsMoreThanValue(m_playerSpawnDistanceCombined->GetMax() / 2, positions);
+						route->m_to = positions[Roll(0, (uint32_t)positions.size() - 1)];
+					}
+
+					// Make route
+					distanceField.MakePath(m_random, route->m_to, route->m_positions);
+				}
+				break;
+
+			default:
+				break;
+			}
+		}
+	}
+
 	//---------------------------------------------------------------------------------
 
 	World::IExecuteFactory::IExecuteFactory()
@@ -925,6 +1033,8 @@ namespace tpublic::MapGenerators
 		Register<ExecuteAddBoss>();
 		Register<ExecuteLevelRange>();
 		Register<ExecutePlayerSpawns>();
+		Register<ExecuteAddSpecialEntitySpawn>();
+		Register<ExecuteAddRandomRoute>();
 	}
 
 	World::IExecuteFactory::~IExecuteFactory()
@@ -1524,6 +1634,23 @@ namespace tpublic::MapGenerators
 		}
 	}
 
+	void
+	World::ExecuteAddSpecialEntitySpawn::Run(
+		Builder*						aBuilder) const
+	{
+		aBuilder->m_specialEntities.push_back(m_specialEntity);
+	}
+
+	void				
+	World::ExecuteAddRandomRoute::Run(
+		Builder*						aBuilder) const
+	{
+		std::unique_ptr<Builder::Route> t = std::make_unique<Builder::Route>();
+		t->m_type = Builder::Route::TYPE_RANDOM;
+		t->m_routeId = m_routeId;
+		aBuilder->m_routes.push_back(std::move(t));
+	}
+
 	//---------------------------------------------------------------------------------
 
 	World::World()
@@ -1654,6 +1781,8 @@ namespace tpublic::MapGenerators
 		builder.ConnectWalkableAreas();
 		builder.InitBosses();
 		builder.InitPlayerSpawns();
+		builder.InitSpecialEntities();
+		builder.InitRoutes();
 
 		builder.CreateMapData(aSourceMapData, aOutMapData);
 

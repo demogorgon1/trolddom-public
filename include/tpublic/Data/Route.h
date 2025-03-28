@@ -109,7 +109,7 @@ namespace tpublic
 						if(aChild->m_name == "trigger")
 							m_triggers.push_back(std::make_unique<Trigger>(aChild));
 						else if(aChild->m_name == "max_direction_field_distance")
-							m_maxDirectionFieldDistance = aChild->GetUInt32();
+							m_maxDirectionFieldDistance = aChild->IsIdentifier("max") ? UINT32_MAX : aChild->GetUInt32();
 						else if (aChild->m_name == "origin_map_entity_spawn")
 							m_originMapEntitySpawnId = aChild->GetId(DataType::ID_MAP_ENTITY_SPAWN);
 						else
