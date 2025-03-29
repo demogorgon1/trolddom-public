@@ -34,6 +34,13 @@
 	train_ability: craft_shiny_armguards
 }
 
+!define DEFAULT_TAILORING_TRAINER
+{
+	train_profession<0>: tailoring
+	train_profession<1>: tailoring
+	train_ability: craft_linen_bracers
+}
+
 !define DEFAULT_HERBALISM_TRAINER
 {
 	train_profession<0>: herbalism

@@ -742,6 +742,8 @@ sprites:
 	sprite icon_bag_2 : { tags: [ icon ] }
 	sprite icon_crystal_2 : { tags: [ icon ] }
 	sprite icon_thorns_1 : { tags: [ icon ] }
+	sprite icon_tailoring : { tags: [ icon ] }
+	sprite icon_thread_1 : { tags: [ icon ] }
 	
 }
 

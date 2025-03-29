@@ -1,0 +1,43 @@
+profession tailoring<primary>:
+{
+	string: "Tailoring"
+	icon: icon_tailoring
+}
+
+!define local TAILORING_CRAFT
+{
+	string: @_string
+	icon_from<item>: @_item
+	description_from<item>: @_item
+	cast_time: 20
+	flags: [ crafting ]	
+	states: [ default in_combat ]
+	consume_items: @_materials
+	produce_items: @_produce
+	required_profession<@_skill>: tailoring
+}
+
+#####################################################
+# Linen Bracers
+
+item linen_bracers:
+{
+	string: "Linen Bracers"
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots: [ wrists ]
+	required_level: 2
+	icon: icon_bracers_2
+	rarity: uncommon
+	stat_weight wisdom: 1 
+}
+
+ability craft_linen_bracers: !TAILORING_CRAFT
+{
+	_string: "Linen Bracers"
+	_item: linen_bracers
+	_produce: { linen_bracers: 1 } 
+	_materials: { item_linen_cloth: 2 item_thread: 1 }
+	_skill: 0
+}
+

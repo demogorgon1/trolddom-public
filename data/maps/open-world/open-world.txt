@@ -56,6 +56,16 @@ map_entity_spawn .junjun:
 	entity .junjun: { weight: 1 }
 }
 
+map_entity_spawn .tailoring_trainer:
+{
+	entity .tailoring_trainer: { weight: 1 }
+}
+
+map_entity_spawn .enchanting_trainer:
+{
+	entity .enchanting_trainer: { weight: 1 }
+}
+
 map_entity_spawn .xazax:
 {
 	entity .xazax: { weight: 1 }
@@ -771,6 +781,8 @@ map_palette .stuff:
 	entity_spawn .rogargh: [ 240 94 106 ]
 	entity_spawn .korin: [ 94 240 106 ]
 	entity_spawn .horse: [ 194 240 106 ]
+	entity_spawn .tailoring_trainer: [ 201 94 83 ]
+	entity_spawn .enchanting_trainer: [ 201 94 183 ]
 	
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn open_world_player_spawn_paladin: [ 0 0 254 ]

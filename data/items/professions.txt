@@ -82,3 +82,12 @@ item item_brontium_ingot:
 	string: "Brontium Ingot"
 	stack: 20	
 }
+
+item item_thread:
+{
+	type: miscellaneous
+	item_level: 1
+	icon: icon_thread_1
+	string: "Sewing Thread"
+	stack: 20
+}
