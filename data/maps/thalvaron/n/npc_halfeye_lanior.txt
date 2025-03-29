@@ -64,7 +64,7 @@ quest .halfeye_lanior_1:
 	
 	description: 
 	[
-		"The tower is full of the dark elf henchmen of the wizard. Eventually I want you to enter that place and get rid of them once and for all, but for now we have to start with something easier. I know that the wizard has"
+		"The tower is full of the henchmen of the wizard. Eventually I want you to enter that place and get rid of them once and for all, but for now we have to start with something easier. I know that the wizard has"
 		"sent out a small detachment into the woods north of us. Why I don't know. It is led by a dark elf named Droogor. I need you to kill him."
 	]
 
@@ -81,4 +81,58 @@ quest .halfeye_lanior_1:
 	objectives: [ .halfeye_lanior_1 ]
 	level: 19
 	reward_one_item: [ .halfeye_lanior_1_a .halfeye_lanior_1_b .halfeye_lanior_1_c ]
+}
+
+############################################################
+# Quest 2
+
+objective .halfeye_lanior_2:
+{
+	string: "Malrik the Undying Defeated"
+	
+	maps: [ lich_tower ]
+	
+	kill_npc:
+	{
+		entities: [ lich_tower_malrik_the_undying ]
+		count: 1
+	}
+}
+
+{
+	${ _level: 20 rarity: rare }
+	item .halfeye_lanior_2_a: !QUEST_REWARD_NECK{ _string: "Chain of Dark Energy" _icon: icon_necklace_1 _constitution: 1 _wisdom: 1 _spell_damage: 2 }
+	item .halfeye_lanior_2_b: !QUEST_REWARD_FEET{ _string: "Boots of the Shield Guard" _icon: icon_shoe_1 _constitution: 2 _block_value: 3 _dexterity: 1 _type: armor_plate }
+	item .halfeye_lanior_2_c: !QUEST_REWARD_WAIST{ _string: "Waistwrap of Healing" _icon: icon_belt_1 _wisdom: 1 _healing: 3 }
+}
+
+quest .halfeye_lanior_2:
+{
+	string: "The Lich of the Tower"
+
+	text:
+	[
+		"Enter the Tower of Indulath to the east and defeat the evil lich."
+	]
+	
+	description: 
+	[
+		"Time has come for you to face off with the final enemy of the living. The dark elf wizard who has become a powerful lich, going by the name Malrik the Undying. He resides in the"
+		"Tower of Indulath to the east. Venture into his lair, defeat him, and return to me for a reward."
+	]
+
+	progress:
+	[
+		"Back already?"
+	]
+	
+	completion:
+	[
+		"Excellent."
+	]
+
+	objectives: [ .halfeye_lanior_2 ]
+	level: 20
+	type: dungeon
+	reward_one_item: [ .halfeye_lanior_2_a .halfeye_lanior_2_b .halfeye_lanior_2_c ]
 }

@@ -209,6 +209,15 @@ namespace tpublic
 				return true;
 			}
 
+			void
+			ToPropertyTable(
+				PropertyTable&			aOut) const override
+			{
+				ToPropertyTableBase(aOut);
+				aOut["string"] = m_string;
+				aOut["points"] = Helpers::Format("%u", m_points).c_str();
+			}
+
 			// Public data
 			std::string							m_string;
 			std::string							m_description;

@@ -9,6 +9,7 @@ dialogue_screen .sheila_urkins_dialogue:
 	[
 		{ quest: .sheila_urkins_1 }
 		{ quest: .sheila_urkins_2 }
+		{ quest: .sheila_urkins_3 }
 		{ quest<completion_only>: .ghyuik }		
 	]
 }
@@ -239,4 +240,97 @@ quest .sheila_urkins_2:
 	level: 15
 	prerequisites: [ .sheila_urkins_1 ]
 	reward_one_item: [ .sheila_urkins_2_a .sheila_urkins_2_b .sheila_urkins_2_c ]
+}
+
+############################################################
+# Quest 3
+
+loot_group .sheila_urkins_3_quest_item: {}
+
+item .sheila_urkins_3_quest_item:
+{
+	icon: icon_thorns_1
+	item_level: 20
+	loot_groups: [ .sheila_urkins_3_quest_item ]
+	flags: [ not_sellable ]
+	string: "Tirnwood Thorns"
+	stack: 5
+}
+
+loot_table .sheila_urkins_3_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .sheila_urkins_3_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_sheila_urkins_3_quest_item:
+{
+	string: "Tirnwood Thorns"
+	systems: [ openable ]
+
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ thorns_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .sheila_urkins_3_quest_item
+			verb: pick
+			range: 1 
+			despawn: true 			
+			level: 20
+			required_quest: .sheila_urkins_3
+		}		
+	}
+}
+
+objective .sheila_urkins_3:
+{
+	string: "Tirnwood Thorns"
+	
+	maps: [ tirnwood_thicket ]
+	
+	collect_items: { item: .sheila_urkins_3_quest_item count: 5 }
+}
+
+{
+	${ _level: 20 _rarity: rare }
+  	item .sheila_urkins_3_a: !QUEST_REWARD_BACK{ _string: "Cloak of the Witch" _icon: icon_cape_1 _constitution: 2 _dexterity: 1 }
+}	   
+
+quest .sheila_urkins_3:
+{
+	string: "Precious Thorns"
+
+	text:
+	[
+		"Find and venture into Tirnwood Thicket and collect thorns."
+	]
+	
+	description: 
+	[
+		"Far away from here to the east, beyond the undying lands and Faerandor is a forest that goes by the name Tirnwood Thicket. I've never been there myself, but some time ago a traveller"
+		"passed through here and gave me a sample of some thorny branches he had found there. If you ever go to this place, please collect some thorns for me. I've never seen anything like those before."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Excellent!"
+	]
+
+	objectives: [ .sheila_urkins_3 ]
+	level: 20
+	type: dungeon
+	prerequisites: [ .sheila_urkins_2 ]
+	reward_one_item: [ .sheila_urkins_3_a ]
 }

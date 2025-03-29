@@ -50,6 +50,7 @@ item .blimcraft_assistant_1:
 	item_level: 20
 	use_ability: $ability [ string icon ]
 	{
+		description: "Locate Willowgast the Red."
 		flags: [ target_self item ]
 		cooldowns: [ global ]
 		cooldown: $cooldown { duration: 50 }

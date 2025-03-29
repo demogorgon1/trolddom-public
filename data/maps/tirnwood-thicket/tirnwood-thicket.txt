@@ -30,6 +30,8 @@ map_cliff .dummy_cliff_7_ramp: { cliff_style: dummy elevation: 7 ramp: true }
 
 map_palette .tiles: !DEFAULT_TILE_PALETTE{}
 
+map_entity_spawn thalvaron_sheila_urkins_3_quest_item: { entity thalvaron_sheila_urkins_3_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+
 map_palette .stuff:
 {
 	player_spawn .player_spawn: [ 0 0 255 ]
@@ -57,6 +59,8 @@ map_palette .stuff:
 	entity_spawn .wolf_trash: [ 251 93 194 ]
 	entity_spawn .giant_spider_trash: [ 30 99 125 ]
 	entity_spawn .tree_trash: [ 31 39 188 ]
+	
+	entity_spawn thalvaron_sheila_urkins_3_quest_item: [ 49 22 111 ]
 }
 
 map_palette .levels:

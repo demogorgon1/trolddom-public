@@ -28,3 +28,5 @@ entity thalvaron_lia_frostmane: !NPC
 	_loot_table: .npc
 	_not_pushable: true	
 }
+
+#############################################

@@ -9,7 +9,7 @@ dialogue_screen .trouli_copperquill_dialogue:
 	[	
 		{ quest<completion_only>: .urgon_starleaf_2 }
 		{ quest: .trouli_copperquill_1 }
-		{ quest: .trouli_copperquill_2 }
+		{ quest: thalvaron_trouli_copperquill_2 }
 	]
 }
 
@@ -101,21 +101,22 @@ quest .trouli_copperquill_1:
 	level: 19
 	prerequisites: [ .urgon_starleaf_2 ]
 	objectives: [ .trouli_copperquill_1_a .trouli_copperquill_1_b ]
-	next_quest: .trouli_copperquill_2
+	next_quest: thalvaron_trouli_copperquill_2
 }
 
 ############################################################
 # Quest 2
 
-loot_group .trouli_copperquill_2_quest_item: {}
+loot_group thalvaron_trouli_copperquill_2_quest_item: {}
 
 item .trouli_copperquill_2_quest_item:
 {
 	icon: icon_claw
 	item_level: 20
-	loot_groups: [ .trouli_copperquill_2_quest_item ]
+	loot_groups: [ thalvaron_trouli_copperquill_2_quest_item ]
 	flags: [ not_sellable unique ]
 	string: "Enormous Infected Claws"
+	quest: thalvaron_trouli_copperquill_2
 }
 
 objective .trouli_copperquill_2:
@@ -134,7 +135,7 @@ objective .trouli_copperquill_2:
   	item .trouli_copperquill_2_c: !QUEST_REWARD_SHOULDERS{ _string: "Mantle of the Dead" _icon: icon_shoulders_4 _constitution: 1 _wisdom: 1 _spell_damage: 1 _type: armor_cloth }
 }	 
 
-quest .trouli_copperquill_2:
+quest thalvaron_trouli_copperquill_2:
 {
 	string: "Something Larger"
 
