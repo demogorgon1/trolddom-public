@@ -209,7 +209,8 @@ doodad ship:
 doodad large_statue:
 {
 	sprites: [ large_statue ]
-	map_palette<"x">: { occupy: true } map: [ "x" ]
+	map_palette<"x">: { occupy: true } map: [ "xx"
+                                              "xx" ]
 }
 
 doodad fs_ground_mark:

@@ -41,3 +41,148 @@ ability craft_linen_bracers: !TAILORING_CRAFT
 	_skill: 0
 }
 
+#####################################################
+# Linen Feet Wraps
+
+item linen_feet_wraps:
+{
+	string: "Linen Feet Wraps"
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots: [ feet ]
+	required_level: 3
+	icon: icon_shoe_1
+	rarity: uncommon
+	stat_weight spirit: 1 
+}
+
+ability craft_linen_feet_wraps: !TAILORING_CRAFT
+{
+	_string: "Linen Feet Wraps"
+	_item: linen_feet_wraps
+	_produce: { linen_feet_wraps: 1 } 
+	_materials: { item_linen_cloth: 3 item_thread: 1 }
+	_skill: 10
+}
+
+#####################################################
+# Linen Cloak
+
+item linen_cloak:
+{
+	string: "Linen Cloak"
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots: [ back ]
+	required_level: 4
+	icon: icon_cape_1
+	rarity: uncommon
+	stat_weight constitution: 1 
+}
+
+ability craft_linen_cloak: !TAILORING_CRAFT
+{
+	_string: "Linen Cloak"
+	_item: linen_cloak
+	_produce: { linen_cloak: 1 } 
+	_materials: { item_linen_cloth: 4 item_thread: 1 }
+	_skill: 20
+}
+
+#####################################################
+# Linen Leggings
+
+item linen_leggings:
+{
+	string: "Linen Leggings"
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots: [ legs ]
+	required_level: 5
+	icon: icon_pants_2
+	rarity: uncommon
+	stat_weight wisdom: 1 
+}
+
+ability craft_linen_leggings: !TAILORING_CRAFT
+{
+	_string: "Linen Leggings"
+	_item: linen_leggings
+	_produce: { linen_leggings: 1 } 
+	_materials: { item_linen_cloth: 5 item_thread: 1 }
+	_skill: 30
+}
+
+#####################################################
+# Linen Waistband
+
+item linen_waistband:
+{
+	string: "Linen Waistband"
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots: [ waist ]
+	required_level: 5
+	icon: icon_pants_2
+	rarity: uncommon
+	stat_weight wisdom: 1 
+}
+
+ability craft_linen_waistband: !TAILORING_CRAFT
+{
+	_string: "Linen Waistband"
+	_item: linen_waistband
+	_produce: { linen_waistband: 1 } 
+	_materials: { item_linen_cloth: 5 item_thread: 1 }
+	_skill: 40
+}
+
+#####################################################
+# Linen Robe
+
+item linen_robe:
+{
+	string: "Linen Robe"
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots: [ chest ]
+	required_level: 6
+	icon: icon_cloth_shirt_4
+	rarity: uncommon
+	stat_weight wisdom: 1 
+	stat_weight constitution: 1 
+}
+
+ability craft_linen_robe: !TAILORING_CRAFT
+{
+	_string: "Linen Robe"
+	_item: linen_robe
+	_produce: { linen_robe: 1 } 
+	_materials: { item_linen_cloth: 6 item_thread: 1 }
+	_skill: 50
+}
+
+#####################################################
+# Linen Hood
+
+item linen_hood:
+{
+	string: "Linen Hood"
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots: [ head ]
+	required_level: 7
+	icon: icon_head_11
+	rarity: uncommon
+	stat_weight wisdom: 1 
+	stat_weight spirit: 1 
+}
+
+ability craft_linen_hood: !TAILORING_CRAFT
+{
+	_string: "Linen Hood"
+	_item: linen_hood
+	_produce: { linen_hood: 1 } 
+	_materials: { item_linen_cloth: 6 item_thread: 1 }
+	_skill: 60
+}

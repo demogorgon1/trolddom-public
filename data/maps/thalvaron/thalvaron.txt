@@ -197,6 +197,7 @@ map_entity_spawn thalvaron_blimcraft_highborne_3_portal: { entity thalvaron_blim
 map_entity_spawn thalvaron_blimcraft_highborne_3_portal_return: { entity thalvaron_blimcraft_highborne_3_portal_return: { init_state: default } }
 map_entity_spawn thalvaron_blimcraft_assistant: { entity thalvaron_blimcraft_assistant: { init_state: default } }
 map_entity_spawn thalvaron_gateway_2: { entity gateway_2: { init_state: default } }
+map_entity_spawn thalvaron_tailoring_trainer: { entity thalvaron_tailoring_trainer: { init_state: default } }
 
 # N
 map_entity_spawn thalvaron_ranger_fremalt: { entity thalvaron_ranger_fremalt: { init_state: default } }
@@ -489,6 +490,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_blimcraft_highborne_3_portal_return: [ 168 81 77 ]
 	entity_spawn thalvaron_blimcraft_assistant: [ 240 104 99 ]
 	entity_spawn thalvaron_gateway_2: [ 40 108 88 ]
+	entity_spawn thalvaron_tailoring_trainer: [ 30 130 33 ]
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				
@@ -860,6 +862,7 @@ map_palette .doodads:
 	doodad wall_sign_generic<"Harbor Manager">: [ 123 21 11 ]	
 	doodad wall_sign_generic<"Skrald & Co.">: [ 223 21 11 ]	
 	doodad wall_sign_generic<"Rare Imports">: [ 231 121 11 ]	
+	doodad wall_sign_generic<"The Valorisian">: [ 231 21 152 ]	
 }
 
 map_palette .cliffs:
