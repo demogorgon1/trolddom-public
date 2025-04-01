@@ -1349,8 +1349,6 @@ namespace tpublic
 				}
 			}
 		}
-
-		printf("..\n");
 	}
 
 	void		

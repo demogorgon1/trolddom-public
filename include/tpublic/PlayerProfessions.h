@@ -162,6 +162,27 @@ namespace tpublic
 		}
 
 		bool
+		HasProfessionAbility(
+			uint32_t			aProfessionId,
+			uint32_t			aAbilityId) const
+		{
+			for (const Entry& t : m_entries)
+			{
+				if (t.m_professionId == aProfessionId)
+				{
+					for(uint32_t abilityId : t.m_abilityIds)
+					{
+						if(abilityId == aAbilityId)
+							return true;
+					}
+					break;
+				}
+			}
+
+			return false;
+		}
+
+		bool
 		RemoveProfession(
 			uint32_t			aProfessionId)
 		{
