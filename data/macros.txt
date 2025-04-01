@@ -280,3 +280,95 @@
 !define BOSS_DROP_OFFHAND { !BOSS_DROP equipment_slots: [ off_hand ] }
 !define BOSS_DROP_TRINKET { !BOSS_DROP equipment_slots: [ trinket_1 trinket_2 ] }
 
+#####################################################
+# Crafting
+
+!define BLACKSMITHING_CRAFT
+{
+	string: @_string
+	icon_from<item>: @_item
+	description_from<item>: @_item
+	cast_time: 20
+	flags: [ crafting ]	
+	states: [ default in_combat ]
+	consume_items: @_materials
+	produce_items: @_produce
+	required_profession<@_skill>: blacksmithing
+	requirement self<must_have_item>: { id: weapon_blacksmithing_hammer }
+		
+	<exists _requires_furnace and _requires_furnace> must_have_nearby_entity: furnace
+	<exists _requires_anvil and _requires_anvil> must_have_nearby_entity: anvil
+}
+
+!define BLACKSMITHING_LEARN
+{
+	string: @_string
+	description: @_description
+	flags: [ target_self item ]
+	cast_time: 20
+	icon: icon_scroll_1
+	cooldowns: [ global ]	
+	consume_items: @_consume_items
+	required_profession<@_skill>: blacksmithing
+	requirement self<must_not_have_profession_ability>: { id: @_craft_ability }
+	direct_effect learn_profession_ability:
+	{
+		profession: blacksmithing
+		ability: @_craft_ability
+	}
+}
+
+!define BLACKSMITHING_RECIPE
+{
+	type: miscellaneous
+	item_level: @_level
+	rarity: @_rarity
+	loot_groups: @_loot_groups  
+	icon: icon_scroll_1
+	string: @_string
+	use_ability: @_learn_ability
+	level_range: @_level_range
+}
+
+!define TAILORING_CRAFT
+{
+	string: @_string
+	icon_from<item>: @_item
+	description_from<item>: @_item
+	cast_time: 20
+	flags: [ crafting ]	
+	states: [ default in_combat ]
+	consume_items: @_materials
+	produce_items: @_produce
+	required_profession<@_skill>: tailoring
+}
+
+!define TAILORING_LEARN
+{
+	string: @_string
+	description: @_description
+	flags: [ target_self item ]
+	cast_time: 20
+	icon: icon_scroll_1
+	cooldowns: [ global ]	
+	consume_items: @_consume_items
+	required_profession<@_skill>: tailoring
+	requirement self<must_not_have_profession_ability>: { id: @_craft_ability }
+	direct_effect learn_profession_ability:
+	{
+		profession: tailoring
+		ability: @_craft_ability
+	}
+}
+
+!define TAILORING_RECIPE
+{
+	type: miscellaneous
+	item_level: @_level
+	rarity: @_rarity
+	loot_groups: @_loot_groups
+	icon: icon_scroll_1
+	string: @_string
+	use_ability: @_learn_ability
+	level_range: @_level_range
+}

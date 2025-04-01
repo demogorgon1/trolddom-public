@@ -12,6 +12,9 @@ loot_group world_drops_uncommon_armor_and_jewelry: {}
 loot_group world_drops_rare_armor_and_jewelry: {}
 loot_group world_drops_epic_armor_and_jewelry: {}
 
+loot_group world_drops_uncommon_recipe: {}
+loot_group world_drops_rare_recipe: {}
+
 loot_group skeletons: {}
 loot_group skeletons_uncommon: {}
 loot_group zombies: {}
@@ -53,7 +56,9 @@ loot_group birds_uncommon: {}
 	possibility: { weight: 500 loot_group: world_drops_junk }
 	possibility: { weight: 100 loot_group: world_drops_consumable }	
 	possibility: { weight: 85 loot_group: world_drops_uncommon }	
-	possibility: { weight: 10 loot_group: world_drops_rare }	
+	possibility: { weight: 24 loot_group: world_drops_uncommon_recipe }		
+	possibility: { weight: 24 loot_group: world_drops_rare }	
+	possibility: { weight: 12 loot_group: world_drops_rare_recipe }	
 	possibility: { weight: 1 loot_group: world_drops_epic }	
 		
 	<exists _extra_possibility> possibility: @_extra_possibility

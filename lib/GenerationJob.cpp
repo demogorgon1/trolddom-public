@@ -7,6 +7,7 @@
 #include <tpublic/Data/LootTable.h>
 #include <tpublic/Data/NameTemplate.h>
 #include <tpublic/Data/Pantheon.h>
+#include <tpublic/Data/Profession.h>
 #include <tpublic/Data/Tag.h>
 #include <tpublic/Data/WordGenerator.h>
 
@@ -87,6 +88,7 @@ namespace tpublic
 		m_wordListQueryCache = std::make_unique<WordList::QueryCache>(&m_manifest->m_wordList);
 		m_taggedSpriteData = std::make_unique<TaggedDataCache<Data::Sprite>>(m_manifest);
 		m_taggedAuraData = std::make_unique<TaggedDataCache<Data::Aura>>(m_manifest);
+		m_taggedItemData = std::make_unique<TaggedDataCache<Data::Item>>(m_manifest);
 
 		// Initialize output path
 		{
@@ -167,12 +169,22 @@ namespace tpublic
 				_ReadStackObjectArray(StackObject::TYPE_ABILITY, aChild);
 			else if (aChild->m_name == "weapon_speeds")
 				_ReadStackObjectArray(StackObject::TYPE_WEAPON_SPEED, aChild);
+			else if (aChild->m_name == "item_suffixes")
+				_ReadStackObjectArray(StackObject::TYPE_ITEM_SUFFIX, aChild);
+			else if (aChild->m_name == "item_prefixes")
+				_ReadStackObjectArray(StackObject::TYPE_ITEM_PREFIX, aChild);
+			else if (aChild->m_name == "equipment_slots")
+				_ReadStackObjectArray(StackObject::TYPE_EQUIPMENT_SLOT, aChild);
+			else if (aChild->m_name == "loot_groups")
+				_ReadStackObjectArray(StackObject::TYPE_LOOT_GROUP, aChild);
 			else if (aChild->m_name == "items")
 				_ReadItems(aChild);
 			else if (aChild->m_name == "deities")
 				_ReadDeities(aChild);
 			else if (aChild->m_name == "npcs")
 				_ReadNPCs(aChild);
+			else if (aChild->m_name == "crafting")
+				_ReadCrafting(aChild);
 			else
 				TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 		});
@@ -191,6 +203,70 @@ namespace tpublic
 
 		switch(aType)
 		{
+		case StackObject::TYPE_LOOT_GROUP:
+			{
+				aSource->GetObject()->ForEachChild([&](
+					const SourceNode* aChild)
+				{
+					if (aChild->m_name == "loot_group")
+						stackObject->m_lootGroup.m_lootGroupId = aChild->GetId(DataType::ID_LOOT_GROUP);
+					else if (aChild->m_name == "rarity")
+						stackObject->m_lootGroup.m_rarity = Rarity::StringToId(aChild->GetIdentifier());
+					else
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+				});
+			}
+			break;
+
+		case StackObject::TYPE_EQUIPMENT_SLOT:
+			{
+				stackObject->m_equipmentSlot = EquipmentSlot::StringToId(aSource->GetIdentifier());
+				TP_VERIFY(stackObject->m_equipmentSlot != EquipmentSlot::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid equipment slot.", aSource->GetIdentifier());
+			}
+			break;
+
+		case StackObject::TYPE_ITEM_PREFIX:
+			{
+				aSource->GetObject()->ForEachChild([&](
+					const SourceNode* aChild)
+				{
+					if (aChild->m_name == "level_range")
+						stackObject->m_itemPrefix.m_levelRange = UIntRange(aChild);
+					else if (aChild->m_name == "rarity")
+						stackObject->m_itemPrefix.m_rarity = Rarity::StringToId(aChild->GetIdentifier());
+					else if (aChild->m_name == "string")
+						stackObject->m_itemPrefix.m_string = aChild->GetString();
+					else if (aChild->m_name == "material_multiplier")
+						stackObject->m_itemPrefix.m_materialMultiplier = aChild->GetFloat();
+					else
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+				});
+			}
+			break;
+
+		case StackObject::TYPE_ITEM_SUFFIX:
+			{
+				aSource->GetObject()->ForEachChild([&](
+					const SourceNode* aChild)
+				{
+					if (aChild->m_name == "string")
+					{
+						stackObject->m_itemSuffix.m_string = aChild->GetString();
+					}
+					else if (aChild->m_name == "budget_bias")
+					{
+						stackObject->m_itemSuffix.m_budgetBias = aChild->GetInt32();
+					}
+					else
+					{
+						Stat::Id id = Stat::StringToId(aChild->m_name.c_str());
+						TP_VERIFY(id != Stat::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid stat or item.", aChild->m_name.c_str());
+						stackObject->m_itemSuffix.m_stats.m_stats[id] = aChild->GetFloat();
+					}
+				});
+			}
+			break;
+
 		case StackObject::TYPE_RANDOM_NUMBER_GENERATOR:
 			{
 				stackObject->m_randomNumberGenerator = std::make_unique<std::mt19937>(aSource->GetUInt32());
@@ -1053,6 +1129,230 @@ namespace tpublic
 		}
 	}
 
+	void
+	GenerationJob::_ReadCrafting(
+		const SourceNode*	aSource)
+	{
+		uint32_t professionId = 0;
+		ItemType::Id itemType = ItemType::INVALID_ID;
+		std::string craftMacro;
+		std::string learnMacro;
+		std::string recipeMacro;
+		std::string recipePrefix = "Recipe";
+		std::unordered_map<std::string, bool> craftBools;
+		std::unordered_map<std::string, uint32_t> baseMaterials;
+		uint32_t reagentTagId = m_manifest->TryGetExistingIdByName<Data::Tag>("reagent");
+
+		aSource->GetObject()->ForEachChild([&](
+			const SourceNode* aChild)
+		{
+			if (aChild->m_name == "profession")
+				professionId = aChild->GetId(DataType::ID_PROFESSION);
+			else if (aChild->m_name == "item_type")
+				itemType = ItemType::StringToId(aChild->GetIdentifier());
+			else if (aChild->m_name == "craft_macro")
+				craftMacro = aChild->GetIdentifier();
+			else if (aChild->m_name == "recipe_macro")
+				recipeMacro = aChild->GetIdentifier();
+			else if (aChild->m_name == "learn_macro")
+				learnMacro = aChild->GetIdentifier();
+			else if (aChild->m_name == "recipe_prefix")
+				recipePrefix = aChild->GetString();
+			else if(aChild->m_tag == "craft")
+				craftBools[aChild->m_name] = aChild->GetBool();
+			else if (aChild->m_tag == "base_material")
+				baseMaterials[aChild->m_name] = aChild->GetUInt32();
+			else if(aChild->m_name == "reagent_tag")
+				reagentTagId = aChild->GetId(DataType::ID_TAG);
+			else
+				TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+		});
+
+		TP_VERIFY(itemType != ItemType::INVALID_ID, aSource->m_debugInfo, "No item type defined.");
+		TP_VERIFY(!craftMacro.empty() && !recipeMacro.empty() && !learnMacro.empty(), aSource->m_debugInfo, "Missing macros.");
+		TP_VERIFY(professionId != 0, aSource->m_debugInfo, "No profession defined.");
+		const Data::Profession* profession = m_manifest->GetById<Data::Profession>(professionId);
+		uint32_t professionTagId = m_manifest->TryGetExistingIdByName<Data::Tag>(profession->m_name.c_str());
+
+		std::vector<EquipmentSlot::Id> equipmentSlots;
+		_GetEquipmentSlots(equipmentSlots);
+
+		std::vector<const StackObject::ItemPrefix*> itemPrefixes;
+		_GetItemPrefixes(itemPrefixes);
+
+		std::vector<const StackObject::ItemSuffix*> itemSuffixes;
+		_GetItemSuffixes(itemSuffixes);
+
+		const char* itemTypeName = ItemType::GetInfo(itemType)->m_name;
+		uint32_t itemTypeTagId = m_manifest->TryGetExistingIdByName<Data::Tag>(itemTypeName);
+		TP_VERIFY(itemTypeTagId != 0, aSource->m_debugInfo, "No item type tag.");
+
+		std::unordered_set<std::string> tt;
+
+		for(EquipmentSlot::Id equipmentSlot : equipmentSlots)
+		{
+			const EquipmentSlot::Info* equipmentSlotInfo = EquipmentSlot::GetInfo(equipmentSlot);
+			uint32_t equipmentSlotTagId = m_manifest->TryGetExistingIdByName<Data::Tag>(equipmentSlotInfo->m_tag);
+			TP_VERIFY(equipmentSlotTagId != 0, aSource->m_debugInfo, "No equipment slot tag.");
+
+			for (const StackObject::ItemSuffix* itemSuffix : itemSuffixes)
+			{
+				for (const StackObject::ItemPrefix* itemPrefix : itemPrefixes)
+				{
+					TP_VERIFY(itemPrefix->m_rarity != Rarity::INVALID_ID, aSource->m_debugInfo, "No rarity defined for item prefix.");
+
+					std::vector<uint32_t> lootGroups;
+					_GetLootGroups(itemPrefix->m_rarity, lootGroups);
+
+					std::string lootGroupsString;
+					for (uint32_t lootGroupId : lootGroups)
+					{	
+						if(!lootGroupsString.empty())
+							lootGroupsString += " ";
+						lootGroupsString += m_manifest->GetById<Data::LootGroup>(lootGroupId)->m_name;
+					}
+
+					uint32_t level = itemPrefix->m_levelRange.GetRandom(_GetRandom());
+
+					uint32_t skill = level * 5;
+
+					std::unordered_map<std::string, uint32_t> materials = baseMaterials;
+
+					uint32_t commonMaterialCount = 1 + (uint32_t)(itemPrefix->m_materialMultiplier * (float)level);
+					const char* commonMaterialName = _PickMaterialName(level, Rarity::ID_COMMON, professionTagId);
+					assert(commonMaterialName != NULL);
+					materials[commonMaterialName] = commonMaterialCount; 
+
+					if((uint32_t)itemPrefix->m_rarity >= (uint32_t)Rarity::ID_UNCOMMON)
+					{
+						const char* reagentName = _PickMaterialName(level, Rarity::ID_COMMON, reagentTagId);
+						uint32_t count = _GetRandomIntInRange<uint32_t>(1, 2);
+
+						if ((uint32_t)itemPrefix->m_rarity >= (uint32_t)Rarity::ID_RARE)
+							count *= _GetRandomIntInRange<uint32_t>(2, 3);
+
+						materials[reagentName] = count;
+					}
+					
+					if((uint32_t)itemPrefix->m_rarity >= (uint32_t)Rarity::ID_RARE)
+					{
+						const char* reagentName = _PickMaterialName(level, Rarity::ID_UNCOMMON, reagentTagId);
+						materials[reagentName] = _GetRandomIntInRange<uint32_t>(1, 2);
+					}
+
+					std::string itemString;
+
+					{
+						WordList::QueryParams wordListQuery;
+						wordListQuery.m_mustHaveTags.push_back(itemTypeTagId);
+						wordListQuery.m_mustHaveTags.push_back(equipmentSlotTagId);
+						wordListQuery.Prepare();
+						const WordList::Word* baseNameWord = m_wordListQueryCache->PerformQuery(wordListQuery)->GetRandomWord(_GetRandom());
+						TP_VERIFY(!baseNameWord->m_word.empty(), aSource->m_debugInfo, "Unable to pick word.");
+						itemString = itemPrefix->m_string + " " + baseNameWord->m_word + " " + itemSuffix->m_string;
+					}
+
+					const char* iconSpriteName = NULL;
+
+					{
+						std::unordered_set<uint32_t> mustHaveTags;
+						std::vector<uint32_t> allTags;
+
+						mustHaveTags.insert(itemTypeTagId);
+						mustHaveTags.insert(equipmentSlotTagId);
+
+						iconSpriteName = _PickIconName(level, itemPrefix->m_rarity, mustHaveTags, allTags);
+					}
+				
+					std::string itemName = Helpers::Format("_%u_%u_%u_%08x%08x", profession->m_id, equipmentSlot, itemType, itemPrefix->GetHash(), itemSuffix->GetHash());
+
+					// Item source
+					{
+						GeneratedSource* output = _CreateGeneratedSource();
+
+						output->PrintF(0, "item %s:", itemName.c_str());
+						output->PrintF(0, "{");
+						output->PrintF(1, "string: \"%s\"", itemString.c_str());
+						output->PrintF(1, "required_level: %u", level);
+						output->PrintF(1, "rarity: %s", Rarity::GetInfo(itemPrefix->m_rarity)->m_name);
+						output->PrintF(1, "binds: when_equipped");
+						output->PrintF(1, "equipment_slots: [ %s ]", equipmentSlotInfo->m_name);
+						output->PrintF(1, "type: %s", itemTypeName);
+						output->PrintF(1, "icon: %s", iconSpriteName);
+						
+						if(itemSuffix->m_budgetBias != 0)
+							output->PrintF(1, "budget_bias: %d", itemSuffix->m_budgetBias);
+
+						for(uint32_t i = 1; i < (uint32_t)Stat::NUM_IDS; i++)
+						{
+							float value = itemSuffix->m_stats.m_stats[i];
+							if(value > 0.0f)
+							{
+								Stat::Id statId = (Stat::Id)i;
+								const Stat::Info* statInfo = Stat::GetInfo(statId);
+
+								output->PrintF(1, "%s %s: %.0f", statInfo->m_percentage ? "stat" : "stat_weight", statInfo->m_name, value);
+							}
+						}
+
+						output->PrintF(0, "}");
+					}
+
+					// Craft ability source
+					{
+						GeneratedSource* output = _CreateGeneratedSource();
+
+						output->PrintF(0, "ability c%s: !%s", itemName.c_str(), craftMacro.c_str());
+						output->PrintF(0, "{");
+						output->PrintF(1, "_string: \"%s\"", itemString.c_str());
+						output->PrintF(1, "_item: %s", itemName.c_str());
+						output->PrintF(1, "_produce: { %s: 1 }", itemName.c_str());
+						output->PrintF(1, "_materials:");
+						output->PrintF(1, "{");
+						for (const std::pair<std::string, uint32_t>& material : materials)
+							output->PrintF(2, "%s: %u", material.first.c_str(), material.second);
+						output->PrintF(1, "}");
+						output->PrintF(1, "_skill: %u", skill);						
+						for(const std::pair<std::string, bool>& craftBool : craftBools)
+							output->PrintF(1, "%s: %s", craftBool.first.c_str(), craftBool.second ? "true" : "false");
+						output->PrintF(0, "}");
+					}
+
+					// Recipe item source
+					{
+						GeneratedSource* output = _CreateGeneratedSource();
+
+						output->PrintF(0, "item r%s: !%s", itemName.c_str(), recipeMacro.c_str());
+						output->PrintF(0, "{");
+						output->PrintF(1, "_string: \"%s: %s\"", recipePrefix.c_str(), itemString.c_str());
+						output->PrintF(1, "_level: %u", level);
+						output->PrintF(1, "_rarity: %s", Rarity::GetInfo(itemPrefix->m_rarity)->m_name);
+						output->PrintF(1, "_learn_ability: l%s", itemName.c_str());
+						output->PrintF(1, "_level_range: [ %u %u ]", level, level + 3);
+						output->PrintF(1, "_loot_groups: [ %s ]", lootGroupsString.c_str());							
+						output->PrintF(0, "}");
+					}
+
+					// Learn ability source
+					{
+						GeneratedSource* output = _CreateGeneratedSource();
+
+						output->PrintF(0, "ability l%s: !%s", itemName.c_str(), learnMacro.c_str());
+						output->PrintF(0, "{");
+						output->PrintF(1, "_string: \"%s: %s\"", recipePrefix.c_str(), itemString.c_str());
+						output->PrintF(1, "_description: \"Teaches you how to make %s.\"", itemString.c_str());
+						output->PrintF(1, "_consume_items: { r%s: 1 }", itemName.c_str());
+						output->PrintF(1, "_skill: %u", skill);
+						output->PrintF(1, "_craft_ability: c%s", itemName.c_str());
+						output->PrintF(0, "}");
+					}
+				}
+			}
+		}
+
+		printf("..\n");
+	}
+
 	void		
 	GenerationJob::_GetContextTags(
 		std::vector<uint32_t>&	aOut)
@@ -1307,4 +1607,84 @@ namespace tpublic
 		return picked;
 	}
 
+	void							
+	GenerationJob::_GetEquipmentSlots(
+		std::vector<EquipmentSlot::Id>& aOut) const
+	{
+		for (const std::unique_ptr<StackObject>& stackObject : m_stack)
+		{
+			if (stackObject->m_type == StackObject::TYPE_EQUIPMENT_SLOT)
+				aOut.push_back(stackObject->m_equipmentSlot);
+		}
+	}
+	
+	void							
+	GenerationJob::_GetItemSuffixes(
+		std::vector<const StackObject::ItemSuffix*>& aOut) const
+	{
+		for (const std::unique_ptr<StackObject>& stackObject : m_stack)
+		{
+			if (stackObject->m_type == StackObject::TYPE_ITEM_SUFFIX)
+				aOut.push_back(&stackObject->m_itemSuffix);
+		}
+	}
+	
+	void							
+	GenerationJob::_GetItemPrefixes(
+		std::vector<const StackObject::ItemPrefix*>& aOut) const
+	{
+		for (const std::unique_ptr<StackObject>& stackObject : m_stack)
+		{
+			if (stackObject->m_type == StackObject::TYPE_ITEM_PREFIX)
+				aOut.push_back(&stackObject->m_itemPrefix);
+		}
+	}
+
+	void							
+	GenerationJob::_GetLootGroups(
+		Rarity::Id										aRarity,
+		std::vector<uint32_t>&							aOut) const
+	{
+		for (const std::unique_ptr<StackObject>& stackObject : m_stack)
+		{
+			if (stackObject->m_type == StackObject::TYPE_LOOT_GROUP && stackObject->m_lootGroup.m_rarity == aRarity)
+				aOut.push_back(stackObject->m_lootGroup.m_lootGroupId);
+		}
+	}
+
+	const char* 
+	GenerationJob::_PickMaterialName(
+		uint32_t										aLevel,
+		Rarity::Id										aRarity,
+		uint32_t										aTagId)
+	{
+		const TaggedData::Tag* tag = m_taggedItemData->Get()->GetTag(aTagId);
+		TP_VERIFY(tag != NULL, m_source->m_debugInfo, "No tagged item data: %u", aTagId);
+
+		uint32_t bestLevelDiff = UINT32_MAX;
+		std::vector<const Data::Item*> bestItems;
+
+		for(uint32_t itemId : tag->m_dataIds)
+		{
+			const Data::Item* item = m_manifest->GetById<Data::Item>(itemId);
+			assert(item->HasTag(aTagId));
+			if(item->m_rarity == aRarity)
+			{
+				uint32_t levelDiff = (uint32_t)abs((int32_t)aLevel - (int32_t)item->m_itemLevel);
+				if(levelDiff == bestLevelDiff)
+				{
+					bestItems.push_back(item);
+				}
+				else if(levelDiff < bestLevelDiff)
+				{
+					bestItems = { item };
+					bestLevelDiff = levelDiff;
+				}
+			}
+		}
+
+		TP_VERIFY(bestItems.size() > 0, m_source->m_debugInfo, "Unable to pick material: %u", aTagId);
+		const Data::Item* materialItem = _GetRandomItemInVector(bestItems);
+		return materialItem->m_name.c_str();
+	}
 }

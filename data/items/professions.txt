@@ -37,26 +37,29 @@ item weapon_fishing_rod:
 
 item item_copper_ingot:
 {
-	item_level: 1
+	item_level: 6
 	icon: icon_copper_ingot
 	string: "Copper Ingot"
 	stack: 20	
+	tags: [ blacksmithing ]
 }
 
 item item_iron_ingot:
 {
-	item_level: 4
+	item_level: 9
 	icon: icon_iron_ingot
 	string: "Iron Ingot"
 	stack: 20	
+	tags: [ blacksmithing ]
 }
 
 item item_azuryte_ingot:
 {
-	item_level: 11
+	item_level: 12
 	icon: icon_azuryte_ingot
 	string: "Azuryte Ingot"
 	stack: 20	
+	tags: [ blacksmithing ]
 }
 
 item item_gold_ingot:
@@ -64,23 +67,27 @@ item item_gold_ingot:
 	item_level: 4
 	icon: icon_gold_ingot
 	string: "Gold Ingot"
+	rarity: uncommon
 	stack: 20	
+	tags: [ reagent ]
 }
 
 item item_mithril_ingot:
 {
-	item_level: 14
+	item_level: 16
 	icon: icon_mithril_ingot
 	string: "Mithril Ingot"
 	stack: 20	
+	tags: [ blacksmithing ]
 }
 
 item item_brontium_ingot:
 {
-	item_level: 17
+	item_level: 20
 	icon: icon_brontium_ingot
 	string: "Brontium Ingot"
 	stack: 20	
+	tags: [ blacksmithing ]
 }
 
 item item_thread:

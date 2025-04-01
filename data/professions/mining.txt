@@ -23,7 +23,7 @@ ${
 	}
 
 	loot_group .mining_verdigrisite: { }
-	item item_verdigrisite: !GATHER_ITEM { }
+	item item_verdigrisite: !GATHER_ITEM { _tags: [ reagent ] }
 }
 
 #############################################################################
@@ -39,7 +39,7 @@ ${
 	}
 
 	loot_group .mining_roseate: { }
-	item item_roseate: !GATHER_ITEM { }
+	item item_roseate: !GATHER_ITEM { _tags: [ reagent ] }
 }
 
 #############################################################################
@@ -55,7 +55,7 @@ ${
 	}
 
 	loot_group .mining_azure_mirage_stone: { }
-	item item_azure_mirage_stone: !GATHER_ITEM { }
+	item item_azure_mirage_stone: !GATHER_ITEM { _tags: [ reagent ] }
 }
 
 #############################################################################
@@ -71,7 +71,7 @@ ${
 	}
 
 	loot_group .mining_amethystine: { }
-	item item_amethystine: !GATHER_ITEM { }
+	item item_amethystine: !GATHER_ITEM { _tags: [ reagent ] }
 }
 
 #############################################################################

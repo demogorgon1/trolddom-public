@@ -5,7 +5,8 @@ item item_linen_cloth:
 	icon: icon_linen_cloth
 	stack: 20
 	level_range: [ 1 10 ]
-	item_level: 1
+	item_level: 7
+	tags: [ tailoring ]
 }
 
 item item_cottonweave_cloth:
@@ -15,9 +16,9 @@ item item_cottonweave_cloth:
 	icon: icon_cottonweave_cloth
 	stack: 20
 	level_range: [ 11 18 ]
-	item_level: 11
+	item_level: 14
+	tags: [ tailoring ]
 }
-
 
 item item_emberfelt_cloth:
 {
@@ -26,5 +27,6 @@ item item_emberfelt_cloth:
 	icon: icon_emberfelt_cloth
 	stack: 20
 	level_range: [ 17 24 ]
-	item_level: 17
+	item_level: 20
+	tags: [ tailoring ]
 }

@@ -39,6 +39,9 @@ tag melee: { }
 tag healer: { }
 tag ranged: { }
 tag player_world_creature: { }
+tag reagent: { }
+tag blacksmithing: { }
+tag tailoring: { }
 
 # Ability tags
 tag ability_small_heal_single_target: {}

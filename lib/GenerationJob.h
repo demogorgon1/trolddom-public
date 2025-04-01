@@ -4,6 +4,7 @@
 
 #include <tpublic/Data/Ability.h>
 #include <tpublic/Data/Aura.h>
+#include <tpublic/Data/Item.h>
 #include <tpublic/Data/Sprite.h>
 
 #include <tpublic/EquipmentSlot.h>
@@ -67,7 +68,11 @@ namespace tpublic
 				TYPE_DESIGNATION,
 				TYPE_LEVEL_RANGE,
 				TYPE_ABILITY,
-				TYPE_WEAPON_SPEED
+				TYPE_WEAPON_SPEED,
+				TYPE_ITEM_SUFFIX,
+				TYPE_ITEM_PREFIX,
+				TYPE_EQUIPMENT_SLOT,
+				TYPE_LOOT_GROUP,
 			};
 
 			struct RandomTags
@@ -164,6 +169,50 @@ namespace tpublic
 				uint32_t									m_targetMustNotHaveAuraId = 0;
 			};
 
+			struct ItemSuffix
+			{
+				uint32_t
+				GetHash() const
+				{
+					Hash::CheckSum hash;
+					hash.AddString(m_string.c_str());
+					hash.AddPOD(m_budgetBias);
+					hash.AddPOD(m_stats.m_stats);
+					return hash.m_hash;
+				}
+
+				// Public data
+				std::string									m_string;
+				int32_t										m_budgetBias = 0;
+				Stat::Collection							m_stats;
+			};
+
+			struct ItemPrefix
+			{
+				uint32_t
+				GetHash() const
+				{
+					Hash::CheckSum hash;
+					hash.AddString(m_string.c_str());
+					hash.AddPOD(m_rarity);
+					hash.AddPOD(m_levelRange);
+					hash.AddPOD(m_materialMultiplier);
+					return hash.m_hash;
+				}
+
+				// Public data
+				std::string									m_string;
+				Rarity::Id									m_rarity = Rarity::INVALID_ID;
+				UIntRange									m_levelRange;
+				float										m_materialMultiplier = 1.0f;
+			};
+
+			struct LootGroup
+			{
+				Rarity::Id									m_rarity = Rarity::INVALID_ID;
+				uint32_t									m_lootGroupId = 0;
+			};
+
 			Type											m_type;
 			RandomTags										m_randomTags;
 			ItemClass										m_itemClass;
@@ -173,6 +222,10 @@ namespace tpublic
 			Ability											m_ability;
 			UIntRange										m_range;
 			std::unique_ptr<std::mt19937>					m_randomNumberGenerator;
+			ItemSuffix										m_itemSuffix;
+			ItemPrefix										m_itemPrefix;
+			LootGroup										m_lootGroup;
+			EquipmentSlot::Id								m_equipmentSlot = EquipmentSlot::INVALID_ID;
 		};
 
 		std::vector<std::unique_ptr<StackObject>>			m_stack;
@@ -183,6 +236,7 @@ namespace tpublic
 		std::unique_ptr<WordList::QueryCache>				m_wordListQueryCache;
 		std::unique_ptr<TaggedDataCache<Data::Sprite>>		m_taggedSpriteData;
 		std::unique_ptr<TaggedDataCache<Data::Aura>>		m_taggedAuraData;
+		std::unique_ptr<TaggedDataCache<Data::Item>>		m_taggedItemData;
 
 		uint32_t											m_nextItemNumber;
 		uint32_t											m_nextDeityNumber;
@@ -211,40 +265,55 @@ namespace tpublic
 
 		void							_ReadSource();
 		void							_ReadCompound(
-											const SourceNode*							aSource);
+											const SourceNode*								aSource);
 		void							_ReadStackObject(
-											StackObject::Type							aType,
-											const SourceNode*							aSource);
+											StackObject::Type								aType,
+											const SourceNode*								aSource);
 		void							_ReadStackObjectArray(
-											StackObject::Type							aType,
-											const SourceNode*							aSource);
+											StackObject::Type								aType,
+											const SourceNode*								aSource);
 		void							_ReadItems(
-											const SourceNode*							aSource);
+											const SourceNode*								aSource);
 		void							_ReadDeities(
-											const SourceNode*							aSource);
+											const SourceNode*								aSource);
 		void							_ReadNPCs(
-											const SourceNode*							aSource);
+											const SourceNode*								aSource);
+		void							_ReadCrafting(
+											const SourceNode*								aSource);
 		void							_GetContextTags(
-											std::vector<uint32_t>&						aOut);
+											std::vector<uint32_t>&							aOut);
 		std::mt19937&					_GetRandom();		
 		const UIntRange&				_GetLevelRange() const;
 		void							_GetAbilities(
-											std::vector<const StackObject::Ability*>&	aOut) const;
+											std::vector<const StackObject::Ability*>&		aOut) const;
 		const char*						_PickIconName(
-											uint32_t									aLevel,
-											Rarity::Id									aRarity,
-											const std::unordered_set<uint32_t>&			aMustHaveTags,
-											const std::vector<uint32_t>&				aTags);
+											uint32_t										aLevel,
+											Rarity::Id										aRarity,
+											const std::unordered_set<uint32_t>&				aMustHaveTags,
+											const std::vector<uint32_t>&					aTags);
 		GeneratedSource*				_CreateGeneratedSource();
 		void							_CreateDesignation(
-											const char*									aBaseName,
-											const StackObject::Designation*				aDesignation,
-											const std::vector<uint32_t>&				aContextTags,
-											std::vector<uint32_t>&						aTags,
-											Stat::Collection&							aStatWeights,
-											std::string&								aOut);
+											const char*										aBaseName,
+											const StackObject::Designation*					aDesignation,
+											const std::vector<uint32_t>&					aContextTags,
+											std::vector<uint32_t>&							aTags,
+											Stat::Collection&								aStatWeights,
+											std::string&									aOut);
 		const StackObject::ItemSpecial*	_PickItemSpecial(
-											ItemType::Id								aItemType);
+											ItemType::Id									aItemType);
+		void							_GetEquipmentSlots(
+											std::vector<EquipmentSlot::Id>&					aOut) const;
+		void							_GetItemSuffixes(
+											std::vector<const StackObject::ItemSuffix*>&	aOut) const;
+		void							_GetItemPrefixes(
+											std::vector<const StackObject::ItemPrefix*>&	aOut) const;
+		void							_GetLootGroups(
+											Rarity::Id										aRarity,
+											std::vector<uint32_t>&							aOut) const;
+		const char*						_PickMaterialName(
+											uint32_t										aLevel,
+											Rarity::Id										aRarity,
+											uint32_t										aTagId);
 	};
 
 }

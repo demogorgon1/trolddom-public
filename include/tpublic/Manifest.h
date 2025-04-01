@@ -287,7 +287,7 @@ namespace tpublic
 			FromStream(
 				IReader*														aStream) override
 			{
-				if(!aStream->ReadObjectPointersWithBase(m_entries, 8192))
+				if(!aStream->ReadObjectPointersWithBase(m_entries, 32768))
 					return false;
 
 				for (std::unique_ptr<_T>& t : m_entries)

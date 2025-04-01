@@ -87,6 +87,7 @@ item item_bone_fragments:
 	string: "Bone Fragments"
 	stack: 20
 	loot_groups: [ skeletons ]
+	tags: [ reagent ]
 }
 
 item item_bone:
@@ -98,6 +99,7 @@ item item_bone:
 	string: "Intact Bone"
 	stack: 10
 	loot_groups: [ skeletons ]
+	tags: [ reagent ]	
 }
 
 item item_corpse_worm:
@@ -109,6 +111,7 @@ item item_corpse_worm:
 	string: "Corpse Worm"
 	stack: 20
 	loot_groups: [ zombies ]
+	tags: [ reagent ]	
 }
 
 item item_zombie_hair:
@@ -120,6 +123,7 @@ item item_zombie_hair:
 	string: "Coarse Zombie Hair"
 	stack: 20
 	loot_groups: [ zombies ]
+	tags: [ reagent ]	
 }
 
 item item_ghoul_claw:
@@ -131,6 +135,7 @@ item item_ghoul_claw:
 	string: "Decomposing Claw"
 	stack: 20
 	loot_groups: [ zombies ]
+	tags: [ reagent ]	
 }
 
 item item_beast_jaw:
@@ -141,7 +146,8 @@ item item_beast_jaw:
 	icon: icon_jaw_1
 	string: "Menacing Jaw"
 	stack: 20
-	loot_groups: [ wolves bears lions  ]
+	loot_groups: [ wolves bears lions ]
+	tags: [ reagent ]
 }
 
 item item_tuft_of_hair:
@@ -153,6 +159,7 @@ item item_tuft_of_hair:
 	string: "Tuft of Hair"
 	stack: 20
 	loot_groups: [ wolves bears ]
+	tags: [ reagent ]	
 }
 
 item item_antlers:
@@ -164,6 +171,7 @@ item item_antlers:
 	string: "Intact Antlers"
 	stack: 20
 	loot_groups: [ deer ]
+	tags: [ reagent ]	
 }
 
 item item_bushy_tail:
@@ -175,6 +183,7 @@ item item_bushy_tail:
 	string: "Bushy Tail"
 	stack: 20
 	loot_groups: [ deer wolves lions ]
+	tags: [ reagent ]	
 }
 
 item item_giant_claws:
@@ -186,6 +195,7 @@ item item_giant_claws:
 	string: "Giant Claws"
 	stack: 20
 	loot_groups: [ bears ]
+	tags: [ reagent ]	
 }
 
 item item_giant_tusk:
@@ -197,6 +207,7 @@ item item_giant_tusk:
 	string: "Giant Tusk"
 	stack: 20
 	loot_groups: [ boars ]
+	tags: [ reagent ]	
 }
 
 item item_crab_claw:
@@ -208,6 +219,7 @@ item item_crab_claw:
 	string: "Sharp Claw"
 	stack: 20
 	loot_groups: [ crabs ]
+	tags: [ reagent ]	
 }
 
 item item_crab_leg:
@@ -219,6 +231,7 @@ item item_crab_leg:
 	string: "Tough Crab Leg"
 	stack: 20
 	loot_groups: [ crabs ]
+	tags: [ reagent ]	
 }
 
 item item_earth_core:
@@ -231,6 +244,7 @@ item item_earth_core:
 	string: "Earth Core"
 	stack: 10
 	loot_groups: [ earth_elementals ]
+	tags: [ reagent ]	
 }
 
 item item_enchanted_dirt:
@@ -243,6 +257,7 @@ item item_enchanted_dirt:
 	string: "Enchanted Dirt"
 	stack: 10
 	loot_groups: [ earth_elementals ]
+	tags: [ reagent ]	
 }
 
 item item_giant_egg:
@@ -254,6 +269,7 @@ item item_giant_egg:
 	string: "Giant Egg"
 	stack: 10
 	loot_groups: [ birds owlbears ]
+	tags: [ reagent ]	
 }
 
 item item_giant_egg_shells:
@@ -265,6 +281,7 @@ item item_giant_egg_shells:
 	string: "Egg Shells"
 	stack: 10
 	loot_groups: [ birds owlbears ]
+	tags: [ reagent ]	
 }
 
 item item_brown_leaf:
@@ -276,6 +293,7 @@ item item_brown_leaf:
 	string: "Faded Leaf"
 	stack: 20
 	loot_groups: [ wood_elementals ]
+	tags: [ reagent ]	
 }
 
 item item_blue_feather:
@@ -287,6 +305,7 @@ item item_blue_feather:
 	string: "Blue Feather"
 	stack: 10
 	loot_groups: [ owlbears ]
+	tags: [ reagent ]	
 }
 
 item item_green_feather:
@@ -298,6 +317,7 @@ item item_green_feather:
 	string: "Green Feather"
 	stack: 10
 	loot_groups: [ birds ]
+	tags: [ reagent ]	
 }
 
 item item_life_core:
@@ -310,6 +330,7 @@ item item_life_core:
 	rarity: uncommon
 	stack: 10
 	loot_groups: [ wood_elementals nature_elementals ]
+	tags: [ reagent ]	
 }
 
 item item_roots:
@@ -321,6 +342,7 @@ item item_roots:
 	string: "Fresh Roots"
 	stack: 10
 	loot_groups: [ wood_elementals nature_elementals ]
+	tags: [ reagent ]	
 }
 
 item item_lizard_tooth:
@@ -332,6 +354,7 @@ item item_lizard_tooth:
 	string: "Lizard Tooth"
 	stack: 10
 	loot_groups: [ lizards ]
+	tags: [ reagent ]		
 }
 
 item item_lizard_tail:
@@ -343,6 +366,7 @@ item item_lizard_tail:
 	string: "Scaly Tail Tip"
 	stack: 10
 	loot_groups: [ lizards ]
+	tags: [ reagent ]		
 }
 
 item item_bubbling_slime:
@@ -354,6 +378,7 @@ item item_bubbling_slime:
 	string: "Bubbling Slime"
 	stack: 10
 	loot_groups: [ oozes ]
+	tags: [ reagent ]		
 }
 
 item item_slimy_skull:
@@ -365,6 +390,7 @@ item item_slimy_skull:
 	string: "Slimy Skull"
 	stack: 10
 	loot_groups: [ oozes ]
+	tags: [ reagent ]		
 }
 
 item item_retractable_claws:
@@ -376,6 +402,7 @@ item item_retractable_claws:
 	string: "Retractable Claws"
 	stack: 10
 	loot_groups: [ lions ]
+	tags: [ reagent ]	
 }
 
 item item_demon_fur:
@@ -387,6 +414,7 @@ item item_demon_fur:
 	string: "Demon Hair"
 	stack: 10
 	loot_groups: [ demons ]
+	tags: [ reagent ]		
 }
 
 item item_demon_teeth:
@@ -398,6 +426,7 @@ item item_demon_teeth:
 	string: "Demon Teeth"
 	stack: 10
 	loot_groups: [ demons ]
+	tags: [ reagent ]		
 }
 
 item item_demon_heart:
@@ -410,6 +439,7 @@ item item_demon_heart:
 	string: "Heart of Darkness"
 	stack: 10
 	loot_groups: [ demons ]
+	tags: [ reagent ]	
 }
 
 item item_nature_heart:
@@ -422,6 +452,7 @@ item item_nature_heart:
 	string: "Heart of Nature"
 	stack: 10
 	loot_groups: [ wood_elementals nature_elementals ]
+	tags: [ reagent ]	
 }
 
 item item_polished_stone:
@@ -434,6 +465,7 @@ item item_polished_stone:
 	string: "Polished Stone"
 	stack: 10
 	loot_groups: [ demons earth_elementals ]
+	tags: [ reagent ]		
 }
 
 item item_enchanted_roots:
@@ -446,6 +478,7 @@ item item_enchanted_roots:
 	string: "Enchanted Roots"
 	stack: 10
 	loot_groups: [ wood_elementals nature_elementals ]
+	tags: [ reagent ]		
 }
 
 item item_spider_leg:
@@ -457,6 +490,7 @@ item item_spider_leg:
 	string: "Spider Leg"
 	stack: 10
 	loot_groups: [ spiders ]
+	tags: [ reagent ]			
 }
 
 item item_poison_fangs:
@@ -468,6 +502,7 @@ item item_poison_fangs:
 	string: "Poison Fangs"
 	stack: 10
 	loot_groups: [ spiders ]
+	tags: [ reagent ]			
 }
 
 item item_large_poison_sack:
@@ -479,6 +514,7 @@ item item_large_poison_sack:
 	string: "Large Poison Sack"
 	stack: 10
 	loot_groups: [ spiders ]
+	tags: [ reagent ]			
 }
 
 item item_sharp_talons:
@@ -490,6 +526,7 @@ item item_sharp_talons:
 	string: "Sharp Talons"
 	stack: 10
 	loot_groups: [ birds owlbears ]
+	tags: [ reagent ]			
 }
 
 item item_razor_beak:
@@ -501,6 +538,7 @@ item item_razor_beak:
 	string: "Razor Beak"
 	stack: 10
 	loot_groups: [ birds owlbears ]
+	tags: [ reagent ]			
 }
 
 loot_group token_of_victory: {}

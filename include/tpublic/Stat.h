@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Hash.h"
 #include "IReader.h"
 #include "IWriter.h"
 #include "Parser.h"
@@ -234,6 +235,14 @@ namespace tpublic
 					}
 				}
 				return sum;
+			}
+
+			uint32_t
+			GetHash() const
+			{
+				Hash::CheckSum hash;
+				hash.AddPOD(m_stats);
+				return hash.m_hash;
 			}
 
 			// Public data
