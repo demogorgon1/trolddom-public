@@ -81,7 +81,7 @@ item item_potatoes:
 item item_bone_fragments:
 {
 	type: miscellaneous
-	item_level: 8
+	item_level: 10
 	level_range: [ 8 16 ]
 	icon: icon_bone_fragments_1
 	string: "Bone Fragments"
@@ -105,7 +105,7 @@ item item_bone:
 item item_corpse_worm:
 {
 	type: miscellaneous
-	item_level: 8
+	item_level: 10
 	level_range: [ 8 16 ]
 	icon: icon_worm_1
 	string: "Corpse Worm"

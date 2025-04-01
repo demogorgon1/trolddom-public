@@ -64,9 +64,10 @@ item item_azuryte_ingot:
 
 item item_gold_ingot:
 {
-	item_level: 4
+	item_level: 10
 	icon: icon_gold_ingot
 	string: "Gold Ingot"
+	value_multiplier: 10
 	rarity: uncommon
 	stack: 20	
 	tags: [ reagent ]

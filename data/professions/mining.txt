@@ -18,7 +18,7 @@ ${
 		_item_string: "Verdigrisite"
 		_loot_groups: [ .mining_verdigrisite world_drops_uncommon ]
 		_rarity: uncommon
-		_item_level: 2
+		_item_level: 10
 		_value_multiplier: 4
 	}
 
@@ -34,7 +34,7 @@ ${
 		_item_string: "Roseate"
 		_loot_groups: [ .mining_roseate world_drops_uncommon ]
 		_rarity: uncommon
-		_item_level: 3
+		_item_level: 10
 		_value_multiplier: 5
 	}
 
@@ -50,7 +50,7 @@ ${
 		_item_string: "Azure Mirage Stone"
 		_loot_groups: [ .mining_azure_mirage_stone world_drops_uncommon ]
 		_rarity: uncommon
-		_item_level: 6	
+		_item_level: 10	
 		_value_multiplier: 6
 	}
 
@@ -167,6 +167,7 @@ ${
 		_profession_skill: 40
 		_sprite: gold_vein
 		_item_level: 4
+		_value_multiplier: 8
 	}
 
 	loot_group .mining_gold: { }
