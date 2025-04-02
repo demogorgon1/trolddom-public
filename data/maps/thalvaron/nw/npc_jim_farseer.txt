@@ -80,5 +80,6 @@ quest .jim_farseer_1:
 	type: dungeon
 	prerequisites: [ thalvaron_sheila_urkins_4 ]
 	reward_one_item: [ .jim_farseer_1_a .jim_farseer_1_b ]
+	reward_all_items: [ tirnwood_thicket_zyxtharion ]
 	quest_items: [ tirnwood_thicket_zyxtharion ]
 }
