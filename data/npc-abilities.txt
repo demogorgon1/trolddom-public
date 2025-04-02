@@ -317,7 +317,7 @@ aura npc_poison_bite:
 	type: debuff
 	icon: icon_poison
 	duration: based_on_effects
-	flags: [ unique ]
+	flags: [ unique poison ]
 
 	aura_effect repeat:
 	{
@@ -1075,7 +1075,7 @@ ability npc_infection_aura:
 			icon: icon_poison
 			type: debuff
 			duration: based_on_effects
-			flags: [ unique no_refresh ]
+			flags: [ unique no_refresh poison ]
 
 			aura_effect repeat:
 			{

@@ -156,7 +156,7 @@ namespace tpublic::Systems
 
 		const Data::Faction* faction = GetManifest()->GetById<Data::Faction>(combat->m_factionId);
 
-		if (aEntityState != EntityState::ID_DEAD && combat->GetResource(Resource::ID_HEALTH) == 0 && !auras->HasEffect(AuraEffect::ID_IMMORTALITY, NULL))
+		if (npc->m_canDie && aEntityState != EntityState::ID_DEAD && combat->GetResource(Resource::ID_HEALTH) == 0 && !auras->HasEffect(AuraEffect::ID_IMMORTALITY, NULL))
 		{
 			const Components::Tag* tag = GetComponent<Components::Tag>(aComponents);
 			if(tag->m_playerTag.IsSet())

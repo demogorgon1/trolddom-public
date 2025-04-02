@@ -55,6 +55,7 @@ map_palette .stuff:
 	entity_spawn .owlbear: [ 255 0 0 ]
 	entity_spawn .tree: [ 255 43 0 ]
 	entity_spawn .wolf: [ 255 3 53 ]
+	entity_spawn .zyxtharion: [ 155 3 53 ]
 	
 	entity_spawn .wolf_trash: [ 251 93 194 ]
 	entity_spawn .giant_spider_trash: [ 30 99 125 ]
@@ -121,6 +122,7 @@ map_palette .subzones:
 	sub_zone .owlbear: [ 251 64 94 ]
 	sub_zone .tree: [ 255 175 250 ]
 	sub_zone .wolf: [ 175 255 219 ]
+	sub_zone .zyxtharion: [ 175 54 210 ]
 }
 
 map_palette .cliffs:
@@ -226,6 +228,11 @@ map tirnwood_thicket:
 		run: { set_trigger: .wolf_killed }
 	}	
 
-
+	script:
+	{
+		condition trigger_not_set: .zyxtharion_killed
+		condition entity_state: { entity_spawn: .zyxtharion state: dead }		
+		run: { set_trigger: .zyxtharion_killed }
+	}	
 }
  

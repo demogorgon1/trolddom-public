@@ -372,3 +372,67 @@
 	use_ability: @_learn_ability
 	level_range: @_level_range
 }
+
+#####################################################
+# Void zone NPCs
+
+!define NPC_VOID_ZONE
+{
+	string: @_string
+
+	systems: 
+	[ 
+		combat 
+		npc 		
+	]
+		
+	components:
+	{
+		position: { }		
+		threat_target: { }
+		auras: { }
+		lootable: { }
+		visible_auras: { }
+		tag: { }
+		combat_public: 
+		{  
+			level: @_level
+			faction: @_faction
+			modifier not_pushable: {}
+			modifier not_targetable: {}
+			modifier hide_level: {}
+			<exists _elite and _elite> modifier elite: {}
+		}			
+		combat_private<static>:
+		{
+			physical_critical_strike_chance: 5
+			dodge_chance: 5
+			parry_chance: 5
+			miss_chance: 5
+			block_chance: 5		
+		}
+		npc: 
+		{ 			
+			state in_combat:
+			{			
+				abilities: @_abilities							
+				<exists _despawn_on_leave_combat and _despawn_on_leave_combat> despawn_on_leave: true
+			}	
+			
+			blocking: false
+			can_move: false
+			can_die: false
+
+			<exists _large> large: @_large			
+			<exists _encounter> encounter: @_encounter
+			<exists _inactive_encounter_despawn> inactive_encounter_despawn: @_inactive_encounter_despawn
+		}		
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ states: [ default in_combat spawning evading dead ] frames: @_sprites z_offset: -2 frame_delay: 120 random_start_frame: true }			
+			]					
+		}				
+	}	
+}

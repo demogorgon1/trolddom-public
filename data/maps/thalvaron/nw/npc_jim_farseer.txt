@@ -1,0 +1,84 @@
+dialogue_screen .jim_farseer:
+{
+	text: 
+	[	
+		"Good day."
+	]			
+	
+	options:
+	[
+		{ quest<completion_only>: thalvaron_sheila_urkins_4 }
+		{ quest: .jim_farseer_1 }
+	]
+}
+
+entity thalvaron_jim_farseer: !NPC
+{
+	_string: "Jim Farseer"
+	_sprite: man_69
+	_dialogue_root: $dialogue_root { .jim_farseer: { } }
+	_sprite_dead: man_69_dead
+	_level: 20
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .jim_farseer_1:
+{
+	string: "Zyxtharion Slain"
+	
+	maps: [ tirnwood_thicket ]
+	
+	kill_npc:
+	{
+		entities: [ tirnwood_thicket_zyxtharion ]
+		count: 1
+	}
+}
+
+{
+	${ _level: 20 _rarity: rare }
+	item .jim_farseer_1_a: !QUEST_REWARD_FINGER{ _string: "Ring of Strength" _icon: icon_ring_2 _strength: 2 _constitution: 1 }
+	item .jim_farseer_1_b: !QUEST_REWARD_FINGER{ _string: "Ring of Wisdom" _icon: icon_ring_4 _wisdom: 2 _constitution: 1 }
+}
+
+quest .jim_farseer_1:
+{
+	string: "At The Gates"
+
+	text:
+	[
+		"Venture into Tirnwood Thicket, find the ancient temple, summon the beast, and defeat it."
+	]
+	
+	description: 
+	[
+		"An unseen battle is currently being waged. Forces from beyond this realm have long been trying to invade it an enslave us all. Most have no idea about what is going on.\n\n"
+		"These evil creatures are shifting around on the boundary between what is real and what is not, like worms under the skin of reality. You have to understand... they're already here. Sometimes they"
+		"break through, sometimes by themselves, sometimes aided by misguided allies.\n\n"
+		"You've encountered a spawn of Zyxtharion, a foul creature. Now I need you to face off with Zyxtharion itself. Defeat it. Make it crawl back where it came from.\n\n"
+		"In the east, inside the Tirnwood Thicket, you'll find a place where the skin of reality is very thin. There, at the ancient temple, blow this horn to trick the beast to come forth."
+	]
+
+	progress:
+	[
+		"Why are you still here?"
+	]
+	
+	completion:
+	[
+		"I knew you'd make it eventually."
+	]
+	
+	objectives: [ .jim_farseer_1 ]
+	level: 21
+	type: dungeon
+	prerequisites: [ thalvaron_sheila_urkins_4 ]
+	reward_one_item: [ .jim_farseer_1_a .jim_farseer_1_b ]
+	quest_items: [ tirnwood_thicket_zyxtharion ]
+}

@@ -11,6 +11,8 @@ dialogue_screen .sheila_urkins_dialogue:
 		{ quest: .sheila_urkins_2 }
 		{ quest: .sheila_urkins_3 }
 		{ quest<completion_only>: .ghyuik }		
+		{ quest<completion_only>: .tentacle_monster }
+		{ quest<offer_only>: thalvaron_sheila_urkins_4 }
 	]
 }
 
@@ -334,3 +336,30 @@ quest .sheila_urkins_3:
 	prerequisites: [ .sheila_urkins_2 ]
 	reward_one_item: [ .sheila_urkins_3_a ]
 }
+
+############################################################
+# Quest 4
+	
+quest thalvaron_sheila_urkins_4:
+{
+	string: "At The Gates"
+	
+	text:
+	[
+		"Bring the severed tentacle to Jim in the Southgate district of Valoris."
+	]
+	
+	description: 
+	[
+		"This tentacle monster business is above my paygrade. Brind the tentacle to my friend Jim in Valoris and see what he can make of it. You'll find him in the western part of the Southgate district."
+	]
+
+	completion:
+	[
+		"I have been expecting you."
+	]
+
+	prerequisites: [ .tentacle_monster ]
+	level: 20
+}
+

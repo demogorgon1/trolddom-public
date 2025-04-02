@@ -315,6 +315,27 @@ map_entity_spawn thalvaron_swamp_giant:
 		use_ability: .swamp_giant
 	}	
 			
+	{
+		${ _level: 15 _rarity: rare }
+		item .swamp_giant_1_a: !QUEST_REWARD_TRINKET
+		{ 
+			_string: "Natural Remedy" 
+			_icon: icon_brown_leaf_1
+			_use_ability: $ability
+			{	
+				string: "Natural Remedy" 
+				icon: icon_brown_leaf_1
+				description: "Cures one poison effect."
+				cooldowns: [ global ]
+				cooldown: $cooldown { duration: 2400 }
+				icon: @_icon
+				flags: [ target_self item ]
+				requirement self<must_have_item_equipped>: .swamp_giant_1_a
+				direct_effect remove_aura: { aura_flags: [ poison ] }
+			}
+		}
+	}
+			
 	quest .swamp_giant:
 	{
 		string: "Bogmaw's Claw"
@@ -336,9 +357,8 @@ map_entity_spawn thalvaron_swamp_giant:
 
 		level: 14
 		quest_items: [ .swamp_giant ]		
-		type: elite
-		
-		# FIXME: rewards
+		type: elite		
+		reward_all_items: [ .swamp_giant_1_a ]
 	}
 	
 	${

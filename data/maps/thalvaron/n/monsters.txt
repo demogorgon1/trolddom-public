@@ -587,25 +587,23 @@ map_entity_spawn thalvaron_ghyuik:
 
 		text:
 		[
-			"FIXME"
+			"Return the severed tentacle to someone in Edmund's Haunt."
 		]
 		
 		description: 
 		[
-			"FIXME"
-		]
-
-		progress:
-		[
-			"FIXME"
+			"Pure evil seeps from the severed tentacle. Find someone in Edmund's Haunt who might know more about the monster you killed."
 		]
 		
 		completion:
 		[
-			"FIXME"
+			"What? In a cave close to here? How horrible."
 		]
 
 		level: 14
+		type: elite
+		reward_xp_multiplier: 0.2
+		reward_cash_multiplier: 0.2
 	}
 
 	${
@@ -617,6 +615,11 @@ map_entity_spawn thalvaron_ghyuik:
 		_weapon_damage: 1.5
 		_resource_health: 1.5
 		_elite: true
+		_abilities:
+		[
+			{ id: npc_curse target: random_player }
+			{ id: npc_attack }
+		]
 	}
 
 	entity thalvaron_tentacle_monster: !NPC { _string: "Spawn of Zyxtharion" _sprite: tentacle_monster_3 _sprite_dead: tentacle_monster_3_dead }
@@ -1344,7 +1347,7 @@ loot_table .hounds_and_wolves:
 		type: debuff
 		icon: icon_poison
 		duration: based_on_effects
-		flags: [ unique ]
+		flags: [ unique poison ]
 
 		aura_effect repeat:
 		{

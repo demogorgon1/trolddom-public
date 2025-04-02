@@ -744,6 +744,7 @@ sprites:
 	sprite icon_thorns_1 : { tags: [ icon ] }
 	sprite icon_tailoring : { tags: [ icon ] }
 	sprite icon_thread_1 : { tags: [ icon ] }
+	sprite icon_horn_1 : { tags: [ icon ] }
 	
 }
 
