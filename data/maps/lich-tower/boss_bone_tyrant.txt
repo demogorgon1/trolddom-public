@@ -109,8 +109,8 @@ entity lich_tower_bone_tyrant: !NPC
 	_faction: monsters 
 	_sprite: giant_skeleton_1 
 	_sprite_dead: giant_skeleton_1_dead 
-	_weapon_damage: 1
-	_resource_health: 1
+	_weapon_damage: 1.9 
+	_resource_health: 6
 	_loot_table: .bone_tyrant
 	_creature_type: undead
 	_encounter: .bone_tyrant
