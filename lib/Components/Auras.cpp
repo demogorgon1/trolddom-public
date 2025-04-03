@@ -320,26 +320,36 @@ namespace tpublic::Components
 		return modified;
 	}
 
-	void		
+	bool		
 	Auras::RemoveAura(
-		uint32_t									aAuraId)
+		uint32_t									aAuraId,
+		uint32_t									aMaxRemove)
 	{
-		for(size_t i = 0; i < m_entries.size(); i++)
+		uint32_t removed = 0;
+
+		for(size_t i = 0; i < m_entries.size() && removed < aMaxRemove; i++)
 		{
 			if(m_entries[i]->m_auraId == aAuraId)
 			{
 				Helpers::RemoveCyclicFromVector(m_entries, i);
 				i--;
+
+				removed++;
 			}
 		}
+
+		return removed > 0;
 	}
 
-	void			
+	bool			
 	Auras::RemoveAuraByGroup(
 		const Manifest*								aManifest,
-		uint32_t									aAuraGroupId)
+		uint32_t									aAuraGroupId,
+		uint32_t									aMaxRemove)
 	{
-		for (size_t i = 0; i < m_entries.size(); i++)
+		uint32_t removed = 0;
+
+		for (size_t i = 0; i < m_entries.size() && removed < aMaxRemove; i++)
 		{
 			const std::unique_ptr<Entry>& entry = m_entries[i];
 			const Data::Aura* auraData = aManifest->GetById<tpublic::Data::Aura>(entry->m_auraId);
@@ -348,16 +358,23 @@ namespace tpublic::Components
 			{
 				Helpers::RemoveCyclicFromVector(m_entries, i);
 				i--;
+
+				removed++;
 			}
 		}
+
+		return removed > 0;
 	}
 
-	void		
+	bool
 	Auras::RemoveAurasByFlags(
 		const Manifest*								aManifest,
-		uint32_t									aFlags)
+		uint32_t									aFlags,
+		uint32_t									aMaxRemove)
 	{
-		for(size_t i = 0; i < m_entries.size(); i++)
+		uint32_t removed = 0;
+
+		for(size_t i = 0; i < m_entries.size() && removed < aMaxRemove; i++)
 		{
 			const std::unique_ptr<Entry>& entry = m_entries[i];
 			const Data::Aura* auraData = aManifest->GetById<tpublic::Data::Aura>(entry->m_auraId);
@@ -366,8 +383,12 @@ namespace tpublic::Components
 			{
 				Helpers::RemoveCyclicFromVector(m_entries, i);
 				i--;
+
+				removed++;
 			}
 		}
+
+		return removed > 0;
 	}
 
 	void			

@@ -94,7 +94,7 @@ entity lich_tower_anatar: !NPC
 	_faction: dark_elves 
 	_sprite: dark_elf_1 
 	_sprite_dead: dark_elf_1_dead 
-	_weapon_damage: 1.9 
+	_weapon_damage: 1.75 
 	_resource_health: 6
 	_loot_table: .anatar
 	_creature_type: humanoid

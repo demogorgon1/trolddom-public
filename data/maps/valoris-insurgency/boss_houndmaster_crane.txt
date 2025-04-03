@@ -115,7 +115,7 @@ entity valoris_insurgency_houndmaster_crane: !NPC
 	_faction: rebels 
 	_sprite: rebel_7
 	_sprite_dead: rebel_7_dead 
-	_weapon_damage: 0.6
+	_weapon_damage: 0.8
 	_resource_health: 3
 	_loot_table: .houndmaster_crane
 	_creature_type: humanoid
@@ -174,8 +174,8 @@ entity .houndmaster_crane_spawn: !NPC
 	_sprite: wolf_1
 	_elite: true
 	_sprite_dead: wolf_1_dead
-	_weapon_damage: 2
-	_resource_health: 3
+	_weapon_damage: 1.6
+	_resource_health: 2.4
 	_creature_type: beast
 	_encounter: .houndmaster_crane
 	_zone: .houndmaster_crane	

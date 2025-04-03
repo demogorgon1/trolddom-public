@@ -103,7 +103,7 @@ entity valoris_insurgency_rufus_the_strong: !NPC
 	_faction: rebels 
 	_sprite: rebel_9
 	_sprite_dead: rebel_9_dead 
-	_weapon_damage: 1.5
+	_weapon_damage: 1.38
 	_resource_health: 5
 	_loot_table: .rufus_the_strong
 	_creature_type: humanoid

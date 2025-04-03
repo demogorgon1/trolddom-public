@@ -28,7 +28,9 @@ namespace tpublic
 				FLAG_UNIQUE							= 0x00000001,
 				FLAG_NOT_SELLABLE					= 0x00000002,
 				FLAG_VENDOR							= 0x00000004,
-				FLAG_KILL_CONTRIBUTION_LOOT			= 0x00000008
+				FLAG_KILL_CONTRIBUTION_LOOT			= 0x00000008,
+				FLAG_QUEST_REWARD					= 0x00000010,
+				FLAG_DUNGEON_LOOT					= 0x00000020
 			};
 
 			static inline uint32_t
@@ -48,6 +50,10 @@ namespace tpublic
 						flags |= FLAG_VENDOR;
 					else if (strcmp(identifier, "kill_contribution_loot") == 0)
 						flags |= FLAG_KILL_CONTRIBUTION_LOOT;
+					else if (strcmp(identifier, "quest_reward") == 0)
+						flags |= FLAG_QUEST_REWARD;
+					else if (strcmp(identifier, "dungeon_loot") == 0)
+						flags |= FLAG_DUNGEON_LOOT;
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item flag.", identifier);
 				});
@@ -133,6 +139,7 @@ namespace tpublic
 			bool	IsNotSellable() const { return m_flags & FLAG_NOT_SELLABLE; }
 			bool	IsVendor() const { return m_flags & FLAG_VENDOR; }
 			bool	IsKillContributionLoot() const { return m_flags & FLAG_KILL_CONTRIBUTION_LOOT; }
+			bool	IsQuestReward() const { return m_flags & FLAG_QUEST_REWARD; }
 
 			// Base implementation
 			void
@@ -231,7 +238,7 @@ namespace tpublic
 						}
 						else if (aChild->m_name == "flags")
 						{
-							m_flags = SourceToFlags(aChild);
+							m_flags |= SourceToFlags(aChild);
 						}
 						else if (aChild->m_name == "flavor")
 						{
@@ -385,6 +392,7 @@ namespace tpublic
 				aOut["required_level"] = Helpers::Format("%u", m_requiredLevel).c_str();
 				aOut["rarity"] = Rarity::GetInfo(m_rarity)->m_name;
 				aOut["item_type"] = ItemType::GetInfo(m_itemType)->m_name;
+				aOut["quest_reward"] = IsQuestReward() ? "1" : "0";
 
 				std::string slots;
 				for(uint32_t equipmentSlotId : m_equipmentSlots)

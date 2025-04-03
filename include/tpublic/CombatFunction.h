@@ -14,6 +14,7 @@ namespace tpublic
 
 	class EntityInstance;
 	class IWorldView;
+	class Manifest;
 	class UIntRange;
 
 	class CombatFunction

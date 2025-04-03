@@ -22,6 +22,7 @@ namespace tpublic
 	GearOptimizer::MakeEquippedItems(
 		Rarity::Id								aMaxRarity,
 		uint32_t								aMaxLevel,
+		uint32_t								aFlags,
 		const Data::Class*						aClass,
 		const char*								aGearOptimizationName,
 		Components::EquippedItems::Slots&		aOut)
@@ -41,7 +42,11 @@ namespace tpublic
 			m_manifest->GetContainer<Data::Item>()->ForEach([&](
 				const Data::Item* aItem)
 			{
-				if(aItem->m_requiredLevel <= aMaxLevel && aItem->m_rarity <= aMaxRarity && (aItem->m_itemType == ItemType::ID_MISCELLANEOUS || aClass->CanUseItemType(aItem->m_itemType)) && aItem->IsEquippableInSlot(i))
+				if(aItem->m_requiredLevel <= aMaxLevel && 
+					aItem->m_rarity <= aMaxRarity && 
+					(aItem->m_flags & aFlags) == aFlags && 
+					(aItem->m_itemType == ItemType::ID_MISCELLANEOUS || aClass->CanUseItemType(aItem->m_itemType)) && 
+					aItem->IsEquippableInSlot(i))
 				{
 					float score = _ScoreItem(aItem, gearOptimization);
 					if(bestItem == NULL || score > bestScore)

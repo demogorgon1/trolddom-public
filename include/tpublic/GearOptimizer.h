@@ -22,6 +22,7 @@ namespace tpublic
 		void	MakeEquippedItems(
 					Rarity::Id								aMaxRarity,
 					uint32_t								aMaxLevel,					
+					uint32_t								aFlags,
 					const Data::Class*						aClass,
 					const char*								aGearOptimizationName,
 					Components::EquippedItems::Slots&		aOut);

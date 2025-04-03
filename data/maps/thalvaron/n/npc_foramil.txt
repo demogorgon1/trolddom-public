@@ -106,13 +106,13 @@ item .foramil_2_quest_item:
 		string: "Leaves of Faerandor"
 		states: [ default in_combat ]
 		icon: icon_seaweed
-		direct_effect heal: { function: 20 }
+		direct_effect heal: { function: 32 }
 	}
 	
 	aura .foramil_2_c:
 	{
 		string: "Leaves of Faerandor"
-		description: "Has a 5% chance when struck in combat of restoring 20 health."
+		description: "Has a 5% chance when struck in combat of restoring 32 health."
 		type: hidden
 		flags: [ item silent ]
 		icon: icon_seaweed

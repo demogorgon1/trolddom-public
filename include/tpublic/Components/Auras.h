@@ -200,14 +200,17 @@ namespace tpublic
 								const Manifest*								aManifest,
 								uint32_t									aAbilityId,
 								int32_t&									aCastTime);
-			void			RemoveAura(
-								uint32_t									aAuraId);
-			void			RemoveAuraByGroup(
+			bool			RemoveAura(
+								uint32_t									aAuraId,
+								uint32_t									aMaxRemove);
+			bool			RemoveAuraByGroup(
 								const Manifest*								aManifest,
-								uint32_t									aAuraGroupId);
-			void			RemoveAurasByFlags(
+								uint32_t									aAuraGroupId,
+								uint32_t									aMaxRemove);
+			bool			RemoveAurasByFlags(
 								const Manifest*								aManifest,
-								uint32_t									aFlags);
+								uint32_t									aFlags,
+								uint32_t									aMaxRemove);
 			void			Reset();
 			void			OnLoadedFromPersistence(
 								const Manifest*								aManifest);

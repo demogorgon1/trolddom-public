@@ -97,6 +97,14 @@ class priest:
 		dexterity: 1.0
 		constitution: 0.25
 	}		
+	
+	gear_optimization healing<{ weapon_dps_weight: 0.0 }>:
+	{	
+		healing: 1.0
+		wisdom: 0.6 
+		mana_per_5: 0.5
+		spirit: 0.4
+	}		
 }
 
 ###############################################################################

@@ -99,7 +99,7 @@ entity valoris_insurgency_erdox_the_soulsplitter: !NPC
 	_faction: dark_elves 
 	_sprite: dark_elf_6
 	_sprite_dead: dark_elf_6_dead 
-	_weapon_damage: 1.7
+	_weapon_damage: 1.52
 	_resource_health: 5.8
 	_loot_table: .erdox_the_soulsplitter
 	_creature_type: humanoid

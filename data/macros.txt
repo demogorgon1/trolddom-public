@@ -225,6 +225,7 @@
 	binds: when_picked_up
 	required_level: @_level
 	icon: @_icon
+	flags: [ dungeon_loot ]
 	
 	<exists _type> type: @_type
 	<exists _item_aura> aura: @_item_aura
@@ -264,7 +265,7 @@
 !define BOSS_DROP_HANDS { !BOSS_DROP equipment_slots: [ hands ] }
 !define BOSS_DROP_BACK { !BOSS_DROP equipment_slots: [ back ] }
 !define BOSS_DROP_NECK { !BOSS_DROP equipment_slots: [ neck ] }
-!define BOSS_DROP_FINGER { !BOSS_DROP equipment_slots: [ finger_1 finger_2 ] }
+!define BOSS_DROP_FINGER { !BOSS_DROP equipment_slots: [ finger_1 finger_2 ] flags: [ unique ] }
 !define BOSS_DROP_BAG { !BOSS_DROP equipment_slots: [ bag_1 bag_2 bag_3 ] }
 !define BOSS_DROP_1H_SWORD { !BOSS_DROP equipment_slots: [ main_hand off_hand ] type: weapon_1h_sword }
 !define BOSS_DROP_1H_MACE { !BOSS_DROP equipment_slots: [ main_hand off_hand ] type: weapon_1h_mace }
@@ -278,7 +279,7 @@
 !define BOSS_DROP_BOW { !BOSS_DROP equipment_slots: [ ranged ] type: ranged_bow }
 !define BOSS_DROP_CROSSBOW { !BOSS_DROP equipment_slots: [ ranged ] type: ranged_crossbow }
 !define BOSS_DROP_OFFHAND { !BOSS_DROP equipment_slots: [ off_hand ] }
-!define BOSS_DROP_TRINKET { !BOSS_DROP equipment_slots: [ trinket_1 trinket_2 ] }
+!define BOSS_DROP_TRINKET { !BOSS_DROP equipment_slots: [ trinket_1 trinket_2 ] flags: [ unique ] }
 
 #####################################################
 # Crafting

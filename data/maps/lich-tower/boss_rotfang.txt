@@ -95,7 +95,7 @@ entity lich_tower_rotfang: !NPC
 	_faction: monsters 
 	_sprite: giant_beast_1
 	_sprite_dead: giant_beast_1_dead 
-	_weapon_damage: 1.9
+	_weapon_damage: 1.80
 	_resource_health: 6.9
 	_loot_table: .rotfang
 	_creature_type: undead

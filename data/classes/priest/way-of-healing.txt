@@ -436,7 +436,7 @@ ability greater_heal:
 	flags: [ spell target_other target_self target_friendly interruptable ]
 	states: [ default in_combat ]
 	icon: icon_greater_heal
-	resource_cost mana: 15
+	resource_cost mana: 24
 	talent_tree: priest_healing
 	target_particle_system: heal	
 	delay: 2
@@ -445,7 +445,7 @@ ability greater_heal:
 	direct_effect heal:
 	{	
 		flags: [ can_be_critical ]
-		function: { expression: a_mul_x_plus_b x: healing a: 1 b: [ [ 1 25 ] [ 10 50 ] [ 20 100 ] ] }
+		function: { expression: a_mul_x_plus_b x: healing a: 1.05 b: [ [ 1 25 ] [ 10 60 ] [ 20 140 ] ] }
 	}
 	
 	direct_effect apply_aura:
@@ -469,7 +469,7 @@ ability minor_heal:
 	flags: [ spell target_other target_self target_friendly interruptable ]
 	states: [ default in_combat ]
 	icon: icon_heal
-	resource_cost mana: 10
+	resource_cost mana: 14
 	talent_tree: priest_healing
 	target_particle_system: heal	
 	delay: 2
@@ -478,7 +478,7 @@ ability minor_heal:
 	direct_effect heal:
 	{	
 		flags: [ can_be_critical ]
-		function: { expression: a_mul_x_plus_b x: healing a: 0.7 b: [ [ 1 10 ] [ 10 20 ] [ 20 40 ] ] }
+		function: { expression: a_mul_x_plus_b x: healing a: 0.8 b: [ [ 1 10 ] [ 10 20 ] [ 20 44 ] ] }
 	}
 	
 	direct_effect apply_aura:
@@ -504,7 +504,7 @@ ability blessing_tick:
 	
 	direct_effect heal:
 	{	
-		function: { expression: a_mul_x_plus_b x: healing a: 0.25 b: [ [ 1 4 ] [ 10 8 ] [ 20 16 ] ] }
+		function: { expression: a_mul_x_plus_b x: healing a: 0.28 b: [ [ 1 4 ] [ 10 10 ] [ 20 24 ] ] }
 	}	
 }
 
@@ -532,7 +532,7 @@ ability blessing:
 	flags: [ spell target_other target_self target_friendly ]
 	states: [ default in_combat ]
 	icon: icon_holy_blessing
-	resource_cost mana: 12
+	resource_cost mana: 25
 	talent_tree: priest_healing
 
 	direct_effect apply_aura:
