@@ -1,6 +1,7 @@
 dialogue_screen .elf_quartermaster_2_vendor:
 {
 	sell token_of_victory_mana_potion: !TOKEN_OF_VICTORY_PRICE{ _count: 1 }
+	sell formula_enchant_weapon_mending: !TOKEN_OF_VICTORY_PRICE{ _count: 12 }	
 }
 
 dialogue_screen .elf_quartermaster_2_dialogue:

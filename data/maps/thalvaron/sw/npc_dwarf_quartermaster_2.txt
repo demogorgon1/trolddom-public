@@ -1,5 +1,6 @@
 dialogue_screen .dwarf_quartermaster_2_vendor:
 {
+	sell formula_enchant_weapon_fire: !TOKEN_OF_VICTORY_PRICE{ _count: 12 }	
 }
 
 dialogue_screen .dwarf_quartermaster_2_dialogue:
