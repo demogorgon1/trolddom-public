@@ -444,4 +444,470 @@
 	item mercenary_contract_cleric: !MERCENARY_CONTRACT_ITEM{}
 }
 
+##############################################################################
+# Mercenary Contract: Assassin
+{
+	${
+		_item_name: "Mercenary Contract: Assassin"
+		_ability: .mercenary_contract_assassin
+		_entity: .mercenary_contract_assassin
+		_name_template: .mercenary_contract_assassin		
+		_ability_consume: { mercenary_contract_assassin: 1 }
+		_reimburse_item: mercenary_contract_assassin
+		_level: 18	
+		_cost: 3300
+		_weapon_damage: 1.0
+		_resource_health: 0.8
+		_armor: 0.7
+		_creature_type: humanoid
+		_sprite: assassin_1
+		_sprite_dead: assassin_1_dead
+		_minion_modes: [ .mercenary_contract_assassin_aggressive .mercenary_contract_assassin_defensive .mercenary_contract_assassin_passive ]
+		_default_minion_mode: .mercenary_contract_assassin_defensive
+		_commands: [ move attack ]
+		_abilities: 
+		[ 
+			{ id: .mercenary_contract_assassin_attack flags: [ auto ] } 
+			{ id: .mercenary_contract_assassin_backstab flags: [ auto ] } 
+			{ id: .mercenary_contract_assassin_stealth }
+		]
+		_ability_prio: [ .mercenary_contract_assassin_backstab .mercenary_contract_assassin_attack ]
+		_icon: icon_scroll_1
+		_minion_duration: 900
+	}
+	
+	tag_context .mercenary_contract_assassin:
+	{
+		must_have_tags: [ american_forename_female ]
+	}
+	
+	name_template .mercenary_contract_assassin:
+	{
+		possibility<1>:
+		{
+			word: [ .mercenary_contract_assassin ]
+		}
+	}
 
+	minion_mode .mercenary_contract_assassin_aggressive:
+	{
+		string: "Aggressive"
+		icon: icon_aggressive
+		follow_distance: 3
+		aggro_range: 5
+		attack_owner_threat_target: true
+		attack_threat_target: true
+	}
+
+	minion_mode .mercenary_contract_assassin_defensive:
+	{
+		string: "Defensive"
+		icon: icon_defensive
+		follow_distance: 3
+		attack_owner_threat_target: true
+		attack_threat_target: true
+	}
+
+	minion_mode .mercenary_contract_assassin_passive:
+	{
+		string: "Passive"
+		icon: icon_passive
+		follow_distance: 3
+	}
+	
+	cooldown .mercenary_contract_assassin_attack:
+	{
+		duration: 16
+	}
+	
+	ability .mercenary_contract_assassin_attack:
+	{
+		string: "Attack"
+		description: "Deals $damage$ damage to target."
+		flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+		states: [ default in_combat ]
+		delay: 3
+		icon: icon_sword_1
+		cooldowns: [ .mercenary_contract_assassin_attack ]
+		
+		direct_effect damage:
+		{
+			flags: [ can_be_critical ]
+			damage_type: physical			
+			function: { expression: x x: weapon }		
+		}
+		
+		direct_effect remove_aura:
+		{
+			aura: .mercenary_contract_assassin_stealth
+			target_self: true
+		}		
+	}	
+
+	aura .mercenary_contract_assassin_stealth:
+	{
+		string: "Stealth"
+		description: "Non-allies are unlikely to notice you. Stay out of open areas to reduce likelihood of detection."
+		type: buff
+		icon: icon_stealth
+		flags: [ unique indefinite cancel_on_damage no_source_needed ]
+		
+		aura_effect stealth: 
+		{
+			flags: [ cancel_aura_on_fade ] 
+			update_count: indefinite
+		}
+		
+		aura_effect move_speed_modifier:
+		{
+			move_speed: slow
+		}
+	}
+
+	ability .mercenary_contract_assassin_stealth:
+	{
+		string: "Stealth"
+		description: "Toggles stealth. When stealthed non-allies are unlikely to notice you."
+		cooldowns: [ global ]
+		flags: [ target_self ]
+		states: [ default in_combat ]
+		icon: icon_stealth
+		delay: 3
+		toggle_aura: .mercenary_contract_assassin_stealth
+
+		direct_effect apply_aura:
+		{
+			aura: .mercenary_contract_assassin_stealth
+		}			
+	}
+	
+	ability .mercenary_contract_assassin_backstab:
+	{
+		string: "Backstab"
+		description: "Stun and wound target from stealth."
+		cooldowns: [ global .mercenary_contract_assassin_attack ]
+		flags: [ melee offensive target_other target_hostile can_miss ]
+		states: [ default ]
+		icon: icon_rage
+		delay: 3
+		toggle_aura: .mercenary_contract_assassin_backstab
+		requirement self<must_have_aura>: .mercenary_contract_assassin_stealth
+
+		direct_effect apply_aura:
+		{
+			aura: .mercenary_contract_assassin_backstab
+		}	
+		
+		direct_effect remove_aura:
+		{
+			aura: .mercenary_contract_assassin_stealth
+			target_self: true
+		}
+	}	
+	
+	ability .mercenary_contract_assassin_backstab_tick:
+	{
+		string: "Backstab"
+		icon: icon_rage		
+		states: [ default in_combat ]
+		flags: [ always_in_range always_in_line_of_sight ]
+		
+		direct_effect damage:
+		{
+			damage_type: bleed
+			function: 32
+		}
+	}
+
+	aura .mercenary_contract_assassin_backstab:
+	{
+		string: "Backstab"
+		description: "Stunned and bleeding."
+		icon: icon_rage		
+		type: debuff
+		duration: based_on_effects
+		flags: [ unique ]
+		aura_effect stun: { }
+		particle_system: knock		
+		aura_effect repeat: 
+		{ 
+			update_interval: 10
+			update_count: 4
+			ability: .mercenary_contract_assassin_backstab_tick
+		}				
+	}
+
+	ability .mercenary_contract_assassin: !MERCENARY_CONTRACT_ABILITY{}
+	entity .mercenary_contract_assassin: !MINION{}
+	item mercenary_contract_assassin: !MERCENARY_CONTRACT_ITEM{}
+}
+
+##############################################################################
+# Mercenary Contract: Coinaxe
+{
+	${
+		_item_name: "Mercenary Contract: Coinaxe"
+		_ability: .mercenary_contract_dwarven_coinaxe
+		_entity: .mercenary_contract_dwarven_coinaxe
+		_name_template: .mercenary_contract_dwarven_coinaxe
+		_ability_consume: { mercenary_contract_dwarven_coinaxe: 1 }
+		_reimburse_item: mercenary_contract_dwarven_coinaxe
+		_level: 18	
+		_cost: 3300		
+		_has_rage: true
+		_weapon_damage: 0.75
+		_resource_health: 1.2
+		_armor: 1.35
+		_creature_type: humanoid
+		_sprite: dwarven_coinaxe_1
+		_sprite_dead: dwarven_coinaxe_1_dead
+		_minion_modes: [ .mercenary_contract_dwarven_coinaxe_aggressive .mercenary_contract_dwarven_coinaxe_defensive .mercenary_contract_dwarven_coinaxe_passive ]
+		_default_minion_mode: .mercenary_contract_dwarven_coinaxe_defensive
+		_commands: [ move attack ]
+		_abilities: [ { id: .mercenary_contract_dwarven_coinaxe_attack flags: [ auto ] } { id: .mercenary_contract_dwarven_coinaxe_shield_bash flags: [ auto ] } ]
+		_ability_prio: [ .mercenary_contract_dwarven_coinaxe_shield_bash .mercenary_contract_dwarven_coinaxe_attack ]
+		_icon: icon_scroll_2
+		_minion_duration: 900
+	}
+	
+	tag_context .mercenary_contract_dwarven_coinaxe:
+	{
+		must_have_tags: [ american_forename_male ]
+	}
+	
+	name_template .mercenary_contract_dwarven_coinaxe:
+	{
+		possibility<1>:
+		{
+			word: [ .mercenary_contract_dwarven_coinaxe ]
+		}
+	}
+
+	minion_mode .mercenary_contract_dwarven_coinaxe_aggressive:
+	{
+		string: "Aggressive"
+		icon: icon_aggressive
+		follow_distance: 3
+		aggro_range: 5
+		attack_owner_threat_target: true
+		attack_threat_target: true
+	}
+
+	minion_mode .mercenary_contract_dwarven_coinaxe_defensive:
+	{
+		string: "Defensive"
+		icon: icon_defensive
+		follow_distance: 3
+		attack_owner_threat_target: true
+		attack_threat_target: true
+	}
+
+	minion_mode .mercenary_contract_dwarven_coinaxe_passive:
+	{
+		string: "Passive"
+		icon: icon_passive
+		follow_distance: 3
+	}
+	
+	cooldown .mercenary_contract_dwarven_coinaxe_attack:
+	{
+		duration: 21
+	}
+	
+	ability .mercenary_contract_dwarven_coinaxe_attack:
+	{
+		string: "Attack"
+		description: "Deals $damage$ damage to target."
+		flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+		states: [ default in_combat ]
+		delay: 3
+		icon: icon_sword_1
+		cooldowns: [ .mercenary_contract_dwarven_coinaxe_attack ]
+		
+		direct_effect damage:
+		{
+			flags: [ generate_rage can_be_critical ]
+			damage_type: physical			
+			function: { expression: x x: weapon }		
+		}
+		
+		direct_effect threat:
+		{
+			apply_to: source
+			add: 5
+		}			
+	}	
+
+	cooldown .mercenary_contract_dwarven_coinaxe_shield_bash:
+	{
+		duration: 50
+	}
+
+	ability .mercenary_contract_dwarven_coinaxe_shield_bash:
+	{
+		string: "Shield Bash"
+		description: "Deals $damage$ damage to target. Generates a lot of threat."
+		range: 1	
+		cooldowns: [ global .mercenary_contract_dwarven_coinaxe_shield_bash ]
+		flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+		states: [ default in_combat ]
+		delay: 3
+		icon: icon_shield_bash
+		resource_cost rage: 10
+
+		direct_effect damage:
+		{
+			flags: [ can_be_critical ]
+			damage_type: physical
+			function: { expression: a_mul_x a: 0.8 x: weapon }		
+		}
+		
+		direct_effect threat:
+		{
+			apply_to: source
+			add: 25
+		}	
+	}
+	
+	ability .mercenary_contract_dwarven_coinaxe: !MERCENARY_CONTRACT_ABILITY{}
+	entity .mercenary_contract_dwarven_coinaxe: !MINION{}
+	item mercenary_contract_dwarven_coinaxe: !MERCENARY_CONTRACT_ITEM{}
+}
+
+##############################################################################
+# Mercenary Contract: Warden
+{
+	${
+		_item_name: "Mercenary Contract: Warden"
+		_ability: .mercenary_contract_elf_warden
+		_entity: .mercenary_contract_elf_warden
+		_name_template: .mercenary_contract_elf_warden
+		_ability_consume: { mercenary_contract_elf_warden: 1 }
+		_reimburse_item: mercenary_contract_elf_warden
+		_level: 18	
+		_cost: 3300		
+		_weapon_damage: 1
+		_resource_health: 0.8
+		_armor: 0.7
+		_resource_mana: 1.4
+		_creature_type: humanoid
+		_sprite: elf_warden_1
+		_sprite_dead: elf_warden_1_dead
+		_minion_modes: [ .mercenary_contract_elf_warden_aggressive .mercenary_contract_elf_warden_defensive .mercenary_contract_elf_warden_passive ]
+		_default_minion_mode: .mercenary_contract_elf_warden_defensive
+		_commands: [ move attack ]
+		_ability_prio: [ .mercenary_contract_elf_warden_mend .mercenary_contract_elf_shoot .mercenary_contract_elf_warden_attack ]
+		_icon: icon_scroll_3
+		_minion_duration: 900
+		
+		_abilities: 
+		[ 
+			{ id: .mercenary_contract_elf_warden_attack flags: [ auto ] } 
+			{ id: .mercenary_contract_elf_shoot flags: [ auto ] } 
+			{ id: .mercenary_contract_elf_warden_mend flags: [ auto ] max_target_health: 80 } 
+		]
+	}
+	
+	name_template .mercenary_contract_elf_warden:
+	{
+		possibility<1>:
+		{
+			generated_name: [ angel_name ]
+		}
+	}
+
+	minion_mode .mercenary_contract_elf_warden_aggressive:
+	{
+		string: "Aggressive"
+		icon: icon_aggressive
+		follow_distance: 3
+		aggro_range: 5
+		attack_owner_threat_target: true
+		attack_threat_target: true
+	}
+
+	minion_mode .mercenary_contract_elf_warden_defensive:
+	{
+		string: "Defensive"
+		icon: icon_defensive
+		follow_distance: 3
+		attack_owner_threat_target: true
+		attack_threat_target: true
+	}
+
+	minion_mode .mercenary_contract_elf_warden_passive:
+	{
+		string: "Passive"
+		icon: icon_passive
+		follow_distance: 3
+	}
+	
+	cooldown .mercenary_contract_elf_warden_attack:
+	{
+		duration: 21
+	}
+	
+	ability .mercenary_contract_elf_warden_attack:
+	{
+		string: "Attack"
+		description: "Deals $damage$ damage to target."
+		flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+		states: [ default in_combat ]
+		delay: 3
+		icon: icon_staff_1
+		cooldowns: [ .mercenary_contract_elf_warden_attack ]
+		
+		direct_effect damage:
+		{
+			flags: [ generate_rage can_be_critical ]
+			damage_type: physical			
+			function: { expression: a_mul_x x: weapon a: 0.5 }
+		}		
+	}	
+
+	ability .mercenary_contract_elf_shoot:
+	{
+		string: "Shoot"
+		range: 8
+		min_range: 3
+		cast_time: 20
+		cooldowns: [ global ]
+		flags: [ ranged offensive target_other target_hostile can_miss ]
+		states: [ in_combat ]
+		icon: icon_bow_1
+		speed: 7
+		projectile: npc_shoot
+
+		direct_effect damage:
+		{
+			flags: [ can_be_critical ]
+			damage_type: physical
+			function: { expression: x x: weapon }		
+		}
+	}
+
+	ability .mercenary_contract_elf_warden_mend:
+	{
+		string: "Mend"
+		description: "Heals target for $heal$."
+		range: 6
+		cooldowns: [ global spell_healing_lockout ]
+		cast_time: 20
+		flags: [ spell target_other target_self target_friendly interruptable ]
+		states: [ default in_combat ]
+		icon: icon_conduit
+		resource_cost mana: 10
+		target_particle_system: heal	
+		delay: 2
+		sound_effects: !SOUND_HEAL{}	
+
+		direct_effect heal:
+		{	
+			function: 75	
+		}		
+	}
+	
+	ability .mercenary_contract_elf_warden: !MERCENARY_CONTRACT_ABILITY{}
+	entity .mercenary_contract_elf_warden: !MINION{}
+	item mercenary_contract_elf_warden: !MERCENARY_CONTRACT_ITEM{}
+}

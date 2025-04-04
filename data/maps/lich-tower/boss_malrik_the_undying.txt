@@ -214,8 +214,8 @@ aura .malrik_the_undying:
 
 	{
 		${
-			_weapon_damage: 1.6 
-			_resource_health: 2.2
+			_weapon_damage: 1.5
+			_resource_health: 1.4
 			_abilities: 
 			[ 
 				{ id: npc_attack } 
@@ -228,7 +228,7 @@ aura .malrik_the_undying:
 	{
 		${
 			_weapon_damage: 1.1
-			_resource_health: 1.6
+			_resource_health: 1
 			_abilities: 
 			[ 
 				{ id: npc_frostbolt_no_cooldown } 
@@ -242,7 +242,7 @@ aura .malrik_the_undying:
 	{
 		${
 			_weapon_damage: 1.1
-			_resource_health: 1.6
+			_resource_health: 1
 			_abilities: 
 			[ 
 				{ id: npc_heal target: low_health_friend_or_self } 

@@ -612,8 +612,8 @@ map_entity_spawn thalvaron_ghyuik:
 		_creature_type: demon
 		_default_behavior_state: .passive
 		_loot_table: .tentacle_monster
-		_weapon_damage: 1.5
-		_resource_health: 1.5
+		_weapon_damage: 1.4
+		_resource_health: 5.2
 		_elite: true
 		_abilities:
 		[

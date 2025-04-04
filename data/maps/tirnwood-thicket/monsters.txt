@@ -74,7 +74,7 @@ loot_table .trees:
 		_default_behavior_state: .wandering_short
 		_loot_table: .wolves
 		_weapon_damage: 1.4
-		_resource_health: 2.1
+		_resource_health: 1.9
 		_elite: true
 		_abilities: 
 		[ 
@@ -95,7 +95,7 @@ loot_table .trees:
 		_default_behavior_state: .passive
 		_loot_table: .spiders
 		_weapon_damage: 1.5
-		_resource_health: 2.4
+		_resource_health: 2
 		_elite: true
 		_abilities: 
 		[ 
@@ -116,7 +116,7 @@ loot_table .trees:
 		_default_behavior_state: .passive
 		_loot_table: .trees
 		_weapon_damage: 1.45
-		_resource_health: 2.6
+		_resource_health: 2.2
 		_elite: true
 		_abilities: 
 		[ 

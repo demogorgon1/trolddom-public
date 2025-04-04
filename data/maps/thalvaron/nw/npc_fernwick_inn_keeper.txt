@@ -2,7 +2,7 @@ dialogue_screen .fernwick_inn_keeper_dialogue:
 {
 	text: 
 	[	
-		"Greetings."
+		"Welcome to Fernwick."
 	]		
 	
 	options:

@@ -1,5 +1,6 @@
 dialogue_screen .dwarf_quartermaster_vendor:
 {
+	sell mercenary_contract_dwarven_coinaxe: { quantity: 1 reputation_level_requirement kingdom_of_thuldarim: !FRIENDLY_REPUTATION_LEVEL{} }		
 	sell kingdom_of_thuldarim_back_1: { quantity: 1 reputation_level_requirement kingdom_of_thuldarim: !HONORED_REPUTATION_LEVEL{} }	
 	sell kingdom_of_thuldarim_waist_1: { quantity: 1 reputation_level_requirement kingdom_of_thuldarim: !HONORED_REPUTATION_LEVEL{} }	
 	sell kingdom_of_thuldarim_hands_1: { quantity: 1 reputation_level_requirement kingdom_of_thuldarim: !REVERED_REPUTATION_LEVEL{} }	

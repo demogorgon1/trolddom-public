@@ -201,8 +201,8 @@ map_entity_spawn .skeletal_brute:
 		_creature_type: undead
 		_default_behavior_state: .passive
 		_loot_table: default_skeleton
-		_weapon_damage: 1.9
-		_resource_health: 2.4
+		_weapon_damage: 1.75
+		_resource_health: 2.3
 		_elite: true
 		_abilities: 
 		[ 

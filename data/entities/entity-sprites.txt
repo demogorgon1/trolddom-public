@@ -757,6 +757,9 @@ sprites:
 	sprite crab_caster_boss_3: { dead: crab_caster_boss_3_dead tags: [ crab_monster caster boss ] }
 	sprite man_68: { dead: man_68_dead }
 	sprite man_69: { dead: man_69_dead }
+	sprite assassin_1: { dead: assassin_1_dead }
+	sprite dwarven_coinaxe_1: { dead: dwarven_coinaxe_1_dead }
+	sprite elf_warden_1: { dead: elf_warden_1_dead }
 	
 	cursor: { position: [ 0 656 ] }
 	sprite crab_monster_4_dead: { }
@@ -769,6 +772,9 @@ sprites:
 	sprite crab_caster_boss_3_dead: { }	
 	sprite man_68_dead: { }	
 	sprite man_69_dead: { }	
+	sprite assassin_1_dead: { }	
+	sprite dwarven_coinaxe_1_dead: { }	
+	sprite elf_warden_1_dead: { }	
 }
 
 sprites:

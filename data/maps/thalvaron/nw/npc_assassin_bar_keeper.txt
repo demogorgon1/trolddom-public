@@ -1,3 +1,8 @@
+dialogue_screen .assassin_bar_keeper_vendor: 
+{
+	sell mercenary_contract_assassin: { quantity: 1 reputation_level_requirement league_of_assassins: !FRIENDLY_REPUTATION_LEVEL{} }	
+}
+
 dialogue_screen .assassin_bar_keeper_dialogue:
 {
 	text: 
@@ -7,6 +12,7 @@ dialogue_screen .assassin_bar_keeper_dialogue:
 	
 	options:
 	[
+		{ goto: .assassin_bar_keeper_vendor text: "Let me browse your goods." }
 	]
 }
 

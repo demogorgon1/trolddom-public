@@ -164,8 +164,8 @@ map_entity_spawn .bone_tyrant:
 
 	{
 		${
-			_weapon_damage: 1.6 
-			_resource_health: 2.2
+			_weapon_damage: 1.4 
+			_resource_health: 1.4
 			_abilities: 
 			[ 
 				{ id: npc_attack } 
@@ -177,8 +177,8 @@ map_entity_spawn .bone_tyrant:
 	
 	{
 		${
-			_weapon_damage: 1.2
-			_resource_health: 1.6
+			_weapon_damage: 0.9
+			_resource_health: 0.7
 			_abilities: 
 			[ 
 				{ id: npc_frostbolt_no_cooldown } 
@@ -191,8 +191,8 @@ map_entity_spawn .bone_tyrant:
 
 	{
 		${
-			_weapon_damage: 1.2
-			_resource_health: 1.6
+			_weapon_damage: 0.9
+			_resource_health: 0.7
 			_abilities: 
 			[ 
 				{ id: npc_heal target: low_health_friend_or_self } 

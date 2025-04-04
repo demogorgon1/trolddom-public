@@ -1,6 +1,7 @@
 tag american_forename_male: { transferable: false }
 tag american_forename_female: { transferable: false }
 tag american_surname: { transferable: false }
+tag dwarf_forename: { transferable: false }
 tag tolkienesque_forename: { transferable: false }
 tag elven_placename: { transferable: false }
 tag human_townname: { transferable: false }

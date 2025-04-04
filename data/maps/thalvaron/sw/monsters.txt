@@ -368,6 +368,8 @@ map_entity_spawn thalvaron_swamp_giant:
 		_loot_table: .swamp_giant
 		_default_behavior_state: .wandering_short
 		_elite: true
+		_weapon_damage: 1.5
+		_resource_health: 4.5
 	}
 
 	entity thalvaron_swamp_giant: !NPC { _string: "Bogmaw" _sprite: swamp_monster_1 _sprite_dead: swamp_monster_2_dead }
@@ -543,8 +545,8 @@ route thalvaron_mongo_patrol:
 		_creature_type: humanoid
 		_default_behavior_state: .mongo
 		_loot_table: default_humanoid
-		_weapon_damage: 1.2
-		_resource_health: 6
+		_weapon_damage: 1.35
+		_resource_health: 8
 		_elite: true
 		_in_combat_barks: [ { type: say text: "Leave Mongo alone in his swamp!" } ]
 	}

@@ -218,8 +218,8 @@ entity .the_light_irza: !NPC
 	_sprite_dead: dragon_2_dead
 	_loot_table: .unholy_tokens
 	_creature_type: dragon
-	_resource_health: 4
-	_weapon_damage: 3
+	_resource_health: 5
+	_weapon_damage: 2
 	_default_behavior_state: .the_light_irza
 	_zone: .the_light_irza
 	_out_of_zone_action: { evade: true }
@@ -412,8 +412,8 @@ entity .the_underworld_draethor: !NPC
 	_sprite_dead: giant_demon_1_dead
 	_loot_table: .holy_tokens
 	_creature_type: demon
-	_resource_health: 4
-	_weapon_damage: 3
+	_resource_health: 5
+	_weapon_damage: 2
 	_default_behavior_state: .the_underworld_draethor
 	_zone: .the_underworld_draethor
 	_out_of_zone_action: { evade: true }

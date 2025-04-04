@@ -2,7 +2,7 @@ dialogue_screen .mirehaven_bar_keeper_dialogue:
 {
 	text: 
 	[	
-		"Hello."
+		"You're not gonna cause any trouble, are you?"
 	]		
 	
 	options:
