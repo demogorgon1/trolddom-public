@@ -99,25 +99,25 @@ class witch:
 	level_progression:
 	[
 		{ level: 1 unlock_abilities: [ witch_attack witch_bolt !DEFAULT_ABILITIES{} ] stats: { dexterity: 3 strength: 4 wisdom: 7 constitution: 4 spirit: 10 } resource health: { add_max: 60 } resource mana: { add_max: 60 } add_unarmed_weapon_damage: [ 2 4 ] }		
-		{ level: 2 unlock_abilities: [ curse_of_corruption ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }
-		{ level: 3 unlock_abilities: [ summon_lesser_demon ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }		
-		{ level: 4 unlock_abilities: [ cheat_death ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }
-		{ level: 5 unlock_abilities: [ drain_life ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }		
-		{ level: 6 unlock_abilities: [ blood_pact ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }
-		{ level: 7 unlock_abilities: [ blind ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }		
-		{ level: 8 unlock_abilities: [ curse_of_attraction ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }
-		{ level: 9 unlock_abilities: [ shackle_undeath ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }		
-		{ level: 10 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }
-		{ level: 11 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }		
-		{ level: 12 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }
-		{ level: 13 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }		
-		{ level: 14 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }
-		{ level: 15 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }		
-		{ level: 16 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }
-		{ level: 17 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }		
-		{ level: 18 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }
-		{ level: 19 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }		
-		{ level: 20 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } achievement: witch_level_10 }
+		{ level: 2 unlock_abilities: [ curse_of_corruption ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
+		{ level: 3 unlock_abilities: [ summon_lesser_demon ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 4 unlock_abilities: [ cheat_death ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
+		{ level: 5 unlock_abilities: [ drain_life ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 6 unlock_abilities: [ blood_pact ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
+		{ level: 7 unlock_abilities: [ blind ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 8 unlock_abilities: [ curse_of_attraction ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
+		{ level: 9 unlock_abilities: [ shackle_undeath ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 10 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
+		{ level: 11 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 12 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
+		{ level: 13 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 14 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
+		{ level: 15 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 16 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
+		{ level: 17 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 18 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
+		{ level: 19 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 20 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } achievement: witch_level_10 }
 	]
 	
 	gear_optimization default<{ weapon_dps_weight: 0.0 }>:

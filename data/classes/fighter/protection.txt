@@ -85,7 +85,7 @@ ability shield_crush:
 	{	
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: a_mul_x x: attack_power a: 0.50 }				
+		function: { expression: a_mul_x x: attack_power a: 0.42 }				
 	}
 		
 	direct_effect apply_aura:
@@ -591,7 +591,7 @@ ability bash:
 		requirement self<must_not_have_aura>: revenge_buff
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: a_mul_x x: attack_power a: 0.35 }				
+		function: { expression: a_mul_x x: attack_power a: 0.30 }				
 	}
 		
 	direct_effect damage:
@@ -599,7 +599,7 @@ ability bash:
 		requirement self<must_have_aura>: revenge_buff
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: a_mul_x x: attack_power a: 1.05 }				
+		function: { expression: a_mul_x x: attack_power a: 0.90 }				
 	}
 	
 	direct_effect remove_aura:

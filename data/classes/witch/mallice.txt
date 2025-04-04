@@ -47,7 +47,7 @@ talent witch_maliciousness:
 	talent_tree_points_required: 15
 	points:
 	[
-		{ ability: elemental_infusion }
+		{ ability: maliciousness }
 	]
 }
 

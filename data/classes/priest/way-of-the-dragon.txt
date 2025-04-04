@@ -89,7 +89,7 @@ talent priest_dragon_crush:
 
 cooldown dragon_crush:
 {
-	duration: 50
+	duration: 80
 }
 
 particle_system dragon_crush:
@@ -111,12 +111,12 @@ ability dragon_crush:
 	string: "Dragon Crush"
 	description: "Interrupts spell casting and deals $damage$ damage to target."
 	range: 1	
-	cooldowns: [ global dragon_punch spell_fire_lockout ]
+	cooldowns: [ global dragon_crush spell_fire_lockout ]
 	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
 	states: [ default in_combat ]
 	icon: icon_crush
 	delay: 3
-	resource_cost mana: 14
+	resource_cost mana: 20
 	talent_tree: priest_dragon
 	melee_particle_system: dragon_crush
 	
@@ -124,7 +124,7 @@ ability dragon_crush:
 	{
 		flags: [ can_be_critical ]
 		damage_type: fire
-		function: { expression: a_mul_x_plus_b x: attack_power a: 0.5 b: [ [ 1 18 ] [ 10 20 ] [ 20 31 ] ] }							
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.88 b: [ [ 1 26 ] [ 10 52 ] [ 20 104 ] ] }							
 	}		
 	
 	direct_effect interrupt:
@@ -180,7 +180,7 @@ ability dragon_breath_tick:
 	direct_effect damage:
 	{	
 		damage_type: fire		
-		function: { expression: a_mul_x_plus_b x: attack_power a: 0.2 b: [ [ 1 10 ] [ 10 20 ] [ 20 40 ] ] }		
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.4 b: [ [ 1 10 ] [ 10 20 ] [ 20 40 ] ] }		
 		flags: [ is_magical ]
 	}		
 }
@@ -244,7 +244,7 @@ ability dragon_punch:
 	states: [ default in_combat ]
 	icon: icon_dragon_punch
 	delay: 3
-	resource_cost mana: 10
+	resource_cost mana: 14
 	talent_tree: priest_dragon
 	melee_particle_system: dragon_punch
 	
@@ -252,7 +252,7 @@ ability dragon_punch:
 	{
 		flags: [ can_be_critical ]
 		damage_type: fire
-		function: { expression: a_mul_x_plus_b x: attack_power a: 0.45 b: [ [ 1 9 ] [ 10 10 ] [ 20 21 ] ] }							
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.75 b: [ [ 1 15 ] [ 10 30 ] [ 20 60 ] ] }							
 	}	
 	
 	direct_effect apply_aura:

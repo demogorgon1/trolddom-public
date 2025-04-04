@@ -559,7 +559,7 @@ ability firebolt:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: fire
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 32 ] [ 10 64 ] [ 20 128 ] ] }											
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.92 b: [ [ 1 32 ] [ 10 65 ] [ 20 132 ] ] }											
 		
 	}
 	
@@ -607,7 +607,7 @@ ability fireball:
 	string: "Fireball"
 	description: "Deals $damage$ damage to target."
 	range: 9
-	cast_time: 28
+	cast_time: 26
 	cooldowns: [ global spell_fire_lockout ]
 	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
 	states: [ default in_combat ]
@@ -615,14 +615,14 @@ ability fireball:
 	talent_tree: sorcerer_elemental
 	speed: 7
 	projectile: fireball
-	resource_cost mana: 24
+	resource_cost mana: 25
 	target_particle_system: orange_spell_hit
 	
 	direct_effect damage:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: fire
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 1 b: [ [ 1 50 ] [ 10 100 ] [ 20 200 ] ] }											
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.5 b: [ [ 1 55 ] [ 10 120 ] [ 20 245 ] ] }											
 	}
 	
 	direct_effect apply_aura:

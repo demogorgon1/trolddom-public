@@ -445,7 +445,7 @@ ability greater_heal:
 	direct_effect heal:
 	{	
 		flags: [ can_be_critical ]
-		function: { expression: a_mul_x_plus_b x: healing a: 1.05 b: [ [ 1 25 ] [ 10 60 ] [ 20 140 ] ] }
+		function: { expression: a_mul_x_plus_b x: healing a: 1.15 b: [ [ 1 25 ] [ 10 60 ] [ 20 140 ] ] }
 	}
 	
 	direct_effect apply_aura:

@@ -118,13 +118,13 @@ ability void_blast:
 	states: [ default in_combat ]
 	icon: icon_special_6
 	talent_tree: sorcerer_arcane
-	resource_cost mana: 25
+	resource_cost mana: 28
 
 	direct_effect damage:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.98 b: [ [ 1 35 ] [ 10 65 ] [ 20 130 ] ] }									
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.1 b: [ [ 1 35 ] [ 10 75 ] [ 20 150 ] ] }									
 	}	
 }
 
@@ -219,7 +219,7 @@ ability void_lightning_tick:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.25 b: [ [ 1 6 ] [ 10 12 ] [ 20 24 ] ] }									
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.32 b: [ [ 1 7 ] [ 10 15 ] [ 20 32 ] ] }									
 	}	
 }
 
@@ -265,7 +265,7 @@ ability void_lightning:
 	talent_tree: sorcerer_arcane
 	speed: 6
 	projectile: void_lightning
-	resource_cost mana: 20
+	resource_cost mana: 24
 	
 	direct_effect spawn_entity:
 	{
@@ -277,7 +277,7 @@ ability void_lightning:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.65 b: [ [ 1 25 ] [ 10 50 ] [ 20 100 ] ] }									
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.02 b: [ [ 1 25 ] [ 10 50 ] [ 20 120 ] ] }									
 	}	
 }
 

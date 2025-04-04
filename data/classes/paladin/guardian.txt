@@ -54,18 +54,6 @@ aura paladin_one_handed_weapon_mastery_1:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases your damage done with one-handed weapons by 2%."
-	aura_effect damage_output_modifier:
-	{
-		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
-		multiplier: 1.02
-	}
-}
-
-aura paladin_one_handed_weapon_mastery_2:
-{
-	flags: [ persist_in_death ]
-	type: hidden
 	description: "Increases your damage done with one-handed weapons by 4%."
 	aura_effect damage_output_modifier:
 	{
@@ -74,19 +62,7 @@ aura paladin_one_handed_weapon_mastery_2:
 	}
 }
 
-aura paladin_one_handed_weapon_mastery_3:
-{
-	flags: [ persist_in_death ]
-	type: hidden
-	description: "Increases your damage done with one-handed weapons by 6%."
-	aura_effect damage_output_modifier:
-	{
-		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
-		multiplier: 1.06
-	}
-}
-
-aura paladin_one_handed_weapon_mastery_4:
+aura paladin_one_handed_weapon_mastery_2:
 {
 	flags: [ persist_in_death ]
 	type: hidden
@@ -98,15 +74,39 @@ aura paladin_one_handed_weapon_mastery_4:
 	}
 }
 
+aura paladin_one_handed_weapon_mastery_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your damage done with one-handed weapons by 12%."
+	aura_effect damage_output_modifier:
+	{
+		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
+		multiplier: 1.12
+	}
+}
+
+aura paladin_one_handed_weapon_mastery_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your damage done with one-handed weapons by 16%."
+	aura_effect damage_output_modifier:
+	{
+		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
+		multiplier: 1.16
+	}
+}
+
 aura paladin_one_handed_weapon_mastery_5:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases your damage done with one-handed weapons by 10%."
+	description: "Increases your damage done with one-handed weapons by 20%."
 	aura_effect damage_output_modifier:
 	{
 		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
-		multiplier: 1.10
+		multiplier: 1.20
 	}
 }
 
@@ -152,7 +152,7 @@ ability paladin_holy_reflection:
 	{	
 		flags: [ is_magical ]
 		damage_type: holy
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 3 ] [ 10 10 ] [ 20 20 ] ] }													
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.3 b: [ [ 1 8 ] [ 10 16 ] [ 20 32 ] ] }													
 	}
 }
 
@@ -704,9 +704,9 @@ cooldown consecrate:
 ability consecrate:
 {
 	string: "Consecrate"
-	description: "Consecrates the ground for 12 seconds. This does damage and extra threat to affected enemies."	
+	description: "Consecrates the ground for 15 seconds. This does damage and extra threat to affected enemies."	
 	range: 7
-	cast_time: 15
+	cast_time: 10
 	flags: [ spell target_aoe interruptable ]
 	states: [ default in_combat ]
 	icon: icon_consecrate
@@ -732,7 +732,7 @@ ability consecrate_tick:
 	{
 		flags: [ is_magical ]
 		damage_type: holy
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 7 ] [ 10 14 ] [ 20 28 ] ] }													
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.35 b: [ [ 1 14 ] [ 10 28 ] [ 20 56 ] ] }													
 	}
 	direct_effect threat:
 	{
@@ -752,7 +752,7 @@ entity consecrate:
 		environment: 
 		{
 			tick_interval: 15
-			duration: 120 
+			duration: 150 
 			ability: consecrate_tick
 		}		
 		sprite<static>: 

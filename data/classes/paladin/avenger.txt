@@ -101,7 +101,7 @@ talent paladin_intervention_of_wrath:
 	talent_tree_points_required: 15
 	points:
 	[
-		{ ability: piercing_strike }
+		{ ability: intervention_of_wrath }
 	]
 }
 
@@ -120,7 +120,7 @@ ability intervention_of_wrath_debuff_tick:
 	direct_effect damage:
 	{
 		damage_type: holy
-		function: { expression: a_mul_x_plus_b x: attack_power a: 0.075 b: [ [ 1 5 ] [ 10 11 ] [ 20 22 ] ] }						
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.080 b: [ [ 1 6 ] [ 10 13 ] [ 20 28 ] ] }						
 	}
 }
 
@@ -146,7 +146,6 @@ aura intervention_of_wrath_debuff:
 	requirement self<must_have_aura>: intervention_of_wrath
 	aura: intervention_of_wrath_debuff
 }
-
 
 aura intervention_of_wrath:
 {
@@ -788,7 +787,7 @@ ability reckoning:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 8 ] [ 10 16 ] [ 20 32 ] ] }
+		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 12 ] [ 10 24 ] [ 20 48 ] ] }
 	}
 	
 	direct_effect apply_aura: !PALADIN_AVENGER_APPLY_INTERVENTION_OF_WRATH_DEBUFF{}

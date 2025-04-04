@@ -66,12 +66,12 @@ talent priest_creeping_guilt:
 	}	
 }
 
-ability creeping_guilt_tick_1: !CREEPING_GUILT_TICK{ _a: 0.25 _level_1: 4 _level_10: 8 _level_20: 16 }
-ability creeping_guilt_tick_2: !CREEPING_GUILT_TICK{ _a: 0.50 _level_1: 8 _level_10: 16 _level_20: 32 }
-ability creeping_guilt_tick_3: !CREEPING_GUILT_TICK{ _a: 0.75 _level_1: 12 _level_10: 24 _level_20: 48 }
-ability creeping_guilt_tick_4: !CREEPING_GUILT_TICK{ _a: 1.00 _level_1: 16 _level_10: 32 _level_20: 64 }
-ability creeping_guilt_tick_5: !CREEPING_GUILT_TICK{ _a: 1.25 _level_1: 20 _level_10: 40 _level_20: 80 }
-ability creeping_guilt_tick_6: !CREEPING_GUILT_TICK{ _a: 1.50 _level_1: 24 _level_10: 48 _level_20: 96 }
+ability creeping_guilt_tick_1: !CREEPING_GUILT_TICK{ _a: 0.30 _level_1: 5 _level_10: 10 _level_20: 20 }
+ability creeping_guilt_tick_2: !CREEPING_GUILT_TICK{ _a: 0.60 _level_1: 10 _level_10: 20 _level_20: 40 }
+ability creeping_guilt_tick_3: !CREEPING_GUILT_TICK{ _a: 0.90 _level_1: 15 _level_10: 30 _level_20: 60 }
+ability creeping_guilt_tick_4: !CREEPING_GUILT_TICK{ _a: 1.20 _level_1: 20 _level_10: 40 _level_20: 80 }
+ability creeping_guilt_tick_5: !CREEPING_GUILT_TICK{ _a: 1.50 _level_1: 25 _level_10: 50 _level_20: 100 }
+ability creeping_guilt_tick_6: !CREEPING_GUILT_TICK{ _a: 1.80 _level_1: 30 _level_10: 60 _level_20: 120 }
 
 aura creeping_guilt:
 {
@@ -94,12 +94,12 @@ ability creeping_guilt:
 	string: "Creeping Guilt"
 	description: "Inflicts increasing damage to the target over 12 seconds."
 	range: 6
-	cast_time: 20
+	cast_time: 18
 	cooldowns: [ global spell_fire_lockout ]
 	flags: [ spell target_other target_hostile ]
 	states: [ default in_combat ]
 	icon: icon_special_7
-	resource_cost mana: 20
+	resource_cost mana: 24
 	talent_tree: priest_condemnation
 
 	direct_effect apply_aura:
@@ -534,17 +534,17 @@ ability smite:
 	flags: [ spell offensive target_other target_hostile interruptable ]
 	states: [ default in_combat ]
 	icon: icon_smite
-	resource_cost mana: 12
+	resource_cost mana: 13
 	target_particle_system: smite	
 	delay: 3
 	talent_tree: priest_condemnation
 	
 	direct_effect damage:
 	{	
-		must_not_have_ability_modifiers: [ improved_smite_1 improved_smite_2 improved_smite_3 ]
+		must_not_have_ability_modifiers: [ improved_smite_1 improved_smite_2 improved_smite_3 improved_smite_4 improved_smite_5 ]
 		damage_type: fire
 		flags: [ can_be_critical is_magical ]
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.8 b: [ [ 1 25 ] [ 10 50 ] [ 20 100 ] ] }			
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 1 b: [ [ 1 25 ] [ 10 50 ] [ 20 100 ] ] }			
 	}	
 	
 	direct_effect damage:
@@ -552,7 +552,7 @@ ability smite:
 		must_have_ability_modifier: improved_smite_1 
 		damage_type: fire
 		flags: [ can_be_critical is_magical ]
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.8 b: [ [ 1 26 ] [ 10 52 ] [ 20 106 ] ] }			
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.06 b: [ [ 1 26 ] [ 10 52 ] [ 20 106 ] ] }			
 	}		
 	
 	direct_effect damage:
@@ -560,7 +560,7 @@ ability smite:
 		must_have_ability_modifier: improved_smite_2
 		damage_type: fire
 		flags: [ can_be_critical is_magical ]
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.8 b: [ [ 1 27 ] [ 10 54 ] [ 20 112 ] ] }			
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.12 b: [ [ 1 27 ] [ 10 54 ] [ 20 112 ] ] }			
 	}		
 
 	direct_effect damage:
@@ -568,7 +568,7 @@ ability smite:
 		must_have_ability_modifier: improved_smite_3 
 		damage_type: fire
 		flags: [ can_be_critical is_magical ]
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.8 b: [ [ 1 28 ] [ 10 56 ] [ 20 118 ] ] }					
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.18 b: [ [ 1 28 ] [ 10 56 ] [ 20 118 ] ] }					
 	}			
 	
 	direct_effect damage:
@@ -576,7 +576,7 @@ ability smite:
 		must_have_ability_modifier: improved_smite_4 
 		damage_type: fire
 		flags: [ can_be_critical is_magical ]
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.8 b: [ [ 1 30 ] [ 10 58 ] [ 20 126 ] ] }					
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.24 b: [ [ 1 30 ] [ 10 58 ] [ 20 126 ] ] }					
 	}			
 
 	direct_effect damage:
@@ -584,7 +584,7 @@ ability smite:
 		must_have_ability_modifier: improved_smite_5 
 		damage_type: fire
 		flags: [ can_be_critical is_magical ]
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.8 b: [ [ 1 32 ] [ 10 60 ] [ 20 130 ] ] }					
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.30 b: [ [ 1 32 ] [ 10 60 ] [ 20 130 ] ] }					
 	}			
 	
 }
@@ -608,7 +608,7 @@ ability condemnation_tick:
 		conditional_critical_chance_bonus<improved_condemnation_4>: 40
 		conditional_critical_chance_bonus<improved_condemnation_5>: 50
 		damage_type: fire		
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.25 b: [ [ 1 4 ] [ 10 8 ] [ 20 16 ] ] }					
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.34 b: [ [ 1 4 ] [ 10 8 ] [ 20 16 ] ] }					
 		flags: [ is_magical ]
 	}	
 	
@@ -621,7 +621,7 @@ ability condemnation_tick:
 		conditional_critical_chance_bonus<improved_condemnation_4>: 40
 		conditional_critical_chance_bonus<improved_condemnation_5>: 50
 		damage_type: fire
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.25 b: [ [ 1 4 ] [ 10 8 ] [ 20 16 ] ] }					
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.34 b: [ [ 1 4 ] [ 10 8 ] [ 20 16 ] ] }					
 		flags: [ can_be_critical is_magical ]
 	}		
 }
@@ -651,7 +651,7 @@ ability condemnation:
 	flags: [ spell target_other target_hostile ]
 	states: [ default in_combat ]
 	icon: icon_holy_condemnation
-	resource_cost mana: 10
+	resource_cost mana: 11
 	talent_tree: priest_condemnation
 
 	direct_effect apply_aura:

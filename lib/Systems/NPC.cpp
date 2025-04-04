@@ -756,7 +756,7 @@ namespace tpublic::Systems
 					bool standingStill = (aContext->m_tick - npc->m_lastCombatMoveTick) >= 10;
 					bool isStunned = auras->HasEffect(AuraEffect::ID_STUN, NULL);
 
-					if (standingStill || isStunned)
+					if ((standingStill && npc->m_canMove) || isStunned)
 						threat->m_table.Touch(aContext->m_tick);
 
 					if (!isStunned)

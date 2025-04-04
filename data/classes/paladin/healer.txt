@@ -57,11 +57,11 @@ ability holy_injection:
 	string: "Holy Injection"
 	description: "Instantly heals target for $heal$."
 	range: 7
-	cooldowns: [ global spell_holy_lockout ]
+	cooldowns: [ global spell_holy_lockout holy_injection ]
 	flags: [ spell target_other target_self target_friendly interruptable ]
 	states: [ default in_combat ]
 	icon: icon_special_8
-	resource_cost mana: 20
+	resource_cost mana: 24
 	talent_tree: paladin_healer
 	target_particle_system: heal	
 	delay: 2
@@ -70,7 +70,7 @@ ability holy_injection:
 	direct_effect heal:
 	{	
 		flags: [ can_be_critical ]
-		function: { expression: a_mul_x_plus_b x: healing a: 2 b: [ [ 1 30 ] [ 10 60 ] [ 20 120 ] ] }
+		function: { expression: a_mul_x_plus_b x: healing a: 1.45 b: [ [ 1 30 ] [ 10 70 ] [ 20 140 ] ] }
 		conditional_critical_chance_bonus<praise_the_light_1>: 2
 		conditional_critical_chance_bonus<praise_the_light_2>: 4
 		conditional_critical_chance_bonus<praise_the_light_3>: 6
@@ -151,7 +151,7 @@ ability flash_heal:
 	flags: [ spell target_other target_self target_friendly interruptable ]
 	states: [ default in_combat ]
 	icon: icon_flash_heal
-	resource_cost mana: 10
+	resource_cost mana: 18
 	talent_tree: paladin_healer
 	target_particle_system: heal	
 	delay: 2
@@ -160,7 +160,7 @@ ability flash_heal:
 	direct_effect heal:
 	{	
 		flags: [ can_be_critical ]
-		function: { expression: a_mul_x_plus_b x: healing a: 1 b: [ [ 1 10 ] [ 10 20 ] [ 20 40 ] ] }
+		function: { expression: a_mul_x_plus_b x: healing a: 0.85 b: [ [ 1 15 ] [ 10 30 ] [ 20 60 ] ] }
 		conditional_critical_chance_bonus<praise_the_light_1>: 2
 		conditional_critical_chance_bonus<praise_the_light_2>: 4
 		conditional_critical_chance_bonus<praise_the_light_3>: 6
@@ -195,7 +195,7 @@ ability holy_light:
 	flags: [ spell target_other target_self target_friendly interruptable ]
 	states: [ default in_combat ]
 	icon: icon_holy_light
-	resource_cost mana: 15
+	resource_cost mana: 14
 	talent_tree: paladin_healer
 	target_particle_system: heal	
 	delay: 2
@@ -204,7 +204,7 @@ ability holy_light:
 	direct_effect heal:
 	{	
 		flags: [ can_be_critical ]
-		function: { expression: a_mul_x_plus_b x: healing a: 0.86 b: [ [ 1 22 ] [ 10 44 ] [ 20 88 ] ] }
+		function: { expression: a_mul_x_plus_b x: healing a: 1.15 b: [ [ 1 22 ] [ 10 44 ] [ 20 95 ] ] }
 		conditional_critical_chance_bonus<praise_the_light_1>: 2
 		conditional_critical_chance_bonus<praise_the_light_2>: 4
 		conditional_critical_chance_bonus<praise_the_light_3>: 6
@@ -316,17 +316,17 @@ talent paladin_improved_cleanse:
 
 ability_modifier improved_cleanse_1:
 {	
-	description: "Cleanse also heals target by 3% of its health over 10 seconds."
+	description: "Cleanse also heals target by 5% of its health over 10 seconds."
 }
 
 ability_modifier improved_cleanse_2:
 {	
-	description: "Cleanse also heals target by 6% of its health over 10 seconds."
+	description: "Cleanse also heals target by 10% of its health over 10 seconds."
 }
 
 ability_modifier improved_cleanse_3:
 {	
-	description: "Cleanse also heals target by 9% of its health over 10 seconds."
+	description: "Cleanse also heals target by 15% of its health over 10 seconds."
 }
 
 aura_group improved_cleanse:
@@ -345,7 +345,7 @@ ability improved_cleanse_tick_1:
 	
 	direct_effect heal:
 	{	
-		function: { expression: a_mul_x x: health_max a: 0.006 entity: target}
+		function: { expression: a_mul_x x: health_max a: 0.01 entity: target}
 	}	
 }
 
@@ -377,7 +377,7 @@ ability improved_cleanse_tick_2:
 	
 	direct_effect heal:
 	{	
-		function: { expression: a_mul_x x: health_max a: 0.012 entity: target}
+		function: { expression: a_mul_x x: health_max a: 0.02 entity: target}
 	}	
 }
 
@@ -409,7 +409,7 @@ ability improved_cleanse_tick_3:
 	
 	direct_effect heal:
 	{	
-		function: { expression: a_mul_x x: health_max a: 0.018 entity: target}
+		function: { expression: a_mul_x x: health_max a: 0.03 entity: target}
 	}	
 }
 

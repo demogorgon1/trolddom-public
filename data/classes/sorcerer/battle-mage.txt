@@ -329,7 +329,7 @@ talent sorcerer_battle_mage_wizard_strike:
 
 cooldown wizard_strike:
 {
-	duration: 50
+	duration: 40
 	talent_tree: sorcerer_battle_mage
 }
 
@@ -358,14 +358,14 @@ ability wizard_strike:
 	icon: icon_wizard_strike
 	melee_particle_system: wizard_strike
 	delay: 3
-	resource_cost mana: 20
+	resource_cost mana: 22
 	talent_tree: sorcerer_battle_mage
 	
 	direct_effect damage:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
-		function: { expression: a_mul_x_plus_b x: attack_power a: 0.25 b: [ [ 1 10 ] [ 10 20 ] [ 20 40 ] ] }											
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.65 b: [ [ 1 15 ] [ 10 30 ] [ 20 60 ] ] }											
 	}		
 }
 
