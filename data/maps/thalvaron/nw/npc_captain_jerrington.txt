@@ -94,6 +94,7 @@ quest .captain_jerrington_1:
 	level: 10
 	
 	prerequisites: [ .city_guard_special_1 ]
+	next_quest: .captain_jerrington_2
 	reward_one_item: [ .captain_jerrington_1_a .captain_jerrington_1_b ]	
 	reward_reputation_multiplier: 1.5
 }
@@ -128,6 +129,7 @@ quest .captain_jerrington_2:
 	]
 
 	level: 10
+	prerequisites: [ .captain_jerrington_1 ]
 	next_quest: .lieutenant_tinley_1
 	reward_xp_multiplier: 0.1
 }

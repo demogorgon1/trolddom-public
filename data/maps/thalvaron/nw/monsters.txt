@@ -109,7 +109,7 @@ map_entity_spawn thalvaron_rebel_dead:
 		slots:
 		[	
 			{ 
-				possibility: { weight: 9 }
+				possibility: { weight: 5 }
 				possibility: { weight: 1 loot_group: .captain_jerrington_1_quest_item requirement self<must_have_active_quest>: { id: .captain_jerrington_1 } } 
 			}
 			
