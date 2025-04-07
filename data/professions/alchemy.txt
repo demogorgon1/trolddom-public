@@ -360,7 +360,7 @@ item recipe_strong_healing_potion:
 	rarity: uncommon
 	loot_groups: [ world_drops_uncommon ]
 	icon: icon_scroll_1
-	string: "Recipe: Storng Healing Potion"
+	string: "Recipe: Strong Healing Potion"
 	use_ability: .learn_strong_healing_potion
 	level_range: [ 11 20 ]
 }
@@ -370,7 +370,7 @@ item recipe_strong_healing_potion:
 
 ability craft_strong_mana_potion: !ALCHEMY_CRAFT
 {
-	_string: "Storng Mana Potion"
+	_string: "Strong Mana Potion"
 	_item: consumable_strong_mana_potion
 	_produce: { consumable_strong_mana_potion: 1 } 
 	_materials: { item_frostbloom: 3 item_bubbling_slime: 1 }

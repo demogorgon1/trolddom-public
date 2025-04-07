@@ -102,7 +102,7 @@ quest .borg_robertson_1:
 
 objective .borg_robertson_2:
 {
-	string: "Buttercup located."
+	string: "Buttercup located"
 	
 	maps: [ thalvaron ]
 	

@@ -77,121 +77,121 @@ loot_group birds_uncommon: {}
 
 !define WORLD_DROPS_SKELETONS 
 {
-	possibility: { weight: 10 }
-	possibility: { weight: 10 loot_group: skeletons creature_types: [ undead ] }
+	possibility: { weight: 20 }
+	possibility: { weight: 15 loot_group: skeletons creature_types: [ undead ] }
 	possibility: { weight: 1 loot_group: skeletons_uncommon creature_types: [ undead ] }
 }
 
 !define WORLD_DROPS_ZOMBIES 
 {
-	possibility: { weight: 10 }
-	possibility: { weight: 10 loot_group: zombies creature_types: [ undead ] }
+	possibility: { weight: 20 }
+	possibility: { weight: 15 loot_group: zombies creature_types: [ undead ] }
 	possibility: { weight: 1 loot_group: zombies_uncommon creature_types: [ undead ] }
 }
 
 !define WORLD_DROPS_WOLVES 
 {
-	possibility: { weight: 10 }
-	possibility: { weight: 10 loot_group: wolves creature_types: [ beast ] }
+	possibility: { weight: 20 }
+	possibility: { weight: 15 loot_group: wolves creature_types: [ beast ] }
 	possibility: { weight: 1 loot_group: wolves_uncommon creature_types: [ beast ] }
 }
 
 !define WORLD_DROPS_DEER 
 {
-	possibility: { weight: 10 }
-	possibility: { weight: 10 loot_group: deer creature_types: [ beast ] }
+	possibility: { weight: 20 }
+	possibility: { weight: 15 loot_group: deer creature_types: [ beast ] }
 	possibility: { weight: 1 loot_group: deer_uncommon creature_types: [ beast ] }
 }
 
 
 !define WORLD_DROPS_BEARS 
 {
-	possibility: { weight: 10 }
-	possibility: { weight: 10 loot_group: bears creature_types: [ beast ] }
+	possibility: { weight: 20 }
+	possibility: { weight: 15 loot_group: bears creature_types: [ beast ] }
 	possibility: { weight: 1 loot_group: bears_uncommon creature_types: [ beast ] }
 }
 
 !define WORLD_DROPS_BOARS
 {
-	possibility: { weight: 10 }
-	possibility: { weight: 10 loot_group: boars creature_types: [ beast ] }
+	possibility: { weight: 20 }
+	possibility: { weight: 15 loot_group: boars creature_types: [ beast ] }
 	possibility: { weight: 1 loot_group: boars_uncommon creature_types: [ beast ] }
 }
 
 !define WORLD_DROPS_CRABS
 {
-	possibility: { weight: 10 }
-	possibility: { weight: 10 loot_group: crabs creature_types: [ beast ] }
+	possibility: { weight: 20 }
+	possibility: { weight: 15 loot_group: crabs creature_types: [ beast ] }
 	possibility: { weight: 1 loot_group: crabs_uncommon creature_types: [ beast ] }
 }
 
 !define WORLD_DROPS_EARTH_ELEMENTALS
 {
-	possibility: { weight: 10 }
-	possibility: { weight: 10 loot_group: earth_elementals creature_types: [ elemental ] }
+	possibility: { weight: 20 }
+	possibility: { weight: 15 loot_group: earth_elementals creature_types: [ elemental ] }
 	possibility: { weight: 1 loot_group: earth_elementals_uncommon creature_types: [ elemental ] }
 }
 
 !define WORLD_DROPS_OWLBEARS
 {
-	possibility: { weight: 10 }
-	possibility: { weight: 10 loot_group: owlbears creature_types: [ beast humanoid ] }
+	possibility: { weight: 20 }
+	possibility: { weight: 15 loot_group: owlbears creature_types: [ beast humanoid ] }
 	possibility: { weight: 1 loot_group: owlbears_uncommon creature_types: [ beast humanoid ] }
 }
 
 !define WORLD_DROPS_WOOD_ELEMENTALS
 {
-	possibility: { weight: 10 }
-	possibility: { weight: 10 loot_group: wood_elementals creature_types: [ elemental ] }
+	possibility: { weight: 20 }
+	possibility: { weight: 15 loot_group: wood_elementals creature_types: [ elemental ] }
 	possibility: { weight: 1 loot_group: wood_elementals_uncommon creature_types: [ elemental ] }
 }
 
 !define WORLD_DROPS_LIZARDS
 {
-	possibility: { weight: 10 }
-	possibility: { weight: 10 loot_group: lizards creature_types: [ beast ] }
+	possibility: { weight: 20 }
+	possibility: { weight: 15 loot_group: lizards creature_types: [ beast ] }
 	possibility: { weight: 1 loot_group: lizards_uncommon creature_types: [ beast ] }
 }
 
 !define WORLD_DROPS_OOZES
 {
-	possibility: { weight: 10 }
-	possibility: { weight: 10 loot_group: oozes creature_types: [ elemental ] }
+	possibility: { weight: 20 }
+	possibility: { weight: 15 loot_group: oozes creature_types: [ elemental ] }
 	possibility: { weight: 1 loot_group: oozes_uncommon creature_types: [ elemental ] }
 }
 
 !define WORLD_DROPS_LIONS
 {
-	possibility: { weight: 10 }
-	possibility: { weight: 10 loot_group: lions creature_types: [ beast ] }
+	possibility: { weight: 20 }
+	possibility: { weight: 15 loot_group: lions creature_types: [ beast ] }
 	possibility: { weight: 1 loot_group: lions_uncommon creature_types: [ beast ] }
 }
 
 !define WORLD_DROPS_DEMONS
 {
-	possibility: { weight: 10 }
-	possibility: { weight: 10 loot_group: demons creature_types: [ demon ] }
+	possibility: { weight: 20 }
+	possibility: { weight: 15 loot_group: demons creature_types: [ demon ] }
 	possibility: { weight: 1 loot_group: demons_uncommon creature_types: [ demon ] }
 }
 
 !define WORLD_DROPS_NATURE_ELEMENTALS
 {
-	possibility: { weight: 10 }
-	possibility: { weight: 10 loot_group: nature_elementals creature_types: [ elemental ] }
+	possibility: { weight: 20 }
+	possibility: { weight: 15 loot_group: nature_elementals creature_types: [ elemental ] }
 	possibility: { weight: 1 loot_group: nature_elementals_uncommon creature_types: [ elemental ] }
 }
 
 !define WORLD_DROPS_SPIDERS
 {
-	possibility: { weight: 10 }
-	possibility: { weight: 10 loot_group: spiders creature_types: [ beast ] }
+	possibility: { weight: 20 }
+	possibility: { weight: 15 loot_group: spiders creature_types: [ beast ] }
 	possibility: { weight: 1 loot_group: spiders_uncommon creature_types: [ beast ] }
 }
 
 !define WORLD_DROPS_BIRDS
 {
-	possibility: { weight: 10 }
-	possibility: { weight: 10 loot_group: birds creature_types: [ beast humanoid ] }
+	possibility: { weight: 20 }
+	possibility: { weight: 15 loot_group: birds creature_types: [ beast humanoid ] }
 	possibility: { weight: 1 loot_group: birds_uncommon creature_types: [ beast humanoid ] }
 }
 

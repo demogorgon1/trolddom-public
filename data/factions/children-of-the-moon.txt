@@ -76,8 +76,8 @@ item token_of_victory_mana_potion (potion):
 	flags: [ not_sellable ]
 	use_ability: $ability (mana_potion) [ string icon ]	
 	{
-		description: "Restores 250 mana."
-		direct_effect modify_resource: { resource: mana function: 250 }
+		description: "Restores 350 mana."
+		direct_effect modify_resource: { resource: mana function: 350 }
 		consume_items: { entry: { item: <item> quantity: 1 } }
 		required_level: 12
 	}

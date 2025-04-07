@@ -77,7 +77,7 @@ item token_of_victory_healing_potion (potion):
 	flags: [ not_sellable ]
 	use_ability: $ability (healing_potion) [ string icon ]	
 	{
-		direct_effect heal: { function: 250 }
+		direct_effect heal: { function: 350 }
 		consume_items: { entry: { item: <item> quantity: 1 } }
 		required_level: 12
 	}

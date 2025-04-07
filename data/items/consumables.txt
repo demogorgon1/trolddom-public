@@ -64,7 +64,7 @@ ability consumable_small_healing_potion (healing_potion):
 {
 	string: "Small Healing Potion"
 	icon: icon_small_red_potion
-	direct_effect heal: { function: 40 }
+	direct_effect heal: { function: 60 }
 	consume_items: { consumable_small_healing_potion: 1 }
 	required_level: 1	
 }
@@ -83,9 +83,9 @@ item consumable_small_healing_potion (healing_potion):
 ability consumable_small_mana_potion (mana_potion):	
 {
 	string: "Small Mana Potion"
-	description: "Restores 40 mana."
+	description: "Restores 60 mana."
 	icon: icon_small_blue_potion
-	direct_effect modify_resource: { resource: mana function: 40 }
+	direct_effect modify_resource: { resource: mana function: 60 }
 	consume_items: { consumable_small_mana_potion: 1 }
 	required_level: 1
 }
@@ -105,7 +105,7 @@ ability consumable_healing_potion (healing_potion):
 {
 	string: "Healing Potion"
 	icon: icon_red_potion
-	direct_effect heal: { function: 65 }
+	direct_effect heal: { function: 110 }
 	consume_items: { consumable_healing_potion: 1 }
 	required_level: 4
 }
@@ -124,9 +124,9 @@ item consumable_healing_potion (healing_potion):
 ability consumable_mana_potion (mana_potion):	
 {
 	string: "Mana Potion"
-	description: "Restores 65 mana."
+	description: "Restores 110 mana."
 	icon: icon_blue_potion
-	direct_effect modify_resource: { resource: mana function: 65 }
+	direct_effect modify_resource: { resource: mana function: 110 }
 	consume_items: { consumable_mana_potion: 1 }
 	required_level: 4
 }
@@ -295,10 +295,10 @@ item consumable_power_potion (potion):
 ability consumable_rejuvenation_potion (potion):	
 {
 	string: "Rejuvenation Potion"
-	description: "Restores 70 health and mana."
+	description: "Restores 105 health and mana."
 	icon: icon_purple_potion
-	direct_effect heal: { function: 70 }
-	direct_effect modify_resource: { resource: mana function: 70 }	
+	direct_effect heal: { function: 105 }
+	direct_effect modify_resource: { resource: mana function: 105 }	
 	consume_items: { consumable_rejuvenation_potion: 1 }
 	target_particle_system: small_heal
 	required_level: 7
@@ -376,7 +376,7 @@ ability consumable_strong_healing_potion (healing_potion):
 {
 	string: "Strong Healing Potion"
 	icon: icon_red_potion_2
-	direct_effect heal: { function: 250 }
+	direct_effect heal: { function: 350 }
 	consume_items: { consumable_strong_healing_potion: 1 }
 	required_level: 10
 }
@@ -395,9 +395,9 @@ item consumable_strong_healing_potion (healing_potion):
 ability consumable_strong_mana_potion (mana_potion):	
 {
 	string: "Strong Mana Potion"
-	description: "Restores 250 mana."
+	description: "Restores 350 mana."
 	icon: icon_blue_potion_2
-	direct_effect modify_resource: { resource: mana function: 250 }
+	direct_effect modify_resource: { resource: mana function: 350 }
 	consume_items: { consumable_strong_mana_potion: 1 }
 	required_level: 10
 }
@@ -416,10 +416,10 @@ item consumable_strong_mana_potion (mana_potion):
 ability consumable_strong_rejuvenation_potion (potion):	
 {
 	string: "Strong Rejuvenation Potion"
-	description: "Restores 160 health and mana."
+	description: "Restores 290 health and mana."
 	icon: icon_purple_potion
-	direct_effect heal: { function: 160 }
-	direct_effect modify_resource: { resource: mana function: 160 }	
+	direct_effect heal: { function: 290 }
+	direct_effect modify_resource: { resource: mana function: 290 }	
 	consume_items: { consumable_strong_rejuvenation_potion: 1 }
 	target_particle_system: small_heal
 	required_level: 12

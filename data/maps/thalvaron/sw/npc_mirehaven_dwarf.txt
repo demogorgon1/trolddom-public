@@ -66,7 +66,7 @@ quest .mirehaven_dwarf_1:
 
 	text:
 	[
-		"Enter the underground dwarven ruins in the south eastern Marshlands and look for a dwarven artifact."
+		"Enter the underground dwarven ruins in the south eastern Marshlands, look for a dwarven artifact, and return it to Dunrik Ironmantle in Mirehaven."
 	]
 	
 	description: 

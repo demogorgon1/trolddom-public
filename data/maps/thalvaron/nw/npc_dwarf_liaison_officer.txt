@@ -39,7 +39,7 @@ quest thalvaron_dwarf_liaison_officer_1:
 
 	text:
 	[
-		"Locate the family heirloom in the dark elf house and return it to Gyo Starleaf."
+		"Seek out Dunrik Ironmantle in Mirehaven to the south."
 	]
 	
 	description: 
@@ -60,6 +60,7 @@ quest thalvaron_dwarf_liaison_officer_1:
 	]
 
 	level: 13
+	prerequisites: [ thalvaron_north_marshlands_kobold_boss ]
 	reward_cash_multiplier: 0.3
 	reward_xp_multiplier: 0.3	
 }

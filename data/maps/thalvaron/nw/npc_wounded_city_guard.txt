@@ -8,6 +8,7 @@ dialogue_screen .wounded_city_guard_dialogue:
 	options:
 	[
 		{ quest<offer_only>: .wounded_city_guard_1 }
+		{ quest<completion_only>: .samantha_plington_1 }
 	]
 }
 
