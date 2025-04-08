@@ -21,7 +21,7 @@ npc_behavior_state .durk:
 {
 	behavior: patrolling
 	pause_when_targeted_by_nearby_player: true
-	on_route<thalvaron_default_patrol>: thalvaron_default_patrol
+	on_route<thalvaron_default_patrol>: .durk
 }
 
 entity thalvaron_durk: !NPC

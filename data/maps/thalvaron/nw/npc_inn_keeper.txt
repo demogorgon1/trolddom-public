@@ -17,6 +17,7 @@ dialogue_screen .inn_keeper_dialogue:
 	[
 		{ text: "Have you ever done business with a gnome that hangs out at the Robertson farm?" goto: .inn_keeper_dialogue_gnome requirement self<must_have_active_quest>: { id: .gnome_1 } }
 		{ quest<offer_only>: .inn_keeper_1 }
+		{ text: "Let me browse your goods." goto: $dialogue_screen !FOOD_VENDOR{} }
 	]
 }
 

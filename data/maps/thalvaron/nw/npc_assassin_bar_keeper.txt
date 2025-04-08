@@ -1,5 +1,6 @@
 dialogue_screen .assassin_bar_keeper_vendor: 
 {
+	!FOOD_VENDOR{}
 	sell mercenary_contract_assassin: { quantity: 1 reputation_level_requirement league_of_assassins: !FRIENDLY_REPUTATION_LEVEL{} }	
 }
 

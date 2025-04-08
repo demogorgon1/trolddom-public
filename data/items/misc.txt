@@ -386,7 +386,7 @@ item item_slimy_skull:
 	type: miscellaneous
 	item_level: 13
 	level_range: [ 12 22 ]
-	icon: icon_slime_1
+	icon: icon_slimy_skull_1
 	string: "Slimy Skull"
 	stack: 10
 	loot_groups: [ oozes ]

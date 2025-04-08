@@ -102,6 +102,7 @@ quest .urgon_starleaf_1:
 	]
 
 	level: 18
+	prerequisites: [ .thalorion_2 ]
 	objectives: [ .urgon_starleaf_1_a .urgon_starleaf_1_b ]
 }
 

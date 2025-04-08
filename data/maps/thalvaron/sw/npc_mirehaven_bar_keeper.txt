@@ -7,6 +7,7 @@ dialogue_screen .mirehaven_bar_keeper_dialogue:
 	
 	options:
 	[
+		{ text: "Let me browse your goods." goto: $dialogue_screen !FOOD_VENDOR{} }	
 	]
 }
 

@@ -1,3 +1,5 @@
+#FIXME: quest line
+
 dialogue_screen .borg_ironmantle_dialogue:
 {
 	text: 

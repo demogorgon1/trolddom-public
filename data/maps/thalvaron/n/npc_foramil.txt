@@ -8,7 +8,7 @@ dialogue_screen .foramil_dialogue:
 	options:
 	[
 		{ quest: .foramil_1 }
-		{ quest<offer_only>: .foramil_2 }
+		{ quest<offer_only>: .foramil_2 requirement self<must_not_have_completed_quest>: .pearly_b_1 }
 	]
 }
 
@@ -144,18 +144,13 @@ quest .foramil_2:
 		"So, uhm, maybe you can deliver the splinters to the one who requested them? Stays by the lake in the small elven town down the road to the east."
 	]
 
-	progress:
-	[
-		"How is it going?"
-	]
-	
 	completion:
 	[
 		"Oh, didn't expect to see you here? Great! Just throw those splinters in the water and let me have look."
 	]
 
 	level: 17
-	prerequisites: [ .foramil_1 ]
+	prerequisites: [ .foramil_1 .pearly_a_2 ]
 	reward_xp_multiplier: 0.3
 	reward_cash_multiplier: 0.3
 	reward_one_item: [ .foramil_2_a .foramil_2_b ]

@@ -23,13 +23,13 @@ talent_tree fighter_subtlety:
 	
 	map:
 	[
-		"..A.B.."
-		"....d.."
-		"DlC.E.G"
-		"|.....d"
-		"|.I.FlJ"
-		"d......"
-		"H......"
+		"..A.B...."
+		"....d...."
+		"DlC.E.G.F"
+		"|.....d.."
+		"|.I...J.."
+		"d........"
+		"H........"
 	]	
 }
 
@@ -514,8 +514,7 @@ talent fighter_subtlety_envenom:
 {
 	string: "Envenom"
 	icon: icon_envenom
-	talent_tree_points_required: 10
-	prerequisites: [ fighter_subtlety_improved_poison_bomb ]
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability: envenom }

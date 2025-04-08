@@ -17,6 +17,12 @@
 	sell consumable_spirit_token: { quantity: 1 }
 }
 
+!define FOOD_VENDOR
+{
+	sell consumable_dry_bread: { quantity: 1 }	
+	sell consumable_durgan_ale: { quantity: 1 cost: 350 }
+}
+
 !define DEFAULT_PORTAL_ANIMATION
 {
 	frames: [ effect_instance_portal_0 effect_instance_portal_1 effect_instance_portal_2 ] 

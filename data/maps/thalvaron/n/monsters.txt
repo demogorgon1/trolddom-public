@@ -138,8 +138,8 @@ map_entity_spawn thalvaron_owlbear:
 		slots:
 		[	
 			{ 
-				possibility: { }
-				possibility: { loot_group: .ronja_frostmane_1_quest_item requirement self<must_have_active_quest>: { id: .ronja_frostmane_1 } } 
+				possibility: { weight: 2 }
+				possibility: { weight: 3 loot_group: .ronja_frostmane_1_quest_item requirement self<must_have_active_quest>: { id: .ronja_frostmane_1 } } 
 			}
 			
 			!WORLD_DROPS {}
@@ -151,8 +151,8 @@ map_entity_spawn thalvaron_owlbear:
 		slots:
 		[	
 			{ 
-				possibility: { }
-				possibility: { loot_group: .ronja_frostmane_2_quest_item requirement self<must_have_active_quest>: { id: .ronja_frostmane_2 } } 
+				possibility: { weight: 2 }
+				possibility: { weight: 3 loot_group: .ronja_frostmane_2_quest_item requirement self<must_have_active_quest>: { id: .ronja_frostmane_2 } } 
 			}
 			
 			!WORLD_DROPS {}

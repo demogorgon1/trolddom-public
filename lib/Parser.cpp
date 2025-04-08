@@ -863,6 +863,7 @@ namespace tpublic
 
 		bool isInsideObject = _IsInsideObject(&m_root, aSourceNodeStack);
 
+		uint32_t x = 0;
 		for (std::unique_ptr<SourceNode>& child : aNode->m_children)
 		{
 			SourceNode* nextNamespace = aNamespace; 
@@ -871,6 +872,7 @@ namespace tpublic
 				nextNamespace = child.get();
 				
 			_ResolveEmbeddedDataObjects(aSourceNodeStack, aObjectNameStack, nextNamespace, child.get());
+			x++;
 		}
 
 		if(needObjectNameStackPop)

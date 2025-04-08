@@ -664,6 +664,7 @@ aura charge_stun:
 	type: debuff
 	duration: 20	
 	aura_effect stun: { }
+	particle_system: knock
 }
 
 ability charge_trigger:

@@ -91,14 +91,14 @@ quest thalvaron_damon_arkwright_2:
 
 	text:
 	[
-		"Take the Mark of the Vampire to Emma Brown in the Southgate district of Valaris."
+		"Take the Mark of the Vampire to Emma Brown in the Southgate district of Valoris."
 	]
 	
 	description: 
 	[
 		"This is a definite sign that a powerful vampire has taken its hold over these woods.\n\n"
 		"We need to banish it, but in order to do that we need a plan. Even if we knew where its lair was, we wouldn't be able to just walk in and kill it - we'd just end up as its dinner.\n\n"
-		"Take this object you found to my colleague in Valaris. Maybe she can help figuring out what we're up against exactly. Her name is Emma Brown and lives in Southgate, close to the trade district." 
+		"Take this object you found to my colleague in Valoris. Maybe she can help figuring out what we're up against exactly. Her name is Emma Brown and lives in Southgate, close to the trade district." 
 	]
 	
 	completion:

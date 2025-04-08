@@ -370,6 +370,35 @@ item consumable_ironbrew_stout (elixir):
 }
 
 #####################################################
+# Durgan Ale
+
+aura consumable_durgan_ale (elixir):
+{
+	string: "Durgan Ale"
+	icon: icon_mug_2
+	duration: 12000
+	stat_modifiers: { constitution: { add: 1 } dexterity: { add: -1 } }
+}
+
+ability consumable_durgan_ale (elixir): 	
+{
+	string: "Ironbrew Stout"
+	description: "Increases your Constitution by 1 and decreases your Dexterity by 1 for 20 minutes. You can only have the effect of one elixir at a time."
+	icon: icon_mug_2
+	direct_effect apply_aura: { aura: consumable_durgan_ale }
+	consume_items: { consumable_durgan_ale: 1 }
+	required_level: 10
+}
+
+item consumable_durgan_ale (elixir):
+{
+	binds: when_picked_up
+	icon: icon_mug_2
+	string: "Durgan Ale"
+	use_ability: consumable_durgan_ale
+}
+
+#####################################################
 # Strong Healing Potion
 
 ability consumable_strong_healing_potion (healing_potion): 	

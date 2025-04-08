@@ -70,7 +70,7 @@ quest .bramli_stonestride_1:
 	
 	description: 
 	[
-		"We dwarves are not strangers to giant spiders as we often find them underground, but the ones here in the Badlands... Well, they're more of furry than we're used to. Have you seen some of the big hairy ones around here?\n\n"
+		"We dwarves are not strangers to giant spiders as we often find them underground, but the ones here in the Badlands... Well, they're more furry than what we're used to. Have you seen some of the big hairy ones around here?\n\n"
 		"Yesterday I was out prospecting in the caves south of here and I got ambushed by a spider larger than anything I've seen before! It was quite horrible and I had to leg it. It had fangs the size of broad swords!\n\n"
 		"You seem like a real go-getter, maybe you can find it and kill it so I can continue my prospecting? I'm not sure exactly what cave it happened in, but it's south east and not far from here."
 	]

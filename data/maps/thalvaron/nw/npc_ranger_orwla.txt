@@ -9,6 +9,7 @@ dialogue_screen .ranger_orwla_dialogue:
 	[
 		{ quest<completion_only>: .ranger_seymore_3 }
 		{ quest: .ranger_orwla_1 }
+		{ quest: .ranger_orwla_2 }
 	]
 }
 

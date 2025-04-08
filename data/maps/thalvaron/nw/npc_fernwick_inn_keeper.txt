@@ -10,6 +10,7 @@ dialogue_screen .fernwick_inn_keeper_dialogue:
 		{ quest<completion_only>: .inn_keeper_1 } 
 		{ quest<offer_only>: .fernwick_inn_keeper_1 }
 		{ quest<completion_only>: .westor_2 }
+		{ text: "Let me browse your goods." goto: $dialogue_screen !FOOD_VENDOR{} }		
 	]
 }
 

@@ -892,6 +892,7 @@
 		description: "Heals target for $heal$."
 		range: 6
 		cooldowns: [ global spell_healing_lockout ]
+		cooldown: $cooldown { duration: 50 }
 		cast_time: 20
 		flags: [ spell target_other target_self target_friendly interruptable ]
 		states: [ default in_combat ]
@@ -903,7 +904,7 @@
 
 		direct_effect heal:
 		{	
-			function: 75	
+			function: 95
 		}		
 	}
 	
