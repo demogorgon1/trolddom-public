@@ -887,9 +887,7 @@ map_entity_spawn thalvaron_ghyuik:
 		use_ability: .ghyuik_start_quest
 		binds: when_picked_up
 	}
-	
-	# FIXME: quest rewards (or follow up)
-	
+
 	quest .ghyuik:
 	{
 		string: "Cursed Effigy"
@@ -913,7 +911,7 @@ map_entity_spawn thalvaron_ghyuik:
 		completion:
 		[
 			"This is... something else. It's evil. You know, just because I may or may not worship the underworld, it doesn't mean that I'm up to no good. I'm not a bad person.\n\n"
-			"Anyway, you say it was in the possession of a dark elf? Not surprising."
+			"Anyway, you say it was in the possession of a dark elf? Not surprising. I will try to contact you if I find out more."
 		]
 
 		level: 16

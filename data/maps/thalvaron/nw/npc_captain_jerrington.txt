@@ -151,7 +151,7 @@ objective .captain_jerrington_3:
 }
 
 {
-	${ _level: 20 _rarity: rare }
+	${ _level: 18 _rarity: rare }
 	item .captain_jerrington_3_a: !QUEST_REWARD_TRINKET{ _string: "Badge of Honor" _icon: icon_sanctuary _phys_crit: 1 }
 	item .captain_jerrington_3_b: !QUEST_REWARD_TRINKET{ _string: "Badge of Justice" _icon: icon_heal_command _spell_crit: 1 }
 }
@@ -162,26 +162,29 @@ quest .captain_jerrington_3:
 
 	text:
 	[
-		"FIXME"
+		"Find and kill the insurgency commander."
 	]
 	
 	description: 
 	[
-		"FIXME"
+		"Thanks to the encryption key you've provided to us, we've been able to learn more about the command structure and plans of the rebels. Needless to say, we need to stop them and reclaim"
+		"our city.\n\n"
+		"One of their commanders who go by the name of Jorgenson, self-proclaimed captain, is holed up in the occupied part of Eastgate. We need you to kill him.\n\n"
+		"You'll have to enter the city through the eastern gate to get to him. Be careful, you'll need to bring some allies. Good luck."
 	]
 
 	progress:
 	[
-		"FIXME"
+		"What are you waiting for?"
 	]
 	
 	completion:
 	[
-		"FIXME"
+		"Amazing! This is a great help quelling the insurgency."
 	]
 
 	type: dungeon
-	level: 20
+	level: 18
 	prerequisites: [ .rebel_leader_camp_quest_item ]
 	objectives: [ .captain_jerrington_3 ]
 	reward_one_item: [ .captain_jerrington_3_a .captain_jerrington_3_b ]
