@@ -30,6 +30,7 @@
 	tile wood_wall_window: [ 255 128 64 ] 
 	tile wood_solid_wall_face_window: [ 100 100 50 ]
 	tile road_1: [ 121 125 66 ]
+	tile road_2: [ 121 155 16 ]
 	tile pavement_1: [ 121 175 56 ]
 	tile brick_wall_window: [ 125 161 164 ] 
 	tile brick_solid_wall_face_window: [ 202 56 58 ]

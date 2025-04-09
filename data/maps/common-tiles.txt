@@ -106,6 +106,20 @@ sprites:
 	sprite dirt_border_16: { }
 	sprite dirt_border_17: { }
 	
+	skip: {}
+	skip: {}
+	skip: {}
+	skip: {}
+	skip: {}
+	skip: {}
+	skip: {}
+	skip: {}
+	skip: {}
+	
+	sprite road_2: { flags: [ tile_walkable ] alt_tiles: [ road_2_alt_1 road_2_alt_2 ] }
+	sprite road_2_alt_1: { flags: [ tile_walkable ] }
+	sprite road_2_alt_2: { flags: [ tile_walkable ] }
+	
 	cursor: { position: [ 0 48 ] }
 	
 	sprite forest: { flags: [ tile_block_line_of_sight ]  borders:

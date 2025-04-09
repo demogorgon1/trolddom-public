@@ -2,7 +2,7 @@ dialogue_screen .baskin_johnson_vendor: !TRADE_SUPPLIES{}
 
 entity thalvaron_baskin_johnson: !NPC
 {
-	_string: "Baskin Johnso"
+	_string: "Baskin Johnson"
 	_guild_name: "Trade Supplies"
 	_sprite: man_67
 	_sprite_dead: man_67_dead

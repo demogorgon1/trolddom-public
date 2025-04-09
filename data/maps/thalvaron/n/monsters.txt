@@ -888,6 +888,8 @@ map_entity_spawn thalvaron_ghyuik:
 		binds: when_picked_up
 	}
 	
+	# FIXME: quest rewards (or follow up)
+	
 	quest .ghyuik:
 	{
 		string: "Cursed Effigy"
@@ -910,7 +912,7 @@ map_entity_spawn thalvaron_ghyuik:
 		
 		completion:
 		[
-			"This is... something else. It's evil. You know, just because I may or may not worship the underworld, it doesn't mean that I'm up to no good. I'm not a bad woman.\n\n"
+			"This is... something else. It's evil. You know, just because I may or may not worship the underworld, it doesn't mean that I'm up to no good. I'm not a bad person.\n\n"
 			"Anyway, you say it was in the possession of a dark elf? Not surprising."
 		]
 

@@ -565,3 +565,27 @@ ability resurrection:
 	{			
 	}
 }
+
+###############################################################################
+# Inner Peace
+
+ability inner_peace:
+{
+	string: "Inner Peace"
+	description: "Restores 50% of your health."
+	cooldowns: [ global spell_healing_lockout ]
+	cooldown: $cooldown { duration: 1800 }
+	flags: [ spell target_other target_self target_friendly interruptable ]
+	states: [ default in_combat ]
+	icon: icon_special_11
+	resource_cost mana: 13
+	talent_tree: priest_healing
+	target_particle_system: heal	
+	delay: 2
+	sound_effects: !SOUND_HEAL{}	
+
+	direct_effect heal:
+	{	
+		function: { expression: a_mul_x x: health_max a: 0.5 }
+	}	
+}

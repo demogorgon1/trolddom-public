@@ -576,3 +576,31 @@ aura meditation:
 	}
 }
 
+###############################################################################
+# Toughen Up
+
+ability toughen_up:
+{
+	string: "Toughen Up"
+	description: "Increases your armor by 100% for 10 seconds."
+	cooldowns: [ global spell_healing_lockout ]
+	cooldown: $cooldown { duration: 1200 }
+	flags: [ spell target_other target_self target_friendly interruptable ]
+	states: [ default in_combat ]
+	icon: icon_special_12
+	resource_cost mana: 11
+	talent_tree: priest_dragon
+	delay: 2
+	direct_effect apply_aura:
+	{
+		aura: $aura [ string icon ]
+		{
+			flags: [ magic unique ]
+			type: buff
+			stat_modifiers: { armor: { add_percent: 100 } }
+			duration: 100		
+		}
+	}
+}
+
+

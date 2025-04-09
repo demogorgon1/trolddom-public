@@ -746,6 +746,9 @@ sprites:
 	sprite icon_thread_1 : { tags: [ icon ] }
 	sprite icon_horn_1 : { tags: [ icon ] }
 	sprite icon_mug_2 : { tags: [ icon ] }
+	sprite icon_special_11 : { tags: [ icon ] }
+	sprite icon_special_12 : { tags: [ icon ] }
+	sprite icon_special_13 : { tags: [ icon ] }
 	
 }
 

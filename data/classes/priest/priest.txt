@@ -69,8 +69,8 @@ class priest:
 		{ level: 5 unlock_abilities: [ meditation ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} }	resource mana: { add_max: 6 } }		
 		{ level: 6 unlock_abilities: [ resurrection ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } } 
 		{ level: 7 unlock_abilities: [ dwindle ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} }	resource mana: { add_max: 6 } }		
-		{ level: 8 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } } 
-		{ level: 9 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} }	resource mana: { add_max: 6 } }		
+		{ level: 8 unlock_abilities: [ toughen_up ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } } 
+		{ level: 9 unlock_abilities: [ inner_peace ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
 		{ level: 10 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } } 
 		{ level: 11 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} }	resource mana: { add_max: 6 } }		
 		{ level: 12 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } } 

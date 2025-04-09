@@ -11,6 +11,7 @@ dialogue_screen .tyron_frostmane_dialogue:
 		{ quest: .tyron_frostmane_1 }
 		{ quest: .tyron_frostmane_2 }
 		{ quest<offer_only>: .tyron_frostmane_3 }
+		{ quest<completion_only>: .doctor_hulius_1 }
 	]
 }
 
@@ -82,7 +83,7 @@ quest .tyron_frostmane_1:
 
 	objectives: [ .tyron_frostmane_1 ]
 	level: 12
-	next_quest: .tyron_frostmane_1 
+	next_quest: .tyron_frostmane_2 
 }
 
 ############################################################

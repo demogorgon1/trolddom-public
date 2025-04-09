@@ -180,7 +180,7 @@ doodad pier_edge_2:
 {
 	sprites: [ doodad_pier_edge_2 ]
 	map_palette<"x">: { must_be_one_of: [ water ] }
-	map_palette<"y">: { must_be_one_of: [ road_1 ] } 
+	map_palette<"y">: { must_be_one_of: [ road_1 road_2 ] } 
 	map: [ "y"
 	       "x" ]
 	map_offset: [ 0 -1 ]

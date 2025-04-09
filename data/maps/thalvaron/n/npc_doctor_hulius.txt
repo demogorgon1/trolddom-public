@@ -36,15 +36,16 @@ entity thalvaron_doctor_hulius: !NPC
 	_blocking: false
 	_visibility_requirements: 
 	{ 
-		requirement self<must_have_active_quest>: .doctor_hulius_camp_1 
 		requirement self<must_not_have_completed_quest>: .doctor_hulius_1
 	} 
 }
 
 route thalvaron_doctor_hulius_escort: 
 { 
+	origin_map_entity_spawn: thalvaron_doctor_hulius
+
 	trigger<2>: { chat: { type: say text: "Do you really think it was going to eat me?" } }
-	trigger<193>: { chat: { type: say text: "Safe! At last! Time for a drink!" } event: true }
+	trigger<193>: { chat: { type: say text: "The troll won't come here, right?" } event: true }
 	trigger<max>: { despawn: true }
 }
 
