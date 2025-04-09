@@ -170,6 +170,26 @@ namespace tpublic
 				});
 
 				aSchema->InitUpgradeChains();
+
+				aSchema->OnRead<EquippedItems>([](
+					EquippedItems*				aEquippedItems,
+					ComponentSchema::ReadType	aReadType,
+					const Manifest*				aManifest)
+				{
+					if(aReadType == ComponentSchema::READ_TYPE_STORAGE)
+					{
+						// Validate items
+						for (uint32_t i = 0; i < (uint32_t)EquipmentSlot::NUM_IDS; i++)
+						{
+							ItemInstance& t = aEquippedItems->m_slots.m_items[i];
+							if(t.IsSet())
+							{
+								if(aManifest->TryGetById<Data::Item>(t.m_itemId) == NULL)
+									t.Clear(); // Remove bad item
+							}
+						}
+					}
+				});
 			}
 
 			void

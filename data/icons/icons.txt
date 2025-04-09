@@ -1,6 +1,7 @@
 !define local ICON_ANY { }
 !define local ICON_UNCOMMON_5 { min_rarity: uncommon min_level: 5 }
 !define local ICON_UNCOMMON_11 { min_rarity: uncommon min_level: 11 }
+!define local ICON_UNCOMMON_14 { min_rarity: uncommon min_level: 14 }
 
 sprites:
 {
@@ -749,6 +750,25 @@ sprites:
 	sprite icon_special_11 : { tags: [ icon ] }
 	sprite icon_special_12 : { tags: [ icon ] }
 	sprite icon_special_13 : { tags: [ icon ] }
+	sprite icon_necklace_8 : { tags: [ icon neck ] icon_meta_data: !ICON_UNCOMMON_14{} }
+
+	cursor: { position: [ 0 656 ] }	
+	sprite icon_necklace_9 : { tags: [ icon neck ] icon_meta_data: !ICON_UNCOMMON_14{} }
+	sprite icon_necklace_10 : { tags: [ icon neck ] icon_meta_data: !ICON_UNCOMMON_14{} }
+	sprite icon_necklace_11 : { tags: [ icon neck ] icon_meta_data: !ICON_UNCOMMON_14{} }
+	sprite icon_necklace_12 : { tags: [ icon neck ] icon_meta_data: !ICON_UNCOMMON_14{} }
+	sprite icon_necklace_13 : { tags: [ icon neck ] icon_meta_data: !ICON_UNCOMMON_14{} }
+	sprite icon_necklace_14 : { tags: [ icon neck ] icon_meta_data: !ICON_UNCOMMON_14{} }
+	sprite icon_necklace_15 : { tags: [ icon neck ] icon_meta_data: !ICON_UNCOMMON_14{} }
+	sprite icon_necklace_16 : { tags: [ icon neck ] icon_meta_data: !ICON_UNCOMMON_14{} }
+	sprite icon_ring_9 : { tags: [ icon finger ] icon_meta_data: !ICON_UNCOMMON_14{} }
+	sprite icon_ring_10 : { tags: [ icon finger ] icon_meta_data: !ICON_UNCOMMON_14{} }
+	sprite icon_ring_11 : { tags: [ icon finger ] icon_meta_data: !ICON_UNCOMMON_14{} }
+	sprite icon_ring_12 : { tags: [ icon finger ] icon_meta_data: !ICON_UNCOMMON_14{} }
+	sprite icon_ring_13 : { tags: [ icon finger ] icon_meta_data: !ICON_UNCOMMON_14{} }
+	sprite icon_ring_14 : { tags: [ icon finger ] icon_meta_data: !ICON_UNCOMMON_14{} }
+	sprite icon_cape_5 : { tags: [ icon back ] icon_meta_data: !ICON_UNCOMMON_14{} }
+	sprite icon_cape_6 : { tags: [ icon back ] icon_meta_data: !ICON_UNCOMMON_14{} }
 	
 }
 
