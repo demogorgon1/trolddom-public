@@ -795,7 +795,7 @@ namespace tpublic
 		uint32_t multiSeqNum = 0;
 
 		for (size_t i = 0; i < aNode->m_children.size(); i++)
-		{
+		{			
 			std::unique_ptr<SourceNode>& child = aNode->m_children[i];
 
 			if(child->m_type == SourceNode::TYPE_EMBEDDED_DATA_OBJECT)
@@ -863,16 +863,17 @@ namespace tpublic
 
 		bool isInsideObject = _IsInsideObject(&m_root, aSourceNodeStack);
 
-		uint32_t x = 0;
-		for (std::unique_ptr<SourceNode>& child : aNode->m_children)
+		for (size_t i = 0; i < aNode->m_children.size(); i++)
 		{
+			std::unique_ptr<SourceNode>& child = aNode->m_children[i];
+			assert(child);
+			
 			SourceNode* nextNamespace = aNamespace; 
 			
 			if(child->IsAnonymousObject() && !isInsideObject)
 				nextNamespace = child.get();
 				
 			_ResolveEmbeddedDataObjects(aSourceNodeStack, aObjectNameStack, nextNamespace, child.get());
-			x++;
 		}
 
 		if(needObjectNameStackPop)

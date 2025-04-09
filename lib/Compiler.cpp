@@ -65,23 +65,22 @@ namespace tpublic
 		{
 			// Recursively parse all .txt files in root path
 			_ParseDirectory(parseRootPath.c_str(), parseRootPath.c_str());
+		}
 
+		{
+			DataErrorHandling::ScopedErrorCallback scopedErrorCallback([&](
+				const char* aString)
 			{
-				DataErrorHandling::ScopedErrorCallback scopedErrorCallback([&](
-					const char* aString)
-				{
-					throw BuildError{ aString };
-				});
+				throw BuildError{ aString };
+			});
 
-				try
-				{
-					m_parser.Resolve();
-				}
-				catch (BuildError& e)
-				{
-					_OnBuildError(e);
-					break;
-				}
+			try
+			{
+				m_parser.Resolve();
+			}
+			catch (BuildError& e)
+			{
+				_OnBuildError(e);				
 			}
 		}
 
@@ -475,10 +474,12 @@ namespace tpublic
 
 			if(aNode->m_extraAnnotation)
 			{
-				std::vector<const DataBase*>& dataExtends = m_dataExtendsTable[t->m_base];
+				std::vector<const DataBase*> dataExtends;
 
 				if(aNode->m_extraAnnotation->m_type == SourceNode::TYPE_ARRAY)
 				{
+					TP_VERIFY(aNode->m_extraAnnotation->m_children.size() > 0, aNode->m_extraAnnotation->m_debugInfo, "Empty extends array.");
+
 					aNode->m_extraAnnotation->ForEachChild([&](
 						const SourceNode* aChild)
 					{
@@ -489,6 +490,9 @@ namespace tpublic
 				{
 					dataExtends.push_back(m_manifest->m_containers[dataType]->GetBaseByName(m_sourceContext.m_persistentIdTable.get(), aNode->m_extraAnnotation->GetIdentifier()));
 				}
+
+				assert(!m_dataExtendsTable.contains(t->m_base));
+				m_dataExtendsTable[t->m_base] = std::move(dataExtends);
 			}
 
 			m_dataQueue.push_back(std::move(t));
@@ -543,8 +547,14 @@ namespace tpublic
 
 		{
 			DataExtendsTable::const_iterator i = m_dataExtendsTable.find(aDataBase);
-			for (const DataBase* extends : i->second)
-				_GetDataExtends(extends, aOut);
+
+			if(i != m_dataExtendsTable.cend())
+			{
+				assert(i->second.size() > 0);
+
+				for (const DataBase* extends : i->second)
+					_GetDataExtends(extends, aOut);
+			}
 		}
 
 		aOut.push_back(source);
