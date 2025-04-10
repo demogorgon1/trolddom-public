@@ -244,6 +244,7 @@ ability paladin_block:
 	delay: 3
 	resource_cost mana: 10
 	talent_tree: paladin_guardian
+	requirement self<must_have_item_type_equipped>: shield
 	
 	direct_effect apply_aura:
 	{
