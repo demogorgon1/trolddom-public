@@ -858,6 +858,10 @@ map_palette .doodads:
 	doodad hole: [ 104 49 146 ]
 	doodad weapon_rack: [ 31 49 49 ]
 	doodad white_throne: [ 13 30 100 ]
+	doodad hard_slope_w: [ 40 103 18 ]
+	doodad hard_slope_n: [ 140 103 18 ]
+	doodad hard_slope_s: [ 40 203 18 ]
+	doodad hard_slope_e: [ 40 103 118 ]
 	
 	doodad wall_sign_generic<"Mathew's Emporium">: [ 197 173 111 ]	
 	doodad wall_sign_generic<"John & Mary's">: [ 97 173 111 ]	

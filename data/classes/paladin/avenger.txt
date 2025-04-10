@@ -674,6 +674,7 @@ ability paladin_relentless_assault_trigger:
 aura paladin_relentless_assault_buff:
 {
 	string: "Relentless Assault"
+	description: "Divine Smite, Flash Heal, or Judgement are instant cast."
 	type: buff
 	icon: icon_relentless_assault
 	duration: 100

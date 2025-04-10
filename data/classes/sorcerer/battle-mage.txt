@@ -411,7 +411,7 @@ ability_modifier improved_power_shield_5:
 	description: "Power Shield reduces all damage taken by 40%."
 }
 
-!define local IMPROVED_POWER_SHIELD
+!define local POWER_SHIELD
 {	
 	string: "Power Shield"
 	description: "Absorbs damage."
@@ -419,21 +419,21 @@ ability_modifier improved_power_shield_5:
 	duration: 300
 	flags: [ unique charged magic ]	
 	icon: icon_mage_shield
-	charges: { expression: a_mul_x_plus_b a: 1.5 b: 8 x: level }		
+	charges: { expression: a_mul_x_plus_b a: 5.5 b: 28 x: level }		
+	particle_system: power_shield
 	aura_effect absorb: { }	
-	aura_effect damage_input_modifier:
+	<exists _multiplier> aura_effect damage_input_modifier:
 	{
 		type_mask: [ all ]
 		multiplier: @_multiplier
 	}
 }
 
-aura improved_power_shield_1: !IMPROVED_POWER_SHIELD { _multiplier: 0.92 }
-aura improved_power_shield_2: !IMPROVED_POWER_SHIELD { _multiplier: 0.84 }
-aura improved_power_shield_3: !IMPROVED_POWER_SHIELD { _multiplier: 0.76 }
-aura improved_power_shield_4: !IMPROVED_POWER_SHIELD { _multiplier: 0.68 }
-aura improved_power_shield_5: !IMPROVED_POWER_SHIELD { _multiplier: 0.60 }
-
+aura improved_power_shield_1: !POWER_SHIELD { _multiplier: 0.92 }
+aura improved_power_shield_2: !POWER_SHIELD { _multiplier: 0.84 }
+aura improved_power_shield_3: !POWER_SHIELD { _multiplier: 0.76 }
+aura improved_power_shield_4: !POWER_SHIELD { _multiplier: 0.68 }
+aura improved_power_shield_5: !POWER_SHIELD { _multiplier: 0.60 }
 
 ###############################################################################
 # Charging Combat
@@ -470,7 +470,7 @@ ability_modifier charging_combat_3:
 
 cooldown power_shield:
 {
-	duration: 100
+	duration: 150
 	talent_tree: sorcerer_battle_mage
 }
 
@@ -528,21 +528,7 @@ ability power_shield:
 	}
 }
 
-aura power_shield:
-{	
-	string: "Power Shield"
-	description: "Absorbs damage."
-	type: buff
-	duration: 300
-	flags: [ unique charged magic ]	
-	icon: icon_mage_shield
-	charges: { expression: a_mul_x_plus_b a: 3.15 b: 17 x: level }	
-	particle_system: power_shield
-	
-	aura_effect absorb:
-	{
-	}
-}
+aura power_shield: !POWER_SHIELD{ _multiplier: 1.0 }
 
 particle_system power_shield:
 {

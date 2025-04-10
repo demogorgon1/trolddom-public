@@ -120,7 +120,8 @@ namespace tpublic
 
 						ItemList* destinationItemList = m_items.GetOrCreateItemList(entry.m_item.GetWorldboundCharacterId());
 
-						if(destinationItemList->AddToInventory(entry.m_item, aManifest->GetById<Data::Item>(entry.m_item.m_itemId), true))
+						ErrorNotification::Id unusedErrorNotification;
+						if(destinationItemList->AddToInventory(entry.m_item, aManifest->GetById<Data::Item>(entry.m_item.m_itemId), true, unusedErrorNotification))
 							count += entry.m_item.m_quantity;
 
 						entry.m_item.Clear();
@@ -134,7 +135,8 @@ namespace tpublic
 					{
 						ItemList* destinationItemList = m_items.GetOrCreateItemList(item.GetWorldboundCharacterId());
 
-						if (destinationItemList->AddToInventory(item, aManifest->GetById<Data::Item>(item.m_itemId), true))
+						ErrorNotification::Id unusedErrorNotification;
+						if (destinationItemList->AddToInventory(item, aManifest->GetById<Data::Item>(item.m_itemId), true, unusedErrorNotification))
 							count += item.m_quantity;
 
 						item.Clear();

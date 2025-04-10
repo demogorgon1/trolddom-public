@@ -546,3 +546,56 @@ item consumable_strong_elixir_of_the_bear (elixir):
 	string: "Strong Elixir of the Bear"
 	use_ability: consumable_strong_elixir_of_the_bear
 }
+
+#####################################################
+# Mana Salve
+
+aura recently_mana_salved:
+{
+	string: "Soothed"
+	description: "Cannot be soothed with Mana Salve."
+	icon: icon_mana_salve
+	type: debuff
+	flags: [ unique ]
+	duration: 1200
+}
+
+item consumable_mana_salve:
+{
+	item_level: 18
+	icon: icon_mana_salve
+	string: "Mana Salve"
+	stack: 20
+	use_ability: $ability [ icon string ]
+	{
+		description: "Restores 200 mana over 5 seconds."
+		cooldowns: [ global ]
+		flags: [ target_other target_self target_friendly item ]
+		consume_items: { consumable_mana_salve: 1 }
+		states: [ default in_combat ]
+		direct_effect apply_aura: { aura: recently_mana_salved }
+		requirement target<must_not_have_aura>: { id: recently_mana_salved }
+		required_level: 15
+		direct_effect apply_aura: 
+		{ 
+			aura: $aura [ icon string ]
+			{
+				type: buff
+				flags: [ channeled ]
+				duration: based_on_effects
+				aura_effect repeat:
+				{
+					update_interval: 10
+					update_count: 5
+					ability: $ability [ icon string ]
+					{
+						states: [ default in_combat ]
+						flags: [ always_in_range always_in_line_of_sight ]
+						direct_effect modify_resource: { resource: mana function: 40 }					
+					}
+				}			
+			}
+		}
+	}
+}
+

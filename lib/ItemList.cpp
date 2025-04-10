@@ -30,10 +30,14 @@ namespace tpublic
 		const ItemInstance&							aItemInstance,
 		const Data::Item*							aItemData,
 		uint32_t									aSize,
+		ErrorNotification::Id&						aOutErrorNotification,
 		bool										aAutoGrow)
 	{
 		if(aItemData->IsUnique() && HasItems(aItemInstance.m_itemId, 1))
+		{	
+			aOutErrorNotification = ErrorNotification::ID_ALREADY_HAS_ITEM;
 			return false;
+		}
 
 		uint32_t remaining = aItemInstance.m_quantity;
 
@@ -88,6 +92,7 @@ namespace tpublic
 			return true;
 		}
 
+		aOutErrorNotification = ErrorNotification::ID_NOT_ENOUGH_INVENTORY_SPACE;
 		return false;
 	}
 

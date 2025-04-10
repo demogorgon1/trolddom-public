@@ -114,6 +114,18 @@ ability craft_strong_elixir_of_the_giant: !ALCHEMY_CRAFT
 }
 
 #####################################################
+# Mana Salve
+
+ability craft_mana_salve: !ALCHEMY_CRAFT
+{
+	_string: "Mana Salve"
+	_item: consumable_mana_salve
+	_produce: { consumable_mana_salve: 1 } 
+	_materials: { item_sunweave: 2 item_emberbloom: 2 }
+	_skill: 75
+}
+
+#####################################################
 # Healing Potion
 
 ability craft_healing_potion: !ALCHEMY_CRAFT

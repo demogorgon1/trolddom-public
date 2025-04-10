@@ -52,6 +52,7 @@ namespace tpublic
 			ID_CANNOT_BUY_THAT,
 			ID_CANNOT_DO_THAT_INDOOR,
 			ID_CANNOT_DO_THAT_MOUNTED,
+			ID_ALREADY_HAS_ITEM,
 
 			NUM_IDS
 		};
@@ -113,7 +114,8 @@ namespace tpublic
 			{ "Can't afford that!" },
 			{ "Can't buy that!" },
 			{ "Can't do that while indoor!" },
-			{ "Can't do that while mounted!" }
+			{ "Can't do that while mounted!" },
+			{ "Already has item!" },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

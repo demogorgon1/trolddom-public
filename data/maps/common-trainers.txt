@@ -105,4 +105,5 @@
 	train_ability: craft_strong_elixir_of_the_bear
 	train_ability: craft_strong_elixir_of_the_owl
 	train_ability: craft_strong_elixir_of_the_giant
+	train_ability: craft_mana_salve
 }

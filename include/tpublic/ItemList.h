@@ -3,6 +3,7 @@
 #include "Data/Ability.h"
 #include "Data/Item.h"
 
+#include "ErrorNotification.h"
 #include "ItemInstance.h"
 #include "IReader.h"
 #include "IWriter.h"
@@ -47,6 +48,7 @@ namespace tpublic
 								const ItemInstance&							aItemInstance,
 								const Data::Item*							aItemData,
 								uint32_t									aSize,
+								ErrorNotification::Id&						aOutErrorNotification,
 								bool										aAutoGrow = false);
 		bool				CanAddMultipleToInventory(
 								uint32_t									aItemId,

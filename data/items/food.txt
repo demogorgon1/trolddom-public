@@ -48,8 +48,9 @@
 	string: @_string
 	stack: 20
 	use_ability: @_ability
-	loot_groups: @_loot_groups
-	level_range: @_level_range
+		
+	<exists _loot_groups> loot_groups: @_loot_groups
+	<exists _level_range> level_range: @_level_range
 }
 
 !define local AURA_FOOD_BUFF
@@ -65,329 +66,361 @@
 
 #####################################################
 # Dry Bread
-${
-	_string: "Dry Bread"
-	_description: "Restores 240 health and mana over 10 seconds. Can't be used in combat."
-	_level: 1
-	_icon: icon_bread_1
-	_heal_tick: 24
-	_ability_tick: consumable_dry_bread_tick
-	_ability: consumable_dry_bread
-	_aura: consumable_dry_bread
-	_item: { consumable_dry_bread: 1 }
-	_loot_groups: [ world_drops_consumable ]
-	_level_range: [ 1 3 ]
-}
+{
+	${
+		_string: "Dry Bread"
+		_description: "Restores 240 health and mana over 10 seconds. Can't be used in combat."
+		_level: 1
+		_icon: icon_bread_1
+		_heal_tick: 24
+		_ability_tick: consumable_dry_bread_tick
+		_ability: consumable_dry_bread
+		_aura: consumable_dry_bread
+		_item: { consumable_dry_bread: 1 }
+		_loot_groups: [ world_drops_consumable ]
+		_level_range: [ 1 3 ]
+	}
 
-ability consumable_dry_bread_tick: !ABILITY_FOOD_TICK {}
-aura consumable_dry_bread: !AURA_FOOD {}
-ability consumable_dry_bread: !ABILITY_FOOD {}
-item consumable_dry_bread: !ITEM_FOOD {}
+	ability consumable_dry_bread_tick: !ABILITY_FOOD_TICK {}
+	aura consumable_dry_bread: !AURA_FOOD {}
+	ability consumable_dry_bread: !ABILITY_FOOD {}
+	item consumable_dry_bread: !ITEM_FOOD {}
+}
 
 #####################################################
 # Red Apple
-${
-	_string: "Red Apple"
-	_description: "Restores 320 health and mana over 10 seconds. Can't be used in combat."
-	_level: 3
-	_icon: icon_red_apple
-	_heal_tick: 32
-	_ability_tick: consumable_red_apple_tick
-	_ability: consumable_red_apple
-	_aura: consumable_red_apple
-	_item: { consumable_red_apple: 1 }
-	_loot_groups: [ world_drops_consumable ]
-	_level_range: [ 3 7 ]
-}
+{
+	${
+		_string: "Red Apple"
+		_description: "Restores 320 health and mana over 10 seconds. Can't be used in combat."
+		_level: 3
+		_icon: icon_red_apple
+		_heal_tick: 32
+		_ability_tick: consumable_red_apple_tick
+		_ability: consumable_red_apple
+		_aura: consumable_red_apple
+		_item: { consumable_red_apple: 1 }
+		_loot_groups: [ world_drops_consumable ]
+		_level_range: [ 3 7 ]
+	}
 
-ability consumable_red_apple_tick: !ABILITY_FOOD_TICK {}
-aura consumable_red_apple: !AURA_FOOD {}
-ability consumable_red_apple: !ABILITY_FOOD {}
-item consumable_red_apple: !ITEM_FOOD {}
+	ability consumable_red_apple_tick: !ABILITY_FOOD_TICK {}
+	aura consumable_red_apple: !AURA_FOOD {}
+	ability consumable_red_apple: !ABILITY_FOOD {}
+	item consumable_red_apple: !ITEM_FOOD {}
+}
 
 #####################################################
 # Green Apple
-${
-	_string: "Green Apple"
-	_description: "Restores 420 health and mana over 10 seconds. Can't be used in combat."
-	_level: 7
-	_icon: icon_green_apple
-	_heal_tick: 42
-	_ability_tick: consumable_green_apple_tick
-	_ability: consumable_green_apple
-	_aura: consumable_green_apple
-	_item: { consumable_green_apple: 1 }
-	_loot_groups: [ world_drops_consumable ]
-	_level_range: [ 7 14 ]
-}
+{
+	${
+		_string: "Green Apple"
+		_description: "Restores 420 health and mana over 10 seconds. Can't be used in combat."
+		_level: 7
+		_icon: icon_green_apple
+		_heal_tick: 42
+		_ability_tick: consumable_green_apple_tick
+		_ability: consumable_green_apple
+		_aura: consumable_green_apple
+		_item: { consumable_green_apple: 1 }
+		_loot_groups: [ world_drops_consumable ]
+		_level_range: [ 7 14 ]
+	}
 
-ability consumable_green_apple_tick: !ABILITY_FOOD_TICK {}
-aura consumable_green_apple: !AURA_FOOD {}
-ability consumable_green_apple: !ABILITY_FOOD {}
-item consumable_green_apple: !ITEM_FOOD {}
+	ability consumable_green_apple_tick: !ABILITY_FOOD_TICK {}
+	aura consumable_green_apple: !AURA_FOOD {}
+	ability consumable_green_apple: !ABILITY_FOOD {}
+	item consumable_green_apple: !ITEM_FOOD {}
+}
 
 #####################################################
 # Potato Stew
-${
-	_string: "Potato Stew"
-	_description: "Restores 380 health and mana over 10 seconds. Can't be used in combat."
-	_level: 4
-	_icon: icon_stew_2
-	_heal_tick: 38
-	_ability_tick: consumable_potato_stew_tick
-	_ability: consumable_potato_stew
-	_aura: consumable_potato_stew
-	_item: { consumable_potato_stew: 1 }
-	_loot_groups: [ ]
-}
+{
+	${
+		_string: "Potato Stew"
+		_description: "Restores 380 health and mana over 10 seconds. Can't be used in combat."
+		_level: 4
+		_icon: icon_stew_2
+		_heal_tick: 38
+		_ability_tick: consumable_potato_stew_tick
+		_ability: consumable_potato_stew
+		_aura: consumable_potato_stew
+		_item: { consumable_potato_stew: 1 }
+		_loot_groups: [ ]
+	}
 
-aura consumable_potato_stew_buff: !AURA_FOOD_BUFF { _stat_modifiers: { constitution: { add: 2 } } }
-ability consumable_potato_stew_tick: !ABILITY_FOOD_TICK {}
-aura consumable_potato_stew: !AURA_FOOD {}
-ability consumable_potato_stew: !ABILITY_FOOD { _buff: consumable_potato_stew_buff }
-item consumable_potato_stew: !ITEM_FOOD {}
+	aura consumable_potato_stew_buff: !AURA_FOOD_BUFF { _stat_modifiers: { constitution: { add: 2 } } }
+	ability consumable_potato_stew_tick: !ABILITY_FOOD_TICK {}
+	aura consumable_potato_stew: !AURA_FOOD {}
+	ability consumable_potato_stew: !ABILITY_FOOD { _buff: consumable_potato_stew_buff }
+	item consumable_potato_stew: !ITEM_FOOD {}
+}
 
 #####################################################
 # Boiled Potato
-${
-	_string: "Boiled Potato"
-	_description: "Restores 380 health and mana over 10 seconds. Can't be used in combat."
-	_level: 4
-	_icon: icon_boiled_potato
-	_heal_tick: 38
-	_ability_tick: consumable_boiled_potato_tick
-	_ability: consumable_boiled_potato
-	_aura: consumable_boiled_potato
-	_item: { consumable_boiled_potato: 1 }
-	_loot_groups: [ ]
-}
+{
+	${
+		_string: "Boiled Potato"
+		_description: "Restores 380 health and mana over 10 seconds. Can't be used in combat."
+		_level: 4
+		_icon: icon_boiled_potato
+		_heal_tick: 38
+		_ability_tick: consumable_boiled_potato_tick
+		_ability: consumable_boiled_potato
+		_aura: consumable_boiled_potato
+		_item: { consumable_boiled_potato: 1 }
+		_loot_groups: [ ]
+	}
 
-aura consumable_boiled_potato_buff: !AURA_FOOD_BUFF { _stat_modifiers: { spirit: { add: 2 } } }
-ability consumable_boiled_potato_tick: !ABILITY_FOOD_TICK {}
-aura consumable_boiled_potato: !AURA_FOOD {}
-ability consumable_boiled_potato: !ABILITY_FOOD { _buff: consumable_boiled_potato_buff }
-item consumable_boiled_potato: !ITEM_FOOD {}
+	aura consumable_boiled_potato_buff: !AURA_FOOD_BUFF { _stat_modifiers: { spirit: { add: 2 } } }
+	ability consumable_boiled_potato_tick: !ABILITY_FOOD_TICK {}
+	aura consumable_boiled_potato: !AURA_FOOD {}
+	ability consumable_boiled_potato: !ABILITY_FOOD { _buff: consumable_boiled_potato_buff }
+	item consumable_boiled_potato: !ITEM_FOOD {}
+}
 
 #####################################################
 # Pickled Herring
-${
-	_string: "Pickled Herring"
-	_description: "Restores 320 health and mana over 10 seconds. Can't be used in combat."
-	_level: 3
-	_icon: icon_small_blue_fish_cooked
-	_heal_tick: 32
-	_ability_tick: consumable_pickled_herring_tick
-	_ability: consumable_pickled_herring
-	_aura: consumable_pickled_herring
-	_item: { consumable_pickled_herring: 1 }
-	_loot_groups: [ ]
-}
+{
+	${
+		_string: "Pickled Herring"
+		_description: "Restores 320 health and mana over 10 seconds. Can't be used in combat."
+		_level: 3
+		_icon: icon_small_blue_fish_cooked
+		_heal_tick: 32
+		_ability_tick: consumable_pickled_herring_tick
+		_ability: consumable_pickled_herring
+		_aura: consumable_pickled_herring
+		_item: { consumable_pickled_herring: 1 }
+		_loot_groups: [ ]
+	}
 
-aura consumable_pickled_herring_buff: !AURA_FOOD_BUFF { _stat_modifiers: { spirit: { add: 1 } } }
-ability consumable_pickled_herring_tick: !ABILITY_FOOD_TICK {}
-aura consumable_pickled_herring: !AURA_FOOD {}
-ability consumable_pickled_herring: !ABILITY_FOOD { _buff: consumable_pickled_herring_buff }
-item consumable_pickled_herring: !ITEM_FOOD {}
+	aura consumable_pickled_herring_buff: !AURA_FOOD_BUFF { _stat_modifiers: { spirit: { add: 1 } } }
+	ability consumable_pickled_herring_tick: !ABILITY_FOOD_TICK {}
+	aura consumable_pickled_herring: !AURA_FOOD {}
+	ability consumable_pickled_herring: !ABILITY_FOOD { _buff: consumable_pickled_herring_buff }
+	item consumable_pickled_herring: !ITEM_FOOD {}
+}
 
 #####################################################
 # Pickled Sucker
-${
-	_string: "Pickled Sucker"
-	_description: "Restores 420 health and mana over 10 seconds. Can't be used in combat."
-	_level: 5
-	_icon: icon_fish_1_cooked
-	_heal_tick: 42
-	_ability_tick: consumable_pickled_sucker_tick
-	_ability: consumable_pickled_sucker
-	_aura: consumable_pickled_sucker
-	_item: { consumable_pickled_sucker: 1 }
-	_loot_groups: [ ]
-}
+{
+	${
+		_string: "Pickled Sucker"
+		_description: "Restores 420 health and mana over 10 seconds. Can't be used in combat."
+		_level: 5
+		_icon: icon_fish_1_cooked
+		_heal_tick: 42
+		_ability_tick: consumable_pickled_sucker_tick
+		_ability: consumable_pickled_sucker
+		_aura: consumable_pickled_sucker
+		_item: { consumable_pickled_sucker: 1 }
+		_loot_groups: [ ]
+	}
 
-aura consumable_pickled_sucker_buff: !AURA_FOOD_BUFF { _stat_modifiers: { spirit: { add: 1 } constitution: { add: 1 } } }
-ability consumable_pickled_sucker_tick: !ABILITY_FOOD_TICK {}
-aura consumable_pickled_sucker: !AURA_FOOD {}
-ability consumable_pickled_sucker: !ABILITY_FOOD { _buff: consumable_pickled_sucker_buff }
-item consumable_pickled_sucker: !ITEM_FOOD {}
+	aura consumable_pickled_sucker_buff: !AURA_FOOD_BUFF { _stat_modifiers: { spirit: { add: 1 } constitution: { add: 1 } } }
+	ability consumable_pickled_sucker_tick: !ABILITY_FOOD_TICK {}
+	aura consumable_pickled_sucker: !AURA_FOOD {}
+	ability consumable_pickled_sucker: !ABILITY_FOOD { _buff: consumable_pickled_sucker_buff }
+	item consumable_pickled_sucker: !ITEM_FOOD {}
+}
 
 #####################################################
 # Pickled Eel Pie
-${
-	_string: "Pickled Eel Pie"
-	_description: "Restores 500 health and mana over 10 seconds. Can't be used in combat."
-	_level: 7
-	_icon: icon_eel_1_cooked
-	_heal_tick: 50
-	_ability_tick: consumable_pickled_eel_pie_tick
-	_ability: consumable_pickled_eel_pie
-	_aura: consumable_pickled_eel_pie
-	_item: { consumable_pickled_eel_pie: 1 }
-	_loot_groups: [ ]
-}
+{
+	${
+		_string: "Pickled Eel Pie"
+		_description: "Restores 500 health and mana over 10 seconds. Can't be used in combat."
+		_level: 7
+		_icon: icon_eel_1_cooked
+		_heal_tick: 50
+		_ability_tick: consumable_pickled_eel_pie_tick
+		_ability: consumable_pickled_eel_pie
+		_aura: consumable_pickled_eel_pie
+		_item: { consumable_pickled_eel_pie: 1 }
+		_loot_groups: [ ]
+	}
 
-aura consumable_pickled_eel_pie_buff: !AURA_FOOD_BUFF { _stat_modifiers: { strength: { add: 5 } } }
-ability consumable_pickled_eel_pie_tick: !ABILITY_FOOD_TICK {}
-aura consumable_pickled_eel_pie: !AURA_FOOD {}
-ability consumable_pickled_eel_pie: !ABILITY_FOOD { _buff: consumable_pickled_eel_pie_buff }
-item consumable_pickled_eel_pie: !ITEM_FOOD {}
+	aura consumable_pickled_eel_pie_buff: !AURA_FOOD_BUFF { _stat_modifiers: { strength: { add: 5 } } }
+	ability consumable_pickled_eel_pie_tick: !ABILITY_FOOD_TICK {}
+	aura consumable_pickled_eel_pie: !AURA_FOOD {}
+	ability consumable_pickled_eel_pie: !ABILITY_FOOD { _buff: consumable_pickled_eel_pie_buff }
+	item consumable_pickled_eel_pie: !ITEM_FOOD {}
+}
 
 #####################################################
 # Pickled Moonfish
-${
-	_string: "Pickled Moonfish"
-	_description: "Restores 580 health and mana over 10 seconds. Can't be used in combat."
-	_level: 9
-	_icon: icon_fish_2_cooked
-	_heal_tick: 58
-	_ability_tick: consumable_pickled_moonfish_tick
-	_ability: consumable_pickled_moonfish
-	_aura: consumable_pickled_moonfish
-	_item: { consumable_pickled_moonfish: 1 }
-	_loot_groups: [ ]
-}
+{
+	${
+		_string: "Pickled Moonfish"
+		_description: "Restores 580 health and mana over 10 seconds. Can't be used in combat."
+		_level: 9
+		_icon: icon_fish_2_cooked
+		_heal_tick: 58
+		_ability_tick: consumable_pickled_moonfish_tick
+		_ability: consumable_pickled_moonfish
+		_aura: consumable_pickled_moonfish
+		_item: { consumable_pickled_moonfish: 1 }
+		_loot_groups: [ ]
+	}
 
-aura consumable_pickled_moonfish_buff: !AURA_FOOD_BUFF { _stat_modifiers: { wisdom: { add: 5 } } }
-ability consumable_pickled_moonfish_tick: !ABILITY_FOOD_TICK {}
-aura consumable_pickled_moonfish: !AURA_FOOD {}
-ability consumable_pickled_moonfish: !ABILITY_FOOD { _buff: consumable_pickled_moonfish_buff }
-item consumable_pickled_moonfish: !ITEM_FOOD {}
+	aura consumable_pickled_moonfish_buff: !AURA_FOOD_BUFF { _stat_modifiers: { wisdom: { add: 5 } } }
+	ability consumable_pickled_moonfish_tick: !ABILITY_FOOD_TICK {}
+	aura consumable_pickled_moonfish: !AURA_FOOD {}
+	ability consumable_pickled_moonfish: !ABILITY_FOOD { _buff: consumable_pickled_moonfish_buff }
+	item consumable_pickled_moonfish: !ITEM_FOOD {}
+}
 
 #####################################################
 # Ripe Banana
-${
-	_string: "Ripe Banana"
-	_description: "Restores 640 health and mana over 10 seconds. Can't be used in combat."
-	_level: 10
-	_icon: icon_banana
-	_heal_tick: 64
-	_ability_tick: consumable_banana_tick
-	_ability: consumable_banana
-	_aura: consumable_banana
-	_item: { consumable_banana: 1 }
-	_loot_groups: [ world_drops_consumable ]
-	_level_range: [ 9 20 ]
-}
+{
+	${
+		_string: "Ripe Banana"
+		_description: "Restores 640 health and mana over 10 seconds. Can't be used in combat."
+		_level: 10
+		_icon: icon_banana
+		_heal_tick: 64
+		_ability_tick: consumable_banana_tick
+		_ability: consumable_banana
+		_aura: consumable_banana
+		_item: { consumable_banana: 1 }
+		_loot_groups: [ world_drops_consumable ]
+		_level_range: [ 9 20 ]
+	}
 
-ability consumable_banana_tick: !ABILITY_FOOD_TICK {}
-aura consumable_banana: !AURA_FOOD {}
-ability consumable_banana: !ABILITY_FOOD {}
-item consumable_banana: !ITEM_FOOD {}
+	ability consumable_banana_tick: !ABILITY_FOOD_TICK {}
+	aura consumable_banana: !AURA_FOOD {}
+	ability consumable_banana: !ABILITY_FOOD {}
+	item consumable_banana: !ITEM_FOOD {}
+}
 
 #####################################################
 # Spiced Rice
-${
-	_string: "Spiced Rice"
-	_description: "Restores 640 health and mana over 10 seconds. Can't be used in combat."
-	_level: 10
-	_icon: icon_cooked_rice
-	_heal_tick: 64
-	_ability_tick: consumable_spiced_rice_tick
-	_ability: consumable_spiced_rice
-	_aura: consumable_spiced_rice
-	_item: { consumable_spiced_rice: 1 }
-}
+{
+	${
+		_string: "Spiced Rice"
+		_description: "Restores 640 health and mana over 10 seconds. Can't be used in combat."
+		_level: 10
+		_icon: icon_cooked_rice
+		_heal_tick: 64
+		_ability_tick: consumable_spiced_rice_tick
+		_ability: consumable_spiced_rice
+		_aura: consumable_spiced_rice
+		_item: { consumable_spiced_rice: 1 }
+	}
 
-ability consumable_spiced_rice_tick: !ABILITY_FOOD_TICK {}
-aura consumable_spiced_rice: !AURA_FOOD {}
-ability consumable_spiced_rice: !ABILITY_FOOD {}
-item consumable_spiced_rice: !ITEM_FOOD {}
+	ability consumable_spiced_rice_tick: !ABILITY_FOOD_TICK {}
+	aura consumable_spiced_rice: !AURA_FOOD {}
+	ability consumable_spiced_rice: !ABILITY_FOOD {}
+	item consumable_spiced_rice: !ITEM_FOOD {}
+}
 
 #####################################################
 # Pickled Toesnapper
-${
-	_string: "Pickled Toesnapper"
-	_description: "Restores 640 health and mana over 10 seconds. Can't be used in combat."
-	_level: 10
-	_icon: icon_fish_3_cooked
-	_heal_tick: 64
-	_ability_tick: consumable_pickled_toesnapper
-	_ability: consumable_pickled_toesnapper
-	_aura: consumable_pickled_toesnapper
-	_item: { consumable_pickled_toesnapper: 1 }
-}
+{
+	${
+		_string: "Pickled Toesnapper"
+		_description: "Restores 640 health and mana over 10 seconds. Can't be used in combat."
+		_level: 10
+		_icon: icon_fish_3_cooked
+		_heal_tick: 64
+		_ability_tick: consumable_pickled_toesnapper
+		_ability: consumable_pickled_toesnapper
+		_aura: consumable_pickled_toesnapper
+		_item: { consumable_pickled_toesnapper: 1 }
+	}
 
-aura consumable_pickled_toesnapper_buff: !AURA_FOOD_BUFF { _stat_modifiers: { constitution: { add: 3 } } }
-ability consumable_pickled_toesnapper_tick: !ABILITY_FOOD_TICK {}
-aura consumable_pickled_toesnapper: !AURA_FOOD {}
-ability consumable_pickled_toesnapper: !ABILITY_FOOD { _buff: consumable_pickled_toesnapper_buff}
-item consumable_pickled_toesnapper: !ITEM_FOOD {}
+	aura consumable_pickled_toesnapper_buff: !AURA_FOOD_BUFF { _stat_modifiers: { constitution: { add: 3 } } }
+	ability consumable_pickled_toesnapper_tick: !ABILITY_FOOD_TICK {}
+	aura consumable_pickled_toesnapper: !AURA_FOOD {}
+	ability consumable_pickled_toesnapper: !ABILITY_FOOD { _buff: consumable_pickled_toesnapper_buff}
+	item consumable_pickled_toesnapper: !ITEM_FOOD {}
+}
 
 #####################################################
 # Steamed Trout
-${
-	_string: "Steamed Trout"
-	_description: "Restores 800 health and mana over 10 seconds. Can't be used in combat."
-	_level: 11
-	_icon: icon_fish_4_cooked
-	_heal_tick: 80
-	_ability_tick: consumable_steamed_trout
-	_ability: consumable_steamed_trout
-	_aura: consumable_steamed_trout
-	_item: { consumable_steamed_trout: 1 }
-}
+{
+	${
+		_string: "Steamed Trout"
+		_description: "Restores 800 health and mana over 10 seconds. Can't be used in combat."
+		_level: 11
+		_icon: icon_fish_4_cooked
+		_heal_tick: 80
+		_ability_tick: consumable_steamed_trout
+		_ability: consumable_steamed_trout
+		_aura: consumable_steamed_trout
+		_item: { consumable_steamed_trout: 1 }
+	}
 
-aura consumable_steamed_trout_buff: !AURA_FOOD_BUFF { _stat_modifiers: { wisdom: { add: 3 } } }
-ability consumable_steamed_trout_tick: !ABILITY_FOOD_TICK {}
-aura consumable_steamed_trout: !AURA_FOOD {}
-ability consumable_steamed_trout: !ABILITY_FOOD { _buff: consumable_steamed_trout_buff }
-item consumable_steamed_trout: !ITEM_FOOD {}
+	aura consumable_steamed_trout_buff: !AURA_FOOD_BUFF { _stat_modifiers: { wisdom: { add: 3 } } }
+	ability consumable_steamed_trout_tick: !ABILITY_FOOD_TICK {}
+	aura consumable_steamed_trout: !AURA_FOOD {}
+	ability consumable_steamed_trout: !ABILITY_FOOD { _buff: consumable_steamed_trout_buff }
+	item consumable_steamed_trout: !ITEM_FOOD {}
+}
 
 #####################################################
 # Seared Bass
-${
-	_string: "Seared Bass"
-	_description: "Restores 960 health and mana over 10 seconds. Can't be used in combat."
-	_level: 12
-	_icon: icon_fish_5_cooked
-	_heal_tick: 96
-	_ability_tick: consumable_seared_bass
-	_ability: consumable_seared_bass
-	_aura: consumable_seared_bass
-	_item: { consumable_seared_bass: 1 }
-}
+{
+	${
+		_string: "Seared Bass"
+		_description: "Restores 960 health and mana over 10 seconds. Can't be used in combat."
+		_level: 12
+		_icon: icon_fish_5_cooked
+		_heal_tick: 96
+		_ability_tick: consumable_seared_bass
+		_ability: consumable_seared_bass
+		_aura: consumable_seared_bass
+		_item: { consumable_seared_bass: 1 }
+	}
 
-aura consumable_seared_bass_buff: !AURA_FOOD_BUFF { _stat_modifiers: { dexterity: { add: 3 } } }
-ability consumable_seared_bass_tick: !ABILITY_FOOD_TICK {}
-aura consumable_seared_bass: !AURA_FOOD {}
-ability consumable_seared_bass: !ABILITY_FOOD { _buff: consumable_seared_bass_buff }
-item consumable_seared_bass: !ITEM_FOOD {}
+	aura consumable_seared_bass_buff: !AURA_FOOD_BUFF { _stat_modifiers: { dexterity: { add: 3 } } }
+	ability consumable_seared_bass_tick: !ABILITY_FOOD_TICK {}
+	aura consumable_seared_bass: !AURA_FOOD {}
+	ability consumable_seared_bass: !ABILITY_FOOD { _buff: consumable_seared_bass_buff }
+	item consumable_seared_bass: !ITEM_FOOD {}
+}
 
 #####################################################
 # Spicy Perch Fillet
-${
-	_string: "Spicy Perch Fillet"
-	_description: "Restores 1120 health and mana over 10 seconds. Can't be used in combat."
-	_level: 14
-	_icon: icon_fish_6_cooked
-	_heal_tick: 112
-	_ability_tick: consumable_spicy_perch_fillet
-	_ability: consumable_spicy_perch_fillet
-	_aura: consumable_spicy_perch_fillet
-	_item: { consumable_spicy_perch_fillet: 1 }
-}
+{
+	${
+		_string: "Spicy Perch Fillet"
+		_description: "Restores 1120 health and mana over 10 seconds. Can't be used in combat."
+		_level: 14
+		_icon: icon_fish_6_cooked
+		_heal_tick: 112
+		_ability_tick: consumable_spicy_perch_fillet
+		_ability: consumable_spicy_perch_fillet
+		_aura: consumable_spicy_perch_fillet
+		_item: { consumable_spicy_perch_fillet: 1 }
+	}
 
-aura consumable_spicy_perch_fillet_buff: !AURA_FOOD_BUFF { _stat_modifiers: { strength: { add: 3 } } }
-ability consumable_spicy_perch_fillet_tick: !ABILITY_FOOD_TICK {}
-aura consumable_spicy_perch_fillet: !AURA_FOOD {}
-ability consumable_spicy_perch_fillet: !ABILITY_FOOD { _buff: consumable_spicy_perch_fillet_buff }
-item consumable_spicy_perch_fillet: !ITEM_FOOD {}
+	aura consumable_spicy_perch_fillet_buff: !AURA_FOOD_BUFF { _stat_modifiers: { strength: { add: 3 } } }
+	ability consumable_spicy_perch_fillet_tick: !ABILITY_FOOD_TICK {}
+	aura consumable_spicy_perch_fillet: !AURA_FOOD {}
+	ability consumable_spicy_perch_fillet: !ABILITY_FOOD { _buff: consumable_spicy_perch_fillet_buff }
+	item consumable_spicy_perch_fillet: !ITEM_FOOD {}
+}
 
 #####################################################
 # Mistveil Balls
-${
-	_string: "Mistveil Balls"
-	_description: "Restores 1280 health and mana over 10 seconds. Can't be used in combat."
-	_level: 16
-	_icon: icon_fish_7_cooked
-	_heal_tick: 128
-	_ability_tick: consumable_mistveil_balls
-	_ability: consumable_mistveil_balls
-	_aura: consumable_mistveil_balls
-	_item: { consumable_mistveil_balls: 1 }
-}
+{
+	${
+		_string: "Mistveil Balls"
+		_description: "Restores 1280 health and mana over 10 seconds. Can't be used in combat."
+		_level: 16
+		_icon: icon_fish_7_cooked
+		_heal_tick: 128
+		_ability_tick: consumable_mistveil_balls
+		_ability: consumable_mistveil_balls
+		_aura: consumable_mistveil_balls
+		_item: { consumable_mistveil_balls: 1 }
+	}
 
-aura consumable_mistveil_balls_buff: !AURA_FOOD_BUFF { _stat_modifiers: { constitution: { add: 4 } } }
-ability consumable_mistveil_balls_tick: !ABILITY_FOOD_TICK {}
-aura consumable_mistveil_balls: !AURA_FOOD {}
-ability consumable_mistveil_balls: !ABILITY_FOOD { _buff: consumable_mistveil_balls_buff }
-item consumable_mistveil_balls: !ITEM_FOOD {}
+	aura consumable_mistveil_balls_buff: !AURA_FOOD_BUFF { _stat_modifiers: { constitution: { add: 4 } } }
+	ability consumable_mistveil_balls_tick: !ABILITY_FOOD_TICK {}
+	aura consumable_mistveil_balls: !AURA_FOOD {}
+	ability consumable_mistveil_balls: !ABILITY_FOOD { _buff: consumable_mistveil_balls_buff }
+	item consumable_mistveil_balls: !ITEM_FOOD {}
+}
