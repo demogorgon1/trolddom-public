@@ -298,6 +298,16 @@ namespace tpublic
 		}
 
 		void
+		GetIdSet(
+			DataType::Id					aDataType,
+			std::unordered_set<uint32_t>&	aOut) const
+		{
+			TP_VERIFY(m_type == TYPE_ARRAY, m_debugInfo, "Not an array.");
+			for (const std::unique_ptr<SourceNode>& child : m_children)
+				aOut.insert(m_sourceContext->m_persistentIdTable->GetId(child->m_debugInfo, aDataType, child->GetIdentifier()));
+		}
+
+		void
 		GetNullOptionalIdArray(
 			DataType::Id				aDataType,
 			std::vector<uint32_t>&		aOut) const
@@ -364,6 +374,16 @@ namespace tpublic
 			TP_VERIFY(m_type == TYPE_ARRAY, m_debugInfo, "Not an array.");
 			for (const std::unique_ptr<SourceNode>& child : m_children)
 				aOut.push_back((_T)child->GetUInt32());
+		}
+
+		template <typename _T>
+		void
+		GetUIntSet(
+			std::vector<_T>&				aOut) const
+		{
+			TP_VERIFY(m_type == TYPE_ARRAY, m_debugInfo, "Not an array.");
+			for (const std::unique_ptr<SourceNode>& child : m_children)
+				aOut.insert((_T)child->GetUInt32());
 		}
 
 		void

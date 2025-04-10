@@ -11,6 +11,11 @@ changelog:
 		{ text: "Level cap raised to 20." }		
 		{ text: "New zones, dungeons, talents, and a lot more." }
 	]	
+	
+}
+
+changelog_old:
+{
 
 	#######################################################################################
 	heading: "v0.1.20"

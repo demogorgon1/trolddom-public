@@ -25,6 +25,8 @@ namespace tpublic
 					m_maxExtraStashSlots = aChild->GetUInt32();
 				else if (aChild->m_name == "additional_extra_stash_slot_price_multiplier")
 					m_additionalExtraStashSlotPriceMultiplier = aChild->GetFloat();
+				else if(aChild->m_name == "demo_maps")
+					aChild->GetIdSet(DataType::ID_MAP, m_demoMaps);
 				else
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 			});
@@ -38,6 +40,7 @@ namespace tpublic
 			aStream->WriteInt(m_maxExtraStashSlotPrice);
 			aStream->WriteUInt(m_maxExtraStashSlots);
 			aStream->WriteFloat(m_additionalExtraStashSlotPriceMultiplier);
+			aStream->WriteUIntSet(m_demoMaps);
 		}
 
 		bool
@@ -51,6 +54,8 @@ namespace tpublic
 			if (!aStream->ReadUInt(m_maxExtraStashSlots))
 				return false;
 			if (!aStream->ReadFloat(m_additionalExtraStashSlotPriceMultiplier))
+				return false;
+			if (!aStream->ReadUIntSet(m_demoMaps))
 				return false;
 			return true;
 		}
@@ -73,10 +78,11 @@ namespace tpublic
 		}
 				
 		// Public data
-		int64_t			m_firstExtraStashSlotPrice = 0;
-		int64_t			m_maxExtraStashSlotPrice = 0;
-		uint32_t		m_maxExtraStashSlots = 0;
-		float			m_additionalExtraStashSlotPriceMultiplier = 0.0f;
+		int64_t							m_firstExtraStashSlotPrice = 0;
+		int64_t							m_maxExtraStashSlotPrice = 0;
+		uint32_t						m_maxExtraStashSlots = 0;
+		float							m_additionalExtraStashSlotPriceMultiplier = 0.0f;
+		std::unordered_set<uint32_t>	m_demoMaps;
 	};
 
 }

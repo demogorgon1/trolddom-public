@@ -1,6 +1,11 @@
 misc_metrics:
 {
 	##################################################################
+	# Demo
+
+	demo_maps: [ open_world dungeon_1 player_world gateway_world lair_of_zuthyg ]
+
+	##################################################################
 	# Stash expansion
 	
 	first_extra_stash_slot_price: 2000

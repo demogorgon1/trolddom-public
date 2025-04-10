@@ -170,6 +170,7 @@ namespace tpublic
 		m_defaultSoundEffects.ToStream(aStream);
 		m_tileLayering.ToStream(aStream);
 		aStream->WriteOptionalObjectPointer(m_changelog);
+		aStream->WriteOptionalObjectPointer(m_changelogOld);
 		aStream->WriteUInt(m_baseTileBorderPatternSpriteId);
 	}
 
@@ -211,6 +212,8 @@ namespace tpublic
 		if (!m_tileLayering.FromStream(aStream))
 			return false;
 		if(!aStream->ReadOptionalObjectPointer(m_changelog))
+			return false;
+		if (!aStream->ReadOptionalObjectPointer(m_changelogOld))
 			return false;
 		if(!aStream->ReadUInt(m_baseTileBorderPatternSpriteId))
 			return false;

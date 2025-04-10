@@ -26,8 +26,8 @@ dialogue_screen .seacaptain_dialogue:
 
 dialogue_root .seacaptain_dialogue:
 {
-	.seacaptain_dialogue: { }
 	.seacaptain_demo: { conditions: [ .seacaptain_demo ] }
+	.seacaptain_dialogue: { }
 }
 
 entity .seacaptain: !NPC

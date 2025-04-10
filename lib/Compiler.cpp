@@ -445,6 +445,10 @@ namespace tpublic
 		{
 			m_manifest->m_changelog = std::make_unique<Document>(aNode);
 		}
+		else if (aNode->m_name == "changelog_old")
+		{
+			m_manifest->m_changelogOld = std::make_unique<Document>(aNode);
+		}
 		else if(aNode->m_name == "base_tile_border_pattern_sprite")
 		{
 			m_manifest->m_baseTileBorderPatternSpriteId = aNode->GetId(DataType::ID_SPRITE);
