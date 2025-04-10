@@ -10,6 +10,7 @@ changelog:
 	[
 		{ text: "Level cap raised to 20." }		
 		{ text: "New zones, dungeons, talents, and a lot more." }
+		{ text: "Demo now includes all previous content up to level 10." }
 	]	
 	
 }
