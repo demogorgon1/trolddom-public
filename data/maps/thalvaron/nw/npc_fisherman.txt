@@ -101,7 +101,7 @@ objective .fisherman_2:
 
 {
 	${ _level: 12 }
-	item .fisherman_2_a: !QUEST_REWARD_1H_KNIFE{ _string: "Crab Tickler" _icon: icon_knife_2 _dexterity: 1 }
+	item .fisherman_2_a: !QUEST_REWARD_1H_KNIFE{ _string: "Crab Tickler" _icon: icon_knife_2 _dexterity: 1 _weapon_cooldown: 18 }
 	item .fisherman_2_b: !QUEST_REWARD_WAIST{ _string: "Chain-Link Waistband" _icon: icon_mail_belt_3 _spirit: 1 _constitution: 2 _type: armor_mail }
 }
 

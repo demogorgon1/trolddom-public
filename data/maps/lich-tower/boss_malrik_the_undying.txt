@@ -31,6 +31,7 @@ loot_table .malrik_the_undying:
 		_constitution: 1
 		_budget_bias: -10
 		_phys_crit: 1
+		_weapon_cooldown: 34
 	}
 	
 	item lich_tower_23: !BOSS_DROP_2H_STAFF
@@ -42,6 +43,7 @@ loot_table .malrik_the_undying:
 		_spell_damage: 3
 		_budget_bias: -10
 		_spell_crit: 1
+		_weapon_cooldown: 22
 	}
 	
 	item lich_tower_24: !BOSS_DROP_OFFHAND
@@ -61,6 +63,7 @@ loot_table .malrik_the_undying:
 		_strength: 2
 		_budget_bais: -10
 		_dodge: 1
+		_weapon_cooldown: 22		
 	}
 	
 	item lich_tower_26: !BOSS_DROP_2H_STAFF
@@ -71,6 +74,7 @@ loot_table .malrik_the_undying:
 		_strength: 3
 		_budget_bias: -10
 		_phys_crit: 1
+		_weapon_cooldown: 30
 	}
 	
 }

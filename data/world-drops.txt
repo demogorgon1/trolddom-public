@@ -55,14 +55,14 @@ loot_group birds_uncommon: {}
 
 !define WORLD_DROPS
 {
-	possibility: { weight: 1050 }
+	possibility: { weight: 950 }
 	possibility: { weight: 500 loot_group: world_drops_junk }
 	possibility: { weight: 105 loot_group: world_drops_consumable }	
-	possibility: { weight: 95 loot_group: world_drops_uncommon }	
-	possibility: { weight: 32 loot_group: world_drops_uncommon_recipe_random }		
+	possibility: { weight: 105 loot_group: world_drops_uncommon }	
+	possibility: { weight: 34 loot_group: world_drops_uncommon_recipe_random }		
 	possibility: { weight: 24 loot_group: world_drops_uncommon_recipe }	
 	possibility: { weight: 24 loot_group: world_drops_rare }	
-	possibility: { weight: 12 loot_group: world_drops_rare_recipe_random }	
+	possibility: { weight: 14 loot_group: world_drops_rare_recipe_random }	
 	possibility: { weight: 12 loot_group: world_drops_rare_recipe }	
 	possibility: { weight: 1 loot_group: world_drops_epic }	
 		

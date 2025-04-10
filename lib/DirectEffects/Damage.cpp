@@ -30,7 +30,11 @@ namespace tpublic::DirectEffects
 				}
 				else if(aChild->m_name == "conditional_critical_chance_bonus")
 				{
-					m_conditionalCriticalChanceBonuses.push_back(ConditionalCriticalChanceBonus(aChild));
+					m_conditionalCriticalChanceBonuses.push_back(ConditionalCriticalChanceBonus(ConditionalCriticalChanceBonus::TYPE_ABILITY_MODIFIER, aChild));
+				}
+				else if (aChild->m_name == "aura_conditional_critical_chance_bonus")
+				{
+					m_conditionalCriticalChanceBonuses.push_back(ConditionalCriticalChanceBonus(ConditionalCriticalChanceBonus::TYPE_AURA, aChild));
 				}
 				else if(aChild->m_name == "function")
 				{
@@ -155,7 +159,7 @@ namespace tpublic::DirectEffects
 			else
 				chance = sourceCombatPrivate->m_physicalCriticalStrikeChance;
 
-			chance += _GetCriticalChanceBonus(abilityModifiers);
+			chance += _GetCriticalChanceBonus(sourceAuras, abilityModifiers);
 
 			if(Helpers::RandomFloat(aRandom) < chance / 100.0f)
 			{
@@ -346,6 +350,7 @@ namespace tpublic::DirectEffects
 
 	float			
 	Damage::_GetCriticalChanceBonus(
+		const Components::Auras*			aAuras,
 		const Components::AbilityModifiers*	aAbilityModifiers) const
 	{
 		if(m_conditionalCriticalChanceBonuses.empty() || aAbilityModifiers == NULL)
@@ -355,8 +360,21 @@ namespace tpublic::DirectEffects
 
 		for(const ConditionalCriticalChanceBonus& t : m_conditionalCriticalChanceBonuses)
 		{
-			if(aAbilityModifiers->HasActive(t.m_abilityModifierId))
-				bonus += t.m_percent;
+			switch(t.m_type)
+			{
+			case ConditionalCriticalChanceBonus::TYPE_ABILITY_MODIFIER:
+				if (aAbilityModifiers->HasActive(t.m_id))
+					bonus += t.m_percent;
+				break;
+
+			case ConditionalCriticalChanceBonus::TYPE_AURA:
+				if(aAuras->HasAura(t.m_id))
+					bonus += t.m_percent;
+				break;
+
+			default:
+				break;
+			}
 		}
 
 		return bonus;

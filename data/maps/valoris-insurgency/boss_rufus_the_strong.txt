@@ -29,6 +29,7 @@ loot_table .rufus_the_strong:
 		_constitution: 2
 		_strength: 3
 		_dexterity: 1
+		_weapon_cooldown: 34
 	}
 	
 	item valoris_insurgency_20: !BOSS_DROP_CHEST

@@ -9,6 +9,11 @@
 namespace tpublic
 {
 
+	namespace Components
+	{
+		struct Auras;
+	}
+
 	namespace DirectEffects
 	{
 
@@ -19,16 +24,32 @@ namespace tpublic
 
 			struct ConditionalCriticalChanceBonus
 			{
+				enum Type : uint8_t
+				{
+					INVALID_TYPE,
+
+					TYPE_ABILITY_MODIFIER,
+					TYPE_AURA
+				};
+
 				ConditionalCriticalChanceBonus()
 				{
 
 				}
 
 				ConditionalCriticalChanceBonus(
+					Type											aType,
 					const SourceNode*								aSource)
+					: m_type(aType)
 				{
-					TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing ability modifier annotation.");
-					m_abilityModifierId = aSource->m_annotation->GetId(DataType::ID_ABILITY_MODIFIER);
+					TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing data annotation.");
+					switch(m_type)
+					{
+					case TYPE_ABILITY_MODIFIER: m_id = aSource->m_annotation->GetId(DataType::ID_ABILITY_MODIFIER); break;
+					case TYPE_AURA:				m_id = aSource->m_annotation->GetId(DataType::ID_AURA); break;
+					default:					assert(false);
+					}
+
 					m_percent = aSource->GetFloat();
 				}
 
@@ -36,7 +57,8 @@ namespace tpublic
 				ToStream(
 					IWriter*										aStream) const
 				{
-					aStream->WriteUInt(m_abilityModifierId);
+					aStream->WritePOD(m_type);
+					aStream->WriteUInt(m_id);
 					aStream->WriteFloat(m_percent);
 				}
 
@@ -44,7 +66,9 @@ namespace tpublic
 				FromStream(
 					IReader*										aStream)
 				{
-					if(!aStream->ReadUInt(m_abilityModifierId))
+					if(!aStream->ReadPOD(m_type))
+						return false;
+					if(!aStream->ReadUInt(m_id))
 						return false;
 					if(!aStream->ReadFloat(m_percent))
 						return false;
@@ -52,7 +76,8 @@ namespace tpublic
 				}
 
 				// Public data
-				uint32_t				m_abilityModifierId = 0;
+				Type					m_type = INVALID_TYPE;
+				uint32_t				m_id = 0;
 				float					m_percent = 0.0f;
 			};
 
@@ -108,6 +133,7 @@ namespace tpublic
 											const AbilityModifierList*			aAbilityModifierList,
 											uint32_t							aAbilityId) const;
 			float						_GetCriticalChanceBonus(
+											const Components::Auras*			aAuras,
 											const Components::AbilityModifiers*	aAbilityModifiers) const;
 			float						_GetDamageModifier(
 											const Components::AbilityModifiers*	aAbilityModifiers) const;

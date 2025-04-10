@@ -29,6 +29,7 @@ loot_table .anatar:
 		_spell_damage: 3
 		_wisdom: 2
 		_constitution: 1
+		_weapon_cooldown: 18
 	}
 	
 	item lich_tower_13: !BOSS_DROP_FEET

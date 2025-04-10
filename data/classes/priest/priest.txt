@@ -71,7 +71,7 @@ class priest:
 		{ level: 7 unlock_abilities: [ dwindle ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} }	resource mana: { add_max: 6 } }		
 		{ level: 8 unlock_abilities: [ toughen_up ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } } 
 		{ level: 9 unlock_abilities: [ inner_peace ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
-		{ level: 10 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } } 
+		{ level: 10 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } achievement: priest_level_10 } 
 		{ level: 11 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} }	resource mana: { add_max: 6 } }		
 		{ level: 12 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } } 
 		{ level: 13 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} }	resource mana: { add_max: 6 } }		
@@ -81,7 +81,7 @@ class priest:
 		{ level: 17 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} }	resource mana: { add_max: 6 } }		
 		{ level: 18 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } } 
 		{ level: 19 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} }	resource mana: { add_max: 6 } }		
-		{ level: 20 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } achievement: priest_level_10 } 		
+		{ level: 20 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } achievement: priest_level_20 } 		
 	]
 	
 	gear_optimization default<{ weapon_dps_weight: 0.0 }>:
@@ -118,6 +118,17 @@ achievement priest_level_10:
 	points: 10 
 	icon: icon_priest
 	no_progress_values: true 
+}
+
+achievement priest_level_20: 
+{ 
+	category: general 
+	string: "Priest (Level 20)" 
+	description: "Reach level 20 as a Priest." 
+	points: 10 
+	icon: icon_priest
+	no_progress_values: true 
+	root: priest_level_20
 }
 
 ###############################################################################

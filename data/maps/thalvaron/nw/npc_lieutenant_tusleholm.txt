@@ -50,8 +50,8 @@ objective .lieutenant_tusleholm_1:
 
 {
 	${ _level: 12 }
-	item .lieutenant_tusleholm_1_a: !QUEST_REWARD_2H_STAFF{ _string: "Mudslinger Staff" _icon: icon_staff_1 _spell_damage: 1 _spirit: 1 }
-	item .lieutenant_tusleholm_1_b: !QUEST_REWARD_1H_MACE{ _string: "Muddy Club" _icon: icon_mace_1 _constitution: 1 }
+	item .lieutenant_tusleholm_1_a: !QUEST_REWARD_2H_STAFF{ _string: "Mudslinger Staff" _icon: icon_staff_1 _spell_damage: 1 _spirit: 1 _weapon_cooldown: 22 }
+	item .lieutenant_tusleholm_1_b: !QUEST_REWARD_1H_MACE{ _string: "Muddy Club" _icon: icon_mace_1 _constitution: 1 _weapon_cooldown: 24 }
 	item .lieutenant_tusleholm_1_c: !QUEST_REWARD_WRISTS{ _string: "City Guard Cuffs" _icon: icon_mail_bracers_1 _wisdom: 1 _mana_per_5: 1 _type: armor_cloth }
 }
 

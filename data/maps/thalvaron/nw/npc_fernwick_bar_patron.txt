@@ -54,7 +54,7 @@ objective .fernwick_bar_patron_1:
 
 {
 	${ _level: 10 }
-	item .fernwick_bar_patron_1_a: !QUEST_REWARD_1H_SWORD{ _string: "Roger's Sticker" _icon: icon_sword_3 _dexterity: 2 _constitution: 1 }
+	item .fernwick_bar_patron_1_a: !QUEST_REWARD_1H_SWORD{ _string: "Roger's Sticker" _icon: icon_sword_3 _dexterity: 2 _constitution: 1 _weapon_cooldown: 20 }
 	item .fernwick_bar_patron_1_b: !QUEST_REWARD_WAIST{ _string: "Delicate Rope Sash" _icon: icon_antenna _wisdom: 2 _dexterity: 1 _type: armor_cloth }
 }
 

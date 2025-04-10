@@ -122,7 +122,7 @@ class fighter:
 		{ level: 5 unlock_abilities: [ taunt ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }				
 		{ level: 6 unlock_abilities: [ bash ] stats: { strength: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }				
 		{ level: 7 unlock_abilities: [ whirlwind ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }				
-		{ level: 8 unlock_abilities: [ throw_rock ] stats: { strength: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }				
+		{ level: 8 unlock_abilities: [ relentless_overpower ] stats: { strength: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }				
 		{ level: 9 unlock_abilities: [ hamstring ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }				
 		{ level: 10 unlock_abilities: [ fortify ] stats: { strength: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } achievement: fighter_level_10 }				
 		{ level: 11 unlock_abilities: [ ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }				
@@ -134,7 +134,7 @@ class fighter:
 		{ level: 17 unlock_abilities: [ ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }				
 		{ level: 18 unlock_abilities: [ ] stats: { strength: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }				
 		{ level: 19 unlock_abilities: [ ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }				
-		{ level: 20 unlock_abilities: [ ] stats: { strength: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }									
+		{ level: 20 unlock_abilities: [ ] stats: { strength: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } achievement: fighter_level_20 }									
 	]
 	
 	gear_optimization default<{ weapon_dps_weight: 1.0 }>:
@@ -156,6 +156,17 @@ achievement fighter_level_10:
 	points: 10 
 	icon: icon_fighter 
 	no_progress_values: true 
+}
+
+achievement fighter_level_20: 
+{ 
+	category: general 
+	string: "Fighter (Level 20)" 
+	description: "Reach level 20 as a Fighter." 
+	points: 10 
+	icon: icon_fighter 
+	no_progress_values: true 
+	root: fighter_level_10
 }
 
 ###############################################################################

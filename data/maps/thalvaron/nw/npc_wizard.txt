@@ -64,9 +64,9 @@ entity thalvaron_wizard_door:
 
 {
 	${ _level: 14 }
-	item .wizard_1_a: !QUEST_REWARD_2H_STAFF{ _string: "Cane of Eastview" _icon: icon_staff_4 _wisdom: 1 _constitution: 1 _spell_damage: 1 }
-	item .wizard_1_b: !QUEST_REWARD_2H_SWORD{ _string: "Smooth Longblade" _icon: icon_sword_5 _strength: 3 _constitution: 1 }
-	item .wizard_1_c: !QUEST_REWARD_1H_AXE{ _string: "Woodman's Axe" _icon: icon_axe_3 _strength: 1 _constitution: 3 }
+	item .wizard_1_a: !QUEST_REWARD_2H_STAFF{ _string: "Cane of Eastview" _icon: icon_staff_4 _wisdom: 1 _constitution: 1 _spell_damage: 1 _weapon_cooldown: 20 }
+	item .wizard_1_b: !QUEST_REWARD_2H_SWORD{ _string: "Smooth Longblade" _icon: icon_sword_5 _strength: 3 _constitution: 1 _weapon_cooldown: 30 }
+	item .wizard_1_c: !QUEST_REWARD_1H_AXE{ _string: "Woodman's Axe" _icon: icon_axe_3 _strength: 1 _constitution: 3 _weapon_cooldown: 20 }
 }
 
 quest .wizard_1:

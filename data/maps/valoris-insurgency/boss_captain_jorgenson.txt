@@ -61,6 +61,7 @@ loot_table .captain_jorgenson:
 		_strength: 2
 		_budget_bias: -10
 		_phys_crit: 1
+		_weapon_cooldown: 24
 	}
 	
 	item valoris_insurgency_5: !BOSS_DROP_1H_SWORD
@@ -71,6 +72,7 @@ loot_table .captain_jorgenson:
 		_budget_bias: -10
 		_spell_crit: 1
 		_spell_damage: 2
+		_weapon_cooldown: 20
 	}
 	
 	item valoris_insurgency_6: !BOSS_DROP_SHIELD

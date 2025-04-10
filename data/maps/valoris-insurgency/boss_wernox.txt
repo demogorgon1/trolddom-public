@@ -29,6 +29,7 @@ loot_table .wernox:
 		_constitution: 1
 		_wisdom: 2
 		_spell_damage: 3
+		_weapon_cooldown: 24
 	}
 	
 	item valoris_insurgency_14: !BOSS_DROP_FINGER

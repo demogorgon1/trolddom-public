@@ -116,7 +116,7 @@ objective .farmer_rabbit_1_b:
 
 {
 	${ _level: 12 }
-	item .farmer_rabbit_1_a: !QUEST_REWARD_2H_MACE{ _string: "Farmer's Skull Whacker" _icon: icon_mace_2 _strength: 2 _constitution: 1 }
+	item .farmer_rabbit_1_a: !QUEST_REWARD_2H_MACE{ _string: "Farmer's Skull Whacker" _icon: icon_mace_2 _strength: 2 _constitution: 1 _weapon_cooldown: 32 }
 	item .farmer_rabbit_1_b: !QUEST_REWARD_LEGS{ _string: "Leggings of the Wise" _icon: icon_pants_1 _wisdom: 1 _type: armor_cloth }
 }
 

@@ -107,7 +107,7 @@ class witch:
 		{ level: 7 unlock_abilities: [ blind ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
 		{ level: 8 unlock_abilities: [ curse_of_attraction ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
 		{ level: 9 unlock_abilities: [ shackle_undeath ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
-		{ level: 10 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
+		{ level: 10 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } achievement: witch_level_10 }
 		{ level: 11 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
 		{ level: 12 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
 		{ level: 13 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
@@ -117,7 +117,7 @@ class witch:
 		{ level: 17 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
 		{ level: 18 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
 		{ level: 19 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
-		{ level: 20 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } achievement: witch_level_10 }
+		{ level: 20 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } achievement: witch_level_20 }
 	]
 	
 	gear_optimization default<{ weapon_dps_weight: 0.0 }>:
@@ -139,6 +139,17 @@ achievement witch_level_10:
 	points: 10 
 	icon: icon_witch
 	no_progress_values: true 
+}
+
+achievement witch_level_20: 
+{ 
+	category: general 
+	string: "Witch (Level 20)" 
+	description: "Reach level 20 as a Witch." 
+	points: 10 
+	icon: icon_witch
+	no_progress_values: true 
+	root: witch_level_10
 }
 
 ###############################################################################

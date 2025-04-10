@@ -597,6 +597,7 @@ ability strike:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
+		aura_conditional_critical_chance_bonus<relentless_overpower>: 50
 		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 4 ] [ 10 8 ] [ 20 16 ] ] }
 	}
 }
@@ -644,6 +645,7 @@ ability whirlwind:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
+		aura_conditional_critical_chance_bonus<relentless_overpower>: 50		
 		function: { expression: x x: weapon }		
 	}
 }
@@ -706,5 +708,32 @@ ability charge:
 		move_flags: [ walkable_path_required ]
 		max_steps: 10
 		trigger_ability_on_resolve<target>: charge_trigger
+	}
+}
+
+###############################################################################
+# Relentless Overpower
+
+ability relentless_overpower:
+{
+	string: "Relentless Overpower"
+	description: "Increase the critical strike chance of Strike and Whirlwind by 50% for 10 seconds."
+	range: 1	
+	cooldown: $cooldown { duration: 1800 }
+	flags: [ target_self ]
+	states: [ default in_combat ]
+	icon: icon_special_14
+	delay: 3
+	talent_tree: fighter_combat
+		
+	direct_effect apply_aura:
+	{
+		aura: $aura @<ability> [ string icon ]
+		{
+			description: "Critical strike chance of Strike and Whirlwind increased by 50%."
+			type: buff
+			duration: 100
+			flags: [ unique ]			
+		}
 	}
 }

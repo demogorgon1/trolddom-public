@@ -30,6 +30,7 @@ loot_table .tree:
 		_strength: 2
 		_budget_bias: -10
 		_parry: 1
+		_weapon_cooldown: 18
 	}
 	
 	item tirnwood_thicket_14: !BOSS_DROP_2H_MACE
@@ -39,6 +40,7 @@ loot_table .tree:
 		_strength: 1
 		_budget_bias: -10
 		_phys_crit: 1
+		_weapon_cooldown: 36
 	}
 	
 	item tirnwood_thicket_15: !BOSS_DROP_CHEST

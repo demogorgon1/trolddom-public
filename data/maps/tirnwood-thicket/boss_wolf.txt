@@ -60,6 +60,7 @@ loot_table .wolf:
 		_constitution: 2
 		_wisdom: 1
 		_healing: 3
+		_weapon_cooldown: 20
 	}
 	
 	item tirnwood_thicket_5: !BOSS_DROP_BOW

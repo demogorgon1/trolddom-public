@@ -166,6 +166,7 @@
 	<exists _type> type: @_type
 	<exists _item_aura> aura: @_item_aura
 	<exists _budget_bias> budget_bias: @_budget_bias
+	<exists _weapon_cooldown> weapon_cooldown: @_weapon_cooldown
 
 	<exists _rarity> rarity: @_rarity
 	<!exists _rarity> rarity: uncommon	
@@ -231,6 +232,7 @@
 	<exists _item_aura> aura: @_item_aura
 	<exists _loot_group> loot_groups: [ @_loot_group ]
 	<exists _budget_bias> budget_bias: @_budget_bias
+	<exists _weapon_cooldown> weapon_cooldown: @_weapon_cooldown
 
 	<exists _rarity> rarity: @_rarity
 	<!exists _rarity> rarity: uncommon		

@@ -769,6 +769,12 @@ sprites:
 	sprite icon_ring_14 : { tags: [ icon finger ] icon_meta_data: !ICON_UNCOMMON_14{} }
 	sprite icon_cape_5 : { tags: [ icon back ] icon_meta_data: !ICON_UNCOMMON_14{} }
 	sprite icon_cape_6 : { tags: [ icon back ] icon_meta_data: !ICON_UNCOMMON_14{} }
+
+	cursor: { position: [ 0 672 ] }	
+	sprite icon_special_14 : { tags: [ icon ] }
+	sprite icon_large_brown_bag : { tags: [ icon ] }
+	sprite icon_large_blue_bag : { tags: [ icon ] }
+	sprite icon_large_red_bag : { tags: [ icon ] }
 	
 }
 

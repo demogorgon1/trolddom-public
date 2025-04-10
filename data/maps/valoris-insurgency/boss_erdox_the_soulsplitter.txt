@@ -58,6 +58,7 @@ loot_table .erdox_the_soulsplitter:
 		_icon: icon_knife_1
 		_constitution: 1
 		_dexterity: 2
+		_weapon_cooldown: 18
 	}
 	
 	item valoris_insurgency_29: !BOSS_DROP_LEGS

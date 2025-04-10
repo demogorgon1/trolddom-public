@@ -151,7 +151,7 @@ objective .mumle_whiterock_2:
 	${ _level: 16 }
 	item .mumle_whiterock_2_a: !QUEST_REWARD_HANDS{ _string: "Mumle's Work Gloves" _icon: icon_gloves_1 _constitution: 1 _strength: 2 _spirit: 1 _type: armor_mail }
 	item .mumle_whiterock_2_b: !QUEST_REWARD_BACK{ _string: "Nomad's Backcover" _icon: icon_cape_1 _constitution: 2 _strength: 1 _wisdom: 1 _type: armor_cloth }
-	item .mumle_whiterock_2_c: !QUEST_REWARD_2H_STAFF{ _string: "Badlands Walking Stick" _icon: icon_staff_1 _wisdom: 1 }
+	item .mumle_whiterock_2_c: !QUEST_REWARD_2H_STAFF{ _string: "Badlands Walking Stick" _icon: icon_staff_1 _wisdom: 1 _weapon_cooldown: 22 }
 }
 
 quest .mumle_whiterock_2:
