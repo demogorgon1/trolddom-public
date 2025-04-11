@@ -1,0 +1,91 @@
+!define CLIENT_CRITTER
+{
+	string: @_string
+
+	systems:
+	[
+		combat
+	]
+
+	components:
+	{
+		position: {} 
+		auras: {}
+		visible_auras: {}
+		critter: 
+		{ 
+			critter: $critter 
+			{ 
+				flags: [ client ] 
+				tiles: @_tiles
+				max_distance: @_max_distance
+			} 
+		}
+		combat_public: 
+		{  
+			level: 1
+			faction: npcs
+			creature_type: @_creature_type
+			modifier not_pushable: {}
+		}			
+		combat_private<static>:
+		{
+			physical_critical_strike_chance: 5
+			dodge_chance: 5
+			parry_chance: 5
+			miss_chance: 5
+			block_chance: 5
+		}
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ states: [ default in_combat spawning evading ] frames: [ @_sprite ] }			
+				{ states: [ dead ] frames: [ @_sprite ] z_offset: -2 }			
+			]					
+			<exists _in_water_sprite> in_water_sprite: @_in_water_sprite
+		}				
+		<exists _visibility_requirements> visibility<static>:
+		{
+			requirements: @_visibility_requirements
+		}
+	}	
+}
+
+###################################################################
+# Seagull
+
+entity seagull: !CLIENT_CRITTER
+{
+	_string: "Seagull"
+	_sprite: seagull_1
+	_in_water_sprite: seagull_1_floating
+	_creature_type: beast	
+	_tiles: [ water dirt mud sand ]
+	_max_distance: 6
+}
+
+###################################################################
+# Duck
+
+entity duck: !CLIENT_CRITTER
+{
+	_string: "Duck"
+	_sprite: duck_1
+	_in_water_sprite: duck_1_floating
+	_creature_type: beast	
+	_tiles: [ water dirt mud sand grass ]
+	_max_distance: 6
+}
+
+###################################################################
+# Chicken
+
+entity chicken: !CLIENT_CRITTER
+{
+	_string: "Chicken"
+	_sprite: chicken_1
+	_creature_type: beast	
+	_tiles: [ dirt grass ]
+	_max_distance: 6
+}

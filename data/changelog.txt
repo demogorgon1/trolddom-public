@@ -4,15 +4,23 @@ changelog:
 	#######################################################################################
 	heading: "v0.2.0"
 
-	text: "Changes:"
+	text: "New content:"
 
 	list:
 	[
 		{ text: "Level cap raised to 20." }		
-		{ text: "New zones, dungeons, talents, and a lot more." }
-		{ text: "Demo now includes all previous content up to level 10." }
+		{ text: "Tons of new quests, zones, dungeons, talents, minions, and a lot more." }
+		{ text: "New professions: enchanting and tailoring." }
 	]	
 	
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "All talent points have been reset due to talent tree changes." }
+		{ text: "Buffs can be canceled by right clicking." }
+		{ text: "Real-time and historical fight details (damage per second, etc) can be accessed by right clicking in combat log." }
+	]	
 }
 
 changelog_old:

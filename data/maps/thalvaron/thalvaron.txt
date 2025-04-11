@@ -338,6 +338,9 @@ map_palette .stuff:
 	entity_spawn cauldron: [ 43 113 166 ]		
 	entity_spawn bonfire_unlit: [ 144 59 20 ]
 	entity_spawn target_dummy: [ 139 201 21 ]	
+	entity_spawn chicken: [ 239 141 21 ]	
+	entity_spawn seagull: [ 139 141 21 ]	
+	entity_spawn duck: [ 239 141 221 ]	
 		
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn thalvaron_wizard_realm_spawn: [ 42 157 85 ]

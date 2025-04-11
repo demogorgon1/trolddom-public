@@ -14,6 +14,7 @@
 #include <tpublic/Data/ControlPointState.h>
 #include <tpublic/Data/Cooldown.h>
 #include <tpublic/Data/CreatureType.h>
+#include <tpublic/Data/Critter.h>
 #include <tpublic/Data/Deity.h>
 #include <tpublic/Data/DialogueRoot.h>
 #include <tpublic/Data/DialogueScreen.h>
@@ -83,6 +84,7 @@ namespace tpublic
 		RegisterDataContainer<Data::ControlPointState>();
 		RegisterDataContainer<Data::Cooldown>();
 		RegisterDataContainer<Data::CreatureType>();
+		RegisterDataContainer<Data::Critter>();
 		RegisterDataContainer<Data::Deity>();
 		RegisterDataContainer<Data::DialogueRoot>();
 		RegisterDataContainer<Data::DialogueScreen>();

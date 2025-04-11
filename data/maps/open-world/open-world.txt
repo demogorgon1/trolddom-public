@@ -692,6 +692,7 @@ map_palette .stuff:
 	entity_spawn demo_limit: [ 13 193 16 ]		
 	entity_spawn the_shrouded_lands_light: [ 54 26 217 ]	
 	entity_spawn the_shrouded_lands_underworld: [ 54 54 217 ]	
+	entity_spawn seagull: [ 141 93 13 ]
 
 	entity_spawn .wildlife: [ 255 255 0 ]
 	entity_spawn .sylas: [ 255 189 0 ]

@@ -818,6 +818,21 @@ sprites:
 
 sprites:
 {
+	source: "critters.png"
+
+	size: { width: 8 height: 8 }
+
+	cursor: { position: [ 0 0 ] }
+
+	sprite seagull_1: { }
+	sprite seagull_1_floating: { }
+	sprite chicken_1: { }
+	sprite duck_1: { }
+	sprite duck_1_floating: { }
+}
+
+sprites:
+{
 	source: "objects.png"
 
 	size: { width: 16 height: 16 }
