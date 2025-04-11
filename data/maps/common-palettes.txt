@@ -80,4 +80,6 @@
 	tile brick_2_closed_door_inside: [ 120 100 167 ]
 	tile brick_closed_door_outside: [ 20 200 167 ]
 	tile brick_2_closed_door_outside: [ 120 200 167 ]
+	tile dungeon_entrance_wide_1: [ 110 250 61 ]
+	tile dungeon_entrance_wide_2: [ 110 150 61 ]
 }

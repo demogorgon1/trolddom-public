@@ -119,6 +119,8 @@ sprites:
 	sprite road_2: { flags: [ tile_walkable ] alt_tiles: [ road_2_alt_1 road_2_alt_2 ] }
 	sprite road_2_alt_1: { flags: [ tile_walkable ] }
 	sprite road_2_alt_2: { flags: [ tile_walkable ] }
+	sprite dungeon_entrance_wide_1: { flags: [ tile_walkable tile_top ] }
+	sprite dungeon_entrance_wide_2: { flags: [ tile_walkable tile_top ] }
 	
 	cursor: { position: [ 0 48 ] }
 	
