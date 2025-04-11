@@ -91,6 +91,15 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_CLASS_VERSION, NULL, offsetof(PlayerPrivate, m_classVersion));
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_KNOWS_RIDING, NULL, offsetof(PlayerPrivate, m_knowsRiding));
 				aSchema->DefineCustomObjectNoSource<LootCooldowns>(FIELD_LOOT_COOLDOWNS, offsetof(PlayerPrivate, m_lootCooldowns));
+
+				aSchema->OnRead<PlayerPrivate>([](
+					PlayerPrivate*				aPlayerPrivate,
+					ComponentSchema::ReadType	aReadType,
+					const Manifest*				aManifest)
+				{
+					if(aReadType == ComponentSchema::READ_TYPE_STORAGE)
+						aPlayerPrivate->OnLoadedFromPersistence(aManifest);
+				});				
 			}
 
 			void
@@ -128,6 +137,13 @@ namespace tpublic
 			HasUseAbility() const
 			{
 				return m_useAbilityExtendedFlags != 0 || m_useAbilityFlags != 0;
+			}
+
+			void
+			OnLoadedFromPersistence(
+				const Manifest*					aManifest)
+			{
+				m_professions.OnLoadedFromPersistence(aManifest);
 			}
 
 			// Public data
