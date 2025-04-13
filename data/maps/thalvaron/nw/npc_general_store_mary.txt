@@ -2,7 +2,7 @@ dialogue_screen .general_store_mary_dialogue:
 {
 	text: 
 	[	
-		"Greetings."
+		"What a lovely day!"
 	]			
 }
 

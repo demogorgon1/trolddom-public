@@ -2,7 +2,7 @@ dialogue_screen .fernwick_bar_patron_dialogue:
 {
 	text: 
 	[	
-		"Greetings."
+		"Fernwick seems like a nice place. Might settle down around here one day."
 	]		
 	
 	options:

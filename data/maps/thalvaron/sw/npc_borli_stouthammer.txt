@@ -2,7 +2,7 @@ dialogue_screen .borli_stouthammer_dialogue:
 {
 	text: 
 	[	
-		"Hello."
+		"Spiders!"
 	]		
 	
 	options:

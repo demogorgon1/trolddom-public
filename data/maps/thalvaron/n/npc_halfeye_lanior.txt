@@ -2,7 +2,7 @@ dialogue_screen .halfeye_lanior_dialogue:
 {
 	text: 
 	[	
-		"Be careful."
+		"We must put and end to the evil powers of the lich."
 	]		
 	
 	options:
@@ -64,7 +64,7 @@ quest .halfeye_lanior_1:
 	
 	description: 
 	[
-		"The tower is full of the henchmen of the wizard. Eventually I want you to enter that place and get rid of them once and for all, but for now we have to start with something easier. I know that the wizard has"
+		"The tower is full of the henchmen of the lich. Eventually I want you to enter that place and get rid of them once and for all, but for now we have to start with something easier. I know that the wizard has"
 		"sent out a small detachment into the woods north of us. Why I don't know. It is led by a dark elf named Droogor. I need you to kill him."
 	]
 

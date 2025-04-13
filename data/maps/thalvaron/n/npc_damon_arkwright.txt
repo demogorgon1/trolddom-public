@@ -2,7 +2,7 @@ dialogue_screen .damon_arkwright_dialogue:
 {
 	text: 
 	[	
-		"Hello."
+		"If you like hunting vampires it's a good time to be alive."
 	]		
 	
 	options:

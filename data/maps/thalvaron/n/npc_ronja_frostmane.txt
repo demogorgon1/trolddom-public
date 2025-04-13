@@ -2,7 +2,7 @@ dialogue_screen .ronja_frostmane_dialogue:
 {
 	text: 
 	[	
-		"Be careful."
+		"The snow never melts."
 	]		
 	
 	options:
@@ -10,8 +10,7 @@ dialogue_screen .ronja_frostmane_dialogue:
 		{ quest: .ronja_frostmane_1 }
 		{ quest: .ronja_frostmane_2 }
 		{ quest<offer_only>: .ronja_frostmane_3 }
-		{ quest<completion_only>: .north_yeti_boss }
-		
+		{ quest<completion_only>: .north_yeti_boss }		
 	]
 }
 

@@ -2,7 +2,7 @@ dialogue_screen .lia_frostmane_dialogue:
 {
 	text: 
 	[	
-		"Hello."
+		"Ah, the fresh air of adventure!"
 	]		
 	
 	options:
@@ -28,5 +28,3 @@ entity thalvaron_lia_frostmane: !NPC
 	_loot_table: .npc
 	_not_pushable: true	
 }
-
-#############################################

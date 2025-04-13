@@ -2,7 +2,7 @@ dialogue_screen .ranger_orwla_dialogue:
 {
 	text: 
 	[	
-		"Be careful."
+		"Be careful around here."
 	]		
 	
 	options:

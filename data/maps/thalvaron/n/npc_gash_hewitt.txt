@@ -65,7 +65,7 @@ quest .gash_hewitt_1:
 
 	text:
 	[
-		"Kill elementals, gather their residue, and return to Thora."
+		"Kill wood elementals, gather their splinters, and return to Gash Hewitt."
 	]
 	
 	description: 

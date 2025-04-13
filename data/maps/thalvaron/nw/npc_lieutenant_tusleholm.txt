@@ -2,7 +2,7 @@ dialogue_screen .lieutenant_tusleholm_dialogue:
 {
 	text: 
 	[	
-		"Greetings."
+		"Are you fighting for Valoris? Either you're with us or against us. State your business!"
 	]		
 	
 	options:

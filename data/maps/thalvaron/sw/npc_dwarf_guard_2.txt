@@ -2,7 +2,7 @@ dialogue_screen .dwarf_guard_2_dialogue:
 {
 	text: 
 	[	
-		"Hello."
+		"Hot out today, isn't it?"
 	]		
 	
 	options:

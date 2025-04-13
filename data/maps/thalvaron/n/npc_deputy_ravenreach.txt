@@ -2,7 +2,7 @@ dialogue_screen .deputy_ravenreach_dialogue:
 {
 	text: 
 	[	
-		"Watch out."
+		"Didn't expect to see anyone out here. Be careful, unnatural dangers lurk behind every tree."
 	]		
 	
 	options:

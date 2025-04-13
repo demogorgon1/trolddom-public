@@ -2,7 +2,7 @@ dialogue_screen .blunt_ronson:
 {
 	text: 
 	[	
-		"Be careful."
+		"They call themselves the ember veil. What do they even mean by that?"
 	]		
 	
 	options:

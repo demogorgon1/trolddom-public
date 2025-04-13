@@ -2,7 +2,7 @@ dialogue_screen .doctor_hulius_dialogue:
 {
 	text: 
 	[	
-		"Be careful."
+		"Here! Over here! Help!"
 	]		
 	
 	options:
@@ -107,7 +107,7 @@ quest .doctor_hulius_1:
 	
 	completion:
 	[
-		"Good job, here take one of these as your reward."
+		"Good to have him back. Here, take one of these as your reward."
 	]
 
 	level: 14

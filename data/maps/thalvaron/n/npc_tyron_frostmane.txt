@@ -2,7 +2,7 @@ dialogue_screen .tyron_frostmane_dialogue:
 {
 	text: 
 	[	
-		"Be careful."
+		"State your business. I have no time for the weak willed."
 	]		
 	
 	options:

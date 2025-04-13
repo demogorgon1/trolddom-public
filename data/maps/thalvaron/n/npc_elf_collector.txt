@@ -2,7 +2,7 @@ dialogue_screen .elf_collector_dialogue:
 {
 	text: 
 	[	
-		"Greetings, $class$."
+		"Greetings, $class$. Do you have anything to contribute to the Children of the Moon?"
 	]
 	
 	options:

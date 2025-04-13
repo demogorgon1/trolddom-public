@@ -2,7 +2,7 @@ dialogue_screen .dwarf_guard_1_dialogue:
 {
 	text: 
 	[	
-		"Hello."
+		"Welcome to the Kingdom of Thuldarim."
 	]		
 	
 	options:

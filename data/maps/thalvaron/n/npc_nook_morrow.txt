@@ -2,7 +2,7 @@ dialogue_screen .nook_morrow_dialogue:
 {
 	text: 
 	[	
-		"Be careful."
+		"Can you hear it? It's the hooting of the owlbears. It's mating season. Isn't it just wonderful?"
 	]		
 	
 	options:

@@ -2,7 +2,7 @@ dialogue_screen .ranger_thorksen_dialogue:
 {
 	text: 
 	[	
-		"Be careful."
+		"It's quiet down here. Maybe too quiet?"
 	]		
 	
 	options:

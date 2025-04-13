@@ -2,7 +2,7 @@ dialogue_screen .robert_dulish_greetings:
 {
 	text: 
 	[	
-		"Greetings."
+		"This is really a horrible place, isn't it? The air is dry and uncomforable. Is it really air we're breathing?"
 	]			
 	
 	options:

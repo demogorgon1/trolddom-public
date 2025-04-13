@@ -2,7 +2,7 @@ dialogue_screen .clara_hawthorne_dialogue:
 {
 	text: 
 	[	
-		"Greetings."
+		"Are you also an archaeologist?"
 	]			
 	
 	options:

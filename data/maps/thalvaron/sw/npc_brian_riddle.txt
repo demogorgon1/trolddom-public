@@ -2,7 +2,7 @@ dialogue_screen .brian_riddle_dialogue:
 {
 	text: 
 	[	
-		"Hello."
+		"What brings you here? If you want trouble, go somewhere else."
 	]		
 	
 	options:

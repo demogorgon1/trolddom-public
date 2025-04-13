@@ -2,7 +2,7 @@ dialogue_screen .brimiar_dialogue:
 {
 	text: 
 	[	
-		"Greetings, dear $class$."
+		"Greetings, dear $class$. Surprised to see you here."
 	]		
 	
 	options:
@@ -219,7 +219,7 @@ quest .brimiar_3:
 	
 	completion:
 	[
-		"Uh, splendid!"
+		"Uh, splendid! Looks delicious!"
 	]
 
 	objectives: [ .brimiar_3 ]

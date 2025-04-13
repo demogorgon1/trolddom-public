@@ -7,7 +7,8 @@ dialogue_screen .erhart_hulius_dialogue:
 {
 	text: 
 	[	
-		"Hello."
+		"Vampires! There could be vampires waiting for you just outside that door! They're out to get you! They're out to get all of us!\n\n"
+		"We need to be prepared!"
 	]		
 	
 	options:

@@ -104,7 +104,7 @@ quest .durk_1:
 	
 	completion:
 	[
-		"Good."
+		"Good. Durk doesn't like mean wizards."
 	]
 
 	objectives: [ .durk_1_a .durk_1_b ]

@@ -2,7 +2,7 @@ dialogue_screen .johnson_dialogue:
 {
 	text: 
 	[	
-		"Be careful."
+		"I'm just mining my own business up here, but can't say I've had much luck recently."
 	]		
 	
 	options:
@@ -74,7 +74,7 @@ quest .johnson_1:
 	
 	completion:
 	[
-		"Excellent."
+		"Excellent. I think I still need to buy some Kobold poison. I've heard you can get some pellets you can put in the corners."
 	]
 
 	level: 12

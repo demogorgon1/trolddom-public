@@ -2,7 +2,7 @@ dialogue_screen .bramli_stonestride_dialogue:
 {
 	text: 
 	[	
-		"Hello."
+		"It's a bit too hot out here. I could use the cold breeze of a cave."
 	]		
 	
 	options:

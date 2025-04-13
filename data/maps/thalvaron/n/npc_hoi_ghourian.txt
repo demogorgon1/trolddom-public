@@ -2,7 +2,7 @@ dialogue_screen .hoi_ghourian_dialogue:
 {
 	text: 
 	[	
-		"Hello."
+		"My name is Hoi and I'm a liason between the trees of these woods and the more fleshy creatures like us."
 	]		
 	
 	options:

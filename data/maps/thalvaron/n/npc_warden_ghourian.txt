@@ -2,7 +2,7 @@ dialogue_screen .warden_ghourian_dialogue:
 {
 	text: 
 	[	
-		"Be careful."
+		"I'm keeping watch over this pass."
 	]		
 	
 	options:

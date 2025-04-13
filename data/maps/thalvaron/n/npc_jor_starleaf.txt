@@ -74,7 +74,7 @@ quest .jor_starleaf_1:
 	
 	completion:
 	[
-		"Excellent."
+		"Good job."
 	]
 
 	level: 17

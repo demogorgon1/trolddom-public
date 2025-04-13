@@ -4,7 +4,7 @@ dialogue_screen .borg_ironmantle_dialogue:
 {
 	text: 
 	[	
-		"Hello."
+		"Welcome to our great underground refuge."
 	]		
 	
 	options:

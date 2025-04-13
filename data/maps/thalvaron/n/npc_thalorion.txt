@@ -2,7 +2,7 @@ dialogue_screen .thalorion_dialogue:
 {
 	text: 
 	[	
-		"Be careful."
+		"What's up with the living dead?"
 	]		
 	
 	options:

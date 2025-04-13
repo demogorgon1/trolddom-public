@@ -2,7 +2,7 @@ dialogue_screen .laura_tokins_dialogue:
 {
 	text: 
 	[	
-		"Hello."
+		"These woods were quite pleasant in the past. Not so much anymore."
 	]		
 	
 	options:

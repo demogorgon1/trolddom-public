@@ -2,7 +2,7 @@ dialogue_screen .fennian_starleaf_dialogue:
 {
 	text: 
 	[	
-		"Listen to the trees."
+		"Listen to the trees. They never lie. Or, well, most of the time they don't."
 	]		
 	
 	options:

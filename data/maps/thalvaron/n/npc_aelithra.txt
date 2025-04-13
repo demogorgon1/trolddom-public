@@ -2,7 +2,7 @@ dialogue_screen .aelithra_dialogue:
 {
 	text: 
 	[	
-		"Be careful."
+		"Something is in the air, am I right? Maybe the end is near."
 	]		
 	
 	options:
@@ -75,7 +75,7 @@ quest .aelithra_1:
 	
 	completion:
 	[
-		"Good."
+		"Good. The dark burden has become a little lighter."
 	]
 
 	objectives: [ .aelithra_1 ]
@@ -98,17 +98,13 @@ quest .aelithra_2:
 	
 	description: 
 	[
-		"We're not that much different from these dark elves, you know, but for ages we've been in conflict with them. They want to inflict suffering on us and they will stop at nothing to achieve that."
-		"Luckily, there aren't that many of them around anymore, at least not in this part of the world - although they've definitely become more active recently. They're clearly planning something and if it's up to them"
-		"we'll soon be destroyed or subjugated completely.\n\n"
-		"As far as I'm aware, only a single dark elf is known to live nearby. We'd feel much safer if he wasn't there anymore. He lives in a small cabin deep in the Faerandor woods to the east."
-		"He goes by the name Jular the Bone-Eater. Please get rid of this foul being.\n\n"
-		"Travel east into Faerandor and look for a skull on a pole by the side of road. That's where you should enter the woods and look for his dwellings."
+		"Dark elves and their evil shenanigans have upset the order of life and death. The bones of the dead has been animated into an undead horde that roams large parts of the lands in the north.\n\n"
+		"Warden Nekelian traveled there recently to investigate. Seek him out and offer your help."
 	]
 
 	completion:
 	[
-		"Good."
+		"We can use all the help we can get."
 	]
 
 	level: 18

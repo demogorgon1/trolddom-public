@@ -2,7 +2,7 @@ dialogue_screen .general_store_john_dialogue:
 {
 	text: 
 	[	
-		"Greetings."
+		"Hello, $class$ $name$."
 	]		
 	
 	options:

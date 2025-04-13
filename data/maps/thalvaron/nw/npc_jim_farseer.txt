@@ -2,8 +2,8 @@ dialogue_screen .jim_farseer:
 {
 	text: 
 	[	
-		"Good day."
-	]			
+		"We have bigger problems than dark elves and the dead crawling out of their graves. Mark my words."
+	]			 
 	
 	options:
 	[

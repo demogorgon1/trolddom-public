@@ -2,7 +2,7 @@ dialogue_screen .urgon_starleaf_dialogue:
 {
 	text: 
 	[	
-		"Be careful."
+		"Maybe one day nature will recover from this nightmare."
 	]		
 	
 	options:

@@ -2,7 +2,7 @@ dialogue_screen .ranger_fremalt_dialogue:
 {
 	text: 
 	[	
-		"Be careful."
+		"These are the foothills of the Iceveil Highlands. Don't travel east until you're ready."
 	]		
 	
 	options:

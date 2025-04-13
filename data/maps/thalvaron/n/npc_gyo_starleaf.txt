@@ -2,7 +2,7 @@ dialogue_screen .gyo_starleaf_dialogue:
 {
 	text: 
 	[	
-		"These are dark times."
+		"These are dark times and it will only get worse."
 	]		
 	
 	options:

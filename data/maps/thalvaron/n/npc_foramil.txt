@@ -2,7 +2,7 @@ dialogue_screen .foramil_dialogue:
 {
 	text: 
 	[	
-		"Be careful."
+		"Watch out for the sharp end of my spear."
 	]		
 	
 	options:

@@ -2,7 +2,7 @@ dialogue_screen .craig_borne_dialogue:
 {
 	text: 
 	[	
-		"Greetings."
+		"If I were you I'd be careful upsetting the wrong people."
 	]			
 	
 	options:

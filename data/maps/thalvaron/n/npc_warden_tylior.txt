@@ -2,7 +2,7 @@ dialogue_screen .warden_tylior_dialogue:
 {
 	text: 
 	[	
-		"Be careful."
+		"There is a skeleton hiding inside you right now."
 	]		
 	
 	options:

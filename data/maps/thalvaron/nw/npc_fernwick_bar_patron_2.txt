@@ -2,7 +2,7 @@ dialogue_screen .fernwick_bar_patron_2_dialogue:
 {
 	text: 
 	[	
-		"Greetings."
+		"They took over my house! Someone should teach those criminals a lesson."
 	]		
 	
 	options:

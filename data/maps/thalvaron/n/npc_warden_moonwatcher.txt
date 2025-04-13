@@ -2,7 +2,7 @@ dialogue_screen .warden_moonwatcher_dialogue:
 {
 	text: 
 	[	
-		"Be careful."
+		"Stay vigilant."
 	]		
 	
 	options:

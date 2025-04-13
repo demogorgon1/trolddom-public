@@ -2,7 +2,7 @@ dialogue_screen .warden_nekelian_dialogue:
 {
 	text: 
 	[	
-		"Be careful."
+		"They undead horde must be stopped."
 	]		
 	
 	options:

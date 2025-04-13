@@ -2,7 +2,7 @@ dialogue_screen .westor_dialogue:
 {
 	text: 
 	[	
-		"We were just attacked by a bunch of rebels. They appeared out of nowhere!"
+		"Fresh mountain air and mushrooms everywhere. What else could I ask for?"
 	]		
 	
 	options:

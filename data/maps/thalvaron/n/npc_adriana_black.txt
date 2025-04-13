@@ -2,7 +2,7 @@ dialogue_screen .adriana_black_dialogue:
 {
 	text: 
 	[	
-		"Hello."
+		"What brings you to our little part of the world?"
 	]		
 	
 	options:

@@ -2,7 +2,7 @@ dialogue_screen .john_thompoure_dialogue:
 {
 	text: 
 	[	
-		"Greetings."
+		"Any news?"
 	]
 
 	options:

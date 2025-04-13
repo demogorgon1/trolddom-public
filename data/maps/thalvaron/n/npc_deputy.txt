@@ -4,10 +4,6 @@ dialogue_screen .deputy_simmons_dialogue:
 	[	
 		"*Burps*"
 	]		
-	
-	options:
-	[
-	]
 }
 
 dialogue_root .deputy_simmons_dialogue:
