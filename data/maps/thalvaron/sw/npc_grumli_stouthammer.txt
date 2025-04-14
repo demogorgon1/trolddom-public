@@ -2,7 +2,7 @@ dialogue_screen .grumli_stouthammer_dialogue:
 {
 	text: 
 	[	
-		"Hello."
+		"You look like someone who could use a stout."
 	]		
 	
 	options:

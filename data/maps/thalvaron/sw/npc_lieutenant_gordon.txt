@@ -2,7 +2,7 @@ dialogue_screen .lieutenant_gordon_dialogue:
 {
 	text: 
 	[	
-		"Hello."
+		"Careful. Beyond this pass you'll enter the badlands. Horrible dry place full of poisonous creatures. You're probably better off in this swamp."
 	]		
 	
 	options:

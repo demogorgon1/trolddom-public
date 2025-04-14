@@ -2,7 +2,7 @@ dialogue_screen .francis_dialogue:
 {
 	text: 
 	[	
-		"Hello."
+		"Welcome to Mirahaven."
 	]		
 	
 	options:

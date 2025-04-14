@@ -2,7 +2,7 @@ dialogue_screen .gob_fulbro_dialogue:
 {
 	text: 
 	[	
-		"Hello."
+		"The water around here is full of vicous beasts. You never know what's hiding just beneath the surface, watching you..."
 	]		
 	
 	options:

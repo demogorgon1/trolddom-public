@@ -2,7 +2,7 @@ dialogue_screen .mumle_whiterock_dialogue:
 {
 	text: 
 	[	
-		"Hello."
+		"You're far away from home, aren't you? Are you lost?"
 	]		
 	
 	options:

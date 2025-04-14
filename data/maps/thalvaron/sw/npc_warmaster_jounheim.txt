@@ -2,7 +2,7 @@ dialogue_screen .warmaster_jounheim_dialogue:
 {
 	text: 
 	[	
-		"Hello."
+		"Glory to Thuldarim."
 	]		
 	
 	options:

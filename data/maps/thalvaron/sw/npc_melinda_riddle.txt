@@ -2,7 +2,7 @@ dialogue_screen .melinda_riddle_dialogue:
 {
 	text: 
 	[	
-		"Hello."
+		"I hope things will go back to normal soon."
 	]		
 	
 	options:

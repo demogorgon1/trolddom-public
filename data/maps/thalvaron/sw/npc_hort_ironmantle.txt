@@ -2,7 +2,7 @@ dialogue_screen .hort_ironmantle_dialogue:
 {
 	text: 
 	[	
-		"Hello."
+		"Rocks are great, aren't they?"
 	]		
 	
 	options:

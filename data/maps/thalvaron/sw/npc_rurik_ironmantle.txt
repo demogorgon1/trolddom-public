@@ -2,7 +2,7 @@ dialogue_screen .rurik_ironmantle_dialogue:
 {
 	text: 
 	[	
-		"Hello."
+		"Yes?"
 	]		
 	
 	options:

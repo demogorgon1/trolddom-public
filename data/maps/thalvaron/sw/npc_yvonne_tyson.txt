@@ -2,7 +2,7 @@ dialogue_screen .yvonne_tyson_dialogue:
 {
 	text: 
 	[	
-		"Hello."
+		"Greetings."
 	]		
 	
 	options:

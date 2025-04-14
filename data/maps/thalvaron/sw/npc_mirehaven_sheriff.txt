@@ -2,7 +2,7 @@ dialogue_screen .mirehaven_sheriff_dialogue:
 {
 	text: 
 	[	
-		"Hello."
+		"Greetings, $class$."
 	]		
 	
 	options:

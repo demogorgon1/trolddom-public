@@ -2,7 +2,7 @@ dialogue_screen .swampman_dialogue:
 {
 	text: 
 	[	
-		"Hello."
+		"Swamplife... That's the pinnacle of existence."
 	]		
 	
 	options:

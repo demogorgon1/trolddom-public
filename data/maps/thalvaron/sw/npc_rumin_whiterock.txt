@@ -2,7 +2,7 @@ dialogue_screen .rumin_whiterock_dialogue:
 {
 	text: 
 	[	
-		"Hello."
+		"Durgan Tharok is great and all, but I can't wait to go home to the real mountains. This expedition is getting about tiresome."
 	]		
 	
 	options:

@@ -17,7 +17,7 @@ dialogue_screen .ria_tyson_dialogue:
 {
 	text: 
 	[	
-		"Hello."
+		"Hi."
 	]		
 	
 	options:

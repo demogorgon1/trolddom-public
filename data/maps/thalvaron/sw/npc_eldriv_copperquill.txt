@@ -2,7 +2,7 @@ dialogue_screen .eldriv_copperquill_dialogue:
 {
 	text: 
 	[	
-		"Hello."
+		"Oh, herbs! They're nature's quiet miracles, don't you think? Each one a whisper from the earth, holding secrets to soothe, to heal, sometimes even to harm."
 	]		
 	
 	options:
