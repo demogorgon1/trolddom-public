@@ -829,6 +829,8 @@ sprites:
 	sprite chicken_1: { }
 	sprite duck_1: { }
 	sprite duck_1_floating: { }
+	sprite homunculus_1: { }
+	sprite homunculus_1_floating: { }
 }
 
 sprites:

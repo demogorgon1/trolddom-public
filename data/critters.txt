@@ -89,3 +89,16 @@ entity chicken: !CLIENT_CRITTER
 	_tiles: [ dirt grass ]
 	_max_distance: 6
 }
+
+###################################################################
+# Homunculus
+
+entity homunculus: !CLIENT_CRITTER
+{
+	_string: "Homunculus"
+	_sprite: homunculus_1
+	_in_water_sprite: homunculus_1_floating
+	_creature_type: humanoid	
+	_tiles: [ wood_floor wood_floor_alt_1 wood_floor_alt_2 ]
+	_max_distance: 6
+}

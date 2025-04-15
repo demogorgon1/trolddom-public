@@ -157,3 +157,9 @@ map_entity_spawn seagull:
 {	
 	entity seagull: { init_state: default } 
 }
+
+map_entity_spawn homunculus:
+{	
+	entity homunculus: { init_state: default } 
+}
+

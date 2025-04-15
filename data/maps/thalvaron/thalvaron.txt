@@ -341,6 +341,7 @@ map_palette .stuff:
 	entity_spawn chicken: [ 239 141 21 ]	
 	entity_spawn seagull: [ 139 141 21 ]	
 	entity_spawn duck: [ 239 141 221 ]	
+	entity_spawn homunculus: [ 100 32 177 ]
 		
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn thalvaron_wizard_realm_spawn: [ 42 157 85 ]
