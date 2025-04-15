@@ -102,6 +102,10 @@ namespace tpublic
 
 				aOut = value;
 			}	
+			else
+			{
+				aOut.reset();
+			}
 				
 			return true;
 		}

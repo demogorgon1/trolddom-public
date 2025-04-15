@@ -218,6 +218,7 @@ namespace tpublic::Systems
 			visibleAuras->m_entries.clear();
 			visibleAuras->m_auraFlags = 0;
 			visibleAuras->m_colorEffect.reset();
+			visibleAuras->m_colorWeaponGlow.reset();
 			visibleAuras->m_mountId = 0;
 			
 			uint32_t colorEffectR = 0;

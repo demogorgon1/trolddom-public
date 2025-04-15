@@ -496,6 +496,8 @@ ability disenchant:
 		icon: icon_enchanted_paper	
 
 		string: "Dexterity +5"
+		color_weapon_glow: [ 15 182 15 200 ]
+		
 		stat_modifiers: { dexterity: { add: 5 } }
 	}
 
@@ -543,6 +545,8 @@ ability disenchant:
 		icon: icon_enchanted_paper	
 
 		string: "Wisdom +5"
+		color_weapon_glow: [ 23 68 250 180 ]
+		
 		stat_modifiers: { wisdom: { add: 5 } }
 	}
 
@@ -590,6 +594,8 @@ ability disenchant:
 		icon: icon_enchanted_paper	
 
 		string: "Strength +5"
+		color_weapon_glow: [ 255 200 23 180 ]
+		
 		stat_modifiers: { strength: { add: 5 } }
 	}
 
@@ -637,6 +643,8 @@ ability disenchant:
 		icon: icon_enchanted_paper	
 
 		string: "Spell Power"
+		color_weapon_glow: [ 152 44 242 255 ]
+		
 		stat_modifiers: { spell_damage: { add: 10 } }
 	}
 
@@ -684,6 +692,8 @@ ability disenchant:
 		icon: icon_enchanted_paper	
 
 		string: "Mending"
+		color_weapon_glow: [ 0 255 0 255 ]
+		
 		stat_modifiers: { healing: { add: 10 } }
 	}
 
