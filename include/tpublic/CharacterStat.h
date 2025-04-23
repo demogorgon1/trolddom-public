@@ -24,6 +24,8 @@ namespace tpublic
 			ID_MAX_EPIC_EQUIP,
 			ID_TOTAL_PVP_KILLS,
 			ID_BANDAGES_CRAFTED,
+			ID_MEALS_PREPARED,
+			ID_FISH_CAUGHT,
 
 			NUM_IDS
 		};
@@ -49,7 +51,9 @@ namespace tpublic
 			{ "max_rare_equip",		"Maximum number of rare items equipped: %zu",		ComponentBase::PENDING_PERSISTENCE_UPDATE_NONE },
 			{ "max_epic_equip",		"Maximum number of epic items equipped: %zu",		ComponentBase::PENDING_PERSISTENCE_UPDATE_NONE },
 			{ "total_pvp_kills",	"Total player kills: %zu",							ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY },
-			{ "bandages_crafted",	"Total bandages crafted: %zu",						ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY }
+			{ "bandages_crafted",	"Total bandages crafted: %zu",						ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY },
+			{ "meals_prepared",		"Total meals prepared: %zu",						ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY },
+			{ "fish_caught",		"Total fish caught: %zu",							ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

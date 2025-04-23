@@ -183,6 +183,8 @@ namespace tpublic
 			uint16_t														m_equippedItemTypeFlags = 0;
 			uint32_t														m_useAbilityFlags = 0;
 			uint32_t														m_useAbilityExtendedFlags = 0;
+
+			std::vector<uint32_t>											m_incrementCharacterStatIds;
 		};
 	}
 

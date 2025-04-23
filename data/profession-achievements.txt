@@ -5,4 +5,15 @@ achievement bandages_2: { category: profession string: "Patchwork Practitioner" 
 achievement bandages_3: { category: profession string: "Field Medic" description: "Craft 150 bandages." points: 10 priority: 2 root: bandages_1 stat_trigger bandages_crafted: 150 icon: icon_heavy_cottonweave_bandage }
 achievement bandages_4: { category: profession string: "Warden of the Wounded" description: "Craft 500 bandages." points: 10 priority: 3 root: bandages_1 stat_trigger bandages_crafted: 500 icon: icon_heavy_cottonweave_bandage }
 
+achievement meals_1: { category: profession string: "Kitchen Novice" description: "Prepare 10 meals." points: 10 priority: 0 stat_trigger meals_prepared: 10 icon: icon_stew_1 }
+achievement meals_2: { category: profession string: "Campfire Cook" description: "Prepare 50 meals." points: 10 priority: 1 root: meals_1 stat_trigger meals_prepared: 50 icon: icon_stew_1 }
+achievement meals_3: { category: profession string: "Iron Chef" description: "Prepare 150 meals." points: 10 priority: 2 root: meals_1 stat_trigger meals_prepared: 150 icon: icon_stew_1 }
+achievement meals_4: { category: profession string: "Feastmaster" description: "Prepare 500 meals." points: 10 priority: 3 root: meals_1 stat_trigger meals_prepared: 500 icon: icon_stew_1 }
+
+achievement fish_1: { category: profession string: "Pond Dabbler" description: "Catch 10 fish." points: 10 priority: 0 stat_trigger fish_caught: 10 icon: icon_fish_1 }
+achievement fish_2: { category: profession string: "River Angler" description: "Catch 50 fish." points: 10 priority: 1 root: fish_1 stat_trigger fish_caught: 50 icon: icon_fish_1 }
+achievement fish_3: { category: profession string: "Menace of the Lake" description: "Catch 150 fish." points: 10 priority: 2 root: fish_1 stat_trigger fish_caught: 150 icon: icon_fish_1 }
+achievement fish_4: { category: profession string: "Ocean Destroyer" description: "Catch 500 fish." points: 10 priority: 3 root: fish_1 stat_trigger fish_caught: 500 icon: icon_fish_1 }
+
+
 

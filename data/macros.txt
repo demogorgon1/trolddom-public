@@ -13,6 +13,7 @@
 	produce_items: @_produce
 	required_profession<@_skill>: cooking
 	must_have_one_of_nearby_entities: [ fireplace bonfire ]
+	increment_character_stat: meals_prepared
 }
 
 #####################################################

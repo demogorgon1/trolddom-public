@@ -75,6 +75,10 @@ entity fishing_splash:
 			required_item: weapon_fishing_rod
 			duration: 20
 			context_help: fishing
+			trigger_ability: $ability
+			{
+				increment_character_stat: fish_caught
+			}
 		}				
 	}
 }
