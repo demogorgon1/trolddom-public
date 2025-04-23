@@ -717,7 +717,7 @@ ability charge:
 ability relentless_overpower:
 {
 	string: "Relentless Overpower"
-	description: "Increase the critical strike chance of Strike and Whirlwind by 50% for 10 seconds."
+	description: "Increase the critical strike chance of Strike and Whirlwind by 60% for 12 seconds."
 	range: 1	
 	cooldown: $cooldown { duration: 1800 }
 	flags: [ target_self ]
@@ -730,9 +730,9 @@ ability relentless_overpower:
 	{
 		aura: $aura @<ability> [ string icon ]
 		{
-			description: "Critical strike chance of Strike and Whirlwind increased by 50%."
+			description: "Critical strike chance of Strike and Whirlwind increased by 60%."
 			type: buff
-			duration: 100
+			duration: 120
 			flags: [ unique ]			
 		}
 	}

@@ -762,6 +762,7 @@ sprites:
 	sprite elf_warden_1: { dead: elf_warden_1_dead }
 	sprite dwarf_18: { dead: dwarf_18_dead }
 	sprite scorpion_3: { dead: scorpion_3_dead }
+	sprite wolf_7: { dead: wolf_7_dead }
 	
 	cursor: { position: [ 0 656 ] }
 	sprite crab_monster_4_dead: { }
@@ -779,6 +780,7 @@ sprites:
 	sprite elf_warden_1_dead: { }	
 	sprite dwarf_18_dead: { }	
 	sprite scorpion_3_dead: { }	
+	sprite wolf_7_dead: { }	
 }
 
 sprites:

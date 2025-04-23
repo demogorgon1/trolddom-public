@@ -648,6 +648,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_baskin_johnson: [ 155 166 148 ]
 	entity_spawn thalvaron_gerhard_frostmane: [ 155 23 148 ]
 	entity_spawn thalvaron_keanu_horton: [ 155 14 234 ]
+	entity_spawn thalvaron_throgar: [ 30 107 93 ]
 
 	# SW
 	entity_spawn thalvaron_brian_riddle: [ 66 88 99 ]

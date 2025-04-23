@@ -1947,3 +1947,51 @@ map_entity_spawn thalvaron_gorge_orc:
 	entity thalvaron_gorge_orc_e: !NPC { _string: "Skullforge Enforcer" _sprite: orc_4 _sprite_dead: orc_4_dead }	
 }	
 
+##########################################################################################
+# Wolf boss
+
+map_entity_spawn thalvaron_throgar: 
+{ 
+	entity thalvaron_throgar: {} 
+	spawn_timer: !NPC_RESPAWN_RARE{}
+}
+
+{
+	loot_table .throgar: 
+	{
+		slots:
+		[	
+			{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
+		      map_message thalvaron: "Throgar will not drop Token of Victory for {}." } } }
+
+			!WORLD_DROPS_RARE {}
+			!WORLD_DROPS {}
+		]	
+	}
+
+	${		
+		_faction: monsters
+		_creature_type: beast
+		_loot_table: .throgar
+		_default_behavior_state: .passive
+		_elite: true
+		_level: 20 
+		_string: "Throgar" 
+		_sprite: wolf_7 
+		_sprite_dead: wolf_7_dead
+		_weapon_damage: 1.5
+		_health: 6.6
+		_immune_to_stun: true
+		_immune_to_immobilize: true
+		_immune_to_slow: true
+		
+		_abilities: 
+		[ 
+			{ id: npc_rend target: random_player }
+			{ id: npc_attack } 
+		]		
+	}
+
+	entity thalvaron_throgar: !NPC { }
+
+}
