@@ -1,0 +1,8 @@
+achievement_category profession: { string: "Professions" order_key: 5 }
+
+achievement bandages_1: { category: profession string: "Band-Aid Apprentice" description: "Craft 10 bandages." points: 10 priority: 0 stat_trigger bandages_crafted: 10 icon: icon_heavy_cottonweave_bandage }
+achievement bandages_2: { category: profession string: "Patchwork Practitioner" description: "Craft 50 bandages." points: 10 priority: 1 root: bandages_1 stat_trigger bandages_crafted: 50 icon: icon_heavy_cottonweave_bandage }
+achievement bandages_3: { category: profession string: "Field Medic" description: "Craft 150 bandages." points: 10 priority: 2 root: bandages_1 stat_trigger bandages_crafted: 150 icon: icon_heavy_cottonweave_bandage }
+achievement bandages_4: { category: profession string: "Warden of the Wounded" description: "Craft 500 bandages." points: 10 priority: 3 root: bandages_1 stat_trigger bandages_crafted: 500 icon: icon_heavy_cottonweave_bandage }
+
+

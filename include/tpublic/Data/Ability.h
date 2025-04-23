@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../CharacterStat.h"
 #include "../DataBase.h"
 #include "../DataReference.h"
 #include "../DirectEffectFactory.h"
@@ -666,6 +667,8 @@ namespace tpublic
 							m_toggleAuraId = aMember->GetId(DataType::ID_AURA);
 						else if (aMember->m_name == "must_not_have_world_aura")
 							m_mustNotHaveWorldAuraId = aMember->GetId(DataType::ID_WORLD_AURA);
+						else if(aMember->m_name == "increment_character_stat")
+							m_incrementCharacterStatId = (uint32_t)CharacterStat::StringToId(aMember->GetIdentifier());
 						else
 							TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
 					}
@@ -724,6 +727,7 @@ namespace tpublic
 				aWriter->WriteUInt(m_targetItemAuraId);
 				aWriter->WriteUInt(m_mustNotHaveWorldAuraId);
 				aWriter->WriteUInt(m_toggleAuraId);
+				aWriter->WriteUInt(m_incrementCharacterStatId);
 
 				for(uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 					aWriter->WriteUInt(m_resourceCosts[i]);
@@ -829,6 +833,8 @@ namespace tpublic
 					return false;
 				if(!aReader->ReadUInt(m_toggleAuraId))
 					return false;
+				if(!aReader->ReadUInt(m_incrementCharacterStatId))
+					return false;
 
 				for (uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 				{
@@ -889,6 +895,7 @@ namespace tpublic
 			std::unique_ptr<ItemProspect>						m_targetItemProspect;
 			uint32_t											m_targetItemAuraId = 0;
 			uint32_t											m_toggleAuraId = 0;
+			uint32_t											m_incrementCharacterStatId = 0;
 		};
 
 	}

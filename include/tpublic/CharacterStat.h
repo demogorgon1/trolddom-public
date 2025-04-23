@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ComponentBase.h"
 #include "IReader.h"
 #include "IWriter.h"
 
@@ -22,14 +23,16 @@ namespace tpublic
 			ID_MAX_RARE_EQUIP,
 			ID_MAX_EPIC_EQUIP,
 			ID_TOTAL_PVP_KILLS,
+			ID_BANDAGES_CRAFTED,
 
 			NUM_IDS
 		};
 
 		struct Info
 		{
-			const char* m_name;
-			const char* m_displayFormat;
+			const char*								m_name;
+			const char*								m_displayFormat;
+			ComponentBase::PendingPersistenceUpdate	m_persistenceUpdate;
 		};
 
 		// IMPORTANT: Must match Id enum
@@ -37,14 +40,16 @@ namespace tpublic
 		{
 			{ NULL, NULL },
 
-			{ "cash_looted", "Cash looted: {%zu}" },
-			{ "total_kills", "Total kills: %zu" },
-			{ "quests_completed", "Quests completed: %zu" },
-			{ "time_played", "Time played: {@%zu}" },
-			{ "max_uncommon_equip", "Maximum number of uncommon items equipped: %zu" },
-			{ "max_rare_equip", "Maximum number of rare items equipped: %zu" },
-			{ "max_epic_equip", "Maximum number of epic items equipped: %zu" },
-			{ "total_pvp_kills", "Total player kills: %zu" },
+																						// The priority of saving stats after an update
+			{ "cash_looted",		"Cash looted: {%zu}",								ComponentBase::PENDING_PERSISTENCE_UPDATE_NONE },
+			{ "total_kills",		"Total kills: %zu",									ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY },
+			{ "quests_completed",	"Quests completed: %zu",							ComponentBase::PENDING_PERSISTENCE_UPDATE_MEDIUM_PRIORITY },
+			{ "time_played",		"Time played: {@%zu}",								ComponentBase::PENDING_PERSISTENCE_UPDATE_NONE },
+			{ "max_uncommon_equip", "Maximum number of uncommon items equipped: %zu",	ComponentBase::PENDING_PERSISTENCE_UPDATE_NONE },
+			{ "max_rare_equip",		"Maximum number of rare items equipped: %zu",		ComponentBase::PENDING_PERSISTENCE_UPDATE_NONE },
+			{ "max_epic_equip",		"Maximum number of epic items equipped: %zu",		ComponentBase::PENDING_PERSISTENCE_UPDATE_NONE },
+			{ "total_pvp_kills",	"Total player kills: %zu",							ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY },
+			{ "bandages_crafted",	"Total bandages crafted: %zu",						ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

@@ -76,6 +76,7 @@ aura recently_bandaged:
 	consume_items: @_materials
 	produce_items: @_item
 	required_profession<@_skill>: first_aid
+	increment_character_stat: bandages_crafted
 }
 
 #####################################################

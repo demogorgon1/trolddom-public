@@ -61,7 +61,7 @@ namespace tpublic
 			}
 
 			// Public data
-			CharacterStat::Collection	m_stats;
+			CharacterStat::Collection							m_stats;
 		};
 
 	}
