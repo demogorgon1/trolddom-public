@@ -55,18 +55,48 @@ loot_group birds_uncommon: {}
 
 !define WORLD_DROPS
 {
-	possibility: { weight: 950 }
-	possibility: { weight: 500 loot_group: world_drops_junk }
-	possibility: { weight: 105 loot_group: world_drops_consumable }	
-	possibility: { weight: 105 loot_group: world_drops_uncommon }	
-	possibility: { weight: 34 loot_group: world_drops_uncommon_recipe_random }		
-	possibility: { weight: 24 loot_group: world_drops_uncommon_recipe }	
-	possibility: { weight: 24 loot_group: world_drops_rare }	
-	possibility: { weight: 14 loot_group: world_drops_rare_recipe_random }	
-	possibility: { weight: 12 loot_group: world_drops_rare_recipe }	
-	possibility: { weight: 1 loot_group: world_drops_epic }	
-		
+	possibility<must_not_be_elite>: { weight: 950 }
+	possibility<must_not_be_elite>: { weight: 500 loot_group: world_drops_junk }
+	possibility<must_not_be_elite>: { weight: 105 loot_group: world_drops_consumable }	
+	possibility<must_not_be_elite>: { weight: 105 loot_group: world_drops_uncommon }	
+	possibility<must_not_be_elite>: { weight: 34 loot_group: world_drops_uncommon_recipe_random }		
+	possibility<must_not_be_elite>: { weight: 24 loot_group: world_drops_uncommon_recipe }	
+	possibility<must_not_be_elite>: { weight: 24 loot_group: world_drops_rare }	
+	possibility<must_not_be_elite>: { weight: 14 loot_group: world_drops_rare_recipe_random }	
+	possibility<must_not_be_elite>: { weight: 12 loot_group: world_drops_rare_recipe }	
+	possibility<must_not_be_elite>: { weight: 1 loot_group: world_drops_epic }	
+
+	possibility<must_be_elite>: { weight: 425 }
+	possibility<must_be_elite>: { weight: 250 loot_group: world_drops_junk }
+	possibility<must_be_elite>: { weight: 105 loot_group: world_drops_consumable }	
+	possibility<must_be_elite>: { weight: 105 loot_group: world_drops_uncommon }	
+	possibility<must_be_elite>: { weight: 40 loot_group: world_drops_uncommon_recipe_random }		
+	possibility<must_be_elite>: { weight: 30 loot_group: world_drops_uncommon_recipe }	
+	possibility<must_be_elite>: { weight: 40 loot_group: world_drops_rare }	
+	possibility<must_be_elite>: { weight: 30 loot_group: world_drops_rare_recipe_random }	
+	possibility<must_be_elite>: { weight: 25 loot_group: world_drops_rare_recipe }	
+	possibility<must_be_elite>: { weight: 2 loot_group: world_drops_epic }	
+
 	<exists _extra_possibility> possibility: @_extra_possibility
+}
+
+!define WORLD_DROPS_RARE
+{
+	possibility<must_not_be_elite>: { weight: 200 loot_group: world_drops_uncommon }	
+	possibility<must_not_be_elite>: { weight: 60 loot_group: world_drops_uncommon_recipe_random }		
+	possibility<must_not_be_elite>: { weight: 50 loot_group: world_drops_uncommon_recipe }	
+	possibility<must_not_be_elite>: { weight: 50 loot_group: world_drops_rare }	
+	possibility<must_not_be_elite>: { weight: 25 loot_group: world_drops_rare_recipe_random }	
+	possibility<must_not_be_elite>: { weight: 25 loot_group: world_drops_rare_recipe }	
+	possibility<must_not_be_elite>: { weight: 1 loot_group: world_drops_epic }	
+
+	possibility<must_be_elite>: { weight: 100 loot_group: world_drops_uncommon }	
+	possibility<must_be_elite>: { weight: 60 loot_group: world_drops_uncommon_recipe_random }		
+	possibility<must_be_elite>: { weight: 50 loot_group: world_drops_uncommon_recipe }	
+	possibility<must_be_elite>: { weight: 150 loot_group: world_drops_rare }	
+	possibility<must_be_elite>: { weight: 25 loot_group: world_drops_rare_recipe_random }	
+	possibility<must_be_elite>: { weight: 25 loot_group: world_drops_rare_recipe }	
+	possibility<must_be_elite>: { weight: 1 loot_group: world_drops_epic }	
 }
 
 !define WORLD_DROPS_CLOTH

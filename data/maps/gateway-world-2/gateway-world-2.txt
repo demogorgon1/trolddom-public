@@ -283,7 +283,8 @@ loot_table .gateway_world_2:
 	default_fishing_loot_table: fish
 	view_attenuation: 0
 	view_attenuation_bias: 0
-	view_hidden_visibility: 35			
+	view_hidden_visibility: 35	
+	openable_elite: true	
 	
 	map_loot_tables: [ .gateway_world_2 ]
 

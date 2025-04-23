@@ -71,7 +71,7 @@ namespace tpublic
 		const EntityInstance*						aLootableEntityInstance,
 		uint32_t									aLevel,
 		uint32_t									aCreatureTypeId,
-		bool										aIsElite,
+		bool										aElite,
 		uint32_t									aPlayerWorldCharacterId,
 		Components::Lootable*						aLootable) const
 	{		
@@ -97,7 +97,7 @@ namespace tpublic
 					tpublic::UniformDistribution<uint32_t> distribution(npcMetricsLevel->m_cash.m_min, npcMetricsLevel->m_cash.m_max);
 					aLootable->m_availableCash = (int64_t)distribution(aRandom);
 
-					if(aLootable->m_availableCash > 0 && aIsElite)
+					if(aLootable->m_availableCash > 0 && aElite)
 						aLootable->m_availableCash = (int64_t)((float)aLootable->m_availableCash * npcMetricsLevel->m_eliteCash);
 
 					aLootable->m_cash = aLootable->m_availableCash > 0;						
@@ -109,7 +109,7 @@ namespace tpublic
 		}
 
 		// Items
-		GenerateLootableItems(aRandom, aPlayerEntityInstances, aLootableEntityInstance, aLevel, aCreatureTypeId, lootTable, aPlayerWorldCharacterId, aLootable);
+		GenerateLootableItems(aRandom, aPlayerEntityInstances, aLootableEntityInstance, aLevel, aCreatureTypeId, aElite, lootTable, aPlayerWorldCharacterId, aLootable);
 	}
 
 	void		
@@ -119,13 +119,14 @@ namespace tpublic
 		const EntityInstance*						aLootableEntityInstance,
 		uint32_t									aLevel,
 		uint32_t									aCreatureTypeId,
+		bool										aElite,
 		const Data::LootTable*						aLootTable,
 		uint32_t									aPlayerWorldCharacterId,
 		Components::Lootable*						aLootable) const
 	{
 		const Components::KillContribution* killContribution = aLootableEntityInstance->GetComponent<Components::KillContribution>();
 
-		GenerateItems(aRandom, aPlayerEntityInstances, aLootableEntityInstance, aLevel, aCreatureTypeId, aLootTable, [&](
+		GenerateItems(aRandom, aPlayerEntityInstances, aLootableEntityInstance, aLevel, aCreatureTypeId, aElite, aLootTable, [&](
 			const ItemInstance& aItemInstance,
 			uint32_t			aLootCooldownId)			
 		{			
@@ -197,6 +198,7 @@ namespace tpublic
 		const EntityInstance*						aLootableEntityInstance,
 		uint32_t									aLevel,
 		uint32_t									aCreatureTypeId,
+		bool										aElite,
 		const Data::LootTable*						aLootTable,
 		ItemCallback								aItemCallback) const
 	{	
@@ -219,6 +221,15 @@ namespace tpublic
 			{
 				if(!possibility.HasCreatureType(aCreatureTypeId))
 					continue;
+
+				if(possibility.m_elite != Data::LootTable::Possibility::ELITE_DOES_NOT_MATTER)
+				{
+					if(possibility.m_elite == Data::LootTable::Possibility::ELITE_MUST_BE && !aElite)
+						continue;
+
+					if (possibility.m_elite == Data::LootTable::Possibility::ELITE_MUST_NOT_BE && aElite)
+						continue;
+				}
 
 				if(aLootableEntityInstance != NULL)
 				{

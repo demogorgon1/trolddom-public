@@ -77,6 +77,7 @@ namespace tpublic::Systems
 					NULL,
 					randomItemVendor->m_level,
 					0,
+					false,
 					lootTable,
 					[&](
 						const ItemInstance& aItemInstance,

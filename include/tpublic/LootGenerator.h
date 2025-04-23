@@ -32,7 +32,7 @@ namespace tpublic
 							const EntityInstance*						aLootableEntityInstance,
 							uint32_t									aLevel,
 							uint32_t									aCreatureTypeId,
-							bool										aIsElite,
+							bool										aElite,
 							uint32_t									aPlayerWorldCharacterId,
 							Components::Lootable*						aLootable) const;
 		void			GenerateLootableItems(
@@ -41,6 +41,7 @@ namespace tpublic
 							const EntityInstance*						aLootableEntityInstance,
 							uint32_t									aLevel,
 							uint32_t									aCreatureTypeId,
+							bool										aElite,
 							const Data::LootTable*						aLootTable,
 							uint32_t									aPlayerWorldCharacterId,
 							Components::Lootable*						aLootable) const;
@@ -50,6 +51,7 @@ namespace tpublic
 							const EntityInstance*						aLootableEntityInstance,
 							uint32_t									aLevel,
 							uint32_t									aCreatureTypeId,
+							bool										aElite,
 							const Data::LootTable*						aLootTable,
 							ItemCallback								aItemCallback) const;						
 

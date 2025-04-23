@@ -162,6 +162,7 @@ map tirnwood_thicket:
 	level: 20
 	max_players: 5
 	max_minions: 1
+	openable_elite: true
 	
 	layers:
 	[

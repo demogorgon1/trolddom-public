@@ -306,7 +306,7 @@ ability npc_poison_bite_tick:
 	direct_effect damage:
 	{
 		damage_type: poison
-		function: { expression: a a: [ [ 1 2 ] [ 10 7 ] [ 20 14 ] [ 30 28 ] ] elite_multiplier: 1.7 }
+		function: { expression: a a: [ [ 1 2 ] [ 10 7 ] [ 20 14 ] [ 30 28 ] ] elite_multiplier: 2.1 }
 	}
 }
 

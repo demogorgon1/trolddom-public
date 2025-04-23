@@ -55,7 +55,14 @@ namespace tpublic
 			};
 
 			struct Possibility
-			{
+			{				
+				enum Elite : uint8_t
+				{
+					ELITE_DOES_NOT_MATTER,
+					ELITE_MUST_BE,
+					ELITE_MUST_NOT_BE
+				};
+
 				Possibility()
 				{
 
@@ -64,6 +71,16 @@ namespace tpublic
 				Possibility(
 					const SourceNode*	aSource)
 				{
+					if(aSource->m_annotation)
+					{
+						if(aSource->m_annotation->IsIdentifier("must_be_elite"))
+							m_elite = ELITE_MUST_BE;
+						else if (aSource->m_annotation->IsIdentifier("must_not_be_elite"))
+							m_elite = ELITE_MUST_NOT_BE;
+						else
+							TP_VERIFY(false, aSource->m_debugInfo, "Invalid elite annotation.");
+					}
+
 					aSource->ForEachChild([&](
 						const SourceNode* aChild)
 					{
@@ -97,6 +114,7 @@ namespace tpublic
 					aStream->WriteObjects(m_requirements);
 					aStream->WriteUInt(m_lootCooldownId);
 					aStream->WriteBool(m_useSpecialLootCooldown);
+					aStream->WritePOD(m_elite);
 				}
 
 				bool
@@ -116,6 +134,8 @@ namespace tpublic
 					if (!aStream->ReadUInt(m_lootCooldownId))
 						return false;
 					if(!aStream->ReadBool(m_useSpecialLootCooldown))
+						return false;
+					if (!aStream->ReadPOD(m_elite))
 						return false;
 					return true;
 				}
@@ -146,6 +166,7 @@ namespace tpublic
 				std::vector<Requirement>		m_requirements;
 				uint32_t						m_lootCooldownId = 0;
 				bool							m_useSpecialLootCooldown = false;
+				Elite							m_elite = ELITE_DOES_NOT_MATTER;
 			};
 
 			struct Slot

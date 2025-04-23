@@ -47,10 +47,14 @@ loot_table .default_chest:
 	[
 		# Guaranteed to have at least an uncommon item
 		{
-			possibility: { weight: 200 loot_group: world_drops_uncommon }	
-			possibility: { weight: 10 loot_group: world_drops_rare }	
-			possibility: { weight: 1 loot_group: world_drops_epic }	
-		}
+			possibility<must_not_be_elite>: { weight: 200 loot_group: world_drops_uncommon }	
+			possibility<must_not_be_elite>: { weight: 10 loot_group: world_drops_rare }	
+			possibility<must_not_be_elite>: { weight: 1 loot_group: world_drops_epic }	
+			
+			possibility<must_be_elite>: { weight: 120 loot_group: world_drops_uncommon }	
+			possibility<must_be_elite>: { weight: 10 loot_group: world_drops_rare }	
+			possibility<must_be_elite>: { weight: 1 loot_group: world_drops_epic }				
+		}			
 		
 		# A bunch of random stuff as well
 		!WORLD_DROPS {}

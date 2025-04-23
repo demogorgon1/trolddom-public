@@ -545,9 +545,12 @@ route thalvaron_mongo_patrol:
 		_creature_type: humanoid
 		_default_behavior_state: .mongo
 		_loot_table: default_humanoid
-		_weapon_damage: 1.35
-		_resource_health: 8
+		_weapon_damage: 1.39
+		_resource_health: 8.5
 		_elite: true
+		_immune_to_stun: true
+		_immune_to_immobilize: true
+		_immune_to_slow: true		
 		_in_combat_barks: [ { type: say text: "Leave Mongo alone in his swamp!" } ]
 	}
 
@@ -1227,4 +1230,51 @@ map_entity_spawn thalvaron_badlands_orc_gorvak:
 	entity thalvaron_badlands_orc_gorvak: !NPC { _string: "Commander Gorvak" _sprite: orc_6 _sprite_dead: orc_6_dead }	
 }
 
+##########################################################################################
+# Scorpion boss
 
+map_entity_spawn thalvaron_krask: 
+{ 
+	entity thalvaron_krask: {} 
+	spawn_timer: !NPC_RESPAWN_RARE{}
+}
+
+{
+	loot_table .krask: 
+	{
+		slots:
+		[	
+			{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
+		          map_message thalvaron: "Krask will not drop Token of Victory for {}." } } }
+
+			!WORLD_DROPS_RARE {}
+			!WORLD_DROPS {}
+		]	
+	}
+
+	${		
+		_faction: monsters
+		_creature_type: beast
+		_loot_table: .krask
+		_default_behavior_state: .wandering_short
+		_elite: true
+		_level: 20 
+		_string: "Krask" 
+		_sprite: scorpion_3 
+		_sprite_dead: scorpion_3_dead
+		_weapon_damage: 1.4
+		_health: 6.8
+		_immune_to_stun: true
+		_immune_to_immobilize: true
+		_immune_to_slow: true
+		
+		_abilities: 
+		[ 
+			{ id: npc_poison_bite target: random_player }
+			{ id: npc_attack } 
+		]		
+	}
+
+	entity thalvaron_krask: !NPC { }
+
+}

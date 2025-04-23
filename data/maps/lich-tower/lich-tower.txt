@@ -167,6 +167,7 @@ map lich_tower:
 	level: 18
 	max_players: 5
 	max_minions: 1
+	openable_elite: true
 	
 	layers:
 	[

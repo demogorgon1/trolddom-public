@@ -20,6 +20,7 @@ changelog:
 		{ text: "All talent points have been reset due to talent tree changes." }
 		{ text: "Buffs can be canceled by right clicking." }
 		{ text: "Real-time and historical fight details (damage per second, etc) can be accessed by right clicking in combat log." }
+		{ text: "Notice there are two new equipment slots for trinkets." }
 	]	
 }
 

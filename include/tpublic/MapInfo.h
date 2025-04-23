@@ -112,6 +112,11 @@ namespace tpublic
 				aItem->GetIdArray(DataType::ID_LOOT_TABLE, m_mapLootTableIds);
 				return true;
 			}
+			else if (aItem->m_name == "openable_elite")
+			{
+				m_openableElite = aItem->GetBool();
+				return true;
+			}
 			return false;
 		}
 
@@ -136,6 +141,7 @@ namespace tpublic
 			aWriter->WriteBool(m_autoIndoor);
 			aWriter->WriteBool(m_defaultIndoor);
 			aWriter->WriteBool(m_allowSpiritTravel);
+			aWriter->WriteBool(m_openableElite);
 		}
 
 		bool
@@ -176,6 +182,8 @@ namespace tpublic
 				return false;
 			if (!aReader->ReadBool(m_allowSpiritTravel))
 				return false;
+			if (!aReader->ReadBool(m_openableElite))
+				return false;
 			return true;
 		}
 
@@ -197,6 +205,7 @@ namespace tpublic
 		uint32_t									m_maxPlayers = 5;
 		uint32_t									m_maxMinions = 0;
 		bool										m_allowSpiritTravel = true;
+		bool										m_openableElite = false;
 	};
 
 }
