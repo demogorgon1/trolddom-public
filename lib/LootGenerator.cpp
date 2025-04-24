@@ -26,34 +26,37 @@ namespace tpublic
 		m_manifest->GetContainer<Data::Item>()->ForEach([&](
 			const Data::Item*	aItem)
 		{
-			UIntRange levelRange = aItem->m_levelRange;
-
-			if (levelRange.m_min == 0 && aItem->m_itemLevel > 0)
+			if(aItem->IsDefined())
 			{
-				levelRange.m_max = aItem->m_itemLevel + 2;
-				levelRange.m_min = aItem->m_itemLevel;
+				UIntRange levelRange = aItem->m_levelRange;
 
-				if(levelRange.m_min < 1)
-					levelRange.m_min = 1;
-
-				// For rare and epic items, make it possible for higher level NPCs to drop them as well
-				if (aItem->m_rarity == Rarity::ID_RARE || aItem->m_rarity == Rarity::ID_EPIC)
-					levelRange.m_max += 2;
-			}
-
-			for(uint32_t lootGroupId : aItem->m_lootGroups)
-			{
-				Group* group = _GetOrCreateGroup(lootGroupId);
-				
-				if(levelRange.m_min == 0)
+				if (levelRange.m_min == 0 && aItem->m_itemLevel > 0)
 				{
-					group->m_defaultLevelBucket.m_itemIds.push_back(aItem->m_id);
+					levelRange.m_max = aItem->m_itemLevel + 2;
+					levelRange.m_min = aItem->m_itemLevel;
+
+					if(levelRange.m_min < 1)
+						levelRange.m_min = 1;
+
+					// For rare and epic items, make it possible for higher level NPCs to drop them as well
+					if (aItem->m_rarity == Rarity::ID_RARE || aItem->m_rarity == Rarity::ID_EPIC)
+						levelRange.m_max += 2;
 				}
-				else
+
+				for(uint32_t lootGroupId : aItem->m_lootGroups)
 				{
-					for(uint32_t level = levelRange.m_min; level <= levelRange.m_max; level++)
-						group->GetOrCreateLevelBucket(level)->m_itemIds.push_back(aItem->m_id);
-				}				
+					Group* group = _GetOrCreateGroup(lootGroupId);
+				
+					if(levelRange.m_min == 0)
+					{
+						group->m_defaultLevelBucket.m_itemIds.push_back(aItem->m_id);
+					}
+					else
+					{
+						for(uint32_t level = levelRange.m_min; level <= levelRange.m_max; level++)
+							group->GetOrCreateLevelBucket(level)->m_itemIds.push_back(aItem->m_id);
+					}				
+				}
 			}
 			return true;
 		});

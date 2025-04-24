@@ -140,6 +140,7 @@ namespace tpublic
 			bool	IsVendor() const { return m_flags & FLAG_VENDOR; }
 			bool	IsKillContributionLoot() const { return m_flags & FLAG_KILL_CONTRIBUTION_LOOT; }
 			bool	IsQuestReward() const { return m_flags & FLAG_QUEST_REWARD; }
+			bool	IsDefined() const { return m_iconSpriteId != 0 && !m_string.empty(); }
 
 			// Base implementation
 			void
