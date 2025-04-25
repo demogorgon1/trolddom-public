@@ -29,7 +29,7 @@ ability mana_potion (potion):
 	target_particle_system: small_heal	
 }
  
-item mana_potion:
+item mana_potion (potion):
 {
 	loot_groups: [ world_drops_consumable ]
 }
