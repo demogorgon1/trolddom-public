@@ -31,7 +31,7 @@ npc_behavior_state .wandering:
 	range: 0
 	cooldowns: [ global ]
 	cast_time: 20
-	flags: [ target_self no_indoor can_use_mounted ]
+	flags: [ target_self no_indoor can_use_mounted item ]
 	states: [ default ]
 	icon: @_icon
 	delay: 2
