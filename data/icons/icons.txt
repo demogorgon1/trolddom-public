@@ -777,6 +777,7 @@ sprites:
 	sprite icon_large_red_bag : { tags: [ icon ] }
 	sprite icon_mana_salve : { tags: [ icon ] }
 	sprite icon_mongo : { tags: [ icon ] }
+	sprite icon_gray_horse : { tags: [ icon ] }
 	
 }
 

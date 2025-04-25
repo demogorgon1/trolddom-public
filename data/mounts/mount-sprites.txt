@@ -11,5 +11,8 @@ sprites:
 	sprite dark_brown_horse_0: { }
 	sprite dark_brown_horse_1: { }
 	sprite dark_brown_horse_2: { }
+	sprite gray_horse_0: { }
+	sprite gray_horse_1: { }
+	sprite gray_horse_2: { }
 
 }

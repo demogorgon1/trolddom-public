@@ -1,0 +1,30 @@
+dialogue_screen .pinto_starleaf_vendor:
+{
+	sell mount_gray_horse: { quantity: 1 }	
+}
+
+dialogue_screen .pinto_starleaf_dialogue:
+{
+	text: 
+	[	
+		"What brings you to my part of the woods? Want to buy a horse?"
+	]		
+	
+	options:
+	[	
+		{ goto: .pinto_starleaf_vendor text: "Let me browse your goods." }
+	]
+}
+
+entity thalvaron_pinto_starleaf: !NPC
+{
+	_string: "Pinto Starleaf"
+	_dialogue_root: $dialogue_root { .pinto_starleaf_dialogue: { } }
+	_sprite: elf_1
+	_sprite_dead: elf_1_dead
+	_level: 20
+	_faction: children_of_the_moon		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}

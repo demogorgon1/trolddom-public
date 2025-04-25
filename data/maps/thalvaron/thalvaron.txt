@@ -274,6 +274,8 @@ map_entity_spawn thalvaron_thour: { entity thalvaron_thour: { init_state: defaul
 map_entity_spawn thalvaron_baskin_johnson: { entity thalvaron_baskin_johnson: { init_state: default } }
 map_entity_spawn thalvaron_gerhard_frostmane: { entity thalvaron_gerhard_frostmane: { init_state: default } }
 map_entity_spawn thalvaron_keanu_horton: { entity thalvaron_keanu_horton: { init_state: default } }
+map_entity_spawn thalvaron_gray_horse: { entity gray_horse: { init_state: default } }
+map_entity_spawn thalvaron_pinto_starleaf: { entity thalvaron_pinto_starleaf: { init_state: default } }
 
 # SW
 map_entity_spawn thalvaron_brian_riddle: { entity thalvaron_brian_riddle: { init_state: default } }
@@ -649,6 +651,8 @@ map_palette .stuff:
 	entity_spawn thalvaron_gerhard_frostmane: [ 155 23 148 ]
 	entity_spawn thalvaron_keanu_horton: [ 155 14 234 ]
 	entity_spawn thalvaron_throgar: [ 30 107 93 ]
+	entity_spawn thalvaron_pinto_starleaf: [ 34 94 245 ]
+	entity_spawn thalvaron_gray_horse: [ 134 94 245 ]
 
 	# SW
 	entity_spawn thalvaron_brian_riddle: [ 66 88 99 ]

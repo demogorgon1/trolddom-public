@@ -373,7 +373,7 @@ loot_table .crab_boss_5:
 entity crab_boss_5: !NPC
 {
 	_string: "Suspiciously Large Crab Man"
-	_level: 4
+	_level: 5
 	_faction: monsters
 	_resource_health: 1.5	
 	_sprite: crab_monster_boss_1

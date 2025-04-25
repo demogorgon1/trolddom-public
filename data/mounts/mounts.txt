@@ -1,5 +1,11 @@
 aura_group mounts: { }
 
+npc_behavior_state .wandering:
+{
+	behavior: wandering
+	max_range: 2
+}
+
 !define local MOUNT
 {
 	sprite: @_sprite
@@ -74,7 +80,10 @@ aura_group mounts: { }
 			modifier not_pushable: {}
 		}			
 		combat_private<static>:{ }
-		npc: { }		
+		npc: 
+		{ 
+			<exists _wandering and _wandering> default_behavior_state: .wandering
+		}		
 		sprite<static>: 
 		{ 
 			animations:
@@ -85,7 +94,6 @@ aura_group mounts: { }
 		}				
 	}
 }
-
 
 ###############################################################################
 # Brown Horse
@@ -128,3 +136,24 @@ aura dark_brown_horse: !MOUNT_AURA{}
 ability dark_brown_horse: !MOUNT_ABILITY{}
 entity dark_brown_horse: !MOUNT_ENTITY{}
 item mount_dark_brown_horse: !MOUNT_ITEM{}
+
+###############################################################################
+# Gray Horse
+
+${
+	_string: "Gray Horse"
+	_description: "Summons or dismisses a rideable horse."
+	_icon: icon_gray_horse
+	_id: gray_horse
+	_sprite: gray_horse_0
+	_walk_sprites: [ gray_horse_1 gray_horse_0 gray_horse_2 gray_horse_0 ]
+	_creature_type: beast
+	_cost: 300000
+	_level: 20	
+}
+
+mount gray_horse: !MOUNT{}
+aura gray_horse: !MOUNT_AURA{}
+ability gray_horse: !MOUNT_ABILITY{}
+entity gray_horse: !MOUNT_ENTITY{ _wandering: true }
+item mount_gray_horse: !MOUNT_ITEM{}
