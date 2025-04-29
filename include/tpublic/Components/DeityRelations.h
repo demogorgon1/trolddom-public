@@ -126,10 +126,25 @@ namespace tpublic
 			Reset()
 			{
 				m_table.m_map.clear();
+
+				m_deityEvents.clear();
 			}
 
 			// Public data
-			Table			m_table;
+			Table							m_table;
+
+			// Internal, server only
+			struct DeityEvent
+			{
+				uint32_t					m_deityId = 0;
+				uint32_t					m_deityPower = 0;
+				uint32_t					m_worshipLevel = 0;
+				int32_t						m_favor = 0;
+				uint32_t					m_itemId = 0;
+				bool						m_desecrated = false;
+			};
+
+			std::vector<DeityEvent>			m_deityEvents;
 		};
 	}
 

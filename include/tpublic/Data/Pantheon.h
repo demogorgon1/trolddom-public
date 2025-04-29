@@ -163,6 +163,8 @@ namespace tpublic
 							m_string = aChild->GetString();
 						else if (aChild->m_name == "deity_specifier")
 							m_deitySpecifier = aChild->GetString();
+						else if (aChild->m_name == "deity_description")
+							m_deityDescription = aChild->GetString();
 						else if (aChild->m_name == "shrine_display_name_prefix")
 							m_shrineDisplayNamePrefix = aChild->GetString();
 						else if(aChild->m_name == "faction")
@@ -196,6 +198,7 @@ namespace tpublic
 				aWriter->WriteString(m_string);
 				aWriter->WriteUInt(m_iconSpriteId);
 				aWriter->WriteString(m_deitySpecifier);
+				aWriter->WriteString(m_deityDescription);
 				aWriter->WriteUInt(m_factionId);
 				aWriter->WriteUInt(m_oppositionPantheonId);
 				aWriter->WriteUInt(m_prayAbilityId);
@@ -218,6 +221,8 @@ namespace tpublic
 				if (!aReader->ReadUInt(m_iconSpriteId))
 					return false;
 				if (!aReader->ReadString(m_deitySpecifier))
+					return false;
+				if (!aReader->ReadString(m_deityDescription))
 					return false;
 				if (!aReader->ReadUInt(m_factionId))
 					return false;
@@ -249,6 +254,7 @@ namespace tpublic
 			uint32_t							m_iconSpriteId = 0;
 			uint32_t							m_factionId = 0;
 			std::string							m_deitySpecifier;
+			std::string							m_deityDescription;
 			uint32_t							m_oppositionPantheonId = 0;
 			std::string							m_notificationStrings[NUM_NOTIFICATION_STRINGS];
 			std::vector<std::string>			m_playerLevels;

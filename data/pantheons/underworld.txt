@@ -16,6 +16,7 @@ pantheon underworld:
 	notification_string<disciple>: "An unholy portal has opened."
 	
 	deity_specifier: "an unholy"
+	deity_description: "an unholy demon of The Underworld"
 	shrine_display_name_prefix: "Unholy Shrine of "
 	
 	hostile_classes: [ paladin ]
