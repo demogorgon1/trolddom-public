@@ -25,7 +25,7 @@ namespace tpublic
 			if (aTargetLevel > aLevel)
 				p *= 0.75f;
 
-			return (uint32_t)(tpublic::Helpers::Clamp<float>(p, 0.0f, 1.0f) * (uint32_t)UINT32_MAX);
+			return (uint32_t)(tpublic::Helpers::Clamp<float>(p, 0.0f, 1.0f) * (float)UINT32_MAX);
 		}
 
 	}

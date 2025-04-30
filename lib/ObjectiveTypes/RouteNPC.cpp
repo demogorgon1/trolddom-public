@@ -16,7 +16,7 @@ namespace tpublic::ObjectiveTypes
 			const RouteNPC*					aObjective)
 			: m_objective(aObjective)
 		{
-
+			(void)m_objective;
 		}
 
 		virtual ~Instance()

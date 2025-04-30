@@ -89,9 +89,9 @@ namespace tpublic::DirectEffects
 		case TARGET_BEHIND:
 			{
 				const Components::Position* sourcePosition = aSource->GetComponent<Components::Position>();
-				Vec2 behindPosition(
+				Vec2 behindPosition{
 					sourcePosition->m_position.m_x + (targetPosition->m_position.m_x - sourcePosition->m_position.m_x) * 2,
-					sourcePosition->m_position.m_y + (targetPosition->m_position.m_y - sourcePosition->m_position.m_y) * 2);
+					sourcePosition->m_position.m_y + (targetPosition->m_position.m_y - sourcePosition->m_position.m_y) * 2 };
 
 				IWorldView::EntityQuery query;
 				query.m_flags = 0;

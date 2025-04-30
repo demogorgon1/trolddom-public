@@ -20,7 +20,7 @@ namespace tpublic
 		ToStream(&writer);
 		std::string base64;
 		Base64::Encode(&buffer[0], buffer.size(), base64);
-		return std::move(base64);
+		return base64;
 	}
 	
 	void

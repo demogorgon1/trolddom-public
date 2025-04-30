@@ -229,7 +229,7 @@ namespace tpublic
 		GetVec2() const
 		{
 			TP_VERIFY(m_type == TYPE_ARRAY && m_children.size() == 2, m_debugInfo, "Not an two-component vector.");
-			return Vec2(m_children[0]->GetInt32(), m_children[1]->GetInt32());
+			return Vec2{ m_children[0]->GetInt32(), m_children[1]->GetInt32() };
 		}
 
 		float

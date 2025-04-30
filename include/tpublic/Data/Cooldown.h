@@ -87,7 +87,7 @@ namespace tpublic
 				if (!aStream->ReadBool(m_shared))
 					return false;
 				if(!aStream->ReadUInt(m_talentTreeId))
-					return FALSE;
+					return false;
 				return true;
 			}
 

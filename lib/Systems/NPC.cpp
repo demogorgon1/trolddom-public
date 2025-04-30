@@ -534,7 +534,7 @@ namespace tpublic::Systems
 														const Data::Ability* ability = GetManifest()->GetById<Data::Ability>(trigger->m_abilityId);
 
 														aContext->m_eventQueue->EventQueueAbility(
-															SourceEntityInstance(aEntityInstanceId, 0),
+															SourceEntityInstance{ aEntityInstanceId, 0 },
 															aEntityInstanceId,
 															Vec2(),
 															ability);

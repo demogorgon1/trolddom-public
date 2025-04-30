@@ -40,7 +40,7 @@ namespace tpublic
 		// IMPORTANT: Must match Id enum
 		static constexpr const Info INFO[] =
 		{
-			{ NULL, NULL },
+			{ NULL, NULL, ComponentBase::PENDING_PERSISTENCE_UPDATE_NONE },
 
 																						// The priority of saving stats after an update
 			{ "cash_looted",		"Cash looted: {%zu}",								ComponentBase::PENDING_PERSISTENCE_UPDATE_NONE },

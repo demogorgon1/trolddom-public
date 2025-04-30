@@ -1309,11 +1309,11 @@ namespace tpublic
 						output->PrintF(1, "_produce: { %s: 1 }", itemName.c_str());
 						output->PrintF(1, "_materials:");
 						output->PrintF(1, "{");
-						for (const std::pair<std::string, uint32_t>& material : materials)
+						for (const std::pair<std::string, uint32_t> material : materials)
 							output->PrintF(2, "%s: %u", material.first.c_str(), material.second);
 						output->PrintF(1, "}");
 						output->PrintF(1, "_skill: %u", skill);						
-						for(const std::pair<std::string, bool>& craftBool : craftBools)
+						for(const std::pair<std::string, bool> craftBool : craftBools)
 							output->PrintF(1, "%s: %s", craftBool.first.c_str(), craftBool.second ? "true" : "false");
 						output->PrintF(0, "}");
 					}

@@ -16,7 +16,7 @@ namespace tpublic
 		{
 			std::unordered_set<uint32_t> questRewardItemIds;
 
-			aManifest->GetContainer<Data::Quest>()->ForEach([aManifest, &questRewardItemIds](
+			aManifest->GetContainer<Data::Quest>()->ForEach([&questRewardItemIds](
 				Data::Quest* aQuest)
 			{
 				for(uint32_t itemId : aQuest->m_rewardAllItems)
@@ -26,7 +26,7 @@ namespace tpublic
 				return true;
 			});
 
-			aManifest->GetContainer<Data::Item>()->ForEach([aManifest, &questRewardItemIds](
+			aManifest->GetContainer<Data::Item>()->ForEach([&questRewardItemIds](
 				Data::Item* aItem)
 			{
 				if(questRewardItemIds.contains(aItem->m_id))

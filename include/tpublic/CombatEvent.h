@@ -69,6 +69,7 @@ namespace tpublic
 			case ID_BLOCK:		return "block";
 			case ID_HIT:		return "hit";
 			case ID_CRITICAL:	return "critical";
+			default:			break;
 			}
 			return "";
 		}
