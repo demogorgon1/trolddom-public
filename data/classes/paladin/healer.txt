@@ -610,6 +610,7 @@ ability divine_shield:
 	range: 7
 	icon: icon_divine_shield
 	talent_tree: paladin_healer
+	requirement target<must_not_have_aura>: divine_shield_debuff
 	
 	direct_effect apply_aura:
 	{

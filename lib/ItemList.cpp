@@ -83,7 +83,7 @@ namespace tpublic
 			}
 		}
 
-		if(aAutoGrow)
+		if(aAutoGrow || (uint32_t)m_entries.size() < aSize)
 		{
 			Entry t;
 			t.m_item = aItemInstance;
