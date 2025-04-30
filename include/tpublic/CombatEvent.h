@@ -57,6 +57,22 @@ namespace tpublic
 			return INVALID_ID;
 		}
 
+		constexpr const char*
+		IdToString(
+			Id			aId)
+		{
+			switch(aId)
+			{
+			case ID_MISS:		return "miss";
+			case ID_DODGE:		return "dodge";
+			case ID_PARRY:		return "parry";
+			case ID_BLOCK:		return "block";
+			case ID_HIT:		return "hit";
+			case ID_CRITICAL:	return "critical";
+			}
+			return "";
+		}
+
 	}
 
 }
