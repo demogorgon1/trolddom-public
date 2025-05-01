@@ -7,6 +7,7 @@
 #include <tpublic/Data/LootTable.h>
 #include <tpublic/Data/NameTemplate.h>
 #include <tpublic/Data/Pantheon.h>
+#include <tpublic/Data/Profession.h>
 #include <tpublic/Data/Tag.h>
 #include <tpublic/Data/WordGenerator.h>
 
@@ -87,6 +88,7 @@ namespace tpublic
 		m_wordListQueryCache = std::make_unique<WordList::QueryCache>(&m_manifest->m_wordList);
 		m_taggedSpriteData = std::make_unique<TaggedDataCache<Data::Sprite>>(m_manifest);
 		m_taggedAuraData = std::make_unique<TaggedDataCache<Data::Aura>>(m_manifest);
+		m_taggedItemData = std::make_unique<TaggedDataCache<Data::Item>>(m_manifest);
 
 		// Initialize output path
 		{
@@ -167,12 +169,22 @@ namespace tpublic
 				_ReadStackObjectArray(StackObject::TYPE_ABILITY, aChild);
 			else if (aChild->m_name == "weapon_speeds")
 				_ReadStackObjectArray(StackObject::TYPE_WEAPON_SPEED, aChild);
+			else if (aChild->m_name == "item_suffixes")
+				_ReadStackObjectArray(StackObject::TYPE_ITEM_SUFFIX, aChild);
+			else if (aChild->m_name == "item_prefixes")
+				_ReadStackObjectArray(StackObject::TYPE_ITEM_PREFIX, aChild);
+			else if (aChild->m_name == "equipment_slots")
+				_ReadStackObjectArray(StackObject::TYPE_EQUIPMENT_SLOT, aChild);
+			else if (aChild->m_name == "loot_groups")
+				_ReadStackObjectArray(StackObject::TYPE_LOOT_GROUP, aChild);
 			else if (aChild->m_name == "items")
 				_ReadItems(aChild);
 			else if (aChild->m_name == "deities")
 				_ReadDeities(aChild);
 			else if (aChild->m_name == "npcs")
 				_ReadNPCs(aChild);
+			else if (aChild->m_name == "crafting")
+				_ReadCrafting(aChild);
 			else
 				TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 		});
@@ -191,6 +203,70 @@ namespace tpublic
 
 		switch(aType)
 		{
+		case StackObject::TYPE_LOOT_GROUP:
+			{
+				aSource->GetObject()->ForEachChild([&](
+					const SourceNode* aChild)
+				{
+					if (aChild->m_name == "loot_group")
+						stackObject->m_lootGroup.m_lootGroupId = aChild->GetId(DataType::ID_LOOT_GROUP);
+					else if (aChild->m_name == "rarity")
+						stackObject->m_lootGroup.m_rarity = Rarity::StringToId(aChild->GetIdentifier());
+					else
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+				});
+			}
+			break;
+
+		case StackObject::TYPE_EQUIPMENT_SLOT:
+			{
+				stackObject->m_equipmentSlot = EquipmentSlot::StringToId(aSource->GetIdentifier());
+				TP_VERIFY(stackObject->m_equipmentSlot != EquipmentSlot::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid equipment slot.", aSource->GetIdentifier());
+			}
+			break;
+
+		case StackObject::TYPE_ITEM_PREFIX:
+			{
+				aSource->GetObject()->ForEachChild([&](
+					const SourceNode* aChild)
+				{
+					if (aChild->m_name == "level_range")
+						stackObject->m_itemPrefix.m_levelRange = UIntRange(aChild);
+					else if (aChild->m_name == "rarity")
+						stackObject->m_itemPrefix.m_rarity = Rarity::StringToId(aChild->GetIdentifier());
+					else if (aChild->m_name == "string")
+						stackObject->m_itemPrefix.m_string = aChild->GetString();
+					else if (aChild->m_name == "material_multiplier")
+						stackObject->m_itemPrefix.m_materialMultiplier = aChild->GetFloat();
+					else
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+				});
+			}
+			break;
+
+		case StackObject::TYPE_ITEM_SUFFIX:
+			{
+				aSource->GetObject()->ForEachChild([&](
+					const SourceNode* aChild)
+				{
+					if (aChild->m_name == "string")
+					{
+						stackObject->m_itemSuffix.m_string = aChild->GetString();
+					}
+					else if (aChild->m_name == "budget_bias")
+					{
+						stackObject->m_itemSuffix.m_budgetBias = aChild->GetInt32();
+					}
+					else
+					{
+						Stat::Id id = Stat::StringToId(aChild->m_name.c_str());
+						TP_VERIFY(id != Stat::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid stat or item.", aChild->m_name.c_str());
+						stackObject->m_itemSuffix.m_stats.m_stats[id] = aChild->GetFloat();
+					}
+				});
+			}
+			break;
+
 		case StackObject::TYPE_RANDOM_NUMBER_GENERATOR:
 			{
 				stackObject->m_randomNumberGenerator = std::make_unique<std::mt19937>(aSource->GetUInt32());
@@ -215,7 +291,29 @@ namespace tpublic
 
 		case StackObject::TYPE_ABILITY:
 			{
-				stackObject->m_abilityId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aSource->GetIdentifier());
+				if(aSource->m_type == SourceNode::TYPE_OBJECT)
+				{
+					aSource->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if (aChild->m_name == "target" && aChild->IsIdentifier("random_player"))
+							stackObject->m_ability.m_targetType = Components::NPC::AbilityEntry::TARGET_TYPE_RANDOM_PLAYER;
+						else if (aChild->m_name == "target" && aChild->IsIdentifier("self"))
+							stackObject->m_ability.m_targetType = Components::NPC::AbilityEntry::TARGET_TYPE_SELF;
+						else if (aChild->m_name == "target" && aChild->IsIdentifier("low_health_friend_or_self"))
+							stackObject->m_ability.m_targetType = Components::NPC::AbilityEntry::TARGET_TYPE_LOW_HEALTH_FRIEND_OR_SELF;
+						else if(aChild->m_name == "id")
+							stackObject->m_ability.m_abilityId = aChild->GetId(DataType::ID_ABILITY);
+						else if(aChild->m_name == "target_must_not_have_aura")
+							stackObject->m_ability.m_targetMustNotHaveAuraId = aChild->GetId(DataType::ID_AURA);
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					});
+				}
+				else
+				{
+					stackObject->m_ability.m_abilityId = aSource->GetId(DataType::ID_ABILITY);
+				}				
 			}
 			break;
 
@@ -283,6 +381,10 @@ namespace tpublic
 				else if(aChild->m_name == "weight")
 				{
 					stackObject->m_itemSpecial.m_weight = aChild->GetUInt32();
+				}
+				else if(aChild->m_name == "exclude_item_types")
+				{
+					aChild->GetIdArrayWithLookup<ItemType::Id, ItemType::INVALID_ID>(stackObject->m_itemSpecial.m_excludeItemTypes, [](const char* aString) { return ItemType::StringToId(aString); });
 				}
 				else
 				{
@@ -362,6 +464,8 @@ namespace tpublic
 		TP_VERIFY(rarity != Rarity::INVALID_ID, aSource->m_debugInfo, "Invalid rarity.");
 		TP_VERIFY(lootGroups.size() > 0, aSource->m_debugInfo, "No loot groups.");
 		TP_VERIFY(type != INVALID_TYPE, aSource->m_debugInfo, "No type.");
+
+		std::unordered_set<std::string> createdItemNames;
 
 		for(uint32_t i = 0; i < count; i++)
 		{
@@ -457,10 +561,30 @@ namespace tpublic
 
 					allTags = baseNameWord->m_allTags;
 
-					_CreateDesignation(baseNameWord->m_word.c_str(), designation, contextTags, allTags, statWeights, itemString);
+					for(;;)
+					{
+						_CreateDesignation(baseNameWord->m_word.c_str(), designation, contextTags, allTags, statWeights, itemString);
+
+						// Check we didn't already create an item with this name
+						uint32_t existingIdWithName = m_manifest->TryGetExistingIdByName<Data::Item>(itemString.c_str());
+						if(existingIdWithName == 0 && !createdItemNames.contains(itemString))
+						{
+							createdItemNames.insert(itemString);
+							break;
+						}
+					}
 
 					if(statWeights.IsEmpty())
-						Helpers::GetRandomStatWeights(_GetRandom()(), statWeights);
+					{
+						std::unordered_set<Stat::Id> excludedStats;
+
+						// FIXME: would be nicer to define this rule in data instead (cloth armor (besides capes) shouldn't have block value
+						bool isBackSlot = (itemClass->m_slots.size() == 1 && itemClass->m_slots[0] == EquipmentSlot::ID_BACK);
+						if(itemType == ItemType::ID_ARMOR_CLOTH && !isBackSlot)
+							excludedStats.insert(Stat::ID_BLOCK_VALUE);
+
+						Helpers::GetRandomStatWeights(excludedStats, _GetRandom()(), statWeights);
+					}
 
 					statWeights.RemoveLowStats(maxDifferentStats);
 					statWeights.Add(baseStatWeights);
@@ -479,7 +603,7 @@ namespace tpublic
 						{
 							if(_GetRandomIntInRange<uint32_t>(1, 100) < propability)
 							{
-								const StackObject::ItemSpecial* itemSpecial = _PickItemSpecial();
+								const StackObject::ItemSpecial* itemSpecial = _PickItemSpecial(itemType);
 								if(itemSpecial == NULL)
 									break;
 								
@@ -573,9 +697,9 @@ namespace tpublic
 			if(aChild->m_name == "count")
 				count = aChild->GetUInt32();
 			else if(aChild->m_name == "name_generator")
-				nameWordGeneratorId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_WORD_GENERATOR, aChild->GetIdentifier());
+				nameWordGeneratorId = aChild->GetId(DataType::ID_WORD_GENERATOR);
 			else if (aChild->m_name == "pantheon")
-				pantheonId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PANTHEON, aChild->GetIdentifier());
+				pantheonId = aChild->GetId(DataType::ID_PANTHEON);
 			else if(aChild->m_name == "must_have_tags")
 				aChild->GetIdArray(DataType::ID_TAG, mustHaveTags);
 			else if (aChild->m_name == "must_not_have_tags")
@@ -826,6 +950,7 @@ namespace tpublic
 		std::vector<uint32_t> extraTags;
 		UIntRange abilityCount;
 		bool hasMana = false;
+		uint32_t specialLootCooldownSeconds = 0; 
 
 		aSource->ForEachChild([&](
 			const SourceNode* aChild)
@@ -841,19 +966,21 @@ namespace tpublic
 			else if (aChild->m_name == "health_multiplier_range")
 				healthMultiplierRange = FloatRange(aChild);
 			else if (aChild->m_name == "name_template")
-				nameTemplateId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_NAME_TEMPLATE, aChild->GetIdentifier());
+				nameTemplateId = aChild->GetId(DataType::ID_NAME_TEMPLATE);
 			else if (aChild->m_name == "faction")
-				factionId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_FACTION, aChild->GetIdentifier());
+				factionId = aChild->GetId(DataType::ID_FACTION);
 			else if (aChild->m_name == "sprite")
-				spriteTagContextId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TAG_CONTEXT, aChild->GetIdentifier());
+				spriteTagContextId = aChild->GetId(DataType::ID_TAG_CONTEXT);
 			else if (aChild->m_name == "creature_type")
-				creatureTypeId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_CREATURE_TYPE, aChild->GetIdentifier());
+				creatureTypeId = aChild->GetId(DataType::ID_CREATURE_TYPE);
 			else if (aChild->m_name == "loot_table")
-				lootTableId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_LOOT_TABLE, aChild->GetIdentifier());
+				lootTableId = aChild->GetId(DataType::ID_LOOT_TABLE);
 			else if (aChild->m_name == "extra_tags")
 				aChild->GetIdArray(DataType::ID_TAG, extraTags);
 			else if(aChild->m_name == "abilities")
 				abilityCount = UIntRange(aChild);
+			else if(aChild->m_name == "special_loot_cooldown_seconds")	
+				specialLootCooldownSeconds = aChild->GetUInt32();				
 			else
 				TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 		});
@@ -896,15 +1023,16 @@ namespace tpublic
 			float weaponDamageMultiplier = weaponDamageMultiplierRange.GetRandom(_GetRandom());
 			float healthMultiplier = healthMultiplierRange.GetRandom(_GetRandom());
 
+			std::vector<const StackObject::Ability*> abilities;
 			uint32_t numAbilities = abilityCount.GetRandom(_GetRandom());
-			std::unordered_set<const Data::Ability*> abilities;
 			if(numAbilities > 0)
 			{
-				std::vector<const Data::Ability*> availableAbilities;
+				std::vector<const StackObject::Ability*> availableAbilities;
 				_GetAbilities(availableAbilities);
 				for(size_t j = 0; j < availableAbilities.size(); j++)
 				{
-					const Data::Ability* abilityData = availableAbilities[j];
+					const Data::Ability* abilityData = m_manifest->GetById<Data::Ability>(availableAbilities[j]->m_abilityId);
+				
 					if(abilityData->m_npcLevelRange.has_value())
 					{
 						if (level < abilityData->m_npcLevelRange->m_min || level > abilityData->m_npcLevelRange->m_max)
@@ -915,12 +1043,22 @@ namespace tpublic
 					}
 				}
 
+				std::unordered_set<const StackObject::Ability*> abilitySet;
+				std::vector<const StackObject::Ability*> tmp = availableAbilities;
+
 				for (uint32_t j = 0; j < numAbilities; j++)
 				{
-					const Data::Ability* pickedAbility;
-					if(Helpers::GetAndRemoveCyclicFromVector(_GetRandom(), availableAbilities, pickedAbility))
-						abilities.insert(pickedAbility);
+					const StackObject::Ability* pickedAbility;
+					if(Helpers::GetAndRemoveCyclicFromVector(_GetRandom(), tmp, pickedAbility))
+						abilitySet.insert(pickedAbility);
 				}
+
+				for (size_t j = 0; j < availableAbilities.size(); j++)
+				{
+					const StackObject::Ability* availableAbility = availableAbilities[j];
+					if(abilitySet.contains(availableAbility))
+						abilities.push_back(availableAbility);
+				}				
 			}
 
 			{
@@ -942,11 +1080,34 @@ namespace tpublic
 
 				output->PrintF(1, "_creature_type: %s", creatureType->m_name.c_str());
 				output->PrintF(1, "_loot_table: %s", lootTable->m_name.c_str());
+
+				if(specialLootCooldownSeconds != 0)
+					output->PrintF(1, "_special_loot_cooldown: $loot_cooldown { seconds: %u }", specialLootCooldownSeconds);
+
 				output->PrintF(1, "_abilities:");
 				output->PrintF(1, "[");
-				for(const Data::Ability* ability : abilities)
-					output->PrintF(2, "{ id: %s }", ability->m_name.c_str());
-				output->PrintF(2, "{ id: npc_attack }");
+				for(const StackObject::Ability* ability : abilities)
+				{
+					const Data::Ability* abilityData = m_manifest->GetById<Data::Ability>(ability->m_abilityId);
+
+					output->PrintF(2, "{");
+					
+					output->PrintF(3, "id: %s", abilityData->m_name.c_str());
+					if(ability->m_targetType == Components::NPC::AbilityEntry::TARGET_TYPE_LOW_HEALTH_FRIEND_OR_SELF)
+						output->PrintF(3, "target: low_health_friend_or_self");
+					else if (ability->m_targetType == Components::NPC::AbilityEntry::TARGET_TYPE_RANDOM_PLAYER)
+						output->PrintF(3, "target: random_player");
+					else if (ability->m_targetType == Components::NPC::AbilityEntry::TARGET_TYPE_SELF)
+						output->PrintF(3, "target: self");
+					
+					if(ability->m_targetMustNotHaveAuraId != 0)
+						output->PrintF(3, "requirement target<must_not_have_aura>: %s", m_manifest->GetById<Data::Aura>(ability->m_targetMustNotHaveAuraId)->m_name.c_str());
+
+					output->PrintF(2, "}");
+				}
+				output->PrintF(2, "{");
+				output->PrintF(3, "id: npc_attack");
+				output->PrintF(2, "}");
 				output->PrintF(1, "]");
 
 				if (tags.size() > 0)
@@ -965,6 +1126,228 @@ namespace tpublic
 			}
 
 			m_nextNPCNumber++;
+		}
+	}
+
+	void
+	GenerationJob::_ReadCrafting(
+		const SourceNode*	aSource)
+	{
+		uint32_t professionId = 0;
+		ItemType::Id itemType = ItemType::INVALID_ID;
+		std::string craftMacro;
+		std::string learnMacro;
+		std::string recipeMacro;
+		std::string recipePrefix = "Recipe";
+		std::unordered_map<std::string, bool> craftBools;
+		std::unordered_map<std::string, uint32_t> baseMaterials;
+		uint32_t reagentTagId = m_manifest->TryGetExistingIdByName<Data::Tag>("reagent");
+
+		aSource->GetObject()->ForEachChild([&](
+			const SourceNode* aChild)
+		{
+			if (aChild->m_name == "profession")
+				professionId = aChild->GetId(DataType::ID_PROFESSION);
+			else if (aChild->m_name == "item_type")
+				itemType = ItemType::StringToId(aChild->GetIdentifier());
+			else if (aChild->m_name == "craft_macro")
+				craftMacro = aChild->GetIdentifier();
+			else if (aChild->m_name == "recipe_macro")
+				recipeMacro = aChild->GetIdentifier();
+			else if (aChild->m_name == "learn_macro")
+				learnMacro = aChild->GetIdentifier();
+			else if (aChild->m_name == "recipe_prefix")
+				recipePrefix = aChild->GetString();
+			else if(aChild->m_tag == "craft")
+				craftBools[aChild->m_name] = aChild->GetBool();
+			else if (aChild->m_tag == "base_material")
+				baseMaterials[aChild->m_name] = aChild->GetUInt32();
+			else if(aChild->m_name == "reagent_tag")
+				reagentTagId = aChild->GetId(DataType::ID_TAG);
+			else
+				TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+		});
+
+		TP_VERIFY(itemType != ItemType::INVALID_ID, aSource->m_debugInfo, "No item type defined.");
+		TP_VERIFY(!craftMacro.empty() && !recipeMacro.empty() && !learnMacro.empty(), aSource->m_debugInfo, "Missing macros.");
+		TP_VERIFY(professionId != 0, aSource->m_debugInfo, "No profession defined.");
+		const Data::Profession* profession = m_manifest->GetById<Data::Profession>(professionId);
+		uint32_t professionTagId = m_manifest->TryGetExistingIdByName<Data::Tag>(profession->m_name.c_str());
+
+		std::vector<EquipmentSlot::Id> equipmentSlots;
+		_GetEquipmentSlots(equipmentSlots);
+
+		std::vector<const StackObject::ItemPrefix*> itemPrefixes;
+		_GetItemPrefixes(itemPrefixes);
+
+		std::vector<const StackObject::ItemSuffix*> itemSuffixes;
+		_GetItemSuffixes(itemSuffixes);
+
+		const char* itemTypeName = ItemType::GetInfo(itemType)->m_name;
+		uint32_t itemTypeTagId = m_manifest->TryGetExistingIdByName<Data::Tag>(itemTypeName);
+		TP_VERIFY(itemTypeTagId != 0, aSource->m_debugInfo, "No item type tag.");
+
+		std::unordered_set<std::string> tt;
+
+		for(EquipmentSlot::Id equipmentSlot : equipmentSlots)
+		{
+			const EquipmentSlot::Info* equipmentSlotInfo = EquipmentSlot::GetInfo(equipmentSlot);
+			uint32_t equipmentSlotTagId = m_manifest->TryGetExistingIdByName<Data::Tag>(equipmentSlotInfo->m_tag);
+			TP_VERIFY(equipmentSlotTagId != 0, aSource->m_debugInfo, "No equipment slot tag.");
+
+			for (const StackObject::ItemSuffix* itemSuffix : itemSuffixes)
+			{
+				for (const StackObject::ItemPrefix* itemPrefix : itemPrefixes)
+				{
+					TP_VERIFY(itemPrefix->m_rarity != Rarity::INVALID_ID, aSource->m_debugInfo, "No rarity defined for item prefix.");
+
+					std::vector<uint32_t> lootGroups;
+					_GetLootGroups(itemPrefix->m_rarity, lootGroups);
+
+					std::string lootGroupsString;
+					for (uint32_t lootGroupId : lootGroups)
+					{	
+						if(!lootGroupsString.empty())
+							lootGroupsString += " ";
+						lootGroupsString += m_manifest->GetById<Data::LootGroup>(lootGroupId)->m_name;
+					}
+
+					uint32_t level = itemPrefix->m_levelRange.GetRandom(_GetRandom());
+
+					uint32_t skill = level * 5;
+
+					std::unordered_map<std::string, uint32_t> materials = baseMaterials;
+
+					uint32_t commonMaterialCount = 1 + (uint32_t)(itemPrefix->m_materialMultiplier * (float)level);
+					const char* commonMaterialName = _PickMaterialName(level, Rarity::ID_COMMON, professionTagId);
+					assert(commonMaterialName != NULL);
+					materials[commonMaterialName] = commonMaterialCount; 
+
+					if((uint32_t)itemPrefix->m_rarity >= (uint32_t)Rarity::ID_UNCOMMON)
+					{
+						const char* reagentName = _PickMaterialName(level, Rarity::ID_COMMON, reagentTagId);
+						uint32_t count = _GetRandomIntInRange<uint32_t>(1, 2);
+
+						if ((uint32_t)itemPrefix->m_rarity >= (uint32_t)Rarity::ID_RARE)
+							count *= _GetRandomIntInRange<uint32_t>(2, 3);
+
+						materials[reagentName] = count;
+					}
+					
+					if((uint32_t)itemPrefix->m_rarity >= (uint32_t)Rarity::ID_RARE)
+					{
+						const char* reagentName = _PickMaterialName(level, Rarity::ID_UNCOMMON, reagentTagId);
+						materials[reagentName] = _GetRandomIntInRange<uint32_t>(1, 2);
+					}
+
+					std::string itemString;
+
+					{
+						WordList::QueryParams wordListQuery;
+						wordListQuery.m_mustHaveTags.push_back(itemTypeTagId);
+						wordListQuery.m_mustHaveTags.push_back(equipmentSlotTagId);
+						wordListQuery.Prepare();
+						const WordList::Word* baseNameWord = m_wordListQueryCache->PerformQuery(wordListQuery)->GetRandomWord(_GetRandom());
+						TP_VERIFY(!baseNameWord->m_word.empty(), aSource->m_debugInfo, "Unable to pick word.");
+						itemString = itemPrefix->m_string + " " + baseNameWord->m_word + " " + itemSuffix->m_string;
+					}
+
+					const char* iconSpriteName = NULL;
+
+					{
+						std::unordered_set<uint32_t> mustHaveTags;
+						std::vector<uint32_t> allTags;
+
+						mustHaveTags.insert(itemTypeTagId);
+						mustHaveTags.insert(equipmentSlotTagId);
+
+						iconSpriteName = _PickIconName(level, itemPrefix->m_rarity, mustHaveTags, allTags);
+					}
+				
+					std::string itemName = Helpers::Format("_%u_%u_%u_%08x%08x", profession->m_id, equipmentSlot, itemType, itemPrefix->GetHash(), itemSuffix->GetHash());
+
+					// Item source
+					{
+						GeneratedSource* output = _CreateGeneratedSource();
+
+						output->PrintF(0, "item %s:", itemName.c_str());
+						output->PrintF(0, "{");
+						output->PrintF(1, "string: \"%s\"", itemString.c_str());
+						output->PrintF(1, "required_level: %u", level);
+						output->PrintF(1, "rarity: %s", Rarity::GetInfo(itemPrefix->m_rarity)->m_name);
+						output->PrintF(1, "binds: when_equipped");
+						output->PrintF(1, "equipment_slots: [ %s ]", equipmentSlotInfo->m_name);
+						output->PrintF(1, "type: %s", itemTypeName);
+						output->PrintF(1, "icon: %s", iconSpriteName);
+						
+						if(itemSuffix->m_budgetBias != 0)
+							output->PrintF(1, "budget_bias: %d", itemSuffix->m_budgetBias);
+
+						for(uint32_t i = 1; i < (uint32_t)Stat::NUM_IDS; i++)
+						{
+							float value = itemSuffix->m_stats.m_stats[i];
+							if(value > 0.0f)
+							{
+								Stat::Id statId = (Stat::Id)i;
+								const Stat::Info* statInfo = Stat::GetInfo(statId);
+
+								output->PrintF(1, "%s %s: %.0f", statInfo->m_percentage ? "stat" : "stat_weight", statInfo->m_name, value);
+							}
+						}
+
+						output->PrintF(0, "}");
+					}
+
+					// Craft ability source
+					{
+						GeneratedSource* output = _CreateGeneratedSource();
+
+						output->PrintF(0, "ability c%s: !%s", itemName.c_str(), craftMacro.c_str());
+						output->PrintF(0, "{");
+						output->PrintF(1, "_string: \"%s\"", itemString.c_str());
+						output->PrintF(1, "_item: %s", itemName.c_str());
+						output->PrintF(1, "_produce: { %s: 1 }", itemName.c_str());
+						output->PrintF(1, "_materials:");
+						output->PrintF(1, "{");
+						for (const std::pair<std::string, uint32_t> material : materials)
+							output->PrintF(2, "%s: %u", material.first.c_str(), material.second);
+						output->PrintF(1, "}");
+						output->PrintF(1, "_skill: %u", skill);						
+						for(const std::pair<std::string, bool> craftBool : craftBools)
+							output->PrintF(1, "%s: %s", craftBool.first.c_str(), craftBool.second ? "true" : "false");
+						output->PrintF(0, "}");
+					}
+
+					// Recipe item source
+					{
+						GeneratedSource* output = _CreateGeneratedSource();
+
+						output->PrintF(0, "item r%s: !%s", itemName.c_str(), recipeMacro.c_str());
+						output->PrintF(0, "{");
+						output->PrintF(1, "_string: \"%s: %s\"", recipePrefix.c_str(), itemString.c_str());
+						output->PrintF(1, "_level: %u", level);
+						output->PrintF(1, "_rarity: %s", Rarity::GetInfo(itemPrefix->m_rarity)->m_name);
+						output->PrintF(1, "_learn_ability: l%s", itemName.c_str());
+						output->PrintF(1, "_level_range: [ %u %u ]", level, level + 3);
+						output->PrintF(1, "_loot_groups: [ %s ]", lootGroupsString.c_str());							
+						output->PrintF(0, "}");
+					}
+
+					// Learn ability source
+					{
+						GeneratedSource* output = _CreateGeneratedSource();
+
+						output->PrintF(0, "ability l%s: !%s", itemName.c_str(), learnMacro.c_str());
+						output->PrintF(0, "{");
+						output->PrintF(1, "_string: \"%s: %s\"", recipePrefix.c_str(), itemString.c_str());
+						output->PrintF(1, "_description: \"Teaches you how to make %s.\"", itemString.c_str());
+						output->PrintF(1, "_consume_items: { r%s: 1 }", itemName.c_str());
+						output->PrintF(1, "_skill: %u", skill);
+						output->PrintF(1, "_craft_ability: c%s", itemName.c_str());
+						output->PrintF(0, "}");
+					}
+				}
+			}
 		}
 	}
 
@@ -1022,12 +1405,12 @@ namespace tpublic
 
 	void							
 	GenerationJob::_GetAbilities(
-		std::vector<const Data::Ability*>&	aOut) const
+		std::vector<const StackObject::Ability*>&	aOut) const
 	{
 		for (const std::unique_ptr<StackObject>& stackObject : m_stack)
 		{
 			if (stackObject->m_type == StackObject::TYPE_ABILITY)
-				aOut.push_back(m_manifest->GetById<Data::Ability>(stackObject->m_abilityId));
+				aOut.push_back(&stackObject->m_ability);
 		}
 	}
 
@@ -1188,14 +1571,31 @@ namespace tpublic
 	}
 
 	const GenerationJob::StackObject::ItemSpecial*
-	GenerationJob::_PickItemSpecial()
+	GenerationJob::_PickItemSpecial(
+		ItemType::Id		aItemType)
 	{
 		WeightedRandom<const StackObject::ItemSpecial*> possibilities;
 
 		for (const std::unique_ptr<StackObject>& stackObject : m_stack)
 		{
 			if (stackObject->m_type == StackObject::TYPE_ITEM_SPECIAL)
-				possibilities.AddPossibility(stackObject->m_itemSpecial.m_weight, &stackObject->m_itemSpecial);
+			{
+				bool possible = true;
+				if(stackObject->m_itemSpecial.m_excludeItemTypes.size() > 0)
+				{
+					for(ItemType::Id excludedItemType : stackObject->m_itemSpecial.m_excludeItemTypes)
+					{
+						if(excludedItemType == aItemType)
+						{
+							possible = false;
+							break;
+						}
+					}
+				}
+
+				if(possible)
+					possibilities.AddPossibility(stackObject->m_itemSpecial.m_weight, &stackObject->m_itemSpecial);
+			}
 		}
 
 		const StackObject::ItemSpecial* picked;
@@ -1205,4 +1605,84 @@ namespace tpublic
 		return picked;
 	}
 
+	void							
+	GenerationJob::_GetEquipmentSlots(
+		std::vector<EquipmentSlot::Id>& aOut) const
+	{
+		for (const std::unique_ptr<StackObject>& stackObject : m_stack)
+		{
+			if (stackObject->m_type == StackObject::TYPE_EQUIPMENT_SLOT)
+				aOut.push_back(stackObject->m_equipmentSlot);
+		}
+	}
+	
+	void							
+	GenerationJob::_GetItemSuffixes(
+		std::vector<const StackObject::ItemSuffix*>& aOut) const
+	{
+		for (const std::unique_ptr<StackObject>& stackObject : m_stack)
+		{
+			if (stackObject->m_type == StackObject::TYPE_ITEM_SUFFIX)
+				aOut.push_back(&stackObject->m_itemSuffix);
+		}
+	}
+	
+	void							
+	GenerationJob::_GetItemPrefixes(
+		std::vector<const StackObject::ItemPrefix*>& aOut) const
+	{
+		for (const std::unique_ptr<StackObject>& stackObject : m_stack)
+		{
+			if (stackObject->m_type == StackObject::TYPE_ITEM_PREFIX)
+				aOut.push_back(&stackObject->m_itemPrefix);
+		}
+	}
+
+	void							
+	GenerationJob::_GetLootGroups(
+		Rarity::Id										aRarity,
+		std::vector<uint32_t>&							aOut) const
+	{
+		for (const std::unique_ptr<StackObject>& stackObject : m_stack)
+		{
+			if (stackObject->m_type == StackObject::TYPE_LOOT_GROUP && stackObject->m_lootGroup.m_rarity == aRarity)
+				aOut.push_back(stackObject->m_lootGroup.m_lootGroupId);
+		}
+	}
+
+	const char* 
+	GenerationJob::_PickMaterialName(
+		uint32_t										aLevel,
+		Rarity::Id										aRarity,
+		uint32_t										aTagId)
+	{
+		const TaggedData::Tag* tag = m_taggedItemData->Get()->GetTag(aTagId);
+		TP_VERIFY(tag != NULL, m_source->m_debugInfo, "No tagged item data: %u", aTagId);
+
+		uint32_t bestLevelDiff = UINT32_MAX;
+		std::vector<const Data::Item*> bestItems;
+
+		for(uint32_t itemId : tag->m_dataIds)
+		{
+			const Data::Item* item = m_manifest->GetById<Data::Item>(itemId);
+			assert(item->HasTag(aTagId));
+			if(item->m_rarity == aRarity)
+			{
+				uint32_t levelDiff = (uint32_t)abs((int32_t)aLevel - (int32_t)item->m_itemLevel);
+				if(levelDiff == bestLevelDiff)
+				{
+					bestItems.push_back(item);
+				}
+				else if(levelDiff < bestLevelDiff)
+				{
+					bestItems = { item };
+					bestLevelDiff = levelDiff;
+				}
+			}
+		}
+
+		TP_VERIFY(bestItems.size() > 0, m_source->m_debugInfo, "Unable to pick material: %u", aTagId);
+		const Data::Item* materialItem = _GetRandomItemInVector(bestItems);
+		return materialItem->m_name.c_str();
+	}
 }

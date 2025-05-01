@@ -1,9 +1,34 @@
+!define local UNHOLY_TOKEN_PRICE { quantity: 1 item_cost<[ unholy_token unholy_token_currency ]>: @_count }	
+
+dialogue_screen .azrakkar_vendor:
+{
+	sell unholy_back_1: !UNHOLY_TOKEN_PRICE{ _count: 6 }
+	sell unholy_back_2: !UNHOLY_TOKEN_PRICE{ _count: 6 }
+	sell unholy_ring_1: !UNHOLY_TOKEN_PRICE{ _count: 8 }
+	sell unholy_ring_2: !UNHOLY_TOKEN_PRICE{ _count: 8 }
+	sell unholy_chest_1: !UNHOLY_TOKEN_PRICE{ _count: 10 }
+	sell unholy_chest_2: !UNHOLY_TOKEN_PRICE{ _count: 10 }
+	sell unholy_legs_1: !UNHOLY_TOKEN_PRICE{ _count: 10 }
+	sell unholy_legs_2: !UNHOLY_TOKEN_PRICE{ _count: 10 }
+	sell unholy_shoulders_1: !UNHOLY_TOKEN_PRICE{ _count: 12 }
+	sell unholy_shoulders_2: !UNHOLY_TOKEN_PRICE{ _count: 12 }
+	sell unholy_head_1: !UNHOLY_TOKEN_PRICE{ _count: 12 }
+	sell unholy_head_2: !UNHOLY_TOKEN_PRICE{ _count: 12 }
+	sell unholy_trinket_1: !UNHOLY_TOKEN_PRICE{ _count: 20 }
+}
+
 dialogue_screen .azrakkar_greetings:
 {
 	text: 
 	[	
 		"The shrines of this realm writhe with the flux of unholy energies, drawn from the veils between worlds. Their form and power twist and shift, shaped by the whims of the wretched deities that mortals dare to worship."
 	]			
+	
+	options:
+	[
+		{ quest: .azrakkar_1 !MUST_BE_REAL_DISCIPLE{} }
+		{ goto: .azrakkar_vendor text: "Let me browse your goods." !MUST_BE_REAL_DISCIPLE{} }
+	]
 }
 
 dialogue_root .azrakkar_dialogue:
@@ -16,11 +41,58 @@ entity .azrakkar: !NPC
 	_string: "Azrakkar"
 	_dialogue_root: .azrakkar_dialogue
 	_loot_table: .npc
-	_level: 10
-	_faction: npcs
+	_level: 20
+	_faction: underworld
 	_creature_type: demon
 	_not_pushable: true
 	_sprite: demon_2
 	_sprite_dead: demon_2_dead
+	_elite: true
 }
 	
+############################################################
+# Quest 1
+
+objective .azrakkar_1:
+{
+	string: "Shroud Crystals"
+	
+	maps: [ the_shrouded_lands ]
+	
+	collect_items: { item: shroud_crystal count: 5 }
+}
+
+
+quest .azrakkar_1:
+{
+	string: "Shroud Crystals For The War Effort"
+
+	text:
+	[
+		"Deliver shroud crystals to Azrakkar at the Altar of the Unseen."
+	]
+	
+	description: 
+	[
+		"The power of this realm materialize itself in crystals growing out of the ground. They can be used by us to summon more allies to fight against the light that has managed to get hold on parts of the land."
+		"Please, if you gather those crystals, it would be a great help. The more you can bring to me the better."
+	]
+
+	progress:
+	[
+		"Make haste!"
+	]
+	
+	completion:
+	[
+		"This will help immensely, thanks!"
+	]
+	
+	objectives: [ .azrakkar_1 ]
+	repeat_mode: always
+	level: 20
+	reward_xp_multiplier: 0
+	reward_cash_multiplier: 0
+	reward_reputation_multiplier: 1
+	reward_realm_balance<the_shrouded_lands_underworld>: { expression: a_mul_x_plus_b x: pvp_control_points a: 2 b: 9 }
+}

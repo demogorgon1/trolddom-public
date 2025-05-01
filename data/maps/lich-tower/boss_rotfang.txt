@@ -1,0 +1,138 @@
+############################################################
+# Loot
+
+loot_group .rotfang: {}
+
+loot_table .rotfang:
+{
+	slots:
+	[
+		{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
+		  map_message lich_tower: "Rotfang will not drop Token of Victory for {}." } } }
+		{ possibility: { loot_group: .rotfang }	}	
+		{ possibility: { loot_group: thalvaron_trouli_copperquill_2_quest_item requirement self<must_have_active_quest>: { id: thalvaron_trouli_copperquill_2 } } }
+		!WORLD_DROPS{}
+		!WORLD_DROPS_ZOMBIES{}
+	]	
+}
+
+{
+	${
+		_rarity: rare
+		_level: 18
+		_loot_group: .rotfang
+	}
+	
+	item lich_tower_1: !BOSS_DROP_WRISTS
+	{
+		_string: "Smelly Wrist Rags"
+		_type: armor_cloth
+		_icon: icon_bracers_2
+		_wisdom: 3
+		_spirit: 2
+		_constitution: 1
+	}
+	
+	item lich_tower_2: !BOSS_DROP_HANDS
+	{
+		_string: "Pestilence Grips"
+		_type: armor_mail
+		_icon: icon_gloves_4
+		_strength: 3
+		_dexterity: 2
+		_constitution: 1
+	}
+	
+	item lich_tower_3: !BOSS_DROP_LEGS
+	{
+		_string: "Trousers of the Plague"
+		_type: armor_cloth
+		_icon: icon_pants_2
+		_constitution: 1
+		_wisdom: 5
+		_healing: 2
+	}
+	
+	item lich_tower_4: !BOSS_DROP_NECK
+	{
+		_string: "Bone Fragment Amulet"
+		_icon: icon_necklace_5
+		_constitution: 1
+		_strength: 1
+		_budget_bias: -10
+		_dodge: 1
+	}
+	
+	item lich_tower_5: !BOSS_DROP_CROSSBOW
+	{
+		_string: "Rotpiercer"
+		_icon: icon_crossbow_1
+		_constitution: 1
+		_dexterity: 2
+		_budget_bias: -10
+		_phys_crit: 1
+	}
+	
+}
+
+############################################################
+# Boss
+
+zone .rotfang:
+{
+}
+
+encounter .rotfang:
+{
+	main_entities: [ lich_tower_rotfang ]	
+}
+
+entity lich_tower_rotfang: !NPC 
+{ 
+	_string: "Rotfang" 
+	_level: 18
+	_elite: true
+	_faction: monsters 
+	_sprite: giant_beast_1
+	_sprite_dead: giant_beast_1_dead 
+	_weapon_damage: 1.80
+	_resource_health: 6.9
+	_loot_table: .rotfang
+	_creature_type: undead
+	_encounter: .rotfang
+	_zone: .rotfang
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+	_large: true
+
+	_abilities: 
+	[
+		{
+			id: npc_infection_aura
+		}	
+	
+		{
+			id: npc_attack
+		}
+	]			
+}
+
+map_trigger .rotfang_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .rotfang:
+{
+	entity lich_tower_rotfang: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .rotfang_killed
+		}
+	}
+}
+

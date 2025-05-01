@@ -90,6 +90,18 @@ namespace tpublic
 				ComponentSchema*					aSchema)
 			{
 				aSchema->DefineCustomObjectNoSource<Items>(FIELD_ITEMS, offsetof(PlayerWorldStash, m_items));
+
+				aSchema->OnRead<PlayerWorldStash>([](
+					PlayerWorldStash*				aPlayerWorldStash,
+					ComponentSchema::ReadType		aReadType,
+					const Manifest*					aManifest)
+				{
+					if(aReadType == ComponentSchema::READ_TYPE_STORAGE)
+					{
+						for(Items::Table::iterator i = aPlayerWorldStash->m_items.m_table.begin(); i != aPlayerWorldStash->m_items.m_table.end(); i++)
+							i->second->OnLoadedFromPersistence(aManifest, SOFT_SIZE_LIMIT);
+					}
+				});
 			}
 
 			uint32_t
@@ -106,9 +118,10 @@ namespace tpublic
 					{
 						TP_CHECK(!entry.m_trading, "Item in player world stash flagged for trading.");
 
-						ItemList* destinationItemList = m_items.GetOrCreateItemList(entry.m_item.m_worldboundCharacterId);
+						ItemList* destinationItemList = m_items.GetOrCreateItemList(entry.m_item.GetWorldboundCharacterId());
 
-						if(destinationItemList->AddToInventory(entry.m_item, aManifest->GetById<Data::Item>(entry.m_item.m_itemId), true))
+						ErrorNotification::Id unusedErrorNotification;
+						if(destinationItemList->AddToInventory(entry.m_item, aManifest->GetById<Data::Item>(entry.m_item.m_itemId), true, unusedErrorNotification))
 							count += entry.m_item.m_quantity;
 
 						entry.m_item.Clear();
@@ -120,9 +133,10 @@ namespace tpublic
 					ItemInstance& item = aSourceEquippedItems[i];
 					if(item.IsSet() && item.IsWorldbound())
 					{
-						ItemList* destinationItemList = m_items.GetOrCreateItemList(item.m_worldboundCharacterId);
+						ItemList* destinationItemList = m_items.GetOrCreateItemList(item.GetWorldboundCharacterId());
 
-						if (destinationItemList->AddToInventory(item, aManifest->GetById<Data::Item>(item.m_itemId), true))
+						ErrorNotification::Id unusedErrorNotification;
+						if (destinationItemList->AddToInventory(item, aManifest->GetById<Data::Item>(item.m_itemId), true, unusedErrorNotification))
 							count += item.m_quantity;
 
 						item.Clear();

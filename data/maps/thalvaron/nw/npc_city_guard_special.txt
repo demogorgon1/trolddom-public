@@ -1,0 +1,65 @@
+dialogue_screen .city_guard_special_dialogue:
+{
+	text: 
+	[	
+		"Welcome to Valoris."
+	]		
+	
+	options:
+	[
+		{ quest<offer_only>: .city_guard_special_1 }
+	]
+}
+
+dialogue_root .city_guard_special_dialogue:
+{
+	.city_guard_special_dialogue: { }
+}
+
+entity thalvaron_city_guard_special: !NPC
+{
+	_string: "City Guard"
+	_dialogue_root: .city_guard_special_dialogue	
+	_sprite: city_guard_1
+	_sprite_dead: city_guard_1_dead
+	_level: 20
+	_faction: valoris		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+quest .city_guard_special_1:
+{
+	string: "Reporting for duty"
+
+	text:
+	[
+		"Report to Captain Jerrington."
+	]
+	
+	description: 
+	[
+		"Finally you've arrived! We've been expecting you.\n\n"
+		"We're facing a bit of a security issue in the city currently and we need your help. Report to Captain Jerrington, who is in charge of the city defenses. Follow the street north and take a right when you reach Monument Square. That"
+		"street will lead you toward Eastgate where you'll meet Captain Jerrington.\n\n"
+		"Hurry!"
+	]
+
+	progress:
+	[
+		"Get a move on!"
+	]
+	
+	completion:
+	[
+		"Welcome to Valoris, $class$. You thought you'd have a leisurely stay in the city, enjoying the sights, and some good food? Wrong! Your majesty the queen needs your services.\n\n"
+	]
+
+	level: 10
+	next_quest: .captain_jerrington_1
+	reward_xp_multiplier: 0.1
+}

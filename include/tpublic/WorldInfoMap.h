@@ -8,13 +8,23 @@
 namespace tpublic
 {
 
+	class Manifest;
+
 	class WorldInfoMap
 	{
 	public:		
 		enum Flag : uint8_t 
 		{
-			FLAG_DEMO = 0x01
+			FLAG_DEMO	= 0x01,
+			FLAG_INDOOR = 0x02
 		};
+
+		static void AutoIndoor(
+						const Manifest*				aManifest,
+						int32_t						aMapWidth,
+						int32_t						aMapHeight,
+						const uint32_t*				aCoverMap,
+						uint8_t*					aFlags);
 
 		static uint8_t
 		SourceToFlags(
@@ -26,6 +36,8 @@ namespace tpublic
 			{
 				if(aChild->IsIdentifier("demo"))
 					flags |= FLAG_DEMO;
+				else if (aChild->IsIdentifier("indoor"))
+					flags |= FLAG_INDOOR;
 				else
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid flag.", aChild->GetIdentifier());					
 			});
@@ -95,23 +107,48 @@ namespace tpublic
 			std::vector<Vec2>		m_positions;
 		};
 
-		void				CopyFrom(
-								const WorldInfoMap*	aWorldInfoMap);
-		void				Build(
-								int32_t				aWidth,
-								int32_t				aHeight,
-								const uint32_t*		aLevelMap,
-								const uint32_t*		aZoneMap,
-								const uint32_t*		aSubZoneMap,
-								const uint8_t*		aFlagsMap);
-		const Entry&		Get(
-								const Vec2&			aPosition) const;
-		const ZoneOutline*	GetZoneOutline(
-								uint32_t			aZoneId) const;
-		void				ToStream(
-								IWriter*			aWriter) const;
-		bool				FromStream(
-								IReader*			aReader);
+		struct ZonePositions
+		{
+			void			
+			ToStream(
+				IWriter*							aWriter) const
+			{
+				aWriter->WriteObjects(m_positions);
+			}
+			
+			bool			
+			FromStream(
+				IReader*							aReader)
+			{
+				if(!aReader->ReadObjects(m_positions))
+					return false;
+				return true;
+			}
+
+			// Public data
+			std::vector<Vec2>		m_positions;			
+		};
+
+		void					CopyFrom(
+									const WorldInfoMap*	aWorldInfoMap);
+		void					Build(
+									const Manifest*		aManifest,
+									int32_t				aWidth,
+									int32_t				aHeight,
+									const uint32_t*		aLevelMap,
+									const uint32_t*		aZoneMap,
+									const uint32_t*		aSubZoneMap,
+									const uint8_t*		aFlagsMap);
+		const Entry&			Get(
+									const Vec2&			aPosition) const;
+		const ZoneOutline*		GetZoneOutline(
+									uint32_t			aZoneId) const;
+		const ZonePositions*	GetZonePositions(
+									uint32_t			aZoneId) const;
+		void					ToStream(
+									IWriter*			aWriter) const;
+		bool					FromStream(
+									IReader*			aReader);
 	
 	private:
 
@@ -197,6 +234,14 @@ namespace tpublic
 
 		typedef std::unordered_map<uint32_t, std::unique_ptr<ZoneOutline>> ZoneOutlineTable;
 		ZoneOutlineTable			m_zoneOutlineTable;
+
+		typedef std::unordered_map<uint32_t, std::unique_ptr<ZonePositions>> ZonePositionsTable;
+		ZonePositionsTable			m_zonePositionsTable;
+
+		void			_UpdateZonePositionsTable(
+							const Manifest*				aManifest,
+							uint32_t					aZoneId,
+							const Vec2&					aPosition);
 	};
 
 }

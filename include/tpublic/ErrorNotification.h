@@ -48,6 +48,11 @@ namespace tpublic
 			ID_CANNOT_DO_THAT_HERE,
 			ID_MUST_BE_IN_A_PARTY_TO_ENTER,
 			ID_CANNOT_LOOT_THAT,
+			ID_CANNOT_AFFORD_THAT,
+			ID_CANNOT_BUY_THAT,
+			ID_CANNOT_DO_THAT_INDOOR,
+			ID_CANNOT_DO_THAT_MOUNTED,
+			ID_ALREADY_HAS_ITEM,
 
 			NUM_IDS
 		};
@@ -105,7 +110,12 @@ namespace tpublic
 			{ "Too low level! "},
 			{ "Cannot do that here!" },
 			{ "Must be in a party to enter!" },
-			{ "Can't loot that!" }
+			{ "Can't loot that!" },
+			{ "Can't afford that!" },
+			{ "Can't buy that!" },
+			{ "Can't do that while indoor!" },
+			{ "Can't do that while mounted!" },
+			{ "Already has item!" },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

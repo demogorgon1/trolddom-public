@@ -115,9 +115,11 @@ namespace tpublic::ObjectiveTypes
 			const SourceNode* aChild)
 		{
 			if(aChild->m_name == "item")
-				m_itemId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ITEM, aChild->GetIdentifier());
+				m_itemId = aChild->GetId(DataType::ID_ITEM);
 			else if(aChild->m_name == "count")  
 				m_count = aChild->GetUInt32();
+			else if(aChild->m_name == "keep_items")
+				m_keepItems = aChild->GetBool();
 			else
 				TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());							
 		});
@@ -129,6 +131,7 @@ namespace tpublic::ObjectiveTypes
 	{
 		aWriter->WriteUInt(m_itemId);
 		aWriter->WriteUInt(m_count);
+		aWriter->WriteBool(m_keepItems);
 	}
 	
 	bool		
@@ -138,6 +141,8 @@ namespace tpublic::ObjectiveTypes
 		if (!aReader->ReadUInt(m_itemId))
 			return false;
 		if (!aReader->ReadUInt(m_count))
+			return false;
+		if(!aReader->ReadBool(m_keepItems))
 			return false;
 		return true;
 	}
@@ -152,8 +157,11 @@ namespace tpublic::ObjectiveTypes
 	CollectItems::PostCompletionInventoryUpdate(
 		Components::Inventory*				aInventory) const 
 	{
-		aInventory->m_itemList.RemoveItems(m_itemId, m_count, aInventory->m_size);
-		aInventory->SetPendingPersistenceUpdate(ComponentBase::PENDING_PERSISTENCE_UPDATE_MEDIUM_PRIORITY);
+		if(!m_keepItems)
+		{
+			aInventory->m_itemList.RemoveItems(m_itemId, m_count, aInventory->m_size);
+			aInventory->SetPendingPersistenceUpdate(ComponentBase::PENDING_PERSISTENCE_UPDATE_MEDIUM_PRIORITY);
+		}
 	}
 
 }

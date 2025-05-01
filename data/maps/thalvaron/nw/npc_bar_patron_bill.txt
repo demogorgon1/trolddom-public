@@ -1,0 +1,40 @@
+dialogue_screen .bar_patron_bill_dialogue_2:
+{
+	text: 
+	[
+		"Gnomes are not real. I think you should go home and sleep it off."
+	]
+}
+
+
+dialogue_screen .bar_patron_bill_dialogue:
+{
+	text: 
+	[	
+		"Hello?"
+	]		
+	
+	options:
+	[
+		{ text: "Have you ever done business with a gnome that hangs out at the Robertson farm?" goto: .bar_patron_bill_dialogue_2 requirement self<must_have_active_quest>: .gnome_1 }	
+	]
+}
+
+
+dialogue_root .bar_patron_bill_dialogue:
+{
+	.bar_patron_bill_dialogue: { }
+}
+
+entity thalvaron_bar_patron_bill: !NPC
+{
+	_string: "Bill"
+	_dialogue_root: .bar_patron_bill_dialogue	
+	_sprite: man_1
+	_sprite_dead: man_1_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}

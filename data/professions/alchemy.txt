@@ -78,6 +78,54 @@ ability craft_elixir_of_the_giant: !ALCHEMY_CRAFT
 }
 
 #####################################################
+# Strong Elixir of the Bear
+
+ability craft_strong_elixir_of_the_bear: !ALCHEMY_CRAFT
+{
+	_string: "Strong Elixir of the Bear"
+	_item: consumable_strong_elixir_of_the_bear
+	_produce: { consumable_strong_elixir_of_the_bear: 1 } 
+	_materials: { item_emberbloom: 3 item_sunweave: 1 item_beast_jaw: 1 }
+	_skill: 45
+}
+
+#####################################################
+# Strong Elixir of the Owl
+
+ability craft_strong_elixir_of_the_owl: !ALCHEMY_CRAFT
+{
+	_string: "Strong Elixir of the Owl"
+	_item: consumable_strong_elixir_of_the_owl
+	_produce: { consumable_strong_elixir_of_the_owl: 1 } 
+	_materials: { item_sunweave: 1 item_emberbloom: 3 item_blue_feather: 1 }
+	_skill: 45
+}
+
+#####################################################
+# Strong Elixir of the Giant
+
+ability craft_strong_elixir_of_the_giant: !ALCHEMY_CRAFT
+{
+	_string: "Strong Elixir of the Giant"
+	_item: consumable_strong_elixir_of_the_giant
+	_produce: { consumable_strong_elixir_of_the_giant: 1 } 
+	_materials: { item_sunweave: 3 item_emberbloom: 3 item_giant_tusk: 1 }
+	_skill: 55
+}
+
+#####################################################
+# Mana Salve
+
+ability craft_mana_salve: !ALCHEMY_CRAFT
+{
+	_string: "Mana Salve"
+	_item: consumable_mana_salve
+	_produce: { consumable_mana_salve: 1 } 
+	_materials: { item_sunweave: 2 item_emberbloom: 2 }
+	_skill: 75
+}
+
+#####################################################
 # Healing Potion
 
 ability craft_healing_potion: !ALCHEMY_CRAFT
@@ -200,7 +248,7 @@ item recipe_spell_juice:
 	icon: icon_scroll_1
 	string: "Recipe: Spell Juice"
 	use_ability: .learn_spell_juice
-	level_range: [ 6 10 ]
+	level_range: [ 6 12 ]
 }
 
 #####################################################
@@ -242,7 +290,7 @@ item recipe_rejuvenation_potion:
 	icon: icon_scroll_1
 	string: "Recipe: Rejuvenation Potion"
 	use_ability: .learn_rejuvenation_potion
-	level_range: [ 7 10 ]
+	level_range: [ 7 12 ]
 }
 
 #####################################################
@@ -284,6 +332,89 @@ item recipe_power_potion:
 	icon: icon_scroll_1
 	string: "Recipe: Power Potion"
 	use_ability: .learn_power_potion
-	level_range: [ 7 10 ]
+	level_range: [ 7 12 ]
 }
 
+#####################################################
+# Strong Healing Potion
+
+ability craft_strong_healing_potion: !ALCHEMY_CRAFT
+{
+	_string: "Strong Healing Potion"
+	_item: consumable_strong_healing_potion
+	_produce: { consumable_strong_healing_potion: 1 } 
+	_materials: { item_sylmarel: 3 item_roots: 1  }
+	_skill: 65
+}
+
+ability .learn_strong_healing_potion:
+{
+	string: "Recipe: Strong Healing Potion"
+	description: "Teaches you how to make a Strong Healing Potion."
+	flags: [ target_self item ]
+	cast_time: 20
+	icon: icon_scroll_1
+	cooldowns: [ global ]	
+	consume_items: { recipe_strong_healing_potion: 1 }
+	required_profession<60>: alchemy
+	requirement self<must_not_have_profession_ability>: { id: craft_strong_healing_potion }
+	direct_effect learn_profession_ability:
+	{
+		profession: alchemy
+		ability: craft_strong_healing_potion
+	}
+}
+
+item recipe_strong_healing_potion:
+{
+	type: miscellaneous
+	item_level: 10
+	rarity: uncommon
+	loot_groups: [ world_drops_uncommon ]
+	icon: icon_scroll_1
+	string: "Recipe: Strong Healing Potion"
+	use_ability: .learn_strong_healing_potion
+	level_range: [ 11 20 ]
+}
+
+#####################################################
+# Strong Mana Potion
+
+ability craft_strong_mana_potion: !ALCHEMY_CRAFT
+{
+	_string: "Strong Mana Potion"
+	_item: consumable_strong_mana_potion
+	_produce: { consumable_strong_mana_potion: 1 } 
+	_materials: { item_frostbloom: 3 item_bubbling_slime: 1 }
+	_skill: 55
+}
+
+ability .learn_strong_mana_potion:
+{
+	string: "Recipe: Strong Mana Potion"
+	description: "Teaches you how to make a Strong Mana Potion."
+	flags: [ target_self item ]
+	cast_time: 20
+	icon: icon_scroll_1
+	cooldowns: [ global ]	
+	consume_items: { recipe_strong_mana_potion: 1 }
+	required_profession<50>: alchemy
+	requirement self<must_not_have_profession_ability>: { id: craft_strong_mana_potion }
+	direct_effect learn_profession_ability:
+	{
+		profession: alchemy
+		ability: craft_strong_mana_potion
+	}
+}
+
+item recipe_strong_mana_potion:
+{
+	type: miscellaneous
+	item_level: 10
+	rarity: uncommon
+	loot_groups: [ world_drops_uncommon ]
+	icon: icon_scroll_1
+	string: "Recipe: Strong Mana Potion"
+	use_ability: .learn_strong_mana_potion
+	level_range: [ 11 20 ]
+}

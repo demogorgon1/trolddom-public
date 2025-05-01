@@ -5,9 +5,11 @@
 #include <tpublic/Data/MapCliff.h>
 #include <tpublic/Data/MapPalette.h>
 #include <tpublic/Data/Sprite.h>
+#include <tpublic/Data/Wall.h>
 
 #include <tpublic/AutoDoodads.h>
 #include <tpublic/CliffBuilder.h>
+#include <tpublic/DebugPrintTimer.h>
 #include <tpublic/DoodadPlacement.h>
 #include <tpublic/Image.h>
 #include <tpublic/Manifest.h>
@@ -27,17 +29,30 @@ namespace tpublic
 
 		uint32_t
 		_MakeColorKey(
-			uint8_t						aR,
-			uint8_t						aG, 
-			uint8_t						aB)
+			uint8_t										aR,
+			uint8_t										aG, 
+			uint8_t										aB)
 		{
 			return (((uint32_t)aR) << 16) | (((uint32_t)aG) << 8) | ((uint32_t)aB);
 		}
 
 		void
+		_WriteStaticPositionToolTipTable(
+			IWriter*									aStream,
+			const MapData::StaticPositionToolTipTable&	aStaticPositionToolTipTable)
+		{
+			aStream->WriteUInt(aStaticPositionToolTipTable.size());
+			for (MapData::StaticPositionToolTipTable::const_iterator i = aStaticPositionToolTipTable.cbegin(); i != aStaticPositionToolTipTable.cend(); i++)
+			{
+				i->first.ToStream(aStream);
+				aStream->WriteString(i->second);
+			}
+		}
+
+		void
 		_WriteObjectTable(
-			IWriter*					aStream,
-			const MapData::ObjectTable&	aObjectTable)
+			IWriter*									aStream,
+			const MapData::ObjectTable&					aObjectTable)
 		{
 			aStream->WriteUInt(aObjectTable.size());
 			for (MapData::ObjectTable::const_iterator i = aObjectTable.cbegin(); i != aObjectTable.cend(); i++)
@@ -49,8 +64,8 @@ namespace tpublic
 
 		bool
 		_ReadObjectTable(
-			IReader*					aStream,
-			MapData::ObjectTable&		aObjectTable)
+			IReader*									aStream,
+			MapData::ObjectTable&						aObjectTable)
 		{
 			size_t count;
 			if (!aStream->ReadUInt(count))
@@ -68,10 +83,31 @@ namespace tpublic
 			return true;
 		}
 
+		bool
+		_ReadStaticPositionToolTipTable(
+			IReader*									aStream,
+			MapData::StaticPositionToolTipTable&		aStaticPositionToolTipTable)
+		{
+			size_t count;
+			if (!aStream->ReadUInt(count))
+				return false;
+			for (size_t i = 0; i < count; i++)
+			{
+				Vec2 position;
+				if (!position.FromStream(aStream))
+					return false;
+				std::string t;
+				if (!aStream->ReadString(t))
+					return false;
+				aStaticPositionToolTipTable[position] = std::move(t);
+			}
+			return true;
+		}
+
 		uint32_t
 		_GetObject(
-			const MapData::ObjectTable&	aObjectTable,
-			const Vec2&					aPosition)
+			const MapData::ObjectTable&					aObjectTable,
+			const Vec2&									aPosition)
 		{
 			MapData::ObjectTable::const_iterator i = aObjectTable.find(aPosition);
 			if(i != aObjectTable.cend())
@@ -131,6 +167,10 @@ namespace tpublic
 					m_generator = std::make_unique<Generator>(aNode);
 				else if(aNode->m_name == "seed")
 					m_seed.FromSource(aNode);
+				else if(aNode->m_name == "pvp")
+					m_pvp = std::make_unique<PVP>(aNode);
+				else if(aNode->m_name == "realm_balance")
+					aNode->GetIdArray(DataType::ID_REALM_BALANCE, m_realmBalanceIds);
 				else
 					TP_VERIFY(false, aNode->m_debugInfo, "'%s' is not a valid item.", aNode->m_name.c_str());
 			}
@@ -158,7 +198,8 @@ namespace tpublic
 	void	
 	MapData::Build(
 		const Manifest*			aManifest,
-		const AutoDoodads*		aAutoDoodads)
+		const AutoDoodads*		aAutoDoodads,
+		nwork::Queue*			/*aWorkQueue*/)
 	{
 		std::mt19937 random;
 
@@ -248,6 +289,9 @@ namespace tpublic
 								}
 								else
 								{
+									if(!entry->m_string.empty())
+										m_staticPositionToolTips[{ mapX, mapY }] = entry->m_string;
+
 									switch(entry->m_type)
 									{
 									case Data::MapPalette::ENTRY_TYPE_TILE:
@@ -336,20 +380,35 @@ namespace tpublic
 				}
 			}
 
-			if(hasLevelMap || hasZoneMap || hasSubZoneMap || hasFlagsMap)
 			{
-				m_worldInfoMap = std::make_unique<WorldInfoMap>();
-				m_worldInfoMap->Build(m_width, m_height, &levelMap[0], &zoneMap[0], &subZoneMap[0], &flagsMap[0]);
+				DebugPrintTimer debugPrintTimer("build world info map");
+
+				if(m_mapInfo.m_autoIndoor && hasCoverMap)
+				{
+					WorldInfoMap::AutoIndoor(aManifest, m_width, m_height, &coverMap[0], &flagsMap[0]);
+
+					hasFlagsMap = true;
+				}
+
+				if (hasLevelMap || hasZoneMap || hasSubZoneMap || hasFlagsMap)
+				{
+					m_worldInfoMap = std::make_unique<WorldInfoMap>();
+					m_worldInfoMap->Build(aManifest, m_width, m_height, &levelMap[0], &zoneMap[0], &subZoneMap[0], &flagsMap[0]);
+				}
 			}
 
 			if(hasCoverMap)
 			{
+				DebugPrintTimer debugPrintTimer("build cover map");
+
 				m_mapCovers = std::make_unique<MapCovers>();
 				m_mapCovers->Build(m_width, m_height, &coverMap[0]);
 			}
 
 			if(m_mapInfo.m_autoDoodads)
 			{
+				DebugPrintTimer debugPrintTimer("generate doodads");
+
 				aAutoDoodads->GenerateDoodads(0, m_tileMap, { m_width, m_height }, { 0, 0 }, { m_width, m_height }, doodadCoverageMap, [&](
 					const Vec2& aPosition,
 					uint32_t	/*aDoodadId*/,
@@ -361,6 +420,8 @@ namespace tpublic
 
 			if(cliffBuilder)
 			{
+				DebugPrintTimer debugPrintTimer("generate cliffs");
+
 				cliffBuilder->Generate([&](
 					const CliffBuilder::Tile& aTile)
 				{
@@ -372,22 +433,51 @@ namespace tpublic
 
 	void	
 	MapData::ConstructMapPathData(
-		const Manifest*			aManifest)
+		const Manifest*			aManifest,
+		nwork::Queue*			aWorkQueue)
 	{		
 		m_mapPathData = std::make_unique<MapPathData>();
 
 		MapPathDataBuilder builder;
-		builder.Build(aManifest, m_tileMap, (uint32_t)m_width, (uint32_t)m_height, 6);
 
-		builder.Export(m_mapPathData.get());
+		{
+			DebugPrintTimer debugPrintTimer("build map path data");
+
+			builder.Build(aManifest, m_tileMap, (uint32_t)m_width, (uint32_t)m_height, 6, aWorkQueue);
+		}
+
+		{
+			DebugPrintTimer debugPrintTimer("export map path data");
+
+			builder.Export(m_mapPathData.get());
+		}
 	}
 
 	void
 	MapData::ConstructMapRouteData(
-		const Manifest*			aManifest)
+		const Manifest*			aManifest,
+		nwork::Queue*			aWorkQueue)
 	{
 		if(m_mapRouteData)
-			m_mapRouteData->Build(aManifest, m_tileMap, m_width, m_height);
+		{
+			DebugPrintTimer debugPrintTimer("build map route data");
+
+			m_mapRouteData->Build(aManifest, m_tileMap, m_width, m_height, aWorkQueue, [&](
+				uint32_t aMapEntitySpawnId) -> Vec2
+			{
+				std::optional<Vec2> result;
+				for(const EntitySpawn& entitySpawn : m_entitySpawns)
+				{
+					if(entitySpawn.m_mapEntitySpawnId == aMapEntitySpawnId)
+					{
+						result = Vec2{ entitySpawn.m_x, entitySpawn.m_y };
+						break;
+					}						
+				}
+				TP_CHECK(result.has_value(), "Map entity spawn id not found in map: %u", aMapEntitySpawnId);
+				return result.value();
+			});
+		}
 	}
 
 	void	
@@ -418,6 +508,9 @@ namespace tpublic
 		_WriteObjectTable(aStream, m_walls);
 		aStream->WriteOptionalObjectPointer(m_mapRouteData);
 		aStream->Write(m_elevationMap, m_width * m_height);
+		_WriteStaticPositionToolTipTable(aStream, m_staticPositionToolTips);
+		aStream->WriteOptionalObjectPointer(m_pvp);
+		aStream->WriteUInts(m_realmBalanceIds);
 	}
 
 	bool	
@@ -453,7 +546,7 @@ namespace tpublic
 			}
 		}
 
-		if (!aStream->ReadObjects(m_entitySpawns))
+		if (!aStream->ReadObjects(m_entitySpawns, 32768))
 			return false;
 		if (!aStream->ReadObjects(m_playerSpawns))
 			return false;
@@ -485,6 +578,14 @@ namespace tpublic
 			if(aStream->Read(m_elevationMap, (size_t)m_width * m_height) != (size_t)(m_width * m_height))
 				return false;
 		}
+
+		if (!_ReadStaticPositionToolTipTable(aStream, m_staticPositionToolTips))
+			return false;
+
+		if(!aStream->ReadOptionalObjectPointer(m_pvp))
+			return false;
+		if(!aStream->ReadUInts(m_realmBalanceIds))
+			return false;
 
 		return true;
 	}
@@ -538,6 +639,17 @@ namespace tpublic
 		uint32_t j = i / 32;
 		uint32_t k = i % 32;
 		return (m_walkableBits[j] & (1 << k)) != 0;
+	}
+
+	bool		
+	MapData::IsTileIndoor(
+		int32_t					aX,
+		int32_t					aY) const
+	{
+		if(m_worldInfoMap)
+			return (m_worldInfoMap->Get({ aX, aY }).m_flags & WorldInfoMap::FLAG_INDOOR) != 0;
+
+		return m_mapInfo.m_defaultIndoor;
 	}
 
 	int32_t
@@ -604,6 +716,17 @@ namespace tpublic
 		uint32_t j = i / 32;
 		uint32_t k = i % 32;
 		return (m_alwaysObscuredBits[j] & (1 << k)) != 0;
+	}
+
+	bool	
+	MapData::DoesNeighborTileBlockLineOfSight(
+		int32_t					aX,
+		int32_t					aY) const
+	{
+		return DoesTileBlockLineOfSight(aX - 1, aY)
+			|| DoesTileBlockLineOfSight(aX + 1, aY)
+			|| DoesTileBlockLineOfSight(aX, aY - 1)
+			|| DoesTileBlockLineOfSight(aX, aY + 1);
 	}
 
 	void	
@@ -678,6 +801,7 @@ namespace tpublic
 
 		m_doodads = aMapData->m_doodads;
 		m_walls = aMapData->m_walls;
+		m_staticPositionToolTips = aMapData->m_staticPositionToolTips;
 	}
 
 	uint32_t	
@@ -723,6 +847,28 @@ namespace tpublic
 		const Vec2&				aPosition) const
 	{
 		return _GetObject(m_walls, aPosition);
+	}
+
+	const char* 
+	MapData::GetStaticPositionToolTip(
+		const Vec2&				aPosition) const
+	{
+		StaticPositionToolTipTable::const_iterator i = m_staticPositionToolTips.find(aPosition);
+		if(i == m_staticPositionToolTips.cend())
+			return NULL;
+		return i->second.c_str();
+	}
+
+	const MapData::PlayerSpawn* 
+	MapData::GetPlayerSpawn(
+		uint32_t				aMapPlayerSpawnId) const
+	{
+		for(const PlayerSpawn& t : m_playerSpawns)
+		{
+			if(t.m_id == aMapPlayerSpawnId)
+				return &t;
+		}
+		return NULL;
 	}
 
 	//--------------------------------------------------------------------
@@ -779,10 +925,10 @@ namespace tpublic
 			layer->m_width = (int32_t)sourceImage.GetWidth();
 			layer->m_height = (int32_t)sourceImage.GetHeight();
 
-			minX = std::min(minX, layer->m_x);
-			minY = std::min(minY, layer->m_y);
-			maxX = std::max(maxX, layer->m_x + layer->m_width);
-			maxY = std::max(maxY, layer->m_y + layer->m_height);
+			minX = Base::Min(minX, layer->m_x);
+			minY = Base::Min(minY, layer->m_y);
+			maxX = Base::Max(maxX, layer->m_x + layer->m_width);
+			maxY = Base::Max(maxY, layer->m_y + layer->m_height);
 
 			layer->m_rgb = new SourceLayer::RGB[sourceImage.GetWidth() * sourceImage.GetHeight()];
 
@@ -863,17 +1009,29 @@ namespace tpublic
 						{
 							const Data::Sprite* doodadSprite = aManifest->GetById<tpublic::Data::Sprite>(doodadSpriteId);
 							nonWalkableDoodad = (doodadSprite->m_info.m_flags & SpriteInfo::FLAG_TILE_WALKABLE) == 0;
+
+							// FIXME: support larger non-walkable doodads
 						}
 					}
 
-					bool hasWall = GetWall({ x, y }) != 0;
+					uint32_t wallId = GetWall({ x, y });
+					bool wallNotWalkable = false;
+					bool wallBlockLineOfSight = false;
+					if(wallId != 0)
+					{
+						const Data::Wall* wall = aManifest->GetById<Data::Wall>(wallId);
+						if(wall->m_flags & Data::Wall::FLAG_BLOCK_LINE_OF_SIGHT)
+							wallBlockLineOfSight = true;
+						if ((wall->m_flags & Data::Wall::FLAG_WALKABLE) == 0)
+							wallNotWalkable = true;
+					}
 
 					const Data::Sprite* sprite = aManifest->GetById<tpublic::Data::Sprite>(*in);
 
-					if (!hasWall && !nonWalkableDoodad && (sprite->m_info.m_flags & SpriteInfo::FLAG_TILE_WALKABLE))
+					if (!wallNotWalkable && !nonWalkableDoodad && (sprite->m_info.m_flags & SpriteInfo::FLAG_TILE_WALKABLE))
 						*outWalkable |= 1 << bit;
 
-					if (hasWall || (sprite->m_info.m_flags & SpriteInfo::FLAG_TILE_BLOCK_LINE_OF_SIGHT))
+					if (wallBlockLineOfSight || (sprite->m_info.m_flags & SpriteInfo::FLAG_TILE_BLOCK_LINE_OF_SIGHT))
 						*outBlockLineOfSight |= 1 << bit;
 
 					// Next tile

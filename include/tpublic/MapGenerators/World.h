@@ -69,9 +69,9 @@ namespace tpublic::MapGenerators
 					if(aChild->m_name == "count")
 						m_count = UIntRange(aChild);
 					else if (aChild->m_name == "map_entity_spawn")
-						m_mapEntitySpawnId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aChild->GetIdentifier());
+						m_mapEntitySpawnId = aChild->GetId(DataType::ID_MAP_ENTITY_SPAWN);
 					else if (aChild->m_name == "tag_context")
-						m_tagContextId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TAG_CONTEXT, aChild->GetIdentifier());
+						m_tagContextId = aChild->GetId(DataType::ID_TAG_CONTEXT);
 					else if (aChild->m_name == "influence_range")
 						m_influenceRange = UIntRange(aChild);
 					else
@@ -123,7 +123,7 @@ namespace tpublic::MapGenerators
 			{
 				TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing probability annotation.");
 				m_probability = aSource->m_annotation->GetUInt32();
-				m_mapEntitySpawnId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aSource->GetIdentifier());
+				m_mapEntitySpawnId = aSource->GetId(DataType::ID_MAP_ENTITY_SPAWN);
 			}
 
 			void
@@ -171,7 +171,7 @@ namespace tpublic::MapGenerators
 					else if (aChild->m_name == "elite")
 						m_elite = aChild->GetBool();
 					else if (aChild->m_name == "map_entity_spawn")
-						m_mapEntitySpawnId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aChild->GetIdentifier());
+						m_mapEntitySpawnId = aChild->GetId(DataType::ID_MAP_ENTITY_SPAWN);
 					else if (aChild->m_name == "tag_contexts")
 						aChild->GetIdArray(DataType::ID_TAG_CONTEXT, m_tagContextIds);
 					else if (aChild->m_name == "influence_range")
@@ -227,6 +227,59 @@ namespace tpublic::MapGenerators
 			std::optional<RandomObject>				m_randomObject;
 		};
 
+		struct SpecialEntity
+		{
+			enum Placement : uint8_t
+			{
+				INVALID_PLACEMENT,
+
+				PLACEMENT_FAR_AWAY_FROM_PLAYER_SPAWNS
+			};
+
+			SpecialEntity()
+			{
+
+			}
+
+			SpecialEntity(
+				const SourceNode*						aSource)
+			{
+				aSource->GetObject()->ForEachChild([&](
+					const SourceNode* aChild)
+				{
+					if(aChild->m_name == "placement" && aChild->IsIdentifier("far_away_from_player_spawns"))
+						m_placement = PLACEMENT_FAR_AWAY_FROM_PLAYER_SPAWNS;
+					else if(aChild->m_name == "entity_spawn")
+						aChild->GetIdArray(DataType::ID_MAP_ENTITY_SPAWN, m_mapEntitySpawns);
+					else
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+				});
+			}
+
+			void
+			ToStream(
+				IWriter*								aWriter) const
+			{
+				aWriter->WritePOD(m_placement);
+				aWriter->WriteUInts(m_mapEntitySpawns);
+			}
+
+			bool
+			FromStream(
+				IReader*								aReader)
+			{
+				if(!aReader->ReadPOD(m_placement))
+					return false;
+				if(!aReader->ReadUInts(m_mapEntitySpawns))
+					return false;
+				return true;
+			}
+
+			// Public data
+			Placement								m_placement = INVALID_PLACEMENT;
+			std::vector<uint32_t>					m_mapEntitySpawns;
+		};
+
 		struct Builder
 		{
 			uint32_t		GetTerrainPaletteEntry(
@@ -257,6 +310,8 @@ namespace tpublic::MapGenerators
 								const Vec2&					aPosition) const;
 			void			InitBosses();
 			void			InitPlayerSpawns();
+			void			InitSpecialEntities();
+			void			InitRoutes();
 
 			// Public data
 			const Params*									m_params = NULL;
@@ -335,12 +390,30 @@ namespace tpublic::MapGenerators
 				uint32_t									m_doodadId = 0;
 			};
 
+			struct Route
+			{
+				enum Type
+				{
+					INVALID_TYPE, 
+
+					TYPE_RANDOM
+				};
+
+				Type										m_type = INVALID_TYPE;
+				uint32_t									m_routeId = 0;				
+				Vec2										m_from;
+				Vec2										m_to;
+				std::vector<Vec2>							m_positions;
+			};
+
 			std::vector<std::unique_ptr<Boss>>				m_bosses;
 			std::unique_ptr<DistanceField>					m_bossDistanceCombined;
 			std::vector<std::unique_ptr<PlayerSpawn>>		m_playerSpawns;
 			std::unique_ptr<DistanceField>					m_playerSpawnDistanceCombined;
 			std::vector<LevelMapPoint>						m_levelMap;
 			std::vector<Doodad>								m_doodads;
+			std::vector<SpecialEntity>						m_specialEntities;
+			std::vector<std::unique_ptr<Route>>				m_routes;
 
 			UIntRange										m_levelRange;
 		};
@@ -366,6 +439,8 @@ namespace tpublic::MapGenerators
 				TYPE_ADD_BOSS,
 				TYPE_LEVEL_RANGE,
 				TYPE_PLAYER_SPAWNS,
+				TYPE_ADD_SPECIAL_ENTITY_SPAWN,
+				TYPE_ADD_RANDOM_ROUTE,
 
 				NUM_TYPES
 			};
@@ -405,6 +480,10 @@ namespace tpublic::MapGenerators
 					return TYPE_LEVEL_RANGE;
 				else if (t == "player_spawns")
 					return TYPE_PLAYER_SPAWNS;
+				else if (t == "add_special_entity_spawn")
+					return TYPE_ADD_SPECIAL_ENTITY_SPAWN;
+				else if(t == "add_random_route")
+					return TYPE_ADD_RANDOM_ROUTE;
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid execute type.", aSource->m_name.c_str());
 				return INVALID_TYPE;
 			}
@@ -809,7 +888,7 @@ namespace tpublic::MapGenerators
 				const IExecuteFactory*				/*aFactory*/,
 				const SourceNode*					aSource) override
 			{
-				m_terrainId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TERRAIN, aSource->GetIdentifier());
+				m_terrainId = aSource->GetId(DataType::ID_TERRAIN);
 			}
 
 			void
@@ -884,7 +963,7 @@ namespace tpublic::MapGenerators
 				const IExecuteFactory*				/*aFactory*/,
 				const SourceNode*					aSource) override
 			{
-				m_terrainId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TERRAIN, aSource->GetIdentifier());
+				m_terrainId = aSource->GetId(DataType::ID_TERRAIN);
 			}
 
 			void
@@ -1042,7 +1121,7 @@ namespace tpublic::MapGenerators
 					const SourceNode*					aSource)
 				{
 					TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing terrain annotation.");
-					m_terrainId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TERRAIN, aSource->m_annotation->GetIdentifier());
+					m_terrainId = aSource->m_annotation->GetId(DataType::ID_TERRAIN);
 
 					aSource->ForEachChild([&](
 						const SourceNode* aChild)
@@ -1111,7 +1190,7 @@ namespace tpublic::MapGenerators
 					const SourceNode*					aSource)
 				{
 					TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing doodad annotation.");
-					m_doodadId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_DOODAD, aSource->m_annotation->GetIdentifier());
+					m_doodadId = aSource->m_annotation->GetId(DataType::ID_DOODAD);
 
 					aSource->ForEachChild([&](
 						const SourceNode* aChild)
@@ -1181,7 +1260,7 @@ namespace tpublic::MapGenerators
 					const SourceNode* aChild)
 				{
 					if (aChild->m_name == "noise")
-						m_noiseId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_NOISE, aChild->GetIdentifier());
+						m_noiseId = aChild->GetId(DataType::ID_NOISE);
 					else if (aChild->m_name == "terrain")
 						m_terrains.push_back(std::make_unique<Terrain>(aChild));
 					else if (aChild->m_name == "doodad")
@@ -1242,7 +1321,7 @@ namespace tpublic::MapGenerators
 				{
 					if(aChild->m_name == "noise")
 					{
-						m_noiseId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_NOISE, aChild->GetIdentifier());
+						m_noiseId = aChild->GetId(DataType::ID_NOISE);
 					}
 					else if(aChild->m_name == "debug")
 					{
@@ -1309,12 +1388,12 @@ namespace tpublic::MapGenerators
 					if(aSource->m_name == "neighbor_terrain_probability_bonus")
 					{
 						TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing terrain annotation.");
-						m_terrainId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TERRAIN, aSource->m_annotation->GetIdentifier());
+						m_terrainId = aSource->m_annotation->GetId(DataType::ID_TERRAIN);
 						m_probabilityBonus = aSource->GetUInt32();
 					}
 					else if(aSource->m_name == "neighbor_terrain_required")
 					{
-						m_terrainId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TERRAIN, aSource->GetIdentifier());
+						m_terrainId = aSource->GetId(DataType::ID_TERRAIN);
 						m_required = true;
 					}
 					else
@@ -1448,9 +1527,9 @@ namespace tpublic::MapGenerators
 					const SourceNode* aChild)
 				{
 					if (aChild->m_name == "tag_context")
-						m_tagContextId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TAG_CONTEXT, aChild->GetIdentifier());
+						m_tagContextId = aChild->GetId(DataType::ID_TAG_CONTEXT);
 					else if (aChild->m_name == "map_entity_spawn")
-						m_mapEntitySpawnId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aChild->GetIdentifier());
+						m_mapEntitySpawnId = aChild->GetId(DataType::ID_MAP_ENTITY_SPAWN);
 					else if (aChild->m_name == "influence")
 						m_influence = aChild->GetUInt32();
 					else if (aChild->m_name == "influence_tile_transform_threshold")
@@ -1586,6 +1665,86 @@ namespace tpublic::MapGenerators
 
 			// Public data
 			uint32_t									m_count = 1;
+		};
+
+		struct ExecuteAddSpecialEntitySpawn : public IExecute
+		{
+			static const Type TYPE = TYPE_ADD_SPECIAL_ENTITY_SPAWN;
+
+			ExecuteAddSpecialEntitySpawn() : IExecute(TYPE) { }
+			virtual	~ExecuteAddSpecialEntitySpawn() { }
+
+			// IExecute implementation
+			void
+			FromSource(
+				const IExecuteFactory*				/*aFactory*/,
+				const SourceNode*					aSource) override
+			{
+				m_specialEntity = SpecialEntity(aSource);
+			}
+
+			void
+			ToStream(
+				IWriter*							aWriter) const override
+			{
+				m_specialEntity.ToStream(aWriter);
+			}
+
+			bool
+			FromStream(
+				const IExecuteFactory*				/*aFactory*/,
+				IReader*							aReader) override
+			{
+				if(!m_specialEntity.FromStream(aReader))
+					return false;
+				return true;
+			}
+
+			void				Run(
+									Builder*			aBuilder) const override;
+
+			// Public data
+			SpecialEntity				m_specialEntity;
+		};
+
+		struct ExecuteAddRandomRoute : public IExecute
+		{
+			static const Type TYPE = TYPE_ADD_RANDOM_ROUTE;
+
+			ExecuteAddRandomRoute() : IExecute(TYPE) { }
+			virtual	~ExecuteAddRandomRoute() { }
+
+			// IExecute implementation
+			void
+			FromSource(
+				const IExecuteFactory*				/*aFactory*/,
+				const SourceNode*					aSource) override
+			{				
+				m_routeId = aSource->GetId(DataType::ID_ROUTE);
+			}
+
+			void
+			ToStream(
+				IWriter*							aWriter) const override
+			{
+				aWriter->WriteUInt(m_routeId);
+			}
+
+			bool
+			FromStream(
+				const IExecuteFactory*				/*aFactory*/,
+				IReader*							aReader) override
+			{
+				if(!aReader->ReadUInt(m_routeId))
+					return false;
+				return true;
+			}
+
+			void				Run(
+									Builder*			aBuilder) const override;
+
+			// Public data
+			uint32_t					m_routeId = 0;
 		};
 
 		// MapGeneratorBase implementation

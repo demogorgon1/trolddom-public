@@ -1,3 +1,18 @@
+dialogue_screen .elara_nightshade_the_shrouded_lands:
+{
+	text:
+	[
+		"The shrouded lands? Yes, of course. I used to have a portal here, but it has faltered. Seek out the secret society of the underworld in Valoris if you to fight on our side."
+	]
+}
+
+!define local THE_SHROUDED_LANDS_OPTION
+{
+	requirement self<must_be_disciple>: underworld
+	goto: .elara_nightshade_the_shrouded_lands
+	text: "How do I get to the shrouded lands?"
+}
+
 dialogue_screen .elara_nightshade_greetings:
 {
 	text: 
@@ -8,6 +23,7 @@ dialogue_screen .elara_nightshade_greetings:
 	options:
 	[
 		{ quest: .elara_nightshade_1 }
+		!THE_SHROUDED_LANDS_OPTION{}
 	]
 }
 
@@ -21,6 +37,7 @@ dialogue_screen .elara_nightshade_greetings_witch:
 	options:
 	[
 		{ quest: .elara_nightshade_1 }
+		!THE_SHROUDED_LANDS_OPTION{}
 	]
 }
 

@@ -1,0 +1,103 @@
+dialogue_screen .dwarf_miner_mining:
+{
+	text: 
+	[	
+		"What you can use mining for? Are you being silly on me?"
+	]
+	
+	options:
+	[
+		{ goto: .dwarf_miner_greetings text: "Alright." }
+	]
+}
+
+dialogue_screen .dwarf_miner_trainer: !DEFAULT_MINING_TRAINER{}
+
+dialogue_screen .dwarf_miner_greetings:
+{
+	text: 
+	[	
+		"What can I do for you?"
+	]
+	
+	options:
+	[
+		{ quest: .dwarf_miner_1 }
+		{ goto: .dwarf_miner_mining text: "What can I use mining for?" }
+		{ goto: .dwarf_miner_trainer text: "Please teach me how to mine." }
+	]
+}
+
+dialogue_root .dwarf_miner_dialogue:
+{
+	.dwarf_miner_greetings: { }
+}
+
+entity thalvaron_dwarf_miner: !NPC
+{
+	_string: "Torvick Dainor"
+	_guild_name: "Mining Trainer"
+	_dialogue_root: .dwarf_miner_dialogue	
+	_sprite: dwarf_8
+	_sprite_dead: dwarf_8_dead
+	_level: 20
+	_faction: kingdom_of_thuldarim		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .dwarf_miner_1_a:
+{
+	string: "Copper Ore"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: item_copper_ore count: 5 }
+}
+
+objective .dwarf_miner_1_b:
+{
+	string: "Iron Ore"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: item_iron_ore count: 5 }
+}
+
+
+quest .dwarf_miner_1:
+{
+	string: "Got Ore?"
+
+	text:
+	[
+		"Deliver ores to Torvick Dainor in Durgan Tharok."
+	]
+	
+	description: 
+	[
+		"You got any ore for me? If you bring me some I'll make sure to put in a good word for you."
+	]
+
+	progress:
+	[
+		"How is it going?"
+	]
+	
+	completion:
+	[
+		"Uh, wonderful!"
+	]
+	
+	objectives: [ .dwarf_miner_1_a .dwarf_miner_1_b ]
+	repeat_mode: always
+	level: 20
+	reward_xp_multiplier: 0
+	reward_cash_multiplier: 0
+	reward_reputation_multiplier: 1.8
+}
+

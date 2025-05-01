@@ -1,0 +1,94 @@
+dialogue_screen .lieutenant_gordon_dialogue:
+{
+	text: 
+	[	
+		"Careful. Beyond this pass you'll enter the badlands. Horrible dry place full of poisonous creatures. You're probably better off in this swamp."
+	]		
+	
+	options:
+	[
+		{ quest: .lieutenant_gordon_1 }
+	]
+}
+
+dialogue_root .lieutenant_gordon_dialogue:
+{
+	.lieutenant_gordon_dialogue: { }
+}
+
+entity thalvaron_lieutenant_gordon: !NPC
+{
+	_string: "Lieutenant Gordon"
+	_dialogue_root: .lieutenant_gordon_dialogue	
+	_sprite: man_13
+	_sprite_dead: man_13_dead
+	_level: 20
+	_faction: valoris		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .lieutenant_gordon_1_quest_item: {}
+
+item .lieutenant_gordon_1_quest_item:
+{
+	icon: icon_kobold_tail
+	item_level: 14
+	loot_groups: [ .lieutenant_gordon_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Kobold Tail"
+	stack: 10
+}
+
+objective .lieutenant_gordon_1:
+{
+	string: "Kobold Tails"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .lieutenant_gordon_1_quest_item count: 10 }
+}
+
+{
+	${ _level: 14 }
+	item .lieutenant_gordon_1_a: !QUEST_REWARD_WRISTS{ _string: "Crude Kobold Armguards" _icon: icon_mail_bracers_2 _strength: 2 _constitution: 3 _type: armor_plate }
+	item .lieutenant_gordon_1_b: !QUEST_REWARD_WAIST{ _string: "Soothsayer's Belt" _icon: icon_plate_belt_1 _wisdom: 3 _constitution: 2 _type: armor_cloth }
+	item .lieutenant_gordon_1_c: !QUEST_REWARD_HANDS{ _string: "Dwarven Chain Gauntlets" _icon: icon_mail_gloves_1 _dexterity: 1 _constitution: 2 _type: armor_mail }
+}
+
+quest .lieutenant_gordon_1:
+{
+	string: "Tired of Kobolds Yet?"
+
+	text:
+	[
+		"Venture into the dwarven ruins north of the pass and collect kobold tails."
+	]
+	
+	description: 
+	[
+		"Just to the north of here you'll find some old abandoned dwarven underground structures. It's been relatively untouched for as long as I can remember, but with the recent surge in kobold activity it too has become"
+		"infested with those nasty little critters. Who knows how far their tunnels reach? Will a kobold eventually pop its ugly head out of a toilet at the royal palace in Valoris?\n\n"
+		"I need you to venture into those old dwarven tunnels and kill kobolds. Bring back their tails to prove your deeds."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Great, good job. Not sure what I'll do with all those tails, though."
+	]
+	
+	objectives: [ .lieutenant_gordon_1 ]
+	level: 14
+	reward_one_item: [ .lieutenant_gordon_1_a .lieutenant_gordon_1_b .lieutenant_gordon_1_c ]
+	reward_reputation_multiplier: 1.5
+}
+

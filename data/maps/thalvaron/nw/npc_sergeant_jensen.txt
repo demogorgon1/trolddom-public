@@ -1,0 +1,141 @@
+dialogue_screen .sergeant_jensen_dialogue:
+{
+	text: 
+	[	
+		"We were just attacked by a bunch of rebels. They appeared out of nowhere!"
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .lieutenant_tinley_2 }
+		{ quest: .sergeant_jensen_1 }
+		{ quest<offer_only>: .sergeant_jensen_2 }
+	]
+}
+
+dialogue_root .sergeant_jensen_dialogue:
+{
+	.sergeant_jensen_dialogue: { }
+}
+
+entity thalvaron_sergeant_jensen: !NPC
+{
+	_string: "Sergeant Jensen"
+	_dialogue_root: .sergeant_jensen_dialogue	
+	_sprite: city_guard_1
+	_sprite_dead: city_guard_1_dead
+	_level: 20
+	_faction: valoris		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .sergeant_jensen_1_1:
+{
+	string: "The Johansson Farm"
+	
+	maps: [ thalvaron ]
+	
+	dialogue_trigger:
+	{
+		entities: [ thalvaron_maude_johansson ]
+	}
+}
+
+objective .sergeant_jensen_1_2:
+{
+	string: "The Robertson Farm"
+	
+	maps: [ thalvaron ]
+	
+	dialogue_trigger:
+	{
+		entities: [ thalvaron_borg_robertson ]
+	}
+}
+
+objective .sergeant_jensen_1_3:
+{
+	string: "The Howton Farm"
+	
+	maps: [ thalvaron ]
+	
+	dialogue_trigger:
+	{
+		entities: [ thalvaron_ola_howton ]
+	}
+}
+
+{
+	${ _level: 11 }
+	item .sergeant_jensen_1_a: !QUEST_REWARD_SHIELD{ _string: "Crest of the City Guard" _icon: icon_shield_3 _dexterity: 2 _constitution: 1 }
+	item .sergeant_jensen_1_b: !QUEST_REWARD_SHIELD{ _string: "City Guard Defender" _icon: icon_shield_2 _healing: 2 _wisdom: 1 }
+	item .sergeant_jensen_1_c: !QUEST_REWARD_WAIST{ _string: "Strong Iron Belt" _icon: icon_belt_2 _dexterity: 1 _strength: 1 _type: armor_plate }
+}
+
+quest .sergeant_jensen_1:
+{
+	string: "The Bread Basket of Valoris"
+
+	text:
+	[
+		"Check up on the farms south of the city."
+	]
+	
+	description: 
+	[
+		"The city relies on a steady supply of food from the farms in the area. With all the commotion going on, we need to make sure the rebels aren't interfering. I need you to check up on them."
+	]
+
+	progress:
+	[
+		"Yes? Did you finish what I asked you to do?"
+	]
+	
+	completion:
+	[
+		"Good. The insurgency must not interfere with the economy."
+	]
+
+	level: 11
+	objectives: [ .sergeant_jensen_1_1 .sergeant_jensen_1_2 .sergeant_jensen_1_3 ]
+	reward_one_item: [ .sergeant_jensen_1_a .sergeant_jensen_1_b .sergeant_jensen_1_c ]
+	reward_reputation_multiplier: 1.5
+}
+
+############################################################
+# Quest 2
+
+quest .sergeant_jensen_2:
+{
+	string: "The Southern Choke"
+
+	text:
+	[
+		"Offer your services at The Southern Choke fortifications."
+	]
+	
+	description: 
+	[
+		"If you follow the main road to the south you'll find a larger fortication called The Southern Choke. Maybe they need some help down there as well."
+	]
+
+	progress:
+	[
+		"Go south."
+	]
+	
+	completion:
+	[
+		"Did Jensen send you? We haven't had much rebel activity down here, but we need to keep the fortifications manned. We don't want any hostile intrusions from the south."
+	]
+
+	level: 11
+	prerequisites: [ .sergeant_jensen_1 ]
+	reward_xp_multiplier: 0.3
+	reward_cash_multiplier: 0.3
+}

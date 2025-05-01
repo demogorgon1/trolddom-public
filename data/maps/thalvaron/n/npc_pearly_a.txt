@@ -1,0 +1,129 @@
+expression .pearly_a_has_item:
+{
+	client_has_item: { id<item>: .fennian_starleaf_3_quest_item }
+}
+
+dialogue_screen .pearly_a_dialogue_1:
+{
+	text: 
+	[	
+		"How are you doing?"
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .fennian_starleaf_3 }
+		{ quest: .pearly_a_1 }
+		{ quest<offer_only>: .pearly_a_2 }
+	]
+}
+
+dialogue_screen .pearly_a_dialogue_2:
+{
+	text: 
+	[	
+		"*Blob*"
+	]		
+}
+
+dialogue_root .pearly_a_dialogue:
+{
+	.pearly_a_dialogue_1: { conditions: [ .pearly_a_has_item ] }
+	.pearly_a_dialogue_2: { inv_conditions: [ .pearly_a_has_item ] }
+}
+
+entity thalvaron_pearly_a: !NPC
+{
+	_string: "Pearly"
+	_guild_name: "Lady of the Lake"
+	_dialogue_root: .pearly_a_dialogue
+	_sprite: pearly
+	_sprite_dead: pearly
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_visibility_requirements:
+	{
+		requirement self<must_not_have_completed_quest>: .pearly_a_2
+	}
+}
+
+############################################################
+# Quest 1
+	   
+objective .pearly_a_1:
+{
+	string: "Spiced Rice"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: consumable_spiced_rice count: 1 }	
+}
+
+quest .pearly_a_1:
+{
+	string: "The Fish is Hungry"
+	
+	text:
+	[
+		"Acquire some spiced rice for Pearly, the lady of the lake. A trained cook or an inn keeper might be able to help you."
+	]
+	
+	description: 
+	[
+		"I'm feeling a bit peckish. I'm afraid I won't be able to focus on your problems unless I first have something to eat. I like spiced rice."
+	]
+
+	progress:
+	[
+		"Is that rice you have there?"
+	]
+	
+	completion:
+	[
+		"That looks delicious! Feed me!"
+	]
+
+	level: 16
+	prerequisites: [ .fennian_starleaf_3 ]
+	objectives: [ .pearly_a_1 ]
+}
+
+############################################################
+# Quest 2
+
+quest .pearly_a_2:
+{
+	string: "The Waters Are Stirred"
+	
+	text:
+	[
+		"Travel west, find the caves and the sacred pond within."
+	]	
+	
+	description: 
+	[
+		"These are uneasy times in this part of the world. I can feel it in my scales. There is something in the water that effects many of the lesser creatures that drink from them, including owlbears. I'm talking about some"
+		"kind of dark magic.\n\n"
+		"It's nothing new. For a long time these forests have had a vile aura, brought by the dark elves from the east that have slowly increased their pressence. I'm afraid we're close to a tipping point and I'm delighted that"
+		"a brave soul like you is interested in doing something about it.\n\n"
+		"Deep in the caves to the west there exists a sacred pond that is directly connected to the arteries of the mountains. You need to find it and see if anything is corrupting it."
+	]
+
+	progress:
+	[
+		"What's up?"
+	]
+	
+	completion:
+	[
+		"You dare to disturb me? State your business!"
+	]
+
+	level: 16
+	prerequisites: [ .pearly_a_1 ]
+	reward_cash_multiplier: 0
+	reward_xp_multiplier: 0.33
+}

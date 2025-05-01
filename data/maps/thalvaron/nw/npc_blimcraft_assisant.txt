@@ -1,0 +1,94 @@
+dialogue_screen .blimcraft_assistant:
+{
+	text: 
+	[	
+		"What are you looking at? Haven't you seen a dwarf swallowed by an ooze before?"
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: thalvaron_blimcraft_highborne_3 }
+		{ quest: thalvaron_blimcraft_assistant_1 }
+	]
+}
+
+entity thalvaron_blimcraft_assistant: !NPC
+{
+	_string: "Thurold"
+	_sprite: dwarf_17
+	_sprite_dead: dwarf_17_dead
+	_level: 20
+	_faction: npcs
+	_creature_type: humanoid
+	_dialogue_root: $dialogue_root { .blimcraft_assistant: { } }
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 3
+
+objective .blimcraft_assistant_1:
+{
+	string: "Willowgast Defeated"
+	
+	maps: [ gateway_world_2_a gateway_world_2_b ]
+	
+	kill_npc:
+	{
+		entities: [ gateway_wizard ]
+		count: 1
+	}
+}
+
+item .blimcraft_assistant_1:
+{
+	string: "Seeking Stone"
+	flags: [ unique not_sellable ]
+	icon: icon_crystal_2
+	quest: thalvaron_blimcraft_assistant_1	
+	item_level: 20
+	use_ability: $ability [ string icon ]
+	{
+		description: "Locate Willowgast the Red."
+		flags: [ target_self item ]
+		cooldowns: [ global ]
+		cooldown: $cooldown { duration: 50 }
+		states: [ default in_combat ]
+		direct_effect simple<entity_compass>: gateway_wizard		
+	}
+}
+
+quest thalvaron_blimcraft_assistant_1:
+{
+	string: "Wizard Rivalry"
+	
+	text: 
+	[
+		"Track down Willowgast beyond the gateway and defeat him."
+	]
+	
+	description: 
+	[
+		"Have you heard of Willowgast? Willowgast the Red? Probably not. He was once a good friend of Blimcraft, a fellow scholar of the arcane, but now they hate each other for reasons" 
+		"you'd have to be a wizard to understand. The whole reason why my master decided to study portals was because he found out that Willowgast spends most of his time these days doing nothing but traveling"
+		"around different planes of existence.\n\n"
+		"The portal you'll find in the next room will takes you to whichever reality Willowgast currently wanders in. My master wants you to enter that portal, find him, and defeat him in combat."
+		"You won't be able to kill him, he's very slippery. Just knock him down a peg or two and we'll reward you.\n\n"
+		"I'll give you a seeking stone that will help you locate him once you've entered the portal. Every day Willowgast will go to a different reality.\n\n"
+		"Don't forget that the usual laws planewalking apply. If you die beyond the gateway your spirit is locked away from entering again until the next day. Try not to die."
+	]
+		
+	completion:
+	[
+		"Blimcraft will be happy to hear about this."
+	]
+
+	level: 20
+	type: elite
+	repeat_mode: daily
+	prerequisites: [ thalvaron_blimcraft_highborne_3 ]
+	reward_all_items: [ item_token_of_victory item_token_of_victory ]
+	objectives: [ .blimcraft_assistant_1 ]
+	quest_items: [ .blimcraft_assistant_1 ]
+}

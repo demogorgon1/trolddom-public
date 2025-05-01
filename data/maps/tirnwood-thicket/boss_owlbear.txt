@@ -1,0 +1,177 @@
+############################################################
+# Loot
+
+loot_group .owlbear: {}
+
+loot_table .owlbear:
+{
+	slots:
+	[
+		{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
+		  map_message tirnwood_thicket: "Grimfeather will not drop Token of Victory for {}." } } }
+		{ possibility: { loot_group: .owlbear  } }			
+		!WORLD_DROPS{}
+		!WORLD_DROPS_OWLBEARS{}
+	]	
+}
+
+{
+	${
+		_rarity: rare
+		_level: 20
+		_loot_group: .owlbear
+	}
+	
+	item tirnwood_thicket_7: !BOSS_DROP_FEET
+	{
+		_string: "Sandals of Woffeh"
+		_type: armor_cloth
+		_icon: icon_slippers_1
+		_wisdom: 3
+		_spell_damage: 2
+		_constitution: 1
+	}
+	
+	item tirnwood_thicket_8: !BOSS_DROP_BACK
+	{
+		_string: "Woodland Poncho"
+		_type: armor_cloth
+		_icon: icon_cape_1
+		_constitution: 2
+		_strength: 1
+		_budget_bias: -10
+		_dodge: 1
+	}
+	
+	item tirnwood_thicket_9: !BOSS_DROP_NECK
+	{
+		_string: "Locket of the Owl"
+		_icon: icon_necklace_3
+		_wisdom: 3
+		_spirit: 2
+		_healing: 1
+	}
+	
+	item tirnwood_thicket_10: !BOSS_DROP_SHOULDERS
+	{
+		_string: "Shawl of the Owl"
+		_type: armor_cloth
+		_icon: icon_shoulders_4
+		_constitution: 2
+		_wisdom: 1
+		_healing: 3
+	}
+	
+	item tirnwood_thicket_11: !BOSS_DROP_CHEST
+	{
+		_string: "Robe of the Warrior Monk"
+		_type: armor_cloth
+		_icon: icon_shirt_3
+		_strength: 1
+		_dexterity: 3
+		_constitution: 2
+	}
+	
+	item tirnwood_thicket_12: !BOSS_DROP_WAIST
+	{
+		_string: "Girlde of Stoicism"
+		_type: armor_plate
+		_icon: icon_belt_4
+		_strength: 1
+		_constitution: 2
+		_budget_bias: -10
+		_parry: 1
+	}
+}
+
+############################################################
+# Boss
+
+zone .owlbear:
+{
+}
+
+encounter .owlbear:
+{
+	main_entities: [ tirnwood_thicket_owlbear ]	
+}
+
+entity tirnwood_thicket_owlbear: !NPC 
+{ 
+	_string: "Grimfeather" 
+	_level: 20
+	_elite: true
+	_faction: monsters 
+	_sprite: owlbear_4
+	_sprite_dead: owlbear_4_dead 
+	_weapon_damage: 1.8
+	_resource_health: 6.2
+	_loot_table: .owlbear
+	_creature_type: beast
+	_encounter: .owlbear
+	_zone: .owlbear
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+
+	_abilities: 
+	[
+		{
+			id: .owlbear
+			target: self
+			requirement self<must_have_less_health_than>: 70
+		}
+		
+		{
+			id: npc_strike
+			target: random_player
+		}
+		
+		{
+			id: npc_attack
+		}
+	]	
+	
+	_in_combat_barks:
+	[
+		{ type: say text: "Oohhh-ohh! Grr! Ohhh! " flags: [ no_chat_bubble ] }
+	]			
+	
+}
+
+map_trigger .owlbear_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .owlbear:
+{
+	entity tirnwood_thicket_owlbear: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .owlbear_killed
+		}
+	}
+}
+
+ability .owlbear:
+{
+	string: "Restoration"
+	cast_time: 30
+	cooldowns: [ global ]
+	cooldown: $cooldown { duration: 160 }
+	flags: [ spell target_self interruptable ]
+	states: [ in_combat ]
+	icon: icon_throw_rock
+	delay: 3
+	target_particle_system: heal
+
+	direct_effect heal:
+	{
+		function: 20
+		max_health_percentage: true
+	}
+}

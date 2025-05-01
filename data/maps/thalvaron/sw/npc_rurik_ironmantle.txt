@@ -1,0 +1,32 @@
+dialogue_screen .rurik_ironmantle_dialogue:
+{
+	text: 
+	[	
+		"Yes?"
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .hort_ironmantle_2 }
+		{ quest<completion_only>: .mumle_whiterock_2 }
+	]
+}
+
+dialogue_root .rurik_ironmantle_dialogue:
+{
+	.rurik_ironmantle_dialogue: { }
+}
+
+entity thalvaron_rurik_ironmantle: !NPC
+{
+	_string: "Rurik Ironmantle"
+	_dialogue_root: .rurik_ironmantle_dialogue	
+	_sprite: dwarf_5
+	_sprite_dead: dwarf_5_dead
+	_level: 20
+	_faction: kingdom_of_thuldarim		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

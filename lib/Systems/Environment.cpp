@@ -89,10 +89,11 @@ namespace tpublic::Systems
 				aContext->m_eventQueue->EventQueueAbility(
 					sourceEntityInstance,
 					aEntityInstanceId, 
-					Vec2(), 
+					position->m_position, 
 					ability, 
 					ItemInstanceReference(), 
-					NULL);
+					NULL,
+					position->m_position);
 			}
 			else
 			{
@@ -103,7 +104,7 @@ namespace tpublic::Systems
 					const EntityInstance* aEntityInstance)
 				{
 					if(aEntityInstance->GetEntityInstanceId() != aEntityInstanceId && aEntityInstance->GetEntityInstanceId() != ownerEntityInstanceId)
-						aContext->m_eventQueue->EventQueueAbility(sourceEntityInstance, aEntityInstance->GetEntityInstanceId(), Vec2(), ability, ItemInstanceReference(), NULL);
+						aContext->m_eventQueue->EventQueueAbility(sourceEntityInstance, aEntityInstance->GetEntityInstanceId(), position->m_position, ability, ItemInstanceReference(), NULL, position->m_position);
 
 					return false; // Don't stop
 				});

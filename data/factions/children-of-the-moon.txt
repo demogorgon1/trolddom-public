@@ -1,0 +1,84 @@
+faction children_of_the_moon:
+{
+	string: "Children of the Moon"
+	flags: [ friendly reputation show ]
+	default_reputation: !NEUTRAL_REPUTATION{}
+	
+	reputation_from_kill dark_elves: 20
+}
+
+################################################################################
+# Reputation items
+
+item children_of_the_moon_back_1:
+{
+	equipment_slots: [ back ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 18
+	icon: icon_cape_3
+	rarity: rare
+	string: "Elven Soothsayer's Cape"
+	stat_weight constitution: 1
+	stat_weight wisdom: 2
+}
+
+item children_of_the_moon_waist_1:
+{
+	equipment_slots: [ waist ]
+	binds: when_picked_up
+	type: armor_mail
+	required_level: 18
+	icon: icon_plate_belt_1
+	rarity: rare
+	string: "Belt of the Elven Assassin"
+	stat_weight constitution: 1
+	stat_weight strength: 2
+	stat_weight dexterity: 1
+}
+
+item children_of_the_moon_hands_1:
+{
+	equipment_slots: [ hands ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 20
+	icon: icon_mail_gloves_2
+	rarity: rare
+	string: "Gloves of the Elven Healer"
+	stat_weight constitution: 1
+	stat_weight healing: 2
+	stat_weight mana_per_5: 1
+}
+
+item children_of_the_moon_neck_1:
+{
+	equipment_slots: [ neck ]
+	binds: when_picked_up
+	required_level: 20
+	icon: icon_necklace_2
+	rarity: rare
+	string: "Warden's Medal"
+	budget_bias: -10
+	stat_weight constitution: 2
+	stat_weight strength: 1
+	stat dodge_chance: 1
+}
+
+################################################################################
+# Token of Victory items
+
+item token_of_victory_mana_potion (potion):
+{	
+	icon: icon_potion_3
+	string: "Victorious Mana Potion"
+	binds: when_picked_up
+	flags: [ not_sellable ]
+	use_ability: $ability (mana_potion) [ string icon ]	
+	{
+		description: "Restores 350 mana."
+		direct_effect modify_resource: { resource: mana function: 350 }
+		consume_items: { entry: { item: <item> quantity: 1 } }
+		required_level: 12
+	}
+}

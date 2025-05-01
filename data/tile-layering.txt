@@ -1,22 +1,44 @@
 tile_layering:
 [
+	# Shallow water
 	shallow_water
+	fs_shallow_water
+	
+	# Natural walkables
 	ice
 	fs_ground_2
 	mud
 	fs_ground_1
+	fs_ground_3
 	sand
 	dirt
+	badlands_1
+	badlands_2
 	grass_2
 	grass
+	dark_grass_2
+	wet_grass
 	dark_grass
 	farmland
 	snow
+	
+	# Special surfaces
+	red_carpet
+	pavement_1
+	
+	# Forest
 	forest
 	forest_2
+	pine_forest_1
+	pine_forest_2
+	pine_forest_3
+	
+	# Rocks
 	rocks
 	snow_rocks	
 	fs_rocks_1
+	fs_rocks_2
+	badlands_rocks
 ]
 
 base_tile_border_pattern_sprite: grass

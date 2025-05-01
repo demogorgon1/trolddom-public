@@ -4,6 +4,12 @@ dialogue_screen .malzeth_greetings:
 	[	
 		"Welcome to the shroud, mortal."
 	]			
+	
+	options:
+	[
+		{ quest: .malzeth_1 !MUST_BE_REAL_DISCIPLE{} }
+		{ quest: .malzeth_2 !MUST_BE_REAL_DISCIPLE{} }
+	]
 }
 
 dialogue_root .malzeth_dialogue:
@@ -16,12 +22,103 @@ entity .malzeth: !NPC
 	_string: "Malzeth"
 	_dialogue_root: .malzeth_dialogue
 	_loot_table: .npc
-	_level: 12
+	_level: 22
 	_elite: true
-	_faction: npcs
+	_weapon_damage: 2
+	_resource_health: 3	
+	_faction: underworld
 	_creature_type: demon
 	_not_pushable: true
 	_sprite: demon_3
 	_sprite_dead: demon_3_dead
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
 }
 	
+############################################################
+# Quest 1
+
+objective .malzeth_1:
+{
+	string: "Holy Shrine Desecrated"
+	
+	use_ability: { entities: [ holy_altar ] count: 1 ability: desecrate }
+}
+
+quest .malzeth_1:
+{
+	string: "Daily Desecration"
+
+	text:
+	[
+		"Desecrate a holy shrine and return to Malzeth in The Shrouded Lands."
+	]
+	
+	description: 
+	[
+		"Have you desecrated a holy shrine today? Yes, no? Well, regardless it would be a good idea to do that. I really, really, hate those ugly things you know. Don't forget how much it hurts their little feelings as well."
+		"Better get to work, right?"
+	]
+
+	progress:
+	[
+		"How is it going?"
+	]
+	
+	completion:
+	[
+		"Ha ha!"
+	]
+	
+	objectives: [ .malzeth_1 ]
+	repeat_mode: daily
+	level: 20
+	reward_reputation_multiplier: 0.6
+	reward_realm_balance<the_shrouded_lands_underworld>: { expression: a_mul_x_plus_b x: pvp_control_points a: 2 b: 6 }
+	reward_all_items: [ unholy_token ]
+}
+
+############################################################
+# Quest 2
+
+objective .malzeth_2:
+{
+	string: "Follower of the Light Killed"
+	
+	maps: [ the_shrouded_lands ]
+	
+	kill_player: { count: 1 faction: light }
+}
+
+quest .malzeth_2:
+{
+	string: "Unholy War"
+
+	text:
+	[
+		"Find and kill a player in the Shrouded Lands who is a follower of the Light."
+	]
+	
+	description: 
+	[
+		"What's more fun than desecrating holy shrines? That's easy! Kill their whiny little followers! Find and kill one."
+	]
+
+	progress:
+	[
+		"What are we waiting for?"
+	]
+	
+	completion:
+	[
+		"That's funny."
+	]
+	
+	objectives: [ .malzeth_2 ]
+	repeat_mode: daily
+	level: 20
+	reward_reputation_multiplier: 0.6
+	reward_realm_balance<the_shrouded_lands_underworld>: { expression: a_mul_x_plus_b x: pvp_control_points a: 2 b: 6 }
+	reward_all_items: [ unholy_token ]
+}

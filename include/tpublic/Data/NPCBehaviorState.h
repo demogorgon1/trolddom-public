@@ -26,8 +26,8 @@ namespace tpublic
 					const SourceNode*	aSource)
 				{
 					TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing route annotation.");
-					m_routeId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ROUTE, aSource->m_annotation->GetIdentifier());
-					m_npcBehaviorStateId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_NPC_BEHAVIOR_STATE, aSource->GetIdentifier());
+					m_routeId = aSource->m_annotation->GetId(DataType::ID_ROUTE);
+					m_npcBehaviorStateId = aSource->GetId(DataType::ID_NPC_BEHAVIOR_STATE);
 				}
 
 				void
@@ -81,6 +81,14 @@ namespace tpublic
 						{
 							m_maxRange = aChild->GetUInt32();
 						}
+						else if (aChild->m_name == "combat_event_pause_ticks")
+						{
+							m_combatEventPauseTicks = aChild->GetInt32();
+						}
+						else if (aChild->m_name == "patrol_move_interval_ticks")
+						{
+							m_patrolMoveIntervalTicks = aChild->GetInt32();
+						}
 						else if (aChild->m_name == "max_ticks")
 						{
 							m_maxTicks = aChild->GetUInt32();
@@ -92,6 +100,18 @@ namespace tpublic
 						else if(aChild->m_name == "on_route")
 						{
 							m_onRoute = OnRoute(aChild);
+						}
+						else if(aChild->m_name == "despawn_if_lost_player")
+						{
+							m_despawnIfLostPlayer = aChild->GetBool();
+						}
+						else if(aChild->m_name == "patrol_reset_after_leaving_combat")
+						{
+							m_patrolResetAfterLeavingCombat = aChild->GetBool();
+						}
+						else if (aChild->m_name == "no_blocking")
+						{
+							m_noBlocking = aChild->GetBool();
 						}
 						else
 						{
@@ -111,6 +131,11 @@ namespace tpublic
 				aStream->WriteUInt(m_maxTicks);
 				aStream->WriteBool(m_pauseWhenTargetedByNearbyPlayer);
 				aStream->WriteOptionalObject(m_onRoute);
+				aStream->WriteInt(m_combatEventPauseTicks);
+				aStream->WriteBool(m_despawnIfLostPlayer);
+				aStream->WriteInt(m_patrolMoveIntervalTicks);
+				aStream->WriteBool(m_patrolResetAfterLeavingCombat);
+				aStream->WriteBool(m_noBlocking);
 			}
 
 			bool
@@ -127,6 +152,16 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadOptionalObject(m_onRoute))
 					return false;
+				if (!aStream->ReadInt(m_combatEventPauseTicks))
+					return false;
+				if (!aStream->ReadBool(m_despawnIfLostPlayer))
+					return false;
+				if (!aStream->ReadInt(m_patrolMoveIntervalTicks))
+					return false;
+				if (!aStream->ReadBool(m_patrolResetAfterLeavingCombat))
+					return false;
+				if (!aStream->ReadBool(m_noBlocking))
+					return false;
 				return true;
 			}
 
@@ -135,8 +170,12 @@ namespace tpublic
 			uint32_t				m_maxRange = 0;
 			uint32_t				m_maxTicks = 0;
 			bool					m_pauseWhenTargetedByNearbyPlayer = false;
+			int32_t					m_combatEventPauseTicks = 0;
 			std::optional<OnRoute>	m_onRoute;
-
+			bool					m_despawnIfLostPlayer = false;
+			int32_t					m_patrolMoveIntervalTicks = 12;
+			bool					m_patrolResetAfterLeavingCombat = false;
+			bool					m_noBlocking = false;
 		};
 
 	}

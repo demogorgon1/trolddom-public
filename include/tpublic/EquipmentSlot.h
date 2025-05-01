@@ -28,9 +28,13 @@ namespace tpublic
 			ID_BAG_1,
 			ID_BAG_2,
 			ID_BAG_3,
+			ID_TRINKET_1,
+			ID_TRINKET_2,
 
 			NUM_IDS
 		};
+
+		static const uint8_t NUM_IDS_V0 = ID_TRINKET_1;
 
 		struct Info
 		{
@@ -62,7 +66,9 @@ namespace tpublic
 			{ "finger_2",	"finger",		"Finger",		true },
 			{ "bag_1",		"bag",			"Bag",			false },
 			{ "bag_2",		"bag",			"Bag",			true },
-			{ "bag_3",		"bag",			"Bag",			true }
+			{ "bag_3",		"bag",			"Bag",			true },
+			{ "trinket_1",	"trinket",		"Trinket",		false },
+			{ "trinket_2",	"trinket",		"Trinket",		true },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

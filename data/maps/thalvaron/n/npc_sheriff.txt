@@ -1,0 +1,257 @@
+dialogue_screen .sheriff_cunningham_dialogue:
+{
+	text: 
+	[	
+		"What brings you to this side of the mountains?"
+	]		
+	
+	options:
+	[
+		{ quest: .sheriff_cunningham_1 }
+		{ quest: .sheriff_cunningham_2 }
+		{ quest: .sheriff_cunningham_3 }
+	]
+}
+
+dialogue_root .sheriff_cunningham_dialogue:
+{
+	.sheriff_cunningham_dialogue: { }
+}
+
+entity thalvaron_sheriff_cunningham: !NPC
+{
+	_string: "Sheriff Cunningham"
+	_dialogue_root: .sheriff_cunningham_dialogue	
+	_sprite: man_10
+	_sprite_dead: man_10_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .sheriff_cunningham_1:
+{
+	string: "Duskwhisper Kobolds Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_duskwhisper_kobold_a thalvaron_duskwhisper_kobold_b thalvaron_duskwhisper_kobold_c ]
+		count: 8
+	}
+}
+
+quest .sheriff_cunningham_1:
+{
+	string: "If You'd Be So Ko-Bold"
+
+	text:
+	[
+		"Find kobolds near the blocked off pass to the west and kill them."
+	]
+	
+	description: 
+	[
+		"You're probably well aware that the main pass to the Iceveil Highlands has been blocked for a while due to fallen rocks. I'm fairly certain it's related to the increased kobold activity"
+		"we've experienced around the pass lately. Those little guys just can't stop digging tunnels everywhere. Before we can even think about reopening the pass, we need to get rid of the infestation.\n\n"
+		"Up for the task? Just follow the road west and you'll find the blocked off pass. I'm sure there will be kobolds."
+	]
+
+	progress:
+	[
+		"Back already?"
+	]
+	
+	completion:
+	[
+		"How many where there? Too many? I'm sure it wasn't too difficult to get rid of them."
+	]
+
+	objectives: [ .sheriff_cunningham_1 ]
+	level: 14
+	next_quest: .sheriff_cunningham_2
+}
+
+############################################################
+# Quest 2
+
+loot_group .sheriff_cunningham_2_quest_item: {}
+
+item .sheriff_cunningham_2_quest_item:
+{
+	icon: icon_barrel_1
+	item_level: 14
+	loot_groups: [ .sheriff_cunningham_2_quest_item ]
+	flags: [ unique not_sellable ]
+	string: "Smuggled Booze"
+}
+
+loot_table .sheriff_cunningham_2_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .sheriff_cunningham_2_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_sheriff_cunningham_2_quest_item:
+{
+	string: "Smuggled Goods"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ barrel_1 ] z_offset: -2 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .sheriff_cunningham_2_quest_item
+			verb: open
+			range: 1 
+			level: 14
+			despawn: true 		
+			required_quest: .sheriff_cunningham_2
+		}		
+	}
+}
+
+objective .sheriff_cunningham_2:
+{
+	string: "Smuggled Goods"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .sheriff_cunningham_2_quest_item count: 1 }
+}
+
+quest .sheriff_cunningham_2:
+{
+	string: "Basic Law Enforcement"
+
+	text:
+	[
+		"Investigate smugglers north of Edmund's Haunt."
+	]
+	
+	description: 
+	[
+		"We're currently severely understaffed and can use all the help we can get around here. I like how you dealt with those kobolds, so I got another task for you, if you're up for it.\n\n"
+		"I've been informed that a gang of smugglers is operating in the caves north of town. Can you go find out what it is they're smuggling?"
+	]
+
+	progress:
+	[
+		"Wet socks?"
+	]
+	
+	completion:
+	[
+		"Huh, that's not particularily surprising."
+	]
+
+	objectives: [ .sheriff_cunningham_2 ]
+	prerequisites: [ .sheriff_cunningham_1 ]
+	level: 14
+	next_quest: .sheriff_cunningham_3
+}
+
+############################################################
+# Quest 3
+
+loot_group .sheriff_cunningham_3_quest_item: {}
+
+item .sheriff_cunningham_3_quest_item:
+{
+	icon: icon_barrel_1
+	item_level: 14
+	loot_groups: [ .sheriff_cunningham_3_quest_item ]
+	flags: [ not_sellable ]
+	string: "Booze"
+	stack: 5
+}
+
+loot_table .sheriff_cunningham_3_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .sheriff_cunningham_3_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_sheriff_cunningham_3_quest_item:
+{
+	string: "Booze"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ barrel_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .sheriff_cunningham_3_quest_item
+			verb: open
+			range: 1 
+			level: 14
+			despawn: true 		
+			required_quest: .sheriff_cunningham_3
+		}		
+	}
+}
+
+objective .sheriff_cunningham_3:
+{
+	string: "Booze"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .sheriff_cunningham_3_quest_item count: 5 }
+}
+
+{
+	${ _level: 14 }
+  	item .sheriff_cunningham_3_a: !QUEST_REWARD_BACK{ _string: "Mysterious Cloak" _icon: icon_cape_2 _constitution: 1 _spirit: 1 _wisdom: 1 _type: armor_cloth }
+  	item .sheriff_cunningham_3_b: !QUEST_REWARD_HANDS{ _string: "Bronze Chain Gauntlets" _icon: icon_mail_gloves_2 _dexterity: 1 _strength: 1 _type: armor_mail }
+  	item .sheriff_cunningham_3_c: !QUEST_REWARD_WRISTS{ _string: "Defender's Bracers" _icon: icon_mail_bracers_1 _dexterity: 1 _constitution: 1 _type: armor_plate }
+}	   
+
+quest .sheriff_cunningham_3:
+{
+	string: "Not on my Watch"
+
+	text:
+	[
+		"Find kobolds near the blocked off pass to the west and kill them."
+	]
+	
+	description: 
+	[
+		"It seems like they're smuggling illegal booze in from overseas, storing it in the caves until they can be transported further. I need you to go in there and mess up their operation. Make some heads roll and bring back"
+		"as much contraband as you can carry. Go!"
+	]
+
+	progress:
+	[
+		"This is very important, why are you still here?"
+	]
+	
+	completion:
+	[
+		"Excellent. Put the illegal contraband inside the building and collect your reward."
+	]
+
+	objectives: [ .sheriff_cunningham_3 ]
+	prerequisites: [ .sheriff_cunningham_2 ]
+	level: 14
+	reward_one_item: [ .sheriff_cunningham_3_a .sheriff_cunningham_3_b .sheriff_cunningham_3_c ]
+}

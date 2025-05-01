@@ -11,21 +11,7 @@ dialogue_screen .rorion_blacksmithing:
 	]
 }
 
-dialogue_screen .rorion_trainer:
-{
-	train_profession<0>: blacksmithing
-	train_profession<1>: blacksmithing
-	train_ability: craft_copper_ingot
-	train_ability: craft_iron_ingot
-	train_ability: craft_copper_bracers
-	train_ability: craft_copper_belt
-	train_ability: craft_copper_gauntlets
-	train_ability: craft_copper_boots
-	train_ability: craft_copper_breeches
-	train_ability: craft_copper_blade
-	train_ability: craft_copper_armor
-	train_ability: craft_shiny_armguards
-}
+dialogue_screen .rorion_trainer: !DEFAULT_BLACKSMITING_TRAINER{}
 
 dialogue_screen .rorion_greetings:
 {

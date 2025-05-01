@@ -73,7 +73,7 @@ item weapon_the_dev_tool:
 	rarity: mythic
 	string: "The Dev Tool"
 	weapon_cooldown: 20		
-	weapon_damage: [ 2000 4000 ]
+	weapon_damage: [ 60000 120000 ]
 }
 
 item weapon_sheriff_wellington_1:

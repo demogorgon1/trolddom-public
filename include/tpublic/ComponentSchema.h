@@ -81,7 +81,7 @@ namespace tpublic
 
 			DataType::Id								m_dataType = DataType::INVALID_ID;
 
-			uint32_t									m_initFromDeprecatedId = 0;
+			uint32_t									m_initFromDeprecatedId = UINT32_MAX;
 			InitFromDeprecatedCallback					m_initFromDeprecatedCallback;
 			std::vector<uint32_t>						m_upgradeChain;
 
@@ -446,6 +446,30 @@ namespace tpublic
 			{
 				_T* p = (_T*)aObject;
 				p->FromSource(aSource);
+			};
+			return t;
+		}
+
+		template <typename _T>
+		Field*
+		DefineCustomOptionalPODNoSource(
+			uint32_t							aId,
+			uint32_t							aOffset)
+		{
+			Field* t = DefineCustom<std::optional<_T>>(aId, NULL, aOffset);
+			t->m_customRead = [](
+				IReader*	aReader,
+				void*		aObject) -> bool
+			{
+				std::optional<_T>* p = (std::optional<_T>*)aObject;
+				return aReader->ReadOptionalPOD(*p);
+			};
+			t->m_customWrite = [](
+				IWriter*	aWriter,
+				const void* aObject)
+			{
+				const std::optional<_T>* p = (const std::optional<_T>*)aObject;
+				aWriter->WriteOptionalPOD(*p);
 			};
 			return t;
 		}

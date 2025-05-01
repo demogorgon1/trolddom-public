@@ -28,7 +28,13 @@ namespace tpublic
 					TYPE_CATCH,
 					TYPE_PICK_UP,
 					TYPE_INSPECT,
-					TYPE_TOUCH
+					TYPE_TOUCH,
+					TYPE_DESTROY,
+					TYPE_BURN,
+					TYPE_WATER,
+					TYPE_USE,
+					TYPE_RING,
+					TYPE_CAPTURE
 				};
 
 				void
@@ -50,6 +56,18 @@ namespace tpublic
 						m_type = TYPE_INSPECT;
 					else if (t == "touch")
 						m_type = TYPE_TOUCH;
+					else if (t == "destroy")
+						m_type = TYPE_DESTROY;
+					else if (t == "burn")
+						m_type = TYPE_BURN;
+					else if (t == "water")
+						m_type = TYPE_WATER;
+					else if (t == "use")
+						m_type = TYPE_USE;
+					else if (t == "ring")
+						m_type = TYPE_RING;
+					else if (t == "capture")
+						m_type = TYPE_CAPTURE;
 					else
 						TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid verb.", aSource->GetIdentifier());
 				}
@@ -82,6 +100,12 @@ namespace tpublic
 					case TYPE_PICK_UP:	return "Pick Up";
 					case TYPE_INSPECT:	return "Inspect";
 					case TYPE_TOUCH:	return "Touch";
+					case TYPE_DESTROY:	return "Destroy";
+					case TYPE_BURN:		return "Burn";
+					case TYPE_WATER:	return "Water";
+					case TYPE_USE:		return "Use";
+					case TYPE_RING:		return "Ring";
+					case TYPE_CAPTURE:	return "Capture";
 					default:			break;
 					}
 					assert(false);
@@ -114,7 +138,8 @@ namespace tpublic
 				FIELD_UNLOCK_MAP_TRIGGER_ID,
 				FIELD_KILL,
 				FIELD_DEAD_DESPAWN_TICKS,
-				FIELD_CONTEXT_HELP
+				FIELD_CONTEXT_HELP,
+				FIELD_SPRITE_INDEX
 			};
 
 			static void
@@ -142,6 +167,7 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_REQUIRED_INCOMPLETE_QUEST_OBJECTIVE_ID, "required_incomplete_quest_objective", offsetof(Openable, m_requiredIncompleteQuestObjectiveId))->SetDataType(DataType::ID_OBJECTIVE);
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_UNLOCK_MAP_TRIGGER_ID, "unlock_map_trigger", offsetof(Openable, m_unlockMapTriggerId))->SetDataType(DataType::ID_MAP_TRIGGER);
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_CONTEXT_HELP, "context_help", offsetof(Openable, m_contextHelpId))->SetDataType(DataType::ID_CONTEXT_HELP);
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_SPRITE_INDEX, "sprite_index", offsetof(Openable, m_spriteIndex));
 			}
 
 			void
@@ -168,7 +194,7 @@ namespace tpublic
 				m_triggerAbilityId = 0;
 				m_unlockMapTriggerId = 0;
 				m_contextHelpId = 0;
-
+				m_spriteIndex = 0;
 			}
 
 			// Public data
@@ -193,6 +219,7 @@ namespace tpublic
 			uint32_t					m_triggerAbilityId = 0;
 			uint32_t					m_unlockMapTriggerId = 0;
 			uint32_t					m_contextHelpId = 0;
+			uint32_t					m_spriteIndex = 0;
 		};
 
 	}

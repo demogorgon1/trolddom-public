@@ -1,0 +1,91 @@
+dialogue_screen .gob_fulbro_dialogue:
+{
+	text: 
+	[	
+		"The water around here is full of vicous beasts. You never know what's hiding just beneath the surface, watching you..."
+	]		
+	
+	options:
+	[
+		{ quest: .gob_fulbro_1 }
+	]
+}
+
+dialogue_root .gob_fulbro_dialogue:
+{
+	.gob_fulbro_dialogue: { }
+}
+
+entity thalvaron_gob_fulbro: !NPC
+{
+	_string: "Gob Fulbro"
+	_dialogue_root: .gob_fulbro_dialogue	
+	_sprite: man_49
+	_sprite_dead: man_49_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .gob_fulbro_1_quest_item: {}
+
+item .gob_fulbro_1_quest_item:
+{
+	icon: icon_severed_leg
+	item_level: 13
+	loot_groups: [ .gob_fulbro_1_quest_item ]
+	flags: [ not_sellable unique ]
+	string: "Half-Digested Leg"
+}
+
+objective .gob_fulbro_1:
+{
+	string: "Half-Digested Leg"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .gob_fulbro_1_quest_item count: 1 }
+}
+
+{
+	${ _level: 13 }
+	item .gob_fulbro_1_a: !QUEST_REWARD_SHIELD{ _string: "Gray Tortoise Shell" _icon: icon_shield_3 _dexterity: 1 _constitution: 2 }
+	item .gob_fulbro_1_b: !QUEST_REWARD_HEAD{ _string: "Moist Piece of Cloth" _icon: icon_wizard_hat_5 _wisdom: 1 _spirit: 1 _constitution: 2 _type: armor_cloth }
+	item .gob_fulbro_1_c: !QUEST_REWARD_CHEST{ _string: "Shirt of Crocodile Handling" _icon: icon_mail_shirt_1 _constitution: 1 _wisdom: 2 _type: armor_mail }
+}
+
+quest .gob_fulbro_1:
+{
+	string: "Watch Your Legs"
+
+	text:
+	[
+		"Hunt down the salt-water crocodile south of Mirehaven and return the contents of its stomach to Gob Fulbro."
+	]
+	
+	description: 
+	[
+		"A friend of mine was recently attacked by a vicious salt-water crocodile while fishing just south of Mirehaven. By some miracle he survived, even after it severed his leg in on clean bite and then swam away.\n\n"
+		"He went back to the capital to recover and won't be back for a while. When that happens, I'd like to have a surprise ready for him. Maybe you can help me by hunting down the crocodile and recover his leg?"
+		"I've seen the crocodile patrolling the waters along the coast to the south."
+	]
+
+	progress:
+	[
+		"Any luck?"
+	]
+	
+	completion:
+	[
+		"Wow, almost as good as new. Deeply appreciated."
+	]
+	
+	objectives: [ .gob_fulbro_1 ]
+	level: 13	
+	reward_one_item: [ .gob_fulbro_1_a .gob_fulbro_1_b .gob_fulbro_1_c ]
+}

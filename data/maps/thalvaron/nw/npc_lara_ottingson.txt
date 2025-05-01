@@ -1,0 +1,63 @@
+dialogue_screen .lara_ottingson_vendor:
+{
+	sell mount_brown_horse: { quantity: 1 }	
+	sell book_how_to_horse: { quantity: 1 }	
+}
+
+dialogue_screen .lara_ottingson_greetings:
+{
+	text: 
+	[	
+		"Interested in horses?"
+	]
+	
+	options:
+	[
+		{ goto: .lara_ottingson_vendor text: "Let me browse your goods." }
+	]
+}
+
+dialogue_root .lara_ottingson_greetings:
+{
+	.lara_ottingson_greetings: { }
+}
+
+entity thalvaron_lara_ottingson: !NPC
+{
+	_string: "Lara Ottingson"
+	_dialogue_root: .lara_ottingson_greetings	
+	_sprite: woman_25
+	_sprite_dead: woman_25_dead	
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+ability .book_how_to_horse:
+{
+	string: "Book: How To Horse"
+	description: "Teaches you how to ride."
+	flags: [ target_self item ]
+	cast_time: 20
+	icon: icon_book
+	cooldowns: [ global ]	
+	consume_items: { book_how_to_horse: 1 }
+	direct_effect simple<learn_riding>: {}
+	requirement self<must_not_know_riding>: {}
+	required_level: 20
+}
+
+item book_how_to_horse:
+{
+	type: miscellaneous
+	binds: when_picked_up
+	flags: [ unique ]
+	item_level: 20
+	rarity: uncommon
+	icon: icon_book
+	string: "Book: How To Horse"
+	use_ability: .book_how_to_horse
+	cost: 700000
+}

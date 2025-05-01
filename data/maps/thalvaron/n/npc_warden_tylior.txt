@@ -1,0 +1,107 @@
+dialogue_screen .warden_tylior_dialogue:
+{
+	text: 
+	[	
+		"There is a skeleton hiding inside you right now."
+	]		
+	
+	options:
+	[
+		{ quest: .warden_tylior_1 }
+	]
+}
+
+dialogue_root .warden_tylior_dialogue:
+{
+	.warden_tylior_dialogue: { }
+}
+
+entity thalvaron_warden_tylior: !NPC
+{
+	_string: "Warden Tylior"
+	_dialogue_root: .warden_tylior_dialogue	
+	_sprite: elf_11
+	_sprite_dead: elf_11_dead
+	_level: 20
+	_faction: children_of_the_moon		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .warden_tylior_1_a:
+{
+	string: "Captain Grimgore Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_hollows_skeleton_boss_a ]
+		count: 1
+	}
+}
+
+objective .warden_tylior_1_b:
+{
+	string: "Captain Abrique Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_hollows_skeleton_boss_b ]
+		count: 1
+	}
+}
+
+objective .warden_tylior_1_c:
+{
+	string: "Captain Ugulath Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_hollows_skeleton_boss_c ]
+		count: 1
+	}
+}
+
+{
+	${ _level: 19 }
+  	item .warden_tylior_1_a: !QUEST_REWARD_BACK{ _string: "Cape of Undeath" _icon: icon_cape_1 _constitution: 2 _spirit: 1 _type: armor_cloth }
+}	 
+
+quest .warden_tylior_1:
+{
+	string: "Skeletal Captains"
+
+	text:
+	[
+		"Locate and kill the skeletal captains."
+	]
+	
+	description: 
+	[
+		"These lands are roaming with living skeletons! We have to defeat their captains before we can ever hope to reclaim the north.\n\n"
+		"I don't know where they are exactly, but you'll be able to find and kill them, right?"
+	]
+
+	progress:
+	[
+		"Back already?"
+	]
+	
+	completion:
+	[
+		"Excellent job!"
+	]
+
+	objectives: [ .warden_tylior_1_a .warden_tylior_1_b .warden_tylior_1_c ]
+	level: 19
+	reward_one_item: [ .warden_tylior_1_a ]
+}

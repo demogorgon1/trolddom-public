@@ -1,0 +1,138 @@
+dialogue_screen .halfeye_lanior_dialogue:
+{
+	text: 
+	[	
+		"We must put and end to the evil powers of the lich."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .spirit_of_joonor_1 }
+		{ quest: .halfeye_lanior_1 }
+	]
+}
+
+dialogue_root .halfeye_lanior_dialogue:
+{
+	.halfeye_lanior_dialogue: { }
+}
+
+entity thalvaron_halfeye_lanior: !NPC
+{
+	_string: "Half-Eye Lanior"
+	_dialogue_root: .halfeye_lanior_dialogue	
+	_sprite: elf_2
+	_sprite_dead: elf_2_dead
+	_level: 20
+	_faction: children_of_the_moon		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .halfeye_lanior_1:
+{
+	string: "Droogor Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_hollows_dark_elf_a ]
+		count: 1
+	}
+}
+
+{
+	${ _level: 19 }
+	item .halfeye_lanior_1_a: !QUEST_REWARD_CHEST{ _string: "Hauberk of Dark Cleansing" _icon: icon_mail_shirt_1 _constitution: 1 _strength: 2 _type: armor_mail }
+	item .halfeye_lanior_1_b: !QUEST_REWARD_LEGS{ _string: "Elven Spell-Caster Leggings" _icon: icon_pants_3 _constitution: 1 _spell_power: 2 _type: armor_cloth }
+	item .halfeye_lanior_1_c: !QUEST_REWARD_FINGER{ _string: "Heirloom Ring" _icon: icon_ring_6  _constitution: 1 _mana_per_5: 1 }
+}
+
+quest .halfeye_lanior_1:
+{
+	string: "Rare Warmblooded Enemy"
+
+	text:
+	[
+		"Enter the woods in the north, find Droogor, and kill him."
+	]
+	
+	description: 
+	[
+		"The tower is full of the henchmen of the lich. Eventually I want you to enter that place and get rid of them once and for all, but for now we have to start with something easier. I know that the wizard has"
+		"sent out a small detachment into the woods north of us. Why I don't know. It is led by a dark elf named Droogor. I need you to kill him."
+	]
+
+	progress:
+	[
+		"Back already?"
+	]
+	
+	completion:
+	[
+		"Good."
+	]
+
+	objectives: [ .halfeye_lanior_1 ]
+	level: 19
+	reward_one_item: [ .halfeye_lanior_1_a .halfeye_lanior_1_b .halfeye_lanior_1_c ]
+}
+
+############################################################
+# Quest 2
+
+objective .halfeye_lanior_2:
+{
+	string: "Malrik the Undying Defeated"
+	
+	maps: [ lich_tower ]
+	
+	kill_npc:
+	{
+		entities: [ lich_tower_malrik_the_undying ]
+		count: 1
+	}
+}
+
+{
+	${ _level: 20 rarity: rare }
+	item .halfeye_lanior_2_a: !QUEST_REWARD_NECK{ _string: "Chain of Dark Energy" _icon: icon_necklace_1 _constitution: 1 _wisdom: 1 _spell_damage: 2 }
+	item .halfeye_lanior_2_b: !QUEST_REWARD_FEET{ _string: "Boots of the Shield Guard" _icon: icon_shoe_1 _constitution: 2 _block_value: 3 _dexterity: 1 _type: armor_plate }
+	item .halfeye_lanior_2_c: !QUEST_REWARD_WAIST{ _string: "Waistwrap of Healing" _icon: icon_belt_1 _wisdom: 1 _healing: 3 }
+}
+
+quest .halfeye_lanior_2:
+{
+	string: "The Lich of the Tower"
+
+	text:
+	[
+		"Enter the Tower of Indulath to the east and defeat the evil lich."
+	]
+	
+	description: 
+	[
+		"Time has come for you to face off with the final enemy of the living. The dark elf wizard who has become a powerful lich, going by the name Malrik the Undying. He resides in the"
+		"Tower of Indulath to the east. Venture into his lair, defeat him, and return to me for a reward."
+	]
+
+	progress:
+	[
+		"Back already?"
+	]
+	
+	completion:
+	[
+		"Excellent."
+	]
+
+	objectives: [ .halfeye_lanior_2 ]
+	level: 20
+	type: dungeon
+	reward_one_item: [ .halfeye_lanior_2_a .halfeye_lanior_2_b .halfeye_lanior_2_c ]
+}

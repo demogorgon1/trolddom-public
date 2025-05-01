@@ -41,24 +41,26 @@ ability sorcerer_attack:
 
 class sorcerer:
 {
+	version: 1
+
 	string: "Sorcerer"	
 	description: "Master of magic."
 	
 	systems: [ combat health_regen mana_regen ]
 	
-	armor_style none:   { sprite: sorcerer_naked sprite_dead: sorcerer_naked_dead sprites_walk: [ sorcerer_naked_walk_1 sorcerer_naked_walk_2 ] }		
-	armor_style brown:  { sprite: sorcerer       sprite_dead: sorcerer_dead       sprites_walk: [ sorcerer_walk_1       sorcerer_walk_2 ] }
-	armor_style green:  { sprite: sorcerer_2     sprite_dead: sorcerer_2_dead     sprites_walk: [ sorcerer_2_walk_1     sorcerer_2_walk_2 ] }
-	armor_style cyan:   { sprite: sorcerer_3     sprite_dead: sorcerer_3_dead     sprites_walk: [ sorcerer_3_walk_1     sorcerer_3_walk_2 ] }
-	armor_style red:    { sprite: sorcerer_4     sprite_dead: sorcerer_4_dead     sprites_walk: [ sorcerer_4_walk_1     sorcerer_4_walk_2 ] }
-	armor_style purple: { sprite: sorcerer_5     sprite_dead: sorcerer_5_dead     sprites_walk: [ sorcerer_5_walk_1     sorcerer_5_walk_2 ] }
-	armor_style black:  { sprite: sorcerer_6     sprite_dead: sorcerer_6_dead     sprites_walk: [ sorcerer_6_walk_1     sorcerer_6_walk_2 ] }
-	armor_style white:  { sprite: sorcerer_7     sprite_dead: sorcerer_7_dead     sprites_walk: [ sorcerer_7_walk_1     sorcerer_7_walk_2 ] }
-	armor_style yellow: { sprite: sorcerer_8     sprite_dead: sorcerer_8_dead     sprites_walk: [ sorcerer_8_walk_1     sorcerer_8_walk_2 ] }
+	armor_style none:   { sprite: sorcerer_naked sprite_dead: sorcerer_naked_dead sprite_mounted: sorcerer_naked_mounted sprites_walk: [ sorcerer_naked_walk_1 sorcerer_naked_walk_2 ] }		
+	armor_style brown:  { sprite: sorcerer       sprite_dead: sorcerer_dead       sprite_mounted: sorcerer_mounted       sprites_walk: [ sorcerer_walk_1       sorcerer_walk_2 ] }
+	armor_style green:  { sprite: sorcerer_2     sprite_dead: sorcerer_2_dead     sprite_mounted: sorcerer_2_mounted     sprites_walk: [ sorcerer_2_walk_1     sorcerer_2_walk_2 ] }
+	armor_style cyan:   { sprite: sorcerer_3     sprite_dead: sorcerer_3_dead     sprite_mounted: sorcerer_3_mounted     sprites_walk: [ sorcerer_3_walk_1     sorcerer_3_walk_2 ] }
+	armor_style red:    { sprite: sorcerer_4     sprite_dead: sorcerer_4_dead     sprite_mounted: sorcerer_4_mounted     sprites_walk: [ sorcerer_4_walk_1     sorcerer_4_walk_2 ] }
+	armor_style purple: { sprite: sorcerer_5     sprite_dead: sorcerer_5_dead     sprite_mounted: sorcerer_5_mounted     sprites_walk: [ sorcerer_5_walk_1     sorcerer_5_walk_2 ] }
+	armor_style black:  { sprite: sorcerer_6     sprite_dead: sorcerer_6_dead     sprite_mounted: sorcerer_6_mounted     sprites_walk: [ sorcerer_6_walk_1     sorcerer_6_walk_2 ] }
+	armor_style white:  { sprite: sorcerer_7     sprite_dead: sorcerer_7_dead     sprite_mounted: sorcerer_7_mounted     sprites_walk: [ sorcerer_7_walk_1     sorcerer_7_walk_2 ] }
+	armor_style yellow: { sprite: sorcerer_8     sprite_dead: sorcerer_8_dead     sprite_mounted: sorcerer_8_mounted     sprites_walk: [ sorcerer_8_walk_1     sorcerer_8_walk_2 ] }
 	
-	weapon_sprites weapon_1h_sword: { sprite: sorcerer_sword_1h sprites_walk: [ sorcerer_walk_1_sword_1h sorcerer_walk_2_sword_1h ] }
-	weapon_sprites weapon_1h_knife: { sprite: sorcerer_knife_1h sprites_walk: [ sorcerer_walk_1_knife_1h sorcerer_walk_2_knife_1h ] }
-	weapon_sprites weapon_2h_staff: { sprite: sorcerer_staff    sprites_walk: [ sorcerer_walk_1_staff    sorcerer_walk_2_staff ] }
+	weapon_sprites weapon_1h_sword: { sprite: sorcerer_sword_1h mounted_offset: [ -1 -2 ] sprites_walk: [ sorcerer_walk_1_sword_1h sorcerer_walk_2_sword_1h ] }
+	weapon_sprites weapon_1h_knife: { sprite: sorcerer_knife_1h mounted_offset: [ -1 -2 ] sprites_walk: [ sorcerer_walk_1_knife_1h sorcerer_walk_2_knife_1h ] }
+	weapon_sprites weapon_2h_staff: { sprite: sorcerer_staff    mounted_offset: [ -1 -2 ] sprites_walk: [ sorcerer_walk_1_staff    sorcerer_walk_2_staff ] }
 	
 	armor_decoration: { sprite: sorcerer_decoration sprite_dead: sorcerer_decoration_dead sprites_walk: [ sorcerer_decoration_walk_1 sorcerer_decoration_walk_2 ] }
 			
@@ -99,25 +101,25 @@ class sorcerer:
 	level_progression:
 	[
 		{ level: 1 unlock_abilities: [ sorcerer_attack firebolt !DEFAULT_ABILITIES{} ] stats: { dexterity: 2 strength: 2 wisdom: 6 constitution: 4 spirit: 6 } resource health: { add_max: 60 } resource mana: { add_max: 60 } add_unarmed_weapon_damage: [ 2 4 ] }		
-		{ level: 2 unlock_abilities: [ ice_lance ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }		
-		{ level: 3 unlock_abilities: [ power_shield ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }		
-		{ level: 4 unlock_abilities: [ fireball ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }		
-		{ level: 5 unlock_abilities: [ arcane_missile ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }		
-		{ level: 6 unlock_abilities: [ sleep ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }		
-		{ level: 7 unlock_abilities: [ frost_explosion ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }		
-		{ level: 8 unlock_abilities: [ counterspell ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }		
-		{ level: 9 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }		
-		{ level: 10 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }		
-		{ level: 11 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }		
-		{ level: 12 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }		
-		{ level: 13 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }		
-		{ level: 14 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }		
-		{ level: 15 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }		
-		{ level: 16 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }		
-		{ level: 17 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }		
-		{ level: 18 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }		
-		{ level: 19 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } }		
-		{ level: 20 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } achievement: sorcerer_level_10 }		
+		{ level: 2 unlock_abilities: [ ice_lance ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 3 unlock_abilities: [ power_shield ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 4 unlock_abilities: [ fireball ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 5 unlock_abilities: [ arcane_missile ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 6 unlock_abilities: [ sleep ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 7 unlock_abilities: [ frost_explosion ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 8 unlock_abilities: [ counterspell ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 9 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 10 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } achievement: sorcerer_level_10 }		
+		{ level: 11 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 12 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 13 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 14 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 15 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 16 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 17 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 18 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 19 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 20 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } achievement: sorcerer_level_20 }		
 	]
 	
 	gear_optimization default<{ weapon_dps_weight: 0.0 }>:
@@ -146,4 +148,48 @@ achievement sorcerer_level_10:
 	points: 10 
 	icon: icon_sorcerer 
 	no_progress_values: true 
+}
+
+achievement sorcerer_level_20: 
+{ 
+	category: general 
+	string: "Sorcerer (Level 20)" 
+	description: "Reach level 20 as a Sorcerer." 
+	points: 10 
+	icon: icon_sorcerer 
+	no_progress_values: true 
+	root: sorcerer_level_10
+}
+
+###############################################################################
+# Rotations
+
+ability_list sorcerer_ranged:
+{
+	ability arcane_missile:
+	{
+	}
+
+	ability firebolt:
+	{
+	}
+
+	ability sorcerer_attack:
+	{
+	}
+}
+
+ability_list sorcerer_melee:
+{
+	ability arcane_missile:
+	{
+	}
+
+	ability wizard_strike:
+	{
+	}
+
+	ability sorcerer_attack:
+	{
+	}
 }

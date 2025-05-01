@@ -14,6 +14,8 @@
 #include <tpublic/AuraEffects/Immortality.h>
 #include <tpublic/AuraEffects/MoveSpeedModifier.h>
 #include <tpublic/AuraEffects/Repeat.h>
+#include <tpublic/AuraEffects/ResourceCostModifier.h>
+#include <tpublic/AuraEffects/Stealth.h>
 #include <tpublic/AuraEffects/Stun.h>
 #include <tpublic/AuraEffects/Taunt.h>
 #include <tpublic/AuraEffects/ThreatModifier.h>
@@ -39,6 +41,8 @@ namespace tpublic
 		_Register<AuraEffects::Immortality>();
 		_Register<AuraEffects::MoveSpeedModifier>();
 		_Register<AuraEffects::Repeat>();
+		_Register<AuraEffects::ResourceCostModifier>();
+		_Register<AuraEffects::Stealth>();
 		_Register<AuraEffects::Stun>();
 		_Register<AuraEffects::Taunt>();
 		_Register<AuraEffects::ThreatModifier>();

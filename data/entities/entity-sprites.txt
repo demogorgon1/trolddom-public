@@ -85,8 +85,8 @@ sprites:
 	sprite cook_1: { dead: cook_1_dead tags: [ male human ] }
 	sprite man_9: { dead: man_9_dead tags: [ male human ] }
 	sprite man_10: { dead: man_10_dead tags: [ male human ] }
-	sprite crab_monster_1: { dead: crab_monster_1_dead tags: [ crab_monster caster melee ] }
-	sprite crab_monster_boss_1: { dead: crab_monster_boss_1_dead tags: [ crab_monster caster melee boss ] }
+	sprite crab_monster_1: { dead: crab_monster_1_dead tags: [ crab_monster melee ] }
+	sprite crab_monster_boss_1: { dead: crab_monster_boss_1_dead tags: [ crab_monster melee boss ] }
 	sprite woman_3: { dead: woman_3_dead tags: [ female human ] }
 	sprite man_11: { dead: man_11_dead tags: [ male human ] }
 	sprite woman_4: { dead: woman_4_dead tags: [ female human ] }
@@ -94,7 +94,7 @@ sprites:
 	sprite kid_1: { dead: kid_1_dead tags: [ human ] }
 	sprite gnome_1: { dead: gnome_1_dead tags: [ ] }
 	sprite man_13: { dead: man_13_dead tags: [ male human ] }
-	sprite crab_caster_1: { dead: crab_caster_1_dead tags: [ crab_monster caster melee ] }
+	sprite crab_caster_1: { dead: crab_caster_1_dead tags: [ crab_monster caster ] }
 	sprite deer_2: { dead: deer_2_dead }
 	sprite boar_2: { dead: boar_2_dead }
 	sprite woman_5: { dead: woman_5_dead tags: [ female human ] }
@@ -131,9 +131,9 @@ sprites:
 	sprite man_17: { dead: man_17_dead tags: [ male human ] }
 	sprite arcane_construct_2: { dead: arcane_construct_2_dead tags: [ melee ] }
 	sprite man_18: { dead: man_18_dead tags: [ male human ] }
-	sprite skeleton_warrior_1: { dead: skeleton_warrior_1_dead tags: [ melee undead ] }
-	sprite skeleton_warrior_2: { dead: skeleton_warrior_2_dead tags: [ melee undead ] }
-	sprite skeleton_caster_1: { dead: skeleton_caster_1_dead tags: [ caster undead ] }
+	sprite skeleton_warrior_1: { dead: skeleton_warrior_1_dead tags: [ melee undead skeleton ] }
+	sprite skeleton_warrior_2: { dead: skeleton_warrior_2_dead tags: [ melee undead skeleton ] }
+	sprite skeleton_caster_1: { dead: skeleton_caster_1_dead tags: [ caster undead skeleton ] }
 	sprite skeleton_chef: { dead: skeleton_chef_dead tags: [ ] }
 	sprite tentacle_monster_2: { dead: tentacle_monster_2_dead }
 
@@ -172,8 +172,8 @@ sprites:
 	sprite man_22: { dead: man_22_dead }
 	sprite demon_1: { dead: demon_1_dead }
 	sprite demon_2: { dead: demon_2_dead }
-	sprite crab_monster_2: { dead: crab_monster_2_dead tags: [ crab_monster caster melee ] }
-	sprite crab_monster_boss_2: { dead: crab_monster_boss_2_dead tags: [ crab_monster caster melee boss ] }
+	sprite crab_monster_2: { dead: crab_monster_2_dead tags: [ crab_monster melee ] }
+	sprite crab_monster_boss_2: { dead: crab_monster_boss_2_dead tags: [ crab_monster melee boss ] }
 
 	cursor: { position: [ 0 144 ] }
 
@@ -196,7 +196,7 @@ sprites:
 	
 	cursor: { position: [ 0 160 ] }
 
-	sprite crab_caster_2: { dead: crab_caster_2_dead tags: [ crab_monster caster melee ] }
+	sprite crab_caster_2: { dead: crab_caster_2_dead tags: [ crab_monster caster ] }
 	sprite barbarian_1: { dead: barbarian_1_dead }
 	sprite shield_maiden_1: { dead: shield_maiden_1_dead }
 	sprite cleric_1: { dead: cleric_1_dead }
@@ -231,7 +231,556 @@ sprites:
 	sprite angel_1_dead: { }
 	sprite demon_3_dead: { }
 	sprite man_25_dead: { }
+
+	cursor: { position: [ 0 192 ] }
+
+	sprite target_dummy: { dead: target_dummy_dead }
+	sprite man_26: { dead: man_26_dead }
+	sprite city_guard_1: { dead: city_guard_1_dead }
+	sprite city_guard_2: { dead: city_guard_1_dead }
+	sprite woman_8: { dead: woman_8_dead }
+	sprite man_27: { dead: man_27_dead }
+	sprite man_28: { dead: man_28_dead }
+	sprite rebel_1: { dead: rebel_1_dead }
+	sprite rebel_2: { dead: rebel_2_dead }
+	sprite rebel_3: { dead: rebel_3_dead }
+	sprite rebel_4: { dead: rebel_4_dead }
+	sprite rebel_5: { dead: rebel_5_dead }
+	sprite crab_1: { dead: crab_1_dead }
+	sprite man_29: { dead: man_29_dead }
+	sprite woman_9: { dead: woman_9_dead }
+	sprite man_30: { dead: man_30_dead }
 	
+	cursor: { position: [ 0 208 ] }
+
+	sprite target_dummy_dead: { }
+	sprite man_26_dead: { }
+	sprite city_guard_1_dead: { }
+	sprite city_guard_2_dead: { }
+	sprite woman_8_dead: { }
+	sprite man_27_dead: { }
+	sprite man_28_dead: { }
+	sprite rebel_1_dead: { }
+	sprite rebel_2_dead: { }
+	sprite rebel_3_dead: { }
+	sprite rebel_4_dead: { }
+	sprite rebel_5_dead: { }
+	sprite crab_1_dead: { }
+	sprite man_29_dead: { }
+	sprite woman_9_dead: { }
+	sprite man_30_dead: { }
+	
+	cursor: { position: [ 0 224 ] }
+
+	sprite man_31: { dead: man_31_dead }
+	sprite man_32: { dead: man_32_dead }
+	sprite woman_10: { dead: woman_10_dead }
+	sprite man_33: { dead: man_33_dead }
+	sprite piglet: { dead: piglet_dead }
+	sprite crab_2: { dead: crab_2_dead }
+	sprite crab_3: { dead: crab_3_dead }
+	sprite dark_elf_1: { dead: dark_elf_1_dead }
+	sprite lion_1 : { dead: lion_1_dead }
+	sprite dark_elf_2: { dead: dark_elf_2_dead }
+	sprite man_34: { dead: man_34_dead }
+	sprite monster_1: { dead: monster_1_dead }
+	sprite woman_11: { dead: woman_11_dead }
+	sprite arcane_worm_1: { dead: arcane_worm_1_dead }
+	sprite arcane_melee_1: { dead: arcane_melee_1_dead }
+	sprite arcane_caster_1: { dead: arcane_caster_1_dead }
+	
+	cursor: { position: [ 0 240 ] }
+
+	sprite man_31_dead: { }
+	sprite man_32_dead: { }
+	sprite woman_10_dead: { }
+	sprite man_33_dead: { }
+	sprite piglet_dead: { }
+	sprite crab_2_dead: { }
+	sprite crab_3_dead: { }
+	sprite dark_elf_1_dead: { }
+	sprite lion_1_dead: { }
+	sprite dark_elf_2_dead: { }
+	sprite man_34_dead: { }
+	sprite monster_1_dead: { }
+	sprite woman_11_dead: { }
+	sprite arcane_worm_1_dead: { }
+	sprite arcane_melee_1_dead: { }
+	sprite arcane_caster_1_dead: { }
+
+	cursor: { position: [ 0 256 ] }
+	
+	sprite man_35: { dead: man_35_dead }
+	sprite kobold_1: { dead: kobold_1_dead }
+	sprite kobold_2: { dead: kobold_2_dead }
+	sprite man_36: { dead: man_36_dead }
+	sprite man_37: { dead: man_37_dead }
+	sprite yeti_1: { dead: yeti_1_dead }
+	sprite woman_12: { dead: woman_12_dead }
+	sprite yeti_2: { dead: yeti_2_dead }
+	sprite yeti_3: { dead: yeti_3_dead }
+	sprite woman_13: { dead: woman_13_dead }
+	sprite owlbear_1: { dead: owlbear_1_dead }
+	sprite man_38: { dead: man_38_dead }
+	sprite troll_2: { dead: troll_2_dead }
+	sprite rock_elemental_1 : { dead: rock_elemental_1_dead }
+	sprite owlbear_2: { dead: owlbear_2_dead }
+	sprite man_39: { dead: man_39_dead }
+	
+	cursor: { position: [ 0 272 ] }
+	
+	sprite man_35_dead: { }
+	sprite kobold_1_dead: { }
+	sprite kobold_2_dead: { }
+	sprite man_36_dead: { }
+	sprite man_37_dead: { }
+	sprite yeti_1_dead: { }
+	sprite woman_12_dead: { }
+	sprite yeti_2_dead: { }
+	sprite yeti_3_dead: { }
+	sprite woman_13_dead: { }
+	sprite owlbear_1_dead: { }
+	sprite man_38_dead: { }
+	sprite troll_2_dead: { }
+	sprite rock_elemental_1_dead: { }
+	sprite owlbear_2_dead: { }
+	sprite man_39_dead: { }
+
+	cursor: { position: [ 0 288 ] }
+
+	sprite man_40: { dead: man_40_dead }
+	sprite elf_1: { dead: elf_1_dead }
+	sprite wood_elemental_1 : { dead: wood_elemental_1_dead }
+	sprite owlbear_3: { dead: owlbear_3_dead }
+	sprite kobold_3: { dead: kobold_3_dead }
+	sprite kobold_4: { dead: kobold_4_dead }
+	sprite kobold_5: { dead: kobold_5_dead }
+	sprite tentacle_monster_3: { dead: tentacle_monster_3_dead }
+	sprite man_41: { dead: man_41_dead }
+	sprite woman_14: { dead: woman_14_dead }
+	sprite man_42: { dead: man_42_dead }
+	sprite pearly : { dead: pearly }
+	sprite elf_2: { dead: elf_2_dead }
+	sprite dark_elf_3: { dead: dark_elf_3_dead }
+	sprite dark_elf_4: { dead: dark_elf_4_dead }
+	sprite dark_elf_5: { dead: dark_elf_5_dead }
+
+	cursor: { position: [ 0 304 ] }
+	
+	sprite man_40_dead: { }
+	sprite elf_1_dead: { }
+	sprite wood_elemental_1_dead: { }
+	sprite owlbear_3_dead: { }
+	sprite kobold_3_dead: { }
+	sprite kobold_4_dead: { }
+	sprite kobold_5_dead: { }
+	sprite tentacle_monster_3_dead: { }
+	sprite man_41_dead: { }
+	sprite woman_14_dead: { }
+	sprite man_42_dead: { }
+	skip: {}
+	sprite elf_2_dead: { }
+	sprite dark_elf_3_dead: { }
+	sprite dark_elf_4_dead: { }
+	sprite dark_elf_5_dead: { }
+	
+	cursor: { position: [ 0 320 ] }
+
+	sprite deer_3: { dead: deer_3_dead }
+	sprite spider_3: { dead: spider_3_dead }
+	sprite elf_3: { dead: elf_3_dead }
+	sprite wood_elemental_2: { dead: wood_elemental_2_dead }
+	sprite lizard_1: { dead: lizard_1_dead }
+	sprite lizard_2: { dead: lizard_2_dead }
+	sprite lizard_3: { dead: lizard_3_dead }
+	sprite man_43: { dead: man_43_dead }
+	sprite wolf_5: { dead: wolf_5_dead }
+	sprite woman_15: { dead: woman_15_dead }
+	sprite man_44: { dead: man_44_dead }
+	sprite man_45: { dead: man_45_dead }
+	sprite woman_16: { dead: woman_16_dead }
+	sprite man_46: { dead: man_46_dead }
+	sprite man_47: { dead: man_47_dead }
+	sprite woman_17: { dead: woman_17_dead }
+
+	cursor: { position: [ 0 336 ] }
+
+	sprite deer_3_dead: { }
+	sprite spider_3_dead: { }
+	sprite elf_3_dead: { }
+	sprite wood_elemental_2_dead: { }
+	sprite lizard_1_dead: { }
+	sprite lizard_2_dead: { }
+	sprite lizard_3_dead: { }
+	sprite man_43_dead: { }
+	sprite wolf_5_dead: { }
+	sprite woman_15_dead: { }
+	sprite man_44_dead: { }
+	sprite man_45_dead: { }
+	sprite woman_16_dead: { }
+	sprite man_46_dead: { }
+	sprite man_47_dead: { }
+	sprite woman_17_dead: { }
+	
+	cursor: { position: [ 0 352 ] }
+	sprite man_48: { dead: man_48_dead }
+	sprite man_49: { dead: man_49_dead }
+	sprite woman_18: { dead: woman_18_dead }
+	sprite man_50: { dead: man_50_dead }
+	sprite swamp_monster_1: { dead: swamp_monster_1_dead }
+	sprite swamp_monster_2: { dead: swamp_monster_2_dead }
+	sprite swamp_monster_3: { dead: swamp_monster_3_dead }
+	sprite swamp_monster_4: { dead: swamp_monster_4_dead }
+	sprite swamp_monster_5: { dead: swamp_monster_5_dead }
+	sprite swamp_monster_6: { dead: swamp_monster_6_dead }
+	sprite ooze_1: { dead: ooze_1_dead }
+	sprite ooze_2: { dead: ooze_2_dead }
+	sprite crocodile_1: { dead: crocodile_1_dead }
+	sprite crocodile_2: { dead: crocodile_2_dead }
+	sprite kobold_6: { dead: kobold_6_dead }
+	sprite dwarf_1: { dead: dwarf_1_dead }
+
+	cursor: { position: [ 0 368 ] }
+	sprite man_48_dead: { }
+	sprite man_49_dead: { }
+	sprite woman_18_dead: { }
+	sprite man_50_dead: { }
+	sprite swamp_monster_1_dead: { }
+	sprite swamp_monster_2_dead: { }
+	sprite swamp_monster_3_dead: { }
+	sprite swamp_monster_4_dead: { }
+	sprite swamp_monster_5_dead: { }
+	sprite swamp_monster_6_dead: { }
+	sprite ooze_1_dead: { }
+	sprite ooze_2_dead: { }
+	sprite crocodile_1_dead: { }
+	sprite crocodile_2_dead: { }
+	sprite kobold_6_dead: { }
+	sprite dwarf_1_dead: { } 
+
+	cursor: { position: [ 0 384 ] }
+	sprite dwarf_2: { dead: dwarf_2_dead }
+	sprite man_51: { dead: man_51_dead }
+	sprite crocodile_1_submerged: { }
+	sprite crocodile_2_submerged: { }
+	sprite ogre_1: { dead: ogre_1_dead }
+	sprite woman_19: { dead: woman_19_dead }
+	sprite man_52: { dead: man_52_dead }
+	sprite rock_elemental_2 : { dead: rock_elemental_2_dead }
+	sprite rock_elemental_3 : { dead: rock_elemental_3_dead }
+	sprite dwarf_3: { dead: dwarf_3_dead }
+	sprite dwarf_4: { dead: dwarf_4_dead }
+	sprite dwarf_5: { dead: dwarf_5_dead }
+	sprite kobold_7: { dead: kobold_7_dead }
+	sprite dwarf_6: { dead: dwarf_6_dead }
+	sprite dwarf_7: { dead: dwarf_7_dead }
+	sprite dwarf_8: { dead: dwarf_8_dead }
+	
+	cursor: { position: [ 0 400 ] }
+	sprite dwarf_2_dead: { }
+	sprite man_51_dead: { }
+	skip: { }
+	skip: { }
+	sprite ogre_1_dead: { }
+	sprite woman_19_dead: { }
+	sprite man_52_dead: { }
+	sprite rock_elemental_2_dead: { }
+	sprite rock_elemental_3_dead: { }
+	sprite dwarf_3_dead: { }
+	sprite dwarf_4_dead: { }
+	sprite dwarf_5_dead: { }
+	sprite kobold_7_dead: { }
+	sprite dwarf_6_dead: { }
+	sprite dwarf_7_dead: { }
+	sprite dwarf_8_dead: { }
+
+	cursor: { position: [ 0 416 ] }
+	sprite dwarf_9: { dead: dwarf_9_dead }
+	sprite dwarf_10: { dead: dwarf_10_dead }
+	sprite dwarf_11: { dead: dwarf_11_dead }
+	sprite dwarf_12: { dead: dwarf_12_dead }
+	sprite scorpion_1: { dead: scorpion_1_dead }
+	sprite scorpion_2: { dead: scorpion_2_dead }
+	sprite orc_1: { dead: orc_1_dead }
+	sprite orc_2: { dead: orc_2_dead }
+	sprite orc_3: { dead: orc_3_dead }
+	sprite orc_4: { dead: orc_4_dead }
+	sprite orc_5: { dead: orc_5_dead }
+	sprite orc_6: { dead: orc_6_dead }
+	sprite harpy_1: { dead: harpy_1_dead }
+	sprite harpy_2: { dead: harpy_2_dead }
+	sprite dwarf_13: { dead: dwarf_13_dead }
+	sprite spider_4: { dead: spider_4_dead }
+	
+	cursor: { position: [ 0 432 ] }
+	sprite dwarf_9_dead: { }
+	sprite dwarf_10_dead: { }
+	sprite dwarf_11_dead: { }
+	sprite dwarf_12_dead: { }
+	sprite scorpion_1_dead: { }
+	sprite scorpion_2_dead: { }
+	sprite orc_1_dead: { }
+	sprite orc_2_dead: { }
+	sprite orc_3_dead: { }
+	sprite orc_4_dead: { }
+	sprite orc_5_dead: { }
+	sprite orc_6_dead: { }
+	sprite harpy_1_dead: { }
+	sprite harpy_2_dead: { }
+	sprite dwarf_13_dead: { }
+	sprite spider_4_dead: { }
+	
+	cursor: { position: [ 0 448 ] }
+	sprite dwarf_14: { dead: dwarf_14_dead }
+	sprite ooze_3: { dead: ooze_3_dead }
+	sprite ghoul_1: { dead: ghoul_1_dead }
+	sprite ghoul_2: { dead: ghoul_2_dead }
+	sprite ghoul_3: { dead: ghoul_3_dead }
+	sprite man_53: { dead: man_53_dead }
+	sprite woman_20: { dead: woman_20_dead }
+	sprite vampire_1: { dead: vampire_1_dead }
+	sprite vampire_2: { dead: vampire_2_dead }
+	sprite woman_21: { dead: woman_21_dead }
+	sprite woman_22: { dead: woman_22_dead }
+	sprite elf_4: { dead: elf_4_dead }
+	sprite elf_5: { dead: elf_5_dead }
+	sprite elf_6: { dead: elf_6_dead }
+	sprite swamp_monster_7: { dead: swamp_monster_7_dead }
+	sprite elf_7: { dead: elf_7_dead }
+	
+	cursor: { position: [ 0 464 ] }
+	sprite dwarf_14_dead: { }
+	sprite ooze_3_dead: { }
+	sprite ghoul_1_dead: { }
+	sprite ghoul_2_dead: { }
+	sprite ghoul_3_dead: { }
+	sprite man_53_dead: { }
+	sprite woman_20_dead: { }
+	sprite vampire_1_dead: { }
+	sprite vampire_2_dead: { }
+	sprite woman_21_dead: { }
+	sprite woman_22_dead: { }
+	sprite elf_4_dead: { }
+	sprite elf_5_dead: { }
+	sprite elf_6_dead: { }
+	sprite swamp_monster_7_dead: { }
+	sprite elf_7_dead: { }
+
+	cursor: { position: [ 0 480 ] }
+	sprite kobold_8: { dead: kobold_8_dead }
+	sprite kobold_9: { dead: kobold_9_dead }
+	sprite kobold_10: { dead: kobold_10_dead }
+	sprite swamp_monster_8: { dead: swamp_monster_8_dead }
+	sprite swamp_monster_9: { dead: swamp_monster_9_dead }
+	sprite elf_8: { dead: elf_8_dead }
+	sprite elf_9: { dead: elf_9_dead }
+	sprite infected_bear_1: { dead: infected_bear_1_dead }
+	sprite skeletal_bear_1: { dead: skeletal_bear_1_dead }
+	sprite ooze_4: { dead: ooze_4_dead }
+	sprite infected_deer_1: { dead: infected_deer_1_dead }
+	sprite infected_boar_1: { dead: infected_boar_1_dead }
+	sprite elf_10: { dead: elf_10_dead }
+	sprite elf_11: { dead: elf_11_dead }
+	sprite spirit_1: { dead: spirit_1_dead }
+	sprite skeleton_3: { dead: skeleton_3_dead tags: [ undead skeleton melee ] }
+
+	cursor: { position: [ 0 496 ] }
+	sprite kobold_8_dead: { }
+	sprite kobold_9_dead: { }
+	sprite kobold_10_dead: { }
+	sprite swamp_monster_8_dead: { }
+	sprite swamp_monster_9_dead: { }
+	sprite elf_8_dead: { }
+	sprite elf_9_dead: { }
+	sprite infected_bear_1_dead: { }
+	sprite skeletal_bear_1_dead: { }
+	sprite ooze_4_dead: { }
+	sprite infected_deer_1_dead: { }
+	sprite infected_boar_1_dead: { }
+	sprite elf_10_dead: { }
+	sprite elf_11_dead: { }
+	sprite spirit_1_dead: { }
+	sprite skeleton_3_dead: { }
+
+	cursor: { position: [ 0 512 ] }
+	sprite skeleton_4: { dead: skeleton_4_dead tags: [ undead skeleton melee ] }
+	sprite skeleton_boss_1: { dead: skeleton_boss_1_dead tags: [ undead skeleton melee boss ] }
+	sprite rebel_6: { dead: rebel_6_dead }
+	sprite rebel_7: { dead: rebel_7_dead }
+	sprite rebel_8: { dead: rebel_8_dead }
+	sprite rebel_9: { dead: rebel_9_dead }
+	sprite dark_elf_6: { dead: dark_elf_6_dead }
+	sprite dark_elf_7: { dead: dark_elf_7_dead }
+	sprite lich_1: { dead: lich_1_dead }
+	sprite skeleton_caster_2: { dead: skeleton_caster_2_dead tags: [ undead skeleton caster boss ] }
+	sprite skeleton_caster_3: { dead: skeleton_caster_3_dead tags: [ undead skeleton caster ] }
+	sprite skeleton_5: { dead: skeleton_5_dead tags: [ undead skeleton melee boss ] }
+	sprite skeleton_6: { dead: skeleton_6_dead tags: [ undead skeleton melee boss ] }
+	sprite wolf_6: { dead: wolf_6_dead }
+	sprite owlbear_4: { dead: owlbear_4_dead }
+	sprite man_54: { dead: man_54_dead }
+
+	cursor: { position: [ 0 528 ] }
+	sprite skeleton_4_dead: { }
+	sprite skeleton_boss_1_dead: { }
+	sprite rebel_6_dead: { }
+	sprite rebel_7_dead: { }
+	sprite rebel_8_dead: { }
+	sprite rebel_9_dead: { }
+	sprite dark_elf_6_dead: { }
+	sprite dark_elf_7_dead: { }
+	sprite lich_1_dead: { }
+	sprite skeleton_caster_2_dead: { }
+	sprite skeleton_caster_3_dead: { }
+	sprite skeleton_5_dead: { }
+	sprite skeleton_6_dead: { }
+	sprite wolf_6_dead: { }
+	sprite owlbear_4_dead: { }
+	sprite man_54_dead: { }
+
+	cursor: { position: [ 0 544 ] }
+	sprite man_55: { dead: man_55_dead }
+	sprite elf_12: { dead: elf_12_dead }
+	sprite woman_23: { dead: woman_23_dead }
+	sprite woman_24: { dead: woman_24_dead }
+	sprite elf_13: { dead: elf_13_dead }
+	sprite dwarf_15: { dead: dwarf_15_dead }
+	sprite woman_25: { dead: woman_25_dead }
+	sprite man_56: { dead: man_56_dead }
+	sprite angel_2: { dead: angel_2_dead }
+	sprite angel_3: { dead: angel_3_dead }
+	sprite demon_4: { dead: demon_4_dead }
+	sprite demon_5: { dead: demon_5_dead }
+	sprite angel_4: { dead: angel_4_dead }
+	sprite demon_6: { dead: demon_6_dead }
+	sprite man_57: { dead: man_57_dead }
+	sprite man_58: { dead: man_58_dead }
+
+	cursor: { position: [ 0 560 ] }
+	sprite man_55_dead: { }
+	sprite elf_12_dead: { }
+	sprite woman_23_dead: { }
+	sprite woman_24_dead: { }
+	sprite elf_13_dead: { }
+	sprite dwarf_15_dead: { }
+	sprite woman_25_dead: { }
+	sprite man_56_dead: { }
+	sprite angel_2_dead: { }
+	sprite angel_3_dead: { }
+	sprite demon_4_dead: { }
+	sprite demon_5_dead: { }
+	sprite angel_4_dead: { }
+	sprite demon_6_dead: { }
+	sprite man_57_dead: { }
+	sprite man_58_dead: { }
+
+	cursor: { position: [ 0 576 ] }
+	sprite woman_26: { dead: woman_26_dead }
+	sprite man_59: { dead: man_59_dead }
+	sprite man_60: { dead: man_60_dead }
+	sprite man_61: { dead: man_61_dead }
+	sprite woman_27: { dead: woman_27_dead }
+	sprite man_62: { dead: man_62_dead }
+	sprite man_63: { dead: man_63_dead }
+	sprite woman_28: { dead: woman_28_dead }
+	sprite man_64: { dead: man_64_dead }
+	sprite man_65: { dead: man_65_dead }
+	sprite woman_29: { dead: woman_29_dead }
+	sprite woman_30: { dead: woman_30_dead }
+	sprite woman_31: { dead: woman_31_dead }
+	sprite rebel_10: { dead: rebel_10_dead }
+	sprite rebel_11: { dead: rebel_11_dead }
+	sprite rebel_12: { dead: rebel_12_dead }
+
+	cursor: { position: [ 0 592 ] }
+	sprite woman_26_dead: { }
+	sprite man_59_dead: { }
+	sprite man_60_dead: { }
+	sprite man_61_dead: { }
+	sprite woman_27_dead: { }
+	sprite man_62_dead: { }
+	sprite man_63_dead: { }
+	sprite woman_28_dead: { }
+	sprite man_64_dead: { }
+	sprite man_65_dead: { }
+	sprite woman_29_dead: { }
+	sprite woman_30_dead: { }
+	sprite woman_31_dead: { }
+	sprite rebel_10_dead: { }
+	sprite rebel_11_dead: { }
+	sprite rebel_12_dead: { }
+	
+	cursor: { position: [ 0 608 ] }
+	sprite rebel_13: { dead: rebel_13_dead }
+	sprite man_66: { dead: man_66_dead }
+	sprite infected_wolf_1: { dead: infected_wolf_1_dead }
+	sprite zombie_2: { dead: zombie_2_dead }
+	sprite zombie_3: { dead: zombie_3_dead }
+	sprite zombie_4: { dead: zombie_4_dead }
+	sprite woman_32: { dead: woman_32_dead }
+	sprite dwarf_16: { dead: dwarf_16_dead }
+	sprite elf_14: { dead: elf_14_dead }
+	sprite woman_33: { dead: woman_33_dead }
+	sprite man_67: { dead: man_67_dead }
+	sprite dwarf_17: { dead: dwarf_17_dead }
+	sprite crab_monster_3: { dead: crab_monster_3_dead tags: [ crab_monster melee ] }
+	sprite crab_monster_boss_3: { dead: crab_monster_boss_3_dead tags: [ crab_monster melee boss ] }
+	sprite crab_caster_3: { dead: crab_caster_3_dead tags: [ crab_monster caster ] }
+	sprite crab_caster_boss_1: { dead: crab_caster_boss_1_dead tags: [ crab_monster caster boss ] }
+	
+	cursor: { position: [ 0 624 ] }
+	sprite rebel_13_dead: { }
+	sprite man_66_dead: { }
+	sprite infected_wolf_1_dead: { }
+	sprite zombie_2_dead: { }
+	sprite zombie_3_dead: { }
+	sprite zombie_4_dead: { }
+	sprite woman_32_dead: { }
+	sprite dwarf_16_dead: { }
+	sprite elf_14_dead: { }
+	sprite woman_33_dead: { }
+	sprite man_67_dead: { }
+	sprite dwarf_17_dead: { }
+	sprite crab_monster_3_dead: { }
+	sprite crab_monster_boss_3_dead: { }
+	sprite crab_caster_3_dead: { }
+	sprite crab_caster_boss_1_dead: { }
+	
+	cursor: { position: [ 0 640 ] }
+	sprite crab_monster_4: { dead: crab_monster_4_dead tags: [ crab_monster melee ] }
+	sprite crab_monster_boss_4: { dead: crab_monster_boss_4_dead tags: [ crab_monster melee boss ] }
+	sprite crab_caster_4: { dead: crab_caster_4_dead tags: [ crab_monster caster ] }
+	sprite crab_caster_boss_2: { dead: crab_caster_boss_2_dead tags: [ crab_monster caster boss ] }
+	sprite crab_monster_5: { dead: crab_monster_5_dead tags: [ crab_monster melee ] }
+	sprite crab_monster_boss_5: { dead: crab_monster_boss_5_dead tags: [ crab_monster melee boss ] }
+	sprite crab_caster_5: { dead: crab_caster_5_dead tags: [ crab_monster caster ] }
+	sprite crab_caster_boss_3: { dead: crab_caster_boss_3_dead tags: [ crab_monster caster boss ] }
+	sprite man_68: { dead: man_68_dead }
+	sprite man_69: { dead: man_69_dead }
+	sprite assassin_1: { dead: assassin_1_dead }
+	sprite dwarven_coinaxe_1: { dead: dwarven_coinaxe_1_dead }
+	sprite elf_warden_1: { dead: elf_warden_1_dead }
+	sprite dwarf_18: { dead: dwarf_18_dead }
+	sprite scorpion_3: { dead: scorpion_3_dead }
+	sprite wolf_7: { dead: wolf_7_dead }
+	
+	cursor: { position: [ 0 656 ] }
+	sprite crab_monster_4_dead: { }
+	sprite crab_monster_boss_4_dead: { }
+	sprite crab_caster_4_dead: { }
+	sprite crab_caster_boss_2_dead: { }
+	sprite crab_monster_5_dead: { }
+	sprite crab_monster_boss_5_dead: { }
+	sprite crab_caster_5_dead: { }
+	sprite crab_caster_boss_3_dead: { }	
+	sprite man_68_dead: { }	
+	sprite man_69_dead: { }	
+	sprite assassin_1_dead: { }	
+	sprite dwarven_coinaxe_1_dead: { }	
+	sprite elf_warden_1_dead: { }	
+	sprite dwarf_18_dead: { }	
+	sprite scorpion_3_dead: { }	
+	sprite wolf_7_dead: { }	
 }
 
 sprites:
@@ -243,10 +792,49 @@ sprites:
 	cursor: { position: [ 0 0 ] }
 
 	sprite dragon_1: { dead: dragon_1_dead tags: [ dragon ] }
+	sprite giga_grab_1: { dead: giga_grab_1_dead }
+	sprite giga_grab_1_submerged: { dead: giga_grab_1_dead }
+	sprite giant_skeleton_1: { dead: giant_skeleton_1_dead }
+	sprite giant_beast_1: { dead: giant_beast_1_dead }
+	sprite giant_wood_elemental_1: { dead: giant_wood_elemental_1_dead }
+	sprite giant_demon_1: { dead: giant_demon_1_dead }
+	sprite dragon_2: { dead: dragon_2_dead tags: [ dragon ] }
 	
 	cursor: { position: [ 0 32 ] }
 	
 	sprite dragon_1_dead: { }	
+	sprite giga_grab_1_dead: { }
+	skip: {}
+	sprite giant_skeleton_1_dead: { }
+	sprite giant_beast_1_dead: { }
+	sprite giant_wood_elemental_1_dead: { }
+	sprite giant_demon_1_dead: { }
+	sprite dragon_2_dead: { }
+	
+	cursor: { position: [ 0 64 ] }
+
+	sprite giant_demon_2: { dead: giant_demon_2_dead }
+
+	cursor: { position: [ 0 92 ] }
+
+	sprite giant_demon_2_dead: { }	
+}
+
+sprites:
+{
+	source: "critters.png"
+
+	size: { width: 8 height: 8 }
+
+	cursor: { position: [ 0 0 ] }
+
+	sprite seagull_1: { }
+	sprite seagull_1_floating: { }
+	sprite chicken_1: { }
+	sprite duck_1: { }
+	sprite duck_1_floating: { }
+	sprite homunculus_1: { }
+	sprite homunculus_1_floating: { }
 }
 
 sprites:
@@ -326,6 +914,50 @@ sprites:
 	sprite purple_gateway_3: { }
 	sprite door_closed_2: { }
 	sprite door_open_2: { }
-	
+	sprite barrel_1: { }
+	sprite glowing_orb_1_a: { }
+
+	cursor: { position: [ 0 64 ] }
+	sprite glowing_orb_1_b: { }
+	sprite cabbage_1: { }
+	sprite effigy_1: { }
+	sprite feather_1: { }
+	sprite bonfire_unlit: { }
+	sprite cage_1: { }
+	sprite egg_1: { }
+	sprite junk_1: { }
+	sprite seashell_1: { }
+	sprite spider_eggs_1: { }
+	sprite flower_1: { }
+	sprite seaweed_1: { }
+	sprite flower_2: { }
+	sprite bell_1: { }
+	sprite flower_3: { }
+	sprite flower_4: { }
+
+	cursor: { position: [ 0 80 ] }
+	sprite flower_5: { }
+	sprite emberbloom: { }
+	sprite sunweave: { }
+	sprite sylmarel: { }
+	sprite azuryte_vein: { }
+	sprite gold_vein: { }
+	sprite mithril_vein: { }
+	sprite brontium_vein: { }
+	sprite frostbloom: { }
+	sprite crystal_1: { }
+	sprite crystal_2: { }
+	sprite gs_flag_underworld: { }
+	sprite gs_flag_light: { }
+	sprite gs_flag_none: { }
+	sprite thorns_1: { }
+
+	cursor: { position: [ 0 96 ] }
+	sprite purple_gateway_closed_1: { }
+	sprite purple_gateway_closed_2: { }
+	sprite purple_gateway_closed_3: { }
+		
 }
+
+
 

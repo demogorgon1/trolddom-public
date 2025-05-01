@@ -1,0 +1,152 @@
+dialogue_screen .farmer_rabbit_dialogue:
+{
+	text: 
+	[	
+		"What is going to happen to my price winning cabbage? Those brutes will trample it!"
+	]		
+	
+	options:
+	[
+		{ quest: .farmer_rabbit_1 }
+	]
+}
+
+dialogue_root .farmer_rabbit_dialogue:
+{
+	.farmer_rabbit_dialogue: { }
+}
+
+entity thalvaron_farmer_rabbit: !NPC
+{
+	_string: "Farmer Rabbit"
+	_dialogue_root: .farmer_rabbit_dialogue	
+	_sprite: man_34
+	_sprite_dead: man_34_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .farmer_rabbit_1_quest_item: { }
+
+item .farmer_rabbit_1_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .farmer_rabbit_1_quest_item ]		
+	string: "Watering Can" 
+	icon: icon_watering_can
+	stack: 1
+	item_level: 12
+	quest: .farmer_rabbit_1
+	flags: [ not_sellable unique ]
+}
+
+loot_table .farmer_rabbit_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .farmer_rabbit_1_quest_item }			
+		}		
+	]
+}
+       
+entity thalvaron_farmer_rabbit_1_quest_item:
+{
+	string: "Farmer Rabbit's Chest"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ chest_2 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .farmer_rabbit_1_quest_item
+			verb: open
+			range: 1 
+			despawn: true 			
+			level: 12
+			required_quest: .farmer_rabbit_1
+		}		
+	}
+}
+
+entity thalvaron_farmer_rabbit_1_quest_item_2:
+{
+	string: "Cabbage"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ cabbage_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			verb: water
+			range: 1 
+			despawn: true 			
+			level: 12
+			required_quest: .farmer_rabbit_1
+			complete_manual_objective: .farmer_rabbit_1_b
+			requirements: { requirement self<must_have_item>: .farmer_rabbit_1_quest_item }
+		}		
+	}
+}
+
+objective .farmer_rabbit_1_a:
+{
+	string: "Watering Can"
+	collect_items: { item: .farmer_rabbit_1_quest_item count: 1 }
+}
+
+objective .farmer_rabbit_1_b:
+{
+	string: "Water The Cabbage"
+	
+	maps: [ thalvaron ]
+	
+	manual_boolean: { }
+}
+
+{
+	${ _level: 12 }
+	item .farmer_rabbit_1_a: !QUEST_REWARD_2H_MACE{ _string: "Farmer's Skull Whacker" _icon: icon_mace_2 _strength: 2 _constitution: 1 _weapon_cooldown: 32 }
+	item .farmer_rabbit_1_b: !QUEST_REWARD_LEGS{ _string: "Leggings of the Wise" _icon: icon_pants_1 _wisdom: 1 _type: armor_cloth }
+}
+
+quest .farmer_rabbit_1:
+{
+	string: "We Must Secure The Cabbages"
+
+	text:
+	[
+		"Go to Farmer Rabbit's barn, find his watering can, and water his cabbages."
+	]
+	
+	description: 
+	[
+		"Those brutes chased me out of my own house! And my cabbages! What will become of them? As you surely know, my cabbages always win first price at the early cabbage championship. That kind of quality"
+		"requires a lot of hard work. I doesn't come easy. My most important task to make sure they get enough water... and I'm afraid they're getting dry! I'd sneak back and water them, but the bandits told me that"
+		"they'd beat me up if they saw me again. Maybe you can do it? You'll find a watering can in the barn."
+	]
+
+	progress:
+	[
+		"Are my babies safe and sound?"
+	]
+	
+	completion:
+	[
+		"Thanks, now I can relax a bit again. Hopefully I can go back and take care of them again soon."
+	]
+
+	objectives: [ .farmer_rabbit_1_a .farmer_rabbit_1_b ]
+	level: 12
+	reward_one_item: [ .farmer_rabbit_1_a .farmer_rabbit_1_b ]
+}

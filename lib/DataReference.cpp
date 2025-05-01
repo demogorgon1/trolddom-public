@@ -19,7 +19,7 @@ namespace tpublic
 		TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing data type annotation.");
 		m_type = DataType::StringToId(aSource->m_annotation->GetIdentifier());
 		TP_VERIFY(m_type != DataType::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid data type.", aSource->m_annotation->GetIdentifier());
-		m_id = aSource->m_sourceContext->m_persistentIdTable->GetId(m_type, aSource->GetIdentifier());
+		m_id = aSource->GetId(m_type);
 	}
 	
 	DataReference::~DataReference()

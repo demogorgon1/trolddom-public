@@ -1,0 +1,75 @@
+dialogue_screen .city_guard_special_2_dialogue:
+{
+	text: 
+	[	
+		"We need to make this city safe again."
+	]		
+	
+	options:
+	[
+		{ quest: .city_guard_special_2_1 }
+	]
+}
+
+dialogue_root .city_guard_special_2_dialogue:
+{
+	.city_guard_special_2_dialogue: { }
+}
+
+entity thalvaron_city_guard_special_2: !NPC
+{
+	_string: "Lieutenant Gloine"
+	_dialogue_root: .city_guard_special_2_dialogue	
+	_sprite: city_guard_1
+	_sprite_dead: city_guard_1_dead
+	_level: 20
+	_faction: valoris		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .city_guard_special_2_1:
+{
+	string: "Rebel Leader Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_rebel_10_leader ]
+		count: 1
+	}
+}
+
+quest .city_guard_special_2_1:
+{
+	string: "Decapitation Strike"
+
+	text:
+	[
+		"Find the rebel leader and kill him."
+	]
+	
+	description: 
+	[
+		"I've been told that one of the rebel leaders are currently in one of the nearby buildings. Find him and kill him quickly before he gets a chance to get away."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Great job, this will surely disrupt their operations.\n\n"
+	]
+
+	level: 10
+	objectives: [ .city_guard_special_2_1 ]
+	reward_reputation_multiplier: 1.5
+}

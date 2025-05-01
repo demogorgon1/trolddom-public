@@ -1,0 +1,67 @@
+dialogue_screen .fernwick_inn_keeper_dialogue:
+{
+	text: 
+	[	
+		"Welcome to Fernwick."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .inn_keeper_1 } 
+		{ quest<offer_only>: .fernwick_inn_keeper_1 }
+		{ quest<completion_only>: .westor_2 }
+		{ text: "Let me browse your goods." goto: $dialogue_screen !FOOD_VENDOR{} }		
+	]
+}
+
+dialogue_root .fernwick_inn_keeper_dialogue:
+{
+	.fernwick_inn_keeper_dialogue: { }
+}
+
+entity thalvaron_fernwick_inn_keeper: !NPC
+{
+	_string: "Bram"
+	_guild_name: "Innkeeper"
+	_dialogue_root: .fernwick_inn_keeper_dialogue	
+	_sprite: man_8
+	_sprite_dead: man_8_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+quest .fernwick_inn_keeper_1:
+{
+	string: "Gone Herbing"
+
+	text:
+	[
+		"Find Westor in the mountains east of Fernwick."
+	]
+	
+	description: 
+	[
+		"I saw how you went to the dangerous side of the bridge to find Elizabeth's book. Maybe you can do something for me as well?\n\n"
+		"My brother, Westor, went looking for herbs and hasn't come back. I'm getting a bit worried. Can you look for him? He went into the mountains east of here." 
+	]
+
+	progress:
+	[
+		"Did you find him?"
+	]
+	
+	completion:
+	[
+		"Have I been gone long? Oh, wasn't really aware of that. Kinda lost track of time. I found something interesting."
+	]
+
+	prerequisites: [ .fernwick_bar_patron_2 ]
+	level: 11
+	reward_xp_multiplier: 0.24
+}

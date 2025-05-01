@@ -1,0 +1,65 @@
+dialogue_screen .buttercup_dialogue_2:
+{
+	text: 
+	[	
+		"Buttercup recognizes her name.\n\n"
+		"The pig seems very content with her little family and doesn't seem like she wants to go back to Robertson's farm."
+	]			
+}
+
+dialogue_screen .buttercup_dialogue:
+{
+	text: 
+	[	
+		"Oink."
+	]		
+	
+	options:
+	[
+		{ text: "Are you Buttercup?" goto: .buttercup_dialogue_2 script: trigger }
+	]
+}
+
+dialogue_root .buttercup_dialogue:
+{
+	.buttercup_dialogue: { }
+}
+
+entity thalvaron_buttercup: !NPC
+{
+	_string: "Buttercup"
+	_dialogue_root: .buttercup_dialogue	
+	_dialogue_scripts: [ trigger ]	
+	_sprite: boar
+	_sprite_dead: boar_dead	
+	_level: 20
+	_faction: npcs		
+	_creature_type: beast
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+entity thalvaron_wild_boar: !NPC
+{
+	_string: "Wild Boar"
+	_sprite: boar
+	_sprite_dead: boar_dead	
+	_level: 20
+	_faction: npcs		
+	_creature_type: beast
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+entity thalvaron_piglet: !NPC
+{
+	_string: "Piglet"
+	_sprite: piglet
+	_sprite_dead: piglet_dead	
+	_level: 1
+	_faction: npcs		
+	_creature_type: beast
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

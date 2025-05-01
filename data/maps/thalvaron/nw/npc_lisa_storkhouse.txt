@@ -1,0 +1,25 @@
+dialogue_screen .lisa_storkhouse_dialogue:
+{
+	text: 
+	[	
+		"I'm the manager of harbor operations around here. Are you here on official business or just wasting my time?"
+	]			
+}
+
+dialogue_root .lisa_storkhouse_dialogue:
+{
+	.lisa_storkhouse_dialogue: { }
+}
+
+entity thalvaron_lisa_storkhouse: !NPC
+{
+	_string: "Lisa Storkhouse"
+	_sprite: woman_29
+	_sprite_dead: woman_29_dead
+	_level: 20
+	_faction: npcs
+	_dialogue_root: .lisa_storkhouse_dialogue
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}

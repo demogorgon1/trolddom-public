@@ -17,6 +17,67 @@ namespace tpublic
 		virtual				~IReader() {}
 
 		template <typename _T>
+		bool
+		ReadUIntSet(
+			std::unordered_set<_T>&					aOut)
+		{
+			size_t count;
+			if (!ReadUInt(count))
+				return false;
+
+			for (size_t i = 0; i < count; i++)
+			{
+				_T value;
+				if (!ReadUInt(value))
+					return false;
+				aOut.insert(value);
+			}
+			return true;
+		}
+
+		template <typename _T1, typename _T2>
+		bool
+		ReadUIntToUIntTable(
+			std::unordered_map<_T1, _T2>&			aOut)
+		{
+			size_t count;
+			if(!ReadUInt(count))
+				return false;
+
+			for(size_t i = 0; i < count; i++)
+			{
+				std::pair<_T1, _T2> t;
+				if (!ReadUInt(t.first))
+					return false;
+				if (!ReadUInt(t.second))
+					return false;
+				aOut.insert(t);
+			}
+			return true;
+		}
+
+		template <typename _T1, typename _T2>
+		bool
+		ReadUIntToIntTable(
+			std::unordered_map<_T1, _T2>&			aOut)
+		{
+			size_t count;
+			if(!ReadUInt(count))
+				return false;
+
+			for(size_t i = 0; i < count; i++)
+			{
+				std::pair<_T1, _T2> t;
+				if (!ReadUInt(t.first))
+					return false;
+				if (!ReadInt(t.second))
+					return false;
+				aOut.insert(t);
+			}
+			return true;
+		}
+
+		template <typename _T>
 		bool	
 		ReadPOD(
 			_T&										aOut)
@@ -41,6 +102,10 @@ namespace tpublic
 
 				aOut = value;
 			}	
+			else
+			{
+				aOut.reset();
+			}
 				
 			return true;
 		}
@@ -344,7 +409,7 @@ namespace tpublic
 			bool&									aOut)
 		{
 			return Read(&aOut, sizeof(aOut)) == sizeof(aOut);
-		}
+		}	
 
 		void
 		SetTick(

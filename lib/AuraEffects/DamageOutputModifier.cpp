@@ -9,9 +9,9 @@ namespace tpublic::AuraEffects
 
 	int32_t
 	DamageOutputModifier::FilterDamageOutput(
-		const Manifest*				aManifest,
-		const EntityInstance*		aSource,
-		const EntityInstance*		aTarget,
+		const Manifest*				/*aManifest*/,
+		const EntityInstance*		/*aSource*/,
+		const EntityInstance*		/*aTarget*/,
 		DirectEffect::DamageType	aDamageType,
 		int32_t						aDamage) const 
 	{
@@ -19,11 +19,8 @@ namespace tpublic::AuraEffects
 
 		if (m_typeMask & (1 << (uint32_t)aDamageType))
 		{
-			if (Requirements::CheckList(aManifest, m_requirements, aSource, aTarget))
-			{
-				damage *= m_multiplierNumerator;
-				damage /= m_multiplierDenominator;
-			}
+			damage *= m_multiplierNumerator;
+			damage /= m_multiplierDenominator;
 		}
 
 		return damage;

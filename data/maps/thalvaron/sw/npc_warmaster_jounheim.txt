@@ -1,0 +1,154 @@
+dialogue_screen .warmaster_jounheim_dialogue:
+{
+	text: 
+	[	
+		"Glory to Thuldarim."
+	]		
+	
+	options:
+	[
+		{ quest: .warmaster_jounheim_1 }
+		{ quest<completion_only>: .badlands_orc }
+		{ quest: .warmaster_jounheim_2 }
+	]
+}
+
+dialogue_root .warmaster_jounheim_dialogue:
+{
+	.warmaster_jounheim_dialogue: { }
+}
+
+entity thalvaron_warmaster_jounheim: !NPC
+{
+	_string: "Werfil Jounheim"
+	_guild_name: "Warmaster"
+	_dialogue_root: .warmaster_jounheim_dialogue	
+	_sprite: dwarf_1
+	_sprite_dead: dwarf_1_dead
+	_level: 20
+	_faction: kingdom_of_thuldarim		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .warmaster_jounheim_1_a:
+{
+	string: "Skullforge Scouts Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_badlands_orc_a thalvaron_badlands_orc_b ]
+		count: 4
+	}
+}
+
+objective .warmaster_jounheim_1_b:
+{
+	string: "Skullforge Rangers Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_badlands_orc_c ]
+		count: 2
+	}
+}
+
+{
+	${ _level: 15 }
+	item .warmaster_jounheim_1_a: !QUEST_REWARD_1H_MACE{ _string: "Skullsmasher" _icon: icon_mace_3 _strength: 3 _constitution: 1 _weapon_cooldown: 26 }
+	item .warmaster_jounheim_1_b: !QUEST_REWARD_1H_KNIFE{ _string: "Dagger of Spell Slicing" _icon: icon_knife_1 _constitution: 1 _spell_damage: 1 _weapon_cooldown: 18 }
+	item .warmaster_jounheim_1_c: !QUEST_REWARD_2H_STAFF{ _string: "Staff of Healing" _icon: icon_staff_1 _constitution: 1 _spirit: 1 _healing: 1 _weapon_cooldown: 22 }
+}
+
+quest .warmaster_jounheim_1:
+{
+	string: "Skullforge Intruders"
+
+	text:
+	[
+		"Hunt down Skullforge orcs in the Badlands south of Durgan Tharok."
+	]
+	
+	description: 
+	[
+		"I've heard you've dealt with the goblins of Aetheris island. Have you ever before encountered their bigger cousins, the orcs? They've been the enemy of all dwarves since the beginning of time. Luckily these lands have"
+		"long been spared their presence, but untortunately some from the Skullforge clan have been spotted in the south. This is a dangerous situation. Where are they coming from and is this a sign of darker times ahead?\n\n"
+		"For now only a few patrols have been spotted, but we can't let them roam freely. I need you to venture south and hunt down these vile creatures."
+	]
+
+	progress:
+	[
+		"Why are you still here?"
+	]
+	
+	completion:
+	[
+		"You wear the stench of orc blood on you. Good."
+	]
+	
+	objectives: [ .warmaster_jounheim_1_a .warmaster_jounheim_1_b ]
+	level: 15
+	reward_one_item: [ .warmaster_jounheim_1_a .warmaster_jounheim_1_b .warmaster_jounheim_1_c ]
+}
+
+############################################################
+# Quest 2
+
+objective .warmaster_jounheim_2:
+{
+	string: "Gorvak Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_badlands_orc_gorvak ]
+		count: 1
+	}
+}
+
+{
+	${ _level: 15 }
+	item .warmaster_jounheim_2_a: !QUEST_REWARD_2H_AXE{ _string: "Gorvak's Waraxe" _icon: icon_axe_3 _strength: 2 _constitution: 1 _weapon_cooldown: 32 }
+	item .warmaster_jounheim_2_b: !QUEST_REWARD_FINGER{ _string: "Stone of the Oracle" _icon: icon_ring_2 _spell_power: 2 _constitution: 1 }
+	item .warmaster_jounheim_2_c: !QUEST_REWARD_FINGER{ _string: "Ring of Soothing" _icon: icon_ring_4 _healing: 1 _wisdom: 2 }
+}
+
+quest .warmaster_jounheim_2:
+{
+	string: "Commander Gorvak"
+
+	text:
+	[
+		"Locate the orc commander Gorvak in south eastern Badlands and kill him."
+	]
+	
+	description: 
+	[
+		"I'm no expert in orcish, but it seems clear to me that the Skullforge orcs we've seen are only the tip of the iceberg. It looks like they've entered the Badlands through the old mines of Durgan Thurgrok to the south east.\n\n"
+		"It mentions some kind of orc commander named Gorvak. Locate this orc and kill him."
+	]
+
+	progress:
+	[
+		"Why are you still here?"
+	]
+	
+	completion:
+	[
+		"This will set them back a good while, but I suspect this is only the beginning."
+	]
+	
+	objectives: [ .warmaster_jounheim_2 ]
+	level: 15
+	prerequisites: [ .badlands_orc ]
+	reward_one_item: [ .warmaster_jounheim_2_a .warmaster_jounheim_2_b .warmaster_jounheim_2_c ]
+}

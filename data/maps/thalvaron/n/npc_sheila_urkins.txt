@@ -1,0 +1,365 @@
+dialogue_screen .sheila_urkins_dialogue:
+{
+	text: 
+	[	
+		"How are you doing?"
+	]		
+	
+	options:
+	[
+		{ quest: .sheila_urkins_1 }
+		{ quest: .sheila_urkins_2 }
+		{ quest: .sheila_urkins_3 }
+		{ quest<completion_only>: .ghyuik }		
+		{ quest<completion_only>: .tentacle_monster }
+		{ quest<offer_only>: thalvaron_sheila_urkins_4 }
+	]
+}
+
+dialogue_root .sheila_urkins_dialogue:
+{
+	.sheila_urkins_dialogue: { }
+}
+
+entity thalvaron_sheila_urkins: !NPC
+{
+	_string: "Sheila Urkins"
+	_dialogue_root: .sheila_urkins_dialogue	
+	_sprite: woman_7
+	_sprite_dead: woman_7_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .sheila_urkins_1_quest_item: {}
+
+item .sheila_urkins_1_quest_item:
+{
+	icon: icon_spider_web_1
+	item_level: 15
+	loot_groups: [ .sheila_urkins_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Spider Silk"
+	stack: 3
+}
+
+loot_table .sheila_urkins_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .sheila_urkins_1_quest_item }			
+		}		
+	]
+}
+
+loot_group .sheila_urkins_1_quest_item_2: {}
+
+item .sheila_urkins_1_quest_item_2:
+{
+	icon: icon_spider_eggs_1
+	item_level: 15
+	loot_groups: [ .sheila_urkins_1_quest_item_2 ]
+	flags: [ unique not_sellable ]
+	string: "Cluster of Spider Eggs"
+}
+
+loot_table .sheila_urkins_1_quest_item_2:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .sheila_urkins_1_quest_item_2 }			
+		}		
+	]
+}
+
+entity thalvaron_sheila_urkins_1_quest_item:
+{
+	string: "Spider Eggs"
+	systems: [ openable ]
+
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ spider_eggs_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .sheila_urkins_1_quest_item_2
+			verb: pick_up
+			range: 1 
+			despawn: true 			
+			level: 15
+			required_quest: .sheila_urkins_1
+		}		
+	}
+}
+
+objective .sheila_urkins_1_a:
+{
+	string: "Spider Silk"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .sheila_urkins_1_quest_item count: 3 }
+}
+
+objective .sheila_urkins_1_b:
+{
+	string: "Cluster of Spider Eggs"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .sheila_urkins_1_quest_item_2 count: 1 }
+}
+
+quest .sheila_urkins_1:
+{
+	string: "Arachnophobia not an Option"
+
+	text:
+	[
+		"Go south, across the river by the mountains, and collect spider silk and eggs."
+	]
+	
+	description: 
+	[
+		"To the south, on the other side of the river, you can encounter a special species of spider that produces the most wonderful silk. I need some for a special project of mine. Can you go collect some for me?\n\n"
+		"Be careful, those spiders are venomonous. You'll find them close to the mountains.\n\n"
+		"Oh, and while you're there, please get me some spider eggs from the cave, thanks."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Amazing! Hmm, it's quite sticky."
+	]
+
+	objectives: [ .sheila_urkins_1_a .sheila_urkins_1_b ]
+	level: 15
+}
+
+############################################################
+# Quest 2
+
+loot_group .sheila_urkins_2_quest_item: {}
+
+item .sheila_urkins_2_quest_item:
+{
+	icon: icon_flower_4
+	item_level: 15
+	loot_groups: [ .sheila_urkins_2_quest_item ]
+	flags: [ not_sellable ]
+	string: "Demon Blossom"
+	stack: 5
+}
+
+loot_table .sheila_urkins_2_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .sheila_urkins_2_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_sheila_urkins_2_quest_item:
+{
+	string: "Demon Blossom"
+	systems: [ openable ]
+
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ flower_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .sheila_urkins_2_quest_item
+			verb: pick
+			range: 1 
+			despawn: true 			
+			level: 15
+			required_quest: .sheila_urkins_2
+		}		
+	}
+}
+
+objective .sheila_urkins_2:
+{
+	string: "Demon Blossom"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .sheila_urkins_2_quest_item count: 5 }
+}
+
+{
+	${ _level: 15 }
+  	item .sheila_urkins_2_a: !QUEST_REWARD_1H_KNIFE{ _string: "Creepy Demonblade" _icon: icon_knife_2 _constitution: 1 _spell_damage: 2 _weapon_cooldown: 16 }
+  	item .sheila_urkins_2_b: !QUEST_REWARD_WAIST{ _string: "Dark Steel Belt" _icon: icon_mail_belt_3 _constitution: 1 _strength: 1 _dexterity: 1 }
+  	item .sheila_urkins_2_c: !QUEST_REWARD_HEAD{ _string: "Scowl of the Witch" _icon: icon_wizard_hat_2 _constitution: 1 _wisdom: 1 }
+}	   
+
+quest .sheila_urkins_2:
+{
+	string: "Flowers for Something Dead"
+
+	text:
+	[
+		"Collect flowers for Sheila Urkins in Duskwhisper Vale."
+	]
+	
+	description: 
+	[
+		"You think I only need disgusting things? You're wrong. The next task I have for you might be a bit less icky.\n\n"
+		"I require a special type of flower, which is only found in these woods. I need a handful of them. You'll find them a bit further south of where you got my spider parts."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"That's for me? How nice!"
+	]
+
+	objectives: [ .sheila_urkins_2 ]
+	level: 15
+	prerequisites: [ .sheila_urkins_1 ]
+	reward_one_item: [ .sheila_urkins_2_a .sheila_urkins_2_b .sheila_urkins_2_c ]
+}
+
+############################################################
+# Quest 3
+
+loot_group .sheila_urkins_3_quest_item: {}
+
+item .sheila_urkins_3_quest_item:
+{
+	icon: icon_thorns_1
+	item_level: 20
+	loot_groups: [ .sheila_urkins_3_quest_item ]
+	flags: [ not_sellable ]
+	string: "Tirnwood Thorns"
+	stack: 5
+}
+
+loot_table .sheila_urkins_3_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .sheila_urkins_3_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_sheila_urkins_3_quest_item:
+{
+	string: "Tirnwood Thorns"
+	systems: [ openable ]
+
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ thorns_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .sheila_urkins_3_quest_item
+			verb: pick
+			range: 1 
+			despawn: true 			
+			level: 20
+			required_quest: .sheila_urkins_3
+		}		
+	}
+}
+
+objective .sheila_urkins_3:
+{
+	string: "Tirnwood Thorns"
+	
+	maps: [ tirnwood_thicket ]
+	
+	collect_items: { item: .sheila_urkins_3_quest_item count: 5 }
+}
+
+{
+	${ _level: 20 _rarity: rare }
+  	item .sheila_urkins_3_a: !QUEST_REWARD_BACK{ _string: "Cloak of the Witch" _icon: icon_cape_1 _constitution: 2 _dexterity: 1 }
+}	   
+
+quest .sheila_urkins_3:
+{
+	string: "Precious Thorns"
+
+	text:
+	[
+		"Find and venture into Tirnwood Thicket and collect thorns."
+	]
+	
+	description: 
+	[
+		"Far away from here to the east, beyond the undying lands and Faerandor is a forest that goes by the name Tirnwood Thicket. I've never been there myself, but some time ago a traveller"
+		"passed through here and gave me a sample of some thorny branches he had found there. If you ever go to this place, please collect some thorns for me. I've never seen anything like those before."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Excellent!"
+	]
+
+	objectives: [ .sheila_urkins_3 ]
+	level: 20
+	type: dungeon
+	prerequisites: [ .sheila_urkins_2 ]
+	reward_one_item: [ .sheila_urkins_3_a ]
+}
+
+############################################################
+# Quest 4
+	
+quest thalvaron_sheila_urkins_4:
+{
+	string: "At The Gates"
+	
+	text:
+	[
+		"Bring the severed tentacle to Jim in the Southgate district of Valoris."
+	]
+	
+	description: 
+	[
+		"This tentacle monster business is above my paygrade. Brind the tentacle to my friend Jim in Valoris and see what he can make of it. You'll find him in the western part of the Southgate district."
+	]
+
+	completion:
+	[
+		"I have been expecting you."
+	]
+
+	prerequisites: [ .tentacle_monster ]
+	level: 20
+}
+

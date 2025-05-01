@@ -2,6 +2,7 @@
 
 #include <tpublic/Components/ActiveQuests.h>
 #include <tpublic/Components/CombatPublic.h>
+#include <tpublic/Components/KillContribution.h>
 #include <tpublic/Components/Lootable.h>
 #include <tpublic/Components/PlayerPublic.h>
 
@@ -25,34 +26,37 @@ namespace tpublic
 		m_manifest->GetContainer<Data::Item>()->ForEach([&](
 			const Data::Item*	aItem)
 		{
-			UIntRange levelRange = aItem->m_levelRange;
-
-			if (levelRange.m_min == 0 && aItem->m_itemLevel > 0)
+			if(aItem->IsDefined())
 			{
-				levelRange.m_max = aItem->m_itemLevel + 2;
-				levelRange.m_min = aItem->m_itemLevel;
+				UIntRange levelRange = aItem->m_levelRange;
 
-				if(levelRange.m_min < 1)
-					levelRange.m_min = 1;
-
-				// For rare and epic items, make it possible for higher level NPCs to drop them as well
-				if (aItem->m_rarity == Rarity::ID_RARE || aItem->m_rarity == Rarity::ID_EPIC)
-					levelRange.m_max += 2;
-			}
-
-			for(uint32_t lootGroupId : aItem->m_lootGroups)
-			{
-				Group* group = _GetOrCreateGroup(lootGroupId);
-				
-				if(levelRange.m_min == 0)
+				if (levelRange.m_min == 0 && aItem->m_itemLevel > 0)
 				{
-					group->m_defaultLevelBucket.m_itemIds.push_back(aItem->m_id);
+					levelRange.m_max = aItem->m_itemLevel + 2;
+					levelRange.m_min = aItem->m_itemLevel;
+
+					if(levelRange.m_min < 1)
+						levelRange.m_min = 1;
+
+					// For rare and epic items, make it possible for higher level NPCs to drop them as well
+					if (aItem->m_rarity == Rarity::ID_RARE || aItem->m_rarity == Rarity::ID_EPIC)
+						levelRange.m_max += 2;
 				}
-				else
+
+				for(uint32_t lootGroupId : aItem->m_lootGroups)
 				{
-					for(uint32_t level = levelRange.m_min; level <= levelRange.m_max; level++)
-						group->GetOrCreateLevelBucket(level)->m_itemIds.push_back(aItem->m_id);
-				}				
+					Group* group = _GetOrCreateGroup(lootGroupId);
+				
+					if(levelRange.m_min == 0)
+					{
+						group->m_defaultLevelBucket.m_itemIds.push_back(aItem->m_id);
+					}
+					else
+					{
+						for(uint32_t level = levelRange.m_min; level <= levelRange.m_max; level++)
+							group->GetOrCreateLevelBucket(level)->m_itemIds.push_back(aItem->m_id);
+					}				
+				}
 			}
 			return true;
 		});
@@ -70,10 +74,13 @@ namespace tpublic
 		const EntityInstance*						aLootableEntityInstance,
 		uint32_t									aLevel,
 		uint32_t									aCreatureTypeId,
-		bool										aIsElite,
+		bool										aElite,
 		uint32_t									aPlayerWorldCharacterId,
 		Components::Lootable*						aLootable) const
-	{
+	{		
+		if(aLootable->m_lootTableId == 0)
+			return;
+
 		const Data::LootTable* lootTable = m_manifest->GetById<tpublic::Data::LootTable>(aLootable->m_lootTableId);
 
 		// Cash
@@ -93,7 +100,7 @@ namespace tpublic
 					tpublic::UniformDistribution<uint32_t> distribution(npcMetricsLevel->m_cash.m_min, npcMetricsLevel->m_cash.m_max);
 					aLootable->m_availableCash = (int64_t)distribution(aRandom);
 
-					if(aLootable->m_availableCash > 0 && aIsElite)
+					if(aLootable->m_availableCash > 0 && aElite)
 						aLootable->m_availableCash = (int64_t)((float)aLootable->m_availableCash * npcMetricsLevel->m_eliteCash);
 
 					aLootable->m_cash = aLootable->m_availableCash > 0;						
@@ -105,7 +112,7 @@ namespace tpublic
 		}
 
 		// Items
-		GenerateLootableItems(aRandom, aPlayerEntityInstances, aLootableEntityInstance, aLevel, aCreatureTypeId, lootTable, aPlayerWorldCharacterId, aLootable);
+		GenerateLootableItems(aRandom, aPlayerEntityInstances, aLootableEntityInstance, aLevel, aCreatureTypeId, aElite, lootTable, aPlayerWorldCharacterId, aLootable);
 	}
 
 	void		
@@ -115,15 +122,46 @@ namespace tpublic
 		const EntityInstance*						aLootableEntityInstance,
 		uint32_t									aLevel,
 		uint32_t									aCreatureTypeId,
+		bool										aElite,
 		const Data::LootTable*						aLootTable,
 		uint32_t									aPlayerWorldCharacterId,
 		Components::Lootable*						aLootable) const
 	{
-		GenerateItems(aRandom, aPlayerEntityInstances, aLootableEntityInstance, aLevel, aCreatureTypeId, aLootTable, [&](
-			const tpublic::ItemInstance& aItemInstance)			
-		{
+		const Components::KillContribution* killContribution = aLootableEntityInstance->GetComponent<Components::KillContribution>();
+
+		GenerateItems(aRandom, aPlayerEntityInstances, aLootableEntityInstance, aLevel, aCreatureTypeId, aElite, aLootTable, [&](
+			const ItemInstance& aItemInstance,
+			uint32_t			aLootCooldownId)			
+		{			
 			const Data::Item* item = m_manifest->GetById<Data::Item>(aItemInstance.m_itemId);
-			if(item->m_questId != 0)
+
+			Components::Lootable::AvailableLoot loot;
+			loot.m_itemInstance = aItemInstance;
+			loot.m_itemInstance.SetWorldbound(aPlayerWorldCharacterId);
+
+			if(loot.m_itemInstance.m_quantity > 1)
+			{
+				if(loot.m_itemInstance.m_quantity > item->m_stackSize)
+					loot.m_itemInstance.m_quantity = item->m_stackSize;
+
+				if(item->IsUnique())
+					loot.m_itemInstance.m_quantity = 1;
+			}
+
+			if(aLootCooldownId != 0)
+			{
+				// Items with loot cooldown goes to all players. Note that this doesn't work with quest items.
+				for (const EntityInstance* playerEntityInstance : aPlayerEntityInstances)
+				{
+					const Components::PlayerPublic* playerPublic = playerEntityInstance->GetComponent<Components::PlayerPublic>();
+					const Components::CombatPublic* combatPublic = playerEntityInstance->GetComponent<Components::CombatPublic>();
+
+					loot.m_playerTag.SetCharacter(playerPublic->m_characterId, combatPublic->m_level);
+					loot.m_lootCooldownId = aLootCooldownId;
+					aLootable->m_availableLoot.push_back(loot);
+				}
+			}
+			else if(item->m_questId != 0)
 			{
 				// This is a quest item. Generate a copy for everyone with the quest.
 				for(const EntityInstance* playerEntityInstance : aPlayerEntityInstances)
@@ -134,20 +172,23 @@ namespace tpublic
 						const Components::PlayerPublic* playerPublic = playerEntityInstance->GetComponent<Components::PlayerPublic>();
 						const Components::CombatPublic* combatPublic = playerEntityInstance->GetComponent<Components::CombatPublic>();
 
-						Components::Lootable::AvailableLoot loot;
-						loot.m_itemInstance = aItemInstance;
-						loot.m_itemInstance.m_worldboundCharacterId = aPlayerWorldCharacterId;
 						loot.m_playerTag.SetCharacter(playerPublic->m_characterId, combatPublic->m_level);
 						loot.m_questId = item->m_questId;
 						aLootable->m_availableLoot.push_back(loot);
 					}
 				}
 			}
+			else if(killContribution != NULL && item->IsKillContributionLoot())
+			{
+				// This can be looted by anyone with kill contribution. Generate a copy for everyone on the list.
+				for(uint32_t characterId : killContribution->m_characterIds.m_ids)
+				{
+					loot.m_playerTag.SetCharacter(characterId, 0); // Player tag character level isn't relevant here
+					aLootable->m_availableLoot.push_back(loot);
+				}
+			}
 			else
 			{
-				Components::Lootable::AvailableLoot loot;
-				loot.m_itemInstance = aItemInstance;
-				loot.m_itemInstance.m_worldboundCharacterId = aPlayerWorldCharacterId;			
 				aLootable->m_availableLoot.push_back(loot);
 			}
 		});
@@ -160,6 +201,7 @@ namespace tpublic
 		const EntityInstance*						aLootableEntityInstance,
 		uint32_t									aLevel,
 		uint32_t									aCreatureTypeId,
+		bool										aElite,
 		const Data::LootTable*						aLootTable,
 		ItemCallback								aItemCallback) const
 	{	
@@ -169,6 +211,8 @@ namespace tpublic
 			{
 				uint32_t	m_accumWeight = 0;
 				uint32_t	m_lootGroupId = 0;
+				uint32_t	m_quantity = 0;
+				uint32_t	m_lootCooldownId = 0;
 			};
 
 			Entry entries[Data::LootTable::Slot::MAX_POSSIBILTY_COUNT];
@@ -181,6 +225,15 @@ namespace tpublic
 				if(!possibility.HasCreatureType(aCreatureTypeId))
 					continue;
 
+				if(possibility.m_elite != Data::LootTable::Possibility::ELITE_DOES_NOT_MATTER)
+				{
+					if(possibility.m_elite == Data::LootTable::Possibility::ELITE_MUST_BE && !aElite)
+						continue;
+
+					if (possibility.m_elite == Data::LootTable::Possibility::ELITE_MUST_NOT_BE && aElite)
+						continue;
+				}
+
 				if(aLootableEntityInstance != NULL)
 				{
 					if (!Requirements::CheckAnyList(m_manifest, possibility.m_requirements, aPlayerEntityInstances, aLootableEntityInstance))
@@ -192,7 +245,19 @@ namespace tpublic
 				accumWeight += possibility.m_weight;
 				Entry& t = entries[entryCount++];
 				t.m_accumWeight = accumWeight;
+				t.m_quantity = possibility.m_quantity;
 				t.m_lootGroupId = possibility.m_lootGroupId;
+
+				if(possibility.m_useSpecialLootCooldown && aLootableEntityInstance != NULL)
+				{
+					const Components::Lootable* lootable = aLootableEntityInstance->GetComponent<Components::Lootable>();
+					if(lootable != NULL)
+						t.m_lootCooldownId = lootable->m_specialLootCooldownId;
+				}
+				else
+				{
+					t.m_lootCooldownId = possibility.m_lootCooldownId;
+				}
 			}
 
 			if(entryCount > 0)
@@ -200,6 +265,8 @@ namespace tpublic
 				tpublic::UniformDistribution<uint32_t> distribution(1, accumWeight);
 				uint32_t possibilityRoll = distribution(aRandom);
 				uint32_t lootGroupId = 0;
+				uint32_t quantity = 0;
+				uint32_t lootCooldownId = 0;
 
 				for (size_t i = 0; i < entryCount; i++)
 				{
@@ -207,6 +274,8 @@ namespace tpublic
 					if (possibilityRoll <= t.m_accumWeight)
 					{
 						lootGroupId = t.m_lootGroupId;
+						quantity = t.m_quantity;
+						lootCooldownId = t.m_lootCooldownId;
 						break;
 					}
 				}
@@ -243,7 +312,8 @@ namespace tpublic
 						{
 							tpublic::ItemInstance itemInstance;
 							itemInstance.m_itemId = itemId;
-							aItemCallback(itemInstance);
+							itemInstance.m_quantity = quantity;
+							aItemCallback(itemInstance, lootCooldownId);
 						}
 					}
 				}

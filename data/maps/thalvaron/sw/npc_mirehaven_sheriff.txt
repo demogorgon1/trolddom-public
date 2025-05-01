@@ -1,0 +1,84 @@
+dialogue_screen .mirehaven_sheriff_dialogue:
+{
+	text: 
+	[	
+		"Greetings, $class$."
+	]		
+	
+	options:
+	[
+		{ quest: .mirehaven_sheriff_1 }
+		{ quest<completion_only>: .swamp_giant }
+	]
+}
+
+dialogue_root .mirehaven_sheriff_dialogue:
+{
+	.mirehaven_sheriff_dialogue: { }
+}
+
+entity thalvaron_mirehaven_sheriff: !NPC
+{
+	_string: "Sheriff Foster"
+	_dialogue_root: .mirehaven_sheriff_dialogue	
+	_sprite: man_10
+	_sprite_dead: man_10_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .mirehaven_sheriff_1:
+{
+	string: "Marsh Bandits Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_marsh_bandit_a thalvaron_marsh_bandit_b thalvaron_marsh_bandit_c thalvaron_marsh_bandit_d ]
+		count: 6
+	}
+}
+
+{
+	${ _level: 13 }
+	item .mirehaven_sheriff_1_a: !QUEST_REWARD_HEAD{ _string: "Chain Scarf of the Law" _icon: icon_head_9 _constitution: 1 _dexterity: 1 _type: armor_mail }
+	item .mirehaven_sheriff_1_b: !QUEST_REWARD_CHEST{ _string: "Dirty Robe of the Marsh" _icon: icon_cloth_shirt_6 _constitution: 1 _spell_power: 1 _type: armor_cloth }
+	item .mirehaven_sheriff_1_c: !QUEST_REWARD_SHOULDERS{ _string: "Swampguard's Pauldrons" _icon: icon_shoulders_3 _constitution: 1 _strength: 2 _type: armor_plate }
+}
+
+quest .mirehaven_sheriff_1:
+{
+	string: "Bandits of the Marshes"
+
+	text:
+	[
+		"Find the bandit camp and kill the bandits."
+	]
+	
+	description: 
+	[
+		"It's not only weird swamp critters we have to deal with down here, no, we also have had some problems with bandits attacking people. They have a camp somewhere to the east of here. Can you go and teach them about law and order?"
+	]
+
+	progress:
+	[
+		"Any bandits left?"
+	]
+	
+	completion:
+	[
+		"Great! Here's a little something for you."
+	]
+
+	level: 13
+	objectives: [ .mirehaven_sheriff_1 ]
+	reward_one_item: [ .mirehaven_sheriff_1_a .mirehaven_sheriff_1_b .mirehaven_sheriff_1_c ]
+}
+

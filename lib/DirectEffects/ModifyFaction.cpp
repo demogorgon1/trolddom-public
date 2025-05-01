@@ -20,7 +20,7 @@ namespace tpublic::DirectEffects
 			if(!FromSourceBase(aChild))
 			{
 				if (aChild->m_name == "faction")
-					m_factionId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_FACTION, aChild->GetIdentifier());
+					m_factionId = aChild->GetId(DataType::ID_FACTION);
 				else if(aChild->m_name == "target_self")
 					m_targetSelf = aChild->GetBool();
 				else

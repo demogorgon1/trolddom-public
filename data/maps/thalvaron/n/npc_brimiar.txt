@@ -1,0 +1,229 @@
+dialogue_screen .brimiar_dialogue:
+{
+	text: 
+	[	
+		"Greetings, dear $class$. Surprised to see you here."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .pearly_b_1 }
+		{ quest: .brimiar_1 }
+		{ quest: .brimiar_2 }
+		{ quest: .brimiar_3 }
+	]
+}
+
+dialogue_root .brimiar_dialogue:
+{
+	.brimiar_dialogue: { }
+}
+
+entity thalvaron_brimiar: !NPC
+{
+	_string: "Brimiar"
+	_dialogue_root: .brimiar_dialogue	
+	_sprite: elf_6
+	_sprite_dead: elf_6_dead
+	_level: 20
+	_faction: children_of_the_moon		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .brimiar_1_quest_item: { }
+
+item .brimiar_1_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .brimiar_1_quest_item ]		
+	string: "Brimiar's Book" 
+	icon: icon_book
+	item_level: 17
+	quest: .brimiar_1
+	flags: [ not_sellable unique ]
+}
+
+loot_table .brimiar_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .brimiar_1_quest_item }			
+		}		
+	]
+}
+       
+entity thalvaron_brimiar_1_quest_item:
+{
+	string: "Kobold Chest"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ chest_2 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .brimiar_1_quest_item
+			verb: open
+			range: 1 
+			despawn: true 			
+			level: 17
+			required_quest: .brimiar_1
+		}		
+	}
+}
+
+objective .brimiar_1:
+{
+	string: "Brimiar's Book"
+
+	collect_items: { item: .brimiar_1_quest_item count: 1 }
+}
+
+quest .brimiar_1:
+{
+	string: "Cave Burglary"
+
+	text:
+	[
+		"Retrieve Brimiar's stolen book and return it to him."
+	]
+	
+	description: 
+	[
+		"Last night someone broke into my home and stole one of my books off my table. I have no idea why anyone would steal it, but it's really annoying because I was in the middle of reading it.\n\n"
+		"Maybe you can help me retrieve it? I can't offer you much clues about who could have done it, even though I woke up when it the burglars ran away. I heard a skitter-scatter of little feet as"
+		"I turned on the light. Seemed like the ran off into the gorge to the east."
+	]
+
+	progress:
+	[
+		"Oh, also I think one of the burglars peed on my carpet. Had to throw it out."
+	]
+	
+	completion:
+	[
+		"Excellent! Kobolds? Oh no, I don't want to deal with that again. I hope you got rid of a few of them."
+	]
+
+	objectives: [ .brimiar_1 ]
+	level: 17	
+}
+
+############################################################
+# Quest 2
+
+objective .brimiar_2:
+{
+	string: "Gorge Harpies Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc: { entities: [ thalvaron_gorge_harpy ] count: 8 }	
+}
+
+{
+	${ _level: 18 }
+	item .brimiar_2_a: !QUEST_REWARD_HANDS{ _string: "Magician Mittens" _icon: icon_cloth_hands_1 _wisdom: 2 _mana_per_5: 1 _type: armor_cloth }
+	item .brimiar_2_b: !QUEST_REWARD_WAIST{ _string: "Rusty Chain Girdle" _icon: icon_mail_belt_2 _strength: 1 _type: armor_mail } 
+	item .brimiar_2_c: !QUEST_REWARD_SHOULDERS{ _string: "Steel Pauldrons" _icon: icon_shoulders_1 _constitution: 1 _type: armor_plate }
+}
+
+quest .brimiar_2:
+{
+	string: "Winged Terrors"
+
+	text:
+	[
+		"Locate the harpy colony in the eastern gorge and thin out their numbers."
+	]
+	
+	description: 
+	[
+		"I have other problems than thieving Kobolds that keep me up at night. Have you heard about harpies? A bunch of them are living in a colony a bit further to the east. I don't really care that much about them,"
+		"but the problem is that they make an awful amount of noise after dark. I've lived by the sea before and I can tell you that they're worse than seagulls during breeding season! You might think that my home"
+		"is deep enough underground to dampen most of the noise, but no, their constant screeching pierces right through the rocks. I don't know what's going on over there, but since you seem to be good at dealing with"
+		"Kobolds, maybe you can deal with harpies too? Seek out their colony and thin out their numbers, please!"
+	]
+
+	progress:
+	[
+		"How is it going?"
+	]
+	
+	completion:
+	[
+		"Ah yes, maybe I can finally sleep again. Thank you!"
+	]
+
+	objectives: [ .brimiar_2 ]
+	level: 18
+	prerequisites: [ .brimiar_1 ]
+	reward_one_item: [ .brimiar_2_a .brimiar_2_b .brimiar_2_c ]
+}
+
+############################################################
+# Quest 3
+
+loot_group .brimiar_3_quest_item: { }
+
+item .brimiar_3_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .brimiar_3_quest_item ]		
+	string: "Non-Poisonous Mystery Meat" 
+	icon: icon_crab_meat_1
+	stack: 6
+	item_level: 18
+	quest: .brimiar_3
+	flags: [ not_sellable ]
+}
+
+objective .brimiar_3:
+{
+	string: "Non-Poisonous Mystery Meat"
+	collect_items: { item: .brimiar_3_quest_item count: 6 }
+}
+
+{
+	${ _level: 18 }
+	item .brimiar_3_a: !QUEST_REWARD_FEET{ _string: "Magician Slippers" _icon: icon_slippers_1 _wisdom: 1 _spell_damage: 2 _type: armor_cloth }
+	item .brimiar_3_b: !QUEST_REWARD_FINGER{ _string: "Bullseye Loop" _icon: icon_ring_5 _dexterity: 1 }
+}
+
+quest .brimiar_3:
+{
+	string: "Venommaw Surprise"
+
+	text:
+	[
+		"Kill lizards in the southern gorge and collect their flesh for Brimiar."
+	]
+	
+	description: 
+	[
+		"Venomous means that it's bad when it bites you, poisonous means it's bad when you bite it. With that in mind, I have a job for you. The southern part of the gorge is crawling with venomous lizards. I'm planning on some kind of"
+		"meat stew for dinner, so maybe you can go grab me some lizard flesh?"
+	]
+
+	progress:
+	[
+		"How is it going?"
+	]
+	
+	completion:
+	[
+		"Uh, splendid! Looks delicious!"
+	]
+
+	objectives: [ .brimiar_3 ]
+	level: 18
+	prerequisites: [ .brimiar_1 ]
+	reward_one_item: [ .brimiar_3_a .brimiar_3_b ]
+}

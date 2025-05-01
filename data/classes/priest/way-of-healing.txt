@@ -13,6 +13,8 @@ talent_tree priest_healing:
 		talent priest_eternal_shine: "E"
 		talent priest_healing_favor: "F"
 		talent priest_improved_blessing: "G"
+		talent priest_swift_mending: "H"
+		talent priest_spiritual_surge: "I"
 		sprite talent_tree_down_arrow: "d"				
 	}
 	
@@ -22,9 +24,96 @@ talent_tree priest_healing:
 		"..d.d.."
 		"G.B.E.F"
 		"..d...."
-		"..D...."
+		"..D.H.."
+		"....d.."
+		"....I.."
 	]
 	
+}
+
+###############################################################################
+# Spiritual Surge
+
+talent priest_spiritual_surge:
+{
+	string: "Spiritual Surge"
+	icon: icon_special_4
+	prerequisites: [ priest_swift_mending ]
+	talent_tree_points_required: 15
+	points:
+	[
+		{ ability: spiritual_surge }
+	]
+}
+
+cooldown spiritual_surge:
+{
+	duration: 1200
+}
+
+aura spiritual_surge:
+{
+	string: "Spiritual Surge"
+	icon: icon_special_4		
+	type: buff
+	duration: 100
+	flags: [ unique magic ]	
+	stat_modifiers: { spell_haste: { add: 30 } }
+}
+
+ability spiritual_surge:
+{
+	string: "Spiritual Surge"
+	description: "Increases spell haste of friendly target by 30% for 10 seconds."
+	range: 1	
+	cooldowns: [ global spiritual_surge ]
+	flags: [ spell target_other target_self target_friendly ]
+	states: [ default in_combat ]
+	icon: icon_special_4
+	delay: 3
+	talent_tree: priest_healing
+		
+	direct_effect apply_aura:
+	{
+		aura: spiritual_surge
+	}
+}
+
+###############################################################################
+# Swift Mending
+
+talent priest_swift_mending:
+{
+	string: "Swift Mending"
+	icon: icon_flash_of_light
+	talent_tree_points_required: 10
+	points:
+	[
+		{ ability_modifier: priest_swift_mending_1 }
+		{ ability_modifier: priest_swift_mending_2 }
+		{ ability_modifier: priest_swift_mending_3 }
+	]
+}
+
+ability_modifier priest_swift_mending_1:
+{	
+	description: "Reduces casting time of Heal and Greater Heal by 0.2 seconds"
+	abilities: [ minor_heal greater_heal ]
+	modify_cast_time: -2
+}
+
+ability_modifier priest_swift_mending_2:
+{	
+	description: "Reduces casting time of Heal and Greater Heal by 0.4 seconds"
+	abilities: [ minor_heal greater_heal ]
+	modify_cast_time: -4
+}
+
+ability_modifier priest_swift_mending_3:
+{	
+	description: "Reduces casting time of Heal and Greater Heal by 0.6 seconds"
+	abilities: [ minor_heal greater_heal ]
+	modify_cast_time: -6
 }
 
 ###############################################################################
@@ -34,7 +123,7 @@ talent priest_improved_blessing:
 {
 	string: "Improved Blessing"
 	icon: icon_holy_blessing
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability_modifier: improved_blessing_1 }
@@ -71,7 +160,7 @@ talent priest_healing_favor:
 {
 	string: "Healing Favor"
 	icon: icon_favor
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability_modifier: healing_favor }
@@ -103,7 +192,7 @@ talent priest_eternal_shine:
 {
 	string: "Eternal Shine"
 	icon: icon_shine
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	prerequisites: [ priest_spiritual_guidance ]
 	points:
 	[
@@ -154,7 +243,7 @@ talent priest_prayer_of_sanctuary:
 {
 	string: "Prayer of Sanctuary"
 	icon: icon_sanctuary
-	talent_tree_points_required: 6
+	talent_tree_points_required: 10
 	prerequisites: [ priest_greater_heal ]
 	points:
 	[
@@ -203,6 +292,8 @@ talent priest_spiritual_guidance:
 		{ aura: priest_spiritual_guidance_1 }
 		{ aura: priest_spiritual_guidance_2 }
 		{ aura: priest_spiritual_guidance_3 }
+		{ aura: priest_spiritual_guidance_4 }
+		{ aura: priest_spiritual_guidance_5 }
 	]
 }
 
@@ -230,6 +321,22 @@ aura priest_spiritual_guidance_3:
 	stat_modifiers: { spirit: { add_percent: 6 } }
 }
 
+aura priest_spiritual_guidance_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your Spirit by 8%."
+	stat_modifiers: { spirit: { add_percent: 8 } }
+}
+
+aura priest_spiritual_guidance_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your Spirit by 10%."
+	stat_modifiers: { spirit: { add_percent: 10 } }
+}
+
 ###############################################################################
 # Healing Conduit
 
@@ -243,6 +350,8 @@ talent priest_healing_conduit:
 		{ aura: priest_healing_conduit_1 }
 		{ aura: priest_healing_conduit_2 }
 		{ aura: priest_healing_conduit_3 }
+		{ aura: priest_healing_conduit_4 }
+		{ aura: priest_healing_conduit_5 }
 	]
 }
 
@@ -250,10 +359,10 @@ aura priest_healing_conduit_1:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases your healing done by 10%."
+	description: "Increases your healing done by 6%."
 	aura_effect heal_output_modifier:
 	{
-		multiplier: 1.1
+		multiplier: 1.06
 	}
 }
 
@@ -261,14 +370,36 @@ aura priest_healing_conduit_2:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases your healing done by 20%."
+	description: "Increases your healing done by 12%."
 	aura_effect heal_output_modifier:
 	{
-		multiplier: 1.2
+		multiplier: 1.12
 	}
 }
 
 aura priest_healing_conduit_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your healing done by 18%."
+	aura_effect heal_output_modifier:
+	{
+		multiplier: 1.18
+	}
+}
+
+aura priest_healing_conduit_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your healing done by 24%."
+	aura_effect heal_output_modifier:
+	{
+		multiplier: 1.24
+	}
+}
+
+aura priest_healing_conduit_5:
 {
 	flags: [ persist_in_death ]
 	type: hidden
@@ -286,7 +417,7 @@ talent priest_greater_heal:
 {
 	string: "Greater Heal"
 	icon: icon_greater_heal
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	prerequisites: [ priest_healing_conduit ]
 	points:
 	[
@@ -305,7 +436,7 @@ ability greater_heal:
 	flags: [ spell target_other target_self target_friendly interruptable ]
 	states: [ default in_combat ]
 	icon: icon_greater_heal
-	resource_cost mana: 15
+	resource_cost mana: 24
 	talent_tree: priest_healing
 	target_particle_system: heal	
 	delay: 2
@@ -314,7 +445,7 @@ ability greater_heal:
 	direct_effect heal:
 	{	
 		flags: [ can_be_critical ]
-		function: { expression: a_mul_x_plus_b x: healing a: 1 b: [ [ 1 25 ] [ 10 50 ] [ 20 100 ] ] }
+		function: { expression: a_mul_x_plus_b x: healing a: 1.15 b: [ [ 1 25 ] [ 10 60 ] [ 20 140 ] ] }
 	}
 	
 	direct_effect apply_aura:
@@ -338,7 +469,7 @@ ability minor_heal:
 	flags: [ spell target_other target_self target_friendly interruptable ]
 	states: [ default in_combat ]
 	icon: icon_heal
-	resource_cost mana: 10
+	resource_cost mana: 14
 	talent_tree: priest_healing
 	target_particle_system: heal	
 	delay: 2
@@ -347,7 +478,7 @@ ability minor_heal:
 	direct_effect heal:
 	{	
 		flags: [ can_be_critical ]
-		function: { expression: a_mul_x_plus_b x: healing a: 0.7 b: [ [ 1 10 ] [ 10 20 ] [ 20 40 ] ] }
+		function: { expression: a_mul_x_plus_b x: healing a: 0.8 b: [ [ 1 10 ] [ 10 20 ] [ 20 44 ] ] }
 	}
 	
 	direct_effect apply_aura:
@@ -373,7 +504,7 @@ ability blessing_tick:
 	
 	direct_effect heal:
 	{	
-		function: { expression: a_mul_x_plus_b x: healing a: 0.25 b: [ [ 1 4 ] [ 10 8 ] [ 20 16 ] ] }
+		function: { expression: a_mul_x_plus_b x: healing a: 0.23 b: [ [ 1 5 ] [ 10 12 ] [ 20 28 ] ] }
 	}	
 }
 
@@ -401,7 +532,7 @@ ability blessing:
 	flags: [ spell target_other target_self target_friendly ]
 	states: [ default in_combat ]
 	icon: icon_holy_blessing
-	resource_cost mana: 12
+	resource_cost mana: 25
 	talent_tree: priest_healing
 
 	direct_effect apply_aura:
@@ -433,4 +564,28 @@ ability resurrection:
 	direct_effect simple<resurrect>:
 	{			
 	}
+}
+
+###############################################################################
+# Inner Peace
+
+ability inner_peace:
+{
+	string: "Inner Peace"
+	description: "Restores 50% of your health."
+	cooldowns: [ global spell_healing_lockout ]
+	cooldown: $cooldown { duration: 1800 }
+	flags: [ spell target_other target_self target_friendly interruptable ]
+	states: [ default in_combat ]
+	icon: icon_special_11
+	resource_cost mana: 13
+	talent_tree: priest_healing
+	target_particle_system: heal	
+	delay: 2
+	sound_effects: !SOUND_HEAL{}	
+
+	direct_effect heal:
+	{	
+		function: { expression: a_mul_x x: health_max a: 0.5 }
+	}	
 }

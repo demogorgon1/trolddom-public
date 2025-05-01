@@ -1,0 +1,57 @@
+dialogue_screen .mathew_larsen_dialogue_2:
+{
+	text: 
+	[	
+		"Ah, yes... the illustrious 8th edition Commoner’s Luckpiece. Extremely rare... unless you’ve visited literally any tavern. Still, I’ll give you a fair price. How about {1000}?"
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: thalvaron_gnome }	
+		{ quest<completion_only>: open_world_randy_2 }
+	]
+}
+
+dialogue_screen .mathew_larsen_dialogue:
+{
+	text: 
+	[	
+		"Ah, a keen eye for treasures, I see! Welcome to Mathew's Emporium - where every item is rare, mysterious, and probably not cursed! Care to browse?"
+	]		
+	
+	options:
+	[
+		{ 
+			text: "I have this extremely rare coin. How much can you give me for it?" 
+			goto: .mathew_larsen_dialogue_2 
+			requirement self<must_have_active_quest>: thalvaron_gnome 
+			requirement self<must_not_have_completed_quest>: thalvaron_gnome
+			requirement self<must_not_be_ready_to_turn_in_quest>: thalvaron_gnome
+			script: trigger
+		}	
+		
+		{ 
+			quest<completion_only>: thalvaron_gnome 
+		}
+	]
+}
+
+dialogue_root .mathew_larsen_dialogue:
+{
+	.mathew_larsen_dialogue: { }
+}
+
+entity thalvaron_mathew_larsen: !NPC
+{
+	_string: "Mathew Larsen"
+	_dialogue_root: .mathew_larsen_dialogue	
+	_dialogue_scripts: [ trigger ]	
+	_sprite: man_33
+	_sprite_dead: man_33_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

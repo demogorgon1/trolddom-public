@@ -148,6 +148,11 @@ namespace tpublic
 			{
 				offsetX += width; 
 			}
+			else if (aNode->m_name == "reverse")
+			{
+				if(offsetX >= width)
+					offsetX -= width;
+			}
 			else if(aNode->m_tag == "sprite")
 			{
 				TP_VERIFY(!aNode->m_name.empty(), aNode->m_debugInfo, "Sprite must be named.");
@@ -181,15 +186,15 @@ namespace tpublic
 					}
 					else if (aSpriteComponent->m_name == "dead")
 					{
-						sprite->m_info.m_deadSpriteId = aSpriteComponent->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aSpriteComponent->GetIdentifier());
+						sprite->m_info.m_deadSpriteId = aSpriteComponent->GetId(DataType::ID_SPRITE);
 					}
 					else if (aSpriteComponent->m_name == "water_floor")
 					{
-						sprite->m_info.m_waterFloorSpriteId = aSpriteComponent->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aSpriteComponent->GetIdentifier());
+						sprite->m_info.m_waterFloorSpriteId = aSpriteComponent->GetId(DataType::ID_SPRITE);
 					}
 					else if (aSpriteComponent->m_name == "overview_map_override")
 					{
-						sprite->m_info.m_overviewMapOverrideSpriteId = aSpriteComponent->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aSpriteComponent->GetIdentifier());
+						sprite->m_info.m_overviewMapOverrideSpriteId = aSpriteComponent->GetId(DataType::ID_SPRITE);
 					}					
 					else if (aSpriteComponent->m_name == "tags")
 					{
@@ -201,7 +206,7 @@ namespace tpublic
 
 						if(aSpriteComponent->m_annotation)
 						{
-							uint32_t spriteId = aSpriteComponent->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aSpriteComponent->m_annotation->GetIdentifier());
+							uint32_t spriteId = aSpriteComponent->m_annotation->GetId(DataType::ID_SPRITE);
 							borders = sprite->m_info.GetOrCreateBorderArray(spriteId);
 						}
 
@@ -535,8 +540,8 @@ namespace tpublic
 			{
 				uint32_t nearestPowerOfTwoWidth = _GetNearestPowerOfTwo(width);
 				uint32_t nearestPowerOfTwoHeight = _GetNearestPowerOfTwo(height);
-				uint32_t sheetSize = std::max(nearestPowerOfTwoWidth, nearestPowerOfTwoHeight);
-				sheetSize = std::max(sheetSize, m_minSheetSize);
+				uint32_t sheetSize = Base::Max(nearestPowerOfTwoWidth, nearestPowerOfTwoHeight);
+				sheetSize = Base::Max(sheetSize, m_minSheetSize);
 				insertSheet = _CreateSheet(sheetSize, sheetSize);
 			}
 			else

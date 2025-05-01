@@ -1,0 +1,7 @@
+faction league_of_assassins:
+{
+	string: "League of Assassins"
+	flags: [ friendly reputation show ]
+	default_reputation: !NEUTRAL_REPUTATION{}	
+}
+

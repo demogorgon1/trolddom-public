@@ -11,11 +11,13 @@ namespace tpublic
 	EntityInstance::EntityInstance(
 		ComponentManager*		aComponentManager,
 		uint32_t				aEntityId,
-		uint32_t				aEntityInstanceId)
+		uint32_t				aEntityInstanceId,
+		uint8_t					aEntityFlags)
 		: m_entityInstanceId(aEntityInstanceId)
 		, m_entityId(aEntityId)
 		, m_state(EntityState::INVALID_ID)
 		, m_componentManager(aComponentManager)
+		, m_entityFlags(aEntityFlags)
 	{
 
 	}

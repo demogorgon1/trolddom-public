@@ -11,11 +11,7 @@ dialogue_screen .brom_mining:
 	]
 }
 
-dialogue_screen .brom_trainer:
-{
-	train_profession<0>: mining
-	train_profession<1>: mining
-}
+dialogue_screen .brom_trainer: !DEFAULT_MINING_TRAINER{}
 
 dialogue_screen .brom_greetings:
 {

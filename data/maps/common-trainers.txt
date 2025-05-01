@@ -1,0 +1,109 @@
+!define DEFAULT_ENCHANTING_TRAINER
+{
+	train_profession<0>: enchanting
+	train_profession<1>: enchanting
+	train_ability: disenchant
+	train_ability: craft_enchant_shield_minor_constitution
+	train_ability: craft_enchant_boots_spirit
+	train_ability: craft_enchant_shield_wisdom
+	train_ability: craft_enchant_shield_major_constitution
+	train_ability: craft_enchant_bracers_strength
+	train_ability: craft_enchant_bracers_spirit
+	train_ability: craft_enchant_gloves_dexterity
+	train_ability: craft_enchant_gloves_wisdom
+	train_ability: craft_enchant_boots_constitution
+}
+
+!define DEFAULT_BLACKSMITING_TRAINER
+{
+	train_profession<0>: blacksmithing
+	train_profession<1>: blacksmithing
+	train_ability: craft_copper_ingot
+	train_ability: craft_iron_ingot
+	train_ability: craft_gold_ingot
+	train_ability: craft_azuryte_ingot
+	train_ability: craft_mithril_ingot
+	train_ability: craft_brontium_ingot
+	train_ability: craft_copper_bracers
+	train_ability: craft_copper_belt
+	train_ability: craft_copper_gauntlets
+	train_ability: craft_copper_boots
+	train_ability: craft_copper_breeches
+	train_ability: craft_copper_blade
+	train_ability: craft_copper_armor
+	train_ability: craft_shiny_armguards
+}
+
+!define DEFAULT_TAILORING_TRAINER
+{
+	train_profession<0>: tailoring
+	train_profession<1>: tailoring
+	train_ability: craft_linen_bracers
+	train_ability: craft_linen_feet_wraps
+	train_ability: craft_linen_leggings
+	train_ability: craft_linen_waistband
+	train_ability: craft_linen_robe
+	train_ability: craft_linen_hood
+}
+
+!define DEFAULT_HERBALISM_TRAINER
+{
+	train_profession<0>: herbalism
+	train_profession<1>: herbalism
+}
+
+!define DEFAULT_MINING_TRAINER
+{
+	train_profession<0>: mining
+	train_profession<1>: mining
+}
+
+!define DEFAULT_FISHING_TRAINER
+{
+	train_profession<0>: fishing
+	train_profession<1>: fishing
+}
+
+!define DEFAULT_FIRST_AID_TRAINER
+{
+	train_profession<0>: first_aid
+	train_profession<1>: first_aid
+	train_ability: craft_linen_bandage
+	train_ability: craft_heavy_linen_bandage
+	train_ability: craft_cottonweave_bandage
+	train_ability: craft_heavy_cottonweave_bandage
+	train_ability: craft_emberfelt_bandage
+	train_ability: craft_heavy_emberfelt_bandage
+}
+
+!define DEFAULT_COOKING_TRAINER
+{
+	train_profession<0>: cooking
+	train_profession<1>: cooking
+	train_ability: craft_dry_bread
+	train_ability: craft_pickled_herring
+	train_ability: craft_pickled_sucker
+	train_ability: craft_pickled_eel_pie
+	train_ability: craft_pickled_moonfish
+	train_ability: craft_spiced_rice
+	train_ability: craft_pickled_toesnapper
+	train_ability: craft_steamed_trout
+	train_ability: craft_seared_bass
+	train_ability: craft_spicy_perch_fillet
+	train_ability: craft_mistveil_balls	
+}
+
+!define DEFAULT_ALCHEMY_TRAINER
+{
+	train_profession<0>: alchemy
+	train_profession<1>: alchemy
+	train_ability: craft_small_healing_potion
+	train_ability: craft_small_mana_potion
+	train_ability: craft_elixir_of_the_bear
+	train_ability: craft_elixir_of_the_owl
+	train_ability: craft_elixir_of_the_giant
+	train_ability: craft_strong_elixir_of_the_bear
+	train_ability: craft_strong_elixir_of_the_owl
+	train_ability: craft_strong_elixir_of_the_giant
+	train_ability: craft_mana_salve
+}

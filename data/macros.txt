@@ -13,6 +13,7 @@
 	produce_items: @_produce
 	required_profession<@_skill>: cooking
 	must_have_one_of_nearby_entities: [ fireplace bonfire ]
+	increment_character_stat: meals_prepared
 }
 
 #####################################################
@@ -28,6 +29,7 @@
 		npc 		
 		<exists _resource_mana> mana_regen
 		<exists _vendor_stock> vendor_restock
+		<exists _random_item_vendor> random_item_vendor
 	]
 	
 	modifiers: 
@@ -51,6 +53,8 @@
 		lootable : 
 		{ 
 			<exists _loot_table> loot_table: @_loot_table
+			<exists _kill_contribution and _kill_contribution> anyone_can_loot: true
+			<exists _special_loot_cooldown> special_loot_cooldown: @_special_loot_cooldown
 		}
 		combat_public: 
 		{  
@@ -96,6 +100,8 @@
 				<exists _abilities> abilities: @_abilities
 				
 				<exists _in_combat_barks> barks: @_in_combat_barks
+				
+				<exists _despawn_on_leave_combat and _despawn_on_leave_combat> despawn_on_leave: true
 			}	
 			
 			<exists _dead_barks> state dead: { barks: @_dead_barks }
@@ -103,12 +109,15 @@
 			<exists _can_move_on_all_non_view_blocking_tiles> can_move_on_all_non_view_blocking_tiles: @_can_move_on_all_non_view_blocking_tiles
 			<exists _blocking> blocking: @_blocking			
 			<exists _large> large: @_large			
+			<exists _can_move> can_move: @_can_move
 			<exists _despawn_time> despawn_time: @_despawn_time
 			<exists _encounter> encounter: @_encounter
 			<exists _inactive_encounter_despawn> inactive_encounter_despawn: @_inactive_encounter_despawn
 			<exists _route> route: @_route
 			<exists _zone> zone: @_zone
 			<exists _out_of_zone_action> out_of_zone_action: @_out_of_zone_action
+			<exists _evade_despawn> evade_despawn: @_evade_despawn
+			<exists _aggro_requirements> aggro_requirements: @_aggro_requirements
 		}		
 		sprite<static>: 
 		{ 
@@ -117,6 +126,8 @@
 				{ states: [ default in_combat spawning evading ] frames: [ @_sprite ] }			
 				{ states: [ dead ] frames: [ @_sprite_dead ] z_offset: -2 }			
 			]		
+			
+			<exists _in_water_sprite> in_water_sprite: @_in_water_sprite
 		}				
 		<exists _auctioneer and _auctioneer> auctioneer<static>: { }
 		<exists _vendor_stock> vendor_stock: 
@@ -135,7 +146,297 @@
 		{
 			registration_price_tiers: @_guild_registrar_price_tiers
 		}
+		<exists _is_threat_source and _is_threat_source> threat_source: { }
+		<exists _kill_contribution and _kill_contribution> kill_contribution: { }
+		<exists _random_item_vendor> random_item_vendor: @_random_item_vendor
 	}
 	
 	<exists _tags> tags: @_tags
+}
+
+#####################################################
+# Quest reward macros
+
+!define QUEST_REWARD
+{
+	string: @_string
+	binds: when_picked_up
+	required_level: @_level
+	icon: @_icon
+	
+	<exists _type> type: @_type
+	<exists _item_aura> aura: @_item_aura
+	<exists _budget_bias> budget_bias: @_budget_bias
+	<exists _weapon_cooldown> weapon_cooldown: @_weapon_cooldown
+
+	<exists _rarity> rarity: @_rarity
+	<!exists _rarity> rarity: uncommon	
+	
+	<exists _dexterity> stat_weight dexterity: @_dexterity
+	<exists _strength> stat_weight strength: @_strength
+	<exists _constitution> stat_weight constitution: @_constitution
+	<exists _spirit> stat_weight spirit: @_spirit
+	<exists _wisdom> stat_weight wisdom: @_wisdom
+	<exists _spell_damage> stat_weight spell_damage: @_spell_damage
+	<exists _healing> stat_weight healing: @_healing
+	<exists _attack_haste> stat_weight attack_haste: @_attack_haste
+	<exists _spell_haste> stat_weight spell_haste: @_spell_haste
+	<exists _health_per_5> stat_weight health_per_5: @_health_per_5
+	<exists _mana_per_5> stat_weight mana_per_5: @_mana_per_5
+	<exists _attack_power> stat_weight attack_power: @_attack_power
+	
+	<exists _parry> stat parry_chance: @_parry
+	<exists _dodge> stat dodge_chance: @_dodge
+	<exists _block> stat block_chance: @_block
+	<exists _phys_crit> stat phys_crit_chance: @_phys_crit
+	<exists _spell_crit> stat spell_crit_chance: @_spell_crit	
+}
+
+!define QUEST_REWARD_HEAD { !QUEST_REWARD equipment_slots: [ head ] }
+!define QUEST_REWARD_CHEST { !QUEST_REWARD equipment_slots: [ chest ] }
+!define QUEST_REWARD_LEGS { !QUEST_REWARD equipment_slots: [ legs ] }
+!define QUEST_REWARD_FEET { !QUEST_REWARD equipment_slots: [ feet ] }
+!define QUEST_REWARD_SHOULDERS { !QUEST_REWARD equipment_slots: [ shoulders ] }
+!define QUEST_REWARD_WRISTS { !QUEST_REWARD equipment_slots: [ wrists ] }
+!define QUEST_REWARD_WAIST { !QUEST_REWARD equipment_slots: [ waist ] }
+!define QUEST_REWARD_HANDS { !QUEST_REWARD equipment_slots: [ hands ] }
+!define QUEST_REWARD_BACK { !QUEST_REWARD equipment_slots: [ back ] }
+!define QUEST_REWARD_NECK { !QUEST_REWARD equipment_slots: [ neck ] }
+!define QUEST_REWARD_FINGER { !QUEST_REWARD equipment_slots: [ finger_1 finger_2 ] }
+!define QUEST_REWARD_BAG { !QUEST_REWARD equipment_slots: [ bag_1 bag_2 bag_3 ] }
+!define QUEST_REWARD_1H_SWORD { !QUEST_REWARD equipment_slots: [ main_hand off_hand ] type: weapon_1h_sword }
+!define QUEST_REWARD_1H_MACE { !QUEST_REWARD equipment_slots: [ main_hand off_hand ] type: weapon_1h_mace }
+!define QUEST_REWARD_1H_AXE { !QUEST_REWARD equipment_slots: [ main_hand off_hand ] type: weapon_1h_axe }
+!define QUEST_REWARD_1H_KNIFE { !QUEST_REWARD equipment_slots: [ main_hand off_hand ] type: weapon_1h_knife }
+!define QUEST_REWARD_2H_SWORD { !QUEST_REWARD equipment_slots: [ main_hand ] type: weapon_2h_sword }
+!define QUEST_REWARD_2H_MACE { !QUEST_REWARD equipment_slots: [ main_hand ] type: weapon_2h_mace }
+!define QUEST_REWARD_2H_AXE { !QUEST_REWARD equipment_slots: [ main_hand ] type: weapon_2h_axe }
+!define QUEST_REWARD_2H_STAFF { !QUEST_REWARD equipment_slots: [ main_hand ] type: weapon_2h_staff }
+!define QUEST_REWARD_SHIELD { !QUEST_REWARD equipment_slots: [ off_hand ] type: shield }
+!define QUEST_REWARD_BOW { !QUEST_REWARD equipment_slots: [ ranged ] type: ranged_bow }
+!define QUEST_REWARD_CROSSBOW { !QUEST_REWARD equipment_slots: [ ranged ] type: ranged_crossbow }
+!define QUEST_REWARD_OFFHAND { !QUEST_REWARD equipment_slots: [ off_hand ] }
+!define QUEST_REWARD_TRINKET { !QUEST_REWARD equipment_slots: [ trinket_1 trinket_2 ] }
+
+#####################################################
+# Boss drop item macros
+
+!define BOSS_DROP
+{
+	string: @_string
+	binds: when_picked_up
+	required_level: @_level
+	icon: @_icon
+	flags: [ dungeon_loot ]
+	
+	<exists _type> type: @_type
+	<exists _item_aura> aura: @_item_aura
+	<exists _loot_group> loot_groups: [ @_loot_group ]
+	<exists _budget_bias> budget_bias: @_budget_bias
+	<exists _weapon_cooldown> weapon_cooldown: @_weapon_cooldown
+
+	<exists _rarity> rarity: @_rarity
+	<!exists _rarity> rarity: uncommon		
+	
+	<exists _dexterity> stat_weight dexterity: @_dexterity
+	<exists _strength> stat_weight strength: @_strength
+	<exists _constitution> stat_weight constitution: @_constitution
+	<exists _spirit> stat_weight spirit: @_spirit
+	<exists _wisdom> stat_weight wisdom: @_wisdom
+	<exists _spell_damage> stat_weight spell_damage: @_spell_damage
+	<exists _healing> stat_weight healing: @_healing
+	<exists _attack_haste> stat_weight attack_haste: @_attack_haste
+	<exists _spell_haste> stat_weight spell_haste: @_spell_haste
+	<exists _health_per_5> stat_weight health_per_5: @_health_per_5
+	<exists _mana_per_5> stat_weight mana_per_5: @_mana_per_5
+	<exists _attack_power> stat_weight attack_power: @_attack_power
+	
+	<exists _parry> stat parry_chance: @_parry
+	<exists _dodge> stat dodge_chance: @_dodge
+	<exists _block> stat block_chance: @_block
+	<exists _phys_crit> stat phys_crit_chance: @_phys_crit
+	<exists _spell_crit> stat spell_crit_chance: @_spell_crit
+}
+
+!define BOSS_DROP_HEAD { !BOSS_DROP equipment_slots: [ head ] }
+!define BOSS_DROP_CHEST { !BOSS_DROP equipment_slots: [ chest ] }
+!define BOSS_DROP_LEGS { !BOSS_DROP equipment_slots: [ legs ] }
+!define BOSS_DROP_FEET { !BOSS_DROP equipment_slots: [ feet ] }
+!define BOSS_DROP_SHOULDERS { !BOSS_DROP equipment_slots: [ shoulders ] }
+!define BOSS_DROP_WRISTS { !BOSS_DROP equipment_slots: [ wrists ] }
+!define BOSS_DROP_WAIST { !BOSS_DROP equipment_slots: [ waist ] }
+!define BOSS_DROP_HANDS { !BOSS_DROP equipment_slots: [ hands ] }
+!define BOSS_DROP_BACK { !BOSS_DROP equipment_slots: [ back ] }
+!define BOSS_DROP_NECK { !BOSS_DROP equipment_slots: [ neck ] }
+!define BOSS_DROP_FINGER { !BOSS_DROP equipment_slots: [ finger_1 finger_2 ] flags: [ unique ] }
+!define BOSS_DROP_BAG { !BOSS_DROP equipment_slots: [ bag_1 bag_2 bag_3 ] }
+!define BOSS_DROP_1H_SWORD { !BOSS_DROP equipment_slots: [ main_hand off_hand ] type: weapon_1h_sword }
+!define BOSS_DROP_1H_MACE { !BOSS_DROP equipment_slots: [ main_hand off_hand ] type: weapon_1h_mace }
+!define BOSS_DROP_1H_AXE { !BOSS_DROP equipment_slots: [ main_hand off_hand ] type: weapon_1h_axe }
+!define BOSS_DROP_1H_KNIFE { !BOSS_DROP equipment_slots: [ main_hand off_hand ] type: weapon_1h_knife }
+!define BOSS_DROP_2H_SWORD { !BOSS_DROP equipment_slots: [ main_hand ] type: weapon_2h_sword }
+!define BOSS_DROP_2H_MACE { !BOSS_DROP equipment_slots: [ main_hand ] type: weapon_2h_mace }
+!define BOSS_DROP_2H_AXE { !BOSS_DROP equipment_slots: [ main_hand ] type: weapon_2h_axe }
+!define BOSS_DROP_2H_STAFF { !BOSS_DROP equipment_slots: [ main_hand ] type: weapon_2h_staff }
+!define BOSS_DROP_SHIELD { !BOSS_DROP equipment_slots: [ off_hand ] type: shield }
+!define BOSS_DROP_BOW { !BOSS_DROP equipment_slots: [ ranged ] type: ranged_bow }
+!define BOSS_DROP_CROSSBOW { !BOSS_DROP equipment_slots: [ ranged ] type: ranged_crossbow }
+!define BOSS_DROP_OFFHAND { !BOSS_DROP equipment_slots: [ off_hand ] }
+!define BOSS_DROP_TRINKET { !BOSS_DROP equipment_slots: [ trinket_1 trinket_2 ] flags: [ unique ] }
+
+#####################################################
+# Crafting
+
+!define BLACKSMITHING_CRAFT
+{
+	string: @_string
+	icon_from<item>: @_item
+	description_from<item>: @_item
+	cast_time: 20
+	flags: [ crafting ]	
+	states: [ default in_combat ]
+	consume_items: @_materials
+	produce_items: @_produce
+	required_profession<@_skill>: blacksmithing
+	requirement self<must_have_item>: { id: weapon_blacksmithing_hammer }
+		
+	<exists _requires_furnace and _requires_furnace> must_have_nearby_entity: furnace
+	<exists _requires_anvil and _requires_anvil> must_have_nearby_entity: anvil
+}
+
+!define BLACKSMITHING_LEARN
+{
+	string: @_string
+	description: @_description
+	flags: [ target_self item ]
+	cast_time: 20
+	icon: icon_scroll_1
+	cooldowns: [ global ]	
+	consume_items: @_consume_items
+	required_profession<@_skill>: blacksmithing
+	requirement self<must_not_have_profession_ability>: { id: @_craft_ability }
+	direct_effect learn_profession_ability:
+	{
+		profession: blacksmithing
+		ability: @_craft_ability
+	}
+}
+
+!define BLACKSMITHING_RECIPE
+{
+	type: miscellaneous
+	item_level: @_level
+	rarity: @_rarity
+	loot_groups: @_loot_groups  
+	icon: icon_scroll_1
+	string: @_string
+	use_ability: @_learn_ability
+	level_range: @_level_range
+}
+
+!define TAILORING_CRAFT
+{
+	string: @_string
+	icon_from<item>: @_item
+	description_from<item>: @_item
+	cast_time: 20
+	flags: [ crafting ]	
+	states: [ default in_combat ]
+	consume_items: @_materials
+	produce_items: @_produce
+	required_profession<@_skill>: tailoring
+}
+
+!define TAILORING_LEARN
+{
+	string: @_string
+	description: @_description
+	flags: [ target_self item ]
+	cast_time: 20
+	icon: icon_scroll_1
+	cooldowns: [ global ]	
+	consume_items: @_consume_items
+	required_profession<@_skill>: tailoring
+	requirement self<must_not_have_profession_ability>: { id: @_craft_ability }
+	direct_effect learn_profession_ability:
+	{
+		profession: tailoring
+		ability: @_craft_ability
+	}
+}
+
+!define TAILORING_RECIPE
+{
+	type: miscellaneous
+	item_level: @_level
+	rarity: @_rarity
+	loot_groups: @_loot_groups
+	icon: icon_scroll_1
+	string: @_string
+	use_ability: @_learn_ability
+	level_range: @_level_range
+}
+
+#####################################################
+# Void zone NPCs
+
+!define NPC_VOID_ZONE
+{
+	string: @_string
+
+	systems: 
+	[ 
+		combat 
+		npc 		
+	]
+		
+	components:
+	{
+		position: { }		
+		threat_target: { }
+		auras: { }
+		lootable: { }
+		visible_auras: { }
+		tag: { }
+		combat_public: 
+		{  
+			level: @_level
+			faction: @_faction
+			modifier not_pushable: {}
+			modifier not_targetable: {}
+			modifier hide_level: {}
+			<exists _elite and _elite> modifier elite: {}
+		}			
+		combat_private<static>:
+		{
+			physical_critical_strike_chance: 5
+			dodge_chance: 5
+			parry_chance: 5
+			miss_chance: 5
+			block_chance: 5		
+		}
+		npc: 
+		{ 			
+			state in_combat:
+			{			
+				abilities: @_abilities							
+				<exists _despawn_on_leave_combat and _despawn_on_leave_combat> despawn_on_leave: true
+			}	
+			
+			blocking: false
+			can_move: false
+			can_die: false
+
+			<exists _large> large: @_large			
+			<exists _encounter> encounter: @_encounter
+			<exists _inactive_encounter_despawn> inactive_encounter_despawn: @_inactive_encounter_despawn
+		}		
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ states: [ default in_combat spawning evading dead ] frames: @_sprites z_offset: -2 frame_delay: 120 random_start_frame: true }			
+			]					
+		}				
+	}	
 }

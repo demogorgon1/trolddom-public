@@ -203,7 +203,7 @@ namespace tpublic
 				RandomRoomConnector(
 					const SourceNode* aSource)
 				{
-					m_mapSegmentConnectorId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_SEGMENT_CONNECTOR, aSource->m_name.c_str());
+					m_mapSegmentConnectorId = aSource->m_sourceContext->m_persistentIdTable->GetId(aSource->m_debugInfo, DataType::ID_MAP_SEGMENT_CONNECTOR, aSource->m_name.c_str());
 
 					aSource->GetObject()->ForEachChild([&](
 						const SourceNode* aChild)
@@ -685,7 +685,7 @@ namespace tpublic
 						else if (aChild->m_tag == "tile_map_modifier")
 							m_tileMapModifiers.push_back(std::make_unique<TileMapModifier>(aChild));
 						else if(aChild->m_name == "underlying_tile")
-							m_underlyingTileSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
+							m_underlyingTileSpriteId = aChild->GetId(DataType::ID_SPRITE);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}

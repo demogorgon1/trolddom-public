@@ -1,0 +1,120 @@
+dialogue_screen .fernwick_bar_patron_2_dialogue:
+{
+	text: 
+	[	
+		"They took over my house! Someone should teach those criminals a lesson."
+	]		
+	
+	options:
+	[
+		{ quest: .fernwick_bar_patron_2 }
+	]
+}
+
+dialogue_root .fernwick_bar_patron_2_dialogue:
+{
+	.fernwick_bar_patron_2_dialogue: { }
+}
+
+entity thalvaron_fernwick_bar_patron_2: !NPC
+{
+	_string: "Elizabeth Fikwaul"
+	_dialogue_root: .fernwick_bar_patron_2_dialogue	
+	_sprite: woman_1
+	_sprite_dead: woman_1_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .fernwick_bar_patron_2_quest_item: { }
+
+item .fernwick_bar_patron_2_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .fernwick_bar_patron_2_quest_item ]		
+	string: "Elizabeth's Book" 
+	icon: icon_book
+	stack: 1
+	item_level: 11
+	quest: .fernwick_bar_patron_2
+	flags: [ not_sellable unique ]
+}
+
+loot_table .fernwick_bar_patron_2_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .fernwick_bar_patron_2_quest_item }			
+		}		
+	]
+}
+       
+entity thalvaron_fernwick_bar_patron_2_quest_item:
+{
+	string: "Elizabeth's Chest"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ chest_2 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .fernwick_bar_patron_2_quest_item
+			verb: open
+			range: 1 
+			despawn: true 			
+			level: 11
+			required_quest: .fernwick_bar_patron_2
+		}		
+	}
+}
+
+objective .fernwick_bar_patron_2:
+{
+	string: "Elizabeth's Book"
+	collect_items: { item: .fernwick_bar_patron_2_quest_item count: 1 }
+}
+
+{
+	${ _level: 11 }
+	item .fernwick_bar_patron_2_a: !QUEST_REWARD_2H_STAFF{ _string: "Elizabeth's Walking Stick" _icon: icon_staff_4 _spirit: 1 _wisdom: 1 _weapon_cooldown: 24 }
+	item .fernwick_bar_patron_2_b: !QUEST_REWARD_FEET{ _string: "Quick Slippers" _icon: icon_slippers_2 _dexterity: 1 _constitution: 2 _type: armor_cloth }
+}
+
+quest .fernwick_bar_patron_2:
+{
+	string: "Something To Read"
+
+	text:
+	[
+		"Go retrieve Elizabeth's book from the house on the other side of the stream."
+	]
+	
+	description: 
+	[
+		"They've evacuated everyone from the other side of the stream until they get the rebel situation under control. My house is just on the other side! I understand that it's for my own safety,"
+		"but I didn't even get a chance to grab something to read before I had to leave! Can you please go grab the book I'm currently reading? It's in the chest in my bedroom."
+	]
+
+	progress:
+	[
+		"Did you find it?"
+	]
+	
+	completion:
+	[
+		"Thank you!"
+	]
+
+	objectives: [ .fernwick_bar_patron_2 ]
+	level: 11
+	reward_one_item: [ .fernwick_bar_patron_2_a .fernwick_bar_patron_2_b ]
+}

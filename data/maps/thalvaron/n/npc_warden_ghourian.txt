@@ -1,0 +1,117 @@
+dialogue_screen .warden_ghourian_dialogue:
+{
+	text: 
+	[	
+		"I'm keeping watch over this pass."
+	]		
+	
+	options:
+	[
+		{ quest: .warden_ghourian_1 }
+		{ quest<offer_only>: .warden_ghourian_2 }
+	]
+}
+
+dialogue_root .warden_ghourian_dialogue:
+{
+	.warden_ghourian_dialogue: { }
+}
+
+entity thalvaron_warden_ghourian: !NPC
+{
+	_string: "Warden Ghourian"
+	_dialogue_root: .warden_ghourian_dialogue	
+	_sprite: elf_11
+	_sprite_dead: elf_11_dead
+	_level: 20
+	_faction: children_of_the_moon		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .warden_ghourian_1:
+{
+	string: "Skullforge Orcs Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_gorge_orc_a thalvaron_gorge_orc_b thalvaron_gorge_orc_c thalvaron_gorge_orc_d thalvaron_gorge_orc_e ]
+		count: 8
+	}
+}
+
+quest .warden_ghourian_1:
+{
+	string: "Skullforge Intrusion"
+
+	text:
+	[
+		"Push back the Skullforge intrusion."
+	]
+	
+	description: 
+	[
+		"Further south in the gorge I've spotted a heavy increase in orc activities. They look like they're from the Skullforge clan. It's a long time since we've had any encounters with these vile creatures,"
+		"so the situation is quite alarming. If you want to make yourself useful, go fight them."
+	]
+
+	progress:
+	[
+		"Back already?"
+	]
+	
+	completion:
+	[
+		"Excellent job!"
+	]
+
+	objectives: [ .warden_ghourian_1 ]
+	level: 18
+	next_quest: .warden_ghourian_2	
+}
+
+############################################################
+# Quest 2
+
+{
+	${ _level: 18 }
+  	item .warden_ghourian_2_a: !QUEST_REWARD_HANDS{ _string: "Orcbane Grips" _icon: icon_mail_gloves_1 _strength: 1 _dexterity: 1 _type: armor_mail }
+  	item .warden_ghourian_2_b: !QUEST_REWARD_HANDS{ _string: "Soothsayer's Gloves" _icon: icon_gloves_3 _wisdom: 1 _healing: 2 _type: armor_cloth }
+}	 
+
+quest .warden_ghourian_2:
+{
+	string: "Reporting the Orcs"
+
+	text:
+	[
+		"Report back to Warden Moonwatcher in town."
+	]
+	
+	description: 
+	[
+		"I'll stay here keeping watch. Can you go back to town and report the orc activity to Warden Moonwatcher? He will surely give you something for your trouble."
+	]
+
+	progress:
+	[
+		"Back already?"
+	]
+	
+	completion:
+	[
+		"Excellent job!"
+	]
+
+	level: 18
+	prerequisites: [ .warden_ghourian_1 ]
+	reward_xp_multiplier: 0.2
+	reward_cash_multiplier: 0.2
+	reward_one_item: [ .warden_ghourian_2_a .warden_ghourian_2_b ]
+}

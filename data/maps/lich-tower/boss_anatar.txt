@@ -1,0 +1,150 @@
+############################################################
+# Loot
+
+loot_group .anatar: {}
+
+loot_table .anatar:
+{
+	slots:
+	[
+		{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
+		  map_message lich_tower: "Anatar will not drop Token of Victory for {}." } } }
+		{ possibility: { loot_group: .anatar  } }			
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+{
+	${
+		_rarity: rare
+		_level: 19
+		_loot_group: .anatar
+	}
+	
+	item lich_tower_12: !BOSS_DROP_1H_KNIFE
+	{
+		_string: "Soulslicer"
+		_icon: icon_sword_9
+		_spell_damage: 3
+		_wisdom: 2
+		_constitution: 1
+		_weapon_cooldown: 18
+	}
+	
+	item lich_tower_13: !BOSS_DROP_FEET
+	{
+		_string: "Dark Magic Slippers"
+		_type: armor_cloth
+		_icon: icon_slippers_1
+		_constitution: 1
+		_wisdom: 2
+		_spell_damage: 1
+		_budget_bias: -10
+		_spell_crit: 1
+	}
+	
+	item lich_tower_14: !BOSS_DROP_SHOULDERS
+	{
+		_string: "Dark Mithril Pauldrons"
+		_type: armor_plate
+		_icon: icon_shoulders_8
+		_constitution: 1
+		_strength: 1
+		_budget_bias: -10
+		_phys_crit: 1
+	}
+	
+	item lich_tower_15: !BOSS_DROP_FINGER
+	{
+		_string: "Dread Ring"
+		_icon: icon_ring_8
+		_constitution: 1
+		_strength: 1
+		_dexterity: 1
+	}
+	
+	item lich_tower_16: !BOSS_DROP_FINGER
+	{
+		_string: "Corrupted Soothsayer's Ring"
+		_icon: icon_ring_1
+		_wisdom: 3
+		_healing: 2
+		_mana_per_5: 1
+	}
+	
+}
+
+############################################################
+# Boss
+
+zone .anatar:
+{
+}
+
+encounter .anatar:
+{
+	main_entities: [ lich_tower_anatar ]	
+}
+
+entity lich_tower_anatar: !NPC 
+{ 
+	_string: "Anatar" 
+	_level: 19
+	_elite: true
+	_faction: dark_elves 
+	_sprite: dark_elf_1 
+	_sprite_dead: dark_elf_1_dead 
+	_weapon_damage: 1.75 
+	_resource_health: 6
+	_loot_table: .anatar
+	_creature_type: humanoid
+	_encounter: .anatar
+	_zone: .anatar
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+
+	_abilities: 
+	[
+		{
+			target: random_player
+			id: $ability (npc_chain_lightning)
+			{
+				cooldown: $cooldown { duration: 90 }
+			}
+		}
+		
+		{
+			id: npc_attack
+		}
+	]	
+	
+	_in_combat_barks:
+	[
+		{ type: say text: "Vermin!" flags: [ no_chat_bubble ] }
+	]			
+	
+	_dead_barks:
+	[
+		{ type: say text: "I dedicate this death to... my master." flags: [ no_chat_bubble ] }
+	]	
+}
+
+map_trigger .anatar_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .anatar:
+{
+	entity lich_tower_anatar: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .anatar_killed
+		}
+	}
+}

@@ -13,8 +13,20 @@ ${
 		_minion_modes: [ .minor_demon_aggressive .minor_demon_defensive .minor_demon_passive ]
 		_default_minion_mode: .minor_demon_defensive
 		_commands: [ move attack ]
-		_abilities: [ { id: .minor_demon_attack flags: [ auto ] } ]
-		_ability_prio: [ .minor_demon_attack ]
+		
+		_abilities: 
+		[ 
+			{ 
+				id: .minor_demon_attack flags: [ auto ] 
+			} 
+			
+			{ 
+				id: .minor_demon_interrupt flags: [ auto interrupt ] 
+				self_must_have_aura: demonic_infusion
+			} 
+		]
+		
+		_ability_prio: [ .minor_demon_interrupt .minor_demon_attack ]
 		_class_minion: true
 		_store_combat_data: true
 	}
@@ -74,6 +86,33 @@ ${
 			damage_type: physical			
 			function: { expression: x x: weapon }		
 		}
+	}	
+	
+	cooldown .minor_demon_interrupt:
+	{
+		duration: 100
+	}
+		
+	ability .minor_demon_interrupt:
+	{
+		string: "Interrupt"
+		description: "Interrupts target spell casting."
+		flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+		states: [ default in_combat ]
+		delay: 3
+		icon: icon_kick
+		cooldowns: [ .minor_demon_interrupt ]
+		
+		direct_effect interrupt:
+		{	
+			lockout_ticks: 40
+		}
+		
+		direct_effect threat:
+		{
+			apply_to: source
+			add: 20
+		}	
 	}	
 	
 	entity minor_demon: !MINION{}
@@ -190,10 +229,10 @@ ${
 	
 		direct_effect damage:
 		{
-			must_not_have_ability_modifiers: [ demon_mastery_1 demon_mastery_2 demon_mastery_3 ]
+			must_not_have_ability_modifiers: [ demon_mastery_1 demon_mastery_2 demon_mastery_3 demon_mastery_4 demon_mastery_5 ]
 			flags: [ can_be_critical is_magical ]
 			damage_type: fire
-			function: { expression: a a: [ [ 1 18 ] [ 10 36 ] [ 10 72 ] ] }
+			function: { expression: a a: [ [ 1 18 ] [ 10 36 ] [ 20 72 ] ] }
 		}
 		
 		direct_effect damage:
@@ -201,7 +240,7 @@ ${
 			must_have_ability_modifier: demon_mastery_1
 			flags: [ can_be_critical is_magical ]
 			damage_type: fire
-			function: { expression: a a: [ [ 1 20 ] [ 10 40 ] [ 20 80 ] ] }
+			function: { expression: a a: [ [ 1 19 ] [ 10 38 ] [ 20 76 ] ] }
 		}
 
 		direct_effect damage:
@@ -209,7 +248,7 @@ ${
 			must_have_ability_modifier: demon_mastery_2
 			flags: [ can_be_critical is_magical ]
 			damage_type: fire
-			function: { expression: a a: [ [ 1 22 ] [ 10 44 ] [ 20 88 ] ] }
+			function: { expression: a a: [ [ 1 21 ] [ 10 42 ] [ 20 84 ] ] }
 		}
 
 		direct_effect damage:
@@ -217,7 +256,23 @@ ${
 			must_have_ability_modifier: demon_mastery_3
 			flags: [ can_be_critical is_magical ]
 			damage_type: fire
+			function: { expression: a a: [ [ 1 22 ] [ 10 44 ] [ 20 88 ] ] }
+		}		
+		
+		direct_effect damage:
+		{
+			must_have_ability_modifier: demon_mastery_4
+			flags: [ can_be_critical is_magical ]
+			damage_type: fire
 			function: { expression: a a: [ [ 1 24 ] [ 10 48 ] [ 20 96 ] ] }
+		}		
+
+			direct_effect damage:
+		{
+			must_have_ability_modifier: demon_mastery_5
+			flags: [ can_be_critical is_magical ]
+			damage_type: fire
+			function: { expression: a a: [ [ 1 25 ] [ 10 50 ] [ 20 100 ] ] }
 		}		
 	}	
 		
@@ -476,7 +531,7 @@ ${
 		direct_effect apply_aura:
 		{
 			aura: .black_beast_growl
-			target_self: true
+			flags: [ self ]
 		}		
 	}
 

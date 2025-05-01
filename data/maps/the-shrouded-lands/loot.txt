@@ -1,0 +1,499 @@
+loot_table .npc:
+{
+	slots:
+	[
+		!WORLD_DROPS{}	
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+item shroud_crystal:
+{
+	item_level: 20
+	icon: icon_crystal_1
+	string: "Shroud Crystal"
+	stack: 40
+	flags: [ not_sellable ]
+	binds: when_picked_up
+	loot_groups: [ shroud_crystal ]
+	level_range: [ 1 20 ]
+}
+
+loot_group .holy_token: {}
+
+item holy_token:
+{
+	item_level: 20
+	icon: icon_holy_token_1
+	string: "Holy Token"
+	stack: 40
+	flags: [ not_sellable kill_contribution_loot ]
+	binds: when_picked_up
+	loot_groups: [ .holy_token ]
+	level_range: [ 1 22 ]
+	rarity: uncommon
+}
+
+loot_group .unholy_token: {}
+
+item unholy_token:
+{
+	item_level: 20
+	icon: icon_unholy_token_1
+	string: "Unholy Token"
+	stack: 40
+	flags: [ not_sellable kill_contribution_loot ]
+	binds: when_picked_up
+	loot_groups: [ .unholy_token ]
+	level_range: [ 1 22 ]
+	rarity: uncommon
+}
+
+loot_group .the_shrouded_lands_lizard_tail: {}
+
+item the_shrouded_lands_lizard_tail:
+{
+	icon: icon_worm_1
+	item_level: 20
+	loot_groups: [ .the_shrouded_lands_lizard_tail ]
+	flags: [ not_sellable ]
+	stack: 5
+	string: "Shroud Lizard Tail"
+}
+
+############################################################
+# Basic holy token items
+
+item holy_back_1:
+{
+	equipment_slots: [ back ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 20
+	icon: icon_cape_1
+	rarity: rare
+	string: "Cloak of the Holy Defender"
+	stat_weight constitution: 2
+	stat_weight strength: 1
+}
+
+item holy_back_2:
+{
+	equipment_slots: [ back ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 20
+	icon: icon_cape_3
+	rarity: rare
+	string: "Cape of the Light"
+	stat_weight constitution: 2
+	stat_weight wisdom: 1
+}
+
+item holy_ring_1:
+{
+	equipment_slots: [ finger_1 finger_2 ]
+	flags: [ unique ]
+	binds: when_picked_up
+	required_level: 20
+	icon: icon_ring_7
+	rarity: rare
+	string: "Ring of the Holy Defender"
+	stat_weight constitution: 3
+	stat_weight strength: 2
+	stat_weight dexterity: 1
+}
+
+item holy_ring_2:
+{
+	equipment_slots: [ finger_1 finger_2 ]
+	flags: [ unique ]
+	binds: when_picked_up
+	required_level: 20
+	icon: icon_ring_2
+	rarity: rare
+	string: "Ring of the Light"
+	stat_weight constitution: 2
+	stat_weight wisdom: 1
+	stat_weight spell_damage: 1
+}
+
+item holy_chest_1:
+{
+	equipment_slots: [ chest ]
+	binds: when_picked_up
+	type: armor_plate
+	required_level: 20
+	icon: icon_plate_chest_3
+	rarity: rare
+	string: "Armor of the Holy Defender"
+	budget_bias: -10
+	stat_weight constitution: 2
+	stat_weight strength: 1
+	stat phys_crit_chance: 1
+}
+
+item holy_chest_2:
+{
+	equipment_slots: [ chest ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 20
+	icon: icon_robe_4
+	rarity: rare
+	string: "Robe of the Light"
+	budget_bias: -10
+	stat_weight constitution: 2
+	stat_weight wisdom: 1
+	stat spell_crit_chance: 1
+}
+
+item holy_legs_1:
+{
+	equipment_slots: [ legs ]
+	binds: when_picked_up
+	type: armor_plate
+	required_level: 20
+	icon: icon_head_7
+	rarity: rare
+	string: "Legplates of the Holy Defender"
+	budget_bias: -10
+	stat_weight constitution: 3
+	stat_weight strength: 2
+	stat_weight dexterity: 1
+	stat phys_crit_chance: 1
+}
+
+item holy_legs_2:
+{
+	equipment_slots: [ legs ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 20
+	icon: icon_pants_2
+	rarity: rare
+	string: "Pants of the Light"
+	stat_weight constitution: 3
+	stat_weight wisdom: 1
+	stat_weight spell_damage: 2
+}
+
+item holy_shoulders_1:
+{
+	equipment_slots: [ shoulders ]
+	binds: when_picked_up
+	type: armor_plate
+	required_level: 20
+	icon: icon_shoulders_2
+	rarity: rare
+	string: "Shoulderguards of the Holy Defender"
+	stat_weight constitution: 3
+	stat_weight strength: 2
+	stat_weight dexterity: 1
+}
+
+item holy_shoulders_2:
+{
+	equipment_slots: [ shoulders ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 20
+	icon: icon_shoulders_1
+	rarity: rare
+	string: "Pauldrons of the Light"
+	stat_weight constitution: 3
+	stat_weight wisdom: 2
+	stat_weight spell_damage: 1
+}
+
+item holy_head_1:
+{
+	equipment_slots: [ head ]
+	binds: when_picked_up
+	type: armor_plate
+	required_level: 20
+	icon: icon_helmet_4
+	rarity: rare
+	string: "Visor of the Holy Defender"
+	stat_weight constitution: 1
+	stat_weight strength: 3
+	stat_weight dexterity: 2
+}
+
+item holy_head_2:
+{
+	equipment_slots: [ head ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 20
+	icon: icon_head_11
+	rarity: rare
+	string: "Cowl of the Light"
+	budget_bias: -10
+	stat_weight constitution: 1
+	stat_weight wisdom: 2
+	stat spell_crit_chance: 1
+}
+
+############################################################
+# Basic unholy token items
+
+item unholy_back_1:
+{
+	equipment_slots: [ back ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 20
+	icon: icon_cape_1
+	rarity: rare
+	string: "Cloak of the Underworld"
+	stat_weight constitution: 2
+	stat_weight strength: 1
+}
+
+item unholy_back_2:
+{
+	equipment_slots: [ back ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 20
+	icon: icon_cape_3
+	rarity: rare
+	string: "Cape of the Wise Slayer"
+	stat_weight constitution: 2
+	stat_weight wisdom: 1
+}
+
+item unholy_ring_1:
+{
+	equipment_slots: [ finger_1 finger_2 ]
+	flags: [ unique ]
+	binds: when_picked_up
+	required_level: 20
+	icon: icon_ring_7
+	rarity: rare
+	string: "Underworld Loop"
+	stat_weight constitution: 3
+	stat_weight strength: 2
+	stat_weight dexterity: 1
+}
+
+item unholy_ring_2:
+{
+	equipment_slots: [ finger_1 finger_2 ]
+	flags: [ unique ]
+	binds: when_picked_up
+	required_level: 20
+	icon: icon_ring_2
+	rarity: rare
+	string: "Ring of the Dark Wizard"
+	stat_weight constitution: 2
+	stat_weight wisdom: 1
+	stat_weight spell_damage: 1
+}
+
+item unholy_chest_1:
+{
+	equipment_slots: [ chest ]
+	binds: when_picked_up
+	type: armor_plate
+	required_level: 20
+	icon: icon_plate_chest_3
+	rarity: rare
+	string: "Unholy Chestplate"
+	budget_bias: -10
+	stat_weight constitution: 2
+	stat_weight strength: 1
+	stat phys_crit_chance: 1
+}
+
+item unholy_chest_2:
+{
+	equipment_slots: [ chest ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 20
+	icon: icon_robe_4
+	rarity: rare
+	string: "Spellcleaver's Robe"
+	budget_bias: -10
+	stat_weight constitution: 2
+	stat_weight wisdom: 1
+	stat spell_crit_chance: 1
+}
+
+item unholy_legs_1:
+{
+	equipment_slots: [ legs ]
+	binds: when_picked_up
+	type: armor_plate
+	required_level: 20
+	icon: icon_head_7
+	rarity: rare
+	string: "Dark Grieves"
+	budget_bias: -10
+	stat_weight constitution: 3
+	stat_weight strength: 2
+	stat_weight dexterity: 1
+	stat phys_crit_chance: 1
+}
+
+item unholy_legs_2:
+{
+	equipment_slots: [ legs ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 20
+	icon: icon_pants_2
+	rarity: rare
+	string: "Pants of Darkness"
+	stat_weight constitution: 3
+	stat_weight wisdom: 1
+	stat_weight spell_damage: 2
+}
+
+item unholy_shoulders_1:
+{
+	equipment_slots: [ shoulders ]
+	binds: when_picked_up
+	type: armor_plate
+	required_level: 20
+	icon: icon_shoulders_2
+	rarity: rare
+	string: "Pauldrons of Unholy Power"
+	stat_weight constitution: 3
+	stat_weight strength: 2
+	stat_weight dexterity: 1
+}
+
+item unholy_shoulders_2:
+{
+	equipment_slots: [ shoulders ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 20
+	icon: icon_shoulders_1
+	rarity: rare
+	string: "Shoulders of Dark Whispers"
+	stat_weight constitution: 3
+	stat_weight wisdom: 2
+	stat_weight spell_damage: 1
+}
+
+item unholy_head_1:
+{
+	equipment_slots: [ head ]
+	binds: when_picked_up
+	type: armor_plate
+	required_level: 20
+	icon: icon_helmet_4
+	rarity: rare
+	string: "Visor of the Unholy Defender"
+	stat_weight constitution: 1
+	stat_weight strength: 3
+	stat_weight dexterity: 2
+}
+
+item unholy_head_2:
+{
+	equipment_slots: [ head ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 20
+	icon: icon_head_11
+	rarity: rare
+	string: "Mask of Dark Wisdom"
+	budget_bias: -10
+	stat_weight constitution: 1
+	stat_weight wisdom: 2
+	stat spell_crit_chance: 1
+}
+
+############################################################
+# Epic trinkets
+
+!define local EPIC_TRINKET_AURA
+{
+	string: @_string
+	icon: @_icon
+	type: buff
+	duration: 150
+	flags: [ unique magic ]
+	particle_system: @_id
+	stat_modifiers:
+	{
+		attack_haste: { add: 30 } 
+		spell_haste: { add: 30 } 
+	}
+}
+
+!define local EPIC_TRINKET_ABILITY
+{
+	string: @_string
+	description: "Restores 220 health and increases your haste for 15 seconds."
+	cooldowns: [ global @_id ]
+	icon: @_icon
+	flags: [ target_self item ]
+	requirement self<must_have_item_equipped>: @_id
+	direct_effect apply_aura: { aura: @_id }
+	direct_effect heal: { function: 220 }
+}
+
+!define local EPIC_TRINKET_ITEM
+{
+	equipment_slots: [ trinket_1 trinket_2 ]
+	binds: when_picked_up
+	flags: [ unique ]
+	required_level: 20
+	icon: @_icon
+	rarity: epic
+	string: @_string
+	use_ability: @_id		
+}
+
+!define local EPIC_TRINKET_PARTICLE_SYSTEM
+{
+	particle:
+	{
+		sprites: @_frames
+		flags: [ attached ]
+		sprite_interval: 150
+		count: 1
+		scale: 1
+		alpha: 0.85
+		fade_in: 500
+		fade_out: 500
+		offset_x: 0.5
+		offset_y: 0.5	
+	}
+}
+
+{
+	${
+		_string: "Claw of the Putrid Beast"
+		_id: unholy_trinket_1	
+		_icon: icon_claw
+		_frames: [ effect_unholy_wings_0 effect_unholy_wings_1 effect_unholy_wings_2 effect_unholy_wings_1 ]
+	}
+	
+	cooldown unholy_trinket_1: { duration: 2400 }
+	aura unholy_trinket_1: !EPIC_TRINKET_AURA {}
+	ability unholy_trinket_1: !EPIC_TRINKET_ABILITY {}
+	item unholy_trinket_1: !EPIC_TRINKET_ITEM {}
+	particle_system unholy_trinket_1: !EPIC_TRINKET_PARTICLE_SYSTEM{}	
+}
+
+{
+	${
+		_string: "Vial of Light"
+		_id: holy_trinket_1	
+		_icon: icon_vial_1
+		_frames: [ effect_holy_wings_0 effect_holy_wings_1 effect_holy_wings_2 effect_holy_wings_1 ]
+	}
+	
+	cooldown holy_trinket_1: { duration: 2400 }
+	aura holy_trinket_1: !EPIC_TRINKET_AURA {}
+	ability holy_trinket_1: !EPIC_TRINKET_ABILITY {}
+	item holy_trinket_1: !EPIC_TRINKET_ITEM {}	
+	particle_system holy_trinket_1: !EPIC_TRINKET_PARTICLE_SYSTEM{}	
+}

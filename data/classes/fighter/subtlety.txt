@@ -1,7 +1,7 @@
 talent_tree fighter_subtlety:
 {
 	string: "Subtlety"
-	description: "Provide sustained damage over time capabilities."	
+	description: "Attack from the shadows."	
 	icon: icon_fighter_subtlety
 	
 	map_palette:
@@ -13,6 +13,9 @@ talent_tree fighter_subtlety:
 		talent fighter_subtlety_hemorrhage: "E"
 		talent fighter_subtlety_envenom: "F"
 		talent fighter_subtlety_poison_bomb: "G"
+		talent fighter_subtlety_stealth: "H"
+		talent fighter_subtlety_one_handed_weapon_mastery: "I"
+		talent fighter_subtlety_improved_poison_bomb: "J"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_left_arrow: "l"
 		sprite talent_tree_down: "|"
@@ -20,12 +23,176 @@ talent_tree fighter_subtlety:
 	
 	map:
 	[
-		"..A.B.."
-		"....d.."
-		"DlC.E.F"
-		"......d"
-		"......G"
+		"..A.B...."
+		"....d...."
+		"DlC.E.G.F"
+		"|.....d.."
+		"|.I...J.."
+		"d........"
+		"H........"
 	]	
+}
+
+###############################################################################
+# Improved Poison Bomb
+
+talent fighter_subtlety_improved_poison_bomb:
+{
+	string: "Improved Poison Bomb"
+	icon: icon_improved_poison_bomb
+	prerequisites: [ fighter_subtlety_poison_bomb ]	
+	talent_tree_points_required: 10
+	points:
+	[
+		{ ability_modifier: fighter_subtlety_improved_poison_bomb_1 }
+		{ ability_modifier: fighter_subtlety_improved_poison_bomb_2 }
+	]
+}
+
+ability_modifier fighter_subtlety_improved_poison_bomb_1:
+{	
+	description: "Increases duration of Poison Bomb by 2 second."
+	ability: poison_bomb
+	modify_aura_update_count: 1
+}
+
+ability_modifier fighter_subtlety_improved_poison_bomb_2:
+{	
+	description: "Increases duration of Poison Bomb by 4 second."
+	ability: poison_bomb
+	modify_aura_update_count: 2
+}
+
+###############################################################################
+# One-Handed Weapon Mastery
+
+talent fighter_subtlety_one_handed_weapon_mastery:
+{
+	string: "One-Handed Weapon Mastery"
+	icon: icon_one_handed_weapon_mastery
+	prerequisites: [ ]	
+	talent_tree_points_required: 10
+	points:
+	[
+		{ aura: fighter_subtlety_one_handed_weapon_mastery_1 }
+		{ aura: fighter_subtlety_one_handed_weapon_mastery_2 }
+		{ aura: fighter_subtlety_one_handed_weapon_mastery_3 }
+		{ aura: fighter_subtlety_one_handed_weapon_mastery_4 }
+		{ aura: fighter_subtlety_one_handed_weapon_mastery_5 }
+	]
+}
+
+aura fighter_subtlety_one_handed_weapon_mastery_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your damage done with one-handed weapons by 2%."
+	aura_effect damage_output_modifier:
+	{
+		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
+		multiplier: 1.02
+	}
+}
+
+aura fighter_subtlety_one_handed_weapon_mastery_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your damage done with one-handed weapons by 4%."
+	aura_effect damage_output_modifier:
+	{
+		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
+		multiplier: 1.04
+	}
+}
+
+aura fighter_subtlety_one_handed_weapon_mastery_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your damage done with one-handed weapons by 6%."
+	aura_effect damage_output_modifier:
+	{
+		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
+		multiplier: 1.06
+	}
+}
+
+aura fighter_subtlety_one_handed_weapon_mastery_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your damage done with one-handed weapons by 8%."
+	aura_effect damage_output_modifier:
+	{
+		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
+		multiplier: 1.08
+	}
+}
+
+aura fighter_subtlety_one_handed_weapon_mastery_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your damage done with one-handed weapons by 10%."
+	aura_effect damage_output_modifier:
+	{
+		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
+		multiplier: 1.10
+	}
+}
+
+###############################################################################
+# Stealth
+
+talent fighter_subtlety_stealth:
+{
+	string: "Stealth"
+	icon: icon_stealth
+	prerequisites: [ fighter_subtlety_smoke_bomb ]	
+	talent_tree_points_required: 15
+	points:
+	[
+		{ ability: stealth }
+	]
+}
+
+aura stealth:
+{
+	string: "Stealth"
+	description: "Non-allies are unlikely to notice you. Stay out of open areas to reduce likelihood of detection."
+	type: buff
+	icon: icon_stealth
+	flags: [ unique indefinite cancel_on_damage no_source_needed ]
+	
+	aura_effect stealth: 
+	{
+		flags: [ cancel_aura_on_fade ] 
+		update_count: indefinite
+	}
+	
+	aura_effect move_speed_modifier:
+	{
+		move_speed: slow
+	}
+}
+
+ability stealth:
+{
+	string: "Stealth"
+	description: "Toggles stealth. When stealthed non-allies are unlikely to notice you."
+	cooldowns: [ global ]
+	flags: [ target_self ]
+	states: [ default in_combat ]
+	icon: icon_stealth
+	delay: 3
+	talent_tree: fighter_subtlety
+	toggle_aura: stealth
+
+	direct_effect apply_aura:
+	{
+		aura: stealth
+	}	
 }
 
 ###############################################################################
@@ -35,8 +202,8 @@ talent fighter_subtlety_poison_bomb:
 {
 	string: "Poison Bomb"
 	icon: icon_poison_bomb
-	prerequisites: [ fighter_subtlety_envenom ]	
-	talent_tree_points_required: 6
+	prerequisites: [ ]	
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability: poison_bomb }
@@ -45,7 +212,7 @@ talent fighter_subtlety_poison_bomb:
 
 cooldown poison_bomb:
 {
-	duration: 100
+	duration: 200
 }
 
 ability poison_bomb_tick:
@@ -69,7 +236,7 @@ aura poison_bomb:
 	type: debuff
 	icon: icon_poison_bomb
 	duration: based_on_effects
-	flags: [ unique ]
+	flags: [ unique poison ]
 	
 	aura_effect repeat: 
 	{ 
@@ -128,7 +295,7 @@ talent fighter_subtlety_smoke_bomb:
 	string: "Smoke Bomb"
 	icon: icon_smoke
 	prerequisites: [ fighter_subtlety_bypass ]	
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability: smoke_bomb }
@@ -165,7 +332,7 @@ talent fighter_subtlety_bypass:
 	string: "Bypass"
 	icon: icon_bypass
 	prerequisites: [ ]	
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability: bypass }
@@ -206,6 +373,8 @@ talent fighter_subtlety_agility:
 		{ aura: fighter_subtlety_agility_1 }
 		{ aura: fighter_subtlety_agility_2 }
 		{ aura: fighter_subtlety_agility_3 }
+		{ aura: fighter_subtlety_agility_4 }
+		{ aura: fighter_subtlety_agility_5 }
 	]
 }
 
@@ -231,6 +400,22 @@ aura fighter_subtlety_agility_3:
 	type: hidden
 	description: "Increases your dexterity by 6%."
 	stat_modifiers: { dexterity: { add_percent: 6 } }
+}
+
+aura fighter_subtlety_agility_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your dexterity by 8%."
+	stat_modifiers: { dexterity: { add_percent: 8 } }
+}
+
+aura fighter_subtlety_agility_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your dexterity by 10%."
+	stat_modifiers: { dexterity: { add_percent: 10 } }
 }
 
 ###############################################################################
@@ -277,14 +462,40 @@ talent fighter_subtlety_hemorrhage:
 	string: "Hemorrhage"
 	icon: icon_stuff
 	prerequisites: [ fighter_subtlety_improved_rend ]
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
-		{ aura: fighter_subtlety_hemorrhage }
+		{ aura: fighter_subtlety_hemorrhage_1 }
+		{ aura: fighter_subtlety_hemorrhage_2 }
+		{ aura: fighter_subtlety_hemorrhage_3 }
 	]
 }
 
-aura fighter_subtlety_hemorrhage:
+aura fighter_subtlety_hemorrhage_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases damage done by your bleed effects by 10%."
+	aura_effect damage_output_modifier:
+	{
+		type_mask: [ bleed ]
+		multiplier: 1.1
+	}
+}
+
+aura fighter_subtlety_hemorrhage_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases damage done by your bleed effects by 20%."
+	aura_effect damage_output_modifier:
+	{
+		type_mask: [ bleed ]
+		multiplier: 1.2
+	}
+}
+
+aura fighter_subtlety_hemorrhage_3:
 {
 	flags: [ persist_in_death ]
 	type: hidden
@@ -303,7 +514,7 @@ talent fighter_subtlety_envenom:
 {
 	string: "Envenom"
 	icon: icon_envenom
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability: envenom }
@@ -325,7 +536,7 @@ ability envenom_tick:
 	direct_effect damage:
 	{
 		damage_type: poison
-		function: { expression: a_mul_x_plus_b x: attack_power a: 0.07 b: [ [ 1 5 ] [ 10 10 ] [ 20 20 ] ] }				
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.07 b: [ [ 1 5 ] [ 10 10 ] [ 20 17 ] ] }				
 	}
 }
 
@@ -336,7 +547,7 @@ aura envenom:
 	type: debuff
 	icon: icon_envenom
 	duration: based_on_effects
-	flags: [ unique ]
+	flags: [ unique poison ]
 	
 	aura_effect repeat: 
 	{ 
@@ -363,7 +574,7 @@ ability envenom:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: a_mul_x_plus_b x: attack_power a: 0.35 b: [ [ 1 15 ] [ 10 30 ] [ 20 60 ] ] }						
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.35 b: [ [ 1 15 ] [ 10 30 ] [ 20 50 ] ] }						
 	}
 	
 	direct_effect apply_aura:

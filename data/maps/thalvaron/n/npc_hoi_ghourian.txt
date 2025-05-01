@@ -1,0 +1,260 @@
+dialogue_screen .hoi_ghourian_dialogue:
+{
+	text: 
+	[	
+		"My name is Hoi and I'm a liason between the trees of these woods and the more fleshy creatures like us."
+	]		
+	
+	options:
+	[
+		{ quest: .hoi_ghourian_1 }
+		{ quest: .hoi_ghourian_2 }
+		{ quest: .hoi_ghourian_3 }
+		{ quest<offer_only>: .hoi_ghourian_4 }
+	]
+}
+
+dialogue_root .hoi_ghourian_dialogue:
+{
+	.hoi_ghourian_dialogue: { }
+}
+
+entity thalvaron_hoi_ghourian: !NPC
+{
+	_string: "Hoi Ghourian"
+	_dialogue_root: .hoi_ghourian_dialogue	
+	_sprite: elf_3
+	_sprite_dead: elf_3_dead
+	_level: 20
+	_faction: children_of_the_moon		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .hoi_ghourian_1:
+{
+	string: "Yrk Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_wood_elemental_2 ]
+		count: 1
+	}
+}
+
+quest .hoi_ghourian_1:
+{
+	string: "Putting Down the Tree"
+
+	text:
+	[
+		"Locate the owlbear colony south of Edmund's Haunt and thin out their numbers."
+	]
+	
+	description: 
+	[
+		"In the dark woods behind me, there lives a wood elemental who goes by the name of Yrk. For many years we've been good friends, but these creatures tend to go mad when they get older. For his own sake,"
+		"he needs to be put down. It's the circle of life, you know."
+	]
+
+	progress:
+	[
+		"Back already?"
+	]
+	
+	completion:
+	[
+		"Good. His ashes will be absorbed back into the earth."
+	]
+
+	objectives: [ .hoi_ghourian_1 ]
+	level: 15
+	next_quest: .hoi_ghourian_2 
+}
+
+############################################################
+# Quest 2
+
+loot_group .hoi_ghourian_2_quest_item: {}
+
+item .hoi_ghourian_2_quest_item:
+{
+	icon: icon_brown_bag
+	item_level: 15
+	loot_groups: [ .hoi_ghourian_2_quest_item ]
+	flags: [ unique not_sellable ]
+	string: "Hoi's Satchel"
+}
+
+loot_table .hoi_ghourian_2_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .hoi_ghourian_2_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_hoi_ghourian_2_quest_item:
+{
+	systems: [ openable ]
+
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ satchel ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .hoi_ghourian_2_quest_item
+			verb: pick_up
+			range: 1 
+			despawn: true 			
+			level: 15
+			required_quest: .hoi_ghourian_2
+		}		
+	}
+}
+
+objective .hoi_ghourian_2:
+{
+	string: "Hoi's Satchel"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .hoi_ghourian_2_quest_item count: 1 }
+}
+
+quest .hoi_ghourian_2:
+{
+	string: "Lost in the Caves"
+
+	text:
+	[
+		"Enter the caves behind Hoi Ghourian's house, find his satchel, and return it to him."
+	]
+	
+	description: 
+	[
+		"You seem brave. Maybe you can do something else for me. Yesterday I was exploring the caves behind my house and was attacked by lizards. I have no idea where they came from,"
+		"but I ended up dropping my satchel. Find it and return it to me and I'll reward you."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Did they attack you as well? I don't like lizards."
+	]
+
+	objectives: [ .hoi_ghourian_2 ]
+	prerequisites: [ .hoi_ghourian_1 ]
+	level: 15
+	next_quest: .hoi_ghourian_3
+}
+
+############################################################
+# Quest 3
+
+loot_group .hoi_ghourian_3_quest_item: {}
+
+item .hoi_ghourian_3_quest_item:
+{
+	icon: icon_organ_1
+	item_level: 16
+	loot_groups: [ .hoi_ghourian_3_quest_item ]
+	flags: [ not_sellable ]
+	string: "Lizard Fire Bladder"
+	stack: 6
+}
+
+objective .hoi_ghourian_3:
+{
+	string: "Lizard Fire Bladders"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .hoi_ghourian_3_quest_item count: 6 }
+}
+
+{
+	${ _level: 16 }
+	item .hoi_ghourian_3_a: !QUEST_REWARD_SHOULDERS{ _string: "Pauldrons of the Lizard Slayer" _icon: icon_shoulders_2 _constitution: 1 _strength: 1 _type: armor_plate }
+	item .hoi_ghourian_3_b: !QUEST_REWARD_CHEST{ _string: "Cave Explorer Robe" _icon: icon_robe_1 _constitution: 1 _wisdom: 1 _type: armor_cloth }
+	item .hoi_ghourian_3_c: !QUEST_REWARD_WAIST{ _string: "Girdle of the Attack Dog" _icon: icon_mail_belt_3 _strength: 1 _type: armor_mail }
+}
+
+quest .hoi_ghourian_3:
+{
+	string: "Fire Lizards"
+
+	text:
+	[
+		"Go south, across the river by the mountains, and collect spider silk and eggs."
+	]
+	
+	description: 
+	[
+		"I don't know how far you went into the caves, but maybe you stumbled upon another cave lizard variety? They're red and spouts fire, kinda hard to miss to be honest.\n\n"
+		"I'm intrigued about how they work from a physiological point of view. Where is the fire coming from? My theory is that they have a special organ that creates the fire. Maybe you can go back there and get me some samples?"
+	]
+
+	progress:
+	[
+		"Did they get you?"
+	]
+	
+	completion:
+	[
+		"Very interesting... Seems like they're full of some kind of liquid. Probably flammable."
+	]
+
+	objectives: [ .hoi_ghourian_3 ]
+	prerequisites: [ .hoi_ghourian_2 ]
+	level: 16
+	reward_one_item: [ .hoi_ghourian_3_a .hoi_ghourian_3_b .hoi_ghourian_3_c ]
+}
+
+############################################################
+# Quest 4
+
+quest .hoi_ghourian_4:
+{
+	string: "Trees Can Be Sad Too"
+
+	text:
+	[
+		"Locate and assist the wandering tree Durk."
+	]
+	
+	description: 
+	[
+		"I don't really have any more tasks for you presently, but I think you should go and talk to my old friend Durk. He's a wood elemental that wanders down south near the temple ruins. He's been down lately, maybe you"
+		"can help him."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Huh... You came to talk to me? Durk?"
+	]
+
+	prerequisites: [ .hoi_ghourian_3 ]
+	level: 16
+	reward_cash_multiplier: 0.2
+	reward_xp_multiplier: 0.2	
+}

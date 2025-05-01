@@ -25,7 +25,7 @@ namespace tpublic::DirectEffects
 			if(!FromSourceBase(aChild))
 			{
 				if (aChild->m_name == "ability")
-					m_abilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
+					m_abilityId = aChild->GetId(DataType::ID_ABILITY);
 				else if(aChild->m_name == "target")
 					m_target = SourceToTarget(aChild);
 				else
@@ -66,7 +66,7 @@ namespace tpublic::DirectEffects
 		CombatEvent::Id					/*aId*/,
 		uint32_t						/*aAbilityId*/,
 		const SourceEntityInstance&		aSourceEntityInstance,
-		EntityInstance*					/*aSource*/,
+		EntityInstance*					aSource,
 		EntityInstance*					aTarget,
 		const Vec2&						/*aAOETarget*/,
 		const ItemInstanceReference&	/*aItem*/,
@@ -86,6 +86,37 @@ namespace tpublic::DirectEffects
 
 		switch(m_target)
 		{
+		case TARGET_BEHIND:
+			{
+				const Components::Position* sourcePosition = aSource->GetComponent<Components::Position>();
+				Vec2 behindPosition{
+					sourcePosition->m_position.m_x + (targetPosition->m_position.m_x - sourcePosition->m_position.m_x) * 2,
+					sourcePosition->m_position.m_y + (targetPosition->m_position.m_y - sourcePosition->m_position.m_y) * 2 };
+
+				IWorldView::EntityQuery query;
+				query.m_flags = 0;
+				query.m_maxDistance = 0;
+				query.m_position = behindPosition;
+
+				aWorldView->WorldViewQueryEntityInstances(query, [&](
+					const EntityInstance*	aEntityInstance,
+					int32_t					/*aDistanceSquared*/)
+				{
+					if(aEntityInstance != aTarget && EntityState::CanBeAttacked(aEntityInstance->GetState()))
+					{
+						const Components::CombatPublic* combatPublic = aEntityInstance->GetComponent<Components::CombatPublic>();
+						if(combatPublic != NULL && combatPublic->m_factionId == targetCombatPublic->m_factionId)
+						{
+							possibleTargets.push_back(aEntityInstance);
+							return true;
+						}
+					}
+
+					return false; // Continue
+				});
+			}
+			break;
+
 		case TARGET_RANDOM_NEARBY:
 			{
 				IWorldView::EntityQuery query;

@@ -1,6 +1,7 @@
 #include "../Pcheader.h"
 
 #include <tpublic/Components/Auras.h>
+#include <tpublic/Components/CombatPrivate.h>
 #include <tpublic/Components/CombatPublic.h>
 #include <tpublic/Components/Position.h>
 #include <tpublic/Components/VisibleAuras.h>
@@ -11,6 +12,7 @@
 #include <tpublic/Helpers.h>
 #include <tpublic/IEventQueue.h>
 #include <tpublic/IWorldView.h>
+#include <tpublic/MapData.h>
 #include <tpublic/Requirements.h>
 #include <tpublic/Resource.h>
 
@@ -22,6 +24,7 @@ namespace tpublic::Systems
 		: SystemBase(aData)
 	{
 		RequireComponent<Components::Auras>();
+		RequireComponent<Components::CombatPrivate>();
 		RequireComponent<Components::CombatPublic>();
 		RequireComponent<Components::Position>();
 		RequireComponent<Components::VisibleAuras>();
@@ -57,17 +60,23 @@ namespace tpublic::Systems
 					bool shouldStopCasting = false;
 
 					// Out of range?
-					int32_t distanceSquared = Helpers::CalculateDistanceSquared(position, targetPosition);
-					if(distanceSquared > (int32_t)(ability->m_range * ability->m_range))
-						shouldStopCasting = true;
+					if(!ability->AlwaysInRange())
+					{
+						int32_t distanceSquared = Helpers::CalculateDistanceSquared(position, targetPosition);
+						if (distanceSquared > (int32_t)(ability->m_range * ability->m_range))
+							shouldStopCasting = true;
+					}
 
 					// Dead?
 					if(!shouldStopCasting && targetEntityInstance->GetState() == tpublic::EntityState::ID_DEAD)
 						shouldStopCasting = true;
 
 					// No line of sight?
-					if(!shouldStopCasting && !aContext->m_worldView->WorldViewLineOfSight(position->m_position, targetPosition->m_position))
-						shouldStopCasting = true;
+					if(!ability->AlwaysInLineOfSight())
+					{
+						if (!shouldStopCasting && !aContext->m_worldView->WorldViewLineOfSight(position->m_position, targetPosition->m_position))
+							shouldStopCasting = true;
+					}
 
 					if(shouldStopCasting)
 						aContext->m_eventQueue->EventQueueInterrupt(aEntityInstanceId, aEntityInstanceId, 0, 0);
@@ -93,6 +102,13 @@ namespace tpublic::Systems
 				if ((aura->m_flags & Data::Aura::FLAG_CANCEL_ON_DAMAGE) != 0 && combatPublic->m_damageAccum > 0)
 					entry->m_cancel = true;
 
+				if((aura->m_flags & Data::Aura::FLAG_CANCEL_INDOOR) != 0)
+				{
+					const Components::Position* position = GetComponent<Components::Position>(aComponents);
+					if(aContext->m_worldView->WorldViewGetMapData()->IsTileIndoor(position->m_position.m_x, position->m_position.m_y))
+						entry->m_cancel = true;
+				}
+
 				if (aura->m_flags & Data::Aura::FLAG_SINGLE_TARGET)
 				{
 					const EntityInstance* sourceEntity = aContext->m_worldView->WorldViewSingleEntityInstance(entry->m_sourceEntityInstance.m_entityInstanceId);
@@ -100,6 +116,9 @@ namespace tpublic::Systems
 					if(sourceCombatPublic != NULL && sourceCombatPublic->m_singleTargetAuraEntityInstanceId != aEntityInstanceId)
 						entry->m_cancel = true;
 				}
+
+				if(aura->m_mustNotHaveWorldAuraId != 0 && aContext->m_worldView->WorldViewHasWorldAura(aura->m_mustNotHaveWorldAuraId))
+					entry->m_cancel = true;
 
 				if(!entry->m_cancel)
 				{
@@ -118,9 +137,20 @@ namespace tpublic::Systems
 					{
 						std::unique_ptr<AuraEffectBase>& effect = entry->m_effects[j];
 
-						if(!effect->Update(entry->m_sourceEntityInstance, aEntityInstanceId, aContext, GetManifest()))
+						bool cancelEffect = false;
+
+						if((aura->m_flags & Data::Aura::FLAG_NO_SOURCE_NEEDED) == 0 && !entry->m_sourceEntityInstance.IsSet())
+							cancelEffect = true;
+
+						if(!cancelEffect && !effect->Update(entry->m_sourceEntityInstance, aEntityInstanceId, aContext, GetManifest()))
+							cancelEffect = true;
+
+						if(cancelEffect)
 						{
 							effect->OnFade(entry->m_sourceEntityInstance, aEntityInstanceId, aContext, GetManifest());
+
+							if(effect->ShouldCancelAuraOnFade())
+								entry->m_cancel = true;
 
 							effect.reset();
 							Helpers::RemoveCyclicFromVector(entry->m_effects, j);
@@ -155,6 +185,16 @@ namespace tpublic::Systems
 					auras->SetPendingPersistenceUpdate(tpublic::ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY);
 				}
 			}
+
+			{
+				Components::CombatPrivate* combatPrivate = GetComponent<Components::CombatPrivate>(aComponents);
+				float resourceCostMultiplier = auras->GetResourceCostMultiplier();
+				if (resourceCostMultiplier != combatPrivate->m_resourceCostMultiplier)
+				{
+					combatPrivate->m_resourceCostMultiplier = resourceCostMultiplier;
+					combatPrivate->SetDirty();
+				}
+			}
 		}
 
 		return EntityState::CONTINUE;
@@ -177,10 +217,43 @@ namespace tpublic::Systems
 			visibleAuras->m_seq = auras->m_seq;
 			visibleAuras->m_entries.clear();
 			visibleAuras->m_auraFlags = 0;
+			visibleAuras->m_colorEffect.reset();
+			visibleAuras->m_colorWeaponGlow.reset();
+			visibleAuras->m_mountId = 0;
+			
+			uint32_t colorEffectR = 0;
+			uint32_t colorEffectG = 0;
+			uint32_t colorEffectB = 0;
+			uint32_t colorEffectA = 0;
+			uint32_t colorEffectCount = 0;
+
+			uint32_t colorWeaponGlowR = 0;
+			uint32_t colorWeaponGlowG = 0;
+			uint32_t colorWeaponGlowB = 0;
+			uint32_t colorWeaponGlowA = 0;
+			uint32_t colorWeaponGlowCount = 0;
 
 			for (const std::unique_ptr<Components::Auras::Entry>& entry : auras->m_entries)
 			{
 				const Data::Aura* aura = GetManifest()->GetById<Data::Aura>(entry->m_auraId);
+
+				if(aura->m_colorEffect.has_value())
+				{
+					colorEffectR += (uint32_t)aura->m_colorEffect->m_r;
+					colorEffectG += (uint32_t)aura->m_colorEffect->m_g;
+					colorEffectB += (uint32_t)aura->m_colorEffect->m_b;
+					colorEffectA += (uint32_t)aura->m_colorEffect->m_a;
+					colorEffectCount++;
+				}
+
+				if (aura->m_colorWeaponGlow.has_value())
+				{
+					colorWeaponGlowR += (uint32_t)aura->m_colorWeaponGlow->m_r;
+					colorWeaponGlowG += (uint32_t)aura->m_colorWeaponGlow->m_g;
+					colorWeaponGlowB += (uint32_t)aura->m_colorWeaponGlow->m_b;
+					colorWeaponGlowA += (uint32_t)aura->m_colorWeaponGlow->m_a;
+					colorWeaponGlowCount++;
+				}
 
 				if(aura->m_type != Data::Aura::TYPE_HIDDEN)
 				{
@@ -192,11 +265,37 @@ namespace tpublic::Systems
 					visibleAuras->m_entries.push_back(t);
 				}
 
+				if(aura->m_mountId != 0)
+					visibleAuras->m_mountId = aura->m_mountId;
+
 				if(entry->HasEffect(AuraEffect::ID_STUN))
 					visibleAuras->m_auraFlags |= Components::VisibleAuras::AURA_FLAG_STUNNED;
 
 				if (entry->HasEffect(AuraEffect::ID_IMMOBILIZE))
 					visibleAuras->m_auraFlags |= Components::VisibleAuras::AURA_FLAG_IMMOBILIZED;
+
+				if(entry->HasEffect(AuraEffect::ID_STEALTH))
+					visibleAuras->m_auraFlags |= Components::VisibleAuras::AURA_FLAG_STEALTHED;
+			}			
+
+			if(colorEffectCount > 0)
+			{
+				visibleAuras->m_colorEffect = Image::RGBA(
+					(uint8_t)(colorEffectR / colorEffectCount),
+					(uint8_t)(colorEffectG / colorEffectCount),
+					(uint8_t)(colorEffectB / colorEffectCount),
+					(uint8_t)(colorEffectA / colorEffectCount)
+				);
+			}
+
+			if(colorWeaponGlowCount > 0)
+			{
+				visibleAuras->m_colorWeaponGlow = Image::RGBA(
+					(uint8_t)(colorWeaponGlowR / colorWeaponGlowCount),
+					(uint8_t)(colorWeaponGlowG / colorWeaponGlowCount),
+					(uint8_t)(colorWeaponGlowB / colorWeaponGlowCount),
+					(uint8_t)(colorWeaponGlowA / colorWeaponGlowCount)
+				);
 			}
 
 			visibleAuras->SetDirty();

@@ -1,0 +1,83 @@
+dialogue_screen .jor_starleaf_dialogue:
+{
+	text: 
+	[	
+		"Watch out. The dead roam in these woods."
+	]		
+	
+	options:
+	[
+		{ quest: .jor_starleaf_1 }
+	]
+}
+
+dialogue_root .jor_starleaf_dialogue:
+{
+	.jor_starleaf_dialogue: { }
+}
+
+entity thalvaron_jor_starleaf: !NPC
+{
+	_string: "Jor Starleaf"
+	_dialogue_root: .jor_starleaf_dialogue	
+	_sprite: elf_5
+	_sprite_dead: elf_2_dead
+	_level: 20
+	_faction: children_of_the_moon		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .jor_starleaf_1:
+{
+	string: "Wandering Ghouls Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_shadowthorn_ghoul_a thalvaron_shadowthorn_ghoul_b ]
+		count: 6
+	}
+}
+
+{
+	${ _level: 17 }
+	item .jor_starleaf_1_a: !QUEST_REWARD_BACK{ _string: "Zombie-Skin Cloak" _icon: icon_cape_1 _dexterity: 1 _strength: 2 _type: armor_cloth }
+	item .jor_starleaf_1_b: !QUEST_REWARD_WRISTS{ _string: "Bone-Link Bracers" _icon: icon_mail_bracers_1 _dexterity: 2 _strength: 1 _type: armor_mail }
+	item .jor_starleaf_1_c: !QUEST_REWARD_WAIST{ _string: "Belt of the Forsaken" _icon: icon_mail_belt_1 _wisdom: 2 _spell_damage: 1 _type: armor_cloth }
+}
+
+quest .jor_starleaf_1:
+{
+	string: "Risen Dead"
+
+	text:
+	[
+		"Get rid of ghouls in the woods."
+	]
+	
+	description: 
+	[
+		"These used to be peaceful woods, but after an evil presence manifested itself in Shadowthorn Abbey, the dead have been crawling out of their graves. These ghouls must be destroyed before they spill into these lands!"
+		"Can you help?"
+	]
+
+	progress:
+	[
+		"Be careful."
+	]
+	
+	completion:
+	[
+		"Good job."
+	]
+
+	level: 17
+	objectives: [ .jor_starleaf_1 ]
+	reward_one_item: [ .jor_starleaf_1_a .jor_starleaf_1_b .jor_starleaf_1_c ]
+}

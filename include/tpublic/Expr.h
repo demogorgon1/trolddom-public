@@ -31,6 +31,9 @@ namespace tpublic
 			OP_CLIENT_GUILD_REGISTRATION_PRICE,
 			OP_CLIENT_UNTRAIN_TALENTS_PRICE,
 			OP_CLIENT_REPUTATION,
+			OP_CLIENT_HAS_ITEM,
+			OP_CLIENT_HAS_COMPLETED_QUEST,
+			OP_CLIENT_IS_DEMO,
 
 			NUM_OPS
 		};
@@ -56,7 +59,10 @@ namespace tpublic
 			"client_wallet_cash",
 			"client_guild_registration_price",
 			"client_untrain_talents_price",
-			"client_reputation"
+			"client_reputation",
+			"client_has_item",
+			"client_has_completed_quest",
+			"client_is_demo"
 		};
 
 		static_assert(sizeof(OPS) / sizeof(const char*) == (size_t)NUM_OPS);
@@ -108,7 +114,7 @@ namespace tpublic
 						TP_VERIFY(aChild->m_annotation, aChild->m_debugInfo, "Missing data type annotation.");
 						DataType::Id dataTypeId = DataType::StringToId(aChild->m_annotation->GetIdentifier());
 						TP_VERIFY(dataTypeId != DataType::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid data type.", aChild->m_annotation->GetIdentifier());
-						uint32_t id = aChild->m_sourceContext->m_persistentIdTable->GetId(dataTypeId, aChild->GetIdentifier());
+						uint32_t id = aChild->GetId(dataTypeId);
 						m_children.push_back(std::make_unique<Node>((int64_t)id));
 					}
 					else

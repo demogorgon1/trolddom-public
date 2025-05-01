@@ -83,9 +83,9 @@ namespace tpublic
 					if(!FromSourceBase(aChild))
 					{
 						if(aChild->m_name == "map")
-							m_mapId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP, aChild->GetIdentifier());
+							m_mapId = aChild->GetId(DataType::ID_MAP);
 						else if (aChild->m_name == "spawn")
-							m_mapPlayerSpawnId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_PLAYER_SPAWN, aChild->GetIdentifier());
+							m_mapPlayerSpawnId = aChild->GetId(DataType::ID_MAP_PLAYER_SPAWN);
 						else if(aChild->m_name == "animation")
 							m_animation = Animation(aChild);
 						else

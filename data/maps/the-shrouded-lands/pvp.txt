@@ -1,0 +1,111 @@
+realm_balance the_shrouded_lands_light:
+{
+	string: "Power of the Light"
+	default_value: 0
+	max_value: 1000
+	color: [ 226 212 118 ]
+	
+	threshold_tool_tip<200>: "Increased holy guard spawns."
+	threshold_tool_tip<400>: "Increased holy guard spawns."
+	threshold_tool_tip<600>: "Increased holy guard spawns."
+	threshold_tool_tip<800>: "Increased holy guard spawns."
+	threshold_tool_tip<900>: "Increased holy guard spawns."
+	threshold_tool_tip<1000>: "The defensive aura of Draethor is dissolved for 30 minutes."
+	
+	tool_tip: "Increased by completing quests for the light.\n\nCompleting quests generate more power when more control points have been captured.\n\nResets at 1000."	
+	
+	max_value_event:
+	{
+		reset: true		
+		apply_world_aura: the_shrouded_lands_underworld_enemy_shield_down
+	}
+}
+
+realm_balance the_shrouded_lands_underworld:
+{
+	string: "Power of the Underworld"
+	default_value: 0
+	max_value: 1000
+	color: [ 149 111 176 ]
+	
+	threshold_tool_tip<200>: "Increased unholy guard spawns."
+	threshold_tool_tip<400>: "Increased unholy guard spawns."
+	threshold_tool_tip<600>: "Increased unholy guard spawns."
+	threshold_tool_tip<800>: "Increased unholy guard spawns."
+	threshold_tool_tip<900>: "Increased unholy guard spawns."
+	threshold_tool_tip<1000>: "The defensive aura of Irza is dissolved for 30 minutes."	
+	
+	tool_tip: "Increased by completing quests for the underworld.\n\nCompleting quests generate more power when more control points have been captured.\n\nResets at 1000."	
+	
+	max_value_event:
+	{
+		reset: true		
+		apply_world_aura: the_shrouded_lands_light_enemy_shield_down
+	}	
+}
+
+map_entity_spawn .flag_underworld: { entity .flag_underworld: { init_state: default } }
+map_entity_spawn .flag_light: { entity .flag_light: { init_state: default } }
+map_entity_spawn .flag_neutral: { entity .flag_neutral: { init_state: default } }
+
+ability .capture_flag:
+{
+	direct_effect simple<capture>: { flags: [ reverse ] }
+}
+
+!define local THE_SHROUDED_LANDS_FLAG
+{
+	string: "Control Point"
+	flags: [ always_replicate ]
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite<static>: { animations: [ { states: [ default ] frames: [ gs_flag_none gs_flag_underworld gs_flag_light ] z_offset: -3 use_control_point_index: true } ] }		
+
+		control_point: 
+		{ 
+			index: @_default_index
+			states: [ the_shrouded_lands_neutral the_shrouded_lands_underworld the_shrouded_lands_light ]
+		}
+
+		openable: 
+		{ 
+			verb: capture
+			range: 1 
+			trigger_ability: .capture_flag
+		}		
+	}
+}
+ 
+entity .flag_underworld: !THE_SHROUDED_LANDS_FLAG{ _default_index: 1 }
+entity .flag_light: !THE_SHROUDED_LANDS_FLAG{ _default_index: 2 }
+entity .flag_neutral: !THE_SHROUDED_LANDS_FLAG{ _default_index: 0 }
+
+control_point_state the_shrouded_lands_light:
+{
+	sprite: the_shrouded_lands_light_flag
+	tool_tip: "Control Point: Claimed by the Light"
+}
+
+control_point_state the_shrouded_lands_underworld:
+{
+	sprite: the_shrouded_lands_underworld_flag
+	tool_tip: "Control Point: Claimed by the Underworld"
+}
+
+control_point_state the_shrouded_lands_neutral:
+{
+	sprite: the_shrouded_lands_neutral_flag
+	tool_tip: "Control Point: Unclaimed"	
+}
+
+world_aura the_shrouded_lands_light_enemy_shield_down:
+{
+	duration_minutes: 30
+}
+
+world_aura the_shrouded_lands_underworld_enemy_shield_down:
+{
+	duration_minutes: 30
+}

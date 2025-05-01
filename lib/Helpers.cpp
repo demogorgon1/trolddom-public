@@ -105,8 +105,7 @@ namespace tpublic::Helpers
 			return _CalculateDistanceSquaredToLargeEntity(aA->m_position, aB);
 
 		// Large/large
-		// FIXME: we don't need this for now
-		assert(false);
+		// FIXME: we don't need this for now. Only used for large->large self casts.
 		return 0;
 	}
 	
@@ -126,6 +125,17 @@ namespace tpublic::Helpers
 		std::mt19937&				aRandom)
 	{
 		return (float)((aRandom() & 0xFFFF0000) >> 16) / (float)0x0000FFFF;
+	}
+
+	bool
+	RandomRoll(
+		std::mt19937&				aRandom,
+		uint32_t					aProbability)
+	{
+		if (aProbability == 100)
+			return true;
+		UniformDistribution<uint32_t> distribution(0, 99);
+		return distribution(aRandom) < aProbability;
 	}
 
 	bool
@@ -195,16 +205,42 @@ namespace tpublic::Helpers
 
 	void		
 	GetRandomStatWeights(
-		uint32_t					aSeed,
-		Stat::Collection&			aOut)
+		const std::unordered_set<Stat::Id>&	aExcluded,
+		uint32_t							aSeed,
+		Stat::Collection&					aOut)
 	{
 		std::vector<Stat::Id> possibleStatIds =
 		{
+			// Appears 3 times each
 			Stat::ID_CONSTITUTION,
 			Stat::ID_DEXTERITY,
 			Stat::ID_STRENGTH,
 			Stat::ID_SPIRIT,
-			Stat::ID_WISDOM
+			Stat::ID_WISDOM,
+			Stat::ID_CONSTITUTION,
+			Stat::ID_DEXTERITY,
+			Stat::ID_STRENGTH,
+			Stat::ID_SPIRIT,
+			Stat::ID_WISDOM,
+			Stat::ID_CONSTITUTION,
+			Stat::ID_DEXTERITY,
+			Stat::ID_STRENGTH,
+			Stat::ID_SPIRIT,
+			Stat::ID_WISDOM,
+
+			// Appears twice each
+			Stat::ID_SPELL_DAMAGE,
+			Stat::ID_HEALING,
+			Stat::ID_MANA_PER_5_SECONDS,
+			Stat::ID_BLOCK_VALUE,
+			Stat::ID_SPELL_DAMAGE,
+			Stat::ID_HEALING,
+			Stat::ID_MANA_PER_5_SECONDS,
+			Stat::ID_BLOCK_VALUE,
+
+			// Appears only once (rarest)
+			Stat::ID_SPELL_HASTE,
+			Stat::ID_ATTACK_HASTE
 		};
 
 		std::mt19937 wordRandom(aSeed);
@@ -213,8 +249,15 @@ namespace tpublic::Helpers
 		for (uint32_t j = 0; j < differentStatWeightsCount; j++)
 		{
 			size_t possibleStatIdIndex = RandomInRange<size_t>(wordRandom, 0, possibleStatIds.size() - 1);
+			Stat::Id statId = possibleStatIds[possibleStatIdIndex];
 
-			aOut.m_stats[possibleStatIds[possibleStatIdIndex]] += 1.0f;
+			if(aExcluded.contains(statId))
+			{
+				j--;
+				continue; // Try again
+			}
+
+			aOut.m_stats[statId] += 1.0f;
 		}
 	}
 

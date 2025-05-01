@@ -76,7 +76,7 @@ namespace tpublic
 			}
 			else if (aSource->m_name == "must_have_ability_modifier")
 			{
-				m_mustHaveAbilityModifierId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY_MODIFIER, aSource->GetIdentifier());
+				m_mustHaveAbilityModifierId = aSource->GetId(DataType::ID_ABILITY_MODIFIER);
 				return true;
 			}
 			else if (aSource->m_name == "must_not_have_ability_modifiers")

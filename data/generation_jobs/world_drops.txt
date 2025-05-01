@@ -30,8 +30,7 @@ generation_job world_drops:
 			{ speed: 36 types: [ weapon_2h_sword weapon_2h_mace weapon_2h_axe ] }
 			{ speed: 38 types: [ weapon_2h_sword weapon_2h_mace weapon_2h_axe ] }
 		]
-	
-		# Common (junk) items
+
 		# Common (junk) items
 		{
 			designations:

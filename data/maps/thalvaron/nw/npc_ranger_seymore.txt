@@ -1,0 +1,274 @@
+dialogue_screen .ranger_seymore_dialogue:
+{
+	text: 
+	[	
+		"Dark elves! This is very alarming! They're not supposed to be on this side of the mountain."
+	]		
+	
+	options:
+	[
+		{ quest: .ranger_seymore_1 }
+		{ quest: .ranger_seymore_2 }
+		{ quest<offer_only>: .ranger_seymore_3 }
+	]
+}
+
+dialogue_root .ranger_seymore_dialogue:
+{
+	.ranger_seymore_dialogue: { }
+}
+
+entity thalvaron_ranger_seymore: !NPC
+{
+	_string: "Ranger Seymore"
+	_dialogue_root: .ranger_seymore_dialogue	
+	_sprite: woman_6
+	_sprite_dead: woman_6_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .ranger_seymore_1_a:
+{
+	string: "Dark Elves Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_rebel_dark_elf ]
+		count: 2
+	}
+}
+
+objective .ranger_seymore_1_b:
+{
+	string: "Furry Fiends Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_rebel_dark_elf_demon_a ]
+		count: 3
+	}
+}
+
+objective .ranger_seymore_1_c:
+{
+	string: "Voidflamers Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_rebel_dark_elf_demon_b ]
+		count: 3
+	}
+}
+
+quest .ranger_seymore_1:
+{
+	string: "Dark Times Ahead"
+
+	text:
+	[
+		"Hunt dark elves and their minions behind the hotel."
+	]
+	
+	description: 
+	[
+		"While we've had fairly good relations with the wood elves for a long time, the same can't be said about their more sinister cousins, the dark elves. All kinds of elves are supposed to be very far from here,"
+		"especially these.\n\n"
+		"What are they doing here? Seems like they're summoning foul demonic creatures. You must drive them back where they came from!"
+	]
+
+	progress:
+	[
+		"Don't waste your time."
+	]
+	
+	completion:
+	[
+		"Good."
+	]
+
+	level: 12
+	objectives: [ .ranger_seymore_1_a .ranger_seymore_1_b .ranger_seymore_1_c ]
+	next_quest: .ranger_seymore_2	
+}
+
+############################################################
+# Quest 2
+
+objective .ranger_seymore_2_a:
+{
+	string: "Gyosa the Bloodletter Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_rebel_dark_elf_leader ]
+		count: 1
+	}
+}
+
+objective .ranger_seymore_2_b:
+{
+	string: "Jim Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_rebel_dark_elf_human ]
+		count: 1
+	}
+}
+
+objective .ranger_seymore_2_c:
+{
+	string: "Secret Document"
+	collect_items: { item: thalvaron_rebel_dark_elf_human_quest_item count: 1 }
+}
+
+quest .ranger_seymore_2:
+{
+	string: "Are They Working Together?"
+
+	text:
+	[
+		"Kill the rebel and dark elf schemers."
+	]
+	
+	description: 
+	[
+		"I fear that the dark elves have some kind of connection to the rebellion. I know that a rebel leader who goes by the name \"Jim\" has set up a small camp behind the hotel. I've heard he's been seen talking with"
+		"some kind of important looking dark elf. Kill both of them. Return to me any documents you find on their dead bodies."
+	]
+
+	progress:
+	[
+		"Are they dead yet?"
+	]
+	
+	completion:
+	[
+		"Great."
+	]
+
+	level: 12
+	objectives: [ .ranger_seymore_2_a .ranger_seymore_2_b .ranger_seymore_2_c ]
+	prerequisites: [ .ranger_seymore_1 ]
+}
+
+############################################################
+# Quest 3
+
+objective .ranger_seymore_3:
+{
+	string: "Destroy Evil Orb"
+	
+	maps: [ thalvaron ]
+	
+	manual_boolean: { }
+}
+
+{
+	${ _level: 12 }
+	item .ranger_seymore_3_a: !QUEST_REWARD_1H_AXE{ _string: "Smooth Field Axe" _icon: icon_axe_1 _strength: 2 _spirit: 1 _weapon_cooldown: 24 }
+	item .ranger_seymore_3_b: !QUEST_REWARD_OFFHAND{ _string: "Blackened Totem" _icon: icon_antlers _wisdom: 1 _spirit: 1 }
+	item .ranger_seymore_3_c: !QUEST_REWARD_FINGER{ _string: "Ranger's Mark" _icon: icon_ring_1 _strength: 1 _dexterity: 1 }
+}
+
+quest .ranger_seymore_3:
+{
+	string: "The Evil Orb"
+
+	text:
+	[
+		"Find and destroy the evil orb hidden in the woods close to the city wall to the west. Then report to Orwla near the bridge to the north."
+	]
+	
+	description: 
+	[
+		"The document you found on Jim contained some very valuable information. It seems that the rebels have acquired some kind of evil artifact from the dark elves. The exact nature of I'm not so sure about,"
+		"but according to this they have placed it close to the city wall, in the woods to the west of here. Those woods are supposed to be impossible to get through, so that's very alarming. I don't dare thinking about"
+		"what the purpose of the device is. You must find it and destroy it. After you've completed your mission, report to Ranger Orwla. You'll find him near the bridge across the river to the north."
+	]
+
+	progress:
+	[
+		"You need to hurry. Why are you still talking to me?"
+	]
+	
+	completion:
+	[
+		"I heard of your deeds."
+	]
+
+	level: 12
+	prerequisites: [ .ranger_seymore_2 ]
+	objectives: [ .ranger_seymore_3 ]
+	reward_one_item: [ .ranger_seymore_3_a .ranger_seymore_3_b .ranger_seymore_3_c ]
+}
+
+entity thalvaron_ranger_seymore_3_quest_item:
+{
+	string: "Evil Orb"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ glowing_orb_1_a glowing_orb_1_b ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			verb: destroy
+			range: 1 
+			despawn: true 			
+			level: 12
+			required_quest: .ranger_seymore_3
+			trigger_ability: .ranger_seymore_3_quest_item
+			complete_manual_objective: .ranger_seymore_3
+		}		
+	}
+}
+
+map_entity_spawn thalvaron_ranger_seymore_3_quest_spawn_a: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn thalvaron_ranger_seymore_3_quest_spawn_b: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn thalvaron_ranger_seymore_3_quest_spawn_c: { spawn_timer: { only_when_triggered: true } }
+
+ability .ranger_seymore_3_quest_item:
+{
+	direct_effect spawn_entity:
+	{
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: thalvaron_rebel_thug_a
+		map_entity_spawn: thalvaron_ranger_seymore_3_quest_spawn_a
+	}
+	
+	direct_effect spawn_entity:
+	{
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: thalvaron_rebel_thug_b
+		map_entity_spawn: thalvaron_ranger_seymore_3_quest_spawn_b
+	}
+
+	direct_effect spawn_entity:
+	{
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: thalvaron_rebel_thug_d
+		map_entity_spawn: thalvaron_ranger_seymore_3_quest_spawn_c
+	}	
+}

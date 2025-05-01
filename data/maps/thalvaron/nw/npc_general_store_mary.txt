@@ -1,0 +1,26 @@
+dialogue_screen .general_store_mary_dialogue:
+{
+	text: 
+	[	
+		"What a lovely day!"
+	]			
+}
+
+dialogue_root .general_store_mary_dialogue:
+{
+	.general_store_mary_dialogue: { }
+}
+
+entity thalvaron_general_store_mary: !NPC
+{
+	_string: "Mary"
+	_dialogue_root: .general_store_mary_dialogue	
+	_sprite: woman_8
+	_sprite_dead: woman_8_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

@@ -51,7 +51,8 @@ namespace tpublic
 				FIELD_SPELL_DAMAGE,
 				FIELD_HEALING,
 				FIELD_PRIVATE_FLAGS,
-				FIELD_ATTACK_POWER
+				FIELD_ATTACK_POWER,
+				FIELD_RESOURCE_COST_MULTIPLIER
 			};
 
 			static void
@@ -83,6 +84,7 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_HEALING, "healing", offsetof(CombatPrivate, m_healing));
 				aSchema->DefineCustomPODNoSource<uint8_t>(FIELD_PRIVATE_FLAGS, offsetof(CombatPrivate, m_privateFlags));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_ATTACK_POWER, "attack_power", offsetof(CombatPrivate, m_attackPower));
+				aSchema->Define(ComponentSchema::TYPE_FLOAT, FIELD_RESOURCE_COST_MULTIPLIER, "resource_cost_multiplier", offsetof(CombatPrivate, m_resourceCostMultiplier));
 
 				aSchema->AddSourceModifier<CombatPrivate>("immune_to_stun", [](
 					CombatPrivate*		aCombatPrivate,
@@ -141,6 +143,7 @@ namespace tpublic
 				m_healing = 0;
 				m_privateFlags = 0;
 				m_attackPower = 0;
+				m_resourceCostMultiplier = 1.0f;
 			}
 
 			bool
@@ -176,6 +179,7 @@ namespace tpublic
 			uint32_t							m_healing = 0;
 			uint32_t							m_attackPower = 0;
 			uint8_t								m_privateFlags = 0;
+			float								m_resourceCostMultiplier = 1.0f;
 		};
 
 	}

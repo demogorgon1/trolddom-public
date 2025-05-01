@@ -1,0 +1,44 @@
+expression .jimbo_tokins_has_completed_quest:
+{
+	client_has_completed_quest: { id<quest>: .vampire_quest_item }
+}
+
+dialogue_screen .jimbo_tokins_dialogue_1:
+{
+	text: 
+	[	
+		"Have you seen my sister Elsa? She has been missing for quite a while now. I fear the worst. If you find her, will you let me know?"
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .vampire_quest_item }
+	]
+}
+
+dialogue_screen .jimbo_tokins_dialogue_2:
+{
+	text: 
+	[	
+		"Leave me alone."
+	]		
+}
+
+dialogue_root .jimbo_tokins_dialogue:
+{	
+	.jimbo_tokins_dialogue_1: { inv_conditions: [ .jimbo_tokins_has_completed_quest ] }
+	.jimbo_tokins_dialogue_2: { conditions: [ .jimbo_tokins_has_completed_quest ] }
+}
+
+entity thalvaron_jimbo_tokins: !NPC
+{
+	_string: "Jimbo Tokins"
+	_dialogue_root: .jimbo_tokins_dialogue	
+	_sprite: man_44
+	_sprite_dead: man_44_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}

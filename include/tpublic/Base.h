@@ -17,6 +17,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <nwork/API.h>
+
 #if defined(WIN32)
 
 	#define TP_STRING_FORMAT_VARARGS(Buffer, BufferSize, Format)						\

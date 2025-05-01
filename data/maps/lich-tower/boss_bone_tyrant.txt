@@ -1,0 +1,211 @@
+############################################################
+# Loot
+
+loot_group .bone_tyrant: {}
+
+loot_table .bone_tyrant:
+{
+	slots:
+	[
+		{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
+		  map_message lich_tower: "Bone Tyrant will not drop Token of Victory for {}." } } }
+		{ possibility: { loot_group: .bone_tyrant  } }			
+		!WORLD_DROPS{}
+		!WORLD_DROPS_SKELETONS{}
+	]	
+}
+
+{
+	${
+		_rarity: rare
+		_level: 18
+		_loot_group: .bone_tyrant
+	}
+	
+	item lich_tower_7: !BOSS_DROP_HEAD
+	{
+		_string: "Boneguard"
+		_type: armor_plate
+		_icon: icon_mail_head_1
+		_strength: 1
+		_constitution: 1
+	}
+	
+	item lich_tower_8: !BOSS_DROP_WAIST
+	{
+		_string: "Belt of a Thousand Screams"
+		_type: armor_cloth
+		_icon: icon_belt_5
+		_dexterity: 2
+		_constitution: 1
+		_budget_bias: -10
+		_phys_crit: 1
+	}
+	
+	item lich_tower_9: !BOSS_DROP_SHIELD
+	{
+		_string: "Ancient Shield of the Dead"
+		_type: armor_cloth
+		_icon: icon_shield_3
+		_constitution: 1
+		_budget_bias: -15		
+		_dodge: 1
+		_block: 1
+	}
+	
+	item lich_tower_10: !BOSS_DROP_FEET
+	{
+		_string: "Dread King Warboots"
+		_icon: icon_mail_boots_1
+		_type: armor_mail
+		_constitution: 1
+		_strength: 2
+		_dexterity: 2
+	}
+	
+	item lich_tower_11: !BOSS_DROP_CHEST
+	{
+		_string: "Veil of the Grave"
+		_icon: icon_robe_3
+		_type: armor_cloth
+		_constitution: 1
+		_wisdom: 2
+		_spell_damage: 1
+	}
+	
+}
+
+############################################################
+# Boss
+
+zone .bone_tyrant:
+{
+}
+
+encounter .bone_tyrant:
+{
+	main_entities: [ lich_tower_bone_tyrant ]	
+	
+	spawn:
+	{
+		map_entity_spawn: .bone_tyrant_spawn
+		possible_entities: [ .bone_tyrant_spawn_a .bone_tyrant_spawn_b .bone_tyrant_spawn_c ]
+		entity_count: 1
+		interval: [ 70 100 ]
+		
+		condition<entity_health_less_than>:
+		{
+			id: lich_tower_bone_tyrant
+			value: 90			
+		}
+	}			
+}
+
+entity lich_tower_bone_tyrant: !NPC 
+{ 
+	_string: "Bone Tyrant" 
+	_level: 18
+	_elite: true
+	_faction: monsters 
+	_sprite: giant_skeleton_1 
+	_sprite_dead: giant_skeleton_1_dead 
+	_weapon_damage: 1.9 
+	_resource_health: 6
+	_loot_table: .bone_tyrant
+	_creature_type: undead
+	_encounter: .bone_tyrant
+	_zone: .bone_tyrant
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+	_large: true
+
+	_abilities: 
+	[
+		{
+			id: npc_rend
+		}
+	
+		{
+			id: npc_attack
+		}
+	]		
+}
+
+map_trigger .bone_tyrant_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .bone_tyrant:
+{
+	entity lich_tower_bone_tyrant: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .bone_tyrant_killed
+		}
+	}
+}
+
+{
+	${
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .passive		
+		_elite: true
+		_encounter: .bone_tyrant
+		_zone: .bone_tyrant	
+		_out_of_zone_action: { use: enrage }
+		_inactive_encounter_despawn: true		
+	}
+
+	{
+		${
+			_weapon_damage: 1.4 
+			_resource_health: 1.4
+			_abilities: 
+			[ 
+				{ id: npc_attack } 
+			]		
+		}
+		
+		entity .bone_tyrant_spawn_a: !NPC { _string: "Skeletal Warrior" _sprite: skeleton_warrior_1 _sprite_dead: skeleton_warrior_1_dead _level: 18 }
+	}
+	
+	{
+		${
+			_weapon_damage: 0.9
+			_resource_health: 0.7
+			_abilities: 
+			[ 
+				{ id: npc_frostbolt_no_cooldown } 
+				{ id: npc_attack } 
+			]		
+		}
+		
+		entity .bone_tyrant_spawn_b: !NPC { _string: "Skeletal Mage" _sprite: skeleton_caster_1 _sprite_dead: skeleton_caster_1_dead _level: 18 }
+	}
+
+	{
+		${
+			_weapon_damage: 0.9
+			_resource_health: 0.7
+			_abilities: 
+			[ 
+				{ id: npc_heal target: low_health_friend_or_self } 
+				{ id: npc_attack } 
+			]		
+		}
+		
+		entity .bone_tyrant_spawn_c: !NPC { _string: "Skeletal Priest" _sprite: skeleton_caster_3 _sprite_dead: skeleton_caster_3_dead _level: 18 }
+	}
+
+}
+
+map_entity_spawn .bone_tyrant_spawn:
+{
+}
+

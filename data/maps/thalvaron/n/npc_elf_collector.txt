@@ -1,0 +1,139 @@
+dialogue_screen .elf_collector_dialogue:
+{
+	text: 
+	[	
+		"Greetings, $class$. Do you have anything to contribute to the Children of the Moon?"
+	]
+	
+	options:
+	[
+		{ quest: .elf_collector_1 }
+		{ quest: .elf_collector_2 }
+	]
+}
+
+dialogue_root .elf_collector_dialogue:
+{
+	.elf_collector_dialogue: { }
+}
+
+entity thalvaron_elf_collector: !NPC
+{
+	_string: "Rhoi Starleaf"
+	_dialogue_root: .elf_collector_dialogue	
+	_sprite: elf_1
+	_sprite_dead: elf_1_dead	
+	_level: 20
+	_faction: children_of_the_moon		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .elf_collector_1_a:
+{
+	string: "Copper Ore"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: item_copper_ore count: 5 }
+}
+
+objective .elf_collector_1_b:
+{
+	string: "Iron Ore"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: item_iron_ore count: 5 }
+}
+
+
+quest .elf_collector_1:
+{
+	string: "We Need Ore"
+
+	text:
+	[
+		"Deliver ores to Rhoi Starleaf in Shadowthorn Forest."
+	]
+	
+	description: 
+	[
+		"We don't have a large supply of ores in this area. If you can deliver some to us we will be very grateful."
+	]
+
+	progress:
+	[
+		"How is it going?"
+	]
+	
+	completion:
+	[
+		"Great, your support will not be forgotton."
+	]
+	
+	objectives: [ .elf_collector_1_a .elf_collector_1_b ]
+	repeat_mode: always
+	level: 20
+	reward_xp_multiplier: 0
+	reward_cash_multiplier: 0
+	reward_reputation_multiplier: 1.8
+}
+
+############################################################
+# Quest 2
+
+objective .elf_collector_2_a:
+{
+	string: "Dewleaf"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: item_dewleaf count: 5 }
+}
+
+objective .elf_collector_2_b:
+{
+	string: "Mistflower"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: item_mistflower count: 5 }
+}
+
+
+quest .elf_collector_2:
+{
+	string: "We Need Herbs"
+
+	text:
+	[
+		"Deliver herbs to Rhoi Starleaf in Shadowthorn Forest."
+	]
+	
+	description: 
+	[
+		"Unlike ore, we have plenty of herbs in these forests, but we really need everything we can get our hands of. Your help will not be forgotten if you deliver herbs to us."
+	]
+
+	progress:
+	[
+		"How is it going?"
+	]
+	
+	completion:
+	[
+		"Excellent, thanks!"
+	]
+	
+	objectives: [ .elf_collector_2_a .elf_collector_2_b ]
+	repeat_mode: always
+	level: 20
+	reward_xp_multiplier: 0
+	reward_cash_multiplier: 0
+	reward_reputation_multiplier: 1.8
+}

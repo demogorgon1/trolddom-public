@@ -1,0 +1,15 @@
+entity target_dummy: !NPC
+{
+	_string: "Target Dummy"
+	_level: 1
+	_faction: neutral
+	_sprite: target_dummy
+	_sprite_dead: target_dummy_dead 
+	_weapon_damage: 1 
+	_resource_health: 1
+	_creature_type: mechanical
+	_default_on_enter_ability: npc_immortality
+	_abilities: [ { id: npc_full_health target: self requirement self<must_have_less_health_than>: 99 update_target: false } ]
+	_can_move: false
+	_not_pushable: true
+}

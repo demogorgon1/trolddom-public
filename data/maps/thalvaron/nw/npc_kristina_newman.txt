@@ -1,0 +1,21 @@
+dialogue_screen .kristina_newman:
+{
+	text: 
+	[	
+		"Why are you in my house?"
+	]			
+}
+
+entity thalvaron_kristina_newman: !NPC
+{
+	_string: "Kristina Newman"
+	_dialogue_root: $dialogue_root { .kristina_newman: { } }
+	_sprite: woman_31
+	_sprite_dead: woman_31_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

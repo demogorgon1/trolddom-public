@@ -51,14 +51,62 @@ sprites:
 	sprite doodad_wall_banner_blacksmithing_1: { flags: [ tile_walkable ] }
 	sprite doodad_tent: { flags: [ tile_walkable ] }
 	sprite doodad_wall_banner_dark_green_1: { flags: [ tile_walkable ] }
+	sprite doodad_pier_edge_2: { flags: [ tile_walkable ] }
+	sprite dungeon_open_door: { flags: [ tile_walkable ] }
+	sprite statue_face_right: { flags: [ tile_walkable ] }
+	sprite statue_face_left: { flags: [ tile_walkable ] }
+	sprite doodad_wood_stairs: { flags: [ tile_walkable ] }
+	sprite doodad_stone_stairs: { flags: [ tile_walkable ] }
+	sprite doodad_dead_tree_1: { flags: [ tile_walkable ] }
+	sprite doodad_dead_tree_2: { flags: [ tile_walkable ] }
+	sprite doodad_cactus_1: { flags: [ tile_walkable ] }
+	sprite doodad_cactus_2: { flags: [ tile_walkable ] }
+	sprite doodad_animal_skull_1: { flags: [ tile_walkable ] }
+	sprite doodad_long_grass_1: { flags: [ tile_walkable ] }
+	sprite doodad_counter_1: { flags: [ ] }
+	sprite doodad_wood_stairs_reversed: { flags: [ tile_walkable ] }
+	sprite doodad_stone_stairs_reversed: { flags: [ tile_walkable ] }
+	sprite doodad_wall_banner_generic_1: { flags: [ tile_walkable ] }
+	sprite doodad_wall_sign_generic_1: { flags: [ tile_walkable ] }
+	sprite doodad_rowboat_1: { flags: [ tile_walkable ] }
+	sprite doodad_cobweb_1: { flags: [ tile_walkable ] }
+	sprite doodad_tombstone_1: { flags: [ tile_walkable ] }
+	sprite doodad_angel_statue: { flags: [ tile_walkable ] }
+	
+	cursor: { position: [ 0 32 ] }
+	sprite doodad_tombstone_2: { flags: [ tile_walkable ] }
+	sprite doodad_skull_stick: { flags: [ tile_walkable ] }
+	sprite doodad_hole_1: { flags: [ tile_walkable ] }
+	sprite doodad_fs_rock_purple_1: { flags: [ tile_walkable ] }
+	sprite doodad_fs_rock_purple_2: { flags: [ tile_walkable ] }
+	sprite doodad_fs_rock_purple_3: { flags: [ tile_walkable ] }
+	sprite doodad_fs_rock_purple_4: { flags: [ tile_walkable ] }
+	sprite doodad_fs_rock_1: { flags: [ tile_walkable ] }
+	sprite doodad_fs_rock_2: { flags: [ tile_walkable ] }
+	sprite doodad_fs_rock_3: { flags: [ tile_walkable ] }
+	sprite doodad_fs_rock_4: { flags: [ tile_walkable ] }
+	sprite doodad_fs_rock_5: { flags: [ tile_walkable ] }
+	sprite doodad_fs_rock_6: { flags: [ tile_walkable ] }
+	sprite doodad_weapon_rack_1: { flags: [ tile_walkable ] }
+	sprite doodad_weapon_rack_2: { flags: [ tile_walkable ] }
+	sprite doodad_weapon_rack_3: { flags: [ tile_walkable ] }
+	sprite doodad_white_throne: { flags: [ tile_walkable ] }
+	sprite doodad_hard_slope_e: { flags: [ tile_walkable ] }
+	sprite doodad_hard_slope_n: { flags: [ tile_walkable ] }
+	sprite doodad_hard_slope_s: { flags: [ tile_walkable ] }
+	sprite doodad_hard_slope_w: { flags: [ tile_walkable ] }
 
+	cursor: { position: [ 0 48 ] }
+	size: { width: 80 height: 64 } sprite ship: { flags: [ tile_walkable ] }
+	size: { width: 32 height: 32 } sprite large_statue: { }
+	size: { width: 48 height: 48 } sprite fs_ground_mark: { flags: [ tile_walkable ] }
 }
 
 doodad small_rocks:
 {
 	sprites: [ doodad_rocks_1 doodad_rocks_2 doodad_rocks_3 doodad_rocks_4 doodad_rocks_10 doodad_rocks_13 doodad_rocks_14 ]
-	map_palette<"x">: { must_be_one_of: [ grass grass_2 dirt mud snow dark_grass sand ] occupy: true  }
-	map_palette<"y">: { must_not_be_one_of: [ forest forest_2 ] } 
+	map_palette<"x">: { must_be_one_of: [ grass grass_2 dirt mud snow dark_grass dark_grass_2 wet_grass sand badlands_1 badlands_2 fs_ground_1 fs_ground_2 ] occupy: true  }
+	map_palette<"y">: { must_not_be_one_of: [ forest forest_2 pine_forest_1 pine_forest_2 pine_forest_3 ] } 
 	map: [ "y"
 	       "x" ]
 	map_offset: [ 0 -1 ]
@@ -70,7 +118,7 @@ doodad flowers:
 {
 	sprites: [ doodad_flowers_1 doodad_flowers_2 doodad_flowers_3 ]
 	map_palette<"x">: { must_be_one_of: [ grass ] occupy: true  }
-	map_palette<"y">: { must_not_be_one_of: [ forest forest_2 ] } 
+	map_palette<"y">: { must_not_be_one_of: [ forest forest_2 pine_forest_1 pine_forest_2 pine_forest_3 ] } 
 	map: [ "y"
 	       "x" ]
 	map_offset: [ 0 -1 ]
@@ -81,8 +129,8 @@ doodad flowers:
 doodad small_rocks_brown:
 {
 	sprites: [ doodad_rocks_5 doodad_rocks_6 doodad_rocks_7 doodad_rocks_8 doodad_rocks_9 doodad_rocks_11 doodad_rocks_12 ]
-	map_palette<"x">: { must_be_one_of: [ grass grass_2 dirt mud snow dark_grass sand ] occupy: true }
-	map_palette<"y">: { must_not_be_one_of: [ forest forest_2 ] } 
+	map_palette<"x">: { must_be_one_of: [ grass grass_2 dirt mud snow dark_grass dark_grass_2 wet_grass sand badlands_1 badlands_2 ] occupy: true }
+	map_palette<"y">: { must_not_be_one_of: [ forest forest_2 pine_forest_1 pine_forest_2 pine_forest_3 ] } 
 	map: [ "y"
 	       "x" ]
 	map_offset: [ 0 -1 ]
@@ -93,8 +141,8 @@ doodad small_rocks_brown:
 doodad grass_patch:
 {
 	sprites: [ doodad_grass_1 doodad_grass_2 ]
-	map_palette<"x">: { must_be_one_of: [ grass grass_2 dirt mud dark_grass ] }
-	map_palette<"y">: { must_not_be_one_of: [ forest forest_2 rocks ] } 
+	map_palette<"x">: { must_be_one_of: [ grass grass_2 dirt mud dark_grass wet_grass dark_grass_2 ] }
+	map_palette<"y">: { must_not_be_one_of: [ forest forest_2 rocks pine_forest_1 pine_forest_2 pine_forest_3 ] } 
 	map: [ "yyy"
 	       "yxy" 
 		   "yyy" ]
@@ -102,6 +150,23 @@ doodad grass_patch:
 	
 	auto_probability: [ 1 56 ]
 }
+
+!define local GROUND_AUTO_DOODAD
+{
+	sprites: @_sprites
+	map_palette<"x">: { must_be_one_of: @_tiles }
+	map_palette<"y">: { must_not_be_one_of: [ forest forest_2 rocks pine_forest_1 pine_forest_2 snow_rocks badlands_rocks pine_forest_3 ] } 
+	map: [ "yyy"
+	       "yxy" 
+		   "yyy" ]
+	map_offset: [ -1 -1 ]	
+	auto_probability: @_probability
+}
+
+doodad dead_tree: !GROUND_AUTO_DOODAD { _sprites: [ doodad_dead_tree_1 doodad_dead_tree_2 ] _tiles: [ badlands_1 badlands_2 ] _probability: [ 1 150 ] }
+doodad cactus: !GROUND_AUTO_DOODAD { _sprites: [ doodad_cactus_1 doodad_cactus_2 ] _tiles: [ badlands_1 badlands_2 ] _probability: [ 1 140 ] }
+doodad animal_skull: !GROUND_AUTO_DOODAD { _sprites: [ doodad_animal_skull_1 ] _tiles: [ badlands_1 badlands_2 ]  _probability: [ 1 180 ]  }
+doodad long_grass: !GROUND_AUTO_DOODAD { _sprites: [ doodad_long_grass_1 ] _tiles: [ wet_grass ]  _probability: [ 1 60 ]  }
 
 doodad pier_edge:
 {
@@ -113,6 +178,49 @@ doodad pier_edge:
 	map_offset: [ 0 -1 ]
 	
 	auto_probability: 100
+}
+
+doodad pier_edge_2:
+{
+	sprites: [ doodad_pier_edge_2 ]
+	map_palette<"x">: { must_be_one_of: [ water ] }
+	map_palette<"y">: { must_be_one_of: [ road_1 road_2 ] } 
+	map: [ "y"
+	       "x" ]
+	map_offset: [ 0 -1 ]
+	
+	auto_probability: 100
+}
+
+doodad pier_edge_3:
+{
+	sprites: [ doodad_pier_edge_1 ]
+	map_palette<"x">: { must_be_one_of: [ water ] }
+	map_palette<"y">: { must_be_one_of: [ outside_wood_floor_1 ] } 
+	map: [ "y"
+	       "x" ]
+	map_offset: [ 0 -1 ]
+	
+	auto_probability: 100
+}
+
+doodad ship:
+{
+	sprites: [ ship ]
+	map_palette<"x">: { occupy: true } map: [ "x" ]
+}
+
+doodad large_statue:
+{
+	sprites: [ large_statue ]
+	map_palette<"x">: { occupy: true } map: [ "xx"
+                                              "xx" ]
+}
+
+doodad fs_ground_mark:
+{
+	sprites: [ fs_ground_mark ]
+	map_palette<"x">: { occupy: true } map: [ "x" ]
 }
 
 doodad crates: { sprites: [ doodad_crates_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
@@ -133,7 +241,31 @@ doodad wall_banner_mining: { sprites: [ doodad_wall_banner_mining_1 ] map_palett
 doodad wall_banner_blacksmithing: { sprites: [ doodad_wall_banner_blacksmithing_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad tent: { sprites: [ doodad_tent ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad wall_banner_dark_green: { sprites: [ doodad_wall_banner_dark_green_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
-
-
-
+doodad dungeon_open_door: { sprites: [ dungeon_open_door ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad statue_face_left: { sprites: [ statue_face_left ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad statue_face_right: { sprites: [ statue_face_right ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad wood_stairs: { sprites: [ doodad_wood_stairs ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad stone_stairs: { sprites: [ doodad_stone_stairs ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad counter: { sprites: [ doodad_counter_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad wood_stairs_reversed: { sprites: [ doodad_wood_stairs_reversed ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad stone_stairs_reversed: { sprites: [ doodad_stone_stairs_reversed ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad wall_banner_generic: { sprites: [ doodad_wall_banner_generic_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad wall_sign_generic: { sprites: [ doodad_wall_sign_generic_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad barrel: { sprites: [ barrel_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad cage: { sprites: [ cage_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad rowboat: { sprites: [ doodad_rowboat_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad sign_generic: { sprites: [ sign_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] } 
+doodad cobweb: { sprites: [ doodad_cobweb_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad tombstone: { sprites: [ doodad_tombstone_1 doodad_tombstone_2 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad statue_angel: { sprites: [ doodad_angel_statue ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad skull_stick: { sprites: [ doodad_skull_stick ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad hole: { sprites: [ doodad_hole_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad fs_rock: { sprites: [ doodad_fs_rock_1 doodad_fs_rock_2 doodad_fs_rock_3 doodad_fs_rock_4 doodad_fs_rock_5 doodad_fs_rock_6 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad fs_rock_purple: { sprites: [ doodad_fs_rock_purple_1 doodad_fs_rock_purple_2 doodad_fs_rock_purple_3 doodad_fs_rock_purple_4 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad weapon_rack: { sprites: [ doodad_weapon_rack_1 doodad_weapon_rack_2 doodad_weapon_rack_3 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad white_throne: { sprites: [ doodad_white_throne ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad hard_slope_e: { sprites: [ doodad_hard_slope_e ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad hard_slope_w: { sprites: [ doodad_hard_slope_w ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad hard_slope_n: { sprites: [ doodad_hard_slope_n ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad hard_slope_s: { sprites: [ doodad_hard_slope_s ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 

@@ -56,6 +56,10 @@ namespace tpublic
 						{
 							m_pingPong = aChild->GetBool();
 						}
+						else if (aChild->m_name == "use_control_point_index")
+						{
+							m_useControlPointIndex = aChild->GetBool();
+						}
 						else if (aChild->m_name == "z_offset")
 						{
 							m_zOffset = aChild->GetInt32();
@@ -78,6 +82,7 @@ namespace tpublic
 					aWriter->WritePOD(m_repeat);
 					aWriter->WriteInt(m_zOffset);
 					aWriter->WritePOD(m_pingPong);
+					aWriter->WritePOD(m_useControlPointIndex);
 				}
 
 				bool
@@ -98,6 +103,8 @@ namespace tpublic
 						return false;
 					if (!aReader->ReadPOD(m_pingPong))
 						return false;
+					if (!aReader->ReadPOD(m_useControlPointIndex))
+						return false;
 					return true;
 				}
 
@@ -109,11 +116,13 @@ namespace tpublic
 				bool							m_repeat = true;
 				int32_t							m_zOffset = 0;
 				bool							m_pingPong = false;
+				bool							m_useControlPointIndex = false;
 			};
 
 			enum Field
 			{
-				FIELD_ANIMATIONS
+				FIELD_ANIMATIONS,
+				FIELD_IN_WATER_SPRITE
 			};
 
 			static void
@@ -121,7 +130,8 @@ namespace tpublic
 				ComponentSchema* aSchema)
 			{
 				aSchema->DefineCustomObjectPointers<Animation>(FIELD_ANIMATIONS, "animations", offsetof(Sprite, m_animations));
-				
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_ANIMATIONS, "in_water_sprite", offsetof(Sprite, m_inWaterSpriteId))->SetDataType(DataType::ID_SPRITE);
+
 				aSchema->OnRead<Sprite>([](
 					Sprite*						aSprite,
 					ComponentSchema::ReadType	/*aReadType*/,
@@ -162,11 +172,13 @@ namespace tpublic
 			{
 				m_animations.clear();
 				memset(m_stateAnimations, 0, sizeof(m_stateAnimations));
+				m_inWaterSpriteId = 0;
 			}
 
 			// Public data
 			std::vector<std::unique_ptr<Animation>>	m_animations;
 			const Animation*						m_stateAnimations[EntityState::NUM_IDS] = { 0 };
+			uint32_t								m_inWaterSpriteId = 0;
 		};
 	}
 

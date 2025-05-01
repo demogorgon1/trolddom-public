@@ -24,7 +24,7 @@ namespace tpublic
 				Scoring(
 					const SourceNode*		aNode)
 				{
-					m_tagId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TAG, aNode->m_name.c_str());
+					m_tagId = aNode->m_sourceContext->m_persistentIdTable->GetId(aNode->m_debugInfo, DataType::ID_TAG, aNode->m_name.c_str());
 					m_score = aNode->GetUInt32();
 				}
 

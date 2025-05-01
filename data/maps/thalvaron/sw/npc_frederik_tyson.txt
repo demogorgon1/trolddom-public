@@ -1,0 +1,120 @@
+dialogue_screen .frederik_tyson_vendor:
+{
+	sell mount_dark_brown_horse: { quantity: 1 }	
+}
+
+dialogue_screen .frederik_tyson_dialogue_2:
+{
+	text: 
+	[	
+		"Haha. Don't make me laugh."
+	]			
+}
+
+dialogue_screen .frederik_tyson_dialogue:
+{
+	text: 
+	[	
+		"Hello."
+	]		
+	
+	options:
+	[
+		{ 
+			quest: .frederik_tyson_1 
+			requirement self<must_have_active_quest>: .mirehaven_mayor_1
+			requirement self<must_not_have_completed_quest>: .mirehaven_mayor_1
+			requirement self<must_not_have_item>: .mirehaven_mayor_1_quest_item 			
+		}
+	
+		{ 
+			goto: .frederik_tyson_dialogue_2 
+			text: "I'm here on behalf of Mayor Riddle. You need to pay your taxes." 
+			requirement self<must_have_active_quest>: .mirehaven_mayor_1
+			requirement self<must_not_have_completed_quest>: .mirehaven_mayor_1
+			requirement self<must_not_have_item>: .mirehaven_mayor_1_quest_item 
+		} 		
+		
+		{ quest<completion_only>: .yvonne_tyson_1 }
+		{ goto: .frederik_tyson_vendor text: "Let me browse your goods." }
+	]
+}
+
+dialogue_root .frederik_tyson_dialogue:
+{
+	.frederik_tyson_dialogue: { }
+}
+
+entity thalvaron_frederik_tyson: !NPC
+{
+	_string: "Frederik Tyson"
+	_dialogue_root: .frederik_tyson_dialogue	
+	_sprite: man_52
+	_sprite_dead: man_52_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+ability .frederik_tyson:
+{
+	flags: [ always_in_range always_in_line_of_sight produce_items_target ]	
+	produce_items: { .mirehaven_mayor_1_quest_item: 1 }
+}
+
+############################################################
+# Quest 1
+
+loot_group .frederik_tyson_1_quest_item: {}
+
+item .frederik_tyson_1_quest_item:
+{
+	icon: icon_cat
+	item_level: 14
+	loot_groups: [ .frederik_tyson_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Tyson's Lost Cat"
+	flavor: "*Purr*"
+}
+
+objective .frederik_tyson_1:
+{
+	string: "Tyson's Lost Cat"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .frederik_tyson_1_quest_item count: 1 }
+}
+
+quest .frederik_tyson_1:
+{
+	string: "Something For Something"
+
+	text:
+	[
+		"Hunt down the swamp ooze that absorbed Tyson's cat."
+	]
+	
+	description: 
+	[
+		"Do you know what a swamp ooze is? Annoying slime-creatures made out of goo. Unfortunately they're quite common down here. They move around like translucent slugs, sometimes picking up debris from the"
+		"ground as the slide over it. We've lost all kinds of stuff to these critters. Farm tools, shoes, you name it, but now they've gone too far! I think one of them might have absorbed our little kitty!\n\n"
+		"If you can find the ooze culprit and return our cat to us, dead or alive, then I might consider paying my taxes."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Mr. Mivvy! You're alive! But I think you'll need a bath..."
+	]
+
+	level: 14
+	reward_all_items: [ .mirehaven_mayor_1_quest_item ]
+	objectives: [ .frederik_tyson_1 ]
+}

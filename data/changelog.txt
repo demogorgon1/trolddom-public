@@ -2,6 +2,35 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.2.0"
+
+	text: "New content:"
+
+	list:
+	[
+		{ text: "Level cap raised to 20." }		
+		{ text: "Tons of new quests, zones, dungeons, talents, minions, and a lot more." }
+		{ text: "New professions: enchanting and tailoring." }
+	]	
+	
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "All talent points have been reset due to talent tree changes." }
+		{ text: "Buffs can be canceled by right clicking." }
+		{ text: "Real-time and historical fight details (damage per second, etc) can be accessed by right clicking in combat log." }
+		{ text: "A new quest tracking interface can be enabled in the quest log." }
+		{ text: "Two new equipment slots for trinkets." }
+		{ text: "Fixed bug that allowed paladins to spam Divine Shield." }
+		{ text: "Fixed bug where you couldn't use right-click to move items from inventory to stash." }
+	]	
+}
+
+changelog_old:
+{
+
+	#######################################################################################
 	heading: "v0.1.20"
 
 	text: "Changes:"

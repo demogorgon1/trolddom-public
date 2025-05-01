@@ -14,16 +14,16 @@ item_metrics:
 		[ 8  17 ]
 		[ 9  19 ]
 		[ 10 20 ]
-		[ 11 20 ]
-		[ 12 20 ]
-		[ 13 20 ]
-		[ 14 20 ]
-		[ 15 20 ]
-		[ 16 20 ]
-		[ 17 20 ]
-		[ 18 20 ]
-		[ 19 20 ]
-		[ 20 20 ]
+		[ 11 21 ]
+		[ 12 22 ]
+		[ 13 23 ]
+		[ 14 24 ]
+		[ 15 25 ]
+		[ 16 26 ]
+		[ 17 27 ]
+		[ 18 28 ]
+		[ 19 29 ]
+		[ 20 30 ]
 	]
 	
 	base_cost:
@@ -76,89 +76,90 @@ item_metrics:
 
 	base_2h_weapon_dps:
 	[
-		[ 1 10 ]
-		[ 2 12 ]
-		[ 3 14 ]
-		[ 4 15 ]
-		[ 5 17 ]
-		[ 6 18 ]
-		[ 7 19 ]
-		[ 8 21 ]
-		[ 9 23 ]
-		[ 10 25 ]
-		[ 11 27 ]
-		[ 12 29 ]
-		[ 13 32 ]
-		[ 14 34 ]
-		[ 15 36 ]
-		[ 16 38 ]
-		[ 17 40 ]
-		[ 18 42 ]
-		[ 19 45 ]
-		[ 20 48 ]
+		[ 1 9 ]
+		[ 2 11 ]
+		[ 3 13 ]
+		[ 4 14 ]
+		[ 5 15 ]
+		[ 6 16 ]
+		[ 7 17 ]
+		[ 8 19 ]
+		[ 9 21 ]
+		[ 10 23 ]
+		[ 11 24 ]
+		[ 12 26 ]
+		[ 13 29 ]
+		[ 14 31 ]
+		[ 15 32 ]
+		[ 16 34 ]
+		[ 17 36 ]
+		[ 18 38 ]
+		[ 19 41 ]
+		[ 20 43 ]
 	]
 
 	base_ranged_dps:
 	[
-		[ 1 10 ]
-		[ 2 12 ]
-		[ 3 14 ]
-		[ 4 15 ]
-		[ 5 17 ]
-		[ 6 18 ]
-		[ 7 19 ]
-		[ 8 21 ]
-		[ 9 22 ]
-		[ 10 24 ]
-		[ 11 27 ]
-		[ 12 29 ]
-		[ 13 32 ]
-		[ 14 34 ]
-		[ 15 36 ]
-		[ 16 38 ]
-		[ 17 40 ]
-		[ 18 42 ]
-		[ 19 45 ]
-		[ 20 48 ]
+		[ 1 9 ]
+		[ 2 11 ]
+		[ 3 13 ]
+		[ 4 14 ]
+		[ 5 15 ]
+		[ 6 16 ]
+		[ 7 17 ]
+		[ 8 19 ]
+		[ 9 21 ]
+		[ 10 23 ]
+		[ 11 24 ]
+		[ 12 26 ]
+		[ 13 29 ]
+		[ 14 31 ]
+		[ 15 32 ]
+		[ 16 34 ]
+		[ 17 36 ]
+		[ 18 38 ]
+		[ 19 41 ]
+		[ 20 43 ]
 	]
 
-	item_type_multipliers armor_cloth: 		{ armor: 1 		cost: 1     stat_budget: 1.0 }
-	item_type_multipliers armor_mail: 		{ armor: 2 		cost: 1.5   stat_budget: 1.0 }
-	item_type_multipliers armor_plate: 		{ armor: 3 		cost: 3     stat_budget: 1.0 }
-	item_type_multipliers weapon_1h_sword: 	{ 				cost: 6     stat_budget: 1.0 }
-	item_type_multipliers weapon_1h_mace: 	{ 				cost: 6     stat_budget: 1.0 }
-	item_type_multipliers weapon_1h_axe: 	{ 				cost: 6     stat_budget: 1.0 }
-	item_type_multipliers weapon_1h_knife: 	{ 				cost: 5     stat_budget: 1.0 }
-	item_type_multipliers weapon_2h_sword: 	{ 				cost: 8     stat_budget: 2.0 }
-	item_type_multipliers weapon_2h_mace: 	{ 				cost: 8     stat_budget: 2.0 }
-	item_type_multipliers weapon_2h_axe: 	{ 				cost: 8     stat_budget: 2.0 }
-	item_type_multipliers weapon_2h_staff: 	{ 				cost: 7     stat_budget: 2.0 }
-	item_type_multipliers shield: 			{ armor: 20		cost: 5     stat_budget: 1.0 }
-	item_type_multipliers ranged_bow: 		{ 				cost: 7     stat_budget: 0.8 }
-	item_type_multipliers ranged_crossbow: 	{ 				cost: 7     stat_budget: 0.8 }
+	item_type_multipliers armor_cloth: 		{ armor: 1 		cost: 1     stat_budget: 1.0	token_cost: 1 }
+	item_type_multipliers armor_mail: 		{ armor: 2 		cost: 1.5   stat_budget: 1.0	token_cost: 1 }
+	item_type_multipliers armor_plate: 		{ armor: 3 		cost: 3     stat_budget: 1.0	token_cost: 1 }
+	item_type_multipliers weapon_1h_sword: 	{ 				cost: 6     stat_budget: 1.0	token_cost: 2 }
+	item_type_multipliers weapon_1h_mace: 	{ 				cost: 6     stat_budget: 1.0	token_cost: 2 }
+	item_type_multipliers weapon_1h_axe: 	{ 				cost: 6     stat_budget: 1.0	token_cost: 2 }
+	item_type_multipliers weapon_1h_knife: 	{ 				cost: 5     stat_budget: 1.0	token_cost: 2 }
+	item_type_multipliers weapon_2h_sword: 	{ 				cost: 8     stat_budget: 2.0	token_cost: 2.2 }
+	item_type_multipliers weapon_2h_mace: 	{ 				cost: 8     stat_budget: 2.0	token_cost: 2.2 }
+	item_type_multipliers weapon_2h_axe: 	{ 				cost: 8     stat_budget: 2.0	token_cost: 2.2 }
+	item_type_multipliers weapon_2h_staff: 	{ 				cost: 7     stat_budget: 2.0	token_cost: 2.2 }
+	item_type_multipliers shield: 			{ armor: 20		cost: 5     stat_budget: 1.0	token_cost: 2 }
+	item_type_multipliers ranged_bow: 		{ 				cost: 7     stat_budget: 0.8	token_cost: 2 }
+	item_type_multipliers ranged_crossbow: 	{ 				cost: 7     stat_budget: 0.8	token_cost: 2 }
 	
-	equipment_slot_multipliers head:		{ armor: 3		cost: 2 	stat_budget: 1.6 }
-	equipment_slot_multipliers chest:		{ armor: 4	    cost: 2.5   stat_budget: 1.8 }
-	equipment_slot_multipliers legs:		{ armor: 3.5	cost: 2.25  stat_budget: 1.6 }
-	equipment_slot_multipliers feet:		{ armor: 2		cost: 1.5   stat_budget: 1.3 }
-	equipment_slot_multipliers shoulders:	{ armor: 2.5	cost: 1.75  stat_budget: 1.4 }
-	equipment_slot_multipliers wrists:		{ armor: 1.5	cost: 1     stat_budget: 1.1 }
-	equipment_slot_multipliers waist:		{ armor: 2		cost: 1.5   stat_budget: 1.2 }
-	equipment_slot_multipliers hands:		{ armor: 2		cost: 1.5   stat_budget: 1.3 }
-	equipment_slot_multipliers back:		{ armor: 0.5	cost: 1.2   stat_budget: 1.1 }
-	equipment_slot_multipliers neck:		{ 				cost: 2   	stat_budget: 1.0 }
-	equipment_slot_multipliers finger_1:	{ 				cost: 2     stat_budget: 1.0 }
-	equipment_slot_multipliers finger_2:	{ 				cost: 2     stat_budget: 1.0 }
+	equipment_slot_multipliers head:		{ armor: 3		cost: 2 	stat_budget: 1.6 	token_cost: 1.6 }
+	equipment_slot_multipliers chest:		{ armor: 4	    cost: 2.5   stat_budget: 1.8 	token_cost: 1.8 }
+	equipment_slot_multipliers legs:		{ armor: 3.5	cost: 2.25  stat_budget: 1.6 	token_cost: 1.6 }
+	equipment_slot_multipliers feet:		{ armor: 2		cost: 1.5   stat_budget: 1.3 	token_cost: 1.3 }
+	equipment_slot_multipliers shoulders:	{ armor: 2.5	cost: 1.75  stat_budget: 1.4 	token_cost: 1.4 }
+	equipment_slot_multipliers wrists:		{ armor: 1.5	cost: 1     stat_budget: 1.1 	token_cost: 1.1 }
+	equipment_slot_multipliers waist:		{ armor: 2		cost: 1.5   stat_budget: 1.2 	token_cost: 1.2 }
+	equipment_slot_multipliers hands:		{ armor: 2		cost: 1.5   stat_budget: 1.3 	token_cost: 1.3 }
+	equipment_slot_multipliers back:		{ armor: 0.5	cost: 1.2   stat_budget: 1.1 	token_cost: 1.1 }
+	equipment_slot_multipliers neck:		{ 				cost: 2   	stat_budget: 1.0 	token_cost: 1.0 }
+	equipment_slot_multipliers finger_1:	{ 				cost: 2     stat_budget: 1.0 	token_cost: 1.0 }
+	equipment_slot_multipliers finger_2:	{ 				cost: 2     stat_budget: 1.0 	token_cost: 1.0 }
 	equipment_slot_multipliers bag_1:		{ 				cost: 3 }
 	equipment_slot_multipliers bag_2:		{ 				cost: 3 }
 	equipment_slot_multipliers bag_3:		{ 				cost: 3 }
 	
-	rarity_multipliers uncommon:			{ armor: 1.2	cost: 2 	stat_budget: 1.1    weapon_damage: 1.2 }
-	rarity_multipliers rare:				{ armor: 1.4	cost: 3 	stat_budget: 1.3    weapon_damage: 1.3 }
-	rarity_multipliers epic:				{ armor: 1.6	cost: 4 	stat_budget: 1.5    weapon_damage: 1.4 }
-	rarity_multipliers mythic:				{ armor: 1.8	cost: 5 	stat_budget: 1.7    weapon_damage: 1.5 }
+	rarity_multipliers uncommon:			{ armor: 1.2	cost: 2 	stat_budget: 1.1    weapon_damage: 1.2  token_cost: 1 }
+	rarity_multipliers rare:				{ armor: 1.4	cost: 3 	stat_budget: 1.3    weapon_damage: 1.3  token_cost: 2 }
+	rarity_multipliers epic:				{ armor: 1.6	cost: 4 	stat_budget: 1.5    weapon_damage: 1.4  token_cost: 3.2 }
+	rarity_multipliers mythic:				{ armor: 1.8	cost: 5 	stat_budget: 1.7    weapon_damage: 1.5  token_cost: 5 }
 	
-	shield_armor_to_base_block_value: 		0.0125
+	shield_armor_to_base_block_value: 		0.016
 	offhand_dps_multiplier:					0.5
-
+	token_cost_base_multiplier: 			5.5
+	
 }

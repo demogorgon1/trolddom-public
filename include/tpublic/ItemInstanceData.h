@@ -31,6 +31,7 @@ namespace tpublic
 		UIntRange				m_weaponDamage;
 		uint32_t				m_weaponCooldown = 0;
 		uint32_t				m_cost = 0;
+		uint32_t				m_tokenCost = 0;
 		int32_t					m_statBudget = 0;
 
 	private:

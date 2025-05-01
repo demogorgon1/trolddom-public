@@ -66,15 +66,15 @@ namespace tpublic
 						}
 						else if (aChild->m_name == "start_position_entity")
 						{
-							m_startPositionEntityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENTITY, aChild->GetIdentifier());
+							m_startPositionEntityId = aChild->GetId(DataType::ID_ENTITY);
 						}
 						else if (aChild->m_name == "creature_map_entity_spawn")
 						{
-							m_creatureMapEntitySpawnId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aChild->GetIdentifier());
+							m_creatureMapEntitySpawnId = aChild->GetId(DataType::ID_MAP_ENTITY_SPAWN);
 						}
 						else if (aChild->m_name == "stash_entity")
 						{
-							m_stashEntityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENTITY, aChild->GetIdentifier());
+							m_stashEntityId = aChild->GetId(DataType::ID_ENTITY);
 						}
 						else
 						{

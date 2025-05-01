@@ -1,0 +1,78 @@
+dialogue_screen .robert_dulish_greetings:
+{
+	text: 
+	[	
+		"This is really a horrible place, isn't it? The air is dry and uncomforable. Is it really air we're breathing?"
+	]			
+	
+	options:
+	[
+		{ quest: .robert_dulish_1 !MUST_BE_REAL_DISCIPLE{} }
+	]
+}
+
+dialogue_root .robert_dulish_dialogue:
+{
+	.robert_dulish_greetings: { }
+}
+
+entity .robert_dulish: !NPC
+{
+	_string: "Robert Dulish"
+	_dialogue_root: .robert_dulish_dialogue
+	_loot_table: .npc
+	_level: 20
+	_faction: underworld
+	_creature_type: humanoid
+	_not_pushable: true
+	_sprite: man_1
+	_sprite_dead: man_1_dead
+	_elite: true
+}
+	
+############################################################
+# Quest 1
+
+objective .robert_dulish_1:
+{
+	string: "Shroud Lizard Tails"
+	
+	maps: [ the_shrouded_lands ]
+	
+	collect_items: { item: the_shrouded_lands_lizard_tail count: 5 }
+}
+
+quest .robert_dulish_1:
+{
+	string: "Lizard Tails"
+
+	text:
+	[
+		"Venture east to the Crystal Fields and collect tails from the lizards."
+	]
+	
+	description: 
+	[
+		"I'm here on behalf of an anonymous wizard from Valoris. He has requested that I procure a large supply of tails of a species of lizard native to this hellhole. If you can deliver some to me I'll make sure you're"
+		"rewarded.\n\n"
+		"You can find the lizard to the east in the crystal fields."
+	]
+
+	progress:
+	[
+		"You still here?"
+	]
+	
+	completion:
+	[
+		"Great. Here you go."
+	]
+	
+	objectives: [ .robert_dulish_1 ] 
+	repeat_mode: daily
+	level: 20
+	reward_cash_multiplier: 3
+	reward_reputation_multiplier: 0
+	reward_realm_balance<the_shrouded_lands_underworld>: { expression: a_mul_x_plus_b x: pvp_control_points a: 2 b: 2 }
+	reward_all_items: [ unholy_token ]
+}

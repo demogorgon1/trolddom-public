@@ -1,0 +1,155 @@
+dialogue_screen .sylvia_swift_dialogue:
+{
+	text: 
+	[	
+		"Do you enjoy murder and mayhem? You might have come to the right place."
+	]			
+	
+	options:
+	[
+		{ quest: .sylvia_swift_1 requirement self<must_be_disciple>: light }
+		{ quest: .sylvia_swift_2 requirement self<must_be_disciple>: underworld }
+	]
+}
+
+dialogue_root .sylvia_swift_dialogue:
+{
+	.sylvia_swift_dialogue: { }
+}
+
+entity thalvaron_sylvia_swift: !NPC
+{
+	_string: "Sylvia Swift"
+	_dialogue_root: .sylvia_swift_dialogue	
+	_sprite: woman_26
+	_sprite_dead: woman_26_dead
+	_level: 20
+	_faction: league_of_assassins		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+aura thalvaron_sylvia_swift_quest_item:
+{
+	string: "Shroud Powder"
+	description: "You feel like someone else."
+	icon: icon_residue_1
+	flags: [ indefinite unique persist_in_death ]
+	type: buff
+}
+
+ability thalvaron_sylvia_swift_quest_item:
+{
+	string: "Shroud Powder"
+	description: "When you enter the Shrouded Lands you'll join as an ally of the enemy."	
+	direct_effect apply_aura: { aura: thalvaron_sylvia_swift_quest_item }
+	cooldowns: [ global ]
+	flags: [ target_self item ]
+	toggle_aura: thalvaron_sylvia_swift_quest_item
+}
+
+item thalvaron_sylvia_swift_quest_item:
+{
+	string: "Shroud Powder"
+	icon: icon_residue_1
+	flags: [ unique ]
+	rarity: uncommon
+	use_ability: thalvaron_sylvia_swift_quest_item
+}
+
+############################################################
+# Quest 1
+
+objective .sylvia_swift_1:
+{
+	string: "Follower of the Light Killed"
+	
+	maps: [ the_shrouded_lands ]
+	
+	kill_player: { count: 1 faction: light }
+}
+
+quest .sylvia_swift_1:
+{
+	string: "Some People Just Want to Watch the World Burn"
+
+	text:
+	[
+		"Enter the Shrouded Lands disguised as a disciple of the Underworld, kill someone, and return to Sylvia in Valoris."
+	]
+	
+	description: 
+	[
+		"I understand that you're a disciple of the light. I've never really been into that mumbo-jumbo and I couldn't care less about deities and prayers.\n\n"
+		"Do you ever go to the Shrouded Lands to fight with the unholy forces? To slay disciples of the underworld? Well... What do you do when you can't find any suitable victims, but you really want to"
+		"kill someone? I might be able to help you.\n\n"
+		"Inhale this powder and you'll be able to enter the Shrouded Lands in the guise of a disciple of the underworld. All the unholy forces will see you as an ally and you'll be able to slay the followers of the light. You're not"
+		"too attached to those guys anyway, are you?\n\n"
+		"Here take it. Enter through one of the portals, kill someone, and return to me for a reward."
+	]
+
+	progress:
+	[
+		"Not into killing people anymore?"
+	]
+	
+	completion:
+	[
+		"Nice! Did they get really annoyed?"
+	]
+
+	objectives: [ .sylvia_swift_1 ]
+	level: 20	
+	repeat_mode: daily
+	reward_cash_multiplier: 1.5
+	quest_items: [ thalvaron_sylvia_swift_quest_item ]
+}
+
+############################################################
+# Quest 2
+
+objective .sylvia_swift_2:
+{
+	string: "Follower of the Underworld Killed"
+	
+	maps: [ the_shrouded_lands ]
+	
+	kill_player: { count: 1 faction: underworld }
+}
+
+quest .sylvia_swift_2:
+{
+	string: "Some People Just Want to Watch the World Burn"
+
+	text:
+	[
+		"Enter the Shrouded Lands disguised as a disciple of the Light, kill someone, and return to Sylvia in Valoris."
+	]
+	
+	description: 
+	[
+		"I understand that you're a disciple of the Underworld. I've never really been into that mumbo-jumbo and I couldn't care less about deities and prayers.\n\n"
+		"Do you ever go to the Shrouded Lands to fight with the holy forces? To slay disciples of the Light? Well... What do you do when you can't find any suitable victims, but you really want to"
+		"kill someone? I might be able to help you.\n\n"
+		"Inhale this powder and you'll be able to enter the Shrouded Lands in the guise of a disciple of the Light. All the holy forces will see you as an ally and you'll be able to slay the followers of the Underworld. You're not"
+		"too attached to those guys anyway, are you?\n\n"
+		"Here take it. Enter through one of the portals, kill someone, and return to me for a reward."
+	]
+
+	progress:
+	[
+		"Not into killing people anymore?"
+	]
+	
+	completion:
+	[
+		"Nice! Did they get really annoyed?"
+	]
+
+	objectives: [ .sylvia_swift_2 ]
+	level: 20	
+	repeat_mode: daily
+	reward_cash_multiplier: 1.5
+	quest_items: [ thalvaron_sylvia_swift_quest_item ]
+}

@@ -1,0 +1,66 @@
+dialogue_screen .yvonne_tyson_dialogue:
+{
+	text: 
+	[	
+		"Greetings."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .brigand_leader_quest_item }
+		{ quest<offer_only>: .yvonne_tyson_1 }
+	]
+}
+
+dialogue_root .yvonne_tyson_dialogue:
+{
+	.yvonne_tyson_dialogue: { }
+}
+
+entity thalvaron_yvonne_tyson: !NPC
+{
+	_string: "Yvonne Tyson"
+	_dialogue_root: .yvonne_tyson_dialogue	
+	_sprite: woman_19
+	_sprite_dead: woman_19_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+{
+	${ _level: 14 }
+	item .yvonne_tyson_1_a: !QUEST_REWARD_NECK{ _string: "Effigy of Wisdom" _icon: icon_necklace_2 _wisdom: 1 }
+	item .yvonne_tyson_1_b: !QUEST_REWARD_NECK{ _string: "Effigy of Constitution" _icon: icon_necklace_1 _constitution: 1 }
+}
+
+quest .yvonne_tyson_1:
+{
+	string: "Collect Your Reward"
+
+	text:
+	[
+		"Ask Frederik Tyson for a reward."
+	]
+	
+	description: 
+	[
+		"The ring is an old family relic of my husband, who probably is more pleased of you finding it than I am. You should go tell him that you found it and he'll probably give you a little something for your trouble."
+	]
+	
+	completion:
+	[
+		"You found Granny's old ring?! Those bastards stole it quite some time ago. This is amazing. I hope they're dead.\n\n"
+		"Here, take this, I don't know how I can ever repay you."
+	]
+
+	level: 14
+	prerequisites: [ .brigand_leader_quest_item ]
+	reward_xp_multiplier: 0.3
+	reward_one_item: [ .yvonne_tyson_1_a .yvonne_tyson_1_b ]
+}

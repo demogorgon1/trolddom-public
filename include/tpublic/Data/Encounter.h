@@ -69,7 +69,7 @@ namespace tpublic
 						const SourceNode* aChild)
 					{
 						if(aChild->m_name == "id")
-							m_id = aChild->m_sourceContext->m_persistentIdTable->GetId(ConditionTypeToDataType(m_type), aChild->GetIdentifier());
+							m_id = aChild->GetId(ConditionTypeToDataType(m_type));
 						else if(aChild->m_name == "value")
 							m_value = aChild->GetUInt32();
 						else 
@@ -119,7 +119,7 @@ namespace tpublic
 						const SourceNode* aChild)
 					{
 						if (aChild->m_name == "map_entity_spawn")
-							m_mapEntitySpawnId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_ENTITY_SPAWN, aChild->GetIdentifier());
+							m_mapEntitySpawnId = aChild->GetId(DataType::ID_MAP_ENTITY_SPAWN);
 						else if(aChild->m_name == "possible_entities")
 							aChild->GetIdArray(DataType::ID_ENTITY, m_possibleEntityIds);
 						else if (aChild->m_name == "entity_count")
@@ -132,6 +132,8 @@ namespace tpublic
 							m_delayTicks = aChild->GetInt32();
 						else if(aChild->m_name == "detached_from_spawn")
 							m_detachedFromSpawn = aChild->GetBool();
+						else if (aChild->m_name == "trigger_count")
+							m_triggerCount = aChild->GetUInt32();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					});
@@ -148,6 +150,7 @@ namespace tpublic
 					aWriter->WriteInt(m_delayTicks);
 					aWriter->WriteObjects(m_conditions);
 					aWriter->WriteBool(m_detachedFromSpawn);
+					aWriter->WriteUInt(m_triggerCount);
 				}
 
 				bool
@@ -168,6 +171,8 @@ namespace tpublic
 						return false;
 					if(!aReader->ReadBool(m_detachedFromSpawn))
 						return false;
+					if(!aReader->ReadUInt(m_triggerCount))
+						return false;
 					return true;
 				}
 
@@ -179,6 +184,7 @@ namespace tpublic
 				int32_t					m_delayTicks = 0;
 				std::vector<Condition>	m_conditions;
 				bool					m_detachedFromSpawn = false;
+				uint32_t				m_triggerCount = UINT32_MAX;
 			};
 
 			void

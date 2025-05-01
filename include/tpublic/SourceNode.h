@@ -6,6 +6,7 @@
 #include "PersistentIdTable.h"
 #include "SourceContext.h"
 #include "Tokenizer.h"
+#include "Vec2.h"
 
 namespace tpublic
 {
@@ -22,8 +23,11 @@ namespace tpublic
 			TYPE_STRING,
 			TYPE_IDENTIFIER,
 			TYPE_MACRO_INVOCATION,
+			TYPE_MACRO_OBJECT_IMPORT,
 			TYPE_REFERENCE,
 			TYPE_REFERENCE_OBJECT,
+			TYPE_EMBEDDED_DATA_OBJECT,
+			TYPE_CONTEXT_TAG,
 			TYPE_EXPRESSION,
 			TYPE_EXPRESSION_OR,
 			TYPE_EXPRESSION_AND,
@@ -36,7 +40,7 @@ namespace tpublic
 			TYPE_EXPRESSION_EXISTS,
 			TYPE_EXPRESSION_NEGATE,
 			TYPE_EXPRESSION_NOT,
-			TYPE_EXPRESSION_VALUE
+			TYPE_EXPRESSION_VALUE,
 		};
 
 		SourceNode(
@@ -80,6 +84,7 @@ namespace tpublic
 		{
 			m_children.clear();
 			m_annotation.reset();
+			m_extraAnnotation.reset();
 			m_condition.reset();
 
 			m_type = aOther->m_type;
@@ -107,6 +112,18 @@ namespace tpublic
 				annotation->Copy(aOther->m_annotation.get());
 
 				m_annotation = std::move(annotation);
+			}
+
+			if (aOther->m_extraAnnotation)
+			{
+				std::unique_ptr<SourceNode> annotation = std::make_unique<SourceNode>(m_sourceContext, m_debugInfo, m_realPath.c_str(), m_path.c_str(), m_pathWithFileName.c_str());
+
+				annotation->m_name = aOther->m_extraAnnotation->m_name;
+				annotation->m_tag = aOther->m_extraAnnotation->m_tag;
+
+				annotation->Copy(aOther->m_extraAnnotation.get());
+
+				m_extraAnnotation = std::move(annotation);
 			}
 
 			if(aOther->m_condition)
@@ -208,6 +225,13 @@ namespace tpublic
 			return (uint8_t)v;
 		}
 
+		Vec2
+		GetVec2() const
+		{
+			TP_VERIFY(m_type == TYPE_ARRAY && m_children.size() == 2, m_debugInfo, "Not an two-component vector.");
+			return Vec2{ m_children[0]->GetInt32(), m_children[1]->GetInt32() };
+		}
+
 		float
 		GetFloat() const
 		{
@@ -256,6 +280,13 @@ namespace tpublic
 			return m_children[aIndex].get();
 		}
 
+		uint32_t
+		GetId(
+			DataType::Id				aDataType) const
+		{
+			return m_sourceContext->m_persistentIdTable->GetId(m_debugInfo, aDataType, GetIdentifier());
+		}
+
 		void
 		GetIdArray(
 			DataType::Id				aDataType,
@@ -263,7 +294,17 @@ namespace tpublic
 		{
 			TP_VERIFY(m_type == TYPE_ARRAY, m_debugInfo, "Not an array.");
 			for (const std::unique_ptr<SourceNode>& child : m_children)
-				aOut.push_back(m_sourceContext->m_persistentIdTable->GetId(aDataType, child->GetIdentifier()));
+				aOut.push_back(m_sourceContext->m_persistentIdTable->GetId(child->m_debugInfo, aDataType, child->GetIdentifier()));
+		}
+
+		void
+		GetIdSet(
+			DataType::Id					aDataType,
+			std::unordered_set<uint32_t>&	aOut) const
+		{
+			TP_VERIFY(m_type == TYPE_ARRAY, m_debugInfo, "Not an array.");
+			for (const std::unique_ptr<SourceNode>& child : m_children)
+				aOut.insert(m_sourceContext->m_persistentIdTable->GetId(child->m_debugInfo, aDataType, child->GetIdentifier()));
 		}
 
 		void
@@ -277,7 +318,7 @@ namespace tpublic
 				if(child->m_type == TYPE_NUMBER && child->m_value == "0")
 					aOut.push_back(0);
 				else
-					aOut.push_back(m_sourceContext->m_persistentIdTable->GetId(aDataType, child->GetIdentifier()));
+					aOut.push_back(m_sourceContext->m_persistentIdTable->GetId(child->m_debugInfo, aDataType, child->GetIdentifier()));
 			}
 		}
 
@@ -333,6 +374,16 @@ namespace tpublic
 			TP_VERIFY(m_type == TYPE_ARRAY, m_debugInfo, "Not an array.");
 			for (const std::unique_ptr<SourceNode>& child : m_children)
 				aOut.push_back((_T)child->GetUInt32());
+		}
+
+		template <typename _T>
+		void
+		GetUIntSet(
+			std::vector<_T>&				aOut) const
+		{
+			TP_VERIFY(m_type == TYPE_ARRAY, m_debugInfo, "Not an array.");
+			for (const std::unique_ptr<SourceNode>& child : m_children)
+				aOut.insert((_T)child->GetUInt32());
 		}
 
 		void
@@ -403,6 +454,13 @@ namespace tpublic
 			return m_type == TYPE_OBJECT && m_name.empty();
 		}
 
+		const SourceNode*
+		GetAnnotation() const 
+		{
+			TP_VERIFY(m_annotation, m_debugInfo, "Missing annotation.");
+			return m_annotation.get();
+		}
+
 		// Public data
 		Type										m_type;
 		SourceContext*								m_sourceContext;
@@ -417,6 +475,7 @@ namespace tpublic
 
 		std::vector<std::unique_ptr<SourceNode>>	m_children;
 		std::unique_ptr<SourceNode>					m_annotation;
+		std::unique_ptr<SourceNode>					m_extraAnnotation;
 		std::unique_ptr<SourceNode>					m_condition;
 	};
 

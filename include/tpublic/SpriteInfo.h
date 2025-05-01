@@ -19,9 +19,12 @@ namespace tpublic
 			FLAG_TILE_TOP					= 0x0008,
 			FLAG_TILE_WATER					= 0x0010,
 			FLAG_TILE_NO_WAVES				= 0x0020,
-			FLAG_STANDALONE					= 0x0040,
-			FLAG_CENTERED					= 0x0080,
-			FLAG_DOUBLED					= 0x0100
+			FLAG_TILE_SNOW					= 0x0040,
+			FLAG_TILE_INDOOR				= 0x0080,
+			FLAG_STANDALONE					= 0x0100,
+			FLAG_CENTERED					= 0x0200,
+			FLAG_DOUBLED					= 0x0400,
+			FLAG_AUTOGLOW					= 0x0800
 		};
 
 		struct NamedAnchor
@@ -104,13 +107,34 @@ namespace tpublic
 				return FLAG_TILE_WATER;
 			if (strcmp(aString, "tile_no_waves") == 0)
 				return FLAG_TILE_NO_WAVES;
+			if (strcmp(aString, "tile_snow") == 0)
+				return FLAG_TILE_SNOW;
+			if (strcmp(aString, "tile_indoor") == 0)
+				return FLAG_TILE_INDOOR;
 			if (strcmp(aString, "standalone") == 0)
 				return FLAG_STANDALONE;
 			if (strcmp(aString, "centered") == 0)
 				return FLAG_CENTERED;
 			if (strcmp(aString, "doubled") == 0)
 				return FLAG_DOUBLED;
+			if (strcmp(aString, "autoglow") == 0)
+				return FLAG_AUTOGLOW;
 			return 0;
+		}
+
+		static inline uint16_t
+		SourceToFlags(
+			const SourceNode*	aSource)
+		{
+			uint16_t flags = 0;
+			aSource->GetArray()->ForEachChild([&flags](
+				const SourceNode* aChild)
+			{
+				uint16_t flag = StringToFlag(aChild->GetIdentifier());
+				TP_VERIFY(flag != 0, aChild->m_debugInfo, "'%s' is not a valid sprite flag.", aChild->GetIdentifier());
+				flags |= flag;
+			});
+			return flags;
 		}
 
 		void
@@ -123,6 +147,7 @@ namespace tpublic
 			aStream->WriteUInt(m_altGreyscaleSpriteId);
 			aStream->WriteUInt(m_waterFloorSpriteId);
 			aStream->WriteUInt(m_overviewMapOverrideSpriteId);
+			aStream->WriteUInt(m_glowSpriteId);
 			aStream->WriteUInts(m_borders);
 			aStream->WriteUInts(m_waterAnimationSpriteIds);
 			aStream->WriteUInts(m_altTileSpriteIds);
@@ -154,6 +179,8 @@ namespace tpublic
 			if (!aStream->ReadUInt(m_waterFloorSpriteId))
 				return false;
 			if (!aStream->ReadUInt(m_overviewMapOverrideSpriteId))
+				return false;
+			if (!aStream->ReadUInt(m_glowSpriteId))
 				return false;
 			if (!aStream->ReadUInts(m_borders))
 				return false;
@@ -263,6 +290,7 @@ namespace tpublic
 		uint32_t					m_waterFloorSpriteId = 0;
 		std::vector<uint32_t>		m_waterAnimationSpriteIds;
 		uint32_t					m_overviewMapOverrideSpriteId = 0;
+		uint32_t					m_glowSpriteId = 0;
 
 		// This is a bit wonky, only using a shared_ptr here so SpriteInfo can be copied easily.
 		typedef std::unordered_map<uint32_t, std::shared_ptr<std::vector<uint32_t>>> BorderTable;

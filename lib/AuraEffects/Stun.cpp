@@ -26,6 +26,7 @@ namespace tpublic::AuraEffects
 	Stun::OnUpdate(
 		const SourceEntityInstance& aSourceEntityInstance,
 		uint32_t					aTargetEntityInstanceId,
+		uint32_t					/*aUpdate*/,
 		SystemBase::Context*		aContext,
 		const Manifest*				/*aManifest*/) 
 	{

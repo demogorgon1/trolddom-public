@@ -4,3 +4,4 @@ creature_type undead: { string: "Undead" flags: [ cash_loot ] }
 creature_type demon: { string: "Demon" }
 creature_type elemental: { string: "Elemental" }
 creature_type dragon: { string: "Dragon" flags: [ cash_loot ] }
+creature_type mechanical: { string: "Mechanical" }

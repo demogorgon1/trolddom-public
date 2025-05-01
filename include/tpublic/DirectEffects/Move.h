@@ -25,7 +25,8 @@ namespace tpublic
 			enum MoveFlag : uint8_t
 			{
 				MOVE_FLAG_WALKABLE_PATH_REQUIRED	= 0x01,
-				MOVE_FLAG_SET_TELEPORTED			= 0x02
+				MOVE_FLAG_SET_TELEPORTED			= 0x02,
+				MOVE_FLAG_AFFECT_TARGET				= 0x04
 			};
 
 			static Destination
@@ -54,6 +55,8 @@ namespace tpublic
 						moveFlags |= MOVE_FLAG_WALKABLE_PATH_REQUIRED;
 					else if (t == "set_teleported")
 						moveFlags |= MOVE_FLAG_SET_TELEPORTED;
+					else if (t == "affect_target")
+						moveFlags |= MOVE_FLAG_AFFECT_TARGET;
 					else
 						TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid move flag.", aSource->GetIdentifier());
 				});
@@ -99,6 +102,7 @@ namespace tpublic
 			uint8_t							m_moveFlags = 0;
 			uint32_t						m_maxSteps = 0;
 			std::optional<SecondaryAbility>	m_triggerAbilitiesOnResolve;
+			uint32_t						m_mapPlayerSpawnId = 0;
 		};
 
 	}

@@ -1,0 +1,217 @@
+expression .pearly_c_has_item:
+{
+	client_has_item: { id<item>: .fennian_starleaf_3_quest_item }
+}
+
+dialogue_screen .pearly_c_dialogue_1:
+{
+	text: 
+	[	
+		"How are you doing?"
+	]		
+	
+	options:
+	[
+		{ quest<offer_only>: .pearly_c_1 }
+	]
+}
+
+dialogue_screen .pearly_c_dialogue_2:
+{
+	text: 
+	[	
+		"*Blob*"
+	]		
+}
+
+dialogue_root .pearly_c_dialogue:
+{
+	.pearly_c_dialogue_1: { conditions: [ .pearly_c_has_item ] }
+	.pearly_c_dialogue_2: { inv_conditions: [ .pearly_c_has_item ] }
+}
+
+entity thalvaron_pearly_c: !NPC
+{
+	_string: "Pearly"
+	_guild_name: "Lady of the Lake"
+	_dialogue_root: .pearly_c_dialogue
+	_sprite: pearly
+	_sprite_dead: pearly
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_visibility_requirements:
+	{
+		requirement self<must_have_completed_quest>: .pearly_b_1
+		requirement self<must_not_have_completed_quest>: .pearly_c_1
+	}
+}
+
+############################################################
+# Quest 1
+
+loot_group .pearly_c_1_quest_item_2: {}
+
+item .pearly_c_1_quest_item_2:
+{
+	icon: icon_blood
+	item_level: 19
+	loot_groups: [ .pearly_c_1_quest_item_2 ]
+	flags: [ not_sellable unique ]
+	string: "Blood of Shrakolyx"
+}
+
+loot_group .pearly_c_1_quest_item: {}
+
+item .pearly_c_1_quest_item:
+{
+	icon: icon_herbs_1
+	item_level: 18
+	loot_groups: [ .pearly_c_1_quest_item ]
+	flags: [ not_sellable unique ]
+	string: "Tears of Joonor"
+	use_ability: .pearly_c_1_quest_item
+}
+
+loot_table .pearly_c_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: 
+			{ 
+				loot_group: .pearly_c_1_quest_item 
+				
+				requirement self<must_have_active_quest>: .pearly_c_1
+				requirement self<must_not_have_item>: .pearly_c_1_quest_item
+			}			
+		}		
+	]
+}
+
+entity thalvaron_pearly_c_1_quest_item:
+{
+	string: "Tears of Joonor"
+	systems: [ openable ]
+
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ flower_5 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .pearly_c_1_quest_item
+			verb: pick
+			range: 1 
+			despawn: true 			
+			level: 18
+			required_quest: .pearly_c_1
+		}		
+	}
+}
+
+objective .pearly_c_1_a:
+{
+	string: "Tears of Joonor"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .pearly_c_1_quest_item count: 1 }
+}
+
+objective .pearly_c_1_b:
+{
+	string: "Blood of Shrakolyx"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .pearly_c_1_quest_item_2 count: 1 }
+}
+
+entity thalvaron_pearly_c_1_quest_item_2:
+{
+	components:
+	{
+		position: { }		
+		visibility: { }		
+		combat_public: { faction: monsters }
+	}
+}
+
+ability .pearly_c_1_quest_item:
+{
+	string: "Tears of Joonor"
+	description: "Place on the Altar of the Undying."
+	flags: [ target_self item ]
+	icon: icon_herbs_1
+	states: [ default ]
+	must_have_one_of_nearby_entities: [ thalvaron_pearly_c_1_quest_item_2 ]
+	cast_time: 20	
+	
+	direct_effect spawn_entity:
+	{
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: thalvaron_pearly_demon_boss
+		map_entity_spawn: thalvaron_pearly_c_1_quest_spawn_a
+	}
+	
+	direct_effect spawn_entity:
+	{
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: thalvaron_pearly_demon
+		map_entity_spawn: thalvaron_pearly_c_1_quest_spawn_b
+	}
+
+	direct_effect spawn_entity:
+	{
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: thalvaron_pearly_demon
+		map_entity_spawn: thalvaron_pearly_c_1_quest_spawn_c
+	}		
+}
+
+map_entity_spawn thalvaron_pearly_c_1_quest_spawn_a: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn thalvaron_pearly_c_1_quest_spawn_b: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn thalvaron_pearly_c_1_quest_spawn_c: { spawn_timer: { only_when_triggered: true } }
+
+item thalvaron_pearly_c_1_quest_item_2:
+{
+	icon: icon_blood
+	item_level: 19
+	flags: [ not_sellable unique ]
+	string: "Blood of Shrakolyx"
+	flavor: "Touched by the Spirit of Joonor."
+}
+
+quest .pearly_c_1:
+{
+	string: "Temple of the Undying"
+
+	text:
+	[
+		"Collect the Tears of Joonor from the lake alcove in the cave, venture north into the Hollows of the Undying, find the temple, put the plant on the altar, slay the evil deity, and collect its blood."
+	]
+	
+	description: 
+	[
+		"The evil power of the north, resting in his tower, needs to be defeated. It won't be an easy task. He is an lich, a powerful creature of undeath, a wizard who have made deals with otherworldly beings to trick death.\n\n"
+		"I want you to summon one of these foul beings that he has used in his schemes, slay it, and collect its blood. You will need this blood if you want to truly destroy the lich.\n\n"
+		"First you will need to acquire a divine plant from the shores of Joonor. Through the cave here you'll be able to find a little alcove by the lake, where it grows. Then you will travel north into the hollows of the undying."
+		"In its very north you'll find the Temple of the Undying. Place the Tears of Joonor on the altar, which will provoke the evil deity to attack you. Slay it and collect it's blood."
+	]
+	
+	completion:
+	[
+		"This pleases me."
+	]
+
+	objectives: [ .pearly_c_1_a .pearly_c_1_b ]
+	level: 19
+	reward_all_items: [ thalvaron_pearly_c_1_quest_item_2 ]
+}

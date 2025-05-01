@@ -1,0 +1,216 @@
+npc_behavior_state .wandering_short:
+{
+	on_route<lich_tower_default_patrol>: .patrol
+	behavior: wandering
+	max_range: 1
+}
+
+npc_behavior_state .passive:
+{
+	on_route<lich_tower_default_patrol>: .patrol
+	behavior: do_nothing
+}
+
+npc_behavior_state .patrol:
+{
+	behavior: patrolling
+}
+
+map_entity_spawn .zombie: 
+{ 
+	entity .zombie_18_a: { level: 18 spawn_condition: { if_not: .rotfang_killed } } 	
+	entity .zombie_18_b: { level: 18 spawn_condition: { if_not: .rotfang_killed } } 	
+	entity .zombie_18_c: { level: 18 spawn_condition: { if_not: .rotfang_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+map_entity_spawn .bloated_zombie: 
+{ 
+	entity .bloated_zombie_18_a: { level: 18 spawn_condition: { if_not: .rotfang_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+map_entity_spawn .skeletal_warrior: 
+{ 
+	entity .skeletal_warrior_18_a: { level: 18 spawn_condition: { if_not: .bone_tyrant_killed } } 	
+	entity .skeletal_warrior_18_b: { level: 18 spawn_condition: { if_not: .bone_tyrant_killed } } 	
+	entity .skeletal_warrior_18_c: { level: 18 spawn_condition: { if_not: .bone_tyrant_killed } } 	
+	entity .skeletal_warrior_18_d: { level: 18 spawn_condition: { if_not: .bone_tyrant_killed } } 	
+
+	entity .skeletal_warrior_19_a: { level: 19 spawn_condition: { if_not: .anatar_killed } } 	
+	entity .skeletal_warrior_19_b: { level: 19 spawn_condition: { if_not: .anatar_killed } } 	
+	entity .skeletal_warrior_19_c: { level: 19 spawn_condition: { if_not: .anatar_killed } } 	
+	entity .skeletal_warrior_19_d: { level: 19 spawn_condition: { if_not: .anatar_killed } } 	
+
+	entity .skeletal_warrior_20_a: { level: 20 spawn_condition: { if_not: .library_killed } } 	
+	entity .skeletal_warrior_20_b: { level: 20 spawn_condition: { if_not: .library_killed } } 	
+	entity .skeletal_warrior_20_c: { level: 20 spawn_condition: { if_not: .library_killed } } 	
+	entity .skeletal_warrior_20_d: { level: 20 spawn_condition: { if_not: .library_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+map_entity_spawn .skeletal_healer: 
+{ 
+	entity .skeletal_healer_18_a: { level: 18 spawn_condition: { if_not: .bone_tyrant_killed } } 	
+	entity .skeletal_healer_19_a: { level: 19 spawn_condition: { if_not: .anatar_killed } } 	
+	entity .skeletal_healer_20_a: { level: 20 spawn_condition: { if_not: .library_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+map_entity_spawn .skeletal_caster: 
+{ 
+	entity .skeletal_caster_18_a: { level: 18 spawn_condition: { if_not: .bone_tyrant_killed } } 	
+	entity .skeletal_caster_19_a: { level: 19 spawn_condition: { if_not: .anatar_killed } } 	
+	entity .skeletal_caster_20_a: { level: 20 spawn_condition: { if_not: .library_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+map_entity_spawn .skeletal_brute: 
+{ 
+	entity .skeletal_brute_18_a: { level: 18 spawn_condition: { if_not: .bone_tyrant_killed } } 	
+	entity .skeletal_brute_19_a: { level: 19 spawn_condition: { if_not: .anatar_killed } } 	
+	entity .skeletal_brute_20_a: { level: 20 spawn_condition: { if_not: .library_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+# Zombies
+{
+	${
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .wandering_short
+		_loot_table: default_zombie
+		_weapon_damage: 2
+		_resource_health: 1.9
+		_abilities: 
+		[ 
+			{ id: npc_attack } 
+		]
+	}
+
+	entity .zombie_18_a: !NPC { _string: "Reanimated Corpse" _sprite: zombie_1 _sprite_dead: zombie_1_dead _level: 18 }
+	entity .zombie_18_b: !NPC { _string: "Reanimated Corpse" _sprite: zombie_3 _sprite_dead: zombie_3_dead _level: 18 }
+	entity .zombie_18_c: !NPC { _string: "Reanimated Corpse" _sprite: zombie_4 _sprite_dead: zombie_4_dead _level: 18 }
+}
+
+# Bloated zombies
+{
+	${
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .wandering_short
+		_loot_table: default_zombie
+		_weapon_damage: 1.5
+		_resource_health: 3.5
+		_elite: true
+		_abilities: 
+		[ 
+			{ id: npc_attack } 
+		]
+	}
+
+	entity .bloated_zombie_18_a: !NPC { _string: "Bloated Zombie" _sprite: zombie_2 _sprite_dead: zombie_2_dead _level: 18 }
+}
+
+# Skeletal warriors
+{
+	${
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .passive
+		_loot_table: default_skeleton 
+		_weapon_damage: 1.6
+		_resource_health: 1.9
+		_elite: true
+		_abilities: 
+		[ 
+			{ id: npc_attack } 
+		]
+	}
+
+	entity .skeletal_warrior_18_a: !NPC { _string: "Skeletal Warrior" _sprite: skeleton_warrior_1 _sprite_dead: skeleton_warrior_1_dead _level: 18 }
+	entity .skeletal_warrior_18_b: !NPC { _string: "Skeletal Warrior" _sprite: skeleton_warrior_2 _sprite_dead: skeleton_warrior_2_dead _level: 18 }
+	entity .skeletal_warrior_18_c: !NPC { _string: "Skeletal Warrior" _sprite: skeleton_3 _sprite_dead: skeleton_3_dead _level: 18 }
+	entity .skeletal_warrior_18_d: !NPC { _string: "Skeletal Warrior" _sprite: skeleton_4 _sprite_dead: skeleton_4_dead _level: 18 }
+	
+	entity .skeletal_warrior_19_a: !NPC { _string: "Skeletal Warrior" _sprite: skeleton_warrior_1 _sprite_dead: skeleton_warrior_1_dead _level: 19 }
+	entity .skeletal_warrior_19_b: !NPC { _string: "Skeletal Warrior" _sprite: skeleton_warrior_2 _sprite_dead: skeleton_warrior_2_dead _level: 19 }
+	entity .skeletal_warrior_19_c: !NPC { _string: "Skeletal Warrior" _sprite: skeleton_3 _sprite_dead: skeleton_3_dead _level: 19 }
+	entity .skeletal_warrior_19_d: !NPC { _string: "Skeletal Warrior" _sprite: skeleton_4 _sprite_dead: skeleton_4_dead _level: 19 }
+
+	entity .skeletal_warrior_20_a: !NPC { _string: "Skeletal Warrior" _sprite: skeleton_warrior_1 _sprite_dead: skeleton_warrior_1_dead _level: 20 }
+	entity .skeletal_warrior_20_b: !NPC { _string: "Skeletal Warrior" _sprite: skeleton_warrior_2 _sprite_dead: skeleton_warrior_2_dead _level: 20 }
+	entity .skeletal_warrior_20_c: !NPC { _string: "Skeletal Warrior" _sprite: skeleton_3 _sprite_dead: skeleton_3_dead _level: 20 }
+	entity .skeletal_warrior_20_d: !NPC { _string: "Skeletal Warrior" _sprite: skeleton_4 _sprite_dead: skeleton_4_dead _level: 20 }	
+}
+
+# Skeletal healer
+{
+	${
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .passive
+		_loot_table: default_skeleton
+		_weapon_damage: 1.2
+		_resource_health: 1.6
+		_elite: true
+		_abilities: 
+		[ 
+			{ id: npc_heal target: low_health_friend_or_self } 
+			{ id: npc_attack } 
+		]
+	}
+
+	entity .skeletal_healer_18_a: !NPC { _string: "Skeletal Priest" _sprite: skeleton_caster_3 _sprite_dead: skeleton_caster_3_dead _level: 18 }
+	entity .skeletal_healer_19_a: !NPC { _string: "Skeletal Priest" _sprite: skeleton_caster_3 _sprite_dead: skeleton_caster_3_dead _level: 19 }
+	entity .skeletal_healer_20_a: !NPC { _string: "Skeletal Priest" _sprite: skeleton_caster_3 _sprite_dead: skeleton_caster_3_dead _level: 20 }
+}
+
+# Skeletal caster
+{
+	${
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .passive
+		_loot_table: default_skeleton 
+		_weapon_damage: 1.2
+		_resource_health: 1.6
+		_elite: true
+		_abilities: 
+		[ 
+			{ id: npc_frostbolt_no_cooldown } 
+			{ id: npc_attack } 
+		]
+	}
+
+	entity .skeletal_caster_18_a: !NPC { _string: "Skeletal Mage" _sprite: skeleton_caster_1 _sprite_dead: skeleton_caster_1_dead _level: 18 }
+	entity .skeletal_caster_19_a: !NPC { _string: "Skeletal Mage" _sprite: skeleton_caster_1 _sprite_dead: skeleton_caster_1_dead _level: 19 }
+	entity .skeletal_caster_20_a: !NPC { _string: "Skeletal Mage" _sprite: skeleton_caster_1 _sprite_dead: skeleton_caster_1_dead _level: 20 }
+}
+
+# Skeletal brute
+{
+	${
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .passive
+		_loot_table: default_skeleton
+		_weapon_damage: 1.75
+		_resource_health: 2.3
+		_elite: true
+		_abilities: 
+		[ 
+			{ id: npc_attack } 
+		]
+	}
+
+	entity .skeletal_brute_18_a: !NPC { _string: "Elite Guard" _sprite: skeleton_boss_1 _sprite_dead: skeleton_boss_1_dead _level: 18 }
+	entity .skeletal_brute_19_a: !NPC { _string: "Elite Guard" _sprite: skeleton_6 _sprite_dead: skeleton_6_dead _level: 19 }
+	entity .skeletal_brute_20_a: !NPC { _string: "Skeletal Commander" _sprite: skeleton_5 _sprite_dead: skeleton_5_dead _level: 20 }	
+}

@@ -3,3 +3,5 @@
 	push
 	recall
 ]
+
+!define HEALTH_PER_LEVEL 14

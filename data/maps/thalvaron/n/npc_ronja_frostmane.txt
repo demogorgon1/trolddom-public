@@ -1,0 +1,190 @@
+dialogue_screen .ronja_frostmane_dialogue:
+{
+	text: 
+	[	
+		"The snow never melts."
+	]		
+	
+	options:
+	[
+		{ quest: .ronja_frostmane_1 }
+		{ quest: .ronja_frostmane_2 }
+		{ quest<offer_only>: .ronja_frostmane_3 }
+		{ quest<completion_only>: .north_yeti_boss }		
+	]
+}
+
+dialogue_root .ronja_frostmane_dialogue:
+{
+	.ronja_frostmane_dialogue: { }
+}
+
+entity thalvaron_ronja_frostmane: !NPC
+{
+	_string: "Ronja Frostmane"
+	_dialogue_root: .ronja_frostmane_dialogue	
+	_sprite: woman_12
+	_sprite_dead: woman_12_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .ronja_frostmane_1:
+{
+	string: "Yeti Pelts"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .ronja_frostmane_1_quest_item count: 5 }
+}
+
+loot_group .ronja_frostmane_1_quest_item: {}
+
+item .ronja_frostmane_1_quest_item:
+{
+	icon: icon_fur
+	item_level: 13
+	loot_groups: [ .ronja_frostmane_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Yeti Pelt"
+	stack: 5
+}
+
+quest .ronja_frostmane_1:
+{
+	string: "Getting Colder"
+
+	text:
+	[
+		"Kill Iceveil yetis and return their pelts to Ronja."
+	]
+	
+	description: 
+	[
+		"I don't know if you've noticed, but it's kinda cold up here. With winter just around the corner I'm thinking it's time to innovate a bit."
+		"Have you seen the yetis in the frozen fields to the east? They don't look like they're freezing. Maybe you can bring me some of their pelts and I'll see if I can turn them into something useful?"
+	]
+
+	progress:
+	[
+		"How is it going?"
+	]
+	
+	completion:
+	[
+		"Hmm, they're more itchy than expected."
+	]
+
+	objectives: [ .ronja_frostmane_1 ]
+	level: 13
+	next_quest: .ronja_frostmane_2 
+}
+
+############################################################
+# Quest 2
+
+objective .ronja_frostmane_2:
+{
+	string: "Pristine Yeti Pelts"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .ronja_frostmane_2_quest_item count: 5 }
+}
+
+loot_group .ronja_frostmane_2_quest_item: {}
+
+item .ronja_frostmane_2_quest_item:
+{
+	icon: icon_fur_2
+	item_level: 13
+	loot_groups: [ .ronja_frostmane_2_quest_item ]
+	flags: [ not_sellable ]
+	string: "Pristine Yeti Pelt"
+	stack: 5
+}
+
+{
+	${ _level: 13 }
+  	item .ronja_frostmane_2_a: !QUEST_REWARD_2H_SWORD{ _string: "Sword of the Mountain" _icon: icon_sword_3 _constitution: 1 _dexterity: 1 _strength: 2 _weapon_cooldown: 30 }
+  	item .ronja_frostmane_2_b: !QUEST_REWARD_CHEST{ _string: "Frosty Wizard's Robe" _icon: icon_cloth_shirt_7 _constitution: 3 _spell_damage: 1 }	
+}	   
+
+quest .ronja_frostmane_2:
+{
+	string: "Not Soft Enough"
+
+	text:
+	[
+		"Kill cave yetis and return their pelts to Ronja."
+	]
+	
+	description: 
+	[
+		"To be honest, the pelts you bought mere were a bit disappointing. That fur was just way too itchy to be comfortable! But you know what, I've seen some softer looking white yetis living in the"
+		"caves beyond the frozen lake to the east. Can you go get me some samples?"
+	]
+
+	progress:
+	[
+		"How's it going?"
+	]
+	
+	completion:
+	[
+		"This is much better! These are going to make fine hats I think."
+	]
+
+	prerequisites: [ .ronja_frostmane_1 ]
+	objectives: [ .ronja_frostmane_2 ]
+	level: 13
+	reward_one_item: [ .ronja_frostmane_2_a .ronja_frostmane_2_b ]
+}
+
+############################################################
+# Quest 3
+
+item .ronja_frostmane_3_quest_item:
+{
+	string: "Strange Yeti Effigy" 
+	icon: icon_effigy
+	item_level: 13
+	flags: [ unique not_sellable ]
+}	
+
+quest .ronja_frostmane_3:
+{
+	string: "Strange Yeti Effigy"
+
+	text:
+	[
+		"Take the strange yeti effigy to Nook."
+	]
+	
+	description: 
+	[
+		"Take the strange object to Nook, she might make some sense of it. She has a weird interest in yetis.\n\n"
+		"She lives in the house next to us."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"What? That evil woman made you kill poor defenseless yetis just to turn them into hats?"
+	]
+
+	prerequisites: [ .north_yeti_boss ]
+	quest_items: [ .ronja_frostmane_3_quest_item ]
+	level: 13
+	reward_xp_multiplier: 0.2
+}

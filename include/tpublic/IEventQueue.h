@@ -2,6 +2,7 @@
 
 #include <tpublic/Components/Lootable.h>
 
+#include "EntityObjectiveEvent.h"
 #include "EntityState.h"
 #include "ItemInstanceReference.h"
 #include "UniformDistribution.h"
@@ -117,11 +118,13 @@ namespace tpublic
 												uint32_t													aCharacterId,
 												uint32_t													aCharacterLevel,
 												uint32_t													aKillLevel,
-												uint32_t													aKillEntityId) = 0;
+												uint32_t													aKillEntityId,
+												uint32_t													aKillFactionId) = 0;
 		virtual void						EventQueueGroupKillXP(
 												uint64_t													aGroupId,
 												uint32_t													aKillLevel,
 												uint32_t													aKillEntityId,
+												uint32_t													aKillFactionId,
 												std::vector<uint32_t>&										aThreatEntityInstanceIds) = 0;
 		virtual void						EventQueueGroupLoot(
 												uint32_t													aEntityInstanceId,
@@ -179,7 +182,26 @@ namespace tpublic
 												uint32_t													aVendorEntityInstanceId,
 												uint32_t													aItemId,
 												uint32_t													aQuantity,
-												int64_t														aCost) = 0;
+												int64_t														aCost,
+												uint32_t													aCurrencyItemId,
+												uint32_t													aCurrencyQuantity) = 0;
+		virtual void						EventQueueEntityObjective(
+												const PlayerTag&											aPlayerTag,
+												uint32_t													aEntityId,
+												EntityObjectiveEvent::Type									aType,
+												int32_t														aMaxDistance,
+												const Vec2&													aPosition,
+												uint32_t													aPlayerEntityInstanceId) = 0;
+		virtual void						EventQueueRemoveAura(
+												uint32_t													aEntityInstanceId,
+												uint32_t													aAuraId) = 0;
+		virtual void						EventQueuePVPKill(
+												uint32_t													aEntityInstanceId,
+												uint32_t													aKilledCharacterId,
+												uint32_t													aKilledCharacterLevel,
+												uint32_t													aKilledFactionId,
+												uint32_t													aKilledClassId,
+												uint32_t													aContributionDenum) = 0;
 	};
 
 }

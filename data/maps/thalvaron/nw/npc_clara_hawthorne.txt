@@ -1,0 +1,33 @@
+dialogue_screen .clara_hawthorne_dialogue:
+{
+	text: 
+	[	
+		"Are you also an archaeologist?"
+	]			
+	
+	options:
+	[
+		{ quest<completion_only>: thalvaron_jonas_white_3 }
+		{ text: "What can you tell me about the tablet?" requirement self<must_have_completed_quest>: thalvaron_jonas_white_3 
+		  goto: $dialogue_screen { text: [ "Hmm... It's indeed a curiosity. I'll have to do more research. I'll contact you when I know more." ] } }
+	]
+}
+
+dialogue_root .clara_hawthorne_dialogue:
+{
+	.clara_hawthorne_dialogue: { }
+}
+
+entity thalvaron_clara_hawthorne: !NPC
+{
+	_string: "Clara Hawthorne"
+	_dialogue_root: .clara_hawthorne_dialogue	
+	_sprite: woman_3
+	_sprite_dead: woman_3_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

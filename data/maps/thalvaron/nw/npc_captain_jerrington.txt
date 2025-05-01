@@ -1,0 +1,191 @@
+dialogue_screen .captain_jerrington_dialogue:
+{
+	text: 
+	[	
+		"We need to bring back order to the city."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .city_guard_special_1 }
+		{ quest: .captain_jerrington_1 }
+		{ quest<offer_only>: .captain_jerrington_2 }
+		{ quest<completion_only>: .fisherman_5 }
+		{ quest<completion_only>: .rebel_leader_camp_quest_item }
+		{ quest: .captain_jerrington_3 }
+	]
+}
+
+dialogue_root .captain_jerrington_dialogue:
+{
+	.captain_jerrington_dialogue: { }
+}
+
+entity thalvaron_captain_jerrington: !NPC
+{
+	_string: "Captain Jerrington"
+	_dialogue_root: .captain_jerrington_dialogue	
+	_sprite: city_guard_2
+	_sprite_dead: city_guard_2_dead
+	_level: 20
+	_faction: valoris		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .captain_jerrington_1:
+{
+	string: "Secret Document"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .captain_jerrington_1_quest_item count: 1 }
+}
+
+loot_group .captain_jerrington_1_quest_item: {}
+
+item .captain_jerrington_1_quest_item:
+{
+	binds: when_picked_up
+	icon: icon_scroll_1
+	item_level: 10
+	loot_groups: [ .captain_jerrington_1_quest_item ]
+	flags: [ unique not_sellable ]
+	string: "Secret Document"
+	flavor: "Seems to be encrypted."
+}
+
+{
+	${ _level: 10 }
+	item .captain_jerrington_1_a: !QUEST_REWARD_CHEST{ _string: "Guard's Chestplate" _icon: icon_plate_chest_1 _strength: 2 _constitution: 1 _type: armor_plate }
+	item .captain_jerrington_1_b: !QUEST_REWARD_CHEST{ _string: "Enchanter's Robe" _icon: icon_robe_4 _wisdom: 2 _constitution: 1 _type: armor_cloth }
+}
+
+quest .captain_jerrington_1:
+{
+	string: "What are they up to?"
+
+	text:
+	[
+		"Look for rebels and see if you can find out what their plans are."
+	]
+	
+	description: 
+	[
+		"As you very well might be aware, rebel scum has occupied the entire eastern district of Valoris. They took us by surprise and we've had issues getting rid of them. The main army is currently on a campaign to the south and can't help us."
+		"Follow the street north into Eastgate and look for rebels. We need to find out what their plans are. Some might carry documents that could be of interest to us."	
+	]
+
+	progress:
+	[
+		"What are you still doing here?"
+	]
+	
+	completion:
+	[
+		"What is this? This looks interesting."
+	]
+
+	objectives: [ .captain_jerrington_1 ]
+	level: 10
+	
+	prerequisites: [ .city_guard_special_1 ]
+	next_quest: .captain_jerrington_2
+	reward_one_item: [ .captain_jerrington_1_a .captain_jerrington_1_b ]	
+	reward_reputation_multiplier: 1.5
+}
+
+############################################################
+# Quest 2
+
+quest .captain_jerrington_2:
+{
+	string: "Fernwick"
+
+	text:
+	[
+		"Find Lieutenant Tinley in the town of Fernwick to the south east."
+	]
+	
+	description: 
+	[
+		"I've seen similar encryption used before. In order to break it we need to find the secret key they're using. Without it we'll never find out what their plans are.\n\n"
+		"It seems like the rebels have sealed off most of the district and at this point all we can do is hold our ground.\n\n"
+		"My scouts are telling me that there is a large rebel presence outside of the city to the east as well. I need you to go investigate that. Talk to Lieutenant Tinley of the city guard. She has been charged with setting up a defensive position around the town of Fernwick. Leave the city through the south gate, go east, and you'll find her."
+	]
+
+	progress:
+	[
+		"Chop, chop."
+	]
+	
+	completion:
+	[
+		"The Captain sent you? Good, we need all the help we can get here."
+	]
+
+	level: 10
+	prerequisites: [ .captain_jerrington_1 ]
+	next_quest: .lieutenant_tinley_1
+	reward_xp_multiplier: 0.1
+}
+
+############################################################
+# Quest 3
+
+objective .captain_jerrington_3:
+{
+	string: "Captain Jorgenson Killed"
+	
+	maps: [ valoris_insurgency ]
+	
+	kill_npc:
+	{
+		entities: [ valoris_insurgency_captain_jorgenson ]
+		count: 1
+	}
+}
+
+{
+	${ _level: 18 _rarity: rare }
+	item .captain_jerrington_3_a: !QUEST_REWARD_TRINKET{ _string: "Badge of Honor" _icon: icon_sanctuary _phys_crit: 1 }
+	item .captain_jerrington_3_b: !QUEST_REWARD_TRINKET{ _string: "Badge of Justice" _icon: icon_heal_command _spell_crit: 1 }
+}
+
+quest .captain_jerrington_3:
+{
+	string: "Insurgency Commander"
+
+	text:
+	[
+		"Find and kill the insurgency commander."
+	]
+	
+	description: 
+	[
+		"Thanks to the encryption key you've provided to us, we've been able to learn more about the command structure and plans of the rebels. Needless to say, we need to stop them and reclaim"
+		"our city.\n\n"
+		"One of their commanders who go by the name of Jorgenson, self-proclaimed captain, is holed up in the occupied part of Eastgate. We need you to kill him.\n\n"
+		"You'll have to enter the city through the eastern gate to get to him. Be careful, you'll need to bring some allies. Good luck."
+	]
+
+	progress:
+	[
+		"What are you waiting for?"
+	]
+	
+	completion:
+	[
+		"Amazing! This is a great help quelling the insurgency."
+	]
+
+	type: dungeon
+	level: 18
+	prerequisites: [ .rebel_leader_camp_quest_item ]
+	objectives: [ .captain_jerrington_3 ]
+	reward_one_item: [ .captain_jerrington_3_a .captain_jerrington_3_b ]
+}

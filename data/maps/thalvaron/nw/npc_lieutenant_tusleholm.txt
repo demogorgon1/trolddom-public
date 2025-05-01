@@ -1,0 +1,145 @@
+dialogue_screen .lieutenant_tusleholm_dialogue:
+{
+	text: 
+	[	
+		"Are you fighting for Valoris? Either you're with us or against us. State your business!"
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .sergeant_jensen_2 }
+		{ quest: .lieutenant_tusleholm_1 }
+		{ quest: .lieutenant_tusleholm_2 }
+		{ quest<completion_only>: thalvaron_north_marshlands_kobold_boss }
+	]
+}
+
+dialogue_root .lieutenant_tusleholm_dialogue:
+{
+	.lieutenant_tusleholm_dialogue: { }
+}
+
+entity thalvaron_lieutenant_tusleholm: !NPC
+{
+	_string: "Lieutenant Tusleholm"
+	_dialogue_root: .lieutenant_tusleholm_dialogue	
+	_sprite: city_guard_2
+	_sprite_dead: city_guard_2_dead
+	_level: 20
+	_faction: valoris		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .lieutenant_tusleholm_1:
+{
+	string: "Mudlord Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_mud_slinger_2 ]
+		count: 1
+	}
+}
+
+{
+	${ _level: 12 }
+	item .lieutenant_tusleholm_1_a: !QUEST_REWARD_2H_STAFF{ _string: "Mudslinger Staff" _icon: icon_staff_1 _spell_damage: 1 _spirit: 1 _weapon_cooldown: 22 }
+	item .lieutenant_tusleholm_1_b: !QUEST_REWARD_1H_MACE{ _string: "Muddy Club" _icon: icon_mace_1 _constitution: 1 _weapon_cooldown: 24 }
+	item .lieutenant_tusleholm_1_c: !QUEST_REWARD_WRISTS{ _string: "City Guard Cuffs" _icon: icon_mail_bracers_1 _wisdom: 1 _mana_per_5: 1 _type: armor_cloth }
+}
+
+quest .lieutenant_tusleholm_1:
+{
+	string: "The Lord of Mud"
+
+	text:
+	[
+		"Find and kill the large mud slinger that inhabits the most north eastern part of the marshlands."
+	]
+	
+	description: 
+	[
+		"Strange creatures inhabit the swamps south of here. Have you heard of mud slingers? Exceptionally dirty elementals that wander around and might attack innocent people if they get too close.\n\n"
+		"They've always been a nuisance, but there have been reports about a very large mud slinger roaming the area. Some people call him the Mudlord. You seem very resourceful. I need you to go and slay this socalled"
+		"lord of mud. You find him down south in the most north eastern part of the marshlands."
+	]
+
+	progress:
+	[
+		"What are you still doing here?"
+	]
+	
+	completion:
+	[
+		"Excellent. Don't forget to clean your shoes if you want to go inside."
+	]
+
+	level: 12
+	objectives: [ .lieutenant_tusleholm_1 ]
+	reward_one_item: [ .lieutenant_tusleholm_1_a .lieutenant_tusleholm_1_b .lieutenant_tusleholm_1_c ]
+	reward_reputation_multiplier: 1.5
+}
+
+############################################################
+# Quest 2
+
+objective .lieutenant_tusleholm_2:
+{
+	string: "Kobolds Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_north_marshlands_kobold_a thalvaron_north_marshlands_kobold_b thalvaron_north_marshlands_kobold_c ]
+		count: 8
+	}
+}
+
+{
+	${ _level: 12 }
+	item .lieutenant_tusleholm_2_a: !QUEST_REWARD_WRISTS{ _string: "City Guard Bracers" _icon: icon_mail_bracers_3 _constitution: 1 _dexterity: 1 _type: armor_plate }
+	item .lieutenant_tusleholm_2_b: !QUEST_REWARD_SHIELD{ _string: "Mudguard" _icon: icon_shield_2 _constitution: 2 _block_value: 1 }
+	item .lieutenant_tusleholm_2_c: !QUEST_REWARD_SHOULDERS{ _string: "Dirty Pads" _icon: icon_shoulders_3 _constitution: 1 wisdom: 2 _type: armor_cloth }
+}
+
+quest .lieutenant_tusleholm_2:
+{
+	string: "Kobold Menace"
+
+	text:
+	[
+		"Explore the caves in the eastern mountains of North Marshlands and exterminate kobolds."
+	]
+	
+	description: 
+	[
+		"The next job I have for you should be much easier than the last one.\n\n"
+		"Kobolds are a constant menace if you live close to any kinds of mountains. They dig their little tunnels everywhere and if you don't continously keep their population down, you'll soon find"
+		"that you've been completely overrun. They reproduce like rabbits. I'm not sure exactly how it works."
+		"Anyway, around the area where you found the mudlord, there are some caves which have been overrun with kobolds. I need you to go and get rid of them."
+	]
+
+	progress:
+	[
+		"What are you still doing here?"
+	]
+	
+	completion:
+	[
+		"Good job!"
+	]
+
+	level: 12
+	objectives: [ .lieutenant_tusleholm_2 ]
+	prerequisites: [ .lieutenant_tusleholm_1 ]
+	reward_one_item: [ .lieutenant_tusleholm_2_a .lieutenant_tusleholm_2_b .lieutenant_tusleholm_2_c ]
+	reward_reputation_multiplier: 1.5
+}

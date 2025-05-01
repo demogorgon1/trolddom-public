@@ -4,23 +4,6 @@ profession blacksmithing<primary>:
 	icon: icon_anvil
 }
 
-!define local BLACKSMITHING_CRAFT
-{
-	string: @_string
-	icon_from<item>: @_item
-	description_from<item>: @_item
-	cast_time: 20
-	flags: [ crafting ]	
-	states: [ default in_combat ]
-	consume_items: @_materials
-	produce_items: @_produce
-	required_profession<@_skill>: blacksmithing
-	requirement self<must_have_item>: { id: weapon_blacksmithing_hammer }
-		
-	<exists _requires_furnace and _requires_furnace> must_have_nearby_entity: furnace
-	<exists _requires_anvil and _requires_anvil> must_have_nearby_entity: anvil
-}
-
 #####################################################
 # Copper Ingot
 
@@ -44,6 +27,58 @@ ability craft_iron_ingot: !BLACKSMITHING_CRAFT
 	_produce: { item_iron_ingot: 1 } 
 	_materials: { item_iron_ore: 1 }
 	_skill: 15
+	_requires_furnace: true
+}
+
+#####################################################
+# Azuryte Ingot
+
+ability craft_azuryte_ingot: !BLACKSMITHING_CRAFT
+{
+	_string: "Smelt Azuryte"
+	_item: item_azuryte_ingot
+	_produce: { item_azuryte_ingot: 1 } 
+	_materials: { item_azuryte_ore: 1 }
+	_skill: 25
+	_requires_furnace: true
+}
+
+#####################################################
+# Gold Ingot
+
+ability craft_gold_ingot: !BLACKSMITHING_CRAFT
+{
+	_string: "Smelt Gold"
+	_item: item_gold_ingot
+	_produce: { item_gold_ingot: 1 } 
+	_materials: { item_gold_ore: 1 }
+	_skill: 35
+	_requires_furnace: true
+}
+
+#####################################################
+# Mithril Ingot
+
+ability craft_mithril_ingot: !BLACKSMITHING_CRAFT
+{
+	_string: "Smelt Mithril"
+	_item: item_mithril_ingot
+	_produce: { item_mithril_ingot: 1 } 
+	_materials: { item_mithril_ore: 1 }
+	_skill: 45
+	_requires_furnace: true
+}
+
+#####################################################
+# Brontium Ingot
+
+ability craft_brontium_ingot: !BLACKSMITHING_CRAFT
+{
+	_string: "Smelt Brontium"
+	_item: item_brontium_ingot
+	_produce: { item_brontium_ingot: 1 } 
+	_materials: { item_brontium_ore: 1 }
+	_skill: 55
 	_requires_furnace: true
 }
 

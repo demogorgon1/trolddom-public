@@ -27,17 +27,17 @@ namespace tpublic
 			}
 			else if (aItem->m_name == "default_tile")
 			{
-				m_defaultTileSpriteId = aItem->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aItem->GetIdentifier());
+				m_defaultTileSpriteId = aItem->GetId(DataType::ID_SPRITE);
 				return true;
 			}
 			else if (aItem->m_name == "default_player_spawn")
 			{
-				m_defaultPlayerSpawnId = aItem->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_PLAYER_SPAWN, aItem->GetIdentifier());
+				m_defaultPlayerSpawnId = aItem->GetId(DataType::ID_MAP_PLAYER_SPAWN);
 				return true;
 			}
 			else if (aItem->m_name == "default_exit_portal")
 			{
-				m_defaultExitPortalId = aItem->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_PORTAL, aItem->GetIdentifier());
+				m_defaultExitPortalId = aItem->GetId(DataType::ID_MAP_PORTAL);
 				return true;
 			}
 			else if (aItem->m_name == "view_attenuation")
@@ -72,7 +72,7 @@ namespace tpublic
 			}
 			else if (aItem->m_name == "default_fishing_loot_table")
 			{
-				m_defaultFishingLootTableId = aItem->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_LOOT_TABLE, aItem->GetIdentifier());
+				m_defaultFishingLootTableId = aItem->GetId(DataType::ID_LOOT_TABLE);
 				return true;
 			}
 			else if (aItem->m_name == "has_overview_map")
@@ -92,9 +92,29 @@ namespace tpublic
 				m_autoDoodads = aItem->GetBool();
 				return true;
 			}
+			else if (aItem->m_name == "auto_indoor")
+			{
+				m_autoIndoor = aItem->GetBool();
+				return true;
+			}
+			else if (aItem->m_name == "default_indoor")
+			{
+				m_defaultIndoor = aItem->GetBool();
+				return true;
+			}
+			else if (aItem->m_name == "allow_spirit_travel")
+			{
+				m_allowSpiritTravel = aItem->GetBool();
+				return true;
+			}
 			else if(aItem->m_name == "map_loot_tables")
 			{
 				aItem->GetIdArray(DataType::ID_LOOT_TABLE, m_mapLootTableIds);
+				return true;
+			}
+			else if (aItem->m_name == "openable_elite")
+			{
+				m_openableElite = aItem->GetBool();
 				return true;
 			}
 			return false;
@@ -118,6 +138,10 @@ namespace tpublic
 			aWriter->WriteUInts(m_mapLootTableIds);
 			aWriter->WriteUInt(m_maxPlayers);
 			aWriter->WriteUInt(m_maxMinions);
+			aWriter->WriteBool(m_autoIndoor);
+			aWriter->WriteBool(m_defaultIndoor);
+			aWriter->WriteBool(m_allowSpiritTravel);
+			aWriter->WriteBool(m_openableElite);
 		}
 
 		bool
@@ -152,6 +176,14 @@ namespace tpublic
 				return false;
 			if (!aReader->ReadUInt(m_maxMinions))
 				return false;
+			if (!aReader->ReadBool(m_autoIndoor))
+				return false;
+			if (!aReader->ReadBool(m_defaultIndoor))
+				return false;
+			if (!aReader->ReadBool(m_allowSpiritTravel))
+				return false;
+			if (!aReader->ReadBool(m_openableElite))
+				return false;
 			return true;
 		}
 
@@ -167,9 +199,13 @@ namespace tpublic
 		uint32_t									m_defaultFishingLootTableId = 0;
 		OverviewMapType								m_overviewMapType = OVERVIEW_MAP_TYPE_NONE;
 		bool										m_autoDoodads = false;
+		bool										m_autoIndoor = true;
+		bool										m_defaultIndoor = false;
 		std::vector<uint32_t>						m_mapLootTableIds;
 		uint32_t									m_maxPlayers = 5;
 		uint32_t									m_maxMinions = 0;
+		bool										m_allowSpiritTravel = true;
+		bool										m_openableElite = false;
 	};
 
 }

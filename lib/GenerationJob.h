@@ -1,7 +1,10 @@
 #pragma once
 
+#include <tpublic/Components/NPC.h>
+
 #include <tpublic/Data/Ability.h>
 #include <tpublic/Data/Aura.h>
+#include <tpublic/Data/Item.h>
 #include <tpublic/Data/Sprite.h>
 
 #include <tpublic/EquipmentSlot.h>
@@ -29,14 +32,14 @@ namespace tpublic
 
 	private:
 		
-		const SourceNode*								m_source;
+		const SourceNode*									m_source;
 
 		struct GeneratedSource
 		{
 			void
 			PrintF(
-				uint32_t								aIndent,
-				const char*								aFormat,
+				uint32_t									aIndent,
+				const char*									aFormat,
 				...)
 			{
 				char buffer[1024];
@@ -51,7 +54,7 @@ namespace tpublic
 			}
 
 			// Public data
-			std::vector<std::string>					m_lines;
+			std::vector<std::string>						m_lines;
 		};
 
 		struct StackObject
@@ -65,30 +68,35 @@ namespace tpublic
 				TYPE_DESIGNATION,
 				TYPE_LEVEL_RANGE,
 				TYPE_ABILITY,
-				TYPE_WEAPON_SPEED
+				TYPE_WEAPON_SPEED,
+				TYPE_ITEM_SUFFIX,
+				TYPE_ITEM_PREFIX,
+				TYPE_EQUIPMENT_SLOT,
+				TYPE_LOOT_GROUP,
 			};
 
 			struct RandomTags
 			{
-				std::vector<uint32_t>					m_tags;
-				uint32_t								m_propability = 0;
-				uint32_t								m_count = 0;
+				std::vector<uint32_t>						m_tags;
+				uint32_t									m_propability = 0;
+				uint32_t									m_count = 0;
 			};
 
 			struct ItemClass
 			{
-				std::vector<EquipmentSlot::Id>			m_slots;
-				std::vector<ItemType::Id>				m_types;
-				Rarity::Id								m_minRarity = Rarity::ID_COMMON;
-				uint32_t								m_minLevel = 0;
-				uint32_t								m_maxLevel = 0;
-				uint32_t								m_weight = 1;
+				std::vector<EquipmentSlot::Id>				m_slots;
+				std::vector<ItemType::Id>					m_types;
+				Rarity::Id									m_minRarity = Rarity::ID_COMMON;
+				uint32_t									m_minLevel = 0;
+				uint32_t									m_maxLevel = 0;
+				uint32_t									m_weight = 1;
 			};
 
 			struct ItemSpecial
 			{
-				Stat::Collection						m_rawStats;
-				uint32_t								m_weight = 1;
+				Stat::Collection							m_rawStats;
+				uint32_t									m_weight = 1;
+				std::vector<ItemType::Id>					m_excludeItemTypes;
 			};
 
 			struct Designation
@@ -109,14 +117,14 @@ namespace tpublic
 								const SourceNode* aChild)
 							{
 								if(aChild->m_name == "name_template")
-									m_nameTemplateId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_NAME_TEMPLATE, aChild->GetIdentifier());
+									m_nameTemplateId = aChild->GetId(DataType::ID_NAME_TEMPLATE);
 								else 
 									TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 							});
 						}
 						else if(aSource->m_type == SourceNode::TYPE_IDENTIFIER)
 						{
-							m_tagId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TAG, aSource->GetIdentifier());
+							m_tagId = aSource->GetId(DataType::ID_TAG);
 						}
 						else
 						{
@@ -124,14 +132,14 @@ namespace tpublic
 						}
 					}
 
-					uint32_t							m_tagId = 0;
-					std::string							m_string;
-					uint32_t							m_nameTemplateId = 0;
+					uint32_t								m_tagId = 0;
+					std::string								m_string;
+					uint32_t								m_nameTemplateId = 0;
 				};
 
-				std::vector<Segment>					m_prefix;
-				std::vector<Segment>					m_suffix;
-				uint32_t								m_weight = 1;
+				std::vector<Segment>						m_prefix;
+				std::vector<Segment>						m_suffix;
+				uint32_t									m_weight = 1;
 			};
 
 			struct WeaponSpeed
@@ -149,40 +157,96 @@ namespace tpublic
 				}
 
 				// Public data
-				int32_t									m_speed = 0;
-				std::vector<ItemType::Id>				m_types;
-				uint32_t								m_weight = 1;
+				int32_t										m_speed = 0;
+				std::vector<ItemType::Id>					m_types;
+				uint32_t									m_weight = 1;
 			};
 
-			Type										m_type;
-			RandomTags									m_randomTags;
-			ItemClass									m_itemClass;
-			ItemSpecial									m_itemSpecial;
-			Designation									m_designation;
-			WeaponSpeed									m_weaponSpeed;
-			uint32_t									m_abilityId = 0;
-			UIntRange									m_range;
-			std::unique_ptr<std::mt19937>				m_randomNumberGenerator;
+			struct Ability
+			{
+				uint32_t									m_abilityId = 0;
+				Components::NPC::AbilityEntry::TargetType	m_targetType = Components::NPC::AbilityEntry::TARGET_TYPE_DEFAULT;
+				uint32_t									m_targetMustNotHaveAuraId = 0;
+			};
+
+			struct ItemSuffix
+			{
+				uint32_t
+				GetHash() const
+				{
+					Hash::CheckSum hash;
+					hash.AddString(m_string.c_str());
+					hash.AddPOD(m_budgetBias);
+					hash.AddPOD(m_stats.m_stats);
+					return hash.m_hash;
+				}
+
+				// Public data
+				std::string									m_string;
+				int32_t										m_budgetBias = 0;
+				Stat::Collection							m_stats;
+			};
+
+			struct ItemPrefix
+			{
+				uint32_t
+				GetHash() const
+				{
+					Hash::CheckSum hash;
+					hash.AddString(m_string.c_str());
+					hash.AddPOD(m_rarity);
+					hash.AddPOD(m_levelRange);
+					hash.AddPOD(m_materialMultiplier);
+					return hash.m_hash;
+				}
+
+				// Public data
+				std::string									m_string;
+				Rarity::Id									m_rarity = Rarity::INVALID_ID;
+				UIntRange									m_levelRange;
+				float										m_materialMultiplier = 1.0f;
+			};
+
+			struct LootGroup
+			{
+				Rarity::Id									m_rarity = Rarity::INVALID_ID;
+				uint32_t									m_lootGroupId = 0;
+			};
+
+			Type											m_type;
+			RandomTags										m_randomTags;
+			ItemClass										m_itemClass;
+			ItemSpecial										m_itemSpecial;
+			Designation										m_designation;
+			WeaponSpeed										m_weaponSpeed;
+			Ability											m_ability;
+			UIntRange										m_range;
+			std::unique_ptr<std::mt19937>					m_randomNumberGenerator;
+			ItemSuffix										m_itemSuffix;
+			ItemPrefix										m_itemPrefix;
+			LootGroup										m_lootGroup;
+			EquipmentSlot::Id								m_equipmentSlot = EquipmentSlot::INVALID_ID;
 		};
 
-		std::vector<std::unique_ptr<StackObject>>		m_stack;
-		const Manifest*									m_manifest;
-		std::string										m_outputPath;		
-		std::mt19937									m_defaultRandomNumberGenerator;
-		std::vector<std::unique_ptr<GeneratedSource>>	m_generatedSource;
-		std::unique_ptr<WordList::QueryCache>			m_wordListQueryCache;
-		std::unique_ptr<TaggedDataCache<Data::Sprite>>	m_taggedSpriteData;
-		std::unique_ptr<TaggedDataCache<Data::Aura>>	m_taggedAuraData;
+		std::vector<std::unique_ptr<StackObject>>			m_stack;
+		const Manifest*										m_manifest;
+		std::string											m_outputPath;		
+		std::mt19937										m_defaultRandomNumberGenerator;
+		std::vector<std::unique_ptr<GeneratedSource>>		m_generatedSource;
+		std::unique_ptr<WordList::QueryCache>				m_wordListQueryCache;
+		std::unique_ptr<TaggedDataCache<Data::Sprite>>		m_taggedSpriteData;
+		std::unique_ptr<TaggedDataCache<Data::Aura>>		m_taggedAuraData;
+		std::unique_ptr<TaggedDataCache<Data::Item>>		m_taggedItemData;
 
-		uint32_t										m_nextItemNumber;
-		uint32_t										m_nextDeityNumber;
-		uint32_t										m_nextNPCNumber;
+		uint32_t											m_nextItemNumber;
+		uint32_t											m_nextDeityNumber;
+		uint32_t											m_nextNPCNumber;
 
 		template <typename _T>
 		_T
 		_GetRandomIntInRange(
-			_T											aMin,
-			_T											aMax)
+			_T																			aMin,
+			_T																			aMax)
 		{
 			tpublic::UniformDistribution<_T> distribution(aMin, aMax);
 			return distribution(_GetRandom());
@@ -191,7 +255,7 @@ namespace tpublic
 		template <typename _T>
 		_T
 		_GetRandomItemInVector(
-			const std::vector<_T>&						aVector)
+			const std::vector<_T>&														aVector)
 		{
 			assert(aVector.size() > 0);
 			if(aVector.size() == 1)
@@ -201,39 +265,55 @@ namespace tpublic
 
 		void							_ReadSource();
 		void							_ReadCompound(
-											const SourceNode*					aSource);
+											const SourceNode*								aSource);
 		void							_ReadStackObject(
-											StackObject::Type					aType,
-											const SourceNode*					aSource);
+											StackObject::Type								aType,
+											const SourceNode*								aSource);
 		void							_ReadStackObjectArray(
-											StackObject::Type					aType,
-											const SourceNode*					aSource);
+											StackObject::Type								aType,
+											const SourceNode*								aSource);
 		void							_ReadItems(
-											const SourceNode*					aSource);
+											const SourceNode*								aSource);
 		void							_ReadDeities(
-											const SourceNode*					aSource);
+											const SourceNode*								aSource);
 		void							_ReadNPCs(
-											const SourceNode*					aSource);
+											const SourceNode*								aSource);
+		void							_ReadCrafting(
+											const SourceNode*								aSource);
 		void							_GetContextTags(
-											std::vector<uint32_t>&				aOut);
+											std::vector<uint32_t>&							aOut);
 		std::mt19937&					_GetRandom();		
 		const UIntRange&				_GetLevelRange() const;
 		void							_GetAbilities(
-											std::vector<const Data::Ability*>&	aOut) const;
+											std::vector<const StackObject::Ability*>&		aOut) const;
 		const char*						_PickIconName(
-											uint32_t							aLevel,
-											Rarity::Id							aRarity,
-											const std::unordered_set<uint32_t>&	aMustHaveTags,
-											const std::vector<uint32_t>&		aTags);
+											uint32_t										aLevel,
+											Rarity::Id										aRarity,
+											const std::unordered_set<uint32_t>&				aMustHaveTags,
+											const std::vector<uint32_t>&					aTags);
 		GeneratedSource*				_CreateGeneratedSource();
 		void							_CreateDesignation(
-											const char*							aBaseName,
-											const StackObject::Designation*		aDesignation,
-											const std::vector<uint32_t>&		aContextTags,
-											std::vector<uint32_t>&				aTags,
-											Stat::Collection&					aStatWeights,
-											std::string&						aOut);
-		const StackObject::ItemSpecial*	_PickItemSpecial();
+											const char*										aBaseName,
+											const StackObject::Designation*					aDesignation,
+											const std::vector<uint32_t>&					aContextTags,
+											std::vector<uint32_t>&							aTags,
+											Stat::Collection&								aStatWeights,
+											std::string&									aOut);
+		const StackObject::ItemSpecial*	_PickItemSpecial(
+											ItemType::Id									aItemType);
+		void							_GetEquipmentSlots(
+											std::vector<EquipmentSlot::Id>&					aOut) const;
+		void							_GetItemSuffixes(
+											std::vector<const StackObject::ItemSuffix*>&	aOut) const;
+		void							_GetItemPrefixes(
+											std::vector<const StackObject::ItemPrefix*>&	aOut) const;
+		void							_GetLootGroups(
+											Rarity::Id										aRarity,
+											std::vector<uint32_t>&							aOut) const;
+		const char*						_PickMaterialName(
+											uint32_t										aLevel,
+											Rarity::Id										aRarity,
+											uint32_t										aTagId);
 	};
 
 }

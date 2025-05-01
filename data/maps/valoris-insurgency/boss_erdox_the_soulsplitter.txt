@@ -1,0 +1,177 @@
+############################################################
+# Loot
+
+loot_group .erdox_the_soulsplitter: {}
+
+loot_table .erdox_the_soulsplitter:
+{
+	slots:
+	[
+		{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
+		  map_message valoris_insurgency: "Erdox the Soulsplitter will not drop Token of Victory for {}." } } }
+		{ possibility: { loot_group: .erdox_the_soulsplitter  } }			
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+
+
+{
+	${
+		_rarity: rare
+		_level: 20
+		_loot_group: .erdox_the_soulsplitter
+	}
+	
+	item valoris_insurgency_25: !BOSS_DROP_CHEST
+	{
+		_string: "Robe of the Soulsplitter"
+		_type: armor_mail
+		_icon: icon_robe_2
+		_constitution: 1
+		_spell_damage: 3
+		_wisdom: 2
+	}
+	
+	item valoris_insurgency_26: !BOSS_DROP_NECK
+	{
+		_string: "Pendant of Evil"
+		_icon: icon_necklace_1
+		_constitution: 1
+		_spell_damage: 2
+	}
+	
+	item valoris_insurgency_27: !BOSS_DROP_FEET
+	{
+		_string: "Dark Elven Slippers"
+		_type: armor_cloth
+		_icon: icon_boots_1
+		_constitution: 2
+		_wisdom: 3
+		_spell_damage: 1
+	}
+	
+	item valoris_insurgency_28: !BOSS_DROP_1H_KNIFE
+	{
+		_string: "Dark Blade of Wrath"
+		_icon: icon_knife_1
+		_constitution: 1
+		_dexterity: 2
+		_weapon_cooldown: 18
+	}
+	
+	item valoris_insurgency_29: !BOSS_DROP_LEGS
+	{
+		_string: "Worn Pants of the Wizard"
+		_type: armor_cloth
+		_icon: icon_pants_2
+		_wisdom: 1
+		_constitution: 1
+		_spell_damage: 2
+	}
+	
+	item valoris_insurgency_30: !BOSS_DROP_NECK
+	{
+		_string: "Pendant of Strength"
+		_icon: icon_necklace_2
+		_constitution: 1
+		_strength: 2
+	}
+}
+
+############################################################
+# Boss
+
+zone .erdox_the_soulsplitter:
+{
+}
+
+encounter .erdox_the_soulsplitter:
+{
+	main_entities: [ valoris_insurgency_erdox_the_soulsplitter ]	
+}
+
+entity valoris_insurgency_erdox_the_soulsplitter: !NPC 
+{ 
+	_string: "Erdox the Soulsplitter" 
+	_level: 20
+	_elite: true
+	_faction: dark_elves 
+	_sprite: dark_elf_6
+	_sprite_dead: dark_elf_6_dead 
+	_weapon_damage: 1.52
+	_resource_health: 5.8
+	_loot_table: .erdox_the_soulsplitter
+	_creature_type: humanoid
+	_encounter: .erdox_the_soulsplitter
+	_zone: .erdox_the_soulsplitter
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+
+	_abilities: 
+	[
+		{
+			id: npc_curse
+			target: random_player
+		}	
+		
+		{
+			id: $ability
+			{
+				string: "Frenzy"
+				cast_time: 10
+				cooldowns: [ global ]
+				cooldown: $cooldown { duration: 200	}
+				flags: [ target_self ]
+				icon: icon_stuff 
+				direct_effect apply_aura:
+				{	
+					aura: $aura [ string icon ]
+					{
+						type: buff
+						duration: 60
+						flags: [ unique magic ]
+						stat_modifiers: { attack_haste: { add: 50 } }
+						color_effect: [ 255 0 0 255 ]
+					}
+				}			
+			}			
+			target: self			
+		}
+	
+		{
+			id: npc_attack
+		}
+	]	
+	
+	_in_combat_barks:
+	[
+		{ type: yell text: "Puny low-lifes, don't interfere with our plans!" flags: [ no_chat_bubble ] }
+	]			
+	
+	_dead_barks:
+	[
+		{ type: say text: "That isn't supposed to be happening..." flags: [ no_chat_bubble ] }
+	]	
+}
+
+map_trigger .erdox_the_soulsplitter_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .erdox_the_soulsplitter:
+{
+	entity valoris_insurgency_erdox_the_soulsplitter: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .erdox_the_soulsplitter_killed
+		}
+	}
+}
+

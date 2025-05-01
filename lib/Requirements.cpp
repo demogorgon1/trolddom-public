@@ -14,8 +14,12 @@
 
 #include <tpublic/Data/Aura.h>
 #include <tpublic/Data/Entity.h>
+#include <tpublic/Data/Objective.h>
+#include <tpublic/Data/Quest.h>
 
 #include <tpublic/EntityInstance.h>
+#include <tpublic/ItemProspect.h>
+#include <tpublic/IWorldView.h>
 #include <tpublic/Manifest.h>
 
 namespace tpublic
@@ -45,6 +49,7 @@ namespace tpublic
 			switch(aRequirement->m_type)
 			{
 			case Requirement::TYPE_MUST_BE_DISCIPLE:
+			case Requirement::TYPE_MUST_NOT_BE_DISCIPLE:
 				{
 					if (!entity->IsPlayer())
 						return false;
@@ -53,7 +58,10 @@ namespace tpublic
 					if (reputation == NULL)
 						return false;
 
-					if(reputation->GetReputation(aRequirement->m_id) < aManifest->m_worshipMetrics.m_discipleLevel)
+					bool shouldBeDisciple = aRequirement->m_type == Requirement::TYPE_MUST_BE_DISCIPLE;
+					bool isDisciple = reputation->GetReputation(aRequirement->m_id) >= aManifest->m_worshipMetrics.m_discipleLevel;
+
+					if(shouldBeDisciple != isDisciple)
 						return false;
 				}
 				break;
@@ -92,42 +100,63 @@ namespace tpublic
 				break;
 
 			case Requirement::TYPE_MUST_HAVE_EQUIPPED_ITEM_TYPE_FLAGS:
-				{
+			case Requirement::TYPE_MUST_NOT_HAVE_EQUIPPED_ITEM_TYPE_FLAGS:
+			{
 					if (!entity->IsPlayer())
 						return false;
 
 					const Components::PlayerPrivate* playerPrivate = entity->GetComponent<Components::PlayerPrivate>();
-					if((playerPrivate->m_equippedItemTypeFlags & (uint16_t)aRequirement->m_id) != (uint16_t)aRequirement->m_id)
+					bool isEquipped = (playerPrivate->m_equippedItemTypeFlags & (uint16_t)aRequirement->m_id) == (uint16_t)aRequirement->m_id;
+					bool shouldBeEquipped = aRequirement->m_type == Requirement::TYPE_MUST_HAVE_EQUIPPED_ITEM_TYPE_FLAGS;
+					if(isEquipped != shouldBeEquipped)
 						return false;
 				}
 				break;
 
 			case Requirement::TYPE_MUST_BE_CREATURE_TYPE:
+			case Requirement::TYPE_MUST_NOT_BE_CREATURE_TYPE:
 				{
 					const Components::CombatPublic* combatPublic = entity->GetComponent<Components::CombatPublic>();
-					if(combatPublic->m_creatureTypeId != aRequirement->m_id)
+					bool isCreatureType = combatPublic->m_creatureTypeId == aRequirement->m_id;
+					bool shouldBeCreatureType = aRequirement->m_type == Requirement::TYPE_MUST_BE_CREATURE_TYPE;
+					if(isCreatureType != shouldBeCreatureType)
 						return false;
 				}
 				break;
 
 			case Requirement::TYPE_MUST_HAVE_LESS_HEALTH_THAN:
 			case Requirement::TYPE_MUST_HAVE_ZERO_HEALTH:
-			{
+				{
 					const Components::CombatPublic* combatPublic = entity->GetComponent<Components::CombatPublic>();
-					const Components::CombatPublic::ResourceEntry* health = combatPublic->GetResourceEntry(Resource::ID_HEALTH);
-					if(health != NULL && health->m_max > 0)
+					if(combatPublic != NULL)
 					{
-						if(aRequirement->m_type == Requirement::TYPE_MUST_HAVE_LESS_HEALTH_THAN)
+						const Components::CombatPublic::ResourceEntry* health = combatPublic->GetResourceEntry(Resource::ID_HEALTH);
+						if (health != NULL && health->m_max > 0)
 						{
-							uint32_t percent = (health->m_current * 100) / health->m_max;
-							if (percent >= aRequirement->m_id)
-								return false;
+							if (aRequirement->m_type == Requirement::TYPE_MUST_HAVE_LESS_HEALTH_THAN)
+							{
+								uint32_t percent = (health->m_current * 100) / health->m_max;
+								if (percent >= aRequirement->m_id)
+									return false;
+							}
+							else if (aRequirement->m_type == Requirement::TYPE_MUST_HAVE_ZERO_HEALTH)
+							{
+								if (health->m_current != 0)
+									return false;
+							}
 						}
-						else if(aRequirement->m_type == Requirement::TYPE_MUST_HAVE_ZERO_HEALTH)
-						{
-							if(health->m_current != 0)
-								return false;
-						}
+					}
+				}
+				break;
+
+			case Requirement::TYPE_MUST_HAVE_MORE_RAGE_THAN:
+				{
+					const Components::CombatPublic* combatPublic = entity->GetComponent<Components::CombatPublic>();
+					const Components::CombatPublic::ResourceEntry* rage = combatPublic->GetResourceEntry(Resource::ID_RAGE);
+					if(rage != NULL && rage->m_max > 0)
+					{
+						if (rage->m_current < aRequirement->m_id)
+							return false;
 					}
 				}
 				break;
@@ -170,7 +199,7 @@ namespace tpublic
 						return false;
 
 					const Components::CompletedQuests* completedQuests = entity->GetComponent<Components::CompletedQuests>();
-					bool hasCompletedQuest = completedQuests->m_questIds.HasValue(aRequirement->m_id);
+					bool hasCompletedQuest = completedQuests->HasQuest(aRequirement->m_id);
 					if(aRequirement->m_type == Requirement::TYPE_MUST_HAVE_COMPLETED_QUEST && !hasCompletedQuest)
 						return false;
 					else if (aRequirement->m_type == Requirement::TYPE_MUST_NOT_HAVE_COMPLETED_QUEST && hasCompletedQuest)
@@ -193,6 +222,44 @@ namespace tpublic
 				}
 				break;
 
+			case Requirement::TYPE_MUST_NOT_BE_READY_TO_TURN_IN_QUEST:
+				{
+					if (!entity->IsPlayer())
+						return false;
+
+					const Components::ActiveQuests* activeQuests = entity->GetComponent<Components::ActiveQuests>();
+					const Components::ActiveQuests::Quest* quest = activeQuests->GetQuest(aRequirement->m_id);
+					if(quest != NULL)
+					{
+						if(quest->m_objectiveInstanceData.empty())	
+							return false;
+
+						const Data::Quest* questData = aManifest->GetById<Data::Quest>(quest->m_questId);
+						MemoryReader reader(&quest->m_objectiveInstanceData[0], quest->m_objectiveInstanceData.size());
+
+						bool readyToTurnIn = true;
+
+						for(uint32_t objectiveId : questData->m_objectives)
+						{
+							const Data::Objective* objectiveData = aManifest->GetById<Data::Objective>(objectiveId);
+							std::unique_ptr<ObjectiveInstanceBase> objectiveInstanceBase(objectiveData->m_objectiveTypeBase->CreateInstance());
+							if(!objectiveInstanceBase->FromStream(&reader))
+								return false;
+
+							if(!objectiveInstanceBase->IsCompleted())
+							{
+								readyToTurnIn = false;
+								break;
+							}
+						}
+
+						if(readyToTurnIn)
+							return false;
+					}
+				}
+
+				break;
+
 			case Requirement::TYPE_MUST_HAVE_TAG:
 				{
 					if(entity->IsPlayer())
@@ -207,6 +274,13 @@ namespace tpublic
 			case Requirement::TYPE_MUST_BE_TYPE:
 				{
 					if(entity->GetEntityId() != aRequirement->m_id)
+						return false;
+				}
+				break;
+
+			case Requirement::TYPE_MUST_NOT_BE_TYPE:
+				{
+					if(entity->GetEntityId() == aRequirement->m_id)
 						return false;
 				}
 				break;
@@ -284,6 +358,7 @@ namespace tpublic
 				break;
 
 			case Requirement::TYPE_MUST_HAVE_ITEM:
+			case Requirement::TYPE_MUST_NOT_HAVE_ITEM:
 				{
 					if (!entity->IsPlayer())
 						return false;
@@ -307,7 +382,9 @@ namespace tpublic
 						hasItem = inventory->m_itemList.HasItems(aRequirement->m_id, 1);
 					}
 
-					if(!hasItem)
+					bool shouldHaveItem = aRequirement->m_type == Requirement::TYPE_MUST_HAVE_ITEM;
+
+					if(hasItem != shouldHaveItem)
 						return false;
 				}
 				break;
@@ -343,13 +420,38 @@ namespace tpublic
 				break;
 
 			case Requirement::TYPE_MUST_HAVE_NEGATIVE_REPUTATION:
+			case Requirement::TYPE_MUST_HAVE_REPUTATION_LEVEL:
 				{
 					if (!entity->IsPlayer())
 						return false;
 
 					const Components::Reputation* reputation = entity->GetComponent<Components::Reputation>();
 					int32_t factionReputation = reputation->GetReputation(aRequirement->m_id);
-					if(factionReputation >= 0)
+
+					if(aRequirement->m_type == Requirement::TYPE_MUST_HAVE_REPUTATION_LEVEL)
+					{
+						uint32_t levelIndex = aManifest->m_reputationMetrics.GetLevelIndexFromReputation(factionReputation);
+						if(levelIndex < aRequirement->m_value)
+							return false;							
+					}
+					else
+					{
+						if (factionReputation >= 0)
+							return false;
+					}
+				}
+				break;
+
+			case Requirement::TYPE_MUST_KNOW_RIDING:
+			case Requirement::TYPE_MUST_NOT_KNOW_RIDING:
+				{
+					if (!entity->IsPlayer())
+						return false;
+
+					const Components::PlayerPrivate* playerPrivate = entity->GetComponent<Components::PlayerPrivate>();
+					bool mustKnowRiding = aRequirement->m_type == Requirement::TYPE_MUST_KNOW_RIDING;
+
+					if(playerPrivate->m_knowsRiding != mustKnowRiding)
 						return false;
 				}
 				break;
@@ -381,6 +483,20 @@ namespace tpublic
 			}
 
 			return true;
+		}
+
+		bool	
+		CheckListUnresolved(
+			const Manifest*										aManifest,
+			const std::vector<Requirement>&						aRequirements,
+			const IWorldView*									aWorldView,
+			uint32_t											aSelfEntityInstanceId,
+			uint32_t											aTargetEntityInstanceId)
+		{
+			const EntityInstance* self = aWorldView->WorldViewSingleEntityInstance(aSelfEntityInstanceId);
+			const EntityInstance* target = aWorldView->WorldViewSingleEntityInstance(aTargetEntityInstanceId);
+
+			return CheckList(aManifest, aRequirements, self, target, NULL);
 		}
 
 		bool	
@@ -483,6 +599,78 @@ namespace tpublic
 
 			if(aOutInstant != NULL)
 				*aOutInstant = openable->m_instant;
+
+			return true;
+		}
+
+		bool	
+		CheckTargetItemRequirements(
+			const Manifest*									aManifest,
+			const Data::Ability::TargetItemRequirements*	aTargetItemRequirements,
+			const ItemProspect*								aTargetItemProspect,
+			uint32_t										aItemId)
+		{
+			if(aTargetItemRequirements == NULL)
+				return true;
+
+			const Data::Item* item = aManifest->GetById<Data::Item>(aItemId);
+
+			if(aTargetItemRequirements->m_mustBeSellable && item->IsNotSellable())
+				return false;
+
+			if(aTargetItemProspect != NULL && !aTargetItemProspect->CanResolve(item))
+				return false;
+			
+			if(!aTargetItemRequirements->m_equipmentSlots.empty())
+			{
+				bool ok = false;
+
+				for(EquipmentSlot::Id equipmentSlot : aTargetItemRequirements->m_equipmentSlots)
+				{
+					if(item->IsEquippableInSlot(equipmentSlot))
+					{
+						ok = true;
+						break;
+					}
+				}
+
+				if(!ok)
+					return false;
+			}
+
+			if (!aTargetItemRequirements->m_rarities.empty())
+			{
+				bool ok = false;
+
+				for (Rarity::Id rarity : aTargetItemRequirements->m_rarities)
+				{
+					if(item->m_rarity == rarity)
+					{
+						ok = true;
+						break;
+					}
+				}
+
+				if (!ok)
+					return false;
+			}
+
+			if (!aTargetItemRequirements->m_itemTypes.empty())
+			{
+				bool ok = false;
+
+				for (ItemType::Id itemType : aTargetItemRequirements->m_itemTypes)
+				{
+					if (item->m_itemType == itemType)
+					{
+						ok = true;
+						break;
+					}
+				}
+
+				if (!ok)
+					return false;
+			}
 
 			return true;
 		}

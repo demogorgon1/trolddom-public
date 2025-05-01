@@ -1,0 +1,251 @@
+map_player_spawn .player_spawn:
+{
+}
+
+map_portal .exit:
+{
+	animation: !DEFAULT_PORTAL_ANIMATION{}
+	map: thalvaron
+	spawn: thalvaron_lich_tower_exit
+}
+
+route lich_tower_default_patrol: { }
+
+map_cliff .dummy_cliff_0: { cliff_style: dummy elevation: 0 }
+map_cliff .dummy_cliff_0_ramp: { cliff_style: dummy elevation: 0 ramp: true }
+map_cliff .dummy_cliff_1: { cliff_style: dummy elevation: 1 } 
+map_cliff .dummy_cliff_1_ramp: { cliff_style: dummy elevation: 1 ramp: true }
+map_cliff .dummy_cliff_2: { cliff_style: dummy elevation: 2 }
+map_cliff .dummy_cliff_2_ramp: { cliff_style: dummy elevation: 2 ramp: true }
+map_cliff .dummy_cliff_3: { cliff_style: dummy elevation: 3 }
+map_cliff .dummy_cliff_3_ramp: { cliff_style: dummy elevation: 3 ramp: true }
+map_cliff .dummy_cliff_4: { cliff_style: dummy elevation: 4 }
+map_cliff .dummy_cliff_4_ramp: { cliff_style: dummy elevation: 4 ramp: true }
+map_cliff .dummy_cliff_5: { cliff_style: dummy elevation: 5 }
+map_cliff .dummy_cliff_5_ramp: { cliff_style: dummy elevation: 5 ramp: true }
+map_cliff .dummy_cliff_6: { cliff_style: dummy elevation: 6 }
+map_cliff .dummy_cliff_6_ramp: { cliff_style: dummy elevation: 6 ramp: true }
+map_cliff .dummy_cliff_7: { cliff_style: dummy elevation: 7 }
+map_cliff .dummy_cliff_7_ramp: { cliff_style: dummy elevation: 7 ramp: true }
+
+map_palette .tiles: !DEFAULT_TILE_PALETTE{}
+
+map_palette .stuff:
+{
+	player_spawn .player_spawn: [ 0 0 255 ]
+	
+	portal .exit: [ 0 253 0 ]	
+	
+	entity_spawn mining: [ 200 200 200 ]
+	entity_spawn herbalism: [ 0 255 0 ]
+	entity_spawn holy_altar: [ 0 0 40 ]	
+	entity_spawn underworld_shrine: [ 0 0 80 ]	
+	entity_spawn furnace: [ 100 43 66 ]		
+	entity_spawn anvil: [ 150 43 66 ]		
+	entity_spawn fireplace: [ 250 43 66 ]		
+	entity_spawn fireplace_unlit: [ 250 243 66 ]		
+	entity_spawn bonfire: [ 251 43 66 ]		
+	entity_spawn default_chest: [ 40 143 66 ]		
+	entity_spawn cauldron: [ 43 113 166 ]		
+	entity_spawn bonfire_unlit: [ 144 59 20 ]
+	entity_spawn target_dummy: [ 139 201 21 ]	
+	
+	entity_spawn .anatar: [ 255 0 0 ]
+	entity_spawn .bone_tyrant: [ 255 43 0 ]
+	entity_spawn .bone_tyrant_spawn: [ 254 100 49 ]
+	entity_spawn .library: [ 255 3 53 ]
+	entity_spawn .malrik_the_undying: [ 255 40 100 ]
+	entity_spawn .malrik_the_undying_spawn_left: [ 40 59 128 ]
+	entity_spawn .malrik_the_undying_spawn_center: [ 140 59 128 ]
+	entity_spawn .malrik_the_undying_spawn_right: [ 40 159 128 ]
+	entity_spawn .rotfang: [ 255 50 254 ]
+	
+	entity_spawn .zombie: [ 94 28 199 ]
+	entity_spawn .bloated_zombie: [ 194 28 199 ]
+	entity_spawn .skeletal_warrior: [ 144 11 84 ]
+	entity_spawn .skeletal_healer: [ 144 111 84 ]
+	entity_spawn .skeletal_caster: [ 144 211 84 ]
+	entity_spawn .skeletal_brute: [ 144 211 184 ]
+}
+
+map_palette .levels:
+{
+	level<18>: [ 255 255 0 ]
+	level<19>: [ 0 255 255 ]
+	level<20>: [ 255 0 255 ]
+}
+
+map_palette .routes:
+{
+	route lich_tower_default_patrol: [ 39 103 53 ]
+}
+
+map_palette .doodads:
+{
+	doodad crates: [ 45 39 100 ]
+	doodad sack: [ 35 100 200 ]
+	doodad table: [ 35 130 200 ]
+	doodad chair_left: [ 45 100 200 ]
+	doodad bed: [ 35 130 240 ]
+	doodad bookshelf: [ 35 140 100 ]
+	doodad alchemy_bookshelf: [ 135 100 200 ]
+	doodad empty_bookshelf: [ 135 200 200 ]
+	doodad chair_right: [ 45 200 100 ]	
+	doodad chair_bottom: [ 56 201 195 ]
+	doodad bench: [ 58 221 113 ]
+	doodad altar: [ 54 29 64 ]
+	doodad wall_banner_red: [ 243 29 53 ]
+	doodad broken_pillar: [ 136 130 200 ]
+	doodad wall_banner_mining: [ 243 19 53 ]
+	doodad wall_banner_blacksmithing: [ 243 59 53 ]
+	doodad tent: [ 249 51 53 ]	
+	doodad wall_banner_dark_green: [ 143 59 13 ]
+	doodad dungeon_open_door: [ 193 13 59 ]	
+	doodad statue_face_left: [ 193 63 59 ]	
+	doodad statue_face_right: [ 193 73 19 ]	
+	doodad ship: [ 193 173 119 ]	
+	doodad stone_stairs: [ 192 173 19 ]	
+	doodad wood_stairs: [ 192 19 173 ]	
+	doodad large_statue: [ 193 73 20 ]	
+	doodad counter: [ 197 73 20 ]	
+	doodad stone_stairs_reversed: [ 19 173 192 ]	
+	doodad wood_stairs_reversed: [ 173 19 192 ]	
+	doodad animal_skull: [ 197 173 210 ]	
+	doodad barrel: [ 111 38 84 ]
+	doodad cage: [ 45 41 145 ]
+	doodad rowboat: [ 145 46 145 ]
+	doodad cobweb: [ 84 111 83 ]
+	doodad dead_tree: [ 33 123 81 ]
+	doodad tombstone: [ 99 99 119 ]
+	doodad statue_angel: [ 199 199 119 ]
+	doodad skull_stick: [ 39 81 167 ]
+}
+
+map_palette .subzones:
+{
+	sub_zone .rotfang: [ 175 177 255 ]
+	sub_zone .malrik_the_undying: [ 255 206 175 ]
+	sub_zone .bone_tyrant: [ 251 64 94 ]
+	sub_zone .library: [ 255 175 250 ]
+	sub_zone .anatar: [ 175 255 219 ]
+}
+
+map_palette .cliffs:
+{
+	cliff .dummy_cliff_1: [ 197 169 134 ]
+	cliff .dummy_cliff_1_ramp: [ 197 142 8 ]	
+
+	cliff .dummy_cliff_2: [ 197 169 234 ]
+	cliff .dummy_cliff_2_ramp: [ 51 197 8 ]	
+
+	cliff .dummy_cliff_3: [ 184 234 169 ]
+	cliff .dummy_cliff_3_ramp: [ 8 197 142 ]	
+	
+	cliff .dummy_cliff_4: [ 169 192 234 ]
+	cliff .dummy_cliff_4_ramp: [ 8 51 197 ]	
+
+	cliff .dummy_cliff_5: [ 234 169 179 ]
+	cliff .dummy_cliff_5_ramp: [ 155 8 197 ]	
+
+	cliff .dummy_cliff_6: [ 255 62 93 ]
+	cliff .dummy_cliff_6_ramp: [ 197 8 39 ]		
+}
+
+map lich_tower:
+{
+	string: "Tower of Indulath"
+	type: private
+	reset: manual
+	default_tile: dungeon_wall
+	default_player_spawn: .player_spawn
+	default_exit_portal: .exit
+	default_fishing_loot_table: fish
+	view_attenuation: 0
+	view_attenuation_bias: 0
+	view_hidden_visibility: 35	
+	auto_doodads: true
+	level: 18
+	max_players: 5
+	max_minions: 1
+	openable_elite: true
+	
+	layers:
+	[
+		{
+			palettes:	[ .tiles ]
+			source:		"lich-tower-tiles.png"
+		}
+
+		{ 
+			palettes:	[ .stuff ]
+			source:		"lich-tower-stuff.png"
+		}
+		
+		{
+			palettes:	[ .levels ]
+			source:		"lich-tower-levels.png"
+		}
+
+		{ 
+			palettes: 	[ .tiles ]
+			source:		"lich-tower-cover.png"
+			cover: 		true
+		}		
+		
+		{ 
+			palettes: 	[ .routes ]
+			source:		"lich-tower-routes.png"
+		}				
+
+		{ 
+			palettes: 	[ .doodads ]
+			source:		"lich-tower-doodads.png"
+		}								
+		
+		{ 
+			palettes: 	[ .subzones ]
+			source:		"lich-tower-subzones.png"
+		}										
+		
+		{ 
+			palettes: 	[ .cliffs ]
+			source:		"lich-tower-cliffs.png"
+		}										
+	]
+	
+	script:
+	{
+		condition trigger_not_set: .anatar_killed
+		condition entity_state: { entity_spawn: .anatar state: dead }		
+		run: { set_trigger: .anatar_killed }
+	}	
+	
+	script:
+	{
+		condition trigger_not_set: .bone_tyrant_killed
+		condition entity_state: { entity_spawn: .bone_tyrant state: dead }		
+		run: { set_trigger: .bone_tyrant_killed }
+	}	
+
+	script:
+	{
+		condition trigger_not_set: .library_killed
+		condition entity_state: { entity_spawn: .library state: dead }		
+		run: { set_trigger: .library_killed }
+	}	
+
+	script:
+	{
+		condition trigger_not_set: .malrik_the_undying_killed
+		condition entity_state: { entity_spawn: .malrik_the_undying state: dead }		
+		run: { set_trigger: .malrik_the_undying_killed }
+	}	
+
+	script:
+	{
+		condition trigger_not_set: .rotfang_killed
+		condition entity_state: { entity_spawn: .rotfang state: dead }		
+		run: { set_trigger: .rotfang_killed }
+	}	
+}
+ 

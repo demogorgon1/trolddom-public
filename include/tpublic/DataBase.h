@@ -111,6 +111,14 @@ namespace tpublic
 		{
 			aOut["name"] = m_name;
 			aOut["id"] = Helpers::Format("%u", m_id);
+
+			if(m_tagIds.size() > 0)
+			{
+				std::string tagString;
+				for(uint32_t tagId : m_tagIds)
+					tagString += Helpers::Format("%s%u", tagString.empty() ? "" : " ", tagId);
+				aOut["tags"] = tagString;
+			}
 		}
 
 		// Virtual interface

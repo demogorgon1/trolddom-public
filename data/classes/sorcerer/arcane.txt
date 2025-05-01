@@ -13,8 +13,12 @@ talent_tree sorcerer_arcane:
 		talent sorcerer_arcane_improved_teleport: "E"
 		talent sorcerer_arcane_void_lightning: "F"
 		talent sorcerer_arcane_improved_counterspell: "G"
+		talent sorcerer_arcane_preparation: "H"
+		talent sorcerer_arcane_void_blast: "I"
+		talent sorcerer_arcane_arcane_mastery: "J"
 		sprite talent_tree_down_arrow: "d"						
 		sprite talent_tree_left_arrow: "l"						
+		sprite talent_tree_down: "|"		
 	}
 	
 	map:
@@ -22,10 +26,144 @@ talent_tree sorcerer_arcane:
 		"..A.B.G"		
 		"....d.."
 		"ElD.C.."
-		"......."
-		"..F...."
+		"....|.."
+		"IlF.|.J"
+		"....d.."
+		"....H.."
 	]
 	
+}
+
+###############################################################################
+# Arcane Mastery
+
+talent sorcerer_arcane_arcane_mastery:
+{
+	string: "Arcane Mastery"
+	icon: icon_flash_of_light
+	talent_tree_points_required: 10
+	points:
+	[
+		{ aura: sorcerer_arcane_arcane_mastery_1 }
+		{ aura: sorcerer_arcane_arcane_mastery_2 }
+		{ aura: sorcerer_arcane_arcane_mastery_3 }
+		{ aura: sorcerer_arcane_arcane_mastery_4 }
+		{ aura: sorcerer_arcane_arcane_mastery_5 }
+	]
+}
+
+aura sorcerer_arcane_arcane_mastery_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases damage of your arcane spells by 6%."
+	aura_effect damage_output_modifier: { type_mask: [ arcane ] multiplier: 1.06 }
+}
+
+aura sorcerer_arcane_arcane_mastery_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases damage of your arcane spells by 12%."
+	aura_effect damage_output_modifier: { type_mask: [ arcane ] multiplier: 1.12 }
+}
+
+aura sorcerer_arcane_arcane_mastery_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases damage of your arcane spells by 18%."
+	aura_effect damage_output_modifier: { type_mask: [ arcane ] multiplier: 1.18 }
+}
+
+aura sorcerer_arcane_arcane_mastery_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases damage of your arcane spells by 24%."
+	aura_effect damage_output_modifier: { type_mask: [ arcane ] multiplier: 1.24 }
+}
+
+aura sorcerer_arcane_arcane_mastery_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases damage of your arcane spells by 30%."
+	aura_effect damage_output_modifier: { type_mask: [ arcane ] multiplier: 1.3 }
+}
+
+###############################################################################
+# Void Blast
+
+talent sorcerer_arcane_void_blast:
+{
+	string: "Void Blast"
+	icon: icon_special_6
+	talent_tree_points_required: 10
+	prerequisites: [ sorcerer_arcane_void_lightning ]
+	points:
+	[
+		{ ability: void_blast }
+	]
+}
+
+ability void_blast:
+{
+	string: "Void Blast"
+	description: "Deals $damage$ damage to target."	
+	range: 7
+	cast_time: 20
+	cooldowns: [ global spell_arcane_lockout ]		
+	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
+	states: [ default in_combat ]
+	icon: icon_special_6
+	talent_tree: sorcerer_arcane
+	resource_cost mana: 28
+
+	direct_effect damage:
+	{
+		flags: [ can_be_critical is_magical ]
+		damage_type: arcane
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.1 b: [ [ 1 35 ] [ 10 75 ] [ 20 150 ] ] }									
+	}	
+}
+
+###############################################################################
+# Preparation
+
+talent sorcerer_arcane_preparation:
+{
+	string: "Preparation"
+	icon: icon_special_5
+	talent_tree_points_required: 15
+	prerequisites: [ sorcerer_arcane_insight ]
+	points:
+	[
+		{ ability: preparation }
+	]
+}
+
+cooldown preparation:
+{
+	duration: 1800
+}
+
+ability preparation:
+{
+	string: "Preparation"
+	description: "Resets the cooldown of your spells."	
+	range: 7
+	cooldowns: [ spell_arcane_lockout preparation ]		
+	flags: [ spell target_self ]
+	states: [ default in_combat ]
+	icon: icon_special_5
+	talent_tree: sorcerer_arcane
+	resource_cost mana: 18
+
+	direct_effect reset_cooldowns:
+	{
+		talent_trees: [ sorcerer_arcane sorcerer_battle_mage sorcerer_elemental ]
+	}	
 }
 
 ###############################################################################
@@ -53,7 +191,7 @@ talent sorcerer_arcane_void_lightning:
 {
 	string: "Void Lightning"
 	icon: icon_void_lightning
-	talent_tree_points_required: 6
+	talent_tree_points_required: 10
 	points:
 	[
 		{ ability: void_lightning }
@@ -63,6 +201,7 @@ talent sorcerer_arcane_void_lightning:
 cooldown void_lightning:
 {
 	duration: 150
+	talent_tree: sorcerer_arcane
 }
 
 ability void_lightning_tick:
@@ -80,7 +219,7 @@ ability void_lightning_tick:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.25 b: [ [ 1 6 ] [ 10 12 ] [ 20 24 ] ] }									
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.32 b: [ [ 1 7 ] [ 10 15 ] [ 20 32 ] ] }									
 	}	
 }
 
@@ -126,7 +265,7 @@ ability void_lightning:
 	talent_tree: sorcerer_arcane
 	speed: 6
 	projectile: void_lightning
-	resource_cost mana: 20
+	resource_cost mana: 24
 	
 	direct_effect spawn_entity:
 	{
@@ -138,7 +277,7 @@ ability void_lightning:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.65 b: [ [ 1 25 ] [ 10 50 ] [ 20 100 ] ] }									
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.02 b: [ [ 1 25 ] [ 10 50 ] [ 20 120 ] ] }									
 	}	
 }
 
@@ -161,7 +300,7 @@ talent sorcerer_arcane_improved_teleport:
 {
 	string: "Improved Teleport"
 	icon: icon_improved_teleport
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	prerequisites: [ sorcerer_arcane_teleport ]
 	points:
 	[
@@ -194,7 +333,7 @@ talent sorcerer_arcane_teleport:
 {
 	string: "Teleport"
 	icon: icon_teleport
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability: teleport }
@@ -204,6 +343,7 @@ talent sorcerer_arcane_teleport:
 cooldown teleport:
 {
 	duration: 200
+	talent_tree: sorcerer_arcane
 }
 
 ability teleport:
@@ -259,7 +399,7 @@ talent sorcerer_arcane_insight:
 {
 	string: "Insight"
 	icon: icon_insight
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	prerequisites: [ sorcerer_arcane_improved_arcane_missile ]
 	points:
 	[
@@ -320,22 +460,34 @@ talent sorcerer_arcane_improved_arcane_missile:
 		{ ability_modifier: improved_arcane_missile_1 }
 		{ ability_modifier: improved_arcane_missile_2 }
 		{ ability_modifier: improved_arcane_missile_3 }
+		{ ability_modifier: improved_arcane_missile_4 }
+		{ ability_modifier: improved_arcane_missile_5 }
 	]
 }
 
 ability_modifier improved_arcane_missile_1:
 {
-	description: "Increases critical chance of Arcane Missile by 15%."	
+	description: "Increases critical chance of Arcane Missile by 12%."	
 }
 
 ability_modifier improved_arcane_missile_2:
 {
-	description: "Increases critical chance of Arcane Missile by 30%."	
+	description: "Increases critical chance of Arcane Missile by 24%."	
 }
 
 ability_modifier improved_arcane_missile_3:
 {
-	description: "Increases critical chance of Arcane Missile by 45%."	
+	description: "Increases critical chance of Arcane Missile by 36%."	
+}
+
+ability_modifier improved_arcane_missile_4:
+{
+	description: "Increases critical chance of Arcane Missile by 48%."	
+}
+
+ability_modifier improved_arcane_missile_5:
+{
+	description: "Increases critical chance of Arcane Missile by 60%."	
 }
 
 ###############################################################################
@@ -351,6 +503,8 @@ talent sorcerer_arcane_word_of_the_wise:
 		{ aura: sorcerer_arcane_word_of_the_wise_1 }
 		{ aura: sorcerer_arcane_word_of_the_wise_2 }
 		{ aura: sorcerer_arcane_word_of_the_wise_3 }
+		{ aura: sorcerer_arcane_word_of_the_wise_4 }
+		{ aura: sorcerer_arcane_word_of_the_wise_5 }
 	]
 }
 
@@ -378,12 +532,29 @@ aura sorcerer_arcane_word_of_the_wise_3:
 	stat_modifiers: { wisdom: { add_percent: 6 } }
 }
 
+aura sorcerer_arcane_word_of_the_wise_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your Wisdom by 8%."
+	stat_modifiers: { wisdom: { add_percent: 8 } }
+}
+
+aura sorcerer_arcane_word_of_the_wise_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your Wisdom by 10%."
+	stat_modifiers: { wisdom: { add_percent: 10 } }
+}
+
 ###############################################################################
 # Arcane Missile
 
 cooldown arcane_missile:
 {
 	duration: 50
+	talent_tree: sorcerer_arcane
 }
 
 ability arcane_missile:
@@ -402,9 +573,11 @@ ability arcane_missile:
 	
 	direct_effect damage:
 	{
-		conditional_critical_chance_bonus<improved_arcane_missile_1>: 15
-		conditional_critical_chance_bonus<improved_arcane_missile_2>: 30
-		conditional_critical_chance_bonus<improved_arcane_missile_3>: 45
+		conditional_critical_chance_bonus<improved_arcane_missile_1>: 12
+		conditional_critical_chance_bonus<improved_arcane_missile_2>: 24
+		conditional_critical_chance_bonus<improved_arcane_missile_3>: 36
+		conditional_critical_chance_bonus<improved_arcane_missile_4>: 48
+		conditional_critical_chance_bonus<improved_arcane_missile_5>: 60
 	
 		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
@@ -509,6 +682,7 @@ particle_system sleep:
 cooldown counterspell:
 {
 	duration: 150
+	talent_tree: sorcerer_arcane
 }
 
 ability counterspell:

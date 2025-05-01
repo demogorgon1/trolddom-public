@@ -12,6 +12,9 @@ talent_tree paladin_guardian:
 		talent paladin_aura_of_protection: "D"
 		talent paladin_shield_specialization: "E"
 		talent paladin_consecrate: "F"
+		talent paladin_endurance: "G"
+		talent paladin_holy_reflection: "H"
+		talent paladin_one_handed_weapon_mastery: "I"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_down: "|"		
 	}
@@ -22,8 +25,194 @@ talent_tree paladin_guardian:
 		"..d.d"
 		"..B.D"
 		"..d.."
-		"..F.."
+		"I.F.G"
+		"....d"
+		"....H"
 	]
+}
+
+###############################################################################
+# One-Handed Weapon Mastery
+
+talent paladin_one_handed_weapon_mastery:
+{
+	string: "One-Handed Weapon Mastery"
+	icon: icon_one_handed_weapon_mastery
+	prerequisites: [ ]	
+	talent_tree_points_required: 10
+	points:
+	[
+		{ aura: paladin_one_handed_weapon_mastery_1 }
+		{ aura: paladin_one_handed_weapon_mastery_2 }
+		{ aura: paladin_one_handed_weapon_mastery_3 }
+		{ aura: paladin_one_handed_weapon_mastery_4 }
+		{ aura: paladin_one_handed_weapon_mastery_5 }
+	]
+}
+
+aura paladin_one_handed_weapon_mastery_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your damage done with one-handed weapons by 4%."
+	aura_effect damage_output_modifier:
+	{
+		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
+		multiplier: 1.04
+	}
+}
+
+aura paladin_one_handed_weapon_mastery_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your damage done with one-handed weapons by 8%."
+	aura_effect damage_output_modifier:
+	{
+		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
+		multiplier: 1.08
+	}
+}
+
+aura paladin_one_handed_weapon_mastery_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your damage done with one-handed weapons by 12%."
+	aura_effect damage_output_modifier:
+	{
+		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
+		multiplier: 1.12
+	}
+}
+
+aura paladin_one_handed_weapon_mastery_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your damage done with one-handed weapons by 16%."
+	aura_effect damage_output_modifier:
+	{
+		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
+		multiplier: 1.16
+	}
+}
+
+aura paladin_one_handed_weapon_mastery_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your damage done with one-handed weapons by 20%."
+	aura_effect damage_output_modifier:
+	{
+		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
+		multiplier: 1.20
+	}
+}
+
+###############################################################################
+# Holy Reflection
+
+talent paladin_holy_reflection:
+{
+	string: "Holy Reflection"
+	icon: icon_holy_reflection
+	prerequisites: [ paladin_endurance ]	
+	talent_tree_points_required: 15
+	points:
+	[
+		{ aura: paladin_holy_reflection }
+	]
+}
+
+aura paladin_holy_reflection:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Causes holy damage to attackers when taking melee damage."
+	
+	aura_effect combat_event_trigger: 
+	{ 
+		combat_event<target>: hit
+		combat_event_ability_mask: [ melee ]
+		ability<self>: paladin_holy_reflection		
+	}	
+}
+
+ability paladin_holy_reflection:
+{
+	string: "Holy Reflection"
+	range: 1
+	flags: [ spell offensive target_other target_hostile ]
+	states: [ default in_combat ]
+	icon: icon_holy_reflection
+	delay: 3
+
+	direct_effect damage:
+	{	
+		flags: [ is_magical ]
+		damage_type: holy
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.3 b: [ [ 1 8 ] [ 10 16 ] [ 20 32 ] ] }													
+	}
+}
+
+###############################################################################
+# Endurance
+
+talent paladin_endurance:
+{
+	string: "Endurance"
+	icon: icon_star_1
+	prerequisites: [ ]	
+	talent_tree_points_required: 10
+	points:
+	[
+		{ aura: paladin_endurance_1 }
+		{ aura: paladin_endurance_2 }
+		{ aura: paladin_endurance_3 }
+		{ aura: paladin_endurance_4 }
+		{ aura: paladin_endurance_5 }
+	]
+}
+
+aura paladin_endurance_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your Constitution by 2%."
+	stat_modifiers: { constitution: { add_percent: 2 } }
+}
+
+aura paladin_endurance_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your Constitution by 4%."
+	stat_modifiers: { constitution: { add_percent: 4 } }
+}
+
+aura paladin_endurance_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your Constitution by 6%."
+	stat_modifiers: { constitution: { add_percent: 6 } }
+}
+
+aura paladin_endurance_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your Constitution by 8%."
+	stat_modifiers: { constitution: { add_percent: 8 } }
+}
+
+aura paladin_endurance_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your Constitution by 10%."
+	stat_modifiers: { constitution: { add_percent: 10 } }
 }
 
 ###############################################################################
@@ -55,6 +244,7 @@ ability paladin_block:
 	delay: 3
 	resource_cost mana: 10
 	talent_tree: paladin_guardian
+	requirement self<must_have_item_type_equipped>: shield
 	
 	direct_effect apply_aura:
 	{
@@ -102,7 +292,6 @@ ability judgement:
 		threat: 20
 	}
 }
-
 
 particle_system judgement:
 {
@@ -166,7 +355,6 @@ ability taunt_2:
 	}
 }
 
-
 ###############################################################################
 # Divine Protection
 
@@ -180,6 +368,7 @@ talent paladin_divine_protection:
 	[
 		{ aura: paladin_divine_protection_1 }
 		{ aura: paladin_divine_protection_2 }
+		{ aura: paladin_divine_protection_3 }
 	]
 }
 
@@ -187,16 +376,24 @@ aura paladin_divine_protection_1:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases your armor by 7%."
-	stat_modifiers: { armor: { add_percent: 7 } }
+	description: "Increases your armor by 5%."
+	stat_modifiers: { armor: { add_percent: 5 } }
 }
 
 aura paladin_divine_protection_2:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases your armor by 14%."
-	stat_modifiers: { armor: { add_percent: 14 } }
+	description: "Increases your armor by 10%."
+	stat_modifiers: { armor: { add_percent: 10 } }
+}
+
+aura paladin_divine_protection_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your armor by 15%."
+	stat_modifiers: { armor: { add_percent: 15 } }
 }
 
 ###############################################################################
@@ -213,6 +410,8 @@ talent paladin_shield_specialization:
 		{ aura: paladin_shield_specialization_1 }
 		{ aura: paladin_shield_specialization_2 }
 		{ aura: paladin_shield_specialization_3 }
+		{ aura: paladin_shield_specialization_4 }
+		{ aura: paladin_shield_specialization_5 }
 	]
 }
 
@@ -220,24 +419,40 @@ aura paladin_shield_specialization_1:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases your chance to block by 3%. Increases amount blocked by 20%."
-	stat_modifiers: { block_chance: { add: 3 } block_value: { add_percent: 20 } }
+	description: "Increases your chance to block by 2%. Increases amount blocked by 12%."
+	stat_modifiers: { block_chance: { add: 2 } block_value: { add_percent: 12 } }
 }
 
 aura paladin_shield_specialization_2:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases your chance to block by 6%. Increases amount blocked by 40%."
-	stat_modifiers: { block_chance: { add: 6 } block_value: { add_percent: 40 } }
+	description: "Increases your chance to block by 4%. Increases amount blocked by 24%."
+	stat_modifiers: { block_chance: { add: 4 } block_value: { add_percent: 24 } }
 }
 
 aura paladin_shield_specialization_3:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases your chance to block by 9%. Increases amount blocked by 60%."
-	stat_modifiers: { block_chance: { add: 9 } block_value: { add_percent: 60 } }
+	description: "Increases your chance to block by 6%. Increases amount blocked by 36%."
+	stat_modifiers: { block_chance: { add: 6 } block_value: { add_percent: 36 } }
+}
+
+aura paladin_shield_specialization_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your chance to block by 8%. Increases amount blocked by 48%."
+	stat_modifiers: { block_chance: { add: 8 } block_value: { add_percent: 48 } }
+}
+
+aura paladin_shield_specialization_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your chance to block by 10%. Increases amount blocked by 60%."
+	stat_modifiers: { block_chance: { add: 10 } block_value: { add_percent: 60 } }
 }
 
 ###############################################################################
@@ -338,7 +553,7 @@ talent paladin_oath_of_protection:
 	string: "Oath of Protection"
 	icon: icon_oath_of_protection
 	prerequisites: [ paladin_blessing_of_protection ]	
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability: paladin_oath_of_protection }
@@ -383,11 +598,12 @@ talent paladin_aura_of_protection:
 	string: "Divine Restoration"
 	icon: icon_aura_of_protection
 	prerequisites: [ paladin_shield_specialization ]	
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ aura: paladin_aura_of_protection_1 }
 		{ aura: paladin_aura_of_protection_2 }
+		{ aura: paladin_aura_of_protection_3 }
 	]
 }
 
@@ -395,7 +611,7 @@ aura paladin_aura_of_protection_1:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "You restore 5% of your mana after blocking an attack."
+	description: "You restore 3% of your mana after blocking an attack."
 	aura_effect combat_event_trigger: 
 	{ 
 		combat_event<target>: block
@@ -412,7 +628,7 @@ ability paladin_aura_of_protection_trigger_1:
 	direct_effect modify_resource:
 	{
 		resource: mana
-		function: { expression: a_mul_x a: 0.05 x: mana_max }		
+		function: { expression: a_mul_x a: 0.03 x: mana_max }		
 	}
 }
 
@@ -420,7 +636,7 @@ aura paladin_aura_of_protection_2:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "You restore 10% of your mana after blocking an attack."
+	description: "You restore 6% of your mana after blocking an attack."
 	aura_effect combat_event_trigger: 
 	{ 
 		combat_event<target>: block
@@ -437,7 +653,32 @@ ability paladin_aura_of_protection_trigger_2:
 	direct_effect modify_resource:
 	{
 		resource: mana
-		function: { expression: a_mul_x a: 0.1 x: mana_max }		
+		function: { expression: a_mul_x a: 0.06 x: mana_max }		
+	}
+}
+
+aura paladin_aura_of_protection_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "You restore 9% of your mana after blocking an attack."
+	aura_effect combat_event_trigger: 
+	{ 
+		combat_event<target>: block
+		ability<target>: paladin_aura_of_protection_trigger_3
+	}
+}
+
+ability paladin_aura_of_protection_trigger_3:
+{
+	string: "Divine Restoration"
+	states: [ default in_combat ]
+	icon: icon_aura_of_protection
+	
+	direct_effect modify_resource:
+	{
+		resource: mana
+		function: { expression: a_mul_x a: 0.09 x: mana_max }		
 	}
 }
 
@@ -448,7 +689,7 @@ talent paladin_consecrate:
 {
 	string: "Consecrate"
 	icon: icon_consecrate
-	talent_tree_points_required: 6
+	talent_tree_points_required: 10
 	prerequisites: [ paladin_oath_of_protection ]
 	points:
 	[
@@ -464,9 +705,9 @@ cooldown consecrate:
 ability consecrate:
 {
 	string: "Consecrate"
-	description: "Consecrates the ground for 12 seconds. This does damage and extra threat to affected enemies."	
+	description: "Consecrates the ground for 15 seconds. This does damage and extra threat to affected enemies."	
 	range: 7
-	cast_time: 15
+	cast_time: 10
 	flags: [ spell target_aoe interruptable ]
 	states: [ default in_combat ]
 	icon: icon_consecrate
@@ -492,7 +733,7 @@ ability consecrate_tick:
 	{
 		flags: [ is_magical ]
 		damage_type: holy
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 7 ] [ 10 14 ] [ 20 28 ] ] }													
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.35 b: [ [ 1 14 ] [ 10 28 ] [ 20 56 ] ] }													
 	}
 	direct_effect threat:
 	{
@@ -512,7 +753,7 @@ entity consecrate:
 		environment: 
 		{
 			tick_interval: 15
-			duration: 120 
+			duration: 150 
 			ability: consecrate_tick
 		}		
 		sprite<static>: 

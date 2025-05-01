@@ -1,0 +1,66 @@
+dialogue_screen .john_thompoure_dialogue:
+{
+	text: 
+	[	
+		"Any news?"
+	]
+
+	options:
+	[
+		{ quest<offer_only>: .john_thompoure_1 }
+	]
+	
+}
+
+dialogue_root .john_thompoure_dialogue:
+{
+	.john_thompoure_dialogue: { }
+}
+
+entity thalvaron_john_thompoure: !NPC
+{
+	_string: "John Thompoure"
+	_dialogue_root: .john_thompoure_dialogue	
+	_sprite: man_18
+	_sprite_dead: man_18_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+quest .john_thompoure_1:
+{
+	string: "Message for Ravenreach"
+
+	text:
+	[
+		"Deliver the message to the sheriff of Ravenreach."
+	]
+	
+	description: 
+	[
+		"Hey! I've been tasked with keeping watch over the northern approach to the town of Ravenreach. They were supposed to send someone here yesterday to check up on me, but that never happened.\n\n"
+		"Maybe you can go to Ravenreach and tell the sheriff that everything is fine here?\n\n"
+		"Just cross the bridge, follow the road, and you'll get to Ravenreach. Make haste! I'm out of snacks and I'm getting bored!"
+	]
+
+	progress:
+	[
+		"What's up."
+	]
+	
+	completion:
+	[
+		"Oh yeah, Mr. Thompoure is still out there. Everything is fine he said? Well, that's because he doesn't know what's going on down here. We have some serious problems."
+	]
+
+	level: 16
+	reward_xp_multiplier: 0.3
+	reward_cash_multiplier: 0.3
+}
+

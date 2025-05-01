@@ -50,30 +50,32 @@ ability fighter_shoot:
 
 class fighter:
 {
+	version: 1
+
 	string: "Fighter"	
 	description: "Defeat your enemies in hand-to-hand combat."
 	
 	systems: [ combat health_regen rage ]
 	
-	armor_style none:   { sprite: fighter_naked sprite_dead: fighter_naked_dead sprites_walk: [ fighter_naked_walk_1 fighter_naked_walk_2 ] }
-	armor_style brown:  { sprite: fighter       sprite_dead: fighter_dead       sprites_walk: [ fighter_walk_1       fighter_walk_2 ] }
-	armor_style green:  { sprite: fighter_2     sprite_dead: fighter_2_dead     sprites_walk: [ fighter_2_walk_1     fighter_2_walk_2 ] }
-	armor_style cyan:   { sprite: fighter_3     sprite_dead: fighter_3_dead     sprites_walk: [ fighter_3_walk_1     fighter_3_walk_2 ] }
-	armor_style red:    { sprite: fighter_4     sprite_dead: fighter_4_dead     sprites_walk: [ fighter_4_walk_1     fighter_4_walk_2 ] }
-	armor_style purple: { sprite: fighter_5     sprite_dead: fighter_5_dead     sprites_walk: [ fighter_5_walk_1     fighter_5_walk_2 ] }
-	armor_style black:  { sprite: fighter_6     sprite_dead: fighter_6_dead     sprites_walk: [ fighter_6_walk_1     fighter_6_walk_2 ] }
-	armor_style white:  { sprite: fighter_7     sprite_dead: fighter_7_dead     sprites_walk: [ fighter_7_walk_1     fighter_7_walk_2 ] }
-	armor_style yellow: { sprite: fighter_8     sprite_dead: fighter_8_dead     sprites_walk: [ fighter_8_walk_1     fighter_8_walk_2 ] }
+	armor_style none:   { sprite: fighter_naked sprite_dead: fighter_naked_dead sprite_mounted: fighter_naked_mounted sprites_walk: [ fighter_naked_walk_1 fighter_naked_walk_2 ] }
+	armor_style brown:  { sprite: fighter       sprite_dead: fighter_dead       sprite_mounted: fighter_mounted       sprites_walk: [ fighter_walk_1       fighter_walk_2 ] }
+	armor_style green:  { sprite: fighter_2     sprite_dead: fighter_2_dead     sprite_mounted: fighter_2_mounted     sprites_walk: [ fighter_2_walk_1     fighter_2_walk_2 ] }
+	armor_style cyan:   { sprite: fighter_3     sprite_dead: fighter_3_dead     sprite_mounted: fighter_3_mounted     sprites_walk: [ fighter_3_walk_1     fighter_3_walk_2 ] }
+	armor_style red:    { sprite: fighter_4     sprite_dead: fighter_4_dead     sprite_mounted: fighter_4_mounted     sprites_walk: [ fighter_4_walk_1     fighter_4_walk_2 ] }
+	armor_style purple: { sprite: fighter_5     sprite_dead: fighter_5_dead     sprite_mounted: fighter_5_mounted     sprites_walk: [ fighter_5_walk_1     fighter_5_walk_2 ] }
+	armor_style black:  { sprite: fighter_6     sprite_dead: fighter_6_dead     sprite_mounted: fighter_6_mounted     sprites_walk: [ fighter_6_walk_1     fighter_6_walk_2 ] }
+	armor_style white:  { sprite: fighter_7     sprite_dead: fighter_7_dead     sprite_mounted: fighter_7_mounted     sprites_walk: [ fighter_7_walk_1     fighter_7_walk_2 ] }
+	armor_style yellow: { sprite: fighter_8     sprite_dead: fighter_8_dead     sprite_mounted: fighter_8_mounted     sprites_walk: [ fighter_8_walk_1     fighter_8_walk_2 ] }
 	
-	weapon_sprites weapon_1h_sword: { sprite: fighter_sword_1h sprites_walk: [ fighter_walk_1_sword_1h fighter_walk_2_sword_1h ] }
-	weapon_sprites weapon_1h_mace:  { sprite: fighter_mace_1h  sprites_walk: [ fighter_walk_1_mace_1h  fighter_walk_2_mace_1h ] }
-	weapon_sprites weapon_1h_axe:   { sprite: fighter_axe_1h   sprites_walk: [ fighter_walk_1_axe_1h   fighter_walk_2_axe_1h ] }
-	weapon_sprites weapon_1h_knife: { sprite: fighter_knife_1h sprites_walk: [ fighter_walk_1_knife_1h fighter_walk_2_knife_1h ] }
-	weapon_sprites weapon_2h_sword: { sprite: fighter_sword_2h sprites_walk: [ fighter_walk_1_sword_2h fighter_walk_2_sword_2h ] }
-	weapon_sprites weapon_2h_mace:  { sprite: fighter_mace_2h  sprites_walk: [ fighter_walk_1_mace_2h  fighter_walk_2_mace_2h ] }
-	weapon_sprites weapon_2h_axe:   { sprite: fighter_axe_2h   sprites_walk: [ fighter_walk_1_axe_2h   fighter_walk_2_axe_2h ] }
-	weapon_sprites weapon_2h_staff: { sprite: fighter_staff    sprites_walk: [ fighter_walk_1_staff    fighter_walk_2_staff ] }
-	weapon_sprites shield: 			{ sprite: fighter_shield   sprites_walk: [ fighter_walk_1_shield   fighter_walk_2_shield ] }
+	weapon_sprites weapon_1h_sword: { sprite: fighter_sword_1h mounted_offset: [ -2 -2 ] sprites_walk: [ fighter_walk_1_sword_1h fighter_walk_2_sword_1h ] }
+	weapon_sprites weapon_1h_mace:  { sprite: fighter_mace_1h  mounted_offset: [ -2 -2 ] sprites_walk: [ fighter_walk_1_mace_1h  fighter_walk_2_mace_1h ] }
+	weapon_sprites weapon_1h_axe:   { sprite: fighter_axe_1h   mounted_offset: [ -2 -2 ] sprites_walk: [ fighter_walk_1_axe_1h   fighter_walk_2_axe_1h ] }
+	weapon_sprites weapon_1h_knife: { sprite: fighter_knife_1h mounted_offset: [ -2 -2 ] sprites_walk: [ fighter_walk_1_knife_1h fighter_walk_2_knife_1h ] }
+	weapon_sprites weapon_2h_sword: { sprite: fighter_sword_2h mounted_offset: [ -2 -2 ] sprites_walk: [ fighter_walk_1_sword_2h fighter_walk_2_sword_2h ] }
+	weapon_sprites weapon_2h_mace:  { sprite: fighter_mace_2h  mounted_offset: [ -2 -2 ] sprites_walk: [ fighter_walk_1_mace_2h  fighter_walk_2_mace_2h ] }
+	weapon_sprites weapon_2h_axe:   { sprite: fighter_axe_2h   mounted_offset: [ -2 -2 ] sprites_walk: [ fighter_walk_1_axe_2h   fighter_walk_2_axe_2h ] }
+	weapon_sprites weapon_2h_staff: { sprite: fighter_staff    mounted_offset: [ -2 -2 ] sprites_walk: [ fighter_walk_1_staff    fighter_walk_2_staff ] }
+	weapon_sprites shield: 			{ sprite: fighter_shield   mounted_offset: [ -2 -2 ] sprites_walk: [ fighter_walk_1_shield   fighter_walk_2_shield ] }
 	
 	armor_decoration: { sprite: fighter_decoration sprite_dead: fighter_decoration_dead sprites_walk: [ fighter_decoration_walk_1 fighter_decoration_walk_2 ] }
 
@@ -114,25 +116,25 @@ class fighter:
 	level_progression:
 	[
 		{ level: 1 unlock_abilities: [ fighter_attack fighter_shoot strike !DEFAULT_ABILITIES{} ] stats: { dexterity: 4 strength: 6 wisdom: 2 constitution: 4 spirit: 5 } resource health: { add_max: 80 } resource rage: { add_max: 100 } add_unarmed_weapon_damage: [ 2 4 ] }
-		{ level: 2 unlock_abilities: [ rend ] stats: { strength: 1 constitution: 1 } resource health: { add_max: 8 } }		
-		{ level: 3 unlock_abilities: [ charge ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: 8 } }				
-		{ level: 4 unlock_abilities: [ kick ] stats: { strength: 1 constitution: 1 } resource health: { add_max: 8 } }						
-		{ level: 5 unlock_abilities: [ taunt ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: 8 } }				
-		{ level: 6 unlock_abilities: [ bash ] stats: { strength: 1 constitution: 1 } resource health: { add_max: 8 } }				
-		{ level: 7 unlock_abilities: [ whirlwind ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: 8 } }				
-		{ level: 8 unlock_abilities: [ throw_rock ] stats: { strength: 1 constitution: 1 } resource health: { add_max: 8 } }				
-		{ level: 9 unlock_abilities: [ hamstring ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: 8 } }				
-		{ level: 10 unlock_abilities: [ fortify ] stats: { strength: 1 constitution: 1 } resource health: { add_max: 8 } achievement: fighter_level_10 }				
-		{ level: 11 unlock_abilities: [ ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: 8 } }				
-		{ level: 12 unlock_abilities: [ ] stats: { strength: 1 constitution: 1 } resource health: { add_max: 8 } }				
-		{ level: 13 unlock_abilities: [ ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: 8 } }				
-		{ level: 14 unlock_abilities: [ ] stats: { strength: 1 constitution: 1 } resource health: { add_max: 8 } }				
-		{ level: 15 unlock_abilities: [ ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: 8 } }				
-		{ level: 16 unlock_abilities: [ ] stats: { strength: 1 constitution: 1 } resource health: { add_max: 8 } }				
-		{ level: 17 unlock_abilities: [ ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: 8 } }				
-		{ level: 18 unlock_abilities: [ ] stats: { strength: 1 constitution: 1 } resource health: { add_max: 8 } }				
-		{ level: 19 unlock_abilities: [ ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: 8 } }				
-		{ level: 20 unlock_abilities: [ ] stats: { strength: 1 constitution: 1 } resource health: { add_max: 8 } }									
+		{ level: 2 unlock_abilities: [ rend ] stats: { strength: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }		
+		{ level: 3 unlock_abilities: [ charge ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }				
+		{ level: 4 unlock_abilities: [ kick ] stats: { strength: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }						
+		{ level: 5 unlock_abilities: [ taunt ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }				
+		{ level: 6 unlock_abilities: [ bash ] stats: { strength: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }				
+		{ level: 7 unlock_abilities: [ whirlwind ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }				
+		{ level: 8 unlock_abilities: [ relentless_overpower ] stats: { strength: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }				
+		{ level: 9 unlock_abilities: [ hamstring ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }				
+		{ level: 10 unlock_abilities: [ fortify ] stats: { strength: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } achievement: fighter_level_10 }				
+		{ level: 11 unlock_abilities: [ ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }				
+		{ level: 12 unlock_abilities: [ ] stats: { strength: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }				
+		{ level: 13 unlock_abilities: [ ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }				
+		{ level: 14 unlock_abilities: [ ] stats: { strength: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }				
+		{ level: 15 unlock_abilities: [ ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }				
+		{ level: 16 unlock_abilities: [ ] stats: { strength: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }				
+		{ level: 17 unlock_abilities: [ ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }				
+		{ level: 18 unlock_abilities: [ ] stats: { strength: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }				
+		{ level: 19 unlock_abilities: [ ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }				
+		{ level: 20 unlock_abilities: [ ] stats: { strength: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } achievement: fighter_level_20 }									
 	]
 	
 	gear_optimization default<{ weapon_dps_weight: 1.0 }>:
@@ -141,7 +143,7 @@ class fighter:
 		dexterity: 0.5
 		constitution: 0.25
 	}
-}
+}  
 
 ###############################################################################
 # Achievements
@@ -156,3 +158,37 @@ achievement fighter_level_10:
 	no_progress_values: true 
 }
 
+achievement fighter_level_20: 
+{ 
+	category: general 
+	string: "Fighter (Level 20)" 
+	description: "Reach level 20 as a Fighter." 
+	points: 10 
+	icon: icon_fighter 
+	no_progress_values: true 
+	root: fighter_level_10
+}
+
+###############################################################################
+# Rotations
+
+ability_list fighter_envenom:
+{
+	ability envenom: 
+	{
+	}
+
+	ability rend: 
+	{
+		requirement target<must_not_have_aura>: rend
+	}
+
+	ability strike: 
+	{
+		requirement self<must_have_more_rage_than>: 30
+	}
+	
+	ability fighter_attack:
+	{
+	}
+}

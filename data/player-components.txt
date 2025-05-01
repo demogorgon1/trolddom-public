@@ -17,6 +17,7 @@ player_components:
 	equipped_items	
 	guild_name
 	inventory
+	kill_contribution
 	player_auctions
 	player_cooldowns
 	player_inbox

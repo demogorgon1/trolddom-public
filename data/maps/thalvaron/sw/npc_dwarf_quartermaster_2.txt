@@ -1,0 +1,37 @@
+dialogue_screen .dwarf_quartermaster_2_vendor:
+{
+	sell formula_enchant_weapon_fire: !TOKEN_OF_VICTORY_PRICE{ _count: 12 }	
+}
+
+dialogue_screen .dwarf_quartermaster_2_dialogue:
+{
+	text: 
+	[	
+		"How are you doing?"
+	]
+	
+	options:
+	[
+		{ goto: .dwarf_quartermaster_2_vendor text: "Let me browse your goods." }
+	]
+}
+
+dialogue_root .dwarf_quartermaster_2_dialogue:
+{
+	.dwarf_quartermaster_2_dialogue: { }
+}
+
+entity thalvaron_dwarf_quartermaster_2: !NPC
+{
+	_string: "Gilior Ironfoot"
+	_guild_name: "Quartermaster"
+	_dialogue_root: .dwarf_quartermaster_2_dialogue	
+	_sprite: dwarf_16
+	_sprite_dead: dwarf_16_dead	
+	_level: 20
+	_faction: kingdom_of_thuldarim
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

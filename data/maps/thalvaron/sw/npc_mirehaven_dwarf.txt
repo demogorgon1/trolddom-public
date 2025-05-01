@@ -1,0 +1,95 @@
+dialogue_screen .mirehaven_dwarf_dialogue:
+{
+	text: 
+	[	
+		"I can't wait to leave this place and go back underground where I belong."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: thalvaron_dwarf_liaison_officer_1 }
+		{ quest: .mirehaven_dwarf_1 }
+	]
+}
+
+dialogue_root .mirehaven_dwarf_dialogue:
+{
+	.mirehaven_dwarf_dialogue: { }
+}
+
+entity thalvaron_mirehaven_dwarf: !NPC
+{
+	_string: "Dunrik Ironmantle"
+	_dialogue_root: .mirehaven_dwarf_dialogue	
+	_sprite: dwarf_2
+	_sprite_dead: dwarf_2_dead
+	_level: 20
+	_faction: kingdom_of_thuldarim		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .mirehaven_dwarf_1_quest_item: {}
+
+item .mirehaven_dwarf_1_quest_item:
+{
+	icon: icon_rod_1
+	item_level: 14
+	loot_groups: [ .mirehaven_dwarf_1_quest_item ]
+	flags: [ not_sellable unique ]
+	string: "Ancient Dwarven Artifact"
+}
+
+objective .mirehaven_dwarf_1:
+{
+	string: "Ancient Dwarven Artifact"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .mirehaven_dwarf_1_quest_item count: 1 }
+}
+
+{
+	${ _level: 14 }
+	item .mirehaven_dwarf_1_a: !QUEST_REWARD_BACK{ _string: "Conjuror's Cloak" _icon: icon_cape_3 _mana_per_5: 1 _wisdom: 2 _type: armor_cloth }
+	item .mirehaven_dwarf_1_b: !QUEST_REWARD_NECK{ _string: "Swiftstrike Amulet" _icon: icon_necklace_1 _attack_haste: 1 }
+	item .mirehaven_dwarf_1_c: !QUEST_REWARD_1H_SWORD{ _string: "Dwarven Blade of Slaying" _icon: icon_sword_6 _constitution: 1 _dexterity: 2 _weapon_cooldown: 22 }
+}
+
+quest .mirehaven_dwarf_1:
+{
+	string: "Into the Depths"
+
+	text:
+	[
+		"Enter the underground dwarven ruins in the south eastern Marshlands, look for a dwarven artifact, and return it to Dunrik Ironmantle in Mirehaven."
+	]
+	
+	description: 
+	[
+		"The ruins you're talking about are well known to us dwarves. They're part of a larger, mostly collapsed complex under the mountains, that in the past was connected to the great mountain fortress of Durgan Tharok.\n\n"
+		"Further to the south in those mountains, just north of the pass that leads to the badlands, you'll find another entrance to the fortress that is actually of more interest to me currently. It has been excavated completely"
+		"not that long ago, but recently kobolds have taken over. Some kobolds have been observed carrying what looks like ancient dwarven artifacts that I very much would like to get a closer look on. I want you to go there and"
+		"look for one of those and return it to me."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"That's interesting, thanks."
+	]
+	
+	objectives: [ .mirehaven_dwarf_1 ]
+	prerequisites: [ thalvaron_dwarf_liaison_officer_1 ]
+	level: 14
+	reward_one_item: [ .mirehaven_dwarf_1_a .mirehaven_dwarf_1_b .mirehaven_dwarf_1_c ]
+}
+

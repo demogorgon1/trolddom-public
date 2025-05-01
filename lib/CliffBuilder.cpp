@@ -33,16 +33,21 @@ namespace tpublic
 
 			Data::CliffStyle::Cell surroundings[9];
 			size_t index = 0;
+			bool isDummyCliff = false;
 
-			for(int32_t y = -1; y <= 1; y++)
+			for(int32_t y = -1; y <= 1 && !isDummyCliff; y++)
 			{
-				for (int32_t x = -1; x <= 1; x++)
+				for (int32_t x = -1; x <= 1 && !isDummyCliff; x++)
 				{
 					Map::const_iterator i = m_map.find(position + Vec2{ x, y });
 					Data::CliffStyle::Cell c = Data::CliffStyle::CELL_LOW;
 					if(i != m_map.cend())
 					{
-						if(i->second.m_elevation <= cell.m_elevation)
+						if(i->second.m_cliffStyle->m_tiles.empty())
+						{
+							isDummyCliff = true;
+						}
+						else if(i->second.m_elevation <= cell.m_elevation)
 						{
 							if(i->second.m_ramp)
 								c = Data::CliffStyle::CELL_RAMP;
@@ -54,6 +59,9 @@ namespace tpublic
 					surroundings[index++] = c;
 				}
 			}
+
+			if(isDummyCliff)
+				continue;
 
 			const Data::CliffStyle::Tile* picked = NULL;
 

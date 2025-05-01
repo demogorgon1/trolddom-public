@@ -1,0 +1,98 @@
+faction valoris:
+{
+	string: "Valoris"
+	flags: [ friendly reputation show ]
+	default_reputation: !FRIENDLY_REPUTATION{}
+	
+	reputation_from_kill rebels: 20
+}
+
+################################################################################
+# Reputation items
+
+item valoris_wrists_1:
+{
+	equipment_slots: [ wrists ]
+	binds: when_picked_up
+	type: armor_plate
+	required_level: 18
+	icon: icon_bracers_4
+	rarity: rare
+	string: "Bracers of the City Guard"
+	stat_weight constitution: 1
+	stat_weight strength: 1
+	stat_weight dexterity: 1
+}
+
+item valoris_wrists_2:
+{
+	equipment_slots: [ wrists ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 18
+	icon: icon_bracers_3
+	rarity: rare
+	string: "Bracers of the Wise"
+	stat_weight constitution: 1
+	stat_weight wisdom: 1
+	stat_weight spirit: 1
+}
+
+item valoris_ring_1:
+{
+	equipment_slots: [ finger_1 finger_2 ]
+	flags: [ unique ]
+	binds: when_picked_up
+	required_level: 20
+	icon: icon_ring_1
+	rarity: rare
+	string: "Ring of Valoris"
+	budget_bias: -10
+	stat_weight constitution: 1
+	stat_weight strength: 1
+	stat phys_crit_chance: 1
+}
+
+item valoris_ring_2:
+{
+	equipment_slots: [ finger_1 finger_2 ]
+	flags: [ unique ]
+	binds: when_picked_up
+	required_level: 20
+	icon: icon_ring_2
+	rarity: rare
+	string: "Royal Mark of Wisdom"
+	stat_weight constitution: 1
+	stat_weight wisdom: 2
+}
+
+################################################################################
+# Token of Victory items
+
+item token_of_victory_healing_potion (potion):
+{	
+	icon: icon_potion_2
+	string: "Victorious Healing Potion"
+	binds: when_picked_up
+	flags: [ not_sellable ]
+	use_ability: $ability (healing_potion) [ string icon ]	
+	{
+		direct_effect heal: { function: 350 }
+		consume_items: { entry: { item: <item> quantity: 1 } }
+		required_level: 12
+	}
+}
+
+item token_of_victory_bag:
+{
+	string: "Hefty Bag" 
+	equipment_slots: [ bag_1 bag_2 bag_3 ]
+	binds: when_picked_up
+	flags: [ unique ]
+	type: miscellaneous
+	required_level: 1
+	icon: icon_bag_2
+	rarity: uncommon
+	bag_slots: 10
+}
+

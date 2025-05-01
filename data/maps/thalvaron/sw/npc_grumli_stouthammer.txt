@@ -1,0 +1,32 @@
+dialogue_screen .grumli_stouthammer_dialogue:
+{
+	text: 
+	[	
+		"You look like someone who could use a stout."
+	]		
+	
+	options:
+	[	
+		{ quest<completion_only>: .borli_stouthammer_1 }
+		{ text: "Let me browse your goods." goto: $dialogue_screen { sell consumable_ironbrew_stout: { quantity: 1 cost: 850 } !FOOD_VENDOR{} } }
+	]
+}
+
+dialogue_root .grumli_stouthammer_dialogue:
+{
+	.grumli_stouthammer_dialogue: { }
+}
+
+entity thalvaron_grumli_stouthammer: !NPC
+{
+	_string: "Grumli Stouthammer"
+	_dialogue_root: .grumli_stouthammer_dialogue	
+	_sprite: dwarf_4
+	_sprite_dead: dwarf_4_dead
+	_level: 20
+	_faction: kingdom_of_thuldarim		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

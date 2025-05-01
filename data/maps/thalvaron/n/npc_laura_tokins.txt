@@ -1,0 +1,266 @@
+dialogue_screen .laura_tokins_dialogue:
+{
+	text: 
+	[	
+		"These woods were quite pleasant in the past. Not so much anymore."
+	]		
+	
+	options:
+	[
+		{ quest: .laura_tokins_1 }
+		{ quest: .laura_tokins_2 }
+	]
+}
+
+dialogue_root .laura_tokins_dialogue:
+{
+	.laura_tokins_dialogue: { }
+}
+
+entity thalvaron_laura_tokins: !NPC
+{
+	_string: "Laura Tokins"
+	_dialogue_root: .laura_tokins_dialogue	
+	_sprite: woman_15
+	_sprite_dead: woman_15_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .laura_tokins_1_quest_item: {}
+
+item .laura_tokins_1_quest_item:
+{
+	icon: icon_flower_7
+	item_level: 16
+	loot_groups: [ .laura_tokins_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Shadowthorn Rose"
+	stack: 4
+}
+
+loot_table .laura_tokins_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .laura_tokins_1_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_laura_tokins_1_quest_item:
+{
+	string: "Shadowthorn Rose"
+	systems: [ openable ]
+
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ flower_3 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .laura_tokins_1_quest_item
+			verb: pick_up
+			range: 1 
+			despawn: true 			
+			level: 16
+			required_quest: .laura_tokins_1
+		}		
+	}
+}
+
+objective .laura_tokins_1:
+{
+	string: "Shadowthorn Roses"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .laura_tokins_1_quest_item count: 4 }
+}
+
+loot_group .laura_tokins_1b_quest_item: {}
+
+item .laura_tokins_1b_quest_item:
+{
+	icon: icon_flower_6
+	item_level: 16
+	loot_groups: [ .laura_tokins_1b_quest_item ]
+	flags: [ not_sellable ]
+	string: "Nightsong Flower"
+	stack: 4
+}
+
+loot_table .laura_tokins_1b_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .laura_tokins_1b_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_laura_tokins_1b_quest_item:
+{
+	string: "Nightsong Flower"
+	systems: [ openable ]
+
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ flower_2 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .laura_tokins_1b_quest_item
+			verb: pick_up
+			range: 1 
+			despawn: true 			
+			level: 16
+			required_quest: .laura_tokins_1
+		}		
+	}
+}
+
+objective .laura_tokins_1b:
+{
+	string: "Nightsong Flowers"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .laura_tokins_1b_quest_item count: 4 }
+}
+
+quest .laura_tokins_1:
+{
+	string: "The Woods Are Too Dangerous"
+
+	text:
+	[
+		"Collect flowers in the woods around Ravenreach."
+	]
+	
+	description: 
+	[
+		"With those nasty creatures outside I don't want to leave the house, but I still need something from the woods! In my cooking and my potions I use petals from the wild roses that grow around here. Can you go grab me a bunch?"
+		"I also need some Nightsong flowers. They also grow in the area.\n\n"
+		"I'm guessing you're not too scared. You look like you've seen worse."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Thanks!"
+	]
+
+	objectives: [ .laura_tokins_1 .laura_tokins_1b ]
+	next_quest: .laura_tokins_2 
+	level: 16
+}
+
+############################################################
+# Quest 2
+
+loot_group .laura_tokins_2_quest_item: {}
+
+item .laura_tokins_2_quest_item:
+{
+	icon: icon_flower_8
+	item_level: 17
+	loot_groups: [ .laura_tokins_2_quest_item ]
+	flags: [ not_sellable ]
+	string: "Dead Man's Blume"
+	stack: 4
+}
+
+loot_table .laura_tokins_2_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .laura_tokins_2_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_laura_tokins_2_quest_item:
+{
+	string: "Dead Man's Blume"
+	systems: [ openable ]
+
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ flower_4 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .laura_tokins_2_quest_item
+			verb: pick_up
+			range: 1 
+			despawn: true 			
+			level: 17
+			required_quest: .laura_tokins_2
+		}		
+	}
+}
+
+objective .laura_tokins_2:
+{
+	string: "Dead Man's Blume"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .laura_tokins_2_quest_item count: 2 }
+}
+
+{
+	${ _level: 17 }
+	item .laura_tokins_2_a: !QUEST_REWARD_HEAD{ _string: "Purple Hood" _icon: icon_wizard_hat_1 _constitution: 1 _wisdom: 2 _spell_damage: 1 _type: armor_cloth }
+	item .laura_tokins_2_b: !QUEST_REWARD_FEET{ _string: "Woodland Boots" _icon: icon_mail_boots_2 _constitution: 1 _strength: 2 _spirit: 1 _type: armor_plate }
+	item .laura_tokins_2_c: !QUEST_REWARD_WRISTS{ _string: "Armguards of the Healer" _icon: icon_mail_bracers_3 _constitution: 1 _wisdom: 1 _healing: 2 _type: armor_plate }
+}
+
+quest .laura_tokins_2:
+{
+	string: "Ravenreach Abbey"
+
+	text:
+	[
+		"Venture through the dark woods in the east to Ravenreach Abbery, pick flowers, and return them to Laura Tokins in Ravenreach."
+	]
+	
+	description: 
+	[
+		"I have one final ask of you, since you don't seem to have a problem with these creatures that roam the woods. Do you know of the old abandoned abbey? It's located deep in the woods to the east. It has been empty"
+		"for a long time, but I sometimes go there to pick some herbs that only grow in its vicinity. Can you go there and pick some for me? Just need a couple. The herb I'm talking about is called Dead Man's Blume. It's"
+		"an orange flower which is hard to miss."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Thanks!"
+	]
+
+	objectives: [ .laura_tokins_2 ]
+	prerequisites: [ .laura_tokins_1 ]
+	level: 17
+	reward_one_item: [ .laura_tokins_2_a .laura_tokins_2_b .laura_tokins_2_c ]
+}

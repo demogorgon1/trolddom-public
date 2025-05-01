@@ -125,17 +125,34 @@ namespace tpublic
 				return i->second;
 			}
 
+			bool
+			HasReputation(
+				uint32_t			aFactionId) const
+			{
+				return m_table.m_map.contains(aFactionId);
+			}
+
 			void
 			Reset()
 			{
 				m_table.m_map.clear();
+				m_wasUpdated = false;
+				m_pendingUpdates.clear();
 			}
 
 			// Public data
-			Table			m_table;
+			Table						m_table;
 
 			// Internal
-			bool			m_wasUpdated = false;
+			bool						m_wasUpdated = false;
+
+			struct PendingUpdate
+			{
+				uint32_t				m_factionId = 0;
+				int32_t					m_reputation = 0;
+			};
+
+			std::vector<PendingUpdate>	m_pendingUpdates;
 		};
 	}
 

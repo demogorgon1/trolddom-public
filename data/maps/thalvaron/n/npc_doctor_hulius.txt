@@ -1,0 +1,116 @@
+dialogue_screen .doctor_hulius_dialogue:
+{
+	text: 
+	[	
+		"Here! Over here! Help!"
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .doctor_hulius_camp_1 }
+		{ quest<offer_only>: .doctor_hulius_1 }
+		{ text: "Let's go." requirement self<must_have_active_quest>: .doctor_hulius_1 script: npc_trigger }	
+	]
+}
+
+dialogue_root .doctor_hulius_dialogue:
+{
+	.doctor_hulius_dialogue: { }
+}
+
+entity thalvaron_doctor_hulius: !NPC
+{
+	_string: "Doctor Hulius"
+	_dialogue_root: .doctor_hulius_dialogue	
+	_dialogue_scripts: [ npc_trigger ]
+	_sprite: man_38
+	_sprite_dead: man_38_dead
+	_level: 14
+	_faction: combat_npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_default_trigger_ability: .doctor_hulius_start_escort
+	_default_behavior_state: .doctor_hulius
+	_is_threat_source: true
+	_blocking: false
+	_visibility_requirements: 
+	{ 
+		requirement self<must_not_have_completed_quest>: .doctor_hulius_1
+	} 
+}
+
+route thalvaron_doctor_hulius_escort: 
+{ 
+	origin_map_entity_spawn: thalvaron_doctor_hulius
+
+	trigger<2>: { chat: { type: say text: "Do you really think it was going to eat me?" } }
+	trigger<193>: { chat: { type: say text: "The troll won't come here, right?" } event: true }
+	trigger<max>: { despawn: true }
+}
+
+npc_behavior_state .doctor_hulius:
+{
+	behavior: patrolling
+	combat_event_pause_ticks: 20
+	despawn_if_lost_player: true
+	patrol_move_interval_ticks: 9
+}
+
+ability .doctor_hulius_start_escort:
+{
+	flags: [ always_in_range always_in_line_of_sight ]
+	
+	direct_effect start_route: { route: thalvaron_doctor_hulius_escort }	
+}
+
+############################################################
+# Quest 1
+
+objective .doctor_hulius_1:
+{
+	string: "Escort Doctor Hulius To Safety"
+	
+	maps: [ thalvaron ]
+	
+	route_npc:
+	{
+		entities: [ thalvaron_doctor_hulius ]
+	}
+}
+
+{
+	${ _level: 14 }
+	item .doctor_hulius_1_a: !QUEST_REWARD_NECK{ _string: "Shiny Rock Necklace" _icon: icon_necklace_2 _strength: 1 _spirit: 1 _constitution: 1 }
+	item .doctor_hulius_1_b: !QUEST_REWARD_HEAD{ _string: "Troll Skullcap" _icon: icon_head_3 _strength: 2 _constitution: 1 _type: armor_mail }
+	item .doctor_hulius_1_c: !QUEST_REWARD_LEGS{ _string: "Swift Pantaloons" _icon: icon_pants_2 _wisdom: 1 _constitution: 1 _spirit: 1 _type: armor_cloth }
+}
+
+quest .doctor_hulius_1:
+{
+	string: "Camping: Not As Fun As Imagined"
+
+	text:
+	[
+		"Tell Doctor Hulius when you're ready to go."
+	]
+	
+	description: 
+	[
+		"Help! The foul creature has put me in this cage! I don't know why! Can you please get me back to the town? It might come back soon, hurry!"
+	]
+
+	progress:
+	[
+		"I'm afraid it will come back!"
+	]
+	
+	completion:
+	[
+		"Good to have him back. Here, take one of these as your reward."
+	]
+
+	level: 14
+	objectives: [ .doctor_hulius_1 ]
+	reward_one_item: [ .doctor_hulius_1_a .doctor_hulius_1_b .doctor_hulius_1_c ]
+}

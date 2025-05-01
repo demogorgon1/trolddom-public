@@ -39,7 +39,7 @@ namespace tpublic::MapGenerators
 				if(aSource->m_annotation)
 					m_weight = aSource->m_annotation->GetUInt32();
 
-				m_mapSegmentId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_SEGMENT, aSource->GetIdentifier());
+				m_mapSegmentId = aSource->GetId(DataType::ID_MAP_SEGMENT);
 			}
 
 			void
@@ -77,7 +77,7 @@ namespace tpublic::MapGenerators
 				const SourceNode*					aSource)
 			{
 				TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "No map segment connector annotation specified.");
-				m_mapSegmentConnectorId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP_SEGMENT_CONNECTOR, aSource->m_annotation->GetIdentifier());
+				m_mapSegmentConnectorId = aSource->m_annotation->GetId(DataType::ID_MAP_SEGMENT_CONNECTOR);
 				m_roomName = aSource->m_name;
 
 				aSource->ForEachChild([&](

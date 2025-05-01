@@ -1,6 +1,7 @@
 #include "Pcheader.h"
 
 #include <tpublic/ItemList.h>
+#include <tpublic/Manifest.h>
 
 namespace tpublic
 {
@@ -29,10 +30,14 @@ namespace tpublic
 		const ItemInstance&							aItemInstance,
 		const Data::Item*							aItemData,
 		uint32_t									aSize,
+		ErrorNotification::Id&						aOutErrorNotification,
 		bool										aAutoGrow)
 	{
 		if(aItemData->IsUnique() && HasItems(aItemInstance.m_itemId, 1))
+		{	
+			aOutErrorNotification = ErrorNotification::ID_ALREADY_HAS_ITEM;
 			return false;
+		}
 
 		uint32_t remaining = aItemInstance.m_quantity;
 
@@ -78,7 +83,7 @@ namespace tpublic
 			}
 		}
 
-		if(aAutoGrow)
+		if(aAutoGrow || (uint32_t)m_entries.size() < aSize)
 		{
 			Entry t;
 			t.m_item = aItemInstance;
@@ -87,6 +92,7 @@ namespace tpublic
 			return true;
 		}
 
+		aOutErrorNotification = ErrorNotification::ID_NOT_ENOUGH_INVENTORY_SPACE;
 		return false;
 	}
 
@@ -138,6 +144,7 @@ namespace tpublic
 		uint32_t									aItemId,
 		uint32_t									aQuantity,
 		const Data::Item*							aItemData,
+		bool										aBind,
 		uint32_t									aSize)
 	{
 		if (aQuantity == 0)
@@ -174,6 +181,9 @@ namespace tpublic
 				ItemInstance itemInstance;
 				itemInstance.m_itemId = aItemId;
 				itemInstance.m_quantity = t_amountToAdd;
+				
+				if(aBind || aItemData->m_itemBinding == ItemBinding::ID_WHEN_PICKED_UP)
+					itemInstance.SetSoulbound();
 
 				t.m_item = itemInstance;
 			}
@@ -511,6 +521,27 @@ namespace tpublic
 	{
 		m_entries.clear();
 		m_version = 0;
+	}
+
+	void				
+	ItemList::OnLoadedFromPersistence(
+		const Manifest*								aManifest,
+		size_t										aSize)
+	{
+		// Make sure we only have valid items
+		for(Entry& entry : m_entries)
+		{
+			entry.m_trading = false; // FIXME: shouldn't be persisted in the first place
+
+			if(entry.m_item.IsSet())
+			{
+				const Data::Item* item = aManifest->TryGetById<Data::Item>(entry.m_item.m_itemId);
+				if(item == NULL || item->m_string.empty() || item->m_iconSpriteId == 0)
+					entry.m_item.Clear();
+			}
+		}
+
+		Shrink(aSize);
 	}
 
 }

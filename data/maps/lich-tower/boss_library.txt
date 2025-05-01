@@ -1,0 +1,164 @@
+############################################################
+# Loot
+
+loot_group .library: {}
+
+loot_table .library:
+{
+	slots:
+	[
+		{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
+		  map_message lich_tower: "Arch-Mage Farrux will not drop Token of Victory for {}." } } }
+		{ possibility: { loot_group: .library  } }			
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+		!WORLD_DROPS_SKELETONS{}
+	]	
+}
+
+{
+	${
+		_rarity: rare
+		_level: 20
+		_loot_group: .library
+	}
+	
+	item lich_tower_17: !BOSS_DROP_SHOULDERS
+	{
+		_string: "Pauldrons of the Lost Mage"
+		_icon: icon_shoulders_10
+		_type: armor_cloth
+		_spell_damage: 1
+		_wisdom: 2
+		_constitution: 1
+	}
+	
+	item lich_tower_18: !BOSS_DROP_CHEST
+	{
+		_string: "Battleplate of the Tower"
+		_type: armor_plate
+		_icon: icon_plate_chest_4
+		_constitution: 3
+		_strength: 2
+		_budget_bias: -10
+		_parry: 1
+	}
+	
+	item lich_tower_19: !BOSS_DROP_BACK
+	{
+		_string: "Elven Warlord's Cape"
+		_type: armor_cloth
+		_icon: icon_cape_4
+		_constitution: 1
+		_dexterity: 1
+		_strength: 1
+	}
+
+	item lich_tower_20: !BOSS_DROP_BACK
+	{
+		_string: "Spellcloak"
+		_type: armor_cloth
+		_icon: icon_cape_4
+		_constitution: 1
+		_wisdom: 1
+		_spirit: 1
+	}
+	
+	item lich_tower_21: !BOSS_DROP_WRISTS
+	{
+		_string: "Dark Elf Cuffs"
+		_icon: icon_bracers_3
+		_type: armor_cloth
+		_wisdom: 2
+		_spirit: 1
+		_healing: 3
+	}
+	
+}
+
+############################################################
+# Boss
+
+zone .library:
+{
+	can_query_position: true 
+}
+
+encounter .library:
+{
+	main_entities: [ lich_tower_library ]	
+}
+
+entity lich_tower_library: !NPC 
+{ 
+	_string: "Arch-Mage Farrux" 
+	_level: 20
+	_elite: true
+	_faction: monsters 
+	_sprite: skeleton_caster_2 
+	_sprite_dead: skeleton_caster_2_dead 
+	_weapon_damage: 1.5
+	_resource_health: 6
+	_loot_table: .library
+	_creature_type: undead
+	_encounter: .library
+	_zone: .library
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+	_default_behavior_state: .passive
+
+	_abilities: 
+	[
+		{
+			id: .teleport
+			target: self
+			requirement self<must_have_less_health_than>: 80
+		}	
+		
+		{
+			id: npc_frostbolt_no_cooldown
+		}
+	
+		{
+			id: npc_attack
+		}
+	]	
+	
+	_in_combat_barks:
+	[
+		{ type: say text: "Ssh! Silence!" flags: [ no_chat_bubble ] }
+	]					
+}
+
+map_trigger .library_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .library:
+{
+	entity lich_tower_library: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .library_killed
+		}
+	}
+}
+
+ability .teleport:
+{
+	string: "Teleport"
+	icon: icon_stuff
+	flags: [ target_self ]
+	states: [ in_combat ]
+	cast_time: 15
+	cooldown: $cooldown { duration: 120 }
+	
+	direct_effect simple<zone_teleport>: .library
+	direct_effect simple<threat_table_shuffle>: { }
+	direct_effect simple<threat_table_equalize>: { }
+}

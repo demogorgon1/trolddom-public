@@ -1,0 +1,65 @@
+dialogue_screen .dwarf_guard_1_dialogue:
+{
+	text: 
+	[	
+		"Welcome to the Kingdom of Thuldarim."
+	]		
+	
+	options:
+	[
+		#FIXME: enable this when quest line leads somewhere
+		#{ quest<offer_only>: .dwarf_guard_1_1 }
+	]
+}
+
+dialogue_root .dwarf_guard_1_dialogue:
+{
+	.dwarf_guard_1_dialogue: { }
+}
+
+entity thalvaron_dwarf_guard_1: !NPC
+{
+	_string: "Durgan Tharok Guard"
+	_dialogue_root: .dwarf_guard_1_dialogue	
+	_sprite: dwarf_6
+	_sprite_dead: dwarf_6_dead
+	_level: 20
+	_faction: kingdom_of_thuldarim		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+quest .dwarf_guard_1_1:
+{
+	string: "The Commander Wants To See You"
+
+	text:
+	[
+		"Find Borg Ironmantle inside Durgan Tharok."
+	]
+	
+	description: 
+	[
+		"$name$? Commander Borg Ironmantle has requested to see you. He will meet you in his residence, which is the deepest chamber of the fortification."
+	]
+
+	progress:
+	[
+		"Why are you still here?"
+	]
+	
+	completion:
+	[
+		"Ah, $name$, I've wanted to see you. You seem to be a good friend of the dwarves."
+	]
+	
+	prerequisites: [ .mirehaven_dwarf_1 .hort_ironmantle_1 ]
+	level: 14
+	reward_cash_multiplier: 0.2
+	reward_xp_multiplier: 0.2
+}
+

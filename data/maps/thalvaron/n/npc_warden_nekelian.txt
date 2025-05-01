@@ -1,0 +1,96 @@
+dialogue_screen .warden_nekelian_dialogue:
+{
+	text: 
+	[	
+		"They undead horde must be stopped."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .aelithra_2 }
+		{ quest: .warden_nekelian_1 }
+	]
+}
+
+dialogue_root .warden_nekelian_dialogue:
+{
+	.warden_nekelian_dialogue: { }
+}
+
+entity thalvaron_warden_nekelian: !NPC
+{
+	_string: "Warden Nekelian"
+	_dialogue_root: .warden_nekelian_dialogue	
+	_sprite: elf_10
+	_sprite_dead: elf_10_dead
+	_level: 20
+	_faction: children_of_the_moon		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .warden_nekelian_1_a:
+{
+	string: "Skeletal Warriors Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_hollows_skeleton_a thalvaron_hollows_skeleton_b thalvaron_hollows_skeleton_c thalvaron_hollows_skeleton_d ]
+		count: 10
+	}
+}
+
+objective .warden_nekelian_1_b:
+{
+	string: "Skeletal Mages Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_hollows_skeleton_e ]
+		count: 2
+	}
+}
+
+{
+	${ _level: 19 }
+  	item .warden_nekelian_1_a: !QUEST_REWARD_HEAD{ _string: "Skull of the Undead" _icon: icon_mail_head_1 _strength: 2 _constitution: 1 _type: armor_mail }
+  	item .warden_nekelian_1_b: !QUEST_REWARD_FEET{ _string: "Heavy Trudgers" _icon: icon_boots_2 _strength: 1 _constitution: 2 _type: armor_plate }
+  	item .warden_nekelian_1_c: !QUEST_REWARD_WRISTS{ _string: "Armband of Light" _icon: icon_bracers_1 _constitution: 1 _wisdom: 1 _type: armor_cloth }
+}	 
+
+quest .warden_nekelian_1:
+{
+	string: "Hordes of Undead"
+
+	text:
+	[
+		"Hunt down the undead of the north."
+	]
+	
+	description: 
+	[
+		"Living skeletons are hiding behind every tree up here. Slay them all!"
+	]
+
+	progress:
+	[
+		"Back already?"
+	]
+	
+	completion:
+	[
+		"Good!"
+	]
+
+	objectives: [ .warden_nekelian_1_a .warden_nekelian_1_b ]
+	level: 19
+	reward_one_item: [ .warden_nekelian_1_a .warden_nekelian_1_b .warden_nekelian_1_c ]
+}

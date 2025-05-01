@@ -1,0 +1,11 @@
+entity thalvaron_lucinda_frostvale: !NPC
+{
+	_string: "Lucinda Frostvale"
+	_sprite: woman_1
+	_sprite_dead: woman_1_dead
+	_level: 20
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}

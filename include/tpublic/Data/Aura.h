@@ -4,6 +4,7 @@
 #include "../AuraEffectFactory.h"
 #include "../CombatFunction.h"
 #include "../DataBase.h"
+#include "../Image.h"
 #include "../Requirement.h"
 #include "../StatModifiers.h"
 
@@ -92,7 +93,12 @@ namespace tpublic
 				FLAG_CANCEL_OUTSIDE_COMBAT	= 0x00000400,
 				FLAG_CANCEL_ON_DAMAGE		= 0x00000800,
 				FLAG_SINGLE_TARGET			= 0x00001000,
-				FLAG_PRIVATE				= 0x00002000
+				FLAG_PRIVATE				= 0x00002000,
+				FLAG_ITEM					= 0x00004000,
+				FLAG_NO_SOURCE_NEEDED		= 0x00008000,
+				FLAG_CANCEL_INDOOR			= 0x00010000,
+				FLAG_NO_REFRESH				= 0x00020000,
+				FLAG_POISON					= 0x00040000
 			};
 
 			static Type
@@ -127,6 +133,8 @@ namespace tpublic
 						flags |= FLAG_HIDE_DESCRIPTION;
 					else if (strcmp(string, "cancel_in_combat") == 0)
 						flags |= FLAG_CANCEL_IN_COMBAT;
+					else if (strcmp(string, "cancel_indoor") == 0)
+						flags |= FLAG_CANCEL_INDOOR;
 					else if (strcmp(string, "persist_in_death") == 0)
 						flags |= FLAG_PERSIST_IN_DEATH;
 					else if (strcmp(string, "silent") == 0)
@@ -147,6 +155,14 @@ namespace tpublic
 						flags |= FLAG_SINGLE_TARGET;
 					else if (strcmp(string, "private") == 0)
 						flags |= FLAG_PRIVATE;
+					else if (strcmp(string, "item") == 0)
+						flags |= FLAG_ITEM;
+					else if (strcmp(string, "no_source_needed") == 0)
+						flags |= FLAG_NO_SOURCE_NEEDED;
+					else if (strcmp(string, "no_refresh") == 0)
+						flags |= FLAG_NO_REFRESH;
+					else if (strcmp(string, "poison") == 0)
+						flags |= FLAG_POISON;
 					else
 						TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid aura flag.", string);
 				});
@@ -180,11 +196,11 @@ namespace tpublic
 					if(!FromSourceBase(aChild))
 					{
 						if (aChild->m_name == "icon")
-							m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
+							m_iconSpriteId = aChild->GetId(DataType::ID_SPRITE);
 						else if (aChild->m_name == "encounter")
-							m_encounterId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENCOUNTER, aChild->GetIdentifier());
+							m_encounterId = aChild->GetId(DataType::ID_ENCOUNTER);
 						else if (aChild->m_name == "particle_system")
-							m_particleSystemId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PARTICLE_SYSTEM, aChild->GetIdentifier());
+							m_particleSystemId = aChild->GetId(DataType::ID_PARTICLE_SYSTEM);
 						else if (aChild->m_name == "duration")
 							m_duration = SourceToDuration(aChild);
 						else if (aChild->m_name == "type")
@@ -202,11 +218,19 @@ namespace tpublic
 						else if(aChild->m_name == "charges")
 							m_charges = CombatFunction(aChild);
 						else if (aChild->m_name == "sound")
-							m_soundId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SOUND, aChild->GetIdentifier());
+							m_soundId = aChild->GetId(DataType::ID_SOUND);
 						else if (aChild->m_name == "aura_group")
-							m_auraGroupId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_AURA_GROUP, aChild->GetIdentifier());
+							m_auraGroupId = aChild->GetId(DataType::ID_AURA_GROUP);
+						else if (aChild->m_name == "mount")
+							m_mountId = aChild->GetId(DataType::ID_MOUNT);
+						else if (aChild->m_name == "must_not_have_world_aura")
+							m_mustNotHaveWorldAuraId = aChild->GetId(DataType::ID_WORLD_AURA);
 						else if(aChild->m_tag == "cancel_requirement")
 							m_cancelRequirements.push_back(Requirement(aChild));
+						else if(aChild->m_name == "color_effect")
+							m_colorEffect = Image::RGBA(aChild);
+						else if (aChild->m_name == "color_weapon_glow")
+							m_colorWeaponGlow = Image::RGBA(aChild);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 					}
@@ -231,6 +255,10 @@ namespace tpublic
 				aStream->WriteUInt(m_soundId);
 				aStream->WriteUInt(m_auraGroupId);
 				aStream->WriteObjects(m_cancelRequirements);
+				aStream->WriteOptionalPOD(m_colorEffect);
+				aStream->WriteOptionalPOD(m_colorWeaponGlow);
+				aStream->WriteUInt(m_mountId);
+				aStream->WriteUInt(m_mustNotHaveWorldAuraId);
 			}
 			 
 			bool
@@ -285,6 +313,31 @@ namespace tpublic
 					if(!aStream->ReadObjects(m_cancelRequirements))
 						return false;
 				}
+
+				if(!aStream->IsEnd())
+				{
+					if(!aStream->ReadOptionalPOD(m_colorEffect))
+						return false;
+				}
+
+				if (!aStream->IsEnd())
+				{
+					if (!aStream->ReadOptionalPOD(m_colorWeaponGlow))
+						return false;
+				}
+
+				if (!aStream->IsEnd())
+				{
+					if (!aStream->ReadUInt(m_mountId))
+						return false;
+				}
+
+				if (!aStream->IsEnd())
+				{
+					if (!aStream->ReadUInt(m_mustNotHaveWorldAuraId))
+						return false;
+				}
+
 				return true;
 			}
 
@@ -302,7 +355,11 @@ namespace tpublic
 			uint32_t										m_particleSystemId = 0;
 			uint32_t										m_soundId = 0;
 			uint32_t										m_auraGroupId = 0;
-			std::vector<Requirement>						m_cancelRequirements;
+			uint32_t										m_mountId = 0;
+			std::vector<Requirement>						m_cancelRequirements;			
+			std::optional<Image::RGBA>						m_colorEffect;
+			std::optional<Image::RGBA>						m_colorWeaponGlow;
+			uint32_t										m_mustNotHaveWorldAuraId = 0;
 		};
 
 	}

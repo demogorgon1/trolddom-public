@@ -120,16 +120,78 @@ entity the_shrouded_lands_underworld:
 	}
 }
 
+entity the_shrouded_lands_light_closed:
+{
+	string: "The Shrouded Lands"
+	
+	components:
+	{
+		position: { }		
+		visibility:
+		{
+			requirements: { requirement self<must_not_be_disciple>: light }
+		}
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ purple_gateway_closed_1 purple_gateway_closed_2 purple_gateway_closed_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}	
+		hover_text<static>:
+		{
+			string: "Must be disciple of The Light to enter"
+		}
+	}
+}
+
+entity the_shrouded_lands_underworld_closed:
+{
+	string: "The Shrouded Lands"
+	
+	components:
+	{
+		position: { }		
+		visibility:
+		{
+			requirements: { requirement self<must_not_be_disciple>: underworld }
+		}		
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ purple_gateway_closed_1 purple_gateway_closed_2 purple_gateway_closed_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+		hover_text<static>:
+		{
+			string: "Must be disciple of The Underworld to enter"
+		}
+	}
+}
+
 entity the_shrouded_lands_light_return:
 {
-	string: "Aetheris Isle"
+	string: "Thalvaron"
 	
 	components:
 	{
 		position: { }		
 		gateway: 
 		{ 
-			maps: [ { map: open_world map_player_spawn: open_world_player_spawn_paladin } ]
+			maps: [ { map: thalvaron map_player_spawn: thalvaron_the_shrouded_lands_light_return } ]
 			schedule: none
 		}
 		sprite<static>: 
@@ -150,14 +212,14 @@ entity the_shrouded_lands_light_return:
 
 entity the_shrouded_lands_underworld_return:
 {
-	string: "Aetheris Isle"
+	string: "Thalvaron"
 	
 	components:
 	{
 		position: { }		
 		gateway: 
 		{ 
-			maps: [ { map: open_world map_player_spawn: open_world_player_spawn_witch } ]
+			maps: [ { map: thalvaron map_player_spawn: thalvaron_the_shrouded_lands_underworld_return } ]
 			schedule: none
 		}
 		sprite<static>: 
@@ -167,6 +229,36 @@ entity the_shrouded_lands_underworld_return:
 				{ 
 					states: [ default in_combat spawning ] 
 					frames: [ purple_gateway_1 purple_gateway_2 purple_gateway_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+	}
+}
+
+entity gateway_2:
+{
+	string: "Gateway"
+	
+	systems: [ gateway ]
+	components:
+	{
+		position: { }		
+		gateway: 
+		{ 
+			maps: [ { map: gateway_world_2_a } { map: gateway_world_2_b } ]
+			schedule: daily
+			use_position_for_randomization: true
+		}
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ gateway_1 gateway_2 gateway_3 ] 		
 					frame_delay: 120 
 					random_start_frame: true 
 					z_offset: -3

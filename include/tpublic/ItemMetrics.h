@@ -30,6 +30,8 @@ namespace tpublic
 						m_statBudget = aChild->GetFloat();
 					else if (aChild->m_name == "weapon_damage")
 						m_weaponDamage = aChild->GetFloat();
+					else if (aChild->m_name == "token_cost")
+						m_tokenCost = aChild->GetFloat();
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 				});
@@ -43,6 +45,7 @@ namespace tpublic
 				aWriter->WriteFloat(m_cost);
 				aWriter->WriteFloat(m_statBudget);
 				aWriter->WriteFloat(m_weaponDamage);
+				aWriter->WriteFloat(m_tokenCost);
 			}
 
 			bool
@@ -57,6 +60,8 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadFloat(m_weaponDamage))
 					return false;
+				if (!aReader->ReadFloat(m_tokenCost))
+					return false;
 				return true;
 			}
 
@@ -65,6 +70,7 @@ namespace tpublic
 			float	m_cost = 1.0f;
 			float	m_statBudget = 1.0f;
 			float	m_weaponDamage = 1.0f;
+			float	m_tokenCost = 1.0f;
 		};
 
 		ItemMetrics()
@@ -176,6 +182,10 @@ namespace tpublic
 				{
 					m_vendorCostMultiplier = aChild->GetFloat();
 				}
+				else if (aChild->m_name == "token_cost_base_multiplier")
+				{
+					m_tokenCostBaseMultiplier = aChild->GetFloat();
+				}
 				else if (aChild->m_name == "shield_armor_to_base_block_value")
 				{
 					m_shieldArmorToBaseBlockValue = aChild->GetFloat();
@@ -203,6 +213,7 @@ namespace tpublic
 			aStream->WriteFloat(m_vendorCostMultiplier);
 			aStream->WriteFloat(m_offHandDPSMultiplier);
 			aStream->WriteFloat(m_shieldArmorToBaseBlockValue);
+			aStream->WriteFloat(m_tokenCostBaseMultiplier);
 
 			for(uint32_t i = 1; i < (uint32_t)ItemType::NUM_IDS; i++)
 				m_itemTypeMultipliers[i].ToStream(aStream);
@@ -233,6 +244,8 @@ namespace tpublic
 			if (!aStream->ReadFloat(m_offHandDPSMultiplier))
 				return false;
 			if (!aStream->ReadFloat(m_shieldArmorToBaseBlockValue))
+				return false;
+			if (!aStream->ReadFloat(m_tokenCostBaseMultiplier))
 				return false;
 
 			for (uint32_t i = 1; i < (uint32_t)ItemType::NUM_IDS; i++)
@@ -348,6 +361,7 @@ namespace tpublic
 		float									m_vendorCostMultiplier = 0.5f;
 		float									m_shieldArmorToBaseBlockValue = 0.0f;
 		float									m_offHandDPSMultiplier = 0.5f;
+		float									m_tokenCostBaseMultiplier = 0.1f;
 	};
 
 }

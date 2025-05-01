@@ -15,7 +15,7 @@ namespace tpublic
 			TYPE_CHARACTER,		// NPC: tagged by character, loot: can be looted by character
 			TYPE_GROUP,			// NPC: tagged by group
 			TYPE_ANYONE,		// Loot: can be looted by anyone
-			TYPE_MASTER			// Loot: can be assigned by master looter
+			TYPE_MASTER			// Loot: can be assigned by master looter,
 		};
 
 		PlayerTag(

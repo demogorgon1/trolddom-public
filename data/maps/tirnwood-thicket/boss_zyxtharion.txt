@@ -1,0 +1,249 @@
+############################################################
+# Loot
+
+loot_group .zyxtharion: {}
+
+loot_table .zyxtharion:
+{
+	slots:
+	[
+		{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
+		  map_message tirnwood_thicket: "Zyxharion will not drop Token of Victory for {}." } } }
+		{ possibility: { loot_group: .zyxtharion  } }			
+		!WORLD_DROPS{}
+		!WORLD_DROPS_DEMONS{}
+	]	
+}
+
+{
+	${
+		_rarity: rare
+		_level: 20
+		_loot_group: .zyxtharion
+	}	
+	
+	item tirnwood_thicket_19: !BOSS_DROP_SHIELD
+	{
+		_string: "Carapace of Zyxtharion"
+		_icon: icon_shield_4
+		_constitution: 2
+		_strength: 1
+		_budget_bias: -10
+		_dodge: 1
+	}
+		
+	item tirnwood_thicket_20: !BOSS_DROP_HANDS
+	{
+		_string: "Gloves of Unreal Restoration"
+		_icon: icon_gloves_5
+		_wisdom: 1
+		_mana_per_5: 2
+		_healing: 3
+		_type: armor_cloth
+	}
+	
+	item tirnwood_thicket_21: !BOSS_DROP_HEAD
+	{
+		_string: "Hood of Eldritch Horrors"
+		_icon: icon_head_10
+		_spell_damage: 3
+		_wisdom: 2
+		_type: armor_cloth
+	}
+	
+	item tirnwood_thicket_22: !BOSS_DROP_WRISTS
+	{
+		_string: "Nether Armguards"
+		_type: armor_plate
+		_icon: icon_bracers_6
+		_constitution: 2
+		_strength: 1
+		_budget_bias: -10
+		_parry: 1
+	}
+	
+	item tirnwood_thicket_23: !BOSS_DROP_1H_AXE	
+	{
+		_string: "Claw of Zyxtharion"
+		_icon: icon_claw_5
+		_strength: 1
+		_budget_bias: -10
+		_phys_crit: 1
+		_weapon_cooldown: 28
+	}
+	
+}
+
+############################################################
+# Boss
+
+item tirnwood_thicket_zyxtharion:
+{
+	string: "Horn of Zyxtharion"
+	icon: icon_horn_1
+	flags: [ unique not_sellable ]
+	use_ability: $ability [ string icon ]
+	{
+		description: "Summon Zyxtharion at the temple in Tirnwood Thicket."
+		flags: [ target_self item ]
+		cooldowns: [ global ]
+		cast_time: 20
+		zone: .zyxtharion
+		direct_effect simple<set_map_trigger>: .zyxtharion_summoned
+	}
+}
+
+zone .zyxtharion:
+{
+}
+
+encounter .zyxtharion:
+{
+	main_entities: [ tirnwood_thicket_zyxtharion ]	
+}
+
+entity tirnwood_thicket_zyxtharion: !NPC 
+{ 
+	_string: "Zyxharion" 
+	_level: 21
+	_elite: true
+	_faction: monsters 
+	_sprite: giant_demon_2
+	_sprite_dead: giant_demon_2_dead
+	_weapon_damage: 1.55
+	_resource_health: 6
+	_loot_table: .zyxtharion
+	_creature_type: demon
+	_encounter: .zyxtharion
+	_zone: .zyxtharion
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+	_large: true
+
+	_abilities: 
+	[
+		{
+			id: $ability
+			{
+				string: "Void Missile"
+				range: 10
+				cast_time: 25
+				cooldowns: [ global ]
+				cooldown: $cooldown { duration: 125 }
+				flags: [ spell offensive target_other target_hostile ]
+				states: [ default in_combat ]
+				icon: icon_firebolt
+				speed: 5
+				projectile: $particle_system
+				{
+					particle:
+					{
+						sprites: [ effect_witch_bolt ]
+						flags: [ attached no_rotation face_target ]
+						scale: 0.6
+						count: 1		
+					}
+				}
+				
+				direct_effect damage:
+				{
+					damage_type: fire
+					function: 80
+				}
+				
+				direct_effect spawn_entity:
+				{
+					spawn_flags: [ at_target no_owner ]
+					entity: .zyxtharion_void_zone
+				}
+			}
+			target: random_player
+			requirement self<must_have_less_health_than>: 90			
+		}
+
+		{
+			id: npc_curse
+			target: random_player
+			requirement self<must_have_less_health_than>: 80
+		}
+	
+		{
+			id: npc_attack
+		}
+	]		
+}
+
+map_trigger .zyxtharion_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_trigger .zyxtharion_summoned:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .zyxtharion:
+{
+	entity tirnwood_thicket_zyxtharion: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .zyxtharion_killed
+			if: .zyxtharion_summoned
+		}
+	}
+}
+
+entity .zyxtharion_void_zone: !NPC_VOID_ZONE
+{
+	_string: "Void Zone"
+	_level: 21
+	_faction: monsters 
+	_sprites: [ effect_void_zone_0 effect_void_zone_1 effect_void_zone_2 ]
+	_elite: true
+	_encounter: .zyxtharion
+	_inactive_encounter_despawn: true
+	
+	_abilities: 
+	[
+		{
+			id: $ability
+			{
+				string: "Void Zone"
+				cooldown: $cooldown { duration: 20 }	
+				flags: [ target_self target_aoe target_aoe_hostile ]
+				states: [ default in_combat ]
+				icon: icon_whirlwind
+				delay: 3
+				aoe_radius: 1
+				aoe_cap: 3
+				aoe_requirement target<must_not_be_in_state>: { id: dead }
+				source_particle_system: $particle_system
+				{
+					particle:
+					{
+						sprites: [ effect_disruption_0 effect_disruption_1 effect_disruption_2 ]
+						flags: [ attached no_loop ]
+						duration: 450
+						sprite_interval: 150
+						count: 1		
+						scale: 1.5
+						rotation_rate: 300
+					}				
+				}
+				
+				direct_effect damage:
+				{
+					damage_type: fire
+					function: 225
+				}	
+			}
+			target: self
+		}
+	]		
+}

@@ -1,0 +1,39 @@
+dialogue_screen .bar_patron_sarah_dialogue_2:
+{
+	text: 
+	[
+		"Uhm, no. Leave me alone."
+	]
+}
+
+
+dialogue_screen .bar_patron_sarah_dialogue:
+{
+	text: 
+	[	
+		"Hello, what a nice day it is!"
+	]		
+	
+	options:
+	[
+		{ text: "Have you ever done business with a gnome that hangs out at the Robertson farm?" goto: .bar_patron_sarah_dialogue_2 requirement self<must_have_active_quest>: .gnome_1 }	
+	]
+}
+
+dialogue_root .bar_patron_sarah_dialogue:
+{
+	.bar_patron_sarah_dialogue: { }
+}
+
+entity thalvaron_bar_patron_sarah: !NPC
+{
+	_string: "Sarah"
+	_dialogue_root: .bar_patron_sarah_dialogue	
+	_sprite: woman_10
+	_sprite_dead: woman_10_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}

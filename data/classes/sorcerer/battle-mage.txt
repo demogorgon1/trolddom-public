@@ -13,6 +13,8 @@ talent_tree sorcerer_battle_mage:
 		talent sorcerer_battle_mage_critical_thinking: "E"			   
 		talent sorcerer_battle_mage_void_blade_storm: "F"
 		talent sorcerer_battle_mage_armor: "G"
+		talent sorcerer_battle_mage_arcane_strength: "H"
+		talent sorcerer_battle_mage_overpower: "I"
 		sprite talent_tree_down_arrow: "d"						
 		sprite talent_tree_left_arrow: "l"						
 	}
@@ -23,9 +25,117 @@ talent_tree sorcerer_battle_mage:
 		"....d.."
 		"ElC.D.G"
 		"..d...."
-		"..F...."
+		"..F.H.."
+		"....d.."
+		"....I.."
 	]
 	
+}
+
+###############################################################################
+# Arcane Strength
+
+talent sorcerer_battle_mage_arcane_strength:
+{
+	string: "Arcane Strength"
+	icon: icon_strength	
+	talent_tree_points_required: 10
+	points:
+	[
+		{ aura: sorcerer_battle_mage_arcane_strength_1 }
+		{ aura: sorcerer_battle_mage_arcane_strength_2 }
+		{ aura: sorcerer_battle_mage_arcane_strength_3 }
+		{ aura: sorcerer_battle_mage_arcane_strength_4 }
+		{ aura: sorcerer_battle_mage_arcane_strength_5 }
+	]
+}
+
+aura sorcerer_battle_mage_arcane_strength_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your strength by 2%."
+	stat_modifiers: { strength: { add_percent: 2 } }
+}
+
+aura sorcerer_battle_mage_arcane_strength_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your strength by 4%."
+	stat_modifiers: { strength: { add_percent: 4 } }
+}
+
+aura sorcerer_battle_mage_arcane_strength_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your strength by 6%."
+	stat_modifiers: { strength: { add_percent: 6 } }
+}
+
+aura sorcerer_battle_mage_arcane_strength_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your strength by 8%."
+	stat_modifiers: { strength: { add_percent: 8 } }
+}
+
+aura sorcerer_battle_mage_arcane_strength_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your strength by 10%."
+	stat_modifiers: { strength: { add_percent: 10 } }
+}
+
+###############################################################################
+# Overpower
+
+talent sorcerer_battle_mage_overpower:
+{
+	string: "Overpower"
+	icon: icon_agility
+	prerequisites: [ sorcerer_battle_mage_arcane_strength ]
+	talent_tree_points_required: 15
+	points:
+	[
+		{ ability: overpower }
+	]
+}
+
+cooldown overpower:
+{
+	duration: 1200
+}
+
+aura overpower:
+{
+	string: "Overpower"
+	type: buff
+	icon: icon_agility
+	duration: 200
+	flags: [ unique ]
+	stat_modifiers: { strength: { add_percent: 100 } }
+}
+
+ability overpower:
+{
+	string: "Overpower"
+	description: "Increases your Strength by 100% for 20 seconds."
+	range: 1	
+	cooldowns: [ global overpower ]
+	flags: [ target_self ]
+	states: [ default in_combat ]
+	icon: icon_agility
+	delay: 3
+	talent_tree: sorcerer_battle_mage
+		
+	direct_effect apply_aura:
+	{
+		aura: overpower
+	}
 }
 
 ###############################################################################
@@ -35,11 +145,12 @@ talent sorcerer_battle_mage_armor:
 {
 	string: "Mage Armor"
 	icon: icon_chest_1	
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ aura: sorcerer_battle_mage_armor_1 }
 		{ aura: sorcerer_battle_mage_armor_2 }
+		{ aura: sorcerer_battle_mage_armor_3 }
 	]
 }
 
@@ -59,6 +170,14 @@ aura sorcerer_battle_mage_armor_2:
 	stat_modifiers: { constitution: { add_percent: 6 } }
 }
 
+aura sorcerer_battle_mage_armor_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your constitution by 9%."
+	stat_modifiers: { constitution: { add_percent: 9 } }
+}
+
 ###############################################################################
 # Void Blade Storm
 
@@ -66,7 +185,7 @@ talent sorcerer_battle_mage_void_blade_storm:
 {
 	string: "Void Blade Storm"
 	icon: icon_void_blade_storm
-	talent_tree_points_required: 6
+	talent_tree_points_required: 10
 	prerequisites: [ sorcerer_battle_mage_wizard_strike ]
 	points:
 	[
@@ -77,6 +196,7 @@ talent sorcerer_battle_mage_void_blade_storm:
 cooldown void_blade_storm:
 {
 	duration: 90
+	talent_tree: sorcerer_battle_mage
 }
 
 particle_system void_blade_storm:
@@ -125,12 +245,13 @@ talent sorcerer_battle_mage_critical_thinking:
 {
 	string: "Critical Thinking"
 	icon: icon_sunshine
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	prerequisites: [ sorcerer_battle_mage_wizard_strike ]
 	points:
 	[
 		{ aura: sorcerer_battle_critical_thinking_1 }
 		{ aura: sorcerer_battle_critical_thinking_2 }
+		{ aura: sorcerer_battle_critical_thinking_3 }
 	]
 }
 
@@ -150,6 +271,14 @@ aura sorcerer_battle_critical_thinking_2:
 	stat_modifiers: { phys_crit_chance: { add: 6 } spell_crit_chance: { add: 6 } }
 }
 
+aura sorcerer_battle_critical_thinking_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your critical strike chance by 9%."
+	stat_modifiers: { phys_crit_chance: { add: 9 } spell_crit_chance: { add: 9 } }
+}
+
 ###############################################################################
 # Swiftness
 
@@ -157,7 +286,7 @@ talent sorcerer_battle_mage_swiftness:
 {
 	string: "Swiftness"
 	icon: icon_mage_swiftness
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	prerequisites: [ sorcerer_battle_mage_improved_power_shield ]
 	points:
 	[
@@ -191,7 +320,7 @@ talent sorcerer_battle_mage_wizard_strike:
 {
 	string: "Wizard Strike"
 	icon: icon_wizard_strike
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability: wizard_strike }
@@ -200,7 +329,8 @@ talent sorcerer_battle_mage_wizard_strike:
 
 cooldown wizard_strike:
 {
-	duration: 50
+	duration: 40
+	talent_tree: sorcerer_battle_mage
 }
 
 particle_system wizard_strike:
@@ -228,14 +358,14 @@ ability wizard_strike:
 	icon: icon_wizard_strike
 	melee_particle_system: wizard_strike
 	delay: 3
-	resource_cost mana: 20
+	resource_cost mana: 22
 	talent_tree: sorcerer_battle_mage
 	
 	direct_effect damage:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
-		function: { expression: a_mul_x_plus_b x: attack_power a: 0.25 b: [ [ 1 10 ] [ 10 20 ] [ 20 40 ] ] }											
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.65 b: [ [ 1 15 ] [ 10 30 ] [ 20 60 ] ] }											
 	}		
 }
 
@@ -251,25 +381,37 @@ talent sorcerer_battle_mage_improved_power_shield:
 		{ ability_modifier: improved_power_shield_1 }
 		{ ability_modifier: improved_power_shield_2 }
 		{ ability_modifier: improved_power_shield_3 }
+		{ ability_modifier: improved_power_shield_4 }
+		{ ability_modifier: improved_power_shield_5 }
 	]
 }
 
 ability_modifier improved_power_shield_1:
 {
-	description: "Power Shield reduces all damage taken by 10%."
+	description: "Power Shield reduces all damage taken by 8%."
 }
 
 ability_modifier improved_power_shield_2:
 {
-	description: "Power Shield reduces all damage taken by 20%."
+	description: "Power Shield reduces all damage taken by 16%."
 }
 
 ability_modifier improved_power_shield_3:
 {
-	description: "Power Shield reduces all damage taken by 30%."
+	description: "Power Shield reduces all damage taken by 24%."
 }
 
-!define local IMPROVED_POWER_SHIELD
+ability_modifier improved_power_shield_4:
+{
+	description: "Power Shield reduces all damage taken by 32%."
+}
+
+ability_modifier improved_power_shield_5:
+{
+	description: "Power Shield reduces all damage taken by 40%."
+}
+
+!define local POWER_SHIELD
 {	
 	string: "Power Shield"
 	description: "Absorbs damage."
@@ -277,18 +419,21 @@ ability_modifier improved_power_shield_3:
 	duration: 300
 	flags: [ unique charged magic ]	
 	icon: icon_mage_shield
-	charges: { expression: a_mul_x_plus_b a: 1.5 b: 8 x: level }		
+	charges: { expression: a_mul_x_plus_b a: 5.5 b: 28 x: level }		
+	particle_system: power_shield
 	aura_effect absorb: { }	
-	aura_effect damage_input_modifier:
+	<exists _multiplier> aura_effect damage_input_modifier:
 	{
 		type_mask: [ all ]
 		multiplier: @_multiplier
 	}
 }
 
-aura improved_power_shield_1: !IMPROVED_POWER_SHIELD { _multiplier: 0.9 }
-aura improved_power_shield_2: !IMPROVED_POWER_SHIELD { _multiplier: 0.8 }
-aura improved_power_shield_3: !IMPROVED_POWER_SHIELD { _multiplier: 0.7 }
+aura improved_power_shield_1: !POWER_SHIELD { _multiplier: 0.92 }
+aura improved_power_shield_2: !POWER_SHIELD { _multiplier: 0.84 }
+aura improved_power_shield_3: !POWER_SHIELD { _multiplier: 0.76 }
+aura improved_power_shield_4: !POWER_SHIELD { _multiplier: 0.68 }
+aura improved_power_shield_5: !POWER_SHIELD { _multiplier: 0.60 }
 
 ###############################################################################
 # Charging Combat
@@ -325,7 +470,8 @@ ability_modifier charging_combat_3:
 
 cooldown power_shield:
 {
-	duration: 100
+	duration: 150
+	talent_tree: sorcerer_battle_mage
 }
 
 ability power_shield:
@@ -362,6 +508,18 @@ ability power_shield:
 		must_have_ability_modifier: improved_power_shield_3
 		aura: improved_power_shield_3
 	}
+
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: improved_power_shield_4
+		aura: improved_power_shield_4
+	}
+
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: improved_power_shield_5
+		aura: improved_power_shield_5
+	}
 	
 	direct_effect apply_aura:
 	{	
@@ -370,21 +528,7 @@ ability power_shield:
 	}
 }
 
-aura power_shield:
-{	
-	string: "Power Shield"
-	description: "Absorbs damage."
-	type: buff
-	duration: 300
-	flags: [ unique charged magic ]	
-	icon: icon_mage_shield
-	charges: { expression: a_mul_x_plus_b a: 3.15 b: 17 x: level }	
-	particle_system: power_shield
-	
-	aura_effect absorb:
-	{
-	}
-}
+aura power_shield: !POWER_SHIELD{ _multiplier: 1.0 }
 
 particle_system power_shield:
 {

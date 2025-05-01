@@ -1,0 +1,162 @@
+############################################################
+# Loot
+
+loot_group .wernox: {}
+
+loot_table .wernox:
+{
+	slots:
+	[
+		{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
+		  map_message valoris_insurgency: "Wernox will not drop Token of Victory for {}." } } }		
+		{ possibility: { loot_group: .wernox  } }				
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+{
+	${
+		_rarity: rare
+		_level: 19
+		_loot_group: .wernox
+	}
+	
+	item valoris_insurgency_13: !BOSS_DROP_2H_STAFF
+	{
+		_string: "Cane of Wernox"
+		_icon: icon_staff_8
+		_constitution: 1
+		_wisdom: 2
+		_spell_damage: 3
+		_weapon_cooldown: 24
+	}
+	
+	item valoris_insurgency_14: !BOSS_DROP_FINGER
+	{
+		_string: "Malignant Band of Magic"
+		_icon: icon_ring_7
+		_constitution: 1
+		_wisdom: 3
+		_spell_damage: 2
+	}
+	
+	item valoris_insurgency_15: !BOSS_DROP_FEET
+	{
+		_string: "Swiftstrike Striders"
+		_type: armor_cloth
+		_icon: icon_slippers_2
+		_constitution: 2
+		_dexterity: 3
+		_strength: 1
+	}
+	
+	item valoris_insurgency_16: !BOSS_DROP_CHEST
+	{
+		_string: "Soothsayer's Garment"
+		_type: armor_cloth
+		_icon: icon_robe_4
+		_wisdom: 3		
+		_spirit: 2	
+		_healing: 1
+	}
+	
+	item valoris_insurgency_17: !BOSS_DROP_FINGER
+	{
+		_string: "Circle of Pain"
+		_icon: icon_ring_8
+		_strength: 1
+		_dexterity: 1
+		_budget_bias: -10
+		_phys_crit: 1
+	}
+	
+	item valoris_insurgency_18: !BOSS_DROP_SHOULDERS
+	{
+		_string: "Rebel Guard Pauldrons"
+		_type: armor_plate
+		_icon: icon_shoulders_5
+		_constitution: 1
+		_budget_bias: -10
+		_dodge: 1
+	}
+}
+
+############################################################
+# Boss
+
+zone .wernox:
+{
+}
+
+encounter .wernox:
+{
+	main_entities: [ valoris_insurgency_wernox ]	
+}
+
+entity valoris_insurgency_wernox: !NPC 
+{ 
+	_string: "Wernox" 
+	_level: 19
+	_elite: true
+	_faction: rebels 
+	_sprite: rebel_8
+	_sprite_dead: rebel_8_dead 
+	_weapon_damage: 1.3
+	_resource_health: 5
+	_loot_table: .wernox
+	_creature_type: humanoid
+	_encounter: .wernox
+	_zone: .wernox
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+
+	_abilities: 
+	[
+		{
+			id: npc_fireball
+			target: random_player
+			requirement self<must_have_less_health_than>: 90
+		}
+	
+		{
+			id: npc_frostbolt
+			target: random_player
+			requirement self<must_have_less_health_than>: 95
+		}
+	
+		{
+			id: npc_attack
+		}
+	]	
+	
+	_in_combat_barks:
+	[
+		{ type: yell text: "You really think you can challenge me? Wernox the Great?!" flags: [ no_chat_bubble ] }
+	]			
+	
+	_dead_barks:
+	[
+		{ type: say text: "You haven't seen the last of me!" flags: [ no_chat_bubble ] }
+	]	
+}
+
+map_trigger .wernox_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .wernox:
+{
+	entity valoris_insurgency_wernox: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .wernox_killed
+		}
+	}
+}
+

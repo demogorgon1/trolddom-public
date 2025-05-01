@@ -191,6 +191,7 @@ entity .zumhorn_2_boss: !NPC
 	_creature_type: elemental
 	_resource_health: 2.1
 	_weapon_damage: 2.2
+	_evade_despawn: true
 }
 
 quest .zumhorn_2:

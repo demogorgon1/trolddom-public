@@ -1,0 +1,175 @@
+dialogue_screen .tyron_frostmane_dialogue:
+{
+	text: 
+	[	
+		"State your business. I have no time for the weak willed."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .ranger_fremalt_1 }
+		{ quest: .tyron_frostmane_1 }
+		{ quest: .tyron_frostmane_2 }
+		{ quest<offer_only>: .tyron_frostmane_3 }
+		{ quest<completion_only>: .doctor_hulius_1 }
+	]
+}
+
+dialogue_root .tyron_frostmane_dialogue:
+{
+	.tyron_frostmane_dialogue: { }
+}
+
+entity thalvaron_tyron_frostmane: !NPC
+{
+	_string: "Tyron Frostmane"
+	_dialogue_root: .tyron_frostmane_dialogue	
+	_sprite: man_36
+	_sprite_dead: man_36_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .tyron_frostmane_1:
+{
+	string: "Rebel Ears"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .tyron_frostmane_1_quest_item count: 10 }
+}
+
+loot_group .tyron_frostmane_1_quest_item: {}
+
+item .tyron_frostmane_1_quest_item:
+{
+	icon: icon_ear_1
+	item_level: 12
+	loot_groups: [ .tyron_frostmane_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Rebel Ear"
+	stack: 10
+}
+
+quest .tyron_frostmane_1:
+{
+	string: "Ears for the Jar"
+
+	text:
+	[
+		"Get rid of the remaining rebels in the northern highlands."
+	]
+	
+	description: 
+	[
+		"The rebel army passed through here and didn't leave much of a presence. As far as I know they just left a little camp up north. I'll give you a reward if you go and get rid of them."
+	]
+
+	progress:
+	[
+		"How is it going?"
+	]
+	
+	completion:
+	[
+		"Nice, more ears for my, uhm, collection."
+	]
+
+	objectives: [ .tyron_frostmane_1 ]
+	level: 12
+	next_quest: .tyron_frostmane_2 
+}
+
+############################################################
+# Quest 2
+
+objective .tyron_frostmane_2:
+{
+	string: "Iceveil Wolves Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_iceveil_wolf ]
+		count: 6
+	}
+}
+
+{
+	${ _level: 14 }
+  	item .tyron_frostmane_2_a: !QUEST_REWARD_WRISTS{ _string: "Hunter's Remorse" _icon: icon_mail_bracers_1 _constitution: 1 _dexterity: 2 _type: armor_mail }
+  	item .tyron_frostmane_2_b: !QUEST_REWARD_WAIST{ _string: "Belt of Grace" _icon: icon_cloth_belt_1 _constitution: 1 _wisdom: 2 _type: armor_cloth }
+  	item .tyron_frostmane_2_c: !QUEST_REWARD_SHIELD{ _string: "Shield of the Mountain Guard" _icon: icon_shield_2 _constitution: 1 }
+}	 
+
+quest .tyron_frostmane_2:
+{
+	string: "Eliminating the Pack"
+
+	text:
+	[
+		"Head south, find the pack of wolves and eliminate it."
+	]
+	
+	description: 
+	[
+		"You seem like you know how to deal with vicious beasts. I got another job for you.\n\n"
+		"A pack of wolves is threatening our little peaceful settlement. Last time I saw it, it was lurking around south of the road. If you can get rid of them it would bring us great peace of mind."
+	]
+
+	progress:
+	[
+		"Have you killed them yet? Why not?"
+	]
+	
+	completion:
+	[
+		"Great!"
+	]
+
+	objectives: [ .tyron_frostmane_2 ]
+	level: 14
+	prerequisites: [ .tyron_frostmane_1 .ronja_frostmane_2 ]
+	reward_one_item: [ .tyron_frostmane_2_a .tyron_frostmane_2_b .tyron_frostmane_2_c ]
+}
+
+############################################################
+# Quest 3
+
+quest .tyron_frostmane_3:
+{
+	string: "The Whereabouts of Doctor Hulius?"
+
+	text:
+	[
+		"Locate Doctor Hulius in the Iceveil Highlands."
+	]
+	
+	description: 
+	[
+		"A few days ago a man passed through here, going by the name of Doctor Hulius. I'm not sure if he was a real doctor. Anyway, he said he came for the city and wanted to go camping in the highlands."
+		"I tried to explain to him that it wasn't a good idea, but he insisted. Maybe you can see if you can find him? Try to figure out where he is? He's likely somewhere to the south east."
+	]
+
+	progress:
+	[
+		"Well, he's not here."
+	]
+	
+	completion:
+	[
+		"This is definitely the belongings of Doctor Hulius."
+	]
+
+	level: 14
+	prerequisites: [ .tyron_frostmane_2 ]
+	reward_xp_multiplier: 0.5
+	reward_cash_multiplier: 0
+}

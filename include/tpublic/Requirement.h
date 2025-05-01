@@ -50,6 +50,17 @@ namespace tpublic
 			TYPE_MUST_HAVE_EQUIPPED_ITEM_TYPE_FLAGS,
 			TYPE_MUST_BE_AT_LEAST_LEVEL,
 			TYPE_MUST_BE_DISCIPLE,
+			TYPE_MUST_HAVE_MORE_RAGE_THAN,
+			TYPE_MUST_NOT_BE_READY_TO_TURN_IN_QUEST,
+			TYPE_MUST_NOT_BE_TYPE,
+			TYPE_MUST_NOT_HAVE_ITEM,
+			TYPE_MUST_HAVE_REPUTATION_LEVEL,
+			TYPE_MUST_NOT_HAVE_EQUIPPED_ITEM_TYPE_FLAGS,
+			TYPE_MUST_NOT_BE_CREATURE_TYPE,
+			TYPE_MUST_KNOW_RIDING,
+			TYPE_MUST_NOT_KNOW_RIDING,
+			TYPE_MUST_NOT_BE_DISCIPLE
+
 		};
 
 		static DataType::Id
@@ -66,22 +77,27 @@ namespace tpublic
 			case TYPE_MUST_NOT_HAVE_COMPLETED_QUEST:
 			case TYPE_MUST_HAVE_ACTIVE_QUEST:
 			case TYPE_MUST_NOT_HAVE_ACTIVE_QUEST:
+			case TYPE_MUST_NOT_BE_READY_TO_TURN_IN_QUEST:
 				return DataType::ID_QUEST;
 
 			case TYPE_MUST_HAVE_TAG:
 				return DataType::ID_TAG;
 
 			case TYPE_MUST_BE_TYPE:
+			case TYPE_MUST_NOT_BE_TYPE:
 				return DataType::ID_ENTITY;
 
 			case TYPE_MUST_NOT_HAVE_ITEM_EQUIPPED:
 			case TYPE_MUST_HAVE_ITEM_EQUIPPED:
+			case TYPE_MUST_NOT_HAVE_ITEM:
 			case TYPE_MUST_HAVE_ITEM:
 				return DataType::ID_ITEM;
 
 			case TYPE_MUST_BE_FACTION:
 			case TYPE_MUST_HAVE_NEGATIVE_REPUTATION:
 			case TYPE_MUST_BE_DISCIPLE:
+			case TYPE_MUST_NOT_BE_DISCIPLE:
+			case TYPE_MUST_HAVE_REPUTATION_LEVEL:
 				return DataType::ID_FACTION;
 
 			case TYPE_MUST_HAVE_DISCOVERED_ZONE:
@@ -90,14 +106,16 @@ namespace tpublic
 			case TYPE_MUST_NOT_HAVE_PROFESSION_ABILITY:
 				return DataType::ID_ABILITY;
 
-			case TYPE_MUST_HAVE_LESS_HEALTH_THAN:
-				return DataType::INVALID_ID;
-
 			case TYPE_MUST_HAVE_AURA_GROUP:
 				return DataType::ID_AURA_GROUP;
 
 			case TYPE_MUST_BE_CREATURE_TYPE:
+			case TYPE_MUST_NOT_BE_CREATURE_TYPE:
 				return DataType::ID_CREATURE_TYPE;
+
+			case TYPE_MUST_HAVE_LESS_HEALTH_THAN:
+			case TYPE_MUST_HAVE_MORE_RAGE_THAN:
+				return DataType::INVALID_ID;
 
 			default:
 				break;
@@ -123,7 +141,7 @@ namespace tpublic
 				TP_VERIFY(itemType != ItemType::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid item type.", aSource->GetIdentifier());
 				return (uint32_t)itemType;
 			}
-			else if(aType == TYPE_MUST_HAVE_EQUIPPED_ITEM_TYPE_FLAGS)
+			else if(aType == TYPE_MUST_HAVE_EQUIPPED_ITEM_TYPE_FLAGS || aType == TYPE_MUST_NOT_HAVE_EQUIPPED_ITEM_TYPE_FLAGS)
 			{
 				uint16_t flags = 0;
 				aSource->GetArray()->ForEachChild([&](
@@ -136,7 +154,7 @@ namespace tpublic
 				return (uint32_t)flags;
 			}
 
-			return aSource->m_sourceContext->m_persistentIdTable->GetId(GetDataType(aType), aSource->GetIdentifier());
+			return aSource->GetId(GetDataType(aType));
 		}
 
 		Requirement()
@@ -179,6 +197,8 @@ namespace tpublic
 				m_type = TYPE_MUST_HAVE_TAG;
 			else if (typeString == "must_be_type")
 				m_type = TYPE_MUST_BE_TYPE;
+			else if (typeString == "must_not_be_type")
+				m_type = TYPE_MUST_NOT_BE_TYPE;
 			else if (typeString == "must_be_in_state")
 				m_type = TYPE_MUST_BE_IN_STATE;
 			else if (typeString == "must_not_be_in_state")
@@ -201,22 +221,40 @@ namespace tpublic
 				m_type = TYPE_MUST_NOT_HAVE_PROFESSION_ABILITY;
 			else if (typeString == "must_have_less_health_than")
 				m_type = TYPE_MUST_HAVE_LESS_HEALTH_THAN;
+			else if (typeString == "must_have_more_rage_than")
+				m_type = TYPE_MUST_HAVE_MORE_RAGE_THAN;
 			else if (typeString == "must_have_negative_reputation")
 				m_type = TYPE_MUST_HAVE_NEGATIVE_REPUTATION;
 			else if (typeString == "must_have_aura_group")
 				m_type = TYPE_MUST_HAVE_AURA_GROUP;
 			else if (typeString == "must_be_creature_type")
 				m_type = TYPE_MUST_BE_CREATURE_TYPE;
+			else if (typeString == "must_not_be_creature_type")
+				m_type = TYPE_MUST_NOT_BE_CREATURE_TYPE;
 			else if(typeString == "must_have_zero_health")
 				m_type = TYPE_MUST_HAVE_ZERO_HEALTH;
 			else if (typeString == "must_have_item_type_equipped")
 				m_type = TYPE_MUST_HAVE_ITEM_TYPE_EQUIPPED;
 			else if (typeString == "must_have_equipped_item_type_flags")
 				m_type = TYPE_MUST_HAVE_EQUIPPED_ITEM_TYPE_FLAGS;
+			else if (typeString == "must_not_have_equipped_item_type_flags")
+				m_type = TYPE_MUST_NOT_HAVE_EQUIPPED_ITEM_TYPE_FLAGS;
 			else if (typeString == "must_be_at_least_level")
 				m_type = TYPE_MUST_BE_AT_LEAST_LEVEL;
-			else if(typeString == "must_be_disciple")
+			else if (typeString == "must_be_disciple")
 				m_type = TYPE_MUST_BE_DISCIPLE;
+			else if (typeString == "must_not_be_disciple")
+				m_type = TYPE_MUST_NOT_BE_DISCIPLE;
+			else if(typeString == "must_not_be_ready_to_turn_in_quest")
+				m_type = TYPE_MUST_NOT_BE_READY_TO_TURN_IN_QUEST;
+			else if(typeString == "must_not_have_item")
+				m_type = TYPE_MUST_NOT_HAVE_ITEM;
+			else if(typeString == "must_have_reputation_level")
+				m_type = TYPE_MUST_HAVE_REPUTATION_LEVEL;
+			else if (typeString == "must_know_riding")
+				m_type = TYPE_MUST_KNOW_RIDING;
+			else if (typeString == "must_not_know_riding")
+				m_type = TYPE_MUST_NOT_KNOW_RIDING;
 			else
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid type.", aSource->m_annotation->GetIdentifier());
 
@@ -235,6 +273,8 @@ namespace tpublic
 				{
 					if (aChild->m_name == "id")
 						m_id = TypeAndSourceToId(m_type, aChild);
+					else if(aChild->m_name == "value")
+						m_value = aChild->GetUInt32();
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 				});
@@ -248,6 +288,7 @@ namespace tpublic
 			aWriter->WritePOD(m_target);
 			aWriter->WritePOD(m_type);
 			aWriter->WriteUInt(m_id);
+			aWriter->WriteUInt(m_value);
 		}
 
 		bool
@@ -260,6 +301,8 @@ namespace tpublic
 				return false;
 			if (!aReader->ReadUInt(m_id))
 				return false;
+			if (!aReader->ReadUInt(m_value))
+				return false;
 			return true;
 		}
 
@@ -267,6 +310,7 @@ namespace tpublic
 		Target								m_target = INVALID_TARGET;
 		Type								m_type = INVALID_TYPE;
 		uint32_t							m_id = 0;
+		uint32_t							m_value = 0;
 	};
 
 }

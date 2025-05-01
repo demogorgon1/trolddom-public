@@ -1,0 +1,31 @@
+dialogue_screen .royal_chef_greetings:
+{
+	text: 
+	[	
+		"Why are you wasting my time? Can't you see I'm busy?"
+	]
+	
+	options:
+	[
+	]
+}
+
+dialogue_root .royal_chef_dialogue:
+{
+	.royal_chef_greetings: { }
+}
+
+entity thalvaron_royal_chef: !NPC
+{
+	_string: "Huart Swanson"
+	_guild_name: "Royal Chef"
+	_dialogue_root: .royal_chef_dialogue	
+	_sprite: man_40
+	_sprite_dead: man_40_dead	
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

@@ -7,6 +7,7 @@
 #include "IWriter.h"
 #include "MoveSpeed.h"
 #include "Parser.h"
+#include "Requirements.h"
 #include "Stat.h"
 #include "SourceEntityInstance.h"
 #include "SystemBase.h"
@@ -20,8 +21,6 @@ namespace tpublic
 	class AuraEffectBase
 	{
 	public:
-		typedef std::function<void(const SecondaryAbility&)> SecondaryAbilityCallback;
-		
 		enum CombatEventType : uint8_t
 		{
 			INVALID_COMBAT_EVENT_TYPE,
@@ -32,7 +31,8 @@ namespace tpublic
 
 		enum Flag : uint8_t
 		{
-			FLAG_IMMEDIATE = 0x01
+			FLAG_IMMEDIATE				= 0x01,
+			FLAG_CANCEL_AURA_ON_FADE	= 0x02
 		};
 
 		static CombatEventType
@@ -58,6 +58,8 @@ namespace tpublic
 			{
 				if(aChild->IsIdentifier("immediate"))
 					flags |= FLAG_IMMEDIATE;
+				else if (aChild->IsIdentifier("cancel_aura_on_fade"))
+					flags |= FLAG_CANCEL_AURA_ON_FADE;
 				else
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid flag.", aChild->GetIdentifier());
 			});
@@ -88,12 +90,20 @@ namespace tpublic
 			}
 			else if (aSource->m_name == "update_count")
 			{
-				m_updateCount = aSource->GetUInt32();
+				if(aSource->IsIdentifier("indefinite"))
+					m_updateCount = UINT32_MAX;
+				else
+					m_updateCount = aSource->GetUInt32();
 				return true;
 			}
 			else if(aSource->m_name == "flags")
 			{
 				m_flags = SourceToFlags(aSource);
+				return true;
+			}
+			else if(aSource->m_tag == "requirement")
+			{
+				m_requirements.push_back(Requirement(aSource));
 				return true;
 			}
 			return false;
@@ -105,6 +115,8 @@ namespace tpublic
 		{
 			aStream->WriteInt(m_updateInterval);
 			aStream->WriteUInt(m_updateCount);
+			aStream->WritePOD(m_flags);
+			aStream->WriteObjects(m_requirements);
 		}
 		
 		bool	
@@ -115,6 +127,10 @@ namespace tpublic
 				return false;
 			if (!aStream->ReadUInt(m_updateCount))
 				return false;
+			if(!aStream->ReadPOD(m_flags))
+				return false;
+			if(!aStream->ReadObjects(m_requirements))
+				return false;
 			return true;
 		}
 
@@ -124,6 +140,8 @@ namespace tpublic
 		{
 			m_updateInterval = aOther->m_updateInterval;
 			m_updateCount = aOther->m_updateCount;
+			m_flags = aOther->m_flags;
+			m_requirements = aOther->m_requirements;
 		}
 
 		bool
@@ -135,10 +153,14 @@ namespace tpublic
 		{
 			if(!m_applied)
 			{
-				if (!OnApplication(aSourceEntityInstance, aTargetEntityInstanceId, aContext, aManifest))
-					return false;
+				if(m_requirements.empty() || Requirements::CheckListUnresolved(aManifest, m_requirements, aContext->m_worldView, aSourceEntityInstance.m_entityInstanceId, aTargetEntityInstanceId))
+				{
+					if (!OnApplication(aSourceEntityInstance, aTargetEntityInstanceId, aContext, aManifest))
+						return false;
+				}
 
 				m_applied = true;
+				m_update = 0;
 
 				if(!IsImmediate())
 					m_lastUpdate = aContext->m_tick; // This will delay first update
@@ -147,23 +169,35 @@ namespace tpublic
 			if(m_updateCount == 0)
 				return true; // Effects that don't require updates will have this initialized to zero
 
-			if(!aSourceEntityInstance.IsSet())
-				return false;
-
 			int32_t ticksSinceLastUpdate = aContext->m_tick - m_lastUpdate;
 			if(ticksSinceLastUpdate >= m_updateInterval)
 			{
-				if(!OnUpdate(aSourceEntityInstance, aTargetEntityInstanceId, aContext, aManifest))
-					return false;
+				if (m_requirements.empty() || Requirements::CheckListUnresolved(aManifest, m_requirements, aContext->m_worldView, aSourceEntityInstance.m_entityInstanceId, aTargetEntityInstanceId))
+				{
+					if (!OnUpdate(aSourceEntityInstance, aTargetEntityInstanceId, m_update, aContext, aManifest))
+						return false;
+				}
 
 				m_lastUpdate = aContext->m_tick;
-				m_updateCount--;
+				m_update++;
+
+				if(m_updateCount != UINT32_MAX)
+					m_updateCount--;
 
 				if(m_updateCount == 0)
 					return false;
 			}
 
 			return true;
+		}
+
+		bool
+		CheckRequirements(
+			const Manifest*					aManifest,
+			const EntityInstance*			aSource,
+			const EntityInstance*			aTarget) const
+		{
+			return m_requirements.empty() || Requirements::CheckList(aManifest, m_requirements, aSource, aTarget, NULL);
 		}
 		
 		// Virtual methods
@@ -181,6 +215,7 @@ namespace tpublic
 		virtual bool			OnUpdate(
 									const SourceEntityInstance&		/*aSourceEntityInstance*/,
 									uint32_t						/*aTargetEntityInstanceId*/,
+									uint32_t						/*aUpdate*/,
 									SystemBase::Context*			/*aContext*/,
 									const Manifest*					/*aManifest*/) { return false; }
 		virtual void			OnFade(
@@ -209,6 +244,7 @@ namespace tpublic
 									int32_t							aHeal) const { return aHeal; }
 		virtual int32_t			FilterThreat(
 									int32_t							aThreat) const { return aThreat; }
+		virtual float			GetResourceCostMultiplier() const { return 1.0f; }
 		virtual void			OnDamageInput(
 									const EntityInstance*			/*aSource*/,
 									const EntityInstance*			/*aTarget*/,
@@ -221,10 +257,15 @@ namespace tpublic
 									IResourceChangeQueue*			/*aResourceChangeQueue*/) const { }
 		virtual MoveSpeed::Id	GetMoveSpeedModifier() const { return MoveSpeed::INVALID_ID; }
 		virtual void			OnCombatEvent(
+									const Manifest*					/*aManifest*/,
+									uint32_t						/*aAuraId*/,
 									CombatEventType					/*aType*/,
 									CombatEvent::Id					/*aCombatEventId*/,
 									uint32_t						/*aAbilityId*/,
-									SecondaryAbilityCallback		/*aCallback*/) const { }
+									const EntityInstance*			/*aSourceEntityInstance*/,
+									const EntityInstance*			/*aTargetEntityInstance*/,
+									std::mt19937*					/*aRandom*/,
+									IEventQueue*					/*aEventQueue*/) const { }
 		virtual bool			GetStatModifier(
 									Stat::Id						/*aStat*/,
 									uint32_t&						/*aOutNum*/,
@@ -237,16 +278,19 @@ namespace tpublic
 
 		// Helpers
 		bool					IsImmediate() const { return m_flags & FLAG_IMMEDIATE; }
+		bool					ShouldCancelAuraOnFade() const { return m_flags & FLAG_CANCEL_AURA_ON_FADE; }
 
 		// Public data
-		int32_t			m_updateInterval = 0;
-		uint32_t		m_updateCount = 0;
-		uint8_t			m_flags = 0;
+		int32_t						m_updateInterval = 0;
+		uint32_t					m_updateCount = 0;
+		uint32_t					m_update = 0;
+		uint8_t						m_flags = 0;
+		std::vector<Requirement>	m_requirements;
 
 		// Internal
-		int32_t			m_lastUpdate = 0;
-		AuraEffect::Id	m_id = AuraEffect::INVALID_ID;
-		bool			m_applied = false;
+		int32_t						m_lastUpdate = 0;
+		AuraEffect::Id				m_id = AuraEffect::INVALID_ID;
+		bool						m_applied = false;
 	};
 
 }

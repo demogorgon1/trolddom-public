@@ -27,7 +27,10 @@ namespace tpublic
 			{
 				FLAG_UNIQUE							= 0x00000001,
 				FLAG_NOT_SELLABLE					= 0x00000002,
-				FLAG_VENDOR							= 0x00000004
+				FLAG_VENDOR							= 0x00000004,
+				FLAG_KILL_CONTRIBUTION_LOOT			= 0x00000008,
+				FLAG_QUEST_REWARD					= 0x00000010,
+				FLAG_DUNGEON_LOOT					= 0x00000020
 			};
 
 			static inline uint32_t
@@ -45,6 +48,12 @@ namespace tpublic
 						flags |= FLAG_NOT_SELLABLE;
 					else if (strcmp(identifier, "vendor") == 0)
 						flags |= FLAG_VENDOR;
+					else if (strcmp(identifier, "kill_contribution_loot") == 0)
+						flags |= FLAG_KILL_CONTRIBUTION_LOOT;
+					else if (strcmp(identifier, "quest_reward") == 0)
+						flags |= FLAG_QUEST_REWARD;
+					else if (strcmp(identifier, "dungeon_loot") == 0)
+						flags |= FLAG_DUNGEON_LOOT;
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item flag.", identifier);
 				});
@@ -129,6 +138,9 @@ namespace tpublic
 			bool	IsUnique() const { return m_flags & FLAG_UNIQUE; }
 			bool	IsNotSellable() const { return m_flags & FLAG_NOT_SELLABLE; }
 			bool	IsVendor() const { return m_flags & FLAG_VENDOR; }
+			bool	IsKillContributionLoot() const { return m_flags & FLAG_KILL_CONTRIBUTION_LOOT; }
+			bool	IsQuestReward() const { return m_flags & FLAG_QUEST_REWARD; }
+			bool	IsDefined() const { return m_iconSpriteId != 0 && !m_string.empty(); }
 
 			// Base implementation
 			void
@@ -176,15 +188,19 @@ namespace tpublic
 						}
 						else if (aChild->m_name == "use_ability")
 						{
-							m_useAbilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
+							m_useAbilityId = aChild->GetId(DataType::ID_ABILITY);
 						}
 						else if (aChild->m_name == "icon")
 						{
-							m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
+							m_iconSpriteId = aChild->GetId(DataType::ID_SPRITE);
 						}
 						else if (aChild->m_name == "quest")
 						{
-							m_questId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_QUEST, aChild->GetIdentifier());
+							m_questId = aChild->GetId(DataType::ID_QUEST);
+						}
+						else if (aChild->m_name == "aura")
+						{
+							m_auraId = aChild->GetId(DataType::ID_AURA);
 						}
 						else if (aChild->m_name == "rarity")
 						{
@@ -209,6 +225,10 @@ namespace tpublic
 						{
 							m_bagSlots = aChild->GetUInt32();
 						}
+						else if (aChild->m_name == "token_cost")
+						{
+							m_tokenCost = aChild->GetUInt32();
+						}
 						else if (aChild->m_name == "weapon_damage")
 						{
 							m_weaponDamage = UIntRange(aChild);
@@ -219,7 +239,7 @@ namespace tpublic
 						}
 						else if (aChild->m_name == "flags")
 						{
-							m_flags = SourceToFlags(aChild);
+							m_flags |= SourceToFlags(aChild);
 						}
 						else if (aChild->m_name == "flavor")
 						{
@@ -296,6 +316,8 @@ namespace tpublic
 				aStream->WriteFloat(m_valueMultiplier);
 				aStream->WriteOptionalObject(m_armorStyleVisual);
 				aStream->WriteUInt(m_questId);
+				aStream->WriteUInt(m_auraId);
+				aStream->WriteUInt(m_tokenCost);
 			}
 
 			bool
@@ -350,6 +372,10 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInt(m_questId))
 					return false;
+				if (!aStream->ReadUInt(m_auraId))
+					return false;
+				if (!aStream->ReadUInt(m_tokenCost))
+					return false;
 
 				m_lcString = m_string;
 				Helpers::MakeLowerCase(m_lcString);
@@ -367,6 +393,7 @@ namespace tpublic
 				aOut["required_level"] = Helpers::Format("%u", m_requiredLevel).c_str();
 				aOut["rarity"] = Rarity::GetInfo(m_rarity)->m_name;
 				aOut["item_type"] = ItemType::GetInfo(m_itemType)->m_name;
+				aOut["quest_reward"] = IsQuestReward() ? "1" : "0";
 
 				std::string slots;
 				for(uint32_t equipmentSlotId : m_equipmentSlots)
@@ -410,6 +437,8 @@ namespace tpublic
 			float								m_valueMultiplier = 1.0f;
 			std::optional<ArmorStyle::Visual>	m_armorStyleVisual;
 			uint32_t							m_questId = 0;
+			uint32_t							m_auraId = 0;
+			uint32_t							m_tokenCost = 0;
 
 			// Not serialized
 			std::string							m_lcString;

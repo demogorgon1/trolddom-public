@@ -1,24 +1,26 @@
 class priest:
 {
+	version: 1
+	
 	string: "Priest"	
 	description: "Become a follower of the faith."
 	
 	systems: [ combat health_regen mana_regen ]
 	
-	armor_style none:   { sprite: priest_naked sprite_dead: priest_naked_dead sprites_walk: [ priest_naked_walk_1 priest_naked_walk_2 ] }	
-	armor_style brown:  { sprite: priest       sprite_dead: priest_dead       sprites_walk: [ priest_walk_1       priest_walk_2 ] }
-	armor_style green:  { sprite: priest_2     sprite_dead: priest_2_dead     sprites_walk: [ priest_2_walk_1     priest_2_walk_2 ] }
-	armor_style cyan:   { sprite: priest_3     sprite_dead: priest_3_dead     sprites_walk: [ priest_3_walk_1     priest_3_walk_2 ] }
-	armor_style red:    { sprite: priest_4     sprite_dead: priest_4_dead     sprites_walk: [ priest_4_walk_1     priest_4_walk_2 ] }
-	armor_style purple: { sprite: priest_5     sprite_dead: priest_5_dead     sprites_walk: [ priest_5_walk_1     priest_5_walk_2 ] }
-	armor_style black:  { sprite: priest_6     sprite_dead: priest_6_dead     sprites_walk: [ priest_6_walk_1     priest_6_walk_2 ] }
-	armor_style white:  { sprite: priest_7     sprite_dead: priest_7_dead     sprites_walk: [ priest_7_walk_1     priest_7_walk_2 ] }
-	armor_style yellow: { sprite: priest_8     sprite_dead: priest_8_dead     sprites_walk: [ priest_8_walk_1     priest_8_walk_2 ] }
+	armor_style none:   { sprite: priest_naked sprite_dead: priest_naked_dead sprite_mounted: priest_naked_mounted sprites_walk: [ priest_naked_walk_1 priest_naked_walk_2 ] }	
+	armor_style brown:  { sprite: priest       sprite_dead: priest_dead       sprite_mounted: priest_mounted       sprites_walk: [ priest_walk_1       priest_walk_2 ] }
+	armor_style green:  { sprite: priest_2     sprite_dead: priest_2_dead     sprite_mounted: priest_2_mounted     sprites_walk: [ priest_2_walk_1     priest_2_walk_2 ] }
+	armor_style cyan:   { sprite: priest_3     sprite_dead: priest_3_dead     sprite_mounted: priest_3_mounted     sprites_walk: [ priest_3_walk_1     priest_3_walk_2 ] }
+	armor_style red:    { sprite: priest_4     sprite_dead: priest_4_dead     sprite_mounted: priest_4_mounted     sprites_walk: [ priest_4_walk_1     priest_4_walk_2 ] }
+	armor_style purple: { sprite: priest_5     sprite_dead: priest_5_dead     sprite_mounted: priest_5_mounted     sprites_walk: [ priest_5_walk_1     priest_5_walk_2 ] }
+	armor_style black:  { sprite: priest_6     sprite_dead: priest_6_dead     sprite_mounted: priest_6_mounted     sprites_walk: [ priest_6_walk_1     priest_6_walk_2 ] }
+	armor_style white:  { sprite: priest_7     sprite_dead: priest_7_dead     sprite_mounted: priest_7_mounted     sprites_walk: [ priest_7_walk_1     priest_7_walk_2 ] }
+	armor_style yellow: { sprite: priest_8     sprite_dead: priest_8_dead     sprite_mounted: priest_8_mounted     sprites_walk: [ priest_8_walk_1     priest_8_walk_2 ] }
 		
-	weapon_sprites weapon_1h_sword: { sprite: priest_sword_1h sprites_walk: [ priest_walk_1_sword_1h priest_walk_2_sword_1h ] }
-	weapon_sprites weapon_1h_mace:  { sprite: priest_mace_1h  sprites_walk: [ priest_walk_1_mace_1h  priest_walk_2_mace_1h ] }
-	weapon_sprites weapon_1h_knife: { sprite: priest_knife_1h sprites_walk: [ priest_walk_1_knife_1h priest_walk_2_knife_1h ] }
-	weapon_sprites weapon_2h_staff: { sprite: priest_staff    sprites_walk: [ priest_walk_1_staff    priest_walk_2_staff ] }
+	weapon_sprites weapon_1h_sword: { sprite: priest_sword_1h mounted_offset: [ 0 -2 ] sprites_walk: [ priest_walk_1_sword_1h priest_walk_2_sword_1h ] }
+	weapon_sprites weapon_1h_mace:  { sprite: priest_mace_1h  mounted_offset: [ 0 -2 ] sprites_walk: [ priest_walk_1_mace_1h  priest_walk_2_mace_1h ] }
+	weapon_sprites weapon_1h_knife: { sprite: priest_knife_1h mounted_offset: [ 0 -2 ] sprites_walk: [ priest_walk_1_knife_1h priest_walk_2_knife_1h ] }
+	weapon_sprites weapon_2h_staff: { sprite: priest_staff    mounted_offset: [ 0 -2 ] sprites_walk: [ priest_walk_1_staff    priest_walk_2_staff ] }
 		
 	armor_decoration: { sprite: priest_decoration sprite_dead: priest_decoration_dead sprites_walk: [ priest_decoration_walk_1 priest_decoration_walk_2 ] }
 		
@@ -60,26 +62,26 @@ class priest:
 	level_progression:
 	[
 		{ level: 1 unlock_abilities: [ attack minor_heal !DEFAULT_ABILITIES{} ] stats: { dexterity: 3 strength: 4 wisdom: 7 constitution: 4 spirit: 10 } resource health: { add_max: 60 } resource mana: { add_max: 60 } add_unarmed_weapon_damage: [ 2 4 ] }		
-		{ level: 2 unlock_abilities: [ smite ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } } 
-		{ level: 3 unlock_abilities: [ blessing ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: 6 }	resource mana: { add_max: 6 } }		
+		{ level: 2 unlock_abilities: [ smite ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } } 
+		{ level: 3 unlock_abilities: [ blessing ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} }	resource mana: { add_max: 6 } }		
 		
-		{ level: 4 unlock_abilities: [ condemnation ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } } 
-		{ level: 5 unlock_abilities: [ meditation ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: 6 }	resource mana: { add_max: 6 } }		
-		{ level: 6 unlock_abilities: [ resurrection ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } } 
-		{ level: 7 unlock_abilities: [ dwindle ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: 6 }	resource mana: { add_max: 6 } }		
-		{ level: 8 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } } 
-		{ level: 9 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: 6 }	resource mana: { add_max: 6 } }		
-		{ level: 10 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } } 
-		{ level: 11 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: 6 }	resource mana: { add_max: 6 } }		
-		{ level: 12 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } } 
-		{ level: 13 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: 6 }	resource mana: { add_max: 6 } }		
-		{ level: 14 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } } 
-		{ level: 15 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: 6 }	resource mana: { add_max: 6 } }		
-		{ level: 16 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } } 
-		{ level: 17 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: 6 }	resource mana: { add_max: 6 } }		
-		{ level: 18 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } } 
-		{ level: 19 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: 6 }	resource mana: { add_max: 6 } }		
-		{ level: 20 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: 6 } resource mana: { add_max: 6 } achievement: priest_level_10 } 		
+		{ level: 4 unlock_abilities: [ condemnation ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } } 
+		{ level: 5 unlock_abilities: [ meditation ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} }	resource mana: { add_max: 6 } }		
+		{ level: 6 unlock_abilities: [ resurrection ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } } 
+		{ level: 7 unlock_abilities: [ dwindle ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} }	resource mana: { add_max: 6 } }		
+		{ level: 8 unlock_abilities: [ toughen_up ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } } 
+		{ level: 9 unlock_abilities: [ inner_peace ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 10 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } achievement: priest_level_10 } 
+		{ level: 11 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} }	resource mana: { add_max: 6 } }		
+		{ level: 12 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } } 
+		{ level: 13 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} }	resource mana: { add_max: 6 } }		
+		{ level: 14 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } } 
+		{ level: 15 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} }	resource mana: { add_max: 6 } }		
+		{ level: 16 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } } 
+		{ level: 17 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} }	resource mana: { add_max: 6 } }		
+		{ level: 18 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } } 
+		{ level: 19 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} }	resource mana: { add_max: 6 } }		
+		{ level: 20 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } achievement: priest_level_20 } 		
 	]
 	
 	gear_optimization default<{ weapon_dps_weight: 0.0 }>:
@@ -95,6 +97,14 @@ class priest:
 		dexterity: 1.0
 		constitution: 0.25
 	}		
+	
+	gear_optimization healing<{ weapon_dps_weight: 0.0 }>:
+	{	
+		healing: 1.0
+		wisdom: 0.6 
+		mana_per_5: 0.5
+		spirit: 0.4
+	}		
 }
 
 ###############################################################################
@@ -108,4 +118,50 @@ achievement priest_level_10:
 	points: 10 
 	icon: icon_priest
 	no_progress_values: true 
+}
+
+achievement priest_level_20: 
+{ 
+	category: general 
+	string: "Priest (Level 20)" 
+	description: "Reach level 20 as a Priest." 
+	points: 10 
+	icon: icon_priest
+	no_progress_values: true 
+	root: priest_level_20
+}
+
+###############################################################################
+# Rotations
+
+ability_list priest_ranged:
+{
+	ability condemnation:
+	{
+		requirement target<must_not_have_aura>: condemnation
+	}
+
+	ability smite:
+	{
+	}
+
+	ability attack:
+	{
+	}
+}
+
+ability_list priest_melee:
+{
+	ability condemnation:
+	{
+		requirement target<must_not_have_aura>: condemnation
+	}
+
+	ability dragon_punch:
+	{
+	}
+
+	ability attack:
+	{
+	}
 }

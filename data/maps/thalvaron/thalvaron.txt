@@ -1,0 +1,986 @@
+map_player_spawn .player_spawn: { }
+
+map_player_spawn thalvaron_lich_tower_exit: { }
+map_player_spawn thalvaron_valoris_insurgency_exit: { }
+map_player_spawn thalvaron_tirnwood_thicket_exit: { }
+
+map_player_spawn thalvaron_wizard_realm_spawn: { }
+map_player_spawn thalvaron_wizard_realm_return_spawn: { }
+
+map_player_spawn thalvaron_the_shrouded_lands_light_return: { }
+map_player_spawn thalvaron_the_shrouded_lands_underworld_return: { }
+
+map_player_spawn thalvaron_blimcraft_highborne_3_portal_spawn: { }
+map_player_spawn thalvaron_blimcraft_highborne_3_portal_return_spawn: { }
+
+zone .valoris: { string: "Valoris" }
+zone .valoris_south: { string: "Fernwick Hills" }
+zone .valoris_south_mountains: { string: "Clearview Slopes" }
+zone .valoris_south_sea: { string: "Clearview" }
+zone .valoris_docks: { string: "Docks" town: true }
+zone .valoris_trade_district: { string: "Trade District" town: true }
+zone .valoris_royal_gardens: { string: "Royal Gardens" town: true }
+zone .valoris_royal_castle: { string: "Royal Castle" town: true }  
+zone .valoris_the_garrison: { string: "The Garrison" town: true }
+zone .valoris_southgate: { string: "Southgate" town: true }
+zone .valoris_royal_district: { string: "Royal District" town: true }
+zone .valoris_eastgate: { string: "Eastgate" }
+zone .valoris_south_town: { string: "Fernwick" }
+zone .north_wetlands: { string: "North Marshlands" }
+zone .middle_wetlands: { string: "Middle Marshlands" }
+zone .south_wetlands: { string: "South Marshlands" }
+zone .wetlands_town: { string: "Mirehaven" }
+zone .south_badlands: { string: "South Badlands" }
+zone .north_badlands: { string: "North Badlands" }
+zone .center_pass: { string: "Ravenreach Pass" }
+zone .valoris_east: { string: "Eastview" }
+zone .valoris_north_woods: { string: "Eastview Woods" }
+zone .north_pass: { string: "Iceveil Pass" }
+zone .mountains: { string: "Iceveil Highlands" }
+zone .myst_woodlands_town: { string: "Edmund's Haunt" }
+zone .myst_woodlands: { string: "Duskwhisper Vale" }
+zone .haunted_woods_main: { string: "Shadowthorn Forest" }
+zone .haunted_woods_west: { string: "Shadowthorn Thicket" }
+zone .haunted_woods_town: { string: "Ravenreach" }
+zone .haunted_woods_clearing: { string: "Shadowthorn Abbey" }
+zone .haunted_woods_east: { string: "Faerandor" }
+zone .jungle: { string: "Xandralis" }
+zone .lich_woods: { string: "Hollows of the Undying" }
+zone .way_north_pass: { string: "The Northern Pass" }
+zone .duskwhisper_caves: { string: "Duskwhisper Caves" }
+zone .old_mans_cave: { string: "Old Man's Cave" }
+zone .realm_of_the_wizard: { string: "Realm of the Wizard" no_map: true }
+zone .eastern_faerandor: { string: "Eastern Faerandor" }
+zone .myst_woodlands_coast: { string: "The Lonely Coast" }
+zone .mongos_swamp: { string: "Mongo's Swamp" }
+zone .dwarf_city: { string: "Durgan Tharok" town: true }
+zone .lake_dourgol: { string: "Lake Dourgol" }
+zone .faerandor_gorge: { string: "Faerandor Gorge" }
+zone .dark_strand: { string: "Dark Strand" }
+zone .lake_ylynor: { string: "Lake Ylynor" }
+zone .lake_joonor: { string: "Lake Joonor" }
+zone .highborne_tower: { string: "Tower of Xalizant" }
+zone .lich_tower: { string: "Tower of Indulath" }
+zone .temple_of_the_undying: { string: "Temple of the Undying" }
+zone .tirnwood: { string: "Tirnwood Vale" }
+zone .holy_temple: { string: "Holy Temple of Valoris" }
+zone .underworld_society: { string: "Society of the Underworld" }
+zone .echosrest: { string: "Echo's Rest" }
+zone .highborne_realm: { string: "Realm of the Highborne" no_map: true }
+
+zone thalvaron_crab_giant: { } 
+zone thalvaron_vampire_boss: { } 
+	
+route thalvaron_default_patrol: { }
+
+npc_behavior_state thalvaron_default_patrol_friendly:
+{
+	behavior: patrolling
+	pause_when_targeted_by_nearby_player: true
+}
+
+npc_behavior_state thalvaron_default_patrol:
+{
+	behavior: patrolling
+}
+
+map_portal thalvaron_lich_tower_entrance: {	animation: !DEFAULT_PORTAL_ANIMATION{} map: lich_tower }
+map_portal thalvaron_valoris_insurgency_entrance: { animation: !DEFAULT_PORTAL_ANIMATION{} map: valoris_insurgency }
+map_portal thalvaron_tirnwood_thicket_entrance: {	animation: !HOLE_PORTAL_ANIMATION{} map: tirnwood_thicket }
+
+map_cliff .rocky_cliff: { cliff_style: rocks elevation: 1 }
+map_cliff .rocky_cliff_ramp: { cliff_style: rocks elevation: 1 ramp: true }
+map_cliff .badlands_cliff: { cliff_style: badlands elevation: 1 }
+map_cliff .badlands_cliff_ramp: { cliff_style: badlands elevation: 1 ramp: true }
+map_cliff .wall_cliff: { cliff_style: wall elevation: 1 }
+map_cliff .wall_cliff_ramp: { cliff_style: wall elevation: 1 ramp: true }
+map_cliff .dummy_cliff_0: { cliff_style: dummy elevation: 0 }
+map_cliff .dummy_cliff_0_ramp: { cliff_style: dummy elevation: 0 ramp: true }
+map_cliff .dummy_cliff_1: { cliff_style: dummy elevation: 1 } 
+map_cliff .dummy_cliff_1_ramp: { cliff_style: dummy elevation: 1 ramp: true }
+map_cliff .dummy_cliff_2: { cliff_style: dummy elevation: 2 }
+map_cliff .dummy_cliff_2_ramp: { cliff_style: dummy elevation: 2 ramp: true }
+
+map_palette .tiles: !DEFAULT_TILE_PALETTE{}
+
+# NW
+map_entity_spawn thalvaron_marlowe: { entity thalvaron_marlowe: { init_state: default } }
+map_entity_spawn thalvaron_city_guard: { entity thalvaron_city_guard: { init_state: default } }
+map_entity_spawn thalvaron_city_guard_special: { entity thalvaron_city_guard_special: { init_state: default } }
+map_entity_spawn thalvaron_city_guard_special_2: { entity thalvaron_city_guard_special_2: { init_state: default } }
+map_entity_spawn thalvaron_captain_jerrington: { entity thalvaron_captain_jerrington: { init_state: default } }
+map_entity_spawn thalvaron_lieutenant_tinley: { entity thalvaron_lieutenant_tinley: { init_state: default } }
+map_entity_spawn thalvaron_inn_keeper_1_quest_item: { entity thalvaron_inn_keeper_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_inn_keeper: { entity thalvaron_inn_keeper: { init_state: default } }
+map_entity_spawn thalvaron_general_store_john: { entity thalvaron_general_store_john: { init_state: default } }
+map_entity_spawn thalvaron_general_store_mary: { entity thalvaron_general_store_mary: { init_state: default } }
+map_entity_spawn thalvaron_fernwick_inn_keeper: { entity thalvaron_fernwick_inn_keeper: { init_state: default } }
+map_entity_spawn thalvaron_fernwick_bar_patron: { entity thalvaron_fernwick_bar_patron: { init_state: default } }
+map_entity_spawn thalvaron_sergeant_jensen: { entity thalvaron_sergeant_jensen: { init_state: default } }
+map_entity_spawn thalvaron_wounded_city_guard: { entity thalvaron_wounded_city_guard: { init_state: default } }
+map_entity_spawn thalvaron_samantha_plington: { entity thalvaron_samantha_plington: { init_state: default } }
+map_entity_spawn thalvaron_samantha_plington_1_quest_item: { entity thalvaron_samantha_plington_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_maude_johansson: { entity thalvaron_maude_johansson: { init_state: default } }
+map_entity_spawn thalvaron_ola_howton: { entity thalvaron_ola_howton: { init_state: default } }
+map_entity_spawn thalvaron_borg_robertson: { entity thalvaron_borg_robertson: { init_state: default } }
+map_entity_spawn thalvaron_gnome: { entity thalvaron_gnome: { init_state: default } }
+map_entity_spawn thalvaron_mysterious_stranger: { entity thalvaron_mysterious_stranger: { init_state: default } }
+map_entity_spawn thalvaron_bar_patron_sarah: { entity thalvaron_bar_patron_sarah: { init_state: default } }
+map_entity_spawn thalvaron_bar_patron_bill: { entity thalvaron_bar_patron_bill: { init_state: default } }
+map_entity_spawn thalvaron_bar_chef: { entity thalvaron_bar_chef: { init_state: default } }
+map_entity_spawn thalvaron_mathew_larsen: { entity thalvaron_mathew_larsen: { init_state: default } }
+map_entity_spawn thalvaron_ola_howton_1_quest_item_1: { entity thalvaron_ola_howton_1_quest_item_1: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_ola_howton_1_quest_item_2: { entity thalvaron_ola_howton_1_quest_item_2: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_ola_howton_1_quest_item_3: { entity thalvaron_ola_howton_1_quest_item_3: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_buttercup: { entity thalvaron_buttercup: { init_state: default } }
+map_entity_spawn thalvaron_wild_boar: { entity thalvaron_wild_boar: { init_state: default } }
+map_entity_spawn thalvaron_piglet: { entity thalvaron_piglet: { init_state: default } }
+map_entity_spawn thalvaron_fisherman: { entity thalvaron_fisherman: { init_state: default } }
+map_entity_spawn thalvaron_lieutenant_tusleholm: { entity thalvaron_lieutenant_tusleholm: { init_state: default } }
+map_entity_spawn thalvaron_fernwick_bar_patron_2_quest_item: { entity thalvaron_fernwick_bar_patron_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_fernwick_bar_patron_2: { entity thalvaron_fernwick_bar_patron_2: { init_state: default } }
+map_entity_spawn thalvaron_cubert_galston: { entity thalvaron_cubert_galston: { init_state: default } spawn_timer: !ESCORT_RESPAWN{} }
+map_entity_spawn thalvaron_westor: { entity thalvaron_westor: { init_state: default } }
+map_entity_spawn thalvaron_westor_1_quest_item: { entity thalvaron_westor_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_westor_3_quest_item: { entity thalvaron_westor_3_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_ranger_seymore: { entity thalvaron_ranger_seymore: { init_state: default } }
+map_entity_spawn thalvaron_ranger_seymore_3_quest_item: { entity thalvaron_ranger_seymore_3_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_ranger_orwla: { entity thalvaron_ranger_orwla: { init_state: default } }
+map_entity_spawn thalvaron_farmer_rabbit: { entity thalvaron_farmer_rabbit: { init_state: default } }
+map_entity_spawn thalvaron_farmer_rabbit_1_quest_item: { entity thalvaron_farmer_rabbit_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_farmer_rabbit_1_quest_item_2: { entity thalvaron_farmer_rabbit_1_quest_item_2: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_ranger_orwla_2_quest_item: { entity thalvaron_ranger_orwla_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_thora_2_quest_item: { entity thalvaron_thora_2_quest_item: { init_state: default } }
+map_entity_spawn thalvaron_thora: { entity thalvaron_thora: { init_state: default } }
+map_entity_spawn thalvaron_tyler: { entity thalvaron_tyler: { init_state: default } }
+map_entity_spawn thalvaron_thora_2_return_portal: { entity thalvaron_thora_2_return_portal: { init_state: default } }
+map_entity_spawn thalvaron_wizard: { entity thalvaron_wizard: { init_state: default } }
+map_entity_spawn thalvaron_wizard_door: { entity thalvaron_wizard_door: { init_state: default } }
+map_entity_spawn thalvaron_royal_chef: { entity thalvaron_royal_chef: { init_state: default } }
+map_entity_spawn thalvaron_royal_chef_assistant: { entity thalvaron_royal_chef_assistant: { init_state: default } }
+map_entity_spawn thalvaron_clara_hawthorne: { entity thalvaron_clara_hawthorne: { init_state: default } }
+map_entity_spawn thalvaron_alchemy_trainer: { entity thalvaron_alchemy_trainer: { init_state: default } }
+map_entity_spawn thalvaron_dwarf_liaison_officer: { entity thalvaron_dwarf_liaison_officer: { init_state: default } }
+map_entity_spawn thalvaron_emma_brown: { entity thalvaron_emma_brown: { init_state: default } }
+map_entity_spawn thalvaron_enchanting_trainer: { entity thalvaron_enchanting_trainer: { init_state: default } }
+map_entity_spawn thalvaron_valoris_quartermaster: { entity thalvaron_valoris_quartermaster: { init_state: default } }
+map_entity_spawn thalvaron_blacksmithing_trainer: { entity thalvaron_blacksmithing_trainer: { init_state: default } }
+map_entity_spawn thalvaron_firstaid_trainer: { entity thalvaron_firstaid_trainer: { init_state: default } }
+map_entity_spawn thalvaron_herbalism_trainer: { entity thalvaron_herbalism_trainer: { init_state: default } }
+map_entity_spawn thalvaron_lara_ottingson: { entity thalvaron_lara_ottingson: { init_state: default } }
+map_entity_spawn thalvaron_brown_horse: { entity brown_horse: { init_state: default } }
+map_entity_spawn thalvaron_dark_brown_horse: { entity dark_brown_horse: { init_state: default } }
+map_entity_spawn thalvaron_craig_borne: { entity thalvaron_craig_borne: { init_state: default } }
+map_entity_spawn thalvaron_sylvia_swift: { entity thalvaron_sylvia_swift: { init_state: default } }
+map_entity_spawn thalvaron_assassin_bar_keeper: { entity thalvaron_assassin_bar_keeper: { init_state: default } }
+map_entity_spawn thalvaron_city_guard_unarmed: { entity thalvaron_city_guard_unarmed: { init_state: default } }
+map_entity_spawn thalvaron_city_guard_boss: { entity thalvaron_city_guard_boss: { init_state: default } }
+map_entity_spawn thalvaron_auctioneer: { entity thalvaron_auctioneer: { init_state: default } }
+map_entity_spawn thalvaron_lance_rottler: { entity thalvaron_lance_rottler: { init_state: default } }
+map_entity_spawn thalvaron_lucinda_frostvale: { entity thalvaron_lucinda_frostvale: { init_state: default } }
+map_entity_spawn thalvaron_father_tobias: { entity thalvaron_father_tobias: { init_state: default } }
+map_entity_spawn thalvaron_consort: { entity thalvaron_consort: { init_state: default } }
+map_entity_spawn thalvaron_queen: { entity thalvaron_queen: { init_state: default } }
+map_entity_spawn thalvaron_royal_guard_big: { entity thalvaron_royal_guard_big: { init_state: default } }
+map_entity_spawn thalvaron_royal_guard: { entity thalvaron_royal_guard: { init_state: default } }
+map_entity_spawn thalvaron_fisherman_city: { entity thalvaron_fisherman_city: { init_state: default } }
+map_entity_spawn thalvaron_lisa_storkhouse: { entity thalvaron_lisa_storkhouse: { init_state: default } }
+map_entity_spawn thalvaron_igor_skrald: { entity thalvaron_igor_skrald: { init_state: default } }
+map_entity_spawn thalvaron_harbor_vendor: { entity thalvaron_harbor_vendor: { init_state: default } }
+map_entity_spawn thalvaron_kristina_newman: { entity thalvaron_kristina_newman: { init_state: default } }
+map_entity_spawn thalvaron_anne_joghun: { entity thalvaron_anne_joghun: { init_state: default } }
+map_entity_spawn thalvaron_blunt_ronson: { entity thalvaron_blunt_ronson: { init_state: default } }
+map_entity_spawn thalvaron_valoris_quartermaster_2: { entity thalvaron_valoris_quartermaster_2: { init_state: default } }
+map_entity_spawn thalvaron_random_vendor: { entity thalvaron_random_vendor: { init_state: default } }
+map_entity_spawn thalvaron_random_vendor_2: { entity thalvaron_random_vendor_2: { init_state: default } }
+map_entity_spawn thalvaron_blimcraft_highborne_3_portal: { entity thalvaron_blimcraft_highborne_3_portal: { init_state: default } }
+map_entity_spawn thalvaron_blimcraft_highborne_3_portal_return: { entity thalvaron_blimcraft_highborne_3_portal_return: { init_state: default } }
+map_entity_spawn thalvaron_blimcraft_assistant: { entity thalvaron_blimcraft_assistant: { init_state: default } }
+map_entity_spawn thalvaron_gateway_2: { entity gateway_2: { init_state: default } }
+map_entity_spawn thalvaron_tailoring_trainer: { entity thalvaron_tailoring_trainer: { init_state: default } }
+map_entity_spawn thalvaron_jim_farseer: { entity thalvaron_jim_farseer: { init_state: default } }
+
+# N
+map_entity_spawn thalvaron_ranger_fremalt: { entity thalvaron_ranger_fremalt: { init_state: default } }
+map_entity_spawn thalvaron_johnson: { entity thalvaron_johnson: { init_state: default } }
+map_entity_spawn thalvaron_tyron_frostmane: { entity thalvaron_tyron_frostmane: { init_state: default } }
+map_entity_spawn thalvaron_ronja_frostmane: { entity thalvaron_ronja_frostmane: { init_state: default } }
+map_entity_spawn thalvaron_nook_morrow: { entity thalvaron_nook_morrow: { init_state: default } }
+map_entity_spawn thalvaron_nook_morrow_1_object: { entity thalvaron_nook_morrow_1_object: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_doctor_hulius_camp: { entity thalvaron_doctor_hulius_camp: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_doctor_hulius: { entity thalvaron_doctor_hulius: { init_state: default } spawn_timer: !ESCORT_RESPAWN{} }
+map_entity_spawn thalvaron_fennian_starleaf: { entity thalvaron_fennian_starleaf: { init_state: default } }
+map_entity_spawn thalvaron_sheriff_cunningham: { entity thalvaron_sheriff_cunningham: { init_state: default } }
+map_entity_spawn thalvaron_joanna_hewitt: { entity thalvaron_joanna_hewitt: { init_state: default } }
+map_entity_spawn thalvaron_gash_hewitt: { entity thalvaron_gash_hewitt: { init_state: default } }
+map_entity_spawn thalvaron_sheriff_cunningham_2_quest_item: { entity thalvaron_sheriff_cunningham_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_sheriff_cunningham_3_quest_item: { entity thalvaron_sheriff_cunningham_3_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_fennian_starleaf_1_quest_item: { entity thalvaron_fennian_starleaf_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_jonas_white_1_quest_item: { entity thalvaron_jonas_white_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_jonas_white: { entity thalvaron_jonas_white: { init_state: default } }
+map_entity_spawn thalvaron_fennian_starleaf_3_quest_item: { entity thalvaron_fennian_starleaf_3_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_pearly_a: { entity thalvaron_pearly_a: { init_state: default } }
+map_entity_spawn thalvaron_sheila_urkins: { entity thalvaron_sheila_urkins: { init_state: default } }
+map_entity_spawn thalvaron_deputy_simmons: { entity thalvaron_deputy_simmons: { init_state: default } }
+map_entity_spawn thalvaron_gyo_starleaf: { entity thalvaron_gyo_starleaf: { init_state: default } }
+map_entity_spawn thalvaron_gyo_starleaf_1_quest_item: { entity thalvaron_gyo_starleaf_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_sheila_urkins_1_quest_item: { entity thalvaron_sheila_urkins_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_sheila_urkins_2_quest_item: { entity thalvaron_sheila_urkins_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_hoi_ghourian: { entity thalvaron_hoi_ghourian: { init_state: default } }
+map_entity_spawn thalvaron_hoi_ghourian_2_quest_item: { entity thalvaron_hoi_ghourian_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_durk: { entity thalvaron_durk: { init_state: default } }
+map_entity_spawn thalvaron_sheriff_ravenreach: { entity thalvaron_sheriff_ravenreach: { init_state: default } }
+map_entity_spawn thalvaron_john_thompoure: { entity thalvaron_john_thompoure: { init_state: default } }
+map_entity_spawn thalvaron_deputy_ravenreach: { entity thalvaron_deputy_ravenreach: { init_state: default } }
+map_entity_spawn thalvaron_adriana_black: { entity thalvaron_adriana_black: { init_state: default } }
+map_entity_spawn thalvaron_damon_arkwright: { entity thalvaron_damon_arkwright: { init_state: default } }
+map_entity_spawn thalvaron_erhart_hulius: { entity thalvaron_erhart_hulius: { init_state: default } }
+map_entity_spawn thalvaron_jimbo_tokins: { entity thalvaron_jimbo_tokins: { init_state: default } }
+map_entity_spawn thalvaron_laura_tokins: { entity thalvaron_laura_tokins: { init_state: default } }
+map_entity_spawn thalvaron_ranger_thorksen: { entity thalvaron_ranger_thorksen: { init_state: default } }
+map_entity_spawn thalvaron_laura_tokins_1_quest_item: { entity thalvaron_laura_tokins_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_laura_tokins_1b_quest_item: { entity thalvaron_laura_tokins_1b_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_emma_brown_1_quest_item_2: { entity thalvaron_emma_brown_1_quest_item_2: { init_state: default } }
+map_entity_spawn thalvaron_laura_tokins_2_quest_item: { entity thalvaron_laura_tokins_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_lia_frostmane: { entity thalvaron_lia_frostmane: { init_state: default } }
+map_entity_spawn thalvaron_foramil: { entity thalvaron_foramil: { init_state: default } }
+map_entity_spawn thalvaron_jor_starleaf: { entity thalvaron_jor_starleaf: { init_state: default } }
+map_entity_spawn thalvaron_pearly_b: { entity thalvaron_pearly_b: { init_state: default } }
+map_entity_spawn thalvaron_brimiar: { entity thalvaron_brimiar: { init_state: default } }
+map_entity_spawn thalvaron_warden_moonwatcher: { entity thalvaron_warden_moonwatcher: { init_state: default } }
+map_entity_spawn thalvaron_pearly_b_1_quest_item: { entity thalvaron_pearly_b_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_brimiar_1_quest_item: { entity thalvaron_brimiar_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_thalorion: { entity thalvaron_thalorion: { init_state: default } }
+map_entity_spawn thalvaron_aelithra: { entity thalvaron_aelithra: { init_state: default } }
+map_entity_spawn thalvaron_urgon_starleaf: { entity thalvaron_urgon_starleaf: { init_state: default } }
+map_entity_spawn thalvaron_trouli_copperquill: { entity thalvaron_trouli_copperquill: { init_state: default } }
+map_entity_spawn thalvaron_pearly_c: { entity thalvaron_pearly_c: { init_state: default } }
+map_entity_spawn thalvaron_warden_tylior: { entity thalvaron_warden_tylior: { init_state: default } }
+map_entity_spawn thalvaron_warden_nekelian: { entity thalvaron_warden_nekelian: { init_state: default } }
+map_entity_spawn thalvaron_blimcraft_highborne: { entity thalvaron_blimcraft_highborne: { init_state: default } }
+map_entity_spawn thalvaron_blimcraft_highborne_1_quest_item: { entity thalvaron_blimcraft_highborne_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_evil_orb: { entity thalvaron_evil_orb: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_spirit_of_joonor: { entity thalvaron_spirit_of_joonor: { init_state: default } }
+map_entity_spawn thalvaron_halfeye_lanior: { entity thalvaron_halfeye_lanior: { init_state: default } }
+map_entity_spawn thalvaron_pearly_c_1_quest_item: { entity thalvaron_pearly_c_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_pearly_c_1_quest_item_2: { entity thalvaron_pearly_c_1_quest_item_2: { init_state: default } }
+map_entity_spawn thalvaron_spirit_of_joonor_b: { entity thalvaron_spirit_of_joonor_b: { init_state: default } }
+map_entity_spawn thalvaron_warden_ghourian: { entity thalvaron_warden_ghourian: { init_state: default } }
+map_entity_spawn thalvaron_elf_collector: { entity thalvaron_elf_collector: { init_state: default } }
+map_entity_spawn thalvaron_elf_quartermaster: { entity thalvaron_elf_quartermaster: { init_state: default } }
+map_entity_spawn thalvaron_bob_gordon: { entity thalvaron_bob_gordon: { init_state: default } }
+map_entity_spawn thalvaron_elf_quartermaster_2: { entity thalvaron_elf_quartermaster_2: { init_state: default } }
+map_entity_spawn thalvaron_thour: { entity thalvaron_thour: { init_state: default } }
+map_entity_spawn thalvaron_baskin_johnson: { entity thalvaron_baskin_johnson: { init_state: default } }
+map_entity_spawn thalvaron_gerhard_frostmane: { entity thalvaron_gerhard_frostmane: { init_state: default } }
+map_entity_spawn thalvaron_keanu_horton: { entity thalvaron_keanu_horton: { init_state: default } }
+map_entity_spawn thalvaron_gray_horse: { entity gray_horse: { init_state: default } }
+map_entity_spawn thalvaron_pinto_starleaf: { entity thalvaron_pinto_starleaf: { init_state: default } }
+
+# SW
+map_entity_spawn thalvaron_brian_riddle: { entity thalvaron_brian_riddle: { init_state: default } }
+map_entity_spawn thalvaron_francis: { entity thalvaron_francis: { init_state: default } }
+map_entity_spawn thalvaron_gob_fulbro: { entity thalvaron_gob_fulbro: { init_state: default } }
+map_entity_spawn thalvaron_kirk_gibson: { entity thalvaron_kirk_gibson: { init_state: default } }
+map_entity_spawn thalvaron_melinda_riddle: { entity thalvaron_melinda_riddle: { init_state: default } }
+map_entity_spawn thalvaron_mirehaven_mayor: { entity thalvaron_mirehaven_mayor: { init_state: default } }
+map_entity_spawn thalvaron_mirehaven_sheriff: { entity thalvaron_mirehaven_sheriff: { init_state: default } }
+map_entity_spawn thalvaron_mirehaven_bar_keeper: { entity thalvaron_mirehaven_bar_keeper: { init_state: default } }
+map_entity_spawn thalvaron_mirehaven_dwarf: { entity thalvaron_mirehaven_dwarf: { init_state: default } }
+map_entity_spawn thalvaron_swampman: { entity thalvaron_swampman: { init_state: default } }
+map_entity_spawn thalvaron_buck_1_quest_item: { entity thalvaron_buck_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_buck: { entity thalvaron_buck: { init_state: default } }
+map_entity_spawn thalvaron_buck_2_quest_item: { entity thalvaron_buck_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_frederik_tyson: { entity thalvaron_frederik_tyson: { init_state: default } }
+map_entity_spawn thalvaron_yvonne_tyson: { entity thalvaron_yvonne_tyson: { init_state: default } }
+map_entity_spawn thalvaron_mirehaven_mayor_2_quest_item: { entity thalvaron_mirehaven_mayor_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_ria_tyson: { entity thalvaron_ria_tyson: { init_state: default } }
+map_entity_spawn thalvaron_francis_1_quest_item: { entity thalvaron_francis_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_buck_3_quest_item: { entity thalvaron_buck_3_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_mirehaven_mayor_2_quest_item_2: { entity thalvaron_mirehaven_mayor_2_quest_item_2: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_hort_ironmantle: { entity thalvaron_hort_ironmantle: { init_state: default } }
+map_entity_spawn thalvaron_rurik_ironmantle: { entity thalvaron_rurik_ironmantle: { init_state: default } }
+map_entity_spawn thalvaron_grumli_stouthammer: { entity thalvaron_grumli_stouthammer: { init_state: default } }
+map_entity_spawn thalvaron_border_guard: { entity thalvaron_border_guard: { init_state: default } }
+map_entity_spawn thalvaron_lieutenant_gordon: { entity thalvaron_lieutenant_gordon: { init_state: default } }
+map_entity_spawn thalvaron_dwarf_guard_1: { entity thalvaron_dwarf_guard_1: { init_state: default } }
+map_entity_spawn thalvaron_dwarf_guard_2: { entity thalvaron_dwarf_guard_2: { init_state: default } }
+map_entity_spawn thalvaron_dwarf_miner: { entity thalvaron_dwarf_miner: { init_state: default } }
+map_entity_spawn thalvaron_dwarf_blacksmith: { entity thalvaron_dwarf_blacksmith: { init_state: default } }
+map_entity_spawn thalvaron_ulrik_copperquill: { entity thalvaron_ulrik_copperquill: { init_state: default } }
+map_entity_spawn thalvaron_eldriv_copperquill: { entity thalvaron_eldriv_copperquill: { init_state: default } }
+map_entity_spawn thalvaron_borg_ironmantle: { entity thalvaron_borg_ironmantle: { init_state: default } }
+map_entity_spawn thalvaron_warmaster_jounheim: { entity thalvaron_warmaster_jounheim: { init_state: default } }
+map_entity_spawn thalvaron_rumin_whiterock: { entity thalvaron_rumin_whiterock: { init_state: default } }
+map_entity_spawn thalvaron_rumin_whiterock_3_quest_item: { entity thalvaron_rumin_whiterock_3_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_bramli_stonestride: { entity thalvaron_bramli_stonestride: { init_state: default } }
+map_entity_spawn thalvaron_borli_stouthammer: { entity thalvaron_borli_stouthammer: { init_state: default } spawn_timer: !ESCORT_RESPAWN{} }
+map_entity_spawn thalvaron_mumle_whiterock: { entity thalvaron_mumle_whiterock: { init_state: default } }
+map_entity_spawn thalvaron_dwarf_quartermaster: { entity thalvaron_dwarf_quartermaster: { init_state: default } }
+map_entity_spawn thalvaron_dwarf_quartermaster_2: { entity thalvaron_dwarf_quartermaster_2: { init_state: default } }
+map_entity_spawn thalvaron_julian_moore: { entity thalvaron_julian_moore: { init_state: default } }
+map_entity_spawn thalvaron_bromrik_coppervein: { entity thalvaron_bromrik_coppervein: { init_state: default } }
+
+map_palette .stuff:
+{
+	entity_spawn mining: [ 200 200 200 ]
+	entity_spawn herbalism: [ 0 255 0 ]
+	entity_spawn spirit_stone: [ 0 0 0 ]	
+	entity_spawn mailbox: [ 0 20 60 ]	
+	entity_spawn holy_altar: [ 0 0 40 ]	
+	entity_spawn underworld_shrine: [ 0 0 80 ]	
+	entity_spawn potatoes: [ 212 255 42 ]
+	entity_spawn stash: [ 0 43 66 ]		
+	entity_spawn furnace: [ 100 43 66 ]		
+	entity_spawn anvil: [ 150 43 66 ]		
+	entity_spawn fireplace: [ 250 43 66 ]		
+	entity_spawn fireplace_unlit: [ 250 243 66 ]		
+	entity_spawn bonfire: [ 251 43 66 ]		
+	entity_spawn default_chest: [ 40 143 66 ]		
+	entity_spawn cauldron: [ 43 113 166 ]		
+	entity_spawn bonfire_unlit: [ 144 59 20 ]
+	entity_spawn target_dummy: [ 139 201 21 ]	
+	entity_spawn chicken: [ 239 141 21 ]	
+	entity_spawn seagull: [ 139 141 21 ]	
+	entity_spawn duck: [ 239 141 221 ]	
+	entity_spawn homunculus: [ 100 32 177 ]
+		
+	player_spawn .player_spawn: [ 0 0 255 ]
+	player_spawn thalvaron_wizard_realm_spawn: [ 42 157 85 ]
+	player_spawn thalvaron_wizard_realm_return_spawn: [ 142 157 85 ]	
+	player_spawn thalvaron_lich_tower_exit: [ 44 88 194 ]
+	player_spawn thalvaron_valoris_insurgency_exit: [ 44 38 194 ]
+	player_spawn thalvaron_tirnwood_thicket_exit: [ 144 188 194 ]
+	player_spawn thalvaron_the_shrouded_lands_light_return: [ 205 206 209 ]
+	player_spawn thalvaron_the_shrouded_lands_underworld_return: [ 205 106 209 ]
+	player_spawn thalvaron_blimcraft_highborne_3_portal_spawn: [ 40 105 130 ]
+	player_spawn thalvaron_blimcraft_highborne_3_portal_return_spawn: [ 140 105 130 ]
+
+	portal thalvaron_lich_tower_entrance: [ 144 188 94 ]
+	portal thalvaron_valoris_insurgency_entrance: [ 144 88 92 ]
+	portal thalvaron_tirnwood_thicket_entrance: [ 144 228 92 ]
+	
+	wall stone_wall: [ 128 128 128 ]
+	wall fence: [ 64 128 140 ]
+	wall wood_wall: [ 164 128 140 ]
+	
+	# NW
+	entity_spawn thalvaron_marlowe: [ 44 56 139 ]
+	entity_spawn thalvaron_city_guard: [ 144 56 139 ]
+	entity_spawn thalvaron_city_guard_special: [ 44 156 139 ]
+	entity_spawn thalvaron_city_guard_special_2: [ 44 156 140 ]
+	entity_spawn thalvaron_captain_jerrington: [ 44 56 239 ]
+	entity_spawn thalvaron_rebel: [ 144 10 239 ]
+	entity_spawn thalvaron_rebel_leader: [ 144 10 39 ]
+	entity_spawn thalvaron_lieutenant_tinley: [ 41 56 239 ]
+	entity_spawn thalvaron_rebel_outside: [ 164 10 239 ]
+	entity_spawn thalvaron_inn_keeper_1_quest_item: [ 114 100 139 ]
+	entity_spawn thalvaron_inn_keeper: [ 64 16 239 ]
+	entity_spawn thalvaron_general_store_john: [ 43 98 195 ]
+	entity_spawn thalvaron_general_store_mary: [ 43 195 98 ]
+	entity_spawn thalvaron_fernwick_inn_keeper: [ 143 125 98 ]	
+	entity_spawn thalvaron_crab: [ 243 225 98 ]		
+	entity_spawn thalvaron_fernwick_bar_patron: [ 213 25 198 ]	
+	entity_spawn thalvaron_roger_bear: [ 213 25 202 ]		
+	entity_spawn thalvaron_sergeant_jensen: [ 95 221 162 ]			
+	entity_spawn thalvaron_wounded_city_guard: [ 95 121 162 ]			
+	entity_spawn thalvaron_samantha_plington: [ 184 101 132 ]			
+	entity_spawn thalvaron_samantha_plington_1_quest_item: [ 39 220 93 ]
+	entity_spawn thalvaron_maude_johansson: [ 139 220 93 ]
+	entity_spawn thalvaron_ola_howton: [ 39 220 193 ]
+	entity_spawn thalvaron_borg_robertson: [ 39 20 93 ]
+	entity_spawn thalvaron_gnome: [ 39 240 93 ]		
+	entity_spawn thalvaron_mysterious_stranger: [ 49 240 93 ]		
+	entity_spawn thalvaron_bar_patron_sarah: [ 194 240 93 ]		
+	entity_spawn thalvaron_bar_patron_bill: [ 149 240 98 ]		
+	entity_spawn thalvaron_bar_chef: [ 34 92 141 ]
+	entity_spawn thalvaron_mathew_larsen: [ 48 18 184 ]
+	entity_spawn thalvaron_ola_howton_1_quest_item_1: [ 94 31 81 ]
+	entity_spawn thalvaron_ola_howton_1_quest_item_2: [ 94 31 82 ]
+	entity_spawn thalvaron_ola_howton_1_quest_item_3: [ 94 31 83 ]
+	entity_spawn thalvaron_robertson_farm_wolf: [ 94 31 184 ]
+	entity_spawn thalvaron_buttercup: [ 94 231 184 ]
+	entity_spawn thalvaron_wild_boar: [ 94 81 184 ]
+	entity_spawn thalvaron_piglet: [ 94 131 184 ]
+	entity_spawn thalvaron_fisherman: [ 44 131 184 ]
+	entity_spawn thalvaron_crab_2: [ 14 131 184 ]		
+	entity_spawn thalvaron_deer: [ 250 240 12 ]
+	entity_spawn thalvaron_lieutenant_tusleholm: [ 252 210 112 ]	
+	entity_spawn thalvaron_crab_3: [ 212 210 112 ]	
+	entity_spawn thalvaron_crab_dark_elf: [ 252 140 112 ]	
+	entity_spawn thalvaron_crab_giant: [ 252 10 12 ]	
+	entity_spawn thalvaron_rebel_poacher: [ 152 1 212 ]	
+	entity_spawn thalvaron_rebel_poacher_dog: [ 200 200 15 ]		
+	entity_spawn thalvaron_rebel_poacher_leader: [ 250 200 15 ]			
+	entity_spawn thalvaron_fernwick_bar_patron_2_quest_item: [ 150 123 15 ]				
+	entity_spawn thalvaron_rebel_fernwick: [ 150 123 115 ]			
+	entity_spawn thalvaron_cubert_galston: [ 134 123 119 ]			
+	entity_spawn thalvaron_cubert_galston_ambush_1_a: [ 149 84 77 ]
+	entity_spawn thalvaron_cubert_galston_ambush_1_b: [ 149 84 97 ]
+	entity_spawn thalvaron_cubert_galston_ambush_2_a: [ 119 84 77 ]
+	entity_spawn thalvaron_cubert_galston_ambush_2_b: [ 129 84 97 ]
+	entity_spawn thalvaron_cubert_galston_ambush_2_c: [ 139 84 77 ]
+	entity_spawn thalvaron_cubert_galston_ambush_3_a: [ 119 84 79 ]
+	entity_spawn thalvaron_cubert_galston_ambush_3_b: [ 129 84 99 ]
+	entity_spawn thalvaron_cubert_galston_ambush_3_c: [ 139 84 79 ]
+	entity_spawn thalvaron_rebel_hotel: [ 179 84 79 ]	
+	entity_spawn thalvaron_westor: [ 79 84 79 ]		
+	entity_spawn thalvaron_westor_1_quest_item: [ 179 84 179 ]		
+	entity_spawn thalvaron_cave_lion: [ 179 34 179 ]			
+	entity_spawn thalvaron_fernwick_bar_patron_2: [ 213 21 199 ]	
+	entity_spawn thalvaron_westor_3_quest_item: [ 179 84 1 ]		
+	entity_spawn thalvaron_ranger_seymore: [ 84 14 61 ]		
+	entity_spawn thalvaron_rebel_dark_elf: [ 84 114 61 ]		
+	entity_spawn thalvaron_rebel_dark_elf_demon: [ 84 214 61 ]		
+	entity_spawn thalvaron_rebel_dark_elf_leader: [ 43 214 61 ]		
+	entity_spawn thalvaron_rebel_dark_elf_human: [ 84 199 61 ]		
+	entity_spawn thalvaron_ranger_seymore_3_quest_item: [ 81 19 131 ]		
+	entity_spawn thalvaron_ranger_seymore_3_quest_spawn_a: [ 10 19 131 ]			
+	entity_spawn thalvaron_ranger_seymore_3_quest_spawn_b: [ 100 19 131 ]			
+	entity_spawn thalvaron_ranger_seymore_3_quest_spawn_c: [ 20 19 131 ]			
+	entity_spawn thalvaron_ranger_orwla: [ 120 19 131 ]			
+	entity_spawn thalvaron_farmer_rabbit: [ 116 39 62 ]
+	entity_spawn thalvaron_farmer_rabbit_1_quest_item: [ 166 39 62 ]
+	entity_spawn thalvaron_farmer_rabbit_1_quest_item_2: [ 215 39 62 ]
+	entity_spawn thalvaron_rebel_leader_farmer_rabbit: [ 49 39 13 ]
+	entity_spawn thalvaron_rebel_elite_guard: [ 49 39 131 ]
+	entity_spawn thalvaron_ranger_orwla_2_quest_item: [ 94 88 183 ]
+	entity_spawn thalvaron_rebel_leader_camp: [ 194 188 183 ]	
+	entity_spawn thalvaron_rebel_dead: [ 194 188 123 ]	
+	entity_spawn thalvaron_tyler: [ 194 188 223 ]		
+	entity_spawn thalvaron_the_beast: [ 123 21 46 ]
+	entity_spawn thalvaron_elemental: [ 123 21 89 ]	
+	entity_spawn thalvaron_thora_2_quest_item: [ 218 48 63 ]
+	entity_spawn thalvaron_thora: [ 97 138 223 ]		
+	entity_spawn thalvaron_thora_2_return_portal: [ 197 138 223 ]		
+	entity_spawn thalvaron_arcane_worm: [ 197 138 201 ]		
+	entity_spawn thalvaron_arcane_monster: [ 97 138 201 ]			
+	entity_spawn thalvaron_wizard: [ 97 138 1 ]				
+	entity_spawn thalvaron_wizard_door: [ 97 138 101 ]		
+	entity_spawn thalvaron_royal_chef: [ 191 158 151 ]		
+	entity_spawn thalvaron_royal_chef_assistant: [ 131 118 151 ]		
+	entity_spawn thalvaron_clara_hawthorne: [ 78 94 128 ]
+	entity_spawn thalvaron_alchemy_trainer: [ 159 99 84 ]
+	entity_spawn thalvaron_dwarf_liaison_officer: [ 11 58 148 ]
+	entity_spawn thalvaron_emma_brown: [ 1 59 75 ]
+	entity_spawn thalvaron_emma_brown_1_quest_item_2: [ 94 159 51 ]
+	entity_spawn thalvaron_enchanting_trainer: [ 39 115 133 ]
+	entity_spawn thalvaron_valoris_quartermaster: [ 103 84 126 ]
+	entity_spawn thalvaron_blacksmithing_trainer: [ 203 84 58 ]
+	entity_spawn thalvaron_firstaid_trainer: [ 103 81 58 ]
+	entity_spawn thalvaron_herbalism_trainer: [ 103 81 158 ]
+	entity_spawn thalvaron_lara_ottingson: [ 49 83 150 ]
+	entity_spawn thalvaron_brown_horse: [ 149 83 150 ]
+	entity_spawn thalvaron_dark_brown_horse: [ 149 83 250 ]
+	entity_spawn the_shrouded_lands_light: [ 108 101 106 ]
+	entity_spawn the_shrouded_lands_underworld: [ 208 141 106 ]
+	entity_spawn thalvaron_sylvia_swift: [ 39 102 120 ]
+	entity_spawn thalvaron_craig_borne: [ 39 102 220 ]
+	entity_spawn thalvaron_assassin_bar_keeper: [ 139 102 220 ]	
+	entity_spawn thalvaron_city_guard_unarmed: [ 124 40 47 ]
+	entity_spawn thalvaron_city_guard_boss: [ 224 40 47 ]
+	entity_spawn thalvaron_auctioneer: [ 30 100 206 ]
+	entity_spawn thalvaron_lance_rottler: [ 120 24 208 ]
+	entity_spawn thalvaron_lucinda_frostvale: [ 220 24 208 ]
+	entity_spawn thalvaron_father_tobias: [ 20 24 208 ]
+	entity_spawn the_shrouded_lands_light_closed: [ 108 101 206 ]
+	entity_spawn the_shrouded_lands_underworld_closed: [ 208 141 206 ]
+	entity_spawn thalvaron_queen: [ 102 104 106 ]
+	entity_spawn thalvaron_consort: [ 102 104 206 ]
+	entity_spawn thalvaron_royal_guard_big: [ 204 94 122 ]
+	entity_spawn thalvaron_royal_guard: [ 204 94 222 ]
+	entity_spawn thalvaron_fisherman_city: [ 30 104 99 ]
+	entity_spawn thalvaron_lisa_storkhouse: [ 130 204 99 ]
+	entity_spawn thalvaron_igor_skrald: [ 230 204 99 ]
+	entity_spawn thalvaron_harbor_vendor: [ 126 39 81 ]
+	entity_spawn thalvaron_kristina_newman: [ 234 99 48 ]
+	entity_spawn thalvaron_anne_joghun: [ 234 99 148 ]
+	entity_spawn thalvaron_blunt_ronson: [ 30 183 88 ]
+	entity_spawn thalvaron_valoris_quartermaster_2: [ 115 81 126 ]
+	entity_spawn thalvaron_random_vendor: [ 39 49 127 ]
+	entity_spawn thalvaron_random_vendor_2: [ 39 149 125 ]
+	entity_spawn thalvaron_blimcraft_highborne_3_portal: [ 68 81 77 ]
+	entity_spawn thalvaron_blimcraft_highborne_3_portal_return: [ 168 81 77 ]
+	entity_spawn thalvaron_blimcraft_assistant: [ 240 104 99 ]
+	entity_spawn thalvaron_gateway_2: [ 40 108 88 ]
+	entity_spawn thalvaron_tailoring_trainer: [ 30 130 33 ]
+	entity_spawn thalvaron_jim_farseer: [ 40 82 176 ]
+	
+	# N
+	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				
+	entity_spawn thalvaron_johnson: [ 97 134 101 ]				
+	entity_spawn thalvaron_tyron_frostmane: [ 92 133 11 ]				
+	entity_spawn thalvaron_north_kobold: [ 192 133 11 ]		
+	entity_spawn thalvaron_north_rebel: [ 49 13 141 ]			
+	entity_spawn thalvaron_north_yeti: [ 49 13 241 ]			
+	entity_spawn thalvaron_ronja_frostmane: [ 49 213 241 ]				
+	entity_spawn thalvaron_north_yeti_cave: [ 97 122 222 ]
+	entity_spawn thalvaron_north_yeti_boss: [ 97 255 255 ]
+	entity_spawn thalvaron_nook_morrow: [ 138 183 49 ]
+	entity_spawn thalvaron_nook_morrow_1_object: [ 214 29 84 ]
+	entity_spawn thalvaron_wandering_owlbear: [ 217 29 190 ]
+	entity_spawn thalvaron_iceveil_wolf: [ 217 129 190 ]	
+	entity_spawn thalvaron_doctor_hulius_camp: [ 218 121 190 ]	
+	entity_spawn thalvaron_doctor_hulius: [ 218 221 190 ]	
+	entity_spawn thalvaron_frost_troll: [ 218 221 201 ]	
+	entity_spawn thalvaron_rock_elemental: [ 23 29 119 ] 
+	entity_spawn thalvaron_royal_chef_assistant_1_quest_item_a: [ 100 200 39 ]
+	entity_spawn thalvaron_royal_chef_assistant_1_quest_item_b: [ 150 200 39 ]
+	entity_spawn thalvaron_royal_chef_assistant_1_quest_item_c: [ 200 200 39 ]
+	entity_spawn thalvaron_royal_chef_assistant_1_quest_item_d: [ 250 200 39 ]
+	entity_spawn thalvaron_royal_chef_assistant_1_quest_spawn_a: [ 100 100 39 ]
+	entity_spawn thalvaron_royal_chef_assistant_1_quest_spawn_b: [ 150 150 39 ]
+	entity_spawn thalvaron_royal_chef_assistant_1_quest_spawn_c: [ 200 233 39 ]
+	entity_spawn thalvaron_royal_chef_assistant_1_quest_spawn_d: [ 250 250 39 ]
+	entity_spawn thalvaron_owlbear: [ 57 94 58 ]
+	entity_spawn thalvaron_deer_north: [ 156 49 82 ]
+	entity_spawn thalvaron_fennian_starleaf: [ 34 86 99 ]
+	entity_spawn thalvaron_sheriff_cunningham: [ 43 88 91 ]
+	entity_spawn thalvaron_gash_hewitt: [ 39 33 87 ]
+	entity_spawn thalvaron_joanna_hewitt: [ 139 33 87 ]
+	entity_spawn thalvaron_wood_elemental: [ 239 33 87 ]
+	entity_spawn thalvaron_duskwhisper_kobold: [ 156 83 71 ]
+	entity_spawn thalvaron_tentacle_monster: [ 33 85 185 ]
+	entity_spawn thalvaron_duskwhisper_smuggler: [ 44 59 22 ]
+	entity_spawn thalvaron_sheriff_cunningham_2_quest_item: [ 244 58 34 ]
+	entity_spawn thalvaron_sheriff_cunningham_3_quest_item: [ 244 58 134 ]
+	entity_spawn thalvaron_duskwhisper_owlbear: [ 146 88 38 ]
+	entity_spawn thalvaron_fennian_starleaf_1_quest_item: [ 67 93 115 ]
+	entity_spawn thalvaron_jonas_white_1_quest_item: [ 34 118 184 ]
+	entity_spawn thalvaron_jonas_white: [ 134 118 184 ]
+	entity_spawn thalvaron_duskwhisper_crab: [ 77 78 175 ]
+	entity_spawn thalvaron_fennian_starleaf_3_quest_item: [ 67 93 111 ]
+	entity_spawn thalvaron_pearly_a: [ 49 246 222 ]
+	entity_spawn thalvaron_deputy_simmons: [ 49 246 242 ]
+	entity_spawn thalvaron_sheila_urkins: [ 149 246 222 ]
+	entity_spawn thalvaron_gyo_starleaf: [ 149 249 136 ]
+	entity_spawn thalvaron_gyo_starleaf_1_quest_item: [ 149 249 226 ]
+	entity_spawn thalvaron_north_dark_elf: [ 249 246 136 ]
+	entity_spawn thalvaron_silk_spider: [ 34 156 85 ]
+	entity_spawn thalvaron_silk_spider_large: [ 34 156 185 ]
+	entity_spawn thalvaron_sheila_urkins_1_quest_item: [ 149 44 89 ]
+	entity_spawn thalvaron_sheila_urkins_2_quest_item: [ 149 144 89 ]
+	entity_spawn thalvaron_hoi_ghourian: [ 134 126 185 ]
+	entity_spawn thalvaron_wood_elemental_2: [ 66 88 11 ]
+	entity_spawn thalvaron_hoi_ghourian_2_quest_item: [ 55 68 111 ]
+	entity_spawn thalvaron_cave_lizard: [ 77 68 222 ]
+	entity_spawn thalvaron_cave_lizard_2: [ 177 68 222 ]
+	entity_spawn thalvaron_korgast: [ 66 99 183 ]
+	entity_spawn thalvaron_durk: [ 66 99 203 ]
+	entity_spawn thalvaron_wood_elemental_3: [ 166 99 203 ]
+	entity_spawn thalvaron_ghyuik: [ 45 89 111 ]
+	entity_spawn thalvaron_john_thompoure: [ 39 23 99 ]
+	entity_spawn thalvaron_sheriff_ravenreach: [ 139 123 199 ]
+	entity_spawn thalvaron_night_hound: [ 87 38 177 ]
+	entity_spawn thalvaron_mountain_troll: [ 187 138 177 ]
+	entity_spawn thalvaron_deputy_ravenreach: [ 139 123 154 ]
+	entity_spawn thalvaron_adriana_black: [ 110 123 54 ]
+	entity_spawn thalvaron_damon_arkwright: [ 110 123 84 ]
+	entity_spawn thalvaron_erhart_hulius: [ 110 123 130 ]
+	entity_spawn thalvaron_jimbo_tokins: [ 110 123 160 ]
+	entity_spawn thalvaron_laura_tokins: [ 110 23 210 ]
+	entity_spawn thalvaron_ranger_thorksen: [ 33 85 155 ]
+	entity_spawn thalvaron_shadowthorn_wolf: [ 133 185 255 ]	
+	entity_spawn thalvaron_laura_tokins_1_quest_item: [ 77 188 92 ]
+	entity_spawn thalvaron_laura_tokins_1b_quest_item: [ 177 188 192 ]
+	entity_spawn thalvaron_shadowthorn_ghoul: [ 44 99 111 ]
+	entity_spawn thalvaron_blood_slave: [ 139 222 222 ]
+	entity_spawn thalvaron_vampire: [ 139 22 222 ]
+	entity_spawn thalvaron_vampire_boss: [ 139 222 22 ]
+	entity_spawn thalvaron_shadowthorn_ghoul_boss: [ 239 222 25 ]
+	entity_spawn thalvaron_vampire_boss_minion_1: [ 39 14 92 ]
+	entity_spawn thalvaron_vampire_boss_minion_2: [ 39 94 92 ]
+	entity_spawn thalvaron_laura_tokins_2_quest_item: [ 255 93 88 ]
+	entity_spawn thalvaron_lia_frostmane: [ 93 255 85 ]
+	entity_spawn thalvaron_foramil: [ 193 255 85 ]	
+	entity_spawn thalvaron_bewildered_wood_elemental: [ 31 78 194 ]
+	entity_spawn thalvaron_jor_starleaf: [ 131 178 84 ]
+	entity_spawn thalvaron_pearly_b: [ 49 157 175 ]
+	entity_spawn thalvaron_brimiar: [ 39 48 248 ]
+	entity_spawn thalvaron_shadowthorn_rotting_corpse: [ 244 88 166 ]
+	entity_spawn thalvaron_warden_moonwatcher: [ 55 255 138 ]
+	entity_spawn thalvaron_pearly_b_1_quest_item: [ 155 55 125 ]
+	entity_spawn thalvaron_gorge_kobold: [ 77 166 123 ]
+	entity_spawn thalvaron_brimiar_1_quest_item: [ 177 166 123 ]	
+	entity_spawn thalvaron_gorge_lizard: [ 177 166 255 ]
+	entity_spawn thalvaron_thalorion: [ 77 255 14]
+	entity_spawn thalvaron_aelithra: [ 177 255 59 ]
+	entity_spawn thalvaron_gorge_harpy: [ 177 255 159 ]
+	entity_spawn thalvaron_wandering_ghoul_husband: [ 177 155 159 ]
+	entity_spawn thalvaron_wandering_ghoul_wife: [ 171 155 59 ]	
+	entity_spawn thalvaron_plague_bear: [ 255 94 88 ]
+	entity_spawn thalvaron_plague_bear_boss: [ 255 94 188 ]
+	entity_spawn thalvaron_urgon_starleaf: [ 78 93 110 ]
+	entity_spawn thalvaron_faerandor_ooze: [ 174 29 144 ]
+	entity_spawn thalvaron_ooze_boss: [ 174 129 244 ]
+	entity_spawn thalvaron_infected_wildlife: [ 155 95 177 ]
+	entity_spawn thalvaron_trouli_copperquill: [ 255 139 28 ]
+	entity_spawn thalvaron_faerandor_dark_elf: [ 67 39 115 ]
+	entity_spawn thalvaron_faerandor_ghoul: [ 123 123 49 ]
+	entity_spawn thalvaron_pearly_c: [ 213 94 88 ]
+	entity_spawn thalvaron_warden_nekelian: [ 39 49 125 ]
+	entity_spawn thalvaron_warden_tylior: [ 139 149 25 ]
+	entity_spawn thalvaron_blimcraft_highborne_1_quest_item: [ 239 249 1 ]
+	entity_spawn thalvaron_blimcraft_highborne: [ 39 149 111 ]
+	entity_spawn thalvaron_evil_orb: [ 149 99 112 ]
+	entity_spawn thalvaron_spirit_of_joonor: [ 24 200 140 ]
+	entity_spawn thalvaron_halfeye_lanior: [ 124 100 240 ]
+	entity_spawn thalvaron_hollows_skeleton: [ 140 40 203 ]
+	entity_spawn thalvaron_hollows_skeleton_boss_a: [ 240 40 203 ]	
+	entity_spawn thalvaron_hollows_skeleton_boss_b: [ 140 240 203 ]	
+	entity_spawn thalvaron_hollows_skeleton_boss_c: [ 141 20 103 ]	
+	entity_spawn thalvaron_pearly_c_1_quest_item: [ 241 49 99 ]
+	entity_spawn thalvaron_pearly_c_1_quest_item_2: [ 141 149 199 ]
+	entity_spawn thalvaron_pearly_c_1_quest_spawn_a: [ 66 124 156 ]
+	entity_spawn thalvaron_pearly_c_1_quest_spawn_b: [ 166 124 156 ]
+	entity_spawn thalvaron_pearly_c_1_quest_spawn_c: [ 66 224 156 ]
+	entity_spawn thalvaron_spirit_of_joonor_b: [ 166 224 255 ]	
+	entity_spawn thalvaron_dark_strand_crab: [ 44 129 88 ]
+	entity_spawn thalvaron_hollows_dark_elf_a: [ 161 23 99 ]
+	entity_spawn thalvaron_hollows_dark_elf_b: [ 111 123 99 ]
+	entity_spawn thalvaron_hollows_dark_elf_c: [ 161 23 199 ]
+	entity_spawn thalvaron_gorge_orc: [ 67 88 184 ]
+	entity_spawn thalvaron_poison_lizard: [ 156 94 114 ]
+	entity_spawn thalvaron_warden_ghourian: [ 255 92 1 ]
+	entity_spawn thalvaron_elf_collector: [ 49 194 46 ]
+	entity_spawn thalvaron_elf_quartermaster: [ 155 22 148 ]
+	entity_spawn thalvaron_bob_gordon: [ 166 23 50 ]
+	entity_spawn thalvaron_elf_quartermaster_2: [ 155 212 148 ]
+	entity_spawn thalvaron_thour: [ 155 14 148 ]
+	entity_spawn thalvaron_baskin_johnson: [ 155 166 148 ]
+	entity_spawn thalvaron_gerhard_frostmane: [ 155 23 148 ]
+	entity_spawn thalvaron_keanu_horton: [ 155 14 234 ]
+	entity_spawn thalvaron_throgar: [ 30 107 93 ]
+	entity_spawn thalvaron_pinto_starleaf: [ 34 94 245 ]
+	entity_spawn thalvaron_gray_horse: [ 134 94 245 ]
+
+	# SW
+	entity_spawn thalvaron_brian_riddle: [ 66 88 99 ]
+	entity_spawn thalvaron_francis: [ 166 88 99 ]
+	entity_spawn thalvaron_gob_fulbro: [ 66 188 99 ]
+	entity_spawn thalvaron_kirk_gibson: [ 66 88 199 ]
+	entity_spawn thalvaron_melinda_riddle: [ 255 88 99 ]
+	entity_spawn thalvaron_mirehaven_mayor: [ 166 188 99 ]
+	entity_spawn thalvaron_mirehaven_sheriff: [ 4 77 199 ]
+	entity_spawn thalvaron_mirehaven_bar_keeper: [ 5 77 199 ]
+	entity_spawn thalvaron_mud_slinger: [ 77 11 88 ]
+	entity_spawn thalvaron_mud_slinger_2: [ 77 11 188 ]
+	entity_spawn thalvaron_north_marshlands_kobold: [ 99 22 148 ]
+	entity_spawn thalvaron_north_marshlands_kobold_boss: [ 99 122 148 ]
+	entity_spawn thalvaron_mirehaven_dwarf: [ 122 88 48 ]
+	entity_spawn thalvaron_swampman: [ 222 28 48 ]
+	entity_spawn thalvaron_crocodile: [ 34 49 112 ]
+	entity_spawn thalvaron_swamp_monster: [ 134 149 12 ]
+	entity_spawn thalvaron_neutral_crab: [ 39 188 55 ]
+	entity_spawn thalvaron_buck_1_quest_item: [ 139 188 66 ]
+	entity_spawn thalvaron_buck: [ 39 188 166 ]
+	entity_spawn thalvaron_buck_2_quest_item: [ 239 188 166 ]	
+	entity_spawn thalvaron_mongo: [ 54 255 58 ]
+	entity_spawn thalvaron_yvonne_tyson: [ 54 245 58 ]
+	entity_spawn thalvaron_frederik_tyson: [ 154 55 158 ]
+	entity_spawn thalvaron_mirehaven_mayor_2_quest_item: [ 38 169 88 ]
+	entity_spawn thalvaron_ria_tyson: [ 154 15 158 ]
+	entity_spawn thalvaron_crocodile_salt: [ 154 155 158 ]	
+	entity_spawn thalvaron_marsh_bandit: [ 199 38 67 ]
+	entity_spawn thalvaron_lizard_ambusher_1: [ 193 38 67 ]
+	entity_spawn thalvaron_lizard_ambusher_2: [ 199 138 67 ]
+	entity_spawn thalvaron_lizard_ambusher_3: [ 199 39 167 ]
+	entity_spawn thalvaron_francis_1_quest_item: [ 29 134 222 ]
+	entity_spawn thalvaron_buck_3_quest_item: [ 123 44 145 ]
+	entity_spawn thalvaron_swamp_ooze: [ 12 45 133 ]
+	entity_spawn thalvaron_mirehaven_mayor_2_quest_item_2: [ 88 77 144 ]
+	entity_spawn thalvaron_rock_crumbler: [ 111 88 222 ]
+	entity_spawn thalvaron_rock_crumbler_boss: [ 211 88 222 ]
+	entity_spawn thalvaron_hort_ironmantle: [ 77 123 148 ]
+	entity_spawn thalvaron_rurik_ironmantle: [ 21 255 94 ]
+	entity_spawn thalvaron_grumli_stouthammer: [ 121 255 194 ]
+	entity_spawn thalvaron_marsh_bandit_2: [ 227 255 194 ]	
+	entity_spawn thalvaron_marsh_bandit_leader: [ 227 0 194 ]		
+	entity_spawn thalvaron_border_guard: [ 66 1 184 ]
+	entity_spawn thalvaron_lieutenant_gordon: [ 166 48 14 ]
+	entity_spawn thalvaron_south_marshlands_kobold: [ 88 93 123 ]
+	entity_spawn thalvaron_south_marshlands_kobold_special: [ 88 193 123 ]
+	entity_spawn thalvaron_swamp_giant: [ 211 38 89 ]
+	entity_spawn thalvaron_dwarf_guard_1: [ 33 44 104 ]
+	entity_spawn thalvaron_dwarf_guard_2: [ 33 44 204 ]
+	entity_spawn thalvaron_dwarf_miner: [ 34 88 184 ]
+	entity_spawn thalvaron_dwarf_blacksmith: [ 34 188 84 ]
+	entity_spawn thalvaron_ulrik_copperquill: [ 77 88 22 ]
+	entity_spawn thalvaron_eldriv_copperquill: [ 177 88 122 ]
+	entity_spawn thalvaron_borg_ironmantle: [ 153 28 249 ]
+	entity_spawn thalvaron_dust_lizard: [ 84 88 129 ]
+	entity_spawn thalvaron_dread_scorpion: [ 184 88 150 ]
+	entity_spawn thalvaron_mountain_lion: [ 77 22 111 ]
+	entity_spawn thalvaron_badlands_orc: [ 99 123 44 ]
+	entity_spawn thalvaron_warmaster_jounheim: [ 139 79 222 ]
+	entity_spawn thalvaron_badlands_orc_2: [ 199 123 44 ]
+	entity_spawn thalvaron_badlands_orc_gorvak: [ 99 123 144 ]
+	entity_spawn thalvaron_dread_stinger: [ 74 91 58 ]
+	entity_spawn thalvaron_rumin_whiterock: [ 114 85 77 ]
+	entity_spawn thalvaron_mountain_lion_boss: [ 114 185 88 ]
+	entity_spawn thalvaron_badlands_harpy_1: [ 114 185 188 ]
+	entity_spawn thalvaron_badlands_harpy_2: [ 214 185 188 ]
+	entity_spawn thalvaron_rumin_whiterock_3_quest_item: [ 14 185 188 ]
+	entity_spawn thalvaron_badlands_spider: [ 84 99 193 ]
+	entity_spawn thalvaron_badlands_spider_boss: [ 94 11 156 ]
+	entity_spawn thalvaron_bramli_stonestride: [ 39 176 216 ]
+	entity_spawn thalvaron_borli_stouthammer: [ 159 93 34 ]
+	entity_spawn thalvaron_badlands_rock_elemental: [ 2 48 158 ]
+	entity_spawn thalvaron_mumle_whiterock: [ 49 148 255 ]
+	entity_spawn thalvaron_badlands_mud_elemental: [ 222 48 158 ]
+	entity_spawn thalvaron_dirt_slitherer: [ 65 44 119 ]
+	entity_spawn thalvaron_dwarf_quartermaster: [ 155 22 248 ]
+	entity_spawn thalvaron_dwarf_quartermaster_2: [ 115 242 248 ]
+	entity_spawn thalvaron_julian_moore: [ 101 81 82 ]
+	entity_spawn thalvaron_bromrik_coppervein: [ 161 81 82 ]
+	entity_spawn thalvaron_krask: [ 161 181 24 ]
+}
+
+map_palette .levels:
+{
+	level<1>: [ 64 196 128 ]
+	level<10>: [ 0 255 0 ]
+	level<11>: [ 255 0 0 ]
+	level<12>: [ 0 0 255 ]
+	level<13>: [ 0 255 255 ]
+	level<14>: [ 127 127 0 ]
+	level<15>: [ 0 127 127 ]
+	level<16>: [ 127 0 127 ]
+	level<17>: [ 127 0 255 ]
+	level<18>: [ 255 0 255 ]
+	level<19>: [ 255 255 0 ]
+	level<20>: [ 255 127 0 ]
+}
+
+map_palette .zones:
+{
+	zone .valoris: [ 0 255 255 ]
+	zone .valoris_south: [ 53 53 112 ]
+	zone .valoris_south_mountains: [ 177 12 195 ]
+	zone .valoris_south_sea: [ 107 53 112 ]
+	zone .north_wetlands: [ 222 172 112 ]
+	zone .middle_wetlands: [ 119 222 112 ]
+	zone .south_wetlands: [ 112 222 208 ]
+	zone .wetlands_town: [ 204 222 112 ]
+	zone .south_badlands: [ 255 165 0 ]
+	zone .north_badlands: [ 82 255 0 ]
+	zone .center_pass: [ 222 112 187 ]
+	zone .valoris_east: [ 112 130 222 ]
+	zone .valoris_north_woods: [ 172 112 222 ]
+	zone .north_pass: [ 239 0 255 ]
+	zone .mountains: [ 99 0 255 ]
+	zone .myst_woodlands_town: [ 156 255 0 ]
+	zone .myst_woodlands: [ 255 82 0 ]
+	zone .haunted_woods_main: [ 255 0 165 ]
+	zone .haunted_woods_west: [ 66 0 255 ]
+	zone .haunted_woods_town: [ 230 255 0 ]
+	zone .haunted_woods_clearing: [ 165 0 255 ]
+	zone .haunted_woods_east: [ 255 16 0 ]
+	zone .jungle: [ 0 25 255 ]
+	zone .lich_woods: [ 222 255 0 ]
+	zone .way_north_pass: [ 0 140 255 ]
+	zone .duskwhisper_caves: [ 133 141 55 ]
+	zone .old_mans_cave: [ 130 112 222 ]
+	zone .eastern_faerandor: [ 0 41 255 ]
+	zone .myst_woodlands_coast: [ 255 0 230 ]
+	zone .lake_dourgol: [ 156 0 255 ]
+	zone .faerandor_gorge: [ 255 222 0 ]
+	zone .dark_strand: [ 0 255 33 ]
+	zone .tirnwood: [ 200 107 210 ]
+	zone .echosrest: [ 171 18 171 ]
+}
+
+map_palette .sub_zones:
+{
+	sub_zone .valoris_docks: [ 191 20 180 ]
+	sub_zone .valoris_trade_district: [ 20 192 180 ]
+	sub_zone .valoris_royal_gardens: [ 192 20 180 ]
+	sub_zone .valoris_royal_castle: [ 180 192 20 ]
+	sub_zone .valoris_the_garrison: [ 80 92 220 ]
+	sub_zone .valoris_southgate: [ 100 192 27 ]
+	sub_zone .valoris_royal_district: [ 192 255 44 ]
+	sub_zone .valoris_eastgate: [ 30 255 140 ]
+	sub_zone .valoris_south_town: [ 174 174 49 ]
+	sub_zone .realm_of_the_wizard: [ 144 27 192 ]
+	sub_zone .mongos_swamp: [ 49 174 65 ] 
+	sub_zone .dwarf_city: [ 250 101 255 ]
+	sub_zone .lake_ylynor: [ 101 180 255 ]
+	sub_zone .lake_joonor: [ 225 101 255 ]
+	sub_zone .highborne_tower: [ 101 136 255 ]
+	sub_zone .lich_tower: [ 159 5 119 ]
+	sub_zone .temple_of_the_undying: [ 159 124 5 ]
+	sub_zone .holy_temple: [ 174 26 217 ]
+	sub_zone .underworld_society: [ 26 217 155 ]
+	sub_zone .highborne_realm: [ 150 85 177 ]
+	
+	sub_zone thalvaron_crab_giant: [ 39 192 83 ]
+	sub_zone thalvaron_vampire_boss: [ 139 93 48 ]
+}
+
+map_palette .routes:
+{
+	route thalvaron_default_patrol: [ 192 16 186 ]	
+	route thalvaron_cubert_galston_escort: [ 198 132 221 ]
+	route thalvaron_doctor_hulius_escort: [ 39 48 168 ]
+	route thalvaron_mongo_patrol: [ 39 148 168 ]
+	route thalvaron_borli_stouthammer_escort: [ 132 143 221 ]
+}
+
+map_palette .doodads:
+{
+	doodad crates: [ 45 39 100 ]
+	doodad sack: [ 35 100 200 ]
+	doodad table: [ 35 130 200 ]
+	doodad chair_left: [ 45 100 200 ]
+	doodad bed: [ 35 130 240 ]
+	doodad bookshelf: [ 35 140 100 ]
+	doodad alchemy_bookshelf: [ 135 100 200 ]
+	doodad empty_bookshelf: [ 135 200 200 ]
+	doodad chair_right: [ 45 200 100 ]	
+	doodad chair_bottom: [ 56 201 195 ]
+	doodad bench: [ 58 221 113 ]
+	doodad altar: [ 54 29 64 ]
+	doodad wall_banner_red: [ 243 29 53 ]
+	doodad broken_pillar: [ 136 130 200 ]
+	doodad wall_banner_mining: [ 243 19 53 ]
+	doodad wall_banner_blacksmithing: [ 243 59 53 ]
+	doodad tent: [ 249 51 53 ]	
+	doodad wall_banner_dark_green: [ 143 59 13 ]
+	doodad dungeon_open_door: [ 193 13 59 ]	
+	doodad statue_face_left: [ 193 63 59 ]	
+	doodad statue_face_right: [ 193 73 19 ]	
+	doodad ship: [ 193 173 119 ]	
+	doodad stone_stairs: [ 192 173 19 ]	
+	doodad wood_stairs: [ 192 19 173 ]	
+	doodad large_statue: [ 193 73 20 ]	
+	doodad counter: [ 197 73 20 ]	
+	doodad stone_stairs_reversed: [ 19 173 192 ]	
+	doodad wood_stairs_reversed: [ 173 19 192 ]	
+	doodad animal_skull: [ 197 173 210 ]	
+	doodad barrel: [ 111 38 84 ]
+	doodad cage: [ 45 41 145 ]
+	doodad rowboat: [ 145 46 145 ]
+	doodad cobweb: [ 84 111 83 ]
+	doodad dead_tree: [ 33 123 81 ]
+	doodad tombstone: [ 99 99 119 ]
+	doodad statue_angel: [ 199 199 119 ]
+	doodad skull_stick: [ 39 81 167 ]
+	doodad hole: [ 104 49 146 ]
+	doodad weapon_rack: [ 31 49 49 ]
+	doodad white_throne: [ 13 30 100 ]
+	doodad hard_slope_w: [ 40 103 18 ]
+	doodad hard_slope_n: [ 140 103 18 ]
+	doodad hard_slope_s: [ 40 203 18 ]
+	doodad hard_slope_e: [ 40 103 118 ]
+	
+	doodad wall_sign_generic<"Mathew's Emporium">: [ 197 173 111 ]	
+	doodad wall_sign_generic<"John & Mary's">: [ 97 173 111 ]	
+	doodad wall_sign_generic<"Royal Garden Tavern">: [ 97 73 111 ]	
+	doodad sign_generic<"Mongo's Swamp: Stay Out!">: [ 77 173 111 ]	
+	doodad sign_generic<"Danger!">: [ 177 173 111 ]	
+	doodad sign_generic<"Riddle Mining Co.">: [ 177 173 211 ]	
+	doodad wall_sign_generic<"The Pick and Pint">: [ 97 123 131 ]	
+	doodad sign_generic<"Brimiar">: [ 177 171 221 ]	
+	doodad sign_generic<"Please wipe your feet">: [ 177 171 121 ]	
+	doodad wall_sign_generic<"Enchanted">: [ 197 123 131 ]	
+	doodad wall_sign_generic<"Alchemy 'R Us">: [ 197 223 131 ]	
+	doodad wall_sign_generic<"Healing Herbs">: [ 117 126 11 ]	
+	doodad wall_sign_generic<"The Black Veil Tavern">: [ 111 121 11 ]	
+	doodad wall_sign_generic<"Auction House">: [ 101 21 11 ]	
+	doodad wall_sign_generic<"Harbor Manager">: [ 123 21 11 ]	
+	doodad wall_sign_generic<"Skrald & Co.">: [ 223 21 11 ]	
+	doodad wall_sign_generic<"Rare Imports">: [ 231 121 11 ]	
+	doodad wall_sign_generic<"The Valorisian">: [ 231 21 152 ]	
+}
+
+map_palette .cliffs:
+{
+	cliff .rocky_cliff: [ 197 169 34 ]
+	cliff .rocky_cliff_ramp: [ 36 152 174 ]
+
+	cliff .badlands_cliff: [ 97 169 34 ]
+	cliff .badlands_cliff_ramp: [ 136 152 74 ]
+
+	cliff .wall_cliff: [ 197 169 134 ]
+	cliff .wall_cliff_ramp: [ 136 152 174 ]
+
+	cliff .dummy_cliff_0: [ 137 18 124 ]
+	cliff .dummy_cliff_0_ramp: [ 116 56 134 ]	
+
+	cliff .dummy_cliff_1: [ 197 16 134 ]
+	cliff .dummy_cliff_1_ramp: [ 136 52 174 ]	
+
+	cliff .dummy_cliff_2: [ 197 169 234 ]
+	cliff .dummy_cliff_2_ramp: [ 136 252 174 ]	
+}
+
+map thalvaron:
+{
+	string: "Thalvaron"
+	type: open_world
+	default_tile: water
+	default_player_spawn: .player_spawn
+	default_fishing_loot_table: fish
+	view_attenuation: 0
+	view_attenuation_bias: 0
+	view_hidden_visibility: 35	
+	has_overview_map: true
+	auto_doodads: true
+	max_players: 80
+
+	layers:
+	[
+		{
+			palettes:	[ .tiles ]
+			source:		"thalvaron-tiles.png"
+		}
+
+		{
+			palettes:	[ .stuff ]
+			source:		"thalvaron-stuff.png"
+		}
+		
+		{
+			palettes:	[ .stuff ]
+			source:		"thalvaron-stuff-2.png"
+		}		
+		
+		{
+			palettes:	[ .levels ]
+			source:		"thalvaron-levels.png"
+		}		
+		
+		{
+			palettes:	[ .zones ]
+			source:		"thalvaron-zones.png"
+		}				
+		
+		{ 
+			palettes: 	[ .tiles ]
+			source:		"thalvaron-cover.png"
+			cover: 		true
+		}
+		
+		{
+			palettes:	[ .sub_zones ]
+			source:		"thalvaron-subzones.png"
+		}						
+		
+		{
+			palettes:	[ .routes ]
+			source:		"thalvaron-routes.png"
+		}								
+		
+		{
+			palettes:	[ .doodads ]
+			source:		"thalvaron-doodads.png"
+		}								
+
+		{
+			palettes:	[ .cliffs ]
+			source:		"thalvaron-cliffs.png"
+		}								
+		
+	]
+}
+ 

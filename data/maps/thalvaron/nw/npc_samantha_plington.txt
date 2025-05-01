@@ -1,0 +1,124 @@
+dialogue_screen .samantha_plington_dialogue:
+{
+	text: 
+	[	
+		"Uh, what are you doing in my home?"
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .wounded_city_guard_1 }
+		{ quest<offer_only>: .samantha_plington_1 }
+	]
+}
+
+dialogue_root .samantha_plington_dialogue:
+{
+	.samantha_plington_dialogue: { }
+}
+
+entity thalvaron_samantha_plington: !NPC
+{
+	_string: "Samantha Plington"
+	_dialogue_root: .samantha_plington_dialogue	
+	_sprite: woman_1
+	_sprite_dead: woman_1_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .samantha_plington_1:
+{
+	string: "Tasty Healing Herbs"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .samantha_plington_1_quest_item count: 5 }
+}
+
+loot_group .samantha_plington_1_quest_item: {}
+
+item .samantha_plington_1_quest_item:
+{
+	icon: icon_flower_3
+	item_level: 10
+	loot_groups: [ .samantha_plington_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Tasty Healing Herbs"
+	stack: 5
+}
+
+loot_table .samantha_plington_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .samantha_plington_1_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_samantha_plington_1_quest_item:
+{
+	string: "Tasty Healing Herbs"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ wild_herbs_2 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .samantha_plington_1_quest_item
+			verb: pick
+			range: 1 
+			despawn: true 			
+			level: 10
+			required_quest: .samantha_plington_1
+		}		
+	}
+}
+
+{
+	${ _level: 10 }
+	item .samantha_plington_1_a: !QUEST_REWARD_WAIST{ _string: "Bloody Guard's Belt" _icon: icon_belt_1 _dexterity: 2 _constitution: 1 _type: armor_mail }
+	item .samantha_plington_1_b: !QUEST_REWARD_WAIST{ _string: "Flimsy Wristband" _icon: icon_cloth_belt_3 _dexterity: 2 _wisdom: 1 _type: armor_cloth }
+	item .samantha_plington_1_c: !QUEST_REWARD_CROSSBOW{ _string: "Guard's Crossbow" _icon: icon_crossbow_1 _dexterity: 1 _constitution: 1 }
+}
+
+quest .samantha_plington_1:
+{
+	string: "Herbs for the husband"
+
+	text:
+	[
+		"Find healing herbs for the wounded city guard. The herbs grow along the river."
+	]
+	
+	description: 
+	[
+		"Well, my husbands gets himself injured in the line of duty on a regular basis and he is always overly dramatic about it. While he's relaxing with his friends at work I'm working hard at home keeping everything together."
+		"Yes, sure, he has probably hurt himself, but I'm sure it's not too bad. Bring him some healing herbs and he'll stop whining. His favorite herbs are growing along the river to the south."
+	]
+
+	progress:
+	[
+		"I'm kinda busy."
+	]
+	
+	completion:
+	[
+		"Nice, I actually feel much better now. Did Samantha say what she's making for dinner tonight?"
+	]
+
+	level: 10
+	prerequisites: [ .wounded_city_guard_1 ]
+	objectives: [ .samantha_plington_1 ]
+	reward_one_item: [ .samantha_plington_1_a .samantha_plington_1_b .samantha_plington_1_c ]
+}

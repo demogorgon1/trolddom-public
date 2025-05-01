@@ -58,6 +58,7 @@ namespace tpublic
 		// Data access
 		ObjectiveType::Id				GetObjectiveTypeId() const { return m_objectiveTypeId; }
 		uint32_t						GetFlags() const { return m_flags; }
+		bool							IsBoolean() const { return m_flags & FLAG_BOOLEAN; }
 
 	private:
 

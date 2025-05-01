@@ -57,6 +57,8 @@ namespace tpublic
 							m_trigger = SourceToTrigger(aChild);
 						else if(aChild->m_name == "shared")
 							m_shared = aChild->GetBool();
+						else if(aChild->m_name == "talent_tree")
+							m_talentTreeId = aChild->GetId(DataType::ID_TALENT_TREE);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -71,6 +73,7 @@ namespace tpublic
 				aStream->WritePOD(m_trigger);
 				aStream->WriteInt(m_duration);
 				aStream->WriteBool(m_shared);
+				aStream->WriteUInt(m_talentTreeId);
 			}
 
 			bool
@@ -83,6 +86,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadBool(m_shared))
 					return false;
+				if(!aStream->ReadUInt(m_talentTreeId))
+					return false;
 				return true;
 			}
 
@@ -90,6 +95,7 @@ namespace tpublic
 			Trigger			m_trigger = TRIGGER_ABILITY;
 			int32_t			m_duration = 0;
 			bool			m_shared = false;
+			uint32_t		m_talentTreeId = 0;
 		};
 
 	}

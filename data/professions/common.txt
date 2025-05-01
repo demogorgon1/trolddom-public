@@ -1,5 +1,6 @@
 !define GATHER_ITEM
 {
+	<exists _tags> tags: @_tags
 	<exists _item_level> item_level: @_item_level
 	<!exists _item_level> item_level: 1
 	<exists _rarity> rarity: @_rarity

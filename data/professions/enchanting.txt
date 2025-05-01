@@ -1,0 +1,789 @@
+profession enchanting<primary>:
+{
+	string: "Enchanting"
+	icon: icon_enchanting
+}
+
+!define local ENCHANTING_REAGENT_ITEM
+{
+	string: @_string
+	item_level: @_level
+	icon: @_icon
+	loot_groups: [ @_loot_group ]
+	level_range: @_level_range
+	stack: 20
+	rarity: @_rarity
+}
+
+!define local ENCHANTING_CRAFT
+{
+	string: @_string
+	icon: icon_enchanted_paper
+	description: @_description
+	cast_time: 20
+	flags: [ crafting ]	
+	states: [ default in_combat ]
+	consume_items: @_materials
+	produce_items: @_produce
+	required_profession<@_skill>: enchanting
+}
+
+!define local ENCHANTING_APPLY
+{
+	string: @_string
+	description: @_description
+	icon: icon_enchanted_paper
+	cast_time: 20
+	flags: [ target_item item ]
+	states: [ default in_combat ]
+	target_item_requirements: @_target_item_requirements
+	target_item_verb: "enchant"
+	target_item_confirmation: "Any existing enchantment will be overwritten."
+	target_item_aura: @_id
+	consume_items: @_consume_items
+}
+
+!define local ENCHANTING_ITEM
+{
+	string: @_string_item
+	rarity: uncommon
+	item_level: @_level
+	icon: icon_enchanted_paper
+	stack: 20
+	use_ability: @_id
+}
+
+!define local ENCHANTING_FORMULA_ITEM
+{
+	type: miscellaneous
+	item_level: @_formula_item_level
+	rarity: uncommon	
+	<exists _loot_groups> loot_groups: @_loot_groups
+	icon: icon_scroll_1
+	string: @_formula_string
+	use_ability: @_learn_ability
+	level_range: @_level_range
+}
+
+!define local ENCHANTING_FORMULA_ABILITY
+{
+	string: @_formula_string	
+	description: @_formula_description
+	flags: [ target_self item ]
+	cast_time: 20
+	icon: icon_scroll_1
+	cooldowns: [ global ]	
+	consume_items: @_formula_consume_items
+	required_profession<@_formula_required_skill>: enchanting
+	requirement self<must_not_have_profession_ability>: { id: @_ability }
+	direct_effect learn_profession_ability:
+	{
+		profession: enchanting
+		ability: @_ability
+	}
+}
+
+#####################################################
+# Reagents
+
+item reagent_paper: 
+{
+	string: "Blank Paper"
+	flavor: "Can be used for making enchantments."
+	item_level: 1
+	icon: icon_empty_paper
+	stack: 20
+	cost: 350
+}
+
+loot_group .reagent_essence: { }
+loot_group .reagent_crystal: { }
+
+item reagent_mystery_essence: !ENCHANTING_REAGENT_ITEM{ _rarity: common _string: "Mystery Essence" _level: 1 _level_range: [ 1 7 ] _icon: icon_magic_dust_1 _loot_group: .reagent_essence }
+item reagent_mystery_crystal: !ENCHANTING_REAGENT_ITEM{ _rarity: uncommon _string: "Mystery Crystal" _level: 1 _level_range: [ 1 7 ] _icon: icon_magic_crystal_1 _loot_group: .reagent_crystal }
+
+item reagent_arcane_essence: !ENCHANTING_REAGENT_ITEM{ _rarity: common _string: "Arcane Essence" _level: 8 _level_range: [ 8 14 ] _icon: icon_magic_dust_2 _loot_group: .reagent_essence }
+item reagent_arcane_crystal: !ENCHANTING_REAGENT_ITEM{ _rarity: uncommon _string: "Arcane Crystal" _level: 8 _level_range: [ 8 14 ] _icon: icon_magic_crystal_2 _loot_group: .reagent_crystal }
+
+item reagent_dream_essence: !ENCHANTING_REAGENT_ITEM{ _rarity: common _string: "Dream Essence" _level: 15 _level_range: [ 15 21 ] _icon: icon_magic_dust_3 _loot_group: .reagent_essence }
+item reagent_dream_crystal: !ENCHANTING_REAGENT_ITEM{ _rarity: uncommon _string: "Dream Crystal" _level: 15 _level_range: [ 15 21 ] _icon: icon_magic_crystal_3 _loot_group: .reagent_crystal }
+
+#####################################################
+# Disenchant
+
+!define local DISENCHANT 
+{
+	slots:
+	[
+		# Always at least one of these
+		{ 
+			possibility: { weight: @_essence_weight loot_group: .reagent_essence } 
+			possibility: { weight: @_crystal_weight loot_group: .reagent_crystal }	
+		}			
+		
+		# Sometimes a second
+		{ 
+			possibility: { weight: 100 }
+						
+			<exists _essence_2_weight> possibility : { weight: @_essence_2_weight loot_group: .reagent_essence } 
+			<exists _crystal_2_weight> possibility : { weight: @_crystal_2_weight loot_group: .reagent_crystal } 
+		}					
+		
+		# Rarely a third
+		{ 
+			possibility: { weight: 100 }
+						
+			<exists _essence_3_weight> possibility : { weight: @_essence_3_weight loot_group: .reagent_essence } 
+			<exists _crystal_3_weight> possibility : { weight: @_crystal_3_weight loot_group: .reagent_crystal } 
+		}							
+	]	
+}
+
+loot_table .disenchant_uncommon_armor: !DISENCHANT{ _essence_weight: 10 _crystal_weight: 1 _essence_2_weight: 10 }
+loot_table .disenchant_uncommon_weapon: !DISENCHANT{ _essence_weight: 3 _crystal_weight: 1 _essence_2_weight: 10 }
+
+loot_table .disenchant_rare_armor: !DISENCHANT{ _essence_weight: 1 _crystal_weight: 1 _essence_2_weight: 50 }
+loot_table .disenchant_rare_weapon: !DISENCHANT{ _essence_weight: 1 _crystal_weight: 3 _essence_2_weight: 50 }
+
+loot_table .disenchant_epic_armor: !DISENCHANT{ _essence_weight: 0 _crystal_weight: 1 _crystal_2_weight: 50 }
+loot_table .disenchant_epic_weapon: !DISENCHANT{ _essence_weight: 0 _crystal_weight: 1 _crystal_2_weight: 50 }
+
+ability disenchant: 
+{
+	string: "Disenchant"
+	description: "Turns target armor or weapon into useful magical reagents. Item must be uncommon or better. This will destroy the item."
+	icon: icon_disenchant
+	cast_time: 15 
+	flags: [ target_item ]
+	states: [ default in_combat ]
+	required_profession<0>: enchanting
+	target_item_requirements: 
+	{
+		rarities: [ uncommon rare epic mythic ]
+		equipment_slots: [ main_hand off_hand ranged head chest legs feet shoulders wrists waist hands back neck finger_1 finger_2 trinket_1 trinket_2 ]
+		must_be_sellable: true
+	}
+	target_item_verb: "disenchant"
+	target_item_confirmation: "The item will be destroyed."
+	
+	target_item_prospect:
+	{
+		item_type_flags<[ armor trinket ]>:
+		{
+			rarity<[ uncommon ]>: { loot_table: .disenchant_uncommon_armor }
+			rarity<[ rare ]>: { loot_table: .disenchant_rare_armor }
+			rarity<[ epic mythic ]>: { loot_table: .disenchant_epic_armor }
+		}
+
+		item_type_flags<[ weapon ranged ]>:
+		{
+			rarity<[ uncommon ]>: { loot_table: .disenchant_uncommon_weapon }
+			rarity<[ rare ]>: { loot_table: .disenchant_rare_weapon }
+			rarity<[ epic mythic ]>: { loot_table: .disenchant_epic_weapon }
+		}
+	}
+}
+
+#####################################################
+# Enchant Shield - Minor Constitution
+
+{
+	${
+		_string: "Enchant Shield - Minor Constitution"
+		_string_item: "Enchant Shield: Minor Constitution"
+		_description: "Enchants item to increase Constitution by 1."
+		_item: enchant_shield_minor_constitution
+		_produce: { enchant_shield_minor_constitution: 1 } 
+		_materials: { reagent_mystery_essence: 2 reagent_paper: 1 }
+		_skill: 0
+		_target_item_requirements: { item_types: [ shield ] }
+		_id: enchant_shield_minor_constitution	
+		_consume_items: { enchant_shield_minor_constitution: 1 }	
+	}
+
+	aura enchant_shield_minor_constitution:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper	
+
+		string: "Constitution +1"
+		stat_modifiers: { constitution: { add: 1 } }
+	}
+
+	ability enchant_shield_minor_constitution: !ENCHANTING_APPLY{}
+	item enchant_shield_minor_constitution: !ENCHANTING_ITEM{}
+	ability craft_enchant_shield_minor_constitution: !ENCHANTING_CRAFT{}
+}
+
+#####################################################
+# Enchant Shield - Major Constitution
+
+{
+	${
+		_string: "Enchant Shield - Major Constitution"
+		_string_item: "Enchant Shield: Major Constitution"
+		_description: "Enchants item to increase Constitution by 2."
+		_item: enchant_shield_major_constitution
+		_produce: { enchant_shield_major_constitution: 1 } 
+		_materials: { reagent_mystery_essence: 4 reagent_mystery_crystal: 1 reagent_paper: 1 }
+		_skill: 55
+		_target_item_requirements: { item_types: [ shield ] }
+		_id: enchant_shield_major_constitution	
+		_consume_items: { enchant_shield_major_constitution: 1 }	
+	}
+
+	aura enchant_shield_major_constitution:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper	
+
+		string: "Constitution +2"
+		stat_modifiers: { constitution: { add: 2 } }
+	}
+
+	ability enchant_shield_major_constitution: !ENCHANTING_APPLY{}
+	item enchant_shield_major_constitution: !ENCHANTING_ITEM{}
+	ability craft_enchant_shield_major_constitution: !ENCHANTING_CRAFT{}
+}
+
+#####################################################
+# Enchant Shield - Wisdom
+
+{
+	${
+		_string: "Enchant Shield - Wisdom"
+		_string_item: "Enchant Shield: Wisdom"
+		_description: "Enchants item to increase Wisdom by 2."
+		_item: enchant_shield_wisdom
+		_produce: { enchant_shield_wisdom: 1 } 
+		_materials: { reagent_mystery_essence: 3 reagent_paper: 1 }
+		_skill: 40
+		_target_item_requirements: { item_types: [ shield ] }
+		_id: enchant_shield_wisdom	
+		_consume_items: { enchant_shield_wisdom: 1 }	
+	}
+
+	aura enchant_shield_wisdom:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper	
+
+		string: "Wisdom +2"
+		stat_modifiers: { wisdom: { add: 2 } }
+	}
+
+	ability enchant_shield_wisdom: !ENCHANTING_APPLY{}
+	item enchant_shield_wisdom: !ENCHANTING_ITEM{}
+	ability craft_enchant_shield_wisdom: !ENCHANTING_CRAFT{}
+}
+
+#####################################################
+# Enchant Bracers - Strength
+
+{
+	${
+		_string: "Enchant Bracers - Strength"
+		_string_item: "Enchant Bracers: Strength"
+		_description: "Enchants item to increase Strength by 1."
+		_item: enchant_bracers_strength
+		_produce: { enchant_bracers_strength: 1 } 
+		_materials: { reagent_dream_essence: 3 reagent_paper: 1 }
+		_skill: 55
+		_target_item_requirements: { equipment_slots: [ wrists ] }
+		_id: enchant_bracers_strength	
+		_consume_items: { enchant_bracers_strength: 1 }	
+	}
+
+	aura enchant_bracers_strength:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper	
+
+		string: "Strength +1"
+		stat_modifiers: { strength: { add: 1 } }
+	}
+
+	ability enchant_bracers_strength: !ENCHANTING_APPLY{}
+	item enchant_bracers_strength: !ENCHANTING_ITEM{}
+	ability craft_enchant_bracers_strength: !ENCHANTING_CRAFT{}
+}
+
+#####################################################
+# Enchant Bracers - Spirit
+
+{
+	${
+		_string: "Enchant Bracers - Spirit"
+		_string_item: "Enchant Bracers: Spirit"
+		_description: "Enchants item to increase Spirit by 1."
+		_item: enchant_bracers_spirit
+		_produce: { enchant_bracers_spirit: 1 } 
+		_materials: { reagent_dream_essence: 4 reagent_paper: 1 }
+		_skill: 60
+		_target_item_requirements: { equipment_slots: [ wrists ] }
+		_id: enchant_bracers_spirit
+		_consume_items: { enchant_bracers_spirit: 1 }	
+	}
+
+	aura enchant_bracers_spirit:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper	
+
+		string: "Spirit +1"
+		stat_modifiers: { spirit: { add: 1 } }
+	}
+
+	ability enchant_bracers_spirit: !ENCHANTING_APPLY{}
+	item enchant_bracers_spirit: !ENCHANTING_ITEM{}
+	ability craft_enchant_bracers_spirit: !ENCHANTING_CRAFT{}
+}
+
+#####################################################
+# Enchant Gloves - Dexterity
+
+{
+	${
+		_string: "Enchant Gloves - Dexterity"
+		_string_item: "Enchant Gloves: Dexterity"
+		_description: "Enchants item to increase Dexterity by 1."
+		_item: enchant_gloves_dexterity
+		_produce: { enchant_gloves_dexterity: 1 } 
+		_materials: { reagent_dream_essence: 4 reagent_dream_crystal: 1 reagent_paper: 1 }
+		_skill: 65
+		_target_item_requirements: { equipment_slots: [ hands ] }
+		_id: enchant_gloves_dexterity
+		_consume_items: { enchant_gloves_dexterity: 1 }	
+	}
+
+	aura enchant_gloves_dexterity:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper	
+
+		string: "Dexterity +1"
+		stat_modifiers: { dexterity: { add: 1 } }
+	}
+
+	ability enchant_gloves_dexterity: !ENCHANTING_APPLY{}
+	item enchant_gloves_dexterity: !ENCHANTING_ITEM{}
+	ability craft_enchant_gloves_dexterity: !ENCHANTING_CRAFT{}
+}
+
+#####################################################
+# Enchant Gloves - Wisdom
+
+{
+	${
+		_string: "Enchant Gloves - Wisdom"
+		_string_item: "Enchant Gloves: Wisdom"
+		_description: "Enchants item to increase Wisdom by 1."
+		_item: enchant_gloves_wisdom
+		_produce: { enchant_gloves_wisdom: 1 } 
+		_materials: { reagent_dream_essence: 5 reagent_paper: 1 }
+		_skill: 70
+		_target_item_requirements: { equipment_slots: [ hands ] }
+		_id: enchant_gloves_wisdom
+		_consume_items: { enchant_gloves_wisdom: 1 }	
+	}
+
+	aura enchant_gloves_wisdom:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper	
+
+		string: "Wisdom +1"
+		stat_modifiers: { wisdom: { add: 1 } }
+	}
+
+	ability enchant_gloves_wisdom: !ENCHANTING_APPLY{}
+	item enchant_gloves_wisdom: !ENCHANTING_ITEM{}
+	ability craft_enchant_gloves_wisdom: !ENCHANTING_CRAFT{}
+}
+
+#####################################################
+# Enchant Boots - Constitution
+
+{
+	${
+		_string: "Enchant Boots - Constitution"
+		_string_item: "Enchant Boots: Constitution"
+		_description: "Enchants item to increase Constitution by 2."
+		_item: enchant_boots_constitution
+		_produce: { enchant_boots_constitution: 1 } 
+		_materials: { reagent_dream_essence: 3 reagent_dream_crystal: 2 reagent_paper: 1 }
+		_skill: 75
+		_target_item_requirements: { equipment_slots: [ feet ] }
+		_id: enchant_boots_constitution
+		_consume_items: { enchant_boots_constitution: 1 }	
+	}
+
+	aura enchant_boots_constitution:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper	
+
+		string: "Constitution +2"
+		stat_modifiers: { constitution: { add: 2 } }
+	}
+
+	ability enchant_boots_constitution: !ENCHANTING_APPLY{}
+	item enchant_boots_constitution: !ENCHANTING_ITEM{}
+	ability craft_enchant_boots_constitution: !ENCHANTING_CRAFT{}
+}
+
+#####################################################
+# Enchant Boots - Spirit
+
+{
+	${
+		_string: "Enchant Boots - Spirit"
+		_string_item: "Enchant Boots: Spirit"
+		_description: "Enchants item to increase Spirit by 1."
+		_item: enchant_boots_spirit
+		_produce: { enchant_boots_spirit: 1 } 
+		_materials: { reagent_mystery_essence: 2 reagent_paper: 1 }
+		_skill: 20
+		_target_item_requirements: { equipment_slots: [ feet ] }
+		_id: enchant_boots_spirit
+		_consume_items: { enchant_boots_spirit: 1 }	
+	}
+
+	aura enchant_boots_spirit:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper	
+
+		string: "Spirit +1"
+		stat_modifiers: { spirit: { add: 1 } }
+	}
+
+	ability enchant_boots_spirit: !ENCHANTING_APPLY{}
+	item enchant_boots_spirit: !ENCHANTING_ITEM{}
+	ability craft_enchant_boots_spirit: !ENCHANTING_CRAFT{}
+}
+
+#####################################################
+# Enchant Weapon - Dexterity
+
+{
+	${
+		_string: "Enchant Weapon - Dexterity"
+		_string_item: "Enchant Weapon: Dexterity"
+		_description: "Enchants item to increase Dexterity by 5."
+		_item: enchant_weapon_dexterity
+		_produce: { enchant_weapon_dexterity: 1 } 
+		_materials: { reagent_dream_crystal: 5 reagent_paper: 1 }
+		_skill: 75
+		_target_item_requirements: { equipment_slots: [ main_hand off_hand ] }
+		_id: enchant_weapon_dexterity
+		_consume_items: { enchant_weapon_dexterity: 1 }	
+	}
+
+	aura enchant_weapon_dexterity:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper	
+
+		string: "Dexterity +5"
+		color_weapon_glow: [ 15 182 15 200 ]
+		
+		stat_modifiers: { dexterity: { add: 5 } }
+	}
+
+	ability enchant_weapon_dexterity: !ENCHANTING_APPLY{}
+	item enchant_weapon_dexterity: !ENCHANTING_ITEM{}
+	ability craft_enchant_weapon_dexterity: !ENCHANTING_CRAFT{}
+
+	${
+		_formula_item_level: 15
+		_formula_string: "Formula: Enchant Weapon - Dexterity"
+		_formula_description: "Teaches you how to enchant a weapon to give +5 Dexterity."
+		_formula_consume_items: { formula_enchant_weapon_dexterity: 1 }
+		_learn_ability: learn_enchant_weapon_dexterity
+		_formula_required_skill: 75
+		_level_range: [ 15 20 ]
+		_ability: craft_enchant_weapon_dexterity
+		_loot_groups: [ world_drops_uncommon_recipe ]
+	}
+
+	item formula_enchant_weapon_dexterity: !ENCHANTING_FORMULA_ITEM{}
+	ability learn_enchant_weapon_dexterity: !ENCHANTING_FORMULA_ABILITY{}
+}
+
+#####################################################
+# Enchant Weapon - Wisdom
+
+{
+	${
+		_string: "Enchant Weapon - Wisdom"
+		_string_item: "Enchant Weapon: Wisdom"
+		_description: "Enchants item to increase Wisdom by 5."
+		_item: enchant_weapon_wisdom
+		_produce: { enchant_weapon_wisdom: 1 } 
+		_materials: { reagent_dream_crystal: 5 reagent_paper: 1 }
+		_skill: 75
+		_target_item_requirements: { equipment_slots: [ main_hand off_hand ] }
+		_id: enchant_weapon_wisdom
+		_consume_items: { enchant_weapon_wisdom: 1 }	
+	}
+
+	aura enchant_weapon_wisdom:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper	
+
+		string: "Wisdom +5"
+		color_weapon_glow: [ 23 68 250 180 ]
+		
+		stat_modifiers: { wisdom: { add: 5 } }
+	}
+
+	ability enchant_weapon_wisdom: !ENCHANTING_APPLY{}
+	item enchant_weapon_wisdom: !ENCHANTING_ITEM{}
+	ability craft_enchant_weapon_wisdom: !ENCHANTING_CRAFT{}
+
+	${
+		_formula_item_level: 15
+		_formula_string: "Formula: Enchant Weapon - Wisdom"
+		_formula_description: "Teaches you how to enchant a weapon to give +5 Wisdom."
+		_formula_consume_items: { formula_enchant_weapon_wisdom: 1 }
+		_learn_ability: learn_enchant_weapon_wisdom
+		_formula_required_skill: 75
+		_level_range: [ 15 20 ]
+		_ability: craft_enchant_weapon_wisdom
+		_loot_groups: [ world_drops_uncommon_recipe ]		
+	}
+
+	item formula_enchant_weapon_wisdom: !ENCHANTING_FORMULA_ITEM{}
+	ability learn_enchant_weapon_wisdom: !ENCHANTING_FORMULA_ABILITY{}
+}
+
+#####################################################
+# Enchant Weapon - Strength
+
+{
+	${
+		_string: "Enchant Weapon - Strength"
+		_string_item: "Enchant Weapon: Strength"
+		_description: "Enchants item to increase Strength by 5."
+		_item: enchant_weapon_strength
+		_produce: { enchant_weapon_strength: 1 } 
+		_materials: { reagent_dream_crystal: 5 reagent_paper: 1 }
+		_skill: 75
+		_target_item_requirements: { equipment_slots: [ main_hand off_hand ] }
+		_id: enchant_weapon_strength
+		_consume_items: { enchant_weapon_strength: 1 }	
+	}
+
+	aura enchant_weapon_strength:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper	
+
+		string: "Strength +5"
+		color_weapon_glow: [ 255 200 23 180 ]
+		
+		stat_modifiers: { strength: { add: 5 } }
+	}
+
+	ability enchant_weapon_strength: !ENCHANTING_APPLY{}
+	item enchant_weapon_strength: !ENCHANTING_ITEM{}
+	ability craft_enchant_weapon_strength: !ENCHANTING_CRAFT{}
+
+	${
+		_formula_item_level: 15
+		_formula_string: "Formula: Enchant Weapon - Strength"
+		_formula_description: "Teaches you how to enchant a weapon to give +5 Strength."
+		_formula_consume_items: { formula_enchant_weapon_strength: 1 }
+		_learn_ability: learn_enchant_weapon_strength
+		_formula_required_skill: 75
+		_level_range: [ 15 20 ]
+		_ability: craft_enchant_weapon_strength
+		_loot_groups: [ world_drops_uncommon_recipe ]		
+	}
+
+	item formula_enchant_weapon_strength: !ENCHANTING_FORMULA_ITEM{}
+	ability learn_enchant_weapon_strength: !ENCHANTING_FORMULA_ABILITY{}
+}
+
+#####################################################
+# Enchant Weapon - Spell Power
+
+{
+	${
+		_string: "Enchant Weapon - Spell Power"
+		_string_item: "Enchant Weapon: Spell Power"
+		_description: "Enchants item to increase spell damage by 10."
+		_item: enchant_weapon_spell_power
+		_produce: { enchant_weapon_spell_power: 1 } 
+		_materials: { reagent_dream_crystal: 6 reagent_paper: 1 }
+		_skill: 80
+		_target_item_requirements: { equipment_slots: [ main_hand off_hand ] }
+		_id: enchant_weapon_spell_power
+		_consume_items: { enchant_weapon_spell_power: 1 }	
+	}
+
+	aura enchant_weapon_spell_power:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper	
+
+		string: "Spell Power"
+		color_weapon_glow: [ 152 44 242 255 ]
+		
+		stat_modifiers: { spell_damage: { add: 10 } }
+	}
+
+	ability enchant_weapon_spell_power: !ENCHANTING_APPLY{}
+	item enchant_weapon_spell_power: !ENCHANTING_ITEM{}
+	ability craft_enchant_weapon_spell_power: !ENCHANTING_CRAFT{}
+
+	${
+		_formula_item_level: 15
+		_formula_string: "Formula: Enchant Weapon - Spell Power"
+		_formula_description: "Teaches you how to enchant a weapon to give +10 spell damage."
+		_formula_consume_items: { formula_enchant_weapon_spell_power: 1 }
+		_learn_ability: learn_enchant_weapon_spell_power
+		_formula_required_skill: 80
+		_level_range: [ 17 20 ]
+		_ability: craft_enchant_weapon_spell_power
+		_loot_groups: [ world_drops_uncommon_recipe ]		
+	}
+
+	item formula_enchant_weapon_spell_power: !ENCHANTING_FORMULA_ITEM{}
+	ability learn_enchant_weapon_spell_power: !ENCHANTING_FORMULA_ABILITY{}
+}
+
+#####################################################
+# Enchant Weapon - Mending
+
+{
+	${
+		_string: "Enchant Weapon - Mending"
+		_string_item: "Enchant Weapon: Mending"
+		_description: "Enchants item to increase healing by 10."
+		_item: enchant_weapon_mending
+		_produce: { enchant_weapon_mending: 1 } 
+		_materials: { reagent_dream_crystal: 6 reagent_paper: 1 }
+		_skill: 85
+		_target_item_requirements: { equipment_slots: [ main_hand off_hand ] }
+		_id: enchant_weapon_mending
+		_consume_items: { enchant_weapon_mending: 1 }	
+	}
+
+	aura enchant_weapon_mending:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper	
+
+		string: "Mending"
+		color_weapon_glow: [ 0 255 0 255 ]
+		
+		stat_modifiers: { healing: { add: 10 } }
+	}
+
+	ability enchant_weapon_mending: !ENCHANTING_APPLY{}
+	item enchant_weapon_mending: !ENCHANTING_ITEM{}
+	ability craft_enchant_weapon_mending: !ENCHANTING_CRAFT{}
+
+	${
+		_formula_item_level: 15
+		_formula_string: "Formula: Enchant Weapon - Mending"
+		_formula_description: "Teaches you how to enchant a weapon to give +10 healing."
+		_formula_consume_items: { formula_enchant_weapon_mending: 1 }
+		_learn_ability: learn_enchant_weapon_mending
+		_formula_required_skill: 85
+		_level_range: [ 17 20 ]
+		_ability: craft_enchant_weapon_mending	
+	}
+
+	item formula_enchant_weapon_mending: !ENCHANTING_FORMULA_ITEM{}
+	ability learn_enchant_weapon_mending: !ENCHANTING_FORMULA_ABILITY{}
+}
+
+#####################################################
+# Enchant Weapon - Flaming Weapon
+
+{
+	${
+		_string: "Enchant Weapon - Flaming Weapon"
+		_string_item: "Enchant Weapon: Flaming Weapon"
+		_description: "Enchants item to sometimes deal additional fire damage in melee."
+		_item: enchant_weapon_fire
+		_produce: { enchant_weapon_fire: 1 } 
+		_materials: { reagent_dream_crystal: 6 reagent_paper: 1 }
+		_skill: 90
+		_target_item_requirements: { equipment_slots: [ main_hand off_hand ] }
+		_id: enchant_weapon_fire
+		_consume_items: { enchant_weapon_fire: 1 }	
+	}
+
+	ability enchant_weapon_fire_trigger:
+	{
+		string: "Flaming Weapon"
+		direct_effect damage:
+		{
+			damage_type: fire
+			function: 40
+		}	
+	}
+
+	aura enchant_weapon_fire:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper	
+
+		string: "Flaming Weapon"
+		color_weapon_glow: [ 255 128 0 255 ]
+		
+		aura_effect combat_event_trigger: 
+		{ 
+			combat_event<source>: hit
+			combat_event_ability_mask: [ offensive melee ]
+			ability<target>: enchant_weapon_fire_trigger
+			probability: 10
+		}	
+		
+		aura_effect combat_event_trigger: 
+		{ 
+			combat_event<source>: critical
+			combat_event_ability_mask: [ offensive melee ]
+			ability<target>: enchant_weapon_fire_trigger
+			probability: 10
+		}		
+	}
+
+	ability enchant_weapon_fire: !ENCHANTING_APPLY{}
+	item enchant_weapon_fire: !ENCHANTING_ITEM{}
+	ability craft_enchant_weapon_fire: !ENCHANTING_CRAFT{}
+
+	${
+		_formula_item_level: 16
+		_formula_string: "Formula: Enchant Weapon - Flaming Weapon"
+		_formula_description: "Teaches you how to enchant a weapon to sometimes deal additional fire damage in melee."
+		_formula_consume_items: { formula_enchant_weapon_fire: 1 }
+		_learn_ability: learn_enchant_weapon_fire
+		_formula_required_skill: 90
+		_level_range: [ 18 20 ]
+		_ability: craft_enchant_weapon_fire
+	}
+
+	item formula_enchant_weapon_fire: !ENCHANTING_FORMULA_ITEM{}
+	ability learn_enchant_weapon_fire: !ENCHANTING_FORMULA_ABILITY{}
+}

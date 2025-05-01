@@ -1,0 +1,236 @@
+dialogue_screen .rumin_whiterock_dialogue:
+{
+	text: 
+	[	
+		"Durgan Tharok is great and all, but I can't wait to go home to the real mountains. This expedition is getting about tiresome."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .ulrik_copperquill_3 }		
+		{ quest: .rumin_whiterock_1 }
+		{ quest: .rumin_whiterock_2 }
+		{ quest: .rumin_whiterock_3 }
+	]
+}
+
+dialogue_root .rumin_whiterock_dialogue:
+{
+	.rumin_whiterock_dialogue: { }
+}
+
+entity thalvaron_rumin_whiterock: !NPC
+{
+	_string: "Rumin Whiterock"
+	_dialogue_root: .rumin_whiterock_dialogue	
+	_sprite: dwarf_3
+	_sprite_dead: dwarf_3_dead
+	_level: 20
+	_faction: kingdom_of_thuldarim		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .rumin_whiterock_1_quest_item: {}
+
+item .rumin_whiterock_1_quest_item:
+{
+	icon: icon_severed_paw
+	item_level: 15
+	loot_groups: [ .rumin_whiterock_1_quest_item ]
+	flags: [ not_sellable unique ]
+	string: "Paw of One-Eyed Moe"
+}
+
+objective .rumin_whiterock_1:
+{
+	string: "Paw of One-Eyed Moe"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .rumin_whiterock_1_quest_item count: 1 }
+}
+
+quest .rumin_whiterock_1:
+{
+	string: "It's Just A Big Kitty"
+
+	text:
+	[
+		"Bring back the paw of One-Eyed Moe to Rumin Whiterock at the Badlands camp."
+	]
+	
+	description: 
+	[
+		"I've had some trouble sleeping up here. Every night I'm occasionally woken by a deep growling that chill me to the bones. They say it's an old mountain lion that patrols the outside the walls of the camp, looking for an"
+		"easy snack. It goes by the name One-Eyed Moe and, for same reason, it has developed a taste for dwarf flesh. Several times it has snuck into the camp and dragged a poor dwarf out into the darkness to be devoured. No wonder"
+		"I'm so worried, right?\n\n"
+		"So, uhm, maybe you can hunt it down and kill it? That would be swell."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"That's one large paw! Whew! Bigger than my head!"
+	]
+
+	level: 15
+	objectives: [ .rumin_whiterock_1 ]
+	next_quest: .rumin_whiterock_2
+}
+
+############################################################
+# Quest 2
+
+loot_group .rumin_whiterock_2_quest_item: {}
+
+item .rumin_whiterock_2_quest_item:
+{
+	icon: icon_feather_1
+	item_level: 15
+	loot_groups: [ .rumin_whiterock_2_quest_item ]
+	flags: [ not_sellable ]
+	string: "Harpy Tail Feather"
+	stack: 6
+}
+
+objective .rumin_whiterock_2:
+{
+	string: "Harpy Tail Feather"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .rumin_whiterock_2_quest_item count: 6 }
+}
+
+quest .rumin_whiterock_2:
+{
+	string: "Harpies of a Feather"
+
+	text:
+	[
+		"Venture east of the camp, collect harpy feathers and return them to Rumin Whiterock."
+	]
+	
+	description: 
+	[
+		"With that big scary cat out of the way I can start focussing on why I'm here in the first place. Have you heard of harpies? They're basically large birds with heads that looks almost human. Fascinating creatures!\n\n"
+		"I'm guessing they're more related to birds than humans, but I'm not sure. I'd like to have a bunch of their feathers to run some tests on. Maybe you can go get me some? There is a colony of harpies to the east of here, close"
+		"to the mountains."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Excellent."
+	]
+
+	level: 15
+	objectives: [ .rumin_whiterock_2 ]
+	prerequisites: [ .rumin_whiterock_1 ]
+	next_quest: .rumin_whiterock_3
+}
+
+############################################################
+# Quest 3
+
+loot_group .rumin_whiterock_3_quest_item: {}
+
+item .rumin_whiterock_3_quest_item:
+{
+	icon: icon_egg_1
+	item_level: 16
+	loot_groups: [ .rumin_whiterock_3_quest_item ]
+	flags: [ unique not_sellable ]
+	string: "Harpy Egg"
+}
+
+loot_table .rumin_whiterock_3_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .rumin_whiterock_3_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_rumin_whiterock_3_quest_item:
+{
+	string: "Harpy Egg"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ egg_1 ] z_offset: -2 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .rumin_whiterock_3_quest_item
+			verb: pick_up
+			range: 1 
+			level: 16
+			despawn: true 		
+			required_quest: .rumin_whiterock_3
+		}		
+	}
+}
+
+objective .rumin_whiterock_3:
+{
+	string: "Harpy Egg"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .rumin_whiterock_3_quest_item count: 1 }
+}
+
+{
+	${ _level: 16 }
+	item .rumin_whiterock_3_a: !QUEST_REWARD_LEGS{ _string: "Desert Explorer's Chain Leggings" _icon: icon_mail_pants_2 _constitution: 2 _strength: 1 _type: armor_mail }
+	item .rumin_whiterock_3_b: !QUEST_REWARD_LEGS{ _string: "Vanguard Legplates" _icon: icon_mail_pants_1 _constitution: 1 _strength: 2 _type: armor_plate }
+	item .rumin_whiterock_3_c: !QUEST_REWARD_WRISTS{ _string: "Harpyslayer Cuffs" _icon: icon_bracers_1 _constitution: 1 _spell_damage: 2 _type: armor_cloth }
+}
+
+quest .rumin_whiterock_3:
+{
+	string: "They Probably Lay Eggs"
+
+	text:
+	[
+		"Venture east of the camp, find a harpy egg and return it to Rumin Whiterock."
+	]
+	
+	description: 
+	[
+		"Feathers are all very interesting, but there is another thing... I'm assuming they lay eggs, but I have never seen one. Did you see any? I think their colony extends into a cave somewhere to the east."
+		"Maybe they lay eggs in there? If you can go in there, find an egg and return it to me, then I'd be very grateful."
+	]
+
+	progress:
+	[
+		"I wonder how big those eggs are. If they exist."
+	]
+	
+	completion:
+	[
+		"Wow, that's a big one! Can't wait to get it back home to study it properly!"
+	]
+
+	objectives: [ .rumin_whiterock_3 ]
+	level: 16
+	prerequisites: [ .rumin_whiterock_2 ]
+	reward_one_item: [ .rumin_whiterock_3_a .rumin_whiterock_3_b .rumin_whiterock_3_c ]
+}

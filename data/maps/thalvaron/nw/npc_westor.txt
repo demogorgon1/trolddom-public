@@ -1,0 +1,242 @@
+dialogue_screen .westor_dialogue:
+{
+	text: 
+	[	
+		"Fresh mountain air and mushrooms everywhere. What else could I ask for?"
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .fernwick_inn_keeper_1 }
+		{ quest: .westor_1 }
+		{ quest<offer_only>: .westor_2 }
+		{ quest: .westor_3 }
+	]
+}
+
+dialogue_root .westor_dialogue:
+{
+	.westor_dialogue: { }
+}
+
+entity thalvaron_westor: !NPC
+{
+	_string: "Westor"
+	_dialogue_root: .westor_dialogue	
+	_sprite: man_22
+	_sprite_dead: man_22_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .westor_1_quest_item: { }
+
+item .westor_1_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .westor_1_quest_item ]		
+	string: "Cave Mushroom" 
+	icon: icon_mushroom_1
+	stack: 1
+	item_level: 11
+	quest: .westor_1
+	flags: [ not_sellable unique ]
+}
+
+loot_table .westor_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .westor_1_quest_item }			
+		}		
+	]
+}
+       
+entity thalvaron_westor_1_quest_item:
+{
+	string: "Cave Mushroom"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ mushroom_2 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .westor_1_quest_item
+			verb: open
+			range: 1 
+			despawn: true 			
+			level: 11
+			required_quest: .westor_1
+		}		
+	}
+}
+
+objective .westor_1:
+{
+	string: "Cave Mushroom"
+	collect_items: { item: .westor_1_quest_item count: 1 }
+}
+
+quest .westor_1:
+{
+	string: "Fine Cave Mushroom"
+
+	text:
+	[
+		"Go into the cave and pick up the mushroom for Westor."
+	]
+	
+	description: 
+	[
+		"You see the cave we're standing in front of, right? Doesn't look too dangerous, does it? Well, that's what I thought when I went in there looking for cave mushrooms. I was about to pick up a really fine specimen when I suddenly heard something growling behind me! I ran out as fast as I could.\n\n"
+		"You look somewhat brave, maybe you can go in there an pick up the mushroom for me?"
+	]
+
+	progress:
+	[
+		"Did you find it?"
+	]
+	
+	completion:
+	[
+		"In daylight it doesn't look that impressive. Oh, well."
+	]
+
+	objectives: [ .westor_1 ]
+	level: 11	
+}
+
+############################################################
+# Quest 2
+
+quest .westor_2:
+{
+	string: "Reporting Back to Bram"
+
+	text:
+	[
+		"Go back to Fernwick and tell Bram his brother is fine."
+	]
+	
+	description: 
+	[
+		"You should probably go back to tell my brother that I'm fine. I still need a lot more mushrooms so I'm not coming back for a while."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"So he's just fooling around in the mountains looking for mushrooms while the world is on fire? Great."
+	]
+
+	level: 11
+	prerequisites: [ .westor_1 .fernwick_inn_keeper_1 ]
+	reward_xp_multiplier: 0.2
+	reward_all_items: [ consumable_ironbrew_stout ]
+}
+
+############################################################
+# Quest 3
+
+loot_group .westor_3_quest_item: { }
+
+item .westor_3_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .westor_3_quest_item ]		
+	string: "Mountain Mushroom" 
+	icon: icon_mushroom_1
+	stack: 6
+	item_level: 12
+	quest: .westor_3
+	flags: [ not_sellable ]
+}
+
+loot_table .westor_3_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .westor_3_quest_item }			
+		}		
+	]
+}
+       
+entity thalvaron_westor_3_quest_item:
+{
+	string: "Mountain Mushroom"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ mushroom_2 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .westor_3_quest_item
+			verb: open
+			range: 1 
+			despawn: true 			
+			level: 12
+			required_quest: .westor_3
+		}		
+	}
+}
+
+objective .westor_3:
+{
+	string: "Mountain Mushrooms"
+	collect_items: { item: .westor_3_quest_item count: 6 }
+}
+
+{
+	${ _level: 12 }
+	item .westor_3_a: !QUEST_REWARD_BACK{ _string: "Cape of the Mountain" _icon: icon_cape_4 _spirit: 1 _strength: 2 _type: armor_cloth }
+	item .westor_3_b: !QUEST_REWARD_FEET{ _string: "Iron-Plated Boots" _icon: icon_boots_1 _wisdom: 1 _constitution: 1 _type: armor_plate }
+	item .westor_3_c: !QUEST_REWARD_WRISTS{ _string: "Swiftcast Bracers" _icon: icon_bracers_1 _spell_haste: 1 _type: armor_cloth }
+}
+
+quest .westor_3:
+{
+	string: "More Mushrooms"
+
+	text:
+	[
+		"Look for mushrooms in the area behind The Mountain Hotel to the north."
+	]
+	
+	description: 
+	[
+		"You know about The Mountain Hotel just north of here? I'm sure you do, it's quite famous. I've heard it has been overrun with shady characters, which is a bit of a problem because I usually pick mushrooms in the area behind it."
+		"I'd appreciate if you could go up there and get some for me? You've already proved that you can tell the difference between a mushroom and a rock. I don't think there are any oversized kitty cats up there, but you should"
+		"probably keep an eye out for bandits."
+	]
+
+	progress:
+	[
+		"Did you find some?"
+	]
+	
+	completion:
+	[
+		"Those will do just fine, thanks!"
+	]
+
+	level: 12
+	prerequisites: [ .westor_1 ]
+	objectives: [ .westor_3 ]
+	reward_one_item: [ .westor_3_a .westor_3_b .westor_3_c ]
+}

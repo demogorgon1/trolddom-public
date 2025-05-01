@@ -1,0 +1,90 @@
+dialogue_screen .deputy_ravenreach_dialogue:
+{
+	text: 
+	[	
+		"Didn't expect to see anyone out here. Be careful, unnatural dangers lurk behind every tree."
+	]		
+	
+	options:
+	[
+		{ quest<offer_only>: .deputy_ravenreach_1 }
+	]
+}
+
+dialogue_root .deputy_ravenreach_dialogue:
+{
+	.deputy_ravenreach_dialogue: { }
+}
+
+entity thalvaron_deputy_ravenreach: !NPC
+{
+	_string: "Deputy Xavier"
+	_dialogue_root: .deputy_ravenreach_dialogue	
+	_sprite: man_13
+	_sprite_dead: man_13_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .deputy_ravenreach_1_quest_item: {}
+
+item .deputy_ravenreach_1_quest_item:
+{
+	icon: icon_sharp_tooth
+	item_level: 16
+	loot_groups: [ .deputy_ravenreach_1_quest_item ]
+	flags: [ unique not_sellable ]
+	string: "Mountain Troll Tusk"
+}
+
+objective .deputy_ravenreach_1:
+{
+	string: "Mountain Troll Tusk"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .deputy_ravenreach_1_quest_item count: 1 }
+}
+
+{
+	${ _level: 16 }
+	item .deputy_ravenreach_1_a: !QUEST_REWARD_HANDS{ _string: "Gauntlet of Slaying Trolls" _icon: icon_gloves_1 _strength: 1 _dexterity: 2 _type: armor_plate }
+	item .deputy_ravenreach_1_b: !QUEST_REWARD_HEAD{ _string: "Dark Vision Headwrap" _icon: icon_wizard_hat_3 _constitution: 1 _wisdom: 2 _type: armor_cloth }
+	item .deputy_ravenreach_1_c: !QUEST_REWARD_WAIST{ _string: "Steelbound Girdle" _icon: icon_belt_2 _constitution: 1 _healing: 1 _type: armor_mail }
+}
+
+quest .deputy_ravenreach_1:
+{
+	string: "It Came Out of the Rocks!"
+
+	text:
+	[
+		"Venture into the mountains to the south west and kill the troll. Deliver its tusk to the sheriff of Ravenreach."
+	]
+	
+	description: 
+	[
+		"A mountain troll has been spotted in the cliffs to the south west of here. The sheriff tasked me to take care of it, but, uhm, I'm not that fond of trolls. Please go take care of it and bring one of its"
+		"tusks to the sheriff in Ravenreach just north of here."
+	]
+
+	progress:
+	[
+		"Cold feet?"
+	]
+	
+	completion:
+	[
+		"Deputy Xavier slayed the troll and sent you to deliver the tusks to me? I find that hard to believe, but I guess that doesn't matter. A dead troll is a dead troll."
+	]
+
+	objectives: [ .deputy_ravenreach_1 ]
+	level: 16
+	reward_one_item: [ .deputy_ravenreach_1_a .deputy_ravenreach_1_b .deputy_ravenreach_1_c ]
+}

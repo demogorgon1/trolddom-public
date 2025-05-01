@@ -55,7 +55,14 @@ namespace tpublic
 			};
 
 			struct Possibility
-			{
+			{				
+				enum Elite : uint8_t
+				{
+					ELITE_DOES_NOT_MATTER,
+					ELITE_MUST_BE,
+					ELITE_MUST_NOT_BE
+				};
+
 				Possibility()
 				{
 
@@ -64,17 +71,33 @@ namespace tpublic
 				Possibility(
 					const SourceNode*	aSource)
 				{
+					if(aSource->m_annotation)
+					{
+						if(aSource->m_annotation->IsIdentifier("must_be_elite"))
+							m_elite = ELITE_MUST_BE;
+						else if (aSource->m_annotation->IsIdentifier("must_not_be_elite"))
+							m_elite = ELITE_MUST_NOT_BE;
+						else
+							TP_VERIFY(false, aSource->m_debugInfo, "Invalid elite annotation.");
+					}
+
 					aSource->ForEachChild([&](
 						const SourceNode* aChild)
 					{
 						if(aChild->m_name == "weight")
 							m_weight = aChild->GetUInt32();
+						else if (aChild->m_name == "quantity")
+							m_quantity = aChild->GetUInt32();
 						else if(aChild->m_name == "loot_group")
-							m_lootGroupId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_LOOT_GROUP, aChild->GetIdentifier());
+							m_lootGroupId = aChild->GetId(DataType::ID_LOOT_GROUP);
+						else if (aChild->m_name == "loot_cooldown")
+							m_lootCooldownId = aChild->GetId(DataType::ID_LOOT_COOLDOWN);
 						else if (aChild->m_name == "creature_types")
 							aChild->GetIdArray(DataType::ID_CREATURE_TYPE, m_creatureTypes);
 						else if(aChild->m_tag == "requirement")
 							m_requirements.push_back(Requirement(aChild));
+						else if(aChild->m_name == "use_special_loot_cooldown")
+							m_useSpecialLootCooldown = aChild->GetBool();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					});
@@ -86,8 +109,12 @@ namespace tpublic
 				{
 					aStream->WriteUInt(m_weight);
 					aStream->WriteUInt(m_lootGroupId);
+					aStream->WriteUInt(m_quantity);
 					aStream->WriteUInts(m_creatureTypes);
 					aStream->WriteObjects(m_requirements);
+					aStream->WriteUInt(m_lootCooldownId);
+					aStream->WriteBool(m_useSpecialLootCooldown);
+					aStream->WritePOD(m_elite);
 				}
 
 				bool
@@ -98,9 +125,17 @@ namespace tpublic
 						return false;
 					if (!aStream->ReadUInt(m_lootGroupId))
 						return false;
+					if (!aStream->ReadUInt(m_quantity))
+						return false;
 					if (!aStream->ReadUInts(m_creatureTypes))
 						return false;
 					if(!aStream->ReadObjects(m_requirements))
+						return false;
+					if (!aStream->ReadUInt(m_lootCooldownId))
+						return false;
+					if(!aStream->ReadBool(m_useSpecialLootCooldown))
+						return false;
+					if (!aStream->ReadPOD(m_elite))
 						return false;
 					return true;
 				}
@@ -126,8 +161,12 @@ namespace tpublic
 				// Public data
 				uint32_t						m_weight = 1;
 				uint32_t						m_lootGroupId = 0;
+				uint32_t						m_quantity = 1;
 				std::vector<uint32_t>			m_creatureTypes;
 				std::vector<Requirement>		m_requirements;
+				uint32_t						m_lootCooldownId = 0;
+				bool							m_useSpecialLootCooldown = false;
+				Elite							m_elite = ELITE_DOES_NOT_MATTER;
 			};
 
 			struct Slot

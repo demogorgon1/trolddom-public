@@ -2,3 +2,5 @@ achievement_category .gateway_world: { string: "Gateway Worlds" order_key: 3 }
 
 achievement gateway_world_minor_boss: { sort_key: 1 category: .gateway_world string: "Killed Minor Boss" description: "Slay minor boss in gateway world." points: 10 priority: 0 kill_trigger_tag: minor_boss icon: icon_skull_2 no_progress_values: true }
 achievement gateway_world_major_boss: { sort_key: 2 category: .gateway_world string: "Killed Major Boss" description: "Slay major boss in gateway world." points: 10 priority: 0 kill_trigger_tag: major_boss icon: icon_skull_3 no_progress_values: true }
+
+achievement gateway_world_willowgast_the_red: { sort_key: 3 category: .gateway_world string: "See You Later!" description: "Defeat Willowgast the Red." points: 10 priority: 0 kill_trigger: gateway_wizard icon: icon_staff_3 no_progress_values: true }

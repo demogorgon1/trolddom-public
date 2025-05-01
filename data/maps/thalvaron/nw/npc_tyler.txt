@@ -1,0 +1,44 @@
+dialogue_screen .tyler_dialogue_2:
+{
+	text: 
+	[	
+		"I live here with my mom. The bad men met the beast. You just have to avoid the beast and you'll be safe."
+	]		
+	
+	options:
+	[
+		{ text: "I see." }
+	]
+}
+
+dialogue_screen .tyler_dialogue:
+{
+	text: 
+	[	
+		"Hi."
+	]		
+	
+	options:
+	[
+		{ text: "What are you doing in these woods all alone? Seems very dangerous!" goto: .tyler_dialogue_2 }
+	]
+}
+
+dialogue_root .tyler_dialogue:
+{
+	.tyler_dialogue: { }
+}
+
+entity thalvaron_tyler: !NPC
+{
+	_string: "Tyler Joghun"
+	_dialogue_root: .tyler_dialogue	
+	_sprite: kid_1
+	_sprite_dead: kid_1_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

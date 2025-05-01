@@ -3,6 +3,7 @@
 #include "Data/Ability.h"
 #include "Data/Item.h"
 
+#include "ErrorNotification.h"
 #include "ItemInstance.h"
 #include "IReader.h"
 #include "IWriter.h"
@@ -47,6 +48,7 @@ namespace tpublic
 								const ItemInstance&							aItemInstance,
 								const Data::Item*							aItemData,
 								uint32_t									aSize,
+								ErrorNotification::Id&						aOutErrorNotification,
 								bool										aAutoGrow = false);
 		bool				CanAddMultipleToInventory(
 								uint32_t									aItemId,
@@ -57,6 +59,7 @@ namespace tpublic
 								uint32_t									aItemId,
 								uint32_t									aQuantity,
 								const Data::Item*							aItemData,
+								bool										aBind,
 								uint32_t									aSize);
 		bool				Destroy(
 								uint32_t									aIndex,
@@ -97,6 +100,9 @@ namespace tpublic
 		void				Shrink(
 								size_t										aTargetSize);
 		void				Reset();
+		void				OnLoadedFromPersistence(
+								const Manifest*								aManifest,
+								size_t										aSize);
 
 		// Public data
 		std::vector<Entry>		m_entries;

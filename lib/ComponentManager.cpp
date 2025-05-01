@@ -12,6 +12,8 @@
 #include <tpublic/Components/CombatPrivate.h>
 #include <tpublic/Components/CombatPublic.h>
 #include <tpublic/Components/CompletedQuests.h>
+#include <tpublic/Components/ControlPoint.h>
+#include <tpublic/Components/Critter.h>
 #include <tpublic/Components/DeityDiscovery.h>
 #include <tpublic/Components/DeityRelations.h>
 #include <tpublic/Components/DisplayName.h>
@@ -20,8 +22,10 @@
 #include <tpublic/Components/Gateway.h>
 #include <tpublic/Components/GuildName.h>
 #include <tpublic/Components/GuildRegistrar.h>
+#include <tpublic/Components/HoverText.h>
 #include <tpublic/Components/InteractableObject.h>
 #include <tpublic/Components/Inventory.h>
+#include <tpublic/Components/KillContribution.h>
 #include <tpublic/Components/Lootable.h>
 #include <tpublic/Components/MinionPrivate.h>
 #include <tpublic/Components/MinionPublic.h>
@@ -38,6 +42,7 @@
 #include <tpublic/Components/PlayerStats.h>
 #include <tpublic/Components/PlayerWorldStash.h>
 #include <tpublic/Components/Position.h>
+#include <tpublic/Components/RandomItemVendor.h>
 #include <tpublic/Components/RecentAchievements.h>
 #include <tpublic/Components/Reputation.h>
 #include <tpublic/Components/ResurrectionPoint.h>
@@ -79,6 +84,8 @@ namespace tpublic
 		_Register<Components::CombatPrivate>();
 		_Register<Components::CombatPublic>();
 		_Register<Components::CompletedQuests>();
+		_Register<Components::ControlPoint>();
+		_Register<Components::Critter>();
 		_Register<Components::DeityDiscovery>();
 		_Register<Components::DeityRelations>();
 		_Register<Components::DisplayName>();
@@ -87,8 +94,10 @@ namespace tpublic
 		_Register<Components::Gateway>();
 		_Register<Components::GuildName>();
 		_Register<Components::GuildRegistrar>();
+		_Register<Components::HoverText>();
 		_Register<Components::InteractableObject>();
 		_Register<Components::Inventory>();
+		_Register<Components::KillContribution>();
 		_Register<Components::Lootable>();
 		_Register<Components::MinionPrivate>();
 		_Register<Components::MinionPublic>();
@@ -105,6 +114,7 @@ namespace tpublic
 		_Register<Components::PlayerStats>();
 		_Register<Components::PlayerWorldStash>();
 		_Register<Components::Position>();
+		_Register<Components::RandomItemVendor>();
 		_Register<Components::RecentAchievements>();
 		_Register<Components::Reputation>();
 		_Register<Components::ResurrectionPoint>();

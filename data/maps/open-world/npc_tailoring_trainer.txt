@@ -1,0 +1,34 @@
+dialogue_screen .tailoring_trainer_trainer: !DEFAULT_TAILORING_TRAINER{}
+
+dialogue_screen .tailoring_trainer_greetings:
+{
+	text: 
+	[	
+		"You like sewing?"
+	]
+	
+	options:
+	[
+		{ goto: .tailoring_trainer_trainer text: "Please teach me about tailoring." }
+	]
+}
+
+dialogue_root .tailoring_trainer_dialogue:
+{
+	.tailoring_trainer_greetings: { }
+}
+
+entity .tailoring_trainer: !NPC
+{
+	_string: "Erhart"
+	_guild_name: "Tailoring Trainer"
+	_dialogue_root: .tailoring_trainer_dialogue	
+	_sprite: man_1
+	_sprite_dead: man_1_dead	
+	_level: 10
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

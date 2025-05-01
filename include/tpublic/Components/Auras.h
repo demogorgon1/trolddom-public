@@ -146,6 +146,9 @@ namespace tpublic
 			float			GetSpellHaste(
 								const Manifest*								aManifest) const;
 			int32_t			FilterDamageInput(
+								const Manifest*								aManifest,
+								const EntityInstance*						aSource,
+								const EntityInstance*						aTarget,
 								DirectEffect::DamageType					aDamageType,
 								int32_t										aDamage) const;
 			int32_t			FilterDamageOutput(
@@ -155,17 +158,32 @@ namespace tpublic
 								DirectEffect::DamageType					aDamageType,
 								int32_t										aDamage) const;
 			int32_t			FilterHealInput(
+								const Manifest*								aManifest,
+								const EntityInstance*						aSource,
+								const EntityInstance*						aTarget,
 								int32_t										aHeal) const;
 			int32_t			FilterHealOutput(
+								const Manifest*								aManifest,
+								const EntityInstance*						aSource,
+								const EntityInstance*						aTarget,
 								int32_t										aHeal) const;
 			int32_t			FilterThreat(
+								const Manifest*								aManifest,
+								const EntityInstance*						aSource,
+								const EntityInstance*						aTarget,
 								int32_t										aThreat) const;
+			float			GetResourceCostMultiplier() const;
 			void			OnCombatEvent(
+								const Manifest*								aManifest,
+								const EntityInstance*						aSource,
+								const EntityInstance*						aTarget,
 								AuraEffectBase::CombatEventType				aType,
 								CombatEvent::Id								aCombatEventId,
 								uint32_t									aAbilityId,
-								AuraEffectBase::SecondaryAbilityCallback	aCallback) const;
+								std::mt19937*								aRandom,
+								IEventQueue*								aEventQueue) const;
 			void			OnDamageInput(
+								const Manifest*								aManifest,
 								const EntityInstance*						aSource,
 								const EntityInstance*						aTarget,
 								DirectEffect::DamageType					aDamageType,
@@ -182,14 +200,17 @@ namespace tpublic
 								const Manifest*								aManifest,
 								uint32_t									aAbilityId,
 								int32_t&									aCastTime);
-			void			RemoveAura(
-								uint32_t									aAuraId);
-			void			RemoveAuraByGroup(
+			bool			RemoveAura(
+								uint32_t									aAuraId,
+								uint32_t									aMaxRemove);
+			bool			RemoveAuraByGroup(
 								const Manifest*								aManifest,
-								uint32_t									aAuraGroupId);
-			void			RemoveAurasByFlags(
+								uint32_t									aAuraGroupId,
+								uint32_t									aMaxRemove);
+			bool			RemoveAurasByFlags(
 								const Manifest*								aManifest,
-								uint32_t									aFlags);
+								uint32_t									aFlags,
+								uint32_t									aMaxRemove);
 			void			Reset();
 			void			OnLoadedFromPersistence(
 								const Manifest*								aManifest);

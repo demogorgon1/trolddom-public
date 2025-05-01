@@ -1,0 +1,144 @@
+dialogue_screen .cubert_galston_dialogue:
+{
+	text: 
+	[	
+		"How did you get here? Please help get me out of here!"
+	]		
+	
+	options:
+	[
+		{ text: "Yes, let's go." requirement self<must_have_active_quest>: .lieutenant_tinley_3 script: npc_trigger }	
+	]
+}
+
+dialogue_root .cubert_galston_dialogue:
+{
+	.cubert_galston_dialogue: { }
+}
+
+entity thalvaron_cubert_galston: !NPC
+{
+	_string: "Cubert Galston"
+	_dialogue_root: .cubert_galston_dialogue	
+	_dialogue_scripts: [ npc_trigger ]
+	_sprite: man_9
+	_sprite_dead: man_9_dead
+	_level: 12
+	_faction: combat_npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_default_trigger_ability: .cubert_galston_start_escort
+	_default_behavior_state: .cubert_galston
+	_is_threat_source: true
+	_blocking: false
+}
+
+route thalvaron_cubert_galston_escort: 
+{ 
+	trigger<28>: { chat: { type: say text: "Ahh, the fresh mountain air! Finally!" } }
+	trigger<30>: { ability: .cubert_galston_ambush_1 }
+	trigger<62>: { ability: .cubert_galston_ambush_2 }
+	trigger<97>: { ability: .cubert_galston_ambush_3 }
+	trigger<120>: { chat: { type: say text: "Safe! At last! Time for a drink!" } event: true }
+	trigger<max>: { despawn: true }
+}
+
+npc_behavior_state .cubert_galston:
+{
+	behavior: patrolling
+	combat_event_pause_ticks: 20
+	despawn_if_lost_player: true
+	patrol_move_interval_ticks: 9
+}
+
+ability .cubert_galston_start_escort:
+{
+	flags: [ always_in_range always_in_line_of_sight ]
+	
+	direct_effect start_route: { route: thalvaron_cubert_galston_escort }	
+}
+
+map_entity_spawn thalvaron_cubert_galston_ambush_1_a: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn thalvaron_cubert_galston_ambush_1_b: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn thalvaron_cubert_galston_ambush_2_a: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn thalvaron_cubert_galston_ambush_2_b: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn thalvaron_cubert_galston_ambush_2_c: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn thalvaron_cubert_galston_ambush_3_a: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn thalvaron_cubert_galston_ambush_3_b: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn thalvaron_cubert_galston_ambush_3_c: { spawn_timer: { only_when_triggered: true } }
+
+ability .cubert_galston_ambush_1:
+{
+	direct_effect spawn_entity: 
+	{ 
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: thalvaron_rebel_thug_a
+		map_entity_spawn: thalvaron_cubert_galston_ambush_1_a	
+	}	
+	
+	direct_effect spawn_entity: 
+	{ 
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: thalvaron_rebel_thug_b
+		map_entity_spawn: thalvaron_cubert_galston_ambush_1_b	
+	}		
+}
+
+ability .cubert_galston_ambush_2:
+{
+	direct_effect spawn_entity: 
+	{ 
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: thalvaron_rebel_thug_d
+		map_entity_spawn: thalvaron_cubert_galston_ambush_2_a	
+	}	
+	
+	direct_effect spawn_entity: 
+	{ 
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: thalvaron_rebel_thug_b
+		map_entity_spawn: thalvaron_cubert_galston_ambush_2_b	
+	}		
+	
+	direct_effect spawn_entity: 
+	{ 
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: thalvaron_rebel_thug_c
+		map_entity_spawn: thalvaron_cubert_galston_ambush_2_c	
+	}			
+}
+
+ability .cubert_galston_ambush_3:
+{
+	direct_effect spawn_entity: 
+	{ 
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: thalvaron_rebel_thug_d
+		map_entity_spawn: thalvaron_cubert_galston_ambush_3_a	
+	}	
+	
+	direct_effect spawn_entity: 
+	{ 
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: thalvaron_rebel_thug_d
+		map_entity_spawn: thalvaron_cubert_galston_ambush_3_b	
+	}		
+	
+	direct_effect spawn_entity: 
+	{ 
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: thalvaron_rebel_thug_a
+		map_entity_spawn: thalvaron_cubert_galston_ambush_3_c	
+	}			
+}
+
+

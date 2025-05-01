@@ -30,7 +30,11 @@ namespace tpublic::DirectEffects
 				}
 				else if(aChild->m_name == "conditional_critical_chance_bonus")
 				{
-					m_conditionalCriticalChanceBonuses.push_back(ConditionalCriticalChanceBonus(aChild));
+					m_conditionalCriticalChanceBonuses.push_back(ConditionalCriticalChanceBonus(ConditionalCriticalChanceBonus::TYPE_ABILITY_MODIFIER, aChild));
+				}
+				else if (aChild->m_name == "aura_conditional_critical_chance_bonus")
+				{
+					m_conditionalCriticalChanceBonuses.push_back(ConditionalCriticalChanceBonus(ConditionalCriticalChanceBonus::TYPE_AURA, aChild));
 				}
 				else if(aChild->m_name == "function")
 				{
@@ -41,7 +45,7 @@ namespace tpublic::DirectEffects
 					aChild->GetObject()->ForEachChild([&](
 						const SourceNode* aAbilityModifierMultiplier)
 					{
-						uint32_t abilityModifierId = aAbilityModifierMultiplier->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY_MODIFIER, aAbilityModifierMultiplier->m_name.c_str());
+						uint32_t abilityModifierId = aAbilityModifierMultiplier->m_sourceContext->m_persistentIdTable->GetId(aAbilityModifierMultiplier->m_debugInfo, DataType::ID_ABILITY_MODIFIER, aAbilityModifierMultiplier->m_name.c_str());
 						m_abilityModifierMultipliers[abilityModifierId] = aAbilityModifierMultiplier->GetFloat();
 					});
 				}
@@ -125,6 +129,9 @@ namespace tpublic::DirectEffects
 		if(aSource == NULL)
 			return Result();
 
+		if(m_flags & DirectEffect::FLAG_SELF)
+			aTarget = aSource;
+
 		const Components::CombatPrivate* sourceCombatPrivate = aSource->GetComponent<Components::CombatPrivate>();
 		const Components::CombatPrivate* targetCombatPrivate = aTarget->GetComponent<Components::CombatPrivate>();
 		Components::CombatPublic* sourceCombatPublic = aSource->GetComponent<Components::CombatPublic>();
@@ -136,7 +143,7 @@ namespace tpublic::DirectEffects
 		if(targetCombatPublic == NULL)
 			return Result();
 
-		uint32_t damage = (uint32_t)m_function.EvaluateSourceAndTargetEntityInstances(aRandom, _GetDamageModifier(abilityModifiers), aSource, aTarget);
+		uint32_t damage = (uint32_t)m_function.EvaluateSourceAndTargetEntityInstances(aManifest, aWorldView, aRandom, _GetDamageModifier(abilityModifiers), aSource, aTarget);
 
 		if(damage == 0)
 			damage = 1;
@@ -152,7 +159,7 @@ namespace tpublic::DirectEffects
 			else
 				chance = sourceCombatPrivate->m_physicalCriticalStrikeChance;
 
-			chance += _GetCriticalChanceBonus(abilityModifiers);
+			chance += _GetCriticalChanceBonus(sourceAuras, abilityModifiers);
 
 			if(Helpers::RandomFloat(aRandom) < chance / 100.0f)
 			{
@@ -177,7 +184,7 @@ namespace tpublic::DirectEffects
 			damage = sourceAuras->FilterDamageOutput(aManifest, aSource, aTarget, damageType, damage);
 
 		if (targetAuras != NULL)
-			damage = targetAuras->FilterDamageInput(damageType, damage);
+			damage = targetAuras->FilterDamageInput(aManifest, aSource, aTarget, damageType, damage);
 
 		uint32_t blocked = 0;
 
@@ -247,7 +254,7 @@ namespace tpublic::DirectEffects
 		if(targetCombatPublic->GetResourceIndex(Resource::ID_HEALTH, healthResourceIndex))
 		{
 			if(targetAuras != NULL)
-				targetAuras->OnDamageInput(aSource, aTarget, m_damageType, (int32_t)damage, result, aEventQueue, aWorldView, aResourceChangeQueue);
+				targetAuras->OnDamageInput(aManifest, aSource, aTarget, m_damageType, (int32_t)damage, result, aEventQueue, aWorldView, aResourceChangeQueue);
 
 			aResourceChangeQueue->AddResourceChange(
 				result,
@@ -318,7 +325,7 @@ namespace tpublic::DirectEffects
 			}
 		}
 
-		m_function.ToRange(damageModifier, aEntityInstance, aOutDamage);
+		m_function.ToRange(NULL, NULL, damageModifier, aEntityInstance, aOutDamage);
 		aOutDamageType = _GetDamageType(aEntityInstance, aAbilityModifierList, aAbilityId);
 		return true;
 	}
@@ -343,6 +350,7 @@ namespace tpublic::DirectEffects
 
 	float			
 	Damage::_GetCriticalChanceBonus(
+		const Components::Auras*			aAuras,
 		const Components::AbilityModifiers*	aAbilityModifiers) const
 	{
 		if(m_conditionalCriticalChanceBonuses.empty() || aAbilityModifiers == NULL)
@@ -352,8 +360,21 @@ namespace tpublic::DirectEffects
 
 		for(const ConditionalCriticalChanceBonus& t : m_conditionalCriticalChanceBonuses)
 		{
-			if(aAbilityModifiers->HasActive(t.m_abilityModifierId))
-				bonus += t.m_percent;
+			switch(t.m_type)
+			{
+			case ConditionalCriticalChanceBonus::TYPE_ABILITY_MODIFIER:
+				if (aAbilityModifiers->HasActive(t.m_id))
+					bonus += t.m_percent;
+				break;
+
+			case ConditionalCriticalChanceBonus::TYPE_AURA:
+				if(aAuras->HasAura(t.m_id))
+					bonus += t.m_percent;
+				break;
+
+			default:
+				break;
+			}
 		}
 
 		return bonus;

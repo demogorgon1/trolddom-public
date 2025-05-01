@@ -1,0 +1,43 @@
+dialogue_screen .random_vendor_dialogue:
+{
+	text: 
+	[	
+		"I'm not interested in your gold. The only currency I accept are tokens of victory. What I'm doing with them? Well, don't you worry about that."
+	]
+	
+	options:
+	[
+		{ goto: $dialogue_screen { random_item_vendor: true } text: "Let me browse your goods." }
+	]
+}
+
+entity thalvaron_random_vendor: !NPC
+{
+	_string: "Dia Rudwik"
+	_dialogue_root: $dialogue_root { .random_vendor_dialogue: { } }
+	_sprite: woman_33
+	_sprite_dead: woman_33_dead	
+	_level: 20
+	_creature_type: humanoid
+	_loot_table: .npc
+	_faction: npcs
+	_not_pushable: true	
+	_random_item_vendor: 
+	{ 
+		item_count: 6
+		refresh_ticks: 50 
+		replacement_ticks: 36000 # 1 hour
+		level: 20
+		token_cost: !RANDOM_ITEM_VENDOR_TOKEN_OF_VICTORY_COST{}
+		force_bind_when_picked_up: true
+		
+		loot_table: $loot_table
+		{
+			slots:
+			[	
+				{ possibility: { weight: 1 loot_group: world_drops_rare_weapons_and_shields } }
+				{ possibility: { weight: 1 loot_group: world_drops_rare_armor_and_jewelry } }
+			]	
+		}
+	}
+}

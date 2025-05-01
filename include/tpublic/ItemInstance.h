@@ -10,20 +10,20 @@ namespace tpublic
 	{
 		enum Flag : uint8_t
 		{
-			FLAG_SOULBOUND = 0x01
+			FLAG_SOULBOUND = 0x01,
+			FLAG_ENCHANTED = 0x02
 		};
 
 		ItemInstance(
 			uint32_t		aItemId = 0,
 			uint32_t		aQuantity = 1,
-			uint32_t		aWorldboundCharacterId = 0,
+			uint32_t		aExtraId = 0,
 			uint8_t			aFlags = 0)
 			: m_itemId(aItemId)
 			, m_quantity(aQuantity)
-			, m_worldboundCharacterId(aWorldboundCharacterId)
 			, m_flags(aFlags)
+			, m_extraId(aExtraId)
 		{
-
 		}
 
 		bool	
@@ -45,16 +45,37 @@ namespace tpublic
 		}
 
 		bool
+		IsEnchanted() const
+		{
+			return m_flags & FLAG_ENCHANTED;
+		}
+
+		void
+		SetEnchanted(
+			uint32_t		aEnchantAuraId)
+		{
+			m_flags |= FLAG_ENCHANTED;
+			m_extraId = aEnchantAuraId;
+		}
+
+		bool
 		IsWorldbound() const
 		{
-			return m_worldboundCharacterId != 0;
+			return !IsEnchanted() && m_extraId != 0;
 		}
 
 		void
 		SetWorldbound(
 			uint32_t		aCharacterId)
 		{
-			m_worldboundCharacterId = aCharacterId;
+			if(!IsEnchanted())
+				m_extraId = aCharacterId;
+		}
+
+		uint32_t
+		GetWorldboundCharacterId() const
+		{
+			return m_extraId;
 		}
 
 		void
@@ -62,7 +83,7 @@ namespace tpublic
 		{
 			m_itemId = 0;
 			m_quantity = 1;
-			m_worldboundCharacterId = 0;
+			m_extraId = 0;
 			m_flags = 0;
 		}
 
@@ -74,7 +95,7 @@ namespace tpublic
 			if(IsSet())
 			{
 				aWriter->WriteUInt(m_quantity);
-				aWriter->WriteUInt(m_worldboundCharacterId);
+				aWriter->WriteUInt(m_extraId);
 				aWriter->WritePOD(m_flags);
 			}
 		}
@@ -89,7 +110,7 @@ namespace tpublic
 			{
 				if (!aReader->ReadUInt(m_quantity))
 					return false;
-				if (!aReader->ReadUInt(m_worldboundCharacterId))
+				if (!aReader->ReadUInt(m_extraId))
 					return false;
 				if(!aReader->ReadPOD(m_flags))
 					return false;
@@ -101,7 +122,7 @@ namespace tpublic
 		operator ==(
 			const ItemInstance&	aOther) const
 		{
-			return m_itemId == aOther.m_itemId && m_quantity == aOther.m_quantity && m_flags == aOther.m_flags && m_worldboundCharacterId == aOther.m_worldboundCharacterId;
+			return m_itemId == aOther.m_itemId && m_quantity == aOther.m_quantity && m_flags == aOther.m_flags && m_extraId == aOther.m_extraId;
 		}
 
 		bool
@@ -112,10 +133,10 @@ namespace tpublic
 		}
 
 		// Public data
-		uint32_t		m_itemId;
-		uint32_t		m_quantity;
-		uint32_t		m_worldboundCharacterId;
-		uint8_t			m_flags;
+		uint32_t		m_itemId = 0;
+		uint32_t		m_quantity = 0;
+		uint32_t		m_extraId = 0;
+		uint8_t			m_flags = 0;
 	};
 
 }

@@ -101,7 +101,7 @@ namespace tpublic
 					const SourceNode* aSource)
 				{
 					TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing terrain annotation.");
-					m_tileSpriteId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aSource->m_annotation->GetIdentifier());
+					m_tileSpriteId = aSource->m_annotation->GetId(DataType::ID_SPRITE);
 					
 					aSource->ForEachChild([&](
 						const SourceNode* aChild)
@@ -148,7 +148,7 @@ namespace tpublic
 					const SourceNode* aSource)
 				{
 					TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing border terrain annotation.");
-					m_terrainId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TERRAIN, aSource->m_annotation->GetIdentifier());
+					m_terrainId = aSource->m_annotation->GetId(DataType::ID_TERRAIN);
 					aSource->GetIdArray(DataType::ID_TERRAIN, m_neighborTerrain);
 				}
 
@@ -188,7 +188,7 @@ namespace tpublic
 				{
 					TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing probability annotation.");
 					m_probability = aSource->m_annotation->GetUInt32();
-					m_terrainId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TERRAIN, aSource->GetIdentifier());
+					m_terrainId = aSource->GetId(DataType::ID_TERRAIN);
 				}
 
 				void
@@ -227,7 +227,7 @@ namespace tpublic
 				{
 					TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing weight annotation.");
 					m_weight = aSource->m_annotation->GetUInt32();
-					m_terrainId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TERRAIN, aSource->GetIdentifier());
+					m_terrainId = aSource->GetId(DataType::ID_TERRAIN);
 				}
 
 				void
@@ -321,7 +321,7 @@ namespace tpublic
 						else if (aChild->m_name == "connect_cost")
 							m_connectCost = aChild->GetUInt32();
 						else if (aChild->m_name == "connect_conversion")
-							m_connectConversion = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TERRAIN, aChild->GetIdentifier());
+							m_connectConversion = aChild->GetId(DataType::ID_TERRAIN);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}

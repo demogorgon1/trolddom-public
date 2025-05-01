@@ -25,7 +25,8 @@ namespace tpublic
 				enum Flag : uint8_t
 				{
 					FLAG_BLOCKED	= 0x01,
-					FLAG_AUTO		= 0x02
+					FLAG_AUTO		= 0x02,
+					FLAG_INTERRUPT	= 0x04
 				};
 
 				static uint8_t
@@ -41,6 +42,8 @@ namespace tpublic
 							t |= FLAG_BLOCKED;
 						else if (aChild->IsIdentifier("auto"))
 							t |= FLAG_AUTO;
+						else if(aChild->IsIdentifier("interrupt"))
+							t |= FLAG_INTERRUPT;
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid flag.", aChild->GetIdentifier());
 					});
@@ -63,15 +66,17 @@ namespace tpublic
 						if(aChild->m_name == "flags")
 							m_flags = SourceToFlags(aChild);
 						else if(aChild->m_name == "id")
-							m_id = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
+							m_id = aChild->GetId(DataType::ID_ABILITY);
 						else if (aChild->m_name == "max_target_health")
 							m_maxTargetHealth = aChild->GetUInt32();
 						else if (aChild->m_name == "min_neighbor_hostiles")
 							m_minNeighborHostiles = aChild->GetUInt32();
 						else if (aChild->m_name == "target_must_not_have_aura")
-							m_targetMustNotHaveAuraId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_AURA, aChild->GetIdentifier());
+							m_targetMustNotHaveAuraId = aChild->GetId(DataType::ID_AURA);
 						else if (aChild->m_name == "self_must_not_have_aura")
-							m_selfMustNotHaveAuraId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_AURA, aChild->GetIdentifier());
+							m_selfMustNotHaveAuraId = aChild->GetId(DataType::ID_AURA);
+						else if(aChild->m_name == "self_must_have_aura")
+							m_selfMustHaveAuraId = aChild->GetId(DataType::ID_AURA);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					});
@@ -87,6 +92,7 @@ namespace tpublic
 					aWriter->WriteUInt(m_targetMustNotHaveAuraId);
 					aWriter->WriteUInt(m_selfMustNotHaveAuraId);
 					aWriter->WriteUInt(m_minNeighborHostiles);
+					aWriter->WriteUInt(m_selfMustHaveAuraId);
 				}
 
 				bool
@@ -105,6 +111,8 @@ namespace tpublic
 						return false;
 					if (!aReader->ReadUInt(m_minNeighborHostiles))
 						return false;
+					if (!aReader->ReadUInt(m_selfMustHaveAuraId))
+						return false;
 					return true;
 				}
 
@@ -115,6 +123,7 @@ namespace tpublic
 				uint32_t			m_targetMustNotHaveAuraId = 0;
 				uint32_t			m_selfMustNotHaveAuraId = 0;
 				uint32_t			m_minNeighborHostiles = 0;
+				uint32_t			m_selfMustHaveAuraId = 0;
 			};
 
 			struct Command

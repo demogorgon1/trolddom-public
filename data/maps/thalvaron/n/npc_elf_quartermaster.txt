@@ -1,0 +1,41 @@
+dialogue_screen .elf_quartermaster_vendor:
+{
+	sell mercenary_contract_elf_warden: { quantity: 1 reputation_level_requirement children_of_the_moon: !FRIENDLY_REPUTATION_LEVEL{} }		
+	sell children_of_the_moon_back_1: { quantity: 1 reputation_level_requirement children_of_the_moon: !HONORED_REPUTATION_LEVEL{} }	
+	sell children_of_the_moon_waist_1: { quantity: 1 reputation_level_requirement children_of_the_moon: !HONORED_REPUTATION_LEVEL{} }	
+	sell children_of_the_moon_hands_1: { quantity: 1 reputation_level_requirement children_of_the_moon: !REVERED_REPUTATION_LEVEL{} }	
+	sell children_of_the_moon_neck_1: { quantity: 1 reputation_level_requirement children_of_the_moon: !REVERED_REPUTATION_LEVEL{} }	
+}
+
+dialogue_screen .elf_quartermaster_dialogue:
+{
+	text: 
+	[	
+		"What can I help you with?"
+	]
+	
+	options:
+	[
+		{ goto: .elf_quartermaster_vendor text: "Let me browse your goods." }
+	]
+}
+
+dialogue_root .elf_quartermaster_dialogue:
+{
+	.elf_quartermaster_dialogue: { }
+}
+
+entity thalvaron_elf_quartermaster: !NPC
+{
+	_string: "Ylion Starleaf"
+	_guild_name: "Quartermaster"
+	_dialogue_root: .elf_quartermaster_dialogue	
+	_sprite: elf_13
+	_sprite_dead: elf_13_dead	
+	_level: 20
+	_faction: children_of_the_moon
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

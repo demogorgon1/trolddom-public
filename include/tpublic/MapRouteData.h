@@ -13,6 +13,8 @@ namespace tpublic
 	class MapRouteData
 	{
 	public:		
+		typedef std::function<Vec2(uint32_t)> GetMapEntitySpawnPositionFunction;
+
 		struct SubRoute
 		{
 			void
@@ -20,7 +22,7 @@ namespace tpublic
 				IWriter*					aWriter) const
 			{
 				aWriter->WriteObjects(m_waypoints);
-				m_directionField.ToStream(aWriter);
+				aWriter->WriteOptionalObjectPointer(m_directionField);
 				aWriter->WriteBool(m_isLoop);
 			}
 
@@ -30,16 +32,30 @@ namespace tpublic
 			{
 				if(!aReader->ReadObjects(m_waypoints))
 					return false;
-				if(!m_directionField.FromStream(aReader))
+				if(!aReader->ReadOptionalObjectPointer(m_directionField))
 					return false;
 				if(!aReader->ReadBool(m_isLoop))
 					return false;
 				return true;
 			}
 
+			void
+			CopyFrom(
+				const SubRoute&				aOther)
+			{
+				m_waypoints = aOther.m_waypoints;
+				m_isLoop = aOther.m_isLoop;
+
+				if(aOther.m_directionField)
+				{
+					m_directionField = std::make_unique<DirectionField>();
+					*m_directionField = *aOther.m_directionField;
+				}
+			}
+
 			// Public data
 			std::vector<Vec2>						m_waypoints;
-			DirectionField							m_directionField;
+			std::unique_ptr<DirectionField>			m_directionField;
 			bool									m_isLoop = false;
 
 			// Runtime (need prepare), not serialized
@@ -76,7 +92,7 @@ namespace tpublic
 				for(const std::unique_ptr<SubRoute>& subRoute : aOther->m_subRoutes)
 				{
 					std::unique_ptr<SubRoute> t = std::make_unique<SubRoute>();
-					*t = *subRoute;
+					t->CopyFrom(*subRoute);
 					m_subRoutes.push_back(std::move(t));
 				}
 				m_positions = aOther->m_positions;
@@ -92,35 +108,39 @@ namespace tpublic
 		};
 
 		void	ToStream(
-					IWriter*				aWriter) const;
+					IWriter*							aWriter) const;
 		bool	FromStream(
-					IReader*				aReader);
+					IReader*							aReader);
 		void	CopyFrom(
-					const MapRouteData*		aOther);
+					const MapRouteData*					aOther);
 		void	Prepare();
 		Route*	GetOrCreateRoute(
-					uint32_t				aRouteId);
+					uint32_t							aRouteId);
 		void	Build(
-					const Manifest*			aManifest,
-					const uint32_t*			aMapTiles,
-					int32_t					aMapWidth,
-					int32_t					aMapHeight);
+					const Manifest*						aManifest,
+					const uint32_t*						aMapTiles,
+					int32_t								aMapWidth,
+					int32_t								aMapHeight,
+					nwork::Queue*						aWorkQueue,
+					GetMapEntitySpawnPositionFunction	aGetMapEntitySpawnPositionFunction);
 		void	BuildRoute(
-					const Manifest*			aManifest,
-					const std::set<Vec2>&	aWalkable,
-					int32_t					aMapWidth,
-					int32_t					aMapHeight,
-					Route*					aRoute);		
+					const Manifest*						aManifest,
+					const std::set<Vec2>&				aWalkable,
+					int32_t								aMapWidth,
+					int32_t								aMapHeight,
+					Route*								aRoute,
+					GetMapEntitySpawnPositionFunction	aGetMapEntitySpawnPositionFunction);		
 		size_t	GetSubRouteIndexByPosition(
-					uint32_t				aRouteId,
-					const Vec2&				aPosition) const;
+					uint32_t							aRouteId,
+					const Vec2&							aPosition) const;
 		bool	GetDirection(
-					uint32_t				aRouteId,
-					size_t					aSubRouteIndex,
-					const Vec2&				aPosition,
-					bool					aIsReversing,
-					Vec2&					aOutDirection,
-					bool&					aOutChangeDirection) const;
+					uint32_t							aRouteId,
+					size_t								aSubRouteIndex,
+					const Vec2&							aPosition,
+					bool								aIsReversing,
+					Vec2&								aOutDirection,
+					bool&								aOutChangeDirection,
+					std::optional<uint32_t>&			aOutIndex) const;
 
 		// Public data
 		std::vector<std::unique_ptr<Route>>			m_routes;

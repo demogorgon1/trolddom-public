@@ -1,0 +1,89 @@
+dialogue_screen .doctor_hulius_camp_dialogue_2:
+{
+	text: 
+	[
+		"The last entry of the journal reads:\n\n"
+		"Last night I was woken up by some sounds outside my tent. I peeked out of my tent and saw a giant figure rummaging around my camp. I was very quiet to not get its attention."
+		"It was dark, so I didn't get a good look at it, but I'm fairly certain it was a troll! After a while it left again. I hope it comes back again tonight, it was very exciting."
+	]
+	
+}
+
+dialogue_screen .doctor_hulius_camp_dialogue:
+{
+	text: 
+	[	
+		"This seems to be the satchel of a traveller. The satchel contains what looks like a journal."
+	]		
+	
+	options:
+	[
+		{ text: "Read journal." goto: .doctor_hulius_camp_dialogue_2 }
+		{ quest<completion_only>: .tyron_frostmane_3 }
+		{ quest<offer_only>: .doctor_hulius_camp_1 }
+	]
+}
+
+dialogue_root .doctor_hulius_camp_dialogue:
+{
+	verb: open
+	
+	.doctor_hulius_camp_dialogue: { }
+}
+
+entity thalvaron_doctor_hulius_camp: 
+{
+	string: "Satchel"
+	components:
+	{
+		position: { }		
+		combat_public: 
+		{  
+			modifier not_pushable: {}
+			modifier hide_level: {}
+			modifier not_targetable: {}
+			dialogue_root: .doctor_hulius_camp_dialogue			
+		}			
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ states: [ default ] frames: [ satchel ] z_offset: -3 }			
+			]		
+		}				
+	}
+}
+
+############################################################
+# Quest 1
+
+quest .doctor_hulius_camp_1:
+{
+	string: "Did He Get Trolled?"
+
+	text:
+	[
+		"Look for trolls and investigate any trace of Doctor Hulius."
+	]
+	
+	description: 
+	[
+		"It seems like the good doctor might have encountered a troll. He probably didn't survive that, but it seems like a clue to figure out what happened to him."
+	]
+
+	progress:
+	[
+		"Did the troll eat him on the spot or bring him somewhere?"
+	]
+	
+	completion:
+	[
+		"Please help!"
+	]
+
+	level: 14
+	reward_xp_multiplier: 0.6
+	reward_cash_multiplier: 0
+	prerequisites: [ .tyron_frostmane_3 ]
+}
+

@@ -1,0 +1,41 @@
+dialogue_screen .dwarf_quartermaster_vendor:
+{
+	sell mercenary_contract_dwarven_coinaxe: { quantity: 1 reputation_level_requirement kingdom_of_thuldarim: !FRIENDLY_REPUTATION_LEVEL{} }		
+	sell kingdom_of_thuldarim_back_1: { quantity: 1 reputation_level_requirement kingdom_of_thuldarim: !HONORED_REPUTATION_LEVEL{} }	
+	sell kingdom_of_thuldarim_waist_1: { quantity: 1 reputation_level_requirement kingdom_of_thuldarim: !HONORED_REPUTATION_LEVEL{} }	
+	sell kingdom_of_thuldarim_hands_1: { quantity: 1 reputation_level_requirement kingdom_of_thuldarim: !REVERED_REPUTATION_LEVEL{} }	
+	sell kingdom_of_thuldarim_neck_1: { quantity: 1 reputation_level_requirement kingdom_of_thuldarim: !REVERED_REPUTATION_LEVEL{} }		
+}
+
+dialogue_screen .dwarf_quartermaster_dialogue:
+{
+	text: 
+	[	
+		"What can I help you with?"
+	]
+	
+	options:
+	[
+		{ goto: .dwarf_quartermaster_vendor text: "Let me browse your goods." }
+	]
+}
+
+dialogue_root .dwarf_quartermaster_dialogue:
+{
+	.dwarf_quartermaster_dialogue: { }
+}
+
+entity thalvaron_dwarf_quartermaster: !NPC
+{
+	_string: "Ghoo Ironfoot"
+	_guild_name: "Quartermaster"
+	_dialogue_root: .dwarf_quartermaster_dialogue	
+	_sprite: dwarf_15
+	_sprite_dead: dwarf_15_dead	
+	_level: 20
+	_faction: kingdom_of_thuldarim
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

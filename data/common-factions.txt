@@ -1,0 +1,68 @@
+##########################################################################################
+# Generic factions
+
+faction monsters:
+{
+}
+
+faction goblins:
+{
+	influence_tile_transform: { from: grass to: dirt }
+	influence_tile_transform: { from: dark_grass to: mud }
+}
+
+faction crabmen:
+{
+	influence_tile_transform: { from: grass to: dirt }
+	influence_tile_transform: { from: dark_grass to: mud }
+}
+
+faction skeletons:
+{
+	influence_tile_transform: { from: grass to: dirt }
+	influence_tile_transform: { from: dark_grass to: mud }
+}
+
+faction wildlife:
+{
+	flags: [ neutral ]
+}
+
+faction wildlife_aggressive:
+{
+}
+
+faction npcs:
+{
+	flags: [ friendly ]
+}
+
+faction neutral:
+{
+	flags: [ neutral ]
+}
+
+faction combat_npcs:
+{
+	flags: [ friendly ]
+}
+
+##########################################################################################
+# Thalvaron enemy factions
+
+faction rebels:
+{
+	string: "The Ember Veil"
+	flags: [ show ]
+}
+
+faction skullforge_orcs:
+{
+	string: "Skullforge Clan"
+	flags: [ show ]
+}
+
+faction dark_elves:
+{
+	# Not shown in game
+}

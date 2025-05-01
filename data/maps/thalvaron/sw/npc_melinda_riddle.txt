@@ -1,0 +1,85 @@
+dialogue_screen .melinda_riddle_dialogue:
+{
+	text: 
+	[	
+		"I hope things will go back to normal soon."
+	]		
+	
+	options:
+	[
+		{ quest: thalvaron_melinda_riddle_1 }
+	]
+}
+
+dialogue_root .melinda_riddle_dialogue:
+{
+	.melinda_riddle_dialogue: { }
+}
+
+entity thalvaron_melinda_riddle: !NPC
+{
+	_string: "Melinda Riddle"
+	_dialogue_root: .melinda_riddle_dialogue	
+	_sprite: woman_18
+	_sprite_dead: woman_18_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .melinda_riddle_1:
+{
+	string: "Escort Jim Riddle To Safety"
+	
+	maps: [ valoris_insurgency ]
+	
+	route_npc:
+	{
+		entities: [ valoris_insurgency_escort ]
+	}
+}
+
+{
+	${ _level: 20 _rarity: rare }
+	item .melinda_riddle_1_a: !QUEST_REWARD_FINGER{ _string: "Ring of Restoration" _icon: icon_ring_5 _mana_per_5: 3 _spirit: 2 _wisdom: 1 }
+	item .melinda_riddle_1_b: !QUEST_REWARD_NECK{ _string: "Choker of Agility" _icon: icon_necklace_1 _constitution: 1 _dexterity: 2 }
+	item .melinda_riddle_1_c: !QUEST_REWARD_WAIST{ _string: "Wicked Belt" _type: armor_mail _icon: icon_belt_5 _strength: 2 _dexterity: 1 }
+}
+
+quest thalvaron_melinda_riddle_1:
+{
+	string: "Kidnapped Brother"
+
+	text:
+	[
+		"Rescue Jim from rebels in the occupied part of Valoris."
+	]
+	
+	description: 
+	[
+		"I really wouldn't have bothered you with this, but you seem quite capable at solving difficult problems...\n\n"
+		"You see, my brother has managed to get himself kidnapped by rebels up north. Last week he went on a business trip to Valoris, but outside the city he got assaulted by a bunch of hooligans. At least that's what"
+		"I've been told. Allegedly they sold him to the rebels who took him somewhere inside the occupied part of Valoris. Now they want us to pay a large amount for them to release him? That's ridiculous!\n\n"
+		"I need you to venture into occupied Valoris, locate my brother Jim and get him out of there. I'll make it worth your while."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Ah yes, I heard about how you aided his escape. Good job."
+	]
+
+	type: dungeon
+	objectives: [ .melinda_riddle_1 ]
+	level: 20
+	reward_one_item: [ .melinda_riddle_1_a .melinda_riddle_1_b .melinda_riddle_1_c ]
+}

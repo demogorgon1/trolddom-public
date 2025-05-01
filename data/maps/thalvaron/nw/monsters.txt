@@ -1,0 +1,890 @@
+npc_behavior_state .wandering_short:
+{
+	on_route<thalvaron_default_patrol>: thalvaron_default_patrol
+	behavior: wandering
+	max_range: 1
+}
+
+npc_behavior_state .passive:
+{
+	on_route<thalvaron_default_patrol>: thalvaron_default_patrol
+	behavior: do_nothing
+}
+
+##########################################################################################
+# Rebels 
+
+map_entity_spawn thalvaron_rebel: 
+{ 
+	entity thalvaron_rebel_10_a: {} 
+	entity thalvaron_rebel_10_b: {} 
+	entity thalvaron_rebel_10_c: {} 
+	entity thalvaron_rebel_10_d: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_rebel_leader: 
+{ 
+	entity thalvaron_rebel_10_leader: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_rebel_outside: 
+{ 
+	entity thalvaron_rebel_skirmisher_10_a: {} 
+	entity thalvaron_rebel_skirmisher_10_b: {} 
+	entity thalvaron_rebel_skirmisher_10_c: {} 
+	entity thalvaron_rebel_skirmisher_10_d: {}
+	spawn_timer: !NPC_RESPAWN_NORMAL{} 
+}
+
+map_entity_spawn thalvaron_rebel_poacher: 
+{ 
+	entity thalvaron_rebel_poacher: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_rebel_poacher_dog: 
+{ 
+	entity thalvaron_rebel_poacher_dog: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_rebel_poacher_leader: 
+{ 
+	entity thalvaron_rebel_poacher_leader: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_rebel_fernwick:
+{ 
+	entity thalvaron_rebel_bandit_a: {} 
+	entity thalvaron_rebel_bandit_b: {} 
+	entity thalvaron_rebel_bandit_c: {} 
+	entity thalvaron_rebel_bandit_d: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_rebel_hotel:
+{ 
+	entity thalvaron_rebel_thug_a: {} 
+	entity thalvaron_rebel_thug_b: {} 
+	entity thalvaron_rebel_thug_c: {} 
+	entity thalvaron_rebel_thug_d: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_rebel_leader_farmer_rabbit:
+{ 
+	entity thalvaron_rebel_leader_farmer_rabbit: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_rebel_elite_guard:
+{ 
+	entity thalvaron_rebel_elite_guard_a: {} 
+	entity thalvaron_rebel_elite_guard_b: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_rebel_leader_camp:
+{ 
+	entity thalvaron_rebel_leader_camp: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_rebel_dead:
+{ 
+	entity thalvaron_rebel_dead_a: { init_state: dead }
+	entity thalvaron_rebel_dead_b: { init_state: dead } 
+	entity thalvaron_rebel_dead_c: { init_state: dead } 
+	entity thalvaron_rebel_dead_d: { init_state: dead } 	
+	spawn_timer: { despawn_required: true }
+}
+
+# Rebels inside the city
+{
+	loot_table .rebel_10: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { weight: 5 }
+				possibility: { weight: 1 loot_group: .captain_jerrington_1_quest_item requirement self<must_have_active_quest>: { id: .captain_jerrington_1 } } 
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_CLOTH{}
+		]	
+	}
+	
+	${
+		_level: 10
+		_faction: rebels
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: .rebel_10
+	}
+
+	entity thalvaron_rebel_10_a: !NPC { _string: "Rebel Fighter" _sprite: rebel_1 _sprite_dead: rebel_1_dead }
+	entity thalvaron_rebel_10_b: !NPC { _string: "Rebel Fighter" _sprite: rebel_2 _sprite_dead: rebel_2_dead }
+	entity thalvaron_rebel_10_c: !NPC { _string: "Rebel Fighter" _sprite: rebel_3 _sprite_dead: rebel_3_dead }
+	entity thalvaron_rebel_10_d: !NPC { _string: "Rebel Scout" _sprite: rebel_4 _sprite_dead: rebel_4_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
+	entity thalvaron_rebel_10_leader: !NPC { _string: "Rebel Leader" _sprite: rebel_5 _sprite_dead: rebel_5_dead }
+}
+
+# Rebels in the area just south of the city
+{
+
+	${
+		_level: 10
+		_faction: rebels
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: default_humanoid
+	}
+
+	entity thalvaron_rebel_skirmisher_10_a: !NPC { _string: "Rebel Skirmisher" _sprite: rebel_1 _sprite_dead: rebel_1_dead }
+	entity thalvaron_rebel_skirmisher_10_b: !NPC { _string: "Rebel Skirmisher" _sprite: rebel_2 _sprite_dead: rebel_2_dead }
+	entity thalvaron_rebel_skirmisher_10_c: !NPC { _string: "Rebel Skirmisher" _sprite: rebel_3 _sprite_dead: rebel_3_dead }
+	entity thalvaron_rebel_skirmisher_10_d: !NPC { _string: "Rebel Scout" _sprite: rebel_4 _sprite_dead: rebel_4_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
+}
+
+# Poachers
+{
+
+	${
+		_level: 11
+		_faction: rebels
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: default_humanoid
+	}
+
+	entity thalvaron_rebel_poacher: !NPC { _string: "Poacher" _sprite: rebel_4 _sprite_dead: rebel_4_dead _abilities: [ { id: npc_shoot }{ id: npc_trap }{ id: npc_attack } ] }
+}
+
+# Hunting dog
+{
+
+	${
+		_level: 11
+		_faction: rebels
+		_creature_type: beast
+		_weapon_damage: 1.1
+		_default_behavior_state: .wandering_short
+		_loot_table: default_wolf
+	}
+
+	entity thalvaron_rebel_poacher_dog: !NPC { _string: "Hunting Hound" _sprite: wolf_2 _sprite_dead: wolf_2_dead _abilities: [ { id: npc_attack } ] }
+}
+
+# Poacher leader
+{
+
+	${
+		_level: 11
+		_faction: rebels
+		_creature_type: humanoid
+		_resource_health: 2
+		_weapon_damage: 1.3
+		_default_behavior_state: .wandering_short
+		_loot_table: default_humanoid
+	}
+
+	entity thalvaron_rebel_poacher_leader: !NPC { _string: "Jimbo Haggins" _sprite: rebel_3 _sprite_dead: rebel_3_dead _abilities: [ { id: npc_rend }{ id: npc_attack } ] }
+}
+
+# Rebels around Fernwick
+{
+
+	${
+		_level: 11
+		_faction: rebels
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: default_humanoid
+	}
+
+	entity thalvaron_rebel_bandit_a: !NPC { _string: "Rebel Bandit" _sprite: rebel_1 _sprite_dead: rebel_1_dead }
+	entity thalvaron_rebel_bandit_b: !NPC { _string: "Rebel Bandit" _sprite: rebel_2 _sprite_dead: rebel_2_dead }
+	entity thalvaron_rebel_bandit_c: !NPC { _string: "Rebel Bandit" _sprite: rebel_3 _sprite_dead: rebel_3_dead }
+	entity thalvaron_rebel_bandit_d: !NPC { _string: "Rebel Pathfinder" _sprite: rebel_4 _sprite_dead: rebel_4_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
+}
+
+# Rebels around the mountain hotel (and camp)
+{
+
+	${
+		_level: 12
+		_faction: rebels
+		_creature_type: humanoid
+		_loot_table: default_humanoid
+		_default_behavior_state: .passive
+	}
+
+	entity thalvaron_rebel_thug_a: !NPC { _string: "Rebel Thug" _sprite: rebel_1 _sprite_dead: rebel_1_dead }
+	entity thalvaron_rebel_thug_b: !NPC { _string: "Rebel Thug" _sprite: rebel_2 _sprite_dead: rebel_2_dead }
+	entity thalvaron_rebel_thug_c: !NPC { _string: "Rebel Thug" _sprite: rebel_3 _sprite_dead: rebel_3_dead }
+	entity thalvaron_rebel_thug_d: !NPC { _string: "Rebel Ranger" _sprite: rebel_4 _sprite_dead: rebel_4_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
+}
+
+# Leader at farmer rabbit's farm 
+{
+
+	${
+		_level: 12
+		_faction: rebels
+		_creature_type: humanoid
+		_loot_table: default_humanoid
+		_weapon_damage: 1.7
+		_resource_health: 2
+	}
+
+	entity thalvaron_rebel_leader_farmer_rabbit: !NPC { _string: "Robert Freiling" _sprite: rebel_5 _sprite_dead: rebel_5_dead }
+}
+
+# Elite guards outside instance
+{
+
+	${
+		_level: 18
+		_faction: rebels
+		_creature_type: humanoid
+		_loot_table: default_humanoid
+		_elite: true		
+		_weapon_damage: 1.2
+		_resource_health: 1.5
+	}
+
+	entity thalvaron_rebel_elite_guard_a: !NPC { _string: "Rebel Guard" _sprite: rebel_1 _sprite_dead: rebel_1_dead }
+	entity thalvaron_rebel_elite_guard_b: !NPC { _string: "Rebel Guard" _sprite: rebel_2 _sprite_dead: rebel_2_dead }
+}
+
+# Leader at camp
+{
+
+	loot_group .rebel_leader_camp_quest_item: { }
+
+	ability .rebel_leader_camp_quest_item:	
+	{
+		string: "Encryption Key"
+		description: "This item starts a quest."
+		flags: [ target_self item ]
+		icon: icon_scroll_1
+		direct_effect simple<start_quest>: .rebel_leader_camp_quest_item
+		states: [ default in_combat ]
+		requirement self<must_not_have_completed_quest>: { id: .rebel_leader_camp_quest_item }
+		requirement self<must_not_have_active_quest>: { id: .rebel_leader_camp_quest_item }
+	}
+
+	item .rebel_leader_camp_quest_item:
+	{
+		loot_groups: [ .rebel_leader_camp_quest_item ]		
+		string: "Encryption Key" 
+		flavor: "Top Secret."
+		icon: icon_scroll_1
+		item_level: 12
+		flags: [ unique not_sellable ]
+		use_ability: .rebel_leader_camp_quest_item
+		binds: when_picked_up
+	}
+	
+	quest .rebel_leader_camp_quest_item:
+	{
+		string: "Encryption Key"
+
+		text:
+		[
+			"Bring the encryption key to Captain Jerrington outside the Eastgate district in Valoris."
+		]
+		
+		description: 
+		[
+			"Captain Jerrington will be very interested in this. Seems like just what he was looking for."
+		]
+		
+		completion:
+		[
+			"Where did you find this? This is great, now we'll be able to decrypt their communications."
+		]
+
+		level: 12
+	}
+
+	loot_table .rebel_leader_camp: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { weight: 1 loot_group: .rebel_leader_camp_quest_item requirement self<must_have_completed_quest>: .captain_jerrington_1 } 
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_CLOTH{}
+		]	
+	}
+	
+	${
+		_level: 12
+		_faction: rebels
+		_creature_type: humanoid
+		_loot_table: .rebel_leader_camp
+		_weapon_damage: 1.7
+		_resource_health: 2
+	}
+
+	entity thalvaron_rebel_leader_camp: !NPC { _string: "John Buffkun" _sprite: rebel_5 _sprite_dead: rebel_5_dead }
+	
+}
+
+# Dead rebels around forest
+{
+	${
+		_level: 12
+		_faction: monsters
+		_creature_type: humanoid
+	}
+
+	entity thalvaron_rebel_dead_a: !NPC { _string: "Rebel" _sprite: rebel_1 _sprite_dead: rebel_1_dead }	
+	entity thalvaron_rebel_dead_b: !NPC { _string: "Rebel" _sprite: rebel_2 _sprite_dead: rebel_2_dead }	
+	entity thalvaron_rebel_dead_c: !NPC { _string: "Rebel" _sprite: rebel_3 _sprite_dead: rebel_3_dead }	
+	entity thalvaron_rebel_dead_d: !NPC { _string: "Rebel" _sprite: rebel_4 _sprite_dead: rebel_4_dead }	
+}
+
+##########################################################################################
+# Lion
+
+map_entity_spawn thalvaron_cave_lion: 
+{ 
+	entity thalvaron_cave_lion: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Lion in cave mushroom quest
+{
+
+	${
+		_faction: monsters
+		_creature_type: beast
+		_loot_table: default_lion
+		_weapon_damage: 2
+		_resource_health: 2.3
+	}
+	
+	entity thalvaron_cave_lion: !NPC { _string: "Cave Lion" _sprite: lion_1 _sprite_dead: lion_1_dead _level: 11 }
+}
+
+##########################################################################################
+# Deer
+
+map_entity_spawn thalvaron_deer: 
+{ 
+	entity thalvaron_deer_10: {} 
+	entity thalvaron_deer_11: {} 
+	entity thalvaron_deer_12: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Wildlife around Valoris
+{
+
+	${
+		_faction: wildlife
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: default_deer
+	}
+	
+	entity thalvaron_deer_10: !NPC { _string: "Deer" _sprite: deer _sprite_dead: deer_dead _level: 10 }
+	entity thalvaron_deer_11: !NPC { _string: "Deer" _sprite: deer _sprite_dead: deer_dead _level: 11 }
+	entity thalvaron_deer_12: !NPC { _string: "Deer" _sprite: deer _sprite_dead: deer_dead _level: 12 }
+}
+
+##########################################################################################
+# Crabs
+
+map_entity_spawn thalvaron_crab: 
+{ 
+	entity thalvaron_crab_10: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_crab_2: 
+{ 
+	entity thalvaron_crab_11: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_crab_3: 
+{ 
+	entity thalvaron_crab_12: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_crab_dark_elf: 
+{ 
+	entity thalvaron_crab_dark_elf: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_crab_giant: 
+{ 
+	spawn_timer: { only_when_triggered: true }
+}
+
+# Crabs in the area just south of the city
+{
+
+	loot_table .crabs_10: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { weight: 1 }
+				possibility: { weight: 1 loot_group: .general_store_john_quest_item requirement self<must_have_active_quest>: { id: .general_store_john_1 } } 
+			}
+			
+			!WORLD_DROPS {}				
+			!WORLD_DROPS_CRABS {}			
+		]	
+	}
+
+	${
+		_level: 10
+		_faction: wildlife
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: .crabs_10
+	}
+
+	entity thalvaron_crab_10: !NPC { _string: "Mud Crawler" _sprite: crab_1 _sprite_dead: crab_1_dead }
+}
+
+# Hostile crabs along the western coast
+{
+
+	${
+		_level: 11
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: default_crab
+		_abilities: [ { id: npc_rend } { id: npc_attack } ]
+	}
+
+	entity thalvaron_crab_11: !NPC { _string: "Sand Crawler" _sprite: crab_2 _sprite_dead: crab_2_dead }	
+}
+
+# Old man's cave crabs
+{
+
+	${
+		_level: 12
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: default_crab
+		_abilities: [ { id: npc_acid_spit } { id: npc_attack } ]
+	}
+
+	entity thalvaron_crab_12: !NPC { _string: "Sand Spitter" _sprite: crab_3 _sprite_dead: crab_3_dead }	
+}
+
+# Dark elf crab master
+{
+	
+	loot_group .crab_dark_elf: {}
+
+	loot_table .crab_dark_elf: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: 
+				{ 
+					loot_group: .crab_dark_elf 
+					requirement self<must_not_have_active_quest>: .fisherman_3  
+					requirement self<must_not_have_completed_quest>: .fisherman_3  
+				} 
+			}
+			
+			!WORLD_DROPS {}			
+			!WORLD_DROPS_CLOTH {}
+		]	
+	}
+	
+	ability .crab_dark_elf_quest_drop_start_quest:	
+	{
+		string: "Mysterious Pearl"
+		description: "This item starts a quest."
+		flags: [ target_self item ]
+		icon: icon_pearl
+		direct_effect simple<start_quest>: .fisherman_3
+		states: [ default in_combat ]
+		requirement self<must_not_have_completed_quest>: .fisherman_3
+		requirement self<must_not_have_active_quest>: .fisherman_3
+	}
+
+	item .crab_dark_elf_quest_drop:
+	{
+		loot_groups: [ .crab_dark_elf ]		
+		string: "Mysterious Pearl" 
+		icon: icon_pearl
+		item_level: 12
+		flags: [ unique not_sellable ]
+		use_ability: .crab_dark_elf_quest_drop_start_quest
+		binds: when_picked_up
+	}
+
+	${
+		_level: 12
+		_faction: dark_elves
+		_creature_type: humanoid
+		_loot_table: .crab_dark_elf
+		_resource_mana: 1
+		_abilities: [ { id: npc_firebolt } { id: npc_attack } ]
+	}
+
+	entity thalvaron_crab_dark_elf: !NPC { _string: "Dark Elf" _sprite: dark_elf_1 _sprite_dead: dark_elf_1_dead }
+}
+
+# Giant crab boss
+{
+	loot_table .crab_giant: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { weight: 1 }
+			}
+			
+			!WORLD_DROPS {}		
+		]	
+	}
+
+	${
+		_level: 12
+		_elite: true
+		_faction: monsters
+		_creature_type: beast
+		_loot_table: .crab_giant
+		_abilities: [ { id: npc_rend } { id: npc_attack } ]
+		_large: true
+		_out_of_zone_action: { evade: true }
+		_immune_to_stun: true
+		_immune_to_immobilize: true
+		_immune_to_slow: true
+		_zone: thalvaron_crab_giant
+		_resource_health: 7
+		_weapon_damage: 2.5	
+		_can_move_on_all_non_view_blocking_tiles: true
+		_evade_despawn: true
+	}
+
+	entity thalvaron_crab_giant: !NPC { _string: "Lurker of the Deep" _sprite: giga_grab_1 _sprite_dead: giga_grab_1_dead _in_water_sprite: giga_grab_1_submerged }
+}
+
+##########################################################################################
+# Bear that stole Roger's lunch
+
+map_entity_spawn thalvaron_roger_bear: 
+{ 
+	entity thalvaron_roger_bear: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+{
+
+	loot_table .roger_bear: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { loot_group: .fernwick_bar_patron_quest_item requirement self<must_have_active_quest>: { id: .fernwick_bar_patron_1 } } 
+			}
+			
+			!WORLD_DROPS {}		
+			!WORLD_DROPS_BEARS {}			
+		]	
+	}
+
+	${
+		_level: 10
+		_faction: monsters
+		_creature_type: beast
+		_weapon_damage: 2
+		_resource_health: 2
+		_default_behavior_state: .wandering_short
+		_loot_table: .roger_bear
+	}
+
+	entity thalvaron_roger_bear: !NPC { _string: "Large Bear" _sprite: bear _sprite_dead: bear_dead }
+}
+
+##########################################################################################
+# Wolves
+
+map_entity_spawn thalvaron_robertson_farm_wolf: 
+{ 
+	entity thalvaron_wolf_11: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Wolves around Robertson farm
+{
+	${
+		_level: 11
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: default_wolf
+	}
+
+	entity thalvaron_wolf_11: !NPC { _string: "Grey Wolf" _sprite: wolf_3 _sprite_dead: wolf_3_dead }
+}
+
+##########################################################################################
+# Dark elves
+
+map_entity_spawn thalvaron_rebel_dark_elf: 
+{ 
+	entity thalvaron_rebel_dark_elf: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_rebel_dark_elf_demon: 
+{ 
+	entity thalvaron_rebel_dark_elf_demon_a: {} 
+	entity thalvaron_rebel_dark_elf_demon_b: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_rebel_dark_elf_leader: 
+{ 
+	entity thalvaron_rebel_dark_elf_leader: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_rebel_dark_elf_human: 
+{ 
+	entity thalvaron_rebel_dark_elf_human: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Demon
+{
+	
+	${
+		_level: 12
+		_faction: monsters
+		_creature_type: demon
+		_loot_table: default_demon
+		_default_behavior_state: .wandering_short
+		_resource_mana: 1		
+	}
+
+	entity thalvaron_rebel_dark_elf_demon_a: !NPC { _string: "Voidflamer" _sprite: demon_2 _sprite_dead: demon_2_dead _abilities: [ { id: npc_firebolt } { id: npc_attack } ] }
+	entity thalvaron_rebel_dark_elf_demon_b: !NPC { _string: "Furry Fiend" _sprite: demon_1 _sprite_dead: demon_1_dead _abilities: [ { id: npc_rend } { id: npc_attack } ] }
+}
+
+# Dark elves behind the hotel
+{
+	${
+		_level: 12
+		_faction: dark_elves
+		_creature_type: humanoid
+		_loot_table: default_humanoid
+	}
+
+	entity thalvaron_rebel_dark_elf: !NPC { _string: "Dark Elf" _sprite: dark_elf_2 _sprite_dead: dark_elf_2_dead _abilities: [ { id: npc_curse } { id: npc_attack } ] _resource_mana: 1 }
+	entity thalvaron_rebel_dark_elf_leader: !NPC { _string: "Gyosa the Bloodletter" _sprite: dark_elf_1 _sprite_dead: dark_elf_1_dead _abilities: [ { id: npc_rend } { id: npc_attack } ] _resource_health: 2 }
+}
+
+# Dark elves rebel human guy
+{
+	
+	loot_group .rebel_dark_elf_human: {}
+
+	item thalvaron_rebel_dark_elf_human_quest_item:
+	{
+		binds: when_picked_up
+		loot_groups: [ .rebel_dark_elf_human ]		
+		string: "Secret Document" 
+		flavor: "Half of it is written in a strange language."
+		icon: icon_scroll_1
+		item_level: 12
+		quest: .ranger_seymore_2
+		flags: [ not_sellable unique ]
+	}
+
+	loot_table .rebel_dark_elf_human: 
+	{
+		slots:
+		[	
+			{
+				possibility: { weight: 1 loot_group: .rebel_dark_elf_human requirement self<must_have_active_quest>: { id: .ranger_seymore_2 } } 
+			}
+		
+			!WORLD_DROPS {}			
+			!WORLD_DROPS_CLOTH {}
+		]	
+	}
+	
+	${
+		_level: 12
+		_faction: monsters
+		_creature_type: humanoid
+		_weapon_damage: 1.3
+		_resource_health: 2
+		_loot_table: .rebel_dark_elf_human		
+	}
+
+	entity thalvaron_rebel_dark_elf_human: !NPC { _string: "Jim" _sprite: rebel_5 _sprite_dead: rebel_5_dead _abilities: [ { id: npc_attack } ] }
+}
+
+##########################################################################################
+# The woods
+
+map_entity_spawn thalvaron_the_beast: 
+{ 
+	entity thalvaron_the_beast: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_elemental: 
+{ 
+	entity thalvaron_elemental: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_arcane_worm: 
+{ 
+	entity thalvaron_arcane_worm: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_arcane_monster: 
+{ 
+	entity thalvaron_arcane_warrior: {} 
+	entity thalvaron_arcane_apparition: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# The beast
+{
+	loot_table .the_beast: 
+	{
+		slots:
+		[	
+			!WORLD_DROPS {}			
+		]	
+	}
+	
+	${
+		_level: 13
+		_faction: monsters
+		_creature_type: humanoid
+		_weapon_damage: 10
+		_resource_health: 20
+		_elite: true
+		_loot_table: .the_beast
+		_immune_to_stun: true
+		_immune_to_immobilize: true
+		_immune_to_slow: true
+		_default_behavior_state: .wandering_short
+		_aggro_requirements:
+		{
+			requirement target<must_not_have_completed_quest>: .thora_2
+		}
+	}
+
+	entity thalvaron_the_beast: !NPC { _string: "The Beast" _sprite: monster_1 _sprite_dead: monster_1_dead _abilities: [ { id: npc_attack } ] }
+}
+
+# Elementals
+{
+
+	loot_table .elemental: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { weight: 1 }
+				possibility: { weight: 1 loot_group: .thora_1_quest_item requirement self<must_have_active_quest>: { id: .thora_1 } } 
+			}
+			
+			!WORLD_DROPS {}				
+		]	
+	}
+
+	${
+		_level: 13
+		_faction: monsters
+		_creature_type: elemental
+		_weapon_damage: 1.3
+		_resource_health: 1.3
+		_default_behavior_state: .wandering_short
+		_loot_table: .elemental
+	}
+
+	entity thalvaron_elemental: !NPC { _string: "Icy Apparition" _sprite: spirit _sprite_dead: spirit_dead _abilities: [ { id: npc_froststrike } { id: npc_attack } ] }
+}
+
+loot_table .arcane_monster: 
+{
+	slots:
+	[	
+		!WORLD_DROPS {}				
+	]	
+}
+
+# Arcane worms
+{
+	${
+		_level: 14
+		_faction: monsters
+		_creature_type: elemental
+		_weapon_damage: 0.8
+		_resource_health: 0.8
+		_default_behavior_state: .wandering_short
+		_loot_table: .arcane_monster
+		_abilities: 
+		[ 
+			{ id: npc_arcane_detonation requirement self<must_have_less_health_than>: 20 } 
+			{ id: npc_attack } 
+		]
+	}
+
+	entity thalvaron_arcane_worm: !NPC { _string: "Arcane Worm" _sprite: arcane_worm_1 _sprite_dead: arcane_worm_1_dead }
+}
+
+# Arcane melee
+{
+	${
+		_level: 14
+		_faction: monsters
+		_creature_type: elemental
+		_weapon_damage: 1.1	
+		_resource_health: 1.2
+		_default_behavior_state: .passive
+		_loot_table: .arcane_monster
+	}
+
+	entity thalvaron_arcane_warrior: !NPC { _string: "Arcane Warrior" _sprite: arcane_melee_1 _sprite_dead: arcane_melee_1_dead _abilities: [ { id: npc_attack } ] }
+}
+
+# Arcane caster
+{
+	${
+		_level: 14
+		_faction: monsters
+		_creature_type: elemental
+		_weapon_damage: 0.8	
+		_resource_health: 1
+		_default_behavior_state: .passive
+		_loot_table: .arcane_monster
+	}
+
+	entity thalvaron_arcane_apparition: !NPC { _string: "Arcane Apparition" _sprite: arcane_caster_1 _sprite_dead: arcane_caster_1_dead _abilities: [ { id: npc_attack } { id: npc_chain_lightning } ] }
+}

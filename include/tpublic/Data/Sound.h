@@ -34,6 +34,8 @@ namespace tpublic
 							m_source = (aChild->m_realPath + "/") + aChild->GetString();
 						else if(aChild->m_name == "streamed")
 							m_streamed = aChild->GetBool();
+						else if (aChild->m_name == "cooldown_ms")
+							m_cooldownMS = aChild->GetUInt32();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -45,6 +47,7 @@ namespace tpublic
 				IWriter*				aWriter) const override
 			{
 				aWriter->WriteBool(m_streamed);
+				aWriter->WriteUInt(m_cooldownMS);
 			}
 			
 			bool
@@ -53,11 +56,14 @@ namespace tpublic
 			{
 				if(!aReader->ReadBool(m_streamed))
 					return false;
+				if (!aReader->ReadUInt(m_cooldownMS))
+					return false;
 				return true;
 			}
 
 			// Public data			
 			bool				m_streamed = false;
+			uint32_t			m_cooldownMS = 80;
 			std::string			m_source; // Not serialized
 		};
 

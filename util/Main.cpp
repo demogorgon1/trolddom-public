@@ -5,7 +5,7 @@ main(
 	int		aNumArgs,
 	char**	aArgs)
 {
-	tpublic::DataErrorHandling::SetErrorCallback([](
+	tpublic::DataErrorHandling::PushErrorCallback([](
 		const char* aErrorMessage)
 	{
 		fprintf(stderr, "Error: %s\n", aErrorMessage);
@@ -16,8 +16,7 @@ main(
 
 	tpublic::Compiler compiler(&manifest);
 
-	compiler.Parse("../../data");
-	compiler.Build("../../data/_ids.txt", ".", "../../data/generated", tpublic::Compression::LEVEL_FAST);
+	compiler.Build({ "../../data" }, "../../data/_ids.txt", ".", "../../data/generated", tpublic::Compression::LEVEL_FAST);
 	manifest.Verify();	
 
 	return EXIT_SUCCESS;

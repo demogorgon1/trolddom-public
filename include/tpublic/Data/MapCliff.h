@@ -31,7 +31,7 @@ namespace tpublic
 					if (!FromSourceBase(aChild))
 					{
 						if (aChild->m_name == "cliff_style")
-							m_cliffStyleId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_CLIFF_STYLE, aChild->GetIdentifier());
+							m_cliffStyleId = aChild->GetId(DataType::ID_CLIFF_STYLE);
 						else if(aChild->m_name == "elevation")
 							m_elevation = aChild->GetUInt8();
 						else if (aChild->m_name == "ramp")

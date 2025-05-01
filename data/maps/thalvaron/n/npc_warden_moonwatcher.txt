@@ -1,0 +1,136 @@
+dialogue_screen .warden_moonwatcher_dialogue:
+{
+	text: 
+	[	
+		"Stay vigilant."
+	]		
+	
+	options:
+	[
+		{ quest: .warden_moonwatcher_1 }
+		{ quest<completion_only>: .evil_orb }
+		{ quest<offer_only>: .warden_moonwatcher_2 }
+		{ quest<completion_only>: .warden_ghourian_2 }
+	]
+}
+
+dialogue_root .warden_moonwatcher_dialogue:
+{
+	.warden_moonwatcher_dialogue: { }
+}
+
+entity thalvaron_warden_moonwatcher: !NPC
+{
+	_string: "Warden Moonwatcher"
+	_dialogue_root: .warden_moonwatcher_dialogue	
+	_sprite: elf_7
+	_sprite_dead: elf_7_dead
+	_level: 20
+	_faction: children_of_the_moon		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .warden_moonwatcher_1:
+{
+	string: "Infected Claws"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .warden_moonwatcher_1_quest_item count: 6 }
+}
+
+loot_group .warden_moonwatcher_1_quest_item: {}
+
+item .warden_moonwatcher_1_quest_item:
+{
+	icon: icon_claw
+	item_level: 17
+	loot_groups: [ .warden_moonwatcher_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Infected Claw"
+	stack: 6
+}
+
+{
+	${ _level: 17 }
+  	item .warden_moonwatcher_1_a: !QUEST_REWARD_NECK{ _string: "Necklace of the Warden" _icon: icon_necklace_3 _constitution: 2 _spirit: 1 }
+}	 
+
+quest .warden_moonwatcher_1:
+{
+	string: "Clearing the Woods"
+
+	text:
+	[
+		"Slay Rotting Corpses around the town."
+	]
+	
+	description: 
+	[
+		"The rotting corpses have been raised from the dead and has overrun the outskirts of our little town! Please help put them back in the ground!"
+	]
+
+	progress:
+	[
+		"Make haste, $class$!"
+	]
+	
+	completion:
+	[
+		"Good job."
+	]
+
+	objectives: [ .warden_moonwatcher_1 ]
+	level: 17
+	reward_all_items: [ .warden_moonwatcher_1_a ]
+}
+
+############################################################
+# Quest 2
+
+item .warden_moonwatcher_2_quest_item:
+{
+	icon: icon_orb_1
+	item_level: 18
+	flags: [ not_sellable unique ]
+	string: "Evil Orb"
+}
+
+quest .warden_moonwatcher_2:
+{
+	string: "Divine Consultation"
+
+	text:
+	[
+		"Take the Evil Orb to the island in Lake Joonor."
+	]
+	
+	description: 
+	[
+		"Good thing you didn't destroy the dark elf orb you found in the woods. Since it's still intact we might be able to figure out where it's coming from.\n\n"
+		"To the east you'll find the great Lake Joonor. On a small island there is a temple of significant divine elvish importance. Take the orb there and consult the spirits who inhabit the place."
+	]
+
+	progress:
+	[
+		"Yes."
+	]
+	
+	completion:
+	[
+		"Ah, yes..."
+	]
+
+	level: 18
+	prerequisites: [ .evil_orb ]
+	reward_xp_multiplier: 0.5
+	reward_cash_multiplier: 0
+	quest_items: [ .warden_moonwatcher_2_quest_item ]
+}
+
+

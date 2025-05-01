@@ -1,0 +1,14 @@
+entity thalvaron_auctioneer: !NPC
+{
+	_string: "Lisa Kaufman"
+	_loot_table: .npc
+	_guild_name: "Auctioneer"
+	_level: 20
+	_faction: npcs
+	_creature_type: humanoid
+	_not_pushable: true
+	_sprite: woman_27
+	_sprite_dead: woman_27_dead
+	_auctioneer: true
+}
+	

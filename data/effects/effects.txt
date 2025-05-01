@@ -60,6 +60,24 @@ sprites:
 	sprite effect_divine_shield_0: { flags: [ centered ] }
 	sprite effect_divine_shield_1: { flags: [ centered ] }
 	sprite effect_divine_shield_2: { flags: [ centered ] }
+	sprite effect_net_trap: { flags: [ centered ] }	
+	sprite effect_instance_portal_hole_0: { flags: [ ] }
+	sprite effect_instance_portal_hole_1: { flags: [ ] }
+	sprite effect_instance_portal_hole_2: { flags: [ ] }	
+	sprite effect_brown_glow_0: { flags: [ ] }
+	sprite effect_brown_glow_1: { flags: [ ] }
+	sprite effect_brown_glow_2: { flags: [ ] }
+	sprite effect_brown_glow_3: { flags: [ ] }
+	sprite effect_holy_wings_0: { flags: [ centered ] }
+	sprite effect_holy_wings_1: { flags: [ centered ] }
+	sprite effect_holy_wings_2: { flags: [ centered ] }
+	sprite effect_unholy_wings_0: { flags: [ centered ] }
+	sprite effect_unholy_wings_1: { flags: [ centered ] }
+	sprite effect_unholy_wings_2: { flags: [ centered ] }
+	sprite effect_web_trap: { flags: [ centered ] }	
+	sprite effect_void_zone_0: { flags: [ ] }
+	sprite effect_void_zone_1: { flags: [ ] }
+	sprite effect_void_zone_2: { flags: [ ] }
 	
 	cursor: { position: [ 0 20 ] }	
 	size: { width: 24 height: 24 }
@@ -74,6 +92,9 @@ sprites:
 	sprite effect_expl_2: { flags: [ centered ] }
 	sprite effect_expl_3: { flags: [ centered ] }
 	sprite effect_void_blade_storm: { flags: [ centered ] }
+	sprite effect_disruption_0: { flags: [ centered ] }
+	sprite effect_disruption_1: { flags: [ centered ] }
+	sprite effect_disruption_2: { flags: [ centered ] }
 
 	cursor: { position: [ 0 44 ] }
 	size: { width: 16 height: 16 }
@@ -138,6 +159,7 @@ sprites:
 	sprite effect_pink_lightning_0: { flags: [ centered ] }
 	sprite effect_pink_lightning_1: { flags: [ centered ] }
 	sprite effect_pink_lightning_2: { flags: [ centered ] }
+	sprite effect_web_projectile: { flags: [ centered ] }
 	
 	cursor: { position: [ 0 67 ] }
 	size: { width: 14 height: 14 }

@@ -1,0 +1,71 @@
+dialogue_screen .wounded_city_guard_dialogue:
+{
+	text: 
+	[	
+		"Urgh... I don't have much time left."
+	]		
+	
+	options:
+	[
+		{ quest<offer_only>: .wounded_city_guard_1 }
+		{ quest<completion_only>: .samantha_plington_1 }
+	]
+}
+
+dialogue_root .wounded_city_guard_dialogue:
+{
+	.wounded_city_guard_dialogue: { }
+}
+
+entity thalvaron_wounded_city_guard: !NPC
+{
+	_string: "Wounded City Guard"
+	_dialogue_root: .wounded_city_guard_dialogue	
+	_sprite: city_guard_1_dead
+	_sprite_dead: city_guard_1_dead
+	_level: 20
+	_faction: valoris		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+item .wounded_city_guard_1_quest_item:
+{
+	icon: icon_scroll_1
+	item_level: 10
+	flags: [ unique not_sellable ]
+	string: "Letter from the Wounded City Guard"
+}
+
+quest .wounded_city_guard_1:
+{
+	string: "Letter for Samantha"
+
+	text:
+	[
+		"Deliver the letter to the wife of the wounded city guard."
+	]
+	
+	description: 
+	[
+		"I can feel life seeping out of my body. Can you please deliver this letter to my wife Samantha? It would mean a lot to me. Our house is in the Southgate district of the city, close to the gate. It's green. Please, find my wife."
+	]
+
+	progress:
+	[
+		"Hurry! I can feel time is running out."
+	]
+	
+	completion:
+	[
+		"Huh, my husband sent you with a letter. Again? Let me see."
+	]
+
+	level: 10
+	reward_xp_multiplier: 0.2
+	quest_items: [ .wounded_city_guard_1_quest_item ]
+}

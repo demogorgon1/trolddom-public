@@ -1,0 +1,38 @@
+dialogue_screen .valoris_quartermaster_2_vendor:
+{
+	sell token_of_victory_healing_potion: !TOKEN_OF_VICTORY_PRICE{ _count: 1 }
+	sell token_of_victory_bag: !TOKEN_OF_VICTORY_PRICE{ _count: 12 }
+}
+
+dialogue_screen .valoris_quartermaster_2_dialogue:
+{
+	text: 
+	[	
+		"How are you doing?"
+	]
+	
+	options:
+	[
+		{ goto: .valoris_quartermaster_2_vendor text: "Let me browse your goods." }
+	]
+}
+
+dialogue_root .valoris_quartermaster_2_dialogue:
+{
+	.valoris_quartermaster_2_dialogue: { }
+}
+
+entity thalvaron_valoris_quartermaster_2: !NPC
+{
+	_string: "Maria Wearlton"
+	_guild_name: "Valoris Quartermaster"
+	_dialogue_root: .valoris_quartermaster_2_dialogue	
+	_sprite: woman_32
+	_sprite_dead: woman_32_dead	
+	_level: 20
+	_faction: valoris		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

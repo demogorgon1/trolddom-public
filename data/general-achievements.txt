@@ -25,3 +25,5 @@ achievement quests_4: { category: general string: "Artisan Adventurer" descripti
 achievement quests_5: { category: general string: "Master Adventurer" description: "Complete 1000 quests." points: 10 priority: 0 stat_trigger quests_completed: 1000 icon: icon_exclamation_mark root: quests_1 }
 
 achievement multi_level_10: { category: general string: "Leveling the Playing Field" description: "Reach level 10 as a Fighter, a Priest, and a Sorcerer." points: 20 need_achievements: [ fighter_level_10 priest_level_10 sorcerer_level_10 ] icon: icon_road account_wide: true }
+achievement multi_level_20: { category: general string: "Leveling the Playing Field Even More" description: "Reach level 20 as all classes." points: 20 need_achievements: [ fighter_level_20 priest_level_20 sorcerer_level_20 paladin_level_20 witch_level_20 ] icon: icon_road account_wide: true root: multi_level_10 }
+

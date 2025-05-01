@@ -1,0 +1,44 @@
+dialogue_screen .wanderer_dialogue:
+{
+	text: 
+	[	
+		"This is the site of the doomed city of Ghorynth."
+	]			
+	
+	options:
+	[
+	]
+}
+
+dialogue_root .wanderer_dialogue:
+{
+	.wanderer_dialogue: { }
+}
+
+npc_behavior_state .wanderer:
+{
+	behavior: patrolling
+	pause_when_targeted_by_nearby_player: true
+}
+
+entity .wanderer: !NPC
+{
+	_string: "Wanderer"
+	_dialogue_root: .wanderer_dialogue
+	_loot_table: .npc
+	_level: 22
+	_elite: true
+	_weapon_damage: 2
+	_resource_health: 3	
+	_faction: npcs
+	_creature_type: humanoid
+	_not_pushable: true
+	_route: .wanderer
+	_default_behavior_state: .wanderer
+	_sprite: man_57
+	_sprite_dead: man_57_dead
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+}
+	

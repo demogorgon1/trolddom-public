@@ -1,0 +1,190 @@
+dialogue_screen .ulrik_copperquill_dialogue:
+{
+	text: 
+	[	
+		"If you're into herbs, go talk to my brother."
+	]		
+	
+	options:
+	[
+		{ quest: .ulrik_copperquill_1 }
+		{ quest: .ulrik_copperquill_2 }
+		{ quest<offer_only>: .ulrik_copperquill_3 }
+	]
+}
+
+dialogue_root .ulrik_copperquill_dialogue:
+{
+	.ulrik_copperquill_dialogue: { }
+}
+
+entity thalvaron_ulrik_copperquill: !NPC
+{
+	_string: "Ulrik Copperquill"
+	_dialogue_root: .ulrik_copperquill_dialogue	
+	_sprite: dwarf_11
+	_sprite_dead: dwarf_11_dead
+	_level: 20
+	_faction: kingdom_of_thuldarim		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .ulrik_copperquill_1_quest_item: {}
+
+item .ulrik_copperquill_1_quest_item:
+{
+	icon: icon_scales_1
+	item_level: 14
+	loot_groups: [ .ulrik_copperquill_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Dust Lizard Scales"
+	stack: 6
+}
+
+objective .ulrik_copperquill_1:
+{
+	string: "Dust Lizard Scales"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .ulrik_copperquill_1_quest_item count: 6 }
+}
+
+quest .ulrik_copperquill_1:
+{
+	string: "Dust Lizards"
+
+	text:
+	[
+		"Kill Dust Lizards outside Durgan Tharok to the west and collect their scales."
+	]
+	
+	description: 
+	[
+		"Maybe you can assist an old alchemist in his work? Maybe you noticed the lizards roaming the badlands to the west of Durgan Tharok? Yes? No? Anyway, I need some of their scales for one of my potions. Can you fetch me some?"
+	]
+
+	progress:
+	[
+		"Hello."
+	]
+	
+	completion:
+	[
+		"That's some fine scales, thanks a lot."
+	]
+	
+	objectives: [ .ulrik_copperquill_1 ]
+	level: 14
+	next_quest: .ulrik_copperquill_2
+}
+
+############################################################
+# Quest 2
+
+loot_group .ulrik_copperquill_2_quest_item: {}
+
+item .ulrik_copperquill_2_quest_item:
+{
+	icon: icon_poison
+	item_level: 14
+	loot_groups: [ .ulrik_copperquill_2_quest_item ]
+	flags: [ not_sellable ]
+	string: "Dread Scorpion Blood"
+	stack: 6
+}
+
+objective .ulrik_copperquill_2:
+{
+	string: "Dread Scorpion Blood"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .ulrik_copperquill_2_quest_item count: 6 }
+}
+
+{
+	${ _level: 14 }
+	item .ulrik_copperquill_2_a: !QUEST_REWARD_NECK{ _string: "Amulet of Dwarven Magic" _icon: icon_necklace_2 _wisdom: 2 _spell_damage: 1 }
+	item .ulrik_copperquill_2_b: !QUEST_REWARD_NECK{ _string: "Amulet of the Fighter" _icon: icon_necklace_1 _strength: 1 _constitution: 1 _dexterity: 1 }
+}
+
+quest .ulrik_copperquill_2:
+{
+	string: "Dread Scorpions"
+
+	text:
+	[
+		"Hunt down Dread Scorpions in the western parts of the badlands and collect their blood."
+	]
+	
+	description: 
+	[
+		"Good job with the lizards. Can you help me with something else as well? I also need a bunch of blood from some of the giant scorpions roaming outside. I promise, this is the last thing you need to pick up for me."
+	]
+
+	progress:
+	[
+		"Hello."
+	]
+	
+	completion:
+	[
+		"Nice."
+	]
+	
+	objectives: [ .ulrik_copperquill_2 ]
+	prerequisites: [ .ulrik_copperquill_1 ]
+	level: 14
+	reward_one_item: [ .ulrik_copperquill_2_a .ulrik_copperquill_2_b ]
+}
+
+############################################################
+# Quest 3
+
+item .ulrik_copperquill_3_quest_item:
+{
+	icon: icon_orange_potion
+	item_level: 15
+	flags: [ not_sellable unique ]
+	string: "Desert Remedy"
+}
+
+quest .ulrik_copperquill_3:
+{
+	string: "Desert Remedy"
+
+	text:
+	[
+		"Bring the Desert Remedy to Rumin Whiterock at the northern camp in the Badlands."
+	]
+	
+	description: 
+	[
+		"A friend of mine recently went to the camp up north to study the local wildlife and I know he suffers a bit from the climate. Thanks to you I've been able to brew a potion that will help him get through the nights. Maybe you"
+		"can bring it to him? I'm sure he'll give you something for your trouble.\n\n"
+		"You'll find the camp if you head north in the Badlands. My friend's name is Rumin Whiterock."
+	]
+
+	progress:
+	[
+		"Don't drink it yourself."
+	]
+	
+	completion:
+	[
+		"Uh, whatever Ulrik is brewing it's usually good. Thanks!"
+	]
+	
+	prerequisites: [ .ulrik_copperquill_2 ]
+	level: 15
+	quest_items: [ .ulrik_copperquill_3_quest_item ]
+	reward_xp_multiplier: 0.4
+	reward_cash_multiplier: 0.4
+}
+

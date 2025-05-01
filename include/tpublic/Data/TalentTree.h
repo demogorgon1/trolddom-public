@@ -71,12 +71,12 @@ namespace tpublic
 						if (aChild->m_tag == "talent")
 						{
 							entry.m_type = MapPaletteEntry::TYPE_TALENT;
-							entry.m_id = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TALENT, aChild->m_name.c_str());
+							entry.m_id = aChild->m_sourceContext->m_persistentIdTable->GetId(aChild->m_debugInfo, DataType::ID_TALENT, aChild->m_name.c_str());
 						}
 						else if (aChild->m_tag == "sprite")
 						{
 							entry.m_type = MapPaletteEntry::TYPE_SPRITE;
-							entry.m_id = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->m_name.c_str());
+							entry.m_id = aChild->m_sourceContext->m_persistentIdTable->GetId(aChild->m_debugInfo, DataType::ID_SPRITE, aChild->m_name.c_str());
 						}
 						else
 						{
@@ -163,7 +163,7 @@ namespace tpublic
 						}
 						else if (aChild->m_name == "icon")
 						{
-							m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
+							m_iconSpriteId = aChild->GetId(DataType::ID_SPRITE);
 						}
 						else if (aChild->m_name == "map_palette")
 						{

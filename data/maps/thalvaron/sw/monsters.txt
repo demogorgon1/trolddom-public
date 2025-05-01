@@ -1,0 +1,1280 @@
+npc_behavior_state .wandering_short:
+{
+	on_route<thalvaron_default_patrol>: thalvaron_default_patrol
+	behavior: wandering
+	max_range: 1
+}
+
+npc_behavior_state .passive:
+{
+	on_route<thalvaron_default_patrol>: thalvaron_default_patrol
+	behavior: do_nothing
+}
+
+##########################################################################################
+# Marshlands monsters
+
+map_entity_spawn thalvaron_mud_slinger: 
+{ 
+	entity thalvaron_mud_slinger: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_mud_slinger_2: 
+{ 
+	entity thalvaron_mud_slinger_2: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_crocodile: 
+{ 
+	entity thalvaron_crocodile: { level: 12 } 
+	entity thalvaron_crocodile_2: { level: 13 } 
+	entity thalvaron_crocodile_3: { level: 14 } 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_crocodile_salt: 
+{ 
+	entity thalvaron_crocodile_salt: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_swamp_monster: 
+{ 
+	entity thalvaron_swamp_lurker: {} 
+	entity thalvaron_swamp_dweller: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_neutral_crab:
+{
+	entity thalvaron_neutral_crab: {} 
+	entity thalvaron_neutral_crab_2: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_lizard_ambusher_1:
+{
+	spawn_timer: { only_when_triggered: true }
+}
+
+map_entity_spawn thalvaron_lizard_ambusher_2:
+{
+	spawn_timer: { only_when_triggered: true }
+}
+
+map_entity_spawn thalvaron_lizard_ambusher_3:
+{
+	spawn_timer: { only_when_triggered: true }
+}
+
+map_entity_spawn thalvaron_swamp_ooze:
+{
+	entity thalvaron_swamp_ooze: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_rock_crumbler:
+{
+	entity thalvaron_rock_crumbler: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_rock_crumbler_boss:
+{
+	entity thalvaron_rock_crumbler_boss: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_swamp_giant:
+{
+	entity thalvaron_swamp_giant: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Neutral crabs
+{
+
+	${		
+		_faction: wildlife
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: default_crab
+	}
+
+	entity thalvaron_neutral_crab: !NPC { _string: "Marshlands Crab" _sprite: crab_1 _sprite_dead: crab_1_dead _level: 13 }
+	entity thalvaron_neutral_crab_2: !NPC { _string: "Southern Mud Crawler" _sprite: crab_2 _sprite_dead: crab_2_dead _level: 14 }
+}
+
+# Mud slingers
+{
+	loot_table .mud_slinger: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { weight: 1 }
+				possibility: { weight: 1 loot_group: thalvaron_alchemy_trainer_1_quest_item requirement self<must_have_active_quest>: { id: thalvaron_alchemy_trainer_1 } } 
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_NATURE_ELEMENTALS {}
+		]	
+	}
+	
+	${
+		_level: 12
+		_faction: monsters
+		_creature_type: elemental		
+		_loot_table: .mud_slinger
+	}
+
+	entity thalvaron_mud_slinger: !NPC { _string: "Mud Slinger" _sprite: swamp_monster_5 _sprite_dead: swamp_monster_5_dead _default_behavior_state: .wandering_short }
+	entity thalvaron_mud_slinger_2: !NPC { _string: "Mudlord" _sprite: swamp_monster_4 _sprite_dead: swamp_monster_4_dead _default_behavior_state: .passive }
+}
+
+# Crocodiles
+{
+	loot_table .crocodile: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { weight: 1 }
+				possibility: { weight: 1 loot_group: .swampman_1_quest_item requirement self<must_have_active_quest>: { id: .swampman_1 } } 
+			}
+			
+			!WORLD_DROPS {}
+		]	
+	}
+	
+	loot_table .crocodile_salt: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { weight: 1 }
+				possibility: { weight: 1 loot_group: .swampman_1_quest_item requirement self<must_have_active_quest>: { id: .swampman_1 } } 
+			}
+
+			{ 
+				possibility: { loot_group: .gob_fulbro_1_quest_item requirement self<must_have_active_quest>: { id: .gob_fulbro_1 } } 
+			}
+
+			!WORLD_DROPS {}
+		]	
+	}	
+	
+	${		
+		_faction: monsters
+		_creature_type: beast				
+		_can_move_on_all_non_view_blocking_tiles: true
+	}
+
+	entity thalvaron_crocodile: !NPC { _level: 12 _string: "Marshlands Crocodile" _sprite: crocodile_2 _sprite_dead: crocodile_2_dead _in_water_sprite: crocodile_2_submerged _default_behavior_state: .passive _loot_table: .crocodile }
+	entity thalvaron_crocodile_2: !NPC { _level: 13 _string: "Swamp Crocodile" _sprite: crocodile_2 _sprite_dead: crocodile_2_dead _in_water_sprite: crocodile_2_submerged _default_behavior_state: .passive _loot_table: .crocodile }
+	entity thalvaron_crocodile_3: !NPC { _level: 14 _string: "Ravenous Crocodile" _sprite: crocodile_2 _sprite_dead: crocodile_2_dead _in_water_sprite: crocodile_2_submerged _default_behavior_state: .passive _loot_table: .crocodile }
+	entity thalvaron_crocodile_salt: !NPC { _level: 13 _string: "Salty" _sprite: crocodile_1 _sprite_dead: crocodile_1_dead _in_water_sprite: crocodile_1_submerged _default_behavior_state: .passive _loot_table: .crocodile_salt }
+}
+
+# Swamp monsters
+{
+	${
+		_level: 12
+		_faction: monsters
+		_creature_type: elemental
+		_loot_table: default_nature_elemental
+		_default_behavior_state: .wandering_short
+	}
+
+	entity thalvaron_swamp_lurker: !NPC { _string: "Swamp Lurker" _sprite: swamp_monster_2 _sprite_dead: swamp_monster_2_dead }
+	entity thalvaron_swamp_dweller: !NPC { _string: "Swamp Dweller" _sprite: swamp_monster_3 _sprite_dead: swamp_monster_3_dead }
+}
+
+# Lizard ambushers in mine
+{
+	${
+		_level: 13
+		_faction: monsters
+		_creature_type: beast
+		_loot_table: default_lizard
+	}
+
+	entity thalvaron_lizard_ambusher: !NPC { _string: "Cave Lizard" _sprite: lizard_1 _sprite_dead: lizard_1_dead }
+}
+
+# Oozes for farm quest
+{
+	loot_table .swamp_ooze: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { weight: 5 }
+				possibility: { weight: 1 loot_group: .frederik_tyson_1_quest_item requirement self<must_have_active_quest>: { id: .frederik_tyson_1 } } 
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_OOZES {}
+		]	
+	}	
+
+	${
+		_level: 14
+		_faction: monsters
+		_creature_type: elemental
+		_loot_table: .swamp_ooze
+		_default_behavior_state: .passive
+	}
+
+	entity thalvaron_swamp_ooze: !NPC { _string: "Putrid Ooze" _sprite: ooze_1 _sprite_dead: ooze_2_dead }
+}
+
+# Rock elementals
+{
+	${
+		_level: 14
+		_faction: monsters
+		_creature_type: elemental
+		_loot_table: default_earth_elemental
+		_default_behavior_state: .wandering_short
+	}
+
+	entity thalvaron_rock_crumbler: !NPC { _string: "Rock Crumbler" _sprite: rock_elemental_2 _sprite_dead: rock_elemental_2_dead }
+}
+
+# Rock elemental boss
+{
+	loot_table .rock_elemental_boss: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { loot_group: .hort_ironmantle_1_quest_item requirement self<must_have_active_quest>: { id: .hort_ironmantle_1 } } 
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_EARTH_ELEMENTALS {}
+		]	
+	}	
+
+	${
+		_level: 14
+		_faction: monsters
+		_creature_type: elemental
+		_loot_table: .rock_elemental_boss
+		_default_behavior_state: .wandering_short
+	}
+
+	entity thalvaron_rock_crumbler_boss: !NPC { _string: "Giant Rock Crumbler" _sprite: rock_elemental_3 _sprite_dead: rock_elemental_3_dead }
+}
+
+# Wandering giant swamp monster
+{
+	loot_table .swamp_giant: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: 
+				{ 				
+					loot_group: .swamp_giant 
+					requirement self<must_not_have_completed_quest>: .swamp_giant 
+					requirement self<must_not_have_active_quest>: .swamp_giant 
+					requirement self<must_not_have_item>: .swamp_giant 
+				} 
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_NATURE_ELEMENTALS {}
+		]	
+	}
+	
+	loot_group .swamp_giant: { }
+	
+	ability .swamp_giant:	
+	{
+		string: "Bogmaw's Claw"
+		description: "This item starts a quest."
+		flags: [ target_self item ]
+		icon: icon_claw_3
+		direct_effect simple<start_quest>: .swamp_giant
+		states: [ default in_combat ]
+		requirement self<must_not_have_completed_quest>: { id: .swamp_giant }
+		requirement self<must_not_have_active_quest>: { id: .swamp_giant }
+	}
+
+	item .swamp_giant:
+	{
+		loot_groups: [ .swamp_giant ]		
+		string: "Bogmaw's Claw" 
+		icon: icon_claw_3
+		item_level: 14
+		flags: [ unique not_sellable ]
+		use_ability: .swamp_giant
+	}	
+			
+	{
+		${ _level: 15 _rarity: rare }
+		item .swamp_giant_1_a: !QUEST_REWARD_TRINKET
+		{ 
+			_string: "Natural Remedy" 
+			_icon: icon_brown_leaf_1
+			_use_ability: $ability
+			{	
+				string: "Natural Remedy" 
+				icon: icon_brown_leaf_1
+				description: "Cures one poison effect."
+				cooldowns: [ global ]
+				cooldown: $cooldown { duration: 2400 }
+				icon: @_icon
+				flags: [ target_self item ]
+				requirement self<must_have_item_equipped>: .swamp_giant_1_a
+				direct_effect remove_aura: { aura_flags: [ poison ] }
+			}
+		}
+	}
+			
+	quest .swamp_giant:
+	{
+		string: "Bogmaw's Claw"
+
+		text:
+		[
+			"Bring Bogmaw's Claw to Sheriff Foster outside Mirehaven."
+		]
+		
+		description: 
+		[
+			"The giant swamp monsters claw is slimy to the touch. You should return it to Sheriff Foster outside Mirehaven. Maybe you'll get a reward for slaying this vile creature."
+		]
+		
+		completion:
+		[
+			"You managed to kill Bogmaw? That creature has been terrorizing the swamp for a long time. Good job!"
+		]
+
+		level: 14
+		quest_items: [ .swamp_giant ]		
+		type: elite		
+		reward_all_items: [ .swamp_giant_1_a ]
+	}
+	
+	${
+		_level: 14
+		_faction: monsters
+		_creature_type: elemental
+		_loot_table: .swamp_giant
+		_default_behavior_state: .wandering_short
+		_elite: true
+		_weapon_damage: 1.5
+		_resource_health: 4.5
+	}
+
+	entity thalvaron_swamp_giant: !NPC { _string: "Bogmaw" _sprite: swamp_monster_1 _sprite_dead: swamp_monster_2_dead }
+}
+
+##########################################################################################
+# North Marshlands kobolds
+
+map_entity_spawn thalvaron_north_marshlands_kobold: 
+{ 
+	entity thalvaron_north_marshlands_kobold_a: {} 
+	entity thalvaron_north_marshlands_kobold_b: {} 
+	entity thalvaron_north_marshlands_kobold_c: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_north_marshlands_kobold_boss: 
+{ 
+	entity thalvaron_north_marshlands_kobold_boss: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Melee
+{
+
+	${
+		_level: 12
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: default_humanoid
+		_weapon_damage: 0.9
+		_resource_health: 0.8
+	}
+
+	entity thalvaron_north_marshlands_kobold_a: !NPC { _string: "Mountain Kobold" _sprite: kobold_3 _sprite_dead: kobold_3_dead }
+	entity thalvaron_north_marshlands_kobold_b: !NPC { _string: "Mountain Kobold" _sprite: kobold_4 _sprite_dead: kobold_4_dead }
+}
+
+# Healer
+{
+
+	${
+		_level: 12
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: default_humanoid
+		_weapon_damage: 0.9
+		_resource_health: 0.8
+		_resource_mana: 1
+		_abilities: 
+		[ 
+			{ id: npc_heal target: low_health_friend_or_self }
+			{ id: npc_firebolt }
+			{ id: npc_attack } 
+		]		
+	}
+
+	entity thalvaron_north_marshlands_kobold_c: !NPC { _string: "Kobold Soothsayer" _sprite: kobold_5 _sprite_dead: kobold_5_dead }
+}
+
+# Boss
+{
+
+	loot_table .north_marshlands_kobold_boss: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: 
+				{ 
+					loot_group: .north_marshlands_kobold_boss 
+					requirement self<must_not_have_completed_quest>: thalvaron_north_marshlands_kobold_boss 
+					requirement self<must_not_have_active_quest>: thalvaron_north_marshlands_kobold_boss 
+					requirement self<must_not_have_item>: .north_marshlands_kobold_boss 					
+				} 
+			}
+			
+			!WORLD_DROPS {}
+		]	
+	}
+	
+	loot_group .north_marshlands_kobold_boss: { }
+	
+	ability .north_marshlands_kobold_boss:	
+	{
+		string: "City Guard Helmet"
+		description: "This item starts a quest."
+		flags: [ target_self item ]
+		icon: icon_head_4
+		direct_effect simple<start_quest>: thalvaron_north_marshlands_kobold_boss
+		states: [ default in_combat ]
+		requirement self<must_not_have_completed_quest>: { id: thalvaron_north_marshlands_kobold_boss }
+		requirement self<must_not_have_active_quest>: { id: thalvaron_north_marshlands_kobold_boss }
+	}
+
+	item .north_marshlands_kobold_boss:
+	{
+		loot_groups: [ .north_marshlands_kobold_boss ]		
+		string: "City Guard Helmet" 
+		flavor: "Smells like kobold."
+		icon: icon_head_4
+		item_level: 12
+		flags: [ unique not_sellable ]
+		use_ability: .north_marshlands_kobold_boss
+	}	
+			
+	quest thalvaron_north_marshlands_kobold_boss:
+	{
+		string: "City Guard Helmet"
+
+		text:
+		[
+			"Bring the city guard helmet back to Lieutenant Tusleholm."
+		]
+		
+		description: 
+		[
+			"This, slightly bigger than usual, kobold wore a helmet apparently stolen from the city guard. Might be of interest to Lieutenant Tusleholm."
+		]
+		
+		completion:
+		[
+			"Nothing unusual about kobolds stealing shiny things. What's more interesting, is how the cave led into something that sounds like an old abandoned underground fortress."
+		]
+
+		level: 12
+		quest_items: [ .north_marshlands_kobold_boss ]
+		reward_xp_multiplier: 0.2
+	}
+
+	${
+		_level: 12
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: .north_marshlands_kobold_boss
+		_weapon_damage: 1.1
+		_resource_health: 1.7
+	}
+
+	entity thalvaron_north_marshlands_kobold_boss: !NPC { _string: "Kobold Shift Boss" _sprite: kobold_6 _sprite_dead: kobold_6_dead }
+}
+
+##########################################################################################
+# Mongo the ogre
+
+map_entity_spawn thalvaron_mongo: 
+{ 
+	entity thalvaron_mongo: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+npc_behavior_state .mongo:
+{
+	behavior: patrolling
+	patrol_move_interval_ticks: 9
+	patrol_reset_after_leaving_combat: true
+}
+
+route thalvaron_mongo_patrol: 
+{ 
+	trigger<7>: { chat: { type: yell text: "Who's disturbing Mongo?" } }
+	trigger<20>: { chat: { type: yell text: "Just leave Mongo alone!" } }
+	trigger<max>: { reset: true }
+}
+
+{
+	${
+		_level: 18
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .mongo
+		_loot_table: default_humanoid
+		_weapon_damage: 1.39
+		_resource_health: 8.5
+		_elite: true
+		_immune_to_stun: true
+		_immune_to_immobilize: true
+		_immune_to_slow: true		
+		_in_combat_barks: [ { type: say text: "Leave Mongo alone in his swamp!" } ]
+	}
+
+	entity thalvaron_mongo: !NPC { _string: "Mongo" _sprite: ogre_1 _sprite_dead: ogre_1_dead }
+}
+
+##########################################################################################
+# Bandits
+
+map_entity_spawn thalvaron_marsh_bandit: 
+{ 
+	entity thalvaron_marsh_bandit_a: {} 
+	entity thalvaron_marsh_bandit_b: {} 
+	entity thalvaron_marsh_bandit_c: {} 
+	entity thalvaron_marsh_bandit_d: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_marsh_bandit_2: 
+{ 
+	entity thalvaron_marsh_bandit_2_a: {} 
+	entity thalvaron_marsh_bandit_2_b: {} 
+	entity thalvaron_marsh_bandit_2_c: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_marsh_bandit_leader: 
+{ 
+	entity thalvaron_marsh_bandit_leader: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Bandits
+{
+	${		
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .passive
+		_loot_table: default_humanoid
+	}
+
+	entity thalvaron_marsh_bandit_a: !NPC { _level: 13 _string: "Marsh Bandit" _sprite: rebel_1 _sprite_dead: rebel_1_dead }
+	entity thalvaron_marsh_bandit_b: !NPC { _level: 13 _string: "Marsh Bandit" _sprite: rebel_2 _sprite_dead: rebel_2_dead }
+	entity thalvaron_marsh_bandit_c: !NPC { _level: 13 _string: "Marsh Bandit" _sprite: rebel_3 _sprite_dead: rebel_3_dead }
+	entity thalvaron_marsh_bandit_d: !NPC { _level: 13 _string: "Marsh Bandit" _sprite: rebel_4 _sprite_dead: rebel_4_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
+
+	entity thalvaron_marsh_bandit_2_a: !NPC { _level: 14 _string: "Brigand" _sprite: rebel_2 _sprite_dead: rebel_2_dead }
+	entity thalvaron_marsh_bandit_2_b: !NPC { _level: 14 _string: "Brigand" _sprite: rebel_3 _sprite_dead: rebel_3_dead }
+	entity thalvaron_marsh_bandit_2_c: !NPC { _level: 14 _string: "Brigand" _sprite: rebel_4 _sprite_dead: rebel_4_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
+}
+
+# Brigand leader
+{
+	loot_group .brigand_leader_quest_item: { }
+
+	ability .brigand_leader_quest_item:	
+	{
+		string: "Wedding Ring"
+		description: "This item starts a quest."
+		flags: [ target_self item ]
+		icon: icon_ring_1
+		direct_effect simple<start_quest>: .brigand_leader_quest_item
+		states: [ default in_combat ]
+		requirement self<must_not_have_completed_quest>: { id: .brigand_leader_quest_item }
+		requirement self<must_not_have_active_quest>: { id: .brigand_leader_quest_item }
+	}
+
+	item .brigand_leader_quest_item:
+	{
+		loot_groups: [ .brigand_leader_quest_item ]		
+		string: "Wedding Ring" 
+		flavor: "Yvonne."
+		icon: icon_ring_1
+		item_level: 14
+		flags: [ unique ]
+		use_ability: .brigand_leader_quest_item
+		binds: when_picked_up
+		cost: 10000
+	}
+	
+	quest .brigand_leader_quest_item:
+	{
+		string: "Wedding Ring"
+
+		text:
+		[
+			"Return the ring to its rightful owner."
+		]
+		
+		description: 
+		[
+			"The thief seems to have stolen this ring from a woman named Yvonne. You should find her and return it to her, unless of course you just want to sell it for a quick buck."
+		]
+		
+		completion:
+		[
+			"Wow, never thought I was going to see that ugly old thing again."
+		]
+
+		level: 14
+		reward_xp_multiplier: 0.3
+		reward_cash_multiplier: 0
+		quest_items: [ .brigand_leader_quest_item ]
+		next_quest: .yvonne_tyson_1
+	}
+
+	loot_table .brigand_leader: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: 
+				{ 
+					loot_group: .brigand_leader_quest_item 
+					requirement self<must_not_have_completed_quest>: .brigand_leader_quest_item 
+					requirement self<must_not_have_active_quest>: .brigand_leader_quest_item 
+					requirement self<must_not_have_item>: .brigand_leader_quest_item 
+				} 
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_CLOTH{}
+		]	
+	}
+	
+	${		
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .passive
+		_loot_table: .brigand_leader
+	}
+	
+	entity thalvaron_marsh_bandit_leader: !NPC { _level: 14 _string: "Jack Rhorn" _sprite: rebel_1 _sprite_dead: rebel_1_dead }	
+}
+
+##########################################################################################
+# South Marshlands kobolds
+
+map_entity_spawn thalvaron_south_marshlands_kobold: 
+{ 
+	entity thalvaron_south_marshlands_kobold_a: {} 
+	entity thalvaron_south_marshlands_kobold_b: {} 
+	entity thalvaron_south_marshlands_kobold_c: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_south_marshlands_kobold_special: 
+{ 
+	entity thalvaron_south_marshlands_kobold_special: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+loot_table .south_marshlands_kobold: 
+{
+	slots:
+	[	
+		{ 
+			possibility: 
+			{ 
+				loot_group: .lieutenant_gordon_1_quest_item 
+				requirement self<must_have_active_quest>: .lieutenant_gordon_1 
+			} 
+		}
+		
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+	
+loot_table .south_marshlands_kobold_special: 
+{
+	slots:
+	[	
+		{ 
+			possibility: 
+			{ 
+				loot_group: .mirehaven_dwarf_1_quest_item 
+				requirement self<must_have_active_quest>: .mirehaven_dwarf_1
+			} 
+		}
+		
+		{ 
+			possibility: 
+			{ 
+				loot_group: .lieutenant_gordon_1_quest_item 
+				requirement self<must_have_active_quest>: .lieutenant_gordon_1 
+			} 
+		}
+		
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+		
+# Melee
+{
+
+	${
+		_level: 14
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: .south_marshlands_kobold
+		_weapon_damage: 0.9
+		_resource_health: 0.8
+	}
+
+	entity thalvaron_south_marshlands_kobold_a: !NPC { _string: "Rugged Kobold" _sprite: kobold_3 _sprite_dead: kobold_3_dead }
+	entity thalvaron_south_marshlands_kobold_b: !NPC { _string: "Rugged Kobold" _sprite: kobold_4 _sprite_dead: kobold_4_dead }
+}
+
+# Healer
+{
+
+	${
+		_level: 14
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: .south_marshlands_kobold
+		_weapon_damage: 0.9
+		_resource_health: 0.8
+		_resource_mana: 1
+		_abilities: 
+		[ 
+			{ id: npc_heal target: low_health_friend_or_self }
+			{ id: npc_firebolt }
+			{ id: npc_attack } 
+		]		
+	}
+
+	entity thalvaron_south_marshlands_kobold_c: !NPC { _string: "Rugged Soothsayer" _sprite: kobold_5 _sprite_dead: kobold_5_dead }
+}
+
+# Kobold with ancient dwarven artifcat
+{
+
+	${
+		_level: 14
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: .south_marshlands_kobold_special
+		_weapon_damage: 0.9
+		_resource_health: 0.8
+	}
+
+	entity thalvaron_south_marshlands_kobold_special: !NPC { _string: "Rugged Kobold" _sprite: kobold_7 _sprite_dead: kobold_7_dead }
+}
+
+##########################################################################################
+# Badlands monsters
+
+map_entity_spawn thalvaron_dust_lizard: 
+{ 
+	entity thalvaron_dust_lizard: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_dread_scorpion: 
+{ 
+	entity thalvaron_dread_scorpion: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_mountain_lion:
+{
+	entity thalvaron_mountain_lion: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_dread_stinger: 
+{ 
+	entity thalvaron_dread_stinger: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_mountain_lion_boss:
+{
+	entity thalvaron_mountain_lion_boss: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_badlands_harpy_1:
+{
+	entity thalvaron_badlands_harpy_1: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_badlands_harpy_2:
+{
+	entity thalvaron_badlands_harpy_2: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_badlands_spider:
+{
+	entity thalvaron_badlands_spider: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_badlands_spider_boss:
+{
+	entity thalvaron_badlands_spider_boss: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_badlands_rock_elemental:
+{
+	entity thalvaron_badlands_rock_elemental: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_badlands_mud_elemental:
+{
+	entity thalvaron_badlands_mud_elemental: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_dirt_slitherer:
+{
+	entity thalvaron_dirt_slitherer: {} spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Lizards
+{
+	loot_table .dust_lizard: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: 
+				{
+					weight: 1
+				}
+			
+				possibility: 
+				{ 
+					weight: 1
+					loot_group: .ulrik_copperquill_1_quest_item 
+					requirement self<must_have_active_quest>: .ulrik_copperquill_1 
+				} 
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_LIZARDS {}
+		]	
+	}
+
+	${		
+		_faction: monsters
+		_creature_type: beast
+		_loot_table: .dust_lizard
+		_default_behavior_state: .wandering_short
+	}
+
+	entity thalvaron_dust_lizard: !NPC { _level: 14 _string: "Dust Lizard" _sprite: lizard_3 _sprite_dead: lizard_3_dead }
+	entity thalvaron_dirt_slitherer: !NPC { _level: 16 _string: "Dirt Slitherer" _sprite: lizard_2 _sprite_dead: lizard_2_dead }
+}
+
+# Scorpions
+{
+	loot_table .dread_scorpion: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: 
+				{
+					weight: 1
+				}
+			
+				possibility: 
+				{ 
+					weight: 1
+					loot_group: .ulrik_copperquill_2_quest_item 
+					requirement self<must_have_active_quest>: .ulrik_copperquill_2 
+				} 
+			}
+			
+			!WORLD_DROPS {}
+		]	
+	}
+
+	${		
+		_faction: monsters
+		_creature_type: beast
+		_loot_table: .dread_scorpion
+		_default_behavior_state: .wandering_short
+	}
+
+	entity thalvaron_dread_scorpion: !NPC { _level: 14 _string: "Dread Scorpion" _sprite: scorpion_1 _sprite_dead: scorpion_1_dead }
+	entity thalvaron_dread_stinger: !NPC { _level: 15 _string: "Dread Stinger" _sprite: scorpion_2 _sprite_dead: scorpion_2_dead }
+	
+
+}
+
+# Mountain lions
+{
+	loot_table .mountain_lion_boss: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: 
+				{ 
+					weight: 1
+					loot_group: .rumin_whiterock_1_quest_item 
+					requirement self<must_have_active_quest>: .rumin_whiterock_1 
+					requirement self<must_not_have_item>: .rumin_whiterock_1_quest_item
+				} 
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_LIONS {}
+		]	
+	}
+
+	${		
+		_faction: monsters
+		_creature_type: beast		
+		_default_behavior_state: .wandering_short
+	}
+
+	entity thalvaron_mountain_lion: !NPC { _level: 14 _string: "Mountain Lion" _sprite: lion_1 _sprite_dead: lion_1_dead _loot_table: default_lion }
+	entity thalvaron_mountain_lion_boss: !NPC { _level: 15 _string: "One-Eyed Moe" _sprite: lion_1 _sprite_dead: lion_1_dead _loot_table: .mountain_lion_boss }
+}
+
+# Harpies
+{
+	loot_table .badlands_harpy: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: 
+				{
+					weight: 1
+				}
+			
+				possibility: 
+				{ 
+					weight: 1
+					loot_group: .rumin_whiterock_2_quest_item 
+					requirement self<must_have_active_quest>: .rumin_whiterock_2
+				} 
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_CLOTH {}
+			!WORLD_DROPS_BIRDS {}			
+		]	
+	}
+
+	${		
+		_faction: monsters
+		_creature_type: humanoid		
+		_default_behavior_state: .wandering_short		
+		_loot_table: .badlands_harpy
+	}
+
+	entity thalvaron_badlands_harpy_1: !NPC { _level: 15 _string: "Shiverwing Harpy" _sprite: harpy_1 _sprite_dead: harpy_1_dead }
+	entity thalvaron_badlands_harpy_2: !NPC { _level: 16 _string: "Shiverwing Rogue" _sprite: harpy_2 _sprite_dead: harpy_2_dead }
+}
+
+# Spiders
+{
+	loot_table .spider_boss: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: 
+				{ 
+					loot_group: .bramli_stonestride_1_quest_item 
+					requirement self<must_have_active_quest>: .bramli_stonestride_1 
+					requirement self<must_not_have_item>: .bramli_stonestride_1_quest_item 
+				} 
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_SPIDERS {}						
+		]	
+	}
+
+	${		
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .passive				
+	}
+
+	entity thalvaron_badlands_spider: !NPC { _level: 15 _string: "Cave Lurker" _sprite: spider_2 _sprite_dead: spider_2_dead _loot_table: default_spider }
+	entity thalvaron_badlands_spider_boss: !NPC { _level: 15 _string: "Giant Cave Lurker" _sprite: spider_4 _sprite_dead: spider_4_dead _loot_table: .spider_boss }
+}
+
+# Rock Elementals
+{
+	loot_table .badlands_rock_elemental: 
+	{
+		slots:
+		[	
+			{ 
+				possibility:
+				{
+					weight: 1
+				}
+			
+				possibility: 
+				{ 
+					weight: 1
+					loot_group: .mumle_whiterock_2_quest_item 
+					requirement self<must_have_active_quest>: .mumle_whiterock_2 
+				} 
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_EARTH_ELEMENTALS {}									
+		]	
+	}
+
+	${
+		_level: 16
+		_faction: monsters
+		_creature_type: elemental
+		_default_behavior_state: .wandering_short
+		_loot_table: .badlands_rock_elemental
+		_weapon_damage: 1.1
+		_resource_health: 1.1
+	}
+
+	entity thalvaron_badlands_rock_elemental: !NPC { _string: "Dirt Rumbler" _sprite: rock_elemental_1 _sprite_dead: rock_elemental_1_dead }
+}
+
+# Mud Elementals
+{
+	${
+		_level: 16
+		_faction: monsters
+		_creature_type: elemental
+		_default_behavior_state: .wandering_short
+		_loot_table: default_nature_elemental
+		_weapon_damage: 1.1
+		_resource_health: 1.1
+	}
+
+	entity thalvaron_badlands_mud_elemental: !NPC { _string: "Mud Elemental" _sprite: ooze_3 _sprite_dead: ooze_3_dead }
+}
+
+##########################################################################################
+# Badlands orcs
+
+map_entity_spawn thalvaron_badlands_orc: 
+{ 
+	entity thalvaron_badlands_orc_a: {} 
+	entity thalvaron_badlands_orc_b: {} 
+	entity thalvaron_badlands_orc_c: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_badlands_orc_2: 
+{ 
+	entity thalvaron_badlands_orc_2_a: {} 
+	entity thalvaron_badlands_orc_2_b: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_badlands_orc_gorvak: 
+{ 
+	entity thalvaron_badlands_orc_gorvak: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Outer camps and patrols
+{
+	loot_table .badlands_orc: 
+	{
+		slots:
+		[	
+			{ 
+				possibility:
+				{
+					weight: 1
+				}
+			
+				possibility: 
+				{ 				
+					weight: 1
+					loot_group: .badlands_orc 
+					requirement self<must_not_have_completed_quest>: .badlands_orc 
+					requirement self<must_not_have_active_quest>: .badlands_orc 
+					requirement self<must_not_have_item>: .badlands_orc 
+					requirement self<must_have_active_quest>: .warmaster_jounheim_1 
+				} 
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_CLOTH {}
+		]	
+	}
+	
+	loot_group .badlands_orc: { }
+	
+	ability .badlands_orc:	
+	{
+		string: "Crude Map"
+		description: "This item starts a quest."
+		flags: [ target_self item ]
+		icon: icon_scroll_2
+		direct_effect simple<start_quest>: .badlands_orc
+		states: [ default in_combat ]
+		requirement self<must_not_have_completed_quest>: { id: .badlands_orc }
+		requirement self<must_not_have_active_quest>: { id: .badlands_orc }
+	}
+
+	item .badlands_orc:
+	{
+		loot_groups: [ .badlands_orc ]		
+		string: "Crude Map" 
+		icon: icon_scroll_2
+		item_level: 15
+		flags: [ unique not_sellable ]
+		use_ability: .badlands_orc
+	}	
+			
+	quest .badlands_orc:
+	{
+		string: "Crude Map"
+
+		text:
+		[
+			"Bring the crude map to Warmaster Jounheim in Durgan Tharok."
+		]
+		
+		description: 
+		[
+			"This looks like a crude map of the badlands with lots of arrows and crosses on it. It might be of the interest to the Warmaster."
+		]
+		
+		completion:
+		[
+			"Hmm. Interesting, let me see."
+		]
+
+		level: 15
+		quest_items: [ .badlands_orc ]		
+		reward_cash_multiplier: 0.3
+		reward_xp_multiplier: 0.3
+		next_quest: .warmaster_jounheim_2
+	}
+
+	${
+		_level: 15
+		_faction: skullforge_orcs
+		_creature_type: humanoid
+		_loot_table: .badlands_orc
+		_default_behavior_state: .passive
+	}
+
+	entity thalvaron_badlands_orc_a: !NPC { _string: "Skullforge Scout" _sprite: orc_1 _sprite_dead: orc_1_dead }
+	entity thalvaron_badlands_orc_b: !NPC { _string: "Skullforge Scout" _sprite: orc_2 _sprite_dead: orc_2_dead }
+	entity thalvaron_badlands_orc_c: !NPC { _string: "Skullforge Ranger" _sprite: orc_5 _sprite_dead: orc_5_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
+}
+
+# Orc soldiers
+{
+	${
+		_level: 15
+		_faction: skullforge_orcs
+		_creature_type: humanoid
+		_loot_table: .badlands_orc
+		_default_behavior_state: .passive
+	}
+
+	entity thalvaron_badlands_orc_2_a: !NPC { _string: "Skullforge Legionaire" _sprite: orc_3 _sprite_dead: orc_3_dead }
+	entity thalvaron_badlands_orc_2_b: !NPC { _string: "Skullforge Legionaire" _sprite: orc_4 _sprite_dead: orc_4_dead }	
+}
+
+# Orc commander
+{
+	${
+		_level: 15
+		_faction: skullforge_orcs
+		_creature_type: humanoid
+		_loot_table: .badlands_orc
+		_default_behavior_state: .passive
+	}
+
+	entity thalvaron_badlands_orc_gorvak: !NPC { _string: "Commander Gorvak" _sprite: orc_6 _sprite_dead: orc_6_dead }	
+}
+
+##########################################################################################
+# Scorpion boss
+
+map_entity_spawn thalvaron_krask: 
+{ 
+	entity thalvaron_krask: {} 
+	spawn_timer: !NPC_RESPAWN_RARE{}
+}
+
+{
+	loot_table .krask: 
+	{
+		slots:
+		[	
+			{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
+		          map_message thalvaron: "Krask will not drop Token of Victory for {}." } } }
+
+			!WORLD_DROPS_RARE {}
+			!WORLD_DROPS {}
+		]	
+	}
+
+	${		
+		_faction: monsters
+		_creature_type: beast
+		_loot_table: .krask
+		_default_behavior_state: .wandering_short
+		_elite: true
+		_level: 20 
+		_string: "Krask" 
+		_sprite: scorpion_3 
+		_sprite_dead: scorpion_3_dead
+		_weapon_damage: 1.4
+		_health: 6.8
+		_immune_to_stun: true
+		_immune_to_immobilize: true
+		_immune_to_slow: true
+		
+		_abilities: 
+		[ 
+			{ id: npc_poison_bite target: random_player }
+			{ id: npc_attack } 
+		]		
+	}
+
+	entity thalvaron_krask: !NPC { }
+
+}

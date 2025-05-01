@@ -21,6 +21,7 @@ namespace tpublic
 			{
 				AURA_FLAG_STUNNED		= 0x01,
 				AURA_FLAG_IMMOBILIZED	= 0x02,
+				AURA_FLAG_STEALTHED		= 0x04
 			};
 
 			struct Entry
@@ -64,7 +65,10 @@ namespace tpublic
 			enum Field
 			{
 				FIELD_ENTRIES,
-				FIELD_AURA_FLAGS
+				FIELD_AURA_FLAGS,
+				FIELD_COLOR_EFFECT,
+				FIELD_COLOR_WEAPON_GLOW,
+				FIELD_MOUNT_ID
 			};
 			
 			static void
@@ -73,6 +77,9 @@ namespace tpublic
 			{
 				aSchema->DefineCustomObjectsNoSource<Entry>(FIELD_ENTRIES, offsetof(VisibleAuras, m_entries));
 				aSchema->DefineCustomPODNoSource<uint8_t>(FIELD_AURA_FLAGS, offsetof(VisibleAuras, m_auraFlags));
+				aSchema->DefineCustomOptionalPODNoSource<Image::RGBA>(FIELD_COLOR_EFFECT, offsetof(VisibleAuras, m_colorEffect));
+				aSchema->DefineCustomOptionalPODNoSource<Image::RGBA>(FIELD_COLOR_WEAPON_GLOW, offsetof(VisibleAuras, m_colorWeaponGlow));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_MOUNT_ID, NULL, offsetof(VisibleAuras, m_mountId));
 			}
 
 			bool 
@@ -92,6 +99,9 @@ namespace tpublic
 			{
 				m_entries.clear();
 				m_auraFlags = 0;
+				m_colorEffect.reset();
+				m_colorWeaponGlow.reset();
+				m_mountId = 0;
 
 				m_seq = 0;
 			}
@@ -99,13 +109,17 @@ namespace tpublic
 			// Helpers
 			bool		IsStunned() const { return m_auraFlags & AURA_FLAG_STUNNED; }
 			bool		IsImmobilized() const { return m_auraFlags & AURA_FLAG_IMMOBILIZED; }
+			bool		IsStealthed() const { return m_auraFlags & AURA_FLAG_STEALTHED; }
 
 			// Public data
-			std::vector<Entry>	m_entries;			
-			uint8_t				m_auraFlags = 0;
+			std::vector<Entry>			m_entries;			
+			uint8_t						m_auraFlags = 0;
+			std::optional<Image::RGBA>	m_colorEffect;
+			std::optional<Image::RGBA>	m_colorWeaponGlow;
+			uint32_t					m_mountId = 0;
 
 			// Internal
-			uint32_t			m_seq = 0;
+			uint32_t					m_seq = 0;
 		};
 	}
 

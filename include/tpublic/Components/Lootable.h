@@ -29,6 +29,7 @@ namespace tpublic
 					m_playerTag.ToStream(aWriter);
 					m_itemInstance.ToStream(aWriter);
 					aWriter->WriteUInt(m_questId);
+					aWriter->WriteUInt(m_lootCooldownId);
 				}
 
 				bool
@@ -41,6 +42,8 @@ namespace tpublic
 						return false;
 					if(!aReader->ReadUInt(m_questId))
 						return false;
+					if (!aReader->ReadUInt(m_lootCooldownId))
+						return false;
 					return true;
 				}
 
@@ -48,6 +51,7 @@ namespace tpublic
 				PlayerTag				m_playerTag;
 				ItemInstance			m_itemInstance;
 				uint32_t				m_questId = 0;
+				uint32_t				m_lootCooldownId = 0;
 			};
 
 			enum Field
@@ -59,6 +63,8 @@ namespace tpublic
 				FIELD_AVAILABLE_LOOT,
 				FIELD_VERSION,
 				FIELD_TIME_STAMP,
+				FIELD_ANYONE_CAN_LOOT,
+				FIELD_SPECIAL_LOOT_COOLDOWN_ID
 			};
 
 			static void
@@ -72,6 +78,8 @@ namespace tpublic
 				aSchema->DefineCustomObjectsNoSource<AvailableLoot>(FIELD_AVAILABLE_LOOT, offsetof(Lootable, m_availableLoot));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_VERSION, NULL, offsetof(Lootable, m_version));
 				aSchema->Define(ComponentSchema::TYPE_UINT64, FIELD_TIME_STAMP, NULL, offsetof(Lootable, m_timeStamp));
+				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_ANYONE_CAN_LOOT, "anyone_can_loot", offsetof(Lootable, m_anyoneCanLoot));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_SPECIAL_LOOT_COOLDOWN_ID, "special_loot_cooldown", offsetof(Lootable, m_specialLootCooldownId))->SetDataType(DataType::ID_LOOT_COOLDOWN);
 			}
 
 			bool
@@ -121,16 +129,20 @@ namespace tpublic
 				m_availableLoot.clear();
 				m_timeStamp = 0;
 				m_version = 0;
+				m_anyoneCanLoot = false;
+				m_specialLootCooldownId = 0;
 			}
 
 			// Public data
 			uint32_t					m_lootTableId = 0;
+			bool						m_anyoneCanLoot = false;
 			PlayerTag					m_playerTag;
 			bool						m_cash = false;
 			int64_t						m_availableCash = 0;
 			std::vector<AvailableLoot>	m_availableLoot;
 			uint64_t					m_timeStamp = 0;
-			uint32_t					m_version = 0;			
+			uint32_t					m_version = 0;	
+			uint32_t					m_specialLootCooldownId = 0;
 		};
 	}
 

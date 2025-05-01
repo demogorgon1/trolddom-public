@@ -1,0 +1,113 @@
+dialogue_screen .blunt_ronson:
+{
+	text: 
+	[	
+		"They call themselves the ember veil. What do they even mean by that?"
+	]		
+	
+	options:
+	[
+		{ quest: .blunt_ronson_1 }
+	]
+}
+
+entity thalvaron_blunt_ronson: !NPC
+{
+	_string: "Blunt Ronson"
+	_dialogue_root: $dialogue_root { .blunt_ronson: { } }
+	_sprite: man_66
+	_sprite_dead: man_66_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .blunt_ronson_1_quest_item: { }
+
+item .blunt_ronson_1_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .blunt_ronson_1_quest_item ]		
+	string: "Important Document" 
+	icon: icon_book
+	stack: 1
+	item_level: 19
+	quest: .blunt_ronson_1
+	flags: [ not_sellable unique ]
+}
+
+entity thalvaron_blunt_ronson_1_quest_item:
+{
+	string: "Ronson's Chest"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ chest_2 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: $loot_table { slots: [ { possibility: { loot_group: .blunt_ronson_1_quest_item } } ] }			
+			verb: open
+			range: 1 
+			despawn: true 			
+			level: 19
+			required_quest: .blunt_ronson_1
+		}		
+	}
+}
+
+objective .blunt_ronson_1:
+{
+	string: "Important Document"
+	collect_items: 
+	{ 
+		item: $item [ string ]
+		{
+			binds: when_picked_up
+			loot_groups: [ .blunt_ronson_1_quest_item ]		
+			icon: icon_book
+			stack: 1
+			item_level: 19
+			quest: .blunt_ronson_1
+			flags: [ not_sellable unique ]
+		}
+		count: 1 
+	}
+}
+
+quest .blunt_ronson_1:
+{
+	string: "Stuff Left Behind"
+
+	text:
+	[
+		"Retrieve the document from Blunt's house in occupied Valoris and return it to him."
+	]
+	
+	description: 
+	[
+		"When the insurgents took over the eastern part of the city a lot of people had to leave very fast, me included. I didn't have time to grab an important document from my chest. It's of utmost importance"
+		"that I get my hands on it as quickly as possible. Maybe you can retrieve it for me? My house is just inside the gate. I really hope they haven't wrecked it."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Ah, that's one less thing to worry about."
+	]
+
+	level: 19
+	type: dungeon
+	objectives: [ .blunt_ronson_1 ]
+	
+}

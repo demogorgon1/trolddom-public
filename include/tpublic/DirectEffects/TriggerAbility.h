@@ -17,7 +17,8 @@ namespace tpublic
 			{
 				INVALID_TARGET,
 
-				TARGET_RANDOM_NEARBY
+				TARGET_RANDOM_NEARBY,
+				TARGET_BEHIND
 			};
 
 			static Target
@@ -26,6 +27,8 @@ namespace tpublic
 			{
 				if(aSource->IsIdentifier("random_nearby"))
 					return TARGET_RANDOM_NEARBY;
+				else if (aSource->IsIdentifier("behind"))
+					return TARGET_BEHIND;
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid target.", aSource->GetIdentifier());
 				return INVALID_TARGET;
 			}

@@ -51,6 +51,18 @@ item item_water:
 }
 
 #####################################################
+# Rice
+
+item item_rice:
+{
+	type: miscellaneous
+	item_level: 1
+	icon: icon_rice
+	string: "Rice"
+	stack: 20
+}
+
+#####################################################
 # Potatoes
 
 item item_potatoes:
@@ -64,27 +76,483 @@ item item_potatoes:
 }
 
 #####################################################
-# Bone Fragments
+# Misc world drops
 
 item item_bone_fragments:
 {
 	type: miscellaneous
-	item_level: 8
+	item_level: 10
+	level_range: [ 8 16 ]
 	icon: icon_bone_fragments_1
 	string: "Bone Fragments"
 	stack: 20
 	loot_groups: [ skeletons ]
+	tags: [ reagent ]
 }
 
-#####################################################
-# Corpse Worm
+item item_bone:
+{
+	type: miscellaneous
+	item_level: 14
+	level_range: [ 14 22 ]
+	icon: icon_bone_1
+	string: "Intact Bone"
+	stack: 10
+	loot_groups: [ skeletons ]
+	tags: [ reagent ]	
+}
 
 item item_corpse_worm:
 {
 	type: miscellaneous
-	item_level: 8
+	item_level: 10
+	level_range: [ 8 16 ]
 	icon: icon_worm_1
 	string: "Corpse Worm"
 	stack: 20
 	loot_groups: [ zombies ]
+	tags: [ reagent ]	
+}
+
+item item_zombie_hair:
+{
+	type: miscellaneous
+	item_level: 14
+	level_range: [ 14 22 ]
+	icon: icon_hair_1
+	string: "Coarse Zombie Hair"
+	stack: 20
+	loot_groups: [ zombies ]
+	tags: [ reagent ]	
+}
+
+item item_ghoul_claw:
+{
+	type: miscellaneous
+	item_level: 12
+	level_range: [ 12 22 ]
+	icon: icon_claw
+	string: "Decomposing Claw"
+	stack: 20
+	loot_groups: [ zombies ]
+	tags: [ reagent ]	
+}
+
+item item_beast_jaw:
+{
+	type: miscellaneous
+	item_level: 15
+	level_range: [ 15 22 ]
+	icon: icon_jaw_1
+	string: "Menacing Jaw"
+	stack: 20
+	loot_groups: [ wolves bears lions ]
+	tags: [ reagent ]
+}
+
+item item_tuft_of_hair:
+{
+	type: miscellaneous
+	item_level: 10
+	level_range: [ 10 18 ]
+	icon: icon_hair_2
+	string: "Tuft of Hair"
+	stack: 20
+	loot_groups: [ wolves bears ]
+	tags: [ reagent ]	
+}
+
+item item_antlers:
+{
+	type: miscellaneous
+	item_level: 10
+	level_range: [ 10 22 ]
+	icon: icon_antlers
+	string: "Intact Antlers"
+	stack: 20
+	loot_groups: [ deer ]
+	tags: [ reagent ]	
+}
+
+item item_bushy_tail:
+{
+	type: miscellaneous
+	item_level: 10
+	level_range: [ 10 22 ]
+	icon: icon_hair_4
+	string: "Bushy Tail"
+	stack: 20
+	loot_groups: [ deer wolves lions ]
+	tags: [ reagent ]	
+}
+
+item item_giant_claws:
+{
+	type: miscellaneous
+	item_level: 10
+	level_range: [ 10 22 ]
+	icon: icon_claw_4
+	string: "Giant Claws"
+	stack: 20
+	loot_groups: [ bears ]
+	tags: [ reagent ]	
+}
+
+item item_giant_tusk:
+{
+	type: miscellaneous
+	item_level: 11
+	level_range: [ 11 22 ]
+	icon: icon_tusk_1
+	string: "Giant Tusk"
+	stack: 20
+	loot_groups: [ boars ]
+	tags: [ reagent ]	
+}
+
+item item_crab_claw:
+{
+	type: miscellaneous
+	item_level: 10
+	level_range: [ 10 22 ]
+	icon: icon_crab_claw_1
+	string: "Sharp Claw"
+	stack: 20
+	loot_groups: [ crabs ]
+	tags: [ reagent ]	
+}
+
+item item_crab_leg:
+{
+	type: miscellaneous
+	item_level: 10
+	level_range: [ 10 22 ]
+	icon: icon_insect_leg_1
+	string: "Tough Crab Leg"
+	stack: 20
+	loot_groups: [ crabs ]
+	tags: [ reagent ]	
+}
+
+item item_earth_core:
+{
+	type: miscellaneous
+	item_level: 10
+	level_range: [ 10 22 ]
+	icon: icon_earth_1
+	rarity: uncommon
+	string: "Earth Core"
+	stack: 10
+	loot_groups: [ earth_elementals ]
+	tags: [ reagent ]	
+}
+
+item item_enchanted_dirt:
+{
+	type: miscellaneous
+	item_level: 14
+	level_range: [ 14 22 ]
+	icon: icon_earth_1
+	rarity: uncommon
+	string: "Enchanted Dirt"
+	stack: 10
+	loot_groups: [ earth_elementals ]
+	tags: [ reagent ]	
+}
+
+item item_giant_egg:
+{
+	type: miscellaneous
+	item_level: 15
+	level_range: [ 13 22 ]
+	icon: icon_egg_2
+	string: "Giant Egg"
+	stack: 10
+	loot_groups: [ birds owlbears ]
+	tags: [ reagent ]	
+}
+
+item item_giant_egg_shells:
+{
+	type: miscellaneous
+	item_level: 13
+	level_range: [ 13 22 ]
+	icon: icon_egg_shells_1
+	string: "Egg Shells"
+	stack: 10
+	loot_groups: [ birds owlbears ]
+	tags: [ reagent ]	
+}
+
+item item_brown_leaf:
+{
+	type: miscellaneous
+	item_level: 14
+	level_range: [ 14 22 ]
+	icon: icon_brown_leaf_1
+	string: "Faded Leaf"
+	stack: 20
+	loot_groups: [ wood_elementals ]
+	tags: [ reagent ]	
+}
+
+item item_blue_feather:
+{
+	type: miscellaneous
+	item_level: 13
+	level_range: [ 13 22 ]
+	icon: icon_feather_2
+	string: "Blue Feather"
+	stack: 10
+	loot_groups: [ owlbears ]
+	tags: [ reagent ]	
+}
+
+item item_green_feather:
+{
+	type: miscellaneous
+	item_level: 13
+	level_range: [ 13 22 ]
+	icon: icon_feather_3
+	string: "Green Feather"
+	stack: 10
+	loot_groups: [ birds ]
+	tags: [ reagent ]	
+}
+
+item item_life_core:
+{
+	type: miscellaneous
+	item_level: 13
+	level_range: [ 13 22 ]
+	icon: icon_essence_1
+	string: "Life Core"
+	rarity: uncommon
+	stack: 10
+	loot_groups: [ wood_elementals nature_elementals ]
+	tags: [ reagent ]	
+}
+
+item item_roots:
+{
+	type: miscellaneous
+	item_level: 11
+	level_range: [ 13 22 ]
+	icon: icon_root_1
+	string: "Fresh Roots"
+	stack: 10
+	loot_groups: [ wood_elementals nature_elementals ]
+	tags: [ reagent ]	
+}
+
+item item_lizard_tooth:
+{
+	type: miscellaneous
+	item_level: 11
+	level_range: [ 13 22 ]
+	icon: icon_tooth_1
+	string: "Lizard Tooth"
+	stack: 10
+	loot_groups: [ lizards ]
+	tags: [ reagent ]		
+}
+
+item item_lizard_tail:
+{
+	type: miscellaneous
+	item_level: 11
+	level_range: [ 13 22 ]
+	icon: icon_tail_1
+	string: "Scaly Tail Tip"
+	stack: 10
+	loot_groups: [ lizards ]
+	tags: [ reagent ]		
+}
+
+item item_bubbling_slime:
+{
+	type: miscellaneous
+	item_level: 11
+	level_range: [ 12 22 ]
+	icon: icon_slime_1
+	string: "Bubbling Slime"
+	stack: 10
+	loot_groups: [ oozes ]
+	tags: [ reagent ]		
+}
+
+item item_slimy_skull:
+{
+	type: miscellaneous
+	item_level: 13
+	level_range: [ 12 22 ]
+	icon: icon_slimy_skull_1
+	string: "Slimy Skull"
+	stack: 10
+	loot_groups: [ oozes ]
+	tags: [ reagent ]		
+}
+
+item item_retractable_claws:
+{
+	type: miscellaneous
+	item_level: 10
+	level_range: [ 10 22 ]
+	icon: icon_claw_5
+	string: "Retractable Claws"
+	stack: 10
+	loot_groups: [ lions ]
+	tags: [ reagent ]	
+}
+
+item item_demon_fur:
+{
+	type: miscellaneous
+	item_level: 10
+	level_range: [ 10 22 ]
+	icon: icon_hair_3
+	string: "Demon Hair"
+	stack: 10
+	loot_groups: [ demons ]
+	tags: [ reagent ]		
+}
+
+item item_demon_teeth:
+{
+	type: miscellaneous
+	item_level: 10
+	level_range: [ 10 22 ]
+	icon: icon_teeth_2
+	string: "Demon Teeth"
+	stack: 10
+	loot_groups: [ demons ]
+	tags: [ reagent ]		
+}
+
+item item_demon_heart:
+{
+	type: miscellaneous
+	item_level: 10
+	level_range: [ 10 22 ]
+	icon: icon_demon_heart_1
+	rarity: uncommon
+	string: "Heart of Darkness"
+	stack: 10
+	loot_groups: [ demons ]
+	tags: [ reagent ]	
+}
+
+item item_nature_heart:
+{
+	type: miscellaneous
+	item_level: 10
+	level_range: [ 10 22 ]
+	icon: icon_nature_heart_1
+	rarity: uncommon
+	string: "Heart of Nature"
+	stack: 10
+	loot_groups: [ wood_elementals nature_elementals ]
+	tags: [ reagent ]	
+}
+
+item item_polished_stone:
+{
+	type: miscellaneous
+	item_level: 10
+	level_range: [ 10 22 ]
+	icon: icon_rock_1
+	rarity: uncommon
+	string: "Polished Stone"
+	stack: 10
+	loot_groups: [ demons earth_elementals ]
+	tags: [ reagent ]		
+}
+
+item item_enchanted_roots:
+{
+	type: miscellaneous
+	item_level: 10
+	level_range: [ 10 22 ]
+	icon: icon_root_2
+	rarity: uncommon
+	string: "Enchanted Roots"
+	stack: 10
+	loot_groups: [ wood_elementals nature_elementals ]
+	tags: [ reagent ]		
+}
+
+item item_spider_leg:
+{
+	type: miscellaneous
+	item_level: 10
+	level_range: [ 10 22 ]
+	icon: icon_insect_leg_2
+	string: "Spider Leg"
+	stack: 10
+	loot_groups: [ spiders ]
+	tags: [ reagent ]			
+}
+
+item item_poison_fangs:
+{
+	type: miscellaneous
+	item_level: 10
+	level_range: [ 10 22 ]
+	icon: icon_fangs_1
+	string: "Poison Fangs"
+	stack: 10
+	loot_groups: [ spiders ]
+	tags: [ reagent ]			
+}
+
+item item_large_poison_sack:
+{
+	type: miscellaneous
+	item_level: 10
+	level_range: [ 10 22 ]
+	icon: icon_poison_sack_1
+	string: "Large Poison Sack"
+	stack: 10
+	loot_groups: [ spiders ]
+	tags: [ reagent ]			
+}
+
+item item_sharp_talons:
+{
+	type: miscellaneous
+	item_level: 10
+	level_range: [ 10 22 ]
+	icon: icon_talons_1
+	string: "Sharp Talons"
+	stack: 10
+	loot_groups: [ birds owlbears ]
+	tags: [ reagent ]			
+}
+
+item item_razor_beak:
+{
+	type: miscellaneous
+	item_level: 10
+	level_range: [ 10 22 ]
+	icon: icon_beak_1
+	string: "Razor Beak"
+	stack: 10
+	loot_groups: [ birds owlbears ]
+	tags: [ reagent ]			
+}
+
+loot_group token_of_victory: {}
+
+item item_token_of_victory:
+{
+	string: "Token of Victory"
+	loot_groups: [ token_of_victory ]
+	type: miscellaneous
+	item_level: 20
+	flags: [ not_sellable ]
+	stack: 100
+	icon: icon_token_2
+	rarity: uncommon
+	level_range: [ 10 22 ]
+	binds: when_picked_up
 }

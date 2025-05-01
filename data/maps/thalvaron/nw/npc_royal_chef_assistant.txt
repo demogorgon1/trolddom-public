@@ -1,0 +1,156 @@
+dialogue_screen .royal_chef_assistant_greetings:
+{
+	text: 
+	[	
+		"That man's ego is too large for his little body."
+	]
+	
+	options:
+	[
+		{ quest: .royal_chef_assistant_1 }
+	]
+}
+
+dialogue_root .royal_chef_assistant_dialogue:
+{
+	.royal_chef_assistant_greetings: { }
+}
+
+entity thalvaron_royal_chef_assistant: !NPC
+{
+	_string: "Romy Chiffon"
+	_guild_name: "Assistant"
+	_dialogue_root: .royal_chef_assistant_dialogue	
+	_sprite: man_39
+	_sprite_dead: man_39_dead	
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .royal_chef_assistant_1_quest_item: { }
+
+item .royal_chef_assistant_1_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .royal_chef_assistant_1_quest_item ]		
+	string: "Owlbear Egg" 
+	icon: icon_egg_1
+	stack: 4
+	item_level: 14
+	quest: .royal_chef_assistant_1
+	flags: [ not_sellable ]
+}
+
+objective .royal_chef_assistant_1:
+{
+	string: "Owlbear Eggs"
+	collect_items: { item: .royal_chef_assistant_1_quest_item count: 4 }
+}
+
+{
+	${ _level: 14 }
+	item .royal_chef_assistant_1_a: !QUEST_REWARD_WAIST{ _string: "Chef's Belt" _icon: icon_mail_belt_2 _spirit: 1 _constitution: 1 _type: armor_cloth }
+	item .royal_chef_assistant_1_b: !QUEST_REWARD_1H_MACE{ _string: "Worn Tenderizer" _icon: icon_mace_1 _strength: 1 _weapon_cooldown: 22 }
+	item .royal_chef_assistant_1_c: !QUEST_REWARD_BACK{ _string: "Royal Employee's Cloak" _icon: icon_cape_3 _wisdom: 1 _constitution: 1 _type: armor_cloth }
+}
+
+quest .royal_chef_assistant_1:
+{
+	string: "The Royal Omelette"
+
+	text:
+	[
+		"Collect owlbear eggs in the Iceveil Highlands."
+	]
+	
+	description: 
+	[
+		"I have a bit of a problem I hope you might be able to help me with.\n\n"
+		"I'm in charge of buying ingredients for the kitchen, which can be a bit difficult at times. Recently I got a good deal on some giant eggs, which was turned into an omelette."
+		"The Prince Consort loved it and asked Chef Swanson for more. Now, it turned out, that those eggs were owlbear eggs, which are absolutely impossible to find. I'm afraid the chef is going to kill me"
+		"if I don't find some. I did a bit of research and it turns out that owlbears live in the Iceveil Highlands to the east. If you go there on your travels, maybe you can get me some?"
+	]
+
+	progress:
+	[
+		"Did you find some eggs?"
+	]
+	
+	completion:
+	[
+		"Whew, those are great! Really helps me a lot, thanks!"
+	]
+
+	objectives: [ .royal_chef_assistant_1 ]
+	level: 14	
+	reward_one_item: [ .royal_chef_assistant_1_a .royal_chef_assistant_1_b .royal_chef_assistant_1_c ]
+}
+
+loot_table .royal_chef_assistant_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .royal_chef_assistant_1_quest_item }			
+		}		
+	]
+}
+
+!define local ROYAL_CHEF_ASSISTANT_1_QUEST_ITEM_ENTITY
+{
+	string: "Owlbear Egg"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ egg_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			verb: pick
+			range: 1 
+			despawn: true 			
+			level: 14
+			required_quest: .royal_chef_assistant_1
+			trigger_ability: @_trigger_ability
+			loot_table: .royal_chef_assistant_1_quest_item
+		}		
+	}
+}
+
+!define local ROYAL_CHEF_ASSISTANT_1_QUEST_ITEM_ABILITY
+{
+	direct_effect spawn_entity:
+	{
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: thalvaron_owlbear
+		map_entity_spawn: @_map_entity_spawn
+	}
+}
+
+map_entity_spawn thalvaron_royal_chef_assistant_1_quest_spawn_a: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn thalvaron_royal_chef_assistant_1_quest_spawn_b: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn thalvaron_royal_chef_assistant_1_quest_spawn_c: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn thalvaron_royal_chef_assistant_1_quest_spawn_d: { spawn_timer: { only_when_triggered: true } }
+
+map_entity_spawn thalvaron_royal_chef_assistant_1_quest_item_a: { entity thalvaron_royal_chef_assistant_1_quest_a: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_royal_chef_assistant_1_quest_item_b: { entity thalvaron_royal_chef_assistant_1_quest_b: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_royal_chef_assistant_1_quest_item_c: { entity thalvaron_royal_chef_assistant_1_quest_c: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_royal_chef_assistant_1_quest_item_d: { entity thalvaron_royal_chef_assistant_1_quest_d: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+
+entity thalvaron_royal_chef_assistant_1_quest_a: !ROYAL_CHEF_ASSISTANT_1_QUEST_ITEM_ENTITY{ _trigger_ability: .royal_chef_assistant_1_quest_spawn_a }
+entity thalvaron_royal_chef_assistant_1_quest_b: !ROYAL_CHEF_ASSISTANT_1_QUEST_ITEM_ENTITY{ _trigger_ability: .royal_chef_assistant_1_quest_spawn_b }
+entity thalvaron_royal_chef_assistant_1_quest_c: !ROYAL_CHEF_ASSISTANT_1_QUEST_ITEM_ENTITY{ _trigger_ability: .royal_chef_assistant_1_quest_spawn_c }
+entity thalvaron_royal_chef_assistant_1_quest_d: !ROYAL_CHEF_ASSISTANT_1_QUEST_ITEM_ENTITY{ _trigger_ability: .royal_chef_assistant_1_quest_spawn_d }
+
+ability .royal_chef_assistant_1_quest_spawn_a: !ROYAL_CHEF_ASSISTANT_1_QUEST_ITEM_ABILITY{ _map_entity_spawn: thalvaron_royal_chef_assistant_1_quest_spawn_a }
+ability .royal_chef_assistant_1_quest_spawn_b: !ROYAL_CHEF_ASSISTANT_1_QUEST_ITEM_ABILITY{ _map_entity_spawn: thalvaron_royal_chef_assistant_1_quest_spawn_b }
+ability .royal_chef_assistant_1_quest_spawn_c: !ROYAL_CHEF_ASSISTANT_1_QUEST_ITEM_ABILITY{ _map_entity_spawn: thalvaron_royal_chef_assistant_1_quest_spawn_c }
+ability .royal_chef_assistant_1_quest_spawn_d: !ROYAL_CHEF_ASSISTANT_1_QUEST_ITEM_ABILITY{ _map_entity_spawn: thalvaron_royal_chef_assistant_1_quest_spawn_d }

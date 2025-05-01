@@ -8,6 +8,7 @@ dialogue_screen .randy_greetings:
 	options:
 	[
 		{ quest: .randy_1 }
+		{ quest<offer_only>: open_world_randy_2 }
 	]
 }
 
@@ -103,4 +104,47 @@ quest .randy_1:
 	level: 6	
 	
 	reward_cash_multiplier: 20
+}
+
+############################################################
+# Quest 2
+
+item .randy_2_quest_item:
+{
+	icon: icon_box
+	item_level: 7
+	flags: [ unique not_sellable ]
+	string: "Crab Parts"
+	flavor: "Smells a bit wonky."
+}
+
+quest open_world_randy_2:
+{
+	string: "Delivery to the City"
+
+	text:
+	[
+		"Deliver the package to Mathew in the trade district of Valoris."
+	]
+	
+	description: 
+	[
+		"I've collected a fairly decent inventory of goods to be shipped off to the mainland. You seem like a fairly trustworthy $class$, maybe you can get it there for me? I'd rather not leave my post here, yet.\n\n"
+		"Mathew, a friend of mine, operates a store in the trade district in Valoris and is interested in these kinds of items. I've instructed him to reward you if you bring the package to him.\n\n"
+		"If you don't know, Valoris is the capital of the kingdom and across the sea. You'll surely be able to find a boat there from Tidewatch."
+	]
+
+	progress:
+	[
+		"What a nice day in the woods."
+	]
+	
+	completion:
+	[
+		"Oh, that weirdo Randy sent you? With a package of junk? Let me see..."
+	]
+
+	level: 7
+	quest_items: [ .randy_2_quest_item ]
+	
 }

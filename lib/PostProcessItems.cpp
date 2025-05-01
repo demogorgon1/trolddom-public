@@ -42,10 +42,7 @@ namespace tpublic
 				{
 					// Automatically set vendor flag if can be bought from a vendor
 					if(vendorItemIds.contains(aItem->m_id))
-					{
-						printf("%s\n", aItem->m_name.c_str());
 						aItem->m_flags |= Data::Item::FLAG_VENDOR;
-					}
 
 					// If no item level (or required level), set item level based on use ability if any
 					if(aItem->m_itemLevel == 0 && aItem->m_useAbilityId != 0)

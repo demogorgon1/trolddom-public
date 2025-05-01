@@ -1,0 +1,333 @@
+!define local NPC_HUMANOID
+{
+	creature_type: humanoid
+	loot_table: default_humanoid
+	weapon_damage_multiplier_range: [ 0.8 1.2 ]
+	health_multiplier_range: [ 0.8 1.2 ]
+	
+	faction: @_faction
+	name_template: @_name_template
+	sprite: @_sprite
+	count: @_count
+	elite: @_elite	
+	abilities: @_abilities
+	
+	<exists _has_mana> has_mana: @_has_mana 
+}
+
+!define local NPC_HUMANOID_WEAK
+{
+	creature_type: humanoid
+	loot_table: default_humanoid
+	weapon_damage_multiplier_range: [ 0.7 0.9 ]
+	health_multiplier_range: [ 0.7 0.9 ]
+	
+	faction: @_faction
+	name_template: @_name_template
+	sprite: @_sprite
+	count: @_count
+	elite: @_elite	
+	abilities: @_abilities
+
+	<exists _has_mana> has_mana: @_has_mana	
+}
+
+!define local NPC_HUMANOID_MINOR_BOSS
+{
+	creature_type: humanoid
+	weapon_damage_multiplier_range: [ 1.6 2 ]
+	health_multiplier_range: [ 2 3 ]
+	loot_table: default_humanoid
+	elite: true
+	extra_tags: [ minor_boss ]
+	special_loot_cooldown_seconds: 14400 # 4 hours
+
+	faction: @_faction
+	name_template: @_name_template
+	sprite: @_sprite
+	count: @_count
+	abilities: @_abilities
+	
+	<exists _has_mana> has_mana: @_has_mana	
+}
+
+!define local NPC_HUMANOID_MAJOR_BOSS
+{
+	creature_type: humanoid
+	weapon_damage_multiplier_range: [ 1.8 2.2 ]
+	health_multiplier_range: [ 3.5 4 ]
+	loot_table: default_humanoid
+	elite: true
+	extra_tags: [ major_boss ]
+	special_loot_cooldown_seconds: 14400 # 4 hours
+
+	faction: @_faction
+	name_template: @_name_template
+	sprite: @_sprite
+	count: @_count
+	abilities: @_abilities
+	
+	<exists _has_mana> has_mana: @_has_mana	
+}
+
+!define local NPC_UNDEAD
+{
+	creature_type: undead
+	loot_table: default_skeleton
+	weapon_damage_multiplier_range: [ 0.8 1.2 ]
+	health_multiplier_range: [ 0.8 1.2 ]
+	
+	faction: @_faction
+	name_template: @_name_template
+	sprite: @_sprite
+	count: @_count
+	elite: @_elite	
+	abilities: @_abilities
+	
+	<exists _has_mana> has_mana: @_has_mana
+}
+
+!define local NPC_UNDEAD_WEAK
+{
+	creature_type: undead
+	loot_table: default_skeleton
+	weapon_damage_multiplier_range: [ 0.7 0.9 ]
+	health_multiplier_range: [ 0.7 0.9 ]
+	
+	faction: @_faction
+	name_template: @_name_template
+	sprite: @_sprite
+	count: @_count
+	elite: @_elite	
+	abilities: @_abilities
+
+	<exists _has_mana> has_mana: @_has_mana	
+}
+
+!define local NPC_UNDEAD_MINOR_BOSS
+{
+	creature_type: undead
+	weapon_damage_multiplier_range: [ 1.6 2 ]
+	health_multiplier_range: [ 2 3 ]
+	loot_table: default_skeleton
+	elite: true
+	extra_tags: [ minor_boss ]
+	special_loot_cooldown_seconds: 14400 # 4 hours
+
+	faction: @_faction
+	name_template: @_name_template
+	sprite: @_sprite
+	count: @_count
+	abilities: @_abilities
+	
+	<exists _has_mana> has_mana: @_has_mana	
+}
+
+!define local NPC_UNDEAD_MAJOR_BOSS
+{
+	creature_type: undead
+	weapon_damage_multiplier_range: [ 1.8 2.2 ]
+	health_multiplier_range: [ 3.5 4 ]
+	loot_table: default_skeleton
+	elite: true
+	extra_tags: [ major_boss ]
+	special_loot_cooldown_seconds: 14400 # 4 hours
+
+	faction: @_faction
+	name_template: @_name_template
+	sprite: @_sprite
+	count: @_count
+	abilities: @_abilities
+	
+	<exists _has_mana> has_mana: @_has_mana	
+}
+
+############################################################################
+# World enemies generation
+
+generation_job world_enemies_2:
+{
+	random_seed: 190466064
+	
+	############################################################################
+	# Goblins
+
+	# Melee
+	{
+		abilities: [ { id: npc_whirlwind target: self } { id: npc_charge target: random_player } { id: npc_strike } ]
+	
+		{
+			level_range: [ 18 20 ]
+			
+			npcs: !NPC_HUMANOID { _faction: goblins _name_template: .melee_goblin _sprite: .melee_goblin_sprite _count: 16 _elite: false _abilities: 0 }
+			npcs: !NPC_HUMANOID { _faction: goblins _name_template: .melee_goblin _sprite: .melee_goblin_sprite _count: 16 _elite: true _abilities: 0 }		
+		}
+		
+		{
+			level_range: [ 18 20 ]		
+			npcs: !NPC_HUMANOID_MINOR_BOSS { _faction: goblins _name_template: .goblin_minor_boss _sprite: .melee_goblin_boss_sprite _count: 32 _abilities: 1 }
+		}	
+
+		{
+			level_range: [ 18 20 ]		
+			npcs: !NPC_HUMANOID_MAJOR_BOSS { _faction: goblins _name_template: .goblin_major_boss _sprite: .melee_goblin_boss_sprite _count: 32 _abilities: 2 }
+		}		
+	}
+
+	# Caster
+	{
+		abilities: 
+		[ 
+			{ id: npc_heal target: low_health_friend_or_self }
+			{ id: npc_fireball target: random_player }
+			{ id: npc_fireball }
+			{ id: npc_frostbolt target: random_player }
+			{ id: npc_frostbolt }
+			{ id: npc_chain_lightning target: random_player }
+			{ id: npc_chain_lightning }			
+			{ id: npc_curse target: random_player }
+			{ id: npc_curse }			
+			{ id: npc_frostbolt_no_cooldown target: random_player }
+			{ id: npc_frostbolt_no_cooldown }
+			{ id: npc_firebolt target: random_player }
+			{ id: npc_firebolt }						   
+		]
+		
+		{
+			level_range: [ 18 20 ]
+			
+			npcs: !NPC_HUMANOID_WEAK { _faction: goblins _name_template: .caster_goblin _sprite: .caster_goblin_sprite _count: 16 _elite: false _abilities: 1 _has_mana: true }
+			npcs: !NPC_HUMANOID_WEAK { _faction: goblins _name_template: .caster_goblin _sprite: .caster_goblin_sprite _count: 16 _elite: true _abilities: 1 _has_mana: true }		
+		}
+			
+		{
+			level_range: [ 18 20 ]		
+			npcs: !NPC_HUMANOID_MINOR_BOSS { _faction: goblins _name_template: .goblin_minor_boss _sprite: .caster_goblin_boss_sprite _count: 32 _abilities: 2 _has_mana: true }
+		}	
+		
+		{
+			level_range: [ 18 20 ]		
+			npcs: !NPC_HUMANOID_MAJOR_BOSS { _faction: goblins _name_template: .goblin_major_boss _sprite: .caster_goblin_boss_sprite _count: 32 _abilities: 3 _has_mana: true }
+		}		
+	}
+
+	############################################################################
+	# Crabmen
+
+	# Melee
+	{
+		abilities: [ { id: npc_acid_spit } { id: npc_rend target_must_not_have_aura: npc_rend } { id: npc_sunder target_must_not_have_aura: npc_sunder } ]
+	
+		{
+			level_range: [ 18 20 ]
+			
+			npcs: !NPC_HUMANOID { _faction: crabmen _name_template: .melee_crabman _sprite: .melee_crabman_sprite _count: 16 _elite: false _abilities: 0 }
+			npcs: !NPC_HUMANOID { _faction: crabmen _name_template: .melee_crabman _sprite: .melee_crabman_sprite _count: 16 _elite: true _abilities: 0 }		
+		}
+		
+		{
+			level_range: [ 18 20 ]		
+			npcs: !NPC_HUMANOID_MINOR_BOSS { _faction: crabmen _name_template: .crabman_minor_boss _sprite: .melee_crabman_boss_sprite _count: 32 _abilities: 1 }
+		}	
+
+		{
+			level_range: [ 18 20 ]		
+			npcs: !NPC_HUMANOID_MAJOR_BOSS { _faction: crabmen _name_template: .crabman_major_boss _sprite: .melee_crabman_boss_sprite _count: 32 _abilities: 2 }
+		}		
+	}
+
+	# Caster 
+	{
+		abilities: 
+		[ 
+			{ id: npc_heal target: low_health_friend_or_self }
+			{ id: npc_fireball target: random_player }
+			{ id: npc_fireball }
+			{ id: npc_frostbolt target: random_player }
+			{ id: npc_frostbolt }
+			{ id: npc_frostbolt_no_cooldown target: random_player }
+			{ id: npc_frostbolt_no_cooldown }
+			{ id: npc_firebolt target: random_player }
+			{ id: npc_firebolt }						   
+		]
+
+		{
+			level_range: [ 18 20 ]
+			
+			npcs: !NPC_HUMANOID_WEAK { _faction: crabmen _name_template: .caster_crabman _sprite: .caster_crabman_sprite _count: 16 _elite: false _abilities: 1 _has_mana: true }
+			npcs: !NPC_HUMANOID_WEAK { _faction: crabmen _name_template: .caster_crabman _sprite: .caster_crabman_sprite _count: 16 _elite: true _abilities: 1 _has_mana: true }		
+		}
+			
+		{
+			level_range: [ 18 20 ]		
+			npcs: !NPC_HUMANOID_MINOR_BOSS { _faction: crabmen _name_template: .crabman_minor_boss _sprite: .caster_crabman_boss_sprite _count: 32 _abilities: 2 _has_mana: true }
+		}	
+		
+		{
+			level_range: [ 18 20 ]		
+			npcs: !NPC_HUMANOID_MAJOR_BOSS { _faction: crabmen _name_template: .crabman_major_boss _sprite: .caster_crabman_boss_sprite _count: 32 _abilities: 3 _has_mana: true }
+		}		
+	}
+	
+	############################################################################
+	# Skeletons
+
+	# Melee
+	{
+		abilities: [ { id: npc_whirlwind target: self } { id: npc_sunder target_must_not_have_aura: npc_sunder } { id: npc_strike } ]
+	
+		{
+			level_range: [ 18 20 ]
+			
+			npcs: !NPC_UNDEAD { _faction: skeletons _name_template: .melee_skeleton _sprite: .melee_skeleton_sprite _count: 16 _elite: false _abilities: 0 }
+			npcs: !NPC_UNDEAD { _faction: skeletons _name_template: .melee_skeleton _sprite: .melee_skeleton_sprite _count: 16 _elite: true _abilities: 0 }		
+		}
+		
+		{
+			level_range: [ 18 20 ]		
+			npcs: !NPC_UNDEAD_MINOR_BOSS { _faction: skeletons _name_template: .skeleton_minor_boss _sprite: .melee_skeleton_boss_sprite _count: 32 _abilities: 1 }
+		}	
+
+		{
+			level_range: [ 18 20 ]		
+			npcs: !NPC_UNDEAD_MAJOR_BOSS { _faction: skeletons _name_template: .skeleton_major_boss _sprite: .melee_skeleton_boss_sprite _count: 32 _abilities: 2 }
+		}		
+	}
+
+	# Caster 
+	{
+		abilities: 
+		[ 
+			{ id: npc_heal target: low_health_friend_or_self }
+			{ id: npc_fireball target: random_player }
+			{ id: npc_fireball }
+			{ id: npc_frostbolt target: random_player }
+			{ id: npc_frostbolt }
+			{ id: npc_chain_lightning target: random_player }
+			{ id: npc_chain_lightning }			
+			{ id: npc_curse target: random_player }
+			{ id: npc_curse }			
+			{ id: npc_frostbolt_no_cooldown target: random_player }
+			{ id: npc_frostbolt_no_cooldown }
+			{ id: npc_firebolt target: random_player }
+			{ id: npc_firebolt }						   
+		]
+
+		{
+			level_range: [ 18 20 ]
+			
+			npcs: !NPC_UNDEAD_WEAK { _faction: skeletons _name_template: .caster_skeleton _sprite: .caster_skeleton_sprite _count: 16 _elite: false _abilities: 1 _has_mana: true }
+			npcs: !NPC_UNDEAD_WEAK { _faction: skeletons _name_template: .caster_skeleton _sprite: .caster_skeleton_sprite _count: 16 _elite: true _abilities: 1 _has_mana: true }		
+		}
+			
+		{
+			level_range: [ 18 20 ]		
+			npcs: !NPC_UNDEAD_MINOR_BOSS { _faction: skeletons _name_template: .skeleton_minor_boss _sprite: .caster_skeleton_boss_sprite _count: 32 _abilities: 2 _has_mana: true }
+		}	
+		
+		{
+			level_range: [ 18 20 ]		
+			npcs: !NPC_UNDEAD_MAJOR_BOSS { _faction: skeletons _name_template: .skeleton_major_boss _sprite: .caster_skeleton_boss_sprite _count: 32 _abilities: 3 _has_mana: true }
+		}		
+	}
+}

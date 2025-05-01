@@ -1,0 +1,193 @@
+dialogue_screen .damon_arkwright_dialogue:
+{
+	text: 
+	[	
+		"If you like hunting vampires it's a good time to be alive."
+	]		
+	
+	options:
+	[
+		{ quest: .damon_arkwright_1 }
+		{ quest<offer_only>: thalvaron_damon_arkwright_2 }
+		{ quest<completion_only>: thalvaron_emma_brown_1 }		
+		{ quest: .damon_arkwright_3 }
+	]
+}
+
+dialogue_root .damon_arkwright_dialogue:
+{
+	.damon_arkwright_dialogue: { }
+}
+
+entity thalvaron_damon_arkwright: !NPC
+{
+	_string: "Damon Arkwright"
+	_guild_name: "Vampire Hunter"
+	_dialogue_root: .damon_arkwright_dialogue	
+	_sprite: man_46
+	_sprite_dead: man_46_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .damon_arkwright_1_quest_item: {}
+
+item thalvaron_damon_arkwright_1_quest_item:
+{
+	icon: icon_mark_1
+	item_level: 16
+	loot_groups: [ .damon_arkwright_1_quest_item ]
+	flags: [ not_sellable unique ]
+	string: "Mark of the Vampire"
+}
+
+objective .damon_arkwright_1:
+{
+	string: "Mark of the Vampire"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: thalvaron_damon_arkwright_1_quest_item count: 1 }
+}
+
+quest .damon_arkwright_1:
+{
+	string: "Vampiric Influence"
+
+	text:
+	[
+		"Kill wolves and hounds around Ravenreach until you find a sign of the vampire."
+	]
+	
+	description: 
+	[
+		"I came to Ravenreach as soon as I heard of black hounds that have been haunting the town at night. I've seen something like this before and it smells like vampiric influence. Those blood sucking bastards often use"
+		"wolves and black hounds to terrorize vulnerable towns like this. These woods are probably hiding a vampire, but where?\n\n"
+		"I have a plan. They often attach evil runes or effigies to these animals they use for their bidding. I want you to kill hounds and wolves in the area and see if you can find one of these marks."
+	]
+	
+	completion:
+	[
+		"Let me see."
+	]
+
+	level: 16	
+	objectives: [ .damon_arkwright_1 ]
+	next_quest: thalvaron_damon_arkwright_2	
+}
+
+############################################################
+# Quest 2
+
+quest thalvaron_damon_arkwright_2:
+{
+	string: "Mark of the Vampire"
+
+	text:
+	[
+		"Take the Mark of the Vampire to Emma Brown in the Southgate district of Valoris."
+	]
+	
+	description: 
+	[
+		"This is a definite sign that a powerful vampire has taken its hold over these woods.\n\n"
+		"We need to banish it, but in order to do that we need a plan. Even if we knew where its lair was, we wouldn't be able to just walk in and kill it - we'd just end up as its dinner.\n\n"
+		"Take this object you found to my colleague in Valoris. Maybe she can help figuring out what we're up against exactly. Her name is Emma Brown and lives in Southgate, close to the trade district." 
+	]
+	
+	completion:
+	[
+		"Yes... That's the unmistaken sign of a very powerful vampire."
+	]
+
+	level: 16	
+	prerequisites: [ .damon_arkwright_1 ]
+	next_quest: thalvaron_emma_brown_1
+	reward_cash_multiplier: 0
+	reward_xp_multiplier: 0.5
+	quest_items: [ thalvaron_damon_arkwright_1_quest_item ]
+}
+
+############################################################
+# Quest 3
+
+aura .damon_arkwright_3_quest_item:
+{
+	string: "Potion of Vampiric Protection"
+	type: buff
+	icon: icon_small_green_potion
+	duration: 6000
+	flags: [ unique ]
+}
+
+ability .damon_arkwright_3_quest_item:	
+{
+	string: "Potion of Vampiric Protection"
+	description: "Makes you resistant to vampiric blood poisons for 10 minutes."
+	flags: [ target_self item ]
+	icon: icon_small_green_potion
+	direct_effect apply_aura: { aura: .damon_arkwright_3_quest_item }
+	consume_items: { .damon_arkwright_3_quest_item: 1 }
+	cooldowns: [ global ]
+	states: [ default in_combat ]
+	sound_effects: !SOUND_DRINK_POTION{}
+	required_level: 15
+}
+
+item .damon_arkwright_3_quest_item:
+{
+	icon: icon_small_green_potion
+	string: "Potion of Vampiric Protection"
+	stack: 10
+	use_ability: .damon_arkwright_3_quest_item
+}
+
+objective .damon_arkwright_3:
+{
+	string: "Kaelithor Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc: { entities: [ thalvaron_vampire_boss ] count: 1 }	
+}
+
+{
+	${ _level: 17 }
+	item .damon_arkwright_3_a: !QUEST_REWARD_CHEST{ _string: "Vestments of Magical Ability" _icon: icon_robe_4 _wisdom: 1 _constitution: 1 _spell_damage: 1 _type: armor_cloth }
+	item .damon_arkwright_3_b: !QUEST_REWARD_CHEST{ _string: "Warplate of the Vampire" _icon: icon_chest_1 _strength: 1 _constitution: 1 _dexterity: 1 _type: armor_plate }
+	item .damon_arkwright_3_c: !QUEST_REWARD_CHEST{ _string: "Chain Link Harness" _icon: icon_chest_3 _strength: 1 _dexterity: 1 _type: armor_mail }
+}
+
+quest .damon_arkwright_3:
+{
+	string: "Slaying Kaelithor the Relentless"
+
+	text:
+	[
+		"Acquire a potion from Gash Hewitt in Ravenreach, summon Kaelithor at Shadowthorn Abbery, and defeat him."
+	]
+	
+	description: 
+	[
+		"If I know Kaelithor, he most likely dwells in the ground close to Shadowthorn Abbey. If you can find a mausoleum it would be a good bet for where he rests. It would, however, be unwise to go and summon him unprepared. He will" 
+		"inflict you with a powerful blood poison that will most likely kill you very fast. Luckily a man in this town, Erhart Hulius, is very knowledgeable about these vampiric blood poisons. He might be able to offer you some kind"
+		"of potion that can help you."
+	]
+	
+	completion:
+	[
+		"At last. Can you feel it? Some of the terrors of the woods have disappeared."
+	]
+
+	level: 17	
+	prerequisites: [ thalvaron_emma_brown_1 ]
+	objectives: [ .damon_arkwright_3 ]
+	quest_items: [ thalvaron_emma_brown_1_quest_item_2 ]
+	reward_one_item: [ .damon_arkwright_3_a .damon_arkwright_3_b .damon_arkwright_3_c ]
+}

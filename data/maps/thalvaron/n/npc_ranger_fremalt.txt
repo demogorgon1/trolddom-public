@@ -1,0 +1,63 @@
+dialogue_screen .ranger_fremalt_dialogue:
+{
+	text: 
+	[	
+		"These are the foothills of the Iceveil Highlands. Don't travel east until you're ready."
+	]		
+	
+	options:
+	[
+		{ quest<offer_only>: .ranger_fremalt_1 }
+	]
+}
+
+dialogue_root .ranger_fremalt_dialogue:
+{
+	.ranger_fremalt_dialogue: { }
+}
+
+entity thalvaron_ranger_fremalt: !NPC
+{
+	_string: "Ranger Fremalt"
+	_dialogue_root: .ranger_fremalt_dialogue	
+	_sprite: man_18
+	_sprite_dead: man_18_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+quest .ranger_fremalt_1:
+{
+	string: "Iceveil Highlands"
+
+	text:
+	[
+		"Go east to the Iceveil Highlands settlement."
+	]
+	
+	description: 
+	[
+		"There is a small settlement up in the Iceveil Highlands that I fear has been overrun by the rebels. Can you go and check it out? Just follow the road through Iceveil Pass and you'll get there."
+	]
+
+	progress:
+	[
+		"What are you still doing here?"
+	]
+	
+	completion:
+	[
+		"Welcome to the Iceveil Highlands. Hope you brought warm socks."
+	]
+
+	level: 12
+	reward_xp_multiplier: 0.3
+	reward_cash_multiplier: 0.3
+}
+

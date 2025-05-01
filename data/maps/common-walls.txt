@@ -22,10 +22,70 @@ sprites:
 	sprite stone_wall_w: { }
 	sprite stone_wall_e: { }
 	sprite stone_wall_s: { }	
+	
+	cursor: { position: [ 0 16 ] }
+
+	sprite fence_w_e: { }
+	sprite fence_n_s: { }
+	sprite fence_w_s: { }
+	sprite fence_e_s: { }
+	sprite fence_n_e: { }
+	sprite fence_w_n: { }
+	sprite fence_w_e_s: { }
+	sprite fence_w_e_n: { }
+	sprite fence_w_n_s: { }
+	sprite fence_e_n_s: { }
+	sprite fence_w_e_n_s: { }
+	sprite fence: { }
+	sprite fence_n: { }
+	sprite fence_w: { }
+	sprite fence_e: { }
+	sprite fence_s: { }	
+
+	cursor: { position: [ 0 32 ] }
+
+	sprite wooden_wall_w_e: { }
+	sprite wooden_wall_n_s: { }
+	sprite wooden_wall_w_s: { }
+	sprite wooden_wall_e_s: { }
+	sprite wooden_wall_n_e: { }
+	sprite wooden_wall_w_n: { }
+	sprite wooden_wall_w_e_s: { }
+	sprite wooden_wall_w_e_n: { }
+	sprite wooden_wall_w_n_s: { }
+	sprite wooden_wall_e_n_s: { }
+	sprite wooden_wall_w_e_n_s: { }
+	sprite wooden_wall: { }
+	sprite wooden_wall_n: { }
+	sprite wooden_wall_w: { }
+	sprite wooden_wall_e: { }
+	sprite wooden_wall_s: { }	
+
+	cursor: { position: [ 0 48 ] }
+
+	sprite gs_stone_wall_w_e: { }
+	sprite gs_stone_wall_n_s: { }
+	sprite gs_stone_wall_w_s: { }
+	sprite gs_stone_wall_e_s: { }
+	sprite gs_stone_wall_n_e: { }
+	sprite gs_stone_wall_w_n: { }
+	sprite gs_stone_wall_w_e_s: { }
+	sprite gs_stone_wall_w_e_n: { }
+	sprite gs_stone_wall_w_n_s: { }
+	sprite gs_stone_wall_e_n_s: { }
+	sprite gs_stone_wall_w_e_n_s: { }
+	sprite gs_stone_wall: { }
+	sprite gs_stone_wall_n: { }
+	sprite gs_stone_wall_w: { }
+	sprite gs_stone_wall_e: { }
+	sprite gs_stone_wall_s: { }	
+	
 }
 
 wall stone_wall:
 {
+	flags: [ block_line_of_sight ]
+
 	sprites: 
 	[ 
         stone_wall
@@ -44,5 +104,80 @@ wall stone_wall:
         stone_wall_e_n_s		
         stone_wall_w_n_s
         stone_wall_w_e_n_s
+	]
+}
+
+wall fence:
+{
+	flags: [ walkable ]
+
+	sprites: 
+	[ 
+        fence
+		fence_e
+		fence_w	
+		fence_w_e
+		fence_n
+        fence_n_e
+        fence_w_n
+        fence_w_e_n
+		fence_s
+        fence_e_s
+	    fence_w_s
+        fence_w_e_s		
+		fence_n_s
+        fence_e_n_s		
+        fence_w_n_s
+        fence_w_e_n_s
+	]
+}
+
+wall wood_wall:
+{
+	flags: [ block_line_of_sight ]
+
+	sprites: 
+	[ 
+        wooden_wall
+		wooden_wall_e
+		wooden_wall_w	
+		wooden_wall_w_e
+		wooden_wall_n
+        wooden_wall_n_e
+        wooden_wall_w_n
+        wooden_wall_w_e_n
+		wooden_wall_s
+        wooden_wall_e_s
+	    wooden_wall_w_s
+        wooden_wall_w_e_s		
+		wooden_wall_n_s
+        wooden_wall_e_n_s		
+        wooden_wall_w_n_s
+        wooden_wall_w_e_n_s
+	]
+}
+
+wall gs_stone_wall:
+{
+	flags: [ block_line_of_sight ]
+
+	sprites: 
+	[ 
+        gs_stone_wall
+		gs_stone_wall_e
+		gs_stone_wall_w	
+		gs_stone_wall_w_e
+		gs_stone_wall_n
+        gs_stone_wall_n_e
+        gs_stone_wall_w_n
+        gs_stone_wall_w_e_n
+		gs_stone_wall_s
+        gs_stone_wall_e_s
+	    gs_stone_wall_w_s
+        gs_stone_wall_w_e_s		
+		gs_stone_wall_n_s
+        gs_stone_wall_e_n_s		
+        gs_stone_wall_w_n_s
+        gs_stone_wall_w_e_n_s
 	]
 }

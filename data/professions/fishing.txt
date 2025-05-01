@@ -75,6 +75,10 @@ entity fishing_splash:
 			required_item: weapon_fishing_rod
 			duration: 20
 			context_help: fishing
+			trigger_ability: $ability
+			{
+				increment_character_stat: fish_caught
+			}
 		}				
 	}
 }
@@ -127,7 +131,7 @@ item item_eel:
 	icon: icon_eel_1
 	stack: 20
 	item_level: 5
-	level_range: [ 5 10 ]
+	level_range: [ 5 12 ]
 }
 
 ################################################################################
@@ -140,7 +144,7 @@ item item_blue_moonfish:
 	icon: icon_fish_2
 	stack: 20
 	item_level: 7
-	level_range: [ 8 10 ]
+	level_range: [ 8 13 ]
 }
 
 ################################################################################
@@ -154,4 +158,56 @@ item item_bony_toesnapper:
 	stack: 20
 	item_level: 10
 	level_range: [ 10 10 ]
+}
+
+################################################################################
+# Blueback Trout
+
+item item_blueback_trout:
+{
+	loot_groups: [ fish ]		
+	string: "Blueback Trout"
+	icon: icon_fish_4
+	stack: 20
+	item_level: 11
+	level_range: [ 11 14 ]
+}
+
+################################################################################
+# Stormscale Bass
+
+item item_stormscale_bass:
+{
+	loot_groups: [ fish ]		
+	string: "Stormscale Bass"
+	icon: icon_fish_5
+	stack: 20
+	item_level: 13
+	level_range: [ 13 16 ]
+}
+
+################################################################################
+# Perch
+
+item item_perch:
+{
+	loot_groups: [ fish ]		
+	string: "Perch"
+	icon: icon_fish_6
+	stack: 20
+	item_level: 15
+	level_range: [ 15 19 ]
+}
+
+################################################################################
+# Mistveil 
+
+item item_mistveil:
+{
+	loot_groups: [ fish ]		
+	string: "Mistveil"
+	icon: icon_fish_7
+	stack: 20
+	item_level: 20
+	level_range: [ 20 20 ]
 }

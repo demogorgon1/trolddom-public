@@ -1,0 +1,84 @@
+dialogue_screen .johnson_dialogue:
+{
+	text: 
+	[	
+		"I'm just mining my own business up here, but can't say I've had much luck recently."
+	]		
+	
+	options:
+	[
+		{ quest: .johnson_1 }
+	]
+}
+
+dialogue_root .johnson_dialogue:
+{
+	.johnson_dialogue: { }
+}
+
+entity thalvaron_johnson: !NPC
+{
+	_string: "Mountainman Johnson"
+	_dialogue_root: .johnson_dialogue	
+	_sprite: man_37
+	_sprite_dead: man_37_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+{
+	${ _level: 12 }
+	item .johnson_1_a: !QUEST_REWARD_SHOULDERS{ _string: "Kobold-Killer Pauldrons" _icon: icon_shoulders_1 _dexterity: 1 _strength: 1 _type: armor_mail }
+	item .johnson_1_b: !QUEST_REWARD_BACK{ _string: "Miner's Back-Protector" _icon: icon_cape_1 _dexterity: 1 _constitution: 1 _type: armor_cloth }
+}
+
+objective .johnson_1:
+{
+	string: "Kobolds Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_north_kobold_a thalvaron_north_kobold_b ]
+		count: 6
+	}
+}
+
+quest .johnson_1:
+{
+	string: "Infested Mine"
+
+	text:
+	[
+		"Reduce the kobold infestation."
+	]
+	
+	description: 
+	[
+		"Have you heard about Kobolds? No? Until recently me neither. I had noticed some strange activities in my little mine, like weird poop in the corners, tools missing, and some of the ore being picked at. I had an"
+		"exterminator come look at it and he immediately told me that I had kobolds! He told me he could help me get rid of them, but the price he quoted me was outrageous.\n\n"
+		"Maybe you can go clear them out for a more reasonable price?"
+	]
+
+	progress:
+	[
+		"Watch out what you step on."
+	]
+	
+	completion:
+	[
+		"Excellent. I think I still need to buy some Kobold poison. I've heard you can get some pellets you can put in the corners."
+	]
+
+	level: 12
+	objectives: [ .johnson_1 ]
+	reward_one_item: [ .johnson_1_a .johnson_1_b ]
+}
+

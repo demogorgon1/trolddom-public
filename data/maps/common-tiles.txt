@@ -8,9 +8,9 @@ sprites:
 
 	sprite dungeon_floor: { flags: [ tile_walkable ] alt_tiles: [ dungeon_floor_alt_1 dungeon_floor_alt_2 ] }
 	sprite dungeon_wall: { flags: [ tile_block_line_of_sight ] }
-	sprite water_1: { flags: [ tile_fishable tile_water ] water_floor: sand }
-	sprite water_2: { flags: [ tile_fishable tile_water ] water_floor: sand }
-	sprite water_3: { flags: [ tile_fishable tile_water ] water_floor: sand }
+	sprite water_1: { flags: [ tile_fishable tile_water standalone ] water_floor: sand }
+	sprite water_2: { flags: [ tile_fishable tile_water standalone ] water_floor: sand }
+	sprite water_3: { flags: [ tile_fishable tile_water standalone ] water_floor: sand }
 	sprite rocks_dungeon_entrance: { flags: [ tile_walkable tile_top ] borders:
 		[ rocks_border_1 rocks_border_2 rocks_border_3 rocks_border_4 rocks_border_5 rocks_border_6 rocks_border_7
 		  rocks_border_8 rocks_border_9 rocks_border_10 rocks_border_11 rocks_border_12 rocks_border_13 rocks_border_14
@@ -22,15 +22,15 @@ sprites:
 	sprite wood_floor: { flags: [ tile_walkable tile_top ] alt_tiles: [ wood_floor_alt_1 wood_floor_alt_2 ] }
 	sprite wood_solid_wall: { flags: [ tile_block_line_of_sight tile_top ] }
 	sprite wood_solid_wall_face: { flags: [ tile_block_line_of_sight tile_top ] }
-	sprite roof_nw: { }
-	sprite roof_n: { }
-	sprite roof_ne: { }
-	sprite roof_w: { }
-	sprite roof: { }
-	sprite roof_e: { }
-	sprite roof_sw: { }
-	sprite roof_s: { }
-	sprite roof_se: { }
+	sprite roof_nw: { flags: [ tile_indoor ] }
+	sprite roof_n: { flags: [ tile_indoor ] }
+	sprite roof_ne: { flags: [ tile_indoor ] }
+	sprite roof_w: { flags: [ tile_indoor ] }
+	sprite roof: { flags: [ tile_indoor ] }
+	sprite roof_e: { flags: [ tile_indoor ] }
+	sprite roof_sw: { flags: [ tile_indoor ] }
+	sprite roof_s: { flags: [ tile_indoor ] }
+	sprite roof_se: { flags: [ tile_indoor ] }
 	sprite pavement: { flags: [ tile_walkable ] }
 	sprite forest_entrance: { flags: [ tile_walkable tile_top  ] }
 	sprite ext_dungeon_wall: { flags: [ tile_block_line_of_sight tile_top ] }
@@ -77,6 +77,10 @@ sprites:
 	sprite ext_dungeon_wall_end: { flags: [ tile_block_line_of_sight tile_top ] }
 	sprite wood_wall_window_grass_1: { flags: [ tile_block_line_of_sight tile_top ] }
 	sprite wood_wall_window_grass_2: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite road_1: { flags: [ tile_walkable ] alt_tiles: [ road_1_alt_1 road_1_alt_2 ] }
+	sprite road_1_alt_1: { flags: [ tile_walkable ] }
+	sprite road_1_alt_2: { flags: [ tile_walkable ] }
+	sprite pavement_1_alt_1: { flags: [ tile_walkable ] }
 
 	cursor: { position: [ 0 32 ] }
 
@@ -102,6 +106,22 @@ sprites:
 	sprite dirt_border_16: { }
 	sprite dirt_border_17: { }
 	
+	skip: {}
+	skip: {}
+	skip: {}
+	skip: {}
+	skip: {}
+	skip: {}
+	skip: {}
+	skip: {}
+	skip: {}
+	
+	sprite road_2: { flags: [ tile_walkable ] alt_tiles: [ road_2_alt_1 road_2_alt_2 ] }
+	sprite road_2_alt_1: { flags: [ tile_walkable ] }
+	sprite road_2_alt_2: { flags: [ tile_walkable ] }
+	sprite dungeon_entrance_wide_1: { flags: [ tile_walkable tile_top ] }
+	sprite dungeon_entrance_wide_2: { flags: [ tile_walkable tile_top ] }
+	
 	cursor: { position: [ 0 48 ] }
 	
 	sprite forest: { flags: [ tile_block_line_of_sight ]  borders:
@@ -126,19 +146,19 @@ sprites:
 	sprite forest_border_16: { }
 	sprite forest_border_17: { }
 	
-	sprite roof_2_nw: { }
-	sprite roof_2_n: { }
-	sprite roof_2_ne: { }
-	sprite roof_2_w: { }
-	sprite roof_2: { }
-	sprite roof_2_e: { }
-	sprite roof_2_sw: { }
-	sprite roof_2_s: { }
-	sprite roof_2_se: { }	
+	sprite roof_2_nw: { flags: [ tile_indoor ] }
+	sprite roof_2_n: { flags: [ tile_indoor ] }
+	sprite roof_2_ne: { flags: [ tile_indoor ] }
+	sprite roof_2_w: { flags: [ tile_indoor ] }
+	sprite roof_2: { flags: [ tile_indoor ] }
+	sprite roof_2_e: { flags: [ tile_indoor ] }
+	sprite roof_2_sw: { flags: [ tile_indoor ] }
+	sprite roof_2_s: { flags: [ tile_indoor ] }
+	sprite roof_2_se: { flags: [ tile_indoor ] }	
 
 	cursor: { position: [ 0 64 ] }
 	
-	sprite rocks: { flags: [ tile_block_line_of_sight ] borders:
+	sprite rocks: { flags: [ tile_block_line_of_sight tile_indoor ] borders:
 		[ rocks_border_1 rocks_border_2 rocks_border_3 rocks_border_4 rocks_border_5 rocks_border_6 rocks_border_7
 		  rocks_border_8 rocks_border_9 rocks_border_10 rocks_border_11 rocks_border_12 rocks_border_13 rocks_border_14
 		  rocks_border_15 rocks_border_16 rocks_border_17 ] alt_tiles: [ rocks_alt_1 rocks_alt_2 ] }		
@@ -160,15 +180,15 @@ sprites:
 	sprite rocks_border_16: { }
 	sprite rocks_border_17: { }
 	
-	sprite roof_3_nw: { }
-	sprite roof_3_n: { }
-	sprite roof_3_ne: { }
-	sprite roof_3_w: { }
-	sprite roof_3: { }
-	sprite roof_3_e: { }
-	sprite roof_3_sw: { }
-	sprite roof_3_s: { }
-	sprite roof_3_se: { }	
+	sprite roof_3_nw: { flags: [ tile_indoor ] }
+	sprite roof_3_n: { flags: [ tile_indoor ] }
+	sprite roof_3_ne: { flags: [ tile_indoor ] }
+	sprite roof_3_w: { flags: [ tile_indoor ] }
+	sprite roof_3: { flags: [ tile_indoor ] }
+	sprite roof_3_e: { flags: [ tile_indoor ] }
+	sprite roof_3_sw: { flags: [ tile_indoor ] }
+	sprite roof_3_s: { flags: [ tile_indoor ] }
+	sprite roof_3_se: { flags: [ tile_indoor ] }	
 
 	cursor: { position: [ 0 80 ] }
 	
@@ -193,6 +213,16 @@ sprites:
 	sprite mud_border_15: { }
 	sprite mud_border_16: { }	
 	sprite mud_border_17: { }
+	
+	sprite roof_4_nw: { flags: [ tile_indoor ] }
+	sprite roof_4_n: { flags: [ tile_indoor ] }
+	sprite roof_4_ne: { flags: [ tile_indoor ] }
+	sprite roof_4_w: { flags: [ tile_indoor ] }
+	sprite roof_4: { flags: [ tile_indoor ] }
+	sprite roof_4_e: { flags: [ tile_indoor ] }
+	sprite roof_4_sw: { flags: [ tile_indoor ] }
+	sprite roof_4_s: { flags: [ tile_indoor ] }
+	sprite roof_4_se: { flags: [ tile_indoor ] }	
 
 	cursor: { position: [ 0 96 ] }
 	
@@ -244,7 +274,7 @@ sprites:
 	
 	cursor: { position: [ 0 128 ] }
 	
-	sprite snow: { flags: [ tile_walkable ] borders:
+	sprite snow: { flags: [ tile_walkable tile_snow ] borders:
 		[ snow_border_1 snow_border_2 snow_border_3 snow_border_4 snow_border_5 snow_border_6 snow_border_7
 		  snow_border_8 snow_border_9 snow_border_10 snow_border_11 snow_border_12 snow_border_13 snow_border_14
 		  snow_border_15 snow_border_16 snow_border_17 ] alt_tiles: [ snow_alt_1 snow_alt_2 ] }		
@@ -292,7 +322,7 @@ sprites:
 	
 	cursor: { position: [ 0 160 ] }
 	
-	sprite snow_rocks: { flags: [ tile_block_line_of_sight ] borders:
+	sprite snow_rocks: { flags: [ tile_block_line_of_sight tile_indoor ] borders:
 		[ snow_rocks_border_1 snow_rocks_border_2 snow_rocks_border_3 snow_rocks_border_4 snow_rocks_border_5 snow_rocks_border_6 snow_rocks_border_7
 		  snow_rocks_border_8 snow_rocks_border_9 snow_rocks_border_10 snow_rocks_border_11 snow_rocks_border_12 snow_rocks_border_13 snow_rocks_border_14
 		  snow_rocks_border_15 snow_rocks_border_16 snow_rocks_border_17 ] alt_tiles: [ snow_rocks_alt_1 snow_rocks_alt_2 ] }		
@@ -425,20 +455,20 @@ sprites:
 	sprite dirt_alt_2: { flags: [ tile_walkable ] }
 	sprite forest_alt_1: { flags: [ tile_block_line_of_sight ] }
 	sprite forest_alt_2: { flags: [ tile_block_line_of_sight ] }
-	sprite rocks_alt_1: { flags: [ tile_block_line_of_sight ] }
-	sprite rocks_alt_2: { flags: [ tile_block_line_of_sight ] }
+	sprite rocks_alt_1: { flags: [ tile_block_line_of_sight tile_indoor ] }
+	sprite rocks_alt_2: { flags: [ tile_block_line_of_sight tile_indoor ] }
 	sprite mud_alt_1: { flags: [ tile_walkable ] }
 	sprite mud_alt_2: { flags: [ tile_walkable ] }
 	sprite sand_alt_1: { flags: [ tile_walkable ] }
 	sprite sand_alt_2: { flags: [ tile_walkable ] }
 	sprite dark_grass_alt_1: { flags: [ tile_walkable ] }
 	sprite dark_grass_alt_2: { flags: [ tile_walkable ] }
-	sprite snow_alt_1: { flags: [ tile_walkable ] }
-	sprite snow_alt_2: { flags: [ tile_walkable ] }
+	sprite snow_alt_1: { flags: [ tile_walkable tile_snow ] }
+	sprite snow_alt_2: { flags: [ tile_walkable tile_snow ] }
 	sprite ice_alt_1: { flags: [ tile_walkable ] }
 	sprite ice_alt_2: { flags: [ tile_walkable ] }
-	sprite snow_rocks_alt_1: { flags: [ tile_block_line_of_sight ] }
-	sprite snow_rocks_alt_2: { flags: [ tile_block_line_of_sight ] }
+	sprite snow_rocks_alt_1: { flags: [ tile_block_line_of_sight tile_indoor ] }
+	sprite snow_rocks_alt_2: { flags: [ tile_block_line_of_sight tile_indoor ] }
 	sprite forest_2_alt_1: { flags: [ tile_block_line_of_sight ] }
 	sprite forest_2_alt_2: { flags: [ tile_block_line_of_sight ] }
 	sprite grass_2_alt_1: { flags: [ tile_walkable ] }
@@ -474,6 +504,22 @@ sprites:
 	sprite fs_ground_1_border_16: { }
 	sprite fs_ground_1_border_17: { }
 	
+	sprite brick_wall: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite brick_open_door: { flags: [ tile_walkable tile_top ] }
+	sprite brick_wall_start: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite brick_wall_end: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite brick_wall_window: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite brick_solid_wall_face: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite brick_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top ] }	
+
+	sprite brick_2_wall: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite brick_2_open_door: { flags: [ tile_walkable tile_top ] }
+	sprite brick_2_wall_start: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite brick_2_wall_end: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite brick_2_wall_window: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite brick_2_solid_wall_face: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite brick_2_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top ] }	
+
 	cursor: { position: [ 0 272 ] }
 
 	sprite fs_ground_2: { flags: [ tile_walkable ] borders: 
@@ -497,20 +543,63 @@ sprites:
 	sprite fs_ground_2_border_15: { }
 	sprite fs_ground_2_border_16: { }
 	sprite fs_ground_2_border_17: { }
+	
+	sprite inside_1_solid_wall_face: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite inside_1_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top ] }	
+	sprite inside_2_solid_wall_face: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite inside_2_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top ] }	
+	sprite inside_3_solid_wall_face: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite inside_3_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top ] }	
+	sprite inside_4_solid_wall_face: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite inside_4_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top ] }	
+	sprite inside_5_solid_wall_face: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite inside_5_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top ] }	
+	sprite outside_wood_floor_1: { flags: [ tile_walkable tile_top ] alt_tiles: [ outside_wood_floor_1_alt_1 outside_wood_floor_1_alt_2 ] }
+	sprite outside_wood_floor_1_alt_1: { flags: [ tile_walkable ] }
+	sprite outside_wood_floor_1_alt_2: { flags: [ tile_walkable ] }
+	sprite ext_dungeon_entrance_closed: { flags: [ tile_block_line_of_sight tile_top ] }
 
 	cursor: { position: [ 0 288 ] }
 
 	sprite fs_water_1: { flags: [ tile_fishable tile_water ] water_floor: sand }
 	sprite fs_water_2: { flags: [ tile_fishable tile_water ] water_floor: sand }
 	sprite fs_water_3: { flags: [ tile_fishable tile_water ] water_floor: sand }
-	sprite fs_rocks_1_alt_1: { flags: [ tile_block_line_of_sight ] }
-	sprite fs_rocks_1_alt_2: { flags: [ tile_block_line_of_sight ] }
+	sprite fs_rocks_1_alt_1: { flags: [ tile_block_line_of_sight tile_indoor ] }
+	sprite fs_rocks_1_alt_2: { flags: [ tile_block_line_of_sight tile_indoor ] }
 	sprite fs_water: { flags: [ tile_fishable tile_water ] water_floor: fs_water_floor water_animation: [ fs_water_1 fs_water_2 fs_water_3 ] }
 	sprite fs_water_floor: { flags: [ tile_walkable ] }
-
+	reverse: {}
+	sprite fs_shallow_water: { flags: [ tile_fishable tile_water tile_walkable tile_no_waves ] overview_map_override: fs_water water_floor: fs_water_floor water_animation: [ fs_water_1 fs_water_2 fs_water_3 ] 
+	    borders: [ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ] }		
+	sprite badlands_dungeon_wall_start: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite badlands_dungeon_wall_end: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite badlands_dungeon_wall: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite badlands_dungeon_entrance: { flags: [ tile_walkable tile_top ] }
+	sprite badlands_cave_entrance: { flags: [ tile_walkable tile_top ] }
+	sprite wood_wall_2: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_2_entrance: { flags: [ tile_walkable tile_top ] }
+	sprite wood_wall_2_inside: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_2_start: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_2_end: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_2_window: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_2_window_inside: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_2_grass_1: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_2_grass_2: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_2_window_grass_1: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_2_window_grass_2: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite ice_cave_entrance: { flags: [ tile_walkable tile_top ] }
+	sprite rock_floor: { flags: [ tile_walkable ] alt_tiles: [ rock_floor_alt_1 rock_floor_alt_2 ] }
+	sprite rock_floor_alt_1: { flags: [ tile_walkable ] }
+	sprite rock_floor_alt_2: { flags: [ tile_walkable ] }
+	sprite badlands_dungeon_entrance_closed: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite ext_dungeon_entrance_open: { flags: [ tile_walkable tile_top ] }
+	sprite fs_cave_entrance: { flags: [ tile_walkable tile_top ] }
+	sprite brick_closed_door_inside: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite brick_2_closed_door_inside: { flags: [ tile_block_line_of_sight tile_top ] }
+	
 	cursor: { position: [ 0 304 ] }
 	
-	sprite fs_rocks_1: { flags: [ tile_block_line_of_sight ] borders:
+	sprite fs_rocks_1: { flags: [ tile_block_line_of_sight tile_indoor ] borders:
 		[ fs_rocks_1_border_1 fs_rocks_1_border_2 fs_rocks_1_border_3 fs_rocks_1_border_4 fs_rocks_1_border_5 fs_rocks_1_border_6 fs_rocks_1_border_7
 		  fs_rocks_1_border_8 fs_rocks_1_border_9 fs_rocks_1_border_10 fs_rocks_1_border_11 fs_rocks_1_border_12 fs_rocks_1_border_13 fs_rocks_1_border_14
 		  fs_rocks_1_border_15 fs_rocks_1_border_16 fs_rocks_1_border_17 ] alt_tiles: [ fs_rocks_1_alt_1 fs_rocks_1_alt_2 ] }		
@@ -532,4 +621,376 @@ sprites:
 	sprite fs_rocks_1_border_16: { }
 	sprite fs_rocks_1_border_17: { }
 	
+	sprite wood_wall_3_alt_1: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_3_alt_2: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_3_window_alt_1: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_3_window_inside_alt_1: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_3_inside_alt_1: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_3_start: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_3_end: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_3_window: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_3_window_inside: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_3: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_3_entrance: { flags: [ tile_walkable tile_top ] }
+	sprite wood_wall_3_inside: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite brick_closed_door_outside: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite brick_2_closed_door_outside: { flags: [ tile_block_line_of_sight tile_top ] }
+
+	cursor: { position: [ 0 320 ] }
+	
+	sprite pavement_1: { flags: [ tile_walkable ] borders:
+		[ pavement_1_border_1 pavement_1_border_2 pavement_1_border_3 pavement_1_border_4 pavement_1_border_5 pavement_1_border_6 pavement_1_border_7
+		  pavement_1_border_8 pavement_1_border_9 pavement_1_border_10 pavement_1_border_11 pavement_1_border_12 pavement_1_border_13 pavement_1_border_14
+		  pavement_1_border_15 pavement_1_border_16 pavement_1_border_17 ] alt_tiles: [ pavement_1_alt_1 ] }		
+	sprite pavement_1_border_1: { }
+	sprite pavement_1_border_2: { }
+	sprite pavement_1_border_3: { }
+	sprite pavement_1_border_4: { }
+	sprite pavement_1_border_5: { }
+	sprite pavement_1_border_6: { }
+	sprite pavement_1_border_7: { }
+	sprite pavement_1_border_8: { }
+	sprite pavement_1_border_9: { }
+	sprite pavement_1_border_10: { }
+	sprite pavement_1_border_11: { }
+	sprite pavement_1_border_12: { }
+	sprite pavement_1_border_13: { }
+	sprite pavement_1_border_14: { }
+	sprite pavement_1_border_15: { }
+	sprite pavement_1_border_16: { }
+	sprite pavement_1_border_17: { }
+	
+	sprite roof_5_nw: { flags: [ tile_indoor ] }
+	sprite roof_5_n: { flags: [ tile_indoor ] }
+	sprite roof_5_ne: { flags: [ tile_indoor ] }
+	sprite roof_5_w: { flags: [ tile_indoor ] }
+	sprite roof_5: { flags: [ tile_indoor ] }
+	sprite roof_5_e: { flags: [ tile_indoor ] }
+	sprite roof_5_sw: { flags: [ tile_indoor ] }
+	sprite roof_5_s: { flags: [ tile_indoor ] }
+	sprite roof_5_se: { flags: [ tile_indoor ] }		
+
+	cursor: { position: [ 0 336 ] }
+	
+	sprite red_carpet: { flags: [ tile_walkable ] borders:
+		[ red_carpet_border_1 red_carpet_border_2 red_carpet_border_3 red_carpet_border_4 red_carpet_border_5 red_carpet_border_6 red_carpet_border_7
+		  red_carpet_border_8 red_carpet_border_9 red_carpet_border_10 red_carpet_border_11 red_carpet_border_12 red_carpet_border_13 red_carpet_border_14
+		  red_carpet_border_15 red_carpet_border_16 red_carpet_border_17 ] alt_tiles: [ ] }		
+	sprite red_carpet_border_1: { }
+	sprite red_carpet_border_2: { }
+	sprite red_carpet_border_3: { }
+	sprite red_carpet_border_4: { }
+	sprite red_carpet_border_5: { }
+	sprite red_carpet_border_6: { }
+	sprite red_carpet_border_7: { }
+	sprite red_carpet_border_8: { }
+	sprite red_carpet_border_9: { }
+	sprite red_carpet_border_10: { }
+	sprite red_carpet_border_11: { }
+	sprite red_carpet_border_12: { }
+	sprite red_carpet_border_13: { }
+	sprite red_carpet_border_14: { }
+	sprite red_carpet_border_15: { }
+	sprite red_carpet_border_16: { }
+	sprite red_carpet_border_17: { }
+
+	cursor: { position: [ 0 352 ] }
+
+	sprite pine_forest_2: 
+	{ 
+		flags: [ tile_block_line_of_sight ] 
+		borders: [ pine_forest_2_border_1 pine_forest_2_border_2 pine_forest_2_border_3 pine_forest_2_border_4 pine_forest_2_border_5 pine_forest_2_border_6 pine_forest_2_border_7
+		           pine_forest_2_border_8 pine_forest_2_border_9 pine_forest_2_border_10 pine_forest_2_border_11 pine_forest_2_border_12 pine_forest_2_border_13 pine_forest_2_border_14
+		           pine_forest_2_border_15 pine_forest_2_border_16 pine_forest_2_border_17 ] 				  						   
+		alt_tiles: [ pine_forest_2_alt_1 pine_forest_2_alt_2 ]
+	}	
+	sprite pine_forest_2_border_1: { }
+	sprite pine_forest_2_border_2: { }
+	sprite pine_forest_2_border_3: { }
+	sprite pine_forest_2_border_4: { }
+	sprite pine_forest_2_border_5: { }
+	sprite pine_forest_2_border_6: { }
+	sprite pine_forest_2_border_7: { }
+	sprite pine_forest_2_border_8: { }
+	sprite pine_forest_2_border_9: { }
+	sprite pine_forest_2_border_10: { }
+	sprite pine_forest_2_border_11: { }
+	sprite pine_forest_2_border_12: { }
+	sprite pine_forest_2_border_13: { }
+	sprite pine_forest_2_border_14: { }
+	sprite pine_forest_2_border_15: { }
+	sprite pine_forest_2_border_16: { }
+	sprite pine_forest_2_border_17: { }
+	sprite pine_forest_2_alt_1: { flags: [ tile_block_line_of_sight ] }
+	sprite pine_forest_2_alt_2: { flags: [ tile_block_line_of_sight ] }
+	
+	sprite fs_building_wall: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite fs_building_entrance: { flags: [ tile_walkable tile_top ] }
+	sprite fs_building_wall_start: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite fs_building_wall_end: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite fs_building_d_wall: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite fs_building_d_entrance: { flags: [ tile_walkable tile_top ] }
+	sprite fs_building_d_wall_start: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite fs_building_d_wall_end: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite fs_building_d_entrance_closed: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite fs_building_entrance_closed: { flags: [ tile_block_line_of_sight tile_top ] }
+
+	cursor: { position: [ 0 368 ] }
+
+	sprite dark_grass_2: 
+	{ 
+		flags: [ tile_walkable ] 
+		borders: [ dark_grass_2_border_1 dark_grass_2_border_2 dark_grass_2_border_3 dark_grass_2_border_4 dark_grass_2_border_5 dark_grass_2_border_6 dark_grass_2_border_7
+		           dark_grass_2_border_8 dark_grass_2_border_9 dark_grass_2_border_10 dark_grass_2_border_11 dark_grass_2_border_12 dark_grass_2_border_13 dark_grass_2_border_14
+		           dark_grass_2_border_15 dark_grass_2_border_16 dark_grass_2_border_17 ] 				  						   
+		alt_tiles: [ dark_grass_2_alt_1 dark_grass_2_alt_2 ]
+	}	
+	sprite dark_grass_2_border_1: { }
+	sprite dark_grass_2_border_2: { }
+	sprite dark_grass_2_border_3: { }
+	sprite dark_grass_2_border_4: { }
+	sprite dark_grass_2_border_5: { }
+	sprite dark_grass_2_border_6: { }
+	sprite dark_grass_2_border_7: { }
+	sprite dark_grass_2_border_8: { }
+	sprite dark_grass_2_border_9: { }
+	sprite dark_grass_2_border_10: { }
+	sprite dark_grass_2_border_11: { }
+	sprite dark_grass_2_border_12: { }
+	sprite dark_grass_2_border_13: { }
+	sprite dark_grass_2_border_14: { }
+	sprite dark_grass_2_border_15: { }
+	sprite dark_grass_2_border_16: { }
+	sprite dark_grass_2_border_17: { }
+	sprite dark_grass_2_alt_1: { flags: [ tile_walkable ] }
+	sprite dark_grass_2_alt_2: { flags: [ tile_walkable ] }
+	
+	cursor: { position: [ 0 384 ] }
+
+	sprite pine_forest_1: 
+	{ 
+		flags: [ tile_block_line_of_sight ] 
+		borders: [ pine_forest_1_border_1 pine_forest_1_border_2 pine_forest_1_border_3 pine_forest_1_border_4 pine_forest_1_border_5 pine_forest_1_border_6 pine_forest_1_border_7
+		           pine_forest_1_border_8 pine_forest_1_border_9 pine_forest_1_border_10 pine_forest_1_border_11 pine_forest_1_border_12 pine_forest_1_border_13 pine_forest_1_border_14
+		           pine_forest_1_border_15 pine_forest_1_border_16 pine_forest_1_border_17 ] 				  						   
+		alt_tiles: [ pine_forest_1_alt_1 pine_forest_1_alt_2 ]
+	}	
+	sprite pine_forest_1_border_1: { }
+	sprite pine_forest_1_border_2: { }
+	sprite pine_forest_1_border_3: { }
+	sprite pine_forest_1_border_4: { }
+	sprite pine_forest_1_border_5: { }
+	sprite pine_forest_1_border_6: { }
+	sprite pine_forest_1_border_7: { }
+	sprite pine_forest_1_border_8: { }
+	sprite pine_forest_1_border_9: { }
+	sprite pine_forest_1_border_10: { }
+	sprite pine_forest_1_border_11: { }
+	sprite pine_forest_1_border_12: { }
+	sprite pine_forest_1_border_13: { }
+	sprite pine_forest_1_border_14: { }
+	sprite pine_forest_1_border_15: { }
+	sprite pine_forest_1_border_16: { }
+	sprite pine_forest_1_border_17: { }
+	sprite pine_forest_1_alt_1: { flags: [ tile_block_line_of_sight ] }
+	sprite pine_forest_1_alt_2: { flags: [ tile_block_line_of_sight ] }
+
+	cursor: { position: [ 0 400 ] }
+
+	sprite wet_grass: 
+	{ 
+		flags: [ tile_walkable ] 
+		borders: [ wet_grass_border_1 wet_grass_border_2 wet_grass_border_3 wet_grass_border_4 wet_grass_border_5 wet_grass_border_6 wet_grass_border_7
+		           wet_grass_border_8 wet_grass_border_9 wet_grass_border_10 wet_grass_border_11 wet_grass_border_12 wet_grass_border_13 wet_grass_border_14
+		           wet_grass_border_15 wet_grass_border_16 wet_grass_border_17 ] 				  						   
+		alt_tiles: [ wet_grass_alt_1 wet_grass_alt_2 ]
+	}	
+	sprite wet_grass_border_1: { }
+	sprite wet_grass_border_2: { }
+	sprite wet_grass_border_3: { }
+	sprite wet_grass_border_4: { }
+	sprite wet_grass_border_5: { }
+	sprite wet_grass_border_6: { }
+	sprite wet_grass_border_7: { }
+	sprite wet_grass_border_8: { }
+	sprite wet_grass_border_9: { }
+	sprite wet_grass_border_10: { }
+	sprite wet_grass_border_11: { }
+	sprite wet_grass_border_12: { }
+	sprite wet_grass_border_13: { }
+	sprite wet_grass_border_14: { }
+	sprite wet_grass_border_15: { }
+	sprite wet_grass_border_16: { }
+	sprite wet_grass_border_17: { }
+	sprite wet_grass_alt_1: { flags: [ tile_walkable ] }
+	sprite wet_grass_alt_2: { flags: [ tile_walkable ] }
+
+	cursor: { position: [ 0 416 ] }
+
+	sprite badlands_1: 
+	{ 
+		flags: [ tile_walkable ] 
+		borders: [ badlands_1_border_1 badlands_1_border_2 badlands_1_border_3 badlands_1_border_4 badlands_1_border_5 badlands_1_border_6 badlands_1_border_7
+		           badlands_1_border_8 badlands_1_border_9 badlands_1_border_10 badlands_1_border_11 badlands_1_border_12 badlands_1_border_13 badlands_1_border_14
+		           badlands_1_border_15 badlands_1_border_16 badlands_1_border_17 ] 				  						   
+		alt_tiles: [ badlands_1_alt_1 badlands_1_alt_2 ]
+	}	
+	sprite badlands_1_border_1: { }
+	sprite badlands_1_border_2: { }
+	sprite badlands_1_border_3: { }
+	sprite badlands_1_border_4: { }
+	sprite badlands_1_border_5: { }
+	sprite badlands_1_border_6: { }
+	sprite badlands_1_border_7: { }
+	sprite badlands_1_border_8: { }
+	sprite badlands_1_border_9: { }
+	sprite badlands_1_border_10: { }
+	sprite badlands_1_border_11: { }
+	sprite badlands_1_border_12: { }
+	sprite badlands_1_border_13: { }
+	sprite badlands_1_border_14: { }
+	sprite badlands_1_border_15: { }
+	sprite badlands_1_border_16: { }
+	sprite badlands_1_border_17: { }
+	sprite badlands_1_alt_1: { flags: [ tile_walkable ] }
+	sprite badlands_1_alt_2: { flags: [ tile_walkable ] }
+
+	cursor: { position: [ 0 432 ] }
+
+	sprite badlands_2: 
+	{ 
+		flags: [ tile_walkable ] 
+		borders: [ badlands_2_border_1 badlands_2_border_2 badlands_2_border_3 badlands_2_border_4 badlands_2_border_5 badlands_2_border_6 badlands_2_border_7
+		           badlands_2_border_8 badlands_2_border_9 badlands_2_border_10 badlands_2_border_11 badlands_2_border_12 badlands_2_border_13 badlands_2_border_14
+		           badlands_2_border_15 badlands_2_border_16 badlands_2_border_17 ] 				  						   
+		alt_tiles: [ badlands_2_alt_1 badlands_2_alt_2 ]
+	}	
+	sprite badlands_2_border_1: { }
+	sprite badlands_2_border_2: { }
+	sprite badlands_2_border_3: { }
+	sprite badlands_2_border_4: { }
+	sprite badlands_2_border_5: { }
+	sprite badlands_2_border_6: { }
+	sprite badlands_2_border_7: { }
+	sprite badlands_2_border_8: { }
+	sprite badlands_2_border_9: { }
+	sprite badlands_2_border_10: { }
+	sprite badlands_2_border_11: { }
+	sprite badlands_2_border_12: { }
+	sprite badlands_2_border_13: { }
+	sprite badlands_2_border_14: { }
+	sprite badlands_2_border_15: { }
+	sprite badlands_2_border_16: { }
+	sprite badlands_2_border_17: { }
+	sprite badlands_2_alt_1: { flags: [ tile_walkable ] }
+	sprite badlands_2_alt_2: { flags: [ tile_walkable ] }
+
+	cursor: { position: [ 0 448 ] }
+
+	sprite badlands_rocks: { flags: [ tile_block_line_of_sight tile_indoor ] borders:
+		[ badlands_rocks_border_1 badlands_rocks_border_2 badlands_rocks_border_3 badlands_rocks_border_4 badlands_rocks_border_5 badlands_rocks_border_6 badlands_rocks_border_7
+		  badlands_rocks_border_8 badlands_rocks_border_9 badlands_rocks_border_10 badlands_rocks_border_11 badlands_rocks_border_12 badlands_rocks_border_13 badlands_rocks_border_14
+		  badlands_rocks_border_15 badlands_rocks_border_16 badlands_rocks_border_17 ] alt_tiles: [ badlands_rocks_alt_1 badlands_rocks_alt_2 ] }		
+	sprite badlands_rocks_border_1: { }
+	sprite badlands_rocks_border_2: { }
+	sprite badlands_rocks_border_3: { }
+	sprite badlands_rocks_border_4: { }
+	sprite badlands_rocks_border_5: { }
+	sprite badlands_rocks_border_6: { }
+	sprite badlands_rocks_border_7: { }
+	sprite badlands_rocks_border_8: { }
+	sprite badlands_rocks_border_9: { }
+	sprite badlands_rocks_border_10: { }
+	sprite badlands_rocks_border_11: { }
+	sprite badlands_rocks_border_12: { }
+	sprite badlands_rocks_border_13: { }
+	sprite badlands_rocks_border_14: { }
+	sprite badlands_rocks_border_15: { }
+	sprite badlands_rocks_border_16: { }
+	sprite badlands_rocks_border_17: { }
+	sprite badlands_rocks_alt_1: { flags: [ tile_block_line_of_sight ] }
+	sprite badlands_rocks_alt_2: { flags: [ tile_block_line_of_sight ] }
+
+	cursor: { position: [ 0 464 ] }
+
+	sprite pine_forest_3: 
+	{ 
+		flags: [ tile_block_line_of_sight ] 
+		borders: [ pine_forest_3_border_1 pine_forest_3_border_2 pine_forest_3_border_3 pine_forest_3_border_4 pine_forest_3_border_5 pine_forest_3_border_6 pine_forest_3_border_7
+		           pine_forest_3_border_8 pine_forest_3_border_9 pine_forest_3_border_10 pine_forest_3_border_11 pine_forest_3_border_12 pine_forest_3_border_13 pine_forest_3_border_14
+		           pine_forest_3_border_15 pine_forest_3_border_16 pine_forest_3_border_17 ] 				  						   
+		alt_tiles: [ pine_forest_3_alt_1 pine_forest_3_alt_2 ]
+	}	
+	sprite pine_forest_3_border_1: { }
+	sprite pine_forest_3_border_2: { }
+	sprite pine_forest_3_border_3: { }
+	sprite pine_forest_3_border_4: { }
+	sprite pine_forest_3_border_5: { }
+	sprite pine_forest_3_border_6: { }
+	sprite pine_forest_3_border_7: { }
+	sprite pine_forest_3_border_8: { }
+	sprite pine_forest_3_border_9: { }
+	sprite pine_forest_3_border_10: { }
+	sprite pine_forest_3_border_11: { }
+	sprite pine_forest_3_border_12: { }
+	sprite pine_forest_3_border_13: { }
+	sprite pine_forest_3_border_14: { }
+	sprite pine_forest_3_border_15: { }
+	sprite pine_forest_3_border_16: { }
+	sprite pine_forest_3_border_17: { }
+	sprite pine_forest_3_alt_1: { flags: [ tile_block_line_of_sight ] }
+	sprite pine_forest_3_alt_2: { flags: [ tile_block_line_of_sight ] }
+
+	cursor: { position: [ 0 480 ] }
+
+	sprite fs_rocks_2: { flags: [ tile_block_line_of_sight tile_indoor ] borders:
+		[ fs_rocks_2_border_1 fs_rocks_2_border_2 fs_rocks_2_border_3 fs_rocks_2_border_4 fs_rocks_2_border_5 fs_rocks_2_border_6 fs_rocks_2_border_7
+		  fs_rocks_2_border_8 fs_rocks_2_border_9 fs_rocks_2_border_10 fs_rocks_2_border_11 fs_rocks_2_border_12 fs_rocks_2_border_13 fs_rocks_2_border_14
+		  fs_rocks_2_border_15 fs_rocks_2_border_16 fs_rocks_2_border_17 ] alt_tiles: [ fs_rocks_2_alt_1 fs_rocks_2_alt_2 ] }		
+	sprite fs_rocks_2_border_1: { }
+	sprite fs_rocks_2_border_2: { }
+	sprite fs_rocks_2_border_3: { }
+	sprite fs_rocks_2_border_4: { }
+	sprite fs_rocks_2_border_5: { }
+	sprite fs_rocks_2_border_6: { }
+	sprite fs_rocks_2_border_7: { }
+	sprite fs_rocks_2_border_8: { }
+	sprite fs_rocks_2_border_9: { }
+	sprite fs_rocks_2_border_10: { }
+	sprite fs_rocks_2_border_11: { }
+	sprite fs_rocks_2_border_12: { }
+	sprite fs_rocks_2_border_13: { }
+	sprite fs_rocks_2_border_14: { }
+	sprite fs_rocks_2_border_15: { }
+	sprite fs_rocks_2_border_16: { }
+	sprite fs_rocks_2_border_17: { }
+	sprite fs_rocks_2_alt_1: { flags: [ tile_block_line_of_sight ] }
+	sprite fs_rocks_2_alt_2: { flags: [ tile_block_line_of_sight ] }
+
+	cursor: { position: [ 0 496 ] }
+
+	sprite fs_ground_3: { flags: [ tile_walkable ] borders: 
+		[ fs_ground_3_border_1 fs_ground_3_border_2 fs_ground_3_border_3 fs_ground_3_border_4 fs_ground_3_border_5 fs_ground_3_border_6 fs_ground_3_border_7
+		  fs_ground_3_border_8 fs_ground_3_border_9 fs_ground_3_border_10 fs_ground_3_border_11 fs_ground_3_border_12 fs_ground_3_border_13 fs_ground_3_border_14
+		  fs_ground_3_border_15 fs_ground_3_border_16 fs_ground_3_border_17 ] alt_tiles: [ fs_ground_3_alt_1 fs_ground_3_alt_2 ] }	
+	sprite fs_ground_3_border_1: { }
+	sprite fs_ground_3_border_2: { }
+	sprite fs_ground_3_border_3: { }
+	sprite fs_ground_3_border_4: { }
+	sprite fs_ground_3_border_5: { }
+	sprite fs_ground_3_border_6: { }
+	sprite fs_ground_3_border_7: { }
+	sprite fs_ground_3_border_8: { }
+	sprite fs_ground_3_border_9: { }
+	sprite fs_ground_3_border_10: { }
+	sprite fs_ground_3_border_11: { }
+	sprite fs_ground_3_border_12: { }
+	sprite fs_ground_3_border_13: { }
+	sprite fs_ground_3_border_14: { }
+	sprite fs_ground_3_border_15: { }
+	sprite fs_ground_3_border_16: { }
+	sprite fs_ground_3_border_17: { }
+	sprite fs_ground_3_alt_1: { flags: [ tile_walkable ] }
+	sprite fs_ground_3_alt_2: { flags: [ tile_walkable ] }
+
 }

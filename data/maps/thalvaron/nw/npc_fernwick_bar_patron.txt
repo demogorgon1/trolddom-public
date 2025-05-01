@@ -1,0 +1,90 @@
+dialogue_screen .fernwick_bar_patron_dialogue:
+{
+	text: 
+	[	
+		"Fernwick seems like a nice place. Might settle down around here one day."
+	]		
+	
+	options:
+	[
+		{ quest: .fernwick_bar_patron_1 }
+	]
+}
+
+dialogue_root .fernwick_bar_patron_dialogue:
+{
+	.fernwick_bar_patron_dialogue: { }
+}
+
+entity thalvaron_fernwick_bar_patron: !NPC
+{
+	_string: "Roger"
+	_dialogue_root: .fernwick_bar_patron_dialogue	
+	_sprite: man_29
+	_sprite_dead: man_29_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .fernwick_bar_patron_quest_item: { }
+
+item .fernwick_bar_patron_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .fernwick_bar_patron_quest_item ]		
+	string: "Roger's Lunch" 
+	icon: icon_box
+	stack: 1
+	item_level: 10
+	quest: .fernwick_bar_patron_1
+	flags: [ not_sellable ]
+}
+
+objective .fernwick_bar_patron_1:
+{
+	string: "Roger's Lunch"
+	collect_items: { item: .fernwick_bar_patron_quest_item count: 1 }
+}
+
+{
+	${ _level: 10 }
+	item .fernwick_bar_patron_1_a: !QUEST_REWARD_1H_SWORD{ _string: "Roger's Sticker" _icon: icon_sword_3 _dexterity: 2 _constitution: 1 _weapon_cooldown: 20 }
+	item .fernwick_bar_patron_1_b: !QUEST_REWARD_WAIST{ _string: "Delicate Rope Sash" _icon: icon_antenna _wisdom: 2 _dexterity: 1 _type: armor_cloth }
+}
+
+quest .fernwick_bar_patron_1:
+{
+	string: "Where is My Lunch?"
+
+	text:
+	[
+		"Find Roger's lost lunch."
+	]
+	
+	description: 
+	[
+		"Every day my lovely wife packs me a lunch before I go to work. Unfortunately I seem to have misplaced it somewhere today. Losing the food is not a problem, really, but she is going to kill me if I get home without the box.\n\n"
+		"She takes food containers very seriously. Please be on the lookout for it if you travel the surrounding countryside."
+	]
+
+	progress:
+	[
+		"Did you find it?"
+	]
+	
+	completion:
+	[
+		"Oh no, what happened to the box? What kind of foul beast would do souch a thing? It's all covered in slime! And it's cracked?! Oh well, I guess I'll need to come up with some kind of excuse before I go home."
+	]
+
+	objectives: [ .fernwick_bar_patron_1 ]
+	level: 10	
+	reward_one_item: [ .fernwick_bar_patron_1_a .fernwick_bar_patron_1_b ]
+	reward_all_items: [ consumable_ironbrew_stout ]
+}

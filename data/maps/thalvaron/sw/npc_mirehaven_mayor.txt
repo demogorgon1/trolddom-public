@@ -1,0 +1,259 @@
+dialogue_screen .mirehaven_mayor_dialogue:
+{
+	text: 
+	[	
+		"Hello."
+	]		
+	
+	options:
+	[
+		{ quest: .mirehaven_mayor_0 }
+		{ quest: .mirehaven_mayor_1 }
+		{ quest: .mirehaven_mayor_2 }
+	]
+}
+
+dialogue_root .mirehaven_mayor_dialogue:
+{
+	.mirehaven_mayor_dialogue: { }
+}
+
+entity thalvaron_mirehaven_mayor: !NPC
+{
+	_string: "Bill Riddle"
+	_guild_name: "Mayor"
+	_dialogue_root: .mirehaven_mayor_dialogue	
+	_sprite: man_50
+	_sprite_dead: man_50_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+item .mirehaven_mayor_0_quest_item:
+{
+	icon: icon_brown_bag
+	item_level: 13
+	flags: [ unique not_sellable ]
+	string: "Ria Tyson's Taxes"
+	flavor: "Not much."
+}
+
+objective .mirehaven_mayor_0:
+{
+	string: "Ria Tyson's Taxes"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .mirehaven_mayor_0_quest_item count: 1 }
+}
+
+quest .mirehaven_mayor_0:
+{
+	string: "Collecting the Taxes"
+
+	text:
+	[
+		"Collect tax from the woman who lives just north of Mirehaven and return to the mayor."
+	]
+	
+	description: 
+	[
+		"Hmm. You look like you've always wanted to become a government bureaucrat? Well, you're in luck! We need some help around here.\n\n"
+		"Certain members of the local community have been dragging their in regards to paying their taxes on time. A woman named Ria Tyson lives in a shack just north of this town. Go persuade her to pay up."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Was that all? Did you shake her down good?"
+	]
+
+	level: 13
+	reward_cash_multiplier: 0.4
+	reward_xp_multiplier: 0.4
+	objectives: [ .mirehaven_mayor_0 ]
+	next_quest: .mirehaven_mayor_1
+}
+
+############################################################
+# Quest 2
+
+item .mirehaven_mayor_1_quest_item:
+{
+	icon: icon_brown_bag
+	item_level: 14
+	flags: [ unique not_sellable ]
+	string: "Frederik Tyson's Taxes"
+}
+
+objective .mirehaven_mayor_1:
+{
+	string: "Frederik Tyson's Taxes"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .mirehaven_mayor_1_quest_item count: 1 }
+}
+
+quest .mirehaven_mayor_1:
+{
+	string: "Farmers Can Be Difficult"
+
+	text:
+	[
+		"Collect tax from the farm to the south of Mirehaven."
+	]
+	
+	description: 
+	[
+		"Those Tysons are all trouble. Ria Tyson's brother Frederik owns a farm to the south, and like her, he's not very good at paying his taxes. It might be a bit more difficult to get him to cough up, but I trust you can do it.\n\n"
+		"What are you waiting for? Taxes don't collect themselves."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Not sure it's enough. He'll need to be squeezed harder next time."
+	]
+
+	level: 14
+	prerequisites: [ .mirehaven_mayor_0 ]
+	objectives: [ .mirehaven_mayor_1 ]
+}
+
+############################################################
+# Quest 3
+
+loot_group .mirehaven_mayor_2_quest_item: {}
+
+item .mirehaven_mayor_2_quest_item:
+{
+	icon: icon_green_bag
+	item_level: 14
+	loot_groups: [ .mirehaven_mayor_2_quest_item ]
+	flags: [ unique not_sellable ]
+	string: "Mongo's Treasure"
+	flavor: "It's full of gold teeth."
+}
+
+loot_table .mirehaven_mayor_2_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .mirehaven_mayor_2_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_mirehaven_mayor_2_quest_item:
+{
+	string: "Mongo's Treasure"
+	systems: [ openable ]
+
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ chest_2 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .mirehaven_mayor_2_quest_item
+			verb: open
+			range: 1 
+			despawn: true 			
+			level: 14
+			required_quest: .mirehaven_mayor_2
+		}		
+	}
+}
+
+ability .mirehaven_mayor_2_door_bell:
+{
+	flags: [ always_in_line_of_sight ]
+	range: 10
+	direct_effect start_route: { route: thalvaron_mongo_patrol }
+	always_target_nearby_entity: thalvaron_mongo
+}
+
+entity thalvaron_mirehaven_mayor_2_quest_item_2:
+{
+	string: "Door Bell"
+	systems: [ openable ]
+
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ bell_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			verb: ring
+			range: 1 
+			trigger_ability: .mirehaven_mayor_2_door_bell
+		}		
+	}
+}
+
+objective .mirehaven_mayor_2:
+{
+	string: "Mongo's Treasure"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .mirehaven_mayor_2_quest_item count: 1 }
+}
+
+{
+	${ _level: 14 }
+	item .mirehaven_mayor_2_a: !QUEST_REWARD_BOW{ _string: "Mirehaven Bow" _icon: icon_bow_1 _dexterity: 1 _spirit: 1 }
+	item .mirehaven_mayor_2_b: !QUEST_REWARD_HEAD{ _string: "Helm of the Tax Collector" _icon: icon_head_2 _dexterity: 1 _strength: 1 _type: armor_plate }
+	item .mirehaven_mayor_2_c: !QUEST_REWARD_HEAD{ _string: "Wizard Hat of Mirehaven" _icon: icon_wizard_hat_1 _wisdom: 2 _spell_damage: 1 _type: armor_cloth }
+}
+
+quest .mirehaven_mayor_2:
+{
+	string: "Ogre Due Taxes"
+
+	text:
+	[
+		"Collect taxes from the ogre who lives to the east."
+	]
+	
+	description: 
+	[
+		"I got one final government task for you, for now.\n\n"
+		"To the east of here, in the part of the swamp near the mountains, there lives a member of our community, \"Mongo\", who has never shown any interest in fitting in. But you still need to contribute, just like any other"
+		"citizen of the kingdom. Making him pay his taxes will be your hardest job yet. He has already eaten several bureaucrats. Oh, yeah, he's an ogre.\n\n"
+		"I know he keeps some kind of gold treasure in his shack. Return those treasures to me."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Good job. You can be proud of yourself."
+	]
+
+	objectives: [ .mirehaven_mayor_2 ]
+	level: 14
+	prerequisites: [ .mirehaven_mayor_1 ]
+	reward_one_item: [ .mirehaven_mayor_2_a .mirehaven_mayor_2_b .mirehaven_mayor_2_c ]
+}

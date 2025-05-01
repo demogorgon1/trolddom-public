@@ -1,0 +1,92 @@
+dialogue_screen .bramli_stonestride_dialogue:
+{
+	text: 
+	[	
+		"It's a bit too hot out here. I could use the cold breeze of a cave."
+	]		
+	
+	options:
+	[
+		{ quest: .bramli_stonestride_1 }
+	]
+}
+
+dialogue_root .bramli_stonestride_dialogue:
+{
+	.bramli_stonestride_dialogue: { }
+}
+
+entity thalvaron_bramli_stonestride: !NPC
+{
+	_string: "Bramli Stonestridew"
+	_dialogue_root: .bramli_stonestride_dialogue	
+	_sprite: dwarf_13
+	_sprite_dead: dwarf_13_dead
+	_level: 20
+	_faction: kingdom_of_thuldarim		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .bramli_stonestride_1_quest_item: {}
+  
+item .bramli_stonestride_1_quest_item:
+{
+	icon: icon_stinger_1
+	item_level: 15
+	loot_groups: [ .bramli_stonestride_1_quest_item ]
+	flags: [ not_sellable unique ]
+	string: "Giant Fang"
+}
+
+objective .bramli_stonestride_1:
+{
+	string: "Giant Fang"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .bramli_stonestride_1_quest_item count: 1 }
+}
+
+{
+	${ _level: 15 }
+	item .bramli_stonestride_1_a: !QUEST_REWARD_FEET{ _string: "Stomping Boots" _icon: icon_boots_1 _dexterity: 2 _constitution: 1 _type: armor_cloth }
+	item .bramli_stonestride_1_b: !QUEST_REWARD_SHOULDERS{ _string: "Chainmail Shoulders" _icon: icon_shoulders_1 _spirit: 1 _wisdom: 2 _type: armor_mail }
+	item .bramli_stonestride_1_c: !QUEST_REWARD_WRISTS{ _string: "Steel Armguards" _icon: icon_plate_bracers_1 _strength: 3 _constitution: 1 _type: armor_plate }
+}
+
+quest .bramli_stonestride_1:
+{
+	string: "Giant Furry Spiders"
+
+	text:
+	[
+		"Kill the giant cave spider that attacked Bramli Stonestride. Bring back its giant fang to prove your deed."
+	]
+	
+	description: 
+	[
+		"We dwarves are not strangers to giant spiders as we often find them underground, but the ones here in the Badlands... Well, they're more furry than what we're used to. Have you seen some of the big hairy ones around here?\n\n"
+		"Yesterday I was out prospecting in the caves south of here and I got ambushed by a spider larger than anything I've seen before! It was quite horrible and I had to leg it. It had fangs the size of broad swords!\n\n"
+		"You seem like a real go-getter, maybe you can find it and kill it so I can continue my prospecting? I'm not sure exactly what cave it happened in, but it's south east and not far from here."
+	]
+
+	progress:
+	[
+		"You don't like spiders either?"
+	]
+	
+	completion:
+	[
+		"Okay, not as big as I remembered it, but thanks anyway."
+	]
+
+	level: 15
+	objectives: [ .bramli_stonestride_1 ]
+	reward_one_item: [ .bramli_stonestride_1_a .bramli_stonestride_1_b .bramli_stonestride_1_c ]
+}
+

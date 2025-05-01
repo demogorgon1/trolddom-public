@@ -27,6 +27,42 @@ namespace tpublic
 			static const Persistence::Id PERSISTENCE = Persistence::ID_NONE;
 			static const Replication REPLICATION = REPLICATION_NONE;
 
+			struct AggroRequirements
+			{
+				void
+				FromSource(
+					const SourceNode*		aSource)
+				{
+					aSource->GetObject()->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if (aChild->m_tag == "requirement")
+							m_requirements.push_back(Requirement(aChild));
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
+					});
+				}
+
+				void
+				ToStream(
+					IWriter*				aStream) const
+				{
+					aStream->WriteObjects(m_requirements);
+				}
+
+				bool
+				FromStream(
+					IReader*				aStream)
+				{
+					if(!aStream->ReadObjects(m_requirements))
+						return false;
+					return true;
+				}	
+
+				// Public data
+				std::vector<Requirement>			m_requirements;
+			};
+
 			struct OutOfZoneAction
 			{
 				void
@@ -37,7 +73,7 @@ namespace tpublic
 						const SourceNode* aChild)
 					{
 						if (aChild->m_name == "use")
-							m_useAbilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
+							m_useAbilityId = aChild->GetId(DataType::ID_ABILITY);
 						else if (aChild->m_name == "evade")
 							m_evade = aChild->GetBool();
 						else
@@ -91,7 +127,7 @@ namespace tpublic
 						const SourceNode* aChild)
 					{
 						if(aChild->m_name == "id")
-							m_abilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
+							m_abilityId = aChild->GetId(DataType::ID_ABILITY);
 						else if(aChild->m_name == "use_probability")
 							m_useProbability = aChild->GetProbability();
 						else if (aChild->m_name == "target" && aChild->m_type == SourceNode::TYPE_ARRAY)
@@ -104,6 +140,8 @@ namespace tpublic
 							m_targetType = TARGET_TYPE_LOW_HEALTH_FRIEND_OR_SELF;
 						else if(aChild->m_tag == "requirement")
 							m_requirements.push_back(Requirement(aChild));
+						else if(aChild->m_name == "update_target")
+							m_updateTarget = aChild->GetBool();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 					});
@@ -118,6 +156,7 @@ namespace tpublic
 					aStream->WriteUInts(m_targetEntityIds);
 					aStream->WritePOD(m_targetType);
 					aStream->WriteObjects(m_requirements);
+					aStream->WriteBool(m_updateTarget);
 				}
 
 				bool
@@ -134,6 +173,8 @@ namespace tpublic
 						return false;
 					if(!aStream->ReadObjects(m_requirements))
 						return false;
+					if(!aStream->ReadBool(m_updateTarget))
+						return false;
 					return true;
 				}	
 
@@ -143,7 +184,7 @@ namespace tpublic
 				std::vector<uint32_t>				m_targetEntityIds;
 				TargetType							m_targetType = TARGET_TYPE_DEFAULT;
 				std::vector<Requirement>			m_requirements;
-				
+				bool								m_updateTarget = true;				
 			};
 
 			struct StateEntry
@@ -184,11 +225,15 @@ namespace tpublic
 						}
 						else if(aChild->m_name == "trigger_ability")
 						{
-							m_triggerAbilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
+							m_triggerAbilityId = aChild->GetId(DataType::ID_ABILITY);
 						}
 						else if (aChild->m_name == "on_enter_ability")
 						{
-							m_onEnterAbilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
+							m_onEnterAbilityId = aChild->GetId(DataType::ID_ABILITY);
+						}
+						else if(aChild->m_name == "despawn_on_leave")
+						{
+							m_despawnOnLeave = aChild->GetBool();
 						}
 						else
 						{
@@ -207,6 +252,7 @@ namespace tpublic
 					aStream->WriteObjects(m_barks);
 					aStream->WriteUInt(m_triggerAbilityId);
 					aStream->WriteUInt(m_onEnterAbilityId);
+					aStream->WriteBool(m_despawnOnLeave);
 				}
 
 				bool
@@ -224,6 +270,8 @@ namespace tpublic
 					if(!aStream->ReadUInt(m_triggerAbilityId))
 						return false;
 					if (!aStream->ReadUInt(m_onEnterAbilityId))
+						return false;
+					if(!aStream->ReadBool(m_despawnOnLeave))
 						return false;
 					return true;
 				}
@@ -247,6 +295,7 @@ namespace tpublic
 				std::vector<Chat>					m_barks;
 				uint32_t							m_triggerAbilityId = 0;
 				uint32_t							m_onEnterAbilityId = 0;
+				bool								m_despawnOnLeave = false;
 			};
 
 			struct ResourceEntry
@@ -357,6 +406,8 @@ namespace tpublic
 							m_ticksWithLoot = aChild->GetInt32() * 10 * 60;
 						else if (aChild->m_name == "out_of_combat_mins")
 							m_ticksOutOfCombat = aChild->GetInt32() * 10 * 60;
+						else if(aChild->m_name == "immediately_when_dead")
+							m_immediatelyWhenDead = aChild->GetBool();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					});
@@ -369,6 +420,7 @@ namespace tpublic
 					aStream->WriteInt(m_ticksWithoutLoot);
 					aStream->WriteInt(m_ticksWithLoot);
 					aStream->WriteInt(m_ticksOutOfCombat);
+					aStream->WriteBool(m_immediatelyWhenDead);
 				}
 
 				bool
@@ -381,6 +433,8 @@ namespace tpublic
 						return false;
 					if (!aStream->ReadInt(m_ticksOutOfCombat))
 						return false;
+					if (!aStream->ReadBool(m_immediatelyWhenDead))
+						return false;
 					return true;
 				}
 
@@ -388,6 +442,7 @@ namespace tpublic
 				int32_t								m_ticksWithoutLoot = 2 * 60 * 10; // 2 min
 				int32_t								m_ticksWithLoot = 5 * 60 * 10; // 5 min
 				int32_t								m_ticksOutOfCombat = 0; // Disabled
+				bool								m_immediatelyWhenDead = false;
 			};
 
 			enum Field
@@ -403,7 +458,11 @@ namespace tpublic
 				FIELD_LARGE,
 				FIELD_ROUTE,
 				FIELD_ZONE,
-				FIELD_OUT_OF_ZONE_ACTION
+				FIELD_OUT_OF_ZONE_ACTION,
+				FIELD_CAN_MOVE,
+				FIELD_EVADE_DESPAWN,
+				FIELD_AGGRO_REQUIREMENTS,
+				FIELD_CAN_DIE,
 			};
 
 			static void
@@ -419,9 +478,13 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_ENCOUNTER, "encounter", offsetof(NPC, m_encounterId))->SetDataType(DataType::ID_ENCOUNTER);
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_INACTIVE_ENCOUNTER_DESPAWN, "inactive_encounter_despawn", offsetof(NPC, m_inactiveEncounterDespawn));
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_BLOCKING, "large", offsetof(NPC, m_large));
+				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_CAN_MOVE, "can_move", offsetof(NPC, m_canMove));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_ROUTE, "route", offsetof(NPC, m_routeId))->SetDataType(DataType::ID_ROUTE);
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_ZONE, "zone", offsetof(NPC, m_zoneId))->SetDataType(DataType::ID_ZONE);
 				aSchema->DefineCustomObject<OutOfZoneAction>(FIELD_OUT_OF_ZONE_ACTION, "out_of_zone_action", offsetof(NPC, m_outOfZoneAction));
+				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_EVADE_DESPAWN, "evade_despawn", offsetof(NPC, m_evadeDespawn));
+				aSchema->DefineCustomObject<AggroRequirements>(FIELD_AGGRO_REQUIREMENTS, "aggro_requirements", offsetof(NPC, m_aggroRequirements));
+				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_CAN_DIE, "can_die", offsetof(NPC, m_canDie));
 			}
 
 			const StateEntry*
@@ -446,11 +509,15 @@ namespace tpublic
 				m_canMoveOnAllNonViewBlockingTiles = false;
 				m_blocking = true;
 				m_large = false;
+				m_canMove = true;
 				m_inactiveEncounterDespawn = false;
 				m_encounterId = 0;
 				m_routeId = 0;
 				m_zoneId = 0;
 				m_outOfZoneAction = OutOfZoneAction();
+				m_evadeDespawn = false;
+				m_aggroRequirements = AggroRequirements();
+				m_canDie = true;
 
 				m_cooldowns.m_entries.clear();
 				m_castInProgress.reset();
@@ -469,6 +536,9 @@ namespace tpublic
 				m_routeIsReversing = false;
 				m_subRouteIndex = SIZE_MAX;
 				m_lastTargetPosition = Vec2();
+				m_handledRouteTriggerIndices.clear();
+				m_effectiveRouteId = 0;
+				m_patrolResetAfterLeavingCombat = false;
 			}
 
 			// Public data			
@@ -480,10 +550,14 @@ namespace tpublic
 			bool										m_blocking = true;
 			bool										m_large = false;
 			bool										m_inactiveEncounterDespawn = false;
+			bool										m_canDie = true;
+			bool										m_canMove = true;
 			uint32_t									m_encounterId = 0;
 			uint32_t									m_routeId = 0;
 			uint32_t									m_zoneId = 0;
 			OutOfZoneAction								m_outOfZoneAction;
+			bool										m_evadeDespawn = false;
+			AggroRequirements							m_aggroRequirements;
 
 			// Not serialized
 			Cooldowns									m_cooldowns;
@@ -503,6 +577,7 @@ namespace tpublic
 			size_t										m_subRouteIndex = SIZE_MAX;
 			uint32_t									m_effectiveRouteId = 0;
 			Vec2										m_lastTargetPosition;
+			bool										m_patrolResetAfterLeavingCombat = false;
 
 			struct SpawnWithTarget
 			{
@@ -511,6 +586,7 @@ namespace tpublic
 			};
 
 			std::optional<SpawnWithTarget>				m_spawnWithTarget;
+			std::unordered_set<uint32_t>				m_handledRouteTriggerIndices;
 		};
 	}
 

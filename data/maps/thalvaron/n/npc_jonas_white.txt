@@ -1,0 +1,215 @@
+dialogue_screen .jonas_white_dialogue:
+{
+	text: 
+	[	
+		"It's nice around here, isn't it? Moving here from the city did wonders for my joints."
+	]		
+	
+	options:
+	[
+		{ quest: .jonas_white_1 }
+		{ quest: .jonas_white_2 }
+		{ quest<offer_only>: thalvaron_jonas_white_3 }
+	]
+}
+
+dialogue_root .jonas_white_dialogue:
+{
+	.jonas_white_dialogue: { }
+}
+
+entity thalvaron_jonas_white: !NPC
+{
+	_string: "Jonas White"
+	_dialogue_root: .jonas_white_dialogue	
+	_sprite: man_42
+	_sprite_dead: man_42_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .jonas_white_1_quest_item: {}
+
+item .jonas_white_1_quest_item:
+{
+	icon: icon_tablet_1
+	item_level: 15
+	loot_groups: [ .jonas_white_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Ancient Tablet"
+	stack: 8
+}
+
+loot_table .jonas_white_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .jonas_white_1_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_jonas_white_1_quest_item:
+{
+	string: "Ancient Tablet"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ junk_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .jonas_white_1_quest_item
+			verb: pick_up
+			range: 1 
+			level: 15
+			despawn: true 		
+			required_quest: .jonas_white_1
+		}		
+	}
+}
+
+objective .jonas_white_1:
+{
+	string: "Ancient Tablets"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .jonas_white_1_quest_item count: 8 }
+}
+
+quest .jonas_white_1:
+{
+	string: "Amateur Archaeology"
+
+	text:
+	[
+		"Find artifacts on the beach and return them to Jonas White."
+	]
+	
+	description: 
+	[
+		"I originally moved here for health reasons. Recently I got a taste for history and from that point of view, this place is amazing as well! Did you know that elves have lived here for"
+		"thousands of years? Fascinating, right? And before the elves there were another civilization. Turns out that they left a lot of stuff behind. Some people might call it junk,"
+		"but I found it very interesting. If you look closely, it's all over the place here! I love collecting it, but unfortunately my body is falling apart, so it's a bit difficult to go out and look for artifact.\n\n"
+		"Maybe you can help? The beach is littered with ancient tablets. Maybe you can collect some for me?"
+	]
+
+	progress:
+	[
+		"Ah, yes, you don't need to help if you don't have time."
+	]
+	
+	completion:
+	[
+		"Uh, how exciting!"
+	]
+
+	objectives: [ .jonas_white_1 ]
+	level: 15
+}
+
+############################################################
+# Quest 2
+
+objective .jonas_white_2:
+{
+	string: "Elusive Tablet"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .jonas_white_2_quest_item count: 1 }
+}
+
+loot_group .jonas_white_2_quest_item: {}
+
+item .jonas_white_2_quest_item:
+{
+	icon: icon_tablet_1
+	item_level: 15
+	loot_groups: [ .jonas_white_2_quest_item ]
+	flags: [ not_sellable unique ]
+	string: "Elusive Table"
+}
+
+quest .jonas_white_2:
+{
+	string: "One More Thing"
+
+	text:
+	[
+		"Try to find a crab on the beach that carries the elusive tablet."
+	]
+	
+	description: 
+	[
+		"Those tablets you found were really interesting! Now... I might have a more complex request for you. Some time ago I was walking the beach and I saw one of the crabs carrying something in"
+		"its claws that piqued my curiosity. It looked like an ancient tablet, but not like anything I've seen before. I tried to chase down the crab, but it ran off. I'm not as fast as I used to be."
+		"Maybe you can go look for it?"
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Really? You found it? Let me take a look..."
+	]
+
+	prerequisites: [ .jonas_white_1 ]
+	objectives: [ .jonas_white_2 ]
+	level: 15
+}
+
+############################################################
+# Quest 3
+
+{
+	${ _level: 15 }
+	item .jonas_white_3_a: !QUEST_REWARD_LEGS{ _string: "Digger's Chain Pantaloons" _icon: icon_mail_pants_2 _dexterity: 2 _constitution: 1 _type: armor_mail }
+	item .jonas_white_3_b: !QUEST_REWARD_LEGS{ _string: "Ancient Dwarven Legguards" _icon: icon_mail_pants_1 _strength: 1 _dexterity: 1 _constitution: 1 _type: armor_plate }
+	item .jonas_white_3_c: !QUEST_REWARD_LEGS{ _string: "Silk Trousers of Pain" _icon: icon_pants_1 _spell_damage: 1 _constitution: 1 _type: armor_cloth }
+}
+
+quest thalvaron_jonas_white_3:
+{
+	string: "This Complicates Matters"
+
+	text:
+	[
+		"Try to find a crab on the beach that carries the elusive tablet."
+	]
+	
+	description: 
+	[
+		"Alright, I had a few minutes to look at the tablet you wrenched out of the claws of that crab. This is really unlike the other ones. I still haven't learnt to read these ancient glyphs,"
+		"but it's clear to me that there is something special about this.\n\n"
+		"My friend in Valoris is much more knowledgeable about these things. Maybe you can bring it to her and have her take a look? Her name is Clara Hawthorne and lives in the royal district, just by the central square."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Old Mr. White sent you all the way from Duskwhisper Vale? Did he finally discover something interesting?"
+	]
+
+	prerequisites: [ .jonas_white_2 ]
+	level: 15
+	reward_cash_multiplier: 0.2
+	reward_xp_multiplier: 0.2
+	reward_one_item: [ .jonas_white_3_a .jonas_white_3_b .jonas_white_3_c ]
+}

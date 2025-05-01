@@ -24,11 +24,11 @@ namespace tpublic
 				if (!FromSourceBase(aChild))
 				{
 					if (aChild->m_name == "consume_source_item")
-						m_consumeSourceItemId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ITEM, aChild->GetIdentifier());
+						m_consumeSourceItemId = aChild->GetId(DataType::ID_ITEM);
 					else if (aChild->m_name == "consume_source_item_count")
 						m_consumeSourceItemCount = aChild->GetUInt32();
 					else if (aChild->m_name == "produce_source_item")
-						m_produceSourceItemId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ITEM, aChild->GetIdentifier());
+						m_produceSourceItemId = aChild->GetId(DataType::ID_ITEM);
 					else if (aChild->m_name == "produce_source_item_count")
 						m_produceSourceItemCount = aChild->GetUInt32();
 					else
@@ -98,12 +98,12 @@ namespace tpublic
 							itemList.RemoveItems(m_consumeSourceItemId, m_consumeSourceItemCount, inventory->m_size);
 
 							if(m_produceSourceItemId != 0)
-								ok = itemList.AddMultipleToInventory(m_produceSourceItemId, m_produceSourceItemCount, aManifest->GetById<Data::Item>(m_produceSourceItemId), inventory->m_size);
+								ok = itemList.AddMultipleToInventory(m_produceSourceItemId, m_produceSourceItemCount, aManifest->GetById<Data::Item>(m_produceSourceItemId), false, inventory->m_size);
 						}
 					}
 					else if(m_produceSourceItemId != 0)
 					{
-						ok = itemList.AddMultipleToInventory(m_produceSourceItemId, m_produceSourceItemCount, aManifest->GetById<Data::Item>(m_produceSourceItemId), inventory->m_size);
+						ok = itemList.AddMultipleToInventory(m_produceSourceItemId, m_produceSourceItemCount, aManifest->GetById<Data::Item>(m_produceSourceItemId), false, inventory->m_size);
 					}
 
 					if (ok)

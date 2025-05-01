@@ -1,0 +1,8 @@
+achievement_category .tirnwood_thicket: { string: "Dungeon: Tirnwood Thicket" order_key: 3 }
+
+achievement tirnwood_thicket_wolf: { sort_key: 1 category: .tirnwood_thicket string: "Skaldrak" description: "Slay Skaldrak." points: 10 priority: 0 kill_trigger: tirnwood_thicket_wolf icon: icon_skull_1 no_progress_values: true }
+achievement tirnwood_thicket_owlbear: { sort_key: 2 category: .tirnwood_thicket string: "Grimfeather" description: "Slay Grimfeather." points: 10 priority: 0 kill_trigger: tirnwood_thicket_owlbear icon: icon_skull_1 no_progress_values: true }
+achievement tirnwood_thicket_tree: { sort_key: 3 category: .tirnwood_thicket string: "Eldros the Evergrowing" description: "Slay Eldros the Evergrowing." points: 10 priority: 0 kill_trigger: tirnwood_thicket_tree icon: icon_skull_1 no_progress_values: true }
+achievement tirnwood_thicket_zyxtharion: { sort_key: 4 category: .tirnwood_thicket string: "Zyxtharion" description: "Slay Zyxtharion." points: 10 priority: 0 kill_trigger: tirnwood_thicket_zyxtharion icon: icon_skull_1 no_progress_values: true }
+
+achievement tirnwood_thicket: { category: .tirnwood_thicket string: "Tirnwood Thicket" description: "Finish Tirnwood Thicket." points: 20 need_achievements: [ tirnwood_thicket_wolf tirnwood_thicket_owlbear tirnwood_thicket_tree tirnwood_thicket_zyxtharion ] icon: icon_tirnwood_thicket }

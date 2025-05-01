@@ -1,0 +1,33 @@
+dialogue_screen .dwarf_blacksmith_trainer: !DEFAULT_BLACKSMITING_TRAINER{}
+
+dialogue_screen .dwarf_blacksmith_greetings:
+{
+	text: 
+	[	
+		"What can I do for you?"
+	]
+	
+	options:
+	[
+		{ goto: .dwarf_blacksmith_trainer text: "Please teach me about blacksmithing." }
+	]
+}
+
+dialogue_root .dwarf_blacksmith_dialogue:
+{
+	.dwarf_blacksmith_greetings: { }
+}
+
+entity thalvaron_dwarf_blacksmith: !NPC
+{
+	_string: "Dolph Ironmantle"
+	_guild_name: "Blacksmithing Trainer"
+	_dialogue_root: .dwarf_blacksmith_dialogue	
+	_sprite: dwarf_9
+	_sprite_dead: dwarf_9_dead
+	_level: 20
+	_faction: kingdom_of_thuldarim		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}

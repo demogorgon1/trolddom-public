@@ -1,0 +1,33 @@
+#FIXME: quest line
+
+dialogue_screen .borg_ironmantle_dialogue:
+{
+	text: 
+	[	
+		"Welcome to our great underground refuge."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .dwarf_guard_1_1 }
+	]
+}
+
+dialogue_root .borg_ironmantle_dialogue:
+{
+	.borg_ironmantle_dialogue: { }
+}
+
+entity thalvaron_borg_ironmantle: !NPC
+{
+	_string: "Borg Ironmantle"
+	_dialogue_root: .borg_ironmantle_dialogue	
+	_sprite: dwarf_12
+	_sprite_dead: dwarf_12_dead
+	_level: 20
+	_faction: kingdom_of_thuldarim		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

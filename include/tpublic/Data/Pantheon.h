@@ -50,7 +50,7 @@ namespace tpublic
 				ClassModifier(
 					const SourceNode*	aSource)
 				{
-					m_classId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_CLASS, aSource->m_name.c_str());
+					m_classId = aSource->m_sourceContext->m_persistentIdTable->GetId(aSource->m_debugInfo, DataType::ID_CLASS, aSource->m_name.c_str());
 
 					aSource->GetObject()->ForEachChild([&](
 						const SourceNode* aChild)
@@ -58,7 +58,7 @@ namespace tpublic
 						if(aChild->m_name == "reputation_trigger")
 							m_reputationTrigger = aChild->GetUInt32();
 						else if (aChild->m_name == "ability_modifier")
-							m_abilityModifierId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY_MODIFIER, aChild->GetIdentifier());
+							m_abilityModifierId = aChild->GetId(DataType::ID_ABILITY_MODIFIER);
 						else if (aChild->m_name == "string")
 							m_string = aChild->GetString();
 						else
@@ -163,16 +163,18 @@ namespace tpublic
 							m_string = aChild->GetString();
 						else if (aChild->m_name == "deity_specifier")
 							m_deitySpecifier = aChild->GetString();
+						else if (aChild->m_name == "deity_description")
+							m_deityDescription = aChild->GetString();
 						else if (aChild->m_name == "shrine_display_name_prefix")
 							m_shrineDisplayNamePrefix = aChild->GetString();
 						else if(aChild->m_name == "faction")
-							m_factionId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_FACTION, aChild->GetIdentifier());
+							m_factionId = aChild->GetId(DataType::ID_FACTION);
 						else if (aChild->m_name == "icon")
-							m_iconSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
+							m_iconSpriteId = aChild->GetId(DataType::ID_SPRITE);
 						else if (aChild->m_name == "pray_ability")
-							m_prayAbilityId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aChild->GetIdentifier());
+							m_prayAbilityId = aChild->GetId(DataType::ID_ABILITY);
 						else if (aChild->m_name == "opposition")
-							m_oppositionPantheonId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PANTHEON, aChild->GetIdentifier());
+							m_oppositionPantheonId = aChild->GetId(DataType::ID_PANTHEON);
 						else if(aChild->m_name == "notification_string")
 							m_notificationStrings[SourceToNotificationString(aChild)] = aChild->GetString();
 						else if (aChild->m_name == "player_levels")
@@ -196,6 +198,7 @@ namespace tpublic
 				aWriter->WriteString(m_string);
 				aWriter->WriteUInt(m_iconSpriteId);
 				aWriter->WriteString(m_deitySpecifier);
+				aWriter->WriteString(m_deityDescription);
 				aWriter->WriteUInt(m_factionId);
 				aWriter->WriteUInt(m_oppositionPantheonId);
 				aWriter->WriteUInt(m_prayAbilityId);
@@ -218,6 +221,8 @@ namespace tpublic
 				if (!aReader->ReadUInt(m_iconSpriteId))
 					return false;
 				if (!aReader->ReadString(m_deitySpecifier))
+					return false;
+				if (!aReader->ReadString(m_deityDescription))
 					return false;
 				if (!aReader->ReadUInt(m_factionId))
 					return false;
@@ -249,6 +254,7 @@ namespace tpublic
 			uint32_t							m_iconSpriteId = 0;
 			uint32_t							m_factionId = 0;
 			std::string							m_deitySpecifier;
+			std::string							m_deityDescription;
 			uint32_t							m_oppositionPantheonId = 0;
 			std::string							m_notificationStrings[NUM_NOTIFICATION_STRINGS];
 			std::vector<std::string>			m_playerLevels;

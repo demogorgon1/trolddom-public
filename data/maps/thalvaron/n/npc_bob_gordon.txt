@@ -1,0 +1,77 @@
+dialogue_screen .bob_gordon_dialogue_assassination:
+{
+	text: 
+	[	
+		"Yes, what is it to you?"
+	]		
+	
+	options:
+	[
+		{ script: npc_trigger text: "Prepare to die!" }
+	]
+}
+
+dialogue_screen .bob_gordon_dialogue:
+{
+	text: 
+	[	
+		"Why do you think I think I decided to live all the way out here alone? To have visitors intrude on me randomly? Go away. I'm busy."
+	]			
+	
+	options:
+	[
+		{ goto: .bob_gordon_dialogue_assassination requirement self<must_have_active_quest>: thalvaron_craig_borne_1 text: "Are you Bob Gordon?" }
+	]
+	
+}
+
+dialogue_root .bob_gordon_dialogue:
+{
+	.bob_gordon_dialogue: { }
+}
+
+entity thalvaron_bob_gordon: !NPC
+{
+	_string: "Bob Gordon"
+	_dialogue_root: .bob_gordon_dialogue	
+	_sprite: man_28
+	_sprite_dead: man_28_dead
+	_level: 16
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_default_trigger_ability: .bob_gordon
+	_default_on_enter_ability: .bob_gordon_reset
+	_dialogue_scripts: [ npc_trigger ]
+	_in_combat_barks:
+	[
+		{ type: say text: "Over my dead body!" flags: [ no_chat_bubble ] }
+	]	
+
+}
+
+ability .bob_gordon_reset:
+{
+	direct_effect modify_faction: { faction: npcs }
+	delay: 1
+}
+
+ability .bob_gordon:
+{
+	flags: [ always_in_range always_in_line_of_sight ]
+	
+	direct_effect modify_faction:
+	{
+		faction: monsters
+		target_self: true
+	}
+	
+	direct_effect threat:
+	{
+		apply_to: target
+		add: 20
+	}
+}
+
+

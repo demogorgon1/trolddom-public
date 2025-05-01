@@ -1,0 +1,349 @@
+dialogue_screen .buck_dialogue:
+{
+	text: 
+	[	
+		"Ah, yes. I pressume you're a fellow swamp enjoyer?"
+	]		
+	
+	options:
+	[
+		{ quest: .buck_1 }
+		{ quest: .buck_2 }
+		{ quest<completion_only>: .francis_2 }
+		{ quest: .buck_3 }
+		{ quest<offer_only>: .buck_4 }
+	]
+}
+
+dialogue_root .buck_dialogue:
+{
+	.buck_dialogue: { }
+}
+
+entity thalvaron_buck: !NPC
+{
+	_string: "Buck"
+	_dialogue_root: .buck_dialogue	
+	_sprite: man_22
+	_sprite_dead: man_22_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .buck_1_quest_item: {}
+
+item .buck_1_quest_item:
+{
+	icon: icon_flower_1
+	item_level: 13
+	loot_groups: [ .buck_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Buzzing Delight"
+	stack: 5
+}
+
+loot_table .buck_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .buck_1_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_buck_1_quest_item:
+{
+	string: "Buzzing Delight"
+	systems: [ openable ]
+
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ flower_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .buck_1_quest_item
+			verb: pick
+			range: 1 
+			despawn: true 			
+			level: 13
+			required_quest: .buck_1
+		}		
+	}
+}
+
+objective .buck_1:
+{
+	string: "Buzzing Delight"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .buck_1_quest_item count: 5 }
+}
+
+{
+	${ _level: 13 }
+	item .buck_1_a: !QUEST_REWARD_BACK{ _string: "Mosquito Cover" _icon: icon_cape_1 _spirit: 1 _constitution: 2 _type: armor_cloth }
+	item .buck_1_b: !QUEST_REWARD_NECK{ _string: "Swamp Explorer's Amulet" _icon: icon_necklace_6 _spirit: 2 _constitution: 1 }
+}
+
+quest .buck_1:
+{
+	string: "Only Problem With Swamps"
+
+	text:
+	[
+		"Collect swamp flowers for Buck's anti-mosquito tonic."
+	]
+	
+	description: 
+	[
+		"Those damn mosquitoes! Absolutely only problem with living in a swamp. Good thing I've developed a special tonic that repells those little devils. Bad thing is that I'm out of"
+		"one of the main ingredients. Collect local flowers of the Buzzing Delight variety and I'll give you a reward."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Thanks."
+	]
+
+	objectives: [ .buck_1 ]
+	level: 13
+	reward_one_item: [ .buck_1_a .buck_1_b ]
+}
+
+############################################################
+# Quest 2
+
+loot_group .buck_2_quest_item: {}
+
+item .buck_2_quest_item:
+{
+	icon: icon_seaweed
+	item_level: 13
+	loot_groups: [ .buck_2_quest_item ]
+	flags: [ not_sellable ]
+	string: "Seaweed"
+	stack: 6
+}
+
+loot_table .buck_2_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .buck_2_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_buck_2_quest_item:
+{
+	string: "Seaweed"
+	systems: [ openable ]
+
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ seaweed_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .buck_2_quest_item
+			verb: pick_up
+			range: 1 
+			despawn: true 			
+			level: 13
+			required_quest: .buck_2
+		}		
+	}
+}
+
+objective .buck_2:
+{
+	string: "Seaweed"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .buck_2_quest_item count: 6 }
+}
+
+{
+	${ _level: 13 }
+	item .buck_2_a: !QUEST_REWARD_WAIST{ _string: "Musky Belt" _icon: icon_cape_1 _wisdom: 1 _constitution: 2 _type: armor_plate }
+	item .buck_2_b: !QUEST_REWARD_HANDS{ _string: "Gardener's Gloves" _icon: icon_gloves_3 _wisdom: 2 _constitution: 1 _type: armor_cloth }
+}
+
+quest .buck_2:
+{
+	string: "Seaweed For Our Clawed Friends"
+
+	text:
+	[
+		"Collect seaweed along the coast of the Marshlands and return to Buck."
+	]
+	
+	description: 
+	[
+		"I like to make seaweed cakes for the local beach crabs. They get so happy when I feed them. Can you help by collecting some seaweed for me? You'll find it along the coast around here."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Thanks."
+	]
+
+	objectives: [ .buck_2 ]
+	level: 13
+	reward_one_item: [ .buck_2_a .buck_2_b ]	
+}
+
+############################################################
+# Quest 3
+
+loot_group .buck_3_quest_item: {}
+
+item .buck_3_quest_item:
+{
+	icon: icon_flower_6
+	item_level: 13
+	loot_groups: [ .buck_3_quest_item ]
+	flags: [ not_sellable unique ]
+	string: "Swamp Rose"
+}
+
+loot_table .buck_3_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .buck_3_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_buck_3_quest_item:
+{
+	string: "Swamp Rose"
+	systems: [ openable ]
+
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ flower_2 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .buck_3_quest_item
+			verb: pick_up
+			range: 1 
+			despawn: true 			
+			level: 13
+			required_quest: .buck_3
+		}		
+	}
+}
+
+objective .buck_3:
+{
+	string: "Swamp Rose"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .buck_3_quest_item count: 1 }
+}
+
+quest .buck_3:
+{
+	string: "Lizard Repellent"
+
+	text:
+	[
+		"Find a swamp rose and return it to buck."
+	]
+	
+	description: 
+	[
+		"There is a rare kind of flower that only grows here in the marshes. If you want to know its scientific name you'll have to ask some academic in the city, I just call it the swamp rose. It's blue and kinda hard to miss"
+		"if you're looking for it. For some reason lizards really hate the smell of that particular flower. If you can bring me just one of them I'll be able to make a small concoction."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"That will do just fine. Give it to me and I'll brew something for you."
+	]
+
+	objectives: [ .buck_3 ]
+	level: 13
+	reward_cash_multiplier: 0.2
+	reward_xp_multiplier: 0.2	
+	prerequisites: [ .francis_2 ]
+	next_quest: .buck_4
+}
+
+############################################################
+# Quest 4
+
+item .buck_4_quest_item:
+{
+	icon: icon_small_cyan_potion
+	item_level: 13
+	flags: [ not_sellable unique ]
+	string: "Concentrated Lizard Repellent"
+	flavor: "If you were a lizard you'd hate this."
+}
+
+{
+	${ _level: 13 }
+	item .buck_4_a: !QUEST_REWARD_FINGER{ _string: "Ring of Restoration" _icon: icon_ring_1 _wisdom: 1 _healing: 2 }
+	item .buck_4_b: !QUEST_REWARD_FINGER{ _string: "Ring of Destruction" _icon: icon_ring_2 _wisdom: 1 _spell_damage: 2 }
+	item .buck_4_c: !QUEST_REWARD_FINGER{ _string: "Ring of the Warrior" _icon: icon_ring_3 _constitution: 1 _strength: 2 }
+}
+
+quest .buck_4:
+{
+	string: "Lizard Repellent"
+
+	text:
+	[
+		"Return to Francis Riddle in Mirehaven with the lizard repellent."
+	]
+	
+	description: 
+	[
+		"I managed to make a whole bottle out of that one flower. Just put a drop or two in your hair and any lizard will stay clear of you."
+	]
+	
+	completion:
+	[
+		"Great. You say this will work against lizards? Okay, good job."
+	]
+
+	level: 13
+	prerequisites: [ .buck_3 ]
+	quest_items: [ .buck_4_quest_item ]
+	reward_one_item: [ .buck_4_a .buck_4_b .buck_4_c ]
+}

@@ -1,0 +1,20 @@
+dialogue_screen .igor_skrald_vendor: !TRADE_SUPPLIES{}
+
+dialogue_root .igor_skrald_dialogue:
+{
+	.igor_skrald_vendor: { }
+}
+
+entity thalvaron_igor_skrald: !NPC
+{
+	_string: "Igor Skrald"
+	_guild_name: "Trade Supplies"
+	_sprite: man_5
+	_sprite_dead: man_5_dead
+	_level: 20
+	_faction: npcs
+	_dialogue_root: .igor_skrald_dialogue
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}

@@ -1,0 +1,235 @@
+############################################################
+# Loot
+
+loot_group .tree: {}
+
+loot_table .tree:
+{
+	slots:
+	[
+		{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
+		  map_message tirnwood_thicket: "Eldros the Evergrowing will not drop Token of Victory for {}." } } }
+		{ possibility: { loot_group: .tree  } }			
+		!WORLD_DROPS{}
+		!WORLD_DROPS_WOOD_ELEMENTALS{}
+	]	
+}
+
+{
+	${
+		_rarity: rare
+		_level: 20
+		_loot_group: .tree
+	}
+	
+	item tirnwood_thicket_13: !BOSS_DROP_1H_SWORD
+	{
+		_string: "Tirnwood Defender"
+		_icon: icon_sword_12
+		_constitution: 3
+		_strength: 2
+		_budget_bias: -10
+		_parry: 1
+		_weapon_cooldown: 18
+	}
+	
+	item tirnwood_thicket_14: !BOSS_DROP_2H_MACE
+	{
+		_string: "Mace of the Evergrowing"
+		_icon: icon_mace_8
+		_strength: 1
+		_budget_bias: -10
+		_phys_crit: 1
+		_weapon_cooldown: 36
+	}
+	
+	item tirnwood_thicket_15: !BOSS_DROP_CHEST
+	{
+		_string: "Staff of Eldros"
+		_icon: icon_staff_4
+		_healing: 3
+		_wisdom: 2
+		_mana_per_5: 1
+	}
+	
+	item tirnwood_thicket_16: !BOSS_DROP_LEGS
+	{
+		_string: "Guardian Legplates"
+		_type: armor_plate
+		_icon: icon_head_8
+		_constitution: 1
+		_strength: 1
+		_dexterity: 1
+	}
+	
+	item tirnwood_thicket_17: !BOSS_DROP_BACK
+	{
+		_string: "Cloak of the Dark Forest"
+		_type: armor_cloth
+		_icon: icon_cape_3
+		_wisdom: 1
+		_spell_damage: 3
+		_constitution: 2
+	}
+	
+	item tirnwood_thicket_18: !BOSS_DROP_FINGER
+	{
+		_string: "Band of Eldros"
+		_icon: icon_ring_4
+		_wisdom: 1
+		_spell_damage: 2
+		_budget_bias: -10
+		_spell_crit: 1
+	}
+}
+
+############################################################
+# Boss
+
+zone .tree:
+{
+}
+
+encounter .tree:
+{
+	main_entities: [ tirnwood_thicket_tree ]	
+}
+
+entity tirnwood_thicket_tree: !NPC 
+{ 
+	_string: "Eldros the Evergrowing" 
+	_level: 21
+	_elite: true
+	_faction: monsters 
+	_sprite: giant_wood_elemental_1 
+	_sprite_dead: giant_wood_elemental_1_dead 
+	_weapon_damage: 1.45
+	_resource_health: 11
+	_loot_table: .tree
+	_creature_type: elemental
+	_encounter: .tree
+	_zone: .tree
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+	_large: true
+
+	_abilities: 
+	[
+		{
+			id: .tree_1
+			target: self
+			requirement self<must_have_less_health_than>: 95
+		}
+			
+		{
+			id: .tree_2
+			target: self
+			requirement self<must_have_less_health_than>: 85
+		}			
+			
+		{
+			id: npc_attack
+		}
+	]	
+	
+	_in_combat_barks:
+	[
+		{ type: yell text: "Leave these woods and never come back!" flags: [ no_chat_bubble ] }
+	]					
+}
+
+map_trigger .tree_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .tree:
+{
+	entity tirnwood_thicket_tree: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .tree_killed
+		}
+	}
+}
+
+ability .tree_1:
+{
+	string: "Aura of the Wild"
+	cast_time: 15
+	cooldowns: [ global ]	
+	cooldown: $cooldown { duration: 150 }
+	flags: [ spell target_self ]
+	states: [ in_combat ]
+	icon: icon_stuff
+	delay: 3
+	target_particle_system: heal
+
+	direct_effect apply_aura:
+	{
+		aura: $aura @<> [ string ]
+		{
+			icon: icon_special_3
+			flags: [ unique ]
+			type: buff
+			duration: 150
+			aura_effect damage_input_modifier: { type_mask: [ fire unholy ] multiplier: 2 }
+			aura_effect damage_input_modifier: { type_mask: [ frost holy ] multiplier: 0.2 }
+		}
+		
+		aura: $aura @<> [ string ]
+		{
+			icon: icon_special_4
+			flags: [ unique ]
+			type: buff
+			duration: 150
+			aura_effect damage_input_modifier: { type_mask: [ fire unholy ] multiplier: 0.2 }
+			aura_effect damage_input_modifier: { type_mask: [ frost holy ] multiplier: 2 }
+		}
+		
+		aura: $aura @<> [ string ]
+		{
+			icon: icon_special_5
+			flags: [ unique ]
+			type: buff
+			duration: 150
+			aura_effect damage_input_modifier: { type_mask: [ fire frost unholy holy ] multiplier: 0.2 }
+			aura_effect damage_input_modifier: { type_mask: [ physical bleed ] multiplier: 2 }
+		}		
+		
+		aura: $aura @<> [ string ]
+		{
+			icon: icon_special_10
+			flags: [ unique ]
+			type: buff
+			duration: 150
+			aura_effect damage_input_modifier: { type_mask: [ fire frost unholy holy ] multiplier: 2 }
+			aura_effect damage_input_modifier: { type_mask: [ physical bleed ] multiplier: 0.2 }
+		}			
+	}
+}
+
+ability .tree_2:
+{
+	string: "Power of the Wild"
+	cooldowns: [ global ]
+	cooldown: $cooldown { duration: 120 }	
+	flags: [ spell target_self target_aoe target_aoe_hostile interruptable ]
+	states: [ default in_combat ]
+	cast_time: 15
+	icon: icon_whirlwind
+	delay: 3
+	aoe_radius: 10
+	aoe_cap: 5
+	aoe_requirement target<must_not_be_in_state>: { id: dead }
+	
+	direct_effect damage:
+	{
+		damage_type: physical
+		function: 80
+	}
+}

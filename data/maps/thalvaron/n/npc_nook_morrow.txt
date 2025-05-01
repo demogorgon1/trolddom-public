@@ -1,0 +1,308 @@
+dialogue_screen .nook_morrow_dialogue:
+{
+	text: 
+	[	
+		"Can you hear it? It's the hooting of the owlbears. It's mating season. Isn't it just wonderful?"
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .ronja_frostmane_3 }
+		{ quest: .nook_morrow_1 }
+		{ quest: .nook_morrow_2 }
+		{ quest<offer_only>: .nook_morrow_3 }
+	]
+}
+
+dialogue_root .nook_morrow_dialogue:
+{
+	.nook_morrow_dialogue: { }
+}
+
+entity thalvaron_nook_morrow: !NPC
+{
+	_string: "Nook Morrow"
+	_dialogue_root: .nook_morrow_dialogue	
+	_sprite: woman_13
+	_sprite_dead: woman_13_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .nook_morrow_1:
+{
+	string: "Source of Corruption Destroyed"
+	
+	maps: [ thalvaron ]
+	
+	manual_boolean: { }
+}
+
+aura .nook_morrow_1_quest_item:
+{
+	string: "Nook's Perfume"
+	description: "Smells like yeti."
+	type: buff
+	icon: icon_potion_1
+	duration: 600
+	flags: [ unique ]
+}
+
+ability .nook_morrow_1_quest_item:
+{
+	string: "Nook's Perfume"
+	description: "Apply to self."
+	flags: [ target_self item ]
+	icon: icon_potion_1
+	direct_effect apply_aura: { aura: .nook_morrow_1_quest_item }
+	states: [ default in_combat ]
+}
+
+item .nook_morrow_1_quest_item:
+{
+	string: "Nook's Perfume" 
+	flavor: "Musky."
+	icon: icon_potion_1
+	item_level: 13
+	flags: [ unique not_sellable ]
+	use_ability: .nook_morrow_1_quest_item
+}	
+
+entity thalvaron_nook_morrow_1_object:
+{
+	string: "Cursed Symbol"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ effigy_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			verb: destroy
+			range: 1 
+			despawn: true 			
+			level: 13
+			required_quest: .nook_morrow_1
+			complete_manual_objective: .nook_morrow_1
+		}		
+	}
+}
+
+quest .nook_morrow_1:
+{
+	string: "Investigating the Ice Cave"
+
+	text:
+	[
+		"Go to the ice caves located on the eastern side of the Iceveil Highlands and find out what's up with the yetis."
+	]
+	
+	description: 
+	[
+		"The yetis usually aren't this aggressive. I suspect that something bad is going on. I want you to go back to the ice caves and look for anything that could be affecting the behavior of these"
+		"magnificient creatures.\n\n"
+		"Here, you can borrow my homemade yeti perfume. Generously apply it to yourself and the yetis won't attack you."
+	]
+
+	progress:
+	[
+		"Can't handle the smell?"
+	]
+	
+	completion:
+	[
+		"You found some kind of cursed sculpture? You destroyed it? Good! I've heard about something like that before. We need to figure out who built it, but I'm not sure how we'll do that."
+	]
+
+	level: 13
+	quest_items: [ .nook_morrow_1_quest_item ]
+	objectives: [ .nook_morrow_1 ]
+	next_quest: .nook_morrow_2
+	prerequisites: [ .ronja_frostmane_3 ]
+}
+
+############################################################
+# Quest 2
+
+aura .nook_morrow_2_quest_item:
+{
+	string: "Tranqualized"
+	description: "Sleeping."
+	type: debuff
+	icon: icon_sleep
+	duration: 150
+	flags: [ unique cancel_on_damage ]
+	particle_system: sleep
+	aura_effect stun: { }
+}
+
+ability .nook_morrow_2_quest_item:
+{
+	string: "Nook's Dart Gun"
+	description: "Puts target owlbear to sleep."
+	flags: [ target_other item ]
+	icon: icon_tube_1
+	range: 9
+	min_range: 2
+	cast_time: 15
+	direct_effect apply_aura: { aura: .nook_morrow_2_quest_item }
+	direct_effect spawn_entity: { entity: .nook_morrow_2_quest_item_2 spawn_flags: [ at_target no_owner ] }
+	requirement target<must_be_type>: thalvaron_wandering_owlbear
+	requirement target<must_not_have_aura>: .nook_morrow_2_quest_item
+	states: [ default in_combat ]
+	speed: 7
+	projectile: npc_shoot
+}
+
+item .nook_morrow_2_quest_item:
+{
+	string: "Nook's Dart Gun" 
+	icon: icon_tube_1
+	item_level: 13
+	flags: [ unique not_sellable ]
+	use_ability: .nook_morrow_2_quest_item
+}	
+
+objective .nook_morrow_2:
+{
+	string: "Wandering Owlbear Feather"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .nook_morrow_2_quest_item_2 count: 1 }
+}
+
+loot_group .nook_morrow_2_quest_item_2: {}
+
+item .nook_morrow_2_quest_item_2:
+{
+	icon: icon_feather_1
+	item_level: 13
+	loot_groups: [ .nook_morrow_2_quest_item_2 ]
+	flags: [ not_sellable ]
+	string: "Wandering Owlbear Feather"
+}
+
+loot_table .nook_morrow_2_quest_item_2:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .nook_morrow_2_quest_item_2 }			
+		}		
+	]
+}
+       
+entity .nook_morrow_2_quest_item_2:
+{
+	string: "Wandering Owlbear Feather"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ feather_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .nook_morrow_2_quest_item_2
+			verb: pick_up
+			range: 1 
+			despawn: true 			
+			level: 13
+			required_quest: .nook_morrow_2
+			duration: 600
+		}		
+	}
+}
+
+quest .nook_morrow_2:
+{
+	string: "Owlbear Research"
+	
+	text:
+	[
+		"Locate the wandering owlbear, tranqualize it, and return one of its feathers to Nook Morrow."
+	]
+	
+	description: 
+	[
+		"Yetis are not the only creatures of these highlands that have changed behavior recently. The majestic owlbear is another affected creature. They don't go anywhere near the ice caves, so the source of dark magic you found"
+		"isn't likely to have affected them.\n\n"
+		"There is a fine specimen that is running around confused south of the frozen lake. Can you bring me one of his feathers? Please don't hurt him, you can use my tranqualizer dart gun to take him down gently and temporarily."
+		"Be careful, their bite is painful, but it's not poisonous."
+	]
+
+	progress:
+	[
+		"How is it going?"
+	]
+	
+	completion:
+	[
+		"Hmm, let me see."
+	]
+
+	level: 13
+	quest_items: [ .nook_morrow_2_quest_item ]
+	objectives: [ .nook_morrow_2 ]
+	prerequisites: [ .nook_morrow_1 ]
+	next_quest: .nook_morrow_3
+}
+
+############################################################
+# Quest 3
+       
+item .nook_morrow_3_quest_item:
+{
+	icon: icon_feather_1
+	item_level: 14
+	flags: [ not_sellable unique ]
+	string: "Wandering Owlbear Feather"
+}
+	   
+{
+	${ _level: 14 }
+	item .nook_morrow_3_a: !QUEST_REWARD_WRISTS{ _string: "Wristguards of the Owlbear" _icon: icon_bracers_2 _wisdom: 1 _healing: 1 _type: armor_plate }
+	item .nook_morrow_3_b: !QUEST_REWARD_WAIST{ _string: "Silk Wrap" _icon: icon_cloth_belt_3 _wisdom: 2 _spirit: 1 _type: armor_cloth }
+	item .nook_morrow_3_c: !QUEST_REWARD_FEET{ _string: "Armored Trudgers" _icon: icon_mail_boots_1 _strength: 2 _constitution: 3 _dexterity: 1 _type: armor_plate }
+}
+	   
+quest .nook_morrow_3:
+{
+	string: "Owlbear Research"
+	
+	text:
+	[
+		"Locate the wandering owlbear, tranqualize it, and return one of its feathers to Fennian in Edmund's Haunt."
+	]
+	
+	description: 
+	[
+		"In the eastern shadow of the mountains, in the town of Edmund's Haunt, an elf named Fennian lives. He's very knowledgable about owlbears and nature in general. I think you should take this feather to him"
+		"and see what he thinks about it. Something seems a bit off to me. The main pass to the east is blocked, but you'll find another smaller one a bit further to the south."
+	]
+
+	progress:
+	[
+		"How is it going?"
+	]
+	
+	completion:
+	[
+		"What is that? The feather of an owlbear in distress? Nook sent you?"
+	]
+
+	level: 14
+	quest_items: [ .nook_morrow_3_quest_item ]
+	prerequisites: [ .nook_morrow_2 ]
+	reward_xp_multiplier: 0.15
+	reward_cash_multiplier: 0.5	
+	reward_one_item: [ .nook_morrow_3_a .nook_morrow_3_b .nook_morrow_3_c ]
+}

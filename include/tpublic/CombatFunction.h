@@ -13,6 +13,8 @@ namespace tpublic
 	}
 
 	class EntityInstance;
+	class IWorldView;
+	class Manifest;
 	class UIntRange;
 
 	class CombatFunction
@@ -78,7 +80,8 @@ namespace tpublic
 			INPUT_RANGED_AVERAGE,
 			INPUT_WEAPON_NORMALIZED,
 			INPUT_WEAPON_AVERAGE_NORMALIZED,
-			INPUT_ATTACK_POWER
+			INPUT_ATTACK_POWER,
+			INPUT_PVP_CONTROL_POINTS
 		};
 
 		enum Entity : uint8_t
@@ -145,6 +148,8 @@ namespace tpublic
 				return INPUT_WEAPON_AVERAGE_NORMALIZED;
 			else if (t == "attack_power")
 				return INPUT_ATTACK_POWER;
+			else if(t == "pvp_control_points")
+				return INPUT_PVP_CONTROL_POINTS;
 			TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid input.", aSource->GetIdentifier());
 			return INVALID_INPUT;
 		}
@@ -293,20 +298,28 @@ namespace tpublic
 		}
 
 		float		Evaluate(
+						const Manifest*						aManifest,
+						const IWorldView*					aWorldView,
 						RandomSource						aRandomSource,
 						float								aMultiplier,
 						const Components::CombatPublic*		aCombatPublic,
 						const Components::CombatPrivate*	aCombatPrivate) const;
 		float		EvaluateEntityInstance(
+						const Manifest*						aManifest,
+						const IWorldView*					aWorldView,
 						RandomSource						aRandomSource,
 						float								aMultiplier,
 						const EntityInstance*				aEntityInstance) const;
 		float		EvaluateSourceAndTargetEntityInstances(
+						const Manifest*						aManifest,
+						const IWorldView*					aWorldView,
 						RandomSource						aRandomSource,
 						float								aMultiplier,
 						const EntityInstance*				aSourceEntityInstance,
 						const EntityInstance*				aTargetEntityInstance) const;
 		void		ToRange(
+						const Manifest*						aManifest,
+						const IWorldView*					aWorldView,
 						float								aMultiplier,
 						const EntityInstance*				aEntityInstance,
 						UIntRange&							aOut) const;

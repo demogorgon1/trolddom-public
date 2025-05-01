@@ -1,10 +1,13 @@
 #pragma once
 
+#include "../CharacterStat.h"
 #include "../DataBase.h"
 #include "../DataReference.h"
 #include "../DirectEffectFactory.h"
 #include "../DirectEffectBase.h"
 #include "../EntityState.h"
+#include "../EquipmentSlot.h"
+#include "../ItemProspect.h"
 #include "../Requirement.h"
 #include "../Resource.h"
 #include "../SoundEffect.h"
@@ -56,14 +59,19 @@ namespace tpublic
 				FLAG_INTERRUPTABLE					= 0x10000000,
 				FLAG_RANGED_CAST_TIME				= 0x20000000,
 				FLAG_USE_RANGED_ICON				= 0x40000000,
-				FLAG_INTERRUPT_ON_DAMAGE			= 0x80000000
+				FLAG_INTERRUPT_ON_DAMAGE			= 0x80000000,
 			};
 
 			enum ExtendedFlag : uint32_t
 			{
 				EXTENDED_FLAG_MINION_SUMMON			= 0x00000001,
 				EXTENDED_FLAG_NO_DELAY				= 0x00000002,
-				EXTENDED_FLAG_CLASS_MINION_SUMMON	= 0x00000004
+				EXTENDED_FLAG_CLASS_MINION_SUMMON	= 0x00000004,
+				EXTENDED_FLAG_PRODUCE_ITEMS_TARGET	= 0x00000008,
+				EXTENDED_FLAG_TARGET_ITEM			= 0x00000010,
+				EXTENDED_FLAG_NO_STEALTH_BREAK		= 0x00000020,
+				EXTENDED_FLAG_NO_INDOOR				= 0x00000040,
+				EXTENDED_FLAG_CAN_USE_MOUNTED		= 0x00000080
 			};
 
 			static inline Resource::Id
@@ -155,6 +163,16 @@ namespace tpublic
 						*aOutExtendedFlags |= EXTENDED_FLAG_NO_DELAY;
 					else if (strcmp(identifier, "class_minion_summon") == 0 && aOutExtendedFlags != NULL)
 						*aOutExtendedFlags |= EXTENDED_FLAG_CLASS_MINION_SUMMON;
+					else if (strcmp(identifier, "produce_items_target") == 0 && aOutExtendedFlags != NULL)
+						*aOutExtendedFlags |= EXTENDED_FLAG_PRODUCE_ITEMS_TARGET;
+					else if (strcmp(identifier, "target_item") == 0 && aOutExtendedFlags != NULL)
+						*aOutExtendedFlags |= EXTENDED_FLAG_TARGET_ITEM;
+					else if (strcmp(identifier, "no_stealth_break") == 0 && aOutExtendedFlags != NULL)
+						*aOutExtendedFlags |= EXTENDED_FLAG_NO_STEALTH_BREAK;
+					else if (strcmp(identifier, "no_indoor") == 0 && aOutExtendedFlags != NULL)
+						*aOutExtendedFlags |= EXTENDED_FLAG_NO_INDOOR;
+					else if (strcmp(identifier, "can_use_mounted") == 0 && aOutExtendedFlags != NULL)
+						*aOutExtendedFlags |= EXTENDED_FLAG_CAN_USE_MOUNTED;
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid ability flag.", identifier);
 				});
@@ -240,7 +258,7 @@ namespace tpublic
 				AOEEntitySpawnEntry(
 					const SourceNode*		aSource)
 				{
-					m_entityId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENTITY, aSource->m_name.c_str());
+					m_entityId = aSource->m_sourceContext->m_persistentIdTable->GetId(aSource->m_debugInfo, DataType::ID_ENTITY, aSource->m_name.c_str());
 					
 					aSource->ForEachChild([&](
 						const SourceNode* aChild)
@@ -339,8 +357,26 @@ namespace tpublic
 						const SourceNode* aChild)
 					{
 						Item t;
-						t.m_itemId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ITEM, aChild->m_name.c_str());
-						t.m_quantity = aChild->GetUInt32();
+							
+						if (aChild->m_name == "entry")
+						{
+							aChild->GetObject()->ForEachChild([&](
+								const SourceNode* aEntryChild)
+							{
+								if(aEntryChild->m_name == "item")
+									t.m_itemId = aEntryChild->GetId(DataType::ID_ITEM);
+								else if(aEntryChild->m_name == "quantity")
+									t.m_quantity = aEntryChild->GetUInt32();
+								else
+									TP_VERIFY(false, aEntryChild->m_debugInfo, "'%s' is not a valid item.", aEntryChild->m_name.c_str());
+							});
+						}
+						else
+						{
+							t.m_itemId = aChild->m_sourceContext->m_persistentIdTable->GetId(aChild->m_debugInfo, DataType::ID_ITEM, aChild->m_name.c_str());
+							t.m_quantity = aChild->GetUInt32();
+						}
+
 						m_items.push_back(t);
 					});
 				}
@@ -377,7 +413,7 @@ namespace tpublic
 				{
 					TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing skill annotation.");
 					m_skill = aSource->m_annotation->GetUInt32();
-					m_professionId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PROFESSION, aSource->GetIdentifier());
+					m_professionId = aSource->GetId(DataType::ID_PROFESSION);
 				}
 
 				void	
@@ -402,6 +438,64 @@ namespace tpublic
 				// Public data
 				uint32_t							m_professionId = 0;	
 				uint32_t							m_skill = 0;
+			};
+
+			struct TargetItemRequirements
+			{
+				TargetItemRequirements()
+				{
+
+				}
+
+				TargetItemRequirements(
+					const SourceNode*		aSource)
+				{
+					aSource->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if(aChild->m_name == "equipment_slots")
+							aChild->GetIdArrayWithLookup<EquipmentSlot::Id, EquipmentSlot::INVALID_ID>(m_equipmentSlots, [](const char* aString) { return EquipmentSlot::StringToId(aString); });
+						else if (aChild->m_name == "rarities")
+							aChild->GetIdArrayWithLookup<Rarity::Id, Rarity::INVALID_ID>(m_rarities, [](const char* aString) { return Rarity::StringToId(aString); });
+						else if (aChild->m_name == "item_types")
+							aChild->GetIdArrayWithLookup<ItemType::Id, ItemType::INVALID_ID>(m_itemTypes, [](const char* aString) { return ItemType::StringToId(aString); });
+						else if(aChild->m_name == "must_be_sellable")
+							m_mustBeSellable = aChild->GetBool();
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					});
+				}
+
+				void	
+				ToStream(
+					IWriter*				aStream) const 
+				{
+					aStream->WritePODs(m_equipmentSlots);
+					aStream->WritePODs(m_rarities);
+					aStream->WritePODs(m_itemTypes);
+					aStream->WriteBool(m_mustBeSellable);
+				}
+			
+				bool	
+				FromStream(
+					IReader*				aStream) 
+				{
+					if (!aStream->ReadPODs(m_equipmentSlots))
+						return false;
+					if (!aStream->ReadPODs(m_rarities))
+						return false;
+					if (!aStream->ReadPODs(m_itemTypes))
+						return false;
+					if(!aStream->ReadBool(m_mustBeSellable))
+						return false;
+					return true;
+				}
+
+				// Public data
+				std::vector<EquipmentSlot::Id>		m_equipmentSlots;
+				std::vector<Rarity::Id>				m_rarities;
+				std::vector<ItemType::Id>			m_itemTypes;
+				bool								m_mustBeSellable = false;
 			};
 
 			void
@@ -446,6 +540,9 @@ namespace tpublic
 			bool IsMinionSummon() const { return m_extendedFlags & EXTENDED_FLAG_MINION_SUMMON; }
 			bool IsNoDelay() const { return m_extendedFlags & EXTENDED_FLAG_NO_DELAY; }
 			bool IsClassMinionSummon() const { return m_extendedFlags & EXTENDED_FLAG_CLASS_MINION_SUMMON; }
+			bool IsProduceItemsTarget() const { return m_extendedFlags & EXTENDED_FLAG_PRODUCE_ITEMS_TARGET; }
+			bool TargetItem() const { return m_extendedFlags & EXTENDED_FLAG_TARGET_ITEM; }
+			bool CanUseMounted() const { return m_extendedFlags & EXTENDED_FLAG_CAN_USE_MOUNTED; }
 
 			bool 
 			IsUsableInState(
@@ -477,7 +574,7 @@ namespace tpublic
 						else if (aMember->m_name == "description")
 							m_description = aMember->GetString();
 						else if (aMember->m_name == "talent_tree")
-							m_talentTreeId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_TALENT_TREE, aMember->GetIdentifier());
+							m_talentTreeId = aMember->GetId(DataType::ID_TALENT_TREE);
 						else if (aMember->m_name == "range")
 							m_range = aMember->GetUInt32();
 						else if (aMember->m_name == "level")
@@ -487,7 +584,7 @@ namespace tpublic
 						else if (aMember->m_name == "channel_interval")
 							m_channelInterval = aMember->GetInt32();
 						else if (aMember->m_name == "channel_tick_ability")
-							m_channelTickAbilityId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aMember->GetIdentifier());
+							m_channelTickAbilityId = aMember->GetId(DataType::ID_ABILITY);
 						else if (aMember->m_name == "aoe_radius")
 							m_aoeRadius = aMember->GetUInt32();
 						else if (aMember->m_name == "aoe_cap")
@@ -502,22 +599,24 @@ namespace tpublic
 							m_delay = aMember->GetInt32();
 						else if (aMember->m_name == "cooldowns")
 							aMember->GetIdArray(DataType::ID_COOLDOWN, m_cooldowns);
+						else if(aMember->m_name == "cooldown")
+							m_cooldowns.push_back(aMember->GetId(DataType::ID_COOLDOWN));
 						else if(aMember->m_name == "trigger_only_cooldown")
-							m_triggerOnlyCooldownId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_COOLDOWN, aMember->GetIdentifier());
+							m_triggerOnlyCooldownId = aMember->GetId(DataType::ID_COOLDOWN);
 						else if (aMember->m_name == "cast_time")
 							m_castTime = aMember->GetInt32();
 						else if (aMember->m_name == "icon")
-							m_iconSpriteId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aMember->GetIdentifier());
+							m_iconSpriteId = aMember->GetId(DataType::ID_SPRITE);
 						else if (aMember->m_name == "projectile")
-							m_projectileParticleSystemId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PARTICLE_SYSTEM, aMember->GetIdentifier());
+							m_projectileParticleSystemId = aMember->GetId(DataType::ID_PARTICLE_SYSTEM);
 						else if (aMember->m_name == "source_particle_system")
-							m_sourceParticleSystemId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PARTICLE_SYSTEM, aMember->GetIdentifier());
+							m_sourceParticleSystemId = aMember->GetId(DataType::ID_PARTICLE_SYSTEM);
 						else if (aMember->m_name == "target_particle_system")
-							m_targetParticleSystemId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PARTICLE_SYSTEM, aMember->GetIdentifier());
+							m_targetParticleSystemId = aMember->GetId(DataType::ID_PARTICLE_SYSTEM);
 						else if (aMember->m_name == "melee_particle_system")
-							m_meleeParticleSystemId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_PARTICLE_SYSTEM, aMember->GetIdentifier());
+							m_meleeParticleSystemId = aMember->GetId(DataType::ID_PARTICLE_SYSTEM);
 						else if (aMember->m_name == "must_have_nearby_entity")
-							m_mustHaveNearbyEntityId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENTITY, aMember->GetIdentifier());
+							m_mustHaveNearbyEntityId = aMember->GetId(DataType::ID_ENTITY);
 						else if (aMember->m_name == "must_have_one_of_nearby_entities")
 							aMember->GetIdArray(DataType::ID_ENTITY, m_mustHaveOneOfNearbyEntityIds);
 						else if (aMember->m_name == "flags")
@@ -550,6 +649,26 @@ namespace tpublic
 							m_descriptionFrom = DataReference(aMember);
 						else if(aMember->m_name == "source_visual")
 							m_sourceVisuals.push_back(Visual(aMember));
+						else if(aMember->m_name == "zone")
+							m_zoneId = aMember->GetId(DataType::ID_ZONE);
+						else if(aMember->m_name == "always_target_nearby_entity")
+							m_alwaysTargetNearbyEntityId = aMember->GetId(DataType::ID_ENTITY);
+						else if(aMember->m_name == "target_item_requirements")
+							m_targetItemRequirements = std::make_unique<TargetItemRequirements>(aMember);
+						else if (aMember->m_name == "target_item_confirmation")
+							m_targetItemConfirmation = aMember->GetString();
+						else if(aMember->m_name == "target_item_verb")
+							m_targetItemVerb = aMember->GetString();
+						else if(aMember->m_name == "target_item_prospect")
+							m_targetItemProspect = std::make_unique<ItemProspect>(aMember);
+						else if(aMember->m_name == "target_item_aura")
+							m_targetItemAuraId = aMember->GetId(DataType::ID_AURA);
+						else if (aMember->m_name == "toggle_aura")
+							m_toggleAuraId = aMember->GetId(DataType::ID_AURA);
+						else if (aMember->m_name == "must_not_have_world_aura")
+							m_mustNotHaveWorldAuraId = aMember->GetId(DataType::ID_WORLD_AURA);
+						else if(aMember->m_name == "increment_character_stat")
+							m_incrementCharacterStatId = (uint32_t)CharacterStat::StringToId(aMember->GetIdentifier());
 						else
 							TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
 					}
@@ -599,6 +718,16 @@ namespace tpublic
 				aWriter->WriteObjects(m_sourceVisuals);
 				aWriter->WriteUInt(m_minRange);
 				aWriter->WriteUInts(m_mustHaveOneOfNearbyEntityIds);
+				aWriter->WriteUInt(m_zoneId);
+				aWriter->WriteUInt(m_alwaysTargetNearbyEntityId);
+				aWriter->WriteOptionalObjectPointer(m_targetItemRequirements);
+				aWriter->WriteString(m_targetItemVerb);
+				aWriter->WriteString(m_targetItemConfirmation);
+				aWriter->WriteOptionalObjectPointer(m_targetItemProspect);
+				aWriter->WriteUInt(m_targetItemAuraId);
+				aWriter->WriteUInt(m_mustNotHaveWorldAuraId);
+				aWriter->WriteUInt(m_toggleAuraId);
+				aWriter->WriteUInt(m_incrementCharacterStatId);
 
 				for(uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 					aWriter->WriteUInt(m_resourceCosts[i]);
@@ -686,6 +815,26 @@ namespace tpublic
 					return false;
 				if(!aReader->ReadUInts(m_mustHaveOneOfNearbyEntityIds))
 					return false;
+				if (!aReader->ReadUInt(m_zoneId))
+					return false;
+				if(!aReader->ReadUInt(m_alwaysTargetNearbyEntityId))
+					return false;
+				if(!aReader->ReadOptionalObjectPointer(m_targetItemRequirements))
+					return false;
+				if(!aReader->ReadString(m_targetItemVerb))
+					return false;
+				if (!aReader->ReadString(m_targetItemConfirmation))
+					return false;
+				if(!aReader->ReadOptionalObjectPointer(m_targetItemProspect))
+					return false;
+				if (!aReader->ReadUInt(m_targetItemAuraId))
+					return false;
+				if (!aReader->ReadUInt(m_mustNotHaveWorldAuraId))
+					return false;
+				if(!aReader->ReadUInt(m_toggleAuraId))
+					return false;
+				if(!aReader->ReadUInt(m_incrementCharacterStatId))
+					return false;
 
 				for (uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 				{
@@ -735,8 +884,18 @@ namespace tpublic
 			DataReference										m_descriptionFrom;
 			uint32_t											m_mustHaveNearbyEntityId = 0;
 			std::vector<uint32_t>								m_mustHaveOneOfNearbyEntityIds;
+			uint32_t											m_mustNotHaveWorldAuraId = 0;
 			std::vector<Visual>									m_sourceVisuals;
 			uint32_t											m_triggerOnlyCooldownId = 0;
+			uint32_t											m_zoneId = 0;
+			uint32_t											m_alwaysTargetNearbyEntityId = 0;
+			std::unique_ptr<TargetItemRequirements>				m_targetItemRequirements;
+			std::string											m_targetItemVerb;
+			std::string											m_targetItemConfirmation;
+			std::unique_ptr<ItemProspect>						m_targetItemProspect;
+			uint32_t											m_targetItemAuraId = 0;
+			uint32_t											m_toggleAuraId = 0;
+			uint32_t											m_incrementCharacterStatId = 0;
 		};
 
 	}

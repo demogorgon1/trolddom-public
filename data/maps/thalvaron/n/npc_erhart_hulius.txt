@@ -1,0 +1,37 @@
+dialogue_screen .erhart_hulius_vendor: 
+{
+	sell .damon_arkwright_3_quest_item: { quantity: 1 cost: 1800 }	
+}
+
+dialogue_screen .erhart_hulius_dialogue:
+{
+	text: 
+	[	
+		"Vampires! There could be vampires waiting for you just outside that door! They're out to get you! They're out to get all of us!\n\n"
+		"We need to be prepared!"
+	]		
+	
+	options:
+	[
+		{ goto: .erhart_hulius_vendor text: "Let me browse your goods." }
+	]
+}
+
+dialogue_root .erhart_hulius_dialogue:
+{
+	.erhart_hulius_dialogue: { }
+}
+
+entity thalvaron_erhart_hulius: !NPC
+{
+	_string: "Erhart Hulius"
+	_dialogue_root: .erhart_hulius_dialogue	
+	_sprite: man_45
+	_sprite_dead: man_45_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

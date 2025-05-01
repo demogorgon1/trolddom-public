@@ -1,0 +1,63 @@
+dialogue_screen .ranger_thorksen_dialogue:
+{
+	text: 
+	[	
+		"It's quiet down here. Maybe too quiet?"
+	]		
+	
+	options:
+	[
+		{ quest<offer_only>: .ranger_thorksen_1 }
+	]
+}
+
+dialogue_root .ranger_thorksen_dialogue:
+{
+	.ranger_thorksen_dialogue: { }
+}
+
+entity thalvaron_ranger_thorksen: !NPC
+{
+	_string: "Ranger Thorksen"
+	_dialogue_root: .ranger_thorksen_dialogue	
+	_sprite: man_18
+	_sprite_dead: man_18_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+quest .ranger_thorksen_1:
+{
+	string: "Ravenreach"
+
+	text:
+	[
+		"Follow the road north and find the sheriff in Ravenreach."
+	]
+	
+	description: 
+	[
+		"Rumor has it that trouble is brewing in the town of Ravenreach to the north. Find the sheriff and offer your help."
+	]
+
+	progress:
+	[
+		"What are you still doing here?"
+	]
+	
+	completion:
+	[
+		"Are you alive? Are you sure you're not undead?"
+	]
+
+	level: 16
+	reward_xp_multiplier: 0.15
+	reward_cash_multiplier: 0
+}
+

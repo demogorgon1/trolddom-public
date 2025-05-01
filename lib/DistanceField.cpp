@@ -9,6 +9,15 @@ namespace tpublic
 {
 
 	DistanceField::DistanceField(
+		const DistanceField&	aOther)
+		: m_width(aOther.m_width)
+		, m_height(aOther.m_height)
+		, m_data(new uint32_t[aOther.m_width * aOther.m_height])
+	{
+		memcpy(m_data, aOther.m_data, sizeof(uint32_t) * m_width * m_height);
+	}
+
+	DistanceField::DistanceField(
 		int32_t					aWidth,
 		int32_t					aHeight)
 		: m_width(aWidth)

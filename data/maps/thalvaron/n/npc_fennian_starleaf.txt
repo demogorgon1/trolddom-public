@@ -1,0 +1,261 @@
+dialogue_screen .fennian_starleaf_dialogue:
+{
+	text: 
+	[	
+		"Listen to the trees. They never lie. Or, well, most of the time they don't."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .nook_morrow_3 }
+		{ quest<completion_only>: .tentacle_monster }
+		{ quest: .fennian_starleaf_1 }
+		{ quest: .fennian_starleaf_2 }
+		{ quest<offer_only>: .fennian_starleaf_3 }
+	]
+}
+
+dialogue_root .fennian_starleaf_dialogue:
+{
+	.fennian_starleaf_dialogue: { }
+}
+
+entity thalvaron_fennian_starleaf: !NPC
+{
+	_string: "Fennian Starleaf"
+	_dialogue_root: .fennian_starleaf_dialogue	
+	_sprite: elf_1
+	_sprite_dead: elf_1_dead
+	_level: 20
+	_faction: children_of_the_moon		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .fennian_starleaf_1_quest_item: {}
+
+item .fennian_starleaf_1_quest_item:
+{
+	icon: icon_herbs_2
+	item_level: 14
+	loot_groups: [ .fennian_starleaf_1_quest_item ]
+	flags: [ unique not_sellable ]
+	string: "Duskweed"
+}
+
+loot_table .fennian_starleaf_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .fennian_starleaf_1_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_fennian_starleaf_1_quest_item:
+{
+	string: "Duskweed"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ wild_herbs ] z_offset: -2 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .fennian_starleaf_1_quest_item
+			verb: pick
+			range: 1 
+			level: 14
+			despawn: true 		
+			required_quest: .fennian_starleaf_1
+		}		
+	}
+}
+
+objective .fennian_starleaf_1:
+{
+	string: "Duskweed"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .fennian_starleaf_1_quest_item count: 1 }
+}
+
+quest .fennian_starleaf_1:
+{
+	string: "Corrupted Waters"
+
+	text:
+	[
+		"Collect duskweed to the west, by the mountain, and bring a sample back to Fennian Starleaf."
+	]
+	
+	description: 
+	[
+		"I fear that there is something in the water and it's caused wild creatures to go mad. Maybe you can help me figure out what is going on.\n\n"
+		"By the mountains, just to the west of this settlement along the road, there is a small pond of water. This water is supposed to be very pure as it comes directly from under the mountains. Just by the water"
+		"you'll find some small plants, called duskweed, that only grow in that particular area. Will you go there, pick one with the roots, and bring it back to me?"
+	]
+
+	progress:
+	[
+		"You'll find the duskweed to the west by the mountain, just by the little pond."
+	]
+	
+	completion:
+	[
+		"I see.\n\n"
+		"I've always kept track of duskweed because it's a good indicator of the pureness of the water. Something is definitely wrong here, but I don't know what."
+	]
+
+	objectives: [ .fennian_starleaf_1 ]
+	level: 14
+}
+
+############################################################
+# Quest 2
+
+objective .fennian_starleaf_2:
+{
+	string: "Duskwhisper Owlbears Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_duskwhisper_owlbear ]
+		count: 5
+	}
+}
+
+{
+	${ _level: 15 }
+	item .fennian_starleaf_2_a: !QUEST_REWARD_WRISTS{ _string: "Lost Elven Cuffs" _icon: icon_bracers_3 _wisdom: 2 _spirit: 1 _type: armor_cloth }
+	item .fennian_starleaf_2_b: !QUEST_REWARD_WRISTS{ _string: "Guards of the Elf Lord" _icon: icon_bracers_1 _constitution: 2 _wisdom: 1 _type: armor_mail }	
+	item .fennian_starleaf_2_c: !QUEST_REWARD_WAIST{ _string: "Belt of the Dusk" _icon: icon_cloth_belt_1 _constitution: 1 _strength: 1 _spirit: 1 _type: armor_plate }	
+}
+
+quest .fennian_starleaf_2:
+{
+	string: "Owlbears Gone Mad"
+
+	text:
+	[
+		"Locate the owlbear colony south of Edmund's Haunt and thin out their numbers."
+	]
+	
+	description: 
+	[
+		"It pains me, but it really seems like some creatures of the woods have lost their minds and gone mad. It's probably something in the waters.\n\n"
+		"The owlbears in particular are causing a lot of problems. I want you to go and clear out their numbers so the madness doesn't spread. You'll find a colony of these"
+		"creatures if you follow the road south.\n\n"
+		"I wouldn't be able to do it myself."
+	]
+
+	progress:
+	[
+		"Back already?"
+	]
+	
+	completion:
+	[
+		"The idea of putting down these beautiful creatures... it's horrible."
+	]
+
+	objectives: [ .fennian_starleaf_2 ]
+	prerequisites: [ .fennian_starleaf_1 ]
+	level: 15
+	reward_one_item: [ .fennian_starleaf_2_a .fennian_starleaf_2_b .fennian_starleaf_2_c ]
+}
+
+############################################################
+# Quest 3
+
+loot_group .fennian_starleaf_3_quest_item: {}
+
+item .fennian_starleaf_3_quest_item:
+{
+	icon: icon_seashell_1
+	item_level: 15
+	loot_groups: [ .fennian_starleaf_3_quest_item ]
+	flags: [ unique not_sellable ]
+	string: "Duskwhisper Seashell"
+	rarity: uncommon
+}
+
+loot_table .fennian_starleaf_3_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .fennian_starleaf_3_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_fennian_starleaf_3_quest_item:
+{
+	string: "Duskwhisper Seashell"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ seashell_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .fennian_starleaf_3_quest_item
+			verb: pick_up
+			range: 1 
+			level: 15
+			despawn: true 		
+		}		
+	}
+}
+
+objective .fennian_starleaf_3:
+{
+	string: "Duskwhisper Seashell"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .fennian_starleaf_3_quest_item count: 1 keep_items: true }	
+}
+
+quest .fennian_starleaf_3:
+{
+	string: "The Lady of the Lake"
+
+	text:
+	[
+		"Travel south and consult the Lady of the Lake."
+	]
+	
+	description: 
+	[
+		"Sometimes when you're at a loss about what to do, it's good to consult the higher powers. At times of pain and doubt I always seek out the Lady of the Lake. You'll find her at the ancient temple ruins down south.\n\n"
+		"Oh, forgot to mention, in order to talk to her you need a Duskwhisper Seashell. I'm sure you can find a good one on the beach somewhere around here."
+	]
+
+	progress:
+	[
+		"*Blob blob* *blob blob blob*?"
+	]
+	
+	completion:
+	[
+		"What brings you to my domain, young $class$?"
+	]
+
+	prerequisites: [ .fennian_starleaf_2 ]
+	objectives: [ .fennian_starleaf_3 ]
+	level: 16
+	reward_xp_multiplier: 0.2
+	reward_cash_multiplier: 0
+}

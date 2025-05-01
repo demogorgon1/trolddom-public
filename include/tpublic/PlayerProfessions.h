@@ -3,6 +3,7 @@
 #include "Helpers.h"
 #include "IReader.h"
 #include "IWriter.h"
+#include "Manifest.h"
 
 namespace tpublic
 {
@@ -162,6 +163,27 @@ namespace tpublic
 		}
 
 		bool
+		HasProfessionAbility(
+			uint32_t			aProfessionId,
+			uint32_t			aAbilityId) const
+		{
+			for (const Entry& t : m_entries)
+			{
+				if (t.m_professionId == aProfessionId)
+				{
+					for(uint32_t abilityId : t.m_abilityIds)
+					{
+						if(abilityId == aAbilityId)
+							return true;
+					}
+					break;
+				}
+			}
+
+			return false;
+		}
+
+		bool
 		RemoveProfession(
 			uint32_t			aProfessionId)
 		{
@@ -174,6 +196,24 @@ namespace tpublic
 				}
 			}
 			return false;
+		}
+
+		void
+		OnLoadedFromPersistence(
+			const Manifest*				aManifest)
+		{
+			// Remove invalid abilities (recipes that no longer exists)
+			for (Entry& entry : m_entries)
+			{
+				for(uint32_t i = 0; i < entry.m_abilityIds.size(); i++)
+				{
+					if(aManifest->TryGetById<tpublic::Data::Ability>(entry.m_abilityIds[i]) == NULL)
+					{
+						entry.m_abilityIds.erase(entry.m_abilityIds.begin() + i);
+						i--;
+					}
+				}
+			}
 		}
 
 		bool

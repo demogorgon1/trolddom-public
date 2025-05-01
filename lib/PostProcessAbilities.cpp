@@ -26,7 +26,8 @@ namespace tpublic
 
 			switch (aAbility->m_descriptionFrom.m_type)
 			{
-			case DataType::INVALID_ID:		break;
+			case DataType::INVALID_ID:		
+				break;
 			
 			case DataType::ID_ITEM:			
 				{ 
@@ -36,7 +37,9 @@ namespace tpublic
 				}
 				break; 
 			
-			default:						TP_VERIFY(false, aAbility->m_debugInfo, "Invalid data reference.");
+			default:						
+				TP_VERIFY(false, aAbility->m_debugInfo, "Invalid data reference.");
+				break;
 			}
 		}
 

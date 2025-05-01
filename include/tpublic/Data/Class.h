@@ -139,11 +139,15 @@ namespace tpublic
 						const SourceNode* aChild)
 					{
 						if (aChild->m_name == "sprite")
-							m_spriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
+							m_spriteId = aChild->GetId(DataType::ID_SPRITE);
 						else if (aChild->m_name == "sprite_dead")
-							m_deadSpriteId = aChild->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aChild->GetIdentifier());
+							m_deadSpriteId = aChild->GetId(DataType::ID_SPRITE);
+						else if (aChild->m_name == "sprite_mounted")
+							m_mountedSpriteId = aChild->GetId(DataType::ID_SPRITE);
 						else if (aChild->m_name == "sprites_walk")
 							aChild->GetIdArray(DataType::ID_SPRITE, m_walkSpriteIds);
+						else if(aChild->m_name == "mounted_offset")
+							m_mountedOffset = aChild->GetVec2();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' not a valid item.", aChild->m_name.c_str());
 					});
@@ -155,7 +159,9 @@ namespace tpublic
 				{
 					aStream->WriteUInt(m_spriteId);
 					aStream->WriteUInt(m_deadSpriteId);
+					aStream->WriteUInt(m_mountedSpriteId);
 					aStream->WriteUInts(m_walkSpriteIds);
+					m_mountedOffset.ToStream(aStream);
 				}
 			
 				bool	
@@ -166,7 +172,11 @@ namespace tpublic
 						return false;
 					if (!aStream->ReadUInt(m_deadSpriteId))
 						return false;
+					if (!aStream->ReadUInt(m_mountedSpriteId))
+						return false;
 					if (!aStream->ReadUInts(m_walkSpriteIds))
+						return false;
+					if(!m_mountedOffset.FromStream(aStream))
 						return false;
 					return true;
 				}
@@ -175,7 +185,9 @@ namespace tpublic
 				// Public data
 				uint32_t				m_spriteId = 0;
 				uint32_t				m_deadSpriteId = 0;
+				uint32_t				m_mountedSpriteId = 0;
 				std::vector<uint32_t>	m_walkSpriteIds;
+				Vec2					m_mountedOffset;
 			};
 
 			struct StartEquipment
@@ -190,7 +202,7 @@ namespace tpublic
 				{
 					m_equipmentSlotId = EquipmentSlot::StringToId(aSource->m_name.c_str());
 					TP_VERIFY(m_equipmentSlotId != 0, aSource->m_debugInfo, "'%s' not a valid equipment slot.", aSource->m_name.c_str());
-					m_itemId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ITEM, aSource->GetIdentifier());
+					m_itemId = aSource->GetId(DataType::ID_ITEM);
 				}
 
 				void	
@@ -227,7 +239,7 @@ namespace tpublic
 				StartReputation(
 					const SourceNode*		aSource)
 				{
-					m_factionId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_FACTION, aSource->m_name.c_str());
+					m_factionId = aSource->m_sourceContext->m_persistentIdTable->GetId(aSource->m_debugInfo, DataType::ID_FACTION, aSource->m_name.c_str());
 					m_reputation = aSource->GetInt32();
 				}
 
@@ -265,7 +277,7 @@ namespace tpublic
 				StartMap(
 					const SourceNode*		aSource)
 				{
-					m_mapId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_MAP, aSource->m_name.c_str());
+					m_mapId = aSource->m_sourceContext->m_persistentIdTable->GetId(aSource->m_debugInfo, DataType::ID_MAP, aSource->m_name.c_str());
 					aSource->GetIdArray(DataType::ID_MAP_PLAYER_SPAWN, m_mapPlayerSpawnIds);					
 				}
 
@@ -359,7 +371,7 @@ namespace tpublic
 						}
 						else if (aMember->m_name == "achievement")
 						{
-							m_achievementId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ACHIEVEMENT, aMember->GetIdentifier());
+							m_achievementId = aMember->GetId(DataType::ID_ACHIEVEMENT);
 						}
 						else if (aMember->m_name == "unlock_abilities")
 						{
@@ -721,6 +733,16 @@ namespace tpublic
 				return NULL;
 			}
 
+			uint32_t
+			GetAbilityReplacement(
+				uint32_t				aAbilityId) const
+			{
+				std::unordered_map<uint32_t, uint32_t>::const_iterator i = m_replaceAbilityTable.find(aAbilityId);
+				if(i == m_replaceAbilityTable.cend())
+					return aAbilityId;
+				return i->second;
+			}
+
 			// Base implementation
 			void
 			FromSource(
@@ -757,7 +779,7 @@ namespace tpublic
 						}
 						else if (aMember->m_name == "default_attack")
 						{
-							m_defaultAttackAbilityId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aMember->GetIdentifier());
+							m_defaultAttackAbilityId = aMember->GetId(DataType::ID_ABILITY);
 						}
 						else if (aMember->m_name == "default_action_bar")
 						{
@@ -840,11 +862,15 @@ namespace tpublic
 						}
 						else if(aMember->m_name == "unlocked_by_achievement")
 						{
-							m_unlockedByAchievementId = aMember->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ACHIEVEMENT, aMember->GetIdentifier());
+							m_unlockedByAchievementId = aMember->GetId(DataType::ID_ACHIEVEMENT);
 						}
 						else if(aMember->m_name == "restricted")
 						{
 							m_restricted = aMember->GetBool();
+						}
+						else if(aMember->m_name == "version")
+						{
+							m_version = aMember->GetUInt32();
 						}
 						else if(aMember->m_tag == "start_reputation")
 						{
@@ -853,6 +879,10 @@ namespace tpublic
 						else if(aMember->m_tag == "gear_optimization")
 						{
 							m_gearOptimizations.push_back(std::make_unique<GearOptimization>(aMember));
+						}
+						else if(aMember->m_tag == "replace_ability")
+						{
+							m_replaceAbilityTable[aMember->m_sourceContext->m_persistentIdTable->GetId(aMember->m_debugInfo, DataType::ID_ABILITY, aMember->m_name.c_str())] = aMember->GetId(DataType::ID_ABILITY);
 						}
 						else
 						{
@@ -884,9 +914,11 @@ namespace tpublic
 				aStream->WritePOD(m_defaultArmorStyleId);
 				m_armorDecoration.ToStream(aStream);
 				aStream->WriteUInt(m_unlockedByAchievementId);
+				aStream->WriteUInt(m_version);
 				aStream->WriteBool(m_restricted);
 				aStream->WriteObjects(m_startReputations);
 				aStream->WriteObjectPointers(m_gearOptimizations);
+				aStream->WriteUIntToUIntTable<uint32_t, uint32_t>(m_replaceAbilityTable);
 
 				for(uint32_t i = 1; i < (uint32_t)ArmorStyle::NUM_IDS; i++)
 					m_armorStyles[i].ToStream(aStream);
@@ -933,13 +965,17 @@ namespace tpublic
 					return false;
 				if(!m_armorDecoration.FromStream(aStream))
 					return false;
-				if(!aStream->ReadUInt(m_unlockedByAchievementId))
+				if (!aStream->ReadUInt(m_unlockedByAchievementId))
+					return false;
+				if (!aStream->ReadUInt(m_version))
 					return false;
 				if(!aStream->ReadBool(m_restricted))
 					return false;
 				if(!aStream->ReadObjects(m_startReputations))
 					return false;
 				if(!aStream->ReadObjectPointers(m_gearOptimizations))
+					return false;
+				if(!aStream->ReadUIntToUIntTable(m_replaceAbilityTable))
 					return false;
 
 				for (uint32_t i = 1; i < (uint32_t)ArmorStyle::NUM_IDS; i++)
@@ -958,6 +994,7 @@ namespace tpublic
 			}
 
 			// Public data
+			uint32_t												m_version = 0;
 			std::string												m_displayName;
 			std::string												m_description;
 			Color													m_color1;
@@ -981,6 +1018,7 @@ namespace tpublic
 			bool													m_restricted = false;			
 			std::vector<StartReputation>							m_startReputations;
 			std::vector<std::unique_ptr<GearOptimization>>			m_gearOptimizations;
+			std::unordered_map<uint32_t, uint32_t>					m_replaceAbilityTable;
 		};
 
 	}

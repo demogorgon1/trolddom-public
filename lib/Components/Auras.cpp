@@ -113,6 +113,9 @@ namespace tpublic::Components
 
 	int32_t
 	Auras::FilterDamageInput(
+		const Manifest*								aManifest,
+		const EntityInstance*						aSource,
+		const EntityInstance*						aTarget,
 		DirectEffect::DamageType					aDamageType,
 		int32_t										aDamage) const
 	{
@@ -121,7 +124,10 @@ namespace tpublic::Components
 		for (const std::unique_ptr<Entry>& entry : m_entries)
 		{
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
-				damage = effect->FilterDamageInput(aDamageType, damage);
+			{
+				if (effect->CheckRequirements(aManifest, aSource, aTarget))
+					damage = effect->FilterDamageInput(aDamageType, damage);
+			}
 		}
 						
 		return damage;
@@ -140,7 +146,10 @@ namespace tpublic::Components
 		for (const std::unique_ptr<Entry>& entry : m_entries)
 		{
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
-				damage = effect->FilterDamageOutput(aManifest, aSource, aTarget, aDamageType, damage);
+			{
+				if (effect->CheckRequirements(aManifest, aSource, aTarget))
+					damage = effect->FilterDamageOutput(aManifest, aSource, aTarget, aDamageType, damage);
+			}
 		}
 						
 		return damage;
@@ -148,6 +157,9 @@ namespace tpublic::Components
 
 	int32_t		
 	Auras::FilterHealInput(
+		const Manifest*								aManifest,
+		const EntityInstance*						aSource,
+		const EntityInstance*						aTarget,
 		int32_t										aHeal) const
 	{
 		int32_t heal = aHeal;
@@ -155,7 +167,10 @@ namespace tpublic::Components
 		for (const std::unique_ptr<Entry>& entry : m_entries)
 		{
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
-				heal = effect->FilterHealInput(heal);
+			{
+				if (effect->CheckRequirements(aManifest, aSource, aTarget))
+					heal = effect->FilterHealInput(heal);
+			}
 		}
 
 		return heal;
@@ -164,6 +179,9 @@ namespace tpublic::Components
 
 	int32_t		
 	Auras::FilterHealOutput(
+		const Manifest*								aManifest,
+		const EntityInstance*						aSource,
+		const EntityInstance*						aTarget,
 		int32_t										aHeal) const
 	{
 		int32_t heal = aHeal;
@@ -171,7 +189,10 @@ namespace tpublic::Components
 		for (const std::unique_ptr<Entry>& entry : m_entries)
 		{
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
-				heal = effect->FilterHealOutput(heal);
+			{
+				if (effect->CheckRequirements(aManifest, aSource, aTarget))
+					heal = effect->FilterHealOutput(heal);
+			}
 		}
 
 		return heal;
@@ -179,6 +200,9 @@ namespace tpublic::Components
 
 	int32_t		
 	Auras::FilterThreat(
+		const Manifest*								aManifest,
+		const EntityInstance*						aSource,
+		const EntityInstance*						aTarget,
 		int32_t										aThreat) const
 	{
 		int32_t threat = aThreat;
@@ -186,28 +210,55 @@ namespace tpublic::Components
 		for (const std::unique_ptr<Entry>& entry : m_entries)
 		{
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
-				threat = effect->FilterThreat(threat);
+			{
+				if (effect->CheckRequirements(aManifest, aSource, aTarget))
+					threat = effect->FilterThreat(threat);
+			}
 		}
 
 		return threat;
 	}
 
+	float			
+	Auras::GetResourceCostMultiplier() const
+	{
+		float t = 1.0f;
+
+		for (const std::unique_ptr<Entry>& entry : m_entries)
+		{
+			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
+				t *= effect->GetResourceCostMultiplier();
+		}
+
+		return t;
+	}
+
 	void		
 	Auras::OnCombatEvent(
+		const Manifest*								aManifest,
+		const EntityInstance*						aSource,
+		const EntityInstance*						aTarget,
 		tpublic::AuraEffectBase::CombatEventType	aType,
 		CombatEvent::Id								aCombatEventId,
 		uint32_t									aAbilityId,
-		AuraEffectBase::SecondaryAbilityCallback	aCallback) const
+		std::mt19937*								aRandom,
+		IEventQueue*								aEventQueue) const
 	{
 		for (const std::unique_ptr<Entry>& entry : m_entries)
 		{
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
-				effect->OnCombatEvent(aType, aCombatEventId, aAbilityId, aCallback);
+			{
+				if (effect->CheckRequirements(aManifest, aSource, aTarget))
+				{
+					effect->OnCombatEvent(aManifest, entry->m_auraId, aType, aCombatEventId, aAbilityId, aSource, aTarget, aRandom, aEventQueue);
+				}
+			}
 		}
 	}
-
+	 
 	void			
 	Auras::OnDamageInput(
+		const Manifest*								aManifest,
 		const EntityInstance*						aSource,
 		const EntityInstance*						aTarget,
 		DirectEffect::DamageType					aDamageType,
@@ -220,7 +271,10 @@ namespace tpublic::Components
 		for (const std::unique_ptr<Entry>& entry : m_entries)
 		{
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
-				effect->OnDamageInput(aSource, aTarget, entry->m_sourceEntityInstance, aDamageType, aDamage, aCombatEventId, aEventQueue, aWorldView, aResourceChangeQueue);
+			{
+				if(effect->CheckRequirements(aManifest, aSource, aTarget))
+					effect->OnDamageInput(aSource, aTarget, entry->m_sourceEntityInstance, aDamageType, aDamage, aCombatEventId, aEventQueue, aWorldView, aResourceChangeQueue);
+			}
 		}
 	}
 
@@ -255,7 +309,7 @@ namespace tpublic::Components
 		{
 			for (std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
 			{
-				if(effect->UpdateCastTime(aManifest, aAbilityId, entry->m_charges, aCastTime))
+				if (effect->UpdateCastTime(aManifest, aAbilityId, entry->m_charges, aCastTime))
 					modified = true;
 			}
 		}
@@ -266,26 +320,36 @@ namespace tpublic::Components
 		return modified;
 	}
 
-	void		
+	bool		
 	Auras::RemoveAura(
-		uint32_t									aAuraId)
+		uint32_t									aAuraId,
+		uint32_t									aMaxRemove)
 	{
-		for(size_t i = 0; i < m_entries.size(); i++)
+		uint32_t removed = 0;
+
+		for(size_t i = 0; i < m_entries.size() && removed < aMaxRemove; i++)
 		{
 			if(m_entries[i]->m_auraId == aAuraId)
 			{
 				Helpers::RemoveCyclicFromVector(m_entries, i);
 				i--;
+
+				removed++;
 			}
 		}
+
+		return removed > 0;
 	}
 
-	void			
+	bool			
 	Auras::RemoveAuraByGroup(
 		const Manifest*								aManifest,
-		uint32_t									aAuraGroupId)
+		uint32_t									aAuraGroupId,
+		uint32_t									aMaxRemove)
 	{
-		for (size_t i = 0; i < m_entries.size(); i++)
+		uint32_t removed = 0;
+
+		for (size_t i = 0; i < m_entries.size() && removed < aMaxRemove; i++)
 		{
 			const std::unique_ptr<Entry>& entry = m_entries[i];
 			const Data::Aura* auraData = aManifest->GetById<tpublic::Data::Aura>(entry->m_auraId);
@@ -294,16 +358,23 @@ namespace tpublic::Components
 			{
 				Helpers::RemoveCyclicFromVector(m_entries, i);
 				i--;
+
+				removed++;
 			}
 		}
+
+		return removed > 0;
 	}
 
-	void		
+	bool
 	Auras::RemoveAurasByFlags(
 		const Manifest*								aManifest,
-		uint32_t									aFlags)
+		uint32_t									aFlags,
+		uint32_t									aMaxRemove)
 	{
-		for(size_t i = 0; i < m_entries.size(); i++)
+		uint32_t removed = 0;
+
+		for(size_t i = 0; i < m_entries.size() && removed < aMaxRemove; i++)
 		{
 			const std::unique_ptr<Entry>& entry = m_entries[i];
 			const Data::Aura* auraData = aManifest->GetById<tpublic::Data::Aura>(entry->m_auraId);
@@ -312,8 +383,12 @@ namespace tpublic::Components
 			{
 				Helpers::RemoveCyclicFromVector(m_entries, i);
 				i--;
+
+				removed++;
 			}
 		}
+
+		return removed > 0;
 	}
 
 	void			
@@ -329,19 +404,28 @@ namespace tpublic::Components
 	Auras::OnLoadedFromPersistence(
 		const Manifest*								aManifest) 
 	{
-		for(std::unique_ptr<Entry>& entry : m_entries)
+		for(size_t i = 0; i < m_entries.size(); i++)
 		{
-			const Data::Aura* auraData = aManifest->GetById<tpublic::Data::Aura>(entry->m_auraId);
+			std::unique_ptr<Entry>& entry = m_entries[i];
+			const Data::Aura* auraData = aManifest->TryGetById<tpublic::Data::Aura>(entry->m_auraId);
 
-			if(auraData->m_auraEffects.size() == 0)
+			if(auraData == NULL)
 			{
-				entry->m_noEffects = true;
-			}				
+				m_entries.erase(m_entries.begin() + i);
+				i--;
+			}
 			else
 			{
-				for (const std::unique_ptr<Data::Aura::AuraEffectEntry>& effect : auraData->m_auraEffects)
-					entry->m_effects.push_back(std::unique_ptr<AuraEffectBase>(effect->m_auraEffectBase->Copy()));
-			}
+				if (auraData->m_auraEffects.size() == 0)
+				{
+					entry->m_noEffects = true;
+				}
+				else
+				{
+					for (const std::unique_ptr<Data::Aura::AuraEffectEntry>& effect : auraData->m_auraEffects)
+						entry->m_effects.push_back(std::unique_ptr<AuraEffectBase>(effect->m_auraEffectBase->Copy()));
+				}
+			}			
 		}
 
 		m_seq++;

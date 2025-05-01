@@ -252,6 +252,7 @@ namespace tpublic::Systems
 
 		bool isStunned = auras->HasEffect(AuraEffect::ID_STUN, NULL);
 		bool isImmobilized = auras->HasEffect(AuraEffect::ID_IMMOBILIZE, NULL);
+		bool isStealthed = auras->HasEffect(AuraEffect::ID_STEALTH, NULL);
 
 		const MoveSpeed::Info* moveSpeedInfo = MoveSpeed::GetInfo(combatPublic->m_moveSpeed);
 		bool moveOnCooldown = minionPrivate->m_moveCooldownUntilTick + moveSpeedInfo->m_tickBias >= aContext->m_tick;
@@ -336,6 +337,18 @@ namespace tpublic::Systems
 					const Data::Ability* ability = GetManifest()->GetById<Data::Ability>(ownerRequestAbility.m_abilityId);
 					const EntityInstance* ownerRequestAbilityTargetEntityInstance = ownerRequestAbility.m_targetEntityInstanceId != 0 ? aContext->m_worldView->WorldViewSingleEntityInstance(ownerRequestAbility.m_targetEntityInstanceId) : NULL;
 
+					if(ownerRequestAbilityTargetEntityInstance != NULL)
+					{
+						const Components::MinionPublic::Ability* minionAbility = minionPublic->GetAbility(ownerRequestAbility.m_abilityId);
+						assert(minionAbility != NULL);
+						if(minionAbility->m_selfMustHaveAuraId != 0)
+						{
+							const Components::VisibleAuras* ownerRequestAbilityTargetVisibleAuras = ownerRequestAbilityTargetEntityInstance->GetComponent<Components::VisibleAuras>();
+							if (ownerRequestAbilityTargetVisibleAuras == NULL || !ownerRequestAbilityTargetVisibleAuras->HasAura(minionAbility->m_selfMustHaveAuraId))
+								ownerRequestAbilityTargetEntityInstance = NULL;
+						}
+					}
+
 					if(ownerRequestAbilityTargetEntityInstance != NULL && !minionPublic->m_cooldowns.IsAbilityOnCooldown(ability))
 					{
 						const Components::Position* ownerRequestAbilityTargetPosition = ownerRequestAbilityTargetEntityInstance->GetComponent<Components::Position>();
@@ -403,6 +416,13 @@ namespace tpublic::Systems
 
 									if(ability->ShouldTriggerMoveCooldown() && isImmobilized)
 										continue;
+
+									if(ability->m_requirements.size() > 0)
+									{
+										const EntityInstance* entityInstance = aContext->m_worldView->WorldViewSingleEntityInstance(aEntityInstanceId);
+										if(entityInstance != NULL && !Requirements::CheckList(GetManifest(), ability->m_requirements, entityInstance, targetEntityInstance))
+											continue;
+									}
 
 									if (ability->TargetFriendly())
 									{
@@ -479,6 +499,22 @@ namespace tpublic::Systems
 										{
 											if(minionAbility->m_selfMustNotHaveAuraId != 0 && visibleAuras->HasAura(minionAbility->m_selfMustNotHaveAuraId))
 												continue;
+
+											if (minionAbility->m_selfMustHaveAuraId != 0 && !visibleAuras->HasAura(minionAbility->m_selfMustHaveAuraId))
+												continue;
+
+											if(minionAbility->m_flags & Components::MinionPublic::Ability::FLAG_INTERRUPT)
+											{
+												bool targetInterruptible = targetCombatPublic != NULL && targetCombatPublic->m_castInProgress.has_value();
+												if(targetInterruptible)
+												{
+													const Data::Ability* targetCastAbility = GetManifest()->GetById<Data::Ability>(targetCombatPublic->m_castInProgress->m_abilityId);
+													targetInterruptible = targetCastAbility->IsInterruptable();
+												}
+
+												if(!targetInterruptible)
+													continue;
+											}
 										}
 
 										if (minionPublic->m_cooldowns.IsAbilityOnCooldown(ability))
@@ -697,7 +733,7 @@ namespace tpublic::Systems
 							attackCommand->m_serverActive = true;
 						}
 					}
-					else if (minionMode->m_aggroRange != 0 && aContext->m_tick - minionPrivate->m_lastAggroPingTick >= AGGRO_PING_INTERVAL_TICKS && !isStunned)
+					else if (minionMode->m_aggroRange != 0 && aContext->m_tick - minionPrivate->m_lastAggroPingTick >= AGGRO_PING_INTERVAL_TICKS && !isStunned && !isStealthed)
 					{
 						// Attack anything non-friendly within aggro range
 						uint32_t aggroEntityInstanceId = 0;
@@ -870,7 +906,7 @@ namespace tpublic::Systems
 				if (useAbility->IsAttack() && useAbility->IsMelee())
 					cooldownModifier = auras->GetAttackHaste(GetManifest());
 
-				minionPublic->m_cooldowns.AddAbility(GetManifest(), useAbility, aContext->m_tick, cooldownModifier);
+				minionPublic->m_cooldowns.AddAbility(GetManifest(), useAbility, aContext->m_tick, cooldownModifier, NULL);
 				minionPublic->SetDirty();
 
 				if (useAbility->m_castTime > 0)
@@ -934,7 +970,7 @@ namespace tpublic::Systems
 		EntityState::Id		aEntityState,
 		int32_t				/*aTicksInState*/,
 		ComponentBase**		aComponents,
-		Context*			/*aContext*/) 
+		Context*			aContext) 
 	{
 		const Components::MinionPrivate* minionPrivate = GetComponent<Components::MinionPrivate>(aComponents);
 
@@ -993,6 +1029,30 @@ namespace tpublic::Systems
 			}
 
 			combatPublic->m_interrupt.reset();
+
+			{
+				const Components::VisibleAuras* visibleAuras = GetComponent<Components::VisibleAuras>(aComponents);
+				uint8_t stealthLevel = 0;
+				if (visibleAuras->IsStealthed())
+				{
+					const Components::Position* position = GetComponent<Components::Position>(aComponents);
+
+					stealthLevel = 1;
+
+					if (aContext->m_worldView->WorldViewGetMapData()->DoesNeighborTileBlockLineOfSight(position->m_position.m_x, position->m_position.m_y))
+					{
+						stealthLevel++; // More stealth from hugging a wall
+						if (aContext->m_tick - position->m_lastMoveTick > 20)
+							stealthLevel++; // More steal from standing still for at least 2 seconds while hugging a wall
+					}
+				}
+
+				if (combatPublic->m_stealthLevel != stealthLevel)
+				{
+					combatPublic->m_stealthLevel = stealthLevel;
+					combatPublic->SetDirty();
+				}
+			}
 		}
 
 		{

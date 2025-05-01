@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Hash.h"
 #include "IReader.h"
 #include "IWriter.h"
 #include "Parser.h"
@@ -33,6 +34,7 @@ namespace tpublic
 			ID_HEALTH_PER_5_SECONDS,
 			ID_MANA_PER_5_SECONDS,
 			ID_ATTACK_POWER,
+			ID_STEALTH,
 
 			NUM_IDS
 		};
@@ -72,6 +74,7 @@ namespace tpublic
 			{ "health_per_5",			"HP5",			"Health Per 5 Seconds",						NULL,																	1.0f,	false,	false },
 			{ "mana_per_5",				"MP5",			"Mana Per 5 Seconds",						NULL,																	1.0f,	false,	false },
 			{ "attack_power",			"AP",			"Attack Power",								NULL,																	2.0f,	false,	false },
+			{ "stealth",				"STEALTH",		"Stealth",									"Decreases likelihood of detection when stealthed.",					10.0f,	false,	false },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);
@@ -232,6 +235,14 @@ namespace tpublic
 					}
 				}
 				return sum;
+			}
+
+			uint32_t
+			GetHash() const
+			{
+				Hash::CheckSum hash;
+				hash.AddPOD(m_stats);
+				return hash.m_hash;
 			}
 
 			// Public data

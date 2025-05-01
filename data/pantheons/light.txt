@@ -1,7 +1,7 @@
 faction light:
 {
 	string: "The Light"
-	flags: [ reputation ]
+	flags: [ friendly reputation pantheon pvp ]
 }
 
 pantheon light:
@@ -16,6 +16,7 @@ pantheon light:
 	notification_string<disciple>: "A holy portal has opened."
 	
 	deity_specifier: "a holy"
+	deity_description: "a holy being of The Light"
 	shrine_display_name_prefix: "Holy Altar of "
 	
 	hostile_classes: [ witch ]

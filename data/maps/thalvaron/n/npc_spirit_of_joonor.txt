@@ -1,0 +1,63 @@
+dialogue_screen .spirit_of_joonor_dialogue:
+{
+	text: 
+	[	
+		"Welcome."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .warden_moonwatcher_2 }
+		{ quest<offer_only>: .spirit_of_joonor_1 }
+	]
+}
+
+dialogue_root .spirit_of_joonor_dialogue:
+{
+	.spirit_of_joonor_dialogue: { }
+}
+
+entity thalvaron_spirit_of_joonor: !NPC
+{
+	_string: "Spirit of Joonor"
+	_dialogue_root: .spirit_of_joonor_dialogue	
+	_sprite: spirit_1
+	_sprite_dead: spirit_1_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: elemental
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+quest .spirit_of_joonor_1:
+{
+	string: "The Hollows of the Undying"
+
+	text:
+	[
+		"Travel to the Hollows of the Undying in the north and find the ally that the Spirit of Joonor was refering to."
+	]
+	
+	description: 
+	[
+		"Two ancient towers were long ago constructed in these lands and were imbued with powerful magic from the crossing of the ley lines. In this age they have been occupied by various wizards and sorcerers who have"
+		"drawn energies out of them for their own purposes. The first tower, the Tower of Xalizant is home of an excentric human wizard who is of harm to no one but himself. The second tower, the Tower of Indulath is home"
+		"to a dark elf going by the name of Morlithar. Dark magic is flowing out of Indulath, destroying life and animating death. This orb you have brought to me is a product of Indulath.\n\n"
+		"If you want to end the chaos, you will need to go the Hollows of the Undying in the north. Travel there and an ally will be waiting for you."
+	]
+	
+	completion:
+	[
+		"Ah... I knew you were coming."
+	]
+
+	level: 19
+	prerequisites: [ .warden_moonwatcher_2 ]
+	reward_xp_multiplier: 0.3
+	reward_cash_multiplier: 0.3
+}
+

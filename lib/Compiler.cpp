@@ -9,6 +9,7 @@
 #include <tpublic/ComponentManager.h>
 #include <tpublic/Compression.h>
 #include <tpublic/DataErrorHandling.h>
+#include <tpublic/DebugPrintTimer.h>
 #include <tpublic/DirectEffectFactory.h>
 #include <tpublic/Document.h>
 #include <tpublic/MemoryWriter.h>
@@ -21,8 +22,10 @@
 #include "JSONManifest.h"
 #include "MapImageOutput.h"
 #include "PostProcessAbilities.h"
+#include "PostProcessDoodads.h"
 #include "PostProcessEntities.h"
 #include "PostProcessItems.h"
+#include "PostProcessQuests.h"
 #include "PostProcessSprites.h"
 #include "PostProcessWordGenerators.h"
 #include "SoundDataBuilder.h"
@@ -35,6 +38,7 @@ namespace tpublic
 		Manifest*				aManifest)
 		: m_manifest(aManifest)
 		, m_parser(&m_sourceContext)
+		, m_buildErrorCount(0)
 	{
 
 	}
@@ -45,23 +49,45 @@ namespace tpublic
 	}
 
 	void	
-	Compiler::Parse(
-		const char*				aRootPath)
-	{
-		// Recursively parse all .txt files in root path
-		_ParseDirectory(aRootPath, aRootPath);
-
-		m_parser.ResolveMacrosAndReferences();
-	}
-
-	void	
 	Compiler::Build(
-		const char*				aPersistentIdTablePath,
-		const char*				aDataOutputPath,
-		const char*				aGeneratedSourceOutputPath,
-		Compression::Level		aCompressionLevel)
+		const std::vector<std::string>&		aParseRootPaths,
+		const char*							aPersistentIdTablePath,
+		const char*							aDataOutputPath,
+		const char*							aGeneratedSourceOutputPath,
+		Compression::Level					aCompressionLevel)
 	{
-		SpriteSheetBuilder spriteSheetBuilder(512);
+		uint32_t buildFingerprint = _GetInputFingerprint(aParseRootPaths);
+		uint32_t currentBuildFingerprint = _GetCurrentBuildFingerprint(aDataOutputPath);
+		if(buildFingerprint == currentBuildFingerprint)
+			return; // No changes, no need to do anything
+
+		for(const std::string& parseRootPath : aParseRootPaths)
+		{
+			// Recursively parse all .txt files in root path
+			_ParseDirectory(parseRootPath.c_str(), parseRootPath.c_str());
+		}
+
+		{
+			DataErrorHandling::ScopedErrorCallback scopedErrorCallback([&](
+				const char* aString)
+			{
+				throw BuildError{ aString };
+			});
+
+			try
+			{
+				m_parser.Resolve();
+			}
+			catch (BuildError& e)
+			{
+				_OnBuildError(e);				
+			}
+		}
+
+		nwork::Queue workQueue;
+		nwork::ThreadPool threadPool(&workQueue);
+
+		SpriteSheetBuilder spriteSheetBuilder(1024);
 		std::vector<std::unique_ptr<GenerationJob>> generationJobs;
 
 		m_sourceContext.m_persistentIdTable->Load(aPersistentIdTablePath);
@@ -70,33 +96,65 @@ namespace tpublic
 		m_parser.GetRoot()->ForEachChild([&](
 			const SourceNode* aNode)
 		{
-			_ProcessNode(&spriteSheetBuilder, &generationJobs, aNode);
+			DataErrorHandling::ScopedErrorCallback scopedErrorCallback([&](
+				const char* aString)
+			{
+				throw BuildError{ aString };
+			});
+
+			try
+			{
+				_ProcessNode(&spriteSheetBuilder, &generationJobs, aNode);
+			}
+			catch(BuildError& e)
+			{
+				_OnBuildError(e);
+			}
 		});		
+
+		// Process data source
+		_ProcessDataQueue();
+
+		TP_CHECK(m_buildErrorCount == 0, "%u build errors.", m_buildErrorCount);
 
 		// Prepare word list manifest
 		{
 			m_manifest->m_wordList.Prepare(m_manifest);
 		}
 
-		// Build map data
+		// Validate/prune persistent ids and build map data
 		{
-			spriteSheetBuilder.ExportPreliminaryManifestData(m_sourceContext.m_persistentIdTable.get(), m_manifest);
-			
+			spriteSheetBuilder.ExportPreliminaryManifestData(m_sourceContext.m_persistentIdTable.get(), m_manifest);			
+
+			m_sourceContext.m_persistentIdTable->ValidateAndPrune([&](
+				const char*							aDataTypeString,
+				const char*							aName, 
+				const DataErrorHandling::DebugInfo& aDebugInfo)
+			{
+				_OnBuildError({ Helpers::Format("[%s:%u] Undefined %s '%s' referenced.", aDebugInfo.m_file.c_str(), aDebugInfo.m_line, aDataTypeString, aName) });
+			});
+
+			TP_CHECK(m_buildErrorCount == 0, "%u validation errors.", m_buildErrorCount);
+
 			AutoDoodads autoDoodads(m_manifest);
 
 			m_manifest->GetContainer<tpublic::Data::Map>()->ForEach([&](
 				Data::Map* aMap)
 			{
-				aMap->m_data->Build(m_manifest, &autoDoodads);
+				printf("Building map '%s'...\n", aMap->m_name.c_str());
 
-				aMap->m_data->ConstructMapPathData(m_manifest);
-				aMap->m_data->ConstructMapRouteData(m_manifest);
+				aMap->m_data->Build(m_manifest, &autoDoodads, &workQueue);
+
+				aMap->m_data->ConstructMapPathData(m_manifest, &workQueue);
+				aMap->m_data->ConstructMapRouteData(m_manifest, &workQueue);
 				return true;
 			});			
 		}
 
 		// Build sprite sheets
 		{
+			DebugPrintTimer timer("build sprite sheets");
+
 			spriteSheetBuilder.Build();
 			spriteSheetBuilder.UpdateManifestData();
 
@@ -107,6 +165,8 @@ namespace tpublic
 
 		// Build sound data
 		{
+			DebugPrintTimer timer("build sound data");
+
 			std::string soundsPath = aDataOutputPath;
 			soundsPath += "/sounds.bin";
 
@@ -140,11 +200,17 @@ namespace tpublic
 		}
 
 		// Post process stuff
-		PostProcessEntities::Run(m_manifest);
-		PostProcessWordGenerators::Run(m_manifest);
-		PostProcessAbilities::Run(m_manifest);
-		PostProcessSprites::Run(m_manifest);
-		PostProcessItems::Run(m_manifest);
+		{
+			DebugPrintTimer timer("post process data");
+
+			PostProcessEntities::Run(m_manifest);
+			PostProcessWordGenerators::Run(m_manifest);
+			PostProcessAbilities::Run(m_manifest);
+			PostProcessSprites::Run(m_manifest);
+			PostProcessItems::Run(m_manifest);
+			PostProcessDoodads::Run(m_manifest);
+			PostProcessQuests::Run(m_manifest);
+		}
 
 		// Run generation jobs
 		for(std::unique_ptr<GenerationJob>& generationJob : generationJobs)
@@ -152,6 +218,8 @@ namespace tpublic
 
 		// Export JSON manifest
 		{
+			DebugPrintTimer timer("export json manifest");
+
 			std::string spriteDataPath = aDataOutputPath;
 			spriteDataPath += "/sprites.bin";
 			JSONManifest jsonManifest(m_manifest, spriteDataPath.c_str());
@@ -163,6 +231,8 @@ namespace tpublic
 
 		// Export manifest 
 		{
+			DebugPrintTimer timer("manifest export");
+
 			std::vector<uint8_t> uncompressed;
 			MemoryWriter writer(uncompressed);
 			m_manifest->ToStream(&writer);
@@ -177,9 +247,86 @@ namespace tpublic
 		}
 
 		m_sourceContext.m_persistentIdTable->Save();
+
+		_SaveBuildFingerprint(aDataOutputPath, buildFingerprint);
 	}
 
 	//-----------------------------------------------------------------------------------
+
+	uint32_t	
+	Compiler::_GetInputFingerprint(
+		const std::vector<std::string>& aParseRootPaths)
+	{
+		Hash::CheckSum checkSum;
+
+		std::vector<std::string> directories = aParseRootPaths;
+
+		while(directories.size() > 0)
+		{
+			std::string directory = std::move(directories[directories.size() - 1]);
+			directories.pop_back();
+
+			std::error_code errorCode;
+			std::filesystem::directory_iterator it(directory.c_str(), errorCode);
+			TP_CHECK(!errorCode, "Failed to search directory: %s (%s)", directory.c_str(), errorCode.message().c_str());
+
+			for (const std::filesystem::directory_entry& entry : it)
+			{
+				std::string path = entry.path().string().c_str();
+
+				if (entry.is_regular_file())
+				{
+					uint64_t timeStamp = (uint64_t)std::chrono::duration_cast<std::chrono::milliseconds>(entry.last_write_time().time_since_epoch()).count();
+					size_t fileSize = (size_t)entry.file_size();
+
+					checkSum.AddString(path.c_str());
+					checkSum.AddPOD(fileSize);
+					checkSum.AddPOD(timeStamp);
+				}
+				else if(entry.is_directory())
+				{
+					directories.push_back(path);
+				}
+			}
+		}
+
+		return checkSum.m_hash;
+	}
+
+	uint32_t	
+	Compiler::_GetCurrentBuildFingerprint(
+		const char*				aDataOutputPath)
+	{
+		std::string buildFingerprintFilePath = std::string(aDataOutputPath) + "/build-fingerprint.txt";
+		std::vector<std::string> lines;
+		if(!Helpers::LoadTextFile(buildFingerprintFilePath.c_str(), lines) || lines.size() == 0)
+			return 0;
+
+		uint32_t value = 0;
+		if(sscanf(lines[0].c_str(), "%u", &value) != 1)
+			return 0;
+
+		return value;
+	}
+
+	void		
+	Compiler::_SaveBuildFingerprint(
+		const char*				aDataOutputPath,
+		uint32_t				aBuildFingerprint)
+	{
+		std::string buildFingerprintFilePath = std::string(aDataOutputPath) + "/build-fingerprint.txt";
+		FileWriter fileWriter(buildFingerprintFilePath.c_str());
+		fileWriter.PrintF("%u\r\n", aBuildFingerprint);
+	}
+
+	void	
+	Compiler::_OnBuildError(
+		const BuildError&		aBuildError)
+	{
+		printf("\x1B[31mERROR: %s\x1B[37m\n", aBuildError.m_string.c_str());
+		
+		m_buildErrorCount++;
+	}
 
 	void	
 	Compiler::_ParseDirectory(
@@ -201,8 +348,21 @@ namespace tpublic
 			{
 				if(entry.path().filename().string().c_str()[0] != '_')
 				{
-					Tokenizer tokenizer(aRootPath, entry.path().string().c_str());
-					m_parser.Parse(tokenizer);
+					DataErrorHandling::ScopedErrorCallback scopedErrorCallback([&](
+						const char* aString)
+					{
+						throw BuildError{ aString };
+					});
+
+					try
+					{
+						Tokenizer tokenizer(aRootPath, entry.path().string().c_str());
+						m_parser.Parse(tokenizer);
+					}
+					catch(BuildError& e)
+					{
+						_OnBuildError(e);
+					}
 				}
 			}
 			else if(entry.is_directory() && entry.path().filename().string().c_str()[0] != '_')
@@ -240,6 +400,10 @@ namespace tpublic
 		else if (aNode->m_name == "misc_metrics")
 		{
 			m_manifest->m_miscMetrics.FromSource(aNode);
+		}
+		else if (aNode->m_name == "reputation_metrics")
+		{
+			m_manifest->m_reputationMetrics.FromSource(aNode);
 		}
 		else if (aNode->m_name == "quest_metrics")
 		{
@@ -281,9 +445,13 @@ namespace tpublic
 		{
 			m_manifest->m_changelog = std::make_unique<Document>(aNode);
 		}
+		else if (aNode->m_name == "changelog_old")
+		{
+			m_manifest->m_changelogOld = std::make_unique<Document>(aNode);
+		}
 		else if(aNode->m_name == "base_tile_border_pattern_sprite")
 		{
-			m_manifest->m_baseTileBorderPatternSpriteId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_SPRITE, aNode->GetIdentifier());
+			m_manifest->m_baseTileBorderPatternSpriteId = aNode->GetId(DataType::ID_SPRITE);
 		}
 		else if(aNode->IsAnonymousObject())
 		{
@@ -296,21 +464,104 @@ namespace tpublic
 		else
 		{
 			DataType::Id dataType = DataType::StringToId(aNode->m_tag.c_str());
-			TP_VERIFY(dataType != DataType::INVALID_ID, aNode->m_debugInfo, "'%s' is not a valid data type.", aNode->m_tag.c_str());
+			TP_VERIFY(dataType != DataType::INVALID_ID, aNode->m_debugInfo, "'%s' is not a valid data type.", aNode->m_tag.c_str());			
 
 			assert(m_manifest->m_containers[dataType]);
 
-			DataBase* base = m_manifest->m_containers[dataType]->GetBaseByName(m_sourceContext.m_persistentIdTable.get(), aNode->m_name.c_str());
+			std::unique_ptr<DataQueueItem> t = std::make_unique<DataQueueItem>();
+			t->m_base = m_manifest->m_containers[dataType]->GetBaseByName(m_sourceContext.m_persistentIdTable.get(), aNode->m_name.c_str());
+			t->m_base->m_debugInfo = aNode->m_debugInfo;
+			t->m_source = aNode;
 
-			TP_VERIFY(!base->m_defined, aNode->m_debugInfo, "'%s' has already been defined.", aNode->m_name.c_str());
+			TP_VERIFY(!m_dataSourceTable.contains(t->m_base), aNode->m_debugInfo, "'%s' already defined.", aNode->m_name.c_str());
+			m_dataSourceTable[t->m_base] = aNode;
 
-			base->m_debugInfo = aNode->m_debugInfo;
+			if(aNode->m_extraAnnotation)
+			{
+				std::vector<const DataBase*> dataExtends;
 
-			base->FromSource(aNode);
+				if(aNode->m_extraAnnotation->m_type == SourceNode::TYPE_ARRAY)
+				{
+					TP_VERIFY(aNode->m_extraAnnotation->m_children.size() > 0, aNode->m_extraAnnotation->m_debugInfo, "Empty extends array.");
 
-			base->m_defined = true;
-			base->m_componentManager = m_sourceContext.m_componentManager.get();
+					aNode->m_extraAnnotation->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						dataExtends.push_back(m_manifest->m_containers[dataType]->GetBaseByName(m_sourceContext.m_persistentIdTable.get(), aChild->m_name.c_str()));
+					});
+				}
+				else
+				{
+					dataExtends.push_back(m_manifest->m_containers[dataType]->GetBaseByName(m_sourceContext.m_persistentIdTable.get(), aNode->m_extraAnnotation->GetIdentifier()));
+				}
+
+				assert(!m_dataExtendsTable.contains(t->m_base));
+				m_dataExtendsTable[t->m_base] = std::move(dataExtends);
+			}
+
+			m_dataQueue.push_back(std::move(t));
 		}
+	}
+
+	void
+	Compiler::_ProcessDataQueue()
+	{
+		for(std::unique_ptr<DataQueueItem>& t : m_dataQueue)
+		{			
+			DataErrorHandling::ScopedErrorCallback scopedErrorCallback([&](
+				const char* aString)
+			{
+				throw BuildError{ aString };
+			});
+
+			try
+			{
+				TP_VERIFY(!t->m_base->m_defined, t->m_base->m_debugInfo, "'%s' has already been defined.", t->m_base->m_name.c_str());
+
+				std::vector<const SourceNode*> sources;
+				_GetDataExtends(t->m_base, sources);
+				assert(sources.size() > 0);
+
+				for(const SourceNode* source : sources)
+					t->m_base->FromSource(source);
+
+				t->m_base->m_defined = true;
+				t->m_base->m_componentManager = m_sourceContext.m_componentManager.get();
+			}
+			catch (BuildError& e)
+			{
+				_OnBuildError(e);
+			}
+		}
+	}
+
+	void		
+	Compiler::_GetDataExtends(
+		const DataBase*							aDataBase,
+		std::vector<const SourceNode*>&			aOut)
+	{	
+		const SourceNode* source = NULL;
+
+		{
+			DataSourceTable::const_iterator i = m_dataSourceTable.find(aDataBase);
+			assert(i != m_dataSourceTable.cend());
+			source = i->second;
+			TP_VERIFY(Helpers::FindItem(aOut, source) == SIZE_MAX, source->m_debugInfo, "Circular polymorphism.");
+		}
+
+		{
+			DataExtendsTable::const_iterator i = m_dataExtendsTable.find(aDataBase);
+
+			if(i != m_dataExtendsTable.cend())
+			{
+				assert(i->second.size() > 0);
+
+				for (const DataBase* extends : i->second)
+					_GetDataExtends(extends, aOut);
+			}
+		}
+
+		aOut.push_back(source);
 	}
 
 }

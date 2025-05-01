@@ -1,18 +1,38 @@
+!define TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS 86400 # 24 hours
+!define TOKEN_OF_VICTORY_PRICE { quantity: 1 item_cost<[ item_token_of_victory token_of_victory_currency ]>: @_count }	
+!define RANDOM_ITEM_VENDOR_TOKEN_OF_VICTORY_COST { token_item: item_token_of_victory token_sprite: token_of_victory_currency }
+
 !define TRASH_RESPAWN_TIMER { normal: 36000 fast_trigger: 0 } 
 !define QUEST_ITEM_RESPAWN_TIMER { despawn_required: true normal: [ 1000 1400 ] fast: [ 600 1000 ] fast_trigger: 600 }
 !define CHEST_RESPAWN { despawn_required: true normal: [ 6000 9000 ] fast_trigger: 0 }
+!define ESCORT_RESPAWN { despawn_required: true normal: [ 100 200 ] fast_trigger: 0 }
 
 !define TRADE_SUPPLIES
 {
 	sell weapon_pick_axe: { quantity: 1 }	
 	sell weapon_blacksmithing_hammer: { quantity: 1 }	
 	sell weapon_fishing_rod: { quantity: 1 }	
+	sell reagent_paper: { quantity: 1 }
+	sell item_thread: { quantity: 1 }
 	sell consumable_spirit_token: { quantity: 1 }
+}
+
+!define FOOD_VENDOR
+{
+	sell consumable_dry_bread: { quantity: 1 }	
+	sell consumable_durgan_ale: { quantity: 1 cost: 350 }
 }
 
 !define DEFAULT_PORTAL_ANIMATION
 {
 	frames: [ effect_instance_portal_0 effect_instance_portal_1 effect_instance_portal_2 ] 
+	frame_interval: 200 
+	color: [ 200 0 100 200 ] 
+}
+
+!define HOLE_PORTAL_ANIMATION
+{
+	frames: [ effect_instance_portal_hole_0 effect_instance_portal_hole_1 effect_instance_portal_hole_2 ] 
 	frame_interval: 200 
 	color: [ 200 0 100 200 ] 
 }

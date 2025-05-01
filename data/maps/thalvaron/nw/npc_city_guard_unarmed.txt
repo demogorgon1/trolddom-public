@@ -1,0 +1,13 @@
+entity thalvaron_city_guard_unarmed: !NPC
+{
+	_string: "City Guard"
+	_sprite: man_60
+	_sprite_dead: man_60_dead
+	_level: 20
+	_faction: valoris		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_route: thalvaron_default_patrol
+	_default_behavior_state: thalvaron_default_patrol_friendly
+}

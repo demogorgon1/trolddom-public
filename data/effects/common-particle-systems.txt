@@ -115,3 +115,45 @@ particle_system level_up:
 	}
 }
 
+particle_system net_trap:
+{
+	particle:
+	{
+		sprites: [ effect_net_trap ]
+		flags: [ attached ]
+		count: 1
+		scale: 1
+		alpha: 1
+		fade_in: 150	
+		fade_out: 150
+		offset_x: 0.5
+		offset_y: 0.5	
+	}
+}
+
+particle_system web_trap:
+{
+	particle:
+	{
+		sprites: [ effect_web_trap ]
+		flags: [ attached ]
+		count: 1
+		scale: 1
+		alpha: 1
+		fade_in: 150	
+		fade_out: 150
+		offset_x: 0.5
+		offset_y: 0.5	
+	}
+}
+
+particle_system web_projectile:
+{
+	particle:
+	{
+		sprites: [ effect_web_projectile ]
+		flags: [ attached no_rotation face_target ]
+		scale: 0.4
+		count: 1		
+	}
+}

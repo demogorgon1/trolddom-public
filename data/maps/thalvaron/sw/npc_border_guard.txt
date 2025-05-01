@@ -1,0 +1,12 @@
+entity thalvaron_border_guard: !NPC
+{
+	_string: "Border Guard"
+	_sprite: man_10
+	_sprite_dead: man_10_dead
+	_level: 20
+	_faction: valoris		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

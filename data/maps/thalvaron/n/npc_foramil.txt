@@ -1,0 +1,159 @@
+dialogue_screen .foramil_dialogue:
+{
+	text: 
+	[	
+		"Watch out for the sharp end of my spear."
+	]		
+	
+	options:
+	[
+		{ quest: .foramil_1 }
+		{ quest<offer_only>: .foramil_2 requirement self<must_not_have_completed_quest>: .pearly_b_1 }
+	]
+}
+
+dialogue_root .foramil_dialogue:
+{
+	.foramil_dialogue: { }
+}
+
+entity thalvaron_foramil: !NPC
+{
+	_string: "Foramil"
+	_dialogue_root: .foramil_dialogue	
+	_sprite: elf_4
+	_sprite_dead: elf_4_dead
+	_level: 20
+	_faction: children_of_the_moon		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .foramil_1:
+{
+	string: "Corrupted Splinters"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .foramil_1_quest_item count: 8 }
+}
+
+loot_group .foramil_1_quest_item: {}
+
+item .foramil_1_quest_item:
+{
+	icon: icon_splinter_1
+	item_level: 17
+	loot_groups: [ .foramil_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Corrupted Splinter"
+	stack: 8
+}
+
+quest .foramil_1:
+{
+	string: "Chopping Wood"
+
+	text:
+	[
+		"Kill bewildered tree elementals, collect their splinters, and return them to Foramil."
+	]
+	
+	description: 
+	[
+		"Someone entrusted me with the quest of dealing with some bewildered tree elementals that seems to run amok in these woods. I don't really feel like doing it right now though, so maybe I can delegate the work to you?"
+		"Basically, the problem is that these forsaken tree creatures have lost their minds and are no longer peaceful. The attack people left and right. We can't have that, apparently. You'll find them to the east of here on both"
+		"sides of the river. Bring me back some of their splinters."
+	]
+
+	progress:
+	[
+		"How is it going?"
+	]
+	
+	completion:
+	[
+		"Excellent. Here, have something for your trouble."
+	]
+
+	objectives: [ .foramil_1 ]
+	level: 17
+	next_quest: .foramil_2
+}
+
+############################################################
+# Quest 2
+
+item .foramil_2_quest_item:
+{
+	icon: icon_bundle_1
+	item_level: 17
+	flags: [ not_sellable unique ]
+	string: "Bundle of Splinters"
+}
+
+{
+	${ _level: 17 }
+	item .foramil_2_a: !QUEST_REWARD_HANDS{ _string: "Elven Handwraps" _icon: icon_cloth_hands_1 _wisdom: 2 _spirit: 1 _constitution: 1 _type: armor_cloth }
+	item .foramil_2_b: !QUEST_REWARD_HANDS{ _string: "Grasps of the Forest" _icon: icon_gloves_1 _strength: 2 _constitution: 1 _type: armor_plate }	
+	
+	ability .foramil_2_c:
+	{
+		string: "Leaves of Faerandor"
+		states: [ default in_combat ]
+		icon: icon_seaweed
+		direct_effect heal: { function: 32 }
+	}
+	
+	aura .foramil_2_c:
+	{
+		string: "Leaves of Faerandor"
+		description: "Has a 5% chance when struck in combat of restoring 32 health."
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_seaweed
+		
+		aura_effect combat_event_trigger: 
+		{ 
+			combat_event<target>: hit
+			combat_event_ability_mask: [ offensive melee ]
+			ability<target>: .foramil_2_c
+			probability: 5
+		}
+	}	
+	
+	item .foramil_2_c: !QUEST_REWARD_TRINKET{ _string: "Leaves of Faerandor" _icon: icon_seaweed _item_aura: .foramil_2_c }
+}
+
+
+quest .foramil_2:
+{
+	string: "Splinter Delivery"
+
+	text:
+	[
+		"Deliver the bundle of splinters to the small elven town down the road to the east."
+	]
+	
+	description: 
+	[
+		"So, uhm, maybe you can deliver the splinters to the one who requested them? Stays by the lake in the small elven town down the road to the east."
+	]
+
+	completion:
+	[
+		"Oh, didn't expect to see you here? Great! Just throw those splinters in the water and let me have look."
+	]
+
+	level: 17
+	prerequisites: [ .foramil_1 .pearly_a_2 ]
+	reward_xp_multiplier: 0.3
+	reward_cash_multiplier: 0.3
+	reward_one_item: [ .foramil_2_a .foramil_2_b ]
+	reward_all_items: [ .foramil_2_c ]
+}
+

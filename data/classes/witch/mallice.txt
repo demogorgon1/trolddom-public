@@ -13,6 +13,8 @@ talent_tree witch_malice:
 		talent witch_swarm: "E"
 		talent witch_curse_of_inaction: "F"
 		talent witch_chain_lightning: "G"
+		talent witch_blood_armor: "H"
+		talent witch_maliciousness: "I"
 		
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_left_arrow: "l"
@@ -27,9 +29,103 @@ talent_tree witch_malice:
 		"..d...d"
 		"DlC.E.F"
 		"....d.."
-		"....G.."
+		"..H.G.."
+		"..d...."
+		"..I...."
 	]
 	
+}
+
+###############################################################################
+# Maliciousness
+
+talent witch_maliciousness:
+{
+	string: "Maliciousness"
+	icon: icon_special_9
+	prerequisites: [ witch_blood_armor ]
+	talent_tree_points_required: 15
+	points:
+	[
+		{ ability: maliciousness }
+	]
+}
+
+cooldown maliciousness:
+{
+	duration: 1200
+}
+
+aura maliciousness:
+{
+	string: "Maliciousness"
+	type: buff
+	icon: icon_special_9
+	duration: 200
+	flags: [ unique ]
+	aura_effect cast_modifier: 
+	{ 
+		ability_flags: [ spell ]
+		cast_time_multiplier: 0.7
+	}	
+}
+
+ability maliciousness:
+{
+	string: "Maliciousness"
+	description: "Increases your spell casting speed by 30% for 20 seconds."
+	range: 1	
+	cooldowns: [ global maliciousness ]
+	flags: [ target_self ]
+	states: [ default in_combat ]
+	icon: icon_special_9
+	delay: 3
+	talent_tree: witch_malice
+		
+	direct_effect apply_aura:
+	{
+		aura: maliciousness
+	}
+}
+
+###############################################################################
+# Blood Armor
+
+talent witch_blood_armor:
+{
+	string: "Blood Armor"
+	icon: icon_blood	
+	talent_tree_points_required: 10
+	points:
+	[
+		{ aura: witch_blood_armor_1 }
+		{ aura: witch_blood_armor_2 }
+		{ aura: witch_blood_armor_3 }
+	]
+}
+
+aura witch_blood_armor_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your constitution by 3%."
+	stat_modifiers: { constitution: { add_percent: 3 } }
+}
+
+aura witch_blood_armor_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your constitution by 6%."
+	stat_modifiers: { constitution: { add_percent: 6 } }
+}
+
+aura witch_blood_armor_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your constitution by 9%."
+	stat_modifiers: { constitution: { add_percent: 9 } }
 }
 
 ###############################################################################
@@ -252,22 +348,34 @@ talent witch_improved_curse_of_corruption:
 		{ ability_modifier: improved_curse_of_corruption_1 }
 		{ ability_modifier: improved_curse_of_corruption_2 }
 		{ ability_modifier: improved_curse_of_corruption_3 }
+		{ ability_modifier: improved_curse_of_corruption_4 }
+		{ ability_modifier: improved_curse_of_corruption_5 }
 	]
 }
 
 ability_modifier improved_curse_of_corruption_1:
 {	
-	description: "Increases damage done by Curse of Corruption by 25%."	
+	description: "Increases damage done by Curse of Corruption by 16%."	
 }
 
 ability_modifier improved_curse_of_corruption_2:
 {	
-	description: "Increases damage done by Curse of Corruption by 35%."	
+	description: "Increases damage done by Curse of Corruption by 32%."	
 }
 
 ability_modifier improved_curse_of_corruption_3:
 {	
-	description: "Increases damage done by Curse of Corruption by 45%."	
+	description: "Increases damage done by Curse of Corruption by 48%."	
+}
+
+ability_modifier improved_curse_of_corruption_4:
+{	
+	description: "Increases damage done by Curse of Corruption by 64%."	
+}
+
+ability_modifier improved_curse_of_corruption_5:
+{	
+	description: "Increases damage done by Curse of Corruption by 80%."	
 }
 
 ###############################################################################
@@ -317,7 +425,7 @@ talent witch_doom:
 	string: "Doom"
 	icon: icon_doom
 	prerequisites: [ witch_malice_weakness ]
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability: doom }
@@ -364,7 +472,7 @@ talent witch_improved_doom:
 	string: "Improved Doom"
 	icon: icon_improved_doom
 	prerequisites: [ witch_doom ]
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability_modifier: improved_doom }
@@ -383,7 +491,7 @@ talent witch_swarm:
 {
 	string: "Swarm"
 	icon: icon_swarm
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability: swarm }
@@ -501,7 +609,7 @@ talent witch_curse_of_inaction:
 {
 	string: "Curse of Inaction"
 	icon: icon_curse_of_inaction
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	prerequisites: [ witch_improved_curse_of_corruption ]
 	points:
 	[
@@ -585,7 +693,7 @@ talent witch_chain_lightning:
 	string: "Chain Lightning"
 	icon: icon_chain_lightning
 	prerequisites: [ witch_swarm ]
-	talent_tree_points_required: 6
+	talent_tree_points_required: 10
 	points:
 	[
 		{ ability: chain_lightning }

@@ -1,0 +1,39 @@
+dialogue_screen .joanna_hewitt_dialogue_bob_gordon:
+{
+	text:
+	[
+		"Bob? Yes, of course. He's a bit of a loner, doesn't like company, so he moved into the old house out on Echo's Rest. It's a tiny island just off the coast out east. Follow the beach east and eventually you'll get to it."
+	]
+}
+
+dialogue_screen .joanna_hewitt_dialogue:
+{
+	text: 
+	[	
+		"Did you see my husband in the woods? What's taking him so long?"
+	]		
+	
+	options:
+	[
+		{ goto: .joanna_hewitt_dialogue_bob_gordon text: "Do you know where Bob Gordon resides?" requirement self<must_have_active_quest>: thalvaron_craig_borne_1 }
+	]	
+}
+
+dialogue_root .joanna_hewitt_dialogue:
+{
+	.joanna_hewitt_dialogue: { }
+}
+
+entity thalvaron_joanna_hewitt: !NPC
+{
+	_string: "Joanna Hewitt"
+	_dialogue_root: .joanna_hewitt_dialogue	
+	_sprite: woman_1
+	_sprite_dead: woman_1_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

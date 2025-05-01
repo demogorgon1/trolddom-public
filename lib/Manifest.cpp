@@ -1,6 +1,7 @@
 #include "Pcheader.h"
 
 #include <tpublic/Data/Ability.h>
+#include <tpublic/Data/AbilityList.h>
 #include <tpublic/Data/AbilityModifier.h>
 #include <tpublic/Data/Achievement.h>
 #include <tpublic/Data/AchievementCategory.h>
@@ -10,8 +11,10 @@
 #include <tpublic/Data/Class.h>
 #include <tpublic/Data/CliffStyle.h>
 #include <tpublic/Data/ContextHelp.h>
+#include <tpublic/Data/ControlPointState.h>
 #include <tpublic/Data/Cooldown.h>
 #include <tpublic/Data/CreatureType.h>
+#include <tpublic/Data/Critter.h>
 #include <tpublic/Data/Deity.h>
 #include <tpublic/Data/DialogueRoot.h>
 #include <tpublic/Data/DialogueScreen.h>
@@ -22,6 +25,7 @@
 #include <tpublic/Data/Expression.h>
 #include <tpublic/Data/Faction.h>
 #include <tpublic/Data/Item.h>
+#include <tpublic/Data/LootCooldown.h>
 #include <tpublic/Data/LootGroup.h>
 #include <tpublic/Data/LootTable.h>
 #include <tpublic/Data/Map.h>
@@ -34,6 +38,7 @@
 #include <tpublic/Data/MapSegmentConnector.h>
 #include <tpublic/Data/MapTrigger.h>
 #include <tpublic/Data/MinionMode.h>
+#include <tpublic/Data/Mount.h>
 #include <tpublic/Data/NameTemplate.h>
 #include <tpublic/Data/Noise.h>
 #include <tpublic/Data/NPCBehaviorState.h>
@@ -43,6 +48,7 @@
 #include <tpublic/Data/PlayerWorldType.h>
 #include <tpublic/Data/Profession.h>
 #include <tpublic/Data/Quest.h>
+#include <tpublic/Data/RealmBalance.h>
 #include <tpublic/Data/Route.h>
 #include <tpublic/Data/Sound.h>
 #include <tpublic/Data/Sprite.h>
@@ -53,6 +59,7 @@
 #include <tpublic/Data/TileModifier.h>
 #include <tpublic/Data/Wall.h>
 #include <tpublic/Data/WordGenerator.h>
+#include <tpublic/Data/WorldAura.h>
 #include <tpublic/Data/Zone.h>
 
 #include <tpublic/Document.h>
@@ -64,6 +71,7 @@ namespace tpublic
 	Manifest::Manifest()
 	{
 		RegisterDataContainer<Data::Ability>();
+		RegisterDataContainer<Data::AbilityList>();
 		RegisterDataContainer<Data::AbilityModifier>();
 		RegisterDataContainer<Data::Achievement>();
 		RegisterDataContainer<Data::AchievementCategory>();
@@ -73,8 +81,10 @@ namespace tpublic
 		RegisterDataContainer<Data::Class>();
 		RegisterDataContainer<Data::CliffStyle>();
 		RegisterDataContainer<Data::ContextHelp>();
+		RegisterDataContainer<Data::ControlPointState>();
 		RegisterDataContainer<Data::Cooldown>();
 		RegisterDataContainer<Data::CreatureType>();
+		RegisterDataContainer<Data::Critter>();
 		RegisterDataContainer<Data::Deity>();
 		RegisterDataContainer<Data::DialogueRoot>();
 		RegisterDataContainer<Data::DialogueScreen>();
@@ -85,6 +95,7 @@ namespace tpublic
 		RegisterDataContainer<Data::Expression>();
 		RegisterDataContainer<Data::Faction>();
 		RegisterDataContainer<Data::Item>();
+		RegisterDataContainer<Data::LootCooldown>();
 		RegisterDataContainer<Data::LootGroup>();
 		RegisterDataContainer<Data::LootTable>();
 		RegisterDataContainer<Data::Map>();
@@ -97,6 +108,7 @@ namespace tpublic
 		RegisterDataContainer<Data::MapSegmentConnector>();
 		RegisterDataContainer<Data::MapTrigger>();		
 		RegisterDataContainer<Data::MinionMode>();
+		RegisterDataContainer<Data::Mount>();
 		RegisterDataContainer<Data::NameTemplate>();
 		RegisterDataContainer<Data::Noise>();
 		RegisterDataContainer<Data::NPCBehaviorState>();
@@ -106,6 +118,7 @@ namespace tpublic
 		RegisterDataContainer<Data::PlayerWorldType>();
 		RegisterDataContainer<Data::Profession>();
 		RegisterDataContainer<Data::Quest>();
+		RegisterDataContainer<Data::RealmBalance>();
 		RegisterDataContainer<Data::Route>();
 		RegisterDataContainer<Data::Sound>();
 		RegisterDataContainer<Data::Sprite>();
@@ -116,6 +129,7 @@ namespace tpublic
 		RegisterDataContainer<Data::TileModifier>();
 		RegisterDataContainer<Data::Wall>();
 		RegisterDataContainer<Data::WordGenerator>();
+		RegisterDataContainer<Data::WorldAura>();
 		RegisterDataContainer<Data::Zone>();				
 	}
 
@@ -154,9 +168,11 @@ namespace tpublic
 		m_wordList.ToStream(aStream);
 		m_worshipMetrics.ToStream(aStream);
 		m_miscMetrics.ToStream(aStream);
+		m_reputationMetrics.ToStream(aStream);
 		m_defaultSoundEffects.ToStream(aStream);
 		m_tileLayering.ToStream(aStream);
 		aStream->WriteOptionalObjectPointer(m_changelog);
+		aStream->WriteOptionalObjectPointer(m_changelogOld);
 		aStream->WriteUInt(m_baseTileBorderPatternSpriteId);
 	}
 
@@ -191,11 +207,15 @@ namespace tpublic
 			return false;
 		if (!m_miscMetrics.FromStream(aStream))
 			return false;
+		if (!m_reputationMetrics.FromStream(aStream))
+			return false;
 		if (!m_defaultSoundEffects.FromStream(aStream))
 			return false;
 		if (!m_tileLayering.FromStream(aStream))
 			return false;
 		if(!aStream->ReadOptionalObjectPointer(m_changelog))
+			return false;
+		if (!aStream->ReadOptionalObjectPointer(m_changelogOld))
 			return false;
 		if(!aStream->ReadUInt(m_baseTileBorderPatternSpriteId))
 			return false;

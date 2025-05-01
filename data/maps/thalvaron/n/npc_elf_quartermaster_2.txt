@@ -1,0 +1,38 @@
+dialogue_screen .elf_quartermaster_2_vendor:
+{
+	sell token_of_victory_mana_potion: !TOKEN_OF_VICTORY_PRICE{ _count: 1 }
+	sell formula_enchant_weapon_mending: !TOKEN_OF_VICTORY_PRICE{ _count: 12 }	
+}
+
+dialogue_screen .elf_quartermaster_2_dialogue:
+{
+	text: 
+	[	
+		"How are you doing?"
+	]
+	
+	options:
+	[
+		{ goto: .elf_quartermaster_2_vendor text: "Let me browse your goods." }
+	]
+}
+
+dialogue_root .elf_quartermaster_2_dialogue:
+{
+	.elf_quartermaster_2_dialogue: { }
+}
+
+entity thalvaron_elf_quartermaster_2: !NPC
+{
+	_string: "Frill Argon"
+	_guild_name: "Quartermaster"
+	_dialogue_root: .elf_quartermaster_2_dialogue	
+	_sprite: elf_14
+	_sprite_dead: elf_14_dead	
+	_level: 20
+	_faction: children_of_the_moon
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

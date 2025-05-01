@@ -1,5 +1,8 @@
 #pragma once
 
+#include "IReader.h"
+#include "IWriter.h"
+
 namespace tpublic
 {
 
@@ -8,8 +11,7 @@ namespace tpublic
 		struct Ability;
 	}
 
-	class IReader;
-	class IWriter;
+	class AbilityModifierList;
 	class Manifest;
 
 	class Cooldowns
@@ -107,24 +109,25 @@ namespace tpublic
 						~Cooldowns();		
 
 		bool			Update(
-							int32_t					aTick);
+							int32_t						aTick);
 		void			AddAbility(
-							const Manifest*			aManifest,
-							const Data::Ability*	aAbility,
-							int32_t					aTick,
-							float					aCooldownModifier);
+							const Manifest*				aManifest,
+							const Data::Ability*		aAbility,
+							int32_t						aTick,
+							float						aCooldownModifier,
+							const AbilityModifierList*	aAbilityModifierList);
 		void			AddCooldown(
-							uint32_t				aCooldownId,
-							int32_t					aDuration,
-							int32_t					aTick);
+							uint32_t					aCooldownId,
+							int32_t						aDuration,
+							int32_t						aTick);
 		bool			IsAbilityOnCooldown(
-							const Data::Ability*	aAbility) const;
+							const Data::Ability*		aAbility) const;
 		const Entry*	GetCooldown(
-							uint32_t				aCooldownId) const;
+							uint32_t					aCooldownId) const;
 		void			ToStream(
-							IWriter*				aStream) const;
+							IWriter*					aStream) const;
 		bool			FromStream(
-							IReader*				aStream);
+							IReader*					aStream);
 
 		// Public data
 		std::vector<Entry>		m_entries;

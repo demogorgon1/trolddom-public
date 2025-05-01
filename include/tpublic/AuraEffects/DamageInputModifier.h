@@ -34,40 +34,43 @@ namespace tpublic
 				aSource->ForEachChild([&](
 					const SourceNode* aChild)
 				{
-					if(aChild->m_name == "type_mask")
+					if (!FromSourceBase(aChild))
 					{
-						aChild->GetArray()->ForEachChild([&](
-							const SourceNode* aFlag)
+						if (aChild->m_name == "type_mask")
 						{
-							if(aFlag->IsIdentifier("all"))
-							{
-								m_typeMask = UINT32_MAX;
-							}
-							else
-							{
-								DirectEffect::DamageType damageType = DirectEffect::StringToDamageType(aFlag->GetIdentifier());
-								m_typeMask |= 1 << (uint32_t)damageType;
-							}
-						});
-					}
-					else if (aChild->m_name == "multiplier")
-					{
-						float f = aChild->GetFloat();
-						m_multiplierNumerator = (uint32_t)(f * 1000.0f);
-						m_multiplierDenominator = 1000;
-					}
-					else if (aChild->m_name == "multiplier_num")
-					{
-						m_multiplierNumerator = aChild->GetInt32();
-					}
-					else if (aChild->m_name == "multiplier_denom")
-					{
-						m_multiplierDenominator = aChild->GetInt32();
-						TP_VERIFY(m_multiplierDenominator != 0, aChild->m_debugInfo, "Multiplier denominator can't be zero.");
-					}
-					else
-					{
-						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+							aChild->GetArray()->ForEachChild([&](
+								const SourceNode* aFlag)
+								{
+									if (aFlag->IsIdentifier("all"))
+									{
+										m_typeMask = UINT32_MAX;
+									}
+									else
+									{
+										DirectEffect::DamageType damageType = DirectEffect::StringToDamageType(aFlag->GetIdentifier());
+										m_typeMask |= 1 << (uint32_t)damageType;
+									}
+								});
+						}
+						else if (aChild->m_name == "multiplier")
+						{
+							float f = aChild->GetFloat();
+							m_multiplierNumerator = (uint32_t)(f * 1000.0f);
+							m_multiplierDenominator = 1000;
+						}
+						else if (aChild->m_name == "multiplier_num")
+						{
+							m_multiplierNumerator = aChild->GetInt32();
+						}
+						else if (aChild->m_name == "multiplier_denom")
+						{
+							m_multiplierDenominator = aChild->GetInt32();
+							TP_VERIFY(m_multiplierDenominator != 0, aChild->m_debugInfo, "Multiplier denominator can't be zero.");
+						}
+						else
+						{
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+						}
 					}
 				});
 			}

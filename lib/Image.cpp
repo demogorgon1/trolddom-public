@@ -447,16 +447,17 @@ namespace tpublic
 
 		const char* p = buffer;
 		uint32_t xPosition = aX;
+		uint32_t yPosition = aY;
 		RGBA* out = GetData();
 
 		while(*p != '\0')
-		{
+		{			
 			for(uint32_t y = 0; y < SmallPixelFont::YSIZE; y++)
 			{
 				for (uint32_t x = 0; x < SmallPixelFont::XSIZE; x++)
 				{
 					uint32_t xImage = xPosition + x;
-					uint32_t yImage = aY + y;
+					uint32_t yImage = yPosition + y;
 
 					if(xImage < m_width && yImage < m_height)
 					{
@@ -490,6 +491,12 @@ namespace tpublic
 			}
 			p++;
 			xPosition += SmallPixelFont::XSIZE;
+
+			if(xPosition + SmallPixelFont::XSIZE > m_width)
+			{
+				xPosition = aX;
+				yPosition += SmallPixelFont::YSIZE;
+			}
 		}
 	}
 

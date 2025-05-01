@@ -23,7 +23,7 @@ namespace tpublic
 			uint32_t					aQuestId)
 		{
 			const Components::CompletedQuests* completedQuests = aPlayerEntity->GetComponent<Components::CompletedQuests>();
-			if (completedQuests->m_questIds.HasValue(aQuestId))
+			if (completedQuests->HasQuest(aQuestId))
 				return ID_COMPLETED;
 				
 			const Components::ActiveQuests* activeQuests = aPlayerEntity->GetComponent<Components::ActiveQuests>();
@@ -37,7 +37,7 @@ namespace tpublic
 
 			for(uint32_t prerequisiteQuestId : quest->m_prerequisites)
 			{
-				if(!completedQuests->m_questIds.HasValue(prerequisiteQuestId))
+				if(!completedQuests->HasQuest(prerequisiteQuestId))
 					return ID_UNAVAILABLE;
 			}
 

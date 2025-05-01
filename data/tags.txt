@@ -1,6 +1,7 @@
 tag american_forename_male: { transferable: false }
 tag american_forename_female: { transferable: false }
 tag american_surname: { transferable: false }
+tag dwarf_forename: { transferable: false }
 tag tolkienesque_forename: { transferable: false }
 tag elven_placename: { transferable: false }
 tag human_townname: { transferable: false }
@@ -28,6 +29,9 @@ tag human: { }
 tag demon: { }
 tag goblin: { }
 tag undead: { }
+tag skeleton: { }
+tag crab_monster: { }
+tag dragon: { }
 tag boss: { }
 tag minor_boss: { }
 tag major_boss: { }
@@ -36,6 +40,9 @@ tag melee: { }
 tag healer: { }
 tag ranged: { }
 tag player_world_creature: { }
+tag reagent: { }
+tag blacksmithing: { }
+tag tailoring: { }
 
 # Ability tags
 tag ability_small_heal_single_target: {}
@@ -53,6 +60,8 @@ tag weapon_2h_sword: {}
 tag weapon_2h_mace: {}
 tag weapon_2h_axe: {}
 tag weapon_2h_staff: {}
+tag ranged_crossbow: {}
+tag ranged_bow: {}
 tag shield: {}
 tag armor_cloth: {}
 tag armor_mail: {}

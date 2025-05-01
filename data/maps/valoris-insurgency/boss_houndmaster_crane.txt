@@ -1,0 +1,200 @@
+############################################################
+# Loot
+
+loot_group .houndmaster_crane: {}
+
+loot_table .houndmaster_crane:
+{
+	slots:
+	[
+		{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
+		  map_message valoris_insurgency: "Houndmaster Crane will not drop Token of Victory for {}." } } }
+		{ possibility: { loot_group: .houndmaster_crane  } }			
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+{
+	${
+		_rarity: rare
+		_level: 19
+		_loot_group: .houndmaster_crane
+	}
+	
+	item valoris_insurgency_7: !BOSS_DROP_BOW
+	{
+		_string: "Bow of the Houndmaster"
+		_icon: icon_bow_2
+		_dexterity: 3
+		_constitution: 1
+	}
+	
+	item valoris_insurgency_8: !BOSS_DROP_HEAD
+	{
+		_string: "Revenant Skullguard"
+		_type: armor_plate
+		_icon: icon_head_4
+		_strength: 2
+		_constitution: 1
+	}
+	
+	item valoris_insurgency_9: !BOSS_DROP_HEAD
+	{
+		_string: "Hood of the Disciple"
+		_type: armor_cloth
+		_icon: icon_head_11
+		_constitution: 1
+		_dexterity: 3
+		_strength: 2
+	}
+	
+	item valoris_insurgency_10: !BOSS_DROP_WAIST
+	{
+		_string: "Gracious Girdle"
+		_type: armor_cloth
+		_icon: icon_cloth_belt_2
+		_wisdom: 2		
+		_spirit: 1		
+		_healing: 3
+	}
+	
+	item valoris_insurgency_11: !BOSS_DROP_CHEST
+	{
+		_string: "Rebel's Chestguard"
+		_icon: icon_chest_2
+		_type: armor_plate
+		_constitution: 2
+		_strength: 1
+		_budget_bias: -10
+		_parry: 1
+	}
+	
+	item valoris_insurgency_12: !BOSS_DROP_BACK
+	{
+		_string: "Spellpiercing Cloak"
+		_icon: icon_cape_1
+		_spirit: 1
+		_wisdom: 2
+		_budget_bias: -10
+		_spell_crit: 1
+	}
+}
+
+############################################################
+# Boss
+
+zone .houndmaster_crane:
+{
+}
+
+encounter .houndmaster_crane:
+{
+	main_entities: [ valoris_insurgency_houndmaster_crane ]	
+	
+	spawn:
+	{
+		map_entity_spawn: .houndmaster_crane_spawn
+		possible_entities: [ .houndmaster_crane_spawn ]
+		entity_count: 1
+		trigger_count: 1
+		
+		condition<entity_health_less_than>:
+		{
+			id: valoris_insurgency_houndmaster_crane
+			value: 90			
+		}
+	}		
+}
+
+entity valoris_insurgency_houndmaster_crane: !NPC 
+{ 
+	_string: "Houndmaster Crane" 
+	_level: 19
+	_elite: true
+	_faction: rebels 
+	_sprite: rebel_7
+	_sprite_dead: rebel_7_dead 
+	_weapon_damage: 0.8
+	_resource_health: 3
+	_loot_table: .houndmaster_crane
+	_creature_type: humanoid
+	_encounter: .houndmaster_crane
+	_zone: .houndmaster_crane
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+
+	_abilities: 
+	[
+		{
+			id: npc_shoot
+			target: random_player
+		}
+	
+		{
+			id: npc_attack
+		}
+	]	
+	
+	_in_combat_barks:
+	[
+		{ type: yell text: "You won't get away with this!" flags: [ no_chat_bubble ] }
+	]			
+	
+	_dead_barks:
+	[
+		{ type: say text: "Please... No!" flags: [ no_chat_bubble ] }
+	]	
+}
+
+map_trigger .houndmaster_crane_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .houndmaster_crane:
+{
+	entity valoris_insurgency_houndmaster_crane: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .houndmaster_crane_killed
+		}
+	}
+}
+
+entity .houndmaster_crane_spawn: !NPC
+{
+	_string: "Hound"
+	_level: 19
+	_faction: monsters 
+	_sprite: wolf_1
+	_elite: true
+	_sprite_dead: wolf_1_dead
+	_weapon_damage: 1.6
+	_resource_health: 2.4
+	_creature_type: beast
+	_encounter: .houndmaster_crane
+	_zone: .houndmaster_crane	
+	_out_of_zone_action: { use: enrage }
+	_inactive_encounter_despawn: true
+	
+	_abilities: 
+	[
+		{
+			id: npc_rend
+		}
+	
+		{
+			id: npc_attack
+		}
+	]		
+}
+
+map_entity_spawn .houndmaster_crane_spawn:
+{
+}
+

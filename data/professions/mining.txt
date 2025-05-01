@@ -18,12 +18,12 @@ ${
 		_item_string: "Verdigrisite"
 		_loot_groups: [ .mining_verdigrisite world_drops_uncommon ]
 		_rarity: uncommon
-		_item_level: 2
+		_item_level: 10
 		_value_multiplier: 4
 	}
 
 	loot_group .mining_verdigrisite: { }
-	item item_verdigrisite: !GATHER_ITEM { }
+	item item_verdigrisite: !GATHER_ITEM { _tags: [ reagent ] }
 }
 
 #############################################################################
@@ -34,12 +34,12 @@ ${
 		_item_string: "Roseate"
 		_loot_groups: [ .mining_roseate world_drops_uncommon ]
 		_rarity: uncommon
-		_item_level: 3
+		_item_level: 10
 		_value_multiplier: 5
 	}
 
 	loot_group .mining_roseate: { }
-	item item_roseate: !GATHER_ITEM { }
+	item item_roseate: !GATHER_ITEM { _tags: [ reagent ] }
 }
 
 #############################################################################
@@ -50,12 +50,12 @@ ${
 		_item_string: "Azure Mirage Stone"
 		_loot_groups: [ .mining_azure_mirage_stone world_drops_uncommon ]
 		_rarity: uncommon
-		_item_level: 6	
+		_item_level: 10	
 		_value_multiplier: 6
 	}
 
 	loot_group .mining_azure_mirage_stone: { }
-	item item_azure_mirage_stone: !GATHER_ITEM { }
+	item item_azure_mirage_stone: !GATHER_ITEM { _tags: [ reagent ] }
 }
 
 #############################################################################
@@ -71,7 +71,7 @@ ${
 	}
 
 	loot_group .mining_amethystine: { }
-	item item_amethystine: !GATHER_ITEM { }
+	item item_amethystine: !GATHER_ITEM { _tags: [ reagent ] }
 }
 
 #############################################################################
@@ -85,6 +85,7 @@ ${
 		_loot_table: .mining_copper
 		_profession_skill: 0
 		_sprite: copper_vein
+		_item_level: 1
 	}
 
 	loot_group .mining_copper: { }
@@ -111,6 +112,7 @@ ${
 		_loot_table: .mining_iron
 		_profession_skill: 20
 		_sprite: iron_vein
+		_item_level: 4
 	}
 
 	loot_group .mining_iron: { }
@@ -124,4 +126,113 @@ ${
 	}
 	item item_iron_ore: !GATHER_ITEM { }
 	entity mining_iron_vein: !GATHER_ENTITY { }
+}
+
+#############################################################################
+# Azuryte
+{
+	${
+		_icon: icon_azuryte_ore
+		_item_string: "Azuryte Ore"
+		_entity_string: "Azuryte Vein"
+		_loot_groups: [ .mining_azuryte ]
+		_loot_table: .mining_azuryte
+		_profession_skill: 30
+		_sprite: azuryte_vein
+		_item_level: 11
+	}
+
+	loot_group .mining_azuryte: { }
+	loot_table .mining_azuryte: 
+	{ 
+		slots: 
+		[ 
+			{ possibility: { loot_group: .mining_azuryte } } 
+			{ possibility: { weight: 30 } possibility: { weight: 2 loot_group: .mining_azure_mirage_stone } possibility: { weight: 1 loot_group: .mining_amethystine } } 
+		] 
+	}
+	item item_azuryte_ore: !GATHER_ITEM { }
+	entity mining_azuryte_vein: !GATHER_ENTITY { }
+}
+
+#############################################################################
+# Gold
+{
+	${
+		_icon: icon_gold_ore
+		_item_string: "Gold Ore"
+		_entity_string: "Gold Vein"
+		_loot_groups: [ .mining_gold ]
+		_loot_table: .mining_gold
+		_profession_skill: 40
+		_sprite: gold_vein
+		_item_level: 4
+		_value_multiplier: 8
+	}
+
+	loot_group .mining_gold: { }
+	loot_table .mining_gold: 
+	{ 
+		slots: 
+		[ 
+			{ possibility: { loot_group: .mining_gold } } 
+			{ possibility: { weight: 30 } possibility: { weight: 2 loot_group: .mining_azure_mirage_stone } possibility: { weight: 1 loot_group: .mining_amethystine } } 
+		] 
+	}
+	item item_gold_ore: !GATHER_ITEM { }
+	entity mining_gold_vein: !GATHER_ENTITY { }
+}
+
+#############################################################################
+# Mithril
+{
+	${
+		_icon: icon_mithril_ore
+		_item_string: "Mithril Ore"
+		_entity_string: "Mithril Vein"
+		_loot_groups: [ .mining_mithril ]
+		_loot_table: .mining_mithril
+		_profession_skill: 60
+		_sprite: mithril_vein
+		_item_level: 14
+	}
+
+	loot_group .mining_mithril: { }
+	loot_table .mining_mithril: 
+	{ 
+		slots: 
+		[ 
+			{ possibility: { loot_group: .mining_mithril } } 
+			{ possibility: { weight: 30 } possibility: { weight: 2 loot_group: .mining_azure_mirage_stone } possibility: { weight: 1 loot_group: .mining_amethystine } } 
+		] 
+	}
+	item item_mithril_ore: !GATHER_ITEM { }
+	entity mining_mithril_vein: !GATHER_ENTITY { }
+}
+
+#############################################################################
+# Brontium
+{
+	${
+		_icon: icon_brontium_ore
+		_item_string: "Brontium Ore"
+		_entity_string: "Brontium Vein"
+		_loot_groups: [ .mining_brontium ]
+		_loot_table: .mining_brontium
+		_profession_skill: 80
+		_sprite: brontium_vein
+		_item_level: 17
+	}
+
+	loot_group .mining_brontium: { }
+	loot_table .mining_brontium: 
+	{ 
+		slots: 
+		[ 
+			{ possibility: { loot_group: .mining_brontium } } 
+			{ possibility: { weight: 30 } possibility: { weight: 2 loot_group: .mining_azure_mirage_stone } possibility: { weight: 1 loot_group: .mining_amethystine } } 
+		] 
+	}
+	item item_brontium_ore: !GATHER_ITEM { }
+	entity mining_brontium_vein: !GATHER_ENTITY { }
 }

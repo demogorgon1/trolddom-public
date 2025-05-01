@@ -138,6 +138,7 @@ map dungeon_1:
 	level: 6
 	max_players: 5
 	max_minions: 1
+	openable_elite: true
 	
 	layers:
 	[

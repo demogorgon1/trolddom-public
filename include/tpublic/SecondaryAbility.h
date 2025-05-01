@@ -41,7 +41,7 @@ namespace tpublic
 		{
 			TP_VERIFY(aSource->m_annotation, aSource->m_debugInfo, "Missing target annotation.");
 			m_target = SourceToTarget(aSource->m_annotation.get());
-			m_abilityId = aSource->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ABILITY, aSource->GetIdentifier());
+			m_abilityId = aSource->GetId(DataType::ID_ABILITY);
 		}
 
 		void
@@ -63,10 +63,10 @@ namespace tpublic
 			return true;
 		}
 
-		EntityInstance*
+		const EntityInstance*
 		ResolveTarget(
-			EntityInstance*			aSelf,
-			EntityInstance*			aTarget) const
+			const EntityInstance*	aSelf,
+			const EntityInstance*	aTarget) const
 		{
 			switch(m_target)
 			{

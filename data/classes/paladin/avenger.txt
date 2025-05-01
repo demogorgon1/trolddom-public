@@ -12,6 +12,9 @@ talent_tree paladin_avenger:
 		talent paladin_divine_grip: "D"
 		talent paladin_relentless_assault: "E"
 		talent paladin_holy_storm: "F"
+		talent paladin_piercing_strike: "G"
+		talent paladin_holy_strength: "H"
+		talent paladin_intervention_of_wrath: "I"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_down: "|"
 	}
@@ -21,12 +24,239 @@ talent_tree paladin_avenger:
 		"A...B"
 		"....d"
 		"D.E.C"
-		"..d.."
-		"..F.."
+		"d.d.."
+		"G.F.H"
+		"....d"
+		"....I"
 	]
 
 }
 
+###############################################################################
+# Holy Strength
+
+talent paladin_holy_strength:
+{
+	string: "Holy Strength"
+	icon: icon_strength	
+	talent_tree_points_required: 10
+	points:
+	[
+		{ aura: paladin_holy_strength_1 }
+		{ aura: paladin_holy_strength_2 }
+		{ aura: paladin_holy_strength_3 }
+		{ aura: paladin_holy_strength_4 }
+		{ aura: paladin_holy_strength_5 }
+	]
+}
+
+aura paladin_holy_strength_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your strength by 2%."
+	stat_modifiers: { strength: { add_percent: 2 } }
+}
+
+aura paladin_holy_strength_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your strength by 4%."
+	stat_modifiers: { strength: { add_percent: 4 } }
+}
+
+aura paladin_holy_strength_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your strength by 6%."
+	stat_modifiers: { strength: { add_percent: 6 } }
+}
+
+aura paladin_holy_strength_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your strength by 8%."
+	stat_modifiers: { strength: { add_percent: 8 } }
+}
+
+aura paladin_holy_strength_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your strength by 10%."
+	stat_modifiers: { strength: { add_percent: 10 } }
+}
+
+###############################################################################
+# Intervention of Wrath
+
+talent paladin_intervention_of_wrath:
+{
+	string: "Intervention of Wrath"
+	icon: icon_special_1
+	prerequisites: [ paladin_holy_strength ]	
+	talent_tree_points_required: 15
+	points:
+	[
+		{ ability: intervention_of_wrath }
+	]
+}
+
+cooldown intervention_of_wrath:
+{
+	duration: 1200
+}
+
+ability intervention_of_wrath_debuff_tick:
+{
+	string: "Intervention of Wrath"
+	icon: icon_special_1		
+	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]
+	
+	direct_effect damage:
+	{
+		damage_type: holy
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.080 b: [ [ 1 6 ] [ 10 13 ] [ 20 28 ] ] }						
+	}
+}
+
+aura intervention_of_wrath_debuff:
+{
+	string: "Intervention of Wrath"
+	description: "Taking holy damage."
+	flags: [ unique magic ]
+	duration: based_on_effects
+	type: buff
+	icon: icon_special_1	
+	
+	aura_effect repeat: 
+	{ 
+		update_interval: 10
+		update_count: 8
+		ability: intervention_of_wrath_debuff_tick
+	}	
+}
+
+!define PALADIN_AVENGER_APPLY_INTERVENTION_OF_WRATH_DEBUFF
+{
+	requirement self<must_have_aura>: intervention_of_wrath
+	aura: intervention_of_wrath_debuff
+}
+
+aura intervention_of_wrath:
+{
+	string: "Intervention of Wrath"
+	flags: [ unique magic ]
+	duration: 200
+	type: buff
+	icon: icon_special_1	
+}
+
+ability intervention_of_wrath:
+{
+	string: "Intervention of Wrath"
+	description: "Your physical attacks cause target to take additional holy damage over 8 seconds. Effect lasts 20 seconds."
+	range: 1	
+	cooldowns: [ global intervention_of_wrath ]
+	flags: [ spell target_self ]
+	states: [ default in_combat ]
+	icon: icon_special_1
+	delay: 3
+	resource_cost mana: 20
+	talent_tree: paladin_avenger
+	
+	direct_effect apply_aura:
+	{
+		aura: intervention_of_wrath
+	}	
+}
+
+###############################################################################
+# Piercing Strike
+
+talent paladin_piercing_strike:
+{
+	string: "Piercing Strike"
+	icon: icon_special_2
+	prerequisites: [ paladin_divine_grip ]	
+	talent_tree_points_required: 10
+	points:
+	[
+		{ ability: piercing_strike }
+	]
+}
+
+cooldown piercing_strike:
+{
+	duration: 60
+}
+
+particle_system piercing_strike:
+{
+	particle:
+	{
+		sprites: [ effect_melee_swing_0 effect_melee_swing_1 effect_melee_swing_2 effect_melee_swing_3 effect_melee_swing_4 ]
+		flags: [ attached face_target no_loop blend_add ]
+		sprite_interval: 33
+		duration: 165
+		count: 1	
+		alpha: 0.4
+		color_mod: [ 255 255 0 ]
+	}
+}
+
+ability piercing_strike_secondary:
+{
+	string: "Piercing Strike"
+	range: 2	
+	flags: [ spell melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+	states: [ default in_combat ]
+	icon: icon_special_2
+	delay: 3
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 10 ] [ 10 20 ] [ 20 40 ] ] }
+	}		
+	
+	direct_effect apply_aura: !PALADIN_AVENGER_APPLY_INTERVENTION_OF_WRATH_DEBUFF{}
+}
+
+ability piercing_strike:
+{
+	string: "Piercing Strike"
+	description: "Deals $damage$ damage to target and any hostile target behind it."
+	range: 1	
+	cooldowns: [ global piercing_strike ]
+	flags: [ spell melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+	states: [ default in_combat ]
+	icon: icon_special_2
+	delay: 3
+	resource_cost mana: 15
+	talent_tree: paladin_avenger
+	melee_particle_system: piercing_strike	
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 10 ] [ 10 20 ] [ 20 40 ] ] }
+	}	
+	
+	direct_effect trigger_ability:
+	{
+		ability: piercing_strike_secondary
+		target: behind
+	}	
+	
+	direct_effect apply_aura: !PALADIN_AVENGER_APPLY_INTERVENTION_OF_WRATH_DEBUFF{}
+}
 ###############################################################################
 # Exorcism
 
@@ -128,6 +358,8 @@ talent paladin_parry:
 		{ aura: paladin_parry_1 }
 		{ aura: paladin_parry_2 }
 		{ aura: paladin_parry_3 }
+		{ aura: paladin_parry_4 }
+		{ aura: paladin_parry_5 }
 	]
 }
 
@@ -153,6 +385,22 @@ aura paladin_parry_3:
 	type: hidden
 	description: "Increases your chance to parry by 6%."
 	stat_modifiers: { parry_chance: { add: 6 } }
+}
+
+aura paladin_parry_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your chance to parry by 8%."
+	stat_modifiers: { parry_chance: { add: 8 } }
+}
+
+aura paladin_parry_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your chance to parry by 10%."
+	stat_modifiers: { parry_chance: { add: 10 } }
 }
 
 ###############################################################################
@@ -263,7 +511,7 @@ talent paladin_oath_of_retribution:
 	string: "Oath of Retribution"
 	icon: icon_oath_of_retribution
 	prerequisites: [ paladin_blessing_of_war ]	
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability: oath_of_retribution }
@@ -308,12 +556,14 @@ talent paladin_divine_grip:
 	string: "Divine Grip"
 	icon: icon_divine_grip
 	prerequisites: [ ]	
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ aura: paladin_divine_grip_1 }
 		{ aura: paladin_divine_grip_2 }
 		{ aura: paladin_divine_grip_3 }
+		{ aura: paladin_divine_grip_4 }
+		{ aura: paladin_divine_grip_5 }
 	]
 }
 
@@ -321,16 +571,29 @@ aura paladin_divine_grip_1:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases damage done with two-handed weapons by 3%."
+	description: "Increases damage done with two-handed weapons by 2%."
 	aura_effect damage_output_modifier: 
 	{ 
 		type_mask: [ physical ]
 		requirement self<must_have_equipped_item_type_flags>: { id: [ two_handed ] }
-		multiplier: 1.03
+		multiplier: 1.02
 	}
 }
 
 aura paladin_divine_grip_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases damage done with two-handed weapons by 4%."
+	aura_effect damage_output_modifier: 
+	{ 
+		type_mask: [ physical ]
+		requirement self<must_have_equipped_item_type_flags>: { id: [ two_handed ] }
+		multiplier: 1.04
+	}
+}
+
+aura paladin_divine_grip_3:
 {
 	flags: [ persist_in_death ]
 	type: hidden
@@ -343,16 +606,29 @@ aura paladin_divine_grip_2:
 	}
 }
 
-aura paladin_divine_grip_3:
+aura paladin_divine_grip_4:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases damage done with two-handed weapons by 9%."
+	description: "Increases damage done with two-handed weapons by 8%."
 	aura_effect damage_output_modifier: 
 	{ 
 		type_mask: [ physical ]
 		requirement self<must_have_equipped_item_type_flags>: { id: [ two_handed ] }
-		multiplier: 1.09
+		multiplier: 1.08
+	}
+}
+
+aura paladin_divine_grip_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases damage done with two-handed weapons by 10%."
+	aura_effect damage_output_modifier: 
+	{ 
+		type_mask: [ physical ]
+		requirement self<must_have_equipped_item_type_flags>: { id: [ two_handed ] }
+		multiplier: 1.10
 	}
 }
 
@@ -364,7 +640,7 @@ talent paladin_relentless_assault:
 	string: "Relentless Assault"
 	icon: icon_relentless_assault
 	prerequisites: [ ]	
-	talent_tree_points_required: 3
+	talent_tree_points_required: 5
 	points:
 	[
 		{ aura: paladin_relentless_assault }
@@ -398,6 +674,7 @@ ability paladin_relentless_assault_trigger:
 aura paladin_relentless_assault_buff:
 {
 	string: "Relentless Assault"
+	description: "Divine Smite, Flash Heal, or Judgement are instant cast."
 	type: buff
 	icon: icon_relentless_assault
 	duration: 100
@@ -420,7 +697,7 @@ talent paladin_holy_storm:
 	string: "Holy Storm"
 	icon: icon_holy_storm
 	prerequisites: [ paladin_relentless_assault ]	
-	talent_tree_points_required: 6
+	talent_tree_points_required: 10
 	points:
 	[
 		{ ability: holy_storm }
@@ -449,7 +726,7 @@ particle_system holy_storm:
 ability holy_storm:
 {
 	string: "Holy Storm"
-	description: "Inflicts $damage$ damage on up to 3 adjacent enemies."
+	description: "Inflicts $damage$ holy damage on up to 3 adjacent enemies."
 	range: 1	
 	cooldowns: [ global holy_storm ]
 	flags: [ spell melee target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
@@ -511,7 +788,9 @@ ability reckoning:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 8 ] [ 10 16 ] [ 20 32 ] ] }
+		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 12 ] [ 10 24 ] [ 20 48 ] ] }
 	}
+	
+	direct_effect apply_aura: !PALADIN_AVENGER_APPLY_INTERVENTION_OF_WRATH_DEBUFF{}
 }
 

@@ -8,13 +8,19 @@ namespace tpublic
 	namespace DataErrorHandling
 	{
 
-		ErrorCallback g_errorCallback;
+		std::vector<ErrorCallback> g_errorCallbackStack;
 
 		void		
-		SetErrorCallback(
+		PushErrorCallback(
 			ErrorCallback					aErrorCallback)
 		{
-			g_errorCallback = aErrorCallback;
+			g_errorCallbackStack.push_back(aErrorCallback);
+		}
+
+		void		
+		PopErrorCallback()
+		{
+			g_errorCallbackStack.pop_back();
 		}
 		
 		void		
@@ -23,8 +29,10 @@ namespace tpublic
 			const char*						aFormat,
 			...)
 		{
-			if(g_errorCallback)
+			if(g_errorCallbackStack.size() > 0)
 			{
+				ErrorCallback& errorCallback = g_errorCallbackStack[g_errorCallbackStack.size() - 1];
+
 				char buffer1[1024];
 				TP_STRING_FORMAT_VARARGS(buffer1, sizeof(buffer1), aFormat);
 
@@ -32,11 +40,11 @@ namespace tpublic
 				if (aDebugInfo.has_value())
 				{
 					TP_STRING_FORMAT(buffer2, sizeof(buffer2), "[%s:%u] %s", aDebugInfo.value().m_file.c_str(), aDebugInfo.value().m_line, buffer1);
-					g_errorCallback(buffer2);
+					errorCallback(buffer2);
 				}
 				else
 				{
-					g_errorCallback(buffer1);
+					errorCallback(buffer1);
 				}
 			}
 
@@ -70,11 +78,13 @@ namespace tpublic
 			const char*						aFormat,
 			...)
 		{
-			if(g_errorCallback)
+			if(g_errorCallbackStack.size() > 0)
 			{
+				ErrorCallback& errorCallback = g_errorCallbackStack[g_errorCallbackStack.size() - 1];
+
 				char buffer[1024];
 				TP_STRING_FORMAT_VARARGS(buffer, sizeof(buffer), aFormat);
-				g_errorCallback(buffer);
+				errorCallback(buffer);
 			}
 
 			exit(EXIT_FAILURE);				

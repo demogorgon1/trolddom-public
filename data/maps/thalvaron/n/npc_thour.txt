@@ -1,0 +1,15 @@
+dialogue_screen .thour_vendor: !TRADE_SUPPLIES{}
+
+entity thalvaron_thour: !NPC
+{
+	_string: "Thour"
+	_guild_name: "Trade Supplies"
+	_sprite: dwarf_18
+	_sprite_dead: dwarf_18_dead
+	_level: 20
+	_faction: npcs
+	_dialogue_root: $dialogue_root { .thour_vendor: { } } 
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}

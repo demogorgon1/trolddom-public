@@ -12,6 +12,7 @@
 #include "PlayerComponents.h"
 #include "ProfessionMetrics.h"
 #include "QuestMetrics.h"
+#include "ReputationMetrics.h"
 #include "TileLayering.h"
 #include "WordList.h"
 #include "WorshipMetrics.h"
@@ -112,7 +113,7 @@ namespace tpublic
 
 					std::unique_ptr<_T> t = std::make_unique<_T>();
 					t->m_name = aName;
-					t->m_id = aPersistentIdTable->GetId(_T::DATA_TYPE, aName);
+					t->m_id = aPersistentIdTable->GetId({}, _T::DATA_TYPE, aName, true);
 
 					if (t->m_id > m_maxId)
 						m_maxId = t->m_id;
@@ -131,6 +132,12 @@ namespace tpublic
 			GetExistingByName(
 				const char*														aName)
 			{
+				if(aName[0] == '$')
+				{
+					uint32_t id = (uint32_t)strtoul(aName + 1, NULL, 10);
+					return TryGetById(id);
+				}
+
 				typename std::unordered_map<std::string, _T*>::iterator it = m_nameTable.find(aName);
 				if(it == m_nameTable.end())
 					return NULL;
@@ -141,6 +148,12 @@ namespace tpublic
 			GetExistingByName(
 				const char*														aName) const
 			{
+				if (aName[0] == '$')
+				{
+					uint32_t id = (uint32_t)strtoul(aName + 1, NULL, 10);
+					return TryGetById(id);
+				}
+
 				typename std::unordered_map<std::string, _T*>::const_iterator it = m_nameTable.find(aName);
 				if(it == m_nameTable.cend())
 					return NULL;
@@ -274,7 +287,7 @@ namespace tpublic
 			FromStream(
 				IReader*														aStream) override
 			{
-				if(!aStream->ReadObjectPointersWithBase(m_entries, 8192))
+				if(!aStream->ReadObjectPointersWithBase(m_entries, 32768))
 					return false;
 
 				for (std::unique_ptr<_T>& t : m_entries)
@@ -440,10 +453,12 @@ namespace tpublic
 		AbilityMetrics									m_abilityMetrics;
 		WorshipMetrics									m_worshipMetrics;
 		MiscMetrics										m_miscMetrics;
+		ReputationMetrics								m_reputationMetrics;
 		WordList::Data									m_wordList;
 		DefaultSoundEffects								m_defaultSoundEffects;
 		TileLayering									m_tileLayering;
 		std::unique_ptr<Document>						m_changelog;
+		std::unique_ptr<Document>						m_changelogOld;
 		uint32_t										m_baseTileBorderPatternSpriteId = 0;
 
 		// Public data

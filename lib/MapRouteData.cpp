@@ -74,10 +74,12 @@ namespace tpublic
 
 	void	
 	MapRouteData::Build(
-		const Manifest*		aManifest,
-		const uint32_t*		aMapTiles,
-		int32_t				aMapWidth,
-		int32_t				aMapHeight)
+		const Manifest*						aManifest,
+		const uint32_t*						aMapTiles,
+		int32_t								aMapWidth,
+		int32_t								aMapHeight,
+		nwork::Queue*						aWorkQueue,
+		GetMapEntitySpawnPositionFunction	aGetMapEntitySpawnPositionFunction)
 	{
 		std::set<Vec2> walkable;
 
@@ -94,20 +96,28 @@ namespace tpublic
 			}
 		}
 
-		for(std::unique_ptr<Route>& route : m_routes)
-			BuildRoute(aManifest, walkable, aMapWidth, aMapHeight, route.get());
+		aWorkQueue->ForEachVector<std::unique_ptr<Route>>(m_routes, [&](
+			std::unique_ptr<Route>& aRoute)
+		{
+			BuildRoute(aManifest, walkable, aMapWidth, aMapHeight, aRoute.get(), aGetMapEntitySpawnPositionFunction);
+		});
 	}
 
 	void	
 	MapRouteData::BuildRoute(
-		const Manifest*			aManifest,
-		const std::set<Vec2>&	aWalkable,
-		int32_t					aMapWidth,
-		int32_t					aMapHeight,
-		Route*					aRoute)
+		const Manifest*						aManifest,
+		const std::set<Vec2>&				aWalkable,
+		int32_t								aMapWidth,
+		int32_t								aMapHeight,
+		Route*								aRoute,
+		GetMapEntitySpawnPositionFunction	aGetMapEntitySpawnPositionFunction)
 	{
 		const Data::Route* routeData = aManifest->GetById<Data::Route>(aRoute->m_routeId);
 		TP_UNUSED(routeData);
+
+		std::optional<Vec2> originPosition;
+		if(routeData->m_originMapEntitySpawnId != 0)
+			originPosition = aGetMapEntitySpawnPositionFunction(routeData->m_originMapEntitySpawnId);
 
 		static const Vec2 NEIGHBORS[4] = { { 1, 0 }, { -1, 0 }, { 0, 1}, { 0, -1 } };
 
@@ -117,20 +127,31 @@ namespace tpublic
 
 			Vec2 startPosition = *aRoute->m_positions.cbegin();
 
-			for (const Vec2& position : aRoute->m_positions)
+			if(originPosition.has_value())
 			{
-				size_t neighborCount = 0;
-				for (size_t i = 0; i < 4 && neighborCount < 2; i++)
-				{
-					Vec2 p = position + NEIGHBORS[i];
-					if (aRoute->m_positions.contains(p))
-						neighborCount++;
-				}
+				// Override first start position with the specified origin (only makes sense if the route is unique and doesn't have sub-routes, for example for escort quests)
+				startPosition = originPosition.value();
+				originPosition.reset();
 
-				if (neighborCount == 1)
+				TP_VERIFY(aRoute->m_positions.contains(startPosition), routeData->m_debugInfo, "Invalid route origin.");
+			}
+			else
+			{
+				for (const Vec2& position : aRoute->m_positions)
 				{
-					startPosition = position;
-					break;
+					size_t neighborCount = 0;
+					for (size_t i = 0; i < 4 && neighborCount < 2; i++)
+					{
+						Vec2 p = position + NEIGHBORS[i];
+						if (aRoute->m_positions.contains(p))
+							neighborCount++;
+					}
+
+					if (neighborCount == 1)
+					{
+						startPosition = position;
+						break;
+					}
 				}
 			}
 
@@ -159,10 +180,14 @@ namespace tpublic
 				position = nextPosition.value();
 			}
 
-			DistanceField distanceField(aMapWidth, aMapHeight);
-			distanceField.Generate(subRoute->m_waypoints, aWalkable, UINT32_MAX);
+			if(routeData->m_maxDirectionFieldDistance != 0)
+			{
+				DistanceField distanceField(aMapWidth, aMapHeight);
+				distanceField.Generate(subRoute->m_waypoints, aWalkable, routeData->m_maxDirectionFieldDistance);
 
-			subRoute->m_directionField.GenerateFromDistanceField(distanceField);
+				subRoute->m_directionField = std::make_unique<DirectionField>();
+				subRoute->m_directionField->GenerateFromDistanceField(distanceField);
+			}
 
 			if(subRoute->m_waypoints.size() >= 8)
 			{
@@ -187,6 +212,9 @@ namespace tpublic
 		if (i == m_routeTable.cend())
 			return SIZE_MAX;
 
+		if(i->second->m_subRoutes.size() == 1)
+			return 0; // Only one subroute - use that one, even if position is off
+
 		size_t index = 0;
 
 		for(const std::unique_ptr<SubRoute>& subRoute : i->second->m_subRoutes)
@@ -203,12 +231,13 @@ namespace tpublic
 
 	bool	
 	MapRouteData::GetDirection(
-		uint32_t				aRouteId,
-		size_t					aSubRouteIndex,
-		const Vec2&				aPosition,
-		bool					aIsReversing,
-		Vec2&					aOutDirection,
-		bool&					aOutChangeDirection) const
+		uint32_t					aRouteId,
+		size_t						aSubRouteIndex,
+		const Vec2&					aPosition,
+		bool						aIsReversing,
+		Vec2&						aOutDirection,
+		bool&						aOutChangeDirection,
+		std::optional<uint32_t>&	aOutIndex) const
 	{
 		const Route* route = NULL;
 
@@ -232,6 +261,11 @@ namespace tpublic
 			{
 				size_t index = i->second;
 				size_t nextIndex = 0;
+
+				if(index == subRoute->m_waypoints.size() - 1)
+					aOutIndex = UINT32_MAX;
+				else
+					aOutIndex = (uint32_t)index;
 
 				if(aIsReversing)
 				{
@@ -279,7 +313,10 @@ namespace tpublic
 			}
 			else
 			{
-				DirectionField::Direction direction = subRoute->m_directionField.GetDirection(aPosition);
+				if(!subRoute->m_directionField)
+					return false;
+
+				DirectionField::Direction direction = subRoute->m_directionField->GetDirection(aPosition);
 
 				switch(direction)
 				{

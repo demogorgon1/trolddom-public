@@ -1,0 +1,37 @@
+dialogue_screen .assassin_bar_keeper_vendor: 
+{
+	!FOOD_VENDOR{}
+	sell mercenary_contract_assassin: { quantity: 1 reputation_level_requirement league_of_assassins: !FRIENDLY_REPUTATION_LEVEL{} }	
+}
+
+dialogue_screen .assassin_bar_keeper_dialogue:
+{
+	text: 
+	[	
+		"Greetings, $class$. What brings you to this perfectly normal tavern?"
+	]		
+	
+	options:
+	[
+		{ goto: .assassin_bar_keeper_vendor text: "Let me browse your goods." }
+	]
+}
+
+dialogue_root .assassin_bar_keeper_dialogue:
+{
+	.assassin_bar_keeper_dialogue: { }
+}
+
+entity thalvaron_assassin_bar_keeper: !NPC
+{
+	_string: "Grom"
+	_dialogue_root: .assassin_bar_keeper_dialogue	
+	_sprite: man_8
+	_sprite_dead: man_8_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

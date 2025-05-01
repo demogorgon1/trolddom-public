@@ -3,6 +3,7 @@
 #include "../DataBase.h"
 #include "../EntityState.h"
 #include "../IntRange.h"
+#include "../SpriteInfo.h"
 
 namespace tpublic
 {
@@ -16,6 +17,58 @@ namespace tpublic
 			static const DataType::Id DATA_TYPE = DataType::ID_MAP_ENTITY_SPAWN;
 			static const bool TAGGED = true;
 
+			struct ControlPointRequirement
+			{
+				ControlPointRequirement()
+				{
+
+				}
+
+				ControlPointRequirement(
+					const SourceNode*		aSource)
+				{
+					aSource->GetObject()->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if(aChild->m_name == "entities")
+							aChild->GetIdArray(DataType::ID_ENTITY, m_entityIds);
+						else if(aChild->m_name == "control_point_state")
+							m_controlPointStateId = aChild->GetId(DataType::ID_CONTROL_POINT_STATE);
+						else if(aChild->m_name == "max_distance")
+							m_maxDistance = aChild->GetInt32();
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					});
+				}
+
+				void
+				ToStream(
+					IWriter*				aStream) const
+				{
+					aStream->WriteUInts(m_entityIds);
+					aStream->WriteUInt(m_controlPointStateId);
+					aStream->WriteInt(m_maxDistance);
+				}
+
+				bool
+				FromStream(
+					IReader*				aStream)
+				{
+					if (!aStream->ReadUInts(m_entityIds))
+						return false;
+					if (!aStream->ReadUInt(m_controlPointStateId))
+						return false;
+					if (!aStream->ReadInt(m_maxDistance))
+						return false;
+					return true;
+				}
+
+				// Public data
+				std::vector<uint32_t>	m_entityIds;
+				uint32_t				m_controlPointStateId = 0;
+				int32_t					m_maxDistance = 0;
+			};
+
 			struct SpawnCondition
 			{
 				enum Type : uint8_t
@@ -23,7 +76,9 @@ namespace tpublic
 					TYPE_NONE,
 					TYPE_IF,
 					TYPE_IF_NOT,
-					TYPE_ENCOUNTER_NOT_ACTIVE
+					TYPE_ENCOUNTER_NOT_ACTIVE,
+					TYPE_REALM_BALANCE_ABOVE,
+					TYPE_NO_NEARBY_ENTITY
 				};
 
 				struct SubCondition
@@ -36,6 +91,8 @@ namespace tpublic
 					SubCondition(
 						const SourceNode*	aNode)
 					{
+						bool hasValue = false;
+
 						if (aNode->m_name == "if")
 						{
 							m_type = TYPE_IF;
@@ -51,12 +108,30 @@ namespace tpublic
 							m_type = TYPE_ENCOUNTER_NOT_ACTIVE;
 							m_dataType = DataType::ID_ENCOUNTER;
 						}
+						else if (aNode->m_name == "realm_balance_above")
+						{
+							m_type = TYPE_REALM_BALANCE_ABOVE;
+							m_dataType = DataType::ID_REALM_BALANCE;
+							hasValue = true;
+						}
+						else if(aNode->m_name == "no_nearby_entity")
+						{
+							m_type = TYPE_NO_NEARBY_ENTITY;
+							m_dataType = DataType::ID_ENTITY;
+							hasValue = true;
+						}
 						else
 						{
 							TP_VERIFY(false, aNode->m_debugInfo, "'%s' is not a valid item.", aNode->m_name.c_str());
 						}
 
-						m_id = aNode->m_sourceContext->m_persistentIdTable->GetId(m_dataType, aNode->GetIdentifier());
+						m_id = aNode->GetId(m_dataType);
+
+						if(hasValue)
+						{
+							TP_VERIFY(aNode->m_annotation, aNode->m_debugInfo, "Missing annotation value.");
+							m_value = aNode->m_annotation->GetInt32();
+						}
 					}
 
 					void
@@ -66,6 +141,7 @@ namespace tpublic
 						aStream->WritePOD(m_type);
 						aStream->WriteUInt(m_id);
 						aStream->WritePOD(m_dataType);
+						aStream->WriteInt(m_value);
 					}
 
 					bool
@@ -78,6 +154,8 @@ namespace tpublic
 							return false;
 						if (!aStream->ReadPOD(m_dataType))
 							return false;
+						if(!aStream->ReadInt(m_value))
+							return false;
 						return true;
 					}
 
@@ -85,6 +163,7 @@ namespace tpublic
 					Type										m_type = TYPE_NONE;
 					DataType::Id								m_dataType = DataType::INVALID_ID;
 					uint32_t									m_id = 0;
+					int32_t										m_value = 0;
 				};
 
 				SpawnCondition()
@@ -128,7 +207,7 @@ namespace tpublic
 				FromSource(
 					const SourceNode*	aNode)
 				{
-					m_entityId = aNode->m_sourceContext->m_persistentIdTable->GetId(DataType::ID_ENTITY, aNode->m_name.c_str());
+					m_entityId = aNode->m_sourceContext->m_persistentIdTable->GetId(aNode->m_debugInfo, DataType::ID_ENTITY, aNode->m_name.c_str());
 
 					aNode->GetObject()->ForEachChild([&](
 						const SourceNode* aChild)
@@ -145,6 +224,14 @@ namespace tpublic
 						{
 							aChild->GetIdArray(DataType::ID_ZONE, m_zones);
 						}
+						else if (aChild->m_name == "must_have_tile_flags")
+						{
+							m_mustHaveTileFlags = SpriteInfo::SourceToFlags(aChild);
+						}
+						else if (aChild->m_name == "must_not_have_tile_flags")
+						{
+							m_mustNotHaveTileFlags = SpriteInfo::SourceToFlags(aChild);
+						}
 						else if (aChild->m_name == "init_state")
 						{
 							m_initState = EntityState::StringToId(aChild->GetIdentifier());
@@ -153,6 +240,10 @@ namespace tpublic
 						else if(aChild->m_name == "spawn_condition")
 						{
 							m_spawnConditions.push_back(std::make_unique<SpawnCondition>(aChild));
+						}
+						else if(aChild->m_name == "control_point_requirement")
+						{
+							m_controlPointRequirement = ControlPointRequirement(aChild);
 						}
 						else
 						{
@@ -171,6 +262,9 @@ namespace tpublic
 					aStream->WriteObjectPointers(m_spawnConditions);
 					m_level.ToStream(aStream);
 					aStream->WriteUInts(m_zones);
+					aStream->WritePOD(m_mustHaveTileFlags);
+					aStream->WritePOD(m_mustNotHaveTileFlags);
+					aStream->WriteOptionalObject(m_controlPointRequirement);
 				}
 
 				bool
@@ -188,6 +282,12 @@ namespace tpublic
 					if(!m_level.FromStream(aStream))
 						return false;
 					if(!aStream->ReadUInts(m_zones))
+						return false;
+					if(!aStream->ReadPOD(m_mustHaveTileFlags))
+						return false;
+					if (!aStream->ReadPOD(m_mustNotHaveTileFlags))
+						return false;
+					if(!aStream->ReadOptionalObject(m_controlPointRequirement))
 						return false;
 					return true;
 				}
@@ -215,6 +315,15 @@ namespace tpublic
 					return aLevel >= m_level.m_min && aLevel <= m_level.m_max;
 				}
 
+				bool
+				CheckTileFlags(
+					uint16_t		aTileFlags) const
+				{
+					if((aTileFlags & m_mustNotHaveTileFlags) != 0)
+						return false;
+					return (aTileFlags & m_mustHaveTileFlags) == m_mustHaveTileFlags;
+				}
+
 				// Public data
 				uint32_t										m_entityId = 0;
 				uint32_t										m_weight = 1;
@@ -222,6 +331,9 @@ namespace tpublic
 				std::vector<std::unique_ptr<SpawnCondition>>	m_spawnConditions;
 				UIntRange										m_level;
 				std::vector<uint32_t>							m_zones;
+				uint16_t										m_mustHaveTileFlags = 0;
+				uint16_t										m_mustNotHaveTileFlags = 0;
+				std::optional<ControlPointRequirement>			m_controlPointRequirement;
 			};
 
 			struct SpawnTimer

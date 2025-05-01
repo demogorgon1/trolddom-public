@@ -21,6 +21,43 @@ namespace tpublic
 			static const DataType::Id DATA_TYPE = DataType::ID_ENTITY;
 			static const bool TAGGED = true;
 
+			enum Flag : uint8_t
+			{
+				FLAG_ALWAYS_REPLICATE = 0x01
+			};
+
+			static uint8_t
+			SourceToFlag(
+				const SourceNode*				aSource)
+			{
+				std::string_view t(aSource->GetIdentifier());
+				if (t == "always_replicate")
+					return FLAG_ALWAYS_REPLICATE;
+				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not an entity flag.", aSource->GetIdentifier());
+				return 0;
+			}
+
+			static uint8_t
+			SourceToFlags(
+				const SourceNode*				aSource)
+			{
+				uint8_t flags = 0;
+				if(aSource->m_type == SourceNode::TYPE_IDENTIFIER)
+				{
+					flags = SourceToFlag(aSource);
+				}
+				else
+				{
+					aSource->GetArray()->ForEachChild([&flags](
+						const SourceNode* aChild)
+					{
+						flags |= SourceToFlag(aChild);
+					});
+				}
+
+				return flags;
+			}
+
 			struct Modifiers
 			{
 				void
@@ -163,7 +200,7 @@ namespace tpublic
 				ComponentManager*		aComponentManager,
 				uint32_t				aEntityInstanceId) const 
 			{
-				std::unique_ptr<EntityInstance> entity = std::make_unique<EntityInstance>(aComponentManager, m_id, aEntityInstanceId);
+				std::unique_ptr<EntityInstance> entity = std::make_unique<EntityInstance>(aComponentManager, m_id, aEntityInstanceId, m_flags);
 
 				for(const std::unique_ptr<ComponentEntry>& componentEntry : m_components)
 				{
@@ -263,6 +300,10 @@ namespace tpublic
 						{
 							m_debugColor = Image::RGBA(aMember);
 						}
+						else if(aMember->m_name == "flags")
+						{
+							m_flags = SourceToFlags(aMember);
+						}
 						else
 						{
 							TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
@@ -277,6 +318,7 @@ namespace tpublic
 			{
 				aStream->WriteString(m_displayName);
 				aStream->WriteOptionalPOD(m_debugColor);
+				aStream->WritePOD(m_flags);
 				aStream->WriteUInts(m_systems);
 
 				{
@@ -294,6 +336,8 @@ namespace tpublic
 				if(!aStream->ReadString(m_displayName))
 					return false;
 				if (!aStream->ReadOptionalPOD(m_debugColor))
+					return false;
+				if (!aStream->ReadPOD(m_flags))
 					return false;
 				if(!aStream->ReadUInts(m_systems))
 					return false;
@@ -315,6 +359,7 @@ namespace tpublic
 			std::optional<Image::RGBA>						m_debugColor;
 			std::vector<uint32_t>							m_systems;
 			std::vector<std::unique_ptr<ComponentEntry>>	m_components;
+			uint8_t											m_flags = 0;
 
 			// Not serialized
 			Modifiers										m_modifiers;

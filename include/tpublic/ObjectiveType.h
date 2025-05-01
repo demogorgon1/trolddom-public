@@ -16,6 +16,8 @@ namespace tpublic
 			ID_DIALOGUE_TRIGGER,
 			ID_MANUAL_BOOLEAN,
 			ID_MANUAL_COUNTER,
+			ID_ROUTE_NPC,
+			ID_KILL_PLAYER,
 
 			NUM_IDS
 		};
@@ -29,7 +31,9 @@ namespace tpublic
 			"use_ability",
 			"dialogue_trigger",
 			"manual_boolean",
-			"manual_counter"
+			"manual_counter",
+			"route_npc",
+			"kill_player"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

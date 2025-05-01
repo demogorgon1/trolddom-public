@@ -1,0 +1,85 @@
+entity thalvaron_evil_orb:
+{
+	string: "Evil Orb"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ glowing_orb_1_a glowing_orb_1_b ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			verb: pick_up
+			range: 1 
+			despawn: true 			
+			level: 18
+			loot_table: .evil_orb
+		}		
+	}
+}
+
+loot_group .evil_orb: {}
+
+item .evil_orb:
+{
+	icon: icon_orb_1
+	item_level: 18
+	loot_groups: [ .evil_orb ]
+	flags: [ not_sellable unique ]
+	string: "Evil Orb"
+	use_ability: .evil_orb
+}
+
+loot_table .evil_orb:
+{
+	slots:
+	[
+		{
+			possibility: 
+			{ 
+				loot_group: .evil_orb 
+				requirement self<must_not_have_completed_quest>: { id: .evil_orb }
+				requirement self<must_not_have_active_quest>: { id: .evil_orb }
+				requirement self<must_not_have_item>: { id: .evil_orb }
+			}			
+		}		
+	]
+}
+
+ability .evil_orb:	
+{
+	string: "Evil Orb"
+	description: "This item starts a quest."
+	flags: [ target_self item ]
+	icon: icon_orb_1
+	direct_effect simple<start_quest>: .evil_orb
+	states: [ default in_combat ]
+	requirement self<must_not_have_completed_quest>: { id: .evil_orb }
+	requirement self<must_not_have_active_quest>: { id: .evil_orb }
+}
+
+quest .evil_orb:
+{
+	string: "Evil Orb"
+
+	text:
+	[
+		"Bring the orb to Warden Moonwatcher in the town south west of Faerandor woods."
+	]
+	
+	description: 
+	[
+		"This doesn't look good. Smells like some kind of dark elf magic. You better show it to Warden Moonwatcher and see what he makes of it."
+	]
+	
+	completion:
+	[
+		"This is a dark elf artifact. Thanks for bringing it to me."
+	]
+
+	level: 18
+	reward_xp_multiplier: 0.5
+	reward_cash_multiplier: 0
+	next_quest: .warden_moonwatcher_2
+	quest_items: [ .evil_orb ]
+}

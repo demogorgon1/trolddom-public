@@ -1,0 +1,181 @@
+dialogue_screen .mumle_whiterock_dialogue:
+{
+	text: 
+	[	
+		"You're far away from home, aren't you? Are you lost?"
+	]		
+	
+	options:
+	[
+		{ quest: .mumle_whiterock_1 }
+		{ quest<offer_only>: .mumle_whiterock_2 }
+	]
+}
+
+dialogue_root .mumle_whiterock_dialogue:
+{
+	.mumle_whiterock_dialogue: { }
+}
+
+entity thalvaron_mumle_whiterock: !NPC
+{
+	_string: "Mumle Whiterock"
+	_dialogue_root: .mumle_whiterock_dialogue	
+	_sprite: dwarf_2
+	_sprite_dead: dwarf_2_dead
+	_level: 20
+	_faction: kingdom_of_thuldarim		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+objective .mumle_whiterock_1:
+{
+	string: "Mud Elementals Sampled"
+	
+	maps: [ thalvaron ]
+	
+	use_ability:
+	{
+		ability: .mumle_whiterock_1
+		entities: [ thalvaron_badlands_mud_elemental ]
+		count: 4
+	}
+}
+
+aura .mumle_whiterock_1:
+{
+	string: "Sampled"
+	type: buff
+	icon: icon_brown_potion
+	duration: 1200
+	flags: [ unique ]
+}
+
+cooldown .mumle_whiterock_1:
+{
+	duration: 30
+}
+
+ability .mumle_whiterock_1:
+{
+	string: "Sample Mud Elemental"
+	description: "Take sample of mud elemental."
+	flags: [ target_other quest_trigger ]
+	cast_time: 10
+	range: 2
+	icon: icon_brown_potion
+	cooldowns: [ global .mumle_whiterock_1 ]	
+	states: [ default in_combat ]
+	requirement target<must_be_type>: { id: thalvaron_badlands_mud_elemental }
+	requirement target<must_not_have_aura>: { id: .mumle_whiterock_1 }
+	direct_effect apply_aura: { aura: .mumle_whiterock_1 }
+	sound_effects: !SOUND_INVENTORY{}
+}
+
+item .mumle_whiterock_1:
+{
+	binds: when_picked_up
+	type: miscellaneous
+	flags: [ unique not_sellable ]
+	item_level: 16
+	icon: icon_brown_potion		
+	string: "Sampling Vial"
+	use_ability: .mumle_whiterock_1
+}
+
+{
+	${ _level: 16 }
+	item .mumle_whiterock_1_a: !QUEST_REWARD_WRISTS{ _string: "Muddy Bracers" _icon: icon_bracers_2 _constitution: 1 _wisdom: 1 _type: armor_mail }
+	item .mumle_whiterock_1_b: !QUEST_REWARD_WAIST{ _string: "Elemental Girdle" _icon: icon_cloth_belt_1 _constitution: 1 _strength: 1 _spirit: 1 _type: armor_plate }
+	item .mumle_whiterock_1_c: !QUEST_REWARD_WAIST{ _string: "Iron Rope of Wrath" _icon: icon_cloth_belt_2 _spirit: 2 _spell_damage: 1 _type: armor_cloth }
+}
+
+quest .mumle_whiterock_1:
+{
+	string: "Magical Mud Creatures"
+
+	text:
+	[
+		"Take samples of the mud elementals and bring them to Mumle Whiterock."
+	]
+	
+	description: 
+	[
+		"The Badlands haven't always been this dry and miserable. Long ago it consisted of woodlands and grassy hills, but the rivers dried out, which caused a rapid detoriation. This is the site of the former Lake Dourgol."
+		"Once a beautiful lake, which had a significant spiritual meaning to both elves and dwarves. At the center of what was once the lake you will still find a muddy area, which seems to have some kind of magical property.\n\n"
+		"Look at those weird elementals moving around in it. Seems like they're made of the mud themselves. Can you bring me some samples?"
+	]
+	
+	completion:
+	[
+		"Good job."
+	]
+
+	level: 16
+	quest_items: [ .mumle_whiterock_1 ]
+	objectives: [ .mumle_whiterock_1 ]
+	next_quest: .mumle_whiterock_2
+	reward_one_item: [ .mumle_whiterock_1_a .mumle_whiterock_1_b .mumle_whiterock_1_c ]
+}
+
+############################################################
+# Quest 2
+
+loot_group .mumle_whiterock_2_quest_item: {}
+
+item .mumle_whiterock_2_quest_item:
+{
+	icon: icon_stone_1
+	item_level: 16
+	loot_groups: [ .mumle_whiterock_2_quest_item ]
+	flags: [ not_sellable ]
+	string: "Dirt Rumbler Stone"
+	stack: 6
+}
+
+objective .mumle_whiterock_2:
+{
+	string: "Dirt Rumbler Stones"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .mumle_whiterock_2_quest_item count: 6 }
+}
+
+{
+	${ _level: 16 }
+	item .mumle_whiterock_2_a: !QUEST_REWARD_HANDS{ _string: "Mumle's Work Gloves" _icon: icon_gloves_1 _constitution: 1 _strength: 2 _spirit: 1 _type: armor_mail }
+	item .mumle_whiterock_2_b: !QUEST_REWARD_BACK{ _string: "Nomad's Backcover" _icon: icon_cape_1 _constitution: 2 _strength: 1 _wisdom: 1 _type: armor_cloth }
+	item .mumle_whiterock_2_c: !QUEST_REWARD_2H_STAFF{ _string: "Badlands Walking Stick" _icon: icon_staff_1 _wisdom: 1 _weapon_cooldown: 22 }
+}
+
+quest .mumle_whiterock_2:
+{
+	string: "Further Research"
+
+	text:
+	[
+		"Collect rocks from elementals in northern Badlands and deliver them to Rurik Ironmantle in Durgan Tharok."
+	]
+	
+	description: 
+	[
+		"Sampling the mud creatures was a great help. If you're up for it, I got some more work for you. The very northern part of the Badlands I've been told is home to another kind of elemental. Some kind of rock elemental,"
+		"so handling them shouldn't get your fingers as dirty as the ones you just dealt with. Will you go there, grab a few rocks from them, and then return them to my colleague Rurik Ironmantle in Durgan Tharok?\n\n"
+		"Please also tell him about the mud samples, that would be very helpful. He'll make sure you get a reward."
+	]
+	
+	completion:
+	[
+		"I love elemental stones! They're all so interesting and unique. Especially this one! Look at it! Can't you see it?"
+	]
+
+	level: 16	
+	objectives: [ .mumle_whiterock_2 ]
+	reward_one_item: [ .mumle_whiterock_2_a .mumle_whiterock_2_b .mumle_whiterock_2_c ]
+}

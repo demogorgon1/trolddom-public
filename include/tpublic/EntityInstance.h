@@ -27,7 +27,8 @@ namespace tpublic
 								EntityInstance(
 									ComponentManager*					aComponentManager,
 									uint32_t							aEntityId,
-									uint32_t							aEntityInstanceId);			
+									uint32_t							aEntityInstanceId,
+									uint8_t								aEntityFlags);			
 								~EntityInstance();
 
 		void					SetEntityInstanceId(
@@ -106,6 +107,7 @@ namespace tpublic
 		std::vector<ComponentEntry>&					GetComponents() { return m_components; }
 		int32_t											GetStateTick() const { return m_stateTick; }
 		uint8_t											GetSeq() const { return m_seq; }
+		uint8_t											GetEntityFlags() const { return m_entityFlags; }
 		
 	private:
 		
@@ -117,6 +119,7 @@ namespace tpublic
 		uint8_t										m_seq = 0;
 		std::vector<ComponentEntry>					m_components;
 		bool										m_dirty = false;
+		uint8_t										m_entityFlags = 0;
 	};
 
 }

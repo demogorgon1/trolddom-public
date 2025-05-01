@@ -1,0 +1,40 @@
+dialogue_screen .valoris_quartermaster_vendor:
+{
+	sell valoris_wrists_1: { quantity: 1 reputation_level_requirement valoris: !HONORED_REPUTATION_LEVEL{} }	
+	sell valoris_wrists_2: { quantity: 1 reputation_level_requirement valoris: !HONORED_REPUTATION_LEVEL{} }	
+	sell valoris_ring_1: { quantity: 1 reputation_level_requirement valoris: !REVERED_REPUTATION_LEVEL{} }	
+	sell valoris_ring_2: { quantity: 1 reputation_level_requirement valoris: !REVERED_REPUTATION_LEVEL{} }	
+}
+
+dialogue_screen .valoris_quartermaster_dialogue:
+{
+	text: 
+	[	
+		"What can I help you with?"
+	]
+	
+	options:
+	[
+		{ goto: .valoris_quartermaster_vendor text: "Let me browse your goods." }
+	]
+}
+
+dialogue_root .valoris_quartermaster_dialogue:
+{
+	.valoris_quartermaster_dialogue: { }
+}
+
+entity thalvaron_valoris_quartermaster: !NPC
+{
+	_string: "Doug Michaelson"
+	_guild_name: "Valoris Quartermaster"
+	_dialogue_root: .valoris_quartermaster_dialogue	
+	_sprite: man_1
+	_sprite_dead: man_1_dead	
+	_level: 20
+	_faction: valoris		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

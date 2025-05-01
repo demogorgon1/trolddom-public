@@ -37,148 +37,347 @@ sprites:
 	sprite rocky_cliff_18: { }
 	sprite rocky_cliff_19: { }
 	sprite rocky_cliff_20: { }
+	
+	cursor: { position: [ 0 32 ] }
+
+	sprite wall_cliff_1_a: { }
+	sprite wall_cliff_1_b: { }
+	sprite wall_cliff_1_c: { }
+	sprite wall_cliff_2_a: { }
+	sprite wall_cliff_2_b: { }
+	sprite wall_cliff_2_c: { }
+	sprite wall_cliff_3_a: { }
+	sprite wall_cliff_3_b: { }
+	sprite wall_cliff_3_c: { }
+	sprite wall_cliff_4_a: { }
+	sprite wall_cliff_4_b: { }
+	sprite wall_cliff_4_c: { }
+	sprite wall_cliff_5: { }
+	sprite wall_cliff_6: { }
+	sprite wall_cliff_7: { }
+	sprite wall_cliff_8: { }
+	
+	cursor: { position: [ 0 48 ] }
+	
+	sprite wall_cliff_9: { }
+	sprite wall_cliff_10: { }
+	sprite wall_cliff_11: { }
+	sprite wall_cliff_12: { }
+	sprite wall_cliff_13: { }
+	sprite wall_cliff_14: { }
+	sprite wall_cliff_15: { }
+	sprite wall_cliff_16: { }
+	sprite wall_cliff_17: { }
+	sprite wall_cliff_18: { }
+	sprite wall_cliff_19: { }
+	sprite wall_cliff_20: { }
+	
+	cursor: { position: [ 0 64 ] }
+
+	sprite badlands_cliff_1_a: { }
+	sprite badlands_cliff_1_b: { }
+	sprite badlands_cliff_1_c: { }
+	sprite badlands_cliff_2_a: { }
+	sprite badlands_cliff_2_b: { }
+	sprite badlands_cliff_2_c: { }
+	sprite badlands_cliff_3_a: { }
+	sprite badlands_cliff_3_b: { }
+	sprite badlands_cliff_3_c: { }
+	sprite badlands_cliff_4_a: { }
+	sprite badlands_cliff_4_b: { }
+	sprite badlands_cliff_4_c: { }
+	sprite badlands_cliff_5: { }
+	sprite badlands_cliff_6: { }
+	sprite badlands_cliff_7: { }
+	sprite badlands_cliff_8: { }
+	
+	cursor: { position: [ 0 80 ] }
+	
+	sprite badlands_cliff_9: { }
+	sprite badlands_cliff_10: { }
+	sprite badlands_cliff_11: { }
+	sprite badlands_cliff_12: { }
+	sprite badlands_cliff_13: { }
+	sprite badlands_cliff_14: { }
+	sprite badlands_cliff_15: { }
+	sprite badlands_cliff_16: { }
+	sprite badlands_cliff_17: { }
+	sprite badlands_cliff_18: { }
+	sprite badlands_cliff_19: { }
+	sprite badlands_cliff_20: { }	
+	
 }
 
-cliff_style rocks:
+!define local CLIFF_STYLE
 {
-	tile<[ rocky_cliff_13 ]>:
+	tile<@_cliff_13>:
 	[
 		"x00"
 		"11R"
 		"111"
 	]
 
-	tile<[ rocky_cliff_14 ]>:
+	tile<@_cliff_13>:
+	[
+		"0R1"
+		"111"
+		"111"
+	]
+
+	tile<@_cliff_14>:
 	[
 		"00x"
 		"R11"
 		"111"
 	]
 
-	tile<[ rocky_cliff_15 ]>:
+	tile<@_cliff_14>:
+	[
+		"1R0"
+		"111"
+		"111"
+	]
+
+	tile<@_cliff_15>:
 	[
 		"11x"
 		"110"
 		"1R0"
 	]
 
-	tile<[ rocky_cliff_16 ]>:
+	tile<@_cliff_15>:
+	[
+		"110"
+		"11R"
+		"111"
+	]
+
+	tile<@_cliff_16>:
 	[
 		"1R0"
 		"110"
 		"11x"
+	]
+
+	tile<@_cliff_16>:
+	[
+		"111"
+		"11R"
+		"110"
 	]
 	
-	tile<[ rocky_cliff_17 ]>:
+	tile<@_cliff_17>:
 	[
 		"111"
 		"R11"
 		"00x"
 	]
 
-	tile<[ rocky_cliff_18 ]>:
+	tile<@_cliff_17>:
+	[
+		"111"
+		"111"
+		"1R0"
+	]
+
+	tile<@_cliff_18>:
 	[
 		"111"
 		"11R"
 		"x00"
 	]
 
-	tile<[ rocky_cliff_19 ]>:
+	tile<@_cliff_18>:
+	[
+		"111"
+		"111"
+		"0R1"
+	]
+
+	tile<@_cliff_19>:
 	[
 		"0R1"
 		"011"
 		"x11"
 	]
 
-	tile<[ rocky_cliff_20 ]>:
+	tile<@_cliff_19>:
+	[
+		"111"
+		"R11"
+		"011"
+	]
+
+	tile<@_cliff_20>:
 	[
 		"x11"
 		"011"
 		"0R1"
 	]	
 
-	tile<[ rocky_cliff_5 ]>:
+	tile<@_cliff_20>:
+	[
+		"011"
+		"R11"
+		"111"
+	]	
+
+	tile<@_cliff_5>:
 	[
 		"x0x"
 		"011"
 		"x11"
 	]
 	
-	tile<[ rocky_cliff_6 ]>:
+	tile<@_cliff_6>:
 	[
 		"x0x"
 		"110"
 		"11x"
 	]
 
-	tile<[ rocky_cliff_7 ]>:
+	tile<@_cliff_7>:
 	[
 		"11x"
 		"110"
 		"x0x"
 	]
 
-	tile<[ rocky_cliff_8 ]>:
+	tile<@_cliff_8>:
 	[
 		"x11"
 		"011"
 		"x0x"
 	]
 
-	tile<[ rocky_cliff_9 ]>:
+	tile<@_cliff_9>:
 	[
 		"011"
 		"111"
 		"111"
 	]
 
-	tile<[ rocky_cliff_10 ]>:
+	tile<@_cliff_10>:
 	[
 		"110"
 		"111"
 		"111"
 	]
 
-	tile<[ rocky_cliff_11 ]>:
+	tile<@_cliff_11>:
 	[
 		"111"
 		"111"
 		"110"
 	]
 
-	tile<[ rocky_cliff_12 ]>:
+	tile<@_cliff_12>:
 	[
 		"111"
 		"111"
 		"011"
 	]
 
-	tile<[ rocky_cliff_1_a rocky_cliff_1_b rocky_cliff_1_c]>:
+	tile<@_cliff_1>:
 	[
 		"x0x"
 		"x1x"
 		"x1x"
 	]
 
-	tile<[ rocky_cliff_2_a rocky_cliff_2_b rocky_cliff_2_c]>:
+	tile<@_cliff_2>:
 	[
 		"xxx"
 		"011"
 		"xxx"
 	]
 
-	tile<[ rocky_cliff_3_a rocky_cliff_3_b rocky_cliff_3_c]>:
+	tile<@_cliff_3>:
 	[
 		"x1x"
 		"x1x"
 		"x0x"
 	]
 
-	tile<[ rocky_cliff_4_a rocky_cliff_4_b rocky_cliff_4_c]>:
+	tile<@_cliff_4>:
 	[
 		"xxx"
 		"110"
 		"xxx"
 	]
-
 }
+
+cliff_style dummy: { }
+
+cliff_style rocks: !CLIFF_STYLE
+{
+	_cliff_1: [ rocky_cliff_1_a rocky_cliff_1_b rocky_cliff_1_c ]
+	_cliff_2: [ rocky_cliff_2_a rocky_cliff_2_b rocky_cliff_2_c ]
+	_cliff_3: [ rocky_cliff_3_a rocky_cliff_3_b rocky_cliff_3_c ]
+	_cliff_4: [ rocky_cliff_4_a rocky_cliff_4_b rocky_cliff_4_c ]
+	_cliff_5: [ rocky_cliff_5 ]
+	_cliff_6: [ rocky_cliff_6 ]
+	_cliff_7: [ rocky_cliff_7 ]
+	_cliff_8: [ rocky_cliff_8 ]
+	_cliff_9: [ rocky_cliff_9 ]
+	_cliff_10: [ rocky_cliff_10 ]
+	_cliff_11: [ rocky_cliff_11 ]
+	_cliff_12: [ rocky_cliff_12 ]
+	_cliff_13: [ rocky_cliff_13 ]
+	_cliff_14: [ rocky_cliff_14 ]
+	_cliff_15: [ rocky_cliff_15 ]
+	_cliff_16: [ rocky_cliff_16 ]
+	_cliff_17: [ rocky_cliff_17 ]
+	_cliff_18: [ rocky_cliff_18 ]
+	_cliff_19: [ rocky_cliff_19 ]
+	_cliff_20: [ rocky_cliff_20 ]
+}
+
+cliff_style wall: !CLIFF_STYLE
+{
+	_cliff_1: [ wall_cliff_1_a wall_cliff_1_b wall_cliff_1_c ]
+	_cliff_2: [ wall_cliff_2_a wall_cliff_2_b wall_cliff_2_c ]
+	_cliff_3: [ wall_cliff_3_a wall_cliff_3_b wall_cliff_3_c ]
+	_cliff_4: [ wall_cliff_4_a wall_cliff_4_b wall_cliff_4_c ]
+	_cliff_5: [ wall_cliff_5 ]
+	_cliff_6: [ wall_cliff_6 ]
+	_cliff_7: [ wall_cliff_7 ]
+	_cliff_8: [ wall_cliff_8 ]
+	_cliff_9: [ wall_cliff_9 ]
+	_cliff_10: [ wall_cliff_10 ]
+	_cliff_11: [ wall_cliff_11 ]
+	_cliff_12: [ wall_cliff_12 ]
+	_cliff_13: [ wall_cliff_13 ]
+	_cliff_14: [ wall_cliff_14 ]
+	_cliff_15: [ wall_cliff_15 ]
+	_cliff_16: [ wall_cliff_16 ]
+	_cliff_17: [ wall_cliff_17 ]
+	_cliff_18: [ wall_cliff_18 ]
+	_cliff_19: [ wall_cliff_19 ]
+	_cliff_20: [ wall_cliff_20 ]
+}
+
+cliff_style badlands: !CLIFF_STYLE
+{
+	_cliff_1: [ badlands_cliff_1_a badlands_cliff_1_b badlands_cliff_1_c ]
+	_cliff_2: [ badlands_cliff_2_a badlands_cliff_2_b badlands_cliff_2_c ]
+	_cliff_3: [ badlands_cliff_3_a badlands_cliff_3_b badlands_cliff_3_c ]
+	_cliff_4: [ badlands_cliff_4_a badlands_cliff_4_b badlands_cliff_4_c ]
+	_cliff_5: [ badlands_cliff_5 ]
+	_cliff_6: [ badlands_cliff_6 ]
+	_cliff_7: [ badlands_cliff_7 ]
+	_cliff_8: [ badlands_cliff_8 ]
+	_cliff_9: [ badlands_cliff_9 ]
+	_cliff_10: [ badlands_cliff_10 ]
+	_cliff_11: [ badlands_cliff_11 ]
+	_cliff_12: [ badlands_cliff_12 ]
+	_cliff_13: [ badlands_cliff_13 ]
+	_cliff_14: [ badlands_cliff_14 ]
+	_cliff_15: [ badlands_cliff_15 ]
+	_cliff_16: [ badlands_cliff_16 ]
+	_cliff_17: [ badlands_cliff_17 ]
+	_cliff_18: [ badlands_cliff_18 ]
+	_cliff_19: [ badlands_cliff_19 ]
+	_cliff_20: [ badlands_cliff_20 ]
+}
+

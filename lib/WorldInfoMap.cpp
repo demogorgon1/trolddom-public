@@ -1,9 +1,40 @@
 #include "Pcheader.h"
 
+#include <tpublic/Data/Sprite.h>
+#include <tpublic/Data/Zone.h>
+
+#include <tpublic/Manifest.h>
+#include <tpublic/SpriteInfo.h>
 #include <tpublic/WorldInfoMap.h>
 
 namespace tpublic
 {
+	
+	void 
+	WorldInfoMap::AutoIndoor(
+		const Manifest*		aManifest,
+		int32_t				aMapWidth,
+		int32_t				aMapHeight,
+		const uint32_t*		aCoverMap,
+		uint8_t*			aFlags)
+	{		
+		const uint32_t* coverMap = aCoverMap;
+		uint8_t* flags = aFlags;
+
+		for(int32_t i = 0, count = aMapWidth * aMapHeight; i < count; i++)
+		{
+			uint32_t tileSpriteId = *coverMap;
+			if(tileSpriteId != 0)
+			{
+				const Data::Sprite* tileSprite = aManifest->GetById<Data::Sprite>(tileSpriteId);
+				if(tileSprite->m_info.m_flags & SpriteInfo::FLAG_TILE_INDOOR)
+					*flags |= FLAG_INDOOR;
+			}
+
+			coverMap++;
+			flags++;
+		}
+	}
 
 	void			
 	WorldInfoMap::CopyFrom(
@@ -20,10 +51,18 @@ namespace tpublic
 			t->m_positions = i->second->m_positions;
 			m_zoneOutlineTable[i->first] = std::move(t);
 		}
+
+		for (ZonePositionsTable::const_iterator i = aWorldInfoMap->m_zonePositionsTable.cbegin(); i != aWorldInfoMap->m_zonePositionsTable.cend(); i++)
+		{
+			std::unique_ptr<ZonePositions> t = std::make_unique<ZonePositions>();
+			t->m_positions = i->second->m_positions;
+			m_zonePositionsTable[i->first] = std::move(t);
+		}
 	}
 
 	void			
 	WorldInfoMap::Build(
+		const Manifest* aManifest,
 		int32_t			aWidth,
 		int32_t			aHeight,
 		const uint32_t* aLevelMap,
@@ -106,12 +145,18 @@ namespace tpublic
 			}
 		}
 
-		// Find zone outlines
+		// Find zone outlines and positions
 		for(int32_t y = 0; y < aHeight; y++)
 		{
 			for(int32_t x = 0; x < aWidth; x++)
 			{
-				uint32_t zoneId = Get({ x, y }).m_zoneId;
+				const Entry& entry = Get({ x, y });
+
+				_UpdateZonePositionsTable(aManifest, entry.m_zoneId, { x, y });
+				_UpdateZonePositionsTable(aManifest, entry.m_subZoneId, { x, y });
+
+				uint32_t zoneId = entry.m_zoneId;
+
 				if(zoneId != 0)
 				{
 					if(Get({ x, y - 1 }).m_zoneId != zoneId || 
@@ -164,6 +209,16 @@ namespace tpublic
 		return NULL;
 	}
 
+	const WorldInfoMap::ZonePositions* 
+	WorldInfoMap::GetZonePositions(
+		uint32_t			aZoneId) const
+	{
+		ZonePositionsTable::const_iterator i = m_zonePositionsTable.find(aZoneId);
+		if (i != m_zonePositionsTable.cend())
+			return i->second.get();
+		return NULL;
+	}
+
 	void			
 	WorldInfoMap::ToStream(
 		IWriter*			aWriter) const
@@ -175,6 +230,13 @@ namespace tpublic
 
 		aWriter->WriteUInt(m_zoneOutlineTable.size());
 		for (ZoneOutlineTable::const_iterator i = m_zoneOutlineTable.cbegin(); i != m_zoneOutlineTable.cend(); i++)
+		{
+			aWriter->WriteUInt(i->first);
+			i->second->ToStream(aWriter);
+		}
+
+		aWriter->WriteUInt(m_zonePositionsTable.size());
+		for (ZonePositionsTable::const_iterator i = m_zonePositionsTable.cbegin(); i != m_zonePositionsTable.cend(); i++)
 		{
 			aWriter->WriteUInt(i->first);
 			i->second->ToStream(aWriter);
@@ -212,7 +274,55 @@ namespace tpublic
 				m_zoneOutlineTable[zoneId] = std::move(t);
 			}
 		}
+
+		{
+			size_t count;
+			if (!aReader->ReadUInt(count))
+				return false;
+
+			for (size_t i = 0; i < count; i++)
+			{
+				uint32_t zoneId;
+				if (!aReader->ReadUInt(zoneId))
+					return false;
+
+				std::unique_ptr<ZonePositions> t = std::make_unique<ZonePositions>();
+				if (!t->FromStream(aReader))
+					return false;
+
+				m_zonePositionsTable[zoneId] = std::move(t);
+			}
+		}
+
 		return true;
+	}
+
+	//--------------------------------------------------------------------------
+
+	void			
+	WorldInfoMap::_UpdateZonePositionsTable(
+		const Manifest*				aManifest,
+		uint32_t					aZoneId,
+		const Vec2&					aPosition)
+	{
+		if(aZoneId == 0)
+			return;
+
+		const Data::Zone* zone = aManifest->GetById<Data::Zone>(aZoneId);
+		if (!zone->m_canQueryPosition)
+			return;
+
+		ZonePositionsTable::iterator i = m_zonePositionsTable.find(aZoneId);
+		if (i != m_zonePositionsTable.end())
+		{
+			i->second->m_positions.push_back(aPosition);
+		}
+		else
+		{
+			ZonePositions* t = new ZonePositions();
+			t->m_positions.push_back(aPosition);
+			m_zonePositionsTable[aZoneId] = std::unique_ptr<ZonePositions>(t);
+		}
 	}
 
 }

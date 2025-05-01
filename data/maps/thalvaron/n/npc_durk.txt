@@ -1,0 +1,114 @@
+dialogue_screen .durk_dialogue:
+{
+	text: 
+	[	
+		"What do you want from an old tree?"
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .hoi_ghourian_4 }
+		{ quest: .durk_1 }
+	]
+}
+
+dialogue_root .durk_dialogue:
+{
+	.durk_dialogue: { }
+}
+
+npc_behavior_state .durk:
+{
+	behavior: patrolling
+	pause_when_targeted_by_nearby_player: true
+	on_route<thalvaron_default_patrol>: .durk
+}
+
+entity thalvaron_durk: !NPC
+{
+	_string: "Durk"
+	_dialogue_root: .durk_dialogue	
+	_sprite: wood_elemental_1
+	_sprite_dead: wood_elemental_1_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_default_behavior_state: .durk
+}
+
+############################################################
+# Quest 1
+
+loot_group .durk_1_quest_item: {}
+
+item .durk_1_quest_item:
+{
+	icon: icon_flower_5
+	item_level: 16
+	loot_groups: [ .durk_1_quest_item ]
+	flags: [ not_sellable unique ]
+	string: "Durk's Sapling"
+	stack: 1
+}
+
+objective .durk_1_a:
+{
+	string: "Korgast Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_korgast ]
+		count: 1
+	}
+}
+
+objective .durk_1_b:
+{
+	string: "Durk's Sapling"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .durk_1_quest_item count: 1 }
+}
+
+{
+	${ _level: 16 }
+	item .durk_1_a: !QUEST_REWARD_2H_STAFF{ _string: "Durk's Wandering Stick" _icon: icon_staff_4 _wisdom: 1 _constitution: 2 _spell_damage: 1 }
+	item .durk_1_b: !QUEST_REWARD_SHIELD{ _string: "Ancient Wood Shield" _icon: icon_shield_1 _constitution: 1 _block_value: 2 }
+	item .durk_1_c: !QUEST_REWARD_NECK{ _string: "Blessed Flower of Salvation" _icon: icon_flower_8 _wisdom: 1 _healing: 2 }
+}
+
+quest .durk_1:
+{
+	string: "The Opposite of a Tree Hugger"
+
+	text:
+	[
+		"Venture past the old temple, through the dark woods, defeat Korgast and return the sapling to Durk."
+	]
+	
+	description: 
+	[
+		"I'm old and sad. I know I will soon loose my mind, as is the destiny of my kind.\n\n"
+		"To make matters worse, someone stole one of my saplings! A wizard did it! I think he goes by the name of Korgast and last I saw him was in the dark woods past the temple ruins. Can you get my sapling back to me? I miss him."
+	]
+
+	progress:
+	[
+		"*Sad tree sounds*"
+	]
+	
+	completion:
+	[
+		"Good. Durk doesn't like mean wizards."
+	]
+
+	objectives: [ .durk_1_a .durk_1_b ]
+	level: 16
+	reward_one_item: [ .durk_1_a .durk_1_b .durk_1_c ]
+}
+

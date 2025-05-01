@@ -1,0 +1,30 @@
+dialogue_screen .dwarf_guard_2_dialogue:
+{
+	text: 
+	[	
+		"Hot out today, isn't it?"
+	]		
+	
+	options:
+	[
+	]
+}
+
+dialogue_root .dwarf_guard_2_dialogue:
+{
+	.dwarf_guard_2_dialogue: { }
+}
+
+entity thalvaron_dwarf_guard_2: !NPC
+{
+	_string: "Durgan Tharok Guard"
+	_dialogue_root: .dwarf_guard_2_dialogue	
+	_sprite: dwarf_7
+	_sprite_dead: dwarf_7_dead
+	_level: 20
+	_faction: kingdom_of_thuldarim		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

@@ -11,7 +11,10 @@ namespace tpublic
 			FLAG_IS_MAGICAL				= 0x00000001,
 			FLAG_GENERATE_RAGE			= 0x00000002,
 			FLAG_CAN_BE_CRITICAL		= 0x00000004,
-			FLAG_LEECH					= 0x00000008
+			FLAG_LEECH					= 0x00000008,
+			FLAG_SELF					= 0x00000010,
+			FLAG_MINION					= 0x00000020,
+			FLAG_REVERSE				= 0x00000040
 		};
 
 		enum DamageType : uint8_t
@@ -26,6 +29,7 @@ namespace tpublic
 			DAMAGE_TYPE_UNHOLY,		
 			DAMAGE_TYPE_HOLY,			
 			DAMAGE_TYPE_POISON,
+			DAMAGE_TYPE_NATURE,
 
 			NUM_DAMAGE_TYPES
 		};
@@ -43,7 +47,8 @@ namespace tpublic
 			"Arcane",
 			"Unholy",
 			"Holy",
-			"Poison"
+			"Poison",
+			"Nature"
 		};
 
 		static_assert(sizeof(DAMAGE_TYPE_NAMES) / sizeof(const char*) == (size_t)NUM_DAMAGE_TYPES);
@@ -60,6 +65,12 @@ namespace tpublic
 				return FLAG_CAN_BE_CRITICAL;
 			if (strcmp(aString, "leech") == 0)
 				return FLAG_LEECH;
+			if (strcmp(aString, "self") == 0)
+				return FLAG_SELF;
+			if (strcmp(aString, "minion") == 0)
+				return FLAG_MINION;
+			if (strcmp(aString, "reverse") == 0)
+				return FLAG_REVERSE;
 			return 0;
 		}
 
@@ -83,6 +94,8 @@ namespace tpublic
 				return DAMAGE_TYPE_HOLY;
 			if (strcmp(aString, "poison") == 0)
 				return DAMAGE_TYPE_POISON;
+			if (strcmp(aString, "nature") == 0)
+				return DAMAGE_TYPE_NATURE;
 			return DamageType(0);
 		}
 
@@ -124,6 +137,8 @@ namespace tpublic
 			ID_MODIFY_FACTION,
 			ID_SPAWN_MINION,
 			ID_TRIGGER_ABILITY,
+			ID_START_ROUTE,
+			ID_RESET_COOLDOWNS,
 
 			NUM_IDS
 		};
@@ -149,7 +164,9 @@ namespace tpublic
 			"learn_profession_ability",
 			"modify_faction",
 			"spawn_minion",
-			"trigger_ability"
+			"trigger_ability",
+			"start_route",
+			"reset_cooldowns"
 		};
 
 		static_assert(sizeof(EFFECT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

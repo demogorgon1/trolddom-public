@@ -56,6 +56,16 @@ map_entity_spawn .junjun:
 	entity .junjun: { weight: 1 }
 }
 
+map_entity_spawn .tailoring_trainer:
+{
+	entity .tailoring_trainer: { weight: 1 }
+}
+
+map_entity_spawn .enchanting_trainer:
+{
+	entity .enchanting_trainer: { weight: 1 }
+}
+
 map_entity_spawn .xazax:
 {
 	entity .xazax: { weight: 1 }
@@ -156,6 +166,11 @@ map_entity_spawn .linda:
 	entity .linda: { weight: 1 }
 }
 
+map_entity_spawn .seacaptain:
+{
+	entity .seacaptain: { weight: 1 }
+}
+
 map_entity_spawn .camus:
 {
 	spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{}
@@ -205,16 +220,6 @@ map_entity_spawn .hermit:
 map_entity_spawn .gateway:
 {
 	entity gateway: { weight: 1 }
-}
-
-map_entity_spawn .the_shrouded_lands_light:
-{
-	entity the_shrouded_lands_light: { weight: 1 }
-}
-
-map_entity_spawn .the_shrouded_lands_underworld:
-{
-	entity the_shrouded_lands_underworld: { weight: 1 }
 }
 
 map_entity_spawn .zumhorn_2:
@@ -302,7 +307,6 @@ map_entity_spawn .crab_brute_5:
 map_entity_spawn .crab_ambusher_6:
 {
 	spawn_timer: { only_when_triggered: true }
-	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 map_entity_spawn .crab_boss_4:
@@ -511,6 +515,10 @@ map_player_spawn open_world_player_spawn_witch:
 {
 }
 
+map_player_spawn open_world_thalvaron_from:
+{
+}
+
 map_portal .dungeon_1_entrance:
 {
 	animation: !DEFAULT_PORTAL_ANIMATION{}
@@ -682,6 +690,9 @@ map_palette .stuff:
 	entity_spawn default_chest: [ 40 143 66 ]		
 	entity_spawn cauldron: [ 43 113 166 ]		
 	entity_spawn demo_limit: [ 13 193 16 ]		
+	entity_spawn the_shrouded_lands_light: [ 54 26 217 ]	
+	entity_spawn the_shrouded_lands_underworld: [ 54 54 217 ]	
+	entity_spawn seagull: [ 141 93 13 ]
 
 	entity_spawn .wildlife: [ 255 255 0 ]
 	entity_spawn .sylas: [ 255 189 0 ]
@@ -694,8 +705,6 @@ map_palette .stuff:
 	entity_spawn .fisherman: [ 0 2 255 ]
 	entity_spawn .junjun: [ 6 55 255 ]
 	entity_spawn .gateway: [ 54 23 85 ]	
-	entity_spawn .the_shrouded_lands_light: [ 54 26 217 ]	
-	entity_spawn .the_shrouded_lands_underworld: [ 54 54 217 ]	
 	entity_spawn .player_world_gateway: [ 23 60 85 ]	
 	entity_spawn .spawn_of_umbracoth: [ 32 0 0 ]		
 	entity_spawn .arcane_anomaly: [ 33 0 0 ]		
@@ -722,6 +731,7 @@ map_palette .stuff:
 	entity_spawn .camus: [ 202 13 115 ]	
 	entity_spawn .benny: [ 50 43 215 ]	
 	entity_spawn .linda: [ 50 43 115 ]	
+	entity_spawn .seacaptain: [ 10 234 70 ]	
 	entity_spawn .werner: [ 97 43 215 ]	
 	entity_spawn .ironfoot: [ 192 143 16 ]	
 	entity_spawn .orgh: [ 6 255 10 ]	
@@ -772,12 +782,15 @@ map_palette .stuff:
 	entity_spawn .rogargh: [ 240 94 106 ]
 	entity_spawn .korin: [ 94 240 106 ]
 	entity_spawn .horse: [ 194 240 106 ]
+	entity_spawn .tailoring_trainer: [ 201 94 83 ]
+	entity_spawn .enchanting_trainer: [ 201 94 183 ]
 	
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn open_world_player_spawn_paladin: [ 0 0 254 ]
 	player_spawn open_world_player_spawn_witch: [ 0 0 253 ]
 	player_spawn dungeon_1_exit: [ 0 0 200 ]	
 	player_spawn lair_of_zuthyg_exit: [ 10 20 200 ]	
+	player_spawn open_world_thalvaron_from: [ 100 20 200 ]	
 	
 	portal .dungeon_1_entrance: [ 0 234 0 ]	
 	portal .lair_of_zuthyg_entrance: [ 10 234 20 ]	
@@ -850,6 +863,7 @@ map_palette .doodads:
 	doodad wall_banner_blacksmithing: [ 243 59 53 ]
 	doodad tent: [ 249 51 53 ]	
 	doodad wall_banner_dark_green: [ 143 59 13 ]
+	doodad ship: [ 193 173 119 ]	
 }
 
 map_palette .flags:

@@ -6,6 +6,12 @@ dialogue_screen .seraphael_greetings:
 		"\n"
 		"Together we will cleanse these lands!"
 	]			
+	
+	options:
+	[
+		{ quest: .the_dawnbringer_1 !MUST_BE_REAL_DISCIPLE{} }
+		{ quest: .the_dawnbringer_2 !MUST_BE_REAL_DISCIPLE{} }
+	]
 }
 
 dialogue_root .seraphael_dialogue:
@@ -18,12 +24,103 @@ entity .the_dawnbringer: !NPC
 	_string: "Seraphael the Dawnbringer"
 	_dialogue_root: .seraphael_dialogue
 	_loot_table: .npc
-	_level: 12
+	_level: 22
+	_weapon_damage: 2
+	_resource_health: 3
 	_elite: true
-	_faction: npcs
+	_faction: light
 	_creature_type: humanoid
 	_not_pushable: true
 	_sprite: angel_1
 	_sprite_dead: angel_1_dead
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
 }
 	
+############################################################
+# Quest 1
+
+objective .the_dawnbringer_1:
+{
+	string: "Unholy Shrine Desecrated"
+	
+	use_ability: { entities: [ underworld_shrine ] count: 1 ability: desecrate }
+}
+
+quest .the_dawnbringer_1:
+{
+	string: "Cleansing the Unholy"
+
+	text:
+	[
+		"Desecrate an unholy shrine and return to Seraphael in The Shrouded Lands."
+	]
+	
+	description: 
+	[
+		"We're at war with the forces of evil and they gain their power from weak mortal souls worshipping them. Unholy shrines litter the lands and the must be ruined! Go and desecrate one of their vile shrines,"
+		"come back to me, and I'll reward you."
+	]
+
+	progress:
+	[
+		"Make haste!"
+	]
+	
+	completion:
+	[
+		"May the light bless you!"
+	]
+	
+	objectives: [ .the_dawnbringer_1 ]
+	repeat_mode: daily
+	level: 20
+	reward_reputation_multiplier: 0.6
+	reward_realm_balance<the_shrouded_lands_light>: { expression: a_mul_x_plus_b x: pvp_control_points a: 2 b: 6 }
+	reward_all_items: [ holy_token ]
+}
+
+############################################################
+# Quest 2
+
+objective .the_dawnbringer_2:
+{
+	string: "Follower of the Underworld Killed"
+	
+	maps: [ the_shrouded_lands ]
+	
+	kill_player: { count: 1 faction: underworld }
+}
+
+quest .the_dawnbringer_2:
+{
+	string: "Holy War"
+
+	text:
+	[
+		"Find and kill a player in the Shrouded Lands who is a follower of the Underworld."
+	]
+	
+	description: 
+	[
+		"Why would anyone side with evil? Especially a mortal. It doesn't make sense. Find one and put them out of their misery."
+	]
+
+	progress:
+	[
+		"May your retribution must be swift and deadly."
+	]
+	
+	completion:
+	[
+		"May the light bless you!"
+	]
+	
+	objectives: [ .the_dawnbringer_2 ]
+	repeat_mode: daily
+	level: 20
+	reward_reputation_multiplier: 0.6
+	reward_realm_balance<the_shrouded_lands_light>: { expression: a_mul_x_plus_b x: pvp_control_points a: 2 b: 6 }
+	reward_all_items: [ holy_token ]
+}
