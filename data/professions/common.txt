@@ -10,6 +10,7 @@
 	string: @_item_string
 	loot_groups: @_loot_groups
 	stack: 20	
+	level_range: [ 1 30 ]
 }
 
 !define GATHER_ENTITY
@@ -28,7 +29,8 @@
 			loot_table: @_loot_table 
 			verb: @_verb 
 			range: 1 
-			despawn: true 						
+			despawn: true 	
+			level: @_level
 			
 			<exists _required_item> required_item: @_required_item 
 		}		

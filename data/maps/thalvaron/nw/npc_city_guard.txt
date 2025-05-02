@@ -1,9 +1,94 @@
+dialogue_screen .city_guard:
+{
+	text: 
+	[	
+		"Yes? Do you need help with anything?"
+	]		
+	
+	options:
+	[
+		{ 
+			text: "Can you tell me where to find a spirit stone?"
+			goto: $dialogue_screen @city_guard_1 { text: [ "Just outside the Royal Garden Tavern in the center of the city. You can't miss it." ] }
+		}
+		
+		{ 
+			text: "Can you tell me where to find a place to store my belongings?"
+			goto: $dialogue_screen @city_guard_2 { text: [ "You'll find a stash in the Royal Garden Tavern. It's located in the center of the city in the trade district." ] }
+		}		
+		
+		{ 
+			text: "Is there an auction house in Valoris?"
+			goto: $dialogue_screen @city_guard_3 { text: [ "Yes, of course! Head to the trade district and you'll find it. It's in the center of the city, hard to miss." ] }
+		}	
+
+		{ 
+			text: "Do you have any profession trainers in Valoris?"
+			goto: $dialogue_screen 
+			{ 
+				text: [ "Yes, obviously. What profession are we talking about?" ] 
+				
+				options:
+				[
+					{ 
+						text: "Alchemy"
+						goto: $dialogue_screen @city_guard_4  { text: [ "Old Brick has a an alchemist's shop down in the furthest corner of Southgate. Watch out for his homumculus, it likes to bite ankles." ] }
+					}						
+					
+					{ 
+						text: "Blacksmithing"
+						goto: $dialogue_screen @city_guard_5 { text: [ "You'll find a blacksmith in the barracks in the Royal District." ] }
+					}											
+					
+					{ 
+						text: "Cooking"
+						goto: $dialogue_screen @city_guard_6 { text: [ "Visit the Royal Garden Tavern in the trade district. Someone there will there know about cooking." ] }
+					}																
+					
+					{ 
+						text: "Enchanting"
+						goto: $dialogue_screen @city_guard_7 { text: [ "Uhm, not sure. I think there might be an enchanter down in the furthest corner of Southgate. " ] }
+					}																
+
+					{ 
+						text: "First Aid"
+						goto: $dialogue_screen @city_guard_8 { text: [ "The Tyson sisters have a little shop at the central square of the trade district. They also do herbalism." ] }
+					}																
+
+					{ 
+						text: "Fishing"
+						goto: $dialogue_screen @city_guard_9 { text: [ "I'm sure you can find a friendly fisherman down by the docks." ] }
+					}																
+
+					{ 
+						text: "Herbalism"
+						goto: $dialogue_screen @city_guard_10 { text: [ "The Tyson sisters have a little shop at the central square of the trade district. They also do first aid." ] }
+					}																
+
+					{ 
+						text: "Mining"
+						goto: $dialogue_screen @city_guard_11 { text: [ "Mining? Uhm... Let me think. Actually it seems like someone forgot to put a mining trainer in Valoris. I think there is one down in Mirehaven, in the Marshlands." ] }
+					}	
+					
+					{ 
+						text: "Tailoring"
+						goto: $dialogue_screen @city_guard_12 { text: [ "There is a tailor at the main square of the trade district." ] }
+					}	
+					
+				]
+			}
+		}	
+
+	]
+}
+
 entity thalvaron_city_guard: !NPC
 {
 	_string: "City Guard"
 	_sprite: city_guard_1
 	_sprite_dead: city_guard_1_dead
 	_level: 20
+	_dialogue_root: $dialogue_root { .city_guard: { } }
 	_faction: valoris		
 	_creature_type: humanoid
 	_loot_table: .npc

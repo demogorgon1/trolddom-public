@@ -2,6 +2,25 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.2.1"
+
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Guards in Valoris can now help you find things." }
+	]
+
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Herbalism and mining in Thalvaron now works like intended." }	
+		{ text: "Recently added food items no longer consume entire stack when eaten." }
+		{ text: "Fixed bug where you couldn't loot chests while in a party." }
+	]
+	
+	#######################################################################################
 	heading: "v0.2.0"
 
 	text: "New content:"
@@ -22,6 +41,12 @@ changelog:
 		{ text: "Real-time and historical fight details (damage per second, etc) can be accessed by right clicking in combat log." }
 		{ text: "A new quest tracking interface can be enabled in the quest log." }
 		{ text: "Two new equipment slots for trinkets." }
+	]
+		
+	text: "Issues fixed:"
+		
+	list:		
+	[
 		{ text: "Fixed bug that allowed paladins to spam Divine Shield." }
 		{ text: "Fixed bug where you couldn't use right-click to move items from inventory to stash." }
 	]	
