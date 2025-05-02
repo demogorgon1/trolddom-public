@@ -5,32 +5,42 @@
 npc_metrics:
 {
 
-	level<1>:  { elite_weapon_damage: 2   elite_resource<health>: 2   elite_resource<mana>: 1 cash: [ 15 33 ]   elite_cash: 5 base_armor: 150 }
-	level<2>:  { elite_weapon_damage: 2.1 elite_resource<health>: 2.2 elite_resource<mana>: 1 cash: [ 25 40 ]   elite_cash: 5 base_armor: 217 }
-	level<3>:  { elite_weapon_damage: 2.2 elite_resource<health>: 2.4 elite_resource<mana>: 1 cash: [ 35 47 ]   elite_cash: 5 base_armor: 250 } 
-	level<4>:  { elite_weapon_damage: 2.3 elite_resource<health>: 2.6 elite_resource<mana>: 1 cash: [ 40 60 ]   elite_cash: 5 base_armor: 285 }
-	level<5>:  { elite_weapon_damage: 2.4 elite_resource<health>: 2.8 elite_resource<mana>: 1 cash: [ 44 78 ]   elite_cash: 5 base_armor: 315 }
-	level<6>:  { elite_weapon_damage: 2.5 elite_resource<health>: 3   elite_resource<mana>: 1 cash: [ 48 86 ]   elite_cash: 5 base_armor: 355 }
-	level<7>:  { elite_weapon_damage: 2.5 elite_resource<health>: 3.4 elite_resource<mana>: 1 cash: [ 53 106 ]  elite_cash: 5 base_armor: 390 }
-	level<8>:  { elite_weapon_damage: 2.5 elite_resource<health>: 3.6 elite_resource<mana>: 1 cash: [ 58 116 ]  elite_cash: 5 base_armor: 422 }
-	level<9>:  { elite_weapon_damage: 2.5 elite_resource<health>: 3.8 elite_resource<mana>: 1 cash: [ 64 128 ]  elite_cash: 5 base_armor: 450 }
-	level<10>: { elite_weapon_damage: 2.5 elite_resource<health>: 4.0 elite_resource<mana>: 1 cash: [ 80 140 ]  elite_cash: 5 base_armor: 480 }
-	level<11>: { elite_weapon_damage: 2.5 elite_resource<health>: 4.5 elite_resource<mana>: 1 cash: [ 90 152 ]  elite_cash: 5 base_armor: 522 }
-	level<12>: { elite_weapon_damage: 2.5 elite_resource<health>: 5 elite_resource<mana>: 1 cash: [ 100 164 ] elite_cash: 5 base_armor: 570 }
-	level<13>: { elite_weapon_damage: 2.5 elite_resource<health>: 5.5 elite_resource<mana>: 1 cash: [ 110 176 ] elite_cash: 5 base_armor: 615 }
-	level<14>: { elite_weapon_damage: 2.5 elite_resource<health>: 6 elite_resource<mana>: 1 cash: [ 120 192 ] elite_cash: 5 base_armor: 650 }
-	level<15>: { elite_weapon_damage: 2.5 elite_resource<health>: 6.5   elite_resource<mana>: 1 cash: [ 135 216 ] elite_cash: 5 base_armor: 685 }
-	level<16>: { elite_weapon_damage: 2.5 elite_resource<health>: 7 elite_resource<mana>: 1 cash: [ 150 240 ] elite_cash: 5 base_armor: 721 }
-	level<17>: { elite_weapon_damage: 2.5 elite_resource<health>: 7.5 elite_resource<mana>: 1 cash: [ 165 264 ] elite_cash: 5 base_armor: 756 }
-	level<18>: { elite_weapon_damage: 2.5 elite_resource<health>: 8.5 elite_resource<mana>: 1 cash: [ 180 288 ] elite_cash: 5 base_armor: 791 }
-	level<19>: { elite_weapon_damage: 2.5 elite_resource<health>: 9.5 elite_resource<mana>: 1 cash: [ 195 312 ] elite_cash: 5 base_armor: 826 }
-	level<20>: { elite_weapon_damage: 2.5 elite_resource<health>: 10  elite_resource<mana>: 1 cash: [ 210 336 ] elite_cash: 5 base_armor: 891 }
-	level<21>: { elite_weapon_damage: 2.5 elite_resource<health>: 11 elite_resource<mana>: 1 cash: [ 220 346 ] elite_cash: 5 base_armor: 930 }
-	level<22>: { elite_weapon_damage: 2.5 elite_resource<health>: 12 elite_resource<mana>: 1 cash: [ 230 356 ] elite_cash: 5 base_armor: 965 }
+	level<1>:  { elite_weapon_damage: 2   elite_resource<health>: 2   elite_resource<mana>: 1 cash: [ 15 33 ]   elite_cash: 5 base_armor:  150 }
+	level<2>:  { elite_weapon_damage: 2.1 elite_resource<health>: 2.2 elite_resource<mana>: 1 cash: [ 25 40 ]   elite_cash: 5 base_armor:  217 }
+	level<3>:  { elite_weapon_damage: 2.2 elite_resource<health>: 2.4 elite_resource<mana>: 1 cash: [ 35 47 ]   elite_cash: 5 base_armor:  250 } 
+	level<4>:  { elite_weapon_damage: 2.3 elite_resource<health>: 2.6 elite_resource<mana>: 1 cash: [ 40 60 ]   elite_cash: 5 base_armor:  285 }
+	level<5>:  { elite_weapon_damage: 2.4 elite_resource<health>: 2.8 elite_resource<mana>: 1 cash: [ 44 78 ]   elite_cash: 5 base_armor:  315 }
+	level<6>:  { elite_weapon_damage: 2.5 elite_resource<health>: 3   elite_resource<mana>: 1 cash: [ 48 86 ]   elite_cash: 5 base_armor:  355 }
+	level<7>:  { elite_weapon_damage: 2.5 elite_resource<health>: 3.4 elite_resource<mana>: 1 cash: [ 53 106 ]  elite_cash: 5 base_armor:  390 }
+	level<8>:  { elite_weapon_damage: 2.5 elite_resource<health>: 3.6 elite_resource<mana>: 1 cash: [ 58 116 ]  elite_cash: 5 base_armor:  422 }
+	level<9>:  { elite_weapon_damage: 2.5 elite_resource<health>: 3.8 elite_resource<mana>: 1 cash: [ 64 128 ]  elite_cash: 5 base_armor:  450 }
+	level<10>: { elite_weapon_damage: 2.5 elite_resource<health>: 4.0 elite_resource<mana>: 1 cash: [ 80 140 ]  elite_cash: 5 base_armor:  480 }
+	level<11>: { elite_weapon_damage: 2.5 elite_resource<health>: 4.5 elite_resource<mana>: 1 cash: [ 90 152 ]  elite_cash: 5 base_armor:  522 }
+	level<12>: { elite_weapon_damage: 2.5 elite_resource<health>: 5   elite_resource<mana>: 1 cash: [ 100 164 ] elite_cash: 5 base_armor:  570 }
+	level<13>: { elite_weapon_damage: 2.5 elite_resource<health>: 5.5 elite_resource<mana>: 1 cash: [ 110 176 ] elite_cash: 5 base_armor:  615 }
+	level<14>: { elite_weapon_damage: 2.5 elite_resource<health>: 6   elite_resource<mana>: 1 cash: [ 120 192 ] elite_cash: 5 base_armor:  650 }
+	level<15>: { elite_weapon_damage: 2.5 elite_resource<health>: 6.5 elite_resource<mana>: 1 cash: [ 135 216 ] elite_cash: 5 base_armor:  685 }
+	level<16>: { elite_weapon_damage: 2.5 elite_resource<health>: 7   elite_resource<mana>: 1 cash: [ 150 240 ] elite_cash: 5 base_armor:  721 }
+	level<17>: { elite_weapon_damage: 2.5 elite_resource<health>: 7.5 elite_resource<mana>: 1 cash: [ 165 264 ] elite_cash: 5 base_armor:  756 }
+	level<18>: { elite_weapon_damage: 2.5 elite_resource<health>: 8.5 elite_resource<mana>: 1 cash: [ 180 288 ] elite_cash: 5 base_armor:  791 }
+	level<19>: { elite_weapon_damage: 2.5 elite_resource<health>: 9.5 elite_resource<mana>: 1 cash: [ 195 312 ] elite_cash: 5 base_armor:  826 }
+	level<20>: { elite_weapon_damage: 2.5 elite_resource<health>: 10  elite_resource<mana>: 1 cash: [ 210 336 ] elite_cash: 5 base_armor:  891 }
+	level<21>: { elite_weapon_damage: 2.5 elite_resource<health>: 11  elite_resource<mana>: 1 cash: [ 225 350 ] elite_cash: 5 base_armor:  930 }
+	level<22>: { elite_weapon_damage: 2.5 elite_resource<health>: 12  elite_resource<mana>: 1 cash: [ 240 365 ] elite_cash: 5 base_armor:  965 }
+	level<23>: { elite_weapon_damage: 2.5 elite_resource<health>: 12  elite_resource<mana>: 1 cash: [ 260 385 ] elite_cash: 5 base_armor:  995 }
+	level<24>: { elite_weapon_damage: 2.5 elite_resource<health>: 12  elite_resource<mana>: 1 cash: [ 280 405 ] elite_cash: 5 base_armor: 1025 }
+	level<25>: { elite_weapon_damage: 2.5 elite_resource<health>: 12  elite_resource<mana>: 1 cash: [ 300 425 ] elite_cash: 5 base_armor: 1055 }
+	level<26>: { elite_weapon_damage: 2.5 elite_resource<health>: 12  elite_resource<mana>: 1 cash: [ 320 445 ] elite_cash: 5 base_armor: 1085 }
+	level<27>: { elite_weapon_damage: 2.5 elite_resource<health>: 12  elite_resource<mana>: 1 cash: [ 340 465 ] elite_cash: 5 base_armor: 1115 }
+	level<28>: { elite_weapon_damage: 2.5 elite_resource<health>: 12  elite_resource<mana>: 1 cash: [ 360 485 ] elite_cash: 5 base_armor: 1145 }
+	level<29>: { elite_weapon_damage: 2.5 elite_resource<health>: 12  elite_resource<mana>: 1 cash: [ 380 505 ] elite_cash: 5 base_armor: 1175 }
+	level<30>: { elite_weapon_damage: 2.5 elite_resource<health>: 12  elite_resource<mana>: 1 cash: [ 400 525 ] elite_cash: 5 base_armor: 1205 }
+	level<31>: { elite_weapon_damage: 2.5 elite_resource<health>: 12  elite_resource<mana>: 1 cash: [ 420 545 ] elite_cash: 5 base_armor: 1235 }
+	level<32>: { elite_weapon_damage: 2.5 elite_resource<health>: 12  elite_resource<mana>: 1 cash: [ 440 565 ] elite_cash: 5 base_armor: 1265 }
 	
-	base_resource_curve<health>: [ [ 1 115 ] [ 10 340 ] [ 20 1200 ] [ 30 3600 ] ]
-	base_resource_curve<mana>:   [ [ 1 80 ] [ 10 160 ] [ 20 320 ] [ 30 640 ] ]
-	base_weapon_damage_curve:	 [ [ 1 8 ] [ 10 26 ] [ 12 30 ] [ 20 120 ] [ 30 400 ] ]
+	base_resource_curve<health>: [ [ 1 115 ] [ 10 340 ] [ 20 1200 ] [ 32 3600 ] ]
+	base_resource_curve<mana>:   [ [ 1 80 ] [ 10 160 ] [ 20 320 ] [ 32 640 ] ]
+	base_weapon_damage_curve:	 [ [ 1 8 ] [ 10 26 ] [ 12 30 ] [ 20 120 ] [ 32 360 ] ]
 	
 	aggro_range_base_level_difference: -3
 	aggro_ranges:
