@@ -4,6 +4,13 @@ changelog:
 	#######################################################################################
 	heading: "v0.2.1"
 
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Guards in Valoris can now help you find things." }
+	]
+
 	text: "Issues fixed:"
 	
 	list:
