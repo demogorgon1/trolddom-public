@@ -324,7 +324,7 @@
 		_level: 10
 		_icon: icon_fish_3_cooked
 		_heal_tick: 64
-		_ability_tick: consumable_pickled_toesnapper
+		_ability_tick: consumable_pickled_toesnapper_tick
 		_ability: consumable_pickled_toesnapper
 		_aura: consumable_pickled_toesnapper
 		_item: { consumable_pickled_toesnapper: 1 }
@@ -346,7 +346,7 @@
 		_level: 11
 		_icon: icon_fish_4_cooked
 		_heal_tick: 80
-		_ability_tick: consumable_steamed_trout
+		_ability_tick: consumable_steamed_trout_tick
 		_ability: consumable_steamed_trout
 		_aura: consumable_steamed_trout
 		_item: { consumable_steamed_trout: 1 }
@@ -368,7 +368,7 @@
 		_level: 12
 		_icon: icon_fish_5_cooked
 		_heal_tick: 96
-		_ability_tick: consumable_seared_bass
+		_ability_tick: consumable_seared_bass_tick
 		_ability: consumable_seared_bass
 		_aura: consumable_seared_bass
 		_item: { consumable_seared_bass: 1 }
@@ -390,7 +390,7 @@
 		_level: 14
 		_icon: icon_fish_6_cooked
 		_heal_tick: 112
-		_ability_tick: consumable_spicy_perch_fillet
+		_ability_tick: consumable_spicy_perch_fillet_tick
 		_ability: consumable_spicy_perch_fillet
 		_aura: consumable_spicy_perch_fillet
 		_item: { consumable_spicy_perch_fillet: 1 }
@@ -412,7 +412,7 @@
 		_level: 16
 		_icon: icon_fish_7_cooked
 		_heal_tick: 128
-		_ability_tick: consumable_mistveil_balls
+		_ability_tick: consumable_mistveil_balls_tick
 		_ability: consumable_mistveil_balls
 		_aura: consumable_mistveil_balls
 		_item: { consumable_mistveil_balls: 1 }
