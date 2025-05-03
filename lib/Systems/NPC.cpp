@@ -451,7 +451,7 @@ namespace tpublic::Systems
 							{
 								const EntityInstance* taggedByEntityInstance = aContext->m_worldView->WorldViewSingleEntityInstance(tag->m_playerEntityInstanceId);
 								const Components::Position* taggedByEntityPosition = taggedByEntityInstance != NULL ? taggedByEntityInstance->GetComponent<Components::Position>() : NULL;
-								despawn = taggedByEntityPosition == NULL || taggedByEntityInstance->GetState() == EntityState::ID_DEAD || !Helpers::IsWithinDistance(position, taggedByEntityPosition, 24);
+								despawn = taggedByEntityPosition == NULL || taggedByEntityInstance->GetState() == EntityState::ID_DEAD || !Helpers::IsWithinDistance(position, taggedByEntityPosition, 48);
 							}
 
 							if(despawn)
