@@ -128,6 +128,7 @@ map_entity_spawn .the_light_guard_control_point_5: !THE_LIGHT_FLAG_GUARD{ _spawn
 		_default_behavior_state: .passive
 		_level: 20 
 		_elite: true
+		_not_pushable: true	
 	}
 	
 	entity .the_light_guard: !NPC { _string: "Guardian" _sprite: angel_2 _sprite_dead: angel_2_dead }
@@ -227,6 +228,7 @@ entity .the_light_irza: !NPC
 	_immune_to_stun: true
 	_immune_to_immobilize: true
 	_immune_to_slow: true
+	_not_pushable: true	
 	
 	_default_abilities:
 	[
@@ -322,6 +324,7 @@ map_entity_spawn .the_underworld_guard_control_point_5: !THE_UNDERWORLD_FLAG_GUA
 		_default_behavior_state: .passive
 		_level: 20 
 		_elite: true
+		_not_pushable: true	
 	}
 	
 	entity .the_underworld_guard: !NPC { _string: "Guardian" _sprite: demon_4 _sprite_dead: demon_4_dead }
@@ -421,6 +424,7 @@ entity .the_underworld_draethor: !NPC
 	_immune_to_immobilize: true
 	_immune_to_slow: true
 	_kill_contribution: true
+	_not_pushable: true	
 	
 	_default_abilities:
 	[

@@ -118,6 +118,7 @@
 			<exists _out_of_zone_action> out_of_zone_action: @_out_of_zone_action
 			<exists _evade_despawn> evade_despawn: @_evade_despawn
 			<exists _aggro_requirements> aggro_requirements: @_aggro_requirements
+			<exists _max_leash_distance> max_leash_distance: @_max_leash_distance
 		}		
 		sprite<static>: 
 		{ 

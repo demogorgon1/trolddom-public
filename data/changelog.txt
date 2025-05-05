@@ -2,6 +2,33 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.2.2"
+
+	text: "New:"
+	
+	list:
+	[
+		{ text: "Completed quests show up on the map." }
+		{ text: "Two new enchants for chest armor." }
+	]
+
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Removed extra spirit stones." }	
+		{ text: "Added missing stashes." }
+		{ text: "Increased the distance you can get from escorted NPC before despawn." }
+		{ text: "Fishing available in all of The Shrouded Lands like intended." }
+		{ text: "Items that increase critical strike chance with spells now work correctly." }
+		{ text: "Fixed some minor bugs." }
+		{ text: "Elite guards in The Shrouded Lands can no longer be pushed around." }
+		{ text: "Some elites can no longer be easily kited far away from their original location." }
+		{ text: "Reagents for certain enchants changed to be more level appropriate." }
+		{ text: "Quest list is now scrollable." }
+	]
+
+	#######################################################################################
 	heading: "v0.2.1"
 
 	text: "Changes:"

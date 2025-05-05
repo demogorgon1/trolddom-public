@@ -12,6 +12,8 @@
 	train_ability: craft_enchant_gloves_dexterity
 	train_ability: craft_enchant_gloves_wisdom
 	train_ability: craft_enchant_boots_constitution
+	train_ability: craft_enchant_chest_greater_mastery
+	train_ability: craft_enchant_chest_mastery
 }
 
 !define DEFAULT_BLACKSMITING_TRAINER

@@ -119,6 +119,10 @@ namespace tpublic
 						{
 							m_mapTransfer = MapTransfer(aChild);
 						}
+						else if (aChild->m_name == "no_point_of_interest")
+						{
+							m_noPointOfInterest = aChild->GetBool();
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
@@ -140,6 +144,7 @@ namespace tpublic
 					aWriter->WriteBool(m_questCompletion);
 					aWriter->WriteObjects(m_requirements);
 					aWriter->WriteOptionalObject(m_mapTransfer);
+					aWriter->WriteBool(m_noPointOfInterest);
 				}
 
 				bool
@@ -166,6 +171,8 @@ namespace tpublic
 						return false;
 					if(!aReader->ReadOptionalObject(m_mapTransfer))
 						return false;
+					if (!aReader->ReadBool(m_noPointOfInterest))
+						return false;
 					return true;
 				}
 
@@ -180,6 +187,7 @@ namespace tpublic
 				uint32_t					m_conditionExpressionId = 0;
 				std::vector<Requirement>	m_requirements;
 				std::optional<MapTransfer>	m_mapTransfer;
+				bool						m_noPointOfInterest = false;
 			};
 
 			struct SellReputationLevelRequirement

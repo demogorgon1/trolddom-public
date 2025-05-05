@@ -511,6 +511,7 @@ namespace tpublic
 		_WriteStaticPositionToolTipTable(aStream, m_staticPositionToolTips);
 		aStream->WriteOptionalObjectPointer(m_pvp);
 		aStream->WriteUInts(m_realmBalanceIds);
+		aStream->WriteObjects(m_pointsOfInterest);
 	}
 
 	bool	
@@ -585,6 +586,8 @@ namespace tpublic
 		if(!aStream->ReadOptionalObjectPointer(m_pvp))
 			return false;
 		if(!aStream->ReadUInts(m_realmBalanceIds))
+			return false;
+		if (!aStream->ReadObjects(m_pointsOfInterest))
 			return false;
 
 		return true;
@@ -802,6 +805,7 @@ namespace tpublic
 		m_doodads = aMapData->m_doodads;
 		m_walls = aMapData->m_walls;
 		m_staticPositionToolTips = aMapData->m_staticPositionToolTips;
+		m_pointsOfInterest = aMapData->m_pointsOfInterest;
 	}
 
 	uint32_t	

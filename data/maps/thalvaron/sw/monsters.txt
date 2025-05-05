@@ -1267,6 +1267,7 @@ map_entity_spawn thalvaron_krask:
 		_immune_to_stun: true
 		_immune_to_immobilize: true
 		_immune_to_slow: true
+		_max_leash_distance: 20
 		
 		_abilities: 
 		[ 

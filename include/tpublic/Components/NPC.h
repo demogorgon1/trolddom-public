@@ -463,6 +463,7 @@ namespace tpublic
 				FIELD_EVADE_DESPAWN,
 				FIELD_AGGRO_REQUIREMENTS,
 				FIELD_CAN_DIE,
+				FIELD_MAX_LEASH_DISTANCE,
 			};
 
 			static void
@@ -485,6 +486,7 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_EVADE_DESPAWN, "evade_despawn", offsetof(NPC, m_evadeDespawn));
 				aSchema->DefineCustomObject<AggroRequirements>(FIELD_AGGRO_REQUIREMENTS, "aggro_requirements", offsetof(NPC, m_aggroRequirements));
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_CAN_DIE, "can_die", offsetof(NPC, m_canDie));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_MAX_LEASH_DISTANCE, "max_leash_distance", offsetof(NPC, m_maxLeashDistance));
 			}
 
 			const StateEntry*
@@ -518,6 +520,7 @@ namespace tpublic
 				m_evadeDespawn = false;
 				m_aggroRequirements = AggroRequirements();
 				m_canDie = true;
+				m_maxLeashDistance = 0;
 
 				m_cooldowns.m_entries.clear();
 				m_castInProgress.reset();
@@ -558,6 +561,7 @@ namespace tpublic
 			OutOfZoneAction								m_outOfZoneAction;
 			bool										m_evadeDespawn = false;
 			AggroRequirements							m_aggroRequirements;
+			uint32_t									m_maxLeashDistance = 0;
 
 			// Not serialized
 			Cooldowns									m_cooldowns;

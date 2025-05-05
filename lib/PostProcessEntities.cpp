@@ -18,18 +18,22 @@ namespace tpublic
 
 		void
 		_PostProcessEntity(
-			const Manifest*		aManifest,
-			Data::Entity*		aEntity)
+			const Manifest*			aManifest,
+			Data::Entity*			aEntity)
 		{
 			const NPCMetrics& npcMetrics = aManifest->m_npcMetrics;
 
+			const Components::CombatPublic* combatPublic = aEntity->TryGetComponent<Components::CombatPublic>();
+			Components::NPC* npc = aEntity->TryGetComponent<Components::NPC>();
+
+			// Default NPC stats
 			ApplyNPCMetrics::Process(
 				&npcMetrics, 
 				aEntity->m_modifiers, 
-				aEntity->TryGetComponent<Components::CombatPublic>(),
+				combatPublic,
 				aEntity->TryGetComponent<Components::CombatPrivate>(),
 				aEntity->TryGetComponent<Components::MinionPrivate>(),
-				aEntity->TryGetComponent<Components::NPC>());
+				npc);
 		}
 
 	}

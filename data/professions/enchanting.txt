@@ -217,35 +217,35 @@ ability disenchant:
 }
 
 #####################################################
-# Enchant Shield - Major Constitution
+# Enchant Boots - Spirit
 
 {
 	${
-		_string: "Enchant Shield - Major Constitution"
-		_string_item: "Enchant Shield: Major Constitution"
-		_description: "Enchants item to increase Constitution by 2."
-		_item: enchant_shield_major_constitution
-		_produce: { enchant_shield_major_constitution: 1 } 
-		_materials: { reagent_mystery_essence: 4 reagent_mystery_crystal: 1 reagent_paper: 1 }
-		_skill: 55
-		_target_item_requirements: { item_types: [ shield ] }
-		_id: enchant_shield_major_constitution	
-		_consume_items: { enchant_shield_major_constitution: 1 }	
+		_string: "Enchant Boots - Spirit"
+		_string_item: "Enchant Boots: Spirit"
+		_description: "Enchants item to increase Spirit by 1."
+		_item: enchant_boots_spirit
+		_produce: { enchant_boots_spirit: 1 } 
+		_materials: { reagent_mystery_essence: 2 reagent_paper: 1 }
+		_skill: 20
+		_target_item_requirements: { equipment_slots: [ feet ] }
+		_id: enchant_boots_spirit
+		_consume_items: { enchant_boots_spirit: 1 }	
 	}
 
-	aura enchant_shield_major_constitution:
+	aura enchant_boots_spirit:
 	{
 		type: hidden
 		flags: [ item silent ]
 		icon: icon_enchanted_paper	
 
-		string: "Constitution +2"
-		stat_modifiers: { constitution: { add: 2 } }
+		string: "Spirit +1"
+		stat_modifiers: { spirit: { add: 1 } }
 	}
 
-	ability enchant_shield_major_constitution: !ENCHANTING_APPLY{}
-	item enchant_shield_major_constitution: !ENCHANTING_ITEM{}
-	ability craft_enchant_shield_major_constitution: !ENCHANTING_CRAFT{}
+	ability enchant_boots_spirit: !ENCHANTING_APPLY{}
+	item enchant_boots_spirit: !ENCHANTING_ITEM{}
+	ability craft_enchant_boots_spirit: !ENCHANTING_CRAFT{}
 }
 
 #####################################################
@@ -281,6 +281,70 @@ ability disenchant:
 }
 
 #####################################################
+# Enchant Chest - Mastery
+
+{
+	${
+		_string: "Enchant Chest - Mastery"
+		_string_item: "Enchant Chest: Mastery"
+		_description: "Enchants item to increase all stats by 1."
+		_item: enchant_chest_mastery
+		_produce: { enchant_chest_mastery: 1 } 
+		_materials: { reagent_mystery_crystal: 3 reagent_paper: 1 }
+		_skill: 50
+		_target_item_requirements: { equipment_slots: [ chest ] }
+		_id: enchant_chest_mastery
+		_consume_items: { enchant_chest_mastery: 1 }	
+	}
+
+	aura enchant_chest_mastery:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper	
+
+		string: "All Stats +1"
+		stat_modifiers: { wisdom: { add: 1 } strength: { add: 1 } dexterity: { add: 1 } spirit: { add: 1 }  constitution: { add: 1 } }
+	}
+
+	ability enchant_chest_mastery: !ENCHANTING_APPLY{}
+	item enchant_chest_mastery: !ENCHANTING_ITEM{}
+	ability craft_enchant_chest_mastery: !ENCHANTING_CRAFT{}
+}
+
+#####################################################
+# Enchant Shield - Major Constitution
+
+{
+	${
+		_string: "Enchant Shield - Major Constitution"
+		_string_item: "Enchant Shield: Major Constitution"
+		_description: "Enchants item to increase Constitution by 2."
+		_item: enchant_shield_major_constitution
+		_produce: { enchant_shield_major_constitution: 1 } 
+		_materials: { reagent_arcane_essence: 4 reagent_mystery_crystal: 1 reagent_paper: 1 }
+		_skill: 55
+		_target_item_requirements: { item_types: [ shield ] }
+		_id: enchant_shield_major_constitution	
+		_consume_items: { enchant_shield_major_constitution: 1 }	
+	}
+
+	aura enchant_shield_major_constitution:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper	
+
+		string: "Constitution +2"
+		stat_modifiers: { constitution: { add: 2 } }
+	}
+
+	ability enchant_shield_major_constitution: !ENCHANTING_APPLY{}
+	item enchant_shield_major_constitution: !ENCHANTING_ITEM{}
+	ability craft_enchant_shield_major_constitution: !ENCHANTING_CRAFT{}
+}
+
+#####################################################
 # Enchant Bracers - Strength
 
 {
@@ -290,7 +354,7 @@ ability disenchant:
 		_description: "Enchants item to increase Strength by 1."
 		_item: enchant_bracers_strength
 		_produce: { enchant_bracers_strength: 1 } 
-		_materials: { reagent_dream_essence: 3 reagent_paper: 1 }
+		_materials: { reagent_arcane_essence: 3 reagent_paper: 1 }
 		_skill: 55
 		_target_item_requirements: { equipment_slots: [ wrists ] }
 		_id: enchant_bracers_strength	
@@ -322,7 +386,7 @@ ability disenchant:
 		_description: "Enchants item to increase Spirit by 1."
 		_item: enchant_bracers_spirit
 		_produce: { enchant_bracers_spirit: 1 } 
-		_materials: { reagent_dream_essence: 4 reagent_paper: 1 }
+		_materials: { reagent_arcane_essence: 4 reagent_paper: 1 }
 		_skill: 60
 		_target_item_requirements: { equipment_slots: [ wrists ] }
 		_id: enchant_bracers_spirit
@@ -354,7 +418,7 @@ ability disenchant:
 		_description: "Enchants item to increase Dexterity by 1."
 		_item: enchant_gloves_dexterity
 		_produce: { enchant_gloves_dexterity: 1 } 
-		_materials: { reagent_dream_essence: 4 reagent_dream_crystal: 1 reagent_paper: 1 }
+		_materials: { reagent_arcane_essence: 4 reagent_dream_crystal: 1 reagent_paper: 1 }
 		_skill: 65
 		_target_item_requirements: { equipment_slots: [ hands ] }
 		_id: enchant_gloves_dexterity
@@ -374,6 +438,38 @@ ability disenchant:
 	ability enchant_gloves_dexterity: !ENCHANTING_APPLY{}
 	item enchant_gloves_dexterity: !ENCHANTING_ITEM{}
 	ability craft_enchant_gloves_dexterity: !ENCHANTING_CRAFT{}
+}
+
+#####################################################
+# Enchant Chest - Greater Mastery
+
+{
+	${
+		_string: "Enchant Chest - Greater Mastery"
+		_string_item: "Enchant Chest: Greater Mastery"
+		_description: "Enchants item to increase all stats by 2."
+		_item: enchant_chest_greater_mastery
+		_produce: { enchant_chest_greater_mastery: 1 } 
+		_materials: { reagent_dream_crystal: 3 reagent_paper: 1 }
+		_skill: 70
+		_target_item_requirements: { equipment_slots: [ chest ] }
+		_id: enchant_chest_greater_mastery
+		_consume_items: { enchant_chest_greater_mastery: 1 }	
+	}
+
+	aura enchant_chest_greater_mastery:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper	
+
+		string: "All Stats +2"
+		stat_modifiers: { wisdom: { add: 2 } strength: { add: 2 } dexterity: { add: 2 } spirit: { add: 2 }  constitution: { add: 2 } }
+	}
+
+	ability enchant_chest_greater_mastery: !ENCHANTING_APPLY{}
+	item enchant_chest_greater_mastery: !ENCHANTING_ITEM{}
+	ability craft_enchant_chest_greater_mastery: !ENCHANTING_CRAFT{}
 }
 
 #####################################################
@@ -438,38 +534,6 @@ ability disenchant:
 	ability enchant_boots_constitution: !ENCHANTING_APPLY{}
 	item enchant_boots_constitution: !ENCHANTING_ITEM{}
 	ability craft_enchant_boots_constitution: !ENCHANTING_CRAFT{}
-}
-
-#####################################################
-# Enchant Boots - Spirit
-
-{
-	${
-		_string: "Enchant Boots - Spirit"
-		_string_item: "Enchant Boots: Spirit"
-		_description: "Enchants item to increase Spirit by 1."
-		_item: enchant_boots_spirit
-		_produce: { enchant_boots_spirit: 1 } 
-		_materials: { reagent_mystery_essence: 2 reagent_paper: 1 }
-		_skill: 20
-		_target_item_requirements: { equipment_slots: [ feet ] }
-		_id: enchant_boots_spirit
-		_consume_items: { enchant_boots_spirit: 1 }	
-	}
-
-	aura enchant_boots_spirit:
-	{
-		type: hidden
-		flags: [ item silent ]
-		icon: icon_enchanted_paper	
-
-		string: "Spirit +1"
-		stat_modifiers: { spirit: { add: 1 } }
-	}
-
-	ability enchant_boots_spirit: !ENCHANTING_APPLY{}
-	item enchant_boots_spirit: !ENCHANTING_ITEM{}
-	ability craft_enchant_boots_spirit: !ENCHANTING_CRAFT{}
 }
 
 #####################################################

@@ -710,6 +710,51 @@ namespace tpublic
 			std::unique_ptr<MapGeneratorBase>	m_base;
 		};
 
+		enum PointOfInterestType : uint8_t
+		{
+			INVALID_POINT_OF_INTEREST_TYPE,
+			
+			POINT_OF_INTEREST_TYPE_QUEST_GIVER
+		};
+
+		struct PointOfInterest
+		{
+			void
+			ToStream(
+				IWriter* aWriter) const
+			{
+				aWriter->WritePOD(m_type);
+				m_position.ToStream(aWriter);
+				aWriter->WriteUInts(m_questIds);
+				aWriter->WriteUInt(m_entityId);
+				aWriter->WriteUInt(m_dialogueRootId);
+			}
+
+			bool
+			FromStream(
+				IReader* aReader)
+			{
+				if (!aReader->ReadPOD(m_type))
+					return false;
+				if (!m_position.FromStream(aReader))
+					return false;
+				if (!aReader->ReadUInts(m_questIds))
+					return false;
+				if (!aReader->ReadUInt(m_entityId))
+					return false;
+				if (!aReader->ReadUInt(m_dialogueRootId))
+					return false;
+				return true;
+			}
+
+			// Public data
+			PointOfInterestType		m_type = INVALID_POINT_OF_INTEREST_TYPE;
+			Vec2					m_position;
+			uint32_t				m_dialogueRootId = 0;
+			uint32_t				m_entityId = 0;
+			std::vector<uint32_t>	m_questIds;
+		};
+
 							MapData();
 							MapData(
 								const SourceNode*		aSource);
@@ -796,6 +841,7 @@ namespace tpublic
 		std::unique_ptr<MapRouteData>				m_mapRouteData;
 		std::unique_ptr<PVP>						m_pvp;
 		std::vector<uint32_t>						m_realmBalanceIds;
+		std::vector<PointOfInterest>				m_pointsOfInterest;
 	
 		typedef std::unordered_map<Vec2, std::string, Vec2::Hasher> StaticPositionToolTipTable;
 		

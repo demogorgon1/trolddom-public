@@ -157,7 +157,7 @@ item item_bony_toesnapper:
 	icon: icon_fish_3
 	stack: 20
 	item_level: 10
-	level_range: [ 10 10 ]
+	level_range: [ 10 20 ]
 }
 
 ################################################################################

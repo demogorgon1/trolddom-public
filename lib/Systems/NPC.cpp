@@ -996,7 +996,12 @@ namespace tpublic::Systems
 							else if(distanceSquared > 1 && !auras->HasEffect(AuraEffect::ID_IMMOBILIZE, NULL))
 							{
 								int32_t ticksSinceLastAttack = aContext->m_tick - npc->m_lastAttackTick;
-								if(ticksSinceLastAttack > 80 && npc->m_large) 
+								if(ticksSinceLastAttack > 30 && npc->m_maxLeashDistance > 0 && leashDistanceSquared > (int32_t)(npc->m_maxLeashDistance * npc->m_maxLeashDistance))
+								{
+									// Exceeded max leash distance nad haven't been able to attack for a bit. Evade!
+									aContext->m_eventQueue->EventQueueThreatClear(aEntityInstanceId);
+								}
+								else if(ticksSinceLastAttack > 80 && npc->m_large)
 								{
 									// We're a large NPC and we haven't been able to hurt anyone for some time. We're probably getting cheesed. Evade!
 									aContext->m_eventQueue->EventQueueThreatClear(aEntityInstanceId);
