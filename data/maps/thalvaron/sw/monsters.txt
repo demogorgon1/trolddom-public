@@ -331,7 +331,7 @@ map_entity_spawn thalvaron_swamp_giant:
 				icon: @_icon
 				flags: [ target_self item ]
 				requirement self<must_have_item_equipped>: .swamp_giant_1_a
-				direct_effect remove_aura: { aura_flags: [ poison ] }
+				direct_effect remove_aura: { aura_type: debuff aura_flags: [ poison ] }
 			}
 		}
 	}
