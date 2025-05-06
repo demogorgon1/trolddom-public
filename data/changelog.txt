@@ -6,9 +6,15 @@ changelog:
 
 	text: "Issues fixed:"
 	
+	text: "Changes:"
+	[
+		{ text: "Black Beast's Growl ability now increases threat by 100% instead of 50%." }
+	]
+	
 	list:
 	[
 		{ text: "Natural Remedy now works like intended." }	
+		{ text: "Witch talent Improved Drain Life now works like intended." }
 	]
 
 	#######################################################################################

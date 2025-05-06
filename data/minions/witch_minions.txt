@@ -498,21 +498,21 @@ ${
 	aura .black_beast_growl:
 	{
 		string: "Threatening"
-		description: "Threat generated increased by 50%."
+		description: "Threat generated increased by 100%."
 		type: buff
 		flags: [ unique ]
 		icon: icon_demonic_fury
 		duration: 200
 		aura_effect threat_modifier: 
 		{ 
-			multiplier: 1.5
+			multiplier: 2
 		}
 	}
 		
 	ability .black_beast_growl:
 	{
 		string: "Growl"
-		description: "Deals $damage$ damage to target. All threat increased by 50% for 20 seconds."
+		description: "Deals $damage$ damage to target. All threat increased by 100% for 20 seconds."
 		range: 1	
 		cooldowns: [ global ]
 		flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
