@@ -1,0 +1,198 @@
+map_player_spawn .player_spawn:
+{
+}
+
+noise .rocks_overlay:
+{
+	divide<[0 255]>:
+	{
+		add:
+		{
+			divide<[0 10000]>:
+			{
+				perlin: { scale: 8000 }
+				constant: 4
+			}
+		
+			divide:
+			{
+				perlin: { scale: 4000 }
+				constant: 4
+			}
+			
+			perlin: { scale: 2000 }
+			perlin: { scale: 1000 }
+			perlin: { scale: 500 }
+			
+			constant: 5000			
+		}
+		
+		constant: 256
+	}
+}
+
+noise .humidity:
+{
+	divide<[0 255]>:
+	{
+		add:
+		{
+			perlin: { scale: 6000 }
+			perlin: { scale: 2000 }
+			perlin: { scale: 500 }
+			constant: 32000			
+		}
+		
+		constant: 256
+	}	
+}
+
+noise .temperature:
+{
+	divide<[0 255]>:
+	{
+		add:
+		{
+			perlin: { scale: 100 }
+			perlin: { scale: 50 }
+			
+			constant: 32000	
+		}
+		
+		constant: 256
+	}	
+}
+
+noise .doodad_brown_rocks_overlay:
+{
+	divide<[0 255]>:
+	{
+		add:
+		{
+			perlin: { scale: 9000 }
+			perlin: { scale: 5000 }
+			perlin: { scale: 1200 }
+			constant: 32000			
+		}
+		
+		constant: 256
+	}	
+}
+
+noise .doodad_grass_overlay:
+{
+	divide<[0 255]>:
+	{
+		add:
+		{
+			perlin: { scale: 9000 }
+			constant: 32000			
+		}
+		
+		constant: 256
+	}	
+}
+
+map_entity_spawn .object:
+{	
+}
+
+map survival_1:
+{
+	string: "Lost Isles"
+	type: private
+	default_player_spawn: .player_spawn
+	has_dynamic_overview_map: true
+	max_players: 5
+	max_minions: 1
+
+	default_tile: water
+	default_fishing_loot_table: fish
+	view_attenuation: 0
+	view_attenuation_bias: 0
+	view_hidden_visibility: 35			
+
+	generator world:
+	{
+		terrain_palette_entry<ocean>: "."
+		terrain_palette_entry<flat>: "X"
+		player_spawn_entity: standing_stone
+		object_map_entity_spawn: .object
+	
+		execute all:
+		{
+			execute one_of:
+			{
+				execute paletted_map:
+				[
+					"...."
+					".XX."
+					".XX."
+					"...."
+				]
+			}
+			
+			execute double: { passes: 5 }
+			execute median_filter: 1
+			execute grow: trees
+			execute despeckle: {}
+			execute double: { passes: 1 no_mutations: true }
+			execute add_borders: ocean
+			execute add_borders: ocean
+			
+			execute overlay: 
+			{
+				noise: .rocks_overlay
+				terrain<rocks>: { above: 128 exclude: [ ocean ] }				
+				doodad<small_rocks>: { range: [ 0 128 ] probability: [ 0 16 ] terrain: [ flat ] }
+			}
+			
+			execute overlay: 
+			{
+				noise: .doodad_brown_rocks_overlay
+				doodad<small_rocks_brown>: { range: [ 192 256 ] probability: [ 0 10 ] terrain: [ flat ] }
+			}
+
+			execute overlay: 
+			{
+				noise: .doodad_grass_overlay
+				doodad<grass_patch>: { range: [ 129 256 ] probability: [ 0 32 ] terrain: [ flat ] }
+			}
+
+			execute terrain_modifier_map:
+			{
+				terrain_modifier: humidity
+				noise: .humidity
+			}		
+
+			execute terrain_modifier_map:
+			{
+				terrain_modifier: temperature
+				noise: .temperature
+			}		
+			
+			execute add_entity_spawns:
+			{
+				entity_spawn: [ herbalism ]
+				probability: 7
+				terrain: [ flat ]
+				neighbor_terrain_probability_bonus<trees>: 12
+				neighbor_terrain_probability_bonus<rocks>: 2
+				min_distance_to_nearby: 2
+			}
+			
+			execute add_entity_spawns:
+			{
+				entity_spawn: [ mining ]
+				probability: 70
+				terrain: [ rocks ]
+				neighbor_terrain_required: flat
+				neighbor_terrain_required: rocks
+				min_distance_to_nearby: 2
+			}			
+			
+			execute player_spawns: 1
+		}		
+	}
+}
+ 

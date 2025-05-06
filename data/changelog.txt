@@ -3,13 +3,15 @@ changelog:
 
 	#######################################################################################
 	heading: "v0.2.3"
-
-	text: "Issues fixed:"
 	
 	text: "Changes:"
+	
+	list:
 	[
 		{ text: "Black Beast's Growl ability now increases threat by 100% instead of 50%." }
 	]
+
+	text: "Issues fixed:"
 	
 	list:
 	[
