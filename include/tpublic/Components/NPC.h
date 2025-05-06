@@ -464,6 +464,8 @@ namespace tpublic
 				FIELD_AGGRO_REQUIREMENTS,
 				FIELD_CAN_DIE,
 				FIELD_MAX_LEASH_DISTANCE,
+				FIELD_MELEE_PUSH_PRIORITY,
+				FIELD_OTHER_NPC_PUSH_OVERRIDE
 			};
 
 			static void
@@ -487,6 +489,8 @@ namespace tpublic
 				aSchema->DefineCustomObject<AggroRequirements>(FIELD_AGGRO_REQUIREMENTS, "aggro_requirements", offsetof(NPC, m_aggroRequirements));
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_CAN_DIE, "can_die", offsetof(NPC, m_canDie));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_MAX_LEASH_DISTANCE, "max_leash_distance", offsetof(NPC, m_maxLeashDistance));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_MELEE_PUSH_PRIORITY, "melee_push_priority", offsetof(NPC, m_meleePushPriority));
+				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_OTHER_NPC_PUSH_OVERRIDE, "other_npc_push_override", offsetof(NPC, m_otherNPCPushOverride));
 			}
 
 			const StateEntry*
@@ -521,6 +525,8 @@ namespace tpublic
 				m_aggroRequirements = AggroRequirements();
 				m_canDie = true;
 				m_maxLeashDistance = 0;
+				m_meleePushPriority = 0;
+				m_otherNPCPushOverride = false;
 
 				m_cooldowns.m_entries.clear();
 				m_castInProgress.reset();
@@ -562,6 +568,8 @@ namespace tpublic
 			bool										m_evadeDespawn = false;
 			AggroRequirements							m_aggroRequirements;
 			uint32_t									m_maxLeashDistance = 0;
+			uint32_t									m_meleePushPriority = 0;
+			bool										m_otherNPCPushOverride = false;
 
 			// Not serialized
 			Cooldowns									m_cooldowns;

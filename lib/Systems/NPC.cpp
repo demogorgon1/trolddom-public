@@ -1017,30 +1017,99 @@ namespace tpublic::Systems
 												npc->m_npcMovement.Reset(aContext->m_tick);
 										}
 
-										IEventQueue::EventQueueMoveRequest moveRequest;
-										if (npc->m_npcMovement.GetMoveRequest(
-											aContext->m_worldView->WorldViewGetMapData()->m_mapPathData.get(),
-											position->m_position,
-											targetPosition->m_position,
-											aContext->m_tick,
-											position->m_lastMoveTick,
-											*aContext->m_random,
-											moveRequest))
+										const EntityInstance* pushEntityInstance = NULL;
+										std::optional<Vec2> pushPosition;
+
+										if(npc->m_meleePushPriority > 0 && !npc->m_large)
 										{
-											moveRequest.m_entityInstanceId = aEntityInstanceId;
-											moveRequest.m_canMoveOnAllNonViewBlockingTiles = npc->m_canMoveOnAllNonViewBlockingTiles;
+											std::function<const EntityInstance*(const Vec2&)> getEntityInstance = [&](
+												const Vec2& aPosition) -> const EntityInstance*
+											{
+												const EntityInstance* entityInstance = NULL;
 
-											aContext->m_eventQueue->EventQueueMove(moveRequest);
+												aContext->m_worldView->WorldViewEntityInstancesAtPosition(aPosition, [&](
+													const EntityInstance* aMidEntityInstance) -> bool
+												{
+													const Components::NPC* otherNPC = aMidEntityInstance->GetComponent<Components::NPC>();
+													const Components::CombatPublic* otherCombatPublic = aMidEntityInstance->GetComponent<Components::CombatPublic>();
+													const Components::Position* otherPosition = aMidEntityInstance->GetComponent<Components::Position>();
 
-											npc->m_moveCooldownUntilTick = aContext->m_tick + 2;
-											npc->m_lastCombatMoveTick = aContext->m_tick;
+													if(otherNPC != NULL && otherCombatPublic != NULL)
+													{
+														bool canBePushed = otherCombatPublic->IsPushable() || otherNPC->m_otherNPCPushOverride;
+														if (otherNPC->m_meleePushPriority < npc->m_meleePushPriority && canBePushed && !otherNPC->m_large && otherPosition->IsBlocking())
+														{
+															entityInstance = aMidEntityInstance;
+															return true; // Stop, found something to push
+														}
+													}										
+													return false;
+												});
+
+												return entityInstance;
+											};
+
+											if(distanceSquared == 4)
+											{
+												// This means that we're horizontally or vertically 2 tiles away from the target - and we're some kind of melee NPC that really wants 
+												// to get close to attack. Figure out if some other NPC is standing between us and the target.
+												// FIXME: doesn't work if either of the NPCs are large
+												Vec2 midPosition = { (position->m_position.m_x + targetPosition->m_position.m_x) / 2, (position->m_position.m_y + targetPosition->m_position.m_y) / 2 };
+												pushEntityInstance = getEntityInstance(midPosition);
+											}
+											else if(distanceSquared == 2)
+											{
+												// Same as above, but diagonally adjacent. This is a bit more complicated, because we have two spots to check.
+												Vec2 midPositions[2] = 
+												{
+													{ position->m_position.m_x, targetPosition->m_position.m_y },
+													{ targetPosition->m_position.m_x, position->m_position.m_y }
+												};
+
+												const EntityInstance* midEntityInstances[2] = { NULL, NULL };
+												for(size_t i = 0; i < 2; i++)
+													midEntityInstances[i] = getEntityInstance(midPositions[i]);
+
+												if(midEntityInstances[0] != NULL && midEntityInstances[1] == NULL)
+													pushEntityInstance = midEntityInstances[0];
+												else if (midEntityInstances[1] != NULL && midEntityInstances[0] == NULL)
+													pushEntityInstance = midEntityInstances[1];
+											}
+										}
+
+										if(pushEntityInstance != NULL)
+										{
+											const Data::Ability* pushAbility = GetManifest()->GetExistingByName<Data::Ability>("npc_push");
+
+											aContext->m_eventQueue->EventQueueAbility({ aEntityInstanceId, 0 }, pushEntityInstance->GetEntityInstanceId(), Vec2(), pushAbility, ItemInstanceReference(), NULL);
 										}
 										else
 										{
-											// Seems like we're stuck chasing the top threat target. Reduce threat on that one.
-											position->m_lastMoveTick = aContext->m_tick;
+											IEventQueue::EventQueueMoveRequest moveRequest;
+											if (npc->m_npcMovement.GetMoveRequest(
+												aContext->m_worldView->WorldViewGetMapData()->m_mapPathData.get(),
+												position->m_position,
+												targetPosition->m_position,
+												aContext->m_tick,
+												position->m_lastMoveTick,
+												*aContext->m_random,
+												moveRequest))
+											{
+												moveRequest.m_entityInstanceId = aEntityInstanceId;
+												moveRequest.m_canMoveOnAllNonViewBlockingTiles = npc->m_canMoveOnAllNonViewBlockingTiles;
 
-											aContext->m_eventQueue->EventQueueThreat(npc->m_targetEntity, aEntityInstanceId, -1, 0, 0.5f);
+												aContext->m_eventQueue->EventQueueMove(moveRequest);
+
+												npc->m_moveCooldownUntilTick = aContext->m_tick + 2;
+												npc->m_lastCombatMoveTick = aContext->m_tick;
+											}
+											else
+											{
+												// Seems like we're stuck chasing the top threat target. Reduce threat on that one.
+												position->m_lastMoveTick = aContext->m_tick;
+
+												aContext->m_eventQueue->EventQueueThreat(npc->m_targetEntity, aEntityInstanceId, -1, 0, 0.5f);
+											}
 										}
 									}
 								}

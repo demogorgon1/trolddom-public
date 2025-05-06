@@ -1165,3 +1165,20 @@ ability npc_teleport:
 	direct_effect simple<threat_table_shuffle>: { flags: [ self ] }
 	direct_effect simple<threat_table_equalize>: { flags: [ self ] }	
 }
+
+ability npc_push:
+{
+	string: "Push"	
+	flags: [ target_other target_hostile target_friendly ]	
+	states: [ default in_combat ]
+	icon: icon_push
+	
+	direct_effect simple<push>:
+	{
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: pushed
+	}
+}

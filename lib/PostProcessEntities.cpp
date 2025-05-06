@@ -25,15 +25,25 @@ namespace tpublic
 
 			const Components::CombatPublic* combatPublic = aEntity->TryGetComponent<Components::CombatPublic>();
 			Components::NPC* npc = aEntity->TryGetComponent<Components::NPC>();
+			Components::CombatPrivate* combatPrivate = aEntity->TryGetComponent<Components::CombatPrivate>();
 
 			// Default NPC stats
 			ApplyNPCMetrics::Process(
 				&npcMetrics, 
 				aEntity->m_modifiers, 
 				combatPublic,
-				aEntity->TryGetComponent<Components::CombatPrivate>(),
+				combatPrivate,
 				aEntity->TryGetComponent<Components::MinionPrivate>(),
 				npc);
+
+			// Default melee push priorities
+			if(npc != NULL && npc->m_meleePushPriority == 0)
+			{				
+				// Use weapon damage per second to calculate melee push priorty
+				npc->m_meleePushPriority = ((combatPrivate->m_weaponDamageRangeMax - combatPrivate->m_weaponDamageRangeMin) * 5) / 20;
+
+				printf("%s %u\n", aEntity->m_displayName.c_str(), npc->m_meleePushPriority);
+			}
 		}
 
 	}
