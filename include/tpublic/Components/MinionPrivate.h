@@ -160,6 +160,7 @@ namespace tpublic
 				m_ownerRequestAbility.reset();
 				m_lastAggroPingTick = 0;
 				m_shouldDie = false;
+				m_factionId = 0;
 			}
 
 			// Public data
@@ -182,6 +183,7 @@ namespace tpublic
 			std::optional<OwnerRequestAbility>	m_ownerRequestAbility;
 			uint32_t							m_lastAggroPingTick = 0;
 			bool								m_shouldDie = false;
+			uint32_t							m_factionId = 0;
 		};
 	}
 
