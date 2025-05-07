@@ -98,7 +98,8 @@ namespace tpublic
 				FLAG_NO_SOURCE_NEEDED		= 0x00008000,
 				FLAG_CANCEL_INDOOR			= 0x00010000,
 				FLAG_NO_REFRESH				= 0x00020000,
-				FLAG_POISON					= 0x00040000
+				FLAG_POISON					= 0x00040000,
+				FLAG_ALWAYS_SELF_APPLIED	= 0x00080000
 			};
 
 			static Type
@@ -163,6 +164,8 @@ namespace tpublic
 						flags |= FLAG_NO_REFRESH;
 					else if (strcmp(string, "poison") == 0)
 						flags |= FLAG_POISON;
+					else if (strcmp(string, "always_self_applied") == 0)
+						flags |= FLAG_ALWAYS_SELF_APPLIED;
 					else
 						TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid aura flag.", string);
 				});

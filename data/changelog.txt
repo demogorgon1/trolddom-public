@@ -9,6 +9,7 @@ changelog:
 	list:
 	[
 		{ text: "Black Beast's Growl ability now increases threat by 100% instead of 50%." }
+		{ text: "Melee enemies can now push less dangerous enemies out of their way to get to their target." }
 	]
 
 	text: "Issues fixed:"
@@ -17,6 +18,7 @@ changelog:
 	[
 		{ text: "Natural Remedy now works like intended." }	
 		{ text: "Witch talent Improved Drain Life now works like intended." }
+		{ text: "Fixed bug that caused some passive talents and auras to malfunction after logging out." }
 	]
 
 	#######################################################################################

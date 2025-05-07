@@ -139,8 +139,8 @@ namespace tpublic::Systems
 
 						bool cancelEffect = false;
 
-						if((aura->m_flags & Data::Aura::FLAG_NO_SOURCE_NEEDED) == 0 && !entry->m_sourceEntityInstance.IsSet())
-							cancelEffect = true;
+						//if ((aura->m_flags & Data::Aura::FLAG_NO_SOURCE_NEEDED) == 0 && !entry->m_sourceEntityInstance.IsSet())
+						//	cancelEffect = true;
 
 						if(!cancelEffect && !effect->Update(entry->m_sourceEntityInstance, aEntityInstanceId, aContext, GetManifest()))
 							cancelEffect = true;

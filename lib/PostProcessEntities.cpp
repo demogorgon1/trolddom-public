@@ -41,8 +41,6 @@ namespace tpublic
 			{				
 				// Use weapon damage per second to calculate melee push priorty
 				npc->m_meleePushPriority = ((combatPrivate->m_weaponDamageRangeMax - combatPrivate->m_weaponDamageRangeMin) * 5) / 20;
-
-				printf("%s %u\n", aEntity->m_displayName.c_str(), npc->m_meleePushPriority);
 			}
 		}
 

@@ -207,7 +207,7 @@ aura exhausted:
 {
 	string: "Exhausted"
 	description: "You can't Spirit Travel."
-	flags: [ private ]
+	flags: [ private always_self_applied ] 
 	icon: icon_exhausted	
 	type: debuff
 	duration: 3000
@@ -217,7 +217,7 @@ aura minion:
 {
 	string: "Minion"
 	description: "You control this minion."
-	flags: [ private ]
+	flags: [ private ] # always_self_applied not needed as minion auras aren't saved
 	icon: icon_exhausted	
 	type: buff
 	duration: 3000
