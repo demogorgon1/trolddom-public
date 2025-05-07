@@ -78,7 +78,7 @@
 		_aura: consumable_dry_bread
 		_item: { consumable_dry_bread: 1 }
 		_loot_groups: [ world_drops_consumable ]
-		_level_range: [ 1 3 ]
+		_level_range: [ 1 10 ]
 	}
 
 	ability consumable_dry_bread_tick: !ABILITY_FOOD_TICK {}
