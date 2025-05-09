@@ -30,7 +30,7 @@
 			verb: @_verb 
 			range: 1 
 			despawn: true 	
-			level: @_level
+			level: @_item_level
 			
 			<exists _required_item> required_item: @_required_item 
 		}		

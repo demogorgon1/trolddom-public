@@ -221,6 +221,8 @@ namespace tpublic
 				aTokenizer.ConsumeToken("{");
 
 				std::unique_ptr<SourceNode> node = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
+				TP_VERIFY(aNamespace != &m_root, node->m_debugInfo, "Reference objects not allowed in root.");
+
 				_ParseObject(aNamespace, aTokenizer, "}", node.get());
 				
 				node->m_type = SourceNode::TYPE_REFERENCE_OBJECT;

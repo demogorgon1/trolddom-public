@@ -47,7 +47,7 @@ profession enchanting<primary>:
 {
 	string: @_string_item
 	rarity: uncommon
-	item_level: @_level
+	item_level: 1
 	icon: icon_enchanted_paper
 	stack: 20
 	use_ability: @_id

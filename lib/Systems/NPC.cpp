@@ -212,7 +212,9 @@ namespace tpublic::Systems
 		int32_t leashDistanceSquared = aEntityState == EntityState::ID_IN_COMBAT ? npc->m_anchorPosition.DistanceSquared(leashPosition) : 0;
 		int32_t minLeashRangeSquared = GetManifest()->m_npcMetrics.m_minLeashRange * GetManifest()->m_npcMetrics.m_minLeashRange;
 
-		if(npc->m_encounterId == 0 && (leashDistanceSquared >= minLeashRangeSquared || !npc->m_canMove))
+		bool isSurvivalMap = aContext->m_worldView->WorldViewGetMapData()->m_mapInfo.m_survivalScriptId != 0;
+
+		if(!isSurvivalMap && npc->m_encounterId == 0 && (leashDistanceSquared >= minLeashRangeSquared || !npc->m_canMove))
 		{
 			std::vector<SourceEntityInstance> threatRemovedEntities;
 			threat->m_table.Update(aContext->m_tick, threatRemovedEntities);
@@ -437,6 +439,10 @@ namespace tpublic::Systems
 				{
 					switch(npc->m_npcBehaviorState->m_behavior)
 					{
+					case NPCBehavior::ID_SURVIVAL_WAVE:
+						
+						break;
+
 					case NPCBehavior::ID_PATROLLING:
 						if(npc->m_npcBehaviorState->m_despawnIfLostPlayer && npc->m_effectiveRouteId != 0)
 						{
