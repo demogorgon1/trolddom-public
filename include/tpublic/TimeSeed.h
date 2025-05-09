@@ -19,7 +19,7 @@ namespace tpublic
 			TYPE_DAILY,
 			TYPE_WEEKLY,
 			TYPE_MONTHLY,
-			TYPE_YEARLY
+			TYPE_YEARLY,
 		};
 
 		static Type		StringToType(

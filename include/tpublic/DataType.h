@@ -71,6 +71,7 @@ namespace tpublic
 			ID_WORLD_AURA,
 			ID_LOOT_COOLDOWN,
 			ID_CRITTER,
+			ID_SURVIVAL_SCRIPT,
 
 			NUM_IDS
 		};
@@ -139,7 +140,8 @@ namespace tpublic
 			"control_point_state",
 			"world_aura",
 			"loot_cooldown",
-			"critter"
+			"critter",
+			"survival_script"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

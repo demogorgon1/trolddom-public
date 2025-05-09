@@ -1,0 +1,95 @@
+!define SURVIVAL_CRABS 
+[ 
+	.dunecrawler_1 
+	.dunecrawler_2 
+]
+
+!define SURVIVAL_CRABMAN_MELEE
+[
+	.crabman_1
+	.crabman_2
+	.crabman_3
+	.crabman_4
+	.crabman_5
+]
+
+!define SURVIVAL_CRABMAN_CASTERS
+[
+	.crabman_wizard_1
+	.crabman_wizard_2
+	.crabman_wizard_3
+]
+
+!define SURVIVAL_CRABMAN_HEALERS
+[
+	.crabman_oracle_1
+	.crabman_oracle_2
+]
+
+npc_behavior_state .survival_enemy: { behavior: do_nothing }
+
+${
+	_faction: monsters
+	_default_behavior_state: .survival_enemy	
+	_level: 20
+}
+
+##############################################################################
+# Dunecrawler
+{
+	${
+		_string: "Dunecrawler" 
+		_creature_type: beast
+		_weapon_damage: 1
+		_resource_health: 1		
+	}
+
+	entity .dunecrawler_1: !NPC { _sprite: crab_1 _sprite_dead: crab_1_dead _abilities: [ { id: npc_attack } ] }
+	entity .dunecrawler_2: !NPC { _sprite: crab_2 _sprite_dead: crab_2_dead _abilities: [ { id: npc_attack } ] }
+}
+
+##############################################################################
+# Crabman
+{
+	${
+		_string: "Crabman" 
+		_creature_type: humanoid
+		_weapon_damage: 1
+		_resource_health: 1		
+	}
+
+	entity .crabman_1: !NPC { _sprite: crab_monster_1 _sprite_dead: crab_monster_1_dead _abilities: [ { id: npc_attack } ] }
+	entity .crabman_2: !NPC { _sprite: crab_monster_2 _sprite_dead: crab_monster_2_dead _abilities: [ { id: npc_attack } ] }
+	entity .crabman_3: !NPC { _sprite: crab_monster_3 _sprite_dead: crab_monster_3_dead _abilities: [ { id: npc_attack } ] }
+	entity .crabman_4: !NPC { _sprite: crab_monster_4 _sprite_dead: crab_monster_4_dead _abilities: [ { id: npc_poison_attack } ] }
+	entity .crabman_5: !NPC { _sprite: crab_monster_5 _sprite_dead: crab_monster_5_dead _abilities: [ { id: npc_sunder requirement target<must_not_have_aura>: npc_sunder } { id: npc_attack } ] }
+}
+
+##############################################################################
+# Crabman Wizard
+{
+	${
+		_string: "Crabman Wizard" 
+		_creature_type: humanoid
+		_weapon_damage: 1
+		_resource_health: 1		
+	}
+
+	entity .crabman_wizard_1: !NPC { _sprite: crab_caster_1 _sprite_dead: crab_caster_1_dead _abilities: [ { id: npc_firebolt target: random_player } { id: npc_attack } ] }
+	entity .crabman_wizard_2: !NPC { _sprite: crab_caster_2 _sprite_dead: crab_caster_2_dead _abilities: [ { id: npc_frostbolt_no_cooldown target: random_player } { id: npc_attack } ] }
+	entity .crabman_wizard_3: !NPC { _sprite: crab_caster_4 _sprite_dead: crab_caster_4_dead _abilities: [ { id: npc_poison_bolt target: random_player } { id: npc_attack } ] }
+}
+
+##############################################################################
+# Crabman Oracle
+{
+	${
+		_string: "Crabman Oracle" 
+		_creature_type: humanoid
+		_weapon_damage: 1
+		_resource_health: 1		
+	}
+
+	entity .crabman_oracle_1: !NPC { _sprite: crab_caster_3 _sprite_dead: crab_caster_3_dead _abilities: [ { id: npc_heal target: low_health_friend_or_self } { id: npc_attack } ] }
+	entity .crabman_oracle_2: !NPC { _sprite: crab_caster_5 _sprite_dead: crab_caster_5_dead _abilities: [ { id: npc_heal target: low_health_friend_or_self } { id: npc_firebolt target: random_player } { id: npc_attack } ] }
+}

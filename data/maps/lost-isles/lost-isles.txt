@@ -97,9 +97,9 @@ map_entity_spawn .object:
 {	
 }
 
-map survival_1:
+!define LOST_ISLES
 {
-	string: "Lost Isles"
+	string: @_string
 	type: private
 	default_player_spawn: .player_spawn
 	has_dynamic_overview_map: true
@@ -111,6 +111,9 @@ map survival_1:
 	view_attenuation: 0
 	view_attenuation_bias: 0
 	view_hidden_visibility: 35			
+	
+	survival_script: lost_isles
+	seed: @_seed
 
 	generator world:
 	{
@@ -196,3 +199,4 @@ map survival_1:
 	}
 }
  
+map lost_isles_1: !LOST_ISLES { _string: "Lost Isles I" _seed: 38493583 }

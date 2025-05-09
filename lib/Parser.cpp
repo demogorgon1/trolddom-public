@@ -661,6 +661,7 @@ namespace tpublic
 				const Macro* macro = _FindMacro(child->m_path.c_str(), child->m_name.c_str());
 				TP_VERIFY(macro != NULL, child->m_debugInfo, "'%s' is not a valid macro.", child->m_name.c_str());
 				DataErrorHandling::DebugInfo debugInfo = child->m_debugInfo;
+
 				aNode->m_children.erase(aNode->m_children.begin() + i);
 				
 				size_t j = i;
@@ -669,6 +670,7 @@ namespace tpublic
 					std::unique_ptr<SourceNode> node = std::make_unique<SourceNode>(m_root.m_sourceContext, debugInfo, t->m_realPath.c_str(), t->m_path.c_str(), t->m_pathWithFileName.c_str());
 					node->m_tag = t->m_tag;
 					node->m_name = t->m_name;
+
 					node->Copy(t.get());
 					aNode->m_children.insert(aNode->m_children.begin() + j, std::move(node));
 					j++;
@@ -723,7 +725,11 @@ namespace tpublic
 				const Macro* macro = _FindMacro(aNode->m_pathWithFileName.c_str(), macroName);
 				TP_VERIFY(macro != NULL, aNode->m_debugInfo, "'%s' is not a defined macro.", macroName);
 
+				std::unique_ptr<SourceNode> detachedAnnotation = std::move(aNode->m_annotation); // Don't lose the annotation
+
 				aNode->Copy(macro->m_body.get());
+
+				aNode->m_annotation = std::move(detachedAnnotation);
 
 				if (arg->m_type == SourceNode::TYPE_OBJECT)
 					m_referenceObjects.push_back(std::move(arg));
