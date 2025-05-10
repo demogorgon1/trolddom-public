@@ -183,7 +183,7 @@ objective .buck_2:
 
 {
 	${ _level: 13 }
-	item .buck_2_a: !QUEST_REWARD_WAIST{ _string: "Musky Belt" _icon: icon_cape_1 _wisdom: 1 _constitution: 2 _type: armor_plate }
+	item .buck_2_a: !QUEST_REWARD_WAIST{ _string: "Musky Belt" _icon: icon_plate_belt_1 _wisdom: 1 _constitution: 2 _type: armor_plate }
 	item .buck_2_b: !QUEST_REWARD_HANDS{ _string: "Gardener's Gloves" _icon: icon_gloves_3 _wisdom: 2 _constitution: 1 _type: armor_cloth }
 }
 
