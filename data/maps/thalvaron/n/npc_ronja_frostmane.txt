@@ -113,7 +113,7 @@ item .ronja_frostmane_2_quest_item:
 {
 	${ _level: 13 }
   	item .ronja_frostmane_2_a: !QUEST_REWARD_2H_SWORD{ _string: "Sword of the Mountain" _icon: icon_sword_3 _constitution: 1 _dexterity: 1 _strength: 2 _weapon_cooldown: 30 }
-  	item .ronja_frostmane_2_b: !QUEST_REWARD_CHEST{ _string: "Frosty Wizard's Robe" _icon: icon_cloth_shirt_7 _constitution: 3 _spell_damage: 1 }	
+  	item .ronja_frostmane_2_b: !QUEST_REWARD_CHEST{ _string: "Frosty Wizard's Robe" _icon: icon_cloth_shirt_7 _constitution: 3 _spell_damage: 1 _type: armor_cloth }	
 }	   
 
 quest .ronja_frostmane_2:
