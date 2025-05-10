@@ -299,7 +299,7 @@
 {
 	${
 		_string: "Spiced Rice"
-		_description: "Restores 640 health and mana over 10 seconds. Can't be used in combat."
+		_description: "Restores 640 health and mana over 10 seconds. Gain 1 Strength, 1 Dexterity, and 1 Constitution for 20 mins. Can't be used in combat."
 		_level: 10
 		_icon: icon_cooked_rice
 		_heal_tick: 64
@@ -309,9 +309,10 @@
 		_item: { consumable_spiced_rice: 1 }
 	}
 
+	aura consumable_spiced_rice_buff: !AURA_FOOD_BUFF { _stat_modifiers: { strength: { add: 1 } dexterity: { add: 1 } constitution: { add: 1 }} }
 	ability consumable_spiced_rice_tick: !ABILITY_FOOD_TICK {}
 	aura consumable_spiced_rice: !AURA_FOOD {}
-	ability consumable_spiced_rice: !ABILITY_FOOD {}
+	ability consumable_spiced_rice: !ABILITY_FOOD { _buff: consumable_spiced_rice_buff}
 	item consumable_spiced_rice: !ITEM_FOOD {}
 }
 
