@@ -138,7 +138,7 @@
 {
 	${
 		_string: "Potato Stew"
-		_description: "Restores 380 health and mana over 10 seconds. Can't be used in combat."
+		_description: "Restores 380 health and mana over 10 seconds. Gain 2 Constitution for 20 min. Can't be used in combat."
 		_level: 4
 		_icon: icon_stew_2
 		_heal_tick: 38
@@ -161,7 +161,7 @@
 {
 	${
 		_string: "Boiled Potato"
-		_description: "Restores 380 health and mana over 10 seconds. Can't be used in combat."
+		_description: "Restores 380 health and mana over 10 seconds. Gain 2 Spirit for 20 min. Can't be used in combat."
 		_level: 4
 		_icon: icon_boiled_potato
 		_heal_tick: 38
@@ -184,7 +184,7 @@
 {
 	${
 		_string: "Pickled Herring"
-		_description: "Restores 320 health and mana over 10 seconds. Can't be used in combat."
+		_description: "Restores 320 health and mana over 10 seconds. Gain 1 Spirit for 20 min. Can't be used in combat."
 		_level: 3
 		_icon: icon_small_blue_fish_cooked
 		_heal_tick: 32
@@ -207,7 +207,7 @@
 {
 	${
 		_string: "Pickled Sucker"
-		_description: "Restores 420 health and mana over 10 seconds. Can't be used in combat."
+		_description: "Restores 420 health and mana over 10 seconds. Gain 1 Spirit and 1 Constitution for 20 min. Can't be used in combat."
 		_level: 5
 		_icon: icon_fish_1_cooked
 		_heal_tick: 42
@@ -230,7 +230,7 @@
 {
 	${
 		_string: "Pickled Eel Pie"
-		_description: "Restores 500 health and mana over 10 seconds. Can't be used in combat."
+		_description: "Restores 500 health and mana over 10 seconds. Gain 5 Strength for 20 min. Can't be used in combat."
 		_level: 7
 		_icon: icon_eel_1_cooked
 		_heal_tick: 50
@@ -253,7 +253,7 @@
 {
 	${
 		_string: "Pickled Moonfish"
-		_description: "Restores 580 health and mana over 10 seconds. Can't be used in combat."
+		_description: "Restores 580 health and mana over 10 seconds. Gain 5 Wisdom for 20 min. Can't be used in combat."
 		_level: 9
 		_icon: icon_fish_2_cooked
 		_heal_tick: 58
@@ -320,7 +320,7 @@
 {
 	${
 		_string: "Pickled Toesnapper"
-		_description: "Restores 640 health and mana over 10 seconds. Can't be used in combat."
+		_description: "Restores 640 health and mana over 10 seconds. Gain 3 Constitution for 20 min. Can't be used in combat."
 		_level: 10
 		_icon: icon_fish_3_cooked
 		_heal_tick: 64
@@ -342,7 +342,7 @@
 {
 	${
 		_string: "Steamed Trout"
-		_description: "Restores 800 health and mana over 10 seconds. Can't be used in combat."
+		_description: "Restores 800 health and mana over 10 seconds. Gain 3 Wisdom for 20 min. Can't be used in combat."
 		_level: 11
 		_icon: icon_fish_4_cooked
 		_heal_tick: 80
@@ -364,10 +364,10 @@
 {
 	${
 		_string: "Seared Bass"
-		_description: "Restores 960 health and mana over 10 seconds. Can't be used in combat."
+		_description: "Restores 960 health and mana over 10 seconds. Gain 3 Dexterity for 20 min. Can't be used in combat."
 		_level: 12
 		_icon: icon_fish_5_cooked
-		_heal_tick: 96
+		_heal_tick: 96 
 		_ability_tick: consumable_seared_bass_tick
 		_ability: consumable_seared_bass
 		_aura: consumable_seared_bass
@@ -386,7 +386,7 @@
 {
 	${
 		_string: "Spicy Perch Fillet"
-		_description: "Restores 1120 health and mana over 10 seconds. Can't be used in combat."
+		_description: "Restores 1120 health and mana over 10 seconds. Gain 3 Strength for 20 min. Can't be used in combat."
 		_level: 14
 		_icon: icon_fish_6_cooked
 		_heal_tick: 112
@@ -408,7 +408,7 @@
 {
 	${
 		_string: "Mistveil Balls"
-		_description: "Restores 1280 health and mana over 10 seconds. Can't be used in combat."
+		_description: "Restores 1280 health and mana over 10 seconds. Gain 4 Constitution for 20 min. Can't be used in combat."
 		_level: 16
 		_icon: icon_fish_7_cooked
 		_heal_tick: 128
