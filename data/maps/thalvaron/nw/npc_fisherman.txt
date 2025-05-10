@@ -183,7 +183,7 @@ objective .fisherman_4:
 {
 	${ _level: 12 _rarity: rare }
 	item .fisherman_4_a: !QUEST_REWARD_HEAD{ _string: "Carapace Skullguard" _icon: icon_head_3 _strength: 1 _constitution: 1 _type: armor_plate }
-	item .fisherman_4_b: !QUEST_REWARD_HEAD{ _string: "Scowl of the Sea" _icon: icon_wizard_hat_4 _mana_per_5: 1 _spell_damage: 1 itype: armor_cloth }
+	item .fisherman_4_b: !QUEST_REWARD_HEAD{ _string: "Scowl of the Sea" _icon: icon_wizard_hat_4 _mana_per_5: 1 _spell_damage: 1 _type: armor_cloth }
 	item .fisherman_4_c: !QUEST_REWARD_FINGER{ _string: "Salty Hoop" _icon: icon_ring_5 _wisdom: 1 _healing: 1 }
 }
 
