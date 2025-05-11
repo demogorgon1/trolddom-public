@@ -324,11 +324,10 @@ map_entity_spawn thalvaron_swamp_giant:
 			_use_ability: $ability
 			{	
 				string: "Natural Remedy" 
-				icon: icon_brown_leaf_1
+				icon: @_icon
 				description: "Cures one poison effect."
 				cooldowns: [ global ]
 				cooldown: $cooldown { duration: 2400 }
-				icon: @_icon
 				flags: [ target_self item ]
 				requirement self<must_have_item_equipped>: .swamp_giant_1_a
 				direct_effect remove_aura: { aura_type: debuff aura_flags: [ poison ] }
