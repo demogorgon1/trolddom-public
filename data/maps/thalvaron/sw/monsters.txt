@@ -323,7 +323,7 @@ map_entity_spawn thalvaron_swamp_giant:
 			_icon: icon_brown_leaf_1
 			_use_ability: $ability
 			{	
-				string: "Natural Remedy" 
+				string: @_string
 				icon: @_icon
 				description: "Cures one poison effect."
 				cooldowns: [ global ]
