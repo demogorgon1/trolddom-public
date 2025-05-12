@@ -1024,7 +1024,6 @@ namespace tpublic::Systems
 										}
 
 										const EntityInstance* pushEntityInstance = NULL;
-										std::optional<Vec2> pushPosition;
 
 										if(npc->m_meleePushPriority > 0 && !npc->m_large)
 										{

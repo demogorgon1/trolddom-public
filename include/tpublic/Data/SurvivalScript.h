@@ -190,7 +190,7 @@ namespace tpublic
 				if(!m_waveSpawnDistance.FromStream(aStream))
 					return false;
 				if(!aStream->ReadUInt(m_waveMaxDistance))
-					return FALSE;
+					return false;
 				return true;
 			}
 

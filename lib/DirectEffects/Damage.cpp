@@ -306,7 +306,7 @@ namespace tpublic::DirectEffects
 			if (result == CombatEvent::ID_CRITICAL)
 				threatMultiplier *= 1.5f; // Crits generate more threat per damage than non-crits
 
-			threat = (int32_t)((float)threat * m_threatMultiplier);
+			threat = (int32_t)((float)threat * threatMultiplier);
 
 			aEventQueue->EventQueueThreat(aSourceEntityInstance, aTarget->GetEntityInstanceId(), threat, aTick);
 		}
