@@ -129,7 +129,7 @@ aura paladin_holy_reflection:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Causes holy damage to attackers when taking melee damage or blocking."
+	description: "Causes increased threat and holy damage to attackers when taking melee damage or blocking."
 	
 	aura_effect combat_event_trigger: 
 	{ 
@@ -159,13 +159,8 @@ ability paladin_holy_reflection:
 	{	
 		flags: [ is_magical ]
 		damage_type: holy
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.3 b: [ [ 1 8 ] [ 10 16 ] [ 20 32 ] ] }													
-	}
-	
-	direct_effect threat:
-	{
-		add: 10
-		apply_to: source
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.3 b: [ [ 1 8 ] [ 10 16 ] [ 20 32 ] ] }					
+		threat_multiplier: 1.35
 	}	
 }
 

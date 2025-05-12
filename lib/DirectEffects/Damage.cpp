@@ -49,6 +49,10 @@ namespace tpublic::DirectEffects
 						m_abilityModifierMultipliers[abilityModifierId] = aAbilityModifierMultiplier->GetFloat();
 					});
 				}
+				else if(aChild->m_name == "threat_multiplier")
+				{
+					m_threatMultiplier = aChild->GetFloat();
+				}
 				else
 				{
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
@@ -72,6 +76,8 @@ namespace tpublic::DirectEffects
 			aStream->WriteUInt(i->first);
 			aStream->WriteFloat(i->second);
 		}
+
+		aStream->WriteFloat(m_threatMultiplier);
 	}
 			
 	bool	
@@ -105,6 +111,9 @@ namespace tpublic::DirectEffects
 				m_abilityModifierMultipliers[abilityModifierId] = multiplier;
 			}
 		}
+
+		if(!aStream->ReadFloat(m_threatMultiplier))
+			return false;
 
 		return true;
 	}
@@ -289,13 +298,17 @@ namespace tpublic::DirectEffects
 		}
 
 		// Threat
+		if(!aTarget->IsPlayer())
 		{
 			int32_t threat = (int32_t)damage;
-			if (result == CombatEvent::ID_CRITICAL)
-				threat = (threat * 3) / 2; // Crits generate more threat per damage than non-crits
+			float threatMultiplier = m_threatMultiplier;
 
-			if (aTarget->GetEntityId() != 0) // Not a player
-				aEventQueue->EventQueueThreat(aSourceEntityInstance, aTarget->GetEntityInstanceId(), threat, aTick);
+			if (result == CombatEvent::ID_CRITICAL)
+				threatMultiplier *= 1.5f; // Crits generate more threat per damage than non-crits
+
+			threat = (int32_t)((float)threat * m_threatMultiplier);
+
+			aEventQueue->EventQueueThreat(aSourceEntityInstance, aTarget->GetEntityInstanceId(), threat, aTick);
 		}
 
 		return { result };

@@ -10,6 +10,7 @@ changelog:
 	[
 		{ text: "Black Beast's Growl ability now increases threat by 100% instead of 50%." }
 		{ text: "Melee enemies can now push less dangerous enemies out of their way to get to their target." }
+		{ text: "Holy Reflection now generates more threat and will also trigger on blocks (thanks sithpl)." }
 	]
 
 	text: "Issues fixed:"
@@ -20,6 +21,7 @@ changelog:
 		{ text: "Witch talent Improved Drain Life now works like intended." }
 		{ text: "Fixed bug that caused some passive talents and auras to malfunction after logging out." }
 		{ text: "Minions now work in The Shrouded Lands." }
+		{ text: "Fixed missing food buffs, item types and some wrong icons (also thanks sithpl)." }
 	]
 
 	#######################################################################################
