@@ -444,133 +444,136 @@ namespace tpublic::Systems
 						break;
 
 					case NPCBehavior::ID_PATROLLING:
-						if(npc->m_npcBehaviorState->m_despawnIfLostPlayer && npc->m_effectiveRouteId != 0)
 						{
-							const Components::Tag* tag = GetComponent<Components::Tag>(aComponents);
-
-							bool despawn = false;
-
-							if(tag->m_playerEntityInstanceId == 0)
-								despawn = true;
-
-							if(!despawn)
-							{
-								const EntityInstance* taggedByEntityInstance = aContext->m_worldView->WorldViewSingleEntityInstance(tag->m_playerEntityInstanceId);
-								const Components::Position* taggedByEntityPosition = taggedByEntityInstance != NULL ? taggedByEntityInstance->GetComponent<Components::Position>() : NULL;
-								despawn = taggedByEntityPosition == NULL || taggedByEntityInstance->GetState() == EntityState::ID_DEAD || !Helpers::IsWithinDistance(position, taggedByEntityPosition, 48);
-							}
-
-							if(despawn)
-								returnValue = EntityState::ID_DESPAWNING;
-						}
-
-						if (npc->m_moveCooldownUntilTick < aContext->m_tick && npc->m_effectiveRouteId != 0)
-						{							
 							bool paused = false;
 
-							if (npc->m_npcBehaviorState->m_combatEventPauseTicks != 0)
-								paused = aContext->m_tick - combat->m_lastCombatEventTick <= npc->m_npcBehaviorState->m_combatEventPauseTicks;
-
-							if(!paused && npc->m_npcBehaviorState->m_pauseWhenTargetedByNearbyPlayer)
+							if (npc->m_npcBehaviorState->m_despawnIfLostPlayer && npc->m_effectiveRouteId != 0)
 							{
-								std::vector<uint32_t> entityIds = { 0 }; // Players
+								const Components::Tag* tag = GetComponent<Components::Tag>(aComponents);
 
-								IWorldView::EntityQuery entityQuery;
-								entityQuery.m_position = position->m_position;
-								entityQuery.m_maxDistance = 3;
-								entityQuery.m_entityIds = &entityIds; 
-								aContext->m_worldView->WorldViewQueryEntityInstances(entityQuery, [&](
-									const EntityInstance* aEntityInstance,
-									int32_t /*aDistanceSquared*/) -> bool
+								bool despawn = false;
+
+								if (tag->m_playerEntityInstanceId == 0)
+									despawn = true;
+
+								if (!despawn)
 								{
-									if (aEntityInstance->GetComponent<Components::CombatPublic>()->m_targetEntityInstanceId == aEntityInstanceId)
-									{
-										paused = true;
-										return true;
-									}
-									return false;
-								});
+									const EntityInstance* taggedByEntityInstance = aContext->m_worldView->WorldViewSingleEntityInstance(tag->m_playerEntityInstanceId);
+									const Components::Position* taggedByEntityPosition = taggedByEntityInstance != NULL ? taggedByEntityInstance->GetComponent<Components::Position>() : NULL;
+									despawn = taggedByEntityPosition == NULL || taggedByEntityInstance->GetState() == EntityState::ID_DEAD || !Helpers::IsWithinDistance(position, taggedByEntityPosition, 48);
+									paused = taggedByEntityInstance != NULL && taggedByEntityInstance->GetState() == EntityState::ID_IN_COMBAT;
+								}
+
+								if (despawn)
+									returnValue = EntityState::ID_DESPAWNING;
 							}
 
-							if(!paused)
-							{
-								const MapRouteData* mapRouteData = aContext->m_worldView->WorldViewGetMapData()->m_mapRouteData.get();
-								if (mapRouteData != NULL)
+							if (!paused && npc->m_moveCooldownUntilTick < aContext->m_tick && npc->m_effectiveRouteId != 0)
+							{								
+								if (npc->m_npcBehaviorState->m_combatEventPauseTicks != 0)
+									paused = aContext->m_tick - combat->m_lastCombatEventTick <= npc->m_npcBehaviorState->m_combatEventPauseTicks;
+
+								if (!paused && npc->m_npcBehaviorState->m_pauseWhenTargetedByNearbyPlayer)
 								{
-									if(npc->m_subRouteIndex == SIZE_MAX)
-										npc->m_subRouteIndex = mapRouteData->GetSubRouteIndexByPosition(npc->m_effectiveRouteId, position->m_position);
+									std::vector<uint32_t> entityIds = { 0 }; // Players
 
-									Vec2 direction;
-									bool shouldChangeDirection = false;
-									std::optional<uint32_t> index;
-
-									if (mapRouteData->GetDirection(npc->m_effectiveRouteId, npc->m_subRouteIndex, position->m_position, npc->m_routeIsReversing, direction, shouldChangeDirection, index))
+									IWorldView::EntityQuery entityQuery;
+									entityQuery.m_position = position->m_position;
+									entityQuery.m_maxDistance = 3;
+									entityQuery.m_entityIds = &entityIds;
+									aContext->m_worldView->WorldViewQueryEntityInstances(entityQuery, [&](
+										const EntityInstance* aEntityInstance,
+										int32_t /*aDistanceSquared*/) -> bool
 									{
-										IEventQueue::EventQueueMoveRequest moveRequest;
-										moveRequest.AddToPriorityList(direction);
-										moveRequest.m_type = IEventQueue::EventQueueMoveRequest::TYPE_SIMPLE;
-										moveRequest.m_entityInstanceId = aEntityInstanceId;
-										moveRequest.m_canMoveOnAllNonViewBlockingTiles = npc->m_canMoveOnAllNonViewBlockingTiles;
-
-										aContext->m_eventQueue->EventQueueMove(moveRequest);
-
-										if (shouldChangeDirection)
-											npc->m_routeIsReversing = !npc->m_routeIsReversing;
-
-										if(index.has_value())
+										if (aEntityInstance->GetComponent<Components::CombatPublic>()->m_targetEntityInstanceId == aEntityInstanceId)
 										{
-											const Data::Route* routeData = GetManifest()->GetById<Data::Route>(npc->m_effectiveRouteId);
-											for(size_t triggerIndex = 0; triggerIndex < routeData->m_triggers.size(); triggerIndex++)
+											paused = true;
+											return true;
+										}
+										return false;
+									});
+								}
+
+								if (!paused)
+								{
+									const MapRouteData* mapRouteData = aContext->m_worldView->WorldViewGetMapData()->m_mapRouteData.get();
+									if (mapRouteData != NULL)
+									{
+										if (npc->m_subRouteIndex == SIZE_MAX)
+											npc->m_subRouteIndex = mapRouteData->GetSubRouteIndexByPosition(npc->m_effectiveRouteId, position->m_position);
+
+										Vec2 direction;
+										bool shouldChangeDirection = false;
+										std::optional<uint32_t> index;
+
+										if (mapRouteData->GetDirection(npc->m_effectiveRouteId, npc->m_subRouteIndex, position->m_position, npc->m_routeIsReversing, direction, shouldChangeDirection, index))
+										{
+											IEventQueue::EventQueueMoveRequest moveRequest;
+											moveRequest.AddToPriorityList(direction);
+											moveRequest.m_type = IEventQueue::EventQueueMoveRequest::TYPE_SIMPLE;
+											moveRequest.m_entityInstanceId = aEntityInstanceId;
+											moveRequest.m_canMoveOnAllNonViewBlockingTiles = npc->m_canMoveOnAllNonViewBlockingTiles;
+
+											aContext->m_eventQueue->EventQueueMove(moveRequest);
+
+											if (shouldChangeDirection)
+												npc->m_routeIsReversing = !npc->m_routeIsReversing;
+
+											if (index.has_value())
 											{
-												const std::unique_ptr<Data::Route::Trigger>& trigger = routeData->m_triggers[triggerIndex];
-												if(trigger->m_index == index.value() && !npc->m_handledRouteTriggerIndices.contains(trigger->m_index))
+												const Data::Route* routeData = GetManifest()->GetById<Data::Route>(npc->m_effectiveRouteId);
+												for (size_t triggerIndex = 0; triggerIndex < routeData->m_triggers.size(); triggerIndex++)
 												{
-													if(trigger->m_chat)
-														aContext->m_eventQueue->EventQueueChat(aEntityInstanceId, trigger->m_chat.value());
-
-													if(trigger->m_event)
+													const std::unique_ptr<Data::Route::Trigger>& trigger = routeData->m_triggers[triggerIndex];
+													if (trigger->m_index == index.value() && !npc->m_handledRouteTriggerIndices.contains(trigger->m_index))
 													{
-														const Components::Tag* tag = GetComponent<Components::Tag>(aComponents);
-														if(tag->m_playerTag.IsSet())
-															aContext->m_eventQueue->EventQueueEntityObjective(tag->m_playerTag, aEntityId, EntityObjectiveEvent::TYPE_ROUTE_NPC, 24, position->m_position, tag->m_playerEntityInstanceId);
-													}
+														if (trigger->m_chat)
+															aContext->m_eventQueue->EventQueueChat(aEntityInstanceId, trigger->m_chat.value());
 
-													if(trigger->m_abilityId != 0)
-													{
-														const Data::Ability* ability = GetManifest()->GetById<Data::Ability>(trigger->m_abilityId);
+														if (trigger->m_event)
+														{
+															const Components::Tag* tag = GetComponent<Components::Tag>(aComponents);
+															if (tag->m_playerTag.IsSet())
+																aContext->m_eventQueue->EventQueueEntityObjective(tag->m_playerTag, aEntityId, EntityObjectiveEvent::TYPE_ROUTE_NPC, 24, position->m_position, tag->m_playerEntityInstanceId);
+														}
 
-														aContext->m_eventQueue->EventQueueAbility(
-															SourceEntityInstance{ aEntityInstanceId, 0 },
-															aEntityInstanceId,
-															Vec2(),
-															ability);
-													}
+														if (trigger->m_abilityId != 0)
+														{
+															const Data::Ability* ability = GetManifest()->GetById<Data::Ability>(trigger->m_abilityId);
 
-													npc->m_handledRouteTriggerIndices.insert(trigger->m_index);
+															aContext->m_eventQueue->EventQueueAbility(
+																SourceEntityInstance{ aEntityInstanceId, 0 },
+																aEntityInstanceId,
+																Vec2(),
+																ability);
+														}
 
-													if(trigger->m_despawn)
-													{
-														returnValue = EntityState::ID_DESPAWNING;
-													}
-													else if(trigger->m_reset)
-													{
-														npc->m_anchorPosition = npc->m_spawnPosition;
-														npc->m_npcBehaviorState = NULL;
-														npc->m_subRouteIndex = SIZE_MAX;
-														npc->m_effectiveRouteId = 0;
-														npc->m_handledRouteTriggerIndices.clear();
+														npc->m_handledRouteTriggerIndices.insert(trigger->m_index);
 
-														returnValue = EntityState::ID_EVADING;
+														if (trigger->m_despawn)
+														{
+															returnValue = EntityState::ID_DESPAWNING;
+														}
+														else if (trigger->m_reset)
+														{
+															npc->m_anchorPosition = npc->m_spawnPosition;
+															npc->m_npcBehaviorState = NULL;
+															npc->m_subRouteIndex = SIZE_MAX;
+															npc->m_effectiveRouteId = 0;
+															npc->m_handledRouteTriggerIndices.clear();
+
+															returnValue = EntityState::ID_EVADING;
+														}
 													}
 												}
 											}
 										}
 									}
 								}
-							}
 
-							if(npc->m_npcBehaviorState != NULL)
-								npc->m_moveCooldownUntilTick = aContext->m_tick + npc->m_npcBehaviorState->m_patrolMoveIntervalTicks;
+								if (npc->m_npcBehaviorState != NULL)
+									npc->m_moveCooldownUntilTick = aContext->m_tick + npc->m_npcBehaviorState->m_patrolMoveIntervalTicks;
+							}
 						}
 						break;
 

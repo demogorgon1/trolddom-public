@@ -1,6 +1,24 @@
 changelog:
 {
 
+
+	#######################################################################################
+	heading: "v0.2.4"
+	
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Escorted NPCs will stop walking while the player is in combat." }
+	]
+
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Fixed bug where certain quest objectives, like escorting an NPC, wouldn't be triggered for all group members." }	
+	]
+
 	#######################################################################################
 	heading: "v0.2.3"
 	
