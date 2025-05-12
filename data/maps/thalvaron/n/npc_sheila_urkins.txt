@@ -257,6 +257,7 @@ item .sheila_urkins_3_quest_item:
 	flags: [ not_sellable ]
 	string: "Tirnwood Thorns"
 	stack: 5
+	binds: when_picked_up
 }
 
 loot_table .sheila_urkins_3_quest_item:

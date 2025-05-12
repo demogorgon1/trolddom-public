@@ -110,7 +110,7 @@ item linen_waistband:
 	binds: when_equipped
 	equipment_slots: [ waist ]
 	required_level: 5
-	icon: icon_pants_2
+	icon: icon_cloth_belt_3
 	rarity: uncommon
 	stat_weight wisdom: 1 
 }
