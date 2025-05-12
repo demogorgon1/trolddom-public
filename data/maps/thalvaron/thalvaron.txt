@@ -927,6 +927,12 @@ map thalvaron:
 	has_overview_map: true
 	auto_doodads: true
 	max_players: 80
+	
+	world_map main:
+	{
+		source: "thalvaron-world-map.png"
+		offset: [ 0 0 ]
+	}
 
 	layers:
 	[
@@ -979,8 +985,7 @@ map thalvaron:
 		{
 			palettes:	[ .cliffs ]
 			source:		"thalvaron-cliffs.png"
-		}								
-		
+		}									
 	]
 }
  

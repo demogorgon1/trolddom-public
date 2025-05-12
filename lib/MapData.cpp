@@ -171,6 +171,8 @@ namespace tpublic
 					m_pvp = std::make_unique<PVP>(aNode);
 				else if(aNode->m_name == "realm_balance")
 					aNode->GetIdArray(DataType::ID_REALM_BALANCE, m_realmBalanceIds);
+				else if(aNode->m_tag == "world_map")
+					m_worldMap = WorldMap(aNode);
 				else
 					TP_VERIFY(false, aNode->m_debugInfo, "'%s' is not a valid item.", aNode->m_name.c_str());
 			}
@@ -512,6 +514,7 @@ namespace tpublic
 		aStream->WriteOptionalObjectPointer(m_pvp);
 		aStream->WriteUInts(m_realmBalanceIds);
 		aStream->WriteObjects(m_pointsOfInterest);
+		aStream->WriteOptionalObject(m_worldMap);
 	}
 
 	bool	
@@ -588,6 +591,8 @@ namespace tpublic
 		if(!aStream->ReadUInts(m_realmBalanceIds))
 			return false;
 		if (!aStream->ReadObjects(m_pointsOfInterest))
+			return false;
+		if(!aStream->ReadOptionalObject(m_worldMap))
 			return false;
 
 		return true;

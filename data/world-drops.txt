@@ -99,7 +99,7 @@ loot_group birds_uncommon: {}
 	possibility<must_be_elite>: { weight: 1 loot_group: world_drops_epic }	
 }
 
-!define WORLD_DROPS_CLOTH
+!define WORLD_DROPS_CLOTH 
 {
 	possibility: { weight: 1 }
 	possibility: { weight: 1 loot_group: world_drops_cloth creature_types: [ humanoid demon undead ] }

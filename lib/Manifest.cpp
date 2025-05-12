@@ -61,6 +61,7 @@
 #include <tpublic/Data/Wall.h>
 #include <tpublic/Data/WordGenerator.h>
 #include <tpublic/Data/WorldAura.h>
+#include <tpublic/Data/WorldMap.h>
 #include <tpublic/Data/Zone.h>
 
 #include <tpublic/Document.h>
@@ -132,6 +133,7 @@ namespace tpublic
 		RegisterDataContainer<Data::Wall>();
 		RegisterDataContainer<Data::WordGenerator>();
 		RegisterDataContainer<Data::WorldAura>();
+		RegisterDataContainer<Data::WorldMap>();
 		RegisterDataContainer<Data::Zone>();				
 	}
 

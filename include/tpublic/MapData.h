@@ -755,6 +755,57 @@ namespace tpublic
 			std::vector<uint32_t>	m_questIds;
 		};
 
+		struct WorldMap
+		{
+			WorldMap()
+			{
+
+			}
+
+			WorldMap(
+				const SourceNode* aSource)
+			{
+				m_worldMapId = aSource->m_sourceContext->m_persistentIdTable->GetId(aSource->m_debugInfo, DataType::ID_WORLD_MAP, aSource->m_name.c_str());
+				
+				aSource->GetObject()->ForEachChild([&](
+					const SourceNode* aChild)
+				{
+					if(aChild->m_name == "offset")
+						m_offset = aChild->GetVec2();
+					else if(aChild->m_name == "source")
+						m_sourcePath = (aChild->m_realPath + "/") + aChild->GetString();
+					else 
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+				});
+			}
+
+			void
+			ToStream(
+				IWriter* aWriter) const
+			{
+				aWriter->WriteUInt(m_worldMapId);
+				m_offset.ToStream(aWriter);
+			}
+
+			bool
+			FromStream(
+				IReader* aReader)
+			{
+				if (!aReader->ReadUInt(m_worldMapId))
+					return false;
+				if(!m_offset.FromStream(aReader))
+					return false;
+				return true;
+			}
+
+			// Public data
+			uint32_t				m_worldMapId = 0;
+			Vec2					m_offset;
+
+			// Not serialized, for building only
+			std::string				m_sourcePath;
+		};
+
 							MapData();
 							MapData(
 								const SourceNode*		aSource);
@@ -842,6 +893,7 @@ namespace tpublic
 		std::unique_ptr<PVP>						m_pvp;
 		std::vector<uint32_t>						m_realmBalanceIds;
 		std::vector<PointOfInterest>				m_pointsOfInterest;
+		std::optional<WorldMap>						m_worldMap;
 	
 		typedef std::unordered_map<Vec2, std::string, Vec2::Hasher> StaticPositionToolTipTable;
 		

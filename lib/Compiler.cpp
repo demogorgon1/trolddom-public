@@ -29,6 +29,7 @@
 #include "PostProcessQuests.h"
 #include "PostProcessSprites.h"
 #include "PostProcessWordGenerators.h"
+#include "PostProcessWorldMaps.h"
 #include "SoundDataBuilder.h"
 #include "SpriteSheetBuilder.h"
 
@@ -212,6 +213,7 @@ namespace tpublic
 			PostProcessDoodads::Run(m_manifest);
 			PostProcessQuests::Run(m_manifest);
 			PostProcessMaps::Run(m_manifest);
+			PostProcessWorldMaps::Run(m_manifest);
 		}
 
 		// Run generation jobs

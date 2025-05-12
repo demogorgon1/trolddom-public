@@ -1,0 +1,5 @@
+world_map main:
+{
+	land_tile: grass
+	ocean_tile: water 
+}
