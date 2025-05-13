@@ -65,7 +65,7 @@ ability spiritual_surge:
 {
 	string: "Spiritual Surge"
 	description: "Increases spell haste of friendly target by 30% for 10 seconds."
-	range: 1	
+	range: 3	
 	cooldowns: [ global spiritual_surge ]
 	flags: [ spell target_other target_self target_friendly ]
 	states: [ default in_combat ]
