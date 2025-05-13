@@ -2,4 +2,5 @@ world_map main:
 {
 	land_tile: grass
 	ocean_tile: water 
+	margins: [ -100 -100 0 0 ]	 
 }

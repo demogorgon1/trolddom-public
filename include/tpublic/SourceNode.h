@@ -378,6 +378,16 @@ namespace tpublic
 
 		template <typename _T>
 		void
+		GetIntArray(
+			std::vector<_T>&				aOut) const
+		{
+			TP_VERIFY(m_type == TYPE_ARRAY, m_debugInfo, "Not an array.");
+			for (const std::unique_ptr<SourceNode>& child : m_children)
+				aOut.push_back((_T)child->GetInt32());
+		}
+
+		template <typename _T>
+		void
 		GetUIntSet(
 			std::vector<_T>&				aOut) const
 		{

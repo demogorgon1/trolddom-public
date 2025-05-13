@@ -55,6 +55,10 @@ namespace tpublic
 			uint8_t		m_a;
 		};
 
+		static RGBA	Sepia(
+						const RGBA&					aRGBA,
+						float						aBrightness = 1.0f);
+
 					Image();
 					Image(
 						uint32_t					aWidth,
@@ -133,6 +137,10 @@ namespace tpublic
 						uint32_t*					aOutWidth,
 						uint32_t*					aOutHeight);
 		RGBA		GetAverageColor() const;
+		void		ToStream(
+						IWriter*					aWriter) const;
+		bool		FromStream(
+						IReader*					aReader);
 		
 		// Data access
 		uint32_t	GetWidth() const { return m_width; }

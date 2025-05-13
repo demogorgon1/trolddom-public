@@ -120,6 +120,16 @@ namespace tpublic
 
 		template <typename _T>
 		void
+		WriteInts(
+			const std::vector<_T>& aValues)
+		{
+			WriteUInt(aValues.size());
+			for (const _T& value : aValues)
+				WriteInt<_T>(value);
+		}
+
+		template <typename _T>
+		void
 		WritePODs(
 			const std::vector<_T>&					aValues)
 		{

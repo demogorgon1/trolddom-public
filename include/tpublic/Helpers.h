@@ -77,6 +77,10 @@ namespace tpublic
 		bool		IsMinionOfPlayer(
 						const EntityInstance*				aEntityInstance,
 						uint32_t							aPlayerEntityInstanceId);
+		float		SmoothStep(
+						float								aEdge0,
+						float								aEdge1,
+						float								aX);
 
 		template <typename _T>
 		void

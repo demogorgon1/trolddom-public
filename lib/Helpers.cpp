@@ -406,4 +406,21 @@ namespace tpublic::Helpers
 		return minionPublic->m_ownerEntityInstanceId == aPlayerEntityInstanceId;
 	}
 
+	float
+	SmoothStep(
+		float						aEdge0,
+		float						aEdge1,
+		float						aX)
+	{
+		if (aX < aEdge0)
+			return 0.0f;
+
+		if (aX >= aEdge1)
+			return 1.0f;
+
+		float x = (aX - aEdge0) / (aEdge1 - aEdge0);
+
+		return x * x * (3.0f - 2.0f * x);
+	}
+
 }
