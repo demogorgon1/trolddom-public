@@ -23,6 +23,9 @@ namespace tpublic
 				{
 					aStream->WriteUInt(m_mapId);
 					aStream->WriteObjects(m_outline);
+					m_center.ToStream(aStream);
+					m_min.ToStream(aStream);
+					m_max.ToStream(aStream);
 				}
 
 				bool
@@ -33,18 +36,39 @@ namespace tpublic
 						return false;
 					if (!aStream->ReadObjects(m_outline, 32768))
 						return false;
+					if (!m_center.FromStream(aStream))
+						return false;
+					if (!m_min.FromStream(aStream))
+						return false;
+					if (!m_max.FromStream(aStream))
+						return false;
 					return true;
 				}
 
 				// Public data
 				uint32_t				m_mapId = 0;
 				std::vector<Vec2>		m_outline;
+				Vec2					m_center;
+				Vec2					m_min;
+				Vec2					m_max;
 			};
 
 			void
 			Verify() const
 			{
 				VerifyBase();
+			}
+
+			const SubMap*
+			GetSubMap(
+				uint32_t				aMapId) const
+			{
+				for(const std::unique_ptr<SubMap>& subMap : m_subMaps)
+				{
+					if(subMap->m_mapId == aMapId)
+						return subMap.get();
+				}
+				return NULL;
 			}
 
 			// Base implementation

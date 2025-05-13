@@ -811,6 +811,7 @@ namespace tpublic
 		m_walls = aMapData->m_walls;
 		m_staticPositionToolTips = aMapData->m_staticPositionToolTips;
 		m_pointsOfInterest = aMapData->m_pointsOfInterest;
+		m_worldMap = aMapData->m_worldMap;
 	}
 
 	uint32_t	

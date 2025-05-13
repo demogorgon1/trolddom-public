@@ -84,6 +84,8 @@ namespace tpublic
 						};
 
 						std::vector<Vec2> outline;
+						Vec2 outlineSum;
+						int32_t outlineSumCount = 0;
 
 						for (int32_t y = 0; y < (int32_t)source.GetHeight(); y++)
 						{
@@ -94,11 +96,23 @@ namespace tpublic
 								{
 									outline.push_back({ position.m_x + x, position.m_y + y });
 									coast.insert({ position.m_x + x, position.m_y + y });
+
+									outlineSum.m_x += position.m_x + x;
+									outlineSum.m_y += position.m_y + y;
+
+									outlineSumCount++;
 								}
 							}
 						}
 
 						subMap->m_outline = std::move(outline);
+
+						if(outlineSumCount > 0)
+							subMap->m_center = { outlineSum.m_x / outlineSumCount, outlineSum.m_y / outlineSumCount };
+
+						subMap->m_min = position;
+						subMap->m_max.m_x = position.m_x + (int32_t)source.GetWidth();
+						subMap->m_max.m_y = position.m_y + (int32_t)source.GetHeight();
 					}
 
 					// Insert in full image
@@ -123,6 +137,13 @@ namespace tpublic
 
 					for(int32_t y = 0; y < size.m_y; y++)
 					{
+						float vBright = 1.0f;
+
+						if(y < 32)
+							vBright = Helpers::SmoothStep(0.0f, 32.0f, (float)y);
+						else if(y > size.m_y - 32)
+							vBright = Helpers::SmoothStep(0.0f, 32.0f, (float)(size.m_y - y));
+
 						for (int32_t x = 0; x < size.m_x; x++)
 						{
 							bool isLand = landmass(x, y);
@@ -157,15 +178,15 @@ namespace tpublic
 							else
 							{
 								brightness = 1.0f;
-								float noiseSample1 = Helpers::Clamp((float)Perlin::Sample(x * 1200, y * 1800, 0, &noise) / 64000.0f + 0.5f, 0.0f, 1.0f);
-								float noiseSample2 = Helpers::Clamp((float)Perlin::Sample(x * 1000, y * 1400, 0, &noise) / 49000.0f + 0.5f, 0.0f, 1.0f);
-								float noiseSample3 = Helpers::Clamp((float)Perlin::Sample(x * 1700, y * 2700, 0, &noise) / 55000.0f + 0.5f, 0.0f, 1.0f);
+								float noiseSample1 = Helpers::Clamp((float)Perlin::Sample(x * 1000, y * 1800, 0, &noise) / 64000.0f + 0.5f, 0.0f, 1.0f);
+								float noiseSample2 = Helpers::Clamp((float)Perlin::Sample(x * 900, y * 1400, 0, &noise) / 49000.0f + 0.5f, 0.0f, 1.0f);
+								float noiseSample3 = Helpers::Clamp((float)Perlin::Sample(x * 1500, y * 2700, 0, &noise) / 55000.0f + 0.5f, 0.0f, 1.0f);
 								float noiseSample4 = ((float)(random() >> 24) / 255.0f);
 								float n = noiseSample1 * noiseSample2 * noiseSample3 * 0.8f + noiseSample4 * 0.2f;
 								brightness *= 0.95f + n * 0.05f;
 							}
 
-							tmp->GetData()[x + y * size.m_x] = Image::Sepia(color, brightness);
+							tmp->GetData()[x + y * size.m_x] = Image::Sepia(color, brightness * vBright);
 						}
 					}
 
