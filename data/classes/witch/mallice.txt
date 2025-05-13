@@ -75,7 +75,7 @@ ability maliciousness:
 	string: "Maliciousness"
 	description: "Increases your spell casting speed by 30% for 20 seconds."
 	range: 1	
-	cooldowns: [ global maliciousness ]
+	cooldowns: [ maliciousness ]
 	flags: [ target_self ]
 	states: [ default in_combat ]
 	icon: icon_special_9

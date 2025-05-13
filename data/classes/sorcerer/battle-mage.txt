@@ -125,7 +125,7 @@ ability overpower:
 	string: "Overpower"
 	description: "Increases your Strength by 100% for 20 seconds."
 	range: 1	
-	cooldowns: [ global overpower ]
+	cooldowns: [ overpower ]
 	flags: [ target_self ]
 	states: [ default in_combat ]
 	icon: icon_agility
