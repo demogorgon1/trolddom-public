@@ -14,6 +14,10 @@
 	train_ability: craft_enchant_boots_constitution
 	train_ability: craft_enchant_chest_greater_mastery
 	train_ability: craft_enchant_chest_mastery
+	train_ability: craft_enchant_cloak_armor
+	train_ability: craft_enchant_cloak_dodge
+	train_ability: craft_enchant_cloak_restoration
+	
 }
 
 !define DEFAULT_BLACKSMITING_TRAINER

@@ -313,6 +313,38 @@ ability disenchant:
 }
 
 #####################################################
+# Enchant Cloak - Dodge
+
+{
+	${
+		_string: "Enchant Cloak - Dodge"
+		_string_item: "Enchant Cloak: Dodge"
+		_description: "Enchants item to increase chance to dodge by 1%."
+		_item: enchant_cloak_dodge
+		_produce: { enchant_cloak_dodge: 1 } 
+		_materials: { reagent_arcane_essence: 1 reagent_mystery_crystal: 2 item_green_feather: 2 reagent_paper: 1 }
+		_skill: 55
+		_target_item_requirements: { equipment_slots: [ back ] }
+		_id: enchant_cloak_dodge
+		_consume_items: { enchant_cloak_dodge: 1 }	
+	}
+
+	aura enchant_cloak_dodge:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper	
+
+		string: "Dodge +1%"
+		stat_modifiers: { dodge_chance: { add: 1 } }
+	}
+
+	ability enchant_cloak_dodge: !ENCHANTING_APPLY{}
+	item enchant_cloak_dodge: !ENCHANTING_ITEM{}
+	ability craft_enchant_cloak_dodge: !ENCHANTING_CRAFT{}
+}
+
+#####################################################
 # Enchant Shield - Major Constitution
 
 {
@@ -377,6 +409,38 @@ ability disenchant:
 }
 
 #####################################################
+# Enchant Cloak - Restoration
+
+{
+	${
+		_string: "Enchant Cloak - Restoration"
+		_string_item: "Enchant Cloak: Restoration"
+		_description: "Enchants item to increase Mana Per 5 Seconds by 4."
+		_item: enchant_cloak_restoration
+		_produce: { enchant_cloak_restoration: 1 } 
+		_materials: { reagent_arcane_essence: 6 item_life_core: 2 reagent_paper: 1 }
+		_skill: 60
+		_target_item_requirements: { equipment_slots: [ back ] }
+		_id: enchant_cloak_restoration
+		_consume_items: { enchant_cloak_restoration: 1 }	
+	}
+
+	aura enchant_cloak_restoration:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper	
+
+		string: "Restoration"
+		stat_modifiers: { mana_per_5: { add: 4 } }
+	}
+
+	ability enchant_cloak_restoration: !ENCHANTING_APPLY{}
+	item enchant_cloak_restoration: !ENCHANTING_ITEM{}
+	ability craft_enchant_cloak_restoration: !ENCHANTING_CRAFT{}
+}
+
+#####################################################
 # Enchant Bracers - Spirit
 
 {
@@ -406,6 +470,38 @@ ability disenchant:
 	ability enchant_bracers_spirit: !ENCHANTING_APPLY{}
 	item enchant_bracers_spirit: !ENCHANTING_ITEM{}
 	ability craft_enchant_bracers_spirit: !ENCHANTING_CRAFT{}
+}
+
+#####################################################
+# Enchant Cloak - Armor
+
+{
+	${
+		_string: "Enchant Cloak - Armor"
+		_string_item: "Enchant Cloak: Armor"
+		_description: "Enchants item to increase Armor by 80."
+		_item: enchant_cloak_armor
+		_produce: { enchant_cloak_armor: 1 } 
+		_materials: { reagent_arcane_essence: 3 reagent_dream_crystal: 1 item_earth_core: 2 reagent_paper: 1 }
+		_skill: 65
+		_target_item_requirements: { equipment_slots: [ back ] }
+		_id: enchant_cloak_armor
+		_consume_items: { enchant_cloak_armor: 1 }	
+	}
+
+	aura enchant_cloak_armor:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper	
+
+		string: "Armor +80"
+		stat_modifiers: { armor: { add: 80 } }
+	}
+
+	ability enchant_cloak_armor: !ENCHANTING_APPLY{}
+	item enchant_cloak_armor: !ENCHANTING_ITEM{}
+	ability craft_enchant_cloak_armor: !ENCHANTING_CRAFT{}
 }
 
 #####################################################

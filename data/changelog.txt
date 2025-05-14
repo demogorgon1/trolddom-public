@@ -10,11 +10,12 @@ changelog:
 	[
 		{ text: "Escorted NPCs will stop walking while the player is in combat." }
 		{ text: "New world map (still no scrolling, sorry)." }
-		{ text: "Intervention of Wratth, Spiritual Surge, Overpower, Elemental Infusion, and Maliciousness are no longer on the global cooldown (thanks sithpl)." }
+		{ text: "Intervention of Wrath, Spiritual Surge, Overpower, Elemental Infusion, and Maliciousness are no longer on the global cooldown (thanks sithpl)." }
 		{ text: "Jewelry can now be disenchanted." }
 		{ text: "Mounting and dismounting is no longer on the global cooldown." }
 		{ text: "Dungeon bosses now reset their Token of Victory cooldown at the same time for everyone." }
 		{ text: "/roll gives a random number between 1 and 100. /roll X between 1 and X. /roll X-Y between X and Y." }
+		{ text: "New enchants for cloaks." }
 	]
 
 	text: "Issues fixed:"
