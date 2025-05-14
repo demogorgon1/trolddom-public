@@ -69,11 +69,20 @@ namespace tpublic
 					if (!FromSourceBase(aChild))
 					{
 						if (aChild->m_name == "seconds")
-							m_seconds = aChild->GetUInt32();
+						{
+							if(aChild->IsIdentifier("fixed_daily_timer"))
+								m_seconds = 0;
+							else
+								m_seconds = aChild->GetUInt32();
+						}
 						else if(aChild->m_tag == "map_message")
+						{
 							m_mapMessage = MapMessage(aChild);
+						}
 						else
+						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+						}
 					}
 				});
 			}

@@ -67,3 +67,10 @@ emote yawn: { strings: [
 	"You yawn sleepily at $target$."
 	"$source$ yawns sleepily at $target$."
 ]}
+
+emote roll: { strings: [ 
+	"You roll $random$ ($random_range$)" 
+	"$source$ rolls $random$ ($random_range$)"
+	"You roll $random$ ($random_range$)" 
+	"$source$ rolls $random$ ($random_range$)"
+]}

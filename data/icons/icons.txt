@@ -601,9 +601,9 @@ sprites:
 	sprite icon_bracers_6 : { tags: [ icon armor_cloth wrists ] icon_meta_data: !ICON_UNCOMMON_11{} }
 	sprite icon_gloves_4 : { tags: [ icon armor_mail armor_plate hands ] icon_meta_data: !ICON_UNCOMMON_11{} }
 	sprite icon_gloves_5 : { tags: [ icon armor_mail armor_cloth hands ] icon_meta_data: !ICON_UNCOMMON_11{} }
-	sprite icon_belt_3 : { tags: [ icon armor_cloth armor_plate armor_mail armor_plate hands ] icon_meta_data: !ICON_UNCOMMON_11{} }
-	sprite icon_belt_4 : { tags: [ icon armor_cloth armor_plate armor_mail armor_plate hands ] icon_meta_data: !ICON_UNCOMMON_11{} }
-	sprite icon_belt_5 : { tags: [ icon armor_cloth armor_plate armor_mail armor_plate hands ] icon_meta_data: !ICON_UNCOMMON_11{} }
+	sprite icon_belt_3 : { tags: [ icon armor_cloth armor_plate armor_mail armor_plate waist ] icon_meta_data: !ICON_UNCOMMON_11{} }
+	sprite icon_belt_4 : { tags: [ icon armor_cloth armor_plate armor_mail armor_plate waist ] icon_meta_data: !ICON_UNCOMMON_11{} }
+	sprite icon_belt_5 : { tags: [ icon armor_cloth armor_plate armor_mail armor_plate waist ] icon_meta_data: !ICON_UNCOMMON_11{} }
 	sprite icon_boots_4 : { tags: [ icon armor_cloth armor_plate armor_mail armor_plate feet ] icon_meta_data: !ICON_UNCOMMON_11{} }
 	sprite icon_boots_5 : { tags: [ icon armor_cloth armor_plate armor_mail armor_plate feet ] icon_meta_data: !ICON_UNCOMMON_11{} }
 	sprite icon_boots_6 : { tags: [ icon armor_plate armor_mail armor_plate feet ] icon_meta_data: !ICON_UNCOMMON_11{} }
