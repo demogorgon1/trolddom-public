@@ -56,7 +56,7 @@ item .gash_hewitt_1_quest_item:
 {
 	${ _level: 14 }
 	item .gash_hewitt_1_a: !QUEST_REWARD_1H_KNIFE{ _string: "Rusty Old Dagger" _icon: icon_knife_2 _constitution: 1 _weapon_cooldown: 18 }
-	item .gash_hewitt_1_b: !QUEST_REWARD_BACK{ _string: "Gash Hewitt's Cloak" _icon: icon_cape_1 _constitution: 1 _dexterity: 2 }
+	item .gash_hewitt_1_b: !QUEST_REWARD_BACK{ _string: "Gash Hewitt's Cloak" _icon: icon_cape_1 _constitution: 1 _dexterity: 2 _type: armor_cloth}
 }
 
 quest .gash_hewitt_1:
