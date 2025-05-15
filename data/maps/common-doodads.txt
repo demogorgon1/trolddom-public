@@ -102,6 +102,9 @@ sprites:
 	sprite doodad_jungle_5: { flags: [ tile_walkable ] }
 	sprite doodad_jungle_purple_1: { flags: [ tile_walkable ] }
 	sprite doodad_jungle_purple_2: { flags: [ tile_walkable ] }
+	sprite doodad_dark_stairs_left: { flags: [ tile_walkable ] }
+	sprite doodad_dark_stairs_center: { flags: [ tile_walkable ] }
+	sprite doodad_dark_stairs_right: { flags: [ tile_walkable ] }
 
 	cursor: { position: [ 0 48 ] }
 	size: { width: 80 height: 64 } sprite ship: { flags: [ tile_walkable ] }
@@ -277,4 +280,7 @@ doodad hard_slope_w: { sprites: [ doodad_hard_slope_w ] map_palette<"x">: { occu
 doodad hard_slope_n: { sprites: [ doodad_hard_slope_n ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad hard_slope_s: { sprites: [ doodad_hard_slope_s ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad jungle_plant_purple: { sprites: [ doodad_jungle_purple_1 doodad_jungle_purple_2 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad dark_stairs_left: { sprites: [ doodad_dark_stairs_left ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad dark_stairs_center: { sprites: [ doodad_dark_stairs_center ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad dark_stairs_right: { sprites: [ doodad_dark_stairs_right ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 

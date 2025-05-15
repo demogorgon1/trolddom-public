@@ -1,0 +1,52 @@
+npc_behavior_state .wandering_short:
+{
+	on_route<durgan_urok_default_patrol>: .patrol
+	behavior: wandering
+	max_range: 1
+}
+
+npc_behavior_state .passive:
+{
+	on_route<durgan_urok_default_patrol>: .patrol
+	behavior: do_nothing
+}
+
+npc_behavior_state .patrol:
+{
+	behavior: patrolling
+}
+
+map_entity_spawn .boss_1_trash: 
+{ 
+	#entity .xxx: { level: 22 spawn_condition: { if_not: .boss_1_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+loot_table .xxx: 
+{
+	slots:
+	[	
+		!WORLD_DROPS {}
+	]	
+}
+
+# xxx
+{
+	${
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: .xxx
+		_weapon_damage: 1.4
+		_resource_health: 1.71
+		_elite: true
+		_abilities: 
+		[ 
+			{ id: npc_attack } 
+		]
+	}
+
+	entity .xxx: !NPC { _string: "xxx" _sprite: wolf_1 _sprite_dead: wolf_1_dead _level: 22 }
+}
+

@@ -2,6 +2,22 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.2.5"
+	
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Increased item level of loot from Zyxtharion and Eldros the Evergrowing." }
+	]
+
+	#text: "Issues fixed:"
+	#
+	#list:
+	#[
+	#]
+
+	#######################################################################################
 	heading: "v0.2.4"
 	
 	text: "Changes:"

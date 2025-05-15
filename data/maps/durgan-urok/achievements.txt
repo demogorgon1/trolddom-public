@@ -1,0 +1,9 @@
+achievement_category .durgan_urok: { string: "Dungeon: Durgan Urok" order_key: 3 }
+
+achievement durgan_urok_boss_1: { sort_key: 1 category: .durgan_urok string: "Boss 1" description: "Slay Boss 1." points: 10 priority: 0 kill_trigger: durgan_urok_boss_1 icon: icon_skull_1 }
+achievement durgan_urok_boss_2: { sort_key: 2 category: .durgan_urok string: "Boss 2" description: "Slay Boss 2." points: 10 priority: 0 kill_trigger: durgan_urok_boss_2 icon: icon_skull_1 }
+achievement durgan_urok_boss_3: { sort_key: 3 category: .durgan_urok string: "Boss 3" description: "Slay Boss 3." points: 10 priority: 0 kill_trigger: durgan_urok_boss_3 icon: icon_skull_1 }
+achievement durgan_urok_boss_4: { sort_key: 4 category: .durgan_urok string: "Boss 4" description: "Slay Boss 4." points: 10 priority: 0 kill_trigger: durgan_urok_boss_4 icon: icon_skull_1 }
+achievement durgan_urok_boss_5: { sort_key: 5 category: .durgan_urok string: "Boss 5" description: "Slay Boss 5." points: 10 priority: 0 kill_trigger: durgan_urok_boss_5 icon: icon_skull_1 }
+
+achievement durgan_urok: { category: .durgan_urok string: "Durgan Urok" description: "Finish Durgan Urok." points: 20 need_achievements: [ durgan_urok_boss_1 durgan_urok_boss_2 durgan_urok_boss_3 durgan_urok_boss_4 durgan_urok_boss_5 ] icon: icon_durgan_urok }

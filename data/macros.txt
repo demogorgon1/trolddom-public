@@ -228,9 +228,11 @@
 {
 	string: @_string
 	binds: when_picked_up
-	required_level: @_level
+	required_level: @_level	
 	icon: @_icon
 	flags: [ dungeon_loot ]
+	
+	<exists _item_level> item_level: @_item_level
 	
 	<exists _type> type: @_type
 	<exists _item_aura> aura: @_item_aura

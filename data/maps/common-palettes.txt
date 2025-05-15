@@ -95,5 +95,10 @@
 	tile jungle_1: [ 35 225 134 ]
 	tile jungle_2: [ 20 245 64 ]
 	tile jungle_grass: [ 70 125 34 ]
+	tile fs_ground_1: [ 61 19 88 ]
+	tile fs_ground_2: [ 53 50 15 ]
+	tile fs_ground_3: [ 60 44 120 ]
+	tile fs_water: [ 60 44 220 ]
+	tile fs_shallow_water: [ 150 44 220 ]
 	
 }

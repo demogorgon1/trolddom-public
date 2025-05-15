@@ -19,6 +19,7 @@ loot_table .zyxtharion:
 	${
 		_rarity: rare
 		_level: 20
+		_item_level: 21
 		_loot_group: .zyxtharion
 	}	
 	

@@ -3,6 +3,7 @@ map_player_spawn .player_spawn: { }
 map_player_spawn thalvaron_lich_tower_exit: { }
 map_player_spawn thalvaron_valoris_insurgency_exit: { }
 map_player_spawn thalvaron_tirnwood_thicket_exit: { }
+map_player_spawn thalvaron_durgan_urok_exit: { }
 
 map_player_spawn thalvaron_wizard_realm_spawn: { }
 map_player_spawn thalvaron_wizard_realm_return_spawn: { }
@@ -92,7 +93,8 @@ npc_behavior_state thalvaron_default_patrol:
 
 map_portal thalvaron_lich_tower_entrance: {	animation: !DEFAULT_PORTAL_ANIMATION{} map: lich_tower }
 map_portal thalvaron_valoris_insurgency_entrance: { animation: !DEFAULT_PORTAL_ANIMATION{} map: valoris_insurgency }
-map_portal thalvaron_tirnwood_thicket_entrance: {	animation: !HOLE_PORTAL_ANIMATION{} map: tirnwood_thicket }
+map_portal thalvaron_tirnwood_thicket_entrance: { animation: !HOLE_PORTAL_ANIMATION{} map: tirnwood_thicket }
+map_portal thalvaron_durgan_urok_entrance: { animation: !HOLE_PORTAL_ANIMATION{} map: durgan_urok }
 
 map_cliff .rocky_cliff: { cliff_style: rocks elevation: 1 }
 map_cliff .rocky_cliff_ramp: { cliff_style: rocks elevation: 1 ramp: true }
@@ -361,10 +363,12 @@ map_palette .stuff:
 	player_spawn thalvaron_the_shrouded_lands_underworld_return: [ 205 106 209 ]
 	player_spawn thalvaron_blimcraft_highborne_3_portal_spawn: [ 40 105 130 ]
 	player_spawn thalvaron_blimcraft_highborne_3_portal_return_spawn: [ 140 105 130 ]
+	player_spawn thalvaron_durgan_urok_exit: [ 114 124 144 ]
 
 	portal thalvaron_lich_tower_entrance: [ 144 188 94 ]
 	portal thalvaron_valoris_insurgency_entrance: [ 144 88 92 ]
 	portal thalvaron_tirnwood_thicket_entrance: [ 144 228 92 ]
+	portal thalvaron_durgan_urok_entrance: [ 244 218 92 ]
 	
 	wall stone_wall: [ 128 128 128 ]
 	wall fence: [ 64 128 140 ]

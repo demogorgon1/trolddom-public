@@ -1,0 +1,91 @@
+############################################################
+# Loot
+
+loot_group .boss_3: {}
+
+loot_table .boss_3:
+{
+	slots:
+	[
+		{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
+		  map_message durgan_urok: "Boss 3 will not drop Token of Victory for {}." } } }
+		{ possibility: { loot_group: .boss_3  } }			
+		!WORLD_DROPS{}		
+	]	
+}
+
+{
+	${
+		_rarity: rare
+		_level: 22
+		_loot_group: .boss_3
+	}
+	
+	item durgan_urok_3: !BOSS_DROP_FEET
+	{
+		_string: "Boss 3's Boots"
+		_type: armor_mail
+		_icon: icon_shoe_1
+		_strength: 3
+		_dexterity: 2
+		_constitution: 1
+	}	
+}
+
+############################################################
+# Boss
+
+zone .boss_3:
+{
+}
+
+encounter .boss_3:
+{
+	main_entities: [ durgan_urok_boss_3 ]	
+}
+
+entity durgan_urok_boss_3: !NPC 
+{ 
+	_string: "Boss 3" 
+	_level: 22
+	_elite: true
+	_faction: monsters 
+	_sprite: wolf_1
+	_sprite_dead: wolf_1_dead 
+	_weapon_damage: 1.8
+	_resource_health: 6
+	_loot_table: .boss_3
+	_creature_type: beast
+	_encounter: .boss_3
+	_zone: .boss_3
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+
+	_abilities: 
+	[
+		{
+			id: npc_attack
+		}
+	]	
+	
+}
+
+map_trigger .boss_3_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .boss_3:
+{
+	entity durgan_urok_boss_3: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .boss_3_killed
+		}
+	}
+}
+
