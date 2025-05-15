@@ -993,4 +993,55 @@ sprites:
 	sprite fs_ground_3_alt_1: { flags: [ tile_walkable ] }
 	sprite fs_ground_3_alt_2: { flags: [ tile_walkable ] }
 
+	cursor: { position: [ 0 512 ] }
+
+	sprite jungle_1: { flags: [ tile_block_line_of_sight ] borders:
+		[ jungle_1_border_1 jungle_1_border_2 jungle_1_border_3 jungle_1_border_4 jungle_1_border_5 jungle_1_border_6 jungle_1_border_7
+		  jungle_1_border_8 jungle_1_border_9 jungle_1_border_10 jungle_1_border_11 jungle_1_border_12 jungle_1_border_13 jungle_1_border_14
+		  jungle_1_border_15 jungle_1_border_16 jungle_1_border_17 ] alt_tiles: [ jungle_1_alt_1 jungle_1_alt_2 ] }		
+	sprite jungle_1_border_1: { }
+	sprite jungle_1_border_2: { }
+	sprite jungle_1_border_3: { }
+	sprite jungle_1_border_4: { }
+	sprite jungle_1_border_5: { }
+	sprite jungle_1_border_6: { }
+	sprite jungle_1_border_7: { }
+	sprite jungle_1_border_8: { }
+	sprite jungle_1_border_9: { }
+	sprite jungle_1_border_10: { }
+	sprite jungle_1_border_11: { }
+	sprite jungle_1_border_12: { }
+	sprite jungle_1_border_13: { }
+	sprite jungle_1_border_14: { }
+	sprite jungle_1_border_15: { }
+	sprite jungle_1_border_16: { }
+	sprite jungle_1_border_17: { }
+	sprite jungle_1_alt_1: { flags: [ tile_block_line_of_sight ] }
+	sprite jungle_1_alt_2: { flags: [ tile_block_line_of_sight ] }
+
+	cursor: { position: [ 0 528 ] }
+
+	sprite jungle_2: { flags: [ tile_block_line_of_sight ] borders:
+		[ jungle_2_border_1 jungle_2_border_2 jungle_2_border_3 jungle_2_border_4 jungle_2_border_5 jungle_2_border_6 jungle_2_border_7
+		  jungle_2_border_8 jungle_2_border_9 jungle_2_border_10 jungle_2_border_11 jungle_2_border_12 jungle_2_border_13 jungle_2_border_14
+		  jungle_2_border_15 jungle_2_border_16 jungle_2_border_17 ] alt_tiles: [ jungle_2_alt_1 jungle_2_alt_2 ] }		
+	sprite jungle_2_border_1: { }
+	sprite jungle_2_border_2: { }
+	sprite jungle_2_border_3: { }
+	sprite jungle_2_border_4: { }
+	sprite jungle_2_border_5: { }
+	sprite jungle_2_border_6: { }
+	sprite jungle_2_border_7: { }
+	sprite jungle_2_border_8: { }
+	sprite jungle_2_border_9: { }
+	sprite jungle_2_border_10: { }
+	sprite jungle_2_border_11: { }
+	sprite jungle_2_border_12: { }
+	sprite jungle_2_border_13: { }
+	sprite jungle_2_border_14: { }
+	sprite jungle_2_border_15: { }
+	sprite jungle_2_border_16: { }
+	sprite jungle_2_border_17: { }
+	sprite jungle_2_alt_1: { flags: [ tile_block_line_of_sight ] }
+	sprite jungle_2_alt_2: { flags: [ tile_block_line_of_sight ] }
 }

@@ -67,6 +67,11 @@ zone .holy_temple: { string: "Holy Temple of Valoris" }
 zone .underworld_society: { string: "Society of the Underworld" }
 zone .echosrest: { string: "Echo's Rest" }
 zone .highborne_realm: { string: "Realm of the Highborne" no_map: true }
+zone .jungle_highlands: { string: "Xandralis Highlands" }
+zone .the_desolate_pass: { string: "The Desolate Pass" }
+zone .skaldrun_coast_west: { string: "Western Skaldrun Shore" }
+zone .skaldrun_coast_east: { string: "Eastern Skaldrun Shore" }
+zone .skaldrun: { string: "Skaldrun" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -750,6 +755,8 @@ map_palette .levels:
 	level<18>: [ 255 0 255 ]
 	level<19>: [ 255 255 0 ]
 	level<20>: [ 255 127 0 ]
+	level<21>: [ 145 203 128 ]
+	level<22>: [ 0 107 255 ]
 }
 
 map_palette .zones:
@@ -788,6 +795,11 @@ map_palette .zones:
 	zone .dark_strand: [ 0 255 33 ]
 	zone .tirnwood: [ 200 107 210 ]
 	zone .echosrest: [ 171 18 171 ]
+	zone .jungle_highlands: [ 240 234 182 ]
+	zone .the_desolate_pass: [ 204 182 240 ]
+	zone .skaldrun_coast_west: [ 240 182 199 ]
+	zone .skaldrun_coast_east: [ 202 76 112 ]
+	zone .skaldrun: [ 38 61 140 ]
 }
 
 map_palette .sub_zones:

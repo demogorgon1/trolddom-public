@@ -32,6 +32,8 @@ tile_layering:
 	pine_forest_1
 	pine_forest_2
 	pine_forest_3
+	jungle_1
+	jungle_2
 	
 	# Rocks
 	rocks
