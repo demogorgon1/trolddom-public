@@ -1044,4 +1044,36 @@ sprites:
 	sprite jungle_2_border_17: { }
 	sprite jungle_2_alt_1: { flags: [ tile_block_line_of_sight ] }
 	sprite jungle_2_alt_2: { flags: [ tile_block_line_of_sight ] }
+	
+	cursor: { position: [ 0 544 ] }
+
+	sprite jungle_grass: 
+	{ 
+		flags: [ tile_walkable ] 
+		borders: [ jungle_grass_border_1 jungle_grass_border_2 jungle_grass_border_3 jungle_grass_border_4 jungle_grass_border_5 jungle_grass_border_6 jungle_grass_border_7
+		           jungle_grass_border_8 jungle_grass_border_9 jungle_grass_border_10 jungle_grass_border_11 jungle_grass_border_12 jungle_grass_border_13 jungle_grass_border_14
+		           jungle_grass_border_15 jungle_grass_border_16 jungle_grass_border_17 ] 				  						   
+		alt_tiles: [ jungle_grass_alt_1 jungle_grass_alt_2 ]
+	}	
+	sprite jungle_grass_border_1: { }
+	sprite jungle_grass_border_2: { }
+	sprite jungle_grass_border_3: { }
+	sprite jungle_grass_border_4: { }
+	sprite jungle_grass_border_5: { }
+	sprite jungle_grass_border_6: { }
+	sprite jungle_grass_border_7: { }
+	sprite jungle_grass_border_8: { }
+	sprite jungle_grass_border_9: { }
+	sprite jungle_grass_border_10: { }
+	sprite jungle_grass_border_11: { }
+	sprite jungle_grass_border_12: { }
+	sprite jungle_grass_border_13: { }
+	sprite jungle_grass_border_14: { }
+	sprite jungle_grass_border_15: { }
+	sprite jungle_grass_border_16: { }
+	sprite jungle_grass_border_17: { }
+	sprite jungle_grass_alt_1: { flags: [ tile_walkable ] }
+	sprite jungle_grass_alt_2: { flags: [ tile_walkable ] }
+	
+	
 }

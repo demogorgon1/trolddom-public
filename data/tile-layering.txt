@@ -20,6 +20,7 @@ tile_layering:
 	wet_grass
 	dark_grass
 	farmland
+	jungle_grass
 	snow
 	
 	# Special surfaces

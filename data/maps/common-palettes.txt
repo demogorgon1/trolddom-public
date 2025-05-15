@@ -94,4 +94,6 @@
 	tile inside_5_solid_wall_face_window: [ 244 25 34 ]
 	tile jungle_1: [ 35 225 134 ]
 	tile jungle_2: [ 20 245 64 ]
+	tile jungle_grass: [ 70 125 34 ]
+	
 }
