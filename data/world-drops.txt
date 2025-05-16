@@ -52,6 +52,8 @@ loot_group spiders: {}
 loot_group spiders_uncommon: {}
 loot_group birds: {}
 loot_group birds_uncommon: {}
+loot_group snakes: {}
+loot_group snakes_uncommon: {}
 
 !define WORLD_DROPS
 {
@@ -225,6 +227,13 @@ loot_group birds_uncommon: {}
 	possibility: { weight: 1 loot_group: birds_uncommon creature_types: [ beast humanoid ] }
 }
 
+!define WORLD_DROPS_SNAKES
+{
+	possibility: { weight: 20 }
+	possibility: { weight: 15 loot_group: snakes creature_types: [ beast ] }
+	possibility: { weight: 1 loot_group: snakes_uncommon creature_types: [ beast ] }
+}
+
 loot_table default_humanoid: 
 {
 	slots:
@@ -394,5 +403,14 @@ loot_table default_bird:
 	[
 		!WORLD_DROPS {}
 		!WORLD_DROPS_BIRDS{}
+	]
+}
+
+loot_table default_snake:
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+		!WORLD_DROPS_SNAKES{}
 	]
 }

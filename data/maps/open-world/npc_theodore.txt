@@ -28,6 +28,10 @@ entity .theodore: !NPC
 	_creature_type: humanoid
 	_loot_table: .npc
 	_not_pushable: true	
+	_visibility_requirements:
+	{
+		requirement self<must_not_have_discovered_zone>: thalvaron_jungle
+	}
 }
 
 ##########################################################################################

@@ -779,6 +779,8 @@ sprites:
 	sprite icon_mongo : { tags: [ icon ] }
 	sprite icon_gray_horse : { tags: [ icon ] }
 	sprite icon_durgan_urok	: { tags: [ icon ] }
+	sprite icon_snake_head_1 : { tags: [ icon ] }
+	sprite icon_fang_1 : { tags: [ icon ] }
 
 }
 

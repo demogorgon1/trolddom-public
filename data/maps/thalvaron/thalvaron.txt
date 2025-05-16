@@ -45,7 +45,7 @@ zone .haunted_woods_west: { string: "Shadowthorn Thicket" }
 zone .haunted_woods_town: { string: "Ravenreach" }
 zone .haunted_woods_clearing: { string: "Shadowthorn Abbey" }
 zone .haunted_woods_east: { string: "Faerandor" }
-zone .jungle: { string: "Xandralis" }
+zone thalvaron_jungle: { string: "Xandralis" }
 zone .lich_woods: { string: "Hollows of the Undying" }
 zone .way_north_pass: { string: "The Northern Pass" }
 zone .duskwhisper_caves: { string: "Duskwhisper Caves" }
@@ -328,6 +328,9 @@ map_entity_spawn thalvaron_dwarf_quartermaster: { entity thalvaron_dwarf_quarter
 map_entity_spawn thalvaron_dwarf_quartermaster_2: { entity thalvaron_dwarf_quartermaster_2: { init_state: default } }
 map_entity_spawn thalvaron_julian_moore: { entity thalvaron_julian_moore: { init_state: default } }
 map_entity_spawn thalvaron_bromrik_coppervein: { entity thalvaron_bromrik_coppervein: { init_state: default } }
+
+# SE
+map_entity_spawn thalvaron_theodore: { entity thalvaron_theodore: { init_state: default } }
 
 map_palette .stuff:
 {
@@ -744,6 +747,12 @@ map_palette .stuff:
 	entity_spawn thalvaron_julian_moore: [ 101 81 82 ]
 	entity_spawn thalvaron_bromrik_coppervein: [ 161 81 82 ]
 	entity_spawn thalvaron_krask: [ 161 181 24 ]
+	
+	# SE
+	entity_spawn thalvaron_slitherer: [ 30 93 123 ]
+	entity_spawn thalvaron_theodore: [ 130 93 123 ]
+	entity_spawn thalvaron_panther: [ 230 93 123 ]
+	
 }
 
 map_palette .levels:
@@ -788,7 +797,7 @@ map_palette .zones:
 	zone .haunted_woods_town: [ 230 255 0 ]
 	zone .haunted_woods_clearing: [ 165 0 255 ]
 	zone .haunted_woods_east: [ 255 16 0 ]
-	zone .jungle: [ 0 25 255 ]
+	zone thalvaron_jungle: [ 0 25 255 ]
 	zone .lich_woods: [ 222 255 0 ]
 	zone .way_north_pass: [ 0 140 255 ]
 	zone .duskwhisper_caves: [ 133 141 55 ]

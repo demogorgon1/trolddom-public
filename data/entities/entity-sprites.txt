@@ -787,12 +787,24 @@ sprites:
 	sprite orc_8: { dead: orc_8_dead }
 	sprite orc_9: { dead: orc_9_dead }
 	sprite orc_10: { dead: orc_10_dead }
+	sprite carnivorous_plant_1: { dead: carnivorous_plant_1_dead }
+	sprite carnivorous_plant_2: { dead: carnivorous_plant_2_dead }
+	sprite snake_1: { dead: snake_1_dead }
+	sprite snake_2: { dead: snake_2_dead }
+	sprite carnivorous_plant_3: { dead: carnivorous_plant_3_dead }
+	sprite panther_1: { dead: panther_1_dead }
 	
 	cursor: { position: [ 0 688 ] }
 	sprite orc_7_dead: { }	
 	sprite orc_8_dead: { }	
 	sprite orc_9_dead: { }	
 	sprite orc_10_dead: { }	
+	sprite carnivorous_plant_1_dead: { }	
+	sprite carnivorous_plant_2_dead: { }	
+	sprite snake_1_dead: { }	
+	sprite snake_2_dead: { }	
+	sprite carnivorous_plant_3_dead: { }	
+	sprite panther_1_dead: { }	
 
 }
 

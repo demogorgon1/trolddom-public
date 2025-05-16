@@ -1,0 +1,138 @@
+dialogue_screen .theodore_greetings:
+{
+	text: 
+	[	
+		"Shh! I'm hunting!"
+	]
+	
+	options:
+	[
+		{ quest: .theodore_1 }
+		{ quest: .theodore_2 }
+	]
+}
+
+dialogue_root .theodore_dialogue:
+{
+	.theodore_greetings: { }
+}
+
+entity thalvaron_theodore: !NPC
+{
+	_string: "Theodore"
+	_dialogue_root: .theodore_dialogue	
+	_sprite: man_1
+	_sprite_dead: man_1_dead	
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+##########################################################################################
+# Quest 1
+
+loot_group .theodore_1_quest_item: { }
+
+item .theodore_1_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .theodore_1_quest_item ]		
+	string: "Slitherer Head" 
+	icon: icon_snake_head_1
+	stack: 5
+	item_level: 20
+	quest: .theodore_1
+	flags: [ not_sellable ]
+}
+
+objective .theodore_1:
+{
+	string: "Slitherer Heads"
+	collect_items: { item: .theodore_1_quest_item count: 5 }
+}
+
+quest .theodore_1:
+{
+	string: "The Xandralis Slitherer"
+
+	text:
+	[
+		"Collect heads from snakes in northern Xandralis and bring them back to Theodore."
+	]
+	
+	description: 
+	[
+		"Ah, I just left and Isle of Aetheris and arrived here a short while ago. It's cetainly a very different place. The air is more moist, the sun warmer, and lots of more interesting animals"
+		"to dominate.\n\n"
+		"Have you seen those giant snakes slithering around the jungle to the east of here, across the river? I'd love to see them up close, but, eh, I'm allergic to snakes. Can you kill a few of them for me"
+		"and bring back their heads?"
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"Nice. Very nice."
+	]
+
+	objectives: [ .theodore_1 ]
+	level: 20	
+}
+
+##########################################################################################
+# Quest 2
+
+loot_group .theodore_2_quest_item: { }
+
+item .theodore_2_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .theodore_2_quest_item ]		
+	string: "Panther Paw" 
+	flavor: "Very soft. Comes in sets of four."
+	icon: icon_severed_paw
+	stack: 20
+	item_level: 20
+	quest: .theodore_2
+	flags: [ not_sellable ]
+}
+
+objective .theodore_2:
+{
+	string: "Panther Paws"
+	collect_items: { item: .theodore_2_quest_item count: 20 }
+}
+
+quest .theodore_2:
+{
+	string: "Jungle Stalkers"
+
+	text:
+	[
+		"Collect paws from panthers in northern Xandralis and bring them back to Theodore."
+	]
+	
+	description: 
+	[
+		"Very impressive work with those snakes. I got another task for you. Do you like big cats? Maybe you can go collect some big cat paws for me? You'll panthers stalking the dense jungle to the south. Be careful, I've heard they can be quite bity."
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"Nice. Very nice."
+	]
+
+	objectives: [ .theodore_2 ]
+	prerequisites: [ .theodore_1 ]
+	level: 20	
+}

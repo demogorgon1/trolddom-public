@@ -365,7 +365,7 @@ item item_lizard_tail:
 	icon: icon_tail_1
 	string: "Scaly Tail Tip"
 	stack: 10
-	loot_groups: [ lizards ]
+	loot_groups: [ lizards snakes ]
 	tags: [ reagent ]		
 }
 
@@ -513,7 +513,7 @@ item item_large_poison_sack:
 	icon: icon_poison_sack_1
 	string: "Large Poison Sack"
 	stack: 10
-	loot_groups: [ spiders ]
+	loot_groups: [ spiders snakes ]
 	tags: [ reagent ]			
 }
 
@@ -538,6 +538,18 @@ item item_razor_beak:
 	string: "Razor Beak"
 	stack: 10
 	loot_groups: [ birds owlbears ]
+	tags: [ reagent ]			
+}
+
+item item_snake_fang:
+{
+	type: miscellaneous
+	item_level: 20
+	level_range: [ 20 30 ]
+	icon: icon_fang_1
+	string: "Snake Fang"
+	stack: 10
+	loot_groups: [ snakes ]
 	tags: [ reagent ]			
 }
 

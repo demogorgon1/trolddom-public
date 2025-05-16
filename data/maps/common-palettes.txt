@@ -100,5 +100,6 @@
 	tile fs_ground_3: [ 60 44 120 ]
 	tile fs_water: [ 60 44 220 ]
 	tile fs_shallow_water: [ 150 44 220 ]
+	tile jungle_1_entrance: [ 252 39 111 ]
 	
 }

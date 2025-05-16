@@ -1,0 +1,71 @@
+npc_behavior_state .wandering_short:
+{
+	on_route<thalvaron_default_patrol>: thalvaron_default_patrol
+	behavior: wandering
+	max_range: 1
+}
+
+npc_behavior_state .passive:
+{
+	on_route<thalvaron_default_patrol>: thalvaron_default_patrol
+	behavior: do_nothing
+}
+
+##########################################################################################
+# Xandralis 
+
+map_entity_spawn thalvaron_slitherer: { entity thalvaron_slitherer: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_panther: { entity thalvaron_panther: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+
+# Theodore quest mobs - snakes
+{
+	loot_table .slitherer: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { weight: 1 }
+				possibility: { weight: 1 loot_group: .theodore_1_quest_item requirement self<must_have_active_quest>: { id: .theodore_1 } } 
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_SNAKES{}
+		]	
+	}
+	
+	${
+		_level: 20
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: .slitherer
+	}
+
+	entity thalvaron_slitherer: !NPC { _string: "Slitherer" _sprite: snake_1 _sprite_dead: snake_1_dead }
+}
+
+# Theodore quest mobs - panthers
+{
+	loot_table .panther: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { quantity: 4 weight: 1 loot_group: .theodore_2_quest_item requirement self<must_have_active_quest>: { id: .theodore_2 } } 
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_LIONS{}
+		]	
+	}
+	
+	${
+		_level: 20
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: .panther
+	}
+
+	entity thalvaron_panther: !NPC { _string: "Panther" _sprite: panther_1 _sprite_dead: panther_1_dead }
+}

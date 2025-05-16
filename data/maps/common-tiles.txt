@@ -669,6 +669,8 @@ sprites:
 	sprite roof_5_sw: { flags: [ tile_indoor ] }
 	sprite roof_5_s: { flags: [ tile_indoor ] }
 	sprite roof_5_se: { flags: [ tile_indoor ] }		
+	
+	sprite jungle_1_entrance: { flags: [ tile_walkable tile_top ] }
 
 	cursor: { position: [ 0 336 ] }
 	
