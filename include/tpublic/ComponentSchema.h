@@ -19,7 +19,10 @@ namespace tpublic
 		enum Flag : uint8_t
 		{
 			FLAG_NO_NETWORK	= 0x01,
-			FLAG_NO_STORAGE = 0x02
+			FLAG_NO_STORAGE = 0x02,
+
+			// Context flags
+			FLAG_ENTITY_STATE = 0x04
 		};
 
 		enum Type : uint8_t

@@ -3,6 +3,7 @@
 #include <tpublic/Components/Auras.h>
 #include <tpublic/Components/CombatPrivate.h>
 #include <tpublic/Components/CombatPublic.h>
+#include <tpublic/Components/DisplayName.h>
 #include <tpublic/Components/KillContribution.h>
 #include <tpublic/Components/Lootable.h>
 #include <tpublic/Components/NPC.h>
@@ -200,6 +201,18 @@ namespace tpublic::Systems
 				aContext->m_eventQueue->EventQueueChat(aEntityInstanceId, *bark);
 			}
 
+			if(!npc->m_displayNameWhenDead.empty())
+			{
+				// FIXME: Here we really need optional components as well. To be honest, just get rid of the whole "required components" concept
+				EntityInstance* entityInstance = (EntityInstance*)aContext->m_worldView->WorldViewSingleEntityInstance(aEntityInstanceId);
+				Components::DisplayName* displayName = entityInstance != NULL ? entityInstance->GetComponent<Components::DisplayName>() : NULL;
+				if (displayName != NULL)
+				{
+					displayName->m_string = npc->m_displayNameWhenDead;
+					displayName->SetDirty();
+				}
+			}
+
 			return EntityState::ID_DEAD;
 		}
 
@@ -222,9 +235,11 @@ namespace tpublic::Systems
 			for (const SourceEntityInstance& threatRemovedEntity : threatRemovedEntities)
 				aContext->m_eventQueue->EventQueueThreat(threatRemovedEntity, aEntityInstanceId, INT32_MIN, aContext->m_tick);
 		}
-		else if(npc->m_inactiveEncounterDespawn && !aContext->m_worldView->WorldViewIsEncounterActive(npc->m_encounterId))
+		else if(npc->m_inactiveEncounterDespawn) 
 		{
-			return EntityState::ID_DESPAWNING;
+			bool validDespawnState = npc->m_inactiveEncounterDespawnState != EntityState::INVALID_ID && npc->m_inactiveEncounterDespawnState == aEntityState;
+			if(validDespawnState && !aContext->m_worldView->WorldViewIsEncounterActive(npc->m_encounterId))
+				return EntityState::ID_DESPAWNING;
 		}
 
 		if(combat->m_interrupt.has_value() && npc->m_castInProgress.has_value())

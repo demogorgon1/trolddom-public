@@ -781,6 +781,19 @@ sprites:
 	sprite dwarf_18_dead: { }	
 	sprite scorpion_3_dead: { }	
 	sprite wolf_7_dead: { }	
+	
+	cursor: { position: [ 0 672 ] }
+	sprite orc_7: { dead: orc_7_dead }
+	sprite orc_8: { dead: orc_8_dead }
+	sprite orc_9: { dead: orc_9_dead }
+	sprite orc_10: { dead: orc_10_dead }
+	
+	cursor: { position: [ 0 688 ] }
+	sprite orc_7_dead: { }	
+	sprite orc_8_dead: { }	
+	sprite orc_9_dead: { }	
+	sprite orc_10_dead: { }	
+
 }
 
 sprites:
@@ -814,10 +827,12 @@ sprites:
 	cursor: { position: [ 0 64 ] }
 
 	sprite giant_demon_2: { dead: giant_demon_2_dead }
+	sprite orc_wolf_rider_1: { dead: orc_wolf_rider_1_dead }
 
 	cursor: { position: [ 0 92 ] }
 
 	sprite giant_demon_2_dead: { }	
+	sprite orc_wolf_rider_1_dead: { }	
 }
 
 sprites:

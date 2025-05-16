@@ -2,6 +2,7 @@
 
 #include <tpublic/Base64.h>
 #include <tpublic/ComponentSchema.h>
+#include <tpublic/EntityState.h>
 #include <tpublic/Helpers.h>
 #include <tpublic/Vec2.h>
 #include <tpublic/VectorIO.h>
@@ -185,6 +186,8 @@ namespace tpublic
 				
 							if (field->m_dataType != DataType::INVALID_ID)
 								*t = aChild->GetId(field->m_dataType);
+							else if (field->m_flags & FLAG_ENTITY_STATE)
+								*t = EntityState::StringToId(aChild->GetIdentifier());
 							else
 								*t = aChild->GetUInt32();
 						}
@@ -215,6 +218,8 @@ namespace tpublic
 
 								if (field->m_dataType != DataType::INVALID_ID)
 									value = aElement->GetId(field->m_dataType);
+								else if (field->m_flags & FLAG_ENTITY_STATE)
+									value = EntityState::StringToId(aElement->GetIdentifier());
 								else
 									value = aElement->GetUInt32();
 

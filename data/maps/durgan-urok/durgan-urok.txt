@@ -9,7 +9,10 @@ map_portal .exit:
 	spawn: thalvaron_durgan_urok_exit
 }
 
-route durgan_urok_default_patrol: { }
+route durgan_urok_default_patrol: 
+{ 
+	max_direction_field_distance: 32
+}
 
 map_cliff .dummy_cliff_0: { cliff_style: dummy elevation: 0 }
 map_cliff .dummy_cliff_0_ramp: { cliff_style: dummy elevation: 0 ramp: true }
@@ -235,8 +238,9 @@ map durgan_urok:
 
 	script:
 	{
+		# Special because actual boss doesn't show up before spawn entity is dead
 		condition trigger_not_set: .boss_5_killed
-		condition entity_state: { entity_spawn: .boss_5 state: dead }		
+		condition entity_state: { entity: durgan_urok_boss_5 state: dead }
 		run: { set_trigger: .boss_5_killed }
 	}	
 

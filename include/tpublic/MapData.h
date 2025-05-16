@@ -504,6 +504,10 @@ namespace tpublic
 						{
 							m_mapEntitySpawnId = aChild->GetId(DataType::ID_MAP_ENTITY_SPAWN);
 						}
+						else if (aChild->m_name == "entity")
+						{
+							m_entityId = aChild->GetId(DataType::ID_ENTITY);
+						}
 						else if(aChild->m_name == "state")
 						{
 							m_entityState = EntityState::StringToId(aChild->GetIdentifier());
@@ -525,6 +529,7 @@ namespace tpublic
 				aStream->WriteUInt(m_mapTriggerId);
 				aStream->WriteUInt(m_mapEntitySpawnId);
 				aStream->WritePOD(m_entityState);
+				aStream->WriteUInt(m_entityId);
 			}
 			
 			bool	
@@ -539,6 +544,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadPOD(m_entityState))
 					return false;
+				if (!aStream->ReadUInt(m_entityId))
+					return false;
 				return true;
 			}
 
@@ -551,6 +558,7 @@ namespace tpublic
 			// TYPE_ENTITY_STATE
 			uint32_t								m_mapEntitySpawnId = 0;
 			EntityState::Id							m_entityState = EntityState::INVALID_ID;
+			uint32_t								m_entityId = 0;
 		};
 
 		struct ScriptCommand

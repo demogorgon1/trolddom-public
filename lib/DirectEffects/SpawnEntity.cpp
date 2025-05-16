@@ -279,6 +279,13 @@ namespace tpublic::DirectEffects
 				npc);
 		}
 
+		if(m_spawnFlags & SPAWN_FLAG_DESPAWN_SOURCE)
+		{
+			Result result;
+			result.m_despawnSource = true;
+			return result;
+		}
+		
 		return Result();
 	}
 
