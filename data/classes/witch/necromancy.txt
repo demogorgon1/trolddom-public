@@ -674,7 +674,7 @@ ability soul_leak:
 	
 	direct_effect apply_aura:
 	{
-		must_not_have_ability_modifiers: [ improved_soul_leak_1 improved_soul_leak_2 improved_soul_leak_3 ]
+		must_not_have_ability_modifiers: [ improved_soul_leak_1 improved_soul_leak_2 improved_soul_leak_3 improved_soul_leak_4 improved_soul_leak_5 ]
 		aura: soul_leak
 	}
 	

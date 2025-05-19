@@ -11,11 +11,14 @@ changelog:
 		{ text: "Increased item level of loot from Zyxtharion and Eldros the Evergrowing." }
 	]
 
-	#text: "Issues fixed:"
-	#
-	#list:
-	#[
-	#]
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Quest rewards from Sheila Urkins now have armor." }
+		{ text: "Fixed bug that caused dead escort NPCs to take too long to respawn." }
+		{ text: "Improved Soul Leak rank 4 and 5 should now work like intended." }
+	]
 
 	#######################################################################################
 	heading: "v0.2.4"

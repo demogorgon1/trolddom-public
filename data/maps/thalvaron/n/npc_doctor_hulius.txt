@@ -28,7 +28,6 @@ entity thalvaron_doctor_hulius: !NPC
 	_level: 14
 	_faction: combat_npcs		
 	_creature_type: humanoid
-	_loot_table: .npc
 	_not_pushable: true	
 	_default_trigger_ability: .doctor_hulius_start_escort
 	_default_behavior_state: .doctor_hulius
