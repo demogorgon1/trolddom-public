@@ -17,7 +17,7 @@ changelog:
 	[
 		{ text: "Quest rewards from Sheila Urkins now have armor." }
 		{ text: "Fixed bug that caused dead escort NPCs to take too long to respawn." }
-		{ text: "Improved Soul Leak rank 4 and 5 should now work like intended." }
+		{ text: "Ranks 4 and 5 of Improved Soul Leak and Improved Curse of Corruption should now work like intended." }
 	]
 
 	#######################################################################################

@@ -279,7 +279,15 @@ ability curse_of_corruption_tick:
 
 	direct_effect damage:
 	{	
-		ability_modifier_multipliers: { improved_curse_of_corruption_1: 1.25 improved_curse_of_corruption_2: 1.35 improved_curse_of_corruption_3: 1.45 }
+		ability_modifier_multipliers: 
+		{ 
+			improved_curse_of_corruption_1: 1.16
+			improved_curse_of_corruption_2: 1.32 
+			improved_curse_of_corruption_3: 1.48 
+			improved_curse_of_corruption_4: 1.64
+			improved_curse_of_corruption_5: 1.80 
+		}
+		
 		damage_type: unholy
 		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.25 b: [ [ 1 4 ] [ 10 8 ] [ 20 16 ] ] }					
 		flags: [ is_magical ]
