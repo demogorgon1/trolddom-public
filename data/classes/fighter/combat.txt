@@ -322,12 +322,11 @@ talent fighter_combat_ferocity:
 	talent_tree_points_required: 5
 	points:
 	[
-		{ aura: fighter_combat_ferocity_1 }
-		{ aura: fighter_combat_ferocity_2 }
+		{ aura: fighter_combat_ferocity }
 	]
 }
 
-ability fighter_combat_ferocity_trigger_1:
+ability fighter_combat_ferocity_trigger:
 {
 	string: "Ferocity"
 	states: [ default in_combat ]
@@ -335,67 +334,30 @@ ability fighter_combat_ferocity_trigger_1:
 	
 	direct_effect apply_aura:
 	{
-		aura: fighter_combat_ferocity_buff_1
+		aura: fighter_combat_ferocity_buff
 		apply_to_party_members_in_range: 8
 	}
 }
 
-aura fighter_combat_ferocity_1:
+aura fighter_combat_ferocity:
 {
 	flags: [ persist_in_death ]	
 	type: hidden
-	description: "Your critical strikes increase your critical strike chance by 5% for 10 seconds. Also affects nearby party members."
+	description: "Your critical strikes increase your critical strike chance by 10% for 10 seconds. Also affects nearby party members. Stacks up to 5 times."
 	aura_effect combat_event_trigger: 
 	{ 
 		combat_event_ability_mask: [ offensive melee ]
 		combat_event<source>: critical
-		ability<self>: fighter_combat_ferocity_trigger_1
+		ability<self>: fighter_combat_ferocity_trigger
 	}
 }
 
-aura fighter_combat_ferocity_buff_1:
+aura fighter_combat_ferocity_buff:
 {
 	string: "Ferocity"
 	type: buff
 	icon: icon_crit
-	duration: 100
-	stat_modifiers:
-	{
-		phys_crit_chance: { add: 5 }
-	}
-}
-
-ability fighter_combat_ferocity_trigger_2:
-{
-	string: "Ferocity"
-	states: [ default in_combat ]
-	icon: icon_crit
-	
-	direct_effect apply_aura:
-	{
-		aura: fighter_combat_ferocity_buff_2
-		apply_to_party_members_in_range: 8
-	}
-}
-
-aura fighter_combat_ferocity_2:
-{
-	flags: [ persist_in_death ]	
-	type: hidden
-	description: "Your critical strikes increase your critical strike chance by 10% for 10 seconds. Also affects nearby party members."
-	aura_effect combat_event_trigger: 
-	{ 
-		combat_event_ability_mask: [ offensive melee ]
-		combat_event<source>: critical
-		ability<self>: fighter_combat_ferocity_trigger_2
-	}
-}
-
-aura fighter_combat_ferocity_buff_2:
-{
-	string: "Ferocity"
-	type: buff
-	icon: icon_crit
+	max_stack: 5
 	duration: 100
 	stat_modifiers:
 	{

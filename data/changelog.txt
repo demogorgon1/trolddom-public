@@ -9,6 +9,7 @@ changelog:
 	list:
 	[
 		{ text: "Increased item level of loot from Zyxtharion and Eldros the Evergrowing." }
+		{ text: "Ferocity can now stack to a maximum of 5." }
 	]
 
 	text: "Issues fixed:"

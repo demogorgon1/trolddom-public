@@ -847,7 +847,7 @@ namespace tpublic
 					if(!combinedAura.m_statModifiers)
 						combinedAura.m_statModifiers = std::make_unique<StatModifiers>();
 
-					combinedAura.m_statModifiers->Combine(*auraData->m_statModifiers);
+					combinedAura.m_statModifiers->Combine(*auraData->m_statModifiers, 1.0f);
 
 					for (uint32_t k = 1; k < (uint32_t)tpublic::Stat::NUM_IDS; k++)
 					{

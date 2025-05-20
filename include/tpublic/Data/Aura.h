@@ -216,6 +216,8 @@ namespace tpublic
 							m_string = aChild->GetString();
 						else if (aChild->m_name == "description")
 							m_description = aChild->GetString();
+						else if (aChild->m_name == "max_stack")
+							m_maxStack = aChild->GetUInt32();
 						else if (aChild->m_name == "stat_modifiers")
 							m_statModifiers = std::make_unique<StatModifiers>(aChild);
 						else if(aChild->m_name == "charges")
@@ -262,6 +264,7 @@ namespace tpublic
 				aStream->WriteOptionalPOD(m_colorWeaponGlow);
 				aStream->WriteUInt(m_mountId);
 				aStream->WriteUInt(m_mustNotHaveWorldAuraId);
+				aStream->WriteUInt(m_maxStack);
 			}
 			 
 			bool
@@ -341,8 +344,17 @@ namespace tpublic
 						return false;
 				}
 
+				if (!aStream->IsEnd())
+				{
+					if (!aStream->ReadUInt(m_maxStack))
+						return false;
+				}
+
 				return true;
 			}
+
+			// Helpers
+			bool IsStacking() const { return m_maxStack > 1; }
 
 			// Public data
 			std::string										m_string;
@@ -363,6 +375,7 @@ namespace tpublic
 			std::optional<Image::RGBA>						m_colorEffect;
 			std::optional<Image::RGBA>						m_colorWeaponGlow;
 			uint32_t										m_mustNotHaveWorldAuraId = 0;
+			uint32_t										m_maxStack = 1;
 		};
 
 	}

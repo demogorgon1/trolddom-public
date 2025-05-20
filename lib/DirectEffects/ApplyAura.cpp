@@ -184,7 +184,7 @@ namespace tpublic
 						continue;
 				}
 
-				if (m_threat != 0 && targetEntity->GetEntityId() != 0)
+				if (m_threat != 0 && !targetEntity->IsPlayer())
 					aEventQueue->EventQueueThreat(sourceEntityInstance, targetEntity->GetEntityInstanceId(), m_threat, aTick);
 
 				std::vector<std::unique_ptr<AuraEffectBase>> effects;

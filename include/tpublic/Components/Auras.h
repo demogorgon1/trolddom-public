@@ -140,6 +140,8 @@ namespace tpublic
 								SourceEntityInstance*						aOutSourceEntityInstance) const;
 			bool			HasAura(
 								uint32_t									aAuraId) const;
+			Entry*			GetAura(
+								uint32_t									aAuraId);
 			MoveSpeed::Id	GetMoveSpeed() const;
 			float			GetAttackHaste(
 								const Manifest*								aManifest) const;

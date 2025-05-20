@@ -262,6 +262,7 @@ namespace tpublic::Systems
 					t.m_entityInstanceId = entry->m_sourceEntityInstance.m_entityInstanceId;
 					t.m_start = entry->m_start;
 					t.m_end = entry->m_end;
+					t.m_charges = entry->m_charges;
 					visibleAuras->m_entries.push_back(t);
 				}
 
