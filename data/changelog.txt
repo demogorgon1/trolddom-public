@@ -10,6 +10,7 @@ changelog:
 	[
 		{ text: "Increased item level of loot from Zyxtharion and Eldros the Evergrowing." }
 		{ text: "Ferocity can now stack to a maximum of 5." }
+		{ text: "Bash threat bonus increased from 50% to 100%." }
 	]
 
 	text: "Issues fixed:"
