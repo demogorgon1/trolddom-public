@@ -236,7 +236,7 @@ aura poison_bomb:
 	type: debuff
 	icon: icon_poison_bomb
 	duration: based_on_effects
-	flags: [ unique poison ]
+	flags: [ unique_per_source poison ]
 	
 	aura_effect repeat: 
 	{ 
@@ -547,7 +547,7 @@ aura envenom:
 	type: debuff
 	icon: icon_envenom
 	duration: based_on_effects
-	flags: [ unique poison ]
+	flags: [ unique_per_source poison ]
 	
 	aura_effect repeat: 
 	{ 
@@ -731,7 +731,7 @@ aura rend:
 	type: debuff
 	icon: icon_rend
 	duration: based_on_effects
-	flags: [ unique ]
+	flags: [ unique_per_source ]
 	
 	aura_effect repeat: 
 	{ 

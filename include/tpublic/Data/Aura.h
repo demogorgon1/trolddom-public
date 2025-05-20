@@ -99,7 +99,8 @@ namespace tpublic
 				FLAG_CANCEL_INDOOR			= 0x00010000,
 				FLAG_NO_REFRESH				= 0x00020000,
 				FLAG_POISON					= 0x00040000,
-				FLAG_ALWAYS_SELF_APPLIED	= 0x00080000
+				FLAG_ALWAYS_SELF_APPLIED	= 0x00080000,
+				FLAG_UNIQUE_PER_SOURCE		= 0x00100000
 			};
 
 			static Type
@@ -166,6 +167,8 @@ namespace tpublic
 						flags |= FLAG_POISON;
 					else if (strcmp(string, "always_self_applied") == 0)
 						flags |= FLAG_ALWAYS_SELF_APPLIED;
+					else if (strcmp(string, "unique_per_source") == 0)
+						flags |= FLAG_UNIQUE_PER_SOURCE;
 					else
 						TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid aura flag.", string);
 				});
@@ -355,6 +358,8 @@ namespace tpublic
 
 			// Helpers
 			bool IsStacking() const { return m_maxStack > 1; }
+			bool IsUniquePerSource() const { return m_flags & FLAG_UNIQUE_PER_SOURCE; }
+			bool IsUnique() const { return m_flags & FLAG_UNIQUE; }
 
 			// Public data
 			std::string										m_string;

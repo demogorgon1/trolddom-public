@@ -336,13 +336,16 @@ namespace tpublic::Components
 	bool		
 	Auras::RemoveAura(
 		uint32_t									aAuraId,
-		uint32_t									aMaxRemove)
+		uint32_t									aMaxRemove,
+		uint32_t									aSourceEntityInstanceId)
 	{
 		uint32_t removed = 0;
 
 		for(size_t i = 0; i < m_entries.size() && removed < aMaxRemove; i++)
 		{
-			if(m_entries[i]->m_auraId == aAuraId)
+			const std::unique_ptr<Entry>& entry = m_entries[i];
+
+			if(entry->m_auraId == aAuraId && (aSourceEntityInstanceId == 0 || entry->m_sourceEntityInstance.m_entityInstanceId == aSourceEntityInstanceId))
 			{
 				Helpers::RemoveCyclicFromVector(m_entries, i);
 				i--;
@@ -358,7 +361,8 @@ namespace tpublic::Components
 	Auras::RemoveAuraByGroup(
 		const Manifest*								aManifest,
 		uint32_t									aAuraGroupId,
-		uint32_t									aMaxRemove)
+		uint32_t									aMaxRemove,
+		uint32_t									aSourceEntityInstanceId)
 	{
 		uint32_t removed = 0;
 
@@ -367,7 +371,7 @@ namespace tpublic::Components
 			const std::unique_ptr<Entry>& entry = m_entries[i];
 			const Data::Aura* auraData = aManifest->GetById<tpublic::Data::Aura>(entry->m_auraId);
 
-			if (auraData->m_auraGroupId == aAuraGroupId)
+			if (auraData->m_auraGroupId == aAuraGroupId && (aSourceEntityInstanceId == 0 || entry->m_sourceEntityInstance.m_entityInstanceId == aSourceEntityInstanceId))
 			{
 				Helpers::RemoveCyclicFromVector(m_entries, i);
 				i--;
@@ -383,7 +387,8 @@ namespace tpublic::Components
 	Auras::RemoveAurasByFlags(
 		const Manifest*								aManifest,
 		uint32_t									aFlags,
-		uint32_t									aMaxRemove)
+		uint32_t									aMaxRemove,
+		uint32_t									aSourceEntityInstanceId)
 	{
 		uint32_t removed = 0;
 
@@ -392,7 +397,7 @@ namespace tpublic::Components
 			const std::unique_ptr<Entry>& entry = m_entries[i];
 			const Data::Aura* auraData = aManifest->GetById<tpublic::Data::Aura>(entry->m_auraId);
 
-			if((auraData->m_flags & aFlags) == aFlags)
+			if((auraData->m_flags & aFlags) == aFlags && (aSourceEntityInstanceId == 0 || entry->m_sourceEntityInstance.m_entityInstanceId == aSourceEntityInstanceId))
 			{
 				Helpers::RemoveCyclicFromVector(m_entries, i);
 				i--;

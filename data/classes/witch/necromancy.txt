@@ -537,7 +537,7 @@ aura soul_leak_1:
 	icon: icon_soul_drain
 	type: debuff
 	duration: 200	
-	flags: [ unique magic ]
+	flags: [ unique_per_source magic ]
 	sound: spell_14
 
 	aura_effect damage_input_effect:
@@ -563,7 +563,7 @@ aura soul_leak_2:
 	icon: icon_soul_drain
 	type: debuff
 	duration: 200	
-	flags: [ unique magic ]
+	flags: [ unique_per_source magic ]
 	sound: spell_14
 
 	aura_effect damage_input_effect:
@@ -589,7 +589,7 @@ aura soul_leak_3:
 	icon: icon_soul_drain
 	type: debuff
 	duration: 200	
-	flags: [ unique magic ]
+	flags: [ unique_per_source magic ]
 	sound: spell_14
 
 	aura_effect damage_input_effect:
@@ -615,7 +615,7 @@ aura soul_leak_4:
 	icon: icon_soul_drain
 	type: debuff
 	duration: 200	
-	flags: [ unique magic ]
+	flags: [ unique_per_source magic ]
 	sound: spell_14
 
 	aura_effect damage_input_effect:
@@ -641,7 +641,7 @@ aura soul_leak_5:
 	icon: icon_soul_drain
 	type: debuff
 	duration: 200	
-	flags: [ unique magic ]
+	flags: [ unique_per_source magic ]
 	sound: spell_14
 
 	aura_effect damage_input_effect:

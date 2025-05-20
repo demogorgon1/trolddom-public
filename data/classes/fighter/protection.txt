@@ -233,7 +233,7 @@ aura banner_of_command:
 {
 	string: "Banner of Command"
 	type: buff
-	flags: [ unique silent ]
+	flags: [ unique_per_source silent ]
 	icon: icon_banner
 	duration: 20
 	stat_modifiers: { strength: { add_percent: 5 } }

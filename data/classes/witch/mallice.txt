@@ -62,7 +62,7 @@ aura maliciousness:
 	type: buff
 	icon: icon_special_9
 	duration: 200
-	flags: [ unique ]
+	flags: [ unique magic ]
 	aura_effect cast_modifier: 
 	{ 
 		ability_flags: [ spell ]
@@ -301,7 +301,7 @@ aura curse_of_corruption:
 	icon: icon_curse_of_corruption		
 	type: debuff
 	duration: based_on_effects	
-	flags: [ unique magic ]
+	flags: [ unique_per_source magic ]
 	sound: spell_14
 	aura_effect repeat: 
 	{ 

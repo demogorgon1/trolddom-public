@@ -128,9 +128,9 @@ aura intervention_of_wrath_debuff:
 {
 	string: "Intervention of Wrath"
 	description: "Taking holy damage."
-	flags: [ unique magic ]
+	flags: [ unique_per_source magic ]
 	duration: based_on_effects
-	type: buff
+	type: debuff
 	icon: icon_special_1	
 	
 	aura_effect repeat: 

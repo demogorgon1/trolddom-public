@@ -514,7 +514,7 @@ aura blessing:
 	icon: icon_holy_blessing		
 	type: buff	
 	duration: based_on_effects	
-	flags: [ unique magic ]
+	flags: [ unique_per_source magic ]
 	aura_effect repeat: 
 	{ 
 		update_interval: 10
