@@ -186,6 +186,7 @@ item .fennian_starleaf_3_quest_item:
 	loot_groups: [ .fennian_starleaf_3_quest_item ]
 	flags: [ unique not_sellable ]
 	string: "Duskwhisper Seashell"
+	flavor: "This item seems too important to throw away."
 	rarity: uncommon
 }
 
