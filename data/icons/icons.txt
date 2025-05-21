@@ -781,6 +781,8 @@ sprites:
 	sprite icon_durgan_urok	: { tags: [ icon ] }
 	sprite icon_snake_head_1 : { tags: [ icon ] }
 	sprite icon_fang_1 : { tags: [ icon ] }
+	sprite icon_hand_1 : { tags: [ icon ] }
+	sprite icon_gorilla : { tags: [ icon ] }
 
 }
 

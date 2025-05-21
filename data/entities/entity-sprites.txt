@@ -793,6 +793,8 @@ sprites:
 	sprite snake_2: { dead: snake_2_dead }
 	sprite carnivorous_plant_3: { dead: carnivorous_plant_3_dead }
 	sprite panther_1: { dead: panther_1_dead }
+	sprite gorilla_1: { dead: gorilla_1_dead }
+	sprite dwarf_19: { dead: dwarf_19_dead }
 	
 	cursor: { position: [ 0 688 ] }
 	sprite orc_7_dead: { }	
@@ -805,6 +807,8 @@ sprites:
 	sprite snake_2_dead: { }	
 	sprite carnivorous_plant_3_dead: { }	
 	sprite panther_1_dead: { }	
+	sprite gorilla_1_dead: { }	
+	sprite dwarf_19_dead: { }	
 
 }
 

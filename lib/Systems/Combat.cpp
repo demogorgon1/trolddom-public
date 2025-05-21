@@ -220,6 +220,7 @@ namespace tpublic::Systems
 			visibleAuras->m_colorEffect.reset();
 			visibleAuras->m_colorWeaponGlow.reset();
 			visibleAuras->m_mountId = 0;
+			visibleAuras->m_overrideSpriteId = 0;
 			
 			uint32_t colorEffectR = 0;
 			uint32_t colorEffectG = 0;
@@ -268,6 +269,9 @@ namespace tpublic::Systems
 
 				if(aura->m_mountId != 0)
 					visibleAuras->m_mountId = aura->m_mountId;
+
+				if(aura->m_overrideSpriteId != 0)
+					visibleAuras->m_overrideSpriteId = aura->m_overrideSpriteId;
 
 				if(entry->HasEffect(AuraEffect::ID_STUN))
 					visibleAuras->m_auraFlags |= Components::VisibleAuras::AURA_FLAG_STUNNED;

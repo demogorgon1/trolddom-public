@@ -16,6 +16,7 @@ npc_behavior_state .passive:
 
 map_entity_spawn thalvaron_slitherer: { entity thalvaron_slitherer: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_panther: { entity thalvaron_panther: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_gorilla: { entity thalvaron_gorilla: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
 
 # Theodore quest mobs - snakes
 {
@@ -68,4 +69,31 @@ map_entity_spawn thalvaron_panther: { entity thalvaron_panther: {} spawn_timer: 
 	}
 
 	entity thalvaron_panther: !NPC { _string: "Panther" _sprite: panther_1 _sprite_dead: panther_1_dead }
+}
+
+# Theodore quest mobs - gorilla
+{
+	loot_table .gorilla: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { quantity: 2 weight: 1 loot_group: .theodore_3_quest_item requirement self<must_have_active_quest>: { id: .theodore_3 } } 
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_LIONS{}
+		]	
+	}
+	
+	${
+		_level: 20
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: .gorilla
+		_aggro_requirements: { requirement target<must_not_have_aura>: .andor_redfoot_1_quest_item }
+	}
+
+	entity thalvaron_gorilla: !NPC { _string: "Highland Gorilla" _sprite: gorilla_1 _sprite_dead: gorilla_1_dead }
 }

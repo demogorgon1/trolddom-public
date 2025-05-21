@@ -100,7 +100,8 @@ namespace tpublic
 				FLAG_NO_REFRESH				= 0x00020000,
 				FLAG_POISON					= 0x00040000,
 				FLAG_ALWAYS_SELF_APPLIED	= 0x00080000,
-				FLAG_UNIQUE_PER_SOURCE		= 0x00100000
+				FLAG_UNIQUE_PER_SOURCE		= 0x00100000,
+				FLAG_NO_MOUNT				= 0x0020000
 			};
 
 			static Type
@@ -169,6 +170,8 @@ namespace tpublic
 						flags |= FLAG_ALWAYS_SELF_APPLIED;
 					else if (strcmp(string, "unique_per_source") == 0)
 						flags |= FLAG_UNIQUE_PER_SOURCE;
+					else if (strcmp(string, "no_mount") == 0)
+						flags |= FLAG_NO_MOUNT;
 					else
 						TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid aura flag.", string);
 				});
@@ -203,6 +206,8 @@ namespace tpublic
 					{
 						if (aChild->m_name == "icon")
 							m_iconSpriteId = aChild->GetId(DataType::ID_SPRITE);
+						else if (aChild->m_name == "override_sprite")
+							m_overrideSpriteId = aChild->GetId(DataType::ID_SPRITE);
 						else if (aChild->m_name == "encounter")
 							m_encounterId = aChild->GetId(DataType::ID_ENCOUNTER);
 						else if (aChild->m_name == "particle_system")
@@ -268,6 +273,7 @@ namespace tpublic
 				aStream->WriteUInt(m_mountId);
 				aStream->WriteUInt(m_mustNotHaveWorldAuraId);
 				aStream->WriteUInt(m_maxStack);
+				aStream->WriteUInt(m_overrideSpriteId);
 			}
 			 
 			bool
@@ -353,6 +359,12 @@ namespace tpublic
 						return false;
 				}
 
+				if (!aStream->IsEnd())
+				{
+					if (!aStream->ReadUInt(m_overrideSpriteId))
+						return false;
+				}
+
 				return true;
 			}
 
@@ -381,6 +393,7 @@ namespace tpublic
 			std::optional<Image::RGBA>						m_colorWeaponGlow;
 			uint32_t										m_mustNotHaveWorldAuraId = 0;
 			uint32_t										m_maxStack = 1;
+			uint32_t										m_overrideSpriteId = 0;
 		};
 
 	}

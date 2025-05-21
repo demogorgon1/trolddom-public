@@ -9,6 +9,7 @@ dialogue_screen .theodore_greetings:
 	[
 		{ quest: .theodore_1 }
 		{ quest: .theodore_2 }
+		{ quest: .theodore_3 }
 	]
 }
 
@@ -136,3 +137,59 @@ quest .theodore_2:
 	prerequisites: [ .theodore_1 ]
 	level: 20	
 }
+
+##########################################################################################
+# Quest 3
+
+loot_group .theodore_3_quest_item: { }
+
+item .theodore_3_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .theodore_3_quest_item ]		
+	string: "Gorilla Hand" 
+	flavor: "Doesn't seem to grant wishes."
+	icon: icon_hand_1
+	stack: 20
+	item_level: 20
+	quest: .theodore_3
+	flags: [ not_sellable ]
+}
+
+objective .theodore_3:
+{
+	string: "Gorilla Hands"
+	collect_items: { item: .theodore_3_quest_item count: 8 }
+}
+
+quest .theodore_3:
+{
+	string: "Highland Gorillas"
+
+	text:
+	[
+		"Collect hands from gorillas in south eastern Xandralis and bring them back to Theodore."
+	]
+	
+	description: 
+	[
+		"I've heard stories of monkey paws granting wishes with no risk of ironic downsides. Someone told me that there is a colony of giant monkeys, or \"gorillas\" living in a secluded area down to"
+		"the south east. Follow the road south until you reach an old ruined house. You'll find the monkeys to the east of there, across the river in the highlands.\n"
+		"How about you bring me back a bunch of those paws and we'll see how many wishes we can squeeze out of them?"
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"Nice. Very nice."
+	]
+
+	objectives: [ .theodore_3 ]
+	prerequisites: [ .theodore_2 ]
+	level: 20	
+}
+

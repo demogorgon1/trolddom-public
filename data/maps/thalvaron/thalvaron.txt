@@ -332,6 +332,7 @@ map_entity_spawn thalvaron_bromrik_coppervein: { entity thalvaron_bromrik_copper
 
 # SE
 map_entity_spawn thalvaron_theodore: { entity thalvaron_theodore: { init_state: default } }
+map_entity_spawn thalvaron_andor_redfoot: { entity thalvaron_andor_redfoot: { init_state: default } }
 
 map_palette .stuff:
 {
@@ -753,7 +754,8 @@ map_palette .stuff:
 	entity_spawn thalvaron_slitherer: [ 30 93 123 ]
 	entity_spawn thalvaron_theodore: [ 130 93 123 ]
 	entity_spawn thalvaron_panther: [ 230 93 123 ]
-	
+	entity_spawn thalvaron_gorilla: [ 230 93 153 ]
+	entity_spawn thalvaron_andor_redfoot: [ 49 120 49 ]
 }
 
 map_palette .levels:

@@ -2,6 +2,21 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.2.6"
+	
+	text: "Changes:"
+	
+	list:
+	[
+	]
+	
+	text: "Issues fixed:"
+	
+	list:
+	[
+	]
+
+	#######################################################################################
 	heading: "v0.2.5"
 	
 	text: "Changes:"
@@ -10,6 +25,7 @@ changelog:
 	[
 		{ text: "Increased item level of loot from Zyxtharion and Eldros the Evergrowing." }
 		{ text: "Ferocity can now stack to a maximum of 5." }
+		{ text: "Ferocity is now a single point talent. All fighters have had their talent points reset." }
 		{ text: "Bash threat bonus increased from 50% to 100%." }
 		{ text: "The following buffs and debuffs are now unique per caster: Banner of Command, Poison Bomb, Envenom, Rend, Intervention of Wrath, Cleanse, Creeping Guilt, Condemnation, Blessing, Curse of Corruption, and Soul Leak." }
 		{ text: "Threat meter can be enabled by right-clicking in combat log." }
