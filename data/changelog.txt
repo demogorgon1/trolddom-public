@@ -24,6 +24,7 @@ changelog:
 		{ text: "Quest rewards from Sheila Urkins now have armor (thanks sithpl)." }
 		{ text: "Fixed bug that caused dead escort NPCs to take too long to respawn." }
 		{ text: "Ranks 4 and 5 of Improved Soul Leak and Improved Curse of Corruption should now work like intended." }
+		{ text: "Having the same enchant on both weapons while dual wielding now works like intended." }
 	]
 
 	#######################################################################################
