@@ -54,6 +54,8 @@ loot_group birds: {}
 loot_group birds_uncommon: {}
 loot_group snakes: {}
 loot_group snakes_uncommon: {}
+loot_group crocodiles: {}
+loot_group crocodiles_uncommon: {}
 
 !define WORLD_DROPS
 {
@@ -234,6 +236,13 @@ loot_group snakes_uncommon: {}
 	possibility: { weight: 1 loot_group: snakes_uncommon creature_types: [ beast ] }
 }
 
+!define WORLD_DROPS_CROCODILES
+{
+	possibility: { weight: 20 }
+	possibility: { weight: 15 loot_group: crocodiles creature_types: [ beast ] }
+	possibility: { weight: 1 loot_group: crocodiles_uncommon creature_types: [ beast ] }
+}
+
 loot_table default_humanoid: 
 {
 	slots:
@@ -412,5 +421,14 @@ loot_table default_snake:
 	[
 		!WORLD_DROPS {}
 		!WORLD_DROPS_SNAKES{}
+	]
+}
+
+loot_table default_crocodiles:
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CROCODILES{}
 	]
 }

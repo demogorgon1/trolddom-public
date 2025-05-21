@@ -142,11 +142,11 @@ item item_beast_jaw:
 {
 	type: miscellaneous
 	item_level: 15
-	level_range: [ 15 22 ]
+	level_range: [ 12 22 ]
 	icon: icon_jaw_1
 	string: "Menacing Jaw"
 	stack: 20
-	loot_groups: [ wolves bears lions ]
+	loot_groups: [ wolves bears lions crocodiles ]
 	tags: [ reagent ]
 }
 
@@ -194,7 +194,7 @@ item item_giant_claws:
 	icon: icon_claw_4
 	string: "Giant Claws"
 	stack: 20
-	loot_groups: [ bears ]
+	loot_groups: [ bears lions owlbears ]
 	tags: [ reagent ]	
 }
 

@@ -146,6 +146,7 @@ map_entity_spawn thalvaron_swamp_giant:
 			}
 			
 			!WORLD_DROPS {}
+			!WORLD_DROPS_CROCODILES {}
 		]	
 	}
 	
@@ -163,6 +164,7 @@ map_entity_spawn thalvaron_swamp_giant:
 			}
 
 			!WORLD_DROPS {}
+			!WORLD_DROPS_CROCODILES {}
 		]	
 	}	
 	
