@@ -17,6 +17,8 @@ npc_behavior_state .passive:
 map_entity_spawn thalvaron_slitherer: { entity thalvaron_slitherer: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_panther: { entity thalvaron_panther: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_gorilla: { entity thalvaron_gorilla: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_jungle_spider: { entity thalvaron_jungle_spider: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_jungle_spider_boss: { entity thalvaron_jungle_spider_boss: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
 
 # Theodore quest mobs - snakes
 {
@@ -96,4 +98,18 @@ map_entity_spawn thalvaron_gorilla: { entity thalvaron_gorilla: {} spawn_timer: 
 	}
 
 	entity thalvaron_gorilla: !NPC { _string: "Highland Gorilla" _sprite: gorilla_1 _sprite_dead: gorilla_1_dead }
+}
+
+# Spiders
+{
+	${
+		_level: 20
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: default_spider
+	}
+
+	entity thalvaron_jungle_spider: !NPC { _string: "Xandralis Tarantula" _sprite: spider_2 _sprite_dead: spider_2_dead }
+	entity thalvaron_jungle_spider_boss: !NPC { _string: "Larger Than Average Spider" _sprite: spider_1 _sprite_dead: spider_1_dead }
 }

@@ -56,6 +56,8 @@ item .andor_redfoot_1_quest_item:
 	use_ability: $ability [ string icon ]
 	{
 		description: "Apply to self."
+		cooldown: $cooldown { duration: 30 }
+		cooldowns: [ global ]	
 		flags: [ target_self item ]
 		direct_effect apply_aura: { aura: .andor_redfoot_1_quest_item }
 		states: [ default in_combat ]
@@ -118,7 +120,7 @@ quest .andor_redfoot_1:
 
 	text:
 	[
-		"Collect heads from snakes in northern Xandralis and bring them back to Theodore."
+		"Feed the inhabitants of the sanctuary."
 	]
 	
 	description: 

@@ -795,6 +795,8 @@ sprites:
 	sprite panther_1: { dead: panther_1_dead }
 	sprite gorilla_1: { dead: gorilla_1_dead }
 	sprite dwarf_19: { dead: dwarf_19_dead }
+	sprite woman_34: { dead: woman_34_dead }
+	sprite man_70: { dead: man_70_dead }
 	
 	cursor: { position: [ 0 688 ] }
 	sprite orc_7_dead: { }	
@@ -809,6 +811,8 @@ sprites:
 	sprite panther_1_dead: { }	
 	sprite gorilla_1_dead: { }	
 	sprite dwarf_19_dead: { }	
+	sprite woman_34_dead: { }	
+	sprite man_70_dead: { }	
 
 }
 
@@ -982,6 +986,7 @@ sprites:
 	sprite gs_flag_light: { }
 	sprite gs_flag_none: { }
 	sprite thorns_1: { }
+	sprite banana_1: { }
 
 	cursor: { position: [ 0 96 ] }
 	sprite purple_gateway_closed_1: { }
