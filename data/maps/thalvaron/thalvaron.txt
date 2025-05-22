@@ -75,6 +75,7 @@ zone .skaldrun_coast_east: { string: "Eastern Skaldrun Shore" }
 zone .skaldrun: { string: "Skaldrun" }
 zone .durgan_urok: { string: "Durgan Urok" }
 zone .hidden_pool: { string: "Great Ape Sanctuary" }
+zone .skaldrun_pass: { string: "Howling Pass" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -844,6 +845,7 @@ map_palette .zones:
 	zone .skaldrun: [ 38 61 140 ]
 	zone .durgan_urok: [ 215 222 0 ]
 	zone .hidden_pool: [ 135 84 189 ]
+	zone .skaldrun_pass: [ 150 25 229 ]
 }
 
 map_palette .sub_zones:
