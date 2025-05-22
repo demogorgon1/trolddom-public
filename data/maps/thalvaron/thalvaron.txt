@@ -764,6 +764,9 @@ map_palette .stuff:
 	entity_spawn thalvaron_brill_craigsworth_1_quest_item: [ 200 40 182 ]
 	entity_spawn thalvaron_jungle_spider: [ 200 120 182 ]
 	entity_spawn thalvaron_jungle_spider_boss: [ 200 220 182 ]
+	entity_spawn thalvaron_carnivorous_plant: [ 200 220 112 ]
+	entity_spawn thalvaron_carnivorous_plant_caster: [ 100 220 112 ]
+	
 }
 
 map_palette .levels:

@@ -8,6 +8,7 @@ dialogue_screen .brill_craigsworth:
 	options:
 	[
 		{ quest<offer_only>: .brill_craigsworth_1 }
+		{ quest: .brill_craigsworth_2 }
 	]
 }
 
@@ -97,6 +98,58 @@ quest .brill_craigsworth_1:
 	]
 
 	objectives: [ .brill_craigsworth_1 ]
+	level: 20	
+}
+
+##########################################################################################
+# Quest 2
+
+loot_group .brill_craigsworth_2_quest_item: { }
+
+item .brill_craigsworth_2_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .brill_craigsworth_2_quest_item ]		
+	string: "Pristine Succulent Leaves" 
+	icon: icon_herbs_3
+	stack: 20
+	item_level: 20
+	quest: .brill_craigsworth_2
+	flags: [ not_sellable ]
+}
+
+objective .brill_craigsworth_2:
+{
+	string: "Pristine Succulent Leaves"
+	collect_items: { item: .brill_craigsworth_2_quest_item count: 5 }
+}
+
+quest .brill_craigsworth_2:
+{
+	string: "Plant Juice"
+
+	text:
+	[
+		"Hunt plants in western Xandralis and return to Brill Craigsworth."
+	]
+	
+	description: 
+	[
+		"Most things in this jungle will try to kill you if they get the chance, including the plants. Some will shoot things at you from afar, others will bite you if you get too close. Some will even chase you, running with their little legs. Anyway, some of these plants are actually really good for cooking. The jungle to the west of here is crawling with carnivous plants that are really good when you"
+		"put them in a nice stew. I'd rather not lose my fingers so maybe you can go and get me some of their leaves? Remember to wear protective gloves."
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"Nice. Very nice."
+	]
+
+	objectives: [ .brill_craigsworth_2 ]
 	level: 20	
 }
 

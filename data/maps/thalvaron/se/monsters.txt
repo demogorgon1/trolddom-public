@@ -19,6 +19,8 @@ map_entity_spawn thalvaron_panther: { entity thalvaron_panther: {} spawn_timer: 
 map_entity_spawn thalvaron_gorilla: { entity thalvaron_gorilla: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_jungle_spider: { entity thalvaron_jungle_spider: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_jungle_spider_boss: { entity thalvaron_jungle_spider_boss: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_carnivorous_plant: { entity thalvaron_carnivorous_plant: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_carnivorous_plant_caster: { entity thalvaron_carnivorous_plant_caster: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
 
 # Theodore quest mobs - snakes
 {
@@ -112,4 +114,32 @@ map_entity_spawn thalvaron_jungle_spider_boss: { entity thalvaron_jungle_spider_
 
 	entity thalvaron_jungle_spider: !NPC { _string: "Xandralis Tarantula" _sprite: spider_2 _sprite_dead: spider_2_dead }
 	entity thalvaron_jungle_spider_boss: !NPC { _string: "Larger Than Average Spider" _sprite: spider_1 _sprite_dead: spider_1_dead }
+}
+
+# Plant monsters
+{
+	loot_table .carnivorous_plant: 
+	{
+		slots:
+		[	
+			{
+				possibility: { weight: 1 } 
+				possibility: { weight: 1 loot_group: .brill_craigsworth_2_quest_item requirement self<must_have_active_quest>: { id: .brill_craigsworth_2 } } 
+			}			
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_NATURE_ELEMENTALS{}
+		]	
+	}
+	
+	${
+		_level: 20
+		_faction: monsters
+		_creature_type: elemental
+		_default_behavior_state: .wandering_short
+		_loot_table: .carnivorous_plant
+	}
+
+	entity thalvaron_carnivorous_plant: !NPC { _string: "Carnivorous Plant" _sprite: carnivorous_plant_1 _sprite_dead: carnivorous_plant_1_dead }
+	entity thalvaron_carnivorous_plant_caster: !NPC { _string: "Thorn Spitter" _sprite: carnivorous_plant_2 _sprite_dead: carnivorous_plant_2_dead _abilities: [ { id: npc_thorn_spit_no_cooldown } ]
 }

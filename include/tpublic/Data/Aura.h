@@ -101,7 +101,8 @@ namespace tpublic
 				FLAG_POISON					= 0x00040000,
 				FLAG_ALWAYS_SELF_APPLIED	= 0x00080000,
 				FLAG_UNIQUE_PER_SOURCE		= 0x00100000,
-				FLAG_NO_MOUNT				= 0x0020000
+				FLAG_NO_MOUNT				= 0x00200000,
+				FLAG_EFFECTS_AS_CHARGES		= 0x00400000
 			};
 
 			static Type
@@ -172,6 +173,8 @@ namespace tpublic
 						flags |= FLAG_UNIQUE_PER_SOURCE;
 					else if (strcmp(string, "no_mount") == 0)
 						flags |= FLAG_NO_MOUNT;
+					else if (strcmp(string, "effects_as_charges") == 0)
+						flags |= FLAG_EFFECTS_AS_CHARGES;
 					else
 						TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid aura flag.", string);
 				});

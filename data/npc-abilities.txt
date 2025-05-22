@@ -1289,3 +1289,53 @@ ability npc_poison_bolt:
 		function: { expression: a_mul_x x: weapon a: 0.9 }
 	}	
 }
+
+ability npc_thorn_spit_no_cooldown:
+{
+	string: "Thorn Spit"
+	range: 7
+	cast_time: 20
+	cooldowns: [ global ]
+	flags: [ offensive target_other target_hostile can_miss interruptable ]
+	states: [ in_combat ]
+	icon: icon_blood
+	delay: 3
+	target_particle_system: green_spell_hit
+	projectile: $particle_system
+	{
+		particle:
+		{
+			sprites: [ effect_witch_bolt ]
+			flags: [ attached no_rotation face_target ]
+			scale: 0.3
+			count: 1		
+		}
+	}
+
+	direct_effect apply_aura:
+	{
+		aura: $aura [ string icon ]
+		{
+			type: debuff
+			duration: 90
+			max_stack: 5
+			flags: [ effects_as_charges ]
+			aura_effect repeat:
+			{
+				update_interval: 15
+				update_count: 6
+				ability: $ability [ string icon ]
+				{
+					states: [ default in_combat ]
+					flags: [ always_in_range always_in_line_of_sight ]
+					direct_effect damage:
+					{
+						damage_type: bleed
+						function: { expression: a a: [ [ 1 2 ] [ 10 4 ] [ 20 7 ] [ 30 14 ] ] elite_multiplier: 1.8 }
+					}
+				}
+			}
+		}
+	}
+}
+
