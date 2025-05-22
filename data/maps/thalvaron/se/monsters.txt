@@ -21,6 +21,15 @@ map_entity_spawn thalvaron_jungle_spider: { entity thalvaron_jungle_spider: {} s
 map_entity_spawn thalvaron_jungle_spider_boss: { entity thalvaron_jungle_spider_boss: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_carnivorous_plant: { entity thalvaron_carnivorous_plant: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_carnivorous_plant_caster: { entity thalvaron_carnivorous_plant_caster: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_jungle_crocodile: { entity thalvaron_jungle_crocodile: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+
+map_entity_spawn thalvaron_jungle_orc: 
+{ 
+	entity thalvaron_jungle_orc_a: {} 
+	entity thalvaron_jungle_orc_b: {} 
+	entity thalvaron_jungle_orc_c: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
 
 # Theodore quest mobs - snakes
 {
@@ -143,3 +152,34 @@ map_entity_spawn thalvaron_carnivorous_plant_caster: { entity thalvaron_carnivor
 	entity thalvaron_carnivorous_plant: !NPC { _string: "Carnivorous Plant" _sprite: carnivorous_plant_1 _sprite_dead: carnivorous_plant_1_dead }
 	entity thalvaron_carnivorous_plant_caster: !NPC { _string: "Thorn Spitter" _sprite: carnivorous_plant_2 _sprite_dead: carnivorous_plant_2_dead _abilities: [ { id: npc_thorn_spit_no_cooldown } ]
 }
+
+# Crocodiles
+{
+	${
+		_level: 20
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .passive
+		_loot_table: default_crocodile
+		_can_move_on_all_non_view_blocking_tiles: true
+	}
+
+	entity thalvaron_jungle_crocodile: !NPC { _string: "Xandralis Crocodile" _sprite: crocodile_1 _sprite_dead: crocodile_1_dead }
+}
+
+# Orcs
+{
+	${
+		_level: 21
+		_faction: skullforge_orcs
+		_creature_type: humanoid
+		_loot_table: default_humanoid
+		_default_behavior_state: .passive
+	}
+
+	entity thalvaron_jungle_orc_a: !NPC { _string: "Skullforge Scout" _sprite: orc_1 _sprite_dead: orc_1_dead }
+	entity thalvaron_jungle_orc_b: !NPC { _string: "Skullforge Scout" _sprite: orc_2 _sprite_dead: orc_2_dead }
+	entity thalvaron_jungle_orc_c: !NPC { _string: "Skullforge Ranger" _sprite: orc_5 _sprite_dead: orc_5_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
+	entity thalvaron_jungle_orc_boss: !NPC { _string: "Klogh" _sprite: orc_3 _sprite_dead: orc_3_dead }
+}
+

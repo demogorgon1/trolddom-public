@@ -1,0 +1,107 @@
+dialogue_screen .sylvaris_thornleaf:
+{
+	text: 
+	[	
+		"Oh, hello. Fancy seeing another two-legged creature around here."
+	]
+	
+	options:
+	[
+		{ quest: .sylvaris_thornleaf_1 }
+	]
+}
+
+entity thalvaron_sylvaris_thornleaf: !NPC
+{
+	_string: "Brill Craigsworth"
+	_dialogue_root: $dialogue_root { .sylvaris_thornleaf: { } }
+	_sprite: elf_15
+	_sprite_dead: elf_15_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+##########################################################################################
+# Quest 1
+
+item .sylvaris_thornleaf_1_quest_item:
+{
+	string: "Riverthistle" 
+	icon: icon_herbs_4
+	loot_groups: [ .sylvaris_thornleaf_1_quest_item ]
+	item_level: 20
+	stack: 5
+	flags: [ not_sellable ]
+}	
+
+objective .sylvaris_thornleaf_1:
+{
+	string: "Riverthistle"
+	collect_items: { item: .sylvaris_thornleaf_1_quest_item count: 5 }
+}
+
+loot_group .sylvaris_thornleaf_1_quest_item: {}
+
+loot_table .sylvaris_thornleaf_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .sylvaris_thornleaf_1_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_sylvaris_thornleaf_1_quest_item:
+{
+	string: "Riverthistle"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ wild_herbs_2 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .sylvaris_thornleaf_1_quest_item
+			verb: pick
+			range: 1 
+			despawn: true 			
+			level: 20
+			required_quest: .sylvaris_thornleaf_1
+		}		
+	}
+}
+
+quest .sylvaris_thornleaf_1:
+{
+	string: "Herbing Assistance"
+
+	text:
+	[
+		"Collect plants by the river in Xandralis."
+	]
+	
+	description: 
+	[
+		"I'm out here doing research on ancient Xandralis civilizations, but I've always enjoyed a good herbal tea - and there are plenty of interesting herbs around here. For example, down by the river,"
+		"you'll find the rare riverthistle. Only problem? Crocodiles. Almost lost my leg to one of them yesterday. You seem like you might be able to handle them. Can you grab me some of those herbs?"
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"Nice. Very nice."
+	]
+
+	objectives: [ .sylvaris_thornleaf_1 ]
+	level: 20	
+}
+

@@ -424,7 +424,7 @@ loot_table default_snake:
 	]
 }
 
-loot_table default_crocodiles:
+loot_table default_crocodile:
 {
 	slots:
 	[

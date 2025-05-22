@@ -336,6 +336,12 @@ map_entity_spawn thalvaron_andor_redfoot: { entity thalvaron_andor_redfoot: { in
 map_entity_spawn thalvaron_brill_craigsworth: { entity thalvaron_brill_craigsworth: { init_state: default } }
 map_entity_spawn thalvaron_jim_craigsworth: { entity thalvaron_jim_craigsworth: { init_state: default } }
 map_entity_spawn thalvaron_brill_craigsworth_1_quest_item: { entity thalvaron_brill_craigsworth_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_sylvaris_thornleaf_1_quest_item: { entity thalvaron_sylvaris_thornleaf_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_sylvaris_thornleaf: { entity thalvaron_sylvaris_thornleaf: { init_state: default } }
+map_entity_spawn thalvaron_warden_wero: { entity thalvaron_warden_wero: { init_state: default } }
+map_entity_spawn thalvaron_warden_taliar: { entity thalvaron_warden_taliar: { init_state: default } }
+map_entity_spawn thalvaron_warden_wero_1_quest_item: { entity thalvaron_warden_wero_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+
 
 map_palette .stuff:
 {
@@ -766,7 +772,15 @@ map_palette .stuff:
 	entity_spawn thalvaron_jungle_spider_boss: [ 200 220 182 ]
 	entity_spawn thalvaron_carnivorous_plant: [ 200 220 112 ]
 	entity_spawn thalvaron_carnivorous_plant_caster: [ 100 220 112 ]
-	
+	entity_spawn thalvaron_jungle_crocodile: [ 44 120 172 ]
+	entity_spawn thalvaron_sylvaris_thornleaf_1_quest_item: [ 43 192 81 ]
+	entity_spawn thalvaron_sylvaris_thornleaf: [ 43 192 181 ]
+	entity_spawn thalvaron_jungle_orc: [ 40 200 91 ]
+	entity_spawn thalvaron_warden_wero: [ 140 200 91 ]	
+	entity_spawn thalvaron_warden_taliar: [ 140 200 191 ]	
+	entity_spawn thalvaron_warden_wero_1_quest_spawn: [ 140 255 191 ]	
+	entity_spawn thalvaron_warden_wero_1_quest_item: [ 240 255 191 ]
+
 }
 
 map_palette .levels:
@@ -1031,3 +1045,4 @@ map thalvaron:
 	]
 }
  
+

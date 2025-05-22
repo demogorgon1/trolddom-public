@@ -1,0 +1,28 @@
+dialogue_screen .warden_taliar:
+{
+	text: 
+	[	
+		"Tread carefully, orcs are hiding everywhere!"
+	]
+	
+	options:
+	[
+		{ quest<completion_only>: .warden_wero_2 }
+	]
+}
+
+entity thalvaron_warden_taliar: !NPC
+{
+	_string: "Warden Taliar"
+	_dialogue_root: $dialogue_root { .warden_taliar: { } }
+	_sprite: elf_2
+	_sprite_dead: elf_2_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+##########################################################################################
+# Quest 1
