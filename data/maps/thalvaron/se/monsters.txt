@@ -31,6 +31,13 @@ map_entity_spawn thalvaron_jungle_orc:
 	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
+map_entity_spawn thalvaron_jungle_ghost: 
+{ 
+	entity thalvaron_jungle_ghost_a: {} 
+	entity thalvaron_jungle_ghost_b: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
 # Theodore quest mobs - snakes
 {
 	loot_table .slitherer: 
@@ -181,5 +188,19 @@ map_entity_spawn thalvaron_jungle_orc:
 	entity thalvaron_jungle_orc_b: !NPC { _string: "Skullforge Scout" _sprite: orc_2 _sprite_dead: orc_2_dead }
 	entity thalvaron_jungle_orc_c: !NPC { _string: "Skullforge Ranger" _sprite: orc_5 _sprite_dead: orc_5_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
 	entity thalvaron_jungle_orc_boss: !NPC { _string: "Klogh" _sprite: orc_3 _sprite_dead: orc_3_dead }
+}
+
+# Ghosts
+{
+	${
+		_level: 21
+		_faction: monsters
+		_creature_type: undead
+		_loot_table: default_ghost
+		_default_behavior_state: .wandering_short
+	}
+
+	entity thalvaron_jungle_ghost_a: !NPC { _string: "Angered Temple Spirit" _sprite: ghost_1 _sprite_dead: ghost_1_dead _abilities: [ { id: npc_frostbolt_no_cooldown target: random_player }{ id: npc_attack } ] }
+	entity thalvaron_jungle_ghost_b: !NPC { _string: "Angered Temple Spirit" _sprite: ghost_2 _sprite_dead: ghost_2_dead _abilities: [ { id: npc_curse target: random_player }{ id: npc_attack } ] }
 }
 

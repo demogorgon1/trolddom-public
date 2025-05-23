@@ -56,6 +56,8 @@ loot_group snakes: {}
 loot_group snakes_uncommon: {}
 loot_group crocodiles: {}
 loot_group crocodiles_uncommon: {}
+loot_group ghosts: {}
+loot_group ghosts_uncommon: {}
 
 !define WORLD_DROPS
 {
@@ -113,28 +115,28 @@ loot_group crocodiles_uncommon: {}
 {
 	possibility: { weight: 20 }
 	possibility: { weight: 15 loot_group: skeletons creature_types: [ undead ] }
-	possibility: { weight: 1 loot_group: skeletons_uncommon creature_types: [ undead ] }
+	possibility: { weight: 8 loot_group: skeletons_uncommon creature_types: [ undead ] }
 }
 
 !define WORLD_DROPS_ZOMBIES 
 {
 	possibility: { weight: 20 }
 	possibility: { weight: 15 loot_group: zombies creature_types: [ undead ] }
-	possibility: { weight: 1 loot_group: zombies_uncommon creature_types: [ undead ] }
+	possibility: { weight: 8 loot_group: zombies_uncommon creature_types: [ undead ] }
 }
 
 !define WORLD_DROPS_WOLVES 
 {
 	possibility: { weight: 20 }
 	possibility: { weight: 15 loot_group: wolves creature_types: [ beast ] }
-	possibility: { weight: 1 loot_group: wolves_uncommon creature_types: [ beast ] }
+	possibility: { weight: 8 loot_group: wolves_uncommon creature_types: [ beast ] }
 }
 
 !define WORLD_DROPS_DEER 
 {
 	possibility: { weight: 20 }
 	possibility: { weight: 15 loot_group: deer creature_types: [ beast ] }
-	possibility: { weight: 1 loot_group: deer_uncommon creature_types: [ beast ] }
+	possibility: { weight: 8 loot_group: deer_uncommon creature_types: [ beast ] }
 }
 
 
@@ -142,14 +144,14 @@ loot_group crocodiles_uncommon: {}
 {
 	possibility: { weight: 20 }
 	possibility: { weight: 15 loot_group: bears creature_types: [ beast ] }
-	possibility: { weight: 1 loot_group: bears_uncommon creature_types: [ beast ] }
+	possibility: { weight: 8 loot_group: bears_uncommon creature_types: [ beast ] }
 }
 
 !define WORLD_DROPS_BOARS
 {
 	possibility: { weight: 20 }
 	possibility: { weight: 15 loot_group: boars creature_types: [ beast ] }
-	possibility: { weight: 1 loot_group: boars_uncommon creature_types: [ beast ] }
+	possibility: { weight: 8 loot_group: boars_uncommon creature_types: [ beast ] }
 }
 
 !define WORLD_DROPS_CRABS
@@ -163,84 +165,91 @@ loot_group crocodiles_uncommon: {}
 {
 	possibility: { weight: 20 }
 	possibility: { weight: 15 loot_group: earth_elementals creature_types: [ elemental ] }
-	possibility: { weight: 1 loot_group: earth_elementals_uncommon creature_types: [ elemental ] }
+	possibility: { weight: 8 loot_group: earth_elementals_uncommon creature_types: [ elemental ] }
 }
 
 !define WORLD_DROPS_OWLBEARS
 {
 	possibility: { weight: 20 }
 	possibility: { weight: 15 loot_group: owlbears creature_types: [ beast humanoid ] }
-	possibility: { weight: 1 loot_group: owlbears_uncommon creature_types: [ beast humanoid ] }
+	possibility: { weight: 8 loot_group: owlbears_uncommon creature_types: [ beast humanoid ] }
 }
 
 !define WORLD_DROPS_WOOD_ELEMENTALS
 {
 	possibility: { weight: 20 }
 	possibility: { weight: 15 loot_group: wood_elementals creature_types: [ elemental ] }
-	possibility: { weight: 1 loot_group: wood_elementals_uncommon creature_types: [ elemental ] }
+	possibility: { weight: 8 loot_group: wood_elementals_uncommon creature_types: [ elemental ] }
 }
 
 !define WORLD_DROPS_LIZARDS
 {
 	possibility: { weight: 20 }
 	possibility: { weight: 15 loot_group: lizards creature_types: [ beast ] }
-	possibility: { weight: 1 loot_group: lizards_uncommon creature_types: [ beast ] }
+	possibility: { weight: 8 loot_group: lizards_uncommon creature_types: [ beast ] }
 }
 
 !define WORLD_DROPS_OOZES
 {
 	possibility: { weight: 20 }
 	possibility: { weight: 15 loot_group: oozes creature_types: [ elemental ] }
-	possibility: { weight: 1 loot_group: oozes_uncommon creature_types: [ elemental ] }
+	possibility: { weight: 8 loot_group: oozes_uncommon creature_types: [ elemental ] }
 }
 
 !define WORLD_DROPS_LIONS
 {
 	possibility: { weight: 20 }
 	possibility: { weight: 15 loot_group: lions creature_types: [ beast ] }
-	possibility: { weight: 1 loot_group: lions_uncommon creature_types: [ beast ] }
+	possibility: { weight: 8 loot_group: lions_uncommon creature_types: [ beast ] }
 }
 
 !define WORLD_DROPS_DEMONS
 {
 	possibility: { weight: 20 }
 	possibility: { weight: 15 loot_group: demons creature_types: [ demon ] }
-	possibility: { weight: 1 loot_group: demons_uncommon creature_types: [ demon ] }
+	possibility: { weight: 8 loot_group: demons_uncommon creature_types: [ demon ] }
 }
 
 !define WORLD_DROPS_NATURE_ELEMENTALS
 {
 	possibility: { weight: 20 }
 	possibility: { weight: 15 loot_group: nature_elementals creature_types: [ elemental ] }
-	possibility: { weight: 1 loot_group: nature_elementals_uncommon creature_types: [ elemental ] }
+	possibility: { weight: 8 loot_group: nature_elementals_uncommon creature_types: [ elemental ] }
 }
 
 !define WORLD_DROPS_SPIDERS
 {
 	possibility: { weight: 20 }
 	possibility: { weight: 15 loot_group: spiders creature_types: [ beast ] }
-	possibility: { weight: 1 loot_group: spiders_uncommon creature_types: [ beast ] }
+	possibility: { weight: 8 loot_group: spiders_uncommon creature_types: [ beast ] }
 }
 
 !define WORLD_DROPS_BIRDS
 {
 	possibility: { weight: 20 }
 	possibility: { weight: 15 loot_group: birds creature_types: [ beast humanoid ] }
-	possibility: { weight: 1 loot_group: birds_uncommon creature_types: [ beast humanoid ] }
+	possibility: { weight: 8 loot_group: birds_uncommon creature_types: [ beast humanoid ] }
 }
 
 !define WORLD_DROPS_SNAKES
 {
 	possibility: { weight: 20 }
 	possibility: { weight: 15 loot_group: snakes creature_types: [ beast ] }
-	possibility: { weight: 1 loot_group: snakes_uncommon creature_types: [ beast ] }
+	possibility: { weight: 8 loot_group: snakes_uncommon creature_types: [ beast ] }
 }
 
 !define WORLD_DROPS_CROCODILES
 {
 	possibility: { weight: 20 }
 	possibility: { weight: 15 loot_group: crocodiles creature_types: [ beast ] }
-	possibility: { weight: 1 loot_group: crocodiles_uncommon creature_types: [ beast ] }
+	possibility: { weight: 8 loot_group: crocodiles_uncommon creature_types: [ beast ] }
+}
+
+!define WORLD_DROPS_GHOSTS
+{
+	possibility: { weight: 20 }
+	possibility: { weight: 15 loot_group: ghosts creature_types: [ beast ] }
+	possibility: { weight: 5 loot_group: ghosts_uncommon creature_types: [ beast ] }
 }
 
 loot_table default_humanoid: 
@@ -430,5 +439,14 @@ loot_table default_crocodile:
 	[
 		!WORLD_DROPS {}
 		!WORLD_DROPS_CROCODILES{}
+	]
+}
+
+loot_table default_ghost:
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+		!WORLD_DROPS_GHOSTS{}
 	]
 }

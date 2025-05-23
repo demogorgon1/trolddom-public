@@ -78,6 +78,7 @@ zone .hidden_pool: { string: "Great Ape Sanctuary" }
 zone .skaldrun_pass: { string: "Howling Pass" }
 zone .urthon_gate: { string: "Urthon Gate" }
 zone .entor_spring: { string: "Entor Spring" }
+zone .jungle_temple: { string: "Ancient Temple" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -344,7 +345,7 @@ map_entity_spawn thalvaron_sylvaris_thornleaf: { entity thalvaron_sylvaris_thorn
 map_entity_spawn thalvaron_warden_wero: { entity thalvaron_warden_wero: { init_state: default } }
 map_entity_spawn thalvaron_warden_taliar: { entity thalvaron_warden_taliar: { init_state: default } }
 map_entity_spawn thalvaron_warden_wero_1_quest_item: { entity thalvaron_warden_wero_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
-
+map_entity_spawn thalvaron_sylvaris_thornleaf_2_quest_item: { entity thalvaron_sylvaris_thornleaf_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 
 map_palette .stuff:
 {
@@ -783,7 +784,8 @@ map_palette .stuff:
 	entity_spawn thalvaron_warden_taliar: [ 140 200 191 ]	
 	entity_spawn thalvaron_warden_wero_1_quest_spawn: [ 140 255 191 ]	
 	entity_spawn thalvaron_warden_wero_1_quest_item: [ 240 255 191 ]
-
+	entity_spawn thalvaron_sylvaris_thornleaf_2_quest_item: [ 39 199 244 ]
+	entity_spawn thalvaron_jungle_ghost: [ 31 100 42 ]
 }
 
 map_palette .levels:
@@ -874,6 +876,7 @@ map_palette .sub_zones:
 	sub_zone .holy_temple: [ 174 26 217 ]
 	sub_zone .underworld_society: [ 26 217 155 ]
 	sub_zone .highborne_realm: [ 150 85 177 ]
+	sub_zone .jungle_temple: [ 49 85 174 ]
 	
 	sub_zone thalvaron_crab_giant: [ 39 192 83 ]
 	sub_zone thalvaron_vampire_boss: [ 139 93 48 ]

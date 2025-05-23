@@ -783,6 +783,8 @@ sprites:
 	sprite icon_fang_1 : { tags: [ icon ] }
 	sprite icon_hand_1 : { tags: [ icon ] }
 	sprite icon_gorilla : { tags: [ icon ] }
+	sprite icon_spirit_dust : { tags: [ icon ] }
+	sprite icon_ectoplasm : { tags: [ icon ] }
 
 }
 

@@ -243,7 +243,7 @@ item item_earth_core:
 	rarity: uncommon
 	string: "Earth Core"
 	stack: 10
-	loot_groups: [ earth_elementals ]
+	loot_groups: [ earth_elementals_uncommon ]
 	tags: [ reagent ]	
 }
 
@@ -256,7 +256,7 @@ item item_enchanted_dirt:
 	rarity: uncommon
 	string: "Enchanted Dirt"
 	stack: 10
-	loot_groups: [ earth_elementals ]
+	loot_groups: [ earth_elementals_uncommon ]
 	tags: [ reagent ]	
 }
 
@@ -329,7 +329,7 @@ item item_life_core:
 	string: "Life Core"
 	rarity: uncommon
 	stack: 10
-	loot_groups: [ wood_elementals nature_elementals ]
+	loot_groups: [ wood_elementals_uncommon nature_elementals_uncommon ]
 	tags: [ reagent ]	
 }
 
@@ -438,7 +438,7 @@ item item_demon_heart:
 	rarity: uncommon
 	string: "Heart of Darkness"
 	stack: 10
-	loot_groups: [ demons ]
+	loot_groups: [ demons_uncommon ]
 	tags: [ reagent ]	
 }
 
@@ -451,7 +451,7 @@ item item_nature_heart:
 	rarity: uncommon
 	string: "Heart of Nature"
 	stack: 10
-	loot_groups: [ wood_elementals nature_elementals ]
+	loot_groups: [ wood_elementals_uncommon nature_elementals_uncommon ]
 	tags: [ reagent ]	
 }
 
@@ -464,7 +464,7 @@ item item_polished_stone:
 	rarity: uncommon
 	string: "Polished Stone"
 	stack: 10
-	loot_groups: [ demons earth_elementals ]
+	loot_groups: [ demons_uncommon earth_elementals_uncommon ]
 	tags: [ reagent ]		
 }
 
@@ -477,7 +477,7 @@ item item_enchanted_roots:
 	rarity: uncommon
 	string: "Enchanted Roots"
 	stack: 10
-	loot_groups: [ wood_elementals nature_elementals ]
+	loot_groups: [ wood_elementals_uncommon nature_elementals_uncommon ]
 	tags: [ reagent ]		
 }
 
@@ -550,6 +550,31 @@ item item_snake_fang:
 	string: "Snake Fang"
 	stack: 10
 	loot_groups: [ snakes ]
+	tags: [ reagent ]			
+}
+
+item item_spirit_dust:
+{
+	type: miscellaneous
+	item_level: 20
+	level_range: [ 10 30 ]
+	icon: icon_spirit_dust
+	string: "Spirit Dust"
+	rarity: uncommon
+	stack: 10
+	loot_groups: [ ghosts_uncommon ]
+	tags: [ reagent ]			
+}
+
+item item_ectoplasm:
+{
+	type: miscellaneous
+	item_level: 20
+	level_range: [ 10 30 ]
+	icon: icon_ectoplasm
+	string: "Ectoplasm"	
+	stack: 10
+	loot_groups: [ ghosts ]
 	tags: [ reagent ]			
 }
 

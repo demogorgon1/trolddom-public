@@ -8,6 +8,7 @@ dialogue_screen .sylvaris_thornleaf:
 	options:
 	[
 		{ quest: .sylvaris_thornleaf_1 }
+		{ quest: .sylvaris_thornleaf_2 }
 	]
 }
 
@@ -105,3 +106,85 @@ quest .sylvaris_thornleaf_1:
 	level: 20	
 }
 
+##########################################################################################
+# Quest 2
+
+item .sylvaris_thornleaf_2_quest_item:
+{
+	string: "Ancient Xandralis Artifact" 
+	icon: icon_tablet_1
+	loot_groups: [ .sylvaris_thornleaf_2_quest_item ]
+	item_level: 20
+	stack: 6
+	flags: [ not_sellable ]
+}	
+
+objective .sylvaris_thornleaf_2:
+{
+	string: "Ancient Xandralis Artifacts"
+	collect_items: { item: .sylvaris_thornleaf_2_quest_item count: 6 }
+}
+
+loot_group .sylvaris_thornleaf_2_quest_item: {}
+
+loot_table .sylvaris_thornleaf_2_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .sylvaris_thornleaf_2_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_sylvaris_thornleaf_2_quest_item:
+{
+	string: "Ancient Xandralis Artifact"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ junk_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .sylvaris_thornleaf_2_quest_item
+			verb: pick
+			range: 1 
+			despawn: true 			
+			level: 20
+			required_quest: .sylvaris_thornleaf_2
+		}		
+	}
+}
+
+quest .sylvaris_thornleaf_2:
+{
+	string: "Ancient Civilization"
+
+	text:
+	[
+		"Collect archeological artifacts around the Xandralis temple ruins and return them to Sylvaris Thronleaf."
+	]
+	
+	description: 
+	[
+		"This place was once the home of a highly developed civilization that has long since vanished. What happened to it nobody knows, and most of its remains have disappeared. One of the few"
+		"sites that are still relatively intact is the temple ruins to the south, on the other side of the river. I'd appreciate if you could go look for artifacts in the ground, around that place."
+		"I'd go myself, but I've heard that the place is haunted. I think the wildlife around here is scary enough already, I don't need any bloody ghosts as well."
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"Nice. Very nice."
+	]
+
+	objectives: [ .sylvaris_thornleaf_2 ]
+	prerequisites: [ .sylvaris_thornleaf_1 ]
+	level: 21
+}
