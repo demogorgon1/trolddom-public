@@ -9,6 +9,7 @@ dialogue_screen .sylvaris_thornleaf:
 	[
 		{ quest: .sylvaris_thornleaf_1 }
 		{ quest: .sylvaris_thornleaf_2 }
+		{ quest: .sylvaris_thornleaf_3 }
 	]
 }
 
@@ -114,7 +115,7 @@ item .sylvaris_thornleaf_2_quest_item:
 	string: "Ancient Xandralis Artifact" 
 	icon: icon_tablet_1
 	loot_groups: [ .sylvaris_thornleaf_2_quest_item ]
-	item_level: 20
+	item_level: 21
 	stack: 6
 	flags: [ not_sellable ]
 }	
@@ -152,7 +153,7 @@ entity thalvaron_sylvaris_thornleaf_2_quest_item:
 			verb: pick
 			range: 1 
 			despawn: true 			
-			level: 20
+			level: 21
 			required_quest: .sylvaris_thornleaf_2
 		}		
 	}
@@ -186,5 +187,99 @@ quest .sylvaris_thornleaf_2:
 
 	objectives: [ .sylvaris_thornleaf_2 ]
 	prerequisites: [ .sylvaris_thornleaf_1 ]
+	level: 21
+}
+
+##########################################################################################
+# Quest 3
+
+map_entity_spawn thalvaron_sylvaris_thornleaf_3_quest_spawn: { spawn_timer: { only_when_triggered: true } }
+
+item .sylvaris_thornleaf_3_quest_item:
+{
+	string: "Tablet of Ryux" 
+	icon: icon_tablet_1
+	loot_groups: [ .sylvaris_thornleaf_3_quest_item ]
+	item_level: 21
+	flags: [ not_sellable unique ]
+}	
+
+objective .sylvaris_thornleaf_3:
+{
+	string: "Tablet of Ryux"
+	collect_items: { item: .sylvaris_thornleaf_3_quest_item count: 1 }
+}
+
+loot_group .sylvaris_thornleaf_3_quest_item: {}
+
+loot_table .sylvaris_thornleaf_3_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .sylvaris_thornleaf_3_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_sylvaris_thornleaf_3_quest_item:
+{
+	string: "Tablet of Ryux"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ junk_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .sylvaris_thornleaf_3_quest_item
+			verb: pick
+			range: 1 
+			despawn: true 			
+			level: 21
+			required_quest: .sylvaris_thornleaf_3
+			trigger_ability: $ability
+			{
+				direct_effect spawn_entity:
+				{
+					spawn_flags: [ no_owner ]
+					npc_target_threat: 20
+					entity: thalvaron_jungle_ghost_panther
+					map_entity_spawn: thalvaron_sylvaris_thornleaf_3_quest_spawn
+				}
+			}
+		}		
+	}
+}
+
+quest .sylvaris_thornleaf_3:
+{
+	string: "Temple of Ryux"
+
+	text:
+	[
+		"Find the tablet located at the Shrine of Ryux and return it to Sylvaris Thornleaf."
+	]
+	
+	description: 
+	[
+		"The ancient civilization worshipped some kind of panther deity by the name of Ryux. If my research is correct, there must be some kind of shrine dedicated to this deity, somewhere further south, close to the Howling Pass.\n\n"
+		"There must be some kind of interesting tablet to be found there. Can you check it out?"
+		
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"Nice. Very nice."
+	]
+
+	objectives: [ .sylvaris_thornleaf_3 ]
+	prerequisites: [ .sylvaris_thornleaf_2 ]
 	level: 21
 }

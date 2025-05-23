@@ -79,6 +79,7 @@ zone .skaldrun_pass: { string: "Howling Pass" }
 zone .urthon_gate: { string: "Urthon Gate" }
 zone .entor_spring: { string: "Entor Spring" }
 zone .jungle_temple: { string: "Ancient Temple" }
+zone .shrine_of_ryux: { string: "Shrine of Ryux" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -346,6 +347,7 @@ map_entity_spawn thalvaron_warden_wero: { entity thalvaron_warden_wero: { init_s
 map_entity_spawn thalvaron_warden_taliar: { entity thalvaron_warden_taliar: { init_state: default } }
 map_entity_spawn thalvaron_warden_wero_1_quest_item: { entity thalvaron_warden_wero_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_sylvaris_thornleaf_2_quest_item: { entity thalvaron_sylvaris_thornleaf_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_sylvaris_thornleaf_3_quest_item: { entity thalvaron_sylvaris_thornleaf_3_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 
 map_palette .stuff:
 {
@@ -786,6 +788,8 @@ map_palette .stuff:
 	entity_spawn thalvaron_warden_wero_1_quest_item: [ 240 255 191 ]
 	entity_spawn thalvaron_sylvaris_thornleaf_2_quest_item: [ 39 199 244 ]
 	entity_spawn thalvaron_jungle_ghost: [ 31 100 42 ]
+	entity_spawn thalvaron_sylvaris_thornleaf_3_quest_item: [ 39 119 244 ]
+	entity_spawn thalvaron_sylvaris_thornleaf_3_quest_spawn: [ 139 199 45 ]
 }
 
 map_palette .levels:
@@ -852,6 +856,7 @@ map_palette .zones:
 	zone .skaldrun_pass: [ 150 25 229 ]
 	zone .urthon_gate: [ 34 122 244 ]
 	zone .entor_spring: [ 211 130 62 ]
+	zone .shrine_of_ryux: [ 70 232 243 ]
 }
 
 map_palette .sub_zones:

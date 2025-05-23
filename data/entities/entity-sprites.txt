@@ -818,6 +818,12 @@ sprites:
 	sprite elf_15_dead: { }	
 	sprite elf_16_dead: { }	
 
+	cursor: { position: [ 0 704 ] }
+	sprite ghost_panther_1: { dead: ghost_panther_1_dead }
+
+	cursor: { position: [ 0 720 ] }
+	sprite ghost_panther_1_dead: { }
+
 }
 
 sprites:

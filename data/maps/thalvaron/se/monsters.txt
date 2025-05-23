@@ -202,5 +202,6 @@ map_entity_spawn thalvaron_jungle_ghost:
 
 	entity thalvaron_jungle_ghost_a: !NPC { _string: "Angered Temple Spirit" _sprite: ghost_1 _sprite_dead: ghost_1_dead _abilities: [ { id: npc_frostbolt_no_cooldown target: random_player }{ id: npc_attack } ] }
 	entity thalvaron_jungle_ghost_b: !NPC { _string: "Angered Temple Spirit" _sprite: ghost_2 _sprite_dead: ghost_2_dead _abilities: [ { id: npc_curse target: random_player }{ id: npc_attack } ] }
+	entity thalvaron_jungle_ghost_panther: !NPC { _string: "Ryux" _sprite: ghost_panther_1 _sprite_dead: ghost_panther_1_dead _abilities: [ { id: npc_rend }{ id: npc_attack } ] }
 }
 
