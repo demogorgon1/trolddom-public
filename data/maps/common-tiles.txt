@@ -766,7 +766,15 @@ sprites:
 	sprite dark_grass_2_border_17: { }
 	sprite dark_grass_2_alt_1: { flags: [ tile_walkable ] }
 	sprite dark_grass_2_alt_2: { flags: [ tile_walkable ] }
-	
+
+	sprite d_building_wall: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite d_building_entrance: { flags: [ tile_walkable tile_top ] }
+	sprite d_building_wall_start: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite d_building_wall_end: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite d_building_entrance_closed: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite d_building_wall_alt_1: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite d_building_wall_alt_2: { flags: [ tile_block_line_of_sight tile_top ] }
+
 	cursor: { position: [ 0 384 ] }
 
 	sprite pine_forest_1: 

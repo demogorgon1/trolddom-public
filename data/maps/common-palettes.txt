@@ -101,5 +101,8 @@
 	tile fs_water: [ 60 44 220 ]
 	tile fs_shallow_water: [ 150 44 220 ]
 	tile jungle_1_entrance: [ 252 39 111 ]
+	tile d_building_wall: [ 48 71 55 ]
+	tile d_building_entrance: [ 148 71 55 ]
+	tile d_building_entrance_closed: [ 148 71 155 ]
 	
 }

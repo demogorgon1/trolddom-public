@@ -76,6 +76,8 @@ zone .skaldrun: { string: "Skaldrun" }
 zone .durgan_urok: { string: "Durgan Urok" }
 zone .hidden_pool: { string: "Great Ape Sanctuary" }
 zone .skaldrun_pass: { string: "Howling Pass" }
+zone .urthon_gate: { string: "Urthon Gate" }
+zone .entor_spring: { string: "Entor Spring" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -846,6 +848,8 @@ map_palette .zones:
 	zone .durgan_urok: [ 215 222 0 ]
 	zone .hidden_pool: [ 135 84 189 ]
 	zone .skaldrun_pass: [ 150 25 229 ]
+	zone .urthon_gate: [ 34 122 244 ]
+	zone .entor_spring: [ 211 130 62 ]
 }
 
 map_palette .sub_zones:
@@ -930,6 +934,8 @@ map_palette .doodads:
 	doodad hard_slope_n: [ 140 103 18 ]
 	doodad hard_slope_s: [ 40 203 18 ]
 	doodad hard_slope_e: [ 40 103 118 ]
+	doodad jungle_plant_purple: [ 147 66 77 ]
+	doodad closed_gate: [ 31 1 138 ]
 	
 	doodad wall_sign_generic<"Mathew's Emporium">: [ 197 173 111 ]	
 	doodad wall_sign_generic<"John & Mary's">: [ 97 173 111 ]	
