@@ -212,7 +212,7 @@ namespace tpublic
 			typedef std::unordered_map<uint32_t, std::unique_ptr<WorldMapSource>> WorldMapSources;
 			WorldMapSources worldMapSources;
 
-			aManifest->GetContainer<Data::Map>()->ForEach([aManifest, &worldMapSources](
+			aManifest->GetContainer<Data::Map>()->ForEach([&worldMapSources](
 				const Data::Map* aMap)
 			{
 				if(aMap->m_data->m_worldMap)
