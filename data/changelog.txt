@@ -16,6 +16,8 @@ changelog:
 	
 	list:
 	[
+		{ text: "FPS should be higher in general." }
+		{ text: "Fixed bug where the quest Elderwood Mushrooms would disappear from NPC dialogue." }
 	]
 
 	#######################################################################################

@@ -397,7 +397,7 @@ namespace tpublic
 
 					const Components::ZoneDiscovery* zoneDiscovery = entity->GetComponent<Components::ZoneDiscovery>();
 					bool hasDiscoveredZone = zoneDiscovery->m_zones.HasValue(aRequirement->m_id);
-					bool shouldHaveDiscoveredZone = aRequirement->m_id == Requirement::TYPE_MUST_HAVE_DISCOVERED_ZONE;
+					bool shouldHaveDiscoveredZone = aRequirement->m_type == Requirement::TYPE_MUST_HAVE_DISCOVERED_ZONE;
 
 					if(hasDiscoveredZone != shouldHaveDiscoveredZone)
 						return false;
