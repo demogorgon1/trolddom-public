@@ -68,6 +68,12 @@ ability open:
 	direct_effect simple<open>:
 	{
 	}
+	
+	direct_effect remove_aura:
+	{
+		target_self: true
+		aura: stealth
+	}	
 }
 
 cooldown gaze_of_death:

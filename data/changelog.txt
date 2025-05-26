@@ -10,6 +10,7 @@ changelog:
 	[
 		{ text: "Added option to disable FPS throttling for smoother graphics." }
 		{ text: "Added option to switch between Direct3D 9, Direct3D 11, and OpenGL rendering." }
+		{ text: "Opening chests, picking herbs, etc, will now break stealth." }
 	]
 	
 	text: "Issues fixed:"

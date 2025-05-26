@@ -87,11 +87,10 @@ namespace tpublic
 			const IWorldView*				/*aWorldView*/)
 		{
 			EntityInstance* target = m_targetSelf ? aSource : aTarget;
+			Components::Auras* targetAuras = target != NULL ? target->GetComponent<Components::Auras>() : NULL;
 
-			if (target == NULL)
+			if (targetAuras == NULL)
 				return Result();
-
-			Components::Auras* targetAuras = target->GetComponent<Components::Auras>();
 			
 			if(m_auraId != 0)
 			{
