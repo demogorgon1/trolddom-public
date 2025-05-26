@@ -1,0 +1,27 @@
+dialogue_screen .warden_qoro:
+{
+	text: 
+	[	
+		"What brings you to this pass? Beyond it lies the wild lands of Skaldrun. I can't imagine a $class$ like you would have any business there."
+	]
+	
+	options:
+	[
+	]
+}
+
+entity thalvaron_warden_qoro: !NPC
+{
+	_string: "Warden Qoro"
+	_dialogue_root: $dialogue_root { .warden_qoro: { } }
+	_sprite: elf_2
+	_sprite_dead: elf_2_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+##########################################################################################
+# Quest 1

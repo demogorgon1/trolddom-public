@@ -276,7 +276,7 @@ quest .sylvaris_thornleaf_3:
 	
 	completion:
 	[
-		"Nice. Very nice."
+		"What, some kind of panther ghost attacked you when you picked up the tablet? That's... well, good thing I sent you there and didn't go myself. I mean, good job!"
 	]
 
 	objectives: [ .sylvaris_thornleaf_3 ]

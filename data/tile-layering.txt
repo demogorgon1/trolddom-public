@@ -21,6 +21,8 @@ tile_layering:
 	dark_grass
 	farmland
 	jungle_grass
+	rocky_dirt
+	rocky_dirt_blur
 	snow
 	
 	# Special surfaces

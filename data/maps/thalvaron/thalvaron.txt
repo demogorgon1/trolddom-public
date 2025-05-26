@@ -348,6 +348,7 @@ map_entity_spawn thalvaron_warden_taliar: { entity thalvaron_warden_taliar: { in
 map_entity_spawn thalvaron_warden_wero_1_quest_item: { entity thalvaron_warden_wero_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_sylvaris_thornleaf_2_quest_item: { entity thalvaron_sylvaris_thornleaf_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_sylvaris_thornleaf_3_quest_item: { entity thalvaron_sylvaris_thornleaf_3_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_warden_qoro: { entity thalvaron_warden_qoro: { init_state: default } }
 
 map_palette .stuff:
 {
@@ -790,6 +791,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_jungle_ghost: [ 31 100 42 ]
 	entity_spawn thalvaron_sylvaris_thornleaf_3_quest_item: [ 39 119 244 ]
 	entity_spawn thalvaron_sylvaris_thornleaf_3_quest_spawn: [ 139 199 45 ]
+	entity_spawn thalvaron_warden_qoro: [ 30 40 80 ]
 }
 
 map_palette .levels:
