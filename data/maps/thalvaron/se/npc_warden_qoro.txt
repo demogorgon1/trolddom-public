@@ -7,6 +7,7 @@ dialogue_screen .warden_qoro:
 	
 	options:
 	[
+		{ quest<offer_only>: .warden_qoro_1 }
 	]
 }
 
@@ -25,3 +26,28 @@ entity thalvaron_warden_qoro: !NPC
 
 ##########################################################################################
 # Quest 1
+
+quest .warden_qoro_1:
+{
+	string: "Rod Gambil"
+
+	text:
+	[
+		"Seek out Rod Gambil in the Howling Pass."
+	]
+	
+	description: 
+	[
+		"If you insist on venturing into the Howling Pass and what lies beyond, I suggest you seek out Rod Gambil on the way. He lives in a shack in the mountains."
+	]
+
+	completion:
+	[
+		"Some elf sent you? I see."
+	]
+
+	level: 21
+	reward_xp_multiplier: 0.2
+	reward_cash_multiplier: 0.2
+}
+

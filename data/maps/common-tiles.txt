@@ -1144,4 +1144,30 @@ sprites:
 	sprite rocky_dirt_blur_border_17: { }
 	sprite rocky_dirt_blur_alt_1: { flags: [ tile_walkable ] }
 	sprite rocky_dirt_blur_alt_2: { flags: [ tile_walkable ] }	
+	
+	cursor: { position: [ 0 592 ] }
+
+	sprite crystals_1: { flags: [ tile_block_line_of_sight ] borders:
+		[ crystals_1_border_1 crystals_1_border_2 crystals_1_border_3 crystals_1_border_4 crystals_1_border_5 crystals_1_border_6 crystals_1_border_7
+		  crystals_1_border_8 crystals_1_border_9 crystals_1_border_10 crystals_1_border_11 crystals_1_border_12 crystals_1_border_13 crystals_1_border_14
+		  crystals_1_border_15 crystals_1_border_16 crystals_1_border_17 ] alt_tiles: [ crystals_1_alt_1 crystals_1_alt_2 ] }		
+	sprite crystals_1_border_1: { }
+	sprite crystals_1_border_2: { }
+	sprite crystals_1_border_3: { }
+	sprite crystals_1_border_4: { }
+	sprite crystals_1_border_5: { }
+	sprite crystals_1_border_6: { }
+	sprite crystals_1_border_7: { }
+	sprite crystals_1_border_8: { }
+	sprite crystals_1_border_9: { }
+	sprite crystals_1_border_10: { }
+	sprite crystals_1_border_11: { }
+	sprite crystals_1_border_12: { }
+	sprite crystals_1_border_13: { }
+	sprite crystals_1_border_14: { }
+	sprite crystals_1_border_15: { }
+	sprite crystals_1_border_16: { }
+	sprite crystals_1_border_17: { }
+	sprite crystals_1_alt_1: { flags: [ tile_block_line_of_sight ] }
+	sprite crystals_1_alt_2: { flags: [ tile_block_line_of_sight ] }	
 }

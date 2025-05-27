@@ -22,6 +22,8 @@ map_entity_spawn thalvaron_jungle_spider_boss: { entity thalvaron_jungle_spider_
 map_entity_spawn thalvaron_carnivorous_plant: { entity thalvaron_carnivorous_plant: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_carnivorous_plant_caster: { entity thalvaron_carnivorous_plant_caster: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_jungle_crocodile: { entity thalvaron_jungle_crocodile: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_thunder_lizard: { entity thalvaron_thunder_lizard: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_thunder_lizard_boss: { entity thalvaron_thunder_lizard_boss: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
 
 map_entity_spawn thalvaron_jungle_orc: 
 { 
@@ -205,3 +207,62 @@ map_entity_spawn thalvaron_jungle_ghost:
 	entity thalvaron_jungle_ghost_panther: !NPC { _string: "Ryux" _sprite: ghost_panther_1 _sprite_dead: ghost_panther_1_dead _abilities: [ { id: npc_rend }{ id: npc_attack } ] }
 }
 
+# Lizards
+{
+	loot_table .thunder_lizard: 
+	{
+		slots:
+		[	
+			{
+				possibility: { weight: 1 } 
+				possibility: { weight: 2 loot_group: .thora_stormpiercer_1_quest_item requirement self<must_have_active_quest>: { id: .thora_stormpiercer_1 } } 
+			}			
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_LIZARDS{}
+		]	
+	}
+
+	loot_table .thunder_lizard_boss: 
+	{
+		slots:
+		[	
+			{
+				possibility: { weight: 1 loot_group: .thora_stormpiercer_2_quest_item requirement self<must_have_active_quest>: { id: .thora_stormpiercer_2 } } 
+			}			
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_LIZARDS{}
+		]	
+	}
+	
+	${
+		_level: 20
+		_faction: monsters
+		_creature_type: beast		
+		_default_behavior_state: .wandering_short
+	}
+
+	entity thalvaron_thunder_lizard: !NPC { _string: "Thunder Lizard" _sprite: lizard_4 _sprite_dead: lizard_4_dead _loot_table: .thunder_lizard }
+	entity thalvaron_thunder_lizard_boss: !NPC { _string: "Stormgoros" _sprite: lizard_5 _sprite_dead: lizard_5_dead _loot_table: .thunder_lizard_boss }
+}
+
+##########################################################################################
+# Howling Pass
+
+map_entity_spawn thalvaron_howling_pass_wolf: { entity thalvaron_howling_pass_wolf: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_howling_pass_wolf_boss: { entity thalvaron_howling_pass_wolf_boss: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+
+# Wolves
+{
+	${
+		_level: 21
+		_faction: monsters
+		_creature_type: beast
+		_loot_table: default_wolf
+		_default_behavior_state: .wandering_short
+	}
+
+	entity thalvaron_howling_pass_wolf: !NPC { _string: "Mountain Wolf" _sprite: wolf_3 _sprite_dead: wolf_3_dead }
+	entity thalvaron_howling_pass_wolf_boss: !NPC { _string: "Den Mother" _sprite: wolf_3 _sprite_dead: wolf_3_dead }
+}

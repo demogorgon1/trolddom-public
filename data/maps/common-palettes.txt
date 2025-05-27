@@ -106,5 +106,6 @@
 	tile d_building_entrance_closed: [ 148 71 155 ]
 	tile rocky_dirt: [ 29 100 200 ]
 	tile rocky_dirt_blur: [ 29 100 120 ]
+	tile crystals_1: [ 129 150 200 ]
 	
 }

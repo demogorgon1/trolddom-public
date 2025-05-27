@@ -1,0 +1,85 @@
+dialogue_screen .rod_gambil:
+{
+	text: 
+	[	
+		"Did you remember to wipe your feet before barging into my house without knocking?"
+	]
+	
+	options:
+	[		
+		{ quest<completion_only>: .warden_qoro_1 }
+		{ quest: .rod_gambil_1 }
+	]
+}
+
+entity thalvaron_rod_gambil: !NPC
+{
+	_string: "Rod Gambil"
+	_dialogue_root: $dialogue_root { .rod_gambil: { } }
+	_sprite: man_71
+	_sprite_dead: man_71_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+##########################################################################################
+# Quest 1
+
+objective .rod_gambil_1_a:
+{
+	string: "Mountain Wolves Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_howling_pass_wolf ]
+		count: 6
+	}
+}
+
+objective .rod_gambil_1_b:
+{
+	string: "Den Mother Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_howling_pass_wolf_boss ]
+		count: 1
+	}
+}
+
+quest .rod_gambil_1:
+{
+	string: "Unhowling the Pass"
+
+	text:
+	[
+		"Slay wolves in the Howling Pass and return to Rod Gambil."
+	]
+	
+	description: 
+	[
+		"Well, yes, people call this the Howling Pass, which I suppose is a fitting name, considering the sounds that fills the area at night. Wolves all over the place. It's getting a bit out of hands, to"
+		"be honest. How about you go and clear them out a bit? Follow the path beyond my house to the east and I'm sure you'll find some."
+	]
+	
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"That's great, good job."
+	]
+
+	objectives: [ .rod_gambil_1_a .rod_gambil_1_b ]
+	level: 21
+}
+

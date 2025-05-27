@@ -1,0 +1,107 @@
+dialogue_screen .benji:
+{
+	text: 
+	[	
+		"Ah, yes, thunder lizards, how interesting."
+	]
+	
+	options:
+	[
+		{ quest<offer_only>: thalvaron_benji_1 }
+	]
+}
+
+entity thalvaron_benji: !NPC
+{
+	_string: "Benji"
+	_dialogue_root: $dialogue_root { .benji: { } }
+	_sprite: man_8
+	_sprite_dead: man_8_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+##########################################################################################
+# Quest 1
+
+item .benji_1_quest_item:
+{
+	string: "Lightning Crystal" 
+	icon: icon_chill_touch
+	loot_groups: [ .benji_1_quest_item ]
+	item_level: 20
+	stack: 4
+	quest: thalvaron_benji_1
+	flags: [ not_sellable ]
+	binds: when_picked_up
+}	
+
+objective .benji_1:
+{
+	string: "Lightning Crystals"
+	collect_items: { item: .benji_1_quest_item count: 4 }
+}
+
+loot_group .benji_1_quest_item: {}
+
+loot_table .benji_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .benji_1_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_benji_1_quest_item:
+{
+	string: "Lightning Crystal"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ doodad_fs_rock_purple_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .benji_1_quest_item
+			verb: pick
+			range: 1 
+			despawn: true 			
+			level: 20
+			required_quest: thalvaron_benji_1
+		}		
+	}
+}
+
+quest thalvaron_benji_1:
+{
+	string: "The Crystal Caves"
+
+	text:
+	[
+		"Collect horns from Thunder Lizards in the Xandralis Highlands and return to Thora Stormpiercer."
+	]
+	
+	description: 
+	[
+		"I noticed that you've eagerly helped Thora with her vendetta against the thunder lizards. Maybe you can help me a with a less pointless endeavour.\n\n"
+		"Have you ever wondered why those lizards are able to should lightning out of their mouths? You don't need to worry about that. What I need you to do is venture into the"
+		"crystal caves in the western part of these highlands, collect some of the crystals, and return them to my master in Valoris. He will reward you.\n\n"
+		"You'll probably find him in his alchemy shop."
+	]
+
+	completion:
+	[
+		"Uh, what are those crystals? From Xandralis? Ah, how exciting! Hand them over at once!"
+	]
+
+	level: 20	
+	objectives: [ .benji_1 ]
+	prerequisites: [ .thora_stormpiercer_2 ]
+}
+

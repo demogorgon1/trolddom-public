@@ -80,6 +80,8 @@ zone .urthon_gate: { string: "Urthon Gate" }
 zone .entor_spring: { string: "Entor Spring" }
 zone .jungle_temple: { string: "Ancient Temple" }
 zone .shrine_of_ryux: { string: "Shrine of Ryux" }
+zone .tower_of_voraghul: { string: "Tower of Voraghul" }
+zone .the_crystal_caves: { string: "The Crystal Caves" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -349,6 +351,12 @@ map_entity_spawn thalvaron_warden_wero_1_quest_item: { entity thalvaron_warden_w
 map_entity_spawn thalvaron_sylvaris_thornleaf_2_quest_item: { entity thalvaron_sylvaris_thornleaf_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_sylvaris_thornleaf_3_quest_item: { entity thalvaron_sylvaris_thornleaf_3_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_warden_qoro: { entity thalvaron_warden_qoro: { init_state: default } }
+map_entity_spawn thalvaron_seren_virelith: { entity thalvaron_seren_virelith: { init_state: default } }
+map_entity_spawn thalvaron_rod_gambil: { entity thalvaron_rod_gambil: { init_state: default } }
+map_entity_spawn thalvaron_elaris_the_veil_walker: { entity thalvaron_elaris_the_veil_walker: { init_state: default } }
+map_entity_spawn thalvaron_thora_stormpiercer: { entity thalvaron_thora_stormpiercer: { init_state: default } }
+map_entity_spawn thalvaron_benji: { entity thalvaron_benji: { init_state: default } }
+map_entity_spawn thalvaron_benji_1_quest_item: { entity thalvaron_benji_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 
 map_palette .stuff:
 {
@@ -792,6 +800,16 @@ map_palette .stuff:
 	entity_spawn thalvaron_sylvaris_thornleaf_3_quest_item: [ 39 119 244 ]
 	entity_spawn thalvaron_sylvaris_thornleaf_3_quest_spawn: [ 139 199 45 ]
 	entity_spawn thalvaron_warden_qoro: [ 30 40 80 ]
+	entity_spawn thalvaron_seren_virelith: [ 20 80 70 ]
+	entity_spawn thalvaron_rod_gambil: [ 120 80 70 ]
+	entity_spawn thalvaron_elaris_the_veil_walker: [ 120 180 70 ]
+	entity_spawn thalvaron_howling_pass_wolf: [ 30 90 110 ]
+	entity_spawn thalvaron_howling_pass_wolf_boss: [ 130 90 110 ]
+	entity_spawn thalvaron_thunder_lizard: [ 100 100 120 ]
+	entity_spawn thalvaron_thunder_lizard_boss: [ 200 100 120 ]
+	entity_spawn thalvaron_thora_stormpiercer: [ 200 200 121 ]
+	entity_spawn thalvaron_benji: [ 210 90 240 ]
+	entity_spawn thalvaron_benji_1_quest_item: [ 37 83 204 ]
 }
 
 map_palette .levels:
@@ -884,6 +902,8 @@ map_palette .sub_zones:
 	sub_zone .underworld_society: [ 26 217 155 ]
 	sub_zone .highborne_realm: [ 150 85 177 ]
 	sub_zone .jungle_temple: [ 49 85 174 ]
+	sub_zone .tower_of_voraghul: [ 47 28 229 ] 
+	sub_zone .the_crystal_caves: [ 129 35 207 ]
 	
 	sub_zone thalvaron_crab_giant: [ 39 192 83 ]
 	sub_zone thalvaron_vampire_boss: [ 139 93 48 ]
@@ -946,6 +966,7 @@ map_palette .doodads:
 	doodad hard_slope_e: [ 40 103 118 ]
 	doodad jungle_plant_purple: [ 147 66 77 ]
 	doodad closed_gate: [ 31 1 138 ]
+	doodad fs_ground_mark: [ 30 105 39 ]
 	
 	doodad wall_sign_generic<"Mathew's Emporium">: [ 197 173 111 ]	
 	doodad wall_sign_generic<"John & Mary's">: [ 97 173 111 ]	
@@ -965,6 +986,7 @@ map_palette .doodads:
 	doodad wall_sign_generic<"Skrald & Co.">: [ 223 21 11 ]	
 	doodad wall_sign_generic<"Rare Imports">: [ 231 121 11 ]	
 	doodad wall_sign_generic<"The Valorisian">: [ 231 21 152 ]	
+	doodad sign_generic_right<"Durgan Urok">: [ 127 140 221 ]	
 }
 
 map_palette .cliffs:

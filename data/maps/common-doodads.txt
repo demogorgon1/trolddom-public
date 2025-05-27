@@ -108,6 +108,9 @@ sprites:
 	sprite doodad_closed_gate: { flags: [ tile_block_line_of_sight ] }
 
 	cursor: { position: [ 0 48 ] }
+	sprite doodad_sign_right: { flags: [ tile_walkable ] }
+	
+	cursor: { position: [ 0 64 ] }
 	size: { width: 80 height: 64 } sprite ship: { flags: [ tile_walkable ] }
 	size: { width: 32 height: 32 } sprite large_statue: { }
 	size: { width: 48 height: 48 } sprite fs_ground_mark: { flags: [ tile_walkable ] }
@@ -285,4 +288,5 @@ doodad dark_stairs_left: { sprites: [ doodad_dark_stairs_left ] map_palette<"x">
 doodad dark_stairs_center: { sprites: [ doodad_dark_stairs_center ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad dark_stairs_right: { sprites: [ doodad_dark_stairs_right ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad closed_gate: { sprites: [ doodad_closed_gate ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad sign_generic_right: { sprites: [ doodad_sign_right ] map_palette<"x">: { occupy: true } map: [ "x" ] } 
 
