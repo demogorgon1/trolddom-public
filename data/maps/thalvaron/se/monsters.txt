@@ -264,5 +264,138 @@ map_entity_spawn thalvaron_howling_pass_wolf_boss: { entity thalvaron_howling_pa
 	}
 
 	entity thalvaron_howling_pass_wolf: !NPC { _string: "Mountain Wolf" _sprite: wolf_3 _sprite_dead: wolf_3_dead }
-	entity thalvaron_howling_pass_wolf_boss: !NPC { _string: "Den Mother" _sprite: wolf_3 _sprite_dead: wolf_3_dead }
+	entity thalvaron_howling_pass_wolf_boss: !NPC { _string: "Den Mother" _sprite: wolf_2 _sprite_dead: wolf_2_dead }
+}
+
+##########################################################################################
+# Eastern Skaldrun Shore
+
+map_entity_spawn thalvaron_skaldrun_crocodile: { entity thalvaron_skaldrun_crocodile: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_skaldrun_shore_orc_boss: { entity thalvaron_skaldrun_shore_orc_boss: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+
+map_entity_spawn thalvaron_skaldrun_shore_orc: 
+{ 
+	entity thalvaron_skaldrun_shore_orc_a: {} 
+	entity thalvaron_skaldrun_shore_orc_b: {} 
+	entity thalvaron_skaldrun_shore_orc_c: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Orcs
+{
+	quest thalvaron_skaldrun_shore_orc_boss_quest_item:
+	{
+		string: "Durgan Tharok Attack Plans"
+
+		text:
+		[
+			"Bring the document to Durgan Tharok."
+		]
+		
+		description: 
+		[
+			"This document seems to describe plans to attack Durgan Tharok. You should warn them."
+		]
+		
+		completion:
+		[
+			"Seems like an attack on Durgan Tharok might be imminent. Good you brought this to my attention."
+		]
+
+		level: 21
+		quest_items: [ .skaldrun_shore_orc_boss_quest_item ]
+	}
+
+	loot_group .skaldrun_shore_orc_boss_quest_item: { }
+
+	item .skaldrun_shore_orc_boss_quest_item:
+	{
+		string: "Durgan Tharok Attack Plans" 
+		loot_groups: [ .skaldrun_shore_orc_boss_quest_item ]		
+		icon: icon_scroll_1
+		item_level: 21
+		flags: [ unique not_sellable ]
+		use_ability: $ability [ string icon ]
+		{
+			description: "This item starts a quest."
+			flags: [ target_self item ]
+			direct_effect simple<start_quest>: thalvaron_skaldrun_shore_orc_boss_quest_item
+			states: [ default in_combat ]
+			requirement self<must_not_have_completed_quest>: { id: thalvaron_skaldrun_shore_orc_boss_quest_item }
+			requirement self<must_not_have_active_quest>: { id: thalvaron_skaldrun_shore_orc_boss_quest_item }
+		}
+	}
+
+	loot_table .skaldrun_shore_orc_boss_quest_item: 
+	{
+		slots:
+		[
+			{
+				possibility: 
+				{ 
+					loot_group: .skaldrun_shore_orc_boss_quest_item 
+					requirement self<must_not_have_completed_quest>: { id: thalvaron_skaldrun_shore_orc_boss_quest_item }
+					requirement self<must_not_have_active_quest>: { id: thalvaron_skaldrun_shore_orc_boss_quest_item }				
+				}			
+			}			
+		
+			!WORLD_DROPS {}
+			!WORLD_DROPS_CLOTH{}
+		]	
+	}
+
+	${
+		_level: 21
+		_faction: skullforge_orcs
+		_creature_type: humanoid		
+		_default_behavior_state: .passive
+	}
+
+	entity thalvaron_skaldrun_shore_orc_a: !NPC { _string: "Skullforge Brute" _sprite: orc_1 _sprite_dead: orc_1_dead _loot_table: default_humanoid }
+	entity thalvaron_skaldrun_shore_orc_b: !NPC { _string: "Skullforge Brute" _sprite: orc_2 _sprite_dead: orc_2_dead _loot_table: default_humanoid }
+	entity thalvaron_skaldrun_shore_orc_c: !NPC { _string: "Skullforge Hunter" _sprite: orc_5 _sprite_dead: orc_5_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] _loot_table: default_humanoid }
+	entity thalvaron_skaldrun_shore_orc_boss: !NPC { _string: "Grort Wizbang" _sprite: goblin_boss_3 _sprite_dead: goblin_boss_3_dead _loot_table: .skaldrun_shore_orc_boss_quest_item }
+}
+
+# Crocodiles
+{
+	${
+		_level: 21
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .passive
+		_loot_table: default_crocodile
+		_can_move_on_all_non_view_blocking_tiles: true
+	}
+
+	entity thalvaron_skaldrun_crocodile: !NPC { _string: "Swamp Crocodile" _sprite: crocodile_1 _sprite_dead: crocodile_1_dead }
+}
+
+##########################################################################################
+# Durgan Urok
+
+map_entity_spawn thalvaron_durgan_urok_orc_boss: { entity thalvaron_durgan_urok_orc_boss: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+
+map_entity_spawn thalvaron_durgan_urok_orc: 
+{ 
+	entity thalvaron_durgan_urok_orc_a: {} 
+	entity thalvaron_durgan_urok_orc_b: {} 
+	entity thalvaron_durgan_urok_orc_c: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Orcs
+{
+	${
+		_level: 22
+		_faction: skullforge_orcs
+		_creature_type: humanoid
+		_loot_table: default_humanoid
+		_default_behavior_state: .passive
+	}
+
+	entity thalvaron_durgan_urok_orc_a: !NPC { _string: "Skullforge Guard" _sprite: orc_1 _sprite_dead: orc_1_dead }
+	entity thalvaron_durgan_urok_orc_b: !NPC { _string: "Skullforge Guard" _sprite: orc_2 _sprite_dead: orc_2_dead }
+	entity thalvaron_durgan_urok_orc_c: !NPC { _string: "Skullforge Ranger" _sprite: orc_5 _sprite_dead: orc_5_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
+	entity thalvaron_durgan_urok_orc_boss: !NPC { _string: "Commander Throgar" _sprite: goblin_boss _sprite_dead: goblin_boss_dead }
 }

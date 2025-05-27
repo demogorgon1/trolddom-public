@@ -10,6 +10,7 @@ dialogue_screen .warmaster_jounheim_dialogue:
 		{ quest: .warmaster_jounheim_1 }
 		{ quest<completion_only>: .badlands_orc }
 		{ quest: .warmaster_jounheim_2 }
+		{ quest<completion_only>: thalvaron_skaldrun_shore_orc_boss_quest_item }
 	]
 }
 

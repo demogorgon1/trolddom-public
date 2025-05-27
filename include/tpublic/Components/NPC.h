@@ -406,8 +406,10 @@ namespace tpublic
 							m_ticksWithLoot = aChild->GetInt32() * 10 * 60;
 						else if (aChild->m_name == "out_of_combat_mins")
 							m_ticksOutOfCombat = aChild->GetInt32() * 10 * 60;
-						else if(aChild->m_name == "immediately_when_dead")
+						else if (aChild->m_name == "immediately_when_dead")
 							m_immediatelyWhenDead = aChild->GetBool();
+						else if (aChild->m_name == "never")
+							m_never = aChild->GetBool();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					});
@@ -421,6 +423,7 @@ namespace tpublic
 					aStream->WriteInt(m_ticksWithLoot);
 					aStream->WriteInt(m_ticksOutOfCombat);
 					aStream->WriteBool(m_immediatelyWhenDead);
+					aStream->WriteBool(m_never);
 				}
 
 				bool
@@ -435,6 +438,8 @@ namespace tpublic
 						return false;
 					if (!aStream->ReadBool(m_immediatelyWhenDead))
 						return false;
+					if (!aStream->ReadBool(m_never))
+						return false;
 					return true;
 				}
 
@@ -443,6 +448,7 @@ namespace tpublic
 				int32_t								m_ticksWithLoot = 5 * 60 * 10; // 5 min
 				int32_t								m_ticksOutOfCombat = 0; // Disabled
 				bool								m_immediatelyWhenDead = false;
+				bool								m_never = false;
 			};
 
 			enum Field

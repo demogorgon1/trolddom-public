@@ -82,6 +82,8 @@ zone .jungle_temple: { string: "Ancient Temple" }
 zone .shrine_of_ryux: { string: "Shrine of Ryux" }
 zone .tower_of_voraghul: { string: "Tower of Voraghul" }
 zone .the_crystal_caves: { string: "The Crystal Caves" }
+zone .swamp_of_skaldrun: { string: "Swamp of Skaldrun" }
+zone .inner_durgan_urok: { string: "Inner Durgan Urok" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -357,6 +359,7 @@ map_entity_spawn thalvaron_elaris_the_veil_walker: { entity thalvaron_elaris_the
 map_entity_spawn thalvaron_thora_stormpiercer: { entity thalvaron_thora_stormpiercer: { init_state: default } }
 map_entity_spawn thalvaron_benji: { entity thalvaron_benji: { init_state: default } }
 map_entity_spawn thalvaron_benji_1_quest_item: { entity thalvaron_benji_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_rod_gambil_2_quest_item: { entity thalvaron_rod_gambil_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 
 map_palette .stuff:
 {
@@ -810,6 +813,12 @@ map_palette .stuff:
 	entity_spawn thalvaron_thora_stormpiercer: [ 200 200 121 ]
 	entity_spawn thalvaron_benji: [ 210 90 240 ]
 	entity_spawn thalvaron_benji_1_quest_item: [ 37 83 204 ]
+	entity_spawn thalvaron_skaldrun_shore_orc: [ 30 40 100 ]
+	entity_spawn thalvaron_skaldrun_shore_orc_boss: [ 230 40 100 ]
+	entity_spawn thalvaron_rod_gambil_2_quest_item: [ 130 140 200 ]
+	entity_spawn thalvaron_skaldrun_crocodile: [ 230 192 94 ]
+	entity_spawn thalvaron_durgan_urok_orc: [ 100 30 229 ]
+	entity_spawn thalvaron_durgan_urok_orc_boss: [ 200 35 200 ]
 }
 
 map_palette .levels:
@@ -904,6 +913,8 @@ map_palette .sub_zones:
 	sub_zone .jungle_temple: [ 49 85 174 ]
 	sub_zone .tower_of_voraghul: [ 47 28 229 ] 
 	sub_zone .the_crystal_caves: [ 129 35 207 ]
+	sub_zone .swamp_of_skaldrun: [ 96 135 232 ]
+	sub_zone .inner_durgan_urok: [ 232 96 140 ]
 	
 	sub_zone thalvaron_crab_giant: [ 39 192 83 ]
 	sub_zone thalvaron_vampire_boss: [ 139 93 48 ]

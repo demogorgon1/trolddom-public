@@ -2,6 +2,23 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.2.7"
+	
+	text: "Changes:"
+	
+	list:
+	[
+	]
+	
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Removed extra Spirit Stone from Durgan Tharok." }
+		{ text: "Fixed some minor bugs." }
+	]
+
+	#######################################################################################
 	heading: "v0.2.6"
 	
 	text: "Changes:"

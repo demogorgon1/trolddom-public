@@ -9,6 +9,7 @@ dialogue_screen .rod_gambil:
 	[		
 		{ quest<completion_only>: .warden_qoro_1 }
 		{ quest: .rod_gambil_1 }
+		{ quest: .rod_gambil_2 }
 	]
 }
 
@@ -80,6 +81,89 @@ quest .rod_gambil_1:
 	]
 
 	objectives: [ .rod_gambil_1_a .rod_gambil_1_b ]
+	level: 21
+}
+
+##########################################################################################
+# Quest 2
+
+objective .rod_gambil_2:
+{
+	string: "Rod Gambil's Stuf"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .rod_gambil_2_quest_item count: 1 }
+}
+
+loot_group .rod_gambil_2_quest_item: {}
+
+item .rod_gambil_2_quest_item:
+{
+	icon: icon_box
+	item_level: 21
+	loot_groups: [ .rod_gambil_2_quest_item ]
+	flags: [ unique not_sellable ]
+	string: "Rod Gambil's Stuff"
+}
+
+entity thalvaron_rod_gambil_2_quest_item:
+{
+	string: "Stolen Goods"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ chest_2 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: $loot_table
+			{
+				slots:
+				[
+					{
+						possibility: { loot_group: .rod_gambil_2_quest_item }			
+					}		
+				]
+			}
+			verb: open
+			range: 1 
+			level: 21
+			despawn: true 		
+			required_quest: .rod_gambil_2
+		}		
+	}
+}
+
+quest .rod_gambil_2:
+{
+	string: "Thieving Skullforge Orcs"
+
+	text:
+	[
+		"Thieving."
+	]
+	
+	description: 
+	[
+		"Beyond this pass to the west you'll find the Swamp of Skaldrun. It's a desolate place and you won't find any civilized people living there. For a while it has been overrun with Skullforge clan orcs" 
+		"from Durgan Urok. They don't seem to show much interest in this pass so they've largely left me alone, but they a couple of them raided my home a few days ago. I managed to get away unscathed, but"
+		"they stole some of my possessions. Maybe you can get them back? I went looking for them and I think they've stashed them at a small camp in the eastern part of the swamp."
+	]
+	
+	progress:
+	[
+		"You're not scared of orcs are you?"
+	]
+	
+	completion:
+	[
+		"Excellent."
+	]
+
+	objectives: [ .rod_gambil_2 ]
+	prerequisites: [ .rod_gambil_1 ]
 	level: 21
 }
 

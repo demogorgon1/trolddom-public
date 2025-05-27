@@ -373,7 +373,7 @@ namespace tpublic::Systems
 				{
 					returnValue = EntityState::ID_DESPAWNED;
 				}
-				else
+				else if(!npc->m_despawnTime.m_never)
 				{
 					const Components::Lootable* lootable = GetComponent<Components::Lootable>(aComponents);
 					bool hasLoot = lootable->HasLoot();
