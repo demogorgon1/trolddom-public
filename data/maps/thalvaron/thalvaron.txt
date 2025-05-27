@@ -360,6 +360,7 @@ map_entity_spawn thalvaron_thora_stormpiercer: { entity thalvaron_thora_stormpie
 map_entity_spawn thalvaron_benji: { entity thalvaron_benji: { init_state: default } }
 map_entity_spawn thalvaron_benji_1_quest_item: { entity thalvaron_benji_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_rod_gambil_2_quest_item: { entity thalvaron_rod_gambil_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_karl: { entity thalvaron_karl: { init_state: default } }
 
 map_palette .stuff:
 {
@@ -821,6 +822,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_durgan_urok_orc_boss: [ 200 35 200 ]
 	entity_spawn thalvaron_west_skaldrun_crab: [ 102 94 88 ]
 	entity_spawn thalvaron_east_skaldrun_crab: [ 202 94 88 ]
+	entity_spawn thalvaron_karl: [ 130 41 84 ]
 }
 
 map_palette .levels:

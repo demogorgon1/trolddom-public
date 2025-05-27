@@ -2,7 +2,7 @@ dialogue_screen .elaris_the_veil_walker:
 {
 	text: 
 	[	
-		"Tread carefully, orcs are hiding everywhere!"
+		"All the inhabitants of the city of Skaldrun disappeared. They were doomed by a pact they made with ancient powers from the far beyond."
 	]
 	
 	options:

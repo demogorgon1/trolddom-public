@@ -1,0 +1,28 @@
+dialogue_screen .karl:
+{
+	text: 
+	[	
+		"This is a great place to fish. Nobody to bother me."
+	]
+	
+	options:
+	[
+	]
+}
+
+entity thalvaron_karl: !NPC
+{
+	_string: "Karl"
+	_guild_name: "Fisherman"
+	_dialogue_root: $dialogue_root { .karl: { } }
+	_sprite: fisherman_1
+	_sprite_dead: fisherman_1_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+##########################################################################################
+# Quest 1
