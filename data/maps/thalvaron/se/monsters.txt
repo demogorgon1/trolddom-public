@@ -272,6 +272,7 @@ map_entity_spawn thalvaron_howling_pass_wolf_boss: { entity thalvaron_howling_pa
 
 map_entity_spawn thalvaron_skaldrun_crocodile: { entity thalvaron_skaldrun_crocodile: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_skaldrun_shore_orc_boss: { entity thalvaron_skaldrun_shore_orc_boss: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_east_skaldrun_crab: { entity thalvaron_east_skaldrun_crab: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
 
 map_entity_spawn thalvaron_skaldrun_shore_orc: 
 { 
@@ -371,6 +372,20 @@ map_entity_spawn thalvaron_skaldrun_shore_orc:
 	entity thalvaron_skaldrun_crocodile: !NPC { _string: "Swamp Crocodile" _sprite: crocodile_1 _sprite_dead: crocodile_1_dead }
 }
 
+# Beach Crabs
+{
+	${
+		_level: 21
+		_faction: wildlife
+		_creature_type: beast
+		_default_behavior_state: .wandering_short				
+		_loot_table: default_crab
+		_abilities: [ { id: npc_rend } { id: npc_attack } ]
+	}
+
+	entity thalvaron_east_skaldrun_crab: !NPC { _string: "Sandcrawler" _sprite: crab_1 _sprite_dead: crab_1_dead  }
+}
+
 ##########################################################################################
 # Durgan Urok
 
@@ -398,4 +413,23 @@ map_entity_spawn thalvaron_durgan_urok_orc:
 	entity thalvaron_durgan_urok_orc_b: !NPC { _string: "Skullforge Guard" _sprite: orc_2 _sprite_dead: orc_2_dead }
 	entity thalvaron_durgan_urok_orc_c: !NPC { _string: "Skullforge Ranger" _sprite: orc_5 _sprite_dead: orc_5_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
 	entity thalvaron_durgan_urok_orc_boss: !NPC { _string: "Commander Throgar" _sprite: goblin_boss _sprite_dead: goblin_boss_dead }
+}
+
+##########################################################################################
+# Western Skaldrun Shore
+
+map_entity_spawn thalvaron_west_skaldrun_crab: { entity thalvaron_west_skaldrun_crab: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+
+# Beach Crabs
+{
+	${
+		_level: 20
+		_faction: wildlife
+		_creature_type: beast
+		_default_behavior_state: .wandering_short				
+		_loot_table: default_crab
+		_abilities: [ { id: npc_rend } { id: npc_attack } ]
+	}
+
+	entity thalvaron_west_skaldrun_crab: !NPC { _string: "Sandcrawler" _sprite: crab_1 _sprite_dead: crab_1_dead  }
 }

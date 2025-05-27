@@ -819,6 +819,8 @@ map_palette .stuff:
 	entity_spawn thalvaron_skaldrun_crocodile: [ 230 192 94 ]
 	entity_spawn thalvaron_durgan_urok_orc: [ 100 30 229 ]
 	entity_spawn thalvaron_durgan_urok_orc_boss: [ 200 35 200 ]
+	entity_spawn thalvaron_west_skaldrun_crab: [ 102 94 88 ]
+	entity_spawn thalvaron_east_skaldrun_crab: [ 202 94 88 ]
 }
 
 map_palette .levels:
