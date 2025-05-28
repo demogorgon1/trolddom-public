@@ -45,7 +45,7 @@ zone .haunted_woods_west: { string: "Shadowthorn Thicket" }
 zone .haunted_woods_town: { string: "Ravenreach" }
 zone .haunted_woods_clearing: { string: "Shadowthorn Abbey" }
 zone .haunted_woods_east: { string: "Faerandor" }
-zone thalvaron_jungle: { string: "Xandralis" }
+zone thalvaron_jungle: { string: "Xandralis" fishing_loot_table: fish_skaldrun }
 zone .lich_woods: { string: "Hollows of the Undying" }
 zone .way_north_pass: { string: "The Northern Pass" }
 zone .duskwhisper_caves: { string: "Duskwhisper Caves" }
@@ -70,8 +70,8 @@ zone .echosrest: { string: "Echo's Rest" }
 zone .highborne_realm: { string: "Realm of the Highborne" no_map: true }
 zone .jungle_highlands: { string: "Xandralis Highlands" }
 zone .the_desolate_pass: { string: "The Desolate Pass" }
-zone .skaldrun_coast_west: { string: "Western Skaldrun Shore" }
-zone .skaldrun_coast_east: { string: "Eastern Skaldrun Shore" }
+zone .skaldrun_coast_west: { string: "Western Skaldrun Shore" fishing_loot_table: $loot_table { } }
+zone .skaldrun_coast_east: { string: "Eastern Skaldrun Shore" fishing_loot_table: fish_skaldrun }
 zone .skaldrun: { string: "Skaldrun" }
 zone .durgan_urok: { string: "Durgan Urok" }
 zone .hidden_pool: { string: "Great Ape Sanctuary" }
@@ -87,6 +87,7 @@ zone .inner_durgan_urok: { string: "Inner Durgan Urok" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
+zone thalvaron_lurker: { fishing_trigger_ability: thalvaron_lurker_spawn fishing_trigger_ability_chance: 50 fishing_loot_table: $loot_table { } }
 	
 route thalvaron_default_patrol: { }
 
@@ -823,6 +824,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_west_skaldrun_crab: [ 102 94 88 ]
 	entity_spawn thalvaron_east_skaldrun_crab: [ 202 94 88 ]
 	entity_spawn thalvaron_karl: [ 130 41 84 ]
+	entity_spawn thalvaron_lurker_spawn: [ 30 104 94 ]
 }
 
 map_palette .levels:
@@ -922,6 +924,7 @@ map_palette .sub_zones:
 	
 	sub_zone thalvaron_crab_giant: [ 39 192 83 ]
 	sub_zone thalvaron_vampire_boss: [ 139 93 48 ]
+	sub_zone thalvaron_lurker: [ 93 39 84 ]
 }
 
 map_palette .routes:

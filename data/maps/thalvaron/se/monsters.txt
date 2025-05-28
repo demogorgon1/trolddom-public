@@ -433,3 +433,43 @@ map_entity_spawn thalvaron_west_skaldrun_crab: { entity thalvaron_west_skaldrun_
 
 	entity thalvaron_west_skaldrun_crab: !NPC { _string: "Sandcrawler" _sprite: crab_1 _sprite_dead: crab_1_dead  }
 }
+
+##########################################################################################
+# Skaldrun
+
+map_entity_spawn thalvaron_lurker_spawn: { spawn_timer: { only_when_triggered: true } }
+
+# Lurker
+{
+	ability thalvaron_lurker_spawn:
+	{
+		direct_effect spawn_entity:
+		{
+			spawn_flags: [ no_owner ]
+			npc_target_threat: 20
+			entity: thalvaron_lurker
+			map_entity_spawn: thalvaron_lurker_spawn
+		}		
+	}
+
+	${
+		_level: 20
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short				
+		_loot_table: default_crab
+		_abilities: [ { id: npc_rend } { id: npc_attack } ]
+		_large: true
+		_out_of_zone_action: { evade: true }
+		_immune_to_stun: true
+		_immune_to_immobilize: true
+		_immune_to_slow: true
+		_zone: thalvaron_lurker
+		_resource_health: 3
+		_weapon_damage: 1.3	
+		_can_move_on_all_non_view_blocking_tiles: true
+		_evade_despawn: true
+	}
+
+	entity thalvaron_lurker: !NPC { _string: "Thal'Zirath" _sprite: giant_demon_3 _sprite_dead: giant_demon_3_dead  }
+}

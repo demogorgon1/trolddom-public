@@ -84,16 +84,12 @@ entity fishing_splash:
 }
 
 loot_group fish: { } 
+loot_group fish_jungle: { } 
+loot_group fish_skaldrun: { } 
 
-loot_table fish:
-{
-	slots:
-	[
-		{
-			possibility: { weight: 1 loot_group: fish }
-		}		
-	]		
-}
+loot_table fish: { slots: [ { possibility: { weight: 1 loot_group: fish } } ] }
+loot_table fish_jungle: { slots: [ { possibility: { weight: 2 loot_group: fish_jungle } possibility: { weight: 1 loot_group: fish } } ] }
+loot_table fish_skaldrun: { slots: [ { possibility: { weight: 2 loot_group: fish_skaldrun } possibility: { weight: 1 loot_group: fish } } ] }
 
 ################################################################################
 # Herring 
@@ -210,4 +206,30 @@ item item_mistveil:
 	stack: 20
 	item_level: 20
 	level_range: [ 20 20 ]
+}
+
+################################################################################
+# Skaldrun Snapper
+
+item item_skaldrun_snapper:
+{
+	loot_groups: [ fish_skaldrun ]		
+	string: "Skaldrun Snapper"
+	icon: icon_fish_8
+	stack: 20
+	item_level: 22
+	level_range: [ 21 22 ]
+}
+
+################################################################################
+# Piranha
+
+item item_piranha:
+{
+	loot_groups: [ fish_jungle ]		
+	string: "Piranha"
+	icon: icon_fish_9
+	stack: 20
+	item_level: 22
+	level_range: [ 20 22 ]
 }

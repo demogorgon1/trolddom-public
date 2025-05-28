@@ -321,7 +321,7 @@
 {
 	${
 		_string: "Pickled Toesnapper"
-		_description: "Restores 640 health and mana over 10 seconds. Gain 3 Constitution for 20 min. Can't be used in combat."
+		_description: "Restores 640 health and mana over 10 seconds. Gain 6 Constitution for 20 min. Can't be used in combat."
 		_level: 10
 		_icon: icon_fish_3_cooked
 		_heal_tick: 64
@@ -331,7 +331,7 @@
 		_item: { consumable_pickled_toesnapper: 1 }
 	}
 
-	aura consumable_pickled_toesnapper_buff: !AURA_FOOD_BUFF { _stat_modifiers: { constitution: { add: 3 } } }
+	aura consumable_pickled_toesnapper_buff: !AURA_FOOD_BUFF { _stat_modifiers: { constitution: { add: 6 } } }
 	ability consumable_pickled_toesnapper_tick: !ABILITY_FOOD_TICK {}
 	aura consumable_pickled_toesnapper: !AURA_FOOD {}
 	ability consumable_pickled_toesnapper: !ABILITY_FOOD { _buff: consumable_pickled_toesnapper_buff}
@@ -343,7 +343,7 @@
 {
 	${
 		_string: "Steamed Trout"
-		_description: "Restores 800 health and mana over 10 seconds. Gain 3 Wisdom for 20 min. Can't be used in combat."
+		_description: "Restores 800 health and mana over 10 seconds. Gain 6 Wisdom for 20 min. Can't be used in combat."
 		_level: 11
 		_icon: icon_fish_4_cooked
 		_heal_tick: 80
@@ -353,7 +353,7 @@
 		_item: { consumable_steamed_trout: 1 }
 	}
 
-	aura consumable_steamed_trout_buff: !AURA_FOOD_BUFF { _stat_modifiers: { wisdom: { add: 3 } } }
+	aura consumable_steamed_trout_buff: !AURA_FOOD_BUFF { _stat_modifiers: { wisdom: { add: 6 } } }
 	ability consumable_steamed_trout_tick: !ABILITY_FOOD_TICK {}
 	aura consumable_steamed_trout: !AURA_FOOD {}
 	ability consumable_steamed_trout: !ABILITY_FOOD { _buff: consumable_steamed_trout_buff }
@@ -365,7 +365,7 @@
 {
 	${
 		_string: "Seared Bass"
-		_description: "Restores 960 health and mana over 10 seconds. Gain 3 Dexterity for 20 min. Can't be used in combat."
+		_description: "Restores 960 health and mana over 10 seconds. Gain 6 Dexterity for 20 min. Can't be used in combat."
 		_level: 12
 		_icon: icon_fish_5_cooked
 		_heal_tick: 96 
@@ -375,7 +375,7 @@
 		_item: { consumable_seared_bass: 1 }
 	}
 
-	aura consumable_seared_bass_buff: !AURA_FOOD_BUFF { _stat_modifiers: { dexterity: { add: 3 } } }
+	aura consumable_seared_bass_buff: !AURA_FOOD_BUFF { _stat_modifiers: { dexterity: { add: 6 } } }
 	ability consumable_seared_bass_tick: !ABILITY_FOOD_TICK {}
 	aura consumable_seared_bass: !AURA_FOOD {}
 	ability consumable_seared_bass: !ABILITY_FOOD { _buff: consumable_seared_bass_buff }
@@ -387,7 +387,7 @@
 {
 	${
 		_string: "Spicy Perch Fillet"
-		_description: "Restores 1120 health and mana over 10 seconds. Gain 3 Strength for 20 min. Can't be used in combat."
+		_description: "Restores 1120 health and mana over 10 seconds. Gain 6 Strength for 20 min. Can't be used in combat."
 		_level: 14
 		_icon: icon_fish_6_cooked
 		_heal_tick: 112
@@ -397,7 +397,7 @@
 		_item: { consumable_spicy_perch_fillet: 1 }
 	}
 
-	aura consumable_spicy_perch_fillet_buff: !AURA_FOOD_BUFF { _stat_modifiers: { strength: { add: 3 } } }
+	aura consumable_spicy_perch_fillet_buff: !AURA_FOOD_BUFF { _stat_modifiers: { strength: { add: 6 } } }
 	ability consumable_spicy_perch_fillet_tick: !ABILITY_FOOD_TICK {}
 	aura consumable_spicy_perch_fillet: !AURA_FOOD {}
 	ability consumable_spicy_perch_fillet: !ABILITY_FOOD { _buff: consumable_spicy_perch_fillet_buff }
@@ -409,7 +409,7 @@
 {
 	${
 		_string: "Mistveil Balls"
-		_description: "Restores 1280 health and mana over 10 seconds. Gain 4 Constitution for 20 min. Can't be used in combat."
+		_description: "Restores 1280 health and mana over 10 seconds. Gain 8 Constitution for 20 min. Can't be used in combat."
 		_level: 16
 		_icon: icon_fish_7_cooked
 		_heal_tick: 128
@@ -419,9 +419,53 @@
 		_item: { consumable_mistveil_balls: 1 }
 	}
 
-	aura consumable_mistveil_balls_buff: !AURA_FOOD_BUFF { _stat_modifiers: { constitution: { add: 4 } } }
+	aura consumable_mistveil_balls_buff: !AURA_FOOD_BUFF { _stat_modifiers: { constitution: { add: 8 } } }
 	ability consumable_mistveil_balls_tick: !ABILITY_FOOD_TICK {}
 	aura consumable_mistveil_balls: !AURA_FOOD {}
 	ability consumable_mistveil_balls: !ABILITY_FOOD { _buff: consumable_mistveil_balls_buff }
 	item consumable_mistveil_balls: !ITEM_FOOD {}
+}
+
+#####################################################
+# Herbed Snapper
+{
+	${
+		_string: "Herbed Snapper"
+		_description: "Restores 1320 health and mana over 10 seconds. Gain 4 Constitution, 4 Strength, and 4 Dexterity for 20 min. Can't be used in combat."
+		_level: 20
+		_icon: icon_fish_8_cooked
+		_heal_tick: 132
+		_ability_tick: consumable_herbed_snapper_tick
+		_ability: consumable_herbed_snapper
+		_aura: consumable_herbed_snapper
+		_item: { consumable_herbed_snapper: 1 }
+	}
+
+	aura consumable_herbed_snapper_buff: !AURA_FOOD_BUFF { _stat_modifiers: { constitution: { add: 4 } strength: { add: 4 } dexterity: { add: 4 } } }
+	ability consumable_herbed_snapper_tick: !ABILITY_FOOD_TICK {}
+	aura consumable_herbed_snapper: !AURA_FOOD {}
+	ability consumable_herbed_snapper: !ABILITY_FOOD { _buff: consumable_herbed_snapper_buff }
+	item consumable_herbed_snapper: !ITEM_FOOD {}
+}
+
+#####################################################
+# Piranha Soup
+{
+	${
+		_string: "Piranha Soup"
+		_description: "Restores 1320 health and mana over 10 seconds. Increases Spell Damage and Healing by 8 for 20 min. Can't be used in combat."
+		_level: 20
+		_icon: icon_fish_9_cooked
+		_heal_tick: 132
+		_ability_tick: consumable_piranha_soup_tick
+		_ability: consumable_piranha_soup
+		_aura: consumable_piranha_soup
+		_item: { consumable_piranha_soup: 1 }
+	}
+
+	aura consumable_piranha_soup_buff: !AURA_FOOD_BUFF { _stat_modifiers: { spell_damage: { add: 8 } healing: { add: 8 } } }
+	ability consumable_piranha_soup_tick: !ABILITY_FOOD_TICK {}
+	aura consumable_piranha_soup: !AURA_FOOD {}
+	ability consumable_piranha_soup: !ABILITY_FOOD { _buff: consumable_piranha_soup_buff }
+	item consumable_piranha_soup: !ITEM_FOOD {}
 }

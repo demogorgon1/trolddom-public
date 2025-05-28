@@ -2,11 +2,12 @@ dialogue_screen .karl:
 {
 	text: 
 	[	
-		"This is a great place to fish. Nobody to bother me."
+		"I went here because I thought fishing would be nice and uncontested, but haven't caught anything at all."
 	]
 	
 	options:
 	[
+		{ quest: .karl_1 }
 	]
 }
 
@@ -26,3 +27,47 @@ entity thalvaron_karl: !NPC
 
 ##########################################################################################
 # Quest 1
+
+objective .karl_1:
+{
+	string: "Catch Fish"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_lurker ]
+		count: 1
+	}
+}
+
+quest .karl_1:
+{
+	string: "What Happened to the Fish?"
+
+	text:
+	[
+		"Collect bananas from north of the river and deliver them to Jim Craigsworth."
+	]
+	
+	description: 
+	[
+		"Haven't caught a single fish since I went down here from Mirehaven. I thought it would be a nice place, but no. Where did all the fish go? Seems like the waters are empty. Look at the crabs!"
+		"They seem to be starving - doesn't even want to go near the water. The only place I saw anything in the water was inside Skaldrun, to the west. Something was stirring, not sure what it was.\n\n"
+		"That place is seriously creepy, though. Not setting my foot in there again, that's for sure! I think I'll just go home... But I'm a bit curious. Maybe you can catch it, whatever it is?\n\n"
+		"Or maybe you're not even a fisherman?"
+	]
+	
+	progress:
+	[
+		"Yeah, I wouldn't go in there either."
+	]
+	
+	completion:
+	[
+		"Uh, really? What else? Did you see a gnome riding a unicorn? Haha."
+	]
+
+	objectives: [ .karl_1 ]
+	level: 20
+}

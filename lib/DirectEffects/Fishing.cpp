@@ -8,6 +8,7 @@
 #include <tpublic/Data/Entity.h>
 #include <tpublic/Data/Profession.h>
 #include <tpublic/Data/Sprite.h>
+#include <tpublic/Data/Zone.h>
 
 #include <tpublic/DirectEffects/Fishing.h>
 
@@ -50,7 +51,7 @@ namespace tpublic::DirectEffects
 		const Manifest*					aManifest,
 		CombatEvent::Id					/*aId*/,
 		uint32_t						/*aAbilityId*/,
-		const SourceEntityInstance&		/*aSourceEntityInstance*/,
+		const SourceEntityInstance&		aSourceEntityInstance,
 		EntityInstance*					aSource,
 		EntityInstance*					aTarget,
 		const Vec2&						/*aAOETarget*/,
@@ -98,45 +99,81 @@ namespace tpublic::DirectEffects
 		{
 			uint32_t level = 0;
 			uint32_t lootTableId = 0;
+			uint32_t triggerAbilityId = 0;
+			uint32_t triggerAbilityChance = 0;
 
 			if(map->m_worldInfoMap)
-				level = map->m_worldInfoMap->Get(fishingPosition.value()).m_level;
+			{
+				const WorldInfoMap::Entry& worldInfo = map->m_worldInfoMap->Get(fishingPosition.value());
+
+				level = worldInfo.m_level;
+
+				const Data::Zone* subZone = worldInfo.m_zoneId != 0 ? aManifest->GetById<Data::Zone>(worldInfo.m_subZoneId) : NULL;
+				const Data::Zone* zone = worldInfo.m_subZoneId != 0 ? aManifest->GetById<Data::Zone>(worldInfo.m_zoneId) : NULL;
+
+				if(subZone != NULL && subZone->m_fishingLootTableId != 0)
+					lootTableId = subZone->m_fishingLootTableId;
+				else if (zone != NULL && zone->m_fishingLootTableId != 0)
+					lootTableId = zone->m_fishingLootTableId;
+
+				if (subZone != NULL && subZone->m_fishingTriggerAbilityId != 0)
+				{
+					triggerAbilityId = subZone->m_fishingTriggerAbilityId;
+					triggerAbilityChance = subZone->m_fishingTriggerAbilityChance;
+				}
+				else if (zone != NULL && zone->m_fishingTriggerAbilityId != 0)
+				{
+					triggerAbilityId = zone->m_fishingTriggerAbilityId;
+					triggerAbilityChance = zone->m_fishingTriggerAbilityChance;
+				}
+			}
 			else 
+			{
 				level = map->m_mapInfo.m_level;
+			}
 
 			if(level == 0)
 				level = 1;
 
 			if(lootTableId == 0)
-			{
 				lootTableId = map->m_mapInfo.m_defaultFishingLootTableId;
-			}
 
 			if(lootTableId != 0)
 			{				
 				uint32_t skillRequired = (level - 1) * 5;
 
-				const tpublic::Components::PlayerPrivate* playerPrivate = aTarget->GetComponent<tpublic::Components::PlayerPrivate>();
-				uint32_t fishingProfessionId = aManifest->GetExistingIdByName<tpublic::Data::Profession>("fishing");
+				const Components::PlayerPrivate* playerPrivate = aTarget->GetComponent<Components::PlayerPrivate>();
+				uint32_t fishingProfessionId = aManifest->GetExistingIdByName<Data::Profession>("fishing");
 
 				if(playerPrivate->m_professions.HasProfessionSkill(fishingProfessionId, skillRequired))
 				{
 					// Each tick has 10% chance of making a splash
 					tpublic::UniformDistribution<uint32_t> distribution(1, 100);
-					if(distribution(aRandom) < 10)
+					if(distribution(aRandom) <= 10)
 					{
-						uint32_t fishingSplashEntityId = aManifest->GetExistingIdByName<tpublic::Data::Entity>("fishing_splash");
+						uint32_t fishingSplashEntityId = aManifest->GetExistingIdByName<Data::Entity>("fishing_splash");
 
-						tpublic::EntityInstance* splashEntity = aEventQueue->EventQueueSpawnEntity(fishingSplashEntityId, tpublic::EntityState::ID_DEFAULT, 0, false);
+						EntityInstance* splashEntity = aEventQueue->EventQueueSpawnEntity(fishingSplashEntityId, EntityState::ID_DEFAULT, 0, false);
 
-						tpublic::Components::Position* splashPosition = splashEntity->GetComponent<tpublic::Components::Position>();
+						Components::Position* splashPosition = splashEntity->GetComponent<Components::Position>();
 						splashPosition->m_position = fishingPosition.value();
 
-						tpublic::Components::Openable* splashOpenable = splashEntity->GetComponent<tpublic::Components::Openable>();
+						Components::Openable* splashOpenable = splashEntity->GetComponent<Components::Openable>();
 						splashOpenable->m_lootTableId = map->m_mapInfo.m_defaultFishingLootTableId;
 						splashOpenable->m_requiredProfessionSkill = skillRequired;
 						splashOpenable->m_level = level;
 					}
+				}
+			}
+
+			if(triggerAbilityId != 0 && triggerAbilityChance > 0)
+			{
+				tpublic::UniformDistribution<uint32_t> distribution(1, 100);
+				if (distribution(aRandom) <= triggerAbilityChance)
+				{
+					const Data::Ability* triggerAbility = aManifest->GetById<Data::Ability>(triggerAbilityId);
+
+					aEventQueue->EventQueueAbility(aSourceEntityInstance, aTarget->GetEntityInstanceId(), Vec2(), triggerAbility);
 				}
 			}
 		}

@@ -1,3 +1,5 @@
+dialogue_screen .rod_gambil_vendor: { !TRADE_SUPPLIES {} sell recipe_herbed_snapper: { quantity: 1 cost: 50000 } }
+
 dialogue_screen .rod_gambil:
 {
 	text: 
@@ -10,6 +12,7 @@ dialogue_screen .rod_gambil:
 		{ quest<completion_only>: .warden_qoro_1 }
 		{ quest: .rod_gambil_1 }
 		{ quest: .rod_gambil_2 }
+		{ goto: .rod_gambil_vendor text: "Let me browse your goods." }
 	]
 }
 

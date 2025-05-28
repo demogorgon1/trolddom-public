@@ -785,6 +785,12 @@ sprites:
 	sprite icon_gorilla : { tags: [ icon ] }
 	sprite icon_spirit_dust : { tags: [ icon ] }
 	sprite icon_ectoplasm : { tags: [ icon ] }
+	sprite icon_fish_8 : { tags: [ icon ] }
+	sprite icon_fish_8_cooked : { tags: [ icon ] }
+	
+	cursor: { position: [ 0 688 ] }	
+	sprite icon_fish_9 : { tags: [ icon ] }
+	sprite icon_fish_9_cooked : { tags: [ icon ] }
 
 }
 

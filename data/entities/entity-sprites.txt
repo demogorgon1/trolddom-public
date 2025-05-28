@@ -866,11 +866,13 @@ sprites:
 
 	sprite giant_demon_2: { dead: giant_demon_2_dead }
 	sprite orc_wolf_rider_1: { dead: orc_wolf_rider_1_dead }
+	sprite giant_demon_3: { dead: giant_demon_3_dead }
 
 	cursor: { position: [ 0 92 ] }
 
 	sprite giant_demon_2_dead: { }	
 	sprite orc_wolf_rider_1_dead: { }	
+	sprite giant_demon_3_dead: { }	
 }
 
 sprites:
