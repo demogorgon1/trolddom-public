@@ -9,6 +9,8 @@ changelog:
 	list:
 	[
 		{ text: "Increased bonuses from Pickled Toesnapper, Steamed Trout, Seared Bass, Spicy Perch Fillet, and Mistveil Balls." }
+		{ text: "Cloth (except capes), mail armor, and two-handed weapons can no longer give block value or block chance bonuses." }
+		{ text: "Two-handed swords, maces, and axes can no longer give caster bonuses." }
 	]
 	
 	text: "Issues fixed:"

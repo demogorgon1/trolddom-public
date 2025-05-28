@@ -212,4 +212,44 @@ item_metrics:
 	offhand_dps_multiplier:					0.5
 	token_cost_base_multiplier: 			5.5
 	
+	invalid_stats:
+	{
+		item_type armor_cloth: 
+		{ 
+			ignore_equipment_slot: back
+		
+			constitution: [ block_value ]
+			dodge_chance: [ block_chance ]
+		}
+
+		item_type armor_mail: 
+		{ 
+			constitution: [ block_value ]
+			dodge_chance: [ block_chance ]
+		}
+		
+		item_type weapon_2h_sword:
+		{
+			strength: [ block_value spell_haste spell_damage healing mana_per_5 ]
+			phys_crit_chance: [ block_chance spell_crit_chance ]
+		}
+		
+		item_type weapon_2h_mace:
+		{
+			strength: [ block_value spell_haste spell_damage healing mana_per_5 ]
+			phys_crit_chance: [ block_chance spell_crit_chance ]
+		}
+
+		item_type weapon_2h_axe:
+		{
+			strength: [ block_value spell_haste spell_damage healing mana_per_5 ]
+			phys_crit_chance: [ block_chance spell_crit_chance ]
+		}
+
+		item_type weapon_2h_staff:
+		{
+			wisdom: [ block_value ]
+			spell_crit_chance: [ block_chance ]
+		}
+	}
 }

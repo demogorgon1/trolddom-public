@@ -416,6 +416,10 @@ namespace tpublic
 					aOut["weapon_damage"] = Helpers::Format("%u-%u", m_weaponDamage->m_min, m_weaponDamage->m_max).c_str();
 			}
 
+			void		PrepareRuntime( 
+							uint8_t					aRuntime,
+							const Manifest*			aManifest);
+
 			// Public data
 			std::vector<uint32_t>				m_equipmentSlots;
 			std::vector<uint32_t>				m_lootGroups;
