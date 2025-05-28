@@ -8,6 +8,7 @@ dialogue_screen .seren_virelith:
 	options:
 	[
 		{ quest<completion_only>: .joar_1 }
+		{ quest: .seren_virelith_1 }
 	]
 }
 
@@ -27,3 +28,45 @@ entity thalvaron_seren_virelith: !NPC
 
 ##########################################################################################
 # Quest 1
+
+objective .seren_virelith_1:
+{
+	string: "Satyrs Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_skaldrun_satyr_a thalvaron_skaldrun_satyr_b thalvaron_skaldrun_satyr_c ]
+		count: 10
+	}
+}
+
+quest .seren_virelith_1:
+{
+	string: "Gates of the Abyss"
+
+	text:
+	[
+		"Kill demons on the beaches of Skaldrun."
+	]
+	
+	description: 
+	[
+		"A dark demonic influence has enveloped this part of the the world. Vile creatures have crawled out of the ground and if we don't take action, they will spread north towards civilization."
+		"If you want to assist me you can start by clearing out demons from the coastal area around here."
+	]
+	
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"That's great, good job."
+	]
+
+	objectives: [ .seren_virelith_1 ]
+	level: 21
+}

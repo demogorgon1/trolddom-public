@@ -521,3 +521,29 @@ map_entity_spawn thalvaron_skaldrun_kobold:
 
 	entity thalvaron_skaldrun_kobold_c: !NPC { _string: "Kobold Oracle" _sprite: kobold_10 _sprite_dead: kobold_10_dead }
 }
+
+##########################################################################################
+# Demons
+
+map_entity_spawn thalvaron_skaldrun_satyr: 
+{ 
+	entity thalvaron_skaldrun_satyr_a: {} 
+	entity thalvaron_skaldrun_satyr_b: {} 
+	entity thalvaron_skaldrun_satyr_c: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Satyrs
+{
+	${
+		_level: 21
+		_faction: monsters
+		_creature_type: demon
+		_default_behavior_state: .wandering_short				
+		_loot_table: default_demon
+	}
+
+	entity thalvaron_skaldrun_satyr_a: !NPC { _string: "Satyr Rogue" _sprite: demon_7 _sprite_dead: demon_7_dead _abilities: [ { id: npc_rend target: random_player }{ id: npc_attack } ] }
+	entity thalvaron_skaldrun_satyr_b: !NPC { _string: "Satyr Hunter" _sprite: demon_8 _sprite_dead: demon_8_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
+	entity thalvaron_skaldrun_satyr_c: !NPC { _string: "Satyr Sorcerer" _sprite: demon_9 _sprite_dead: demon_9_dead _abilities: [ { id: npc_firebolt }{ id: npc_attack } ] }
+}

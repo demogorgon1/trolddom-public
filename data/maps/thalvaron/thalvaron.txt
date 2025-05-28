@@ -832,6 +832,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_joar: [ 40 104 194 ]
 	entity_spawn thalvaron_skaldrun_kobold: [ 140 50 90 ]
 	entity_spawn thalvaron_orm_thogore_1_quest_item: [ 240 50 90 ]
+	entity_spawn thalvaron_skaldrun_satyr: [ 103 94 115 ]
 }
 
 map_palette .levels:
