@@ -1,0 +1,57 @@
+dialogue_screen .joar:
+{
+	text: 
+	[	
+		"Greetings."
+	]
+	
+	options:
+	[
+		{ quest<offer_only>: .joar_1 }
+	]
+}
+
+entity thalvaron_joar: !NPC
+{
+	_string: "Joar"
+	_dialogue_root: $dialogue_root { .joar: { } }
+	_sprite: elf_1
+	_sprite_dead: elf_1_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+##########################################################################################
+# Quest 1
+
+quest .joar_1:
+{
+	string: "The Demon Hunter"
+
+	text:
+	[
+		"Find Seren Vireleth and offer you assistance."
+	]
+	
+	description: 
+	[
+		"If you look for adventure... We ran into a woman going by the name of Seren Vireleth, apparently some kind of demon hunter. She wanted help with dealing with some nasty demonic business, but we"
+		"figured it was probably a bit too much. Maybe you want to assist her? She set up camp quite a bit further down the coast.\n\n"
+		"Follow the road east, it will bend south and eventually it will fork. Go right down towards the sea and you'll find her."
+		
+	]
+		
+	completion:
+	[
+		"They got overwhelmed by Kobolds? Well, I hope you're more capable than them."
+	]
+
+	level: 21
+	reward_cash_multiplier: 0.2
+	reward_xp_multiplier: 0.2
+	prerequisites: [ .orm_thogore_1 ]
+}
+

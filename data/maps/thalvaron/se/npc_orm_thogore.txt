@@ -1,0 +1,109 @@
+dialogue_screen .orm_thogore:
+{
+	text: 
+	[	
+		"Kobolds! They're everywhere, aren't they?"
+	]
+	
+	options:
+	[
+		{ quest: .orm_thogore_1 }
+	]
+}
+
+entity thalvaron_orm_thogore: !NPC
+{
+	_string: "Orm Thogore"
+	_dialogue_root: $dialogue_root { .orm_thogore: { } }
+	_sprite: dwarf_1
+	_sprite_dead: dwarf_1_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+##########################################################################################
+# Quest 1
+
+objective .orm_thogore_1:
+{
+	string: "Orm's Loot"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .orm_thogore_1_quest_item count: 1 }
+}
+
+loot_group .orm_thogore_1_quest_item: {}
+
+item .orm_thogore_1_quest_item:
+{
+	icon: icon_brown_bag
+	item_level: 20
+	loot_groups: [ .orm_thogore_1_quest_item ]
+	flags: [ unique not_sellable ]
+	string: "Orm's Loot"
+}
+
+entity thalvaron_orm_thogore_1_quest_item:
+{
+	string: "Orm's Loot"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ satchel ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: $loot_table
+			{
+				slots:
+				[
+					{
+						possibility: { loot_group: .orm_thogore_1_quest_item }			
+					}		
+				]
+			}
+			verb: open
+			range: 1 
+			level: 20
+			despawn: true 		
+			required_quest: .orm_thogore_1
+		}		
+	}
+}
+
+quest .orm_thogore_1:
+{
+	string: "Overrun by Kobolds"
+
+	text:
+	[
+		"Locate Orm's bag inside the caves at Entor Spring and return it to him."
+	]
+	
+	description: 
+	[
+		"My friend here and I went exploring in the old ruins up by the Entor Spring, hoping to find some loot. We found an opening that led into some caves and suddenly smelly kobolds were all over the place.\n\n"
+		"We fought them off, but they just kept coming out of holes in the walls. Eventually we had to retreat and I dropped my bag in there somewhere. If you can retrieve it for me I'll reward you.\n\n"
+		"You'll find the ruins just north of here."
+		
+	]
+	
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Ah, that's good. Seems like they didn't touch it."
+	]
+
+	objectives: [ .orm_thogore_1 ]
+	level: 20
+}
+

@@ -2,11 +2,12 @@ dialogue_screen .seren_virelith:
 {
 	text: 
 	[	
-		"Tread carefully, orcs are hiding everywhere!"
+		"These are dark times."
 	]
 	
 	options:
 	[
+		{ quest<completion_only>: .joar_1 }
 	]
 }
 

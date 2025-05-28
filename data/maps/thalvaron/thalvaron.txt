@@ -362,6 +362,9 @@ map_entity_spawn thalvaron_benji: { entity thalvaron_benji: { init_state: defaul
 map_entity_spawn thalvaron_benji_1_quest_item: { entity thalvaron_benji_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_rod_gambil_2_quest_item: { entity thalvaron_rod_gambil_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_karl: { entity thalvaron_karl: { init_state: default } }
+map_entity_spawn thalvaron_joar: { entity thalvaron_joar: { init_state: default } }
+map_entity_spawn thalvaron_orm_thogore: { entity thalvaron_orm_thogore: { init_state: default } }
+map_entity_spawn thalvaron_orm_thogore_1_quest_item: { entity thalvaron_orm_thogore_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 
 map_palette .stuff:
 {
@@ -825,6 +828,10 @@ map_palette .stuff:
 	entity_spawn thalvaron_east_skaldrun_crab: [ 202 94 88 ]
 	entity_spawn thalvaron_karl: [ 130 41 84 ]
 	entity_spawn thalvaron_lurker_spawn: [ 30 104 94 ]
+	entity_spawn thalvaron_orm_thogore: [ 40 104 94 ]
+	entity_spawn thalvaron_joar: [ 40 104 194 ]
+	entity_spawn thalvaron_skaldrun_kobold: [ 140 50 90 ]
+	entity_spawn thalvaron_orm_thogore_1_quest_item: [ 240 50 90 ]
 }
 
 map_palette .levels:
