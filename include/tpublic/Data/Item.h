@@ -418,7 +418,7 @@ namespace tpublic
 
 			void		PrepareRuntime( 
 							uint8_t					aRuntime,
-							const Manifest*			aManifest);
+							const Manifest*			aManifest) override;
 
 			// Public data
 			std::vector<uint32_t>				m_equipmentSlots;
