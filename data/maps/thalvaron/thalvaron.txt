@@ -552,6 +552,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_gateway_2: [ 40 108 88 ]
 	entity_spawn thalvaron_tailoring_trainer: [ 30 130 33 ]
 	entity_spawn thalvaron_jim_farseer: [ 40 82 176 ]
+	entity_spawn voraghul_portal_closed: [ 206 102 91 ]
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				
@@ -833,6 +834,11 @@ map_palette .stuff:
 	entity_spawn thalvaron_skaldrun_kobold: [ 140 50 90 ]
 	entity_spawn thalvaron_orm_thogore_1_quest_item: [ 240 50 90 ]
 	entity_spawn thalvaron_skaldrun_satyr: [ 103 94 115 ]
+	entity_spawn thalvaron_skaldrun_satyr_melee: [ 35 99 128 ]
+	entity_spawn thalvaron_skaldrun_satyr_ranged: [ 135 99 128 ]
+	entity_spawn thalvaron_skaldrun_satyr_caster: [ 35 199 128 ]
+	entity_spawn thalvaron_skaldrun_demon_spawn: [ 200 199 83 ]
+	entity_spawn thalvaron_skaldrun_portal_master: [ 140 29 88 ]
 }
 
 map_palette .levels:

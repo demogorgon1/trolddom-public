@@ -827,6 +827,7 @@ sprites:
 	sprite demon_7: { dead: demon_7_dead }	
 	sprite demon_8: { dead: demon_8_dead }	
 	sprite demon_9: { dead: demon_9_dead }	
+	sprite man_73: { dead: man_73_dead }
 
 	cursor: { position: [ 0 720 ] }
 	sprite ghost_panther_1_dead: { }
@@ -837,6 +838,7 @@ sprites:
 	sprite demon_7_dead: { }	
 	sprite demon_8_dead: { }	
 	sprite demon_9_dead: { }	
+	sprite man_73_dead: { }	
 
 }
 
@@ -1018,6 +1020,12 @@ sprites:
 	sprite purple_gateway_closed_1: { }
 	sprite purple_gateway_closed_2: { }
 	sprite purple_gateway_closed_3: { }
+	sprite orange_gateway_1: { }
+	sprite orange_gateway_2: { }
+	sprite orange_gateway_3: { }
+	sprite orange_gateway_closed_1: { }
+	sprite orange_gateway_closed_2: { }
+	sprite orange_gateway_closed_3: { }
 		
 }
 

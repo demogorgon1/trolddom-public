@@ -525,6 +525,12 @@ map_entity_spawn thalvaron_skaldrun_kobold:
 ##########################################################################################
 # Demons
 
+map_entity_spawn thalvaron_skaldrun_satyr_melee: { entity thalvaron_skaldrun_satyr_melee: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_skaldrun_satyr_ranged: { entity thalvaron_skaldrun_satyr_ranged: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_skaldrun_satyr_caster: { entity thalvaron_skaldrun_satyr_caster: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_skaldrun_demon_spawn: { entity thalvaron_skaldrun_demon_spawn: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_skaldrun_portal_master: { entity thalvaron_skaldrun_portal_master: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+
 map_entity_spawn thalvaron_skaldrun_satyr: 
 { 
 	entity thalvaron_skaldrun_satyr_a: {} 
@@ -533,7 +539,7 @@ map_entity_spawn thalvaron_skaldrun_satyr:
 	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
-# Satyrs
+# Satyrs - level 21
 {
 	${
 		_level: 21
@@ -546,4 +552,50 @@ map_entity_spawn thalvaron_skaldrun_satyr:
 	entity thalvaron_skaldrun_satyr_a: !NPC { _string: "Satyr Rogue" _sprite: demon_7 _sprite_dead: demon_7_dead _abilities: [ { id: npc_rend target: random_player }{ id: npc_attack } ] }
 	entity thalvaron_skaldrun_satyr_b: !NPC { _string: "Satyr Hunter" _sprite: demon_8 _sprite_dead: demon_8_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
 	entity thalvaron_skaldrun_satyr_c: !NPC { _string: "Satyr Sorcerer" _sprite: demon_9 _sprite_dead: demon_9_dead _abilities: [ { id: npc_firebolt }{ id: npc_attack } ] }
+}
+
+# Satyrs - level 22
+{
+	${
+		_level: 22
+		_faction: monsters
+		_creature_type: demon
+		_default_behavior_state: .passive				
+		_loot_table: default_demon
+	}
+
+	entity thalvaron_skaldrun_satyr_melee: !NPC { _string: "Satyr Rogue" _sprite: demon_7 _sprite_dead: demon_7_dead _abilities: [ { id: npc_rend target: random_player }{ id: npc_attack } ] }
+	entity thalvaron_skaldrun_satyr_ranged: !NPC { _string: "Satyr Hunter" _sprite: demon_8 _sprite_dead: demon_8_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
+	entity thalvaron_skaldrun_satyr_caster: !NPC { _string: "Satyr Summoner" _sprite: demon_9 _sprite_dead: demon_9_dead _abilities: [ { id: npc_firebolt }{ id: npc_attack } ] }
+}
+
+# Spawns
+{
+	${
+		_level: 22
+		_faction: monsters
+		_creature_type: demon
+		_default_behavior_state: .wandering_short				
+		_loot_table: default_demon
+	}
+
+	entity thalvaron_skaldrun_demon_spawn: !NPC { _string: "Demonic Spawn" _sprite: demon_2 _sprite_dead: demon_2_dead _abilities: [ { id: npc_attack } ] }
+}
+
+# Portal master
+{
+	${
+		_level: 22
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short				
+		_loot_table: default_humanoid
+		_abilities: [ { id: npc_attack } ]
+		_in_combat_barks:
+		[
+			{ type: yell text: "The portal to the realm of my master has been sealed!" flags: [ no_chat_bubble ] }
+		]				
+	}
+
+	entity thalvaron_skaldrun_portal_master: !NPC { _string: "Vellith Morbain" _guild_name: "Portal Master" _sprite: man_73 _sprite_dead: man_73_dead }
 }
