@@ -2,6 +2,16 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.2.9"
+	
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Possible fix of bug where you'd die right after transfering to another map." }
+	]
+
+	#######################################################################################
 	heading: "v0.2.8"
 	
 	text: "Issues fixed:"
