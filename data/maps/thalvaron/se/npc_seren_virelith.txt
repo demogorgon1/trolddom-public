@@ -10,6 +10,7 @@ dialogue_screen .seren_virelith:
 		{ quest<completion_only>: .joar_1 }
 		{ quest: .seren_virelith_1 }
 		{ quest: .seren_virelith_2 }
+		{ quest: thalvaron_seren_virelith_3 }
 	]
 }
 
@@ -125,5 +126,47 @@ quest .seren_virelith_2:
 	prerequisites: [ .seren_virelith_1 ]
 	level: 22
 }
+
+##########################################################################################
+# Quest 3
+
+objective thalvaron_seren_virelith_3:
+{
+	string: "Locate Portal"
+	maps: [ thalvaron ]	
+	manual_boolean: { }
+}
+
+quest thalvaron_seren_virelith_3:
+{
+	string: "Chasing Voraghul"
+
+	text:
+	[
+		"Find the portal to the realm of Voraghul in the tower and return to Seren Virelith."
+	]
+	
+	description: 
+	[
+		"I can tell from these extremely hairy tentacles that Voraghul must be alive. He must be residing on another realm, preparing his comeback. If I know anything about evil wizards, and I do,"
+		"he will have a portal located somewhere in his tower. Locate this portal and return to me."
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"Yes, this is as expected. The cowardly wizard has retreated into his demonic realm of fire. The portal was sealed? I will think about a way to open it. I will find a way to reach you if I need"
+		"your assistance again."
+	]
+
+	objectives: [ thalvaron_seren_virelith_3 ]
+	prerequisites: [ .seren_virelith_2 ]
+	level: 22
+}
+
 
 

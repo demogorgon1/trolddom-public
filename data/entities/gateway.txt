@@ -292,5 +292,12 @@ entity voraghul_portal_closed:
 		{
 			string: "The portal is sealed."
 		}
+		openable: 
+		{ 
+			verb: inspect
+			range: 1 
+			required_quest: thalvaron_seren_virelith_3
+			complete_manual_objective: thalvaron_seren_virelith_3
+		}	
 	}
 }

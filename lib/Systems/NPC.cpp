@@ -156,7 +156,7 @@ namespace tpublic::Systems
 		bool despawnOnLeaveState = state != NULL && state->m_despawnOnLeave;	
 		uint32_t despawnAfterTicks = state != NULL && state->m_despawnAfterTicks;
 
-		if(despawnAfterTicks != 0 && despawnAfterTicks > (uint32_t)aTicksInState)
+		if(despawnAfterTicks != 0 && (uint32_t)aTicksInState > despawnAfterTicks)
 			return EntityState::ID_DESPAWNING;
 
 		const Data::Faction* faction = GetManifest()->GetById<Data::Faction>(combat->m_factionId);
