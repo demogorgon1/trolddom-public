@@ -11,8 +11,9 @@ dialogue_screen .rod_gambil:
 	[		
 		{ quest<completion_only>: .warden_qoro_1 }
 		{ quest: .rod_gambil_1 }
-		{ quest: .rod_gambil_2 }
+		{ quest: .rod_gambil_2 }		
 		{ goto: .rod_gambil_vendor text: "Let me browse your goods." }
+		{ quest<offer_only>: .rod_gambil_3 requirement self<must_not_have_discovered_zone>: thalvaron_jungle }
 	]
 }
 
@@ -170,3 +171,29 @@ quest .rod_gambil_2:
 	level: 21
 }
 
+##########################################################################################
+# Quest 3
+
+quest .rod_gambil_3:
+{
+	string: "The Great Jungle Hunter"
+
+	text:
+	[
+		"Find Theodore in the northern part of Xandralis."
+	]
+	
+	description: 
+	[
+		"A guy passed through here a few days ago, called himself Theodore. Claimed he was a bigshot at the hunting scene and wanted to find interesting creatures to hunt up in the Xandralis Jungle. He seemed"
+		"like a bit of a weirdo. Said he wanted to set up in the most northern part of the jungle. I think you should see if you can find him and check if he's in trouble. He looked like a common"
+		"jungle frog could swallow him whole. Travel north through this pass and you'll enter the jungle. Follow the road all the way to the north and you'll probably find him."
+	]
+	
+	completion:
+	[
+		"Ah, yes, a fellow big game hunter?"
+	]
+
+	level: 20
+}

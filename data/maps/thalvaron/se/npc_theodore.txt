@@ -7,6 +7,7 @@ dialogue_screen .theodore_greetings:
 	
 	options:
 	[
+		{ quest<completion_only>: .rod_gambil_3 }
 		{ quest: .theodore_1 }
 		{ quest: .theodore_2 }
 		{ quest: .theodore_3 }

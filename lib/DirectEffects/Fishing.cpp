@@ -108,8 +108,8 @@ namespace tpublic::DirectEffects
 
 				level = worldInfo.m_level;
 
-				const Data::Zone* subZone = worldInfo.m_zoneId != 0 ? aManifest->GetById<Data::Zone>(worldInfo.m_subZoneId) : NULL;
-				const Data::Zone* zone = worldInfo.m_subZoneId != 0 ? aManifest->GetById<Data::Zone>(worldInfo.m_zoneId) : NULL;
+				const Data::Zone* zone = worldInfo.m_zoneId != 0 ? aManifest->GetById<Data::Zone>(worldInfo.m_zoneId) : NULL;
+				const Data::Zone* subZone = worldInfo.m_subZoneId != 0 ? aManifest->GetById<Data::Zone>(worldInfo.m_subZoneId) : NULL;
 
 				if(subZone != NULL && subZone->m_fishingLootTableId != 0)
 					lootTableId = subZone->m_fishingLootTableId;
