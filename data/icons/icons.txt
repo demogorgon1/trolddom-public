@@ -791,6 +791,7 @@ sprites:
 	cursor: { position: [ 0 688 ] }	
 	sprite icon_fish_9 : { tags: [ icon ] }
 	sprite icon_fish_9_cooked : { tags: [ icon ] }
+	sprite icon_tentacle_2 : { tags: [ icon ] }
 
 }
 

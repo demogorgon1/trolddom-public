@@ -33,6 +33,7 @@ namespace tpublic
 			TYPE_BOOL,
 			TYPE_INT32,
 			TYPE_INT64,
+			TYPE_UINT8,
 			TYPE_UINT32,
 			TYPE_UINT64,
 			TYPE_FLOAT,

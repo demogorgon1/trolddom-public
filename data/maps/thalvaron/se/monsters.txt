@@ -566,20 +566,72 @@ map_entity_spawn thalvaron_skaldrun_satyr:
 
 	entity thalvaron_skaldrun_satyr_melee: !NPC { _string: "Satyr Rogue" _sprite: demon_7 _sprite_dead: demon_7_dead _abilities: [ { id: npc_rend target: random_player }{ id: npc_attack } ] }
 	entity thalvaron_skaldrun_satyr_ranged: !NPC { _string: "Satyr Hunter" _sprite: demon_8 _sprite_dead: demon_8_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
-	entity thalvaron_skaldrun_satyr_caster: !NPC { _string: "Satyr Summoner" _sprite: demon_9 _sprite_dead: demon_9_dead _abilities: [ { id: npc_firebolt }{ id: npc_attack } ] }
+	
+	entity thalvaron_skaldrun_satyr_caster: !NPC 
+	{ 
+		_string: "Satyr Summoner" _sprite: demon_9 _sprite_dead: demon_9_dead 
+		_abilities: 
+		[ 
+			{
+				target: self
+				id: $ability
+				{
+					string: "Summon Demonic Spawn"
+					range: 1
+					cast_time: 40
+					cooldowns: [ global ]
+					cooldown: $cooldown { duration: 100 }
+					flags: [ target_self ]
+					states: [ in_combat ]
+					icon: icon_poison
+					delay: 3
+
+					direct_effect spawn_entity:
+					{
+						spawn_flags: [ no_owner ]
+						entity: thalvaron_skaldrun_demon_spawn_summoner
+					}					
+				}
+			}			
+			
+			{ id: npc_firebolt target: random_player }
+			{ id: npc_attack } 
+		] 
+	}
 }
 
 # Spawns
 {
+	loot_table .seren_virelith_2_quest_item: 
+	{
+		slots:
+		[
+			{
+				possibility: 
+				{ 
+					weight: 1 
+				}
+			
+				possibility: 
+				{ 
+					weight: 1 
+					loot_group: .seren_virelith_2_quest_item 
+					requirement self<must_have_active_quest>: { id: .seren_virelith_2 }				
+				}			
+			}					
+		]	
+	}
+
 	${
 		_level: 22
 		_faction: monsters
 		_creature_type: demon
 		_default_behavior_state: .wandering_short				
-		_loot_table: default_demon
+		_loot_table: .seren_virelith_2_quest_item			
 	}
 
 	entity thalvaron_skaldrun_demon_spawn: !NPC { _string: "Demonic Spawn" _sprite: demon_2 _sprite_dead: demon_2_dead _abilities: [ { id: npc_attack } ] }
+	entity thalvaron_skaldrun_demon_spawn_summoner: !NPC { _string: "Demonic Spawn" _sprite: demon_2 _sprite_dead: demon_2_dead _abilities: [ { id: npc_attack } ] _default_despawn_after_ticks: 50 _no_kill_event: true }
 }
 
 # Portal master

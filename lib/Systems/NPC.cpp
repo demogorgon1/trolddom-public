@@ -154,6 +154,10 @@ namespace tpublic::Systems
 		}
 
 		bool despawnOnLeaveState = state != NULL && state->m_despawnOnLeave;	
+		uint32_t despawnAfterTicks = state != NULL && state->m_despawnAfterTicks;
+
+		if(despawnAfterTicks != 0 && despawnAfterTicks > (uint32_t)aTicksInState)
+			return EntityState::ID_DESPAWNING;
 
 		const Data::Faction* faction = GetManifest()->GetById<Data::Faction>(combat->m_factionId);
 
@@ -162,15 +166,18 @@ namespace tpublic::Systems
 			const Components::Tag* tag = GetComponent<Components::Tag>(aComponents);
 			if(tag->m_playerTag.IsSet())
 			{
-				if(tag->m_playerTag.IsGroup())
+				if(!npc->m_noKillEvent)
 				{
-					std::vector<uint32_t> threatEntityInstanceIds;
-					threat->m_table.GetEntityInstanceIds(threatEntityInstanceIds);
-					aContext->m_eventQueue->EventQueueGroupKillXP(tag->m_playerTag.GetGroupId(), combat->m_level, aEntityId, combat->m_factionId, threatEntityInstanceIds);
-				}
-				else if(tag->m_playerTag.IsCharacter())
-				{
-					aContext->m_eventQueue->EventQueueIndividualKillXP(tag->m_playerTag.GetCharacterId(), tag->m_playerTag.GetCharacterLevel(), combat->m_level, aEntityId, combat->m_factionId);
+					if (tag->m_playerTag.IsGroup())
+					{
+						std::vector<uint32_t> threatEntityInstanceIds;
+						threat->m_table.GetEntityInstanceIds(threatEntityInstanceIds);
+						aContext->m_eventQueue->EventQueueGroupKillXP(tag->m_playerTag.GetGroupId(), combat->m_level, aEntityId, combat->m_factionId, threatEntityInstanceIds);
+					}
+					else if (tag->m_playerTag.IsCharacter())
+					{
+						aContext->m_eventQueue->EventQueueIndividualKillXP(tag->m_playerTag.GetCharacterId(), tag->m_playerTag.GetCharacterLevel(), combat->m_level, aEntityId, combat->m_factionId);
+					}
 				}
 
 				Components::Lootable* lootable = GetComponent<Components::Lootable>(aComponents);
@@ -345,12 +352,15 @@ namespace tpublic::Systems
 								}
 							}
 						}
-						else if (topThreatEntity != NULL && aEntity->GetState() != EntityState::ID_IN_COMBAT && (!faction->IsNeutralOrFriendly() || faction->IsPVP()))
+						else if (topThreatEntity != NULL && aEntity->GetState() == EntityState::ID_DEFAULT && (!faction->IsNeutralOrFriendly() || faction->IsPVP()))
 						{
 							const Components::CombatPublic* nearbyNonPlayerCombatPublic = aEntity->GetComponent<Components::CombatPublic>();
 							int32_t aggroAssistRange = GetManifest()->m_npcMetrics.m_aggroAssistRange;
 							if(nearbyNonPlayerCombatPublic != NULL && nearbyNonPlayerCombatPublic->m_factionId == combat->m_factionId && aDistanceSquared <= aggroAssistRange * aggroAssistRange)
-								aContext->m_eventQueue->EventQueueThreat({ topThreatEntity->GetEntityInstanceId(), topThreatEntity->GetSeq() }, aEntity->GetEntityInstanceId(), 1, threat->m_table.GetTick());
+							{	
+								int32_t threatTick = aContext->m_tick; // threat->m_table.GetTick(); (FIXME: which makes most sense)
+								aContext->m_eventQueue->EventQueueThreat({ topThreatEntity->GetEntityInstanceId(), topThreatEntity->GetSeq() }, aEntity->GetEntityInstanceId(), 1, threatTick);
+							}
 						}
 					}
 
@@ -991,7 +1001,9 @@ namespace tpublic::Systems
 								npc->m_npcMovement.Reset(aContext->m_tick);
 
 								if(useAbility->IsOffensive())
+								{
 									npc->m_lastAttackTick = aContext->m_tick;
+								}
 
 								float cooldownModifier = 0.0f;
 								if(useAbility->IsAttack() && useAbility->IsMelee())

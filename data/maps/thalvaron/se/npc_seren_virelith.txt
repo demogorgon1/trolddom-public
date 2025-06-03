@@ -9,6 +9,7 @@ dialogue_screen .seren_virelith:
 	[
 		{ quest<completion_only>: .joar_1 }
 		{ quest: .seren_virelith_1 }
+		{ quest: .seren_virelith_2 }
 	]
 }
 
@@ -70,3 +71,59 @@ quest .seren_virelith_1:
 	objectives: [ .seren_virelith_1 ]
 	level: 21
 }
+
+##########################################################################################
+# Quest 2
+
+loot_group .seren_virelith_2_quest_item: { }
+
+item .seren_virelith_2_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .seren_virelith_2_quest_item ]		
+	string: "Hairy Tentacle" 
+	icon: icon_tentacle_2
+	stack: 8
+	item_level: 22
+	quest: .seren_virelith_2
+	flags: [ not_sellable ]
+}
+
+objective .seren_virelith_2:
+{
+	string: "Hairy Tentacles"
+	collect_items: { item: .seren_virelith_2_quest_item count: 8 }
+}
+
+quest .seren_virelith_2:
+{
+	string: "Tower of Voraghul"
+
+	text:
+	[
+		"Slay demonic spawns in the Tower of Voraghul, collect their tencacles, and return to Seren Virelith."
+	]
+	
+	description: 
+	[
+		"If you follow this road south you'll find a bridge that will take you to a rocky island, just off the coast. This is where the Tower of Voraghul is located.\n\n"
+		"Voraghul was an demonologist who signed an evil contract with some creature from beyond. He was vanquished a long time ago and everyone assumed that he is dead and gone. But is he really?"
+		"This demonic activity could be a sign that he is back. I need you to venture into the tower and slay demonic spawns and collect their tentacles. Bring them back to me."
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"Nice. Very nice."
+	]
+
+	objectives: [ .seren_virelith_2 ]
+	prerequisites: [ .seren_virelith_1 ]
+	level: 22
+}
+
+

@@ -88,6 +88,7 @@
 				<exists _default_trigger_ability> trigger_ability: @_default_trigger_ability
 				<exists _default_on_enter_ability> on_enter_ability: @_default_on_enter_ability				
 				<exists _default_abilities> abilities: @_default_abilities
+				<exists _default_despawn_after_ticks> despawn_after_ticks: @_default_despawn_after_ticks
 			}
 			
 			state in_combat:
@@ -132,6 +133,7 @@
 			<exists _max_leash_distance> max_leash_distance: @_max_leash_distance						
 			<exists _melee_push_priority> melee_push_priority: @_melee_push_priority
 			<exists _display_name_when_dead> display_name_when_dead: @_display_name_when_dead
+			<exists _no_kill_event and _no_kill_event> no_kill_event: @_no_kill_event
 		}		
 		sprite<static>: 
 		{ 

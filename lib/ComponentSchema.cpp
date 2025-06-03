@@ -180,14 +180,23 @@ namespace tpublic
 						}
 						break;
 
+					case TYPE_UINT8:
+						{
+							uint8_t* t = (uint8_t*)&(((const uint8_t*)aObject)[field->m_offset]);
+				
+							if (field->m_flags & FLAG_ENTITY_STATE)
+								*t = EntityState::StringToId(aChild->GetIdentifier());
+							else
+								*t = aChild->GetUInt8();
+						}
+						break;
+
 					case TYPE_UINT32:
 						{
 							uint32_t* t = (uint32_t*)&(((const uint8_t*)aObject)[field->m_offset]);
 				
 							if (field->m_dataType != DataType::INVALID_ID)
 								*t = aChild->GetId(field->m_dataType);
-							else if (field->m_flags & FLAG_ENTITY_STATE)
-								*t = EntityState::StringToId(aChild->GetIdentifier());
 							else
 								*t = aChild->GetUInt32();
 						}
@@ -539,6 +548,16 @@ namespace tpublic
 			}
 			break;
 
+		case TYPE_UINT8:
+			{
+				uint8_t* t = (uint8_t*)&(((const uint8_t*)aObject)[field->m_offset]);
+				uint32_t tmp = 0;
+				int32_t result = sscanf(p, "%u", &tmp);
+				TP_CHECK(result == 1 && tmp >= 0 && tmp <= 255, "Invalid value.");
+				*t = (uint8_t)tmp;
+			}
+			break;
+
 		case TYPE_UINT32:
 			{
 				uint32_t* t = (uint32_t*)&(((const uint8_t*)aObject)[field->m_offset]);
@@ -642,6 +661,7 @@ namespace tpublic
 		case TYPE_BOOL:				return sizeof(bool);
 		case TYPE_INT32:			return sizeof(int32_t);
 		case TYPE_INT64:			return sizeof(int64_t);
+		case TYPE_UINT8:			return sizeof(uint8_t);
 		case TYPE_UINT32:			return sizeof(uint32_t);
 		case TYPE_UINT64:			return sizeof(uint64_t);
 		case TYPE_FLOAT:			return sizeof(float);
@@ -728,6 +748,13 @@ namespace tpublic
 			{
 				const int64_t* t = (const int64_t*)&(((const uint8_t*)aObject)[aField->m_offset]);
 				aWriter->WriteInt(*t);
+			}
+			break;
+
+		case TYPE_UINT8:
+			{
+				const uint8_t* t = (const uint8_t*)&(((const uint8_t*)aObject)[aField->m_offset]);
+				aWriter->WritePOD(*t);
 			}
 			break;
 
@@ -828,6 +855,14 @@ namespace tpublic
 			}
 			break;
 
+		case TYPE_UINT8:
+			{
+				uint8_t* t = (uint8_t*)&(((const uint8_t*)aObject)[offset]);
+				if(!aReader->ReadPOD(*t))
+					return false;
+			}
+			break;
+
 		case TYPE_UINT32:
 			{
 				uint32_t* t = (uint32_t*)&(((const uint8_t*)aObject)[offset]);
@@ -917,6 +952,13 @@ namespace tpublic
 			{
 				const int64_t* t = (const int64_t*)&(((const uint8_t*)aObject)[aField->m_offset]);
 				TP_STRING_FORMAT(buffer, sizeof(buffer), "%zd", *t);
+			}
+			break;
+
+		case TYPE_UINT8:
+			{
+				const uint8_t* t = (const uint8_t*)&(((const uint8_t*)aObject)[aField->m_offset]);
+				TP_STRING_FORMAT(buffer, sizeof(buffer), "%u", (uint32_t)*t);
 			}
 			break;
 
