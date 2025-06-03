@@ -9,6 +9,7 @@ changelog:
 	list:
 	[
 		{ text: "Possible fix of bug where you'd die right after transfering to another map." }
+		{ text: "Fixed bug that would happen whenever someone fished." }
 	]
 
 	#######################################################################################
