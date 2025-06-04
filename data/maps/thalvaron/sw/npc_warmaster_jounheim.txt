@@ -11,6 +11,7 @@ dialogue_screen .warmaster_jounheim_dialogue:
 		{ quest<completion_only>: .badlands_orc }
 		{ quest: .warmaster_jounheim_2 }
 		{ quest<completion_only>: thalvaron_skaldrun_shore_orc_boss_quest_item }
+		{ quest: .warmaster_jounheim_3 }
 	]
 }
 
@@ -153,3 +154,50 @@ quest .warmaster_jounheim_2:
 	prerequisites: [ .badlands_orc ]
 	reward_one_item: [ .warmaster_jounheim_2_a .warmaster_jounheim_2_b .warmaster_jounheim_2_c ]
 }
+
+############################################################
+# Quest 3
+
+objective .warmaster_jounheim_3:
+{
+	string: "Karthul Blackfang Slain"
+	
+	maps: [ durgan_urok ]
+	
+	kill_npc:
+	{
+		entities: [ durgan_urok_boss_5 ]
+		count: 1
+	}
+}
+
+quest .warmaster_jounheim_3:
+{
+	string: "Decapitation of the Skullforge Clan"
+
+	text:
+	[
+		"Travel into Durgan Urok, find Karthul Blackfang, kill him, and return to Warmaster Jounheim."
+	]
+	
+	description: 
+	[
+		"The Skullforge attack plans mention an orc going by the name of Karthul Blackfang. He is clearly one of the leaders of the clan and has set up residence inside the old dwarven fortress of Durgan Urok."
+		"It wearies my soul that such a wonderful, albeit long uninhabited, place has fallen to the orcs. You should venture into Durgan Urok and track down this orc warlord and defeat him. Make sure he is dead."
+	]
+
+	progress:
+	[
+		"Why are you still here?"
+	]
+	
+	completion:
+	[
+		"Great. Maybe it's time for dwarves to return to Durgan Urok."
+	]
+	
+	objectives: [ .warmaster_jounheim_3 ]
+	level: 23
+	prerequisites: [ thalvaron_skaldrun_shore_orc_boss_quest_item ]
+}
+	

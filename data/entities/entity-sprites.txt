@@ -828,6 +828,7 @@ sprites:
 	sprite demon_8: { dead: demon_8_dead }	
 	sprite demon_9: { dead: demon_9_dead }	
 	sprite man_73: { dead: man_73_dead }
+	sprite golem_1: { dead: golem_1_dead }
 
 	cursor: { position: [ 0 720 ] }
 	sprite ghost_panther_1_dead: { }
@@ -839,6 +840,7 @@ sprites:
 	sprite demon_8_dead: { }	
 	sprite demon_9_dead: { }	
 	sprite man_73_dead: { }	
+	sprite golem_1_dead: { }	
 
 }
 

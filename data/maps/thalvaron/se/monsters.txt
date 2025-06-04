@@ -390,6 +390,7 @@ map_entity_spawn thalvaron_skaldrun_shore_orc:
 # Durgan Urok
 
 map_entity_spawn thalvaron_durgan_urok_orc_boss: { entity thalvaron_durgan_urok_orc_boss: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_durgan_urok_golem: { entity thalvaron_durgan_urok_golem: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
 
 map_entity_spawn thalvaron_durgan_urok_orc: 
 { 
@@ -413,6 +414,33 @@ map_entity_spawn thalvaron_durgan_urok_orc:
 	entity thalvaron_durgan_urok_orc_b: !NPC { _string: "Skullforge Guard" _sprite: orc_2 _sprite_dead: orc_2_dead }
 	entity thalvaron_durgan_urok_orc_c: !NPC { _string: "Skullforge Ranger" _sprite: orc_5 _sprite_dead: orc_5_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
 	entity thalvaron_durgan_urok_orc_boss: !NPC { _string: "Commander Throgar" _sprite: goblin_boss _sprite_dead: goblin_boss_dead }
+}
+
+# Golems
+{
+	loot_table .durgan_urok_golem: 
+	{
+		slots:
+		[
+			{
+				possibility: 
+				{ 
+					loot_group: thalvaron_mumle_whiterock_3_quest_item 
+					requirement self<must_have_active_quest>: { id: thalvaron_mumle_whiterock_3 }				
+				}			
+			}					
+		]	
+	}
+
+	${
+		_level: 22
+		_faction: monsters
+		_creature_type: elemental
+		_default_behavior_state: .passive
+		_loot_table: .durgan_urok_golem
+	}
+
+	entity thalvaron_durgan_urok_golem: !NPC { _string: "Ancient Golem" _sprite: golem_1 _sprite_dead: golem_1_dead _abilities: [ { id: npc_attack } ] }
 }
 
 ##########################################################################################

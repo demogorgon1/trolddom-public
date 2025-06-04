@@ -839,6 +839,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_skaldrun_satyr_caster: [ 35 199 128 ]
 	entity_spawn thalvaron_skaldrun_demon_spawn: [ 200 199 83 ]
 	entity_spawn thalvaron_skaldrun_portal_master: [ 140 29 88 ]
+	entity_spawn thalvaron_durgan_urok_golem: [ 240 49 133 ]
 }
 
 map_palette .levels:
