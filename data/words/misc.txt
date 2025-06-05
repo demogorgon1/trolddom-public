@@ -1,22 +1,23 @@
-word_list: { strings: [ "Viper" "Snake" "Serpent" "Adder" "Asp" "Anaconda" "Python" ] tags: [ noun creature snake dangerous evil ] }
-word_list: { strings: [ "Wolf" "Lion" "Tiger" "Panther" "Cougar" "Jaguar" "Jackal" "Leopard" "Bear" ] tags: [ noun creature predator ] }
-word_list: { strings: [ "Dragon" "Drake" "Wyvern" "Manticore" "Basilisk" "Hydra" "Kraken" "Sphinx" "Giant" ] tags: [ noun creature monster dangerous ] }
+word_list: { strings: [ "Viper" "Snake" "Serpent" "Adder" "Asp" "Anaconda" "Python" "Worm" ] tags: [ noun creature snake dangerous evil ] }
+word_list: { strings: [ "Wolf" "Lion" "Tiger" "Panther" "Cougar" "Jaguar" "Jackal" "Leopard" "Bear" "Hyena" "Rat" "Bat" "Lizard" ] tags: [ noun creature predator ] }
+word_list: { strings: [ "Dragon" "Drake" "Wyvern" "Manticore" "Basilisk" "Hydra" "Kraken" "Sphinx" "Giant" "Chimera" "Cockatrice" "Harpy" "Minotaur" "Troll" "Ogre" ] tags: [ noun creature monster dangerous ] }
 
-word_list: { strings: [ "Adversary" "Devourer" "Nightmare" "Horror" "Phantasm" "Incubus" "Familiar" "Cambion" "Liar" "Succubus" "Inquisitor" ] tags: [ noun evil ] }
+word_list: { strings: [ "Adversary" "Devourer" "Nightmare" "Horror" "Phantasm" "Incubus" "Familiar" "Cambion" "Liar" "Succubus" "Inquisitor" "Glutton" "Predator" "Fiend" "Specter" "Revenant" "Wraith" "Cyclops" "Vampire" "Lich" "Leviathan" ] tags: [ noun evil ] }
 word_list: { strings: [ "Beholder" "Berserker" "Witness" "Watcher" "Observer" "Slayer" ] tags: [ noun ] }
-word_list: { strings: [ "Dreamer" "Elder" "Ancient" ] tags: [ noun mysterious ] }
+word_list: { strings: [ "Dreamer" "Elder" "Ancient" "Tempest" ] tags: [ noun mysterious ] }
 
 word_list: { strings: [ "Repugnant" "Vile" "Hateful" "Corrupt" "Vicious" "Malevolent" "Hideous" "Nefarious" "Ugly" "Beastly" "Wicked" "Depraved" "Calamitious" "Baneful" "Atrocious" "Damned"
-		     		  "Execrable" "Iniquitous" "Injurious" "Loathsome" "Maleficient" "Malignant" "Obscene" "Rancorous" "Repulsive" "Revolting" "Spiteful" "Stinking" "Wrathful" "Angry"
-				      "Bitter" "Bloody" "Deadly" "Dirty" "Cruel" "Destructive" "Fatal" "Harmful" "Lethal" "Toxic" "Noxious" "Murderous" "Pestilent" "Violent" "Infernal" ] tags: [ adjective evil ] }
+						"Execrable" "Iniquitous" "Injurious" "Loathsome" "Maleficient" "Malignant" "Obscene" "Rancorous" "Repulsive" "Revolting" "Spiteful" "Stinking" "Wrathful" "Angry"
+						"Bitter" "Bloody" "Deadly" "Dirty" "Cruel" "Destructive" "Fatal" "Harmful" "Lethal" "Toxic" "Noxious" "Murderous" "Pestilent" "Violent" "Infernal" ] tags: [ adjective evil ] }
 
 word_list: { strings: [ "Crazy" "Deep" "Old" "Fat" "Large" "Mad" "Skinny" "Strange" "Weird" "Wild" "Immortal" "Endless" "Enduring" "Pretty"	"Absurd"
-                      "Eternal" "Everlasting" "Indestructible" "Timeless" "Undying" "Deathless" "Bleak" ] tags: [ adjective ] }					  
+						"Eternal" "Everlasting" "Indestructible" "Timeless" "Undying" "Deathless" "Bleak" ] tags: [ adjective ] }					  
 word_list: { strings: [ "Delirious" "Demented" "Foolish" "Deranged" ] tags: [ character_adjective ] }
 word_list: { strings: [ "Clever" "Fit" "Healthy" "Polite" "Shy" "Sincere" "Strong" "Young" "Adventurous" "Fearless" "Confident" "Unafraid" "Undaunted" "Rational" "Resourceful" "Courteous" "Quiet" ] tags: [ character_adjective ] }
 
-word_list: { strings: [ "Bold" "Humble" "Clean" "Pure" "Sharp" "Heroic" "Resolute" "Daring" "Courageous" "Audacious" "Gallant" "Forward" "Dauntless" "Valiant" "Valorous" "Elegant" "Orderly" "Flauntless" "Able" "Adept" "Cunning" "Apt"
-                      "Astute" "Sagacious" "Savvy" "Brilliant" "Modest" "Incorruptible" ] tags: [ adjective good ] }												 
+word_list: { strings: [ "Bold" "Humble" "Clean" "Pure" "Sharp" "Heroic" "Resolute" "Daring" "Courageous" "Audacious" "Gallant" "Forward" "Dauntless" "Valiant" "Valorous" "Elegant" "Orderly" 
+						"Flauntless" "Able" "Adept" "Cunning" "Apt"
+						"Astute" "Sagacious" "Savvy" "Brilliant" "Modest" "Incorruptible" ] tags: [ adjective good ] }												 
 
 word_list: { strings: [ "Grey" "Black" "Ebon" "Dark" ] tags: [ adjective color evil ] }
 word_list: { strings: [ "Red" "Green" "Blue" "Brown" "Purple" ] tags: [ adjective color ] }

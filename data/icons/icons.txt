@@ -793,6 +793,18 @@ sprites:
 	sprite icon_fish_9_cooked : { tags: [ icon ] }
 	sprite icon_tentacle_2 : { tags: [ icon ] }
 	sprite icon_rune_stone_1 : { tags: [ icon ] }
+	sprite icon_sword_15 : { tags: [ icon weapon_1h_sword weapon_2h_sword ] icon_meta_data: !ICON_UNCOMMON_11{} }
+	sprite icon_knife_5 : { tags: [ icon weapon_1h_knife ] icon_meta_data: !ICON_UNCOMMON_11{} }
+	sprite icon_axe_8 : { tags: [ icon weapon_1h_axe weapon_2h_axe ] icon_meta_data: !ICON_UNCOMMON_11{} }
+	sprite icon_axe_9 : { tags: [ icon weapon_1h_axe weapon_2h_axe ] icon_meta_data: !ICON_UNCOMMON_11{} }
+	sprite icon_axe_10 : { tags: [ icon weapon_1h_axe weapon_2h_axe ] icon_meta_data: !ICON_UNCOMMON_11{} }
+	sprite icon_mace_12 : { tags: [ icon weapon_1h_mace weapon_2h_mace ] icon_meta_data: !ICON_UNCOMMON_11{} }
+	sprite icon_mace_13 : { tags: [ icon weapon_1h_mace weapon_2h_mace ] icon_meta_data: !ICON_UNCOMMON_11{} }
+	sprite icon_mace_14 : { tags: [ icon weapon_1h_mace weapon_2h_mace ] icon_meta_data: !ICON_UNCOMMON_11{} }
+	sprite icon_mace_15 : { tags: [ icon weapon_1h_mace weapon_2h_mace ] icon_meta_data: !ICON_UNCOMMON_11{} }
+	sprite icon_sword_16 : { tags: [ icon weapon_1h_sword weapon_2h_sword ] icon_meta_data: !ICON_UNCOMMON_11{} }
+	sprite icon_staff_11 : { tags: [ icon weapon_2h_staff ] icon_meta_data: !ICON_UNCOMMON_11{} }
+	sprite icon_staff_12 : { tags: [ icon weapon_2h_staff ] icon_meta_data: !ICON_UNCOMMON_11{} }
 
 }
 
