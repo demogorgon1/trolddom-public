@@ -198,6 +198,7 @@ quest .warmaster_jounheim_3:
 	
 	objectives: [ .warmaster_jounheim_3 ]
 	level: 23
+	type: dungeon
 	prerequisites: [ thalvaron_skaldrun_shore_orc_boss_quest_item ]
 }
 	

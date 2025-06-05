@@ -9,6 +9,7 @@ dialogue_screen .brill_craigsworth:
 	[
 		{ quest<offer_only>: .brill_craigsworth_1 }
 		{ quest: .brill_craigsworth_2 }
+		{ quest: .brill_craigsworth_3 }
 	]
 }
 
@@ -153,3 +154,87 @@ quest .brill_craigsworth_2:
 	level: 20	
 }
 
+##########################################################################################
+# Quest 3
+
+item .brill_craigsworth_3_quest_item:
+{
+	string: "Ghost Puffball" 
+	icon: icon_mushroom_1
+	loot_groups: [ .brill_craigsworth_3_quest_item ]
+	item_level: 20
+	stack: 6
+	flags: [ not_sellable ]
+}	
+
+objective .brill_craigsworth_3:  
+{
+	string: "Ghost Puffballs"
+	collect_items: { item: .brill_craigsworth_3_quest_item count: 6 }
+}
+
+loot_group .brill_craigsworth_3_quest_item: {}
+
+loot_table .brill_craigsworth_3_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .brill_craigsworth_3_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_brill_craigsworth_3_quest_item:
+{
+	string: "Ghost Puffball"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ mushroom_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .brill_craigsworth_3_quest_item
+			verb: pick
+			range: 1 
+			despawn: true 			
+			level: 22
+			required_quest: .brill_craigsworth_3
+		}		
+	}
+}
+
+quest .brill_craigsworth_3:
+{
+	string: "Ghosts of Durgan Urok"
+
+	text:
+	[
+		"Venture into Durgan Urok, collect mushrooms, and return them to Brill Craigsworth."
+	]
+	
+	description: 
+	[
+		"I have one last ask of you, which might be a bit more dangerous. I don't know if you've heard about Durgan Urok, an abandoned dwarven underground stronghold in the mountains south west of here."
+		"The gates have been blocked off for a very long time, but now they're open, I've heard.\n\n"
+		"Caves of that area have always been known to be home to a very rare type of mushroom, the so-called Ghost Puffball. They're highly coveted so they usually get picked quickly when they're"
+		"found somewhere. Anyway, since Durgan Urok has been sealed off for such a long time, I figured that maybe it's possible to find Ghost Puffballs there. If you at some point go there, maybe you can see"
+		"if you can find some and bring them back to me?"
+	]
+	
+	progress:
+	[
+		"No hurry, I got plenty of time."
+	]
+	
+	completion:
+	[
+		"Ohh, how exciting! Here, got something for you in return."
+	]
+
+	objectives: [ .brill_craigsworth_3 ]
+	prerequisites: [ .brill_craigsworth_2 ]
+	level: 22
+}

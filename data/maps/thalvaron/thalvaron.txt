@@ -365,6 +365,7 @@ map_entity_spawn thalvaron_karl: { entity thalvaron_karl: { init_state: default 
 map_entity_spawn thalvaron_joar: { entity thalvaron_joar: { init_state: default } }
 map_entity_spawn thalvaron_orm_thogore: { entity thalvaron_orm_thogore: { init_state: default } }
 map_entity_spawn thalvaron_orm_thogore_1_quest_item: { entity thalvaron_orm_thogore_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_brill_craigsworth_3_quest_item: { entity thalvaron_brill_craigsworth_3_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 
 map_palette .stuff:
 {
@@ -840,6 +841,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_skaldrun_demon_spawn: [ 200 199 83 ]
 	entity_spawn thalvaron_skaldrun_portal_master: [ 140 29 88 ]
 	entity_spawn thalvaron_durgan_urok_golem: [ 240 49 133 ]
+	entity_spawn thalvaron_brill_craigsworth_3_quest_item: [ 30 30 170 ]
 }
 
 map_palette .levels:
