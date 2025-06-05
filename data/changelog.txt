@@ -8,6 +8,7 @@ changelog:
 	
 	list:
 	[
+		{ text: "Fixed client crash caused by talents UI." }	
 		{ text: "Some server stability issues fixed." }
 	]
 
