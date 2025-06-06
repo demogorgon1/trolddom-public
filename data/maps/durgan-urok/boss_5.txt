@@ -67,7 +67,7 @@ entity durgan_urok_boss_5_mounted: !NPC
 	_display_name_when_dead: "Drokha"
 	_inactive_encounter_despawn: true
 	_inactive_encounter_despawn_state: dead
-	
+		
 	_dead_on_enter_ability: $ability
 	{
 		flags: [ target_self can_target_dead ]
@@ -82,6 +82,37 @@ entity durgan_urok_boss_5_mounted: !NPC
 
 	_abilities: 
 	[
+		{
+			requirement self<must_have_less_health_than>: 40
+			target: self
+			id: $ability
+			{
+				string: "Frenzy"
+				cast_time: 10
+				cooldowns: [ global]
+				cooldown: $cooldown { duration: 180 }
+				flags: [ target_self ]
+				icon: icon_stuff 
+
+				direct_effect apply_aura:
+				{	
+					aura: $aura [ string icon ]
+					{
+						type: buff
+						duration: 60
+						flags: [ unique ]
+						color_effect: [ 255 0 0 ]
+						stat_modifiers:	{ attack_haste: { add: 60 } }
+					}
+				}
+			}
+		}
+	
+		{
+			requirement self<must_have_less_health_than>: 95
+			id: npc_rend
+		}
+		
 		{
 			id: npc_attack
 		}
@@ -139,13 +170,41 @@ entity durgan_urok_boss_5: !NPC
 		}					
 	}
 
-	_in_combat_barks:
-	[
-		{ type: yell text: "You'll pay for this!" flags: [ no_chat_bubble ] }
-	]		
+	_in_combat_barks: [ { type: yell text: "You'll pay for this!" flags: [ no_chat_bubble ] } ]		
+	_dead_barks: [ { type: say text: "The Skullforge cannot be stopped... You will regret this..." flags: [ no_chat_bubble ] } ]
 
 	_abilities: 
-	[
+	[	
+		{
+			requirement self<must_have_less_health_than>: 90
+			target: self
+			id: $ability
+			{
+				string: "Shield Block"
+				cooldowns: [ global]
+				cooldown: $cooldown { duration: 120 }
+				flags: [ target_self ]
+				icon: icon_block
+
+				direct_effect apply_aura:
+				{	
+					aura: $aura [ string icon ]
+					{
+						type: buff
+						duration: 30
+						flags: [ unique ]
+						aura_effect damage_input_modifier: { type_mask: [ physical] multiplier: 0.5 }
+					}
+				}
+			}
+		}
+
+		{
+			requirement self<must_have_less_health_than>: 95
+			target: random_player
+			id: npc_mortal_strike_non_instant			
+		}
+	
 		{
 			id: npc_attack
 		}
