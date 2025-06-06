@@ -102,7 +102,8 @@ namespace tpublic
 				FLAG_ALWAYS_SELF_APPLIED	= 0x00080000,
 				FLAG_UNIQUE_PER_SOURCE		= 0x00100000,
 				FLAG_NO_MOUNT				= 0x00200000,
-				FLAG_EFFECTS_AS_CHARGES		= 0x00400000
+				FLAG_EFFECTS_AS_CHARGES		= 0x00400000,
+				FLAG_IGNORE_IMMUNITIES		= 0x00800000
 			};
 
 			static Type
@@ -175,6 +176,8 @@ namespace tpublic
 						flags |= FLAG_NO_MOUNT;
 					else if (strcmp(string, "effects_as_charges") == 0)
 						flags |= FLAG_EFFECTS_AS_CHARGES;
+					else if (strcmp(string, "ignore_immunities") == 0)
+						flags |= FLAG_IGNORE_IMMUNITIES;
 					else
 						TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid aura flag.", string);
 				});
@@ -375,6 +378,7 @@ namespace tpublic
 			bool IsStacking() const { return m_maxStack > 1; }
 			bool IsUniquePerSource() const { return m_flags & FLAG_UNIQUE_PER_SOURCE; }
 			bool IsUnique() const { return m_flags & FLAG_UNIQUE; }
+			bool ShouldIgnoreImmunities() const { return m_flags & FLAG_IGNORE_IMMUNITIES; }
 
 			// Public data
 			std::string										m_string;

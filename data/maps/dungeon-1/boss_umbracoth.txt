@@ -194,7 +194,7 @@ aura .goblin_cultist:
 	icon: icon_stun
 	type: debuff
 	duration: 120
-	flags: [ unique ]
+	flags: [ unique ignore_immunities ]
 	aura_effect stun: { }
 	aura_effect damage_input_modifier: { type_mask: [ all ] multiplier_num: 0 }
 }

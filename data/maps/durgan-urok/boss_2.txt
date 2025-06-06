@@ -8,7 +8,7 @@ loot_table .boss_2:
 	slots:
 	[
 		{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
-		  map_message durgan_urok: "Boss 2 will not drop Token of Victory for {}." } } }
+		  map_message durgan_urok: "Drokhan the Cleaver will not drop Token of Victory for {}." } } }
 		{ possibility: { loot_group: .boss_2  } }			
 		!WORLD_DROPS{}		
 	]	
@@ -46,16 +46,16 @@ encounter .boss_2:
 
 entity durgan_urok_boss_2: !NPC 
 { 
-	_string: "Boss 2" 
+	_string: "Drokhan the Cleaver" 
 	_level: 22
 	_elite: true
 	_faction: monsters 
-	_sprite: wolf_1
-	_sprite_dead: wolf_1_dead 
+	_sprite: orc_15
+	_sprite_dead: orc_15_dead 
 	_weapon_damage: 1.8
 	_resource_health: 6
 	_loot_table: .boss_2
-	_creature_type: beast
+	_creature_type: humanoid
 	_encounter: .boss_2
 	_zone: .boss_2
 	_out_of_zone_action: { evade: true }
@@ -63,9 +63,63 @@ entity durgan_urok_boss_2: !NPC
 	_immune_to_immobilize: true
 	_immune_to_slow: true
 	_default_behavior_state: $npc_behavior_state { on_route<durgan_urok_default_patrol>: .patrol behavior: do_nothing }
+	_in_combat_barks: [ { type: yell text: "You challenge me?! Foolish!" flags: [ no_chat_bubble ] } ]	
+	_dead_barks: [ { type: say text: "Urgh... You will not succeed..." flags: [ no_chat_bubble ] } ]
 
 	_abilities: 
 	[
+		{
+			target: random_player
+			requirement self<must_have_less_health_than>: 90
+			barks: 
+			[ 
+				{ type: yell text: "What are you looking at?!" flags: [ no_chat_bubble ] } 
+				{ type: yell text: "Taste my axe!" flags: [ no_chat_bubble ] } 
+			]
+			id: $ability
+			{
+				string: "Fixate"
+				range: 10
+				cast_time: 30
+				cooldowns: [ global ]
+				cooldown: $cooldown { duration: 180 } 
+				flags: [ offensive target_other target_hostile ]
+				states: [ in_combat ]
+				icon: icon_aggressive
+				delay: 3
+
+				direct_effect apply_aura: 
+				{
+					aura: $aura @durgan_urok_boss_2_aura_1 [ string icon ]
+					{
+						description: "You should probably run away."
+						type: debuff
+						duration: 80
+						flags: [ unique ]
+					}
+				}	
+
+				direct_effect apply_aura: 
+				{
+					flags: [ reverse ]	
+					source_redirect: refresh
+				
+					aura: $aura @durgan_urok_boss_2_aura_2 [ string icon ]
+					{
+						description: "Enraged."
+						type: buff
+						duration: 80
+						flags: [ unique ignore_immunities ]
+						color_effect: [ 255 0 0 ]
+						
+						aura_effect move_speed_modifier: { move_speed: slow }							
+						aura_effect taunt: { }						
+						aura_effect damage_output_modifier: { type_mask: [ physical ] multiplier: 2 }						
+					}
+				}					
+			}			
+		}
+		
 		{
 			id: npc_attack
 		}

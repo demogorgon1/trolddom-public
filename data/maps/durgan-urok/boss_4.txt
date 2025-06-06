@@ -8,7 +8,7 @@ loot_table .boss_4:
 	slots:
 	[
 		{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
-		  map_message durgan_urok: "Boss 4 will not drop Token of Victory for {}." } } }
+		  map_message durgan_urok: "Vornak Bonechant will not drop Token of Victory for {}." } } }
 		{ possibility: { loot_group: .boss_4  } }			
 		!WORLD_DROPS{}		
 	]	
@@ -46,12 +46,12 @@ encounter .boss_4:
 
 entity durgan_urok_boss_4: !NPC 
 { 
-	_string: "Boss 4" 
+	_string: "Vornak Bonechant" 
 	_level: 22
 	_elite: true
 	_faction: monsters 
-	_sprite: wolf_1
-	_sprite_dead: wolf_1_dead 
+	_sprite: orc_11
+	_sprite_dead: orc_11_dead 
 	_weapon_damage: 1.8
 	_resource_health: 6
 	_loot_table: .boss_4
@@ -66,6 +66,61 @@ entity durgan_urok_boss_4: !NPC
 
 	_abilities: 
 	[
+		{
+			requirement self<must_have_less_health_than>: 80			
+			target: self
+			id: $ability
+			{
+				string: "Curse of the Skullforge"
+				cooldowns: [ global ]
+				cooldown: $cooldown { duration: 180 }
+				flags: [ target_self ]
+				icon: icon_stuff 
+
+				direct_effect apply_aura:
+				{	
+					aura: $aura [string icon ]
+					{
+						type: buff
+						duration: based_on_effects
+						flags: [ unique channeled ]
+						aura_effect repeat:
+						{
+							update_interval: 15
+							update_count: 4
+							ability: $ability [string icon]							
+							{
+								flags: [ target_self target_aoe target_aoe_hostile ]
+								delay: 3
+								aoe_radius: 12
+								aoe_cap: 10
+								aoe_requirement target<must_not_be_in_state>: { id: dead }	
+
+								direct_effect damage:
+								{
+									damage_type: physical
+									function: 55											
+								}														
+							}
+						}
+						
+					}
+				}									
+			}
+		}
+
+		{
+			requirement self<must_have_less_health_than>: 95					
+			target: random_player
+			id: npc_curse
+		}
+
+		{
+			requirement self<must_have_less_health_than>: 60
+			target: low_health_friend_or_self
+			id: npc_heal
+		}
+	
 		{
 			id: npc_attack
 		}

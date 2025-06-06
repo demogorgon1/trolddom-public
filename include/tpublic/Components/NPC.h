@@ -142,6 +142,8 @@ namespace tpublic
 							m_requirements.push_back(Requirement(aChild));
 						else if(aChild->m_name == "update_target")
 							m_updateTarget = aChild->GetBool();
+						else if (aChild->m_name == "barks")
+							aChild->GetArray()->ForEachChild([&](const SourceNode* aBark) { m_barks.push_back(Chat(aBark)); });
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 					});
@@ -157,6 +159,7 @@ namespace tpublic
 					aStream->WritePOD(m_targetType);
 					aStream->WriteObjects(m_requirements);
 					aStream->WriteBool(m_updateTarget);
+					aStream->WriteObjects(m_barks);
 				}
 
 				bool
@@ -175,6 +178,8 @@ namespace tpublic
 						return false;
 					if(!aStream->ReadBool(m_updateTarget))
 						return false;
+					if (!aStream->ReadObjects(m_barks))
+						return false;
 					return true;
 				}	
 
@@ -185,6 +190,7 @@ namespace tpublic
 				TargetType							m_targetType = TARGET_TYPE_DEFAULT;
 				std::vector<Requirement>			m_requirements;
 				bool								m_updateTarget = true;				
+				std::vector<Chat>					m_barks;
 			};
 
 			struct StateEntry

@@ -8,7 +8,7 @@ loot_table .boss_3:
 	slots:
 	[
 		{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
-		  map_message durgan_urok: "Boss 3 will not drop Token of Victory for {}." } } }
+		  map_message durgan_urok: "Skreeth will not drop Token of Victory for {}." } } }
 		{ possibility: { loot_group: .boss_3  } }			
 		!WORLD_DROPS{}		
 	]	
@@ -46,12 +46,12 @@ encounter .boss_3:
 
 entity durgan_urok_boss_3: !NPC 
 { 
-	_string: "Boss 3" 
+	_string: "Skreeth" 
 	_level: 22
 	_elite: true
 	_faction: monsters 
-	_sprite: wolf_1
-	_sprite_dead: wolf_1_dead 
+	_sprite: wyvern_1
+	_sprite_dead: wyvern_1_dead 
 	_weapon_damage: 1.8
 	_resource_health: 6
 	_loot_table: .boss_3
@@ -65,6 +65,67 @@ entity durgan_urok_boss_3: !NPC
 
 	_abilities: 
 	[
+		{
+			target: random_player
+			requirement self<must_have_less_health_than>: 95
+			id: $ability
+			{
+				string: "Poison Bolt"
+				range: 10
+				cast_time: 20
+				cooldowns: [ global ]
+				cooldown: $cooldown { duration: 100 }
+				flags: [ offensive target_other target_hostile can_miss interruptable ]
+				states: [ in_combat ]
+				icon: icon_poison
+				delay: 3
+				target_particle_system: green_spell_hit
+				projectile: $particle_system
+				{
+					particle:
+					{
+						sprites: [ effect_witch_bolt ]
+						flags: [ attached no_rotation face_target ]
+						scale: 0.52
+						count: 1		
+					}
+				}	
+
+				direct_effect apply_aura:
+				{
+					aura: $aura
+					{
+						string: "Poisoned"
+						description: "Taking damage over time."
+						type: debuff
+						icon: icon_poison
+						duration: based_on_effects
+						flags: [ unique poison no_refresh ]
+						max_stack: 10
+
+						aura_effect repeat:
+						{
+							update_interval: 20
+							update_count: 8
+							ability: $ability [ string icon ]
+							{
+								states: [ default in_combat ]
+								flags: [ always_in_range always_in_line_of_sight ]
+								direct_effect damage: { damage_type: poison function: 21 }				
+							}
+						}
+					}
+				}
+				
+				direct_effect damage:
+				{
+					flags: [ can_be_critical ]
+					damage_type: poison
+					function: 60
+				}	
+			}			
+		}
+	
 		{
 			id: npc_attack
 		}

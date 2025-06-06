@@ -8,7 +8,7 @@ loot_table .boss_1:
 	slots:
 	[
 		{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
-		  map_message durgan_urok: "Boss 1 will not drop Token of Victory for {}." } } }
+		  map_message durgan_urok: "Zaggra Rustblade will not drop Token of Victory for {}." } } }
 		{ possibility: { loot_group: .boss_1  } }			
 		!WORLD_DROPS{}		
 	]	
@@ -46,16 +46,16 @@ encounter .boss_1:
 
 entity durgan_urok_boss_1: !NPC 
 { 
-	_string: "Boss 1" 
+	_string: "Zaggra Rustblade" 
 	_level: 22
 	_elite: true
 	_faction: monsters 
-	_sprite: wolf_1
-	_sprite_dead: wolf_1_dead 
+	_sprite: orc_13
+	_sprite_dead: orc_13_dead 
 	_weapon_damage: 1.8
 	_resource_health: 6
 	_loot_table: .boss_1
-	_creature_type: beast
+	_creature_type: humanoid
 	_encounter: .boss_1
 	_zone: .boss_1
 	_out_of_zone_action: { evade: true }
@@ -65,6 +65,36 @@ entity durgan_urok_boss_1: !NPC
 
 	_abilities: 
 	[
+		{
+			requirement self<must_have_less_health_than>: 95		
+			barks: 
+			[ 
+				{ type: yell text: "Spin to win!" flags: [ no_chat_bubble ] } 
+			]
+			id: $ability
+			{
+				string: "Whirlwind"
+				cast_time: 20
+				cooldowns: [ global ]
+				cooldown: $cooldown { duration: 120 }
+				flags: [ target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+				states: [ default in_combat ]
+				icon: icon_whirlwind
+				delay: 3
+				aoe_radius: 1
+				aoe_cap: 3
+				aoe_requirement target<must_not_be_in_state>: { id: dead }
+				source_particle_system: whirlwind	
+
+				direct_effect damage:
+				{
+					damage_type: physical
+					function: { expression: a_mul_x x: weapon a: 2 }													
+				}
+			}
+			
+		}
+	
 		{
 			id: npc_attack
 		}

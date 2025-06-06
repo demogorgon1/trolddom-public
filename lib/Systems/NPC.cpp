@@ -12,6 +12,7 @@
 #include <tpublic/Components/Tag.h>
 #include <tpublic/Components/ThreatSource.h>
 #include <tpublic/Components/ThreatTarget.h>
+#include <tpublic/Components/VisibleAuras.h>
 
 #include <tpublic/Data/Faction.h>
 #include <tpublic/Data/LootTable.h>
@@ -69,6 +70,7 @@ namespace tpublic::Systems
 		RequireComponent<Components::Position>();
 		RequireComponent<Components::Tag>();
 		RequireComponent<Components::ThreatTarget>();
+		RequireComponent<Components::VisibleAuras>();
 	}
 	
 	NPC::~NPC()
@@ -714,6 +716,13 @@ namespace tpublic::Systems
 												continue;
 										}
 
+										if (abilityEntry.m_barks.size() > 0)
+										{
+											const Chat* bark = Helpers::RandomItemPointer(*aContext->m_random, abilityEntry.m_barks);
+											assert(bark != NULL);
+											aContext->m_eventQueue->EventQueueChat(aEntityInstanceId, *bark);
+										}
+
 										npc->m_cooldowns.AddAbility(GetManifest(), ability, aContext->m_tick, 0.0f, NULL); // FIXME: cooldown modifier from haste?
 
 										if (ability->m_castTime > 0)
@@ -1011,6 +1020,13 @@ namespace tpublic::Systems
 
 								npc->m_cooldowns.AddAbility(GetManifest(), useAbility, aContext->m_tick, cooldownModifier, NULL);
 
+								if (useAbilityEntry != NULL && useAbilityEntry->m_barks.size() > 0)
+								{
+									const Chat* bark = Helpers::RandomItemPointer(*aContext->m_random, useAbilityEntry->m_barks);
+									assert(bark != NULL);
+									aContext->m_eventQueue->EventQueueChat(aEntityInstanceId, *bark);
+								}
+
 								if(useAbility->m_castTime > 0)
 								{	
 									int32_t castTime = useAbility->m_castTime;
@@ -1209,7 +1225,7 @@ namespace tpublic::Systems
 		EntityState::Id		aEntityState,
 		int32_t				/*aTicksInState*/,
 		ComponentBase**		aComponents,
-		Context*			/*aContext*/) 
+		Context*			aContext) 
 	{
 		Components::CombatPublic* combat = GetComponent<Components::CombatPublic>(aComponents);
 		Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
@@ -1263,6 +1279,28 @@ namespace tpublic::Systems
 		}
 
 		combat->m_interrupt.reset();
+
+		{
+			const Components::VisibleAuras* visibleAuras = GetComponent<Components::VisibleAuras>(aComponents);
+			uint8_t stealthLevel = 0;
+			if (visibleAuras->IsStealthed())
+			{
+				stealthLevel = 1;
+
+				if (aContext->m_worldView->WorldViewGetMapData()->DoesNeighborTileBlockLineOfSight(position->m_position.m_x, position->m_position.m_y))
+				{
+					stealthLevel++; // More stealth from hugging a wall
+					if (aContext->m_tick - position->m_lastMoveTick > 20)
+						stealthLevel++; // More steal from standing still for at least 2 seconds while hugging a wall
+				}
+			}
+
+			if (combat->m_stealthLevel != stealthLevel)
+			{
+				combat->m_stealthLevel = stealthLevel;
+				combat->SetDirty();
+			}
+		}
 	}
 
 }

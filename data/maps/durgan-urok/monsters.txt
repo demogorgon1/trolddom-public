@@ -16,37 +16,235 @@ npc_behavior_state .patrol:
 	behavior: patrolling
 }
 
-map_entity_spawn .boss_1_trash: 
+#############################################################################
+# Boss 1
+
+map_entity_spawn .boss_1_melee_trash: 
 { 
-	#entity .xxx: { level: 22 spawn_condition: { if_not: .boss_1_killed } } 	
+	entity .melee_orc_a: { level: 22 spawn_condition: { if_not: .boss_1_killed } } 	
+	entity .melee_orc_b: { level: 22 spawn_condition: { if_not: .boss_1_killed } } 	
+	entity .melee_orc_c: { level: 22 spawn_condition: { if_not: .boss_1_killed } } 	
+	entity .melee_orc_d: { level: 22 spawn_condition: { if_not: .boss_1_killed } } 	
 
 	spawn_timer: !TRASH_RESPAWN_TIMER{}
 }
 
-loot_table .xxx: 
-{
-	slots:
-	[	
-		!WORLD_DROPS {}
-	]	
+map_entity_spawn .boss_1_ranged_trash: 
+{ 
+	entity .ranged_orc: { level: 22 spawn_condition: { if_not: .boss_1_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
 }
 
-# xxx
+#############################################################################
+# Boss 2
+
+map_entity_spawn .boss_2_melee_trash: 
+{ 
+	entity .melee_orc_a: { level: 22 spawn_condition: { if_not: .boss_2_killed } } 	
+	entity .melee_orc_b: { level: 22 spawn_condition: { if_not: .boss_2_killed } } 	
+	entity .melee_orc_c: { level: 22 spawn_condition: { if_not: .boss_2_killed } } 	
+	entity .melee_orc_d: { level: 22 spawn_condition: { if_not: .boss_2_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+map_entity_spawn .boss_2_ranged_trash: 
+{ 
+	entity .ranged_orc: { level: 22 spawn_condition: { if_not: .boss_2_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+map_entity_spawn .boss_2_stealth_trash: 
+{ 
+	entity .stealth_orc: { level: 22 spawn_condition: { if_not: .boss_2_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+#############################################################################
+# Boss 3
+
+map_entity_spawn .boss_3_ranged_trash: 
+{ 
+	entity .ranged_orc: { level: 22 spawn_condition: { if_not: .boss_3_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+map_entity_spawn .boss_3_wyvern_handler_trash: 
+{ 
+	entity .wyvern_handler: { level: 22 spawn_condition: { if_not: .boss_3_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+#############################################################################
+# Boss 4
+
+map_entity_spawn .boss_4_melee_trash: 
+{ 
+	entity .elite_melee_orc_a: { level: 22 spawn_condition: { if_not: .boss_4_killed } } 	
+	entity .elite_melee_orc_b: { level: 22 spawn_condition: { if_not: .boss_4_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+#############################################################################
+# Boss 5
+
+map_entity_spawn .boss_5_melee_trash: 
+{ 
+	entity .elite_melee_orc_a: { level: 22 spawn_condition: { if_not: .boss_5_killed } } 	
+	entity .elite_melee_orc_b: { level: 22 spawn_condition: { if_not: .boss_5_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+#############################################################################
+# Monsters
+
+# Melee orcs
 {
 	${
 		_faction: monsters
-		_creature_type: beast
-		_default_behavior_state: .wandering_short
-		_loot_table: .xxx
+		_creature_type: humanoid
+		_default_behavior_state: .passive
+		_loot_table: default_humanoid
 		_weapon_damage: 1.4
 		_resource_health: 1.71
 		_elite: true
+		_level: 22
+		_string: "Skullforge Warrior"		
 		_abilities: 
 		[ 
 			{ id: npc_attack } 
 		]
 	}
 
-	entity .xxx: !NPC { _string: "xxx" _sprite: wolf_1 _sprite_dead: wolf_1_dead _level: 22 }
+	entity .melee_orc_a: !NPC { _sprite: orc_1 _sprite_dead: orc_1_dead  }
+	entity .melee_orc_b: !NPC { _sprite: orc_2 _sprite_dead: orc_2_dead  }
+	entity .melee_orc_c: !NPC { _sprite: orc_3 _sprite_dead: orc_3_dead  }
+	entity .melee_orc_d: !NPC { _sprite: orc_4 _sprite_dead: orc_4_dead  }
 }
 
+# Ranged orcs
+{
+	${
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .passive
+		_loot_table: default_humanoid
+		_weapon_damage: 1.4
+		_resource_health: 1.71
+		_elite: true
+		_string: "Skullforge Archer" 
+		_level: 22		
+		_abilities: 
+		[ 
+			{ id: npc_shoot } 
+			{ id: npc_attack } 
+		]
+	}
+
+	entity .ranged_orc: !NPC { _sprite: orc_5 _sprite_dead: orc_5_dead }
+}
+
+# Wyvern handler orcs
+{
+	${
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .passive
+		_loot_table: default_humanoid
+		_weapon_damage: 1.4
+		_resource_health: 1.71
+		_elite: true
+		_string: "Wyvern Handler" 
+		_level: 22		
+		_abilities: 
+		[ 
+			{ id: npc_trap } 
+			{ id: npc_attack } 
+		]
+	}
+
+	entity .wyvern_handler: !NPC { _sprite: orc_14 _sprite_dead: orc_14_dead }
+}
+
+# Stealth orcs
+{
+	aura .stealth_orc_aura:
+	{
+		string: "Stealth"
+		type: buff
+		icon: icon_stealth
+		flags: [ unique indefinite cancel_on_damage no_source_needed ]
+		
+		aura_effect stealth: 
+		{
+			flags: [ cancel_aura_on_fade ] 
+			update_count: indefinite
+		}
+		
+		aura_effect move_speed_modifier:
+		{
+			move_speed: slow
+		}
+	}
+
+	${
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .passive
+		_loot_table: default_humanoid
+		_weapon_damage: 1.4
+		_resource_health: 1.71
+		_elite: true
+		_string: "Skullforge Rogue" 
+		_level: 22		
+
+		_default_on_enter_ability: $ability 
+		{
+			flags: [ target_self ]
+			string: "Stealth"
+			cast_time: 10
+			cooldowns: [ global ]
+			icon: icon_stealth
+			direct_effect apply_aura:
+			{
+				aura: .stealth_orc_aura
+			}
+		}	
+				
+		_abilities: 
+		[ 
+			{ id: npc_attack } 
+		]
+	}
+
+	entity .stealth_orc: !NPC { _sprite: orc_9 _sprite_dead: orc_9_dead }
+}
+
+# Elite melee orcs
+{
+	${
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .passive
+		_loot_table: default_humanoid
+		_weapon_damage: 1.4
+		_resource_health: 1.71
+		_elite: true
+		_level: 22
+		_string: "Skullforge Guardian"		
+		_abilities: 
+		[ 
+			{ id: npc_attack } 
+		]
+	}
+
+	entity .elite_melee_orc_a: !NPC { _sprite: orc_7 _sprite_dead: orc_7_dead  }
+	entity .elite_melee_orc_b: !NPC { _sprite: orc_8 _sprite_dead: orc_8_dead  }
+}

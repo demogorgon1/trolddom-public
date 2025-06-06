@@ -58,6 +58,21 @@ map_palette .stuff:
 	entity_spawn .boss_3: [ 255 64 0 ]
 	entity_spawn .boss_4: [ 255 0 128 ]
 	entity_spawn .boss_5: [ 255 128 0 ]
+	entity_spawn .boss_6: [ 255 128 64 ]
+	
+	entity_spawn .boss_1_melee_trash: [ 129 48 88 ]
+	entity_spawn .boss_1_ranged_trash: [ 129 48 188 ]
+
+	entity_spawn .boss_2_melee_trash: [ 129 248 88 ]
+	entity_spawn .boss_2_ranged_trash: [ 129 248 188 ]
+	entity_spawn .boss_2_stealth_trash: [ 129 24 188 ]
+
+	entity_spawn .boss_3_ranged_trash: [ 129 148 188 ]
+	entity_spawn .boss_3_wyvern_handler_trash: [ 29 148 188 ]
+	
+	entity_spawn .boss_4_melee_trash: [ 14 228 88 ]	
+
+	entity_spawn .boss_5_melee_trash: [ 214 228 88 ]		
 }
 
 map_palette .levels:
@@ -123,6 +138,7 @@ map_palette .subzones:
 	sub_zone .boss_3: [ 183 175 255 ]
 	sub_zone .boss_4: [ 255 175 227 ]
 	sub_zone .boss_5: [ 212 132 56 ]
+	sub_zone .boss_6: [ 56 126 212 ]
 }
 
 map_palette .cliffs:
@@ -242,6 +258,13 @@ map durgan_urok:
 		condition trigger_not_set: .boss_5_killed
 		condition entity_state: { entity: durgan_urok_boss_5 state: dead }
 		run: { set_trigger: .boss_5_killed }
+	}	
+
+	script:
+	{
+		condition trigger_not_set: .boss_6_killed
+		condition entity_state: { entity_spawn: .boss_6 state: dead }		
+		run: { set_trigger: .boss_6_killed }
 	}	
 
 }
