@@ -21,15 +21,44 @@ loot_table .boss_6:
 		_loot_group: .boss_6
 	}
 	
-	item durgan_urok_6: !BOSS_DROP_FEET
+	item durgan_urok_6_1: !BOSS_DROP_SHOULDERS
 	{
-		_string: "Boss 6's Boots"
-		_type: armor_mail
-		_icon: icon_shoe_1
+		_string: "Pauldrons of the Deep Vault"
+		_type: armor_plate
+		_icon: icon_shoulders_1
+		_strength: 1
+		_dexterity: 2
+		_constitution: 3
+	}	
+
+	item durgan_urok_6_2: !BOSS_DROP_FINGER
+	{
+		_string: "Runeflux Loop"		
+		_icon: icon_ring_1
+		_wisdom: 5
+		_spell_damage: 1
+	}	
+
+	item durgan_urok_6_3: !BOSS_DROP_WAIST
+	{
+		_string: "Belt of the Buried Spark"
+		_type: armor_cloth
+		_icon: icon_belt_4
 		_strength: 3
 		_dexterity: 2
 		_constitution: 1
 	}	
+
+	item durgan_urok_6_4: !BOSS_DROP_FEET
+	{
+		_string: "Pulse-Bound Treads"
+		_type: armor_cloth
+		_icon: icon_boots_4
+		_spirit: 1
+		_wisdom: 2
+		_healing: 3
+	}		
+	
 }
 
 ############################################################

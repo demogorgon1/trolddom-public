@@ -21,15 +21,44 @@ loot_table .boss_1:
 		_loot_group: .boss_1
 	}
 	
-	item durgan_urok_1: !BOSS_DROP_FEET
+	item durgan_urok_1_1: !BOSS_DROP_SHIELD
 	{
-		_string: "Boss 1's Boots"
-		_type: armor_mail
-		_icon: icon_shoe_1
-		_strength: 3
-		_dexterity: 2
+		_string: "Shield of Zaggra"
+		_icon: icon_shield_5
+		_budget_bias: -10
+		_dodge_chance: 1
 		_constitution: 1
 	}	
+	
+	item durgan_urok_1_2: !BOSS_DROP_WAIST
+	{
+		_string: "Silk Wrap of the Lost Dwarf"
+		_icon: icon_cloth_belt_1
+		_type: armor_cloth
+		_budget_bias: -10
+		_spell_crit: 1
+		_wisdom: 1
+		_spell_damage: 2
+	}		
+	
+	item durgan_urok_1_3: !BOSS_DROP_1H_KNIFE
+	{
+		_string: "Swiftblade"
+		_icon: icon_knife_2
+		_dexterity: 1
+		_weapon_cooldown: 14
+	}		
+
+	item durgan_urok_1_4: !BOSS_DROP_HEAD
+	{
+		_string: "Orc Thinking Cap"
+		_icon: icon_head_5
+		_healing: 3
+		_mana_per_5: 2
+		_wisdom: 1
+		_type: armor_cloth
+	}		
+	
 }
 
 ############################################################

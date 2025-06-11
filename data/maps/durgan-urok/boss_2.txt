@@ -21,15 +21,46 @@ loot_table .boss_2:
 		_loot_group: .boss_2
 	}
 	
-	item durgan_urok_2: !BOSS_DROP_FEET
+	item durgan_urok_2_1: !BOSS_DROP_FEET
 	{
-		_string: "Boss 2's Boots"
-		_type: armor_mail
-		_icon: icon_shoe_1
-		_strength: 3
+		_string: "Bloodied Greaves"
+		_type: armor_plate
+		_icon: icon_boots_6
+		_strength: 1
 		_dexterity: 2
-		_constitution: 1
+		_constitution: 3		
 	}	
+	
+	item durgan_urok_2_2: !BOSS_DROP_2H_AXE
+	{
+		_string: "Black Iron Cleaver"
+		_icon: icon_axe_3
+		_strength: 1
+		_budget_bias: -10
+		_phys_crit: 1
+		_weapon_cooldown: 36
+	}		
+	
+	item durgan_urok_2_3: !BOSS_DROP_HANDS
+	{
+		_string: "Orcish Spellgloves"
+		_icon: icon_gloves_5
+		_spell_damage: 1
+		_wisdom: 2
+		_constitution: 1
+		_type: armor_cloth
+	}			
+	
+	item durgan_urok_2_4: !BOSS_DROP_SHOULDERS
+	{
+		_string: "Shoulders of the Vanquished"
+		_icon: icon_shoulders_9
+		_healing: 2
+		_wisdom: 1
+		_spirit: 1
+		_type: armor_cloth
+	}			
+	
 }
 
 ############################################################

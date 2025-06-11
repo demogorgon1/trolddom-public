@@ -21,15 +21,47 @@ loot_table .boss_3:
 		_loot_group: .boss_3
 	}
 	
-	item durgan_urok_3: !BOSS_DROP_FEET
+	item durgan_urok_3_1: !BOSS_DROP_HANDS
 	{
-		_string: "Boss 3's Boots"
-		_type: armor_mail
-		_icon: icon_shoe_1
-		_strength: 3
-		_dexterity: 2
-		_constitution: 1
+		_string: "Crusty Plate Gauntlets"
+		_type: armor_plate
+		_icon: icon_mail_hands_1
+		_budget_bias: -10
+		_strength: 2
+		_constitution: 3		
+		_block_chance: 2
 	}	
+	
+	item durgan_urok_3_2: !BOSS_DROP_LEGS
+	{
+		_string: "Clawed Wizard's Pants"
+		_icon: icon_pants_2
+		_type: armor_cloth
+		_wisdom: 4
+		_constitution: 2
+		_spell_damage: 1		
+	}		
+	
+	item durgan_urok_3_3: !BOSS_DROP_HANDS
+	{
+		_string: "Wyvern Scale Gauntlets"
+		_icon: icon_mail_gloves_2
+		_budget_bias: -10
+		_strength: 3
+		_constitution: 1
+		_phys_crit: 1
+		_type: armor_mail
+	}			
+	
+	item durgan_urok_3_4: !BOSS_DROP_NECK
+	{
+		_string: "Wyvern Bone Necklace"
+		_icon: icon_necklace_5
+		_healing: 3
+		_mana_per_5: 2
+		_spell_haste: 1
+	}	
+	
 }
 
 ############################################################

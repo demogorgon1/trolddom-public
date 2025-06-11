@@ -21,15 +21,46 @@ loot_table .boss_4:
 		_loot_group: .boss_4
 	}
 	
-	item durgan_urok_4: !BOSS_DROP_FEET
+	item durgan_urok_4_1: !BOSS_DROP_CHEST
 	{
-		_string: "Boss 4's Boots"
-		_type: armor_mail
-		_icon: icon_shoe_1
-		_strength: 3
-		_dexterity: 2
-		_constitution: 1
+		_string: "Ancient Dwarven Battle-Plate"
+		_type: armor_plate
+		_icon: icon_plate_chest_3
+		_budget_bias: -10
+		_strength: 1
+		_constitution: 3		
+		_parry_chance: 1
 	}	
+	
+	item durgan_urok_4_2: !BOSS_DROP_2H_STAFF
+	{
+		_string: "Staff of the Bone-Chanter"
+		_icon: icon_staff_9
+		_wisdom: 3
+		_spell_damage: 2
+		_spell_haste: 1
+	}		
+	
+	item durgan_urok_4_3: !BOSS_DROP_HEAD
+	{
+		_string: "Assassin's Hood"
+		_icon: icon_head_11
+		_budget_bias: -10
+		_strength: 2
+		_dexterity: 1
+		_phys_crit: 1
+		_type: armor_cloth
+	}			
+	
+	item durgan_urok_4_4: !BOSS_DROP_LEGS
+	{
+		_string: "Legs of Restoration"
+		_icon: icon_pants_1
+		_type: armor_cloth
+		_wisdom: 3
+		_healing: 1			
+	}	
+	
 }
 
 ############################################################

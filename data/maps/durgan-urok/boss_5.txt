@@ -22,15 +22,62 @@ loot_table .boss_5:
 		_loot_group: .boss_5
 	}
 	
-	item durgan_urok_5: !BOSS_DROP_FEET
+	item durgan_urok_5_1: !BOSS_DROP_LEGS
 	{
-		_string: "Boss 5's Boots"
-		_type: armor_mail
-		_icon: icon_shoe_1
-		_strength: 3
+		_string: "Ancient Dwarven Leg Guards"
+		_type: armor_plate
+		_icon: icon_head_7
+		_strength: 1
 		_dexterity: 2
-		_constitution: 1
+		_constitution: 4		
 	}	
+
+	item durgan_urok_5_2: !BOSS_DROP_CHEST
+	{
+		_string: "Aetherthread Shroud"
+		_type: armor_cloth
+		_icon: icon_chest_6
+		_wisdom: 2
+		_constitution: 1
+		_spell_damage: 3
+	}	
+
+	item durgan_urok_5_3: !BOSS_DROP_NECK
+	{
+		_string: "Chain of the Juggernaut"
+		_icon: icon_necklace_2
+		_constitution: 2
+		_strength: 5
+	}	
+
+	item durgan_urok_5_4: !BOSS_DROP_HANDS
+	{
+		_string: "Aetherthread Shroud"
+		_type: armor_cloth
+		_icon: icon_gloves_1
+		_wisdom: 2
+		_mana_per_5: 1
+		_healing: 3
+	}	
+	
+	item durgan_urok_5_5: !BOSS_DROP_2H_STAFF
+	{
+		_string: "Rod of Eternal Grace"
+		_icon: icon_staff_10
+		_wisdom: 3
+		_healing: 2
+		_mana_per_5: 1
+	}		
+	
+	item durgan_urok_5_6: !BOSS_DROP_2H_SWORD
+	{
+		_string: "Skullrender"
+		_icon: icon_sword_6
+		_strength: 3
+		_constitution: 1
+		_weapon_cooldown: 36
+	}				
+
 }
 
 ############################################################
