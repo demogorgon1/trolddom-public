@@ -142,11 +142,11 @@ item item_beast_jaw:
 {
 	type: miscellaneous
 	item_level: 15
-	level_range: [ 15 22 ]
+	level_range: [ 12 22 ]
 	icon: icon_jaw_1
 	string: "Menacing Jaw"
 	stack: 20
-	loot_groups: [ wolves bears lions ]
+	loot_groups: [ wolves bears lions crocodiles ]
 	tags: [ reagent ]
 }
 
@@ -194,7 +194,7 @@ item item_giant_claws:
 	icon: icon_claw_4
 	string: "Giant Claws"
 	stack: 20
-	loot_groups: [ bears ]
+	loot_groups: [ bears lions owlbears ]
 	tags: [ reagent ]	
 }
 
@@ -243,7 +243,7 @@ item item_earth_core:
 	rarity: uncommon
 	string: "Earth Core"
 	stack: 10
-	loot_groups: [ earth_elementals ]
+	loot_groups: [ earth_elementals_uncommon ]
 	tags: [ reagent ]	
 }
 
@@ -256,7 +256,7 @@ item item_enchanted_dirt:
 	rarity: uncommon
 	string: "Enchanted Dirt"
 	stack: 10
-	loot_groups: [ earth_elementals ]
+	loot_groups: [ earth_elementals_uncommon ]
 	tags: [ reagent ]	
 }
 
@@ -329,7 +329,7 @@ item item_life_core:
 	string: "Life Core"
 	rarity: uncommon
 	stack: 10
-	loot_groups: [ wood_elementals nature_elementals ]
+	loot_groups: [ wood_elementals_uncommon nature_elementals_uncommon ]
 	tags: [ reagent ]	
 }
 
@@ -365,7 +365,7 @@ item item_lizard_tail:
 	icon: icon_tail_1
 	string: "Scaly Tail Tip"
 	stack: 10
-	loot_groups: [ lizards ]
+	loot_groups: [ lizards snakes ]
 	tags: [ reagent ]		
 }
 
@@ -438,7 +438,7 @@ item item_demon_heart:
 	rarity: uncommon
 	string: "Heart of Darkness"
 	stack: 10
-	loot_groups: [ demons ]
+	loot_groups: [ demons_uncommon ]
 	tags: [ reagent ]	
 }
 
@@ -451,7 +451,7 @@ item item_nature_heart:
 	rarity: uncommon
 	string: "Heart of Nature"
 	stack: 10
-	loot_groups: [ wood_elementals nature_elementals ]
+	loot_groups: [ wood_elementals_uncommon nature_elementals_uncommon ]
 	tags: [ reagent ]	
 }
 
@@ -464,7 +464,7 @@ item item_polished_stone:
 	rarity: uncommon
 	string: "Polished Stone"
 	stack: 10
-	loot_groups: [ demons earth_elementals ]
+	loot_groups: [ demons_uncommon earth_elementals_uncommon ]
 	tags: [ reagent ]		
 }
 
@@ -477,7 +477,7 @@ item item_enchanted_roots:
 	rarity: uncommon
 	string: "Enchanted Roots"
 	stack: 10
-	loot_groups: [ wood_elementals nature_elementals ]
+	loot_groups: [ wood_elementals_uncommon nature_elementals_uncommon ]
 	tags: [ reagent ]		
 }
 
@@ -513,7 +513,7 @@ item item_large_poison_sack:
 	icon: icon_poison_sack_1
 	string: "Large Poison Sack"
 	stack: 10
-	loot_groups: [ spiders ]
+	loot_groups: [ spiders snakes ]
 	tags: [ reagent ]			
 }
 
@@ -538,6 +538,43 @@ item item_razor_beak:
 	string: "Razor Beak"
 	stack: 10
 	loot_groups: [ birds owlbears ]
+	tags: [ reagent ]			
+}
+
+item item_snake_fang:
+{
+	type: miscellaneous
+	item_level: 20
+	level_range: [ 20 30 ]
+	icon: icon_fang_1
+	string: "Snake Fang"
+	stack: 10
+	loot_groups: [ snakes ]
+	tags: [ reagent ]			
+}
+
+item item_spirit_dust:
+{
+	type: miscellaneous
+	item_level: 20
+	level_range: [ 10 30 ]
+	icon: icon_spirit_dust
+	string: "Spirit Dust"
+	rarity: uncommon
+	stack: 10
+	loot_groups: [ ghosts_uncommon ]
+	tags: [ reagent ]			
+}
+
+item item_ectoplasm:
+{
+	type: miscellaneous
+	item_level: 20
+	level_range: [ 10 30 ]
+	icon: icon_ectoplasm
+	string: "Ectoplasm"	
+	stack: 10
+	loot_groups: [ ghosts ]
 	tags: [ reagent ]			
 }
 

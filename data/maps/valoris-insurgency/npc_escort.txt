@@ -25,7 +25,6 @@ entity valoris_insurgency_escort: !NPC
 	_resource_health: 2.5
 	_faction: combat_npcs		
 	_creature_type: humanoid
-	_loot_table: default_humanoid
 	_not_pushable: true	
 	_default_trigger_ability: .escort
 	_default_behavior_state: .escort

@@ -19,6 +19,7 @@ loot_table .tree:
 	${
 		_rarity: rare
 		_level: 20
+		_item_level: 21
 		_loot_group: .tree
 	}
 	
@@ -43,7 +44,7 @@ loot_table .tree:
 		_weapon_cooldown: 36
 	}
 	
-	item tirnwood_thicket_15: !BOSS_DROP_CHEST
+	item tirnwood_thicket_15: !BOSS_DROP_2H_STAFF
 	{
 		_string: "Staff of Eldros"
 		_icon: icon_staff_4

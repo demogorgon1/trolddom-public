@@ -267,3 +267,37 @@ entity gateway_2:
 		}		
 	}
 }
+
+entity voraghul_portal_closed:
+{
+	string: "Realm of Voraghul"
+	
+	components:
+	{
+		position: { }		
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ orange_gateway_closed_1 orange_gateway_closed_2 orange_gateway_closed_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+		hover_text<static>:
+		{
+			string: "The portal is sealed."
+		}
+		openable: 
+		{ 
+			verb: inspect
+			range: 1 
+			required_quest: thalvaron_seren_virelith_3
+			complete_manual_objective: thalvaron_seren_virelith_3
+		}	
+	}
+}

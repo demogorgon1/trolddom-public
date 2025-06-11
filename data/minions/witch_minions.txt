@@ -1,782 +1,786 @@
-${
-	_level: 1 
-}
-
-##############################################################################
-# Minor Demon
 {
+
 	${
-		_creature_type: demon	
-		_name_template: .minor_demon		
-		_sprite: minor_demon
-		_sprite_dead: minor_demon_dead
-		_minion_modes: [ .minor_demon_aggressive .minor_demon_defensive .minor_demon_passive ]
-		_default_minion_mode: .minor_demon_defensive
-		_commands: [ move attack ]
-		
-		_abilities: 
-		[ 
-			{ 
-				id: .minor_demon_attack flags: [ auto ] 
-			} 
+		_level: 1 
+	}
+
+	##############################################################################
+	# Minor Demon
+	{
+		${
+			_creature_type: demon	
+			_name_template: .minor_demon		
+			_sprite: minor_demon
+			_sprite_dead: minor_demon_dead
+			_minion_modes: [ .minor_demon_aggressive .minor_demon_defensive .minor_demon_passive ]
+			_default_minion_mode: .minor_demon_defensive
+			_commands: [ move attack ]
 			
-			{ 
-				id: .minor_demon_interrupt flags: [ auto interrupt ] 
-				self_must_have_aura: demonic_infusion
-			} 
-		]
-		
-		_ability_prio: [ .minor_demon_interrupt .minor_demon_attack ]
-		_class_minion: true
-		_store_combat_data: true
-	}
-	
-	name_template .minor_demon:
-	{
-		possibility<1>:
-		{
-			generated_name: [ demon_name ]
-		}
-	}
-
-	minion_mode .minor_demon_aggressive:
-	{
-		string: "Aggressive"
-		icon: icon_aggressive
-		follow_distance: 3
-		aggro_range: 5
-		attack_owner_threat_target: true
-		attack_threat_target: true
-	}
-
-	minion_mode .minor_demon_defensive:
-	{
-		string: "Defensive"
-		icon: icon_defensive
-		follow_distance: 3
-		attack_owner_threat_target: true
-		attack_threat_target: true
-	}
-
-	minion_mode .minor_demon_passive:
-	{
-		string: "Passive"
-		icon: icon_passive
-		follow_distance: 3
-	}
-	
-	cooldown .minor_demon_attack:
-	{
-		duration: 18
-	}
-	
-	ability .minor_demon_attack:
-	{
-		string: "Attack"
-		description: "Deals $damage$ damage to target."
-		flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
-		states: [ default in_combat ]
-		delay: 3
-		icon: icon_demon_attack
-		cooldowns: [ .minor_demon_attack ]
-		
-		direct_effect damage:
-		{
-			flags: [ can_be_critical ]
-			damage_type: physical			
-			function: { expression: x x: weapon }		
-		}
-	}	
-	
-	cooldown .minor_demon_interrupt:
-	{
-		duration: 100
-	}
-		
-	ability .minor_demon_interrupt:
-	{
-		string: "Interrupt"
-		description: "Interrupts target spell casting."
-		flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
-		states: [ default in_combat ]
-		delay: 3
-		icon: icon_kick
-		cooldowns: [ .minor_demon_interrupt ]
-		
-		direct_effect interrupt:
-		{	
-			lockout_ticks: 40
+			_abilities: 
+			[ 
+				{ 
+					id: .minor_demon_attack flags: [ auto ] 
+				} 
+				
+				{ 
+					id: .minor_demon_interrupt flags: [ auto interrupt ] 
+					self_must_have_aura: demonic_infusion
+				} 
+			]
+			
+			_ability_prio: [ .minor_demon_interrupt .minor_demon_attack ]
+			_class_minion: true
+			_store_combat_data: true
 		}
 		
-		direct_effect threat:
+		name_template .minor_demon:
 		{
-			apply_to: source
-			add: 20
+			possibility<1>:
+			{
+				generated_name: [ demon_name ]
+			}
+		}
+
+		minion_mode .minor_demon_aggressive:
+		{
+			string: "Aggressive"
+			icon: icon_aggressive
+			follow_distance: 3
+			aggro_range: 5
+			attack_owner_threat_target: true
+			attack_threat_target: true
+		}
+
+		minion_mode .minor_demon_defensive:
+		{
+			string: "Defensive"
+			icon: icon_defensive
+			follow_distance: 3
+			attack_owner_threat_target: true
+			attack_threat_target: true
+		}
+
+		minion_mode .minor_demon_passive:
+		{
+			string: "Passive"
+			icon: icon_passive
+			follow_distance: 3
+		}
+		
+		cooldown .minor_demon_attack:
+		{
+			duration: 18
+		}
+		
+		ability .minor_demon_attack:
+		{
+			string: "Attack"
+			description: "Deals $damage$ damage to target."
+			flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+			states: [ default in_combat ]
+			delay: 3
+			icon: icon_demon_attack
+			cooldowns: [ .minor_demon_attack ]
+			
+			direct_effect damage:
+			{
+				flags: [ can_be_critical ]
+				damage_type: physical			
+				function: { expression: x x: weapon }		
+			}
 		}	
-	}	
-	
-	entity minor_demon: !MINION{}
-}
-
-##############################################################################
-# Fiendish Spellcaster
-{
-
-	${
-		_name_template: .fiendish_spellcaster
-		_creature_type: demon
-		_sprite: fiendish_spellcaster
-		_sprite_dead: fiendish_spellcaster_dead
-		_minion_modes: [ .fiendish_spellcaster_aggressive .fiendish_spellcaster_defensive .fiendish_spellcaster_passive ]
-		_default_minion_mode: .fiendish_spellcaster_defensive
-		_commands: [ move attack ]
 		
-		_abilities: 
-		[ 
-			{ id: .fiendish_spellcaster_attack flags: [ auto ] } 
-			{ id: .fiendish_spellcaster_fireball flags: [ auto ] } 
-			{ id: .fiendish_spellcaster_unholy_empowerment flags: [ auto ] target_must_not_have_aura: .fiendish_spellcaster_unholy_empowerment } 
+		cooldown .minor_demon_interrupt:
+		{
+			duration: 100
+		}
 			
-			# FIXME: currently no way of having long cooldown minion abilities as cooldowns aren't persisted (also seems like +crit chance stat modifiers aren't working)
-			# { id: .fiendish_spellcaster_demonic_fury } 			
-		]
+		ability .minor_demon_interrupt:
+		{
+			string: "Interrupt"
+			description: "Interrupts target spell casting."
+			flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+			states: [ default in_combat ]
+			delay: 3
+			icon: icon_kick
+			cooldowns: [ .minor_demon_interrupt ]
+			
+			direct_effect interrupt:
+			{	
+				lockout_ticks: 40
+			}
+			
+			direct_effect threat:
+			{
+				apply_to: source
+				add: 20
+			}	
+		}	
 		
-		_ability_prio: [ .fiendish_spellcaster_unholy_empowerment .fiendish_spellcaster_fireball .fiendish_spellcaster_attack ]		
-		_class_minion: true
-		_store_combat_data: true
-	}
-	
-	name_template .fiendish_spellcaster:
-	{
-		possibility<1>:
-		{
-			generated_name: [ demon_name ]
-		}
+		entity minor_demon: !MINION{}
 	}
 
-	minion_mode .fiendish_spellcaster_aggressive:
+	##############################################################################
+	# Fiendish Spellcaster
 	{
-		string: "Aggressive"
-		icon: icon_aggressive
-		follow_distance: 3
-		aggro_range: 5
-		attack_owner_threat_target: true
-		attack_threat_target: true
-	}
 
-	minion_mode .fiendish_spellcaster_defensive:
-	{
-		string: "Defensive"
-		icon: icon_defensive
-		follow_distance: 3
-		attack_owner_threat_target: true
-		attack_threat_target: true
-	}
-
-	minion_mode .fiendish_spellcaster_passive:
-	{
-		string: "Passive"
-		icon: icon_passive
-		follow_distance: 3
-	}
-	
-	cooldown .fiendish_spellcaster_attack:
-	{
-		duration: 21
-	}
-	
-	ability .fiendish_spellcaster_attack:
-	{
-		string: "Attack"
-		description: "Deals $damage$ damage to target."
-		flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
-		states: [ default in_combat ]
-		delay: 3
-		icon: icon_demon_attack
-		cooldowns: [ .fiendish_spellcaster_attack ]
-		
-		direct_effect damage:
-		{
-			flags: [ can_be_critical ]
-			damage_type: physical			
-			function: { expression: x x: weapon }		
-		}
-	}	
-	
-	particle_system .fiendish_spellcaster_fireball:
-	{
-		particle:
-		{
-			sprites: [ effect_fireball ]
-			flags: [ attached no_rotation face_target ]
-			count: 1		
-			scale: 0.5
-		}
-	}
-
-	ability .fiendish_spellcaster_fireball:
-	{
-		string: "Fireball"
-		description: "Deals $damage$ damage to target."
-		range: 8
-		cast_time: 25
-		cooldowns: [ global spell_fire_lockout ]
-		flags: [ spell offensive target_other target_hostile can_miss interruptable ]
-		states: [ in_combat default ]
-		icon: icon_fireball
-		speed: 6
-		projectile: .fiendish_spellcaster_fireball
-	
-		direct_effect damage:
-		{
-			must_not_have_ability_modifiers: [ demon_mastery_1 demon_mastery_2 demon_mastery_3 demon_mastery_4 demon_mastery_5 ]
-			flags: [ can_be_critical is_magical ]
-			damage_type: fire
-			function: { expression: a a: [ [ 1 18 ] [ 10 36 ] [ 20 72 ] ] }
+		${
+			_name_template: .fiendish_spellcaster
+			_creature_type: demon
+			_sprite: fiendish_spellcaster
+			_sprite_dead: fiendish_spellcaster_dead
+			_minion_modes: [ .fiendish_spellcaster_aggressive .fiendish_spellcaster_defensive .fiendish_spellcaster_passive ]
+			_default_minion_mode: .fiendish_spellcaster_defensive
+			_commands: [ move attack ]
+			
+			_abilities: 
+			[ 
+				{ id: .fiendish_spellcaster_attack flags: [ auto ] } 
+				{ id: .fiendish_spellcaster_fireball flags: [ auto ] } 
+				{ id: .fiendish_spellcaster_unholy_empowerment flags: [ auto ] target_must_not_have_aura: .fiendish_spellcaster_unholy_empowerment } 
+				
+				# FIXME: currently no way of having long cooldown minion abilities as cooldowns aren't persisted (also seems like +crit chance stat modifiers aren't working)
+				# { id: .fiendish_spellcaster_demonic_fury } 			
+			]
+			
+			_ability_prio: [ .fiendish_spellcaster_unholy_empowerment .fiendish_spellcaster_fireball .fiendish_spellcaster_attack ]		
+			_class_minion: true
+			_store_combat_data: true
 		}
 		
-		direct_effect damage:
+		name_template .fiendish_spellcaster:
 		{
-			must_have_ability_modifier: demon_mastery_1
-			flags: [ can_be_critical is_magical ]
-			damage_type: fire
-			function: { expression: a a: [ [ 1 19 ] [ 10 38 ] [ 20 76 ] ] }
+			possibility<1>:
+			{
+				generated_name: [ demon_name ]
+			}
 		}
 
-		direct_effect damage:
+		minion_mode .fiendish_spellcaster_aggressive:
 		{
-			must_have_ability_modifier: demon_mastery_2
-			flags: [ can_be_critical is_magical ]
-			damage_type: fire
-			function: { expression: a a: [ [ 1 21 ] [ 10 42 ] [ 20 84 ] ] }
+			string: "Aggressive"
+			icon: icon_aggressive
+			follow_distance: 3
+			aggro_range: 5
+			attack_owner_threat_target: true
+			attack_threat_target: true
 		}
 
-		direct_effect damage:
+		minion_mode .fiendish_spellcaster_defensive:
 		{
-			must_have_ability_modifier: demon_mastery_3
-			flags: [ can_be_critical is_magical ]
-			damage_type: fire
-			function: { expression: a a: [ [ 1 22 ] [ 10 44 ] [ 20 88 ] ] }
-		}		
+			string: "Defensive"
+			icon: icon_defensive
+			follow_distance: 3
+			attack_owner_threat_target: true
+			attack_threat_target: true
+		}
+
+		minion_mode .fiendish_spellcaster_passive:
+		{
+			string: "Passive"
+			icon: icon_passive
+			follow_distance: 3
+		}
 		
-		direct_effect damage:
+		cooldown .fiendish_spellcaster_attack:
 		{
-			must_have_ability_modifier: demon_mastery_4
-			flags: [ can_be_critical is_magical ]
-			damage_type: fire
-			function: { expression: a a: [ [ 1 24 ] [ 10 48 ] [ 20 96 ] ] }
-		}		
+			duration: 21
+		}
+		
+		ability .fiendish_spellcaster_attack:
+		{
+			string: "Attack"
+			description: "Deals $damage$ damage to target."
+			flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+			states: [ default in_combat ]
+			delay: 3
+			icon: icon_demon_attack
+			cooldowns: [ .fiendish_spellcaster_attack ]
+			
+			direct_effect damage:
+			{
+				flags: [ can_be_critical ]
+				damage_type: physical			
+				function: { expression: x x: weapon }		
+			}
+		}	
+		
+		particle_system .fiendish_spellcaster_fireball:
+		{
+			particle:
+			{
+				sprites: [ effect_fireball ]
+				flags: [ attached no_rotation face_target ]
+				count: 1		
+				scale: 0.5
+			}
+		}
+
+		ability .fiendish_spellcaster_fireball:
+		{
+			string: "Fireball"
+			description: "Deals $damage$ damage to target."
+			range: 8
+			cast_time: 25
+			cooldowns: [ global spell_fire_lockout ]
+			flags: [ spell offensive target_other target_hostile can_miss interruptable ]
+			states: [ in_combat default ]
+			icon: icon_fireball
+			speed: 6
+			projectile: .fiendish_spellcaster_fireball
+		
+			direct_effect damage:
+			{
+				must_not_have_ability_modifiers: [ demon_mastery_1 demon_mastery_2 demon_mastery_3 demon_mastery_4 demon_mastery_5 ]
+				flags: [ can_be_critical is_magical ]
+				damage_type: fire
+				function: { expression: a a: [ [ 1 18 ] [ 10 36 ] [ 20 72 ] ] }
+			}
+			
+			direct_effect damage:
+			{
+				must_have_ability_modifier: demon_mastery_1
+				flags: [ can_be_critical is_magical ]
+				damage_type: fire
+				function: { expression: a a: [ [ 1 19 ] [ 10 38 ] [ 20 76 ] ] }
+			}
 
 			direct_effect damage:
-		{
-			must_have_ability_modifier: demon_mastery_5
-			flags: [ can_be_critical is_magical ]
-			damage_type: fire
-			function: { expression: a a: [ [ 1 25 ] [ 10 50 ] [ 20 100 ] ] }
-		}		
-	}	
-		
-	aura .fiendish_spellcaster_unholy_empowerment:
-	{
-		string: "Unholy Empowerment"
-		icon: icon_unholy_empowerment
-		type: buff	
-		duration: 6000
-		flags: [ unique magic ]
-		stat_modifiers: 
-		{ 
-			constitution: { add_percent: 10 } 
-		}		
-	}
-	
-	cooldown .fiendish_spellcaster_unholy_empowerment:
-	{
-		duration: 40
-	}
+			{
+				must_have_ability_modifier: demon_mastery_2
+				flags: [ can_be_critical is_magical ]
+				damage_type: fire
+				function: { expression: a a: [ [ 1 21 ] [ 10 42 ] [ 20 84 ] ] }
+			}
 
-	ability .fiendish_spellcaster_unholy_empowerment:
-	{
-		string: "Unholy Empowerment"
-		description: "Increases target Constitution by 10% for 10 minutes."
-		range: 8
-		cooldowns: [ global .fiendish_spellcaster_unholy_empowerment ]
-		flags: [ spell target_other target_friendly ]
-		states: [ default in_combat ]
-		icon: icon_unholy_empowerment		
-		cast_time: 20
-		sound_effects: !SOUND_HEAL{}
+			direct_effect damage:
+			{
+				must_have_ability_modifier: demon_mastery_3
+				flags: [ can_be_critical is_magical ]
+				damage_type: fire
+				function: { expression: a a: [ [ 1 22 ] [ 10 44 ] [ 20 88 ] ] }
+			}		
+			
+			direct_effect damage:
+			{
+				must_have_ability_modifier: demon_mastery_4
+				flags: [ can_be_critical is_magical ]
+				damage_type: fire
+				function: { expression: a a: [ [ 1 24 ] [ 10 48 ] [ 20 96 ] ] }
+			}		
 
-		direct_effect apply_aura:
-		{	
-			aura: .fiendish_spellcaster_unholy_empowerment
-		}
-	}
-
-	aura .fiendish_spellcaster_demonic_fury:
-	{
-		string: "Demonic Fury"
-		icon: icon_demonic_fury
-		type: buff	
-		duration: 200
-		flags: [ unique magic ]
-		stat_modifiers: 
-		{ 
-			phys_crit_chance: { add: 30 } 
-			spell_crit_chance: { add: 30 } 
-		}
-	}
-	
-	cooldown .fiendish_spellcaster_demonic_fury:
-	{
-		duration: 6000
-	}
-
-	ability .fiendish_spellcaster_demonic_fury:
-	{
-		string: "Demonic Fury"
-		description: "Increases target critical strike chance by 30% for 20 seconds."
-		range: 8
-		cooldowns: [ global .fiendish_spellcaster_demonic_fury ]
-		flags: [ spell target_other target_self target_friendly ]
-		states: [ default in_combat ]
-		icon: icon_demonic_fury
-		cast_time: 20
-
-		direct_effect apply_aura:
-		{	
-			aura: .fiendish_spellcaster_demonic_fury
-		}
-	}	
-	
-	entity fiendish_spellcaster: !MINION{}	
-}
-
-##############################################################################
-# Black Beast
-{
-
-	${
-		_name_template: .black_beast
-		_has_rage: true
-		_creature_type: demon
-		_sprite: black_beast
-		_sprite_dead: black_beast_dead
-		_minion_modes: [ .black_beast_aggressive .black_beast_defensive .black_beast_passive ]
-		_default_minion_mode: .black_beast_defensive
-		_commands: [ move attack ]
-		
-		_abilities: 
-		[ 
-			{ id: .black_beast_attack flags: [ auto ] } 
-			{ id: .black_beast_growl flags: [ auto ] self_must_not_have_aura: .black_beast_growl } 
-			{ id: .black_beast_howl_from_beyond flags: [ auto ] min_neighbor_hostiles: 2 } 			
-		]
-		
-		_ability_prio: 
-		[ 
-			.black_beast_howl_from_beyond
-			.black_beast_growl
-			.black_beast_attack 
-		]		
-		
-		_class_minion: true
-		_store_combat_data: true
-	}
-	
-	name_template .black_beast:
-	{
-		possibility<1>:
-		{
-			generated_name: [ demon_name ]
-		}
-	}
-
-	minion_mode .black_beast_aggressive:
-	{
-		string: "Aggressive"
-		icon: icon_aggressive
-		follow_distance: 3
-		aggro_range: 5
-		attack_owner_threat_target: true
-		attack_threat_target: true
-	}
-
-	minion_mode .black_beast_defensive:
-	{
-		string: "Defensive"
-		icon: icon_defensive
-		follow_distance: 3
-		attack_owner_threat_target: true
-		attack_threat_target: true
-	}
-
-	minion_mode .black_beast_passive:
-	{
-		string: "Passive"
-		icon: icon_passive
-		follow_distance: 3
-	}
-	
-	cooldown .black_beast_attack:
-	{
-		duration: 21
-	}
-	
-	ability .black_beast_attack:
-	{
-		string: "Attack"
-		description: "Deals $damage$ damage to target."
-		flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
-		states: [ default in_combat ]
-		delay: 3
-		icon: icon_demon_attack
-		cooldowns: [ .fiendish_spellcaster_attack ]
-		
-		direct_effect damage:
-		{
-			flags: [ can_be_critical generate_rage ]
-			damage_type: physical			
-			function: { expression: x x: weapon }		
-		}
-	}	
-	
-	ability .black_beast_howl_from_beyond_tick:
-	{
-		string: "Howl From Beyond"
-		flags: [ target_self target_aoe target_aoe_hostile ]
-		icon: icon_howl_from_beyond
-		delay: 3
-		aoe_radius: 2
-		aoe_cap: 5
-		aoe_requirement target<must_not_be_in_state>: { id: dead }	
-
-		direct_effect damage:
-		{
-			damage_type: physical
-			function: { expression: a a: [ [ 1 12 ] [ 10 24 ] [ 20 48 ] ] }
-		}
-		
-		source_visual<tile_shake>:
-		{
-			radius: 2
-			flags: [ line_of_sight ]
-			duration: 17
-			amount: 1
-		}		
-	}
-
-	aura .black_beast_howl_from_beyond:
-	{
-		string: "Howl From Beyond"
-		icon: icon_howl_from_beyond
-		type: buff
-		duration: based_on_effects
-		flags: [ unique channeled ]
-
-		aura_effect repeat:
-		{
-			update_interval: 15
-			update_count: 4
-			ability: .black_beast_howl_from_beyond_tick
-		}
-	}
-	
-	ability .black_beast_howl_from_beyond:
-	{
-		string: "Howl From Beyond"
-		cooldowns: [ global ]
-		flags: [ target_self ]
-		icon: icon_howl_from_beyond 
-		resource_cost rage: 30
-
-		direct_effect apply_aura:
-		{	
-			aura: .black_beast_howl_from_beyond
-		}
-	}
-
-	aura .black_beast_growl:
-	{
-		string: "Threatening"
-		description: "Threat generated increased by 50%."
-		type: buff
-		flags: [ unique ]
-		icon: icon_demonic_fury
-		duration: 200
-		aura_effect threat_modifier: 
-		{ 
-			multiplier: 1.5
-		}
-	}
-		
-	ability .black_beast_growl:
-	{
-		string: "Growl"
-		description: "Deals $damage$ damage to target. All threat increased by 50% for 20 seconds."
-		range: 1	
-		cooldowns: [ global ]
-		flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
-		states: [ default in_combat ]
-		delay: 3
-		icon: icon_demonic_fury
-		resource_cost rage: 10
-
-		direct_effect damage:
-		{
-			flags: [ can_be_critical ]
-			damage_type: physical
-			function: { expression: a_mul_x a: 0.8 x: weapon }		
-		}
-		
-		direct_effect apply_aura:
-		{
-			aura: .black_beast_growl
-			flags: [ self ]
-		}		
-	}
-
-	entity black_beast: !MINION{}
-}
-
-##############################################################################
-# Skeleton
-{
-	${
-		_name_template: .skeleton
-		_creature_type: undead
-		_sprite: skeleton
-		_sprite_dead: skeleton_dead
-		_minion_modes: [ .skeleton_aggressive .skeleton_defensive .skeleton_passive ]
-		_default_minion_mode: .skeleton_defensive
-		_commands: [ move attack ]
-		_abilities: [ { id: .skeleton_attack flags: [ auto ] } ]
-		_ability_prio: [ .skeleton_attack ]
-		_class_minion: true
-		_store_combat_data: true
-	}
-	
-	name_template .skeleton:
-	{
-		possibility<1>:
-		{
-			string: [ "Skeleton" ]
-		}
-	}
-
-	minion_mode .skeleton_aggressive:
-	{
-		string: "Aggressive"
-		icon: icon_aggressive
-		follow_distance: 3
-		aggro_range: 5
-		attack_owner_threat_target: true
-		attack_threat_target: true
-	}
-
-	minion_mode .skeleton_defensive:
-	{
-		string: "Defensive"
-		icon: icon_defensive
-		follow_distance: 3
-		attack_owner_threat_target: true
-		attack_threat_target: true
-	}
-
-	minion_mode .skeleton_passive:
-	{
-		string: "Passive"
-		icon: icon_passive
-		follow_distance: 3
-	}
-	
-	cooldown .skeleton_attack:
-	{
-		duration: 19
-	}
-	
-	ability .skeleton_attack:
-	{
-		string: "Attack"
-		description: "Deals $damage$ damage to target."
-		flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
-		states: [ default in_combat ]
-		delay: 3
-		icon: icon_sword_1
-		cooldowns: [ .skeleton_attack ]
-		
-		direct_effect damage:
-		{
-			flags: [ can_be_critical ]
-			damage_type: physical			
-			function: { expression: x x: weapon }		
-		}
-	}	
-	
-	entity skeleton: !MINION{}
-}
-
-##############################################################################
-# Skeletal Terror
-{
-	${
-		_name_template: .skeletal_terror
-		_creature_type: undead
-		_sprite: skeleton_2
-		_sprite_dead: skeleton_2_dead
-		_minion_modes: [ .skeletal_terror_aggressive .skeletal_terror_defensive .skeletal_terror_passive ]
-		_default_minion_mode: .skeletal_terror_defensive
-		_commands: [ move attack ]
-		_has_rage: true
-
-		_abilities: 
-		[ 
-			{ id: .skeletal_terror_attack flags: [ auto ] } 
-			{ id: .skeletal_terror_claw flags: [ auto ] } 
-			{ id: .skeletal_terror_whirlwind flags: [ auto ] min_neighbor_hostiles: 2 } 			
-		]
-		
-		_ability_prio: 
-		[ 
-			.skeletal_terror_whirlwind
-			.skeletal_terror_claw
-			.skeletal_terror_attack 
-		]		
-		
-		_class_minion: true
-		_store_combat_data: true
-	}
-	
-	name_template .skeletal_terror:
-	{
-		possibility<1>:
-		{
-			string: [ "Skeletal Terror" ]
-		}
-	}
-
-	minion_mode .skeletal_terror_aggressive:
-	{
-		string: "Aggressive"
-		icon: icon_aggressive
-		follow_distance: 3
-		aggro_range: 5
-		attack_owner_threat_target: true
-		attack_threat_target: true
-	}
-
-	minion_mode .skeletal_terror_defensive:
-	{
-		string: "Defensive"
-		icon: icon_defensive
-		follow_distance: 3
-		attack_owner_threat_target: true
-		attack_threat_target: true
-	}
-
-	minion_mode .skeletal_terror_passive:
-	{
-		string: "Passive"
-		icon: icon_passive
-		follow_distance: 3
-	}
-	
-	cooldown .skeletal_terror_attack:
-	{
-		duration: 22
-	}
-	
-	ability .skeletal_terror_attack:
-	{
-		string: "Attack"
-		description: "Deals $damage$ damage to target."
-		flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
-		states: [ default in_combat ]
-		delay: 3
-		icon: icon_sword_1
-		cooldowns: [ .skeletal_terror_attack ]
-		
-		direct_effect damage:
-		{
-			flags: [ can_be_critical generate_rage ]
-			damage_type: physical			
-			function: { expression: x x: weapon }		
-		}
-	}	
-	
-	cooldown .skeletal_terror_claw:
-	{
-		duration: 50
-	}
-
-	ability .skeletal_terror_claw:
-	{
-		string: "Claw"
-		description: "Deals $damage$ damage to target. Generates a lot of threat."
-		range: 1	
-		cooldowns: [ global .skeletal_terror_claw ]
-		flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
-		states: [ default in_combat ]
-		delay: 3
-		icon: icon_demon_attack
-		resource_cost rage: 10
-
-		direct_effect damage:
-		{
-			flags: [ can_be_critical ]
-			damage_type: physical
-			function: { expression: a_mul_x a: 0.8 x: weapon }		
-		}
-		
-		direct_effect threat:
-		{
-			apply_to: source
-			add: 25
+				direct_effect damage:
+			{
+				must_have_ability_modifier: demon_mastery_5
+				flags: [ can_be_critical is_magical ]
+				damage_type: fire
+				function: { expression: a a: [ [ 1 25 ] [ 10 50 ] [ 20 100 ] ] }
+			}		
 		}	
-	}
-	
-	cooldown .skeletal_terror_whirlwind:
-	{
-		duration: 50
-	}
-
-	particle_system .skeletal_terror_whirlwind:
-	{
-		particle:
+			
+		aura .fiendish_spellcaster_unholy_empowerment:
 		{
-			sprites: [ effect_whirlwind ]
-			flags: [ attached blend_add ]
-			duration: 500
-			count: 1		
-			scale: 1.5
-			alpha: 0.6
-			rotation_rate: 1440
+			string: "Unholy Empowerment"
+			icon: icon_unholy_empowerment
+			type: buff	
+			duration: 6000
+			flags: [ unique magic ]
+			stat_modifiers: 
+			{ 
+				constitution: { add_percent: 10 } 
+			}		
 		}
-	}
-
-	ability .skeletal_terror_whirlwind:
-	{
-		string: "Whirlwind"
-		description: "Inflicts $damage$ damage on up to 3 adjacent enemies."
-		range: 1	
-		cooldowns: [ global .skeletal_terror_whirlwind ]
-		flags: [ melee target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
-		states: [ default in_combat ]
-		icon: icon_whirlwind
-		delay: 3
-		aoe_radius: 1
-		aoe_cap: 3
-		aoe_requirement target<must_not_be_in_state>: { id: dead }
-		resource_cost rage: 10
-		source_particle_system: .skeletal_terror_whirlwind	
-
-		direct_effect damage:
-		{
-			flags: [ can_be_critical ]
-			damage_type: physical
-			function: { expression: a_mul_x a: 1.3 x: weapon }	
-		}
-	}
-	
 		
-	entity skeletal_terror: !MINION{}
+		cooldown .fiendish_spellcaster_unholy_empowerment:
+		{
+			duration: 40
+		}
+
+		ability .fiendish_spellcaster_unholy_empowerment:
+		{
+			string: "Unholy Empowerment"
+			description: "Increases target Constitution by 10% for 10 minutes."
+			range: 8
+			cooldowns: [ global .fiendish_spellcaster_unholy_empowerment ]
+			flags: [ spell target_other target_friendly ]
+			states: [ default in_combat ]
+			icon: icon_unholy_empowerment		
+			cast_time: 20
+			sound_effects: !SOUND_HEAL{}
+
+			direct_effect apply_aura:
+			{	
+				aura: .fiendish_spellcaster_unholy_empowerment
+			}
+		}
+
+		aura .fiendish_spellcaster_demonic_fury:
+		{
+			string: "Demonic Fury"
+			icon: icon_demonic_fury
+			type: buff	
+			duration: 200
+			flags: [ unique magic ]
+			stat_modifiers: 
+			{ 
+				phys_crit_chance: { add: 30 } 
+				spell_crit_chance: { add: 30 } 
+			}
+		}
+		
+		cooldown .fiendish_spellcaster_demonic_fury:
+		{
+			duration: 6000
+		}
+
+		ability .fiendish_spellcaster_demonic_fury:
+		{
+			string: "Demonic Fury"
+			description: "Increases target critical strike chance by 30% for 20 seconds."
+			range: 8
+			cooldowns: [ global .fiendish_spellcaster_demonic_fury ]
+			flags: [ spell target_other target_self target_friendly ]
+			states: [ default in_combat ]
+			icon: icon_demonic_fury
+			cast_time: 20
+
+			direct_effect apply_aura:
+			{	
+				aura: .fiendish_spellcaster_demonic_fury
+			}
+		}	
+		
+		entity fiendish_spellcaster: !MINION{}	
+	}
+
+	##############################################################################
+	# Black Beast
+	{
+
+		${
+			_name_template: .black_beast
+			_has_rage: true
+			_creature_type: demon
+			_sprite: black_beast
+			_sprite_dead: black_beast_dead
+			_minion_modes: [ .black_beast_aggressive .black_beast_defensive .black_beast_passive ]
+			_default_minion_mode: .black_beast_defensive
+			_commands: [ move attack ]
+			
+			_abilities: 
+			[ 
+				{ id: .black_beast_attack flags: [ auto ] } 
+				{ id: .black_beast_growl flags: [ auto ] self_must_not_have_aura: .black_beast_growl } 
+				{ id: .black_beast_howl_from_beyond flags: [ auto ] min_neighbor_hostiles: 2 } 			
+			]
+			
+			_ability_prio: 
+			[ 
+				.black_beast_howl_from_beyond
+				.black_beast_growl
+				.black_beast_attack 
+			]		
+			
+			_class_minion: true
+			_store_combat_data: true
+		}
+		
+		name_template .black_beast:
+		{
+			possibility<1>:
+			{
+				generated_name: [ demon_name ]
+			}
+		}
+
+		minion_mode .black_beast_aggressive:
+		{
+			string: "Aggressive"
+			icon: icon_aggressive
+			follow_distance: 3
+			aggro_range: 5
+			attack_owner_threat_target: true
+			attack_threat_target: true
+		}
+
+		minion_mode .black_beast_defensive:
+		{
+			string: "Defensive"
+			icon: icon_defensive
+			follow_distance: 3
+			attack_owner_threat_target: true
+			attack_threat_target: true
+		}
+
+		minion_mode .black_beast_passive:
+		{
+			string: "Passive"
+			icon: icon_passive
+			follow_distance: 3
+		}
+		
+		cooldown .black_beast_attack:
+		{
+			duration: 21
+		}
+		
+		ability .black_beast_attack:
+		{
+			string: "Attack"
+			description: "Deals $damage$ damage to target."
+			flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+			states: [ default in_combat ]
+			delay: 3
+			icon: icon_demon_attack
+			cooldowns: [ .fiendish_spellcaster_attack ]
+			
+			direct_effect damage:
+			{
+				flags: [ can_be_critical generate_rage ]
+				damage_type: physical			
+				function: { expression: x x: weapon }		
+			}
+		}	
+		
+		ability .black_beast_howl_from_beyond_tick:
+		{
+			string: "Howl From Beyond"
+			flags: [ target_self target_aoe target_aoe_hostile ]
+			icon: icon_howl_from_beyond
+			delay: 3
+			aoe_radius: 2
+			aoe_cap: 5
+			aoe_requirement target<must_not_be_in_state>: { id: dead }	
+
+			direct_effect damage:
+			{
+				damage_type: physical
+				function: { expression: a a: [ [ 1 12 ] [ 10 24 ] [ 20 48 ] ] }
+			}
+			
+			source_visual<tile_shake>:
+			{
+				radius: 2
+				flags: [ line_of_sight ]
+				duration: 17
+				amount: 1
+			}		
+		}
+
+		aura .black_beast_howl_from_beyond:
+		{
+			string: "Howl From Beyond"
+			icon: icon_howl_from_beyond
+			type: buff
+			duration: based_on_effects
+			flags: [ unique channeled ]
+
+			aura_effect repeat:
+			{
+				update_interval: 15
+				update_count: 4
+				ability: .black_beast_howl_from_beyond_tick
+			}
+		}
+		
+		ability .black_beast_howl_from_beyond:
+		{
+			string: "Howl From Beyond"
+			cooldowns: [ global ]
+			flags: [ target_self ]
+			icon: icon_howl_from_beyond 
+			resource_cost rage: 30
+
+			direct_effect apply_aura:
+			{	
+				aura: .black_beast_howl_from_beyond
+			}
+		}
+
+		aura .black_beast_growl:
+		{
+			string: "Threatening"
+			description: "Threat generated increased by 100%."
+			type: buff
+			flags: [ unique ]
+			icon: icon_demonic_fury
+			duration: 200
+			aura_effect threat_modifier: 
+			{ 
+				multiplier: 2
+			}
+		}
+			
+		ability .black_beast_growl:
+		{
+			string: "Growl"
+			description: "Deals $damage$ damage to target. All threat increased by 100% for 20 seconds."
+			range: 1	
+			cooldowns: [ global ]
+			flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+			states: [ default in_combat ]
+			delay: 3
+			icon: icon_demonic_fury
+			resource_cost rage: 10
+
+			direct_effect damage:
+			{
+				flags: [ can_be_critical ]
+				damage_type: physical
+				function: { expression: a_mul_x a: 0.8 x: weapon }		
+			}
+			
+			direct_effect apply_aura:
+			{
+				aura: .black_beast_growl
+				flags: [ self ]
+			}		
+		}
+
+		entity black_beast: !MINION{}
+	}
+
+	##############################################################################
+	# Skeleton
+	{
+		${
+			_name_template: .skeleton
+			_creature_type: undead
+			_sprite: skeleton
+			_sprite_dead: skeleton_dead
+			_minion_modes: [ .skeleton_aggressive .skeleton_defensive .skeleton_passive ]
+			_default_minion_mode: .skeleton_defensive
+			_commands: [ move attack ]
+			_abilities: [ { id: .skeleton_attack flags: [ auto ] } ]
+			_ability_prio: [ .skeleton_attack ]
+			_class_minion: true
+			_store_combat_data: true
+		}
+		
+		name_template .skeleton:
+		{
+			possibility<1>:
+			{
+				string: [ "Skeleton" ]
+			}
+		}
+
+		minion_mode .skeleton_aggressive:
+		{
+			string: "Aggressive"
+			icon: icon_aggressive
+			follow_distance: 3
+			aggro_range: 5
+			attack_owner_threat_target: true
+			attack_threat_target: true
+		}
+
+		minion_mode .skeleton_defensive:
+		{
+			string: "Defensive"
+			icon: icon_defensive
+			follow_distance: 3
+			attack_owner_threat_target: true
+			attack_threat_target: true
+		}
+
+		minion_mode .skeleton_passive:
+		{
+			string: "Passive"
+			icon: icon_passive
+			follow_distance: 3
+		}
+		
+		cooldown .skeleton_attack:
+		{
+			duration: 19
+		}
+		
+		ability .skeleton_attack:
+		{
+			string: "Attack"
+			description: "Deals $damage$ damage to target."
+			flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+			states: [ default in_combat ]
+			delay: 3
+			icon: icon_sword_1
+			cooldowns: [ .skeleton_attack ]
+			
+			direct_effect damage:
+			{
+				flags: [ can_be_critical ]
+				damage_type: physical			
+				function: { expression: x x: weapon }		
+			}
+		}	
+		
+		entity skeleton: !MINION{}
+	}
+
+	##############################################################################
+	# Skeletal Terror
+	{
+		${
+			_name_template: .skeletal_terror
+			_creature_type: undead
+			_sprite: skeleton_2
+			_sprite_dead: skeleton_2_dead
+			_minion_modes: [ .skeletal_terror_aggressive .skeletal_terror_defensive .skeletal_terror_passive ]
+			_default_minion_mode: .skeletal_terror_defensive
+			_commands: [ move attack ]
+			_has_rage: true
+
+			_abilities: 
+			[ 
+				{ id: .skeletal_terror_attack flags: [ auto ] } 
+				{ id: .skeletal_terror_claw flags: [ auto ] } 
+				{ id: .skeletal_terror_whirlwind flags: [ auto ] min_neighbor_hostiles: 2 } 			
+			]
+			
+			_ability_prio: 
+			[ 
+				.skeletal_terror_whirlwind
+				.skeletal_terror_claw
+				.skeletal_terror_attack 
+			]		
+			
+			_class_minion: true
+			_store_combat_data: true
+		}
+		
+		name_template .skeletal_terror:
+		{
+			possibility<1>:
+			{
+				string: [ "Skeletal Terror" ]
+			}
+		}
+
+		minion_mode .skeletal_terror_aggressive:
+		{
+			string: "Aggressive"
+			icon: icon_aggressive
+			follow_distance: 3
+			aggro_range: 5
+			attack_owner_threat_target: true
+			attack_threat_target: true
+		}
+
+		minion_mode .skeletal_terror_defensive:
+		{
+			string: "Defensive"
+			icon: icon_defensive
+			follow_distance: 3
+			attack_owner_threat_target: true
+			attack_threat_target: true
+		}
+
+		minion_mode .skeletal_terror_passive:
+		{
+			string: "Passive"
+			icon: icon_passive
+			follow_distance: 3
+		}
+		
+		cooldown .skeletal_terror_attack:
+		{
+			duration: 22
+		}
+		
+		ability .skeletal_terror_attack:
+		{
+			string: "Attack"
+			description: "Deals $damage$ damage to target."
+			flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+			states: [ default in_combat ]
+			delay: 3
+			icon: icon_sword_1
+			cooldowns: [ .skeletal_terror_attack ]
+			
+			direct_effect damage:
+			{
+				flags: [ can_be_critical generate_rage ]
+				damage_type: physical			
+				function: { expression: x x: weapon }		
+			}
+		}	
+		
+		cooldown .skeletal_terror_claw:
+		{
+			duration: 50
+		}
+
+		ability .skeletal_terror_claw:
+		{
+			string: "Claw"
+			description: "Deals $damage$ damage to target. Generates a lot of threat."
+			range: 1	
+			cooldowns: [ global .skeletal_terror_claw ]
+			flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+			states: [ default in_combat ]
+			delay: 3
+			icon: icon_demon_attack
+			resource_cost rage: 10
+
+			direct_effect damage:
+			{
+				flags: [ can_be_critical ]
+				damage_type: physical
+				function: { expression: a_mul_x a: 0.8 x: weapon }		
+			}
+			
+			direct_effect threat:
+			{
+				apply_to: source
+				add: 25
+			}	
+		}
+		
+		cooldown .skeletal_terror_whirlwind:
+		{
+			duration: 50
+		}
+
+		particle_system .skeletal_terror_whirlwind:
+		{
+			particle:
+			{
+				sprites: [ effect_whirlwind ]
+				flags: [ attached blend_add ]
+				duration: 500
+				count: 1		
+				scale: 1.5
+				alpha: 0.6
+				rotation_rate: 1440
+			}
+		}
+
+		ability .skeletal_terror_whirlwind:
+		{
+			string: "Whirlwind"
+			description: "Inflicts $damage$ damage on up to 3 adjacent enemies."
+			range: 1	
+			cooldowns: [ global .skeletal_terror_whirlwind ]
+			flags: [ melee target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+			states: [ default in_combat ]
+			icon: icon_whirlwind
+			delay: 3
+			aoe_radius: 1
+			aoe_cap: 3
+			aoe_requirement target<must_not_be_in_state>: { id: dead }
+			resource_cost rage: 10
+			source_particle_system: .skeletal_terror_whirlwind	
+
+			direct_effect damage:
+			{
+				flags: [ can_be_critical ]
+				damage_type: physical
+				function: { expression: a_mul_x a: 1.3 x: weapon }	
+			}
+		}
+		
+			
+		entity skeletal_terror: !MINION{}
+	}
+
 }

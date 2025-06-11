@@ -390,12 +390,16 @@ namespace tpublic
 				break;
 
 			case Requirement::TYPE_MUST_HAVE_DISCOVERED_ZONE:
-				{
+			case Requirement::TYPE_MUST_NOT_HAVE_DISCOVERED_ZONE:
+			{
 					if(!entity->IsPlayer())
 						return false;
 
 					const Components::ZoneDiscovery* zoneDiscovery = entity->GetComponent<Components::ZoneDiscovery>();
-					if(!zoneDiscovery->m_zones.HasValue(aRequirement->m_id))
+					bool hasDiscoveredZone = zoneDiscovery->m_zones.HasValue(aRequirement->m_id);
+					bool shouldHaveDiscoveredZone = aRequirement->m_type == Requirement::TYPE_MUST_HAVE_DISCOVERED_ZONE;
+
+					if(hasDiscoveredZone != shouldHaveDiscoveredZone)
 						return false;
 				}
 				break;

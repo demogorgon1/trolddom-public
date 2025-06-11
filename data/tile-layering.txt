@@ -20,6 +20,9 @@ tile_layering:
 	wet_grass
 	dark_grass
 	farmland
+	jungle_grass
+	rocky_dirt
+	rocky_dirt_blur
 	snow
 	
 	# Special surfaces
@@ -32,6 +35,8 @@ tile_layering:
 	pine_forest_1
 	pine_forest_2
 	pine_forest_3
+	jungle_1
+	jungle_2
 	
 	# Rocks
 	rocks
@@ -39,6 +44,7 @@ tile_layering:
 	fs_rocks_1
 	fs_rocks_2
 	badlands_rocks
+	crystals_1
 ]
 
 base_tile_border_pattern_sprite: grass

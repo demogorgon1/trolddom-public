@@ -117,7 +117,7 @@ objective .swampman_2_b:
 	${ _level: 12 }
 	item .swampman_2_a: !QUEST_REWARD_LEGS{ _string: "Swamp Lurker Leggings" _icon: icon_mail_pants_2 _constitution: 2 _healing: 1 _type: armor_cloth }
 	item .swampman_2_b: !QUEST_REWARD_2H_AXE{ _string: "Monstrous Axe" _icon: icon_axe_2 _constitution: 1 _spirit: 1 _strength: 2 _weapon_cooldown: 32 }
-	item .swampman_2_c: !QUEST_REWARD_HANDS{ _string: "Gauntlets of the Saint" _icon: icon_gloves_2 _constitution: 1 _strength: 1 _wisdom: 2 }
+	item .swampman_2_c: !QUEST_REWARD_HANDS{ _string: "Gauntlets of the Saint" _icon: icon_gloves_2 _constitution: 1 _strength: 1 _wisdom: 2 _type: armor_mail }
 }
 
 quest .swampman_2:

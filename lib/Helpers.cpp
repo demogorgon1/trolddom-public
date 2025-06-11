@@ -135,7 +135,8 @@ namespace tpublic::Helpers
 		if (aProbability == 100)
 			return true;
 		UniformDistribution<uint32_t> distribution(0, 99);
-		return distribution(aRandom) < aProbability;
+		uint32_t roll = distribution(aRandom);
+		return roll < aProbability;
 	}
 
 	bool
@@ -404,6 +405,23 @@ namespace tpublic::Helpers
 			return false;
 
 		return minionPublic->m_ownerEntityInstanceId == aPlayerEntityInstanceId;
+	}
+
+	float
+	SmoothStep(
+		float						aEdge0,
+		float						aEdge1,
+		float						aX)
+	{
+		if (aX < aEdge0)
+			return 0.0f;
+
+		if (aX >= aEdge1)
+			return 1.0f;
+
+		float x = (aX - aEdge0) / (aEdge1 - aEdge0);
+
+		return x * x * (3.0f - 2.0f * x);
 	}
 
 }

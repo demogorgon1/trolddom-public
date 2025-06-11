@@ -242,6 +242,9 @@ namespace tpublic::Systems
 
 		const Data::MinionMode* minionMode = minionPublic->m_currentMinionModeId != 0 ? GetManifest()->GetById<Data::MinionMode>(minionPublic->m_currentMinionModeId) : NULL;
 		const Components::Position* ownerPosition = ownerEntityInstance->GetComponent<Components::Position>();
+		const Components::CombatPublic* ownerCombatPublic = ownerEntityInstance->GetComponent<Components::CombatPublic>();
+
+		minionPrivate->m_factionId = ownerCombatPublic->m_factionId;
 
 		Components::MinionPublic::Command* activeCommand = NULL;
 		uint32_t activeCommandPriority = UINT32_MAX;
@@ -382,7 +385,10 @@ namespace tpublic::Systems
 					if(targetCombatPublic->m_factionId != 0)
 					{
 						const Data::Faction* faction = GetManifest()->GetById<Data::Faction>(targetCombatPublic->m_factionId);
-						if (!faction->IsFriendly())
+
+						bool pvpTarget = faction->IsPVP() && combatPublic->m_factionId != 0 && combatPublic->m_factionId != faction->m_id;
+
+						if (!faction->IsFriendly() || pvpTarget)
 							targetCanBeAttacked = true;
 					}
 				}
@@ -1026,6 +1032,12 @@ namespace tpublic::Systems
 					combatPublic->m_castInProgress.reset();
 					combatPublic->SetDirty();
 				}
+			}
+
+			if(combatPublic->m_factionId != minionPrivate->m_factionId)
+			{
+				combatPublic->m_factionId = minionPrivate->m_factionId;
+				combatPublic->SetDirty();
 			}
 
 			combatPublic->m_interrupt.reset();

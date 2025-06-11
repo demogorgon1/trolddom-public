@@ -83,4 +83,3 @@ quest .eldriv_copperquill_1:
 	reward_cash_multiplier: 0
 	reward_reputation_multiplier: 1.8
 }
-

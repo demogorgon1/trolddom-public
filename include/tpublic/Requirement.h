@@ -59,8 +59,8 @@ namespace tpublic
 			TYPE_MUST_NOT_BE_CREATURE_TYPE,
 			TYPE_MUST_KNOW_RIDING,
 			TYPE_MUST_NOT_KNOW_RIDING,
-			TYPE_MUST_NOT_BE_DISCIPLE
-
+			TYPE_MUST_NOT_BE_DISCIPLE,
+			TYPE_MUST_NOT_HAVE_DISCOVERED_ZONE
 		};
 
 		static DataType::Id
@@ -101,6 +101,7 @@ namespace tpublic
 				return DataType::ID_FACTION;
 
 			case TYPE_MUST_HAVE_DISCOVERED_ZONE:
+			case TYPE_MUST_NOT_HAVE_DISCOVERED_ZONE:
 				return DataType::ID_ZONE;
 
 			case TYPE_MUST_NOT_HAVE_PROFESSION_ABILITY:
@@ -217,6 +218,8 @@ namespace tpublic
 				m_type = TYPE_MUST_BE_FACTION;
 			else if (typeString == "must_have_discovered_zone")
 				m_type = TYPE_MUST_HAVE_DISCOVERED_ZONE;
+			else if (typeString == "must_not_have_discovered_zone")
+				m_type = TYPE_MUST_NOT_HAVE_DISCOVERED_ZONE;
 			else if (typeString == "must_not_have_profession_ability")
 				m_type = TYPE_MUST_NOT_HAVE_PROFESSION_ABILITY;
 			else if (typeString == "must_have_less_health_than")

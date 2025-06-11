@@ -139,8 +139,8 @@ namespace tpublic::Systems
 
 						bool cancelEffect = false;
 
-						if((aura->m_flags & Data::Aura::FLAG_NO_SOURCE_NEEDED) == 0 && !entry->m_sourceEntityInstance.IsSet())
-							cancelEffect = true;
+						//if ((aura->m_flags & Data::Aura::FLAG_NO_SOURCE_NEEDED) == 0 && !entry->m_sourceEntityInstance.IsSet())
+						//	cancelEffect = true;
 
 						if(!cancelEffect && !effect->Update(entry->m_sourceEntityInstance, aEntityInstanceId, aContext, GetManifest()))
 							cancelEffect = true;
@@ -220,6 +220,7 @@ namespace tpublic::Systems
 			visibleAuras->m_colorEffect.reset();
 			visibleAuras->m_colorWeaponGlow.reset();
 			visibleAuras->m_mountId = 0;
+			visibleAuras->m_overrideSpriteId = 0;
 			
 			uint32_t colorEffectR = 0;
 			uint32_t colorEffectG = 0;
@@ -262,11 +263,20 @@ namespace tpublic::Systems
 					t.m_entityInstanceId = entry->m_sourceEntityInstance.m_entityInstanceId;
 					t.m_start = entry->m_start;
 					t.m_end = entry->m_end;
+
+					if(aura->m_flags& Data::Aura::FLAG_EFFECTS_AS_CHARGES)
+						t.m_charges = (uint32_t)entry->m_effects.size();
+					else
+						t.m_charges = entry->m_charges;
+
 					visibleAuras->m_entries.push_back(t);
 				}
 
 				if(aura->m_mountId != 0)
 					visibleAuras->m_mountId = aura->m_mountId;
+
+				if(aura->m_overrideSpriteId != 0)
+					visibleAuras->m_overrideSpriteId = aura->m_overrideSpriteId;
 
 				if(entry->HasEffect(AuraEffect::ID_STUN))
 					visibleAuras->m_auraFlags |= Components::VisibleAuras::AURA_FLAG_STUNNED;

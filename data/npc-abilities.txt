@@ -21,6 +21,53 @@ ability npc_attack:
 	}
 }
 
+ability npc_poison_attack:
+{
+	string: "Attack"
+	range: 1
+	cooldowns: [ global npc_attack ]
+	flags: [ melee attack offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+	states: [ in_combat ]
+	icon: icon_strike
+	delay: 3
+
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		function: { expression: x x: weapon }
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: $aura
+		{
+			string: "Poisoned"
+			description: "Taking damage over time."
+			type: debuff
+			icon: icon_poison
+			duration: based_on_effects
+			flags: [ unique poison no_refresh ]
+
+			aura_effect repeat:
+			{
+				update_interval: 25
+				update_count: 6
+				ability: $ability [ string icon ]
+				{
+					states: [ default in_combat ]
+					flags: [ always_in_range always_in_line_of_sight ]
+					direct_effect damage:
+					{
+						damage_type: poison
+						function: { expression: a a: [ [ 1 2 ] [ 10 7 ] [ 20 14 ] [ 30 28 ] ] elite_multiplier: 2.1 }
+					}				
+				}
+			}
+		}
+	}
+}
+
 cooldown npc_strike:
 {
 	duration: 60
@@ -1165,3 +1212,130 @@ ability npc_teleport:
 	direct_effect simple<threat_table_shuffle>: { flags: [ self ] }
 	direct_effect simple<threat_table_equalize>: { flags: [ self ] }	
 }
+
+ability npc_push:
+{
+	string: "Push"	
+	flags: [ target_other target_hostile target_friendly ]	
+	states: [ default in_combat ]
+	icon: icon_push
+	
+	direct_effect simple<push>:
+	{
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: pushed
+	}
+}
+
+ability npc_poison_bolt:
+{
+	string: "Poison Bolt"
+	range: 8
+	cast_time: 20
+	cooldowns: [ global ]
+	cooldown: $cooldown { duration: 80 }
+	flags: [ offensive target_other target_hostile can_miss interruptable ]
+	states: [ in_combat ]
+	icon: icon_poison
+	delay: 3
+	target_particle_system: green_spell_hit
+	projectile: $particle_system
+	{
+		particle:
+		{
+			sprites: [ effect_witch_bolt ]
+			flags: [ attached no_rotation face_target ]
+			scale: 0.52
+			count: 1		
+		}
+	}	
+
+	direct_effect apply_aura:
+	{
+		aura: $aura
+		{
+			string: "Poisoned"
+			description: "Taking damage over time."
+			type: debuff
+			icon: icon_poison
+			duration: based_on_effects
+			flags: [ unique poison no_refresh ]
+
+			aura_effect repeat:
+			{
+				update_interval: 25
+				update_count: 6
+				ability: $ability [ string icon ]
+				{
+					states: [ default in_combat ]
+					flags: [ always_in_range always_in_line_of_sight ]
+					direct_effect damage:
+					{
+						damage_type: poison
+						function: { expression: a a: [ [ 1 2 ] [ 10 7 ] [ 20 14 ] [ 30 28 ] ] elite_multiplier: 2.1 }
+					}				
+				}
+			}
+		}
+	}
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: poison
+		function: { expression: a_mul_x x: weapon a: 0.9 }
+	}	
+}
+
+ability npc_thorn_spit_no_cooldown:
+{
+	string: "Thorn Spit"
+	range: 7
+	cast_time: 20
+	cooldowns: [ global ]
+	flags: [ offensive target_other target_hostile can_miss interruptable ]
+	states: [ in_combat ]
+	icon: icon_blood
+	delay: 3
+	target_particle_system: green_spell_hit
+	projectile: $particle_system
+	{
+		particle:
+		{
+			sprites: [ effect_witch_bolt ]
+			flags: [ attached no_rotation face_target ]
+			scale: 0.3
+			count: 1		
+		}
+	}
+
+	direct_effect apply_aura:
+	{
+		aura: $aura [ string icon ]
+		{
+			type: debuff
+			duration: 90
+			max_stack: 5
+			flags: [ effects_as_charges ]
+			aura_effect repeat:
+			{
+				update_interval: 15
+				update_count: 6
+				ability: $ability [ string icon ]
+				{
+					states: [ default in_combat ]
+					flags: [ always_in_range always_in_line_of_sight ]
+					direct_effect damage:
+					{
+						damage_type: bleed
+						function: { expression: a a: [ [ 1 2 ] [ 10 4 ] [ 20 7 ] [ 30 14 ] ] elite_multiplier: 1.8 }
+					}
+				}
+			}
+		}
+	}
+}
+

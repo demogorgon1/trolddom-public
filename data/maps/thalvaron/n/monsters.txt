@@ -1636,6 +1636,7 @@ map_entity_spawn thalvaron_poison_lizard:
 			}
 			
 			!WORLD_DROPS {}			
+			!WORLD_DROPS_DEER {}
 			!WORLD_DROPS_ZOMBIES {}
 		]	
 	}
@@ -1653,6 +1654,7 @@ map_entity_spawn thalvaron_poison_lizard:
 			}
 			
 			!WORLD_DROPS {}		
+			!WORLD_DROPS_BOARS {}
 			!WORLD_DROPS_ZOMBIES {}
 		]	
 	}
@@ -1984,6 +1986,7 @@ map_entity_spawn thalvaron_throgar:
 		_immune_to_stun: true
 		_immune_to_immobilize: true
 		_immune_to_slow: true
+		_max_leash_distance: 20
 		
 		_abilities: 
 		[ 

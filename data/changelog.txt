@@ -2,6 +2,187 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.2.10"
+	
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Fixed client crash caused by talents UI." }	
+		{ text: "Some server stability issues fixed." }
+	]
+
+	#######################################################################################
+	heading: "v0.2.9"
+	
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Possible fix of bug where you'd die right after transfering to another map." }
+		{ text: "Fixed bug that would happen whenever someone fished." }
+	]
+
+	#######################################################################################
+	heading: "v0.2.8"
+	
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "A server stability issue is being investigated." }
+	]
+
+	#######################################################################################
+	heading: "v0.2.7"
+	
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Increased bonuses from Pickled Toesnapper, Steamed Trout, Seared Bass, Spicy Perch Fillet, and Mistveil Balls." }
+		{ text: "Cloth (except capes), mail armor, and two-handed weapons can no longer give block value or block chance bonuses." }
+		{ text: "Two-handed swords, maces, and axes can no longer give caster bonuses." }
+	]
+	
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Removed extra Spirit Stone from Durgan Tharok." }
+		{ text: "Fixed some minor bugs." }
+	]
+
+	#######################################################################################
+	heading: "v0.2.6"
+	
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Added option to disable FPS throttling for smoother graphics." }
+		{ text: "Added option to switch between Direct3D 9, Direct3D 11, and OpenGL rendering." }
+		{ text: "Opening chests, picking herbs, etc, will now break stealth." }
+	]
+	
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "FPS should be higher in general." }
+		{ text: "Fixed bug where the quest Elderwood Mushrooms would disappear from NPC dialogue." }
+	]
+
+	#######################################################################################
+	heading: "v0.2.5"
+	
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Increased item level of loot from Zyxtharion and Eldros the Evergrowing." }
+		{ text: "Ferocity can now stack to a maximum of 5." }
+		{ text: "Ferocity is now a single point talent. All fighters have had their talent points reset." }
+		{ text: "Bash threat bonus increased from 50% to 100%." }
+		{ text: "The following buffs and debuffs are now unique per caster: Banner of Command, Poison Bomb, Envenom, Rend, Intervention of Wrath, Cleanse, Creeping Guilt, Condemnation, Blessing, Curse of Corruption, and Soul Leak." }
+		{ text: "Threat meter can be enabled by right-clicking in combat log." }
+		{ text: "Crocodiles can now drop Menacing Jaws." }
+		{ text: "Infected Deer and Infected Boars can now also drop deer and boar items." }
+	]
+
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Quest rewards from Sheila Urkins now have armor (thanks sithpl)." }
+		{ text: "Fixed bug that caused dead escort NPCs to take too long to respawn." }
+		{ text: "Ranks 4 and 5 of Improved Soul Leak and Improved Curse of Corruption should now work like intended." }
+		{ text: "Having the same enchant on both weapons while dual wielding now works like intended." }
+	]
+
+	#######################################################################################
+	heading: "v0.2.4"
+	
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Escorted NPCs will stop walking while the player is in combat." }
+		{ text: "New world map (still no scrolling, sorry)." }
+		{ text: "Intervention of Wrath, Spiritual Surge, Overpower, Elemental Infusion, and Maliciousness are no longer on the global cooldown (thanks sithpl)." }
+		{ text: "Jewelry can now be disenchanted." }
+		{ text: "Mounting and dismounting is no longer on the global cooldown." }
+		{ text: "Dungeon bosses now reset their Token of Victory cooldown at the same time for everyone." }
+		{ text: "/roll gives a random number between 1 and 100. /roll X between 1 and X. /roll X-Y between X and Y." }
+		{ text: "New enchants for cloaks." }
+	]
+
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Fixed bug where certain quest objectives, like escorting an NPC, wouldn't be triggered for all group members." }	
+		{ text: "Several fixes by sithpl: Spiritual Surge no longer melee range only, Gash Hewitt's Cloak now has armor, and the quest The Best Deal Ever works again." }
+		{ text: "More consistent enchanting reagent icons." }
+		{ text: "Fixed wrong icons on a lot of items." }
+	]
+
+	#######################################################################################
+	heading: "v0.2.3"
+	
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Black Beast's Growl ability now increases threat by 100% instead of 50%." }
+		{ text: "Melee enemies can now push less dangerous enemies out of their way to get to their target." }
+		{ text: "Holy Reflection now generates more threat and will also trigger on blocks (thanks sithpl)." }
+		{ text: "Tirnwood Thorns now binds when picked up." }
+		{ text: "Non-boss enemy health levels reduced slightly in Valoris Insurgency, Tower of Indulath, and Tirnwood Thicket." }
+		{ text: "Priests have figured out how to use one-handed maces." }
+	]
+
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Natural Remedy now works like intended." }	
+		{ text: "Witch talent Improved Drain Life now works like intended." }
+		{ text: "Fixed bug that caused some passive talents and auras to malfunction after logging out." }
+		{ text: "Minions now work in The Shrouded Lands." }
+		{ text: "Fixed missing food buffs, item types and some wrong icons (also thanks sithpl)." }
+		{ text: "The quest Delivery to the City can now be turned in at Mathew's Emporium." }
+		{ text: "Robe of the Soulsplitter is now made of cloth like intended." }
+	]
+
+	#######################################################################################
+	heading: "v0.2.2"
+
+	text: "New:"
+	
+	list:
+	[
+		{ text: "Completed quests show up on the map." }
+		{ text: "Two new enchants for chest armor." }
+	]
+
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Removed extra spirit stones." }	
+		{ text: "Added missing stashes." }
+		{ text: "Increased the distance you can get from escorted NPC before despawn." }
+		{ text: "Fishing available in all of The Shrouded Lands like intended." }
+		{ text: "Items that increase critical strike chance with spells now work correctly." }
+		{ text: "Fixed some minor bugs." }
+		{ text: "Elite guards in The Shrouded Lands can no longer be pushed around." }
+		{ text: "Some elites can no longer be easily kited far away from their original location." }
+		{ text: "Reagents for certain enchants changed to be more level appropriate." }
+		{ text: "Quest list is now scrollable." }
+	]
+
+	#######################################################################################
 	heading: "v0.2.1"
 
 	text: "Changes:"

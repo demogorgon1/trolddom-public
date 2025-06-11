@@ -1,0 +1,150 @@
+############################################################
+# Loot
+
+loot_group .boss_1: {}
+
+loot_table .boss_1:
+{
+	slots:
+	[
+		{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
+		  map_message durgan_urok: "Zaggra Rustblade will not drop Token of Victory for {}." } } }
+		{ possibility: { loot_group: .boss_1  } }			
+		!WORLD_DROPS{}		
+	]	
+}
+
+{
+	${
+		_rarity: rare
+		_level: 22
+		_loot_group: .boss_1
+	}
+	
+	item durgan_urok_1_1: !BOSS_DROP_SHIELD
+	{
+		_string: "Shield of Zaggra"
+		_icon: icon_shield_5
+		_budget_bias: -10
+		_dodge_chance: 1
+		_constitution: 1
+	}	
+	
+	item durgan_urok_1_2: !BOSS_DROP_WAIST
+	{
+		_string: "Silk Wrap of the Lost Dwarf"
+		_icon: icon_cloth_belt_1
+		_type: armor_cloth
+		_budget_bias: -10
+		_spell_crit: 1
+		_wisdom: 1
+		_spell_damage: 2
+	}		
+	
+	item durgan_urok_1_3: !BOSS_DROP_1H_KNIFE
+	{
+		_string: "Swiftblade"
+		_icon: icon_knife_2
+		_dexterity: 1
+		_weapon_cooldown: 14
+	}		
+
+	item durgan_urok_1_4: !BOSS_DROP_HEAD
+	{
+		_string: "Orc Thinking Cap"
+		_icon: icon_head_5
+		_healing: 3
+		_mana_per_5: 2
+		_wisdom: 1
+		_type: armor_cloth
+	}		
+	
+}
+
+############################################################
+# Boss
+
+zone .boss_1:
+{
+}
+
+encounter .boss_1:
+{
+	main_entities: [ durgan_urok_boss_1 ]	
+}
+
+entity durgan_urok_boss_1: !NPC 
+{ 
+	_string: "Zaggra Rustblade" 
+	_level: 22
+	_elite: true
+	_faction: monsters 
+	_sprite: orc_13
+	_sprite_dead: orc_13_dead 
+	_weapon_damage: 1.8
+	_resource_health: 6
+	_loot_table: .boss_1
+	_creature_type: humanoid
+	_encounter: .boss_1
+	_zone: .boss_1
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+
+	_abilities: 
+	[
+		{
+			requirement self<must_have_less_health_than>: 95		
+			barks: 
+			[ 
+				{ type: yell text: "Spin to win!" flags: [ no_chat_bubble ] } 
+			]
+			id: $ability
+			{
+				string: "Whirlwind"
+				cast_time: 20
+				cooldowns: [ global ]
+				cooldown: $cooldown { duration: 120 }
+				flags: [ target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+				states: [ default in_combat ]
+				icon: icon_whirlwind
+				delay: 3
+				aoe_radius: 1
+				aoe_cap: 3
+				aoe_requirement target<must_not_be_in_state>: { id: dead }
+				source_particle_system: whirlwind	
+
+				direct_effect damage:
+				{
+					damage_type: physical
+					function: { expression: a_mul_x x: weapon a: 2 }													
+				}
+			}
+			
+		}
+	
+		{
+			id: npc_attack
+		}
+	]	
+	
+}
+
+map_trigger .boss_1_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .boss_1:
+{
+	entity durgan_urok_boss_1: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .boss_1_killed
+		}
+	}
+}
+

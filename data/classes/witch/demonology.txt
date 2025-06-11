@@ -740,7 +740,7 @@ ability drain_life:
 	
 	direct_effect damage:
 	{	
-		must_not_have_ability_modifiers: [ improved_drain_life_1 improved_drain_life_2 improved_drain_life_3 ]
+		must_not_have_ability_modifiers: [ improved_drain_life_1 improved_drain_life_2 improved_drain_life_3 improved_drain_life_4 improved_drain_life_5 ]
 		damage_type: unholy
 		flags: [ can_be_critical is_magical leech ]
 		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.7 b: [ [ 1 22 ] [ 10 44 ] [ 20 88 ] ] }			
@@ -751,7 +751,7 @@ ability drain_life:
 		must_have_ability_modifier: improved_drain_life_1 
 		damage_type: unholy
 		flags: [ can_be_critical is_magical leech ]
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.7 b: [ [ 1 25 ] [ 10 50 ] [ 20 100 ] ] }			
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.77 b: [ [ 1 24 ] [ 10 48 ] [ 20 96 ] ] }			
 	}		
 	
 	direct_effect damage:
@@ -759,7 +759,7 @@ ability drain_life:
 		must_have_ability_modifier: improved_drain_life_2
 		damage_type: unholy
 		flags: [ can_be_critical is_magical leech ]
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.7 b: [ [ 1 29 ] [ 10 58 ] [ 20 116 ] ] }			
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.84 b: [ [ 1 26 ] [ 10 52 ] [ 20 104 ] ] }			
 	}		
 
 	direct_effect damage:
@@ -767,8 +767,24 @@ ability drain_life:
 		must_have_ability_modifier: improved_drain_life_3 
 		damage_type: unholy
 		flags: [ can_be_critical is_magical leech ]
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.8 b: [ [ 1 32 ] [ 10 64 ] [ 20 128 ] ] }					
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.91 b: [ [ 1 29 ] [ 10 58 ] [ 20 118 ] ] }					
 	}			
+	
+	direct_effect damage:
+	{	
+		must_have_ability_modifier: improved_drain_life_4 
+		damage_type: unholy
+		flags: [ can_be_critical is_magical leech ]
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.98 b: [ [ 1 31 ] [ 10 62 ] [ 20 124 ] ] }					
+	}			
+
+	direct_effect damage:
+	{	
+		must_have_ability_modifier: improved_drain_life_5 
+		damage_type: unholy
+		flags: [ can_be_critical is_magical leech ]
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.05 b: [ [ 1 33 ] [ 10 66 ] [ 20 132 ] ] }					
+	}				
 }
 
 ###############################################################################

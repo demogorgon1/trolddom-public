@@ -209,8 +209,8 @@ objective .sheila_urkins_2:
 {
 	${ _level: 15 }
   	item .sheila_urkins_2_a: !QUEST_REWARD_1H_KNIFE{ _string: "Creepy Demonblade" _icon: icon_knife_2 _constitution: 1 _spell_damage: 2 _weapon_cooldown: 16 }
-  	item .sheila_urkins_2_b: !QUEST_REWARD_WAIST{ _string: "Dark Steel Belt" _icon: icon_mail_belt_3 _constitution: 1 _strength: 1 _dexterity: 1 }
-  	item .sheila_urkins_2_c: !QUEST_REWARD_HEAD{ _string: "Scowl of the Witch" _icon: icon_wizard_hat_2 _constitution: 1 _wisdom: 1 }
+  	item .sheila_urkins_2_b: !QUEST_REWARD_WAIST{ _string: "Dark Steel Belt" _icon: icon_mail_belt_3 _constitution: 1 _strength: 1 _dexterity: 1 _type: armor_plate }
+  	item .sheila_urkins_2_c: !QUEST_REWARD_HEAD{ _string: "Scowl of the Witch" _icon: icon_wizard_hat_2 _constitution: 1 _wisdom: 1 _type: armor_cloth}
 }	   
 
 quest .sheila_urkins_2:
@@ -257,6 +257,7 @@ item .sheila_urkins_3_quest_item:
 	flags: [ not_sellable ]
 	string: "Tirnwood Thorns"
 	stack: 5
+	binds: when_picked_up
 }
 
 loot_table .sheila_urkins_3_quest_item:

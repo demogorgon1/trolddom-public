@@ -356,7 +356,7 @@ aura improved_cleanse_1:
 	type: buff	
 	aura_group: improved_cleanse
 	duration: based_on_effects	
-	flags: [ unique magic ]
+	flags: [ unique_per_source magic ]
 	aura_effect repeat: 
 	{ 
 		update_interval: 20
@@ -388,7 +388,7 @@ aura improved_cleanse_2:
 	type: buff	
 	aura_group: improved_cleanse
 	duration: based_on_effects	
-	flags: [ unique magic ]
+	flags: [ unique_per_source magic ]
 	aura_effect repeat: 
 	{ 
 		update_interval: 20
@@ -420,7 +420,7 @@ aura improved_cleanse_3:
 	type: buff	
 	aura_group: improved_cleanse
 	duration: based_on_effects	
-	flags: [ unique magic ]
+	flags: [ unique_per_source magic ]
 	aura_effect repeat: 
 	{ 
 		update_interval: 20

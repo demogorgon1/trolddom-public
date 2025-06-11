@@ -128,9 +128,9 @@ aura intervention_of_wrath_debuff:
 {
 	string: "Intervention of Wrath"
 	description: "Taking holy damage."
-	flags: [ unique magic ]
+	flags: [ unique_per_source magic ]
 	duration: based_on_effects
-	type: buff
+	type: debuff
 	icon: icon_special_1	
 	
 	aura_effect repeat: 
@@ -161,7 +161,7 @@ ability intervention_of_wrath:
 	string: "Intervention of Wrath"
 	description: "Your physical attacks cause target to take additional holy damage over 8 seconds. Effect lasts 20 seconds."
 	range: 1	
-	cooldowns: [ global intervention_of_wrath ]
+	cooldowns: [ intervention_of_wrath ]
 	flags: [ spell target_self ]
 	states: [ default in_combat ]
 	icon: icon_special_1

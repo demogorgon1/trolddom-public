@@ -3,6 +3,7 @@
 #include <tpublic/Components/Auras.h>
 #include <tpublic/Components/CombatPrivate.h>
 #include <tpublic/Components/CombatPublic.h>
+#include <tpublic/Components/DisplayName.h>
 #include <tpublic/Components/KillContribution.h>
 #include <tpublic/Components/Lootable.h>
 #include <tpublic/Components/NPC.h>
@@ -11,6 +12,7 @@
 #include <tpublic/Components/Tag.h>
 #include <tpublic/Components/ThreatSource.h>
 #include <tpublic/Components/ThreatTarget.h>
+#include <tpublic/Components/VisibleAuras.h>
 
 #include <tpublic/Data/Faction.h>
 #include <tpublic/Data/LootTable.h>
@@ -68,6 +70,7 @@ namespace tpublic::Systems
 		RequireComponent<Components::Position>();
 		RequireComponent<Components::Tag>();
 		RequireComponent<Components::ThreatTarget>();
+		RequireComponent<Components::VisibleAuras>();
 	}
 	
 	NPC::~NPC()
@@ -153,6 +156,10 @@ namespace tpublic::Systems
 		}
 
 		bool despawnOnLeaveState = state != NULL && state->m_despawnOnLeave;	
+		uint32_t despawnAfterTicks = state != NULL && state->m_despawnAfterTicks;
+
+		if(despawnAfterTicks != 0 && (uint32_t)aTicksInState > despawnAfterTicks)
+			return EntityState::ID_DESPAWNING;
 
 		const Data::Faction* faction = GetManifest()->GetById<Data::Faction>(combat->m_factionId);
 
@@ -161,15 +168,18 @@ namespace tpublic::Systems
 			const Components::Tag* tag = GetComponent<Components::Tag>(aComponents);
 			if(tag->m_playerTag.IsSet())
 			{
-				if(tag->m_playerTag.IsGroup())
+				if(!npc->m_noKillEvent)
 				{
-					std::vector<uint32_t> threatEntityInstanceIds;
-					threat->m_table.GetEntityInstanceIds(threatEntityInstanceIds);
-					aContext->m_eventQueue->EventQueueGroupKillXP(tag->m_playerTag.GetGroupId(), combat->m_level, aEntityId, combat->m_factionId, threatEntityInstanceIds);
-				}
-				else if(tag->m_playerTag.IsCharacter())
-				{
-					aContext->m_eventQueue->EventQueueIndividualKillXP(tag->m_playerTag.GetCharacterId(), tag->m_playerTag.GetCharacterLevel(), combat->m_level, aEntityId, combat->m_factionId);
+					if (tag->m_playerTag.IsGroup())
+					{
+						std::vector<uint32_t> threatEntityInstanceIds;
+						threat->m_table.GetEntityInstanceIds(threatEntityInstanceIds);
+						aContext->m_eventQueue->EventQueueGroupKillXP(tag->m_playerTag.GetGroupId(), combat->m_level, aEntityId, combat->m_factionId, threatEntityInstanceIds);
+					}
+					else if (tag->m_playerTag.IsCharacter())
+					{
+						aContext->m_eventQueue->EventQueueIndividualKillXP(tag->m_playerTag.GetCharacterId(), tag->m_playerTag.GetCharacterLevel(), combat->m_level, aEntityId, combat->m_factionId);
+					}
 				}
 
 				Components::Lootable* lootable = GetComponent<Components::Lootable>(aComponents);
@@ -200,6 +210,18 @@ namespace tpublic::Systems
 				aContext->m_eventQueue->EventQueueChat(aEntityInstanceId, *bark);
 			}
 
+			if(!npc->m_displayNameWhenDead.empty())
+			{
+				// FIXME: Here we really need optional components as well. To be honest, just get rid of the whole "required components" concept
+				EntityInstance* entityInstance = (EntityInstance*)aContext->m_worldView->WorldViewSingleEntityInstance(aEntityInstanceId);
+				Components::DisplayName* displayName = entityInstance != NULL ? entityInstance->GetComponent<Components::DisplayName>() : NULL;
+				if (displayName != NULL)
+				{
+					displayName->m_string = npc->m_displayNameWhenDead;
+					displayName->SetDirty();
+				}
+			}
+
 			return EntityState::ID_DEAD;
 		}
 
@@ -212,7 +234,9 @@ namespace tpublic::Systems
 		int32_t leashDistanceSquared = aEntityState == EntityState::ID_IN_COMBAT ? npc->m_anchorPosition.DistanceSquared(leashPosition) : 0;
 		int32_t minLeashRangeSquared = GetManifest()->m_npcMetrics.m_minLeashRange * GetManifest()->m_npcMetrics.m_minLeashRange;
 
-		if(npc->m_encounterId == 0 && (leashDistanceSquared >= minLeashRangeSquared || !npc->m_canMove))
+		bool isSurvivalMap = aContext->m_worldView->WorldViewGetMapData()->m_mapInfo.m_survivalScriptId != 0;
+
+		if(!isSurvivalMap && npc->m_encounterId == 0 && (leashDistanceSquared >= minLeashRangeSquared || !npc->m_canMove))
 		{
 			std::vector<SourceEntityInstance> threatRemovedEntities;
 			threat->m_table.Update(aContext->m_tick, threatRemovedEntities);
@@ -220,9 +244,11 @@ namespace tpublic::Systems
 			for (const SourceEntityInstance& threatRemovedEntity : threatRemovedEntities)
 				aContext->m_eventQueue->EventQueueThreat(threatRemovedEntity, aEntityInstanceId, INT32_MIN, aContext->m_tick);
 		}
-		else if(npc->m_inactiveEncounterDespawn && !aContext->m_worldView->WorldViewIsEncounterActive(npc->m_encounterId))
+		else if(npc->m_inactiveEncounterDespawn) 
 		{
-			return EntityState::ID_DESPAWNING;
+			bool validDespawnState = npc->m_inactiveEncounterDespawnState != EntityState::INVALID_ID && npc->m_inactiveEncounterDespawnState == aEntityState;
+			if(validDespawnState && !aContext->m_worldView->WorldViewIsEncounterActive(npc->m_encounterId))
+				return EntityState::ID_DESPAWNING;
 		}
 
 		if(combat->m_interrupt.has_value() && npc->m_castInProgress.has_value())
@@ -328,12 +354,15 @@ namespace tpublic::Systems
 								}
 							}
 						}
-						else if (topThreatEntity != NULL && aEntity->GetState() != EntityState::ID_IN_COMBAT && (!faction->IsNeutralOrFriendly() || faction->IsPVP()))
+						else if (topThreatEntity != NULL && aEntity->GetState() == EntityState::ID_DEFAULT && (!faction->IsNeutralOrFriendly() || faction->IsPVP()))
 						{
 							const Components::CombatPublic* nearbyNonPlayerCombatPublic = aEntity->GetComponent<Components::CombatPublic>();
 							int32_t aggroAssistRange = GetManifest()->m_npcMetrics.m_aggroAssistRange;
 							if(nearbyNonPlayerCombatPublic != NULL && nearbyNonPlayerCombatPublic->m_factionId == combat->m_factionId && aDistanceSquared <= aggroAssistRange * aggroAssistRange)
-								aContext->m_eventQueue->EventQueueThreat({ topThreatEntity->GetEntityInstanceId(), topThreatEntity->GetSeq() }, aEntity->GetEntityInstanceId(), 1, threat->m_table.GetTick());
+							{	
+								int32_t threatTick = aContext->m_tick; // threat->m_table.GetTick(); (FIXME: which makes most sense)
+								aContext->m_eventQueue->EventQueueThreat({ topThreatEntity->GetEntityInstanceId(), topThreatEntity->GetSeq() }, aEntity->GetEntityInstanceId(), 1, threatTick);
+							}
 						}
 					}
 
@@ -356,7 +385,7 @@ namespace tpublic::Systems
 				{
 					returnValue = EntityState::ID_DESPAWNED;
 				}
-				else
+				else if(!npc->m_despawnTime.m_never)
 				{
 					const Components::Lootable* lootable = GetComponent<Components::Lootable>(aComponents);
 					bool hasLoot = lootable->HasLoot();
@@ -437,134 +466,141 @@ namespace tpublic::Systems
 				{
 					switch(npc->m_npcBehaviorState->m_behavior)
 					{
+					case NPCBehavior::ID_SURVIVAL_WAVE:
+						
+						break;
+
 					case NPCBehavior::ID_PATROLLING:
-						if(npc->m_npcBehaviorState->m_despawnIfLostPlayer && npc->m_effectiveRouteId != 0)
 						{
-							const Components::Tag* tag = GetComponent<Components::Tag>(aComponents);
-
-							bool despawn = false;
-
-							if(tag->m_playerEntityInstanceId == 0)
-								despawn = true;
-
-							if(!despawn)
-							{
-								const EntityInstance* taggedByEntityInstance = aContext->m_worldView->WorldViewSingleEntityInstance(tag->m_playerEntityInstanceId);
-								const Components::Position* taggedByEntityPosition = taggedByEntityInstance != NULL ? taggedByEntityInstance->GetComponent<Components::Position>() : NULL;
-								despawn = taggedByEntityPosition == NULL || taggedByEntityInstance->GetState() == EntityState::ID_DEAD || !Helpers::IsWithinDistance(position, taggedByEntityPosition, 24);
-							}
-
-							if(despawn)
-								returnValue = EntityState::ID_DESPAWNING;
-						}
-
-						if (npc->m_moveCooldownUntilTick < aContext->m_tick && npc->m_effectiveRouteId != 0)
-						{							
 							bool paused = false;
 
-							if (npc->m_npcBehaviorState->m_combatEventPauseTicks != 0)
-								paused = aContext->m_tick - combat->m_lastCombatEventTick <= npc->m_npcBehaviorState->m_combatEventPauseTicks;
-
-							if(!paused && npc->m_npcBehaviorState->m_pauseWhenTargetedByNearbyPlayer)
+							if (npc->m_npcBehaviorState->m_despawnIfLostPlayer && npc->m_effectiveRouteId != 0)
 							{
-								std::vector<uint32_t> entityIds = { 0 }; // Players
+								const Components::Tag* tag = GetComponent<Components::Tag>(aComponents);
 
-								IWorldView::EntityQuery entityQuery;
-								entityQuery.m_position = position->m_position;
-								entityQuery.m_maxDistance = 3;
-								entityQuery.m_entityIds = &entityIds; 
-								aContext->m_worldView->WorldViewQueryEntityInstances(entityQuery, [&](
-									const EntityInstance* aEntityInstance,
-									int32_t /*aDistanceSquared*/) -> bool
+								bool despawn = false;
+
+								if (tag->m_playerEntityInstanceId == 0)
+									despawn = true;
+
+								if (!despawn)
 								{
-									if (aEntityInstance->GetComponent<Components::CombatPublic>()->m_targetEntityInstanceId == aEntityInstanceId)
-									{
-										paused = true;
-										return true;
-									}
-									return false;
-								});
+									const EntityInstance* taggedByEntityInstance = aContext->m_worldView->WorldViewSingleEntityInstance(tag->m_playerEntityInstanceId);
+									const Components::Position* taggedByEntityPosition = taggedByEntityInstance != NULL ? taggedByEntityInstance->GetComponent<Components::Position>() : NULL;
+									despawn = taggedByEntityPosition == NULL || taggedByEntityInstance->GetState() == EntityState::ID_DEAD || !Helpers::IsWithinDistance(position, taggedByEntityPosition, 48);
+									paused = taggedByEntityInstance != NULL && taggedByEntityInstance->GetState() == EntityState::ID_IN_COMBAT;
+								}
+
+								if (despawn)
+									returnValue = EntityState::ID_DESPAWNING;
 							}
 
-							if(!paused)
-							{
-								const MapRouteData* mapRouteData = aContext->m_worldView->WorldViewGetMapData()->m_mapRouteData.get();
-								if (mapRouteData != NULL)
+							if (!paused && npc->m_moveCooldownUntilTick < aContext->m_tick && npc->m_effectiveRouteId != 0)
+							{								
+								if (npc->m_npcBehaviorState->m_combatEventPauseTicks != 0)
+									paused = aContext->m_tick - combat->m_lastCombatEventTick <= npc->m_npcBehaviorState->m_combatEventPauseTicks;
+
+								if (!paused && npc->m_npcBehaviorState->m_pauseWhenTargetedByNearbyPlayer)
 								{
-									if(npc->m_subRouteIndex == SIZE_MAX)
-										npc->m_subRouteIndex = mapRouteData->GetSubRouteIndexByPosition(npc->m_effectiveRouteId, position->m_position);
+									std::vector<uint32_t> entityIds = { 0 }; // Players
 
-									Vec2 direction;
-									bool shouldChangeDirection = false;
-									std::optional<uint32_t> index;
-
-									if (mapRouteData->GetDirection(npc->m_effectiveRouteId, npc->m_subRouteIndex, position->m_position, npc->m_routeIsReversing, direction, shouldChangeDirection, index))
+									IWorldView::EntityQuery entityQuery;
+									entityQuery.m_position = position->m_position;
+									entityQuery.m_maxDistance = 3;
+									entityQuery.m_entityIds = &entityIds;
+									aContext->m_worldView->WorldViewQueryEntityInstances(entityQuery, [&](
+										const EntityInstance* aEntityInstance,
+										int32_t /*aDistanceSquared*/) -> bool
 									{
-										IEventQueue::EventQueueMoveRequest moveRequest;
-										moveRequest.AddToPriorityList(direction);
-										moveRequest.m_type = IEventQueue::EventQueueMoveRequest::TYPE_SIMPLE;
-										moveRequest.m_entityInstanceId = aEntityInstanceId;
-										moveRequest.m_canMoveOnAllNonViewBlockingTiles = npc->m_canMoveOnAllNonViewBlockingTiles;
-
-										aContext->m_eventQueue->EventQueueMove(moveRequest);
-
-										if (shouldChangeDirection)
-											npc->m_routeIsReversing = !npc->m_routeIsReversing;
-
-										if(index.has_value())
+										if (aEntityInstance->GetComponent<Components::CombatPublic>()->m_targetEntityInstanceId == aEntityInstanceId)
 										{
-											const Data::Route* routeData = GetManifest()->GetById<Data::Route>(npc->m_effectiveRouteId);
-											for(size_t triggerIndex = 0; triggerIndex < routeData->m_triggers.size(); triggerIndex++)
+											paused = true;
+											return true;
+										}
+										return false;
+									});
+								}
+
+								if (!paused)
+								{
+									const MapRouteData* mapRouteData = aContext->m_worldView->WorldViewGetMapData()->m_mapRouteData.get();
+									if (mapRouteData != NULL)
+									{
+										if (npc->m_subRouteIndex == SIZE_MAX)
+											npc->m_subRouteIndex = mapRouteData->GetSubRouteIndexByPosition(npc->m_effectiveRouteId, position->m_position);
+
+										Vec2 direction;
+										bool shouldChangeDirection = false;
+										std::optional<uint32_t> index;
+
+										if (mapRouteData->GetDirection(npc->m_effectiveRouteId, npc->m_subRouteIndex, position->m_position, npc->m_routeIsReversing, direction, shouldChangeDirection, index))
+										{
+											IEventQueue::EventQueueMoveRequest moveRequest;
+											moveRequest.AddToPriorityList(direction);
+											moveRequest.m_type = IEventQueue::EventQueueMoveRequest::TYPE_SIMPLE;
+											moveRequest.m_entityInstanceId = aEntityInstanceId;
+											moveRequest.m_canMoveOnAllNonViewBlockingTiles = npc->m_canMoveOnAllNonViewBlockingTiles;
+
+											aContext->m_eventQueue->EventQueueMove(moveRequest);
+
+											if (shouldChangeDirection)
+												npc->m_routeIsReversing = !npc->m_routeIsReversing;
+
+											if (index.has_value())
 											{
-												const std::unique_ptr<Data::Route::Trigger>& trigger = routeData->m_triggers[triggerIndex];
-												if(trigger->m_index == index.value() && !npc->m_handledRouteTriggerIndices.contains(trigger->m_index))
+												const Data::Route* routeData = GetManifest()->GetById<Data::Route>(npc->m_effectiveRouteId);
+												for (size_t triggerIndex = 0; triggerIndex < routeData->m_triggers.size(); triggerIndex++)
 												{
-													if(trigger->m_chat)
-														aContext->m_eventQueue->EventQueueChat(aEntityInstanceId, trigger->m_chat.value());
-
-													if(trigger->m_event)
+													const std::unique_ptr<Data::Route::Trigger>& trigger = routeData->m_triggers[triggerIndex];
+													if (trigger->m_index == index.value() && !npc->m_handledRouteTriggerIndices.contains(trigger->m_index))
 													{
-														const Components::Tag* tag = GetComponent<Components::Tag>(aComponents);
-														if(tag->m_playerTag.IsSet())
-															aContext->m_eventQueue->EventQueueEntityObjective(tag->m_playerTag, aEntityId, EntityObjectiveEvent::TYPE_ROUTE_NPC, 24, position->m_position, tag->m_playerEntityInstanceId);
-													}
+														if (trigger->m_chat)
+															aContext->m_eventQueue->EventQueueChat(aEntityInstanceId, trigger->m_chat.value());
 
-													if(trigger->m_abilityId != 0)
-													{
-														const Data::Ability* ability = GetManifest()->GetById<Data::Ability>(trigger->m_abilityId);
+														if (trigger->m_event)
+														{
+															const Components::Tag* tag = GetComponent<Components::Tag>(aComponents);
+															if (tag->m_playerTag.IsSet())
+																aContext->m_eventQueue->EventQueueEntityObjective(tag->m_playerTag, aEntityId, EntityObjectiveEvent::TYPE_ROUTE_NPC, 24, position->m_position, tag->m_playerEntityInstanceId);
+														}
 
-														aContext->m_eventQueue->EventQueueAbility(
-															SourceEntityInstance{ aEntityInstanceId, 0 },
-															aEntityInstanceId,
-															Vec2(),
-															ability);
-													}
+														if (trigger->m_abilityId != 0)
+														{
+															const Data::Ability* ability = GetManifest()->GetById<Data::Ability>(trigger->m_abilityId);
 
-													npc->m_handledRouteTriggerIndices.insert(trigger->m_index);
+															aContext->m_eventQueue->EventQueueAbility(
+																SourceEntityInstance{ aEntityInstanceId, 0 },
+																aEntityInstanceId,
+																Vec2(),
+																ability);
+														}
 
-													if(trigger->m_despawn)
-													{
-														returnValue = EntityState::ID_DESPAWNING;
-													}
-													else if(trigger->m_reset)
-													{
-														npc->m_anchorPosition = npc->m_spawnPosition;
-														npc->m_npcBehaviorState = NULL;
-														npc->m_subRouteIndex = SIZE_MAX;
-														npc->m_effectiveRouteId = 0;
-														npc->m_handledRouteTriggerIndices.clear();
+														npc->m_handledRouteTriggerIndices.insert(trigger->m_index);
 
-														returnValue = EntityState::ID_EVADING;
+														if (trigger->m_despawn)
+														{
+															returnValue = EntityState::ID_DESPAWNING;
+														}
+														else if (trigger->m_reset)
+														{
+															npc->m_anchorPosition = npc->m_spawnPosition;
+															npc->m_npcBehaviorState = NULL;
+															npc->m_subRouteIndex = SIZE_MAX;
+															npc->m_effectiveRouteId = 0;
+															npc->m_handledRouteTriggerIndices.clear();
+
+															returnValue = EntityState::ID_EVADING;
+														}
 													}
 												}
 											}
 										}
 									}
 								}
-							}
 
-							if(npc->m_npcBehaviorState != NULL)
-								npc->m_moveCooldownUntilTick = aContext->m_tick + npc->m_npcBehaviorState->m_patrolMoveIntervalTicks;
+								if (npc->m_npcBehaviorState != NULL)
+									npc->m_moveCooldownUntilTick = aContext->m_tick + npc->m_npcBehaviorState->m_patrolMoveIntervalTicks;
+							}
 						}
 						break;
 
@@ -678,6 +714,13 @@ namespace tpublic::Systems
 											const EntityInstance* target = aContext->m_worldView->WorldViewSingleEntityInstance(targetEntityInstanceId);
 											if (self != NULL && target != NULL && !Requirements::CheckList(GetManifest(), abilityEntry.m_requirements, self, target))
 												continue;
+										}
+
+										if (abilityEntry.m_barks.size() > 0)
+										{
+											const Chat* bark = Helpers::RandomItemPointer(*aContext->m_random, abilityEntry.m_barks);
+											assert(bark != NULL);
+											aContext->m_eventQueue->EventQueueChat(aEntityInstanceId, *bark);
 										}
 
 										npc->m_cooldowns.AddAbility(GetManifest(), ability, aContext->m_tick, 0.0f, NULL); // FIXME: cooldown modifier from haste?
@@ -967,13 +1010,22 @@ namespace tpublic::Systems
 								npc->m_npcMovement.Reset(aContext->m_tick);
 
 								if(useAbility->IsOffensive())
+								{
 									npc->m_lastAttackTick = aContext->m_tick;
+								}
 
 								float cooldownModifier = 0.0f;
 								if(useAbility->IsAttack() && useAbility->IsMelee())
 									cooldownModifier = auras->GetAttackHaste(GetManifest());
 
 								npc->m_cooldowns.AddAbility(GetManifest(), useAbility, aContext->m_tick, cooldownModifier, NULL);
+
+								if (useAbilityEntry != NULL && useAbilityEntry->m_barks.size() > 0)
+								{
+									const Chat* bark = Helpers::RandomItemPointer(*aContext->m_random, useAbilityEntry->m_barks);
+									assert(bark != NULL);
+									aContext->m_eventQueue->EventQueueChat(aEntityInstanceId, *bark);
+								}
 
 								if(useAbility->m_castTime > 0)
 								{	
@@ -996,7 +1048,12 @@ namespace tpublic::Systems
 							else if(distanceSquared > 1 && !auras->HasEffect(AuraEffect::ID_IMMOBILIZE, NULL))
 							{
 								int32_t ticksSinceLastAttack = aContext->m_tick - npc->m_lastAttackTick;
-								if(ticksSinceLastAttack > 80 && npc->m_large) 
+								if(ticksSinceLastAttack > 30 && npc->m_maxLeashDistance > 0 && leashDistanceSquared > (int32_t)(npc->m_maxLeashDistance * npc->m_maxLeashDistance))
+								{
+									// Exceeded max leash distance nad haven't been able to attack for a bit. Evade!
+									aContext->m_eventQueue->EventQueueThreatClear(aEntityInstanceId);
+								}
+								else if(ticksSinceLastAttack > 80 && npc->m_large)
 								{
 									// We're a large NPC and we haven't been able to hurt anyone for some time. We're probably getting cheesed. Evade!
 									aContext->m_eventQueue->EventQueueThreatClear(aEntityInstanceId);
@@ -1012,30 +1069,98 @@ namespace tpublic::Systems
 												npc->m_npcMovement.Reset(aContext->m_tick);
 										}
 
-										IEventQueue::EventQueueMoveRequest moveRequest;
-										if (npc->m_npcMovement.GetMoveRequest(
-											aContext->m_worldView->WorldViewGetMapData()->m_mapPathData.get(),
-											position->m_position,
-											targetPosition->m_position,
-											aContext->m_tick,
-											position->m_lastMoveTick,
-											*aContext->m_random,
-											moveRequest))
+										const EntityInstance* pushEntityInstance = NULL;
+
+										if(npc->m_meleePushPriority > 0 && !npc->m_large)
 										{
-											moveRequest.m_entityInstanceId = aEntityInstanceId;
-											moveRequest.m_canMoveOnAllNonViewBlockingTiles = npc->m_canMoveOnAllNonViewBlockingTiles;
+											std::function<const EntityInstance*(const Vec2&)> getEntityInstance = [&](
+												const Vec2& aPosition) -> const EntityInstance*
+											{
+												const EntityInstance* entityInstance = NULL;
 
-											aContext->m_eventQueue->EventQueueMove(moveRequest);
+												aContext->m_worldView->WorldViewEntityInstancesAtPosition(aPosition, [&](
+													const EntityInstance* aMidEntityInstance) -> bool
+												{
+													const Components::NPC* otherNPC = aMidEntityInstance->GetComponent<Components::NPC>();
+													const Components::CombatPublic* otherCombatPublic = aMidEntityInstance->GetComponent<Components::CombatPublic>();
+													const Components::Position* otherPosition = aMidEntityInstance->GetComponent<Components::Position>();
 
-											npc->m_moveCooldownUntilTick = aContext->m_tick + 2;
-											npc->m_lastCombatMoveTick = aContext->m_tick;
+													if(otherNPC != NULL && otherCombatPublic != NULL)
+													{
+														bool canBePushed = otherCombatPublic->IsPushable() || otherNPC->m_otherNPCPushOverride;
+														if (otherNPC->m_meleePushPriority < npc->m_meleePushPriority && canBePushed && !otherNPC->m_large && otherPosition->IsBlocking())
+														{
+															entityInstance = aMidEntityInstance;
+															return true; // Stop, found something to push
+														}
+													}										
+													return false;
+												});
+
+												return entityInstance;
+											};
+
+											if(distanceSquared == 4)
+											{
+												// This means that we're horizontally or vertically 2 tiles away from the target - and we're some kind of melee NPC that really wants 
+												// to get close to attack. Figure out if some other NPC is standing between us and the target.
+												// FIXME: doesn't work if either of the NPCs are large
+												Vec2 midPosition = { (position->m_position.m_x + targetPosition->m_position.m_x) / 2, (position->m_position.m_y + targetPosition->m_position.m_y) / 2 };
+												pushEntityInstance = getEntityInstance(midPosition);
+											}
+											else if(distanceSquared == 2)
+											{
+												// Same as above, but diagonally adjacent. This is a bit more complicated, because we have two spots to check.
+												Vec2 midPositions[2] = 
+												{
+													{ position->m_position.m_x, targetPosition->m_position.m_y },
+													{ targetPosition->m_position.m_x, position->m_position.m_y }
+												};
+
+												const EntityInstance* midEntityInstances[2] = { NULL, NULL };
+												for(size_t i = 0; i < 2; i++)
+													midEntityInstances[i] = getEntityInstance(midPositions[i]);
+
+												if(midEntityInstances[0] != NULL && midEntityInstances[1] == NULL)
+													pushEntityInstance = midEntityInstances[0];
+												else if (midEntityInstances[1] != NULL && midEntityInstances[0] == NULL)
+													pushEntityInstance = midEntityInstances[1];
+											}
+										}
+
+										if(pushEntityInstance != NULL)
+										{
+											const Data::Ability* pushAbility = GetManifest()->GetExistingByName<Data::Ability>("npc_push");
+
+											aContext->m_eventQueue->EventQueueAbility({ aEntityInstanceId, 0 }, pushEntityInstance->GetEntityInstanceId(), Vec2(), pushAbility, ItemInstanceReference(), NULL);
 										}
 										else
 										{
-											// Seems like we're stuck chasing the top threat target. Reduce threat on that one.
-											position->m_lastMoveTick = aContext->m_tick;
+											IEventQueue::EventQueueMoveRequest moveRequest;
+											if (npc->m_npcMovement.GetMoveRequest(
+												aContext->m_worldView->WorldViewGetMapData()->m_mapPathData.get(),
+												position->m_position,
+												targetPosition->m_position,
+												aContext->m_tick,
+												position->m_lastMoveTick,
+												*aContext->m_random,
+												moveRequest))
+											{
+												moveRequest.m_entityInstanceId = aEntityInstanceId;
+												moveRequest.m_canMoveOnAllNonViewBlockingTiles = npc->m_canMoveOnAllNonViewBlockingTiles;
 
-											aContext->m_eventQueue->EventQueueThreat(npc->m_targetEntity, aEntityInstanceId, -1, 0, 0.5f);
+												aContext->m_eventQueue->EventQueueMove(moveRequest);
+
+												npc->m_moveCooldownUntilTick = aContext->m_tick + 2;
+												npc->m_lastCombatMoveTick = aContext->m_tick;
+											}
+											else
+											{
+												// Seems like we're stuck chasing the top threat target. Reduce threat on that one.
+												position->m_lastMoveTick = aContext->m_tick;
+
+												aContext->m_eventQueue->EventQueueThreat(npc->m_targetEntity, aEntityInstanceId, -1, 0, 0.5f);
+											}
 										}
 									}
 								}
@@ -1100,7 +1225,7 @@ namespace tpublic::Systems
 		EntityState::Id		aEntityState,
 		int32_t				/*aTicksInState*/,
 		ComponentBase**		aComponents,
-		Context*			/*aContext*/) 
+		Context*			aContext) 
 	{
 		Components::CombatPublic* combat = GetComponent<Components::CombatPublic>(aComponents);
 		Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
@@ -1154,6 +1279,28 @@ namespace tpublic::Systems
 		}
 
 		combat->m_interrupt.reset();
+
+		{
+			const Components::VisibleAuras* visibleAuras = GetComponent<Components::VisibleAuras>(aComponents);
+			uint8_t stealthLevel = 0;
+			if (visibleAuras->IsStealthed())
+			{
+				stealthLevel = 1;
+
+				if (aContext->m_worldView->WorldViewGetMapData()->DoesNeighborTileBlockLineOfSight(position->m_position.m_x, position->m_position.m_y))
+				{
+					stealthLevel++; // More stealth from hugging a wall
+					if (aContext->m_tick - position->m_lastMoveTick > 20)
+						stealthLevel++; // More steal from standing still for at least 2 seconds while hugging a wall
+				}
+			}
+
+			if (combat->m_stealthLevel != stealthLevel)
+			{
+				combat->m_stealthLevel = stealthLevel;
+				combat->SetDirty();
+			}
+		}
 	}
 
 }

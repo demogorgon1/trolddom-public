@@ -1,0 +1,80 @@
+dialogue_screen .karl:
+{
+	text: 
+	[	
+		"I went here because I thought fishing would be nice and uncontested, but haven't caught anything at all."
+	]
+	
+	options:
+	[
+		{ quest: .karl_1 }
+	]
+}
+
+entity thalvaron_karl: !NPC
+{
+	_string: "Karl"
+	_guild_name: "Fisherman"
+	_dialogue_root: $dialogue_root { .karl: { } }
+	_sprite: fisherman_1
+	_sprite_dead: fisherman_1_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+##########################################################################################
+# Quest 1
+
+objective .karl_1:
+{
+	string: "Catch Fish"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_lurker ]
+		count: 1
+	}
+}
+
+{
+	${ _level: 20 }
+	item .karl_1_a: !QUEST_REWARD_FINGER{ _string: "Fisherman's Ring" _icon: icon_ring_9 _strength: 3 _constitution: 2 _dexterity: 1 }
+	item .karl_1_b: !QUEST_REWARD_FINGER{ _string: "Signet of the Deep" _icon: icon_ring_10 _wisdom: 4 _constitution: 1 _type: armor_cloth }
+}
+
+quest .karl_1:
+{
+	string: "What Happened to the Fish?"
+
+	text:
+	[
+		"Try to catch a fish inside the abandoned city of Skaldrun."
+	]
+	
+	description: 
+	[
+		"Haven't caught a single fish since I went down here from Mirehaven. I thought it would be a nice place, but no. Where did all the fish go? Seems like the waters are empty. Look at the crabs!"
+		"They seem to be starving - doesn't even want to go near the water. The only place I saw anything in the water was inside Skaldrun, to the west. Something was stirring, not sure what it was.\n\n"
+		"That place is seriously creepy, though. Not setting my foot in there again, that's for sure! I think I'll just go home... But I'm a bit curious. Maybe you can catch it, whatever it is?\n\n"
+		"Or maybe you're not even a fisherman?"
+	]
+	
+	progress:
+	[
+		"Yeah, I wouldn't go in there either."
+	]
+	
+	completion:
+	[
+		"Uh, really? What else? Did you see a gnome riding a unicorn? Haha."
+	]
+
+	objectives: [ .karl_1 ]
+	level: 20
+	reward_one_item: [ .karl_1_a .karl_1_b ]
+}

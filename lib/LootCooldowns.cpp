@@ -4,6 +4,7 @@
 
 #include <tpublic/LootCooldowns.h>
 #include <tpublic/Manifest.h>
+#include <tpublic/TimeSeed.h>
 
 namespace tpublic
 {
@@ -31,7 +32,18 @@ namespace tpublic
 	{
 		uint64_t currentTime = (uint64_t)time(NULL);
 		const Data::LootCooldown* lootCooldown = aManifest->GetById<Data::LootCooldown>(aLootCooldownId);
-		m_table[aLootCooldownId] = currentTime + (uint64_t)lootCooldown->m_seconds;
+
+		if(lootCooldown->m_seconds == 0)
+		{
+			// Fixed daily timer
+			uint64_t nextTimeStamp = TimeSeed::GetNextTimeStamp(currentTime, TimeSeed::TYPE_DAILY);
+
+			m_table[aLootCooldownId] = nextTimeStamp;
+		}
+		else
+		{
+			m_table[aLootCooldownId] = currentTime + (uint64_t)lootCooldown->m_seconds;
+		}
 	}
 	
 	bool		

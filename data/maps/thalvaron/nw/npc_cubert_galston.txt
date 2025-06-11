@@ -26,7 +26,6 @@ entity thalvaron_cubert_galston: !NPC
 	_level: 12
 	_faction: combat_npcs		
 	_creature_type: humanoid
-	_loot_table: .npc
 	_not_pushable: true	
 	_default_trigger_ability: .cubert_galston_start_escort
 	_default_behavior_state: .cubert_galston

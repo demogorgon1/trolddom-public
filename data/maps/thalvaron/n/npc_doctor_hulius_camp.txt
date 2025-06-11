@@ -19,7 +19,7 @@ dialogue_screen .doctor_hulius_camp_dialogue:
 	options:
 	[
 		{ text: "Read journal." goto: .doctor_hulius_camp_dialogue_2 }
-		{ quest<completion_only>: .tyron_frostmane_3 }
+		{ quest<completion_only>: .tyron_frostmane_3 no_point_of_interest: true }
 		{ quest<offer_only>: .doctor_hulius_camp_1 }
 	]
 }

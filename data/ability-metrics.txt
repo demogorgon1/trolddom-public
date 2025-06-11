@@ -9,6 +9,10 @@ ability_metrics:
 		[ 30 400 ]
 		[ 40 500 ]
 		[ 50 600 ]
+		[ 60 700 ]
+		[ 70 800 ]
+		[ 80 900 ]
+		[ 90 1000 ]
 	]
 	
 	rage_constant_at_level:
@@ -16,6 +20,7 @@ ability_metrics:
 		[ 1 2 ]
 		[ 10 12 ]
 		[ 20 24 ]
+		[ 30 36 ]
 	]
 	
 	rage_hit_base_per_second: 4
@@ -26,5 +31,6 @@ ability_metrics:
 		[ 1 300 ]
 		[ 10 2500 ]
 		[ 20 8000 ]
+		[ 30 21600 ]
 	]
 }

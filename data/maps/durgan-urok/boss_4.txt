@@ -1,0 +1,178 @@
+############################################################
+# Loot
+
+loot_group .boss_4: {}
+
+loot_table .boss_4:
+{
+	slots:
+	[
+		{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
+		  map_message durgan_urok: "Vornak Bonechant will not drop Token of Victory for {}." } } }
+		{ possibility: { loot_group: .boss_4  } }			
+		!WORLD_DROPS{}		
+	]	
+}
+
+{
+	${
+		_rarity: rare
+		_level: 22
+		_loot_group: .boss_4
+	}
+	
+	item durgan_urok_4_1: !BOSS_DROP_CHEST
+	{
+		_string: "Ancient Dwarven Battle-Plate"
+		_type: armor_plate
+		_icon: icon_plate_chest_3
+		_budget_bias: -10
+		_strength: 1
+		_constitution: 3		
+		_parry_chance: 1
+	}	
+	
+	item durgan_urok_4_2: !BOSS_DROP_2H_STAFF
+	{
+		_string: "Staff of the Bone-Chanter"
+		_icon: icon_staff_9
+		_wisdom: 3
+		_spell_damage: 2
+		_spell_haste: 1
+	}		
+	
+	item durgan_urok_4_3: !BOSS_DROP_HEAD
+	{
+		_string: "Assassin's Hood"
+		_icon: icon_head_11
+		_budget_bias: -10
+		_strength: 2
+		_dexterity: 1
+		_phys_crit: 1
+		_type: armor_cloth
+	}			
+	
+	item durgan_urok_4_4: !BOSS_DROP_LEGS
+	{
+		_string: "Legs of Restoration"
+		_icon: icon_pants_1
+		_type: armor_cloth
+		_wisdom: 3
+		_healing: 1			
+	}	
+	
+}
+
+############################################################
+# Boss
+
+zone .boss_4:
+{
+}
+
+encounter .boss_4:
+{
+	main_entities: [ durgan_urok_boss_4 ]	
+}
+
+entity durgan_urok_boss_4: !NPC 
+{ 
+	_string: "Vornak Bonechant" 
+	_level: 22
+	_elite: true
+	_faction: monsters 
+	_sprite: orc_11
+	_sprite_dead: orc_11_dead 
+	_weapon_damage: 1.8
+	_resource_health: 6
+	_loot_table: .boss_4
+	_creature_type: beast
+	_encounter: .boss_4
+	_zone: .boss_4
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+	_default_behavior_state: $npc_behavior_state { on_route<durgan_urok_default_patrol>: .patrol behavior: do_nothing }
+
+	_abilities: 
+	[
+		{
+			requirement self<must_have_less_health_than>: 80			
+			target: self
+			id: $ability
+			{
+				string: "Curse of the Skullforge"
+				cooldowns: [ global ]
+				cooldown: $cooldown { duration: 180 }
+				flags: [ target_self ]
+				icon: icon_stuff 
+
+				direct_effect apply_aura:
+				{	
+					aura: $aura [string icon ]
+					{
+						type: buff
+						duration: based_on_effects
+						flags: [ unique channeled ]
+						aura_effect repeat:
+						{
+							update_interval: 15
+							update_count: 4
+							ability: $ability [string icon]							
+							{
+								flags: [ target_self target_aoe target_aoe_hostile ]
+								delay: 3
+								aoe_radius: 12
+								aoe_cap: 10
+								aoe_requirement target<must_not_be_in_state>: { id: dead }	
+
+								direct_effect damage:
+								{
+									damage_type: physical
+									function: 55											
+								}														
+							}
+						}
+						
+					}
+				}									
+			}
+		}
+
+		{
+			requirement self<must_have_less_health_than>: 95					
+			target: random_player
+			id: npc_curse
+		}
+
+		{
+			requirement self<must_have_less_health_than>: 60
+			target: low_health_friend_or_self
+			id: npc_heal
+		}
+	
+		{
+			id: npc_attack
+		}
+	]	
+	
+}
+
+map_trigger .boss_4_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .boss_4:
+{
+	entity durgan_urok_boss_4: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .boss_4_killed
+		}
+	}
+}
+

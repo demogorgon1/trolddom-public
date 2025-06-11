@@ -52,6 +52,7 @@
 #include <tpublic/Data/Route.h>
 #include <tpublic/Data/Sound.h>
 #include <tpublic/Data/Sprite.h>
+#include <tpublic/Data/SurvivalScript.h>
 #include <tpublic/Data/Tag.h>
 #include <tpublic/Data/TagContext.h>
 #include <tpublic/Data/Talent.h>
@@ -60,6 +61,7 @@
 #include <tpublic/Data/Wall.h>
 #include <tpublic/Data/WordGenerator.h>
 #include <tpublic/Data/WorldAura.h>
+#include <tpublic/Data/WorldMap.h>
 #include <tpublic/Data/Zone.h>
 
 #include <tpublic/Document.h>
@@ -77,7 +79,6 @@ namespace tpublic
 		RegisterDataContainer<Data::AchievementCategory>();
 		RegisterDataContainer<Data::Aura>();
 		RegisterDataContainer<Data::AuraGroup>();
-		RegisterDataContainer<Data::Terrain>();
 		RegisterDataContainer<Data::Class>();
 		RegisterDataContainer<Data::CliffStyle>();
 		RegisterDataContainer<Data::ContextHelp>();
@@ -122,14 +123,17 @@ namespace tpublic
 		RegisterDataContainer<Data::Route>();
 		RegisterDataContainer<Data::Sound>();
 		RegisterDataContainer<Data::Sprite>();
+		RegisterDataContainer<Data::SurvivalScript>();
 		RegisterDataContainer<Data::Tag>();
 		RegisterDataContainer<Data::TagContext>();
 		RegisterDataContainer<Data::Talent>();
 		RegisterDataContainer<Data::TalentTree>();
+		RegisterDataContainer<Data::Terrain>();
 		RegisterDataContainer<Data::TileModifier>();
 		RegisterDataContainer<Data::Wall>();
 		RegisterDataContainer<Data::WordGenerator>();
 		RegisterDataContainer<Data::WorldAura>();
+		RegisterDataContainer<Data::WorldMap>();
 		RegisterDataContainer<Data::Zone>();				
 	}
 

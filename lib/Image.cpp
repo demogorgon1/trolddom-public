@@ -57,6 +57,32 @@ namespace tpublic
 
 	//---------------------------------------------------------------------------------
 
+	Image::RGBA	
+	Image::Sepia(
+		const RGBA&		aRGBA,
+		float			aBrightness)
+	{
+		float f[3] = { (float)aRGBA.m_r / 255.0f, (float)aRGBA.m_g / 255.0f, (float)aRGBA.m_b / 255.0f };
+
+		float sepia[3] =
+		{
+			((f[0] * 0.393f) + (f[1] * 0.769f) + (f[2] * 0.189f)) * 220.0f * aBrightness,
+			((f[0] * 0.349f) + (f[1] * 0.686f) + (f[2] * 0.168f)) * 220.0f * aBrightness,
+			((f[0] * 0.272f) + (f[1] * 0.534f) + (f[2] * 0.131f)) * 220.0f * aBrightness
+		};
+
+		if (sepia[0] > 255.0f)
+			sepia[0] = 255.0f;
+		if (sepia[1] > 255.0f)
+			sepia[1] = 255.0f;
+		if (sepia[2] > 255.0f)
+			sepia[2] = 255.0f;
+
+		return { (uint8_t)sepia[0], (uint8_t)sepia[1], (uint8_t)sepia[2], aRGBA.m_a };
+	}
+
+	//---------------------------------------------------------------------------------
+
 	Image::Image()
 		: m_data(NULL)
 		, m_width(0)
@@ -567,6 +593,35 @@ namespace tpublic
 		}
 
 		return RGBA((uint8_t)(r / (uint64_t)count), (uint8_t)(g / (uint64_t)count), (uint8_t)(b / (uint64_t)count), (uint8_t)(a / (uint64_t)count));
+	}
+
+	void		
+	Image::ToStream(
+		IWriter*	aWriter) const
+	{
+		aWriter->WriteUInt(m_width);
+		aWriter->WriteUInt(m_height);
+		aWriter->Write(m_data, GetSize());
+	}
+
+	bool		
+	Image::FromStream(
+		IReader*	aReader)
+	{
+		uint32_t width;
+		if (!aReader->ReadUInt(width))
+			return false;
+
+		uint32_t height;
+		if (!aReader->ReadUInt(height))
+			return false;
+
+		Allocate(width, height);		
+		size_t result = aReader->Read(m_data, GetSize());
+		if(result != GetSize())
+			return false;
+
+		return true;
 	}
 
 }

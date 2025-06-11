@@ -1,0 +1,153 @@
+dialogue_screen .andor_redfoot_theodore:
+{
+	text: 
+	[	
+		"Have you lost your marbles?"
+	]
+}
+
+dialogue_screen .andor_redfoot:
+{
+	text: 
+	[	
+		"Please don't disturb the gorillas. They're gentle creatures."
+	]
+	
+	options:
+	[
+		{ quest: .andor_redfoot_1 }
+		{ goto: .andor_redfoot_theodore text: "Does the paw of a gorilla grant wishes?" requirement self<must_have_active_quest>: .theodore_3 }
+	]
+}
+
+entity thalvaron_andor_redfoot: !NPC
+{
+	_string: "Andor Redfoot"
+	_dialogue_root: $dialogue_root { .andor_redfoot: { } }
+	_sprite: dwarf_19
+	_sprite_dead: dwarf_19_dead	
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+##########################################################################################
+# Quest 1
+
+aura .andor_redfoot_1_quest_item:
+{
+	string: "Gorilla Disguise"
+	description: "Looks like a gorilla."
+	type: buff
+	icon: icon_gorilla
+	duration: 600
+	flags: [ unique no_mount ]
+	override_sprite: gorilla_1
+}
+
+item .andor_redfoot_1_quest_item:
+{
+	string: "Gorilla Disguise" 
+	icon: icon_gorilla
+	item_level: 20
+	flags: [ unique not_sellable ]
+	use_ability: $ability [ string icon ]
+	{
+		description: "Apply to self."
+		cooldown: $cooldown { duration: 30 }
+		cooldowns: [ global ]	
+		flags: [ target_self item ]
+		direct_effect apply_aura: { aura: .andor_redfoot_1_quest_item }
+		states: [ default in_combat ]
+	}	
+}	
+
+objective .andor_redfoot_1:
+{
+	string: "Gorillas Fed"
+	
+	maps: [ thalvaron ]
+	
+	use_ability:
+	{
+		ability: .andor_redfoot_1_quest_item_2
+		entities: [ thalvaron_gorilla ]
+		count: 5
+	}
+}
+
+aura .andor_redfoot_1_quest_item_2:
+{
+	string: "Well Fed"
+	type: buff
+	icon: icon_green_apple
+	duration: 6000
+	flags: [ unique ]
+}
+
+ability .andor_redfoot_1_quest_item_2:
+{
+	icon: icon_brown_bag_2		
+	string: "Bundle of Apples"
+	description: "Feed a gorilla."
+	flags: [ target_other quest_trigger ]
+	cast_time: 10
+	range: 2
+	cooldowns: [ global ]	
+	cooldown: $cooldown { duration: 30 }
+	states: [ default ]
+	requirement target<must_be_type>: thalvaron_gorilla
+	requirement target<must_not_have_aura>: { id: .andor_redfoot_1_quest_item_2 }
+	direct_effect apply_aura: { aura: .andor_redfoot_1_quest_item_2 }
+}	
+
+item .andor_redfoot_1_quest_item_2:
+{
+	binds: when_picked_up
+	type: miscellaneous
+	flags: [ unique not_sellable ]
+	item_level: 20
+	icon: icon_brown_bag_2		
+	string: "Bundle of Apples"
+	use_ability: .andor_redfoot_1_quest_item_2
+}
+
+{
+	${ _level: 20 }
+	item .andor_redfoot_1_a: !QUEST_REWARD_WAIST{ _string: "Thornbite Cinch" _icon: icon_mail_belt_3 _strength: 1 _constitution: 1 _type: armor_plate }
+	item .andor_redfoot_1_b: !QUEST_REWARD_HANDS{ _string: "Apprentice’s Spellgrips" _icon: icon_wizard_hat_5 _wisdom: 1 _spirit: 1 _constitution: 1 _type: armor_cloth }
+}
+
+quest .andor_redfoot_1:
+{
+	string: "Gorilla Sanctuary"
+
+	text:
+	[
+		"Feed the inhabitants of the sanctuary."
+	]
+	
+	description: 
+	[
+		"Just up here behind me are the only remaining Xandralis Highland gorillas. Those poor apes have been hunted down to almost extinction. Why? I have no idea. They're gentle souls.\n"
+		"I've come here to study them, all the way from Durgan Tharok. Are you also interested in gorillas? If you want to see them up close you have to be careful as they've grown quite hostile to humans and dwarves alike - rightfully so. Maybe put on this disguise and go feed them some apples. They like those."		
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"Nice. Very nice."
+	]
+
+	objectives: [ .andor_redfoot_1 ]
+	level: 20	
+	quest_items: [ .andor_redfoot_1_quest_item .andor_redfoot_1_quest_item_2 ]
+	reward_one_item: [ .andor_redfoot_1_a .andor_redfoot_1_b ]
+}
+

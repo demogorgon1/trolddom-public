@@ -13,6 +13,154 @@ namespace tpublic
 	class ItemMetrics
 	{
 	public:
+		struct InvalidStatsItemType
+		{
+			InvalidStatsItemType()
+			{
+
+			}
+
+			InvalidStatsItemType(
+				const SourceNode*		aSource)
+			{
+				m_itemTypeId = ItemType::StringToId(aSource->m_name.c_str());
+				TP_VERIFY(m_itemTypeId != ItemType::INVALID_ID, aSource->m_debugInfo, "'%s' is not a valid item type.", aSource->m_name.c_str());
+
+				aSource->GetObject()->ForEachChild([&](
+					const SourceNode* aChild)
+				{
+					if(aChild->m_name == "ignore_equipment_slot")
+					{
+						m_ignoreEquipmentSlotId = EquipmentSlot::StringToId(aChild->GetIdentifier());
+						TP_VERIFY(m_ignoreEquipmentSlotId != EquipmentSlot::INVALID_ID, aChild->m_debugInfo, "'%s' is not a equipment slot.", aChild->GetIdentifier());
+					}
+					else
+					{
+						Stat::Id replacementStatId = Stat::StringToId(aChild->m_name.c_str());
+						TP_VERIFY(replacementStatId != Stat::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid stat.", aChild->m_name.c_str());
+
+						aChild->GetArray()->ForEachChild([&](
+							const SourceNode* aItem)
+						{
+							Stat::Id illegalStatId = Stat::StringToId(aItem->GetIdentifier());
+							TP_VERIFY(illegalStatId != Stat::INVALID_ID, aItem->m_debugInfo, "'%s' is not a valid stat.", aItem->GetIdentifier());
+							m_table[(uint32_t)illegalStatId] = (uint32_t)replacementStatId;
+						});
+					}
+				});
+			}
+
+			void
+			ToStream(
+				IWriter*				aWriter) const
+			{
+				aWriter->WritePOD(m_itemTypeId);
+				aWriter->WritePOD(m_ignoreEquipmentSlotId);
+				aWriter->WriteUIntToUIntTable<uint32_t, uint32_t>(m_table);
+			}
+
+			bool
+			FromStream(
+				IReader*				aReader)
+			{
+				if (!aReader->ReadPOD(m_itemTypeId))
+					return false;
+				if (!aReader->ReadPOD(m_ignoreEquipmentSlotId))
+					return false;
+				if(!aReader->ReadUIntToUIntTable(m_table))
+					return false;
+				return true;
+			}
+
+			// Public data
+			ItemType::Id						m_itemTypeId = ItemType::INVALID_ID;
+			EquipmentSlot::Id					m_ignoreEquipmentSlotId = EquipmentSlot::INVALID_ID;
+
+			typedef std::unordered_map<uint32_t, uint32_t> Table;
+			Table								m_table;
+		};
+
+		struct InvalidStats
+		{
+			void
+			FromSource(
+				const SourceNode*		aSource)
+			{
+				aSource->ForEachChild([&](
+					const SourceNode* aChild)
+				{
+					if (aChild->m_tag == "item_type")
+						m_itemTypes.push_back(std::make_unique<InvalidStatsItemType>(aChild));
+					else
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+				});
+			}
+
+			void
+			ToStream(
+				IWriter*				aWriter) const
+			{
+				aWriter->WriteObjectPointers(m_itemTypes);
+			}
+
+			bool
+			FromStream(
+				IReader*				aReader)
+			{
+				if(!aReader->ReadObjectPointers(m_itemTypes))
+					return false;
+				return true;
+			}
+
+			const InvalidStatsItemType*
+			GetItemType(
+				ItemType::Id			aItemTypeId) const
+			{
+				for(const std::unique_ptr<InvalidStatsItemType>& t : m_itemTypes)
+				{
+					if(t->m_itemTypeId == aItemTypeId)
+						return t.get();
+				}
+				return NULL;
+			}
+
+			bool
+			ShouldReplaceStat(
+				ItemType::Id					aItemTypeId,
+				const std::vector<uint32_t>&	aEquipmentSlots,
+				Stat::Id						aStatId,
+				uint32_t						aValue,
+				Stat::Id&						aOutStatId,
+				uint32_t&						aOutValue) const
+			{
+				const InvalidStatsItemType* itemType = GetItemType(aItemTypeId);
+				if(itemType == NULL)
+					return false;
+
+				InvalidStatsItemType::Table::const_iterator i = itemType->m_table.find((uint32_t)aStatId);
+				if(i == itemType->m_table.cend())
+					return false;
+
+				if(itemType->m_ignoreEquipmentSlotId != EquipmentSlot::INVALID_ID)
+				{
+					if(Helpers::FindItem(aEquipmentSlots, (uint32_t)itemType->m_ignoreEquipmentSlotId) != SIZE_MAX)
+						return false;
+				}
+
+				aOutStatId = (Stat::Id)i->second;
+				const Stat::Info* replacementStatInfo = Stat::GetInfo(aOutStatId);
+				const Stat::Info* illegalStatInfo = Stat::GetInfo(aStatId);
+				aOutValue = (uint32_t)(((float)aValue * illegalStatInfo->m_budgetCost) / replacementStatInfo->m_budgetCost);
+
+				if(aOutValue == 0)
+					aOutValue = 1;
+				return true;
+			}
+			
+			// Public data
+			std::vector<std::unique_ptr<InvalidStatsItemType>>	m_itemTypes;
+		};
+
 		struct Multipliers
 		{
 			void
@@ -194,6 +342,10 @@ namespace tpublic
 				{
 					m_offHandDPSMultiplier = aChild->GetFloat();
 				}
+				else if(aChild->m_name == "invalid_stats")
+				{
+					m_invalidStats.FromSource(aChild);
+				}
 				else
 				{
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -214,6 +366,7 @@ namespace tpublic
 			aStream->WriteFloat(m_offHandDPSMultiplier);
 			aStream->WriteFloat(m_shieldArmorToBaseBlockValue);
 			aStream->WriteFloat(m_tokenCostBaseMultiplier);
+			m_invalidStats.ToStream(aStream);
 
 			for(uint32_t i = 1; i < (uint32_t)ItemType::NUM_IDS; i++)
 				m_itemTypeMultipliers[i].ToStream(aStream);
@@ -246,6 +399,8 @@ namespace tpublic
 			if (!aStream->ReadFloat(m_shieldArmorToBaseBlockValue))
 				return false;
 			if (!aStream->ReadFloat(m_tokenCostBaseMultiplier))
+				return false;
+			if(!m_invalidStats.FromStream(aStream))
 				return false;
 
 			for (uint32_t i = 1; i < (uint32_t)ItemType::NUM_IDS; i++)
@@ -362,6 +517,7 @@ namespace tpublic
 		float									m_shieldArmorToBaseBlockValue = 0.0f;
 		float									m_offHandDPSMultiplier = 0.5f;
 		float									m_tokenCostBaseMultiplier = 0.1f;
+		InvalidStats							m_invalidStats;
 	};
 
 }

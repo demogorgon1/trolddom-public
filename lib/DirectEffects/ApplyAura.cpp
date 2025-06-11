@@ -170,6 +170,20 @@ namespace tpublic
 					sourceEntityInstance = { targetOfTarget->GetEntityInstanceId(), targetOfTarget->GetSeq() };
 				}
 				break;
+
+			case SOURCE_REDIRECT_TARGET:
+				{
+					// It will appear as the target applied the aura
+					sourceEntityInstance = { aTarget->GetEntityInstanceId(), aTarget->GetSeq() };
+				}
+				break;
+
+			case SOURCE_REDIRECT_REFRESH:
+				{
+					// Make sure the source entity is set to the assigned source (in case of reverse flag being set)
+					sourceEntityInstance = { aSource->GetEntityInstanceId(), aSource->GetSeq() };
+				}
+				break;
 				
 			default:
 				break;
@@ -184,7 +198,7 @@ namespace tpublic
 						continue;
 				}
 
-				if (m_threat != 0 && targetEntity->GetEntityId() != 0)
+				if (m_threat != 0 && !targetEntity->IsPlayer())
 					aEventQueue->EventQueueThreat(sourceEntityInstance, targetEntity->GetEntityInstanceId(), m_threat, aTick);
 
 				std::vector<std::unique_ptr<AuraEffectBase>> effects;

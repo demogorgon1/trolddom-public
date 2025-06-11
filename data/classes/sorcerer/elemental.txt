@@ -130,7 +130,7 @@ ability elemental_infusion:
 	string: "Elemental Infusion"
 	description: "Increases the damage of your fire and frost spells by 50% for 20 seconds. All your spells cost 50% more mana to cast."
 	range: 1	
-	cooldowns: [ global elemental_infusion ]
+	cooldowns: [ elemental_infusion ]
 	flags: [ target_self ]
 	states: [ default in_combat ]
 	icon: icon_combustion

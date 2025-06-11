@@ -79,7 +79,7 @@ aura creeping_guilt:
 	icon: icon_special_7		
 	type: debuff
 	duration: based_on_effects
-	flags: [ unique magic ]
+	flags: [ unique_per_source magic ]
 	sound: spell_14
 	aura_effect repeat: 
 	{ 
@@ -632,7 +632,7 @@ aura condemnation:
 	icon: icon_holy_condemnation		
 	type: debuff
 	duration: based_on_effects
-	flags: [ unique magic ]
+	flags: [ unique_per_source magic ]
 	sound: spell_14
 	aura_effect repeat: 
 	{ 

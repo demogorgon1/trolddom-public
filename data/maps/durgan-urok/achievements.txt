@@ -1,0 +1,10 @@
+achievement_category .durgan_urok: { string: "Dungeon: Durgan Urok" order_key: 3 }
+
+achievement durgan_urok_boss_1: { sort_key: 1 category: .durgan_urok string: "Zaggra Rustblade" description: "Slay Zaggra Rustblade." points: 10 priority: 0 kill_trigger: durgan_urok_boss_1 icon: icon_skull_1 }
+achievement durgan_urok_boss_2: { sort_key: 2 category: .durgan_urok string: "Drokhan the Cleaver" description: "Slay Drokhan the Cleaver." points: 10 priority: 0 kill_trigger: durgan_urok_boss_2 icon: icon_skull_1 }
+achievement durgan_urok_boss_3: { sort_key: 3 category: .durgan_urok string: "Skreeth" description: "Slay Skreeth." points: 10 priority: 0 kill_trigger: durgan_urok_boss_3 icon: icon_skull_1 }
+achievement durgan_urok_boss_4: { sort_key: 4 category: .durgan_urok string: "Vornak Bonechant" description: "Slay Vornak Bonechant." points: 10 priority: 0 kill_trigger: durgan_urok_boss_4 icon: icon_skull_1 }
+achievement durgan_urok_boss_6: { sort_key: 5 category: .durgan_urok string: "Runecore Sentinel" description: "Slay Runecore Sentinel." points: 10 priority: 0 kill_trigger: durgan_urok_boss_4 icon: icon_skull_1 }
+achievement durgan_urok_boss_5: { sort_key: 6 category: .durgan_urok string: "Karthul Blackfang" description: "Slay Karthul Blackfang." points: 10 priority: 0 kill_trigger: durgan_urok_boss_5 icon: icon_skull_1 }
+
+achievement durgan_urok: { category: .durgan_urok string: "Durgan Urok" description: "Finish Durgan Urok." points: 20 need_achievements: [ durgan_urok_boss_1 durgan_urok_boss_2 durgan_urok_boss_3 durgan_urok_boss_4 durgan_urok_boss_5 durgan_urok_boss_6 ] icon: icon_durgan_urok }

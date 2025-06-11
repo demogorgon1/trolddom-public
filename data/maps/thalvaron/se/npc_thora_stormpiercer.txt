@@ -1,0 +1,138 @@
+dialogue_screen .thora_stormpiercer:
+{
+	text: 
+	[	
+		"To the south lies the Xandralis Highlands, home of the thunder lizards."
+	]
+	
+	options:
+	[
+		{ quest: .thora_stormpiercer_1 }
+		{ quest: .thora_stormpiercer_2 }
+	]
+}
+
+entity thalvaron_thora_stormpiercer: !NPC
+{
+	_string: "Thora Stormpiercer"
+	_dialogue_root: $dialogue_root { .thora_stormpiercer: { } }
+	_sprite: woman_5
+	_sprite_dead: woman_5_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+##########################################################################################
+# Quest 1
+
+loot_group .thora_stormpiercer_1_quest_item: { }
+
+item .thora_stormpiercer_1_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .thora_stormpiercer_1_quest_item ]		
+	string: "Thunder Lizard Horn" 
+	icon: icon_tusk_1
+	stack: 6
+	item_level: 20
+	quest: .thora_stormpiercer_1
+	flags: [ not_sellable ]
+}
+
+objective .thora_stormpiercer_1:
+{
+	string: "Thunder Lizard Horns"
+	collect_items: { item: .thora_stormpiercer_1_quest_item count: 6 }
+}
+
+quest .thora_stormpiercer_1:
+{
+	string: "Revenge Against Nature"
+
+	text:
+	[
+		"Collect horns from Thunder Lizards in the Xandralis Highlands and return to Thora Stormpiercer."
+	]
+	
+	description: 
+	[
+		"Years ago my mother died in a freak thunder lizard hunting accident. Since then I've dedicated my life to destroying these foul beasts. You also hate them? Great! Bring me some of their horns"
+		"to show me that you're serious. You'll find these aggressive herbivorous monsters grazing to the south."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Yes!"
+	]
+
+	objectives: [ .thora_stormpiercer_1 ]
+	level: 20	
+}
+
+##########################################################################################
+# Quest 2
+
+loot_group .thora_stormpiercer_2_quest_item: { }
+
+item .thora_stormpiercer_2_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .thora_stormpiercer_2_quest_item ]		
+	string: "Broken Horn of Stormgoros" 
+	icon: icon_sharp_tooth
+	item_level: 20
+	quest: .thora_stormpiercer_2
+	flags: [ not_sellable unique ]
+}
+
+objective .thora_stormpiercer_2:
+{	
+	string: "Broken Horn of Stormgoros"
+	collect_items: { item: .thora_stormpiercer_2_quest_item count: 1 }
+}
+
+{
+	${ _level: 20 }
+	item .thora_stormpiercer_2_a: !QUEST_REWARD_BOW{ _string: "Bow of the Stormpiercer" _icon: icon_bow_2 _budget_bias: -10 _constituion: 1 _phys_crit: 1 }
+	item .thora_stormpiercer_2_b: !QUEST_REWARD_OFFHAND{ _string: "Orb of Lost Magic" _icon: icon_red_orb _budget_bias: -10 _wisdom: 1 _spell_crit: 1 }
+}
+
+quest .thora_stormpiercer_2:
+{
+	string: "Slaying Stormgoros"
+
+	text:
+	[
+		"Hunt down Stormgoros, slay it, and return its broken horn to Thora Stormpiercer."
+	]
+	
+	description: 
+	[
+		"I've spotted the foulest of all storm lizards, the horrendously ugly Stormgoros, moving around in the central highlands. I don't know where he is exactly as he tends to move around. If you truly"
+		"want to make the world a better place, track down Stormgoros, kill him, and return his horn as a trophy."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"This is more like it."
+	]
+
+	prerequisites: [ .thora_stormpiercer_1 ]
+	objectives: [ .thora_stormpiercer_2 ]
+	level: 20	
+	reward_one_item: [ .thora_stormpiercer_2_a .thora_stormpiercer_2_b ]
+}
+

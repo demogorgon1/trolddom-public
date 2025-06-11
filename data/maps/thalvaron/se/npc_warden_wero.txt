@@ -1,0 +1,152 @@
+dialogue_screen .warden_wero:
+{
+	text: 
+	[	
+		"Greetings, $class$."
+	]
+	
+	options:
+	[
+		{ quest: .warden_wero_1 }
+		{ quest<offer_only>: .warden_wero_2 }
+	]
+}
+
+entity thalvaron_warden_wero: !NPC
+{
+	_string: "Warden Wero"
+	_dialogue_root: $dialogue_root { .warden_wero: { } }
+	_sprite: elf_16
+	_sprite_dead: elf_16_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+##########################################################################################
+# Quest 1
+
+objective .warden_wero_1_a:
+{
+	string: "Skullforge Orcs Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_jungle_orc_a thalvaron_jungle_orc_b thalvaron_jungle_orc_c ]
+		count: 6
+	}
+}
+
+objective .warden_wero_1_b:
+{
+	string: "Destroy Supplies"
+	
+	maps: [ thalvaron ]
+	
+	manual_boolean: { }
+}
+
+entity thalvaron_warden_wero_1_quest_item:
+{
+	string: "Supplies"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ barrel_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			verb: destroy
+			range: 1 
+			despawn: true 			
+			level: 12
+			required_quest: .warden_wero_1
+			trigger_ability: .warden_wero_1_quest_item
+			complete_manual_objective: .warden_wero_1_b
+		}		
+	}
+}
+
+map_entity_spawn thalvaron_warden_wero_1_quest_spawn: { spawn_timer: { only_when_triggered: true } }
+
+ability .warden_wero_1_quest_item:
+{
+	direct_effect spawn_entity:
+	{
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: thalvaron_jungle_orc_boss
+		map_entity_spawn: thalvaron_warden_wero_1_quest_spawn
+	}
+}
+
+{
+	${ _level: 21 }
+	item .warden_wero_1_a: !QUEST_REWARD_1H_SWORD{ _string: "Orcbane" _icon: icon_sword_16 _constitution: 1 _strength: 1 _dexterity: 1 _weapon_cooldown: 28 }
+	item .warden_wero_1_b: !QUEST_REWARD_FINGER{ _string: "Enchanted Elvish Ring" _icon: icon_ring_3 _constitution: 1 _wisdom: 1 }
+}
+
+quest .warden_wero_1:
+{
+	string: "Skullforge Menace"
+
+	text:
+	[
+		"Kill orcs in southern Xandralis, destroy their supplies in the cave, and return to Warden Wero."
+	]
+	
+	description: 
+	[
+		"The southern parts of Xandralis are crawling with orcs. It's much worse down here than up in Faerandor Gorge. They're all of the Skullforge clan and they're definitely planning something."
+		"We must stop them before they become too established. They've fortified the area to the south, by the mountains. Go there and kill their scouts and rangers. I think they keep some supplies in"
+		"a cave in the eastern part of the camp. Those supplies need to be destroyed as well. Don't make it easy for them."
+	]
+	
+	progress:
+	[
+		"Make haste, don't waste time."
+	]
+	
+	completion:
+	[
+		"This will definitely set them back a good deal."
+	]
+
+	objectives: [ .warden_wero_1_a .warden_wero_1_b ]
+	level: 21	
+	reward_one_item: [ .warden_wero_1_a .warden_wero_1_b ]
+}
+
+##########################################################################################
+# Quest 2
+
+quest .warden_wero_2:
+{
+	string: "Infiltrating Durgan Urok"
+
+	text:
+	[
+		"Find Warden Taliar in the cave leading to Durgan Urok in southern Xandralis."
+	]
+	
+	description: 
+	[
+		"The orcs are coming out of the old dwarven fortifications of Durgan Urok, out of the hidden entrance in the south western corner of Xandralis. Seek out Warden Taliar somewhere in the cave leading to"
+		"the fortress."
+	]
+	
+	completion:
+	[
+		"I've been expecting you."
+	]
+
+	reward_cash_multiplier: 0
+	reward_xp_multiplier: 0.2
+	prerequisites: [ .warden_wero_1 ]
+	level: 21	
+}

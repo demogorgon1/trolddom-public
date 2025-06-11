@@ -88,6 +88,7 @@
 				<exists _default_trigger_ability> trigger_ability: @_default_trigger_ability
 				<exists _default_on_enter_ability> on_enter_ability: @_default_on_enter_ability				
 				<exists _default_abilities> abilities: @_default_abilities
+				<exists _default_despawn_after_ticks> despawn_after_ticks: @_default_despawn_after_ticks
 			}
 			
 			state in_combat:
@@ -104,6 +105,16 @@
 				<exists _despawn_on_leave_combat and _despawn_on_leave_combat> despawn_on_leave: true
 			}	
 			
+			<exists _dead_on_enter_ability> state dead:
+			{
+				on_enter_ability: @_dead_on_enter_ability
+			}
+
+			<exists _evading_on_enter_ability> state evading:
+			{
+				on_enter_ability: @_evading_on_enter_ability
+			}
+			
 			<exists _dead_barks> state dead: { barks: @_dead_barks }
 			<exists _default_behavior_state> default_behavior_state: @_default_behavior_state
 			<exists _can_move_on_all_non_view_blocking_tiles> can_move_on_all_non_view_blocking_tiles: @_can_move_on_all_non_view_blocking_tiles
@@ -113,17 +124,24 @@
 			<exists _despawn_time> despawn_time: @_despawn_time
 			<exists _encounter> encounter: @_encounter
 			<exists _inactive_encounter_despawn> inactive_encounter_despawn: @_inactive_encounter_despawn
+			<exists _inactive_encounter_despawn_state> inactive_encounter_despawn_state: @_inactive_encounter_despawn_state
 			<exists _route> route: @_route
 			<exists _zone> zone: @_zone
 			<exists _out_of_zone_action> out_of_zone_action: @_out_of_zone_action
 			<exists _evade_despawn> evade_despawn: @_evade_despawn
 			<exists _aggro_requirements> aggro_requirements: @_aggro_requirements
+			<exists _max_leash_distance> max_leash_distance: @_max_leash_distance						
+			<exists _melee_push_priority> melee_push_priority: @_melee_push_priority
+			<exists _display_name_when_dead> display_name_when_dead: @_display_name_when_dead
+			<exists _no_kill_event and _no_kill_event> no_kill_event: @_no_kill_event
 		}		
 		sprite<static>: 
 		{ 
 			animations:
 			[
-				{ states: [ default in_combat spawning evading ] frames: [ @_sprite ] }			
+				<exists _animation_states> { states: @_animation_states frames: [ @_sprite ] }			
+				<!exists _animation_states> { states: [ default in_combat spawning evading ] frames: [ @_sprite ] }			
+				
 				{ states: [ dead ] frames: [ @_sprite_dead ] z_offset: -2 }			
 			]		
 			
@@ -149,6 +167,7 @@
 		<exists _is_threat_source and _is_threat_source> threat_source: { }
 		<exists _kill_contribution and _kill_contribution> kill_contribution: { }
 		<exists _random_item_vendor> random_item_vendor: @_random_item_vendor
+		<exists _display_name_when_dead> display_name: { string: @_string }
 	}
 	
 	<exists _tags> tags: @_tags
@@ -168,6 +187,7 @@
 	<exists _item_aura> aura: @_item_aura
 	<exists _budget_bias> budget_bias: @_budget_bias
 	<exists _weapon_cooldown> weapon_cooldown: @_weapon_cooldown
+	<exists _use_ability> use_ability: @_use_ability
 
 	<exists _rarity> rarity: @_rarity
 	<!exists _rarity> rarity: uncommon	
@@ -225,15 +245,18 @@
 {
 	string: @_string
 	binds: when_picked_up
-	required_level: @_level
+	required_level: @_level	
 	icon: @_icon
 	flags: [ dungeon_loot ]
+	
+	<exists _item_level> item_level: @_item_level
 	
 	<exists _type> type: @_type
 	<exists _item_aura> aura: @_item_aura
 	<exists _loot_group> loot_groups: [ @_loot_group ]
 	<exists _budget_bias> budget_bias: @_budget_bias
 	<exists _weapon_cooldown> weapon_cooldown: @_weapon_cooldown
+	<exists _use_ability> use_ability: @_use_ability
 
 	<exists _rarity> rarity: @_rarity
 	<!exists _rarity> rarity: uncommon		

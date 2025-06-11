@@ -142,6 +142,8 @@ namespace tpublic
 							m_requirements.push_back(Requirement(aChild));
 						else if(aChild->m_name == "update_target")
 							m_updateTarget = aChild->GetBool();
+						else if (aChild->m_name == "barks")
+							aChild->GetArray()->ForEachChild([&](const SourceNode* aBark) { m_barks.push_back(Chat(aBark)); });
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 					});
@@ -157,6 +159,7 @@ namespace tpublic
 					aStream->WritePOD(m_targetType);
 					aStream->WriteObjects(m_requirements);
 					aStream->WriteBool(m_updateTarget);
+					aStream->WriteObjects(m_barks);
 				}
 
 				bool
@@ -175,6 +178,8 @@ namespace tpublic
 						return false;
 					if(!aStream->ReadBool(m_updateTarget))
 						return false;
+					if (!aStream->ReadObjects(m_barks))
+						return false;
 					return true;
 				}	
 
@@ -185,6 +190,7 @@ namespace tpublic
 				TargetType							m_targetType = TARGET_TYPE_DEFAULT;
 				std::vector<Requirement>			m_requirements;
 				bool								m_updateTarget = true;				
+				std::vector<Chat>					m_barks;
 			};
 
 			struct StateEntry
@@ -235,6 +241,10 @@ namespace tpublic
 						{
 							m_despawnOnLeave = aChild->GetBool();
 						}
+						else if (aChild->m_name == "despawn_after_ticks")
+						{
+							m_despawnAfterTicks = aChild->GetUInt32();
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
@@ -253,6 +263,7 @@ namespace tpublic
 					aStream->WriteUInt(m_triggerAbilityId);
 					aStream->WriteUInt(m_onEnterAbilityId);
 					aStream->WriteBool(m_despawnOnLeave);
+					aStream->WriteUInt(m_despawnAfterTicks);
 				}
 
 				bool
@@ -271,7 +282,9 @@ namespace tpublic
 						return false;
 					if (!aStream->ReadUInt(m_onEnterAbilityId))
 						return false;
-					if(!aStream->ReadBool(m_despawnOnLeave))
+					if (!aStream->ReadBool(m_despawnOnLeave))
+						return false;
+					if (!aStream->ReadUInt(m_despawnAfterTicks))
 						return false;
 					return true;
 				}
@@ -296,6 +309,7 @@ namespace tpublic
 				uint32_t							m_triggerAbilityId = 0;
 				uint32_t							m_onEnterAbilityId = 0;
 				bool								m_despawnOnLeave = false;
+				uint32_t							m_despawnAfterTicks = 0;
 			};
 
 			struct ResourceEntry
@@ -406,8 +420,10 @@ namespace tpublic
 							m_ticksWithLoot = aChild->GetInt32() * 10 * 60;
 						else if (aChild->m_name == "out_of_combat_mins")
 							m_ticksOutOfCombat = aChild->GetInt32() * 10 * 60;
-						else if(aChild->m_name == "immediately_when_dead")
+						else if (aChild->m_name == "immediately_when_dead")
 							m_immediatelyWhenDead = aChild->GetBool();
+						else if (aChild->m_name == "never")
+							m_never = aChild->GetBool();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					});
@@ -421,6 +437,7 @@ namespace tpublic
 					aStream->WriteInt(m_ticksWithLoot);
 					aStream->WriteInt(m_ticksOutOfCombat);
 					aStream->WriteBool(m_immediatelyWhenDead);
+					aStream->WriteBool(m_never);
 				}
 
 				bool
@@ -435,6 +452,8 @@ namespace tpublic
 						return false;
 					if (!aStream->ReadBool(m_immediatelyWhenDead))
 						return false;
+					if (!aStream->ReadBool(m_never))
+						return false;
 					return true;
 				}
 
@@ -443,6 +462,7 @@ namespace tpublic
 				int32_t								m_ticksWithLoot = 5 * 60 * 10; // 5 min
 				int32_t								m_ticksOutOfCombat = 0; // Disabled
 				bool								m_immediatelyWhenDead = false;
+				bool								m_never = false;
 			};
 
 			enum Field
@@ -463,6 +483,12 @@ namespace tpublic
 				FIELD_EVADE_DESPAWN,
 				FIELD_AGGRO_REQUIREMENTS,
 				FIELD_CAN_DIE,
+				FIELD_MAX_LEASH_DISTANCE,
+				FIELD_MELEE_PUSH_PRIORITY,
+				FIELD_OTHER_NPC_PUSH_OVERRIDE,
+				FIELD_DISPLAY_NAME_WHEN_DEAD,
+				FIELD_INACTIVE_ENCOUNTER_DESPAWN_STATE,
+				FIELD_NO_KILL_EVENT,
 			};
 
 			static void
@@ -485,6 +511,12 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_EVADE_DESPAWN, "evade_despawn", offsetof(NPC, m_evadeDespawn));
 				aSchema->DefineCustomObject<AggroRequirements>(FIELD_AGGRO_REQUIREMENTS, "aggro_requirements", offsetof(NPC, m_aggroRequirements));
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_CAN_DIE, "can_die", offsetof(NPC, m_canDie));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_MAX_LEASH_DISTANCE, "max_leash_distance", offsetof(NPC, m_maxLeashDistance));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_MELEE_PUSH_PRIORITY, "melee_push_priority", offsetof(NPC, m_meleePushPriority));
+				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_OTHER_NPC_PUSH_OVERRIDE, "other_npc_push_override", offsetof(NPC, m_otherNPCPushOverride));
+				aSchema->Define(ComponentSchema::TYPE_STRING, FIELD_DISPLAY_NAME_WHEN_DEAD, "display_name_when_dead", offsetof(NPC, m_displayNameWhenDead));
+				aSchema->Define(ComponentSchema::TYPE_UINT8, FIELD_INACTIVE_ENCOUNTER_DESPAWN_STATE, "inactive_encounter_despawn_state", offsetof(NPC, m_inactiveEncounterDespawnState))->SetFlags(ComponentSchema::FLAG_ENTITY_STATE);
+				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_NO_KILL_EVENT, "no_kill_event", offsetof(NPC, m_noKillEvent));
 			}
 
 			const StateEntry*
@@ -518,6 +550,12 @@ namespace tpublic
 				m_evadeDespawn = false;
 				m_aggroRequirements = AggroRequirements();
 				m_canDie = true;
+				m_maxLeashDistance = 0;
+				m_meleePushPriority = 0;
+				m_otherNPCPushOverride = false;
+				m_displayNameWhenDead.clear();
+				m_inactiveEncounterDespawnState = EntityState::INVALID_ID;
+				m_noKillEvent = false;
 
 				m_cooldowns.m_entries.clear();
 				m_castInProgress.reset();
@@ -558,6 +596,12 @@ namespace tpublic
 			OutOfZoneAction								m_outOfZoneAction;
 			bool										m_evadeDespawn = false;
 			AggroRequirements							m_aggroRequirements;
+			uint32_t									m_maxLeashDistance = 0;
+			uint32_t									m_meleePushPriority = 0;
+			bool										m_otherNPCPushOverride = false;
+			std::string									m_displayNameWhenDead;
+			EntityState::Id								m_inactiveEncounterDespawnState = EntityState::INVALID_ID;
+			bool										m_noKillEvent = false;
 
 			// Not serialized
 			Cooldowns									m_cooldowns;

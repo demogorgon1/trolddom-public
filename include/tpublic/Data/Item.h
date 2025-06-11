@@ -283,6 +283,10 @@ namespace tpublic
 				{
 					if(m_useAbilityId != 0)
 						m_itemType = ItemType::ID_CONSUMABLE;
+					else if(IsEquippableInSlot(EquipmentSlot::ID_FINGER_1) || IsEquippableInSlot(EquipmentSlot::ID_FINGER_2) || IsEquippableInSlot(EquipmentSlot::ID_NECK))
+						m_itemType = ItemType::ID_JEWELRY;
+					else if (IsEquippableInSlot(EquipmentSlot::ID_BACK))
+						m_itemType = ItemType::ID_ARMOR_CLOTH;
 					else
 						m_itemType = ItemType::ID_MISCELLANEOUS;
 				}
@@ -411,6 +415,10 @@ namespace tpublic
 				if (m_weaponDamage)
 					aOut["weapon_damage"] = Helpers::Format("%u-%u", m_weaponDamage->m_min, m_weaponDamage->m_max).c_str();
 			}
+
+			void		PrepareRuntime( 
+							uint8_t					aRuntime,
+							const Manifest*			aManifest) override;
 
 			// Public data
 			std::vector<uint32_t>				m_equipmentSlots;

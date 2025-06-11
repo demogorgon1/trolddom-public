@@ -1,0 +1,179 @@
+dialogue_screen .seren_virelith:
+{
+	text: 
+	[	
+		"These are dark times."
+	]
+	
+	options:
+	[
+		{ quest<completion_only>: .joar_1 }
+		{ quest: .seren_virelith_1 }
+		{ quest: .seren_virelith_2 }
+		{ quest: thalvaron_seren_virelith_3 }
+	]
+}
+
+entity thalvaron_seren_virelith: !NPC
+{
+	_string: "Seren Virelith"
+	_guild_name: "Demon Hunter"
+	_dialogue_root: $dialogue_root { .seren_virelith: { } }
+	_sprite: elf_2
+	_sprite_dead: elf_2_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+##########################################################################################
+# Quest 1
+
+objective .seren_virelith_1:
+{
+	string: "Satyrs Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_skaldrun_satyr_a thalvaron_skaldrun_satyr_b thalvaron_skaldrun_satyr_c ]
+		count: 10
+	}
+}
+
+quest .seren_virelith_1:
+{
+	string: "Gates of the Abyss"
+
+	text:
+	[
+		"Kill demons on the beaches of Skaldrun."
+	]
+	
+	description: 
+	[
+		"A dark demonic influence has enveloped this part of the the world. Vile creatures have crawled out of the ground and if we don't take action, they will spread north towards civilization."
+		"If you want to assist me you can start by clearing out demons from the coastal area around here."
+	]
+	
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"That's great, good job."
+	]
+
+	objectives: [ .seren_virelith_1 ]
+	level: 21
+}
+
+##########################################################################################
+# Quest 2
+
+loot_group .seren_virelith_2_quest_item: { }
+
+item .seren_virelith_2_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .seren_virelith_2_quest_item ]		
+	string: "Hairy Tentacle" 
+	icon: icon_tentacle_2
+	stack: 8
+	item_level: 22
+	quest: .seren_virelith_2
+	flags: [ not_sellable ]
+}
+
+objective .seren_virelith_2:
+{
+	string: "Hairy Tentacles"
+	collect_items: { item: .seren_virelith_2_quest_item count: 8 }
+}
+
+quest .seren_virelith_2:
+{
+	string: "Tower of Voraghul"
+
+	text:
+	[
+		"Slay demonic spawns in the Tower of Voraghul, collect their tencacles, and return to Seren Virelith."
+	]
+	
+	description: 
+	[
+		"If you follow this road south you'll find a bridge that will take you to a rocky island, just off the coast. This is where the Tower of Voraghul is located.\n\n"
+		"Voraghul was an demonologist who signed an evil contract with some creature from beyond. He was vanquished a long time ago and everyone assumed that he is dead and gone. But is he really?"
+		"This demonic activity could be a sign that he is back. I need you to venture into the tower and slay demonic spawns and collect their tentacles. Bring them back to me."
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"Nice. Very nice."
+	]
+
+	objectives: [ .seren_virelith_2 ]
+	prerequisites: [ .seren_virelith_1 ]
+	level: 22
+}
+
+##########################################################################################
+# Quest 3
+
+objective thalvaron_seren_virelith_3:
+{
+	string: "Locate Portal"
+	maps: [ thalvaron ]	
+	manual_boolean: { }
+}
+
+{
+	${ _level: 22 }
+	item .seren_virelith_3_a: !QUEST_REWARD_LEGS{ _string: "Legplates of the Mad Wizard" _icon: icon_plate_legs_1 _strength: 4 _constitution: 3 _dexterity: 2 _type: armor_plate }
+	item .seren_virelith_3_b: !QUEST_REWARD_WRISTS{ _string: "Demon Hunter Cuffs" _icon: icon_bracers_6 _wisdom: 2 _constitution: 3 _spirit: 1 _type: armor_cloth }
+}
+
+quest thalvaron_seren_virelith_3:
+{
+	string: "Chasing Voraghul"
+
+	text:
+	[
+		"Find the portal to the realm of Voraghul in the tower and return to Seren Virelith."
+	]
+	
+	description: 
+	[
+		"I can tell from these extremely hairy tentacles that Voraghul must be alive. He must be residing on another realm, preparing his comeback. If I know anything about evil wizards, and I do,"
+		"he will have a portal located somewhere in his tower. Locate this portal and return to me."
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"Yes, this is as expected. The cowardly wizard has retreated into his demonic realm of fire. The portal was sealed? I will think about a way to open it. I will find a way to reach you if I need"
+		"your assistance again."
+	]
+
+	objectives: [ thalvaron_seren_virelith_3 ]
+	prerequisites: [ .seren_virelith_2 ]
+	level: 22
+	reward_one_item: [ .seren_virelith_3_a .seren_virelith_3_b ]
+}
+
+
+

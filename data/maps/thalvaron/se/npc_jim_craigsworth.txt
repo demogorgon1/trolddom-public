@@ -1,0 +1,78 @@
+dialogue_screen .jim_craigsworth:
+{
+	text: 
+	[	
+		"How did you get past the spiders? They usually keep guests away."
+	]
+	
+	options:
+	[
+		{ quest<completion_only>: .brill_craigsworth_1 }
+		{ quest: .jim_craigsworth_1 }
+	]
+}
+
+entity thalvaron_jim_craigsworth: !NPC
+{
+	_string: "Jim Craigsworth"
+	_dialogue_root: $dialogue_root { .jim_craigsworth: { } }
+	_sprite: man_70
+	_sprite_dead: man_70_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+##########################################################################################
+# Quest 1
+
+objective .jim_craigsworth_1:
+{
+	string: "Larger Than Average Spider Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_jungle_spider_boss ]
+		count: 1
+	}
+}
+
+{
+	${ _level: 20 }
+	item .jim_craigsworth_1_a: !QUEST_REWARD_1H_MACE{ _string: "Club of the Recluse" _icon: icon_mace_1 _strength: 2 _constitution: 1 _dexterity: 1 _weapon_cooldown: 25 }
+	item .jim_craigsworth_1_b: !QUEST_REWARD_BACK{ _string: "Jungle Wanderer's Cloak" _icon: icon_cape_6 _wisdom: 3 _constitution: 2 _type: armor_cloth }
+}
+
+quest .jim_craigsworth_1:
+{
+	string: "Extermination Job"
+
+	text:
+	[
+		"Venture into the jungle behind Jim Craigsworth's house and kill the spider."
+	]
+	
+	description: 
+	[
+		"If you really want to help, maybe I got a task for you. I don't mind the spiders, usually, but there is a pretty nasty one that has set up camp just behind my house. Sometimes, at night, I think it's peeking through my window, looking at me sleeping. Quite creepy. Can you get rid of it?"
+	]
+	
+	progress:
+	[
+		"Huh? If you don't want to help just leave me alone."
+	]
+	
+	completion:
+	[
+		"Ah, good. I will sleep better tonight."
+	]
+
+	objectives: [ .jim_craigsworth_1 ]
+	level: 20	
+	reward_one_item: [ .jim_craigsworth_1_a .jim_craigsworth_1_b ]
+}
+

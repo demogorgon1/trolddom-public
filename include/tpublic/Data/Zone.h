@@ -38,6 +38,12 @@ namespace tpublic
 							m_noMap = aChild->GetBool();
 						else if (aChild->m_name == "can_query_position")
 							m_canQueryPosition = aChild->GetBool();
+						else if (aChild->m_name == "fishing_loot_table")
+							m_fishingLootTableId = aChild->GetId(DataType::ID_LOOT_TABLE);
+						else if (aChild->m_name == "fishing_trigger_ability")
+							m_fishingTriggerAbilityId = aChild->GetId(DataType::ID_ABILITY);
+						else if (aChild->m_name == "fishing_trigger_ability_chance")
+							m_fishingTriggerAbilityChance = aChild->GetUInt32();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -52,6 +58,9 @@ namespace tpublic
 				aWriter->WriteBool(m_town);
 				aWriter->WriteBool(m_noMap);
 				aWriter->WriteBool(m_canQueryPosition);
+				aWriter->WriteUInt(m_fishingLootTableId);
+				aWriter->WriteUInt(m_fishingTriggerAbilityId);
+				aWriter->WriteUInt(m_fishingTriggerAbilityChance);
 			}
 			
 			bool
@@ -65,6 +74,12 @@ namespace tpublic
 				if (!aReader->ReadBool(m_noMap))
 					return false;
 				if (!aReader->ReadBool(m_canQueryPosition))
+					return false;
+				if (!aReader->ReadUInt(m_fishingLootTableId))
+					return false;
+				if (!aReader->ReadUInt(m_fishingTriggerAbilityId))
+					return false;
+				if (!aReader->ReadUInt(m_fishingTriggerAbilityChance))
 					return false;
 				return true;
 			}
@@ -82,6 +97,9 @@ namespace tpublic
 			bool				m_town = false;			
 			bool				m_noMap = false;
 			bool				m_canQueryPosition = false;
+			uint32_t			m_fishingLootTableId = 0;
+			uint32_t			m_fishingTriggerAbilityId = 0;
+			uint32_t			m_fishingTriggerAbilityChance = 0;
 		};
 
 	}

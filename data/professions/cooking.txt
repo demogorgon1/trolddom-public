@@ -136,3 +136,82 @@ ability craft_mistveil_balls: !COOKING_CRAFT
 	_skill: 90
 }
 
+#####################################################
+# Herbed Snapper
+
+ability craft_herbed_snapper: !COOKING_CRAFT
+{
+	_string: "Herbed Snapper"
+	_item: consumable_herbed_snapper
+	_produce: { consumable_herbed_snapper: 1 } 
+	_materials: { item_skaldrun_snapper: 1 item_wild_herbs: 1 }	
+	_skill: 95
+}
+
+item recipe_herbed_snapper:
+{
+	binds: when_picked_up
+	type: miscellaneous
+	flags: [ unique ]
+	rarity: uncommon
+	item_level: 20
+	icon: icon_scroll_1
+	string: "Recipe: Herbed Snapper"
+	use_ability: $ability
+	{
+		string: "Recipe: Herbed Snapper"
+		description: "Learn to make Herbed Snapper."
+		flags: [ target_self item ]
+		cast_time: 20
+		icon: icon_scroll_1
+		cooldowns: [ global ]	
+		consume_items: { recipe_herbed_snapper: 1 }
+		required_profession<95>: cooking
+		requirement self<must_not_have_profession_ability>: craft_herbed_snapper
+		direct_effect learn_profession_ability:
+		{
+			profession: cooking
+			ability: craft_herbed_snapper
+		}
+	}
+}
+
+#####################################################
+# Piranha Soup
+
+ability craft_piranha_soup: !COOKING_CRAFT
+{
+	_string: "Piranha Soup"
+	_item: consumable_piranha_soup
+	_produce: { consumable_piranha_soup: 1 } 
+	_materials: { item_piranha: 1 item_water: 1 }	
+	_skill: 95
+}
+
+item recipe_piranha_soup:
+{
+	binds: when_picked_up
+	type: miscellaneous
+	flags: [ unique ]
+	rarity: uncommon
+	item_level: 20
+	icon: icon_scroll_1
+	string: "Recipe: Piranha Soup"
+	use_ability: $ability
+	{
+		string: "Recipe: Piranha Soup"
+		description: "Learn to make Piranha Soup."
+		flags: [ target_self item ]
+		cast_time: 20
+		icon: icon_scroll_1
+		cooldowns: [ global ]	
+		consume_items: { recipe_piranha_soup: 1 }
+		required_profession<95>: cooking
+		requirement self<must_not_have_profession_ability>: craft_piranha_soup
+		direct_effect learn_profession_ability:
+		{
+			profession: cooking
+			ability: craft_piranha_soup
+		}
+	}
+}

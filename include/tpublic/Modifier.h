@@ -16,6 +16,15 @@ namespace tpublic
 		}
 
 		Modifier(
+			const Modifier&		aOther,
+			float				aMultiplier)
+			: m_add(aOther.m_add * aMultiplier)
+			, m_addPercent(aOther.m_addPercent * aMultiplier)
+		{
+
+		}
+
+		Modifier(
 			const SourceNode*	aSource)
 		{
 			aSource->ForEachChild([&](
@@ -32,10 +41,11 @@ namespace tpublic
 
 		void
 		Combine(
-			const Modifier&		aOther)
+			const Modifier&		aOther,
+			float				aMultiplier)
 		{
-			m_add += aOther.m_add;
-			m_addPercent += aOther.m_addPercent;
+			m_add += aOther.m_add * aMultiplier;
+			m_addPercent += aOther.m_addPercent * aMultiplier;
 		}
 
 		float

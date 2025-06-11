@@ -140,6 +140,8 @@ namespace tpublic
 								SourceEntityInstance*						aOutSourceEntityInstance) const;
 			bool			HasAura(
 								uint32_t									aAuraId) const;
+			Entry*			GetAura(
+								uint32_t									aAuraId);
 			MoveSpeed::Id	GetMoveSpeed() const;
 			float			GetAttackHaste(
 								const Manifest*								aManifest) const;
@@ -202,15 +204,18 @@ namespace tpublic
 								int32_t&									aCastTime);
 			bool			RemoveAura(
 								uint32_t									aAuraId,
-								uint32_t									aMaxRemove);
+								uint32_t									aMaxRemove,
+								uint32_t									aSourceEntityInstanceId);
 			bool			RemoveAuraByGroup(
 								const Manifest*								aManifest,
 								uint32_t									aAuraGroupId,
-								uint32_t									aMaxRemove);
+								uint32_t									aMaxRemove,
+								uint32_t									aSourceEntityInstanceId);
 			bool			RemoveAurasByFlags(
 								const Manifest*								aManifest,
 								uint32_t									aFlags,
-								uint32_t									aMaxRemove);
+								uint32_t									aMaxRemove,
+								uint32_t									aSourceEntityInstanceId);
 			void			Reset();
 			void			OnLoadedFromPersistence(
 								const Manifest*								aManifest);

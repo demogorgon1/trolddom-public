@@ -1,0 +1,725 @@
+npc_behavior_state .wandering_short:
+{
+	on_route<thalvaron_default_patrol>: thalvaron_default_patrol
+	behavior: wandering
+	max_range: 1
+}
+
+npc_behavior_state .passive:
+{
+	on_route<thalvaron_default_patrol>: thalvaron_default_patrol
+	behavior: do_nothing
+}
+
+##########################################################################################
+# Xandralis 
+
+map_entity_spawn thalvaron_slitherer: { entity thalvaron_slitherer: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_panther: { entity thalvaron_panther: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_gorilla: { entity thalvaron_gorilla: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_jungle_spider: { entity thalvaron_jungle_spider: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_jungle_spider_boss: { entity thalvaron_jungle_spider_boss: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_carnivorous_plant: { entity thalvaron_carnivorous_plant: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_carnivorous_plant_caster: { entity thalvaron_carnivorous_plant_caster: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_jungle_crocodile: { entity thalvaron_jungle_crocodile: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_thunder_lizard: { entity thalvaron_thunder_lizard: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_thunder_lizard_boss: { entity thalvaron_thunder_lizard_boss: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+
+map_entity_spawn thalvaron_jungle_orc: 
+{ 
+	entity thalvaron_jungle_orc_a: {} 
+	entity thalvaron_jungle_orc_b: {} 
+	entity thalvaron_jungle_orc_c: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_jungle_ghost: 
+{ 
+	entity thalvaron_jungle_ghost_a: {} 
+	entity thalvaron_jungle_ghost_b: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Theodore quest mobs - snakes
+{
+	loot_table .slitherer: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { weight: 1 }
+				possibility: { weight: 1 loot_group: .theodore_1_quest_item requirement self<must_have_active_quest>: { id: .theodore_1 } } 
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_SNAKES{}
+		]	
+	}
+	
+	${
+		_level: 20
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: .slitherer
+	}
+
+	entity thalvaron_slitherer: !NPC { _string: "Slitherer" _sprite: snake_1 _sprite_dead: snake_1_dead }
+}
+
+# Theodore quest mobs - panthers
+{
+	loot_table .panther: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { quantity: 4 weight: 1 loot_group: .theodore_2_quest_item requirement self<must_have_active_quest>: { id: .theodore_2 } } 
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_LIONS{}
+		]	
+	}
+	
+	${
+		_level: 20
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: .panther
+	}
+
+	entity thalvaron_panther: !NPC { _string: "Panther" _sprite: panther_1 _sprite_dead: panther_1_dead }
+}
+
+# Theodore quest mobs - gorilla
+{
+	loot_table .gorilla: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { quantity: 2 weight: 1 loot_group: .theodore_3_quest_item requirement self<must_have_active_quest>: { id: .theodore_3 } } 
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_LIONS{}
+		]	
+	}
+	
+	${
+		_level: 20
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: .gorilla
+		_aggro_requirements: { requirement target<must_not_have_aura>: .andor_redfoot_1_quest_item }
+	}
+
+	entity thalvaron_gorilla: !NPC { _string: "Highland Gorilla" _sprite: gorilla_1 _sprite_dead: gorilla_1_dead }
+}
+
+# Spiders
+{
+	${
+		_level: 20
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: default_spider
+	}
+
+	entity thalvaron_jungle_spider: !NPC { _string: "Xandralis Tarantula" _sprite: spider_2 _sprite_dead: spider_2_dead }
+	entity thalvaron_jungle_spider_boss: !NPC { _string: "Larger Than Average Spider" _sprite: spider_1 _sprite_dead: spider_1_dead }
+}
+
+# Plant monsters
+{
+	loot_table .carnivorous_plant: 
+	{
+		slots:
+		[	
+			{
+				possibility: { weight: 1 } 
+				possibility: { weight: 1 loot_group: .brill_craigsworth_2_quest_item requirement self<must_have_active_quest>: { id: .brill_craigsworth_2 } } 
+			}			
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_NATURE_ELEMENTALS{}
+		]	
+	}
+	
+	${
+		_level: 20
+		_faction: monsters
+		_creature_type: elemental
+		_default_behavior_state: .wandering_short
+		_loot_table: .carnivorous_plant
+	}
+
+	entity thalvaron_carnivorous_plant: !NPC { _string: "Carnivorous Plant" _sprite: carnivorous_plant_1 _sprite_dead: carnivorous_plant_1_dead }
+	entity thalvaron_carnivorous_plant_caster: !NPC { _string: "Thorn Spitter" _sprite: carnivorous_plant_2 _sprite_dead: carnivorous_plant_2_dead _abilities: [ { id: npc_thorn_spit_no_cooldown } ]
+}
+
+# Crocodiles
+{
+	${
+		_level: 20
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .passive
+		_loot_table: default_crocodile
+		_can_move_on_all_non_view_blocking_tiles: true
+	}
+
+	entity thalvaron_jungle_crocodile: !NPC { _string: "Xandralis Crocodile" _sprite: crocodile_1 _sprite_dead: crocodile_1_dead }
+}
+
+# Orcs
+{
+	${
+		_level: 21
+		_faction: skullforge_orcs
+		_creature_type: humanoid
+		_loot_table: default_humanoid
+		_default_behavior_state: .passive
+	}
+
+	entity thalvaron_jungle_orc_a: !NPC { _string: "Skullforge Scout" _sprite: orc_1 _sprite_dead: orc_1_dead }
+	entity thalvaron_jungle_orc_b: !NPC { _string: "Skullforge Scout" _sprite: orc_2 _sprite_dead: orc_2_dead }
+	entity thalvaron_jungle_orc_c: !NPC { _string: "Skullforge Ranger" _sprite: orc_5 _sprite_dead: orc_5_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
+	entity thalvaron_jungle_orc_boss: !NPC { _string: "Klogh" _sprite: orc_3 _sprite_dead: orc_3_dead }
+}
+
+# Ghosts
+{
+	${
+		_level: 21
+		_faction: monsters
+		_creature_type: undead
+		_loot_table: default_ghost
+		_default_behavior_state: .wandering_short
+	}
+
+	entity thalvaron_jungle_ghost_a: !NPC { _string: "Angered Temple Spirit" _sprite: ghost_1 _sprite_dead: ghost_1_dead _abilities: [ { id: npc_frostbolt_no_cooldown target: random_player }{ id: npc_attack } ] }
+	entity thalvaron_jungle_ghost_b: !NPC { _string: "Angered Temple Spirit" _sprite: ghost_2 _sprite_dead: ghost_2_dead _abilities: [ { id: npc_curse target: random_player }{ id: npc_attack } ] }
+	entity thalvaron_jungle_ghost_panther: !NPC { _string: "Ryux" _sprite: ghost_panther_1 _sprite_dead: ghost_panther_1_dead _abilities: [ { id: npc_rend }{ id: npc_attack } ] }
+}
+
+# Lizards
+{
+	loot_table .thunder_lizard: 
+	{
+		slots:
+		[	
+			{
+				possibility: { weight: 1 } 
+				possibility: { weight: 2 loot_group: .thora_stormpiercer_1_quest_item requirement self<must_have_active_quest>: { id: .thora_stormpiercer_1 } } 
+			}			
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_LIZARDS{}
+		]	
+	}
+
+	loot_table .thunder_lizard_boss: 
+	{
+		slots:
+		[	
+			{
+				possibility: { weight: 1 loot_group: .thora_stormpiercer_2_quest_item requirement self<must_have_active_quest>: { id: .thora_stormpiercer_2 } } 
+			}			
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_LIZARDS{}
+		]	
+	}
+	
+	${
+		_level: 20
+		_faction: monsters
+		_creature_type: beast		
+		_default_behavior_state: .wandering_short
+	}
+
+	entity thalvaron_thunder_lizard: !NPC { _string: "Thunder Lizard" _sprite: lizard_4 _sprite_dead: lizard_4_dead _loot_table: .thunder_lizard }
+	entity thalvaron_thunder_lizard_boss: !NPC { _string: "Stormgoros" _sprite: lizard_5 _sprite_dead: lizard_5_dead _loot_table: .thunder_lizard_boss }
+}
+
+##########################################################################################
+# Howling Pass
+
+map_entity_spawn thalvaron_howling_pass_wolf: { entity thalvaron_howling_pass_wolf: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_howling_pass_wolf_boss: { entity thalvaron_howling_pass_wolf_boss: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+
+# Wolves
+{
+	${
+		_level: 21
+		_faction: monsters
+		_creature_type: beast
+		_loot_table: default_wolf
+		_default_behavior_state: .wandering_short
+	}
+
+	entity thalvaron_howling_pass_wolf: !NPC { _string: "Mountain Wolf" _sprite: wolf_3 _sprite_dead: wolf_3_dead }
+	entity thalvaron_howling_pass_wolf_boss: !NPC { _string: "Den Mother" _sprite: wolf_2 _sprite_dead: wolf_2_dead }
+}
+
+##########################################################################################
+# Eastern Skaldrun Shore
+
+map_entity_spawn thalvaron_skaldrun_crocodile: { entity thalvaron_skaldrun_crocodile: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_skaldrun_shore_orc_boss: { entity thalvaron_skaldrun_shore_orc_boss: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_east_skaldrun_crab: { entity thalvaron_east_skaldrun_crab: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+
+map_entity_spawn thalvaron_skaldrun_shore_orc: 
+{ 
+	entity thalvaron_skaldrun_shore_orc_a: {} 
+	entity thalvaron_skaldrun_shore_orc_b: {} 
+	entity thalvaron_skaldrun_shore_orc_c: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Orcs
+{
+	quest thalvaron_skaldrun_shore_orc_boss_quest_item:
+	{
+		string: "Durgan Tharok Attack Plans"
+
+		text:
+		[
+			"Bring the document to Durgan Tharok."
+		]
+		
+		description: 
+		[
+			"This document seems to describe plans to attack Durgan Tharok. You should warn them."
+		]
+		
+		completion:
+		[
+			"Seems like an attack on Durgan Tharok might be imminent. Good you brought this to my attention."
+		]
+
+		level: 21
+		quest_items: [ .skaldrun_shore_orc_boss_quest_item ]
+	}
+
+	loot_group .skaldrun_shore_orc_boss_quest_item: { }
+
+	item .skaldrun_shore_orc_boss_quest_item:
+	{
+		string: "Durgan Tharok Attack Plans" 
+		loot_groups: [ .skaldrun_shore_orc_boss_quest_item ]		
+		icon: icon_scroll_1
+		item_level: 21
+		flags: [ unique not_sellable ]
+		use_ability: $ability [ string icon ]
+		{
+			description: "This item starts a quest."
+			flags: [ target_self item ]
+			direct_effect simple<start_quest>: thalvaron_skaldrun_shore_orc_boss_quest_item
+			states: [ default in_combat ]
+			requirement self<must_not_have_completed_quest>: { id: thalvaron_skaldrun_shore_orc_boss_quest_item }
+			requirement self<must_not_have_active_quest>: { id: thalvaron_skaldrun_shore_orc_boss_quest_item }
+		}
+	}
+
+	loot_table .skaldrun_shore_orc_boss_quest_item: 
+	{
+		slots:
+		[
+			{
+				possibility: 
+				{ 
+					loot_group: .skaldrun_shore_orc_boss_quest_item 
+					requirement self<must_not_have_completed_quest>: { id: thalvaron_skaldrun_shore_orc_boss_quest_item }
+					requirement self<must_not_have_active_quest>: { id: thalvaron_skaldrun_shore_orc_boss_quest_item }				
+				}			
+			}			
+		
+			!WORLD_DROPS {}
+			!WORLD_DROPS_CLOTH{}
+		]	
+	}
+
+	${
+		_level: 21
+		_faction: skullforge_orcs
+		_creature_type: humanoid		
+		_default_behavior_state: .passive
+	}
+
+	entity thalvaron_skaldrun_shore_orc_a: !NPC { _string: "Skullforge Brute" _sprite: orc_1 _sprite_dead: orc_1_dead _loot_table: default_humanoid }
+	entity thalvaron_skaldrun_shore_orc_b: !NPC { _string: "Skullforge Brute" _sprite: orc_2 _sprite_dead: orc_2_dead _loot_table: default_humanoid }
+	entity thalvaron_skaldrun_shore_orc_c: !NPC { _string: "Skullforge Hunter" _sprite: orc_5 _sprite_dead: orc_5_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] _loot_table: default_humanoid }
+	entity thalvaron_skaldrun_shore_orc_boss: !NPC { _string: "Grort Wizbang" _sprite: goblin_boss_3 _sprite_dead: goblin_boss_3_dead _loot_table: .skaldrun_shore_orc_boss_quest_item }
+}
+
+# Crocodiles
+{
+	${
+		_level: 21
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .passive
+		_loot_table: default_crocodile
+		_can_move_on_all_non_view_blocking_tiles: true
+	}
+
+	entity thalvaron_skaldrun_crocodile: !NPC { _string: "Swamp Crocodile" _sprite: crocodile_1 _sprite_dead: crocodile_1_dead }
+}
+
+# Beach Crabs
+{
+	${
+		_level: 21
+		_faction: wildlife
+		_creature_type: beast
+		_default_behavior_state: .wandering_short				
+		_loot_table: default_crab
+		_abilities: [ { id: npc_rend } { id: npc_attack } ]
+	}
+
+	entity thalvaron_east_skaldrun_crab: !NPC { _string: "Sandcrawler" _sprite: crab_1 _sprite_dead: crab_1_dead  }
+}
+
+##########################################################################################
+# Durgan Urok
+
+map_entity_spawn thalvaron_durgan_urok_orc_boss: { entity thalvaron_durgan_urok_orc_boss: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_durgan_urok_golem: { entity thalvaron_durgan_urok_golem: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+
+map_entity_spawn thalvaron_durgan_urok_orc: 
+{ 
+	entity thalvaron_durgan_urok_orc_a: {} 
+	entity thalvaron_durgan_urok_orc_b: {} 
+	entity thalvaron_durgan_urok_orc_c: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Orcs
+{
+	${
+		_level: 22
+		_faction: skullforge_orcs
+		_creature_type: humanoid
+		_loot_table: default_humanoid
+		_default_behavior_state: .passive
+	}
+
+	entity thalvaron_durgan_urok_orc_a: !NPC { _string: "Skullforge Guard" _sprite: orc_1 _sprite_dead: orc_1_dead }
+	entity thalvaron_durgan_urok_orc_b: !NPC { _string: "Skullforge Guard" _sprite: orc_2 _sprite_dead: orc_2_dead }
+	entity thalvaron_durgan_urok_orc_c: !NPC { _string: "Skullforge Ranger" _sprite: orc_5 _sprite_dead: orc_5_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
+	entity thalvaron_durgan_urok_orc_boss: !NPC { _string: "Commander Throgar" _sprite: goblin_boss _sprite_dead: goblin_boss_dead }
+}
+
+# Golems
+{
+	loot_table .durgan_urok_golem: 
+	{
+		slots:
+		[
+			{
+				possibility: 
+				{ 
+					loot_group: thalvaron_mumle_whiterock_3_quest_item 
+					requirement self<must_have_active_quest>: { id: thalvaron_mumle_whiterock_3 }				
+				}			
+			}					
+		]	
+	}
+
+	${
+		_level: 22
+		_faction: monsters
+		_creature_type: elemental
+		_default_behavior_state: .passive
+		_loot_table: .durgan_urok_golem
+	}
+
+	entity thalvaron_durgan_urok_golem: !NPC { _string: "Ancient Golem" _sprite: golem_1 _sprite_dead: golem_1_dead _abilities: [ { id: npc_attack } ] }
+}
+
+##########################################################################################
+# Western Skaldrun Shore
+
+map_entity_spawn thalvaron_west_skaldrun_crab: { entity thalvaron_west_skaldrun_crab: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+
+# Beach Crabs
+{
+	${
+		_level: 20
+		_faction: wildlife
+		_creature_type: beast
+		_default_behavior_state: .wandering_short				
+		_loot_table: default_crab
+		_abilities: [ { id: npc_rend } { id: npc_attack } ]
+	}
+
+	entity thalvaron_west_skaldrun_crab: !NPC { _string: "Sandcrawler" _sprite: crab_1 _sprite_dead: crab_1_dead  }
+}
+
+##########################################################################################
+# Skaldrun
+
+map_entity_spawn thalvaron_lurker_spawn: { spawn_timer: { only_when_triggered: true } }
+
+map_entity_spawn thalvaron_skaldrun_kobold: 
+{ 
+	entity thalvaron_skaldrun_kobold_a: {} 
+	entity thalvaron_skaldrun_kobold_b: {} 
+	entity thalvaron_skaldrun_kobold_c: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Lurker
+{
+	ability thalvaron_lurker_spawn:
+	{
+		direct_effect spawn_entity:
+		{
+			spawn_flags: [ no_owner ]
+			npc_target_threat: 20
+			entity: thalvaron_lurker
+			map_entity_spawn: thalvaron_lurker_spawn
+		}		
+	}
+
+	${
+		_level: 20
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short				
+		_loot_table: default_crab
+		_abilities: [ { id: npc_rend } { id: npc_attack } ]
+		_large: true
+		_out_of_zone_action: { evade: true }
+		_immune_to_stun: true
+		_immune_to_immobilize: true
+		_immune_to_slow: true
+		_zone: thalvaron_lurker
+		_resource_health: 3
+		_weapon_damage: 1.3	
+		_can_move_on_all_non_view_blocking_tiles: true
+		_evade_despawn: true
+	}
+
+	entity thalvaron_lurker: !NPC { _string: "Thal'Zirath" _sprite: giant_demon_3 _sprite_dead: giant_demon_3_dead  }
+}
+
+# Melee kobold
+{
+
+	${
+		_level: 20
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: default_humanoid
+		_weapon_damage: 0.9
+		_resource_health: 0.8
+	}
+
+	entity thalvaron_skaldrun_kobold_a: !NPC { _string: "Kobold Digger" _sprite: kobold_8 _sprite_dead: kobold_8_dead }
+	entity thalvaron_skaldrun_kobold_b: !NPC { _string: "Kobold Digger" _sprite: kobold_9 _sprite_dead: kobold_9_dead }
+}
+
+# Healer kobold
+{
+
+	${
+		_level: 20
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: default_humanoid
+		_weapon_damage: 0.9
+		_resource_health: 0.8
+		_resource_mana: 1
+		_abilities: 
+		[ 
+			{ id: npc_heal target: low_health_friend_or_self }
+			{ id: npc_frostbolt target: random_player }
+			{ id: npc_attack } 
+		]		
+	}
+
+	entity thalvaron_skaldrun_kobold_c: !NPC { _string: "Kobold Oracle" _sprite: kobold_10 _sprite_dead: kobold_10_dead }
+}
+
+##########################################################################################
+# Demons
+
+map_entity_spawn thalvaron_skaldrun_satyr_melee: { entity thalvaron_skaldrun_satyr_melee: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_skaldrun_satyr_ranged: { entity thalvaron_skaldrun_satyr_ranged: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_skaldrun_satyr_caster: { entity thalvaron_skaldrun_satyr_caster: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_skaldrun_demon_spawn: { entity thalvaron_skaldrun_demon_spawn: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_skaldrun_portal_master: { entity thalvaron_skaldrun_portal_master: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_thalkyr: { entity thalvaron_thalkyr: {} spawn_timer: !NPC_RESPAWN_RARE{} }
+
+
+map_entity_spawn thalvaron_skaldrun_satyr: 
+{ 
+	entity thalvaron_skaldrun_satyr_a: {} 
+	entity thalvaron_skaldrun_satyr_b: {} 
+	entity thalvaron_skaldrun_satyr_c: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Satyrs - level 21
+{
+	${
+		_level: 21
+		_faction: monsters
+		_creature_type: demon
+		_default_behavior_state: .wandering_short				
+		_loot_table: default_demon
+	}
+
+	entity thalvaron_skaldrun_satyr_a: !NPC { _string: "Satyr Rogue" _sprite: demon_7 _sprite_dead: demon_7_dead _abilities: [ { id: npc_rend target: random_player }{ id: npc_attack } ] }
+	entity thalvaron_skaldrun_satyr_b: !NPC { _string: "Satyr Hunter" _sprite: demon_8 _sprite_dead: demon_8_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
+	entity thalvaron_skaldrun_satyr_c: !NPC { _string: "Satyr Sorcerer" _sprite: demon_9 _sprite_dead: demon_9_dead _abilities: [ { id: npc_firebolt }{ id: npc_attack } ] }
+}
+
+# Satyrs - level 22
+{
+	${
+		_level: 22
+		_faction: monsters
+		_creature_type: demon
+		_default_behavior_state: .passive				
+		_loot_table: default_demon
+	}
+
+	entity thalvaron_skaldrun_satyr_melee: !NPC { _string: "Satyr Rogue" _sprite: demon_7 _sprite_dead: demon_7_dead _abilities: [ { id: npc_rend target: random_player }{ id: npc_attack } ] }
+	entity thalvaron_skaldrun_satyr_ranged: !NPC { _string: "Satyr Hunter" _sprite: demon_8 _sprite_dead: demon_8_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
+	
+	entity thalvaron_skaldrun_satyr_caster: !NPC 
+	{ 
+		_string: "Satyr Summoner" _sprite: demon_9 _sprite_dead: demon_9_dead 
+		_abilities: 
+		[ 
+			{
+				target: self
+				id: $ability
+				{
+					string: "Summon Demonic Spawn"
+					range: 1
+					cast_time: 40
+					cooldowns: [ global ]
+					cooldown: $cooldown { duration: 100 }
+					flags: [ target_self ]
+					states: [ in_combat ]
+					icon: icon_poison
+					delay: 3
+
+					direct_effect spawn_entity:
+					{
+						spawn_flags: [ no_owner ]
+						entity: thalvaron_skaldrun_demon_spawn_summoner
+					}					
+				}
+			}			
+			
+			{ id: npc_firebolt target: random_player }
+			{ id: npc_attack } 
+		] 
+	}
+}
+
+# Spawns
+{
+	loot_table .seren_virelith_2_quest_item: 
+	{
+		slots:
+		[
+			{
+				possibility: 
+				{ 
+					weight: 1 
+				}
+			
+				possibility: 
+				{ 
+					weight: 1 
+					loot_group: .seren_virelith_2_quest_item 
+					requirement self<must_have_active_quest>: { id: .seren_virelith_2 }				
+				}			
+			}					
+		]	
+	}
+
+	${
+		_level: 22
+		_faction: monsters
+		_creature_type: demon
+		_default_behavior_state: .wandering_short				
+		_loot_table: .seren_virelith_2_quest_item			
+	}
+
+	entity thalvaron_skaldrun_demon_spawn: !NPC { _string: "Demonic Spawn" _sprite: demon_2 _sprite_dead: demon_2_dead _abilities: [ { id: npc_attack } ] }
+	entity thalvaron_skaldrun_demon_spawn_summoner: !NPC { _string: "Demonic Spawn" _sprite: demon_2 _sprite_dead: demon_2_dead _abilities: [ { id: npc_attack } ] _default_despawn_after_ticks: 50 _no_kill_event: true }
+}
+
+# Portal master
+{
+	${
+		_level: 22
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short				
+		_loot_table: default_humanoid
+		_abilities: [ { id: npc_attack } ]
+		_in_combat_barks:
+		[
+			{ type: yell text: "The portal to the realm of my master has been sealed!" flags: [ no_chat_bubble ] }
+		]				
+	}
+
+	entity thalvaron_skaldrun_portal_master: !NPC { _string: "Vellith Morbain" _guild_name: "Portal Master" _sprite: man_73 _sprite_dead: man_73_dead }
+}
+
+# Satyr boss
+{
+	loot_table .thalkyr: 
+	{
+		slots:
+		[	
+			{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
+		          map_message thalvaron: "Thal'kyr the Horned Whisperer will not drop Token of Victory for {}." } } }
+
+			!WORLD_DROPS_RARE {}
+			!WORLD_DROPS {}
+		]	
+	}
+
+	${		
+		_faction: monsters
+		_creature_type: demon
+		_loot_table: .thalkyr
+		_default_behavior_state: .passive
+		_elite: true
+		_level: 21
+		_string: "Thal'kyr the Horned Whisperer" 
+		_sprite: demon_10
+		_sprite_dead: demon_10_dead
+		_weapon_damage: 1.4
+		_health: 6.8
+		_immune_to_stun: true
+		_immune_to_immobilize: true
+		_immune_to_slow: true
+		_max_leash_distance: 20
+		
+		_abilities: 
+		[ 
+			{ id: npc_mortal_strike_non_instant }
+			{ id: npc_attack } 
+		]		
+	}
+
+	entity thalvaron_thalkyr: !NPC { }
+
+}

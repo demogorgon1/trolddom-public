@@ -1,0 +1,42 @@
+survival_script lost_isles:
+{
+	wave_spawn_distance: [ 26 28 ]
+	wave_max_distance: 48
+
+	thread:
+	{	
+		wait<[ 40 60 ]>: {}
+	
+		repeat<[ 2 3 ]>:
+		{
+			wait<[ 40 80 ]>: {}
+			wave<1>: !SURVIVAL_CRABS{}
+		}
+		
+		repeat<[ 2 3 ]>:
+		{
+			wait<[ 40 80 ]>: {}
+			wave<[ 1 2 ]>: !SURVIVAL_CRABS{}
+		}
+
+		wait<[ 90 100 ]>: {}
+
+		repeat<[ 2 3 ]>:
+		{
+			wait<[ 40 60 ]>: {}
+			wave<[ 2 3 ]>: !SURVIVAL_CRABS{}
+		}
+		
+		wait<[ 90 100 ]>: {}
+		
+		wave<1>: !SURVIVAL_CRABMAN_MELEE{}
+		wave<[ 1 2 ]>: !SURVIVAL_CRABS{}
+		
+		repeat<[ 2 4 ]>:
+		{
+			wait<[ 40 80 ]>: {}
+			wave<[ 1 2 ]>: !SURVIVAL_CRABMAN_MELEE{}
+			wave<[ 0 1 ]>: !SURVIVAL_CRABS{}
+		}				
+	}
+}  

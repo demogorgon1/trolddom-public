@@ -18,18 +18,30 @@ namespace tpublic
 
 		void
 		_PostProcessEntity(
-			const Manifest*		aManifest,
-			Data::Entity*		aEntity)
+			const Manifest*			aManifest,
+			Data::Entity*			aEntity)
 		{
 			const NPCMetrics& npcMetrics = aManifest->m_npcMetrics;
 
+			const Components::CombatPublic* combatPublic = aEntity->TryGetComponent<Components::CombatPublic>();
+			Components::NPC* npc = aEntity->TryGetComponent<Components::NPC>();
+			Components::CombatPrivate* combatPrivate = aEntity->TryGetComponent<Components::CombatPrivate>();
+
+			// Default NPC stats
 			ApplyNPCMetrics::Process(
 				&npcMetrics, 
 				aEntity->m_modifiers, 
-				aEntity->TryGetComponent<Components::CombatPublic>(),
-				aEntity->TryGetComponent<Components::CombatPrivate>(),
+				combatPublic,
+				combatPrivate,
 				aEntity->TryGetComponent<Components::MinionPrivate>(),
-				aEntity->TryGetComponent<Components::NPC>());
+				npc);
+
+			// Default melee push priorities
+			if(npc != NULL && npc->m_meleePushPriority == 0)
+			{				
+				// Use weapon damage per second to calculate melee push priorty
+				npc->m_meleePushPriority = ((combatPrivate->m_weaponDamageRangeMax - combatPrivate->m_weaponDamageRangeMin) * 5) / 20;
+			}
 		}
 
 	}

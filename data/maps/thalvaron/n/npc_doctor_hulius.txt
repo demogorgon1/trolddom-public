@@ -7,7 +7,7 @@ dialogue_screen .doctor_hulius_dialogue:
 	
 	options:
 	[
-		{ quest<completion_only>: .doctor_hulius_camp_1 }
+		{ quest<completion_only>: .doctor_hulius_camp_1 no_point_of_interest: true }
 		{ quest<offer_only>: .doctor_hulius_1 }
 		{ text: "Let's go." requirement self<must_have_active_quest>: .doctor_hulius_1 script: npc_trigger }	
 	]
@@ -28,7 +28,6 @@ entity thalvaron_doctor_hulius: !NPC
 	_level: 14
 	_faction: combat_npcs		
 	_creature_type: humanoid
-	_loot_table: .npc
 	_not_pushable: true	
 	_default_trigger_ability: .doctor_hulius_start_escort
 	_default_behavior_state: .doctor_hulius

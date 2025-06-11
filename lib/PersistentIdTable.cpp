@@ -129,10 +129,10 @@ namespace tpublic
 				typedef std::map<uint32_t, std::pair<std::string, std::string>> SortedMap;
 				SortedMap sortedMap;
 
-				for(std::pair<std::string, uint32_t> it : t.m_table)
+				for (std::pair<std::string, uint32_t> it : t.m_table)
 					sortedMap[it.second] = std::make_pair<std::string, std::string>(dataTypeString, it.first.c_str());
 
-				for(SortedMap::const_iterator j = sortedMap.cbegin(); j != sortedMap.cend(); j++)
+				for (SortedMap::const_iterator j = sortedMap.cbegin(); j != sortedMap.cend(); j++)
 					fprintf(f, "%s %s %u\r\n", j->second.first.c_str(), j->second.second.c_str(), j->first);
 			}
 

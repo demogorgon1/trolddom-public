@@ -1,51 +1,55 @@
-${ _tags: [ player_world_creature ] }
-
-loot_table .player_world_creatures_loot:
-{
-	slots:
-	[
-		!WORLD_DROPS{}
-		!WORLD_DROPS_CLOTH{}
-	]	
-}
-
-#####################################################################
-# Arcane Construct
 {
 
-	${
-		_string: "Arcane Construct"
-		_faction: monsters 
-		_sprite: arcane_construct
-		_sprite_dead: arcane_construct_dead
-		_weapon_damage: 1 
-		_resource_health: 1
-		_creature_type: elemental
-		_loot_table: .player_world_creatures_loot
+	${ _tags: [ player_world_creature ] }
+
+	loot_table .player_world_creatures_loot:
+	{
+		slots:
+		[
+			!WORLD_DROPS{}
+			!WORLD_DROPS_CLOTH{}
+		]	
 	}
 
-	${ _elite: false }
-	entity arcane_construct_1: !NPC { _level: 1 }
-	entity arcane_construct_2: !NPC { _level: 2 }
-	entity arcane_construct_3: !NPC { _level: 3 }
-	entity arcane_construct_4: !NPC { _level: 4 }
-	entity arcane_construct_5: !NPC { _level: 5 }
-	entity arcane_construct_6: !NPC { _level: 6 }
-	entity arcane_construct_7: !NPC { _level: 7 }
-	entity arcane_construct_8: !NPC { _level: 8 }
-	entity arcane_construct_9: !NPC { _level: 9 }
-	entity arcane_construct_10: !NPC { _level: 10 }
+	#####################################################################
+	# Arcane Construct
+	{
 
-	${ _elite: true	}
-	entity arcane_construct_1e: !NPC { _level: 1 }
-	entity arcane_construct_2e: !NPC { _level: 2 }
-	entity arcane_construct_3e: !NPC { _level: 3 }
-	entity arcane_construct_4e: !NPC { _level: 4 }
-	entity arcane_construct_5e: !NPC { _level: 5 }
-	entity arcane_construct_6e: !NPC { _level: 6 }
-	entity arcane_construct_7e: !NPC { _level: 7 }
-	entity arcane_construct_8e: !NPC { _level: 8 }
-	entity arcane_construct_9e: !NPC { _level: 9 }
-	entity arcane_construct_10e: !NPC { _level: 10 }
+		${
+			_string: "Arcane Construct"
+			_faction: monsters 
+			_sprite: arcane_construct
+			_sprite_dead: arcane_construct_dead
+			_weapon_damage: 1 
+			_resource_health: 1
+			_creature_type: elemental
+			_loot_table: .player_world_creatures_loot
+		}
 
+		${ _elite: false }
+		entity arcane_construct_1: !NPC { _level: 1 }
+		entity arcane_construct_2: !NPC { _level: 2 }
+		entity arcane_construct_3: !NPC { _level: 3 }
+		entity arcane_construct_4: !NPC { _level: 4 }
+		entity arcane_construct_5: !NPC { _level: 5 }
+		entity arcane_construct_6: !NPC { _level: 6 }
+		entity arcane_construct_7: !NPC { _level: 7 }
+		entity arcane_construct_8: !NPC { _level: 8 }
+		entity arcane_construct_9: !NPC { _level: 9 }
+		entity arcane_construct_10: !NPC { _level: 10 }
+
+		${ _elite: true	}
+		entity arcane_construct_1e: !NPC { _level: 1 }
+		entity arcane_construct_2e: !NPC { _level: 2 }
+		entity arcane_construct_3e: !NPC { _level: 3 }
+		entity arcane_construct_4e: !NPC { _level: 4 }
+		entity arcane_construct_5e: !NPC { _level: 5 }
+		entity arcane_construct_6e: !NPC { _level: 6 }
+		entity arcane_construct_7e: !NPC { _level: 7 }
+		entity arcane_construct_8e: !NPC { _level: 8 }
+		entity arcane_construct_9e: !NPC { _level: 9 }
+		entity arcane_construct_10e: !NPC { _level: 10 }
+
+	}
+	
 }

@@ -126,7 +126,7 @@ map_entity_spawn .skeletal_brute:
 		_default_behavior_state: .passive
 		_loot_table: default_skeleton 
 		_weapon_damage: 1.6
-		_resource_health: 1.9
+		_resource_health: 1.71
 		_elite: true
 		_abilities: 
 		[ 
@@ -158,7 +158,8 @@ map_entity_spawn .skeletal_brute:
 		_default_behavior_state: .passive
 		_loot_table: default_skeleton
 		_weapon_damage: 1.2
-		_resource_health: 1.6
+		_resource_health: 1.44
+		_resource_mana: 1
 		_elite: true
 		_abilities: 
 		[ 
@@ -180,7 +181,8 @@ map_entity_spawn .skeletal_brute:
 		_default_behavior_state: .passive
 		_loot_table: default_skeleton 
 		_weapon_damage: 1.2
-		_resource_health: 1.6
+		_resource_health: 1.44
+		_resource_mana: 1
 		_elite: true
 		_abilities: 
 		[ 
@@ -202,7 +204,7 @@ map_entity_spawn .skeletal_brute:
 		_default_behavior_state: .passive
 		_loot_table: default_skeleton
 		_weapon_damage: 1.75
-		_resource_health: 2.3
+		_resource_health: 2.07
 		_elite: true
 		_abilities: 
 		[ 

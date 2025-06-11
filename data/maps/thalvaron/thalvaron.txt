@@ -3,6 +3,7 @@ map_player_spawn .player_spawn: { }
 map_player_spawn thalvaron_lich_tower_exit: { }
 map_player_spawn thalvaron_valoris_insurgency_exit: { }
 map_player_spawn thalvaron_tirnwood_thicket_exit: { }
+map_player_spawn thalvaron_durgan_urok_exit: { }
 
 map_player_spawn thalvaron_wizard_realm_spawn: { }
 map_player_spawn thalvaron_wizard_realm_return_spawn: { }
@@ -44,7 +45,7 @@ zone .haunted_woods_west: { string: "Shadowthorn Thicket" }
 zone .haunted_woods_town: { string: "Ravenreach" }
 zone .haunted_woods_clearing: { string: "Shadowthorn Abbey" }
 zone .haunted_woods_east: { string: "Faerandor" }
-zone .jungle: { string: "Xandralis" }
+zone thalvaron_jungle: { string: "Xandralis" fishing_loot_table: fish_skaldrun }
 zone .lich_woods: { string: "Hollows of the Undying" }
 zone .way_north_pass: { string: "The Northern Pass" }
 zone .duskwhisper_caves: { string: "Duskwhisper Caves" }
@@ -67,9 +68,26 @@ zone .holy_temple: { string: "Holy Temple of Valoris" }
 zone .underworld_society: { string: "Society of the Underworld" }
 zone .echosrest: { string: "Echo's Rest" }
 zone .highborne_realm: { string: "Realm of the Highborne" no_map: true }
+zone .jungle_highlands: { string: "Xandralis Highlands" }
+zone .the_desolate_pass: { string: "The Desolate Pass" }
+zone .skaldrun_coast_west: { string: "Western Skaldrun Shore" fishing_loot_table: $loot_table { } }
+zone .skaldrun_coast_east: { string: "Eastern Skaldrun Shore" fishing_loot_table: fish_skaldrun }
+zone .skaldrun: { string: "Skaldrun" }
+zone .durgan_urok: { string: "Durgan Urok" }
+zone .hidden_pool: { string: "Great Ape Sanctuary" }
+zone .skaldrun_pass: { string: "Howling Pass" }
+zone .urthon_gate: { string: "Urthon Gate" }
+zone .entor_spring: { string: "Entor Spring" }
+zone .jungle_temple: { string: "Ancient Temple" }
+zone .shrine_of_ryux: { string: "Shrine of Ryux" }
+zone .tower_of_voraghul: { string: "Tower of Voraghul" }
+zone .the_crystal_caves: { string: "The Crystal Caves" }
+zone .swamp_of_skaldrun: { string: "Swamp of Skaldrun" }
+zone .inner_durgan_urok: { string: "Inner Durgan Urok" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
+zone thalvaron_lurker: { fishing_trigger_ability: thalvaron_lurker_spawn fishing_trigger_ability_chance: 50 fishing_loot_table: $loot_table { } }
 	
 route thalvaron_default_patrol: { }
 
@@ -86,7 +104,8 @@ npc_behavior_state thalvaron_default_patrol:
 
 map_portal thalvaron_lich_tower_entrance: {	animation: !DEFAULT_PORTAL_ANIMATION{} map: lich_tower }
 map_portal thalvaron_valoris_insurgency_entrance: { animation: !DEFAULT_PORTAL_ANIMATION{} map: valoris_insurgency }
-map_portal thalvaron_tirnwood_thicket_entrance: {	animation: !HOLE_PORTAL_ANIMATION{} map: tirnwood_thicket }
+map_portal thalvaron_tirnwood_thicket_entrance: { animation: !HOLE_PORTAL_ANIMATION{} map: tirnwood_thicket }
+map_portal thalvaron_durgan_urok_entrance: { animation: !HOLE_PORTAL_ANIMATION{} map: durgan_urok }
 
 map_cliff .rocky_cliff: { cliff_style: rocks elevation: 1 }
 map_cliff .rocky_cliff_ramp: { cliff_style: rocks elevation: 1 ramp: true }
@@ -321,6 +340,33 @@ map_entity_spawn thalvaron_dwarf_quartermaster_2: { entity thalvaron_dwarf_quart
 map_entity_spawn thalvaron_julian_moore: { entity thalvaron_julian_moore: { init_state: default } }
 map_entity_spawn thalvaron_bromrik_coppervein: { entity thalvaron_bromrik_coppervein: { init_state: default } }
 
+# SE
+map_entity_spawn thalvaron_theodore: { entity thalvaron_theodore: { init_state: default } }
+map_entity_spawn thalvaron_andor_redfoot: { entity thalvaron_andor_redfoot: { init_state: default } }
+map_entity_spawn thalvaron_brill_craigsworth: { entity thalvaron_brill_craigsworth: { init_state: default } }
+map_entity_spawn thalvaron_jim_craigsworth: { entity thalvaron_jim_craigsworth: { init_state: default } }
+map_entity_spawn thalvaron_brill_craigsworth_1_quest_item: { entity thalvaron_brill_craigsworth_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_sylvaris_thornleaf_1_quest_item: { entity thalvaron_sylvaris_thornleaf_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_sylvaris_thornleaf: { entity thalvaron_sylvaris_thornleaf: { init_state: default } }
+map_entity_spawn thalvaron_warden_wero: { entity thalvaron_warden_wero: { init_state: default } }
+map_entity_spawn thalvaron_warden_taliar: { entity thalvaron_warden_taliar: { init_state: default } }
+map_entity_spawn thalvaron_warden_wero_1_quest_item: { entity thalvaron_warden_wero_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_sylvaris_thornleaf_2_quest_item: { entity thalvaron_sylvaris_thornleaf_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_sylvaris_thornleaf_3_quest_item: { entity thalvaron_sylvaris_thornleaf_3_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_warden_qoro: { entity thalvaron_warden_qoro: { init_state: default } }
+map_entity_spawn thalvaron_seren_virelith: { entity thalvaron_seren_virelith: { init_state: default } }
+map_entity_spawn thalvaron_rod_gambil: { entity thalvaron_rod_gambil: { init_state: default } }
+map_entity_spawn thalvaron_elaris_the_veil_walker: { entity thalvaron_elaris_the_veil_walker: { init_state: default } }
+map_entity_spawn thalvaron_thora_stormpiercer: { entity thalvaron_thora_stormpiercer: { init_state: default } }
+map_entity_spawn thalvaron_benji: { entity thalvaron_benji: { init_state: default } }
+map_entity_spawn thalvaron_benji_1_quest_item: { entity thalvaron_benji_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_rod_gambil_2_quest_item: { entity thalvaron_rod_gambil_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_karl: { entity thalvaron_karl: { init_state: default } }
+map_entity_spawn thalvaron_joar: { entity thalvaron_joar: { init_state: default } }
+map_entity_spawn thalvaron_orm_thogore: { entity thalvaron_orm_thogore: { init_state: default } }
+map_entity_spawn thalvaron_orm_thogore_1_quest_item: { entity thalvaron_orm_thogore_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_brill_craigsworth_3_quest_item: { entity thalvaron_brill_craigsworth_3_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+
 map_palette .stuff:
 {
 	entity_spawn mining: [ 200 200 200 ]
@@ -355,10 +401,12 @@ map_palette .stuff:
 	player_spawn thalvaron_the_shrouded_lands_underworld_return: [ 205 106 209 ]
 	player_spawn thalvaron_blimcraft_highborne_3_portal_spawn: [ 40 105 130 ]
 	player_spawn thalvaron_blimcraft_highborne_3_portal_return_spawn: [ 140 105 130 ]
+	player_spawn thalvaron_durgan_urok_exit: [ 114 124 144 ]
 
 	portal thalvaron_lich_tower_entrance: [ 144 188 94 ]
 	portal thalvaron_valoris_insurgency_entrance: [ 144 88 92 ]
 	portal thalvaron_tirnwood_thicket_entrance: [ 144 228 92 ]
+	portal thalvaron_durgan_urok_entrance: [ 244 218 92 ]
 	
 	wall stone_wall: [ 128 128 128 ]
 	wall fence: [ 64 128 140 ]
@@ -505,6 +553,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_gateway_2: [ 40 108 88 ]
 	entity_spawn thalvaron_tailoring_trainer: [ 30 130 33 ]
 	entity_spawn thalvaron_jim_farseer: [ 40 82 176 ]
+	entity_spawn voraghul_portal_closed: [ 206 102 91 ]
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				
@@ -734,6 +783,66 @@ map_palette .stuff:
 	entity_spawn thalvaron_julian_moore: [ 101 81 82 ]
 	entity_spawn thalvaron_bromrik_coppervein: [ 161 81 82 ]
 	entity_spawn thalvaron_krask: [ 161 181 24 ]
+	
+	# SE
+	entity_spawn thalvaron_slitherer: [ 30 93 123 ]
+	entity_spawn thalvaron_theodore: [ 130 93 123 ]
+	entity_spawn thalvaron_panther: [ 230 93 123 ]
+	entity_spawn thalvaron_gorilla: [ 230 93 153 ]
+	entity_spawn thalvaron_andor_redfoot: [ 49 120 49 ]
+	entity_spawn thalvaron_brill_craigsworth: [ 149 100 49 ]
+	entity_spawn thalvaron_jim_craigsworth: [ 149 100 145 ]
+	entity_spawn thalvaron_brill_craigsworth_1_quest_item: [ 200 40 182 ]
+	entity_spawn thalvaron_jungle_spider: [ 200 120 182 ]
+	entity_spawn thalvaron_jungle_spider_boss: [ 200 220 182 ]
+	entity_spawn thalvaron_carnivorous_plant: [ 200 220 112 ]
+	entity_spawn thalvaron_carnivorous_plant_caster: [ 100 220 112 ]
+	entity_spawn thalvaron_jungle_crocodile: [ 44 120 172 ]
+	entity_spawn thalvaron_sylvaris_thornleaf_1_quest_item: [ 43 192 81 ]
+	entity_spawn thalvaron_sylvaris_thornleaf: [ 43 192 181 ]
+	entity_spawn thalvaron_jungle_orc: [ 40 200 91 ]
+	entity_spawn thalvaron_warden_wero: [ 140 200 91 ]	
+	entity_spawn thalvaron_warden_taliar: [ 140 200 191 ]	
+	entity_spawn thalvaron_warden_wero_1_quest_spawn: [ 140 255 191 ]	
+	entity_spawn thalvaron_warden_wero_1_quest_item: [ 240 255 191 ]
+	entity_spawn thalvaron_sylvaris_thornleaf_2_quest_item: [ 39 199 244 ]
+	entity_spawn thalvaron_jungle_ghost: [ 31 100 42 ]
+	entity_spawn thalvaron_sylvaris_thornleaf_3_quest_item: [ 39 119 244 ]
+	entity_spawn thalvaron_sylvaris_thornleaf_3_quest_spawn: [ 139 199 45 ]
+	entity_spawn thalvaron_warden_qoro: [ 30 40 80 ]
+	entity_spawn thalvaron_seren_virelith: [ 20 80 70 ]
+	entity_spawn thalvaron_rod_gambil: [ 120 80 70 ]
+	entity_spawn thalvaron_elaris_the_veil_walker: [ 120 180 70 ]
+	entity_spawn thalvaron_howling_pass_wolf: [ 30 90 110 ]
+	entity_spawn thalvaron_howling_pass_wolf_boss: [ 130 90 110 ]
+	entity_spawn thalvaron_thunder_lizard: [ 100 100 120 ]
+	entity_spawn thalvaron_thunder_lizard_boss: [ 200 100 120 ]
+	entity_spawn thalvaron_thora_stormpiercer: [ 200 200 121 ]
+	entity_spawn thalvaron_benji: [ 210 90 240 ]
+	entity_spawn thalvaron_benji_1_quest_item: [ 37 83 204 ]
+	entity_spawn thalvaron_skaldrun_shore_orc: [ 30 40 100 ]
+	entity_spawn thalvaron_skaldrun_shore_orc_boss: [ 230 40 100 ]
+	entity_spawn thalvaron_rod_gambil_2_quest_item: [ 130 140 200 ]
+	entity_spawn thalvaron_skaldrun_crocodile: [ 230 192 94 ]
+	entity_spawn thalvaron_durgan_urok_orc: [ 100 30 229 ]
+	entity_spawn thalvaron_durgan_urok_orc_boss: [ 200 35 200 ]
+	entity_spawn thalvaron_west_skaldrun_crab: [ 102 94 88 ]
+	entity_spawn thalvaron_east_skaldrun_crab: [ 202 94 88 ]
+	entity_spawn thalvaron_karl: [ 130 41 84 ]
+	entity_spawn thalvaron_lurker_spawn: [ 30 104 94 ]
+	entity_spawn thalvaron_orm_thogore: [ 40 104 94 ]
+	entity_spawn thalvaron_joar: [ 40 104 194 ]
+	entity_spawn thalvaron_skaldrun_kobold: [ 140 50 90 ]
+	entity_spawn thalvaron_orm_thogore_1_quest_item: [ 240 50 90 ]
+	entity_spawn thalvaron_skaldrun_satyr: [ 103 94 115 ]
+	entity_spawn thalvaron_skaldrun_satyr_melee: [ 35 99 128 ]
+	entity_spawn thalvaron_skaldrun_satyr_ranged: [ 135 99 128 ]
+	entity_spawn thalvaron_skaldrun_satyr_caster: [ 35 199 128 ]
+	entity_spawn thalvaron_skaldrun_demon_spawn: [ 200 199 83 ]
+	entity_spawn thalvaron_skaldrun_portal_master: [ 140 29 88 ]
+	entity_spawn thalvaron_durgan_urok_golem: [ 240 49 133 ]
+	entity_spawn thalvaron_brill_craigsworth_3_quest_item: [ 30 30 170 ]
+	entity_spawn thalvaron_thalkyr: [ 55 84 77 ]
 }
 
 map_palette .levels:
@@ -750,6 +859,8 @@ map_palette .levels:
 	level<18>: [ 255 0 255 ]
 	level<19>: [ 255 255 0 ]
 	level<20>: [ 255 127 0 ]
+	level<21>: [ 145 203 128 ]
+	level<22>: [ 0 107 255 ]
 }
 
 map_palette .zones:
@@ -776,7 +887,7 @@ map_palette .zones:
 	zone .haunted_woods_town: [ 230 255 0 ]
 	zone .haunted_woods_clearing: [ 165 0 255 ]
 	zone .haunted_woods_east: [ 255 16 0 ]
-	zone .jungle: [ 0 25 255 ]
+	zone thalvaron_jungle: [ 0 25 255 ]
 	zone .lich_woods: [ 222 255 0 ]
 	zone .way_north_pass: [ 0 140 255 ]
 	zone .duskwhisper_caves: [ 133 141 55 ]
@@ -788,6 +899,17 @@ map_palette .zones:
 	zone .dark_strand: [ 0 255 33 ]
 	zone .tirnwood: [ 200 107 210 ]
 	zone .echosrest: [ 171 18 171 ]
+	zone .jungle_highlands: [ 240 234 182 ]
+	zone .the_desolate_pass: [ 204 182 240 ]
+	zone .skaldrun_coast_west: [ 240 182 199 ]
+	zone .skaldrun_coast_east: [ 202 76 112 ]
+	zone .skaldrun: [ 38 61 140 ]
+	zone .durgan_urok: [ 215 222 0 ]
+	zone .hidden_pool: [ 135 84 189 ]
+	zone .skaldrun_pass: [ 150 25 229 ]
+	zone .urthon_gate: [ 34 122 244 ]
+	zone .entor_spring: [ 211 130 62 ]
+	zone .shrine_of_ryux: [ 70 232 243 ]
 }
 
 map_palette .sub_zones:
@@ -812,9 +934,15 @@ map_palette .sub_zones:
 	sub_zone .holy_temple: [ 174 26 217 ]
 	sub_zone .underworld_society: [ 26 217 155 ]
 	sub_zone .highborne_realm: [ 150 85 177 ]
+	sub_zone .jungle_temple: [ 49 85 174 ]
+	sub_zone .tower_of_voraghul: [ 47 28 229 ] 
+	sub_zone .the_crystal_caves: [ 129 35 207 ]
+	sub_zone .swamp_of_skaldrun: [ 96 135 232 ]
+	sub_zone .inner_durgan_urok: [ 232 96 140 ]
 	
 	sub_zone thalvaron_crab_giant: [ 39 192 83 ]
 	sub_zone thalvaron_vampire_boss: [ 139 93 48 ]
+	sub_zone thalvaron_lurker: [ 93 39 84 ]
 }
 
 map_palette .routes:
@@ -872,6 +1000,9 @@ map_palette .doodads:
 	doodad hard_slope_n: [ 140 103 18 ]
 	doodad hard_slope_s: [ 40 203 18 ]
 	doodad hard_slope_e: [ 40 103 118 ]
+	doodad jungle_plant_purple: [ 147 66 77 ]
+	doodad closed_gate: [ 31 1 138 ]
+	doodad fs_ground_mark: [ 30 105 39 ]
 	
 	doodad wall_sign_generic<"Mathew's Emporium">: [ 197 173 111 ]	
 	doodad wall_sign_generic<"John & Mary's">: [ 97 173 111 ]	
@@ -891,6 +1022,7 @@ map_palette .doodads:
 	doodad wall_sign_generic<"Skrald & Co.">: [ 223 21 11 ]	
 	doodad wall_sign_generic<"Rare Imports">: [ 231 121 11 ]	
 	doodad wall_sign_generic<"The Valorisian">: [ 231 21 152 ]	
+	doodad sign_generic_right<"Durgan Urok">: [ 127 140 221 ]	
 }
 
 map_palette .cliffs:
@@ -927,6 +1059,12 @@ map thalvaron:
 	has_overview_map: true
 	auto_doodads: true
 	max_players: 80
+	
+	world_map main:
+	{
+		source: "thalvaron-world-map.png"
+		offset: [ 0 0 ]
+	}
 
 	layers:
 	[
@@ -979,8 +1117,8 @@ map thalvaron:
 		{
 			palettes:	[ .cliffs ]
 			source:		"thalvaron-cliffs.png"
-		}								
-		
+		}									
 	]
 }
  
+

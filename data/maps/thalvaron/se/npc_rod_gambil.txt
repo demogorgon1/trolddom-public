@@ -1,0 +1,208 @@
+dialogue_screen .rod_gambil_vendor: { !TRADE_SUPPLIES {} sell recipe_herbed_snapper: { quantity: 1 cost: 50000 } }
+
+dialogue_screen .rod_gambil:
+{
+	text: 
+	[	
+		"Did you remember to wipe your feet before barging into my house without knocking?"
+	]
+	
+	options:
+	[		
+		{ quest<completion_only>: .warden_qoro_1 }
+		{ quest: .rod_gambil_1 }
+		{ quest: .rod_gambil_2 }		
+		{ goto: .rod_gambil_vendor text: "Let me browse your goods." }
+		{ quest<offer_only>: .rod_gambil_3 requirement self<must_not_have_discovered_zone>: thalvaron_jungle }
+	]
+}
+
+entity thalvaron_rod_gambil: !NPC
+{
+	_string: "Rod Gambil"
+	_dialogue_root: $dialogue_root { .rod_gambil: { } }
+	_sprite: man_71
+	_sprite_dead: man_71_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+##########################################################################################
+# Quest 1
+
+objective .rod_gambil_1_a:
+{
+	string: "Mountain Wolves Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_howling_pass_wolf ]
+		count: 6
+	}
+}
+
+objective .rod_gambil_1_b:
+{
+	string: "Den Mother Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_howling_pass_wolf_boss ]
+		count: 1
+	}
+}
+
+quest .rod_gambil_1:
+{
+	string: "Unhowling the Pass"
+
+	text:
+	[
+		"Slay wolves in the Howling Pass and return to Rod Gambil."
+	]
+	
+	description: 
+	[
+		"Well, yes, people call this the Howling Pass, which I suppose is a fitting name, considering the sounds that fills the area at night. Wolves all over the place. It's getting a bit out of hands, to"
+		"be honest. How about you go and clear them out a bit? Follow the path beyond my house to the east and I'm sure you'll find some."
+	]
+	
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"That's great, good job."
+	]
+
+	objectives: [ .rod_gambil_1_a .rod_gambil_1_b ]
+	level: 21
+}
+
+##########################################################################################
+# Quest 2
+
+objective .rod_gambil_2:
+{
+	string: "Rod Gambil's Stuf"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .rod_gambil_2_quest_item count: 1 }
+}
+
+loot_group .rod_gambil_2_quest_item: {}
+
+item .rod_gambil_2_quest_item:
+{
+	icon: icon_box
+	item_level: 21
+	loot_groups: [ .rod_gambil_2_quest_item ]
+	flags: [ unique not_sellable ]
+	string: "Rod Gambil's Stuff"
+}
+
+entity thalvaron_rod_gambil_2_quest_item:
+{
+	string: "Stolen Goods"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ chest_2 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: $loot_table
+			{
+				slots:
+				[
+					{
+						possibility: { loot_group: .rod_gambil_2_quest_item }			
+					}		
+				]
+			}
+			verb: open
+			range: 1 
+			level: 21
+			despawn: true 		
+			required_quest: .rod_gambil_2
+		}		
+	}
+}
+
+{
+	${ _level: 21 }
+	item .rod_gambil_2_a: !QUEST_REWARD_FEET{ _string: "Boots of the Howling Pass" _icon: icon_boots_1 _strength: 2 _constitution: 3 _type: armor_plate }
+	item .rod_gambil_2_b: !QUEST_REWARD_LEGS{ _string: "Shamanistic Legwraps" _icon: icon_pants_1 _wisdom: 3 _constitution: 2 _spirit: 1 _type: armor_cloth }
+}
+
+quest .rod_gambil_2:
+{
+	string: "Thieving Skullforge Orcs"
+
+	text:
+	[
+		"Locate the stolen possessions of Rod Gambil in the Swamp of Skaldrun and return them to him."
+	]
+	
+	description: 
+	[
+		"Beyond this pass to the west you'll find the Swamp of Skaldrun. It's a desolate place and you won't find any civilized people living there. For a while it has been overrun with Skullforge clan orcs" 
+		"from Durgan Urok. They don't seem to show much interest in this pass so they've largely left me alone, but they a couple of them raided my home a few days ago. I managed to get away unscathed, but"
+		"they stole some of my possessions. Maybe you can get them back? I went looking for them and I think they've stashed them at a small camp in the eastern part of the swamp."
+	]
+	
+	progress:
+	[
+		"You're not scared of orcs are you?"
+	]
+	
+	completion:
+	[
+		"Excellent."
+	]
+
+	objectives: [ .rod_gambil_2 ]
+	prerequisites: [ .rod_gambil_1 ]
+	level: 21
+	reward_one_item: [ .rod_gambil_2_a .rod_gambil_2_b ]
+}
+
+##########################################################################################
+# Quest 3
+
+quest .rod_gambil_3:
+{
+	string: "The Great Jungle Hunter"
+
+	text:
+	[
+		"Find Theodore in the northern part of Xandralis."
+	]
+	
+	description: 
+	[
+		"A guy passed through here a few days ago, called himself Theodore. Claimed he was a bigshot at the hunting scene and wanted to find interesting creatures to hunt up in the Xandralis Jungle. He seemed"
+		"like a bit of a weirdo. Said he wanted to set up in the most northern part of the jungle. I think you should see if you can find him and check if he's in trouble. He looked like a common"
+		"jungle frog could swallow him whole. Travel north through this pass and you'll enter the jungle. Follow the road all the way to the north and you'll probably find him."
+	]
+	
+	completion:
+	[
+		"Ah, yes, a fellow big game hunter?"
+	]
+
+	level: 20
+	reward_xp_multiplier: 0.2
+	reward_cash_multiplier: 0.2
+}

@@ -1,0 +1,79 @@
+dialogue_screen .warden_taliar:
+{
+	text: 
+	[	
+		"This cave leads to Durgan Urok. It is infested with orcs, so be careful."
+	]
+	
+	options:
+	[
+		{ quest<completion_only>: .warden_wero_2 }
+		{ quest: .warden_taliar_1 }
+	]
+}
+
+entity thalvaron_warden_taliar: !NPC
+{
+	_string: "Warden Taliar"
+	_dialogue_root: $dialogue_root { .warden_taliar: { } }
+	_sprite: elf_2
+	_sprite_dead: elf_2_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+##########################################################################################
+# Quest 1
+
+objective .warden_taliar_1:
+{
+	string: "Commander Throgar Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_durgan_urok_orc_boss ]
+		count: 1
+	}
+}
+
+{
+	${ _level: 22 }
+	item .warden_taliar_1_a: !QUEST_REWARD_HEAD{ _string: "Elvish Headguard" _icon: icon_helmet_3 _constitution: 1 _strength: 1 _type: armor_plate }
+	item .warden_taliar_1_b: !QUEST_REWARD_1H_KNIFE{ _string: "Spellslicer" _icon: icon_knife_5 _constitution: 1 _wisdom: 3 _type: armor_cloth }
+}
+
+quest .warden_taliar_1:
+{
+	string: "Assassinating the Commander"
+
+	text:
+	[
+		"Locate Commander Throgar in outer Durgan Urok and slay him."
+	]
+	
+	description: 
+	[
+		"The orcs have taken over the entire fortification complex of Durgan Urok. They must have recently breached out of the inner depths of the fortress. The orcs of the outer area is commanded"
+		"by Throgar, a larger than usual specimen of these vile creatures. I'm not sure where he is exactly, but he must be somewhere in the outer areas. Don't venture into the depths. Yet.\n\n"
+		"You need to kill this orc to disrupt their command structure."
+	]
+
+	progress:
+	[
+		"Back already?"
+	]
+	
+	completion:
+	[
+		"Excellent job!"
+	]
+
+	objectives: [ .warden_taliar_1 ]
+	level: 22
+	reward_one_item: [ .warden_taliar_1_a .warden_taliar_1_b ]
+}

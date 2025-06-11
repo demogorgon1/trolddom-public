@@ -1,0 +1,25 @@
+dialogue_screen .elaris_the_veil_walker:
+{
+	text: 
+	[	
+		"All the inhabitants of the city of Skaldrun disappeared. They were doomed by a pact they made with ancient powers from the far beyond."
+	]
+	
+	options:
+	[
+
+	]
+}
+
+entity thalvaron_elaris_the_veil_walker: !NPC
+{
+	_string: "Elaris the Veil-Walker"
+	_dialogue_root: $dialogue_root { .elaris_the_veil_walker: { } }
+	_sprite: man_72
+	_sprite_dead: man_72_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}

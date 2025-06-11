@@ -16,7 +16,9 @@ namespace tpublic
 			enum SourceRedirect : uint8_t
 			{
 				SOURCE_REDIRECT_NONE,
-				SOURCE_REDIRECT_TARGET_OF_TARGET
+				SOURCE_REDIRECT_TARGET_OF_TARGET,
+				SOURCE_REDIRECT_TARGET,
+				SOURCE_REDIRECT_REFRESH
 			};
 
 			static SourceRedirect
@@ -27,6 +29,10 @@ namespace tpublic
 					return SOURCE_REDIRECT_NONE;
 				else if (aSource->IsIdentifier("target_of_target"))
 					return SOURCE_REDIRECT_TARGET_OF_TARGET;
+				else if (aSource->IsIdentifier("target"))
+					return SOURCE_REDIRECT_TARGET;
+				else if (aSource->IsIdentifier("refresh"))
+					return SOURCE_REDIRECT_REFRESH;
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid source redirect.", aSource->GetIdentifier());
 				return SOURCE_REDIRECT_NONE;
 			}

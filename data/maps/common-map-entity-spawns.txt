@@ -36,7 +36,7 @@ map_entity_spawn mining:
 {	
 	spawn_timer: { despawn_required: true }
 
-	entity mining_gold_vein: { level: [ 4 20 ] weight: 1 init_state: default } 
+	entity mining_gold_vein: { level: [ 4 22 ] weight: 1 init_state: default } 
 
 	entity mining_copper_vein: { level: [ 1 6 ] weight: 5 init_state: default } 
 	entity mining_iron_vein: { level: [ 4 12 ] weight: 5 init_state: default } 
@@ -49,7 +49,7 @@ map_entity_spawn herbalism:
 {	
 	spawn_timer: { despawn_required: true }
 
-	entity herbalism_wild_herbs: { level: [ 1 20 ] weight: 1 init_state: default must_not_have_tile_flags: [ tile_snow ] }
+	entity herbalism_wild_herbs: { level: [ 1 22 ] weight: 1 init_state: default must_not_have_tile_flags: [ tile_snow ] }
 
 	entity herbalism_dewleaf: { level: [ 1 6 ] weight: 4 init_state: default must_not_have_tile_flags: [ tile_snow ] }
 	entity herbalism_mistflower: { level: [ 4 12 ] weight: 4 init_state: default must_not_have_tile_flags: [ tile_snow ] } 
@@ -136,6 +136,11 @@ map_entity_spawn the_shrouded_lands_light_closed:
 map_entity_spawn the_shrouded_lands_underworld_closed:
 {
 	entity the_shrouded_lands_underworld_closed: { weight: 1 }
+}
+
+map_entity_spawn voraghul_portal_closed:
+{
+	entity voraghul_portal_closed: { weight: 1 init_state: default }	
 }
 
 map_entity_spawn target_dummy:

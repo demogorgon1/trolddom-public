@@ -24,6 +24,16 @@ item_metrics:
 		[ 18 28 ]
 		[ 19 29 ]
 		[ 20 30 ]
+		[ 21 31 ]
+		[ 22 32 ]
+		[ 23 33 ]
+		[ 24 34 ]
+		[ 25 35 ]
+		[ 26 36 ]
+		[ 27 37 ]
+		[ 28 38 ]
+		[ 29 39 ]
+		[ 30 40 ]
 	]
 	
 	base_cost:
@@ -47,7 +57,17 @@ item_metrics:
 		[ 17 182 ]
 		[ 18 195 ]
 		[ 19 212 ]
-		[ 20 224 ]
+		[ 20 229 ]
+		[ 21 246 ]
+		[ 22 263 ]
+		[ 23 280 ]
+		[ 24 297 ]
+		[ 25 314 ]
+		[ 26 331 ]
+		[ 27 348 ]
+		[ 28 365 ]
+		[ 29 382 ]
+		[ 30 399 ]
 	]
 	
 	base_1h_weapon_dps:
@@ -72,6 +92,16 @@ item_metrics:
 		[ 18 28 ]
 		[ 19 30 ]
 		[ 20 32 ]
+		[ 21 34 ]
+		[ 22 36 ]
+		[ 23 38 ]
+		[ 24 40 ]
+		[ 25 42 ]
+		[ 26 44 ]
+		[ 27 46 ]
+		[ 28 48 ]
+		[ 29 50 ]
+		[ 30 52 ]
 	]
 
 	base_2h_weapon_dps:
@@ -96,6 +126,16 @@ item_metrics:
 		[ 18 38 ]
 		[ 19 41 ]
 		[ 20 43 ]
+		[ 21 45 ]
+		[ 22 47 ]
+		[ 23 49 ]
+		[ 24 51 ]
+		[ 25 53 ]
+		[ 26 55 ]
+		[ 27 57 ]
+		[ 28 59 ]
+		[ 29 61 ]
+		[ 30 63 ]
 	]
 
 	base_ranged_dps:
@@ -120,6 +160,16 @@ item_metrics:
 		[ 18 38 ]
 		[ 19 41 ]
 		[ 20 43 ]
+		[ 21 45 ]
+		[ 22 47 ]
+		[ 23 49 ]
+		[ 24 51 ]
+		[ 25 53 ]
+		[ 26 55 ]
+		[ 27 57 ]
+		[ 28 59 ]
+		[ 29 61 ]
+		[ 30 63 ]		
 	]
 
 	item_type_multipliers armor_cloth: 		{ armor: 1 		cost: 1     stat_budget: 1.0	token_cost: 1 }
@@ -162,4 +212,44 @@ item_metrics:
 	offhand_dps_multiplier:					0.5
 	token_cost_base_multiplier: 			5.5
 	
+	invalid_stats:
+	{
+		item_type armor_cloth: 
+		{ 
+			ignore_equipment_slot: back
+		
+			constitution: [ block_value ]
+			dodge_chance: [ block_chance ]
+		}
+
+		item_type armor_mail: 
+		{ 
+			constitution: [ block_value ]
+			dodge_chance: [ block_chance ]
+		}
+		
+		item_type weapon_2h_sword:
+		{
+			strength: [ block_value spell_haste spell_damage healing mana_per_5 ]
+			phys_crit_chance: [ block_chance spell_crit_chance ]
+		}
+		
+		item_type weapon_2h_mace:
+		{
+			strength: [ block_value spell_haste spell_damage healing mana_per_5 ]
+			phys_crit_chance: [ block_chance spell_crit_chance ]
+		}
+
+		item_type weapon_2h_axe:
+		{
+			strength: [ block_value spell_haste spell_damage healing mana_per_5 ]
+			phys_crit_chance: [ block_chance spell_crit_chance ]
+		}
+
+		item_type weapon_2h_staff:
+		{
+			wisdom: [ block_value ]
+			spell_crit_chance: [ block_chance ]
+		}
+	}
 }

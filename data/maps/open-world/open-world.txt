@@ -891,6 +891,12 @@ map open_world:
 	auto_doodads: true
 	max_players: 80
 
+	world_map main:
+	{
+		source: "open-world-world-map.png"
+		offset: [ -256 0 ]
+	}
+
 	layers:
 	[
 		{

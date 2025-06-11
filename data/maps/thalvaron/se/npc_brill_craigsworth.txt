@@ -1,0 +1,247 @@
+dialogue_screen .brill_craigsworth:
+{
+	text: 
+	[	
+		"Welcome to the jungle."
+	]
+	
+	options:
+	[
+		{ quest<offer_only>: .brill_craigsworth_1 }
+		{ quest: .brill_craigsworth_2 }
+		{ quest: .brill_craigsworth_3 }
+	]
+}
+
+entity thalvaron_brill_craigsworth: !NPC
+{
+	_string: "Brill Craigsworth"
+	_dialogue_root: $dialogue_root { .brill_craigsworth: { } }
+	_sprite: woman_34
+	_sprite_dead: woman_34_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+##########################################################################################
+# Quest 1
+
+item .brill_craigsworth_1_quest_item:
+{
+	string: "Xandralis Sour Banana" 
+	icon: icon_banana
+	loot_groups: [ .brill_craigsworth_1_quest_item ]
+	item_level: 20
+	stack: 5
+	flags: [ not_sellable ]
+}	
+
+objective .brill_craigsworth_1:
+{
+	string: "Xandralis Sour Bananas"
+	collect_items: { item: .brill_craigsworth_1_quest_item count: 5 }
+}
+
+loot_group .brill_craigsworth_1_quest_item: {}
+
+loot_table .brill_craigsworth_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .brill_craigsworth_1_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_brill_craigsworth_1_quest_item:
+{
+	string: "Xandralis Sour Banana"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ banana_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .brill_craigsworth_1_quest_item
+			verb: pick
+			range: 1 
+			despawn: true 			
+			level: 20
+			required_quest: .brill_craigsworth_1
+		}		
+	}
+}
+
+quest .brill_craigsworth_1:
+{
+	string: "Supplies for Jim Craigsworth"
+
+	text:
+	[
+		"Collect bananas from north of the river and deliver them to Jim Craigsworth."
+	]
+	
+	description: 
+	[
+		"My old uncle is a bit of a weirdo and has taken up residence in a the most spider infested part of the jungle. There is a path leading to his house just north of here. Can you go check"
+		"up on him? I'd rather not venture into that part of the jungle. If you do, bring him some the sour bananas you can find across the river. The man needs to eat."
+	]
+	
+	completion:
+	[
+		"Bananas? I suppose that will do."
+	]
+
+	objectives: [ .brill_craigsworth_1 ]
+	level: 20	
+}
+
+##########################################################################################
+# Quest 2
+
+loot_group .brill_craigsworth_2_quest_item: { }
+
+item .brill_craigsworth_2_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .brill_craigsworth_2_quest_item ]		
+	string: "Pristine Succulent Leaves" 
+	icon: icon_herbs_3
+	stack: 20
+	item_level: 20
+	quest: .brill_craigsworth_2
+	flags: [ not_sellable ]
+}
+
+objective .brill_craigsworth_2:
+{
+	string: "Pristine Succulent Leaves"
+	collect_items: { item: .brill_craigsworth_2_quest_item count: 5 }
+}
+
+quest .brill_craigsworth_2:
+{
+	string: "Plant Juice"
+
+	text:
+	[
+		"Hunt plants in western Xandralis and return to Brill Craigsworth."
+	]
+	
+	description: 
+	[
+		"Most things in this jungle will try to kill you if they get the chance, including the plants. Some will shoot things at you from afar, others will bite you if you get too close. Some will even chase you, running with their little legs. Anyway, some of these plants are actually really good for cooking. The jungle to the west of here is crawling with carnivous plants that are really good when you"
+		"put them in a nice stew. I'd rather not lose my fingers so maybe you can go and get me some of their leaves? Remember to wear protective gloves."
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"Nice. Very nice."
+	]
+
+	objectives: [ .brill_craigsworth_2 ]
+	level: 20	
+}
+
+##########################################################################################
+# Quest 3
+
+item .brill_craigsworth_3_quest_item:
+{
+	string: "Ghost Puffball" 
+	icon: icon_mushroom_1
+	loot_groups: [ .brill_craigsworth_3_quest_item ]
+	item_level: 20
+	stack: 6
+	flags: [ not_sellable ]
+}	
+
+objective .brill_craigsworth_3:  
+{
+	string: "Ghost Puffballs"
+	collect_items: { item: .brill_craigsworth_3_quest_item count: 6 }
+}
+
+loot_group .brill_craigsworth_3_quest_item: {}
+
+loot_table .brill_craigsworth_3_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .brill_craigsworth_3_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_brill_craigsworth_3_quest_item:
+{
+	string: "Ghost Puffball"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ mushroom_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .brill_craigsworth_3_quest_item
+			verb: pick
+			range: 1 
+			despawn: true 			
+			level: 22
+			required_quest: .brill_craigsworth_3
+		}		
+	}
+}
+
+{
+	${ _level: 22 }
+	item .brill_craigsworth_3_a: !QUEST_REWARD_CHEST{ _string: "Explorer's Chest Armor" _icon: icon_plate_chest_1 _strength: 1 _constitution: 1 _dexterity: 1 _type: armor_plate }
+	item .brill_craigsworth_3_b: !QUEST_REWARD_WAIST{ _string: "Lost Jungle Wristwrap" _icon: icon_cloth_belt_3 _wisdom: 2 _spirit: 1 _constitution: 3 _type: armor_cloth }
+}
+
+quest .brill_craigsworth_3:
+{
+	string: "Ghosts of Durgan Urok"
+
+	text:
+	[
+		"Venture into Durgan Urok, collect mushrooms, and return them to Brill Craigsworth."
+	]
+	
+	description: 
+	[
+		"I have one last ask of you, which might be a bit more dangerous. I don't know if you've heard about Durgan Urok, an abandoned dwarven underground stronghold in the mountains south west of here."
+		"The gates have been blocked off for a very long time, but now they're open, I've heard.\n\n"
+		"Caves of that area have always been known to be home to a very rare type of mushroom, the so-called Ghost Puffball. They're highly coveted so they usually get picked quickly when they're"
+		"found somewhere. Anyway, since Durgan Urok has been sealed off for such a long time, I figured that maybe it's possible to find Ghost Puffballs there. If you at some point go there, maybe you can see"
+		"if you can find some and bring them back to me?"
+	]
+	
+	progress:
+	[
+		"No hurry, I got plenty of time."
+	]
+	
+	completion:
+	[
+		"Ohh, how exciting! Here, got something for you in return."
+	]
+
+	objectives: [ .brill_craigsworth_3 ]
+	prerequisites: [ .brill_craigsworth_2 ]
+	level: 22
+	reward_one_item: [ .brill_craigsworth_3_a .brill_craigsworth_3_b ]
+}

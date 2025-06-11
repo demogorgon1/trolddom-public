@@ -146,6 +146,7 @@ map_entity_spawn thalvaron_swamp_giant:
 			}
 			
 			!WORLD_DROPS {}
+			!WORLD_DROPS_CROCODILES {}
 		]	
 	}
 	
@@ -163,6 +164,7 @@ map_entity_spawn thalvaron_swamp_giant:
 			}
 
 			!WORLD_DROPS {}
+			!WORLD_DROPS_CROCODILES {}
 		]	
 	}	
 	
@@ -323,15 +325,14 @@ map_entity_spawn thalvaron_swamp_giant:
 			_icon: icon_brown_leaf_1
 			_use_ability: $ability
 			{	
-				string: "Natural Remedy" 
-				icon: icon_brown_leaf_1
+				string: @_string
+				icon: @_icon
 				description: "Cures one poison effect."
 				cooldowns: [ global ]
 				cooldown: $cooldown { duration: 2400 }
-				icon: @_icon
 				flags: [ target_self item ]
 				requirement self<must_have_item_equipped>: .swamp_giant_1_a
-				direct_effect remove_aura: { aura_flags: [ poison ] }
+				direct_effect remove_aura: { aura_type: debuff aura_flags: [ poison ] }
 			}
 		}
 	}
@@ -1267,6 +1268,7 @@ map_entity_spawn thalvaron_krask:
 		_immune_to_stun: true
 		_immune_to_immobilize: true
 		_immune_to_slow: true
+		_max_leash_distance: 20
 		
 		_abilities: 
 		[ 

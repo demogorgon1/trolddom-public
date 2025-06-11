@@ -2,6 +2,7 @@
 
 #include <tpublic/AuraEffects/Stealth.h>
 
+#include <tpublic/Components/MinionPublic.h>
 #include <tpublic/Components/PlayerPrivate.h>
 
 #include <tpublic/Data/Ability.h>
@@ -23,12 +24,20 @@ namespace tpublic::AuraEffects
 		const Manifest*				/*aManifest*/) 
 	{
 		const EntityInstance* entity = aContext->m_worldView->WorldViewSingleEntityInstance(aTargetEntityInstanceId);
-		if(entity != NULL && entity->IsPlayer())
+		if(entity != NULL)
 		{
-			const Components::PlayerPrivate* playerPrivate = entity->GetComponent<Components::PlayerPrivate>();
-			if(playerPrivate != NULL && playerPrivate->HasUseAbility())
+			if(entity->IsPlayer())
 			{
-				// FIXME: some abilities shouldn't break stealth
+				const Components::PlayerPrivate* playerPrivate = entity->GetComponent<Components::PlayerPrivate>();
+				if (playerPrivate != NULL && playerPrivate->HasUseAbility())
+				{
+					// FIXME: some abilities shouldn't break stealth
+					return false;
+				}
+			}
+			else if(!entity->HasComponent<Components::MinionPublic>() && entity->GetState() == EntityState::ID_IN_COMBAT)
+			{
+				// All non-minion/non-player entities break stealth the moment they enter combat
 				return false;
 			}
 		}

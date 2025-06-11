@@ -89,7 +89,8 @@ namespace tpublic
 
 		void
 		Combine(
-			const StatModifiers&	aOther)
+			const StatModifiers&	aOther,
+			float					aMultiplier)
 		{
 			for (uint32_t i = 1; i < (uint32_t)Stat::NUM_IDS; i++)
 			{
@@ -97,9 +98,9 @@ namespace tpublic
 				const std::optional<Modifier>& otherModifier = aOther.m_modifiers[i];
 
 				if(!thisModifier.has_value() && otherModifier.has_value())
-					thisModifier = otherModifier.value();
+					thisModifier = Modifier(otherModifier.value(), aMultiplier);
 				else if(thisModifier.has_value() && otherModifier.has_value())
-					thisModifier.value().Combine(otherModifier.value());
+					thisModifier.value().Combine(otherModifier.value(), aMultiplier);
 			}
 		}
 

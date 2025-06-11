@@ -62,7 +62,7 @@ aura maliciousness:
 	type: buff
 	icon: icon_special_9
 	duration: 200
-	flags: [ unique ]
+	flags: [ unique magic ]
 	aura_effect cast_modifier: 
 	{ 
 		ability_flags: [ spell ]
@@ -75,7 +75,7 @@ ability maliciousness:
 	string: "Maliciousness"
 	description: "Increases your spell casting speed by 30% for 20 seconds."
 	range: 1	
-	cooldowns: [ global maliciousness ]
+	cooldowns: [ maliciousness ]
 	flags: [ target_self ]
 	states: [ default in_combat ]
 	icon: icon_special_9
@@ -279,7 +279,15 @@ ability curse_of_corruption_tick:
 
 	direct_effect damage:
 	{	
-		ability_modifier_multipliers: { improved_curse_of_corruption_1: 1.25 improved_curse_of_corruption_2: 1.35 improved_curse_of_corruption_3: 1.45 }
+		ability_modifier_multipliers: 
+		{ 
+			improved_curse_of_corruption_1: 1.16
+			improved_curse_of_corruption_2: 1.32 
+			improved_curse_of_corruption_3: 1.48 
+			improved_curse_of_corruption_4: 1.64
+			improved_curse_of_corruption_5: 1.80 
+		}
+		
 		damage_type: unholy
 		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.25 b: [ [ 1 4 ] [ 10 8 ] [ 20 16 ] ] }					
 		flags: [ is_magical ]
@@ -293,7 +301,7 @@ aura curse_of_corruption:
 	icon: icon_curse_of_corruption		
 	type: debuff
 	duration: based_on_effects	
-	flags: [ unique magic ]
+	flags: [ unique_per_source magic ]
 	sound: spell_14
 	aura_effect repeat: 
 	{ 

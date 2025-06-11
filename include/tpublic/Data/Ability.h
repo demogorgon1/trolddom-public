@@ -71,7 +71,9 @@ namespace tpublic
 				EXTENDED_FLAG_TARGET_ITEM			= 0x00000010,
 				EXTENDED_FLAG_NO_STEALTH_BREAK		= 0x00000020,
 				EXTENDED_FLAG_NO_INDOOR				= 0x00000040,
-				EXTENDED_FLAG_CAN_USE_MOUNTED		= 0x00000080
+				EXTENDED_FLAG_CAN_USE_MOUNTED		= 0x00000080,
+				EXTENDED_FLAG_CAN_TARGET_DEAD		= 0x00000100,
+				EXTENDED_FLAG_CAN_TARGET_EVADING	= 0x00000200
 			};
 
 			static inline Resource::Id
@@ -173,6 +175,10 @@ namespace tpublic
 						*aOutExtendedFlags |= EXTENDED_FLAG_NO_INDOOR;
 					else if (strcmp(identifier, "can_use_mounted") == 0 && aOutExtendedFlags != NULL)
 						*aOutExtendedFlags |= EXTENDED_FLAG_CAN_USE_MOUNTED;
+					else if (strcmp(identifier, "can_target_dead") == 0 && aOutExtendedFlags != NULL)
+						*aOutExtendedFlags |= EXTENDED_FLAG_CAN_TARGET_DEAD;
+					else if (strcmp(identifier, "can_target_evading") == 0 && aOutExtendedFlags != NULL)
+						*aOutExtendedFlags |= EXTENDED_FLAG_CAN_TARGET_EVADING;
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid ability flag.", identifier);
 				});
@@ -543,6 +549,8 @@ namespace tpublic
 			bool IsProduceItemsTarget() const { return m_extendedFlags & EXTENDED_FLAG_PRODUCE_ITEMS_TARGET; }
 			bool TargetItem() const { return m_extendedFlags & EXTENDED_FLAG_TARGET_ITEM; }
 			bool CanUseMounted() const { return m_extendedFlags & EXTENDED_FLAG_CAN_USE_MOUNTED; }
+			bool CanTargetDead() const { return m_extendedFlags & EXTENDED_FLAG_CAN_TARGET_DEAD; }
+			bool CanTargetEvading() const { return m_extendedFlags & EXTENDED_FLAG_CAN_TARGET_EVADING; }
 
 			bool 
 			IsUsableInState(

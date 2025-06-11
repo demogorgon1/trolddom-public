@@ -98,7 +98,12 @@ namespace tpublic
 				FLAG_NO_SOURCE_NEEDED		= 0x00008000,
 				FLAG_CANCEL_INDOOR			= 0x00010000,
 				FLAG_NO_REFRESH				= 0x00020000,
-				FLAG_POISON					= 0x00040000
+				FLAG_POISON					= 0x00040000,
+				FLAG_ALWAYS_SELF_APPLIED	= 0x00080000,
+				FLAG_UNIQUE_PER_SOURCE		= 0x00100000,
+				FLAG_NO_MOUNT				= 0x00200000,
+				FLAG_EFFECTS_AS_CHARGES		= 0x00400000,
+				FLAG_IGNORE_IMMUNITIES		= 0x00800000
 			};
 
 			static Type
@@ -163,6 +168,16 @@ namespace tpublic
 						flags |= FLAG_NO_REFRESH;
 					else if (strcmp(string, "poison") == 0)
 						flags |= FLAG_POISON;
+					else if (strcmp(string, "always_self_applied") == 0)
+						flags |= FLAG_ALWAYS_SELF_APPLIED;
+					else if (strcmp(string, "unique_per_source") == 0)
+						flags |= FLAG_UNIQUE_PER_SOURCE;
+					else if (strcmp(string, "no_mount") == 0)
+						flags |= FLAG_NO_MOUNT;
+					else if (strcmp(string, "effects_as_charges") == 0)
+						flags |= FLAG_EFFECTS_AS_CHARGES;
+					else if (strcmp(string, "ignore_immunities") == 0)
+						flags |= FLAG_IGNORE_IMMUNITIES;
 					else
 						TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid aura flag.", string);
 				});
@@ -197,6 +212,8 @@ namespace tpublic
 					{
 						if (aChild->m_name == "icon")
 							m_iconSpriteId = aChild->GetId(DataType::ID_SPRITE);
+						else if (aChild->m_name == "override_sprite")
+							m_overrideSpriteId = aChild->GetId(DataType::ID_SPRITE);
 						else if (aChild->m_name == "encounter")
 							m_encounterId = aChild->GetId(DataType::ID_ENCOUNTER);
 						else if (aChild->m_name == "particle_system")
@@ -213,6 +230,8 @@ namespace tpublic
 							m_string = aChild->GetString();
 						else if (aChild->m_name == "description")
 							m_description = aChild->GetString();
+						else if (aChild->m_name == "max_stack")
+							m_maxStack = aChild->GetUInt32();
 						else if (aChild->m_name == "stat_modifiers")
 							m_statModifiers = std::make_unique<StatModifiers>(aChild);
 						else if(aChild->m_name == "charges")
@@ -259,6 +278,8 @@ namespace tpublic
 				aStream->WriteOptionalPOD(m_colorWeaponGlow);
 				aStream->WriteUInt(m_mountId);
 				aStream->WriteUInt(m_mustNotHaveWorldAuraId);
+				aStream->WriteUInt(m_maxStack);
+				aStream->WriteUInt(m_overrideSpriteId);
 			}
 			 
 			bool
@@ -338,8 +359,26 @@ namespace tpublic
 						return false;
 				}
 
+				if (!aStream->IsEnd())
+				{
+					if (!aStream->ReadUInt(m_maxStack))
+						return false;
+				}
+
+				if (!aStream->IsEnd())
+				{
+					if (!aStream->ReadUInt(m_overrideSpriteId))
+						return false;
+				}
+
 				return true;
 			}
+
+			// Helpers
+			bool IsStacking() const { return m_maxStack > 1; }
+			bool IsUniquePerSource() const { return m_flags & FLAG_UNIQUE_PER_SOURCE; }
+			bool IsUnique() const { return m_flags & FLAG_UNIQUE; }
+			bool ShouldIgnoreImmunities() const { return m_flags & FLAG_IGNORE_IMMUNITIES; }
 
 			// Public data
 			std::string										m_string;
@@ -360,6 +399,8 @@ namespace tpublic
 			std::optional<Image::RGBA>						m_colorEffect;
 			std::optional<Image::RGBA>						m_colorWeaponGlow;
 			uint32_t										m_mustNotHaveWorldAuraId = 0;
+			uint32_t										m_maxStack = 1;
+			uint32_t										m_overrideSpriteId = 0;
 		};
 
 	}

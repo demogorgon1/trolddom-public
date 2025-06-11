@@ -99,7 +99,7 @@ map_entity_spawn thalvaron_rebel_dead:
 	entity thalvaron_rebel_dead_b: { init_state: dead } 
 	entity thalvaron_rebel_dead_c: { init_state: dead } 
 	entity thalvaron_rebel_dead_d: { init_state: dead } 	
-	spawn_timer: { despawn_required: true }
+	spawn_timer: { despawn_required: true  }
 }
 
 # Rebels inside the city
@@ -344,6 +344,7 @@ map_entity_spawn thalvaron_rebel_dead:
 		_level: 12
 		_faction: monsters
 		_creature_type: humanoid
+		_despawn_time: { never: true }
 	}
 
 	entity thalvaron_rebel_dead_a: !NPC { _string: "Rebel" _sprite: rebel_1 _sprite_dead: rebel_1_dead }	

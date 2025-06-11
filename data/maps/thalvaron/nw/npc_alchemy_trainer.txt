@@ -11,6 +11,7 @@ dialogue_screen .alchemy_trainer_greetings:
 	[
 		{ quest: thalvaron_alchemy_trainer_1 }
 		{ quest: .alchemy_trainer_2 }
+		{ quest<completion_only>: thalvaron_benji_1 }
 		{ goto: .alchemy_trainer_trainer text: "Please teach me about alchemy." }
 	]
 }
@@ -124,7 +125,7 @@ quest .alchemy_trainer_2:
 
 	text:
 	[
-		"Deliver herbs to Brick Johnson in Valors."
+		"Deliver herbs to Brick Johnson in Valoris."
 	]
 	
 	description: 

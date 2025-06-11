@@ -1,0 +1,53 @@
+dialogue_screen .warden_qoro:
+{
+	text: 
+	[	
+		"What brings you to this pass? Beyond it lies the wild lands of Skaldrun. I can't imagine a $class$ like you would have any business there."
+	]
+	
+	options:
+	[
+		{ quest<offer_only>: .warden_qoro_1 }
+	]
+}
+
+entity thalvaron_warden_qoro: !NPC
+{
+	_string: "Warden Qoro"
+	_dialogue_root: $dialogue_root { .warden_qoro: { } }
+	_sprite: elf_2
+	_sprite_dead: elf_2_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+##########################################################################################
+# Quest 1
+
+quest .warden_qoro_1:
+{
+	string: "Rod Gambil"
+
+	text:
+	[
+		"Seek out Rod Gambil in the Howling Pass."
+	]
+	
+	description: 
+	[
+		"If you insist on venturing into the Howling Pass and what lies beyond, I suggest you seek out Rod Gambil on the way. He lives in a shack in the mountains."
+	]
+
+	completion:
+	[
+		"Some elf sent you? I see."
+	]
+
+	level: 21
+	reward_xp_multiplier: 0.2
+	reward_cash_multiplier: 0.2
+}
+

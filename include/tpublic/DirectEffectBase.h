@@ -47,6 +47,7 @@ namespace tpublic
 		{
 			CombatEvent::Id		m_updatedEventId = CombatEvent::INVALID_ID;
 			bool				m_generateImmediateCombatLogEvent = false;
+			bool				m_despawnSource = false;
 		};
 
 		bool

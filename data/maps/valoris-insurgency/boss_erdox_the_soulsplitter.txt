@@ -27,7 +27,7 @@ loot_table .erdox_the_soulsplitter:
 	item valoris_insurgency_25: !BOSS_DROP_CHEST
 	{
 		_string: "Robe of the Soulsplitter"
-		_type: armor_mail
+		_type: armor_cloth
 		_icon: icon_robe_2
 		_constitution: 1
 		_spell_damage: 3

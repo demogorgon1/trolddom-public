@@ -94,6 +94,7 @@ aura .snarltooth:
 	type: buff
 	duration: 60
 	flags: [ unique ]
+	color_effect: [ 255 0 0 ]
 
 	stat_modifiers:
 	{

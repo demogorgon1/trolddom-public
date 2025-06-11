@@ -27,7 +27,6 @@ entity thalvaron_borli_stouthammer: !NPC
 	_level: 15
 	_faction: combat_npcs		
 	_creature_type: humanoid
-	_loot_table: .npc
 	_not_pushable: true	
 	_default_trigger_ability: .borli_stouthammer_start_escort
 	_default_behavior_state: .borli_stouthammer
