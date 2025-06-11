@@ -558,6 +558,8 @@ map_entity_spawn thalvaron_skaldrun_satyr_ranged: { entity thalvaron_skaldrun_sa
 map_entity_spawn thalvaron_skaldrun_satyr_caster: { entity thalvaron_skaldrun_satyr_caster: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_skaldrun_demon_spawn: { entity thalvaron_skaldrun_demon_spawn: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_skaldrun_portal_master: { entity thalvaron_skaldrun_portal_master: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_thalkyr: { entity thalvaron_thalkyr: {} spawn_timer: !NPC_RESPAWN_RARE{} }
+
 
 map_entity_spawn thalvaron_skaldrun_satyr: 
 { 
@@ -678,4 +680,46 @@ map_entity_spawn thalvaron_skaldrun_satyr:
 	}
 
 	entity thalvaron_skaldrun_portal_master: !NPC { _string: "Vellith Morbain" _guild_name: "Portal Master" _sprite: man_73 _sprite_dead: man_73_dead }
+}
+
+# Satyr boss
+{
+	loot_table .thalkyr: 
+	{
+		slots:
+		[	
+			{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
+		          map_message thalvaron: "Thal'kyr the Horned Whisperer will not drop Token of Victory for {}." } } }
+
+			!WORLD_DROPS_RARE {}
+			!WORLD_DROPS {}
+		]	
+	}
+
+	${		
+		_faction: monsters
+		_creature_type: demon
+		_loot_table: .thalkyr
+		_default_behavior_state: .passive
+		_elite: true
+		_level: 21
+		_string: "Thal'kyr the Horned Whisperer" 
+		_sprite: demon_10
+		_sprite_dead: demon_10_dead
+		_weapon_damage: 1.4
+		_health: 6.8
+		_immune_to_stun: true
+		_immune_to_immobilize: true
+		_immune_to_slow: true
+		_max_leash_distance: 20
+		
+		_abilities: 
+		[ 
+			{ id: npc_mortal_strike_non_instant }
+			{ id: npc_attack } 
+		]		
+	}
+
+	entity thalvaron_thalkyr: !NPC { }
+
 }

@@ -28,6 +28,21 @@ namespace tpublic
 
 			}
 
+			bool
+			ShouldTriggerOnCombatEvent(
+				CombatEvent::Id			aCombatEventId) const
+			{
+				if(m_combatEventIds.empty() && aCombatEventId == CombatEvent::ID_HIT)
+					return true; // Defaults to triggering on hits
+
+				for(CombatEvent::Id t : m_combatEventIds)
+				{
+					if(t == aCombatEventId)
+						return true;
+				}
+				return false;
+			}
+
 			// AuraEffectBase implementation
 			void
 			FromSource(
@@ -42,8 +57,22 @@ namespace tpublic
 						{
 							TP_VERIFY(aChild->m_annotation, aChild->m_debugInfo, "Missing combat event type annotation.");
 							m_combatEventType = AuraEffectBase::SourceToCombatEventType(aChild->m_annotation.get());
-							m_combatEventId = CombatEvent::StringToId(aChild->GetIdentifier());
-							TP_VERIFY(m_combatEventId != CombatEvent::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid combat event.", aChild->GetIdentifier());
+
+							if(aChild->m_type == SourceNode::TYPE_ARRAY)
+							{
+								aChild->ForEachChild([&](
+									const SourceNode* aItem)
+								{
+									CombatEvent::Id combatEventId = CombatEvent::StringToId(aItem->GetIdentifier());
+									TP_VERIFY(combatEventId != CombatEvent::INVALID_ID, aItem->m_debugInfo, "'%s' is not a valid combat event.", aItem->GetIdentifier());
+									m_combatEventIds.push_back(combatEventId);
+								});
+							}
+							else
+							{
+								m_combatEventIds = { CombatEvent::StringToId(aChild->GetIdentifier()) };
+								TP_VERIFY(m_combatEventIds[0] != CombatEvent::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid combat event.", aChild->GetIdentifier());
+							}
 						}
 						else if(aChild->m_name == "ability")
 						{
@@ -75,7 +104,7 @@ namespace tpublic
 			{
 				ToStreamBase(aStream);
 
-				aStream->WritePOD(m_combatEventId);
+				aStream->WritePODs(m_combatEventIds);
 				aStream->WritePOD(m_combatEventType);
 				m_ability.ToStream(aStream);
 				aStream->WriteUInts(m_triggerAbilityIds);
@@ -90,7 +119,7 @@ namespace tpublic
 				if(!FromStreamBase(aStream))
 					return false;
 
-				if (!aStream->ReadPOD(m_combatEventId))
+				if (!aStream->ReadPODs(m_combatEventIds))
 					return false;
 				if (!aStream->ReadPOD(m_combatEventType))
 					return false;
@@ -110,7 +139,7 @@ namespace tpublic
 			{
 				CombatEventTrigger* t = new CombatEventTrigger();
 				t->CopyBase(this);
-				t->m_combatEventId = m_combatEventId;
+				t->m_combatEventIds = m_combatEventIds;
 				t->m_combatEventType = m_combatEventType;
 				t->m_ability = m_ability;
 				t->m_triggerAbilityIds = m_triggerAbilityIds;
@@ -132,7 +161,7 @@ namespace tpublic
 
 			// Public data
 			AuraEffectBase::CombatEventType	m_combatEventType = AuraEffectBase::INVALID_COMBAT_EVENT_TYPE;
-			CombatEvent::Id					m_combatEventId = CombatEvent::ID_HIT;
+			std::vector<CombatEvent::Id>	m_combatEventIds;
 			uint32_t						m_combatEventAbilityMask = 0;
 			SecondaryAbility				m_ability;
 			std::vector<uint32_t>			m_triggerAbilityIds;

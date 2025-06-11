@@ -171,6 +171,82 @@ objective .warmaster_jounheim_3:
 	}
 }
 
+{
+	${ _level: 22 _rarity: rare }
+	
+	item .warmaster_jounheim_3_a: !QUEST_REWARD_TRINKET
+	{ 
+		_string: "Blood of the Mountain" _icon: icon_red_shard 				
+		_item_aura: $aura
+		{
+			string: "Blood of the Mountain" icon: icon_red_shard 				
+			description: "Your melee attacks have a 25% chance of increasing your Strength by 66 for 12 seconds."
+			type: hidden
+			flags: [ item silent ]
+			
+			aura_effect combat_event_trigger: 
+			{ 
+				combat_event<source>: [ hit critical block ]
+				combat_event_ability_mask: [ offensive melee ]
+				ability<self>: $ability [ icon string ]
+				{
+					states: [ default in_combat ]
+					direct_effect apply_aura:
+					{
+						aura: $aura [ icon string ]
+						{
+							type: buff
+							duration: 120
+							flags: [ unique magic ]
+							stat_modifiers:
+							{
+								strength: { add: 66 } 
+							}							
+						}
+					}
+				}
+				probability: 25
+			}
+		}	
+	}
+	
+	item .warmaster_jounheim_3_b: !QUEST_REWARD_TRINKET
+	{ 
+		_string: "Ancient Runestone" _icon: icon_tablet_1 
+		_item_aura: $aura
+		{
+			string: "Ancient Runestone" icon: icon_tablet_1 				
+			description: "Your spells have a 25% chance of increasing your Wisdom by 66 for 12 seconds."
+			type: hidden
+			flags: [ item silent ]
+			
+			aura_effect combat_event_trigger: 
+			{ 
+				combat_event<source>: [ hit critical ]
+				combat_event_ability_mask: [ spell ]
+				ability<self>: $ability [ icon string ]
+				{
+					states: [ default in_combat ]
+					direct_effect apply_aura:
+					{
+						aura: $aura [ icon string ]
+						{
+							type: buff
+							duration: 120
+							flags: [ unique magic ]
+							stat_modifiers:
+							{
+								wisdom: { add: 66 } 
+							}							
+						}
+					}
+				}
+				probability: 25
+			}
+		}	
+	}
+}
+
 quest .warmaster_jounheim_3:
 {
 	string: "Decapitation of the Skullforge Clan"
@@ -200,5 +276,6 @@ quest .warmaster_jounheim_3:
 	level: 23
 	type: dungeon
 	prerequisites: [ thalvaron_skaldrun_shore_orc_boss_quest_item ]
+	reward_one_item: [ .warmaster_jounheim_3_a .warmaster_jounheim_3_b ]
 }
 	

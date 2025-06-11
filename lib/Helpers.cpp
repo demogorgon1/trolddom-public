@@ -135,7 +135,8 @@ namespace tpublic::Helpers
 		if (aProbability == 100)
 			return true;
 		UniformDistribution<uint32_t> distribution(0, 99);
-		return distribution(aRandom) < aProbability;
+		uint32_t roll = distribution(aRandom);
+		return roll < aProbability;
 	}
 
 	bool

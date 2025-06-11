@@ -842,6 +842,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_skaldrun_portal_master: [ 140 29 88 ]
 	entity_spawn thalvaron_durgan_urok_golem: [ 240 49 133 ]
 	entity_spawn thalvaron_brill_craigsworth_3_quest_item: [ 30 30 170 ]
+	entity_spawn thalvaron_thalkyr: [ 55 84 77 ]
 }
 
 map_palette .levels:

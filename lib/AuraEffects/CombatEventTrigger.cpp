@@ -21,7 +21,7 @@ namespace tpublic::AuraEffects
 		std::mt19937*					aRandom,
 		IEventQueue*					aEventQueue) const
 	{
-		if(m_combatEventId == aCombatEventId && m_combatEventType == aType)
+		if(ShouldTriggerOnCombatEvent(aCombatEventId) && m_combatEventType == aType)
 		{
 			bool shouldTrigger = true;
 
