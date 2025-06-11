@@ -137,6 +137,12 @@ objective thalvaron_seren_virelith_3:
 	manual_boolean: { }
 }
 
+{
+	${ _level: 22 }
+	item .seren_virelith_3_a: !QUEST_REWARD_LEGS{ _string: "Legplates of the Mad Wizard" _icon: icon_plate_legs_1 _strength: 4 _constitution: 3 _dexterity: 2 _type: armor_plate }
+	item .seren_virelith_3_b: !QUEST_REWARD_WRISTS{ _string: "Demon Hunter Cuffs" _icon: icon_bracers_6 _wisdom: 2 _constitution: 3 _spirit: 1 _type: armor_cloth }
+}
+
 quest thalvaron_seren_virelith_3:
 {
 	string: "Chasing Voraghul"
@@ -166,6 +172,7 @@ quest thalvaron_seren_virelith_3:
 	objectives: [ thalvaron_seren_virelith_3 ]
 	prerequisites: [ .seren_virelith_2 ]
 	level: 22
+	reward_one_item: [ .seren_virelith_3_a .seren_virelith_3_b ]
 }
 
 

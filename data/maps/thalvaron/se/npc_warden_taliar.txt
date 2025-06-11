@@ -41,6 +41,12 @@ objective .warden_taliar_1:
 	}
 }
 
+{
+	${ _level: 22 }
+	item .warden_taliar_1_a: !QUEST_REWARD_HEAD{ _string: "Elvish Headguard" _icon: icon_helmet_3 _constitution: 1 _strength: 1 _type: armor_plate }
+	item .warden_taliar_1_b: !QUEST_REWARD_1H_KNIFE{ _string: "Spellslicer" _icon: icon_knife_5 _constitution: 1 _wisdom: 3 _type: armor_cloth }
+}
+
 quest .warden_taliar_1:
 {
 	string: "Assassinating the Commander"
@@ -69,4 +75,5 @@ quest .warden_taliar_1:
 
 	objectives: [ .warden_taliar_1 ]
 	level: 22
+	reward_one_item: [ .warden_taliar_1_a .warden_taliar_1_b ]
 }

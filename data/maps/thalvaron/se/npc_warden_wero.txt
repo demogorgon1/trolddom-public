@@ -85,6 +85,12 @@ ability .warden_wero_1_quest_item:
 	}
 }
 
+{
+	${ _level: 21 }
+	item .warden_wero_1_a: !QUEST_REWARD_1H_SWORD{ _string: "Orcbane" _icon: icon_sword_16 _constitution: 1 _strength: 1 _dexterity: 1 _weapon_cooldown: 28 }
+	item .warden_wero_1_b: !QUEST_REWARD_FINGER{ _string: "Enchanted Elvish Ring" _icon: icon_ring_3 _constitution: 1 _wisdom: 1 }
+}
+
 quest .warden_wero_1:
 {
 	string: "Skullforge Menace"
@@ -113,6 +119,7 @@ quest .warden_wero_1:
 
 	objectives: [ .warden_wero_1_a .warden_wero_1_b ]
 	level: 21	
+	reward_one_item: [ .warden_wero_1_a .warden_wero_1_b ]
 }
 
 ##########################################################################################

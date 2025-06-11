@@ -163,6 +163,12 @@ objective .theodore_3:
 	collect_items: { item: .theodore_3_quest_item count: 8 }
 }
 
+{
+	${ _level: 20 }
+	item .theodore_3_a: !QUEST_REWARD_WRISTS{ _string: "Hunter's Armguards" _icon: icon_bracers_2 _strength: 3 _dexterity: 2 _type: armor_plate }
+	item .theodore_3_b: !QUEST_REWARD_HEAD{ _string: "Spellbound Prowler's Hood" _icon: icon_head_9 _wisdom: 2 _spirit: 1 _type: armor_cloth }
+}
+
 quest .theodore_3:
 {
 	string: "Highland Gorillas"
@@ -192,5 +198,6 @@ quest .theodore_3:
 	objectives: [ .theodore_3 ]
 	prerequisites: [ .theodore_2 ]
 	level: 20	
+	reward_one_item: [ .theodore_3_a .theodore_3_b ]
 }
 

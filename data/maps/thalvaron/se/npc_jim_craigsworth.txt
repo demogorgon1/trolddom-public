@@ -41,6 +41,12 @@ objective .jim_craigsworth_1:
 	}
 }
 
+{
+	${ _level: 20 }
+	item .jim_craigsworth_1_a: !QUEST_REWARD_1H_MACE{ _string: "Club of the Recluse" _icon: icon_mace_1 _strength: 2 _constitution: 1 _dexterity: 1 _weapon_cooldown: 25 }
+	item .jim_craigsworth_1_b: !QUEST_REWARD_BACK{ _string: "Jungle Wanderer's Cloak" _icon: icon_cape_6 _wisdom: 3 _constitution: 2 _type: armor_cloth }
+}
+
 quest .jim_craigsworth_1:
 {
 	string: "Extermination Job"
@@ -67,5 +73,6 @@ quest .jim_craigsworth_1:
 
 	objectives: [ .jim_craigsworth_1 ]
 	level: 20	
+	reward_one_item: [ .jim_craigsworth_1_a .jim_craigsworth_1_b ]
 }
 

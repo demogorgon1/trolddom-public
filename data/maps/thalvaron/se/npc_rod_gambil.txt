@@ -140,13 +140,19 @@ entity thalvaron_rod_gambil_2_quest_item:
 	}
 }
 
+{
+	${ _level: 21 }
+	item .rod_gambil_2_a: !QUEST_REWARD_FEET{ _string: "Boots of the Howling Pass" _icon: icon_boots_1 _strength: 2 _constitution: 3 _type: armor_plate }
+	item .rod_gambil_2_b: !QUEST_REWARD_LEGS{ _string: "Shamanistic Legwraps" _icon: icon_pants_1 _wisdom: 3 _constitution: 2 _spirit: 1 _type: armor_cloth }
+}
+
 quest .rod_gambil_2:
 {
 	string: "Thieving Skullforge Orcs"
 
 	text:
 	[
-		"Thieving."
+		"Locate the stolen possessions of Rod Gambil in the Swamp of Skaldrun and return them to him."
 	]
 	
 	description: 
@@ -169,6 +175,7 @@ quest .rod_gambil_2:
 	objectives: [ .rod_gambil_2 ]
 	prerequisites: [ .rod_gambil_1 ]
 	level: 21
+	reward_one_item: [ .rod_gambil_2_a .rod_gambil_2_b ]
 }
 
 ##########################################################################################
@@ -196,4 +203,6 @@ quest .rod_gambil_3:
 	]
 
 	level: 20
+	reward_xp_multiplier: 0.2
+	reward_cash_multiplier: 0.2
 }

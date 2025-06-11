@@ -41,13 +41,19 @@ objective .karl_1:
 	}
 }
 
+{
+	${ _level: 20 }
+	item .karl_1_a: !QUEST_REWARD_FINGER{ _string: "Fisherman's Ring" _icon: icon_ring_9 _strength: 3 _constitution: 2 _dexterity: 1 }
+	item .karl_1_b: !QUEST_REWARD_FINGER{ _string: "Signet of the Deep" _icon: icon_ring_10 _wisdom: 4 _constitution: 1 _type: armor_cloth }
+}
+
 quest .karl_1:
 {
 	string: "What Happened to the Fish?"
 
 	text:
 	[
-		"Collect bananas from north of the river and deliver them to Jim Craigsworth."
+		"Try to catch a fish inside the abandoned city of Skaldrun."
 	]
 	
 	description: 
@@ -70,4 +76,5 @@ quest .karl_1:
 
 	objectives: [ .karl_1 ]
 	level: 20
+	reward_one_item: [ .karl_1_a .karl_1_b ]
 }

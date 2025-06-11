@@ -99,6 +99,12 @@ objective .thora_stormpiercer_2:
 	collect_items: { item: .thora_stormpiercer_2_quest_item count: 1 }
 }
 
+{
+	${ _level: 20 }
+	item .thora_stormpiercer_2_a: !QUEST_REWARD_BOW{ _string: "Bow of the Stormpiercer" _icon: icon_bow_2 _budget_bias: -10 _constituion: 1 _phys_crit: 1 }
+	item .thora_stormpiercer_2_b: !QUEST_REWARD_OFFHAND{ _string: "Orb of Lost Magic" _icon: icon_red_orb _budget_bias: -10 _wisdom: 1 _spell_crit: 1 }
+}
+
 quest .thora_stormpiercer_2:
 {
 	string: "Slaying Stormgoros"
@@ -127,5 +133,6 @@ quest .thora_stormpiercer_2:
 	prerequisites: [ .thora_stormpiercer_1 ]
 	objectives: [ .thora_stormpiercer_2 ]
 	level: 20	
+	reward_one_item: [ .thora_stormpiercer_2_a .thora_stormpiercer_2_b ]
 }
 

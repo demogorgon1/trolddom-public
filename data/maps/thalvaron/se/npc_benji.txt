@@ -78,6 +78,12 @@ entity thalvaron_benji_1_quest_item:
 	}
 }
 
+{
+	${ _level: 20 }
+	item .benji_1_a: !QUEST_REWARD_BACK{ _string: "Thunder Cloak" _icon: icon_cape_6 _strength: 1 _constitution: 1 _dexterity: 1 _type: armor_cloth }
+	item .benji_1_b: !QUEST_REWARD_CHEST{ _string: "Lizard Hunter's Robe" _icon: icon_cloth_shirt_7 _wisdom: 2 _spirit: 1 _constitution: 1 _type: armor_cloth }
+}
+
 quest thalvaron_benji_1:
 {
 	string: "The Crystal Caves"
@@ -103,5 +109,6 @@ quest thalvaron_benji_1:
 	level: 20	
 	objectives: [ .benji_1 ]
 	prerequisites: [ .thora_stormpiercer_2 ]
+	reward_one_item: [ .benji_1_a .benji_1_b ]
 }
 

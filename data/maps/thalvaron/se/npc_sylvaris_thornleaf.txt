@@ -15,7 +15,7 @@ dialogue_screen .sylvaris_thornleaf:
 
 entity thalvaron_sylvaris_thornleaf: !NPC
 {
-	_string: "Brill Craigsworth"
+	_string: "Sylvaris Thornleaf"
 	_dialogue_root: $dialogue_root { .sylvaris_thornleaf: { } }
 	_sprite: elf_15
 	_sprite_dead: elf_15_dead
@@ -253,6 +253,12 @@ entity thalvaron_sylvaris_thornleaf_3_quest_item:
 	}
 }
 
+{
+	${ _level: 21 }
+	item .sylvaris_thornleaf_3_a: !QUEST_REWARD_2H_SWORD{ _string: "Elvish Longblade" _icon: icon_sword_3 _strength: 5 _constitution: 1 _dexterity: 2 }
+	item .sylvaris_thornleaf_3_b: !QUEST_REWARD_2H_STAFF{ _string: "Jungle Guardian Staff" _icon: icon_staff_11 _wisdom: 1 }
+}
+
 quest .sylvaris_thornleaf_3:
 {
 	string: "Temple of Ryux"
@@ -282,4 +288,5 @@ quest .sylvaris_thornleaf_3:
 	objectives: [ .sylvaris_thornleaf_3 ]
 	prerequisites: [ .sylvaris_thornleaf_2 ]
 	level: 21
+	reward_one_item: [ .sylvaris_thornleaf_3_a .sylvaris_thornleaf_3_b ]
 }

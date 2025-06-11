@@ -206,6 +206,12 @@ entity thalvaron_brill_craigsworth_3_quest_item:
 	}
 }
 
+{
+	${ _level: 22 }
+	item .brill_craigsworth_3_a: !QUEST_REWARD_CHEST{ _string: "Explorer's Chest Armor" _icon: icon_plate_chest_1 _strength: 1 _constitution: 1 _dexterity: 1 _type: armor_plate }
+	item .brill_craigsworth_3_b: !QUEST_REWARD_WAIST{ _string: "Lost Jungle Wristwrap" _icon: icon_cloth_belt_3 _wisdom: 2 _spirit: 1 _constitution: 3 _type: armor_cloth }
+}
+
 quest .brill_craigsworth_3:
 {
 	string: "Ghosts of Durgan Urok"
@@ -237,4 +243,5 @@ quest .brill_craigsworth_3:
 	objectives: [ .brill_craigsworth_3 ]
 	prerequisites: [ .brill_craigsworth_2 ]
 	level: 22
+	reward_one_item: [ .brill_craigsworth_3_a .brill_craigsworth_3_b ]
 }

@@ -76,6 +76,12 @@ entity thalvaron_orm_thogore_1_quest_item:
 	}
 }
 
+{
+	${ _level: 20 }
+	item .orm_thogore_1_a: !QUEST_REWARD_HANDS{ _string: "Adventurer's Gauntlets" _icon: icon_gloves_2 _strength: 2 _constitution: 3 _type: armor_plate }
+	item .orm_thogore_1_b: !QUEST_REWARD_FEET{ _string: "Kobold Soothsayer's Shoes" _icon: icon_shoe_1 _wisdom: 3 _constitution: 2 _type: armor_cloth }
+}
+
 quest .orm_thogore_1:
 {
 	string: "Overrun by Kobolds"
@@ -105,5 +111,6 @@ quest .orm_thogore_1:
 
 	objectives: [ .orm_thogore_1 ]
 	level: 20
+	reward_one_item: [ .orm_thogore_1_a .orm_thogore_1_b ]
 }
 

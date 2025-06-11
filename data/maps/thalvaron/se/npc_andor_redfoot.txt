@@ -114,6 +114,12 @@ item .andor_redfoot_1_quest_item_2:
 	use_ability: .andor_redfoot_1_quest_item_2
 }
 
+{
+	${ _level: 20 }
+	item .andor_redfoot_1_a: !QUEST_REWARD_WAIST{ _string: "Thornbite Cinch" _icon: icon_mail_belt_3 _strength: 1 _constitution: 1 _type: armor_plate }
+	item .andor_redfoot_1_b: !QUEST_REWARD_HANDS{ _string: "Apprentice’s Spellgrips" _icon: icon_wizard_hat_5 _wisdom: 1 _spirit: 1 _constitution: 1 _type: armor_cloth }
+}
+
 quest .andor_redfoot_1:
 {
 	string: "Gorilla Sanctuary"
@@ -142,5 +148,6 @@ quest .andor_redfoot_1:
 	objectives: [ .andor_redfoot_1 ]
 	level: 20	
 	quest_items: [ .andor_redfoot_1_quest_item .andor_redfoot_1_quest_item_2 ]
+	reward_one_item: [ .andor_redfoot_1_a .andor_redfoot_1_b ]
 }
 
