@@ -131,7 +131,7 @@ map_entity_spawn thalvaron_jungle_ghost:
 	}
 
 	entity thalvaron_jungle_spider: !NPC { _string: "Xandralis Tarantula" _sprite: spider_2 _sprite_dead: spider_2_dead }
-	entity thalvaron_jungle_spider_boss: !NPC { _string: "Larger Than Average Spider" _sprite: spider_1 _sprite_dead: spider_1_dead }
+	entity thalvaron_jungle_spider_boss: !NPC { _string: "Larger Than Average Spider" _sprite: spider_1 _sprite_dead: spider_1_dead _resource_health: 2 }
 }
 
 # Plant monsters
