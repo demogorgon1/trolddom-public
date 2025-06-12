@@ -501,8 +501,8 @@ map_entity_spawn thalvaron_skaldrun_kobold:
 		_immune_to_immobilize: true
 		_immune_to_slow: true
 		_zone: thalvaron_lurker
-		_resource_health: 3
-		_weapon_damage: 1.3	
+		_resource_health: 2.3
+		_weapon_damage: 1.2	
 		_can_move_on_all_non_view_blocking_tiles: true
 		_evade_despawn: true
 	}
@@ -519,7 +519,7 @@ map_entity_spawn thalvaron_skaldrun_kobold:
 		_creature_type: humanoid
 		_default_behavior_state: .wandering_short
 		_loot_table: default_humanoid
-		_weapon_damage: 0.9
+		_weapon_damage: 0.8
 		_resource_health: 0.8
 	}
 
@@ -536,8 +536,8 @@ map_entity_spawn thalvaron_skaldrun_kobold:
 		_creature_type: humanoid
 		_default_behavior_state: .wandering_short
 		_loot_table: default_humanoid
-		_weapon_damage: 0.9
-		_resource_health: 0.8
+		_weapon_damage: 0.7
+		_resource_health: 0.7
 		_resource_mana: 1
 		_abilities: 
 		[ 
@@ -577,6 +577,8 @@ map_entity_spawn thalvaron_skaldrun_satyr:
 		_creature_type: demon
 		_default_behavior_state: .wandering_short				
 		_loot_table: default_demon
+		_weapon_damage: 0.8
+		_resource_health: 0.8
 	}
 
 	entity thalvaron_skaldrun_satyr_a: !NPC { _string: "Satyr Rogue" _sprite: demon_7 _sprite_dead: demon_7_dead _abilities: [ { id: npc_rend target: random_player }{ id: npc_attack } ] }
@@ -592,6 +594,8 @@ map_entity_spawn thalvaron_skaldrun_satyr:
 		_creature_type: demon
 		_default_behavior_state: .passive				
 		_loot_table: default_demon
+		_weapon_damage: 0.8
+		_resource_health: 0.9		
 	}
 
 	entity thalvaron_skaldrun_satyr_melee: !NPC { _string: "Satyr Rogue" _sprite: demon_7 _sprite_dead: demon_7_dead _abilities: [ { id: npc_rend target: random_player }{ id: npc_attack } ] }
@@ -658,6 +662,7 @@ map_entity_spawn thalvaron_skaldrun_satyr:
 		_creature_type: demon
 		_default_behavior_state: .wandering_short				
 		_loot_table: .seren_virelith_2_quest_item			
+		_resource_health: 0.75
 	}
 
 	entity thalvaron_skaldrun_demon_spawn: !NPC { _string: "Demonic Spawn" _sprite: demon_2 _sprite_dead: demon_2_dead _abilities: [ { id: npc_attack } ] }

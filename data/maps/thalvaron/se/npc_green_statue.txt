@@ -1,0 +1,67 @@
+dialogue_screen .green_statue:
+{
+	text: 
+	[	
+		"This statue of a featureless, winged, humanoid creature is made from some kind of green marble."
+	]		
+	
+	options:
+	[
+		{ quest<offer_only>: .green_statue_1 }
+	]
+}
+
+entity thalvaron_green_statue: 
+{
+	string: "Statue"
+	components:
+	{
+		position: { }		
+		combat_public: 
+		{  
+			modifier not_pushable: {}
+			modifier hide_level: {}
+			modifier not_targetable: {}
+			dialogue_root: $dialogue_root
+			{
+				verb: inspect
+				.green_statue: {}
+			}			
+		}			
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ states: [ default ] frames: [ green_statue ] z_offset: -3 }			
+			]		
+		}				
+	}
+}
+
+############################################################
+# Quest 1
+
+quest .green_statue_1:
+{
+	string: "Marble Statue"
+
+	text:
+	[
+		"Look for someone who might know more about the statue."
+	]
+	
+	description: 
+	[
+		"The eerie, green marble statue seems quite out of place. Maybe you can find someone around here, who can tell you more about it?"
+	]
+	
+	completion:
+	[
+		"You shouldn't be here."
+	]
+
+	level: 20
+	reward_xp_multiplier: 0.75
+	reward_cash_multiplier: 0
+}
+

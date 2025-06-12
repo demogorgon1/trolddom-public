@@ -44,7 +44,7 @@ objective .karl_1:
 {
 	${ _level: 20 }
 	item .karl_1_a: !QUEST_REWARD_FINGER{ _string: "Fisherman's Ring" _icon: icon_ring_9 _strength: 3 _constitution: 2 _dexterity: 1 }
-	item .karl_1_b: !QUEST_REWARD_FINGER{ _string: "Signet of the Deep" _icon: icon_ring_10 _wisdom: 4 _constitution: 1 _type: armor_cloth }
+	item .karl_1_b: !QUEST_REWARD_FINGER{ _string: "Signet of the Deep" _icon: icon_ring_10 _wisdom: 4 _constitution: 1 }
 }
 
 quest .karl_1:

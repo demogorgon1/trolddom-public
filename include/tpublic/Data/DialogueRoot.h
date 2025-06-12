@@ -21,7 +21,8 @@ namespace tpublic
 				{
 					TYPE_TALK,
 					TYPE_READ,
-					TYPE_OPEN
+					TYPE_OPEN,
+					TYPE_INSPECT
 				};
 
 				void
@@ -35,6 +36,8 @@ namespace tpublic
 						m_type = TYPE_READ;
 					else if (t == "open")
 						m_type = TYPE_OPEN;
+					else if (t == "inspect")
+						m_type = TYPE_INSPECT;
 					else
 						TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid verb.", aSource->GetIdentifier());
 				}
@@ -63,6 +66,7 @@ namespace tpublic
 					case TYPE_TALK:		return "Talk";
 					case TYPE_READ:		return "Read";
 					case TYPE_OPEN:		return "Open";
+					case TYPE_INSPECT:	return "Inspect";
 					default:			break;
 					}
 					assert(false);

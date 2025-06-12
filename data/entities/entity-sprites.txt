@@ -898,7 +898,7 @@ sprites:
 	sprite orc_wolf_rider_1: { dead: orc_wolf_rider_1_dead }
 	sprite giant_demon_3: { dead: giant_demon_3_dead }
 
-	cursor: { position: [ 0 92 ] }
+	cursor: { position: [ 0 96 ] }
 
 	sprite giant_demon_2_dead: { }	
 	sprite orc_wolf_rider_1_dead: { }	
@@ -1048,6 +1048,8 @@ sprites:
 	sprite orange_gateway_closed_1: { }
 	sprite orange_gateway_closed_2: { }
 	sprite orange_gateway_closed_3: { }
+	sprite green_statue: { }
+	sprite green_fragment: { }
 		
 }
 

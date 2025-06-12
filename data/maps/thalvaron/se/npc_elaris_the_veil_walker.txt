@@ -7,7 +7,8 @@ dialogue_screen .elaris_the_veil_walker:
 	
 	options:
 	[
-
+		{ quest<completion_only>: .green_statue_1 }
+		{ quest<offer_only>: thalvaron_elaris_the_veil_walker_1 }
 	]
 }
 
@@ -23,3 +24,33 @@ entity thalvaron_elaris_the_veil_walker: !NPC
 	_loot_table: .npc
 	_not_pushable: true	
 }
+
+############################################################
+# Quest 1
+
+quest thalvaron_elaris_the_veil_walker_1:
+{
+	string: "The Other Doomed City"
+
+	text:
+	[
+		"Look for someone who might know more about the statue."
+	]
+	
+	description: 
+	[
+		"I have nothing to tell you about Skaldrun, except that it isn't the only city that was doomed by the poor choices of its inhabitants. If you want to know more, you need to travel to the Shrouded Lands"
+		"and seek out the Wanderer. You will be able to find him in Ghorynth. Good luck."
+	]
+	
+	completion:
+	[
+		"You come all the way from Skaldrun? It's a long time since I've heard of that place..."
+	]
+
+	level: 20
+	reward_xp_multiplier: 0.75
+	reward_cash_multiplier: 0
+	prerequisites: [ .green_statue_1 ]
+}
+

@@ -366,6 +366,7 @@ map_entity_spawn thalvaron_joar: { entity thalvaron_joar: { init_state: default 
 map_entity_spawn thalvaron_orm_thogore: { entity thalvaron_orm_thogore: { init_state: default } }
 map_entity_spawn thalvaron_orm_thogore_1_quest_item: { entity thalvaron_orm_thogore_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_brill_craigsworth_3_quest_item: { entity thalvaron_brill_craigsworth_3_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_green_statue: { entity thalvaron_green_statue: { init_state: default } }
 
 map_palette .stuff:
 {
@@ -843,6 +844,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_durgan_urok_golem: [ 240 49 133 ]
 	entity_spawn thalvaron_brill_craigsworth_3_quest_item: [ 30 30 170 ]
 	entity_spawn thalvaron_thalkyr: [ 55 84 77 ]
+	entity_spawn thalvaron_green_statue: [ 155 184 177 ]
 }
 
 map_palette .levels:

@@ -31,6 +31,20 @@ map_entity_spawn .kaelion: { entity .kaelion: { weight: 1 } }
 map_entity_spawn .brail_howser: { entity .brail_howser: { weight: 1 } }
 map_entity_spawn .robert_dulish: { entity .robert_dulish: { weight: 1 } }
 map_entity_spawn .wanderer: { entity .wanderer: { weight: 1 } }
+map_entity_spawn .demon_spawn_1: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn .demon_spawn_2: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn .demon_spawn_3: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn .demon_spawn_4: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn .demon_spawn_5: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn .demon_spawn_6: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn .demon_spawn_7: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn .demon_spawn_8: { spawn_timer: { only_when_triggered: true } }
+
+map_entity_spawn .wanderer_1_quest_item:
+{
+	spawn_timer: { despawn_required: true }		
+	entity .wanderer_1_quest_item: { weight: 1 init_state: default }
+}
 
 map_entity_spawn .shroud_crystal:
 {
@@ -54,6 +68,8 @@ zone .drowned_temple: { string: "Drowned Temple" }
 zone .the_black_watch: { string: "The Black Watch" }
 zone .dawnbringer_keep: { string: "Dawnbringer Keep" }
 zone .the_foul_breach: { string: "The Foul Breach" }
+
+zone .demon_spawn: { }
 
 map_cliff .dummy_cliff_0: { cliff_style: dummy elevation: 0 }
 map_cliff .dummy_cliff_0_ramp: { cliff_style: dummy elevation: 0 ramp: true }
@@ -131,6 +147,15 @@ map_palette .stuff:
 	entity_spawn .brail_howser: [ 124 66 139 ]
 	entity_spawn .robert_dulish: [ 124 166 139 ]
 	entity_spawn .wanderer: [ 39 88 164 ]
+	entity_spawn .wanderer_1_quest_item: [ 139 188 219 ]
+	entity_spawn .demon_spawn_1: [ 100 200 23 ]
+	entity_spawn .demon_spawn_2: [ 130 200 23 ]
+	entity_spawn .demon_spawn_3: [ 160 200 23 ]
+	entity_spawn .demon_spawn_4: [ 190 200 23 ]
+	entity_spawn .demon_spawn_5: [ 210 200 23 ]
+	entity_spawn .demon_spawn_6: [ 240 200 23 ]
+	entity_spawn .demon_spawn_7: [ 100 230 23 ]
+	entity_spawn .demon_spawn_8: [ 100 200 103 ]
 
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn the_shrouded_lands_underworld: [ 255 0 0 ]
@@ -162,6 +187,8 @@ map_palette .sub_zones:
 	
 	sub_zone .the_light_irza: [ 64 44 113 ]
 	sub_zone .the_underworld_draethor: [ 164 44 113 ]
+	
+	sub_zone .demon_spawn: [ 39 43 111 ]
 }
 
 map_palette .routes:
