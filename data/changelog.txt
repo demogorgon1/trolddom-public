@@ -2,10 +2,38 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.3.0"
+
+	text: "New content:"
+
+	list:
+	[
+		{ text: "Level cap raised to 22." }		
+		{ text: "Zones: Skaldrun and Xandralis." }
+		{ text: "Dungeon: Durgan Urok." }
+		{ text: "Profession recipes, world drops, quests, and more." }
+	]	
+	
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Blocking now has a base damage reduction of 30%, increased by block value." }
+		{ text: "Item budget cost of block chance reduced." }
+	]
+	
+	#######################################################################################
 	heading: "v0.2.10"
 	
-	text: "Issues fixed:"
+	text: "Changes:"
 	
+	list:
+	[
+		{ text: "Irza and Draethor the Beholder got new abilities." }
+	]
+	
+	text: "Issues fixed:"
+
 	list:
 	[
 		{ text: "Fixed client crash caused by talents UI." }	
