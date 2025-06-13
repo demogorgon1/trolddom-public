@@ -413,7 +413,7 @@ map_entity_spawn thalvaron_durgan_urok_orc:
 	entity thalvaron_durgan_urok_orc_a: !NPC { _string: "Skullforge Guard" _sprite: orc_1 _sprite_dead: orc_1_dead }
 	entity thalvaron_durgan_urok_orc_b: !NPC { _string: "Skullforge Guard" _sprite: orc_2 _sprite_dead: orc_2_dead }
 	entity thalvaron_durgan_urok_orc_c: !NPC { _string: "Skullforge Ranger" _sprite: orc_5 _sprite_dead: orc_5_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] }
-	entity thalvaron_durgan_urok_orc_boss: !NPC { _string: "Commander Mogdug" _sprite: goblin_boss _sprite_dead: goblin_boss_dead }
+	entity thalvaron_durgan_urok_orc_boss: !NPC { _string: "Commander Mogdug" _sprite: goblin_boss _sprite_dead: goblin_boss_dead _resource_health: 1.2 }
 }
 
 # Golems
