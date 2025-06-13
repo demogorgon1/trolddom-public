@@ -812,6 +812,11 @@ sprites:
 	sprite icon_shield_9: { tags: [ icon shield ] icon_meta_data: !ICON_UNCOMMON_11{} }
 	sprite icon_shield_10: { tags: [ icon shield ] icon_meta_data: !ICON_UNCOMMON_11{} }
 	sprite icon_tablet_2: { tags: [ icon ] }
+	sprite icon_magic_crystal_4 : { tags: [ icon ] }
+	sprite icon_magic_dust_4 : { tags: [ icon ] }
+	sprite icon_blue_fire : { tags: [ icon ] }
+	sprite icon_dancing_weapon : { tags: [ icon ] }
+	
 }
 
 

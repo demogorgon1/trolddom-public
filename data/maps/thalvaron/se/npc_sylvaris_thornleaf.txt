@@ -255,7 +255,7 @@ entity thalvaron_sylvaris_thornleaf_3_quest_item:
 
 {
 	${ _level: 21 }
-	item .sylvaris_thornleaf_3_a: !QUEST_REWARD_2H_SWORD{ _string: "Elvish Longblade" _icon: icon_sword_3 _strength: 5 _constitution: 1 _dexterity: 2 }
+	item .sylvaris_thornleaf_3_a: !QUEST_REWARD_2H_SWORD{ _string: "Elvish Longblade" _icon: icon_sword_3 _strength: 5 _constitution: 1 _dexterity: 2 _weapon_cooldown: 32 }
 	item .sylvaris_thornleaf_3_b: !QUEST_REWARD_2H_STAFF{ _string: "Jungle Guardian Staff" _icon: icon_staff_11 _wisdom: 1 }
 }
 

@@ -108,6 +108,9 @@ item reagent_arcane_crystal: !ENCHANTING_REAGENT_ITEM{ _rarity: uncommon _string
 item reagent_dream_essence: !ENCHANTING_REAGENT_ITEM{ _rarity: common _string: "Dream Essence" _level: 15 _level_range: [ 15 21 ] _icon: icon_magic_dust_3 _loot_group: .reagent_essence }
 item reagent_dream_crystal: !ENCHANTING_REAGENT_ITEM{ _rarity: uncommon _string: "Dream Crystal" _level: 15 _level_range: [ 15 21 ] _icon: icon_magic_crystal_3 _loot_group: .reagent_crystal }
 
+item reagent_void_essence: !ENCHANTING_REAGENT_ITEM{ _rarity: common _string: "Void Essence" _level: 22 _level_range: [ 22 28 ] _icon: icon_magic_dust_4 _loot_group: .reagent_essence }
+item reagent_void_crystal: !ENCHANTING_REAGENT_ITEM{ _rarity: uncommon _string: "Void Crystal" _level: 22 _level_range: [ 22 28 ] _icon: icon_magic_crystal_4 _loot_group: .reagent_crystal }
+
 #####################################################
 # Disenchant
 
@@ -914,19 +917,12 @@ ability disenchant:
 		
 		aura_effect combat_event_trigger: 
 		{ 
-			combat_event<source>: hit
+			combat_event<source>: [ hit critical ]
 			combat_event_ability_mask: [ offensive melee ]
+			combat_event_ability_reject_mask: [ always_in_range always_in_line_of_sight ]
 			ability<target>: enchant_weapon_fire_trigger
 			probability: 10
 		}	
-		
-		aura_effect combat_event_trigger: 
-		{ 
-			combat_event<source>: critical
-			combat_event_ability_mask: [ offensive melee ]
-			ability<target>: enchant_weapon_fire_trigger
-			probability: 10
-		}		
 	}
 
 	ability enchant_weapon_fire: !ENCHANTING_APPLY{}
@@ -946,4 +942,256 @@ ability disenchant:
 
 	item formula_enchant_weapon_fire: !ENCHANTING_FORMULA_ITEM{}
 	ability learn_enchant_weapon_fire: !ENCHANTING_FORMULA_ABILITY{}
+}
+
+#####################################################
+# Enchant Weapon - Frostfire
+
+{
+	${
+		_string: "Enchant Weapon - Frostfire"
+		_string_item: "Enchant Weapon: Frostfire"
+		_description: "Enchants item to make your spells sometimes deal additional damage."
+		_item: enchant_weapon_frostfire
+		_produce: { enchant_weapon_frostfire: 1 } 
+		_materials: { reagent_void_crystal: 6 reagent_paper: 1 }
+		_skill: 95
+		_target_item_requirements: { equipment_slots: [ main_hand off_hand ] }
+		_id: enchant_weapon_frostfire
+		_consume_items: { enchant_weapon_frostfire: 1 }	
+	}
+
+	ability enchant_weapon_frostfire_trigger:
+	{
+		string: "Frostfire"
+		direct_effect apply_aura:
+		{
+			aura: $aura
+			{
+				string: "Frostfire"
+				icon: icon_blue_fire
+				type: debuff
+				duration: based_on_effects
+				flags: [ unique_per_source magic ]
+				aura_effect repeat: 
+				{ 
+					update_interval: 12
+					update_count: 4
+					ability: $ability [ string icon ]
+					{
+						states: [ default in_combat ]
+						flags: [ always_in_range always_in_line_of_sight ]
+						
+						direct_effect damage:
+						{	
+							damage_type: fire		
+							function: 12
+							flags: [ is_magical ]
+						}							
+					}
+				}
+			}
+		}	
+	}
+
+	aura enchant_weapon_frostfire:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper	
+
+		string: "Frostfire"
+		color_weapon_glow: [ 200 0 200 255 ]
+		
+		aura_effect combat_event_trigger: 
+		{ 
+			combat_event<source>: [ hit critical ]
+			combat_event_ability_mask: [ offensive spell ]
+			combat_event_ability_reject_mask: [ always_in_range always_in_line_of_sight ]
+			ability<target>: enchant_weapon_frostfire_trigger
+			probability: 25
+		}		
+	}
+
+	ability enchant_weapon_frostfire: !ENCHANTING_APPLY{}
+	item enchant_weapon_frostfire: !ENCHANTING_ITEM{}
+	ability craft_enchant_weapon_frostfire: !ENCHANTING_CRAFT{}
+
+	${
+		_formula_item_level: 22
+		_formula_string: "Formula: Enchant Weapon - Frostfire"
+		_formula_description: "Teaches you how to enchant a weapon to make your spells sometimes deal additional damage."
+		_formula_consume_items: { formula_enchant_weapon_frostfire: 1 }
+		_learn_ability: learn_enchant_weapon_frostfire
+		_formula_required_skill: 95
+		_level_range: [ 22 28 ]
+		_ability: craft_enchant_weapon_frostfire
+	}
+
+	item formula_enchant_weapon_frostfire: !ENCHANTING_FORMULA_ITEM{}
+	ability learn_enchant_weapon_frostfire: !ENCHANTING_FORMULA_ABILITY{}
+}
+
+#####################################################
+# Enchant Cloak - Razormind
+
+{
+	${
+		_string: "Enchant Cloak - Razormind"
+		_string_item: "Enchant Cloak: Razormind"
+		_description: "Enchants item to increase your critical chance with spells by 1%."
+		_item: enchant_cloak_razormind
+		_produce: { enchant_cloak_razormind: 1 } 
+		_materials: { reagent_void_essence: 5 reagent_paper: 1 }
+		_skill: 95
+		_target_item_requirements: { equipment_slots: [ back ] }
+		_id: enchant_cloak_razormind
+		_consume_items: { enchant_cloak_razormind: 1 }	
+	}
+
+	aura enchant_cloak_razormind:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper	
+
+		string: "Razormind"
+		stat_modifiers: { spell_crit_chance: { add: 1 } }
+	}
+
+	ability enchant_cloak_razormind: !ENCHANTING_APPLY{}
+	item enchant_cloak_razormind: !ENCHANTING_ITEM{}
+	ability craft_enchant_cloak_razormind: !ENCHANTING_CRAFT{}
+
+	${
+		_formula_item_level: 22
+		_formula_string: "Formula: Enchant Cloak - Razormind"
+		_formula_description: "Teaches you how to enchant a cloak to increase your critical chance with spells by 1%."
+		_formula_consume_items: { formula_enchant_cloak_razormind: 1 }
+		_learn_ability: learn_enchant_cloak_razormind
+		_formula_required_skill: 95
+		_level_range: [ 22 28 ]
+		_ability: craft_enchant_cloak_razormind
+	}
+
+	item formula_enchant_cloak_razormind: !ENCHANTING_FORMULA_ITEM{}
+	ability learn_enchant_cloak_razormind: !ENCHANTING_FORMULA_ABILITY{}
+}
+
+#####################################################
+# Enchant Cloak - Dexterity
+
+{
+	${
+		_string: "Enchant Cloak - Dexterity"
+		_string_item: "Enchant Cloak: Dexterity"
+		_description: "Enchants item to increase Dexterity by 4."
+		_item: enchant_cloak_dexterity
+		_produce: { enchant_cloak_dexterity: 1 } 
+		_materials: { reagent_void_essence: 5 reagent_paper: 1 }
+		_skill: 95
+		_target_item_requirements: { equipment_slots: [ back ] }
+		_id: enchant_cloak_dexterity
+		_consume_items: { enchant_cloak_dexterity: 1 }	
+	}
+
+	aura enchant_cloak_dexterity:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper	
+
+		string: "Dexterity +4"
+		stat_modifiers: { dexterity: { add: 4 } }
+	}
+
+	ability enchant_cloak_dexterity: !ENCHANTING_APPLY{}
+	item enchant_cloak_dexterity: !ENCHANTING_ITEM{}
+	ability craft_enchant_cloak_dexterity: !ENCHANTING_CRAFT{}
+
+	${
+		_formula_item_level: 22
+		_formula_string: "Formula: Enchant Cloak - Dexterity"
+		_formula_description: "Teaches you how to enchant a cloak to increase Dexterity by 4."
+		_formula_consume_items: { formula_enchant_cloak_dexterity: 1 }
+		_learn_ability: learn_enchant_cloak_dexterity
+		_formula_required_skill: 95
+		_level_range: [ 22 28 ]
+		_ability: craft_enchant_cloak_dexterity
+	}
+
+	item formula_enchant_cloak_dexterity: !ENCHANTING_FORMULA_ITEM{}
+	ability learn_enchant_cloak_dexterity: !ENCHANTING_FORMULA_ABILITY{}
+}
+
+#####################################################
+# Enchant Weapon - Dancing Weapon
+
+{
+	${
+		_string: "Enchant Weapon - Dancing Weapon"
+		_string_item: "Enchant Weapon: Dancing Weapon"
+		_description: "Enchants item to sometimes increase Dexterity by 50 for 15 seconds."
+		_item: enchant_weapon_dancing_weapon
+		_produce: { enchant_weapon_dancing_weapon: 1 } 
+		_materials: { reagent_void_crystal: 6 reagent_paper: 1 }
+		_skill: 95
+		_target_item_requirements: { equipment_slots: [ main_hand off_hand ] }
+		_id: enchant_weapon_dancing_weapon
+		_consume_items: { enchant_weapon_dancing_weapon: 1 }	
+	}
+
+	ability enchant_weapon_dancing_weapon_trigger:
+	{
+		string: "Dancing Weapon"
+		direct_effect apply_aura:
+		{
+			aura: $aura
+			{
+				string: "Dancing Weapon"
+				icon: icon_dancing_weapon
+				type: buff
+				duration: 150
+				flags: [ magic unique ]
+				stat_modifiers: { dexterity: { add: 50 } }
+			}
+		}	
+	}
+
+	aura enchant_weapon_dancing_weapon:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper	
+
+		string: "Dancing Weapon"
+		color_weapon_glow: [ 50 0 250 190 ]
+		
+		aura_effect combat_event_trigger: 
+		{ 
+			combat_event<source>: [ hit critical ]
+			combat_event_ability_mask: [ offensive melee ]
+			combat_event_ability_reject_mask: [ always_in_range always_in_line_of_sight ]
+			ability<self>: enchant_weapon_dancing_weapon_trigger
+			probability: 15
+		}			
+	}
+
+	ability enchant_weapon_dancing_weapon: !ENCHANTING_APPLY{}
+	item enchant_weapon_dancing_weapon: !ENCHANTING_ITEM{}
+	ability craft_enchant_weapon_dancing_weapon: !ENCHANTING_CRAFT{}
+
+	${
+		_formula_item_level: 22
+		_formula_string: "Formula: Enchant Weapon - Dancing Weapon"
+		_formula_description: "Teaches you how to enchant a weapon to sometimes increase Dexterity by 50 for 15 seconds."
+		_formula_consume_items: { formula_enchant_weapon_dancing_weapon: 1 }
+		_learn_ability: learn_enchant_weapon_dancing_weapon
+		_formula_required_skill: 95
+		_level_range: [ 22 28 ]
+		_ability: craft_enchant_weapon_dancing_weapon
+	}
+
+	item formula_enchant_weapon_dancing_weapon: !ENCHANTING_FORMULA_ITEM{}
+	ability learn_enchant_weapon_dancing_weapon: !ENCHANTING_FORMULA_ABILITY{}
 }

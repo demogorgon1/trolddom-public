@@ -11,7 +11,7 @@ changelog:
 		{ text: "Level cap raised to 22." }		
 		{ text: "Zones: Skaldrun and Xandralis." }
 		{ text: "Dungeon: Durgan Urok." }
-		{ text: "Profession recipes, world drops, quests, and more." }
+		{ text: "Crafting recipes, enchants, world drops, quests, and more." }
 	]	
 	
 	text: "Changes:"
@@ -20,6 +20,14 @@ changelog:
 	[
 		{ text: "Blocking now has a base damage reduction of 30%, increased by block value." }
 		{ text: "Item budget cost of block chance reduced." }
+	]
+
+	text: "Issues fixed:"
+
+	list:
+	[
+		{ text: "Fixed bug that could prevent quest indicators over NPCs from appearing correctly." }	
+		{ text: "Fixed bug that could break enchants when dying." }	
 	]
 	
 	#######################################################################################
