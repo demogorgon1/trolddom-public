@@ -728,3 +728,48 @@ map_entity_spawn thalvaron_skaldrun_satyr:
 	entity thalvaron_thalkyr: !NPC { }
 
 }
+
+##########################################################################################
+# Wildlife
+
+map_entity_spawn thalvaron_se_deer: 
+{ 
+	entity thalvaron_se_deer_20: {} 
+	entity thalvaron_se_deer_21: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_se_boar: 
+{ 
+	entity thalvaron_se_boar_20: {} 
+	entity thalvaron_se_boar_21: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Deer
+{
+
+	${
+		_faction: wildlife
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: default_deer
+	}
+	
+	entity thalvaron_se_deer_20: !NPC { _string: "Stag" _sprite: deer_2 _sprite_dead: deer_2_dead _level: 20 }
+	entity thalvaron_se_deer_21: !NPC { _string: "Stag" _sprite: deer_2 _sprite_dead: deer_2_dead _level: 21 }
+}
+
+# Boars
+{
+
+	${
+		_faction: wildlife
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: default_boar
+	}
+	
+	entity thalvaron_se_boar_20: !NPC { _string: "Jungle Pig" _sprite: boar _sprite_dead: boar_dead _level: 20 }
+	entity thalvaron_se_boar_21: !NPC { _string: "Jungle Pig" _sprite: boar _sprite_dead: boar_dead _level: 21 }
+}
