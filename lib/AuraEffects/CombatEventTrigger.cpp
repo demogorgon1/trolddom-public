@@ -38,11 +38,21 @@ namespace tpublic::AuraEffects
 				}
 			}
 
-			if(shouldTrigger && m_combatEventAbilityMask != 0)
+			if(shouldTrigger && (m_combatEventAbilityMask != 0 || m_combatEventAbilityRejectMask != 0))
 			{
 				const Data::Ability* ability = aManifest->GetById<Data::Ability>(aAbilityId);
-				if((ability->m_flags & m_combatEventAbilityMask) != m_combatEventAbilityMask)
-					shouldTrigger = false;
+
+				if (shouldTrigger && m_combatEventAbilityMask != 0)
+				{
+					if ((ability->m_flags & m_combatEventAbilityMask) != m_combatEventAbilityMask)
+						shouldTrigger = false;
+				}
+
+				if (shouldTrigger && m_combatEventAbilityRejectMask != 0 )
+				{
+					if (ability->m_flags & m_combatEventAbilityRejectMask)
+						shouldTrigger = false;
+				}
 			}
 
 			if(shouldTrigger && m_probability > 0 && !Helpers::RandomRoll(*aRandom, m_probability))

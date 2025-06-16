@@ -1339,3 +1339,38 @@ ability npc_thorn_spit_no_cooldown:
 	}
 }
 
+ability npc_beam_of_petrification:
+{
+	string: "Beam of Petrification"
+	range: 8
+	cast_time: 30
+	cooldowns: [ global spell_unholy_lockout ]
+	cooldown: $cooldown { duration: 180 }
+	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
+	states: [ default in_combat ]
+	icon: icon_rock_1
+	speed: 9
+	projectile: web_projectile
+	resource_cost mana: 20
+	target_particle_system: purple_spell_hit
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical is_magical ]
+		damage_type: unholy
+		function: { expression: a a: [ [ 1 15 ] [ 10 45 ] [ 20 90 ] [ 30 180 ] ] elite_multiplier: 1.7 }		
+	}		
+	
+	direct_effect apply_aura:
+	{
+		aura: $aura [ icon string ]
+		{
+			description: "Stunned."
+			type: debuff
+			flags: [ magic unique ]
+			duration: 50	
+			aura_effect stun: { }		
+			color_effect: [ 128 128 128 ]
+		}
+	}
+}

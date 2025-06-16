@@ -96,7 +96,7 @@ namespace tpublic::Systems
 				if ((aura->m_flags & Data::Aura::FLAG_CANCEL_OUTSIDE_COMBAT) != 0 && aEntityState != EntityState::ID_IN_COMBAT)
 					entry->m_cancel = true;
 
-				if((aura->m_flags & Data::Aura::FLAG_PERSIST_IN_DEATH) == 0 && aEntityState == EntityState::ID_DEAD)
+				if((aura->m_flags & Data::Aura::FLAG_PERSIST_IN_DEATH) == 0 && (aura->m_flags & Data::Aura::FLAG_ITEM) == 0 && aEntityState == EntityState::ID_DEAD)
 					entry->m_cancel = true;
 
 				if ((aura->m_flags & Data::Aura::FLAG_CANCEL_ON_DAMAGE) != 0 && combatPublic->m_damageAccum > 0)

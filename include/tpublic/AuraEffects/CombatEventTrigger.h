@@ -86,6 +86,10 @@ namespace tpublic
 						{
 							m_combatEventAbilityMask = Data::Ability::GetFlags(aChild, NULL);
 						}
+						else if (aChild->m_name == "combat_event_ability_reject_mask")
+						{
+							m_combatEventAbilityRejectMask = Data::Ability::GetFlags(aChild, NULL);
+						}
 						else if (aChild->m_name == "probability")
 						{
 							m_probability = aChild->GetUInt32();
@@ -109,6 +113,7 @@ namespace tpublic
 				m_ability.ToStream(aStream);
 				aStream->WriteUInts(m_triggerAbilityIds);
 				aStream->WriteUInt(m_combatEventAbilityMask);
+				aStream->WriteUInt(m_combatEventAbilityRejectMask);
 				aStream->WriteUInt(m_probability);
 			}
 
@@ -129,6 +134,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInt(m_combatEventAbilityMask))
 					return false;
+				if (!aStream->ReadUInt(m_combatEventAbilityRejectMask))
+					return false;
 				if (!aStream->ReadUInt(m_probability))
 					return false;
 				return true;
@@ -144,6 +151,7 @@ namespace tpublic
 				t->m_ability = m_ability;
 				t->m_triggerAbilityIds = m_triggerAbilityIds;
 				t->m_combatEventAbilityMask = m_combatEventAbilityMask;
+				t->m_combatEventAbilityRejectMask = m_combatEventAbilityRejectMask;
 				t->m_probability = m_probability;
 				return t;
 			}
@@ -163,6 +171,7 @@ namespace tpublic
 			AuraEffectBase::CombatEventType	m_combatEventType = AuraEffectBase::INVALID_COMBAT_EVENT_TYPE;
 			std::vector<CombatEvent::Id>	m_combatEventIds;
 			uint32_t						m_combatEventAbilityMask = 0;
+			uint32_t						m_combatEventAbilityRejectMask = 0;
 			SecondaryAbility				m_ability;
 			std::vector<uint32_t>			m_triggerAbilityIds;
 			uint32_t						m_probability = 0;

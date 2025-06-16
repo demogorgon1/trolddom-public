@@ -69,13 +69,21 @@ namespace tpublic::ObjectiveTypes
 		{
 			if(m_objective->m_abilityId == aAbilityId && m_count < m_objective->m_count)
 			{
-				for(uint32_t entityId : m_objective->m_entityIds)
+				if(m_objective->m_entityIds.empty())
 				{
-					if(aEntityInstance->GetEntityId() == entityId)
+					m_count++;
+					OnUpdate();
+				}
+				else
+				{
+					for(uint32_t entityId : m_objective->m_entityIds)
 					{
-						m_count++;
-						OnUpdate();
-						break;
+						if(aEntityInstance->GetEntityId() == entityId)
+						{
+							m_count++;
+							OnUpdate();
+							break;
+						}
 					}
 				}
 			}

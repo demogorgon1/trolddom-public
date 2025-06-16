@@ -285,7 +285,7 @@
 		_aura: consumable_banana
 		_item: { consumable_banana: 1 }
 		_loot_groups: [ world_drops_consumable ]
-		_level_range: [ 9 20 ]
+		_level_range: [ 9 22 ]
 	}
 
 	ability consumable_banana_tick: !ABILITY_FOOD_TICK {}

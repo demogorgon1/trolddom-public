@@ -199,7 +199,10 @@ namespace tpublic::DirectEffects
 
 		if(result == CombatEvent::ID_BLOCK && targetCombatPrivate != NULL)
 		{
-			blocked = targetCombatPrivate->m_blockValue;
+			blocked = (damage * 3) / 10; // Base block is 30%
+
+			// Add block value
+			blocked += targetCombatPrivate->m_blockValue;
 			if(blocked > damage)
 				blocked = damage;
 

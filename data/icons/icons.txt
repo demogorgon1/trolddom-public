@@ -806,6 +806,17 @@ sprites:
 	sprite icon_staff_11 : { tags: [ icon weapon_2h_staff ] icon_meta_data: !ICON_UNCOMMON_11{} }
 	sprite icon_staff_12 : { tags: [ icon weapon_2h_staff ] icon_meta_data: !ICON_UNCOMMON_11{} }
 
+	cursor: { position: [ 0 704 ] }	
+	sprite icon_shield_7: { tags: [ icon shield ] icon_meta_data: !ICON_UNCOMMON_11{} }
+	sprite icon_shield_8: { tags: [ icon shield ] icon_meta_data: !ICON_UNCOMMON_11{} }
+	sprite icon_shield_9: { tags: [ icon shield ] icon_meta_data: !ICON_UNCOMMON_11{} }
+	sprite icon_shield_10: { tags: [ icon shield ] icon_meta_data: !ICON_UNCOMMON_11{} }
+	sprite icon_tablet_2: { tags: [ icon ] }
+	sprite icon_magic_crystal_4 : { tags: [ icon ] }
+	sprite icon_magic_dust_4 : { tags: [ icon ] }
+	sprite icon_blue_fire : { tags: [ icon ] }
+	sprite icon_dancing_weapon : { tags: [ icon ] }
+	
 }
 
 

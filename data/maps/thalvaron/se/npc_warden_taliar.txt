@@ -30,7 +30,7 @@ entity thalvaron_warden_taliar: !NPC
 
 objective .warden_taliar_1:
 {
-	string: "Commander Throgar Slain"
+	string: "Commander Mogdug Slain"
 	
 	maps: [ thalvaron ]
 	
@@ -53,13 +53,13 @@ quest .warden_taliar_1:
 
 	text:
 	[
-		"Locate Commander Throgar in outer Durgan Urok and slay him."
+		"Locate Commander Mogdug in outer Durgan Urok and slay him."
 	]
 	
 	description: 
 	[
 		"The orcs have taken over the entire fortification complex of Durgan Urok. They must have recently breached out of the inner depths of the fortress. The orcs of the outer area is commanded"
-		"by Throgar, a larger than usual specimen of these vile creatures. I'm not sure where he is exactly, but he must be somewhere in the outer areas. Don't venture into the depths. Yet.\n\n"
+		"by Mogdug, a larger than usual specimen of these vile creatures. I'm not sure where he is exactly, but he must be somewhere in the outer areas. Don't venture into the depths. Yet.\n\n"
 		"You need to kill this orc to disrupt their command structure."
 	]
 

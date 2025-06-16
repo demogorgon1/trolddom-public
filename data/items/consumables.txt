@@ -415,7 +415,7 @@ item consumable_strong_healing_potion (healing_potion):
 	icon: icon_red_potion_2
 	string: "Strong Healing Potion"
 	use_ability: consumable_strong_healing_potion
-	level_range: [ 11 20 ]
+	level_range: [ 11 22 ]
 }
 
 #####################################################
@@ -436,7 +436,7 @@ item consumable_strong_mana_potion (mana_potion):
 	icon: icon_blue_potion_2
 	string: "Strong Mana Potion"
 	use_ability: consumable_strong_mana_potion
-	level_range: [ 11 20 ]
+	level_range: [ 11 22 ]
 }
 
 #####################################################
@@ -460,7 +460,7 @@ item consumable_strong_rejuvenation_potion (potion):
 	icon: icon_purple_potion_2
 	string: "Strong Rejuvenation Potion"
 	use_ability: consumable_strong_rejuvenation_potion
-	level_range: [ 13 20 ]
+	level_range: [ 13 22 ]
 }
 
 #####################################################

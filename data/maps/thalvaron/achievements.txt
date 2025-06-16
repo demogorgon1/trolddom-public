@@ -4,3 +4,4 @@ achievement kill_the_beast: { category: .thalvaron string: "Larger Than A Jaguar
 achievement kill_mongo: { category: .thalvaron string: "Mongo No More" description: "Slay Mongo." points: 10 priority: 0 kill_trigger: thalvaron_mongo icon: icon_mongo no_progress_values: true }
 achievement kill_krask: { category: .thalvaron string: "Scorpion Slayer" description: "Slay Krask." points: 10 priority: 0 kill_trigger: thalvaron_krask icon: icon_crab_claw_1 no_progress_values: true }
 achievement kill_throgar: { category: .thalvaron string: "Wolf Slayer" description: "Slay Throgar." points: 10 priority: 0 kill_trigger: thalvaron_throgar icon: icon_jaw_1 no_progress_values: true }
+achievement kill_thalkyr: { category: .thalvaron string: "Demon Hunter" description: "Slay Thal'kyr the Horned Whisperer." points: 10 priority: 0 kill_trigger: thalvaron_thalkyr icon: icon_summon_lesser_demon no_progress_values: true }

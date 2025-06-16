@@ -39,7 +39,7 @@ entity thalvaron_andor_redfoot: !NPC
 aura .andor_redfoot_1_quest_item:
 {
 	string: "Gorilla Disguise"
-	description: "Looks like a gorilla."
+	description: "Looks like a gorilla. Smells like a gorilla."
 	type: buff
 	icon: icon_gorilla
 	duration: 600

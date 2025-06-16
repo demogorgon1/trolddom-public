@@ -7,6 +7,8 @@ dialogue_screen .wanderer_dialogue:
 	
 	options:
 	[
+		{ quest<completion_only>: thalvaron_elaris_the_veil_walker_1 }
+		{ quest: .wanderer_1 }
 	]
 }
 
@@ -41,4 +43,133 @@ entity .wanderer: !NPC
 	_immune_to_immobilize: true
 	_immune_to_slow: true
 }
+
+############################################################
+# Quest 1
+
+{
+	ability .demon_spawn:
+	{
+		string: "Marble Icon Fragment"
+		description: "Place by the water."
+		states: [ default ]
+		flags: [ item quest_trigger target_self ]				
+		cast_time: 20
+		zone: .demon_spawn
+		
+		direct_effect spawn_entity: { spawn_flags: [ no_owner ] npc_target_threat: 20 entity: .demon_spawn map_entity_spawn: .demon_spawn_1 }		
+		direct_effect spawn_entity: { spawn_flags: [ no_owner ] npc_target_threat: 20 entity: .demon_spawn map_entity_spawn: .demon_spawn_2 }		
+		direct_effect spawn_entity: { spawn_flags: [ no_owner ] npc_target_threat: 20 entity: .demon_spawn map_entity_spawn: .demon_spawn_3 }		
+		direct_effect spawn_entity: { spawn_flags: [ no_owner ] npc_target_threat: 20 entity: .demon_spawn map_entity_spawn: .demon_spawn_4 }		
+		direct_effect spawn_entity: { spawn_flags: [ no_owner ] npc_target_threat: 20 entity: .demon_spawn map_entity_spawn: .demon_spawn_5 }		
+		direct_effect spawn_entity: { spawn_flags: [ no_owner ] npc_target_threat: 20 entity: .demon_spawn map_entity_spawn: .demon_spawn_6 }		
+		direct_effect spawn_entity: { spawn_flags: [ no_owner ] npc_target_threat: 20 entity: .demon_spawn map_entity_spawn: .demon_spawn_7 }		
+		direct_effect spawn_entity: { spawn_flags: [ no_owner ] npc_target_threat: 20 entity: .demon_spawn map_entity_spawn: .demon_spawn_8 }	
+
+		consume_items: { .wanderer_1_quest_item: 1 }
+	}
+
+	${
+		_level: 20
+		_faction: monsters
+		_creature_type: demon
+		_default_behavior_state: .wandering_short				
+		_loot_table: default_demon
+		_abilities: [ { id: npc_attack } ]
+		_resource_health: 0.37
+		_weapon_damage: 0.38
+		_can_move_on_all_non_view_blocking_tiles: true
+		_evade_despawn: true
+	}
+
+	entity .demon_spawn: !NPC { _string: "Dark Spawn" _sprite: tentacle_monster_2 _sprite_dead: tentacle_monster_2_dead  }
+}
+
+objective .wanderer_1:
+{
+	string: "Marble Icon Fragment Placed"
+	
+	maps: [ the_shrouded_lands ]
+	
+	use_ability:
+	{
+		ability: .demon_spawn
+		count: 1
+	}
+}
+
+item .wanderer_1_quest_item:
+{
+	string: "Marble Icon Fragment" 
+	icon: icon_tablet_2
+	loot_groups: [ .wanderer_1_quest_item ]
+	item_level: 20
+	flags: [ not_sellable unique ]
+	use_ability: .demon_spawn
+}	
+
+loot_group .wanderer_1_quest_item: {}
+
+loot_table .wanderer_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .wanderer_1_quest_item }			
+		}		
+	]
+}
+
+entity .wanderer_1_quest_item:
+{
+	string: "Marble Icon Fragment"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ green_fragment ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .wanderer_1_quest_item
+			verb: pick_up
+			range: 1 
+			despawn: true 			
+			level: 20
+			required_quest: .wanderer_1
+		}		
+	}
+}
+
+quest .wanderer_1:
+{
+	string: "The Fate of the Doomed Cities"
+
+	text:
+	[
+		"Find a damaged marble icon in Ghorynth and place it by the water to the east."
+	]
+	
+	description: 
+	[
+		"If you want to find out what happened to Skaldrun and Ghorynth, it's best that you see for yourself. Find a damaged marble icon in one of the abandoned buildings here and bring it to the dark waters to the"
+		"east of here. Place the icon by the water and you'll learn everything you need to know."
+	]
+	
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"They came from the water. You will learn more in due time."
+	]
+
+	level: 20
+	prerequisites: [ thalvaron_elaris_the_veil_walker_1 ]
+	reward_xp_multiplier: 1.6
+	objectives: [ .wanderer_1 ]
+}
+
 	

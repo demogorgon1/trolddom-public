@@ -246,6 +246,12 @@ entity .the_light_irza: !NPC
 			id: .the_light_irza_shield
 			requirement self<must_not_have_aura>: .the_light_irza_shield
 		}
+
+		{
+			requirement self<must_have_less_health_than>: 95					
+			id: npc_chain_lightning
+			target: random_player
+		}
 	
 		{
 			id: npc_attack
@@ -442,7 +448,13 @@ entity .the_underworld_draethor: !NPC
 			id: .the_underworld_draethor_shield
 			requirement self<must_not_have_aura>: .the_underworld_draethor_shield
 		}
-	
+
+		{
+			requirement self<must_have_less_health_than>: 95					
+			id: npc_beam_of_petrification
+			target: random_player
+		}
+
 		{
 			id: npc_attack
 		}
