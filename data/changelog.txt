@@ -2,6 +2,16 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.3.1"
+	
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Northern gates of Durgan Urok are now open like intended." }
+	]
+
+	#######################################################################################
 	heading: "v0.3.0"
 
 	text: "New content:"
