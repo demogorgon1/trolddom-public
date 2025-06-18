@@ -3,12 +3,20 @@ changelog:
 
 	#######################################################################################
 	heading: "v0.3.1"
+
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Enemies spawning during Bone Tyrant and Malrik the Undying fights are no longer elite." }
+	]
 	
 	text: "Issues fixed:"
 	
 	list:
 	[
 		{ text: "Northern gates of Durgan Urok are now open like intended." }
+		{ text: "Item tool tip background slightly darker to make it easier to read." }
 	]
 
 	#######################################################################################
