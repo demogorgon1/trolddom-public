@@ -1,0 +1,198 @@
+map_player_spawn .player_spawn: { }
+
+zone .realm_of_voraghul: { string: "Realm of Voraghul" }
+	
+route realm_of_fire_default_patrol: { }
+
+npc_behavior_state realm_of_fire_default_patrol_friendly:
+{
+	behavior: patrolling
+	pause_when_targeted_by_nearby_player: true
+}
+
+npc_behavior_state realm_of_fire_default_patrol:
+{
+	behavior: patrolling
+}
+
+map_cliff .rocky_cliff: { cliff_style: rocks elevation: 1 }
+map_cliff .rocky_cliff_ramp: { cliff_style: rocks elevation: 1 ramp: true }
+map_cliff .badlands_cliff: { cliff_style: badlands elevation: 1 }
+map_cliff .badlands_cliff_ramp: { cliff_style: badlands elevation: 1 ramp: true }
+map_cliff .wall_cliff: { cliff_style: wall elevation: 1 }
+map_cliff .wall_cliff_ramp: { cliff_style: wall elevation: 1 ramp: true }
+map_cliff .dummy_cliff_0: { cliff_style: dummy elevation: 0 }
+map_cliff .dummy_cliff_0_ramp: { cliff_style: dummy elevation: 0 ramp: true }
+map_cliff .dummy_cliff_1: { cliff_style: dummy elevation: 1 } 
+map_cliff .dummy_cliff_1_ramp: { cliff_style: dummy elevation: 1 ramp: true }
+map_cliff .dummy_cliff_2: { cliff_style: dummy elevation: 2 }
+map_cliff .dummy_cliff_2_ramp: { cliff_style: dummy elevation: 2 ramp: true }
+
+map_palette .tiles: !DEFAULT_TILE_PALETTE{}
+
+map_palette .stuff:
+{
+	entity_spawn mining: [ 200 200 200 ]
+	entity_spawn herbalism: [ 0 255 0 ]
+	entity_spawn spirit_stone: [ 0 0 0 ]	
+		
+	player_spawn .player_spawn: [ 0 0 255 ]
+}
+
+map_palette .levels:
+{
+	level<22>: [ 0 107 255 ]
+	level<23>: [ 130 107 255 ]
+}
+
+map_palette .zones:
+{
+	zone .realm_of_voraghul: [ 0 255 255 ]
+}
+
+map_palette .sub_zones:
+{
+}
+
+map_palette .routes:
+{
+	route realm_of_fire_default_patrol: [ 192 16 186 ]	
+}
+
+map_palette .doodads:
+{
+	doodad crates: [ 45 39 100 ]
+	doodad sack: [ 35 100 200 ]
+	doodad table: [ 35 130 200 ]
+	doodad chair_left: [ 45 100 200 ]
+	doodad bed: [ 35 130 240 ]
+	doodad bookshelf: [ 35 140 100 ]
+	doodad alchemy_bookshelf: [ 135 100 200 ]
+	doodad empty_bookshelf: [ 135 200 200 ]
+	doodad chair_right: [ 45 200 100 ]	
+	doodad chair_bottom: [ 56 201 195 ]
+	doodad bench: [ 58 221 113 ]
+	doodad altar: [ 54 29 64 ]
+	doodad wall_banner_red: [ 243 29 53 ]
+	doodad broken_pillar: [ 136 130 200 ]
+	doodad wall_banner_mining: [ 243 19 53 ]
+	doodad wall_banner_blacksmithing: [ 243 59 53 ]
+	doodad tent: [ 249 51 53 ]	
+	doodad wall_banner_dark_green: [ 143 59 13 ]
+	doodad dungeon_open_door: [ 193 13 59 ]	
+	doodad statue_face_left: [ 193 63 59 ]	
+	doodad statue_face_right: [ 193 73 19 ]	
+	doodad ship: [ 193 173 119 ]	
+	doodad stone_stairs: [ 192 173 19 ]	
+	doodad wood_stairs: [ 192 19 173 ]	
+	doodad large_statue: [ 193 73 20 ]	
+	doodad counter: [ 197 73 20 ]	
+	doodad stone_stairs_reversed: [ 19 173 192 ]	
+	doodad wood_stairs_reversed: [ 173 19 192 ]	
+	doodad animal_skull: [ 197 173 210 ]	
+	doodad barrel: [ 111 38 84 ]
+	doodad cage: [ 45 41 145 ]
+	doodad rowboat: [ 145 46 145 ]
+	doodad cobweb: [ 84 111 83 ]
+	doodad dead_tree: [ 33 123 81 ]
+	doodad tombstone: [ 99 99 119 ]
+	doodad statue_angel: [ 199 199 119 ]
+	doodad skull_stick: [ 39 81 167 ]
+	doodad hole: [ 104 49 146 ]
+	doodad weapon_rack: [ 31 49 49 ]
+	doodad white_throne: [ 13 30 100 ]
+	doodad hard_slope_w: [ 40 103 18 ]
+	doodad hard_slope_n: [ 140 103 18 ]
+	doodad hard_slope_s: [ 40 203 18 ]
+	doodad hard_slope_e: [ 40 103 118 ]
+	doodad jungle_plant_purple: [ 147 66 77 ]
+	doodad closed_gate: [ 31 1 138 ]
+	doodad fs_ground_mark: [ 30 105 39 ]	
+}
+
+map_palette .cliffs:
+{
+	cliff .rocky_cliff: [ 197 169 34 ]
+	cliff .rocky_cliff_ramp: [ 36 152 174 ]
+
+	cliff .badlands_cliff: [ 97 169 34 ]
+	cliff .badlands_cliff_ramp: [ 136 152 74 ]
+
+	cliff .wall_cliff: [ 197 169 134 ]
+	cliff .wall_cliff_ramp: [ 136 152 174 ]
+
+	cliff .dummy_cliff_0: [ 137 18 124 ]
+	cliff .dummy_cliff_0_ramp: [ 116 56 134 ]	
+
+	cliff .dummy_cliff_1: [ 197 16 134 ]
+	cliff .dummy_cliff_1_ramp: [ 136 52 174 ]	
+
+	cliff .dummy_cliff_2: [ 197 169 234 ]
+	cliff .dummy_cliff_2_ramp: [ 136 252 174 ]	
+}
+
+map realm_of_fire:
+{
+	string: "Realm of Fire"
+	type: open_world
+	default_tile: lava
+	default_player_spawn: .player_spawn
+	default_fishing_loot_table: fish
+	view_attenuation: 0
+	view_attenuation_bias: 0
+	view_hidden_visibility: 35	
+	has_overview_map: true
+	auto_doodads: true
+	max_players: 80
+	
+	layers:
+	[
+		{
+			palettes:	[ .tiles ]
+			source:		"realm-of-fire-tiles.png"
+		}
+
+		{
+			palettes:	[ .stuff ]
+			source:		"realm-of-fire-stuff.png"
+		}
+		
+		{
+			palettes:	[ .levels ]
+			source:		"realm-of-fire-levels.png"
+		}		
+		
+		{
+			palettes:	[ .zones ]
+			source:		"realm-of-fire-zones.png"
+		}				
+		
+		{ 
+			palettes: 	[ .tiles ]
+			source:		"realm-of-fire-cover.png"
+			cover: 		true
+		}
+		
+		{
+			palettes:	[ .sub_zones ]
+			source:		"realm-of-fire-subzones.png"
+		}						
+		
+		{
+			palettes:	[ .routes ]
+			source:		"realm-of-fire-routes.png"
+		}								
+		
+		{
+			palettes:	[ .doodads ]
+			source:		"realm-of-fire-doodads.png"
+		}								
+
+		{
+			palettes:	[ .cliffs ]
+			source:		"realm-of-fire-cliffs.png"
+		}									
+	]
+}
+ 
+

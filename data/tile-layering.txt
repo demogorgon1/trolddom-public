@@ -5,6 +5,7 @@ tile_layering:
 	fs_shallow_water
 	
 	# Natural walkables
+	molten_rock
 	ice
 	fs_ground_2
 	mud
@@ -28,6 +29,7 @@ tile_layering:
 	# Special surfaces
 	red_carpet
 	pavement_1
+	pavement_2
 	
 	# Forest
 	forest
@@ -45,6 +47,7 @@ tile_layering:
 	fs_rocks_2
 	badlands_rocks
 	crystals_1
+	black_rocks
 ]
 
 base_tile_border_pattern_sprite: grass

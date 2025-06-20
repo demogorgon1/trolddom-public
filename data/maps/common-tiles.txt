@@ -1170,4 +1170,91 @@ sprites:
 	sprite crystals_1_border_17: { }
 	sprite crystals_1_alt_1: { flags: [ tile_block_line_of_sight ] }
 	sprite crystals_1_alt_2: { flags: [ tile_block_line_of_sight ] }	
+
+	cursor: { position: [ 0 608 ] }
+	
+	sprite lava_1: { flags: [ tile_fishable tile_water standalone ] water_floor: sand }
+	sprite lava_2: { flags: [ tile_fishable tile_water standalone ] water_floor: sand }
+	sprite lava_3: { flags: [ tile_fishable tile_water standalone ] water_floor: sand }
+	sprite lava: { flags: [ tile_fishable tile_water ] water_floor: sand water_animation: [ lava_1 lava_2 lava_3 ] }
+
+	cursor: { position: [ 0 624 ] }
+	
+	sprite molten_rock: 
+	{ 
+		flags: [ tile_walkable ] 
+		borders: [ molten_rock_border_1 molten_rock_border_2 molten_rock_border_3 molten_rock_border_4 molten_rock_border_5 molten_rock_border_6 molten_rock_border_7
+		           molten_rock_border_8 molten_rock_border_9 molten_rock_border_10 molten_rock_border_11 molten_rock_border_12 molten_rock_border_13 molten_rock_border_14
+		           molten_rock_border_15 molten_rock_border_16 molten_rock_border_17 ] 				  						   
+		alt_tiles: [ molten_rock_alt_1 molten_rock_alt_2 ]
+	}	
+	sprite molten_rock_border_1: { }
+	sprite molten_rock_border_2: { }
+	sprite molten_rock_border_3: { }
+	sprite molten_rock_border_4: { }
+	sprite molten_rock_border_5: { }
+	sprite molten_rock_border_6: { }
+	sprite molten_rock_border_7: { }
+	sprite molten_rock_border_8: { }
+	sprite molten_rock_border_9: { }
+	sprite molten_rock_border_10: { }
+	sprite molten_rock_border_11: { }
+	sprite molten_rock_border_12: { }
+	sprite molten_rock_border_13: { }
+	sprite molten_rock_border_14: { }
+	sprite molten_rock_border_15: { }
+	sprite molten_rock_border_16: { }
+	sprite molten_rock_border_17: { }
+	sprite molten_rock_alt_1: { flags: [ tile_walkable ] }
+	sprite molten_rock_alt_2: { flags: [ tile_walkable ] }		
+
+	cursor: { position: [ 0 640 ] }
+
+	sprite black_rocks: { flags: [ tile_block_line_of_sight ] borders:
+		[ black_rocks_border_1 black_rocks_border_2 black_rocks_border_3 black_rocks_border_4 black_rocks_border_5 black_rocks_border_6 black_rocks_border_7
+		  black_rocks_border_8 black_rocks_border_9 black_rocks_border_10 black_rocks_border_11 black_rocks_border_12 black_rocks_border_13 black_rocks_border_14
+		  black_rocks_border_15 black_rocks_border_16 black_rocks_border_17 ] alt_tiles: [ black_rocks_alt_1 black_rocks_alt_2 ] }		
+	sprite black_rocks_border_1: { }
+	sprite black_rocks_border_2: { }
+	sprite black_rocks_border_3: { }
+	sprite black_rocks_border_4: { }
+	sprite black_rocks_border_5: { }
+	sprite black_rocks_border_6: { }
+	sprite black_rocks_border_7: { }
+	sprite black_rocks_border_8: { }
+	sprite black_rocks_border_9: { }
+	sprite black_rocks_border_10: { }
+	sprite black_rocks_border_11: { }
+	sprite black_rocks_border_12: { }
+	sprite black_rocks_border_13: { }
+	sprite black_rocks_border_14: { }
+	sprite black_rocks_border_15: { }
+	sprite black_rocks_border_16: { }
+	sprite black_rocks_border_17: { }
+	sprite black_rocks_alt_1: { flags: [ tile_block_line_of_sight ] }
+	sprite black_rocks_alt_2: { flags: [ tile_block_line_of_sight ] }	
+	
+	cursor: { position: [ 0 656 ] }
+	
+	sprite pavement_2: { flags: [ tile_walkable ] borders:
+		[ pavement_2_border_1 pavement_2_border_2 pavement_2_border_3 pavement_2_border_4 pavement_2_border_5 pavement_2_border_6 pavement_2_border_7
+		  pavement_2_border_8 pavement_2_border_9 pavement_2_border_10 pavement_2_border_11 pavement_2_border_12 pavement_2_border_13 pavement_2_border_14
+		  pavement_2_border_15 pavement_2_border_16 pavement_2_border_17 ] alt_tiles: [ ] }		
+	sprite pavement_2_border_1: { }
+	sprite pavement_2_border_2: { }
+	sprite pavement_2_border_3: { }
+	sprite pavement_2_border_4: { }
+	sprite pavement_2_border_5: { }
+	sprite pavement_2_border_6: { }
+	sprite pavement_2_border_7: { }
+	sprite pavement_2_border_8: { }
+	sprite pavement_2_border_9: { }
+	sprite pavement_2_border_10: { }
+	sprite pavement_2_border_11: { }
+	sprite pavement_2_border_12: { }
+	sprite pavement_2_border_13: { }
+	sprite pavement_2_border_14: { }
+	sprite pavement_2_border_15: { }
+	sprite pavement_2_border_16: { }
+	sprite pavement_2_border_17: { }	
 }

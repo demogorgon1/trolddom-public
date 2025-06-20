@@ -107,5 +107,9 @@
 	tile rocky_dirt: [ 29 100 200 ]
 	tile rocky_dirt_blur: [ 29 100 120 ]
 	tile crystals_1: [ 129 150 200 ]
+	tile molten_rock: [ 16 16 16 ]
+	tile black_rocks: [ 67 64 51 ]
+	tile pavement_2: [ 59 88 128 ]	
+	tile lava: [ 240 180 32 ]	
 	
 }
