@@ -270,7 +270,7 @@ entity gateway_2:
 
 entity voraghul_portal_closed:
 {
-	string: "Realm of Voraghul"
+	string: "Realm of Voraghul" 
 	
 	components:
 	{

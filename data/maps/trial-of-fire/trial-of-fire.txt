@@ -53,7 +53,7 @@ map_entity_spawn .object:
  
 map trial_of_fire:
 {
-	string: "Realm of Fire"
+	string: "Trial of Fire"
 	type: private
 	default_player_spawn: .player_spawn
 	has_dynamic_overview_map: true
@@ -73,9 +73,36 @@ map trial_of_fire:
 	{
 		terrain_palette_entry<lava>: "."
 		terrain_palette_entry<flat_volcanic>: "X"
-		player_spawn_entity: standing_stone
 		object_map_entity_spawn: .object
-		connect_conversion_radius: [ 0 0 0 0 0 0 1 1 1 1 2 ]
+		connect_conversion_radius: [ 0 0 0 0 1 1 1 1 1 1 2 ]
+
+		player_spawn_entity: $entity
+		{
+			string: "Thalvaron"
+			
+			components:
+			{
+				position: { }		
+				gateway: 
+				{ 
+					maps: [ { map: thalvaron map_player_spawn: thalvaron_trial_of_fire_return_spawn } ]
+					schedule: none
+				}
+				sprite<static>: 
+				{ 
+					animations:
+					[
+						{ 
+							states: [ default in_combat spawning ] 
+							frames: [ orange_gateway_1 orange_gateway_2 orange_gateway_3 ] 		
+							frame_delay: 120 
+							random_start_frame: true 
+							z_offset: -3
+						}
+					]		
+				}		
+			}
+		}
 	
 		execute all:
 		{
@@ -92,7 +119,6 @@ map trial_of_fire:
 			
 			execute double: { passes: 5 }
 			execute median_filter: 1
-			#execute despeckle: {}
 			execute double: { passes: 1 no_mutations: true }
 			execute add_borders: lava
 			execute add_borders: lava

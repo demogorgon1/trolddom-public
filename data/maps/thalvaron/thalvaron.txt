@@ -4,6 +4,7 @@ map_player_spawn thalvaron_lich_tower_exit: { }
 map_player_spawn thalvaron_valoris_insurgency_exit: { }
 map_player_spawn thalvaron_tirnwood_thicket_exit: { }
 map_player_spawn thalvaron_durgan_urok_exit: { }
+map_player_spawn thalvaron_trial_of_fire_return_spawn: { }
 
 map_player_spawn thalvaron_wizard_realm_spawn: { }
 map_player_spawn thalvaron_wizard_realm_return_spawn: { }
@@ -403,6 +404,7 @@ map_palette .stuff:
 	player_spawn thalvaron_blimcraft_highborne_3_portal_spawn: [ 40 105 130 ]
 	player_spawn thalvaron_blimcraft_highborne_3_portal_return_spawn: [ 140 105 130 ]
 	player_spawn thalvaron_durgan_urok_exit: [ 114 124 144 ]
+	player_spawn thalvaron_trial_of_fire_return_spawn: [ 149 99 100 ]
 
 	portal thalvaron_lich_tower_entrance: [ 144 188 94 ]
 	portal thalvaron_valoris_insurgency_entrance: [ 144 88 92 ]

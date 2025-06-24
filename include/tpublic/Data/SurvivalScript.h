@@ -166,6 +166,8 @@ namespace tpublic
 							m_waveSpawnDistance = UIntRange(aChild);
 						else if (aChild->m_name == "wave_max_distance")
 							m_waveMaxDistance = aChild->GetUInt32();
+						else if(aChild->m_name == "reset_when_inactive")
+							m_resetWhenInactive = aChild->GetBool();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -179,6 +181,7 @@ namespace tpublic
 				aStream->WriteObjectPointers(m_threads);
 				m_waveSpawnDistance.ToStream(aStream);
 				aStream->WriteUInt(m_waveMaxDistance);
+				aStream->WriteBool(m_resetWhenInactive);
 			}
 
 			bool
@@ -191,6 +194,8 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadUInt(m_waveMaxDistance))
 					return false;
+				if(!aStream->ReadBool(m_resetWhenInactive))
+					return false;
 				return true;
 			}
 
@@ -198,6 +203,7 @@ namespace tpublic
 			std::vector<std::unique_ptr<Thread>>	m_threads;
 			UIntRange								m_waveSpawnDistance;
 			uint32_t								m_waveMaxDistance = 32;
+			bool									m_resetWhenInactive = false;
 		};
 
 	}
