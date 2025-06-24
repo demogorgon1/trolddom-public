@@ -22,6 +22,7 @@ tile_layering:
 	dark_grass
 	farmland
 	jungle_grass
+	dark_rocky_dirt
 	rocky_dirt
 	rocky_dirt_blur
 	snow

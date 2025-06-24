@@ -56,7 +56,8 @@ namespace tpublic
 		const char*							aPersistentIdTablePath,
 		const char*							aDataOutputPath,
 		const char*							aGeneratedSourceOutputPath,
-		Compression::Level					aCompressionLevel)
+		Compression::Level					aCompressionLevel,
+		const char*							aOnlyBuildMap)
 	{
 		uint32_t buildFingerprint = _GetInputFingerprint(aParseRootPaths);
 		uint32_t currentBuildFingerprint = _GetCurrentBuildFingerprint(aDataOutputPath);
@@ -142,13 +143,16 @@ namespace tpublic
 
 			m_manifest->GetContainer<tpublic::Data::Map>()->ForEach([&](
 				Data::Map* aMap)
-			{
-				printf("Building map '%s'...\n", aMap->m_name.c_str());
+			{			
+				if(aOnlyBuildMap == NULL || aOnlyBuildMap[0] == '\0' || aMap->m_name == aOnlyBuildMap)
+				{
+					printf("Building map '%s'...\n", aMap->m_name.c_str());
 
-				aMap->m_data->Build(m_manifest, &autoDoodads, &workQueue);
+					aMap->m_data->Build(m_manifest, &autoDoodads, &workQueue);
 
-				aMap->m_data->ConstructMapPathData(m_manifest, &workQueue);
-				aMap->m_data->ConstructMapRouteData(m_manifest, &workQueue);
+					aMap->m_data->ConstructMapPathData(m_manifest, &workQueue);
+					aMap->m_data->ConstructMapRouteData(m_manifest, &workQueue);
+				}
 				return true;
 			});			
 		}

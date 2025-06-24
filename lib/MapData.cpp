@@ -130,6 +130,7 @@ namespace tpublic
 		, m_alwaysObscuredBits(NULL)
 		, m_resetMode(MapType::RESET_MODE_MANUAL)
 		, m_type(MapType::ID_OPEN_WORLD)
+		, m_built(false)
 	{
 
 	}
@@ -147,6 +148,7 @@ namespace tpublic
 		, m_walkableBits(NULL)
 		, m_alwaysObscuredBits(NULL)
 		, m_blockLineOfSightBits(NULL)
+		, m_built(false)
 	{
 		aSource->GetObject()->ForEachChild([&](
 			const SourceNode* aNode)
@@ -203,7 +205,7 @@ namespace tpublic
 		const AutoDoodads*		aAutoDoodads,
 		nwork::Queue*			/*aWorkQueue*/)
 	{
-		std::mt19937 random;
+		std::mt19937 random;		
 
 		if(m_sourceLayers.size() > 0)
 		{
@@ -430,6 +432,8 @@ namespace tpublic
 					m_doodads[aTile.m_position] = aTile.m_spriteId;
 				});
 			}
+
+			m_built = true;
 		}
 	}
 
@@ -493,15 +497,21 @@ namespace tpublic
 		aStream->WriteInt(m_y);
 		aStream->WriteInt(m_width);
 		aStream->WriteInt(m_height);
+		aStream->WriteBool(m_built);
+		
+		if(m_built)
+		{
+			for (int32_t i = 0, count = m_width * m_height; i < count; i++)
+				aStream->WriteUInt(m_tileMap[i]);
 
-		for(int32_t i = 0, count = m_width * m_height; i < count; i++)
-			aStream->WriteUInt(m_tileMap[i]);
+			aStream->WriteObjectPointer(m_mapPathData);
+			aStream->Write(m_elevationMap, m_width * m_height);
+		}
 
 		aStream->WriteObjects(m_entitySpawns);
 		aStream->WriteObjects(m_playerSpawns);
 		aStream->WriteObjects(m_portals);
 		aStream->WriteObjectPointers(m_scripts);
-		aStream->WriteObjectPointer(m_mapPathData);
 		aStream->WriteOptionalObjectPointer(m_generator);
 		m_seed.ToStream(aStream);
 		aStream->WriteOptionalObjectPointer(m_worldInfoMap);
@@ -509,7 +519,7 @@ namespace tpublic
 		_WriteObjectTable(aStream, m_doodads);
 		_WriteObjectTable(aStream, m_walls);
 		aStream->WriteOptionalObjectPointer(m_mapRouteData);
-		aStream->Write(m_elevationMap, m_width * m_height);
+
 		_WriteStaticPositionToolTipTable(aStream, m_staticPositionToolTips);
 		aStream->WriteOptionalObjectPointer(m_pvp);
 		aStream->WriteUInts(m_realmBalanceIds);
@@ -535,17 +545,33 @@ namespace tpublic
 			return false;
 		if (!aStream->ReadInt(m_height))
 			return false;
-
-		if(m_width < 0 || m_width > 2048 || m_height < 0 || m_height > 2048)
+		if(!aStream->ReadBool(m_built))
 			return false;
 
-		if(m_width != 0 && m_height != 0)
+		if(m_built)
 		{
-			assert(m_tileMap == NULL);
-			m_tileMap = new uint32_t[m_width * m_height];
-			for (int32_t i = 0, count = m_width * m_height; i < count; i++)
+			if (m_width < 0 || m_width > 2048 || m_height < 0 || m_height > 2048)
+				return false;
+
+			if (m_width != 0 && m_height != 0)
 			{
-				if(!aStream->ReadUInt(m_tileMap[i]))
+				assert(m_tileMap == NULL);
+				m_tileMap = new uint32_t[m_width * m_height];
+				for (int32_t i = 0, count = m_width * m_height; i < count; i++)
+				{
+					if (!aStream->ReadUInt(m_tileMap[i]))
+						return false;
+				}
+			}
+
+			if (!aStream->ReadObjectPointer(m_mapPathData))
+				return false;
+
+			if (m_width != 0 && m_height != 0)
+			{
+				assert(m_elevationMap == NULL);
+				m_elevationMap = new uint8_t[m_width * m_height];
+				if (aStream->Read(m_elevationMap, (size_t)m_width * m_height) != (size_t)(m_width * m_height))
 					return false;
 			}
 		}
@@ -556,13 +582,11 @@ namespace tpublic
 			return false;
 		if (!aStream->ReadObjects(m_portals))
 			return false;
-		if(!aStream->ReadObjectPointers(m_scripts))
+		if (!aStream->ReadObjectPointers(m_scripts))
 			return false;
-		if(!aStream->ReadObjectPointer(m_mapPathData))
+		if (!aStream->ReadOptionalObjectPointer(m_generator))
 			return false;
-		if(!aStream->ReadOptionalObjectPointer(m_generator))
-			return false;
-		if(!m_seed.FromStream(aStream))
+		if (!m_seed.FromStream(aStream))
 			return false;
 		if (!aStream->ReadOptionalObjectPointer(m_worldInfoMap))
 			return false;
@@ -572,27 +596,19 @@ namespace tpublic
 			return false;
 		if (!_ReadObjectTable(aStream, m_walls))
 			return false;
-		if(!aStream->ReadOptionalObjectPointer(m_mapRouteData))
+		if (!aStream->ReadOptionalObjectPointer(m_mapRouteData))
 			return false;
-
-		if (m_width != 0 && m_height != 0)
-		{
-			assert(m_elevationMap == NULL);
-			m_elevationMap = new uint8_t[m_width * m_height];
-			if(aStream->Read(m_elevationMap, (size_t)m_width * m_height) != (size_t)(m_width * m_height))
-				return false;
-		}
 
 		if (!_ReadStaticPositionToolTipTable(aStream, m_staticPositionToolTips))
 			return false;
 
-		if(!aStream->ReadOptionalObjectPointer(m_pvp))
+		if (!aStream->ReadOptionalObjectPointer(m_pvp))
 			return false;
-		if(!aStream->ReadUInts(m_realmBalanceIds))
+		if (!aStream->ReadUInts(m_realmBalanceIds))
 			return false;
 		if (!aStream->ReadObjects(m_pointsOfInterest))
 			return false;
-		if(!aStream->ReadOptionalObject(m_worldMap))
+		if (!aStream->ReadOptionalObject(m_worldMap))
 			return false;
 
 		return true;

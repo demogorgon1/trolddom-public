@@ -902,6 +902,7 @@ namespace tpublic
 		std::vector<uint32_t>						m_realmBalanceIds;
 		std::vector<PointOfInterest>				m_pointsOfInterest;
 		std::optional<WorldMap>						m_worldMap;
+		bool										m_built;
 	
 		typedef std::unordered_map<Vec2, std::string, Vec2::Hasher> StaticPositionToolTipTable;
 		

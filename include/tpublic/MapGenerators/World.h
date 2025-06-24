@@ -35,6 +35,7 @@ namespace tpublic::MapGenerators
 			{
 				aWriter->WriteUInt(m_playerSpawnEntityId);
 				aWriter->WriteUInt(m_objectMapEntitySpawnId);
+				aWriter->WriteUInts(m_connectConversionRadius);
 			}
 
 			bool
@@ -45,12 +46,15 @@ namespace tpublic::MapGenerators
 					return false;
 				if (!aReader->ReadUInt(m_objectMapEntitySpawnId))
 					return false;
+				if (!aReader->ReadUInts(m_connectConversionRadius))
+					return false;
 				return true;
 			}
 
 			// Public data
 			uint32_t					m_playerSpawnEntityId = 0;
 			uint32_t					m_objectMapEntitySpawnId = 0;
+			std::vector<uint32_t>		m_connectConversionRadius;
 		};
 
 		struct MinorBosses

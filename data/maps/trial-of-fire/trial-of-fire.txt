@@ -1,0 +1,115 @@
+map_player_spawn .player_spawn:
+{
+}
+
+noise .rocks_overlay:
+{
+	divide<[0 255]>:
+	{
+		add:
+		{
+			divide<[0 19000]>:
+			{
+				perlin: { scale: 21000 }
+				constant: 3
+			}
+		
+			divide:
+			{
+				perlin: { scale: 18000 }
+				constant: 4
+			}
+			
+			perlin: { scale: 9000 }
+			perlin: { scale: 5700 }
+			perlin: { scale: 2400 }
+			 
+			constant: 15000			
+		}
+		
+		constant: 256
+	}
+}
+
+noise .temperature:
+{
+	divide<[0 255]>:
+	{
+		add:
+		{
+			perlin: { scale: 100 }
+			perlin: { scale: 50 }
+			
+			constant: 32000	
+		}
+		
+		constant: 256
+	}	
+}
+
+map_entity_spawn .object:
+{	
+}
+ 
+map trial_of_fire:
+{
+	string: "Realm of Fire"
+	type: private
+	default_player_spawn: .player_spawn
+	has_dynamic_overview_map: true
+	max_players: 5
+	max_minions: 1
+
+	default_tile: lava_b
+	default_fishing_loot_table: fish
+	view_attenuation: 0
+	view_attenuation_bias: 0
+	view_hidden_visibility: 35			
+	
+	survival_script: trial_of_fire
+	seed: 39447431
+
+	generator world:
+	{
+		terrain_palette_entry<lava>: "."
+		terrain_palette_entry<flat_volcanic>: "X"
+		player_spawn_entity: standing_stone
+		object_map_entity_spawn: .object
+		connect_conversion_radius: [ 0 0 0 0 0 0 1 1 1 1 2 ]
+	
+		execute all:
+		{
+			execute one_of:
+			{
+				execute paletted_map:
+				[
+					"...."
+					".XX."
+					".XX."
+					"...."
+				]
+			}
+			
+			execute double: { passes: 5 }
+			execute median_filter: 1
+			#execute despeckle: {}
+			execute double: { passes: 1 no_mutations: true }
+			execute add_borders: lava
+			execute add_borders: lava
+			
+			execute overlay: 
+			{
+				noise: .rocks_overlay
+				terrain<black_rocks>: { above: 112 }				
+			}
+			
+			execute terrain_modifier_map:
+			{
+				terrain_modifier: temperature
+				noise: .temperature
+			}		
+			
+			execute player_spawns: 1			
+		}		
+	}
+}

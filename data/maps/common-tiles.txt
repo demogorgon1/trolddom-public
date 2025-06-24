@@ -1173,10 +1173,14 @@ sprites:
 
 	cursor: { position: [ 0 608 ] }
 	
-	sprite lava_1: { flags: [ tile_fishable tile_water standalone ] water_floor: sand }
-	sprite lava_2: { flags: [ tile_fishable tile_water standalone ] water_floor: sand }
-	sprite lava_3: { flags: [ tile_fishable tile_water standalone ] water_floor: sand }
-	sprite lava: { flags: [ tile_fishable tile_water ] water_floor: sand water_animation: [ lava_1 lava_2 lava_3 ] }
+	sprite lava_1: { flags: [ tile_fishable tile_water standalone ] water_floor: lava_1 }
+	sprite lava_2: { flags: [ tile_fishable tile_water standalone ] water_floor: lava_1 }
+	sprite lava_3: { flags: [ tile_fishable tile_water standalone ] water_floor: lava_1 }
+	sprite lava: { flags: [ tile_fishable tile_water tile_no_water_edge tile_no_waves ] water_floor: sand water_animation: [ lava_1 lava_2 lava_3 ] }
+	sprite lava_b: { flags: [ tile_fishable ] alt_tiles: [ lava_b_alt_1 lava_b_alt_2 lava_b_alt_3 ] }
+	sprite lava_b_alt_1: { flags: [ tile_fishable ] }
+	sprite lava_b_alt_2: { flags: [ tile_fishable ] }
+	sprite lava_b_alt_3: { flags: [ tile_fishable ] }
 
 	cursor: { position: [ 0 624 ] }
 	
@@ -1257,4 +1261,36 @@ sprites:
 	sprite pavement_2_border_15: { }
 	sprite pavement_2_border_16: { }
 	sprite pavement_2_border_17: { }	
+
+	cursor: { position: [ 0 672 ] }
+	
+	sprite dark_rocky_dirt: 
+	{ 
+		flags: [ tile_walkable ] 
+		borders: [ dark_rocky_dirt_border_1 dark_rocky_dirt_border_2 dark_rocky_dirt_border_3 dark_rocky_dirt_border_4 dark_rocky_dirt_border_5 dark_rocky_dirt_border_6 dark_rocky_dirt_border_7
+		           dark_rocky_dirt_border_8 dark_rocky_dirt_border_9 dark_rocky_dirt_border_10 dark_rocky_dirt_border_11 dark_rocky_dirt_border_12 dark_rocky_dirt_border_13 dark_rocky_dirt_border_14
+		           dark_rocky_dirt_border_15 dark_rocky_dirt_border_16 dark_rocky_dirt_border_17 ] 				  						   
+		alt_tiles: [ dark_rocky_dirt_alt_1 dark_rocky_dirt_alt_2 ]
+	}	
+	sprite dark_rocky_dirt_border_1: { }
+	sprite dark_rocky_dirt_border_2: { }
+	sprite dark_rocky_dirt_border_3: { }
+	sprite dark_rocky_dirt_border_4: { }
+	sprite dark_rocky_dirt_border_5: { }
+	sprite dark_rocky_dirt_border_6: { }
+	sprite dark_rocky_dirt_border_7: { }
+	sprite dark_rocky_dirt_border_8: { }
+	sprite dark_rocky_dirt_border_9: { }
+	sprite dark_rocky_dirt_border_10: { }
+	sprite dark_rocky_dirt_border_11: { }
+	sprite dark_rocky_dirt_border_12: { }
+	sprite dark_rocky_dirt_border_13: { }
+	sprite dark_rocky_dirt_border_14: { }
+	sprite dark_rocky_dirt_border_15: { }
+	sprite dark_rocky_dirt_border_16: { }
+	sprite dark_rocky_dirt_border_17: { }
+	sprite dark_rocky_dirt_alt_1: { flags: [ tile_walkable ] }
+	sprite dark_rocky_dirt_alt_2: { flags: [ tile_walkable ] }		
+
+	
 }

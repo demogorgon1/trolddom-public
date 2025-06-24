@@ -427,9 +427,28 @@ namespace tpublic::MapGenerators
 
 			otherWalkableArea->Merge(walkableArea);
 
+			std::set<Vec2> pathPositions;
+
 			for (size_t j = 0; j < path.size(); j++)
 			{
 				const Vec2& pathPosition = path[j];
+
+				int32_t radius = 0;
+				if(!m_params->m_connectConversionRadius.empty())
+					radius = (int32_t)Helpers::RandomItem(m_random, m_params->m_connectConversionRadius);
+
+				for(int32_t y = -radius; y <= radius; y++)
+				{
+					for (int32_t x = -radius; x <= radius; x++)
+					{
+						if(x * x + y * y <= radius * radius)
+							pathPositions.insert({ pathPosition.m_x + x, pathPosition.m_y + y });
+					}
+				}
+			}
+
+			for(const Vec2& pathPosition : pathPositions)
+			{
 				otherWalkableArea->m_positions.insert(pathPosition);
 
 				uint32_t terrainId = m_terrainMap[pathPosition.m_x + pathPosition.m_y * (int32_t)m_width];
@@ -1692,6 +1711,10 @@ namespace tpublic::MapGenerators
 				else if (aChild->m_name == "object_map_entity_spawn")
 				{
 					m_params.m_objectMapEntitySpawnId = aChild->GetId(DataType::ID_MAP_ENTITY_SPAWN);
+				}
+				else if(aChild->m_name == "connect_conversion_radius")
+				{
+					aChild->GetUIntArray(m_params.m_connectConversionRadius);
 				}
 				else
 				{

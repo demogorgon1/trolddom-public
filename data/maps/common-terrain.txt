@@ -129,3 +129,53 @@ terrain pine_trees:
 	
 	debug_color: [ 0 128 0 ]	
 }
+
+terrain lava:
+{
+	tile<lava_b>: { }
+
+	mutation_chance: 5
+	mutation<1>: flat_volcanic
+	
+	border<coast_volcanic>: [ flat_volcanic coast_volcanic ]
+	
+	connect_cost: 32
+	connect_conversion: coast_volcanic
+	
+	debug_color: [ 0 0 255 ]
+}
+
+terrain coast_volcanic:
+{
+	tile<dark_rocky_dirt>: { threshold<temperature>: { less_than: 64 } }
+	tile<molten_rock>: { }
+	
+	walkable: true
+	
+	debug_color: [ 255 255 0 ]
+}
+
+terrain flat_volcanic:
+{
+	tile<dark_rocky_dirt>: { }
+
+	mutation_chance: 5
+	mutation<1>: lava
+		
+	walkable: true
+			
+	debug_color: [ 0 255 0 ]
+}
+
+terrain black_rocks:
+{
+	tile<black_rocks>: { }
+
+	mutation_chance: 10
+	mutation<1>: flat_volcanic
+
+	connect_cost: 4
+	connect_conversion: flat_volcanic
+					
+	debug_color: [ 128 128 128 ]
+}
