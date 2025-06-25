@@ -1,0 +1,38 @@
+!define TRIAL_OF_FIRE_CRABS 
+[ 
+	.lavacrawler
+]
+
+!define TRIAL_OF_FIRE_CONDITIONAL_ENTITY_MAP
+{
+	.lavacrawler<.lavacrawler_elite>: party
+}
+
+{
+
+	npc_behavior_state .survival_monster: { behavior: survival_wave despawn_if_lost_player: true }
+
+	${
+		_faction: monsters
+		_default_behavior_state: .survival_monster	
+		_level: 22
+	}
+
+	##############################################################################
+	# Lavacrawler
+	{
+		${
+			_string: "Lavacrawler" 
+			_creature_type: beast
+			_weapon_damage: 0.7
+			_resource_health: 0.55		
+			_sprite: crab_4 
+			_sprite_dead: crab_4_dead 
+			_abilities: [ { id: npc_attack } ]
+		}
+
+		entity .lavacrawler: !NPC { }
+		entity .lavacrawler_elite: !NPC { _elite: true }
+	}
+
+}

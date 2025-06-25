@@ -65,6 +65,7 @@ namespace tpublic
 												uint32_t				aWorldAuraId) const = 0;
 		virtual const std::vector<Vec2>*	WorldViewQueryZonePositions(
 												uint32_t				aZoneId) const = 0;											
+		virtual bool						WorldViewIsSurvivalActive() const = 0;
 	};
 
 }

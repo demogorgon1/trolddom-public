@@ -857,10 +857,12 @@ sprites:
 	cursor: { position: [ 0 736 ] }
 	sprite orc_15: { dead: orc_15_dead }
 	sprite demon_10: { dead: demon_10_dead }
+	sprite crab_4: { dead: crab_4_dead }
 	
 	cursor: { position: [ 0 752 ] }
 	sprite orc_15_dead: { }	
 	sprite demon_10_dead: { }	
+	sprite crab_4_dead: { }	
 
 }
 

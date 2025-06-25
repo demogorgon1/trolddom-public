@@ -66,8 +66,40 @@ map trial_of_fire:
 	view_attenuation_bias: 0
 	view_hidden_visibility: 35			
 	
-	survival_script: trial_of_fire
 	seed: 39447431
+	
+	survival_script: $survival_script
+	{
+		wave_spawn_distance: [ 26 28 ]
+		wave_max_distance: 48
+		reset_when_inactive: true		
+		conditional_entity_map: !TRIAL_OF_FIRE_CONDITIONAL_ENTITY_MAP {}
+
+		thread:
+		{	
+			wait<[ 40 60 ]>: {}
+		
+			repeat<[ 2 3 ]>:
+			{
+				wait<[ 40 80 ]>: {}
+				wave<1>: !TRIAL_OF_FIRE_CRABS {}
+			}
+			
+			repeat<[ 2 3 ]>:
+			{
+				wait<[ 40 80 ]>: {}
+				wave<[ 1 2 ]>: !TRIAL_OF_FIRE_CRABS {}
+			}
+
+			wait<[ 90 100 ]>: {}
+
+			repeat<[ 2 3 ]>:
+			{
+				wait<[ 40 60 ]>: {}
+				wave<[ 2 3 ]>: !TRIAL_OF_FIRE_CRABS {}
+			}			
+		}
+	}  
 
 	generator world:
 	{
