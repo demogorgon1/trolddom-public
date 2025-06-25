@@ -1052,6 +1052,16 @@ sprites:
 	sprite orange_gateway_closed_3: { }
 	sprite green_statue: { }
 	sprite green_fragment: { }
+
+	cursor: { position: [ 0 112 ] }
+	sprite fire_0: { }
+	sprite fire_1: { }
+	sprite fire_2: { }
+	sprite fire_fade_0: { }
+	sprite fire_fade_1: { }
+	sprite fire_fade_2: { }
+	sprite glowing_orb_2_a: { }
+	sprite glowing_orb_2_b: { }
 		
 }
 

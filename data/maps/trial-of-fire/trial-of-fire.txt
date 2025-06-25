@@ -47,10 +47,50 @@ noise .temperature:
 	}	
 }
 
+aura .outside_player_spawn_zone_debuff:
+{
+	string: "Intense Fire"
+	description: "Infernal fire burns you."
+	icon: icon_fire
+	type: debuff
+	flags: [ unique indefinite ]
+	aura_effect repeat: 
+	{ 
+		update_interval: 10
+		update_count: indefinite
+		ability: $ability [ string icon ]
+		{
+			states: [ default in_combat ]
+			flags: [ always_in_range always_in_line_of_sight ]			
+			direct_effect damage:
+			{	
+				damage_type: fire		
+				function: { expression: a_mul_x x: health_max a: 0.20 entity: target }					
+				flags: [ is_magical ]
+			}					
+		}
+	}
+}
+
+zone .outside_player_spawn_zone:
+{
+	no_map: true
+	
+	player_trigger_ability_requirement self<must_not_have_aura>: .outside_player_spawn_zone_debuff
+	
+	player_trigger_ability: $ability
+	{
+		direct_effect apply_aura:
+		{
+			aura: .outside_player_spawn_zone_debuff
+		}
+	}	
+}
+
 map_entity_spawn .object:
 {	
 }
- 
+
 map trial_of_fire:
 {
 	string: "Trial of Fire"
@@ -107,6 +147,8 @@ map trial_of_fire:
 		terrain_palette_entry<flat_volcanic>: "X"
 		object_map_entity_spawn: .object
 		connect_conversion_radius: [ 0 0 0 0 1 1 1 1 1 1 2 ]
+		outside_player_spawn_zone: .outside_player_spawn_zone
+		player_spawn_zone_radius: 8
 
 		player_spawn_entity: $entity
 		{
@@ -167,7 +209,57 @@ map trial_of_fire:
 				noise: .temperature
 			}		
 			
-			execute player_spawns: 1			
-		}		
+			execute player_spawns: 1		
+			
+			execute add_player_spawn_zone_boundary_entity:
+			{ 
+				range: [ 1 1 ]
+				entity: $entity @trial_of_fire_boundary_fire_1
+				{
+					components:
+					{
+						position: { }		
+						sprite: 
+						{ 
+							animations: 
+							[
+								{ 
+									states: [ default ] 
+									frames: [ fire_0 fire_1 fire_2 ] 
+									frame_delay: 120 
+									random_start_frame: true 
+									z_offset: -1
+								}			
+							]			
+						}		
+					}				
+				}
+			}
+			
+			execute add_player_spawn_zone_boundary_entity:
+			{ 
+				range: [ 2 2 ]
+				entity: $entity @trial_of_fire_boundary_fire_2
+				{
+					components:
+					{
+						position: { }		
+						sprite: 
+						{ 
+							animations: 
+							[
+								{ 
+									states: [ default ] 
+									frames: [ fire_fade_0 fire_fade_1 fire_fade_2 ] 
+									frame_delay: 120 
+									random_start_frame: true 
+									z_offset: -1
+								}			
+							]			
+						}		
+					}				
+				}
+			}			
+		}				
 	}
 }

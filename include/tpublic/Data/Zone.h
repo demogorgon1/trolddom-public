@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../DataBase.h"
+#include "../Requirement.h"
 
 namespace tpublic
 {
@@ -44,6 +45,12 @@ namespace tpublic
 							m_fishingTriggerAbilityId = aChild->GetId(DataType::ID_ABILITY);
 						else if (aChild->m_name == "fishing_trigger_ability_chance")
 							m_fishingTriggerAbilityChance = aChild->GetUInt32();
+						else if (aChild->m_name == "player_trigger_ability")
+							m_playerTriggerAbilityId = aChild->GetId(DataType::ID_ABILITY);
+						else if (aChild->m_name == "player_trigger_ability_chance")
+							m_playerTriggerAbilityChance = aChild->GetUInt32();
+						else if (aChild->m_tag == "player_trigger_ability_requirement")
+							m_playerTriggerAbilityRequirements.push_back(Requirement(aChild));
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -61,6 +68,9 @@ namespace tpublic
 				aWriter->WriteUInt(m_fishingLootTableId);
 				aWriter->WriteUInt(m_fishingTriggerAbilityId);
 				aWriter->WriteUInt(m_fishingTriggerAbilityChance);
+				aWriter->WriteUInt(m_playerTriggerAbilityId);
+				aWriter->WriteObjects(m_playerTriggerAbilityRequirements);
+				aWriter->WriteUInt(m_playerTriggerAbilityChance);
 			}
 			
 			bool
@@ -81,6 +91,12 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadUInt(m_fishingTriggerAbilityChance))
 					return false;
+				if (!aReader->ReadUInt(m_playerTriggerAbilityId))
+					return false;
+				if(!aReader->ReadObjects(m_playerTriggerAbilityRequirements))
+					return false;
+				if (!aReader->ReadUInt(m_playerTriggerAbilityChance))
+					return false;
 				return true;
 			}
 
@@ -93,13 +109,18 @@ namespace tpublic
 			}
 
 			// Public data
-			std::string			m_string;
-			bool				m_town = false;			
-			bool				m_noMap = false;
-			bool				m_canQueryPosition = false;
-			uint32_t			m_fishingLootTableId = 0;
-			uint32_t			m_fishingTriggerAbilityId = 0;
-			uint32_t			m_fishingTriggerAbilityChance = 0;
+			std::string					m_string;
+			bool						m_town = false;			
+			bool						m_noMap = false;
+			bool						m_canQueryPosition = false;
+			
+			uint32_t					m_fishingLootTableId = 0;
+			uint32_t					m_fishingTriggerAbilityId = 0;
+			uint32_t					m_fishingTriggerAbilityChance = 0;
+
+			uint32_t					m_playerTriggerAbilityId = 0;
+			std::vector<Requirement>	m_playerTriggerAbilityRequirements;
+			uint32_t					m_playerTriggerAbilityChance = 0;
 		};
 
 	}
