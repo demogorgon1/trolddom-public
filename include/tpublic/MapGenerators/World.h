@@ -249,7 +249,8 @@ namespace tpublic::MapGenerators
 			{
 				INVALID_PLACEMENT,
 
-				PLACEMENT_FAR_AWAY_FROM_PLAYER_SPAWNS
+				PLACEMENT_FAR_AWAY_FROM_PLAYER_SPAWNS,
+				PLACEMENT_IN_PLAYER_SPAWN_DISTANCE_RANGE
 			};
 
 			SpecialEntity()
@@ -263,8 +264,18 @@ namespace tpublic::MapGenerators
 				aSource->GetObject()->ForEachChild([&](
 					const SourceNode* aChild)
 				{
+					if(aChild->m_annotation)
+					{
+						if(aChild->m_annotation->m_children.size() == 2 && aChild->m_annotation->IsArrayType(SourceNode::TYPE_NUMBER))
+							m_range = UIntRange(aChild->m_annotation.get());
+						else
+							TP_VERIFY(false, aChild->m_annotation->m_debugInfo, "Invalid annotation.");
+					}
+
 					if(aChild->m_name == "placement" && aChild->IsIdentifier("far_away_from_player_spawns"))
 						m_placement = PLACEMENT_FAR_AWAY_FROM_PLAYER_SPAWNS;
+					else if (aChild->m_name == "placement" && aChild->IsIdentifier("in_player_spawn_distance_range"))
+						m_placement = PLACEMENT_IN_PLAYER_SPAWN_DISTANCE_RANGE;
 					else if(aChild->m_name == "entity_spawn")
 						aChild->GetIdArray(DataType::ID_MAP_ENTITY_SPAWN, m_mapEntitySpawns);
 					else
@@ -278,6 +289,7 @@ namespace tpublic::MapGenerators
 			{
 				aWriter->WritePOD(m_placement);
 				aWriter->WriteUInts(m_mapEntitySpawns);
+				aWriter->WriteOptionalObject(m_range);
 			}
 
 			bool
@@ -288,12 +300,15 @@ namespace tpublic::MapGenerators
 					return false;
 				if(!aReader->ReadUInts(m_mapEntitySpawns))
 					return false;
+				if(!aReader->ReadOptionalObject(m_range))
+					return false;
 				return true;
 			}
 
 			// Public data
 			Placement								m_placement = INVALID_PLACEMENT;
 			std::vector<uint32_t>					m_mapEntitySpawns;
+			std::optional<UIntRange>				m_range;
 		};
 
 		struct Builder

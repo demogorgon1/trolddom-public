@@ -471,6 +471,20 @@ namespace tpublic
 			return m_annotation.get();
 		}
 
+		bool
+		IsArrayType(
+			SourceNode::Type				aType) const
+		{
+			if(m_type != TYPE_ARRAY)
+				return false;
+			for(const std::unique_ptr<SourceNode>& child : m_children)
+			{
+				if(child->m_type != aType)
+					return false;
+			}
+			return true;
+		}
+
 		// Public data
 		Type										m_type;
 		SourceContext*								m_sourceContext;

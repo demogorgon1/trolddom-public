@@ -32,6 +32,7 @@ namespace tpublic
 			ID_ZONE_TELEPORT,
 			ID_ENTITY_COMPASS,
 			ID_SET_MAP_TRIGGER,
+			ID_START_SURVIVAL,
 
 			NUM_IDS
 		};
@@ -68,6 +69,7 @@ namespace tpublic
 			{ "zone_teleport",			DataType::ID_ZONE,			false },
 			{ "entity_compass",			DataType::ID_ENTITY,		false },
 			{ "set_map_trigger",		DataType::ID_MAP_TRIGGER,	false },
+			{ "start_survival",			DataType::INVALID_ID,		false },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

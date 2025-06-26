@@ -76,6 +76,7 @@ zone .outside_player_spawn_zone:
 {
 	no_map: true
 	
+	player_trigger_ability_requirement self<must_not_have_started_survival>: {}
 	player_trigger_ability_requirement self<must_not_have_aura>: .outside_player_spawn_zone_debuff
 	
 	player_trigger_ability: $ability
@@ -89,6 +90,48 @@ zone .outside_player_spawn_zone:
 
 map_entity_spawn .object:
 {	
+}
+
+map_entity_spawn .survival_start_object:
+{	
+	entity .survival_start_object: { init_state: default } 	
+}
+
+entity .survival_start_object:
+{
+	string: "Orb of Trials"
+	
+	systems: [ openable ]
+	
+	components:
+	{
+		position: { }		
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ glowing_orb_2_a glowing_orb_2_b ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+				
+		openable: 
+		{ 
+			verb: use
+			range: 1 
+			trigger_ability: $ability
+			{
+				string: "Orb of Trials"
+				direct_effect simple<start_survival>: {}
+				direct_effect remove_aura: { aura: .outside_player_spawn_zone_debuff }
+			}
+		}	
+	}
 }
 
 map trial_of_fire:
@@ -232,6 +275,10 @@ map trial_of_fire:
 								}			
 							]			
 						}		
+						visibility<static>: 
+						{
+							requirements: { requirement self<must_not_have_started_survival>: {} }
+						}
 					}				
 				}
 			}
@@ -257,9 +304,19 @@ map trial_of_fire:
 								}			
 							]			
 						}		
+						visibility<static>: 
+						{
+							requirements: { requirement self<must_not_have_started_survival>: {} }
+						}
 					}				
 				}
-			}			
+			}		
+
+			execute add_special_entity_spawn:
+			{
+				placement<[ 4 5 ]>: in_player_spawn_distance_range
+				entity_spawn: [ .survival_start_object ]
+			}
 		}				
 	}
 }

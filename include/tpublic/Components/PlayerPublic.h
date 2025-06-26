@@ -3,6 +3,7 @@
 #include "../Component.h"
 #include "../ComponentBase.h"
 #include "../Stat.h"
+#include "../Survival.h"
 #include "../Vec2.h"
 
 namespace tpublic
@@ -32,6 +33,7 @@ namespace tpublic
 				FIELD_CHARACTER_ID,
 				FIELD_STATS,
 				FIELD_STATUS,
+				FIELD_SURVIVAL_STATE
 			};
 
 			static void
@@ -42,6 +44,7 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_CHARACTER_ID, NULL, offsetof(PlayerPublic, m_characterId));
 				aSchema->DefineCustomObjectNoSource<Stat::Collection>(FIELD_STATS, offsetof(PlayerPublic, m_stats));
 				aSchema->DefineCustomPODNoSource<Status>(FIELD_STATUS, offsetof(PlayerPublic, m_status));
+				aSchema->DefineCustomPODNoSource<Status>(FIELD_SURVIVAL_STATE, offsetof(PlayerPublic, m_survivalState));
 			}
 
 			void
@@ -51,13 +54,15 @@ namespace tpublic
 				m_characterId = 0;
 				m_stats.Reset();
 				m_status = STATUS_NORMAL;
+				m_survivalState = Survival::STATE_NONE;
 			}
 
 			// Public data
 			uint32_t			m_classId = 0;
 			uint32_t			m_characterId = 0;
 			Stat::Collection	m_stats;			
-			Status				m_status = STATUS_NORMAL;
+			Status				m_status = STATUS_NORMAL;			
+			Survival::State		m_survivalState = Survival::STATE_NONE;
 		};
 	}
 

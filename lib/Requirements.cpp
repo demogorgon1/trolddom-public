@@ -7,6 +7,7 @@
 #include <tpublic/Components/Inventory.h>
 #include <tpublic/Components/Openable.h>
 #include <tpublic/Components/PlayerPrivate.h>
+#include <tpublic/Components/PlayerPublic.h>
 #include <tpublic/Components/Position.h>
 #include <tpublic/Components/Reputation.h>
 #include <tpublic/Components/VisibleAuras.h>
@@ -456,6 +457,21 @@ namespace tpublic
 					bool mustKnowRiding = aRequirement->m_type == Requirement::TYPE_MUST_KNOW_RIDING;
 
 					if(playerPrivate->m_knowsRiding != mustKnowRiding)
+						return false;
+				}
+				break;
+
+			case Requirement::TYPE_MUST_HAVE_STARTED_SURVIVAL:
+			case Requirement::TYPE_MUST_NOT_HAVE_STARTED_SURVIVAL:
+				{
+					if (!entity->IsPlayer())
+						return false;
+
+					const Components::PlayerPublic* playerPublic = entity->GetComponent<Components::PlayerPublic>();
+					bool shouldBeStarted = aRequirement->m_type == Requirement::TYPE_MUST_HAVE_STARTED_SURVIVAL;
+					bool isStarted = playerPublic->m_survivalState == Survival::STATE_STARTED;
+
+					if (shouldBeStarted != isStarted)
 						return false;
 				}
 				break;

@@ -60,7 +60,9 @@ namespace tpublic
 			TYPE_MUST_KNOW_RIDING,
 			TYPE_MUST_NOT_KNOW_RIDING,
 			TYPE_MUST_NOT_BE_DISCIPLE,
-			TYPE_MUST_NOT_HAVE_DISCOVERED_ZONE
+			TYPE_MUST_NOT_HAVE_DISCOVERED_ZONE,
+			TYPE_MUST_NOT_HAVE_STARTED_SURVIVAL,
+			TYPE_MUST_HAVE_STARTED_SURVIVAL
 		};
 
 		static DataType::Id
@@ -258,6 +260,10 @@ namespace tpublic
 				m_type = TYPE_MUST_KNOW_RIDING;
 			else if (typeString == "must_not_know_riding")
 				m_type = TYPE_MUST_NOT_KNOW_RIDING;
+			else if (typeString == "must_not_have_started_survival")
+				m_type = TYPE_MUST_NOT_HAVE_STARTED_SURVIVAL;
+			else if (typeString == "must_have_started_survival")
+				m_type = TYPE_MUST_HAVE_STARTED_SURVIVAL;
 			else
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid type.", aSource->m_annotation->GetIdentifier());
 

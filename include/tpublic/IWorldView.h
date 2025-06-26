@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Survival.h"
 #include "Vec2.h"
 
 namespace tpublic
@@ -66,6 +67,7 @@ namespace tpublic
 		virtual const std::vector<Vec2>*	WorldViewQueryZonePositions(
 												uint32_t				aZoneId) const = 0;											
 		virtual bool						WorldViewIsSurvivalActive() const = 0;
+		virtual Survival::State				WorldViewGetSurvivalState() const = 0;
 	};
 
 }
