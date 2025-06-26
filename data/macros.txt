@@ -115,6 +115,11 @@
 				on_enter_ability: @_evading_on_enter_ability
 			}
 			
+			<exists _spawn_barks> state spawning:
+			{
+				barks: @_spawn_barks
+			}
+			
 			<exists _dead_barks> state dead: { barks: @_dead_barks }
 			<exists _default_behavior_state> default_behavior_state: @_default_behavior_state
 			<exists _can_move_on_all_non_view_blocking_tiles> can_move_on_all_non_view_blocking_tiles: @_can_move_on_all_non_view_blocking_tiles

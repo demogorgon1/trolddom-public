@@ -88,6 +88,8 @@ zone .outside_player_spawn_zone:
 	}	
 }
 
+map_entity_spawn .boss_1: {	spawn_timer: { only_when_triggered: true } }
+
 map_entity_spawn .object:
 {	
 }
@@ -158,29 +160,34 @@ map trial_of_fire:
 		reset_when_inactive: true		
 		conditional_entity_map: !TRIAL_OF_FIRE_CONDITIONAL_ENTITY_MAP {}
 
-		thread:
+		thread<_1>:
 		{	
-			wait<[ 40 60 ]>: {}
+			wait<60>: {}
 		
-			repeat<[ 2 3 ]>:
+			repeat<3>:
 			{
 				wait<[ 40 80 ]>: {}
 				wave<1>: !TRIAL_OF_FIRE_CRABS {}
 			}
 			
-			repeat<[ 2 3 ]>:
+			repeat<2>:
 			{
-				wait<[ 40 80 ]>: {}
-				wave<[ 1 2 ]>: !TRIAL_OF_FIRE_CRABS {}
+				wait<[ 60 90 ]>: {}
+				wave<2>: !TRIAL_OF_FIRE_CRABS {}
 			}
 
-			wait<[ 90 100 ]>: {}
+			wait<120>: {}
 
-			repeat<[ 2 3 ]>:
+			repeat<3>:
 			{
-				wait<[ 40 60 ]>: {}
+				wait<[ 50 70 ]>: {} 
 				wave<[ 2 3 ]>: !TRIAL_OF_FIRE_CRABS {}
 			}			
+			
+			wait<120>: {}		
+
+			thread_boss_map_entity_spawns: [ .boss_1 ]
+			spawn_boss<1>: [ .fireclaw ]
 		}
 	}  
 
@@ -317,6 +324,13 @@ map trial_of_fire:
 				placement<[ 4 5 ]>: in_player_spawn_distance_range
 				entity_spawn: [ .survival_start_object ]
 			}
+			
+			# Boss 1
+			execute add_special_entity_spawn:
+			{
+				placement<[ 30 40 ]>: in_player_spawn_distance_range_percentage
+				entity_spawn: [ .boss_1 ]
+			}			
 		}				
 	}
 }

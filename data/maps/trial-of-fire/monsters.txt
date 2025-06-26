@@ -6,6 +6,7 @@
 !define TRIAL_OF_FIRE_CONDITIONAL_ENTITY_MAP
 {
 	.lavacrawler<.lavacrawler_elite>: party
+	.fireclaw<.fireclaw_elite>: party
 }
 
 {
@@ -33,6 +34,25 @@
 
 		entity .lavacrawler: !NPC { }
 		entity .lavacrawler_elite: !NPC { _elite: true }
+	}
+
+	##############################################################################
+	# Fireclaw
+	{
+		${
+			_string: "Fireclaw" 
+			_creature_type: beast
+			_weapon_damage: 1.2
+			_resource_health: 1.35		
+			_sprite: crab_monster_boss_6
+			_sprite_dead: crab_monster_boss_6_dead
+			_abilities: [ { id: npc_attack } ]
+			_in_combat_barks: [ { type: yell text: "The temperature is rising! Time to die!" flags: [ no_chat_bubble ] } ]				
+			_spawn_barks: [ { type: yell text: "Who dare challenge my master?" flags: [ no_chat_bubble instance ] } ]				
+		}
+
+		entity .fireclaw: !NPC { }
+		entity .fireclaw_elite: !NPC { _elite: true }
 	}
 
 }

@@ -20,7 +20,8 @@ namespace tpublic
 
 		enum Flag : uint8_t
 		{
-			FLAG_NO_CHAT_BUBBLE = 0x01
+			FLAG_NO_CHAT_BUBBLE = 0x01,
+			FLAG_INSTANCE = 0x02
 		};
 
 		static Type
@@ -47,6 +48,8 @@ namespace tpublic
 			{
 				if(aChild->IsIdentifier("no_chat_bubble"))
 					flags |= FLAG_NO_CHAT_BUBBLE;
+				else if (aChild->IsIdentifier("instance"))
+					flags |= FLAG_INSTANCE;
 				else
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid flag.", aChild->GetIdentifier());
 			});

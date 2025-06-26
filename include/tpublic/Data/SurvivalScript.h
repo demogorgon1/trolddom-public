@@ -23,8 +23,10 @@ namespace tpublic
 					TYPE_WAIT,
 					TYPE_REPEAT,
 					TYPE_WAVE,
-					TYPE_THREAD_RUN_CONDITION_ENTITY_NOT_DEAD
-				};
+					TYPE_THREAD_RUN_CONDITION_ENTITY_NOT_DEAD,
+					TYPE_SPAWN_BOSS,
+					TYPE_THREAD_BOSS_MAP_ENTITY_SPAWNS
+				};			
 
 				Node()
 				{
@@ -42,7 +44,7 @@ namespace tpublic
 					}
 					else
 					{
-						if(aSource->m_annotation)
+						if(aSource->m_annotation && UIntRange::ValidateSourceNode(aSource->m_annotation.get()))
 							m_range = UIntRange(aSource->m_annotation.get());
 
 						if (aSource->m_name == "wait")
@@ -62,6 +64,16 @@ namespace tpublic
 						{
 							m_type = TYPE_THREAD_RUN_CONDITION_ENTITY_NOT_DEAD;
 							aSource->GetIdArray(DataType::ID_ENTITY, m_ids);
+						}
+						else if (aSource->m_name == "spawn_boss")
+						{
+							m_type = TYPE_SPAWN_BOSS;
+							aSource->GetIdArray(DataType::ID_ENTITY, m_ids);
+						}
+						else if (aSource->m_name == "thread_boss_map_entity_spawns")
+						{
+							m_type = TYPE_THREAD_BOSS_MAP_ENTITY_SPAWNS;
+							aSource->GetIdArray(DataType::ID_MAP_ENTITY_SPAWN, m_ids);
 						}
 						else
 						{
@@ -121,6 +133,9 @@ namespace tpublic
 				Thread(
 					const SourceNode*	aSource)
 				{
+					if(aSource->m_annotation)
+						m_name = aSource->m_annotation->GetIdentifier();
+
 					m_root = std::make_unique<Node>(aSource, true);
 				}
 
@@ -129,6 +144,7 @@ namespace tpublic
 					IWriter*			aWriter) const
 				{
 					aWriter->WriteObjectPointer(m_root);
+					aWriter->WriteString(m_name);
 				}
 
 				bool
@@ -137,11 +153,14 @@ namespace tpublic
 				{
 					if(!aReader->ReadObjectPointer(m_root))
 						return false;
+					if(!aReader->ReadString(m_name))
+						return false;
 					return true;
 				}
 
 				// Public data
 				std::unique_ptr<Node>					m_root;
+				std::string								m_name;
 			};
 
 			enum Condition : uint8_t

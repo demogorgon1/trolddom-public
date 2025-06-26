@@ -1005,6 +1005,18 @@ namespace tpublic::MapGenerators
 				}
 				break;
 
+			case SpecialEntity::PLACEMENT_IN_PLAYER_SPAWN_DISTANCE_RANGE_PERCENTAGE:
+				{
+					TP_CHECK(m_playerSpawnDistanceCombined, "No player spawn distance field.");
+					TP_CHECK(specialEntity.m_range.has_value(), "Missing spawn distanace range.");
+					uint32_t maxDistance = m_playerSpawnDistanceCombined->GetMax();
+					std::vector<Vec2> positions;
+					m_playerSpawnDistanceCombined->GetPositionsInRange((specialEntity.m_range->m_min * maxDistance) / 100, (specialEntity.m_range->m_max * maxDistance) / 100, positions);
+					if (positions.size() > 0)
+						position = positions[Roll(0, (uint32_t)positions.size() - 1)];
+				}
+				break;
+
 			default:
 				break;
 			}

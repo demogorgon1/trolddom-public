@@ -136,14 +136,28 @@ namespace tpublic::Systems
 		ComponentBase**			aComponents,
 		Context*				aContext) 
 	{		
+		Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
+
 		if(aEntityState == EntityState::ID_SPAWNING)
-			return aTicksInState < SPAWN_TICKS ? EntityState::CONTINUE : EntityState::ID_DEFAULT;
+		{
+			if(aTicksInState < SPAWN_TICKS)
+				return EntityState::CONTINUE;
+
+			const Components::NPC::StateEntry* spawningState = npc->GetState(EntityState::ID_SPAWNING);
+			if (spawningState != NULL && spawningState->m_barks.size() > 0)
+			{
+				const Chat* bark = Helpers::RandomItemPointer(*aContext->m_random, spawningState->m_barks);
+				assert(bark != NULL);
+				aContext->m_eventQueue->EventQueueChat(aEntityInstanceId, *bark);
+			}
+
+			return EntityState::ID_DEFAULT;
+		}
 
 		if (aEntityState == EntityState::ID_DESPAWNING)
 			return aTicksInState < DESPAWN_TICKS ? EntityState::CONTINUE : EntityState::ID_DESPAWNED;
 
 		const Components::CombatPublic* combat = GetComponent<Components::CombatPublic>(aComponents);
-		Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
 		Components::Position* position = GetComponent<Components::Position>(aComponents);
 		Components::ThreatTarget* threat = GetComponent<Components::ThreatTarget>(aComponents);
 		const Components::Auras* auras = GetComponent<Components::Auras>(aComponents);

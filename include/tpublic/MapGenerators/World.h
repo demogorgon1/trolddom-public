@@ -250,7 +250,8 @@ namespace tpublic::MapGenerators
 				INVALID_PLACEMENT,
 
 				PLACEMENT_FAR_AWAY_FROM_PLAYER_SPAWNS,
-				PLACEMENT_IN_PLAYER_SPAWN_DISTANCE_RANGE
+				PLACEMENT_IN_PLAYER_SPAWN_DISTANCE_RANGE,
+				PLACEMENT_IN_PLAYER_SPAWN_DISTANCE_RANGE_PERCENTAGE,
 			};
 
 			SpecialEntity()
@@ -276,6 +277,8 @@ namespace tpublic::MapGenerators
 						m_placement = PLACEMENT_FAR_AWAY_FROM_PLAYER_SPAWNS;
 					else if (aChild->m_name == "placement" && aChild->IsIdentifier("in_player_spawn_distance_range"))
 						m_placement = PLACEMENT_IN_PLAYER_SPAWN_DISTANCE_RANGE;
+					else if (aChild->m_name == "placement" && aChild->IsIdentifier("in_player_spawn_distance_range_percentage"))
+						m_placement = PLACEMENT_IN_PLAYER_SPAWN_DISTANCE_RANGE_PERCENTAGE;
 					else if(aChild->m_name == "entity_spawn")
 						aChild->GetIdArray(DataType::ID_MAP_ENTITY_SPAWN, m_mapEntitySpawns);
 					else
