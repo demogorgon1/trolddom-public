@@ -160,8 +160,10 @@ map trial_of_fire:
 		reset_when_inactive: true		
 		conditional_entity_map: !TRIAL_OF_FIRE_CONDITIONAL_ENTITY_MAP {}
 
-		thread<_1>:
+		thread<crabs>:
 		{	
+			thread_run_condition_entity_not_dead: [ .fireclaw ]
+				
 			wait<60>: {}
 		
 			repeat<3>:
@@ -184,10 +186,19 @@ map trial_of_fire:
 				wave<[ 2 3 ]>: !TRIAL_OF_FIRE_CRABS {}
 			}			
 			
-			wait<120>: {}		
-
+			repeat:
+			{
+				wait<120>: {}
+				wave<1>: !TRIAL_OF_FIRE_CRABS {}
+			}
+		}
+		
+		thread<crab_boss>:
+		{
+			# wait<1050>: {}					
+			wait<10>: {}
 			thread_boss_map_entity_spawns: [ .boss_1 ]
-			spawn_boss<1>: [ .fireclaw ]
+			spawn_boss<1>: [ .fireclaw ]	
 		}
 	}  
 

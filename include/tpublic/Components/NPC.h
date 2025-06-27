@@ -489,6 +489,7 @@ namespace tpublic
 				FIELD_DISPLAY_NAME_WHEN_DEAD,
 				FIELD_INACTIVE_ENCOUNTER_DESPAWN_STATE,
 				FIELD_NO_KILL_EVENT,
+				FIELD_GLOBAL_AURA,
 			};
 
 			static void
@@ -517,6 +518,7 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_STRING, FIELD_DISPLAY_NAME_WHEN_DEAD, "display_name_when_dead", offsetof(NPC, m_displayNameWhenDead));
 				aSchema->Define(ComponentSchema::TYPE_UINT8, FIELD_INACTIVE_ENCOUNTER_DESPAWN_STATE, "inactive_encounter_despawn_state", offsetof(NPC, m_inactiveEncounterDespawnState))->SetFlags(ComponentSchema::FLAG_ENTITY_STATE);
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_NO_KILL_EVENT, "no_kill_event", offsetof(NPC, m_noKillEvent));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_GLOBAL_AURA, "global_aura", offsetof(NPC, m_globalAuraId))->SetDataType(DataType::ID_AURA);
 			}
 
 			const StateEntry*
@@ -556,6 +558,7 @@ namespace tpublic
 				m_displayNameWhenDead.clear();
 				m_inactiveEncounterDespawnState = EntityState::INVALID_ID;
 				m_noKillEvent = false;
+				m_globalAuraId = 0;
 
 				m_cooldowns.m_entries.clear();
 				m_castInProgress.reset();
@@ -602,6 +605,7 @@ namespace tpublic
 			std::string									m_displayNameWhenDead;
 			EntityState::Id								m_inactiveEncounterDespawnState = EntityState::INVALID_ID;
 			bool										m_noKillEvent = false;
+			uint32_t									m_globalAuraId = 0;
 
 			// Not serialized
 			Cooldowns									m_cooldowns;

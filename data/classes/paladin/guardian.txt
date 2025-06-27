@@ -59,6 +59,7 @@ aura paladin_one_handed_weapon_mastery_1:
 	{
 		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
 		multiplier: 1.04
+		type_mask: [ physical ]
 	}
 }
 
@@ -71,6 +72,7 @@ aura paladin_one_handed_weapon_mastery_2:
 	{
 		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
 		multiplier: 1.08
+		type_mask: [ physical ]
 	}
 }
 
@@ -83,6 +85,7 @@ aura paladin_one_handed_weapon_mastery_3:
 	{
 		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
 		multiplier: 1.12
+		type_mask: [ physical ]
 	}
 }
 
@@ -95,6 +98,7 @@ aura paladin_one_handed_weapon_mastery_4:
 	{
 		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
 		multiplier: 1.16
+		type_mask: [ physical ]
 	}
 }
 
@@ -107,6 +111,7 @@ aura paladin_one_handed_weapon_mastery_5:
 	{
 		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
 		multiplier: 1.20
+		type_mask: [ physical ]
 	}
 }
 

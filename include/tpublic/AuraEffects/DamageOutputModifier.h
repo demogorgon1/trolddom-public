@@ -47,17 +47,17 @@ namespace tpublic
 						{
 							aChild->GetArray()->ForEachChild([&](
 								const SourceNode* aFlag)
+							{
+								if (aFlag->IsIdentifier("all"))
 								{
-									if (aFlag->IsIdentifier("all"))
-									{
-										m_typeMask = UINT32_MAX;
-									}
-									else
-									{
-										DirectEffect::DamageType damageType = DirectEffect::StringToDamageType(aFlag->GetIdentifier());
-										m_typeMask |= 1 << (uint32_t)damageType;
-									}
-								});
+									m_typeMask = UINT32_MAX;
+								}
+								else
+								{
+									DirectEffect::DamageType damageType = DirectEffect::StringToDamageType(aFlag->GetIdentifier());
+									m_typeMask |= 1 << (uint32_t)damageType;
+								}
+							});
 						}
 						else if (aChild->m_name == "multiplier")
 						{

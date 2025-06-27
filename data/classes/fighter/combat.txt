@@ -61,6 +61,7 @@ aura fighter_combat_two_handed_weapon_mastery_1:
 	{
 		requirement self<must_have_equipped_item_type_flags>: { id: [ two_handed ] }
 		multiplier: 1.02
+		type_mask: [ physical ]
 	}
 }
 
@@ -73,6 +74,7 @@ aura fighter_combat_two_handed_weapon_mastery_2:
 	{
 		requirement self<must_have_equipped_item_type_flags>: { id: [ two_handed ] }
 		multiplier: 1.04
+		type_mask: [ physical ]
 	}
 }
 
@@ -85,6 +87,7 @@ aura fighter_combat_two_handed_weapon_mastery_3:
 	{
 		requirement self<must_have_equipped_item_type_flags>: { id: [ two_handed ] }
 		multiplier: 1.06
+		type_mask: [ physical ]
 	}
 }
 
@@ -97,6 +100,7 @@ aura fighter_combat_two_handed_weapon_mastery_4:
 	{
 		requirement self<must_have_equipped_item_type_flags>: { id: [ two_handed ] }
 		multiplier: 1.08
+		type_mask: [ physical ]
 	}
 }
 
@@ -109,6 +113,7 @@ aura fighter_combat_two_handed_weapon_mastery_5:
 	{
 		requirement self<must_have_equipped_item_type_flags>: { id: [ two_handed ] }
 		multiplier: 1.10
+		type_mask: [ physical ]
 	}
 }
 

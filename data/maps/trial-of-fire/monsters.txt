@@ -51,10 +51,23 @@
 			_in_combat_barks: [ { type: yell text: "The temperature is rising! Time to die!" flags: [ no_chat_bubble ] } ]				
 			_spawn_barks: [ { type: yell text: "Who dare challenge my master?" flags: [ no_chat_bubble instance ] } ]				
 			_default_behavior_state: .survival_boss	
+	
+			_global_aura: $aura
+			{
+				string: "Fury of Fireclaw"
+				description: "Physical damage increased by 20%."
+				icon: icon_claw_2
+				type: buff
+				flags: [ unique indefinite global ]
+				aura_effect damage_output_modifier:
+				{
+					type_mask: [ physical ]
+					multiplier: 1.2
+				}			
+			}
 		}
 
 		entity .fireclaw: !NPC { }
 		entity .fireclaw_elite: !NPC { _elite: true }
 	}
-
 }

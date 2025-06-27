@@ -39,7 +39,7 @@ namespace tpublic::Systems
 
 	EntityState::Id
 	Combat::UpdatePrivate(
-		uint32_t			/*aEntityId*/,
+		uint32_t			aEntityId,
 		uint32_t			aEntityInstanceId,
 		EntityState::Id		aEntityState,
 		int32_t				/*aTicksInState*/,
@@ -85,11 +85,50 @@ namespace tpublic::Systems
 
 			Components::Auras* auras = GetComponent<Components::Auras>(aComponents);
 
+			const std::unordered_set<uint32_t>& globalAuras = aContext->m_worldView->WorldViewGetGlobalAuras();
+			if(!globalAuras.empty())
+			{
+				// Need to make sure that all applicable global auras are active
+				for(uint32_t globalAuraId : globalAuras)
+				{
+					if(!auras->HasAura(globalAuraId))
+					{
+						const Data::Aura* aura = GetManifest()->GetById<Data::Aura>(globalAuraId);
+						TP_CHECK(aura->m_flags & Data::Aura::FLAG_GLOBAL, "Aura '%s' not flagged as global.", aura->m_name.c_str());
+
+						bool shouldBePlayer = (aura->m_flags & Data::Aura::FLAG_GLOBAL_PLAYER) != 0;
+						bool isPlayer = aEntityId == 0;
+
+						if(shouldBePlayer == isPlayer)
+						{
+							// FIXME: should be refactored. Making some assumptions about what kind of auras we're talking about
+							std::vector<std::unique_ptr<AuraEffectBase>> effects;
+							for (const std::unique_ptr<Data::Aura::AuraEffectEntry>& t : aura->m_auraEffects)
+							{
+								std::unique_ptr<AuraEffectBase> effect(t->m_auraEffectBase->Copy());
+								effects.push_back(std::move(effect));
+							}
+
+							std::unique_ptr<Components::Auras::Entry> newAura = std::make_unique<Components::Auras::Entry>();
+							newAura->m_auraId = globalAuraId;
+							newAura->m_effects = std::move(effects);
+							newAura->m_noEffects = newAura->m_effects.empty();
+						
+							auras->m_entries.push_back(std::move(newAura));
+							auras->m_seq++;
+						}
+					}
+				}
+			}
+
 			for(size_t i = 0; i < auras->m_entries.size(); i++)
 			{
 				std::unique_ptr<Components::Auras::Entry>& entry = auras->m_entries[i];
 
 				const Data::Aura* aura = GetManifest()->GetById<Data::Aura>(entry->m_auraId);
+				if((aura->m_flags & Data::Aura::FLAG_GLOBAL) != 0 && !globalAuras.contains(entry->m_auraId))
+					entry->m_cancel = true;
+
 				if((aura->m_flags & Data::Aura::FLAG_CANCEL_IN_COMBAT) != 0 && aEntityState == EntityState::ID_IN_COMBAT)
 					entry->m_cancel = true;
 

@@ -103,7 +103,9 @@ namespace tpublic
 				FLAG_UNIQUE_PER_SOURCE		= 0x00100000,
 				FLAG_NO_MOUNT				= 0x00200000,
 				FLAG_EFFECTS_AS_CHARGES		= 0x00400000,
-				FLAG_IGNORE_IMMUNITIES		= 0x00800000
+				FLAG_IGNORE_IMMUNITIES		= 0x00800000,
+				FLAG_GLOBAL					= 0x01000000,
+				FLAG_GLOBAL_PLAYER			= 0x02000000
 			};
 
 			static Type
@@ -178,6 +180,10 @@ namespace tpublic
 						flags |= FLAG_EFFECTS_AS_CHARGES;
 					else if (strcmp(string, "ignore_immunities") == 0)
 						flags |= FLAG_IGNORE_IMMUNITIES;
+					else if (strcmp(string, "global") == 0)
+						flags |= FLAG_GLOBAL;
+					else if (strcmp(string, "global_player") == 0)
+						flags |= FLAG_GLOBAL_PLAYER;
 					else
 						TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid aura flag.", string);
 				});
