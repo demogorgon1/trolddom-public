@@ -51,6 +51,7 @@
 #include <tpublic/Components/SpiritStoneDiscovery.h>
 #include <tpublic/Components/Sprite.h>
 #include <tpublic/Components/Stash.h>
+#include <tpublic/Components/SurvivalInfo.h>
 #include <tpublic/Components/Tag.h>
 #include <tpublic/Components/Talents.h>
 #include <tpublic/Components/ThreatSource.h>
@@ -123,6 +124,7 @@ namespace tpublic
 		_Register<Components::SpiritStoneDiscovery>();
 		_Register<Components::Sprite>();
 		_Register<Components::Stash>();
+		_Register<Components::SurvivalInfo>();
 		_Register<Components::Tag>();
 		_Register<Components::Talents>();
 		_Register<Components::ThreatSource>();

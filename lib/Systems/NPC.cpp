@@ -481,6 +481,7 @@ namespace tpublic::Systems
 					switch(npc->m_npcBehaviorState->m_behavior)
 					{
 					case NPCBehavior::ID_SURVIVAL_WAVE:
+					case NPCBehavior::ID_SURVIVAL_BOSS:
 						if(npc->m_npcBehaviorState->m_despawnIfLostPlayer)
 						{
 							if(!aContext->m_worldView->WorldViewIsSurvivalActive())

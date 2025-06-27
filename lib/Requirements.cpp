@@ -7,9 +7,9 @@
 #include <tpublic/Components/Inventory.h>
 #include <tpublic/Components/Openable.h>
 #include <tpublic/Components/PlayerPrivate.h>
-#include <tpublic/Components/PlayerPublic.h>
 #include <tpublic/Components/Position.h>
 #include <tpublic/Components/Reputation.h>
+#include <tpublic/Components/SurvivalInfo.h>
 #include <tpublic/Components/VisibleAuras.h>
 #include <tpublic/Components/ZoneDiscovery.h>
 
@@ -467,9 +467,9 @@ namespace tpublic
 					if (!entity->IsPlayer())
 						return false;
 
-					const Components::PlayerPublic* playerPublic = entity->GetComponent<Components::PlayerPublic>();
+					const Components::SurvivalInfo* survivalInfo = entity->GetComponent<Components::SurvivalInfo>();
 					bool shouldBeStarted = aRequirement->m_type == Requirement::TYPE_MUST_HAVE_STARTED_SURVIVAL;
-					bool isStarted = playerPublic->m_survivalState == Survival::STATE_STARTED;
+					bool isStarted = survivalInfo->m_state == Survival::STATE_STARTED;
 
 					if (shouldBeStarted != isStarted)
 						return false;

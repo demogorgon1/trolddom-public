@@ -32,6 +32,7 @@ player_components:
 	reputation
 	spirit_stone_discovery
 	stash
+	survival_info
 	talents
 	threat_source
 	trade

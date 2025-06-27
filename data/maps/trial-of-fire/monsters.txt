@@ -12,6 +12,7 @@
 {
 
 	npc_behavior_state .survival_monster: { behavior: survival_wave despawn_if_lost_player: true }
+	npc_behavior_state .survival_boss: { behavior: survival_boss despawn_if_lost_player: true }
 
 	${
 		_faction: monsters
@@ -25,7 +26,7 @@
 		${
 			_string: "Lavacrawler" 
 			_creature_type: beast
-			_weapon_damage: 0.7
+			_weapon_damage: 0.46
 			_resource_health: 0.55		
 			_sprite: crab_4 
 			_sprite_dead: crab_4_dead 
@@ -42,13 +43,14 @@
 		${
 			_string: "Fireclaw" 
 			_creature_type: beast
-			_weapon_damage: 1.2
-			_resource_health: 1.35		
+			_weapon_damage: 1.1
+			_resource_health: 1.55		
 			_sprite: crab_monster_boss_6
 			_sprite_dead: crab_monster_boss_6_dead
 			_abilities: [ { id: npc_attack } ]
 			_in_combat_barks: [ { type: yell text: "The temperature is rising! Time to die!" flags: [ no_chat_bubble ] } ]				
 			_spawn_barks: [ { type: yell text: "Who dare challenge my master?" flags: [ no_chat_bubble instance ] } ]				
+			_default_behavior_state: .survival_boss	
 		}
 
 		entity .fireclaw: !NPC { }
