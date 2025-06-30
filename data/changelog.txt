@@ -2,6 +2,21 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.3.2"
+
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Angered Temple Spirits can now drop Spirit Dust and Ectoplasm." }
+		{ text: "Runecore Sentinel achievement now triggers like intended." }
+		{ text: "Karthul Blackfang now drops Token of Victory like intended." }
+		{ text: "Bloodied Rope drop from Skaldrak now has correct item type." }
+		{ text: "Fixed bug where map would be displayed incorrectly in Gateway worlds." }
+		{ text: "Fixed a couple of crash bugs." }
+	]
+
+	#######################################################################################
 	heading: "v0.3.1"
 
 	text: "Changes:"
