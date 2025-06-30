@@ -248,8 +248,8 @@ loot_group ghosts_uncommon: {}
 !define WORLD_DROPS_GHOSTS
 {
 	possibility: { weight: 20 }
-	possibility: { weight: 15 loot_group: ghosts creature_types: [ beast ] }
-	possibility: { weight: 5 loot_group: ghosts_uncommon creature_types: [ beast ] }
+	possibility: { weight: 15 loot_group: ghosts creature_types: [ undead ] }
+	possibility: { weight: 5 loot_group: ghosts_uncommon creature_types: [ undead ] }
 }
 
 loot_table default_humanoid: 
