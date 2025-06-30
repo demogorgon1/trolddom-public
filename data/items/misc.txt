@@ -590,6 +590,6 @@ item item_token_of_victory:
 	stack: 100
 	icon: icon_token_2
 	rarity: uncommon
-	level_range: [ 10 22 ]
+	level_range: [ 10 25 ]
 	binds: when_picked_up
 }
