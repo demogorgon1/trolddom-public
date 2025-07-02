@@ -14,6 +14,8 @@ changelog:
 		{ text: "Bloodied Rope drop from Skaldrak now has correct item type." }
 		{ text: "Fixed bug where map would be displayed incorrectly in Gateway worlds." }
 		{ text: "Fixed a couple of crash bugs." }
+		{ text: "Fixed a bug that allowed equipping binds-on-equip items without binding them." }
+		{ text: "Fixed a bug that prevented stash UI updating correctly under some circumstances." }
 	]
 
 	#######################################################################################
