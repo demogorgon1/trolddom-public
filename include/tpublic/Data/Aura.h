@@ -65,7 +65,7 @@ namespace tpublic
 				}
 
 				// Public data
-				uint32_t							m_auraEffectId;
+				uint32_t							m_auraEffectId = 0;
 				std::unique_ptr<AuraEffectBase>		m_auraEffectBase;
 			};
 

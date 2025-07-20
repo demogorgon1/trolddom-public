@@ -61,7 +61,7 @@ namespace tpublic
 				uint32_t							m_stackSize = 0;
 				int64_t								m_startPrice = 0;
 				int64_t								m_buyoutPrice = 0;
-				AuctionDuration::Id					m_duration;
+				AuctionDuration::Id					m_duration = AuctionDuration::INVALID_ID;
 				int64_t								m_deposit = 0;
 			};
 

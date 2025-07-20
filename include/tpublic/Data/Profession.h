@@ -72,8 +72,8 @@ namespace tpublic
 
 			// Public data
 			std::string				m_string;
-			ProfessionType::Id		m_type;
-			uint32_t				m_iconSpriteId;
+			ProfessionType::Id		m_type = ProfessionType::INVALID_ID;
+			uint32_t				m_iconSpriteId = 0;
 		};
 
 	}
