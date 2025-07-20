@@ -492,6 +492,9 @@ namespace tpublic
 					t.m_armor = multipliers.m_armor;
 				if (multipliers.m_cost > t.m_cost)
 					t.m_cost = multipliers.m_cost;
+				if (multipliers.m_statBudget > t.m_statBudget)
+					t.m_statBudget = multipliers.m_statBudget;
+				// FIXME: should probably update token cost here as well - but it will make all items more expensive. Hmm.
 			}
 			
 			return t;

@@ -865,7 +865,6 @@ sprites:
 	sprite demon_10_dead: { }	
 	sprite crab_4_dead: { }	
 	sprite crab_monster_boss_6_dead: { }	
-
 }
 
 sprites:

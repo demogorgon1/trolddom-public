@@ -30,22 +30,55 @@ namespace tpublic
 		multipliers.m_cost = itemTypeMultipliers.m_cost * equipmentSlotMultipliers.m_cost * rarityMultipliers.m_cost;
 		multipliers.m_weaponDamage = itemTypeMultipliers.m_weaponDamage * equipmentSlotMultipliers.m_weaponDamage * rarityMultipliers.m_weaponDamage;
 		multipliers.m_tokenCost = itemTypeMultipliers.m_tokenCost * equipmentSlotMultipliers.m_tokenCost * rarityMultipliers.m_tokenCost;
+		multipliers.m_statBudget = itemTypeMultipliers.m_statBudget * equipmentSlotMultipliers.m_statBudget * rarityMultipliers.m_statBudget;
 
 		{
 			Stat::Collection statWeights;
 			uint32_t totalStatWeight = 0;
 
 			m_statBudget = (int32_t)m_itemData->m_itemLevel - 1;			
-			m_statBudget = (int32_t)(rarityMultipliers.m_statBudget * (float)m_statBudget);
+			m_statBudget = (int32_t)(multipliers.m_statBudget * (float)m_statBudget);
 
 			_Generate(aManifest, statWeights, totalStatWeight);
 
 			if(totalStatWeight > 0 && m_statBudget > 0)
 			{
+				float statBudgetRemainder = 0.0f;
+				uint32_t maxAddStatIndex = UINT32_MAX;
+				float maxAddStat = 0.0f;
+
 				for(uint32_t i = 1; i < (uint32_t)Stat::NUM_IDS; i++)
 				{
-					const Stat::Info* statInfo = Stat::GetInfo((Stat::Id)i);					
-					m_stats.m_stats[i] += (statWeights.m_stats[i] * (float)m_statBudget) / ((float)totalStatWeight * statInfo->m_budgetCost);
+					float statWeight = statWeights.m_stats[i];
+
+					if(statWeight > 0.0f)
+					{
+						const Stat::Info* statInfo = Stat::GetInfo((Stat::Id)i);
+
+						float normalizedStatWeight = statWeight / (float)totalStatWeight;
+						float budgetToStat = (float)m_statBudget * normalizedStatWeight;
+						float addStat = budgetToStat / statInfo->m_budgetCost;
+						float addStatFloor = floorf(addStat);
+
+						if (addStat > maxAddStat)
+						{
+							maxAddStat = addStat;
+							maxAddStatIndex = i;
+						}
+
+						statBudgetRemainder += (addStat - addStatFloor) * statInfo->m_budgetCost;
+
+						m_stats.m_stats[i] += addStatFloor;
+					}
+				}
+
+				if(maxAddStat > 0.0f && maxAddStatIndex != UINT32_MAX && statBudgetRemainder > 0.0f)
+				{
+					// Use remainder stat budget to increase max stat
+					const Stat::Info* statInfo = Stat::GetInfo((Stat::Id)maxAddStatIndex);
+					float addStat = statBudgetRemainder / statInfo->m_budgetCost;
+					float addStatFloor = floorf(addStat);
+					m_stats.m_stats[maxAddStatIndex] += addStatFloor;
 				}
 			}
 		}
