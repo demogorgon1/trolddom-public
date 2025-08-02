@@ -2,6 +2,24 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.3.3"
+
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "New custom server and offline modes available." }
+		{ text: "Custom server binaries available in install directory." }
+	]
+	
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Fixed item stat budget bug. Most items will have more stats now." }
+	]
+
+	#######################################################################################
 	heading: "v0.3.2"
 
 	text: "Issues fixed:"
