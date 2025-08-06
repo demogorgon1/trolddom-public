@@ -32,16 +32,26 @@ namespace tpublic
 							IReader*			aReader);
 		void			SetDefined(
 							bool				aDefined);
-		void			Add(
+		Entry*			Add(
 							const Entry&		aEntry);
+		void			Set(
+							RealmModifier::Id	aId,
+							const char*			aString);
 		const Entry*	Get(
 							RealmModifier::Id	aId) const;
+		Entry*			Get(
+							RealmModifier::Id	aId);
+		Entry*			GetAutoDefault(
+							RealmModifier::Id	aId);
 		bool			GetFlag(
 							RealmModifier::Id	aId,
 							bool				aDefault) const;
 		float			GetMultiplier(
 							RealmModifier::Id	aId,
 							float				aDefault) const;
+		void			ToggleFlag(
+							RealmModifier::Id	aId);
+		void			PruneDefaults();
 		
 		// Data access
 		bool			IsDefined() const { return m_defined; }
@@ -51,6 +61,12 @@ namespace tpublic
 		uint32_t				m_version = 0;
 		std::vector<Entry>		m_entries;
 		bool					m_defined = false;
+
+		void			_SetString(
+							Entry*				aEntry,
+							const char*			aString) const;
+		bool			_IsDefault(
+							const Entry*		aEntry) const;
 	};
 
 }

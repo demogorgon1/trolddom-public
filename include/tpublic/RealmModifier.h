@@ -26,12 +26,27 @@ namespace tpublic
 				TYPE_MULTIPLIER
 			};
 
+			// Helpers
+			size_t 
+			GetValidOptionIndex(
+				const char*	aString) const
+			{
+				std::string_view t(aString);
+				for(size_t i = 0; i < m_validOptions.size(); i++)
+				{
+					if(t == m_validOptions[i])
+						return i;
+				}
+				return SIZE_MAX;
+			}
+
 			// Public data
 			const char*					m_string;
 			const char*					m_displayName;
 			Type						m_type;
 			std::vector<const char*>	m_validOptions;
 			const char*					m_description;
+			const char*					m_default;
 		};
 
 		// IMPORTANT: Must match Id enum
@@ -39,8 +54,8 @@ namespace tpublic
 		{
 			{ NULL, NULL, Info::INVALID_TYPE, {}, NULL },
 
-			{ "hardcore_mode", "Hardcore Mode", Info::TYPE_FLAG, {}, "Enable permanent death." },
-			{ "xp_multiplier", "XP", Info::TYPE_MULTIPLIER, { "50%", "100%", "150%", "200%", "300%" }, "Increased XP gains." }
+			{ "hardcore_mode", "Hardcore Mode", Info::TYPE_FLAG, { "true", "false" }, "Enable permanent death.", "false" },
+			{ "xp_multiplier", "XP Gain", Info::TYPE_MULTIPLIER, { "50%", "100%", "150%", "200%", "300%" }, "XP gained from kills and quests.", "100%" }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);
