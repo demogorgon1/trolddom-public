@@ -54,7 +54,7 @@ namespace tpublic
 		{
 			{ NULL, NULL, Info::INVALID_TYPE, {}, NULL },
 
-			{ "hardcore_mode", "Hardcore Mode", Info::TYPE_FLAG, { "true", "false" }, "Enable permanent death.", "false" },
+			{ "hardcore_mode", "Hardcore Mode", Info::TYPE_FLAG, { "true", "false" }, "Permanent death.", "false" },
 			{ "xp_multiplier", "XP Gain", Info::TYPE_MULTIPLIER, { "50%", "100%", "150%", "200%", "300%" }, "XP gained from kills and quests.", "100%" }
 		};
 

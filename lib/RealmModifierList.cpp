@@ -215,6 +215,39 @@ namespace tpublic
 		}
 	}
 
+	void			
+	RealmModifierList::GetAsStringArray(
+		std::vector<std::string>&	aOut) const
+	{
+		for (const Entry& t : m_entries)
+		{
+			if (!_IsDefault(&t))
+			{
+				const RealmModifier::Info* info = RealmModifier::GetInfo(t.m_id);
+
+				std::string s;
+
+				switch (info->m_type)
+				{
+				case RealmModifier::Info::TYPE_FLAG:
+					if(t.m_bool)
+						s = info->m_displayName;
+					break;
+
+				case RealmModifier::Info::TYPE_MULTIPLIER:
+					s = Helpers::Format("%s: %.0f%%", info->m_displayName, t.m_float * 100.0f);
+					break;
+
+				default:
+					break;
+				}
+
+				if(!s.empty())
+					aOut.push_back(std::move(s));
+			}
+		}
+	}
+
 	//--------------------------------------------------------------------------------------------------------
 
 	void			

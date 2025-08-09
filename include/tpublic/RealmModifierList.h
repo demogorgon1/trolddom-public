@@ -16,9 +16,9 @@ namespace tpublic
 		struct Entry
 		{
 			void		ToStream(
-							IWriter*			aWriter) const;
+							IWriter*					aWriter) const;
 			bool		FromStream(
-							IReader*			aReader);
+							IReader*					aReader);
 
 			// Public data
 			RealmModifier::Id	m_id = RealmModifier::INVALID_ID;			
@@ -27,31 +27,33 @@ namespace tpublic
 		};
 
 		void			ToStream(
-							IWriter*			aWriter) const;
+							IWriter*					aWriter) const;
 		bool			FromStream(
-							IReader*			aReader);
+							IReader*					aReader);
 		void			SetDefined(
-							bool				aDefined);
+							bool						aDefined);
 		Entry*			Add(
-							const Entry&		aEntry);
+							const Entry&				aEntry);
 		void			Set(
-							RealmModifier::Id	aId,
-							const char*			aString);
+							RealmModifier::Id			aId,
+							const char*					aString);
 		const Entry*	Get(
-							RealmModifier::Id	aId) const;
+							RealmModifier::Id			aId) const;
 		Entry*			Get(
-							RealmModifier::Id	aId);
+							RealmModifier::Id			aId);
 		Entry*			GetAutoDefault(
-							RealmModifier::Id	aId);
+							RealmModifier::Id			aId);
 		bool			GetFlag(
-							RealmModifier::Id	aId,
-							bool				aDefault) const;
+							RealmModifier::Id			aId,
+							bool						aDefault) const;
 		float			GetMultiplier(
-							RealmModifier::Id	aId,
-							float				aDefault) const;
+							RealmModifier::Id			aId,
+							float						aDefault) const;
 		void			ToggleFlag(
-							RealmModifier::Id	aId);
+							RealmModifier::Id			aId);
 		void			PruneDefaults();
+		void			GetAsStringArray(
+							std::vector<std::string>&	aOut) const;
 		
 		// Data access
 		bool			IsDefined() const { return m_defined; }
@@ -63,10 +65,10 @@ namespace tpublic
 		bool					m_defined = false;
 
 		void			_SetString(
-							Entry*				aEntry,
-							const char*			aString) const;
+							Entry*						aEntry,
+							const char*					aString) const;
 		bool			_IsDefault(
-							const Entry*		aEntry) const;
+							const Entry*				aEntry) const;
 	};
 
 }
