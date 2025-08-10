@@ -71,7 +71,8 @@ namespace tpublic
 				FIELD_LATEST_CHARACTER_FIX_ID,
 				FIELD_CLASS_VERSION,
 				FIELD_KNOWS_RIDING,
-				FIELD_LOOT_COOLDOWNS
+				FIELD_LOOT_COOLDOWNS,
+				FIELD_NON_HARDCORE_FLAG,
 			};
 
 			static void
@@ -91,6 +92,7 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_CLASS_VERSION, NULL, offsetof(PlayerPrivate, m_classVersion));
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_KNOWS_RIDING, NULL, offsetof(PlayerPrivate, m_knowsRiding));
 				aSchema->DefineCustomObjectNoSource<LootCooldowns>(FIELD_LOOT_COOLDOWNS, offsetof(PlayerPrivate, m_lootCooldowns));
+				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_NON_HARDCORE_FLAG, NULL, offsetof(PlayerPrivate, m_nonHardcoreFlag));
 
 				aSchema->OnRead<PlayerPrivate>([](
 					PlayerPrivate*				aPlayerPrivate,
@@ -119,6 +121,7 @@ namespace tpublic
 				m_classVersion = 0;
 				m_knowsRiding = false;
 				m_lootCooldowns.Reset();
+				m_nonHardcoreFlag = false;
 
 				m_tryEditPlayerWorlds = false;
 				m_recall = false;
@@ -160,6 +163,7 @@ namespace tpublic
 			uint32_t														m_classVersion = 0;
 			bool															m_knowsRiding = false;
 			LootCooldowns													m_lootCooldowns;
+			bool															m_nonHardcoreFlag = false;
 
 			// Not serialized, internal
 			bool															m_tryEditPlayerWorlds = false;
