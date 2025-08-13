@@ -10,6 +10,7 @@ changelog:
 	[
 		{ text: "New custom server and offline modes available." }
 		{ text: "Custom server binaries available in install directory." }
+		{ text: "Realm modifiers: extra experience gain and hardcore mode (only available in custom server and offline modes)." }
 	]
 	
 	text: "Issues fixed:"
