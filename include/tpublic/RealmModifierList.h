@@ -63,7 +63,6 @@ namespace tpublic
 
 	private:
 
-		uint32_t				m_version = 0;
 		std::vector<Entry>		m_entries;
 		bool					m_defined = false;
 
