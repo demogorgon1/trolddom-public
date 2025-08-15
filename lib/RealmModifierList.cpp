@@ -248,6 +248,18 @@ namespace tpublic
 		}
 	}
 
+	void			
+	RealmModifierList::SetFromConfig(
+		const char*			aRealmModifierString,
+		const char*			aValue)
+	{
+		Entry t;
+		t.m_id = RealmModifier::StringToId(aRealmModifierString);
+		TP_CHECK(t.m_id!= RealmModifier::INVALID_ID, "Invalid realm modifier: %s", aRealmModifierString);
+		_SetString(&t, aValue);
+		m_defined = true;
+	}
+
 	//--------------------------------------------------------------------------------------------------------
 
 	void			

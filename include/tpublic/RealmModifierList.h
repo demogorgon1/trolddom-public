@@ -54,13 +54,15 @@ namespace tpublic
 		void			PruneDefaults();
 		void			GetAsStringArray(
 							std::vector<std::string>&	aOut) const;
+		void			SetFromConfig(
+							const char*					aRealmModifierString,
+							const char*					aValue);
 		
 		// Data access
 		bool			IsDefined() const { return m_defined; }
 
 	private:
 
-		uint32_t				m_version = 0;
 		std::vector<Entry>		m_entries;
 		bool					m_defined = false;
 

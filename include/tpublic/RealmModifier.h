@@ -53,7 +53,7 @@ namespace tpublic
 		// IMPORTANT: Must match Id enum
 		static const Info INFO[] =
 		{
-			{ NULL, NULL, Info::INVALID_TYPE, {}, NULL },
+			{ NULL, NULL, Info::INVALID_TYPE, {}, NULL, NULL },
 
 			{ "hardcore_mode", "Hardcore Mode", Info::TYPE_FLAG, { "true", "false" }, "Permanent death.", "false", false },
 			{ "xp_multiplier", "XP Gain", Info::TYPE_MULTIPLIER, { "50%", "100%", "150%", "200%", "300%" }, "XP gained from kills and quests.", "100%", true }
