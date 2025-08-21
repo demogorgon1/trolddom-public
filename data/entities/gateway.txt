@@ -272,6 +272,8 @@ entity voraghul_portal_closed:
 {
 	string: "Realm of Voraghul" 
 	
+	systems: [ openable ]
+	
 	components:
 	{
 		position: { }		

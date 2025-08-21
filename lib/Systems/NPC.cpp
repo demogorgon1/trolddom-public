@@ -170,7 +170,7 @@ namespace tpublic::Systems
 		}
 
 		bool despawnOnLeaveState = state != NULL && state->m_despawnOnLeave;	
-		uint32_t despawnAfterTicks = state != NULL && state->m_despawnAfterTicks;
+		uint32_t despawnAfterTicks = state != NULL ? state->m_despawnAfterTicks : 0;
 
 		if(despawnAfterTicks != 0 && (uint32_t)aTicksInState > despawnAfterTicks)
 			return EntityState::ID_DESPAWNING;

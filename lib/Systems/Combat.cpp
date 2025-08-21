@@ -211,7 +211,7 @@ namespace tpublic::Systems
 				if(aura->m_encounterId != 0 && !aContext->m_worldView->WorldViewIsEncounterActive(aura->m_encounterId))
 					entry->m_cancel = true;
 
-				if(entry->m_cancel || (!entry->m_noEffects && entry->m_effects.size() == 0) || (entry->m_end != 0 && aContext->m_tick >= entry->m_end))
+				if(entry->m_cancel || (!entry->m_noEffects && entry->m_effects.size() == 0) || (entry->m_end != 0 && aContext->m_tick > entry->m_end))
 				{
 					for(std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
 						effect->OnFade(entry->m_sourceEntityInstance, aEntityInstanceId, aContext, GetManifest());

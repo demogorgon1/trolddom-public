@@ -2,6 +2,19 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.3.4"
+
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Fixed crash when dragging equipped item to empty inventory or stash slot." }
+		{ text: "Fixed bug where Demonic Spawn in Tower of Voraghul would despawn immediately." }
+		{ text: "Fixed bug where the quest Chasing Voraghul couldn't be completed." }
+		{ text: "Fixed bug where last tick from damage-over-time and heal-over-time spells didn't resolve." }
+	]
+
+	#######################################################################################
 	heading: "v0.3.3"
 
 	text: "Changes:"
