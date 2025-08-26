@@ -168,3 +168,7 @@ map_entity_spawn homunculus:
 	entity homunculus: { init_state: default } 
 }
 
+map_entity_spawn standing_stone:
+{
+	entity standing_stone: { init_state: default }
+}

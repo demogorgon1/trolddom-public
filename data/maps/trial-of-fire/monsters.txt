@@ -209,9 +209,20 @@
 			_sprite: demon_9
 			_sprite_dead: demon_9_dead
 			_abilities: [ { id: npc_firebolt }{ id: npc_attack } ]
-			_in_combat_barks: [ { type: yell text: "You will not enter the rift!" flags: [ no_chat_bubble ] } ]				
+			_in_combat_barks: [ { type: yell text: "You will not enter my rift!" flags: [ no_chat_bubble ] } ]				
 			_spawn_barks: [ { type: yell text: "Destroy the intruders!" flags: [ no_chat_bubble instance ] } ]				
 			_default_behavior_state: .survival_boss	
+	
+			_dead_on_enter_ability: $ability
+			{
+				flags: [ target_self can_target_dead ]
+				icon: icon_stuff	
+				direct_effect spawn_entity:
+				{
+					entity: voraghul_portal_rift
+					spawn_flags: [ no_owner nearby detached ]
+				}					
+			}	
 	
 			_global_aura: $aura
 			{

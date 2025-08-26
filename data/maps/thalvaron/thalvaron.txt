@@ -15,6 +15,8 @@ map_player_spawn thalvaron_the_shrouded_lands_underworld_return: { }
 map_player_spawn thalvaron_blimcraft_highborne_3_portal_spawn: { }
 map_player_spawn thalvaron_blimcraft_highborne_3_portal_return_spawn: { }
 
+map_player_spawn thalvaron_realm_of_fire_return_spawn: { }
+
 zone .valoris: { string: "Valoris" }
 zone .valoris_south: { string: "Fernwick Hills" }
 zone .valoris_south_mountains: { string: "Clearview Slopes" }
@@ -392,6 +394,7 @@ map_palette .stuff:
 	entity_spawn seagull: [ 139 141 21 ]	
 	entity_spawn duck: [ 239 141 221 ]	
 	entity_spawn homunculus: [ 100 32 177 ]
+	entity_spawn standing_stone: [ 209 44 77 ]
 		
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn thalvaron_wizard_realm_spawn: [ 42 157 85 ]
@@ -405,6 +408,7 @@ map_palette .stuff:
 	player_spawn thalvaron_blimcraft_highborne_3_portal_return_spawn: [ 140 105 130 ]
 	player_spawn thalvaron_durgan_urok_exit: [ 114 124 144 ]
 	player_spawn thalvaron_trial_of_fire_return_spawn: [ 149 99 100 ]
+	player_spawn thalvaron_realm_of_fire_return_spawn: [ 99 134 105 ]
 
 	portal thalvaron_lich_tower_entrance: [ 144 188 94 ]
 	portal thalvaron_valoris_insurgency_entrance: [ 144 88 92 ]

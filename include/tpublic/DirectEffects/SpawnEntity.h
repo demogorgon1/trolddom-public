@@ -21,7 +21,8 @@ namespace tpublic
 				SPAWN_FLAG_AT_AOE_TARGET		= 0x08,
 				SPAWN_FLAG_SOURCE_THREAT_TARGET = 0x10,
 				SPAWN_FLAG_DETACHED				= 0x20,
-				SPAWN_FLAG_DESPAWN_SOURCE		= 0x40
+				SPAWN_FLAG_DESPAWN_SOURCE		= 0x40,
+				SPAWN_FLAG_NEARBY				= 0x80
 			};
 
 			static uint8_t
@@ -47,6 +48,8 @@ namespace tpublic
 						flags |= SPAWN_FLAG_DETACHED;
 					else if (strcmp(string, "despawn_source") == 0)
 						flags |= SPAWN_FLAG_DESPAWN_SOURCE;
+					else if (strcmp(string, "nearby") == 0)
+						flags |= SPAWN_FLAG_NEARBY;
 					else
 						TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid spawn flag.", string);
 				});

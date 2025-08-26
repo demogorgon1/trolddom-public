@@ -115,7 +115,7 @@ namespace tpublic::DirectEffects
 	DirectEffectBase::Result
 	SpawnEntity::Resolve(
 		int32_t							/*aTick*/,
-		std::mt19937&					/*aRandom*/,
+		std::mt19937&					aRandom,
 		const Manifest*					aManifest,
 		CombatEvent::Id					/*aId*/,
 		uint32_t						/*aAbilityId*/,
@@ -188,6 +188,9 @@ namespace tpublic::DirectEffects
 				spawnedEntityPosition->m_position = aAOETarget;
 			else
 				spawnedEntityPosition->m_position = aSource->GetComponent<Components::Position>()->m_position;
+
+			if (m_spawnFlags & SPAWN_FLAG_NEARBY)
+				spawnedEntityPosition->m_position = aWorldView->WorldViewGetNearbyFreePosition(spawnedEntityPosition->m_position, 1, aRandom);
 		}
 
 		if((m_spawnFlags & SPAWN_FLAG_NO_OWNER) == 0)

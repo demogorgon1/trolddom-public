@@ -69,6 +69,10 @@ namespace tpublic
 		virtual bool								WorldViewIsSurvivalActive() const = 0;
 		virtual Survival::State						WorldViewGetSurvivalState() const = 0;
 		virtual const std::unordered_set<uint32_t>&	WorldViewGetGlobalAuras() const = 0;
+		virtual Vec2								WorldViewGetNearbyFreePosition(
+														const Vec2&				aPosition,
+														int32_t					aRadius,
+														std::mt19937&			aRandom) const = 0;
 	};
 
 }

@@ -303,3 +303,59 @@ entity voraghul_portal_closed:
 		}	
 	}
 }
+
+entity voraghul_portal_rift:
+{
+	string: "Realm of Voraghul" 
+	
+	components:
+	{
+		position: { }		
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ orange_gateway_1 orange_gateway_2 orange_gateway_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+		gateway: 
+		{ 
+			maps: [ { map: realm_of_fire } ]
+			schedule: none
+		}
+	}
+}
+
+entity voraghul_portal_return_portal:
+{
+	string: "Thalvaron" 
+	
+	components:
+	{
+		position: { }		
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ orange_gateway_1 orange_gateway_2 orange_gateway_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+		gateway: 
+		{ 
+			maps: [ { map: thalvaron map_player_spawn: thalvaron_realm_of_fire_return_spawn } ]
+			schedule: none
+		}
+	}
+}
