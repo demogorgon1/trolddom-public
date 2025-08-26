@@ -3,10 +3,26 @@
 	.lavacrawler
 ]
 
+!define TRIAL_OF_FIRE_ROCK_ELEMENTALS
+[ 
+	.volcanic_rock_shambler
+]
+
+!define TRIAL_OF_FIRE_SATYRS
+[ 
+	.satyr_rogue
+	.satyr_hunter
+]
+
 !define TRIAL_OF_FIRE_CONDITIONAL_ENTITY_MAP
 {
 	.lavacrawler<.lavacrawler_elite>: party
 	.fireclaw<.fireclaw_elite>: party
+	.volcanic_rock_shambler<.volcanic_rock_shambler_elite>: party
+	.basaltis<.basaltis_elite>: party
+	.satyr_rogue<.satyr_rogue_elite>: party
+	.satyr_hunter<.satyr_hunter_elite>: party
+	.rift_keeper<.rift_keeper_elite>: party
 }
 
 {
@@ -70,4 +86,156 @@
 		entity .fireclaw: !NPC { }
 		entity .fireclaw_elite: !NPC { _elite: true }
 	}
+	
+	##############################################################################
+	# Volcanic Rock Shambler
+	{
+		${
+			_string: "Volcanic Rock Shambler" 
+			_creature_type: elemental
+			_weapon_damage: 0.46
+			_resource_health: 0.55		
+			_sprite: rock_elemental_2
+			_sprite_dead: rock_elemental_2_dead 
+			_abilities: [ { id: npc_attack } ]
+		}
+
+		entity .volcanic_rock_shambler: !NPC { }
+		entity .volcanic_rock_shambler_elite: !NPC { _elite: true }
+	}
+	
+	##############################################################################
+	# Basaltis
+	{
+		${
+			_string: "Basaltis" 
+			_creature_type: elemental
+			_weapon_damage: 1.1
+			_resource_health: 1.55		
+			_sprite: rock_elemental_3
+			_sprite_dead: rock_elemental_3_dead
+			_abilities: [ { id: npc_attack } ]
+			_in_combat_barks: [ { type: yell text: "Stone grinds flesh!" flags: [ no_chat_bubble ] } ]				
+			_spawn_barks: [ { type: yell text: "From magma and mountain, I AWAKEN!" flags: [ no_chat_bubble instance ] } ]				
+			_default_behavior_state: .survival_boss	
+	
+			_global_aura: $aura
+			{
+				string: "Skin of Basaltis"
+				description: "Damage taken reduced by 20%."
+				icon: icon_rock_1
+				type: buff
+				flags: [ unique indefinite global ]
+				aura_effect damage_input_modifier:
+				{
+					type_mask: [ all ]
+					multiplier: 0.8
+				}			
+			}
+		}
+
+		entity .basaltis: !NPC { }
+		entity .basaltis_elite: !NPC { _elite: true }
+	}
+
+	##############################################################################
+	# Satyr Rogue
+	{
+		${
+			_string: "Satyr Rogue" 
+			_creature_type: demon
+			_weapon_damage: 0.46
+			_resource_health: 0.55		
+			_sprite: demon_7
+			_sprite_dead: demon_7_dead 
+			_abilities: [ { id: npc_rend target: random_player }{ id: npc_attack } ]
+		}
+		
+		entity .satyr_rogue: !NPC { }
+		entity .satyr_rogue_elite: !NPC { _elite: true }		
+	}
+
+	##############################################################################
+	# Satyr Hunter
+	{
+		${
+			_string: "Satyr Rogue" 
+			_creature_type: demon
+			_weapon_damage: 0.46
+			_resource_health: 0.55		
+			_sprite: demon_8
+			_sprite_dead: demon_8_dead 
+			_abilities: [ { id: npc_shoot }{ id: npc_attack } ]
+		}
+		
+		entity .satyr_hunter: !NPC { }
+		entity .satyr_hunter_elite: !NPC { _elite: true }		
+	}
+	
+	##############################################################################
+	# Rift Keeper
+	{
+		aura .rift_keeper_burn:
+		{
+			string: "Burning"
+			description: "Taking damage over time."
+			type: debuff
+			icon: icon_exorcism
+			duration: based_on_effects
+			flags: [ unique magic ]
+
+			aura_effect repeat:
+			{
+				update_interval: 20
+				update_count: 4
+				ability: $ability [ string icon ]
+				{
+					states: [ default in_combat ]
+					flags: [ always_in_range always_in_line_of_sight ]
+					direct_effect damage:
+					{
+						damage_type: fire
+						function: { expression: a a: 9 elite_multiplier: 1.5 }
+					}				
+				}
+			}
+		}		
+	
+		${
+			_string: "Rift Keeper" 
+			_creature_type: demon
+			_weapon_damage: 1.1
+			_resource_health: 1.55		
+			_sprite: demon_9
+			_sprite_dead: demon_9_dead
+			_abilities: [ { id: npc_firebolt }{ id: npc_attack } ]
+			_in_combat_barks: [ { type: yell text: "You will not enter the rift!" flags: [ no_chat_bubble ] } ]				
+			_spawn_barks: [ { type: yell text: "Destroy the intruders!" flags: [ no_chat_bubble instance ] } ]				
+			_default_behavior_state: .survival_boss	
+	
+			_global_aura: $aura
+			{
+				string: "Aura of the Rift Keeper"
+				description: "Attacks and spells cause target to burn for 8 seconds."
+				icon: icon_fury
+				type: buff
+				flags: [ unique indefinite global ]
+				aura_effect combat_event_trigger: 
+				{ 
+					combat_event_ability_mask: [ offensive ]
+					combat_event<source>: [ hit critical ]
+					ability<target>: $ability
+					{
+						states: [ default in_combat ]
+						flags: [ always_in_range always_in_line_of_sight ]					
+						direct_effect apply_aura: {	aura: .rift_keeper_burn	}
+					}
+				}								
+			}
+		}
+
+		entity .rift_keeper: !NPC { }
+		entity .rift_keeper_elite: !NPC { _elite: true }
+	}
+			
 }

@@ -25,7 +25,9 @@ namespace tpublic
 					TYPE_WAVE,
 					TYPE_THREAD_RUN_CONDITION_ENTITY_NOT_DEAD,
 					TYPE_SPAWN_BOSS,
-					TYPE_THREAD_BOSS_MAP_ENTITY_SPAWNS
+					TYPE_THREAD_BOSS_MAP_ENTITY_SPAWNS,
+					TYPE_SET_FLAG,
+					TYPE_THREAD_RUN_CONDITION_FLAG,
 				};			
 
 				Node()
@@ -74,6 +76,15 @@ namespace tpublic
 						{
 							m_type = TYPE_THREAD_BOSS_MAP_ENTITY_SPAWNS;
 							aSource->GetIdArray(DataType::ID_MAP_ENTITY_SPAWN, m_ids);
+						}
+						else if (aSource->m_name == "set_flag")
+						{
+							m_type = TYPE_SET_FLAG; // m_range is flag
+						}
+						else if (aSource->m_name == "thread_run_condition_flag")
+						{
+							m_type = TYPE_THREAD_RUN_CONDITION_FLAG;
+							aSource->GetUIntArray(m_ids);
 						}
 						else
 						{
