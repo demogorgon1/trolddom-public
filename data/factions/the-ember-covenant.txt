@@ -1,0 +1,7 @@
+faction the_ember_covenant:
+{
+	string: "The Ember Covenant"
+	flags: [ friendly reputation show ]
+	default_reputation: !NEUTRAL_REPUTATION{}	
+}
+

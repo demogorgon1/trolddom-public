@@ -593,3 +593,30 @@ item item_token_of_victory:
 	level_range: [ 10 25 ]
 	binds: when_picked_up
 }
+
+#####################################################
+# Realm of Fire talisman
+
+item realm_of_fire_talisman:
+{
+	binds: when_picked_up
+	type: miscellaneous
+	flags: [ unique not_sellable ]
+	item_level: 20
+	rarity: rare
+	icon: icon_fury		
+	string: "Burning Ember Talisman"
+	use_ability: $ability [ icon string ]
+	{
+		description: "Enter the Realm of Voraghul."
+		flags: [ target_self item ]
+		cooldowns: [ global ]	
+		cooldown: $cooldown { duration: 200 }
+		cast_time: 20
+		states: [ default ]
+		sound_effects: !SOUND_INVENTORY{}
+		required_level: 20
+		direct_effect simple<map_transfer>: realm_of_fire
+		requirement self<must_not_be_on_map>: realm_of_fire
+	}	
+}

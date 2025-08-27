@@ -141,6 +141,7 @@ namespace tpublic::DirectEffects
 		case SimpleDirectEffect::ID_ENTITY_COMPASS:
 		case SimpleDirectEffect::ID_SET_MAP_TRIGGER:
 		case SimpleDirectEffect::ID_START_SURVIVAL:
+		case SimpleDirectEffect::ID_MAP_TRANSFER:
 			aCombatResultQueue->AddSimpleDirectEffect(aSourceEntityInstance, target->GetEntityInstanceId(), m_id, m_param);
 			break;
 

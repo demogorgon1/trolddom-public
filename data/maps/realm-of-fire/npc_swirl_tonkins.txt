@@ -1,0 +1,57 @@
+dialogue_screen .swirl_tonkins_greetings:
+{
+	text: 
+	[	
+		"Oh, hello. Didn't expect anyone to show up here."
+	]				
+	
+	options:
+	[
+		{ quest<offer_only>: realm_of_fire_swirl_tonkins_1 }
+	]
+}
+
+dialogue_root .swirl_tonkins_dialogue:
+{
+	.swirl_tonkins_greetings: { }
+}
+
+entity .swirl_tonkins: !NPC
+{
+	_string: "Swirl Tonkins"
+	_dialogue_root: .swirl_tonkins_dialogue
+	_loot_table: .npc
+	_faction: the_ember_covenant
+	_level: 22
+	_creature_type: humanoid
+	_not_pushable: true
+	_sprite: man_74
+	_sprite_dead: man_74_dead
+}
+	
+##########################################################################################
+# Quest 1
+
+quest realm_of_fire_swirl_tonkins_1:
+{
+	string: "Planar Attunement"
+
+	text:
+	[
+		"Use the portal to return to Thalvaron and find Ghorm in Valoris."
+	]
+	
+	description: 
+	[
+		"Now that you've entered this realm, your spirit has become attuned. This will make it easier for you to return here later if you wish to. Seek out Ghorm, an old friend of mine, who lives in Valoris. He can"
+		"help provide you a talisman that will help you. The portal here will take out you to Thalvaron."
+	]
+	
+	completion:
+	[
+		"You got attuned to the Realm of Voraghul? Excellent. This talisman should work for you. If Mr. Tonkins sent you it must be important."
+	]
+
+	level: 22
+	reward_all_items: [ realm_of_fire_talisman ]
+}

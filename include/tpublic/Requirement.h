@@ -62,7 +62,9 @@ namespace tpublic
 			TYPE_MUST_NOT_BE_DISCIPLE,
 			TYPE_MUST_NOT_HAVE_DISCOVERED_ZONE,
 			TYPE_MUST_NOT_HAVE_STARTED_SURVIVAL,
-			TYPE_MUST_HAVE_STARTED_SURVIVAL
+			TYPE_MUST_HAVE_STARTED_SURVIVAL,
+			TYPE_MUST_NOT_BE_ON_MAP,
+			TYPE_MUST_BE_ON_MAP
 		};
 
 		static DataType::Id
@@ -119,6 +121,10 @@ namespace tpublic
 			case TYPE_MUST_HAVE_LESS_HEALTH_THAN:
 			case TYPE_MUST_HAVE_MORE_RAGE_THAN:
 				return DataType::INVALID_ID;
+
+			case TYPE_MUST_BE_ON_MAP:
+			case TYPE_MUST_NOT_BE_ON_MAP:
+				return DataType::ID_MAP;
 
 			default:
 				break;
@@ -264,6 +270,10 @@ namespace tpublic
 				m_type = TYPE_MUST_NOT_HAVE_STARTED_SURVIVAL;
 			else if (typeString == "must_have_started_survival")
 				m_type = TYPE_MUST_HAVE_STARTED_SURVIVAL;
+			else if(typeString == "must_not_be_on_map")
+				m_type = TYPE_MUST_NOT_BE_ON_MAP;
+			else if (typeString == "must_be_on_map")
+				m_type = TYPE_MUST_BE_ON_MAP;
 			else
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid type.", aSource->m_annotation->GetIdentifier());
 

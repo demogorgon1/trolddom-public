@@ -859,12 +859,16 @@ sprites:
 	sprite demon_10: { dead: demon_10_dead }
 	sprite crab_4: { dead: crab_4_dead }
 	sprite crab_monster_boss_6: { dead: crab_monster_boss_6_dead }
+	sprite man_74: { dead: man_74_dead }
+	sprite dwarf_20: { dead: dwarf_20_dead }
 	
 	cursor: { position: [ 0 752 ] }
 	sprite orc_15_dead: { }	
 	sprite demon_10_dead: { }	
 	sprite crab_4_dead: { }	
 	sprite crab_monster_boss_6_dead: { }	
+	sprite man_74_dead: { }	
+	sprite dwarf_20_dead: { }	
 }
 
 sprites:

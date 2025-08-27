@@ -134,6 +134,8 @@ namespace tpublic
 				m_useAbilityExtendedFlags = 0;
 				m_notifyLearnedRiding = false;
 				m_entityCompassEvent.reset();
+				m_pendingMapTransfer.reset();
+				m_mapId = 0;
 			}
 
 			bool
@@ -166,6 +168,7 @@ namespace tpublic
 			bool															m_nonHardcoreFlag = false;
 
 			// Not serialized, internal
+			uint32_t														m_mapId = 0;
 			bool															m_tryEditPlayerWorlds = false;
 			bool															m_recall = false;
 			uint32_t														m_xpGain = 0;
@@ -189,6 +192,14 @@ namespace tpublic
 			uint32_t														m_useAbilityExtendedFlags = 0;
 
 			std::vector<uint32_t>											m_incrementCharacterStatIds;
+
+			struct PendingMapTransfer
+			{
+				uint32_t													m_mapId = 0;
+				uint32_t													m_mapPlayerSpawnId = 0;
+			};
+
+			std::optional<PendingMapTransfer>								m_pendingMapTransfer;
 		};
 	}
 

@@ -1,0 +1,26 @@
+dialogue_screen .ghorm:
+{
+	text: 
+	[	
+		"How are you doing?"
+	]			
+	
+	options:
+	[
+		{ quest<completion_only>: realm_of_fire_swirl_tonkins_1 }
+	]
+}
+
+entity thalvaron_ghorm: !NPC
+{
+	_string: "Ghorm"
+	_dialogue_root: $dialogue_root { .ghorm: { } }
+	_sprite: dwarf_20
+	_sprite_dead: dwarf_20_dead
+	_level: 20
+	_faction: the_ember_covenant		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

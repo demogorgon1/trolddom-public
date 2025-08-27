@@ -476,6 +476,22 @@ namespace tpublic
 				}
 				break;
 
+			case Requirement::TYPE_MUST_BE_ON_MAP:
+			case Requirement::TYPE_MUST_NOT_BE_ON_MAP:
+				{
+					if (!entity->IsPlayer())
+						return false;
+
+					const Components::PlayerPrivate* playerPrivate = entity->GetComponent<Components::PlayerPrivate>();
+
+					bool shouldBeOnMap = aRequirement->m_type == Requirement::TYPE_MUST_BE_ON_MAP;
+					bool isOnMap = playerPrivate->m_mapId == aRequirement->m_id;
+
+					if(shouldBeOnMap != isOnMap)
+						return false;
+				}
+				break;
+
 			default:
 				assert(false);
 				break;

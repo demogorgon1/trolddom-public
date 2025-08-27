@@ -221,6 +221,7 @@ map_entity_spawn thalvaron_blimcraft_assistant: { entity thalvaron_blimcraft_ass
 map_entity_spawn thalvaron_gateway_2: { entity gateway_2: { init_state: default } }
 map_entity_spawn thalvaron_tailoring_trainer: { entity thalvaron_tailoring_trainer: { init_state: default } }
 map_entity_spawn thalvaron_jim_farseer: { entity thalvaron_jim_farseer: { init_state: default } }
+map_entity_spawn thalvaron_ghorm: { entity thalvaron_ghorm: { init_state: default } }
 
 # N
 map_entity_spawn thalvaron_ranger_fremalt: { entity thalvaron_ranger_fremalt: { init_state: default } }
@@ -561,6 +562,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_tailoring_trainer: [ 30 130 33 ]
 	entity_spawn thalvaron_jim_farseer: [ 40 82 176 ]
 	entity_spawn voraghul_portal_closed: [ 206 102 91 ]
+	entity_spawn thalvaron_ghorm: [ 30 104 230 ]
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				
