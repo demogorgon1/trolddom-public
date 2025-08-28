@@ -1,6 +1,11 @@
 map_player_spawn .player_spawn: { }
 
 zone .realm_of_voraghul_landing: { string: "Realm of Voraghul" }
+zone .smoldering_fields: { string: "Smoldering Fields" }
+zone .burning_approach: { string: "The Burning Approach" }
+zone .courtyard_of_voraghul: { string: "Courtyard of Voraghul" }
+zone .fiery_rift: { string: "Fiery Rift" }
+zone .desolate_plains: { string: "Desolate Plains" }
 	
 route realm_of_fire_default_patrol: { }
 
@@ -41,6 +46,8 @@ map_palette .stuff:
 	
 	entity_spawn .exit_portal: [ 130 88 66 ]
 	entity_spawn .swirl_tonkins: [ 30 49 148 ]
+	
+	entity_spawn realm_of_fire_lava_worm: [ 100 39 84 ]
 		
 	player_spawn .player_spawn: [ 0 0 255 ]	
 }
@@ -49,11 +56,19 @@ map_palette .levels:
 {
 	level<22>: [ 0 107 255 ]
 	level<23>: [ 130 107 255 ]
+	level<24>: [ 255 155 107 ]
+	level<25>: [ 255 107 236 ]
 }
 
 map_palette .zones:
 {
 	zone .realm_of_voraghul_landing: [ 0 255 255 ]
+	zone .smoldering_fields: [ 255 173 0 ]	
+	zone .burning_approach: [ 58 255 0 ]
+	zone .courtyard_of_voraghul: [ 123 0 255 ]
+	zone .fiery_rift: [ 0 74 255 ]
+	zone .desolate_plains: [ 255 0 189 ]
+	
 }
 
 map_palette .sub_zones:

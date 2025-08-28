@@ -186,7 +186,7 @@ doodad jungle_plant: !GROUND_AUTO_DOODAD { _sprites: [ doodad_jungle_1 doodad_ju
 doodad pier_edge:
 {
 	sprites: [ doodad_pier_edge_1 ]
-	map_palette<"x">: { must_be_one_of: [ water ] }
+	map_palette<"x">: { must_be_one_of: [ water lava lava_b ] }
 	map_palette<"y">: { must_be_one_of: [ wood_floor ] } 
 	map: [ "y"
 	       "x" ]
@@ -198,8 +198,8 @@ doodad pier_edge:
 doodad pier_edge_2:
 {
 	sprites: [ doodad_pier_edge_2 ]
-	map_palette<"x">: { must_be_one_of: [ water ] }
-	map_palette<"y">: { must_be_one_of: [ road_1 road_2 ] } 
+	map_palette<"x">: { must_be_one_of: [ water lava lava_b ] }
+	map_palette<"y">: { must_be_one_of: [ road_1 road_2 rock_floor rock_floor_alt_1 rock_floor_alt_2 ] } 
 	map: [ "y"
 	       "x" ]
 	map_offset: [ 0 -1 ]
@@ -210,7 +210,7 @@ doodad pier_edge_2:
 doodad pier_edge_3:
 {
 	sprites: [ doodad_pier_edge_1 ]
-	map_palette<"x">: { must_be_one_of: [ water ] }
+	map_palette<"x">: { must_be_one_of: [ water lava lava_b ] }
 	map_palette<"y">: { must_be_one_of: [ outside_wood_floor_1 ] } 
 	map: [ "y"
 	       "x" ]

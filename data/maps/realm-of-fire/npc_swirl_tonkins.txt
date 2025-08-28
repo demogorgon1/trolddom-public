@@ -8,6 +8,7 @@ dialogue_screen .swirl_tonkins_greetings:
 	options:
 	[
 		{ quest<offer_only>: realm_of_fire_swirl_tonkins_1 }
+		{ quest<completion_only>: thalvaron_ghorm_1 }
 	]
 }
 

@@ -8,6 +8,7 @@ dialogue_screen .ghorm:
 	options:
 	[
 		{ quest<completion_only>: realm_of_fire_swirl_tonkins_1 }
+		{ quest<offer_only>: thalvaron_ghorm_1 }
 	]
 }
 
@@ -24,3 +25,34 @@ entity thalvaron_ghorm: !NPC
 	_not_pushable: true	
 }
 
+##########################################################################################
+# Quest 1
+
+quest thalvaron_ghorm_1:
+{
+	string: "Assisting the Covenant"
+
+	text:
+	[
+		"Use the Burning Ember Talisman and seek out Swirl Tonkins."
+	]
+	
+	description: 
+	[
+		"By sending you to me, Mr. Tonkins shows that he trusts you enough to let you know about our organization, the Ember Covenant. We are a group of like-minded individuals that long have sought out the ancient"
+		"wisdom of Solkara, the queen, ruler of the realm of fire.\n"
+		"\n"
+		"You've already encountered the minions of Voraghul, a mad wizard who has taken residence in the fiery realm, claiming it as his own. We, the covenant, must defeat him. I trust you can help us. Return to"
+		"Mr. Tonkins and offer your assistance. Use your Burning Ember Talisman to leave this realm."
+	]
+		
+	completion:
+	[
+		"Ah, good to see you're back. We got work to do."
+	]
+
+	prerequisites: [ realm_of_fire_swirl_tonkins_1 ]
+	level: 23
+	reward_cash_multiplier: 0.15
+	reward_xp_multiplier: 0.15
+}
