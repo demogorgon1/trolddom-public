@@ -36,18 +36,27 @@ map_cliff .dummy_cliff_2_ramp: { cliff_style: dummy elevation: 2 ramp: true }
 map_palette .tiles: !DEFAULT_TILE_PALETTE{}
 
 map_entity_spawn .exit_portal: { entity voraghul_portal_return_portal: { init_state: default } }
+map_entity_spawn .mining: { spawn_timer: { despawn_required: true } entity mining_cindralite_vein: { init_state: default } }
+map_entity_spawn .herbalism: { spawn_timer: { despawn_required: true } entity herbalism_ashveil: { init_state: default } }
 map_entity_spawn .swirl_tonkins: { entity .swirl_tonkins: { init_state: default } }
+
 
 map_palette .stuff:
 {
-	entity_spawn mining: [ 200 200 200 ]
-	entity_spawn herbalism: [ 0 255 0 ]
 	entity_spawn spirit_stone: [ 0 0 0 ]	
 	
 	entity_spawn .exit_portal: [ 130 88 66 ]
+	entity_spawn .mining: [ 200 200 200 ]
+	entity_spawn .herbalism: [ 0 255 0 ]
 	entity_spawn .swirl_tonkins: [ 30 49 148 ]
 	
 	entity_spawn realm_of_fire_lava_worm: [ 100 39 84 ]
+	entity_spawn realm_of_fire_satyr_caster: [ 200 39 84 ]
+	entity_spawn realm_of_fire_satyr_healer: [ 100 139 84 ]
+	entity_spawn realm_of_fire_satyr_guard: [ 100 39 184 ]
+	entity_spawn realm_of_fire_satyr_rogue: [ 0 239 84 ]
+	entity_spawn realm_of_fire_satyr_ranged: [ 0 39 194 ]
+	entity_spawn realm_of_fire_satyr_random: [ 153 39 194 ]	
 		
 	player_spawn .player_spawn: [ 0 0 255 ]	
 }

@@ -560,7 +560,6 @@ map_entity_spawn thalvaron_skaldrun_demon_spawn: { entity thalvaron_skaldrun_dem
 map_entity_spawn thalvaron_skaldrun_portal_master: { entity thalvaron_skaldrun_portal_master: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_thalkyr: { entity thalvaron_thalkyr: {} spawn_timer: !NPC_RESPAWN_RARE{} }
 
-
 map_entity_spawn thalvaron_skaldrun_satyr: 
 { 
 	entity thalvaron_skaldrun_satyr_a: {} 

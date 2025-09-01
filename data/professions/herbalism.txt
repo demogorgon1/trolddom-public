@@ -179,4 +179,28 @@ profession herbalism<primary>:
 	item item_sylmarel: !GATHER_ITEM { }
 	entity herbalism_sylmarel: !GATHER_ENTITY { }
 
+	#############################################################################
+	# Ashveil
+	${
+		_icon: icon_ashveil
+		_item_string: "Ashveil"
+		_entity_string: "Ashveil"
+		_loot_groups: [ .herbalism_ashveil ]
+		_loot_table: .herbalism_ashveil
+		_profession_skill: 85
+		_sprite: ashveil
+		_item_level: 20
+	}
+
+	loot_group .herbalism_ashveil: { }
+	loot_table .herbalism_ashveil: 
+	{ 
+		slots: 
+		[ 
+			{ possibility: { loot_group: .herbalism_ashveil } } 
+		] 
+	}
+	item item_ashveil: !GATHER_ITEM { }
+	entity herbalism_ashveil: !GATHER_ENTITY { }
+
 }

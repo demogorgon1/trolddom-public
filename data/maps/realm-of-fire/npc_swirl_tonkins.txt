@@ -9,6 +9,7 @@ dialogue_screen .swirl_tonkins_greetings:
 	[
 		{ quest<offer_only>: realm_of_fire_swirl_tonkins_1 }
 		{ quest<completion_only>: thalvaron_ghorm_1 }
+		{ quest: .swirl_tonkins_2 }
 	]
 }
 
@@ -50,9 +51,52 @@ quest realm_of_fire_swirl_tonkins_1:
 	
 	completion:
 	[
-		"You got attuned to the Realm of Voraghul? Excellent. This talisman should work for you. If Mr. Tonkins sent you it must be important."
+		"You got attuned to the Realm of Fire? Excellent. This talisman should work for you. If Mr. Tonkins sent you it must be important."
 	]
 
 	level: 22
 	reward_all_items: [ realm_of_fire_talisman ]
 }
+
+##########################################################################################
+# Quest 2
+
+objective .swirl_tonkins_2:
+{
+	string: "Lava Worms Slain"
+	
+	maps: [ realm_of_fire ]
+	
+	kill_npc: { entities: [ realm_of_fire_lava_worm ] count: 6 }	
+}
+
+quest .swirl_tonkins_2:
+{
+	string: "First Order of Business"
+
+	text:
+	[
+		"Venture to the Smoldering Fields and kill lava worms."
+	]
+	
+	description: 
+	[
+		"Before I'll task you with anything that's actually important, I'd like to see what you're made of. The Smoldering Fields west of here has been overrun with lava worms. They don't have anything"
+		"to do with Voraghul, but they're quite annoying. Go and thin out their numbers."
+	]
+	
+	progress:
+	[
+		"It's getting too hot for you?"
+	]
+	
+	completion:
+	[
+		"Ah, good job."
+	]
+
+	level: 23
+	prerequisites: [ thalvaron_ghorm_1 ]
+	objectives: [ .swirl_tonkins_2 ]
+}
+

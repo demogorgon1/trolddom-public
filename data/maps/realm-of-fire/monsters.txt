@@ -34,3 +34,147 @@ map_entity_spawn realm_of_fire_lava_worm:
 	entity realm_of_fire_lava_worm: !NPC { _string: "Lava Worm" _sprite: snake_3 _sprite_dead: snake_3_dead _level: 23 }
 }
 
+##########################################################################################
+# Satyrs
+
+map_entity_spawn realm_of_fire_satyr_caster: 
+{ 
+	entity realm_of_fire_satyr_caster_23: {} 
+	entity realm_of_fire_satyr_caster_24: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn realm_of_fire_satyr_healer: 
+{ 
+	entity realm_of_fire_satyr_healer_23: {} 
+	entity realm_of_fire_satyr_healer_24: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn realm_of_fire_satyr_guard: 
+{ 
+	entity realm_of_fire_satyr_guard_23: {} 
+	entity realm_of_fire_satyr_guard_24: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn realm_of_fire_satyr_rogue: 
+{ 
+	entity realm_of_fire_satyr_rogue_23: {} 
+	entity realm_of_fire_satyr_rogue_24: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn realm_of_fire_satyr_ranged: 
+{ 
+	entity realm_of_fire_satyr_ranged_23: {} 
+	entity realm_of_fire_satyr_ranged_24: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn realm_of_fire_satyr_random: 
+{ 
+	entity realm_of_fire_satyr_caster_23: {} 
+	entity realm_of_fire_satyr_caster_24: {} 
+	entity realm_of_fire_satyr_healer_23: {} 
+	entity realm_of_fire_satyr_healer_24: {} 
+	entity realm_of_fire_satyr_rogue_23: {} 
+	entity realm_of_fire_satyr_rogue_24: {} 
+	entity realm_of_fire_satyr_ranged_23: {} 
+	entity realm_of_fire_satyr_ranged_24: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Casters
+{
+
+	${		
+		_faction: minions_of_voraghul
+		_creature_type: demon
+		_default_behavior_state: .passive
+		_loot_table: default_demon		
+		_string: "Satyr Sorcerer" 
+		_sprite: demon_9 
+		_sprite_dead: demon_9_dead 
+		_abilities: [ { id: npc_curse target: random_player }{ id: npc_firebolt }{ id: npc_attack } ]
+	}
+
+	entity realm_of_fire_satyr_caster_23: !NPC { _level: 23 }
+	entity realm_of_fire_satyr_caster_24: !NPC { _level: 24 }
+}
+
+# Healer
+{
+
+	${		
+		_faction: minions_of_voraghul
+		_creature_type: demon
+		_default_behavior_state: .passive
+		_loot_table: default_demon		
+		_string: "Satyr Firesoother" 
+		_sprite: demon_12 
+		_sprite_dead: demon_12_dead
+		_abilities: [ { id: npc_heal target: low_health_friend_or_self }{ id: npc_firebolt }{ id: npc_attack } ]
+	}
+
+	entity realm_of_fire_satyr_healer_23: !NPC { _level: 23 }
+	entity realm_of_fire_satyr_healer_24: !NPC { _level: 24 }
+}
+
+# Ranged
+{
+
+	${		
+		_faction: minions_of_voraghul
+		_creature_type: demon
+		_default_behavior_state: .passive
+		_loot_table: default_demon		
+		_string: "Satyr Sorcerer" 
+		_sprite: demon_8 
+		_sprite_dead: demon_8_dead 
+		_abilities: [ { id: npc_shoot }{ id: npc_attack } ]
+	}
+
+	entity realm_of_fire_satyr_ranged_23: !NPC { _level: 23 }
+	entity realm_of_fire_satyr_ranged_24: !NPC { _level: 24 }
+}
+
+# Rogue
+{
+
+	${		
+		_faction: minions_of_voraghul
+		_creature_type: demon
+		_default_behavior_state: .passive
+		_loot_table: default_demon		
+		_string: "Satyr Rogue" 
+		_sprite: demon_7
+		_sprite_dead: demon_7_dead 
+		_abilities: [ { id: npc_attack }{ id: npc_rend }]
+		_resource_health: 0.8
+		_weapon_damage: 1.2
+	}
+
+	entity realm_of_fire_satyr_rogue_23: !NPC { _level: 23 }
+	entity realm_of_fire_satyr_rogue_24: !NPC { _level: 24 }
+}
+
+# Guard
+{
+
+	${		
+		_faction: minions_of_voraghul
+		_creature_type: demon
+		_default_behavior_state: .passive
+		_loot_table: default_demon		
+		_string: "Satyr Guard" 
+		_sprite: demon_11
+		_sprite_dead: demon_11_dead 
+		_abilities: [ { id: npc_attack } ]
+		_resource_health: 1.2
+		_weapon_damage: 0.8
+	}
+
+	entity realm_of_fire_satyr_guard_23: !NPC { _level: 23 }
+	entity realm_of_fire_satyr_guard_24: !NPC { _level: 24 }
+}

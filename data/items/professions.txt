@@ -91,6 +91,15 @@ item item_brontium_ingot:
 	tags: [ blacksmithing ]
 }
 
+item item_cindralite_ingot:
+{
+	item_level: 22
+	icon: icon_cindralite_ingot
+	string: "Cindralite Ingot"
+	stack: 22
+	tags: [ blacksmithing ]
+}
+
 item item_thread:
 {
 	type: miscellaneous

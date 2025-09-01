@@ -1067,6 +1067,8 @@ sprites:
 	sprite orange_gateway_closed_3: { }
 	sprite green_statue: { }
 	sprite green_fragment: { }
+	sprite ashveil: { }
+	sprite cindralite_vein: { }
 
 	cursor: { position: [ 0 112 ] }
 	sprite fire_0: { }

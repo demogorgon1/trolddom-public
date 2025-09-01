@@ -239,4 +239,30 @@ profession mining<primary>:
 		entity mining_brontium_vein: !GATHER_ENTITY { }
 	}
 
+	#############################################################################
+	# Cindralite
+	{
+		${
+			_icon: icon_cindralite_ore
+			_item_string: "Cindralite Ore"
+			_entity_string: "Cindralite Vein"
+			_loot_groups: [ .mining_cindralite ]
+			_loot_table: .mining_cindralite
+			_profession_skill: 85
+			_sprite: cindralite_vein
+			_item_level: 20
+		}
+
+		loot_group .mining_cindralite: { }
+		loot_table .mining_cindralite: 
+		{ 
+			slots: 
+			[ 
+				{ possibility: { loot_group: .mining_cindralite } } 
+			] 
+		}
+		item item_cindralite_ore: !GATHER_ITEM { }
+		entity mining_cindralite_vein: !GATHER_ENTITY { }
+	}
+
 }

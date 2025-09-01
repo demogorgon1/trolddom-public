@@ -34,7 +34,7 @@ quest thalvaron_ghorm_1:
 
 	text:
 	[
-		"Use the Burning Ember Talisman and seek out Swirl Tonkins."
+		"Use the Burning Ember Talisman and return to Swirl Tonkins."
 	]
 	
 	description: 

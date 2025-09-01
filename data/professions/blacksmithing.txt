@@ -83,6 +83,18 @@ ability craft_brontium_ingot: !BLACKSMITHING_CRAFT
 }
 
 #####################################################
+# Cindralite Ingot
+
+ability craft_cindralite_ingot: !BLACKSMITHING_CRAFT
+{
+	_string: "Smelt Cindralite"
+	_item: item_cindralite_ingot
+	_produce: { item_cindralite_ingot: 1 } 
+	_materials: { item_cindralite_ore: 1 }
+	_skill: 60
+	_requires_furnace: true
+}
+#####################################################
 # Copper Bracers
 
 item wrists_copper_bracers:

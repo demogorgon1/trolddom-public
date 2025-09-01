@@ -816,6 +816,9 @@ sprites:
 	sprite icon_magic_dust_4 : { tags: [ icon ] }
 	sprite icon_blue_fire : { tags: [ icon ] }
 	sprite icon_dancing_weapon : { tags: [ icon ] }
+	sprite icon_ashveil : { tags: [ icon ] }
+	sprite icon_cindralite_ore : { tags: [ icon ] }
+	sprite icon_cindralite_ingot : { tags: [ icon ] }
 	
 }
 
