@@ -1,11 +1,13 @@
 map_player_spawn .player_spawn: { }
 
-zone .realm_of_voraghul_landing: { string: "Realm of Voraghul" }
+zone .realm_of_voraghul_landing: { string: "The Charred Verge" }
 zone .smoldering_fields: { string: "Smoldering Fields" }
 zone .burning_approach: { string: "The Burning Approach" }
-zone .courtyard_of_voraghul: { string: "Courtyard of Voraghul" }
+zone .bastion_courtyard: { string: "Bastion Courtyard" }
 zone .fiery_rift: { string: "Fiery Rift" }
 zone .desolate_plains: { string: "Desolate Plains" }
+zone .bastion_of_urt: { string: "Bastion of Urt" }
+zone .altar_of_urt: { string: "Altar of Urt" }
 	
 route realm_of_fire_default_patrol: { }
 
@@ -39,7 +41,12 @@ map_entity_spawn .exit_portal: { entity voraghul_portal_return_portal: { init_st
 map_entity_spawn .mining: { spawn_timer: { despawn_required: true } entity mining_cindralite_vein: { init_state: default } }
 map_entity_spawn .herbalism: { spawn_timer: { despawn_required: true } entity herbalism_ashveil: { init_state: default } }
 map_entity_spawn .swirl_tonkins: { entity .swirl_tonkins: { init_state: default } }
-
+map_entity_spawn .homunculus: { entity .homunculus: { init_state: default } }
+map_entity_spawn .ilhuna: { entity .ilhuna: { init_state: default } }
+map_entity_spawn .ilhuna_1_quest_item_a: { entity .ilhuna_1_quest_item_a: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn .ilhuna_1_quest_item_b: { entity .ilhuna_1_quest_item_b: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn .ilhuna_1_quest_item_c: { entity .ilhuna_1_quest_item_c: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn .ilhuna_1_quest_item_d: { entity .ilhuna_1_quest_item_d: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 
 map_palette .stuff:
 {
@@ -49,6 +56,12 @@ map_palette .stuff:
 	entity_spawn .mining: [ 200 200 200 ]
 	entity_spawn .herbalism: [ 0 255 0 ]
 	entity_spawn .swirl_tonkins: [ 30 49 148 ]
+	entity_spawn .homunculus: [ 30 149 148 ]
+	entity_spawn .ilhuna: [ 130 49 148 ]
+	entity_spawn .ilhuna_1_quest_item_a: [ 253 39 194 ]	
+	entity_spawn .ilhuna_1_quest_item_b: [ 53 239 194 ]	
+	entity_spawn .ilhuna_1_quest_item_c: [ 53 9 123 ]	
+	entity_spawn .ilhuna_1_quest_item_d: [ 0 254 124 ]	
 	
 	entity_spawn realm_of_fire_lava_worm: [ 100 39 84 ]
 	entity_spawn realm_of_fire_satyr_caster: [ 200 39 84 ]
@@ -74,7 +87,7 @@ map_palette .zones:
 	zone .realm_of_voraghul_landing: [ 0 255 255 ]
 	zone .smoldering_fields: [ 255 173 0 ]	
 	zone .burning_approach: [ 58 255 0 ]
-	zone .courtyard_of_voraghul: [ 123 0 255 ]
+	zone .bastion_courtyard: [ 123 0 255 ]
 	zone .fiery_rift: [ 0 74 255 ]
 	zone .desolate_plains: [ 255 0 189 ]
 	
@@ -82,6 +95,8 @@ map_palette .zones:
 
 map_palette .sub_zones:
 {
+	sub_zone .bastion_of_urt: [ 36 204 63 ]
+	sub_zone .altar_of_urt: [ 36 101 204 ]
 }
 
 map_palette .routes:

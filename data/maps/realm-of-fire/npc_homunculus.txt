@@ -1,0 +1,29 @@
+dialogue_screen .homunculus_vendor: !TRADE_SUPPLIES{}
+
+dialogue_screen .homunculus:
+{
+	text: 
+	[	
+		"Glorp?"
+	]				
+	
+	options:
+	[
+		{ goto: .homunculus_vendor text: "Let me browse your goods." }				
+	]
+}
+
+entity .homunculus: !NPC
+{
+	_string: "Glorp"
+	_dialogue_root: $dialogue_root { .homunculus: { } }
+	_loot_table: .npc
+	_faction: the_ember_covenant
+	_level: 22
+	_creature_type: humanoid
+	_not_pushable: true
+	_sprite: homunculus_1
+	_sprite_dead: homunculus_1
+	_critter: $critter { max_distance: 0 } 
+}
+	

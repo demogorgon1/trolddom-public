@@ -55,6 +55,13 @@ namespace tpublic
 				{
 					aPosition->m_positionFlags |= POSITION_FLAG_DEMO_ONLY;
 				});
+
+				aSchema->AddSourceModifier<Position>("large", [](
+					Position*			aPosition,
+					const SourceNode*	/*aSource*/)
+				{
+					aPosition->m_positionFlags |= POSITION_FLAG_LARGE;
+				});
 			}
 
 			void

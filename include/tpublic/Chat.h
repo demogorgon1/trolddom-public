@@ -15,13 +15,15 @@ namespace tpublic
 			INVALID_TYPE,
 
 			TYPE_SAY,
-			TYPE_YELL
+			TYPE_YELL,
+			TYPE_EMOTE
 		};
 
 		enum Flag : uint8_t
 		{
-			FLAG_NO_CHAT_BUBBLE = 0x01,
-			FLAG_INSTANCE = 0x02
+			FLAG_NO_CHAT_BUBBLE		= 0x01,
+			FLAG_INSTANCE			= 0x02,
+			FLAG_NO_SOURCE			= 0x04
 		};
 
 		static Type
@@ -31,8 +33,10 @@ namespace tpublic
 			std::string t(aSource->GetIdentifier());
 			if(t == "say")
 				return TYPE_SAY;
-			else if(t == "yell")
+			else if (t == "yell")
 				return TYPE_YELL;
+			else if (t == "emote")
+				return TYPE_EMOTE;
 			TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid chat type.", aSource->GetIdentifier());
 			return INVALID_TYPE;
 		}
@@ -50,6 +54,8 @@ namespace tpublic
 					flags |= FLAG_NO_CHAT_BUBBLE;
 				else if (aChild->IsIdentifier("instance"))
 					flags |= FLAG_INSTANCE;
+				else if (aChild->IsIdentifier("no_source"))
+					flags |= FLAG_NO_SOURCE;
 				else
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid flag.", aChild->GetIdentifier());
 			});
@@ -63,6 +69,13 @@ namespace tpublic
 		}
 
 		Chat(
+			const SourceNode*		aSource)
+		{
+			FromSource(aSource);
+		}
+
+		void
+		FromSource(
 			const SourceNode*		aSource)
 		{
 			aSource->ForEachChild([&](

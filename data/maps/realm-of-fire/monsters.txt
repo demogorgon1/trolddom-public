@@ -85,6 +85,29 @@ map_entity_spawn realm_of_fire_satyr_random:
 	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
+loot_table .satyr: 
+{
+	slots:
+	[	
+		{ 
+			possibility:
+			{
+				weight: 4
+			}
+		
+			possibility: 
+			{ 
+				weight: 1
+				loot_group: .swirl_tonkins_3_quest_item 
+				requirement self<must_have_active_quest>: .swirl_tonkins_3 
+			} 
+		}
+		
+		!WORLD_DROPS {}
+		!WORLD_DROPS_DEMONS {}									
+	]	
+}
+
 # Casters
 {
 
@@ -92,7 +115,7 @@ map_entity_spawn realm_of_fire_satyr_random:
 		_faction: minions_of_voraghul
 		_creature_type: demon
 		_default_behavior_state: .passive
-		_loot_table: default_demon		
+		_loot_table: .satyr		
 		_string: "Satyr Sorcerer" 
 		_sprite: demon_9 
 		_sprite_dead: demon_9_dead 
@@ -110,7 +133,7 @@ map_entity_spawn realm_of_fire_satyr_random:
 		_faction: minions_of_voraghul
 		_creature_type: demon
 		_default_behavior_state: .passive
-		_loot_table: default_demon		
+		_loot_table: .satyr		
 		_string: "Satyr Firesoother" 
 		_sprite: demon_12 
 		_sprite_dead: demon_12_dead
@@ -128,7 +151,7 @@ map_entity_spawn realm_of_fire_satyr_random:
 		_faction: minions_of_voraghul
 		_creature_type: demon
 		_default_behavior_state: .passive
-		_loot_table: default_demon		
+		_loot_table: .satyr		
 		_string: "Satyr Sorcerer" 
 		_sprite: demon_8 
 		_sprite_dead: demon_8_dead 
@@ -146,7 +169,7 @@ map_entity_spawn realm_of_fire_satyr_random:
 		_faction: minions_of_voraghul
 		_creature_type: demon
 		_default_behavior_state: .passive
-		_loot_table: default_demon		
+		_loot_table: .satyr		
 		_string: "Satyr Rogue" 
 		_sprite: demon_7
 		_sprite_dead: demon_7_dead 
@@ -166,7 +189,7 @@ map_entity_spawn realm_of_fire_satyr_random:
 		_faction: minions_of_voraghul
 		_creature_type: demon
 		_default_behavior_state: .passive
-		_loot_table: default_demon		
+		_loot_table: .satyr		
 		_string: "Satyr Guard" 
 		_sprite: demon_11
 		_sprite_dead: demon_11_dead 

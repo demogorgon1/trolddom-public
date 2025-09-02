@@ -1082,5 +1082,17 @@ sprites:
 		
 }
 
+sprites:
+{
+	source: "large-objects.png"
+
+	size: { width: 32 height: 32 }
+
+	cursor: { position: [ 0 0 ] }
+
+	sprite large_orange_gateway_closed_1: { }
+	sprite large_orange_gateway_closed_2: { }
+	sprite large_orange_gateway_closed_3: { }
+}
 
 

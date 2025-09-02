@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../Chat.h"
 #include "../Component.h"
 #include "../ComponentBase.h"
 #include "../Requirement.h"
@@ -139,7 +140,8 @@ namespace tpublic
 				FIELD_KILL,
 				FIELD_DEAD_DESPAWN_TICKS,
 				FIELD_CONTEXT_HELP,
-				FIELD_SPRITE_INDEX
+				FIELD_SPRITE_INDEX,
+				FIELD_CHATS
 			};
 
 			static void
@@ -168,6 +170,7 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_UNLOCK_MAP_TRIGGER_ID, "unlock_map_trigger", offsetof(Openable, m_unlockMapTriggerId))->SetDataType(DataType::ID_MAP_TRIGGER);
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_CONTEXT_HELP, "context_help", offsetof(Openable, m_contextHelpId))->SetDataType(DataType::ID_CONTEXT_HELP);
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_SPRITE_INDEX, "sprite_index", offsetof(Openable, m_spriteIndex));
+				aSchema->DefineCustomObjects<Chat>(FIELD_CHATS, "chats", offsetof(Openable, m_chats));
 			}
 
 			void
@@ -195,6 +198,7 @@ namespace tpublic
 				m_unlockMapTriggerId = 0;
 				m_contextHelpId = 0;
 				m_spriteIndex = 0;
+				m_chats.clear();
 			}
 
 			// Public data
@@ -220,6 +224,7 @@ namespace tpublic
 			uint32_t					m_unlockMapTriggerId = 0;
 			uint32_t					m_contextHelpId = 0;
 			uint32_t					m_spriteIndex = 0;
+			std::vector<Chat>			m_chats;
 		};
 
 	}
