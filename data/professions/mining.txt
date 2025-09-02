@@ -259,6 +259,7 @@ profession mining<primary>:
 			slots: 
 			[ 
 				{ possibility: { loot_group: .mining_cindralite } } 
+				{ possibility: { weight: 30 } possibility: { weight: 2 loot_group: fire_elementals } possibility: { weight: 1 loot_group: fire_elementals_uncommon } }
 			] 
 		}
 		item item_cindralite_ore: !GATHER_ITEM { }

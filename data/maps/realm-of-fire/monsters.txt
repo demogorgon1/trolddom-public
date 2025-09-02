@@ -201,3 +201,115 @@ loot_table .satyr:
 	entity realm_of_fire_satyr_guard_23: !NPC { _level: 23 }
 	entity realm_of_fire_satyr_guard_24: !NPC { _level: 24 }
 }
+
+# Boss
+{
+
+	${		
+		_faction: minions_of_voraghul
+		_creature_type: demon
+		_default_behavior_state: .passive
+		_loot_table: default_demon		
+		_string: "Commander Ripthork" 
+		_sprite: demon_10
+		_sprite_dead: demon_10_dead 
+		_abilities: [ { id: npc_rend }{ id: npc_mortal_strike_non_instant }{ id: npc_attack } ]
+		_resource_health: 1.9
+		_weapon_damage: 1.1
+	}
+
+	entity realm_of_fire_satyr_boss: !NPC { _level: 24 }
+}
+
+##########################################################################################
+# Elementals
+
+map_entity_spawn realm_of_fire_enslaved_fire_elemental: 
+{ 
+	entity realm_of_fire_enslaved_fire_elemental: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Enslaved fire elemental
+{
+	loot_group .enslaved_fire_elemental: {}
+
+	item .enslaved_fire_elemental_quest_item:
+	{
+		string: "Elemental Binding" 
+		icon: icon_ring_9
+		loot_groups: [ .enslaved_fire_elemental ]
+		item_level: 24
+		flags: [ not_sellable unique ]
+		use_ability: $ability [ string icon ]
+		{
+			description: "This item starts a quest."
+			flags: [ target_self item ]
+			direct_effect simple<start_quest>: .enslaved_fire_elemental
+			states: [ default in_combat ]
+			requirement self<must_not_have_completed_quest>: { id: .enslaved_fire_elemental }
+			requirement self<must_not_have_active_quest>: { id: .enslaved_fire_elemental }
+		}
+	}	
+
+	quest .enslaved_fire_elemental:
+	{
+		string: "Elemental Binding"
+
+		text:
+		[
+			"Bring the elemental binding to Swirl Tonkins."
+		]
+		
+		description: 
+		[
+			"Swirl Tonkins might be interested in this item. Better bring it to him and see what he can make of it."
+		]
+		
+		completion:
+		[
+			"Oh. You got this from a giant fire elemental inside the bastion?"
+		]
+
+		level: 24		
+		quest_items: [ .enslaved_fire_elemental_quest_item ]
+	}
+	
+	${		
+		_faction: monsters
+		_creature_type: elemental
+		_default_behavior_state: .passive
+		_loot_table: $loot_table
+		{
+			slots:
+			[	
+				{ 
+					possibility: 
+					{ 
+						loot_group: .enslaved_fire_elemental
+						requirement self<must_not_have_active_quest>: .enslaved_fire_elemental
+						requirement self<must_not_have_completed_quest>: .enslaved_fire_elemental
+						requirement self<must_not_have_item>: .enslaved_fire_elemental_quest_item
+					} 
+				}
+				
+				!WORLD_DROPS {}
+				!WORLD_DROPS_FIRE_ELEMENTALS {}									
+			]			
+		}
+		_string: "Enslaved Fire Elemental" 
+		_sprite: giant_fire_elemental_1
+		_sprite_dead: giant_fire_elemental_1_dead 
+		_abilities: [ { id: npc_attack } ]
+		_resource_health: 2
+		_weapon_damage: 0.85
+		_large: true
+		_zone: .altar_of_urt
+		_out_of_zone_action: { evade: true }
+		_immune_to_stun: true
+		_immune_to_immobilize: true
+		_immune_to_slow: true		
+	}
+
+	entity realm_of_fire_enslaved_fire_elemental: !NPC { _level: 24 }
+}

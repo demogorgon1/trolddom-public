@@ -11,6 +11,7 @@ dialogue_screen .swirl_tonkins_greetings:
 		{ quest<completion_only>: thalvaron_ghorm_1 }
 		{ quest: .swirl_tonkins_2 }
 		{ quest<offer_only>: .swirl_tonkins_3 }
+		{ quest<completion_only>: .enslaved_fire_elemental }
 	]
 }
 

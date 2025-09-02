@@ -58,6 +58,8 @@ loot_group crocodiles: {}
 loot_group crocodiles_uncommon: {}
 loot_group ghosts: {}
 loot_group ghosts_uncommon: {}
+loot_group fire_elementals: {}
+loot_group fire_elementals_uncommon: {}
 
 !define WORLD_DROPS
 {
@@ -250,6 +252,13 @@ loot_group ghosts_uncommon: {}
 	possibility: { weight: 20 }
 	possibility: { weight: 15 loot_group: ghosts creature_types: [ undead ] }
 	possibility: { weight: 5 loot_group: ghosts_uncommon creature_types: [ undead ] }
+}
+
+!define WORLD_DROPS_FIRE_ELEMENTALS
+{
+	possibility: { weight: 20 }
+	possibility: { weight: 15 loot_group: fire_elementals creature_types: [ elemental ] }
+	possibility: { weight: 5 loot_group: fire_elementals_uncommon creature_types: [ elemental ] }
 }
 
 loot_table default_humanoid: 
@@ -448,5 +457,14 @@ loot_table default_ghost:
 	[
 		!WORLD_DROPS {}
 		!WORLD_DROPS_GHOSTS{}
+	]
+}
+
+loot_table default_fire_elementals:
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+		!WORLD_DROPS_FIRE_ELEMENTALS{}
 	]
 }

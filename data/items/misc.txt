@@ -578,6 +578,34 @@ item item_ectoplasm:
 	tags: [ reagent ]			
 }
 
+item item_elemental_fire:
+{
+	type: miscellaneous
+	item_level: 24
+	level_range: [ 22 30 ]
+	icon: icon_elemental_fire
+	string: "Elemental Fire"
+	rarity: uncommon
+	stack: 10
+	loot_groups: [ fire_elementals_uncommon ]
+	tags: [ reagent ]			
+}
+
+item item_enchanted_coal:
+{
+	type: miscellaneous
+	item_level: 24
+	level_range: [ 22 30 ]
+	icon: icon_enchanted_coal
+	string: "Enchanted Coal"	
+	stack: 10
+	loot_groups: [ fire_elementals ]
+	tags: [ reagent ]			
+}
+
+#####################################################
+# Tokens
+
 loot_group token_of_victory: {}
 
 item item_token_of_victory:

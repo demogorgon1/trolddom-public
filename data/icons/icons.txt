@@ -819,6 +819,8 @@ sprites:
 	sprite icon_ashveil : { tags: [ icon ] }
 	sprite icon_cindralite_ore : { tags: [ icon ] }
 	sprite icon_cindralite_ingot : { tags: [ icon ] }
+	sprite icon_elemental_fire : { tags: [ icon ] }
+	sprite icon_enchanted_coal : { tags: [ icon ] }
 	
 }
 
