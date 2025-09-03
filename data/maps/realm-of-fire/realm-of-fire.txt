@@ -17,6 +17,7 @@ zone .voraghuls_landing: { string: "Voraghul's Landing" }
 zone .throne_of_voraghul: { string: "Throne of Voraghul" no_map: true }
 zone .ruined_tower: { string: "Tower Ruins" }
 zone .magma_pass: { string: "Magma Pass" }
+zone .tower_of_urt: { string: "Tower of Urt" }
 	
 route realm_of_fire_default_patrol: { }
 
@@ -165,6 +166,7 @@ map_palette .stuff:
 	entity_spawn realm_of_fire_enslaved_fire_elemental: [ 7 38 205 ]
 	entity_spawn realm_of_fire_magmacrawler: [ 107 35 109 ]
 	entity_spawn realm_of_fire_magma_elemental: [ 207 35 109 ]	
+	entity_spawn realm_of_fire_fire_elemental: [ 104 95 88 ]
 		
 	player_spawn .player_spawn: [ 0 0 255 ]	
 	player_spawn .throne_of_voraghul_spawn: [ 50 0 255 ]	
@@ -193,6 +195,7 @@ map_palette .zones:
 	zone .voraghuls_landing: [ 142 172 244 ]
 	zone .ruined_tower: [ 142 244 237 ]
 	zone .magma_pass: [ 170 118 175 ]
+	zone .tower_of_urt: [ 205 142 244 ]
 }
 
 map_palette .sub_zones:

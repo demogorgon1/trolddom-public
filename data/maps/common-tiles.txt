@@ -1237,7 +1237,8 @@ sprites:
 	sprite black_rocks_border_17: { }
 	sprite black_rocks_alt_1: { flags: [ tile_block_line_of_sight ] }
 	sprite black_rocks_alt_2: { flags: [ tile_block_line_of_sight ] }	
-	
+	sprite black_rocks_cave_entrance: { flags: [ tile_walkable tile_top ] }
+
 	cursor: { position: [ 0 656 ] }
 	
 	sprite pavement_2: { flags: [ tile_walkable ] borders:

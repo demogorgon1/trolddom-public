@@ -13,6 +13,7 @@ dialogue_screen .swirl_tonkins_greetings:
 		{ quest<offer_only>: .swirl_tonkins_3 }
 		{ quest<completion_only>: .enslaved_fire_elemental }
 		{ quest: .swirl_tonkins_4 }
+		{ quest: .swirl_tonkins_5 }
 	]
 }
 
@@ -213,5 +214,60 @@ quest .swirl_tonkins_4:
 	level: 25
 	prerequisites: [ .enslaved_fire_elemental ]
 	objectives: [ .swirl_tonkins_4 ]
+	next_quest: .swirl_tonkins_5
+}
+
+##########################################################################################
+# Quest 5
+
+loot_group .swirl_tonkins_5_quest_item: {}
+
+item .swirl_tonkins_5_quest_item:
+{
+	icon: icon_ring_15
+	item_level: 25
+	loot_groups: [ .swirl_tonkins_5_quest_item ]
+	flags: [ not_sellable ]
+	string: "Arcane Binding"
+	stack: 6
+}
+
+objective .swirl_tonkins_5:
+{
+	string: "Arcane Bindings"
+	
+	maps: [ realm_of_fire ]
+	
+	collect_items: { item: .swirl_tonkins_5_quest_item count: 6 }
+}
+
+quest .swirl_tonkins_5:
+{
+	string: "Gathering Power of the Arcane"
+
+	text:
+	[
+		"Venture south of the Desolate Plains, obtain bindings from the elementals found there, and return to Swirl Tonkins."
+	]
+	
+	description: 
+	[
+		"We need a few more materials for our weapon against Voraghul. The elemental binding you returned to me earlier was useful, but we need more. The lava south of the Desolate Plains is full of"
+		"fire elementals, corrupted by Voraghul. Return their bindings to me."
+	]
+	
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Excellent."
+	]
+
+	level: 25
+	prerequisites: [ .swirl_tonkins_4 ]
+	objectives: [ .swirl_tonkins_5 ]
 }
 

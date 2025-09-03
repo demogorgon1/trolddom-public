@@ -259,6 +259,13 @@ map_entity_spawn realm_of_fire_magma_elemental:
 	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
+map_entity_spawn realm_of_fire_fire_elemental: 
+{ 
+	entity realm_of_fire_fire_elemental_a: {} 
+	entity realm_of_fire_fire_elemental_b: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
 # Enslaved fire elemental
 {
 	loot_group .enslaved_fire_elemental: {}
@@ -343,7 +350,7 @@ map_entity_spawn realm_of_fire_magma_elemental:
 	entity realm_of_fire_enslaved_fire_elemental: !NPC { _level: 24 }
 }
 
-# Magma Elemental
+# Magma elementals
 {
 	${		
 		_creature_type: elemental
@@ -352,7 +359,7 @@ map_entity_spawn realm_of_fire_magma_elemental:
 		_resource_health: 1.1
 		_weapon_damage: 0.9
 		_level: 25
-		_faction: monsters
+		_faction: minions_of_voraghul
 		_loot_table: $loot_table
 		{
 			slots:
@@ -377,6 +384,43 @@ map_entity_spawn realm_of_fire_magma_elemental:
 		}
 	}
 
-	entity realm_of_fire_magma_elemental_a: !NPC { _sprite: fire_elemental_3 _sprite_dead: fire_elemental_3_dead _abilities: [ { id: npc_attack } ] }
-	entity realm_of_fire_magma_elemental_b: !NPC { _sprite: fire_elemental_4 _sprite_dead: fire_elemental_4_dead _abilities: [ { id: npc_fireball } { id: npc_attack } ] }
+	entity realm_of_fire_magma_elemental_a: !NPC { _sprite: fire_elemental_4 _sprite_dead: fire_elemental_4_dead _abilities: [ { id: npc_attack } ] }
+	entity realm_of_fire_magma_elemental_b: !NPC { _sprite: fire_elemental_3 _sprite_dead: fire_elemental_3_dead _abilities: [ { id: npc_fireball } { id: npc_attack } ] }
+}
+
+# Fire Elemental
+{
+	${		
+		_creature_type: elemental
+		_default_behavior_state: .wandering_short		 			
+		_resource_health: 1.1
+		_weapon_damage: 0.9
+		_level: 25
+		_faction: minions_of_voraghul
+		_loot_table: $loot_table
+		{
+			slots:
+			[	
+				{ 
+					possibility:
+					{
+						weight: 1
+					}
+				
+					possibility: 
+					{ 
+						weight: 2
+						loot_group: .swirl_tonkins_5_quest_item 
+						requirement self<must_have_active_quest>: .swirl_tonkins_5
+					} 
+				}
+				
+				!WORLD_DROPS {}
+				!WORLD_DROPS_FIRE_ELEMENTALS {}									
+			]	
+		}
+	}
+
+	entity realm_of_fire_fire_elemental_a: !NPC { _string: "Blaze Warden" _sprite: fire_elemental_1 _sprite_dead: fire_elemental_1_dead _abilities: [ { id: npc_attack } ] }
+	entity realm_of_fire_fire_elemental_b: !NPC { _string: "Flamecaster" _sprite: fire_elemental_2 _sprite_dead: fire_elemental_2_dead _abilities: [ { id: npc_fireball } { id: npc_attack } ] }
 }

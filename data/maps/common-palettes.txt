@@ -113,5 +113,6 @@
 	tile lava: [ 240 180 32 ]	
 	tile lava_b: [ 240 230 32 ]	
 	tile dark_rocky_dirt: [ 90 130 32 ]	
+	tile black_rocks_cave_entrance: [ 166 3 149 ]
 	
 }
