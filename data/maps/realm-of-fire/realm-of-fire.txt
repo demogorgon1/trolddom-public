@@ -1,14 +1,22 @@
 map_player_spawn .player_spawn: { }
 
+map_player_spawn .throne_of_voraghul_spawn: { }
+map_player_spawn .throne_of_voraghul_return_spawn: { }
+
 zone .realm_of_voraghul_landing: { string: "The Charred Verge" }
 zone .smoldering_fields: { string: "Smoldering Fields" }
 zone .burning_approach: { string: "The Burning Approach" }
 zone .bastion_courtyard: { string: "Bastion Courtyard" }
-zone .fiery_rift: { string: "Fiery Rift" }
+zone .fiery_rift: { string: "Fiery Crevice " }
 zone .desolate_plains: { string: "Desolate Plains" }
 zone .bastion_of_urt: { string: "Bastion of Urt" }
 zone .altar_of_urt: { string: "Altar of Urt" }
 zone .satyr_altar: { string: "Satyr Altar" }
+zone .the_infernal_flow: { string: "The Infernal Flow" }
+zone .voraghuls_landing: { string: "Voraghul's Landing" }
+zone .throne_of_voraghul: { string: "Throne of Voraghul" no_map: true }
+zone .ruined_tower: { string: "Tower Ruins" }
+zone .magma_pass: { string: "Magma Pass" }
 	
 route realm_of_fire_default_patrol: { }
 
@@ -21,6 +29,78 @@ npc_behavior_state realm_of_fire_default_patrol_friendly:
 npc_behavior_state realm_of_fire_default_patrol:
 {
 	behavior: patrolling
+}
+
+entity .throne_of_voraghul_portal:
+{
+	string: "Portal"	
+	systems: [ openable ]	
+	components:
+	{
+		position: { }		
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ orange_gateway_1 orange_gateway_2 orange_gateway_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+				
+		openable: 
+		{ 
+			verb: use
+			range: 1 
+			level: 25
+			trigger_ability: $ability
+			{
+				states: [ default ]
+				direct_effect move: { map_player_spawn: .throne_of_voraghul_spawn move_flags: [ set_teleported affect_target ] }
+			}			
+			instant: true
+		}	
+	}
+}
+
+entity .throne_of_voraghul_return_portal:
+{
+	string: "Portal"	
+	systems: [ openable ]	
+	components:
+	{
+		position: { }		
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ orange_gateway_1 orange_gateway_2 orange_gateway_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+				
+		openable: 
+		{ 
+			verb: use
+			range: 1 
+			level: 26
+			trigger_ability: $ability
+			{
+				states: [ default ]
+				direct_effect move: { map_player_spawn: .throne_of_voraghul_return_spawn move_flags: [ set_teleported affect_target ] }
+			}			
+			instant: true
+		}	
+	}
 }
 
 map_cliff .rocky_cliff: { cliff_style: rocks elevation: 1 }
@@ -39,6 +119,8 @@ map_cliff .dummy_cliff_2_ramp: { cliff_style: dummy elevation: 2 ramp: true }
 map_palette .tiles: !DEFAULT_TILE_PALETTE{}
 
 map_entity_spawn .exit_portal: { entity voraghul_portal_return_portal: { init_state: default } }
+map_entity_spawn .throne_of_voraghul_portal: { entity .throne_of_voraghul_portal: { init_state: default } }
+map_entity_spawn .throne_of_voraghul_return_portal: { entity .throne_of_voraghul_return_portal: { init_state: default } }
 map_entity_spawn .mining: { spawn_timer: { despawn_required: true } entity mining_cindralite_vein: { init_state: default } }
 map_entity_spawn .herbalism: { spawn_timer: { despawn_required: true } entity herbalism_ashveil: { init_state: default } }
 map_entity_spawn .swirl_tonkins: { entity .swirl_tonkins: { init_state: default } }
@@ -55,8 +137,11 @@ map_entity_spawn .ilhuna_3_quest_item: { entity .ilhuna_3_quest_item: { init_sta
 map_palette .stuff:
 {
 	entity_spawn spirit_stone: [ 0 0 0 ]	
+	entity_spawn fire: [ 255 122 0 ]	
 	
 	entity_spawn .exit_portal: [ 130 88 66 ]
+	entity_spawn .throne_of_voraghul_portal: [ 130 88 166 ]
+	entity_spawn .throne_of_voraghul_return_portal: [ 230 88 66 ]
 	entity_spawn .mining: [ 200 200 200 ]
 	entity_spawn .herbalism: [ 0 255 0 ]
 	entity_spawn .swirl_tonkins: [ 30 49 148 ]
@@ -78,8 +163,12 @@ map_palette .stuff:
 	entity_spawn realm_of_fire_satyr_ranged: [ 0 39 194 ]
 	entity_spawn realm_of_fire_satyr_random: [ 153 39 194 ]	
 	entity_spawn realm_of_fire_enslaved_fire_elemental: [ 7 38 205 ]
+	entity_spawn realm_of_fire_magmacrawler: [ 107 35 109 ]
+	entity_spawn realm_of_fire_magma_elemental: [ 207 35 109 ]	
 		
 	player_spawn .player_spawn: [ 0 0 255 ]	
+	player_spawn .throne_of_voraghul_spawn: [ 50 0 255 ]	
+	player_spawn .throne_of_voraghul_return_spawn: [ 0 50 255 ]	
 }
 
 map_palette .levels:
@@ -88,6 +177,7 @@ map_palette .levels:
 	level<23>: [ 130 107 255 ]
 	level<24>: [ 255 155 107 ]
 	level<25>: [ 255 107 236 ]
+	level<26>: [ 177 175 120 ]
 }
 
 map_palette .zones:
@@ -99,12 +189,17 @@ map_palette .zones:
 	zone .fiery_rift: [ 0 74 255 ]
 	zone .desolate_plains: [ 255 0 189 ]
 	zone .satyr_altar: [ 255 0 25 ]
+	zone .the_infernal_flow: [ 244 215 142 ]
+	zone .voraghuls_landing: [ 142 172 244 ]
+	zone .ruined_tower: [ 142 244 237 ]
+	zone .magma_pass: [ 170 118 175 ]
 }
 
 map_palette .sub_zones:
 {
 	sub_zone .bastion_of_urt: [ 36 204 63 ]
 	sub_zone .altar_of_urt: [ 36 101 204 ]
+	sub_zone .throne_of_voraghul: [ 215 142 244 ]
 }
 
 map_palette .routes:

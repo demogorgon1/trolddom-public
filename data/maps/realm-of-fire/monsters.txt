@@ -12,11 +12,17 @@ npc_behavior_state .passive:
 }
 
 ##########################################################################################
-# Worms
+# Misc monsters
 
 map_entity_spawn realm_of_fire_lava_worm: 
 { 
 	entity realm_of_fire_lava_worm: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn realm_of_fire_magmacrawler: 
+{ 
+	entity realm_of_fire_magmacrawler: {} 
 	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
@@ -32,6 +38,22 @@ map_entity_spawn realm_of_fire_lava_worm:
 	}
 
 	entity realm_of_fire_lava_worm: !NPC { _string: "Lava Worm" _sprite: snake_3 _sprite_dead: snake_3_dead _level: 23 }
+}
+
+# Magmacrawler
+{
+	${
+		_string: "Magmacrawler" 
+		_creature_type: beast
+		_faction: monsters
+		_weapon_damage: 1
+		_resource_health: 1.1		
+		_sprite: crab_4 
+		_sprite_dead: crab_4_dead 
+		_abilities: [ { id: npc_attack } ]
+	}
+
+	entity realm_of_fire_magmacrawler: !NPC { _level: 25 }
 }
 
 ##########################################################################################
@@ -230,6 +252,13 @@ map_entity_spawn realm_of_fire_enslaved_fire_elemental:
 	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
+map_entity_spawn realm_of_fire_magma_elemental: 
+{ 
+	entity realm_of_fire_magma_elemental_a: {} 
+	entity realm_of_fire_magma_elemental_b: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
 # Enslaved fire elemental
 {
 	loot_group .enslaved_fire_elemental: {}
@@ -312,4 +341,42 @@ map_entity_spawn realm_of_fire_enslaved_fire_elemental:
 	}
 
 	entity realm_of_fire_enslaved_fire_elemental: !NPC { _level: 24 }
+}
+
+# Magma Elemental
+{
+	${		
+		_creature_type: elemental
+		_default_behavior_state: .wandering_short
+		_string: "Magma Elemental" 				
+		_resource_health: 1.1
+		_weapon_damage: 0.9
+		_level: 25
+		_faction: monsters
+		_loot_table: $loot_table
+		{
+			slots:
+			[	
+				{ 
+					possibility:
+					{
+						weight: 1
+					}
+				
+					possibility: 
+					{ 
+						weight: 2
+						loot_group: .swirl_tonkins_4_quest_item 
+						requirement self<must_have_active_quest>: .swirl_tonkins_4
+					} 
+				}
+				
+				!WORLD_DROPS {}
+				!WORLD_DROPS_EARTH_ELEMENTALS {}									
+			]	
+		}
+	}
+
+	entity realm_of_fire_magma_elemental_a: !NPC { _sprite: fire_elemental_3 _sprite_dead: fire_elemental_3_dead _abilities: [ { id: npc_attack } ] }
+	entity realm_of_fire_magma_elemental_b: !NPC { _sprite: fire_elemental_4 _sprite_dead: fire_elemental_4_dead _abilities: [ { id: npc_fireball } { id: npc_attack } ] }
 }

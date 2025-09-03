@@ -101,6 +101,11 @@ map_entity_spawn fireplace_unlit:
 	entity fireplace_unlit: { weight: 1 }
 }
 
+map_entity_spawn fire:
+{
+	entity fire: { }
+}
+
 map_entity_spawn stash:
 {
 	entity stash: { }

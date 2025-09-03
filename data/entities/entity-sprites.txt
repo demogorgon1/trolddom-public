@@ -866,6 +866,8 @@ sprites:
 	sprite fire_elemental_2: { dead: fire_elemental_2_dead }
 	sprite demon_11: { dead: demon_11_dead }
 	sprite demon_12: { dead: demon_12_dead }
+	sprite fire_elemental_3: { dead: fire_elemental_3_dead }
+	sprite fire_elemental_4: { dead: fire_elemental_4_dead }
 	
 	cursor: { position: [ 0 752 ] }
 	sprite orc_15_dead: { }	
@@ -879,6 +881,8 @@ sprites:
 	sprite fire_elemental_2_dead: { }	
 	sprite demon_11_dead: { }	
 	sprite demon_12_dead: { }	
+	sprite fire_elemental_3_dead: { }	
+	sprite fire_elemental_4_dead: { }	
 }
 
 sprites:

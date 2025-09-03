@@ -12,6 +12,7 @@ dialogue_screen .swirl_tonkins_greetings:
 		{ quest: .swirl_tonkins_2 }
 		{ quest<offer_only>: .swirl_tonkins_3 }
 		{ quest<completion_only>: .enslaved_fire_elemental }
+		{ quest: .swirl_tonkins_4 }
 	]
 }
 
@@ -157,5 +158,60 @@ quest .swirl_tonkins_3:
 	level: 23
 	prerequisites: [ .swirl_tonkins_2 ]
 	objectives: [ .swirl_tonkins_3 ]
+}
+
+##########################################################################################
+# Quest 4
+
+loot_group .swirl_tonkins_4_quest_item: {}
+
+item .swirl_tonkins_4_quest_item:
+{
+	icon: icon_elemental_stone
+	item_level: 25
+	loot_groups: [ .swirl_tonkins_4_quest_item ]
+	flags: [ not_sellable ]
+	string: "Corrupted Elemental Stone"
+	stack: 6
+}
+
+objective .swirl_tonkins_4:
+{
+	string: "Corrupted Elemental Stones"
+	
+	maps: [ realm_of_fire ]
+	
+	collect_items: { item: .swirl_tonkins_4_quest_item count: 6 }
+}
+
+quest .swirl_tonkins_4:
+{
+	string: "Forging a Weapon"
+
+	text:
+	[
+		"Venture east to the Desolate Plains, obtain stones from the elementals found there, and return to Swirl Tonkins."
+	]
+	
+	description: 
+	[
+		"The elemental binding you returned to me has given me an important insight into how Voraghul channels the powers of this realm. I think we me might be able to construct some sort of weapon that can damage him."
+		"I'm gonna need you to do the heavy lifting. Travel east to the Desolate Plains where you're find a lot of elementals, no doubt under the influence of Voraghul. Go there, slay some of them and collect their"
+		"corrupted stones. Return them to me."
+	]
+	
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Good, but we're not done yet."
+	]
+
+	level: 25
+	prerequisites: [ .enslaved_fire_elemental ]
+	objectives: [ .swirl_tonkins_4 ]
 }
 

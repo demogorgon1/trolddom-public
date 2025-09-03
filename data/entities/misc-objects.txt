@@ -1,6 +1,8 @@
 !define local MISC_OBJECT
 {
 	string: @_string
+	<exists _environment> systems: [ environment ]
+	
 	components:
 	{
 		position: { }				
@@ -16,7 +18,9 @@
 					z_offset: -3
 				}
 			]		
-		}		
+		}	
+		<exists _environment> environment: @_environment
+		<exists _environment> owner<static>: {}
 	}
 }
 
@@ -29,3 +33,23 @@ entity bonfire: !MISC_OBJECT { _string: "Bonfire" _frames: [ bonfire_1 bonfire_2
 entity cauldron: !MISC_OBJECT { _string: "Cauldron" _frames: [ cauldron_1 ] }
 entity bonfire_unlit: !MISC_OBJECT { _string: "Extinguished Bonfire" _frames: [ bonfire_unlit ] }
 
+entity fire: !MISC_OBJECT 
+{ 
+	_string: "Fire" 
+	_frames: [ fire_0 fire_1 fire_2 ] 
+	_environment: 
+	{
+		tick_interval: 15
+		duration: 0
+		ability: $ability [ string ]
+		{
+			flags: [ offensive always_in_range always_in_line_of_sight ]
+			icon: icon_fire
+			direct_effect damage:
+			{
+				damage_type: fire
+				function: { expression: a_mul_x a: 0.1 x: health_max entity: target }													
+			}
+		}								
+	}
+}
