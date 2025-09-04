@@ -134,6 +134,7 @@ map_entity_spawn .ilhuna_1_quest_item_d: { entity .ilhuna_1_quest_item_d: { init
 map_entity_spawn .ilhuna_2_quest_item: { entity .ilhuna_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn .ilhuna_3_quest_item_monster: { spawn_timer: { only_when_triggered: true } }
 map_entity_spawn .ilhuna_3_quest_item: { entity .ilhuna_3_quest_item: { init_state: default } }
+map_entity_spawn .swirl_tonkins_6_object: { entity .swirl_tonkins_6_object: { init_state: default } }
 
 map_palette .stuff:
 {
@@ -155,6 +156,7 @@ map_palette .stuff:
 	entity_spawn .ilhuna_2_quest_item: [ 100 254 124 ]	
 	entity_spawn .ilhuna_3_quest_item_monster: [ 103 81 10 ]
 	entity_spawn .ilhuna_3_quest_item: [ 200 254 124 ]	
+	entity_spawn .swirl_tonkins_6_object: [ 7 109 204 ]
 	
 	entity_spawn realm_of_fire_lava_worm: [ 100 39 84 ]
 	entity_spawn realm_of_fire_satyr_caster: [ 200 39 84 ]
@@ -167,6 +169,15 @@ map_palette .stuff:
 	entity_spawn realm_of_fire_magmacrawler: [ 107 35 109 ]
 	entity_spawn realm_of_fire_magma_elemental: [ 207 35 109 ]	
 	entity_spawn realm_of_fire_fire_elemental: [ 104 95 88 ]
+	entity_spawn realm_of_fire_wizard: [ 209 99 188 ]
+	entity_spawn realm_of_fire_wizard_spawn_1: [ 10 120 220 ]
+	entity_spawn realm_of_fire_wizard_spawn_2: [ 40 120 220 ]
+	entity_spawn realm_of_fire_wizard_spawn_3: [ 70 120 220 ]
+	entity_spawn realm_of_fire_wizard_spawn_4: [ 100 120 220 ]
+	entity_spawn realm_of_fire_wizard_spawn_5: [ 130 120 220 ]
+	entity_spawn realm_of_fire_wizard_spawn_6: [ 160 120 220 ]
+	entity_spawn realm_of_fire_wizard_spawn_7: [ 190 120 220 ]
+	entity_spawn realm_of_fire_wizard_spawn_8: [ 220 120 220 ]
 		
 	player_spawn .player_spawn: [ 0 0 255 ]	
 	player_spawn .throne_of_voraghul_spawn: [ 50 0 255 ]	

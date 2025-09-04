@@ -192,7 +192,7 @@ namespace tpublic
 
 			// FIXME: packed
 			Entry					m_entry;
-			uint32_t				m_detailsIndex;
+			uint32_t				m_detailsIndex = 0;
 		};
 
 		struct Details

@@ -868,6 +868,7 @@ sprites:
 	sprite demon_12: { dead: demon_12_dead }
 	sprite fire_elemental_3: { dead: fire_elemental_3_dead }
 	sprite fire_elemental_4: { dead: fire_elemental_4_dead }
+	sprite man_75: { dead: man_75_dead }
 	
 	cursor: { position: [ 0 752 ] }
 	sprite orc_15_dead: { }	
@@ -883,6 +884,7 @@ sprites:
 	sprite demon_12_dead: { }	
 	sprite fire_elemental_3_dead: { }	
 	sprite fire_elemental_4_dead: { }	
+	sprite man_75_dead: { }	
 }
 
 sprites:
@@ -1085,6 +1087,11 @@ sprites:
 	sprite fire_fade_2: { }
 	sprite glowing_orb_2_a: { }
 	sprite glowing_orb_2_b: { }
+	sprite lava_shrine_1: { }
+	sprite lava_shrine_2: { }
+	sprite lava_shrine_3: { }
+	sprite lava_shrine_4: { }
+	
 		
 }
 

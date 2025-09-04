@@ -14,6 +14,7 @@ dialogue_screen .swirl_tonkins_greetings:
 		{ quest<completion_only>: .enslaved_fire_elemental }
 		{ quest: .swirl_tonkins_4 }
 		{ quest: .swirl_tonkins_5 }
+		{ quest: .swirl_tonkins_6 }
 	]
 }
 
@@ -269,5 +270,120 @@ quest .swirl_tonkins_5:
 	level: 25
 	prerequisites: [ .swirl_tonkins_4 ]
 	objectives: [ .swirl_tonkins_5 ]
+	next_quest: .swirl_tonkins_6
 }
 
+##########################################################################################
+# Quest 6
+
+entity .swirl_tonkins_6_object:
+{
+	string: "Shrine of Solkara"
+	
+	systems: [ openable ]
+
+	components:
+	{
+		position: { }				
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ lava_shrine_1 lava_shrine_2 lava_shrine_3 lava_shrine_4 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}				
+			]		
+		}		
+		openable: 
+		{ 
+			verb: use
+			range: 1 
+			level: 22
+			required_quest: .swirl_tonkins_6
+			requirements:
+			{			
+				requirement self<must_have_item>: .swirl_tonkins_6_uninfused_rod
+			}
+			trigger_ability: $ability
+			{
+				flags: [ produce_items_target ]
+				states: [ default ]
+				consume_items: { .swirl_tonkins_6_uninfused_rod: 1 }
+				produce_items: { .swirl_tonkins_6_infused_rod: 1 }
+			}
+		}		
+
+	}
+}
+
+item .swirl_tonkins_6_uninfused_rod:
+{
+	icon: icon_rod_2
+	item_level: 26
+	flags: [ not_sellable unique ]
+	string: "Uninfused Rod"
+}
+
+item .swirl_tonkins_6_infused_rod:
+{
+	icon: icon_rod_1
+	item_level: 26
+	flags: [ not_sellable unique ]
+	string: "Rod of Solkara"
+}
+
+objective .swirl_tonkins_6_a:
+{
+	string: "Voraghul Slain"
+	
+	maps: [ realm_of_fire ]
+	
+	kill_npc: { entities: [ realm_of_fire_wizard ] count: 1 }	
+}
+
+objective .swirl_tonkins_6_b:
+{
+	string: "Rod of Solkara"
+	
+	maps: [ realm_of_fire ]
+	
+	collect_items: { item: .swirl_tonkins_6_infused_rod count: 1 }
+}
+
+quest .swirl_tonkins_6:
+{
+	string: "Defeating the Mad Wizard"
+
+	text:
+	[
+		"Infuse the rod at the shrine of Solkara, seek out Voraghul, defeat him, and return to Swirl Tonkins."
+	]
+	
+	description: 
+	[
+		"Alright, I'll give you this rod I've enchanted using the materials you've provided. Right now it's, unfortunately, quite useless, so we'll need to do something about that.\n"
+		"\n"
+		"It needs to be infused by a blessing of Solkara, the divine queen of this realm. Only she can expel the mad wizard. Take the rod to her shrine just south of here and ask for her"
+		"help. Then seek out the Voraghul and defeat him. Use the blessed rod to defend yourself from his attacks.\n"
+		"I'm not sure where he is. Probably somewhere to the south."
+	]
+	
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Finally, this place might not be doomed after all."
+	]
+
+	level: 26
+	quest_items: [ .swirl_tonkins_6_uninfused_rod ]
+	prerequisites: [ .swirl_tonkins_5 ]
+	objectives: [ .swirl_tonkins_6_a .swirl_tonkins_6_b ]
+}

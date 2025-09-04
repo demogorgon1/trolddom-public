@@ -592,6 +592,7 @@ namespace tpublic
 			p++;
 		}
 
+		assert(count > 0);
 		return RGBA((uint8_t)(r / (uint64_t)count), (uint8_t)(g / (uint64_t)count), (uint8_t)(b / (uint64_t)count), (uint8_t)(a / (uint64_t)count));
 	}
 

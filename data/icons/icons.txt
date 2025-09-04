@@ -822,6 +822,7 @@ sprites:
 	sprite icon_elemental_fire : { tags: [ icon ] }
 	sprite icon_enchanted_coal : { tags: [ icon ] }
 	sprite icon_ring_15 : { tags: [ icon ] }
+	sprite icon_rod_2 : { tags: [ icon ] }
 	
 }
 

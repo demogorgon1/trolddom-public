@@ -424,3 +424,70 @@ map_entity_spawn realm_of_fire_fire_elemental:
 	entity realm_of_fire_fire_elemental_a: !NPC { _string: "Blaze Warden" _sprite: fire_elemental_1 _sprite_dead: fire_elemental_1_dead _abilities: [ { id: npc_attack } ] }
 	entity realm_of_fire_fire_elemental_b: !NPC { _string: "Flamecaster" _sprite: fire_elemental_2 _sprite_dead: fire_elemental_2_dead _abilities: [ { id: npc_fireball } { id: npc_attack } ] }
 }
+
+##########################################################################################
+# Wizard
+
+map_entity_spawn realm_of_fire_wizard: 
+{ 
+	entity realm_of_fire_wizard: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn realm_of_fire_wizard_spawn_1: { spawn_timer: { only_when_triggered: true }	}
+map_entity_spawn realm_of_fire_wizard_spawn_2: { spawn_timer: { only_when_triggered: true }	}
+map_entity_spawn realm_of_fire_wizard_spawn_3: { spawn_timer: { only_when_triggered: true }	}
+map_entity_spawn realm_of_fire_wizard_spawn_4: { spawn_timer: { only_when_triggered: true }	}
+map_entity_spawn realm_of_fire_wizard_spawn_5: { spawn_timer: { only_when_triggered: true }	}
+map_entity_spawn realm_of_fire_wizard_spawn_6: { spawn_timer: { only_when_triggered: true }	}
+map_entity_spawn realm_of_fire_wizard_spawn_7: { spawn_timer: { only_when_triggered: true }	}
+map_entity_spawn realm_of_fire_wizard_spawn_8: { spawn_timer: { only_when_triggered: true }	}
+
+
+# Wizard himself
+{
+
+	${		
+		_faction: minions_of_voraghul
+		_creature_type: humanoid
+		_default_behavior_state: .passive
+		_loot_table: default_humanoid
+		_abilities: 
+		[ 
+			{ id: npc_attack } 
+		]
+		_in_combat_on_enter_ability: $ability
+		{
+			flags: [ always_in_range always_in_line_of_sight ]
+			
+			direct_effect spawn_entity: { map_entity_spawn: realm_of_fire_wizard_spawn_1 entity: realm_of_fire_wizard_spawn spawn_flags: [ no_owner source_threat_target detached ] npc_target_threat: 20 } 
+			direct_effect spawn_entity: { map_entity_spawn: realm_of_fire_wizard_spawn_2 entity: realm_of_fire_wizard_spawn spawn_flags: [ no_owner source_threat_target detached ] npc_target_threat: 20 } 
+			direct_effect spawn_entity: { map_entity_spawn: realm_of_fire_wizard_spawn_3 entity: realm_of_fire_wizard_spawn spawn_flags: [ no_owner source_threat_target detached ] npc_target_threat: 20 } 
+			direct_effect spawn_entity: { map_entity_spawn: realm_of_fire_wizard_spawn_4 entity: realm_of_fire_wizard_spawn spawn_flags: [ no_owner source_threat_target detached ] npc_target_threat: 20 } 
+			direct_effect spawn_entity: { map_entity_spawn: realm_of_fire_wizard_spawn_5 entity: realm_of_fire_wizard_spawn spawn_flags: [ no_owner source_threat_target detached ] npc_target_threat: 20 } 
+			direct_effect spawn_entity: { map_entity_spawn: realm_of_fire_wizard_spawn_6 entity: realm_of_fire_wizard_spawn spawn_flags: [ no_owner source_threat_target detached ] npc_target_threat: 20 } 
+			direct_effect spawn_entity: { map_entity_spawn: realm_of_fire_wizard_spawn_7 entity: realm_of_fire_wizard_spawn spawn_flags: [ no_owner source_threat_target detached ] npc_target_threat: 20 } 
+			direct_effect spawn_entity: { map_entity_spawn: realm_of_fire_wizard_spawn_8 entity: realm_of_fire_wizard_spawn spawn_flags: [ no_owner source_threat_target detached ] npc_target_threat: 20 } 
+		}
+	}
+
+	entity realm_of_fire_wizard: !NPC { _string: "Voraghul" _sprite: man_75 _sprite_dead: man_75_dead _level: 26 }
+}
+
+# Crabs
+{
+	${
+		_string: "Lavacrawler" 
+		_creature_type: beast
+		_faction: monsters
+		_weapon_damage: 0.2
+		_resource_health: 0.7
+		_sprite: crab_4 
+		_sprite_dead: crab_4_dead 
+		_abilities: [ { id: npc_attack } ]
+		_despawn_time: { out_of_combat_ticks: 40 }
+	}
+
+	entity realm_of_fire_wizard_spawn: !NPC { _level: 26 }
+}
+

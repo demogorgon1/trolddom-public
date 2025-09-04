@@ -179,6 +179,7 @@ namespace tpublic
 				break;
 
 			case SOURCE_REDIRECT_REFRESH:
+				if(aSource != NULL)
 				{
 					// Make sure the source entity is set to the assigned source (in case of reverse flag being set)
 					sourceEntityInstance = { aSource->GetEntityInstanceId(), aSource->GetSeq() };

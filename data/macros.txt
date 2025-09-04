@@ -103,6 +103,8 @@
 				<exists _in_combat_barks> barks: @_in_combat_barks
 				
 				<exists _despawn_on_leave_combat and _despawn_on_leave_combat> despawn_on_leave: true
+				
+				<exists _in_combat_on_enter_ability> on_enter_ability: @_in_combat_on_enter_ability
 			}	
 			
 			<exists _dead_on_enter_ability> state dead:
