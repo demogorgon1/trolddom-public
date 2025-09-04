@@ -328,12 +328,31 @@ item .swirl_tonkins_6_uninfused_rod:
 	string: "Uninfused Rod"
 }
 
+aura .swirl_tonkins_6_infused_rod:
+{
+	string: "Blessing of Solkara"
+	description: "Protected against the wrath of Voraghul."
+	type: buff
+	icon: icon_rod_1
+	duration: 40
+	flags: [ unique ]
+}
+
 item .swirl_tonkins_6_infused_rod:
 {
 	icon: icon_rod_1
 	item_level: 26
 	flags: [ not_sellable unique ]
 	string: "Rod of Solkara"
+	use_ability: $ability [ string icon ]
+	{
+		description: "Protect yourself against the wrath of Voraghul."
+		cooldown: $cooldown { duration: 80 }
+		cooldowns: [ global ]	
+		flags: [ target_self item ]
+		direct_effect apply_aura: { aura: .swirl_tonkins_6_infused_rod }
+		states: [ default in_combat ]
+	}	
 }
 
 objective .swirl_tonkins_6_a:

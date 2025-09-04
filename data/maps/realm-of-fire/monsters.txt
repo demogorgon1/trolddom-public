@@ -452,9 +452,98 @@ map_entity_spawn realm_of_fire_wizard_spawn_8: { spawn_timer: { only_when_trigge
 		_creature_type: humanoid
 		_default_behavior_state: .passive
 		_loot_table: default_humanoid
+		_resource_health: 2.6
+		_weapon_damage: 0.7
+		_immune_to_stun: true
+		_immune_to_immobilize: true
+		_immune_to_slow: true				
 		_abilities: 
 		[ 
-			{ id: npc_attack } 
+			{
+				requirement self<must_have_less_health_than>: 95	
+				target: random_player
+				barks: 
+				[ 
+					{ type: yell text: "Go away!" flags: [ no_chat_bubble ] } 
+					{ type: yell text: "Burn!" flags: [ no_chat_bubble ] } 
+					{ type: yell text: "Taste my wrath!" flags: [ no_chat_bubble ] } 
+				]		
+				id: $ability @realm_of_fire_wizard_wrath_of_voraghul
+				{
+					string: "Wrath of Voraghul"
+					range: 20				
+					cast_time: 20
+					cooldowns: [ global ]
+					cooldown: $cooldown { duration: 100 }
+					flags: [ spell offensive target_other target_hostile ]
+					states: [ in_combat ]
+					icon: icon_firebolt
+					delay: 3
+					speed: 6
+					target_particle_system: orange_spell_hit	
+					
+					projectile: $particle_system
+					{
+						particle:
+						{
+							sprites: [ effect_firebolt_b ]
+							flags: [ attached no_rotation no_scaling face_target ]
+							count: 1		
+						}
+					}									
+					
+					direct_effect damage:
+					{
+						requirement target<must_not_have_aura>: .swirl_tonkins_6_infused_rod
+						damage_type: fire
+						function: { expression: a_mul_x a: 0.75 x: health_max entity: target }		
+					}					
+					
+					direct_effect damage:
+					{
+						requirement target<must_have_aura>: .swirl_tonkins_6_infused_rod
+						damage_type: fire
+						function: { expression: a_mul_x a: 0.075 x: health_max entity: target }		
+					}										
+				}
+			}
+			
+			{
+				id: $ability @realm_of_fire_wizard_fireball
+				{
+					string: "Fireball"
+					range: 20				
+					cast_time: 25
+					cooldowns: [ spell_fire_lockout global ]
+					flags: [ spell offensive target_other target_hostile can_miss interruptable ]
+					states: [ in_combat ]
+					icon: icon_firebolt
+					delay: 3
+					speed: 6
+					target_particle_system: orange_spell_hit	
+
+					projectile: $particle_system
+					{
+						particle:
+						{
+							sprites: [ effect_fireball ]
+							flags: [ attached no_rotation face_target ]
+							count: 1		
+							scale: 0.5
+						}
+					}
+					
+					direct_effect damage:
+					{
+						damage_type: fire
+						function: 115		
+					}					
+				}
+			}
+			
+			{ 
+				id: npc_attack 
+			} 
 		]
 		_in_combat_on_enter_ability: $ability
 		{
@@ -482,8 +571,8 @@ map_entity_spawn realm_of_fire_wizard_spawn_8: { spawn_timer: { only_when_trigge
 		_string: "Lavacrawler" 
 		_creature_type: beast
 		_faction: monsters
-		_weapon_damage: 0.2
-		_resource_health: 0.7
+		_weapon_damage: 0.15
+		_resource_health: 0.18
 		_sprite: crab_4 
 		_sprite_dead: crab_4_dead 
 		_abilities: [ { id: npc_attack } ]
