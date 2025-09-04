@@ -469,6 +469,8 @@ map_entity_spawn realm_of_fire_wizard_spawn_8: { spawn_timer: { only_when_trigge
 			direct_effect spawn_entity: { map_entity_spawn: realm_of_fire_wizard_spawn_7 entity: realm_of_fire_wizard_spawn spawn_flags: [ no_owner source_threat_target detached ] npc_target_threat: 20 } 
 			direct_effect spawn_entity: { map_entity_spawn: realm_of_fire_wizard_spawn_8 entity: realm_of_fire_wizard_spawn spawn_flags: [ no_owner source_threat_target detached ] npc_target_threat: 20 } 
 		}
+		_in_combat_barks: [ { type: yell text: "Say hello to my little friends!" flags: [ no_chat_bubble ] } ]		
+		_dead_barks: [ { type: say text: "No... This can't be... This wasn't supposed to happen." flags: [ no_chat_bubble ] } ]		
 	}
 
 	entity realm_of_fire_wizard: !NPC { _string: "Voraghul" _sprite: man_75 _sprite_dead: man_75_dead _level: 26 }
