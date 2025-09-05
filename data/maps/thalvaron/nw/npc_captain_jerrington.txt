@@ -13,6 +13,7 @@ dialogue_screen .captain_jerrington_dialogue:
 		{ quest<completion_only>: .fisherman_5 }
 		{ quest<completion_only>: .rebel_leader_camp_quest_item }
 		{ quest: .captain_jerrington_3 }
+		{ quest<completion_only>: .goblin_boss_quest_item }
 	]
 }
 

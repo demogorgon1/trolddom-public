@@ -889,3 +889,157 @@ loot_table .arcane_monster:
 
 	entity thalvaron_arcane_apparition: !NPC { _string: "Arcane Apparition" _sprite: arcane_caster_1 _sprite_dead: arcane_caster_1_dead _abilities: [ { id: npc_attack } { id: npc_chain_lightning } ] }
 }
+
+##########################################################################################
+# North wildlife
+
+map_entity_spawn thalvaron_north_wolf: 
+{ 
+	entity thalvaron_north_wolf: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Wolf
+{
+
+	${
+		_level: 23
+		_faction: monsters
+		_creature_type: beast
+		_weapon_damage: 1
+		_resource_health: 1
+		_default_behavior_state: .wandering_short
+		_loot_table: default_wolf
+	}
+
+	entity thalvaron_north_wolf: !NPC { _string: "Northgrove Wolf" _sprite: wolf_1 _sprite_dead: wolf_1_dead _abilities: [ { id: npc_rend }{ id: npc_attack } ] }
+}
+
+##########################################################################################
+# Goblins
+
+map_entity_spawn thalvaron_goblin: 
+{ 
+	entity thalvaron_goblin_melee: {} 
+	entity thalvaron_goblin_ranged: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_goblin_boss: 
+{ 
+	entity thalvaron_goblin_boss: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Melee
+{
+	${
+		_level: 23
+		_faction: monsters
+		_creature_type: humanoid
+		_weapon_damage: 1.1
+		_resource_health: 1.1
+		_default_behavior_state: .passive
+		_loot_table: default_humanoid
+	}
+
+	entity thalvaron_goblin_melee: !NPC { _string: "Goblin Bandit" _sprite: goblin _sprite_dead: goblin_dead _abilities: [ { id: npc_attack } ] }
+}
+
+# Ranged
+{
+	${
+		_level: 23
+		_faction: monsters
+		_creature_type: humanoid
+		_weapon_damage: 1
+		_resource_health: 0.65
+		_default_behavior_state: .passive
+		_loot_table: default_humanoid
+	}
+
+	entity thalvaron_goblin_ranged: !NPC { _string: "Goblin Poacher" _sprite: goblin_bowman_1 _sprite_dead: goblin_bowman_1_dead _abilities: [ { id: npc_shoot } { id: npc_attack } ] }
+}
+
+# Boss
+{
+	
+	loot_group .goblin_boss_quest_item: { }
+
+	item .goblin_boss_quest_item:
+	{
+		loot_groups: [ .goblin_boss_quest_item ]		
+		string: "Lobnorg's Ear" 
+		icon: icon_ear_2
+		item_level: 23
+		flags: [ unique not_sellable ]
+		use_ability: $ability [ string icon ]
+		{
+			description: "This item starts a quest."
+			flags: [ target_self item ]
+			direct_effect simple<start_quest>: .goblin_boss_quest_item
+			states: [ default in_combat ]
+			requirement self<must_not_have_completed_quest>: { id: .goblin_boss_quest_item }
+			requirement self<must_not_have_active_quest>: { id: .goblin_boss_quest_item }
+		}
+		
+		binds: when_picked_up
+	}
+	
+	quest .goblin_boss_quest_item:
+	{
+		string: "Lobnorg's Ear"
+
+		text:
+		[
+			"Bring Lobnorg's ear to Captain Jerrington outside the Eastgate district in Valoris."
+		]
+		
+		description: 
+		[
+			"The city guard might be interested in the fact that goblins have set up camp just north of the city. Captain Jerrington should be informed."
+		]
+		
+		completion:
+		[
+			"Goblins? Up in Northgrove? How did you even get there?"
+		]
+
+		level: 23
+		reward_xp_multiplier: 0.25
+		reward_cash_multiplier: 0.25
+	}
+
+	loot_table .goblin_boss: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { loot_group: .anna_skrald_1_quest_item requirement self<must_have_active_quest>: { id: .anna_skrald_1 } } 
+			}
+
+			{ 
+				possibility: 
+				{ 
+					loot_group: .goblin_boss_quest_item 
+					requirement self<must_not_have_active_quest>: { id: .goblin_boss_quest_item } 
+					requirement self<must_not_have_completed_quest>: { id: .goblin_boss_quest_item } 
+				} 
+			}
+			
+			!WORLD_DROPS {}		
+		]	
+	}	
+
+	${
+		_level: 23
+		_faction: monsters
+		_creature_type: humanoid
+		_weapon_damage: 1.1
+		_resource_health: 1.5
+		_default_behavior_state: .passive
+		_loot_table: .goblin_boss
+	}
+
+	entity thalvaron_goblin_boss: !NPC { _string: "Lobnorg" _sprite: goblin_boss _sprite_dead: goblin_boss_dead _abilities: [ { id: npc_whirlwind } { id: npc_attack } ] }
+}

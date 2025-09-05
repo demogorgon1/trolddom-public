@@ -87,6 +87,8 @@ zone .tower_of_voraghul: { string: "Tower of Voraghul" }
 zone .the_crystal_caves: { string: "The Crystal Caves" }
 zone .swamp_of_skaldrun: { string: "Swamp of Skaldrun" }
 zone .inner_durgan_urok: { string: "Inner Durgan Urok" }
+zone .northern_tunnels: { string: "Northern Tunnels" }
+zone .northgrove: { string: "Northgrove" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -222,6 +224,8 @@ map_entity_spawn thalvaron_gateway_2: { entity gateway_2: { init_state: default 
 map_entity_spawn thalvaron_tailoring_trainer: { entity thalvaron_tailoring_trainer: { init_state: default } }
 map_entity_spawn thalvaron_jim_farseer: { entity thalvaron_jim_farseer: { init_state: default } }
 map_entity_spawn thalvaron_ghorm: { entity thalvaron_ghorm: { init_state: default } }
+map_entity_spawn thalvaron_bar_patron_trogor: { entity thalvaron_bar_patron_trogor: { init_state: default } }
+map_entity_spawn thalvaron_anna_skrald: { entity thalvaron_anna_skrald: { init_state: default } }
 
 # N
 map_entity_spawn thalvaron_ranger_fremalt: { entity thalvaron_ranger_fremalt: { init_state: default } }
@@ -563,6 +567,11 @@ map_palette .stuff:
 	entity_spawn thalvaron_jim_farseer: [ 40 82 176 ]
 	entity_spawn voraghul_portal_closed: [ 206 102 91 ]
 	entity_spawn thalvaron_ghorm: [ 30 104 230 ]
+	entity_spawn thalvaron_bar_patron_trogor: [ 10 120 230 ]
+	entity_spawn thalvaron_anna_skrald: [ 110 110 230 ]
+	entity_spawn thalvaron_goblin: [ 30 39 194 ]
+	entity_spawn thalvaron_goblin_boss: [ 230 39 194 ]
+	entity_spawn thalvaron_north_wolf: [ 130 39 152 ]
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				
@@ -873,6 +882,7 @@ map_palette .levels:
 	level<20>: [ 255 127 0 ]
 	level<21>: [ 145 203 128 ]
 	level<22>: [ 0 107 255 ]
+	level<23>: [ 115 86 122 ]
 }
 
 map_palette .zones:
@@ -922,6 +932,8 @@ map_palette .zones:
 	zone .urthon_gate: [ 34 122 244 ]
 	zone .entor_spring: [ 211 130 62 ]
 	zone .shrine_of_ryux: [ 70 232 243 ]
+	zone .northern_tunnels: [ 128 167 167 ]
+	zone .northgrove: [ 212 97 138 ]
 }
 
 map_palette .sub_zones:
