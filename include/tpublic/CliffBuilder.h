@@ -22,7 +22,7 @@ namespace tpublic
 		void		AddCliff(
 						const Vec2&							aPosition,
 						const Data::CliffStyle*				aCliffStyle,
-						uint8_t								aElevation,
+						int8_t								aElevation,
 						bool								aRamp);		
 		void		Generate(
 						std::function<void(const Tile&)>	aCallback) const;
@@ -32,7 +32,7 @@ namespace tpublic
 		struct Cell
 		{
 			const Data::CliffStyle*			m_cliffStyle = NULL;
-			uint8_t							m_elevation = 0;
+			int8_t							m_elevation = 0;
 			bool							m_ramp = false;
 		};
 

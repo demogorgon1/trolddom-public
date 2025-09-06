@@ -33,7 +33,7 @@ namespace tpublic
 						if (aChild->m_name == "cliff_style")
 							m_cliffStyleId = aChild->GetId(DataType::ID_CLIFF_STYLE);
 						else if(aChild->m_name == "elevation")
-							m_elevation = aChild->GetUInt8();
+							m_elevation = (int8_t)aChild->GetInt32();
 						else if (aChild->m_name == "ramp")
 							m_ramp = aChild->GetBool();
 						else
@@ -66,7 +66,7 @@ namespace tpublic
 
 			// Public data
 			uint32_t			m_cliffStyleId = 0;
-			uint8_t				m_elevation = 0;
+			int8_t				m_elevation = 0;
 			bool				m_ramp = false;
 		};
 
