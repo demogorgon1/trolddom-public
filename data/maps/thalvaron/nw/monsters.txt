@@ -895,15 +895,15 @@ loot_table .arcane_monster:
 
 map_entity_spawn thalvaron_north_wolf: 
 { 
-	entity thalvaron_north_wolf: {} 
+	entity thalvaron_north_wolf_23: {} 
+	entity thalvaron_north_wolf_24: {} 
 	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
 # Wolf
 {
 
-	${
-		_level: 23
+	${		
 		_faction: monsters
 		_creature_type: beast
 		_weapon_damage: 1
@@ -912,7 +912,8 @@ map_entity_spawn thalvaron_north_wolf:
 		_loot_table: default_wolf
 	}
 
-	entity thalvaron_north_wolf: !NPC { _string: "Northgrove Wolf" _sprite: wolf_1 _sprite_dead: wolf_1_dead _abilities: [ { id: npc_rend }{ id: npc_attack } ] }
+	entity thalvaron_north_wolf_23: !NPC { _level: 23 _string: "Northgrove Wolf" _sprite: wolf_1 _sprite_dead: wolf_1_dead _abilities: [ { id: npc_rend }{ id: npc_attack } ] }
+	entity thalvaron_north_wolf_24: !NPC { _level: 24 _string: "Northgrove Wolf" _sprite: wolf_1 _sprite_dead: wolf_1_dead _abilities: [ { id: npc_rend }{ id: npc_attack } ] }
 }
 
 ##########################################################################################

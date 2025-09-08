@@ -14,6 +14,7 @@ dialogue_screen .captain_jerrington_dialogue:
 		{ quest<completion_only>: .rebel_leader_camp_quest_item }
 		{ quest: .captain_jerrington_3 }
 		{ quest<completion_only>: .goblin_boss_quest_item }
+		{ quest: .captain_jerrington_4 }
 	]
 }
 
@@ -190,3 +191,50 @@ quest .captain_jerrington_3:
 	objectives: [ .captain_jerrington_3 ]
 	reward_one_item: [ .captain_jerrington_3_a .captain_jerrington_3_b ]
 }
+
+############################################################
+# Quest 4
+
+objective .captain_jerrington_4:
+{
+	string: "Goblins Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_goblin_ranged thalvaron_goblin_melee ]
+		count: 10
+	}
+}
+
+quest .captain_jerrington_4:
+{
+	string: "Going Underground"
+
+	text:
+	[
+		"Kill goblins in Northgrove and find out where they're coming from."
+	]
+	
+	description: 
+	[
+		"The last thing we need right now is a goblin infestation this close to the city. Killing them is great, and I urge you to kill as many of them as you can, but we need to figure out where"
+		"they're coming from. I need you to go there and investigate. Look for suspicious caves and tunnels and report back to me."
+	]
+
+	progress:
+	[
+		"What are you waiting for?"
+	]
+	
+	completion:
+	[
+		"A hole in the ground? That makes sense."
+	]
+
+	level: 23
+	prerequisites: [ .goblin_boss_quest_item ]
+	objectives: [ .captain_jerrington_4 ]
+}
+

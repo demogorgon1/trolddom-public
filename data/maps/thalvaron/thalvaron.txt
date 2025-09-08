@@ -89,6 +89,9 @@ zone .swamp_of_skaldrun: { string: "Swamp of Skaldrun" }
 zone .inner_durgan_urok: { string: "Inner Durgan Urok" }
 zone .northern_tunnels: { string: "Northern Tunnels" }
 zone .northgrove: { string: "Northgrove" }
+zone .northgrove_caves: { string: "Northgrove Caves" }
+zone .outcast_coast: { string: "Outcast Coast" }
+zone .tyrons_land: { string: "Tyron's Land" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -885,6 +888,7 @@ map_palette .levels:
 	level<21>: [ 145 203 128 ]
 	level<22>: [ 0 107 255 ]
 	level<23>: [ 115 86 122 ]
+	level<24>: [ 248 185 5 ]
 }
 
 map_palette .zones:
@@ -935,7 +939,10 @@ map_palette .zones:
 	zone .entor_spring: [ 211 130 62 ]
 	zone .shrine_of_ryux: [ 70 232 243 ]
 	zone .northern_tunnels: [ 128 167 167 ]
-	zone .northgrove: [ 212 97 138 ]
+	zone .northgrove: [ 212 97 138 ]	
+	zone .northgrove_caves: [ 135 26 225 ]
+	zone .outcast_coast: [ 26 129 225 ]
+	zone .tyrons_land: [ 225 199 26 ]	
 }
 
 map_palette .sub_zones:

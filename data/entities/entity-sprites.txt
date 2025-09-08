@@ -1077,6 +1077,7 @@ sprites:
 	sprite green_fragment: { }
 	sprite ashveil: { }
 	sprite cindralite_vein: { }
+	sprite hole: { }
 
 	cursor: { position: [ 0 112 ] }
 	sprite fire_0: { }
