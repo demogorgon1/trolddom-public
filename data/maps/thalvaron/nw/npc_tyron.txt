@@ -1,0 +1,25 @@
+dialogue_screen .tyron_dialogue:
+{
+	text: 
+	[	
+		"What brings you up here? Rare for us to have visitors."
+	]		
+	
+	options:
+	[
+	]
+}
+
+entity thalvaron_tyron: !NPC
+{
+	_string: "Tyron"
+	_dialogue_root: $dialogue_root { .tyron_dialogue: { } }
+	_sprite: man_76
+	_sprite_dead: man_76_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

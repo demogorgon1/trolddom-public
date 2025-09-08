@@ -869,6 +869,8 @@ sprites:
 	sprite fire_elemental_3: { dead: fire_elemental_3_dead }
 	sprite fire_elemental_4: { dead: fire_elemental_4_dead }
 	sprite man_75: { dead: man_75_dead }
+	sprite man_76: { dead: man_76_dead }
+	sprite woman_35: { dead: woman_35_dead }
 	
 	cursor: { position: [ 0 752 ] }
 	sprite orc_15_dead: { }	
@@ -885,6 +887,8 @@ sprites:
 	sprite fire_elemental_3_dead: { }	
 	sprite fire_elemental_4_dead: { }	
 	sprite man_75_dead: { }	
+	sprite man_76_dead: { }	
+	sprite woman_35_dead: { }	
 }
 
 sprites:

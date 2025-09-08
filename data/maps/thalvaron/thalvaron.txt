@@ -231,6 +231,8 @@ map_entity_spawn thalvaron_jim_farseer: { entity thalvaron_jim_farseer: { init_s
 map_entity_spawn thalvaron_ghorm: { entity thalvaron_ghorm: { init_state: default } }
 map_entity_spawn thalvaron_bar_patron_trogor: { entity thalvaron_bar_patron_trogor: { init_state: default } }
 map_entity_spawn thalvaron_anna_skrald: { entity thalvaron_anna_skrald: { init_state: default } }
+map_entity_spawn thalvaron_tyron: { entity thalvaron_tyron: { init_state: default } }
+map_entity_spawn thalvaron_ophelie: { entity thalvaron_ophelie: { init_state: default } }
 
 # N
 map_entity_spawn thalvaron_ranger_fremalt: { entity thalvaron_ranger_fremalt: { init_state: default } }
@@ -577,6 +579,8 @@ map_palette .stuff:
 	entity_spawn thalvaron_goblin: [ 30 39 194 ]
 	entity_spawn thalvaron_goblin_boss: [ 230 39 194 ]
 	entity_spawn thalvaron_north_wolf: [ 130 39 152 ]
+	entity_spawn thalvaron_tyron: [ 31 39 208 ]
+	entity_spawn thalvaron_ophelie: [ 61 239 108 ]
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				
