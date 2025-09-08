@@ -92,6 +92,7 @@ zone .northgrove: { string: "Northgrove" }
 zone .northgrove_caves: { string: "Northgrove Caves" }
 zone .outcast_coast: { string: "Outcast Coast" }
 zone .tyrons_land: { string: "Tyron's Land" }
+zone .tyrons_rock: { string: "Tyron's Rock" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -581,6 +582,8 @@ map_palette .stuff:
 	entity_spawn thalvaron_north_wolf: [ 130 39 152 ]
 	entity_spawn thalvaron_tyron: [ 31 39 208 ]
 	entity_spawn thalvaron_ophelie: [ 61 239 108 ]
+	entity_spawn thalvaron_north_boar: [ 60 100 99 ]
+	entity_spawn thalvaron_north_crab: [ 60 100 199 ]	
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				
@@ -947,6 +950,7 @@ map_palette .zones:
 	zone .northgrove_caves: [ 135 26 225 ]
 	zone .outcast_coast: [ 26 129 225 ]
 	zone .tyrons_land: [ 225 199 26 ]	
+	zone .tyrons_rock: [ 24 173 24 ]
 }
 
 map_palette .sub_zones:

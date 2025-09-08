@@ -900,6 +900,18 @@ map_entity_spawn thalvaron_north_wolf:
 	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
+map_entity_spawn thalvaron_north_boar: 
+{ 
+	entity thalvaron_north_boar: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_north_crab: 
+{ 
+	entity thalvaron_north_crab: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
 # Wolf
 {
 
@@ -914,6 +926,34 @@ map_entity_spawn thalvaron_north_wolf:
 
 	entity thalvaron_north_wolf_23: !NPC { _level: 23 _string: "Northgrove Wolf" _sprite: wolf_1 _sprite_dead: wolf_1_dead _abilities: [ { id: npc_rend }{ id: npc_attack } ] }
 	entity thalvaron_north_wolf_24: !NPC { _level: 24 _string: "Northgrove Wolf" _sprite: wolf_1 _sprite_dead: wolf_1_dead _abilities: [ { id: npc_rend }{ id: npc_attack } ] }
+}
+
+# Boar
+{
+
+	${		
+		_faction: monsters
+		_creature_type: beast
+		_weapon_damage: 1.1
+		_resource_health: 1.35
+		_default_behavior_state: .wandering_short
+		_loot_table: default_boar
+	}
+
+	entity thalvaron_north_boar: !NPC { _level: 24 _string: "Angry Boar" _sprite: boar _sprite_dead: boar_dead _abilities: [ { id: npc_charge }{ id: npc_attack } ] }
+}
+
+# Neutral crabs
+{
+
+	${		
+		_faction: wildlife
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: default_crab
+	}
+
+	entity thalvaron_north_crab: !NPC { _string: "Giant Mud Crab" _sprite: crab_1 _sprite_dead: crab_1_dead _level: 24 _abilities: [ { id: npc_sunder }{ id: npc_attack } ]}
 }
 
 ##########################################################################################
