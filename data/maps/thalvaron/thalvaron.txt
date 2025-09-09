@@ -234,6 +234,7 @@ map_entity_spawn thalvaron_bar_patron_trogor: { entity thalvaron_bar_patron_trog
 map_entity_spawn thalvaron_anna_skrald: { entity thalvaron_anna_skrald: { init_state: default } }
 map_entity_spawn thalvaron_tyron: { entity thalvaron_tyron: { init_state: default } }
 map_entity_spawn thalvaron_ophelie: { entity thalvaron_ophelie: { init_state: default } }
+map_entity_spawn thalvaron_captain_jerrington_quest_item: { entity thalvaron_captain_jerrington_quest_item: { init_state: default } }
 
 # N
 map_entity_spawn thalvaron_ranger_fremalt: { entity thalvaron_ranger_fremalt: { init_state: default } }
@@ -383,6 +384,7 @@ map_entity_spawn thalvaron_orm_thogore: { entity thalvaron_orm_thogore: { init_s
 map_entity_spawn thalvaron_orm_thogore_1_quest_item: { entity thalvaron_orm_thogore_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_brill_craigsworth_3_quest_item: { entity thalvaron_brill_craigsworth_3_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_green_statue: { entity thalvaron_green_statue: { init_state: default } }
+map_entity_spawn thalvaron_seren_virelith_4_quest_item: { entity thalvaron_seren_virelith_4_quest_item: { init_state: default } }
 
 map_palette .stuff:
 {
@@ -574,6 +576,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_tailoring_trainer: [ 30 130 33 ]
 	entity_spawn thalvaron_jim_farseer: [ 40 82 176 ]
 	entity_spawn voraghul_portal_closed: [ 206 102 91 ]
+	entity_spawn voraghul_portal_open: [ 106 109 91 ]
 	entity_spawn thalvaron_ghorm: [ 30 104 230 ]
 	entity_spawn thalvaron_bar_patron_trogor: [ 10 120 230 ]
 	entity_spawn thalvaron_anna_skrald: [ 110 110 230 ]
@@ -584,6 +587,9 @@ map_palette .stuff:
 	entity_spawn thalvaron_ophelie: [ 61 239 108 ]
 	entity_spawn thalvaron_north_boar: [ 60 100 99 ]
 	entity_spawn thalvaron_north_crab: [ 60 100 199 ]	
+	entity_spawn thalvaron_goblin_healer: [ 160 110 90 ]
+	entity_spawn thalvaron_captain_jerrington_quest_item: [ 250 200 93 ]
+	entity_spawn thalvaron_goblin_tunneler: [ 104 83 97 ]
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				
@@ -876,6 +882,8 @@ map_palette .stuff:
 	entity_spawn thalvaron_green_statue: [ 155 184 177 ]
 	entity_spawn thalvaron_se_deer: [ 30 184 71 ]
 	entity_spawn thalvaron_se_boar: [ 30 184 171 ]
+	entity_spawn thalvaron_se_poison_crab: [ 40 90 140 ]
+	entity_spawn thalvaron_seren_virelith_4_quest_item: [ 140 80 22 ]
 }
 
 map_palette .levels:

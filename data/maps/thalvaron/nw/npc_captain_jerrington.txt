@@ -195,7 +195,7 @@ quest .captain_jerrington_3:
 ############################################################
 # Quest 4
 
-objective .captain_jerrington_4:
+objective .captain_jerrington_4_a:
 {
 	string: "Goblins Slain"
 	
@@ -203,9 +203,56 @@ objective .captain_jerrington_4:
 	
 	kill_npc:
 	{
-		entities: [ thalvaron_goblin_ranged thalvaron_goblin_melee ]
+		entities: [ thalvaron_goblin_ranged thalvaron_goblin_melee thalvaron_goblin_tunneler thalvaron_goblin_healer ]
 		count: 10
 	}
+}
+
+entity thalvaron_captain_jerrington_quest_item: 
+{
+	string: "Suspicious Hole" 
+	
+	systems: [ openable ]
+	
+	components:
+	{	
+		position: {}
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ hole ] 		
+					z_offset: -3
+				}
+			]		
+		}		
+		openable: 
+		{ 
+			verb: inspect
+			range: 1
+			required_quest: .captain_jerrington_4
+			complete_manual_objective: .captain_jerrington_4_b
+			requirements:
+			{
+				requirement self<must_not_have_completed_quest>: .captain_jerrington_4
+			}
+			trigger_ability: $ability
+			{
+				flags: [ always_in_range always_in_line_of_sight ]
+				
+				direct_effect spawn_entity: { map_entity_spawn: thalvaron_goblin_tunneler entity: thalvaron_goblin_tunneler spawn_flags: [ no_owner detached ] npc_target_threat: 20 } 
+			}
+		}	
+	}
+}
+
+objective .captain_jerrington_4_b:
+{
+	string: "Source of Goblins Discovered"
+	maps: [ thalvaron ]	
+	manual_boolean: { }
 }
 
 quest .captain_jerrington_4:
@@ -230,11 +277,11 @@ quest .captain_jerrington_4:
 	
 	completion:
 	[
-		"A hole in the ground? That makes sense."
+		"A hole in the ground? That makes sense. I'll send a demolition team to take care of it as soon as possible."
 	]
 
 	level: 23
 	prerequisites: [ .goblin_boss_quest_item ]
-	objectives: [ .captain_jerrington_4 ]
+	objectives: [ .captain_jerrington_4_a .captain_jerrington_4_b ]
 }
 

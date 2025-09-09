@@ -301,6 +301,42 @@ entity voraghul_portal_closed:
 			required_quest: thalvaron_seren_virelith_3
 			complete_manual_objective: thalvaron_seren_virelith_3
 		}	
+		visibility:
+		{
+			requirements: { requirement self<must_not_have_item>: thalvaron_blimcraft_highborne_4_quest_item }
+		}
+	}
+}
+
+entity voraghul_portal_open:
+{
+	string: "Realm of Voraghul" 
+	
+	components:
+	{
+		position: { }		
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ orange_gateway_1 orange_gateway_2 orange_gateway_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+		gateway: 
+		{ 
+			maps: [ { map: trial_of_fire } ]
+			schedule: none
+		}
+		visibility:
+		{
+			requirements: { requirement self<must_have_item>: thalvaron_blimcraft_highborne_4_quest_item }
+		}		
 	}
 }
 

@@ -889,6 +889,14 @@ sprites:
 	sprite man_75_dead: { }	
 	sprite man_76_dead: { }	
 	sprite woman_35_dead: { }	
+	
+	cursor: { position: [ 0 768 ] }
+	sprite goblin_6: { dead: goblin_6_dead }
+	sprite crab_5: { dead: crab_5_dead }
+	
+	cursor: { position: [ 0 784 ] }
+	sprite goblin_6_dead: { }	
+	sprite crab_5_dead: { }	
 }
 
 sprites:

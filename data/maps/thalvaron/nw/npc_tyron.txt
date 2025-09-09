@@ -7,6 +7,7 @@ dialogue_screen .tyron_dialogue:
 	
 	options:
 	[
+		{ quest: .tyron_1 }
 	]
 }
 
@@ -23,3 +24,56 @@ entity thalvaron_tyron: !NPC
 	_not_pushable: true	
 }
 
+##########################################################################################
+# Quest 1
+
+loot_group .tyron_1_quest_item: { }
+
+item .tyron_1_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .tyron_1_quest_item ]		
+	string: "Juicy Claw" 
+	icon: icon_claw_2
+	stack: 12
+	item_level: 24
+	quest: .tyron_1
+	flags: [ not_sellable ]
+}
+
+objective .tyron_1:
+{
+	string: "Juicy Claws"
+	collect_items: { item: .tyron_1_quest_item count: 12 }
+}
+
+quest .tyron_1:
+{
+	string: "Northern Delicacy"
+
+	text:
+	[
+		"Hunt crabs on the beach and return their claws to Tyron."
+	]
+	
+	description: 
+	[
+		"We live off the land up here and have been doing it for a while. Don't really interact much with others, but we can always use a little help. If you don't have anything better to do, you can go"
+		"grab me some claws from the crabs that roam the beach. They make a mean soup.\n"
+		"\n"
+		"Oh, and watch out for the wolves."		
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Yummy. They'll go straight into the pot."
+	]
+
+	objectives: [ .tyron_1 ]
+	level: 24	
+}

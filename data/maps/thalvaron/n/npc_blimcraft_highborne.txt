@@ -10,6 +10,8 @@ dialogue_screen .blimcraft_highborne_dialogue:
 		{ quest: .blimcraft_highborne_1 }
 		{ quest: .blimcraft_highborne_2 }
 		{ quest<offer_only>: thalvaron_blimcraft_highborne_3 }
+		{ quest<offer_only>: thalvaron_blimcraft_highborne_4 }
+		{ quest<completion_only>: thalvaron_seren_virelith_4 }
 	]
 }
 
@@ -292,6 +294,52 @@ ability .blimcraft_highborne_3_portal_return:
 {
 	states: [ default ]                     
 	direct_effect move: { map_player_spawn: thalvaron_blimcraft_highborne_3_portal_return_spawn move_flags: [ set_teleported affect_target ] }
+}
+
+############################################################
+# Quest 4
+
+item thalvaron_blimcraft_highborne_4_quest_item:
+{
+	icon: icon_stone_2
+	item_level: 22
+	flags: [ not_sellable unique ]
+	string: "Firestone"
+	flavor: "Allows access to the Realm of Fire."
+}
+
+quest thalvaron_blimcraft_highborne_4:
+{
+	string: "Access to the Realm of Fire"
+	
+	text: 
+	[
+		"Use the orb in the building besides Blimcraft Highborne's tower to find his assistant."
+	]
+	
+	description: 
+	[
+		"You want to enter the \"demonic\" realm of fire? It's not really demonic, is it. Just an ordinary realm of fire.\n"
+		"\n"
+		"Go talk to my assistant. He'll hook you up with an artifact that will allow you to enter.\n"
+		"\n"
+		"Use the orb in my tower up north to reach him.\n"
+	]
+		
+	completion:
+	[
+		"The realm of fire. Good luck with that.\n"
+		"\n"
+		"I've heard it has been taken over by a mad wizard, so I'm not really sure what you should expect. Don't say I didn't warn you.\n"
+		"\n"
+		"Here, take this medallion. Keep it in your pocket and the portal will allow you to enter." 
+	]
+
+	level: 22
+	reward_xp_multiplier: 0.2
+	reward_cash_multiplier: 0.2
+	prerequisites: [ thalvaron_seren_virelith_4 ]
+	reward_all_items: [ thalvaron_blimcraft_highborne_4_quest_item ]
 }
 
 

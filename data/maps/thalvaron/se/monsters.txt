@@ -647,7 +647,7 @@ map_entity_spawn thalvaron_skaldrun_satyr:
 			
 				possibility: 
 				{ 
-					weight: 1 
+					weight: 2 
 					loot_group: .seren_virelith_2_quest_item 
 					requirement self<must_have_active_quest>: { id: .seren_virelith_2 }				
 				}			
@@ -745,6 +745,12 @@ map_entity_spawn thalvaron_se_boar:
 	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
+map_entity_spawn thalvaron_se_poison_crab: 
+{ 
+	entity thalvaron_se_poison_crab: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
 # Deer
 {
 
@@ -771,4 +777,19 @@ map_entity_spawn thalvaron_se_boar:
 	
 	entity thalvaron_se_boar_20: !NPC { _string: "Jungle Pig" _sprite: boar _sprite_dead: boar_dead _level: 20 }
 	entity thalvaron_se_boar_21: !NPC { _string: "Jungle Pig" _sprite: boar _sprite_dead: boar_dead _level: 21 }
+}
+
+# Poison crab
+{
+
+	${
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: default_crab
+		_abilities: [ { id: npc_poison_bite } { id: npc_attack } ]
+		_resource_health: 2.1
+	}
+	
+	entity thalvaron_se_poison_crab: !NPC { _string: "Poison Crawler" _sprite: crab_5 _sprite_dead: crab_5_dead _level: 22 }
 }

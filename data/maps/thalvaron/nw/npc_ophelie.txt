@@ -7,6 +7,7 @@ dialogue_screen .ophelie_dialogue:
 	
 	options:
 	[
+		{ quest: .ophelie_1 }	
 	]
 }
 
@@ -23,3 +24,55 @@ entity thalvaron_ophelie: !NPC
 	_not_pushable: true	
 }
 
+##########################################################################################
+# Quest 1
+
+loot_group .ophelie_1_quest_item: { }
+
+item .ophelie_1_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .ophelie_1_quest_item ]		
+	string: "Bloody Tusks" 
+	icon: icon_tusk_1
+	item_level: 24
+	quest: .ophelie_1
+	flags: [ not_sellable unique ]
+}
+
+objective .ophelie_1:
+{
+	string: "Bloody Tusks"
+	collect_items: { item: .ophelie_1_quest_item count: 1 }
+}
+
+quest .ophelie_1:
+{
+	string: "Potato Menace"
+
+	text:
+	[
+		"Hunt crabs on the beach and return their claws to Tyron."
+	]
+	
+	description: 
+	[
+		"Did you spot the potato field when you came here? We basically live off crabs and potatoes up here. What I wouldn't give for some real food... Oh, anyway. A giant angry boar has been roaming"
+		"around the potato field recently and I can't go there without getting chased off. What is worse, I think it's eating my potatoes!\n"
+		"\n"
+		"You seem rather resourceful, maybe you can do something about it?"
+	]
+
+	progress:
+	[
+		"It's a big mean oinker, isn't it?"
+	]
+	
+	completion:
+	[
+		"Thank you so much!"
+	]
+
+	objectives: [ .ophelie_1 ]
+	level: 24	
+}

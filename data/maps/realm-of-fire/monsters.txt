@@ -443,7 +443,6 @@ map_entity_spawn realm_of_fire_wizard_spawn_6: { spawn_timer: { only_when_trigge
 map_entity_spawn realm_of_fire_wizard_spawn_7: { spawn_timer: { only_when_triggered: true }	}
 map_entity_spawn realm_of_fire_wizard_spawn_8: { spawn_timer: { only_when_triggered: true }	}
 
-
 # Wizard himself
 {
 

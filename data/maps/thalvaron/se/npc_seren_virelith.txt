@@ -11,6 +11,7 @@ dialogue_screen .seren_virelith:
 		{ quest: .seren_virelith_1 }
 		{ quest: .seren_virelith_2 }
 		{ quest: thalvaron_seren_virelith_3 }
+		{ quest<offer_only>: thalvaron_seren_virelith_4 }
 	]
 }
 
@@ -84,7 +85,7 @@ item .seren_virelith_2_quest_item:
 	loot_groups: [ .seren_virelith_2_quest_item ]		
 	string: "Hairy Tentacle" 
 	icon: icon_tentacle_2
-	stack: 8
+	stack: 4
 	item_level: 22
 	quest: .seren_virelith_2
 	flags: [ not_sellable ]
@@ -93,7 +94,7 @@ item .seren_virelith_2_quest_item:
 objective .seren_virelith_2:
 {
 	string: "Hairy Tentacles"
-	collect_items: { item: .seren_virelith_2_quest_item count: 8 }
+	collect_items: { item: .seren_virelith_2_quest_item count: 4 }
 }
 
 quest .seren_virelith_2:
@@ -165,8 +166,7 @@ quest thalvaron_seren_virelith_3:
 	
 	completion:
 	[
-		"Yes, this is as expected. The cowardly wizard has retreated into his demonic realm of fire. The portal was sealed? I will think about a way to open it. I will find a way to reach you if I need"
-		"your assistance again."
+		"Yes, this is as expected. The cowardly wizard has retreated into his demonic realm of fire. The portal was sealed? Hmm..."
 	]
 
 	objectives: [ thalvaron_seren_virelith_3 ]
@@ -175,5 +175,90 @@ quest thalvaron_seren_virelith_3:
 	reward_one_item: [ .seren_virelith_3_a .seren_virelith_3_b ]
 }
 
+##########################################################################################
+# Quest 4
 
+loot_group .seren_virelith_4_quest_item: {}
+
+item .seren_virelith_4_quest_item:
+{
+	icon: icon_mushroom_2
+	item_level: 22
+	loot_groups: [ .seren_virelith_4_quest_item ]
+	flags: [ not_sellable unique ]
+	string: "Rare Skaldrun Mushroom"
+}
+
+loot_table .seren_virelith_4_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .seren_virelith_4_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_seren_virelith_4_quest_item:
+{
+	string: "Rare Skaldrun Mushroom"
+	systems: [ openable ]
+
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ mushroom_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .seren_virelith_4_quest_item
+			verb: pick_up
+			range: 1 
+			despawn: true 			
+			level: 22
+			required_quest: thalvaron_seren_virelith_4
+		}		
+	}
+}
+
+objective .seren_virelith_4:
+{
+	string: "Rare Skaldrun Mushroom"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .seren_virelith_4_quest_item count: 1 }
+}
+
+quest thalvaron_seren_virelith_4:
+{
+	string: "Blimcraft Highborne"
+
+	text:
+	[
+		"Pick the rare mushroom in the Skaldrun cave and bring it to Blimcraft Highborne in Eastern Faerandor."
+	]
+	
+	description: 
+	[
+		"I know of a wizard who is very good with portals, maybe you know of him as well. His name is Blimcraft Highborne and he lives up in Eastern Faerandor. If anyone knows how to break open the portal,"
+		"he is the one. You should seek him out and see if he is willing to help us.\n"
+		"\n"
+		"He is fond of exotic mushrooms, so I suggest you bring him one. If you follow the road north of here, you'll find a flooded cave. I heard there is a rare mushroom in there you can bring him."
+	]
+
+	progress:
+	[
+		"You got anything for me?"
+	]
+	
+	completion:
+	[
+		"Ohh, what is that?"
+	]
+
+	objectives: [ .seren_virelith_4 ]
+	prerequisites: [ thalvaron_seren_virelith_3 ]
+	level: 22
+}
 

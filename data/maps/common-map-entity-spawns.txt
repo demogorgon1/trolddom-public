@@ -148,6 +148,11 @@ map_entity_spawn voraghul_portal_closed:
 	entity voraghul_portal_closed: { weight: 1 init_state: default }	
 }
 
+map_entity_spawn voraghul_portal_open:
+{
+	entity voraghul_portal_open: { weight: 1 init_state: default }	
+}
+
 map_entity_spawn target_dummy:
 {
 	entity target_dummy: { weight: 1 }
