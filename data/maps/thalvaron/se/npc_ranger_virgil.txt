@@ -1,0 +1,26 @@
+dialogue_screen .ranger_virgil_greetings:
+{
+	text: 
+	[	
+		"Tread lightly."
+	]
+	
+	options:
+	[
+		{ quest<completion_only>: thalvaron_ranger_roel_2 }
+	]
+}
+
+entity thalvaron_ranger_virgil: !NPC
+{
+	_string: "Ranger Virgil"
+	_dialogue_root: $dialogue_root { .ranger_virgil_greetings: { } }
+	_sprite: woman_5
+	_sprite_dead: woman_5_dead	
+	_level: 30
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

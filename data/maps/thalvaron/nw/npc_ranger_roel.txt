@@ -1,0 +1,150 @@
+dialogue_screen .ranger_roel_dialogue:
+{
+	text: 
+	[	
+		"Greetings.\n"
+		"\n"
+		"Why I don't just live in the cabin? Why would I? I prefer sleeping on the grass."
+	]		
+	
+	options:
+	[
+		{ quest: .ranger_roel_1 }
+		{ quest<offer_only>: thalvaron_ranger_roel_2 }
+	]
+}
+
+entity thalvaron_ranger_roel: !NPC
+{
+	_string: "Ranger Roel"
+	_dialogue_root: $dialogue_root { .ranger_roel_dialogue: { } }
+	_sprite: man_77
+	_sprite_dead: man_77_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+##########################################################################################
+# Quest 1
+
+loot_group .ranger_roel_1_quest_item: {}
+
+item .ranger_roel_1_quest_item:
+{
+	icon: icon_brown_bag
+	item_level: 23
+	loot_groups: [ .ranger_roel_1_quest_item ]
+	flags: [ not_sellable unique ]
+	string: "Roel's Stuff"
+}
+
+loot_table .ranger_roel_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .ranger_roel_1_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_ranger_roel_1_quest_item:
+{
+	string: "Roel's Stuff"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ satchel ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .ranger_roel_1_quest_item
+			verb: pick_up
+			range: 1 
+			level: 23
+			despawn: true 		
+			required_quest: .ranger_roel_1
+		}		
+	}
+}
+
+objective .ranger_roel_1:
+{
+	string: "Roel's Stuff"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .ranger_roel_1_quest_item count: 1 }
+}
+
+quest .ranger_roel_1:
+{
+	string: "Satchel Recovering"
+
+	text:
+	[
+		"Went into the caves to find Roel's satchel and return it to him."
+	]
+	
+	description: 
+	[
+		"Didn't expect to see anyone here. It's been ages since last time I had a visitor. Or, well, recently goblins have been coming out of the caves at night to steal my things. They seem to be afraid of me,"
+		"but yesterday they stole my satchel.\n"		
+		"\n"
+		"I went in there to look for it, but couldn't find it. Maybe you can retrieve it for me?"
+	]
+
+	progress:
+	[
+		"Ah, yes, you don't need to help if you don't have time."
+	]
+	
+	completion:
+	[
+		"Thank you."
+	]
+
+	objectives: [ .ranger_roel_1 ]
+	level: 23
+}
+
+##########################################################################################
+# Quest 2
+
+item .ranger_roel_2_quest_item:
+{
+	icon: icon_envelope_1
+	item_level: 23
+	flags: [ not_sellable unique ]
+	string: "Sealed Envelope"
+}
+
+quest thalvaron_ranger_roel_2:
+{
+	string: "Delivery to Tirnwood"
+
+	text:
+	[
+		"Deliver the letter to Ranger Virgil in Tirnwood."
+	]
+	
+	description: 
+	[
+		"I have a final task for you, if you don't mind a little traveling. I need you to deliver an important letter to my fellow ranger Virgil, currently in Tirnwood. Can you do that?"
+	]
+
+	completion:
+	[
+		"You coming all the way from Roel? Hmm. This doesn't bode well."
+	]
+
+	reward_xp_multiplier: 0.5
+	reward_cash_multiplier: 0.5
+	quest_items: [ .ranger_roel_2_quest_item ]
+	level: 23
+	prerequisites: [ .ranger_roel_1 ]
+}
