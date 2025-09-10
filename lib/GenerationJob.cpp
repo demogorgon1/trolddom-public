@@ -1218,10 +1218,21 @@ namespace tpublic
 
 					std::unordered_map<std::string, uint32_t> materials = baseMaterials;
 
-					uint32_t commonMaterialCount = 1 + (uint32_t)(itemPrefix->m_materialMultiplier * (float)level);
-					const char* commonMaterialName = _PickMaterialName(level, Rarity::ID_COMMON, professionTagId);
-					assert(commonMaterialName != NULL);
-					materials[commonMaterialName] = commonMaterialCount; 
+					// Primary common material
+					{
+						uint32_t commonMaterialCount = 1 + (uint32_t)(0.5f * itemPrefix->m_materialMultiplier * (float)level);
+						const char* commonMaterialName = _PickMaterialName(level, Rarity::ID_COMMON, professionTagId);
+						assert(commonMaterialName != NULL);
+						materials[commonMaterialName] = commonMaterialCount;
+					}
+
+					// Secondary common material
+					{
+						uint32_t commonMaterialCount = 1 + (uint32_t)(0.5f * itemPrefix->m_materialMultiplier * (float)level);
+						const char* commonMaterialName = _PickMaterialName(level, Rarity::ID_COMMON, professionTagId);
+						assert(commonMaterialName != NULL);
+						materials[commonMaterialName] += commonMaterialCount;
+					}
 
 					if((uint32_t)itemPrefix->m_rarity >= (uint32_t)Rarity::ID_UNCOMMON)
 					{

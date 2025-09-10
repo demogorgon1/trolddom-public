@@ -94,10 +94,10 @@ item item_brontium_ingot:
 
 item item_cindralite_ingot:
 {
-	item_level: 22
+	item_level: 20
 	icon: icon_cindralite_ingot
 	string: "Cindralite Ingot"
-	stack: 22
+	stack: 20
 	tags: [ blacksmithing ]
 }
 

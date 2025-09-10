@@ -117,7 +117,7 @@ item item_corpse_worm:
 item item_zombie_hair:
 {
 	type: miscellaneous
-	item_level: 14
+	item_level: 20
 	level_range: [ 14 25 ]
 	icon: icon_hair_1
 	string: "Coarse Zombie Hair"
@@ -141,7 +141,7 @@ item item_ghoul_claw:
 item item_beast_jaw:
 {
 	type: miscellaneous
-	item_level: 15
+	item_level: 20
 	level_range: [ 12 25 ]
 	icon: icon_jaw_1
 	string: "Menacing Jaw"
@@ -214,7 +214,7 @@ item item_crab_claw:
 {
 	type: miscellaneous
 	item_level: 10
-	level_range: [ 10 25 ]
+	level_range: [ 10 20 ]
 	icon: icon_crab_claw_1
 	string: "Sharp Claw"
 	stack: 20
@@ -226,7 +226,7 @@ item item_crab_leg:
 {
 	type: miscellaneous
 	item_level: 10
-	level_range: [ 10 25 ]
+	level_range: [ 10 20 ]
 	icon: icon_insect_leg_1
 	string: "Tough Crab Leg"
 	stack: 20
@@ -238,7 +238,7 @@ item item_earth_core:
 {
 	type: miscellaneous
 	item_level: 10
-	level_range: [ 10 25 ]
+	level_range: [ 10 20 ]
 	icon: icon_earth_1
 	rarity: uncommon
 	string: "Earth Core"
@@ -251,7 +251,7 @@ item item_enchanted_dirt:
 {
 	type: miscellaneous
 	item_level: 14
-	level_range: [ 14 25 ]
+	level_range: [ 14 20 ]
 	icon: icon_earth_1
 	rarity: uncommon
 	string: "Enchanted Dirt"
@@ -408,7 +408,7 @@ item item_retractable_claws:
 item item_demon_fur:
 {
 	type: miscellaneous
-	item_level: 10
+	item_level: 20
 	level_range: [ 10 25 ]
 	icon: icon_hair_3
 	string: "Demon Hair"
@@ -420,7 +420,7 @@ item item_demon_fur:
 item item_demon_teeth:
 {
 	type: miscellaneous
-	item_level: 10
+	item_level: 20
 	level_range: [ 10 25 ]
 	icon: icon_teeth_2
 	string: "Demon Teeth"
@@ -432,7 +432,7 @@ item item_demon_teeth:
 item item_demon_heart:
 {
 	type: miscellaneous
-	item_level: 10
+	item_level: 20
 	level_range: [ 10 25 ]
 	icon: icon_demon_heart_1
 	rarity: uncommon
@@ -581,7 +581,7 @@ item item_ectoplasm:
 item item_elemental_fire:
 {
 	type: miscellaneous
-	item_level: 24
+	item_level: 20
 	level_range: [ 22 30 ]
 	icon: icon_elemental_fire
 	string: "Elemental Fire"
@@ -594,13 +594,63 @@ item item_elemental_fire:
 item item_enchanted_coal:
 {
 	type: miscellaneous
-	item_level: 24
+	item_level: 20
 	level_range: [ 22 30 ]
 	icon: icon_enchanted_coal
 	string: "Enchanted Coal"	
 	stack: 10
 	loot_groups: [ fire_elementals ]
 	tags: [ reagent ]			
+}
+
+item item_crab_claw_2:
+{
+	type: miscellaneous
+	item_level: 20
+	level_range: [ 21 25 ]
+	icon: icon_claw_6
+	string: "Brutal Claw"
+	stack: 20
+	loot_groups: [ crabs ]
+	tags: [ reagent ]	
+}
+
+item item_crab_leg_2:
+{
+	type: miscellaneous
+	item_level: 20
+	level_range: [ 21 30 ]
+	icon: icon_insect_leg_3
+	string: "Fine Crab Leg"
+	stack: 20
+	loot_groups: [ crabs ]
+	tags: [ reagent ]	
+}
+
+item item_earth_core_2:
+{
+	type: miscellaneous
+	item_level: 20
+	level_range: [ 21 25 ]
+	icon: icon_rock_2
+	rarity: uncommon
+	string: "Dark Mantle Core"
+	stack: 10
+	loot_groups: [ earth_elementals_uncommon demons ]
+	tags: [ reagent ]	
+}
+
+item item_enchanted_dirt_2:
+{
+	type: miscellaneous
+	item_level: 20
+	level_range: [ 21 25 ]
+	icon: icon_dirt_1
+	rarity: uncommon
+	string: "Arcane Dirt"
+	stack: 10
+	loot_groups: [ earth_elementals_uncommon ]
+	tags: [ reagent ]	
 }
 
 #####################################################

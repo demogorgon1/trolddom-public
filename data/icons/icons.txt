@@ -831,6 +831,10 @@ sprites:
 	sprite icon_fishing_rod_2 : { tags: [ icon ] }
 	sprite icon_lava_shrimp : { tags: [ icon ] }
 	sprite icon_lava_shrimp_cooked : { tags: [ icon ] }
+	sprite icon_claw_6 : { tags: [ icon ] }
+	sprite icon_insect_leg_3 : { tags: [ icon ] }
+	sprite icon_rock_2 : { tags: [ icon ] }
+	sprite icon_dirt_1 : { tags: [ icon ] }
 	
 }
 
