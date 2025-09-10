@@ -140,6 +140,7 @@ map_palette .stuff:
 {
 	entity_spawn spirit_stone: [ 0 0 0 ]	
 	entity_spawn fire: [ 255 122 0 ]	
+	entity_spawn default_chest: [ 40 143 66 ]		
 	
 	entity_spawn .exit_portal: [ 130 88 66 ]
 	entity_spawn .throne_of_voraghul_portal: [ 130 88 166 ]

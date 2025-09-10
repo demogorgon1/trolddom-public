@@ -10,6 +10,7 @@ dialogue_screen .ranger_roel_dialogue:
 	options:
 	[
 		{ quest: .ranger_roel_1 }
+		{ quest: .ranger_roel_3 }
 		{ quest<offer_only>: thalvaron_ranger_roel_2 }
 	]
 }
@@ -118,7 +119,7 @@ quest .ranger_roel_1:
 item .ranger_roel_2_quest_item:
 {
 	icon: icon_envelope_1
-	item_level: 23
+	item_level: 24
 	flags: [ not_sellable unique ]
 	string: "Sealed Envelope"
 }
@@ -145,6 +146,54 @@ quest thalvaron_ranger_roel_2:
 	reward_xp_multiplier: 0.5
 	reward_cash_multiplier: 0.5
 	quest_items: [ .ranger_roel_2_quest_item ]
-	level: 23
-	prerequisites: [ .ranger_roel_1 ]
+	level: 24
+	prerequisites: [ .ranger_roel_3 ]
 }
+
+############################################################
+# Quest 3
+
+objective .ranger_roel_3:
+{
+	string: "Thunderclaw Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_north_crabman_boss ]
+		count: 1
+	}
+}
+
+quest .ranger_roel_3:
+{
+	string: "Crabs Aren't Supposed to Shoot Lightning"
+
+	text:
+	[
+		"Venture north of Outcast Coast and track down and kill the giant green crab that shoots lightning."
+	]
+	
+	description: 
+	[
+		"Aetheris Island is just across the water from here and have long been plagued by weird crabs walking on their hind legs, some even employing tools, weapons, and magic. Well, now they seem to have"
+		"reached our shores as well. I haven't seen them other places so hopefully they're not too widespread. Anyway, yesterday I went for a walk up by the old fort when suddenly a giant green crab appeared out"
+		"of nowhere and blasted me with some kind of lightning strike. I don't want to deal with that. Can you go up there and take care of it?"
+	]
+
+	progress:
+	[
+		"Cold feet?"
+	]
+	
+	completion:
+	[
+		"That's less to worry about, good."
+	]
+
+	level: 24
+	prerequisites: [ .ranger_roel_1 ]
+	objectives: [ .ranger_roel_3 ]
+}
+

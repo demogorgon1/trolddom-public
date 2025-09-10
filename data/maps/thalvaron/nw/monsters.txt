@@ -993,6 +993,67 @@ map_entity_spawn thalvaron_north_crab:
 }
 
 ##########################################################################################
+# Crabmen
+
+map_entity_spawn thalvaron_north_crabman: 
+{ 
+	entity thalvaron_north_crabman_melee: {} 
+	entity thalvaron_north_crabman_caster: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_north_crabman_boss: 
+{ 
+	entity thalvaron_north_crabman_boss: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Melee
+{
+	${
+		_level: 24
+		_faction: monsters
+		_creature_type: humanoid
+		_weapon_damage: 1.1
+		_resource_health: 1.1
+		_default_behavior_state: .wandering_short
+		_loot_table: default_crab
+	}
+
+	entity thalvaron_north_crabman_melee: !NPC { _string: "Crabman Warrior" _sprite: crab_monster_3 _sprite_dead: crab_monster_3_dead _abilities: [ { id: npc_attack } ] }
+}
+
+# Caster
+{
+	${
+		_level: 24
+		_faction: monsters
+		_creature_type: humanoid
+		_weapon_damage: 0.8
+		_resource_health: 0.75
+		_default_behavior_state: .wandering_short
+		_loot_table: default_crab
+	}
+
+	entity thalvaron_north_crabman_caster: !NPC { _string: "Crabman Soothsayer" _sprite: crab_caster_3 _sprite_dead: crab_caster_3_dead _abilities: [ { id: npc_frostbolt_no_cooldown } { id: npc_attack } ] }
+}
+
+# Boss
+{
+	${
+		_level: 24
+		_faction: monsters
+		_creature_type: humanoid
+		_weapon_damage: 1.1
+		_resource_health: 1.95
+		_default_behavior_state: .wandering_short
+		_loot_table: default_crab
+	}
+
+	entity thalvaron_north_crabman_boss: !NPC { _string: "Thunderclaw" _sprite: crab_caster_boss_2 _sprite_dead: crab_caster_boss_2_dead _abilities: [ { id: npc_chain_lightning } { id: npc_attack } ] }
+}
+
+##########################################################################################
 # Goblins
 
 map_entity_spawn thalvaron_goblin: 

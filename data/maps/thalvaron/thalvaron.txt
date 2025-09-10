@@ -93,6 +93,7 @@ zone .northgrove_caves: { string: "Northgrove Caves" }
 zone .outcast_coast: { string: "Outcast Coast" }
 zone .tyrons_land: { string: "Tyron's Land" }
 zone .tyrons_rock: { string: "Tyron's Rock" }
+zone .cape_valor: { string: "Cape Valor" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -595,6 +596,8 @@ map_palette .stuff:
 	entity_spawn thalvaron_goblin_tunneler: [ 104 83 97 ]
 	entity_spawn thalvaron_ranger_roel_1_quest_item: [ 77 63 148 ]
 	entity_spawn thalvaron_ranger_roel: [ 177 163 148 ]
+	entity_spawn thalvaron_north_crabman: [ 12 38 93 ]
+	entity_spawn thalvaron_north_crabman_boss: [ 212 38 93 ]
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				
@@ -965,6 +968,7 @@ map_palette .zones:
 	zone .outcast_coast: [ 26 129 225 ]
 	zone .tyrons_land: [ 225 199 26 ]	
 	zone .tyrons_rock: [ 24 173 24 ]
+	zone .cape_valor: [ 225 26 90 ]
 }
 
 map_palette .sub_zones:
