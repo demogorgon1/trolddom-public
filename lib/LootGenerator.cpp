@@ -245,7 +245,7 @@ namespace tpublic
 				accumWeight += possibility.m_weight;
 				Entry& t = entries[entryCount++];
 				t.m_accumWeight = accumWeight;
-				t.m_quantity = possibility.m_quantity;
+				t.m_quantity = possibility.m_quantity.GetRandom(aRandom);
 				t.m_lootGroupId = possibility.m_lootGroupId;
 
 				if(possibility.m_useSpecialLootCooldown && aLootableEntityInstance != NULL)

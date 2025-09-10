@@ -492,6 +492,27 @@ namespace tpublic
 				}
 				break;
 
+			case Requirement::TYPE_MUST_HAVE_FISHING_ROD_EQUIPPED:
+				{
+					if (!entity->IsPlayer())
+						return false;
+
+					const Components::EquippedItems* equippedItems = entity->GetComponent<Components::EquippedItems>();
+					bool isEquipped = false;
+
+					const ItemInstance& item = equippedItems->m_slots.m_items[EquipmentSlot::ID_MAIN_HAND];
+					if(item.IsSet())
+					{
+						const Data::Item* itemData = aManifest->GetById<Data::Item>(item.m_itemId);
+						if(itemData->m_flags & Data::Item::FLAG_FISHING_ROD)
+							isEquipped = true;
+					}
+
+					if(!isEquipped)
+						return false;
+				}
+				break;
+
 			default:
 				assert(false);
 				break;

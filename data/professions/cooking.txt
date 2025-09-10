@@ -215,3 +215,41 @@ item recipe_piranha_soup:
 		}
 	}
 }
+
+#####################################################
+# Hot Grilled Shrimp
+
+ability craft_hot_grilled_shrimp: !COOKING_CRAFT
+{
+	_string: "Hot Grilled Shrimp"
+	_item: consumable_hot_grilled_shrimp
+	_produce: { consumable_hot_grilled_shrimp: 1 } 
+	_materials: { item_lava_shrimp: 3 }	
+	_skill: 100
+}
+
+item recipe_hot_grilled_shrimp:
+{
+	binds: when_picked_up
+	type: miscellaneous
+	flags: [ unique ]
+	rarity: uncommon
+	item_level: 25
+	icon: icon_scroll_1
+	string: "Recipe: Hot Grilled Shrimp"
+	use_ability: $ability [ string icon ]
+	{
+		description: "Learn to make Hot Grilled Shrimp."
+		flags: [ target_self item ]
+		cast_time: 20
+		cooldowns: [ global ]	
+		consume_items: { recipe_hot_grilled_shrimp: 1 }
+		required_profession<100>: cooking
+		requirement self<must_not_have_profession_ability>: craft_hot_grilled_shrimp
+		direct_effect learn_profession_ability:
+		{
+			profession: cooking
+			ability: craft_hot_grilled_shrimp
+		}
+	}
+}

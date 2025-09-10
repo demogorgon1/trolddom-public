@@ -64,7 +64,8 @@ namespace tpublic
 			TYPE_MUST_NOT_HAVE_STARTED_SURVIVAL,
 			TYPE_MUST_HAVE_STARTED_SURVIVAL,
 			TYPE_MUST_NOT_BE_ON_MAP,
-			TYPE_MUST_BE_ON_MAP
+			TYPE_MUST_BE_ON_MAP,
+			TYPE_MUST_HAVE_FISHING_ROD_EQUIPPED
 		};
 
 		static DataType::Id
@@ -274,6 +275,8 @@ namespace tpublic
 				m_type = TYPE_MUST_NOT_BE_ON_MAP;
 			else if (typeString == "must_be_on_map")
 				m_type = TYPE_MUST_BE_ON_MAP;
+			else if(typeString == "must_have_fishing_rod_equipped")
+				m_type = TYPE_MUST_HAVE_FISHING_ROD_EQUIPPED;
 			else
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid type.", aSource->m_annotation->GetIdentifier());
 

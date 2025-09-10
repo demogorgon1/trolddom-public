@@ -6,6 +6,7 @@
 
 #include <tpublic/Data/Ability.h>
 #include <tpublic/Data/Entity.h>
+#include <tpublic/Data/LootTable.h>
 #include <tpublic/Data/Profession.h>
 #include <tpublic/Data/Sprite.h>
 #include <tpublic/Data/Zone.h>
@@ -17,6 +18,7 @@
 #include <tpublic/IWorldView.h>
 #include <tpublic/Manifest.h>
 #include <tpublic/MapData.h>
+#include <tpublic/Requirements.h>
 #include <tpublic/WorldInfoMap.h>
 
 namespace tpublic::DirectEffects
@@ -140,28 +142,52 @@ namespace tpublic::DirectEffects
 
 			if(lootTableId != 0)
 			{				
-				uint32_t skillRequired = (level - 1) * 5;
+				bool hasPossibleLoot = false;
 
-				const Components::PlayerPrivate* playerPrivate = aTarget->GetComponent<Components::PlayerPrivate>();
-				uint32_t fishingProfessionId = aManifest->GetExistingIdByName<Data::Profession>("fishing");
-
-				if(playerPrivate->m_professions.HasProfessionSkill(fishingProfessionId, skillRequired))
+				// Check all loot possibilities... only proceed (make splash) if all requirements are matched for at least one possibibility
 				{
-					// Each tick has 10% chance of making a splash
-					tpublic::UniformDistribution<uint32_t> distribution(1, 100);
-					if(distribution(aRandom) <= 10)
+					const Data::LootTable* lootTable = aManifest->GetById<Data::LootTable>(lootTableId);
+					for (const std::unique_ptr<Data::LootTable::Slot>& slot : lootTable->m_slots)
 					{
-						uint32_t fishingSplashEntityId = aManifest->GetExistingIdByName<Data::Entity>("fishing_splash");
+						for (const Data::LootTable::Possibility& possibility : slot->m_possibilities)
+						{
+							if (Requirements::CheckList(aManifest, possibility.m_requirements, aSource, aTarget))
+							{
+								hasPossibleLoot = true;
+								break;
+							}
+						}
 
-						EntityInstance* splashEntity = aEventQueue->EventQueueSpawnEntity(fishingSplashEntityId, EntityState::ID_DEFAULT, 0, false);
+						if (hasPossibleLoot)
+							break;
+					}
+				}
 
-						Components::Position* splashPosition = splashEntity->GetComponent<Components::Position>();
-						splashPosition->m_position = fishingPosition.value();
+				if(hasPossibleLoot)
+				{
+					uint32_t skillRequired = (level - 1) * 5;
 
-						Components::Openable* splashOpenable = splashEntity->GetComponent<Components::Openable>();
-						splashOpenable->m_lootTableId = map->m_mapInfo.m_defaultFishingLootTableId;
-						splashOpenable->m_requiredProfessionSkill = skillRequired;
-						splashOpenable->m_level = level;
+					const Components::PlayerPrivate* playerPrivate = aTarget->GetComponent<Components::PlayerPrivate>();
+					uint32_t fishingProfessionId = aManifest->GetExistingIdByName<Data::Profession>("fishing");
+
+					if (playerPrivate->m_professions.HasProfessionSkill(fishingProfessionId, skillRequired))
+					{
+						// Each tick has 10% chance of making a splash
+						UniformDistribution<uint32_t> distribution(1, 100);
+						if (distribution(aRandom) <= 10)
+						{
+							uint32_t fishingSplashEntityId = aManifest->GetExistingIdByName<Data::Entity>("fishing_splash");
+
+							EntityInstance* splashEntity = aEventQueue->EventQueueSpawnEntity(fishingSplashEntityId, EntityState::ID_DEFAULT, 0, false);
+
+							Components::Position* splashPosition = splashEntity->GetComponent<Components::Position>();
+							splashPosition->m_position = fishingPosition.value();
+
+							Components::Openable* splashOpenable = splashEntity->GetComponent<Components::Openable>();
+							splashOpenable->m_lootTableId = lootTableId;
+							splashOpenable->m_requiredProfessionSkill = skillRequired;
+							splashOpenable->m_level = level;
+						}
 					}
 				}
 			}

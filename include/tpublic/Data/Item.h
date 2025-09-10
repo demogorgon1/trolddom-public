@@ -30,7 +30,8 @@ namespace tpublic
 				FLAG_VENDOR							= 0x00000004,
 				FLAG_KILL_CONTRIBUTION_LOOT			= 0x00000008,
 				FLAG_QUEST_REWARD					= 0x00000010,
-				FLAG_DUNGEON_LOOT					= 0x00000020
+				FLAG_DUNGEON_LOOT					= 0x00000020,
+				FLAG_FISHING_ROD					= 0x00000040
 			};
 
 			static inline uint32_t
@@ -54,6 +55,8 @@ namespace tpublic
 						flags |= FLAG_QUEST_REWARD;
 					else if (strcmp(identifier, "dungeon_loot") == 0)
 						flags |= FLAG_DUNGEON_LOOT;
+					else if (strcmp(identifier, "fishing_rod") == 0)
+						flags |= FLAG_FISHING_ROD;
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item flag.", identifier);
 				});

@@ -827,6 +827,10 @@ sprites:
 	cursor: { position: [ 0 720 ] }	
 	sprite icon_stone_2 : { tags: [ icon ] }
 	sprite icon_envelope_1 : { tags: [ icon ] }
+	sprite icon_crystal_3 : { tags: [ icon ] }
+	sprite icon_fishing_rod_2 : { tags: [ icon ] }
+	sprite icon_lava_shrimp : { tags: [ icon ] }
+	sprite icon_lava_shrimp_cooked : { tags: [ icon ] }
 	
 }
 

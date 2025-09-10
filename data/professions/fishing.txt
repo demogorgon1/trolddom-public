@@ -36,7 +36,7 @@ ability fishing:
 	icon: icon_fishing_rod
 	states: [ default in_combat ]	
 	direct_effect apply_aura: { aura: fishing }
-	requirement self<must_have_item_equipped>: { id: weapon_fishing_rod }
+	requirement self<must_have_fishing_rod_equipped>: {}
 }
 
 context_help fishing:
@@ -72,7 +72,10 @@ entity fishing_splash:
 			range: 10 
 			despawn: true 									
 			instant: true
-			required_item: weapon_fishing_rod
+			requirements:
+			{
+				requirement self<must_have_fishing_rod_equipped>: {}
+			}
 			duration: 20
 			context_help: fishing
 			trigger_ability: $ability
@@ -86,10 +89,26 @@ entity fishing_splash:
 loot_group fish: { } 
 loot_group fish_jungle: { } 
 loot_group fish_skaldrun: { } 
+loot_group fish_realm_of_fire: { } 
 
 loot_table fish: { slots: [ { possibility: { weight: 1 loot_group: fish } } ] }
 loot_table fish_jungle: { slots: [ { possibility: { weight: 2 loot_group: fish_jungle } possibility: { weight: 1 loot_group: fish } } ] }
 loot_table fish_skaldrun: { slots: [ { possibility: { weight: 2 loot_group: fish_skaldrun } possibility: { weight: 1 loot_group: fish } } ] }
+
+loot_table fish_realm_of_fire: 
+{ 
+	slots: 
+	[ 
+		{ 
+			possibility: 
+			{ 
+				loot_group: fish_realm_of_fire 
+				quantity: [ 1 3 ] 
+				requirement self<must_have_item_equipped>: realm_of_fire_fishing_rod
+			} 
+		} 
+	] 
+}
 
 ################################################################################
 # Herring 
@@ -232,4 +251,17 @@ item item_piranha:
 	stack: 20
 	item_level: 22
 	level_range: [ 20 22 ]
+}
+
+################################################################################
+# Lava Shrimp
+
+item item_lava_shrimp:
+{
+	loot_groups: [ fish_realm_of_fire ]		
+	string: "Lava Shrimp"
+	icon: icon_lava_shrimp
+	stack: 20
+	item_level: 25
+	level_range: [ 20 30 ]
 }

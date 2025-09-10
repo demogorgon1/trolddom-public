@@ -469,3 +469,25 @@
 	ability consumable_piranha_soup: !ABILITY_FOOD { _buff: consumable_piranha_soup_buff }
 	item consumable_piranha_soup: !ITEM_FOOD {}
 }
+
+#####################################################
+# Hot Grilled Shrimp
+{
+	${
+		_string: "Hot Grilled Shrimp"
+		_description: "Restores 1460 health and mana over 10 seconds. Gain 10 Constitution for 20 min. Can't be used in combat."
+		_level: 20
+		_icon: icon_lava_shrimp_cooked
+		_heal_tick: 146
+		_ability_tick: consumable_hot_grilled_shrimp_tick
+		_ability: consumable_hot_grilled_shrimp
+		_aura: consumable_hot_grilled_shrimp
+		_item: { consumable_hot_grilled_shrimp: 1 }
+	}
+
+	aura consumable_hot_grilled_shrimp_buff: !AURA_FOOD_BUFF { _stat_modifiers: { constitution: { add: 10 } } }
+	ability consumable_hot_grilled_shrimp_tick: !ABILITY_FOOD_TICK {}
+	aura consumable_hot_grilled_shrimp: !AURA_FOOD {}
+	ability consumable_hot_grilled_shrimp: !ABILITY_FOOD { _buff: consumable_hot_grilled_shrimp_buff }
+	item consumable_hot_grilled_shrimp: !ITEM_FOOD {}
+}

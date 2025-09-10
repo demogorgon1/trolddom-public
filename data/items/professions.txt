@@ -25,6 +25,7 @@ item weapon_blacksmithing_hammer:
 item weapon_fishing_rod:
 {
 	type: weapon_2h_staff
+	flags: [ fishing_rod ]
 	equipment_slots: [ main_hand ]
 	required_level: 1
 	item_level: 1
