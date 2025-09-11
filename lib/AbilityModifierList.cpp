@@ -93,6 +93,20 @@ namespace tpublic
 	}
 
 	int32_t														
+	AbilityModifierList::GetAbilityModifyAuraDuration(
+		uint32_t						aAbilityId) const
+	{
+		int32_t result = 0;
+		const std::vector<const Data::AbilityModifier*>* abilityModifiers = GetAbility(aAbilityId);
+		if(abilityModifiers != NULL)
+		{
+			for(const Data::AbilityModifier* abilityModifier : *abilityModifiers)
+				result += abilityModifier->m_modifyAuraDuration;
+		}
+		return result;
+	}
+
+	int32_t														
 	AbilityModifierList::GetAbilityModifyRange(
 		uint32_t						aAbilityId) const
 	{

@@ -231,19 +231,24 @@ namespace tpublic
 		virtual AuraEffectBase*	Copy() const { assert(false); return NULL; }
 		virtual int32_t			FilterDamageInput(
 									DirectEffect::DamageType		/*aDamageType*/,
-									int32_t							aDamage) const { return aDamage; }
+									int32_t							aDamage,
+									uint32_t						/*aAbilityId*/) const { return aDamage; }
 		virtual int32_t			FilterDamageOutput(
 									const Manifest*					/*aManifest*/,
 									const EntityInstance*			/*aSource*/,
 									const EntityInstance*			/*aTarget*/,
 									DirectEffect::DamageType		/*aDamageType*/,
-									int32_t							aDamage) const { return aDamage; }
+									int32_t							aDamage,
+									uint32_t						/*aAbilityId*/) const { return aDamage; }
 		virtual int32_t			FilterHealInput(
-									int32_t							aHeal) const { return aHeal; }
+									int32_t							aHeal,
+									uint32_t						/*aAbilityId*/) const { return aHeal; }
 		virtual int32_t			FilterHealOutput(
-									int32_t							aHeal) const { return aHeal; }
+									int32_t							aHeal,
+									uint32_t						/*aAbilityId*/) const { return aHeal; }
 		virtual int32_t			FilterThreat(
-									int32_t							aThreat) const { return aThreat; }
+									int32_t							aThreat,
+									uint32_t						/*aAbilityId*/) const { return aThreat; }
 		virtual float			GetResourceCostMultiplier() const { return 1.0f; }
 		virtual void			OnDamageInput(
 									const EntityInstance*			/*aSource*/,

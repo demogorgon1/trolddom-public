@@ -32,7 +32,8 @@ namespace tpublic
 								const EntityInstance*		aSource,
 								const EntityInstance*		aTarget,
 								DirectEffect::DamageType	aDamageType,
-								int32_t						aDamage) const override;
+								int32_t						aDamage,
+								uint32_t					aAbilityId) const override;
 
 			void
 			FromSource(
@@ -74,6 +75,10 @@ namespace tpublic
 							m_multiplierDenominator = aChild->GetInt32();
 							TP_VERIFY(m_multiplierDenominator != 0, aChild->m_debugInfo, "Multiplier denominator can't be zero.");
 						}
+						else if(aChild->m_name == "apply_to_abilities")
+						{
+							aChild->GetIdArray(DataType::ID_ABILITY, m_applyToAbilityIds);
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -90,6 +95,7 @@ namespace tpublic
 				aStream->WriteUInt(m_typeMask);
 				aStream->WriteInt(m_multiplierNumerator);
 				aStream->WriteInt(m_multiplierDenominator);
+				aStream->WriteUInts(m_applyToAbilityIds);
 			}
 
 			bool
@@ -104,6 +110,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadInt(m_multiplierDenominator))
 					return false;
+				if(!aStream->ReadUInts(m_applyToAbilityIds))
+					return false;
 				return true;
 			}
 
@@ -116,6 +124,7 @@ namespace tpublic
 				t->m_typeMask = m_typeMask;
 				t->m_multiplierNumerator = m_multiplierNumerator;
 				t->m_multiplierDenominator = m_multiplierDenominator;
+				t->m_applyToAbilityIds = m_applyToAbilityIds;
 
 				return t;
 			}
@@ -124,6 +133,7 @@ namespace tpublic
 			uint32_t					m_typeMask = 0;
 			int32_t						m_multiplierNumerator = 1;
 			int32_t						m_multiplierDenominator = 1;
+			std::vector<uint32_t>		m_applyToAbilityIds;
 		};
 
 	}

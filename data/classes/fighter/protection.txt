@@ -16,6 +16,7 @@ talent_tree fighter_protection:
 		talent fighter_protection_revenge: "H"
 		talent fighter_protection_last_stand: "I"
 		talent fighter_protection_shield_crush: "J"
+		talent fighter_protection_heroic_strike: "K"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_right_arrow: "r"
 	}
@@ -26,10 +27,80 @@ talent_tree fighter_protection:
 		"..d...."
 		"D.GrB.F"
 		"d.d...."
-		"E.I.H.."
+		"E.I.H.K"
 		"....d.."
 		"....J.."
 	]
+}
+
+###############################################################################
+# Heroic Strike
+
+talent fighter_protection_heroic_strike:
+{
+	string: "Heroic Strike"
+	icon: icon_strike_2
+	talent_tree_points_required: 10
+	points:
+	[
+		{ aura: fighter_protection_heroic_strike_1 }
+		{ aura: fighter_protection_heroic_strike_2 }
+		{ aura: fighter_protection_heroic_strike_3 }
+	]
+}
+
+aura fighter_protection_heroic_strike_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your threat and damage from Strike by 8%."
+	aura_effect damage_output_modifier:
+	{
+		multiplier: 1.08
+		type_mask: [ physical ]
+		apply_to_abilities: [ strike ]
+	}
+	aura_effect threat_modifier:
+	{
+		multiplier: 1.08
+		apply_to_abilities: [ strike ]
+	}
+}
+
+aura fighter_protection_heroic_strike_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your threat and damage from Strike by 16%."
+	aura_effect damage_output_modifier:
+	{
+		multiplier: 1.16
+		type_mask: [ physical ]
+		apply_to_abilities: [ strike ]
+	}
+	aura_effect threat_modifier:
+	{
+		multiplier: 1.16
+		apply_to_abilities: [ strike ]
+	}
+}
+
+aura fighter_protection_heroic_strike_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your threat and damage from Strike by 24%."
+	aura_effect damage_output_modifier:
+	{
+		multiplier: 1.24
+		type_mask: [ physical ]
+		apply_to_abilities: [ strike ]
+	}
+	aura_effect threat_modifier:
+	{
+		multiplier: 1.24
+		apply_to_abilities: [ strike ]
+	}
 }
 
 ###############################################################################

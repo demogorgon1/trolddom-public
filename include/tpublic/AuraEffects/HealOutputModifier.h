@@ -76,7 +76,8 @@ namespace tpublic
 
 			int32_t
 			FilterHealOutput(
-				int32_t						aHeal) const override
+				int32_t						aHeal,
+				uint32_t					/*aAbilityId*/) const override
 			{
 				int32_t heal = (int32_t)((float)aHeal * m_multiplier);
 				

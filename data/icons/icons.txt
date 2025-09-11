@@ -835,6 +835,7 @@ sprites:
 	sprite icon_insect_leg_3 : { tags: [ icon ] }
 	sprite icon_rock_2 : { tags: [ icon ] }
 	sprite icon_dirt_1 : { tags: [ icon ] }
+	sprite icon_strike_2 : { tags: [ icon ] }
 	
 }
 

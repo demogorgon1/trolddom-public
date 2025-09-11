@@ -152,28 +152,33 @@ namespace tpublic
 								const EntityInstance*						aSource,
 								const EntityInstance*						aTarget,
 								DirectEffect::DamageType					aDamageType,
-								int32_t										aDamage) const;
+								int32_t										aDamage,
+								uint32_t									aAbilityId) const;
 			int32_t			FilterDamageOutput(
 								const Manifest*								aManifest,
 								const EntityInstance*						aSource,
 								const EntityInstance*						aTarget,				
 								DirectEffect::DamageType					aDamageType,
-								int32_t										aDamage) const;
+								int32_t										aDamage,
+								uint32_t									aAbilityId) const;
 			int32_t			FilterHealInput(
 								const Manifest*								aManifest,
 								const EntityInstance*						aSource,
 								const EntityInstance*						aTarget,
-								int32_t										aHeal) const;
+								int32_t										aHeal,
+								uint32_t									aAbilityId) const;
 			int32_t			FilterHealOutput(
 								const Manifest*								aManifest,
 								const EntityInstance*						aSource,
 								const EntityInstance*						aTarget,
-								int32_t										aHeal) const;
+								int32_t										aHeal,
+								uint32_t									aAbilityId) const;
 			int32_t			FilterThreat(
 								const Manifest*								aManifest,
 								const EntityInstance*						aSource,
 								const EntityInstance*						aTarget,
-								int32_t										aThreat) const;
+								int32_t										aThreat,
+								uint32_t									aAbilityId) const;
 			float			GetResourceCostMultiplier() const;
 			void			OnCombatEvent(
 								const Manifest*								aManifest,

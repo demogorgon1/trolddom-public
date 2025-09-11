@@ -147,8 +147,12 @@ namespace tpublic
 			const Components::PlayerPrivate* playerPrivate = aSource != NULL ? aSource->GetComponent<Components::PlayerPrivate>() : NULL;
 			const AbilityModifierList* abilityModifierList = playerPrivate != NULL ? playerPrivate->m_abilityModifierList : NULL;
 			int32_t modifyAuraUpdateCount = 0;
+			int32_t modifyAuraDuration = 0;
 			if (abilityModifierList != NULL)
+			{
 				modifyAuraUpdateCount = abilityModifierList->GetAbilityModifyAuraUpdateCount(aAbilityId);
+				modifyAuraDuration = abilityModifierList->GetAbilityModifyAuraDuration(aAbilityId);
+			}
 
 			bool sourceIsPlayerOrMinion = aSource != NULL && Helpers::IsPlayerOrMinion(aSource);
 
@@ -200,7 +204,7 @@ namespace tpublic
 				}
 
 				if (m_threat != 0 && !targetEntity->IsPlayer())
-					aEventQueue->EventQueueThreat(sourceEntityInstance, targetEntity->GetEntityInstanceId(), m_threat, aTick);
+					aEventQueue->EventQueueThreat(sourceEntityInstance, targetEntity->GetEntityInstanceId(), m_threat, aTick, aAbilityId);
 
 				std::vector<std::unique_ptr<AuraEffectBase>> effects;
 				for (const std::unique_ptr<Data::Aura::AuraEffectEntry>& t : aura->m_auraEffects)
@@ -213,7 +217,7 @@ namespace tpublic
 					effects.push_back(std::move(effect));
 				}
 
-				aAuraEventQueue->ApplyAura(aAbilityId, auraId, sourceEntityInstance, sourceIsPlayerOrMinion, targetEntity->GetEntityInstanceId(), effects);
+				aAuraEventQueue->ApplyAura(aAbilityId, auraId, sourceEntityInstance, sourceIsPlayerOrMinion, targetEntity->GetEntityInstanceId(), modifyAuraDuration, effects);
 			}
 
 			return Result();

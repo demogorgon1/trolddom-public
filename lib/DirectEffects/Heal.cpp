@@ -112,11 +112,11 @@ namespace tpublic::DirectEffects
 
 		Components::Auras* sourceAuras = aSource->GetComponent<Components::Auras>();
 		if (sourceAuras != NULL)
-			heal = sourceAuras->FilterHealOutput(aManifest, aSource, aTarget, heal);
+			heal = sourceAuras->FilterHealOutput(aManifest, aSource, aTarget, heal, aAbilityId);
 
 		Components::Auras* targetAuras = aTarget->GetComponent<Components::Auras>();
 		if(targetAuras != NULL)
-			heal = targetAuras->FilterHealInput(aManifest, aSource, aTarget, heal);
+			heal = targetAuras->FilterHealInput(aManifest, aSource, aTarget, heal, aAbilityId);
 
 		size_t healthResourceIndex;
 		if(targetCombatPublic->GetResourceIndex(Resource::ID_HEALTH, healthResourceIndex))
@@ -144,7 +144,7 @@ namespace tpublic::DirectEffects
 
 				for(std::unordered_map<uint32_t, int32_t>::const_iterator i = targetThreatSource->m_targets.cbegin(); i != targetThreatSource->m_targets.cend(); i++)
 				{
-					aEventQueue->EventQueueThreat(aSourceEntityInstance, i->first, threat, aTick);
+					aEventQueue->EventQueueThreat(aSourceEntityInstance, i->first, threat, aTick, aAbilityId);
 				}
 			}
 		}

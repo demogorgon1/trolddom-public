@@ -17,6 +17,7 @@ namespace tpublic
 								const SourceEntityInstance&						aSourceEntityInstance,
 								bool											aSourceIsPlayerOrMinion,
 								uint32_t										aTargetEntityInstanceId,
+								int32_t											aAuraDurationModifier,
 								std::vector<std::unique_ptr<AuraEffectBase>>&	aAuraEffects) = 0;
 	};
 

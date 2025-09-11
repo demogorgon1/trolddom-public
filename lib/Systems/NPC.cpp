@@ -256,7 +256,7 @@ namespace tpublic::Systems
 			threat->m_table.Update(aContext->m_tick, threatRemovedEntities);
 
 			for (const SourceEntityInstance& threatRemovedEntity : threatRemovedEntities)
-				aContext->m_eventQueue->EventQueueThreat(threatRemovedEntity, aEntityInstanceId, INT32_MIN, aContext->m_tick);
+				aContext->m_eventQueue->EventQueueThreat(threatRemovedEntity, aEntityInstanceId, INT32_MIN, aContext->m_tick, 0);
 		}
 		else if(npc->m_inactiveEncounterDespawn) 
 		{
@@ -364,7 +364,7 @@ namespace tpublic::Systems
 									}
 
 									if (detected && (npc->m_aggroRequirements.m_requirements.empty() || Requirements::CheckList(GetManifest(), npc->m_aggroRequirements.m_requirements, NULL, aEntity)))
-										aContext->m_eventQueue->EventQueueThreat({ aEntity->GetEntityInstanceId(), aEntity->GetSeq() }, aEntityInstanceId, 1, aContext->m_tick);
+										aContext->m_eventQueue->EventQueueThreat({ aEntity->GetEntityInstanceId(), aEntity->GetSeq() }, aEntityInstanceId, 1, aContext->m_tick, 0);
 								}
 							}
 						}
@@ -375,7 +375,7 @@ namespace tpublic::Systems
 							if(nearbyNonPlayerCombatPublic != NULL && nearbyNonPlayerCombatPublic->m_factionId == combat->m_factionId && aDistanceSquared <= aggroAssistRange * aggroAssistRange)
 							{	
 								int32_t threatTick = aContext->m_tick; // threat->m_table.GetTick(); (FIXME: which makes most sense)
-								aContext->m_eventQueue->EventQueueThreat({ topThreatEntity->GetEntityInstanceId(), topThreatEntity->GetSeq() }, aEntity->GetEntityInstanceId(), 1, threatTick);
+								aContext->m_eventQueue->EventQueueThreat({ topThreatEntity->GetEntityInstanceId(), topThreatEntity->GetSeq() }, aEntity->GetEntityInstanceId(), 1, threatTick, 0);
 							}
 						}
 					}
@@ -417,7 +417,7 @@ namespace tpublic::Systems
 		case EntityState::ID_DEFAULT:
 			if(npc->m_spawnWithTarget.has_value())
 			{
-				aContext->m_eventQueue->EventQueueThreat(npc->m_spawnWithTarget->m_entity, aEntityInstanceId, npc->m_spawnWithTarget->m_threat, aContext->m_tick);
+				aContext->m_eventQueue->EventQueueThreat(npc->m_spawnWithTarget->m_entity, aEntityInstanceId, npc->m_spawnWithTarget->m_threat, aContext->m_tick, 0);
 				npc->m_spawnWithTarget.reset();
 			}
 			else if (!threat->m_table.IsEmpty())
@@ -879,7 +879,7 @@ namespace tpublic::Systems
 
 						if (target == NULL || target->GetState() == EntityState::ID_DEAD || target->GetSeq() != npc->m_targetEntity.m_entityInstanceSeq)
 						{
-							aContext->m_eventQueue->EventQueueThreat(npc->m_targetEntity, aEntityInstanceId, INT32_MIN, aContext->m_tick);
+							aContext->m_eventQueue->EventQueueThreat(npc->m_targetEntity, aEntityInstanceId, INT32_MIN, aContext->m_tick, 0);
 
 							npc->m_castInProgress.reset();
 							npc->m_targetEntity = SourceEntityInstance();
@@ -1178,7 +1178,7 @@ namespace tpublic::Systems
 												// Seems like we're stuck chasing the top threat target. Reduce threat on that one.
 												position->m_lastMoveTick = aContext->m_tick;
 
-												aContext->m_eventQueue->EventQueueThreat(npc->m_targetEntity, aEntityInstanceId, -1, 0, 0.5f);
+												aContext->m_eventQueue->EventQueueThreat(npc->m_targetEntity, aEntityInstanceId, -1, 0, 0, 0.5f);
 											}
 										}
 									}
@@ -1187,7 +1187,7 @@ namespace tpublic::Systems
 								{
 									position->m_lastMoveTick = aContext->m_tick;
 
-									aContext->m_eventQueue->EventQueueThreat(npc->m_targetEntity, aEntityInstanceId, -1, 0, 0.5f);
+									aContext->m_eventQueue->EventQueueThreat(npc->m_targetEntity, aEntityInstanceId, -1, 0, 0, 0.5f);
 								}
 							}
 						}

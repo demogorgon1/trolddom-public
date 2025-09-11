@@ -152,6 +152,7 @@ namespace tpublic
 												uint32_t													aTargetEntityInstanceId,
 												int32_t														aThreat,
 												int32_t														aTick,
+												uint32_t													aAbilityId,
 												const std::optional<float>&									aMultiply = std::optional<float>()) = 0;
 		virtual void						EventQueueThreatClear(
 												uint32_t													aEntityInstanceId) = 0;

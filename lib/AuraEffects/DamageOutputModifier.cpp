@@ -13,8 +13,12 @@ namespace tpublic::AuraEffects
 		const EntityInstance*		/*aSource*/,
 		const EntityInstance*		/*aTarget*/,
 		DirectEffect::DamageType	aDamageType,
-		int32_t						aDamage) const 
+		int32_t						aDamage,
+		uint32_t					aAbilityId) const 
 	{
+		if (!m_applyToAbilityIds.empty() && Helpers::FindItem(m_applyToAbilityIds, aAbilityId) == -1)
+			return aDamage;
+
 		int32_t damage = aDamage;
 
 		if (m_typeMask & (1 << (uint32_t)aDamageType))

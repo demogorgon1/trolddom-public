@@ -190,10 +190,10 @@ namespace tpublic::DirectEffects
 		}
 
 		if (sourceAuras != NULL)
-			damage = sourceAuras->FilterDamageOutput(aManifest, aSource, aTarget, damageType, damage);
+			damage = sourceAuras->FilterDamageOutput(aManifest, aSource, aTarget, damageType, damage, aAbilityId);
 
 		if (targetAuras != NULL)
-			damage = targetAuras->FilterDamageInput(aManifest, aSource, aTarget, damageType, damage);
+			damage = targetAuras->FilterDamageInput(aManifest, aSource, aTarget, damageType, damage, aAbilityId);
 
 		uint32_t blocked = 0;
 
@@ -311,7 +311,7 @@ namespace tpublic::DirectEffects
 
 			threat = (int32_t)((float)threat * threatMultiplier);
 
-			aEventQueue->EventQueueThreat(aSourceEntityInstance, aTarget->GetEntityInstanceId(), threat, aTick);
+			aEventQueue->EventQueueThreat(aSourceEntityInstance, aTarget->GetEntityInstanceId(), threat, aTick, aAbilityId);
 		}
 
 		return { result };

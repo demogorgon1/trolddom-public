@@ -16,6 +16,7 @@ talent_tree fighter_subtlety:
 		talent fighter_subtlety_stealth: "H"
 		talent fighter_subtlety_one_handed_weapon_mastery: "I"
 		talent fighter_subtlety_improved_poison_bomb: "J"
+		talent fighter_subtlety_improved_hamstring: "K"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_left_arrow: "l"
 		sprite talent_tree_down: "|"
@@ -27,10 +28,47 @@ talent_tree fighter_subtlety:
 		"....d...."
 		"DlC.E.G.F"
 		"|.....d.."
-		"|.I...J.."
+		"|.I.K.J.."
 		"d........"
 		"H........"
 	]	
+}
+
+###############################################################################
+# Improved Hamstring
+
+talent fighter_subtlety_improved_hamstring:
+{
+	string: "Improved Hamstring"
+	icon: icon_hamstring
+	talent_tree_points_required: 10
+	points:
+	[
+		{ ability_modifier: fighter_subtlety_improved_hamstring_1 }
+		{ ability_modifier: fighter_subtlety_improved_hamstring_2 }
+		{ ability_modifier: fighter_subtlety_improved_hamstring_3 }
+	]
+}
+
+ability_modifier fighter_subtlety_improved_hamstring_1:
+{	
+	description: "Increases duration of Hamstring by 1 second."
+	ability: hamstring
+	modify_aura_duration: 10
+}
+
+ability_modifier fighter_subtlety_improved_hamstring_2:
+{	
+	description: "Increases duration of Hamstring by 2 second."
+	ability: hamstring
+	modify_aura_duration: 20
+}
+
+ability_modifier fighter_subtlety_improved_hamstring_3:
+{	
+	description: "Increases duration of Hamstring by 3 second."
+	ability: hamstring
+	modify_aura_duration: 30
 }
 
 ###############################################################################
