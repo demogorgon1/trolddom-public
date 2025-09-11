@@ -12,6 +12,8 @@ ability paladin_attack:
 		flags: [ can_be_critical ]
 		damage_type: physical			
 		function: { expression: x x: weapon }		
+		aura_conditional_critical_chance_bonus<paladin_holy_assault>: 100
+		resolve_cancel_aura: paladin_holy_assault
 	}
 	
 	direct_effect apply_aura: !PALADIN_AVENGER_APPLY_INTERVENTION_OF_WRATH_DEBUFF{}	

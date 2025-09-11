@@ -15,21 +15,76 @@ talent_tree paladin_avenger:
 		talent paladin_piercing_strike: "G"
 		talent paladin_holy_strength: "H"
 		talent paladin_intervention_of_wrath: "I"
+		talent paladin_improved_divine_smite: "J"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_down: "|"
 	}
 	
 	map:
 	[
-		"A...B"
-		"....d"
-		"D.E.C"
-		"d.d.."
-		"G.F.H"
-		"....d"
-		"....I"
+		"A...B.J"
+		"....d.."
+		"D.E.C.."
+		"d.d...."
+		"G.F.H.."
+		"....d.."
+		"....I.."
 	]
 
+}
+
+###############################################################################
+# Improved Divine Smite
+
+talent paladin_improved_divine_smite:
+{
+	string: "Improved Divine Smite"
+	icon: icon_divine_smite
+	points:
+	[
+		{ aura: paladin_improved_divine_smite_1 }
+		{ aura: paladin_improved_divine_smite_2 }
+		{ aura: paladin_improved_divine_smite_3 }
+	]
+}
+
+aura paladin_improved_divine_smite_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases damage done with Divine Smite by 15%."
+	aura_effect damage_output_modifier:
+	{
+		apply_to_abilities: [ divine_smite ]
+		multiplier: 1.15
+		type_mask: [ all ]
+	}
+}
+
+aura paladin_improved_divine_smite_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases damage done with Divine Smite by 30%."
+	aura_effect damage_output_modifier:
+	{
+		apply_to_abilities: [ divine_smite ]
+		multiplier: 1.30
+		type_mask: [ all ]
+	}
+}
+
+aura paladin_improved_divine_smite_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases damage done with Divine Smite by 45%."
+	aura_effect damage_output_modifier:
+	{
+		apply_to_abilities: [ divine_smite ]
+		multiplier: 1.45
+		type_mask: [ all ]
+	}
 }
 
 ###############################################################################
@@ -247,6 +302,8 @@ ability piercing_strike:
 		flags: [ can_be_critical ]
 		damage_type: physical
 		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 10 ] [ 10 20 ] [ 20 40 ] ] }
+		aura_conditional_critical_chance_bonus<paladin_holy_assault>: 100
+		resolve_cancel_aura: paladin_holy_assault		
 	}	
 	
 	direct_effect trigger_ability:
@@ -745,6 +802,8 @@ ability holy_storm:
 		flags: [ can_be_critical ]
 		damage_type: holy
 		function: { expression: x x: weapon_normalized }		
+		aura_conditional_critical_chance_bonus<paladin_holy_assault>: 100
+		resolve_cancel_aura: paladin_holy_assault		
 	}
 }
 
@@ -789,6 +848,8 @@ ability reckoning:
 		flags: [ can_be_critical ]
 		damage_type: physical
 		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 12 ] [ 10 24 ] [ 20 48 ] ] }
+		aura_conditional_critical_chance_bonus<paladin_holy_assault>: 100
+		resolve_cancel_aura: paladin_holy_assault		
 	}
 	
 	direct_effect apply_aura: !PALADIN_AVENGER_APPLY_INTERVENTION_OF_WRATH_DEBUFF{}

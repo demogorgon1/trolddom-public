@@ -15,20 +15,58 @@ talent_tree paladin_guardian:
 		talent paladin_endurance: "G"
 		talent paladin_holy_reflection: "H"
 		talent paladin_one_handed_weapon_mastery: "I"
+		talent paladin_improved_judgement: "J"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_down: "|"		
 	}
 	
 	map:
 	[
-		"C.A.E"
-		"..d.d"
-		"..B.D"
-		"..d.."
-		"I.F.G"
-		"....d"
-		"....H"
+		"C.A.E.."
+		"..d.d.."
+		"..B.D.J"
+		"..d...."
+		"I.F.G.."
+		"....d.."
+		"....H.."
 	]
+}
+
+###############################################################################
+# Improved Judgement
+
+talent paladin_improved_judgement:
+{
+	string: "Improved Judgement"
+	icon: icon_judge
+	talent_tree_points_required: 5
+	points:
+	[
+		{ ability_modifier: paladin_improved_judgement_1 }
+		{ ability_modifier: paladin_improved_judgement_2 }
+		{ ability_modifier: paladin_improved_judgement_3 }
+	]
+}
+
+ability_modifier paladin_improved_judgement_1:
+{
+	description: "Increases duration of Judgement by 1 second."
+	abilities: [ judgement ]
+	modify_aura_duration: 10
+}
+
+ability_modifier paladin_improved_judgement_2:
+{
+	description: "Increases duration of Judgement by 2 second."
+	abilities: [ judgement ]
+	modify_aura_duration: 20
+}
+
+ability_modifier paladin_improved_judgement_3:
+{
+	description: "Increases duration of Judgement by 3 second."
+	abilities: [ judgement ]
+	modify_aura_duration: 30
 }
 
 ###############################################################################

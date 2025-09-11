@@ -128,6 +128,7 @@ namespace tpublic
 			std::vector<ConditionalCriticalChanceBonus>	m_conditionalCriticalChanceBonuses;
 			std::unordered_map<uint32_t, float>			m_abilityModifierMultipliers;		
 			float										m_threatMultiplier = 1.0f;
+			uint32_t									m_resolveCancelAuraId = 0;
 
 			DirectEffect::DamageType	_GetDamageType(
 											const EntityInstance*				aEntityInstance,

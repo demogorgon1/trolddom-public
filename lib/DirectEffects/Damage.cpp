@@ -53,6 +53,10 @@ namespace tpublic::DirectEffects
 				{
 					m_threatMultiplier = aChild->GetFloat();
 				}
+				else if(aChild->m_name == "resolve_cancel_aura")
+				{
+					m_resolveCancelAuraId = aChild->GetId(DataType::ID_AURA);
+				}
 				else
 				{
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
@@ -78,6 +82,7 @@ namespace tpublic::DirectEffects
 		}
 
 		aStream->WriteFloat(m_threatMultiplier);
+		aStream->WriteUInt(m_resolveCancelAuraId);
 	}
 			
 	bool	
@@ -113,6 +118,8 @@ namespace tpublic::DirectEffects
 		}
 
 		if(!aStream->ReadFloat(m_threatMultiplier))
+			return false;
+		if(!aStream->ReadUInt(m_resolveCancelAuraId))
 			return false;
 
 		return true;
@@ -267,6 +274,9 @@ namespace tpublic::DirectEffects
 		{
 			if(targetAuras != NULL)
 				targetAuras->OnDamageInput(aManifest, aSource, aTarget, m_damageType, (int32_t)damage, result, aEventQueue, aWorldView, aResourceChangeQueue);
+
+			if(m_resolveCancelAuraId != 0)
+				aEventQueue->EventQueueRemoveAura(aSource->GetEntityInstanceId(), m_resolveCancelAuraId);
 
 			aResourceChangeQueue->AddResourceChange(
 				result,
