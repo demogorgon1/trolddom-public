@@ -15,8 +15,10 @@ talent_tree priest_condemnation:
 		talent priest_wisdom: "G"
 		talent priest_improved_spiritual_crisis: "H"
 		talent priest_creeping_guilt: "I"
+		talent priest_spiritual_justice: "J"
 		sprite talent_tree_down_arrow: "d"						
 		sprite talent_tree_right_arrow: "r"				
+		sprite talent_tree_left_arrow: "l"				
 		sprite talent_tree_down_arrow_fork_left: "z"
 		sprite talent_tree_horizontal: "-"
 		sprite talent_tree_right_to_down_arrow: "w"
@@ -28,12 +30,44 @@ talent_tree priest_condemnation:
 		"A.C...."
 		"d.d...."
 		"B.D.E.G"
-		"..w-z.|"
-		"..H.F.|"
+		"d.w-z.|"
+		"JlH.F.|"
 		"......d"
 		"......I"
 	]
 	
+}
+
+###############################################################################
+# Spiritual Justice
+
+talent priest_spiritual_justice:
+{
+	string: "Spiritual Justice"
+	icon: icon_spiritual_justice
+	talent_tree_points_required: 10
+	prerequisites: [ priest_improved_spiritual_crisis priest_swift_justice ]
+	points:
+	[
+		{ ability_modifier: priest_spiritual_justice_1 }
+		{ ability_modifier: priest_spiritual_justice_2 }
+		{ ability_modifier: priest_spiritual_justice_3 }
+	]
+}
+
+ability_modifier priest_spiritual_justice_1:
+{	
+	description: "Increases damage of Smite by 8% if target is afflicted by Spiritual Crisis."	
+}
+
+ability_modifier priest_spiritual_justice_2:
+{	
+	description: "Increases damage of Smite by 16% if target is afflicted by Spiritual Crisis."	
+}
+
+ability_modifier priest_spiritual_justice_3:
+{	
+	description: "Increases damage of Smite by 24% if target is afflicted by Spiritual Crisis."	
 }
 
 ###############################################################################
@@ -297,6 +331,7 @@ particle_system spiritual_crisis:
 	}
 }
 
+# DEPRECATED
 aura spiritual_crisis:
 {
 	string: "Spiritual Crisis"
@@ -308,7 +343,7 @@ aura spiritual_crisis:
 	{
 		attack_haste: { add: -15 } 
 		spell_haste: { add: -15 } 
-	}
+	}	
 }
 
 ability spiritual_crisis:
@@ -375,8 +410,85 @@ ability spiritual_crisis:
 
 	direct_effect apply_aura:
 	{
-		aura: spiritual_crisis
+		must_not_have_ability_modifiers: [ priest_spiritual_justice_1 priest_spiritual_justice_2 priest_spiritual_justice_3 ]
+		aura: $aura @spiritual_crisis_0 [ string icon ]
+		{
+			type: debuff
+			duration: 200	
+			flags: [ unique magic ]
+			stat_modifiers:
+			{
+				attack_haste: { add: -15 } 
+				spell_haste: { add: -15 } 
+			}			
+		}
 	}
+	
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: priest_spiritual_justice_1
+		aura: $aura @spiritual_crisis_1 [ string icon ]
+		{
+			type: debuff
+			duration: 200	
+			flags: [ unique magic ]
+			stat_modifiers:
+			{
+				attack_haste: { add: -15 } 
+				spell_haste: { add: -15 } 
+			}			
+			aura_effect damage_input_modifier:
+			{
+				multiplier: 1.08
+				type_mask: [ all ]
+				apply_to_abilities: [ smite ]
+			}
+		}
+	}	
+	
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: priest_spiritual_justice_2
+		aura: $aura @spiritual_crisis_2 [ string icon ]
+		{
+			type: debuff
+			duration: 200	
+			flags: [ unique magic ]
+			stat_modifiers:
+			{
+				attack_haste: { add: -15 } 
+				spell_haste: { add: -15 } 
+			}			
+			aura_effect damage_input_modifier:
+			{
+				multiplier: 1.16
+				type_mask: [ all ]
+				apply_to_abilities: [ smite ]
+			}
+		}
+	}	
+
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: priest_spiritual_justice_3
+		aura: $aura @spiritual_crisis_3 [ string icon ]
+		{
+			type: debuff
+			duration: 200	
+			flags: [ unique magic ]
+			stat_modifiers:
+			{
+				attack_haste: { add: -15 } 
+				spell_haste: { add: -15 } 
+			}			
+			aura_effect damage_input_modifier:
+			{
+				multiplier: 1.24
+				type_mask: [ all ]
+				apply_to_abilities: [ smite ]
+			}
+		}
+	}		
 }
 
 ###############################################################################

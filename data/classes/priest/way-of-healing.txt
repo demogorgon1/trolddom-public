@@ -15,6 +15,7 @@ talent_tree priest_healing:
 		talent priest_improved_blessing: "G"
 		talent priest_swift_mending: "H"
 		talent priest_spiritual_surge: "I"
+		talent priest_improved_inner_peace: "J"
 		sprite talent_tree_down_arrow: "d"				
 	}
 	
@@ -24,11 +25,42 @@ talent_tree priest_healing:
 		"..d.d.."
 		"G.B.E.F"
 		"..d...."
-		"..D.H.."
+		"J.D.H.."
 		"....d.."
 		"....I.."
 	]
 	
+}
+
+###############################################################################
+# Improved Inner Peace
+
+talent priest_improved_inner_peace:
+{
+	string: "Improved Inner Peace"
+	icon: icon_special_11
+	talent_tree_points_required: 10
+	points:
+	[
+		{ ability_modifier: priest_improved_inner_peace_1 }
+		{ ability_modifier: priest_improved_inner_peace_2 }
+		{ ability_modifier: priest_improved_inner_peace_3 }
+	]
+}
+
+ability_modifier priest_improved_inner_peace_1:
+{	
+	description: "Increases your healing by 15% for 12 seconds after casting Inner Peace."
+}
+
+ability_modifier priest_improved_inner_peace_2:
+{	
+	description: "Increases your healing by 30% for 12 seconds after casting Inner Peace."
+}
+
+ability_modifier priest_improved_inner_peace_3:
+{	
+	description: "Increases your healing by 45% for 12 seconds after casting Inner Peace."
 }
 
 ###############################################################################
@@ -587,5 +619,44 @@ ability inner_peace:
 	direct_effect heal:
 	{	
 		function: { expression: a_mul_x x: health_max a: 0.5 }
+	}	
+	
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: priest_improved_inner_peace_1
+		aura: $aura @improved_inner_peace_1 [ icon string ]
+		{	
+			description: "Heals increased by 15%."
+			type: buff	
+			duration: 120
+			flags: [ magic ]
+			aura_effect heal_output_modifier: { multiplier: 1.15 }
+		}
+	}
+	
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: priest_improved_inner_peace_2
+		aura: $aura @improved_inner_peace_2 [ icon string ]
+		{
+			description: "Heals increased by 30%."
+			type: buff	
+			duration: 120
+			flags: [ magic ]
+			aura_effect heal_output_modifier: { multiplier: 1.30 }
+		}
+	}
+
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: priest_improved_inner_peace_3
+		aura: $aura @improved_inner_peace_3 [ icon string ]
+		{
+			description: "Heals increased by 45%."
+			type: buff	
+			duration: 120
+			flags: [ magic ]
+			aura_effect heal_output_modifier: { multiplier: 1.45 }
+		}
 	}	
 }
