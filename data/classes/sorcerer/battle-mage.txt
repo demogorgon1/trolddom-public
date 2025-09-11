@@ -15,13 +15,14 @@ talent_tree sorcerer_battle_mage:
 		talent sorcerer_battle_mage_armor: "G"
 		talent sorcerer_battle_mage_arcane_strength: "H"
 		talent sorcerer_battle_mage_overpower: "I"
+		talent sorcerer_battle_mage_staff_mastery: "J"
 		sprite talent_tree_down_arrow: "d"						
 		sprite talent_tree_left_arrow: "l"						
 	}
 	
 	map:
 	[
-		"..A.B.."
+		"..A.B.J"
 		"....d.."
 		"ElC.D.G"
 		"..d...."
@@ -30,6 +31,60 @@ talent_tree sorcerer_battle_mage:
 		"....I.."
 	]
 	
+}
+
+###############################################################################
+# Staff Mastery
+
+talent sorcerer_battle_mage_staff_mastery:
+{
+	string: "Staff Mastery"
+	icon: icon_staff_1
+	points:
+	[
+		{ aura: sorcerer_battle_mage_staff_mastery_1 }
+		{ aura: sorcerer_battle_mage_staff_mastery_2 }
+		{ aura: sorcerer_battle_mage_staff_mastery_3 }
+	]
+}
+
+aura sorcerer_battle_mage_staff_mastery_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your physical damage done with staves by 12%."
+	aura_effect damage_output_modifier:
+	{	
+		requirement self<must_have_item_type_equipped>: weapon_2h_staff
+		multiplier: 1.12
+		type_mask: [ physical ]
+	}
+}
+
+aura sorcerer_battle_mage_staff_mastery_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your physical damage done with staves by 24%."
+	aura_effect damage_output_modifier:
+	{	
+		requirement self<must_have_item_type_equipped>: weapon_2h_staff
+		multiplier: 1.24
+		type_mask: [ physical ]
+	}
+}
+
+aura sorcerer_battle_mage_staff_mastery_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your physical damage done with staves by 36%."
+	aura_effect damage_output_modifier:
+	{	
+		requirement self<must_have_item_type_equipped>: weapon_2h_staff
+		multiplier: 1.36
+		type_mask: [ physical ]
+	}
 }
 
 ###############################################################################

@@ -16,6 +16,7 @@ talent_tree sorcerer_arcane:
 		talent sorcerer_arcane_preparation: "H"
 		talent sorcerer_arcane_void_blast: "I"
 		talent sorcerer_arcane_arcane_mastery: "J"
+		talent sorcerer_arcane_sweet_dreams: "K"
 		sprite talent_tree_down_arrow: "d"						
 		sprite talent_tree_left_arrow: "l"						
 		sprite talent_tree_down: "|"		
@@ -25,13 +26,43 @@ talent_tree sorcerer_arcane:
 	[
 		"..A.B.G"		
 		"....d.."
-		"ElD.C.."
+		"ElD.C.K"
 		"....|.."
 		"IlF.|.J"
 		"....d.."
 		"....H.."
 	]
 	
+}
+
+###############################################################################
+# Sweet Dreams
+
+talent sorcerer_arcane_sweet_dreams:
+{
+	string: "Sweet Dreams"
+	icon: icon_sleep
+	points:
+	[
+		{ ability_modifier: sorcerer_arcane_sweet_dreams_1 }
+		{ ability_modifier: sorcerer_arcane_sweet_dreams_2 }
+	]
+}
+
+ability_modifier sorcerer_arcane_sweet_dreams_1:
+{
+	description: "Reduces the casting time of Sleep by 25% and increases its duration by 2 seconds."
+	modify_aura_update_count: 1
+	modify_cast_time: -5
+	abilities: [ sleep ]
+}
+
+ability_modifier sorcerer_arcane_sweet_dreams_2:
+{
+	description: "Reduces the casting time of Sleep by 50% and increases its duration by 4 seconds."
+	modify_aura_update_count: 2
+	modify_cast_time: -10
+	abilities: [ sleep ]
 }
 
 ###############################################################################

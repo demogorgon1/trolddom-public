@@ -21,7 +21,7 @@ aura_group paladin_oaths: { }
 
 class paladin:
 {
-	version: 1
+	version: 2
 	
 	string: "Paladin"	
 	description: "Warrior of the Light."
