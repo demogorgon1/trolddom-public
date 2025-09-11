@@ -15,6 +15,7 @@ talent_tree witch_malice:
 		talent witch_chain_lightning: "G"
 		talent witch_blood_armor: "H"
 		talent witch_maliciousness: "I"
+		talent witch_malice_improved_witch_bolt: "J"
 		
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_left_arrow: "l"
@@ -25,7 +26,7 @@ talent_tree witch_malice:
 	
 	map:
 	[
-		"..A.B-x"
+		"J.A.B-x"
 		"..d...d"
 		"DlC.E.F"
 		"....d.."
@@ -35,6 +36,61 @@ talent_tree witch_malice:
 	]
 	
 }
+
+###############################################################################
+# Improved Witch Bolt
+
+talent witch_malice_improved_witch_bolt:
+{
+	string: "Improved Witch Bolt"
+	icon: icon_witch_bolt
+	points:
+	[
+		{ aura: witch_malice_improved_witch_bolt_1 }
+		{ aura: witch_malice_improved_witch_bolt_2 }
+		{ aura: witch_malice_improved_witch_bolt_3 }
+	]
+}
+
+aura witch_malice_improved_witch_bolt_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases damage done with Witch Bolt by 10%."
+	aura_effect damage_output_modifier:
+	{
+		type_mask: [ all ]
+		apply_to_abilities: [ witch_bolt ]
+		multiplier: 1.1
+	}
+}
+
+aura witch_malice_improved_witch_bolt_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases damage done with Witch Bolt by 20%."
+	aura_effect damage_output_modifier:
+	{
+		type_mask: [ all ]
+		apply_to_abilities: [ witch_bolt ]
+		multiplier: 1.2
+	}
+}
+
+aura witch_malice_improved_witch_bolt_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases damage done with Witch Bolt by 30%."
+	aura_effect damage_output_modifier:
+	{
+		type_mask: [ all ]
+		apply_to_abilities: [ witch_bolt ]
+		multiplier: 1.3
+	}
+}
+
 
 ###############################################################################
 # Maliciousness
