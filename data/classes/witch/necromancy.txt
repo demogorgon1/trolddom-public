@@ -15,6 +15,7 @@ talent_tree witch_necromancy:
 		talent witch_chill_touch: "G"
 		talent witch_bone_armor: "H"
 		talent witch_corpse_explosion: "I"
+		talent witch_icy_bones: "J"
 		
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_left_arrow: "l"
@@ -26,9 +27,9 @@ talent_tree witch_necromancy:
 
 	map:
 	[
-		"A...G.."
-		"......."
-		"E.D.BrC"
+		"G.E.A.."
+		"d......"
+		"JlD.BrC"
 		"..d...."
 		"..F.H.."
 		"....d.."
@@ -37,12 +38,43 @@ talent_tree witch_necromancy:
 }
 
 ###############################################################################
+# Icy Bones
+
+talent witch_icy_bones:
+{
+	string: "Icy Bones"
+	icon: icon_icy_bones
+	prerequisites: [ witch_chill_touch witch_raise_dead ]
+	talent_tree_points_required: 5
+	points:
+	[
+		{ ability_modifier: witch_icy_bones }
+	]		
+}
+
+ability_modifier witch_icy_bones:
+{	
+	description: "Undead minion melee attacks slow target for 3 seconds."
+}
+
+aura witch_icy_bones:
+{
+	string: "Icy Bones"
+	description: "Reduced movement speed."
+	icon: icon_icy_bones
+	type: debuff
+	duration: 30
+	flags: [ unique magic ]					
+	aura_effect move_speed_modifier: { move_speed: slow }
+}
+
+###############################################################################
 # Corpse Explosion
 
 talent witch_corpse_explosion:
 {
 	string: "Corpse Explosion"
-	icon: icon_raise_dead
+	icon: icon_corpse_explosion
 	prerequisites: [ witch_bone_armor ]
 	talent_tree_points_required: 15
 	points:
@@ -124,7 +156,7 @@ ability corpse_explosion:
 	flags: [ spell target_aoe target_aoe_always_self interruptable ]
 	aoe_radius: 0
 	states: [ default in_combat ]
-	icon: icon_raise_dead
+	icon: icon_corpse_explosion
 	resource_cost mana: 20
 	talent_tree: witch_necromancy
 	cast_time: 20
@@ -362,7 +394,6 @@ talent witch_enfeeblement:
 {
 	string: "Enfeeblement"
 	icon: icon_enfeeblement
-	talent_tree_points_required: 5
 	points:
 	[
 		{ ability: enfeeblement }

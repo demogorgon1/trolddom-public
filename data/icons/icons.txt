@@ -839,6 +839,8 @@ sprites:
 	sprite icon_spiritual_justice : { tags: [ icon ] }
 	sprite icon_stun_2 : { tags: [ icon ] }
 	sprite icon_holy_assault : { tags: [ icon ] }
+	sprite icon_icy_bones : { tags: [ icon ] }
+	sprite icon_corpse_explosion : { tags: [ icon ] }
 	
 }
 

@@ -612,6 +612,13 @@
 				damage_type: physical			
 				function: { expression: x x: weapon }		
 			}
+			
+			direct_effect apply_aura:
+			{
+				must_have_ability_modifier: witch_icy_bones
+				aura: witch_icy_bones
+			}			
+
 		}	
 		
 		entity skeleton: !MINION{}
@@ -685,7 +692,7 @@
 		cooldown .skeletal_terror_attack:
 		{
 			duration: 22
-		}
+		}	
 		
 		ability .skeletal_terror_attack:
 		{
@@ -702,7 +709,13 @@
 				flags: [ can_be_critical generate_rage ]
 				damage_type: physical			
 				function: { expression: x x: weapon }		
-			}
+			}		
+
+			direct_effect apply_aura:
+			{
+				must_have_ability_modifier: witch_icy_bones
+				aura: witch_icy_bones
+			}			
 		}	
 		
 		cooldown .skeletal_terror_claw:
@@ -734,6 +747,12 @@
 				apply_to: source
 				add: 25
 			}	
+			
+			direct_effect apply_aura:
+			{
+				must_have_ability_modifier: witch_icy_bones
+				aura: witch_icy_bones
+			}			
 		}
 		
 		cooldown .skeletal_terror_whirlwind:
@@ -777,6 +796,12 @@
 				damage_type: physical
 				function: { expression: a_mul_x a: 1.3 x: weapon }	
 			}
+			
+			direct_effect apply_aura:
+			{
+				must_have_ability_modifier: witch_icy_bones
+				aura: witch_icy_bones
+			}						
 		}
 		
 			

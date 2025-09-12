@@ -31,6 +31,18 @@ ability witch_attack:
 		must_have_ability_modifier: chill_touch_3
 		aura: chill_touch_3
 	}	
+	
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: chill_touch_4
+		aura: chill_touch_4
+	}	
+
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: chill_touch_5
+		aura: chill_touch_5
+	}		
 }
 
 class witch:
