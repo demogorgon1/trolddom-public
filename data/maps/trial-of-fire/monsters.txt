@@ -14,6 +14,12 @@
 	.satyr_hunter
 ]
 
+!define TRIAL_OF_FIRE_FIRE_ELEMENTALS
+[ 
+	.fire_warden
+	.scorchcaster
+]
+
 !define TRIAL_OF_FIRE_CONDITIONAL_ENTITY_MAP
 {
 	.lavacrawler<.lavacrawler_elite>: party
@@ -72,7 +78,7 @@
 			{
 				string: "Fury of Fireclaw"
 				description: "Physical damage increased by 20%."
-				icon: icon_claw_2
+				icon: icon_claw_2 
 				type: buff
 				flags: [ unique indefinite global ]
 				aura_effect damage_output_modifier:
@@ -248,5 +254,142 @@
 		entity .rift_keeper: !NPC { }
 		entity .rift_keeper_elite: !NPC { _elite: true }
 	}
+
+	##############################################################################
+	# Fire Warden
+	{
+		${
+			_string: "Fire Warden" 
+			_creature_type: elemental
+			_weapon_damage: 0.46
+			_resource_health: 0.55		
+			_sprite: fire_elemental_1
+			_sprite_dead: fire_elemental_1_dead 
+			_abilities: [ { id: npc_charge } { id: npc_attack } ]
+		}
+		
+		entity .fire_warden: !NPC { }
+		entity .fire_warden_elite: !NPC { _elite: true }		
+	}
+
+	##############################################################################
+	# Scorchcaster
+	{
+		${
+			_string: "Scorchcaster" 
+			_creature_type: elemental
+			_weapon_damage: 0.38
+			_resource_health: 0.45		
+			_sprite: fire_elemental_2
+			_sprite_dead: fire_elemental_2_dead 
+			_abilities: [ { id: npc_fireball target: random_player }{ id: npc_attack } ]
+		}
+		
+		entity .scorchcaster: !NPC { }
+		entity .scorchcaster_elite: !NPC { _elite: true }		
+	}
+	
+	##############################################################################
+	# Ignivar
+	{
+		aura .ignivar_corruption:
+		{
+			string: "Corruption"
+			description: "Taking damage over time."
+			type: debuff
+			icon: icon_curse_of_corruption
+			duration: based_on_effects
+			flags: [ unique magic ]
+
+			aura_effect repeat:
+			{
+				update_interval: 20
+				update_count: 4
+				ability: $ability [ string icon ]
+				{
+					states: [ default in_combat ]
+					flags: [ always_in_range always_in_line_of_sight ]
+					direct_effect damage:
+					{
+						damage_type: unholy
+						function: { expression: a a: 9 elite_multiplier: 1.5 }
+					}				
+				}
+			}
+		}	
+	
+		${
+			_string: "Ignivar the Corruptor" 
+			_creature_type: demon
+			_weapon_damage: 1.1
+			_resource_health: 1.55		
+			_sprite: fire_elemental_5
+			_sprite_dead: fire_elemental_5_dead
+			_in_combat_barks: [ { type: yell text: "This is the end!" flags: [ no_chat_bubble ] } ]				
+			_spawn_barks: [ { type: yell text: "Do you want to challenge me?" flags: [ no_chat_bubble instance ] } ]				
+			_default_behavior_state: .survival_boss	
+			_loot_table: .ignivar_corruption
+
+			_abilities: 
+			[ 
+				{ id: npc_whirlwind } 
+				{ id: npc_rend target: random_player } 
+				{ id: npc_attack } 
+			]
+	
+			_global_aura: $aura
+			{
+				string: "Aura of Corruption"
+				description: "Attacks and spells cause target to be corrupted for 8 seconds."
+				icon: icon_fury
+				type: buff
+				flags: [ unique indefinite global ]
+				aura_effect combat_event_trigger: 
+				{ 
+					combat_event_ability_mask: [ offensive ]
+					combat_event<source>: [ hit critical ]
+					ability<target>: $ability
+					{
+						states: [ default in_combat ]
+						flags: [ always_in_range always_in_line_of_sight ]					
+						direct_effect apply_aura: {	aura: .ignivar_corruption }
+					}
+				}								
+			}
+		}
+
+		entity .ignivar: !NPC 
+		{ 
+			_loot_table: $loot_table
+			{
+				slots:
+				[	
+					{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
+						  map_message thalvaron: "Ignivar the Corruptor will not drop Token of Victory for {}." } } }
+
+					!WORLD_DROPS_RARE {}
+					!WORLD_DROPS {}
+				]	
+			}		
+		}
+		
+		entity .ignivar_elite: !NPC 
+		{ 
+			_elite: true 
 			
+			_loot_table: $loot_table
+			{
+				slots:
+				[	
+					{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
+						  map_message thalvaron: "Ignivar the Corruptor (Elite) will not drop Token of Victory for {}." } } }
+
+					!WORLD_DROPS_RARE {}
+					!WORLD_DROPS_RARE {}
+					!WORLD_DROPS {}
+				]	
+			}					
+		}
+	}
+
 }

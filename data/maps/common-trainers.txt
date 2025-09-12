@@ -17,6 +17,10 @@
 	train_ability: craft_enchant_cloak_armor
 	train_ability: craft_enchant_cloak_dodge
 	train_ability: craft_enchant_cloak_restoration
+	train_ability: craft_enchant_bracers_strength
+	train_ability: craft_enchant_bracers_major_spirit
+	train_ability: craft_enchant_boots_dexterity
+	train_ability: craft_enchant_gloves_major_wisdom
 	
 }
 

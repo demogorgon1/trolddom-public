@@ -91,6 +91,7 @@ zone .outside_player_spawn_zone:
 map_entity_spawn .boss_1: {	spawn_timer: { only_when_triggered: true } }
 map_entity_spawn .boss_2: {	spawn_timer: { only_when_triggered: true } }
 map_entity_spawn .boss_3: {	spawn_timer: { only_when_triggered: true } }
+map_entity_spawn .boss_4: {	spawn_timer: { only_when_triggered: true } }
 
 map_entity_spawn .object:
 {	
@@ -141,6 +142,7 @@ entity .survival_start_object:
 !define local FLAG_SPAWN_CRAB_BOSS 0
 !define local FLAG_SPAWN_ROCK_ELEMENTAL_BOSS 1
 !define local FLAG_SPAWN_RIFT_KEEPER_BOSS 2
+!define local FLAG_SPAWN_FIRE_ELEMENTAL_BOSS 3
 
 map trial_of_fire:
 {
@@ -152,7 +154,7 @@ map trial_of_fire:
 	max_minions: 1
 
 	default_tile: lava_b
-	default_fishing_loot_table: fish
+	default_fishing_loot_table: fish_realm_of_fire
 	view_attenuation: 0
 	view_attenuation_bias: 0
 	view_hidden_visibility: 35			
@@ -169,13 +171,11 @@ map trial_of_fire:
 		thread<crabs>:
 		{	
 			thread_run_condition_entity_not_dead: [ .fireclaw ]
-				
+								
 			wait<60>: {}
 			
-			set_flag<!FLAG_SPAWN_CRAB_BOSS{}>: {}
-			set_flag<!FLAG_SPAWN_ROCK_ELEMENTAL_BOSS{}>: {}
-			set_flag<!FLAG_SPAWN_RIFT_KEEPER_BOSS{}>: {}
-				
+			set_flag<!FLAG_SPAWN_FIRE_ELEMENTAL_BOSS{}>: {}			
+							
 			repeat<3>:
 			{
 				wait<[ 40 80 ]>: {}
@@ -239,6 +239,8 @@ map trial_of_fire:
 				wave<[ 2 3 ]>: !TRIAL_OF_FIRE_ROCK_ELEMENTALS {}
 			}			
 			
+			set_flag<!FLAG_SPAWN_ROCK_ELEMENTAL_BOSS{}>: {}
+			
 			repeat:
 			{
 				wait<120>: {}
@@ -256,7 +258,7 @@ map trial_of_fire:
 		thread<satyrs>:
 		{	
 			thread_run_condition_entity_not_dead: [ .rift_keeper ]
-			thread_run_condition_flag: [ !FLAG_SPAWN_RIFT_KEEPER_BOSS{} ]
+			thread_run_condition_flag: [ !FLAG_SPAWN_ROCK_ELEMENTAL_BOSS{} ]
 			
 			wait<140>: {}
 					
@@ -280,6 +282,8 @@ map trial_of_fire:
 				wave<[ 2 3 ]>: !TRIAL_OF_FIRE_SATYRS {}
 			}			
 			
+			set_flag<!FLAG_SPAWN_RIFT_KEEPER_BOSS{}>: {}
+			
 			repeat:
 			{
 				wait<120>: {}
@@ -292,6 +296,49 @@ map trial_of_fire:
 			thread_run_condition_flag: [ !FLAG_SPAWN_RIFT_KEEPER_BOSS{} ]
 			thread_boss_map_entity_spawns: [ .boss_3 ]
 			spawn_boss<1>: [ .rift_keeper ]	
+		}		
+
+		thread<fire_elemental>:
+		{	
+			thread_run_condition_entity_not_dead: [ .ignivar ]
+			thread_run_condition_flag: [ !FLAG_SPAWN_RIFT_KEEPER_BOSS{} ]
+			
+			wait<140>: {}
+					
+			repeat<3>:
+			{
+				wait<[ 40 80 ]>: {}
+				wave<1>: !TRIAL_OF_FIRE_FIRE_ELEMENTALS {}
+			}
+			
+			repeat<2>:
+			{
+				wait<[ 60 90 ]>: {}
+				wave<2>: !TRIAL_OF_FIRE_FIRE_ELEMENTALS {}
+			}
+		
+			wait<120>: {}
+		
+			repeat<3>:
+			{
+				wait<[ 50 70 ]>: {} 
+				wave<[ 2 3 ]>: !TRIAL_OF_FIRE_FIRE_ELEMENTALS {}
+			}			
+			
+			set_flag<!FLAG_SPAWN_FIRE_ELEMENTAL_BOSS{}>: {}
+			
+			repeat:
+			{
+				wait<120>: {}
+				wave<1>: !TRIAL_OF_FIRE_FIRE_ELEMENTALS {}
+			}
+		}		
+		
+		thread<rift_keeper_boss>:
+		{
+			thread_run_condition_flag: [ !FLAG_SPAWN_FIRE_ELEMENTAL_BOSS{} ]
+			thread_boss_map_entity_spawns: [ .boss_4 ]
+			spawn_boss<1>: [ .ignivar ]	
 		}				
 	}  
 
@@ -449,6 +496,13 @@ map trial_of_fire:
 				placement<[ 77 88 ]>: in_player_spawn_distance_range_percentage
 				entity_spawn: [ .boss_3 ]
 			}						
+			
+			# Boss 4
+			execute add_special_entity_spawn:
+			{
+				placement<[ 90 93 ]>: in_player_spawn_distance_range_percentage
+				entity_spawn: [ .boss_4 ]
+			}								
 		}				
 	}
 }

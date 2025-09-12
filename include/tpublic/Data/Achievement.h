@@ -134,6 +134,8 @@ namespace tpublic
 							m_iconSpriteId = aChild->GetId(DataType::ID_SPRITE);
 						else if (aChild->m_name == "kill_trigger")
 							m_killTriggerEntityId = aChild->GetId(DataType::ID_ENTITY);
+						else if (aChild->m_name == "kill_trigger_must_be_alive")
+							m_killTriggerMustBeAliveEntityId = aChild->GetId(DataType::ID_ENTITY);
 						else if (aChild->m_name == "kill_trigger_tag")
 							m_killTriggerEntityTagId = aChild->GetId(DataType::ID_TAG);
 						else if (aChild->m_tag == "stat_trigger")
@@ -168,6 +170,7 @@ namespace tpublic
 				aStream->WriteUInt(m_killTriggerEntityId);
 				aStream->WriteUInt(m_killTriggerEntityTagId);
 				aStream->WriteBool(m_availableInFrontEnd);
+				aStream->WriteUInt(m_killTriggerMustBeAliveEntityId);
 			}
 
 			bool
@@ -206,6 +209,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadBool(m_availableInFrontEnd))
 					return false;
+				if (!aStream->ReadUInt(m_killTriggerMustBeAliveEntityId))
+					return false;
 				return true;
 			}
 
@@ -231,6 +236,7 @@ namespace tpublic
 			std::vector<uint32_t>				m_needAchievementIds;
 			uint32_t							m_killTriggerEntityId = 0;
 			uint32_t							m_killTriggerEntityTagId = 0;
+			uint32_t							m_killTriggerMustBeAliveEntityId = 0;
 			uint64_t							m_sortKey = 0;
 			bool								m_noProgressValues = false;
 			bool								m_accountWide = false;

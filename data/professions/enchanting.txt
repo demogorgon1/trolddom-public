@@ -1195,3 +1195,131 @@ ability disenchant:
 	item formula_enchant_weapon_dancing_weapon: !ENCHANTING_FORMULA_ITEM{}
 	ability learn_enchant_weapon_dancing_weapon: !ENCHANTING_FORMULA_ABILITY{}
 }
+
+#####################################################
+# Enchant Bracers - Major Strength
+
+{
+	${
+		_string: "Enchant Bracers - Major Strength"
+		_string_item: "Enchant Bracers: Major Strength"
+		_description: "Enchants item to increase Strength by 2."
+		_item: enchant_bracers_major_strength
+		_produce: { enchant_bracers_major_strength: 1 } 
+		_materials: { reagent_void_essence: 3 reagent_paper: 1 }
+		_skill: 95
+		_target_item_requirements: { equipment_slots: [ wrists ] }
+		_id: enchant_bracers_major_strength	
+		_consume_items: { enchant_bracers_major_strength: 1 }	
+	}
+
+	aura enchant_bracers_major_strength:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper	
+
+		string: "Strength +2"
+		stat_modifiers: { strength: { add: 2 } }
+	}
+
+	ability enchant_bracers_major_strength: !ENCHANTING_APPLY{}
+	item enchant_bracers_major_strength: !ENCHANTING_ITEM{}
+	ability craft_enchant_bracers_major_strength: !ENCHANTING_CRAFT{}
+}
+
+#####################################################
+# Enchant Bracers - Major Spirit
+
+{
+	${
+		_string: "Enchant Bracers - Major Spirit"
+		_string_item: "Enchant Bracers: Major Spirit"
+		_description: "Enchants item to increase Spirit by 2."
+		_item: enchant_bracers_major_spirit
+		_produce: { enchant_bracers_major_spirit: 1 } 
+		_materials: { reagent_void_essence: 4 reagent_paper: 1 }
+		_skill: 100
+		_target_item_requirements: { equipment_slots: [ wrists ] }
+		_id: enchant_bracers_major_spirit
+		_consume_items: { enchant_bracers_major_spirit: 1 }	
+	}
+
+	aura enchant_bracers_major_spirit:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper	
+
+		string: "Spirit +2"
+		stat_modifiers: { spirit: { add: 2 } }
+	}
+
+	ability enchant_bracers_major_spirit: !ENCHANTING_APPLY{}
+	item enchant_bracers_major_spirit: !ENCHANTING_ITEM{}
+	ability craft_enchant_bracers_major_spirit: !ENCHANTING_CRAFT{}
+}
+
+#####################################################
+# Enchant Boots - Dexterity
+
+{
+	${
+		_string: "Enchant Boots - Dexterity"
+		_string_item: "Enchant Boots: Dexterity"
+		_description: "Enchants item to increase Dexterity by 3."
+		_item: enchant_boots_dexterity
+		_produce: { enchant_boots_dexterity: 1 } 
+		_materials: { reagent_void_essence: 3 reagent_void_crystal: 1 reagent_paper: 1 }
+		_skill: 100
+		_target_item_requirements: { equipment_slots: [ feet ] }
+		_id: enchant_boots_dexterity
+		_consume_items: { enchant_boots_dexterity: 1 }	
+	}
+
+	aura enchant_boots_dexterity:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper	
+
+		string: "Dexterity +3"
+		stat_modifiers: { dexterity: { add: 3 } }
+	}
+
+	ability enchant_boots_dexterity: !ENCHANTING_APPLY{}
+	item enchant_boots_dexterity: !ENCHANTING_ITEM{}
+	ability craft_enchant_boots_dexterity: !ENCHANTING_CRAFT{}
+}
+
+#####################################################
+# Enchant Gloves - Major Wisdom
+
+{
+	${
+		_string: "Enchant Gloves - Major Wisdom"
+		_string_item: "Enchant Gloves: Major Wisdom"
+		_description: "Enchants item to increase Wisdom by 3."
+		_item: enchant_gloves_major_wisdom
+		_produce: { enchant_gloves_major_wisdom: 1 } 
+		_materials: { reagent_void_essence: 5 reagent_paper: 1 }
+		_skill: 105
+		_target_item_requirements: { equipment_slots: [ hands ] }
+		_id: enchant_gloves_major_wisdom
+		_consume_items: { enchant_gloves_major_wisdom: 1 }	
+	}
+
+	aura enchant_gloves_major_wisdom:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper	
+
+		string: "Wisdom +3"
+		stat_modifiers: { wisdom: { add: 3 } }
+	}
+
+	ability enchant_gloves_major_wisdom: !ENCHANTING_APPLY{}
+	item enchant_gloves_major_wisdom: !ENCHANTING_ITEM{}
+	ability craft_enchant_gloves_major_wisdom: !ENCHANTING_CRAFT{}
+}

@@ -224,7 +224,7 @@ item item_mistveil:
 	icon: icon_fish_7
 	stack: 20
 	item_level: 20
-	level_range: [ 20 20 ]
+	level_range: [ 20 26 ]
 }
 
 ################################################################################

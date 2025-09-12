@@ -895,12 +895,14 @@ sprites:
 	sprite crab_5: { dead: crab_5_dead }
 	sprite man_77: { dead: man_77_dead }
 	sprite man_78: { dead: man_78_dead }
+	sprite fire_elemental_5: { dead: fire_elemental_5_dead }
 		
 	cursor: { position: [ 0 784 ] }
 	sprite goblin_6_dead: { }	
 	sprite crab_5_dead: { }	
 	sprite man_77_dead: { }	
 	sprite man_78_dead: { }	
+	sprite fire_elemental_5_dead: { }	
 }
 
 sprites:

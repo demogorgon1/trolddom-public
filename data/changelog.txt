@@ -2,6 +2,31 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.4.0"
+
+	text: "New content:"
+
+	list:
+	[
+		{ text: "Level cap raised to 25." }		
+		{ text: "Enter the Realm of Fire." }
+		{ text: "Area north of Valoris opened up." }
+		{ text: "Talents, crafting recipes, enchants, world drops, quests, and more." }
+	]	
+	
+#	text: "Changes:"
+#	
+#	list:
+#	[
+#	]
+#
+#	text: "Issues fixed:"
+#
+#	list:
+#	[
+#	]
+
+	#######################################################################################
 	heading: "v0.3.4"
 
 	text: "Issues fixed:"
