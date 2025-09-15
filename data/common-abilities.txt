@@ -1,3 +1,5 @@
+!define DEFAULT_SPREAD 0.12
+
 cooldown global:
 {
 	duration: 15
@@ -22,7 +24,7 @@ ability attack:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical		
-		function: { expression: x x: weapon }													
+		function: { expression: x x: weapon }	
 	}
 }
 

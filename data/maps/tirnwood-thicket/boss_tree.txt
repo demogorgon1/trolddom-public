@@ -232,5 +232,6 @@ ability .tree_2:
 	{
 		damage_type: physical
 		function: 80
+		spread: !DEFAULT_SPREAD{}						
 	}
 }

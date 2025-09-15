@@ -166,6 +166,7 @@ entity durgan_urok_boss_6: !NPC
 				{
 					damage_type: fire
 					function: 125
+					spread: !DEFAULT_SPREAD{}
 				}
 				
 				direct_effect spawn_entity:
@@ -191,7 +192,8 @@ entity durgan_urok_boss_6: !NPC
 									direct_effect damage:
 									{
 										damage_type: fire
-										function: { expression: a a: 75 }													
+										function: { expression: a a: 75 }			
+										spread: !DEFAULT_SPREAD{}
 									}
 								}								
 							}		

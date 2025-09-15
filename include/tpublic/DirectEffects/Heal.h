@@ -98,6 +98,7 @@ namespace tpublic
 			CombatFunction								m_function;
 			bool										m_maxHealthPercentage = false;
 			std::vector<ConditionalCriticalChanceBonus>	m_conditionalCriticalChanceBonuses;
+			float										m_spread = 0.0f;
 
 			float			_GetCriticalChanceBonus(
 								const Components::AbilityModifiers*	aAbilityModifiers) const;

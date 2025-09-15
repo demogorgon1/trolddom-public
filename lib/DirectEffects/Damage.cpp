@@ -57,6 +57,10 @@ namespace tpublic::DirectEffects
 				{
 					m_resolveCancelAuraId = aChild->GetId(DataType::ID_AURA);
 				}
+				else if (aChild->m_name == "spread")
+				{
+					m_spread = aChild->GetFloat();
+				}
 				else
 				{
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
@@ -83,6 +87,7 @@ namespace tpublic::DirectEffects
 
 		aStream->WriteFloat(m_threatMultiplier);
 		aStream->WriteUInt(m_resolveCancelAuraId);
+		aStream->WriteFloat(m_spread);
 	}
 			
 	bool	
@@ -120,6 +125,8 @@ namespace tpublic::DirectEffects
 		if(!aStream->ReadFloat(m_threatMultiplier))
 			return false;
 		if(!aStream->ReadUInt(m_resolveCancelAuraId))
+			return false;
+		if (!aStream->ReadFloat(m_spread))
 			return false;
 
 		return true;
@@ -159,7 +166,14 @@ namespace tpublic::DirectEffects
 		if(targetCombatPublic == NULL)
 			return Result();
 
-		uint32_t damage = (uint32_t)m_function.EvaluateSourceAndTargetEntityInstances(aManifest, aWorldView, aRandom, _GetDamageModifier(abilityModifiers), aSource, aTarget);
+		float realDamage = m_function.EvaluateSourceAndTargetEntityInstances(aManifest, aWorldView, aRandom, _GetDamageModifier(abilityModifiers), aSource, aTarget);
+		if(m_spread > 0.0f)
+		{
+			std::uniform_real_distribution<float> spread(realDamage * (1.0f - m_spread), realDamage * (1.0f + m_spread));
+			realDamage = spread(aRandom);
+		}
+
+		uint32_t damage = (uint32_t)realDamage;
 
 		if(damage == 0)
 			damage = 1;
@@ -352,6 +366,19 @@ namespace tpublic::DirectEffects
 		}
 
 		m_function.ToRange(NULL, NULL, damageModifier, aEntityInstance, aOutDamage);
+
+		if(m_spread > 0.0f)
+		{
+			aOutDamage.m_min = (uint32_t)((float)aOutDamage.m_min * (1.0f - m_spread));
+			aOutDamage.m_max = (uint32_t)((float)aOutDamage.m_max * (1.0f + m_spread));
+
+			if (aOutDamage.m_min == 0)
+				aOutDamage.m_min = 1;
+
+			if (aOutDamage.m_max == 0)
+				aOutDamage.m_max = 1;
+		}
+
 		aOutDamageType = _GetDamageType(aEntityInstance, aAbilityModifierList, aAbilityId);
 		return true;
 	}

@@ -436,6 +436,7 @@
 		direct_effect heal:
 		{	
 			function: { expression: a a: [ [ 1 8 ] [ 10 19 ] ] }		
+			spread: !DEFAULT_SPREAD{}						
 		}		
 	}
 	
@@ -905,6 +906,7 @@
 		direct_effect heal:
 		{	
 			function: 95
+			spread: !DEFAULT_SPREAD{}						
 		}		
 	}
 	

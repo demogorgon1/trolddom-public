@@ -9,23 +9,18 @@ changelog:
 	list:
 	[
 		{ text: "Level cap raised to 25." }		
-		{ text: "Enter the Realm of Fire." }
-		{ text: "Area north of Valoris opened up." }
+		{ text: "Seren Virelith quest line continues." }
+		{ text: "Head to the Royal Garden Tavern to pick up a quest leading north of Valoris." }
 		{ text: "Talents, crafting recipes, enchants, world drops, quests, and more." }
 	]	
-	
-#	text: "Changes:"
-#	
-#	list:
-#	[
-#	]
-#
-#	text: "Issues fixed:"
-#
-#	list:
-#	[
-#	]
 
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Direct damage and heals from spells and abilities will usually be slightly randomized." }
+	]
+	
 	#######################################################################################
 	heading: "v0.3.4"
 

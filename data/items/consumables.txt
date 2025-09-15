@@ -599,3 +599,64 @@ item consumable_mana_salve:
 	}
 }
 
+#####################################################
+# Invisibility Potion
+
+aura consumable_invisibility_potion:
+{
+	string: "Invisibility"
+	type: buff
+	icon: icon_potion_4
+	duration: 150
+	description: "Non-allies are unlikely to notice you. Stay out of open areas to reduce likelihood of detection."
+	flags: [ unique cancel_on_damage no_source_needed ]
+	
+	aura_effect stealth: 
+	{
+		flags: [ cancel_aura_on_fade ] 
+	}
+	
+	aura_effect move_speed_modifier:
+	{
+		move_speed: slow
+	}
+}
+
+ability consumable_invisibility_potion (potion):
+{
+	string: "Invisibility Potion"
+	description: "Makes you invisible for 15 seconds."
+	icon: icon_potion_4
+	direct_effect apply_aura: { aura: consumable_invisibility_potion }
+	consume_items: { consumable_invisibility_potion: 1 }
+	required_level: 16
+}
+
+item consumable_invisibility_potion (potion):
+{
+	icon: icon_potion_4
+	string: "Invisibility Potion"
+	use_ability: consumable_invisibility_potion
+	level_range: [ 16 25 ]
+}
+
+#####################################################
+# Rage Potion
+
+ability consumable_rage_potion (potion):	
+{
+	string: "Rage Potion"
+	description: "Generates 40 rage."
+	icon: icon_potion_5
+	direct_effect modify_resource: { resource: rage function: 40 }
+	consume_items: { consumable_rage_potion: 1 }
+	required_level: 15
+}
+
+item consumable_rage_potion (potion):
+{
+	icon: icon_potion_5
+	string: "Rage Potion"
+	use_ability: consumable_rage_potion
+	level_range: [ 16 25 ]
+}

@@ -31,6 +31,8 @@ namespace tpublic::DirectEffects
 					m_maxHealthPercentage = aChild->GetBool();
 				else if (aChild->m_name == "conditional_critical_chance_bonus")
 					m_conditionalCriticalChanceBonuses.push_back(ConditionalCriticalChanceBonus(aChild));
+				else if (aChild->m_name == "spread")
+					m_spread = aChild->GetFloat();
 				else
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 			}
@@ -45,6 +47,7 @@ namespace tpublic::DirectEffects
 		m_function.ToStream(aStream);
 		aStream->WriteBool(m_maxHealthPercentage);
 		aStream->WriteObjects(m_conditionalCriticalChanceBonuses);
+		aStream->WriteFloat(m_spread);
 	}
 			
 	bool	
@@ -58,6 +61,8 @@ namespace tpublic::DirectEffects
 		if (!aStream->ReadBool(m_maxHealthPercentage))
 			return false;
 		if(!aStream->ReadObjects(m_conditionalCriticalChanceBonuses))
+			return false;
+		if (!aStream->ReadFloat(m_spread))
 			return false;
 		return true;
 	}
@@ -85,7 +90,15 @@ namespace tpublic::DirectEffects
 		if(sourceCombatPrivate == NULL || targetCombatPublic == NULL)
 			return Result();
 
-		uint32_t heal = (uint32_t)m_function.EvaluateSourceAndTargetEntityInstances(aManifest, aWorldView, aRandom, 1.0f, aSource, aTarget);
+		float realHeal = m_function.EvaluateSourceAndTargetEntityInstances(aManifest, aWorldView, aRandom, 1.0f, aSource, aTarget);
+
+		if (m_spread > 0.0f)
+		{
+			std::uniform_real_distribution<float> spread(realHeal * (1.0f - m_spread), realHeal * (1.0f + m_spread));
+			realHeal = spread(aRandom);
+		}
+
+		uint32_t heal = (uint32_t)realHeal;
 
 		if(m_maxHealthPercentage)
 		{	
@@ -143,9 +156,7 @@ namespace tpublic::DirectEffects
 					threat = (threat * 3) / 2;
 
 				for(std::unordered_map<uint32_t, int32_t>::const_iterator i = targetThreatSource->m_targets.cbegin(); i != targetThreatSource->m_targets.cend(); i++)
-				{
 					aEventQueue->EventQueueThreat(aSourceEntityInstance, i->first, threat, aTick, aAbilityId);
-				}
 			}
 		}
 
@@ -160,6 +171,19 @@ namespace tpublic::DirectEffects
 		UIntRange&					aOutHeal) const 
 	{
 		m_function.ToRange(NULL, NULL, 1.0f, aEntityInstance, aOutHeal);
+
+		if (m_spread > 0.0f)
+		{
+			aOutHeal.m_min = (uint32_t)((float)aOutHeal.m_min * (1.0f - m_spread));
+			aOutHeal.m_max = (uint32_t)((float)aOutHeal.m_max * (1.0f + m_spread));
+
+			if (aOutHeal.m_min == 0)
+				aOutHeal.m_min = 1;
+
+			if (aOutHeal.m_max == 0)
+				aOutHeal.m_max = 1;
+		}
+
 		return true;
 	}
 

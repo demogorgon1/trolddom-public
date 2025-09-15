@@ -155,7 +155,8 @@ ability void_blast:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.1 b: [ [ 1 35 ] [ 10 75 ] [ 20 150 ] ] }									
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.1 b: [ [ 1 35 ] [ 10 75 ] [ 20 150 ] ] }	
+		spread: !DEFAULT_SPREAD{}
 	}	
 }
 
@@ -250,7 +251,8 @@ ability void_lightning_tick:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.32 b: [ [ 1 7 ] [ 10 15 ] [ 20 32 ] ] }									
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.32 b: [ [ 1 7 ] [ 10 15 ] [ 20 32 ] ] }		
+		spread: !DEFAULT_SPREAD{}
 	}	
 }
 
@@ -308,7 +310,8 @@ ability void_lightning:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.02 b: [ [ 1 25 ] [ 10 50 ] [ 20 120 ] ] }									
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.02 b: [ [ 1 25 ] [ 10 50 ] [ 20 120 ] ] }	
+		spread: !DEFAULT_SPREAD{}
 	}	
 }
 
@@ -613,6 +616,7 @@ ability arcane_missile:
 		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
 		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 15 ] [ 10 30 ] [ 20 60 ] ] }											
+		spread: !DEFAULT_SPREAD{}
 	}
 }
 

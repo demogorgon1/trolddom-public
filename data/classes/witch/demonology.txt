@@ -349,6 +349,7 @@ ability heal_demon:
 	{	
 		flags: [ can_be_critical ]
 		function: { expression: a_mul_x_plus_b x: healing a: 1 b: [ [ 1 25 ] [ 10 50 ] [ 20 100 ] ] }
+		spread: !DEFAULT_SPREAD{}						
 	}		
 }
 
@@ -796,6 +797,7 @@ ability drain_life:
 		damage_type: unholy
 		flags: [ can_be_critical is_magical leech ]
 		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.7 b: [ [ 1 22 ] [ 10 44 ] [ 20 88 ] ] }			
+		spread: !DEFAULT_SPREAD{}
 	}	
 	
 	direct_effect damage:
@@ -804,6 +806,7 @@ ability drain_life:
 		damage_type: unholy
 		flags: [ can_be_critical is_magical leech ]
 		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.77 b: [ [ 1 24 ] [ 10 48 ] [ 20 96 ] ] }			
+		spread: !DEFAULT_SPREAD{}
 	}		
 	
 	direct_effect damage:
@@ -812,6 +815,7 @@ ability drain_life:
 		damage_type: unholy
 		flags: [ can_be_critical is_magical leech ]
 		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.84 b: [ [ 1 26 ] [ 10 52 ] [ 20 104 ] ] }			
+		spread: !DEFAULT_SPREAD{}
 	}		
 
 	direct_effect damage:
@@ -820,6 +824,7 @@ ability drain_life:
 		damage_type: unholy
 		flags: [ can_be_critical is_magical leech ]
 		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.91 b: [ [ 1 29 ] [ 10 58 ] [ 20 118 ] ] }					
+		spread: !DEFAULT_SPREAD{}
 	}			
 	
 	direct_effect damage:
@@ -828,6 +833,7 @@ ability drain_life:
 		damage_type: unholy
 		flags: [ can_be_critical is_magical leech ]
 		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.98 b: [ [ 1 31 ] [ 10 62 ] [ 20 124 ] ] }					
+		spread: !DEFAULT_SPREAD{}
 	}			
 
 	direct_effect damage:
@@ -836,6 +842,7 @@ ability drain_life:
 		damage_type: unholy
 		flags: [ can_be_critical is_magical leech ]
 		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.05 b: [ [ 1 33 ] [ 10 66 ] [ 20 132 ] ] }					
+		spread: !DEFAULT_SPREAD{}
 	}				
 }
 

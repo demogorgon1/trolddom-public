@@ -48,6 +48,13 @@ objective .anna_skrald_1:
 	collect_items: { item: .anna_skrald_1_quest_item count: 1 }
 }
 
+{
+	${ _level: 22 }
+	#item .anna_skrald_1_a: !QUEST_REWARD_FINGER{ _string: "Solkara's Ring of Restoration" _icon: icon_ring_14 _wisdom: 1 _healing: 2 }
+	#item .anna_skrald_1_b: !QUEST_REWARD_FINGER{ _string: "Signet Ring of Swirl" _icon: icon_ring_1 _wisdom: 1 _spell_damage: 2 }
+	#item .anna_skrald_1_c: !QUEST_REWARD_FINGER{ _string: "Ring of Fiery Doom" _icon: icon_ring_12 _strength: 4 _constitution: 1 }
+}
+
 quest .anna_skrald_1:
 {
 	string: "Goblin Raiders"

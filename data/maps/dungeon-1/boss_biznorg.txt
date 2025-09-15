@@ -106,5 +106,6 @@ ability .biznorg:
 	{
 		damage_type: fire
 		function: { expression: a a: 75 }															
+		spread: !DEFAULT_SPREAD{}
 	}
 }

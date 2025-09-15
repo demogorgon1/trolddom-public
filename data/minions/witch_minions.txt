@@ -235,6 +235,7 @@
 				flags: [ can_be_critical is_magical ]
 				damage_type: fire
 				function: { expression: a a: [ [ 1 18 ] [ 10 36 ] [ 20 72 ] ] }
+				spread: !DEFAULT_SPREAD{}						
 			}
 			
 			direct_effect damage:
@@ -243,6 +244,7 @@
 				flags: [ can_be_critical is_magical ]
 				damage_type: fire
 				function: { expression: a a: [ [ 1 19 ] [ 10 38 ] [ 20 76 ] ] }
+				spread: !DEFAULT_SPREAD{}						
 			}
 
 			direct_effect damage:
@@ -251,6 +253,7 @@
 				flags: [ can_be_critical is_magical ]
 				damage_type: fire
 				function: { expression: a a: [ [ 1 21 ] [ 10 42 ] [ 20 84 ] ] }
+				spread: !DEFAULT_SPREAD{}										
 			}
 
 			direct_effect damage:
@@ -259,6 +262,7 @@
 				flags: [ can_be_critical is_magical ]
 				damage_type: fire
 				function: { expression: a a: [ [ 1 22 ] [ 10 44 ] [ 20 88 ] ] }
+				spread: !DEFAULT_SPREAD{}						
 			}		
 			
 			direct_effect damage:
@@ -267,14 +271,16 @@
 				flags: [ can_be_critical is_magical ]
 				damage_type: fire
 				function: { expression: a a: [ [ 1 24 ] [ 10 48 ] [ 20 96 ] ] }
+				spread: !DEFAULT_SPREAD{}						
 			}		
 
-				direct_effect damage:
+			direct_effect damage:
 			{
 				must_have_ability_modifier: demon_mastery_5
 				flags: [ can_be_critical is_magical ]
 				damage_type: fire
 				function: { expression: a a: [ [ 1 25 ] [ 10 50 ] [ 20 100 ] ] }
+				spread: !DEFAULT_SPREAD{}						
 			}		
 		}	
 			

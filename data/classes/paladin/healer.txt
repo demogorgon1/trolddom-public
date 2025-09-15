@@ -99,6 +99,7 @@ ability holy_injection:
 		conditional_critical_chance_bonus<praise_the_light_3>: 6
 		conditional_critical_chance_bonus<praise_the_light_4>: 8
 		conditional_critical_chance_bonus<praise_the_light_5>: 10
+		spread: !DEFAULT_SPREAD{}						
 	}
 }
 
@@ -189,6 +190,7 @@ ability flash_heal:
 		conditional_critical_chance_bonus<praise_the_light_3>: 6
 		conditional_critical_chance_bonus<praise_the_light_4>: 8
 		conditional_critical_chance_bonus<praise_the_light_5>: 10
+		spread: !DEFAULT_SPREAD{}						
 	}
 }
 
@@ -233,6 +235,7 @@ ability holy_light:
 		conditional_critical_chance_bonus<praise_the_light_3>: 6
 		conditional_critical_chance_bonus<praise_the_light_3>: 8
 		conditional_critical_chance_bonus<praise_the_light_3>: 10
+		spread: !DEFAULT_SPREAD{}						
 	}
 	
 	direct_effect apply_aura:

@@ -75,6 +75,13 @@ objective .swirl_tonkins_2:
 	kill_npc: { entities: [ realm_of_fire_lava_worm ] count: 6 }	
 }
 
+{
+	${ _level: 23 }
+	item .swirl_tonkins_2_a: !QUEST_REWARD_FEET{ _string: "Basalt Boots" _icon: icon_mail_boots_1 _constitution: 1 _strength: 1 _type: armor_plate }
+	item .swirl_tonkins_2_b: !QUEST_REWARD_SHOULDERS{ _string: "Spellcaster Shoulderpads" _icon: icon_shoulders_6 _constitution: 1 _wisdom: 2 _type: armor_cloth }
+	item .swirl_tonkins_2_c: !QUEST_REWARD_WRISTS{ _string: "Guardian Bracers" _icon: icon_mail_bracers_1 _constitution: 3 _strength: 1 _dexterity: 2 _type: armor_plate }
+}
+
 quest .swirl_tonkins_2:
 {
 	string: "First Order of Business"
@@ -103,6 +110,7 @@ quest .swirl_tonkins_2:
 	level: 23
 	prerequisites: [ thalvaron_ghorm_1 ]
 	objectives: [ .swirl_tonkins_2 ]
+	reward_one_item: [ .swirl_tonkins_2_a .swirl_tonkins_2_b .swirl_tonkins_2_c ]
 }
 
 ##########################################################################################
@@ -373,6 +381,13 @@ objective .swirl_tonkins_6_b:
 	collect_items: { item: .swirl_tonkins_6_infused_rod count: 1 }
 }
 
+{
+	${ _level: 25 }
+	item .swirl_tonkins_6_a: !QUEST_REWARD_FINGER{ _string: "Solkara's Ring of Restoration" _icon: icon_ring_14 _wisdom: 1 _healing: 2 }
+	item .swirl_tonkins_6_b: !QUEST_REWARD_FINGER{ _string: "Signet Ring of Swirl" _icon: icon_ring_1 _wisdom: 1 _spell_damage: 2 }
+	item .swirl_tonkins_6_c: !QUEST_REWARD_FINGER{ _string: "Ring of Fiery Doom" _icon: icon_ring_12 _strength: 4 _constitution: 1 }
+}
+
 quest .swirl_tonkins_6:
 {
 	string: "Defeating the Mad Wizard"
@@ -405,4 +420,5 @@ quest .swirl_tonkins_6:
 	quest_items: [ .swirl_tonkins_6_uninfused_rod ]
 	prerequisites: [ .swirl_tonkins_5 ]
 	objectives: [ .swirl_tonkins_6_a .swirl_tonkins_6_b ]
+	reward_one_item: [ .swirl_tonkins_6_a .swirl_tonkins_6_b .swirl_tonkins_6_c ]
 }

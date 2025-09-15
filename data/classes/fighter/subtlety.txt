@@ -617,7 +617,8 @@ ability envenom:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: a_mul_x_plus_b x: attack_power a: 0.35 b: [ [ 1 15 ] [ 10 30 ] [ 20 50 ] ] }						
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.35 b: [ [ 1 15 ] [ 10 30 ] [ 20 50 ] ] }				
+		spread: !DEFAULT_SPREAD{}		
 	}
 	
 	direct_effect apply_aura:

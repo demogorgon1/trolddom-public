@@ -156,7 +156,8 @@ ability shield_crush:
 	{	
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: a_mul_x x: attack_power a: 0.42 }				
+		function: { expression: a_mul_x x: attack_power a: 0.42 }			
+		spread: !DEFAULT_SPREAD{}
 	}
 		
 	direct_effect apply_aura:
@@ -663,6 +664,7 @@ ability bash:
 		flags: [ can_be_critical ]
 		damage_type: physical
 		function: { expression: a_mul_x x: attack_power a: 0.30 }				
+		spread: !DEFAULT_SPREAD{}
 	}
 		
 	direct_effect damage:
@@ -671,6 +673,7 @@ ability bash:
 		flags: [ can_be_critical ]
 		damage_type: physical
 		function: { expression: a_mul_x x: attack_power a: 0.90 }				
+		spread: !DEFAULT_SPREAD{}
 	}
 	
 	direct_effect remove_aura:

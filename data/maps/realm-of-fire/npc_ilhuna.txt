@@ -275,6 +275,13 @@ objective .ilhuna_3:
 	kill_npc: { entities: [ realm_of_fire_satyr_boss ] count: 1 }	
 }
 
+{
+	${ _level: 24 }
+	item .ilhuna_3_a: !QUEST_REWARD_HEAD{ _string: "Hood of the Warrior Wizard" _icon: icon_cloth_head_1 _wisdom: 3 _constitution: 2 _type: armor_cloth }
+	item .ilhuna_3_b: !QUEST_REWARD_CHEST{ _string: "Magma-Forged Chestguard" _icon: icon_chest_2 _constitution: 1 _strength: 1 _type: armor_plate }
+	item .ilhuna_3_c: !QUEST_REWARD_LEGS{ _string: "Partially Burned Trousers" _icon: icon_mail_pants_2 _spell_damage: 1 _wisdom: 2 _type: armor_cloth }
+}
+
 quest .ilhuna_3:
 {
 	string: "Summoning the Enemy"
@@ -297,5 +304,6 @@ quest .ilhuna_3:
 	prerequisites: [ .ilhuna_2 ]
 	quest_items: [ .ilhuna_3_quest_item ]
 	objectives: [ .ilhuna_3 ]
+	reward_one_item: [ .ilhuna_3_a .ilhuna_3_b .ilhuna_3_c ]
 	level: 24
 }

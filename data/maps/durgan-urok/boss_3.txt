@@ -154,6 +154,7 @@ entity durgan_urok_boss_3: !NPC
 					flags: [ can_be_critical ]
 					damage_type: poison
 					function: 60
+					spread: !DEFAULT_SPREAD{}					
 				}	
 			}			
 		}

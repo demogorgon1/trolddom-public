@@ -582,7 +582,7 @@ ability firebolt:
 		flags: [ can_be_critical is_magical ]
 		damage_type: fire
 		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.92 b: [ [ 1 32 ] [ 10 65 ] [ 20 132 ] ] }											
-		
+		spread: !DEFAULT_SPREAD{}		
 	}
 	
 	direct_effect apply_aura:
@@ -645,6 +645,7 @@ ability fireball:
 		flags: [ can_be_critical is_magical ]
 		damage_type: fire
 		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.5 b: [ [ 1 55 ] [ 10 120 ] [ 20 245 ] ] }											
+		spread: !DEFAULT_SPREAD{}
 	}
 	
 	direct_effect apply_aura:
@@ -707,6 +708,7 @@ ability ice_lance:
 		flags: [ can_be_critical is_magical ]
 		damage_type: frost
 		function: { expression: a_mul_x_plus_b x: spell_damage a: 1 b: [ [ 1 30 ] [ 10 60 ] [ 20 120 ] ] }													
+		spread: !DEFAULT_SPREAD{}
 	}
 	
 	direct_effect apply_aura:
@@ -773,6 +775,7 @@ ability frost_explosion:
 		flags: [ can_be_critical is_magical ]
 		damage_type: frost
 		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 15 ] [ 10 30 ] [ 20 60 ] ] }													
+		spread: !DEFAULT_SPREAD{}
 	}
 	
 	direct_effect apply_aura:

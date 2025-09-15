@@ -166,8 +166,8 @@ ability .gribble:
 	direct_effect damage:
 	{
 		damage_type: fire
-		function: { expression: a a: 55 }													
-
+		function: { expression: a a: 55 }	
+		spread: !DEFAULT_SPREAD{}		
 	}
 	
 	direct_effect spawn_entity:

@@ -119,6 +119,7 @@ ability .baldric_sunstrike_tick:
 	{
 		damage_type: holy
 		function: { expression: a a: 9 }
+		spread: !DEFAULT_SPREAD{}
 	}
 
 }

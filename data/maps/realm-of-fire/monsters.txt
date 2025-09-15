@@ -495,7 +495,7 @@ map_entity_spawn realm_of_fire_wizard_spawn_8: { spawn_timer: { only_when_trigge
 					{
 						requirement target<must_not_have_aura>: .swirl_tonkins_6_infused_rod
 						damage_type: fire
-						function: { expression: a_mul_x a: 0.75 x: health_max entity: target }		
+						function: { expression: a_mul_x a: 0.75 x: health_max entity: target }
 					}					
 					
 					direct_effect damage:
@@ -536,6 +536,7 @@ map_entity_spawn realm_of_fire_wizard_spawn_8: { spawn_timer: { only_when_trigge
 					{
 						damage_type: fire
 						function: 115		
+						spread: !DEFAULT_SPREAD{}						
 					}					
 				}
 			}

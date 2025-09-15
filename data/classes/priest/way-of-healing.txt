@@ -478,6 +478,7 @@ ability greater_heal:
 	{	
 		flags: [ can_be_critical ]
 		function: { expression: a_mul_x_plus_b x: healing a: 1.15 b: [ [ 1 25 ] [ 10 60 ] [ 20 140 ] ] }
+		spread: !DEFAULT_SPREAD{}						
 	}
 	
 	direct_effect apply_aura:
@@ -511,6 +512,7 @@ ability minor_heal:
 	{	
 		flags: [ can_be_critical ]
 		function: { expression: a_mul_x_plus_b x: healing a: 0.8 b: [ [ 1 10 ] [ 10 20 ] [ 20 44 ] ] }
+		spread: !DEFAULT_SPREAD{}						
 	}
 	
 	direct_effect apply_aura:
@@ -543,6 +545,7 @@ ability blessing_tick:
 aura blessing:
 {
 	string: "Blessing"
+	description: "Heals over time."
 	icon: icon_holy_blessing		
 	type: buff	
 	duration: based_on_effects	

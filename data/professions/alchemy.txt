@@ -418,3 +418,87 @@ item recipe_strong_mana_potion:
 	use_ability: .learn_strong_mana_potion
 	level_range: [ 11 20 ]
 }
+
+#####################################################
+# Invisibility Potion
+
+ability craft_invisibility_potion: !ALCHEMY_CRAFT
+{
+	_string: "Invisibility Potion"
+	_item: consumable_invisibility_potion
+	_produce: { consumable_invisibility_potion: 1 } 
+	_materials: { item_ashveil: 3 item_ectoplasm: 1 item_spirit_dust: 1 }
+	_skill: 70
+}
+
+ability .learn_invisibility_potion:
+{
+	string: "Recipe: Invisibility Potion"
+	description: "Teaches you how to make an Invisibility Potion."
+	flags: [ target_self item ]
+	cast_time: 20
+	icon: icon_scroll_1
+	cooldowns: [ global ]	
+	consume_items: { recipe_invisibility_potion: 1 }
+	required_profession<65>: alchemy
+	requirement self<must_not_have_profession_ability>: { id: craft_invisibility_potion }
+	direct_effect learn_profession_ability:
+	{
+		profession: alchemy
+		ability: craft_invisibility_potion
+	}
+}
+
+item recipe_invisibility_potion:
+{
+	type: miscellaneous
+	item_level: 16
+	rarity: uncommon
+	loot_groups: [ world_drops_uncommon ]
+	icon: icon_scroll_1
+	string: "Recipe: Invisibility Potion"
+	use_ability: .learn_invisibility_potion
+	level_range: [ 16 25 ]
+}
+
+#####################################################
+# Rage Potion
+
+ability craft_rage_potion: !ALCHEMY_CRAFT
+{
+	_string: "Rage Potion"
+	_item: consumable_rage_potion
+	_produce: { consumable_rage_potion: 1 } 
+	_materials: { item_ashveil: 2 item_crab_claw_2: 1 }
+	_skill: 75
+}
+
+ability .learn_rage_potion:
+{
+	string: "Recipe: Rage Potion"
+	description: "Teaches you how to make a Rage Potion."
+	flags: [ target_self item ]
+	cast_time: 20
+	icon: icon_scroll_1
+	cooldowns: [ global ]	
+	consume_items: { recipe_rage_potion: 1 }
+	required_profession<70>: alchemy
+	requirement self<must_not_have_profession_ability>: { id: craft_rage_potion }
+	direct_effect learn_profession_ability:
+	{
+		profession: alchemy
+		ability: craft_rage_potion
+	}
+}
+
+item recipe_rage_potion:
+{
+	type: miscellaneous
+	item_level: 16
+	rarity: uncommon
+	loot_groups: [ world_drops_uncommon ]
+	icon: icon_scroll_1
+	string: "Recipe: Rage Potion"
+	use_ability: .learn_rage_potion
+	level_range: [ 16 25 ]
+}
