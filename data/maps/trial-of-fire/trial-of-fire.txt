@@ -173,9 +173,7 @@ map trial_of_fire:
 			thread_run_condition_entity_not_dead: [ .fireclaw ]
 								
 			wait<60>: {}
-			
-			set_flag<!FLAG_SPAWN_FIRE_ELEMENTAL_BOSS{}>: {}			
-							
+										
 			repeat<3>:
 			{
 				wait<[ 40 80 ]>: {}

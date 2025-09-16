@@ -166,6 +166,12 @@ objective .ranger_roel_3:
 	}
 }
 
+{
+	${ _level: 24 }
+	item .ranger_roel_3_a: !QUEST_REWARD_BOW{ _string: "Ranger's Bow" _icon: icon_bow_1 _dexterity: 2 _constitution: 1 }
+	item .ranger_roel_3_b: !QUEST_REWARD_FEET{ _string: "Outcast Slippers" _icon: icon_slippers_2 _wisdom: 2 _spell_damage: 3 _type: armor_cloth }
+}
+
 quest .ranger_roel_3:
 {
 	string: "Crabs Aren't Supposed to Shoot Lightning"
@@ -195,5 +201,6 @@ quest .ranger_roel_3:
 	level: 24
 	prerequisites: [ .ranger_roel_1 ]
 	objectives: [ .ranger_roel_3 ]
+	reward_one_item: [ .ranger_roel_3_a .ranger_roel_3_b ]
 }
 

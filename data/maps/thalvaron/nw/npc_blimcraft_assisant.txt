@@ -27,7 +27,7 @@ entity thalvaron_blimcraft_assistant: !NPC
 }
 
 ############################################################
-# Quest 3
+# Quest 1
 
 objective .blimcraft_assistant_1:
 {

@@ -189,7 +189,7 @@
 {
 	string: @_string
 	binds: when_picked_up
-	required_level: @_level
+	item_level: @_level
 	icon: @_icon
 	
 	<exists _type> type: @_type

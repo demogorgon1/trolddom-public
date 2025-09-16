@@ -255,6 +255,12 @@ objective .captain_jerrington_4_b:
 	manual_boolean: { }
 }
 
+{
+	${ _level: 23 }
+	item .captain_jerrington_4_a: !QUEST_REWARD_CHEST{ _string: "Elite Guard's Chestplate" _icon: icon_plate_chest_1 _strength: 2 _constitution: 1 _type: armor_plate }
+	item .captain_jerrington_4_b: !QUEST_REWARD_CHEST{ _string: "Elite Enchanter's Robe" _icon: icon_robe_4 _wisdom: 2 _constitution: 1 _type: armor_cloth }
+}
+
 quest .captain_jerrington_4:
 {
 	string: "Going Underground"
@@ -283,5 +289,6 @@ quest .captain_jerrington_4:
 	level: 23
 	prerequisites: [ .goblin_boss_quest_item ]
 	objectives: [ .captain_jerrington_4_a .captain_jerrington_4_b ]
+	reward_one_item: [ .captain_jerrington_4_a .captain_jerrington_4_b ]
 }
 
