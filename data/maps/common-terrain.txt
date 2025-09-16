@@ -142,7 +142,7 @@ terrain lava:
 	connect_cost: 32
 	connect_conversion: coast_volcanic
 	
-	debug_color: [ 0 0 255 ]
+	debug_color: [ 64 64 0 ]
 }
 
 terrain coast_volcanic:
@@ -152,7 +152,7 @@ terrain coast_volcanic:
 	
 	walkable: true
 	
-	debug_color: [ 255 255 0 ]
+	debug_color: [ 128 128 128 ]
 }
 
 terrain flat_volcanic:
@@ -164,7 +164,7 @@ terrain flat_volcanic:
 		
 	walkable: true
 			
-	debug_color: [ 0 255 0 ]
+	debug_color: [ 90 90 90 ]
 }
 
 terrain black_rocks:
@@ -177,5 +177,5 @@ terrain black_rocks:
 	connect_cost: 4
 	connect_conversion: flat_volcanic
 					
-	debug_color: [ 128 128 128 ]
+	debug_color: [ 32 32 32 ]
 }

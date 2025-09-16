@@ -48,8 +48,8 @@
 		${
 			_string: "Lavacrawler" 
 			_creature_type: beast
-			_weapon_damage: 0.46
-			_resource_health: 0.55		
+			_weapon_damage: 0.36
+			_resource_health: 0.29		
 			_sprite: crab_4 
 			_sprite_dead: crab_4_dead 
 			_abilities: [ { id: npc_attack } ]
@@ -65,7 +65,7 @@
 		${
 			_string: "Fireclaw" 
 			_creature_type: beast
-			_weapon_damage: 1.1
+			_weapon_damage: 0.9
 			_resource_health: 1.55		
 			_sprite: crab_monster_boss_6
 			_sprite_dead: crab_monster_boss_6_dead
@@ -99,8 +99,8 @@
 		${
 			_string: "Volcanic Rock Shambler" 
 			_creature_type: elemental
-			_weapon_damage: 0.46
-			_resource_health: 0.55		
+			_weapon_damage: 0.4
+			_resource_health: 0.33		
 			_sprite: rock_elemental_2
 			_sprite_dead: rock_elemental_2_dead 
 			_abilities: [ { id: npc_attack } ]
@@ -116,8 +116,8 @@
 		${
 			_string: "Basaltis" 
 			_creature_type: elemental
-			_weapon_damage: 1.1
-			_resource_health: 1.55		
+			_weapon_damage: 1
+			_resource_health: 1.6		
 			_sprite: rock_elemental_3
 			_sprite_dead: rock_elemental_3_dead
 			_abilities: [ { id: npc_attack } ]
@@ -128,14 +128,14 @@
 			_global_aura: $aura
 			{
 				string: "Skin of Basaltis"
-				description: "Damage taken reduced by 20%."
+				description: "Damage taken reduced by 10%."
 				icon: icon_rock_1
 				type: buff
 				flags: [ unique indefinite global ]
 				aura_effect damage_input_modifier:
 				{
 					type_mask: [ all ]
-					multiplier: 0.8
+					multiplier: 0.9
 				}			
 			}
 		}
@@ -150,8 +150,8 @@
 		${
 			_string: "Satyr Rogue" 
 			_creature_type: demon
-			_weapon_damage: 0.46
-			_resource_health: 0.55		
+			_weapon_damage: 0.4
+			_resource_health: 0.35		
 			_sprite: demon_7
 			_sprite_dead: demon_7_dead 
 			_abilities: [ { id: npc_rend target: random_player }{ id: npc_attack } ]
@@ -167,8 +167,8 @@
 		${
 			_string: "Satyr Rogue" 
 			_creature_type: demon
-			_weapon_damage: 0.46
-			_resource_health: 0.55		
+			_weapon_damage: 0.32
+			_resource_health: 0.5		
 			_sprite: demon_8
 			_sprite_dead: demon_8_dead 
 			_abilities: [ { id: npc_shoot }{ id: npc_attack } ]
@@ -201,7 +201,7 @@
 					direct_effect damage:
 					{
 						damage_type: fire
-						function: { expression: a a: 9 elite_multiplier: 1.5 }
+						function: { expression: a a: 8 elite_multiplier: 1.5 }
 					}				
 				}
 			}
@@ -210,8 +210,8 @@
 		${
 			_string: "Rift Keeper" 
 			_creature_type: demon
-			_weapon_damage: 1.1
-			_resource_health: 1.55		
+			_weapon_damage: 0.9
+			_resource_health: 1.65
 			_sprite: demon_9
 			_sprite_dead: demon_9_dead
 			_abilities: [ { id: npc_firebolt }{ id: npc_attack } ]
@@ -261,8 +261,8 @@
 		${
 			_string: "Fire Warden" 
 			_creature_type: elemental
-			_weapon_damage: 0.46
-			_resource_health: 0.55		
+			_weapon_damage: 0.42
+			_resource_health: 0.45		
 			_sprite: fire_elemental_1
 			_sprite_dead: fire_elemental_1_dead 
 			_abilities: [ { id: npc_charge } { id: npc_attack } ]
@@ -279,7 +279,7 @@
 			_string: "Scorchcaster" 
 			_creature_type: elemental
 			_weapon_damage: 0.38
-			_resource_health: 0.45		
+			_resource_health: 0.35		
 			_sprite: fire_elemental_2
 			_sprite_dead: fire_elemental_2_dead 
 			_abilities: [ { id: npc_fireball target: random_player }{ id: npc_attack } ]
@@ -312,7 +312,7 @@
 					direct_effect damage:
 					{
 						damage_type: unholy
-						function: { expression: a a: 9 elite_multiplier: 1.5 }
+						function: { expression: a a: 8 elite_multiplier: 1.5 }
 					}				
 				}
 			}
@@ -322,7 +322,7 @@
 			_string: "Ignivar the Corruptor" 
 			_creature_type: demon
 			_weapon_damage: 1.1
-			_resource_health: 1.55		
+			_resource_health: 1.57		
 			_sprite: fire_elemental_5
 			_sprite_dead: fire_elemental_5_dead
 			_in_combat_barks: [ { type: yell text: "This is the end!" flags: [ no_chat_bubble ] } ]				

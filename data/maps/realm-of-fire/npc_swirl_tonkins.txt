@@ -51,7 +51,7 @@ quest realm_of_fire_swirl_tonkins_1:
 	description: 
 	[
 		"Now that you've entered this realm, your spirit has become attuned. This will make it easier for you to return here later if you wish to. Seek out Ghorm, an old friend of mine, who lives in Valoris. He can"
-		"help provide you a talisman that will help you. The portal here will take out you to Thalvaron."
+		"help provide you a talisman that will help you. The portal here will take you to Thalvaron."
 	]
 	
 	completion:
@@ -402,7 +402,7 @@ quest .swirl_tonkins_6:
 		"Alright, I'll give you this rod I've enchanted using the materials you've provided. Right now it's, unfortunately, quite useless, so we'll need to do something about that.\n"
 		"\n"
 		"It needs to be infused by a blessing of Solkara, the divine queen of this realm. Only she can expel the mad wizard. Take the rod to her shrine just south of here and ask for her"
-		"help. Then seek out the Voraghul and defeat him. Use the blessed rod to defend yourself from his attacks.\n"
+		"help. Then seek out Voraghul and defeat him. Use the blessed rod to defend yourself from his attacks.\n"
 		"I'm not sure where he is. Probably somewhere to the south."
 	]
 	

@@ -40,7 +40,7 @@ npc_metrics:
 	
 	base_resource_curve<health>: [ [ 1 115 ] [ 10 340 ] [ 20 1200 ] [ 30 2060 ] [ 40 2920 ] ]
 	base_resource_curve<mana>:   [ [ 1 80 ] [ 10 160 ] [ 20 320 ] [ 30 480 ] [ 40 640 ] ]
-	base_weapon_damage_curve:	 [ [ 1 8 ] [ 10 26 ] [ 12 30 ] [ 20 110 ] [ 30 190 ] [ 40 270 ] ]
+	base_weapon_damage_curve:	 [ [ 1 8 ] [ 10 26 ] [ 12 30 ] [ 20 110 ] [ 30 180 ] [ 40 250 ] ]
 	
 	aggro_range_base_level_difference: -3
 	aggro_ranges:

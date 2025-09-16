@@ -1394,27 +1394,46 @@ namespace tpublic::MapGenerators
 			{
 				uint32_t offset = x + y * aBuilder->m_width;
 				uint32_t terrainId = aBuilder->m_terrainMap[offset];
-				uint32_t surroundingTerrainId = 0;
 
-				static const Vec2 NEIGHBORS[4] = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
-				for (uint32_t j = 0; j < 4; j++)
+				if(terrainId == m_fromTerrainId || m_fromTerrainId == 0)
 				{
-					const Vec2& neighbor = NEIGHBORS[j];
-					uint32_t neighborTerrainId = aBuilder->GetTerrainIdWithOffset(x, y, neighbor.m_x, neighbor.m_y);
-					if (neighborTerrainId == terrainId || (surroundingTerrainId != 0 && surroundingTerrainId != neighborTerrainId))
-					{
-						surroundingTerrainId = 0;
-						break;
-					}
-					else if (surroundingTerrainId == 0)
-					{
-						surroundingTerrainId = neighborTerrainId;
-					}
-				}
+					uint32_t replacementTerrainId = 0;
 
-				if (surroundingTerrainId != 0)
-				{
-					changes.push_back({ offset, surroundingTerrainId });
+					static const Vec2 NEIGHBORS[4] = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
+
+					if(m_toTerrainId == 0)
+					{
+						for (uint32_t j = 0; j < 4; j++)
+						{
+							const Vec2& neighbor = NEIGHBORS[j];
+							uint32_t neighborTerrainId = aBuilder->GetTerrainIdWithOffset(x, y, neighbor.m_x, neighbor.m_y);
+							if (neighborTerrainId == terrainId || (replacementTerrainId != 0 && replacementTerrainId != neighborTerrainId))
+							{
+								replacementTerrainId = 0;
+								break;
+							}
+							else if (replacementTerrainId == 0)
+							{
+								replacementTerrainId = neighborTerrainId;
+							}
+						}
+					}
+					else
+					{
+						replacementTerrainId = m_toTerrainId;
+
+						for (uint32_t j = 0; j < 4 && replacementTerrainId != 0; j++)
+						{
+							const Vec2& neighbor = NEIGHBORS[j];
+							uint32_t neighborTerrainId = aBuilder->GetTerrainIdWithOffset(x, y, neighbor.m_x, neighbor.m_y);
+							if(neighborTerrainId == m_fromTerrainId || neighborTerrainId == 0)
+								replacementTerrainId = 0;
+						}
+
+					}
+
+					if (replacementTerrainId != 0)
+						changes.push_back({ offset, replacementTerrainId });
 				}
 			}
 		}
@@ -1474,18 +1493,29 @@ namespace tpublic::MapGenerators
 	{
 		TP_CHECK(aBuilder->m_terrainMap.size() > 0 && aBuilder->m_width > 0 && aBuilder->m_height > 0, "No terrain map.");
 
-		std::unordered_set<uint32_t> entitySpawnOffsets;
+		std::unordered_map<uint32_t, Image::RGBA> objects;
 		for (const MapData::EntitySpawn& entitySpawn : aBuilder->m_entitySpawns)
-			entitySpawnOffsets.insert((uint32_t)(entitySpawn.m_x + entitySpawn.m_y * (int32_t)aBuilder->m_width));
+		{
+			if(entitySpawn.m_mapEntitySpawnId != 0)
+			{
+				const Data::MapEntitySpawn* mapEntitySpawn = aBuilder->m_manifest->GetById<Data::MapEntitySpawn>(entitySpawn.m_mapEntitySpawnId);
+				if(mapEntitySpawn->m_debugColor.has_value())
+				{
+					uint32_t offset = (uint32_t)(entitySpawn.m_x + entitySpawn.m_y * (int32_t)aBuilder->m_width);
+					objects[offset] = mapEntitySpawn->m_debugColor.value();
+				}
+			}
+		}
 
 		Image image;
 		image.Allocate(aBuilder->m_width, aBuilder->m_height);
 		Image::RGBA* out = image.GetData();
 		for (uint32_t i = 0; i < aBuilder->m_width * aBuilder->m_height; i++)
 		{
-			if (entitySpawnOffsets.contains(i))
+			std::unordered_map<uint32_t, Image::RGBA>::const_iterator j = objects.find(i);
+			if (j != objects.cend())
 			{
-				*out = { 255, 0, 0, 255 };
+				*out = j->second;
 			}
 			else
 			{
@@ -1502,6 +1532,7 @@ namespace tpublic::MapGenerators
 			}
 			out++;
 		}
+
 		image.SavePNG(m_path.c_str());
 	}
 
@@ -1512,11 +1543,12 @@ namespace tpublic::MapGenerators
 		const Data::Noise* noise = aBuilder->m_manifest->GetById<Data::Noise>(m_noiseId);
 		NoiseInstance noiseInstance(noise, aBuilder->m_random);
 
-		uint32_t offset = 0;
-		for (int32_t y = 0; y < (int32_t)aBuilder->m_height; y++)
+		for (int32_t y = (uint32_t)m_border; y < (int32_t)(aBuilder->m_height - m_border); y++)
 		{
-			for (int32_t x = 0; x < (int32_t)aBuilder->m_width; x++)
+			for (int32_t x = (uint32_t)m_border; x < (int32_t)(aBuilder->m_width - m_border); x++)
 			{
+				uint32_t offset = (uint32_t)x + (uint32_t)y * aBuilder->m_width;
+
 				int32_t sample = noiseInstance.Sample({ x, y });
 				uint32_t terrainId = aBuilder->m_terrainMap[offset];
 
@@ -1913,6 +1945,12 @@ namespace tpublic::MapGenerators
 		builder.InitSpecialEntities();
 		builder.InitRoutes();
 		builder.InitZones();
+
+		//{
+		//	ExecuteDebugTerrainMap debugTerrainMap;
+		//	debugTerrainMap.m_path = "debug-terrain-map.png";
+		//	debugTerrainMap.Run(&builder);
+		//}
 
 		builder.CreateMapData(aSourceMapData, aOutMapData);
 

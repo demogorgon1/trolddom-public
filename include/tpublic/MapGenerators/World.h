@@ -975,21 +975,37 @@ namespace tpublic::MapGenerators
 			void
 			FromSource(
 				const IExecuteFactory*				/*aFactory*/,
-				const SourceNode*					/*aSource*/) override
+				const SourceNode*					aSource) override
 			{
+				aSource->ForEachChild([&](
+					const SourceNode* aChild)
+				{
+					if(aChild->m_name == "from_terrain")
+						m_fromTerrainId = aChild->GetId(DataType::ID_TERRAIN);
+					else if(aChild->m_name == "to_terrain")
+						m_toTerrainId = aChild->GetId(DataType::ID_TERRAIN);
+					else 
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+				});
 			}
 
 			void
 			ToStream(
-				IWriter*							/*aWriter*/) const override
+				IWriter*							aWriter) const override
 			{
+				aWriter->WriteUInt(m_fromTerrainId);
+				aWriter->WriteUInt(m_toTerrainId);
 			}
 
 			bool
 			FromStream(
 				const IExecuteFactory*				/*aFactory*/,
-				IReader*							/*aReader*/) override
+				IReader*							aReader) override
 			{
+				if(!aReader->ReadUInt(m_fromTerrainId))
+					return false;
+				if (!aReader->ReadUInt(m_toTerrainId))
+					return false;
 				return true;
 			}
 
@@ -997,6 +1013,8 @@ namespace tpublic::MapGenerators
 									Builder*			aBuilder) const override;
 
 			// Public data
+			uint32_t			m_fromTerrainId = 0;
+			uint32_t			m_toTerrainId = 0;
 		};
 
 		struct ExecuteAddBorders : public IExecute
@@ -1262,7 +1280,7 @@ namespace tpublic::MapGenerators
 					aWriter->WriteUInt(m_doodadId);
 					aWriter->WriteUInts(m_terrainIds);
 					m_range.ToStream(aWriter);
-					m_probability.ToStream(aWriter);
+					m_probability.ToStream(aWriter);					
 				}
 
 				bool
@@ -1314,6 +1332,8 @@ namespace tpublic::MapGenerators
 						m_terrains.push_back(std::make_unique<Terrain>(aChild));
 					else if (aChild->m_name == "doodad")
 						m_doodads.push_back(std::make_unique<Doodad>(aChild));
+					else if(aChild->m_name == "border")
+						m_border = aChild->GetUInt32();
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 				});
@@ -1327,6 +1347,7 @@ namespace tpublic::MapGenerators
 				aWriter->WriteUInt(m_noiseId);
 				aWriter->WriteObjectPointers(m_terrains);
 				aWriter->WriteObjectPointers(m_doodads);
+				aWriter->WriteUInt(m_border);
 			}
 
 			bool
@@ -1340,6 +1361,8 @@ namespace tpublic::MapGenerators
 					return false;
 				if (!aReader->ReadObjectPointers(m_doodads))
 					return false;
+				if (!aReader->ReadUInt(m_border))
+					return false;
 				return true;
 			}
 
@@ -1350,6 +1373,7 @@ namespace tpublic::MapGenerators
 			uint32_t										m_noiseId = 0;
 			std::vector<std::unique_ptr<Terrain>>			m_terrains;
 			std::vector<std::unique_ptr<Doodad>>			m_doodads;
+			uint32_t										m_border = 0;
 		};
 
 		struct ExecuteTerrainModifierMap : public IExecute
