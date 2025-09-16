@@ -1,0 +1,80 @@
+dialogue_screen .junior_dialogue:
+{
+	text: 
+	[	
+		"Huh?"
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .ophelie_2 }	
+		{ quest: .junior_1 }	
+	]
+}
+
+entity thalvaron_junior: !NPC
+{
+	_string: "Junior"
+	_dialogue_root: $dialogue_root { .junior_dialogue: { } }
+	_sprite: man_1
+	_sprite_dead: man_1_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+##########################################################################################
+# Quest 1
+
+loot_group .junior_1_quest_item: { }
+
+item .junior_1_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .junior_1_quest_item ]		
+	string: "Bear Fur" 
+	icon: icon_fur
+	item_level: 24
+	quest: .junior_1
+	flags: [ not_sellable ]
+	stack: 6
+}
+
+objective .junior_1:
+{
+	string: "Bear Furs"
+	collect_items: { item: .junior_1_quest_item count: 6 }
+}
+
+quest .junior_1:
+{
+	string: "The Great Bear Hunt"
+
+	text:
+	[
+		"Hunt bears in the woods and return their fur to Junior."
+	]
+	
+	description: 
+	[
+		"To be honest I mostly go out here to get a bit of alone time. I don't really care much for hunting bears, but dad expects me to bring back a fat stack of bear furs. If you want to help,"
+		"can you go grab some for me? You'll find bears all over these woods."
+	]
+
+	progress:
+	[
+		"Are they too mean and scary?"
+	]
+	
+	completion:
+	[
+		"Those will do fine, perfect."
+	]
+
+	objectives: [ .junior_1 ]
+	#reward_one_item: [ .ophelie_1_a .ophelie_1_b ]
+	prerequisites: [ .ophelie_2 ]
+	level: 24	
+}

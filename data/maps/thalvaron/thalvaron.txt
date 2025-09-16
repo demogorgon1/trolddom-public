@@ -94,6 +94,7 @@ zone .outcast_coast: { string: "Outcast Coast" }
 zone .tyrons_land: { string: "Tyron's Land" }
 zone .tyrons_rock: { string: "Tyron's Rock" }
 zone .cape_valor: { string: "Cape Valor" }
+zone .brior_hills: { string: "Brior Hills" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -238,6 +239,7 @@ map_entity_spawn thalvaron_ophelie: { entity thalvaron_ophelie: { init_state: de
 map_entity_spawn thalvaron_captain_jerrington_quest_item: { entity thalvaron_captain_jerrington_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_ranger_roel_1_quest_item: { entity thalvaron_ranger_roel_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_ranger_roel: { entity thalvaron_ranger_roel: { init_state: default } }
+map_entity_spawn thalvaron_junior: { entity thalvaron_junior: { init_state: default } }
 
 # N
 map_entity_spawn thalvaron_ranger_fremalt: { entity thalvaron_ranger_fremalt: { init_state: default } }
@@ -598,6 +600,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_ranger_roel: [ 177 163 148 ]
 	entity_spawn thalvaron_north_crabman: [ 12 38 93 ]
 	entity_spawn thalvaron_north_crabman_boss: [ 212 38 93 ]
+	entity_spawn thalvaron_junior: [ 94 128 61 ]
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				
@@ -969,6 +972,7 @@ map_palette .zones:
 	zone .tyrons_land: [ 225 199 26 ]	
 	zone .tyrons_rock: [ 24 173 24 ]
 	zone .cape_valor: [ 225 26 90 ]
+	zone .brior_hills: [ 71 160 88 ]
 }
 
 map_palette .sub_zones:

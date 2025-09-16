@@ -8,6 +8,7 @@ dialogue_screen .ophelie_dialogue:
 	options:
 	[
 		{ quest: .ophelie_1 }	
+		{ quest<offer_only>: .ophelie_2 }	
 	]
 }
 
@@ -82,4 +83,35 @@ quest .ophelie_1:
 	objectives: [ .ophelie_1 ]
 	reward_one_item: [ .ophelie_1_a .ophelie_1_b ]
 	level: 24	
+}
+
+##########################################################################################
+# Quest 2
+
+quest .ophelie_2:
+{
+	string: "Junior Chasing Bears in the Woods"
+
+	text:
+	[
+		"Locate Ophelie's son across the river, somewhere along the coast."
+	]
+	
+	description: 
+	[
+		"My son has been out bear hunting in Brior Hills. He left almost a week ago and I'm getting a bit worried. Tyron doesn't seem to care, so maybe you can go check out on him? I'm too busy"
+		"with my potatoes. Why he can't leave the bears alone, I don't know.\n"
+		"\n"
+		"The easiest way to reach Brior Hills is by crossing the river to the west and follow the coast."
+	]
+	
+	completion:
+	[
+		"Mom sent you? Gosh... Can't she leave me alone for a few days?"
+	]
+
+	level: 24	
+	reward_xp_multiplier: 0.3
+	reward_cash_multiplier: 0.25
+	prerequisites: [ .ophelie_1 ]
 }
