@@ -912,6 +912,18 @@ map_entity_spawn thalvaron_north_crab:
 	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
+map_entity_spawn thalvaron_north_bear_24: 
+{ 
+	entity thalvaron_north_bear_24: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_north_deer_24: 
+{ 
+	entity thalvaron_north_deer_24: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
 # Wolf
 {
 
@@ -926,6 +938,54 @@ map_entity_spawn thalvaron_north_crab:
 
 	entity thalvaron_north_wolf_23: !NPC { _level: 23 _string: "Northgrove Wolf" _sprite: wolf_1 _sprite_dead: wolf_1_dead _abilities: [ { id: npc_rend }{ id: npc_attack } ] }
 	entity thalvaron_north_wolf_24: !NPC { _level: 24 _string: "Northgrove Wolf" _sprite: wolf_1 _sprite_dead: wolf_1_dead _abilities: [ { id: npc_rend }{ id: npc_attack } ] }
+}
+
+# Bear
+{
+
+	loot_table .north_bear: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: 
+				{ 
+					loot_group: .junior_1_quest_item
+					requirement self<must_have_active_quest>: { id: .junior_1 } 
+					requirement self<must_not_have_completed_quest>: { id: .junior_1 } 
+				} 
+			}
+			
+			!WORLD_DROPS {}		
+			!WORLD_DROPS_BEARS {}
+		]	
+	}	
+	
+	${		
+		_faction: monsters
+		_creature_type: beast
+		_weapon_damage: 1
+		_resource_health: 1
+		_default_behavior_state: .wandering_short
+		_loot_table: .north_bear
+	}
+
+	entity thalvaron_north_bear_24: !NPC { _level: 24 _string: "Hill Bear" _sprite: bear _sprite_dead: bear_dead _abilities: [ { id: npc_sunder }{ id: npc_attack } ] }
+}
+
+# Deer
+{
+
+	${
+		_faction: wildlife
+		_creature_type: beast
+		_weapon_damage: 1
+		_resource_health: 1
+		_default_behavior_state: .wandering_short
+		_loot_table: default_deer
+	}
+	
+	entity thalvaron_north_deer_24: !NPC { _string: "Deer" _sprite: deer _sprite_dead: deer_dead _level: 24 }
 }
 
 # Boar

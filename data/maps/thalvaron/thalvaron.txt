@@ -601,6 +601,8 @@ map_palette .stuff:
 	entity_spawn thalvaron_north_crabman: [ 12 38 93 ]
 	entity_spawn thalvaron_north_crabman_boss: [ 212 38 93 ]
 	entity_spawn thalvaron_junior: [ 94 128 61 ]
+	entity_spawn thalvaron_north_deer_24: [ 39 147 49 ]
+	entity_spawn thalvaron_north_bear_24: [ 139 147 111 ]
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				
