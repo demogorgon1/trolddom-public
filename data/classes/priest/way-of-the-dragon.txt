@@ -145,7 +145,7 @@ ability dragon_crush:
 	{
 		flags: [ can_be_critical ]
 		damage_type: fire
-		function: { expression: a_mul_x_plus_b x: attack_power a: 0.88 b: [ [ 1 26 ] [ 10 52 ] [ 20 104 ] ] }		
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.88 b: [ [ 1 26 ] [ 10 52 ] [ 20 104 ] [ 30 171 ] ] }		
 		spread: !DEFAULT_SPREAD{}		
 	}		
 	
@@ -202,7 +202,7 @@ ability dragon_breath_tick:
 	direct_effect damage:
 	{	
 		damage_type: fire		
-		function: { expression: a_mul_x_plus_b x: attack_power a: 0.4 b: [ [ 1 10 ] [ 10 20 ] [ 20 40 ] ] }		
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.4 b: [ [ 1 10 ] [ 10 20 ] [ 20 40 ] [ 30 66 ] ] }		
 		flags: [ is_magical ]
 		spread: !DEFAULT_SPREAD{}
 	}	
@@ -293,7 +293,7 @@ ability dragon_punch:
 	{
 		flags: [ can_be_critical ]
 		damage_type: fire
-		function: { expression: a_mul_x_plus_b x: attack_power a: 0.75 b: [ [ 1 15 ] [ 10 30 ] [ 20 60 ] ] }		
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.75 b: [ [ 1 15 ] [ 10 30 ] [ 20 60 ] [ 30 99 ] ] }		
 		spread: !DEFAULT_SPREAD{}
 	}	
 	

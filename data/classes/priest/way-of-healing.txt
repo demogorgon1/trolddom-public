@@ -306,7 +306,7 @@ ability prayer_of_sanctuary:
 	direct_effect heal:
 	{	
 		flags: [ can_be_critical ]
-		function: { expression: a_mul_x_plus_b x: healing a: 0.5 b: [ [ 1 12 ] [ 10 24 ] [ 20 48 ] ] }
+		function: { expression: a_mul_x_plus_b x: healing a: 0.5 b: [ [ 1 12 ] [ 10 24 ] [ 20 48 ] [ 30 79 ] ] }
 	}
 }
 
@@ -477,7 +477,7 @@ ability greater_heal:
 	direct_effect heal:
 	{	
 		flags: [ can_be_critical ]
-		function: { expression: a_mul_x_plus_b x: healing a: 1.15 b: [ [ 1 25 ] [ 10 60 ] [ 20 140 ] ] }
+		function: { expression: a_mul_x_plus_b x: healing a: 1.15 b: [ [ 1 25 ] [ 10 60 ] [ 20 140 ] [ 30 231 ] ] }
 		spread: !DEFAULT_SPREAD{}						
 	}
 	
@@ -511,7 +511,7 @@ ability minor_heal:
 	direct_effect heal:
 	{	
 		flags: [ can_be_critical ]
-		function: { expression: a_mul_x_plus_b x: healing a: 0.8 b: [ [ 1 10 ] [ 10 20 ] [ 20 44 ] ] }
+		function: { expression: a_mul_x_plus_b x: healing a: 0.8 b: [ [ 1 10 ] [ 10 20 ] [ 20 44 ] [ 30 72 ] ] }
 		spread: !DEFAULT_SPREAD{}						
 	}
 	
@@ -538,7 +538,7 @@ ability blessing_tick:
 	
 	direct_effect heal:
 	{	
-		function: { expression: a_mul_x_plus_b x: healing a: 0.23 b: [ [ 1 5 ] [ 10 12 ] [ 20 28 ] ] }
+		function: { expression: a_mul_x_plus_b x: healing a: 0.23 b: [ [ 1 5 ] [ 10 12 ] [ 20 28 ] [ 30 46 ] ] }
 	}	
 }
 

@@ -348,7 +348,7 @@ ability heal_demon:
 	direct_effect heal:
 	{	
 		flags: [ can_be_critical ]
-		function: { expression: a_mul_x_plus_b x: healing a: 1 b: [ [ 1 25 ] [ 10 50 ] [ 20 100 ] ] }
+		function: { expression: a_mul_x_plus_b x: healing a: 1 b: [ [ 1 25 ] [ 10 50 ] [ 20 100 ] [ 30 165 ] ] }
 		spread: !DEFAULT_SPREAD{}						
 	}		
 }
@@ -782,7 +782,7 @@ ability drain_life:
 	description: "Does $damage$ damage to target and heals you for 50% of the damage dealt."
 	range: 6
 	cooldowns: [ global spell_unholy_lockout ]
-	cast_time: 20
+	cast_time: 18
 	flags: [ spell offensive target_other target_hostile interruptable ]
 	states: [ default in_combat ]
 	icon: icon_drain_life
@@ -796,7 +796,7 @@ ability drain_life:
 		must_not_have_ability_modifiers: [ improved_drain_life_1 improved_drain_life_2 improved_drain_life_3 improved_drain_life_4 improved_drain_life_5 ]
 		damage_type: unholy
 		flags: [ can_be_critical is_magical leech ]
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.7 b: [ [ 1 22 ] [ 10 44 ] [ 20 88 ] ] }			
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.7 b: [ [ 1 22 ] [ 10 44 ] [ 20 88 ] [ 30 145 ] ] }			
 		spread: !DEFAULT_SPREAD{}
 	}	
 	
@@ -805,7 +805,7 @@ ability drain_life:
 		must_have_ability_modifier: improved_drain_life_1 
 		damage_type: unholy
 		flags: [ can_be_critical is_magical leech ]
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.77 b: [ [ 1 24 ] [ 10 48 ] [ 20 96 ] ] }			
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.77 b: [ [ 1 24 ] [ 10 48 ] [ 20 96 ] [ 30 158 ] ] }			
 		spread: !DEFAULT_SPREAD{}
 	}		
 	
@@ -814,7 +814,7 @@ ability drain_life:
 		must_have_ability_modifier: improved_drain_life_2
 		damage_type: unholy
 		flags: [ can_be_critical is_magical leech ]
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.84 b: [ [ 1 26 ] [ 10 52 ] [ 20 104 ] ] }			
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.84 b: [ [ 1 26 ] [ 10 52 ] [ 20 104 ] [ 30 171 ] ] }			
 		spread: !DEFAULT_SPREAD{}
 	}		
 
@@ -823,7 +823,7 @@ ability drain_life:
 		must_have_ability_modifier: improved_drain_life_3 
 		damage_type: unholy
 		flags: [ can_be_critical is_magical leech ]
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.91 b: [ [ 1 29 ] [ 10 58 ] [ 20 118 ] ] }					
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.91 b: [ [ 1 29 ] [ 10 58 ] [ 20 118 ] [ 30 194 ] ] }					
 		spread: !DEFAULT_SPREAD{}
 	}			
 	
@@ -832,7 +832,7 @@ ability drain_life:
 		must_have_ability_modifier: improved_drain_life_4 
 		damage_type: unholy
 		flags: [ can_be_critical is_magical leech ]
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.98 b: [ [ 1 31 ] [ 10 62 ] [ 20 124 ] ] }					
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.98 b: [ [ 1 31 ] [ 10 62 ] [ 20 124 ] [ 30 204 ] ] }					
 		spread: !DEFAULT_SPREAD{}
 	}			
 
@@ -841,7 +841,7 @@ ability drain_life:
 		must_have_ability_modifier: improved_drain_life_5 
 		damage_type: unholy
 		flags: [ can_be_critical is_magical leech ]
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.05 b: [ [ 1 33 ] [ 10 66 ] [ 20 132 ] ] }					
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.05 b: [ [ 1 33 ] [ 10 66 ] [ 20 132 ] [ 30 217 ] ] }					
 		spread: !DEFAULT_SPREAD{}
 	}				
 }

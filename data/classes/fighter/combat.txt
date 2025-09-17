@@ -528,7 +528,7 @@ ability mortal_strike:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: x_plus_a x: weapon a: [ [ 1 9 ] [ 10 18 ] [ 20 36 ] ] }
+		function: { expression: x_plus_a x: weapon a: [ [ 1 9 ] [ 10 18 ] [ 20 36 ] [ 30 59 ] ] }
 	}
 	
 	direct_effect apply_aura:
@@ -621,7 +621,7 @@ ability strike:
 		flags: [ can_be_critical ]
 		damage_type: physical
 		aura_conditional_critical_chance_bonus<relentless_overpower>: 50
-		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 4 ] [ 10 8 ] [ 20 16 ] ] }
+		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 4 ] [ 10 8 ] [ 20 16 ] [ 30 26 ] ] }
 	}
 }
 

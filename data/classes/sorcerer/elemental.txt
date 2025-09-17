@@ -514,7 +514,7 @@ ability lake_of_fire_tick:
 	{
 		flags: [ is_magical ]
 		damage_type: fire
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 10 ] [ 10 20 ] [ 20 40 ] ] }											
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 10 ] [ 10 20 ] [ 20 40 ] [ 30 66 ] ] }											
 	}
 }
 
@@ -581,7 +581,7 @@ ability firebolt:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: fire
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.92 b: [ [ 1 32 ] [ 10 65 ] [ 20 132 ] ] }											
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.92 b: [ [ 1 32 ] [ 10 65 ] [ 20 132 ] [ 30 217 ] ] }											
 		spread: !DEFAULT_SPREAD{}		
 	}
 	
@@ -644,7 +644,7 @@ ability fireball:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: fire
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.5 b: [ [ 1 55 ] [ 10 120 ] [ 20 245 ] ] }											
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.5 b: [ [ 1 55 ] [ 10 120 ] [ 20 245 ] [ 30 404 ] ] }											
 		spread: !DEFAULT_SPREAD{}
 	}
 	
@@ -707,7 +707,7 @@ ability ice_lance:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: frost
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 1 b: [ [ 1 30 ] [ 10 60 ] [ 20 120 ] ] }													
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.1 b: [ [ 1 30 ] [ 10 60 ] [ 20 120 ] [ 30 198 ] ] }													
 		spread: !DEFAULT_SPREAD{}
 	}
 	
@@ -774,7 +774,7 @@ ability frost_explosion:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: frost
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 15 ] [ 10 30 ] [ 20 60 ] ] }													
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 15 ] [ 10 30 ] [ 20 60 ] [ 30 99 ] ] }													
 		spread: !DEFAULT_SPREAD{}
 	}
 	

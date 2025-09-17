@@ -202,7 +202,7 @@ ability paladin_holy_reflection:
 	{	
 		flags: [ is_magical ]
 		damage_type: holy
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.3 b: [ [ 1 8 ] [ 10 16 ] [ 20 32 ] ] }					
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.3 b: [ [ 1 8 ] [ 10 16 ] [ 20 32 ] [ 30 52 ] ] }					
 		threat_multiplier: 1.35
 	}	
 }
@@ -784,7 +784,7 @@ ability consecrate_tick:
 	{
 		flags: [ is_magical ]
 		damage_type: holy
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.35 b: [ [ 1 14 ] [ 10 28 ] [ 20 56 ] ] }													
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.35 b: [ [ 1 14 ] [ 10 28 ] [ 20 56 ] [ 30 92 ] ] }													
 	}
 	direct_effect threat:
 	{

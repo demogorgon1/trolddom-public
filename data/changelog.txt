@@ -19,6 +19,14 @@ changelog:
 	list:
 	[
 		{ text: "Direct damage and heals from spells and abilities will usually be slightly randomized." }
+		{ text: "Witch spell Elemental Destruction unlocks at level 10." }
+	]
+
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Fixed bug where spells and abilities didn't scale enough after level 20." }
 	]
 	
 	#######################################################################################

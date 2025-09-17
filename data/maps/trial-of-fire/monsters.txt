@@ -66,7 +66,7 @@
 			_string: "Fireclaw" 
 			_creature_type: beast
 			_weapon_damage: 0.9
-			_resource_health: 1.55		
+			_resource_health: 1.35		
 			_sprite: crab_monster_boss_6
 			_sprite_dead: crab_monster_boss_6_dead
 			_abilities: [ { id: npc_attack } ]
@@ -117,7 +117,7 @@
 			_string: "Basaltis" 
 			_creature_type: elemental
 			_weapon_damage: 1
-			_resource_health: 1.6		
+			_resource_health: 1.4		
 			_sprite: rock_elemental_3
 			_sprite_dead: rock_elemental_3_dead
 			_abilities: [ { id: npc_attack } ]
@@ -211,7 +211,7 @@
 			_string: "Rift Keeper" 
 			_creature_type: demon
 			_weapon_damage: 0.9
-			_resource_health: 1.65
+			_resource_health: 1.5
 			_sprite: demon_9
 			_sprite_dead: demon_9_dead
 			_abilities: [ { id: npc_firebolt }{ id: npc_attack } ]
@@ -341,7 +341,7 @@
 			{
 				string: "Aura of Corruption"
 				description: "Attacks and spells cause target to be corrupted for 8 seconds."
-				icon: icon_fury
+				icon: icon_special_3
 				type: buff
 				flags: [ unique indefinite global ]
 				aura_effect combat_event_trigger: 

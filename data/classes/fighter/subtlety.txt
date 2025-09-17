@@ -268,7 +268,7 @@ ability poison_bomb_tick:
 	direct_effect damage:
 	{
 		damage_type: poison
-		function: { expression: a_mul_x_plus_b x: attack_power a: 0.06 b: [ [ 1 5 ] [ 10 11 ] [ 20 22 ] ] }				
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.06 b: [ [ 1 5 ] [ 10 11 ] [ 20 22 ] [ 30 36 ] ] }				
 	}
 }
 
@@ -579,7 +579,7 @@ ability envenom_tick:
 	direct_effect damage:
 	{
 		damage_type: poison
-		function: { expression: a_mul_x_plus_b x: attack_power a: 0.07 b: [ [ 1 5 ] [ 10 10 ] [ 20 17 ] ] }				
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.07 b: [ [ 1 5 ] [ 10 10 ] [ 20 17 ] [ 20 28 ] ] }				
 	}
 }
 
@@ -617,7 +617,7 @@ ability envenom:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: a_mul_x_plus_b x: attack_power a: 0.35 b: [ [ 1 15 ] [ 10 30 ] [ 20 50 ] ] }				
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.35 b: [ [ 1 15 ] [ 10 30 ] [ 20 50 ] [ 30 82 ] ] }				
 		spread: !DEFAULT_SPREAD{}		
 	}
 	
@@ -764,7 +764,7 @@ ability rend_tick:
 	direct_effect damage:
 	{
 		damage_type: bleed
-		function: { expression: a_mul_x_plus_b x: attack_power a: 0.085 b: [ [ 1 5 ] [ 10 11 ] [ 20 22 ] ] }						
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.085 b: [ [ 1 5 ] [ 10 11 ] [ 20 22 ] [ 20 36 ] ] }						
 	}
 }
 

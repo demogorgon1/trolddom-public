@@ -290,7 +290,7 @@ ability witch_bolt:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: unholy
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 34 ] [ 10 68 ] [ 20 136 ] ] }													
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 34 ] [ 10 68 ] [ 20 136 ] [ 30 224 ] ] }													
 		spread: !DEFAULT_SPREAD{}
 	}	
 	
@@ -346,7 +346,7 @@ ability curse_of_corruption_tick:
 		}
 		
 		damage_type: unholy
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.25 b: [ [ 1 4 ] [ 10 8 ] [ 20 16 ] ] }					
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.25 b: [ [ 1 4 ] [ 10 8 ] [ 20 16 ] [ 30 26 ] ] }					
 		flags: [ is_magical ]
 	}		
 	
@@ -520,7 +520,7 @@ ability doom:
 		flags: [ can_be_critical is_magical ]
 		conditional_critical_chance_bonus<improved_doom>: 50
 		damage_type: unholy
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.95 b: [ [ 1 26 ] [ 10 52 ] [ 20 104 ] ] }													
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.95 b: [ [ 1 26 ] [ 10 52 ] [ 20 104 ] [ 30 171 ] ] }													
 		spread: !DEFAULT_SPREAD{}
 	}	
 	
@@ -647,7 +647,7 @@ ability swarm_tick:
 		requirement target<must_be_hostile>: {}
 		flags: [ can_be_critical is_magical ]
 		damage_type: unholy
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 9 ] [ 10 18 ] [ 20 36 ] ] }			
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 9 ] [ 10 18 ] [ 20 36 ] [ 30 59 ] ] }			
 	}
 }
 
@@ -781,7 +781,7 @@ ability chain_lightning_tertiary:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: unholy
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 15 ] [ 10 30 ] [ 20 60 ] ] }													
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 15 ] [ 10 30 ] [ 20 60 ] [ 30 99 ] ] }													
 		spread: !DEFAULT_SPREAD{}
 	}			
 }
@@ -801,7 +801,7 @@ ability chain_lightning_secondary:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: unholy
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 18 ] [ 10 36 ] [ 20 72 ] ] }													
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 18 ] [ 10 36 ] [ 20 72 ] [ 30 118 ] ] }													
 		spread: !DEFAULT_SPREAD{}
 	}			
 	
@@ -833,7 +833,7 @@ ability chain_lightning:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: unholy
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 32 ] [ 10 64 ] [ 20 128 ] ] }													
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 32 ] [ 10 64 ] [ 20 128 ] [ 30 211 ] ] }													
 		spread: !DEFAULT_SPREAD{}
 	}		
 	
@@ -853,5 +853,44 @@ particle_system witch_chain_lightning:
 		flags: [ attached no_rotation ]
 		scale: 0.4
 		count: 1		
+	}
+}
+
+###############################################################################
+# Elemental Destruction
+
+ability witch_elemental_destruction:
+{
+	string: "Elemental Destruction"
+	description: "Deals $damage$ damage to target elemental."
+	range: 8
+	cooldowns: [ global spell_unholy_lockout ]
+	cooldown: $cooldown { duration: 70 }
+	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
+	states: [ default in_combat ]
+	icon: icon_elemental_destruction
+	talent_tree: witch_malice
+	speed: 7
+	projectile: $particle_system
+	{
+		particle:
+		{
+			sprites: [ effect_frostbolt ]
+			flags: [ attached no_rotation face_target ]
+			scale: 0.4
+			count: 1		
+			color_mod: [ 255 64 40 ]
+		}
+	}
+	resource_cost mana: 18
+	target_particle_system: green_spell_hit
+	requirement target<must_be_creature_type>: elemental
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical is_magical ]
+		damage_type: unholy
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.2 b: [ [ 1 40 ] [ 10 80 ] [ 20 160 ] [ 30 264 ] ] }													
+		spread: !DEFAULT_SPREAD{}
 	}
 }

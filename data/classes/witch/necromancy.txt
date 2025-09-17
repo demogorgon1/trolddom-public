@@ -111,7 +111,7 @@ ability corpse_explosion_tick:
 		flags: [ can_be_critical is_magical ]
 		requirement target<must_not_be_in_state>: dead
 		damage_type: unholy
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.65 b: [ [ 1 20 ] [ 10 40 ] [ 20 80 ] ] }													
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.65 b: [ [ 1 20 ] [ 10 40 ] [ 20 80 ] [ 30 132 ] ] }													
 	}
 }
 

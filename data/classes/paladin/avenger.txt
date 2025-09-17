@@ -175,7 +175,7 @@ ability intervention_of_wrath_debuff_tick:
 	direct_effect damage:
 	{
 		damage_type: holy
-		function: { expression: a_mul_x_plus_b x: attack_power a: 0.080 b: [ [ 1 6 ] [ 10 13 ] [ 20 28 ] ] }						
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.080 b: [ [ 1 6 ] [ 10 13 ] [ 20 28 ] [ 20 46 ] ] }						
 	}
 }
 
@@ -277,7 +277,7 @@ ability piercing_strike_secondary:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 10 ] [ 10 20 ] [ 20 40 ] ] }		
+		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 10 ] [ 10 20 ] [ 20 40 ] [ 30 66 ] ] }		
 	}		
 	
 	direct_effect apply_aura: !PALADIN_AVENGER_APPLY_INTERVENTION_OF_WRATH_DEBUFF{}
@@ -301,7 +301,7 @@ ability piercing_strike:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 10 ] [ 10 20 ] [ 20 40 ] ] }
+		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 10 ] [ 10 20 ] [ 20 40 ] [ 30 66 ] ] }
 		aura_conditional_critical_chance_bonus<paladin_holy_assault>: 100
 		resolve_cancel_aura: paladin_holy_assault		
 	}	
@@ -354,7 +354,7 @@ ability exorcism:
 	{	
 		damage_type: holy
 		flags: [ can_be_critical is_magical ]
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.8 b: [ [ 1 25 ] [ 10 50 ] [ 20 100 ] ] }		
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.8 b: [ [ 1 25 ] [ 10 50 ] [ 20 100 ] [ 30 165 ] ] }		
 		spread: !DEFAULT_SPREAD{}		
 	}	
 }
@@ -398,7 +398,7 @@ ability divine_smite:
 	{	
 		damage_type: holy
 		flags: [ can_be_critical is_magical ]
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.7 b: [ [ 1 18 ] [ 10 36 ] [ 20 72 ] ] }			
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.7 b: [ [ 1 18 ] [ 10 36 ] [ 20 72 ] [ 30 118 ] ] }			
 		spread: !DEFAULT_SPREAD{}
 	}	
 }
@@ -849,7 +849,7 @@ ability reckoning:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 12 ] [ 10 24 ] [ 20 48 ] ] }
+		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 12 ] [ 10 24 ] [ 20 48 ] [ 30 79 ] ] }
 		aura_conditional_critical_chance_bonus<paladin_holy_assault>: 100
 		resolve_cancel_aura: paladin_holy_assault		
 	}

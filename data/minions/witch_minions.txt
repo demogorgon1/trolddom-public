@@ -234,7 +234,7 @@
 				must_not_have_ability_modifiers: [ demon_mastery_1 demon_mastery_2 demon_mastery_3 demon_mastery_4 demon_mastery_5 ]
 				flags: [ can_be_critical is_magical ]
 				damage_type: fire
-				function: { expression: a a: [ [ 1 18 ] [ 10 36 ] [ 20 72 ] ] }
+				function: { expression: a a: [ [ 1 18 ] [ 10 36 ] [ 20 72 ] [ 30 118 ] ] }
 				spread: !DEFAULT_SPREAD{}						
 			}
 			
@@ -243,7 +243,7 @@
 				must_have_ability_modifier: demon_mastery_1
 				flags: [ can_be_critical is_magical ]
 				damage_type: fire
-				function: { expression: a a: [ [ 1 19 ] [ 10 38 ] [ 20 76 ] ] }
+				function: { expression: a a: [ [ 1 19 ] [ 10 38 ] [ 20 76 ] [ 30 125 ] ] }
 				spread: !DEFAULT_SPREAD{}						
 			}
 
@@ -252,7 +252,7 @@
 				must_have_ability_modifier: demon_mastery_2
 				flags: [ can_be_critical is_magical ]
 				damage_type: fire
-				function: { expression: a a: [ [ 1 21 ] [ 10 42 ] [ 20 84 ] ] }
+				function: { expression: a a: [ [ 1 21 ] [ 10 42 ] [ 20 84 ] [ 30 138 ] ] }
 				spread: !DEFAULT_SPREAD{}										
 			}
 
@@ -261,7 +261,7 @@
 				must_have_ability_modifier: demon_mastery_3
 				flags: [ can_be_critical is_magical ]
 				damage_type: fire
-				function: { expression: a a: [ [ 1 22 ] [ 10 44 ] [ 20 88 ] ] }
+				function: { expression: a a: [ [ 1 22 ] [ 10 44 ] [ 20 88 ] [ 30 145 ] ] }
 				spread: !DEFAULT_SPREAD{}						
 			}		
 			
@@ -270,7 +270,7 @@
 				must_have_ability_modifier: demon_mastery_4
 				flags: [ can_be_critical is_magical ]
 				damage_type: fire
-				function: { expression: a a: [ [ 1 24 ] [ 10 48 ] [ 20 96 ] ] }
+				function: { expression: a a: [ [ 1 24 ] [ 10 48 ] [ 20 96 ] [ 30 158 ] ] }
 				spread: !DEFAULT_SPREAD{}						
 			}		
 
@@ -279,7 +279,7 @@
 				must_have_ability_modifier: demon_mastery_5
 				flags: [ can_be_critical is_magical ]
 				damage_type: fire
-				function: { expression: a a: [ [ 1 25 ] [ 10 50 ] [ 20 100 ] ] }
+				function: { expression: a a: [ [ 1 25 ] [ 10 50 ] [ 20 100 ] [ 30 165 ] ] }
 				spread: !DEFAULT_SPREAD{}						
 			}		
 		}	
@@ -461,7 +461,7 @@
 			direct_effect damage:
 			{
 				damage_type: physical
-				function: { expression: a a: [ [ 1 12 ] [ 10 24 ] [ 20 48 ] ] }
+				function: { expression: a a: [ [ 1 12 ] [ 10 24 ] [ 20 48 ] [ 30 79 ] ] }
 			}
 			
 			source_visual<tile_shake>:
