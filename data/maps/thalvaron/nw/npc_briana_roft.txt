@@ -1,0 +1,116 @@
+dialogue_screen .briana_roft_dialogue:
+{
+	text: 
+	[	
+		"What?"
+	]			
+	
+	options:
+	[
+		{ quest: .briana_roft_1 }
+	]
+}
+
+dialogue_root .briana_roft_dialogue:
+{
+	.briana_roft_dialogue: { }
+}
+
+entity thalvaron_briana_roft: !NPC
+{
+	_string: "Briana Roft"
+	_dialogue_root: .briana_roft_dialogue	
+	_sprite: woman_36
+	_sprite_dead: woman_36_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .briana_roft_1_quest_item: {}
+
+item .briana_roft_1_quest_item:
+{
+	icon: icon_crown_1
+	item_level: 23
+	loot_groups: [ .briana_roft_1_quest_item ]
+	flags: [ unique not_sellable ]
+	string: "Golden Loot"
+}
+
+loot_table .briana_roft_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .briana_roft_1_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_briana_roft_1_quest_item:
+{
+	string: "Funerary Objects"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ chest_2 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .briana_roft_1_quest_item
+			verb: open
+			range: 1 
+			level: 23
+			despawn: true 		
+			required_quest: .briana_roft_1
+		}		
+	}
+}
+
+objective .briana_roft_1:
+{
+	string: "Loot"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .briana_roft_1_quest_item count: 1 }
+}
+
+quest .briana_roft_1:
+{
+	string: "Grave Robbing the Rich"
+
+	text:
+	[
+		"Enter the catacombs, find the crown of Prince Gerth, and return it to Briana Roft."
+	]
+	
+	description: 
+	[
+		"I saw you entered the catacombs earlier. Do you have the key? If you go down there again, maybe you can pick up something for me?\n" 
+		"\n"
+		"Basically... Well, these rich bastards sometimes get buried with some interesting items. I know that Prince Gerth was buried with a crown that one of my, hmm, clients is very interested in. If you can go grab"
+		"it for me I'll make it worth your while. If it's not on his head it must be somewhere in his burial chamber."
+	]
+
+	progress:
+	[
+		"They're not gonna miss their stuff. They're dead."
+	]
+	
+	completion:
+	[
+		"Ah, that's exactly it. Thanks."
+	]
+
+	objectives: [ .briana_roft_1 ]
+	prerequisites: [ .father_tobias_1 ]
+	level: 23
+}

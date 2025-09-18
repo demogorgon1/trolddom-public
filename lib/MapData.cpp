@@ -413,7 +413,7 @@ namespace tpublic
 			{
 				DebugPrintTimer debugPrintTimer("generate doodads");
 
-				aAutoDoodads->GenerateDoodads(0, m_tileMap, { m_width, m_height }, { 0, 0 }, { m_width, m_height }, doodadCoverageMap, [&](
+				aAutoDoodads->GenerateDoodads(0, m_tileMap, coverMap.empty() ? NULL : &coverMap[0], { m_width, m_height }, { 0, 0 }, { m_width, m_height }, doodadCoverageMap, [&](
 					const Vec2& aPosition,
 					uint32_t	/*aDoodadId*/,
 					uint32_t	aSpriteId)

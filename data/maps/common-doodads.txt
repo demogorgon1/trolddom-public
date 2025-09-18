@@ -109,6 +109,11 @@ sprites:
 
 	cursor: { position: [ 0 48 ] }
 	sprite doodad_sign_right: { flags: [ tile_walkable ] }
+	sprite doodad_bone_1: { flags: [ tile_walkable ] }
+	sprite doodad_bone_2: { flags: [ tile_walkable ] }
+	sprite doodad_bone_3: { flags: [ tile_walkable ] }
+	sprite doodad_sarcophagus_open: { flags: [ tile_walkable ] }
+	sprite doodad_sarcophagus_closed: { flags: [ tile_walkable ] }
 	
 	cursor: { position: [ 0 64 ] }
 	size: { width: 80 height: 64 } sprite ship: { flags: [ tile_walkable ] }
@@ -163,6 +168,7 @@ doodad grass_patch:
 	map_offset: [ -1 -1 ]
 	
 	auto_probability: [ 1 56 ]
+	no_cover: true
 }
 
 !define local GROUND_AUTO_DOODAD
@@ -289,4 +295,7 @@ doodad dark_stairs_center: { sprites: [ doodad_dark_stairs_center ] map_palette<
 doodad dark_stairs_right: { sprites: [ doodad_dark_stairs_right ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad closed_gate: { sprites: [ doodad_closed_gate ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad sign_generic_right: { sprites: [ doodad_sign_right ] map_palette<"x">: { occupy: true } map: [ "x" ] } 
+doodad bones: { sprites: [ doodad_bone_1 doodad_bone_2 doodad_bone_3 ] map_palette<"x">: { occupy: true } map: [ "x" ] } 
+doodad sarcophagus_open: { sprites: [ doodad_sarcophagus_open ] map_palette<"x">: { occupy: true } map: [ "x" ] } 
+doodad sarcophagus_closed: { sprites: [ doodad_sarcophagus_closed ] map_palette<"x">: { occupy: true } map: [ "x" ] } 
 

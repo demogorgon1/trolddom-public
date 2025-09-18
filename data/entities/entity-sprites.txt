@@ -900,6 +900,7 @@ sprites:
 	sprite skeleton_8: { dead: skeleton_8_dead }
 	sprite skeleton_9: { dead: skeleton_9_dead }
 	sprite skeleton_10: { dead: skeleton_10_dead }
+	sprite woman_36: { dead: woman_36_dead }
 		
 	cursor: { position: [ 0 784 ] }
 	sprite goblin_6_dead: { }	
@@ -911,6 +912,7 @@ sprites:
 	sprite skeleton_8_dead: { }	
 	sprite skeleton_9_dead: { }	
 	sprite skeleton_10_dead: { }	
+	sprite woman_36_dead: { }	
 }
 
 sprites:

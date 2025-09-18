@@ -242,6 +242,8 @@ map_entity_spawn thalvaron_ranger_roel_1_quest_item: { entity thalvaron_ranger_r
 map_entity_spawn thalvaron_ranger_roel: { entity thalvaron_ranger_roel: { init_state: default } }
 map_entity_spawn thalvaron_junior: { entity thalvaron_junior: { init_state: default } }
 map_entity_spawn thalvaron_father_tobias_door: { entity thalvaron_father_tobias_door: { init_state: default } }
+map_entity_spawn thalvaron_briana_roft_1_quest_item: { entity thalvaron_briana_roft_1_quest_item: { init_state: default } }
+map_entity_spawn thalvaron_briana_roft: { entity thalvaron_briana_roft: { init_state: default } }
 
 # N
 map_entity_spawn thalvaron_ranger_fremalt: { entity thalvaron_ranger_fremalt: { init_state: default } }
@@ -613,6 +615,8 @@ map_palette .stuff:
 	entity_spawn thalvaron_catacombs_boss_4: [ 120 148 100 ]
 	entity_spawn thalvaron_catacombs_boss_5: [ 120 148 200 ]
 	entity_spawn thalvaron_catacombs_boss_6: [ 120 248 100 ]
+	entity_spawn thalvaron_briana_roft_1_quest_item: [ 40 29 204 ]
+	entity_spawn thalvaron_briana_roft: [ 240 29 204 ]
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				
@@ -1079,6 +1083,9 @@ map_palette .doodads:
 	doodad jungle_plant_purple: [ 147 66 77 ]
 	doodad closed_gate: [ 31 1 138 ]
 	doodad fs_ground_mark: [ 30 105 39 ]
+	doodad bones: [ 130 105 39 ]
+	doodad sarcophagus_open: [ 30 105 239 ]
+	doodad sarcophagus_closed: [ 30 205 39 ]
 	
 	doodad wall_sign_generic<"Mathew's Emporium">: [ 197 173 111 ]	
 	doodad wall_sign_generic<"John & Mary's">: [ 97 173 111 ]	
