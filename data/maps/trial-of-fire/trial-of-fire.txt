@@ -182,15 +182,20 @@ map trial_of_fire:
 	has_dynamic_overview_map: true
 	max_players: 5
 	max_minions: 1
-
-	default_tile: lava_b
+	
+	default_tile: lava_b	
 	default_fishing_loot_table: fish_realm_of_fire
 	view_attenuation: 0
 	view_attenuation_bias: 0
 	view_hidden_visibility: 35			
 	
-	#seed: 39447432
 	seed: 39447431
+	
+	default_exit_portal: $map_portal
+	{
+		map: thalvaron
+		spawn: thalvaron_trial_of_fire_return_spawn
+	}	
 	
 	survival_script: $survival_script
 	{
