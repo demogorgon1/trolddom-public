@@ -95,6 +95,7 @@ zone .tyrons_land: { string: "Tyron's Land" }
 zone .tyrons_rock: { string: "Tyron's Rock" }
 zone .cape_valor: { string: "Cape Valor" }
 zone .brior_hills: { string: "Brior Hills" }
+zone .catacombs: { string: "Royal Catacombs" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -240,6 +241,7 @@ map_entity_spawn thalvaron_captain_jerrington_quest_item: { entity thalvaron_cap
 map_entity_spawn thalvaron_ranger_roel_1_quest_item: { entity thalvaron_ranger_roel_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_ranger_roel: { entity thalvaron_ranger_roel: { init_state: default } }
 map_entity_spawn thalvaron_junior: { entity thalvaron_junior: { init_state: default } }
+map_entity_spawn thalvaron_father_tobias_door: { entity thalvaron_father_tobias_door: { init_state: default } }
 
 # N
 map_entity_spawn thalvaron_ranger_fremalt: { entity thalvaron_ranger_fremalt: { init_state: default } }
@@ -603,6 +605,14 @@ map_palette .stuff:
 	entity_spawn thalvaron_junior: [ 94 128 61 ]
 	entity_spawn thalvaron_north_deer_24: [ 39 147 49 ]
 	entity_spawn thalvaron_north_bear_24: [ 139 147 111 ]
+	entity_spawn thalvaron_father_tobias_door: [ 20 148 172 ]
+	entity_spawn thalvaron_catacombs_skeleton: [ 120 148 48 ]
+	entity_spawn thalvaron_catacombs_boss_1: [ 220 148 100 ]
+	entity_spawn thalvaron_catacombs_boss_2: [ 220 148 200 ]
+	entity_spawn thalvaron_catacombs_boss_3: [ 220 248 100 ]
+	entity_spawn thalvaron_catacombs_boss_4: [ 120 148 100 ]
+	entity_spawn thalvaron_catacombs_boss_5: [ 120 148 200 ]
+	entity_spawn thalvaron_catacombs_boss_6: [ 120 248 100 ]
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				
@@ -975,6 +985,7 @@ map_palette .zones:
 	zone .tyrons_rock: [ 24 173 24 ]
 	zone .cape_valor: [ 225 26 90 ]
 	zone .brior_hills: [ 71 160 88 ]
+	zone .catacombs: [ 225 52 26 ]
 }
 
 map_palette .sub_zones:

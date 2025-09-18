@@ -1289,3 +1289,134 @@ map_entity_spawn thalvaron_goblin_tunneler:
 
 	entity thalvaron_goblin_boss: !NPC { _string: "Lobnorg" _sprite: goblin_boss _sprite_dead: goblin_boss_dead _abilities: [ { id: npc_whirlwind } { id: npc_attack } ] }
 }
+
+##########################################################################################
+# Catacombs
+
+map_entity_spawn thalvaron_catacombs_skeleton: { entity thalvaron_catacombs_skeleton: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_catacombs_boss_1: { 	entity thalvaron_catacombs_boss_1: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_catacombs_boss_2: { 	entity thalvaron_catacombs_boss_2: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_catacombs_boss_3: { 	entity thalvaron_catacombs_boss_3: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_catacombs_boss_4: { 	entity thalvaron_catacombs_boss_4: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_catacombs_boss_5: { 	entity thalvaron_catacombs_boss_5: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_catacombs_boss_6: { 	entity thalvaron_catacombs_boss_6: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+
+# Entrance skeletons 
+{
+	${
+		_level: 23
+		_faction: monsters
+		_creature_type: undead
+		_weapon_damage: 0.7
+		_resource_health: 1.1
+		_default_behavior_state: .passive
+		_loot_table: default_skeleton
+	}
+
+	entity thalvaron_catacombs_skeleton: !NPC 
+	{ 
+		_string: "Risen Skeleton" _sprite: skeleton_7 _sprite_dead: skeleton_7_dead 
+		_abilities: 
+		[ 
+			{ 
+				id: npc_attack
+			} 
+		] 
+	}
+}
+
+# Named skeletons
+{
+	${
+		_level: 23
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .passive
+		_aggro_range_bias: -2
+	}
+
+	!define local CATACOMBS_BOSS_LOOT_TABLE
+	{
+		slots:
+		[	
+			{ 
+				possibility: { loot_group: @_loot_group requirement self<must_have_active_quest>: { id: .father_tobias_2 } } 
+			}
+
+			!WORLD_DROPS {}	
+		]	
+	}		
+
+	entity thalvaron_catacombs_boss_1: !NPC 
+	{ 
+		_string: "Lady Brior" _sprite: skeleton_9 _sprite_dead: skeleton_9_dead _loot_table: $loot_table !CATACOMBS_BOSS_LOOT_TABLE { _loot_group: .father_tobias_quest_item_2_a }
+		_weapon_damage: 0.9
+		_resource_health: 1.2
+		_abilities: 
+		[ 
+			{ id: npc_curse } 
+			{ id: npc_attack } 
+		] 		
+	}
+	
+	entity thalvaron_catacombs_boss_2: !NPC 
+	{ 
+		_string: "Lord Erston" _sprite: skeleton_5 _sprite_dead: skeleton_5_dead _loot_table: $loot_table !CATACOMBS_BOSS_LOOT_TABLE { _loot_group: .father_tobias_quest_item_2_b }
+		_weapon_damage: 1.2
+		_resource_health: 1.4
+		_abilities: 
+		[ 
+			{ id: npc_mortal_strike_non_instant } 
+			{ id: npc_attack } 
+		] 		
+	}
+
+	entity thalvaron_catacombs_boss_3: !NPC 
+	{ 
+		_string: "Count Ukos" _sprite: skeleton_caster_3 _sprite_dead: skeleton_caster_3_dead _loot_table: $loot_table !CATACOMBS_BOSS_LOOT_TABLE { _loot_group: .father_tobias_quest_item_2_c }
+		_weapon_damage: 0.9
+		_resource_health: 1.2
+		_abilities: 
+		[ 
+			{ id: npc_chain_lightning } 
+			{ id: npc_attack } 
+		] 		
+	}
+
+	entity thalvaron_catacombs_boss_4: !NPC 
+	{ 
+		_string: "Prince Gerth" _sprite: skeleton_10 _sprite_dead: skeleton_10_dead _loot_table: $loot_table !CATACOMBS_BOSS_LOOT_TABLE { _loot_group: .father_tobias_quest_item_2_d }
+		_weapon_damage: 1.1
+		_resource_health: 1.1
+		_abilities: 
+		[ 
+			{ id: npc_froststrike } 
+			{ id: npc_attack } 
+		] 		
+	}
+
+	entity thalvaron_catacombs_boss_5: !NPC 
+	{ 
+		_string: "Commander Banntor" _sprite: skeleton_boss_1 _sprite_dead: skeleton_boss_1_dead _loot_table: $loot_table !CATACOMBS_BOSS_LOOT_TABLE { _loot_group: .father_tobias_quest_item_2_e }
+		_weapon_damage: 1
+		_resource_health: 1.6
+		_abilities: 
+		[ 
+			{ id: npc_rend } 
+			{ id: npc_attack } 
+		] 		
+	}
+
+	entity thalvaron_catacombs_boss_6: !NPC 
+	{ 
+		_string: "Miss Turhast" _sprite: skeleton_8 _sprite_dead: skeleton_8_dead _loot_table: $loot_table !CATACOMBS_BOSS_LOOT_TABLE { _loot_group: .father_tobias_quest_item_2_f }
+		_weapon_damage: 0.8
+		_resource_health: 1.1
+		_abilities: 
+		[ 
+			{ id: npc_frostbolt } 
+			{ id: npc_attack } 
+		] 		
+	}
+	
+}

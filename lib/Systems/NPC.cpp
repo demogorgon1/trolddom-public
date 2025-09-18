@@ -342,9 +342,18 @@ namespace tpublic::Systems
 								int32_t aggroRange = 0;
 
 								if (blind)
+								{
 									aggroRange = 1;
+								}
 								else
+								{
 									aggroRange = GetManifest()->m_npcMetrics.GetAggroRangeForLevelDifference((int32_t)combat->m_level, (int32_t)targetCombatPublic->m_level);
+
+									aggroRange += npc->m_aggroRangeBias;
+
+									if(aggroRange < 1)
+										aggroRange = 1;
+								}
 
 								if (targetCombatPublic->m_stealthLevel > 0)
 								{

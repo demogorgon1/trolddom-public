@@ -32,6 +32,7 @@ namespace tpublic::ObjectiveTypes
 
 		std::vector<uint32_t>	m_entityIds;
 		uint32_t				m_count = 1;
+		bool					m_boolean = false;
 	};
 
 }

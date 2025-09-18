@@ -896,6 +896,10 @@ sprites:
 	sprite man_77: { dead: man_77_dead }
 	sprite man_78: { dead: man_78_dead }
 	sprite fire_elemental_5: { dead: fire_elemental_5_dead }
+	sprite skeleton_7: { dead: skeleton_7_dead }
+	sprite skeleton_8: { dead: skeleton_8_dead }
+	sprite skeleton_9: { dead: skeleton_9_dead }
+	sprite skeleton_10: { dead: skeleton_10_dead }
 		
 	cursor: { position: [ 0 784 ] }
 	sprite goblin_6_dead: { }	
@@ -903,6 +907,10 @@ sprites:
 	sprite man_77_dead: { }	 
 	sprite man_78_dead: { }	
 	sprite fire_elemental_5_dead: { }	
+	sprite skeleton_7_dead: { }	
+	sprite skeleton_8_dead: { }	
+	sprite skeleton_9_dead: { }	
+	sprite skeleton_10_dead: { }	
 }
 
 sprites:
@@ -1096,6 +1104,8 @@ sprites:
 	sprite ashveil: { }
 	sprite cindralite_vein: { }
 	sprite hole: { }
+	sprite door_closed_3: { }
+	sprite door_open_3: { }
 
 	cursor: { position: [ 0 112 ] }
 	sprite fire_0: { }
