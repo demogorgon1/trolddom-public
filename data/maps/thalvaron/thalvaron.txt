@@ -96,6 +96,21 @@ zone .tyrons_rock: { string: "Tyron's Rock" }
 zone .cape_valor: { string: "Cape Valor" }
 zone .brior_hills: { string: "Brior Hills" }
 zone .catacombs: { string: "Royal Catacombs" }
+zone .southern_tirnwood: { string: "Southern Tirnwood" }
+zone .zilkore: { string: "Zilkore" }
+zone .northern_thalyssian_wilds: { string: "Northern Thalyssian Wilds" }
+zone .emerald_strand: { string: "Emerald Strand" }
+zone .thalyssian_wilds: { string: "Thalyssian Wilds" }
+zone .the_devouring_shroud: { string: "The Devouring Shroud" }
+zone .thalyssian_highlands: { string: "Thalyssian Highlands" }
+zone .southern_thalyssian_wilds: { string: "Southern Thalyssian Wilds" }
+zone .new_thalyssar: { string: "New Thalyssar" }
+zone .veylans_crossing: { string: "Veylan's Crossing" }
+zone .the_verdant_mire: { string: "The Verdant Mire" }
+zone .xandralis_mountains: { string: "Xandralis Mountains" }
+zone .the_desolate_lowlands: { string: "The Desolate Lowlands" }
+zone .urthon: { string: "Urthon" }
+zone .faerandor_pass: { string: "Faerandor Pass" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -932,6 +947,12 @@ map_palette .levels:
 	level<22>: [ 0 107 255 ]
 	level<23>: [ 115 86 122 ]
 	level<24>: [ 248 185 5 ]
+	level<25>: [ 9 58 147 ]
+	level<26>: [ 102 9 147 ]
+	level<27>: [ 222 61 92 ]
+	level<28>: [ 61 181 222 ]
+	level<29>: [ 230 163 240 ]
+	level<30>: [ 240 232 163 ]
 }
 
 map_palette .zones:
@@ -989,7 +1010,22 @@ map_palette .zones:
 	zone .tyrons_rock: [ 24 173 24 ]
 	zone .cape_valor: [ 225 26 90 ]
 	zone .brior_hills: [ 71 160 88 ]
-	zone .catacombs: [ 225 52 26 ]
+	zone .catacombs: [ 225 52 26 ]	
+	zone .southern_tirnwood: [ 228 34 115 ] 
+	zone .zilkore: [ 147 34 228 ]
+	zone .northern_thalyssian_wilds: [ 222 228 34 ]
+	zone .emerald_strand: [ 94 138 156 ]
+	zone .thalyssian_wilds: [ 103 211 14 ]
+	zone .the_devouring_shroud: [ 39 14 211 ]
+	zone .thalyssian_highlands: [ 139 94 222 ]
+	zone .southern_thalyssian_wilds: [ 49 105 241 ]
+	zone .new_thalyssar: [ 160 210 200 ]
+	zone .veylans_crossing: [ 210 160 168 ]
+	zone .the_verdant_mire: [ 222 94 177 ]
+	zone .xandralis_mountains: [ 241 49 61 ]
+	zone .the_desolate_lowlands: [ 49 241 173 ]
+	zone .urthon: [ 250 172 49 ]	
+	zone .faerandor_pass: [ 191 138 248 ]
 }
 
 map_palette .sub_zones:
