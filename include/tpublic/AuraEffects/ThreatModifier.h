@@ -82,7 +82,7 @@ namespace tpublic
 				int32_t						aThreat,
 				uint32_t					aAbilityId) const override
 			{
-				if (!m_applyToAbilityIds.empty() && Helpers::FindItem(m_applyToAbilityIds, aAbilityId) == -1)
+				if (!m_applyToAbilityIds.empty() && Helpers::FindItem(m_applyToAbilityIds, aAbilityId) == SIZE_MAX)
 					return aThreat;
 
 				int32_t threat = (int32_t)((float)aThreat * m_multiplier);
