@@ -1,5 +1,7 @@
 #pragma once
 
+#include "ItemType.h"
+
 namespace tpublic
 {
 
@@ -38,37 +40,38 @@ namespace tpublic
 
 		struct Info
 		{
-			const char* m_name;
-			const char* m_tag;
-			const char* m_displayName;
-			bool		m_alternative;
+			const char*					m_name;
+			const char*					m_tag;
+			const char*					m_displayName;
+			bool						m_alternative;
+			std::vector<ItemType::Id>	m_itemTypes;
 		};
 
 		// IMPORTANT: Must match Id enum
-		static constexpr const Info INFO[] =
+		static const Info INFO[] =
 		{
-			{ NULL, NULL, NULL, false },
+			{ NULL, NULL, NULL, false, {} },
 
-			{ "main_hand",	NULL,			"Main-Hand",	false },
-			{ "off_hand",	NULL,			"Off-Hand",		false },
-			{ "ranged",		NULL,			"Ranged",		false },
-			{ "head",		"head",			"Head",			false },
-			{ "chest",		"chest",		"Chest",		false },
-			{ "legs",		"legs",			"Legs",			false },
-			{ "feet",		"feet",			"Feet",			false },
-			{ "shoulders",	"shoulders",	"Shoulders",	false },
-			{ "wrists",		"wrists",		"Wrists",		false },
-			{ "waist",		"waist",		"Waist",		false },
-			{ "hands",		"hands",		"Hands",		false },
-			{ "back",		"back",			"Back",			false },
-			{ "neck",		"neck",			"Neck",			false },
-			{ "finger_1",	"finger",		"Finger",		false },
-			{ "finger_2",	"finger",		"Finger",		true },
-			{ "bag_1",		"bag",			"Bag",			false },
-			{ "bag_2",		"bag",			"Bag",			true },
-			{ "bag_3",		"bag",			"Bag",			true },
-			{ "trinket_1",	"trinket",		"Trinket",		false },
-			{ "trinket_2",	"trinket",		"Trinket",		true },
+			{ "main_hand",	NULL,			"Main-Hand",	false,	{} },
+			{ "off_hand",	NULL,			"Off-Hand",		false,	{} },
+			{ "ranged",		NULL,			"Ranged",		false,	{} },
+			{ "head",		"head",			"Head",			false,	{ ItemType::ID_ARMOR_CLOTH, ItemType::ID_ARMOR_MAIL, ItemType::ID_ARMOR_PLATE } },
+			{ "chest",		"chest",		"Chest",		false,	{ ItemType::ID_ARMOR_CLOTH, ItemType::ID_ARMOR_MAIL, ItemType::ID_ARMOR_PLATE } },
+			{ "legs",		"legs",			"Legs",			false,	{ ItemType::ID_ARMOR_CLOTH, ItemType::ID_ARMOR_MAIL, ItemType::ID_ARMOR_PLATE } },
+			{ "feet",		"feet",			"Feet",			false,	{ ItemType::ID_ARMOR_CLOTH, ItemType::ID_ARMOR_MAIL, ItemType::ID_ARMOR_PLATE } },
+			{ "shoulders",	"shoulders",	"Shoulders",	false,	{ ItemType::ID_ARMOR_CLOTH, ItemType::ID_ARMOR_MAIL, ItemType::ID_ARMOR_PLATE } },
+			{ "wrists",		"wrists",		"Wrists",		false,	{ ItemType::ID_ARMOR_CLOTH, ItemType::ID_ARMOR_MAIL, ItemType::ID_ARMOR_PLATE } },
+			{ "waist",		"waist",		"Waist",		false,	{ ItemType::ID_ARMOR_CLOTH, ItemType::ID_ARMOR_MAIL, ItemType::ID_ARMOR_PLATE } },
+			{ "hands",		"hands",		"Hands",		false,	{ ItemType::ID_ARMOR_CLOTH, ItemType::ID_ARMOR_MAIL, ItemType::ID_ARMOR_PLATE } },
+			{ "back",		"back",			"Back",			false,	{ ItemType::ID_ARMOR_CLOTH } },
+			{ "neck",		"neck",			"Neck",			false,	{} },
+			{ "finger_1",	"finger",		"Finger",		false,	{} },
+			{ "finger_2",	"finger",		"Finger",		true,	{} },
+			{ "bag_1",		"bag",			"Bag",			false,	{} },
+			{ "bag_2",		"bag",			"Bag",			true,	{} },
+			{ "bag_3",		"bag",			"Bag",			true,	{} },
+			{ "trinket_1",	"trinket",		"Trinket",		false,	{} },
+			{ "trinket_2",	"trinket",		"Trinket",		true,	{} },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

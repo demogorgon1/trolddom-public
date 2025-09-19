@@ -2,6 +2,17 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.4.1"
+
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Fixed bug where some quest rewards lacked item type." }
+		{ text: "Fixed bug where some doors wouldn't open the first time." }
+	] 
+	
+	#######################################################################################
 	heading: "v0.4.0"
 
 	text: "New content:"

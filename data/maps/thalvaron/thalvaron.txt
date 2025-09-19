@@ -188,7 +188,7 @@ map_entity_spawn thalvaron_thora: { entity thalvaron_thora: { init_state: defaul
 map_entity_spawn thalvaron_tyler: { entity thalvaron_tyler: { init_state: default } }
 map_entity_spawn thalvaron_thora_2_return_portal: { entity thalvaron_thora_2_return_portal: { init_state: default } }
 map_entity_spawn thalvaron_wizard: { entity thalvaron_wizard: { init_state: default } }
-map_entity_spawn thalvaron_wizard_door: { entity thalvaron_wizard_door: { init_state: default } }
+map_entity_spawn thalvaron_wizard_door: { entity thalvaron_wizard_door: { init_state: default } spawn_timer: { despawn_required: true } }
 map_entity_spawn thalvaron_royal_chef: { entity thalvaron_royal_chef: { init_state: default } }
 map_entity_spawn thalvaron_royal_chef_assistant: { entity thalvaron_royal_chef_assistant: { init_state: default } }
 map_entity_spawn thalvaron_clara_hawthorne: { entity thalvaron_clara_hawthorne: { init_state: default } }
@@ -241,7 +241,7 @@ map_entity_spawn thalvaron_captain_jerrington_quest_item: { entity thalvaron_cap
 map_entity_spawn thalvaron_ranger_roel_1_quest_item: { entity thalvaron_ranger_roel_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_ranger_roel: { entity thalvaron_ranger_roel: { init_state: default } }
 map_entity_spawn thalvaron_junior: { entity thalvaron_junior: { init_state: default } }
-map_entity_spawn thalvaron_father_tobias_door: { entity thalvaron_father_tobias_door: { init_state: default } }
+map_entity_spawn thalvaron_father_tobias_door: { entity thalvaron_father_tobias_door: { init_state: default } spawn_timer: { despawn_required: true } }
 map_entity_spawn thalvaron_briana_roft_1_quest_item: { entity thalvaron_briana_roft_1_quest_item: { init_state: default } }
 map_entity_spawn thalvaron_briana_roft: { entity thalvaron_briana_roft: { init_state: default } }
 

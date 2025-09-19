@@ -49,8 +49,8 @@ objective .tyron_1:
 
 {
 	${ _level: 24 }
-	item .tyron_1_a: !QUEST_REWARD_HEAD{ _string: "Heirloom Helmet" _icon: icon_helmet_5 _constitution: 2 _strength: 3 _dexterity: 1 _item_type: armor_mail }
-	item .tyron_1_b: !QUEST_REWARD_BACK{ _string: "Woodman's Cloak" _icon: icon_cloth_shirt_4 _wisdom: 3 _constitution: 2 _spirit: 1 _item_type: armor_cloth }
+	item .tyron_1_a: !QUEST_REWARD_HEAD{ _string: "Heirloom Helmet" _icon: icon_helmet_5 _constitution: 2 _strength: 3 _dexterity: 1 _type: armor_mail }
+	item .tyron_1_b: !QUEST_REWARD_BACK{ _string: "Woodman's Cloak" _icon: icon_cloth_shirt_4 _wisdom: 3 _constitution: 2 _spirit: 1 _type: armor_cloth }
 }
 
 quest .tyron_1:

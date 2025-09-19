@@ -103,7 +103,7 @@ objective .halfeye_lanior_2:
 	${ _level: 20 rarity: rare }
 	item .halfeye_lanior_2_a: !QUEST_REWARD_NECK{ _string: "Chain of Dark Energy" _icon: icon_necklace_1 _constitution: 1 _wisdom: 1 _spell_damage: 2 }
 	item .halfeye_lanior_2_b: !QUEST_REWARD_FEET{ _string: "Boots of the Shield Guard" _icon: icon_shoe_1 _constitution: 2 _block_value: 3 _dexterity: 1 _type: armor_plate }
-	item .halfeye_lanior_2_c: !QUEST_REWARD_WAIST{ _string: "Waistwrap of Healing" _icon: icon_belt_1 _wisdom: 1 _healing: 3 }
+	item .halfeye_lanior_2_c: !QUEST_REWARD_WAIST{ _string: "Waistwrap of Healing" _icon: icon_belt_1 _wisdom: 1 _healing: 3 _type: armor_cloth }
 }
 
 quest .halfeye_lanior_2:

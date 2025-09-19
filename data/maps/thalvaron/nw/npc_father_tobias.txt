@@ -78,6 +78,10 @@ entity thalvaron_father_tobias_door:
 				{ states: [ dead ] frames: [ door_open_3 ] z_offset: -3 }
 			]		
 		}		
+		hover_text<static>:
+		{
+			string: "Requires Key to the Catacombs."
+		}		
 	}
 }
 

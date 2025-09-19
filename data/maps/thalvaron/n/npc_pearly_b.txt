@@ -110,7 +110,7 @@ objective .pearly_b_1:
 	${ _level: 17 }
 	item .pearly_b_1_a: !QUEST_REWARD_CHEST{ _string: "Warrior Chestplate" _icon: icon_plate_chest_1 _strength: 1 _dexterity: 2 _constitution: 1 _type: armor_plate }
 	item .pearly_b_1_b: !QUEST_REWARD_1H_MACE{ _string: "Wise Man's Bludgeon" _icon: icon_mace_3 _wisdom: 1 _constitution: 1 _healing: 2 _weapon_cooldown: 22 }
-	item .pearly_b_1_c: !QUEST_REWARD_LEGS{ _string: "Hermit's Wooly Pants" _icon: icon_mail_pants_2 _wisdom: 2 _constitution: 1 }
+	item .pearly_b_1_c: !QUEST_REWARD_LEGS{ _string: "Hermit's Wooly Pants" _icon: icon_mail_pants_2 _wisdom: 2 _constitution: 1 _type: armor_cloth }
 }
 
 quest .pearly_b_1:

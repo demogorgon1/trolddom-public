@@ -293,6 +293,16 @@ namespace tpublic
 					else
 						m_itemType = ItemType::ID_MISCELLANEOUS;
 				}
+
+				for(uint32_t equipmentSlot : m_equipmentSlots)
+				{
+					const EquipmentSlot::Info* equipmentSlotInfo = EquipmentSlot::GetInfo((EquipmentSlot::Id)equipmentSlot);
+					if(equipmentSlotInfo->m_itemTypes.size() > 0)
+					{
+						bool validItemType = Helpers::FindItem(equipmentSlotInfo->m_itemTypes, m_itemType) != SIZE_MAX;
+						TP_VERIFY(validItemType, aSource->m_debugInfo, "'%s' does not have a valid item type.", aSource->m_name.c_str());
+					}
+				}
 			}
 
 			void

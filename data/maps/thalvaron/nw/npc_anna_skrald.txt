@@ -50,8 +50,8 @@ objective .anna_skrald_1:
 
 {
 	${ _level: 22 }
-	item .anna_skrald_1_a: !QUEST_REWARD_WAIST{ _string: "Smuggler's Belt" _icon: icon_cloth_belt_1 _wisdom: 3 _constitution: 2 _item_type: armor_cloth }
-	item .anna_skrald_1_b: !QUEST_REWARD_WRISTS{ _string: "Brawler's Wristguard" _icon: icon_bracers_5 _strength: 2 _constitution: 1 _item_type: armor_plate }
+	item .anna_skrald_1_a: !QUEST_REWARD_WAIST{ _string: "Smuggler's Belt" _icon: icon_cloth_belt_1 _wisdom: 3 _constitution: 2 _type: armor_cloth }
+	item .anna_skrald_1_b: !QUEST_REWARD_WRISTS{ _string: "Brawler's Wristguard" _icon: icon_bracers_5 _strength: 2 _constitution: 1 _type: armor_plate }
 }
 
 quest .anna_skrald_1:
