@@ -1,0 +1,30 @@
+dialogue_screen .old_man_james:
+{
+	text: 
+	[	
+		"South of here you'll find the great Thalyssian Wilds. Only seasoned adventurers should travel there.\n"
+		"\n"
+		"What I did to be stationed this far away from civilization? Let's just say I stepped on some important toes."
+	]		
+	
+	options:
+	[
+	]
+}
+
+entity thalvaron_old_man_james: !NPC
+{
+	_string: "Old Man James"
+	_sprite: man_83
+	_sprite_dead: man_83_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .old_man_james: { } }
+}
+
+############################################################
+# Quest 1
+

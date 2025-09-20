@@ -1,0 +1,28 @@
+dialogue_screen .brila_stargazer:
+{
+	text: 
+	[	
+		"What an elf is doing down here? I'm working for Mr. Riddle."
+	]		
+	
+	options:
+	[
+	]
+}
+
+entity thalvaron_brila_stargazer: !NPC
+{
+	_string: "Brila Stargazer"
+	_sprite: elf_17
+	_sprite_dead: elf_17_dead
+	_level: 30
+	_faction: children_of_the_moon		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .brila_stargazer: { } }
+}
+
+############################################################
+# Quest 1
+

@@ -1,0 +1,28 @@
+dialogue_screen .sheriff_nordberg:
+{
+	text: 
+	[	
+		"Welcome to New Thalyssar. Doesn't look like much yet, but hopeful people will come live here. It's pretty nice, if you ignore the bugs."
+	]		
+	
+	options:
+	[
+	]
+}
+
+entity thalvaron_sheriff_nordberg: !NPC
+{
+	_string: "Sheriff Nordberg"
+	_sprite: man_10
+	_sprite_dead: man_10_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .sheriff_nordberg: { } }
+}
+
+############################################################
+# Quest 1
+

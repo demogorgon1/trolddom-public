@@ -1,0 +1,28 @@
+dialogue_screen .egon_riddle:
+{
+	text: 
+	[	
+		"Impressed with my little slice of the world? You should be."
+	]		
+	
+	options:
+	[
+	]
+}
+
+entity thalvaron_egon_riddle: !NPC
+{
+	_string: "Egon Riddle"
+	_sprite: man_2
+	_sprite_dead: man_2_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .egon_riddle: { } }
+}
+
+############################################################
+# Quest 1
+

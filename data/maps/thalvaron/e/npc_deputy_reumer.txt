@@ -1,0 +1,28 @@
+dialogue_screen .deputy_reumer:
+{
+	text: 
+	[	
+		"Argh! The mosquitoes!"
+	]		
+	
+	options:
+	[
+	]
+}
+
+entity thalvaron_deputy_reumer: !NPC
+{
+	_string: "Deputy Reumer"
+	_sprite: man_13
+	_sprite_dead: man_13_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .deputy_reumer: { } }
+}
+
+############################################################
+# Quest 1
+

@@ -1,0 +1,28 @@
+dialogue_screen .faolan:
+{
+	text: 
+	[	
+		"Greetings."
+	]		
+	
+	options:
+	[
+	]
+}
+
+entity thalvaron_faolan: !NPC
+{
+	_string: "Faolan"
+	_sprite: woman_37
+	_sprite_dead: woman_37_dead
+	_level: 20
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .faolan: { } }
+}
+
+############################################################
+# Quest 1
+

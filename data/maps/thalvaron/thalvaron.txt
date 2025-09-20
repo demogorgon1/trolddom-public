@@ -105,12 +105,14 @@ zone .the_devouring_shroud: { string: "The Devouring Shroud" }
 zone .thalyssian_highlands: { string: "Thalyssian Highlands" }
 zone .southern_thalyssian_wilds: { string: "Southern Thalyssian Wilds" }
 zone .new_thalyssar: { string: "New Thalyssar" }
-zone .veylans_crossing: { string: "Veylan's Crossing" }
+zone .riddles_crossing: { string: "Riddle's Crossing" }
 zone .the_verdant_mire: { string: "The Verdant Mire" }
 zone .xandralis_mountains: { string: "Xandralis Mountains" }
 zone .the_desolate_lowlands: { string: "The Desolate Lowlands" }
 zone .urthon: { string: "Urthon" }
 zone .faerandor_pass: { string: "Faerandor Pass" }
+zone .forbidden_island: { string: "Forbidden Island" }
+zone .twin_temples: { string: "Twin Temples" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -410,6 +412,28 @@ map_entity_spawn thalvaron_brill_craigsworth_3_quest_item: { entity thalvaron_br
 map_entity_spawn thalvaron_green_statue: { entity thalvaron_green_statue: { init_state: default } }
 map_entity_spawn thalvaron_seren_virelith_4_quest_item: { entity thalvaron_seren_virelith_4_quest_item: { init_state: default } }
 map_entity_spawn thalvaron_ranger_virgil: { entity thalvaron_ranger_virgil: { init_state: default } }
+
+# E
+map_entity_spawn thalvaron_faolan: { entity thalvaron_faolan: { init_state: default } }
+map_entity_spawn thalvaron_farkas: { entity thalvaron_farkas: { init_state: default } }
+map_entity_spawn thalvaron_fenris: { entity thalvaron_fenris: { init_state: default } }
+map_entity_spawn thalvaron_freki: { entity thalvaron_freki: { init_state: default } }
+map_entity_spawn thalvaron_fridolf: { entity thalvaron_fridolf: { init_state: default } }
+map_entity_spawn thalvaron_friduwulf: { entity thalvaron_friduwulf: { init_state: default } }
+map_entity_spawn thalvaron_old_man_james: { entity thalvaron_old_man_james: { init_state: default } }
+map_entity_spawn thalvaron_frida: { entity thalvaron_frida: { init_state: default } }
+map_entity_spawn thalvaron_frolok: { entity thalvaron_frolok: { init_state: default } }
+map_entity_spawn thalvaron_rubert: { entity thalvaron_rubert: { init_state: default } }
+map_entity_spawn thalvaron_troels_ronson: { entity thalvaron_troels_ronson: { init_state: default } }
+map_entity_spawn thalvaron_egon_riddle: { entity thalvaron_egon_riddle: { init_state: default } }
+map_entity_spawn thalvaron_grim_ironspear: { entity thalvaron_grim_ironspear: { init_state: default } }
+map_entity_spawn thalvaron_brila_stargazer: { entity thalvaron_brila_stargazer: { init_state: default } }
+map_entity_spawn thalvaron_ranger_cromor: { entity thalvaron_ranger_cromor: { init_state: default } }
+map_entity_spawn thalvaron_sheriff_nordberg: { entity thalvaron_sheriff_nordberg: { init_state: default } }
+map_entity_spawn thalvaron_captain_blackstone: { entity thalvaron_captain_blackstone: { init_state: default } }
+map_entity_spawn thalvaron_trader_joseph: { entity thalvaron_trader_joseph: { init_state: default } }
+map_entity_spawn thalvaron_deputy_reumer: { entity thalvaron_deputy_reumer: { init_state: default } }
+map_entity_spawn thalvaron_flimlock: { entity thalvaron_flimlock: { init_state: default } }
 
 map_palette .stuff:
 {
@@ -927,6 +951,28 @@ map_palette .stuff:
 	entity_spawn thalvaron_se_poison_crab: [ 40 90 140 ]
 	entity_spawn thalvaron_seren_virelith_4_quest_item: [ 140 80 22 ]
 	entity_spawn thalvaron_ranger_virgil: [ 240 180 122 ]
+	
+	# E
+	entity_spawn thalvaron_faolan: [ 201 209 182 ]
+	entity_spawn thalvaron_farkas: [ 201 209 82 ]
+	entity_spawn thalvaron_fenris: [ 201 9 182 ]
+	entity_spawn thalvaron_freki: [ 1 209 182 ]
+	entity_spawn thalvaron_fridolf: [ 101 209 182 ]
+	entity_spawn thalvaron_friduwulf: [ 201 109 182 ]
+	entity_spawn thalvaron_old_man_james: [ 148 74 102 ]
+	entity_spawn thalvaron_frida: [ 30 141 96 ]
+	entity_spawn thalvaron_frolok: [ 130 41 196 ]
+	entity_spawn thalvaron_rubert: [ 230 41 196 ]
+	entity_spawn thalvaron_troels_ronson: [ 119 29 114 ]
+	entity_spawn thalvaron_egon_riddle: [ 201 49 119 ]
+	entity_spawn thalvaron_grim_ironspear: [ 104 13 158 ]
+	entity_spawn thalvaron_brila_stargazer: [ 184 82 119 ]
+	entity_spawn thalvaron_ranger_cromor: [ 239 129 22 ]
+	entity_spawn thalvaron_sheriff_nordberg: [ 39 71 108 ]
+	entity_spawn thalvaron_captain_blackstone: [ 131 104 80 ]
+	entity_spawn thalvaron_trader_joseph: [ 231 100 105 ]
+	entity_spawn thalvaron_deputy_reumer: [ 18 238 92 ]
+	entity_spawn thalvaron_flimlock: [ 230 210 201 ] 
 }
 
 map_palette .levels:
@@ -1020,12 +1066,14 @@ map_palette .zones:
 	zone .thalyssian_highlands: [ 139 94 222 ]
 	zone .southern_thalyssian_wilds: [ 49 105 241 ]
 	zone .new_thalyssar: [ 160 210 200 ]
-	zone .veylans_crossing: [ 210 160 168 ]
+	zone .riddles_crossing: [ 210 160 168 ]
 	zone .the_verdant_mire: [ 222 94 177 ]
 	zone .xandralis_mountains: [ 241 49 61 ]
 	zone .the_desolate_lowlands: [ 49 241 173 ]
 	zone .urthon: [ 250 172 49 ]	
 	zone .faerandor_pass: [ 191 138 248 ]
+	zone .forbidden_island: [ 34 228 184 ]
+	zone .twin_temples: [ 211 14 103 ]
 }
 
 map_palette .sub_zones:
@@ -1122,6 +1170,7 @@ map_palette .doodads:
 	doodad bones: [ 130 105 39 ]
 	doodad sarcophagus_open: [ 30 105 239 ]
 	doodad sarcophagus_closed: [ 30 205 39 ]
+	doodad jungle_plant: [ 49 205 50 ]
 	
 	doodad wall_sign_generic<"Mathew's Emporium">: [ 197 173 111 ]	
 	doodad wall_sign_generic<"John & Mary's">: [ 97 173 111 ]	

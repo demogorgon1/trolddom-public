@@ -1,0 +1,36 @@
+npc_behavior_state .wandering_short:
+{
+	on_route<thalvaron_default_patrol>: thalvaron_default_patrol
+	behavior: wandering
+	max_range: 1
+}
+
+npc_behavior_state .passive:
+{
+	on_route<thalvaron_default_patrol>: thalvaron_default_patrol
+	behavior: do_nothing
+}
+
+##########################################################################################
+# North kobolds 
+
+#map_entity_spawn thalvaron_north_kobold: 
+#{ 
+#	entity thalvaron_north_kobold_a: { } 
+#	entity thalvaron_north_kobold_b: { } 	
+#	spawn_timer: !NPC_RESPAWN_NORMAL{} 
+#}
+#
+## Kobolds in the iceveil pass mine
+#{
+#	${
+#		_level: 12
+#		_faction: monsters
+#		_creature_type: humanoid
+#		_default_behavior_state: .wandering_short
+#		_loot_table: default_humanoid
+#	}
+#
+#	entity thalvaron_north_kobold_a: !NPC { _string: "Iceveil Kobold" _sprite: kobold_1 _sprite_dead: kobold_1_dead }
+#	entity thalvaron_north_kobold_b: !NPC { _string: "Iceveil Kobold" _sprite: kobold_2 _sprite_dead: kobold_2_dead }
+#}

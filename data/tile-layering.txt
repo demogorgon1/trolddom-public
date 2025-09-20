@@ -14,6 +14,7 @@ tile_layering:
 	sand
 	dirt
 	badlands_1
+	sand_2
 	badlands_2
 	grass_2
 	grass

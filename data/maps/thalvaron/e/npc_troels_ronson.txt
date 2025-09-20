@@ -1,0 +1,28 @@
+dialogue_screen .troels_ronson:
+{
+	text: 
+	[	
+		"I'm sick... The jungle has gotten into my bones..."
+	]		
+	
+	options:
+	[
+	]
+}
+
+entity thalvaron_troels_ronson: !NPC
+{
+	_string: "Troels Ronson"
+	_sprite: man_77_dead
+	_sprite_dead: man_77_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .troels_ronson: { } }
+}
+
+############################################################
+# Quest 1
+

@@ -1,0 +1,28 @@
+dialogue_screen .frolok:
+{
+	text: 
+	[	
+		"Beyond this wall lies the Devouring Shroud, the most dangerous and unexplored parts of this jungle. Go there at your own peril. It will eat you alive.\n"
+	]		
+	
+	options:
+	[
+	]
+}
+
+entity thalvaron_frolok: !NPC
+{
+	_string: "Frolok"
+	_sprite: man_84
+	_sprite_dead: man_84_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .frolok: { } }
+}
+
+############################################################
+# Quest 1
+

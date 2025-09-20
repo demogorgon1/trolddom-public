@@ -804,6 +804,18 @@ sprites:
 	sprite pine_forest_1_border_17: { }
 	sprite pine_forest_1_alt_1: { flags: [ tile_block_line_of_sight ] }
 	sprite pine_forest_1_alt_2: { flags: [ tile_block_line_of_sight ] }
+	
+	sprite wood_wall_4: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_4_entrance: { flags: [ tile_walkable tile_top ] }
+	sprite wood_wall_4_inside: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_4_start: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_4_end: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_4_window: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_4_window_inside: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_4_grass_1: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_4_grass_2: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_4_window_grass_1: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite wood_wall_4_window_grass_2: { flags: [ tile_block_line_of_sight tile_top ] }	
 
 	cursor: { position: [ 0 400 ] }
 
@@ -1293,5 +1305,30 @@ sprites:
 	sprite dark_rocky_dirt_alt_1: { flags: [ tile_walkable ] }
 	sprite dark_rocky_dirt_alt_2: { flags: [ tile_walkable ] }		
 
+	cursor: { position: [ 0 688 ] }
+
+	sprite sand_2: { flags: [ tile_walkable ] borders:
+		[ sand_2_border_1 sand_2_border_2 sand_2_border_3 sand_2_border_4 sand_2_border_5 sand_2_border_6 sand_2_border_7
+		  sand_2_border_8 sand_2_border_9 sand_2_border_10 sand_2_border_11 sand_2_border_12 sand_2_border_13 sand_2_border_14
+		  sand_2_border_15 sand_2_border_16 sand_2_border_17 ] alt_tiles: [ sand_2_alt_1 sand_2_alt_2 ] }		
+	sprite sand_2_border_1: { }
+	sprite sand_2_border_2: { }
+	sprite sand_2_border_3: { }
+	sprite sand_2_border_4: { }
+	sprite sand_2_border_5: { }
+	sprite sand_2_border_6: { }
+	sprite sand_2_border_7: { }
+	sprite sand_2_border_8: { }
+	sprite sand_2_border_9: { }
+	sprite sand_2_border_10: { }
+	sprite sand_2_border_11: { }
+	sprite sand_2_border_12: { }
+	sprite sand_2_border_13: { }
+	sprite sand_2_border_14: { }
+	sprite sand_2_border_15: { }
+	sprite sand_2_border_16: { }	
+	sprite sand_2_border_17: { }
+	sprite sand_2_alt_1: { flags: [ tile_walkable ] }
+	sprite sand_2_alt_2: { flags: [ tile_walkable ] }		
 	
 }

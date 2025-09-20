@@ -1,0 +1,28 @@
+dialogue_screen .farkas:
+{
+	text: 
+	[	
+		"Greetings."
+	]		
+	
+	options:
+	[
+	]
+}
+
+entity thalvaron_farkas: !NPC
+{
+	_string: "Farkas"
+	_sprite: man_79
+	_sprite_dead: man_79_dead
+	_level: 20
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .farkas: { } }
+}
+
+############################################################
+# Quest 1
+

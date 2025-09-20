@@ -141,14 +141,12 @@ quest thalvaron_ranger_roel_2:
 	completion:
 	[
 		"You coming all the way from Roel? Hmm. This doesn't bode well.\n"
-		"\n"
-		"Currently the water level of the river is high. You should come back later when it's possible to cross it."
 	]
 
 	reward_xp_multiplier: 0.5
 	reward_cash_multiplier: 0.5
 	quest_items: [ .ranger_roel_2_quest_item ]
-	level: 24
+	level: 25
 	prerequisites: [ .ranger_roel_3 ]
 }
 

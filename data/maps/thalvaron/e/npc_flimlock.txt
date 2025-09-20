@@ -1,0 +1,28 @@
+dialogue_screen .flimlock:
+{
+	text: 
+	[	
+		"Welcome to my swamp! I hope you'll enjoy your stay!"
+	]		
+	
+	options:
+	[
+	]
+}
+
+entity thalvaron_flimlock: !NPC
+{
+	_string: "Flimlock"
+	_sprite: man_35
+	_sprite_dead: man_35_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .flimlock: { } }
+}
+
+############################################################
+# Quest 1
+

@@ -1,0 +1,29 @@
+dialogue_screen .fenris:
+{
+	text: 
+	[	
+		"What brings you to our humble little village?"
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: thalvaron_ranger_virgil_1 }
+	]
+}
+
+entity thalvaron_fenris: !NPC
+{
+	_string: "Fenris"
+	_sprite: man_80
+	_sprite_dead: man_80_dead
+	_level: 20
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .fenris: { } }
+}
+
+############################################################
+# Quest 1
+

@@ -901,7 +901,13 @@ sprites:
 	sprite skeleton_9: { dead: skeleton_9_dead }
 	sprite skeleton_10: { dead: skeleton_10_dead }
 	sprite woman_36: { dead: woman_36_dead }
-		
+	sprite man_79: { dead: man_79_dead }
+	sprite man_80: { dead: man_80_dead }
+	sprite woman_37: { dead: woman_37_dead }
+	sprite man_81: { dead: man_81_dead }
+	sprite woman_38: { dead: woman_38_dead }
+	sprite man_82: { dead: man_82_dead }
+			
 	cursor: { position: [ 0 784 ] }
 	sprite goblin_6_dead: { }	
 	sprite crab_5_dead: { }	
@@ -913,6 +919,28 @@ sprites:
 	sprite skeleton_9_dead: { }	
 	sprite skeleton_10_dead: { }	
 	sprite woman_36_dead: { }	
+	sprite man_79_dead: { }	 
+	sprite man_80_dead: { }	
+	sprite woman_37_dead: { }	
+	sprite man_81_dead: { }	 
+	sprite woman_38_dead: { }	
+	sprite man_82_dead: { }	
+
+	cursor: { position: [ 0 800 ] }
+	sprite man_83: { dead: man_83_dead }
+	sprite woman_39: { dead: woman_39_dead }
+	sprite man_84: { dead: man_84_dead }
+	sprite man_85: { dead: man_85_dead }
+	sprite dwarf_21: { dead: dwarf_21_dead }
+	sprite elf_17: { dead: elf_17_dead }
+
+	cursor: { position: [ 0 816 ] }
+	sprite man_83_dead: { }	
+	sprite woman_39_dead: { }	
+	sprite man_84_dead: { }	
+	sprite man_85_dead: { }	
+	sprite dwarf_21_dead: { }	
+	sprite elf_17_dead: { }	
 }
 
 sprites:

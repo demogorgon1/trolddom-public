@@ -1,0 +1,30 @@
+dialogue_screen .ranger_cromor:
+{
+	text: 
+	[	
+		"State your business."
+	]		
+	
+	options:
+	[
+	]
+}
+
+entity thalvaron_ranger_cromor: !NPC
+{
+	_string: "Ranger Cromor"
+	_sprite: woman_6
+	_sprite_dead: woman_6_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .ranger_cromor: { } }
+	_route: thalvaron_default_patrol
+	_default_behavior_state: thalvaron_default_patrol_friendly
+}
+
+############################################################
+# Quest 1
+

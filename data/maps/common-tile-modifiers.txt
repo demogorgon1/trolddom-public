@@ -313,6 +313,48 @@ tile_modifier d_building_wall_broken:
 	probability: 30
 }
 
+tile_modifier wood_wall_4_grass:
+{
+	sprites: [ wood_wall_4_grass_1 wood_wall_4_grass_2 ]
+	
+	requirement<center_must_be>: [ wood_wall_4 ]
+	requirement<south_must_be>: [ dark_grass dark_grass_alt_1 dark_grass_alt_2 ]
+	
+	probability: 90
+}
+
+tile_modifier wood_wall_4_window_grass:
+{
+	sprites: [ wood_wall_4_window_grass_1 wood_wall_4_window_grass_2 ]
+	
+	requirement<center_must_be>: [ wood_wall_4_window ]
+	requirement<south_must_be>: [ dark_grass dark_grass_alt_1 dark_grass_alt_2 ]
+	
+	probability: 90
+}
+
+tile_modifier wood_wall_4_start:
+{
+	sprites: [ wood_wall_4_start ]
+	
+	requirement<center_must_be>: [ wood_wall_4 ]
+	requirement<west_must_not_be>: [ wood_wall_4 wood_wall_4_grass_1 wood_wall_4_grass_2 wood_wall_4_window wood_wall_4_window_grass_1 wood_wall_4_window_grass_2 pavement dungeon_floor wood_floor ]
+	
+	probability: 100
+	priority: true
+}
+
+tile_modifier wood_wall_4_end:
+{
+	sprites: [ wood_wall_4_end ]
+	
+	requirement<center_must_be>: [ wood_wall_4 ]
+	requirement<east_must_not_be>: [ wood_wall_4 wood_wall_4_grass_1 wood_wall_4_grass_2 wood_wall_4_window wood_wall_4_window_grass_1 wood_wall_4_window_grass_2 pavement dungeon_floor wood_floor ]
+	
+	probability: 100
+	priority: true
+}
+
 tile_modifier roof_nw: { sprites: [ roof_nw ] requirement<center_must_be>: [ roof ] requirement<north_must_not_be>: [ roof ] requirement<west_must_not_be>: [ roof ] probability: 100 priority: true }
 tile_modifier roof_ne: { sprites: [ roof_ne ] requirement<center_must_be>: [ roof ] requirement<north_must_not_be>: [ roof ] requirement<east_must_not_be>: [ roof ] probability: 100 priority: true }
 tile_modifier roof_sw: { sprites: [ roof_sw ] requirement<center_must_be>: [ roof ] requirement<south_must_not_be>: [ roof ] requirement<west_must_not_be>: [ roof ] probability: 100 priority: true }

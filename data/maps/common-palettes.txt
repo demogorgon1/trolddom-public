@@ -114,5 +114,11 @@
 	tile lava_b: [ 240 230 32 ]	
 	tile dark_rocky_dirt: [ 90 130 32 ]	
 	tile black_rocks_cave_entrance: [ 166 3 149 ]
+	tile sand_2: [ 240 242 59 ]
+	tile wood_wall_4: [ 114 26 210 ]
+	tile wood_wall_4_entrance: [ 150 45 0 ] 
+	tile wood_wall_4_inside: [ 110 16 129 ]
+	tile wood_wall_4_window: [ 222 164 125 ]
+	tile wood_wall_4_window_inside: [ 243 125 164 ]
 	
 }

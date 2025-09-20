@@ -1,0 +1,28 @@
+dialogue_screen .captain_blackstone:
+{
+	text: 
+	[	
+		"Wipe your feet first if you're planning on getting on my boat."
+	]		
+	
+	options:
+	[
+	]
+}
+
+entity thalvaron_captain_blackstone: !NPC
+{
+	_string: "Captain Blackstone"
+	_sprite: man_26
+	_sprite_dead: man_26_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .captain_blackstone: { } }
+}
+
+############################################################
+# Quest 1
+

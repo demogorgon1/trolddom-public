@@ -1,0 +1,28 @@
+dialogue_screen .friduwulf:
+{
+	text: 
+	[	
+		"Greetings."
+	]		
+	
+	options:
+	[
+	]
+}
+
+entity thalvaron_friduwulf: !NPC
+{
+	_string: "Friduwulf"
+	_sprite: man_82
+	_sprite_dead: man_82_dead
+	_level: 20
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .friduwulf: { } }
+}
+
+############################################################
+# Quest 1
+

@@ -1,0 +1,28 @@
+dialogue_screen .freki:
+{
+	text: 
+	[	
+		"Greetings."
+	]		
+	
+	options:
+	[
+	]
+}
+
+entity thalvaron_freki: !NPC
+{
+	_string: "Freki"
+	_sprite: woman_38
+	_sprite_dead: woman_38_dead
+	_level: 20
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .freki: { } }
+}
+
+############################################################
+# Quest 1
+

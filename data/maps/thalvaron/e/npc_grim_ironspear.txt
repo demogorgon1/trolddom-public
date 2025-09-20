@@ -1,0 +1,29 @@
+dialogue_screen .grim_ironspear:
+{
+	text: 
+	[	
+		"Get in! The water is amazing!"
+	]		
+	
+	options:
+	[
+	]
+}
+
+entity thalvaron_grim_ironspear: !NPC
+{
+	_string: "Grim Ironspear"
+	_guild_name: "Right Hand of Egon Riddle"
+	_sprite: dwarf_21
+	_sprite_dead: dwarf_21_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .grim_ironspear: { } }
+}
+
+############################################################
+# Quest 1
+

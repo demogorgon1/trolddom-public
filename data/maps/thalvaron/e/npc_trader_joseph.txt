@@ -1,0 +1,30 @@
+dialogue_screen .trader_joseph:
+{
+	text: 
+	[	
+		"What can I do for you?"
+	]		
+	
+	options:
+	[
+		{ text: "Let me browse your goods." goto: $dialogue_screen !TRADE_SUPPLIES{} }
+	]
+}
+
+entity thalvaron_trader_joseph: !NPC
+{
+	_string: "Trader Joseph"
+	_guild_name: "Local Entrepreneur"
+	_sprite: man_5
+	_sprite_dead: man_5_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .trader_joseph: { } }
+}
+
+############################################################
+# Quest 1
+

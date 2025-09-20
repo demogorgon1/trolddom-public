@@ -1,0 +1,28 @@
+dialogue_screen .frida:
+{
+	text: 
+	[	
+		"Greetings."
+	]		
+	
+	options:
+	[
+	]
+}
+
+entity thalvaron_frida: !NPC
+{
+	_string: "Frida"
+	_sprite: woman_39
+	_sprite_dead: woman_39_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .frida: { } }
+}
+
+############################################################
+# Quest 1
+

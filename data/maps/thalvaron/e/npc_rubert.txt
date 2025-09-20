@@ -1,0 +1,28 @@
+dialogue_screen .rubert:
+{
+	text: 
+	[	
+		"Get in! The water is amazing!"
+	]		
+	
+	options:
+	[
+	]
+}
+
+entity thalvaron_rubert: !NPC
+{
+	_string: "Rubert"
+	_sprite: man_85
+	_sprite_dead: man_85_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .rubert: { } }
+}
+
+############################################################
+# Quest 1
+
