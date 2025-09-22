@@ -5,10 +5,13 @@
 #include <tpublic/Components/CombatPublic.h>
 #include <tpublic/Components/PlayerPrivate.h>
 
+#include <tpublic/Data/AbilityModifier.h>
+
 #include <tpublic/DirectEffects/Damage.h>
 
 #include <tpublic/EntityInstance.h>
 #include <tpublic/Helpers.h>
+#include <tpublic/Manifest.h>
 #include <tpublic/IEventQueue.h>
 #include <tpublic/IResourceChangeQueue.h>
 

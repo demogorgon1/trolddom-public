@@ -22,7 +22,7 @@
 #include "UniformDistribution.h"
 #include "UTF8.h"
 #include "Vec2.h"
-
+#include "WordList.h"
 
 namespace tpublic
 {

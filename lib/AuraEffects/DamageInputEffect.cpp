@@ -7,6 +7,7 @@
 #include <tpublic/Components/Position.h>
 
 #include <tpublic/EntityInstance.h>
+#include <tpublic/Helpers.h>
 #include <tpublic/IResourceChangeQueue.h>
 #include <tpublic/IWorldView.h>
 

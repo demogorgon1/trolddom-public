@@ -2,7 +2,10 @@
 
 #include <tpublic/Components/Auras.h>
 
+#include <tpublic/Data/Aura.h>
+
 #include <tpublic/Helpers.h>
+#include <tpublic/Manifest.h>
 
 namespace tpublic::Components
 {

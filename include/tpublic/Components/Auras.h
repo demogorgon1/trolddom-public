@@ -1,10 +1,7 @@
 #pragma once
 
-#include "../Data/Aura.h"
-
 #include "../AuraEffectBase.h"
 #include "../ComponentBase.h"
-#include "../Manifest.h"
 #include "../MoveSpeed.h"
 
 namespace tpublic

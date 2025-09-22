@@ -3,6 +3,7 @@
 #include "IReader.h"
 #include "IWriter.h"
 #include "SourceNode.h"
+#include "UniformDistribution.h"
 
 namespace tpublic
 {

@@ -6,6 +6,7 @@
 
 #include <tpublic/EntityInstance.h>
 #include <tpublic/Helpers.h>
+#include <tpublic/Manifest.h>
 
 namespace tpublic
 {

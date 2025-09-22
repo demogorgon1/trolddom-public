@@ -2,6 +2,7 @@
 
 #include "../Component.h"
 #include "../ComponentBase.h"
+#include "../Image.h"
 
 namespace tpublic
 {

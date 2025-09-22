@@ -1,5 +1,6 @@
 #include "../Pcheader.h"
 
+#include <tpublic/Data/Ability.h>
 #include <tpublic/Data/Faction.h>
 #include <tpublic/Data/MinionMode.h>
 

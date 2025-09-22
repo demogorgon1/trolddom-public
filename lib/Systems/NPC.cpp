@@ -14,6 +14,7 @@
 #include <tpublic/Components/ThreatTarget.h>
 #include <tpublic/Components/VisibleAuras.h>
 
+#include <tpublic/Data/Ability.h>
 #include <tpublic/Data/Faction.h>
 #include <tpublic/Data/LootTable.h>
 #include <tpublic/Data/NPCBehaviorState.h>

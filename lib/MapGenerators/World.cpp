@@ -6,6 +6,7 @@
 #include <tpublic/Data/Faction.h>
 #include <tpublic/Data/MapEntitySpawn.h>
 #include <tpublic/Data/Noise.h>
+#include <tpublic/Data/TagContext.h>
 #include <tpublic/Data/Terrain.h>
 
 #include <tpublic/MapGenerators/World.h>

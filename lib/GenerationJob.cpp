@@ -9,6 +9,7 @@
 #include <tpublic/Data/Pantheon.h>
 #include <tpublic/Data/Profession.h>
 #include <tpublic/Data/Tag.h>
+#include <tpublic/Data/TagContext.h>
 #include <tpublic/Data/WordGenerator.h>
 
 #include <tpublic/CreateName.h>

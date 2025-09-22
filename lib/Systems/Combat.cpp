@@ -6,12 +6,16 @@
 #include <tpublic/Components/Position.h>
 #include <tpublic/Components/VisibleAuras.h>
 
+#include <tpublic/Data/Ability.h>
+#include <tpublic/Data/Aura.h>
+
 #include <tpublic/Systems/Combat.h>
 
 #include <tpublic/EntityInstance.h>
 #include <tpublic/Helpers.h>
 #include <tpublic/IEventQueue.h>
 #include <tpublic/IWorldView.h>
+#include <tpublic/Manifest.h>
 #include <tpublic/MapData.h>
 #include <tpublic/Requirements.h>
 #include <tpublic/Resource.h>

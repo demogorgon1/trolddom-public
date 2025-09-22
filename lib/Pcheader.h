@@ -5,3 +5,5 @@
 #include <tpublic/DataType.h>
 #include <tpublic/PersistentIdTable.h>
 #include <tpublic/SourceContext.h>
+#include <tpublic/UIntRange.h>
+#include <tpublic/WordList.h>

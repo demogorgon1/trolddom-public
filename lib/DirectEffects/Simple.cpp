@@ -8,6 +8,7 @@
 #include <tpublic/DirectEffects/Simple.h>
 
 #include <tpublic/EntityInstance.h>
+#include <tpublic/Helpers.h>
 #include <tpublic/IEventQueue.h>
 #include <tpublic/IResourceChangeQueue.h>
 #include <tpublic/IWorldView.h>
