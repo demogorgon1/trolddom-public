@@ -1,5 +1,7 @@
 #include "Pcheader.h"
 
+#include <tpublic/Data/Item.h>
+
 #include <tpublic/ItemList.h>
 #include <tpublic/Manifest.h>
 
