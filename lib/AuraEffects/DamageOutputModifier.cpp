@@ -2,6 +2,7 @@
 
 #include <tpublic/AuraEffects/DamageOutputModifier.h>
 
+#include <tpublic/Helpers.h>
 #include <tpublic/Requirements.h>
 
 namespace tpublic::AuraEffects

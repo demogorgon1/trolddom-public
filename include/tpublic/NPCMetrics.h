@@ -3,8 +3,8 @@
 #include "IReader.h"
 #include "ItemType.h"
 #include "IWriter.h"
-#include "Parser.h"
 #include "Resource.h"
+#include "SourceNode.h"
 #include "UIntCurve.h"
 #include "UIntRange.h"
 

@@ -1,5 +1,7 @@
 #include "Pcheader.h"
 
+#include <tpublic/Compiler.h>
+
 int
 main(
 	int		aNumArgs,

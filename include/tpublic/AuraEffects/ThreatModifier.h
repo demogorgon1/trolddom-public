@@ -2,6 +2,7 @@
 
 #include "../AuraEffectBase.h"
 #include "../DirectEffect.h"
+#include "../Helpers.h"
 
 namespace tpublic
 {

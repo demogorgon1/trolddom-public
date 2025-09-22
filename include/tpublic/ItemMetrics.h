@@ -4,8 +4,8 @@
 #include "IReader.h"
 #include "ItemType.h"
 #include "IWriter.h"
-#include "Parser.h"
 #include "Rarity.h"
+#include "SourceNode.h"
 
 namespace tpublic
 {

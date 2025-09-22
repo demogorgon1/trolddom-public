@@ -4,7 +4,7 @@
 #include "IReader.h"
 #include "ItemInstanceData.h"
 #include "IWriter.h"
-#include "Parser.h"
+#include "SourceNode.h"
 
 namespace tpublic
 {

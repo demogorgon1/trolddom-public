@@ -663,7 +663,7 @@ namespace tpublic
 		bool	
 		CheckTargetItemRequirements(
 			const Manifest*									aManifest,
-			const Data::Ability::TargetItemRequirements*	aTargetItemRequirements,
+			const TargetItemRequirements*					aTargetItemRequirements,
 			const ItemProspect*								aTargetItemProspect,
 			uint32_t										aItemId)
 		{

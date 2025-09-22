@@ -8,7 +8,7 @@
 #include "MapGeneratorFactory.h"
 #include "MapInfo.h"
 #include "MapType.h"
-#include "Parser.h"
+#include "SourceNode.h"
 
 namespace tpublic
 {

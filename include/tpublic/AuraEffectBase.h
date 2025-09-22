@@ -6,7 +6,6 @@
 #include "IReader.h"
 #include "IWriter.h"
 #include "MoveSpeed.h"
-#include "Parser.h"
 #include "Requirements.h"
 #include "Stat.h"
 #include "SourceEntityInstance.h"

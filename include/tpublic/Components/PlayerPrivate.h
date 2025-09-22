@@ -1,7 +1,5 @@
 #pragma once
 
-#include <tpublic/Data/Ability.h>
-
 #include "../AbilityModifierList.h"
 #include "../Component.h"
 #include "../ComponentBase.h"

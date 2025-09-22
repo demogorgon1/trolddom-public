@@ -1,9 +1,11 @@
 #pragma once
 
+#include "DataType.h"
 #include "EntityState.h"
 #include "IReader.h"
 #include "ItemType.h"
 #include "IWriter.h"
+#include "SourceNode.h"
 
 namespace tpublic
 {
