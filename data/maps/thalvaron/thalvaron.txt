@@ -434,6 +434,7 @@ map_entity_spawn thalvaron_captain_blackstone: { entity thalvaron_captain_blacks
 map_entity_spawn thalvaron_trader_joseph: { entity thalvaron_trader_joseph: { init_state: default } }
 map_entity_spawn thalvaron_deputy_reumer: { entity thalvaron_deputy_reumer: { init_state: default } }
 map_entity_spawn thalvaron_flimlock: { entity thalvaron_flimlock: { init_state: default } }
+map_entity_spawn thalvaron_fradi: { entity thalvaron_fradi: { init_state: default } }
 
 map_palette .stuff:
 {
@@ -973,6 +974,15 @@ map_palette .stuff:
 	entity_spawn thalvaron_trader_joseph: [ 231 100 105 ]
 	entity_spawn thalvaron_deputy_reumer: [ 18 238 92 ]
 	entity_spawn thalvaron_flimlock: [ 230 210 201 ] 
+	entity_spawn thalvaron_east_kobold: [ 21 78 117 ]
+	entity_spawn thalvaron_zilkore_sandcrawler: [ 121 78 139 ]
+	entity_spawn thalvaron_fradi: [ 221 84 82 ]
+	entity_spawn thalvaron_forbidden_island_boss: [ 112 48 28 ]
+	entity_spawn thalvaron_zilkore_crab_man_boss: [ 212 48 28 ]
+	entity_spawn thalvaron_zilkore_crab_man_small: [ 112 248 28 ]
+	entity_spawn thalvaron_zilkore_crab_man_large: [ 112 48 228 ]
+	entity_spawn thalvaron_south_tirnwood_elemental: [ 30 160 190 ]
+	entity_spawn thalvaron_zilkore_plant: [ 130 240 220 ]
 }
 
 map_palette .levels:

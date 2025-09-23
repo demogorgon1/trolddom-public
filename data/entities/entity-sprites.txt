@@ -933,6 +933,12 @@ sprites:
 	sprite man_85: { dead: man_85_dead }
 	sprite dwarf_21: { dead: dwarf_21_dead }
 	sprite elf_17: { dead: elf_17_dead }
+	sprite man_86: { dead: man_86_dead }
+	sprite crab_monster_6: { dead: crab_monster_6_dead }
+	sprite crab_monster_7: { dead: crab_monster_7_dead }
+	sprite crab_caster_6: { dead: crab_caster_6_dead }
+	sprite crab_caster_7: { dead: crab_caster_7_dead }
+	sprite crab_monster_boss_7: { dead: crab_monster_boss_7_dead }
 
 	cursor: { position: [ 0 816 ] }
 	sprite man_83_dead: { }	
@@ -941,6 +947,12 @@ sprites:
 	sprite man_85_dead: { }	
 	sprite dwarf_21_dead: { }	
 	sprite elf_17_dead: { }	
+	sprite man_86_dead: { }	
+	sprite crab_monster_6_dead: { }	
+	sprite crab_monster_7_dead: { }	
+	sprite crab_caster_6_dead: { }	
+	sprite crab_caster_7_dead: { }	
+	sprite crab_monster_boss_7_dead: { }	
 }
 
 sprites:

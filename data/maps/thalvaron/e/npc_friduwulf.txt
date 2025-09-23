@@ -26,3 +26,4 @@ entity thalvaron_friduwulf: !NPC
 ############################################################
 # Quest 1
 
+# kill thalvaron_zilkore_sandcrawlers

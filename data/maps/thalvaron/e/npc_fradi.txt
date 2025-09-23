@@ -1,0 +1,29 @@
+dialogue_screen .fradi:
+{
+	text: 
+	[	
+		"Greetings."
+	]		
+	
+	options:
+	[
+	]
+}
+
+entity thalvaron_fradi: !NPC
+{
+	_string: "Fradi the Shaman"
+	_sprite: man_86
+	_sprite_dead: man_86_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .fradi: { } }
+}
+
+############################################################
+# Quest 1
+
+# collect items off the coast of zilkore

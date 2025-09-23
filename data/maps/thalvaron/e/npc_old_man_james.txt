@@ -28,3 +28,4 @@ entity thalvaron_old_man_james: !NPC
 ############################################################
 # Quest 1
 
+# kill thalvaron_north_kobolds
