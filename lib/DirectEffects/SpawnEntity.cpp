@@ -274,7 +274,7 @@ namespace tpublic::DirectEffects
 			Components::NPC* npc = spawnedEntity->GetComponent<Components::NPC>();
 
 			ApplyNPCMetrics::Process(
-				&aManifest->m_npcMetrics,
+				aManifest->m_npcMetrics.get(),
 				modifiers,
 				combatPublic,
 				combatPrivate,

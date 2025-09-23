@@ -1,5 +1,7 @@
 #pragma once
 
+#include <tpublic/Data/Item.h>
+
 #include "Image.h"
 #include "IReader.h"
 #include "ItemInstanceData.h"

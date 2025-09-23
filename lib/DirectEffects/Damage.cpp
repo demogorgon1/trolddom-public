@@ -9,6 +9,7 @@
 
 #include <tpublic/DirectEffects/Damage.h>
 
+#include <tpublic/AbilityMetrics.h>
 #include <tpublic/EntityInstance.h>
 #include <tpublic/Helpers.h>
 #include <tpublic/Manifest.h>
@@ -239,7 +240,7 @@ namespace tpublic::DirectEffects
 			size_t rageResourceIndex;
 			if (sourceCombatPublic->GetResourceIndex(Resource::ID_RAGE, rageResourceIndex))
 			{
-				const AbilityMetrics* abilityMetrics = &aManifest->m_abilityMetrics;
+				const AbilityMetrics* abilityMetrics = aManifest->m_abilityMetrics.get();
 				int32_t rageConstant = (int32_t)abilityMetrics->m_rageConstantAtLevelCurve.Sample(sourceCombatPublic->m_level) + 1;
 				int32_t rageBasePerSecond = result == CombatEvent::ID_CRITICAL ? (int32_t)abilityMetrics->m_rageCritBasePerSecond : (int32_t)abilityMetrics->m_rageHitBasePerSecond;
 				int32_t rageBase = (sourceCombatPrivate->m_weaponCooldown * rageBasePerSecond) / 20;
@@ -267,7 +268,7 @@ namespace tpublic::DirectEffects
 			size_t rageResourceIndex;
 			if (targetCombatPublic->GetResourceIndex(Resource::ID_RAGE, rageResourceIndex))
 			{
-				const AbilityMetrics* abilityMetrics = &aManifest->m_abilityMetrics;
+				const AbilityMetrics* abilityMetrics = aManifest->m_abilityMetrics.get();
 				int32_t rageConstant = (int32_t)abilityMetrics->m_rageConstantAtLevelCurve.Sample(targetCombatPublic->m_level) + 1;
 				int32_t rage = (int32_t)(5 * damage) / (8 * rageConstant) + 1;
 

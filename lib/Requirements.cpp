@@ -22,6 +22,8 @@
 #include <tpublic/ItemProspect.h>
 #include <tpublic/IWorldView.h>
 #include <tpublic/Manifest.h>
+#include <tpublic/ReputationMetrics.h>
+#include <tpublic/WorshipMetrics.h>
 
 namespace tpublic
 {
@@ -60,7 +62,7 @@ namespace tpublic
 						return false;
 
 					bool shouldBeDisciple = aRequirement->m_type == Requirement::TYPE_MUST_BE_DISCIPLE;
-					bool isDisciple = reputation->GetReputation(aRequirement->m_id) >= aManifest->m_worshipMetrics.m_discipleLevel;
+					bool isDisciple = reputation->GetReputation(aRequirement->m_id) >= aManifest->m_worshipMetrics->m_discipleLevel;
 
 					if(shouldBeDisciple != isDisciple)
 						return false;
@@ -435,7 +437,7 @@ namespace tpublic
 
 					if(aRequirement->m_type == Requirement::TYPE_MUST_HAVE_REPUTATION_LEVEL)
 					{
-						uint32_t levelIndex = aManifest->m_reputationMetrics.GetLevelIndexFromReputation(factionReputation);
+						uint32_t levelIndex = aManifest->m_reputationMetrics->GetLevelIndexFromReputation(factionReputation);
 						if(levelIndex < aRequirement->m_value)
 							return false;							
 					}

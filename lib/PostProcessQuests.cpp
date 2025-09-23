@@ -1,5 +1,6 @@
 #include "Pcheader.h"
 
+#include <tpublic/Data/Item.h>
 #include <tpublic/Data/Quest.h>
 
 #include <tpublic/Manifest.h>

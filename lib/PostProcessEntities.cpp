@@ -9,6 +9,7 @@
 
 #include <tpublic/ApplyNPCMetrics.h>
 #include <tpublic/Manifest.h>
+#include <tpublic/NPCMetrics.h>
 
 namespace tpublic
 {
@@ -21,7 +22,7 @@ namespace tpublic
 			const Manifest*			aManifest,
 			Data::Entity*			aEntity)
 		{
-			const NPCMetrics& npcMetrics = aManifest->m_npcMetrics;
+			const NPCMetrics& npcMetrics = *aManifest->m_npcMetrics;
 
 			const Components::CombatPublic* combatPublic = aEntity->TryGetComponent<Components::CombatPublic>();
 			Components::NPC* npc = aEntity->TryGetComponent<Components::NPC>();

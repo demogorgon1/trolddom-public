@@ -3,6 +3,7 @@
 #include <tpublic/Data/Sprite.h>
 
 #include <tpublic/Manifest.h>
+#include <tpublic/TileLayering.h>
 
 namespace tpublic
 {
@@ -17,7 +18,7 @@ namespace tpublic
 			aManifest->GetContainer<Data::Sprite>()->ForEach([aManifest](
 				Data::Sprite* aSprite)
 			{
-				aSprite->m_info.m_tileLayer = aManifest->m_tileLayering.GetTileLayer(aSprite);
+				aSprite->m_info.m_tileLayer = aManifest->m_tileLayering->GetTileLayer(aSprite);
 
 				if(aSprite->m_info.m_flags & SpriteInfo::FLAG_AUTOGLOW)
 				{

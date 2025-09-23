@@ -1,6 +1,7 @@
 #include "Pcheader.h"
 
 #include <tpublic/GearOptimizer.h>
+#include <tpublic/ItemInstanceData.h>
 #include <tpublic/Manifest.h>
 
 namespace tpublic

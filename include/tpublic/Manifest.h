@@ -1,27 +1,27 @@
 #pragma once
 
-#include "AbilityMetrics.h"
 #include "DataBase.h"
-#include "DefaultSoundEffects.h"
 #include "IReader.h"
-#include "ItemMetrics.h"
 #include "IWriter.h"
-#include "MiscMetrics.h"
-#include "NPCMetrics.h"
 #include "PersistentIdTable.h"
-#include "PlayerComponents.h"
-#include "ProfessionMetrics.h"
-#include "QuestMetrics.h"
-#include "ReputationMetrics.h"
-#include "TileLayering.h"
 #include "WordList.h"
-#include "WorshipMetrics.h"
-#include "XPMetrics.h"
 
 namespace tpublic
 {
 
+	class AbilityMetrics;
+	class DefaultSoundEffects;
 	class Document;
+	class ItemMetrics;
+	class MiscMetrics;
+	class NPCMetrics;
+	class PlayerComponents;
+	class ProfessionMetrics;
+	class QuestMetrics;
+	class ReputationMetrics;
+	class TileLayering;
+	class WorshipMetrics;
+	class XPMetrics;
 
 	class Manifest
 	{
@@ -444,19 +444,19 @@ namespace tpublic
 		}
 
 		// Global non-itemized data
-		PlayerComponents								m_playerComponents;
-		XPMetrics										m_xpMetrics;
-		ItemMetrics										m_itemMetrics;
-		NPCMetrics										m_npcMetrics;
-		QuestMetrics									m_questMetrics;
-		ProfessionMetrics								m_professionMetrics;
-		AbilityMetrics									m_abilityMetrics;
-		WorshipMetrics									m_worshipMetrics;
-		MiscMetrics										m_miscMetrics;
-		ReputationMetrics								m_reputationMetrics;
+		std::unique_ptr<PlayerComponents>				m_playerComponents;
+		std::unique_ptr<XPMetrics>						m_xpMetrics;
+		std::unique_ptr<ItemMetrics>					m_itemMetrics;
+		std::unique_ptr<NPCMetrics>						m_npcMetrics;
+		std::unique_ptr<QuestMetrics>					m_questMetrics;
+		std::unique_ptr<ProfessionMetrics>				m_professionMetrics;
+		std::unique_ptr<AbilityMetrics>					m_abilityMetrics;
+		std::unique_ptr<WorshipMetrics>					m_worshipMetrics;
+		std::unique_ptr<MiscMetrics>					m_miscMetrics;
+		std::unique_ptr<ReputationMetrics>				m_reputationMetrics;
 		WordList::Data									m_wordList;
-		DefaultSoundEffects								m_defaultSoundEffects;
-		TileLayering									m_tileLayering;
+		std::unique_ptr<DefaultSoundEffects>			m_defaultSoundEffects;
+		std::unique_ptr<TileLayering>					m_tileLayering;
 		std::unique_ptr<Document>						m_changelog;
 		std::unique_ptr<Document>						m_changelogOld;
 		uint32_t										m_baseTileBorderPatternSpriteId = 0;

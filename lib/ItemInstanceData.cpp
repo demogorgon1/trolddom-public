@@ -1,7 +1,10 @@
 #include "Pcheader.h"
 
+#include <tpublic/Data/Item.h>
+
 #include <tpublic/Helpers.h>
 #include <tpublic/ItemInstanceData.h>
+#include <tpublic/ItemMetrics.h>
 #include <tpublic/ItemType.h>
 #include <tpublic/Manifest.h>
 
@@ -21,9 +24,9 @@ namespace tpublic
 		m_itemData = aManifest->GetById<tpublic::Data::Item>(aItemInstance.m_itemId);
 
 		const ItemType::Info* itemTypeInfo = ItemType::GetInfo(m_itemData->m_itemType);
-		const ItemMetrics::Multipliers& rarityMultipliers = aManifest->m_itemMetrics.GetRarityMultipliers(m_itemData->m_rarity);
-		const ItemMetrics::Multipliers& itemTypeMultipliers = aManifest->m_itemMetrics.GetItemTypeMultipliers(m_itemData->m_itemType);
-		const ItemMetrics::Multipliers& equipmentSlotMultipliers = aManifest->m_itemMetrics.GetEquipmentSlotMultipliers(m_itemData->m_equipmentSlots);
+		const ItemMetrics::Multipliers& rarityMultipliers = aManifest->m_itemMetrics->GetRarityMultipliers(m_itemData->m_rarity);
+		const ItemMetrics::Multipliers& itemTypeMultipliers = aManifest->m_itemMetrics->GetItemTypeMultipliers(m_itemData->m_itemType);
+		const ItemMetrics::Multipliers& equipmentSlotMultipliers = aManifest->m_itemMetrics->GetEquipmentSlotMultipliers(m_itemData->m_equipmentSlots);
 
 		ItemMetrics::Multipliers multipliers;
 		multipliers.m_armor = itemTypeMultipliers.m_armor * equipmentSlotMultipliers.m_armor * rarityMultipliers.m_armor;
@@ -92,7 +95,7 @@ namespace tpublic
 			{
 				// This weapon doesn't have explicit damage range, use defaults based on item level
 				bool isTwoHanded = itemTypeInfo->m_flags & ItemType::FLAG_TWO_HANDED;
-				uint32_t dps = isTwoHanded ? aManifest->m_itemMetrics.GetLevelBase2HWeaponDPS(m_itemData->m_itemLevel) : aManifest->m_itemMetrics.GetLevelBase1HWeaponDPS(m_itemData->m_itemLevel);
+				uint32_t dps = isTwoHanded ? aManifest->m_itemMetrics->GetLevelBase2HWeaponDPS(m_itemData->m_itemLevel) : aManifest->m_itemMetrics->GetLevelBase1HWeaponDPS(m_itemData->m_itemLevel);
 
 				dps = (uint32_t)((float)dps * multipliers.m_weaponDamage);
 
@@ -118,7 +121,7 @@ namespace tpublic
 			if (m_weaponDamage.m_min == 0 && m_weaponDamage.m_max == 0)
 			{
 				// Like with weapons, come up with damage based on item level
-				uint32_t dps = aManifest->m_itemMetrics.GetLevelBaseRangedDPS(m_itemData->m_itemLevel);
+				uint32_t dps = aManifest->m_itemMetrics->GetLevelBaseRangedDPS(m_itemData->m_itemLevel);
 
 				dps = (uint32_t)((float)dps * multipliers.m_weaponDamage);
 
@@ -139,13 +142,13 @@ namespace tpublic
 
 		if(itemTypeInfo->m_flags & ItemType::FLAG_ARMOR)
 		{
-			uint32_t baseArmor = aManifest->m_itemMetrics.GetLevelBaseArmor(m_itemData->m_itemLevel);
+			uint32_t baseArmor = aManifest->m_itemMetrics->GetLevelBaseArmor(m_itemData->m_itemLevel);
 			baseArmor = 1 + (uint32_t)((float)baseArmor * multipliers.m_armor);
 			m_stats.m_stats[Stat::ID_ARMOR] += (float)baseArmor; 
 
 			if (itemTypeInfo->m_flags & ItemType::FLAG_SHIELD)
 			{
-				uint32_t blockValue = (uint32_t)((float)baseArmor * aManifest->m_itemMetrics.m_shieldArmorToBaseBlockValue);
+				uint32_t blockValue = (uint32_t)((float)baseArmor * aManifest->m_itemMetrics->m_shieldArmorToBaseBlockValue);
 				if(blockValue == 0)
 					blockValue = 1;
 				m_stats.m_stats[Stat::ID_BLOCK_VALUE] += (float)blockValue;
@@ -156,7 +159,7 @@ namespace tpublic
 
 		if (m_cost == 0)
 		{
-			uint32_t baseCost = aManifest->m_itemMetrics.GetLevelBaseCost(m_itemData->m_itemLevel);
+			uint32_t baseCost = aManifest->m_itemMetrics->GetLevelBaseCost(m_itemData->m_itemLevel);
 			baseCost = (uint32_t)((float)baseCost * multipliers.m_cost * rarityMultipliers.m_cost * m_itemData->m_valueMultiplier);
 			m_cost = baseCost;
 
@@ -168,13 +171,13 @@ namespace tpublic
 		
 		if(m_tokenCost == 0)
 		{
-			m_tokenCost = (uint32_t)(multipliers.m_tokenCost * aManifest->m_itemMetrics.m_tokenCostBaseMultiplier);
+			m_tokenCost = (uint32_t)(multipliers.m_tokenCost * aManifest->m_itemMetrics->m_tokenCostBaseMultiplier);
 
 			if (m_tokenCost == 0)
 				m_tokenCost = 1;
 		}
 
-		m_vendorValue = (uint32_t)((float)m_cost * aManifest->m_itemMetrics.m_vendorCostMultiplier);
+		m_vendorValue = (uint32_t)((float)m_cost * aManifest->m_itemMetrics->m_vendorCostMultiplier);
 	}
 	
 	ItemInstanceData::~ItemInstanceData()

@@ -35,6 +35,7 @@
 #include <tpublic/Manifest.h>
 #include <tpublic/MapData.h>
 #include <tpublic/MapRouteData.h>
+#include <tpublic/NPCMetrics.h>
 #include <tpublic/Requirements.h>
 #include <tpublic/StealthUtils.h>
 #include <tpublic/WorldInfoMap.h>
@@ -247,7 +248,7 @@ namespace tpublic::Systems
 
 		Vec2 leashPosition = aEntityState == EntityState::ID_IN_COMBAT ? npc->m_lastTargetPosition : position->m_position;
 		int32_t leashDistanceSquared = aEntityState == EntityState::ID_IN_COMBAT ? npc->m_anchorPosition.DistanceSquared(leashPosition) : 0;
-		int32_t minLeashRangeSquared = GetManifest()->m_npcMetrics.m_minLeashRange * GetManifest()->m_npcMetrics.m_minLeashRange;
+		int32_t minLeashRangeSquared = GetManifest()->m_npcMetrics->m_minLeashRange * GetManifest()->m_npcMetrics->m_minLeashRange;
 
 		bool isSurvivalMap = aContext->m_worldView->WorldViewGetMapData()->m_mapInfo.m_survivalScriptId != 0;
 
@@ -323,7 +324,7 @@ namespace tpublic::Systems
 
 				IWorldView::EntityQuery entityQuery;
 				entityQuery.m_position = position->m_position;
-				entityQuery.m_maxDistance = GetManifest()->m_npcMetrics.GetMaxAggroRange();
+				entityQuery.m_maxDistance = GetManifest()->m_npcMetrics->GetMaxAggroRange();
 				entityQuery.m_flags = IWorldView::EntityQuery::FLAG_LINE_OF_SIGHT;
 
 				aContext->m_worldView->WorldViewQueryEntityInstances(entityQuery, [&](
@@ -348,7 +349,7 @@ namespace tpublic::Systems
 								}
 								else
 								{
-									aggroRange = GetManifest()->m_npcMetrics.GetAggroRangeForLevelDifference((int32_t)combat->m_level, (int32_t)targetCombatPublic->m_level);
+									aggroRange = GetManifest()->m_npcMetrics->GetAggroRangeForLevelDifference((int32_t)combat->m_level, (int32_t)targetCombatPublic->m_level);
 
 									aggroRange += npc->m_aggroRangeBias;
 
@@ -381,7 +382,7 @@ namespace tpublic::Systems
 						else if (topThreatEntity != NULL && aEntity->GetState() == EntityState::ID_DEFAULT && (!faction->IsNeutralOrFriendly() || faction->IsPVP()))
 						{
 							const Components::CombatPublic* nearbyNonPlayerCombatPublic = aEntity->GetComponent<Components::CombatPublic>();
-							int32_t aggroAssistRange = GetManifest()->m_npcMetrics.m_aggroAssistRange;
+							int32_t aggroAssistRange = GetManifest()->m_npcMetrics->m_aggroAssistRange;
 							if(nearbyNonPlayerCombatPublic != NULL && nearbyNonPlayerCombatPublic->m_factionId == combat->m_factionId && aDistanceSquared <= aggroAssistRange * aggroAssistRange)
 							{	
 								int32_t threatTick = aContext->m_tick; // threat->m_table.GetTick(); (FIXME: which makes most sense)

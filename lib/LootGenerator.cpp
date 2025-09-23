@@ -14,6 +14,7 @@
 #include <tpublic/EntityInstance.h>
 #include <tpublic/LootGenerator.h>
 #include <tpublic/Manifest.h>
+#include <tpublic/NPCMetrics.h>
 #include <tpublic/Requirements.h>
 
 namespace tpublic
@@ -94,7 +95,7 @@ namespace tpublic
 			}
 			else if(aCreatureTypeId == 0 || m_manifest->GetById<tpublic::Data::CreatureType>(aCreatureTypeId)->m_flags & Data::CreatureType::FLAG_CASH_LOOT)
 			{
-				const NPCMetrics::Level* npcMetricsLevel = m_manifest->m_npcMetrics.GetLevel(aLevel);
+				const NPCMetrics::Level* npcMetricsLevel = m_manifest->m_npcMetrics->GetLevel(aLevel);
 				if (npcMetricsLevel != NULL)
 				{
 					tpublic::UniformDistribution<uint32_t> distribution(npcMetricsLevel->m_cash.m_min, npcMetricsLevel->m_cash.m_max);
