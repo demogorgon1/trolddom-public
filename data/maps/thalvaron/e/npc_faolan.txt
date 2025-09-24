@@ -29,8 +29,18 @@ entity thalvaron_faolan: !NPC
 # FIXME quest
 # gather herbs around zilkore and bring as offering to shrine in woods to the east
 
+quest .faolan_1:
+{
+	level: 25
+}
+
 ############################################################
 # Quest 2
 
 # FIXME quest
 # gather items from thalvaron_zilkore_plant and deliver to thalvaron_frida
+
+quest .faolan_2:
+{
+	level: 26
+}

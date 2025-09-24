@@ -26,3 +26,10 @@ entity thalvaron_captain_blackstone: !NPC
 ############################################################
 # Quest 1
 
+# FIXME quest
+# collect item from shore/boat in south swamp
+
+quest .captain_blackstone_1:
+{
+	level: 27
+}

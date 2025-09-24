@@ -26,3 +26,10 @@ entity thalvaron_deputy_reumer: !NPC
 ############################################################
 # Quest 1
 
+# FIXME quest
+# kill thalvaron_mirefiend
+
+quest .deputy_reumer_1:
+{
+	level: 27
+}

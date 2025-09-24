@@ -28,3 +28,8 @@ entity thalvaron_friduwulf: !NPC
 
 # FIXME quest
 # kill thalvaron_zilkore_sandcrawlers
+
+quest .friduwulf_1:
+{
+	level: 25
+}

@@ -31,8 +31,18 @@ entity thalvaron_trader_joseph: !NPC
 # FIXME quest
 # collect special mangos from north dense jungle with killer plants
 
+quest .trader_joseph_1:
+{
+	level: 26
+}
+
 ############################################################
 # Quest 2
 
 # FIXME quest
 # collect things from the swamp
+
+quest .trader_joseph_2:
+{
+	level: 27
+}

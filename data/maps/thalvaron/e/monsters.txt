@@ -1,3 +1,10 @@
+npc_behavior_state .wandering:
+{
+	on_route<thalvaron_default_patrol>: thalvaron_default_patrol
+	behavior: wandering
+	max_range: 2
+}
+
 npc_behavior_state .wandering_short:
 {
 	on_route<thalvaron_default_patrol>: thalvaron_default_patrol
@@ -127,6 +134,30 @@ map_entity_spawn thalvaron_zilkore_crab_man_large:
 }
 
 ##########################################################################################
+# Swamp
+
+map_entity_spawn thalvaron_mirefiend: 
+{ 
+	entity thalvaron_mirefiend_lurker: { } 
+	entity thalvaron_mirefiend_dweller: { } 	
+	spawn_timer: !NPC_RESPAWN_NORMAL{} 
+}
+
+# Swamp monsters
+{
+	${
+		_level: 27
+		_faction: monsters
+		_creature_type: elemental
+		_loot_table: default_nature_elemental
+		_default_behavior_state: .wandering_short
+	}
+
+	entity thalvaron_mirefiend_lurker: !NPC { _string: "Mirefiend Lurker" _sprite: swamp_monster_2 _sprite_dead: swamp_monster_2_dead }
+	entity thalvaron_mirefiend_dweller: !NPC { _string: "Mirefiend Dweller" _sprite: swamp_monster_3 _sprite_dead: swamp_monster_3_dead }
+}
+
+##########################################################################################
 # Misc monsters
 
 map_entity_spawn thalvaron_forbidden_island_boss: { entity thalvaron_forbidden_island_boss: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
@@ -135,6 +166,11 @@ map_entity_spawn thalvaron_thalyssian_snake: { entity thalvaron_thalyssian_snake
 map_entity_spawn thalvaron_e_boar_25: { entity thalvaron_e_boar_25: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_e_boar_26: { entity thalvaron_e_boar_26: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_jungle_harpy: { entity thalvaron_jungle_harpy: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_jungle_lizard: { entity thalvaron_jungle_lizard: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_jungle_lizard_boss: { entity thalvaron_jungle_lizard_boss: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_thalyssian_spider_26: { entity thalvaron_thalyssian_spider_26: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_thalyssian_spider_27: { entity thalvaron_thalyssian_spider_27: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_wyvern: { entity thalvaron_wyvern: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 
 # Forbidden island boss
 {
@@ -220,4 +256,148 @@ map_entity_spawn thalvaron_jungle_harpy: { entity thalvaron_jungle_harpy: { } sp
 	}
 
 	entity thalvaron_jungle_harpy: !NPC { _string: "Jungle Harpy" _sprite: harpy_1 _sprite_dead: harpy_1_dead }
+}
+
+# Jungle lizards
+{
+	${
+		_level: 27
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short				
+		_loot_table: default_lizard
+		_weapon_damage: 1.1		
+	}
+
+	entity thalvaron_jungle_lizard: !NPC { _string: "Jungle Lizard" _sprite: lizard_2 _sprite_dead: lizard_2_dead _resource_health: 1.0 }
+	entity thalvaron_jungle_lizard_boss: !NPC { _string: "Scalemaw" _sprite: lizard_6 _sprite_dead: lizard_6_dead _resource_health: 2.0 }
+}
+
+# Spiders
+{
+	${		
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: default_spider
+	}
+
+	entity thalvaron_thalyssian_spider_26: !NPC { _string: "Thalyssian Crawler" _sprite: spider_2 _sprite_dead: spider_2_dead _level: 26 }
+	entity thalvaron_thalyssian_spider_27: !NPC { _string: "Moss Stalker" _sprite: spider_1 _sprite_dead: spider_1_dead _level: 27 }
+}
+
+# Wyvern
+{
+	${
+		_level: 26
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short				
+		_loot_table: default_lizard
+		_weapon_damage: 1.1				
+		_resource_health: 2.3
+		_abilities: [ { id: npc_poison_attack } ]
+	}
+
+	entity thalvaron_wyvern: !NPC { _string: "Wyvern" _sprite: wyvern_2 _sprite_dead: wyvern_2_dead }
+}
+
+##########################################################################################
+# Desolate lowlands
+
+map_entity_spawn thalvaron_crust_elemental: { entity thalvaron_crust_elemental: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+
+# Rock elementals
+{
+	loot_group .crust_elemental_quest_item: { }
+
+	item .crust_elemental_quest_item:
+	{
+		loot_groups: [ .crust_elemental_quest_item ]		
+		string: "Glowing Powder" 
+		icon: icon_spirit_dust
+		item_level: 27
+		flags: [ unique not_sellable ]
+		use_ability: $ability [ string icon ]
+		{
+			description: "This item starts a quest."
+			flags: [ target_self item ]
+			direct_effect simple<start_quest>: .crust_elemental_quest_item
+			states: [ default in_combat ]
+			requirement self<must_not_have_completed_quest>: { id: .crust_elemental_quest_item }
+			requirement self<must_not_have_active_quest>: { id: .crust_elemental_quest_item }
+		}
+		
+		binds: when_picked_up
+	}
+	
+	quest .crust_elemental_quest_item:
+	{
+		string: "Glowing Powder"
+
+		text:
+		[
+			"Bring the weird glowing powder to Flimlock in The Verdant Mire."
+		]
+		
+		description: 
+		[
+			"This is no ordinary elemental powder. It has an eerie glow to it. You should take it to Flimlock in the Verdant mire and see what he has to say about it."
+		]
+		
+		completion:
+		[
+			"How interesting... Let me have a taste!"
+		]
+
+		level: 27
+		reward_xp_multiplier: 0.25
+		reward_cash_multiplier: 0.25
+	}
+
+	loot_table .crust_elemental: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: 
+				{ 
+					loot_group: .crust_elemental_quest_item 
+					requirement self<must_not_have_active_quest>: { id: .crust_elemental_quest_item } 
+					requirement self<must_not_have_completed_quest>: { id: .crust_elemental_quest_item } 
+				} 
+			}
+			
+			!WORLD_DROPS {}		
+			!WORLD_DROPS_EARTH_ELEMENTALS {}
+		]	
+	}	
+	
+	${
+		_level: 27
+		_faction: monsters
+		_creature_type: elemental
+		_loot_table: .crust_elemental
+		_default_behavior_state: .wandering
+	}
+
+	entity thalvaron_crust_elemental: !NPC { _string: "Crust Elemental" _sprite: rock_elemental_2 _sprite_dead: rock_elemental_2_dead }
+}
+
+##########################################################################################
+# Lizard men
+
+map_entity_spawn thalvaron_lizard_wizard: { entity thalvaron_lizard_wizard: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+
+# Wizard
+{
+	${
+		_level: 27
+		_faction: monsters
+		_creature_type: humanoid
+		_loot_table: default_humanoid
+		_default_behavior_state: .passive
+	}
+
+	entity thalvaron_lizard_wizard: !NPC { _string: "Zim'Bwob" _sprite: lizard_man_1 _sprite_dead: lizard_man_1_dead }
 }

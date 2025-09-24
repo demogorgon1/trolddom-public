@@ -26,3 +26,12 @@ entity thalvaron_egon_riddle: !NPC
 ############################################################
 # Quest 1
 
+# FIXME quest
+# lead to thalvaron_sandra_riddle in urthonak keep (urthon)
+
+quest .egon_riddle_1:
+{
+	level: 28
+	reward_xp_multiplier: 0.3
+	reward_cash_multiplier: 0.3
+}

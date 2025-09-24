@@ -7,6 +7,7 @@ dialogue_screen .rubert:
 	
 	options:
 	[
+		{ quest: .rubert_1 }
 	]
 }
 
@@ -26,3 +27,42 @@ entity thalvaron_rubert: !NPC
 ############################################################
 # Quest 1
 
+objective .rubert_1:
+{
+	string: "Locate Diane"
+	
+	maps: [ thalvaron ]
+	
+	route_npc:
+	{
+		entities: [ thalvaron_diane ]
+	}
+}
+
+quest .rubert_1:
+{
+	string: "Where is my Wife?"
+
+	text:
+	[
+		"Find out what's taking Rubert's wife so long."
+	]
+	
+	description: 
+	[
+		""
+	]
+
+	progress:
+	[
+		"She'll probably show up by herself."
+	]
+	
+	completion:
+	[
+		""		
+	]
+
+	level: 27
+	objectives: [ .rubert_1 ]
+}

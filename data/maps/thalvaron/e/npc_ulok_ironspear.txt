@@ -1,0 +1,27 @@
+dialogue_screen .ulok_ironspear:
+{
+	text: 
+	[	
+		"If this place had been built by dwarves it wouldn't be falling apart."
+	]		
+	
+	options:
+	[
+	]
+}
+
+entity thalvaron_ulok_ironspear: !NPC
+{
+	_string: "Ulok Ironspear"
+	_sprite: dwarf_22
+	_sprite_dead: dwarf_22_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .ulok_ironspear: { } }
+}
+
+############################################################
+# Quest 1

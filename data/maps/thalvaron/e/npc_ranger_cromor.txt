@@ -28,3 +28,10 @@ entity thalvaron_ranger_cromor: !NPC
 ############################################################
 # Quest 1
 
+# FIXME quest
+# kill thalvaron_jungle_lizard_boss
+
+quest .ranger_cromor_1:
+{
+	level: 27
+}

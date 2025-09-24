@@ -940,6 +940,9 @@ sprites:
 	sprite crab_caster_7: { dead: crab_caster_7_dead }
 	sprite crab_monster_boss_7: { dead: crab_monster_boss_7_dead }
 	sprite woman_40: { dead: woman_40_dead }
+	sprite woman_41: { dead: woman_41_dead }
+	sprite lizard_6: { dead: lizard_6_dead }
+	sprite wyvern_2: { dead: wyvern_2_dead }
 
 	cursor: { position: [ 0 816 ] }
 	sprite man_83_dead: { }	
@@ -955,6 +958,21 @@ sprites:
 	sprite crab_caster_7_dead: { }	
 	sprite crab_monster_boss_7_dead: { }	
 	sprite woman_40_dead: { }	
+	sprite woman_41_dead: { }	
+	sprite lizard_6_dead: { }	
+	sprite wyvern_2_dead: { }	
+
+	cursor: { position: [ 0 832 ] }
+	sprite lizard_man_1: { dead: lizard_man_1_dead }
+	sprite woman_42: { dead: woman_42_dead }
+	sprite man_87: { dead: man_87_dead }
+	sprite dwarf_22: { dead: dwarf_22_dead }
+
+	cursor: { position: [ 0 848 ] }
+	sprite lizard_man_1_dead: { }	
+	sprite woman_42_dead: { }	
+	sprite man_87_dead: { }	
+	sprite dwarf_22_dead: { }	
 
 }
 

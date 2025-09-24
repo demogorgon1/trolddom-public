@@ -26,3 +26,22 @@ entity thalvaron_brila_stargazer: !NPC
 ############################################################
 # Quest 1
 
+# FIXME quest
+# collect enchanted cave mushrooms from cave lake
+# collect swamp monsters goo
+
+quest .brila_stargazer_1:
+{
+	level: 27
+}
+
+############################################################
+# Quest 2
+
+# FIXME quest
+# deliver elixir to npc_troels_ronson
+
+quest .brila_stargazer_2:
+{
+	level: 27
+}

@@ -7,6 +7,7 @@ dialogue_screen .flimlock:
 	
 	options:
 	[
+		{ quest<completion_only>: .crust_elemental_quest_item }
 	]
 }
 
@@ -25,4 +26,109 @@ entity thalvaron_flimlock: !NPC
 
 ############################################################
 # Quest 1
+
+# FIXME quest
+# collect water samples from swamp
+
+quest .flimlock_1:
+{
+	level: 27
+}
+
+############################################################
+# Quest 2
+
+# FIXME quest
+# pour elixir into water by old zilkore burial site - fight off undead that spawns
+
+quest .flimlock_2:
+{
+	level: 27
+}
+
+############################################################
+# Quest 3
+
+# FIXME quest
+# kill thalvaron_lizard_wizard
+
+quest .flimlock_3:
+{
+	level: 27
+	prerequisites: [ .crust_elemental_quest_item ]
+}
+
+entity thalvaron_flimlock_3_portal:
+{
+	string: "Portal"
+	
+	systems: [ openable ]
+	
+	components:
+	{
+		position: { }		
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ gateway_1 gateway_2 gateway_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}						
+		openable: 
+		{ 
+			verb: use
+			range: 1 
+			level: 27
+			trigger_ability: $ability
+			{
+				states: [ default ]                     
+				direct_effect move: { map_player_spawn: thalvaron_flimlock_3_portal_spawn move_flags: [ set_teleported affect_target ] }
+			}			
+			instant: true
+		}	
+	}
+}
+
+entity thalvaron_flimlock_3_portal_return:
+{
+	string: "Portal"
+	
+	systems: [ openable ]
+	
+	components:
+	{
+		position: { }		
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ gateway_1 gateway_2 gateway_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+		openable: 
+		{ 
+			verb: use
+			range: 1 
+			level: 27
+			trigger_ability: $ability
+			{
+				states: [ default ]                     
+				direct_effect move: { map_player_spawn: thalvaron_flimlock_3_portal_return_spawn move_flags: [ set_teleported affect_target ] }
+			}			
+			instant: true
+		}	
+	}
+}
 

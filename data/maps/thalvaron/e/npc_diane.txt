@@ -1,0 +1,56 @@
+dialogue_screen .diane:
+{
+	text: 
+	[	
+		"Don't mind me, I'm just stuck in this spider web. I'm probably going to be eaten soon."
+	]		
+	
+	options:
+	[
+		{ text: "Your husband asked me to look for you. Let's go." requirement self<must_have_active_quest>: .rubert_1 script: npc_trigger }		
+	]
+}
+
+entity thalvaron_diane: !NPC
+{
+	_string: "Diane"
+	_sprite: woman_41
+	_sprite_dead: woman_41_dead
+	_dialogue_scripts: [ npc_trigger ]
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .diane: { } }
+	_is_threat_source: true
+	_blocking: false
+	
+	_default_trigger_ability: $ability
+	{
+		flags: [ always_in_range always_in_line_of_sight ]	
+		direct_effect start_route: { route: thalvaron_diane_escort }	
+	}
+	
+	_default_behavior_state: $npc_behavior_state
+	{
+		behavior: patrolling
+		combat_event_pause_ticks: 20
+		despawn_if_lost_player: true
+		patrol_move_interval_ticks: 9
+	}	
+}
+
+route thalvaron_diane_escort: 
+{ 
+	#trigger<28>: { chat: { type: say text: "Ahh, the fresh mountain air! Finally!" } }
+	#trigger<30>: { ability: .cubert_galston_ambush_1 }
+	#trigger<62>: { ability: .cubert_galston_ambush_2 }
+	#trigger<97>: { ability: .cubert_galston_ambush_3 }
+	#trigger<120>: { chat: { type: say text: "Safe! At last! Time for a drink!" } event: true }
+	#trigger<max>: { despawn: true }
+}
+
+############################################################
+# Quest 1
+

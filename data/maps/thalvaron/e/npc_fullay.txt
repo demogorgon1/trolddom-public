@@ -30,9 +30,20 @@ entity thalvaron_fullay: !NPC
 # FIXME quest
 # lead to old man james
 
+quest .fullay_1:
+{
+	level: 26
+}
+
 ############################################################
 # Quest 2
 
 # FIXME quest
 # kill thalvaron_thalyssian_snake, take items to thalvaron_trader_joseph
+
+quest .fullay_2:
+{
+	level: 26
+}
+
 

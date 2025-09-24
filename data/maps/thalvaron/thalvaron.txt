@@ -15,6 +15,9 @@ map_player_spawn thalvaron_the_shrouded_lands_underworld_return: { }
 map_player_spawn thalvaron_blimcraft_highborne_3_portal_spawn: { }
 map_player_spawn thalvaron_blimcraft_highborne_3_portal_return_spawn: { }
 
+map_player_spawn thalvaron_flimlock_3_portal_spawn: { }
+map_player_spawn thalvaron_flimlock_3_portal_return_spawn: { }
+
 map_player_spawn thalvaron_realm_of_fire_return_spawn: { }
 
 zone .valoris: { string: "Valoris" }
@@ -115,6 +118,9 @@ zone .forbidden_island: { string: "Forbidden Island" }
 zone .twin_temples: { string: "Twin Temples" }
 zone .temple_of_firbiu: { string: "Temple of Firbiu" }
 zone .temple_of_feruc: { string: "Temple of Feruc" }
+zone .realm_of_the_lizard_wizard: { string: "Desolate Tower" no_map: true }
+zone .realm_of_the_lizard_wizard_ext: { string: "Desolate Tower" }
+zone .urthonak_keep: { string: "Urthonak Keep" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -438,6 +444,12 @@ map_entity_spawn thalvaron_deputy_reumer: { entity thalvaron_deputy_reumer: { in
 map_entity_spawn thalvaron_flimlock: { entity thalvaron_flimlock: { init_state: default } }
 map_entity_spawn thalvaron_fradi: { entity thalvaron_fradi: { init_state: default } }
 map_entity_spawn thalvaron_fullay: { entity thalvaron_fullay: { init_state: default } }
+map_entity_spawn thalvaron_diane: { entity thalvaron_diane: { init_state: default } }
+map_entity_spawn thalvaron_flimlock_3_portal: { entity thalvaron_flimlock_3_portal: { init_state: default } }
+map_entity_spawn thalvaron_flimlock_3_portal_return: { entity thalvaron_flimlock_3_portal_return: { init_state: default } }
+map_entity_spawn thalvaron_chad_wartorn: { entity thalvaron_chad_wartorn: { init_state: default } }
+map_entity_spawn thalvaron_sandra_riddle: { entity thalvaron_sandra_riddle: { init_state: default } }
+map_entity_spawn thalvaron_ulok_ironspear: { entity thalvaron_ulok_ironspear: { init_state: default } }
 
 map_palette .stuff:
 {
@@ -477,6 +489,8 @@ map_palette .stuff:
 	player_spawn thalvaron_durgan_urok_exit: [ 114 124 144 ]
 	player_spawn thalvaron_trial_of_fire_return_spawn: [ 149 99 100 ]
 	player_spawn thalvaron_realm_of_fire_return_spawn: [ 99 134 105 ]
+	player_spawn thalvaron_flimlock_3_portal_spawn: [ 240 105 30 ]
+	player_spawn thalvaron_flimlock_3_portal_return_spawn: [ 240 105 230 ]
 
 	portal thalvaron_lich_tower_entrance: [ 144 188 94 ]
 	portal thalvaron_valoris_insurgency_entrance: [ 144 88 92 ]
@@ -992,6 +1006,20 @@ map_palette .stuff:
 	entity_spawn thalvaron_e_boar_25: [ 194 44 91 ]
 	entity_spawn thalvaron_e_boar_26: [ 194 44 94 ]
 	entity_spawn thalvaron_jungle_harpy: [ 39 191 111 ]
+	entity_spawn thalvaron_mirefiend: [ 139 91 11 ]
+	entity_spawn thalvaron_diane: [ 156 74 72 ]
+	entity_spawn thalvaron_jungle_lizard_boss: [ 255 93 81 ]
+	entity_spawn thalvaron_jungle_lizard: [ 25 93 255 ]
+	entity_spawn thalvaron_thalyssian_spider_26: [ 34 12 89 ]
+	entity_spawn thalvaron_thalyssian_spider_27: [ 34 12 189 ]
+	entity_spawn thalvaron_wyvern: [ 150 131 49 ]
+	entity_spawn thalvaron_crust_elemental: [ 150 131 249 ]
+	entity_spawn thalvaron_lizard_wizard: [ 40 188 234 ]
+	entity_spawn thalvaron_flimlock_3_portal_return: [ 140 88 34 ]
+	entity_spawn thalvaron_flimlock_3_portal: [ 40 188 34 ]
+	entity_spawn thalvaron_chad_wartorn: [ 95 99 129 ]
+	entity_spawn thalvaron_sandra_riddle: [ 195 99 129 ]
+	entity_spawn thalvaron_ulok_ironspear: [ 95 199 129 ]
 }
 
 map_palette .levels:
@@ -1093,6 +1121,8 @@ map_palette .zones:
 	zone .faerandor_pass: [ 191 138 248 ]
 	zone .forbidden_island: [ 34 228 184 ]
 	zone .twin_temples: [ 211 14 103 ]
+	zone .realm_of_the_lizard_wizard_ext: [ 213 62 134 ]	
+	zone .urthonak_keep: [ 173 2 134 ]
 }
 
 map_palette .sub_zones:
@@ -1124,6 +1154,7 @@ map_palette .sub_zones:
 	sub_zone .inner_durgan_urok: [ 232 96 140 ]
 	sub_zone .temple_of_firbiu: [ 255 171 101 ]
 	sub_zone .temple_of_feruc: [ 31 211 182 ]
+	sub_zone .realm_of_the_lizard_wizard: [ 113 62 134 ]
 	
 	sub_zone thalvaron_crab_giant: [ 39 192 83 ]
 	sub_zone thalvaron_vampire_boss: [ 139 93 48 ]
@@ -1137,6 +1168,7 @@ map_palette .routes:
 	route thalvaron_doctor_hulius_escort: [ 39 48 168 ]
 	route thalvaron_mongo_patrol: [ 39 148 168 ]
 	route thalvaron_borli_stouthammer_escort: [ 132 143 221 ]
+	route thalvaron_diane_escort: [ 243 145 49 ]
 }
 
 map_palette .doodads:
@@ -1192,6 +1224,9 @@ map_palette .doodads:
 	doodad sarcophagus_open: [ 30 105 239 ]
 	doodad sarcophagus_closed: [ 30 205 39 ]
 	doodad jungle_plant: [ 49 205 50 ]
+	doodad dark_stairs_left: [ 144 49 146 ]
+	doodad dark_stairs_center: [ 104 41 146 ]
+	doodad dark_stairs_right: [ 104 42 246 ]	
 	
 	doodad wall_sign_generic<"Mathew's Emporium">: [ 197 173 111 ]	
 	doodad wall_sign_generic<"John & Mary's">: [ 97 173 111 ]	

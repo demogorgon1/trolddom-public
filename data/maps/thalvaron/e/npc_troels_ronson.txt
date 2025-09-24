@@ -26,3 +26,10 @@ entity thalvaron_troels_ronson: !NPC
 ############################################################
 # Quest 1
 
+# FIXME quest
+# go ask npc_brila_stargazer for a cure
+
+quest .troels_ronson_1:
+{
+	level: 27
+}

@@ -30,14 +30,29 @@ entity thalvaron_fenris: !NPC
 # FIXME quest
 # bring tentacle from thalvaron_forbidden_island_boss
 
+quest .fenris_1:
+{
+	level: 25
+}
+
 ############################################################
 # Quest 2
 
 # FIXME quest
 # kill thalvaron_zilkore_crab_man_small
 
+quest .fenris_2:
+{
+	level: 25
+}
+
 ############################################################
 # Quest 3
 
 # FIXME quest
 # kill thalvaron_zilkore_crab_man_large and thalvaron_zilkore_crab_man_boss
+
+quest .fenris_3:
+{
+	level: 25
+}

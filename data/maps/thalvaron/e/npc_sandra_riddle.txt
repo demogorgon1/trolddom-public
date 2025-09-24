@@ -1,0 +1,28 @@
+dialogue_screen .sandra_riddle:
+{
+	text: 
+	[	
+		"Do you brings news from the north?"
+	]		
+	
+	options:
+	[
+	]
+}
+
+entity thalvaron_sandra_riddle: !NPC
+{
+	_string: "Sandra Riddle"
+	_sprite: woman_42
+	_sprite_dead: woman_42_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .sandra_riddle: { } }
+}
+
+############################################################
+# Quest 1
+

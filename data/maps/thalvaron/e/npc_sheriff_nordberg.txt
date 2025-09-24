@@ -26,3 +26,10 @@ entity thalvaron_sheriff_nordberg: !NPC
 ############################################################
 # Quest 1
 
+# FIXME quest
+# kill thalvaron_wyvern
+
+quest .sheriff_nordberg_1:
+{
+	level: 26 
+}

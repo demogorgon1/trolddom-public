@@ -1,0 +1,28 @@
+dialogue_screen .chad_wartorn:
+{
+	text: 
+	[	
+		"What's up?"
+	]		
+	
+	options:
+	[
+	]
+}
+
+entity thalvaron_chad_wartorn: !NPC
+{
+	_string: "Chad Wartorn"
+	_sprite: man_87
+	_sprite_dead: man_87_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .chad_wartorn: { } }
+}
+
+############################################################
+# Quest 1
+

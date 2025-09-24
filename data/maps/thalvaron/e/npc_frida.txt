@@ -28,3 +28,8 @@ entity thalvaron_frida: !NPC
 
 # FIXME quest
 # kill thalvaron_thalyssian_beast
+
+quest .frida_1:
+{
+	level: 26
+}

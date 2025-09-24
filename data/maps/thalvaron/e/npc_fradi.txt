@@ -28,3 +28,8 @@ entity thalvaron_fradi: !NPC
 
 # FIXME quest
 # collect items off the coast of zilkore
+
+quest .fradi_1:
+{
+	level: 25
+}
