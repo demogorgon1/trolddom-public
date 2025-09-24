@@ -127,11 +127,16 @@ map_entity_spawn thalvaron_zilkore_crab_man_large:
 }
 
 ##########################################################################################
-# Forbidden island
+# Misc monsters
 
 map_entity_spawn thalvaron_forbidden_island_boss: { entity thalvaron_forbidden_island_boss: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_thalyssian_beast: { entity thalvaron_thalyssian_beast: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_thalyssian_snake: { entity thalvaron_thalyssian_snake: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_e_boar_25: { entity thalvaron_e_boar_25: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_e_boar_26: { entity thalvaron_e_boar_26: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_jungle_harpy: { entity thalvaron_jungle_harpy: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 
-# Boss
+# Forbidden island boss
 {
 	${
 		_level: 25
@@ -147,3 +152,72 @@ map_entity_spawn thalvaron_forbidden_island_boss: { entity thalvaron_forbidden_i
 	entity thalvaron_forbidden_island_boss: !NPC { _string: "Fryzilk" _sprite: demon_1 _sprite_dead: demon_1_dead  }
 }
 
+# Scary creature
+{
+	${
+		_level: 26
+		_faction: monsters
+		_creature_type: beast
+		_weapon_damage: 1.15
+		_resource_health: 1.67
+		_loot_table: default_lion
+		_default_behavior_state: .wandering_short
+
+	}
+
+	entity thalvaron_thalyssian_beast: !NPC { _string: "Mysterious Beast" _sprite: monster_1 _sprite_dead: monster_1_dead _abilities: [ { id: npc_charge_rend } { id: npc_attack } ] }
+}
+
+# Fullay quest mobs - snakes
+{
+	loot_table .thalyssian_snake: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { weight: 1 }
+				#possibility: { weight: 1 loot_group: .theodore_1_quest_item requirement self<must_have_active_quest>: { id: .theodore_1 } } 
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_SNAKES{}
+		]	
+	}
+	
+	${
+		_level: 20
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: .thalyssian_snake
+	}
+
+	entity thalvaron_thalyssian_snake: !NPC { _string: "Thalyssian Bluesnake" _sprite: snake_1 _sprite_dead: snake_1_dead }
+}
+
+# Boars
+{
+
+	${
+		_faction: wildlife
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: default_boar
+	}
+	
+	entity thalvaron_e_boar_25: !NPC { _string: "Thalyssian Pig" _sprite: boar_2 _sprite_dead: boar_2_dead _level: 25 }
+	entity thalvaron_e_boar_26: !NPC { _string: "Thalyssian Pig" _sprite: boar_2 _sprite_dead: boar_2_dead _level: 26 }
+}
+
+# Jungle harpies
+{
+	${		
+		_faction: monsters
+		_creature_type: humanoid		
+		_default_behavior_state: .wandering_short		
+		_loot_table: default_bird
+		_level: 26
+	}
+
+	entity thalvaron_jungle_harpy: !NPC { _string: "Jungle Harpy" _sprite: harpy_1 _sprite_dead: harpy_1_dead }
+}

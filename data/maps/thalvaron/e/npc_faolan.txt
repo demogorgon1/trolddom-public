@@ -26,9 +26,11 @@ entity thalvaron_faolan: !NPC
 ############################################################
 # Quest 1
 
+# FIXME quest
 # gather herbs around zilkore and bring as offering to shrine in woods to the east
 
 ############################################################
 # Quest 2
 
+# FIXME quest
 # gather items from thalvaron_zilkore_plant and deliver to thalvaron_frida

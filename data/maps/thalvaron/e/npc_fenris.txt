@@ -27,14 +27,17 @@ entity thalvaron_fenris: !NPC
 ############################################################
 # Quest 1
 
+# FIXME quest
 # bring tentacle from thalvaron_forbidden_island_boss
 
 ############################################################
 # Quest 2
 
+# FIXME quest
 # kill thalvaron_zilkore_crab_man_small
 
 ############################################################
 # Quest 3
 
+# FIXME quest
 # kill thalvaron_zilkore_crab_man_large and thalvaron_zilkore_crab_man_boss

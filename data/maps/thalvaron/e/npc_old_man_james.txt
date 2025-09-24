@@ -28,4 +28,17 @@ entity thalvaron_old_man_james: !NPC
 ############################################################
 # Quest 1
 
+# FIXME quest
 # kill thalvaron_north_kobolds
+
+############################################################
+# Quest 2
+
+# FIXME quest
+# enter water cave, use item to summon kobolds and kill them
+
+############################################################
+# Quest 3
+
+# FIXME quest
+# go to twin temples and kill thalvaron_jungle_harpy

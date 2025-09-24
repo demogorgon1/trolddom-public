@@ -26,3 +26,5 @@ entity thalvaron_frida: !NPC
 ############################################################
 # Quest 1
 
+# FIXME quest
+# kill thalvaron_thalyssian_beast

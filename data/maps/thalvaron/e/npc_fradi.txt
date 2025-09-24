@@ -26,4 +26,5 @@ entity thalvaron_fradi: !NPC
 ############################################################
 # Quest 1
 
+# FIXME quest
 # collect items off the coast of zilkore

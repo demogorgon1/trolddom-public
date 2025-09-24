@@ -113,6 +113,8 @@ zone .urthon: { string: "Urthon" }
 zone .faerandor_pass: { string: "Faerandor Pass" }
 zone .forbidden_island: { string: "Forbidden Island" }
 zone .twin_temples: { string: "Twin Temples" }
+zone .temple_of_firbiu: { string: "Temple of Firbiu" }
+zone .temple_of_feruc: { string: "Temple of Feruc" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -435,6 +437,7 @@ map_entity_spawn thalvaron_trader_joseph: { entity thalvaron_trader_joseph: { in
 map_entity_spawn thalvaron_deputy_reumer: { entity thalvaron_deputy_reumer: { init_state: default } }
 map_entity_spawn thalvaron_flimlock: { entity thalvaron_flimlock: { init_state: default } }
 map_entity_spawn thalvaron_fradi: { entity thalvaron_fradi: { init_state: default } }
+map_entity_spawn thalvaron_fullay: { entity thalvaron_fullay: { init_state: default } }
 
 map_palette .stuff:
 {
@@ -983,6 +986,12 @@ map_palette .stuff:
 	entity_spawn thalvaron_zilkore_crab_man_large: [ 112 48 228 ]
 	entity_spawn thalvaron_south_tirnwood_elemental: [ 30 160 190 ]
 	entity_spawn thalvaron_zilkore_plant: [ 130 240 220 ]
+	entity_spawn thalvaron_thalyssian_beast: [ 230 49 105 ]
+	entity_spawn thalvaron_thalyssian_snake: [ 29 148 108 ]
+	entity_spawn thalvaron_fullay: [ 129 48 208 ]
+	entity_spawn thalvaron_e_boar_25: [ 194 44 91 ]
+	entity_spawn thalvaron_e_boar_26: [ 194 44 94 ]
+	entity_spawn thalvaron_jungle_harpy: [ 39 191 111 ]
 }
 
 map_palette .levels:
@@ -1113,6 +1122,8 @@ map_palette .sub_zones:
 	sub_zone .the_crystal_caves: [ 129 35 207 ]
 	sub_zone .swamp_of_skaldrun: [ 96 135 232 ]
 	sub_zone .inner_durgan_urok: [ 232 96 140 ]
+	sub_zone .temple_of_firbiu: [ 255 171 101 ]
+	sub_zone .temple_of_feruc: [ 31 211 182 ]
 	
 	sub_zone thalvaron_crab_giant: [ 39 192 83 ]
 	sub_zone thalvaron_vampire_boss: [ 139 93 48 ]

@@ -26,4 +26,5 @@ entity thalvaron_friduwulf: !NPC
 ############################################################
 # Quest 1
 
+# FIXME quest
 # kill thalvaron_zilkore_sandcrawlers

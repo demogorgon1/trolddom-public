@@ -28,3 +28,11 @@ entity thalvaron_trader_joseph: !NPC
 ############################################################
 # Quest 1
 
+# FIXME quest
+# collect special mangos from north dense jungle with killer plants
+
+############################################################
+# Quest 2
+
+# FIXME quest
+# collect things from the swamp

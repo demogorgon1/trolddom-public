@@ -1,0 +1,38 @@
+dialogue_screen .fullay:
+{
+	text: 
+	[	
+		"Passing north or south?"
+	]		
+	
+	options:
+	[
+	
+	]
+}
+
+entity thalvaron_fullay: !NPC
+{
+	_string: "Fullay"
+	_sprite: woman_40
+	_sprite_dead: woman_40_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .fullay: { } }
+}
+
+############################################################
+# Quest 1
+
+# FIXME quest
+# lead to old man james
+
+############################################################
+# Quest 2
+
+# FIXME quest
+# kill thalvaron_thalyssian_snake, take items to thalvaron_trader_joseph
+
