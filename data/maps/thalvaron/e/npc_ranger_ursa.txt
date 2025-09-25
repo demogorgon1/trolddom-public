@@ -1,0 +1,47 @@
+dialogue_screen .ranger_ursa:
+{
+	text: 
+	[	
+		"Welcome to the gates of Urthon."
+	]		
+	
+	options:
+	[
+	]
+}
+
+entity thalvaron_ranger_ursa: !NPC
+{
+	_string: "Ranger Ursa"
+	_sprite: woman_6
+	_sprite_dead: woman_6_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .ranger_ursa: { } }
+}
+
+############################################################
+# Quest 1
+
+# FIXME quest
+# slay thalvaron_urthon_orc_boss
+
+quest .ranger_ursa_1:
+{
+	level: 28
+}
+
+############################################################
+# Quest 2
+
+# FIXME quest
+# slay thalvaron_urthon_orc_wolf_wrangler
+
+quest .ranger_ursa_2:
+{
+	prerequisites: [ .ranger_ursa_1 ]
+	level: 28
+}

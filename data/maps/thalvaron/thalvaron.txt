@@ -122,6 +122,7 @@ zone .realm_of_the_lizard_wizard: { string: "Desolate Tower" no_map: true }
 zone .realm_of_the_lizard_wizard_ext: { string: "Desolate Tower" }
 zone .urthonak_keep: { string: "Urthonak Keep" }
 zone .urthon_burial_grounds: { string: "Urthon Burial Grounds" }
+zone .northern_kareth: { string: "Northern Kareth" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -451,6 +452,12 @@ map_entity_spawn thalvaron_flimlock_3_portal_return: { entity thalvaron_flimlock
 map_entity_spawn thalvaron_chad_wartorn: { entity thalvaron_chad_wartorn: { init_state: default } }
 map_entity_spawn thalvaron_sandra_riddle: { entity thalvaron_sandra_riddle: { init_state: default } }
 map_entity_spawn thalvaron_ulok_ironspear: { entity thalvaron_ulok_ironspear: { init_state: default } }
+map_entity_spawn thalvaron_fritz_dawnstar: { entity thalvaron_fritz_dawnstar: { init_state: default } }
+map_entity_spawn thalvaron_fritz_dawnstar_horse: { entity thalvaron_fritz_dawnstar_horse: { init_state: default } }
+map_entity_spawn thalvaron_sandra_riddle_1_quest_item: { entity thalvaron_sandra_riddle_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_ranger_ursa: { entity thalvaron_ranger_ursa: { init_state: default } }
+map_entity_spawn thalvaron_captain_ejner: { entity thalvaron_captain_ejner: { init_state: default } }
+map_entity_spawn thalvaron_erik_the_bleak: { entity thalvaron_erik_the_bleak: { init_state: default } } 
 
 map_palette .stuff:
 {
@@ -1021,6 +1028,17 @@ map_palette .stuff:
 	entity_spawn thalvaron_chad_wartorn: [ 95 99 129 ]
 	entity_spawn thalvaron_sandra_riddle: [ 195 99 129 ]
 	entity_spawn thalvaron_ulok_ironspear: [ 95 199 129 ]
+	entity_spawn thalvaron_fritz_dawnstar_horse: [ 30 158 89 ]
+	entity_spawn thalvaron_fritz_dawnstar: [ 230 158 89 ]
+	entity_spawn thalvaron_ranger_ursa: [ 100 148 177 ]
+	entity_spawn thalvaron_urthon_orc_boss: [ 140 148 177 ]
+	entity_spawn thalvaron_urthon_orc: [ 140 248 177 ]
+	entity_spawn thalvaron_urthon_orc_wolf_wrangler: [ 150 82 110 ]
+	entity_spawn thalvaron_urthon_orc_wolf: [ 250 82 110 ]
+	entity_spawn thalvaron_sandra_riddle_1_quest_item: [ 150 85 48 ]
+	entity_spawn thalvaron_captain_ejner: [ 250 185 18 ]
+	entity_spawn thalvaron_urthon_orc_boss_2: [ 190 140 181 ]
+	entity_spawn thalvaron_erik_the_bleak: [ 201 183 30 ]
 }
 
 map_palette .levels:
@@ -1125,6 +1143,7 @@ map_palette .zones:
 	zone .realm_of_the_lizard_wizard_ext: [ 213 62 134 ]	
 	zone .urthonak_keep: [ 173 2 134 ]
 	zone .urthon_burial_grounds: [ 49 250 75 ]
+	zone .northern_kareth: [ 74 207 198 ]
 }
 
 map_palette .sub_zones:
@@ -1229,6 +1248,8 @@ map_palette .doodads:
 	doodad dark_stairs_left: [ 144 49 146 ]
 	doodad dark_stairs_center: [ 104 41 146 ]
 	doodad dark_stairs_right: [ 104 42 246 ]	
+	doodad small_rocks: [ 204 52 210 ]
+	doodad statue: [ 104 153 149 ]
 	
 	doodad wall_sign_generic<"Mathew's Emporium">: [ 197 173 111 ]	
 	doodad wall_sign_generic<"John & Mary's">: [ 97 173 111 ]	

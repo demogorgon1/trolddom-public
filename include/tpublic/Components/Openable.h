@@ -35,7 +35,8 @@ namespace tpublic
 					TYPE_WATER,
 					TYPE_USE,
 					TYPE_RING,
-					TYPE_CAPTURE
+					TYPE_CAPTURE,
+					TYPE_LOOT
 				};
 
 				void
@@ -69,6 +70,8 @@ namespace tpublic
 						m_type = TYPE_RING;
 					else if (t == "capture")
 						m_type = TYPE_CAPTURE;
+					else if (t == "loot")
+						m_type = TYPE_LOOT;
 					else
 						TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid verb.", aSource->GetIdentifier());
 				}
@@ -107,6 +110,7 @@ namespace tpublic
 					case TYPE_USE:		return "Use";
 					case TYPE_RING:		return "Ring";
 					case TYPE_CAPTURE:	return "Capture";
+					case TYPE_LOOT:		return "Loot";
 					default:			break;
 					}
 					assert(false);

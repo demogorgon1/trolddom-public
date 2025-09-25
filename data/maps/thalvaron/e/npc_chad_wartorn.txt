@@ -26,3 +26,11 @@ entity thalvaron_chad_wartorn: !NPC
 ############################################################
 # Quest 1
 
+# FIXME quest
+# kill thalvaron_urthon_orc_boss_2
+
+quest .chad_wartorn_1:
+{
+	level: 28
+}
+

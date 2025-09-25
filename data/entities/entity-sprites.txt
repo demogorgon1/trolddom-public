@@ -967,12 +967,20 @@ sprites:
 	sprite woman_42: { dead: woman_42_dead }
 	sprite man_87: { dead: man_87_dead }
 	sprite dwarf_22: { dead: dwarf_22_dead }
+	sprite orc_16: { dead: orc_16_dead }
+	sprite ghost_3: { dead: ghost_3_dead }
+	sprite man_88: { dead: man_88_dead }
+	sprite man_89: { dead: man_89_dead }
 
 	cursor: { position: [ 0 848 ] }
 	sprite lizard_man_1_dead: { }	
 	sprite woman_42_dead: { }	
 	sprite man_87_dead: { }	
 	sprite dwarf_22_dead: { }	
+	sprite orc_16_dead: { }	
+	sprite ghost_3_dead: { }	
+	sprite man_88_dead: { }	
+	sprite man_89_dead: { }	
 
 }
 
@@ -1185,7 +1193,8 @@ sprites:
 	sprite lava_shrine_4: { }
 	sprite crystal_3: { }
 	sprite crystal_4: { }
-	
+	sprite loot_1: { }
+	sprite loot_2: { }
 		
 }
 

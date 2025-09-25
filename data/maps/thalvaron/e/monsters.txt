@@ -401,3 +401,66 @@ map_entity_spawn thalvaron_lizard_wizard: { entity thalvaron_lizard_wizard: { } 
 
 	entity thalvaron_lizard_wizard: !NPC { _string: "Zim'Bwob" _sprite: lizard_man_1 _sprite_dead: lizard_man_1_dead }
 }
+
+##########################################################################################
+# Orcs
+
+map_entity_spawn thalvaron_urthon_orc_boss: { entity thalvaron_urthon_orc_boss: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_urthon_orc_wolf_wrangler: { entity thalvaron_urthon_orc_wolf_wrangler: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_urthon_orc_wolf: { entity thalvaron_urthon_orc_wolf: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_urthon_orc_boss_2: { entity thalvaron_urthon_orc_boss_2: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+
+map_entity_spawn thalvaron_urthon_orc: 
+{ 
+	entity thalvaron_urthon_orc_a: { } 
+	entity thalvaron_urthon_orc_b: { } 
+	entity thalvaron_urthon_orc_c: { } 
+	spawn_timer: !NPC_RESPAWN_NORMAL{} 
+}
+
+# Urthon
+{
+	${
+		_level: 28
+		_faction: skullforge_orcs
+		_creature_type: humanoid
+		_loot_table: default_humanoid
+		_default_behavior_state: .passive
+	}
+
+	entity thalvaron_urthon_orc_a: !NPC { _string: "Skullforge Enforcer" _sprite: orc_1 _sprite_dead: orc_1_dead }
+	entity thalvaron_urthon_orc_b: !NPC { _string: "Skullforge Enforcer" _sprite: orc_2 _sprite_dead: orc_2_dead }
+	entity thalvaron_urthon_orc_c: !NPC { _string: "Skullforge Ranger" _sprite: orc_5 _sprite_dead: orc_5_dead _abilities: [ { id: npc_shoot }{ id: npc_attack } ] _resource_health: 0.8 }
+	entity thalvaron_urthon_orc_boss: !NPC { _string: "Uglor" _sprite: orc_3 _sprite_dead: orc_3_dead _weapon_damage: 1.1 _resource_health: 2.1 }
+	entity thalvaron_urthon_orc_wolf_wrangler: !NPC { _string: "Wolf Wrangler Bazstik" _sprite: orc_16 _sprite_dead: orc_16_dead _abilities: [ { id: npc_trap }{ id: npc_attack } ] _resource_health: 1.9 }	
+	entity thalvaron_urthon_orc_boss_2: !NPC { _string: "Eeklong" _sprite: orc_4 _sprite_dead: orc_4_dead _weapon_damage: 1.1 _resource_health: 2.1 }
+}
+
+# Wolves
+{
+	${
+		_level: 28
+		_faction: monsters
+		_creature_type: beast
+		_loot_table: default_wolf
+		_default_behavior_state: .wandering_short
+	}
+
+	entity thalvaron_urthon_orc_wolf: !NPC { _string: "Captive Wolf" _sprite: wolf_3 _sprite_dead: wolf_3_dead }
+}
+
+##########################################################################################
+# Urthonak Keep
+
+# Ghosts
+{
+	${
+		_level: 28
+		_faction: monsters
+		_creature_type: undead
+		_loot_table: default_ghost
+		_default_behavior_state: .wandering_short
+	}
+
+	entity thalvaron_urthonak_ghost: !NPC { _string: "Angry Ghost" _sprite: ghost_3 _sprite_dead: ghost_3_dead _resource_health: 1.3 }
+}

@@ -114,6 +114,7 @@ sprites:
 	sprite doodad_bone_3: { flags: [ tile_walkable ] }
 	sprite doodad_sarcophagus_open: { flags: [ tile_walkable ] }
 	sprite doodad_sarcophagus_closed: { flags: [ tile_walkable ] }
+	sprite doodad_statue: { flags: [ ] }
 	
 	cursor: { position: [ 0 64 ] }
 	size: { width: 80 height: 64 } sprite ship: { flags: [ tile_walkable ] }
@@ -124,7 +125,7 @@ sprites:
 doodad small_rocks:
 {
 	sprites: [ doodad_rocks_1 doodad_rocks_2 doodad_rocks_3 doodad_rocks_4 doodad_rocks_10 doodad_rocks_13 doodad_rocks_14 ]
-	map_palette<"x">: { must_be_one_of: [ grass grass_2 dirt mud snow dark_grass dark_grass_2 wet_grass sand badlands_1 badlands_2 fs_ground_1 fs_ground_2 ] occupy: true  }
+	map_palette<"x">: { must_be_one_of: [ grass grass_2 dirt mud snow dark_grass dark_grass_2 wet_grass sand badlands_1 badlands_2 fs_ground_1 fs_ground_2 sand_2 sand_3 ] occupy: true  }
 	map_palette<"y">: { must_not_be_one_of: [ forest forest_2 pine_forest_1 pine_forest_2 pine_forest_3 ] } 
 	map: [ "y"
 	       "x" ]
@@ -148,7 +149,7 @@ doodad flowers:
 doodad small_rocks_brown:
 {
 	sprites: [ doodad_rocks_5 doodad_rocks_6 doodad_rocks_7 doodad_rocks_8 doodad_rocks_9 doodad_rocks_11 doodad_rocks_12 ]
-	map_palette<"x">: { must_be_one_of: [ grass grass_2 dirt mud snow dark_grass dark_grass_2 wet_grass sand badlands_1 badlands_2 ] occupy: true }
+	map_palette<"x">: { must_be_one_of: [ grass grass_2 dirt mud snow dark_grass dark_grass_2 wet_grass sand badlands_1 badlands_2 sand_2 sand_3 ] occupy: true }
 	map_palette<"y">: { must_not_be_one_of: [ forest forest_2 pine_forest_1 pine_forest_2 pine_forest_3 ] } 
 	map: [ "y"
 	       "x" ]
@@ -298,4 +299,4 @@ doodad sign_generic_right: { sprites: [ doodad_sign_right ] map_palette<"x">: { 
 doodad bones: { sprites: [ doodad_bone_1 doodad_bone_2 doodad_bone_3 ] map_palette<"x">: { occupy: true } map: [ "x" ] } 
 doodad sarcophagus_open: { sprites: [ doodad_sarcophagus_open ] map_palette<"x">: { occupy: true } map: [ "x" ] } 
 doodad sarcophagus_closed: { sprites: [ doodad_sarcophagus_closed ] map_palette<"x">: { occupy: true } map: [ "x" ] } 
-
+doodad statue: { sprites: [ doodad_statue ] map_palette<"x">: { occupy: true } map: [ "x" ] } 

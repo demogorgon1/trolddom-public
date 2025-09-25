@@ -7,6 +7,7 @@ dialogue_screen .sandra_riddle:
 	
 	options:
 	[
+		{ quest: .sandra_riddle_1 }
 	]
 }
 
@@ -26,3 +27,110 @@ entity thalvaron_sandra_riddle: !NPC
 ############################################################
 # Quest 1
 
+entity thalvaron_sandra_riddle_1_quest_item: 
+{
+	string: "Untouched Statue" 
+	
+	systems: [ openable ]
+	
+	components:
+	{	
+		position: {}
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ loot_2 ] 		
+					z_offset: -3
+				}
+			]		
+		}		
+		openable: 
+		{ 
+			verb: loot
+			level: 28
+			range: 1
+			required_quest: .sandra_riddle_1			
+			despawn: true 			
+			requirements:
+			{
+				requirement self<must_not_have_completed_quest>: .sandra_riddle_1
+			}
+			trigger_ability: $ability
+			{
+				flags: [ always_in_range always_in_line_of_sight ]				
+				direct_effect spawn_entity: { entity: thalvaron_urthonak_ghost spawn_flags: [ no_owner detached ] npc_target_threat: 20 } 
+			}
+			loot_table: $loot_table
+			{
+				slots:
+				[
+					{
+						possibility: { loot_group: .sandra_riddle_1_quest_item }			
+					}		
+				]
+			}
+		}	
+	}
+}
+
+loot_group .sandra_riddle_1_quest_item: {}
+
+item .sandra_riddle_1_quest_item:
+{
+	icon: icon_crown_1
+	item_level: 28
+	loot_groups: [ .sandra_riddle_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Golden Halo"
+	stack: 4
+}
+
+objective .sandra_riddle_1:
+{
+	string: "Golden Halos"	
+	maps: [ thalvaron ]	
+	collect_items: { item: .sandra_riddle_1_quest_item count: 4 }
+}
+
+quest .sandra_riddle_1:
+{
+	string: "Expensive Junk"
+
+	text:
+	[
+		"Gather mudweed along the coast up north."
+	]
+	
+	description: 
+	[
+		"."
+	]
+
+	progress:
+	[
+		"Yeah?"
+	]
+	
+	completion:
+	[
+		"I hope you didn't get spooked."
+	]
+
+	objectives: [ .sandra_riddle_1 ]
+	level: 28
+}
+
+############################################################
+# Quest 2
+
+# FIXME quest
+# loot loot_2 items from the graveyard
+
+quest .sandra_riddle_2:
+{
+	prerequisites: [ .sandra_riddle_1 ]
+	level: 28
+}

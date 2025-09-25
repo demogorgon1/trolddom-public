@@ -1,0 +1,35 @@
+dialogue_screen .captain_ejner:
+{
+	text: 
+	[	
+		"Wipe your feet first if you're planning on getting on my boat."
+	]		
+	
+	options:
+	[
+	]
+}
+
+entity thalvaron_captain_ejner: !NPC
+{
+	_string: "Captain Ejner"
+	_sprite: man_88
+	_sprite_dead: man_88_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .captain_ejner: { } }
+}
+
+############################################################
+# Quest 1
+
+# FIXME quest
+# get bottle of rum from thalvaron_rod_gambil
+
+quest thalvaron_captain_ejner_1:
+{
+	level: 28
+}

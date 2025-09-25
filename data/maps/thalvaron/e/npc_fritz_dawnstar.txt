@@ -1,0 +1,72 @@
+dialogue_screen .fritz_dawnstar:
+{
+	text: 
+	[	
+		"Darkness has fallen on these lands."
+	]		
+	
+	options:
+	[
+	]
+}
+
+entity thalvaron_fritz_dawnstar: !NPC
+{
+	_string: "Fritz Dawnstar"
+	_sprite: man_20
+	_sprite_dead: man_20_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .fritz_dawnstar: { } }
+}
+
+entity thalvaron_fritz_dawnstar_horse: !NPC
+{
+	_string: "Rilar"
+	_sprite: horse_1
+	_sprite_dead: horse_1_dead	
+	_level: 30
+	_faction: npcs		
+	_creature_type: beast
+	_loot_table: .npc
+	_not_pushable: true
+}
+
+############################################################
+# Quest 1
+
+# FIXME quest
+# slay undead at the graveyard
+
+quest .fritz_dawnstar_1:
+{
+	level: 28
+}
+
+############################################################
+# Quest 2
+
+# FIXME quest
+# slay necromancer in the crypt
+
+quest .fritz_dawnstar_2:
+{
+	prerequisites: [ .fritz_dawnstar_1 ]
+	level: 28
+}
+
+############################################################
+# Quest 3
+
+# FIXME quest
+# lead to thalvaron_erik_the_bleak
+
+quest .fritz_dawnstar_3:
+{
+	prerequisites: [ .fritz_dawnstar_2 ]
+	level: 28
+}
+

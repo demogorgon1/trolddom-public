@@ -1330,5 +1330,31 @@ sprites:
 	sprite sand_2_border_17: { }
 	sprite sand_2_alt_1: { flags: [ tile_walkable ] }
 	sprite sand_2_alt_2: { flags: [ tile_walkable ] }		
-	
+
+	cursor: { position: [ 0 704 ] }
+
+	sprite sand_3: { flags: [ tile_walkable ] borders:
+		[ sand_3_border_1 sand_3_border_2 sand_3_border_3 sand_3_border_4 sand_3_border_5 sand_3_border_6 sand_3_border_7
+		  sand_3_border_8 sand_3_border_9 sand_3_border_10 sand_3_border_11 sand_3_border_12 sand_3_border_13 sand_3_border_14
+		  sand_3_border_15 sand_3_border_16 sand_3_border_17 ] alt_tiles: [ sand_3_alt_1 sand_3_alt_2 ] }		
+	sprite sand_3_border_1: { }
+	sprite sand_3_border_2: { }
+	sprite sand_3_border_3: { }
+	sprite sand_3_border_4: { }
+	sprite sand_3_border_5: { }
+	sprite sand_3_border_6: { }
+	sprite sand_3_border_7: { }
+	sprite sand_3_border_8: { }
+	sprite sand_3_border_9: { }
+	sprite sand_3_border_10: { }
+	sprite sand_3_border_11: { }
+	sprite sand_3_border_12: { }
+	sprite sand_3_border_13: { }
+	sprite sand_3_border_14: { }
+	sprite sand_3_border_15: { }
+	sprite sand_3_border_16: { }	
+	sprite sand_3_border_17: { }
+	sprite sand_3_alt_1: { flags: [ tile_walkable ] }
+	sprite sand_3_alt_2: { flags: [ tile_walkable ] }		
+
 }

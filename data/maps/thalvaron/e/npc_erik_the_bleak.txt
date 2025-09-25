@@ -1,0 +1,24 @@
+dialogue_screen .erik_the_bleak:
+{
+	text: 
+	[	
+		"This is the edge of civilization."
+	]		
+	
+	options:
+	[
+	]
+}
+
+entity thalvaron_erik_the_bleak: !NPC
+{
+	_string: "Erik the Bleak"
+	_sprite: man_89
+	_sprite_dead: man_89_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .erik_the_bleak: { } }
+}

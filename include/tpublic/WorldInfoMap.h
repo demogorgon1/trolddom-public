@@ -98,7 +98,7 @@ namespace tpublic
 			FromStream(
 				IReader*							aReader)
 			{
-				if(!aReader->ReadObjects(m_positions))
+				if(!aReader->ReadObjects(m_positions, 2048))
 					return false;
 				return true;
 			}
