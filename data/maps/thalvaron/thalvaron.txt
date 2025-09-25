@@ -121,6 +121,7 @@ zone .temple_of_feruc: { string: "Temple of Feruc" }
 zone .realm_of_the_lizard_wizard: { string: "Desolate Tower" no_map: true }
 zone .realm_of_the_lizard_wizard_ext: { string: "Desolate Tower" }
 zone .urthonak_keep: { string: "Urthonak Keep" }
+zone .urthon_burial_grounds: { string: "Urthon Burial Grounds" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -1123,6 +1124,7 @@ map_palette .zones:
 	zone .twin_temples: [ 211 14 103 ]
 	zone .realm_of_the_lizard_wizard_ext: [ 213 62 134 ]	
 	zone .urthonak_keep: [ 173 2 134 ]
+	zone .urthon_burial_grounds: [ 49 250 75 ]
 }
 
 map_palette .sub_zones:
