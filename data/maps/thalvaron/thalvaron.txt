@@ -129,6 +129,10 @@ zone .southern_kareth: { string: "Southern Kareth" }
 zone .kareth_pass: { string: "Kareth Pass" }
 zone .balidor: { string: "Balidor" }
 zone .ashira: { string: "Ashira" }
+zone .karethi_temple: { string: "Karethi Temple" }
+zone .tomb_of_kralir: { string: "Tomb of Kralir" }
+zone .tomb_of_jurgorth: { string: "Tomb of Jurgorth" }
+zone .tomb_of_the_last_king: { string: "Tomb of the Last King" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -1161,6 +1165,7 @@ map_palette .zones:
 	zone .kareth_pass: [ 171 113 177 ]
 	zone .balidor: [ 139 248 22 ]
 	zone .ashira: [ 233 131 36 ]
+	zone .karethi_temple: [ 152 21 127 ]
 }
 
 map_palette .sub_zones:
@@ -1193,6 +1198,9 @@ map_palette .sub_zones:
 	sub_zone .temple_of_firbiu: [ 255 171 101 ]
 	sub_zone .temple_of_feruc: [ 31 211 182 ]
 	sub_zone .realm_of_the_lizard_wizard: [ 113 62 134 ]
+	sub_zone .tomb_of_kralir: [ 40 169 123 ]
+	sub_zone .tomb_of_jurgorth: [ 169 161 40 ]
+	sub_zone .tomb_of_the_last_king: [ 144 40 169 ]
 	
 	sub_zone thalvaron_crab_giant: [ 39 192 83 ]
 	sub_zone thalvaron_vampire_boss: [ 139 93 48 ]
