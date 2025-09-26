@@ -1,0 +1,35 @@
+dialogue_screen .joana:
+{
+	text: 
+	[	
+		"May you be cleansed by the Light."
+	]		
+	
+	options:
+	[
+	]
+}
+
+entity thalvaron_joana: !NPC
+{
+	_string: "Joana"
+	_sprite: woman_43
+	_sprite_dead: woman_43_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .joana: { } }
+}
+
+############################################################
+# Quest 1
+
+# FIXME quest
+# kill thalvaron_kareth_skeleton_boss
+                                                  
+quest .joana_1:                          
+{                                                 
+	level: 29                                     
+}

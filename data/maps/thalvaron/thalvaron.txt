@@ -123,6 +123,12 @@ zone .realm_of_the_lizard_wizard_ext: { string: "Desolate Tower" }
 zone .urthonak_keep: { string: "Urthonak Keep" }
 zone .urthon_burial_grounds: { string: "Urthon Burial Grounds" }
 zone .northern_kareth: { string: "Northern Kareth" }
+zone .the_serpents_rest: { string: "The Serpent's Rest" }
+zone .eastern_kareth: { string: "Eastern Kareth" }
+zone .southern_kareth: { string: "Southern Kareth" }
+zone .kareth_pass: { string: "Kareth Pass" }
+zone .balidor: { string: "Balidor" }
+zone .ashira: { string: "Ashira" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -458,6 +464,7 @@ map_entity_spawn thalvaron_sandra_riddle_1_quest_item: { entity thalvaron_sandra
 map_entity_spawn thalvaron_ranger_ursa: { entity thalvaron_ranger_ursa: { init_state: default } }
 map_entity_spawn thalvaron_captain_ejner: { entity thalvaron_captain_ejner: { init_state: default } }
 map_entity_spawn thalvaron_erik_the_bleak: { entity thalvaron_erik_the_bleak: { init_state: default } } 
+map_entity_spawn thalvaron_joana: { entity thalvaron_joana: { init_state: default } } 
 
 map_palette .stuff:
 {
@@ -508,6 +515,7 @@ map_palette .stuff:
 	wall stone_wall: [ 128 128 128 ]
 	wall fence: [ 64 128 140 ]
 	wall wood_wall: [ 164 128 140 ]
+	wall desert_wall: [ 190 175 95 ]
 	
 	# NW
 	entity_spawn thalvaron_marlowe: [ 44 56 139 ]
@@ -1039,6 +1047,9 @@ map_palette .stuff:
 	entity_spawn thalvaron_captain_ejner: [ 250 185 18 ]
 	entity_spawn thalvaron_urthon_orc_boss_2: [ 190 140 181 ]
 	entity_spawn thalvaron_erik_the_bleak: [ 201 183 30 ]
+	entity_spawn thalvaron_kareth_skeleton: [ 101 181 40 ]
+	entity_spawn thalvaron_joana: [208 184 111 ]
+	entity_spawn thalvaron_kareth_skeleton_boss: [ 201 93 88 ]
 }
 
 map_palette .levels:
@@ -1144,6 +1155,12 @@ map_palette .zones:
 	zone .urthonak_keep: [ 173 2 134 ]
 	zone .urthon_burial_grounds: [ 49 250 75 ]
 	zone .northern_kareth: [ 74 207 198 ]
+	zone .the_serpents_rest: [ 207 74 181 ]
+	zone .eastern_kareth: [ 74 207 95 ]
+	zone .southern_kareth: [ 125 74 207 ]
+	zone .kareth_pass: [ 171 113 177 ]
+	zone .balidor: [ 139 248 22 ]
+	zone .ashira: [ 233 131 36 ]
 }
 
 map_palette .sub_zones:

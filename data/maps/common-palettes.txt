@@ -121,5 +121,10 @@
 	tile wood_wall_4_window: [ 222 164 125 ]
 	tile wood_wall_4_window_inside: [ 243 125 164 ]
 	tile sand_3: [ 210 212 28 ]
+	tile desert_wall_1: [ 180 190 130 ]
+	tile desert_wall_1_inside: [ 180 190 230 ]
+	tile desert_wall_1_entrance: [ 130 90 181 ]
+	tile desert_wall_1_entrance_closed: [ 230 80 84 ]
+	tile desert_roof_1: [ 94 100 9 ]
 	
 }

@@ -313,6 +313,37 @@ tile_modifier d_building_wall_broken:
 	probability: 30
 }
 
+tile_modifier desert_wall_1_start:
+{
+	sprites: [ desert_wall_1_start ]
+	
+	requirement<center_must_be>: [ desert_wall_1 ]
+	requirement<west_must_not_be>: [ desert_wall_1 desert_wall_1_entrance_closed desert_wall_1_alt_1 desert_wall_1_alt_2 pavement dungeon_floor wood_floor ]
+	
+	probability: 100
+	priority: true
+}
+
+tile_modifier desert_wall_1_end:
+{
+	sprites: [ desert_wall_1_end ]
+	
+	requirement<center_must_be>: [ desert_wall_1 ]
+	requirement<east_must_not_be>: [ desert_wall_1 desert_wall_1_entrance_closed desert_wall_1_alt_1 desert_wall_1_alt_2 pavement dungeon_floor wood_floor ]
+	
+	probability: 100
+	priority: true
+}
+
+tile_modifier desert_wall_1_broken:
+{
+	sprites: [ desert_wall_1_alt_1 desert_wall_1_alt_2 ]
+	
+	requirement<center_must_be>: [ desert_wall_1 ]
+	
+	probability: 30
+}
+
 tile_modifier wood_wall_4_grass:
 {
 	sprites: [ wood_wall_4_grass_1 wood_wall_4_grass_2 ]
@@ -400,6 +431,14 @@ tile_modifier roof_5_e: { sprites: [ roof_5_e ] requirement<center_must_be>: [ r
 tile_modifier roof_5_s: { sprites: [ roof_5_s ] requirement<center_must_be>: [ roof_5 ] requirement<south_must_not_be>: [ roof_5 ] probability: 100 }
 tile_modifier roof_5_w: { sprites: [ roof_5_w ]	requirement<center_must_be>: [ roof_5 ] requirement<west_must_not_be>: [ roof_5 ] probability: 100 }
 
+tile_modifier desert_roof_1_nw: { sprites: [ desert_roof_1_nw ] requirement<center_must_be>: [ desert_roof_1 ] requirement<north_must_not_be>: [ desert_roof_1 ] requirement<west_must_not_be>: [ desert_roof_1 ] probability: 100 priority: true }
+tile_modifier desert_roof_1_ne: { sprites: [ desert_roof_1_ne ] requirement<center_must_be>: [ desert_roof_1 ] requirement<north_must_not_be>: [ desert_roof_1 ] requirement<east_must_not_be>: [ desert_roof_1 ] probability: 100 priority: true }
+tile_modifier desert_roof_1_sw: { sprites: [ desert_roof_1_sw ] requirement<center_must_be>: [ desert_roof_1 ] requirement<south_must_not_be>: [ desert_roof_1 ] requirement<west_must_not_be>: [ desert_roof_1 ] probability: 100 priority: true }
+tile_modifier desert_roof_1_se: { sprites: [ desert_roof_1_se ] requirement<center_must_be>: [ desert_roof_1 ] requirement<south_must_not_be>: [ desert_roof_1 ] requirement<east_must_not_be>: [ desert_roof_1 ] probability: 100 priority: true }
+tile_modifier desert_roof_1_n: { sprites: [ desert_roof_1_n ] requirement<center_must_be>: [ desert_roof_1 ] requirement<north_must_not_be>: [ desert_roof_1 ] probability: 100 }
+tile_modifier desert_roof_1_e: { sprites: [ desert_roof_1_e ] requirement<center_must_be>: [ desert_roof_1 ] requirement<east_must_not_be>: [ desert_roof_1 ] probability: 100 }
+tile_modifier desert_roof_1_s: { sprites: [ desert_roof_1_s ] requirement<center_must_be>: [ desert_roof_1 ] requirement<south_must_not_be>: [ desert_roof_1 ] probability: 100 }
+tile_modifier desert_roof_1_w: { sprites: [ desert_roof_1_w ]	requirement<center_must_be>: [ desert_roof_1 ] requirement<west_must_not_be>: [ desert_roof_1 ] probability: 100 }
 
 
 

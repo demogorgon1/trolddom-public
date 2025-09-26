@@ -464,3 +464,65 @@ map_entity_spawn thalvaron_urthon_orc:
 
 	entity thalvaron_urthonak_ghost: !NPC { _string: "Angry Ghost" _sprite: ghost_3 _sprite_dead: ghost_3_dead _resource_health: 1.3 }
 }
+
+##########################################################################################
+# Kareth
+
+map_entity_spawn thalvaron_kareth_skeleton: 
+{ 
+	entity thalvaron_kareth_skeleton_a: {} 
+	entity thalvaron_kareth_skeleton_b: {} 
+	entity thalvaron_kareth_skeleton_c: {} 
+	entity thalvaron_kareth_skeleton_d: {} 
+	entity thalvaron_kareth_skeleton_e: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_kareth_skeleton_boss: { entity thalvaron_kareth_skeleton_boss: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+
+# Melee skeleton
+{
+	${
+		_level: 28
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .wandering_short
+		_loot_table: default_skeleton
+	}
+
+	entity thalvaron_kareth_skeleton_a: !NPC { _string: "Dustwalker Warrior" _sprite: skeleton_warrior_1 _sprite_dead: skeleton_warrior_1_dead }
+	entity thalvaron_kareth_skeleton_b: !NPC { _string: "Dustwalker Warrior" _sprite: skeleton_warrior_2 _sprite_dead: skeleton_warrior_2_dead }
+	entity thalvaron_kareth_skeleton_c: !NPC { _string: "Dustwalker Warrior" _sprite: skeleton_3 _sprite_dead: skeleton_3_dead }
+	entity thalvaron_kareth_skeleton_d: !NPC { _string: "Dustwalker Warrior" _sprite: skeleton_4 _sprite_dead: skeleton_4_dead }
+}
+
+# Caster skeleton
+{
+
+	${
+		_level: 28
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .wandering_short
+		_loot_table: default_skeleton
+		_abilities: 
+		[ 
+			{ id: npc_frostbolt_no_cooldown }
+			{ id: npc_attack } 
+		]		
+	}
+
+	entity thalvaron_kareth_skeleton_e: !NPC { _string: "Dustwalker Mage" _sprite: skeleton_caster_1 _sprite_dead: skeleton_caster_1_dead }
+}
+
+# Boss skeletons
+{
+	${
+		_level: 29
+		_faction: monsters
+		_creature_type: undead		
+		_loot_table: default_skeleton
+	}
+
+	entity thalvaron_kareth_skeleton_boss: !NPC { _string: "Xildur" _sprite: skeleton_boss_1 _sprite_dead: skeleton_boss_1_dead _default_behavior_state: .passive _resource_health: 2 }
+}

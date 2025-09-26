@@ -846,6 +846,15 @@ sprites:
 	sprite wet_grass_border_17: { }
 	sprite wet_grass_alt_1: { flags: [ tile_walkable ] }
 	sprite wet_grass_alt_2: { flags: [ tile_walkable ] }
+	
+	sprite desert_wall_1: { flags: [ tile_block_line_of_sight tile_top ] }	
+	sprite desert_wall_1_entrance: { flags: [ tile_walkable tile_top ] }
+	sprite desert_wall_1_inside: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite desert_wall_1_start: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite desert_wall_1_end: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite desert_wall_1_alt_1: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite desert_wall_1_alt_2: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite desert_wall_1_entrance_closed: { flags: [ tile_block_line_of_sight tile_top ] }
 
 	cursor: { position: [ 0 416 ] }
 
@@ -876,6 +885,16 @@ sprites:
 	sprite badlands_1_border_17: { }
 	sprite badlands_1_alt_1: { flags: [ tile_walkable ] }
 	sprite badlands_1_alt_2: { flags: [ tile_walkable ] }
+
+	sprite desert_roof_1_nw: { flags: [ tile_indoor ] }
+	sprite desert_roof_1_n: { flags: [ tile_indoor ] }
+	sprite desert_roof_1_ne: { flags: [ tile_indoor ] }
+	sprite desert_roof_1_w: { flags: [ tile_indoor ] }
+	sprite desert_roof_1: { flags: [ tile_indoor ] }
+	sprite desert_roof_1_e: { flags: [ tile_indoor ] }
+	sprite desert_roof_1_sw: { flags: [ tile_indoor ] }
+	sprite desert_roof_1_s: { flags: [ tile_indoor ] }
+	sprite desert_roof_1_se: { flags: [ tile_indoor ] }	
 
 	cursor: { position: [ 0 432 ] }
 

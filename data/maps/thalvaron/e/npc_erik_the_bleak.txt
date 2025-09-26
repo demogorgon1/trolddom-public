@@ -22,3 +22,27 @@ entity thalvaron_erik_the_bleak: !NPC
 	_not_pushable: true	
 	_dialogue_root: $dialogue_root { .erik_the_bleak: { } }
 }
+
+############################################################
+# Quest 1
+
+# FIXME quest
+# kill undead along the edge of the great desert (thalvaron_kareth_skeleton_a thalvaron_kareth_skeleton_b thalvaron_kareth_skeleton_c thalvaron_kareth_skeleton_d thalvaron_kareth_skeleton_e)
+                                                  
+quest .erik_the_bleak_1:                          
+{                                                 
+	level: 28                                     
+}
+
+############################################################
+# Quest 2
+
+# FIXME quest
+# lead to thalvaron_joana
+                                                  
+quest .erik_the_bleak_2:                          
+{                                                 
+	level: 29
+	reward_cash_multiplier: 0.2
+	reward_xp_multiplier: 0.2
+}
