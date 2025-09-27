@@ -10,6 +10,7 @@ dialogue_screen .father_tobias_dialogue:
 		{ quest<completion_only>: .inn_keeper_2 }
 		{ quest: .father_tobias_1 }	
 		{ quest: .father_tobias_2 }	
+		{ quest<completion_only>: thalvaron_joana_2 }
 	]
 }
 
@@ -224,4 +225,16 @@ quest .father_tobias_2:
 	objectives: [ .father_tobias_quest_item_2_a .father_tobias_quest_item_2_b .father_tobias_quest_item_2_c .father_tobias_quest_item_2_d .father_tobias_quest_item_2_e .father_tobias_quest_item_2_f ]
 	prerequisites: [ .father_tobias_1 ]
 	level: 23
+}
+
+############################################################
+# Quest 3
+
+# FIXME quest
+# summon big boss at the temple and kill it
+                                                  
+quest thalvaron_father_tobias_3:                          
+{            
+	prerequisites: [ thalvaron_joana_2 ]
+	level: 30
 }

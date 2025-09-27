@@ -469,6 +469,9 @@ map_entity_spawn thalvaron_ranger_ursa: { entity thalvaron_ranger_ursa: { init_s
 map_entity_spawn thalvaron_captain_ejner: { entity thalvaron_captain_ejner: { init_state: default } }
 map_entity_spawn thalvaron_erik_the_bleak: { entity thalvaron_erik_the_bleak: { init_state: default } } 
 map_entity_spawn thalvaron_joana: { entity thalvaron_joana: { init_state: default } } 
+map_entity_spawn thalvaron_dag_hammerfest: { entity thalvaron_dag_hammerfest: { init_state: default } } 
+map_entity_spawn thalvaron_carla_longton: { entity thalvaron_carla_longton: { init_state: default } } 
+map_entity_spawn thalvaron_urgon_lark: { entity thalvaron_urgon_lark: { init_state: default } } 
 
 map_palette .stuff:
 {
@@ -1054,6 +1057,9 @@ map_palette .stuff:
 	entity_spawn thalvaron_kareth_skeleton: [ 101 181 40 ]
 	entity_spawn thalvaron_joana: [208 184 111 ]
 	entity_spawn thalvaron_kareth_skeleton_boss: [ 201 93 88 ]
+	entity_spawn thalvaron_dag_hammerfest: [ 104 58 199 ]
+	entity_spawn thalvaron_carla_longton: [ 204 158 99 ]
+	entity_spawn thalvaron_urgon_lark: [ 4 58 199 ]
 }
 
 map_palette .levels:

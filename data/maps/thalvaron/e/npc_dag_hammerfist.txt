@@ -1,0 +1,27 @@
+dialogue_screen .dag_hammerfest:
+{
+	text: 
+	[	
+		"If you're heading south, don't forget to bring a drink or two."
+	]		
+	
+	options:
+	[
+	
+	]
+}
+
+entity thalvaron_dag_hammerfest: !NPC
+{
+	_string: "Dag Hammerfest"
+	_sprite: dwarf_23
+	_sprite_dead: dwarf_23_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .dag_hammerfest: { } }
+}
+
+

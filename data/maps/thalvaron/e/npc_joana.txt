@@ -33,3 +33,14 @@ quest .joana_1:
 {                                                 
 	level: 29                                     
 }
+
+############################################################
+# Quest 2
+
+# FIXME quest
+# loot items from the 3 tombs and bring them to father tobias
+                                                  
+quest thalvaron_joana_2:                          
+{                                                 
+	level: 29                                     
+}

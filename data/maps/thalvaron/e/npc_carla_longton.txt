@@ -1,0 +1,14 @@
+dialogue_screen .carla_longton: !TRADE_SUPPLIES{}
+
+entity thalvaron_carla_longton: !NPC
+{
+	_string: "Carla Longton"
+	_sprite: woman_44
+	_sprite_dead: woman_44_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .carla_longton: { } }
+}

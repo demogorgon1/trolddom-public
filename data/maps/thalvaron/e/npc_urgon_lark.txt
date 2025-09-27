@@ -1,0 +1,48 @@
+dialogue_screen .urgon_lark:
+{
+	text: 
+	[	
+		"Maybe one day I'll be a real paladin. Right?"
+	]		
+	
+	options:
+	[
+	
+	]
+}
+
+entity thalvaron_urgon_lark: !NPC
+{
+	_string: "Urgon Lark"
+	_sprite: man_90
+	_sprite_dead: man_90_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .urgon_lark: { } }
+}
+
+############################################################
+# Quest 1
+
+# FIXME quest
+# kill skeletons in eastern_kareth
+                                                  
+quest .urgon_lark_1:                          
+{            
+	level: 29
+}
+
+############################################################
+# Quest 2
+
+# FIXME quest
+# kill skeleton priests in the temple
+                                                  
+quest .urgon_lark_2:                          
+{            
+	prerequisites: [ .urgon_lark_1 ]
+	level: 30
+}
