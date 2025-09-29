@@ -1,3 +1,10 @@
+npc_behavior_state .wandering_long:
+{
+	on_route<thalvaron_default_patrol>: thalvaron_default_patrol
+	behavior: wandering
+	max_range: 4
+}
+
 npc_behavior_state .wandering:
 {
 	on_route<thalvaron_default_patrol>: thalvaron_default_patrol
@@ -68,6 +75,14 @@ map_entity_spawn thalvaron_east_kobold:
 	spawn_timer: !NPC_RESPAWN_NORMAL{} 
 }
 
+map_entity_spawn thalvaron_lonely_cove_kobold: 
+{ 
+	entity thalvaron_lonely_cove_kobold_a: { } 
+	entity thalvaron_lonely_cove_kobold_b: { } 	
+	entity thalvaron_lonely_cove_kobold_c: { } 	
+	spawn_timer: !NPC_RESPAWN_NORMAL{} 
+}
+
 # Kobolds in the cave in the north
 {
 	${
@@ -80,6 +95,21 @@ map_entity_spawn thalvaron_east_kobold:
 
 	entity thalvaron_east_kobold_a: !NPC { _string: "Kobold Digger" _sprite: kobold_1 _sprite_dead: kobold_1_dead _abilities: [ { id: npc_sunder } { id: npc_attack } ] _resource_health: 0.8 }
 	entity thalvaron_east_kobold_b: !NPC { _string: "Kobold Fighter" _sprite: kobold_2 _sprite_dead: kobold_2_dead _abilities: [ { id: npc_attack } ] _weapon_damage: 1.1 }
+}
+
+# Kobolds in the cave in the east by lonely cove
+{
+	${
+		_level: 29
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: default_humanoid
+	}
+
+	entity thalvaron_lonely_cove_kobold_a: !NPC { _string: "Karethi Kobold Brute" _sprite: kobold_3 _sprite_dead: kobold_3_dead _abilities: [ { id: npc_sunder } { id: npc_attack } ] _resource_health: 0.8 }
+	entity thalvaron_lonely_cove_kobold_b: !NPC { _string: "Karethi Kobold Enforcer" _sprite: kobold_4 _sprite_dead: kobold_4_dead _abilities: [ { id: npc_attack } ] _weapon_damage: 1.1 }
+	entity thalvaron_lonely_cove_kobold_c: !NPC { _string: "Karethi Kobold Soothsayer" _sprite: kobold_5 _sprite_dead: kobold_5_dead _abilities: [ { id: npc_heal target: low_health_friend_or_self } { id: npc_frostbolt_no_cooldown } ] _weapon_damage: 0.69 }
 }
 
 ##########################################################################################
@@ -409,6 +439,7 @@ map_entity_spawn thalvaron_urthon_orc_boss: { entity thalvaron_urthon_orc_boss: 
 map_entity_spawn thalvaron_urthon_orc_wolf_wrangler: { entity thalvaron_urthon_orc_wolf_wrangler: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_urthon_orc_wolf: { entity thalvaron_urthon_orc_wolf: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_urthon_orc_boss_2: { entity thalvaron_urthon_orc_boss_2: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_urthon_wild_wolf: { entity thalvaron_urthon_wild_wolf: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 
 map_entity_spawn thalvaron_urthon_orc: 
 { 
@@ -441,12 +472,38 @@ map_entity_spawn thalvaron_urthon_orc:
 	${
 		_level: 28
 		_faction: monsters
-		_creature_type: beast
-		_loot_table: default_wolf
+		_creature_type: beast	
 		_default_behavior_state: .wandering_short
 	}
 
-	entity thalvaron_urthon_orc_wolf: !NPC { _string: "Captive Wolf" _sprite: wolf_3 _sprite_dead: wolf_3_dead }
+	entity thalvaron_urthon_orc_wolf: !NPC { _string: "Captive Wolf" _sprite: wolf_3 _sprite_dead: wolf_3_dead 	_loot_table: default_wolf }
+	
+	entity thalvaron_urthon_wild_wolf: !NPC 
+	{ 
+		_string: "Urthon Wolf" _sprite: wolf_3 _sprite_dead: wolf_3_dead 
+		_loot_table: $loot_table
+		{
+			slots:
+			[	
+				{ 
+					possibility: 
+					{
+						weight: 1
+					}
+				
+					possibility: 
+					{ 
+						weight: 1
+						loot_group: .ulok_ironspear_1_quest_item
+						requirement self<must_have_active_quest>: .ulok_ironspear_1
+					} 
+				}
+				
+				!WORLD_DROPS {}
+				!WORLD_DROPS_WOLVES {}
+			]	
+		}		
+	}
 }
 
 ##########################################################################################
@@ -494,6 +551,25 @@ map_entity_spawn thalvaron_kareth_skeleton_guard:
 
 map_entity_spawn thalvaron_kareth_skeleton_boss: { entity thalvaron_kareth_skeleton_boss: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_kareth_skeleton_priest: { entity thalvaron_kareth_skeleton_priest: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_karethi_scorpion: { entity thalvaron_karethi_scorpion: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+
+loot_table .kareth_skeletons:
+{
+	slots:
+	[	
+		{ 
+			possibility: 
+			{ 
+				weight: 1
+				loot_group: .farmer_farbottom_1_quest_item
+				requirement self<must_have_active_quest>: .farmer_farbottom_1
+			} 
+		}
+		
+		!WORLD_DROPS {}
+		!WORLD_DROPS_SKELETONS {}
+	]	
+}		
 
 # Melee skeleton
 {
@@ -502,7 +578,7 @@ map_entity_spawn thalvaron_kareth_skeleton_priest: { entity thalvaron_kareth_ske
 		_faction: monsters
 		_creature_type: undead
 		_default_behavior_state: .wandering_short
-		_loot_table: default_skeleton
+		_loot_table: .kareth_skeletons
 	}
 
 	entity thalvaron_kareth_skeleton_a: !NPC { _string: "Dustwalker Warrior" _sprite: skeleton_warrior_1 _sprite_dead: skeleton_warrior_1_dead }
@@ -519,7 +595,7 @@ map_entity_spawn thalvaron_kareth_skeleton_priest: { entity thalvaron_kareth_ske
 		_faction: monsters
 		_creature_type: undead
 		_default_behavior_state: .wandering_short
-		_loot_table: default_skeleton
+		_loot_table: .kareth_skeletons
 		_abilities: 
 		[ 
 			{ id: npc_frostbolt_no_cooldown }
@@ -536,7 +612,7 @@ map_entity_spawn thalvaron_kareth_skeleton_priest: { entity thalvaron_kareth_ske
 		_level: 29
 		_faction: monsters
 		_creature_type: undead		
-		_loot_table: default_skeleton
+		_loot_table: .kareth_skeletons
 	}
 
 	entity thalvaron_kareth_skeleton_boss: !NPC { _string: "Xildur" _sprite: skeleton_boss_1 _sprite_dead: skeleton_boss_1_dead _default_behavior_state: .passive _resource_health: 2 }
@@ -550,7 +626,7 @@ map_entity_spawn thalvaron_kareth_skeleton_priest: { entity thalvaron_kareth_ske
 		_faction: monsters
 		_creature_type: undead
 		_default_behavior_state: .wandering_short
-		_loot_table: default_skeleton
+		_loot_table: .kareth_skeletons
 		_abilities: 
 		[ 
 			{ id: npc_curse }
@@ -568,7 +644,7 @@ map_entity_spawn thalvaron_kareth_skeleton_priest: { entity thalvaron_kareth_ske
 		_faction: monsters
 		_creature_type: undead
 		_default_behavior_state: .wandering_short
-		_loot_table: default_skeleton
+		_loot_table: .kareth_skeletons
 		_abilities: 
 		[ 
 			{ id: npc_shoot }
@@ -587,7 +663,7 @@ map_entity_spawn thalvaron_kareth_skeleton_priest: { entity thalvaron_kareth_ske
 		_faction: monsters
 		_creature_type: undead
 		_default_behavior_state: .wandering_short
-		_loot_table: default_skeleton
+		_loot_table: .kareth_skeletons
 		_abilities: 
 		[ 
 			{ id: npc_sunder }
@@ -597,6 +673,38 @@ map_entity_spawn thalvaron_kareth_skeleton_priest: { entity thalvaron_kareth_ske
 
 	entity thalvaron_kareth_skeleton_guard_29: !NPC { _string: "Temple Guard" _sprite: skeleton_11 _sprite_dead: skeleton_11_dead _level: 29 }
 	entity thalvaron_kareth_skeleton_guard_30: !NPC { _string: "Temple Guard" _sprite: skeleton_11 _sprite_dead: skeleton_11_dead _level: 30 }
+}
+
+# Scorpions
+{
+	${		
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_long
+		_loot_table: $loot_table
+		{
+			slots:
+			[	
+				{ 
+					possibility: 
+					{
+						weight: 1
+					}
+				
+					possibility: 
+					{ 
+						weight: 1
+						loot_group: .ulok_ironspear_2_quest_item
+						requirement self<must_have_active_quest>: .ulok_ironspear_2
+					} 
+				}
+				
+				!WORLD_DROPS {}
+			]	
+		}		
+	}
+
+	entity thalvaron_karethi_scorpion: !NPC { _level: 29 _string: "Karethi Scorpion" _sprite: scorpion_1 _sprite_dead: scorpion_1_dead }
 }
 
 ##########################################################################################

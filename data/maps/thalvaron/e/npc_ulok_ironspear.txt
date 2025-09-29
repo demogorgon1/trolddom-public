@@ -7,6 +7,8 @@ dialogue_screen .ulok_ironspear:
 	
 	options:
 	[
+		{ quest: .ulok_ironspear_1 }
+		{ quest: .ulok_ironspear_2 }
 	]
 }
 
@@ -25,3 +27,104 @@ entity thalvaron_ulok_ironspear: !NPC
 
 ############################################################
 # Quest 1
+
+loot_group .ulok_ironspear_1_quest_item: { }
+
+item .ulok_ironspear_1_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .ulok_ironspear_1_quest_item ]		
+	string: "Pristine Wolf Tooth" 
+	icon: icon_sharp_tooth
+	stack: 5
+	item_level: 28
+	quest: .ulok_ironspear_1
+	flags: [ not_sellable ]
+}
+
+objective .ulok_ironspear_1:
+{
+	string: "Pristine Wolf Teeth"
+	collect_items: { item: .ulok_ironspear_1_quest_item count: 5 }
+}
+
+quest .ulok_ironspear_1:
+{
+	string: "Advanced Alchemy Ingredients"
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+	
+	completion:
+	[
+		"."
+	]
+	
+	progress:
+	[
+		"Huh? Cold feet?"
+	]
+
+	level: 28
+	objectives: [ .ulok_ironspear_1 ]
+	next_quest: .ulok_ironspear_2
+}
+
+############################################################
+# Quest 2
+
+loot_group .ulok_ironspear_2_quest_item: { }
+
+item .ulok_ironspear_2_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .ulok_ironspear_2_quest_item ]		
+	string: "Karethi Stinger" 
+	icon: icon_stinger_2
+	stack: 5
+	item_level: 29
+	quest: .ulok_ironspear_2
+	flags: [ not_sellable ]
+}
+
+objective .ulok_ironspear_2:
+{
+	string: "Karethi Stingers"
+	collect_items: { item: .ulok_ironspear_2_quest_item count: 5 }
+}
+
+quest .ulok_ironspear_2:
+{
+	string: "Exotic Poisons"
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+	
+	completion:
+	[
+		"."
+	]
+	
+	progress:
+	[
+		"Do you have anything for me?"
+	]
+
+	level: 29
+	objectives: [ .ulok_ironspear_2 ]
+	prerequisites: [ .ulok_ironspear_1 ]
+}

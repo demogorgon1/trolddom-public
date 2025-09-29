@@ -133,6 +133,7 @@ zone .karethi_temple: { string: "Karethi Temple" }
 zone .tomb_of_kralir: { string: "Tomb of Kralir" }
 zone .tomb_of_jurgorth: { string: "Tomb of Jurgorth" }
 zone .tomb_of_the_last_king: { string: "Tomb of the Last King" }
+zone .lonely_cove: { string: "Lonely Cove" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -472,6 +473,7 @@ map_entity_spawn thalvaron_joana: { entity thalvaron_joana: { init_state: defaul
 map_entity_spawn thalvaron_dag_hammerfest: { entity thalvaron_dag_hammerfest: { init_state: default } } 
 map_entity_spawn thalvaron_carla_longton: { entity thalvaron_carla_longton: { init_state: default } } 
 map_entity_spawn thalvaron_urgon_lark: { entity thalvaron_urgon_lark: { init_state: default } } 
+map_entity_spawn thalvaron_farmer_farbottom: { entity thalvaron_farmer_farbottom: { init_state: default } } 
 
 map_palette .stuff:
 {
@@ -1068,6 +1070,10 @@ map_palette .stuff:
 	entity_spawn thalvaron_kareth_tomb_1: [ 94 89 105 ]
 	entity_spawn thalvaron_kareth_tomb_2: [ 194 89 105 ]
 	entity_spawn thalvaron_kareth_tomb_3: [ 94 189 105 ]
+	entity_spawn thalvaron_karethi_scorpion: [ 66 81 87 ]
+	entity_spawn thalvaron_urthon_wild_wolf: [ 166 181 187 ]
+	entity_spawn thalvaron_farmer_farbottom: [ 50 161 188 ]
+	entity_spawn thalvaron_lonely_cove_kobold: [ 105 71 203 ]
 }
 
 map_palette .levels:
@@ -1180,6 +1186,7 @@ map_palette .zones:
 	zone .balidor: [ 139 248 22 ]
 	zone .ashira: [ 233 131 36 ]
 	zone .karethi_temple: [ 152 21 127 ]
+	zone .lonely_cove: [ 10 60 121 ]
 }
 
 map_palette .sub_zones:

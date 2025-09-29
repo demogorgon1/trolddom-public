@@ -2,7 +2,7 @@ dialogue_screen .grim_ironspear:
 {
 	text: 
 	[	
-		"Get in! The water is amazing!"
+		"Yeah?"
 	]		
 	
 	options:
@@ -23,7 +23,4 @@ entity thalvaron_grim_ironspear: !NPC
 	_not_pushable: true	
 	_dialogue_root: $dialogue_root { .grim_ironspear: { } }
 }
-
-############################################################
-# Quest 1
 

@@ -24,4 +24,26 @@ entity thalvaron_dag_hammerfest: !NPC
 	_dialogue_root: $dialogue_root { .dag_hammerfest: { } }
 }
 
+############################################################
+# Quest 1
+
+# FIXME quest
+# kill thalvaros_stalker_1
+
+quest .dag_hammerfest_1:
+{
+	level: 29
+}
+
+############################################################
+# Quest 2
+
+# FIXME quest
+# kill thalvaros_stalker_2
+
+quest .dag_hammerfest_2:
+{
+	prerequisites: [ .dag_hammerfest_1 ]
+	level: 30
+}
 

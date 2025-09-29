@@ -848,6 +848,7 @@ sprites:
 	sprite icon_elemental_destruction : { tags: [ icon ] }
 	sprite icon_key_2 : { tags: [ icon ] }
 	sprite icon_bone_2 : { tags: [ icon ] }
+	sprite icon_stinger_2 : { tags: [ icon ] }
 }
 
 

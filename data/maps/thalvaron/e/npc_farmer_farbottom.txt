@@ -1,0 +1,89 @@
+dialogue_screen .farmer_farbottom:
+{
+	text: 
+	[	
+		"Ah, a visitor! How exciting!"
+	]		
+	
+	options:
+	[
+		{ quest: .farmer_farbottom_1 }
+		{ quest: .farmer_farbottom_2 }
+	]
+}
+
+entity thalvaron_farmer_farbottom: !NPC
+{
+	_string: "Farmer Farbottom"
+	_sprite: man_6
+	_sprite_dead: man_6_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .farmer_farbottom: { } }
+}
+
+############################################################
+# Quest 1
+
+loot_group .farmer_farbottom_1_quest_item: { }
+
+item .farmer_farbottom_1_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .farmer_farbottom_1_quest_item ]		
+	string: "Very Dry Bones" 
+	icon: icon_bone_2
+	stack: 8
+	item_level: 29
+	quest: .farmer_farbottom_1
+	flags: [ not_sellable ]
+}
+
+objective .farmer_farbottom_1:
+{
+	string: "Very Dry Bones"
+	collect_items: { item: .farmer_farbottom_1_quest_item count: 8 }
+}
+
+quest .farmer_farbottom_1:
+{
+	string: "Undead Fertilizer"
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+	
+	completion:
+	[
+		"."
+	]
+	
+	progress:
+	[
+		"Hello!"
+	]
+
+	level: 29
+	objectives: [ .farmer_farbottom_1 ]
+}
+
+############################################################
+# Quest 2
+
+# FIXME quest
+# kill thalvaron_lonely_cove_kobold_a thalvaron_lonely_cove_kobold_b thalvaron_lonely_cove_kobold_c
+                                                  
+quest .farmer_farbottom_2:                          
+{                                                 
+	level: 29
+}
+
