@@ -1065,6 +1065,9 @@ map_palette .stuff:
 	entity_spawn thalvaron_kareth_skeleton_archer: [ 140 98 247 ]
 	entity_spawn thalvaron_kareth_stalker_small: [ 240 98 247 ]
 	entity_spawn thalvaron_kareth_stalker_large: [ 140 198 247 ]
+	entity_spawn thalvaron_kareth_tomb_1: [ 94 89 105 ]
+	entity_spawn thalvaron_kareth_tomb_2: [ 194 89 105 ]
+	entity_spawn thalvaron_kareth_tomb_3: [ 94 189 105 ]
 }
 
 map_palette .levels:

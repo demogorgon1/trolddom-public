@@ -1000,9 +1000,15 @@ sprites:
 	
 	cursor: { position: [ 0 864 ] }
 	sprite stalker_2: { dead: stalker_2_dead }
+	sprite zombie_5: { dead: zombie_5_dead }
+	sprite zombie_6: { dead: zombie_6_dead }
+	sprite zombie_7: { dead: zombie_7_dead }
 	
 	cursor: { position: [ 0 880 ] }
 	sprite stalker_2_dead: { }		
+	sprite zombie_5_dead: { }		
+	sprite zombie_6_dead: { }		
+	sprite zombie_7_dead: { }		
 }
 
 sprites:
@@ -1216,6 +1222,9 @@ sprites:
 	sprite crystal_4: { }
 	sprite loot_1: { }
 	sprite loot_2: { }
+
+	cursor: { position: [ 0 128 ] }
+	sprite tomb_1: { }
 		
 }
 

@@ -7,6 +7,7 @@ dialogue_screen .joana:
 	
 	options:
 	[
+		{ quest<offer_only>: thalvaron_joana_2 }
 	]
 }
 
@@ -39,8 +40,82 @@ quest .joana_1:
 
 # FIXME quest
 # loot items from the 3 tombs and bring them to father tobias
-                                                  
-quest thalvaron_joana_2:                          
-{                                                 
-	level: 29                                     
+                                              
+loot_group .joana_2_quest_item_1: {}
+loot_group .joana_2_quest_item_2: {}
+loot_group .joana_2_quest_item_3: {}
+
+item .joana_2_quest_item_1:
+{
+	icon: icon_orb_1
+	item_level: 29
+	loot_groups: [ .joana_2_quest_item_1 ]
+	flags: [ not_sellable unique ]
+	string: "Orb of Kralir"
+}
+
+item .joana_2_quest_item_2:
+{
+	icon: icon_orb_1
+	item_level: 29
+	loot_groups: [ .joana_2_quest_item_2 ]
+	flags: [ not_sellable unique ]
+	string: "Orb of Jurgorth"
+}
+
+
+item .joana_2_quest_item_3:
+{
+	icon: icon_orb_1
+	item_level: 29
+	loot_groups: [ .joana_2_quest_item_3 ]
+	flags: [ not_sellable unique ]
+	string: "Orb of the Last King"
+}
+
+objective .joana_2_a:
+{
+	string: "Orb of Kralir"
+	collect_items: { item: .joana_2_quest_item_1 count: 1 }
+}
+
+objective .joana_2_b:
+{
+	string: "Orb of Jurgorth"
+	collect_items: { item: .joana_2_quest_item_2 count: 1 }
+}
+
+objective .joana_2_c:
+{
+	string: "Orb of the Last King"
+	collect_items: { item: .joana_2_quest_item_3 count: 1 }
+}
+
+quest thalvaron_joana_2:
+{
+	string: "Investigating the Tombs"
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+	
+	completion:
+	[
+		"."
+	]
+	
+	progress:
+	[
+		"Any progress?"
+	]
+
+	level: 29
+	objectives: [ .joana_2_a .joana_2_b .joana_2_c ]	
+	#prerequisites: [ gateway_world_quest_1 ]
 }
