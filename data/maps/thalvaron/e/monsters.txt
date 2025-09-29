@@ -478,7 +478,22 @@ map_entity_spawn thalvaron_kareth_skeleton:
 	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
+map_entity_spawn thalvaron_kareth_skeleton_archer: 
+{ 
+	entity thalvaron_kareth_skeleton_archer_29: { level: 29 } 
+	entity thalvaron_kareth_skeleton_archer_30: { level: 30 } 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_kareth_skeleton_guard: 
+{ 
+	entity thalvaron_kareth_skeleton_guard_29: { level: 29 } 
+	entity thalvaron_kareth_skeleton_guard_30: { level: 30 } 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
 map_entity_spawn thalvaron_kareth_skeleton_boss: { entity thalvaron_kareth_skeleton_boss: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_kareth_skeleton_priest: { entity thalvaron_kareth_skeleton_priest: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 
 # Melee skeleton
 {
@@ -526,3 +541,85 @@ map_entity_spawn thalvaron_kareth_skeleton_boss: { entity thalvaron_kareth_skele
 
 	entity thalvaron_kareth_skeleton_boss: !NPC { _string: "Xildur" _sprite: skeleton_boss_1 _sprite_dead: skeleton_boss_1_dead _default_behavior_state: .passive _resource_health: 2 }
 }
+
+# Priest skeleton
+{
+
+	${
+		_level: 30
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .wandering_short
+		_loot_table: default_skeleton
+		_abilities: 
+		[ 
+			{ id: npc_curse }
+			{ id: npc_attack } 
+		]		
+	}
+
+	entity thalvaron_kareth_skeleton_priest: !NPC { _string: "Priest of Karethi" _sprite: skeleton_caster_5 _sprite_dead: skeleton_caster_5_dead }
+}
+
+# Skeletal Archers
+{
+
+	${
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .wandering_short
+		_loot_table: default_skeleton
+		_abilities: 
+		[ 
+			{ id: npc_shoot }
+			{ id: npc_attack } 
+		]		
+	}
+
+	entity thalvaron_kareth_skeleton_archer_29: !NPC { _string: "Dustwalker Archer" _sprite: skeleton_12 _sprite_dead: skeleton_12_dead _level: 29 }
+	entity thalvaron_kareth_skeleton_archer_30: !NPC { _string: "Dustwalker Archer" _sprite: skeleton_12 _sprite_dead: skeleton_12_dead _level: 30 }
+}
+
+# Skeletal guards
+{
+
+	${
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .wandering_short
+		_loot_table: default_skeleton
+		_abilities: 
+		[ 
+			{ id: npc_sunder }
+			{ id: npc_attack } 
+		]		
+	}
+
+	entity thalvaron_kareth_skeleton_guard_29: !NPC { _string: "Temple Guard" _sprite: skeleton_11 _sprite_dead: skeleton_11_dead _level: 29 }
+	entity thalvaron_kareth_skeleton_guard_30: !NPC { _string: "Temple Guard" _sprite: skeleton_11 _sprite_dead: skeleton_11_dead _level: 30 }
+}
+
+##########################################################################################
+# Stalkers
+
+map_entity_spawn thalvaron_kareth_stalker_small: { entity thalvaron_kareth_stalker_small: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_kareth_stalker_large: { entity thalvaron_kareth_stalker_large: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+
+{
+
+	${
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: default_humanoid
+		_abilities: 
+		[ 
+			{ id: npc_charge_rend }			
+			{ id: npc_attack } 
+		]		
+	}
+
+	entity thalvaron_kareth_stalker_small: !NPC { _string: "Sand Stalker Fledgeling" _sprite: stalker_1 _sprite_dead: stalker_1_dead _level: 29 }
+	entity thalvaron_kareth_stalker_large: !NPC { _string: "Sand Stalker Brute" _sprite: stalker_2 _sprite_dead: stalker_2_dead _level: 30 }
+}
+

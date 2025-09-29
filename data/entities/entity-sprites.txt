@@ -975,9 +975,10 @@ sprites:
 	sprite dwarf_23: { dead: dwarf_23_dead }
 	sprite woman_44: { dead: woman_44_dead }
 	sprite man_90: { dead: man_90_dead }
-	sprite skeleton_caster_4: { dead: skeleton_caster_4_dead }
+	sprite skeleton_caster_5: { dead: skeleton_caster_5_dead }
 	sprite skeleton_11: { dead: skeleton_11_dead }
 	sprite skeleton_12: { dead: skeleton_12_dead }
+	sprite stalker_1: { dead: stalker_1_dead }
 
 	cursor: { position: [ 0 848 ] }
 	sprite lizard_man_1_dead: { }	
@@ -992,9 +993,16 @@ sprites:
 	sprite dwarf_23_dead: { }	
 	sprite woman_44_dead: { }	
 	sprite man_90_dead: { }	
-	sprite skeleton_caster_4: { }	
+	sprite skeleton_caster_5_dead: { }	
 	sprite skeleton_11_dead: { }	
 	sprite skeleton_12_dead: { }		
+	sprite stalker_1_dead: { }		
+	
+	cursor: { position: [ 0 864 ] }
+	sprite stalker_2: { dead: stalker_2_dead }
+	
+	cursor: { position: [ 0 880 ] }
+	sprite stalker_2_dead: { }		
 }
 
 sprites:

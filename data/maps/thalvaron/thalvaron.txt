@@ -1060,6 +1060,11 @@ map_palette .stuff:
 	entity_spawn thalvaron_dag_hammerfest: [ 104 58 199 ]
 	entity_spawn thalvaron_carla_longton: [ 204 158 99 ]
 	entity_spawn thalvaron_urgon_lark: [ 4 58 199 ]
+	entity_spawn thalvaron_kareth_skeleton_priest: [ 40 98 47 ]
+	entity_spawn thalvaron_kareth_skeleton_guard: [ 140 98 47 ]
+	entity_spawn thalvaron_kareth_skeleton_archer: [ 140 98 247 ]
+	entity_spawn thalvaron_kareth_stalker_small: [ 240 98 247 ]
+	entity_spawn thalvaron_kareth_stalker_large: [ 140 198 247 ]
 }
 
 map_palette .levels:
@@ -1402,4 +1407,5 @@ map thalvaron:
 	]
 }
  
+
 
