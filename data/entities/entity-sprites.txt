@@ -1230,6 +1230,7 @@ sprites:
 	cursor: { position: [ 0 128 ] }
 	sprite tomb_1: { }
 	sprite sand_orchid: { }
+	sprite mushroom_3: { }
 		
 }
 

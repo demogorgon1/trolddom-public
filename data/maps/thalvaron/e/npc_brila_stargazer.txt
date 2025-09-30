@@ -7,6 +7,9 @@ dialogue_screen .brila_stargazer:
 	
 	options:
 	[
+		{ quest<completion_only>: .troels_ronson_1 }
+		{ quest: .brila_stargazer_1 }
+		{ quest<offer_only>: .brila_stargazer_2 }
 	]
 }
 
@@ -26,22 +29,149 @@ entity thalvaron_brila_stargazer: !NPC
 ############################################################
 # Quest 1
 
-# FIXME quest
-# collect enchanted cave mushrooms from cave lake
-# collect swamp monsters goo
+loot_group .brila_stargazer_1_quest_item_2: {}
+
+item .brila_stargazer_1_quest_item_2:
+{
+	icon: icon_slime_1
+	item_level: 27
+	loot_groups: [ .brila_stargazer_1_quest_item_2 ]
+	flags: [ not_sellable ]
+	string: "Swamp Goo"
+	quest: .brila_stargazer_1
+	stack: 5
+}
+
+loot_group .brila_stargazer_1_quest_item: {}
+
+item .brila_stargazer_1_quest_item:
+{
+	icon: icon_mushroom_3
+	item_level: 27
+	loot_groups: [ .brila_stargazer_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Enchanted Cave Mushroom"
+	quest: .brila_stargazer_1
+	stack: 3
+}
+
+loot_table .brila_stargazer_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .brila_stargazer_1_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_brila_stargazer_1_quest_item:
+{
+	string: "Enchanted Cave Mushroom"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ mushroom_3 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .brila_stargazer_1_quest_item
+			verb: pick_up
+			range: 1 
+			level: 27
+			despawn: true 		
+			required_quest: .brila_stargazer_1
+		}		
+	}
+}
+
+objective .brila_stargazer_1_a:
+{
+	string: "Enchanted Cave Mushrooms"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .brila_stargazer_1_quest_item count: 3 }
+}
+
+objective .brila_stargazer_1_b:
+{
+	string: "Swamp Goo"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .brila_stargazer_1_quest_item_2 count: 5 }
+}
 
 quest .brila_stargazer_1:
 {
+	string: "Special Jungle Brew"
+
+	text:
+	[
+		"Get mushrooms from the underground lake to the west, swamp goo from monsters of the Verdant Mire, and return to Brila Stargazer."
+	]
+	
+	description: 
+	[
+		"If you want to save Mr. Ronson you'll need to gather some ingredients for me. You seem like a capable adventurer so it might not be impossible."
+		"First of all I need"
+		"some special mushrooms that only grow by an underground lake in a cave to the west of here. You'll find the entrance deep in the jungle, so good luck with that. Also, south of here is the Verdant Mire. A"
+		"really horrible swamp crawling with monsters. These monsters are covered in a very interesting goo that is essential for the brew.\n"
+		"\n"
+		"How about that?"
+	]
+
+	progress:
+	[
+		"Tick, tock, the man's bones are melting."
+	]
+	
+	completion:
+	[
+		"Ah, that should work."
+	]
+
+	objectives: [ .brila_stargazer_1_a .brila_stargazer_1_b ]
 	level: 27
+	prerequisites: [ .troels_ronson_1 ]
 }
 
 ############################################################
 # Quest 2
 
-# FIXME quest
-# deliver elixir to npc_troels_ronson
+item .brila_stargazer_2_quest_item:
+{
+	icon: icon_bottle_2
+	item_level: 27
+	flags: [ not_sellable unique ]
+	string: "Jungle Brew"
+	flavor: "You should probably not drink this unless your bones are melting."
+	quest: .brila_stargazer_2
+}
 
 quest .brila_stargazer_2:
 {
+	string: "Delivery to Mr. Ronson"
+
+	text:
+	[
+		"Deliver the potion to Troels Ronson to save his life."
+	]
+	
+	description: 
+	[
+		"I've successfully brewed a potion for you to take you to Troels Ronson. He should drink it as soon as possible, otherwise he's unlikely to survive."
+	]
+
+
+	completion:
+	[
+		"Oh, you came back! I've been blessed by the gods! Please, let me have it!"
+	]
+
 	level: 27
+	prerequisites: [ .brila_stargazer_1 ]
+	quest_items: [ .brila_stargazer_2_quest_item ]
 }

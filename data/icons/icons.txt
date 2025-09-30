@@ -854,6 +854,8 @@ sprites:
 	sprite icon_pony : { tags: [ icon ] }
 	sprite icon_bottle_1 : { tags: [ icon ] }
 	sprite icon_map_1 : { tags: [ icon ] }
+	sprite icon_mushroom_3 : { tags: [ icon ] }
+	sprite icon_bottle_2 : { tags: [ icon ] }
 }
 
 

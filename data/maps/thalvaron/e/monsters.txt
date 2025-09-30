@@ -175,11 +175,25 @@ map_entity_spawn thalvaron_mirefiend:
 
 # Swamp monsters
 {
+	loot_table .swamp_monster: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { weight: 1 }
+				possibility: { weight: 1 loot_group: .brila_stargazer_1_quest_item_2 requirement self<must_have_active_quest>: { id: .brila_stargazer_1 } } 
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_NATURE_ELEMENTALS{}
+		]	
+	}
+	
 	${
 		_level: 27
 		_faction: monsters
 		_creature_type: elemental
-		_loot_table: default_nature_elemental
+		_loot_table: .swamp_monster
 		_default_behavior_state: .wandering_short
 	}
 

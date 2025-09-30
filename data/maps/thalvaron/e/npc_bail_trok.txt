@@ -9,6 +9,8 @@ dialogue_screen .bail_trok:
 	
 	options:
 	[
+		{ quest: .bail_trok_1 }
+		{ quest<offer_only>: thalvaron_bail_trok_2 }
 		{ text: "Let me browse your goods." goto: $dialogue_screen !TRADE_SUPPLIES{} }
 	]
 }
@@ -40,11 +42,122 @@ entity thalvaron_bail_trok_mount: !NPC
 
 ############################################################
 # Quest 1
+           
+loot_group .bail_trok_1_quest_item: {}
 
-# FIXME quest
-# collect ancient artifacts from Balidor
-                                                  
-quest .bail_trok_1:                          
-{                                                 
+item .bail_trok_1_quest_item:
+{
+	icon: icon_tablet_1
+	item_level: 29
+	loot_groups: [ .bail_trok_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Dusty Artifact"
+	quest: .bail_trok_1
+	stack: 6
+}
+
+loot_table .bail_trok_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .bail_trok_1_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_bail_trok_1_quest_item:
+{
+	string: "Dusty Artifact"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ junk_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .bail_trok_1_quest_item
+			verb: pick_up
+			range: 1 
+			level: 29
+			despawn: true 		
+			required_quest: .bail_trok_1
+		}		
+	}
+}
+
+objective .bail_trok_1:
+{
+	string: "Dusty Artifacts"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .bail_trok_1_quest_item count: 6 }
+}
+
+quest .bail_trok_1:
+{
+	string: "Ancient Junk"
+
+	text:
+	[
+		"Find artifacts in and around Balidor to the west."
+	]
+	
+	description: 
+	[
+		"Out west, by the sea, is an ancient abandoned village, going by the name of Balidor. Nobody has lived there for a very long time and now it is crawling with the undead. I have a client who"
+		"is quite interested in that area, though. Apparently it should be littered with ancient artifacts. How about you go there and retrieve some for me?"
+	]
+
+	progress:
+	[
+		"How is it going? Seen any spooky skeletons?"
+	]
+	
+	completion:
+	[
+		"Well, that looks about right."
+	]
+
+	objectives: [ .bail_trok_1 ]
+	level: 29
+}
+
+############################################################
+# Quest 2
+
+item .bail_trok_2_quest_item:
+{
+	icon: icon_brown_bag_2
+	item_level: 29
+	flags: [ not_sellable unique ]
+	string: "Bag of Dusty Junk"
+	quest: thalvaron_bail_trok_2
+}
+
+quest thalvaron_bail_trok_2:
+{
+	string: "Delivery to Valoris"
+
+	text:
+	[
+		"Deliver the artifacts to Clara Hawthorne in the Royal District of Valoris."
+	]
+	
+	description: 
+	[
+		"Well, the client I spoke of is Clara Hawthorne. She lives in the Royal District of Valoris. The artifacts you collected were requested by her. If you can, please deliver this bundle to her next time you"
+		"go to Valoris."
+	]
+
+	completion:
+	[
+		"How wonderful! You come all the way from the ancient ruins of Balidor?"
+	]
+
+	quest_items: [ .bail_trok_2_quest_item ]
+	prerequisites: [ .bail_trok_1 ]
 	level: 29
 }
