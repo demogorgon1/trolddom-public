@@ -1,4 +1,4 @@
-dialogue_screen .rod_gambil_vendor: { !TRADE_SUPPLIES {} sell recipe_herbed_snapper: { quantity: 1 cost: 50000 } }
+dialogue_screen .rod_gambil_vendor: { !TRADE_SUPPLIES {} sell recipe_herbed_snapper: { quantity: 1 cost: 50000 } sell consumable_bottle_of_rum: { quantity: 1 cost: 4100 } }
 
 dialogue_screen .rod_gambil:
 {
@@ -206,3 +206,4 @@ quest .rod_gambil_3:
 	reward_xp_multiplier: 0.2
 	reward_cash_multiplier: 0.2
 }
+

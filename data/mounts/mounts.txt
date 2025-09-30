@@ -12,6 +12,7 @@
 	{
 		sprite: @_sprite
 		walk_sprites: @_walk_sprites
+		<exists _y_offset> y_offset: @_y_offset
 	}
 
 	!define local MOUNT_AURA
@@ -158,5 +159,27 @@
 	ability gray_horse: !MOUNT_ABILITY{}
 	entity gray_horse: !MOUNT_ENTITY{ _wandering: true }
 	item mount_gray_horse: !MOUNT_ITEM{}
+
+	###############################################################################
+	# Pony
+
+	${
+		_string: "Pony"
+		_description: "Summons or dismisses a rideable pony."
+		_icon: icon_pony
+		_id: pony
+		_sprite: pony_0
+		_walk_sprites: [ pony_1 pony_0 pony_2 pony_0 ]
+		_creature_type: beast
+		_cost: 300000
+		_level: 20	
+		_y_offset: 1
+	}
+
+	mount pony: !MOUNT{}
+	aura pony: !MOUNT_AURA{}
+	ability pony: !MOUNT_ABILITY{}
+	entity pony: !MOUNT_ENTITY{ _wandering: false }
+	item mount_pony: !MOUNT_ITEM{}
 
 }

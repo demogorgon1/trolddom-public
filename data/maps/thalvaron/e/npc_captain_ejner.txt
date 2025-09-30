@@ -2,11 +2,13 @@ dialogue_screen .captain_ejner:
 {
 	text: 
 	[	
-		"Wipe your feet first if you're planning on getting on my boat."
+		"Yarh."
 	]		
 	
 	options:
 	[
+		{ quest: .captain_ejner_1 }
+		{ quest: .captain_ejner_2 }		
 	]
 }
 
@@ -26,10 +28,126 @@ entity thalvaron_captain_ejner: !NPC
 ############################################################
 # Quest 1
 
-# FIXME quest
-# get bottle of rum from thalvaron_rod_gambil
-
-quest thalvaron_captain_ejner_1:
+objective .captain_ejner_1:
 {
+	string: "Bottle of Rum"
+	maps: [ thalvaron ]
+	collect_items: { item: consumable_bottle_of_rum count: 1 }	
+}
+
+quest .captain_ejner_1:
+{
+	string: "Pirate Supplies"
+
+	text:
+	[
+		"Buy a drink from Rod Gambil in the Howling Pass to the north and return it to Captain Ejner."
+	]
+	
+	description: 
+	[
+		"I might have some business for you, but I can't think straight. I need a drink. My old friend Rod Gambil sells some fairly decent rum. Bring me some and I might talk to you. He has a shop up north"
+		"in the Howling Pass."
+	]
+	
+	completion:
+	[
+		"Oh I see what you got there, give it to me. Quickly!"
+	]
+	
+	progress:
+	[
+		"Yarh?"
+	]
+
 	level: 28
+	reward_cash_multiplier: 0.38
+	reward_xp_multiplier: 0.38
+	objectives: [ .captain_ejner_1 ]
+	next_quest: .captain_ejner_2
+}
+
+############################################################
+# Quest 2
+
+objective .captain_ejner_2:
+{
+	string: "Treasure"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .captain_ejner_2_quest_item count: 1 }
+}
+
+loot_group .captain_ejner_2_quest_item: {}
+
+item .captain_ejner_2_quest_item:
+{
+	icon: icon_box
+	item_level: 29
+	loot_groups: [ .captain_ejner_2_quest_item ]
+	flags: [ unique not_sellable ]
+	string: "Treasure"
+	flavor: "Seems like the box is empty."
+}
+
+loot_table .captain_ejner_2_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .captain_ejner_2_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_captain_ejner_2_quest_item:
+{
+	string: "Lost Treasure"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ chest_2 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .captain_ejner_2_quest_item
+			verb: open
+			range: 1 
+			level: 29
+			despawn: true 		
+			required_quest: .captain_ejner_2
+		}		
+	}
+}
+
+quest .captain_ejner_2:
+{
+	string: "Lost Treasure"
+
+	text:
+	[
+		"Recover the lost treasure of Captain Ejner and return it to him."
+	]
+	
+	description: 
+	[
+		"My brain feels a bit clearer now after a little drink. Let me see... Yes... I might have buried a treasure around here somewhere. I need you to help me find it. It's on the beach somewhere. Return it"
+		"to me and I'll make it worth your while."
+	]
+	
+	completion:
+	[
+		"Ah, yes! Excellent!"
+	]
+	
+	progress:
+	[
+		"You found it yet?"
+	]
+
+	level: 29
+	objectives: [ .captain_ejner_2 ]
+	prerequisites: [ .captain_ejner_1 ]
 }

@@ -475,6 +475,9 @@ map_entity_spawn thalvaron_carla_longton: { entity thalvaron_carla_longton: { in
 map_entity_spawn thalvaron_urgon_lark: { entity thalvaron_urgon_lark: { init_state: default } } 
 map_entity_spawn thalvaron_farmer_farbottom: { entity thalvaron_farmer_farbottom: { init_state: default } } 
 map_entity_spawn thalvaron_zizlo: { entity thalvaron_zizlo: { init_state: default } } 
+map_entity_spawn thalvaron_bail_trok: { entity thalvaron_bail_trok: { init_state: default } } 
+map_entity_spawn thalvaron_bail_trok_mount: { entity thalvaron_bail_trok_mount: { init_state: default } } 
+map_entity_spawn thalvaron_captain_ejner_2_quest_item: { entity thalvaron_captain_ejner_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 
 map_palette .stuff:
 {
@@ -1077,6 +1080,9 @@ map_palette .stuff:
 	entity_spawn thalvaron_lonely_cove_kobold: [ 105 71 203 ]
 	entity_spawn thalvaron_zizlo: [ 205 71 203 ]
 	entity_spawn thalvaron_desert_crocodile: [ 101 84 127 ]
+	entity_spawn thalvaron_bail_trok: [ 29 105 195 ]
+	entity_spawn thalvaron_bail_trok_mount: [ 29 205 95 ]
+	entity_spawn thalvaron_captain_ejner_2_quest_item: [ 129 104 88 ]
 }
 
 map_palette .levels:

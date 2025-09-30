@@ -382,7 +382,7 @@ aura consumable_durgan_ale (elixir):
 
 ability consumable_durgan_ale (elixir): 	
 {
-	string: "Ironbrew Stout"
+	string: "Durgan Ale"
 	description: "Increases your Constitution by 1 and decreases your Dexterity by 1 for 20 minutes. You can only have the effect of one elixir at a time."
 	icon: icon_mug_2
 	direct_effect apply_aura: { aura: consumable_durgan_ale }
@@ -396,6 +396,36 @@ item consumable_durgan_ale (elixir):
 	icon: icon_mug_2
 	string: "Durgan Ale"
 	use_ability: consumable_durgan_ale
+}
+
+#####################################################
+# Bottle of Rum
+
+aura consumable_bottle_of_rum (elixir):
+{
+	string: "Bottle of Rum"
+	icon: icon_bottle_1
+	duration: 12000
+	stat_modifiers: { constitution: { add: 10 } dexterity: { add: -10 } }
+}
+
+ability consumable_bottle_of_rum (elixir): 	
+{
+	string: "Bottle of Rum"
+	description: "Increases your Constitution by 10 and decreases your Dexterity by 10 for 20 minutes. You can only have the effect of one elixir at a time."
+	icon: icon_bottle_1
+	direct_effect apply_aura: { aura: consumable_bottle_of_rum }
+	consume_items: { consumable_bottle_of_rum: 1 }
+	required_level: 20
+}
+
+item consumable_bottle_of_rum (elixir):
+{
+	binds: when_picked_up
+	icon: icon_bottle_1
+	flavor: "Pirate-grade."
+	string: "Bottle of Rum"
+	use_ability: consumable_bottle_of_rum
 }
 
 #####################################################

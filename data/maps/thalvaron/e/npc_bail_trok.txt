@@ -1,0 +1,50 @@
+dialogue_screen .bail_trok:
+{
+	text: 
+	[	
+		"What brings you here, traveler?\n"
+		"\n"
+		"Further south of here you'll find the road that once led to Ashira, but the bridges have been destroyed."
+	]		
+	
+	options:
+	[
+		{ text: "Let me browse your goods." goto: $dialogue_screen !TRADE_SUPPLIES{} }
+	]
+}
+
+entity thalvaron_bail_trok: !NPC
+{
+	_string: "Bail Trok"
+	_sprite: dwarf_24
+	_sprite_dead: dwarf_24_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .bail_trok: { } }
+}
+
+entity thalvaron_bail_trok_mount: !NPC
+{
+	_string: "Paul the Pony"
+	_sprite: pony_0
+	_sprite_dead: pony_0	
+	_level: 30
+	_faction: npcs		
+	_creature_type: beast
+	_loot_table: .npc
+	_not_pushable: true
+}
+
+############################################################
+# Quest 1
+
+# FIXME quest
+# collect ancient artifacts from Balidor
+                                                  
+quest .bail_trok_1:                          
+{                                                 
+	level: 29
+}

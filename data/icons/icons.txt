@@ -851,6 +851,8 @@ sprites:
 	sprite icon_stinger_2 : { tags: [ icon ] }
 	sprite icon_sand_orchid : { tags: [ icon ] }
 	sprite icon_figurine_1 : { tags: [ icon ] }
+	sprite icon_pony : { tags: [ icon ] }
+	sprite icon_bottle_1 : { tags: [ icon ] }
 }
 
 
