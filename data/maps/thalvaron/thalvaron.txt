@@ -480,6 +480,7 @@ map_entity_spawn thalvaron_bail_trok_mount: { entity thalvaron_bail_trok_mount: 
 map_entity_spawn thalvaron_captain_ejner_2_quest_item: { entity thalvaron_captain_ejner_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_bail_trok_1_quest_item: { entity thalvaron_bail_trok_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_brila_stargazer_1_quest_item: { entity thalvaron_brila_stargazer_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_captain_blackstone_1_quest_item: { entity thalvaron_captain_blackstone_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 
 map_palette .stuff:
 {
@@ -1087,6 +1088,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_captain_ejner_2_quest_item: [ 129 104 88 ]
 	entity_spawn thalvaron_bail_trok_1_quest_item: [ 149 88 71 ]
 	entity_spawn thalvaron_brila_stargazer_1_quest_item: [ 250 28 100 ]
+	entity_spawn thalvaron_captain_blackstone_1_quest_item: [ 101 109 190 ]
 }
 
 map_palette .levels:
