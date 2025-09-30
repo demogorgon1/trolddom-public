@@ -30,6 +30,6 @@ achievement multi_level_30: { category: general string: "Leveling the Playing Fi
 
 achievement exploration_1: { category: general string: "Apprentice Explorer" description: "Discover 10 areas." points: 10 priority: 0 stat_trigger areas_discovered: 10 icon: icon_map_1 }
 achievement exploration_2: { category: general string: "Journeyman Explorer" description: "Discover 50 areas." points: 10 priority: 0 stat_trigger areas_discovered: 50 icon: icon_map_1 root: exploration_1 }
-achievement exploration_3: { category: general string: "Expert Explorer" description: "Discover 200 areas." points: 10 priority: 0 stat_trigger areas_discovered: 200 icon: icon_map_1 root: exploration_1 }
-achievement exploration_4: { category: general string: "Artisan Explorer" description: "Discover 500 areas." points: 10 priority: 0 stat_trigger areas_discovered: 500 icon: icon_map_1 root: exploration_1 }
-achievement exploration_5: { category: general string: "Master Explorer" description: "Discover 1000 areas." points: 10 priority: 0 stat_trigger areas_discovered: 1000 icon: icon_map_1 root: exploration_1 }
+achievement exploration_3: { category: general string: "Expert Explorer" description: "Discover 100 areas." points: 10 priority: 0 stat_trigger areas_discovered: 100 icon: icon_map_1 root: exploration_1 }
+achievement exploration_4: { category: general string: "Artisan Explorer" description: "Discover 200 areas." points: 10 priority: 0 stat_trigger areas_discovered: 200 icon: icon_map_1 root: exploration_1 }
+achievement exploration_5: { category: general string: "Master Explorer" description: "Discover 400 areas." points: 10 priority: 0 stat_trigger areas_discovered: 400 icon: icon_map_1 root: exploration_1 }
