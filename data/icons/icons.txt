@@ -853,6 +853,7 @@ sprites:
 	sprite icon_figurine_1 : { tags: [ icon ] }
 	sprite icon_pony : { tags: [ icon ] }
 	sprite icon_bottle_1 : { tags: [ icon ] }
+	sprite icon_map_1 : { tags: [ icon ] }
 }
 
 

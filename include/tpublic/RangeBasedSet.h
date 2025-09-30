@@ -70,6 +70,8 @@ namespace tpublic
 							range.m_min = m_array[i - 1].m_min;
 							m_array.erase(m_array.begin() + i - 1);
 						}
+
+						m_count++;
 						return true;
 					}
 					else if (aValue == range.m_max + 1)
@@ -82,6 +84,8 @@ namespace tpublic
 							range.m_max = m_array[i + 1].m_max;
 							m_array.erase(m_array.begin() + i + 1);
 						}
+
+						m_count++;
 						return true;
 					}
 					else if(aValue < range.m_min)
@@ -97,6 +101,7 @@ namespace tpublic
 				m_array.insert(m_array.begin() + searchMin, { aValue, aValue });
 			}
 
+			m_count++;
 			return true;
 		}
 
@@ -104,6 +109,7 @@ namespace tpublic
 		Reset()
 		{
 			m_array.clear();
+			m_count = 0;
 		}
 
 		void
@@ -115,6 +121,12 @@ namespace tpublic
 				for(_T i = t.m_min; i <= t.m_max; i++)
 					aCallback(i);
 			}
+		}
+
+		size_t
+		GetSize() const
+		{
+			return m_count;
 		}
 
 		// Serialization
@@ -133,6 +145,7 @@ namespace tpublic
 		};
 
 		std::vector<Range>		m_array;
+		size_t					m_count = 0;
 	};
 
 	template <>
@@ -161,6 +174,7 @@ namespace tpublic
 			return false;
 
 		m_array.resize(count);
+		m_count = 0;
 
 		for(size_t i = 0; i < count; i++)
 		{
@@ -169,6 +183,8 @@ namespace tpublic
 				return false;
 			if (!aReader->ReadUInt(t.m_max))
 				return false;
+
+			m_count += (size_t)(t.m_max - t.m_min);
 		}
 
 		return true;
