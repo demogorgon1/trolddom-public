@@ -1003,12 +1003,14 @@ sprites:
 	sprite zombie_5: { dead: zombie_5_dead }
 	sprite zombie_6: { dead: zombie_6_dead }
 	sprite zombie_7: { dead: zombie_7_dead }
+	sprite lizard_man_2: { dead: lizard_man_2_dead }
 	
 	cursor: { position: [ 0 880 ] }
 	sprite stalker_2_dead: { }		
 	sprite zombie_5_dead: { }		
 	sprite zombie_6_dead: { }		
 	sprite zombie_7_dead: { }		
+	sprite lizard_man_2_dead: { }		
 }
 
 sprites:
@@ -1225,6 +1227,7 @@ sprites:
 
 	cursor: { position: [ 0 128 ] }
 	sprite tomb_1: { }
+	sprite sand_orchid: { }
 		
 }
 

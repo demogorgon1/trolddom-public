@@ -552,6 +552,7 @@ map_entity_spawn thalvaron_kareth_skeleton_guard:
 map_entity_spawn thalvaron_kareth_skeleton_boss: { entity thalvaron_kareth_skeleton_boss: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_kareth_skeleton_priest: { entity thalvaron_kareth_skeleton_priest: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_karethi_scorpion: { entity thalvaron_karethi_scorpion: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_desert_crocodile: { entity thalvaron_desert_crocodile: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 
 loot_table .kareth_skeletons:
 {
@@ -707,6 +708,20 @@ loot_table .kareth_skeletons:
 	entity thalvaron_karethi_scorpion: !NPC { _level: 29 _string: "Karethi Scorpion" _sprite: scorpion_1 _sprite_dead: scorpion_1_dead }
 }
 
+# Crocodiles
+{
+	${
+		_level: 29
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .passive
+		_loot_table: default_crocodile
+		_can_move_on_all_non_view_blocking_tiles: true
+	}
+
+	entity thalvaron_desert_crocodile: !NPC { _string: "Blackbelly Crocodile" _sprite: crocodile_1 _sprite_dead: crocodile_1_dead }
+}
+
 ##########################################################################################
 # Kareth tombs
 
@@ -847,7 +862,7 @@ map_entity_spawn thalvaron_kareth_stalker_large: { entity thalvaron_kareth_stalk
 	${
 		_faction: monsters
 		_creature_type: beast
-		_default_behavior_state: .wandering_short
+		_default_behavior_state: .wandering_long
 		_loot_table: default_humanoid
 		_abilities: 
 		[ 

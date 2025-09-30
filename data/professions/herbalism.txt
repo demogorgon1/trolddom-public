@@ -203,4 +203,28 @@ profession herbalism<primary>:
 	item item_ashveil: !GATHER_ITEM { }
 	entity herbalism_ashveil: !GATHER_ENTITY { }
 
+	#############################################################################
+	# Sand Orchid
+	${
+		_icon: icon_sand_orchid
+		_item_string: "Sand Orchid"
+		_entity_string: "Sand Orchid"
+		_loot_groups: [ .herbalism_sand_orchid ]
+		_loot_table: .herbalism_sand_orchid
+		_profession_skill: 100
+		_sprite: sand_orchid
+		_item_level: 28
+	}
+
+	loot_group .herbalism_sand_orchid: { }
+	loot_table .herbalism_sand_orchid: 
+	{ 
+		slots: 
+		[ 
+			{ possibility: { loot_group: .herbalism_sand_orchid } } 
+		] 
+	}
+	item item_sand_orchid: !GATHER_ITEM { }
+	entity herbalism_sand_orchid: !GATHER_ENTITY { }
+
 }

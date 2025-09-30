@@ -22,10 +22,11 @@ namespace tpublic
 			FLAG_TILE_SNOW					= 0x0040,
 			FLAG_TILE_INDOOR				= 0x0080,
 			FLAG_TILE_NO_WATER_EDGE			= 0x0100,
-			FLAG_STANDALONE					= 0x0200,
-			FLAG_CENTERED					= 0x0400,
-			FLAG_DOUBLED					= 0x0800,
-			FLAG_AUTOGLOW					= 0x1000
+			FLAG_TILE_DESERT				= 0x0200,
+			FLAG_STANDALONE					= 0x0400,
+			FLAG_CENTERED					= 0x0800,
+			FLAG_DOUBLED					= 0x1000,
+			FLAG_AUTOGLOW					= 0x2000
 		};
 
 		struct NamedAnchor
@@ -114,6 +115,8 @@ namespace tpublic
 				return FLAG_TILE_INDOOR;
 			if (strcmp(aString, "tile_no_water_edge") == 0)
 				return FLAG_TILE_NO_WATER_EDGE;
+			if (strcmp(aString, "tile_desert") == 0)
+				return FLAG_TILE_DESERT;
 			if (strcmp(aString, "standalone") == 0)
 				return FLAG_STANDALONE;
 			if (strcmp(aString, "centered") == 0)

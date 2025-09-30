@@ -8,6 +8,7 @@ dialogue_screen .flimlock:
 	options:
 	[
 		{ quest<completion_only>: .crust_elemental_quest_item }
+		{ quest<completion_only>: .zislo_1 }
 	]
 }
 
@@ -132,3 +133,14 @@ entity thalvaron_flimlock_3_portal_return:
 	}
 }
 
+############################################################
+# Quest 4
+
+# FIXME quest
+# lead to npc_frolok
+
+quest .flimlock_4:
+{
+	level: 30
+	prerequisites: [ .zislo_1 ]
+}

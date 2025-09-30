@@ -849,6 +849,8 @@ sprites:
 	sprite icon_key_2 : { tags: [ icon ] }
 	sprite icon_bone_2 : { tags: [ icon ] }
 	sprite icon_stinger_2 : { tags: [ icon ] }
+	sprite icon_sand_orchid : { tags: [ icon ] }
+	sprite icon_figurine_1 : { tags: [ icon ] }
 }
 
 

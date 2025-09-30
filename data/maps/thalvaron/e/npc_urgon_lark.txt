@@ -7,7 +7,9 @@ dialogue_screen .urgon_lark:
 	
 	options:
 	[
-	
+		{ quest: .urgon_lark_1 }
+		{ quest: .urgon_lark_2 }
+		{ quest: .urgon_lark_3 }
 	]
 }
 
@@ -28,7 +30,7 @@ entity thalvaron_urgon_lark: !NPC
 # Quest 1
 
 # FIXME quest
-# kill skeletons in eastern_kareth
+# kill thalvaron_desert_crocodile
                                                   
 quest .urgon_lark_1:                          
 {            
@@ -39,10 +41,22 @@ quest .urgon_lark_1:
 # Quest 2
 
 # FIXME quest
-# kill skeleton priests in the temple
+# kill skeletons in eastern_kareth
                                                   
 quest .urgon_lark_2:                          
 {            
 	prerequisites: [ .urgon_lark_1 ]
+	level: 29
+}
+
+############################################################
+# Quest 3
+
+# FIXME quest
+# kill skeleton priests in the temple
+                                                  
+quest .urgon_lark_3:                          
+{            
+	prerequisites: [ .urgon_lark_2 ]
 	level: 30
 }

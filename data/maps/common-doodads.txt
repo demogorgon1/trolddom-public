@@ -125,7 +125,7 @@ sprites:
 doodad small_rocks:
 {
 	sprites: [ doodad_rocks_1 doodad_rocks_2 doodad_rocks_3 doodad_rocks_4 doodad_rocks_10 doodad_rocks_13 doodad_rocks_14 ]
-	map_palette<"x">: { must_be_one_of: [ grass grass_2 dirt mud snow dark_grass dark_grass_2 wet_grass sand badlands_1 badlands_2 fs_ground_1 fs_ground_2 sand_2 sand_3 ] occupy: true  }
+	map_palette<"x">: { must_be_one_of: [ grass grass_2 dirt mud snow dark_grass dark_grass_2 wet_grass sand badlands_1 badlands_2 fs_ground_1 fs_ground_2 ] occupy: true  }
 	map_palette<"y">: { must_not_be_one_of: [ forest forest_2 pine_forest_1 pine_forest_2 pine_forest_3 ] } 
 	map: [ "y"
 	       "x" ]
@@ -149,13 +149,37 @@ doodad flowers:
 doodad small_rocks_brown:
 {
 	sprites: [ doodad_rocks_5 doodad_rocks_6 doodad_rocks_7 doodad_rocks_8 doodad_rocks_9 doodad_rocks_11 doodad_rocks_12 ]
-	map_palette<"x">: { must_be_one_of: [ grass grass_2 dirt mud snow dark_grass dark_grass_2 wet_grass sand badlands_1 badlands_2 sand_2 sand_3 ] occupy: true }
+	map_palette<"x">: { must_be_one_of: [ grass grass_2 dirt mud snow dark_grass dark_grass_2 wet_grass sand badlands_1 badlands_2 ] occupy: true }
 	map_palette<"y">: { must_not_be_one_of: [ forest forest_2 pine_forest_1 pine_forest_2 pine_forest_3 ] } 
 	map: [ "y"
 	       "x" ]
 	map_offset: [ 0 -1 ]
 	
 	auto_probability: [ 1 40 ]
+}
+
+doodad desert_small_rocks_brown:
+{
+	sprites: [ doodad_rocks_5 doodad_rocks_6 doodad_rocks_7 doodad_rocks_8 doodad_rocks_9 doodad_rocks_11 doodad_rocks_12 ]
+	map_palette<"x">: { must_be_one_of: [ sand_2 sand_3 ] occupy: true }
+	map_palette<"y">: { must_not_be_one_of: [ forest forest_2 pine_forest_1 pine_forest_2 pine_forest_3 ] } 
+	map: [ "y"
+	       "x" ]
+	map_offset: [ 0 -1 ]
+	
+	auto_probability: [ 1 80 ]
+}
+
+doodad desert_small_rocks:
+{
+	sprites: [ doodad_rocks_1 doodad_rocks_2 doodad_rocks_3 doodad_rocks_4 doodad_rocks_10 doodad_rocks_13 doodad_rocks_14 ]
+	map_palette<"x">: { must_be_one_of: [ sand_2 sand_3 ] occupy: true  }
+	map_palette<"y">: { must_not_be_one_of: [ forest forest_2 pine_forest_1 pine_forest_2 pine_forest_3 ] } 
+	map: [ "y"
+	       "x" ]
+	map_offset: [ 0 -1 ]
+	
+	auto_probability: [ 1 64 ]
 }
 
 doodad grass_patch:

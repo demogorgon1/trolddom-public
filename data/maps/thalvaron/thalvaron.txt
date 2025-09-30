@@ -474,6 +474,7 @@ map_entity_spawn thalvaron_dag_hammerfest: { entity thalvaron_dag_hammerfest: { 
 map_entity_spawn thalvaron_carla_longton: { entity thalvaron_carla_longton: { init_state: default } } 
 map_entity_spawn thalvaron_urgon_lark: { entity thalvaron_urgon_lark: { init_state: default } } 
 map_entity_spawn thalvaron_farmer_farbottom: { entity thalvaron_farmer_farbottom: { init_state: default } } 
+map_entity_spawn thalvaron_zizlo: { entity thalvaron_zizlo: { init_state: default } } 
 
 map_palette .stuff:
 {
@@ -1074,6 +1075,8 @@ map_palette .stuff:
 	entity_spawn thalvaron_urthon_wild_wolf: [ 166 181 187 ]
 	entity_spawn thalvaron_farmer_farbottom: [ 50 161 188 ]
 	entity_spawn thalvaron_lonely_cove_kobold: [ 105 71 203 ]
+	entity_spawn thalvaron_zizlo: [ 205 71 203 ]
+	entity_spawn thalvaron_desert_crocodile: [ 101 84 127 ]
 }
 
 map_palette .levels:
