@@ -856,6 +856,8 @@ sprites:
 	sprite icon_map_1 : { tags: [ icon ] }
 	sprite icon_mushroom_3 : { tags: [ icon ] }
 	sprite icon_bottle_2 : { tags: [ icon ] }
+	sprite icon_talon_1 : { tags: [ icon ] }
+	sprite icon_talon_2 : { tags: [ icon ] }
 }
 
 

@@ -7,6 +7,7 @@ dialogue_screen .deputy_reumer:
 	
 	options:
 	[
+		{ quest: .deputy_reumer_1 }
 	]
 }
 
@@ -26,10 +27,44 @@ entity thalvaron_deputy_reumer: !NPC
 ############################################################
 # Quest 1
 
-# FIXME quest
-# kill thalvaron_mirefiend
+objective .deputy_reumer_1:
+{
+	string: "Mirefiends Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_mirefiend_lurker thalvaron_mirefiend_dweller ]
+		count: 8
+	}
+}
 
 quest .deputy_reumer_1:
 {
+	string: "Swamp Monsters"
+
+	text:
+	[
+		"Kill monsters in the swamp to the south."
+	]
+	
+	description: 
+	[
+		"I have no idea what these creatures are or how they came to be, but they're too many of them. They're some kind of humanoid creeps walking around the swamp. If you get too close to them, they'll"
+		"attack you and try to kill you. What's up with them? Please help me getting rid of them. If we ever want to civilize this place, they must go."
+	]
+
+	progress:
+	[
+		"Too many mosquitoes? I agree."
+	]
+	
+	completion:
+	[
+		"Hopefully they don't reproduce very fast."
+	]
+	
+	objectives: [ .deputy_reumer_1 ]
 	level: 27
 }

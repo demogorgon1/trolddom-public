@@ -7,6 +7,7 @@ dialogue_screen .chad_wartorn:
 	
 	options:
 	[
+		{ quest: .chad_wartorn_1 }
 	]
 }
 
@@ -26,11 +27,45 @@ entity thalvaron_chad_wartorn: !NPC
 ############################################################
 # Quest 1
 
-# FIXME quest
-# kill thalvaron_urthon_orc_boss_2
+objective .chad_wartorn_1:
+{
+	string: "Eeklong Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_urthon_orc_boss_2 ]
+		count: 1
+	}
+}
 
 quest .chad_wartorn_1:
 {
-	level: 28
-}
+	string: "Too Close To Home"
 
+	text:
+	[
+		"Track down the orc boss Eeklong to the south and kill him."
+	]
+	
+	description: 
+	[
+		"As we were arriving here we encountered quite a bit of Skullforge activity. Those damn orcs seem to be everywhere. We chased a small band of them south. It was led by an orc boss"
+		"going by the name of Eeklong. I don't want them to sneak up on as at night and kill us in our sleep. I'll pay you if you track them down and kill their leader. That will cause them"
+		"to scatter like cockroaches."
+	]
+
+	progress:
+	[
+		"Yeah?"
+	]
+	
+	completion:
+	[
+		"Excellent. You smell like orc blood."
+	]
+	
+	objectives: [ .chad_wartorn_1 ]
+	level: 28	
+}

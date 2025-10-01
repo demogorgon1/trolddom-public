@@ -457,7 +457,7 @@ map_entity_spawn thalvaron_deputy_reumer: { entity thalvaron_deputy_reumer: { in
 map_entity_spawn thalvaron_flimlock: { entity thalvaron_flimlock: { init_state: default } }
 map_entity_spawn thalvaron_fradi: { entity thalvaron_fradi: { init_state: default } }
 map_entity_spawn thalvaron_fullay: { entity thalvaron_fullay: { init_state: default } }
-map_entity_spawn thalvaron_diane: { entity thalvaron_diane: { init_state: default } }
+map_entity_spawn thalvaron_diane: { entity thalvaron_diane: { init_state: default } spawn_timer: !ESCORT_RESPAWN{} }
 map_entity_spawn thalvaron_flimlock_3_portal: { entity thalvaron_flimlock_3_portal: { init_state: default } }
 map_entity_spawn thalvaron_flimlock_3_portal_return: { entity thalvaron_flimlock_3_portal_return: { init_state: default } }
 map_entity_spawn thalvaron_chad_wartorn: { entity thalvaron_chad_wartorn: { init_state: default } }
@@ -1089,6 +1089,12 @@ map_palette .stuff:
 	entity_spawn thalvaron_bail_trok_1_quest_item: [ 149 88 71 ]
 	entity_spawn thalvaron_brila_stargazer_1_quest_item: [ 250 28 100 ]
 	entity_spawn thalvaron_captain_blackstone_1_quest_item: [ 101 109 190 ]
+	entity_spawn thalvaron_diane_ambush_1_a: [ 201 109 190 ]
+	entity_spawn thalvaron_diane_ambush_2_a: [ 101 209 190 ]
+	entity_spawn thalvaron_diane_ambush_2_b: [ 101 109 90 ]
+	entity_spawn thalvaron_diane_ambush_3_a: [ 201 209 190 ]
+	entity_spawn thalvaron_diane_ambush_3_b: [ 101 9 190 ]	
+	entity_spawn thalvaron_diane_ambush_4_a: [ 101 249 190 ]	
 }
 
 map_palette .levels:

@@ -877,7 +877,6 @@ map_entity_spawn thalvaron_kareth_stalker_large: { entity thalvaron_kareth_stalk
 		_faction: monsters
 		_creature_type: beast
 		_default_behavior_state: .wandering_long
-		_loot_table: default_humanoid
 		_abilities: 
 		[ 
 			{ id: npc_charge_rend }			
@@ -885,7 +884,32 @@ map_entity_spawn thalvaron_kareth_stalker_large: { entity thalvaron_kareth_stalk
 		]		
 	}
 
-	entity thalvaron_kareth_stalker_small: !NPC { _string: "Sand Stalker Fledgeling" _sprite: stalker_1 _sprite_dead: stalker_1_dead _level: 29 }
-	entity thalvaron_kareth_stalker_large: !NPC { _string: "Sand Stalker Brute" _sprite: stalker_2 _sprite_dead: stalker_2_dead _level: 30 }
+	entity thalvaron_kareth_stalker_small: !NPC 
+	{ 
+		_string: "Sand Stalker Fledgeling" _sprite: stalker_1 _sprite_dead: stalker_1_dead _level: 29 
+		_loot_table: $loot_table
+		{
+			slots:
+			[	
+				{ possibility: { weight: 1 loot_group: .dag_hammerfest_1_quest_item requirement self<must_have_active_quest>: .dag_hammerfest_1 } }				
+				!WORLD_DROPS {}
+				!WORLD_DROPS_SKELETONS{}
+			]	
+		}				
+	}
+
+	entity thalvaron_kareth_stalker_large: !NPC 
+	{ 
+		_string: "Sand Stalker Brute" _sprite: stalker_2 _sprite_dead: stalker_2_dead _level: 30 
+		_loot_table: $loot_table
+		{
+			slots:
+			[	
+				{ possibility: { weight: 1 loot_group: .dag_hammerfest_2_quest_item requirement self<must_have_active_quest>: .dag_hammerfest_2 } }				
+				!WORLD_DROPS {}
+				!WORLD_DROPS_SKELETONS{}
+			]	
+		}				
+	}
 }
 
