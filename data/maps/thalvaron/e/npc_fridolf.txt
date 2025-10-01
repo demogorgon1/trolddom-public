@@ -2,7 +2,7 @@ dialogue_screen .fridolf:
 {
 	text: 
 	[	
-		"Greetings."
+		"What's up?"
 	]		
 	
 	options:
@@ -22,7 +22,3 @@ entity thalvaron_fridolf: !NPC
 	_not_pushable: true	
 	_dialogue_root: $dialogue_root { .fridolf: { } }
 }
-
-############################################################
-# Quest 1
-

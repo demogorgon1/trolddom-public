@@ -53,12 +53,25 @@ map_entity_spawn thalvaron_zilkore_plant:
 
 # Plant monsters
 {
+	loot_table .plant_monster: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { weight: 1 loot_group: .faolan_2_quest_item requirement self<must_have_active_quest>: { id: .faolan_2 } } 
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_NATURE_ELEMENTALS{}
+		]	
+	}
+
 	${
 		_level: 26
 		_faction: monsters
 		_creature_type: elemental
 		_default_behavior_state: .wandering_short
-		_loot_table: default_nature_elemental
+		_loot_table: .plant_monster
 	}
 
 	entity thalvaron_zilkore_plant_a: !NPC { _string: "Thrasher" _sprite: carnivorous_plant_1 _sprite_dead: carnivorous_plant_1_dead }
@@ -567,6 +580,7 @@ map_entity_spawn thalvaron_kareth_skeleton_boss: { entity thalvaron_kareth_skele
 map_entity_spawn thalvaron_kareth_skeleton_priest: { entity thalvaron_kareth_skeleton_priest: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_karethi_scorpion: { entity thalvaron_karethi_scorpion: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_desert_crocodile: { entity thalvaron_desert_crocodile: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_kareth_skeleton_high_wizard: { entity thalvaron_kareth_skeleton_high_wizard: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 
 loot_table .kareth_skeletons:
 {
@@ -640,7 +654,7 @@ loot_table .kareth_skeletons:
 		_level: 30
 		_faction: monsters
 		_creature_type: undead
-		_default_behavior_state: .wandering_short
+		_default_behavior_state: .passive
 		_loot_table: .kareth_skeletons
 		_abilities: 
 		[ 
@@ -677,7 +691,7 @@ loot_table .kareth_skeletons:
 	${
 		_faction: monsters
 		_creature_type: undead
-		_default_behavior_state: .wandering_short
+		_default_behavior_state: .passive
 		_loot_table: .kareth_skeletons
 		_abilities: 
 		[ 
@@ -734,6 +748,34 @@ loot_table .kareth_skeletons:
 	}
 
 	entity thalvaron_desert_crocodile: !NPC { _string: "Blackbelly Crocodile" _sprite: crocodile_1 _sprite_dead: crocodile_1_dead }
+}
+
+# High wizard skeleton
+{
+
+	${
+		_level: 30
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .passive
+		_resource_health: 2.9
+		_loot_table: $loot_table
+		{
+			slots:
+			[	
+				{ possibility: { loot_group: thalvaron_father_tobias_quest_item_3 requirement self<must_have_active_quest>: thalvaron_father_tobias_3 } }				
+				!WORLD_DROPS {}
+				!WORLD_DROPS_SKELETONS{}
+			]	
+		}		
+		_abilities: 
+		[ 
+			{ id: npc_curse }
+			{ id: npc_frostbolt_no_cooldown }
+		]		
+	}
+
+	entity thalvaron_kareth_skeleton_high_wizard: !NPC { _string: "High Wizard Urjux" _sprite: skeleton_caster_5 _sprite_dead: skeleton_caster_5_dead }
 }
 
 ##########################################################################################

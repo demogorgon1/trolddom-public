@@ -54,22 +54,23 @@ quest .farmer_farbottom_1:
 
 	text:
 	[
-		"."
+		"Collect bones from skeletons in Kareth and return to Farmer Farbottom."
 	]
 	
 	description: 
 	[
-		"."
+		"I'm just a humble farmer, trying to grow some vegetables out of this miserable dirt. It's really not doing very good as the soil isn't very good. It really needs to be fertilized. Luckily"
+		"the desert south of here is crawling with skeletons. I figured that maybe their bones can be ground up and used as fertilizer? It's worth a shot, right? Can you go grab me some of their bones?"
 	]
 	
 	completion:
 	[
-		"."
+		"Ah, that's a lot of bones. I hope it works!"
 	]
 	
 	progress:
 	[
-		"Hello!"
+		"Did you find any undead?"
 	]
 
 	level: 29
@@ -78,12 +79,47 @@ quest .farmer_farbottom_1:
 
 ############################################################
 # Quest 2
+                                 
+objective .farmer_farbottom_2:
+{
+	string: "Kobolds Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_lonely_cove_kobold_a thalvaron_lonely_cove_kobold_b thalvaron_lonely_cove_kobold_c ]
+		count: 8
+	}
+}
 
-# FIXME quest
-# kill thalvaron_lonely_cove_kobold_a thalvaron_lonely_cove_kobold_b thalvaron_lonely_cove_kobold_c
-                                                  
-quest .farmer_farbottom_2:                          
-{                                                 
+quest .farmer_farbottom_2:
+{
+	string: "Yet Another Kobold Infestation"
+
+	text:
+	[
+		"Hunt kobolds in the cave north of Farmer Farbottom's house and return to him when done."
+	]
+	
+	description: 
+	[
+		"I don't really mind kobolds too much, usually, but they've been a real pest recently. They come out at night and eats my potatoes! I think they hang out in the cave behind my house. The entrance to"
+		"the cave is just to the west of here. Can you go clear out their numbers a bit?"
+	]
+
+	progress:
+	[
+		"Yeah?"
+	]
+	
+	completion:
+	[
+		"I hope that helps."
+	]
+	
+	objectives: [ .farmer_farbottom_2 ]
 	level: 29
 }
+
 

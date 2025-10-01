@@ -11,6 +11,7 @@ dialogue_screen .father_tobias_dialogue:
 		{ quest: .father_tobias_1 }	
 		{ quest: .father_tobias_2 }	
 		{ quest<completion_only>: thalvaron_joana_2 }
+		{ quest<offer_only>: thalvaron_father_tobias_3 } 
 	]
 }
 
@@ -230,11 +231,82 @@ quest .father_tobias_2:
 ############################################################
 # Quest 3
 
-# FIXME quest
-# summon big boss at the temple and kill it
+loot_group thalvaron_father_tobias_quest_item_3: { }
+
+item .father_tobias_quest_item_3:
+{
+	binds: when_picked_up
+	string: "Torch" 
+	flavor: "Suitable for burning bones."
+	icon: icon_torch
+	item_level: 30
+	quest: thalvaron_father_tobias_3
+	flags: [ not_sellable unique ]
+}
+
+!define local BONES_ABILITY_2
+{	
+	description: "Burn."
+	requirement self<must_have_item>: .father_tobias_quest_item_3
+	flags: [ target_self quest_trigger ]
+	states: [ default ]	
+	icon: icon_bone_2	
+	consume_items: { entry: { item: @_id quantity: 1 } }
+}
+
+!define local BONES_ITEM_2
+{
+	binds: when_picked_up
+	loot_groups: [ @_id ]		
+	string: @_string 
+	icon: icon_bone_2
+	item_level: 30
+	quest: thalvaron_father_tobias_3
+	flags: [ not_sellable unique ]
+	use_ability: @_ability_id
+}
+
+!define local BONES_OBJECTIVE_2
+{
+	string: @_string
+	use_ability: { ability: @_id count: 1 boolean: true }	
+}
+
+ability .father_tobias_quest_item_3_x: !BONES_ABILITY_2 { _id: .father_tobias_quest_item_3_x }
+item .father_tobias_quest_item_3_x: !BONES_ITEM_2 { _string: "Remains of High Wizard Urjux" _id: thalvaron_father_tobias_quest_item_3 _ability_id: .father_tobias_quest_item_3_x }
+objective .father_tobias_quest_item_3_x: !BONES_OBJECTIVE_2 { _string: "Remains of High Wizard Urjux Torched." _id: .father_tobias_quest_item_3_x }
                                                   
 quest thalvaron_father_tobias_3:                          
 {            
+	string: "Burning More Bones"
+
+	text:
+	[
+		"Burn bones of High Wizard Urjux at the Temple of Kareth."
+	]
+	
+	description: 
+	[
+		"The orbs you showed to me are used by evil forces to channel their powers. My best guess is that the main source is linked to Urjux, a powerful ancient wizard of Kareth, who died a long time ago."
+		"Probably not totally dead, though.\n"
+		"\n"
+		"The standard solution for dealing with troublesome corpses is to burn their bones. Seek out the High Wizard at the Temple of Kareth, defeat him, and burn his bones.\n"
+		"\n"
+		"Report to Joana when you've done the deed."
+	]
+
+	progress:
+	[
+		"How are you doing?"
+	]
+	
+	completion:
+	[
+		"Praised be! Our prayers have been answered! The gods have opened the door!"
+	]
+
+	quest_items: [ .father_tobias_quest_item_3 ]
+	objectives: [ .father_tobias_quest_item_3_x ]	
 	prerequisites: [ thalvaron_joana_2 ]
 	level: 30
 }

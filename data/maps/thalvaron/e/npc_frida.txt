@@ -2,11 +2,12 @@ dialogue_screen .frida:
 {
 	text: 
 	[	
-		"Greetings."
+		"Huh?"
 	]		
 	
 	options:
 	[
+		{ quest<completion_only>: .faolan_2 }
 	]
 }
 

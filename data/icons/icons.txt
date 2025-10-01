@@ -858,6 +858,7 @@ sprites:
 	sprite icon_bottle_2 : { tags: [ icon ] }
 	sprite icon_talon_1 : { tags: [ icon ] }
 	sprite icon_talon_2 : { tags: [ icon ] }
+	sprite icon_herbs_5 : { tags: [ icon ] }
 }
 
 

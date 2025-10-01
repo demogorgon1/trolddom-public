@@ -7,7 +7,10 @@ dialogue_screen .joana:
 	
 	options:
 	[
+		{ quest: .joana_1 }
 		{ quest<offer_only>: thalvaron_joana_2 }
+		{ quest<completion_only>: .erik_the_bleak_2 }
+		{ quest<completion_only>: thalvaron_father_tobias_3 } 
 	]
 }
 
@@ -27,20 +30,52 @@ entity thalvaron_joana: !NPC
 ############################################################
 # Quest 1
 
-# FIXME quest
-# kill thalvaron_kareth_skeleton_boss
-                                                  
-quest .joana_1:                          
-{                                                 
-	level: 29                                     
+objective .joana_1:
+{
+	string: "Xildur Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_kareth_skeleton_boss ]
+		count: 1
+	}
 }
 
+quest .joana_1:
+{
+	string: "Infiltrating the Undead Command"
+
+	text:
+	[
+		"Locate Xildur to the north east of the Serpent's Rest and destroy him."
+	]
+	
+	description: 
+	[
+		"I don't know how these skeletal monsters operate. They seem to mostly wander around mindlessly at the moment, but sometimes it seems like they are commanded by some more powerful creature."
+		"I've located one of these commanders at an compound north east of here. It's a monstrous skeleton, allegedly the remains of some ancient captain named Xildur. Locate this monster and destroy it."
+	]
+
+	progress:
+	[
+		"Lost in the desert?"
+	]
+	
+	completion:
+	[
+		"Good job, but we're not done yet."
+	]
+	
+	objectives: [ .joana_1 ]
+	next_quest: thalvaron_joana_2
+	level: 29
+}
+                                                  
 ############################################################
 # Quest 2
-
-# FIXME quest
-# loot items from the 3 tombs and bring them to father tobias
-                                              
+      
 loot_group .joana_2_quest_item_1: {}
 loot_group .joana_2_quest_item_2: {}
 loot_group .joana_2_quest_item_3: {}
@@ -93,21 +128,26 @@ objective .joana_2_c:
 
 quest thalvaron_joana_2:
 {
-	string: "Investigating the Tombs"
+	string: "Entering the Tombs"
 
 	text:
 	[
-		"."
+		"Retrieve orbs from tombs of Kareth and deliver them to Father Tobias in Valoris."
 	]
 	
 	description: 
 	[
-		"."
+		"The eastern parts of Kareth are littered with old tombs. I have a feeling that these are connected to the evil presence that has taken hold of these lands. I have heard that some of these tombs contain"
+		"powerful orbs that are of great interest to our cause. I want you to retrieve these and deliver them to Father Tobias in Valoris. He will know what to do with them.\n"
+		"\n"
+		"The first orb is in the Tomb of Kralier in the mountains of north eastern Kareth.\n"
+		"The second orb is in the Tomb of Jurgorth east of here.\n"		
+		"And, finally, even further to the east you'll find the last orb in the Tomb of the Last King."
 	]
 	
 	completion:
 	[
-		"."
+		"Huh, what unholy nonsense is this? Let me see."
 	]
 	
 	progress:
@@ -117,5 +157,5 @@ quest thalvaron_joana_2:
 
 	level: 29
 	objectives: [ .joana_2_a .joana_2_b .joana_2_c ]	
-	#prerequisites: [ gateway_world_quest_1 ]
+	prerequisites: [ .joana_1 ]
 }

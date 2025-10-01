@@ -7,6 +7,8 @@ dialogue_screen .erik_the_bleak:
 	
 	options:
 	[
+		{ quest: .erik_the_bleak_1 }
+		{ quest<offer_only>: .erik_the_bleak_2 }
 	]
 }
 
@@ -26,23 +28,75 @@ entity thalvaron_erik_the_bleak: !NPC
 ############################################################
 # Quest 1
 
-# FIXME quest
-# kill undead along the edge of the great desert (thalvaron_kareth_skeleton_a thalvaron_kareth_skeleton_b thalvaron_kareth_skeleton_c thalvaron_kareth_skeleton_d thalvaron_kareth_skeleton_e)
-                                                  
-quest .erik_the_bleak_1:                          
-{                                                 
-	level: 28                                     
+objective .erik_the_bleak_1:
+{
+	string: "Dustwalkers Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_kareth_skeleton_a thalvaron_kareth_skeleton_b thalvaron_kareth_skeleton_c thalvaron_kareth_skeleton_d thalvaron_kareth_skeleton_e ]
+		count: 10
+	}
+}
+
+quest .erik_the_bleak_1:
+{
+	string: "The Undead Are Coming"
+
+	text:
+	[
+		"Destroy the undead of northern Kareth."
+	]
+	
+	description: 
+	[
+		"We might have pushed back the undead of the north, but down here it's a whole different matter. I don't know the source of this evil, but it's probably unrelated to the dark elves. At least I haven't"
+		"seen any of them around.\n"
+		"\n"
+		"The sands of Kareth is now crawling with these unholy aberrations. We must destroy them!"
+	]
+
+	progress:
+	[
+		"We need to cure the pestilence of these lands."
+	]
+	
+	completion:
+	[
+		"By the Light! We might not be doomed after all."
+	]
+	
+	objectives: [ .erik_the_bleak_1 ]
+	next_quest: .erik_the_bleak_2
+	level: 28
 }
 
 ############################################################
 # Quest 2
-
-# FIXME quest
-# lead to thalvaron_joana
-                                                  
+                       
 quest .erik_the_bleak_2:                          
-{                                                 
+{                           
+	string: "The Serpent's Rest"
+
+	text:
+	[
+		"Venture south through the desert and meet Joana at the Serpent's Rest."
+	]
+	
+	description: 
+	[
+		"We must find the source of this evil and destroy it. Seek out my holy colleague Joana at the Serpent's Rest, an oasis to the south, deep in the great desert. Offer your assistance to her."
+	]
+
+	completion:
+	[
+		"You come from Erik the Bleak?"
+	]
+                      
 	level: 29
+	prerequisites: [ .erik_the_bleak_1 ]
 	reward_cash_multiplier: 0.2
 	reward_xp_multiplier: 0.2
 }

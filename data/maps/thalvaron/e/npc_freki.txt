@@ -2,7 +2,7 @@ dialogue_screen .freki:
 {
 	text: 
 	[	
-		"Greetings."
+		"Hello."
 	]		
 	
 	options:
@@ -22,7 +22,3 @@ entity thalvaron_freki: !NPC
 	_not_pushable: true	
 	_dialogue_root: $dialogue_root { .freki: { } }
 }
-
-############################################################
-# Quest 1
-

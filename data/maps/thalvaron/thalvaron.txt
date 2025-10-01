@@ -134,6 +134,7 @@ zone .tomb_of_kralir: { string: "Tomb of Kralir" }
 zone .tomb_of_jurgorth: { string: "Tomb of Jurgorth" }
 zone .tomb_of_the_last_king: { string: "Tomb of the Last King" }
 zone .lonely_cove: { string: "Lonely Cove" }
+zone .shrine_of_zilu: { string: "Shrine of Zilu" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -481,6 +482,8 @@ map_entity_spawn thalvaron_captain_ejner_2_quest_item: { entity thalvaron_captai
 map_entity_spawn thalvaron_bail_trok_1_quest_item: { entity thalvaron_bail_trok_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_brila_stargazer_1_quest_item: { entity thalvaron_brila_stargazer_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_captain_blackstone_1_quest_item: { entity thalvaron_captain_blackstone_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_faolan_1_quest_item: { entity thalvaron_faolan_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_zilu: { entity thalvaron_zilu: { init_state: default } } 
 
 map_palette .stuff:
 {
@@ -1095,6 +1098,9 @@ map_palette .stuff:
 	entity_spawn thalvaron_diane_ambush_3_a: [ 201 209 190 ]
 	entity_spawn thalvaron_diane_ambush_3_b: [ 101 9 190 ]	
 	entity_spawn thalvaron_diane_ambush_4_a: [ 101 249 190 ]	
+	entity_spawn thalvaron_kareth_skeleton_high_wizard: [ 39 81 72 ]
+	entity_spawn thalvaron_zilu: [ 140 169 105 ]
+	entity_spawn thalvaron_faolan_1_quest_item: [ 240 10 158 ]
 }
 
 map_palette .levels:
@@ -1243,6 +1249,7 @@ map_palette .sub_zones:
 	sub_zone .tomb_of_kralir: [ 40 169 123 ]
 	sub_zone .tomb_of_jurgorth: [ 169 161 40 ]
 	sub_zone .tomb_of_the_last_king: [ 144 40 169 ]
+	sub_zone .shrine_of_zilu: [ 170 113 23 ]
 	
 	sub_zone thalvaron_crab_giant: [ 39 192 83 ]
 	sub_zone thalvaron_vampire_boss: [ 139 93 48 ]

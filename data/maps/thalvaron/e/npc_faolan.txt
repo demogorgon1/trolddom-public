@@ -2,11 +2,13 @@ dialogue_screen .faolan:
 {
 	text: 
 	[	
-		"Greetings."
+		"We have some pretty neat plants around here."
 	]		
 	
 	options:
 	[
+		{ quest<offer_only>: .faolan_1 }
+		{ quest<offer_only>: .faolan_2 }
 	]
 }
 
@@ -15,7 +17,7 @@ entity thalvaron_faolan: !NPC
 	_string: "Faolan"
 	_sprite: woman_37
 	_sprite_dead: woman_37_dead
-	_level: 20
+	_level: 30
 	_faction: npcs
 	_creature_type: humanoid
 	_loot_table: .npc
@@ -26,21 +28,138 @@ entity thalvaron_faolan: !NPC
 ############################################################
 # Quest 1
 
-# FIXME quest
-# gather herbs around zilkore and bring as offering to shrine in woods to the east
+objective .faolan_1:
+{
+	string: "Zilkore Herbs"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .faolan_1_quest_item count: 6 }
+}
+
+loot_group .faolan_1_quest_item: {}
+
+item .faolan_1_quest_item:
+{
+	icon: icon_herbs_1
+	item_level: 25
+	loot_groups: [ .faolan_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Zilkore Herbs"
+	stack: 6
+}
+
+entity thalvaron_faolan_1_quest_item:
+{
+	string: "Zilkore Herbs"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ wild_herbs_2 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: $loot_table
+			{
+				slots:
+				[
+					{
+						possibility: { loot_group: .faolan_1_quest_item }			
+					}		
+				]
+			}			
+			verb: pick
+			range: 1 
+			level: 25
+			despawn: true 		
+			required_quest: .faolan_1
+		}		
+	}
+}
 
 quest .faolan_1:
 {
+	string: "Serving the Gods"
+
+	text:
+	[
+		"Collect herbs and take them to the shrine of Zilu in the woods east of Zilkore."
+	]
+	
+	description: 
+	[
+		"I don't really trust you, to be honest. Most outsiders have bad intentions when they come here. Prove your good intentions by making an offering at the shrine of Zilu. She likes herbs."
+		"Collect some around the here and find the shrine in the woods to the west. Then return to me."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Thanks. Here, have a blessing."
+	]
+
 	level: 25
+	objectives: [ .faolan_1 ]
 }
 
 ############################################################
 # Quest 2
 
-# FIXME quest
-# gather items from thalvaron_zilkore_plant and deliver to thalvaron_frida
+objective .faolan_2:
+{
+	string: "Thrasher Leaves"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .faolan_2_quest_item count: 6 }
+}
+
+loot_group .faolan_2_quest_item: {}
+
+item .faolan_2_quest_item:
+{
+	icon: icon_herbs_5
+	item_level: 26
+	loot_groups: [ .faolan_2_quest_item ]
+	flags: [ not_sellable ]
+	string: "Thrasher Leaf"
+	stack: 6
+}
 
 quest .faolan_2:
 {
+	string: "Living Plants of the South"
+
+	text:
+	[
+		"Head south into the Thalyssian Wilds, collect leaves from thrasher plants, and find Frida by the coast to the east."
+	]
+	
+	description: 
+	[
+		"I can feel that you made a succesful offering to Zilu. Very appreciated. Now I have a more practical job for you...\n"
+		"\n"
+		"To the south of here you'll find the Thalyssian Wilds. It's a fierce jungle full of dangerous creatures. A friend of mine, Frida, lives in a house by the coast down there. Last time I talked with her, she"
+		"had some problems that she could use some help with. Can you go visit her? Pick up some leaves from the thrasher plants on the way. They're good for tea."
+	]
+
+	progress:
+	[
+		"Yeah?"
+	]
+	
+	completion:
+	[
+		"Oh, is that real thrasher leaves you got there?"
+	]
+
 	level: 26
+	prerequisites: [ .faolan_1 ]
+	objectives: [ .faolan_2 ]
 }
+
