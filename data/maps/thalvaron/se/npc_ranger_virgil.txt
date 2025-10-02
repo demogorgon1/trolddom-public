@@ -2,7 +2,8 @@ dialogue_screen .ranger_virgil_greetings:
 {
 	text: 
 	[	
-		"The river has subsided a bit. You should be able to cross safely."
+		#"The river has subsided a bit. You should be able to cross safely."
+		"The water level of the river is too high to cross currently. Maybe in a few days."
 	]
 	
 	options:

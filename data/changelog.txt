@@ -2,6 +2,25 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.4.2"
+
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Fixed bug where quest items wouldn't respawn correctly." }
+		{ text: "Piranhas can now be fished in Xandralis like intended." }
+	] 
+
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Mistveil and Skaldrun Snappers can now be fished in zones up to level 30." }
+		{ text: "It's now more likely to catch something when fishing." }
+	]
+
+	#######################################################################################
 	heading: "v0.4.1"
 
 	text: "Issues fixed:"

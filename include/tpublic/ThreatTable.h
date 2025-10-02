@@ -36,7 +36,7 @@ namespace tpublic
 							int32_t									aTick,
 							const SourceEntityInstance&				aSourceEntityInstance,
 							int32_t									aThreat);
-		void			Multiply(
+		int32_t			Multiply(
 							int32_t									aTick,
 							const SourceEntityInstance&				aSourceEntityInstance,
 							float									aFactor);
@@ -56,6 +56,8 @@ namespace tpublic
 		void			DebugPrint() const;
 		void			GetEntityInstanceIds(
 							std::vector<uint32_t>&					aOutEntityInstanceIds) const;
+		void			Validate() const;
+		void			FastValidate() const;
 
 		// Data access
 		bool			IsEmpty() const { return m_head == NULL; }

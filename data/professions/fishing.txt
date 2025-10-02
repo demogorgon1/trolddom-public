@@ -211,7 +211,7 @@ item item_perch:
 	icon: icon_fish_6
 	stack: 20
 	item_level: 15
-	level_range: [ 15 19 ]
+	level_range: [ 15 21 ]
 }
 
 ################################################################################
@@ -224,7 +224,7 @@ item item_mistveil:
 	icon: icon_fish_7
 	stack: 20
 	item_level: 20
-	level_range: [ 20 26 ]
+	level_range: [ 20 30 ]
 }
 
 ################################################################################
@@ -237,7 +237,7 @@ item item_skaldrun_snapper:
 	icon: icon_fish_8
 	stack: 20
 	item_level: 22
-	level_range: [ 21 22 ]
+	level_range: [ 21 30 ]
 }
 
 ################################################################################
@@ -250,7 +250,7 @@ item item_piranha:
 	icon: icon_fish_9
 	stack: 20
 	item_level: 22
-	level_range: [ 20 22 ]
+	level_range: [ 20 30 ]
 }
 
 ################################################################################

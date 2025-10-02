@@ -15,8 +15,9 @@ namespace tpublic
 	public:		
 		enum Flag : uint8_t 
 		{
-			FLAG_DEMO	= 0x01,
-			FLAG_INDOOR = 0x02
+			FLAG_DEMO		= 0x01,
+			FLAG_INDOOR		= 0x02,
+			FLAG_RESTRICTED	= 0x04
 		};
 
 		static void AutoIndoor(
@@ -38,6 +39,8 @@ namespace tpublic
 					flags |= FLAG_DEMO;
 				else if (aChild->IsIdentifier("indoor"))
 					flags |= FLAG_INDOOR;
+				else if (aChild->IsIdentifier("restricted"))
+					flags |= FLAG_RESTRICTED;
 				else
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid flag.", aChild->GetIdentifier());					
 			});
