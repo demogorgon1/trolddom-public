@@ -484,6 +484,7 @@ map_entity_spawn thalvaron_brila_stargazer_1_quest_item: { entity thalvaron_bril
 map_entity_spawn thalvaron_captain_blackstone_1_quest_item: { entity thalvaron_captain_blackstone_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_faolan_1_quest_item: { entity thalvaron_faolan_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_zilu: { entity thalvaron_zilu: { init_state: default } } 
+map_entity_spawn thalvaron_flimlock_1_quest_item: { entity thalvaron_flimlock_1_quest_item: { init_state: default } } # No respawn needed
 
 map_palette .stuff:
 {
@@ -1101,6 +1102,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_kareth_skeleton_high_wizard: [ 39 81 72 ]
 	entity_spawn thalvaron_zilu: [ 140 169 105 ]
 	entity_spawn thalvaron_faolan_1_quest_item: [ 240 10 158 ]
+	entity_spawn thalvaron_flimlock_1_quest_item: [ 109 55 91 ]
 }
 
 map_palette .levels:

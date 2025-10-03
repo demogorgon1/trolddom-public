@@ -8,6 +8,9 @@ dialogue_screen .fenris:
 	options:
 	[
 		{ quest<completion_only>: thalvaron_ranger_virgil_1 }
+		{ quest: .fenris_1 }
+		{ quest: .fenris_2 }
+		{ quest: .fenris_3 }
 	]
 }
 
@@ -27,32 +30,152 @@ entity thalvaron_fenris: !NPC
 ############################################################
 # Quest 1
 
-# FIXME quest
-# bring tentacle from thalvaron_forbidden_island_boss
+loot_group .fenris_1_quest_item: { }
+
+item .fenris_1_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .fenris_1_quest_item ]		
+	string: "Tentacle of Fryzilk" 
+	icon: icon_tentacle
+	item_level: 25
+	quest: .fenris_1
+	flags: [ not_sellable unique ]
+}
+
+objective .fenris_1:
+{
+	string: "Tentacle of Fryzilk"
+	collect_items: { item: .fenris_1_quest_item count: 8 }
+}
 
 quest .fenris_1:
 {
+	string: "."
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+	
+	completion:
+	[
+		"."
+	]
+	
+	progress:
+	[
+		"."
+	]
+
 	level: 25
+	objectives: [ .fenris_1 ]
 }
 
 ############################################################
 # Quest 2
 
-# FIXME quest
-# kill thalvaron_zilkore_crab_man_small
+objective .fenris_2:
+{
+	string: "Crab Men Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_zilkore_crab_man_small_a thalvaron_zilkore_crab_man_small_b ]
+		count: 8
+	}
+}
 
 quest .fenris_2:
 {
+	string: "Ranger Roel Is Right"
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+
+	progress:
+	[
+		"."
+	]
+	
+	completion:
+	[
+		"."
+	]
+	
+	objectives: [ .fenris_2 ]
+	prerequisites: [ .fenris_1 ]
 	level: 25
 }
 
 ############################################################
 # Quest 3
 
-# FIXME quest
-# kill thalvaron_zilkore_crab_man_large and thalvaron_zilkore_crab_man_boss
+objective .fenris_3_a:
+{
+	string: "Large Crab Man Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_zilkore_crab_man_boss ]
+		count: 1
+	}
+}
+
+objective .fenris_3_b:
+{
+	string: "More Crab Men Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_zilkore_crab_man_large_a thalvaron_zilkore_crab_man_large_b ]
+		count: 6
+	}
+}
 
 quest .fenris_3:
 {
+	string: "Finishing the Job"
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+
+	progress:
+	[
+		"."
+	]
+	
+	completion:
+	[
+		"."
+	]
+	
+	objectives: [ .fenris_3_a .fenris_3_b ]
+	prerequisites: [ .fenris_2 ]
 	level: 25
 }

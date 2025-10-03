@@ -7,6 +7,7 @@ dialogue_screen .flimlock:
 	
 	options:
 	[
+		{ quest: .flimlock_1 }
 		{ quest<completion_only>: .crust_elemental_quest_item }
 		{ quest<completion_only>: .zislo_1 }
 	]
@@ -28,12 +29,80 @@ entity thalvaron_flimlock: !NPC
 ############################################################
 # Quest 1
 
-# FIXME quest
-# collect water samples from swamp
+objective .flimlock_1:
+{
+	string: "Water Samples Collected"
+	
+	maps: [ thalvaron ]
+	
+	manual_counter:
+	{
+		count: 5
+	}
+}
+
+item .flimlock_1_quest_item:
+{
+	binds: when_picked_up
+	type: miscellaneous
+	flags: [ unique not_sellable ]
+	item_level: 27
+	icon: icon_green_bottle		
+	string: "Swamp Vial"
+	use_ability: $ability [ icon string ]
+	{
+		description: "Collect water from the Verdant Mire."
+		flags: [ target_self target_aoe target_aoe_hostile item ]
+		cooldowns: [ global ]	
+		cooldown: $cooldown { duration: 40 }
+		states: [ default ]
+		sound_effects: !SOUND_DRINK_POTION{}	
+		aoe_radius: 8
+		aoe_cap: 1
+		aoe_requirement target<must_be_type>: { id: thalvaron_flimlock_1_quest_item }
+		cast_time: 20	
+		direct_effect simple<activate_trigger>: { }
+	}	
+}
+
+entity thalvaron_flimlock_1_quest_item:
+{
+	components:
+	{
+		position: { }		
+		visibility: { }		
+		trigger: { lock_out_ticks: 6000 trigger_manual_objective: .flimlock_1 }
+		combat_public: { faction: monsters }
+	}
+}
 
 quest .flimlock_1:
 {
+	string: "."
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+
+	progress:
+	[
+		"."
+	]
+	
+	completion:
+	[
+		"."
+	]
+	
 	level: 27
+	quest_items: [ .flimlock_1_quest_item ]
+	objectives: [ .flimlock_1 ]
 }
 
 ############################################################

@@ -236,7 +236,16 @@ map_entity_spawn thalvaron_wyvern: { entity thalvaron_wyvern: { } spawn_timer: !
 		_faction: monsters
 		_creature_type: demon
 		_default_behavior_state: .wandering_short				
-		_loot_table: default_demon
+		_loot_table: $loot_table
+		{
+			slots:
+			[	
+				{ possibility: { weight: 1 loot_group: .fenris_1_quest_item requirement self<must_have_active_quest>: { id: .fenris_1 } } }
+				
+				!WORLD_DROPS {}
+				!WORLD_DROPS_DEMONS{}
+			]	
+		}			
 		_resource_health: 2
 		_weapon_damage: 1.1
 		_abilities: [ { id: npc_frostbolt } { id: npc_rend } { id: npc_attack } ]
