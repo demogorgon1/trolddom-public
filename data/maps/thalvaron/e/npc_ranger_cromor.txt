@@ -7,6 +7,7 @@ dialogue_screen .ranger_cromor:
 	
 	options:
 	[
+		{ quest: .ranger_cromor_1 }
 	]
 }
 
@@ -28,10 +29,43 @@ entity thalvaron_ranger_cromor: !NPC
 ############################################################
 # Quest 1
 
-# FIXME quest
-# kill thalvaron_jungle_lizard_boss
+objective .ranger_cromor_1:
+{
+	string: "Scalemaw Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_jungle_lizard_boss ]
+		count: 1
+	}
+}
 
 quest .ranger_cromor_1:
 {
+	string: "."
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+
+	progress:
+	[
+		"."
+	]
+	
+	completion:
+	[
+		"."
+	]
+	
+	objectives: [ .ranger_cromor_1 ]
 	level: 27
 }

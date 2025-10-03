@@ -7,6 +7,7 @@ dialogue_screen .friduwulf:
 	
 	options:
 	[
+		{ quest: .friduwulf_1 }
 	]
 }
 
@@ -26,10 +27,43 @@ entity thalvaron_friduwulf: !NPC
 ############################################################
 # Quest 1
 
-# FIXME quest
-# kill thalvaron_zilkore_sandcrawlers
+objective .friduwulf_1:
+{
+	string: "Zilkore Sandcrawlers Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_zilkore_sandcrawler ]
+		count: 8
+	}
+}
 
 quest .friduwulf_1:
 {
+	string: "."
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+
+	progress:
+	[
+		"."
+	]
+	
+	completion:
+	[
+		"."
+	]
+	
+	objectives: [ .friduwulf_1 ]
 	level: 25
 }

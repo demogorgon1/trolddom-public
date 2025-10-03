@@ -7,6 +7,7 @@ dialogue_screen .sheriff_nordberg:
 	
 	options:
 	[
+		{ quest: .sheriff_nordberg_1 }
 	]
 }
 
@@ -26,10 +27,43 @@ entity thalvaron_sheriff_nordberg: !NPC
 ############################################################
 # Quest 1
 
-# FIXME quest
-# kill thalvaron_wyvern
+objective .sheriff_nordberg_1:
+{
+	string: "Wyvern Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_wyvern ]
+		count: 1
+	}
+}
 
 quest .sheriff_nordberg_1:
 {
-	level: 26 
+	string: "."
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+
+	progress:
+	[
+		"."
+	]
+	
+	completion:
+	[
+		"."
+	]
+	
+	objectives: [ .sheriff_nordberg_1 ]
+	level: 26
 }

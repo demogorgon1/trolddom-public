@@ -9,6 +9,7 @@ dialogue_screen .sandra_riddle:
 	[
 		{ quest<completion_only>: .egon_riddle_1 }
 		{ quest: .sandra_riddle_1 }
+		{ quest: .sandra_riddle_2 }
 	]
 }
 
@@ -102,7 +103,7 @@ quest .sandra_riddle_1:
 
 	text:
 	[
-		"Gather mudweed along the coast up north."
+		"."
 	]
 	
 	description: 
@@ -127,11 +128,84 @@ quest .sandra_riddle_1:
 ############################################################
 # Quest 2
 
-# FIXME quest
-# loot loot_2 items from the graveyard
+loot_group .sandra_riddle_2_quest_item: {}
+
+item .sandra_riddle_2_quest_item:
+{
+	icon: icon_gold_totem
+	item_level: 28
+	loot_groups: [ .sandra_riddle_2_quest_item ]
+	flags: [ not_sellable ]
+	string: "Shiny Loot"
+	quest: .sandra_riddle_2
+	stack: 5
+}
+
+loot_table .sandra_riddle_2_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .sandra_riddle_2_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_sandra_riddle_2_quest_item:
+{
+	string: "Shiny Item"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ loot_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .sandra_riddle_2_quest_item
+			verb: pick_up
+			range: 1 
+			level: 28
+			despawn: true 		
+			required_quest: .sandra_riddle_2
+		}		
+	}
+}
+
+objective .sandra_riddle_2:
+{
+	string: "Shiny Items Collected"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .sandra_riddle_2_quest_item count: 5 }
+}
 
 quest .sandra_riddle_2:
 {
+	string: "."
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+
+	progress:
+	[
+		"."
+	]
+	
+	completion:
+	[
+		"."
+	]
+
+	objectives: [ .sandra_riddle_2 ]
 	prerequisites: [ .sandra_riddle_1 ]
 	level: 28
 }

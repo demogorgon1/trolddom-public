@@ -9,6 +9,10 @@ dialogue_screen .old_man_james:
 	
 	options:
 	[
+		{ quest<completion_only>: .fullay_1 }
+		{ quest: .old_man_james_1 }
+		{ quest: .old_man_james_2 }
+		{ quest: .old_man_james_3 }
 	]
 }
 
@@ -28,32 +32,183 @@ entity thalvaron_old_man_james: !NPC
 ############################################################
 # Quest 1
 
-# FIXME quest
-# kill thalvaron_north_kobolds
+objective .old_man_james_1:
+{
+	string: "Kobolds Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_east_kobold_a thalvaron_east_kobold_b ]
+		count: 6
+	}
+}
 
 quest .old_man_james_1:
 {
+	string: "Contaminated Water"
+
+	text:
+	[
+		"Follow the path south, cross the river, enter the cave, and hunt kobolds."
+	]
+	
+	description: 
+	[
+		"."
+	]
+
+	progress:
+	[
+		"."
+	]
+	
+	completion:
+	[
+		"."
+	]
+	
+	objectives: [ .old_man_james_1 ]
 	level: 26
 }
 
 ############################################################
 # Quest 2
 
-# FIXME quest
-# enter water cave, use item to summon kobolds and kill them
+objective .old_man_james_2:
+{
+	string: "Elixir Administered"	
+	maps: [ thalvaron ]	
+	manual_boolean: {}
+}
+
+map_entity_spawn thalvaron_old_man_james_2_spawn_1: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn thalvaron_old_man_james_2_spawn_2: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn thalvaron_old_man_james_2_spawn_3: { spawn_timer: { only_when_triggered: true } }
+
+item .old_man_james_2_quest_item:
+{
+	binds: when_picked_up
+	type: miscellaneous
+	flags: [ unique not_sellable ]
+	item_level: 26
+	icon: icon_green_bottle		
+	string: "Kobold Poison"
+	use_ability: $ability [ icon string ]
+	{
+		description: "Pour into water by Kobold shrine."
+		flags: [ target_self target_aoe target_aoe_hostile item ]
+		cooldowns: [ global ]	
+		cooldown: $cooldown { duration: 40 }
+		states: [ default ]
+		sound_effects: !SOUND_DRINK_POTION{}	
+		aoe_radius: 7
+		aoe_cap: 1
+		aoe_requirement target<must_be_type>: { id: thalvaron_old_man_james_2_quest_item }
+		cast_time: 20	
+		direct_effect simple<activate_trigger>: { }
+		
+		direct_effect spawn_entity: { flags: [ reverse ] spawn_flags: [ no_owner ] npc_target_threat: 20 entity: thalvaron_north_kobold_a map_entity_spawn: thalvaron_old_man_james_2_spawn_1 }			
+		direct_effect spawn_entity: { flags: [ reverse ] spawn_flags: [ no_owner ] npc_target_threat: 20 entity: thalvaron_north_kobold_b map_entity_spawn: thalvaron_old_man_james_2_spawn_2 }			
+		direct_effect spawn_entity: { flags: [ reverse ] spawn_flags: [ no_owner ] npc_target_threat: 20 entity: thalvaron_north_kobold_a map_entity_spawn: thalvaron_old_man_james_2_spawn_3 }			
+	}	
+}
+
+entity thalvaron_old_man_james_2_quest_item:
+{
+	components:
+	{
+		position: { }		
+		visibility: { }		
+		trigger: { lock_out_ticks: 50 trigger_manual_objective: .old_man_james_2 }
+		combat_public: { faction: monsters }
+	}
+}
 
 quest .old_man_james_2:
 {
+	string: "."
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+
+	progress:
+	[
+		"."
+	]
+	
+	completion:
+	[
+		"."
+	]
+	
 	level: 26
+	quest_items: [ .old_man_james_2_quest_item ]
+	prerequisites: [ .old_man_james_1 ]
+	objectives: [ .old_man_james_2 ]
 }
 
 ############################################################
 # Quest 3
 
-# FIXME quest
-# go to twin temples and kill thalvaron_jungle_harpy
+objective .old_man_james_3_a:
+{
+	string: "Firbiu Temple Harpies Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_jungle_harpy ]
+		count: 5
+	}
+}
+
+objective .old_man_james_3_b:
+{
+	string: "Feruc Temple Harpies Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_jungle_harpy_2 ]
+		count: 5
+	}
+}
 
 quest .old_man_james_3:
 {
+	string: "Aerial Assault"
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+
+	progress:
+	[
+		"."
+	]
+	
+	completion:
+	[
+		"."
+	]
+	
+	objectives: [ .old_man_james_3_a .old_man_james_3_b ]
 	level: 26
 }

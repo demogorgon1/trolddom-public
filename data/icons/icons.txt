@@ -859,6 +859,13 @@ sprites:
 	sprite icon_talon_1 : { tags: [ icon ] }
 	sprite icon_talon_2 : { tags: [ icon ] }
 	sprite icon_herbs_5 : { tags: [ icon ] }
+	
+	cursor: { position: [ 0 752 ] }	
+	sprite icon_bottle_3 : { tags: [ icon ] }
+	sprite icon_junk_1 : { tags: [ icon ] }
+	sprite icon_scales_3 : { tags: [ icon ] }
+	sprite icon_exotic_fruit : { tags: [ icon ] }
+
 }
 
 

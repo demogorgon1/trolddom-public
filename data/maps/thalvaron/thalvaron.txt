@@ -135,6 +135,8 @@ zone .tomb_of_jurgorth: { string: "Tomb of Jurgorth" }
 zone .tomb_of_the_last_king: { string: "Tomb of the Last King" }
 zone .lonely_cove: { string: "Lonely Cove" }
 zone .shrine_of_zilu: { string: "Shrine of Zilu" }
+zone .ancient_burial_site: { string: "Ancient Burial Site" }
+zone .kobold_shrine: { string: "Kobold Shrine" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -485,6 +487,12 @@ map_entity_spawn thalvaron_captain_blackstone_1_quest_item: { entity thalvaron_c
 map_entity_spawn thalvaron_faolan_1_quest_item: { entity thalvaron_faolan_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_zilu: { entity thalvaron_zilu: { init_state: default } } 
 map_entity_spawn thalvaron_flimlock_1_quest_item: { entity thalvaron_flimlock_1_quest_item: { init_state: default } } # No respawn needed
+map_entity_spawn thalvaron_flimlock_2_quest_item: { entity thalvaron_flimlock_2_quest_item: { init_state: default } } # No respawn needed
+map_entity_spawn thalvaron_fradi_1_quest_item: { entity thalvaron_fradi_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_old_man_james_2_quest_item: { entity thalvaron_old_man_james_2_quest_item: { init_state: default } } # No respawn needed
+map_entity_spawn thalvaron_sandra_riddle_2_quest_item: { entity thalvaron_sandra_riddle_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_trader_joseph_1_quest_item: { entity thalvaron_trader_joseph_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_trader_joseph_2_quest_item: { entity thalvaron_trader_joseph_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 
 map_palette .stuff:
 {
@@ -1103,6 +1111,21 @@ map_palette .stuff:
 	entity_spawn thalvaron_zilu: [ 140 169 105 ]
 	entity_spawn thalvaron_faolan_1_quest_item: [ 240 10 158 ]
 	entity_spawn thalvaron_flimlock_1_quest_item: [ 109 55 91 ]
+	entity_spawn thalvaron_flimlock_2_quest_item: [ 204 91 192 ]
+	entity_spawn thalvaron_flimlock_2_spawn_1: [ 204 191 192 ]
+	entity_spawn thalvaron_flimlock_2_spawn_2: [ 4 191 192 ]
+	entity_spawn thalvaron_flimlock_2_spawn_3: [ 204 1 192 ]
+	entity_spawn thalvaron_fradi_1_quest_item: [ 108 48 204 ]
+	entity_spawn thalvaron_urthon_ghoul: [ 30 159 95 ]
+	entity_spawn thalvaron_urthon_necromancer: [ 130 159 195 ]
+	entity_spawn thalvaron_old_man_james_2_quest_item: [ 230 59 95 ]
+	entity_spawn thalvaron_old_man_james_2_spawn_1: [ 130 59 95 ]
+	entity_spawn thalvaron_old_man_james_2_spawn_2: [ 220 59 195 ]
+	entity_spawn thalvaron_old_man_james_2_spawn_3: [ 20 251 95 ]
+	entity_spawn thalvaron_jungle_harpy_2: [ 20 251 195 ]
+	entity_spawn thalvaron_sandra_riddle_2_quest_item: [ 121 125 159 ]
+	entity_spawn thalvaron_trader_joseph_1_quest_item: [ 222 111 49 ]
+	entity_spawn thalvaron_trader_joseph_2_quest_item: [ 122 211 49 ]
 }
 
 map_palette .levels:
@@ -1252,6 +1275,8 @@ map_palette .sub_zones:
 	sub_zone .tomb_of_jurgorth: [ 169 161 40 ]
 	sub_zone .tomb_of_the_last_king: [ 144 40 169 ]
 	sub_zone .shrine_of_zilu: [ 170 113 23 ]
+	sub_zone .ancient_burial_site: [ 234 28 128 ]
+	sub_zone .kobold_shrine: [ 239 170 201 ]
 	
 	sub_zone thalvaron_crab_giant: [ 39 192 83 ]
 	sub_zone thalvaron_vampire_boss: [ 139 93 48 ]

@@ -7,6 +7,9 @@ dialogue_screen .trader_joseph:
 	
 	options:
 	[
+		{ quest<completion_only>: .fullay_2 }
+		{ quest: .trader_joseph_1 }
+		{ quest: .trader_joseph_2 }
 		{ text: "Let me browse your goods." goto: $dialogue_screen !TRADE_SUPPLIES{} }
 	]
 }
@@ -28,21 +31,168 @@ entity thalvaron_trader_joseph: !NPC
 ############################################################
 # Quest 1
 
-# FIXME quest
-# collect special mangos from north dense jungle with killer plants
+loot_group .trader_joseph_1_quest_item: {}
+
+item .trader_joseph_1_quest_item:
+{
+	icon: icon_exotic_fruit
+	item_level: 26
+	loot_groups: [ .trader_joseph_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Mango"
+	quest: .trader_joseph_1
+	stack: 5
+}
+
+loot_table .trader_joseph_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .trader_joseph_1_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_trader_joseph_1_quest_item:
+{
+	string: "Mango"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ mango_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .trader_joseph_1_quest_item
+			verb: pick_up
+			range: 1 
+			level: 26
+			despawn: true 		
+			required_quest: .trader_joseph_1
+		}		
+	}
+}
+
+objective .trader_joseph_1:
+{
+	string: "Mangos Gathered"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .trader_joseph_1_quest_item count: 5 }
+}
 
 quest .trader_joseph_1:
 {
+	string: "."
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+
+	progress:
+	[
+		"."
+	]
+	
+	completion:
+	[
+		"."
+	]
+
+	objectives: [ .trader_joseph_1 ]
 	level: 26
 }
 
 ############################################################
 # Quest 2
 
-# FIXME quest
-# collect things from the swamp
+loot_group .trader_joseph_2_quest_item: {}
+
+item .trader_joseph_2_quest_item:
+{
+	icon: icon_banana
+	item_level: 27
+	loot_groups: [ .trader_joseph_2_quest_item ]
+	flags: [ not_sellable ]
+	string: "Swamp Banana"
+	quest: .trader_joseph_2
+	stack: 6
+}
+
+loot_table .trader_joseph_2_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .trader_joseph_2_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_trader_joseph_2_quest_item:
+{
+	string: "Swamp Banana"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ banana_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .trader_joseph_2_quest_item
+			verb: pick_up
+			range: 1 
+			level: 27
+			despawn: true 		
+			required_quest: .trader_joseph_2
+		}		
+	}
+}
+
+objective .trader_joseph_2:
+{
+	string: "Swamp Bananas Gathered"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .trader_joseph_2_quest_item count: 6 }
+}
 
 quest .trader_joseph_2:
 {
+	string: "."
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+
+	progress:
+	[
+		"."
+	]
+	
+	completion:
+	[
+		"."
+	]
+
+	objectives: [ .trader_joseph_2 ]
+	prerequisites: [ .trader_joseph_1 ]
 	level: 27
 }

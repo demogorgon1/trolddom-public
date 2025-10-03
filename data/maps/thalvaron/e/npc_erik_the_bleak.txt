@@ -7,6 +7,7 @@ dialogue_screen .erik_the_bleak:
 	
 	options:
 	[
+		{ quest<offer_only>: .fritz_dawnstar_3 }	
 		{ quest: .erik_the_bleak_1 }
 		{ quest<offer_only>: .erik_the_bleak_2 }
 	]

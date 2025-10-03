@@ -1233,6 +1233,8 @@ sprites:
 	sprite tomb_1: { }
 	sprite sand_orchid: { }
 	sprite mushroom_3: { }
+	sprite junk_2: { }
+	sprite mango_1: { }
 		
 }
 

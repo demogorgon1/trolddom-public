@@ -214,6 +214,20 @@ map_entity_spawn thalvaron_mirefiend:
 	entity thalvaron_mirefiend_dweller: !NPC { _string: "Mirefiend Dweller" _sprite: swamp_monster_3 _sprite_dead: swamp_monster_3_dead }
 }
 
+# Ghouls
+{	
+	${
+		_level: 27
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .wandering_short					
+		_loot_table: default_zombie
+	}
+
+	entity thalvaron_mire_ghoul_a: !NPC { _string: "Living Dead" _sprite: ghoul_1 _sprite_dead: ghoul_1_dead _loot_table: default_zombie }
+	entity thalvaron_mire_ghoul_b: !NPC { _string: "Living Dead" _sprite: ghoul_2 _sprite_dead: ghoul_2_dead _loot_table: default_zombie }
+}
+
 ##########################################################################################
 # Misc monsters
 
@@ -223,6 +237,7 @@ map_entity_spawn thalvaron_thalyssian_snake: { entity thalvaron_thalyssian_snake
 map_entity_spawn thalvaron_e_boar_25: { entity thalvaron_e_boar_25: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_e_boar_26: { entity thalvaron_e_boar_26: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_jungle_harpy: { entity thalvaron_jungle_harpy: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_jungle_harpy_2: { entity thalvaron_jungle_harpy_2: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_jungle_lizard: { entity thalvaron_jungle_lizard: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_jungle_lizard_boss: { entity thalvaron_jungle_lizard_boss: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_thalyssian_spider_26: { entity thalvaron_thalyssian_spider_26: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
@@ -277,8 +292,7 @@ map_entity_spawn thalvaron_wyvern: { entity thalvaron_wyvern: { } spawn_timer: !
 		slots:
 		[	
 			{ 
-				possibility: { weight: 1 }
-				#possibility: { weight: 1 loot_group: .theodore_1_quest_item requirement self<must_have_active_quest>: { id: .theodore_1 } } 
+				possibility: { weight: 1 loot_group: .fullay_2_quest_item requirement self<must_have_active_quest>: { id: .fullay_2 } } 
 			}
 			
 			!WORLD_DROPS {}
@@ -287,7 +301,7 @@ map_entity_spawn thalvaron_wyvern: { entity thalvaron_wyvern: { } spawn_timer: !
 	}
 	
 	${
-		_level: 20
+		_level: 26
 		_faction: monsters
 		_creature_type: beast
 		_default_behavior_state: .wandering_short
@@ -321,8 +335,9 @@ map_entity_spawn thalvaron_wyvern: { entity thalvaron_wyvern: { } spawn_timer: !
 		_level: 26
 	}
 
-	entity thalvaron_jungle_harpy: !NPC { _string: "Jungle Harpy" _sprite: harpy_1 _sprite_dead: harpy_1_dead }
-}
+	entity thalvaron_jungle_harpy: !NPC { _string: "Firbiu Temple Harpy" _sprite: harpy_1 _sprite_dead: harpy_1_dead }
+	entity thalvaron_jungle_harpy_2: !NPC { _string: "Feruc Temple Harpy" _sprite: harpy_2 _sprite_dead: harpy_2_dead }	
+}   
 
 # Jungle lizards
 {
@@ -543,7 +558,16 @@ map_entity_spawn thalvaron_urthon_orc:
 }
 
 ##########################################################################################
-# Urthonak Keep
+# Urthon / urthonak keep
+
+map_entity_spawn thalvaron_urthon_ghoul: 
+{ 
+	entity thalvaron_urthon_ghoul_a: {} 
+	entity thalvaron_urthon_ghoul_b: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_urthon_necromancer: { entity thalvaron_urthon_necromancer: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 
 # Ghosts
 {
@@ -556,6 +580,77 @@ map_entity_spawn thalvaron_urthon_orc:
 	}
 
 	entity thalvaron_urthonak_ghost: !NPC { _string: "Angry Ghost" _sprite: ghost_3 _sprite_dead: ghost_3_dead _resource_health: 1.3 }
+}
+
+# Ghouls
+{	
+	${
+		_level: 28
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .wandering_long					
+		_loot_table: default_zombie
+		_resource_health: 0.64
+		_weapon_damage: 0.74
+	}
+
+	entity thalvaron_urthon_ghoul_a: !NPC { _string: "Creeping Death" _sprite: ghoul_1 _sprite_dead: ghoul_1_dead }
+	entity thalvaron_urthon_ghoul_b: !NPC { _string: "Creeping Death" _sprite: ghoul_2 _sprite_dead: ghoul_2_dead }
+}
+
+# Skeleton
+{	
+	${
+		_level: 28
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .wandering_long					
+		_loot_table: default_zombie
+		_resource_health: 0.64
+		_weapon_damage: 0.74
+	}
+
+	entity thalvaron_urthon_skeleton: !NPC { _string: "Skeleton" _sprite: skeleton_warrior_1 _sprite_dead: skeleton_warrior_1_dead }
+}
+
+# Necromancer
+{	
+	${
+		_level: 28
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .passive
+		_loot_table: default_humanoid
+		_resource_health: 2.2
+		_weapon_damage: 0.67
+		_abilities: 
+		[ 
+			{
+				target: self
+				id: $ability
+				{
+					string: "Summon Undead"
+					range: 1
+					cast_time: 40
+					cooldowns: [ global ]
+					cooldown: $cooldown { duration: 80 }
+					flags: [ target_self ]
+					states: [ in_combat ]
+					icon: icon_poison
+					delay: 3
+
+					direct_effect spawn_entity:
+					{
+						spawn_flags: [ no_owner ]
+						entity: thalvaron_urthon_skeleton
+					}					
+				}
+			}						
+			{ id: npc_frostbolt_no_cooldown target: random_player }
+		] 		
+	}
+
+	entity thalvaron_urthon_necromancer: !NPC { _string: "John Krellington" _sprite: man_7 _sprite_dead: man_7_dead }
 }
 
 ##########################################################################################

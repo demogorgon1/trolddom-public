@@ -6,8 +6,9 @@ dialogue_screen .frida:
 	]		
 	
 	options:
-	[
+	[	
 		{ quest<completion_only>: .faolan_2 }
+		{ quest: .frida_1 }
 	]
 }
 
@@ -27,10 +28,43 @@ entity thalvaron_frida: !NPC
 ############################################################
 # Quest 1
 
-# FIXME quest
-# kill thalvaron_thalyssian_beast
+objective .frida_1:
+{
+	string: "Mysterious Beast Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_thalyssian_beast ]
+		count: 1
+	}
+}
 
 quest .frida_1:
 {
+	string: "."
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+
+	progress:
+	[
+		"."
+	]
+	
+	completion:
+	[
+		"."
+	]
+	
+	objectives: [ .frida_1 ]
 	level: 26
 }

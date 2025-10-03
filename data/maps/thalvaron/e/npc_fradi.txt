@@ -2,11 +2,12 @@ dialogue_screen .fradi:
 {
 	text: 
 	[	
-		"Greetings."
+		"Huh, this is the forbidden island, you know."
 	]		
 	
 	options:
 	[
+		{ quest: .fradi_1 }
 	]
 }
 
@@ -26,10 +27,83 @@ entity thalvaron_fradi: !NPC
 ############################################################
 # Quest 1
 
-# FIXME quest
-# collect items off the coast of zilkore
+loot_group .fradi_1_quest_item: {}
+
+item .fradi_1_quest_item:
+{
+	icon: icon_junk_1
+	item_level: 25
+	loot_groups: [ .fradi_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Beach Junk"
+	quest: .fradi_1
+	stack: 6
+}
+
+loot_table .fradi_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .fradi_1_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_fradi_1_quest_item:
+{
+	string: "Junk"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ junk_2 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .fradi_1_quest_item
+			verb: pick_up
+			range: 1 
+			level: 25
+			despawn: true 		
+			required_quest: .fradi_1
+		}		
+	}
+}
+
+objective .fradi_1:
+{
+	string: "Beach Junk Collected"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .bail_trok_1_quest_item count: 6 }
+}
 
 quest .fradi_1:
 {
+	string: "."
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+
+	progress:
+	[
+		"."
+	]
+	
+	completion:
+	[
+		"."
+	]
+
+	objectives: [ .fradi_1 ]
 	level: 25
 }

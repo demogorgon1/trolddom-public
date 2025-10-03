@@ -7,6 +7,8 @@ dialogue_screen .ranger_ursa:
 	
 	options:
 	[
+		{ quest: .ranger_ursa_1 }
+		{ quest: .ranger_ursa_2 }
 	]
 }
 
@@ -26,22 +28,88 @@ entity thalvaron_ranger_ursa: !NPC
 ############################################################
 # Quest 1
 
-# FIXME quest
-# slay thalvaron_urthon_orc_boss
+objective .ranger_ursa_1:
+{
+	string: "Uglor Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_urthon_orc_boss ]
+		count: 1
+	}
+}
 
 quest .ranger_ursa_1:
 {
+	string: "."
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+
+	progress:
+	[
+		"."
+	]
+	
+	completion:
+	[
+		"."
+	]
+	
+	objectives: [ .ranger_ursa_1 ]
 	level: 28
 }
 
 ############################################################
 # Quest 2
 
-# FIXME quest
-# slay thalvaron_urthon_orc_wolf_wrangler
+objective .ranger_ursa_2:
+{
+	string: "Wolf Wrangler Bazstik Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_urthon_orc_wolf_wrangler ]
+		count: 1
+	}
+}
 
 quest .ranger_ursa_2:
 {
+	string: "."
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+
+	progress:
+	[
+		"."
+	]
+	
+	completion:
+	[
+		"."
+	]
+	
+	objectives: [ .ranger_ursa_2 ]
 	prerequisites: [ .ranger_ursa_1 ]
 	level: 28
 }

@@ -8,6 +8,8 @@ dialogue_screen .flimlock:
 	options:
 	[
 		{ quest: .flimlock_1 }
+		{ quest: .flimlock_2 }
+		{ quest: .flimlock_3 }
 		{ quest<completion_only>: .crust_elemental_quest_item }
 		{ quest<completion_only>: .zislo_1 }
 	]
@@ -108,12 +110,84 @@ quest .flimlock_1:
 ############################################################
 # Quest 2
 
-# FIXME quest
-# pour elixir into water by old zilkore burial site - fight off undead that spawns
+objective .flimlock_2:
+{
+	string: "Elixir Administered"	
+	maps: [ thalvaron ]	
+	manual_boolean: {}
+}
+
+map_entity_spawn thalvaron_flimlock_2_spawn_1: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn thalvaron_flimlock_2_spawn_2: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn thalvaron_flimlock_2_spawn_3: { spawn_timer: { only_when_triggered: true } }
+
+item .flimlock_2_quest_item:
+{
+	binds: when_picked_up
+	type: miscellaneous
+	flags: [ unique not_sellable ]
+	item_level: 27
+	icon: icon_bottle_3		
+	string: "Swamp Elixir"
+	use_ability: $ability [ icon string ]
+	{
+		description: "Pour into water at the old burial site."
+		flags: [ target_self target_aoe target_aoe_hostile item ]
+		cooldowns: [ global ]	
+		cooldown: $cooldown { duration: 40 }
+		states: [ default ]
+		sound_effects: !SOUND_DRINK_POTION{}	
+		aoe_radius: 4
+		aoe_cap: 1
+		aoe_requirement target<must_be_type>: { id: thalvaron_flimlock_2_quest_item }
+		cast_time: 20	
+		direct_effect simple<activate_trigger>: { }
+		
+		direct_effect spawn_entity: { flags: [ reverse ] spawn_flags: [ no_owner ] npc_target_threat: 20	entity: thalvaron_mire_ghoul_a map_entity_spawn: thalvaron_flimlock_2_spawn_1 }			
+		direct_effect spawn_entity: { flags: [ reverse ] spawn_flags: [ no_owner ] npc_target_threat: 20	entity: thalvaron_mire_ghoul_b map_entity_spawn: thalvaron_flimlock_2_spawn_2 }			
+		direct_effect spawn_entity: { flags: [ reverse ] spawn_flags: [ no_owner ] npc_target_threat: 20	entity: thalvaron_mire_ghoul_a map_entity_spawn: thalvaron_flimlock_2_spawn_3 }			
+	}	
+}
+
+entity thalvaron_flimlock_2_quest_item:
+{
+	components:
+	{
+		position: { }		
+		visibility: { }		
+		trigger: { lock_out_ticks: 50 trigger_manual_objective: .flimlock_2 }
+		combat_public: { faction: monsters }
+	}
+}
 
 quest .flimlock_2:
 {
+	string: "."
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+
+	progress:
+	[
+		"."
+	]
+	
+	completion:
+	[
+		"."
+	]
+	
 	level: 27
+	quest_items: [ .flimlock_2_quest_item ]
+	prerequisites: [ .flimlock_1 ]
+	objectives: [ .flimlock_2 ]
 }
 
 ############################################################
@@ -122,8 +196,43 @@ quest .flimlock_2:
 # FIXME quest
 # kill thalvaron_lizard_wizard
 
+objective .flimlock_3:
+{
+	string: "Zim'Bwob Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_lizard_wizard ]
+		count: 1
+	}
+}
+
 quest .flimlock_3:
 {
+	string: "."
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+
+	progress:
+	[
+		"."
+	]
+	
+	completion:
+	[
+		"."
+	]
+	
 	level: 27
 	prerequisites: [ .crust_elemental_quest_item ]
 }
@@ -205,11 +314,32 @@ entity thalvaron_flimlock_3_portal_return:
 ############################################################
 # Quest 4
 
-# FIXME quest
-# lead to npc_frolok
-
 quest .flimlock_4:
 {
+	string: "."
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+
+	progress:
+	[
+		"."
+	]
+	
+	completion:
+	[
+		"."
+	]
+	
+	reward_xp_multiplier: 0.25
+	reward_cash_multiplier: 0.25
 	level: 30
 	prerequisites: [ .zislo_1 ]
 }

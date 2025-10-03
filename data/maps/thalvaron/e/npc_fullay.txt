@@ -7,7 +7,8 @@ dialogue_screen .fullay:
 	
 	options:
 	[
-	
+		{ quest<offer_only>: .fullay_1 requirement self<must_not_have_completed_quest>: .old_man_james_1 }
+		{ quest<offer_only>: .fullay_2 }
 	]
 }
 
@@ -32,18 +33,77 @@ entity thalvaron_fullay: !NPC
 
 quest .fullay_1:
 {
+	string: "."
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+
+	completion:
+	[
+		"."
+	]
+	
+	reward_xp_multiplier: 0.32
+	reward_cash_multiplier: 0.27
 	level: 26
 }
 
 ############################################################
 # Quest 2
 
-# FIXME quest
-# kill thalvaron_thalyssian_snake, take items to thalvaron_trader_joseph
+loot_group .fullay_2_quest_item: { }
+
+item .fullay_2_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .fullay_2_quest_item ]		
+	string: "Thalyssian Snake Scale" 
+	icon: icon_scales_3
+	item_level: 26
+	quest: .fullay_2
+	flags: [ not_sellable unique ]
+}
+
+objective .fullay_2:
+{
+	string: "Thalyssian Snake Scale"
+	collect_items: { item: .fullay_2_quest_item count: 6 }
+}
 
 quest .fullay_2:
 {
+	string: "."
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+	
+	completion:
+	[
+		"."
+	]
+	
+	progress:
+	[
+		"."
+	]
+
 	level: 26
+	objectives: [ .fullay_2 ]
 }
+
 
 

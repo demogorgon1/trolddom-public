@@ -7,6 +7,9 @@ dialogue_screen .fritz_dawnstar:
 	
 	options:
 	[
+		{ quest: .fritz_dawnstar_1 }
+		{ quest: .fritz_dawnstar_2 }
+		{ quest<offer_only>: .fritz_dawnstar_3 }
 	]
 }
 
@@ -38,22 +41,88 @@ entity thalvaron_fritz_dawnstar_horse: !NPC
 ############################################################
 # Quest 1
 
-# FIXME quest
-# slay undead at the graveyard
+objective .fritz_dawnstar_1:
+{
+	string: "Graveyard Undead Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_urthon_ghoul_a thalvaron_urthon_ghoul_b ]
+		count: 6
+	}
+}
 
 quest .fritz_dawnstar_1:
 {
+	string: "."
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+
+	progress:
+	[
+		"."
+	]
+	
+	completion:
+	[
+		"."
+	]
+	
+	objectives: [ .fritz_dawnstar_1 ]
 	level: 28
 }
 
 ############################################################
 # Quest 2
 
-# FIXME quest
-# slay necromancer in the crypt
+objective .fritz_dawnstar_2:
+{
+	string: "John Krellington Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_urthon_necromancer ]
+		count: 1
+	}
+}
 
 quest .fritz_dawnstar_2:
 {
+	string: "."
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+
+	progress:
+	[
+		"."
+	]
+	
+	completion:
+	[
+		"."
+	]
+	
+	objectives: [ .fritz_dawnstar_2 ]
 	prerequisites: [ .fritz_dawnstar_1 ]
 	level: 28
 }
@@ -61,11 +130,27 @@ quest .fritz_dawnstar_2:
 ############################################################
 # Quest 3
 
-# FIXME quest
-# lead to thalvaron_erik_the_bleak
-
 quest .fritz_dawnstar_3:
 {
+	string: "."
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+
+	completion:
+	[
+		"."
+	]
+	
+	reward_xp_multiplier: 0.32
+	reward_cash_multiplier: 0.27
 	prerequisites: [ .fritz_dawnstar_2 ]
 	level: 28
 }

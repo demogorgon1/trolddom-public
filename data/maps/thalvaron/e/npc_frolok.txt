@@ -23,6 +23,3 @@ entity thalvaron_frolok: !NPC
 	_dialogue_root: $dialogue_root { .frolok: { } }
 }
 
-############################################################
-# Quest 1
-
