@@ -629,7 +629,7 @@ namespace tpublic::Systems
 								}
 
 								if (npc->m_npcBehaviorState != NULL)
-									npc->m_moveCooldownUntilTick = aContext->m_tick + npc->m_npcBehaviorState->m_patrolMoveIntervalTicks;
+									npc->m_moveCooldownUntilTick = aContext->m_tick + npc->m_npcBehaviorState->m_patrolMoveIntervalTicks + ((*aContext->m_random)() & 1);
 							}
 						}
 						break;

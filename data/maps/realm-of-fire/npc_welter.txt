@@ -81,7 +81,7 @@ entity .welter_1_quest_item_a: !BASALT_CRYSTAL_ENTITY { _sprite: crystal_3 }
 entity .welter_1_quest_item_b: !BASALT_CRYSTAL_ENTITY { _sprite: crystal_4 }
 
 item realm_of_fire_fishing_rod:
-{
+{ 
 	type: weapon_2h_staff
 	flags: [ fishing_rod ]
 	equipment_slots: [ main_hand ]
