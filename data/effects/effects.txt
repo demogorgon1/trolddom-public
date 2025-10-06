@@ -78,6 +78,9 @@ sprites:
 	sprite effect_void_zone_0: { flags: [ ] }
 	sprite effect_void_zone_1: { flags: [ ] }
 	sprite effect_void_zone_2: { flags: [ ] }
+	sprite effect_taunt_0: { flags: [ centered ] }
+	sprite effect_taunt_1: { flags: [ centered ] }
+	sprite effect_taunt_2: { flags: [ centered ] }
 	
 	cursor: { position: [ 0 20 ] }	
 	size: { width: 24 height: 24 }

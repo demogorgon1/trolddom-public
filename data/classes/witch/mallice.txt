@@ -456,6 +456,7 @@ aura curse_of_attraction:
 	flags: [ unique magic ]
 	sound: spell_14
 	aura_effect taunt: {}	
+	particle_system: taunt
 }
 
 cooldown curse_of_attraction:

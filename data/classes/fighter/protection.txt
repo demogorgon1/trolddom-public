@@ -17,8 +17,10 @@ talent_tree fighter_protection:
 		talent fighter_protection_last_stand: "I"
 		talent fighter_protection_shield_crush: "J"
 		talent fighter_protection_heroic_strike: "K"
+		talent fighter_protection_provocation: "L"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_right_arrow: "r"
+		sprite talent_tree_down: "|"
 	}
 	
 	map:
@@ -28,9 +30,53 @@ talent_tree fighter_protection:
 		"D.GrB.F"
 		"d.d...."
 		"E.I.H.K"
-		"....d.."
-		"....J.."
+		"|...d.."
+		"|...J.."
+		"d......"
+		"L......"
 	]
+}
+
+###############################################################################
+# Provocation
+
+talent fighter_protection_provocation:
+{
+	string: "Provocation"
+	icon: icon_provocation
+	talent_tree_points_required: 20
+	points:
+	[
+		{ ability: provocation }
+	]
+}
+
+ability provocation:
+{
+	string: "Provocation"
+	description: "Forces all nearby enemies to attack you for 5 seconds."
+	range: 1	
+	cooldowns: [ global ]
+	cooldown: $cooldown { duration: 600 }
+	flags: [ target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+	states: [ default in_combat ]
+	icon: icon_provocation
+	delay: 3
+	aoe_radius: 5
+	aoe_cap: 10
+	aoe_requirement target<must_not_be_in_state>: { id: dead }
+	talent_tree: fighter_protection
+	
+	direct_effect threat:
+	{	
+		apply_to: source
+		add: top
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: taunt
+	}	
 }
 
 ###############################################################################
@@ -606,7 +652,6 @@ ability knock:
 	}
 }
 
-
 particle_system knock:
 {
 	particle:
@@ -712,9 +757,27 @@ aura taunt:
 	type: debuff
 	duration: 50	
 	flags: [ unique ]
+	particle_system: taunt
 	
 	aura_effect taunt: 
 	{
+	}
+}
+
+particle_system taunt:
+{
+	particle:
+	{
+		sprites: [ effect_taunt_0 effect_taunt_1 effect_taunt_2 effect_taunt_1 ]
+		flags: [ attached ]
+		sprite_interval: 125
+		count: 1
+		scale: 1
+		alpha: 0.45
+		fade_in: 250	
+		fade_out: 250
+		offset_x: 0.5
+		offset_y: 0.5	
 	}
 }
 

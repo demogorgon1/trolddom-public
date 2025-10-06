@@ -376,6 +376,7 @@ aura taunt_2:
 	type: debuff
 	duration: 50	
 	flags: [ unique ]
+	particle_system: taunt
 	
 	aura_effect taunt: 
 	{
