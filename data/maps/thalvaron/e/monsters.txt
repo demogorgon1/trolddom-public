@@ -685,6 +685,7 @@ map_entity_spawn thalvaron_kareth_skeleton_priest: { entity thalvaron_kareth_ske
 map_entity_spawn thalvaron_karethi_scorpion: { entity thalvaron_karethi_scorpion: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_desert_crocodile: { entity thalvaron_desert_crocodile: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_kareth_skeleton_high_wizard: { entity thalvaron_kareth_skeleton_high_wizard: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_kareth_skeleton_special: { entity thalvaron_kareth_skeleton_special: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 
 loot_table .kareth_skeletons:
 {
@@ -806,6 +807,42 @@ loot_table .kareth_skeletons:
 
 	entity thalvaron_kareth_skeleton_guard_29: !NPC { _string: "Temple Guard" _sprite: skeleton_11 _sprite_dead: skeleton_11_dead _level: 29 }
 	entity thalvaron_kareth_skeleton_guard_30: !NPC { _string: "Temple Guard" _sprite: skeleton_11 _sprite_dead: skeleton_11_dead _level: 30 }
+}
+
+# Special skeleton
+{
+	${
+		_level: 29
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .wandering_long
+		_loot_table: $loot_table
+		{
+			slots:
+			[	
+				{ 
+					possibility: 
+					{ 
+						loot_group: .farmer_farbottom_1_quest_item
+						requirement self<must_have_active_quest>: .farmer_farbottom_1
+					} 
+				}
+				
+				{ 
+					possibility: 
+					{ 
+						loot_group: .urgon_lark_2_quest_item
+						requirement self<must_have_active_quest>: .urgon_lark_2
+					} 
+				}
+				
+				!WORLD_DROPS {}
+				!WORLD_DROPS_SKELETONS {}
+			]	
+		}		
+	}
+
+	entity thalvaron_kareth_skeleton_special: !NPC { _string: "Emerald Phalanx" _sprite: skeleton_13 _sprite_dead: skeleton_13_dead }
 }
 
 # Scorpions

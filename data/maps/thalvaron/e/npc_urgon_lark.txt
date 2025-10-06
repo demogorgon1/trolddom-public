@@ -29,22 +29,94 @@ entity thalvaron_urgon_lark: !NPC
 ############################################################
 # Quest 1
 
-# FIXME quest
-# kill thalvaron_desert_crocodile
-                                                  
-quest .urgon_lark_1:                          
-{            
+objective .urgon_lark_1:
+{
+	string: "Crocodiles Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_desert_crocodile ]
+		count: 3
+	}
+}
+
+quest .urgon_lark_1:
+{
+	string: "."
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+
+	progress:
+	[
+		"."
+	]
+	
+	completion:
+	[
+		"."
+	]
+	
+	objectives: [ .urgon_lark_1 ]
 	level: 29
 }
 
 ############################################################
 # Quest 2
+loot_group .urgon_lark_2_quest_item: { }
 
-# FIXME quest
-# kill skeletons in eastern_kareth
-                                                  
-quest .urgon_lark_2:                          
-{            
+item .urgon_lark_2_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .urgon_lark_2_quest_item ]		
+	string: "Emerald Phalanx Helmet" 
+	icon: icon_plate_helmet_1
+	stack: 6
+	item_level: 29
+	quest: .urgon_lark_2
+	flags: [ not_sellable ]
+}
+
+objective .urgon_lark_2:
+{
+	string: "Emerald Phalanx Helmets"
+	collect_items: { item: .urgon_lark_2_quest_item count: 6 }
+}
+
+quest .urgon_lark_2:
+{
+	string: "."
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+
+	progress:
+	[
+		"."
+	]
+	
+	completion:
+	[
+		"."
+	]
+	
+	objectives: [ .urgon_lark_2 ]
 	prerequisites: [ .urgon_lark_1 ]
 	level: 29
 }
@@ -52,11 +124,45 @@ quest .urgon_lark_2:
 ############################################################
 # Quest 3
 
-# FIXME quest
-# kill skeleton priests in the temple
-                                                  
-quest .urgon_lark_3:                          
-{            
+objective .urgon_lark_3:
+{
+	string: "Priest of Karethis Destroyed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_kareth_skeleton_priest ]
+		count: 4
+	}
+}
+
+quest .urgon_lark_3:
+{
+	string: "."
+
+	text:
+	[
+		"."
+	]
+	
+	description: 
+	[
+		"."
+	]
+
+	progress:
+	[
+		"."
+	]
+	
+	completion:
+	[
+		"."
+	]
+	
+	objectives: [ .urgon_lark_3 ]
 	prerequisites: [ .urgon_lark_2 ]
 	level: 30
 }
+                                                  

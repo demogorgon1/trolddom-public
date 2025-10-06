@@ -1126,6 +1126,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_sandra_riddle_2_quest_item: [ 121 125 159 ]
 	entity_spawn thalvaron_trader_joseph_1_quest_item: [ 222 111 49 ]
 	entity_spawn thalvaron_trader_joseph_2_quest_item: [ 122 211 49 ]
+	entity_spawn thalvaron_kareth_skeleton_special: [ 45 45 129 ]
 }
 
 map_palette .levels:
