@@ -160,6 +160,7 @@ sprites:
 	sprite effect_pink_lightning_1: { flags: [ centered ] }
 	sprite effect_pink_lightning_2: { flags: [ centered ] }
 	sprite effect_web_projectile: { flags: [ centered ] }
+	sprite effect_arrow_poison: { flags: [ centered ] }
 	
 	cursor: { position: [ 0 67 ] }
 	size: { width: 14 height: 14 }

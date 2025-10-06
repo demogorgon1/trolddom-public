@@ -17,6 +17,7 @@ talent_tree fighter_combat:
 		talent fighter_combat_blade_guard: "I"
 		talent fighter_combat_two_handed_weapon_mastery: "J"
 		talent fighter_combat_improved_whirlwind: "K"
+		talent fighter_combat_cyclone: "L"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_down: "|"
 	}
@@ -28,10 +29,88 @@ talent_tree fighter_combat:
 		"J.B.C.F"
 		"d...|.d"
 		"E.K.|.H"
-		"....d.."
-		"....I.."
+		"..|.d.."
+		"..|.I.."
+		"..d...."
+		"..L...."
 	]
 	
+}
+
+###############################################################################
+# Cyclone
+
+talent fighter_combat_cyclone:
+{
+	string: "Cyclone"
+	icon: icon_cyclone
+	prerequisites: [ fighter_combat_improved_whirlwind ]
+	talent_tree_points_required: 20
+	points:
+	[
+		{ ability: cyclone }
+	]
+}
+
+cooldown cyclone:
+{
+	duration: 600
+}
+
+aura cyclone:
+{
+	string: "Cyclone"
+	description: "Whirlwinding."
+	type: buff
+	icon: icon_cyclone
+	duration: based_on_effects
+	flags: [ unique ]
+	particle_system: knock
+	aura_effect repeat: 
+	{ 
+		update_interval: 10
+		update_count: 4
+		ability: $ability [ icon ]
+		{
+			string: "Whirlwind"
+			range: 1	
+			flags: [ target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+			states: [ default in_combat ]
+			delay: 3
+			aoe_radius: 1
+			aoe_cap: 3
+			aoe_requirement target<must_not_be_in_state>: { id: dead }
+			source_particle_system: whirlwind	
+			direct_effect damage:
+			{
+				flags: [ can_be_critical ]
+				damage_type: physical
+				aura_conditional_critical_chance_bonus<relentless_overpower>: 50		
+				function: { expression: x x: weapon }		
+			}
+		}
+	}
+	aura_effect stun:
+	{
+	}
+}
+
+ability cyclone:
+{
+	string: "Cyclone"
+	description: "Performs a Whirlwind attack every second for 4 seconds. Unable to do anything else while active."
+	range: 1	
+	cooldowns: [ global cyclone ]
+	flags: [ target_self ]
+	states: [ default in_combat ]
+	icon: icon_cyclone
+	delay: 3
+	talent_tree: fighter_combat
+		
+	direct_effect apply_aura:
+	{
+		aura: cyclone
+	}
 }
 
 ###############################################################################

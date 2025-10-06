@@ -865,6 +865,10 @@ sprites:
 	sprite icon_junk_1 : { tags: [ icon ] }
 	sprite icon_scales_3 : { tags: [ icon ] }
 	sprite icon_exotic_fruit : { tags: [ icon ] }
+	sprite icon_cyclone : { tags: [ icon ] }
+	sprite icon_assassination : { tags: [ icon ] }
+	sprite icon_accuracy : { tags: [ icon ] }
+	sprite icon_provocation : { tags: [ icon ] }
 
 }
 
