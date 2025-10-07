@@ -58,7 +58,7 @@ ability provocation:
 	range: 1	
 	cooldowns: [ global ]
 	cooldown: $cooldown { duration: 600 }
-	flags: [ target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+	flags: [ target_self target_aoe target_aoe_hostile ]
 	states: [ default in_combat ]
 	icon: icon_provocation
 	delay: 3

@@ -105,7 +105,8 @@ namespace tpublic
 				FLAG_EFFECTS_AS_CHARGES		= 0x00400000,
 				FLAG_IGNORE_IMMUNITIES		= 0x00800000,
 				FLAG_GLOBAL					= 0x01000000,
-				FLAG_GLOBAL_PLAYER			= 0x02000000
+				FLAG_GLOBAL_PLAYER			= 0x02000000,
+				FLAG_ALWAYS_SHOW_CHARGES	= 0x04000000
 			};
 
 			static Type
@@ -184,6 +185,8 @@ namespace tpublic
 						flags |= FLAG_GLOBAL;
 					else if (strcmp(string, "global_player") == 0)
 						flags |= FLAG_GLOBAL_PLAYER;
+					else if (strcmp(string, "always_show_charges") == 0)
+						flags |= FLAG_ALWAYS_SHOW_CHARGES;
 					else
 						TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid aura flag.", string);
 				});

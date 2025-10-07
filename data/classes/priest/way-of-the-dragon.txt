@@ -16,9 +16,11 @@ talent_tree priest_dragon:
 		talent priest_dragon_double_attack: "H"
 		talent priest_dragon_crush: "I"
 		talent priest_dragon_knockout: "J"
+		talent priest_dragon_swiftstrike: "K"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_left_arrow: "l"
 		sprite talent_tree_right_arrow: "r"
+		sprite talent_tree_down: "|"
 	}
 	
 	map:
@@ -26,12 +28,65 @@ talent_tree priest_dragon:
 		"..A.B.."
 		"..d...."
 		"D.C.ErF"
-		"....d.."
-		"..H.GrJ"
+		"..|.d.."
+		"H.|.GrJ"
+		"d.|...."
+		"I.|...."
 		"..d...."
-		"..I...."
+		"..K...."
 	]
 	
+}
+
+###############################################################################
+# Swiftstrike
+
+talent priest_dragon_swiftstrike:
+{
+	string: "Swiftstrike"
+	icon: icon_swiftstrike
+	prerequisites: [ priest_dragon_improved_dwindle ]
+	talent_tree_points_required: 20
+	points:
+	[
+		{ ability: swiftstrike }
+	]
+}
+
+cooldown swiftstrike:
+{
+	duration: 600
+}
+
+aura swiftstrike:
+{
+	string: "Swiftstrike"
+	type: buff
+	icon: icon_swiftstrike
+	duration: 120
+	flags: [ unique ]
+	stat_modifiers:
+	{
+		attack_haste: { add: 50 } 
+	}
+}
+
+ability swiftstrike:
+{
+	string: "Swiftstrike"
+	description: "Increases your attack speed by 50% for 12 seconds."
+	range: 1	
+	cooldowns: [ swiftstrike ]
+	flags: [ target_self ]
+	states: [ default in_combat ]
+	icon: icon_swiftstrike
+	delay: 3
+	talent_tree: priest_dragon
+		
+	direct_effect apply_aura:
+	{
+		aura: swiftstrike
+	}
 }
 
 ###############################################################################

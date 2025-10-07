@@ -869,6 +869,12 @@ sprites:
 	sprite icon_assassination : { tags: [ icon ] }
 	sprite icon_accuracy : { tags: [ icon ] }
 	sprite icon_provocation : { tags: [ icon ] }
+	sprite icon_healing_shield : { tags: [ icon ] }
+	sprite icon_mass_hysteria : { tags: [ icon ] }
+	sprite icon_swiftstrike : { tags: [ icon ] }
+	sprite icon_ponder : { tags: [ icon ] }
+	sprite icon_shell : { tags: [ icon ] }
+	sprite icon_blink : { tags: [ icon ] }
 
 }
 

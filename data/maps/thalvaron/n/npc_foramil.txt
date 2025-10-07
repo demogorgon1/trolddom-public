@@ -119,7 +119,7 @@ item .foramil_2_quest_item:
 		
 		aura_effect combat_event_trigger: 
 		{ 
-			combat_event<target>: hit
+			combat_event<target>: [ hit critical block ]
 			combat_event_ability_mask: [ offensive melee ]
 			ability<target>: .foramil_2_c
 			probability: 5

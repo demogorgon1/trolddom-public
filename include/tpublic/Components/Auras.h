@@ -204,6 +204,10 @@ namespace tpublic
 								const Manifest*								aManifest,
 								uint32_t									aAbilityId,
 								int32_t&									aCastTime);
+			bool			ConsumeAura(
+								const Manifest*								aManifest,
+								uint32_t									aAuraId,
+								uint32_t									aSourceEntityInstanceId);
 			bool			RemoveAura(
 								uint32_t									aAuraId,
 								uint32_t									aMaxRemove,

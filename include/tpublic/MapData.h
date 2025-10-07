@@ -874,6 +874,11 @@ namespace tpublic
 								const Vec2&				aPosition) const;
 		const PlayerSpawn*	GetPlayerSpawn(
 								uint32_t				aMapPlayerSpawnId) const;
+		void				GetWalkableFloodFillPositions(
+								const Vec2&				aPosition,
+								uint32_t				aMinSteps,
+								uint32_t				aMaxSteps,
+								std::vector<Vec2>&		aOut) const;
 		
 		// Public data
 		MapType::Id									m_type;

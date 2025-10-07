@@ -897,6 +897,44 @@ namespace tpublic
 		return NULL;
 	}
 
+	void				
+	MapData::GetWalkableFloodFillPositions(
+		const Vec2&				aPosition,
+		uint32_t				aMinSteps,
+		uint32_t				aMaxSteps,
+		std::vector<Vec2>&		aOut) const
+	{
+		struct QueueItem
+		{
+			Vec2		m_position;
+			uint32_t	m_distance = 0;
+		};
+
+		std::vector<QueueItem> queue = { { aPosition, 0 } };
+		std::unordered_set<Vec2, Vec2::Hasher> visited;
+
+		while (!queue.empty())
+		{
+			QueueItem t = queue[queue.size() - 1];
+			queue.resize(queue.size() - 1);
+			visited.insert(t.m_position);
+
+			static const Vec2 DIRECTIONS[4] = { { -1, 0 }, { 1, 0}, { 0, -1 }, { 0, 1 } };
+			for (uint32_t i = 0; i < 4; i++)
+			{
+				Vec2 nextPosition = { t.m_position.m_x + DIRECTIONS[i].m_x, t.m_position.m_y + DIRECTIONS[i].m_y };
+				if (IsTileWalkable(nextPosition.m_x, nextPosition.m_y) && !visited.contains(nextPosition))
+				{
+					if(t.m_distance >= aMinSteps)
+						aOut.push_back(nextPosition);
+
+					if(t.m_distance < aMaxSteps)
+						queue.push_back({ nextPosition, t.m_distance + 1 });
+				}
+			}
+		}
+	}
+
 	//--------------------------------------------------------------------
 
 	void	

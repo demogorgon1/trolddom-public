@@ -366,6 +366,44 @@ namespace tpublic::Components
 	}
 
 	bool			
+	Auras::ConsumeAura(
+		const Manifest*								aManifest,
+		uint32_t									aAuraId,
+		uint32_t									aSourceEntityInstanceId)
+	{
+		for(size_t i = 0; i < m_entries.size(); i++)
+		{
+			std::unique_ptr<Entry>& entry = m_entries[i];
+			if(entry->m_auraId == aAuraId && entry->m_sourceEntityInstance.m_entityInstanceId == aSourceEntityInstanceId)
+			{
+				const Data::Aura* aura = aManifest->GetById<tpublic::Data::Aura>(aAuraId);
+				bool shouldRemove = false;
+
+				m_seq++;
+
+				if(aura->m_flags & Data::Aura::FLAG_CHARGED && entry->m_charges > 0)
+				{
+					entry->m_charges--;
+
+					if(entry->m_charges == 0)
+						shouldRemove = true;
+				}
+				else
+				{
+					shouldRemove = true;
+				}
+
+				if(shouldRemove)
+					Helpers::RemoveCyclicFromVector(m_entries, i);
+
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	bool			
 	Auras::RemoveAuraByGroup(
 		const Manifest*								aManifest,
 		uint32_t									aAuraGroupId,

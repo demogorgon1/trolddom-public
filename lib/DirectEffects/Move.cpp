@@ -31,6 +31,8 @@ namespace tpublic
 						m_moveFlags = SourceToMoveFlags(aChild);
 					else if (aChild->m_name == "max_steps")
 						m_maxSteps = aChild->GetUInt32();
+					else if (aChild->m_name == "min_steps")
+						m_minSteps = aChild->GetUInt32();
 					else if(aChild->m_name == "trigger_ability_on_resolve")
 						m_triggerAbilitiesOnResolve = SecondaryAbility(aChild);
 					else if(aChild->m_name == "map_player_spawn")
@@ -51,6 +53,7 @@ namespace tpublic
 			aStream->WriteUInt(m_maxSteps);
 			aStream->WriteOptionalObject(m_triggerAbilitiesOnResolve);
 			aStream->WriteUInt(m_mapPlayerSpawnId);
+			aStream->WriteUInt(m_minSteps);
 		}
 
 		bool
@@ -69,13 +72,15 @@ namespace tpublic
 				return false;
 			if (!aStream->ReadUInt(m_mapPlayerSpawnId))
 				return false;
+			if (!aStream->ReadUInt(m_minSteps))
+				return false;
 			return true;
 		}
 
 		DirectEffectBase::Result
 		Move::Resolve(
 			int32_t							/*aTick*/,
-			std::mt19937&					/*aRandom*/,
+			std::mt19937&					aRandom,
 			const Manifest*					/*aManifest*/,
 			CombatEvent::Id					/*aId*/,
 			uint32_t						/*aAbilityId*/,
@@ -165,6 +170,32 @@ namespace tpublic
 								t.m_triggerAbilityOnResolve = &(m_triggerAbilitiesOnResolve.value());
 
 							aEventQueue->EventQueueMoveAdjacent(t);
+						}
+						break;
+
+					case DESTINATION_TARGET_NEARBY_RANDOM:	
+						{
+							const Components::Position* targetPosition = aTarget->GetComponent<Components::Position>();
+							const Components::Position* sourcePosition = aSource->GetComponent<Components::Position>();
+							
+							std::vector<Vec2> nearbyPositions;
+							aWorldView->WorldViewGetMapData()->GetWalkableFloodFillPositions(targetPosition->m_position, m_minSteps, m_maxSteps, nearbyPositions);
+							if(nearbyPositions.size() > 0)
+							{
+								const Vec2& position = Helpers::RandomItem(aRandom, nearbyPositions);
+								Vec2 d = { position.m_x - sourcePosition->m_position.m_x, position.m_y - sourcePosition->m_position.m_y };
+
+								IEventQueue::EventQueueMoveRequest t;
+								t.AddToPriorityList(d);
+								t.m_type = IEventQueue::EventQueueMoveRequest::TYPE_SIMPLE;
+								t.m_entityInstanceId = aSource->GetEntityInstanceId();
+								t.m_setUpdatedOnServerFlag = true;
+
+								if (m_moveFlags & MOVE_FLAG_SET_TELEPORTED)
+									t.m_setTeleportedFlag = true;
+
+								aEventQueue->EventQueueMove(t);
+							}
 						}
 						break;
 

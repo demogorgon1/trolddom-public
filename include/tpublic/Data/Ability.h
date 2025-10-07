@@ -616,6 +616,8 @@ namespace tpublic
 							m_targetItemAuraId = aMember->GetId(DataType::ID_AURA);
 						else if (aMember->m_name == "toggle_aura")
 							m_toggleAuraId = aMember->GetId(DataType::ID_AURA);
+						else if (aMember->m_name == "consume_source_aura")
+							m_consumeSourceAuraId = aMember->GetId(DataType::ID_AURA);
 						else if (aMember->m_name == "must_not_have_world_aura")
 							m_mustNotHaveWorldAuraId = aMember->GetId(DataType::ID_WORLD_AURA);
 						else if(aMember->m_name == "increment_character_stat")
@@ -679,6 +681,7 @@ namespace tpublic
 				aWriter->WriteUInt(m_mustNotHaveWorldAuraId);
 				aWriter->WriteUInt(m_toggleAuraId);
 				aWriter->WriteUInt(m_incrementCharacterStatId);
+				aWriter->WriteUInt(m_consumeSourceAuraId);
 
 				for(uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 					aWriter->WriteUInt(m_resourceCosts[i]);
@@ -784,7 +787,9 @@ namespace tpublic
 					return false;
 				if(!aReader->ReadUInt(m_toggleAuraId))
 					return false;
-				if(!aReader->ReadUInt(m_incrementCharacterStatId))
+				if (!aReader->ReadUInt(m_incrementCharacterStatId))
+					return false;
+				if (!aReader->ReadUInt(m_consumeSourceAuraId))
 					return false;
 
 				for (uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
@@ -847,6 +852,7 @@ namespace tpublic
 			uint32_t											m_targetItemAuraId = 0;
 			uint32_t											m_toggleAuraId = 0;
 			uint32_t											m_incrementCharacterStatId = 0;
+			uint32_t											m_consumeSourceAuraId = 0;
 		};
 
 	}

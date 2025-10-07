@@ -16,6 +16,7 @@ talent_tree priest_condemnation:
 		talent priest_improved_spiritual_crisis: "H"
 		talent priest_creeping_guilt: "I"
 		talent priest_spiritual_justice: "J"
+		talent priest_mass_hysteria: "K"
 		sprite talent_tree_down_arrow: "d"						
 		sprite talent_tree_right_arrow: "r"				
 		sprite talent_tree_left_arrow: "l"				
@@ -32,10 +33,68 @@ talent_tree priest_condemnation:
 		"B.D.E.G"
 		"d.w-z.|"
 		"JlH.F.|"
-		"......d"
-		"......I"
+		"....|.d"
+		"....|.I"
+		"....d.."
+		"....K.."
 	]
 	
+}
+
+###############################################################################
+# Mass Hysteria
+
+talent priest_mass_hysteria:
+{
+	string: "Mass Hysteria"
+	icon: icon_mass_hysteria
+	talent_tree_points_required: 20
+	prerequisites: [ priest_fear ]
+	points:
+	[
+		{ ability: mass_hysteria }
+	]
+}
+
+aura mass_hysteria:
+{
+	string: "Mass Hysteria"
+	icon: icon_mass_hysteria
+	type: debuff
+	duration: 60	
+	flags: [ unique magic ]
+	aura_effect stun:
+	{
+		flags: [ immediate ]
+		fear: true
+		update_interval: 5
+		update_count: 12
+	}
+}
+
+ability mass_hysteria:
+{
+	string: "Mass Hysteria"
+	description: "Forces all nearby enemies to away in fear for 6 seconds."
+	range: 1	
+	cooldowns: [ global ]
+	cooldown: $cooldown { duration: 600 }
+	flags: [ target_self target_aoe target_aoe_hostile ]
+	states: [ default in_combat ]
+	icon: icon_mass_hysteria
+	resource_cost mana: 15
+	cast_time: 15
+	delay: 3
+	aoe_radius: 5
+	aoe_cap: 10
+	aoe_requirement target<must_not_be_in_state>: { id: dead }
+	talent_tree: priest_condemnation
+	
+	direct_effect apply_aura:
+	{
+		aura: mass_hysteria
+		threat: 25
+	}	
 }
 
 ###############################################################################

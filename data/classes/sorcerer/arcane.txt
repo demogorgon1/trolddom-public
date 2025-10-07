@@ -17,6 +17,7 @@ talent_tree sorcerer_arcane:
 		talent sorcerer_arcane_void_blast: "I"
 		talent sorcerer_arcane_arcane_mastery: "J"
 		talent sorcerer_arcane_sweet_dreams: "K"
+		talent sorcerer_arcane_ponder: "L"
 		sprite talent_tree_down_arrow: "d"						
 		sprite talent_tree_left_arrow: "l"						
 		sprite talent_tree_down: "|"		
@@ -31,8 +32,60 @@ talent_tree sorcerer_arcane:
 		"IlF.|.J"
 		"....d.."
 		"....H.."
+		"....d.."
+		"....L.."
 	]
 	
+}
+
+###############################################################################
+# Ponder
+
+talent sorcerer_arcane_ponder:
+{
+	string: "Ponder"
+	icon: icon_ponder
+	talent_tree_points_required: 20
+	prerequisites: [ sorcerer_arcane_preparation ]
+	points:
+	[
+		{ ability: ponder }
+	]
+}
+
+aura ponder:
+{
+	string: "Ponder"
+	description: "Your next spell is instant."
+	type: buff
+	icon: icon_ponder
+	duration: 200
+	flags: [ unique charged magic always_show_charges ]
+	charges: 2
+	aura_effect cast_modifier: 
+	{ 
+		ability_flags: [ spell ]
+		cast_time_multiplier: 0
+		use_charge: true		
+	}
+}
+
+ability ponder:
+{
+	string: "Ponder"
+	description: "Causes your next two spells to be instant."	
+	cooldowns: [ global spell_arcane_lockout ]		
+	cooldown: $cooldown { duration: 1200 }
+	flags: [ spell target_self ]
+	states: [ default in_combat ]
+	icon: icon_ponder
+	talent_tree: sorcerer_arcane
+	resource_cost mana: 16
+
+	direct_effect apply_aura:
+	{
+		aura: ponder
+	}	
 }
 
 ###############################################################################

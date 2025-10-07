@@ -16,6 +16,7 @@ talent_tree sorcerer_elemental:
 		talent sorcerer_elemental_infusion: "H"
 		talent sorcerer_elemental_shield: "I"
 		talent sorcerer_elemental_improved_ice_lance: "J"
+		talent sorcerer_elemental_shell: "K"
 		sprite talent_tree_down_arrow: "d"						
 		sprite talent_tree_right_arrow: "r"						
 		sprite talent_tree_down: "|"		
@@ -33,6 +34,8 @@ talent_tree sorcerer_elemental:
 		"..C.I.J.."
 		"....d...."
 		"....H...."
+		"....d...."
+		"....K...."
 	]
 	
 }
@@ -114,6 +117,81 @@ aura sorcerer_elemental_shield_5:
 	type: hidden
 	description: "Reduces damage taken by fire and cold effects by 30%."
 	aura_effect damage_input_modifier: { type_mask: [ cold fire ] multiplier: 0.70 }
+}
+
+###############################################################################
+# Shell
+
+talent sorcerer_elemental_shell:
+{
+	string: "Shell"
+	icon: icon_shell
+	prerequisites: [ sorcerer_elemental_infusion ]
+	talent_tree_points_required: 20
+	points:
+	[
+		{ ability: shell }
+	]
+}
+
+cooldown shell:
+{
+	duration: 600
+}
+
+aura shell:
+{
+	string: "Shell"
+	description: "Protected."
+	type: buff
+	icon: icon_shell
+	duration: 60
+	flags: [ unique magic ]
+	aura_effect stun: { }
+	aura_effect damage_input_modifier: { type_mask: [ all ] multiplier_num: 0 }
+	particle_system: $particle_system
+	{
+		particle:
+		{
+			sprites: [ effect_shell_0 effect_shell_1 effect_shell_2 ]
+			flags: [ attached ]
+			sprite_interval: 150
+			count: 1
+			scale: 1
+			alpha: 0.31
+			fade_in: 500
+			fade_out: 500
+			offset_x: 0.5
+			offset_y: 0.5	
+		}
+	}
+}
+
+ability shell:
+{
+	string: "Shell"
+	description: "Restores 10% of your health and mana and protects you against all damage for 6 seconds, but makes you unable to do anything."
+	range: 1	
+	cooldowns: [ elemental_infusion ]
+	flags: [ target_self ]
+	states: [ default in_combat ]
+	icon: icon_shell
+	delay: 3
+	talent_tree: sorcerer_elemental
+		
+	direct_effect apply_aura:
+	{
+		aura: shell
+	}
+	direct_effect heal:
+	{
+		function: { expression: a_mul_x x: health_max a: 0.1 }
+	}
+	direct_effect modify_resource:
+	{
+		resource: mana
+		function: { expression: a_mul_x x: mana_max a: 0.1 }
+	}
 }
 
 ###############################################################################

@@ -16,8 +16,10 @@ talent_tree sorcerer_battle_mage:
 		talent sorcerer_battle_mage_arcane_strength: "H"
 		talent sorcerer_battle_mage_overpower: "I"
 		talent sorcerer_battle_mage_staff_mastery: "J"
+		talent sorcerer_battle_mage_blink: "K"
 		sprite talent_tree_down_arrow: "d"						
-		sprite talent_tree_left_arrow: "l"						
+		sprite talent_tree_left_arrow: "l"				
+		sprite talent_tree_down: "|"			
 	}
 	
 	map:
@@ -25,12 +27,51 @@ talent_tree sorcerer_battle_mage:
 		"..A.B.J"
 		"....d.."
 		"ElC.D.G"
-		"..d...."
-		"..F.H.."
+		"..d.|.."
+		"..F.|.H"
+		"....|.d"
+		"....|.I"
 		"....d.."
-		"....I.."
+		"....K.."
 	]
 	
+}
+
+###############################################################################
+# Blink
+
+talent sorcerer_battle_mage_blink:
+{
+	string: "Blink"
+	icon: icon_blink
+	talent_tree_points_required: 20
+	prerequisites: [ sorcerer_battle_mage_swiftness ]
+	points:
+	[
+		{ ability: blink }
+	]
+}
+
+ability blink:
+{
+	string: "Blink"
+	description: "Teleports you to a random nearby location."	
+	cooldowns: [ global spell_arcane_lockout ]		
+	cooldown: $cooldown { duration: 80 }
+	flags: [ spell target_self ]
+	states: [ default in_combat ]
+	icon: icon_blink
+	talent_tree: sorcerer_battle_mage
+	resource_cost mana: 16
+	source_particle_system: teleport
+
+	direct_effect move:
+	{
+		destination: target_nearby_random
+		move_flags: [ ] 
+		max_steps: 6
+		min_steps: 3
+	}	
 }
 
 ###############################################################################

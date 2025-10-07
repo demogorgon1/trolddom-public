@@ -16,7 +16,9 @@ talent_tree priest_healing:
 		talent priest_swift_mending: "H"
 		talent priest_spiritual_surge: "I"
 		talent priest_improved_inner_peace: "J"
+		talent priest_healing_shield: "K"
 		sprite talent_tree_down_arrow: "d"				
+		sprite talent_tree_down: "|"		
 	}
 	
 	map:
@@ -24,12 +26,79 @@ talent_tree priest_healing:
 		"..A.C.."
 		"..d.d.."
 		"G.B.E.F"
-		"..d...."
-		"J.D.H.."
-		"....d.."
-		"....I.."
+		"..d...|"
+		"J.D.H.|"
+		"....d.|"
+		"....I.|"
+		"......d"
+		"......K"
 	]
 	
+}
+
+###############################################################################
+# Healing Shield
+
+talent priest_healing_shield:
+{
+	string: "Healing Shield"
+	icon: icon_healing_shield
+	talent_tree_points_required: 20
+	prerequisites: [ priest_healing_favor ]
+	points:
+	[
+		{ ability: healing_shield }
+	]
+}
+
+aura healing_shield:
+{
+	string: "Healing Shield"
+	description: "Heals when hit."
+	icon: icon_healing_shield	
+	type: buff	
+	duration: 200
+	flags: [ unique_per_source magic charged always_show_charges ]
+	charges: 3
+	aura_effect combat_event_trigger: 
+	{ 
+		combat_event<target>: [ hit critical block ]
+		combat_event_ability_mask: [ offensive ]
+		ability<target>: $ability [ icon string ]
+		{
+			states: [ default in_combat ]
+			target_particle_system: small_heal	
+			delay: 2
+			sound_effects: !SOUND_HEAL_SMALL{}			
+			flags: [ always_in_range always_in_line_of_sight ]
+			consume_source_aura: healing_shield
+			direct_effect heal: 
+			{ 
+				flags: [ can_be_critical ]
+				function: { expression: a_mul_x_plus_b x: healing a: 0.8 b: [ [ 1 10 ] [ 10 20 ] [ 20 44 ] [ 30 72 ] ] }
+				spread: !DEFAULT_SPREAD{}									
+			}			
+		}		
+	}	
+}
+
+ability healing_shield:
+{
+	string: "Healing Shield"
+	description: "Causes target to be healed next time it is hit. Lasts 20 seconds. 3 charges."
+	range: 6
+	cast_time: 15
+	cooldowns: [ global spell_healing_lockout ]
+	flags: [ spell target_other target_self target_friendly ]
+	states: [ default in_combat ]
+	icon: icon_healing_shield
+	resource_cost mana: 25
+	talent_tree: priest_healing
+
+	direct_effect apply_aura:
+	{	
+		aura: healing_shield
+	}
 }
 
 ###############################################################################

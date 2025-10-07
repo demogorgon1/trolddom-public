@@ -81,6 +81,9 @@ sprites:
 	sprite effect_taunt_0: { flags: [ centered ] }
 	sprite effect_taunt_1: { flags: [ centered ] }
 	sprite effect_taunt_2: { flags: [ centered ] }
+	sprite effect_shell_0: { flags: [ centered ] }
+	sprite effect_shell_1: { flags: [ centered ] }
+	sprite effect_shell_2: { flags: [ centered ] }
 	
 	cursor: { position: [ 0 20 ] }	
 	size: { width: 24 height: 24 }
