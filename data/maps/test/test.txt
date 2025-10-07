@@ -1,0 +1,40 @@
+npc_behavior_state .default_patrol: { behavior: patrolling }
+map_player_spawn .player_spawn: { }
+route .default_patrol: { }
+map_palette .tiles: !DEFAULT_TILE_PALETTE{}
+
+map_palette .stuff:
+{
+	entity_spawn .crab_man: [ 255 255 0 ]	
+	
+	player_spawn .player_spawn: [ 0 0 255 ]	
+}
+
+map test:
+{
+	string: "Test Map"
+	type: open_world
+	default_tile: water
+	default_player_spawn: .player_spawn
+	default_fishing_loot_table: fish
+	view_attenuation: 0
+	view_attenuation_bias: 0
+	view_hidden_visibility: 35	
+	has_overview_map: true
+	auto_doodads: true
+	max_players: 80
+
+	layers:
+	[
+		{
+			palettes:	[ .tiles ]
+			source:		"test-tiles.png"
+		}
+
+		{
+			palettes:	[ .stuff ]
+			source:		"test-stuff.png"
+		}
+	]
+}
+ 
