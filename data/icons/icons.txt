@@ -876,6 +876,11 @@ sprites:
 	sprite icon_shell : { tags: [ icon ] }
 	sprite icon_blink : { tags: [ icon ] }
 
+	cursor: { position: [ 0 768 ] }	
+	sprite icon_vindicate : { tags: [ icon ] }
+	sprite icon_judgement_for_all : { tags: [ icon ] }
+	sprite icon_guardian_angel : { tags: [ icon ] }
+
 }
 
 
