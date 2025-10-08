@@ -16,6 +16,7 @@ talent_tree witch_malice:
 		talent witch_blood_armor: "H"
 		talent witch_maliciousness: "I"
 		talent witch_malice_improved_witch_bolt: "J"
+		talent witch_malice_pain_and_suffering: "K"
 		
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_left_arrow: "l"
@@ -26,15 +27,63 @@ talent_tree witch_malice:
 	
 	map:
 	[
-		"J.A.B-x"
-		"..d...d"
-		"DlC.E.F"
-		"....d.."
-		"..H.G.."
-		"..d...."
-		"..I...."
+		"J.A...B-x"
+		"..d...|.d"
+		"DlC.E.|.F"
+		"....d.|.."
+		"..H.G.|.."
+		"..d...|.."
+		"..I...|.."
+		"......d.."
+		"......K.."
 	]
 	
+}
+
+###############################################################################
+# Pain and Suffering
+
+talent witch_malice_pain_and_suffering:
+{
+	string: "Pain and Suffering"
+	talent_tree_points_required: 20
+	prerequisites: [ witch_improved_curse_of_corruption ]
+	icon: icon_pain_and_suffering
+	points:
+	[
+		{ ability: witch_pain_and_suffering }
+	]
+}
+
+ability witch_pain_and_suffering:
+{
+	string: "Pain and Suffering"
+	description: "Deals $damage$ damage to target enemy afflicted by Curse of Corruption and refreshes it to its full duration."
+	range: 8
+	cooldowns: [ global spell_unholy_lockout ]
+	cooldown: $cooldown { duration: 80 }
+	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
+	states: [ default in_combat ]
+	icon: icon_pain_and_suffering
+	talent_tree: witch_malice
+	speed: 7
+	projectile: arcane_missile
+	resource_cost mana: 18
+	target_particle_system: green_spell_hit
+	requirement target<must_have_aura>: curse_of_corruption
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical is_magical ]
+		damage_type: unholy
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 34 ] [ 10 78 ] [ 20 146 ] [ 30 234 ] ] }															
+		spread: !DEFAULT_SPREAD{}
+	}
+	
+	direct_effect apply_aura:
+	{	
+		aura: curse_of_corruption
+	}	
 }
 
 ###############################################################################
@@ -157,6 +206,8 @@ talent witch_blood_armor:
 		{ aura: witch_blood_armor_1 }
 		{ aura: witch_blood_armor_2 }
 		{ aura: witch_blood_armor_3 }
+		{ aura: witch_blood_armor_4 }
+		{ aura: witch_blood_armor_5 }
 	]
 }
 
@@ -164,24 +215,40 @@ aura witch_blood_armor_1:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases your constitution by 3%."
-	stat_modifiers: { constitution: { add_percent: 3 } }
+	description: "Increases your constitution by 4%."
+	stat_modifiers: { constitution: { add_percent: 4 } }
 }
 
 aura witch_blood_armor_2:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases your constitution by 6%."
-	stat_modifiers: { constitution: { add_percent: 6 } }
+	description: "Increases your constitution by 8%."
+	stat_modifiers: { constitution: { add_percent: 8 } }
 }
 
 aura witch_blood_armor_3:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases your constitution by 9%."
-	stat_modifiers: { constitution: { add_percent: 9 } }
+	description: "Increases your constitution by 12%."
+	stat_modifiers: { constitution: { add_percent: 12 } }
+}
+
+aura witch_blood_armor_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your constitution by 16%."
+	stat_modifiers: { constitution: { add_percent: 16 } }
+}
+
+aura witch_blood_armor_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your constitution by 20%."
+	stat_modifiers: { constitution: { add_percent: 20 } }
 }
 
 ###############################################################################

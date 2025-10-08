@@ -10,6 +10,7 @@
 #include "../ItemProspect.h"
 #include "../Requirement.h"
 #include "../Resource.h"
+#include "../SecondaryAbility.h"
 #include "../SoundEffect.h"
 #include "../TargetItemRequirements.h"
 #include "../UIntRange.h"
@@ -29,52 +30,53 @@ namespace tpublic
 
 			enum Flag : uint32_t
 			{
-				FLAG_TARGET_SELF					= 0x00000001,
-				FLAG_TARGET_OTHER					= 0x00000002,
-				FLAG_TARGET_AOE						= 0x00000004,
-				FLAG_TARGET_HOSTILE					= 0x00000008,
-				FLAG_TARGET_FRIENDLY				= 0x00000010,
-				FLAG_CAN_MISS						= 0x00000020,
-				FLAG_CAN_BE_DODGED					= 0x00000040,
-				FLAG_CAN_BE_PARRIED					= 0x00000080,
-				FLAG_CAN_BE_BLOCKED					= 0x00000100,
-				FLAG_ATTACK							= 0x00000200,
-				FLAG_USE_WEAPON_ICON				= 0x00000400,				
-				FLAG_AOE_LOW_HEALTH_ONLY			= 0x00000800,
-				FLAG_AOE_LOW_HEALTH_PRIO			= 0x00001000,
-				FLAG_OFFENSIVE						= 0x00002000,
-				FLAG_SPELL							= 0x00004000,
-				FLAG_MELEE							= 0x00008000,
-				FLAG_RANGED							= 0x00010000,
-				FLAG_ITEM							= 0x00020000,
-				FLAG_ALWAYS_IN_RANGE				= 0x00040000,
-				FLAG_ALWAYS_IN_LINE_OF_SIGHT		= 0x00080000,
-				FLAG_CRAFTING						= 0x00100000,
-				FLAG_HIDDEN							= 0x00200000,
-				FLAG_LATE_COOLDOWN_TRIGGER			= 0x00400000,
-				FLAG_TARGET_AOE_FRIENDLY			= 0x00800000,
-				FLAG_TARGET_AOE_HOSTILE				= 0x01000000,
-				FLAG_TARGET_AOE_ALWAYS_SELF			= 0x02000000,
-				FLAG_TRIGGER_MOVE_COOLDOWN			= 0x04000000,
-				FLAG_QUEST_TRIGGER					= 0x08000000,
-				FLAG_INTERRUPTABLE					= 0x10000000,
-				FLAG_RANGED_CAST_TIME				= 0x20000000,
-				FLAG_USE_RANGED_ICON				= 0x40000000,
-				FLAG_INTERRUPT_ON_DAMAGE			= 0x80000000,
+				FLAG_TARGET_SELF						= 0x00000001,
+				FLAG_TARGET_OTHER						= 0x00000002,
+				FLAG_TARGET_AOE							= 0x00000004,
+				FLAG_TARGET_HOSTILE						= 0x00000008,
+				FLAG_TARGET_FRIENDLY					= 0x00000010,
+				FLAG_CAN_MISS							= 0x00000020,
+				FLAG_CAN_BE_DODGED						= 0x00000040,
+				FLAG_CAN_BE_PARRIED						= 0x00000080,
+				FLAG_CAN_BE_BLOCKED						= 0x00000100,
+				FLAG_ATTACK								= 0x00000200,
+				FLAG_USE_WEAPON_ICON					= 0x00000400,				
+				FLAG_AOE_LOW_HEALTH_ONLY				= 0x00000800,
+				FLAG_AOE_LOW_HEALTH_PRIO				= 0x00001000,
+				FLAG_OFFENSIVE							= 0x00002000,
+				FLAG_SPELL								= 0x00004000,
+				FLAG_MELEE								= 0x00008000,
+				FLAG_RANGED								= 0x00010000,
+				FLAG_ITEM								= 0x00020000,
+				FLAG_ALWAYS_IN_RANGE					= 0x00040000,
+				FLAG_ALWAYS_IN_LINE_OF_SIGHT			= 0x00080000,
+				FLAG_CRAFTING							= 0x00100000,
+				FLAG_HIDDEN								= 0x00200000,
+				FLAG_LATE_COOLDOWN_TRIGGER				= 0x00400000,
+				FLAG_TARGET_AOE_FRIENDLY				= 0x00800000,
+				FLAG_TARGET_AOE_HOSTILE					= 0x01000000,
+				FLAG_TARGET_AOE_ALWAYS_SELF				= 0x02000000,
+				FLAG_TRIGGER_MOVE_COOLDOWN				= 0x04000000,
+				FLAG_QUEST_TRIGGER						= 0x08000000,
+				FLAG_INTERRUPTABLE						= 0x10000000,
+				FLAG_RANGED_CAST_TIME					= 0x20000000,
+				FLAG_USE_RANGED_ICON					= 0x40000000,
+				FLAG_INTERRUPT_ON_DAMAGE				= 0x80000000,
 			};
 
 			enum ExtendedFlag : uint32_t
 			{
-				EXTENDED_FLAG_MINION_SUMMON			= 0x00000001,
-				EXTENDED_FLAG_NO_DELAY				= 0x00000002,
-				EXTENDED_FLAG_CLASS_MINION_SUMMON	= 0x00000004,
-				EXTENDED_FLAG_PRODUCE_ITEMS_TARGET	= 0x00000008,
-				EXTENDED_FLAG_TARGET_ITEM			= 0x00000010,
-				EXTENDED_FLAG_NO_STEALTH_BREAK		= 0x00000020,
-				EXTENDED_FLAG_NO_INDOOR				= 0x00000040,
-				EXTENDED_FLAG_CAN_USE_MOUNTED		= 0x00000080,
-				EXTENDED_FLAG_CAN_TARGET_DEAD		= 0x00000100,
-				EXTENDED_FLAG_CAN_TARGET_EVADING	= 0x00000200
+				EXTENDED_FLAG_MINION_SUMMON				= 0x00000001,
+				EXTENDED_FLAG_NO_DELAY					= 0x00000002,
+				EXTENDED_FLAG_CLASS_MINION_SUMMON		= 0x00000004,
+				EXTENDED_FLAG_PRODUCE_ITEMS_TARGET		= 0x00000008,
+				EXTENDED_FLAG_TARGET_ITEM				= 0x00000010,
+				EXTENDED_FLAG_NO_STEALTH_BREAK			= 0x00000020,
+				EXTENDED_FLAG_NO_INDOOR					= 0x00000040,
+				EXTENDED_FLAG_CAN_USE_MOUNTED			= 0x00000080,
+				EXTENDED_FLAG_CAN_TARGET_DEAD			= 0x00000100,
+				EXTENDED_FLAG_CAN_TARGET_EVADING		= 0x00000200,
+				EXTENDED_FLAG_TEMPORARY_MINION_SUMMON	= 0x00000400,
 			};
 
 			static inline Resource::Id
@@ -166,6 +168,8 @@ namespace tpublic
 						*aOutExtendedFlags |= EXTENDED_FLAG_NO_DELAY;
 					else if (strcmp(identifier, "class_minion_summon") == 0 && aOutExtendedFlags != NULL)
 						*aOutExtendedFlags |= EXTENDED_FLAG_CLASS_MINION_SUMMON;
+					else if (strcmp(identifier, "temporary_minion_summon") == 0 && aOutExtendedFlags != NULL)
+						*aOutExtendedFlags |= EXTENDED_FLAG_TEMPORARY_MINION_SUMMON;
 					else if (strcmp(identifier, "produce_items_target") == 0 && aOutExtendedFlags != NULL)
 						*aOutExtendedFlags |= EXTENDED_FLAG_PRODUCE_ITEMS_TARGET;
 					else if (strcmp(identifier, "target_item") == 0 && aOutExtendedFlags != NULL)
@@ -489,6 +493,7 @@ namespace tpublic
 			bool IsMinionSummon() const { return m_extendedFlags & EXTENDED_FLAG_MINION_SUMMON; }
 			bool IsNoDelay() const { return m_extendedFlags & EXTENDED_FLAG_NO_DELAY; }
 			bool IsClassMinionSummon() const { return m_extendedFlags & EXTENDED_FLAG_CLASS_MINION_SUMMON; }
+			bool IsTemporaryMinionSummon() const { return m_extendedFlags & EXTENDED_FLAG_TEMPORARY_MINION_SUMMON; }
 			bool IsProduceItemsTarget() const { return m_extendedFlags & EXTENDED_FLAG_PRODUCE_ITEMS_TARGET; }
 			bool TargetItem() const { return m_extendedFlags & EXTENDED_FLAG_TARGET_ITEM; }
 			bool CanUseMounted() const { return m_extendedFlags & EXTENDED_FLAG_CAN_USE_MOUNTED; }
@@ -622,6 +627,8 @@ namespace tpublic
 							m_mustNotHaveWorldAuraId = aMember->GetId(DataType::ID_WORLD_AURA);
 						else if(aMember->m_name == "increment_character_stat")
 							m_incrementCharacterStatId = (uint32_t)CharacterStat::StringToId(aMember->GetIdentifier());
+						else if(aMember->m_name == "kill_trigger_ability")
+							m_killTriggerAbility = SecondaryAbility(aMember);
 						else
 							TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
 					}
@@ -682,6 +689,7 @@ namespace tpublic
 				aWriter->WriteUInt(m_toggleAuraId);
 				aWriter->WriteUInt(m_incrementCharacterStatId);
 				aWriter->WriteUInt(m_consumeSourceAuraId);
+				m_killTriggerAbility.ToStream(aWriter);
 
 				for(uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 					aWriter->WriteUInt(m_resourceCosts[i]);
@@ -791,6 +799,8 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadUInt(m_consumeSourceAuraId))
 					return false;
+				if(!m_killTriggerAbility.FromStream(aReader))
+					return false;
 
 				for (uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 				{
@@ -853,6 +863,7 @@ namespace tpublic
 			uint32_t											m_toggleAuraId = 0;
 			uint32_t											m_incrementCharacterStatId = 0;
 			uint32_t											m_consumeSourceAuraId = 0;
+			SecondaryAbility									m_killTriggerAbility;
 		};
 
 	}

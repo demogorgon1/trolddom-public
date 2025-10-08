@@ -875,11 +875,14 @@ sprites:
 	sprite icon_ponder : { tags: [ icon ] }
 	sprite icon_shell : { tags: [ icon ] }
 	sprite icon_blink : { tags: [ icon ] }
-
-	cursor: { position: [ 0 768 ] }	
 	sprite icon_vindicate : { tags: [ icon ] }
 	sprite icon_judgement_for_all : { tags: [ icon ] }
+
+	cursor: { position: [ 0 768 ] }	
 	sprite icon_guardian_angel : { tags: [ icon ] }
+	sprite icon_pain_and_suffering: { tags: [ icon ] }
+	sprite icon_demon_lord: { tags: [ icon ] }
+	sprite icon_extinguish: { tags: [ icon ] }
 
 }
 

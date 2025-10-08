@@ -33,6 +33,8 @@ namespace tpublic::DirectEffects
 					m_conditionalCriticalChanceBonuses.push_back(ConditionalCriticalChanceBonus(aChild));
 				else if (aChild->m_name == "spread")
 					m_spread = aChild->GetFloat();
+				else if (aChild->m_name == "threat_multiplier")
+					m_threatMultiplier = aChild->GetFloat();
 				else
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 			}
@@ -48,6 +50,7 @@ namespace tpublic::DirectEffects
 		aStream->WriteBool(m_maxHealthPercentage);
 		aStream->WriteObjects(m_conditionalCriticalChanceBonuses);
 		aStream->WriteFloat(m_spread);
+		aStream->WriteFloat(m_threatMultiplier);
 	}
 			
 	bool	
@@ -63,6 +66,8 @@ namespace tpublic::DirectEffects
 		if(!aStream->ReadObjects(m_conditionalCriticalChanceBonuses))
 			return false;
 		if (!aStream->ReadFloat(m_spread))
+			return false;
+		if (!aStream->ReadFloat(m_threatMultiplier))
 			return false;
 		return true;
 	}
@@ -154,6 +159,8 @@ namespace tpublic::DirectEffects
 				int32_t threat = (int32_t)heal / 2;
 				if(result == CombatEvent::ID_CRITICAL)
 					threat = (threat * 3) / 2;
+
+				threat = (int32_t)((float)threat * m_threatMultiplier);
 
 				for(std::unordered_map<uint32_t, int32_t>::const_iterator i = targetThreatSource->m_targets.cbegin(); i != targetThreatSource->m_targets.cend(); i++)
 					aEventQueue->EventQueueThreat(aSourceEntityInstance, i->first, threat, aTick, aAbilityId);

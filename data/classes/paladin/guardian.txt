@@ -16,6 +16,7 @@ talent_tree paladin_guardian:
 		talent paladin_holy_reflection: "H"
 		talent paladin_one_handed_weapon_mastery: "I"
 		talent paladin_improved_judgement: "J"
+		talent paladin_judgement_for_all: "K"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_down: "|"		
 	}
@@ -25,11 +26,86 @@ talent_tree paladin_guardian:
 		"C.A.E.."
 		"..d.d.."
 		"..B.D.J"
-		"..d...."
-		"I.F.G.."
-		"....d.."
-		"....H.."
+		"..d...|"
+		"I.F.G.|"
+		"....d.|"
+		"....H.|"
+		"......d"
+		"......K"
 	]
+}
+
+###############################################################################
+# Judgement for All
+
+talent paladin_judgement_for_all:
+{
+	string: "Judgement For All"
+	icon: icon_judgement_for_all
+	prerequisites: [ paladin_improved_judgement ]
+	talent_tree_points_required: 20
+	points:
+	[
+		{ ability: judgement_for_all }
+	]
+}
+
+particle_system judgement_for_all:
+{
+	particle:
+	{
+		sprites: [ effect_judgement_for_all ]
+		flags: [ attached blend_add ]
+		duration: 500
+		count: 1		
+		scale: 1.5
+		alpha: 0.6
+		rotation_rate: 1440
+	}
+}
+
+aura judgement_for_all:
+{
+	string: "Judgement For All"
+	description: "Stunned."
+	icon: icon_stun		
+	type: debuff
+	duration: 40	
+	flags: [ unique magic ]
+	aura_effect stun: { }
+	particle_system: judgement
+}
+
+ability judgement_for_all:
+{
+	string: "Judgement For All"
+	description: "Inflicts $damage$ holy damage on adjacent enemies, stuns them for 4 seconds, and generates a high amount of threat."
+	range: 1	
+	cooldowns: [ global ]
+	cooldown: $cooldown { duration: 600 }
+	flags: [ spell target_self target_aoe target_aoe_hostile ]
+	states: [ default in_combat ]
+	icon: icon_judgement_for_all
+	delay: 3
+	aoe_radius: 1
+	aoe_cap: 4
+	aoe_requirement target<must_not_be_in_state>: { id: dead }
+	resource_cost mana: 20
+	talent_tree: paladin_guardian
+	source_particle_system: judgement_for_all
+
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: holy
+		function: { expression: a_mul_x x: weapon_normalized a: 0.5 }		
+		threat_multiplier: 2.4
+	}
+
+	direct_effect apply_aura:
+	{
+		aura: judgement_for_all
+	}
 }
 
 ###############################################################################

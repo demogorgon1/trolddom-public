@@ -61,6 +61,10 @@ namespace tpublic::AuraEffects
 				{
 					m_probability = aChild->GetUInt32();
 				}
+				else if(aChild->m_name == "ability_retain_source")
+				{
+					m_abilityRetainSource = aChild->GetBool();
+				}
 				else
 				{
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -82,6 +86,7 @@ namespace tpublic::AuraEffects
 		aStream->WriteUInt(m_combatEventAbilityMask);
 		aStream->WriteUInt(m_combatEventAbilityRejectMask);
 		aStream->WriteUInt(m_probability);
+		aStream->WriteBool(m_abilityRetainSource);
 	}
 
 	bool
@@ -105,6 +110,8 @@ namespace tpublic::AuraEffects
 			return false;
 		if (!aStream->ReadUInt(m_probability))
 			return false;
+		if(!aStream->ReadBool(m_abilityRetainSource))
+			return false;
 		return true;
 	}
 
@@ -120,6 +127,7 @@ namespace tpublic::AuraEffects
 		t->m_combatEventAbilityMask = m_combatEventAbilityMask;
 		t->m_combatEventAbilityRejectMask = m_combatEventAbilityRejectMask;
 		t->m_probability = m_probability;
+		t->m_abilityRetainSource = m_abilityRetainSource;
 		return t;
 	}
 
@@ -180,6 +188,9 @@ namespace tpublic::AuraEffects
 					const Data::Ability* ability = aManifest->GetById<Data::Ability>(m_ability.m_abilityId);
 
 					const EntityInstance* source = aType == COMBAT_EVENT_TYPE_TARGET ? aTargetEntityInstance : aSourceEntityInstance;
+
+					if(m_abilityRetainSource)
+						source = aSourceEntityInstance;
 
 					aEventQueue->EventQueueAbility({ source->GetEntityInstanceId(), source->GetSeq() }, target->GetEntityInstanceId(), Vec2(), ability, ItemInstanceReference(), NULL);
 				}

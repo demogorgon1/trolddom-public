@@ -66,6 +66,7 @@ namespace tpublic
 			uint32_t						m_combatEventAbilityMask = 0;
 			uint32_t						m_combatEventAbilityRejectMask = 0;
 			SecondaryAbility				m_ability;
+			bool							m_abilityRetainSource = false;
 			std::vector<uint32_t>			m_triggerAbilityIds;
 			uint32_t						m_probability = 0;
 		};

@@ -99,6 +99,7 @@ namespace tpublic
 			bool										m_maxHealthPercentage = false;
 			std::vector<ConditionalCriticalChanceBonus>	m_conditionalCriticalChanceBonuses;
 			float										m_spread = 0.0f;
+			float										m_threatMultiplier = 1.0f;
 
 			float			_GetCriticalChanceBonus(
 								const Components::AbilityModifiers*	aAbilityModifiers) const;

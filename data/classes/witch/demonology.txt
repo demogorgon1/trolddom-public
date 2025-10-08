@@ -16,6 +16,7 @@ talent_tree witch_demonology:
 		talent witch_demonic_frenzy: "H"
 		talent witch_demonic_infusion: "I"
 		talent witch_secrecy: "J"
+		talent witch_guardian_demon: "K"
 		
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_left_arrow: "l"
@@ -29,12 +30,55 @@ talent_tree witch_demonology:
 		"A-x.G.B"
 		"d.d.d.."
 		"F.D.C.J"
-		"d......"
-		"E.H...."
+		"d.|...."
+		"E.|.H.."
+		"..|.d.."
+		"..|.I.."
 		"..d...."
-		"..I...."
+		"..K...."
 	]
 	
+}
+
+###############################################################################
+# Guardian Demon
+
+talent witch_guardian_demon:
+{
+	string: "Guardian Demon"
+	icon: icon_demon_lord
+	talent_tree_points_required: 20
+	prerequisites: [ witch_demon_mastery ]
+	points:
+	[
+		{ ability: guardian_demon }
+	]
+}
+
+ability guardian_demon:
+{
+	string: "Guardian Demon"
+	description: "Summons a Guardian Demon for 30 seconds."
+	flags: [ target_self minion_summon class_minion_summon temporary_minion_summon ]
+	cast_time: 20
+	icon: icon_demon_lord
+	resource_cost mana: 25
+	talent_tree: witch_demonology
+	cooldowns: [ global spell_unholy_lockout ]	
+	cooldown: $cooldown { duration: 1500 }
+
+	direct_effect spawn_entity:
+	{
+		spawn_flags: [ no_owner source_level ]
+		entity: guardian_demon
+		init_state: spawning	
+		refresh_npc_metrics:
+		{
+			weapon_damage: 1
+			health: 2
+			armor: 1.2
+		}
+	}
 }
 
 ###############################################################################

@@ -813,5 +813,90 @@
 			
 		entity skeletal_terror: !MINION{}
 	}
+	
+	##############################################################################
+	# Guardian Demon
+	{
 
+		${
+			_name_template: .guardian_demon
+			_creature_type: demon
+			_sprite: demon_lord
+			_sprite_dead: demon_lord_dead
+			_minion_modes: [ .guardian_demon_aggressive .guardian_demon_defensive .guardian_demon_passive ]
+			_default_minion_mode: .guardian_demon_aggressive
+			_commands: [ move attack ]
+			
+			_abilities: 
+			[ 
+				{ id: .guardian_demon_attack flags: [ auto ] } 								
+			]
+			
+			_ability_prio: [ .guardian_demon_attack ]		
+			_class_minion: true
+			_temporary_minion: true
+			_store_combat_data: true
+			_minion_duration: 30
+		}
+		
+		name_template .guardian_demon:
+		{
+			possibility<1>:
+			{
+				generated_name: [ demon_name ]
+			}
+		}
+
+		minion_mode .guardian_demon_aggressive:
+		{
+			string: "Aggressive"
+			icon: icon_aggressive
+			follow_distance: 3
+			aggro_range: 5
+			attack_owner_threat_target: true
+			attack_threat_target: true
+		}
+
+		minion_mode .guardian_demon_defensive:
+		{
+			string: "Defensive"
+			icon: icon_defensive
+			follow_distance: 3
+			attack_owner_threat_target: true
+			attack_threat_target: true
+		}
+
+		minion_mode .guardian_demon_passive:
+		{
+			string: "Passive"
+			icon: icon_passive
+			follow_distance: 3
+		}
+		
+		cooldown .guardian_demon_attack:
+		{
+			duration: 21
+		}
+		
+		ability .guardian_demon_attack:
+		{
+			string: "Attack"
+			description: "Deals $damage$ damage to target."
+			flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+			states: [ default in_combat ]
+			delay: 3
+			icon: icon_demon_attack
+			cooldowns: [ .guardian_demon_attack ]
+			
+			direct_effect damage:
+			{
+				flags: [ can_be_critical ]
+				damage_type: physical			
+				function: { expression: x x: weapon }		
+			}
+		}		
+		
+		entity guardian_demon: !MINION{}	
+	}
+	
 }

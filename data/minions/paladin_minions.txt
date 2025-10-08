@@ -1,0 +1,71 @@
+{
+
+	${
+		_level: 1 
+	}
+
+	##############################################################################
+	# Guardian Angel
+	{
+		${
+			_creature_type: humanoid
+			_name_template: .guardian_angel		
+			_sprite: guardian_angel
+			_sprite_dead: guardian_angel_dead
+			_minion_modes: [ .guardian_angel_passive ]
+			_default_minion_mode: .guardian_angel_passive
+			_commands: [ move ]
+			
+			_abilities: 
+			[ 
+				{ id: .guardian_angel_heal flags: [ auto ] max_target_health: 99 } 
+			]
+			
+			_ability_prio: [ .guardian_angel_heal ]
+			_class_minion: true
+			_temporary_minion: true
+			_store_combat_data: true
+			_minion_duration: 30
+		}
+		
+		name_template .guardian_angel:
+		{
+			possibility<1>:
+			{
+				generated_name: [ angel_name ]
+			}
+		}
+
+		minion_mode .guardian_angel_passive:
+		{
+			string: "Passive"
+			icon: icon_passive
+			follow_distance: 3
+		}
+		
+		ability .guardian_angel_heal:
+		{
+			string: "Heal"
+			description: "Heals target for $heal$."
+			range: 6
+			cooldowns: [ global spell_healing_lockout ]
+			cast_time: 20
+			flags: [ spell target_other target_self target_friendly interruptable ]
+			states: [ default in_combat ]
+			icon: icon_conduit
+			target_particle_system: heal	
+			delay: 2
+			sound_effects: !SOUND_HEAL{}	
+
+			direct_effect heal:
+			{	
+				function: { expression: a a: [ [ 1 16 ] [ 10 32 ] [ 20 64 ] [ 30 96 ] ] }		
+				spread: !DEFAULT_SPREAD{}		
+				threat_multiplier: 0
+			}		
+		}	
+		
+		entity guardian_angel: !MINION{}
+	}
+
+}

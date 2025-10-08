@@ -77,6 +77,20 @@ namespace tpublic
 			return NULL;
 		}
 
+		uint32_t
+		ResolveTargetEntityInstanceId(
+			uint32_t				aSelfEntityInstanceId,
+			uint32_t				aTargetEntityInstanceId) const
+		{
+			switch(m_target)
+			{
+			case TARGET_SELF:		return aSelfEntityInstanceId;
+			case TARGET_TARGET:		return aTargetEntityInstanceId;
+			default:				break;
+			}
+			return 0;
+		}
+
 		// Public data
 		uint32_t		m_abilityId = 0;
 		Target			m_target = INVALID_TARGET;		

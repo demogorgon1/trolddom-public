@@ -16,6 +16,7 @@ talent_tree paladin_avenger:
 		talent paladin_holy_strength: "H"
 		talent paladin_intervention_of_wrath: "I"
 		talent paladin_improved_divine_smite: "J"
+		talent paladin_vindicate: "K"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_down: "|"
 	}
@@ -23,14 +24,93 @@ talent_tree paladin_avenger:
 	map:
 	[
 		"A...B.J"
-		"....d.."
-		"D.E.C.."
-		"d.d...."
-		"G.F.H.."
-		"....d.."
-		"....I.."
+		"....d.|"
+		"D.E.C.|"
+		"d.d...|"
+		"G.F.H.|"
+		"....d.|"
+		"....I.|"
+		"......d"
+		"......K"
 	]
 
+}
+
+###############################################################################
+# Vindicate
+
+talent paladin_vindicate:
+{
+	string: "Vindicate"
+	icon: icon_vindicate
+	talent_tree_points_required: 20
+	prerequisites: [ paladin_improved_divine_smite ]
+	points:
+	[
+		{ ability: vindicate }
+	]
+}
+
+ability vindicate_trigger:
+{	
+	string: "Vindicate"
+	icon: icon_vindicate
+	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]
+	direct_effect damage: 
+	{
+		damage_type: holy
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 1 b: [ [ 1 50 ] [ 10 100 ] [ 20 200 ] [ 30 300 ] ] }					
+		flags: [ is_magical can_be_critical ]
+		spread: !DEFAULT_SPREAD{}	
+	}
+	direct_effect remove_aura:
+	{
+		aura: vindicate
+	}
+}				
+
+aura vindicate:
+{
+	string: "Vindicate"
+	icon: icon_vindicate
+	type: debuff
+	duration: based_on_effects	
+	flags: [ unique_per_source magic ]
+	sound: spell_14
+	aura_effect repeat: 
+	{ 
+		update_interval: 100
+		update_count: 1
+		ability: vindicate_trigger
+	}
+	aura_effect combat_event_trigger:
+	{
+		trigger_abilities: [ divine_smite ]
+		combat_event<target>: [ hit critical ]
+		ability<target>: vindicate_trigger		
+		ability_retain_source: true
+	}
+}
+
+ability vindicate:
+{
+	string: "Vindicate"
+	description: "Inflicts holy damage after 10 seconds or on next Divine Smite."
+	range: 6
+	cooldowns: [ global spell_holy_lockout ]
+	cooldown: $cooldown { duration: 50 }
+	flags: [ spell offensive target_other target_hostile interruptable ]
+	states: [ default in_combat ]
+	icon: icon_vindicate
+	resource_cost mana: 12
+	delay: 3
+	talent_tree: paladin_avenger
+	
+	direct_effect apply_aura:
+	{	
+		aura: vindicate
+	}	
 }
 
 ###############################################################################
@@ -400,7 +480,7 @@ ability divine_smite:
 		flags: [ can_be_critical is_magical ]
 		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.7 b: [ [ 1 18 ] [ 10 36 ] [ 20 72 ] [ 30 118 ] ] }			
 		spread: !DEFAULT_SPREAD{}
-	}	
+	}		
 }
 
 ###############################################################################

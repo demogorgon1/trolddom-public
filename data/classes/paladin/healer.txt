@@ -16,6 +16,7 @@ talent_tree paladin_healer:
 		talent paladin_powerful_faith: "H"		
 		talent paladin_holy_injection: "I"		
 		talent paladin_holy_assault: "J"
+		talent paladin_guardian_angel: "K"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_right_arrow: "r"
 		sprite talent_tree_down: "|"				
@@ -28,12 +29,54 @@ talent_tree paladin_healer:
 		"B.DrJ.A"
 		"..d...."
 		"H.G...."
-		"d......"
-		"I......"
+		"d.|...."
+		"I.|...."
+		"..d...."
+		"..K...."
 	]
 	
 }
 
+###############################################################################
+# Guardian Angel
+
+talent paladin_guardian_angel:
+{
+	string: "Guardian Angel"
+	icon: icon_guardian_angel
+	talent_tree_points_required: 20
+	prerequisites: [ paladin_divine_shield ]
+	points:
+	[
+		{ ability: guardian_angel }
+	]
+}
+
+ability guardian_angel:
+{
+	string: "Guardian Angel"
+	description: "Summons a Guardian Angel to heal you and your allies for 30 seconds."
+	flags: [ target_self minion_summon class_minion_summon temporary_minion_summon ]
+	cast_time: 20
+	icon: icon_guardian_angel
+	resource_cost mana: 25
+	talent_tree: paladin_healer
+	cooldowns: [ global spell_holy_lockout ]	
+	cooldown: $cooldown { duration: 1200 }
+
+	direct_effect spawn_entity:
+	{
+		spawn_flags: [ no_owner source_level ]
+		entity: guardian_angel
+		init_state: spawning	
+		refresh_npc_metrics:
+		{
+			weapon_damage: 1
+			health: 2
+			armor: 2
+		}
+	}
+}
 
 ###############################################################################
 # Holy Assault

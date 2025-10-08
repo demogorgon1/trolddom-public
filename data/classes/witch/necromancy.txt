@@ -16,6 +16,7 @@ talent_tree witch_necromancy:
 		talent witch_bone_armor: "H"
 		talent witch_corpse_explosion: "I"
 		talent witch_icy_bones: "J"
+		talent witch_extinguish: "K"
 		
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_left_arrow: "l"
@@ -30,11 +31,82 @@ talent_tree witch_necromancy:
 		"G.E.A.."
 		"d......"
 		"JlD.BrC"
-		"..d...."
-		"..F.H.."
-		"....d.."
-		"....I.."
+		"..d...|"
+		"..F.H.|"
+		"....d.|"
+		"....I.|"
+		"......d"
+		"......K"
 	]	
+}
+
+###############################################################################
+# Extinguish
+
+talent witch_extinguish:
+{
+	string: "Extinguish"
+	talent_tree_points_required: 20
+	prerequisites: [ witch_improved_soul_leak ]
+	icon: icon_extinguish
+	points:
+	[
+		{ ability: extinguish }
+	]
+}
+
+particle_system extinguish:
+{
+	particle:
+	{
+		sprites: [ effect_arcane_missile ]
+		flags: [ attached no_rotation no_scaling ]
+		count: 1		
+		color_mod: [ 0 0 0 ]
+	}
+}
+
+ability extinguish:
+{
+	string: "Extinguish"
+	description: "Deals $damage$ damage to target. Restores 20% of your health and mana if this kills the target."
+	range: 8
+	cooldowns: [ global spell_unholy_lockout ]
+	cooldown: $cooldown { duration: 100 }
+	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
+	states: [ default in_combat ]
+	icon: icon_extinguish
+	talent_tree: witch_necromancy
+	speed: 7
+	projectile: extinguish
+	resource_cost mana: 18
+	target_particle_system: green_spell_hit
+	
+	kill_trigger_ability<self>: $ability [ icon string ]
+	{
+		states: [ default in_combat ]
+		flags: [ always_in_range always_in_line_of_sight no_delay ]
+		
+		direct_effect modify_resource:
+		{	
+			resource: health
+			function: { expression: a_mul_x a: 0.20 x: health_max entity: source }
+		}
+		
+		direct_effect modify_resource:
+		{	
+			resource: mana
+			function: { expression: a_mul_x a: 0.20 x: mana_max entity: source }
+		}		
+	}
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical is_magical ]
+		damage_type: unholy
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.65 b: [ [ 1 32 ] [ 10 72 ] [ 20 136 ] [ 30 214 ] ] }															
+		spread: !DEFAULT_SPREAD{}
+	}
 }
 
 ###############################################################################

@@ -101,6 +101,7 @@ sprites:
 	sprite effect_disruption_0: { flags: [ centered ] }
 	sprite effect_disruption_1: { flags: [ centered ] }
 	sprite effect_disruption_2: { flags: [ centered ] }
+	sprite effect_judgement_for_all: { flags: [ centered ] }
 
 	cursor: { position: [ 0 44 ] }
 	size: { width: 16 height: 16 }
