@@ -42,26 +42,27 @@ objective .friduwulf_1:
 
 quest .friduwulf_1:
 {
-	string: "."
+	string: "The Great Crab Hunt"
 
 	text:
 	[
-		"."
+		"Remove crabs from the beaches of Zilkore."
 	]
 	
 	description: 
 	[
-		"."
+		"People talk about crab men, but not enough about ordinary crabs. They're a much bigger concern, to be honest. They eat all the fish! Can you bring down the numbers a bit? Yeah, you're probably"
+		"tired of crabs at this point, but what can you do. If you do a good job with these crabs, hopefully it will be the last we'll see of them for a while."
 	]
 
 	progress:
 	[
-		"."
+		"Giving up?"
 	]
 	
 	completion:
 	[
-		"."
+		"Good job!"
 	]
 	
 	objectives: [ .friduwulf_1 ]

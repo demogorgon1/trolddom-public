@@ -865,7 +865,7 @@ particle_system holy_storm:
 ability holy_storm:
 {
 	string: "Holy Storm"
-	description: "Inflicts $damage$ holy damage on up to 3 adjacent enemies."
+	description: "Inflicts $damage$ damage on up to 3 adjacent enemies."
 	range: 1	
 	cooldowns: [ global holy_storm ]
 	flags: [ spell melee target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]

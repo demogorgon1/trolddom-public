@@ -44,26 +44,29 @@ objective .urgon_lark_1:
 
 quest .urgon_lark_1:
 {
-	string: "."
+	string: "Delegated Crocodile Hunt"
 
 	text:
 	[
-		"."
+		"Slay crocodiles around the oasis and return to Urgon Lark."
 	]
 	
 	description: 
 	[
-		"."
+		"Joana is a great paladin and also my boss. She's supposed to delegate important holy work to me, but it seems like she won't trust me. She's giving me all these silly tasks that have nothing"
+		"to do with fighting the forces of evil. Like, she told me to deal with the crocodile problem. They seem to be annoying her. Whatever, I'll just delegate the task to you if you want it.\n"
+		"\n"
+		"Can you go kill a few crocodiles around the oasis?"
 	]
 
 	progress:
 	[
-		"."
+		"This place isn't too bad, I guess."
 	]
 	
 	completion:
 	[
-		"."
+		"Nice, but if she asks, I'm the one who killed the crocodiles."
 	]
 	
 	objectives: [ .urgon_lark_1 ]
@@ -94,26 +97,31 @@ objective .urgon_lark_2:
 
 quest .urgon_lark_2:
 {
-	string: "."
+	string: "The Emerald Phalanx"
 
 	text:
 	[
-		"."
+		"Collect helmets from the undead Emerald Phalanx of eastern Karath."
 	]
 	
 	description: 
 	[
-		"."
+		"Finally, I got my first holy task! Only problem is that it involves venturing into the desert. It's much more comfortable here at the oasis, especially after we got rid of the crocodiles.\n"
+		"\n"
+		"Maybe you can do my job? Joana told me about the Emerald Phalanx, and ancient military unit of the empire that once reigned these lands. They were known by the green helmet they wore on their heads."
+		"Some of the Emerald Phalanx has risen from the dead and now roam the desert as unholy monstrosities. My boss wants a bunch of their helmets. Can you bring them to me? That would be nice.\n"
+		"\n"
+		"You'll find these skeletons in the east."
 	]
 
 	progress:
 	[
-		"."
+		"Too much sand, am I right?"
 	]
 	
 	completion:
 	[
-		"."
+		"Excellent, I'll bring them to Joana and see what she has to say."
 	]
 	
 	objectives: [ .urgon_lark_2 ]
@@ -139,26 +147,28 @@ objective .urgon_lark_3:
 
 quest .urgon_lark_3:
 {
-	string: "."
+	string: "The Desert Temple"
 
 	text:
 	[
-		"."
+		"Travel east to the temple, slay the priests, and return to Urgon Lark."
 	]
 	
 	description: 
 	[
-		"."
+		"My boss was very pleased with the helmets. Good job! I might get a promotion soon.\n"
+		"\n"
+		"To the east of here is an ancient temple. It's full of undeath. In there some of the temple priests have come back from the dead. It would be to the benefit of the cause if you go and destroy them."
 	]
 
 	progress:
 	[
-		"."
+		"It's over there, to the east. Behind all the sand."
 	]
 	
 	completion:
 	[
-		"."
+		"Praised be the light. Wasn't expecting you to come back alive from this. Here take this as a reward."
 	]
 	
 	objectives: [ .urgon_lark_3 ]

@@ -77,7 +77,7 @@ entity thalvaron_trader_joseph_1_quest_item:
 
 objective .trader_joseph_1:
 {
-	string: "Mangos Gathered"
+	string: "Mangoes Gathered"
 	
 	maps: [ thalvaron ]
 	
@@ -86,26 +86,27 @@ objective .trader_joseph_1:
 
 quest .trader_joseph_1:
 {
-	string: "."
+	string: "Exotic Fruit Company"
 
 	text:
 	[
-		"."
+		"Collect mangoes in the jungle west of New Thalissar and return to Trader Joseph."
 	]
 	
 	description: 
 	[
-		"."
+		"My main source of income is acquiring items here and shipping them off to Valoris. Recently I send off a batch of exotic fruit called \"mangoes\" and they were really popular. I need more! Only problem"
+		"is that they're quite hard to collect because of all the poisonous animals and meat eating plants. Anyway, if you're up for the task you'll find plenty of these fruits in the jungle west of here."
 	]
 
 	progress:
 	[
-		"."
+		"If you got bitten by a caterpillar you got 24 hours to live."
 	]
 	
 	completion:
 	[
-		"."
+		"Ah, these look nice. Probably will be quite mushy by the time I get them to Valoris. If only they could be cooled down, somehow."
 	]
 
 	objectives: [ .trader_joseph_1 ]
@@ -170,26 +171,27 @@ objective .trader_joseph_2:
 
 quest .trader_joseph_2:
 {
-	string: "."
+	string: "More Exotic Fruit Business"
 
 	text:
 	[
-		"."
+		"Collect bananas in the Verdant Mire and return to Trader Joseph."
 	]
 	
 	description: 
 	[
-		"."
+		"Mangoes aren't the only exotic fruit I export. Swamp bananas are also really popular in Valoris. I guess you know the drill? Go collect some and I'll pay you. You can find them growing all over the"
+		"Verdant Mire south of here."
 	]
 
 	progress:
 	[
-		"."
+		"How is it going?"
 	]
 	
 	completion:
 	[
-		"."
+		"Well, well, well. Here, let me pay you."
 	]
 
 	objectives: [ .trader_joseph_2 ]

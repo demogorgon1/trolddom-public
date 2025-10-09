@@ -54,17 +54,19 @@ quest .ulok_ironspear_1:
 
 	text:
 	[
-		"."
+		"Collect teeth from wolves in Urthon and return to Ulok Ironspear."
 	]
 	
 	description: 
 	[
-		"."
+		"I know a guy back in Durgan Tharok who does a lot of alchemy. Never said me anything, but whatever. He pays pretty good for weird ingredients that I locate around the world.\n"
+		"\n"
+		"Apparently wolf teeth are a useful reagent, for some reason. There happens to be wolves all over the place here. Maybe go grab me some teeth and we can share the profit?"
 	]
 	
 	completion:
 	[
-		"."
+		"Looks like it could be wolf teeth. If they're not, please don't tell me where you found them. Good enough."
 	]
 	
 	progress:
@@ -106,17 +108,17 @@ quest .ulok_ironspear_2:
 
 	text:
 	[
-		"."
+		"Collect stingers from scorpions in Kareth."
 	]
 	
 	description: 
 	[
-		"."
+		"My guy in Durgan Tharok also talks a lot about the scorpions of Kareth. You know, the great desert to the south of here. If you can bring me some stingers from there, that would be great."
 	]
 	
 	completion:
 	[
-		"."
+		"Those are bigger than expected. How large were those scorpions?"
 	]
 	
 	progress:

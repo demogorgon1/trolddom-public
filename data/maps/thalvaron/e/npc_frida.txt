@@ -43,26 +43,28 @@ objective .frida_1:
 
 quest .frida_1:
 {
-	string: "."
+	string: "The Devouring Shroud Is Leaking"
 
 	text:
 	[
-		"."
+		"Venture into the jungle south of Frida's house, track down the beast and kill it."
 	]
 	
 	description: 
 	[
-		"."
+		"To the south of here, past these rocky cliffs, lie the Devouring Shroud. It's a nasty place. The worst parts of the jungle. These cliffs act like a natural barrier and rarely we see any of the horrible"
+		"creatures of the shroud get past them. Unfortunately, I'm fairly sure that at least one of them is currently roaming in the forest south west of here. A big nasty thing with big teeth. I think it ate my dog."
+		"Maybe you can go get rid of it?"
 	]
 
 	progress:
 	[
-		"."
+		"Too scary? Completely understandable."
 	]
 	
 	completion:
 	[
-		"."
+		"Damn, how about that."
 	]
 	
 	objectives: [ .frida_1 ]

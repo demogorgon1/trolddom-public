@@ -103,12 +103,13 @@ quest .sandra_riddle_1:
 
 	text:
 	[
-		"."
+		"Collect shiny loot from the statues in Urthonak Keep."
 	]
 	
 	description: 
 	[
-		"."
+		"My father basically sent me here to loot everything that might be worth something. I don't know if you've noticed, but this place is pretty empty. The only shinies I've seen"
+		"in this keep are the crowns placed on various statues. Only problem is that I think they might be haunted. Maybe you can collect some for me?"
 	]
 
 	progress:
@@ -183,26 +184,26 @@ objective .sandra_riddle_2:
 
 quest .sandra_riddle_2:
 {
-	string: "."
+	string: "More Shiny Items"
 
 	text:
 	[
-		"."
+		"Travel to the Urthon Burial Grounds, collect loot, and return to Sandra Riddle."
 	]
 	
 	description: 
 	[
-		"."
+		"West of here are some old burial grounds. I've heard that potentially valuable items are scattered all over the place. I need you go collect some for me. I'll pay."
 	]
 
 	progress:
 	[
-		"."
+		"Got lost?"
 	]
 	
 	completion:
 	[
-		"."
+		"Ah, not sure how much those are worth, but whatever."
 	]
 
 	objectives: [ .sandra_riddle_2 ]

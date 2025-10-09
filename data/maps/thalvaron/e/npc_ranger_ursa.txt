@@ -43,26 +43,29 @@ objective .ranger_ursa_1:
 
 quest .ranger_ursa_1:
 {
-	string: "."
+	string: "Orc Scouting Party"
 
 	text:
 	[
-		"."
+		"Find and kill Uglor in the woods of western Urthon."
 	]
 	
 	description: 
 	[
-		"."
+		"North of here lies the desolate lands of Urthon. Once part of a powerful empire, its inhabitants eventually disappeared. Nobody really knows what happened.\n"
+		"\n"
+		"I tracked an orc scouting party here. They continued north, but I have no interest in entering Urthon. The party was led by an orc named Uglor. If you want to help me,"
+		"find this orc and kill him. I think they're in the woods to the left after you're past this wall."
 	]
 
 	progress:
 	[
-		"."
+		"No luck tracking them down?"
 	]
 	
 	completion:
 	[
-		"."
+		"Good job."
 	]
 	
 	objectives: [ .ranger_ursa_1 ]
@@ -87,26 +90,28 @@ objective .ranger_ursa_2:
 
 quest .ranger_ursa_2:
 {
-	string: "."
+	string: "Wrangling the Wrangler"
 
 	text:
 	[
-		"."
+		"Locate and kill Bazstik in the woodland mountains north of the gate to Urthon."
 	]
 	
 	description: 
 	[
-		"."
+		"The lands north of here have long been a place where orc wolf riders source their mounts. I know of an infamous wolf wrangler going by the name of Bazstik, who operates in the mountains to the north.\n"
+		"\n"
+		"If you can find and kill him it would be a great service to the kingdom."
 	]
 
 	progress:
 	[
-		"."
+		"He's most likely in a cave somewhere."
 	]
 	
 	completion:
 	[
-		"."
+		"Excellent!"
 	]
 	
 	objectives: [ .ranger_ursa_2 ]

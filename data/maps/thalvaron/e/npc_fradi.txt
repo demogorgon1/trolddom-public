@@ -82,26 +82,27 @@ objective .fradi_1:
 
 quest .fradi_1:
 {
-	string: "."
+	string: "Cleaning the Beach"
 
 	text:
 	[
-		"."
+		"Collect junk on the beaches of Zilkore and return to Fradi."
 	]
 	
 	description: 
 	[
-		"."
+		"People thought I was weird, so they made me a shaman, and sent me off to live here. Well, what's so weird about wanting to keep the beaches clean? I don't know. Is it weird? Anyway, maybe"
+		"you can help me collect some junk. It's all over these beaches."
 	]
 
 	progress:
 	[
-		"."
+		"Out of junk?"
 	]
 	
 	completion:
 	[
-		"."
+		"Ah, looks good. Needs to be careful where you step when shoes are against your beliefs."
 	]
 
 	objectives: [ .fradi_1 ]

@@ -10,6 +10,7 @@ dialogue_screen .flimlock:
 		{ quest: .flimlock_1 }
 		{ quest: .flimlock_2 }
 		{ quest: .flimlock_3 }
+		# { quest: .flimlock_4 } FIXME
 		{ quest<completion_only>: .crust_elemental_quest_item }
 		{ quest<completion_only>: .zislo_1 }
 	]
@@ -80,31 +81,33 @@ entity thalvaron_flimlock_1_quest_item:
 
 quest .flimlock_1:
 {
-	string: "."
+	string: "Swamp Research"
 
 	text:
 	[
-		"."
+		"Help Flimlock with his research and return to him."
 	]
 	
 	description: 
 	[
-		"."
+		"Isn't this just the most wonderful place? Everything is so moist and you can't walk anywhere without getting wet socks! Constant buzz of insects, marvelous creatures clawing at your ankles if"
+		"you get too close to a body of water. There is something special about this place. I'm thinking maybe it's something in the water, so I've been doing some research. Maybe you can help me"
+		"taking some samples from the water puddles around here?"
 	]
 
 	progress:
 	[
-		"."
+		"Did you spot any interesting plants or diseases?"
 	]
 	
 	completion:
 	[
-		"."
+		"Thank you."
 	]
 	
 	level: 27
 	quest_items: [ .flimlock_1_quest_item ]
-	objectives: [ .flimlock_1 ]
+	objectives: [ .flimlock_1 
 }
 
 ############################################################
@@ -162,26 +165,27 @@ entity thalvaron_flimlock_2_quest_item:
 
 quest .flimlock_2:
 {
-	string: "."
+	string: "Experimenting with the Swamp"
 
 	text:
 	[
-		"."
+		"Travel to the old burial site in the southern Verdant Mire and pour the elixir into the water."
 	]
 	
 	description: 
 	[
-		"."
+		"The water samples you collected had a very peculiar taste, which gave me a good idea about an experiment. Here, takes this elixir and pour it in the water down by the old Zilkore burial site in the"
+		"southernmost part of the swamp. Come back and tell me about the results afterwards."
 	]
 
 	progress:
 	[
-		"."
+		"The place is down south. Can't miss it, pillars, stone tiles on the ground."
 	]
 	
 	completion:
 	[
-		"."
+		"Ghouls rising up from the ground to attack you? Well, that's quite unexpected."
 	]
 	
 	level: 27
@@ -193,12 +197,9 @@ quest .flimlock_2:
 ############################################################
 # Quest 3
 
-# FIXME quest
-# kill thalvaron_lizard_wizard
-
 objective .flimlock_3:
 {
-	string: "Zim'Bwob Slain"
+	string: "Evil Wizard Slain"
 	
 	maps: [ thalvaron ]
 	
@@ -211,26 +212,28 @@ objective .flimlock_3:
 
 quest .flimlock_3:
 {
-	string: "."
+	string: "The Desolate Tower"
 
 	text:
 	[
-		"."
+		"Travel to the Desolate Tower to the south east, defeat the evil wizard within, and return to Flimlock."
 	]
 	
 	description: 
 	[
-		"."
+		"Strange dusty elementals... And something is defintely up in this swamp as well. I'm fairly certain it must"
+		"be linked to the old wizard tower at the coast south east of here. Some evil wizard must have taken residence and who knows what they're up to. I think you should travel to this tower, find out"
+		"who lives there, and kill them. "
 	]
 
 	progress:
 	[
-		"."
+		"You can't find the place? It's somewhere."
 	]
 	
 	completion:
 	[
-		"."
+		"Oh, a lizard man? Hmm. Not good. The lizard people usually keep to themselves in the jungles of the Devouring Shroud. I wonder what brought him there."
 	]
 	
 	level: 27
@@ -313,6 +316,8 @@ entity thalvaron_flimlock_3_portal_return:
 
 ############################################################
 # Quest 4
+
+# FIXME: quest leading into the devouring shroud
 
 quest .flimlock_4:
 {

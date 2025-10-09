@@ -41,7 +41,7 @@ objective .old_man_james_1:
 	kill_npc:
 	{
 		entities: [ thalvaron_east_kobold_a thalvaron_east_kobold_b ]
-		count: 6
+		count: 8
 	}
 }
 
@@ -56,21 +56,26 @@ quest .old_man_james_1:
 	
 	description: 
 	[
-		"."
+		"Ah, kobolds. Constant nuisance for anyone living close to their habitats. I've noticed that the water river has become contaminated and I'm certain it's related to kobold activity. Let's just say that those\n"
+		"little guys aren't known for borrowing their droppings in the ground.\n"
+		"\n"
+		"There is a cave system on the other side of the river. To enter it, you'll need to head south and cross the river at the first opportunity. You'll find a cave which probably is full of kobolds. Kill a bunch of"
+		"them and hopefully they'll scatter and go live somewhere else."
 	]
 
 	progress:
 	[
-		"."
+		"How is it going?"
 	]
 	
 	completion:
 	[
-		"."
+		"Excellent! Hopefully the water will get better soon."
 	]
 	
 	objectives: [ .old_man_james_1 ]
 	level: 26
+	next_quest: .old_man_james_2
 }
 
 ############################################################
@@ -78,7 +83,7 @@ quest .old_man_james_1:
 
 objective .old_man_james_2:
 {
-	string: "Elixir Administered"	
+	string: "Poison Administered"	
 	maps: [ thalvaron ]	
 	manual_boolean: {}
 }
@@ -128,26 +133,30 @@ entity thalvaron_old_man_james_2_quest_item:
 
 quest .old_man_james_2:
 {
-	string: "."
+	string: "Kobold Extermination"
 
 	text:
 	[
-		"."
+		"Poison the pool by the kobold effigy and return to Old Man James."
 	]
 	
 	description: 
 	[
-		"."
+		"I just remembered that a traveling salesman sold some kobold poison. I'm not sure it works. Apparently you just need to pour it in their water source and it should kill them. Maybe it doesn't work.\n"
+		"\n"
+		"There is another cave a bit further east. Again, just follow the river, but go past the crossing you used last time. You'll find the cave I'm talking about across the next crossing. Inside there I've seen"
+		"what looks like some kind of crude religious effigy. What do kobolds worship? Probably something stupid. It's just by a very clear pool of water. I think it might have some kind of significance to these"
+		"creatures. Pour the poison into this pool and see what happens."
 	]
 
 	progress:
 	[
-		"."
+		"Don't feel bad for kobolds. They're barely sentient."
 	]
 	
 	completion:
 	[
-		"."
+		"Huh, they didn't like that, did they?"
 	]
 	
 	level: 26
@@ -191,22 +200,24 @@ quest .old_man_james_3:
 
 	text:
 	[
-		"."
+		"Venture into the jungle to the south, locate the Firbiu and Feruc temples, kill harpies, and return to Old Man James."
 	]
 	
 	description: 
 	[
-		"."
+		"Good job with the kobolds, maybe you handle another problem for me. You hear about harpies? They migrated here recently and they've been making life here quite hard. Not only the noise, but sometimes they"
+		"swoop down when I'm eating, trying to steal my food. They live in the mountains south of here, in the jungle. Yesterday I went down to check it out, but there were too many of them. I found a colony at the"
+		"Firbiu Temple and another one at the Feruc Temple. How about you go clear them out? You seem fairly good at killing critters.
 	]
 
 	progress:
 	[
-		"."
+		"How is it going?"
 	]
 	
 	completion:
 	[
-		"."
+		"Good job!"
 	]
 	
 	objectives: [ .old_man_james_3_a .old_man_james_3_b ]

@@ -28,26 +28,24 @@ entity thalvaron_fullay: !NPC
 ############################################################
 # Quest 1
 
-# FIXME quest
-# lead to old man james
-
 quest .fullay_1:
 {
-	string: "."
+	string: "Old Man James"
 
 	text:
 	[
-		"."
+		"Seek out James at the Faerandor Pass."
 	]
 	
 	description: 
 	[
-		"."
+		"West of here you'll find the Faerandor Pass. At the height of it, there is a small post manned by James, an old friend of mine. He's been living there for ages and barely ever gets any visitors. Maybe you"
+		"can go there and see what he's up to?"
 	]
 
 	completion:
 	[
-		"."
+		"Fullay sent you? He's still refusing to wear shoes?"
 	]
 	
 	reward_xp_multiplier: 0.32
@@ -79,26 +77,29 @@ objective .fullay_2:
 
 quest .fullay_2:
 {
-	string: "."
+	string: "Jungle Business"
 
 	text:
 	[
-		"."
+		"Hunt Thalyssian snakes for their scales and deliver them to Joseph in New Thalyssar."
 	]
 	
 	description: 
 	[
-		"."
+		"South of here you'll find New Thalyssar, a recently established trading post. I've been doing some business with a guy named Joseph. He has set up shop there and sometimes I sell him exotic items from the"
+		"jungle. Recently he requested some scales from a type of snake that lives in these parts. No way I'm going to hunt snakes. Maybe you don't mind? Collect some snake scales and deliver them to Joseph.\n"
+		"\n"
+		"You'll find a ton of these snakes in the jungle south west of here."
 	]
 	
 	completion:
 	[
-		"."
+		"Oh, those will bring in the cash! Thanks!"
 	]
 	
 	progress:
 	[
-		"."
+		"Well, just kill those innocent snakes, take their scales, and deliver them to where they're supposed to go."
 	]
 
 	level: 26

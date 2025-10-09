@@ -44,26 +44,29 @@ objective .ranger_cromor_1:
 
 quest .ranger_cromor_1:
 {
-	string: "."
+	string: "Lizard Hunt"
 
 	text:
 	[
-		"."
+		"Venture into the jungle to the north, find and kill Scalemaw, and return to Ranger Cromor."
 	]
 	
 	description: 
 	[
-		"."
+		"I'm in charge of security around here and it's not looking good. The wildlife isn't really compatible with civilization. The locals told me about a giant lizard coming out at night, terrorizing everyone."
+		"They call it Scalemaw. Kill this nasty lizard and I'll make it worth your while.\n"
+		"\n"
+		"Reportedly it lives in the jungle to the north of here."
 	]
 
 	progress:
 	[
-		"."
+		"Scared of lizards?"
 	]
 	
 	completion:
 	[
-		"."
+		"Good job."
 	]
 	
 	objectives: [ .ranger_cromor_1 ]

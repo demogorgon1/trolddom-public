@@ -42,26 +42,27 @@ objective .sheriff_nordberg_1:
 
 quest .sheriff_nordberg_1:
 {
-	string: "."
+	string: "Flying Snakes?"
 
 	text:
 	[
-		"."
+		"Venture north of New Thalyssar, enter the dense jungle, find the cave, kill the wyvern, and return to Sheriff Nordberg."
 	]
 	
 	description: 
 	[
-		"."
+		"The wildlife around here is truly astounding. I'm used to dealing with bandits and rebels, but here I have to worry about weird animals. Have you heard about wyverns? Basically snakes with wings."
+		"One of them has been spotted north of here. Rumored to live in a cave. If you can go kill it, it would make my life a lot easier. Please?"
 	]
 
 	progress:
 	[
-		"."
+		"If I were you I'd just go home."
 	]
 	
 	completion:
 	[
-		"."
+		"Oh... You're back? Alive? That's a better outcome than I expected."
 	]
 	
 	objectives: [ .sheriff_nordberg_1 ]

@@ -79,7 +79,7 @@ aura judgement_for_all:
 ability judgement_for_all:
 {
 	string: "Judgement For All"
-	description: "Inflicts $damage$ holy damage on adjacent enemies, stuns them for 4 seconds, and generates a high amount of threat."
+	description: "Inflicts $damage$ damage on adjacent enemies, stuns them for 4 seconds, and generates a high amount of threat."
 	range: 1	
 	cooldowns: [ global ]
 	cooldown: $cooldown { duration: 600 }
