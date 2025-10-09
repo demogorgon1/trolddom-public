@@ -2,6 +2,7 @@
 !define local ICON_UNCOMMON_5 { min_rarity: uncommon min_level: 5 }
 !define local ICON_UNCOMMON_11 { min_rarity: uncommon min_level: 11 }
 !define local ICON_UNCOMMON_14 { min_rarity: uncommon min_level: 14 }
+!define local ICON_UNCOMMON_26 { min_rarity: uncommon min_level: 26 }
 
 sprites:
 {
@@ -883,7 +884,26 @@ sprites:
 	sprite icon_pain_and_suffering: { tags: [ icon ] }
 	sprite icon_demon_lord: { tags: [ icon ] }
 	sprite icon_extinguish: { tags: [ icon ] }
+	sprite icon_helmet_6: { tags: [ icon head armor_plate armor_mail ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_helmet_7: { tags: [ icon head armor_plate armor_mail ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_helmet_8: { tags: [ icon head armor_plate armor_mail ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_helmet_9: { tags: [ icon head armor_plate armor_mail ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_head_12: { tags: [ icon head armor_mail armor_cloth ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_head_13: { tags: [ icon head armor_mail armor_cloth ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_head_14: { tags: [ icon head armor_mail armor_cloth ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_chest_7: { tags: [ icon chest armor_mail armor_plate ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_chest_8: { tags: [ icon chest armor_mail armor_plate ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_chest_9: { tags: [ icon chest armor_cloth ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_chest_10: { tags: [ icon chest armor_cloth ] icon_meta_data: !ICON_UNCOMMON_26{} }
 
+	cursor: { position: [ 0 784 ] }	
+	sprite icon_pants_4: { tags: [ icon legs armor_cloth ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_pants_5: { tags: [ icon legs armor_cloth ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_sword_17: { tags: [ icon weapon_1h_sword weapon_2h_sword ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_sword_18: { tags: [ icon weapon_1h_sword weapon_2h_sword ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_staff_13: { tags: [ icon weapon_2h_staff ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_mace_16: { tags: [ icon weapon_1h_mace weapon_2h_mace ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_mace_17: { tags: [ icon weapon_1h_mace weapon_2h_mace ] icon_meta_data: !ICON_UNCOMMON_26{} }
 }
 
 

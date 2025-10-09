@@ -207,7 +207,7 @@ quest .old_man_james_3:
 	[
 		"Good job with the kobolds, maybe you handle another problem for me. You hear about harpies? They migrated here recently and they've been making life here quite hard. Not only the noise, but sometimes they"
 		"swoop down when I'm eating, trying to steal my food. They live in the mountains south of here, in the jungle. Yesterday I went down to check it out, but there were too many of them. I found a colony at the"
-		"Firbiu Temple and another one at the Feruc Temple. How about you go clear them out? You seem fairly good at killing critters.
+		"Firbiu Temple and another one at the Feruc Temple. How about you go clear them out? You seem fairly good at killing critters."
 	]
 
 	progress:

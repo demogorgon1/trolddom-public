@@ -107,7 +107,7 @@ quest .flimlock_1:
 	
 	level: 27
 	quest_items: [ .flimlock_1_quest_item ]
-	objectives: [ .flimlock_1 
+	objectives: [ .flimlock_1 ]
 }
 
 ############################################################
