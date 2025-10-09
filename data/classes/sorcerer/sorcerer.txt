@@ -41,7 +41,7 @@ ability sorcerer_attack:
 
 class sorcerer:
 {
-	version: 2
+	version: 3
 
 	string: "Sorcerer"	
 	description: "Master of magic."

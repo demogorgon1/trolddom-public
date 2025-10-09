@@ -50,7 +50,7 @@ ability fighter_shoot:
 
 class fighter:
 {
-	version: 3
+	version: 4
 
 	string: "Fighter"	
 	description: "Defeat your enemies in hand-to-hand combat."
