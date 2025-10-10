@@ -1,0 +1,19 @@
+generation_job crafting_4: !CRAFTING
+{
+	_seed: 34349638
+		
+	_blacksmithing_item_prefixes:
+	[
+		{ level_range: [ 26 30 ] string: "Brutal" rarity: uncommon material_multiplier: 0.4 }
+		
+		{ level_range: [ 26 30 ] string: "Merciless" rarity: rare material_multiplier: 0.8 }			
+	]
+	
+	_tailoring_item_prefixes:
+	[
+		{ level_range: [ 26 30 ] string: "Everlasting" rarity: uncommon material_multiplier: 0.8 }
+		
+		{ level_range: [ 26 30 ] string: "Immortal" rarity: rare material_multiplier: 1.6 }			
+	]	
+}
+	

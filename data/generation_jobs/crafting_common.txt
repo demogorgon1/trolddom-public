@@ -1,0 +1,107 @@
+!define CRAFTING
+{
+	random_seed: @_seed
+	
+	item_suffixes:
+	[
+		{ string: "of Vitality" constitution: 1 }
+		{ string: "of the Sentinel" constitution: 1 dexterity: 1 }
+		{ string: "of Endurance" constitution: 2 wisdom: 1 }
+		{ string: "of Might" strength: 1 }
+		{ string: "of the Berserker" strength: 1 budget_bias: -10 phys_crit_chance: 1 }
+		{ string: "of the Warlord" strength: 2 constitution: 1 }
+		{ string: "of the Duelist" strength: 1 dexterity: 1 }
+		{ string: "of Swiftness" dexterity: 1 }
+		{ string: "of the Windwalker" dexterity: 2 budget_bias: -10 phys_crit_chance: 1 }
+		{ string: "of the Stalker" dexterity: 2 strength: 1 }
+		{ string: "of the Sage" wisdom: 1 }
+		{ string: "of the Oracle" wisdom: 2 spirit: 1 }
+		{ string: "of the Seer" wisdom: 2 budget_bias: -10 spell_crit_chance: 1 }
+		{ string: "of Sorcery" spell_damage: 1 }
+		{ string: "of the Lifebinder" healing: 2 spirit: 1 }
+		{ string: "of Divinity" healing: 2 wisdom: 1 }
+		{ string: "of the Lightbringer" healing: 2 wisdom: 1 budget_bias: -10 spell_crit_chance: 1 }
+		{ string: "of the Unbreakable" constitution: 2 healing: 1 }
+		{ string: "of the Mirage" dexterity: 1 budget_bias: -10 dodge_chance: 1 }
+		{ string: "of Restoration" healing: 1 }
+	]
+	
+	equipment_slots:
+	[
+		head chest legs feet shoulders wrists waist hands
+	]
+	
+	loot_groups:
+	[
+		{ rarity: uncommon loot_group: world_drops_uncommon_recipe_random }
+		{ rarity: rare loot_group: world_drops_rare_recipe_random }
+	]
+
+	# Blacksmithing
+	{
+		item_suffixes:
+		[
+			{ string: "of the Elusive" dexterity: 1 budget_bias: -10 parry_chance: 1 }
+			{ string: "of the Gladiator" strength: 1 budget_bias: -10 parry_chance: 1 }
+			{ string: "of the Bulwark" constitution: 2 budget_bias: -5 block_chance: 1 }
+			{ string: "of the Guardian" constitution: 2 strength: 1 budget_bias: -5 block_chance: 1 }
+			{ string: "of the Immovable" constitution: 1 budget_bias: -5 block_chance: 1 } 
+			{ string: "of the Unyielding" constitution: 1 budget_bias: -5 block_chance: 1 healing: 1 }			
+			{ string: "of the Titan" constitution: 2 strength: 1 }
+		]
+	
+		item_prefixes: @_blacksmithing_item_prefixes
+
+		crafting: 
+		{	
+			profession: blacksmithing
+			craft_macro: BLACKSMITHING_CRAFT
+			learn_macro: BLACKSMITHING_LEARN
+			recipe_macro: BLACKSMITHING_RECIPE
+			recipe_prefix: "Plans"
+			item_type: armor_mail
+			craft _requires_anvil: true
+		}
+		
+		crafting: 
+		{	
+			profession: blacksmithing
+			craft_macro: BLACKSMITHING_CRAFT
+			learn_macro: BLACKSMITHING_LEARN
+			recipe_macro: BLACKSMITHING_RECIPE
+			recipe_prefix: "Plans"
+			item_type: armor_plate
+			craft _requires_anvil: true
+		}		
+	}
+	
+	# Tailoring
+	{
+		equipment_slots:
+		[
+			back
+		]
+		
+		item_suffixes:
+		[
+			{ string: "of the Arch-Mage" spell_damage: 2 wisdom: 1 }
+			{ string: "of the Warlock" spell_damage: 2 budget_bias: -10 spell_crit_chance: 1 }
+			{ string: "of the Arcanist" wisdom: 2 spell_damage: 1 }			
+			{ string: "of Serenity" spirit: 1 }			
+		]
+	
+		item_prefixes: @_tailoring_item_prefixes
+		
+		crafting: 
+		{	
+			profession: tailoring
+			craft_macro: TAILORING_CRAFT
+			learn_macro: TAILORING_LEARN
+			recipe_macro: TAILORING_RECIPE
+			recipe_prefix: "Pattern"			
+			item_type: armor_cloth
+			base_material item_thread: 1
+		}		
+	}	
+}
+	

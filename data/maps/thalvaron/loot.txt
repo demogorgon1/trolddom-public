@@ -1,0 +1,27 @@
+loot_group kareth_common: {}
+loot_group kareth_uncommon: {}
+
+loot_table .kareth_zone_drops: 
+{
+	slots:
+	[	
+		{ 
+			possibility: { weight: 20 }
+			possibility: { weight: 4 loot_group: kareth_common } 
+			possibility: { weight: 1 loot_group: kareth_uncommon } 
+		}
+	]	
+}
+
+loot_group thallysian_wilds_uncommon: {}
+
+loot_table .thallysian_wilds_zone_drops: 
+{
+	slots:
+	[	
+		{ 
+			possibility: { weight: 20 }
+			possibility: { weight: 1 loot_group: thallysian_wilds_uncommon } 
+		}
+	]	
+}

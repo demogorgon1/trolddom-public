@@ -313,7 +313,8 @@ namespace tpublic
 		const char*						_PickMaterialName(
 											uint32_t										aLevel,
 											Rarity::Id										aRarity,
-											uint32_t										aTagId);
+											uint32_t										aTagId,
+											bool											aMixed);
 	};
 
 }

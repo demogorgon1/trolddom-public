@@ -902,8 +902,12 @@ sprites:
 	sprite icon_sword_17: { tags: [ icon weapon_1h_sword weapon_2h_sword ] icon_meta_data: !ICON_UNCOMMON_26{} }
 	sprite icon_sword_18: { tags: [ icon weapon_1h_sword weapon_2h_sword ] icon_meta_data: !ICON_UNCOMMON_26{} }
 	sprite icon_staff_13: { tags: [ icon weapon_2h_staff ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_staff_14: { tags: [ icon weapon_2h_staff ] icon_meta_data: !ICON_UNCOMMON_26{} }
 	sprite icon_mace_16: { tags: [ icon weapon_1h_mace weapon_2h_mace ] icon_meta_data: !ICON_UNCOMMON_26{} }
 	sprite icon_mace_17: { tags: [ icon weapon_1h_mace weapon_2h_mace ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_sand_1: { tags: [ icon ] }
+	sprite icon_emerald_1: { tags: [ icon ] }
+	sprite icon_bottle_4: { tags: [ icon ] }
 }
 
 

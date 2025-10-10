@@ -41,6 +41,8 @@ namespace tpublic
 							m_canQueryPosition = aChild->GetBool();
 						else if (aChild->m_name == "fishing_loot_table")
 							m_fishingLootTableId = aChild->GetId(DataType::ID_LOOT_TABLE);
+						else if (aChild->m_name == "loot_table")
+							m_lootTableId = aChild->GetId(DataType::ID_LOOT_TABLE);
 						else if (aChild->m_name == "fishing_trigger_ability")
 							m_fishingTriggerAbilityId = aChild->GetId(DataType::ID_ABILITY);
 						else if (aChild->m_name == "fishing_trigger_ability_chance")
@@ -51,6 +53,8 @@ namespace tpublic
 							m_playerTriggerAbilityChance = aChild->GetUInt32();
 						else if (aChild->m_tag == "player_trigger_ability_requirement")
 							m_playerTriggerAbilityRequirements.push_back(Requirement(aChild));
+						else if (aChild->m_name == "top_zone")
+							m_topZoneId = aChild->GetId(DataType::ID_ZONE);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -71,6 +75,8 @@ namespace tpublic
 				aWriter->WriteUInt(m_playerTriggerAbilityId);
 				aWriter->WriteObjects(m_playerTriggerAbilityRequirements);
 				aWriter->WriteUInt(m_playerTriggerAbilityChance);
+				aWriter->WriteUInt(m_lootTableId);
+				aWriter->WriteUInt(m_topZoneId);
 			}
 			
 			bool
@@ -97,6 +103,10 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadUInt(m_playerTriggerAbilityChance))
 					return false;
+				if (!aReader->ReadUInt(m_lootTableId))
+					return false;
+				if (!aReader->ReadUInt(m_topZoneId))
+					return false;
 				return true;
 			}
 
@@ -121,6 +131,9 @@ namespace tpublic
 			uint32_t					m_playerTriggerAbilityId = 0;
 			std::vector<Requirement>	m_playerTriggerAbilityRequirements;
 			uint32_t					m_playerTriggerAbilityChance = 0;
+
+			uint32_t					m_lootTableId = 0;
+			uint32_t					m_topZoneId = 0;
 		};
 
 	}
