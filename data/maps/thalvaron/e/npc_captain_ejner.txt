@@ -122,6 +122,12 @@ entity thalvaron_captain_ejner_2_quest_item:
 	}
 }
 
+{
+	${ _level: 29 }
+	item .captain_ejner_1_a: !QUEST_REWARD_FEET{ _string: "." _icon: icon_boots_6 _dexterity: 2 _strength: 1 _type: armor_mail }
+	item .captain_ejner_1_b: !QUEST_REWARD_NECK{ _string: "." _icon: icon_necklace_2 _constitution: 1 _wisdom: 2  }
+}
+
 quest .captain_ejner_2:
 {
 	string: "Lost Treasure"
@@ -150,4 +156,5 @@ quest .captain_ejner_2:
 	level: 29
 	objectives: [ .captain_ejner_2 ]
 	prerequisites: [ .captain_ejner_1 ]
+	reward_one_item: [ .captain_ejner_1_a .captain_ejner_1_a ]
 }

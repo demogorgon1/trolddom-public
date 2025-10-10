@@ -40,6 +40,12 @@ objective .friduwulf_1:
 	}
 }
 
+{
+	${ _level: 25 }
+	item .friduwulf_1_a: !QUEST_REWARD_HANDS{ _string: "." _icon: icon_plate_hands_1 _dexterity: 1 _budget_bias: -10 _phys_crit: 1 _strength: 1 _type: armor_mail }
+	item .friduwulf_1_b: !QUEST_REWARD_WRISTS{ _string: "." _icon: icon_bracers_3 _constitution: 1 _wisdom: 4 _spell_damage: 2 _type: armor_cloth }
+}
+
 quest .friduwulf_1:
 {
 	string: "The Great Crab Hunt"
@@ -67,4 +73,5 @@ quest .friduwulf_1:
 	
 	objectives: [ .friduwulf_1 ]
 	level: 25
+	reward_one_item: [ .friduwulf_1_a .friduwulf_1_b ]
 }

@@ -101,6 +101,12 @@ objective .fritz_dawnstar_2:
 	}
 }
 
+{
+	${ _level: 28 }
+	item .fritz_dawnstar_2_a: !QUEST_REWARD_WRISTS{ _string: "." _icon: icon_bracers_6 _constitution: 2 _strength: 3 _type: armor_plate }
+	item .fritz_dawnstar_2_b: !QUEST_REWARD_HEAD{ _string: "." _icon: icon_head_11 _constitution: 1 _spell_damage: 1 _wisdom: 2 _type: armor_cloth }
+}
+
 quest .fritz_dawnstar_2:
 {
 	string: "The Necromancer"
@@ -128,6 +134,7 @@ quest .fritz_dawnstar_2:
 	
 	objectives: [ .fritz_dawnstar_2 ]
 	prerequisites: [ .fritz_dawnstar_1 ]
+	reward_one_item: [ .fritz_dawnstar_2_a .fritz_dawnstar_2_b ]
 	level: 28
 }
 

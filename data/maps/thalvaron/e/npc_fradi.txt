@@ -80,6 +80,12 @@ objective .fradi_1:
 	collect_items: { item: .bail_trok_1_quest_item count: 6 }
 }
 
+{
+	${ _level: 27 }
+	item .fradi_1_a: !QUEST_REWARD_WRISTS{ _string: "." _icon: icon_bracers_1 _constitution: 2 _wisdom: 3 _type: armor_cloth }
+	item .fradi_1_b: !QUEST_REWARD_SHOULDERS{ _string: "." _icon: icon_plate_shoulders_1 _constitution: 2 _strength: 3 _dexterity: 4 _type: armor_plate }
+}
+
 quest .fradi_1:
 {
 	string: "Cleaning the Beach"
@@ -107,4 +113,5 @@ quest .fradi_1:
 
 	objectives: [ .fradi_1 ]
 	level: 25
+	reward_one_item: [ .fradi_1_a .fradi_1_b ]
 }

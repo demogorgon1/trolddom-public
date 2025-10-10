@@ -182,6 +182,12 @@ objective .sandra_riddle_2:
 	collect_items: { item: .sandra_riddle_2_quest_item count: 5 }
 }
 
+{
+	${ _level: 28 }
+	item .sandra_riddle_2_a: !QUEST_REWARD_1H_KNIFE{ _string: "." _icon: icon_knife_2 _dexterity: 1 _strength: 3 }
+	item .sandra_riddle_2_b: !QUEST_REWARD_2H_STAFF{ _string: "." _icon: icon_staff_11 _constitution: 1 _wisdom: 2 _healing: 3 }
+}
+
 quest .sandra_riddle_2:
 {
 	string: "More Shiny Items"
@@ -208,5 +214,6 @@ quest .sandra_riddle_2:
 
 	objectives: [ .sandra_riddle_2 ]
 	prerequisites: [ .sandra_riddle_1 ]
+	reward_one_item: [ .sandra_riddle_2_a .sandra_riddle_2_b ]
 	level: 28
 }

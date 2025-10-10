@@ -93,6 +93,12 @@ objective .farmer_farbottom_2:
 	}
 }
 
+{
+	${ _level: 29 }
+	item .farmer_farbottom_2_a: !QUEST_REWARD_HANDS{ _string: "." _icon: icon_gloves_2 _constitution: 1 _wisdom: 4 _spell_damage: 2 _type: armor_cloth }
+	item .farmer_farbottom_2_b: !QUEST_REWARD_NECK{ _string: "." _icon: icon_necklace_10 _constitution: 2 _budget_bias: -10 _phys_crit: 1 }
+}
+
 quest .farmer_farbottom_2:
 {
 	string: "Yet Another Kobold Infestation"
@@ -120,6 +126,7 @@ quest .farmer_farbottom_2:
 	
 	objectives: [ .farmer_farbottom_2 ]
 	level: 29
+	reward_one_item: [ .farmer_farbottom_2_a .farmer_farbottom_2_b ]
 }
 
 

@@ -194,6 +194,12 @@ objective .old_man_james_3_b:
 	}
 }
 
+{
+	${ _level: 26 }
+	item .old_man_james_3_a: !QUEST_REWARD_WAIST{ _string: "." _icon: icon_cloth_belt_2 _constitution: 3 _wisdom: 2 _healing: 3 _type: armor_cloth }
+	item .old_man_james_3_b: !QUEST_REWARD_WRISTS{ _string: "." _icon: icon_plate_bracers_1 _dexterity: 1 _strength: 2 _type: armor_mail }
+}
+
 quest .old_man_james_3:
 {
 	string: "Aerial Assault"
@@ -222,4 +228,5 @@ quest .old_man_james_3:
 	
 	objectives: [ .old_man_james_3_a .old_man_james_3_b ]
 	level: 26
+	reward_one_item: [ .old_man_james_3_a .old_man_james_3_b ]
 }

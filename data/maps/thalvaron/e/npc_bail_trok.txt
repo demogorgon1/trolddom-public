@@ -137,6 +137,12 @@ item .bail_trok_2_quest_item:
 	quest: thalvaron_bail_trok_2
 }
 
+{
+	${ _level: 29 }
+	item .bail_trok_2_a: !QUEST_REWARD_WAIST{ _string: "." _icon: icon_cloth_belt_1 _constitution: 1 _wisdom: 2 _spell_damage: 3 _type: armor_cloth }
+	item .bail_trok_2_b: !QUEST_REWARD_WAIST{ _string: "." _icon: icon_cloth_belt_3 _constitution: 3 _strength: 1 _type: armor_plate }
+}
+	  
 quest thalvaron_bail_trok_2:
 {
 	string: "Delivery to Valoris"
@@ -148,8 +154,8 @@ quest thalvaron_bail_trok_2:
 	
 	description: 
 	[
-		"Well, the client I spoke of is Clara Hawthorne. She lives in the Royal District of Valoris. The artifacts you collected were requested by her. If you can, please deliver this bundle to her next time you"
-		"go to Valoris."
+		"Well, the client I spoke of is a woman named Clara Hawthorne. She lives in the Royal District of Valoris. The artifacts you collected were requested by her. If you can, please deliver this bundle"
+		"to her next time you go to Valoris."
 	]
 
 	completion:
@@ -159,5 +165,6 @@ quest thalvaron_bail_trok_2:
 
 	quest_items: [ .bail_trok_2_quest_item ]
 	prerequisites: [ .bail_trok_1 ]
+	reward_one_item: [ .bail_trok_2_a .bail_trok_2_a ]
 	level: 29
 }

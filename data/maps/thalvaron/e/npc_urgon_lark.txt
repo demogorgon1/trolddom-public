@@ -75,6 +75,7 @@ quest .urgon_lark_1:
 
 ############################################################
 # Quest 2
+
 loot_group .urgon_lark_2_quest_item: { }
 
 item .urgon_lark_2_quest_item:
@@ -145,6 +146,13 @@ objective .urgon_lark_3:
 	}
 }
 
+{
+	${ _level: 30 }
+	item .urgon_lark_3_a: !QUEST_REWARD_CHEST{ _string: "." _icon: icon_cloth_shirt_6 _constitution: 1 _wisdom: 2 _healing: 1 _type: armor_cloth }
+	item .urgon_lark_3_b: !QUEST_REWARD_BACK{ _string: "." _icon: icon_cape_6 _constitution: 2 _strength: 6 _type: armor_cloth }
+	item .urgon_lark_3_c: !QUEST_REWARD_FINGER{ _string: "." _icon: icon_ring_13 _constitution: 1 _spell_damage: 3 _wisdom: 2 }
+}
+
 quest .urgon_lark_3:
 {
 	string: "The Desert Temple"
@@ -173,6 +181,7 @@ quest .urgon_lark_3:
 	
 	objectives: [ .urgon_lark_3 ]
 	prerequisites: [ .urgon_lark_2 ]
+	reward_one_item: [ .urgon_lark_3_a .urgon_lark_3_b ]
 	level: 30
 }
                                                   

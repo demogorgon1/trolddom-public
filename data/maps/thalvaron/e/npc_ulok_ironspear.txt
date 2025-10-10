@@ -102,6 +102,12 @@ objective .ulok_ironspear_2:
 	collect_items: { item: .ulok_ironspear_2_quest_item count: 5 }
 }
 
+{
+	${ _level: 29 }
+	item .ulok_ironspear_2_a: !QUEST_REWARD_CHEST{ _string: "." _icon: icon_cloth_shirt_7 _constitution: 1 _wisdom: 3 _spell_damage: 2 _type: armor_cloth }
+	item .ulok_ironspear_2_b: !QUEST_REWARD_CHEST{ _string: "." _icon: icon_chest_1 _constitution: 2 _strength: 3 _type: armor_plate }
+}
+
 quest .ulok_ironspear_2:
 {
 	string: "Exotic Poisons"
@@ -129,4 +135,5 @@ quest .ulok_ironspear_2:
 	level: 29
 	objectives: [ .ulok_ironspear_2 ]
 	prerequisites: [ .ulok_ironspear_1 ]
+	reward_one_item: [ .ulok_ironspear_2_a .ulok_ironspear_2_b ]
 }

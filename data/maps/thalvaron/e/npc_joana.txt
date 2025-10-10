@@ -98,7 +98,6 @@ item .joana_2_quest_item_2:
 	string: "Orb of Jurgorth"
 }
 
-
 item .joana_2_quest_item_3:
 {
 	icon: icon_orb_1
@@ -124,6 +123,12 @@ objective .joana_2_c:
 {
 	string: "Orb of the Last King"
 	collect_items: { item: .joana_2_quest_item_3 count: 1 }
+}
+
+{
+	${ _level: 29 }
+	item .joana_2_a: !QUEST_REWARD_FINGER{ _string: "." _icon: icon_ring_1 _constitution: 1 _healing: 5 _budget_bias: -10 _spell_crit: 1 }
+	item .joana_2_b: !QUEST_REWARD_WRISTS{ _string: "." _icon: icon_bracers_3 _constitution: 2 _strength: 1 _type: armor_plate }
 }
 
 quest thalvaron_joana_2:
@@ -158,4 +163,5 @@ quest thalvaron_joana_2:
 	level: 29
 	objectives: [ .joana_2_a .joana_2_b .joana_2_c ]	
 	prerequisites: [ .joana_1 ]
+	reward_one_item: [ .joana_2_a .joana_2_b ]
 }

@@ -75,6 +75,12 @@ objective .fullay_2:
 	collect_items: { item: .fullay_2_quest_item count: 6 }
 }
 
+{
+	${ _level: 26 }
+	item .fullay_2_a: !QUEST_REWARD_HEAD{ _string: "." _icon: icon_helmet_2 _constitution: 2 _strength: 1 _type: armor_plate }
+	item .fullay_2_b: !QUEST_REWARD_WRISTS{ _string: "." _icon: icon_mail_bracers_3 _constitution: 1 _wisdom: 2 _healing: 3 _type: armor_cloth }
+}
+
 quest .fullay_2:
 {
 	string: "Jungle Business"
@@ -104,6 +110,7 @@ quest .fullay_2:
 
 	level: 26
 	objectives: [ .fullay_2 ]
+	reward_one_item: [ .fullay_2_a .fullay_2_b ]
 }
 
 

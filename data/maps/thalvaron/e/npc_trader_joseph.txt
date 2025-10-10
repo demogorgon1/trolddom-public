@@ -169,6 +169,12 @@ objective .trader_joseph_2:
 	collect_items: { item: .trader_joseph_2_quest_item count: 6 }
 }
 
+{
+	${ _level: 27 }
+	item .trader_joseph_2_a: !QUEST_REWARD_NECK{ _string: "." _icon: icon_necklace_4 _constitution: 1 _mana_per_5: 3 _healing: 2 }
+	item .trader_joseph_2_b: !QUEST_REWARD_FINGER{ _string: "." _icon: icon_ring_14 _constitution: 1 _strength: 2 }
+}
+
 quest .trader_joseph_2:
 {
 	string: "More Exotic Fruit Business"
@@ -196,5 +202,6 @@ quest .trader_joseph_2:
 
 	objectives: [ .trader_joseph_2 ]
 	prerequisites: [ .trader_joseph_1 ]
+	reward_one_item: [ .trader_joseph_2_a .trader_joseph_2_b ]
 	level: 27
 }

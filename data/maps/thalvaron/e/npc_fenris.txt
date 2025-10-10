@@ -156,6 +156,12 @@ objective .fenris_3_b:
 	}
 }
 
+{
+	${ _level: 25 }
+	item .fenris_3_a: !QUEST_REWARD_BACK{ _string: "." _icon: icon_cape_2 _constitution: 1 _wisdom: 4 _type: armor_cloth }
+	item .fenris_3_b: !QUEST_REWARD_NECK{ _string: "." _icon: icon_necklace_1 _constitution: 1 _block_chance: 1 _budget_bias: -10 }
+}
+
 quest .fenris_3:
 {
 	string: "Finishing the Job"
@@ -184,4 +190,5 @@ quest .fenris_3:
 	objectives: [ .fenris_3_a .fenris_3_b ]
 	prerequisites: [ .fenris_2 ]
 	level: 25
+	reward_one_item: [ .fenris_3_a .fenris_3_b ]
 }

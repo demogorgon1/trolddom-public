@@ -163,6 +163,12 @@ entity thalvaron_flimlock_2_quest_item:
 	}
 }
 
+{
+	${ _level: 27 }
+	item .flimlock_2_a: !QUEST_REWARD_1H_SWORD{ _string: "." _icon: icon_sword_15 _constitution: 3 _dexterity: 2 _strength: 1 }
+	item .flimlock_2_b: !QUEST_REWARD_2H_STAFF{ _string: "." _icon: icon_staff_3 _constitution: 1 _wisdom: 3 _spell_damage: 4 }
+}
+
 quest .flimlock_2:
 {
 	string: "Experimenting with the Swamp"
@@ -192,6 +198,7 @@ quest .flimlock_2:
 	quest_items: [ .flimlock_2_quest_item ]
 	prerequisites: [ .flimlock_1 ]
 	objectives: [ .flimlock_2 ]
+	reward_one_item: [ .flimlock_2_a .flimlock_2_b ]
 }
 
 ############################################################
@@ -208,6 +215,12 @@ objective .flimlock_3:
 		entities: [ thalvaron_lizard_wizard ]
 		count: 1
 	}
+}
+
+{
+	${ _level: 27 }
+	item .flimlock_3_a: !QUEST_REWARD_SHOULDERS{ _string: "." _icon: icon_shoulders_3 _constitution: 1 _wisdom: 1 _spirit: 2 _healing: 3 _type: armor_cloth }
+	item .flimlock_3_b: !QUEST_REWARD_FINGER{ _string: "." _icon: icon_ring_2 _constitution: 2 _strength: 1 }
 }
 
 quest .flimlock_3:
@@ -238,6 +251,7 @@ quest .flimlock_3:
 	
 	level: 27
 	prerequisites: [ .crust_elemental_quest_item ]
+	reward_one_item: [ .flimlock_3_a .flimlock_3_b ]
 }
 
 entity thalvaron_flimlock_3_portal:

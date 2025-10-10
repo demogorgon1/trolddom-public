@@ -151,6 +151,12 @@ item .brila_stargazer_2_quest_item:
 	quest: .brila_stargazer_2
 }
 
+{
+	${ _level: 27 }
+	item .brila_stargazer_2_a: !QUEST_REWARD_WAIST{ _string: "." _icon: icon_cloth_belt_1 _constitution: 2 _strength: 4 _type: armor_plate }
+	item .brila_stargazer_2_b: !QUEST_REWARD_SHOULDERS{ _string: "." _icon: icon_shoulders_9 _constitution: 1 _wisdom: 4 _spirit: 2 _type: armor_cloth }
+}
+
 quest .brila_stargazer_2:
 {
 	string: "Delivery to Mr. Ronson"
@@ -174,4 +180,5 @@ quest .brila_stargazer_2:
 	level: 27
 	prerequisites: [ .brila_stargazer_1 ]
 	quest_items: [ .brila_stargazer_2_quest_item ]
+	reward_one_item: [ .brila_stargazer_2_a .brila_stargazer_2_b ]
 }

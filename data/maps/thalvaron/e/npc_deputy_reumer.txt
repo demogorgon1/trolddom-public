@@ -40,6 +40,12 @@ objective .deputy_reumer_1:
 	}
 }
 
+{
+	${ _level: 27 }
+	item .deputy_reumer_1_a: !QUEST_REWARD_BACK{ _string: "." _icon: icon_cape_5 _constitution: 1 _wisdom: 2 _spell_damage: 1 _type: armor_cloth }
+	item .deputy_reumer_1_b: !QUEST_REWARD_WAIST{ _string: "." _icon: icon_kobold_tail _dexterity: 1 _strength: 3 _type: armor_mail }
+}
+
 quest .deputy_reumer_1:
 {
 	string: "Swamp Monsters"
@@ -67,4 +73,5 @@ quest .deputy_reumer_1:
 	
 	objectives: [ .deputy_reumer_1 ]
 	level: 27
+	reward_one_item: [ .deputy_reumer_1_a .deputy_reumer_1_b ]
 }

@@ -104,6 +104,12 @@ objective .dag_hammerfest_2:
 	collect_items: { item: .dag_hammerfest_2_quest_item count: 1 }
 }
 
+{
+	${ _level: 30 }
+	item .dag_hammerfest_2_a: !QUEST_REWARD_HEAD{ _string: "." _icon: icon_head_10 _constitution: 1 _healing: 2 _spirit: 1 _type: armor_cloth }
+	item .dag_hammerfest_2_b: !QUEST_REWARD_BACK{ _string: "." _icon: icon_cape_1 _constitution: 2 _strength: 1 _parry_chance: 1 _budget_bias: -10 _type: armor_cloth }
+}
+
 quest .dag_hammerfest_2:
 {
 	string: "Icing of the Cake"
@@ -131,6 +137,7 @@ quest .dag_hammerfest_2:
 
 	prerequisites: [ .dag_hammerfest_1 ]
 	objectives: [ .dag_hammerfest_2 ]
+	reward_one_item: [ .dag_hammerfest_2_a .dag_hammerfest_2_b ]
 	level: 30
 }
 
