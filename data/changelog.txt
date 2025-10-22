@@ -2,6 +2,18 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.5.0"
+
+	text: "New content:"
+
+	list:
+	[
+		{ text: "Level cap raised to 30." }		
+		{ text: "Zones, talents, crafting recipes, enchants, world drops, quests, and more." }
+		{ text: "Talk to Ranger Virgil in Tirnwood Vale or Ranger Ursa at Urthon Gate." }		
+	]	
+
+	#######################################################################################
 	heading: "v0.4.2"
 
 	text: "Issues fixed:"

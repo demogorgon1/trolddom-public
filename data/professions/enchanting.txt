@@ -1188,7 +1188,7 @@ ability disenchant:
 		_formula_consume_items: { formula_enchant_weapon_dancing_weapon: 1 }
 		_learn_ability: learn_enchant_weapon_dancing_weapon
 		_formula_required_skill: 95
-		_level_range: [ 22 28 ]
+		_level_range: [ 22 30 ]
 		_ability: craft_enchant_weapon_dancing_weapon
 	}
 
@@ -1322,4 +1322,91 @@ ability disenchant:
 	ability enchant_gloves_major_wisdom: !ENCHANTING_APPLY{}
 	item enchant_gloves_major_wisdom: !ENCHANTING_ITEM{}
 	ability craft_enchant_gloves_major_wisdom: !ENCHANTING_CRAFT{}
+}
+
+#####################################################
+# Enchant Weapon - Vampiric Edge
+
+{
+	${
+		_string: "Enchant Weapon - Vampiric Edge"
+		_string_item: "Enchant Weapon: Vampiric Edge"
+		_description: "Enchants item to make your melee attacks heal you over time."
+		_item: enchant_weapon_vampiric_edge
+		_produce: { enchant_weapon_vampiric_edge: 1 } 
+		_materials: { reagent_void_crystal: 5 reagent_void_essence: 5 reagent_paper: 1 }
+		_skill: 110
+		_target_item_requirements: { equipment_slots: [ main_hand off_hand ] }
+		_id: enchant_weapon_vampiric_edge
+		_consume_items: { enchant_weapon_vampiric_edge: 1 }	
+	}
+
+	ability enchant_weapon_vampiric_edge_trigger:
+	{
+		string: "Vampiric Edge"
+		direct_effect apply_aura:
+		{
+			aura: $aura [ string ]
+			{
+				icon: icon_vampiric_edge
+				description: "Heals over time."
+				type: buff
+				duration: based_on_effects
+				flags: [ magic unique ]
+				aura_effect repeat: 
+				{ 
+					update_interval: 10
+					update_count: 5
+					ability: $ability [ string icon ]
+					{
+						states: [ default in_combat ]
+						flags: [ always_in_range always_in_line_of_sight ]
+						target_particle_system: small_heal	
+						delay: 2						
+						direct_effect heal:
+						{	
+							function: { expression: a_mul_x_plus_b x: healing a: 0.13 b: 27 }
+							spread: !DEFAULT_SPREAD{}									
+						}	
+					}				
+				}
+			}
+		}	
+	}
+
+	aura enchant_weapon_vampiric_edge:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper	
+
+		string: "Vampiric Edge"
+		color_weapon_glow: [ 255 0 255 255 ]
+		
+		aura_effect combat_event_trigger: 
+		{ 
+			combat_event<source>: [ hit critical ]
+			combat_event_ability_mask: [ offensive melee ]
+			combat_event_ability_reject_mask: [ always_in_range always_in_line_of_sight ]
+			ability<self>: enchant_weapon_vampiric_edge_trigger
+		}			
+	}
+
+	ability enchant_weapon_vampiric_edge: !ENCHANTING_APPLY{}
+	item enchant_weapon_vampiric_edge: !ENCHANTING_ITEM{}
+	ability craft_enchant_weapon_vampiric_edge: !ENCHANTING_CRAFT{}
+
+	${
+		_formula_item_level: 22
+		_formula_string: "Formula: Enchant Weapon - Vampiric Edge"
+		_formula_description: "Teaches you how to enchant a weapon to make your melee attacks heal you over time."
+		_formula_consume_items: { formula_enchant_weapon_vampiric_edge: 1 }
+		_learn_ability: learn_enchant_weapon_vampiric_edge
+		_formula_required_skill: 110
+		_level_range: [ 22 30 ]
+		_ability: craft_enchant_weapon_vampiric_edge
+	}
+
+	item formula_enchant_weapon_vampiric_edge: !ENCHANTING_FORMULA_ITEM{}
+	ability learn_enchant_weapon_vampiric_edge: !ENCHANTING_FORMULA_ABILITY{}
 }

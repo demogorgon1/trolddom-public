@@ -458,7 +458,7 @@ item recipe_invisibility_potion:
 	icon: icon_scroll_1
 	string: "Recipe: Invisibility Potion"
 	use_ability: .learn_invisibility_potion
-	level_range: [ 16 25 ]
+	level_range: [ 16 30 ]
 }
 
 #####################################################
@@ -500,5 +500,233 @@ item recipe_rage_potion:
 	icon: icon_scroll_1
 	string: "Recipe: Rage Potion"
 	use_ability: .learn_rage_potion
-	level_range: [ 16 25 ]
+	level_range: [ 16 30 ]
+}
+
+#####################################################
+# Fire Protection Potion
+
+ability craft_fire_protection_potion: !ALCHEMY_CRAFT
+{
+	_string: "Fire Protection Potion"
+	_item: consumable_fire_protection_potion
+	_produce: { consumable_fire_protection_potion: 1 } 
+	_materials: { item_sand_orchid: 3 item_enchanted_coal: 1 }
+	_skill: 80
+}
+
+item recipe_fire_protection_potion:
+{
+	type: miscellaneous
+	item_level: 20
+	rarity: uncommon
+	loot_groups: [ world_drops_uncommon ]
+	icon: icon_scroll_1
+	string: "Recipe: Fire Protection Potion"
+	level_range: [ 20 30 ]
+	use_ability: $ability [ string icon ]
+	{
+		description: "Teaches you how to make a Fire Protection Potion."
+		flags: [ target_self item ]
+		cast_time: 20
+		cooldowns: [ global ]	
+		consume_items: { recipe_fire_protection_potion: 1 }
+		required_profession<75>: alchemy
+		requirement self<must_not_have_profession_ability>: { id: craft_fire_protection_potion }
+		direct_effect learn_profession_ability:
+		{
+			profession: alchemy
+			ability: craft_fire_protection_potion
+		}
+	}	
+}
+
+#####################################################
+# Frost Protection Potion
+
+ability craft_frost_protection_potion: !ALCHEMY_CRAFT
+{
+	_string: "Frost Protection Potion"
+	_item: consumable_frost_protection_potion
+	_produce: { consumable_frost_protection_potion: 1 } 
+	_materials: { item_sand_orchid: 3 item_roots: 1 }
+	_skill: 80
+}
+
+item recipe_frost_protection_potion:
+{
+	type: miscellaneous
+	item_level: 20
+	rarity: uncommon
+	loot_groups: [ world_drops_uncommon ]
+	icon: icon_scroll_1
+	string: "Recipe: Frost Protection Potion"
+	level_range: [ 20 30 ]
+	use_ability: $ability [ string icon ]
+	{
+		description: "Teaches you how to make a Frost Protection Potion."
+		flags: [ target_self item ]
+		cast_time: 20
+		cooldowns: [ global ]	
+		consume_items: { recipe_frost_protection_potion: 1 }
+		required_profession<75>: alchemy
+		requirement self<must_not_have_profession_ability>: { id: craft_frost_protection_potion }
+		direct_effect learn_profession_ability:
+		{
+			profession: alchemy
+			ability: craft_frost_protection_potion
+		}
+	}	
+}
+
+#####################################################
+# Arcane Protection Potion
+
+ability craft_arcane_protection_potion: !ALCHEMY_CRAFT
+{
+	_string: "Arcane Protection Potion"
+	_item: consumable_arcane_protection_potion
+	_produce: { consumable_arcane_protection_potion: 1 } 
+	_materials: { item_sand_orchid: 3 item_lizard_tail: 1 }
+	_skill: 80
+}
+
+item recipe_arcane_protection_potion:
+{
+	type: miscellaneous
+	item_level: 20
+	rarity: uncommon
+	loot_groups: [ world_drops_uncommon ]
+	icon: icon_scroll_1
+	string: "Recipe: Arcane Protection Potion"
+	level_range: [ 20 30 ]
+	use_ability: $ability [ string icon ]
+	{
+		description: "Teaches you how to make a Arcane Protection Potion."
+		flags: [ target_self item ]
+		cast_time: 20
+		cooldowns: [ global ]	
+		consume_items: { recipe_arcane_protection_potion: 1 }
+		required_profession<75>: alchemy
+		requirement self<must_not_have_profession_ability>: { id: craft_arcane_protection_potion }
+		direct_effect learn_profession_ability:
+		{
+			profession: alchemy
+			ability: craft_arcane_protection_potion
+		}
+	}	
+}
+
+#####################################################
+# Unholy Protection Potion
+
+ability craft_unholy_protection_potion: !ALCHEMY_CRAFT
+{
+	_string: "Unholy Protection Potion"
+	_item: consumable_unholy_protection_potion
+	_produce: { consumable_unholy_protection_potion: 1 } 
+	_materials: { item_sand_orchid: 3 item_demon_teeth: 1 }
+	_skill: 80
+}
+
+item recipe_unholy_protection_potion:
+{
+	type: miscellaneous
+	item_level: 20
+	rarity: uncommon
+	loot_groups: [ world_drops_uncommon ]
+	icon: icon_scroll_1
+	string: "Recipe: Unholy Protection Potion"
+	level_range: [ 20 30 ]
+	use_ability: $ability [ string icon ]
+	{
+		description: "Teaches you how to make a Unholy Protection Potion."
+		flags: [ target_self item ]
+		cast_time: 20
+		cooldowns: [ global ]	
+		consume_items: { recipe_unholy_protection_potion: 1 }
+		required_profession<75>: alchemy
+		requirement self<must_not_have_profession_ability>: { id: craft_unholy_protection_potion }
+		direct_effect learn_profession_ability:
+		{
+			profession: alchemy
+			ability: craft_unholy_protection_potion
+		}
+	}	
+}
+
+#####################################################
+# Holy Protection Potion
+
+ability craft_holy_protection_potion: !ALCHEMY_CRAFT
+{
+	_string: "Holy Protection Potion"
+	_item: consumable_holy_protection_potion
+	_produce: { consumable_holy_protection_potion: 1 } 
+	_materials: { item_sand_orchid: 3 item_demon_fur: 1 }
+	_skill: 80
+}
+
+item recipe_holy_protection_potion:
+{
+	type: miscellaneous
+	item_level: 20
+	rarity: uncommon
+	loot_groups: [ world_drops_uncommon ]
+	icon: icon_scroll_1
+	string: "Recipe: Holy Protection Potion"
+	level_range: [ 20 30 ]
+	use_ability: $ability [ string icon ]
+	{
+		description: "Teaches you how to make a Holy Protection Potion."
+		flags: [ target_self item ]
+		cast_time: 20
+		cooldowns: [ global ]	
+		consume_items: { recipe_holy_protection_potion: 1 }
+		required_profession<75>: alchemy
+		requirement self<must_not_have_profession_ability>: { id: craft_holy_protection_potion }
+		direct_effect learn_profession_ability:
+		{
+			profession: alchemy
+			ability: craft_holy_protection_potion
+		}
+	}	
+}
+
+#####################################################
+# Poison Protection Potion
+
+ability craft_poison_protection_potion: !ALCHEMY_CRAFT
+{
+	_string: "Poison Protection Potion"
+	_item: consumable_poison_protection_potion
+	_produce: { consumable_poison_protection_potion: 1 } 
+	_materials: { item_sand_orchid: 3 item_large_poison_sack: 1 }
+	_skill: 80
+}
+
+item recipe_poison_protection_potion:
+{
+	type: miscellaneous
+	item_level: 20
+	rarity: uncommon
+	loot_groups: [ world_drops_uncommon ]
+	icon: icon_scroll_1
+	string: "Recipe: Poison Protection Potion"
+	level_range: [ 20 30 ]
+	use_ability: $ability [ string icon ]
+	{
+		description: "Teaches you how to make a Poison Protection Potion."
+		flags: [ target_self item ]
+		cast_time: 20
+		cooldowns: [ global ]	
+		consume_items: { recipe_poison_protection_potion: 1 }
+		required_profession<75>: alchemy
+		requirement self<must_not_have_profession_ability>: { id: craft_poison_protection_potion }
+		direct_effect learn_profession_ability:
+		{
+			profession: alchemy
+			ability: craft_poison_protection_potion
+		}
+	}	
 }

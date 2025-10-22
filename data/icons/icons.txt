@@ -908,6 +908,16 @@ sprites:
 	sprite icon_sand_1: { tags: [ icon ] }
 	sprite icon_emerald_1: { tags: [ icon ] }
 	sprite icon_bottle_4: { tags: [ icon ] }
+	sprite icon_potion_6: { tags: [ icon ] }
+	sprite icon_potion_7: { tags: [ icon ] }
+	sprite icon_potion_8: { tags: [ icon ] }
+	sprite icon_potion_9: { tags: [ icon ] }
+	sprite icon_potion_10: { tags: [ icon ] }
+	
+	cursor: { position: [ 0 800 ] }	
+	sprite icon_potion_11: { tags: [ icon ] }
+	sprite icon_vampiric_edge: { tags: [ icon ] }
+	
 }
 
 
