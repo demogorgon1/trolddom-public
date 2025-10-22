@@ -12,6 +12,7 @@ dialogue_screen .ranger_roel_dialogue:
 		{ quest: .ranger_roel_1 }
 		{ quest: .ranger_roel_3 }
 		{ quest<offer_only>: thalvaron_ranger_roel_2 }
+		{ quest<completion_only>: thalvaron_ranger_virgil_2 }
 	]
 }
 
@@ -88,7 +89,7 @@ quest .ranger_roel_1:
 
 	text:
 	[
-		"Went into the caves to find Roel's satchel and return it to him."
+		"Venture into the caves to find Roel's satchel and return it to him."
 	]
 	
 	description: 

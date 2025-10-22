@@ -252,6 +252,7 @@ quest .flimlock_3:
 	level: 27
 	prerequisites: [ .crust_elemental_quest_item ]
 	reward_one_item: [ .flimlock_3_a .flimlock_3_b ]
+	objectives: [ .flimlock_3 ]
 }
 
 entity thalvaron_flimlock_3_portal:

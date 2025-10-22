@@ -2,14 +2,14 @@ dialogue_screen .ranger_virgil_greetings:
 {
 	text: 
 	[	
-		#"The river has subsided a bit. You should be able to cross safely."
-		"The water level of the river is too high to cross currently. Maybe in a few days."
+		"The river has subsided a bit. You should be able to cross safely."
 	]
 	
 	options:
 	[
 		{ quest<completion_only>: thalvaron_ranger_roel_2 }
 		{ quest<offer_only>: thalvaron_ranger_virgil_1 }
+		{ quest<offer_only>: thalvaron_ranger_virgil_2 requirement self<must_not_have_completed_quest>: thalvaron_ranger_roel_2 requirement self<must_not_have_active_quest>: thalvaron_ranger_roel_2 }
 	]
 }
 
@@ -57,4 +57,31 @@ quest thalvaron_ranger_virgil_1:
 	reward_cash_multiplier: 0.25
 	level: 25
 	prerequisites: [ thalvaron_ranger_roel_2 ]
+}
+
+##########################################################################################
+# Quest 2
+
+quest thalvaron_ranger_virgil_2:
+{
+	string: "Brother in Arms"
+
+	text:
+	[
+		"Seek out Ranger Roel at the Outcast Coast north of Valoris."
+	]
+	
+	description: 
+	[
+		"I haven't heard from my dear friend Roel for a while. Last I heard he traveled to the Outcast Coast north of Valoris to seek a life of solitude. Can't you go and find him, check if he's all right?"
+	]
+
+	completion:
+	[
+		"Oh, how wonderful."
+	]
+
+	reward_xp_multiplier: 0.25
+	reward_cash_multiplier: 0.25
+	level: 23	
 }

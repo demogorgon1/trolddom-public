@@ -12,6 +12,7 @@ loot_table .bone_tyrant:
 		{ possibility: { loot_group: .bone_tyrant  } }			
 		!WORLD_DROPS{}
 		!WORLD_DROPS_SKELETONS{}
+		!WORLD_DROPS_CLOTH{}		
 	]	
 }
 

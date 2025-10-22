@@ -12,6 +12,13 @@ changelog:
 		{ text: "Zones, talents, crafting recipes, enchants, world drops, quests, and more." }
 		{ text: "Talk to Ranger Virgil in Tirnwood Vale or Ranger Ursa at Urthon Gate." }		
 	]	
+	
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Using certain abilities on yourself no longer keeps you in combat." }
+	] 	
 
 	#######################################################################################
 	heading: "v0.4.2"

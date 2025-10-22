@@ -266,7 +266,7 @@ map_entity_spawn thalvaron_wyvern: { entity thalvaron_wyvern: { } spawn_timer: !
 		_abilities: [ { id: npc_frostbolt } { id: npc_rend } { id: npc_attack } ]
 	}
 
-	entity thalvaron_forbidden_island_boss: !NPC { _string: "Fryzilk" _sprite: demon_1 _sprite_dead: demon_1_dead  }
+	entity thalvaron_forbidden_island_boss: !NPC { _string: "Fryzilk" _sprite: tentacle_monster _sprite_dead: tentacle_monster_dead  }
 }
 
 # Scary creature
@@ -702,6 +702,7 @@ loot_table .kareth_skeletons:
 		
 		!WORLD_DROPS {}
 		!WORLD_DROPS_SKELETONS {}
+		!WORLD_DROPS_CLOTH{}
 	]	
 }		
 
@@ -838,6 +839,7 @@ loot_table .kareth_skeletons:
 				
 				!WORLD_DROPS {}
 				!WORLD_DROPS_SKELETONS {}
+				!WORLD_DROPS_CLOTH{}
 			]	
 		}		
 	}
@@ -856,11 +858,6 @@ loot_table .kareth_skeletons:
 			slots:
 			[	
 				{ 
-					possibility: 
-					{
-						weight: 1
-					}
-				
 					possibility: 
 					{ 
 						weight: 1
@@ -907,6 +904,7 @@ loot_table .kareth_skeletons:
 				{ possibility: { loot_group: thalvaron_father_tobias_quest_item_3 requirement self<must_have_active_quest>: thalvaron_father_tobias_3 } }				
 				!WORLD_DROPS {}
 				!WORLD_DROPS_SKELETONS{}
+				!WORLD_DROPS_CLOTH{}
 			]	
 		}		
 		_abilities: 
@@ -996,6 +994,7 @@ entity thalvaron_kareth_tomb_3: !TOMB_ENTITY{ _string: "Sarcophagus of the Last 
 				{ possibility: { weight: 1 loot_group: .joana_2_quest_item_1 requirement self<must_have_active_quest>: thalvaron_joana_2 } }				
 				!WORLD_DROPS {}
 				!WORLD_DROPS_SKELETONS{}
+				!WORLD_DROPS_CLOTH{}
 			]	
 		}
 		_abilities: 
@@ -1016,6 +1015,7 @@ entity thalvaron_kareth_tomb_3: !TOMB_ENTITY{ _string: "Sarcophagus of the Last 
 				{ possibility: { weight: 1 loot_group: .joana_2_quest_item_2 requirement self<must_have_active_quest>: thalvaron_joana_2 } }				
 				!WORLD_DROPS {}
 				!WORLD_DROPS_SKELETONS{}
+				!WORLD_DROPS_CLOTH{}
 			]	
 		}		
 		_abilities: 
@@ -1036,6 +1036,7 @@ entity thalvaron_kareth_tomb_3: !TOMB_ENTITY{ _string: "Sarcophagus of the Last 
 				{ possibility: { weight: 1 loot_group: .joana_2_quest_item_3 requirement self<must_have_active_quest>: thalvaron_joana_2 } }				
 				!WORLD_DROPS {}
 				!WORLD_DROPS_SKELETONS{}
+				!WORLD_DROPS_CLOTH{}
 			]	
 		}		
 		_abilities: 
@@ -1076,7 +1077,6 @@ map_entity_spawn thalvaron_kareth_stalker_large: { entity thalvaron_kareth_stalk
 			[	
 				{ possibility: { weight: 1 loot_group: .dag_hammerfest_1_quest_item requirement self<must_have_active_quest>: .dag_hammerfest_1 } }				
 				!WORLD_DROPS {}
-				!WORLD_DROPS_SKELETONS{}
 			]	
 		}				
 	}
@@ -1090,7 +1090,6 @@ map_entity_spawn thalvaron_kareth_stalker_large: { entity thalvaron_kareth_stalk
 			[	
 				{ possibility: { weight: 1 loot_group: .dag_hammerfest_2_quest_item requirement self<must_have_active_quest>: .dag_hammerfest_2 } }				
 				!WORLD_DROPS {}
-				!WORLD_DROPS_SKELETONS{}
 			]	
 		}				
 	}

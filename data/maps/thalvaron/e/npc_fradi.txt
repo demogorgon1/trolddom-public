@@ -77,7 +77,7 @@ objective .fradi_1:
 	
 	maps: [ thalvaron ]
 	
-	collect_items: { item: .bail_trok_1_quest_item count: 6 }
+	collect_items: { item: .fradi_1_quest_item count: 6 }
 }
 
 {

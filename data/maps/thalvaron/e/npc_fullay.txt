@@ -66,7 +66,8 @@ item .fullay_2_quest_item:
 	icon: icon_scales_3
 	item_level: 26
 	quest: .fullay_2
-	flags: [ not_sellable unique ]
+	flags: [ not_sellable ]
+	stack: 6
 }
 
 objective .fullay_2:

@@ -229,4 +229,5 @@ quest .old_man_james_3:
 	objectives: [ .old_man_james_3_a .old_man_james_3_b ]
 	level: 26
 	reward_one_item: [ .old_man_james_3_a .old_man_james_3_b ]
+	prerequisites: [ .old_man_james_2 ]
 }
