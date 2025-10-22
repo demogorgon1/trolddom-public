@@ -148,9 +148,9 @@ objective .urgon_lark_3:
 
 {
 	${ _level: 30 }
-	item .urgon_lark_3_a: !QUEST_REWARD_CHEST{ _string: "." _icon: icon_cloth_shirt_6 _constitution: 1 _wisdom: 2 _healing: 1 _type: armor_cloth }
-	item .urgon_lark_3_b: !QUEST_REWARD_BACK{ _string: "." _icon: icon_cape_6 _constitution: 2 _strength: 6 _type: armor_cloth }
-	item .urgon_lark_3_c: !QUEST_REWARD_FINGER{ _string: "." _icon: icon_ring_13 _constitution: 1 _spell_damage: 3 _wisdom: 2 }
+	item .urgon_lark_3_a: !QUEST_REWARD_CHEST{ _string: "Garment of the Karethi Priest" _icon: icon_cloth_shirt_6 _constitution: 1 _wisdom: 2 _healing: 1 _type: armor_cloth }
+	item .urgon_lark_3_b: !QUEST_REWARD_BACK{ _string: "Sandslayer Cloak" _icon: icon_cape_6 _constitution: 2 _strength: 6 _type: armor_cloth }
+	item .urgon_lark_3_c: !QUEST_REWARD_FINGER{ _string: "Ancient Wizard's Gem" _icon: icon_ring_13 _constitution: 1 _spell_damage: 3 _wisdom: 2 }
 }
 
 quest .urgon_lark_3:

@@ -106,8 +106,8 @@ objective .dag_hammerfest_2:
 
 {
 	${ _level: 30 }
-	item .dag_hammerfest_2_a: !QUEST_REWARD_HEAD{ _string: "." _icon: icon_head_10 _constitution: 1 _healing: 2 _spirit: 1 _type: armor_cloth }
-	item .dag_hammerfest_2_b: !QUEST_REWARD_BACK{ _string: "." _icon: icon_cape_1 _constitution: 2 _strength: 1 _parry_chance: 1 _budget_bias: -10 _type: armor_cloth }
+	item .dag_hammerfest_2_a: !QUEST_REWARD_HEAD{ _string: "Desert Wanderer's Hood" _icon: icon_head_10 _constitution: 1 _healing: 2 _spirit: 1 _type: armor_cloth }
+	item .dag_hammerfest_2_b: !QUEST_REWARD_BACK{ _string: "Cape of the Stalker" _icon: icon_cape_1 _constitution: 2 _strength: 1 _parry_chance: 1 _budget_bias: -10 _type: armor_cloth }
 }
 
 quest .dag_hammerfest_2:

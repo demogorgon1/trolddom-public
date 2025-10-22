@@ -42,8 +42,8 @@ objective .chad_wartorn_1:
 
 {
 	${ _level: 28 }
-	item .chad_wartorn_1_a: !QUEST_REWARD_HANDS{ _string: "." _icon: icon_gloves_1 _constitution: 1 _wisdom: 2 _healing: 3 _type: armor_cloth }
-	item .chad_wartorn_1_b: !QUEST_REWARD_FEET{ _string: "." _icon: icon_boots_3 _constitution: 2 _strength: 3 _dexterity: 1 _type: armor_plate }
+	item .chad_wartorn_1_a: !QUEST_REWARD_HANDS{ _string: "Celestine Handwraps" _icon: icon_gloves_1 _constitution: 1 _wisdom: 2 _healing: 3 _type: armor_cloth }
+	item .chad_wartorn_1_b: !QUEST_REWARD_FEET{ _string: "Stormmarch Sabatons" _icon: icon_boots_3 _constitution: 2 _strength: 3 _dexterity: 1 _type: armor_plate }
 }
 
 quest .chad_wartorn_1:

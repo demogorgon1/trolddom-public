@@ -127,8 +127,8 @@ objective .joana_2_c:
 
 {
 	${ _level: 29 }
-	item .joana_2_a: !QUEST_REWARD_FINGER{ _string: "." _icon: icon_ring_1 _constitution: 1 _healing: 5 _budget_bias: -10 _spell_crit: 1 }
-	item .joana_2_b: !QUEST_REWARD_WRISTS{ _string: "." _icon: icon_bracers_3 _constitution: 2 _strength: 1 _type: armor_plate }
+	item .joana_2_a: !QUEST_REWARD_FINGER{ _string: "Ring of the Holy Spellweaver" _icon: icon_ring_1 _constitution: 1 _healing: 5 _budget_bias: -10 _spell_crit: 1 }
+	item .joana_2_b: !QUEST_REWARD_WRISTS{ _string: "Desert Guard's Armguards" _icon: icon_bracers_3 _constitution: 2 _strength: 1 _type: armor_plate }
 }
 
 quest thalvaron_joana_2:

@@ -184,8 +184,8 @@ objective .sandra_riddle_2:
 
 {
 	${ _level: 28 }
-	item .sandra_riddle_2_a: !QUEST_REWARD_1H_KNIFE{ _string: "." _icon: icon_knife_2 _dexterity: 1 _strength: 3 }
-	item .sandra_riddle_2_b: !QUEST_REWARD_2H_STAFF{ _string: "." _icon: icon_staff_11 _constitution: 1 _wisdom: 2 _healing: 3 }
+	item .sandra_riddle_2_a: !QUEST_REWARD_1H_KNIFE{ _string: "Sharp Obsidian Knife" _icon: icon_knife_2 _dexterity: 1 _strength: 3 }
+	item .sandra_riddle_2_b: !QUEST_REWARD_2H_STAFF{ _string: "Urthonak Staff of Restoration" _icon: icon_staff_11 _constitution: 1 _wisdom: 2 _healing: 3 }
 }
 
 quest .sandra_riddle_2:

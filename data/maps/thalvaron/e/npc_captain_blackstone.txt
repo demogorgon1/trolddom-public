@@ -83,8 +83,8 @@ entity thalvaron_captain_blackstone_1_quest_item:
 
 {
 	${ _level: 27 }
-	item .captain_blackstone_1_a: !QUEST_REWARD_LEGS{ _string: "." _icon: icon_cloth_legs_1 _constitution: 1 _wisdom: 4 _mana_per_5: 3 _healing: 2 _type: armor_cloth }
-	item .captain_blackstone_1_b: !QUEST_REWARD_HANDS{ _string: "." _icon: icon_cloth_hands_1 _constitution: 3 _dexterity: 1 _type: armor_plate }
+	item .captain_blackstone_1_a: !QUEST_REWARD_LEGS{ _string: "Swashbuckler's Pants" _icon: icon_cloth_legs_1 _constitution: 1 _wisdom: 4 _mana_per_5: 3 _healing: 2 _type: armor_cloth }
+	item .captain_blackstone_1_b: !QUEST_REWARD_HANDS{ _string: "Rusty Gauntlets" _icon: icon_cloth_hands_1 _constitution: 3 _dexterity: 1 _type: armor_plate }
 }
 
 quest .captain_blackstone_1:

@@ -43,8 +43,8 @@ objective .frida_1:
 
 {
 	${ _level: 26 }
-	item .frida_1_a: !QUEST_REWARD_FEET{ _string: "." _icon: icon_cloth_feet_1 _constitution: 1 _wisdom: 3 _type: armor_cloth }
-	item .frida_1_b: !QUEST_REWARD_HANDS{ _string: "." _icon: icon_gloves_5 _constitution: 2 _strength: 5 _type: armor_plate }
+	item .frida_1_a: !QUEST_REWARD_FEET{ _string: "Devouring Sandals" _icon: icon_cloth_feet_1 _constitution: 1 _wisdom: 3 _type: armor_cloth }
+	item .frida_1_b: !QUEST_REWARD_HANDS{ _string: "Gauntlets of the Beast Wrangler" _icon: icon_gloves_5 _constitution: 2 _strength: 5 _type: armor_plate }
 }
 
 quest .frida_1:

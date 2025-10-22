@@ -44,8 +44,8 @@ objective .ranger_cromor_1:
 
 {
 	${ _level: 27 }
-	item .ranger_cromor_1_a: !QUEST_REWARD_WAIST{ _string: "." _icon: icon_cloth_belt_3 _constitution: 1 _wisdom: 1 _spirit: 1 _type: armor_cloth }
-	item .ranger_cromor_1_b: !QUEST_REWARD_SHOULDERS{ _string: "." _icon: icon_shoulders_5 _dexterity: 1 _strength: 1 _type: armor_mail }
+	item .ranger_cromor_1_a: !QUEST_REWARD_WAIST{ _string: "Ranger's Waistband" _icon: icon_cloth_belt_3 _constitution: 1 _wisdom: 1 _spirit: 1 _type: armor_cloth }
+	item .ranger_cromor_1_b: !QUEST_REWARD_SHOULDERS{ _string: "Ranger's Shoulder Guards" _icon: icon_shoulders_5 _dexterity: 1 _strength: 1 _type: armor_mail }
 }
 
 quest .ranger_cromor_1:

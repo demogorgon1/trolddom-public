@@ -82,8 +82,8 @@ objective .fradi_1:
 
 {
 	${ _level: 27 }
-	item .fradi_1_a: !QUEST_REWARD_WRISTS{ _string: "." _icon: icon_bracers_1 _constitution: 2 _wisdom: 3 _type: armor_cloth }
-	item .fradi_1_b: !QUEST_REWARD_SHOULDERS{ _string: "." _icon: icon_plate_shoulders_1 _constitution: 2 _strength: 3 _dexterity: 4 _type: armor_plate }
+	item .fradi_1_a: !QUEST_REWARD_WRISTS{ _string: "Environmentalist's Bracers" _icon: icon_bracers_1 _constitution: 2 _wisdom: 3 _type: armor_cloth }
+	item .fradi_1_b: !QUEST_REWARD_SHOULDERS{ _string: "Shoulderguards of the Zilkore" _icon: icon_plate_shoulders_1 _constitution: 2 _strength: 3 _dexterity: 4 _type: armor_plate }
 }
 
 quest .fradi_1:

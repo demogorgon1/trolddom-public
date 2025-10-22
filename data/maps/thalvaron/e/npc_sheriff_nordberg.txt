@@ -42,8 +42,8 @@ objective .sheriff_nordberg_1:
 
 {
 	${ _level: 26 }
-	item .sheriff_nordberg_1_a: !QUEST_REWARD_LEGS{ _string: "." _icon: icon_pants_2 _constitution: 1 _wisdom: 2 _type: armor_cloth }
-	item .sheriff_nordberg_1_b: !QUEST_REWARD_2H_MACE{ _string: "." _icon: icon_staff_10 _constitution: 2 _strength: 3 }
+	item .sheriff_nordberg_1_a: !QUEST_REWARD_LEGS{ _string: "Pants of the Wyvern Master" _icon: icon_pants_2 _constitution: 1 _wisdom: 2 _type: armor_cloth }
+	item .sheriff_nordberg_1_b: !QUEST_REWARD_2H_MACE{ _string: "Wurmslayer's Mace" _icon: icon_staff_10 _constitution: 2 _strength: 3 }
 }
 
 quest .sheriff_nordberg_1:

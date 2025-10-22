@@ -77,8 +77,8 @@ objective .fullay_2:
 
 {
 	${ _level: 26 }
-	item .fullay_2_a: !QUEST_REWARD_HEAD{ _string: "." _icon: icon_helmet_2 _constitution: 2 _strength: 1 _type: armor_plate }
-	item .fullay_2_b: !QUEST_REWARD_WRISTS{ _string: "." _icon: icon_mail_bracers_3 _constitution: 1 _wisdom: 2 _healing: 3 _type: armor_cloth }
+	item .fullay_2_a: !QUEST_REWARD_HEAD{ _string: "Thalyssian Helmet" _icon: icon_helmet_2 _constitution: 2 _strength: 1 _type: armor_plate }
+	item .fullay_2_b: !QUEST_REWARD_WRISTS{ _string: "Thalyssian Bracers of Healing" _icon: icon_mail_bracers_3 _constitution: 1 _wisdom: 2 _healing: 3 _type: armor_cloth }
 }
 
 quest .fullay_2:

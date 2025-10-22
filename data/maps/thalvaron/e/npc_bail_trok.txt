@@ -139,8 +139,8 @@ item .bail_trok_2_quest_item:
 
 {
 	${ _level: 29 }
-	item .bail_trok_2_a: !QUEST_REWARD_WAIST{ _string: "." _icon: icon_cloth_belt_1 _constitution: 1 _wisdom: 2 _spell_damage: 3 _type: armor_cloth }
-	item .bail_trok_2_b: !QUEST_REWARD_WAIST{ _string: "." _icon: icon_cloth_belt_3 _constitution: 3 _strength: 1 _type: armor_plate }
+	item .bail_trok_2_a: !QUEST_REWARD_WAIST{ _string: "Archaeologist's Belt" _icon: icon_cloth_belt_1 _constitution: 1 _wisdom: 2 _spell_damage: 3 _type: armor_cloth }
+	item .bail_trok_2_b: !QUEST_REWARD_WAIST{ _string: "Ancient Steel Girdle" _icon: icon_cloth_belt_3 _constitution: 3 _strength: 1 _type: armor_plate }
 }
 	  
 quest thalvaron_bail_trok_2:

@@ -165,8 +165,8 @@ entity thalvaron_flimlock_2_quest_item:
 
 {
 	${ _level: 27 }
-	item .flimlock_2_a: !QUEST_REWARD_1H_SWORD{ _string: "." _icon: icon_sword_15 _constitution: 3 _dexterity: 2 _strength: 1 }
-	item .flimlock_2_b: !QUEST_REWARD_2H_STAFF{ _string: "." _icon: icon_staff_3 _constitution: 1 _wisdom: 3 _spell_damage: 4 }
+	item .flimlock_2_a: !QUEST_REWARD_1H_SWORD{ _string: "Swiftstrike Shortsword" _icon: icon_sword_15 _constitution: 3 _dexterity: 2 _strength: 1 }
+	item .flimlock_2_b: !QUEST_REWARD_2H_STAFF{ _string: "Staff of the Mire" _icon: icon_staff_3 _constitution: 1 _wisdom: 3 _spell_damage: 4 }
 }
 
 quest .flimlock_2:
@@ -219,8 +219,8 @@ objective .flimlock_3:
 
 {
 	${ _level: 27 }
-	item .flimlock_3_a: !QUEST_REWARD_SHOULDERS{ _string: "." _icon: icon_shoulders_3 _constitution: 1 _wisdom: 1 _spirit: 2 _healing: 3 _type: armor_cloth }
-	item .flimlock_3_b: !QUEST_REWARD_FINGER{ _string: "." _icon: icon_ring_2 _constitution: 2 _strength: 1 }
+	item .flimlock_3_a: !QUEST_REWARD_SHOULDERS{ _string: "Lizard Skin Mantle" _icon: icon_shoulders_3 _constitution: 1 _wisdom: 1 _spirit: 2 _healing: 3 _type: armor_cloth }
+	item .flimlock_3_b: !QUEST_REWARD_FINGER{ _string: "Ancient Stone Ring" _icon: icon_ring_2 _constitution: 2 _strength: 1 }
 }
 
 quest .flimlock_3:

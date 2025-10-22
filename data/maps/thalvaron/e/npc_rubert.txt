@@ -41,8 +41,8 @@ objective .rubert_1:
 
 {
 	${ _level: 27 }
-	item .rubert_1_a: !QUEST_REWARD_FEET{ _string: "." _icon: icon_boots_5 _constitution: 1 _wisdom: 4 _spirit: 2 _type: armor_cloth }
-	item .rubert_1_b: !QUEST_REWARD_HEAD{ _string: "." _icon: icon_helmet_5 _dexterity: 1 _strength: 1 _type: armor_mail }
+	item .rubert_1_a: !QUEST_REWARD_FEET{ _string: "Jungle Boots" _icon: icon_boots_5 _constitution: 1 _wisdom: 4 _spirit: 2 _type: armor_cloth }
+	item .rubert_1_b: !QUEST_REWARD_HEAD{ _string: "Dexterous Head Protection" _icon: icon_helmet_5 _dexterity: 2 _strength: 1 _type: armor_mail }
 }
 
 quest .rubert_1:
