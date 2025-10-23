@@ -179,7 +179,7 @@
 	mount pony: !MOUNT{}
 	aura pony: !MOUNT_AURA{}
 	ability pony: !MOUNT_ABILITY{}
-	entity pony: !MOUNT_ENTITY{ _wandering: false }
+	entity pony: !MOUNT_ENTITY{ _wandering: true }
 	item mount_pony: !MOUNT_ITEM{}
 
 }

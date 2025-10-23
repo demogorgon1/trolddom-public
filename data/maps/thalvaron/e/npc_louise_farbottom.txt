@@ -1,0 +1,23 @@
+dialogue_screen .louise_farbottom_vendor:
+{
+	sell mount_pony: { quantity: 1 }	
+}
+
+dialogue_root .louise_farbottom_greetings:
+{
+	.louise_farbottom_vendor: { }
+}
+
+entity thalvaron_louise_farbottom: !NPC
+{
+	_string: "Louise Farbottom"
+	_dialogue_root: .louise_farbottom_greetings	
+	_sprite: woman_4
+	_sprite_dead: woman_4_dead	
+	_level: 30
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+

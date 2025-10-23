@@ -498,6 +498,8 @@ map_entity_spawn thalvaron_old_man_james_2_quest_item: { entity thalvaron_old_ma
 map_entity_spawn thalvaron_sandra_riddle_2_quest_item: { entity thalvaron_sandra_riddle_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_trader_joseph_1_quest_item: { entity thalvaron_trader_joseph_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_trader_joseph_2_quest_item: { entity thalvaron_trader_joseph_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_pony: { entity pony: { init_state: default } }
+map_entity_spawn thalvaron_louise_farbottom: { entity thalvaron_louise_farbottom: { init_state: default } }
 
 map_palette .stuff:
 {
@@ -1132,6 +1134,8 @@ map_palette .stuff:
 	entity_spawn thalvaron_trader_joseph_1_quest_item: [ 222 111 49 ]
 	entity_spawn thalvaron_trader_joseph_2_quest_item: [ 122 211 49 ]
 	entity_spawn thalvaron_kareth_skeleton_special: [ 45 45 129 ]
+	entity_spawn thalvaron_pony: [ 145 15 93 ]
+	entity_spawn thalvaron_louise_farbottom: [ 245 155 12 ]
 }
 
 map_palette .levels:
