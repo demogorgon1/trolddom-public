@@ -12,6 +12,13 @@ changelog:
 		{ text: "Zones, talents, crafting recipes, enchants, world drops, quests, and more." }
 		{ text: "Talk to Ranger Virgil in Tirnwood Vale or Ranger Ursa at Urthon Gate." }		
 	]	
+
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Offline mode and custom servers: options for unlimited professions and easy elites." }
+	]
 	
 	text: "Issues fixed:"
 	

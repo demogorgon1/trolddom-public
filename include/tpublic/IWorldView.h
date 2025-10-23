@@ -8,6 +8,7 @@ namespace tpublic
 
 	class CastInProgress;
 	class MapData;
+	class RealmModifierList;
 
 	class IWorldView
 	{
@@ -73,6 +74,7 @@ namespace tpublic
 														const Vec2&				aPosition,
 														int32_t					aRadius,
 														std::mt19937&			aRandom) const = 0;
+		virtual const RealmModifierList*			WorldViewGetRealmModifierList() const = 0;
 	};
 
 }

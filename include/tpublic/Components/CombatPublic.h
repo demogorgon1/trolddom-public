@@ -208,6 +208,7 @@ namespace tpublic
 				m_doNotZeroResources = false;
 				m_pvpCombatEvent = false;
 				m_lastPVPCombatEventTick = 0;
+				m_easyElite = false;
 			}
 
 			// Helpers
@@ -245,6 +246,7 @@ namespace tpublic
 			bool							m_doNotZeroResources = false;
 			bool							m_pvpCombatEvent = false;
 			int32_t							m_lastPVPCombatEventTick = 0;
+			bool							m_easyElite = false;
 		};
 
 	}

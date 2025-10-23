@@ -12,7 +12,8 @@ namespace tpublic
 
 			ID_HARDCORE_MODE,
 			ID_XP_MULTIPLIER,
-
+			ID_UNLIMITED_PROFESSIONS,
+			ID_EASY_ELITES,
 			NUM_IDS
 		};
 
@@ -55,8 +56,10 @@ namespace tpublic
 		{
 			{ NULL, NULL, Info::INVALID_TYPE, {}, NULL, NULL, false },
 
-			{ "hardcore_mode", "Hardcore Mode", Info::TYPE_FLAG, { "true", "false" }, "Permanent death.", "false", false },
-			{ "xp_multiplier", "XP Gain", Info::TYPE_MULTIPLIER, { "50%", "100%", "150%", "200%", "300%" }, "XP gained from kills and quests.", "100%", true }
+			{ "hardcore_mode",				"Hardcore Mode",			Info::TYPE_FLAG,		{ "true", "false" },						"Permanent death.",									"false",	false },
+			{ "xp_multiplier",				"XP Gain",					Info::TYPE_MULTIPLIER,	{ "50%", "100%", "150%", "200%", "300%" },	"XP gained from kills and quests.",					"100%",		true },
+			{ "unlimited_professions",		"Unlimited Professions",	Info::TYPE_FLAG,		{ "true", "false" },						"You can learn any number of primary professions.",	"false",	false },
+			{ "easy_elites",				"Easy Elites",				Info::TYPE_FLAG,		{ "true", "false" },						"Elite enemies are easier to kill.",				"false",	false },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

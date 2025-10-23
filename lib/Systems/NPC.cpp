@@ -22,6 +22,7 @@
 
 #include <tpublic/Systems/NPC.h>
 
+#include <tpublic/ApplyNPCMetrics.h>
 #include <tpublic/EntityInstance.h>
 #include <tpublic/Haste.h>
 #include <tpublic/Helpers.h>
@@ -36,6 +37,7 @@
 #include <tpublic/MapData.h>
 #include <tpublic/MapRouteData.h>
 #include <tpublic/NPCMetrics.h>
+#include <tpublic/RealmModifierList.h>
 #include <tpublic/Requirements.h>
 #include <tpublic/StealthUtils.h>
 #include <tpublic/WorldInfoMap.h>
@@ -67,6 +69,7 @@ namespace tpublic::Systems
 	{
 		RequireComponent<Components::Auras>();
 		RequireComponent<Components::CombatPublic>();
+		RequireComponent<Components::CombatPrivate>();
 		RequireComponent<Components::Lootable>();
 		RequireComponent<Components::NPC>();
 		RequireComponent<Components::Position>();
@@ -1260,6 +1263,18 @@ namespace tpublic::Systems
 		Components::CombatPublic* combat = GetComponent<Components::CombatPublic>(aComponents);
 		Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
 		Components::Position* position = GetComponent<Components::Position>(aComponents);
+
+		if (combat->IsElite())
+		{
+			bool isEasyElitesEnabled = aContext->m_worldView->WorldViewGetRealmModifierList()->GetFlag(RealmModifier::ID_EASY_ELITES, false);
+
+			if (isEasyElitesEnabled)
+			{
+				Components::CombatPrivate* combatPrivate = GetComponent<Components::CombatPrivate>(aComponents);
+
+				ApplyNPCMetrics::MakeEliteEasy(GetManifest()->m_npcMetrics.get(), combat, combatPrivate);
+			}
+		}
 
 		if(npc->m_restoreResources)
 		{

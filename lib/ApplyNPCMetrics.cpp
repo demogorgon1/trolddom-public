@@ -107,6 +107,67 @@ namespace tpublic
 			}
 		}
 
+		void		
+		MakeEliteEasy(
+			const NPCMetrics*			aNPCMetrics,
+			Components::CombatPublic*	aCombatPublic,
+			Components::CombatPrivate*	aCombatPrivate)
+		{
+			if(aCombatPublic != NULL && aCombatPrivate != NULL)
+			{
+				assert(aCombatPublic->IsElite());
+
+				const NPCMetrics::Level* npcMetricsLevel = aNPCMetrics->GetLevel(aCombatPublic->m_level);
+
+				if (npcMetricsLevel != NULL)
+				{
+					if(!aCombatPublic->m_easyElite)
+					{
+						Components::CombatPublic::ResourceEntry* health = aCombatPublic->GetResourceEntry(Resource::ID_HEALTH);
+
+						if (health != NULL)
+						{
+							float eliteHealthMultiplier = npcMetricsLevel->m_eliteResource[Resource::ID_HEALTH];
+
+							if (eliteHealthMultiplier > 1.0f)
+							{
+								float nonEliteHealth = (float)health->m_max / eliteHealthMultiplier;
+								float updatedEliteHealthMultiplier = 1.0f + (eliteHealthMultiplier - 1.0f) / 6.5f;
+
+								health->m_max = (uint32_t)(nonEliteHealth * updatedEliteHealthMultiplier);
+								if (health->m_max == 0)
+									health->m_max = 1;
+
+								if (health->m_current > health->m_max)
+									health->m_current = health->m_max;
+							}
+						}
+
+						aCombatPublic->m_easyElite = true;
+					}
+
+					if(npcMetricsLevel->m_eliteWeaponDamage > 1.0f && !aCombatPrivate->m_easyElite)
+					{
+						float nonEliteWeaponDamageRangeMin = (float)aCombatPrivate->m_weaponDamageRangeMin / npcMetricsLevel->m_eliteWeaponDamage;
+						float nonEliteWeaponDamageRangeMax = (float)aCombatPrivate->m_weaponDamageRangeMax / npcMetricsLevel->m_eliteWeaponDamage;
+
+						float updatedEliteWeaponDamageMultiplier = 1.0f + (npcMetricsLevel->m_eliteWeaponDamage - 1.0f) / 4.0f;
+
+						aCombatPrivate->m_weaponDamageRangeMin = (uint32_t)(nonEliteWeaponDamageRangeMin * updatedEliteWeaponDamageMultiplier);
+						aCombatPrivate->m_weaponDamageRangeMax = (uint32_t)(nonEliteWeaponDamageRangeMax * updatedEliteWeaponDamageMultiplier);
+
+						if(aCombatPrivate->m_weaponDamageRangeMin == 0)
+							aCombatPrivate->m_weaponDamageRangeMin = 1;
+
+						if (aCombatPrivate->m_weaponDamageRangeMax == 0)
+							aCombatPrivate->m_weaponDamageRangeMax = 1;
+
+						aCombatPrivate->m_easyElite = true;
+					}
+				}
+			}
+		}
+
 	}
 
 }

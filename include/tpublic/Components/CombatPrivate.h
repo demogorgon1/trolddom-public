@@ -144,6 +144,8 @@ namespace tpublic
 				m_privateFlags = 0;
 				m_attackPower = 0;
 				m_resourceCostMultiplier = 1.0f;
+
+				m_easyElite = false;
 			}
 
 			bool
@@ -180,6 +182,9 @@ namespace tpublic
 			uint32_t							m_attackPower = 0;
 			uint8_t								m_privateFlags = 0;
 			float								m_resourceCostMultiplier = 1.0f;
+
+			// Server only
+			bool								m_easyElite = false;
 		};
 
 	}
