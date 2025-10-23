@@ -914,7 +914,7 @@ loot_table .kareth_skeletons:
 		]		
 	}
 
-	entity thalvaron_kareth_skeleton_high_wizard: !NPC { _string: "High Wizard Urjux" _sprite: skeleton_caster_5 _sprite_dead: skeleton_caster_5_dead }
+	entity thalvaron_kareth_skeleton_high_wizard: !NPC { _string: "High Wizard Urjux" _sprite: lich_1 _sprite_dead: lich_1_dead }
 }
 
 ##########################################################################################

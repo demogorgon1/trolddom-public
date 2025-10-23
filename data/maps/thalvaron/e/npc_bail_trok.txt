@@ -165,6 +165,6 @@ quest thalvaron_bail_trok_2:
 
 	quest_items: [ .bail_trok_2_quest_item ]
 	prerequisites: [ .bail_trok_1 ]
-	reward_one_item: [ .bail_trok_2_a .bail_trok_2_a ]
+	reward_one_item: [ .bail_trok_2_a .bail_trok_2_b ]
 	level: 29
 }
