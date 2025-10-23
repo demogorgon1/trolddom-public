@@ -142,6 +142,7 @@ zone .lonely_cove: { string: "Lonely Cove" }
 zone .shrine_of_zilu: { string: "Shrine of Zilu" }
 zone .ancient_burial_site: { string: "Ancient Burial Site" }
 zone .kobold_shrine: { string: "Kobold Shrine" }
+zone .the_lizard_coast: { string: "The Lizard Coast" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -1249,6 +1250,7 @@ map_palette .zones:
 	zone .ashira: [ 233 131 36 ]
 	zone .karethi_temple: [ 152 21 127 ]
 	zone .lonely_cove: [ 10 60 121 ]
+	zone .the_lizard_coast: [ 185 79 137 ]
 }
 
 map_palette .sub_zones:

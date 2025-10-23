@@ -856,6 +856,7 @@ sprites:
 	sprite desert_wall_1_alt_2: { flags: [ tile_block_line_of_sight tile_top ] }
 	sprite desert_wall_1_entrance_closed: { flags: [ tile_block_line_of_sight tile_top ] }
 	sprite desert_wall_1_light: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite desert_wall_1_light_door_open: { flags: [ tile_walkable tile_top ] }
 
 	cursor: { position: [ 0 416 ] }
 

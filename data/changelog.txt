@@ -2,6 +2,16 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.5.2"
+
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Fixed bug where you'd get teleported out of the new zones." }
+	] 	
+
+	#######################################################################################
 	heading: "v0.5.1"
 
 	text: "Issues fixed:"
