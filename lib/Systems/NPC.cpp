@@ -1270,6 +1270,7 @@ namespace tpublic::Systems
 
 			if (isEasyElitesEnabled)
 			{
+				// FIXME: if a component is static (like CombatPrivate often is), this will get messed up if entity updates ever get parallelized
 				Components::CombatPrivate* combatPrivate = GetComponent<Components::CombatPrivate>(aComponents);
 
 				ApplyNPCMetrics::MakeEliteEasy(GetManifest()->m_npcMetrics.get(), combat, combatPrivate);
