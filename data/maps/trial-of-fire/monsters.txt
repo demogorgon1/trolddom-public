@@ -29,6 +29,7 @@
 	.satyr_rogue<.satyr_rogue_elite>: party
 	.satyr_hunter<.satyr_hunter_elite>: party
 	.rift_keeper<.rift_keeper_elite>: party
+	.ignivar<.ignivar_elite>: party
 }
 
 {

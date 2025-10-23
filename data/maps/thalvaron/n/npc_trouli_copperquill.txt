@@ -112,7 +112,7 @@ loot_group thalvaron_trouli_copperquill_2_quest_item: {}
 item .trouli_copperquill_2_quest_item:
 {
 	icon: icon_claw
-	item_level: 20
+	item_level: 18
 	loot_groups: [ thalvaron_trouli_copperquill_2_quest_item ]
 	flags: [ not_sellable unique ]
 	string: "Enormous Infected Claws"
