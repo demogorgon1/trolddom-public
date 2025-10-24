@@ -129,4 +129,8 @@
 	tile light_tiles_1: [ 195 191 249 ]
 	tile desert_wall_1_light: [ 204 18 131 ]
 	tile desert_wall_1_light_door_open: [ 72 96 161 ]
+	tile jungle_wall_1: [ 100 200 81 ]
+	tile jungle_wall_1_inside: [ 205 200 81 ]
+	tile jungle_wall_1_entrance: [ 200 81 181 ]
+	tile jungle_wall_1_entrance_closed: [ 120 242 81 ]
 }

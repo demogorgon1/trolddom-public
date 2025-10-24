@@ -928,6 +928,15 @@ sprites:
 	sprite badlands_2_alt_1: { flags: [ tile_walkable ] }
 	sprite badlands_2_alt_2: { flags: [ tile_walkable ] }
 
+	sprite jungle_wall_1: { flags: [ tile_block_line_of_sight tile_top ] }	
+	sprite jungle_wall_1_entrance: { flags: [ tile_walkable tile_top ] }
+	sprite jungle_wall_1_inside: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite jungle_wall_1_start: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite jungle_wall_1_end: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite jungle_wall_1_alt_1: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite jungle_wall_1_alt_2: { flags: [ tile_block_line_of_sight tile_top ] }
+	sprite jungle_wall_1_entrance_closed: { flags: [ tile_block_line_of_sight tile_top ] }
+
 	cursor: { position: [ 0 448 ] }
 
 	sprite badlands_rocks: { flags: [ tile_block_line_of_sight tile_indoor ] borders:

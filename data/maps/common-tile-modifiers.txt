@@ -344,6 +344,37 @@ tile_modifier desert_wall_1_broken:
 	probability: 30
 }
 
+tile_modifier jungle_wall_1_start:
+{
+	sprites: [ jungle_wall_1_start ]
+	
+	requirement<center_must_be>: [ jungle_wall_1 ]
+	requirement<west_must_not_be>: [ jungle_wall_1 jungle_wall_1_entrance_closed jungle_wall_1_alt_1 jungle_wall_1_alt_2 pavement dungeon_floor wood_floor ]
+	
+	probability: 100
+	priority: true
+}
+
+tile_modifier jungle_wall_1_end:
+{
+	sprites: [ jungle_wall_1_end ]
+	
+	requirement<center_must_be>: [ jungle_wall_1 ]
+	requirement<east_must_not_be>: [ jungle_wall_1 jungle_wall_1_entrance_closed jungle_wall_1_alt_1 jungle_wall_1_alt_2 pavement dungeon_floor wood_floor ]
+	
+	probability: 100
+	priority: true
+}
+
+tile_modifier jungle_wall_1_broken:
+{
+	sprites: [ jungle_wall_1_alt_1 jungle_wall_1_alt_2 ]
+	
+	requirement<center_must_be>: [ jungle_wall_1 ]
+	
+	probability: 30
+}
+
 tile_modifier wood_wall_4_grass:
 {
 	sprites: [ wood_wall_4_grass_1 wood_wall_4_grass_2 ]
