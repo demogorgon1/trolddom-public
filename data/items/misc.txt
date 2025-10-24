@@ -698,6 +698,22 @@ item item_token_of_victory:
 	binds: when_picked_up
 }
 
+loot_group emblem_of_triumph: {}
+
+item item_emblem_of_triumph:
+{
+	string: "Emblem of Triumph"
+	loot_groups: [ emblem_of_triumph ]
+	type: miscellaneous
+	item_level: 30
+	flags: [ not_sellable ]
+	stack: 100
+	icon: icon_token_3
+	rarity: uncommon
+	level_range: [ 28 30 ]
+	binds: when_picked_up
+}
+
 #####################################################
 # Realm of Fire talisman
 

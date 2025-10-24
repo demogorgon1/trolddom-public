@@ -1,0 +1,91 @@
+npc_behavior_state .wandering_short:
+{
+	on_route<karethi_temple_default_patrol>: .patrol
+	behavior: wandering
+	max_range: 1
+}
+
+npc_behavior_state .passive:
+{
+	on_route<karethi_temple_default_patrol>: .patrol
+	behavior: do_nothing
+}
+
+npc_behavior_state .patrol:
+{
+	behavior: patrolling
+}
+
+#############################################################################
+# Boss 1
+
+map_entity_spawn .boss_1_melee_trash: 
+{ 
+	#entity .melee_a: { level: 30 spawn_condition: { if_not: .boss_1_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+#############################################################################
+# Boss 2
+
+map_entity_spawn .boss_2_melee_trash: 
+{ 
+	#entity .melee_a: { level: 30 spawn_condition: { if_not: .boss_2_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+#############################################################################
+# Boss 3
+
+map_entity_spawn .boss_3_melee_trash: 
+{ 
+	#entity .melee_a: { level: 30 spawn_condition: { if_not: .boss_3_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+#############################################################################
+# Boss 4
+
+map_entity_spawn .boss_4_melee_trash: 
+{ 
+	#entity .melee_a: { level: 30 spawn_condition: { if_not: .boss_4_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+#############################################################################
+# Boss 5
+
+map_entity_spawn .boss_5_melee_trash: 
+{ 
+	#entity .melee_a: { level: 30 spawn_condition: { if_not: .boss_5_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+#############################################################################
+# Monsters
+
+# Melee 
+{
+	${
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .passive
+		_loot_table: default_humanoid
+		_weapon_damage: 1.4
+		_resource_health: 1.71
+		_elite: true
+		_level: 30
+		_string: "Melee"		
+		_abilities: 
+		[ 
+			{ id: npc_attack } 
+		]
+	}
+
+	entity .melee_a: !NPC { _sprite: boar _sprite_dead: boar_dead  }
+}

@@ -917,6 +917,9 @@ sprites:
 	cursor: { position: [ 0 800 ] }	
 	sprite icon_potion_11: { tags: [ icon ] }
 	sprite icon_vampiric_edge: { tags: [ icon ] }
+	sprite icon_the_devouring_shroud: { tags: [ icon ] }
+	sprite icon_karethi_temple: { tags: [ icon ] }
+	sprite icon_token_3: { tags: [ icon ] }
 	
 }
 

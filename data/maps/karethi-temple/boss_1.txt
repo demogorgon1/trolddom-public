@@ -1,0 +1,81 @@
+############################################################
+# Loot
+
+loot_group .boss_1: {}
+
+loot_table .boss_1:
+{
+	slots:
+	[
+		{ possibility: { loot_group: emblem_of_triumph loot_cooldown: $loot_cooldown { seconds: !EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS{} 
+		  map_message karethi_temple: "Boss 1 will not drop Emblem of Triumph for {}." } } }
+		{ possibility: { loot_group: .boss_1  } }			
+		!WORLD_DROPS{}		
+	]	
+}
+
+{
+	${
+		_rarity: rare
+		_level: 30
+		_loot_group: .boss_1
+	}		
+}
+
+############################################################
+# Boss
+
+zone .boss_1:
+{
+}
+
+encounter .boss_1:
+{
+	main_entities: [ karethi_temple_boss_1 ]	
+}
+
+entity karethi_temple_boss_1: !NPC 
+{ 
+	_string: "Boss 1" 
+	_level: 30
+	_elite: true
+	_faction: monsters 
+	_sprite: deer
+	_sprite_dead: deer_dead 
+	_weapon_damage: 1.8
+	_resource_health: 6
+	_loot_table: .boss_1
+	_creature_type: humanoid
+	_encounter: .boss_1
+	_zone: .boss_1
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+
+	_abilities: 
+	[
+		{
+			id: npc_attack
+		}
+	]	
+	
+}
+
+map_trigger .boss_1_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .boss_1:
+{
+	entity karethi_temple_boss_1: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .boss_1_killed
+		}
+	}
+}
+

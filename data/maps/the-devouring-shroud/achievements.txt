@@ -1,0 +1,9 @@
+achievement_category .the_devouring_shroud: { string: "Dungeon: The Devouring Shroud" order_key: 4 }
+
+achievement the_devouring_shroud_boss_1: { sort_key: 1 category: .the_devouring_shroud string: "Boss 1" description: "Slay Boss 1." points: 10 priority: 0 kill_trigger: the_devouring_shroud_boss_1 icon: icon_skull_1 }
+achievement the_devouring_shroud_boss_2: { sort_key: 2 category: .the_devouring_shroud string: "Boss 2" description: "Slay Boss 2." points: 10 priority: 0 kill_trigger: the_devouring_shroud_boss_2 icon: icon_skull_1 }
+achievement the_devouring_shroud_boss_3: { sort_key: 3 category: .the_devouring_shroud string: "Boss 3" description: "Slay Boss 3." points: 10 priority: 0 kill_trigger: the_devouring_shroud_boss_3 icon: icon_skull_1 }
+achievement the_devouring_shroud_boss_4: { sort_key: 4 category: .the_devouring_shroud string: "Boss 4" description: "Slay Boss 4." points: 10 priority: 0 kill_trigger: the_devouring_shroud_boss_4 icon: icon_skull_1 }
+achievement the_devouring_shroud_boss_5: { sort_key: 5 category: .the_devouring_shroud string: "Boss 5" description: "Slay Boss 5." points: 10 priority: 0 kill_trigger: the_devouring_shroud_boss_5 icon: icon_skull_1 }
+
+achievement the_devouring_shroud: { category: .the_devouring_shroud string: "The Devouring Shroud" description: "Finish The Devouring Shroud." points: 20 need_achievements: [ the_devouring_shroud_boss_1 the_devouring_shroud_boss_2 the_devouring_shroud_boss_3 the_devouring_shroud_boss_4 the_devouring_shroud_boss_5 ] icon: icon_the_devouring_shroud }

@@ -5,6 +5,8 @@ map_player_spawn thalvaron_valoris_insurgency_exit: { }
 map_player_spawn thalvaron_tirnwood_thicket_exit: { }
 map_player_spawn thalvaron_durgan_urok_exit: { }
 map_player_spawn thalvaron_trial_of_fire_return_spawn: { }
+map_player_spawn thalvaron_the_devouring_shroud_exit: { }
+map_player_spawn thalvaron_karethi_temple_exit: { }
 
 map_player_spawn thalvaron_wizard_realm_spawn: { }
 map_player_spawn thalvaron_wizard_realm_return_spawn: { }
@@ -542,6 +544,8 @@ map_palette .stuff:
 	player_spawn thalvaron_realm_of_fire_return_spawn: [ 99 134 105 ]
 	player_spawn thalvaron_flimlock_3_portal_spawn: [ 240 105 30 ]
 	player_spawn thalvaron_flimlock_3_portal_return_spawn: [ 240 105 230 ]
+	player_spawn thalvaron_the_devouring_shroud_exit: [ 14 121 144 ]
+	player_spawn thalvaron_karethi_temple_exit: [ 111 124 244 ]
 
 	portal thalvaron_lich_tower_entrance: [ 144 188 94 ]
 	portal thalvaron_valoris_insurgency_entrance: [ 144 88 92 ]
