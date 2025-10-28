@@ -8,7 +8,7 @@ loot_table .boss_4:
 	slots:
 	[
 		{ possibility: { loot_group: emblem_of_triumph loot_cooldown: $loot_cooldown { seconds: !EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS{} 
-		  map_message karethi_temple: "Boss 4 will not drop Emblem of Triumph for {}." } } }
+		  map_message karethi_temple: "Lord Klazcep will not drop Emblem of Triumph for {}." } } }
 		{ possibility: { loot_group: .boss_4  } }			
 		!WORLD_DROPS{}		
 	]	
@@ -36,12 +36,12 @@ encounter .boss_4:
 
 entity karethi_temple_boss_4: !NPC 
 { 
-	_string: "Boss 4" 
+	_string: "Lord Klazcep" 
 	_level: 30
 	_elite: true
 	_faction: monsters 
-	_sprite: deer
-	_sprite_dead: deer_dead 
+	_sprite: skeleton_caster_6
+	_sprite_dead: skeleton_caster_6_dead 
 	_weapon_damage: 1.8
 	_resource_health: 6
 	_loot_table: .boss_4

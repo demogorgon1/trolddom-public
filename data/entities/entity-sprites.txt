@@ -1009,6 +1009,12 @@ sprites:
 	sprite skeleton_13: { dead: skeleton_13_dead }
 	sprite guardian_angel: { dead: guardian_angel_dead }
 	sprite demon_lord: { dead: demon_lord_dead }
+	sprite lizard_7: { dead: lizard_7_dead }
+	sprite stalker_3: { dead: stalker_3_dead }
+	sprite stalker_4: { dead: stalker_4_dead }
+	sprite skeleton_caster_4: { dead: skeleton_caster_4_dead }
+	sprite skeleton_caster_7: { dead: skeleton_caster_7_dead }
+	sprite skeleton_boss_2: { dead: skeleton_boss_2_dead }
 
 	cursor: { position: [ 0 880 ] }
 	sprite stalker_2_dead: { }		
@@ -1021,6 +1027,36 @@ sprites:
 	sprite skeleton_13_dead: { }		
 	sprite guardian_angel_dead: { }		
 	sprite demon_lord_dead: { }		
+	sprite lizard_7_dead: { }		
+	sprite stalker_3_dead: { }		
+	sprite stalker_4_dead: { }		
+	sprite skeleton_caster_4_dead: { }		
+	sprite skeleton_caster_7_dead: { }		
+	sprite skeleton_boss_2_dead: { }		
+	
+	cursor: { position: [ 0 896 ] }
+	sprite skeleton_caster_6: { dead: skeleton_caster_6_dead }
+	sprite crab_6: { dead: crab_6_dead }
+	sprite monster_2: { dead: monster_2_dead }
+	sprite monster_3: { dead: monster_3_dead }
+	sprite lizard_man_3: { dead: lizard_man_3_dead }
+	sprite lizard_man_4: { dead: lizard_man_4_dead }
+	sprite lizard_man_5: { dead: lizard_man_5_dead }
+	sprite lizard_man_6: { dead: lizard_man_6_dead }
+	sprite lizard_man_7: { dead: lizard_man_7_dead }
+	sprite lizard_man_8: { dead: lizard_man_8_dead }
+
+	cursor: { position: [ 0 912 ] }
+	sprite skeleton_caster_6_dead: { }		
+	sprite crab_6_dead: { }		
+	sprite monster_2_dead: { }		
+	sprite monster_3_dead: { }		
+	sprite lizard_man_3_dead: { }		
+	sprite lizard_man_4_dead: { }		
+	sprite lizard_man_5_dead: { }		
+	sprite lizard_man_6_dead: { }		
+	sprite lizard_man_7_dead: { }		
+	sprite lizard_man_8_dead: { }		
 }
 
 sprites:
@@ -1057,6 +1093,8 @@ sprites:
 	sprite orc_wolf_rider_1: { dead: orc_wolf_rider_1_dead }
 	sprite giant_demon_3: { dead: giant_demon_3_dead }
 	sprite giant_fire_elemental_1: { dead: giant_fire_elemental_1_dead }
+	sprite giant_demon_4: { dead: giant_demon_4_dead }
+	sprite giga_crab_2: { dead: giga_crab_2_dead }
 
 	cursor: { position: [ 0 96 ] }
 
@@ -1064,6 +1102,8 @@ sprites:
 	sprite orc_wolf_rider_1_dead: { }	
 	sprite giant_demon_3_dead: { }	
 	sprite giant_fire_elemental_1_dead: { }	
+	sprite giant_demon_4_dead: { }	
+	sprite giga_crab_2_dead: { }	
 }
 
 sprites:

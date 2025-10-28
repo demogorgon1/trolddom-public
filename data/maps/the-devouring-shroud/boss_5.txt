@@ -8,7 +8,7 @@ loot_table .boss_5:
 	slots:
 	[
 		{ possibility: { loot_group: emblem_of_triumph loot_cooldown: $loot_cooldown { seconds: !EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS{} 
-		  map_message the_devouring_shroud: "Boss 5 will not drop Emblem of Triumph for {}." } } }
+		  map_message the_devouring_shroud: "Tzun'Kala will not drop Emblem of Triumph for {}." } } }
 		{ possibility: { loot_group: .boss_5  } }			
 		!WORLD_DROPS{}		
 	]	
@@ -36,12 +36,12 @@ encounter .boss_5:
 
 entity the_devouring_shroud_boss_5: !NPC 
 { 
-	_string: "Boss 5" 
+	_string: "Tzun'Kala" 
 	_level: 30
 	_elite: true
 	_faction: monsters 
-	_sprite: deer
-	_sprite_dead: deer_dead 
+	_sprite: lizard_man_7
+	_sprite_dead: lizard_man_7_dead 
 	_weapon_damage: 1.8
 	_resource_health: 6
 	_loot_table: .boss_5
