@@ -490,7 +490,8 @@ namespace tpublic
 				FIELD_INACTIVE_ENCOUNTER_DESPAWN_STATE,
 				FIELD_NO_KILL_EVENT,
 				FIELD_GLOBAL_AURA,
-				FIELD_AGGRO_RANGE_BIAS
+				FIELD_AGGRO_RANGE_BIAS,
+				FIELD_COMBAT_MOVE_INTERVAL_TICKS,
 			};
 
 			static void
@@ -521,6 +522,7 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_NO_KILL_EVENT, "no_kill_event", offsetof(NPC, m_noKillEvent));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_GLOBAL_AURA, "global_aura", offsetof(NPC, m_globalAuraId))->SetDataType(DataType::ID_AURA);
 				aSchema->Define(ComponentSchema::TYPE_INT32, FIELD_AGGRO_RANGE_BIAS, "aggro_range_bias", offsetof(NPC, m_aggroRangeBias));
+				aSchema->Define(ComponentSchema::TYPE_INT32, FIELD_COMBAT_MOVE_INTERVAL_TICKS, "combat_move_interval_ticks", offsetof(NPC, m_combatMoveIntervalTicks));
 			}
 
 			const StateEntry*
@@ -562,6 +564,7 @@ namespace tpublic
 				m_noKillEvent = false;
 				m_globalAuraId = 0;
 				m_aggroRangeBias = 0;
+				m_combatMoveIntervalTicks = 2;
 
 				m_cooldowns.m_entries.clear();
 				m_castInProgress.reset();
@@ -610,6 +613,7 @@ namespace tpublic
 			bool										m_noKillEvent = false;
 			uint32_t									m_globalAuraId = 0;
 			int32_t										m_aggroRangeBias = 0;
+			int32_t										m_combatMoveIntervalTicks = 2;
 
 			// Not serialized
 			Cooldowns									m_cooldowns;

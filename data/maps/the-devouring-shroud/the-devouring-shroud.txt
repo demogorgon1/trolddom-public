@@ -14,6 +14,51 @@ route the_devouring_shroud_default_patrol:
 	max_direction_field_distance: 32
 }
 
+item the_devouring_shroud_key:
+{
+	binds: when_picked_up
+	string: "Key of Tzun'Kala"
+	icon: icon_key_3
+	item_level: 30
+	rarity: uncommon
+	flags: [ not_sellable unique ]
+}
+
+loot_group .key: {}
+
+entity .door:
+{
+	string: "Rusty Gate"
+	
+	systems: [ door ]
+	
+	components:
+	{
+		position: { }		
+		sound_source: { }
+		openable: 
+		{
+			requirements:
+			{
+				self<must_have_item>: { id: the_devouring_shroud_key }
+			}
+			sound: inventory_1
+		}
+		sprite: 
+		{ 
+			animations:
+			[
+				{ states: [ default spawning ] frames: [ door_closed_3 ] z_offset: -3 }
+				{ states: [ dead ] frames: [ door_open_3 ] z_offset: -3 }
+			]		
+		}		
+		hover_text<static>:
+		{
+			string: "Requires Key of Tzun'Kala."
+		}		
+	}
+}
+
 map_cliff .dummy_cliff_0: { cliff_style: dummy elevation: 0 }
 map_cliff .dummy_cliff_0_ramp: { cliff_style: dummy elevation: 0 ramp: true }
 map_cliff .dummy_cliff_1: { cliff_style: dummy elevation: 1 } 
@@ -32,6 +77,8 @@ map_cliff .dummy_cliff_7: { cliff_style: dummy elevation: 7 }
 map_cliff .dummy_cliff_7_ramp: { cliff_style: dummy elevation: 7 ramp: true }
 
 map_palette .tiles: !DEFAULT_TILE_PALETTE{}
+
+map_entity_spawn .door: { entity .door: { init_state: default } spawn_timer: { despawn_required: true } }
 
 map_palette .stuff:
 {
@@ -58,6 +105,19 @@ map_palette .stuff:
 	entity_spawn .boss_3: [ 255 64 0 ]
 	entity_spawn .boss_4: [ 255 0 128 ]
 	entity_spawn .boss_5: [ 255 128 0 ]
+	
+	entity_spawn .boss_1_melee_trash: [ 40 102 201 ]
+	entity_spawn .boss_1_spawn: [ 140 201 10 ]
+	entity_spawn .boss_2_melee_trash: [ 240 201 10 ]
+	entity_spawn .boss_3_spawn_a: [ 210 94 224 ]
+	entity_spawn .boss_3_spawn_b: [ 10 94 224 ]
+	entity_spawn .boss_3_melee_trash: [ 78 29 199 ]
+	entity_spawn .boss_4_melee_trash: [ 178 129 99 ]
+	entity_spawn .boss_4_caster_trash: [ 178 229 99 ]
+	entity_spawn .boss_5_melee_trash: [ 178 128 199 ]
+	entity_spawn .boss_5_caster_trash: [ 178 29 99 ]
+	
+	entity_spawn .door: [ 10 49 121 ] 
 }
 
 map_palette .levels:

@@ -9,7 +9,8 @@ loot_table .boss_5:
 	[
 		{ possibility: { loot_group: emblem_of_triumph loot_cooldown: $loot_cooldown { seconds: !EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS{} 
 		  map_message the_devouring_shroud: "Tzun'Kala will not drop Emblem of Triumph for {}." } } }
-		{ possibility: { loot_group: .boss_5  } }			
+		{ possibility: { loot_group: .boss_5  } }		
+		{ possibility: { loot_group: .key } }
 		!WORLD_DROPS{}		
 	]	
 }
@@ -37,7 +38,7 @@ encounter .boss_5:
 entity the_devouring_shroud_boss_5: !NPC 
 { 
 	_string: "Tzun'Kala" 
-	_level: 30
+	_level: 31
 	_elite: true
 	_faction: monsters 
 	_sprite: lizard_man_7
@@ -55,6 +56,48 @@ entity the_devouring_shroud_boss_5: !NPC
 
 	_abilities: 
 	[
+		{
+			target: self			
+			requirement self<must_have_less_health_than>: 30
+			id: $ability
+			{
+				string: "Frenzy"
+				cast_time: 10
+				cooldowns: [ global ]
+				cooldown: $cooldown { duration: 120 }
+				flags: [ target_self ]
+				icon: icon_stuff 
+
+				direct_effect apply_aura:
+				{	
+					aura: $aura [ icon string ]
+					{
+						type: buff
+						duration: 100
+						flags: [ unique ]
+						color_effect: [ 255 0 0 ]
+
+						stat_modifiers:
+						{
+							attack_haste: { add: 50 } 
+						}
+					}
+				}
+			}			
+		}
+
+		{
+			requirement self<must_have_less_health_than>: 80
+			id: npc_curse
+			target: random_player
+		}
+		
+		{
+			requirement self<must_have_less_health_than>: 95					
+			id: npc_rend
+			target: random_player
+		}
+		
 		{
 			id: npc_attack
 		}
@@ -78,4 +121,5 @@ map_entity_spawn .boss_5:
 		}
 	}
 }
+
 

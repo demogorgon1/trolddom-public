@@ -32,6 +32,20 @@ zone .boss_1:
 encounter .boss_1:
 {
 	main_entities: [ the_devouring_shroud_boss_1 ]	
+	
+	spawn:
+	{
+		map_entity_spawn: .boss_1_spawn
+		possible_entities: [ .crab_non_elite ]
+		entity_count: 1
+		interval: [ 70 100 ]
+		
+		condition<entity_health_less_than>:
+		{
+			id: the_devouring_shroud_boss_1
+			value: 80			
+		}
+	}		
 }
 
 entity the_devouring_shroud_boss_1: !NPC 
@@ -57,6 +71,42 @@ entity the_devouring_shroud_boss_1: !NPC
 	_abilities: 
 	[
 		{
+			target: random_player
+			id: $ability
+			{
+				string: "Acid Spit"
+				range: 7
+				cast_time: 20
+				cooldowns: [ global ]
+				cooldown: $cooldown { duration: 80 }
+				flags: [ offensive target_other target_hostile can_miss interruptable ]
+				states: [ in_combat ]
+				icon: icon_poison
+				delay: 3
+				target_particle_system: green_spell_hit
+				projectile: npc_acid_spit
+
+				direct_effect apply_aura:
+				{
+					aura: $aura [ string icon ]
+					{
+						type: debuff
+						duration: 150
+						flags: [ unique poison ]
+						stat_modifiers: { armor: { add_percent: -30 } }					
+					}
+				}
+				
+				direct_effect damage:
+				{
+					damage_type: poison
+					function: 400
+					spread: !DEFAULT_SPREAD{}
+				}	
+			}
+		}
+	
+		{
 			id: npc_attack
 		}
 	]	
@@ -80,3 +130,6 @@ map_entity_spawn .boss_1:
 	}
 }
 
+map_entity_spawn .boss_1_spawn:
+{
+}

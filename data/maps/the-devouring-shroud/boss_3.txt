@@ -32,6 +32,34 @@ zone .boss_3:
 encounter .boss_3:
 {
 	main_entities: [ the_devouring_shroud_boss_3 ]	
+	
+	spawn:
+	{
+		map_entity_spawn: .boss_3_spawn_a
+		possible_entities: [ .beast ]
+		entity_count: 1
+		interval: [ 60 70 ]
+		
+		condition<entity_health_less_than>:
+		{
+			id: the_devouring_shroud_boss_3
+			value: 90			
+		}
+	}		
+	
+	spawn:
+	{
+		map_entity_spawn: .boss_3_spawn_b
+		possible_entities: [ .beast ]
+		entity_count: 1
+		interval: [ 70 80 ]
+		
+		condition<entity_health_less_than>:
+		{
+			id: the_devouring_shroud_boss_3
+			value: 50			
+		}
+	}		
 }
 
 entity the_devouring_shroud_boss_3: !NPC 
@@ -56,6 +84,10 @@ entity the_devouring_shroud_boss_3: !NPC
 	_abilities: 
 	[
 		{
+			id: npc_poison_bite
+		}
+		
+		{
 			id: npc_attack
 		}
 	]	
@@ -78,4 +110,13 @@ map_entity_spawn .boss_3:
 		}
 	}
 }
+
+map_entity_spawn .boss_3_spawn_a:
+{
+}
+
+map_entity_spawn .boss_3_spawn_b:
+{
+}
+
 

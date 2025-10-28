@@ -1184,7 +1184,7 @@ namespace tpublic::Systems
 
 												aContext->m_eventQueue->EventQueueMove(moveRequest);
 
-												npc->m_moveCooldownUntilTick = aContext->m_tick + 2;
+												npc->m_moveCooldownUntilTick = aContext->m_tick + npc->m_combatMoveIntervalTicks;
 												npc->m_lastCombatMoveTick = aContext->m_tick;
 											}
 											else

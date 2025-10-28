@@ -52,12 +52,68 @@ entity the_devouring_shroud_boss_2: !NPC
 	_immune_to_stun: true
 	_immune_to_immobilize: true
 	_immune_to_slow: true
+	_combat_move_interval_ticks: 4
 
 	_abilities: 
 	[
 		{
-			id: npc_attack
+			target: random_player
+			requirement self<must_have_less_health_than>: 75
+			id: $ability @the_devouring_shroud_boss_2_ability_1
+			{
+				string: "Fire Spit"
+				range: 8
+				cast_time: 20
+				cooldowns: [ global spell_fire_lockout ]
+				cooldown: $cooldown { duration: 90 }
+				flags: [ spell offensive target_other target_hostile can_miss interruptable ]
+				states: [ in_combat ]
+				icon: icon_firebolt
+				speed: 6
+				projectile: npc_firebolt
+				target_particle_system: orange_spell_hit
+
+				direct_effect damage:
+				{
+					flags: [ can_be_critical ]
+					damage_type: fire
+					function: { expression: a a: 200 }
+					spread: !DEFAULT_SPREAD{}						
+				}
+			}
 		}
+	
+		{
+			id: $ability @the_devouring_shroud_boss_2_ability_2
+			{
+				string: "Attack"
+				range: 1
+				cooldowns: [ global npc_attack ]
+				flags: [ melee attack offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+				states: [ in_combat ]
+				icon: icon_strike
+				delay: 3
+
+				direct_effect damage:
+				{
+					flags: [ can_be_critical ]
+					damage_type: physical
+					function: { expression: x x: weapon }
+				}
+				
+				direct_effect apply_aura:
+				{
+					aura: $aura
+					{
+						icon: icon_fang_1
+						flags: [ unique poison effects_as_charges charged ]
+						type: debuff
+						duration: 100
+						aura_effect damage_input_modifier: { type_mask: [ physical ] multiplier: 1.05 }
+					}
+				}
+			}
+		}		
 	]	
 	
 }

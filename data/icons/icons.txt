@@ -920,6 +920,7 @@ sprites:
 	sprite icon_the_devouring_shroud: { tags: [ icon ] }
 	sprite icon_karethi_temple: { tags: [ icon ] }
 	sprite icon_token_3: { tags: [ icon ] }
+	sprite icon_key_3: { tags: [ icon ] }
 	
 }
 

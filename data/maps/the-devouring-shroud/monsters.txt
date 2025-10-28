@@ -21,7 +21,7 @@ npc_behavior_state .patrol:
 
 map_entity_spawn .boss_1_melee_trash: 
 { 
-	#entity .melee_a: { level: 30 spawn_condition: { if_not: .boss_1_killed } } 	
+	entity .crab: { spawn_condition: { if_not: .boss_1_killed } } 	
 
 	spawn_timer: !TRASH_RESPAWN_TIMER{}
 }
@@ -31,7 +31,7 @@ map_entity_spawn .boss_1_melee_trash:
 
 map_entity_spawn .boss_2_melee_trash: 
 { 
-	#entity .melee_a: { level: 30 spawn_condition: { if_not: .boss_2_killed } } 	
+	entity .lizard: { spawn_condition: { if_not: .boss_2_killed } } 	
 
 	spawn_timer: !TRASH_RESPAWN_TIMER{}
 }
@@ -41,7 +41,7 @@ map_entity_spawn .boss_2_melee_trash:
 
 map_entity_spawn .boss_3_melee_trash: 
 { 
-	#entity .melee_a: { level: 30 spawn_condition: { if_not: .boss_3_killed } } 	
+	entity .beast_elite: { spawn_condition: { if_not: .boss_3_killed } } 	
 
 	spawn_timer: !TRASH_RESPAWN_TIMER{}
 }
@@ -51,7 +51,16 @@ map_entity_spawn .boss_3_melee_trash:
 
 map_entity_spawn .boss_4_melee_trash: 
 { 
-	#entity .melee_a: { level: 30 spawn_condition: { if_not: .boss_4_killed } } 	
+	entity .melee_lizard_man_1: { spawn_condition: { if_not: .boss_4_killed } } 	
+	entity .melee_lizard_man_2: { spawn_condition: { if_not: .boss_4_killed } } 	
+	entity .melee_lizard_man_3: { spawn_condition: { if_not: .boss_4_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+map_entity_spawn .boss_4_caster_trash: 
+{ 
+	entity .caster_lizard_man: { spawn_condition: { if_not: .boss_4_killed } } 	
 
 	spawn_timer: !TRASH_RESPAWN_TIMER{}
 }
@@ -61,7 +70,16 @@ map_entity_spawn .boss_4_melee_trash:
 
 map_entity_spawn .boss_5_melee_trash: 
 { 
-	#entity .melee_a: { level: 30 spawn_condition: { if_not: .boss_5_killed } } 	
+	entity .melee_lizard_man_1: { spawn_condition: { if_not: .boss_5_killed } } 	
+	entity .melee_lizard_man_2: { spawn_condition: { if_not: .boss_5_killed } } 	
+	entity .melee_lizard_man_3: { spawn_condition: { if_not: .boss_5_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+map_entity_spawn .boss_5_caster_trash: 
+{ 
+	entity .caster_lizard_man: { spawn_condition: { if_not: .boss_5_killed } } 	
 
 	spawn_timer: !TRASH_RESPAWN_TIMER{}
 }
@@ -69,7 +87,97 @@ map_entity_spawn .boss_5_melee_trash:
 #############################################################################
 # Monsters
 
-# Melee 
+# Crabs
+{
+	${
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: default_crab
+		_weapon_damage: 1.4
+		_resource_health: 1.71
+		_elite: true
+		_level: 30
+		_string: "Jungle Crab"		
+		_abilities: 
+		[ 
+			{ id: npc_rend } 
+			{ id: npc_attack } 
+		]
+	}
+
+	entity .crab: !NPC { _sprite: crab_6 _sprite_dead: crab_6_dead  }
+}
+
+# Crabs - boss fight
+{
+	${
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: default_crab
+		_weapon_damage: 1.4
+		_resource_health: 1.71
+		_level: 30
+		_string: "Crab Spawn"		
+		_abilities: 
+		[ 
+			{ id: npc_rend } 
+			{ id: npc_attack } 
+		]
+	}
+
+	entity .crab_non_elite: !NPC { _sprite: crab_6 _sprite_dead: crab_6_dead  }
+}
+
+# Lizards
+{
+	${
+		_level: 30
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short				
+		_loot_table: default_lizard
+		_weapon_damage: 1.1
+		_resource_health: 1.0
+		_elite: true
+	}
+
+	entity .lizard: !NPC { _string: "Jungle Lizard" _sprite: lizard_1 _sprite_dead: lizard_1_dead  }
+}
+
+# Beasts
+{
+	${
+		_level: 30
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short				
+		_loot_table: default_beast
+		_weapon_damage: 1.1
+		_resource_health: 1.0
+	}
+
+	entity .beast: !NPC { _string: "Spawn of Eshura" _sprite: monster_3 _sprite_dead: monster_3_dead  }
+}
+
+# Beasts elite
+{
+	${
+		_level: 30
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short				
+		_loot_table: default_beast
+		_weapon_damage: 1.1
+		_resource_health: 1.0
+		_elite: true
+	}
+
+	entity .beast_elite: !NPC { _string: "Spawn of Eshura" _sprite: monster_3 _sprite_dead: monster_3_dead  }
+}
+
+# Melee lizard men
 {
 	${
 		_faction: monsters
@@ -80,12 +188,37 @@ map_entity_spawn .boss_5_melee_trash:
 		_resource_health: 1.71
 		_elite: true
 		_level: 30
-		_string: "Melee"		
+		_string: "Urlok Warrior"		
 		_abilities: 
 		[ 
 			{ id: npc_attack } 
 		]
 	}
 
-	entity .melee_a: !NPC { _sprite: boar _sprite_dead: boar_dead  }
+	entity .melee_lizard_man_1: !NPC { _sprite: lizard_man_4 _sprite_dead: lizard_man_4_dead  }
+	entity .melee_lizard_man_2: !NPC { _sprite: lizard_man_5 _sprite_dead: lizard_man_5_dead  }
+	entity .melee_lizard_man_3: !NPC { _sprite: lizard_man_8 _sprite_dead: lizard_man_8_dead  }
+}
+
+# Caster lizard
+{
+	${
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .passive
+		_loot_table: default_humanoid
+		_weapon_damage: 1.4
+		_resource_health: 1.71
+		_elite: true
+		_string: "Urlok Shaman" 
+		_level: 30
+		_abilities: 
+		[ 
+			{ id: npc_poison_bolt target: random_player } 
+			{ id: npc_heal target: low_health_friend_or_self } 
+			{ id: npc_attack } 
+		]
+	}
+
+	entity .caster_lizard_man: !NPC { _sprite: lizard_man_3 _sprite_dead: lizard_man_3_dead }
 }
