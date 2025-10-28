@@ -21,7 +21,21 @@ npc_behavior_state .patrol:
 
 map_entity_spawn .boss_1_melee_trash: 
 { 
-	#entity .melee_a: { level: 30 spawn_condition: { if_not: .boss_1_killed } } 	
+	entity .stalker: { spawn_condition: { if_not: .boss_1_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+map_entity_spawn .boss_1_melee_trash_skeletal_guard: 
+{ 
+	entity .skeletal_guard: { spawn_condition: { if_not: .boss_1_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+map_entity_spawn .boss_1_caster_trash_skeletal_priest: 
+{ 
+	entity .skeletal_priest: { spawn_condition: { if_not: .boss_1_killed } } 	
 
 	spawn_timer: !TRASH_RESPAWN_TIMER{}
 }
@@ -29,9 +43,16 @@ map_entity_spawn .boss_1_melee_trash:
 #############################################################################
 # Boss 2
 
-map_entity_spawn .boss_2_melee_trash: 
+map_entity_spawn .boss_2_melee_trash_skeletal_guard: 
 { 
-	#entity .melee_a: { level: 30 spawn_condition: { if_not: .boss_2_killed } } 	
+	entity .skeletal_guard: { spawn_condition: { if_not: .boss_2_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+map_entity_spawn .boss_2_caster_trash_skeletal_priest: 
+{ 
+	entity .skeletal_priest: { spawn_condition: { if_not: .boss_2_killed } } 	
 
 	spawn_timer: !TRASH_RESPAWN_TIMER{}
 }
@@ -59,9 +80,16 @@ map_entity_spawn .boss_4_melee_trash:
 #############################################################################
 # Boss 5
 
-map_entity_spawn .boss_5_melee_trash: 
+map_entity_spawn .boss_5_melee_trash_skeletal_guard: 
 { 
-	#entity .melee_a: { level: 30 spawn_condition: { if_not: .boss_5_killed } } 	
+	entity .skeletal_guard: { spawn_condition: { if_not: .boss_5_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+map_entity_spawn .boss_5_caster_trash_skeletal_priest: 
+{ 
+	entity .skeletal_priest: { spawn_condition: { if_not: .boss_5_killed } } 	
 
 	spawn_timer: !TRASH_RESPAWN_TIMER{}
 }
@@ -69,7 +97,7 @@ map_entity_spawn .boss_5_melee_trash:
 #############################################################################
 # Monsters
 
-# Melee 
+# Stalkers 
 {
 	${
 		_faction: monsters
@@ -80,12 +108,58 @@ map_entity_spawn .boss_5_melee_trash:
 		_resource_health: 1.71
 		_elite: true
 		_level: 30
-		_string: "Melee"		
+		_string: "Temple Stalker"		
+		_abilities: 
+		[ 
+			{ id: npc_charge_rend } 
+			{ id: npc_attack } 
+		]
+	}
+
+	entity .stalker: !NPC { _sprite: stalker_4 _sprite_dead: stalker_4_dead  }
+}
+
+# Melee skeletons
+{
+	${
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .passive
+		_loot_table: default_humanoid
+		_weapon_damage: 1.4
+		_resource_health: 1.71
+		_elite: true
+		_level: 30
+		_string: "Skeletal Guard"		
 		_abilities: 
 		[ 
 			{ id: npc_attack } 
 		]
 	}
 
-	entity .melee_a: !NPC { _sprite: boar _sprite_dead: boar_dead  }
+	entity .skeletal_guard: !NPC { _sprite: skeleton_13 _sprite_dead: skeleton_13_dead  }
 }
+
+# Healer skeletons
+{
+	${
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .passive
+		_loot_table: default_humanoid
+		_weapon_damage: 1.4
+		_resource_health: 1.71
+		_elite: true
+		_level: 30
+		_string: "Skeletal Priest"		
+		_abilities: 
+		[ 
+			{ id: npc_heal target: low_health_friend_or_self }
+			{ id: npc_curse target: random_player }
+			{ id: npc_attack } 
+		]
+	}
+
+	entity .skeletal_priest: !NPC { _sprite: skeleton_caster_2 _sprite_dead: skeleton_caster_2_dead  }
+}
+

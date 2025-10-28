@@ -56,6 +56,16 @@ entity karethi_temple_boss_1: !NPC
 	_abilities: 
 	[
 		{
+			target: random_player
+			id: npc_mortal_strike_non_instant
+		}	
+	
+		{
+			target: random_player		
+			id: npc_rend						
+		}	
+		
+		{
 			id: npc_attack
 		}
 	]	

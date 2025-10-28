@@ -81,3 +81,30 @@ map_entity_spawn .boss_5:
 	}
 }
 
+entity .boss_5_door: 
+{
+	string: "Gate"
+	
+	systems: [ door ]
+	
+	components:
+	{
+		position: { }		
+		sound_source: { }
+		openable: 
+		{
+			unlock_map_triggers: [ .boss_2_killed .boss_3_killed .boss_4_killed ]
+			sound: inventory_1
+		}
+		sprite: 
+		{ 
+			animations:
+			[
+				{ states: [ default spawning ] frames: [ door_closed_1 ] z_offset: -3 }
+				{ states: [ dead ] frames: [ door_open_1 ] z_offset: -3 }
+			]		
+		}		
+	}
+}
+
+map_entity_spawn .boss_5_door: { entity .boss_5_door: { } spawn_timer: { despawn_required: true } }

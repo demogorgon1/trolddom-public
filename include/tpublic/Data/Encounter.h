@@ -187,6 +187,58 @@ namespace tpublic
 				uint32_t				m_triggerCount = UINT32_MAX;
 			};
 
+			struct Script
+			{
+				Script()
+				{
+
+				}
+
+				Script(
+					const SourceNode*	aSource)
+				{
+					aSource->GetObject()->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if (aChild->m_tag == "condition" && aChild->m_name == "main_entities_must_have_less_health_than")
+							m_conditionMainEntitiesMustHaveLessHealthThan = aChild->GetUInt32();
+						else if (aChild->m_tag == "action" && aChild->m_name == "block_main_entity_abilities")
+							aChild->GetIdArray(DataType::ID_ABILITY, m_actionBlockMainEntityAbilityIds);
+						else if (aChild->m_tag == "action" && aChild->m_name == "cancel_main_entity_auras")
+							aChild->GetIdArray(DataType::ID_AURA, m_actionCancelMainEntityAuraIds);
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					});
+				}
+
+				void
+				ToStream(
+					IWriter*			aWriter) const
+				{
+					aWriter->WriteUInt(m_conditionMainEntitiesMustHaveLessHealthThan);
+					aWriter->WriteUInts(m_actionBlockMainEntityAbilityIds);
+					aWriter->WriteUInts(m_actionCancelMainEntityAuraIds);
+				}
+
+				bool
+				FromStream(
+					IReader*			aReader)
+				{
+					if (!aReader->ReadUInt(m_conditionMainEntitiesMustHaveLessHealthThan))
+						return false;
+					if (!aReader->ReadUInts(m_actionBlockMainEntityAbilityIds))
+						return false;
+					if (!aReader->ReadUInts(m_actionCancelMainEntityAuraIds))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t				m_conditionMainEntitiesMustHaveLessHealthThan = 0;
+				std::vector<uint32_t>	m_actionBlockMainEntityAbilityIds;
+				std::vector<uint32_t>	m_actionCancelMainEntityAuraIds;
+			};
+
 			void
 			Verify() const
 			{
@@ -207,6 +259,8 @@ namespace tpublic
 							m_spawns.push_back(std::make_unique<Spawn>(aChild));
 						else if(aChild->m_name == "main_entities")
 							aChild->GetIdArray(DataType::ID_ENTITY, m_mainEntityIds);
+						else if (aChild->m_name == "script")
+							m_scripts.push_back(std::make_unique<Script>(aChild));
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -221,6 +275,7 @@ namespace tpublic
 
 				aStream->WriteObjectPointers(m_spawns);
 				aStream->WriteUInts(m_mainEntityIds);
+				aStream->WriteObjectPointers(m_scripts);
 			}
 
 			bool
@@ -234,12 +289,15 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadUInts(m_mainEntityIds))
 					return false;
+				if (!aStream->ReadObjectPointers(m_scripts))
+					return false;
 				return true;
 			}
 
 			// Public data			
-			std::vector<std::unique_ptr<Spawn>>	m_spawns;
-			std::vector<uint32_t>				m_mainEntityIds;
+			std::vector<std::unique_ptr<Spawn>>		m_spawns;
+			std::vector<uint32_t>					m_mainEntityIds;
+			std::vector<std::unique_ptr<Script>>	m_scripts;
 		};
 
 	}

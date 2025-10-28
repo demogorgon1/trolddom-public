@@ -11,7 +11,6 @@ map_portal .exit:
 
 route karethi_temple_default_patrol: 
 { 
-	max_direction_field_distance: 32
 }
 
 map_cliff .dummy_cliff_0: { cliff_style: dummy elevation: 0 }
@@ -55,9 +54,19 @@ map_palette .stuff:
 		
 	entity_spawn .boss_1: [ 255 0 0 ]
 	entity_spawn .boss_2: [ 255 0 64 ]
+	entity_spawn .boss_2_b: [ 255 228 0 ]
 	entity_spawn .boss_3: [ 255 64 0 ]
 	entity_spawn .boss_4: [ 255 0 128 ]
 	entity_spawn .boss_5: [ 255 128 0 ]
+	
+	entity_spawn .boss_1_melee_trash: [ 120 48 77 ]
+	entity_spawn .boss_1_caster_trash_skeletal_priest: [ 30 18 209 ]
+	entity_spawn .boss_1_melee_trash_skeletal_guard: [ 230 18 209 ]
+	entity_spawn .boss_2_caster_trash_skeletal_priest: [ 30 118 209 ]
+	entity_spawn .boss_2_melee_trash_skeletal_guard: [ 230 118 209 ]	
+	entity_spawn .boss_5_caster_trash_skeletal_priest: [ 130 118 109 ]
+	entity_spawn .boss_5_melee_trash_skeletal_guard: [ 130 118 9 ]	
+	entity_spawn .boss_5_door: [ 104 99 82 ]
 }
 
 map_palette .levels:
@@ -219,6 +228,7 @@ map karethi_temple:
 	{
 		condition trigger_not_set: .boss_2_killed
 		condition entity_state: { entity_spawn: .boss_2 state: dead }		
+		condition entity_state: { entity_spawn: .boss_2_b state: dead }		
 		run: { set_trigger: .boss_2_killed }
 	}	
 
