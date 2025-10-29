@@ -45,7 +45,7 @@ entity karethi_temple_boss_1: !NPC
 	_weapon_damage: 1.8
 	_resource_health: 6
 	_loot_table: .boss_1
-	_creature_type: humanoid
+	_creature_type: beast
 	_encounter: .boss_1
 	_zone: .boss_1
 	_out_of_zone_action: { evade: true }

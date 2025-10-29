@@ -32,6 +32,20 @@ zone .boss_3:
 encounter .boss_3:
 {
 	main_entities: [ karethi_temple_boss_3 ]	
+	
+	spawn:
+	{
+		map_entity_spawn: .boss_3_spawn
+		possible_entities: [ .skeletal_priest ]
+		entity_count: 1
+		interval: [ 130 140 ]
+		
+		condition<entity_health_less_than>:
+		{
+			id: karethi_temple_boss_3
+			value: 70			
+		}
+	}	
 }
 
 entity karethi_temple_boss_3: !NPC 
@@ -45,7 +59,7 @@ entity karethi_temple_boss_3: !NPC
 	_weapon_damage: 1.8
 	_resource_health: 6
 	_loot_table: .boss_3
-	_creature_type: humanoid
+	_creature_type: undead
 	_encounter: .boss_3
 	_zone: .boss_3
 	_out_of_zone_action: { evade: true }
@@ -56,8 +70,12 @@ entity karethi_temple_boss_3: !NPC
 	_abilities: 
 	[
 		{
-			id: npc_attack
+			id: npc_fire_attack
 		}
+		
+		{
+			id: npc_attack
+		}		
 	]	
 	
 }
@@ -79,3 +97,6 @@ map_entity_spawn .boss_3:
 	}
 }
 
+map_entity_spawn .boss_3_spawn:
+{
+}

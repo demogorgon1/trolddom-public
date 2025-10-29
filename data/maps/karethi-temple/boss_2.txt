@@ -35,10 +35,10 @@ encounter .boss_2:
 	
 	script:
 	{
-		condition main_entities_must_have_less_health_than: 5
-		action block_main_entity_abilities: [ .blaztek_bind_spirit .full_heal ]
-		action cancel_main_entity_auras: [ .blaztek_spirit_bound ]
-	}
+		condition main_entities_must_have_less_health_than: 8
+		action block_npc_abilities: [ .blaztek_bind_spirit .slaktek_bind_spirit .full_heal ]
+		action cancel_auras: [ .blaztek_spirit_bound .slaktek_spirit_bound ]
+	}	
 }
 
 ability .blaztek_bind_spirit:
@@ -66,11 +66,36 @@ aura .blaztek_spirit_bound:
 	}
 }
 
+ability .slaktek_bind_spirit:
+{
+	string: "Bind Spirit"
+	range: 0
+	flags: [ target_self ]
+	states: [ spawning default in_combat ]
+	icon: icon_throw_rock
+	direct_effect apply_aura:
+	{
+		aura: .slaktek_spirit_bound
+	}				
+}	
+			
+aura .slaktek_spirit_bound:
+{
+	string: "Spirit Bound"
+	description: "Bound to Blaztek."
+	flags: [ unique indefinite ]
+	icon: icon_skull_1	
+	type: buff
+	aura_effect immortality: 
+	{ 
+	}
+}
+
 ability .full_heal:
 {
 	string: "Restore Spirit"
 	range: 0
-	cast_time: 20
+	cast_time: 10
 	cooldowns: [ global ]
 	flags: [ spell target_self ]
 	states: [ in_combat ]
@@ -96,7 +121,7 @@ entity karethi_temple_boss_2: !NPC
 	_weapon_damage: 0.2
 	_resource_health: 6
 	_loot_table: .boss_2
-	_creature_type: humanoid
+	_creature_type: undead
 	_encounter: .boss_2
 	_zone: .boss_2
 	_out_of_zone_action: { evade: true }
@@ -116,6 +141,7 @@ entity karethi_temple_boss_2: !NPC
 			target: self
 			id: .full_heal
 			requirement self<must_have_aura>: .blaztek_spirit_bound
+			requirement self<must_have_less_health_than>: 1
 		}
 	
 		{
@@ -146,8 +172,7 @@ entity karethi_temple_boss_2_b: !NPC
 	_sprite_dead: skeleton_caster_7_dead 
 	_weapon_damage: 0.2
 	_resource_health: 6
-	_loot_table: .boss_2
-	_creature_type: humanoid
+	_creature_type: undead
 	_encounter: .boss_2
 	_zone: .boss_2
 	_out_of_zone_action: { evade: true }
@@ -157,6 +182,19 @@ entity karethi_temple_boss_2_b: !NPC
 
 	_abilities: 
 	[
+		{
+			target: self
+			requirement self<must_not_have_aura>: .slaktek_spirit_bound
+			id: .slaktek_bind_spirit			
+		}
+		
+		{
+			target: self
+			id: .full_heal
+			requirement self<must_have_aura>: .slaktek_spirit_bound
+			requirement self<must_have_less_health_than>: 1
+		}
+		
 		{
 			id: npc_whirlwind
 			requirement self<must_have_less_health_than>: 80

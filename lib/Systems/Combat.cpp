@@ -130,29 +130,29 @@ namespace tpublic::Systems
 				std::unique_ptr<Components::Auras::Entry>& entry = auras->m_entries[i];
 
 				const Data::Aura* aura = GetManifest()->GetById<Data::Aura>(entry->m_auraId);
-				if((aura->m_flags & Data::Aura::FLAG_GLOBAL) != 0 && !globalAuras.contains(entry->m_auraId))
+				if(!entry->m_cancel && (aura->m_flags & Data::Aura::FLAG_GLOBAL) != 0 && !globalAuras.contains(entry->m_auraId))
 					entry->m_cancel = true;
 
-				if((aura->m_flags & Data::Aura::FLAG_CANCEL_IN_COMBAT) != 0 && aEntityState == EntityState::ID_IN_COMBAT)
+				if(!entry->m_cancel && (aura->m_flags & Data::Aura::FLAG_CANCEL_IN_COMBAT) != 0 && aEntityState == EntityState::ID_IN_COMBAT)
 					entry->m_cancel = true;
 
-				if ((aura->m_flags & Data::Aura::FLAG_CANCEL_OUTSIDE_COMBAT) != 0 && aEntityState != EntityState::ID_IN_COMBAT)
+				if (!entry->m_cancel && (aura->m_flags & Data::Aura::FLAG_CANCEL_OUTSIDE_COMBAT) != 0 && aEntityState != EntityState::ID_IN_COMBAT)
 					entry->m_cancel = true;
 
-				if((aura->m_flags & Data::Aura::FLAG_PERSIST_IN_DEATH) == 0 && (aura->m_flags & Data::Aura::FLAG_ITEM) == 0 && aEntityState == EntityState::ID_DEAD)
+				if(!entry->m_cancel && (aura->m_flags & Data::Aura::FLAG_PERSIST_IN_DEATH) == 0 && (aura->m_flags & Data::Aura::FLAG_ITEM) == 0 && aEntityState == EntityState::ID_DEAD)
 					entry->m_cancel = true;
 
-				if ((aura->m_flags & Data::Aura::FLAG_CANCEL_ON_DAMAGE) != 0 && combatPublic->m_damageAccum > 0)
+				if (!entry->m_cancel && (aura->m_flags & Data::Aura::FLAG_CANCEL_ON_DAMAGE) != 0 && combatPublic->m_damageAccum > 0)
 					entry->m_cancel = true;
 
-				if((aura->m_flags & Data::Aura::FLAG_CANCEL_INDOOR) != 0)
+				if(!entry->m_cancel && (aura->m_flags & Data::Aura::FLAG_CANCEL_INDOOR) != 0)
 				{
 					const Components::Position* position = GetComponent<Components::Position>(aComponents);
 					if(aContext->m_worldView->WorldViewGetMapData()->IsTileIndoor(position->m_position.m_x, position->m_position.m_y))
 						entry->m_cancel = true;
 				}
 
-				if (aura->m_flags & Data::Aura::FLAG_SINGLE_TARGET)
+				if (!entry->m_cancel && (aura->m_flags & Data::Aura::FLAG_SINGLE_TARGET))
 				{
 					const EntityInstance* sourceEntity = aContext->m_worldView->WorldViewSingleEntityInstance(entry->m_sourceEntityInstance.m_entityInstanceId);
 					const Components::CombatPublic* sourceCombatPublic = sourceEntity != NULL ? sourceEntity->GetComponent<Components::CombatPublic>() : NULL;
@@ -160,7 +160,10 @@ namespace tpublic::Systems
 						entry->m_cancel = true;
 				}
 
-				if(aura->m_mustNotHaveWorldAuraId != 0 && aContext->m_worldView->WorldViewHasWorldAura(aura->m_mustNotHaveWorldAuraId))
+				if(!entry->m_cancel && aura->m_mustNotHaveWorldAuraId != 0 && aContext->m_worldView->WorldViewHasWorldAura(aura->m_mustNotHaveWorldAuraId))
+					entry->m_cancel = true;
+
+				if(!entry->m_cancel && aContext->m_worldView->WorldViewIsAnyEncounterCancellingAura(aura->m_id))
 					entry->m_cancel = true;
 
 				if(!entry->m_cancel)

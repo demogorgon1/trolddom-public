@@ -202,10 +202,10 @@ namespace tpublic
 					{
 						if (aChild->m_tag == "condition" && aChild->m_name == "main_entities_must_have_less_health_than")
 							m_conditionMainEntitiesMustHaveLessHealthThan = aChild->GetUInt32();
-						else if (aChild->m_tag == "action" && aChild->m_name == "block_main_entity_abilities")
-							aChild->GetIdArray(DataType::ID_ABILITY, m_actionBlockMainEntityAbilityIds);
-						else if (aChild->m_tag == "action" && aChild->m_name == "cancel_main_entity_auras")
-							aChild->GetIdArray(DataType::ID_AURA, m_actionCancelMainEntityAuraIds);
+						else if (aChild->m_tag == "action" && aChild->m_name == "block_npc_abilities")
+							aChild->GetIdArray(DataType::ID_ABILITY, m_actionBlockNPCAbilityIds);
+						else if (aChild->m_tag == "action" && aChild->m_name == "cancel_auras")
+							aChild->GetIdArray(DataType::ID_AURA, m_actionCancelAuraIds);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					});
@@ -216,8 +216,8 @@ namespace tpublic
 					IWriter*			aWriter) const
 				{
 					aWriter->WriteUInt(m_conditionMainEntitiesMustHaveLessHealthThan);
-					aWriter->WriteUInts(m_actionBlockMainEntityAbilityIds);
-					aWriter->WriteUInts(m_actionCancelMainEntityAuraIds);
+					aWriter->WriteUInts(m_actionBlockNPCAbilityIds);
+					aWriter->WriteUInts(m_actionCancelAuraIds);
 				}
 
 				bool
@@ -226,17 +226,17 @@ namespace tpublic
 				{
 					if (!aReader->ReadUInt(m_conditionMainEntitiesMustHaveLessHealthThan))
 						return false;
-					if (!aReader->ReadUInts(m_actionBlockMainEntityAbilityIds))
+					if (!aReader->ReadUInts(m_actionBlockNPCAbilityIds))
 						return false;
-					if (!aReader->ReadUInts(m_actionCancelMainEntityAuraIds))
+					if (!aReader->ReadUInts(m_actionCancelAuraIds))
 						return false;
 					return true;
 				}
 
 				// Public data
 				uint32_t				m_conditionMainEntitiesMustHaveLessHealthThan = 0;
-				std::vector<uint32_t>	m_actionBlockMainEntityAbilityIds;
-				std::vector<uint32_t>	m_actionCancelMainEntityAuraIds;
+				std::vector<uint32_t>	m_actionBlockNPCAbilityIds;
+				std::vector<uint32_t>	m_actionCancelAuraIds;
 			};
 
 			void

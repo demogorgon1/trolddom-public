@@ -922,6 +922,9 @@ namespace tpublic::Systems
 										continue;
 								}
 
+								if (npc->m_encounterId != 0 && aContext->m_worldView->WorldViewIsEncounterBlockingNPCAbility(npc->m_encounterId, ability->m_id))
+									continue;
+
 								if (abilityEntry.m_targetType == Components::NPC::AbilityEntry::TARGET_TYPE_DEFAULT)
 								{
 									if (!ability->AlwaysInRange() && distanceSquared > (int32_t)(ability->m_range * ability->m_range))

@@ -67,6 +67,10 @@ map_palette .stuff:
 	entity_spawn .boss_5_caster_trash_skeletal_priest: [ 130 118 109 ]
 	entity_spawn .boss_5_melee_trash_skeletal_guard: [ 130 118 9 ]	
 	entity_spawn .boss_5_door: [ 104 99 82 ]
+	
+	entity_spawn .boss_3_spawn: [ 76 55 146 ]
+	entity_spawn .boss_5_spawn_1: [ 174 92 88 ]
+	entity_spawn .boss_5_spawn_2: [ 174 192 88 ]
 }
 
 map_palette .levels:
@@ -228,7 +232,6 @@ map karethi_temple:
 	{
 		condition trigger_not_set: .boss_2_killed
 		condition entity_state: { entity_spawn: .boss_2 state: dead }		
-		condition entity_state: { entity_spawn: .boss_2_b state: dead }		
 		run: { set_trigger: .boss_2_killed }
 	}	
 

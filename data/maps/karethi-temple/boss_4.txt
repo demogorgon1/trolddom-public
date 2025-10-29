@@ -45,7 +45,7 @@ entity karethi_temple_boss_4: !NPC
 	_weapon_damage: 1.8
 	_resource_health: 6
 	_loot_table: .boss_4
-	_creature_type: humanoid
+	_creature_type: undead
 	_encounter: .boss_4
 	_zone: .boss_4
 	_out_of_zone_action: { evade: true }
@@ -55,6 +55,11 @@ entity karethi_temple_boss_4: !NPC
 
 	_abilities: 
 	[
+		{
+			id: npc_frostbolt
+			target: random_player
+		}
+		
 		{
 			id: npc_attack
 		}

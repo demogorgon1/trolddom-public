@@ -163,3 +163,41 @@ map_entity_spawn .boss_5_caster_trash_skeletal_priest:
 	entity .skeletal_priest: !NPC { _sprite: skeleton_caster_2 _sprite_dead: skeleton_caster_2_dead  }
 }
 
+# Tentacle monsters
+{
+	${
+		_faction: monsters
+		_creature_type: demon
+		_default_behavior_state: .passive
+	}
+
+	entity .tentacle_monster_1: !NPC 
+	{ 
+		_sprite: tentacle_monster_2 _sprite_dead: tentacle_monster_2_dead  
+		_weapon_damage: 1.4
+		_resource_health: 1.71
+		_level: 30
+		_string: "Void Spawn"		
+		_abilities: 
+		[ 
+			{ id: npc_curse target: random_player }
+			{ id: npc_attack } 
+		]		
+	}
+	
+	entity .tentacle_monster_2: !NPC 
+	{ 
+		_sprite: tentacle_monster _sprite_dead: tentacle_monster_dead  
+		_weapon_damage: 1.4
+		_resource_health: 1.71
+		_elite: true
+		_level: 30
+		_string: "Void Spawn"		
+		_abilities: 
+		[ 
+			{ id: npc_chain_lightning target: random_player }
+			{ id: npc_attack } 
+		]		
+	}
+}
+

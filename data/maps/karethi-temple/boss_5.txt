@@ -33,6 +33,34 @@ zone .boss_5:
 encounter .boss_5:
 {
 	main_entities: [ karethi_temple_boss_5 ]	
+	
+	spawn:
+	{
+		map_entity_spawn: .boss_5_spawn_1
+		possible_entities: [ .tentacle_monster_1 ]
+		entity_count: 1
+		interval: [ 80 90 ]
+		
+		condition<entity_health_less_than>:
+		{
+			id: karethi_temple_boss_5
+			value: 95			
+		}
+	}		
+	
+	spawn:
+	{
+		map_entity_spawn: .boss_5_spawn_2
+		possible_entities: [ .tentacle_monster_2 ]
+		entity_count: 1
+		interval: [ 150 160 ]
+		
+		condition<entity_health_less_than>:
+		{
+			id: karethi_temple_boss_5
+			value: 75	
+		}
+	}			
 }
 
 entity karethi_temple_boss_5: !NPC 
@@ -43,10 +71,10 @@ entity karethi_temple_boss_5: !NPC
 	_faction: monsters 
 	_sprite: giant_demon_4
 	_sprite_dead: giant_demon_4_dead 
-	_weapon_damage: 1.8
+	_weapon_damage: 0.2
 	_resource_health: 6
 	_loot_table: .boss_5
-	_creature_type: humanoid
+	_creature_type: demon
 	_encounter: .boss_5
 	_zone: .boss_5
 	_out_of_zone_action: { evade: true }
@@ -57,6 +85,10 @@ entity karethi_temple_boss_5: !NPC
 
 	_abilities: 
 	[
+		{
+			id: npc_arcane_explosion
+		}	
+	
 		{
 			id: npc_attack
 		}
@@ -108,3 +140,6 @@ entity .boss_5_door:
 }
 
 map_entity_spawn .boss_5_door: { entity .boss_5_door: { } spawn_timer: { despawn_required: true } }
+
+map_entity_spawn .boss_5_spawn_1: { }
+map_entity_spawn .boss_5_spawn_2: { }

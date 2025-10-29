@@ -710,7 +710,7 @@ item item_emblem_of_triumph:
 	stack: 100
 	icon: icon_token_3
 	rarity: uncommon
-	level_range: [ 28 30 ]
+	level_range: [ 28 31 ]
 	binds: when_picked_up
 }
 

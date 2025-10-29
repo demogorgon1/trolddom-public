@@ -75,6 +75,11 @@ namespace tpublic
 														int32_t					aRadius,
 														std::mt19937&			aRandom) const = 0;
 		virtual const RealmModifierList*			WorldViewGetRealmModifierList() const = 0;
+		virtual bool								WorldViewIsEncounterBlockingNPCAbility(
+														uint32_t				aEncounterId,
+														uint32_t				aAbilityId) const = 0;
+		virtual bool								WorldViewIsAnyEncounterCancellingAura(
+														uint32_t				aAuraId) const = 0;
 	};
 
 }
