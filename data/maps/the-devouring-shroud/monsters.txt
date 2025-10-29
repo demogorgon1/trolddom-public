@@ -94,8 +94,8 @@ map_entity_spawn .boss_5_caster_trash:
 		_creature_type: beast
 		_default_behavior_state: .wandering_short
 		_loot_table: default_crab
-		_weapon_damage: 1.4
-		_resource_health: 1.71
+		_weapon_damage: 1.46
+		_resource_health: 0.8
 		_elite: true
 		_level: 30
 		_string: "Jungle Crab"		
@@ -116,8 +116,8 @@ map_entity_spawn .boss_5_caster_trash:
 		_creature_type: beast
 		_default_behavior_state: .wandering_short
 		_loot_table: default_crab
-		_weapon_damage: 1.4
-		_resource_health: 1.71
+		_weapon_damage: 1.2
+		_resource_health: 1.36
 		_level: 30
 		_string: "Crab Spawn"		
 		_abilities: 
@@ -170,7 +170,7 @@ map_entity_spawn .boss_5_caster_trash:
 		_default_behavior_state: .wandering_short				
 		_loot_table: default_beast
 		_weapon_damage: 1.1
-		_resource_health: 1.0
+		_resource_health: 1.2
 		_elite: true
 	}
 
@@ -184,8 +184,8 @@ map_entity_spawn .boss_5_caster_trash:
 		_creature_type: humanoid
 		_default_behavior_state: .passive
 		_loot_table: default_humanoid
-		_weapon_damage: 1.4
-		_resource_health: 1.71
+		_weapon_damage: 1.1
+		_resource_health: 1.1
 		_elite: true
 		_level: 30
 		_string: "Urlok Warrior"		
@@ -207,8 +207,8 @@ map_entity_spawn .boss_5_caster_trash:
 		_creature_type: humanoid
 		_default_behavior_state: .passive
 		_loot_table: default_humanoid
-		_weapon_damage: 1.4
-		_resource_health: 1.71
+		_weapon_damage: 0.7
+		_resource_health: 0.74
 		_elite: true
 		_string: "Urlok Shaman" 
 		_level: 30

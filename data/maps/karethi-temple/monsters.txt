@@ -104,8 +104,8 @@ map_entity_spawn .boss_5_caster_trash_skeletal_priest:
 		_creature_type: humanoid
 		_default_behavior_state: .passive
 		_loot_table: default_humanoid
-		_weapon_damage: 1.4
-		_resource_health: 1.71
+		_weapon_damage: 1.1
+		_resource_health: 0.9
 		_elite: true
 		_level: 30
 		_string: "Temple Stalker"		
@@ -126,8 +126,8 @@ map_entity_spawn .boss_5_caster_trash_skeletal_priest:
 		_creature_type: humanoid
 		_default_behavior_state: .passive
 		_loot_table: default_humanoid
-		_weapon_damage: 1.4
-		_resource_health: 1.71
+		_weapon_damage: 1.0
+		_resource_health: 1.2
 		_elite: true
 		_level: 30
 		_string: "Skeletal Guard"		
@@ -147,8 +147,8 @@ map_entity_spawn .boss_5_caster_trash_skeletal_priest:
 		_creature_type: humanoid
 		_default_behavior_state: .passive
 		_loot_table: default_humanoid
-		_weapon_damage: 1.4
-		_resource_health: 1.71
+		_weapon_damage: 0.7
+		_resource_health: 0.7
 		_elite: true
 		_level: 30
 		_string: "Skeletal Priest"		
@@ -174,7 +174,7 @@ map_entity_spawn .boss_5_caster_trash_skeletal_priest:
 	entity .tentacle_monster_1: !NPC 
 	{ 
 		_sprite: tentacle_monster_2 _sprite_dead: tentacle_monster_2_dead  
-		_weapon_damage: 1.4
+		_weapon_damage: 1.1
 		_resource_health: 1.71
 		_level: 30
 		_string: "Void Spawn"		
@@ -188,15 +188,14 @@ map_entity_spawn .boss_5_caster_trash_skeletal_priest:
 	entity .tentacle_monster_2: !NPC 
 	{ 
 		_sprite: tentacle_monster _sprite_dead: tentacle_monster_dead  
-		_weapon_damage: 1.4
-		_resource_health: 1.71
+		_weapon_damage: 0.7
+		_resource_health: 0.84
 		_elite: true
 		_level: 30
 		_string: "Void Spawn"		
 		_abilities: 
 		[ 
 			{ id: npc_chain_lightning target: random_player }
-			{ id: npc_attack } 
 		]		
 	}
 }

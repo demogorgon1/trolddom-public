@@ -77,8 +77,8 @@ entity karethi_temple_boss_5: !NPC
 	_faction: monsters 
 	_sprite: giant_demon_4
 	_sprite_dead: giant_demon_4_dead 
-	_weapon_damage: 0.2
-	_resource_health: 6
+	_weapon_damage: 1.1
+	_resource_health: 4.5
 	_loot_table: .boss_5
 	_creature_type: demon
 	_encounter: .boss_5

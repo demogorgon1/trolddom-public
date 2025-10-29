@@ -48,8 +48,8 @@ entity the_devouring_shroud_boss_2: !NPC
 	_faction: monsters 
 	_sprite: lizard_7
 	_sprite_dead: lizard_7_dead 
-	_weapon_damage: 1.8
-	_resource_health: 6
+	_weapon_damage: 1.1
+	_resource_health: 3.6
 	_loot_table: .boss_2
 	_creature_type: humanoid
 	_encounter: .boss_2
@@ -111,11 +111,14 @@ entity the_devouring_shroud_boss_2: !NPC
 				{
 					aura: $aura
 					{
+						string: "Weakened"
+						description: "Taking increased physical damage."
 						icon: icon_fang_1
-						flags: [ unique poison effects_as_charges charged ]
+						flags: [ unique poison effects_as_charges ]
 						type: debuff
-						duration: 100
-						aura_effect damage_input_modifier: { type_mask: [ physical ] multiplier: 1.05 }
+						duration: 80
+						max_stack: 20
+						aura_effect damage_input_modifier: { type_mask: [ physical ] multiplier: 1.08 }
 					}
 				}
 			}

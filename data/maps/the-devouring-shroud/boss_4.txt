@@ -48,8 +48,8 @@ entity the_devouring_shroud_boss_4: !NPC
 	_faction: monsters 
 	_sprite: lizard_man_6
 	_sprite_dead: lizard_man_6_dead 
-	_weapon_damage: 1.8
-	_resource_health: 6
+	_weapon_damage: 1.26
+	_resource_health: 3.9
 	_loot_table: .boss_4
 	_creature_type: humanoid
 	_encounter: .boss_4
@@ -63,8 +63,37 @@ entity the_devouring_shroud_boss_4: !NPC
 	[
 		{
 			requirement self<must_have_less_health_than>: 95					
-			id: npc_chain_lightning
 			target: random_player
+			
+			id: $ability
+			{
+				string: "Chain Lightning"
+				range: 9
+				cast_time: 25
+				cooldowns: [ global spell_arcane_lockout ]
+				cooldown: $cooldown { duration: 70 }
+				flags: [ spell offensive target_other target_hostile can_miss interruptable ]
+				states: [ default in_combat ]
+				icon: icon_chain_lightning
+				speed: 9
+				projectile: npc_chain_lightning
+				resource_cost mana: 20
+				target_particle_system: purple_spell_hit
+				
+				direct_effect damage:
+				{
+					flags: [ can_be_critical is_magical ]
+					damage_type: nature
+					function: { expression: a a: [ [ 1 15 ] [ 10 45 ] [ 20 90 ] [ 30 180 ] ] elite_multiplier: 4 }		
+					spread: !DEFAULT_SPREAD{}						
+				}		
+				
+				direct_effect trigger_ability:
+				{
+					ability: npc_chain_lightning_secondary
+					target: random_nearby
+				}
+			}
 		}
 	
 		{

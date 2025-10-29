@@ -123,8 +123,8 @@ entity karethi_temple_boss_2: !NPC
 	_faction: monsters 
 	_sprite: skeleton_caster_4
 	_sprite_dead: skeleton_caster_4_dead 
-	_weapon_damage: 0.2
-	_resource_health: 6
+	_weapon_damage: 0.6
+	_resource_health: 2.2
 	_loot_table: .boss_2
 	_creature_type: undead
 	_encounter: .boss_2
@@ -175,8 +175,8 @@ entity karethi_temple_boss_2_b: !NPC
 	_faction: monsters 
 	_sprite: skeleton_caster_7
 	_sprite_dead: skeleton_caster_7_dead 
-	_weapon_damage: 0.2
-	_resource_health: 6
+	_weapon_damage: 1.0
+	_resource_health: 2.2
 	_creature_type: undead
 	_encounter: .boss_2
 	_zone: .boss_2

@@ -50,8 +50,8 @@ entity the_devouring_shroud_boss_5: !NPC
 	_faction: monsters 
 	_sprite: lizard_man_7
 	_sprite_dead: lizard_man_7_dead 
-	_weapon_damage: 1.8
-	_resource_health: 6
+	_weapon_damage: 1.1
+	_resource_health: 4.2
 	_loot_table: .boss_5
 	_creature_type: humanoid
 	_encounter: .boss_5

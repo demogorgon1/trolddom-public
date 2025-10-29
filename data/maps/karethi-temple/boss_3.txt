@@ -61,8 +61,8 @@ entity karethi_temple_boss_3: !NPC
 	_faction: monsters 
 	_sprite: skeleton_boss_2
 	_sprite_dead: skeleton_boss_2_dead 
-	_weapon_damage: 1.8
-	_resource_health: 6
+	_weapon_damage: 1.2
+	_resource_health: 4
 	_loot_table: .boss_3
 	_creature_type: undead
 	_encounter: .boss_3
