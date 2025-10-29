@@ -20,6 +20,11 @@ loot_table .boss_3:
 		_level: 30
 		_loot_group: .boss_3
 	}		
+		
+	item karethi_temple_3_1: !BOSS_DROP_HEAD { _string: "Hood of Blasting" _icon: icon_chest_7 _type: armor_cloth _spell_damage: 2 _constitution: 1 _wisdom: 3 }	
+	item karethi_temple_3_2: !BOSS_DROP_HEAD { _string: "Helmet of Hizua" _icon: icon_plate_helmet_1 _type: armor_plate _strength: 3 _constitution: 1 _dexterity: 2 }	
+	item karethi_temple_3_3: !BOSS_DROP_LEGS { _string: "" _icon: icon_plate_legs_1 _type: armor_plate _constitution: 3 _dexterity: 1 _strength: 4 }	
+	item karethi_temple_3_4: !BOSS_DROP_BACK { _string: "" _icon: icon_cape_4 _type: armor_cloth _constitution: 1 dexterity: 1 _budget_bias: 10 _phys_crit: 1 }			
 }
 
 ############################################################

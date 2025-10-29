@@ -19,7 +19,12 @@ loot_table .boss_3:
 		_rarity: rare
 		_level: 30
 		_loot_group: .boss_3
-	}		
+	}			
+
+	item the_devouring_shroud_3_1: !BOSS_DROP_FINGER { _string: "Glowing Bone Ring" _icon: icon_ring_3  _budget_bias: -10 _spell_crit: 1 _wisdom: 2 _spell_damage: 1 }	
+	item the_devouring_shroud_3_2: !BOSS_DROP_BACK { _string: "Cloak of the Jaguar" _icon: icon_cape_6 _type: armor_cloth _budget_bias: -10 _spell_crit: 1 _wisdom: 2 _healing: 1 }	
+	item the_devouring_shroud_3_3: !BOSS_DROP_WAIST { _string: "Monstrous Mithril Belt" _icon: icon_cloth_belt_1 _type: armor_plate _strength: 1 _constitution: 1 }	
+	item the_devouring_shroud_3_4: !BOSS_DROP_FINGER { _string: "Warrior's Emerald Loop" _icon: icon_ring_8 _strength: 1 _constitution: 1 }		
 }
 
 ############################################################

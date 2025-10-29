@@ -921,6 +921,16 @@ sprites:
 	sprite icon_karethi_temple: { tags: [ icon ] }
 	sprite icon_token_3: { tags: [ icon ] }
 	sprite icon_key_3: { tags: [ icon ] }
+	sprite icon_axe_11: { tags: [ icon ] }
+	sprite icon_sword_19: { tags: [ icon ] }
+	sprite icon_staff_15: { tags: [ icon ] }
+	sprite icon_knife_6: { tags: [ icon ] }
+	sprite icon_mace_18: { tags: [ icon ] }
+	sprite icon_shield_11: { tags: [ icon ] }
+	sprite icon_knife_7: { tags: [ icon ] }
+	sprite icon_bow_3: { tags: [ icon ] }
+	sprite icon_sword_20: { tags: [ icon ] }
+	sprite icon_staff_16: { tags: [ icon ] }
 	
 }
 

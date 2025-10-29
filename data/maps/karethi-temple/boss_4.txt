@@ -20,6 +20,12 @@ loot_table .boss_4:
 		_level: 30
 		_loot_group: .boss_4
 	}		
+		
+	item karethi_temple_4_1: !BOSS_DROP_NECK { _string: "Forgotten Healer's Necklace" _icon: icon_necklace_13 _constitution: 1 _budget_bias: -10 _spell_crit: 1 _wisdom: 2 _healing: 1 }	
+	item karethi_temple_4_2: !BOSS_DROP_FINGER { _string: "Gold Ring of Death" _icon: icon_ring_15 _wisdom: 1 _constitution: 1 }	
+	item karethi_temple_4_3: !BOSS_DROP_WRISTS { _string: "Dead Wizard's Bracers" _icon: icon_bracers_1 _type: armor_cloth _wisdom: 4 _healing: 1 }	
+	item karethi_temple_4_4: !BOSS_DROP_SHOULDERS { _string: "Mantle of Klazcep" _icon: icon_shoulders_4 _type: armor_cloth _constitution: 3 _wisdom: 1 }	
+
 }
 
 ############################################################

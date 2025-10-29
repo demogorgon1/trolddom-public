@@ -19,7 +19,13 @@ loot_table .boss_2:
 		_rarity: rare
 		_level: 30
 		_loot_group: .boss_2
-	}		
+	}			
+
+	item the_devouring_shroud_2_1: !BOSS_DROP_WAIST { _string: "Chameleon Belt" _icon: icon_cloth_belt_3 _type: armor_cloth _spell_damage: 1 _wisdom: 2 _constitution: 3 }	
+	item the_devouring_shroud_2_2: !BOSS_DROP_FEET { _string: "Lost Explorer's Shoes" _icon: icon_cloth_feet_1 _type: armor_cloth _wisdom: 4 _healing: 3 _spirit: 1 }	
+	item the_devouring_shroud_2_3: !BOSS_DROP_FEET { _string: "Swift Steel Boots" _icon: icon_mail_boots_1 _type: armor_plate _constitution: 5 _strength: 2 _dodge_chance: 1 _budget_bias: -10 }	
+	item the_devouring_shroud_2_4: !BOSS_DROP_FEET { _string: "Soothsayer's Slippers" _icon: icon_slippers_2 _type: armor_cloth _wisdom: 6 _constitution: 1 }	
+	
 }
 
 ############################################################

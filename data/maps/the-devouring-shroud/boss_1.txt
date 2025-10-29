@@ -20,6 +20,12 @@ loot_table .boss_1:
 		_level: 30
 		_loot_group: .boss_1
 	}		
+	
+	item the_devouring_shroud_1_1: !BOSS_DROP_WAIST { _string: "Lost Fisherman's Belt" _icon: icon_mail_belt_1 _type: armor_cloth _healing: 1 _wisdom: 3 _constitution: 2 }	
+	item the_devouring_shroud_1_2: !BOSS_DROP_CHEST { _string: "Rotting Wizard's Gown" _icon: icon_cloth_shirt_2 _type: armor_cloth _wisdom: 5 _constitution: 2 _budget_bias: -10 _spell_crit: 1 }	
+	item the_devouring_shroud_1_3: !BOSS_DROP_NECK { _string: "Enchanted Seaweed Necklace" _icon: icon_hair_1 _constitution: 1 }	
+	item the_devouring_shroud_1_4: !BOSS_DROP_HANDS { _string: "Berserker Gauntlets" _icon: icon_gloves_4 _type: armor_plate _strength: 1 _constitution: 1 _dexterity: 1 }	
+	
 }
 
 ############################################################

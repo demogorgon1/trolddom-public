@@ -265,15 +265,54 @@ namespace tpublic::Components
 		std::mt19937*								aRandom,
 		IEventQueue*								aEventQueue) const
 	{
+		// This is quite horrible. We pass on aEventQueue, which can potentially trigger changes in this component. Entries could be removed. 
+
+		// This is a horrible workaround
+		struct EntryEffectPair
+		{
+			const Entry*			m_entry = NULL;
+			const AuraEffectBase*	m_effect = NULL;
+		};
+
+		static const size_t MAX_ENTRY_EFFECT_PAIRS = 256;
+		size_t numEntryEffectPairs = 0;
+		EntryEffectPair entryEffectPairs[MAX_ENTRY_EFFECT_PAIRS];		
+
 		for (const std::unique_ptr<Entry>& entry : m_entries)
 		{
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
 			{
-				if (effect->CheckRequirements(aManifest, aSource, aTarget))
+				if (effect->CheckRequirements(aManifest, aSource, aTarget) && numEntryEffectPairs < MAX_ENTRY_EFFECT_PAIRS)
+					entryEffectPairs[numEntryEffectPairs++] = { entry.get(), effect.get() };
+			}
+		}
+
+		for(size_t i = 0; i < numEntryEffectPairs; i++)
+		{
+			const EntryEffectPair& t = entryEffectPairs[i];
+
+			bool stillExists = false;
+
+			for (const std::unique_ptr<Entry>& entry : m_entries)
+			{
+				if(entry.get() == t.m_entry)
 				{
-					effect->OnCombatEvent(aManifest, entry->m_auraId, aType, aCombatEventId, aAbilityId, aSource, aTarget, aRandom, aEventQueue);
+					for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
+					{
+						if(effect.get() == t.m_effect)
+						{
+							stillExists = true;
+							break;
+						}
+					}
+
+					if (stillExists)
+						break;
 				}
 			}
+
+			if(stillExists)
+				t.m_effect->OnCombatEvent(aManifest, t.m_entry->m_auraId, aType, aCombatEventId, aAbilityId, aSource, aTarget, aRandom, aEventQueue);
 		}
 	}
 	 
