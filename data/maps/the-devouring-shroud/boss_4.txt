@@ -23,7 +23,7 @@ loot_table .boss_4:
 
 	item the_devouring_shroud_4_1: !BOSS_DROP_CHEST { _string: "Robe of the Soothsayer" _icon: icon_cloth_shirt_5 _type: armor_cloth _healing: 3 _constitution: 1 _wisdom: 2 }	
 	item the_devouring_shroud_4_2: !BOSS_DROP_SHOULDERS { _string: "Mantle of Destruction" _icon: icon_cloth_shoulders_1 _type: armor_cloth _constitution: 1 _wisdom: 3 _spell_damage: 2 }	
-	item the_devouring_shroud_4_3: !BOSS_DROP_CHEST { _string: "Jungle-Forged Steel Armor" _icon: icon_chest_2 _type: armor_plate _constitution: 1 _budget_bias: -20 _block_chance: 1 _dodge_chance: 1 }	
+	item the_devouring_shroud_4_3: !BOSS_DROP_CHEST { _string: "Jungle-Forged Steel Armor" _icon: icon_chest_2 _type: armor_plate _constitution: 1 _budget_bias: -20 _block: 1 _dodge: 1 }	
 	item the_devouring_shroud_4_4: !BOSS_DROP_HANDS { _string: "Gloves of the Shadow Priest" _icon: icon_cloth_hands_1 _type: armor_cloth _spell_damage: 1 _wisdom: 2 _budget_bias: -10 _spell_crit: 1 }	
 	
 }

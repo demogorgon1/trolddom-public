@@ -1,9 +1,9 @@
 achievement_category .karethi_temple: { string: "Dungeon: Karethi Temple" order_key: 5 }
 
-achievement karethi_temple_boss_1: { sort_key: 1 category: .karethi_temple string: "Boss 1" description: "Slay Boss 1." points: 10 priority: 0 kill_trigger: karethi_temple_boss_1 icon: icon_skull_1 }
-achievement karethi_temple_boss_2: { sort_key: 2 category: .karethi_temple string: "Boss 2" description: "Slay Boss 2." points: 10 priority: 0 kill_trigger: karethi_temple_boss_2 icon: icon_skull_1 }
-achievement karethi_temple_boss_3: { sort_key: 3 category: .karethi_temple string: "Boss 3" description: "Slay Boss 3." points: 10 priority: 0 kill_trigger: karethi_temple_boss_3 icon: icon_skull_1 }
-achievement karethi_temple_boss_4: { sort_key: 4 category: .karethi_temple string: "Boss 4" description: "Slay Boss 4." points: 10 priority: 0 kill_trigger: karethi_temple_boss_4 icon: icon_skull_1 }
-achievement karethi_temple_boss_5: { sort_key: 5 category: .karethi_temple string: "Boss 5" description: "Slay Boss 5." points: 10 priority: 0 kill_trigger: karethi_temple_boss_5 icon: icon_skull_1 }
+achievement karethi_temple_boss_1: { sort_key: 1 category: .karethi_temple string: "Tzahar the Endless Talon" description: "Slay Tzahar the Endless Talon." points: 10 priority: 0 kill_trigger: karethi_temple_boss_1 icon: icon_skull_1 }
+achievement karethi_temple_boss_2: { sort_key: 2 category: .karethi_temple string: "Blaztek" description: "Slay Blaztek." points: 10 priority: 0 kill_trigger: karethi_temple_boss_2 icon: icon_skull_1 }
+achievement karethi_temple_boss_3: { sort_key: 3 category: .karethi_temple string: "Commander Hizua" description: "Slay Commander Hizua." points: 10 priority: 0 kill_trigger: karethi_temple_boss_3 icon: icon_skull_1 }
+achievement karethi_temple_boss_4: { sort_key: 4 category: .karethi_temple string: "Lord Klazcep" description: "Slay Lord Klazcep." points: 10 priority: 0 kill_trigger: karethi_temple_boss_4 icon: icon_skull_1 }
+achievement karethi_temple_boss_5: { sort_key: 5 category: .karethi_temple string: "Nehzura" description: "Slay Nehzura." points: 10 priority: 0 kill_trigger: karethi_temple_boss_5 icon: icon_skull_1 }
 
 achievement karethi_temple: { category: .karethi_temple string: "Karethi Temple" description: "Finish Karethi Temple." points: 20 need_achievements: [ karethi_temple_boss_1 karethi_temple_boss_2 karethi_temple_boss_3 karethi_temple_boss_4 karethi_temple_boss_5 ] icon: icon_karethi_temple }

@@ -845,6 +845,8 @@ map_palette .routes:
 
 map_palette .doodads:
 {
+	!DEFAULT_DOODAD_PALETTE{}
+
 	doodad crates: [ 45 39 100 ]
 	doodad sack: [ 35 100 200 ]
 	doodad table: [ 35 130 200 ]

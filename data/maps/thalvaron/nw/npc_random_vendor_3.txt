@@ -1,0 +1,43 @@
+dialogue_screen .random_vendor_3_dialogue:
+{
+	text: 
+	[	
+		"Interested in some rare items?"
+	]
+	
+	options:
+	[
+		{ goto: $dialogue_screen { random_item_vendor: true } text: "Let me browse your goods." }
+	]
+}
+
+entity thalvaron_random_vendor_3: !NPC
+{
+	_string: "Roger Black"
+	_dialogue_root: $dialogue_root { .random_vendor_3_dialogue: { } }
+	_sprite: man_91
+	_sprite_dead: man_91_dead	
+	_level: 30
+	_creature_type: humanoid
+	_loot_table: .npc
+	_faction: npcs
+	_not_pushable: true	
+	_random_item_vendor: 
+	{ 
+		item_count: 6
+		refresh_ticks: 50 
+		replacement_ticks: 36000 # 1 hour
+		level: 30
+		token_cost: !RANDOM_ITEM_VENDOR_EMBLEM_OF_TRIUMPH_COST{}		             
+		force_bind_when_picked_up: true
+		
+		loot_table: $loot_table
+		{
+			slots:
+			[	
+				{ possibility: { weight: 1 loot_group: world_drops_rare_weapons_and_shields } }
+				{ possibility: { weight: 1 loot_group: world_drops_rare_armor_and_jewelry } }
+			]	
+		}
+	}
+}

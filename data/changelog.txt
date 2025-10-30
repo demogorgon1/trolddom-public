@@ -2,6 +2,24 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.5.3"
+
+	text: "New content:"
+
+	list:
+	[
+		{ text: "Dungeons: The Devouring Shroud and Karethi Temple." }		
+		{ text: "Emblems of Triumph can be spent at new shop in the Trade District of Valoris." }
+	]	
+
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Lots of sprites have been updated." }
+	]
+	
+	#######################################################################################
 	heading: "v0.5.2"
 
 	text: "Issues fixed:"

@@ -23,7 +23,7 @@ loot_table .boss_5:
 	}		
 	
 	item karethi_temple_5_1: !BOSS_DROP_2H_AXE { _string: "Axe of the Void" _icon: icon_axe_11 _strength: 2 _constitution: 1 _budget_bias: -20 _phys_crit: 2 _weapon_cooldown: 38 }			
-	item karethi_temple_5_2: !BOSS_DROP_1H_SWORD { _string: "Blade of Nehzura" _icon: icon_sword_19 _strength: 1 _constitution: 2 _budget_bias: -10 _parry_chance: 1 _weapon_cooldown: 24 }			
+	item karethi_temple_5_2: !BOSS_DROP_1H_SWORD { _string: "Blade of Nehzura" _icon: icon_sword_19 _strength: 1 _constitution: 2 _budget_bias: -10 _parry: 1 _weapon_cooldown: 24 }			
 	item karethi_temple_5_3: !BOSS_DROP_2H_STAFF { _string: "Otherworld Staff" _icon: icon_staff_15 _spell_damage: 3 _wisdom: 2 _constitution: 1 }			
 	item karethi_temple_5_4: !BOSS_DROP_1H_KNIFE { _string: "Emerald Blade Dagger" _icon: icon_knife_6 _strength: 2 _dexterity: 3 _weapon_cooldown: 18 }			
 	item karethi_temple_5_5: !BOSS_DROP_1H_MACE { _string: "Scepter of the Unknown Entity" _icon: icon_mace_18 _wisdom: 2 _healing: 3 _mana_per_5: 1 }			

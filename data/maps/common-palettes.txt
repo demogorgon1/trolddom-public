@@ -134,3 +134,11 @@
 	tile jungle_wall_1_entrance: [ 200 81 181 ]
 	tile jungle_wall_1_entrance_closed: [ 120 242 81 ]
 }
+
+!define DEFAULT_DOODAD_PALETTE
+{
+	doodad potted_plant_1: [ 74 159 102 ]
+	doodad potted_plant_2: [ 174 159 102 ]
+	doodad potted_plant_3: [ 74 59 102 ]
+	doodad potted_plant_4: [ 74 159 202 ]
+}

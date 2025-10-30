@@ -23,7 +23,7 @@ loot_table .boss_2:
 	
 	item karethi_temple_2_1: !BOSS_DROP_LEGS { _string: "Leggings of Blaztek" _icon: icon_mail_pants_1 _type: armor_cloth _wisdom: 3 _healing: 1 _mana_per_5: 2}	
 	item karethi_temple_2_2: !BOSS_DROP_BACK { _string: "Cape of the Twin Guardian" _icon: icon_cape_5 _type: armor_cloth _budget_bias: -10 _spell_crit: 1 _wisdom: 1 _spell_damage: 2 }	
-	item karethi_temple_2_3: !BOSS_DROP_WRISTS { _string: "Slaktek's Bracers" _icon: icon_bracers_3 _type: armor_plate _constitution: 2 _strength: 1 _budget_bias: -20 _block_chance: 1 _parry_chance: 1 }	
+	item karethi_temple_2_3: !BOSS_DROP_WRISTS { _string: "Slaktek's Bracers" _icon: icon_bracers_3 _type: armor_plate _constitution: 2 _strength: 1 _budget_bias: -20 _block: 1 _parry: 1 }	
 	item karethi_temple_2_4: !BOSS_DROP_LEGS { _string: "Twin Guardian Leggings" _icon: icon_mail_pants_1 _type: armor_cloth _spell_damage: 3 _wisdom: 1 }		
 }
 

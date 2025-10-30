@@ -167,6 +167,8 @@ map_portal thalvaron_lich_tower_entrance: {	animation: !DEFAULT_PORTAL_ANIMATION
 map_portal thalvaron_valoris_insurgency_entrance: { animation: !DEFAULT_PORTAL_ANIMATION{} map: valoris_insurgency }
 map_portal thalvaron_tirnwood_thicket_entrance: { animation: !HOLE_PORTAL_ANIMATION{} map: tirnwood_thicket }
 map_portal thalvaron_durgan_urok_entrance: { animation: !HOLE_PORTAL_ANIMATION{} map: durgan_urok }
+map_portal thalvaron_the_devouring_shroud_entrance: { animation: !HOLE_PORTAL_ANIMATION{} map: the_devouring_shroud }
+map_portal thalvaron_karethi_temple_entrance: { animation: !HOLE_PORTAL_ANIMATION{} map: karethi_temple }
 
 map_cliff .rocky_cliff: { cliff_style: rocks elevation: 1 }
 map_cliff .rocky_cliff_ramp: { cliff_style: rocks elevation: 1 ramp: true }
@@ -293,6 +295,8 @@ map_entity_spawn thalvaron_junior: { entity thalvaron_junior: { init_state: defa
 map_entity_spawn thalvaron_father_tobias_door: { entity thalvaron_father_tobias_door: { init_state: default } spawn_timer: { despawn_required: true } }
 map_entity_spawn thalvaron_briana_roft_1_quest_item: { entity thalvaron_briana_roft_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_briana_roft: { entity thalvaron_briana_roft: { init_state: default } }
+map_entity_spawn thalvaron_random_vendor_3: { entity thalvaron_random_vendor_3: { init_state: default } }
+map_entity_spawn thalvaron_random_vendor_4: { entity thalvaron_random_vendor_4: { init_state: default } }
 
 # N
 map_entity_spawn thalvaron_ranger_fremalt: { entity thalvaron_ranger_fremalt: { init_state: default } }
@@ -551,6 +555,8 @@ map_palette .stuff:
 	portal thalvaron_valoris_insurgency_entrance: [ 144 88 92 ]
 	portal thalvaron_tirnwood_thicket_entrance: [ 144 228 92 ]
 	portal thalvaron_durgan_urok_entrance: [ 244 218 92 ]
+	portal thalvaron_the_devouring_shroud_entrance: [ 241 218 92 ]
+	portal thalvaron_karethi_temple_entrance: [ 244 218 2 ]
 	
 	wall stone_wall: [ 128 128 128 ]
 	wall fence: [ 64 128 140 ]
@@ -730,6 +736,8 @@ map_palette .stuff:
 	entity_spawn thalvaron_catacombs_boss_6: [ 120 248 100 ]
 	entity_spawn thalvaron_briana_roft_1_quest_item: [ 40 29 204 ]
 	entity_spawn thalvaron_briana_roft: [ 240 29 204 ]
+	entity_spawn thalvaron_random_vendor_3: [ 30 70 102 ]
+	entity_spawn thalvaron_random_vendor_4: [ 130 170 102 ]
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				
@@ -1311,6 +1319,8 @@ map_palette .routes:
 
 map_palette .doodads:
 {
+	!DEFAULT_DOODAD_PALETTE{}
+
 	doodad crates: [ 45 39 100 ]
 	doodad sack: [ 35 100 200 ]
 	doodad table: [ 35 130 200 ]
@@ -1387,6 +1397,7 @@ map_palette .doodads:
 	doodad wall_sign_generic<"Rare Imports">: [ 231 121 11 ]	
 	doodad wall_sign_generic<"The Valorisian">: [ 231 21 152 ]	
 	doodad sign_generic_right<"Durgan Urok">: [ 127 140 221 ]	
+	doodad wall_sign_generic<"Black Outlet ">: [ 231 171 21 ]	
 }
 
 map_palette .cliffs:

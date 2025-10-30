@@ -34,7 +34,7 @@ item_metrics:
 		[ 28 38 ]
 		[ 29 39 ]
 		[ 30 40 ]
-		[ 30 41 ]
+		[ 31 41 ]
 	]
 	
 	base_cost:
@@ -139,7 +139,7 @@ item_metrics:
 		[ 28 59 ]
 		[ 29 61 ]
 		[ 30 63 ]
-		[ 30 65 ]
+		[ 31 65 ]
 	]
 
 	base_ranged_dps:
@@ -174,7 +174,7 @@ item_metrics:
 		[ 28 59 ]
 		[ 29 61 ]
 		[ 30 63 ]		
-		[ 30 65 ]		
+		[ 31 65 ]		
 	]
 
 	item_type_multipliers armor_cloth: 		{ armor: 1 		cost: 1     stat_budget: 1.0	token_cost: 1 }
