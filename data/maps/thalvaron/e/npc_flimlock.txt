@@ -10,7 +10,7 @@ dialogue_screen .flimlock:
 		{ quest: .flimlock_1 }
 		{ quest: .flimlock_2 }
 		{ quest: .flimlock_3 }
-		# { quest: .flimlock_4 } FIXME
+		{ quest: .flimlock_4 }
 		{ quest<completion_only>: .crust_elemental_quest_item }
 		{ quest<completion_only>: .zislo_1 }
 	]
@@ -332,34 +332,155 @@ entity thalvaron_flimlock_3_portal_return:
 ############################################################
 # Quest 4
 
-# FIXME: quest leading into the devouring shroud
+objective .flimlock_4:
+{
+	string: "Water Sample Collected"
+	
+	maps: [ the_devouring_shroud ]
+	
+	manual_counter:
+	{
+		count: 1
+	}
+}
 
+item .flimlock_4_quest_item:
+{
+	binds: when_picked_up
+	type: miscellaneous
+	flags: [ unique not_sellable ]
+	item_level: 30
+	icon: icon_green_bottle		
+	string: "Water Vial"
+	use_ability: $ability [ icon string ]
+	{
+		description: "Collect pungent water from the Devouring Shroud."
+		flags: [ target_self target_aoe target_aoe_hostile item ]
+		cooldowns: [ global ]	
+		cooldown: $cooldown { duration: 40 }
+		states: [ default ]
+		sound_effects: !SOUND_DRINK_POTION{}	
+		aoe_radius: 8
+		aoe_cap: 1
+		aoe_requirement target<must_be_type>: { id: thalvaron_flimlock_4_quest_item }
+		cast_time: 20	
+		direct_effect simple<activate_trigger>: { }
+	}	
+}
+
+entity thalvaron_flimlock_4_quest_item:
+{
+	components:
+	{
+		position: { }		
+		visibility: { }		
+		trigger: { lock_out_ticks: 6000 trigger_manual_objective: .flimlock_4 }
+		combat_public: { faction: monsters }
+	}
+}
+
+{
+	${ _level: 30 _rarity: rare }
+	
+	item .flimlock_4_a: !QUEST_REWARD_TRINKET
+	{ 
+		_string: "Flimlock's Vial of Power" _icon: icon_purple_potion_2
+		_item_aura: $aura
+		{
+			string: "Flimlock's Vial of Power" icon: icon_purple_potion_2 				
+			description: "Your offensive spells increase your spell damage by 9 for 10 seconds. Stacks up to 6 times."
+			type: hidden
+			flags: [ item silent ]
+			
+			aura_effect combat_event_trigger: 
+			{ 
+				combat_event<source>: [ hit critical ]
+				combat_event_ability_mask: [ spell offensive ]
+				ability<self>: $ability [ icon string ]
+				{
+					states: [ default in_combat ]
+					direct_effect apply_aura:
+					{
+						aura: $aura [ icon string ]
+						{
+							type: buff
+							duration: 100
+							flags: [ unique magic silent ]
+							max_stack: 6
+							stat_modifiers: { spell_damage: { add: 9 } }							
+						}
+					}
+				}
+			}
+		}	
+	}
+	
+	item .flimlock_4_b: !QUEST_REWARD_TRINKET
+	{ 
+		_string: "Flimlock's Vial of the Beast" _icon: icon_red_potion_2
+		_item_aura: $aura
+		{
+			string: "Flimlock's Vial of the Beast" icon: icon_red_potion_2 				
+			description: "Your melee attacks increase your Dexterity by 9 for 10 seconds. Stacks up to 6 times."
+			type: hidden
+			flags: [ item silent ]
+			
+			aura_effect combat_event_trigger: 
+			{ 
+				combat_event<source>: [ hit critical ]
+				combat_event_ability_mask: [ melee offensive ]
+				ability<self>: $ability [ icon string ]
+				{
+					states: [ default in_combat ]
+					direct_effect apply_aura:
+					{
+						aura: $aura [ icon string ]
+						{
+							type: buff
+							duration: 100
+							flags: [ unique magic silent ]
+							max_stack: 6
+							stat_modifiers: { dexterity: { add: 9 } }							
+						}
+					}
+				}
+			}
+		}	
+	}	
+}
+	
 quest .flimlock_4:
 {
-	string: "."
+	string: "The Devouring Shroud"
 
 	text:
 	[
-		"."
+		"Venture into the Devouring Shroud, find the pungent water, sample it, and return to Flimlock."
 	]
 	
 	description: 
 	[
-		"."
+		"I've finally managed to figure out what Zislo wanted to tell me.\n\n"
+		"You know, the proud Thalyssian lizard people reside deep in the jungle to the east, inside the Devouring Shroud and beyond. Most of them don't like outsiders, so you should be careful"
+		"if you ever encounter any of them. Except Zislo, of course, he's great. Anyway, I could smell from the statue that he has found some exceptionally pungent water deep inside the Devouring Shroud."
+		"He wants me to run some experiments on it. You should know the drill by now. Take this vial, fill it with the water, and return it to me.\n\n"  
+		"As far as I could understand on Zislo, the puddle of water is inside a cave. Where exactly I can't tell. Go into the Devouring Shroud and try to locate it."
 	]
 
 	progress:
 	[
-		"."
+		"Can't find it? Follow your nose."
 	]
 	
 	completion:
 	[
-		"."
+		"How wonderful! I'll commence the experiments immediately!"
 	]
 	
-	reward_xp_multiplier: 0.25
-	reward_cash_multiplier: 0.25
+	type: dungeon
+	objectives: [ .flimlock_4 ]
 	level: 30
 	prerequisites: [ .zislo_1 ]
+	reward_one_item: [ .flimlock_4_a .flimlock_4_b ]
+	quest_items: [ .flimlock_4_quest_item ]
 }

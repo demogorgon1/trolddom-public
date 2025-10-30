@@ -238,7 +238,7 @@ item item_earth_core:
 {
 	type: miscellaneous
 	item_level: 10
-	level_range: [ 10 20 ]
+	level_range: [ 10 30 ]
 	icon: icon_earth_1
 	rarity: uncommon
 	string: "Earth Core"
@@ -251,7 +251,7 @@ item item_enchanted_dirt:
 {
 	type: miscellaneous
 	item_level: 14
-	level_range: [ 14 20 ]
+	level_range: [ 14 30 ]
 	icon: icon_earth_1
 	rarity: uncommon
 	string: "Enchanted Dirt"

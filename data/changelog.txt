@@ -17,6 +17,8 @@ changelog:
 	list:
 	[
 		{ text: "Lots of sprites have been updated." }
+		{ text: "Shrines and chests can be found in the new zones." }
+		{ text: "Zislo and Urgon Lark quest lines continue." }
 	]
 	
 	#######################################################################################

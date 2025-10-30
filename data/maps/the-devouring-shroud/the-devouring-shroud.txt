@@ -9,6 +9,8 @@ map_portal .exit:
 	spawn: thalvaron_the_devouring_shroud_exit
 }
 
+zone .pungent_cave: { string: "Pungent Cave" }
+
 route the_devouring_shroud_default_patrol: 
 { 
 }
@@ -78,6 +80,7 @@ map_cliff .dummy_cliff_7_ramp: { cliff_style: dummy elevation: 7 ramp: true }
 map_palette .tiles: !DEFAULT_TILE_PALETTE{}
 
 map_entity_spawn .door: { entity .door: { init_state: default } spawn_timer: { despawn_required: true } }
+map_entity_spawn .flimlock_4_quest_item: { entity thalvaron_flimlock_4_quest_item: { init_state: default } } # No respawn needed
 
 map_palette .stuff:
 {
@@ -117,6 +120,7 @@ map_palette .stuff:
 	entity_spawn .boss_5_caster_trash: [ 178 29 99 ]
 	
 	entity_spawn .door: [ 10 49 121 ] 
+	entity_spawn .flimlock_4_quest_item: [ 100 149 221 ]
 }
 
 map_palette .levels:
@@ -182,6 +186,8 @@ map_palette .subzones:
 	sub_zone .boss_3: [ 183 175 255 ]
 	sub_zone .boss_4: [ 255 175 227 ]
 	sub_zone .boss_5: [ 212 132 56 ]
+	
+	sub_zone .pungent_cave: [ 186 43 154 ]
 }
 
 map_palette .cliffs:

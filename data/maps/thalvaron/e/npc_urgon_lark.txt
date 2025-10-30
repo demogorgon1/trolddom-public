@@ -10,6 +10,7 @@ dialogue_screen .urgon_lark:
 		{ quest: .urgon_lark_1 }
 		{ quest: .urgon_lark_2 }
 		{ quest: .urgon_lark_3 }
+		{ quest: thalvaron_urgon_lark_4 }
 	]
 }
 
@@ -185,3 +186,63 @@ quest .urgon_lark_3:
 	level: 30
 }
                                                   
+############################################################
+# Quest 4
+
+loot_group thalvaron_urgon_lark_4_quest_item: { }
+
+item .urgon_lark_4_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ thalvaron_urgon_lark_4_quest_item ]		
+	string: "Commander Hizua's Shield" 
+	icon: icon_shield_10
+	item_level: 30
+	quest: thalvaron_urgon_lark_4
+	flags: [ not_sellable unique ]
+}
+
+objective .urgon_lark_4:
+{
+	string: "Commander Hizua's Shield"
+	collect_items: { item: .urgon_lark_4_quest_item count: 1 }
+}
+
+{
+	${ _level: 30 _rarity: rare }
+	item .urgon_lark_4_a: !QUEST_REWARD_FINGER{ _string: "Ring of Unrelenting Strength" _icon: icon_ring_1 _strength: 1 }
+	item .urgon_lark_4_b: !QUEST_REWARD_FINGER{ _string: "Ring of Unrelenting Wisdom" _icon: icon_ring_2 _wisdom: 1 }
+}
+
+quest thalvaron_urgon_lark_4:
+{
+	string: "Commander Hizua"
+
+	text:
+	[
+		"Venture deeper into the the Temple of Karethi, locate Commander Hizua, and return his shield to Urgon Lark."
+	]
+	
+	description: 
+	[
+		"The Temple of Karethi is a large complex and deeper inside you'll encounter more dangerous types of undeath. One of these monstrosities are the remains of the once great"
+		"Command Hizua, leader of the Emerald Phalanx. He is said to possess a shield with unique properties. Properties the order of the Light is very interested in. I need you to"
+		"locate this monster, destroy it, and return its shield to me."
+	]
+
+	progress:
+	[
+		"Yeah?"
+	]
+	
+	completion:
+	[
+		"You survived? Excellent. You work here is over."
+	]
+	
+	objectives: [ .urgon_lark_4 ]
+	prerequisites: [ .urgon_lark_3 ]
+	level: 30
+	type: dungeon
+	reward_one_item: [ .urgon_lark_4_a .urgon_lark_4_b ]
+}

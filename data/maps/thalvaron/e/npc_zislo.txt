@@ -40,9 +40,6 @@ entity thalvaron_zizlo: !NPC
 ############################################################
 # Quest 1
 
-# FIXME quest
-# bring item/message to npc_flimlock 
-
 item .zislo_1_quest_item:
 {
 	binds: when_picked_up
