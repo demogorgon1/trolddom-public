@@ -53,6 +53,7 @@ namespace tpublic
 			ID_CANNOT_DO_THAT_INDOOR,
 			ID_CANNOT_DO_THAT_MOUNTED,
 			ID_ALREADY_HAS_ITEM,
+			ID_SKILL_LEVEL_NOT_HIGH_ENOUGH,
 
 			NUM_IDS
 		};
@@ -116,6 +117,7 @@ namespace tpublic
 			{ "Can't do that while indoor!" },
 			{ "Can't do that while mounted!" },
 			{ "Already has item!" },
+			{ "Skill level not high enough! "},
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

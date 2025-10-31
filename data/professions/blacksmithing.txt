@@ -94,6 +94,7 @@ ability craft_cindralite_ingot: !BLACKSMITHING_CRAFT
 	_skill: 60
 	_requires_furnace: true
 }
+
 #####################################################
 # Copper Bracers
 

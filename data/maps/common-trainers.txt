@@ -34,6 +34,7 @@
 	train_ability: craft_azuryte_ingot
 	train_ability: craft_mithril_ingot
 	train_ability: craft_brontium_ingot
+	train_ability: craft_cindralite_ingot
 	train_ability: craft_copper_bracers
 	train_ability: craft_copper_belt
 	train_ability: craft_copper_gauntlets

@@ -134,7 +134,7 @@ ability craft_healing_potion: !ALCHEMY_CRAFT
 	_item: consumable_healing_potion
 	_produce: { consumable_healing_potion: 1 } 
 	_materials: { item_dewleaf: 4 }
-	_skill: 40
+	_skill: 35
 }
 
 ability .learn_healing_potion:
@@ -176,7 +176,7 @@ ability craft_mana_potion: !ALCHEMY_CRAFT
 	_item: consumable_mana_potion
 	_produce: { consumable_mana_potion: 1 } 
 	_materials: { item_mistflower: 4 }
-	_skill: 40
+	_skill: 35
 }
 
 ability .learn_mana_potion:
@@ -218,7 +218,7 @@ ability craft_spell_juice: !ALCHEMY_CRAFT
 	_item: consumable_spell_juice
 	_produce: { consumable_spell_juice: 1 } 
 	_materials: { item_mistflower: 5 }
-	_skill: 45
+	_skill: 40
 }
 
 ability .learn_spell_juice:
@@ -260,7 +260,7 @@ ability craft_rejuvenation_potion: !ALCHEMY_CRAFT
 	_item: consumable_rejuvenation_potion
 	_produce: { consumable_rejuvenation_potion: 1 } 
 	_materials: { item_mistflower: 4 item_corpse_worm: 2 }
-	_skill: 50
+	_skill: 45
 }
 
 ability .learn_rejuvenation_potion:
@@ -302,7 +302,7 @@ ability craft_power_potion: !ALCHEMY_CRAFT
 	_item: consumable_power_potion
 	_produce: { consumable_power_potion: 1 } 
 	_materials: { item_mistflower: 4 item_bone_fragments: 2 }
-	_skill: 50
+	_skill: 45
 }
 
 ability .learn_power_potion:
@@ -344,7 +344,7 @@ ability craft_strong_healing_potion: !ALCHEMY_CRAFT
 	_item: consumable_strong_healing_potion
 	_produce: { consumable_strong_healing_potion: 1 } 
 	_materials: { item_sylmarel: 3 item_roots: 1  }
-	_skill: 65
+	_skill: 60
 }
 
 ability .learn_strong_healing_potion:
@@ -386,7 +386,7 @@ ability craft_strong_mana_potion: !ALCHEMY_CRAFT
 	_item: consumable_strong_mana_potion
 	_produce: { consumable_strong_mana_potion: 1 } 
 	_materials: { item_frostbloom: 3 item_bubbling_slime: 1 }
-	_skill: 55
+	_skill: 50
 }
 
 ability .learn_strong_mana_potion:
@@ -428,7 +428,7 @@ ability craft_invisibility_potion: !ALCHEMY_CRAFT
 	_item: consumable_invisibility_potion
 	_produce: { consumable_invisibility_potion: 1 } 
 	_materials: { item_ashveil: 3 item_ectoplasm: 1 item_spirit_dust: 1 }
-	_skill: 70
+	_skill: 65
 }
 
 ability .learn_invisibility_potion:
@@ -470,7 +470,7 @@ ability craft_rage_potion: !ALCHEMY_CRAFT
 	_item: consumable_rage_potion
 	_produce: { consumable_rage_potion: 1 } 
 	_materials: { item_ashveil: 2 item_crab_claw_2: 1 }
-	_skill: 75
+	_skill: 70
 }
 
 ability .learn_rage_potion:
@@ -512,7 +512,7 @@ ability craft_fire_protection_potion: !ALCHEMY_CRAFT
 	_item: consumable_fire_protection_potion
 	_produce: { consumable_fire_protection_potion: 1 } 
 	_materials: { item_sand_orchid: 3 item_enchanted_coal: 1 }
-	_skill: 80
+	_skill: 75
 }
 
 item recipe_fire_protection_potion:
@@ -550,7 +550,7 @@ ability craft_frost_protection_potion: !ALCHEMY_CRAFT
 	_item: consumable_frost_protection_potion
 	_produce: { consumable_frost_protection_potion: 1 } 
 	_materials: { item_sand_orchid: 3 item_roots: 1 }
-	_skill: 80
+	_skill: 75
 }
 
 item recipe_frost_protection_potion:
@@ -588,7 +588,7 @@ ability craft_arcane_protection_potion: !ALCHEMY_CRAFT
 	_item: consumable_arcane_protection_potion
 	_produce: { consumable_arcane_protection_potion: 1 } 
 	_materials: { item_sand_orchid: 3 item_lizard_tail: 1 }
-	_skill: 80
+	_skill: 75
 }
 
 item recipe_arcane_protection_potion:
@@ -626,7 +626,7 @@ ability craft_unholy_protection_potion: !ALCHEMY_CRAFT
 	_item: consumable_unholy_protection_potion
 	_produce: { consumable_unholy_protection_potion: 1 } 
 	_materials: { item_sand_orchid: 3 item_demon_teeth: 1 }
-	_skill: 80
+	_skill: 75
 }
 
 item recipe_unholy_protection_potion:
@@ -664,7 +664,7 @@ ability craft_holy_protection_potion: !ALCHEMY_CRAFT
 	_item: consumable_holy_protection_potion
 	_produce: { consumable_holy_protection_potion: 1 } 
 	_materials: { item_sand_orchid: 3 item_demon_fur: 1 }
-	_skill: 80
+	_skill: 75
 }
 
 item recipe_holy_protection_potion:
@@ -702,7 +702,7 @@ ability craft_poison_protection_potion: !ALCHEMY_CRAFT
 	_item: consumable_poison_protection_potion
 	_produce: { consumable_poison_protection_potion: 1 } 
 	_materials: { item_sand_orchid: 3 item_large_poison_sack: 1 }
-	_skill: 80
+	_skill: 75
 }
 
 item recipe_poison_protection_potion:

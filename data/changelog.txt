@@ -2,6 +2,19 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.5.4"
+
+	text: "Issues Fixed:"
+	
+	list:
+	[
+		{ text: "Blacksmithing trainers now teach the smelting of Cindralite Ore." }
+		{ text: "Fixed Kareth Desert Tomb names." }
+		{ text: "Fixed bug where you could learn higher skill profession recipes than intended." } 
+		{ text: "Profession recipes no longer show wrong skill requirement." } 
+	]
+
+	#######################################################################################
 	heading: "v0.5.3"
 
 	text: "New content:"

@@ -26,28 +26,32 @@ namespace tpublic
 
 			// DirectEffectBase implementation
 			void			FromSource(
-								const SourceNode*				aSource) override;
+								const SourceNode*					aSource) override;
 			void			ToStream(
-								IWriter*						aStream) const override;
+								IWriter*							aStream) const override;
 			bool			FromStream(
-								IReader*						aStream) override;
+								IReader*							aStream) override;
+			void			Validate(
+								const DataErrorHandling::DebugInfo&	aDebugInfo,
+								const Manifest*						aManifest,
+								const Data::Ability*				aAbility) const override;			
 			Result			Resolve(
-								int32_t							aTick,
-								std::mt19937&					aRandom,
-								const Manifest*					aManifest,
-								CombatEvent::Id					aId,
-								uint32_t						aAbilityId,
-								const SourceEntityInstance&		aSourceEntityInstance,
-								EntityInstance*					aSource,
-								EntityInstance*					aTarget,
-								const Vec2&						aAOETarget,
-								const ItemInstanceReference&	aItem,
-								IResourceChangeQueue*			aCombatResultQueue,
-								IAuraEventQueue*				aAuraEventQueue,
-								IEventQueue*					aEventQueue,
-								const IWorldView*				aWorldView) override;
+								int32_t								aTick,
+								std::mt19937&						aRandom,
+								const Manifest*						aManifest,
+								CombatEvent::Id						aId,
+								uint32_t							aAbilityId,
+								const SourceEntityInstance&			aSourceEntityInstance,
+								EntityInstance*						aSource,
+								EntityInstance*						aTarget,
+								const Vec2&							aAOETarget,
+								const ItemInstanceReference&		aItem,
+								IResourceChangeQueue*				aCombatResultQueue,
+								IAuraEventQueue*					aAuraEventQueue,
+								IEventQueue*						aEventQueue,
+								const IWorldView*					aWorldView) override;
 			uint32_t		GetToolTipItemId(
-								const Manifest*					aManifest) const override;
+								const Manifest*						aManifest) const override;
 
 			// Public data
 			uint32_t			m_professionId = 0;

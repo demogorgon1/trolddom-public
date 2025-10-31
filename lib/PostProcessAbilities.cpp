@@ -41,6 +41,12 @@ namespace tpublic
 				TP_VERIFY(false, aAbility->m_debugInfo, "Invalid data reference.");
 				break;
 			}
+
+			if(aAbility->m_debugInfo)
+			{				
+				for (const std::unique_ptr<Data::Ability::DirectEffectEntry>& directEffect : aAbility->m_directEffects)
+					directEffect->m_directEffectBase->Validate(aAbility->m_debugInfo.value(), aManifest, aAbility);
+			}
 		}
 
 	}
@@ -52,12 +58,35 @@ namespace tpublic
 		Run(
 			Manifest* aManifest)
 		{
-			aManifest->GetContainer<Data::Ability>()->ForEach([aManifest](
-				Data::Ability* aAbility)
+			size_t errorCount = 0;
+
 			{
-				_PostProcessAbility(aManifest, aAbility);
-				return true;
-			});
+				DataErrorHandling::ScopedErrorCallback errorCallback([&errorCount](
+					const char* aError)
+				{
+					printf("\x1B[31mERROR: %s\x1B[37m\n", aError);
+					errorCount++;
+
+					throw int(0); // Need to abort error handling, otherwise the process will exit on first error
+				});
+
+				aManifest->GetContainer<Data::Ability>()->ForEach([aManifest](
+					Data::Ability* aAbility)
+				{
+					try
+					{
+						_PostProcessAbility(aManifest, aAbility);
+					}
+					catch(int /*e*/)
+					{
+						// Do nothing
+					}
+					return true;
+				});
+			}
+
+
+			TP_CHECK(errorCount == 0, "%zu error%s encountered while processing abilities.", errorCount, errorCount == 1 ? "" : "s");
 		}
 
 	}
