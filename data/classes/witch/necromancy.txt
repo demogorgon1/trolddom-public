@@ -174,7 +174,7 @@ particle_system corpse_explosion:
 ability corpse_explosion_tick:
 {
 	string: "Corpse Explosion"
-	flags: [ target_self target_aoe target_aoe_hostile ]
+	flags: [ target_aoe target_aoe_hostile ]
 	delay: 3
 	aoe_radius: 2
 	target_particle_system: corpse_explosion
@@ -227,6 +227,7 @@ ability corpse_explosion:
 	cooldowns: [ global spell_unholy_lockout ]
 	flags: [ spell target_aoe target_aoe_always_self interruptable ]
 	aoe_radius: 0
+	aoe_cap: 1
 	states: [ default in_combat ]
 	icon: icon_corpse_explosion
 	resource_cost mana: 20
@@ -242,7 +243,7 @@ ability corpse_explosion:
 		must_have_one_at_target:
 		[
 			{
-				creature_types: [ undead humanoid beast ]
+				creature_types: [ undead humanoid beast demon ]
 				entity_states: [ dead ]
 			}
 			
@@ -532,7 +533,7 @@ ability raise_dead:
 	description: "Raises a dead humanoid or undead to fight for you."
 	range: 7
 	cooldowns: [ global spell_unholy_lockout ]
-	flags: [ spell target_aoe target_aoe_always_self interruptable minion_summon class_minion_summon ]
+	flags: [ spell target_aoe interruptable minion_summon class_minion_summon ]
 	aoe_radius: 0
 	states: [ default in_combat ]
 	icon: icon_raise_dead

@@ -2,6 +2,17 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v0.5.5"
+
+	text: "Issues Fixed:"
+	
+	list:
+	[
+		{ text: "Level 29+ items can now be disenchanted like intended." }
+		{ text: "Fixed bug where some targeted AOE abilities didn't work." }
+	]
+
+	#######################################################################################
 	heading: "v0.5.4"
 
 	text: "Issues Fixed:"

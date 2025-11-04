@@ -293,7 +293,7 @@ ability void_lightning_tick:
 {
 	string: "Void Lightning"
 	range: 2	
-	flags: [ target_self target_aoe target_aoe_hostile ]
+	flags: [ target_aoe target_aoe_hostile ]
 	states: [ default in_combat ]
 	icon: icon_void_lightning
 	delay: 3

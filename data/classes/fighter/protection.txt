@@ -361,7 +361,7 @@ ability banner_of_command_tick:
 {
 	string: "Banner of Command"
 	range: 8	
-	flags: [ target_self target_aoe target_aoe_hostile target_aoe_friendly target_aoe_always_self ]
+	flags: [ target_aoe target_aoe_hostile target_aoe_friendly ]
 	states: [ default in_combat ]
 	icon: icon_banner
 	delay: 3
