@@ -405,7 +405,7 @@ entity thalvaron_flimlock_4_quest_item:
 						{
 							type: buff
 							duration: 100
-							flags: [ unique magic silent ]
+							flags: [ unique magic silent always_show_timer ]
 							max_stack: 6
 							stat_modifiers: { spell_damage: { add: 9 } }							
 						}
@@ -438,7 +438,7 @@ entity thalvaron_flimlock_4_quest_item:
 						{
 							type: buff
 							duration: 100
-							flags: [ unique magic silent ]
+							flags: [ unique magic silent always_show_timer ]
 							max_stack: 6
 							stat_modifiers: { dexterity: { add: 9 } }							
 						}
