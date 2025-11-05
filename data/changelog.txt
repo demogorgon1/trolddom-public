@@ -2,6 +2,12 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v1.0.0"
+	
+	text: "Finally leaving Early Access and entering the next phase of the game!"	
+	text: "\n\n"
+
+	#######################################################################################
 	heading: "v0.5.5"
 
 	text: "Issues Fixed:"
