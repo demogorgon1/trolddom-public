@@ -1,5 +1,5 @@
-loot_group kareth_common: {}
-loot_group kareth_uncommon: {}
+loot_group kareth_common: { oracle: { everywhere: true } }
+loot_group kareth_uncommon: { oracle: { everywhere: true } }
 
 loot_table .kareth_zone_drops: 
 {
@@ -13,7 +13,7 @@ loot_table .kareth_zone_drops:
 	]	
 }
 
-loot_group thallysian_wilds_uncommon: {}
+loot_group thallysian_wilds_uncommon: { oracle: { everywhere: true } }
 
 loot_table .thallysian_wilds_zone_drops: 
 {

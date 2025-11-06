@@ -209,10 +209,36 @@ namespace tpublic
 							_GetPossibleLoot(aManifest, level, mapLootTableId, creatureTypeId, elite, reagentTagId, aItemMap, loot);
 
 						if (worldInfoMapEntry.m_zoneId != 0)
-							_GetPossibleLoot(aManifest, level, aManifest->GetById<Data::Zone>(worldInfoMapEntry.m_zoneId)->m_lootTableId, creatureTypeId, elite, reagentTagId, aItemMap, loot);
+						{								
+							const Data::Zone* positionZone = aManifest->GetById<Data::Zone>(worldInfoMapEntry.m_zoneId);
+
+							for(;;)
+							{
+								if (positionZone->m_lootTableId != 0)
+									_GetPossibleLoot(aManifest, level, positionZone->m_lootTableId, creatureTypeId, elite, reagentTagId, aItemMap, loot);
+
+								if(positionZone->m_topZoneId == 0)
+									break;
+
+								positionZone = aManifest->GetById<Data::Zone>(positionZone->m_topZoneId);
+							}
+						}
 
 						if (worldInfoMapEntry.m_subZoneId != 0)
-							_GetPossibleLoot(aManifest, level, aManifest->GetById<Data::Zone>(worldInfoMapEntry.m_subZoneId)->m_lootTableId, creatureTypeId, elite, reagentTagId, aItemMap, loot);
+						{
+							const Data::Zone* positionZone = aManifest->GetById<Data::Zone>(worldInfoMapEntry.m_subZoneId);
+
+							for (;;)
+							{
+								if (positionZone->m_lootTableId != 0)
+									_GetPossibleLoot(aManifest, level, positionZone->m_lootTableId, creatureTypeId, elite, reagentTagId, aItemMap, loot);
+
+								if (positionZone->m_topZoneId == 0)
+									break;
+
+								positionZone = aManifest->GetById<Data::Zone>(positionZone->m_topZoneId);
+							}
+						}
 
 						for (const Loot& t : loot)
 						{

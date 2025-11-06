@@ -9,7 +9,7 @@ map_portal .exit:
 	spawn: thalvaron_the_devouring_shroud_exit
 }
 
-zone .pungent_cave: { string: "Pungent Cave" }
+zone .pungent_cave: { string: "Pungent Cave" preposition: "in the" }
 
 route the_devouring_shroud_default_patrol: 
 { 

@@ -61,6 +61,9 @@ namespace tpublic
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
 				});
+
+				if(!m_string.empty())
+					TP_VERIFY(!m_preposition.empty(), aSource->m_debugInfo, "Missing zone preposition.");
 			}
 
 			void	
