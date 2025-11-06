@@ -18,48 +18,48 @@ loot_group world_drops_rare_recipe_random: {}
 loot_group world_drops_uncommon_recipe: {}
 loot_group world_drops_rare_recipe: {}
 
-loot_group skeletons: {}
-loot_group skeletons_uncommon: {}
-loot_group zombies: {}
-loot_group zombies_uncommon: {}
-loot_group wolves: {}
-loot_group wolves_uncommon: {}
-loot_group deer: {}
-loot_group deer_uncommon: {}
-loot_group bears: {}
-loot_group bears_uncommon: {}
-loot_group boars: {}
-loot_group boars_uncommon: {}
-loot_group crabs: {}
-loot_group crabs_uncommon: {}
-loot_group earth_elementals: {}
-loot_group earth_elementals_uncommon: {}
-loot_group owlbears: {}
-loot_group owlbears_uncommon: {}
-loot_group wood_elementals: {}
-loot_group wood_elementals_uncommon: {}
-loot_group lizards: {}
-loot_group lizards_uncommon: {}
-loot_group oozes: {}
-loot_group oozes_uncommon: {}
-loot_group lions: {}
-loot_group lions_uncommon: {}
-loot_group demons: {}
-loot_group demons_uncommon: {}
-loot_group nature_elementals: {}
-loot_group nature_elementals_uncommon: {}
-loot_group spiders: {}
-loot_group spiders_uncommon: {}
-loot_group birds: {}
-loot_group birds_uncommon: {}
-loot_group snakes: {}
-loot_group snakes_uncommon: {}
-loot_group crocodiles: {}
-loot_group crocodiles_uncommon: {}
-loot_group ghosts: {}
-loot_group ghosts_uncommon: {}
-loot_group fire_elementals: {}
-loot_group fire_elementals_uncommon: {}
+loot_group skeletons: { oracle: { source_plural: "skeletons" } }
+loot_group skeletons_uncommon: { oracle: { source_plural: "skeletons" } }
+loot_group zombies: { oracle: { source_plural: "zombies and ghouls" } }
+loot_group zombies_uncommon: { oracle: { source_plural: "zombies and ghouls" } }
+loot_group wolves: { oracle: { source_plural: "wolves" } }
+loot_group wolves_uncommon: { oracle: { source_plural: "wolves" } }
+loot_group deer: { oracle: { source_plural: "deer" } }
+loot_group deer_uncommon: { oracle: { source_plural: "deer" } }
+loot_group bears: { oracle: { source_plural: "bears" } }
+loot_group bears_uncommon: { oracle: { source_plural: "bears" } }
+loot_group boars: { oracle: { source_plural: "boars" } }
+loot_group boars_uncommon: { oracle: { source_plural: "boars" } }
+loot_group crabs: { oracle: { source_plural: "crabs" } }
+loot_group crabs_uncommon: { oracle: { source_plural: "crabs" } }
+loot_group earth_elementals: { oracle: { source_plural: "earth elementals" } }
+loot_group earth_elementals_uncommon: { oracle: { source_plural: "earth_elementals" } }
+loot_group owlbears: { oracle: { source_plural: "owlbears" } }
+loot_group owlbears_uncommon: { oracle: { source_plural: "owlbears" } }
+loot_group wood_elementals: { oracle: { source_plural: "wood elementals" } }
+loot_group wood_elementals_uncommon: { oracle: { source_plural: "wood elementals" } }
+loot_group lizards: { oracle: { source_plural: "lizards" } }
+loot_group lizards_uncommon: { oracle: { source_plural: "lizards" } }
+loot_group oozes: { oracle: { source_plural: "oozes" } }
+loot_group oozes_uncommon: { oracle: { source_plural: "oozes" } }
+loot_group lions: { oracle: { source_plural: "giant casts" } }
+loot_group lions_uncommon: { oracle: { source_plural: "giant cats" } }
+loot_group demons: { oracle: { source_plural: "demons" } }
+loot_group demons_uncommon: { oracle: { source_plural: "demons" } }
+loot_group nature_elementals: { oracle: { source_plural: "nature elementals" } }
+loot_group nature_elementals_uncommon: { oracle: { source_plural: "nature elementals" } }
+loot_group spiders: { oracle: { source_plural: "spiders" } }
+loot_group spiders_uncommon: { oracle: { source_plural: "spiders" } }
+loot_group birds: { oracle: { source_plural: "birds" } }
+loot_group birds_uncommon: { oracle: { source_plural: "birds" } }
+loot_group snakes: { oracle: { source_plural: "snakes" } }
+loot_group snakes_uncommon: { oracle: { source_plural: "snakes" } }
+loot_group crocodiles: { oracle: { source_plural: "crocodiles" } }
+loot_group crocodiles_uncommon: { oracle: { source_plural: "crocodiles" } }
+loot_group ghosts: { oracle: { source_plural: "ghosts" } }
+loot_group ghosts_uncommon: { oracle: { source_plural: "ghosts" } }
+loot_group fire_elementals: { oracle: { source_plural: "fire elementals" } }
+loot_group fire_elementals_uncommon: { oracle: { source_plural: "fire elementals" } }
 
 !define WORLD_DROPS
 {

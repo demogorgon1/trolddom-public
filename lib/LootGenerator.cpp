@@ -263,7 +263,7 @@ namespace tpublic
 
 			if(entryCount > 0)
 			{
-				tpublic::UniformDistribution<uint32_t> distribution(1, accumWeight);
+				UniformDistribution<uint32_t> distribution(1, accumWeight);
 				uint32_t possibilityRoll = distribution(aRandom);
 				uint32_t lootGroupId = 0;
 				uint32_t quantity = 0;
@@ -295,7 +295,7 @@ namespace tpublic
 						{
 							size_t totalItemCount = group->m_defaultLevelBucket.m_itemIds.size() + levelBucket->m_itemIds.size();
 							assert(totalItemCount > 0);
-							tpublic::UniformDistribution<size_t> d(0, totalItemCount - 1);
+							UniformDistribution<size_t> d(0, totalItemCount - 1);
 							size_t roll = d(aRandom);
 							if (roll < group->m_defaultLevelBucket.m_itemIds.size())
 								itemId = group->m_defaultLevelBucket.m_itemIds[roll];
@@ -304,14 +304,14 @@ namespace tpublic
 						}
 						else if (group->m_defaultLevelBucket.m_itemIds.size() > 0)
 						{
-							tpublic::UniformDistribution<size_t> d(0, group->m_defaultLevelBucket.m_itemIds.size() - 1);
+							UniformDistribution<size_t> d(0, group->m_defaultLevelBucket.m_itemIds.size() - 1);
 							size_t roll = d(aRandom);
 							itemId = group->m_defaultLevelBucket.m_itemIds[roll];
 						}
 
 						if (itemId != 0)
 						{
-							tpublic::ItemInstance itemInstance;
+							ItemInstance itemInstance;
 							itemInstance.m_itemId = itemId;
 							itemInstance.m_quantity = quantity;
 							aItemCallback(itemInstance, lootCooldownId);
@@ -319,6 +319,31 @@ namespace tpublic
 					}
 				}
 			}
+		}
+	}
+
+	void			
+	LootGenerator::QueryLootGroup(
+		uint32_t									aLootGroupId,
+		uint32_t									aLevel,
+		ItemCallback								aItemCallback) const
+	{
+		GroupTable::const_iterator i = m_groups.find(aLootGroupId);
+		if (i != m_groups.end())
+		{
+			const Group* group = i->second.get();
+			const LevelBucket* levelBucket = aLevel != 0 ? group->GetLevelBucket(aLevel) : NULL;
+
+			if (levelBucket != NULL)
+			{
+				for(uint32_t itemId : levelBucket->m_itemIds)
+					aItemCallback(ItemInstance{ itemId }, 0);
+			}
+			else if (group->m_defaultLevelBucket.m_itemIds.size() > 0)
+			{
+				for (uint32_t itemId : group->m_defaultLevelBucket.m_itemIds)
+					aItemCallback(ItemInstance{ itemId }, 0);
+			}		
 		}
 	}
 

@@ -103,9 +103,140 @@ namespace tpublic
 				}
 
 				// Public data
-				Stat::Id			m_id = Stat::Id(0);
-				bool				m_isBudgetWeight = false;
-				uint32_t			m_value = 0;
+				Stat::Id				m_id = Stat::Id(0);
+				bool					m_isBudgetWeight = false;
+				uint32_t				m_value = 0;
+			};
+
+			struct Zone
+			{
+				Zone()
+				{
+
+				}
+
+				Zone(
+					const SourceNode*	aSource)
+				{
+					aSource->GetObject()->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if(aChild->m_name == "map")
+							m_mapId = aChild->GetId(DataType::ID_MAP);
+						else if (aChild->m_name == "zone")
+							m_zoneId = aChild->GetId(DataType::ID_ZONE);
+						else if(aChild->m_name == "loot_groups")
+							aChild->GetIdArray(DataType::ID_ENTITY, m_lootGroupIds);
+						else 
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					});
+				}
+
+				void 
+				ToStream(
+					IWriter*			aStream) const
+				{
+					aStream->WriteUInt(m_mapId);
+					aStream->WriteUInt(m_zoneId);
+					aStream->WriteUInts(m_lootGroupIds);
+				}
+
+				bool
+				FromStream(
+					IReader*			aStream)
+				{
+					if (!aStream->ReadUInt(m_mapId))
+						return false;
+					if (!aStream->ReadUInt(m_zoneId))
+						return false;
+					if(!aStream->ReadUInts(m_lootGroupIds))
+						return false;
+					return true;
+				}
+
+				void
+				AddUniqueLootGroupId(
+					uint32_t			aLootGroupId)
+				{
+					for(uint32_t t : m_lootGroupIds)
+					{
+						if(t == aLootGroupId)
+							return;
+					}
+					m_lootGroupIds.push_back(aLootGroupId);
+				}
+
+				// Public data
+				uint32_t				m_mapId = 0;
+				uint32_t				m_zoneId = 0;
+				std::vector<uint32_t>	m_lootGroupIds;
+			};
+
+			struct Oracle
+			{
+				Oracle()
+				{
+
+				}
+
+				Oracle(
+					const SourceNode*	aSource)
+				{
+					aSource->GetObject()->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if(aChild->m_name == "text" && aChild->IsArrayType(SourceNode::TYPE_STRING))
+							aChild->GetStringArray(m_text);
+						else if (aChild->m_name == "text")
+							m_text.push_back(aChild->GetString());
+						else if(aChild->m_name == "zones")
+							aChild->GetObjectArray(m_zones);
+						else 
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					});
+				}
+
+
+				void 
+				ToStream(
+					IWriter*			aStream) const
+				{
+					aStream->WriteStrings(m_text);
+					aStream->WriteObjects(m_zones);
+				}
+
+				bool
+				FromStream(
+					IReader*			aStream)
+				{
+					if (!aStream->ReadStrings(m_text))
+						return false;
+					if(!aStream->ReadObjects(m_zones))
+						return false;
+					return true;
+				}
+
+				Zone*
+				GetOrCreateZone(
+					uint32_t			aMapId,
+					uint32_t			aZoneId)
+				{
+					for(Zone& t : m_zones)
+					{
+						if(t.m_zoneId == aZoneId && t.m_mapId == aMapId)
+							return &t;
+					}
+
+					Zone n;
+					n.m_mapId = aMapId;
+					n.m_zoneId = aZoneId;
+					m_zones.push_back(n);
+					return &m_zones[m_zones.size() - 1];
+				}
+
+				// Public data
+				std::vector<std::string>	m_text;
+				std::vector<Zone>			m_zones;
 			};
 
 			void
@@ -272,6 +403,10 @@ namespace tpublic
 						{
 							m_armorStyleVisual = ArmorStyle::Visual(aChild);
 						}
+						else if(aChild->m_name == "oracle")
+						{
+							m_oracle = std::make_unique<Oracle>(aChild);
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -335,6 +470,7 @@ namespace tpublic
 				aStream->WriteUInt(m_questId);
 				aStream->WriteUInt(m_auraId);
 				aStream->WriteUInt(m_tokenCost);
+				aStream->WriteOptionalObjectPointer(m_oracle);
 			}
 
 			bool
@@ -392,6 +528,8 @@ namespace tpublic
 				if (!aStream->ReadUInt(m_auraId))
 					return false;
 				if (!aStream->ReadUInt(m_tokenCost))
+					return false;
+				if(!aStream->ReadOptionalObjectPointer(m_oracle))
 					return false;
 
 				m_lcString = m_string;
@@ -460,6 +598,7 @@ namespace tpublic
 			uint32_t							m_questId = 0;
 			uint32_t							m_auraId = 0;
 			uint32_t							m_tokenCost = 0;
+			std::unique_ptr<Oracle>				m_oracle;
 
 			// Not serialized
 			std::string							m_lcString;

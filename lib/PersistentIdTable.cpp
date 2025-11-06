@@ -24,6 +24,8 @@ namespace tpublic
 		const char*							aName,
 		bool								aIsDefinition)
 	{
+		assert(*aName != '\0');
+
 		TP_CHECK(DataType::ValidateId(aDataType), "Invalid data type.");
 		Type& t = m_types[aDataType];
 

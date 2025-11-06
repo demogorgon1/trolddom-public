@@ -1,21 +1,75 @@
 #include "Pcheader.h"
 
 #include <tpublic/Components/CombatPublic.h>
+#include <tpublic/Components/Lootable.h>
+#include <tpublic/Components/Openable.h>
 
 #include <tpublic/Data/DialogueRoot.h>
 #include <tpublic/Data/DialogueScreen.h>
 #include <tpublic/Data/Entity.h>
+#include <tpublic/Data/Item.h>
+#include <tpublic/Data/LootGroup.h>
+#include <tpublic/Data/LootTable.h>
 #include <tpublic/Data/Map.h>
 #include <tpublic/Data/MapEntitySpawn.h>
+#include <tpublic/Data/Tag.h>
+#include <tpublic/Data/Zone.h>
 
+#include <tpublic/LootGenerator.h>
 #include <tpublic/Manifest.h>
+#include <tpublic/WorldInfoMap.h>
 
 namespace tpublic
 {
 	
 	namespace
-	{
-		void 
+	{		
+
+		struct ItemMap
+		{
+			Data::Item::Oracle*
+			GetItemOracle(
+				uint32_t					aItemId)
+			{
+				Table::iterator i = m_table.find(aItemId);
+				if(i == m_table.cend())
+					return NULL;
+
+				Data::Item* t = i->second;
+
+				if(!t->m_oracle)
+					t->m_oracle = std::make_unique<Data::Item::Oracle>();
+
+				return t->m_oracle.get();
+			}
+
+			void
+			Build(
+				Manifest*					aManifest)
+			{
+				aManifest->GetContainer<Data::Item>()->ForEach([&](
+					Data::Item* aItem) -> bool
+				{
+					m_table[aItem->m_id] = aItem;
+					return true; // Continue
+				});				
+
+				m_lootGenerator = std::make_unique<LootGenerator>(aManifest);
+			}
+
+			// Public data
+			typedef std::unordered_map<uint32_t, Data::Item*> Table;
+			Table								m_table;
+			std::unique_ptr<LootGenerator>		m_lootGenerator;
+		};
+
+		struct Loot
+		{
+			uint32_t							m_lootGroupId = 0;
+			uint32_t							m_itemId = 0;
+		};
+
+		void	
 		_GetPossibleQuests(
 			const Manifest*					aManifest, 
 			uint32_t						aDialogueScreenId,
@@ -33,35 +87,138 @@ namespace tpublic
 					_GetPossibleQuests(aManifest, option.m_dialogueScreenId, aVisited, aOutQuestIds);
 			}
 		}
+
+		void
+		_GetPossibleLoot(
+			const Manifest*								aManifest,
+			uint32_t									aLevel,
+			uint32_t									aLootTableId,
+			uint32_t									aCreatureTypeId,
+			bool										aElite,
+			uint32_t									aTagId,
+			ItemMap&									aItemMap,
+			std::vector<Loot>&							aOutLoot)
+		{
+			if(aLootTableId == 0)
+				return;
+
+			const Data::LootTable* lootTable = aManifest->GetById<Data::LootTable>(aLootTableId);
+
+			for(const std::unique_ptr<Data::LootTable::Slot>& slot : lootTable->m_slots)
+			{
+				for(const Data::LootTable::Possibility& possibility : slot->m_possibilities)
+				{
+					if(!possibility.HasCreatureType(aCreatureTypeId))
+						continue;
+
+					if(aElite && possibility.m_elite == Data::LootTable::Possibility::ELITE_MUST_NOT_BE)
+						continue;
+
+					if (!aElite && possibility.m_elite == Data::LootTable::Possibility::ELITE_MUST_BE)
+						continue;
+
+					if(possibility.m_lootGroupId == 0)
+						continue;
+
+					aItemMap.m_lootGenerator->QueryLootGroup(possibility.m_lootGroupId, aLevel, [&](
+						const ItemInstance& aItemInstance,
+						uint32_t			/*aLootCooldownId*/)
+					{
+						const Data::Item* item = aManifest->GetById<Data::Item>(aItemInstance.m_itemId);
+						if(aTagId == 0 || item->HasTag(aTagId))
+							aOutLoot.push_back({ possibility.m_lootGroupId, item->m_id });
+					});
+				}
+			}
+		}
 			
 		void
 		_EntityAtPosition(
-			const Manifest*					aManifest,
-			const Vec2&						aPosition,
-			uint32_t						aEntityId,
-			Data::Map*						aMap)
+			const Manifest*								aManifest,
+			const Vec2&									aPosition,
+			uint32_t									aEntityId,
+			Data::Map*									aMap,
+			ItemMap&									aItemMap)
 		{
 			const Data::Entity* entity = aManifest->GetById<Data::Entity>(aEntityId);
 			const Components::CombatPublic* combatPublic = entity->TryGetComponent<Components::CombatPublic>();
-			if(combatPublic != NULL && combatPublic->m_dialogueRootId != 0)
+
+			// Quest giver?
 			{
-				const Data::DialogueRoot* dialogueRoot = aManifest->GetById<Data::DialogueRoot>(combatPublic->m_dialogueRootId);
-
-				std::vector<uint32_t> possibleQuestIds;
-				std::unordered_set<uint32_t> visited;
-
-				for (const std::unique_ptr<Data::DialogueRoot::Entry>& entry : dialogueRoot->m_entries)
-					_GetPossibleQuests(aManifest, entry->m_dialogueScreenId, visited, possibleQuestIds);
-
-				if(possibleQuestIds.size() > 0)
+				if (combatPublic != NULL && combatPublic->m_dialogueRootId != 0)
 				{
-					MapData::PointOfInterest t;
-					t.m_type = MapData::POINT_OF_INTEREST_TYPE_QUEST_GIVER;
-					t.m_position = aPosition;
-					t.m_questIds = std::move(possibleQuestIds);
-					t.m_dialogueRootId = combatPublic->m_dialogueRootId;
-					t.m_entityId = aEntityId;
-					aMap->m_data->m_pointsOfInterest.push_back(t);
+					const Data::DialogueRoot* dialogueRoot = aManifest->GetById<Data::DialogueRoot>(combatPublic->m_dialogueRootId);
+
+					std::vector<uint32_t> possibleQuestIds;
+					std::unordered_set<uint32_t> visited;
+
+					for (const std::unique_ptr<Data::DialogueRoot::Entry>& entry : dialogueRoot->m_entries)
+						_GetPossibleQuests(aManifest, entry->m_dialogueScreenId, visited, possibleQuestIds);
+
+					if (possibleQuestIds.size() > 0)
+					{
+						MapData::PointOfInterest t;
+						t.m_type = MapData::POINT_OF_INTEREST_TYPE_QUEST_GIVER;
+						t.m_position = aPosition;
+						t.m_questIds = std::move(possibleQuestIds);
+						t.m_dialogueRootId = combatPublic->m_dialogueRootId;
+						t.m_entityId = aEntityId;
+						aMap->m_data->m_pointsOfInterest.push_back(t);
+					}
+				}
+			}
+
+			// Item oracle info?
+			if (aMap->m_data->m_worldInfoMap && !entity->m_displayName.empty())
+			{
+				const Components::Lootable* lootable = entity->TryGetComponent<Components::Lootable>();
+
+				const WorldInfoMap::Entry& worldInfoMapEntry = aMap->m_data->m_worldInfoMap->Get(aPosition);
+				const Data::Zone* zone = worldInfoMapEntry.m_zoneId != 0 ? aManifest->GetById<Data::Zone>(worldInfoMapEntry.m_zoneId) : NULL;
+
+				while (zone != NULL && zone->m_topZoneId != 0)
+					zone = aManifest->GetById<Data::Zone>(zone->m_topZoneId);
+
+				uint32_t reagentTagId = aManifest->GetExistingIdByName<Data::Tag>("reagent");
+
+				if(lootable != NULL && lootable->m_lootTableId != 0)
+				{
+					uint32_t creatureTypeId = combatPublic != NULL ? combatPublic->m_creatureTypeId : 0;
+					bool elite = false;
+					uint32_t level = aMap->m_data->m_mapInfo.m_level;
+
+					if (combatPublic != NULL)
+					{
+						elite = combatPublic->IsElite();
+						level = combatPublic->m_level;
+					}
+					else
+					{
+						elite = aMap->m_data->m_mapInfo.m_openableElite && entity->TryGetComponent<Components::Openable>();
+						level = worldInfoMapEntry.m_level;
+					}
+
+					if(level != 0)
+					{
+						std::vector<Loot> loot;
+
+						_GetPossibleLoot(aManifest, level, lootable->m_lootTableId, creatureTypeId, elite, reagentTagId, aItemMap, loot);
+
+						for (uint32_t mapLootTableId : aMap->m_data->m_mapInfo.m_mapLootTableIds)
+							_GetPossibleLoot(aManifest, level, mapLootTableId, creatureTypeId, elite, reagentTagId, aItemMap, loot);
+
+						if (worldInfoMapEntry.m_zoneId != 0)
+							_GetPossibleLoot(aManifest, level, aManifest->GetById<Data::Zone>(worldInfoMapEntry.m_zoneId)->m_lootTableId, creatureTypeId, elite, reagentTagId, aItemMap, loot);
+
+						if (worldInfoMapEntry.m_subZoneId != 0)
+							_GetPossibleLoot(aManifest, level, aManifest->GetById<Data::Zone>(worldInfoMapEntry.m_subZoneId)->m_lootTableId, creatureTypeId, elite, reagentTagId, aItemMap, loot);
+
+						for (const Loot& t : loot)
+						{
+							Data::Item::Zone* oracleZone = aItemMap.GetItemOracle(t.m_itemId)->GetOrCreateZone(aMap->m_id, zone != NULL ? zone->m_id : 0);
+							oracleZone->AddUniqueLootGroupId(t.m_lootGroupId);
+						}
+					}
 				}
 			}
 		}
@@ -72,8 +229,11 @@ namespace tpublic
 
 		void		
 		Run(
-			Manifest*						aManifest)
+			Manifest*									aManifest)
 		{
+			ItemMap itemMap;
+			itemMap.Build(aManifest);
+
 			aManifest->GetContainer<Data::Map>()->ForEach([&](
 				Data::Map* aMap)
 			{
@@ -81,17 +241,47 @@ namespace tpublic
 				{
 					if(entitySpawn.m_entityId != 0)
 					{
-						_EntityAtPosition(aManifest, { entitySpawn.m_x, entitySpawn.m_y }, entitySpawn.m_entityId, aMap);
+						_EntityAtPosition(aManifest, { entitySpawn.m_x, entitySpawn.m_y }, entitySpawn.m_entityId, aMap, itemMap);
 					}
 					else
 					{
 						const Data::MapEntitySpawn* mapEntitySpawn = aManifest->GetById<Data::MapEntitySpawn>(entitySpawn.m_mapEntitySpawnId);
 						for(const std::unique_ptr<Data::MapEntitySpawn::Entity>& entity : mapEntitySpawn ->m_entities)
-							_EntityAtPosition(aManifest, { entitySpawn.m_x, entitySpawn.m_y }, entity->m_entityId, aMap);
+							_EntityAtPosition(aManifest, { entitySpawn.m_x, entitySpawn.m_y }, entity->m_entityId, aMap, itemMap);
 					}
 				}
 				return true;
 			});			
+
+			for(ItemMap::Table::const_iterator i = itemMap.m_table.cbegin(); i != itemMap.m_table.cend(); i++)
+			{
+				const Data::Item* item = i->second;
+
+				if(item->m_oracle)
+				{
+					printf("[%s]\n", item->m_string.c_str());
+
+					for(const Data::Item::Zone& zone : item->m_oracle->m_zones)
+					{
+						const Data::Map* map = aManifest->GetById<Data::Map>(zone.m_mapId);
+						const Data::Zone* z = zone.m_zoneId != 0 ? aManifest->GetById<Data::Zone>(zone.m_zoneId) : NULL;
+
+						printf("{%s<%s>%zu", map->m_data->m_mapInfo.m_displayName.c_str(), z != NULL ? z->m_string.c_str() : "", zone.m_lootGroupIds.size());
+
+						for(uint32_t lootGroupId : zone.m_lootGroupIds)
+						{
+							const Data::LootGroup* lootGroup = aManifest->GetById<Data::LootGroup>(lootGroupId);
+							if(lootGroup->m_oracle)
+							{
+								printf(" (%s)", lootGroup->m_oracle->m_sourcePlural.c_str());
+							}
+						}
+
+						printf("}\n");
+					}
+				}
+			}
+			printf("..\n");
 		}
 
 	}
