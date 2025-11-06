@@ -33,6 +33,8 @@ namespace tpublic
 					{
 						if (aChild->m_name == "string")
 							m_string = aChild->GetString();
+						else if (aChild->m_name == "preposition")
+							m_preposition = aChild->GetString();
 						else if(aChild->m_name == "town")
 							m_town = aChild->GetBool();
 						else if (aChild->m_name == "no_map")
@@ -66,6 +68,7 @@ namespace tpublic
 				IWriter*				aWriter) const override
 			{
 				aWriter->WriteString(m_string);
+				aWriter->WriteString(m_preposition);
 				aWriter->WriteBool(m_town);
 				aWriter->WriteBool(m_noMap);
 				aWriter->WriteBool(m_canQueryPosition);
@@ -83,7 +86,9 @@ namespace tpublic
 			FromStream(
 				IReader*				aReader) override
 			{
-				if(!aReader->ReadString(m_string))
+				if (!aReader->ReadString(m_string))
+					return false;
+				if (!aReader->ReadString(m_preposition))
 					return false;
 				if(!aReader->ReadBool(m_town))
 					return false;
@@ -120,6 +125,7 @@ namespace tpublic
 
 			// Public data
 			std::string					m_string;
+			std::string					m_preposition;
 			bool						m_town = false;			
 			bool						m_noMap = false;
 			bool						m_canQueryPosition = false;

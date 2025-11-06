@@ -1047,6 +1047,7 @@ sprites:
 	sprite lizard_man_8: { dead: lizard_man_8_dead }
 	sprite man_91: { dead: man_91_dead }
 	sprite woman_45: { dead: woman_45_dead }
+	sprite man_92: { dead: man_92_dead }
 
 	cursor: { position: [ 0 912 ] }
 	sprite skeleton_caster_6_dead: { }		
@@ -1061,6 +1062,7 @@ sprites:
 	sprite lizard_man_8_dead: { }		
 	sprite man_91_dead: { }	
 	sprite woman_45_dead: { }	
+	sprite man_92_dead: { }	
 }
 
 sprites:

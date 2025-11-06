@@ -138,7 +138,8 @@ namespace tpublic
 			const Vec2&									aPosition,
 			uint32_t									aEntityId,
 			Data::Map*									aMap,
-			ItemMap&									aItemMap)
+			ItemMap&									aItemMap,
+			std::unordered_set<std::string>&			aOutErrors)
 		{
 			const Data::Entity* entity = aManifest->GetById<Data::Entity>(aEntityId);
 			const Components::CombatPublic* combatPublic = entity->TryGetComponent<Components::CombatPublic>();
@@ -216,6 +217,13 @@ namespace tpublic
 						for (const Loot& t : loot)
 						{
 							Data::Item::Zone* oracleZone = aItemMap.GetItemOracle(t.m_itemId)->GetOrCreateZone(aMap->m_id, zone != NULL ? zone->m_id : 0);
+
+							if(zone != NULL && zone->m_preposition.empty())
+							{
+								std::string error = Helpers::Format("[%s:%u] Zone must have preposition defined when used by oracle.", zone->m_debugInfo->m_file.c_str(), zone->m_debugInfo->m_line);
+								aOutErrors.insert(error);
+							}
+
 							oracleZone->AddUniqueLootGroupId(t.m_lootGroupId);
 						}
 					}
@@ -234,6 +242,8 @@ namespace tpublic
 			ItemMap itemMap;
 			itemMap.Build(aManifest);
 
+			std::unordered_set<std::string> errors;
+
 			aManifest->GetContainer<Data::Map>()->ForEach([&](
 				Data::Map* aMap)
 			{
@@ -241,47 +251,22 @@ namespace tpublic
 				{
 					if(entitySpawn.m_entityId != 0)
 					{
-						_EntityAtPosition(aManifest, { entitySpawn.m_x, entitySpawn.m_y }, entitySpawn.m_entityId, aMap, itemMap);
+						_EntityAtPosition(aManifest, { entitySpawn.m_x, entitySpawn.m_y }, entitySpawn.m_entityId, aMap, itemMap, errors);
 					}
 					else
 					{
 						const Data::MapEntitySpawn* mapEntitySpawn = aManifest->GetById<Data::MapEntitySpawn>(entitySpawn.m_mapEntitySpawnId);
 						for(const std::unique_ptr<Data::MapEntitySpawn::Entity>& entity : mapEntitySpawn ->m_entities)
-							_EntityAtPosition(aManifest, { entitySpawn.m_x, entitySpawn.m_y }, entity->m_entityId, aMap, itemMap);
+							_EntityAtPosition(aManifest, { entitySpawn.m_x, entitySpawn.m_y }, entity->m_entityId, aMap, itemMap, errors);
 					}
 				}
 				return true;
 			});			
 
-			for(ItemMap::Table::const_iterator i = itemMap.m_table.cbegin(); i != itemMap.m_table.cend(); i++)
-			{
-				const Data::Item* item = i->second;
+			for(const std::string& error : errors)
+				printf("\x1B[31mERROR: %s\x1B[37m\n", error.c_str());
 
-				if(item->m_oracle)
-				{
-					printf("[%s]\n", item->m_string.c_str());
-
-					for(const Data::Item::Zone& zone : item->m_oracle->m_zones)
-					{
-						const Data::Map* map = aManifest->GetById<Data::Map>(zone.m_mapId);
-						const Data::Zone* z = zone.m_zoneId != 0 ? aManifest->GetById<Data::Zone>(zone.m_zoneId) : NULL;
-
-						printf("{%s<%s>%zu", map->m_data->m_mapInfo.m_displayName.c_str(), z != NULL ? z->m_string.c_str() : "", zone.m_lootGroupIds.size());
-
-						for(uint32_t lootGroupId : zone.m_lootGroupIds)
-						{
-							const Data::LootGroup* lootGroup = aManifest->GetById<Data::LootGroup>(lootGroupId);
-							if(lootGroup->m_oracle)
-							{
-								printf(" (%s)", lootGroup->m_oracle->m_sourcePlural.c_str());
-							}
-						}
-
-						printf("}\n");
-					}
-				}
-			}
-			printf("..\n");
+			TP_CHECK(errors.size() == 0, "%zu error%s encountered while processing maps.", errors.size(), errors.size() == 1 ? "" : "s");
 		}
 
 	}

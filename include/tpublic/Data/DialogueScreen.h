@@ -373,6 +373,52 @@ namespace tpublic
 				uint32_t			m_professionLevel = 0;
 			};
 
+			struct Oracle
+			{
+				Oracle()
+				{
+
+				}
+
+				Oracle(
+					const SourceNode* aSource)
+				{
+					aSource->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if(aChild->m_name == "item_tag")
+							m_itemTag = aChild->GetId(DataType::ID_TAG);
+						else if(aChild->m_name == "search")
+							m_search = aChild->GetString();
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
+					});
+				}
+
+				void
+				ToStream(
+					IWriter*			aWriter) const
+				{
+					aWriter->WriteUInt(m_itemTag);
+					aWriter->WriteString(m_search);
+				}
+
+				bool
+				FromStream(
+					IReader*			aReader) 
+				{
+					if (!aReader->ReadUInt(m_itemTag))
+						return false;
+					if (!aReader->ReadString(m_search))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t			m_itemTag = 0;
+				std::string			m_search;
+			};
+
 			void
 			Verify() const
 			{
@@ -413,6 +459,8 @@ namespace tpublic
 							aChild->GetIdArray(DataType::ID_ABILITY, m_trainAbilities);
 						else if(aChild->m_name == "random_item_vendor")
 							m_randomItemVendor = aChild->GetBool();
+						else if(aChild->m_name == "oracle")
+							m_oracle = std::make_unique<Oracle>(aChild);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 					}
@@ -429,6 +477,7 @@ namespace tpublic
 				aStream->WriteObjects(m_trainProfessions);
 				aStream->WriteUInts(m_trainAbilities);
 				aStream->WriteBool(m_randomItemVendor);
+				aStream->WriteOptionalObjectPointer(m_oracle);
 			}
 
 			bool
@@ -447,6 +496,8 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadBool(m_randomItemVendor))
 					return false;
+				if (!aStream->ReadOptionalObjectPointer(m_oracle))
+					return false;
 				return true;
 			}
 
@@ -457,6 +508,7 @@ namespace tpublic
 			std::vector<TrainProfession>		m_trainProfessions;
 			std::vector<uint32_t>				m_trainAbilities;
 			bool								m_randomItemVendor = false;
+			std::unique_ptr<Oracle>				m_oracle;
 		};
 
 	}

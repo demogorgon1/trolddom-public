@@ -2,6 +2,16 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v1.0.1"
+
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "The Oracle has moved into a house near the Trade District in Valoris." }
+	]
+
+	#######################################################################################
 	heading: "v1.0.0"
 	
 	text: "Finally leaving Early Access and entering the next phase of the game!"	

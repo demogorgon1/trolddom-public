@@ -3,21 +3,21 @@ map_player_spawn .player_spawn: { }
 map_player_spawn .throne_of_voraghul_spawn: { }
 map_player_spawn .throne_of_voraghul_return_spawn: { }
 
-zone .realm_of_voraghul_landing: { string: "The Charred Verge" }
-zone .smoldering_fields: { string: "Smoldering Fields" }
-zone .burning_approach: { string: "The Burning Approach" }
-zone .bastion_courtyard: { string: "Bastion Courtyard" }
-zone .fiery_rift: { string: "Fiery Crevice " }
-zone .desolate_plains: { string: "Desolate Plains" }
-zone .bastion_of_urt: { string: "Bastion of Urt" }
-zone .altar_of_urt: { string: "Altar of Urt" }
-zone .satyr_altar: { string: "Satyr Altar" }
-zone .the_infernal_flow: { string: "The Infernal Flow" }
-zone .voraghuls_landing: { string: "Voraghul's Landing" }
-zone .throne_of_voraghul: { string: "Throne of Voraghul" no_map: true }
-zone .ruined_tower: { string: "Tower Ruins" }
-zone .magma_pass: { string: "Magma Pass" }
-zone .tower_of_urt: { string: "Tower of Urt" }
+zone .realm_of_voraghul_landing: { string: "The Charred Verge" preposition: "at" }
+zone .smoldering_fields: { string: "Smoldering Fields" preposition: "on the" }
+zone .burning_approach: { string: "The Burning Approach" preposition: "at" }
+zone .bastion_courtyard: { string: "Bastion Courtyard" preposition: "around the" }
+zone .fiery_rift: { string: "Fiery Crevice" preposition: "around the" }
+zone .desolate_plains: { string: "Desolate Plains" preposition: "at the" }
+zone .bastion_of_urt: { string: "Bastion of Urt" preposition: "in the" }
+zone .altar_of_urt: { string: "Altar of Urt" preposition: "by the" }
+zone .satyr_altar: { string: "Satyr Altar" preposition: "at the" }
+zone .the_infernal_flow: { string: "The Infernal Flow" preposition: "around" }
+zone .voraghuls_landing: { string: "Voraghul's Landing" preposition: "at" }
+zone .throne_of_voraghul: { string: "Throne of Voraghul" no_map: true preposition: "at the"  }
+zone .ruined_tower: { string: "Tower Ruins" preposition: "in the" }
+zone .magma_pass: { string: "Magma Pass" preposition: "at the" }
+zone .tower_of_urt: { string: "Tower of Urt" preposition: "in the" }
 	
 route realm_of_fire_default_patrol: { }
 

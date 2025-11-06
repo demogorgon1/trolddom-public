@@ -29,6 +29,8 @@ namespace tpublic
 					{
 						if(aChild->m_name == "source_plural")
 							m_sourcePlural = aChild->GetString();
+						else if(aChild->m_name == "everywhere")
+							m_everywhere = aChild->GetBool();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					});
@@ -39,6 +41,7 @@ namespace tpublic
 					IWriter*				aStream) const 
 				{
 					aStream->WriteString(m_sourcePlural);
+					aStream->WriteBool(m_everywhere);
 				}
 
 				bool
@@ -47,11 +50,14 @@ namespace tpublic
 				{
 					if(!aStream->ReadString(m_sourcePlural))
 						return false;
+					if(!aStream->ReadBool(m_everywhere))
+						return false;
 					return true;
 				}
 
 				// Public data
 				std::string		m_sourcePlural;
+				bool			m_everywhere = false;
 			};
 
 			void

@@ -534,88 +534,105 @@ map_portal .lair_of_zuthyg_entrance:
 zone .zone_1:
 {
 	string: "Cape Arrival"
+	preposition: "at"
 }
 
 zone .zone_2:
 {
 	string: "Southshore"
+	preposition: "at"
 }
 
 zone .zone_3:
 {
 	string: "Eldertree Woods"
+	preposition: "in"
 }
 
 zone .zone_4:
 {
 	string: "The Hidden Cove"
+	preposition: "at"	
 }
 
 zone .zone_5:
 {
 	string: "Eastshore"
+	preposition: "around"
 }
 
 zone .zone_6:
 {
 	string: "Aetheris Mountains"
+	preposition: "in the"
 }
 
 zone .zone_7:
 {
 	string: "Aetheris Bay"
+	preposition: "around"
 }
 
 zone .zone_8:
 {
 	string: "Black Woods"
+	preposition: "in the"
 }
 
 zone .zone_9:
 {
 	string: "Bramble Heath"
+	preposition: "on"
 }
 
 zone .zone_10:
 {
 	string: "Xazax's Hideaway"
+	preposition: "in"
 }
 
 zone .zone_11:
 {
 	string: "The Old Fort"
+	preposition: "around"
 }
 
 zone .zone_12:
 {
 	string: "Peninsula Cave"
+	preposition: "in"
 }
 
 zone .zone_13:
 {
 	string: "Twilight Thicket"
+	preposition: "in the"
 }
 
 zone .town:
 {
 	string: "Tidewatch"
+	preposition: "in"
 	town: true
 }
 
 zone .undead:
 {
 	string: "Blouville"
+	preposition: "around"
 }
 
 zone .junjun:
 {
 	string: "Fortress of Junjun"
+	preposition: "in the"
 	town: true
 }
 
 zone .temple:
 {
 	string: "Temple of Luminara"
+	preposition: "at the"
 }
 
 route .town_farm_patrol:

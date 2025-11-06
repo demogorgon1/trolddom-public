@@ -85,7 +85,6 @@ namespace tpublic
 				});
 			}
 
-
 			TP_CHECK(errorCount == 0, "%zu error%s encountered while processing abilities.", errorCount, errorCount == 1 ? "" : "s");
 		}
 

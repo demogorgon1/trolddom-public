@@ -22,129 +22,129 @@ map_player_spawn thalvaron_flimlock_3_portal_return_spawn: { }
 
 map_player_spawn thalvaron_realm_of_fire_return_spawn: { }
 
-zone .top_zone_marshlands: { string: "The Marshlands" }
-zone .top_zone_badlands: { string: "The Badlands" }
-zone .top_zone_kareth: { string: "Kareth" loot_table: .kareth_zone_drops }
-zone .top_zone_thallysian_wilds: { string: "Thalyssian Wilds" loot_table: .thallysian_wilds_zone_drops }
+zone .top_zone_marshlands: { string: "The Marshlands" preposition: "in" }
+zone .top_zone_badlands: { string: "The Badlands" preposition: "in" }
+zone .top_zone_kareth: { string: "Kareth" loot_table: .kareth_zone_drops preposition: "in" }
+zone .top_zone_thallysian_wilds: { string: "Thalyssian Wilds" loot_table: .thallysian_wilds_zone_drops preposition: "in the" }
 
-zone .valoris: { string: "Valoris" }
-zone .valoris_south: { string: "Fernwick Hills" }
-zone .valoris_south_mountains: { string: "Clearview Slopes" }
-zone .valoris_south_sea: { string: "Clearview" }
-zone .valoris_docks: { string: "Docks" town: true }
-zone .valoris_trade_district: { string: "Trade District" town: true }
-zone .valoris_royal_gardens: { string: "Royal Gardens" town: true }
-zone .valoris_royal_castle: { string: "Royal Castle" town: true }  
-zone .valoris_the_garrison: { string: "The Garrison" town: true }
-zone .valoris_southgate: { string: "Southgate" town: true }
-zone .valoris_royal_district: { string: "Royal District" town: true }
-zone .valoris_eastgate: { string: "Eastgate" }
-zone .valoris_south_town: { string: "Fernwick" }
-zone .north_wetlands: { string: "North Marshlands" top_zone: .top_zone_marshlands }
-zone .middle_wetlands: { string: "Middle Marshlands" top_zone: .top_zone_marshlands }
-zone .south_wetlands: { string: "South Marshlands" top_zone: .top_zone_marshlands }
-zone .wetlands_town: { string: "Mirehaven" top_zone: .top_zone_marshlands }
-zone .south_badlands: { string: "South Badlands" top_zone: .top_zone_badlands }
-zone .north_badlands: { string: "North Badlands" top_zone: .top_zone_badlands }
-zone .center_pass: { string: "Ravenreach Pass" }
-zone .valoris_east: { string: "Eastview" }
-zone .valoris_north_woods: { string: "Eastview Woods" }
-zone .north_pass: { string: "Iceveil Pass" }
-zone .mountains: { string: "Iceveil Highlands" }
-zone .myst_woodlands_town: { string: "Edmund's Haunt" }
-zone .myst_woodlands: { string: "Duskwhisper Vale" }
-zone .haunted_woods_main: { string: "Shadowthorn Forest" }
-zone .haunted_woods_west: { string: "Shadowthorn Thicket" }
-zone .haunted_woods_town: { string: "Ravenreach" }
-zone .haunted_woods_clearing: { string: "Shadowthorn Abbey" }
-zone .haunted_woods_east: { string: "Faerandor" }
-zone thalvaron_jungle: { string: "Xandralis" fishing_loot_table: fish_jungle }
-zone .lich_woods: { string: "Hollows of the Undying" }
-zone .way_north_pass: { string: "The Northern Pass" }
-zone .duskwhisper_caves: { string: "Duskwhisper Caves" }
-zone .old_mans_cave: { string: "Old Man's Cave" }
-zone .realm_of_the_wizard: { string: "Realm of the Wizard" no_map: true }
-zone .eastern_faerandor: { string: "Eastern Faerandor" }
-zone .myst_woodlands_coast: { string: "The Lonely Coast" }
-zone .mongos_swamp: { string: "Mongo's Swamp" top_zone: .top_zone_marshlands }
-zone .dwarf_city: { string: "Durgan Tharok" town: true }
-zone .lake_dourgol: { string: "Lake Dourgol" }
-zone .faerandor_gorge: { string: "Faerandor Gorge" }
-zone .dark_strand: { string: "Dark Strand" }
-zone .lake_ylynor: { string: "Lake Ylynor" }
-zone .lake_joonor: { string: "Lake Joonor" }
-zone .highborne_tower: { string: "Tower of Xalizant" }
-zone .lich_tower: { string: "Tower of Indulath" }
-zone .temple_of_the_undying: { string: "Temple of the Undying" }
-zone .tirnwood: { string: "Tirnwood Vale" }
-zone .holy_temple: { string: "Holy Temple of Valoris" }
-zone .underworld_society: { string: "Society of the Underworld" }
-zone .echosrest: { string: "Echo's Rest" }
-zone .highborne_realm: { string: "Realm of the Highborne" no_map: true }
-zone .jungle_highlands: { string: "Xandralis Highlands" }
-zone .the_desolate_pass: { string: "The Desolate Pass" }
-zone .skaldrun_coast_west: { string: "Western Skaldrun Shore" fishing_loot_table: $loot_table { } }
-zone .skaldrun_coast_east: { string: "Eastern Skaldrun Shore" fishing_loot_table: fish_skaldrun }
-zone .skaldrun: { string: "Skaldrun" }
-zone .durgan_urok: { string: "Durgan Urok" }
-zone .hidden_pool: { string: "Great Ape Sanctuary" top_zone: thalvaron_jungle }
-zone .skaldrun_pass: { string: "Howling Pass" }
-zone .urthon_gate: { string: "Urthon Gate" }
-zone .entor_spring: { string: "Entor Spring" }
-zone .jungle_temple: { string: "Ancient Temple" top_zone: thalvaron_jungle }
-zone .shrine_of_ryux: { string: "Shrine of Ryux" }
-zone .tower_of_voraghul: { string: "Tower of Voraghul" }
-zone .the_crystal_caves: { string: "The Crystal Caves" top_zone: thalvaron_jungle }
-zone .swamp_of_skaldrun: { string: "Swamp of Skaldrun" }
-zone .inner_durgan_urok: { string: "Inner Durgan Urok" }
-zone .northern_tunnels: { string: "Northern Tunnels" }
-zone .northgrove: { string: "Northgrove" }
-zone .northgrove_caves: { string: "Northgrove Caves" }
-zone .outcast_coast: { string: "Outcast Coast" }
-zone .tyrons_land: { string: "Tyron's Land" }
-zone .tyrons_rock: { string: "Tyron's Rock" }
-zone .cape_valor: { string: "Cape Valor" }
-zone .brior_hills: { string: "Brior Hills" }
-zone .catacombs: { string: "Royal Catacombs" top_zone: .valoris }
-zone .southern_tirnwood: { string: "Southern Tirnwood" }
-zone .zilkore: { string: "Zilkore" }
-zone .northern_thalyssian_wilds: { string: "Northern Thalyssian Wilds" top_zone: .top_zone_thallysian_wilds }
-zone .emerald_strand: { string: "Emerald Strand" top_zone: .top_zone_thallysian_wilds }
-zone .thalyssian_wilds: { string: "Thalyssian Wilds" top_zone: .top_zone_thallysian_wilds }
-zone .the_devouring_shroud: { string: "The Devouring Shroud" top_zone: .top_zone_thallysian_wilds }
-zone .thalyssian_highlands: { string: "Thalyssian Highlands" top_zone: .top_zone_thallysian_wilds }
-zone .southern_thalyssian_wilds: { string: "Southern Thalyssian Wilds" top_zone: .top_zone_thallysian_wilds }
-zone .new_thalyssar: { string: "New Thalyssar" top_zone: .top_zone_thallysian_wilds }
-zone .riddles_crossing: { string: "Riddle's Crossing" top_zone: .top_zone_thallysian_wilds }
-zone .the_verdant_mire: { string: "The Verdant Mire" top_zone: .top_zone_thallysian_wilds }
-zone .xandralis_mountains: { string: "Xandralis Mountains" }
-zone .the_desolate_lowlands: { string: "The Desolate Lowlands" }
-zone .urthon: { string: "Urthon" }
-zone .faerandor_pass: { string: "Faerandor Pass" }
-zone .forbidden_island: { string: "Forbidden Island" }
-zone .twin_temples: { string: "Twin Temples" }
-zone .temple_of_firbiu: { string: "Temple of Firbiu" }
-zone .temple_of_feruc: { string: "Temple of Feruc" }
-zone .realm_of_the_lizard_wizard: { string: "Desolate Tower" no_map: true }
-zone .realm_of_the_lizard_wizard_ext: { string: "Desolate Tower" }
-zone .urthonak_keep: { string: "Urthonak Keep" }
-zone .urthon_burial_grounds: { string: "Urthon Burial Grounds" }
-zone .northern_kareth: { string: "Northern Kareth" top_zone: .top_zone_kareth }
-zone .the_serpents_rest: { string: "The Serpent's Rest" top_zone: .top_zone_kareth }
-zone .eastern_kareth: { string: "Eastern Kareth" top_zone: .top_zone_kareth }
-zone .southern_kareth: { string: "Southern Kareth" top_zone: .top_zone_kareth }
-zone .kareth_pass: { string: "Kareth Pass" top_zone: .top_zone_kareth }
-zone .balidor: { string: "Balidor" }
-zone .ashira: { string: "Ashira" }
-zone .karethi_temple: { string: "Karethi Temple" }
-zone .tomb_of_kralir: { string: "Tomb of Kralir" }
-zone .tomb_of_jurgorth: { string: "Tomb of Jurgorth" }
-zone .tomb_of_the_last_king: { string: "Tomb of the Last King" }
-zone .lonely_cove: { string: "Lonely Cove" }
-zone .shrine_of_zilu: { string: "Shrine of Zilu" }
-zone .ancient_burial_site: { string: "Ancient Burial Site" }
-zone .kobold_shrine: { string: "Kobold Shrine" }
-zone .the_lizard_coast: { string: "The Lizard Coast" }
+zone .valoris: { string: "Valoris" preposition: "in" }
+zone .valoris_south: { string: "Fernwick Hills" preposition: "around"}
+zone .valoris_south_mountains: { string: "Clearview Slopes" preposition: "around" }
+zone .valoris_south_sea: { string: "Clearview" preposition: "around" }
+zone .valoris_docks: { string: "Docks" town: true preposition: "at the" }
+zone .valoris_trade_district: { string: "Trade District" town: true preposition: "in the" }
+zone .valoris_royal_gardens: { string: "Royal Gardens" town: true preposition: "in the" }
+zone .valoris_royal_castle: { string: "Royal Castle" town: true preposition: "at the" }  
+zone .valoris_the_garrison: { string: "The Garrison" town: true preposition: "around" }
+zone .valoris_southgate: { string: "Southgate" town: true preposition: "in" }
+zone .valoris_royal_district: { string: "Royal District" town: true preposition: "in the" }
+zone .valoris_eastgate: { string: "Eastgate" preposition: "in"}
+zone .valoris_south_town: { string: "Fernwick" preposition: "in"}
+zone .north_wetlands: { string: "North Marshlands" top_zone: .top_zone_marshlands preposition: "in the" }
+zone .middle_wetlands: { string: "Middle Marshlands" top_zone: .top_zone_marshlands preposition: "in the" }
+zone .south_wetlands: { string: "South Marshlands" top_zone: .top_zone_marshlands preposition: "in the" }
+zone .wetlands_town: { string: "Mirehaven" top_zone: .top_zone_marshlands preposition: "in"}
+zone .south_badlands: { string: "South Badlands" top_zone: .top_zone_badlands preposition: "in the" }
+zone .north_badlands: { string: "North Badlands" top_zone: .top_zone_badlands preposition: "in the" }
+zone .center_pass: { string: "Ravenreach Pass" preposition: "at" }
+zone .valoris_east: { string: "Eastview" preposition: "in" }
+zone .valoris_north_woods: { string: "Eastview Woods" preposition: "in" }
+zone .north_pass: { string: "Iceveil Pass" preposition: "at" }
+zone .mountains: { string: "Iceveil Highlands" preposition: "at" }
+zone .myst_woodlands_town: { string: "Edmund's Haunt" preposition: "in" }
+zone .myst_woodlands: { string: "Duskwhisper Vale" preposition: "in" }
+zone .haunted_woods_main: { string: "Shadowthorn Forest" preposition: "in" }
+zone .haunted_woods_west: { string: "Shadowthorn Thicket" preposition: "in" }
+zone .haunted_woods_town: { string: "Ravenreach" preposition: "in" }
+zone .haunted_woods_clearing: { string: "Shadowthorn Abbey" preposition: "at" }
+zone .haunted_woods_east: { string: "Faerandor" preposition: "in" }
+zone thalvaron_jungle: { string: "Xandralis" fishing_loot_table: fish_jungle preposition: "in" }
+zone .lich_woods: { string: "Hollows of the Undying" preposition: "in the" }
+zone .way_north_pass: { string: "The Northern Pass" preposition: "at" }
+zone .duskwhisper_caves: { string: "Duskwhisper Caves" preposition: "in the" }
+zone .old_mans_cave: { string: "Old Man's Cave" preposition: "in the" }
+zone .realm_of_the_wizard: { string: "Realm of the Wizard" no_map: true preposition: "in the" }
+zone .eastern_faerandor: { string: "Eastern Faerandor" preposition: "in" }
+zone .myst_woodlands_coast: { string: "The Lonely Coast" preposition: "at the" }
+zone .mongos_swamp: { string: "Mongo's Swamp" top_zone: .top_zone_marshlands preposition: "around"}
+zone .dwarf_city: { string: "Durgan Tharok" town: true preposition: "in" }
+zone .lake_dourgol: { string: "Lake Dourgol" preposition: "around" }
+zone .faerandor_gorge: { string: "Faerandor Gorge" preposition: "around" }
+zone .dark_strand: { string: "Dark Strand" preposition: "around" }
+zone .lake_ylynor: { string: "Lake Ylynor" preposition: "around" }
+zone .lake_joonor: { string: "Lake Joonor" preposition: "around" }
+zone .highborne_tower: { string: "Tower of Xalizant" preposition: "at the" }
+zone .lich_tower: { string: "Tower of Indulath" preposition: "at the" }
+zone .temple_of_the_undying: { string: "Temple of the Undying" preposition: "at the" }
+zone .tirnwood: { string: "Tirnwood Vale" preposition: "in" }
+zone .holy_temple: { string: "Holy Temple of Valoris" preposition: "at the" }
+zone .underworld_society: { string: "Society of the Underworld" preposition: "at the" }
+zone .echosrest: { string: "Echo's Rest" preposition: "at" }
+zone .highborne_realm: { string: "Realm of the Highborne" no_map: true preposition: "in the" }
+zone .jungle_highlands: { string: "Xandralis Highlands" preposition: "in the" }
+zone .the_desolate_pass: { string: "The Desolate Pass" preposition: "at" }
+zone .skaldrun_coast_west: { string: "Western Skaldrun Shore" fishing_loot_table: $loot_table { } preposition: "around" }
+zone .skaldrun_coast_east: { string: "Eastern Skaldrun Shore" fishing_loot_table: fish_skaldrun preposition: "around" }
+zone .skaldrun: { string: "Skaldrun" preposition: "in" }
+zone .durgan_urok: { string: "Durgan Urok" preposition: "in" }
+zone .hidden_pool: { string: "Great Ape Sanctuary" top_zone: thalvaron_jungle preposition: "at the"  }
+zone .skaldrun_pass: { string: "Howling Pass" preposition: "at the" }
+zone .urthon_gate: { string: "Urthon Gate" preposition: "around" }
+zone .entor_spring: { string: "Entor Spring" preposition: "around" }
+zone .jungle_temple: { string: "Ancient Temple" top_zone: thalvaron_jungle preposition: "at the" }
+zone .shrine_of_ryux: { string: "Shrine of Ryux" preposition: "at the" }
+zone .tower_of_voraghul: { string: "Tower of Voraghul" preposition: "in the" }
+zone .the_crystal_caves: { string: "The Crystal Caves" top_zone: thalvaron_jungle preposition: "in" }
+zone .swamp_of_skaldrun: { string: "Swamp of Skaldrun" preposition: "in the" }
+zone .inner_durgan_urok: { string: "Inner Durgan Urok" preposition: "in" }
+zone .northern_tunnels: { string: "Northern Tunnels" preposition: "in the" }
+zone .northgrove: { string: "Northgrove" preposition: "in" }
+zone .northgrove_caves: { string: "Northgrove Caves" preposition: "in the"  }
+zone .outcast_coast: { string: "Outcast Coast" preposition: "at the" }
+zone .tyrons_land: { string: "Tyron's Land" preposition: "around" }
+zone .tyrons_rock: { string: "Tyron's Rock" preposition: "around" }
+zone .cape_valor: { string: "Cape Valor" preposition: "at" }
+zone .brior_hills: { string: "Brior Hills" preposition: "in" }
+zone .catacombs: { string: "Royal Catacombs" top_zone: .valoris preposition: "in the" }
+zone .southern_tirnwood: { string: "Southern Tirnwood" preposition: "in" }
+zone .zilkore: { string: "Zilkore" preposition: "in" }
+zone .northern_thalyssian_wilds: { string: "Northern Thalyssian Wilds" top_zone: .top_zone_thallysian_wilds preposition: "in the" }
+zone .emerald_strand: { string: "Emerald Strand" top_zone: .top_zone_thallysian_wilds preposition: "at the" }
+zone .thalyssian_wilds: { string: "Thalyssian Wilds" top_zone: .top_zone_thallysian_wilds preposition: "in the" }
+zone .the_devouring_shroud: { string: "The Devouring Shroud" top_zone: .top_zone_thallysian_wilds preposition: "in" }
+zone .thalyssian_highlands: { string: "Thalyssian Highlands" top_zone: .top_zone_thallysian_wilds preposition: "in the" }
+zone .southern_thalyssian_wilds: { string: "Southern Thalyssian Wilds" top_zone: .top_zone_thallysian_wilds preposition: "in the" }
+zone .new_thalyssar: { string: "New Thalyssar" top_zone: .top_zone_thallysian_wilds preposition: "in New Thalyssar" }
+zone .riddles_crossing: { string: "Riddle's Crossing" top_zone: .top_zone_thallysian_wilds preposition: "at" }
+zone .the_verdant_mire: { string: "The Verdant Mire" top_zone: .top_zone_thallysian_wilds preposition: "in" }
+zone .xandralis_mountains: { string: "Xandralis Mountains" preposition: "in the" }
+zone .the_desolate_lowlands: { string: "The Desolate Lowlands" preposition: "in" }
+zone .urthon: { string: "Urthon" preposition: "in" }
+zone .faerandor_pass: { string: "Faerandor Pass" preposition: "at" }
+zone .forbidden_island: { string: "Forbidden Island" preposition: "on the" }
+zone .twin_temples: { string: "Twin Temples" preposition: "at the" }
+zone .temple_of_firbiu: { string: "Temple of Firbiu" preposition: "at the" }
+zone .temple_of_feruc: { string: "Temple of Feruc" preposition: "at the" }
+zone .realm_of_the_lizard_wizard: { string: "Desolate Tower" no_map: true preposition: "at the" }
+zone .realm_of_the_lizard_wizard_ext: { string: "Desolate Tower" preposition: "at the" }
+zone .urthonak_keep: { string: "Urthonak Keep" preposition: "at" }
+zone .urthon_burial_grounds: { string: "Urthon Burial Grounds" preposition: "around the" }
+zone .northern_kareth: { string: "Northern Kareth" top_zone: .top_zone_kareth preposition: "in" }
+zone .the_serpents_rest: { string: "The Serpent's Rest" top_zone: .top_zone_kareth preposition: "at" }
+zone .eastern_kareth: { string: "Eastern Kareth" top_zone: .top_zone_kareth preposition: "in" }
+zone .southern_kareth: { string: "Southern Kareth" top_zone: .top_zone_kareth preposition: "in" }
+zone .kareth_pass: { string: "Kareth Pass" top_zone: .top_zone_kareth preposition: "around" }
+zone .balidor: { string: "Balidor" preposition: "in" }
+zone .ashira: { string: "Ashira" preposition: "in" }
+zone .karethi_temple: { string: "Karethi Temple" preposition: "at the"  }
+zone .tomb_of_kralir: { string: "Tomb of Kralir" preposition: "in the" }
+zone .tomb_of_jurgorth: { string: "Tomb of Jurgorth" preposition: "in the" }
+zone .tomb_of_the_last_king: { string: "Tomb of the Last King" preposition: "in the" }
+zone .lonely_cove: { string: "Lonely Cove" preposition: "at the" }
+zone .shrine_of_zilu: { string: "Shrine of Zilu" preposition: "at the" }
+zone .ancient_burial_site: { string: "Ancient Burial Site" preposition: "at the" }
+zone .kobold_shrine: { string: "Kobold Shrine" preposition: "at the" }
+zone .the_lizard_coast: { string: "The Lizard Coast" preposition: "on" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -297,6 +297,7 @@ map_entity_spawn thalvaron_briana_roft_1_quest_item: { entity thalvaron_briana_r
 map_entity_spawn thalvaron_briana_roft: { entity thalvaron_briana_roft: { init_state: default } }
 map_entity_spawn thalvaron_random_vendor_3: { entity thalvaron_random_vendor_3: { init_state: default } }
 map_entity_spawn thalvaron_random_vendor_4: { entity thalvaron_random_vendor_4: { init_state: default } }
+map_entity_spawn thalvaron_dutsim: { entity thalvaron_dutsim: { init_state: default } }
 
 # N
 map_entity_spawn thalvaron_ranger_fremalt: { entity thalvaron_ranger_fremalt: { init_state: default } }
@@ -738,6 +739,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_briana_roft: [ 240 29 204 ]
 	entity_spawn thalvaron_random_vendor_3: [ 30 70 102 ]
 	entity_spawn thalvaron_random_vendor_4: [ 130 170 102 ]
+	entity_spawn thalvaron_dutsim: [ 230 110 105 ]
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				
