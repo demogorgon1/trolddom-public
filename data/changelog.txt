@@ -10,6 +10,8 @@ changelog:
 	[
 		{ text: "Type /realm or /1 in chat prompt to use global chat. Can be muted in chat frame right-click menu." }
 		{ text: "Ignore list management available through UI or chat commands." }
+		{ text: "Use the <tab> key to cycle through chat channels." }
+		{ text: "Party invites can be sent by right-clicking on other players in chat." }
 	]
 
 	#######################################################################################
