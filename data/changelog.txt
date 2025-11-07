@@ -2,6 +2,17 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v1.0.2"
+
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Type /realm or /1 in chat prompt to use global chat. Can be muted in chat frame right-click menu." }
+		{ text: "Ignore list management available through UI or chat commands." }
+	]
+
+	#######################################################################################
 	heading: "v1.0.1"
 
 	text: "Changes:"
