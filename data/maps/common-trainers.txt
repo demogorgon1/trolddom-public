@@ -22,6 +22,7 @@
 	train_ability: craft_enchant_boots_dexterity
 	train_ability: craft_enchant_gloves_major_wisdom
 	
+	nothing_to_train_dialogue_screen: $dialogue_screen { text: [ "I don't have anything more to teach you." ] }	
 }
 
 !define DEFAULT_BLACKSMITING_TRAINER
@@ -43,6 +44,8 @@
 	train_ability: craft_copper_blade
 	train_ability: craft_copper_armor
 	train_ability: craft_shiny_armguards
+	
+	nothing_to_train_dialogue_screen: $dialogue_screen { text: [ "I don't have anything more to teach you." ] }
 }
 
 !define DEFAULT_TAILORING_TRAINER
@@ -55,24 +58,32 @@
 	train_ability: craft_linen_waistband
 	train_ability: craft_linen_robe
 	train_ability: craft_linen_hood
+	
+	nothing_to_train_dialogue_screen: $dialogue_screen { text: [ "I don't have anything more to teach you." ] }
 }
 
 !define DEFAULT_HERBALISM_TRAINER
 {
 	train_profession<0>: herbalism
 	train_profession<1>: herbalism
+	
+	nothing_to_train_dialogue_screen: $dialogue_screen { text: [ "I can't teach you anything else." ] }
 }
 
 !define DEFAULT_MINING_TRAINER
 {
 	train_profession<0>: mining
 	train_profession<1>: mining
+	
+	nothing_to_train_dialogue_screen: $dialogue_screen { text: [ "I can't teach you anything else. Go hit some rocks!" ] }
 }
 
 !define DEFAULT_FISHING_TRAINER
 {
 	train_profession<0>: fishing
 	train_profession<1>: fishing
+	
+	nothing_to_train_dialogue_screen: $dialogue_screen { text: [ "I have nothing else to teach you at the moment." ] }
 }
 
 !define DEFAULT_FIRST_AID_TRAINER
@@ -85,6 +96,8 @@
 	train_ability: craft_heavy_cottonweave_bandage
 	train_ability: craft_emberfelt_bandage
 	train_ability: craft_heavy_emberfelt_bandage
+	
+	nothing_to_train_dialogue_screen: $dialogue_screen { text: [ "I don't have anything more to teach you." ] }
 }
 
 !define DEFAULT_COOKING_TRAINER
@@ -102,6 +115,8 @@
 	train_ability: craft_seared_bass
 	train_ability: craft_spicy_perch_fillet
 	train_ability: craft_mistveil_balls	
+	
+	nothing_to_train_dialogue_screen: $dialogue_screen { text: [ "I don't have anything more to teach you." ] }
 }
 
 !define DEFAULT_ALCHEMY_TRAINER
@@ -117,4 +132,6 @@
 	train_ability: craft_strong_elixir_of_the_owl
 	train_ability: craft_strong_elixir_of_the_giant
 	train_ability: craft_mana_salve
+	
+	nothing_to_train_dialogue_screen: $dialogue_screen { text: [ "I don't have anything more to teach you." ] }
 }

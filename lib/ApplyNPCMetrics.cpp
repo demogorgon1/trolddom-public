@@ -21,7 +21,8 @@ namespace tpublic
 			const Components::CombatPublic*	aCombatPublic,
 			Components::CombatPrivate*		aCombatPrivate,
 			Components::MinionPrivate*		aMinionPrivate,
-			Components::NPC*				aNPC)
+			Components::NPC*				aNPC,
+			bool							aUpdate)
 		{
 			if (aCombatPublic != NULL && aCombatPrivate != NULL && (aNPC != NULL || aMinionPrivate != NULL))
 			{
@@ -38,44 +39,64 @@ namespace tpublic
 						if (aNPC != NULL)
 						{
 							// NPC
-							if (aNPC->m_resources.GetResourceEntry(resourceId) == NULL)
+							Components::NPC::ResourceEntry* t = aNPC->m_resources.GetResourceEntry(resourceId);
+
+							if(t == NULL)
+							{	
+								aNPC->m_resources.m_entries.resize(aNPC->m_resources.m_entries.size() + 1);
+								t = &aNPC->m_resources.m_entries[aNPC->m_resources.m_entries.size() - 1];
+							}
+							else if(!aUpdate)
+							{
+								t = NULL;
+							}
+
+							if (t != NULL)
 							{
 								float value = (float)npcMetricsLevel->m_baseResource[resourceId] * modifier;
 
 								if (aCombatPublic->IsElite())
 									value *= npcMetricsLevel->m_eliteResource[resourceId];
 
-								Components::NPC::ResourceEntry resourceEntry;
-								resourceEntry.m_id = resourceId;
-								resourceEntry.m_max = (uint32_t)value;
-								aNPC->m_resources.m_entries.push_back(resourceEntry);
+								t->m_id = resourceId;
+								t->m_max = (uint32_t)value;
 
 								if (resourceId == Resource::ID_MANA)
 								{
 									// Initialize base mana 
-									aCombatPrivate->m_baseMana = resourceEntry.m_max;
+									aCombatPrivate->m_baseMana = t->m_max;
 								}
 							}
 						}
 						else
 						{
 							// Minion
-							if (aMinionPrivate->m_resources.GetResourceEntry(resourceId) == NULL)
+							Components::MinionPrivate::ResourceEntry* t = aMinionPrivate->m_resources.GetResourceEntry(resourceId);
+
+							if (t == NULL)
+							{
+								aMinionPrivate->m_resources.m_entries.resize(aMinionPrivate->m_resources.m_entries.size() + 1);
+								t = &aMinionPrivate->m_resources.m_entries[aMinionPrivate->m_resources.m_entries.size() - 1];
+							}
+							else if (!aUpdate)
+							{
+								t = NULL;
+							}
+
+							if (t != NULL)
 							{
 								float value = (float)npcMetricsLevel->m_baseResource[resourceId] * modifier;
 
 								if (aCombatPublic->IsElite())
 									value *= npcMetricsLevel->m_eliteResource[resourceId];
 
-								Components::MinionPrivate::ResourceEntry resourceEntry;
-								resourceEntry.m_id = resourceId;
-								resourceEntry.m_max = (uint32_t)value;
-								aMinionPrivate->m_resources.m_entries.push_back(resourceEntry);
+								t->m_id = resourceId;
+								t->m_max = (uint32_t)value;
 
 								if (resourceId == Resource::ID_MANA)
 								{
 									// Initialize base mana 
-									aCombatPrivate->m_baseMana = resourceEntry.m_max;
+									aCombatPrivate->m_baseMana = t->m_max;
 								}
 							}
 						}
@@ -83,7 +104,7 @@ namespace tpublic
 
 					// Do the same for weapon damage
 					bool noWeaponDamageDefined = aCombatPrivate->m_weaponDamageRangeMin == 0 || aCombatPrivate->m_weaponDamageRangeMax == 0;
-					if (noWeaponDamageDefined && aModifiers.m_weaponDamage.has_value())
+					if ((noWeaponDamageDefined || aUpdate) && aModifiers.m_weaponDamage.has_value())
 					{
 						float factor = aModifiers.m_weaponDamage.value();
 

@@ -1,6 +1,7 @@
 #include "Pcheader.h"
 
 #include <tpublic/Components/ActiveQuests.h>
+#include <tpublic/Components/Auras.h>
 #include <tpublic/Components/CombatPublic.h>
 #include <tpublic/Components/CompletedQuests.h>
 #include <tpublic/Components/EquippedItems.h>
@@ -167,12 +168,23 @@ namespace tpublic
 			case Requirement::TYPE_MUST_HAVE_AURA:
 			case Requirement::TYPE_MUST_NOT_HAVE_AURA:
 				{
-					const Components::VisibleAuras* visibleAuras = entity->GetComponent<Components::VisibleAuras>();
-					bool hasAura = visibleAuras->HasAura(aRequirement->m_id);
-					if (aRequirement->m_type == Requirement::TYPE_MUST_HAVE_AURA && !hasAura)
-						return false;
-					else if (aRequirement->m_type == Requirement::TYPE_MUST_NOT_HAVE_AURA && hasAura)
-						return false;
+					bool shouldHaveAura = aRequirement->m_type == Requirement::TYPE_MUST_HAVE_AURA;
+					bool hasAura = false;
+
+					if (aManifest->GetById<Data::Aura>(aRequirement->m_id)->m_type == Data::Aura::TYPE_HIDDEN)
+					{
+						// Hidden auras must be checked in the server-side only component
+						const Components::Auras* auras = entity->GetComponent<Components::Auras>();
+						hasAura = auras != NULL && auras->HasAura(aRequirement->m_id);
+					}
+					else
+					{
+						const Components::VisibleAuras* visibleAuras = entity->GetComponent<Components::VisibleAuras>();
+						hasAura = visibleAuras->HasAura(aRequirement->m_id);
+					}
+
+					if(shouldHaveAura != hasAura)
+						return false;						
 				}
 				break;					
 

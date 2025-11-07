@@ -1151,6 +1151,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_kareth_skeleton_special: [ 45 45 129 ]
 	entity_spawn thalvaron_pony: [ 145 15 93 ]
 	entity_spawn thalvaron_louise_farbottom: [ 245 155 12 ]
+	entity_spawn thalvaron_sand_golem: [ 24 94 118 ]
 }
 
 map_palette .levels:

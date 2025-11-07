@@ -279,7 +279,8 @@ namespace tpublic::DirectEffects
 				combatPublic,
 				combatPrivate,
 				minionPrivate,
-				npc);
+				npc,
+				m_refreshNPCMetrics->m_update);
 		}
 
 		if(m_spawnFlags & SPAWN_FLAG_DESPAWN_SOURCE)

@@ -461,6 +461,8 @@ namespace tpublic
 							m_randomItemVendor = aChild->GetBool();
 						else if(aChild->m_name == "oracle")
 							m_oracle = std::make_unique<Oracle>(aChild);
+						else if(aChild->m_name == "nothing_to_train_dialogue_screen")
+							m_nothingToTrainDialogueScreenId = aChild->GetId(DataType::ID_DIALOGUE_SCREEN);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 					}
@@ -478,6 +480,7 @@ namespace tpublic
 				aStream->WriteUInts(m_trainAbilities);
 				aStream->WriteBool(m_randomItemVendor);
 				aStream->WriteOptionalObjectPointer(m_oracle);
+				aStream->WriteUInt(m_nothingToTrainDialogueScreenId);
 			}
 
 			bool
@@ -498,6 +501,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadOptionalObjectPointer(m_oracle))
 					return false;
+				if(!aStream->ReadUInt(m_nothingToTrainDialogueScreenId))
+					return false;
 				return true;
 			}
 
@@ -507,6 +512,7 @@ namespace tpublic
 			std::vector<Sell>					m_sell;
 			std::vector<TrainProfession>		m_trainProfessions;
 			std::vector<uint32_t>				m_trainAbilities;
+			uint32_t							m_nothingToTrainDialogueScreenId = 0;
 			bool								m_randomItemVendor = false;
 			std::unique_ptr<Oracle>				m_oracle;
 		};

@@ -8,7 +8,19 @@ changelog:
 	
 	list:
 	[
-		{ text: "The Oracle has moved into a house near the Trade District in Valoris." }
+		{ text: "An oracle has moved into a house near the Trade District in Valoris." }
+		{ text: "The Valoris Quartermaster sells a new trinket for Emblems of Triumph." }
+		{ text: "A horrible monster stalks the central Kareth desert." }
+	]
+
+	text: "Issues Fixed:"
+	
+	list:
+	[
+		{ text: "Trainer UI no longer just an empty screen if there isn't anything to train." }
+		{ text: "Fixed bug that could cause the client to crash." }
+		{ text: "Fishing aura no longer creates events in the combat log." }
+		{ text: "Fixed bug that caused some world bosses to have much less health than intended." }
 	]
 
 	#######################################################################################

@@ -18,7 +18,7 @@ aura fishing:
 	string: "Fishing"
 	icon: icon_fishing_rod
 	type: buff
-	flags: [ channeled ]
+	flags: [ channeled silent ]
 	duration: based_on_effects
 	aura_effect repeat: 
 	{ 

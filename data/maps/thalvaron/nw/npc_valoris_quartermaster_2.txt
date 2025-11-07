@@ -2,6 +2,7 @@ dialogue_screen .valoris_quartermaster_2_vendor:
 {
 	sell token_of_victory_healing_potion: !TOKEN_OF_VICTORY_PRICE{ _count: 1 }
 	sell token_of_victory_bag: !TOKEN_OF_VICTORY_PRICE{ _count: 12 }
+	sell emblem_of_triumph_trinket: !EMBLEM_OF_TRIUMPH_PRICE{ _count: 20 }
 }
 
 dialogue_screen .valoris_quartermaster_2_dialogue:

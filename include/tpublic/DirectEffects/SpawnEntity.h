@@ -127,6 +127,8 @@ namespace tpublic
 							m_health = aChild->GetFloat();
 						else if (aChild->m_name == "armor")
 							m_armor = aChild->GetFloat();
+						else if (aChild->m_name == "update")
+							m_update = aChild->GetBool();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					});
@@ -139,6 +141,7 @@ namespace tpublic
 					aWriter->WriteFloat(m_weaponDamage);
 					aWriter->WriteFloat(m_health);
 					aWriter->WriteFloat(m_armor);
+					aWriter->WriteBool(m_update);
 				}
 
 				bool
@@ -151,6 +154,8 @@ namespace tpublic
 						return false;
 					if (!aReader->ReadFloat(m_armor))
 						return false;
+					if (!aReader->ReadBool(m_update))
+						return false;
 					return true;
 				}
 				
@@ -158,6 +163,7 @@ namespace tpublic
 				float			m_weaponDamage = 1.0f;
 				float			m_health = 1.0f;
 				float			m_armor = 1.0f;
+				bool			m_update = false;
 			};
 
 			SpawnEntity()

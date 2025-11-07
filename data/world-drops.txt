@@ -107,6 +107,22 @@ loot_group fire_elementals_uncommon: { oracle: { source_plural: "Fire elementals
 	possibility<must_be_elite>: { weight: 1 loot_group: world_drops_epic }	
 }
 
+!define WORLD_DROPS_VERY_RARE
+{
+	possibility<must_not_be_elite>: { weight: 100 loot_group: world_drops_uncommon }	
+	possibility<must_not_be_elite>: { weight: 30 loot_group: world_drops_uncommon_recipe_random }		
+	possibility<must_not_be_elite>: { weight: 25 loot_group: world_drops_uncommon_recipe }	
+	possibility<must_not_be_elite>: { weight: 50 loot_group: world_drops_rare }	
+	possibility<must_not_be_elite>: { weight: 25 loot_group: world_drops_rare_recipe_random }	
+	possibility<must_not_be_elite>: { weight: 25 loot_group: world_drops_rare_recipe }	
+	possibility<must_not_be_elite>: { weight: 1 loot_group: world_drops_epic }	
+
+	possibility<must_be_elite>: { weight: 150 loot_group: world_drops_rare }	
+	possibility<must_be_elite>: { weight: 25 loot_group: world_drops_rare_recipe_random }	
+	possibility<must_be_elite>: { weight: 25 loot_group: world_drops_rare_recipe }	
+	possibility<must_be_elite>: { weight: 1 loot_group: world_drops_epic }	
+}
+
 !define WORLD_DROPS_CLOTH 
 {
 	possibility: { weight: 1 }

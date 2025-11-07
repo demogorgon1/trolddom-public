@@ -1095,3 +1095,105 @@ map_entity_spawn thalvaron_kareth_stalker_large: { entity thalvaron_kareth_stalk
 	}
 }
 
+##########################################################################################
+# Emblem of Triumph token bosses
+
+map_entity_spawn thalvaron_sand_golem: { entity thalvaron_sand_golem: {} spawn_timer: !NPC_RESPAWN_RARE{} }
+
+# Sand golem
+{
+	loot_table .sand_golem: 
+	{
+		slots:
+		[	
+			{ possibility: { loot_group: emblem_of_triumph loot_cooldown: $loot_cooldown { seconds: !EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS{} 
+		          map_message thalvaron: "The Abominable Sandman will not drop Emblem of Triumph for {}." } } }
+
+			!WORLD_DROPS_VERY_RARE {}
+			!WORLD_DROPS_RARE {}
+			!WORLD_DROPS {}
+		]	
+	}
+
+	${		
+		_faction: monsters
+		_creature_type: elemental
+		_loot_table: .sand_golem
+		_default_behavior_state: .passive
+		_elite: true
+		_level: 30
+		_string: "The Abominable Sandman" 
+		_sprite: golem_3
+		_sprite_dead: golem_3_dead
+		_weapon_damage: 1.4
+		_resource_health: 4.1
+		_immune_to_stun: true
+		_immune_to_immobilize: true
+		_immune_to_slow: true
+		_max_leash_distance: 20
+		
+		_abilities: 
+		[ 
+			{
+				target: self
+				id: $ability
+				{
+					string: "Sandquake"
+					cast_time: 20
+					cooldowns: [ global ]
+					cooldown: $cooldown { duration: 190 }
+					flags: [ target_self ]
+					icon: icon_stuff 
+					direct_effect apply_aura:
+					{	
+						aura: $aura
+						{
+							string: "Sandquake"
+							icon: icon_stuff		
+							type: buff
+							duration: based_on_effects
+							flags: [ unique channeled ]
+
+							aura_effect repeat:
+							{
+								update_interval: 15
+								update_count: 4
+								ability: $ability
+								{
+									string: "Sandquake"
+									flags: [ target_self target_aoe target_aoe_hostile ]
+									icon: icon_stuff
+									delay: 3
+									aoe_radius: 10
+									aoe_cap: 10
+									aoe_requirement target<must_not_be_in_state>: { id: dead }	
+
+									direct_effect damage:
+									{
+										damage_type: physical
+										function: { expression: a a: 190 }													
+									}
+									
+									source_visual<tile_shake>:
+									{
+										radius: 10
+										flags: [ line_of_sight ]
+										duration: 17
+										amount: 1
+									}		
+								}
+							}
+						}						
+					}
+				}
+			}		
+
+			{
+				id: npc_attack
+			}
+		]		
+	}
+
+	entity thalvaron_sand_golem: !NPC { }
+
+}

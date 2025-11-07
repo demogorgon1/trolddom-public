@@ -932,6 +932,8 @@ sprites:
 	sprite icon_sword_20: { tags: [ icon ] }
 	sprite icon_staff_16: { tags: [ icon ] }
 	
+	cursor: { position: [ 0 816 ] }	
+	sprite icon_banner_2: { tags: [ icon ] }
 }
 
 

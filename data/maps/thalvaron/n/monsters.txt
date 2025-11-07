@@ -1982,7 +1982,7 @@ map_entity_spawn thalvaron_throgar:
 		_sprite: wolf_7 
 		_sprite_dead: wolf_7_dead
 		_weapon_damage: 1.5
-		_health: 6.6
+		_resource_health: 4.1
 		_immune_to_stun: true
 		_immune_to_immobilize: true
 		_immune_to_slow: true

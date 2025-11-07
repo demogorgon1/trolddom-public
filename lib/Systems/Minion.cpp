@@ -230,6 +230,16 @@ namespace tpublic::Systems
 			return EntityState::ID_DESPAWNING;
 		}
 
+		if(minionPrivate->m_requiredOwnerAuraId != 0)
+		{
+			const Components::Auras* ownerAuras = ownerEntityInstance->GetComponent<Components::Auras>();
+			if(!ownerAuras->HasAura(minionPrivate->m_requiredOwnerAuraId))
+			{
+				// Owner doesn't have the required aura, need to despawn
+				return EntityState::ID_DESPAWNING;
+			}
+		}
+
 		bool shouldDie = aEntityState != EntityState::ID_DEAD && combatPublic->GetResource(Resource::ID_HEALTH) == 0 && !auras->HasEffect(AuraEffect::ID_IMMORTALITY, NULL);
 
 		// Killing minion is delayed one tick after reaching 0 health (so we get a chance to resolve effects such as Cheat Death)

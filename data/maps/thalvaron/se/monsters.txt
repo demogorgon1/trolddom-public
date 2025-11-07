@@ -711,7 +711,7 @@ map_entity_spawn thalvaron_skaldrun_satyr:
 		_sprite: demon_10
 		_sprite_dead: demon_10_dead
 		_weapon_damage: 1.4
-		_health: 6.8
+		_resource_health: 4.1
 		_immune_to_stun: true
 		_immune_to_immobilize: true
 		_immune_to_slow: true

@@ -96,3 +96,26 @@ item token_of_victory_bag:
 	bag_slots: 10
 }
 
+################################################################################
+# Emblem of Triumph items
+
+aura emblem_of_triumph_trinket:
+{
+	string: "Banner of the Queen"
+	icon: icon_banner_2
+	description: "Any summoned mercenary matches your level. Removing this trinket causes mercenary to be dismissed."
+	type: hidden
+	flags: [ item silent ]			
+}
+
+item emblem_of_triumph_trinket:
+{
+	equipment_slots: [ trinket_1 trinket_2 ]
+	binds: when_picked_up
+	flags: [ unique ]
+	required_level: 30
+	icon: icon_banner_2
+	rarity: epic
+	string: "Banner of the Queen"
+	aura: emblem_of_triumph_trinket
+}
