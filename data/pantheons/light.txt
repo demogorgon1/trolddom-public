@@ -77,6 +77,6 @@ ability_modifier light_priest:
 {
 	string: "Holy Condemnation"
 	description: "Spiritual Crisis, Smite and Condemnation does holy damage."
-	abilities: [ spiritual_crisis smite condemnation ]
+	abilities: [ spiritual_crisis smite condemnation_tick ]
 	modify_damage_type: holy	
 }

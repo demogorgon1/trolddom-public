@@ -55,7 +55,7 @@ objective .ranger_seymore_1_b:
 	
 	kill_npc:
 	{
-		entities: [ thalvaron_rebel_dark_elf_demon_a ]
+		entities: [ thalvaron_rebel_dark_elf_demon_b ]
 		count: 3
 	}
 }
@@ -68,7 +68,7 @@ objective .ranger_seymore_1_c:
 	
 	kill_npc:
 	{
-		entities: [ thalvaron_rebel_dark_elf_demon_b ]
+		entities: [ thalvaron_rebel_dark_elf_demon_a ]
 		count: 3
 	}
 }

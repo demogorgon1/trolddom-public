@@ -2,6 +2,19 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v1.0.3"
+
+	text: "Issues Fixed:"
+	
+	list:
+	[
+		{ text: "Various quest typos fixed." }
+		{ text: "Holy and Unholy Condemnation now work like intended." }
+		{ text: "Server and network stability issues fixed." }
+		{ text: "Whispers can be sent by right-clicking on other players in chat." }
+	]
+	
+	#######################################################################################
 	heading: "v1.0.2"
 
 	text: "Changes:"
@@ -13,7 +26,7 @@ changelog:
 		{ text: "Use the <tab> key to cycle through chat channels." }
 		{ text: "Party invites can be sent by right-clicking on other players in chat." }
 	]
-
+	
 	#######################################################################################
 	heading: "v1.0.1"
 
