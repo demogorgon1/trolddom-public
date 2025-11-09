@@ -4,14 +4,22 @@ changelog:
 	#######################################################################################
 	heading: "v1.0.3"
 
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Whispers can be sent by right-clicking on other players in chat." }
+		{ text: "Added option to close automatically chat prompt after sending." }
+	]
+		
 	text: "Issues Fixed:"
 	
 	list:
 	[
 		{ text: "Various quest typos fixed." }
 		{ text: "Holy and Unholy Condemnation now work like intended." }
-		{ text: "Server and network stability issues fixed." }
-		{ text: "Whispers can be sent by right-clicking on other players in chat." }
+		{ text: "Server and network stability issues fixed." }	
+		{ text: "Fixed bug where movement would continue when key was released." }	
 	]
 	
 	#######################################################################################
